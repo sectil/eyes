@@ -161,6 +161,23 @@ export default function EyeBreakoutGame() {
     };
   }, [gameState]);
 
+  // Initial canvas draw for setup state
+  useEffect(() => {
+    if (gameState === "setup") {
+      const gameCanvas = gameCanvasRef.current;
+      if (!gameCanvas) return;
+      const ctx = gameCanvas.getContext("2d");
+      if (!ctx) return;
+      
+      // Initialize game objects
+      initBricks();
+      resetBall();
+      
+      // Draw initial state
+      drawGame(ctx);
+    }
+  }, [gameState]);
+
   // Game loop
   useEffect(() => {
     if (gameState !== "playing") return;
@@ -319,12 +336,25 @@ export default function EyeBreakoutGame() {
       return;
     }
 
+    // Check calibration
+    if (trackerRef.current) {
+      const calibrationQuality = trackerRef.current.getCalibrationQuality();
+      console.log("Kalibrasyon kalitesi:", calibrationQuality);
+      
+      if (calibrationQuality < 0.3) {
+        toast.warning("Kalibrasyon kalitesi düşük. Daha iyi sonuçlar için tekrar kalibrasyon yapabilirsiniz.");
+      } else {
+        console.log("✅ Kalibrasyon başarılı!");
+      }
+    }
+
     initBricks();
     resetBall();
     setScore(0);
     setLives(3);
     setGameState("playing");
     lastTimeRef.current = 0;
+    toast.success("Oyun başladı! Gözlerinizi hareket ettirin.");
   };
 
   const pauseGame = () => {

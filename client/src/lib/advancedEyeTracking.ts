@@ -153,9 +153,15 @@ export class AdvancedEyeTracker {
    * Add calibration point
    */
   addCalibrationPoint(screenX: number, screenY: number, eyeData: EyeData) {
-    this.calibrationPoints.push({
+    const point = {
       screen: { x: screenX, y: screenY },
       eye: { x: eyeData.gaze.x, y: eyeData.gaze.y },
+    };
+    this.calibrationPoints.push(point);
+    console.log(`🎯 Kalibrasyon noktası ${this.calibrationPoints.length} eklendi:`, {
+      ekran: `(${screenX.toFixed(2)}, ${screenY.toFixed(2)})`,
+      göz: `(${eyeData.gaze.x.toFixed(3)}, ${eyeData.gaze.y.toFixed(3)})`,
+      toplam: this.calibrationPoints.length
     });
   }
 
