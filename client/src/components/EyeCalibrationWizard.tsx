@@ -652,10 +652,23 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
                     <Button
                       className="w-full"
                       onClick={() => {
+                        console.log('🎮 Oyun başlatılıyor...');
                         setEyeGameActive(true);
                         setTargetsCompleted(0);
                         setGameMetrics([]);
                         setCurrentTarget(null);
+                        
+                        setTimeout(() => {
+                          const firstTarget = {
+                            x: Math.random() * 70 + 15,
+                            y: Math.random() * 60 + 15,
+                          };
+                          console.log('🎯 İlk hedef:', firstTarget);
+                          setCurrentTarget(firstTarget);
+                          setTargetStartTime(Date.now());
+                          setLookDuration(0);
+                          setIsLookingAtTarget(false);
+                        }, 500);
                       }}
                       disabled={!eyesDetected}
                     >
