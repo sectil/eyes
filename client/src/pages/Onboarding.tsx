@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import EyeCalibrationWizard from "@/components/EyeCalibrationWizard";
 
-type OnboardingStep = "welcome" | "profile" | "ai-analysis" | "face-recognition" | "calibration" | "tests" | "ai-report" | "complete";
+type OnboardingStep = "welcome" | "face-recognition" | "profile" | "ai-analysis" | "calibration" | "tests" | "ai-report" | "complete";
 
 interface ProfileData {
   age: string;
@@ -34,6 +34,7 @@ interface TestResult {
 export default function Onboarding() {
   const [, setLocation] = useLocation();
   const [step, setStep] = useState<OnboardingStep>("welcome");
+  const [facePhotos, setFacePhotos] = useState<string[]>([]);
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [savedProfile, setSavedProfile] = useState<ProfileData | null>(null);
   const [profileData, setProfileData] = useState<ProfileData>({
@@ -67,7 +68,7 @@ export default function Onboarding() {
         }
         setAiAnalysis(parsed);
         toast.success("🤖 AI profil analizi tamamlandı!");
-        setStep("face-recognition");
+        setStep("calibration");
       } catch (error) {
         console.error("AI analysis error:", error);
         toast.error("AI analizi işlenemedi");
@@ -111,7 +112,7 @@ export default function Onboarding() {
   // Eye profile will be saved via profile router
 
   const getStepProgress = () => {
-    const steps: OnboardingStep[] = ["welcome", "profile", "ai-analysis", "face-recognition", "calibration", "tests", "ai-report", "complete"];
+    const steps: OnboardingStep[] = ["welcome", "face-recognition", "profile", "ai-analysis", "calibration", "tests", "ai-report", "complete"];
     const currentIndex = steps.indexOf(step);
     return ((currentIndex + 1) / steps.length) * 100;
   };
@@ -220,7 +221,7 @@ export default function Onboarding() {
         <div className="mb-8">
           <Progress value={getStepProgress()} className="h-2" />
           <p className="text-sm text-muted-foreground mt-2 text-center">
-            Adım {["welcome", "profile", "ai-analysis", "face-recognition", "calibration", "tests", "ai-report", "complete"].indexOf(step) + 1} / 8
+            Adım {["welcome", "face-recognition", "profile", "ai-analysis", "calibration", "tests", "ai-report", "complete"].indexOf(step) + 1} / 8
           </p>
         </div>
 
@@ -239,6 +240,13 @@ export default function Onboarding() {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
+                  <div>
+                    <h4 className="font-semibold">Kişi Tanıma</h4>
+                    <p className="text-sm text-muted-foreground">Sistemi size tanıtmak için yüz fotoğrafları çekin</p>
+                  </div>
+                </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
                   <div>
@@ -276,7 +284,7 @@ export default function Onboarding() {
                 </div>
               </div>
 
-              <Button onClick={() => setStep("profile")} className="w-full gap-2" size="lg">
+              <Button onClick={() => setStep("face-recognition")} className="w-full gap-2" size="lg">
                 Başlayalım <ArrowRight className="h-4 w-4" />
               </Button>
             </CardContent>
@@ -438,37 +446,48 @@ export default function Onboarding() {
               )}
 
               {aiAnalysis && (
-                <Alert className="bg-primary/5 border-primary/20">
-                  <Sparkles className="h-4 w-4" />
-                  <AlertDescription>
-                    <div className="space-y-3 mt-2">
-                      <div>
-                        <strong className="text-primary">Risk Seviyesi:</strong>{" "}
-                        <span className={
-                          aiAnalysis.riskLevel === "yüksek" ? "text-red-600 font-semibold" :
-                          aiAnalysis.riskLevel === "orta" ? "text-yellow-600 font-semibold" :
-                          "text-green-600 font-semibold"
-                        }>
-                          {aiAnalysis.riskLevel?.toUpperCase()}
-                        </span>
-                      </div>
-                      <div>
-                        <strong className="text-primary">Analiz:</strong>
-                        <p className="text-sm mt-1">{aiAnalysis.analysis}</p>
-                      </div>
-                      {aiAnalysis.recommendations && aiAnalysis.recommendations.length > 0 && (
+                <div className="space-y-6">
+                  <Alert className="bg-primary/5 border-primary/20">
+                    <Sparkles className="h-4 w-4" />
+                    <AlertDescription>
+                      <div className="space-y-3 mt-2">
                         <div>
-                          <strong className="text-primary">Öneriler:</strong>
-                          <ul className="list-disc list-inside text-sm mt-1 space-y-1">
-                            {aiAnalysis.recommendations.slice(0, 3).map((rec: string, idx: number) => (
-                              <li key={idx}>{rec}</li>
-                            ))}
-                          </ul>
+                          <strong className="text-primary">Risk Seviyesi:</strong>{" "}
+                          <span className={
+                            aiAnalysis.riskLevel === "yüksek" ? "text-red-600 font-semibold" :
+                            aiAnalysis.riskLevel === "orta" ? "text-yellow-600 font-semibold" :
+                            "text-green-600 font-semibold"
+                          }>
+                            {aiAnalysis.riskLevel?.toUpperCase()}
+                          </span>
                         </div>
-                      )}
-                    </div>
-                  </AlertDescription>
-                </Alert>
+                        <div>
+                          <strong className="text-primary">Analiz:</strong>
+                          <p className="text-sm mt-1">{aiAnalysis.analysis}</p>
+                        </div>
+                        {aiAnalysis.recommendations && aiAnalysis.recommendations.length > 0 && (
+                          <div>
+                            <strong className="text-primary">Öneriler:</strong>
+                            <ul className="list-disc list-inside text-sm mt-1 space-y-1">
+                              {aiAnalysis.recommendations.slice(0, 3).map((rec: string, idx: number) => (
+                                <li key={idx}>{rec}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    </AlertDescription>
+                  </Alert>
+                  
+                  <div className="flex gap-4">
+                    <Button onClick={() => setStep("profile")} variant="outline" className="gap-2">
+                      <ArrowLeft className="h-4 w-4" /> Geri
+                    </Button>
+                    <Button onClick={() => setStep("calibration")} className="flex-1 gap-2">
+                      Devam Et <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
               )}
             </CardContent>
           </Card>
@@ -491,10 +510,16 @@ export default function Onboarding() {
                   Sistem sizi tanımak için kameranızdan 3-4 fotoğraf çekecek.
                   Farklı açılardan yüzünüzü gösterin.
                 </p>
+              </div>
+              
+              <div className="flex gap-4">
+                <Button onClick={() => setStep("welcome")} variant="outline" className="gap-2">
+                  <ArrowLeft className="h-4 w-4" /> Geri
+                </Button>
                 <Button
-                  onClick={() => setStep("calibration")}
+                  onClick={() => setStep("profile")}
+                  className="flex-1 gap-2"
                   size="lg"
-                  className="gap-2"
                 >
                   Başla <ArrowRight className="h-4 w-4" />
                 </Button>
@@ -507,7 +532,7 @@ export default function Onboarding() {
         {step === "calibration" && (
           <EyeCalibrationWizard
             onComplete={handleCalibrationComplete}
-            onCancel={() => setStep("profile")}
+            onCancel={() => setStep("ai-analysis")}
           />
         )}
 
