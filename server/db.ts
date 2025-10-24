@@ -1,11 +1,20 @@
-import { eq } from "drizzle-orm";
+import { eq, and, desc, gte, lte, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { 
+  InsertUser, users,
+  subscriptionPlans, InsertSubscriptionPlan,
+  userSubscriptions, InsertUserSubscription,
+  userEyeProfiles, InsertUserEyeProfile,
+  eyeTestResults, InsertEyeTestResult,
+  eyeFatigueLogs, InsertEyeFatigueLog,
+  exercisePrograms, InsertExerciseProgram,
+  userExerciseLogs, InsertUserExerciseLog,
+  eyeSimulations, InsertEyeSimulation
+} from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
-// Lazily create the drizzle instance so local tooling can run without a DB.
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
@@ -89,4 +98,223 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+// Subscription Plans
+export async function getActiveSubscriptionPlans() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(subscriptionPlans).where(eq(subscriptionPlans.isActive, 1));
+}
+
+export async function createSubscriptionPlan(plan: InsertSubscriptionPlan) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(subscriptionPlans).values(plan);
+}
+
+// User Subscriptions
+export async function getUserActiveSubscription(userId: number) {
+  const db = await getDb();
+  if (!db) return null;
+  
+  const now = new Date();
+  const result = await db
+    .select()
+    .from(userSubscriptions)
+    .where(
+      and(
+        eq(userSubscriptions.userId, userId),
+        eq(userSubscriptions.status, "active"),
+        gte(userSubscriptions.endDate, now)
+      )
+    )
+    .limit(1);
+  
+  return result.length > 0 ? result[0] : null;
+}
+
+export async function createUserSubscription(subscription: InsertUserSubscription) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(userSubscriptions).values(subscription);
+}
+
+export async function updateSubscriptionStatus(subscriptionId: number, status: "active" | "expired" | "cancelled") {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(userSubscriptions)
+    .set({ status, updatedAt: new Date() })
+    .where(eq(userSubscriptions.id, subscriptionId));
+}
+
+// User Eye Profiles
+export async function getUserEyeProfile(userId: number) {
+  const db = await getDb();
+  if (!db) return null;
+  
+  const result = await db.select().from(userEyeProfiles).where(eq(userEyeProfiles.userId, userId)).limit(1);
+  return result.length > 0 ? result[0] : null;
+}
+
+export async function upsertUserEyeProfile(profile: InsertUserEyeProfile) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const existing = await getUserEyeProfile(profile.userId);
+  
+  if (existing) {
+    await db.update(userEyeProfiles)
+      .set({ ...profile, updatedAt: new Date() })
+      .where(eq(userEyeProfiles.userId, profile.userId));
+  } else {
+    await db.insert(userEyeProfiles).values(profile);
+  }
+}
+
+// Eye Test Results
+export async function createEyeTestResult(result: InsertEyeTestResult) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(eyeTestResults).values(result);
+}
+
+export async function getUserTestHistory(userId: number, testType?: string) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  const conditions = [eq(eyeTestResults.userId, userId)];
+  if (testType) {
+    conditions.push(eq(eyeTestResults.testType, testType as any));
+  }
+  
+  return db.select().from(eyeTestResults)
+    .where(and(...conditions))
+    .orderBy(desc(eyeTestResults.testDate))
+    .limit(50);
+}
+
+export async function getLatestTestResult(userId: number, testType: string) {
+  const db = await getDb();
+  if (!db) return null;
+  
+  const result = await db.select().from(eyeTestResults)
+    .where(and(
+      eq(eyeTestResults.userId, userId),
+      eq(eyeTestResults.testType, testType as any)
+    ))
+    .orderBy(desc(eyeTestResults.testDate))
+    .limit(1);
+  
+  return result.length > 0 ? result[0] : null;
+}
+
+// Eye Fatigue Logs
+export async function createEyeFatigueLog(log: InsertEyeFatigueLog) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(eyeFatigueLogs).values(log);
+}
+
+export async function getUserFatigueLogs(userId: number, startDate?: Date, endDate?: Date) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  const conditions = [eq(eyeFatigueLogs.userId, userId)];
+  if (startDate) conditions.push(gte(eyeFatigueLogs.logDate, startDate));
+  if (endDate) conditions.push(lte(eyeFatigueLogs.logDate, endDate));
+  
+  return db.select().from(eyeFatigueLogs)
+    .where(and(...conditions))
+    .orderBy(desc(eyeFatigueLogs.logDate));
+}
+
+// Exercise Programs
+export async function getActiveExercisePrograms() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(exercisePrograms).where(eq(exercisePrograms.isActive, 1));
+}
+
+export async function getExerciseProgramById(id: number) {
+  const db = await getDb();
+  if (!db) return null;
+  
+  const result = await db.select().from(exercisePrograms).where(eq(exercisePrograms.id, id)).limit(1);
+  return result.length > 0 ? result[0] : null;
+}
+
+export async function createExerciseProgram(program: InsertExerciseProgram) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(exercisePrograms).values(program);
+}
+
+// User Exercise Logs
+export async function createUserExerciseLog(log: InsertUserExerciseLog) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(userExerciseLogs).values(log);
+}
+
+export async function getUserExerciseLogs(userId: number, startDate?: Date, endDate?: Date) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  const conditions = [eq(userExerciseLogs.userId, userId)];
+  if (startDate) conditions.push(gte(userExerciseLogs.completedAt, startDate));
+  if (endDate) conditions.push(lte(userExerciseLogs.completedAt, endDate));
+  
+  return db.select().from(userExerciseLogs)
+    .where(and(...conditions))
+    .orderBy(desc(userExerciseLogs.completedAt));
+}
+
+export async function getUserExerciseStats(userId: number, days: number = 30) {
+  const db = await getDb();
+  if (!db) return { totalExercises: 0, totalMinutes: 0, uniqueDays: 0 };
+  
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - days);
+  
+  const logs = await getUserExerciseLogs(userId, startDate);
+  
+  const totalExercises = logs.length;
+  const totalMinutes = logs.reduce((sum, log) => sum + log.durationMinutes, 0);
+  const uniqueDays = new Set(logs.map(log => log.completedAt.toDateString())).size;
+  
+  return { totalExercises, totalMinutes, uniqueDays };
+}
+
+// Eye Simulations
+export async function createEyeSimulation(simulation: InsertEyeSimulation) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(eyeSimulations).values(simulation);
+}
+
+export async function getUserLatestSimulation(userId: number, simulationType?: string) {
+  const db = await getDb();
+  if (!db) return null;
+  
+  const conditions = [eq(eyeSimulations.userId, userId)];
+  if (simulationType) {
+    conditions.push(eq(eyeSimulations.simulationType, simulationType as any));
+  }
+  
+  const result = await db.select().from(eyeSimulations)
+    .where(and(...conditions))
+    .orderBy(desc(eyeSimulations.createdAt))
+    .limit(1);
+  
+  return result.length > 0 ? result[0] : null;
+}
+
+export async function getUserSimulationHistory(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return db.select().from(eyeSimulations)
+    .where(eq(eyeSimulations.userId, userId))
+    .orderBy(desc(eyeSimulations.createdAt))
+    .limit(20);
+}
+
