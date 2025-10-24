@@ -128,7 +128,10 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
 
     const interval = setInterval(() => {
       const eyeData = lastEyeDataRef.current;
-      if (!eyeData) return;
+      if (!eyeData) {
+        console.log('⚠️ Göz verisi yok');
+        return;
+      }
 
       // Calculate gaze position (average of both eyes)
       const gazeX = (eyeData.left.center.x + eyeData.right.center.x) / 2;
@@ -145,6 +148,11 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
 
       // Check if within threshold (80 pixels)
       const isLooking = distance < 80;
+      
+      console.log('👁️ Göz:', { gazeX: gazeX.toFixed(0), gazeY: gazeY.toFixed(0) });
+      console.log('🎯 Hedef:', { targetX: targetX.toFixed(0), targetY: targetY.toFixed(0) });
+      console.log('📏 Mesafe:', distance.toFixed(0), 'px', isLooking ? '✅ Bakıyor' : '❌ Bakmıyor');
+      
       setIsLookingAtTarget(isLooking);
     }, 100); // Check every 100ms
 
