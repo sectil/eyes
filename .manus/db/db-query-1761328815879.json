@@ -1,0 +1,9 @@
+{
+  "query": "INSERT INTO subscriptionPlans (name, type, durationDays, price, features, isActive) VALUES\n('Ücretsiz Deneme', 'trial', 3, 0, '[\"Temel göz testleri\", \"Günlük egzersiz programı\", \"İlerleme takibi\"]', 1),\n('Aylık Abonelik', 'monthly', 30, 4900, '[\"Tüm göz testleri\", \"Kişiselleştirilmiş egzersizler\", \"AI göz simülasyonu\", \"Detaylı raporlar\", \"Öncelikli destek\"]', 1),\n('3 Aylık Abonelik', 'quarterly', 90, 12900, '[\"Tüm aylık özellikler\", \"3 ay sürekli takip\", \"İleri düzey analizler\"]', 1),\n('Yıllık Abonelik', 'yearly', 365, 39900, '[\"Tüm özellikler\", \"1 yıl kesintisiz hizmet\", \"Özel danışmanlık\", \"Yıllık göz sağlığı raporu\"]', 1);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user Ky3ch7VqW1LmvRj.b79dbf61be7f --database 8QUgGyUx5Wt8QW6fgwNPpY --execute INSERT INTO subscriptionPlans (name, type, durationDays, price, features, isActive) VALUES\n('Ücretsiz Deneme', 'trial', 3, 0, '[\"Temel göz testleri\", \"Günlük egzersiz programı\", \"İlerleme takibi\"]', 1),\n('Aylık Abonelik', 'monthly', 30, 4900, '[\"Tüm göz testleri\", \"Kişiselleştirilmiş egzersizler\", \"AI göz simülasyonu\", \"Detaylı raporlar\", \"Öncelikli destek\"]', 1),\n('3 Aylık Abonelik', 'quarterly', 90, 12900, '[\"Tüm aylık özellikler\", \"3 ay sürekli takip\", \"İleri düzey analizler\"]', 1),\n('Yıllık Abonelik', 'yearly', 365, 39900, '[\"Tüm özellikler\", \"1 yıl kesintisiz hizmet\", \"Özel danışmanlık\", \"Yıllık göz sağlığı raporu\"]', 1);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 120
+}
