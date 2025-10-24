@@ -23,15 +23,15 @@ export default function Home() {
                 <Link href="/dashboard">
                   <Button variant="ghost">Dashboard</Button>
                 </Link>
-                <Link href="/profile">
+                <Link href="/profile/setup">
                   <Button variant="outline">Profilim</Button>
                 </Link>
               </>
             ) : (
               <>
-                <Link href="/features">
+                <a href="#features">
                   <Button variant="ghost">Özellikler</Button>
-                </Link>
+                </a>
                 <Link href="/pricing">
                   <Button variant="ghost">Fiyatlandırma</Button>
                 </Link>
@@ -74,11 +74,11 @@ export default function Home() {
                         Ücretsiz Başla <ArrowRight className="h-4 w-4" />
                       </Button>
                     </a>
-                    <Link href="/features">
+                    <a href="#features">
                       <Button size="lg" variant="outline">
                         Özellikleri Keşfet
                       </Button>
-                    </Link>
+                    </a>
                   </>
                 )}
               </div>
@@ -103,7 +103,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-muted/30">
+      <section id="features" className="py-20 bg-background">
         <div className="container">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl md:text-4xl font-bold">Neden VisionCare?</h2>
@@ -211,7 +211,7 @@ export default function Home() {
             <div>
               <h3 className="font-semibold mb-4">Ürün</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/features">Özellikler</Link></li>
+                <li><a href="#features">Özellikler</a></li>
                 <li><Link href="/pricing">Fiyatlandırma</Link></li>
                 <li><Link href="/exercises">Egzersizler</Link></li>
               </ul>
