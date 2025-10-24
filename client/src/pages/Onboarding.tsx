@@ -34,6 +34,8 @@ interface TestResult {
 export default function Onboarding() {
   const [, setLocation] = useLocation();
   const [step, setStep] = useState<OnboardingStep>("welcome");
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
+  const [savedProfile, setSavedProfile] = useState<ProfileData | null>(null);
   const [profileData, setProfileData] = useState<ProfileData>({
     age: "",
     gender: "",
@@ -129,6 +131,10 @@ export default function Onboarding() {
       usesGlasses: parseInt(profileData.usesGlasses),
     });
 
+    // Save to local state
+    setSavedProfile({ ...profileData });
+    setIsEditingProfile(false);
+
     // Analyze with AI
     setStep("ai-analysis");
     analyzeProfile.mutate({
@@ -138,6 +144,17 @@ export default function Onboarding() {
       hasGlasses: parseInt(profileData.usesGlasses) === 1,
       symptoms: profileData.symptoms,
     });
+  };
+
+  const handleEditProfile = () => {
+    setIsEditingProfile(true);
+  };
+
+  const handleCancelEdit = () => {
+    if (savedProfile) {
+      setProfileData(savedProfile);
+    }
+    setIsEditingProfile(false);
   };
 
   const handleCalibrationComplete = () => {
@@ -367,21 +384,36 @@ export default function Onboarding() {
               </div>
 
               <div className="flex gap-4">
-                <Button onClick={() => setStep("welcome")} variant="outline" className="gap-2">
-                  <ArrowLeft className="h-4 w-4" /> Geri
-                </Button>
-                <Button onClick={handleProfileSubmit} disabled={upsertProfile.isPending} className="flex-1 gap-2">
-                  {upsertProfile.isPending ? (
-                    <>
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      Kaydediliyor...
-                    </>
-                  ) : (
-                    <>
+                {!isEditingProfile && savedProfile ? (
+                  <>
+                    <Button onClick={() => setStep("ai-analysis")} className="flex-1 gap-2">
                       Devam Et <ArrowRight className="h-4 w-4" />
-                    </>
-                  )}
-                </Button>
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button onClick={() => setStep("welcome")} variant="outline" className="gap-2">
+                      <ArrowLeft className="h-4 w-4" /> Geri
+                    </Button>
+                    {isEditingProfile && (
+                      <Button onClick={handleCancelEdit} variant="outline" className="gap-2">
+                        Iptal Et
+                      </Button>
+                    )}
+                    <Button onClick={handleProfileSubmit} disabled={upsertProfile.isPending} className="flex-1 gap-2">
+                      {upsertProfile.isPending ? (
+                        <>
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                          Kaydediliyor...
+                        </>
+                      ) : (
+                        <>
+                          Kaydet <ArrowRight className="h-4 w-4" />
+                        </>
+                      )}
+                    </Button>
+                  </>
+                )}
               </div>
             </CardContent>
           </Card>
