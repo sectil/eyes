@@ -76,6 +76,7 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   const [leftEyeOpen, setLeftEyeOpen] = useState(true);
   const [rightEyeOpen, setRightEyeOpen] = useState(true);
   const [lastEyeData, setLastEyeData] = useState<EyeData | null>(null);
+  const lastEyeDataRef = useRef<EyeData | null>(null);
   const [videoScale, setVideoScale] = useState({ scaleX: 1, scaleY: 1, offsetX: 0, offsetY: 0 });
   const [currentPointIndex, setCurrentPointIndex] = useState(0);
   const [calibrationProgress, setCalibrationProgress] = useState(0);
@@ -121,27 +122,34 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     }
   }, [eyeGameActive, currentTarget, targetsCompleted, TOTAL_TARGETS]);
 
-  // Eye tracking game - check if looking at target
+  // Eye tracking game - check if looking at target (using interval instead of useEffect)
   useEffect(() => {
-    if (!eyeGameActive || !currentTarget || !lastEyeData) return;
+    if (!eyeGameActive || !currentTarget) return;
 
-    // Calculate gaze position (average of both eyes)
-    const gazeX = (lastEyeData.left.center.x + lastEyeData.right.center.x) / 2;
-    const gazeY = (lastEyeData.left.center.y + lastEyeData.right.center.y) / 2;
+    const interval = setInterval(() => {
+      const eyeData = lastEyeDataRef.current;
+      if (!eyeData) return;
 
-    // Convert target position to pixels (assuming video is 640x480)
-    const targetX = (currentTarget.x / 100) * (videoRef.current?.clientWidth || 640);
-    const targetY = (currentTarget.y / 100) * (videoRef.current?.clientHeight || 480);
+      // Calculate gaze position (average of both eyes)
+      const gazeX = (eyeData.left.center.x + eyeData.right.center.x) / 2;
+      const gazeY = (eyeData.left.center.y + eyeData.right.center.y) / 2;
 
-    // Calculate distance
-    const distance = Math.sqrt(
-      Math.pow(gazeX - targetX, 2) + Math.pow(gazeY - targetY, 2)
-    );
+      // Convert target position to pixels
+      const targetX = (currentTarget.x / 100) * (videoRef.current?.clientWidth || 640);
+      const targetY = (currentTarget.y / 100) * (videoRef.current?.clientHeight || 480);
 
-    // Check if within threshold (50 pixels)
-    const isLooking = distance < 80;
-    setIsLookingAtTarget(isLooking);
-  }, [eyeGameActive, currentTarget, lastEyeData]);
+      // Calculate distance
+      const distance = Math.sqrt(
+        Math.pow(gazeX - targetX, 2) + Math.pow(gazeY - targetY, 2)
+      );
+
+      // Check if within threshold (80 pixels)
+      const isLooking = distance < 80;
+      setIsLookingAtTarget(isLooking);
+    }, 100); // Check every 100ms
+
+    return () => clearInterval(interval);
+  }, [eyeGameActive, currentTarget]);
 
   // Eye tracking game - track look duration
   useEffect(() => {
@@ -318,6 +326,7 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
               };
               
               setLastEyeData(scaledEyes);
+              lastEyeDataRef.current = scaledEyes;
             }
 
             // Detect if eyes are open or closed based on eye aspect ratio
