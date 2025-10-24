@@ -123,7 +123,7 @@ export default function Onboarding() {
     // Save profile
     upsertProfile.mutate({
       age: parseInt(profileData.age),
-      gender: profileData.gender as "male" | "female" | "other" | undefined,
+      gender: profileData.gender ? (profileData.gender as "male" | "female" | "other") : undefined,
       occupation: profileData.occupation,
       dailyScreenTime: parseInt(profileData.dailyScreenTime),
       usesGlasses: parseInt(profileData.usesGlasses),
