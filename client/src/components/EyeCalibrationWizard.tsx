@@ -15,6 +15,42 @@ interface CalibrationWizardProps {
 
 type CalibrationStep = "setup" | "face-detection" | "eye-detection" | "calibration" | "complete";
 
+// Helper function to calculate Eye Aspect Ratio (EAR)
+// Used to detect if eyes are open or closed
+function calculateEyeAspectRatio(
+  keypoints: Array<{ x?: number; y?: number; z?: number }>,
+  eye: 'left' | 'right'
+): number {
+  // MediaPipe eye landmark indices
+  const indices = eye === 'left'
+    ? [33, 160, 158, 133, 153, 144] // Left eye: outer, top1, top2, inner, bottom2, bottom1
+    : [362, 387, 385, 263, 380, 373]; // Right eye
+
+  const [p1, p2, p3, p4, p5, p6] = indices.map(i => keypoints[i]);
+
+  // Check if all points are valid
+  if (!p1?.x || !p2?.x || !p3?.x || !p4?.x || !p5?.x || !p6?.x) {
+    return 1.0; // Default to "open"
+  }
+
+  // Calculate vertical distances
+  const vertical1 = Math.sqrt(
+    Math.pow((p2.x - p6.x), 2) + Math.pow((p2.y! - p6.y!), 2)
+  );
+  const vertical2 = Math.sqrt(
+    Math.pow((p3.x - p5.x), 2) + Math.pow((p3.y! - p5.y!), 2)
+  );
+
+  // Calculate horizontal distance
+  const horizontal = Math.sqrt(
+    Math.pow((p1.x - p4.x), 2) + Math.pow((p1.y! - p4.y!), 2)
+  );
+
+  // Eye Aspect Ratio
+  const ear = (vertical1 + vertical2) / (2.0 * horizontal);
+  return ear;
+}
+
 const CALIBRATION_POINTS = [
   { x: 0.5, y: 0.5, label: "Merkez" },      // Center
   { x: 0.1, y: 0.1, label: "Sol Üst" },     // Top-left
@@ -50,6 +86,8 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   useEffect(() => {
     const setup = async () => {
       try {
+        toast.loading("🔄 Kamera ve AI modeli yüklen iyor...", { id: "setup" });
+        
         // Initialize webcam
         const stream = await initWebcam();
         streamRef.current = stream;
@@ -64,7 +102,7 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
         trackerRef.current = tracker;
         tracker.resetCalibration();
 
-        toast.success("Kamera ve göz takibi hazır!");
+        toast.success("✅ Hazır! Göz takibi aktif.", { id: "setup" });
       } catch (error: any) {
         toast.error(error.message || "Başlatma hatası");
       }
@@ -167,10 +205,19 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
               setLastEyeData(scaledEyes);
             }
 
-            // Detect if eyes are open or closed based on eye landmarks
-            // Simple heuristic: if iris is detected, eye is open
-            setLeftEyeOpen(true);
-            setRightEyeOpen(true);
+            // Detect if eyes are open or closed based on eye aspect ratio
+            // Calculate eye aspect ratio (EAR) for better detection
+            if (face.keypoints) {
+              const leftEyeAR = calculateEyeAspectRatio(face.keypoints, 'left');
+              const rightEyeAR = calculateEyeAspectRatio(face.keypoints, 'right');
+              
+              // Threshold: EAR < 0.2 means closed, >= 0.2 means open
+              setLeftEyeOpen(leftEyeAR >= 0.18);
+              setRightEyeOpen(rightEyeAR >= 0.18);
+            } else {
+              setLeftEyeOpen(true);
+              setRightEyeOpen(true);
+            }
           } else {
             setEyesDetected(false);
             // Eyes might be closed
