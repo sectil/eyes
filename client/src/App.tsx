@@ -11,6 +11,7 @@ import Pricing from "./pages/Pricing";
 import Tests from "./pages/Tests";
 import SnellenTest from "./pages/SnellenTest";
 import Exercises from "./pages/Exercises";
+import EyeTrackingTest from "./pages/EyeTrackingTest";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/tests" component={Tests} />
       <Route path="/tests/snellen" component={SnellenTest} />
       <Route path="/exercises" component={Exercises} />
+      <Route path="/tests/eye-tracking" component={EyeTrackingTest} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

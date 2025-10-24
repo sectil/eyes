@@ -46,13 +46,13 @@ const TESTS = [
   },
   {
     id: "convergence",
-    name: "Konverjans Testi",
-    description: "Her iki gözün yakın mesafede birlikte odaklanma yeteneğini ölçer.",
+    name: "Göz Takibi ve Konverjans Testi",
+    description: "Kamera ile göz hareketlerinizi takip eder ve konverjans yeteneğinizi ölçer.",
     icon: Focus,
     duration: "4 dakika",
     difficulty: "Orta",
-    path: "/tests/convergence",
-    available: false,
+    path: "/tests/eye-tracking",
+    available: true,
   },
   {
     id: "symptom",
