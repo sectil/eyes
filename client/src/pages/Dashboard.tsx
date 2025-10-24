@@ -11,6 +11,9 @@ export default function Dashboard() {
   const [, setLocation] = useLocation();
   const { data: subscription } = trpc.subscription.getMySubscription.useQuery();
   const { data: profile, isLoading: profileLoading } = trpc.profile.get.useQuery();
+  const { data: fatigueStats } = trpc.fatigue.getStats.useQuery({ days: 7 });
+  const { data: exerciseStats } = trpc.exercises.getStats.useQuery({ days: 30 });
+  const { data: latestSimulation } = trpc.simulation.getLatest.useQuery({});
 
   // Redirect to onboarding if no profile
   useEffect(() => {
@@ -33,9 +36,6 @@ export default function Dashboard() {
   if (!profile) {
     return null; // Will redirect to onboarding
   }
-  const { data: fatigueStats } = trpc.fatigue.getStats.useQuery({ days: 7 });
-  const { data: exerciseStats } = trpc.exercises.getStats.useQuery({ days: 30 });
-  const { data: latestSimulation } = trpc.simulation.getLatest.useQuery({});
 
   const hasProfile = !!profile;
   const hasActiveSubscription = subscription?.status === "active" && new Date(subscription.endDate) > new Date();
