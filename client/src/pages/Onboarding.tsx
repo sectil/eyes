@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import EyeCalibrationWizard from "@/components/EyeCalibrationWizard";
 
-type OnboardingStep = "welcome" | "profile" | "ai-analysis" | "calibration" | "tests" | "ai-report" | "complete";
+type OnboardingStep = "welcome" | "profile" | "ai-analysis" | "face-recognition" | "calibration" | "tests" | "ai-report" | "complete";
 
 interface ProfileData {
   age: string;
@@ -67,7 +67,7 @@ export default function Onboarding() {
         }
         setAiAnalysis(parsed);
         toast.success("🤖 AI profil analizi tamamlandı!");
-        setStep("calibration");
+        setStep("face-recognition");
       } catch (error) {
         console.error("AI analysis error:", error);
         toast.error("AI analizi işlenemedi");
@@ -111,7 +111,7 @@ export default function Onboarding() {
   // Eye profile will be saved via profile router
 
   const getStepProgress = () => {
-    const steps: OnboardingStep[] = ["welcome", "profile", "ai-analysis", "calibration", "tests", "ai-report", "complete"];
+    const steps: OnboardingStep[] = ["welcome", "profile", "ai-analysis", "face-recognition", "calibration", "tests", "ai-report", "complete"];
     const currentIndex = steps.indexOf(step);
     return ((currentIndex + 1) / steps.length) * 100;
   };
@@ -220,7 +220,7 @@ export default function Onboarding() {
         <div className="mb-8">
           <Progress value={getStepProgress()} className="h-2" />
           <p className="text-sm text-muted-foreground mt-2 text-center">
-            Adım {["welcome", "profile", "ai-analysis", "calibration", "tests", "ai-report", "complete"].indexOf(step) + 1} / 7
+            Adım {["welcome", "profile", "ai-analysis", "face-recognition", "calibration", "tests", "ai-report", "complete"].indexOf(step) + 1} / 8
           </p>
         </div>
 
@@ -470,6 +470,35 @@ export default function Onboarding() {
                   </AlertDescription>
                 </Alert>
               )}
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Face Recognition Step */}
+        {step === "face-recognition" && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Kişi Tanıma Testi</CardTitle>
+              <CardDescription>
+                Yüz tanıma sistemi kalibrasyonu için birkaç fotoğraf çekeceğiz
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="text-center py-12">
+                <div className="text-6xl mb-4">📸</div>
+                <h3 className="text-xl font-semibold mb-2">Yüz Tanıma Kalibrasyonu</h3>
+                <p className="text-muted-foreground mb-6">
+                  Sistem sizi tanımak için kameranızdan 3-4 fotoğraf çekecek.
+                  Farklı açılardan yüzünüzü gösterin.
+                </p>
+                <Button
+                  onClick={() => setStep("calibration")}
+                  size="lg"
+                  className="gap-2"
+                >
+                  Başla <ArrowRight className="h-4 w-4" />
+                </Button>
+              </div>
             </CardContent>
           </Card>
         )}
