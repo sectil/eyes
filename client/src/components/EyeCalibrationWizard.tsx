@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Eye, Camera, CheckCircle2, AlertCircle, X, Volume2, VolumeX } from "lucide-react";
+import { Eye, Camera, CheckCircle2, AlertCircle, X, Volume2, VolumeX, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { getEyeTracker, type EyeData } from "@/lib/advancedEyeTracking";
 import { initWebcam, stopWebcam } from "@/lib/eyeTracking";
@@ -294,12 +294,22 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
   const handleStartCalibration = async () => {
     try {
       if (!videoRef.current) return;
+      setIsModelLoading(true);
       const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
       videoRef.current.srcObject = stream;
       streamRef.current = stream;
-      setStep("setup");
+      
+      // Wait for video to be ready
+      videoRef.current.onloadedmetadata = () => {
+        videoRef.current?.play();
+        setStep("face-detection");
+        setIsModelLoading(false);
+        toast.success("🎥 Kamera açıldı!");
+      };
     } catch (error) {
-      toast.error("Kamera erişimi başarısız");
+      console.error("Camera error:", error);
+      setIsModelLoading(false);
+      toast.error("Kamera erişimi başarısız. Lütfen tarayıcı izinlerini kontrol edin.");
     }
   };
 
@@ -338,6 +348,14 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
         </CardHeader>
         <CardContent className="space-y-4">
           <Progress value={(step === "setup" ? 25 : step === "face-detection" ? 50 : step === "eye-detection" ? 75 : 100)} />
+          
+          {/* Hidden video element for camera initialization */}
+          <video
+            ref={videoRef}
+            autoPlay
+            playsInline
+            className={step === "setup" ? "hidden" : "w-full rounded-lg bg-black/10"}
+          />
 
           {step === "setup" && (
             <>
@@ -350,8 +368,18 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Button onClick={handleStartCalibration} className="flex-1">
-                    Kamerayı Aç
+                  <Button onClick={handleStartCalibration} className="flex-1" disabled={isModelLoading}>
+                    {isModelLoading ? (
+                      <>
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        Kamera açılıyor...
+                      </>
+                    ) : (
+                      <>
+                        <Camera className="h-4 w-4 mr-2" />
+                        Kamerayı Aç
+                      </>
+                    )}
                   </Button>
                   <Button onClick={onCancel} variant="outline">
                     <X className="h-4 w-4" /> İptal
@@ -363,12 +391,6 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
 
           {step === "face-detection" && (
             <>
-              <video
-                ref={videoRef}
-                autoPlay
-                playsInline
-                className="w-full rounded-lg bg-black/10"
-              />
               <div className="flex items-center gap-3 p-4 bg-accent/50 rounded-lg">
                 {faceDetected ? (
                   <CheckCircle2 className="h-5 w-5 text-green-600" />
@@ -387,12 +409,6 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
 
           {step === "eye-detection" && (
             <>
-              <video
-                ref={videoRef}
-                autoPlay
-                playsInline
-                className="w-full rounded-lg bg-black/10"
-              />
               {!snakeGameActive ? (
                 <>
                   <div className="flex items-center gap-3 p-4 bg-accent/50 rounded-lg">
