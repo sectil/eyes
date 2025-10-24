@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { trpc } from "@/lib/trpc";
-import { Eye, Clock, Target, CheckCircle2, Play } from "lucide-react";
+import { Eye, Clock, Target, CheckCircle2, Play, Gamepad2 } from "lucide-react";
 import { Link } from "wouter";
 import { toast } from "sonner";
 import { useAuth } from "@/_core/hooks/useAuth";
@@ -16,6 +16,23 @@ export default function Exercises() {
   const [exerciseTime, setExerciseTime] = useState(0);
 
   const { data: exercises, isLoading } = trpc.exercises.getAll.useQuery();
+
+  // Add eye game as special exercise
+  const eyeGame = {
+    id: 999,
+    name: "Göz Kontrollü Breakout Oyunu",
+    description: "Eğlenceli oyun ile göz kaslarınızı güçlendirin ve koordinasyonunuzu geliştirin",
+    durationMinutes: 5,
+    difficulty: "beginner",
+    targetCondition: "Göz koordinasyonu, odaklanma, eğlenceli egzersiz",
+    instructions: JSON.stringify([
+      "Gözlerinizi sağa-sola hareket ettirerek çubuğu kontrol edin",
+      "Topu yere düşürmeden tüm blokları kırın",
+      "Başınızı sabit tutun, sadece gözlerinizi hareket ettirin",
+      "3 can hakkınız var, dikkatli olun!"
+    ]),
+    isActive: true,
+  };
   const logExercise = trpc.exercises.logCompletion.useMutation({
     onSuccess: () => {
       toast.success("Egzersiz başarıyla kaydedildi!");
@@ -129,6 +146,43 @@ export default function Exercises() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Eye Game Card */}
+          <Card className="flex flex-col border-2 border-primary">
+            <CardHeader>
+              <div className="flex items-start justify-between gap-2">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Gamepad2 className="h-5 w-5 text-primary" />
+                  {eyeGame.name}
+                </CardTitle>
+                <Badge className="bg-purple-100 text-purple-700">
+                  Oyun
+                </Badge>
+              </div>
+              <CardDescription className="line-clamp-2">
+                {eyeGame.description}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex-1 flex flex-col justify-between space-y-4">
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Clock className="h-4 w-4" />
+                  <span>{eyeGame.durationMinutes} dakika</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Target className="h-4 w-4" />
+                  <span className="line-clamp-1">{eyeGame.targetCondition}</span>
+                </div>
+              </div>
+              <Link href="/exercises/eye-game">
+                <Button className="w-full gap-2" variant="default">
+                  <Play className="h-4 w-4" />
+                  Oyuna Başla
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+
+          {/* Regular Exercises */}
           {exercises?.map((exercise) => {
             const instructions = exercise.instructions ? JSON.parse(exercise.instructions) : [];
 

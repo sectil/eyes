@@ -12,6 +12,7 @@ import Tests from "./pages/Tests";
 import SnellenTest from "./pages/SnellenTest";
 import Exercises from "./pages/Exercises";
 import EyeTrackingTest from "./pages/EyeTrackingTest";
+import EyeBreakoutGame from "./pages/EyeBreakoutGame";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -25,6 +26,7 @@ function Router() {
       <Route path="/tests/snellen" component={SnellenTest} />
       <Route path="/exercises" component={Exercises} />
       <Route path="/tests/eye-tracking" component={EyeTrackingTest} />
+      <Route path="/exercises/eye-game" component={EyeBreakoutGame} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
