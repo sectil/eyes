@@ -125,21 +125,18 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     const timer = setInterval(() => {
       setCountdown((prev) => {
         if (prev <= 1) {
-          // Capture calibration point
-          if (eyeData && trackerRef.current) {
-            const point = CALIBRATION_POINTS[currentPointIndex];
-            trackerRef.current.addCalibrationPoint(point.x, point.y, eyeData);
-
-            if (currentPointIndex < CALIBRATION_POINTS.length - 1) {
-              setCurrentPointIndex(currentPointIndex + 1);
-              setCalibrationProgress(((currentPointIndex + 1) / CALIBRATION_POINTS.length) * 100);
-              return 3;
+          // Move to next point or complete
+          setCurrentPointIndex((currentIdx) => {
+            if (currentIdx < CALIBRATION_POINTS.length - 1) {
+              setCalibrationProgress(((currentIdx + 1) / CALIBRATION_POINTS.length) * 100);
+              return currentIdx + 1;
             } else {
               // Calibration complete
               setStep("complete");
               toast.success("Kalibrasyon tamamlandı!");
+              return currentIdx;
             }
-          }
+          });
           return 3;
         }
         return prev - 1;
@@ -147,6 +144,15 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     }, 1000);
 
     return () => clearInterval(timer);
+  }, [step]);
+
+  // Capture calibration data when countdown hits 1
+  useEffect(() => {
+    if (step === "calibration" && countdown === 1 && eyeData && trackerRef.current) {
+      const point = CALIBRATION_POINTS[currentPointIndex];
+      trackerRef.current.addCalibrationPoint(point.x, point.y, eyeData);
+      console.log(`Kalibrasyon noktası ${currentPointIndex + 1} kaydedildi:`, point.label);
+    }
   }, [step, countdown, currentPointIndex, eyeData]);
 
   const startFaceDetection = () => {
