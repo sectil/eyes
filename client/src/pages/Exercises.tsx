@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { trpc } from "@/lib/trpc";
-import { Eye, Clock, Target, CheckCircle2, Play, Gamepad2 } from "lucide-react";
+import { Eye, Clock, Target, CheckCircle2, Play, Gamepad2, Camera } from "lucide-react";
 import { Link } from "wouter";
 import { toast } from "sonner";
 import { useAuth } from "@/_core/hooks/useAuth";
@@ -181,6 +181,42 @@ export default function Exercises() {
               </Link>
             </CardContent>
           </Card>
+
+          {/* Camera Exercises Card */}
+          <Link href="/exercises/camera">
+            <Card className="flex flex-col border-2 border-cyan-500 cursor-pointer hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex items-start justify-between gap-2">
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <Camera className="h-5 w-5 text-cyan-600" />
+                    Kamera Egzersizleri
+                  </CardTitle>
+                  <Badge className="bg-cyan-100 text-cyan-700">
+                    Yeni
+                  </Badge>
+                </div>
+                <CardDescription className="line-clamp-2">
+                  Kamera ile gerçek zamanlı göz egzersizleri yapın. Hızlı göz takip, rotasyon, odaklanma ve stabilite testleri.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex-1 flex flex-col justify-between space-y-4">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Clock className="h-4 w-4" />
+                    <span>2 dakika / egzersiz</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Target className="h-4 w-4" />
+                    <span>Göz takip, rotasyon, odaklanma</span>
+                  </div>
+                </div>
+                <Button className="w-full gap-2" variant="default">
+                  <Play className="h-4 w-4" />
+                  Başla
+                </Button>
+              </CardContent>
+            </Card>
+          </Link>
 
           {/* Regular Exercises */}
           {exercises?.map((exercise) => {
