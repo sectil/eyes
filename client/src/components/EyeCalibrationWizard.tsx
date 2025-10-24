@@ -85,12 +85,16 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   const [warmupCountdown, setWarmupCountdown] = useState(5);
   const [isModelLoading, setIsModelLoading] = useState(false);
   
-  // Eye detection game states
+  // Eye tracking game states
   const [eyeGameActive, setEyeGameActive] = useState(false);
-  const [eyeGameScore, setEyeGameScore] = useState(0);
-  const [eyeGameBalls, setEyeGameBalls] = useState<Array<{id: number, x: number, y: number, color: string}>>([]);
-  const [blinkCount, setBlinkCount] = useState(0);
-  const [eyeDetectionProgress, setEyeDetectionProgress] = useState(0);
+  const [currentTarget, setCurrentTarget] = useState<{x: number, y: number} | null>(null);
+  const [targetStartTime, setTargetStartTime] = useState<number>(0);
+  const [targetsCompleted, setTargetsCompleted] = useState(0);
+  const [gameMetrics, setGameMetrics] = useState<Array<{reactionTime: number, accuracy: number, stability: number}>>([]);
+  const [isLookingAtTarget, setIsLookingAtTarget] = useState(false);
+  const [lookDuration, setLookDuration] = useState(0);
+  const TOTAL_TARGETS = 10;
+  const LOOK_DURATION_REQUIRED = 2; // seconds
 
   const WARMUP_EXERCISES = [
     { text: "Sol gözünüzü kırpın 👁️", duration: 5, icon: "👈" },
@@ -100,46 +104,72 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     { text: "Gözlerinizi açın ve kameraya bakın 👀", duration: 3, icon: "✅" },
   ];
 
-  // Eye detection game - spawn balls
+  // Eye tracking game - spawn new target
   useEffect(() => {
-    if (!eyeGameActive) return;
+    if (!eyeGameActive || targetsCompleted >= TOTAL_TARGETS) return;
+    
+    if (!currentTarget) {
+      // Spawn new target at random position
+      const newTarget = {
+        x: Math.random() * 70 + 15, // 15-85%
+        y: Math.random() * 60 + 15, // 15-75%
+      };
+      setCurrentTarget(newTarget);
+      setTargetStartTime(Date.now());
+      setLookDuration(0);
+      setIsLookingAtTarget(false);
+    }
+  }, [eyeGameActive, currentTarget, targetsCompleted, TOTAL_TARGETS]);
+
+  // Eye tracking game - check if looking at target
+  useEffect(() => {
+    if (!eyeGameActive || !currentTarget || !lastEyeData) return;
+
+    // Calculate gaze position (average of both eyes)
+    const gazeX = (lastEyeData.left.center.x + lastEyeData.right.center.x) / 2;
+    const gazeY = (lastEyeData.left.center.y + lastEyeData.right.center.y) / 2;
+
+    // Convert target position to pixels (assuming video is 640x480)
+    const targetX = (currentTarget.x / 100) * (videoRef.current?.clientWidth || 640);
+    const targetY = (currentTarget.y / 100) * (videoRef.current?.clientHeight || 480);
+
+    // Calculate distance
+    const distance = Math.sqrt(
+      Math.pow(gazeX - targetX, 2) + Math.pow(gazeY - targetY, 2)
+    );
+
+    // Check if within threshold (50 pixels)
+    const isLooking = distance < 80;
+    setIsLookingAtTarget(isLooking);
+  }, [eyeGameActive, currentTarget, lastEyeData]);
+
+  // Eye tracking game - track look duration
+  useEffect(() => {
+    if (!eyeGameActive || !isLookingAtTarget) return;
 
     const interval = setInterval(() => {
-      const colors = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'];
-      const newBall = {
-        id: Date.now(),
-        x: Math.random() * 80 + 10, // 10-90%
-        y: Math.random() * 60 + 10, // 10-70%
-        color: colors[Math.floor(Math.random() * colors.length)]
-      };
-      
-      setEyeGameBalls(prev => [...prev.slice(-4), newBall]); // Keep max 5 balls
-    }, 2000); // New ball every 2 seconds
+      setLookDuration(prev => {
+        const newDuration = prev + 0.1;
+        
+        // Target completed!
+        if (newDuration >= LOOK_DURATION_REQUIRED) {
+          const reactionTime = (Date.now() - targetStartTime) / 1000;
+          const accuracy = 100; // Simplified for now
+          const stability = 100; // Simplified for now
+          
+          setGameMetrics(prev => [...prev, { reactionTime, accuracy, stability }]);
+          setTargetsCompleted(prev => prev + 1);
+          setCurrentTarget(null);
+          
+          return 0;
+        }
+        
+        return newDuration;
+      });
+    }, 100);
 
     return () => clearInterval(interval);
-  }, [eyeGameActive]);
-
-  // Eye detection game - track blinks and progress
-  useEffect(() => {
-    if (!eyeGameActive) return;
-
-    // Detect blink (when both eyes close then open)
-    if (!leftEyeOpen && !rightEyeOpen) {
-      // Eyes closed
-    } else if (leftEyeOpen && rightEyeOpen) {
-      // Eyes open - count as blink if previously closed
-      setBlinkCount(prev => {
-        const newCount = prev + 1;
-        setEyeGameScore(newCount * 10);
-        
-        // Increase progress
-        const progress = Math.min((newCount / 20) * 100, 100);
-        setEyeDetectionProgress(progress);
-        
-        return newCount;
-      });
-    }
-  }, [leftEyeOpen, rightEyeOpen, eyeGameActive]);
+  }, [eyeGameActive, isLookingAtTarget, targetStartTime, LOOK_DURATION_REQUIRED]);
 
   // Warmup countdown timer
   useEffect(() => {
@@ -614,9 +644,9 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
                       className="w-full"
                       onClick={() => {
                         setEyeGameActive(true);
-                        setEyeGameScore(0);
-                        setBlinkCount(0);
-                        setEyeDetectionProgress(0);
+                        setTargetsCompleted(0);
+                        setGameMetrics([]);
+                        setCurrentTarget(null);
                       }}
                       disabled={!eyesDetected}
                     >
@@ -625,49 +655,79 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
                   </>
                 ) : (
                   <>
-                    {/* Eye Game UI */}
-                    <div className="relative h-64 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-950 dark:to-blue-950 rounded-lg border-2 border-primary/30 overflow-hidden">
-                      {/* Floating balls */}
-                      {eyeGameBalls.map(ball => (
+                    {/* Eye Tracking Game UI */}
+                    <div className="relative h-64 bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-950 dark:to-blue-950 rounded-lg border-2 border-primary/30 overflow-hidden">
+                      {/* Target */}
+                      {currentTarget && (
                         <div
-                          key={ball.id}
-                          className="absolute w-12 h-12 rounded-full shadow-lg animate-bounce"
+                          className="absolute"
                           style={{
-                            left: `${ball.x}%`,
-                            top: `${ball.y}%`,
-                            backgroundColor: ball.color,
-                            boxShadow: `0 0 20px ${ball.color}`,
+                            left: `${currentTarget.x}%`,
+                            top: `${currentTarget.y}%`,
+                            transform: 'translate(-50%, -50%)',
                           }}
-                        />
-                      ))}
+                        >
+                          {/* Outer ring - progress indicator */}
+                          <div className="relative w-16 h-16">
+                            <svg className="absolute inset-0 -rotate-90" viewBox="0 0 64 64">
+                              <circle
+                                cx="32"
+                                cy="32"
+                                r="28"
+                                fill="none"
+                                stroke="#e5e7eb"
+                                strokeWidth="4"
+                              />
+                              <circle
+                                cx="32"
+                                cy="32"
+                                r="28"
+                                fill="none"
+                                stroke={isLookingAtTarget ? "#10b981" : "#3b82f6"}
+                                strokeWidth="4"
+                                strokeDasharray={`${(lookDuration / LOOK_DURATION_REQUIRED) * 175.93} 175.93`}
+                                className="transition-all duration-100"
+                              />
+                            </svg>
+                            {/* Inner target */}
+                            <div className={`absolute inset-0 m-3 rounded-full transition-all duration-200 ${
+                              isLookingAtTarget ? 'bg-green-500 shadow-lg shadow-green-500/50' : 'bg-blue-500 shadow-lg shadow-blue-500/50'
+                            } flex items-center justify-center`}>
+                              <div className="w-3 h-3 bg-white rounded-full animate-pulse" />
+                            </div>
+                          </div>
+                        </div>
+                      )}
                       
                       {/* Game instructions */}
                       <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm font-medium">
-                        👀 Renkli toplara bakın ve göz kırpın!
+                        🎯 Hedefe göz bebeklerin izle takip et!
                       </div>
                       
-                      {/* Score */}
-                      <div className="absolute top-4 right-4 bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg shadow-lg">
-                        🏆 {eyeGameScore}
+                      {/* Targets completed */}
+                      <div className="absolute top-4 right-4 bg-primary text-white px-4 py-2 rounded-full font-bold text-lg shadow-lg">
+                        🎯 {targetsCompleted}/{TOTAL_TARGETS}
                       </div>
                       
-                      {/* Blink counter */}
-                      <div className="absolute bottom-4 left-4 bg-green-500 text-white px-4 py-2 rounded-full font-bold shadow-lg">
-                        👁️ Kırpma: {blinkCount}/20
-                      </div>
+                      {/* Average reaction time */}
+                      {gameMetrics.length > 0 && (
+                        <div className="absolute bottom-4 left-4 bg-yellow-500 text-white px-3 py-1.5 rounded-full font-bold text-sm shadow-lg">
+                          ⏱️ {(gameMetrics.reduce((sum, m) => sum + m.reactionTime, 0) / gameMetrics.length).toFixed(1)}s
+                        </div>
+                      )}
                     </div>
                     
                     {/* Progress */}
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span className="text-muted-foreground">Göz Algılama İlerlemesi</span>
-                        <span className="font-bold text-primary">{Math.round(eyeDetectionProgress)}%</span>
+                        <span className="text-muted-foreground">Hedef Tamamlama</span>
+                        <span className="font-bold text-primary">{targetsCompleted}/{TOTAL_TARGETS}</span>
                       </div>
-                      <Progress value={eyeDetectionProgress} className="h-3" />
+                      <Progress value={(targetsCompleted / TOTAL_TARGETS) * 100} className="h-3" />
                     </div>
                     
                     {/* Continue button */}
-                    {eyeDetectionProgress >= 100 && (
+                    {targetsCompleted >= TOTAL_TARGETS && (
                       <Button
                         className="w-full"
                         onClick={() => {
@@ -675,15 +735,15 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
                           startEyeDetection();
                         }}
                       >
-                        ✅ Kalibrasyona Geç (Puan: {eyeGameScore})
+                        ✅ Kalibrasyona Geç (Ortalama: {(gameMetrics.reduce((sum, m) => sum + m.reactionTime, 0) / gameMetrics.length).toFixed(1)}s)
                       </Button>
                     )}
                     
-                    {eyeDetectionProgress < 100 && (
+                    {targetsCompleted < TOTAL_TARGETS && (
                       <div className="flex items-center gap-2 p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800">
-                        <div className="animate-pulse h-4 w-4 bg-blue-500 rounded-full" />
+                        <Target className="h-4 w-4 text-blue-500 animate-pulse" />
                         <p className="text-sm text-blue-700 dark:text-blue-300">
-                          Devam edin! {20 - blinkCount} kırpma daha...
+                          {isLookingAtTarget ? "👀 Hedefe bakıyorsunuz! Sabit kalın..." : "🔍 Hedefe göz bebeklerin izle bakın..."}
                         </p>
                       </div>
                     )}
