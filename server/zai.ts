@@ -23,7 +23,7 @@ const ZAI_API_URL = "https://api.z.ai/api/paas/v4/chat/completions";
 /**
  * Call Z.ai API for AI assistance
  */
-export async function callZai(messages: ZaiMessage[]): Promise<string> {
+export async function callZai(messages: ZaiMessage[], jsonMode = false): Promise<string> {
   if (!ZAI_API_KEY) {
     throw new Error("ZAI_API_KEY is not configured");
   }
@@ -40,6 +40,7 @@ export async function callZai(messages: ZaiMessage[]): Promise<string> {
         messages,
         temperature: 0.7,
         max_tokens: 1000,
+        ...(jsonMode && { response_format: { type: "json_object" } }),
       }),
     });
 
@@ -97,7 +98,7 @@ Yanıtını JSON formatında ver:
     },
   ];
 
-  const response = await callZai(messages);
+  const response = await callZai(messages, true); // JSON mode enabled
   return response;
 }
 
@@ -169,7 +170,7 @@ JSON formatında yanıt ver:
     },
   ];
 
-  const response = await callZai(messages);
+  const response = await callZai(messages, true); // JSON mode enabled
   return response;
 }
 

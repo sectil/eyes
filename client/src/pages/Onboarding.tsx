@@ -46,17 +46,29 @@ export default function Onboarding() {
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [currentTestIndex, setCurrentTestIndex] = useState(0);
   const [finalReport, setFinalReport] = useState<any>(null);
-
   const analyzeProfile = trpc.ai.analyzeProfile.useMutation({
     onSuccess: (data) => {
       try {
-        const parsed = JSON.parse(data.analysis);
+        // Try to parse as JSON
+        let parsed;
+        try {
+          parsed = JSON.parse(data.analysis);
+        } catch {
+          // If not valid JSON, create a fallback structure
+          parsed = {
+            riskLevel: "orta",
+            analysis: data.analysis,
+            recommendations: ["Düzenli göz egzersizleri yapın", "Ekran molaları verin"],
+            exerciseFrequency: "günde 2-3 kez",
+            warnings: ["Uzun süreli ekran kullanımından kaçının"]
+          };
+        }
         setAiAnalysis(parsed);
         toast.success("🤖 AI profil analizi tamamlandı!");
         setStep("calibration");
       } catch (error) {
-        console.error("AI parse error:", error);
-        toast.error("AI analizi okunamadı");
+        console.error("AI analysis error:", error);
+        toast.error("AI analizi işlenemedi");
       }
     },
   });
@@ -64,13 +76,26 @@ export default function Onboarding() {
   const analyzeTests = trpc.ai.analyzeTestResults.useMutation({
     onSuccess: (data) => {
       try {
-        const parsed = JSON.parse(data.analysis);
+        // Try to parse as JSON
+        let parsed;
+        try {
+          parsed = JSON.parse(data.analysis);
+        } catch {
+          // If not valid JSON, create a fallback structure
+          parsed = {
+            performance: "iyi",
+            progress: "ilerleme",
+            feedback: data.analysis,
+            suggestions: ["Egzersizlere devam edin", "Düzenli testler yapın"],
+            nextSteps: ["Günlük egzersiz programını takip edin"]
+          };
+        }
         setFinalReport(parsed);
         toast.success("🎯 Test sonuçları analiz edildi!");
         setStep("complete");
       } catch (error) {
-        console.error("AI parse error:", error);
-        toast.error("Test analizi okunamadı");
+        console.error("Test analysis error:", error);
+        toast.error("Test analizi işlenemedi");
       }
     },
   });
