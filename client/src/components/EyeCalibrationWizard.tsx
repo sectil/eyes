@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import { getEyeTracker, type EyeData } from "@/lib/advancedEyeTracking";
 import { initWebcam, stopWebcam } from "@/lib/eyeTracking";
 import AnimatedEyeOverlay from "@/components/AnimatedEyeOverlay";
+import { speak, playTickSound, playSuccessSound, setAudioEnabled, isAudioEnabled, WARMUP_VOICE_INSTRUCTIONS } from "@/lib/audioHelper";
+import { Volume2, VolumeX } from "lucide-react";
 
 interface CalibrationWizardProps {
   onComplete: () => void;
@@ -94,6 +96,7 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   const [gameMetrics, setGameMetrics] = useState<Array<{reactionTime: number, accuracy: number, stability: number}>>([]);
   const [isLookingAtTarget, setIsLookingAtTarget] = useState(false);
   const [lookDuration, setLookDuration] = useState(0);
+  const [audioEnabled, setAudioEnabledState] = useState(true);
   const TOTAL_TARGETS = 10;
   const LOOK_DURATION_REQUIRED = 2; // seconds
 
@@ -193,14 +196,21 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
 
     const timer = setInterval(() => {
       setWarmupCountdown((prev) => {
+        // Play tick sound
+        playTickSound();
+        
         if (prev <= 1) {
           // Move to next exercise
           const nextStep = warmupStep + 1;
           if (nextStep < WARMUP_EXERCISES.length) {
             setWarmupStep(nextStep);
+            // Speak next instruction
+            speak(WARMUP_VOICE_INSTRUCTIONS[nextStep]);
             return WARMUP_EXERCISES[nextStep].duration;
           } else {
             // Warmup complete, move to face detection
+            playSuccessSound();
+            speak("Isınma tamamlandı! Yüzünüzü kameraya gösterin.");
             setIsModelLoading(false);
             setStep("face-detection");
             return 0;
@@ -446,9 +456,24 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
                 Hassas göz takibi için kalibrasyon yapın
               </CardDescription>
             </div>
-            <Button variant="ghost" size="icon" onClick={onCancel}>
-              <X className="h-4 w-4" />
-            </Button>
+            <div className="flex gap-2">
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => {
+                  const newState = !audioEnabled;
+                  setAudioEnabledState(newState);
+                  setAudioEnabled(newState);
+                  toast.success(newState ? "🔊 Sesler açıldı" : "🔇 Sesler kapatıldı");
+                }}
+                title={audioEnabled ? "Sesleri Kapat" : "Sesleri Aç"}
+              >
+                {audioEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+              </Button>
+              <Button variant="ghost" size="icon" onClick={onCancel}>
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
           <Progress value={
             step === "setup" ? 0 :
@@ -580,6 +605,8 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
                         setIsModelLoading(true);
                         setWarmupStep(0);
                         setWarmupCountdown(WARMUP_EXERCISES[0].duration);
+                        // Speak first instruction
+                        speak(WARMUP_VOICE_INSTRUCTIONS[0]);
                       }}
                     >
                       Kalibrasyona Başla
