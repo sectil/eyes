@@ -484,12 +484,22 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
                       </div>
                     )}
 
-                    <Button
-                      onClick={gameOver ? handleStartSnakeGame : handleCompleteCalibration}
-                      className="w-full"
-                    >
-                      {gameOver ? "Tekrar Oyna" : "Kalibrasyonu Tamamla"}
-                    </Button>
+                    {gameOver && (
+                      <Button
+                        onClick={handleCompleteCalibration}
+                        className="w-full"
+                      >
+                        Testlere Devam Et
+                      </Button>
+                    )}
+                    {!gameOver && (
+                      <Button
+                        onClick={handleCompleteCalibration}
+                        className="w-full"
+                      >
+                        Kalibrasyonu Tamamla
+                      </Button>
+                    )}
                   </div>
                 </>
               )}
