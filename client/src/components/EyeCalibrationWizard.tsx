@@ -713,7 +713,18 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
                 ) : (
                   <>
                     {/* Eye Tracking Game UI */}
-                    <div className="relative h-64 bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-950 dark:to-blue-950 rounded-lg border-2 border-primary/30 overflow-hidden">
+                    <div 
+                      className="relative h-64 bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-950 dark:to-blue-950 rounded-lg border-2 border-primary/30 overflow-hidden cursor-crosshair"
+                      onMouseMove={(e) => {
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        const x = ((e.clientX - rect.left) / rect.width) * 100;
+                        const y = ((e.clientY - rect.top) / rect.height) * 100;
+                        if (currentTarget) {
+                          const distance = Math.sqrt((x - currentTarget.x) ** 2 + (y - currentTarget.y) ** 2);
+                          setIsLookingAtTarget(distance < 8);
+                        }
+                      }}
+                    >
                       {/* Target */}
                       {currentTarget && (
                         <div
