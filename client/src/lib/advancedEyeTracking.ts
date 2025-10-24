@@ -98,15 +98,15 @@ export class AdvancedEyeTracker {
     const leftIris = leftIrisIndices.length > 0 ? keypoints[leftIrisIndices[0]] : leftEyeCenter;
     const rightIris = rightIrisIndices.length > 0 ? keypoints[rightIrisIndices[0]] : rightEyeCenter;
 
-    // Calculate gaze direction
+    // Calculate gaze direction with higher sensitivity
     const leftGaze = {
-      x: (leftIris.x - leftEyeCenter.x) / 10, // Normalize
-      y: (leftIris.y - leftEyeCenter.y) / 10,
+      x: (leftIris.x - leftEyeCenter.x) / 5, // Increased sensitivity (was /10)
+      y: (leftIris.y - leftEyeCenter.y) / 5,
     };
 
     const rightGaze = {
-      x: (rightIris.x - rightEyeCenter.x) / 10,
-      y: (rightIris.y - rightEyeCenter.y) / 10,
+      x: (rightIris.x - rightEyeCenter.x) / 5, // Increased sensitivity
+      y: (rightIris.y - rightEyeCenter.y) / 5,
     };
 
     // Average both eyes
