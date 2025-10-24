@@ -21,7 +21,7 @@ export default function AnimatedEyeOverlay({ x, y, isOpen, side }: AnimatedEyeOv
       style={{
         left: `${x}px`,
         top: `${y}px`,
-        transform: "translate(-50%, -50%) scaleX(-1)",
+        transform: "translate(-50%, -50%)",
       }}
     >
       {/* Eye container */}

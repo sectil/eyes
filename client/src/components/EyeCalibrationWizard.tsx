@@ -40,6 +40,7 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   const [leftEyeOpen, setLeftEyeOpen] = useState(true);
   const [rightEyeOpen, setRightEyeOpen] = useState(true);
   const [lastEyeData, setLastEyeData] = useState<EyeData | null>(null);
+  const [videoScale, setVideoScale] = useState({ scaleX: 1, scaleY: 1, offsetX: 0, offsetY: 0 });
   const [currentPointIndex, setCurrentPointIndex] = useState(0);
   const [calibrationProgress, setCalibrationProgress] = useState(0);
   const [eyeData, setEyeData] = useState<EyeData | null>(null);
@@ -99,7 +100,72 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
           if (eyes) {
             setEyesDetected(true);
             setEyeData(eyes);
-            setLastEyeData(eyes);
+            
+            // Calculate video scaling
+            if (videoRef.current) {
+              const video = videoRef.current;
+              const videoWidth = video.videoWidth;
+              const videoHeight = video.videoHeight;
+              const displayWidth = video.clientWidth;
+              const displayHeight = video.clientHeight;
+              
+              // object-cover scaling
+              const videoAspect = videoWidth / videoHeight;
+              const displayAspect = displayWidth / displayHeight;
+              
+              let scaleX, scaleY, offsetX = 0, offsetY = 0;
+              
+              if (videoAspect > displayAspect) {
+                // Video is wider - height matches, width is cropped
+                scaleY = displayHeight / videoHeight;
+                scaleX = scaleY;
+                const scaledWidth = videoWidth * scaleX;
+                offsetX = (displayWidth - scaledWidth) / 2;
+              } else {
+                // Video is taller - width matches, height is cropped
+                scaleX = displayWidth / videoWidth;
+                scaleY = scaleX;
+                const scaledHeight = videoHeight * scaleY;
+                offsetY = (displayHeight - scaledHeight) / 2;
+              }
+              
+              setVideoScale({ scaleX, scaleY, offsetX, offsetY });
+              
+              // Scale eye coordinates
+              const scaledEyes: EyeData = {
+                left: {
+                  center: {
+                    x: displayWidth - (eyes.left.center.x * scaleX + offsetX), // Mirror X
+                    y: eyes.left.center.y * scaleY + offsetY
+                  },
+                  pupil: {
+                    x: displayWidth - (eyes.left.pupil.x * scaleX + offsetX),
+                    y: eyes.left.pupil.y * scaleY + offsetY
+                  },
+                  iris: {
+                    x: displayWidth - (eyes.left.iris.x * scaleX + offsetX),
+                    y: eyes.left.iris.y * scaleY + offsetY
+                  }
+                },
+                right: {
+                  center: {
+                    x: displayWidth - (eyes.right.center.x * scaleX + offsetX),
+                    y: eyes.right.center.y * scaleY + offsetY
+                  },
+                  pupil: {
+                    x: displayWidth - (eyes.right.pupil.x * scaleX + offsetX),
+                    y: eyes.right.pupil.y * scaleY + offsetY
+                  },
+                  iris: {
+                    x: displayWidth - (eyes.right.iris.x * scaleX + offsetX),
+                    y: eyes.right.iris.y * scaleY + offsetY
+                  }
+                },
+                gaze: eyes.gaze
+              };
+              
+              setLastEyeData(scaledEyes);
+            }
 
             // Detect if eyes are open or closed based on eye landmarks
             // Simple heuristic: if iris is detected, eye is open
