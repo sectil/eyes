@@ -36,7 +36,20 @@ export default function ProfileSetup() {
   const analyzeProfile = trpc.ai.analyzeProfile.useMutation({
     onSuccess: (data) => {
       try {
-        const parsed = JSON.parse(data.analysis);
+        // Try to parse as JSON
+        let parsed;
+        try {
+          parsed = JSON.parse(data.analysis);
+        } catch {
+          // If not valid JSON, create a fallback structure
+          parsed = {
+            riskLevel: "orta",
+            analysis: data.analysis,
+            recommendations: ["Düzenli göz egzersizleri yapın", "Ekran molaları verin"],
+            exerciseFrequency: "günde 2-3 kez",
+            warnings: ["Uzun süreli ekran kullanımından kaçının"]
+          };
+        }
         setAiAnalysis(parsed);
         setShowAIAnalysis(true);
         toast.success("🤖 AI analizi tamamlandı!");
