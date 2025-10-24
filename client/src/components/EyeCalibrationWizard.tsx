@@ -84,6 +84,13 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   const [warmupStep, setWarmupStep] = useState(0);
   const [warmupCountdown, setWarmupCountdown] = useState(5);
   const [isModelLoading, setIsModelLoading] = useState(false);
+  
+  // Eye detection game states
+  const [eyeGameActive, setEyeGameActive] = useState(false);
+  const [eyeGameScore, setEyeGameScore] = useState(0);
+  const [eyeGameBalls, setEyeGameBalls] = useState<Array<{id: number, x: number, y: number, color: string}>>([]);
+  const [blinkCount, setBlinkCount] = useState(0);
+  const [eyeDetectionProgress, setEyeDetectionProgress] = useState(0);
 
   const WARMUP_EXERCISES = [
     { text: "Sol gözünüzü kırpın 👁️", duration: 5, icon: "👈" },
@@ -92,6 +99,47 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     { text: "Gözlerinizi kapalı tutun 😴", duration: 3, icon: "🚫" },
     { text: "Gözlerinizi açın ve kameraya bakın 👀", duration: 3, icon: "✅" },
   ];
+
+  // Eye detection game - spawn balls
+  useEffect(() => {
+    if (!eyeGameActive) return;
+
+    const interval = setInterval(() => {
+      const colors = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6'];
+      const newBall = {
+        id: Date.now(),
+        x: Math.random() * 80 + 10, // 10-90%
+        y: Math.random() * 60 + 10, // 10-70%
+        color: colors[Math.floor(Math.random() * colors.length)]
+      };
+      
+      setEyeGameBalls(prev => [...prev.slice(-4), newBall]); // Keep max 5 balls
+    }, 2000); // New ball every 2 seconds
+
+    return () => clearInterval(interval);
+  }, [eyeGameActive]);
+
+  // Eye detection game - track blinks and progress
+  useEffect(() => {
+    if (!eyeGameActive) return;
+
+    // Detect blink (when both eyes close then open)
+    if (!leftEyeOpen && !rightEyeOpen) {
+      // Eyes closed
+    } else if (leftEyeOpen && rightEyeOpen) {
+      // Eyes open - count as blink if previously closed
+      setBlinkCount(prev => {
+        const newCount = prev + 1;
+        setEyeGameScore(newCount * 10);
+        
+        // Increase progress
+        const progress = Math.min((newCount / 20) * 100, 100);
+        setEyeDetectionProgress(progress);
+        
+        return newCount;
+      });
+    }
+  }, [leftEyeOpen, rightEyeOpen, eyeGameActive]);
 
   // Warmup countdown timer
   useEffect(() => {
@@ -550,23 +598,97 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
 
             {step === "eye-detection" && (
               <div className="space-y-4">
-                <div className="flex items-center gap-3 p-4 bg-accent/50 rounded-lg">
-                  <Eye className="h-5 w-5 text-primary" />
-                  <div className="flex-1">
-                    <p className="font-semibold">Adım 2: Göz Tespiti</p>
-                    <p className="text-sm text-muted-foreground">
-                      Gözlerinizi açıp kapatın, sonra kameraya bakın
-                    </p>
-                  </div>
-                  {eyesDetected && <CheckCircle2 className="h-6 w-6 text-green-500" />}
-                </div>
-                <Button
-                  className="w-full"
-                  onClick={startEyeDetection}
-                  disabled={!eyesDetected}
-                >
-                  {eyesDetected ? "Kalibrasyona Geç" : "Gözler Bekleniyor..."}
-                </Button>
+                {!eyeGameActive ? (
+                  <>
+                    <div className="flex items-center gap-3 p-4 bg-accent/50 rounded-lg">
+                      <Eye className="h-5 w-5 text-primary" />
+                      <div className="flex-1">
+                        <p className="font-semibold">Adım 2: Göz Tespiti</p>
+                        <p className="text-sm text-muted-foreground">
+                          Eğlenceli bir mini oyun ile göz algılamasını tamamlayın!
+                        </p>
+                      </div>
+                      {eyesDetected && <CheckCircle2 className="h-6 w-6 text-green-500" />}
+                    </div>
+                    <Button
+                      className="w-full"
+                      onClick={() => {
+                        setEyeGameActive(true);
+                        setEyeGameScore(0);
+                        setBlinkCount(0);
+                        setEyeDetectionProgress(0);
+                      }}
+                      disabled={!eyesDetected}
+                    >
+                      {eyesDetected ? "🎮 Oyuna Başla" : "Gözler Bekleniyor..."}
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    {/* Eye Game UI */}
+                    <div className="relative h-64 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-950 dark:to-blue-950 rounded-lg border-2 border-primary/30 overflow-hidden">
+                      {/* Floating balls */}
+                      {eyeGameBalls.map(ball => (
+                        <div
+                          key={ball.id}
+                          className="absolute w-12 h-12 rounded-full shadow-lg animate-bounce"
+                          style={{
+                            left: `${ball.x}%`,
+                            top: `${ball.y}%`,
+                            backgroundColor: ball.color,
+                            boxShadow: `0 0 20px ${ball.color}`,
+                          }}
+                        />
+                      ))}
+                      
+                      {/* Game instructions */}
+                      <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full text-sm font-medium">
+                        👀 Renkli toplara bakın ve göz kırpın!
+                      </div>
+                      
+                      {/* Score */}
+                      <div className="absolute top-4 right-4 bg-yellow-500 text-white px-4 py-2 rounded-full font-bold text-lg shadow-lg">
+                        🏆 {eyeGameScore}
+                      </div>
+                      
+                      {/* Blink counter */}
+                      <div className="absolute bottom-4 left-4 bg-green-500 text-white px-4 py-2 rounded-full font-bold shadow-lg">
+                        👁️ Kırpma: {blinkCount}/20
+                      </div>
+                    </div>
+                    
+                    {/* Progress */}
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">Göz Algılama İlerlemesi</span>
+                        <span className="font-bold text-primary">{Math.round(eyeDetectionProgress)}%</span>
+                      </div>
+                      <Progress value={eyeDetectionProgress} className="h-3" />
+                    </div>
+                    
+                    {/* Continue button */}
+                    {eyeDetectionProgress >= 100 && (
+                      <Button
+                        className="w-full"
+                        onClick={() => {
+                          setEyeGameActive(false);
+                          startEyeDetection();
+                        }}
+                      >
+                        ✅ Kalibrasyona Geç (Puan: {eyeGameScore})
+                      </Button>
+                    )}
+                    
+                    {eyeDetectionProgress < 100 && (
+                      <div className="flex items-center gap-2 p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800">
+                        <div className="animate-pulse h-4 w-4 bg-blue-500 rounded-full" />
+                        <p className="text-sm text-blue-700 dark:text-blue-300">
+                          Devam edin! {20 - blinkCount} kırpma daha...
+                        </p>
+                      </div>
+                    )}
+                  </>
+                )}
               </div>
             )}
 
