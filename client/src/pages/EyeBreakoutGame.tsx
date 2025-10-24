@@ -5,13 +5,8 @@ import { Eye, Camera, Play, Pause, RotateCcw, Trophy } from "lucide-react";
 import { Link } from "wouter";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
-import {
-  initWebcam,
-  stopWebcam,
-  detectFaceSimple,
-  calculateEyeGaze,
-  type EyePosition,
-} from "@/lib/eyeTracking";
+import { getEyeTracker, type EyeData } from "@/lib/advancedEyeTracking";
+import EyeCalibrationWizard from "@/components/EyeCalibrationWizard";
 
 interface Ball {
   x: number;
@@ -56,8 +51,10 @@ export default function EyeBreakoutGame() {
   const lastTimeRef = useRef<number>(0);
 
   const [cameraReady, setCameraReady] = useState(false);
-  const [gameState, setGameState] = useState<"setup" | "playing" | "paused" | "gameover" | "won">("setup");
-  const [eyePosition, setEyePosition] = useState<EyePosition>({ x: 0, y: 0, isDetected: false });
+  const [gameState, setGameState] = useState<"calibration" | "setup" | "playing" | "paused" | "gameover" | "won">("calibration");
+  const [showCalibration, setShowCalibration] = useState(true);
+  const [eyeData, setEyeData] = useState<EyeData | null>(null);
+  const trackerRef = useRef<Awaited<ReturnType<typeof getEyeTracker>> | null>(null);
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
   const [level, setLevel] = useState(1);
@@ -106,55 +103,58 @@ export default function EyeBreakoutGame() {
     bricksRef.current = bricks;
   };
 
-  // Initialize camera
+  // Initialize eye tracker
   useEffect(() => {
-    let eyeTrackingFrameId: number;
-
-    const setupCamera = async () => {
+    const setup = async () => {
       try {
-        const stream = await initWebcam();
-        streamRef.current = stream;
-
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-          await videoRef.current.play();
-          setCameraReady(true);
-          toast.success("Kamera hazır!");
-
-          // Start eye tracking loop
-          const trackEyes = () => {
-            if (videoRef.current && canvasRef.current) {
-              const face = detectFaceSimple(videoRef.current, canvasRef.current);
-              if (face) {
-                const gaze = calculateEyeGaze(videoRef.current, canvasRef.current, face);
-                setEyePosition(gaze);
-
-                // Update paddle position based on eye gaze
-                if (gameState === "playing") {
-                  const paddleX = ((gaze.x + 1) / 2) * GAME_WIDTH;
-                  paddleRef.current.x = Math.max(
-                    0,
-                    Math.min(GAME_WIDTH - PADDLE_WIDTH, paddleX - PADDLE_WIDTH / 2)
-                  );
-                }
-              }
-            }
-            eyeTrackingFrameId = requestAnimationFrame(trackEyes);
-          };
-
-          trackEyes();
-        }
+        const tracker = await getEyeTracker();
+        trackerRef.current = tracker;
+        setCameraReady(true);
       } catch (error: any) {
-        toast.error(error.message || "Kamera başlatılamadı");
+        toast.error("Göz takibi başlatılamadı");
       }
     };
 
-    setupCamera();
+    setup();
+  }, []);
+
+  // Eye tracking loop
+  useEffect(() => {
+    if (!videoRef.current || !trackerRef.current || gameState !== "playing") return;
+
+    let eyeTrackingFrameId: number;
+
+    const trackEyes = async () => {
+      if (!videoRef.current || !trackerRef.current) return;
+
+      try {
+        const faces = await trackerRef.current.detectFace(videoRef.current);
+        if (faces.length > 0) {
+          const eyes = trackerRef.current.extractEyeData(faces[0]);
+          if (eyes) {
+            setEyeData(eyes);
+
+            // Apply calibration
+            const calibratedGaze = trackerRef.current.calibrateGaze(eyes.gaze);
+
+            // Update paddle position
+            const paddleX = ((calibratedGaze.x + 1) / 2) * GAME_WIDTH;
+            paddleRef.current.x = Math.max(
+              0,
+              Math.min(GAME_WIDTH - PADDLE_WIDTH, paddleX - PADDLE_WIDTH / 2)
+            );
+          }
+        }
+      } catch (error) {
+        console.error("Eye tracking error:", error);
+      }
+
+      eyeTrackingFrameId = requestAnimationFrame(trackEyes);
+    };
+
+    trackEyes();
 
     return () => {
-      if (streamRef.current) {
-        stopWebcam(streamRef.current);
-      }
       if (eyeTrackingFrameId) {
         cancelAnimationFrame(eyeTrackingFrameId);
       }
@@ -295,8 +295,9 @@ export default function EyeBreakoutGame() {
     ctx.shadowBlur = 0;
 
     // Draw eye position indicator
-    if (eyePosition.isDetected) {
-      const eyeX = ((eyePosition.x + 1) / 2) * GAME_WIDTH;
+    if (eyeData && trackerRef.current) {
+      const calibratedGaze = trackerRef.current.calibrateGaze(eyeData.gaze);
+      const eyeX = ((calibratedGaze.x + 1) / 2) * GAME_WIDTH;
       ctx.fillStyle = "rgba(34, 197, 94, 0.3)";
       ctx.fillRect(eyeX - 2, 0, 4, GAME_HEIGHT);
     }
@@ -344,6 +345,20 @@ export default function EyeBreakoutGame() {
   };
 
   return (
+    <>
+    {showCalibration && (
+      <EyeCalibrationWizard
+        onComplete={() => {
+          setShowCalibration(false);
+          setGameState("setup");
+          toast.success("Kalibrasyon tamamlandı! Oyuna başlayabilirsiniz.");
+        }}
+        onCancel={() => {
+          setShowCalibration(false);
+          setGameState("setup");
+        }}
+      />
+    )}
     <div className="min-h-screen bg-background">
       <header className="border-b">
         <div className="container flex h-16 items-center justify-between">
@@ -479,7 +494,7 @@ export default function EyeBreakoutGame() {
                       </div>
                     </div>
                   )}
-                  {eyePosition.isDetected && (
+                  {eyeData && (
                     <div className="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded">
                       Göz Algılandı ✓
                     </div>
@@ -540,6 +555,7 @@ export default function EyeBreakoutGame() {
         </div>
       </main>
     </div>
+    </>
   );
 }
 
