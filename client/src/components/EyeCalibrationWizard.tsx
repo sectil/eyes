@@ -6,6 +6,7 @@ import { Eye, Camera, Target, CheckCircle2, AlertCircle, X } from "lucide-react"
 import { toast } from "sonner";
 import { getEyeTracker, type EyeData } from "@/lib/advancedEyeTracking";
 import { initWebcam, stopWebcam } from "@/lib/eyeTracking";
+import AnimatedEyeOverlay from "@/components/AnimatedEyeOverlay";
 
 interface CalibrationWizardProps {
   onComplete: () => void;
@@ -36,6 +37,9 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   const [step, setStep] = useState<CalibrationStep>("setup");
   const [faceDetected, setFaceDetected] = useState(false);
   const [eyesDetected, setEyesDetected] = useState(false);
+  const [leftEyeOpen, setLeftEyeOpen] = useState(true);
+  const [rightEyeOpen, setRightEyeOpen] = useState(true);
+  const [lastEyeData, setLastEyeData] = useState<EyeData | null>(null);
   const [currentPointIndex, setCurrentPointIndex] = useState(0);
   const [calibrationProgress, setCalibrationProgress] = useState(0);
   const [eyeData, setEyeData] = useState<EyeData | null>(null);
@@ -95,8 +99,17 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
           if (eyes) {
             setEyesDetected(true);
             setEyeData(eyes);
+            setLastEyeData(eyes);
+
+            // Detect if eyes are open or closed based on eye landmarks
+            // Simple heuristic: if iris is detected, eye is open
+            setLeftEyeOpen(true);
+            setRightEyeOpen(true);
           } else {
             setEyesDetected(false);
+            // Eyes might be closed
+            setLeftEyeOpen(false);
+            setRightEyeOpen(false);
           }
         } else {
           setFaceDetected(false);
@@ -232,31 +245,27 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
             )}
 
             {/* Eye detection overlay */}
-            {step === "eye-detection" && (
+            {step === "eye-detection" && lastEyeData && (
               <div className="absolute inset-0 pointer-events-none">
-                {eyeData ? (
-                  <>
-                    {/* Draw eye positions */}
-                    <div
-                      className="absolute w-6 h-6 bg-green-500 rounded-full border-2 border-white shadow-lg"
-                      style={{
-                        left: `${eyeData.left.iris.x}px`,
-                        top: `${eyeData.left.iris.y}px`,
-                        transform: "translate(-50%, -50%) scaleX(-1)",
-                      }}
-                    />
-                    <div
-                      className="absolute w-6 h-6 bg-green-500 rounded-full border-2 border-white shadow-lg"
-                      style={{
-                        left: `${eyeData.right.iris.x}px`,
-                        top: `${eyeData.right.iris.y}px`,
-                        transform: "translate(-50%, -50%) scaleX(-1)",
-                      }}
-                    />
-                    <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg font-semibold">
-                      Gözler Algılandı! ✓
-                    </div>
-                  </>
+                {/* Animated eye overlays */}
+                <AnimatedEyeOverlay
+                  x={lastEyeData.left.center.x}
+                  y={lastEyeData.left.center.y}
+                  isOpen={leftEyeOpen}
+                  side="left"
+                />
+                <AnimatedEyeOverlay
+                  x={lastEyeData.right.center.x}
+                  y={lastEyeData.right.center.y}
+                  isOpen={rightEyeOpen}
+                  side="right"
+                />
+                
+                {/* Status message */}
+                {eyesDetected ? (
+                  <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg font-semibold">
+                    Gözler Algılandı! ✓
+                  </div>
                 ) : (
                   <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white px-4 py-2 rounded-lg font-semibold animate-pulse">
                     Gözlerinizi Açıp Kapatın
