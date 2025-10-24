@@ -4,6 +4,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
 import * as db from "./db";
+import * as zai from "./zai";
 
 export const appRouter = router({
   system: systemRouter,
@@ -283,6 +284,65 @@ export const appRouter = router({
           imageUrl: null, // Will be populated after image generation
         });
         return { success: true };
+      }),
+  }),
+
+  ai: router({
+    analyzeProfile: protectedProcedure
+      .input(z.object({
+        age: z.number(),
+        occupation: z.string(),
+        screenTime: z.number(),
+        hasGlasses: z.boolean(),
+        symptoms: z.array(z.string()),
+      }))
+      .mutation(async ({ input }) => {
+        const analysis = await zai.analyzeUserProfile(input);
+        return { analysis };
+      }),
+
+    guideCalibration: protectedProcedure
+      .input(z.object({
+        step: z.string(),
+        userFeedback: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const guidance = await zai.guideCalibration(input.step, input.userFeedback);
+        return { guidance };
+      }),
+
+    analyzeTestResults: protectedProcedure
+      .input(z.object({
+        testType: z.string(),
+        score: z.number(),
+        duration: z.number(),
+        accuracy: z.number(),
+        previousScores: z.array(z.number()).optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const analysis = await zai.analyzeTestResults(input);
+        return { analysis };
+      }),
+
+    getDailyMotivation: protectedProcedure
+      .input(z.object({
+        streak: z.number(),
+        completedExercises: z.number(),
+        lastScore: z.number(),
+      }))
+      .query(async ({ input }) => {
+        const message = await zai.getDailyMotivation(input);
+        return { message };
+      }),
+
+    askQuestion: protectedProcedure
+      .input(z.object({
+        question: z.string(),
+        userContext: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const answer = await zai.answerQuestion(input.question, input.userContext);
+        return { answer };
       }),
   }),
 });

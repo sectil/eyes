@@ -8,10 +8,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
-import { Eye } from "lucide-react";
+import { Eye, Sparkles, Loader2 } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function ProfileSetup() {
   const [, setLocation] = useLocation();
+  const [showAIAnalysis, setShowAIAnalysis] = useState(false);
+  const [aiAnalysis, setAiAnalysis] = useState<any>(null);
+  const [symptoms, setSymptoms] = useState<string[]>([]);
+
   const [formData, setFormData] = useState({
     age: "",
     gender: "",
@@ -27,6 +33,23 @@ export default function ProfileSetup() {
     familyHistory: "",
   });
 
+  const analyzeProfile = trpc.ai.analyzeProfile.useMutation({
+    onSuccess: (data) => {
+      try {
+        const parsed = JSON.parse(data.analysis);
+        setAiAnalysis(parsed);
+        setShowAIAnalysis(true);
+        toast.success("🤖 AI analizi tamamlandı!");
+      } catch (error) {
+        console.error("AI response parse error:", error);
+        toast.error("AI analizi okunamadı");
+      }
+    },
+    onError: (error) => {
+      toast.error("AI analizi başarısız: " + error.message);
+    },
+  });
+
   const upsertProfile = trpc.profile.upsert.useMutation({
     onSuccess: () => {
       toast.success("Profiliniz başarıyla oluşturuldu!");
@@ -36,6 +59,21 @@ export default function ProfileSetup() {
       toast.error("Profil oluşturulurken hata oluştu: " + error.message);
     },
   });
+
+  const handleAIAnalysis = () => {
+    if (!formData.age || !formData.occupation || !formData.dailyScreenTime) {
+      toast.error("Lütfen yaş, meslek ve ekran süresi bilgilerini girin");
+      return;
+    }
+
+    analyzeProfile.mutate({
+      age: parseInt(formData.age),
+      occupation: formData.occupation,
+      screenTime: parseInt(formData.dailyScreenTime),
+      hasGlasses: parseInt(formData.usesGlasses) === 1,
+      symptoms,
+    });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -252,6 +290,114 @@ export default function ProfileSetup() {
                   />
                 </div>
               </div>
+
+              {/* Semptomlar */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold">Yaşadığınız Semptomlar</h3>
+                <div className="grid md:grid-cols-2 gap-3">
+                  {[
+                    "Göz yorgunluğu",
+                    "Baş ağrısı",
+                    "Bulanık görme",
+                    "Kuru göz",
+                    "Göz sulanması",
+                    "Işığa hassasiyet",
+                    "Görme alanında kısıtlama",
+                    "Renk algısında değişiklik",
+                  ].map((symptom) => (
+                    <div key={symptom} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={symptom}
+                        checked={symptoms.includes(symptom)}
+                        onCheckedChange={(checked) => {
+                          if (checked) {
+                            setSymptoms([...symptoms, symptom]);
+                          } else {
+                            setSymptoms(symptoms.filter((s) => s !== symptom));
+                          }
+                        }}
+                      />
+                      <label htmlFor={symptom} className="text-sm cursor-pointer">
+                        {symptom}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* AI Analiz Butonu */}
+              <div className="border-t pt-4">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleAIAnalysis}
+                  disabled={analyzeProfile.isPending}
+                  className="w-full gap-2"
+                >
+                  {analyzeProfile.isPending ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      AI Analiz Ediliyor...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="h-4 w-4" />
+                      AI ile Profil Analizi Yap
+                    </>
+                  )}
+                </Button>
+              </div>
+
+              {/* AI Analiz Sonuçları */}
+              {showAIAnalysis && aiAnalysis && (
+                <Alert className="bg-primary/5 border-primary/20">
+                  <Sparkles className="h-4 w-4" />
+                  <AlertDescription>
+                    <div className="space-y-3 mt-2">
+                      <div>
+                        <strong className="text-primary">Risk Seviyesi:</strong>{" "}
+                        <span className={
+                          aiAnalysis.riskLevel === "yüksek" ? "text-red-600 font-semibold" :
+                          aiAnalysis.riskLevel === "orta" ? "text-yellow-600 font-semibold" :
+                          "text-green-600 font-semibold"
+                        }>
+                          {aiAnalysis.riskLevel?.toUpperCase()}
+                        </span>
+                      </div>
+                      <div>
+                        <strong className="text-primary">Analiz:</strong>
+                        <p className="text-sm mt-1">{aiAnalysis.analysis}</p>
+                      </div>
+                      {aiAnalysis.recommendations && aiAnalysis.recommendations.length > 0 && (
+                        <div>
+                          <strong className="text-primary">Öneriler:</strong>
+                          <ul className="list-disc list-inside text-sm mt-1 space-y-1">
+                            {aiAnalysis.recommendations.map((rec: string, idx: number) => (
+                              <li key={idx}>{rec}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {aiAnalysis.exerciseFrequency && (
+                        <div>
+                          <strong className="text-primary">Egzersiz Sıklığı:</strong>{" "}
+                          <span className="text-sm">{aiAnalysis.exerciseFrequency}</span>
+                        </div>
+                      )}
+                      {aiAnalysis.warnings && aiAnalysis.warnings.length > 0 && (
+                        <div>
+                          <strong className="text-red-600">Uyarılar:</strong>
+                          <ul className="list-disc list-inside text-sm mt-1 space-y-1 text-red-600">
+                            {aiAnalysis.warnings.map((warning: string, idx: number) => (
+                              <li key={idx}>{warning}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </AlertDescription>
+                </Alert>
+              )}
 
               <div className="flex gap-4">
                 <Button type="submit" disabled={upsertProfile.isPending} className="flex-1">
