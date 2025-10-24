@@ -18,7 +18,7 @@ interface ZaiResponse {
 }
 
 const ZAI_API_KEY = process.env.ZAI_API_KEY;
-const ZAI_API_URL = "https://api.z.ai/v1/chat/completions";
+const ZAI_API_URL = "https://api.z.ai/api/paas/v4/chat/completions";
 
 /**
  * Call Z.ai API for AI assistance
@@ -36,7 +36,7 @@ export async function callZai(messages: ZaiMessage[]): Promise<string> {
         "Authorization": `Bearer ${ZAI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-4",
+        model: "glm-4.6",
         messages,
         temperature: 0.7,
         max_tokens: 1000,
