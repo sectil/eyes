@@ -81,6 +81,43 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   const [calibrationProgress, setCalibrationProgress] = useState(0);
   const [eyeData, setEyeData] = useState<EyeData | null>(null);
   const [countdown, setCountdown] = useState(3);
+  const [warmupStep, setWarmupStep] = useState(0);
+  const [warmupCountdown, setWarmupCountdown] = useState(5);
+  const [isModelLoading, setIsModelLoading] = useState(false);
+
+  const WARMUP_EXERCISES = [
+    { text: "Sol gözünüzü kırpın 👁️", duration: 5, icon: "👈" },
+    { text: "Sağ gözünüzü kırpın 👁️", duration: 5, icon: "👉" },
+    { text: "Her iki gözünüzü birlikte kırpın 👀", duration: 4, icon: "⬇️" },
+    { text: "Gözlerinizi kapalı tutun 😴", duration: 3, icon: "🚫" },
+    { text: "Gözlerinizi açın ve kameraya bakın 👀", duration: 3, icon: "✅" },
+  ];
+
+  // Warmup countdown timer
+  useEffect(() => {
+    if (!isModelLoading || warmupStep >= WARMUP_EXERCISES.length) return;
+
+    const timer = setInterval(() => {
+      setWarmupCountdown((prev) => {
+        if (prev <= 1) {
+          // Move to next exercise
+          const nextStep = warmupStep + 1;
+          if (nextStep < WARMUP_EXERCISES.length) {
+            setWarmupStep(nextStep);
+            return WARMUP_EXERCISES[nextStep].duration;
+          } else {
+            // Warmup complete, move to face detection
+            setIsModelLoading(false);
+            setStep("face-detection");
+            return 0;
+          }
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [isModelLoading, warmupStep, WARMUP_EXERCISES]);
 
   // Initialize camera and eye tracker
   useEffect(() => {
@@ -428,21 +465,64 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
           <div className="space-y-4">
             {step === "setup" && (
               <div className="space-y-4">
-                <div className="flex items-start gap-3 p-4 bg-accent/50 rounded-lg">
-                  <AlertCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                  <div className="space-y-2 text-sm">
-                    <p className="font-semibold">Kalibrasyon Adımları:</p>
-                    <ol className="list-decimal list-inside space-y-1 text-muted-foreground">
-                      <li>Yüzünüzü kameraya gösterin ve çerçeveye yerleştirin</li>
-                      <li>Gözlerinizi açıp kapatarak göz algılamayı doğrulayın</li>
-                      <li>Ekranda beliren 9 noktaya sırayla bakın</li>
-                      <li>Her nokta için 3 saniye bekleyin</li>
-                    </ol>
-                  </div>
-                </div>
-                <Button className="w-full" onClick={() => setStep("face-detection")}>
-                  Kalibrasyona Başla
-                </Button>
+                {!isModelLoading ? (
+                  <>
+                    <div className="flex items-start gap-3 p-4 bg-accent/50 rounded-lg">
+                      <AlertCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <div className="space-y-2 text-sm">
+                        <p className="font-semibold">Kalibrasyon Adımları:</p>
+                        <ol className="list-decimal list-inside space-y-1 text-muted-foreground">
+                          <li>Yüzünüzü kameraya gösterin ve çerçeveye yerleştirin</li>
+                          <li>Gözlerinizi açıp kapatarak göz algılamayı doğrulayın</li>
+                          <li>Ekranda beliren 9 noktaya sırayla bakın</li>
+                          <li>Her nokta için 3 saniye bekleyin</li>
+                        </ol>
+                      </div>
+                    </div>
+                    <Button 
+                      className="w-full" 
+                      onClick={() => {
+                        setIsModelLoading(true);
+                        setWarmupStep(0);
+                        setWarmupCountdown(WARMUP_EXERCISES[0].duration);
+                      }}
+                    >
+                      Kalibrasyona Başla
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    {/* Warmup Exercise Display */}
+                    <div className="flex flex-col items-center justify-center gap-6 p-8 bg-gradient-to-br from-primary/10 to-accent/20 rounded-lg border-2 border-primary/30">
+                      <div className="text-6xl animate-pulse">
+                        {WARMUP_EXERCISES[warmupStep]?.icon}
+                      </div>
+                      <div className="text-center space-y-2">
+                        <p className="text-2xl font-bold text-primary">
+                          {WARMUP_EXERCISES[warmupStep]?.text}
+                        </p>
+                        <div className="text-5xl font-bold text-primary/80 tabular-nums">
+                          {warmupCountdown}
+                        </div>
+                      </div>
+                      <div className="w-full">
+                        <Progress 
+                          value={(warmupStep / WARMUP_EXERCISES.length) * 100} 
+                          className="h-2"
+                        />
+                        <p className="text-xs text-center text-muted-foreground mt-2">
+                          Egzersiz {warmupStep + 1} / {WARMUP_EXERCISES.length}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800">
+                      <div className="animate-spin h-4 w-4 border-2 border-blue-500 border-t-transparent rounded-full" />
+                      <p className="text-sm text-blue-700 dark:text-blue-300">
+                        AI modeli arka planda yüklen iyor... Egzersizlere devam edin!
+                      </p>
+                    </div>
+                  </>
+                )}
               </div>
             )}
 
