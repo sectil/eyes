@@ -28,6 +28,7 @@ const CALIBRATION_POINTS = [
 
 export default function EyeCalibrationWizard({ onComplete, onCancel }: CalibrationWizardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const trackerRef = useRef<Awaited<ReturnType<typeof getEyeTracker>> | null>(null);
   const animationFrameRef = useRef<number>(0);
@@ -199,55 +200,73 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
           <div className="aspect-video bg-black rounded-lg overflow-hidden relative">
             <video
               ref={videoRef}
-              className="w-full h-full object-cover mirror"
+              className="w-full h-full object-cover"
               playsInline
               style={{ transform: "scaleX(-1)" }}
             />
+            <canvas ref={canvasRef} className="hidden" />
 
             {/* Face detection overlay */}
             {step === "face-detection" && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="border-4 border-dashed border-primary w-64 h-80 rounded-lg flex items-center justify-center">
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="border-4 border-dashed border-primary w-80 h-96 rounded-2xl flex items-center justify-center">
                   {faceDetected ? (
-                    <CheckCircle2 className="h-16 w-16 text-green-500" />
+                    <div className="text-center">
+                      <CheckCircle2 className="h-20 w-20 text-green-500 mx-auto mb-2" />
+                      <p className="text-white text-lg font-semibold">Yüz Algılandı!</p>
+                    </div>
                   ) : (
-                    <Eye className="h-16 w-16 text-primary animate-pulse" />
+                    <div className="text-center">
+                      <Eye className="h-20 w-20 text-primary animate-pulse mx-auto mb-2" />
+                      <p className="text-white text-lg font-semibold">Yüzünüzü Çerçeveye Yerleştirin</p>
+                    </div>
                   )}
                 </div>
               </div>
             )}
 
             {/* Eye detection overlay */}
-            {step === "eye-detection" && eyeData && (
-              <div className="absolute inset-0">
-                {/* Draw eye positions */}
-                <div
-                  className="absolute w-4 h-4 bg-green-500 rounded-full"
-                  style={{
-                    left: `${eyeData.left.iris.x}px`,
-                    top: `${eyeData.left.iris.y}px`,
-                    transform: "translate(-50%, -50%)",
-                  }}
-                />
-                <div
-                  className="absolute w-4 h-4 bg-green-500 rounded-full"
-                  style={{
-                    left: `${eyeData.right.iris.x}px`,
-                    top: `${eyeData.right.iris.y}px`,
-                    transform: "translate(-50%, -50%)",
-                  }}
-                />
+            {step === "eye-detection" && (
+              <div className="absolute inset-0 pointer-events-none">
+                {eyeData ? (
+                  <>
+                    {/* Draw eye positions */}
+                    <div
+                      className="absolute w-6 h-6 bg-green-500 rounded-full border-2 border-white shadow-lg"
+                      style={{
+                        left: `${eyeData.left.iris.x}px`,
+                        top: `${eyeData.left.iris.y}px`,
+                        transform: "translate(-50%, -50%) scaleX(-1)",
+                      }}
+                    />
+                    <div
+                      className="absolute w-6 h-6 bg-green-500 rounded-full border-2 border-white shadow-lg"
+                      style={{
+                        left: `${eyeData.right.iris.x}px`,
+                        top: `${eyeData.right.iris.y}px`,
+                        transform: "translate(-50%, -50%) scaleX(-1)",
+                      }}
+                    />
+                    <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg font-semibold">
+                      Gözler Algılandı! ✓
+                    </div>
+                  </>
+                ) : (
+                  <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white px-4 py-2 rounded-lg font-semibold animate-pulse">
+                    Gözlerinizi Açıp Kapatın
+                  </div>
+                )}
               </div>
             )}
 
             {/* Calibration points */}
             {step === "calibration" && (
-              <div className="absolute inset-0">
+              <div className="absolute inset-0 pointer-events-none">
                 {CALIBRATION_POINTS.map((point, index) => (
                   <div
                     key={index}
-                    className={`absolute transform -translate-x-1/2 -translate-y-1/2 ${
-                      index === currentPointIndex ? "z-10" : "opacity-30"
+                    className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 ${
+                      index === currentPointIndex ? "z-10 opacity-100" : index < currentPointIndex ? "opacity-50" : "opacity-30"
                     }`}
                     style={{
                       left: `${point.x * 100}%`,
@@ -256,13 +275,20 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
                   >
                     {index === currentPointIndex ? (
                       <div className="relative">
-                        <div className="absolute inset-0 w-16 h-16 bg-primary rounded-full animate-ping opacity-75" />
-                        <div className="relative w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-2xl">
+                        <div className="absolute inset-0 w-20 h-20 -left-2 -top-2 bg-primary rounded-full animate-ping opacity-75" />
+                        <div className="relative w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-3xl shadow-2xl border-4 border-white">
                           {countdown}
                         </div>
+                        <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-black/70 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+                          {point.label}
+                        </div>
+                      </div>
+                    ) : index < currentPointIndex ? (
+                      <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                        <CheckCircle2 className="h-6 w-6 text-white" />
                       </div>
                     ) : (
-                      <div className="w-8 h-8 bg-gray-400 rounded-full" />
+                      <div className="w-10 h-10 bg-gray-400 rounded-full border-2 border-white" />
                     )}
                   </div>
                 ))}
