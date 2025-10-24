@@ -3,12 +3,36 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
 import { Eye, Activity, Target, TrendingUp, TrendingDown, Minus, Calendar, Award } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { useEffect } from "react";
 
 export default function Dashboard() {
   const { user } = useAuth();
+  const [, setLocation] = useLocation();
   const { data: subscription } = trpc.subscription.getMySubscription.useQuery();
-  const { data: profile } = trpc.profile.get.useQuery();
+  const { data: profile, isLoading: profileLoading } = trpc.profile.get.useQuery();
+
+  // Redirect to onboarding if no profile
+  useEffect(() => {
+    if (!profileLoading && !profile) {
+      setLocation("/onboarding");
+    }
+  }, [profile, profileLoading, setLocation]);
+
+  if (profileLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <Eye className="h-16 w-16 text-primary mx-auto mb-4 animate-pulse" />
+          <p className="text-muted-foreground">Yükleniyor...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!profile) {
+    return null; // Will redirect to onboarding
+  }
   const { data: fatigueStats } = trpc.fatigue.getStats.useQuery({ days: 7 });
   const { data: exerciseStats } = trpc.exercises.getStats.useQuery({ days: 30 });
   const { data: latestSimulation } = trpc.simulation.getLatest.useQuery({});
