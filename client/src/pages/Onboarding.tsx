@@ -93,7 +93,6 @@ export default function Onboarding() {
         }
         setAiAnalysis(parsed);
         toast.success("🤖 AI profil analizi tamamlandı!");
-        setStep("calibration");
       } catch (error) {
         console.error("AI analysis error:", error);
         toast.error("AI analizi işlenemedi");
@@ -131,6 +130,8 @@ export default function Onboarding() {
   const upsertProfile = trpc.profile.upsert.useMutation({
     onSuccess: () => {
       toast.success("Profiliniz kaydedildi!");
+      // Move to calibration step
+      setStep("calibration");
       // Automatically trigger AI analysis
       analyzeProfile.mutate({
         age: parseInt(profileData.age),

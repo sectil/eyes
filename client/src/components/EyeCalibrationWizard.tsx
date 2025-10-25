@@ -504,10 +504,13 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   }, [step, currentCalibrationPoint]);
 
   const handleStartCalibration = async () => {
+    console.log("Camera: handleStartCalibration started");
     if (!videoRef.current) {
+      console.error("Camera: videoRef.current is null");
       toast.error("Video element hazır değil");
       return;
     }
+    console.log("Camera: videoRef.current exists");
     
     // Initialize tracker if not ready
     if (!trackerRef.current) {
@@ -520,17 +523,23 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     }
 
     try {
+      console.log("Camera: Calling getUserMedia...");
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: "user", width: 1280, height: 720 }
       });
+      console.log("Camera: Stream obtained. Tracks:", stream.getVideoTracks().length);
       
       if (videoRef.current) {
+        console.log("Camera: Setting srcObject...");
         videoRef.current.srcObject = stream;
         streamRef.current = stream;
+        console.log("Camera: srcObject set. readyState:", videoRef.current.readyState);
         
         const playHandler = async () => {
+          console.log("Camera: oncanplay event fired");
           try {
             await videoRef.current?.play();
+            console.log("Camera: Video playing");
             setStep("face-detection");
             toast.success("Kamera açıldı");
           } catch (playError) {
@@ -542,12 +551,12 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
         
         // Fallback: proceed to face-detection after 1 second if video not ready
         setTimeout(() => {
-          console.log("Kamera timeout - face-detection'a geçiliyor");
+          console.log("Camera: Timeout - moving to face-detection. readyState:", videoRef.current?.readyState);
           setStep("face-detection");
         }, 1000);
       }
     } catch (error) {
-      console.error("Camera error:", error);
+      console.error("Camera: getUserMedia error:", error);
       toast.error("Kamera erişimi reddedildi");
     }
   };
@@ -735,8 +744,7 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-gray-900 dark:to-gray-800">
-      <Card className="w-full max-w-2xl">
+    <Card className="w-full">
         <CardHeader className="relative">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -767,12 +775,14 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
         <CardContent className="space-y-4">
           <Progress value={getProgress()} />
           
-          {/* Hidden video element for camera */}
+          {/* Video element for face/eye detection */}
           <video
             ref={videoRef}
             autoPlay
             playsInline
-            className="hidden"
+            muted
+            className={step === "face-detection" || step === "eye-detection" ? "w-full rounded-lg bg-black" : "hidden"}
+            style={step === "face-detection" || step === "eye-detection" ? { transform: "scaleX(-1)" } : {}}
           />
           
           {/* Canvas for eye-focused view */}
@@ -788,16 +798,6 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
                 </div>
               )}
             </div>
-          )}
-          
-          {/* Show regular video for other steps */}
-          {step !== "setup" && step !== "warmup" && step !== "calibration-points" && (
-            <video
-              ref={videoRef}
-              autoPlay
-              playsInline
-              className="w-full rounded-lg bg-black/10"
-            />
           )}
 
           {/* Setup Step */}
@@ -1040,7 +1040,6 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
           )}
         </CardContent>
       </Card>
-    </div>
   );
 }
 
