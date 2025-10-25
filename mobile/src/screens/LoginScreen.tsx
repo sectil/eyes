@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
-import { Text, TextInput, Button, Card, Snackbar } from 'react-native-paper';
+import { View, StyleSheet, KeyboardAvoidingView, Platform, Alert } from 'react-native';
+import { Text, TextInput, Button, Card, Banner, Divider } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { trpc } from '@/services/trpc';
@@ -18,6 +18,7 @@ export default function LoginScreen() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [showError, setShowError] = useState(false);
 
@@ -25,7 +26,7 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     if (!email || !password) {
-      setError('Please fill in all fields');
+      setError('Lütfen e-posta ve şifrenizi girin');
       setShowError(true);
       return;
     }
@@ -37,9 +38,18 @@ export default function LoginScreen() {
         refreshToken: result.refreshToken,
       });
     } catch (err: any) {
-      setError(err.message || 'Login failed');
+      const errorMessage = err.message || 'Giriş başarısız oldu';
+      setError(errorMessage);
       setShowError(true);
     }
+  };
+
+  const handleGoogleSignIn = () => {
+    Alert.alert('Google Sign-In', 'Google ile giriş yakında eklenecek!');
+  };
+
+  const handleAppleSignIn = () => {
+    Alert.alert('Apple Sign-In', 'Apple ile giriş yakında eklenecek!');
   };
 
   return (
@@ -52,52 +62,92 @@ export default function LoginScreen() {
           VisionCare
         </Text>
         <Text variant="titleMedium" style={styles.subtitle}>
-          AI-Powered Eye Health Assistant
+          Göz Sağlığı Asistanınız
         </Text>
+
+        {showError && (
+          <Banner
+            visible={showError}
+            actions={[
+              {
+                label: 'Kapat',
+                onPress: () => setShowError(false),
+              },
+            ]}
+            icon="alert-circle"
+            style={styles.errorBanner}
+          >
+            {error}
+          </Banner>
+        )}
 
         <Card style={styles.card}>
           <Card.Content>
             <TextInput
-              label="Email"
+              label="E-posta"
               value={email}
               onChangeText={setEmail}
               autoCapitalize="none"
               keyboardType="email-address"
               style={styles.input}
+              left={<TextInput.Icon icon="email" />}
             />
+
             <TextInput
-              label="Password"
+              label="Şifre"
               value={password}
               onChangeText={setPassword}
-              secureTextEntry
+              secureTextEntry={!showPassword}
               style={styles.input}
+              left={<TextInput.Icon icon="lock" />}
+              right={
+                <TextInput.Icon
+                  icon={showPassword ? 'eye-off' : 'eye'}
+                  onPress={() => setShowPassword(!showPassword)}
+                />
+              }
             />
+
             <Button
               mode="contained"
               onPress={handleLogin}
               loading={loginMutation.isLoading}
-              style={styles.button}
+              disabled={loginMutation.isLoading}
+              style={styles.loginButton}
             >
-              Login
+              Giriş Yap
             </Button>
+
+            <Divider style={styles.divider} />
+
+            <Button
+              mode="outlined"
+              onPress={handleGoogleSignIn}
+              icon="google"
+              style={styles.socialButton}
+            >
+              Google ile Devam Et
+            </Button>
+
+            <Button
+              mode="outlined"
+              onPress={handleAppleSignIn}
+              icon="apple"
+              style={styles.socialButton}
+            >
+              Apple ile Devam Et
+            </Button>
+
             <Button
               mode="text"
               onPress={() => navigation.navigate('Register')}
               style={styles.button}
             >
-              Don't have an account? Register
+              Hesabınız yok mu? Kayıt Olun
             </Button>
           </Card.Content>
         </Card>
       </View>
-
-      <Snackbar
-        visible={showError}
-        onDismiss={() => setShowError(false)}
-        duration={3000}
-      >
-        {error}
-      </Snackbar>
     </KeyboardAvoidingView>
   );
 }
@@ -119,14 +169,27 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     textAlign: 'center',
-    marginBottom: 32,
+    marginBottom: 24,
     color: '#666',
+  },
+  errorBanner: {
+    marginBottom: 16,
+    backgroundColor: '#ffebee',
   },
   card: {
     padding: 16,
   },
   input: {
     marginBottom: 16,
+  },
+  loginButton: {
+    marginTop: 8,
+  },
+  divider: {
+    marginVertical: 16,
+  },
+  socialButton: {
+    marginBottom: 8,
   },
   button: {
     marginTop: 8,
