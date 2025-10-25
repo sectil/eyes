@@ -364,19 +364,19 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
       }
 
       try {
-        const faces = await trackerRef.current.detectFace(videoRef.current);
-        if (faces.length > 0) {
-          const eyes = trackerRef.current.extractEyeData(faces[0]);
-          if (eyes) {
+        const isFaceDetected = await trackerRef.current.detectFace(videoRef.current);
+        if (isFaceDetected) {
+          const eyes = await trackerRef.current.extractEyeData(videoRef.current);
+          if (eyes && eyes.gaze) {
             currentPointData.push({
-              x: eyes.gaze.x,
-              y: eyes.gaze.y,
+              x: eyes.gaze.x || 0,
+              y: eyes.gaze.y || 0,
               pupilSize: eyes.pupilSize || 0,
               timestamp: Date.now(),
             });
             
             // Analyze eye health in real-time
-            analyzeEyeHealth(faces[0], eyes);
+            analyzeEyeHealth(null, eyes);
           }
         }
       } catch (error) {
