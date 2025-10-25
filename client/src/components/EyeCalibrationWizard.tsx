@@ -71,6 +71,8 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
   const [gameOver, setGameOver] = useState(false);
   const [audioEnabled, setAudioEnabledState] = useState(true);
   const [gaze, setGaze] = useState<{x: number, y: number}>({x: 10, y: 10});
+  const [blinkDetected, setBlinkDetected] = useState(false);
+  const [blinkCount, setBlinkCount] = useState(0);
   const GRID_SIZE = 20;
   const GAME_WIDTH = 400;
   const GAME_HEIGHT = 400;
@@ -224,6 +226,46 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
     }
   }, [warmupStep, isModelLoading, audioEnabled]);
 
+  // Blink detection during warmup
+  useEffect(() => {
+    if (!isModelLoading || !videoRef.current || !trackerRef.current) return;
+
+    let detectionFrameId: number;
+    let previousEAR = 1.0;
+    const EAR_THRESHOLD = 0.2; // Threshold for detecting eye closure
+
+    const detectBlinks = async () => {
+      if (!videoRef.current || !trackerRef.current) return;
+
+      try {
+        const faces = await trackerRef.current.detectFace(videoRef.current);
+        if (faces.length > 0 && faces[0].keypoints) {
+          const leftEAR = calculateEyeAspectRatio(faces[0].keypoints, 'left');
+          const rightEAR = calculateEyeAspectRatio(faces[0].keypoints, 'right');
+          const avgEAR = (leftEAR + rightEAR) / 2;
+
+          // Detect blink: EAR drops below threshold then rises above
+          if (previousEAR > EAR_THRESHOLD && avgEAR < EAR_THRESHOLD) {
+            setBlinkDetected(true);
+            setBlinkCount(prev => prev + 1);
+            playTickSound();
+            setTimeout(() => setBlinkDetected(false), 300);
+          }
+
+          previousEAR = avgEAR;
+        }
+      } catch (error) {
+        console.error("Blink detection error:", error);
+      }
+
+      detectionFrameId = requestAnimationFrame(detectBlinks);
+    };
+
+    detectBlinks();
+
+    return () => cancelAnimationFrame(detectionFrameId);
+  }, [isModelLoading]);
+
   // Face detection
   useEffect(() => {
     if (step !== "face-detection" || !videoRef.current || !trackerRef.current) return;
@@ -259,6 +301,7 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
     if (step !== "eye-detection" || !videoRef.current || !trackerRef.current) return;
 
     let detectionFrameId: number;
+    let eyesDetectedCount = 0;
 
     const detectEyes = async () => {
       if (!videoRef.current || !trackerRef.current) return;
@@ -268,7 +311,21 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
         if (faces.length > 0) {
           const eyes = trackerRef.current.extractEyeData(faces[0]);
           lastEyeDataRef.current = eyes;
-          setEyesDetected(!!eyes);
+          if (eyes) {
+            eyesDetectedCount++;
+            setEyesDetected(true);
+            
+            // Auto-start warmup after 2 seconds of stable eye detection
+            if (eyesDetectedCount > 30 && !isModelLoading) {
+              setTimeout(() => {
+                handleStartWarmup();
+              }, 500);
+              return;
+            }
+          } else {
+            eyesDetectedCount = 0;
+            setEyesDetected(false);
+          }
         }
       } catch (error) {
         console.error("Eye detection error:", error);
@@ -280,7 +337,7 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
     detectEyes();
 
     return () => cancelAnimationFrame(detectionFrameId);
-  }, [step]);
+  }, [step, isModelLoading]);
 
   const handleStartWarmup = () => {
     setIsModelLoading(true);
@@ -436,8 +493,18 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
                             <div className="text-4xl mb-2">{WARMUP_EXERCISES[warmupStep].icon}</div>
                             <p className="font-medium">{WARMUP_EXERCISES[warmupStep].text}</p>
                             <p className="text-2xl font-bold text-primary mt-2">{warmupCountdown}</p>
+                            
+                            {/* Blink indicator */}
+                            <div className="mt-4 flex items-center justify-center gap-2">
+                              <div className={`w-3 h-3 rounded-full transition-all ${
+                                blinkDetected ? 'bg-green-500 scale-125' : 'bg-gray-300'
+                              }`} />
+                              <span className="text-sm text-muted-foreground">
+                                Göz kırpma: {blinkCount}
+                              </span>
+                            </div>
                           </div>
-                          <Progress value={(warmupStep / WARMUP_EXERCISES.length) * 100} />
+                          <Progress value={((warmupStep + 1) / WARMUP_EXERCISES.length) * 100} />
                         </div>
                       )}
                     </>
