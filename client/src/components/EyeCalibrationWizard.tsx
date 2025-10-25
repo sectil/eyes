@@ -890,6 +890,10 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
                     Tamamla
                   </Button>
                 )}
+                {/* Debug: Show button state */}
+                {calibrationSuccess === null && (
+                  <p className="text-xs text-muted-foreground">Validation in progress...</p>
+                )}
               </div>
             </div>
           )}
