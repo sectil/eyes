@@ -62,6 +62,8 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   const [audioEnabled, setAudioEnabledState] = useState(true);
   const [blinkDetected, setBlinkDetected] = useState(false);
   const [blinkCount, setBlinkCount] = useState(0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [eyeRegion, setEyeRegion] = useState<{x: number, y: number, width: number, height: number} | null>(null);
   const [currentCalibrationPoint, setCurrentCalibrationPoint] = useState(0);
   const [pointCountdown, setPointCountdown] = useState(3);
   const [calibrationData, setCalibrationData] = useState<Array<{
@@ -146,6 +148,82 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
       trackerRef.current = null;
     };
   }, []);
+
+  // Draw eye-focused view on canvas
+  useEffect(() => {
+    if (!videoRef.current || !canvasRef.current) return;
+    if (step !== "warmup" && step !== "calibration-points") return;
+
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationFrameId: number;
+
+    const drawEyeView = async () => {
+      if (!trackerRef.current || video.readyState < 2) {
+        animationFrameId = requestAnimationFrame(drawEyeView);
+        return;
+      }
+
+      try {
+        const eyes = await trackerRef.current.extractEyeData(video);
+        if (eyes && eyes.faceLandmarks) {
+          const leftEye = eyes.faceLandmarks.getLeftEye();
+          const rightEye = eyes.faceLandmarks.getRightEye();
+
+          // Calculate bounding box for both eyes
+          const allEyePoints = [...leftEye, ...rightEye];
+          const minX = Math.min(...allEyePoints.map(p => p.x));
+          const maxX = Math.max(...allEyePoints.map(p => p.x));
+          const minY = Math.min(...allEyePoints.map(p => p.y));
+          const maxY = Math.max(...allEyePoints.map(p => p.y));
+
+          // Add padding
+          const padding = 50;
+          const eyeX = Math.max(0, minX - padding);
+          const eyeY = Math.max(0, minY - padding);
+          const eyeWidth = Math.min(video.videoWidth - eyeX, maxX - minX + padding * 2);
+          const eyeHeight = Math.min(video.videoHeight - eyeY, maxY - minY + padding * 2);
+
+          // Set canvas size
+          canvas.width = 640;
+          canvas.height = 480;
+
+          // Draw blurred background
+          ctx.filter = "blur(20px) brightness(0.3)";
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+          // Draw clear eye region (zoomed)
+          ctx.filter = "none";
+          ctx.drawImage(
+            video,
+            eyeX, eyeY, eyeWidth, eyeHeight,
+            0, 0, canvas.width, canvas.height
+          );
+
+          setEyeRegion({ x: eyeX, y: eyeY, width: eyeWidth, height: eyeHeight });
+        } else {
+          // No eyes detected - show full video with blur
+          canvas.width = 640;
+          canvas.height = 480;
+          ctx.filter = "blur(10px) brightness(0.5)";
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        }
+      } catch (error) {
+        console.error("Eye view drawing error:", error);
+      }
+
+      animationFrameId = requestAnimationFrame(drawEyeView);
+    };
+
+    drawEyeView();
+
+    return () => {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+    };
+  }, [step]);
 
   // Warmup countdown
   useEffect(() => {
@@ -672,8 +750,33 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
             ref={videoRef}
             autoPlay
             playsInline
-            className={step === "setup" ? "hidden" : "w-full rounded-lg bg-black/10"}
+            className="hidden"
           />
+          
+          {/* Canvas for eye-focused view */}
+          {(step === "warmup" || step === "calibration-points") && (
+            <div className="relative">
+              <canvas
+                ref={canvasRef}
+                className="w-full rounded-lg bg-black"
+              />
+              {eyeRegion && (
+                <div className="absolute top-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded">
+                  👁️ Göz Odaklı Görünüm
+                </div>
+              )}
+            </div>
+          )}
+          
+          {/* Show regular video for other steps */}
+          {step !== "setup" && step !== "warmup" && step !== "calibration-points" && (
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              className="w-full rounded-lg bg-black/10"
+            />
+          )}
 
           {/* Setup Step */}
           {step === "setup" && (
