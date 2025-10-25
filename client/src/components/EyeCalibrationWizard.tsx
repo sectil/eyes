@@ -375,9 +375,15 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
               timestamp: Date.now(),
             });
             
+            console.log(`📊 Gaze data collected: Point ${currentCalibrationPoint}, Total: ${currentPointData.length}`);
+            
             // Analyze eye health in real-time
             analyzeEyeHealth(null, eyes);
+          } else {
+            console.warn('⚠️ Eyes not detected or gaze data missing');
           }
+        } else {
+          console.warn('⚠️ Face not detected');
         }
       } catch (error) {
         console.error("Gaze data collection error:", error);
@@ -500,9 +506,18 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   };
 
   const validateCalibration = () => {
+    console.log(`🔍 Validating calibration...`);
+    console.log(`📦 Total calibration data points: ${calibrationData.length}`);
+    calibrationData.forEach((d, i) => {
+      console.log(`  Point ${i}: ${d.gazeData.length} gaze samples`);
+    });
+    
     // Simple validation: check if we have enough data points
     const validPoints = calibrationData.filter(d => d.gazeData.length > 10);
     const score = Math.round((validPoints.length / CALIBRATION_POINTS.length) * 100);
+    
+    console.log(`✅ Valid points: ${validPoints.length}/${CALIBRATION_POINTS.length}`);
+    console.log(`📊 Calibration score: ${score}%`);
     
     setValidationScore(score);
     setCalibrationSuccess(score >= 70); // 70% threshold
