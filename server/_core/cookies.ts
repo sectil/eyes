@@ -26,16 +26,16 @@ export function getSessionCookieOptions(
 ): Pick<CookieOptions, "domain" | "httpOnly" | "path" | "sameSite" | "secure"> {
   const isSecure = isSecureRequest(req);
   
-  // iPhone Safari and other mobile browsers require secure: true when sameSite: "none"
-  // If not secure, fallback to sameSite: "lax" for better compatibility
-  const sameSite = isSecure ? "none" : "lax";
-  const secure = isSecure || true; // Always try to set secure flag for mobile compatibility
-
+  // For OAuth callback to work on iPhone Safari:
+  // - Always use secure: true (required for cross-origin cookies)
+  // - Use sameSite: "strict" for same-site requests (better compatibility)
+  // - Only use sameSite: "none" when absolutely necessary
+  
   return {
     httpOnly: true,
     path: "/",
-    sameSite,
-    secure,
+    sameSite: "strict",
+    secure: true, // Always true for mobile compatibility
   };
 }
 
