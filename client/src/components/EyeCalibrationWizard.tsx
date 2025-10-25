@@ -528,11 +528,23 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
         videoRef.current.srcObject = stream;
         streamRef.current = stream;
         
-        videoRef.current.onloadedmetadata = () => {
-          videoRef.current?.play();
-          setStep("face-detection");
-          toast.success("Kamera açıldı");
+        const playHandler = async () => {
+          try {
+            await videoRef.current?.play();
+            setStep("face-detection");
+            toast.success("Kamera açıldı");
+          } catch (playError) {
+            console.error("Play error:", playError);
+          }
         };
+        
+        videoRef.current.oncanplay = playHandler;
+        
+        setTimeout(() => {
+          if (videoRef.current?.readyState === 0) {
+            setStep("face-detection");
+          }
+        }, 3000);
       }
     } catch (error) {
       console.error("Camera error:", error);
