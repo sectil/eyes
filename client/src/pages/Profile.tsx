@@ -5,10 +5,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, Mail, Calendar, Briefcase, Clock, Eye, Edit, Save, X } from "lucide-react";
+import { 
+  User, Mail, Calendar, Briefcase, Clock, Eye, Edit, Save, X, 
+  Crown, Star, Bell, TrendingUp, Award, Zap, CheckCircle2, AlertCircle 
+} from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
@@ -30,6 +34,39 @@ export default function Profile() {
     usesGlasses: profile?.usesGlasses?.toString() || "0",
     symptoms: [] as string[],
   });
+
+  // Mock data for premium, points, and notifications
+  const isPremium = true; // TODO: Get from user data
+  const membershipEndDate = new Date("2025-12-31");
+  const userPoints = 1250;
+  const userLevel = 5;
+  const pointsToNextLevel = 1500;
+  const notifications = [
+    {
+      id: 1,
+      type: "ai_report",
+      title: "AI Göz Sağlığı Raporu",
+      message: "Haftalık göz sağlığı raporunuz hazır. Genel durumunuz iyi görünüyor.",
+      date: new Date("2025-10-24"),
+      read: false,
+    },
+    {
+      id: 2,
+      type: "exercise",
+      title: "Egzersiz Hatırlatması",
+      message: "Bugün henüz göz egzersizi yapmadınız. 20-20-20 kuralını unutmayın!",
+      date: new Date("2025-10-25"),
+      read: false,
+    },
+    {
+      id: 3,
+      type: "test",
+      title: "Test Sonucu",
+      message: "Snellen test sonucunuz: 20/20. Görme keskinliğiniz mükemmel!",
+      date: new Date("2025-10-23"),
+      read: true,
+    },
+  ];
 
   const updateProfile = trpc.profile.upsert.useMutation({
     onSuccess: () => {
@@ -85,10 +122,29 @@ export default function Profile() {
     return "Diğer";
   };
 
+  const getDaysUntilRenewal = () => {
+    const today = new Date();
+    const diff = membershipEndDate.getTime() - today.getTime();
+    return Math.ceil(diff / (1000 * 60 * 60 * 24));
+  };
+
+  const getNotificationIcon = (type: string) => {
+    switch (type) {
+      case "ai_report":
+        return <Zap className="h-4 w-4 text-blue-600" />;
+      case "exercise":
+        return <AlertCircle className="h-4 w-4 text-orange-600" />;
+      case "test":
+        return <CheckCircle2 className="h-4 w-4 text-green-600" />;
+      default:
+        return <Bell className="h-4 w-4 text-gray-600" />;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto space-y-6">
+        <div className="max-w-6xl mx-auto space-y-6">
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
@@ -100,192 +156,332 @@ export default function Profile() {
             </Button>
           </div>
 
-          {/* User Info Card */}
-          <Card>
-            <CardHeader>
-              <div className="flex items-center gap-4">
-                <Avatar className="h-20 w-20">
-                  <AvatarImage src={user?.email ? `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}` : undefined} />
-                  <AvatarFallback>{getInitials()}</AvatarFallback>
-                </Avatar>
-                <div className="flex-1">
-                  <CardTitle className="text-2xl">{user?.name || "Kullanıcı"}</CardTitle>
-                  <CardDescription className="flex items-center gap-2 mt-1">
-                    <Mail className="h-4 w-4" />
-                    {user?.email || "email@example.com"}
-                  </CardDescription>
-                </div>
-                {!isEditing ? (
-                  <Button onClick={() => setIsEditing(true)} className="gap-2">
-                    <Edit className="h-4 w-4" />
-                    Düzenle
-                  </Button>
-                ) : (
-                  <div className="flex gap-2">
-                    <Button onClick={handleSave} disabled={updateProfile.isPending} className="gap-2">
-                      <Save className="h-4 w-4" />
-                      Kaydet
-                    </Button>
-                    <Button onClick={handleCancel} variant="outline" className="gap-2">
-                      <X className="h-4 w-4" />
-                      İptal
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </CardHeader>
-          </Card>
-
-          {/* Profile Details Card */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Profil Bilgileri</CardTitle>
-              <CardDescription>Göz sağlığınız için önemli bilgiler</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {!isEditing ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="flex items-center gap-3">
-                    <Calendar className="h-5 w-5 text-muted-foreground" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Yaş</p>
-                      <p className="font-medium">{profile?.age || "Belirtilmemiş"}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Left Column */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* User Info Card */}
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-4">
+                    <Avatar className="h-20 w-20">
+                      <AvatarImage src={user?.email ? `https://api.dicebear.com/7.x/initials/svg?seed=${user.name}` : undefined} />
+                      <AvatarFallback>{getInitials()}</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <CardTitle className="text-2xl">{user?.name || "Kullanıcı"}</CardTitle>
+                        {isPremium && (
+                          <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white gap-1">
+                            <Crown className="h-3 w-3" />
+                            Premium
+                          </Badge>
+                        )}
+                      </div>
+                      <CardDescription className="flex items-center gap-2 mt-1">
+                        <Mail className="h-4 w-4" />
+                        {user?.email || "email@example.com"}
+                      </CardDescription>
                     </div>
+                    {!isEditing ? (
+                      <Button onClick={() => setIsEditing(true)} className="gap-2">
+                        <Edit className="h-4 w-4" />
+                        Düzenle
+                      </Button>
+                    ) : (
+                      <div className="flex gap-2">
+                        <Button onClick={handleSave} disabled={updateProfile.isPending} className="gap-2">
+                          <Save className="h-4 w-4" />
+                          Kaydet
+                        </Button>
+                        <Button onClick={handleCancel} variant="outline" className="gap-2">
+                          <X className="h-4 w-4" />
+                          İptal
+                        </Button>
+                      </div>
+                    )}
                   </div>
+                </CardHeader>
+              </Card>
 
-                  <div className="flex items-center gap-3">
-                    <User className="h-5 w-5 text-muted-foreground" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Cinsiyet</p>
-                      <p className="font-medium">{getGenderLabel(profile?.gender)}</p>
+              {/* Profile Details Card */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Profil Bilgileri</CardTitle>
+                  <CardDescription>Göz sağlığınız için önemli bilgiler</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {!isEditing ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="flex items-center gap-3">
+                        <Calendar className="h-5 w-5 text-muted-foreground" />
+                        <div>
+                          <p className="text-sm text-muted-foreground">Yaş</p>
+                          <p className="font-medium">{profile?.age || "Belirtilmemiş"}</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <User className="h-5 w-5 text-muted-foreground" />
+                        <div>
+                          <p className="text-sm text-muted-foreground">Cinsiyet</p>
+                          <p className="font-medium">{getGenderLabel(profile?.gender)}</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <Briefcase className="h-5 w-5 text-muted-foreground" />
+                        <div>
+                          <p className="text-sm text-muted-foreground">Meslek</p>
+                          <p className="font-medium">{profile?.occupation || "Belirtilmemiş"}</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <Clock className="h-5 w-5 text-muted-foreground" />
+                        <div>
+                          <p className="text-sm text-muted-foreground">Günlük Ekran Süresi</p>
+                          <p className="font-medium">{profile?.dailyScreenTime ? `${profile.dailyScreenTime} saat` : "Belirtilmemiş"}</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <Eye className="h-5 w-5 text-muted-foreground" />
+                        <div>
+                          <p className="text-sm text-muted-foreground">Gözlük/Lens Kullanımı</p>
+                          <p className="font-medium">
+                            {profile?.usesGlasses === 1 ? "Gözlük" : profile?.usesGlasses === 2 ? "Lens" : "Hayır"}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="age">Yaşınız *</Label>
+                        <Input
+                          id="age"
+                          type="number"
+                          min="1"
+                          max="120"
+                          value={formData.age}
+                          onChange={(e) => updateField("age", e.target.value)}
+                          placeholder="Örn: 28"
+                        />
+                      </div>
 
-                  <div className="flex items-center gap-3">
-                    <Briefcase className="h-5 w-5 text-muted-foreground" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Meslek</p>
-                      <p className="font-medium">{profile?.occupation || "Belirtilmemiş"}</p>
+                      <div className="space-y-2">
+                        <Label htmlFor="gender">Cinsiyet</Label>
+                        <Select value={formData.gender} onValueChange={(value) => updateField("gender", value)}>
+                          <SelectTrigger id="gender">
+                            <SelectValue placeholder="Seçiniz" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="male">Erkek</SelectItem>
+                            <SelectItem value="female">Kadın</SelectItem>
+                            <SelectItem value="other">Diğer</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="occupation">Mesleğiniz *</Label>
+                        <Input
+                          id="occupation"
+                          value={formData.occupation}
+                          onChange={(e) => updateField("occupation", e.target.value)}
+                          placeholder="Örn: Yazılım Geliştirici"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="dailyScreenTime">Günlük Ekran Süresi (saat) *</Label>
+                        <Input
+                          id="dailyScreenTime"
+                          type="number"
+                          min="0"
+                          max="24"
+                          value={formData.dailyScreenTime}
+                          onChange={(e) => updateField("dailyScreenTime", e.target.value)}
+                          placeholder="Örn: 8"
+                        />
+                      </div>
+
+                      <div className="space-y-2 md:col-span-2">
+                        <Label htmlFor="usesGlasses">Gözlük/Lens Kullanıyor musunuz?</Label>
+                        <Select value={formData.usesGlasses} onValueChange={(value) => updateField("usesGlasses", value)}>
+                          <SelectTrigger id="usesGlasses">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="0">Hayır</SelectItem>
+                            <SelectItem value="1">Gözlük</SelectItem>
+                            <SelectItem value="2">Lens</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
-                  </div>
+                  )}
+                </CardContent>
+              </Card>
 
-                  <div className="flex items-center gap-3">
-                    <Clock className="h-5 w-5 text-muted-foreground" />
+              {/* Account Info Card */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Hesap Bilgileri</CardTitle>
+                  <CardDescription>Hesabınızla ilgili detaylar</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
                     <div>
-                      <p className="text-sm text-muted-foreground">Günlük Ekran Süresi</p>
-                      <p className="font-medium">{profile?.dailyScreenTime ? `${profile.dailyScreenTime} saat` : "Belirtilmemiş"}</p>
+                      <p className="text-sm text-muted-foreground">Giriş Yöntemi</p>
+                      <p className="font-medium capitalize">{user?.loginMethod || "Bilinmiyor"}</p>
                     </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <Eye className="h-5 w-5 text-muted-foreground" />
+                    <Separator />
                     <div>
-                      <p className="text-sm text-muted-foreground">Gözlük/Lens Kullanımı</p>
+                      <p className="text-sm text-muted-foreground">Hesap Oluşturma Tarihi</p>
                       <p className="font-medium">
-                        {profile?.usesGlasses === 1 ? "Gözlük" : profile?.usesGlasses === 2 ? "Lens" : "Hayır"}
+                        {user?.createdAt ? new Date(user.createdAt).toLocaleDateString("tr-TR") : "Bilinmiyor"}
+                      </p>
+                    </div>
+                    <Separator />
+                    <div>
+                      <p className="text-sm text-muted-foreground">Son Giriş</p>
+                      <p className="font-medium">
+                        {user?.lastSignedIn ? new Date(user.lastSignedIn).toLocaleDateString("tr-TR") : "Bilinmiyor"}
                       </p>
                     </div>
                   </div>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Right Column */}
+            <div className="space-y-6">
+              {/* Membership Card */}
+              <Card className={isPremium ? "border-2 border-yellow-400" : ""}>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Crown className={isPremium ? "h-5 w-5 text-yellow-500" : "h-5 w-5 text-gray-400"} />
+                    {isPremium ? "Premium Üyelik" : "Ücretsiz Üyelik"}
+                  </CardTitle>
+                  <CardDescription>
+                    {isPremium 
+                      ? `${getDaysUntilRenewal()} gün sonra yenilenecek` 
+                      : "Premium'a yükseltin ve tüm özelliklere erişin"}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {isPremium ? (
+                    <>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-muted-foreground">Bitiş Tarihi</span>
+                          <span className="font-medium">{membershipEndDate.toLocaleDateString("tr-TR")}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-green-600">
+                          <CheckCircle2 className="h-4 w-4" />
+                          <span>Aktif</span>
+                        </div>
+                      </div>
+                      <Button className="w-full" variant="outline" onClick={() => setLocation("/pricing")}>
+                        Üyeliği Yenile
+                      </Button>
+                    </>
+                  ) : (
+                    <Button className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600" onClick={() => setLocation("/pricing")}>
+                      Premium'a Yükselt
+                    </Button>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* Points & Level Card */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Star className="h-5 w-5 text-yellow-500" />
+                    Puanlar & Seviye
+                  </CardTitle>
+                  <CardDescription>Aktivitelerinizle puan kazanın</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Award className="h-5 w-5 text-blue-600" />
+                      <span className="font-semibold">Seviye {userLevel}</span>
+                    </div>
+                    <span className="text-2xl font-bold text-primary">{userPoints}</span>
+                  </div>
                   <div className="space-y-2">
-                    <Label htmlFor="age">Yaşınız *</Label>
-                    <Input
-                      id="age"
-                      type="number"
-                      min="1"
-                      max="120"
-                      value={formData.age}
-                      onChange={(e) => updateField("age", e.target.value)}
-                      placeholder="Örn: 28"
-                    />
+                    <div className="flex justify-between text-sm text-muted-foreground">
+                      <span>Sonraki seviyeye</span>
+                      <span>{pointsToNextLevel - userPoints} puan</span>
+                    </div>
+                    <Progress value={(userPoints / pointsToNextLevel) * 100} />
                   </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="gender">Cinsiyet</Label>
-                    <Select value={formData.gender} onValueChange={(value) => updateField("gender", value)}>
-                      <SelectTrigger id="gender">
-                        <SelectValue placeholder="Seçiniz" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="male">Erkek</SelectItem>
-                        <SelectItem value="female">Kadın</SelectItem>
-                        <SelectItem value="other">Diğer</SelectItem>
-                      </SelectContent>
-                    </Select>
+                  <div className="pt-2 space-y-2">
+                    <p className="text-sm font-medium">Puan Kazanma Yolları:</p>
+                    <ul className="text-sm text-muted-foreground space-y-1">
+                      <li className="flex items-center gap-2">
+                        <TrendingUp className="h-3 w-3" />
+                        Günlük egzersiz: +10 puan
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <TrendingUp className="h-3 w-3" />
+                        Test tamamlama: +25 puan
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <TrendingUp className="h-3 w-3" />
+                        7 gün üst üste: +50 puan
+                      </li>
+                    </ul>
                   </div>
+                </CardContent>
+              </Card>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="occupation">Mesleğiniz *</Label>
-                    <Input
-                      id="occupation"
-                      value={formData.occupation}
-                      onChange={(e) => updateField("occupation", e.target.value)}
-                      placeholder="Örn: Yazılım Geliştirici"
-                    />
+              {/* Notifications Card */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Bell className="h-5 w-5" />
+                    Bildirimler
+                    {notifications.filter(n => !n.read).length > 0 && (
+                      <Badge variant="destructive" className="ml-auto">
+                        {notifications.filter(n => !n.read).length}
+                      </Badge>
+                    )}
+                  </CardTitle>
+                  <CardDescription>AI raporları ve hatırlatmalar</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {notifications.slice(0, 3).map((notification) => (
+                      <div
+                        key={notification.id}
+                        className={`p-3 rounded-lg border ${
+                          notification.read ? "bg-background" : "bg-accent/50"
+                        }`}
+                      >
+                        <div className="flex items-start gap-3">
+                          {getNotificationIcon(notification.type)}
+                          <div className="flex-1 space-y-1">
+                            <p className="text-sm font-medium">{notification.title}</p>
+                            <p className="text-xs text-muted-foreground">{notification.message}</p>
+                            <p className="text-xs text-muted-foreground">
+                              {notification.date.toLocaleDateString("tr-TR")}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    <Button variant="outline" className="w-full" size="sm">
+                      Tümünü Gör
+                    </Button>
                   </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="dailyScreenTime">Günlük Ekran Süresi (saat) *</Label>
-                    <Input
-                      id="dailyScreenTime"
-                      type="number"
-                      min="0"
-                      max="24"
-                      value={formData.dailyScreenTime}
-                      onChange={(e) => updateField("dailyScreenTime", e.target.value)}
-                      placeholder="Örn: 8"
-                    />
-                  </div>
-
-                  <div className="space-y-2 md:col-span-2">
-                    <Label htmlFor="usesGlasses">Gözlük/Lens Kullanıyor musunuz?</Label>
-                    <Select value={formData.usesGlasses} onValueChange={(value) => updateField("usesGlasses", value)}>
-                      <SelectTrigger id="usesGlasses">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="0">Hayır</SelectItem>
-                        <SelectItem value="1">Gözlük</SelectItem>
-                        <SelectItem value="2">Lens</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Account Info Card */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Hesap Bilgileri</CardTitle>
-              <CardDescription>Hesabınızla ilgili detaylar</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Giriş Yöntemi</p>
-                  <p className="font-medium capitalize">{user?.loginMethod || "Bilinmiyor"}</p>
-                </div>
-                <Separator />
-                <div>
-                  <p className="text-sm text-muted-foreground">Hesap Oluşturma Tarihi</p>
-                  <p className="font-medium">
-                    {user?.createdAt ? new Date(user.createdAt).toLocaleDateString("tr-TR") : "Bilinmiyor"}
-                  </p>
-                </div>
-                <Separator />
-                <div>
-                  <p className="text-sm text-muted-foreground">Son Giriş</p>
-                  <p className="font-medium">
-                    {user?.lastSignedIn ? new Date(user.lastSignedIn).toLocaleDateString("tr-TR") : "Bilinmiyor"}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </div>
       </div>
     </div>
