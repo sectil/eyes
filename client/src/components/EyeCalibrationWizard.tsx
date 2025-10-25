@@ -204,9 +204,12 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
         if (eyes) {
           // Calculate average EAR from both eyes
           const avgEAR = (eyes.left.ear + eyes.right.ear) / 2;
+          
+          console.log(`👁️ EAR: ${avgEAR.toFixed(3)} | Threshold: ${EAR_THRESHOLD} | Previous: ${previousEAR.toFixed(3)}`);
 
           // Detect blink: EAR drops below threshold
           if (previousEAR > EAR_THRESHOLD && avgEAR < EAR_THRESHOLD) {
+            console.log(`✅ BLINK DETECTED! Count: ${blinkCount + 1}`);
             setBlinkDetected(true);
             setBlinkCount(prev => prev + 1);
             playTickSound();
@@ -214,6 +217,8 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
           }
 
           previousEAR = avgEAR;
+        } else {
+          console.warn('⚠️ extractEyeData returned null');
         }
       } catch (error) {
         console.error("Blink detection error:", error);
