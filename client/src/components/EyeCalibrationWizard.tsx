@@ -346,9 +346,20 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     return () => clearInterval(timer);
   }, [step, currentCalibrationPoint]);
 
-  // Collect gaze data during calibration
+  // Validation step - automatically validate when entering validation step
   useEffect(() => {
-    if (step !== "calibration-points" || !videoRef.current || !trackerRef.current) return;
+    if (step === "validation" && calibrationSuccess === null) {
+      // Wait a bit for UI to render, then validate
+      const timer = setTimeout(() => {
+        validateCalibration();
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [step]);
+
+  // Gaze data collection during calibration
+  useEffect(() => {  if (step !== "calibration-points" || !videoRef.current || !trackerRef.current) return;
 
     let collectionFrameId: number;
     let isActive = true;
