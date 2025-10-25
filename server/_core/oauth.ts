@@ -24,15 +24,14 @@ export function registerOAuthRoutes(app: Express) {
 
     if (!code || !state) {
       console.error("[OAuth] Missing code or state", { code, state });
-      // Return HTML page that shows error
       res.send(`
         <html>
-          <body>
-            <h1>Login Error</h1>
-            <p>Missing code or state parameter</p>
-            <script>
-              window.location.href = '/';
-            </script>
+          <head><title>Login Error</title></head>
+          <body style="font-family: Arial; padding: 20px;">
+            <h1>❌ Login Error</h1>
+            <p><strong>Error:</strong> Missing code or state parameter</p>
+            <p>This usually means the OAuth provider didn't return the required parameters.</p>
+            <button onclick="window.location.href='/'">Go Back Home</button>
           </body>
         </html>
       `);
@@ -51,12 +50,12 @@ export function registerOAuthRoutes(app: Express) {
         console.error("[OAuth] Missing openId in user info");
         res.send(`
           <html>
-            <body>
-              <h1>Login Error</h1>
-              <p>Missing user information</p>
-              <script>
-                window.location.href = '/';
-              </script>
+            <head><title>Login Error</title></head>
+            <body style="font-family: Arial; padding: 20px;">
+              <h1>❌ Login Error</h1>
+              <p><strong>Error:</strong> Missing user information (openId)</p>
+              <p>The OAuth provider didn't return your user ID.</p>
+              <button onclick="window.location.href='/'">Go Back Home</button>
             </body>
           </html>
         `);
@@ -79,24 +78,31 @@ export function registerOAuthRoutes(app: Express) {
       });
 
       const cookieOptions = getSessionCookieOptions(req);
-      console.log("[OAuth] Setting cookie with options:", cookieOptions);
+      console.log("[OAuth] Setting cookie with options:", {
+        ...cookieOptions,
+        maxAge: ONE_YEAR_MS,
+      });
       res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
 
       // Return HTML page that stores token and redirects
-      // This works better on mobile browsers than server-side redirect
       console.log("[OAuth] Returning success page with redirect");
       res.send(`
         <html>
           <head>
             <title>Logging in...</title>
+            <meta charset="UTF-8">
           </head>
-          <body>
-            <p>Logging in...</p>
+          <body style="font-family: Arial; padding: 20px; text-align: center;">
+            <h1>✅ Logging in...</h1>
+            <p>Please wait, you are being redirected...</p>
             <script>
-              // Store token in localStorage as backup (in case cookie fails)
+              // Store token in localStorage as backup
               localStorage.setItem('${COOKIE_NAME}', '${sessionToken}');
+              console.log('Token stored in localStorage');
               // Redirect to home page
-              window.location.href = '/';
+              setTimeout(() => {
+                window.location.href = '/';
+              }, 500);
             </script>
           </body>
         </html>
@@ -104,15 +110,25 @@ export function registerOAuthRoutes(app: Express) {
     } catch (error) {
       console.error("[OAuth] Callback failed", error);
       const errorMessage = error instanceof Error ? error.message : String(error);
+      const errorStack = error instanceof Error ? error.stack : '';
+      
       res.send(`
         <html>
-          <body>
-            <h1>Login Failed</h1>
-            <p>${errorMessage}</p>
+          <head><title>Login Failed</title></head>
+          <body style="font-family: Arial; padding: 20px;">
+            <h1>❌ Login Failed</h1>
+            <p><strong>Error:</strong> ${errorMessage}</p>
+            <details style="margin-top: 20px; padding: 10px; background: #f0f0f0; border-radius: 5px;">
+              <summary>Technical Details</summary>
+              <pre style="overflow: auto; max-height: 200px; font-size: 12px;">${errorStack}</pre>
+            </details>
+            <p style="margin-top: 20px;">
+              <button onclick="window.location.href='/'">Go Back Home</button>
+            </p>
             <script>
               setTimeout(() => {
                 window.location.href = '/';
-              }, 3000);
+              }, 5000);
             </script>
           </body>
         </html>
