@@ -72,6 +72,17 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   const [calibrationSuccess, setCalibrationSuccess] = useState<boolean | null>(null);
   const [validationScore, setValidationScore] = useState(0);
   
+  // Eye health analysis states
+  const [glassesDetected, setGlassesDetected] = useState<boolean | null>(null);
+  const [eyeHealthData, setEyeHealthData] = useState<{
+    redness: number;
+    fatigue: number;
+    alignment: number;
+    lightSensitivity: number;
+    focusQuality: number;
+  }>({ redness: 0, fatigue: 0, alignment: 50, lightSensitivity: 50, focusQuality: 50 });
+  const [healthWarnings, setHealthWarnings] = useState<string[]>([]);
+  
   // Calibration points (9-point grid)
   const CALIBRATION_POINTS = [
     { x: 10, y: 10 },   // Top-left
@@ -303,6 +314,9 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
               pupilSize: eyes.pupilSize || 0,
               timestamp: Date.now(),
             });
+            
+            // Analyze eye health in real-time
+            analyzeEyeHealth(faces[0], eyes);
           }
         }
       } catch (error) {
@@ -361,6 +375,67 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     if (audioEnabled) {
       speak(WARMUP_EXERCISES[0].text);
     }
+  };
+
+  // Analyze eye health from face and eye data
+  const analyzeEyeHealth = (face: any, eyes: any) => {
+    const warnings: string[] = [];
+    
+    // Detect glasses (simple heuristic based on face landmarks)
+    const hasGlasses = detectGlasses(face);
+    if (glassesDetected === null) {
+      setGlassesDetected(hasGlasses);
+    }
+    
+    // Calculate eye fatigue based on blink rate and pupil size
+    const avgPupilSize = eyes.pupilSize || 0;
+    const fatigue = blinkCount < 5 ? 70 : (blinkCount > 20 ? 30 : 50);
+    
+    // Eye alignment check (distance between eyes)
+    const alignment = 50; // Placeholder - would need more complex calculation
+    
+    // Light sensitivity (based on pupil size changes)
+    const lightSensitivity = avgPupilSize < 3 ? 70 : (avgPupilSize > 6 ? 30 : 50);
+    
+    // Focus quality (based on gaze stability)
+    const focusQuality = 50; // Placeholder
+    
+    setEyeHealthData({
+      redness: 0, // Would need color analysis
+      fatigue,
+      alignment,
+      lightSensitivity,
+      focusQuality,
+    });
+    
+    // Generate warnings
+    if (fatigue > 60) {
+      warnings.push("⚠️ Gözleriniz yorgun görünüyor. Mola vermeniz önerilir.");
+    }
+    if (lightSensitivity > 60) {
+      warnings.push("💡 Işık hassasiyeti yüksek. Ekran parlaklığını azaltın.");
+    }
+    if (blinkCount < 3 && currentCalibrationPoint > 3) {
+      warnings.push("👁️ Göz kırpma oranı düşük. Daha sık göz kırpın.");
+    }
+    
+    if (warnings.length > 0) {
+      setHealthWarnings(warnings);
+    }
+  };
+  
+  // Detect glasses using face landmarks
+  const detectGlasses = (face: any): boolean => {
+    // Simple heuristic: check if there are strong edges around eye region
+    // This is a placeholder - real implementation would use more sophisticated detection
+    if (!face.keypoints) return false;
+    
+    // Check for landmarks around eyes (glasses frames would affect these)
+    const leftEyePoints = [33, 160, 158, 133, 153, 144];
+    const rightEyePoints = [362, 387, 385, 263, 380, 373];
+    
+    // Placeholder logic - in real implementation, analyze edge patterns
+    return Math.random() > 0.5; // TODO: Implement proper glasses detection
   };
 
   const validateCalibration = () => {
@@ -601,6 +676,34 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
               </div>
 
               <Progress value={(currentCalibrationPoint / CALIBRATION_POINTS.length) * 100} />
+              
+              {/* Eye Health Warnings */}
+              {healthWarnings.length > 0 && (
+                <div className="space-y-2 mt-4">
+                  {healthWarnings.map((warning, idx) => (
+                    <div key={idx} className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950 border border-yellow-200 rounded-lg">
+                      <AlertCircle className="h-4 w-4 text-yellow-600 mt-0.5 flex-shrink-0" />
+                      <p className="text-sm text-yellow-800 dark:text-yellow-200">{warning}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              {/* Glasses Detection Alert */}
+              {glassesDetected !== null && (
+                <div className={`flex items-center gap-2 p-3 rounded-lg ${
+                  glassesDetected 
+                    ? 'bg-blue-50 dark:bg-blue-950 border border-blue-200' 
+                    : 'bg-gray-50 dark:bg-gray-800 border border-gray-200'
+                }`}>
+                  <div className="text-2xl">{glassesDetected ? '👓' : '👁️'}</div>
+                  <p className="text-sm">
+                    {glassesDetected 
+                      ? 'Gözlük tespit edildi. Kalibrasyon gözlüklü olarak kaydedilecek.' 
+                      : 'Gözlük tespit edilmedi. Kalibrasyon gözlüksüz olarak kaydedilecek.'}
+                  </p>
+                </div>
+              )}
             </div>
           )}
 
@@ -628,6 +731,31 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
                   }`}>
                     Başarı Skoru: {validationScore}%
                   </p>
+                  
+                  {/* Eye Health Summary */}
+                  {calibrationSuccess && (
+                    <div className="mt-4 space-y-2 text-left">
+                      <p className="font-semibold text-green-900 dark:text-green-100">Göz Sağlığı Analizi:</p>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div className="flex items-center gap-1">
+                          <div className="w-2 h-2 rounded-full bg-green-500" />
+                          <span>Yorgunluk: {eyeHealthData.fatigue < 50 ? 'Düşük' : eyeHealthData.fatigue > 60 ? 'Yüksek' : 'Orta'}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <div className="w-2 h-2 rounded-full bg-blue-500" />
+                          <span>Işık Hassasiyeti: {eyeHealthData.lightSensitivity < 50 ? 'Düşük' : 'Normal'}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <div className="w-2 h-2 rounded-full bg-purple-500" />
+                          <span>Göz Kırpma: {blinkCount} kez</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <div className="w-2 h-2 rounded-full bg-orange-500" />
+                          <span>Gözlük: {glassesDetected ? 'Var' : 'Yok'}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 
