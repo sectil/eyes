@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import ProfileSetup from "./pages/ProfileSetup";
+import Profile from "./pages/Profile";
 import Pricing from "./pages/Pricing";
 import Tests from "./pages/Tests";
 import SnellenTest from "./pages/SnellenTest";
@@ -23,6 +24,7 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/profile" component={Profile} />
       <Route path="/profile/setup" component={ProfileSetup} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/tests" component={Tests} />
