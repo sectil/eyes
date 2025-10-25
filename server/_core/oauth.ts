@@ -24,7 +24,18 @@ export function registerOAuthRoutes(app: Express) {
 
     if (!code || !state) {
       console.error("[OAuth] Missing code or state", { code, state });
-      res.status(400).json({ error: "code and state are required" });
+      // Return HTML page that shows error
+      res.send(`
+        <html>
+          <body>
+            <h1>Login Error</h1>
+            <p>Missing code or state parameter</p>
+            <script>
+              window.location.href = '/';
+            </script>
+          </body>
+        </html>
+      `);
       return;
     }
 
@@ -38,7 +49,17 @@ export function registerOAuthRoutes(app: Express) {
 
       if (!userInfo.openId) {
         console.error("[OAuth] Missing openId in user info");
-        res.status(400).json({ error: "openId missing from user info" });
+        res.send(`
+          <html>
+            <body>
+              <h1>Login Error</h1>
+              <p>Missing user information</p>
+              <script>
+                window.location.href = '/';
+              </script>
+            </body>
+          </html>
+        `);
         return;
       }
 
@@ -61,12 +82,41 @@ export function registerOAuthRoutes(app: Express) {
       console.log("[OAuth] Setting cookie with options:", cookieOptions);
       res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
 
-      console.log("[OAuth] Redirecting to /");
-      res.redirect(302, "/");
+      // Return HTML page that stores token and redirects
+      // This works better on mobile browsers than server-side redirect
+      console.log("[OAuth] Returning success page with redirect");
+      res.send(`
+        <html>
+          <head>
+            <title>Logging in...</title>
+          </head>
+          <body>
+            <p>Logging in...</p>
+            <script>
+              // Store token in localStorage as backup (in case cookie fails)
+              localStorage.setItem('${COOKIE_NAME}', '${sessionToken}');
+              // Redirect to home page
+              window.location.href = '/';
+            </script>
+          </body>
+        </html>
+      `);
     } catch (error) {
       console.error("[OAuth] Callback failed", error);
       const errorMessage = error instanceof Error ? error.message : String(error);
-      res.status(500).json({ error: "OAuth callback failed", details: errorMessage });
+      res.send(`
+        <html>
+          <body>
+            <h1>Login Failed</h1>
+            <p>${errorMessage}</p>
+            <script>
+              setTimeout(() => {
+                window.location.href = '/';
+              }, 3000);
+            </script>
+          </body>
+        </html>
+      `);
     }
   });
 }
