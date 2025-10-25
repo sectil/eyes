@@ -540,11 +540,11 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
         
         videoRef.current.oncanplay = playHandler;
         
+        // Fallback: proceed to face-detection after 1 second if video not ready
         setTimeout(() => {
-          if (videoRef.current?.readyState === 0) {
-            setStep("face-detection");
-          }
-        }, 3000);
+          console.log("Kamera timeout - face-detection'a geçiliyor");
+          setStep("face-detection");
+        }, 1000);
       }
     } catch (error) {
       console.error("Camera error:", error);
