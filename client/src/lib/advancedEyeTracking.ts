@@ -1,10 +1,9 @@
 /**
- * Advanced Eye Tracking using TensorFlow.js FaceMesh
- * Provides accurate eye pupil detection and calibration
+ * Advanced Eye Tracking using Face-api
+ * Provides accurate eye detection and calibration
  */
 
-import * as tf from "@tensorflow/tfjs";
-import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
+import * as faceapi from '@vladmandic/face-api';
 
 export interface EyeData {
   left: {
@@ -29,7 +28,6 @@ export interface CalibrationPoint {
 }
 
 export class AdvancedEyeTracker {
-  private detector: faceLandmarksDetection.FaceLandmarksDetector | null = null;
   private calibrationPoints: CalibrationPoint[] = [];
   private isInitialized = false;
 
@@ -37,19 +35,15 @@ export class AdvancedEyeTracker {
     if (this.isInitialized) return;
 
     try {
-      // Set TensorFlow backend
-      await tf.setBackend("webgl");
-      await tf.ready();
+      // Load Face-api models from CDN
+      const MODEL_URL = 'https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/';
+      
+      await Promise.all([
+        faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+        faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+        faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
+      ]);
 
-      // Create face detector
-      const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
-      const detectorConfig: faceLandmarksDetection.MediaPipeFaceMeshMediaPipeModelConfig = {
-        runtime: "mediapipe",
-        solutionPath: "https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh",
-        refineLandmarks: true, // Enable iris landmarks
-      };
-
-      this.detector = await faceLandmarksDetection.createDetector(model, detectorConfig);
       this.isInitialized = true;
       console.log("✅ Eye tracker initialized");
     } catch (error) {
@@ -58,94 +52,106 @@ export class AdvancedEyeTracker {
     }
   }
 
-  async detectFace(video: HTMLVideoElement): Promise<faceLandmarksDetection.Face[]> {
-    if (!this.detector) {
+  async detectFace(video: HTMLVideoElement): Promise<boolean> {
+    if (!this.isInitialized) {
       throw new Error("Eye tracker not initialized");
     }
 
-    const faces = await this.detector.estimateFaces(video, {
-      flipHorizontal: false,
-    });
+    try {
+      const detection = await faceapi
+        .detectSingleFace(video, new faceapi.TinyFaceDetectorOptions())
+        .withFaceLandmarks()
+        .withFaceExpressions();
 
-    return faces;
+      return !!detection;
+    } catch (error) {
+      console.error("Face detection error:", error);
+      return false;
+    }
   }
 
   /**
    * Extract eye data from face landmarks
    */
-  extractEyeData(face: faceLandmarksDetection.Face): EyeData | null {
-    if (!face.keypoints) return null;
+  async extractEyeData(video: HTMLVideoElement): Promise<EyeData | null> {
+    if (!this.isInitialized) return null;
 
-    const keypoints = face.keypoints;
+    try {
+      const detection = await faceapi
+        .detectSingleFace(video, new faceapi.TinyFaceDetectorOptions())
+        .withFaceLandmarks()
+        .withFaceExpressions();
 
-    // Left eye indices (MediaPipe)
-    const leftEyeIndices = [33, 133, 160, 159, 158, 157, 173, 144];
-    const leftIrisIndices = [468, 469, 470, 471, 472]; // Iris landmarks
+      if (!detection) return null;
 
-    // Right eye indices
-    const rightEyeIndices = [362, 263, 387, 386, 385, 384, 398, 373];
-    const rightIrisIndices = [473, 474, 475, 476, 477];
+      const landmarks = detection.landmarks;
+      
+      // Eye landmarks (Face-api uses 68-point landmarks)
+      // Left eye: points 36-41
+      // Right eye: points 42-47
+      const leftEyePoints = landmarks.getLeftEye();
+      const rightEyePoints = landmarks.getRightEye();
 
-    // Calculate left eye center
-    const leftEyePoints = leftEyeIndices.map((i) => keypoints[i]);
-    const leftEyeCenter = this.calculateCenter(leftEyePoints);
+      if (leftEyePoints.length === 0 || rightEyePoints.length === 0) {
+        return null;
+      }
 
-    // Calculate right eye center
-    const rightEyePoints = rightEyeIndices.map((i) => keypoints[i]);
-    const rightEyeCenter = this.calculateCenter(rightEyePoints);
+      // Calculate eye centers
+      const leftEyeCenter = this.calculateCenter(leftEyePoints);
+      const rightEyeCenter = this.calculateCenter(rightEyePoints);
 
-    // Get iris positions (pupil approximation)
-    const leftIris = leftIrisIndices.length > 0 ? keypoints[leftIrisIndices[0]] : leftEyeCenter;
-    const rightIris = rightIrisIndices.length > 0 ? keypoints[rightIrisIndices[0]] : rightEyeCenter;
+      // Approximate pupil position (center of eye region)
+      const leftPupil = leftEyePoints[3]; // Center point
+      const rightPupil = rightEyePoints[3]; // Center point
 
-    // Calculate gaze direction with higher sensitivity
-    const leftGaze = {
-      x: (leftIris.x - leftEyeCenter.x) / 5, // Increased sensitivity (was /10)
-      y: (leftIris.y - leftEyeCenter.y) / 5,
-    };
+      // Calculate gaze direction
+      const leftGaze = {
+        x: (leftPupil.x - leftEyeCenter.x) / 5,
+        y: (leftPupil.y - leftEyeCenter.y) / 5,
+      };
 
-    const rightGaze = {
-      x: (rightIris.x - rightEyeCenter.x) / 5, // Increased sensitivity
-      y: (rightIris.y - rightEyeCenter.y) / 5,
-    };
+      const rightGaze = {
+        x: (rightPupil.x - rightEyeCenter.x) / 5,
+        y: (rightPupil.y - rightEyeCenter.y) / 5,
+      };
 
-    // Average both eyes
-    const avgGaze = {
-      x: (leftGaze.x + rightGaze.x) / 2,
-      y: (leftGaze.y + rightGaze.y) / 2,
-    };
+      // Average both eyes
+      const avgGaze = {
+        x: (leftGaze.x + rightGaze.x) / 2,
+        y: (leftGaze.y + rightGaze.y) / 2,
+      };
 
-    return {
-      left: {
-        center: leftEyeCenter,
-        pupil: { x: leftIris.x, y: leftIris.y },
-        iris: { x: leftIris.x, y: leftIris.y },
-      },
-      right: {
-        center: rightEyeCenter,
-        pupil: { x: rightIris.x, y: rightIris.y },
-        iris: { x: rightIris.x, y: rightIris.y },
-      },
-      gaze: avgGaze,
-    };
+      return {
+        left: {
+          center: leftEyeCenter,
+          pupil: { x: leftPupil.x, y: leftPupil.y },
+          iris: { x: leftPupil.x, y: leftPupil.y },
+        },
+        right: {
+          center: rightEyeCenter,
+          pupil: { x: rightPupil.x, y: rightPupil.y },
+          iris: { x: rightPupil.x, y: rightPupil.y },
+        },
+        gaze: avgGaze,
+      };
+    } catch (error) {
+      console.error("Eye data extraction error:", error);
+      return null;
+    }
   }
 
-  private calculateCenter(points: Array<{ x?: number; y?: number; z?: number }>): { x: number; y: number } {
+  private calculateCenter(points: Array<{ x: number; y: number }>): { x: number; y: number } {
     let sumX = 0;
     let sumY = 0;
-    let count = 0;
 
     for (const point of points) {
-      if (point.x !== undefined && point.y !== undefined) {
-        sumX += point.x;
-        sumY += point.y;
-        count++;
-      }
+      sumX += point.x;
+      sumY += point.y;
     }
 
     return {
-      x: count > 0 ? sumX / count : 0,
-      y: count > 0 ? sumY / count : 0,
+      x: sumX / points.length,
+      y: sumY / points.length,
     };
   }
 
@@ -235,10 +241,6 @@ export class AdvancedEyeTracker {
    * Cleanup
    */
   dispose() {
-    if (this.detector) {
-      this.detector.dispose();
-      this.detector = null;
-    }
     this.isInitialized = false;
   }
 }
