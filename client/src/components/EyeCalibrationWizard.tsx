@@ -489,7 +489,7 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   const detectGlasses = (face: any): boolean => {
     // Simple heuristic: check if there are strong edges around eye region
     // This is a placeholder - real implementation would use more sophisticated detection
-    if (!face.keypoints) return false;
+    if (!face || !face.keypoints) return false;
     
     // Check for landmarks around eyes (glasses frames would affect these)
     const leftEyePoints = [33, 160, 158, 133, 153, 144];
