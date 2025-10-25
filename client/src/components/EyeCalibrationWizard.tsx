@@ -149,27 +149,27 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
 
   // Warmup countdown
   useEffect(() => {
-    if (!isModelLoading || warmupStep >= WARMUP_EXERCISES.length) return;
-
+    if (step !== "warmup" || warmupStep >= WARMUP_EXERCISES.length) return;
     const timer = setInterval(() => {
       setWarmupCountdown((prev) => {
         if (prev <= 1) {
           if (warmupStep < WARMUP_EXERCISES.length - 1) {
-            setWarmupStep(prev => prev + 1);
-            setWarmupCountdown(WARMUP_EXERCISES[warmupStep + 1].duration);
+            const nextStep = warmupStep + 1;
+            setWarmupStep(nextStep);
+            return WARMUP_EXERCISES[nextStep].duration;
           } else {
             setIsModelLoading(false);
             setStep("calibration-points");
             toast.success("Kalibrasyon noktalarına geçiliyor...");
+            return 0;
           }
-          return 0;
         }
         return prev - 1;
       });
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isModelLoading, warmupStep]);
+  }, [step, warmupStep]);
 
   // Warmup voice instructions
   useEffect(() => {
