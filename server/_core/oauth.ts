@@ -14,20 +14,35 @@ export function registerOAuthRoutes(app: Express) {
     const code = getQueryParam(req, "code");
     const state = getQueryParam(req, "state");
 
+    console.log("[OAuth] Callback received", {
+      hasCode: !!code,
+      hasState: !!state,
+      protocol: req.protocol,
+      host: req.hostname,
+      userAgent: req.get("user-agent"),
+    });
+
     if (!code || !state) {
+      console.error("[OAuth] Missing code or state", { code, state });
       res.status(400).json({ error: "code and state are required" });
       return;
     }
 
     try {
+      console.log("[OAuth] Exchanging code for token...");
       const tokenResponse = await sdk.exchangeCodeForToken(code, state);
+      console.log("[OAuth] Token received, getting user info...");
+      
       const userInfo = await sdk.getUserInfo(tokenResponse.accessToken);
+      console.log("[OAuth] User info received", { openId: userInfo.openId, email: userInfo.email });
 
       if (!userInfo.openId) {
+        console.error("[OAuth] Missing openId in user info");
         res.status(400).json({ error: "openId missing from user info" });
         return;
       }
 
+      console.log("[OAuth] Upserting user...");
       await db.upsertUser({
         openId: userInfo.openId,
         name: userInfo.name || null,
@@ -36,18 +51,23 @@ export function registerOAuthRoutes(app: Express) {
         lastSignedIn: new Date(),
       });
 
+      console.log("[OAuth] Creating session token...");
       const sessionToken = await sdk.createSessionToken(userInfo.openId, {
         name: userInfo.name || "",
         expiresInMs: ONE_YEAR_MS,
       });
 
       const cookieOptions = getSessionCookieOptions(req);
+      console.log("[OAuth] Setting cookie with options:", cookieOptions);
       res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
 
+      console.log("[OAuth] Redirecting to /");
       res.redirect(302, "/");
     } catch (error) {
       console.error("[OAuth] Callback failed", error);
-      res.status(500).json({ error: "OAuth callback failed" });
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      res.status(500).json({ error: "OAuth callback failed", details: errorMessage });
     }
   });
 }
+
