@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -45,6 +45,31 @@ export default function Onboarding() {
     usesGlasses: "0",
     symptoms: [],
   });
+  
+  // Fetch existing profile
+  const { data: existingProfile } = trpc.profile.get.useQuery();
+  
+  // Auto-fill profile data when it's loaded
+  useEffect(() => {
+    if (existingProfile) {
+      setProfileData({
+        age: existingProfile.age?.toString() || "",
+        gender: existingProfile.gender || "",
+        occupation: existingProfile.occupation || "",
+        dailyScreenTime: existingProfile.dailyScreenTime?.toString() || "",
+        usesGlasses: existingProfile.usesGlasses?.toString() || "0",
+        symptoms: [], // TODO: Load symptoms from profile if stored
+      });
+      setSavedProfile({
+        age: existingProfile.age?.toString() || "",
+        gender: existingProfile.gender || "",
+        occupation: existingProfile.occupation || "",
+        dailyScreenTime: existingProfile.dailyScreenTime?.toString() || "",
+        usesGlasses: existingProfile.usesGlasses?.toString() || "0",
+        symptoms: [],
+      });
+    }
+  }, [existingProfile]);
   const [aiAnalysis, setAiAnalysis] = useState<any>(null);
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [currentTestIndex, setCurrentTestIndex] = useState(0);
