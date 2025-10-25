@@ -1,12 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Eye, Camera, CheckCircle2, AlertCircle, X, Volume2, VolumeX, Loader2 } from "lucide-react";
+import { Eye, Camera, CheckCircle2, AlertCircle, X, Volume2, VolumeX, Loader2, RefreshCcw } from "lucide-react";
 import { toast } from "sonner";
 import { getEyeTracker, type EyeData } from "@/lib/advancedEyeTracking";
-import { initWebcam, stopWebcam } from "@/lib/eyeTracking";
-import AnimatedEyeOverlay from "@/components/AnimatedEyeOverlay";
-import { speak, playTickSound, playSuccessSound, setAudioEnabled, isAudioEnabled, WARMUP_VOICE_INSTRUCTIONS } from "@/lib/audioHelper";
+import { speak, playTickSound, playSuccessSound, setAudioEnabled, isAudioEnabled } from "@/lib/audioHelper";
 import { useRef, useState, useEffect } from "react";
 
 interface CalibrationWizardProps {
@@ -14,7 +12,7 @@ interface CalibrationWizardProps {
   onCancel: () => void;
 }
 
-type CalibrationStep = "setup" | "face-detection" | "eye-detection" | "calibration" | "complete";
+type CalibrationStep = "setup" | "face-detection" | "eye-detection" | "warmup" | "calibration-points" | "validation" | "complete";
 
 // Helper function to calculate Eye Aspect Ratio (EAR)
 function calculateEyeAspectRatio(
@@ -45,38 +43,49 @@ function calculateEyeAspectRatio(
   return (vertical1 + vertical2) / (2 * horizontal);
 }
 
-export default function SnakeGameCalibration({ onComplete, onCancel }: CalibrationWizardProps) {
+export default function EyeCalibrationWizard({ onComplete, onCancel }: CalibrationWizardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const trackerRef = useRef<any>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const lastEyeDataRef = useRef<EyeData | null>(null);
+  const calibrationIntervalRef = useRef<number | null>(null);
 
   const [step, setStep] = useState<CalibrationStep>("setup");
   const [cameraReady, setCameraReady] = useState(false);
   const [faceDetected, setFaceDetected] = useState(false);
   const [eyesDetected, setEyesDetected] = useState(false);
-  const [countdown, setCountdown] = useState(3);
   const [warmupStep, setWarmupStep] = useState(0);
   const [warmupCountdown, setWarmupCountdown] = useState(5);
   const [isModelLoading, setIsModelLoading] = useState(false);
   
-  // Snake game states
-  const [snakeGameActive, setSnakeGameActive] = useState(false);
-  const [snakeBody, setSnakeBody] = useState<Array<{x: number, y: number}>>([{x: 5, y: 5}]);
-  const [food, setFood] = useState<{x: number, y: number}>({x: 10, y: 10});
-  const [snakeDirection, setSnakeDirection] = useState<{x: number, y: number}>({x: 1, y: 0});
-  const [nextDirection, setNextDirection] = useState<{x: number, y: number}>({x: 1, y: 0});
-  const [snakeScore, setSnakeScore] = useState(0);
-  const [gameOver, setGameOver] = useState(false);
+  // Calibration states
   const [audioEnabled, setAudioEnabledState] = useState(true);
-  const [gaze, setGaze] = useState<{x: number, y: number}>({x: 10, y: 10});
   const [blinkDetected, setBlinkDetected] = useState(false);
   const [blinkCount, setBlinkCount] = useState(0);
-  const GRID_SIZE = 20;
-  const GAME_WIDTH = 400;
-  const GAME_HEIGHT = 400;
-  const CELL_SIZE = GAME_WIDTH / GRID_SIZE;
+  const [currentCalibrationPoint, setCurrentCalibrationPoint] = useState(0);
+  const [pointCountdown, setPointCountdown] = useState(3);
+  const [calibrationData, setCalibrationData] = useState<Array<{
+    point: { x: number; y: number };
+    gazeData: Array<{ x: number; y: number; pupilSize: number; timestamp: number }>;
+    blinkCount: number;
+  }>>([]);
+  const [calibrationSuccess, setCalibrationSuccess] = useState<boolean | null>(null);
+  const [validationScore, setValidationScore] = useState(0);
+  
+  // Calibration points (9-point grid)
+  const CALIBRATION_POINTS = [
+    { x: 10, y: 10 },   // Top-left
+    { x: 50, y: 10 },   // Top-center
+    { x: 90, y: 10 },   // Top-right
+    { x: 10, y: 50 },   // Middle-left
+    { x: 50, y: 50 },   // Center
+    { x: 90, y: 50 },   // Middle-right
+    { x: 10, y: 90 },   // Bottom-left
+    { x: 50, y: 90 },   // Bottom-center
+    { x: 90, y: 90 },   // Bottom-right
+  ];
+  
+  const POINT_DURATION = 3; // 3 seconds per point
 
   const WARMUP_EXERCISES = [
     { text: "Sol gözünüzü kırpın 👁️", duration: 5, icon: "👈" },
@@ -101,111 +110,20 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
     setup();
   }, []);
 
-  // Snake game loop
-  useEffect(() => {
-    if (!snakeGameActive || gameOver) return;
-
-    const gameLoop = setInterval(() => {
-      setSnakeBody(prevBody => {
-        const head = prevBody[0];
-        const newHead = {
-          x: (head.x + snakeDirection.x + GRID_SIZE) % GRID_SIZE,
-          y: (head.y + snakeDirection.y + GRID_SIZE) % GRID_SIZE,
-        };
-
-        // Check if hit food
-        if (newHead.x === food.x && newHead.y === food.y) {
-          playSuccessSound();
-          setSnakeScore(prev => prev + 10);
-          setFood({
-            x: Math.floor(Math.random() * GRID_SIZE),
-            y: Math.floor(Math.random() * GRID_SIZE),
-          });
-          return [newHead, ...prevBody];
-        }
-
-        // Check if hit self
-        if (prevBody.some(segment => segment.x === newHead.x && segment.y === newHead.y)) {
-          setGameOver(true);
-          toast.error("Oyun bitti! Yılan kendisine çarptı");
-          return prevBody;
-        }
-
-        return [newHead, ...prevBody.slice(0, -1)];
-      });
-    }, 200); // Game speed
-
-    return () => clearInterval(gameLoop);
-  }, [snakeGameActive, snakeDirection, food, gameOver]);
-
-  // Eye tracking for snake direction
-  useEffect(() => {
-    if (!snakeGameActive || !videoRef.current || !trackerRef.current) return;
-
-    let trackingFrameId: number;
-
-    const trackEyes = async () => {
-      if (!videoRef.current || !trackerRef.current) return;
-
-      try {
-        const faces = await trackerRef.current.detectFace(videoRef.current);
-        if (faces.length > 0) {
-          const eyes = trackerRef.current.extractEyeData(faces[0]);
-          if (eyes) {
-            lastEyeDataRef.current = eyes;
-            const calibratedGaze = trackerRef.current.calibrateGaze(eyes.gaze);
-
-            // Convert gaze to grid coordinates
-            const gridX = Math.floor(((calibratedGaze.x + 1) / 2) * GRID_SIZE);
-            const gridY = Math.floor(((calibratedGaze.y + 1) / 2) * GRID_SIZE);
-
-            setGaze({ x: gridX, y: gridY });
-
-            // Determine direction based on gaze
-            const head = snakeBody[0];
-            const dx = gridX - head.x;
-            const dy = gridY - head.y;
-
-            if (Math.abs(dx) > Math.abs(dy)) {
-              if (dx > 0 && snakeDirection.x === 0) setNextDirection({ x: 1, y: 0 });
-              if (dx < 0 && snakeDirection.x === 0) setNextDirection({ x: -1, y: 0 });
-            } else {
-              if (dy > 0 && snakeDirection.y === 0) setNextDirection({ x: 0, y: 1 });
-              if (dy < 0 && snakeDirection.y === 0) setNextDirection({ x: 0, y: -1 });
-            }
-          }
-        }
-      } catch (error) {
-        console.error("Eye tracking error:", error);
-      }
-
-      trackingFrameId = requestAnimationFrame(trackEyes);
-    };
-
-    trackEyes();
-
-    return () => cancelAnimationFrame(trackingFrameId);
-  }, [snakeGameActive, snakeBody]);
-
-  // Update direction
-  useEffect(() => {
-    if (!snakeGameActive) return;
-    setSnakeDirection(nextDirection);
-  }, [nextDirection, snakeGameActive]);
-
   // Warmup countdown
   useEffect(() => {
     if (!isModelLoading || warmupStep >= WARMUP_EXERCISES.length) return;
 
     const timer = setInterval(() => {
-      setWarmupCountdown(prev => {
+      setWarmupCountdown((prev) => {
         if (prev <= 1) {
           if (warmupStep < WARMUP_EXERCISES.length - 1) {
             setWarmupStep(prev => prev + 1);
             setWarmupCountdown(WARMUP_EXERCISES[warmupStep + 1].duration);
           } else {
             setIsModelLoading(false);
-            setStep("face-detection");
+            setStep("calibration-points");
+            toast.success("Kalibrasyon noktalarına geçiliyor...");
           }
           return 0;
         }
@@ -232,7 +150,7 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
 
     let detectionFrameId: number;
     let previousEAR = 1.0;
-    const EAR_THRESHOLD = 0.2; // Threshold for detecting eye closure
+    const EAR_THRESHOLD = 0.2;
 
     const detectBlinks = async () => {
       if (!videoRef.current || !trackerRef.current) return;
@@ -244,7 +162,6 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
           const rightEAR = calculateEyeAspectRatio(faces[0].keypoints, 'right');
           const avgEAR = (leftEAR + rightEAR) / 2;
 
-          // Detect blink: EAR drops below threshold then rises above
           if (previousEAR > EAR_THRESHOLD && avgEAR < EAR_THRESHOLD) {
             setBlinkDetected(true);
             setBlinkCount(prev => prev + 1);
@@ -315,7 +232,7 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
             eyesDetectedCount++;
             setEyesDetected(true);
             
-            // Auto-start warmup after 2 seconds of stable eye detection
+            // Auto-start warmup after 1 second of stable eye detection
             if (eyesDetectedCount > 30 && !isModelLoading) {
               setTimeout(() => {
                 handleStartWarmup();
@@ -339,6 +256,104 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
     return () => cancelAnimationFrame(detectionFrameId);
   }, [step, isModelLoading]);
 
+  // Calibration point countdown and data collection
+  useEffect(() => {
+    if (step !== "calibration-points") return;
+
+    const timer = setInterval(() => {
+      setPointCountdown((prev) => {
+        if (prev <= 1) {
+          // Move to next point
+          if (currentCalibrationPoint < CALIBRATION_POINTS.length - 1) {
+            setCurrentCalibrationPoint(prev => prev + 1);
+            setPointCountdown(POINT_DURATION);
+            playTickSound();
+          } else {
+            // All points completed
+            setStep("validation");
+            validateCalibration();
+          }
+          return POINT_DURATION;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [step, currentCalibrationPoint]);
+
+  // Collect gaze data during calibration
+  useEffect(() => {
+    if (step !== "calibration-points" || !videoRef.current || !trackerRef.current) return;
+
+    let collectionFrameId: number;
+    const currentPointData: Array<{ x: number; y: number; pupilSize: number; timestamp: number }> = [];
+
+    const collectGazeData = async () => {
+      if (!videoRef.current || !trackerRef.current) return;
+
+      try {
+        const faces = await trackerRef.current.detectFace(videoRef.current);
+        if (faces.length > 0) {
+          const eyes = trackerRef.current.extractEyeData(faces[0]);
+          if (eyes) {
+            currentPointData.push({
+              x: eyes.gaze.x,
+              y: eyes.gaze.y,
+              pupilSize: eyes.pupilSize || 0,
+              timestamp: Date.now(),
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Gaze data collection error:", error);
+      }
+
+      collectionFrameId = requestAnimationFrame(collectGazeData);
+    };
+
+    collectGazeData();
+
+    return () => {
+      cancelAnimationFrame(collectionFrameId);
+      // Save collected data for current point
+      if (currentPointData.length > 0) {
+        setCalibrationData(prev => [...prev, {
+          point: CALIBRATION_POINTS[currentCalibrationPoint],
+          gazeData: currentPointData,
+          blinkCount: blinkCount,
+        }]);
+      }
+    };
+  }, [step, currentCalibrationPoint]);
+
+  const handleStartCalibration = async () => {
+    if (!videoRef.current || !trackerRef.current) {
+      toast.error("Kamera hazır değil");
+      return;
+    }
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "user", width: 1280, height: 720 }
+      });
+      
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        streamRef.current = stream;
+        
+        videoRef.current.onloadedmetadata = () => {
+          videoRef.current?.play();
+          setStep("face-detection");
+          toast.success("Kamera açıldı");
+        };
+      }
+    } catch (error) {
+      console.error("Camera error:", error);
+      toast.error("Kamera erişimi reddedildi");
+    }
+  };
+
   const handleStartWarmup = () => {
     setIsModelLoading(true);
     setWarmupStep(0);
@@ -348,65 +363,101 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
     }
   };
 
-  const handleStartCalibration = async () => {
-    try {
-      if (!videoRef.current) return;
-      setIsModelLoading(true);
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
-      videoRef.current.srcObject = stream;
-      streamRef.current = stream;
-      
-      // Wait for video to be ready
-      videoRef.current.onloadedmetadata = () => {
-        videoRef.current?.play();
-        setStep("face-detection");
-        setIsModelLoading(false);
-        toast.success("🎥 Kamera açıldı!");
-      };
-    } catch (error) {
-      console.error("Camera error:", error);
-      setIsModelLoading(false);
-      toast.error("Kamera erişimi başarısız. Lütfen tarayıcı izinlerini kontrol edin.");
+  const validateCalibration = () => {
+    // Simple validation: check if we have enough data points
+    const validPoints = calibrationData.filter(d => d.gazeData.length > 10);
+    const score = Math.round((validPoints.length / CALIBRATION_POINTS.length) * 100);
+    
+    setValidationScore(score);
+    setCalibrationSuccess(score >= 70); // 70% threshold
+    
+    if (score >= 70) {
+      playSuccessSound();
+      toast.success("Kalibrasyon başarılı!");
+      if (audioEnabled) {
+        speak("Kalibrasyon başarıyla tamamlandı");
+      }
+    } else {
+      toast.error("Kalibrasyon başarısız. Lütfen tekrar deneyin.");
+      if (audioEnabled) {
+        speak("Kalibrasyon başarısız. Lütfen tekrar deneyin.");
+      }
     }
   };
 
-  const handleStartSnakeGame = () => {
-    setSnakeGameActive(true);
-    setSnakeBody([{ x: 5, y: 5 }]);
-    setFood({ x: 10, y: 10 });
-    setSnakeScore(0);
-    setGameOver(false);
-    setSnakeDirection({ x: 1, y: 0 });
-    setNextDirection({ x: 1, y: 0 });
+  const handleRestartCalibration = () => {
+    setStep("setup");
+    setCurrentCalibrationPoint(0);
+    setPointCountdown(POINT_DURATION);
+    setCalibrationData([]);
+    setCalibrationSuccess(null);
+    setValidationScore(0);
+    setBlinkCount(0);
+    setWarmupStep(0);
+    setIsModelLoading(false);
+    toast.info("Kalibrasyon yeniden başlatılıyor...");
   };
 
   const handleCompleteCalibration = () => {
+    // Clean up
     if (streamRef.current) {
       streamRef.current.getTracks().forEach(track => track.stop());
     }
     onComplete();
   };
 
+  const toggleAudio = () => {
+    const newState = !audioEnabled;
+    setAudioEnabledState(newState);
+    setAudioEnabled(newState);
+  };
+
+  const getProgress = () => {
+    if (step === "setup") return 10;
+    if (step === "face-detection") return 25;
+    if (step === "eye-detection") return 40;
+    if (step === "warmup") return 55;
+    if (step === "calibration-points") {
+      return 55 + (currentCalibrationPoint / CALIBRATION_POINTS.length) * 30;
+    }
+    if (step === "validation") return 90;
+    return 100;
+  };
+
   return (
-    <div className="w-full max-w-2xl mx-auto">
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <div>
-            <CardTitle>Göz Kalibrasyonu</CardTitle>
-            <CardDescription>Yılan oyunu ile göz takibi kalibrasyonu</CardDescription>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-gray-900 dark:to-gray-800">
+      <Card className="w-full max-w-2xl">
+        <CardHeader className="relative">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Eye className="h-6 w-6 text-primary" />
+              <CardTitle>Göz Kalibrasyonu</CardTitle>
+            </div>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={toggleAudio}
+              >
+                {audioEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={onCancel}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setAudioEnabledState(!audioEnabled)}
-          >
-            {audioEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
-          </Button>
+          <CardDescription>
+            AI'nin gözlerinizi tanıması ve öğrenmesi için kalibrasyon yapılıyor
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <Progress value={(step === "setup" ? 25 : step === "face-detection" ? 50 : step === "eye-detection" ? 75 : 100)} />
+          <Progress value={getProgress()} />
           
-          {/* Hidden video element for camera initialization */}
+          {/* Hidden video element for camera */}
           <video
             ref={videoRef}
             autoPlay
@@ -414,38 +465,52 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
             className={step === "setup" ? "hidden" : "w-full rounded-lg bg-black/10"}
           />
 
+          {/* Setup Step */}
           {step === "setup" && (
             <>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 p-4 bg-accent/50 rounded-lg">
                   <Camera className="h-5 w-5 text-primary" />
                   <div>
-                    <p className="font-medium">Kamerayı Etkinleştir</p>
-                    <p className="text-sm text-muted-foreground">Başlamak için kamera erişimi gereklidir</p>
+                    <p className="font-medium">Kamera Erişimi</p>
+                    <p className="text-sm text-muted-foreground">
+                      Göz takibi için kameranıza erişim gerekiyor
+                    </p>
                   </div>
                 </div>
-                <div className="flex gap-2">
-                  <Button onClick={handleStartCalibration} className="flex-1" disabled={isModelLoading}>
-                    {isModelLoading ? (
-                      <>
-                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                        Kamera açılıyor...
-                      </>
-                    ) : (
-                      <>
-                        <Camera className="h-4 w-4 mr-2" />
-                        Kamerayı Aç
-                      </>
-                    )}
-                  </Button>
-                  <Button onClick={onCancel} variant="outline">
-                    <X className="h-4 w-4" /> İptal
-                  </Button>
+
+                <div className="space-y-2 text-sm">
+                  <p className="font-semibold">Kalibrasyon Adımları:</p>
+                  <ul className="space-y-1 ml-4 list-disc text-muted-foreground">
+                    <li>Yüz ve göz algılama</li>
+                    <li>Isınma egzersizleri (göz kırpma)</li>
+                    <li>9 noktaya bakarak kalibrasyon</li>
+                    <li>Doğrulama ve sonuç</li>
+                  </ul>
                 </div>
+
+                <Button 
+                  onClick={handleStartCalibration} 
+                  disabled={!cameraReady}
+                  className="w-full gap-2"
+                >
+                  {!cameraReady ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Hazırlanıyor...
+                    </>
+                  ) : (
+                    <>
+                      <Camera className="h-4 w-4" />
+                      Kamerayı Aç
+                    </>
+                  )}
+                </Button>
               </div>
             </>
           )}
 
+          {/* Face Detection Step */}
           {step === "face-detection" && (
             <>
               <div className="flex items-center gap-3 p-4 bg-accent/50 rounded-lg">
@@ -464,129 +529,122 @@ export default function SnakeGameCalibration({ onComplete, onCancel }: Calibrati
             </>
           )}
 
+          {/* Eye Detection Step */}
           {step === "eye-detection" && (
             <>
-              {!snakeGameActive ? (
-                <>
-                  <div className="flex items-center gap-3 p-4 bg-accent/50 rounded-lg">
-                    {eyesDetected ? (
-                      <CheckCircle2 className="h-5 w-5 text-green-600" />
-                    ) : (
-                      <AlertCircle className="h-5 w-5 text-yellow-600" />
-                    )}
-                    <div>
-                      <p className="font-medium">{eyesDetected ? "Gözler Algılandı ✓" : "Gözlerinizi Açık Tutun"}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {eyesDetected ? "Yılan oyunu başlatmaya hazır" : "Lütfen gözlerinizi açık tutun"}
-                      </p>
-                    </div>
-                  </div>
-                  {eyesDetected && (
-                    <>
-                      {!isModelLoading ? (
-                        <Button onClick={handleStartWarmup} className="w-full">
-                          Isınma Egzersizlerine Başla
-                        </Button>
-                      ) : (
-                        <div className="space-y-4">
-                          <div className="text-center">
-                            <div className="text-4xl mb-2">{WARMUP_EXERCISES[warmupStep].icon}</div>
-                            <p className="font-medium">{WARMUP_EXERCISES[warmupStep].text}</p>
-                            <p className="text-2xl font-bold text-primary mt-2">{warmupCountdown}</p>
-                            
-                            {/* Blink indicator */}
-                            <div className="mt-4 flex items-center justify-center gap-2">
-                              <div className={`w-3 h-3 rounded-full transition-all ${
-                                blinkDetected ? 'bg-green-500 scale-125' : 'bg-gray-300'
-                              }`} />
-                              <span className="text-sm text-muted-foreground">
-                                Göz kırpma: {blinkCount}
-                              </span>
-                            </div>
-                          </div>
-                          <Progress value={((warmupStep + 1) / WARMUP_EXERCISES.length) * 100} />
-                        </div>
-                      )}
-                    </>
-                  )}
-                </>
-              ) : (
-                <>
-                  {/* Snake Game */}
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-semibold">Yılan Oyunu</h3>
-                      <p className="text-lg font-bold text-primary">Puan: {snakeScore}</p>
-                    </div>
+              <div className="flex items-center gap-3 p-4 bg-accent/50 rounded-lg">
+                {eyesDetected ? (
+                  <CheckCircle2 className="h-5 w-5 text-green-600" />
+                ) : (
+                  <AlertCircle className="h-5 w-5 text-yellow-600" />
+                )}
+                <div>
+                  <p className="font-medium">{eyesDetected ? "Gözler Algılandı ✓" : "Gözlerinizi Açık Tutun"}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {eyesDetected ? "Isınma egzersizlerine geçiliyor..." : "Lütfen gözlerinizi açık tutun"}
+                  </p>
+                </div>
+              </div>
+              {eyesDetected && !isModelLoading && (
+                <Button onClick={handleStartWarmup} className="w-full">
+                  Isınma Egzersizlerine Başla
+                </Button>
+              )}
+              {isModelLoading && (
+                <div className="space-y-4">
+                  <div className="text-center">
+                    <div className="text-4xl mb-2">{WARMUP_EXERCISES[warmupStep].icon}</div>
+                    <p className="font-medium">{WARMUP_EXERCISES[warmupStep].text}</p>
+                    <p className="text-2xl font-bold text-primary mt-2">{warmupCountdown}</p>
                     
-                    <div
-                      className="relative mx-auto bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950 rounded-lg border-2 border-primary/30"
-                      style={{ width: GAME_WIDTH, height: GAME_HEIGHT }}
-                    >
-                      {/* Snake */}
-                      {snakeBody.map((segment, i) => (
-                        <div
-                          key={i}
-                          className={`absolute transition-all duration-75 rounded-sm ${
-                            i === 0 ? 'bg-green-600 shadow-lg' : 'bg-green-500'
-                          }`}
-                          style={{
-                            left: segment.x * CELL_SIZE,
-                            top: segment.y * CELL_SIZE,
-                            width: CELL_SIZE - 2,
-                            height: CELL_SIZE - 2,
-                          }}
-                        />
-                      ))}
-
-                      {/* Food */}
-                      <div
-                        className="absolute bg-red-500 rounded-full animate-pulse"
-                        style={{
-                          left: food.x * CELL_SIZE + CELL_SIZE / 4,
-                          top: food.y * CELL_SIZE + CELL_SIZE / 4,
-                          width: CELL_SIZE / 2,
-                          height: CELL_SIZE / 2,
-                        }}
-                      />
-
-                      {/* Gaze indicator */}
-                      <div
-                        className="absolute w-2 h-2 bg-blue-500 rounded-full opacity-50"
-                        style={{
-                          left: gaze.x * CELL_SIZE + CELL_SIZE / 2 - 1,
-                          top: gaze.y * CELL_SIZE + CELL_SIZE / 2 - 1,
-                        }}
-                      />
+                    {/* Blink indicator */}
+                    <div className="mt-4 flex items-center justify-center gap-2">
+                      <div className={`w-3 h-3 rounded-full transition-all ${
+                        blinkDetected ? 'bg-green-500 scale-125' : 'bg-gray-300'
+                      }`} />
+                      <span className="text-sm text-muted-foreground">
+                        Göz kırpma: {blinkCount}
+                      </span>
                     </div>
-
-                    {gameOver && (
-                      <div className="p-4 bg-red-50 dark:bg-red-950 rounded-lg border border-red-200">
-                        <p className="font-semibold text-red-900 dark:text-red-100">Oyun Bitti!</p>
-                        <p className="text-sm text-red-800 dark:text-red-200 mt-1">Final Puan: {snakeScore}</p>
-                      </div>
-                    )}
-
-                    {gameOver && (
-                      <Button
-                        onClick={handleCompleteCalibration}
-                        className="w-full"
-                      >
-                        Testlere Devam Et
-                      </Button>
-                    )}
-                    {!gameOver && (
-                      <Button
-                        onClick={handleCompleteCalibration}
-                        className="w-full"
-                      >
-                        Kalibrasyonu Tamamla
-                      </Button>
-                    )}
                   </div>
-                </>
+                  <Progress value={((warmupStep + 1) / WARMUP_EXERCISES.length) * 100} />
+                </div>
               )}
             </>
+          )}
+
+          {/* Calibration Points Step */}
+          {step === "calibration-points" && (
+            <div className="space-y-4">
+              <div className="text-center">
+                <p className="font-semibold text-lg mb-2">
+                  Nokta {currentCalibrationPoint + 1} / {CALIBRATION_POINTS.length}
+                </p>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Ekrandaki noktaya bakın ve gözlerinizi sabit tutun
+                </p>
+                <p className="text-3xl font-bold text-primary">{pointCountdown}</p>
+              </div>
+
+              {/* Calibration point display */}
+              <div className="relative w-full h-96 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
+                <div
+                  className="absolute w-4 h-4 bg-red-500 rounded-full animate-pulse shadow-lg"
+                  style={{
+                    left: `${CALIBRATION_POINTS[currentCalibrationPoint].x}%`,
+                    top: `${CALIBRATION_POINTS[currentCalibrationPoint].y}%`,
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                >
+                  <div className="absolute inset-0 bg-red-500 rounded-full animate-ping opacity-75" />
+                </div>
+              </div>
+
+              <Progress value={(currentCalibrationPoint / CALIBRATION_POINTS.length) * 100} />
+            </div>
+          )}
+
+          {/* Validation Step */}
+          {step === "validation" && (
+            <div className="space-y-4 text-center">
+              <Loader2 className="h-12 w-12 animate-spin text-primary mx-auto" />
+              <p className="font-semibold">Kalibrasyon Doğrulanıyor...</p>
+              <p className="text-sm text-muted-foreground">
+                Toplanan veriler analiz ediliyor
+              </p>
+              {calibrationSuccess !== null && (
+                <div className={`p-4 rounded-lg ${
+                  calibrationSuccess 
+                    ? 'bg-green-50 dark:bg-green-950 border border-green-200' 
+                    : 'bg-red-50 dark:bg-red-950 border border-red-200'
+                }`}>
+                  <p className={`font-semibold ${
+                    calibrationSuccess ? 'text-green-900 dark:text-green-100' : 'text-red-900 dark:text-red-100'
+                  }`}>
+                    {calibrationSuccess ? '✓ Kalibrasyon Başarılı!' : '✗ Kalibrasyon Başarısız'}
+                  </p>
+                  <p className={`text-sm mt-1 ${
+                    calibrationSuccess ? 'text-green-800 dark:text-green-200' : 'text-red-800 dark:text-red-200'
+                  }`}>
+                    Başarı Skoru: {validationScore}%
+                  </p>
+                </div>
+              )}
+
+              <div className="flex gap-2">
+                {!calibrationSuccess && calibrationSuccess !== null && (
+                  <Button onClick={handleRestartCalibration} variant="outline" className="flex-1 gap-2">
+                    <RefreshCcw className="h-4 w-4" />
+                    Tekrar Dene
+                  </Button>
+                )}
+                {calibrationSuccess && (
+                  <Button onClick={handleCompleteCalibration} className="flex-1">
+                    Tamamla
+                  </Button>
+                )}
+              </div>
+            </div>
           )}
         </CardContent>
       </Card>

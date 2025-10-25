@@ -106,6 +106,8 @@ export default function Onboarding() {
   const upsertProfile = trpc.profile.upsert.useMutation({
     onSuccess: () => {
       toast.success("Profiliniz kaydedildi!");
+      // Move to AI analysis step
+      setStep("ai-analysis");
     },
   });
 
