@@ -10,16 +10,19 @@ export interface EyeData {
     center: { x: number; y: number };
     pupil: { x: number; y: number };
     iris: { x: number; y: number };
+    ear: number; // Eye Aspect Ratio (0-1, lower = more closed)
   };
   right: {
     center: { x: number; y: number };
     pupil: { x: number; y: number };
     iris: { x: number; y: number };
+    ear: number; // Eye Aspect Ratio (0-1, lower = more closed)
   };
   gaze: {
     x: number; // -1 (left) to 1 (right)
     y: number; // -1 (up) to 1 (down)
   };
+  pupilSize?: number;
 }
 
 export interface CalibrationPoint {
@@ -115,24 +118,36 @@ export class AdvancedEyeTracker {
         y: (rightPupil.y - rightEyeCenter.y) / 5,
       };
 
+      // Calculate Eye Aspect Ratio (EAR) for blink detection
+      const leftEAR = this.calculateEAR(leftEyePoints);
+      const rightEAR = this.calculateEAR(rightEyePoints);
+
       // Average both eyes
       const avgGaze = {
         x: (leftGaze.x + rightGaze.x) / 2,
         y: (leftGaze.y + rightGaze.y) / 2,
       };
 
+      // Estimate pupil size from eye width
+      const leftEyeWidth = this.calculateDistance(leftEyePoints[0], leftEyePoints[3]);
+      const rightEyeWidth = this.calculateDistance(rightEyePoints[0], rightEyePoints[3]);
+      const avgPupilSize = (leftEyeWidth + rightEyeWidth) / 2;
+
       return {
         left: {
           center: leftEyeCenter,
           pupil: { x: leftPupil.x, y: leftPupil.y },
           iris: { x: leftPupil.x, y: leftPupil.y },
+          ear: leftEAR,
         },
         right: {
           center: rightEyeCenter,
           pupil: { x: rightPupil.x, y: rightPupil.y },
           iris: { x: rightPupil.x, y: rightPupil.y },
+          ear: rightEAR,
         },
         gaze: avgGaze,
+        pupilSize: avgPupilSize,
       };
     } catch (error) {
       console.error("Eye data extraction error:", error);
@@ -153,6 +168,34 @@ export class AdvancedEyeTracker {
       x: sumX / points.length,
       y: sumY / points.length,
     };
+  }
+
+  /**
+   * Calculate distance between two points
+   */
+  private calculateDistance(p1: { x: number; y: number }, p2: { x: number; y: number }): number {
+    return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+  }
+
+  /**
+   * Calculate Eye Aspect Ratio (EAR) for blink detection
+   * EAR = (||p2 - p6|| + ||p3 - p5||) / (2 * ||p1 - p4||)
+   * Where p1-p6 are eye landmarks in order
+   */
+  private calculateEAR(eyePoints: Array<{ x: number; y: number }>): number {
+    if (eyePoints.length < 6) return 0.3; // Default open eye value
+
+    // Vertical eye distances
+    const vertical1 = this.calculateDistance(eyePoints[1], eyePoints[5]);
+    const vertical2 = this.calculateDistance(eyePoints[2], eyePoints[4]);
+
+    // Horizontal eye distance
+    const horizontal = this.calculateDistance(eyePoints[0], eyePoints[3]);
+
+    // EAR formula
+    const ear = (vertical1 + vertical2) / (2.0 * horizontal);
+
+    return ear;
   }
 
   /**

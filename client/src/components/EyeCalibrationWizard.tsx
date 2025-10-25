@@ -202,10 +202,10 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
       try {
         const eyes = await trackerRef.current.extractEyeData(videoRef.current);
         if (eyes) {
-          // Simplified blink detection using eye data
-          // In a real implementation, we would calculate EAR from eye landmarks
-          const avgEAR = Math.random() * 0.5; // Placeholder for EAR
+          // Calculate average EAR from both eyes
+          const avgEAR = (eyes.left.ear + eyes.right.ear) / 2;
 
+          // Detect blink: EAR drops below threshold
           if (previousEAR > EAR_THRESHOLD && avgEAR < EAR_THRESHOLD) {
             setBlinkDetected(true);
             setBlinkCount(prev => prev + 1);
