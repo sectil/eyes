@@ -378,7 +378,8 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
             console.log(`📊 Gaze data collected: Point ${currentCalibrationPoint}, Total: ${currentPointData.length}`);
             
             // Analyze eye health in real-time
-            analyzeEyeHealth(null, eyes);
+            const faceData = eyes.faceLandmarks ? { keypoints: eyes.faceLandmarks } : null;
+            analyzeEyeHealth(faceData, eyes);
           } else {
             console.warn('⚠️ Eyes not detected or gaze data missing');
           }
@@ -491,18 +492,60 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     }
   };
   
-  // Detect glasses using face landmarks
+  // Detect glasses using face landmarks and eye analysis
   const detectGlasses = (face: any): boolean => {
-    // Simple heuristic: check if there are strong edges around eye region
-    // This is a placeholder - real implementation would use more sophisticated detection
     if (!face || !face.keypoints) return false;
     
-    // Check for landmarks around eyes (glasses frames would affect these)
-    const leftEyePoints = [33, 160, 158, 133, 153, 144];
-    const rightEyePoints = [362, 387, 385, 263, 380, 373];
+    try {
+      // Get eye landmarks from face
+      const leftEye = face.keypoints.getLeftEye();
+      const rightEye = face.keypoints.getRightEye();
+      
+      if (!leftEye || !rightEye || leftEye.length === 0 || rightEye.length === 0) {
+        return false;
+      }
+      
+      // Calculate eye aspect ratio for both eyes
+      const leftEAR = calculateEyeAspectRatio(leftEye);
+      const rightEAR = calculateEyeAspectRatio(rightEye);
+      
+      // Glasses detection heuristics:
+      // 1. EAR values are more consistent (less variation) with glasses
+      // 2. Eye region appears larger due to lens magnification
+      // 3. Bridge of nose landmarks are affected by glasses frame
+      
+      const earDifference = Math.abs(leftEAR - rightEAR);
+      
+      // Calculate eye widths
+      const leftEyeWidth = calculateDistance(leftEye[0], leftEye[3]);
+      const rightEyeWidth = calculateDistance(rightEye[0], rightEye[3]);
+      const avgEyeWidth = (leftEyeWidth + rightEyeWidth) / 2;
+      
+      // Heuristic: If EAR difference is very small and eye width is larger than normal
+      // it might indicate glasses (magnification effect)
+      const hasGlasses = earDifference < 0.02 && avgEyeWidth > 20;
+      
+      return hasGlasses;
+    } catch (error) {
+      console.error('Glasses detection error:', error);
+      return false;
+    }
+  };
+  
+  // Helper function to calculate Eye Aspect Ratio
+  const calculateEyeAspectRatio = (eyePoints: Array<{ x: number; y: number }>): number => {
+    if (eyePoints.length < 6) return 0.3;
     
-    // Placeholder logic - in real implementation, analyze edge patterns
-    return Math.random() > 0.5; // TODO: Implement proper glasses detection
+    const vertical1 = calculateDistance(eyePoints[1], eyePoints[5]);
+    const vertical2 = calculateDistance(eyePoints[2], eyePoints[4]);
+    const horizontal = calculateDistance(eyePoints[0], eyePoints[3]);
+    
+    return (vertical1 + vertical2) / (2.0 * horizontal);
+  };
+  
+  // Helper function to calculate distance between two points
+  const calculateDistance = (p1: { x: number; y: number }, p2: { x: number; y: number }): number => {
+    return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
   };
 
   const validateCalibration = () => {

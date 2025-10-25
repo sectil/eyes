@@ -23,6 +23,7 @@ export interface EyeData {
     y: number; // -1 (up) to 1 (down)
   };
   pupilSize?: number;
+  faceLandmarks?: any; // Face landmarks for glasses detection
 }
 
 export interface CalibrationPoint {
@@ -148,6 +149,7 @@ export class AdvancedEyeTracker {
         },
         gaze: avgGaze,
         pupilSize: avgPupilSize,
+        faceLandmarks: landmarks, // Include face landmarks for glasses detection
       };
     } catch (error) {
       console.error("Eye data extraction error:", error);
