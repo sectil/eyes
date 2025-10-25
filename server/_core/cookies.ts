@@ -25,17 +25,28 @@ export function getSessionCookieOptions(
   req: Request
 ): Pick<CookieOptions, "domain" | "httpOnly" | "path" | "sameSite" | "secure"> {
   const isSecure = isSecureRequest(req);
+  const hostname = req.hostname;
   
-  // For OAuth callback to work on iPhone Safari:
-  // - Always use secure: true (required for cross-origin cookies)
-  // - Use sameSite: "strict" for same-site requests (better compatibility)
-  // - Only use sameSite: "none" when absolutely necessary
-  
+  // Determine if we should set domain
+  // For localhost and IP addresses, don't set domain
+  // For real domains, set domain to allow subdomains
+  let domain: string | undefined = undefined;
+  if (
+    hostname &&
+    !LOCAL_HOSTS.has(hostname) &&
+    !isIpAddress(hostname)
+  ) {
+    // Set domain to parent domain (e.g., example.com for app.example.com)
+    // This allows the cookie to be shared across subdomains
+    domain = hostname.startsWith(".") ? hostname : hostname;
+  }
+
   return {
     httpOnly: true,
     path: "/",
+    domain,
     sameSite: "strict",
-    secure: true, // Always true for mobile compatibility
+    secure: true,
   };
 }
 
