@@ -121,6 +121,37 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     setup();
   }, []);
 
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      // Stop camera stream
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current = null;
+      }
+      
+      // Clear video source
+      if (videoRef.current) {
+        videoRef.current.srcObject = null;
+      }
+      
+      // Clear calibration interval
+      if (calibrationIntervalRef.current) {
+        clearInterval(calibrationIntervalRef.current);
+      }
+      
+      // Dispose tracker (if it has a dispose method)
+      if (trackerRef.current && typeof trackerRef.current.dispose === 'function') {
+        try {
+          trackerRef.current.dispose();
+        } catch (error) {
+          console.error('Tracker disposal error:', error);
+        }
+      }
+      trackerRef.current = null;
+    };
+  }, []);
+
   // Warmup countdown
   useEffect(() => {
     if (!isModelLoading || warmupStep >= WARMUP_EXERCISES.length) return;
@@ -161,10 +192,17 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
 
     let detectionFrameId: number;
     let previousEAR = 1.0;
+    let isActive = true;
     const EAR_THRESHOLD = 0.2;
 
     const detectBlinks = async () => {
-      if (!videoRef.current || !trackerRef.current) return;
+      if (!isActive || !videoRef.current || !trackerRef.current) return;
+      
+      // Check if video is ready
+      if (videoRef.current.readyState < 2) {
+        detectionFrameId = requestAnimationFrame(detectBlinks);
+        return;
+      }
 
       try {
         const faces = await trackerRef.current.detectFace(videoRef.current);
@@ -191,7 +229,10 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
 
     detectBlinks();
 
-    return () => cancelAnimationFrame(detectionFrameId);
+    return () => {
+      isActive = false;
+      if (detectionFrameId) cancelAnimationFrame(detectionFrameId);
+    };
   }, [isModelLoading]);
 
   // Face detection
@@ -199,9 +240,16 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     if (step !== "face-detection" || !videoRef.current || !trackerRef.current) return;
 
     let detectionFrameId: number;
+    let isActive = true;
 
     const detectFace = async () => {
-      if (!videoRef.current || !trackerRef.current) return;
+      if (!isActive || !videoRef.current || !trackerRef.current) return;
+      
+      // Check if video is ready
+      if (videoRef.current.readyState < 2) {
+        detectionFrameId = requestAnimationFrame(detectFace);
+        return;
+      }
 
       try {
         const faces = await trackerRef.current.detectFace(videoRef.current);
@@ -221,7 +269,10 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
 
     detectFace();
 
-    return () => cancelAnimationFrame(detectionFrameId);
+    return () => {
+      isActive = false;
+      if (detectionFrameId) cancelAnimationFrame(detectionFrameId);
+    };
   }, [step]);
 
   // Eye detection
@@ -230,9 +281,16 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
 
     let detectionFrameId: number;
     let eyesDetectedCount = 0;
+    let isActive = true;
 
     const detectEyes = async () => {
-      if (!videoRef.current || !trackerRef.current) return;
+      if (!isActive || !videoRef.current || !trackerRef.current) return;
+      
+      // Check if video is ready
+      if (videoRef.current.readyState < 2) {
+        detectionFrameId = requestAnimationFrame(detectEyes);
+        return;
+      }
 
       try {
         const faces = await trackerRef.current.detectFace(videoRef.current);
@@ -264,7 +322,10 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
 
     detectEyes();
 
-    return () => cancelAnimationFrame(detectionFrameId);
+    return () => {
+      isActive = false;
+      if (detectionFrameId) cancelAnimationFrame(detectionFrameId);
+    };
   }, [step, isModelLoading]);
 
   // Calibration point countdown and data collection
@@ -298,10 +359,17 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     if (step !== "calibration-points" || !videoRef.current || !trackerRef.current) return;
 
     let collectionFrameId: number;
+    let isActive = true;
     const currentPointData: Array<{ x: number; y: number; pupilSize: number; timestamp: number }> = [];
 
     const collectGazeData = async () => {
-      if (!videoRef.current || !trackerRef.current) return;
+      if (!isActive || !videoRef.current || !trackerRef.current) return;
+      
+      // Check if video is ready
+      if (videoRef.current.readyState < 2) {
+        collectionFrameId = requestAnimationFrame(collectGazeData);
+        return;
+      }
 
       try {
         const faces = await trackerRef.current.detectFace(videoRef.current);
@@ -329,7 +397,8 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     collectGazeData();
 
     return () => {
-      cancelAnimationFrame(collectionFrameId);
+      isActive = false;
+      if (collectionFrameId) cancelAnimationFrame(collectionFrameId);
       // Save collected data for current point
       if (currentPointData.length > 0) {
         setCalibrationData(prev => [...prev, {
