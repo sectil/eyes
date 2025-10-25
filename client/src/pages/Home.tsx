@@ -2,11 +2,13 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
-import { Eye, Activity, Target, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
+import { Eye, Activity, Target, Sparkles, CheckCircle2, ArrowRight, Menu, X } from "lucide-react";
 import { Link } from "wouter";
+import { useState } from "react";
 
 export default function Home() {
   const { user, isAuthenticated } = useAuth();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -15,9 +17,10 @@ export default function Home() {
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
             <Eye className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold">{APP_TITLE}</span>
+            <span className="text-xl font-bold hidden sm:inline">{APP_TITLE}</span>
           </div>
-          <nav className="flex items-center gap-4">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-4">
             {isAuthenticated ? (
               <>
                 <Link href="/dashboard">
@@ -41,7 +44,57 @@ export default function Home() {
               </>
             )}
           </nav>
+          
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
         </div>
+        
+        {/* Mobile Navigation */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t bg-background p-4 space-y-2">
+            {isAuthenticated ? (
+              <>
+                <Link href="/dashboard">
+                  <Button variant="ghost" className="w-full justify-start">
+                    Dashboard
+                  </Button>
+                </Link>
+                <Link href="/profile/setup">
+                  <Button variant="outline" className="w-full justify-start">
+                    Profilim
+                  </Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <a href="#features" onClick={() => setMobileMenuOpen(false)}>
+                  <Button variant="ghost" className="w-full justify-start">
+                    Özellikler
+                  </Button>
+                </a>
+                <Link href="/pricing">
+                  <Button variant="ghost" className="w-full justify-start">
+                    Fiyatlandırma
+                  </Button>
+                </Link>
+                <a href={getLoginUrl()}>
+                  <Button className="w-full">
+                    Giriş Yap
+                  </Button>
+                </a>
+              </>
+            )}
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}
@@ -49,18 +102,18 @@ export default function Home() {
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium">
+              <div className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-xs sm:text-sm font-medium">
                 AI Destekli Göz Sağlığı Platformu
               </div>
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight">
                 Gözlerinizin Sağlığını
                 <span className="text-primary block">Takip Edin</span>
               </h1>
-              <p className="text-lg text-muted-foreground max-w-xl">
+              <p className="text-base sm:text-lg text-muted-foreground max-w-xl">
                 Bilimsel temelli göz egzersizleri, kişiselleştirilmiş takip ve AI destekli simülasyonlarla 
                 göz sağlığınızı koruyun ve iyileştirin.
               </p>
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 {isAuthenticated ? (
                   <Link href="/dashboard">
                     <Button size="lg" className="gap-2">
@@ -93,7 +146,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative hidden lg:block">
               <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 p-8 flex items-center justify-center">
                 <Eye className="h-64 w-64 text-primary/40" />
               </div>
