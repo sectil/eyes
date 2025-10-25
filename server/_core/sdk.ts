@@ -259,7 +259,18 @@ class SDKServer {
   async authenticateRequest(req: Request): Promise<User> {
     // Regular authentication flow
     const cookies = this.parseCookies(req.headers.cookie);
-    const sessionCookie = cookies.get(COOKIE_NAME);
+    let sessionCookie = cookies.get(COOKIE_NAME);
+    
+    // Fallback: Check X-Auth-Token header if cookie is missing
+    // This helps on mobile browsers where cookies sometimes fail
+    if (!sessionCookie) {
+      const authHeader = req.headers['x-auth-token'];
+      sessionCookie = typeof authHeader === 'string' ? authHeader : undefined;
+      if (sessionCookie) {
+        console.log('[Auth] Using token from X-Auth-Token header (cookie fallback)');
+      }
+    }
+    
     const session = await this.verifySession(sessionCookie);
 
     if (!session) {

@@ -1,5 +1,4 @@
-import { trpc } from "@/lib/trpc";
-import { UNAUTHED_ERR_MSG } from '@shared/const';
+import { COOKIE_NAME, UNAUTHED_ERR_MSG } from '@shared/const';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink, TRPCClientError } from "@trpc/client";
 import { createRoot } from "react-dom/client";
@@ -43,9 +42,23 @@ const trpcClient = trpc.createClient({
       url: "/api/trpc",
       transformer: superjson,
       fetch(input, init) {
+        // Get token from localStorage as fallback
+        const token = typeof window !== 'undefined' 
+          ? localStorage.getItem(COOKIE_NAME)
+          : null;
+
+        const headers = new Headers(init?.headers || {});
+        
+        // If we have a token in localStorage, send it as Authorization header
+        // This is a fallback for when cookies fail (especially on mobile)
+        if (token) {
+          headers.set('X-Auth-Token', token);
+        }
+
         return globalThis.fetch(input, {
           ...(init ?? {}),
           credentials: "include",
+          headers,
         });
       },
     }),
@@ -59,3 +72,4 @@ createRoot(document.getElementById("root")!).render(
     </QueryClientProvider>
   </trpc.Provider>
 );
+
