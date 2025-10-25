@@ -181,9 +181,9 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     }
   }, [warmupStep, isModelLoading, audioEnabled]);
 
-  // Blink detection during warmup
+  // Blink detection during warmup and calibration
   useEffect(() => {
-    if (!isModelLoading || !videoRef.current || !trackerRef.current) return;
+    if ((step !== "warmup" && step !== "calibration-points") || !videoRef.current || !trackerRef.current) return;
 
     let detectionFrameId: number;
     let previousEAR = 1.0;
@@ -228,7 +228,7 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
       isActive = false;
       if (detectionFrameId) cancelAnimationFrame(detectionFrameId);
     };
-  }, [isModelLoading]);
+  }, [step]);
 
   // Face detection
   useEffect(() => {
