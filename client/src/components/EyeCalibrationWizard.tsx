@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Progress } from "@/components/ui/progress";
 import { Eye, Camera, CheckCircle2, AlertCircle, X, Volume2, VolumeX, Loader2, RefreshCcw } from "lucide-react";
 import { toast } from "sonner";
-import { getEyeTracker, type EyeData } from "@/lib/advancedEyeTracking";
+import { getEyeTracker, disposeEyeTracker, type EyeData } from "@/lib/advancedEyeTracking";
 import { speak, playTickSound, playSuccessSound, setAudioEnabled, isAudioEnabled } from "@/lib/audioHelper";
 import { useRef, useState, useEffect } from "react";
 
@@ -140,14 +140,8 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
         clearInterval(calibrationIntervalRef.current);
       }
       
-      // Dispose tracker (if it has a dispose method)
-      if (trackerRef.current && typeof trackerRef.current.dispose === 'function') {
-        try {
-          trackerRef.current.dispose();
-        } catch (error) {
-          console.error('Tracker disposal error:', error);
-        }
-      }
+      // Dispose singleton tracker instance
+      disposeEyeTracker();
       trackerRef.current = null;
     };
   }, []);

@@ -256,3 +256,14 @@ export async function getEyeTracker(): Promise<AdvancedEyeTracker> {
   return trackerInstance;
 }
 
+/**
+ * Dispose the singleton tracker instance
+ */
+export function disposeEyeTracker() {
+  if (trackerInstance) {
+    trackerInstance.dispose();
+    trackerInstance = null;
+    console.log('✅ Eye tracker disposed');
+  }
+}
+
