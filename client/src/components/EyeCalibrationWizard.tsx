@@ -266,7 +266,11 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
     let detectionFrameId: number;
     let previousEAR = 1.0;
     let isActive = true;
-    const EAR_THRESHOLD = 0.2;
+    const EAR_THRESHOLD = 0.18; // Optimized threshold for blink detection
+    const EAR_CONSEC_FRAMES = 1; // Detect blink on first frame below threshold
+    let framesBelow = 0;
+    let lastBlinkTime = 0;
+    const BLINK_COOLDOWN = 150; // Minimum ms between blinks
 
     const detectBlinks = async () => {
       if (!isActive || !videoRef.current || !trackerRef.current) return;
@@ -279,27 +283,52 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
 
       try {
         const eyes = await trackerRef.current.extractEyeData(videoRef.current);
-        if (eyes) {
-          // Calculate average EAR from both eyes
-          const avgEAR = (eyes.left.ear + eyes.right.ear) / 2;
-          
-          console.log(`👁️ EAR: ${avgEAR.toFixed(3)} | Threshold: ${EAR_THRESHOLD} | Previous: ${previousEAR.toFixed(3)}`);
+        
+        if (!eyes) {
+          console.warn('⚠️ [BLINK] extractEyeData returned null');
+          return;
+        }
+        
+        if (!eyes.left || !eyes.right) {
+          console.warn('⚠️ [BLINK] Missing eye data:', { hasLeft: !!eyes.left, hasRight: !!eyes.right });
+          return;
+        }
+        
+        // Calculate average EAR from both eyes
+        const leftEAR = eyes.left.ear || 0;
+        const rightEAR = eyes.right.ear || 0;
+        const avgEAR = (leftEAR + rightEAR) / 2;
+        
+        console.log(`👁️ [BLINK] EAR: L=${leftEAR.toFixed(3)} R=${rightEAR.toFixed(3)} Avg=${avgEAR.toFixed(3)} | Threshold: ${EAR_THRESHOLD}`);
 
-          // Detect blink: EAR drops below threshold
-          if (previousEAR > EAR_THRESHOLD && avgEAR < EAR_THRESHOLD) {
-            console.log(`✅ BLINK DETECTED! Count: ${blinkCount + 1}`);
+        // Detect blink: EAR transition from open to closed to open
+        const now = Date.now();
+        const earDropped = previousEAR > EAR_THRESHOLD && avgEAR < EAR_THRESHOLD;
+        const earRaised = previousEAR < EAR_THRESHOLD && avgEAR > EAR_THRESHOLD;
+        
+        if (earDropped) {
+          console.log(`👁️ [BLINK] EAR DROPPED: ${previousEAR.toFixed(3)} → ${avgEAR.toFixed(3)}`);
+          framesBelow++;
+        } else if (earRaised) {
+          console.log(`👁️ [BLINK] EAR RAISED: ${previousEAR.toFixed(3)} → ${avgEAR.toFixed(3)}`);
+          
+          // Blink complete - EAR went from below threshold to above
+          if (framesBelow >= EAR_CONSEC_FRAMES && (now - lastBlinkTime) > BLINK_COOLDOWN) {
+            console.log(`✅ [BLINK] BLINK DETECTED! Count: ${blinkCount + 1}`);
+            lastBlinkTime = now;
             setBlinkDetected(true);
             setBlinkCount(prev => prev + 1);
             playTickSound();
-            setTimeout(() => setBlinkDetected(false), 300);
+            setTimeout(() => setBlinkDetected(false), 200);
           }
-
-          previousEAR = avgEAR;
-        } else {
-          console.warn('⚠️ extractEyeData returned null');
+          framesBelow = 0;
+        } else if (avgEAR >= EAR_THRESHOLD) {
+          framesBelow = 0;
         }
+
+        previousEAR = avgEAR;
       } catch (error) {
-        console.error("Blink detection error:", error);
+        console.error("[BLINK] Detection error:", error);
       }
 
       detectionFrameId = requestAnimationFrame(detectBlinks);
@@ -311,7 +340,7 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
       isActive = false;
       if (detectionFrameId) cancelAnimationFrame(detectionFrameId);
     };
-  }, [step]);
+  }, [step, blinkCount]);
 
   // Face detection
   useEffect(() => {
@@ -659,13 +688,18 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   
   // Helper function to calculate Eye Aspect Ratio
   const calculateEyeAspectRatio = (eyePoints: Array<{ x: number; y: number }>): number => {
-    if (eyePoints.length < 6) return 0.3;
+    if (!eyePoints || eyePoints.length < 6) return 0.3;
     
-    const vertical1 = calculateDistance(eyePoints[1], eyePoints[5]);
-    const vertical2 = calculateDistance(eyePoints[2], eyePoints[4]);
-    const horizontal = calculateDistance(eyePoints[0], eyePoints[3]);
+    try {
+      const vertical1 = calculateDistance(eyePoints[1], eyePoints[5]);
+      const vertical2 = calculateDistance(eyePoints[2], eyePoints[4]);
+      const horizontal = calculateDistance(eyePoints[0], eyePoints[3]);
     
-    return (vertical1 + vertical2) / (2.0 * horizontal);
+      return (vertical1 + vertical2) / (2 * horizontal);
+    } catch (error) {
+      console.error('Error calculating EAR:', error);
+      return 0.3;
+    }
   };
   
   // Helper function to calculate distance between two points
