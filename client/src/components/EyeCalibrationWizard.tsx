@@ -504,9 +504,19 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   }, [step, currentCalibrationPoint]);
 
   const handleStartCalibration = async () => {
-    if (!videoRef.current || !trackerRef.current) {
-      toast.error("Kamera hazır değil");
+    if (!videoRef.current) {
+      toast.error("Video element hazır değil");
       return;
+    }
+    
+    // Initialize tracker if not ready
+    if (!trackerRef.current) {
+      try {
+        trackerRef.current = await getEyeTracker();
+      } catch (error) {
+        console.error("Tracker init error:", error);
+        // Continue anyway - tracker will be initialized on first use
+      }
     }
 
     try {
