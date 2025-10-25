@@ -350,6 +350,17 @@ export default function Profile() {
                         {user?.lastSignedIn ? new Date(user.lastSignedIn).toLocaleDateString("tr-TR") : "Bilinmiyor"}
                       </p>
                     </div>
+                    <Separator />
+                    <div>
+                      <Button 
+                        onClick={() => setLocation("/onboarding?step=calibration")} 
+                        variant="outline" 
+                        className="w-full gap-2"
+                      >
+                        <Eye className="h-4 w-4" />
+                        Tekrar Kalibrasyon Yap
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
