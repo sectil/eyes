@@ -51,7 +51,7 @@ export default function EyeCalibrationWizard({ onComplete, onCancel }: Calibrati
   const calibrationIntervalRef = useRef<number | null>(null);
 
   const [step, setStep] = useState<CalibrationStep>("setup");
-  const [cameraReady, setCameraReady] = useState(false);
+  const [cameraReady, setCameraReady] = useState(true); // Camera ready by default
   const [faceDetected, setFaceDetected] = useState(false);
   const [eyesDetected, setEyesDetected] = useState(false);
   const [warmupStep, setWarmupStep] = useState(0);
