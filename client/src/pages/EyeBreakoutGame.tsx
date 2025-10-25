@@ -128,9 +128,9 @@ export default function EyeBreakoutGame() {
       if (!videoRef.current || !trackerRef.current) return;
 
       try {
-        const faces = await trackerRef.current.detectFace(videoRef.current);
-        if (faces.length > 0) {
-          const eyes = trackerRef.current.extractEyeData(faces[0]);
+        const isFaceDetected = await trackerRef.current.detectFace(videoRef.current);
+        if (isFaceDetected) {
+          const eyes = await trackerRef.current.extractEyeData(videoRef.current);
           if (eyes) {
             setEyeData(eyes);
 
