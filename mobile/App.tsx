@@ -28,31 +28,65 @@ export default function App() {
       <View style={styles.welcomeContainer}>
         <StatusBar style="light" />
 
-        {/* Gradient Background */}
-        <View style={styles.gradientBackground}>
-          {/* Top Section - Eye Icon & Title */}
+        <ScrollView contentContainerStyle={styles.welcomeScrollContent}>
+          {/* Top Section - Animated Eyes */}
           <View style={styles.welcomeTop}>
-            <View style={styles.welcomeEyeIcon}>
-              <Text style={styles.eyeEmoji}>👁</Text>
+            <View style={styles.welcomeEyeContainer}>
+              <AnimatedEye size="large" />
             </View>
 
             <Text style={styles.welcomeTitle}>Eyes</Text>
-            <Text style={styles.welcomeSubtitle}>Göz Sağlığı Asistanınız</Text>
+            <Text style={styles.welcomeSubtitle}>Göz Sağlığınız, Bizim Önceliğimiz</Text>
           </View>
 
-          {/* Middle Section - Value Props */}
+          {/* Stats Section */}
+          <View style={styles.statsContainer}>
+            <View style={styles.statBox}>
+              <Text style={styles.statNumber}>50K+</Text>
+              <Text style={styles.statLabel}>Aktif Kullanıcı</Text>
+            </View>
+            <View style={styles.statBox}>
+              <Text style={styles.statNumber}>95%</Text>
+              <Text style={styles.statLabel}>Memnuniyet</Text>
+            </View>
+            <View style={styles.statBox}>
+              <Text style={styles.statNumber}>1M+</Text>
+              <Text style={styles.statLabel}>Test Yapıldı</Text>
+            </View>
+          </View>
+
+          {/* Middle Section - Personal Benefits */}
           <View style={styles.welcomeMiddle}>
-            <View style={styles.featureRow}>
-              <View style={styles.featureDot} />
-              <Text style={styles.featureText}>Yapay Zeka Destekli Testler</Text>
+            <Text style={styles.benefitsTitle}>Sizin İçin Hazırladık</Text>
+
+            <View style={styles.benefitCard}>
+              <View style={styles.benefitIconContainer}>
+                <Text style={styles.benefitIcon}>🎯</Text>
+              </View>
+              <View style={styles.benefitContent}>
+                <Text style={styles.benefitTitle}>Kişisel Göz Sağlığı Profili</Text>
+                <Text style={styles.benefitText}>Sizin verilerinize özel analiz ve öneriler</Text>
+              </View>
             </View>
-            <View style={styles.featureRow}>
-              <View style={styles.featureDot} />
-              <Text style={styles.featureText}>Kişiselleştirilmiş Egzersizler</Text>
+
+            <View style={styles.benefitCard}>
+              <View style={styles.benefitIconContainer}>
+                <Text style={styles.benefitIcon}>🧠</Text>
+              </View>
+              <View style={styles.benefitContent}>
+                <Text style={styles.benefitTitle}>Yapay Zeka Destekli</Text>
+                <Text style={styles.benefitText}>Anlık göz sağlığı değerlendirmesi</Text>
+              </View>
             </View>
-            <View style={styles.featureRow}>
-              <View style={styles.featureDot} />
-              <Text style={styles.featureText}>7/24 Göz Sağlığı Takibi</Text>
+
+            <View style={styles.benefitCard}>
+              <View style={styles.benefitIconContainer}>
+                <Text style={styles.benefitIcon}>📈</Text>
+              </View>
+              <View style={styles.benefitContent}>
+                <Text style={styles.benefitTitle}>İlerleme Takibi</Text>
+                <Text style={styles.benefitText}>Göz sağlığınızdaki gelişimi görün</Text>
+              </View>
             </View>
           </View>
 
@@ -63,7 +97,7 @@ export default function App() {
               onPress={() => setCurrentScreen('LoginOptions')}
               activeOpacity={0.9}
             >
-              <Text style={styles.welcomePrimaryButtonText}>Hemen Başla</Text>
+              <Text style={styles.welcomePrimaryButtonText}>Ücretsiz Başla</Text>
               <Text style={styles.welcomeButtonArrow}>→</Text>
             </TouchableOpacity>
 
@@ -71,10 +105,14 @@ export default function App() {
               style={styles.welcomeSecondaryButton}
               onPress={() => setCurrentScreen('EmailLogin')}
             >
-              <Text style={styles.welcomeSecondaryButtonText}>Hesabım Var</Text>
+              <Text style={styles.welcomeSecondaryButtonText}>Zaten Hesabım Var</Text>
             </TouchableOpacity>
+
+            <Text style={styles.privacyText}>
+              Gizliliğiniz bizim için önemli. Verileriniz güvendedir.
+            </Text>
           </View>
-        </View>
+        </ScrollView>
       </View>
     );
   }
@@ -291,31 +329,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#0F172A',
   },
-  gradientBackground: {
-    flex: 1,
-    backgroundColor: '#0F172A',
+  welcomeScrollContent: {
     paddingTop: 60,
     paddingBottom: 40,
     paddingHorizontal: 24,
   },
   welcomeTop: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  welcomeEyeIcon: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: 'rgba(8, 145, 178, 0.1)',
-    alignItems: 'center',
-    justifyContent: 'center',
     marginBottom: 32,
-    borderWidth: 2,
-    borderColor: 'rgba(8, 145, 178, 0.2)',
   },
-  eyeEmoji: {
-    fontSize: 64,
+  welcomeEyeContainer: {
+    marginBottom: 24,
+    transform: [{ scale: 1.1 }],
   },
   welcomeTitle: {
     fontSize: 48,
@@ -323,36 +348,87 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     letterSpacing: -1,
     marginBottom: 8,
+    marginTop: 16,
   },
   welcomeSubtitle: {
-    fontSize: 18,
+    fontSize: 16,
     color: 'rgba(255, 255, 255, 0.6)',
     fontWeight: '400',
+    textAlign: 'center',
   },
-  welcomeMiddle: {
-    flex: 0.8,
-    justifyContent: 'center',
-    paddingVertical: 32,
-  },
-  featureRow: {
+  // Stats Section
+  statsContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 40,
+    paddingVertical: 24,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  statBox: {
+    flex: 1,
     alignItems: 'center',
-    marginBottom: 20,
   },
-  featureDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#06B6D4',
-    marginRight: 16,
+  statNumber: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#06B6D4',
+    marginBottom: 4,
   },
-  featureText: {
-    fontSize: 17,
-    color: 'rgba(255, 255, 255, 0.9)',
+  statLabel: {
+    fontSize: 12,
+    color: 'rgba(255, 255, 255, 0.5)',
     fontWeight: '500',
   },
+  // Benefits Section
+  welcomeMiddle: {
+    marginBottom: 32,
+  },
+  benefitsTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    marginBottom: 20,
+  },
+  benefitCard: {
+    flexDirection: 'row',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  benefitIconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: 'rgba(8, 145, 178, 0.15)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 16,
+  },
+  benefitIcon: {
+    fontSize: 24,
+  },
+  benefitContent: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  benefitTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#FFFFFF',
+    marginBottom: 4,
+  },
+  benefitText: {
+    fontSize: 13,
+    color: 'rgba(255, 255, 255, 0.6)',
+    lineHeight: 18,
+  },
   welcomeBottom: {
-    paddingTop: 20,
+    paddingTop: 8,
   },
   welcomePrimaryButton: {
     backgroundColor: '#0891B2',
@@ -360,7 +436,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 16,
+    marginBottom: 12,
     flexDirection: 'row',
   },
   welcomePrimaryButtonText: {
@@ -381,11 +457,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.1)',
+    marginBottom: 16,
   },
   welcomeSecondaryButtonText: {
     color: 'rgba(255, 255, 255, 0.8)',
     fontSize: 16,
     fontWeight: '600',
+  },
+  privacyText: {
+    fontSize: 12,
+    color: 'rgba(255, 255, 255, 0.4)',
+    textAlign: 'center',
+    lineHeight: 16,
   },
   // Other Screens Styles
   container: {
