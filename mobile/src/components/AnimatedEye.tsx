@@ -14,15 +14,15 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
   const blinkAnim = useRef(new Animated.Value(1)).current;
   const glossAnim = useRef(new Animated.Value(0.3)).current;
 
-  const dimensions = size === 'large' ? { width: 280, height: 120 } : { width: 140, height: 60 };
-  const eyeWidth = size === 'large' ? 50 : 25;
-  const eyeHeight = size === 'large' ? 35 : 17.5;
-  const pupilRadius = size === 'large' ? 12 : 6;
-  const glossRadius = size === 'large' ? 6 : 3;
-  const eyeSpacing = size === 'large' ? 160 : 80;
-  const leftEyeX = size === 'large' ? 90 : 45;
+  const dimensions = size === 'large' ? { width: 240, height: 100 } : { width: 140, height: 60 };
+  const eyeWidth = size === 'large' ? 45 : 25;
+  const eyeHeight = size === 'large' ? 30 : 17.5;
+  const pupilRadius = size === 'large' ? 10 : 6;
+  const glossRadius = size === 'large' ? 5 : 3;
+  const eyeSpacing = size === 'large' ? 130 : 80;
+  const leftEyeX = size === 'large' ? 70 : 45;
   const rightEyeX = leftEyeX + eyeSpacing;
-  const eyeY = size === 'large' ? 60 : 30;
+  const eyeY = size === 'large' ? 50 : 30;
   const moveRange = size === 'large' ? 8 : 4;
 
   useEffect(() => {
@@ -205,8 +205,8 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
     borderRadius: 20,
-    overflow: 'hidden',
-    backgroundColor: '#F0F9FF',
+    overflow: 'visible',
+    backgroundColor: 'transparent',
   },
   eyelid: {
     position: 'absolute',

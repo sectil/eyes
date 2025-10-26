@@ -340,7 +340,9 @@ const styles = StyleSheet.create({
   },
   welcomeEyeContainer: {
     marginBottom: 24,
-    transform: [{ scale: 1.1 }],
+    width: '100%',
+    maxWidth: 260,
+    alignSelf: 'center',
   },
   welcomeTitle: {
     fontSize: 48,
