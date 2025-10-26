@@ -59,15 +59,21 @@ function App() {
 
     // Cleanup - iOS için önemli (memory leak önler)
     return () => {
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach(track => {
-          track.stop()
-          console.log('🛑 Kamera track durduruldu')
-        })
-        streamRef.current = null
-      }
-      if (videoRef.current) {
-        videoRef.current.srcObject = null
+      try {
+        if (streamRef.current?.getTracks) {
+          streamRef.current.getTracks().forEach(track => {
+            if (track && typeof track.stop === 'function') {
+              track.stop()
+              console.log('🛑 Kamera track durduruldu')
+            }
+          })
+          streamRef.current = null
+        }
+        if (videoRef.current) {
+          videoRef.current.srcObject = null
+        }
+      } catch (error) {
+        console.warn('Cleanup error (safe to ignore):', error)
       }
     }
   }, [])
