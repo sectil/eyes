@@ -209,7 +209,7 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
             fill="url(#irisDepth)"
           />
 
-          {/* Radial pattern lines (iris fibers) - Çok daha fazla detay */}
+          {/* Radial pattern lines (iris fibers) - Ultra detaylı */}
           {[...Array(irisPatternLines)].map((_, i) => {
             const angle = (i * 360) / irisPatternLines;
             const rad = (angle * Math.PI) / 180;
@@ -223,9 +223,10 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
             const x2 = eyeX + Math.cos(rad) * endRadius;
             const y2 = eyeY + Math.sin(rad) * endRadius;
 
-            // Opacity varyasyonu
-            const opacity = 0.08 + (Math.sin(i * 0.7) * 0.1);
-            const strokeWidth = i % 3 === 0 ? 0.6 : 0.3;
+            // Opacity ve renk varyasyonu (açık mavi tonlar)
+            const baseOpacity = 0.12 + (Math.sin(i * 0.7) * 0.08);
+            const colorVariation = Math.sin(i * 1.3) * 20 + 100;
+            const strokeWidth = i % 4 === 0 ? 0.7 : (i % 2 === 0 ? 0.4 : 0.25);
 
             return (
               <Line
@@ -234,7 +235,7 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
                 y1={y1}
                 x2={x2}
                 y2={y2}
-                stroke={`rgba(0,0,0,${opacity})`}
+                stroke={`rgba(0,${colorVariation},${colorVariation + 50},${baseOpacity})`}
                 strokeWidth={strokeWidth}
               />
             );
@@ -324,14 +325,14 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
             fill="url(#limbusDark)"
           />
 
-          {/* Limbus ring - Güçlendirilmiş (genç ve sağlıklı göz) */}
+          {/* Limbus ring - Güçlü, parlak mavi halka */}
           <Circle
             cx={eyeX}
             cy={eyeY}
             r={irisRadius + 0.3}
             fill="none"
-            stroke="rgba(15,35,45,0.75)"
-            strokeWidth="2.2"
+            stroke="rgba(10,80,120,0.85)"
+            strokeWidth="2.5"
           />
 
           {/* Limbus outer edge */}
@@ -340,8 +341,8 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
             cy={eyeY}
             r={irisRadius + 1.2}
             fill="none"
-            stroke="rgba(10,25,35,0.45)"
-            strokeWidth="1.0"
+            stroke="rgba(15,100,140,0.55)"
+            strokeWidth="1.2"
           />
 
           {/* Pupil with gradient - Animated dilation */}
@@ -408,51 +409,47 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
     <View style={[styles.container, { width: dimensions.width, height: dimensions.height }]}>
       <Svg width={dimensions.width} height={dimensions.height} viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}>
         <Defs>
-          {/* Sclera gradient - Gerçekçi göz beyazı (hafif krem tonu) */}
+          {/* Sclera gradient - Parlak beyaz */}
           <RadialGradient id="scleraGradient" cx="50%" cy="50%">
-            <Stop offset="0%" stopColor="#FBF8F3" stopOpacity="1" />
-            <Stop offset="40%" stopColor="#F8F5F0" stopOpacity="1" />
-            <Stop offset="70%" stopColor="#F2EDE8" stopOpacity="1" />
-            <Stop offset="100%" stopColor="#E8E3DC" stopOpacity="1" />
+            <Stop offset="0%" stopColor="#FFFFFF" stopOpacity="1" />
+            <Stop offset="40%" stopColor="#FEFEFE" stopOpacity="1" />
+            <Stop offset="70%" stopColor="#FCFCFC" stopOpacity="1" />
+            <Stop offset="100%" stopColor="#F8F8F8" stopOpacity="1" />
           </RadialGradient>
 
           <RadialGradient id="scleraShadow" cx="50%" cy="50%">
-            <Stop offset="0%" stopColor="rgba(255,250,245,0)" />
-            <Stop offset="80%" stopColor="rgba(230,210,190,0.03)" />
-            <Stop offset="100%" stopColor="rgba(200,180,160,0.1)" />
+            <Stop offset="0%" stopColor="rgba(255,255,255,0)" />
+            <Stop offset="85%" stopColor="rgba(240,245,250,0.05)" />
+            <Stop offset="100%" stopColor="rgba(220,230,240,0.1)" />
           </RadialGradient>
 
-          {/* Iris gradients - Çok katmanlı gerçekçi renk */}
-          <RadialGradient id="irisBase" cx="42%" cy="43%">
-            <Stop offset="0%" stopColor="#D4B870" stopOpacity="1" />
-            <Stop offset="10%" stopColor="#B8A05F" stopOpacity="1" />
-            <Stop offset="20%" stopColor="#8FAA78" stopOpacity="1" />
-            <Stop offset="30%" stopColor="#6F9B7A" stopOpacity="1" />
-            <Stop offset="42%" stopColor="#52887C" stopOpacity="1" />
-            <Stop offset="55%" stopColor="#3F7670" stopOpacity="1" />
-            <Stop offset="68%" stopColor="#2E6663" stopOpacity="1" />
-            <Stop offset="78%" stopColor="#235551" stopOpacity="1" />
-            <Stop offset="88%" stopColor="#1A4540" stopOpacity="1" />
-            <Stop offset="95%" stopColor="#123832" stopOpacity="1" />
-            <Stop offset="100%" stopColor="#0A2B28" stopOpacity="1" />
+          {/* Iris gradients - Parlak, canlı mavi-yeşil (aqua) */}
+          <RadialGradient id="irisBase" cx="45%" cy="45%">
+            <Stop offset="0%" stopColor="#B4E7F5" stopOpacity="1" />
+            <Stop offset="15%" stopColor="#7FDBF2" stopOpacity="1" />
+            <Stop offset="30%" stopColor="#4AC9E3" stopOpacity="1" />
+            <Stop offset="45%" stopColor="#2AB0D1" stopOpacity="1" />
+            <Stop offset="60%" stopColor="#1899BC" stopOpacity="1" />
+            <Stop offset="75%" stopColor="#0E7FA3" stopOpacity="1" />
+            <Stop offset="88%" stopColor="#0A6689" stopOpacity="1" />
+            <Stop offset="100%" stopColor="#064D6B" stopOpacity="1" />
           </RadialGradient>
 
-          <RadialGradient id="irisPattern" cx="48%" cy="48%">
-            <Stop offset="0%" stopColor="rgba(255,250,230,0.5)" />
-            <Stop offset="15%" stopColor="rgba(230,240,210,0.35)" />
-            <Stop offset="30%" stopColor="rgba(180,220,180,0.25)" />
-            <Stop offset="50%" stopColor="rgba(100,160,140,0.2)" />
-            <Stop offset="70%" stopColor="rgba(60,120,110,0.18)" />
-            <Stop offset="85%" stopColor="rgba(30,80,75,0.22)" />
-            <Stop offset="100%" stopColor="rgba(0,0,0,0.35)" />
+          <RadialGradient id="irisPattern" cx="50%" cy="50%">
+            <Stop offset="0%" stopColor="rgba(255,255,255,0.6)" />
+            <Stop offset="25%" stopColor="rgba(180,240,255,0.4)" />
+            <Stop offset="50%" stopColor="rgba(100,200,230,0.3)" />
+            <Stop offset="75%" stopColor="rgba(50,150,200,0.25)" />
+            <Stop offset="100%" stopColor="rgba(0,0,0,0.4)" />
           </RadialGradient>
 
           {/* Iris secondary overlay - 3D depth */}
-          <RadialGradient id="irisDepth" cx="55%" cy="55%">
-            <Stop offset="0%" stopColor="rgba(255,255,255,0.25)" />
-            <Stop offset="40%" stopColor="rgba(0,0,0,0)" />
-            <Stop offset="70%" stopColor="rgba(0,0,0,0.15)" />
-            <Stop offset="100%" stopColor="rgba(0,0,0,0.4)" />
+          <RadialGradient id="irisDepth" cx="52%" cy="52%">
+            <Stop offset="0%" stopColor="rgba(255,255,255,0.4)" />
+            <Stop offset="30%" stopColor="rgba(255,255,255,0.1)" />
+            <Stop offset="60%" stopColor="rgba(0,0,0,0)" />
+            <Stop offset="85%" stopColor="rgba(0,50,80,0.2)" />
+            <Stop offset="100%" stopColor="rgba(0,30,50,0.5)" />
           </RadialGradient>
 
           <RadialGradient id="pupilGradient" cx="40%" cy="40%">
