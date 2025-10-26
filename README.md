@@ -1,8 +1,20 @@
 # VisionCare - AI-Powered Eye Tracking
 
-Professional eye tracking application with real AI face detection, pupil tracking, and gaze analysis.
+Professional eye tracking application with real AI face detection, pupil tracking, gaze analysis, calibration system, and eye exercises.
 
 ## 🚀 Quick Start (Recommended)
+
+### Kalibrasyon ve Göz Egzersizleri (Web App)
+
+**Tek komutla başlat:**
+
+```bash
+./start-calibration.sh
+```
+
+Tarayıcıda aç: **http://localhost:8080**
+
+### Full Stack (Mobile + Backend)
 
 **Start everything with one command:**
 
@@ -16,12 +28,13 @@ Professional eye tracking application with real AI face detection, pupil trackin
 ./stop-all.sh
 ```
 
-Or press **Ctrl+C** when running `start-all.sh`.
+Or press **Ctrl+C** when running the script.
 
 ---
 
 ## 📚 Documentation
 
+- **[calibration-app/README.md](calibration-app/README.md)** - Kalibrasyon ve egzersiz sistemi (YENİ!)
 - **[QUICK_START.md](QUICK_START.md)** - Get started in 5 minutes
 - **[ROADMAP.md](ROADMAP.md)** - Complete project history and architecture
 - **[ai-service/README.md](ai-service/README.md)** - AI service API documentation
@@ -30,10 +43,26 @@ Or press **Ctrl+C** when running `start-all.sh`.
 
 ## ✨ Features
 
+### 🎯 Kalibrasyon Sistemi (YENİ!)
+- ✅ **9 Noktalı Kalibrasyon** - 3x3 grid ile hassas kalibrasyon
+- ✅ **Ekran Koordinat Mapping** - Göz bebeği → ekran pozisyonu dönüşümü
+- ✅ **Otomatik Veri Toplama** - Her nokta için 5 örnek
+- ✅ **LocalStorage Kayıt** - Kalibrasyon verilerini sakla
+
+### 💪 Göz Egzersizleri (YENİ!)
+- ✅ **7 Egzersiz Modu** - Merkez, sağ, sol, yukarı, aşağı, kırpma, dairesel
+- ✅ **Göz Kırpma Sayacı** - Egzersiz sırasında göz kırpma takibi
+- ✅ **Hareket Analizi** - Göz bebekleri ve göz kasları hareketi
+- ✅ **Real-time Feedback** - Anlık geri bildirim
+
+### 👁️ Göz Takibi
 - ✅ **Real AI Face Detection** - MediaPipe with 478 facial landmarks
 - ✅ **Eye Blink Detection** - EAR (Eye Aspect Ratio) algorithm
 - ✅ **Pupil Tracking** - Precise iris landmark detection
 - ✅ **Gaze Direction** - Real-time eye movement tracking
+- ✅ **Gaze Indicator** - Bakış noktası gösterimi
+- ✅ **Pupil Trail** - Göz bebeği hareketi izi
+- ✅ **Blink-Aware** - Göz kırpmalarda son pozisyon koruma
 - ✅ **Glasses Detection** - Facial geometry analysis
 - ✅ **Works in Expo Go** - No development build needed!
 
