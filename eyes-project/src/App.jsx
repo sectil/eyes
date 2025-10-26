@@ -140,15 +140,14 @@ function App() {
 
   // TensorFlow.js modeli yükleme - iOS MOBILE OPTIMIZED
   useEffect(() => {
+    let isSubscribed = true
+
     const loadModel = async () => {
       try {
         await tf.ready()
 
         // iOS için WebGL backend kullan
         await tf.setBackend('webgl')
-
-        // Memory optimizasyonu - eski tensor'leri temizle
-        tf.engine().startScope()
 
         const model = await faceLandmarksDetection.createDetector(
           faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh,
@@ -159,10 +158,16 @@ function App() {
             detectorModelUrl: undefined,  // Default lightweight model
           }
         )
-        modelRef.current = model
-        setIsModelLoaded(true)
-        console.log('✅ iOS için optimize edilmiş model yüklendi')
-        console.log('📱 Memory:', tf.memory())
+
+        if (isSubscribed) {
+          modelRef.current = model
+          setIsModelLoaded(true)
+          console.log('✅ iOS için optimize edilmiş model yüklendi')
+          console.log('📱 Memory:', tf.memory())
+        } else {
+          // Component unmount olduysa model'i hemen temizle
+          model.dispose?.()
+        }
       } catch (error) {
         console.error('Model yüklenirken hata:', error)
       }
@@ -172,10 +177,16 @@ function App() {
 
     // Cleanup - memory leak önleme
     return () => {
+      isSubscribed = false
       if (modelRef.current) {
-        modelRef.current.dispose?.()
+        try {
+          modelRef.current.dispose?.()
+          console.log('🧹 Model temizlendi')
+        } catch (e) {
+          console.warn('Model cleanup error (safe to ignore):', e)
+        }
+        modelRef.current = null
       }
-      tf.engine().endScope()
     }
   }, [])
   
