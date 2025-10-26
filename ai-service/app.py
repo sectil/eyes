@@ -12,6 +12,7 @@ import base64
 from PIL import Image
 from io import BytesIO
 import math
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -293,6 +294,9 @@ def calibrate():
 
 
 if __name__ == '__main__':
+    # Get port from environment variable or default to 5000
+    PORT = int(os.environ.get('PORT', 5000))
+
     print('=' * 60)
     print('VisionCare AI Service Starting...')
     print('Professional Eye Tracking & Face Analysis')
@@ -304,8 +308,8 @@ if __name__ == '__main__':
     print('  - Glasses detection')
     print('  - Real-time gaze tracking')
     print('=' * 60)
-    print('Server running on http://0.0.0.0:5000')
-    print('Health check: http://0.0.0.0:5000/health')
+    print(f'Server running on http://0.0.0.0:{PORT}')
+    print(f'Health check: http://0.0.0.0:{PORT}/health')
     print('=' * 60)
 
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=PORT, debug=True)
