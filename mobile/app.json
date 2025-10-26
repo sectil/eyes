@@ -4,6 +4,7 @@
     "slug": "visioncare",
     "version": "1.0.0",
     "orientation": "portrait",
+    "main": "index.js",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
