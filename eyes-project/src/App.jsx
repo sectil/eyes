@@ -138,8 +138,12 @@ function App() {
   
   // Yüz tespiti ve göz takibi
   useEffect(() => {
+    let frameCount = 0
     const detectFace = async () => {
-      if (!modelRef.current || !videoRef.current || !cameraPermission) return
+      if (!modelRef.current || !videoRef.current || !cameraPermission) {
+        requestAnimationFrameIdRef.current = requestAnimationFrame(detectFace)
+        return
+      }
 
       // Video'nun tamamen yüklendiğinden emin ol
       const video = videoRef.current
@@ -151,11 +155,22 @@ function App() {
       try {
         const predictions = await modelRef.current.estimateFaces(video)
 
+        frameCount++
+        if (frameCount % 30 === 0) {
+          console.log(`🎥 Frame ${frameCount}: ${predictions.length} yüz tespit edildi`)
+        }
+
         if (predictions.length > 0) {
           const face = predictions[0]
 
           // Sol göz ve sağ göz landmark'ları (keypoints kullanarak)
           const keypoints = face.keypoints
+
+          if (!keypoints || keypoints.length < 468) {
+            console.warn('⚠️ Yeterli keypoint bulunamadı:', keypoints?.length)
+            requestAnimationFrameIdRef.current = requestAnimationFrame(detectFace)
+            return
+          }
 
           // MediaPipeFaceMesh keypoint indeksleri
           // Sol göz: 33, 160, 158, 133, 153, 144
