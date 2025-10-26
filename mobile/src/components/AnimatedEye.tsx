@@ -169,12 +169,17 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
           fill="url(#scleraShadow)"
         />
 
-        {/* Subtle veins */}
+        {/* Kan damarları - Daha gerçekçi */}
         {size === 'large' && (
           <>
-            <Line x1={eyeX - 35} y1={eyeY - 8} x2={eyeX - 20} y2={eyeY - 5} stroke="rgba(220,53,69,0.08)" strokeWidth="0.5" />
-            <Line x1={eyeX + 35} y1={eyeY + 8} x2={eyeX + 20} y2={eyeY + 5} stroke="rgba(220,53,69,0.08)" strokeWidth="0.5" />
-            <Line x1={eyeX - 30} y1={eyeY + 10} x2={eyeX - 18} y2={eyeY + 8} stroke="rgba(220,53,69,0.06)" strokeWidth="0.5" />
+            <Line x1={eyeX - 38} y1={eyeY - 10} x2={eyeX - 22} y2={eyeY - 6} stroke="rgba(180,50,60,0.15)" strokeWidth="0.6" />
+            <Line x1={eyeX - 35} y1={eyeY - 8} x2={eyeX - 24} y2={eyeY - 5} stroke="rgba(180,50,60,0.12)" strokeWidth="0.5" />
+            <Line x1={eyeX + 38} y1={eyeY + 10} x2={eyeX + 22} y2={eyeY + 6} stroke="rgba(180,50,60,0.15)" strokeWidth="0.6" />
+            <Line x1={eyeX + 35} y1={eyeY + 8} x2={eyeX + 24} y2={eyeY + 5} stroke="rgba(180,50,60,0.12)" strokeWidth="0.5" />
+            <Line x1={eyeX - 30} y1={eyeY + 12} x2={eyeX - 20} y2={eyeY + 9} stroke="rgba(180,50,60,0.1)" strokeWidth="0.5" />
+            <Line x1={eyeX + 30} y1={eyeY - 12} x2={eyeX + 20} y2={eyeY - 9} stroke="rgba(180,50,60,0.1)" strokeWidth="0.5" />
+            <Path d={`M ${eyeX - 32} ${eyeY - 6} Q ${eyeX - 26} ${eyeY - 4} ${eyeX - 22} ${eyeY - 3}`} stroke="rgba(180,50,60,0.08)" strokeWidth="0.4" fill="none" />
+            <Path d={`M ${eyeX + 32} ${eyeY + 6} Q ${eyeX + 26} ${eyeY + 4} ${eyeX + 22} ${eyeY + 3}`} stroke="rgba(180,50,60,0.08)" strokeWidth="0.4" fill="none" />
           </>
         )}
 
@@ -277,14 +282,24 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
             fill="url(#limbusDark)"
           />
 
-          {/* Limbus ring */}
+          {/* Limbus ring - Güçlendirilmiş (genç ve sağlıklı göz) */}
           <Circle
             cx={eyeX}
             cy={eyeY}
-            r={irisRadius + 0.5}
+            r={irisRadius + 0.3}
             fill="none"
-            stroke="rgba(0,0,0,0.4)"
-            strokeWidth="1.5"
+            stroke="rgba(15,35,45,0.75)"
+            strokeWidth="2.2"
+          />
+
+          {/* Limbus outer edge */}
+          <Circle
+            cx={eyeX}
+            cy={eyeY}
+            r={irisRadius + 1.2}
+            fill="none"
+            stroke="rgba(10,25,35,0.45)"
+            strokeWidth="1.0"
           />
 
           {/* Pupil with gradient - Animated dilation */}
@@ -351,33 +366,35 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
     <View style={[styles.container, { width: dimensions.width, height: dimensions.height }]}>
       <Svg width={dimensions.width} height={dimensions.height} viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}>
         <Defs>
-          {/* Sclera gradient */}
+          {/* Sclera gradient - Gerçekçi göz beyazı (hafif krem tonu) */}
           <RadialGradient id="scleraGradient" cx="50%" cy="50%">
-            <Stop offset="0%" stopColor="#FEFEFE" stopOpacity="1" />
-            <Stop offset="40%" stopColor="#FCFDFD" stopOpacity="1" />
-            <Stop offset="70%" stopColor="#F5F8FA" stopOpacity="1" />
-            <Stop offset="100%" stopColor="#E8EDEF" stopOpacity="1" />
+            <Stop offset="0%" stopColor="#FBF8F3" stopOpacity="1" />
+            <Stop offset="40%" stopColor="#F8F5F0" stopOpacity="1" />
+            <Stop offset="70%" stopColor="#F2EDE8" stopOpacity="1" />
+            <Stop offset="100%" stopColor="#E8E3DC" stopOpacity="1" />
           </RadialGradient>
 
           <RadialGradient id="scleraShadow" cx="50%" cy="50%">
-            <Stop offset="0%" stopColor="rgba(255,255,255,0)" />
-            <Stop offset="85%" stopColor="rgba(0,0,0,0.02)" />
-            <Stop offset="100%" stopColor="rgba(0,0,0,0.08)" />
+            <Stop offset="0%" stopColor="rgba(255,250,245,0)" />
+            <Stop offset="80%" stopColor="rgba(230,210,190,0.03)" />
+            <Stop offset="100%" stopColor="rgba(200,180,160,0.1)" />
           </RadialGradient>
 
-          {/* Iris gradients - Kahverengi (dünya nüfusunun %70-80'i) */}
-          <RadialGradient id="irisBase" cx="50%" cy="50%">
-            <Stop offset="0%" stopColor="#A67C52" stopOpacity="1" />
-            <Stop offset="25%" stopColor="#8C5933" stopOpacity="1" />
-            <Stop offset="50%" stopColor="#6B4423" stopOpacity="1" />
-            <Stop offset="75%" stopColor="#4A2F18" stopOpacity="1" />
-            <Stop offset="100%" stopColor="#2D1B0E" stopOpacity="1" />
+          {/* Iris gradients - Gerçekçi parlak yeşil-mavi (hazel) */}
+          <RadialGradient id="irisBase" cx="45%" cy="45%">
+            <Stop offset="0%" stopColor="#C4A55A" stopOpacity="1" />
+            <Stop offset="20%" stopColor="#7A9B6F" stopOpacity="1" />
+            <Stop offset="40%" stopColor="#4A7C6B" stopOpacity="1" />
+            <Stop offset="60%" stopColor="#2E6B5F" stopOpacity="1" />
+            <Stop offset="80%" stopColor="#1E4D47" stopOpacity="1" />
+            <Stop offset="100%" stopColor="#0D3933" stopOpacity="1" />
           </RadialGradient>
 
           <RadialGradient id="irisPattern" cx="50%" cy="50%">
-            <Stop offset="0%" stopColor="rgba(255,255,255,0.2)" />
-            <Stop offset="40%" stopColor="rgba(0,0,0,0.1)" />
-            <Stop offset="100%" stopColor="rgba(0,0,0,0.4)" />
+            <Stop offset="0%" stopColor="rgba(255,245,220,0.4)" />
+            <Stop offset="30%" stopColor="rgba(120,180,140,0.2)" />
+            <Stop offset="60%" stopColor="rgba(40,100,90,0.15)" />
+            <Stop offset="100%" stopColor="rgba(0,0,0,0.3)" />
           </RadialGradient>
 
           <RadialGradient id="pupilGradient" cx="40%" cy="40%">
