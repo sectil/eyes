@@ -14,7 +14,6 @@ export default function AppNavigator() {
         initialRouteName="Welcome"
         screenOptions={{
           headerShown: false,
-          animation: 'slide_from_right',
         }}
       >
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
