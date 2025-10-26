@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
-import Svg, { Ellipse, Circle, Defs, RadialGradient, Stop } from 'react-native-svg';
+import Svg, { Ellipse, Circle, Defs, RadialGradient, Stop, Path, G } from 'react-native-svg';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+const AnimatedG = Animated.createAnimatedComponent(G);
 
 interface AnimatedEyeProps {
   size?: 'small' | 'large';
@@ -116,75 +117,206 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
     <View style={[styles.container, { width: dimensions.width, height: dimensions.height }]}>
       <Svg width={dimensions.width} height={dimensions.height} viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}>
         <Defs>
-          <RadialGradient id="eyeGradient" cx="50%" cy="50%">
+          {/* Sclera (Eye white) gradient */}
+          <RadialGradient id="scleraGradient" cx="50%" cy="50%">
             <Stop offset="0%" stopColor="#FFFFFF" stopOpacity="1" />
-            <Stop offset="100%" stopColor="#F0F9FF" stopOpacity="1" />
+            <Stop offset="70%" stopColor="#F8FAFC" stopOpacity="1" />
+            <Stop offset="100%" stopColor="#E2E8F0" stopOpacity="1" />
+          </RadialGradient>
+
+          {/* Iris (Colored part) gradient - Blue/Teal */}
+          <RadialGradient id="irisGradient" cx="50%" cy="50%">
+            <Stop offset="0%" stopColor="#0EA5E9" stopOpacity="1" />
+            <Stop offset="30%" stopColor="#0891B2" stopOpacity="1" />
+            <Stop offset="60%" stopColor="#0E7490" stopOpacity="1" />
+            <Stop offset="100%" stopColor="#155E75" stopOpacity="1" />
+          </RadialGradient>
+
+          {/* Pupil gradient */}
+          <RadialGradient id="pupilGradient" cx="50%" cy="50%">
+            <Stop offset="0%" stopColor="#000000" stopOpacity="1" />
+            <Stop offset="100%" stopColor="#1F2937" stopOpacity="1" />
+          </RadialGradient>
+
+          {/* Cornea reflection gradient */}
+          <RadialGradient id="corneaGradient" cx="30%" cy="30%">
+            <Stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.9" />
+            <Stop offset="50%" stopColor="#FFFFFF" stopOpacity="0.6" />
+            <Stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
           </RadialGradient>
         </Defs>
 
-        {/* Left Eye */}
-        <Ellipse
-          cx={leftEyeX}
-          cy={eyeY}
-          rx={eyeWidth}
-          ry={eyeHeight}
-          fill="url(#eyeGradient)"
-          stroke="#0891B2"
-          strokeWidth={size === 'large' ? 2 : 1}
-        />
+        {/* LEFT EYE */}
+        <G>
+          {/* Sclera (white part) */}
+          <Ellipse
+            cx={leftEyeX}
+            cy={eyeY}
+            rx={eyeWidth}
+            ry={eyeHeight}
+            fill="url(#scleraGradient)"
+          />
 
-        {/* Left Pupil */}
-        <AnimatedCircle
-          cx={leftEyeX}
-          cy={eyeY}
-          r={pupilRadius}
-          fill="#1F2937"
-          translateX={pupilX}
-          translateY={pupilY}
-        />
+          {/* Eye shadow (inner) */}
+          <Ellipse
+            cx={leftEyeX}
+            cy={eyeY - 2}
+            rx={eyeWidth - 2}
+            ry={eyeHeight - 2}
+            fill="rgba(0, 0, 0, 0.05)"
+          />
 
-        {/* Left Gloss */}
-        <AnimatedCircle
-          cx={leftEyeX - (size === 'large' ? 4 : 2)}
-          cy={eyeY - (size === 'large' ? 4 : 2)}
-          r={glossRadius}
-          fill="#FFFFFF"
-          opacity={glossAnim}
-          translateX={pupilX}
-          translateY={pupilY}
-        />
+          {/* Iris group (animated) */}
+          <AnimatedG translateX={pupilX} translateY={pupilY}>
+            {/* Iris base */}
+            <Circle
+              cx={leftEyeX}
+              cy={eyeY}
+              r={pupilRadius * 2}
+              fill="url(#irisGradient)"
+            />
 
-        {/* Right Eye */}
-        <Ellipse
-          cx={rightEyeX}
-          cy={eyeY}
-          rx={eyeWidth}
-          ry={eyeHeight}
-          fill="url(#eyeGradient)"
-          stroke="#0891B2"
-          strokeWidth={size === 'large' ? 2 : 1}
-        />
+            {/* Iris pattern lines */}
+            <Circle
+              cx={leftEyeX}
+              cy={eyeY}
+              r={pupilRadius * 1.8}
+              fill="none"
+              stroke="rgba(0, 0, 0, 0.15)"
+              strokeWidth="0.5"
+            />
+            <Circle
+              cx={leftEyeX}
+              cy={eyeY}
+              r={pupilRadius * 1.5}
+              fill="none"
+              stroke="rgba(0, 0, 0, 0.1)"
+              strokeWidth="0.5"
+            />
 
-        {/* Right Pupil */}
-        <AnimatedCircle
-          cx={rightEyeX}
-          cy={eyeY}
-          r={pupilRadius}
-          fill="#1F2937"
-          translateX={pupilX}
-          translateY={pupilY}
-        />
+            {/* Pupil */}
+            <Circle
+              cx={leftEyeX}
+              cy={eyeY}
+              r={pupilRadius}
+              fill="url(#pupilGradient)"
+            />
 
-        {/* Right Gloss */}
-        <AnimatedCircle
-          cx={rightEyeX - (size === 'large' ? 4 : 2)}
-          cy={eyeY - (size === 'large' ? 4 : 2)}
-          r={glossRadius}
-          fill="#FFFFFF"
-          opacity={glossAnim}
-          translateX={pupilX}
-          translateY={pupilY}
-        />
+            {/* Main highlight */}
+            <Circle
+              cx={leftEyeX - pupilRadius * 0.5}
+              cy={eyeY - pupilRadius * 0.5}
+              r={pupilRadius * 0.7}
+              fill="url(#corneaGradient)"
+              opacity={0.9}
+            />
+
+            {/* Secondary highlight */}
+            <AnimatedCircle
+              cx={leftEyeX + pupilRadius * 0.8}
+              cy={eyeY + pupilRadius * 0.8}
+              r={pupilRadius * 0.3}
+              fill="#FFFFFF"
+              opacity={glossAnim}
+            />
+          </AnimatedG>
+
+          {/* Limbus (dark ring around iris) */}
+          <Circle
+            cx={leftEyeX}
+            cy={eyeY}
+            r={pupilRadius * 2.1}
+            fill="none"
+            stroke="rgba(0, 0, 0, 0.3)"
+            strokeWidth="1"
+          />
+        </G>
+
+        {/* RIGHT EYE */}
+        <G>
+          {/* Sclera (white part) */}
+          <Ellipse
+            cx={rightEyeX}
+            cy={eyeY}
+            rx={eyeWidth}
+            ry={eyeHeight}
+            fill="url(#scleraGradient)"
+          />
+
+          {/* Eye shadow (inner) */}
+          <Ellipse
+            cx={rightEyeX}
+            cy={eyeY - 2}
+            rx={eyeWidth - 2}
+            ry={eyeHeight - 2}
+            fill="rgba(0, 0, 0, 0.05)"
+          />
+
+          {/* Iris group (animated) */}
+          <AnimatedG translateX={pupilX} translateY={pupilY}>
+            {/* Iris base */}
+            <Circle
+              cx={rightEyeX}
+              cy={eyeY}
+              r={pupilRadius * 2}
+              fill="url(#irisGradient)"
+            />
+
+            {/* Iris pattern lines */}
+            <Circle
+              cx={rightEyeX}
+              cy={eyeY}
+              r={pupilRadius * 1.8}
+              fill="none"
+              stroke="rgba(0, 0, 0, 0.15)"
+              strokeWidth="0.5"
+            />
+            <Circle
+              cx={rightEyeX}
+              cy={eyeY}
+              r={pupilRadius * 1.5}
+              fill="none"
+              stroke="rgba(0, 0, 0, 0.1)"
+              strokeWidth="0.5"
+            />
+
+            {/* Pupil */}
+            <Circle
+              cx={rightEyeX}
+              cy={eyeY}
+              r={pupilRadius}
+              fill="url(#pupilGradient)"
+            />
+
+            {/* Main highlight */}
+            <Circle
+              cx={rightEyeX - pupilRadius * 0.5}
+              cy={eyeY - pupilRadius * 0.5}
+              r={pupilRadius * 0.7}
+              fill="url(#corneaGradient)"
+              opacity={0.9}
+            />
+
+            {/* Secondary highlight */}
+            <AnimatedCircle
+              cx={rightEyeX + pupilRadius * 0.8}
+              cy={eyeY + pupilRadius * 0.8}
+              r={pupilRadius * 0.3}
+              fill="#FFFFFF"
+              opacity={glossAnim}
+            />
+          </AnimatedG>
+
+          {/* Limbus (dark ring around iris) */}
+          <Circle
+            cx={rightEyeX}
+            cy={eyeY}
+            r={pupilRadius * 2.1}
+            fill="none"
+            stroke="rgba(0, 0, 0, 0.3)"
+            strokeWidth="1"
+          />
+        </G>
       </Svg>
 
       {/* Blink overlay - top eyelid */}
