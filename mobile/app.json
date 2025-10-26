@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "VisionCare",
+    "slug": "visioncare",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.visioncare.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "VisionCare needs camera access for eye tracking and calibration tests."
+      }
+    },
+    "android": {
+      "package": "com.visioncare.app",
+      "permissions": [
+        "CAMERA"
+      ]
+    },
+    "plugins": [
+      "expo-secure-store",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "VisionCare needs camera access for eye tracking and calibration tests."
+        }
+      ]
+    ],
+    "scheme": "visioncare",
+    "extra": {
+      "eas": {
+        "projectId": "your-project-id"
+      }
+    }
+  }
+}
