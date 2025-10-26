@@ -114,16 +114,23 @@ function App() {
   useEffect(() => {
     const loadModel = async () => {
       try {
-        const model = await faceLandmarksDetection.load(
-          faceLandmarksDetection.SupportedPackages.mediapipeFacemesh
+        await tf.ready()
+        const model = await faceLandmarksDetection.createDetector(
+          faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh,
+          {
+            runtime: 'mediapipe',
+            solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
+            maxFaces: 1
+          }
         )
         modelRef.current = model
         setIsModelLoaded(true)
+        console.log('✅ Model başarıyla yüklendi')
       } catch (error) {
         console.error('Model yüklenirken hata:', error)
       }
     }
-    
+
     loadModel()
   }, [])
   
@@ -131,19 +138,24 @@ function App() {
   useEffect(() => {
     const detectFace = async () => {
       if (!modelRef.current || !videoRef.current || !cameraPermission) return
-      
+
       try {
-        const predictions = await modelRef.current.estimateFaces({
-          input: videoRef.current,
-          returnRawCoordinates: false,
-        })
-        
+        const predictions = await modelRef.current.estimateFaces(videoRef.current)
+
         if (predictions.length > 0) {
           const face = predictions[0]
-          
-          // Sol göz ve sağ göz landmark'ları
-          const leftEye = face.annotations.leftEye
-          const rightEye = face.annotations.rightEye
+
+          // Sol göz ve sağ göz landmark'ları (keypoints kullanarak)
+          const keypoints = face.keypoints
+
+          // MediaPipeFaceMesh keypoint indeksleri
+          // Sol göz: 33, 160, 158, 133, 153, 144
+          // Sağ göz: 362, 385, 387, 263, 373, 380
+          const leftEyeIndices = [33, 160, 158, 133, 153, 144]
+          const rightEyeIndices = [362, 385, 387, 263, 373, 380]
+
+          const leftEye = leftEyeIndices.map(i => [keypoints[i].x, keypoints[i].y])
+          const rightEye = rightEyeIndices.map(i => [keypoints[i].x, keypoints[i].y])
           
           // Göz merkezi hesapla
           if (leftEye && leftEye.length > 0 && rightEye && rightEye.length > 0) {
