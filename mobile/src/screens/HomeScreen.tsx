@@ -38,8 +38,11 @@ export default function HomeScreen() {
             left={(props) => <Avatar.Icon {...props} icon="eye" />}
           />
           <Card.Actions>
-            <Button mode="contained" disabled>
-              Coming Soon
+            <Button
+              mode="contained"
+              onPress={() => navigation.navigate('EyeTracking')}
+            >
+              Start Calibration
             </Button>
           </Card.Actions>
         </Card>
