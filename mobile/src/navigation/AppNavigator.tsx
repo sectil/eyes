@@ -10,6 +10,7 @@ import RegisterScreen from '@/screens/RegisterScreen';
 import HomeScreen from '@/screens/HomeScreen';
 import ProfileScreen from '@/screens/ProfileScreen';
 import EyeTrackingScreen from '@/screens/EyeTrackingScreen';
+import CalibrationScreen from '@/screens/CalibrationScreen';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -17,6 +18,7 @@ export type RootStackParamList = {
   Home: undefined;
   Profile: undefined;
   EyeTracking: undefined;
+  Calibration: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -48,6 +50,7 @@ export default function AppNavigator() {
           <>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="Calibration" component={CalibrationScreen} />
             <Stack.Screen name="EyeTracking" component={EyeTrackingScreen} />
           </>
         )}

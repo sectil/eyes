@@ -58,10 +58,17 @@ echo "========================================"
 echo ""
 
 # Check if we're in the right directory
-if [ ! -d "ai-service" ] || [ ! -d "backend" ] || [ ! -d "mobile" ]; then
+if [ ! -d "ai-service" ]; then
     echo -e "${RED}Error: Must run from project root directory${NC}"
-    echo "Please run: cd /home/user/eyes && ./start-all.sh"
+    echo "Please run: cd /path/to/eyes && ./start-all.sh"
     exit 1
+fi
+
+# Check if backend and mobile exist
+if [ ! -d "backend" ] || [ ! -d "mobile" ]; then
+    echo -e "${YELLOW}Warning: backend or mobile directory not found${NC}"
+    echo -e "${YELLOW}Only AI service will be started${NC}"
+    echo ""
 fi
 
 # 1. Start AI Service

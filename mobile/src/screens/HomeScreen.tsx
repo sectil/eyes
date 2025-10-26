@@ -33,16 +33,33 @@ export default function HomeScreen() {
       <View style={styles.content}>
         <Card style={styles.card}>
           <Card.Title
-            title="Eye Calibration"
-            subtitle="Calibrate your eye tracking"
+            title="🎯 Kalibrasyon"
+            subtitle="9 noktalı göz kalibrasyonu"
+            left={(props) => <Avatar.Icon {...props} icon="target" />}
+          />
+          <Card.Actions>
+            <Button
+              mode="contained"
+              onPress={() => navigation.navigate('Calibration' as any)}
+            >
+              Kalibrasyon Yap
+            </Button>
+          </Card.Actions>
+        </Card>
+
+        <Card style={styles.card}>
+          <Card.Title
+            title="👁️ Göz Takibi"
+            subtitle="AI ile gerçek zamanlı göz analizi"
             left={(props) => <Avatar.Icon {...props} icon="eye" />}
           />
           <Card.Actions>
             <Button
               mode="contained"
               onPress={() => navigation.navigate('EyeTracking')}
+              style={{ backgroundColor: '#4ecdc4' }}
             >
-              Start Calibration
+              Göz Takibi Başlat
             </Button>
           </Card.Actions>
         </Card>

@@ -37,8 +37,12 @@ wheels/
 
 # Node
 node_modules/
+node_modules.backup/
+node_modules.old/
 .npm
 .eslintcache
+package-lock*.json
+*package-lock*.json
 
 # Environment
 .env
