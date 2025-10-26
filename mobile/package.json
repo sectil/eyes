@@ -16,6 +16,7 @@
     "expo-camera": "^17.0.8",
     "expo-constants": "^18.0.10",
     "expo-status-bar": "~3.0.8",
+    "invariant": "^2.2.4",
     "react": "19.1.0",
     "react-native": "0.81.5",
     "react-native-safe-area-context": "^5.6.1",
