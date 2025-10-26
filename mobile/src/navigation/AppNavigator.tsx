@@ -12,24 +12,23 @@ export default function AppNavigator() {
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Welcome"
-        screenOptions={{
-          headerShown: false,
-        }}
       >
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        <Stack.Screen
+          name="Welcome"
+          component={WelcomeScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={{
-            headerShown: true,
             title: 'Ana Sayfa',
             headerStyle: {
               backgroundColor: '#3498db',
             },
             headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
           }}
         />
       </Stack.Navigator>
