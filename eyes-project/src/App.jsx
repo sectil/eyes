@@ -24,30 +24,50 @@ function App() {
   const eyeSmoothingRef = useRef(new EyeSmoothing(0.4))
   const requestAnimationFrameIdRef = useRef(null)
   
-  // Kamera başlatma
+  // Kamera başlatma - iOS MOBILE OPTIMIZED
   useEffect(() => {
+    let stream = null
+
     const setupCamera = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: { 
-            width: 640, 
-            height: 480,
-            facingMode: 'user' 
+        // iOS Safari için optimize edilmiş video ayarları
+        stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            width: { ideal: 640, max: 640 },
+            height: { ideal: 480, max: 480 },
+            facingMode: 'user',
+            frameRate: { ideal: 15, max: 20 }  // iOS battery için düşük FPS
           },
           audio: false
         })
-        
+
         if (videoRef.current) {
           videoRef.current.srcObject = stream
+          videoRef.current.setAttribute('playsinline', 'true')  // iOS için critical
+          videoRef.current.setAttribute('webkit-playsinline', 'true')
           setCameraPermission(true)
+          console.log('📹 Kamera başlatıldı (iOS optimized)')
         }
       } catch (error) {
-        console.log('Kamera erişimi reddedildi:', error)
+        console.error('❌ Kamera erişimi reddedildi:', error)
         setCameraPermission(false)
       }
     }
-    
+
     setupCamera()
+
+    // Cleanup - iOS için önemli (memory leak önler)
+    return () => {
+      if (stream) {
+        stream.getTracks().forEach(track => {
+          track.stop()
+          console.log('🛑 Kamera track durduruldu')
+        })
+      }
+      if (videoRef.current) {
+        videoRef.current.srcObject = null
+      }
+    }
   }, [])
 
   // Ekran boyutuna göre otomatik ölçeklendirme
@@ -110,35 +130,53 @@ function App() {
     }
   }, [])
 
-  // TensorFlow.js modeli yükleme (MediaPipe yerine)
+  // TensorFlow.js modeli yükleme - iOS MOBILE OPTIMIZED
   useEffect(() => {
     const loadModel = async () => {
       try {
         await tf.ready()
+
+        // iOS için WebGL backend kullan
         await tf.setBackend('webgl')
+
+        // Memory optimizasyonu - eski tensor'leri temizle
+        tf.engine().startScope()
 
         const model = await faceLandmarksDetection.createDetector(
           faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh,
           {
             runtime: 'tfjs',
             maxFaces: 1,
-            refineLandmarks: true
+            refineLandmarks: false,  // iOS'ta performans için kapalı
+            detectorModelUrl: undefined,  // Default lightweight model
           }
         )
         modelRef.current = model
         setIsModelLoaded(true)
-        console.log('✅ Model başarıyla yüklendi (TensorFlow.js backend)')
+        console.log('✅ iOS için optimize edilmiş model yüklendi')
+        console.log('📱 Memory:', tf.memory())
       } catch (error) {
         console.error('Model yüklenirken hata:', error)
       }
     }
 
     loadModel()
+
+    // Cleanup - memory leak önleme
+    return () => {
+      if (modelRef.current) {
+        modelRef.current.dispose?.()
+      }
+      tf.engine().endScope()
+    }
   }, [])
   
-  // Yüz tespiti ve göz takibi
+  // Yüz tespiti ve göz takibi - iOS MOBILE OPTIMIZED
   useEffect(() => {
     let frameCount = 0
+    let lastDetectionTime = 0
+    const DETECTION_INTERVAL = 100 // iOS için 100ms (10 FPS) - battery saving
+
     const detectFace = async () => {
       if (!modelRef.current || !videoRef.current || !cameraPermission) {
         requestAnimationFrameIdRef.current = requestAnimationFrame(detectFace)
@@ -152,29 +190,36 @@ function App() {
         return
       }
 
+      // iOS için FPS throttling - her frame değil
+      const now = Date.now()
+      if (now - lastDetectionTime < DETECTION_INTERVAL) {
+        requestAnimationFrameIdRef.current = requestAnimationFrame(detectFace)
+        return
+      }
+      lastDetectionTime = now
+
       try {
-        const predictions = await modelRef.current.estimateFaces(video)
+        // TensorFlow.js inference
+        const predictions = await modelRef.current.estimateFaces(video, {
+          flipHorizontal: false
+        })
 
         frameCount++
         if (frameCount % 30 === 0) {
-          console.log(`🎥 Frame ${frameCount}: ${predictions.length} yüz tespit edildi`)
+          console.log(`🎥 Frame ${frameCount}: ${predictions.length} yüz | Memory:`, tf.memory().numTensors)
         }
 
         if (predictions.length > 0) {
           const face = predictions[0]
-
-          // Sol göz ve sağ göz landmark'ları (keypoints kullanarak)
           const keypoints = face.keypoints
 
           if (!keypoints || keypoints.length < 468) {
-            console.warn('⚠️ Yeterli keypoint bulunamadı:', keypoints?.length)
+            console.warn('⚠️ Yeterli keypoint yok:', keypoints?.length)
             requestAnimationFrameIdRef.current = requestAnimationFrame(detectFace)
             return
           }
 
-          // MediaPipeFaceMesh keypoint indeksleri
-          // Sol göz: 33, 160, 158, 133, 153, 144
-          // Sağ göz: 362, 385, 387, 263, 373, 380
+          // Sadece göz keypoints - memory için minimize
           const leftEyeIndices = [33, 160, 158, 133, 153, 144]
           const rightEyeIndices = [362, 385, 387, 263, 373, 380]
 
@@ -237,15 +282,27 @@ function App() {
         ref={videoRef}
         autoPlay
         playsInline
+        muted
+        webkit-playsinline="true"
         className="camera-feed"
+        style={{ objectFit: 'cover' }}
       />
       
-      <Canvas camera={{ position: [0, 0, 2.5], fov: cameraFov }} className="canvas">
-        {/* Işıklandırma */}
+      <Canvas
+        camera={{ position: [0, 0, 2.5], fov: cameraFov }}
+        className="canvas"
+        dpr={[1, 1.5]}  // iOS için pixel ratio limit - memory save
+        performance={{ min: 0.5 }}  // Auto performance adjustment
+        gl={{
+          antialias: false,  // iOS performance
+          alpha: false,
+          powerPreference: 'high-performance'
+        }}
+      >
+        {/* Işıklandırma - iOS için optimize */}
         <ambientLight intensity={0.6} />
         <directionalLight position={[5, 5, 5]} intensity={0.8} />
-        <directionalLight position={[-5, -5, -5]} intensity={0.3} />
-        <pointLight position={[0, 0, 5]} intensity={0.5} color="#ffffff" />
+        <pointLight position={[0, 0, 5]} intensity={0.4} color="#ffffff" />
 
         <OrbitControls
           enableZoom={false}
