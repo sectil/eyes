@@ -23,15 +23,14 @@ function App() {
   const blinkDetectorRef = useRef(new BlinkDetector())
   const eyeSmoothingRef = useRef(new EyeSmoothing(0.4))
   const requestAnimationFrameIdRef = useRef(null)
-  
+  const streamRef = useRef(null)  // iOS için stream ref
+
   // Kamera başlatma - iOS MOBILE OPTIMIZED
   useEffect(() => {
-    let stream = null
-
     const setupCamera = async () => {
       try {
         // iOS Safari için optimize edilmiş video ayarları
-        stream = await navigator.mediaDevices.getUserMedia({
+        const stream = await navigator.mediaDevices.getUserMedia({
           video: {
             width: { ideal: 640, max: 640 },
             height: { ideal: 480, max: 480 },
@@ -40,6 +39,8 @@ function App() {
           },
           audio: false
         })
+
+        streamRef.current = stream  // Ref'e kaydet
 
         if (videoRef.current) {
           videoRef.current.srcObject = stream
@@ -58,11 +59,12 @@ function App() {
 
     // Cleanup - iOS için önemli (memory leak önler)
     return () => {
-      if (stream) {
-        stream.getTracks().forEach(track => {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => {
           track.stop()
           console.log('🛑 Kamera track durduruldu')
         })
+        streamRef.current = null
       }
       if (videoRef.current) {
         videoRef.current.srcObject = null
