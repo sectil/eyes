@@ -6,7 +6,11 @@ echo "🔄 Updating from remote..."
 cd /Users/haydarerkaya/Documents/eyes
 git pull origin claude/fix-expo-sdk-version-011CUUpzxfWRueywRAga91go
 
-echo "📱 Starting mobile app..."
+echo "🧹 Deep cleaning cache..."
 cd mobile
 rm -rf .expo
-npm start -- --clear
+rm -rf node_modules/.cache
+watchman watch-del-all 2>/dev/null || true
+
+echo "📱 Starting mobile app with clean cache..."
+npx expo start --clear
