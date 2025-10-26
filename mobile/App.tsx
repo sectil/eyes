@@ -25,34 +25,57 @@ export default function App() {
   // Welcome Screen
   if (currentScreen === 'Welcome') {
     return (
-      <SafeAreaView style={styles.container}>
-        <StatusBar style="auto" />
-        <ScrollView contentContainerStyle={styles.scrollContent}>
-          <View style={styles.content}>
-            <View style={styles.eyeContainer}>
-              <AnimatedEye size="large" />
+      <View style={styles.welcomeContainer}>
+        <StatusBar style="light" />
+
+        {/* Gradient Background */}
+        <View style={styles.gradientBackground}>
+          {/* Top Section - Eye Icon & Title */}
+          <View style={styles.welcomeTop}>
+            <View style={styles.welcomeEyeIcon}>
+              <Text style={styles.eyeEmoji}>👁</Text>
             </View>
 
-            <Text style={styles.title}>VisionCare</Text>
-            <Text style={styles.subtitle}>Göz Sağlığı Asistanı</Text>
+            <Text style={styles.welcomeTitle}>Eyes</Text>
+            <Text style={styles.welcomeSubtitle}>Göz Sağlığı Asistanınız</Text>
+          </View>
 
-            <Text style={styles.description}>
-              Gözlerinizin sağlığını takip edin, yapay zeka destekli testler ile göz sağlığınızı koruyun.
-            </Text>
+          {/* Middle Section - Value Props */}
+          <View style={styles.welcomeMiddle}>
+            <View style={styles.featureRow}>
+              <View style={styles.featureDot} />
+              <Text style={styles.featureText}>Yapay Zeka Destekli Testler</Text>
+            </View>
+            <View style={styles.featureRow}>
+              <View style={styles.featureDot} />
+              <Text style={styles.featureText}>Kişiselleştirilmiş Egzersizler</Text>
+            </View>
+            <View style={styles.featureRow}>
+              <View style={styles.featureDot} />
+              <Text style={styles.featureText}>7/24 Göz Sağlığı Takibi</Text>
+            </View>
+          </View>
+
+          {/* Bottom Section - CTA */}
+          <View style={styles.welcomeBottom}>
+            <TouchableOpacity
+              style={styles.welcomePrimaryButton}
+              onPress={() => setCurrentScreen('LoginOptions')}
+              activeOpacity={0.9}
+            >
+              <Text style={styles.welcomePrimaryButtonText}>Hemen Başla</Text>
+              <Text style={styles.welcomeButtonArrow}>→</Text>
+            </TouchableOpacity>
 
             <TouchableOpacity
-              style={styles.primaryButton}
-              onPress={() => setCurrentScreen('LoginOptions')}
+              style={styles.welcomeSecondaryButton}
+              onPress={() => setCurrentScreen('EmailLogin')}
             >
-              <Text style={styles.primaryButtonText}>Başla</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => setCurrentScreen('EmailLogin')}>
-              <Text style={styles.linkText}>Zaten hesabınız var mı? <Text style={styles.linkBold}>Giriş Yap</Text></Text>
+              <Text style={styles.welcomeSecondaryButtonText}>Hesabım Var</Text>
             </TouchableOpacity>
           </View>
-        </ScrollView>
-      </SafeAreaView>
+        </View>
+      </View>
     );
   }
 
@@ -263,6 +286,108 @@ const styles = StyleSheet.create({
   flex: {
     flex: 1,
   },
+  // Welcome Screen Styles
+  welcomeContainer: {
+    flex: 1,
+    backgroundColor: '#0F172A',
+  },
+  gradientBackground: {
+    flex: 1,
+    backgroundColor: '#0F172A',
+    paddingTop: 60,
+    paddingBottom: 40,
+    paddingHorizontal: 24,
+  },
+  welcomeTop: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  welcomeEyeIcon: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: 'rgba(8, 145, 178, 0.1)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 32,
+    borderWidth: 2,
+    borderColor: 'rgba(8, 145, 178, 0.2)',
+  },
+  eyeEmoji: {
+    fontSize: 64,
+  },
+  welcomeTitle: {
+    fontSize: 48,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    letterSpacing: -1,
+    marginBottom: 8,
+  },
+  welcomeSubtitle: {
+    fontSize: 18,
+    color: 'rgba(255, 255, 255, 0.6)',
+    fontWeight: '400',
+  },
+  welcomeMiddle: {
+    flex: 0.8,
+    justifyContent: 'center',
+    paddingVertical: 32,
+  },
+  featureRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  featureDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#06B6D4',
+    marginRight: 16,
+  },
+  featureText: {
+    fontSize: 17,
+    color: 'rgba(255, 255, 255, 0.9)',
+    fontWeight: '500',
+  },
+  welcomeBottom: {
+    paddingTop: 20,
+  },
+  welcomePrimaryButton: {
+    backgroundColor: '#0891B2',
+    paddingVertical: 18,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
+    flexDirection: 'row',
+  },
+  welcomePrimaryButtonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '700',
+    marginRight: 8,
+  },
+  welcomeButtonArrow: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    fontWeight: '700',
+  },
+  welcomeSecondaryButton: {
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    paddingVertical: 18,
+    borderRadius: 16,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  welcomeSecondaryButtonText: {
+    color: 'rgba(255, 255, 255, 0.8)',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  // Other Screens Styles
   container: {
     flex: 1,
     backgroundColor: '#F3F4F6',
