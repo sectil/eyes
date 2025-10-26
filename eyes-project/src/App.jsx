@@ -209,6 +209,12 @@ function App() {
         return
       }
 
+      // İlk kez video boyutlarını log'la
+      if (frameCount === 0) {
+        console.log('📹 Video boyutları:', video.videoWidth, 'x', video.videoHeight)
+        console.log('📹 Video readyState:', video.readyState)
+      }
+
       // iOS için FPS throttling - her frame değil
       const now = Date.now()
       if (now - lastDetectionTime < DETECTION_INTERVAL) {
@@ -218,14 +224,17 @@ function App() {
       lastDetectionTime = now
 
       try {
-        // TensorFlow.js inference
+        // TensorFlow.js inference - flipHorizontal true olmalı!
         const predictions = await modelRef.current.estimateFaces(video, {
-          flipHorizontal: false
+          flipHorizontal: true  // iOS ön kamera için önemli
         })
 
         frameCount++
         if (frameCount % 30 === 0) {
           console.log(`🎥 Frame ${frameCount}: ${predictions.length} yüz | Memory:`, tf.memory().numTensors)
+          if (predictions.length === 0) {
+            console.warn('⚠️ Hiç yüz tespit edilmiyor! Yüzünüz kamerada görünüyor mu?')
+          }
         }
 
         if (predictions.length > 0) {
