@@ -141,8 +141,15 @@ function App() {
     const detectFace = async () => {
       if (!modelRef.current || !videoRef.current || !cameraPermission) return
 
+      // Video'nun tamamen yüklendiğinden emin ol
+      const video = videoRef.current
+      if (video.readyState < 2 || video.videoWidth === 0 || video.videoHeight === 0) {
+        requestAnimationFrameIdRef.current = requestAnimationFrame(detectFace)
+        return
+      }
+
       try {
-        const predictions = await modelRef.current.estimateFaces(videoRef.current)
+        const predictions = await modelRef.current.estimateFaces(video)
 
         if (predictions.length > 0) {
           const face = predictions[0]
