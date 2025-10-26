@@ -9,6 +9,11 @@ import numpy as np
 import base64
 from io import BytesIO
 from PIL import Image, ImageDraw
+import os
+
+# Get port from environment or default to 5000
+PORT = int(os.environ.get('PORT', 5000))
+SERVICE_URL = f'http://localhost:{PORT}'
 
 
 def create_test_image():
@@ -59,7 +64,7 @@ def test_health_check():
     print("="*60)
 
     try:
-        response = requests.get('http://localhost:5000/health', timeout=5)
+        response = requests.get(f'{SERVICE_URL}/health', timeout=5)
         if response.status_code == 200:
             data = response.json()
             print("✓ Health check passed!")
@@ -91,7 +96,7 @@ def test_face_detection():
 
         # Send request
         response = requests.post(
-            'http://localhost:5000/api/detect-face',
+            f'{SERVICE_URL}/api/detect-face',
             json={
                 'image': base64_img,
                 'timestamp': '2025-10-26T17:30:00Z'
