@@ -14,6 +14,8 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
   const pupilY = useRef(new Animated.Value(0)).current;
   const blinkAnim = useRef(new Animated.Value(1)).current;
   const glossAnim = useRef(new Animated.Value(0.3)).current;
+  // Pupil dilation: 1.0 = normal (11px), 0.7 = bright light (7.7px), 1.4 = darkness (15.4px)
+  const pupilScale = useRef(new Animated.Value(1.0)).current;
 
   const dimensions = size === 'large' ? { width: 260, height: 110 } : { width: 140, height: 60 };
   const eyeWidth = size === 'large' ? 48 : 25;
@@ -28,18 +30,22 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
   const moveRange = size === 'large' ? 6 : 4;
 
   useEffect(() => {
-    // Blink animation
+    // Blink animation - Anatomik zamanlamalar (45ms kapanma, 15ms kapalı, 90ms açılma)
     const blink = Animated.loop(
       Animated.sequence([
         Animated.delay(4000),
+        // Kapanma fazı (40-50ms)
         Animated.timing(blinkAnim, {
           toValue: 0.1,
-          duration: 150,
+          duration: 45,
           useNativeDriver: true,
         }),
+        // Kapalı kalma (10-20ms)
+        Animated.delay(15),
+        // Açılma fazı (90ms)
         Animated.timing(blinkAnim, {
           toValue: 1,
-          duration: 150,
+          duration: 90,
           useNativeDriver: true,
         }),
       ])
@@ -99,16 +105,45 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
       ])
     );
 
+    // Pupil dilation animation (1.5-8mm range simulation)
+    const dilation = Animated.loop(
+      Animated.sequence([
+        Animated.delay(3000),
+        // Işık artınca pupil daralır (miosis)
+        Animated.timing(pupilScale, {
+          toValue: 0.7,
+          duration: 800,
+          useNativeDriver: true,
+        }),
+        Animated.delay(2500),
+        // Karanlıkta pupil genişler (mydriasis)
+        Animated.timing(pupilScale, {
+          toValue: 1.4,
+          duration: 1200,
+          useNativeDriver: true,
+        }),
+        Animated.delay(2500),
+        // Normal duruma dön
+        Animated.timing(pupilScale, {
+          toValue: 1.0,
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+      ])
+    );
+
     blink.start();
     lookAround.start();
     gloss.start();
+    dilation.start();
 
     return () => {
       blink.stop();
       lookAround.stop();
       gloss.stop();
+      dilation.stop();
     };
-  }, [blinkAnim, pupilX, pupilY, glossAnim, moveRange]);
+  }, [blinkAnim, pupilX, pupilY, glossAnim, pupilScale, moveRange]);
 
   // Function to render a single realistic eye
   const renderEye = (eyeX: number) => {
@@ -183,6 +218,27 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
             );
           })}
 
+          {/* Fuchs Crypts - Elmas şeklindeki iris açıklıkları */}
+          {size === 'large' && [...Array(6)].map((_, i) => {
+            const angle = (i * 60 + 30) * (Math.PI / 180);
+            const distance = irisRadius * 0.75;
+            const cryptX = eyeX + Math.cos(angle) * distance;
+            const cryptY = eyeY + Math.sin(angle) * distance;
+            const cryptSize = 2 + Math.random() * 1.5;
+
+            return (
+              <Ellipse
+                key={`crypt-${i}`}
+                cx={cryptX}
+                cy={cryptY}
+                rx={cryptSize}
+                ry={cryptSize * 1.4}
+                fill="rgba(0,0,0,0.12)"
+                rotation={angle * (180 / Math.PI)}
+              />
+            );
+          })}
+
           {/* Collarette (wavy pattern) */}
           <Circle
             cx={eyeX}
@@ -231,22 +287,26 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
             strokeWidth="1.5"
           />
 
-          {/* Pupil with gradient */}
-          <Circle
+          {/* Pupil with gradient - Animated dilation */}
+          <AnimatedCircle
             cx={eyeX}
             cy={eyeY}
             r={pupilRadius}
             fill="url(#pupilGradient)"
+            scale={pupilScale}
+            origin={`${eyeX}, ${eyeY}`}
           />
 
-          {/* Pupil edge */}
-          <Circle
+          {/* Pupil edge - Animated */}
+          <AnimatedCircle
             cx={eyeX}
             cy={eyeY}
             r={pupilRadius + 0.5}
             fill="none"
             stroke="rgba(0,0,0,0.8)"
             strokeWidth="0.5"
+            scale={pupilScale}
+            origin={`${eyeX}, ${eyeY}`}
           />
 
           {/* Main cornea highlight (wetness) */}
@@ -274,6 +334,14 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
             fill="#FFFFFF"
             opacity={0.9}
           />
+
+          {/* Kornea refraction overlay - Tüm iris üzerinde */}
+          <Circle
+            cx={eyeX}
+            cy={eyeY}
+            r={irisRadius + 2}
+            fill="url(#corneaRefraction)"
+          />
         </AnimatedG>
       </G>
     );
@@ -297,13 +365,13 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
             <Stop offset="100%" stopColor="rgba(0,0,0,0.08)" />
           </RadialGradient>
 
-          {/* Iris gradients */}
+          {/* Iris gradients - Kahverengi (dünya nüfusunun %70-80'i) */}
           <RadialGradient id="irisBase" cx="50%" cy="50%">
-            <Stop offset="0%" stopColor="#38BDF8" stopOpacity="1" />
-            <Stop offset="25%" stopColor="#0EA5E9" stopOpacity="1" />
-            <Stop offset="50%" stopColor="#0891B2" stopOpacity="1" />
-            <Stop offset="75%" stopColor="#0E7490" stopOpacity="1" />
-            <Stop offset="100%" stopColor="#164E63" stopOpacity="1" />
+            <Stop offset="0%" stopColor="#A67C52" stopOpacity="1" />
+            <Stop offset="25%" stopColor="#8C5933" stopOpacity="1" />
+            <Stop offset="50%" stopColor="#6B4423" stopOpacity="1" />
+            <Stop offset="75%" stopColor="#4A2F18" stopOpacity="1" />
+            <Stop offset="100%" stopColor="#2D1B0E" stopOpacity="1" />
           </RadialGradient>
 
           <RadialGradient id="irisPattern" cx="50%" cy="50%">
@@ -335,6 +403,14 @@ export default function AnimatedEye({ size = 'large' }: AnimatedEyeProps) {
             <Stop offset="0%" stopColor="rgba(0,0,0,0)" />
             <Stop offset="85%" stopColor="rgba(0,0,0,0.1)" />
             <Stop offset="100%" stopColor="rgba(0,0,0,0.5)" />
+          </RadialGradient>
+
+          {/* Kornea refraction katmanı - Islaklık ve derinlik */}
+          <RadialGradient id="corneaRefraction" cx="50%" cy="45%">
+            <Stop offset="0%" stopColor="rgba(255,255,255,0.15)" />
+            <Stop offset="30%" stopColor="rgba(255,255,255,0.08)" />
+            <Stop offset="60%" stopColor="rgba(255,255,255,0.03)" />
+            <Stop offset="100%" stopColor="rgba(255,255,255,0)" />
           </RadialGradient>
         </Defs>
 
