@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisionCare - Göz Kalibrasyonu ve Egzersiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .status-item {
+            flex: 1;
+            min-width: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .status-item .label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .status-item .value {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .status-item.success {
+            background: rgba(76, 175, 80, 0.3);
+        }
+
+        .status-item.error {
+            background: rgba(244, 67, 54, 0.3);
+        }
+
+        .calibration-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .calibration-point {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #fff;
+            border: 3px solid #667eea;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .calibration-point.active {
+            width: 50px;
+            height: 50px;
+            background: #4CAF50;
+            border-color: #fff;
+            animation: pulse 1s infinite;
+        }
+
+        .calibration-point.completed {
+            background: #2196F3;
+            border-color: #fff;
+        }
+
+        .calibration-point.collecting {
+            animation: collecting 0.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+        }
+
+        @keyframes collecting {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.7;
+            }
+        }
+
+        .gaze-indicator {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff0;
+            border: 2px solid #f00;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: all 0.1s ease;
+            z-index: 100;
+        }
+
+        .pupil-trail {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 0, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button.primary {
+            background: #4CAF50;
+            color: white;
+        }
+
+        button.primary:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        button.secondary {
+            background: #2196F3;
+            color: white;
+        }
+
+        button.secondary:hover {
+            background: #0b7dda;
+        }
+
+        button.danger {
+            background: #f44336;
+            color: white;
+        }
+
+        button.danger:hover {
+            background: #da190b;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .eye-data {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .eye-data-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .eye-data-item .label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .eye-data-item .value {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .exercise-mode {
+            text-align: center;
+        }
+
+        .exercise-instruction {
+            font-size: 1.3rem;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .camera-feed {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            background: #000;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .connection-status.connected {
+            background: #4CAF50;
+        }
+
+        .connection-status.disconnected {
+            background: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="connection-status disconnected" id="connectionStatus">
+        AI Service: Disconnected
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>👁️ VisionCare</h1>
+            <p>Profesyonel Göz Takibi, Kalibrasyon ve Egzersiz Sistemi</p>
+        </div>
+
+        <!-- Main Menu -->
+        <div class="card" id="mainMenu">
+            <h2 style="margin-bottom: 20px;">Sistem Durumu</h2>
+            <div class="status-bar">
+                <div class="status-item" id="aiStatus">
+                    <div class="label">AI Service</div>
+                    <div class="value">❌</div>
+                </div>
+                <div class="status-item" id="cameraStatus">
+                    <div class="label">Kamera</div>
+                    <div class="value">❌</div>
+                </div>
+                <div class="status-item" id="calibrationStatus">
+                    <div class="label">Kalibrasyon</div>
+                    <div class="value">Yok</div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="primary" onclick="startCalibration()">
+                    🎯 Kalibrasyon Yap
+                </button>
+                <button class="secondary" onclick="startExercise()" id="exerciseBtn" disabled>
+                    💪 Göz Egzersizi
+                </button>
+                <button class="secondary" onclick="startTracking()" id="trackingBtn" disabled>
+                    👁️ Göz Takibi Başlat
+                </button>
+            </div>
+        </div>
+
+        <!-- Calibration Screen -->
+        <div class="card hidden" id="calibrationScreen">
+            <h2>Kalibrasyon</h2>
+            <p style="margin: 15px 0;">Ekranda görünen noktalara sırayla bakın. Her nokta için göz bebeğiniz kaydedilecek.</p>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="calibrationProgress" style="width: 0%">0%</div>
+            </div>
+
+            <div class="calibration-container" id="calibrationContainer">
+                <!-- Calibration points will be added here dynamically -->
+            </div>
+
+            <div class="button-group">
+                <button class="danger" onclick="cancelCalibration()">İptal</button>
+                <button class="primary" onclick="saveCalibration()" id="saveCalibrationBtn" disabled>
+                    Kalibrasyonu Kaydet
+                </button>
+            </div>
+        </div>
+
+        <!-- Exercise Screen -->
+        <div class="card hidden" id="exerciseScreen">
+            <h2>Göz Egzersizleri</h2>
+
+            <div class="exercise-instruction" id="exerciseInstruction">
+                Hazırlanıyor...
+            </div>
+
+            <div class="status-bar">
+                <div class="status-item">
+                    <div class="label">Egzersiz Süresi</div>
+                    <div class="value" id="exerciseTime">0s</div>
+                </div>
+                <div class="status-item">
+                    <div class="label">Göz Kırpma</div>
+                    <div class="value" id="blinkCount">0</div>
+                </div>
+                <div class="status-item">
+                    <div class="label">Bakış Yönü</div>
+                    <div class="value" id="gazeDirection">-</div>
+                </div>
+            </div>
+
+            <div class="calibration-container" id="exerciseContainer">
+                <!-- Exercise visualization will be here -->
+            </div>
+
+            <div class="eye-data" id="exerciseData">
+                <!-- Real-time eye data will be displayed here -->
+            </div>
+
+            <div class="button-group">
+                <button class="danger" onclick="stopExercise()">Durdur</button>
+            </div>
+        </div>
+
+        <!-- Tracking Screen -->
+        <div class="card hidden" id="trackingScreen">
+            <h2>Göz Takibi</h2>
+
+            <div class="calibration-container" id="trackingContainer">
+                <div class="gaze-indicator hidden" id="gazeIndicator"></div>
+            </div>
+
+            <div class="eye-data" id="trackingData">
+                <!-- Real-time tracking data -->
+            </div>
+
+            <div class="button-group">
+                <button class="danger" onclick="stopTracking()">Durdur</button>
+            </div>
+        </div>
+
+        <!-- Camera Feed -->
+        <div class="card">
+            <h3>Kamera Görüntüsü</h3>
+            <div class="camera-feed">
+                <video id="cameraVideo" autoplay playsinline></video>
+                <div id="cameraPlaceholder">Kamera başlatılıyor...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
