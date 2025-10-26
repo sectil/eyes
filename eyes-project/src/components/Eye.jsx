@@ -9,12 +9,12 @@ function Eye({ pupilPosition = { x: 0, y: 0 } }) {
   const pupilRef = useRef()
   const { camera } = useThree()
   
-  // Kahverengi iris shader
+  // Modern güzel iris shader
   const irisVertexShader = `
     varying vec2 vUv;
     varying vec3 vNormal;
     varying vec3 vPosition;
-    
+
     void main() {
       vUv = uv;
       vNormal = normalize(normalMatrix * normal);
@@ -22,7 +22,7 @@ function Eye({ pupilPosition = { x: 0, y: 0 } }) {
       gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
     }
   `
-  
+
   const irisFragmentShader = `
     uniform vec3 uIrisColor;
     uniform float uTime;
@@ -30,71 +30,45 @@ function Eye({ pupilPosition = { x: 0, y: 0 } }) {
     varying vec3 vNormal;
     varying vec3 vPosition;
 
-    float hash(vec2 p) {
-      return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
-    }
-
-    float noise(vec2 p) {
-      vec2 i = floor(p);
-      vec2 f = fract(p);
-      f = f * f * (3.0 - 2.0 * f);
-      return mix(
-        mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), f.x),
-        mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x),
-        f.y
-      );
-    }
-
     void main() {
       vec2 center = vec2(0.5);
       vec2 dir = vUv - center;
       float dist = length(dir);
       float angle = atan(dir.y, dir.x);
 
-      // Daha detaylı iris deseni
-      float fibers = 0.0;
-      for (float i = 0.0; i < 3.0; i++) {
-        fibers += sin(angle * (30.0 + i * 10.0) + dist * 15.0 + uTime * 0.1) * (0.5 / (i + 1.0));
-      }
-      fibers = fibers * 0.5 + 0.5;
+      // Modern parlak renkler - Turkuaz/Aqua
+      vec3 innerColor = vec3(0.4, 0.9, 1.0);    // Parlak açık mavi
+      vec3 midColor = vec3(0.2, 0.7, 0.95);     // Turkuaz
+      vec3 outerColor = vec3(0.15, 0.5, 0.85);  // Koyu mavi
 
-      // Organik noise katmanları
-      float n1 = noise(vUv * 80.0 + vec2(uTime * 0.01));
-      float n2 = noise(vUv * 150.0 - vec2(uTime * 0.005));
-      float detailNoise = n1 * 0.4 + n2 * 0.3;
+      // Temiz radyal gradient
+      vec3 irisColor = innerColor;
+      irisColor = mix(irisColor, midColor, smoothstep(0.0, 0.35, dist));
+      irisColor = mix(irisColor, outerColor, smoothstep(0.35, 0.45, dist));
 
-      // Daha canlı renk paleti
-      vec3 color1 = vec3(0.2, 0.5, 0.8);  // Mavi
-      vec3 color2 = vec3(0.4, 0.8, 0.9);  // Açık turkuaz
-      vec3 color3 = vec3(0.1, 0.3, 0.6);  // Koyu mavi
-      vec3 amber = vec3(0.8, 0.6, 0.2);   // Altın amber
+      // İnce radyal hatlar (minimal)
+      float lines = sin(angle * 60.0) * 0.03;
+      irisColor += lines;
 
-      // Renkli iris deseni
-      vec3 irisColor = mix(color1, color2, fibers);
-      irisColor = mix(irisColor, color3, detailNoise);
-      irisColor = mix(irisColor, amber, noise(vUv * 100.0) * 0.3);
+      // Parıldayan halka efekti
+      float ring1 = smoothstep(0.22, 0.24, dist) * (1.0 - smoothstep(0.24, 0.26, dist));
+      irisColor += vec3(0.6, 1.0, 1.0) * ring1 * 0.4;
 
-      // Radyal gradient - merkez ışıltısı
-      float radialGradient = smoothstep(0.0, 0.4, dist);
-      vec3 centerGlow = vec3(0.9, 0.95, 1.0);
-      irisColor = mix(centerGlow, irisColor, radialGradient);
+      // Limbal ring - koyu dış halka
+      float limbal = smoothstep(0.45, 0.48, dist);
+      irisColor = mix(irisColor, vec3(0.05, 0.2, 0.35), limbal);
 
-      // Limbal ring (dış parlak halka)
-      float limbal = smoothstep(0.42, 0.48, dist);
-      vec3 limbalColor = vec3(0.05, 0.15, 0.3);
-      irisColor = mix(irisColor, limbalColor, limbal);
+      // Dış kenar parlak halka
+      float outerRing = smoothstep(0.48, 0.49, dist) * (1.0 - smoothstep(0.49, 0.5, dist));
+      irisColor += vec3(0.3, 0.8, 1.0) * outerRing * 0.6;
 
-      // Dış kenar parlaması
-      float edgeGlow = smoothstep(0.48, 0.5, dist);
-      irisColor = mix(irisColor, vec3(0.3, 0.5, 0.7), edgeGlow * 0.5);
+      // Işıltı efekti
+      float glow = (1.0 - dist * 1.5) * 0.3;
+      irisColor += vec3(1.0, 1.0, 1.0) * glow;
 
-      // Fresnel ve speküler parlaması
-      float fresnel = pow(1.0 - abs(dot(vNormal, vec3(0.0, 0.0, 1.0))), 3.0);
-      irisColor += vec3(0.6, 0.7, 0.9) * fresnel * 0.3;
-
-      // Dinamik parıltı efekti
-      float sparkle = noise(vUv * 200.0 + uTime * 0.5) * noise(vUv * 150.0 - uTime * 0.3);
-      irisColor += vec3(1.0, 1.0, 1.0) * sparkle * 0.1;
+      // Fresnel parlaklık
+      float fresnel = pow(1.0 - abs(dot(vNormal, vec3(0.0, 0.0, 1.0))), 2.5);
+      irisColor += vec3(0.8, 1.0, 1.0) * fresnel * 0.2;
 
       gl_FragColor = vec4(irisColor, 1.0);
     }
@@ -151,23 +125,23 @@ function Eye({ pupilPosition = { x: 0, y: 0 } }) {
     })
   }, [])
   
-  // Sclera materyal - daha gerçekçi göz beyazı
+  // Sclera materyal - temiz göz beyazı
   const scleraMaterial = useMemo(() => {
     return new THREE.MeshStandardMaterial({
-      color: 0xfcf9f5,
-      roughness: 0.6,
+      color: 0xffffff,
+      roughness: 0.5,
       metalness: 0.0,
-      emissive: 0xfff8f0,
-      emissiveIntensity: 0.05
+      emissive: 0xffffff,
+      emissiveIntensity: 0.1
     })
   }, [])
-  
-  // Pupil materyal
+
+  // Pupil materyal - derin siyah
   const pupilMaterial = useMemo(() => {
     return new THREE.MeshStandardMaterial({
       color: 0x000000,
-      roughness: 0.8,
-      metalness: 0.1,
+      roughness: 0.3,
+      metalness: 0.0,
       emissive: 0x000000
     })
   }, [])
@@ -198,44 +172,55 @@ function Eye({ pupilPosition = { x: 0, y: 0 } }) {
       {/* Sclera (göz beyazı) */}
       <mesh ref={scleraRef} geometry={new THREE.SphereGeometry(1.0, 32, 16)} material={scleraMaterial} />
       
-      {/* Iris */}
-      <mesh 
-        ref={irisRef} 
-        position={[0, 0, 0.99]} 
-        geometry={new THREE.CircleGeometry(0.3, 32)} 
+      {/* Iris - daha büyük */}
+      <mesh
+        ref={irisRef}
+        position={[0, 0, 0.99]}
+        geometry={new THREE.CircleGeometry(0.38, 40)}
         material={irisMaterial}
         rotation={[0, 0, 0]}
       />
-      
-      {/* Pupil */}
-      <mesh 
-        ref={pupilRef} 
-        position={[0, 0, 0.995]} 
-        geometry={new THREE.CircleGeometry(0.15, 32)} 
+
+      {/* Pupil - orantılı */}
+      <mesh
+        ref={pupilRef}
+        position={[0, 0, 0.995]}
+        geometry={new THREE.CircleGeometry(0.17, 40)}
         material={pupilMaterial}
       />
       
-      {/* Purkinje görüntüsü (göz parıltısı) - Ana parlama */}
-      <mesh position={[0.12, 0.15, 1.06]}>
-        <circleGeometry args={[0.1, 20]} />
-        <meshBasicMaterial color={0xffffff} transparent opacity={0.85} />
+      {/* Ana ışık yansıması - büyük ve parlak */}
+      <mesh position={[0.15, 0.18, 1.08]}>
+        <circleGeometry args={[0.14, 24]} />
+        <meshBasicMaterial color={0xffffff} transparent opacity={0.95} />
       </mesh>
 
-      {/* İkincil parlamalar */}
-      <mesh position={[-0.08, -0.08, 1.045]}>
-        <circleGeometry args={[0.05, 16]} />
-        <meshBasicMaterial color={0xe0f0ff} transparent opacity={0.4} />
+      {/* İkinci parlama - yumuşak halo */}
+      <mesh position={[0.15, 0.18, 1.075]}>
+        <circleGeometry args={[0.20, 24]} />
+        <meshBasicMaterial color={0xccffff} transparent opacity={0.3} />
       </mesh>
 
-      <mesh position={[0.05, -0.1, 1.04]}>
-        <circleGeometry args={[0.03, 12]} />
-        <meshBasicMaterial color={0xffffff} transparent opacity={0.25} />
+      {/* Alt yansımalar - dengeli görünüm */}
+      <mesh position={[-0.12, -0.12, 1.055]}>
+        <circleGeometry args={[0.07, 20]} />
+        <meshBasicMaterial color={0xffffff} transparent opacity={0.6} />
       </mesh>
 
-      {/* Işık yansıması halkası */}
-      <mesh position={[0, 0, 1.055]} rotation={[0, 0, Math.PI / 4]}>
-        <ringGeometry args={[0.28, 0.32, 32]} />
-        <meshBasicMaterial color={0x88ccff} transparent opacity={0.15} side={THREE.DoubleSide} />
+      <mesh position={[-0.12, -0.12, 1.05]}>
+        <circleGeometry args={[0.10, 20]} />
+        <meshBasicMaterial color={0xe0f8ff} transparent opacity={0.25} />
+      </mesh>
+
+      {/* Küçük parlama noktaları */}
+      <mesh position={[0.08, -0.14, 1.045]}>
+        <circleGeometry args={[0.04, 16]} />
+        <meshBasicMaterial color={0xffffff} transparent opacity={0.5} />
+      </mesh>
+
+      <mesh position={[-0.18, 0.05, 1.045]}>
+        <circleGeometry args={[0.035, 16]} />
+        <meshBasicMaterial color={0xffffff} transparent opacity={0.4} />
       </mesh>
       
       {/* Kornea (şeffaf katman) */}
