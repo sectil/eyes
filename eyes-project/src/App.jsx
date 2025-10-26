@@ -110,22 +110,24 @@ function App() {
     }
   }, [])
 
-  // MediaPipe modeli yükleme
+  // TensorFlow.js modeli yükleme (MediaPipe yerine)
   useEffect(() => {
     const loadModel = async () => {
       try {
         await tf.ready()
+        await tf.setBackend('webgl')
+
         const model = await faceLandmarksDetection.createDetector(
           faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh,
           {
-            runtime: 'mediapipe',
-            solutionPath: 'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh',
-            maxFaces: 1
+            runtime: 'tfjs',
+            maxFaces: 1,
+            refineLandmarks: true
           }
         )
         modelRef.current = model
         setIsModelLoaded(true)
-        console.log('✅ Model başarıyla yüklendi')
+        console.log('✅ Model başarıyla yüklendi (TensorFlow.js backend)')
       } catch (error) {
         console.error('Model yüklenirken hata:', error)
       }
