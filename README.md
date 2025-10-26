@@ -2,6 +2,36 @@
 
 Professional eye tracking application with real AI face detection, pupil tracking, gaze analysis, calibration system, and eye exercises.
 
+## ⚠️ ÖNEMLİ: İLK KULLANIM
+
+**Eğer `calibration-app` klasörü veya `start-calibration.sh` dosyası yoksa:**
+
+```bash
+# 1. Eyes proje klasörüne gidin
+cd ~/eyes
+# (veya projenizin olduğu yere: cd ~/Documents/eyes, cd ~/Desktop/eyes, vs.)
+
+# 2. En son değişiklikleri çekin
+git pull origin claude/fix-metro-package-export-011CUVwPfC86uR2miwR2Nnws
+
+# 3. Artık kullanmaya hazır!
+./start-calibration.sh
+```
+
+**Projenin yerini bilmiyorsanız:**
+```bash
+# Projeyi bulun
+find ~ -name "eyes" -type d 2>/dev/null | grep -v node_modules
+
+# Bulduğunuz yere gidin
+cd [bulunan-yol]
+
+# Git pull yapın
+git pull origin claude/fix-metro-package-export-011CUVwPfC86uR2miwR2Nnws
+```
+
+---
+
 ## 🚀 Quick Start (Recommended)
 
 ### Kalibrasyon ve Göz Egzersizleri (Web App)
@@ -29,6 +59,30 @@ Tarayıcıda aç: **http://localhost:8080**
 ```
 
 Or press **Ctrl+C** when running the script.
+
+### Manuel Başlatma (Script olmadan)
+
+**Eğer git pull yapmadıysanız veya script çalışmazsa:**
+
+**Terminal 1 - AI Service:**
+```bash
+cd [eyes-proje-klasörü]/ai-service
+source venv/bin/activate
+
+# Eğer port meşgulse önce temizle
+lsof -ti:5001 | xargs kill -9
+
+# Başlat
+PORT=5001 python app.py
+```
+
+**Terminal 2 - Kalibrasyon Web Uygulaması:**
+```bash
+cd [eyes-proje-klasörü]/calibration-app
+python3 -m http.server 8080
+```
+
+**Tarayıcıda aç:** http://localhost:8080
 
 ---
 
