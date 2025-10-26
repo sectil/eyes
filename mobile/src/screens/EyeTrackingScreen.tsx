@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, StyleSheet, Dimensions, Platform } from 'react-native';
 import { Text, Button, ActivityIndicator, Surface, IconButton } from 'react-native-paper';
-import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
+import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@/navigation/AppNavigator';
@@ -16,44 +16,97 @@ type EyeTrackingScreenNavigationProp = NativeStackNavigationProp<
 export default function EyeTrackingScreen() {
   const navigation = useNavigation<EyeTrackingScreenNavigationProp>();
   const [permission, requestPermission] = useCameraPermissions();
-  const [isReady, setIsReady] = useState(false);
-  const [faceDetected, setFaceDetected] = useState(false);
-  const [isCalibrating, setIsCalibrating] = useState(false);
+  const [isTracking, setIsTracking] = useState(false);
+  const [eyeData, setEyeData] = useState<any>(null);
+  const [lastAnalysisTime, setLastAnalysisTime] = useState(0);
   const cameraRef = useRef<any>(null);
+  const trackingIntervalRef = useRef<any>(null);
+  const isAnalyzingRef = useRef(false);
 
-  useEffect(() => {
-    // Simulate model loading for demo purposes
-    // In production, you would initialize TensorFlow.js here
-    const timer = setTimeout(() => {
-      setIsReady(true);
-    }, 1500);
+  const startTracking = async () => {
+    console.log('[Eye Tracking] Starting AI tracking...');
+    setIsTracking(true);
 
-    return () => clearTimeout(timer);
-  }, []);
+    trackingIntervalRef.current = setInterval(async () => {
+      await captureAndAnalyze();
+    }, 1000);
+  };
 
-  const handleFaceDetection = (data: any) => {
-    // This is a placeholder for face detection
-    // In production, you would process camera frames with TensorFlow.js
-    if (data && data.faces && data.faces.length > 0) {
-      setFaceDetected(true);
-    } else {
-      setFaceDetected(false);
+  const stopTracking = () => {
+    console.log('[Eye Tracking] Stopping...');
+    if (trackingIntervalRef.current) {
+      clearInterval(trackingIntervalRef.current);
+      trackingIntervalRef.current = null;
+    }
+    setIsTracking(false);
+    setEyeData(null);
+    isAnalyzingRef.current = false;
+  };
+
+  const captureAndAnalyze = async () => {
+    if (isAnalyzingRef.current || !cameraRef.current) {
+      return;
+    }
+
+    try {
+      isAnalyzingRef.current = true;
+      const startTime = Date.now();
+
+      const photo = await cameraRef.current.takePictureAsync({
+        base64: true,
+        quality: 0.3,  // Lower quality = smaller size
+        skipProcessing: true,
+      });
+
+      if (!photo?.base64) return;
+
+      console.log('[Eye Tracking] Analyzing...');
+
+      // Simple TRPC format - no batching
+      const response = await fetch('http://192.168.1.12:3000/trpc/eyeTracking.analyzeFace?batch=1', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "0": {
+            image: `data:image/jpeg;base64,${photo.base64}`,
+            timestamp: new Date().toISOString(),
+          }
+        }),
+      });
+
+      const data = await response.json();
+      
+      // TRPC batch response: [{ result: { data: ... } }]
+      const result = data[0]?.result?.data;
+      
+      if (result?.success && result?.face_detected) {
+        console.log('[Eye Tracking] ✓ FACE!');
+        setEyeData(result.analysis);
+        setLastAnalysisTime(Date.now() - startTime);
+      } else {
+        setEyeData(null);
+      }
+    } catch (error: any) {
+      console.error('[Eye Tracking] Error:', error.message);
+    } finally {
+      isAnalyzingRef.current = false;
     }
   };
 
-  const startCalibration = () => {
-    setIsCalibrating(true);
-    // Implement calibration logic here
-    setTimeout(() => {
-      setFaceDetected(true);
-    }, 1000);
-  };
+  React.useEffect(() => {
+    return () => {
+      if (trackingIntervalRef.current) {
+        clearInterval(trackingIntervalRef.current);
+      }
+    };
+  }, []);
 
   if (!permission) {
     return (
       <View style={styles.centerContainer}>
         <ActivityIndicator size="large" color="#6200ee" />
-        <Text style={styles.loadingText}>Loading...</Text>
       </View>
     );
   }
@@ -65,7 +118,7 @@ export default function EyeTrackingScreen() {
           Camera Permission Required
         </Text>
         <Text style={styles.errorText}>
-          VisionCare needs camera access for eye tracking and calibration tests.
+          VisionCare needs camera access.
         </Text>
         <Button mode="contained" onPress={requestPermission} style={styles.button}>
           Grant Permission
@@ -73,16 +126,6 @@ export default function EyeTrackingScreen() {
         <Button mode="outlined" onPress={() => navigation.goBack()} style={styles.button}>
           Go Back
         </Button>
-      </View>
-    );
-  }
-
-  if (!isReady) {
-    return (
-      <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#6200ee" />
-        <Text style={styles.loadingText}>Initializing eye tracking...</Text>
-        <Text style={styles.subText}>This may take a moment</Text>
       </View>
     );
   }
@@ -97,229 +140,102 @@ export default function EyeTrackingScreen() {
           iconColor="#fff"
         />
         <Text variant="headlineSmall" style={styles.title}>
-          Eye Tracking Calibration
+          AI Eye Tracking
         </Text>
         <View style={{ width: 40 }} />
       </Surface>
 
       <View style={styles.cameraContainer}>
-        <CameraView
-          ref={cameraRef}
-          style={styles.camera}
-          facing="front"
-        />
+        <CameraView ref={cameraRef} style={styles.camera} facing="front" />
 
         <View style={styles.overlay}>
-          <Surface style={styles.statusCard} elevation={3}>
-            <View style={styles.statusRow}>
-              <View style={[styles.statusDot, faceDetected && styles.statusDotActive]} />
-              <Text style={styles.statusText}>
-                {faceDetected ? 'Face detected' : 'No face detected'}
+          <View style={[styles.statusIndicator, isTracking && styles.statusActive]}>
+            <Text style={styles.statusText}>
+              {isTracking ? '● TRACKING' : '○ STOPPED'}
+            </Text>
+          </View>
+
+          {eyeData && (
+            <View style={styles.dataContainer}>
+              <View style={styles.dataRow}>
+                <Text style={styles.dataLabel}>Eyes:</Text>
+                <Text style={styles.dataValue}>
+                  {eyeData.eyes.both_open ? '👀 Open' : '👁 Closed'}
+                </Text>
+              </View>
+
+              {eyeData.eyes.blinking && (
+                <Text style={[styles.dataValue, styles.blinking]}>👁️ Blinking</Text>
+              )}
+
+              <View style={styles.dataRow}>
+                <Text style={styles.dataLabel}>Gaze:</Text>
+                <Text style={styles.dataValue}>{eyeData.gaze.direction}</Text>
+              </View>
+
+              {eyeData.glasses.detected && (
+                <View style={styles.dataRow}>
+                  <Text style={styles.dataLabel}>Glasses:</Text>
+                  <Text style={styles.dataValue}>👓 Yes</Text>
+                </View>
+              )}
+
+              <Text style={styles.qualityText}>
+                ✓ {eyeData.face_quality.landmarks_count} landmarks • {lastAnalysisTime}ms
               </Text>
             </View>
-
-            {faceDetected && (
-              <View style={styles.eyeInfo}>
-                <Text style={styles.eyeInfoText}>Left Eye: ✓</Text>
-                <Text style={styles.eyeInfoText}>Right Eye: ✓</Text>
-              </View>
-            )}
-          </Surface>
-
-          {!faceDetected && (
-            <Surface style={styles.instructionCard} elevation={2}>
-              <Text style={styles.instructionTitle}>Position your face</Text>
-              <Text style={styles.instructionText}>
-                • Look directly at the camera{'\n'}
-                • Ensure good lighting{'\n'}
-                • Keep your face in the frame
-              </Text>
-            </Surface>
           )}
+
+          {!eyeData && isTracking && (
+            <View style={styles.noFaceContainer}>
+              <Text style={styles.noFaceText}>👤 Scanning...</Text>
+            </View>
+          )}
+
+          <View style={styles.controls}>
+            <Button 
+              mode="contained" 
+              onPress={isTracking ? stopTracking : startTracking} 
+              style={isTracking ? styles.stopButton : styles.startButton}
+            >
+              {isTracking ? 'Stop' : 'Start AI Tracking'}
+            </Button>
+          </View>
         </View>
       </View>
 
-      <View style={styles.bottomContainer}>
-        <Text style={styles.infoText}>
-          {faceDetected
-            ? 'Great! Your eyes are being tracked. Follow the on-screen instructions.'
-            : 'Position your face in front of the camera to begin.'}
-        </Text>
-
-        {!isCalibrating && (
-          <Button mode="contained" onPress={startCalibration} style={styles.calibrateButton}>
-            {faceDetected ? 'Start Calibration' : 'Position Your Face'}
-          </Button>
-        )}
-        {isCalibrating && faceDetected && (
-          <Surface style={styles.calibrationCard} elevation={3}>
-            <Text style={styles.calibrationTitle}>Calibration in Progress</Text>
-            <Text style={styles.calibrationText}>
-              Follow the dot with your eyes as it moves around the screen
-            </Text>
-            <ActivityIndicator size="small" color="#6200ee" style={{ marginTop: 12 }} />
-          </Surface>
-        )}
-      </View>
+      <Surface style={styles.infoCard} elevation={2}>
+        <Text style={styles.infoTitle}>🤖 MediaPipe AI • 478 Landmarks</Text>
+      </Surface>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  centerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#f5f5f5',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingTop: Platform.OS === 'ios' ? 50 : 20,
-    paddingBottom: 10,
-    paddingHorizontal: 10,
-    backgroundColor: '#6200ee',
-  },
-  title: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  cameraContainer: {
-    flex: 1,
-    position: 'relative',
-    backgroundColor: '#000',
-  },
-  camera: {
-    flex: 1,
-    width: screenWidth,
-    height: screenHeight * 0.6,
-  },
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    padding: 20,
-  },
-  statusCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 20,
-  },
-  statusRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  statusDot: {
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    backgroundColor: '#ff5252',
-    marginRight: 12,
-  },
-  statusDotActive: {
-    backgroundColor: '#4caf50',
-  },
-  statusText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-  },
-  eyeInfo: {
-    marginTop: 12,
-    paddingTop: 12,
-    borderTopWidth: 1,
-    borderTopColor: '#e0e0e0',
-  },
-  eyeInfoText: {
-    fontSize: 14,
-    color: '#666',
-    marginVertical: 2,
-  },
-  instructionCard: {
-    backgroundColor: 'rgba(98, 0, 238, 0.95)',
-    padding: 20,
-    borderRadius: 12,
-    position: 'absolute',
-    bottom: 20,
-    left: 20,
-    right: 20,
-  },
-  instructionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#fff',
-    marginBottom: 12,
-  },
-  instructionText: {
-    fontSize: 14,
-    color: '#fff',
-    lineHeight: 22,
-  },
-  bottomContainer: {
-    padding: 20,
-    backgroundColor: '#fff',
-  },
-  infoText: {
-    fontSize: 14,
-    color: '#666',
-    textAlign: 'center',
-    marginBottom: 16,
-    lineHeight: 20,
-  },
-  calibrateButton: {
-    marginTop: 8,
-  },
-  loadingText: {
-    marginTop: 16,
-    fontSize: 16,
-    color: '#333',
-  },
-  subText: {
-    marginTop: 8,
-    fontSize: 14,
-    color: '#666',
-  },
-  errorTitle: {
-    color: '#d32f2f',
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  errorText: {
-    fontSize: 14,
-    color: '#666',
-    textAlign: 'center',
-    marginBottom: 24,
-    paddingHorizontal: 20,
-  },
-  button: {
-    marginTop: 12,
-    minWidth: 200,
-  },
-  calibrationCard: {
-    backgroundColor: '#fff',
-    padding: 20,
-    borderRadius: 12,
-    marginTop: 16,
-    alignItems: 'center',
-  },
-  calibrationTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#6200ee',
-    marginBottom: 8,
-  },
-  calibrationText: {
-    fontSize: 14,
-    color: '#666',
-    textAlign: 'center',
-  },
+  container: { flex: 1, backgroundColor: '#000' },
+  centerContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20, backgroundColor: '#f5f5f5' },
+  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingTop: Platform.OS === 'ios' ? 50 : 20, paddingBottom: 10, paddingHorizontal: 10, backgroundColor: '#6200ee' },
+  title: { color: '#fff', fontWeight: 'bold' },
+  cameraContainer: { flex: 1 },
+  camera: { flex: 1 },
+  overlay: { ...StyleSheet.absoluteFillObject, justifyContent: 'space-between', padding: 20 },
+  statusIndicator: { alignSelf: 'flex-start', backgroundColor: 'rgba(255, 255, 255, 0.2)', paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20 },
+  statusActive: { backgroundColor: 'rgba(0, 255, 0, 0.3)' },
+  statusText: { color: '#fff', fontWeight: 'bold' },
+  dataContainer: { backgroundColor: 'rgba(0, 0, 0, 0.85)', borderRadius: 12, padding: 16, marginTop: 60 },
+  dataRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 },
+  dataLabel: { color: '#aaa', fontSize: 14 },
+  dataValue: { color: '#fff', fontSize: 14, fontWeight: 'bold' },
+  blinking: { color: '#ff6b6b', marginBottom: 8 },
+  qualityText: { color: '#2ecc71', fontSize: 11, marginTop: 8 },
+  noFaceContainer: { alignItems: 'center', marginTop: 100 },
+  noFaceText: { color: '#fff', fontSize: 18 },
+  controls: { alignItems: 'center', marginBottom: 20 },
+  startButton: { backgroundColor: '#4ecdc4' },
+  stopButton: { backgroundColor: '#ff6b6b' },
+  infoCard: { backgroundColor: '#6200ee', padding: 12, alignItems: 'center' },
+  infoTitle: { color: '#fff', fontSize: 13, fontWeight: 'bold' },
+  errorTitle: { color: '#d32f2f', marginBottom: 16, textAlign: 'center' },
+  errorText: { fontSize: 14, color: '#666', textAlign: 'center', marginBottom: 24, paddingHorizontal: 20 },
+  button: { marginTop: 12, minWidth: 200 },
 });

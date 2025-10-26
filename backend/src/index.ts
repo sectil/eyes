@@ -16,13 +16,19 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(helmet());
+
+// CORS - Development modunda tüm origin'lere izin ver
 app.use(
   cors({
-    origin: process.env.ALLOWED_ORIGINS?.split(',') || '*',
+    origin: process.env.NODE_ENV === 'production' 
+      ? process.env.ALLOWED_ORIGINS?.split(',') 
+      : true, // Development'ta tüm origin'lere izin ver
     credentials: true,
   })
 );
-app.use(express.json());
+
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(cookieParser());
 
 // Rate limiting
@@ -75,11 +81,13 @@ app.use(
   }
 );
 
-// Start server
-app.listen(PORT, () => {
+// Start server - Listen on all network interfaces (0.0.0.0)
+app.listen(PORT, '0.0.0.0', () => {
   logger.info(`Server running on port ${PORT}`);
   logger.info(`TRPC endpoint: http://localhost:${PORT}/trpc`);
   logger.info(`Health check: http://localhost:${PORT}/health`);
+  logger.info(`Network access: http://192.168.1.12:${PORT}`);
+  logger.info(`CORS: ${process.env.NODE_ENV === 'production' ? 'Restricted' : 'All origins allowed (dev mode)'}`);
 });
 
 export default app;
