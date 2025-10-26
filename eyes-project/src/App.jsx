@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Lights } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei'
 import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection'
 import * as tf from '@tensorflow/tfjs'
 import Eye from './components/Eye'
@@ -205,7 +205,12 @@ function App() {
       />
       
       <Canvas camera={{ position: [0, 0, 2.5], fov: cameraFov }} className="canvas">
-        <Lights />
+        {/* Işıklandırma */}
+        <ambientLight intensity={0.6} />
+        <directionalLight position={[5, 5, 5]} intensity={0.8} />
+        <directionalLight position={[-5, -5, -5]} intensity={0.3} />
+        <pointLight position={[0, 0, 5]} intensity={0.5} color="#ffffff" />
+
         <OrbitControls
           enableZoom={false}
           enablePan={false}
@@ -217,7 +222,7 @@ function App() {
           <Eye pupilPosition={pupilPosition} />
           <Eyelid onBlink={blinkState} />
         </group>
-        
+
         {!isModelLoaded && <LoadingScreen />}
       </Canvas>
       
