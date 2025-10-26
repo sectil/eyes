@@ -6,7 +6,17 @@ import { trpc, getTRPCClient } from './src/services/trpc';
 import { useAuthStore } from './src/store/authStore';
 import AppNavigator from './src/navigation/AppNavigator';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 2,
+      staleTime: 5 * 1000,
+    },
+    mutations: {
+      retry: 1,
+    },
+  },
+});
 const trpcClient = getTRPCClient();
 
 export default function App() {
@@ -18,13 +28,13 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <trpc.Provider client={trpcClient} queryClient={queryClient}>
-        <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <trpc.Provider client={trpcClient} queryClient={queryClient}>
           <PaperProvider>
             <AppNavigator />
           </PaperProvider>
-        </QueryClientProvider>
-      </trpc.Provider>
+        </trpc.Provider>
+      </QueryClientProvider>
     </SafeAreaProvider>
   );
 }
