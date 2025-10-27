@@ -1,15 +1,18 @@
 import { createTRPCReact } from '@trpc/react-query';
 import { httpBatchLink } from '@trpc/client';
+import Constants from 'expo-constants';
 import type { AppRouter } from '@/types';
 import { getStoredTokens } from './storage';
 
 export const trpc = createTRPCReact<AppRouter>();
 
 export function getTRPCClient() {
+  const apiUrl = Constants.expoConfig?.extra?.API_URL || 'http://localhost:3000';
+
   return trpc.createClient({
     links: [
       httpBatchLink({
-        url: `${process.env.API_URL || 'http://localhost:3000'}/trpc`,
+        url: `${apiUrl}/trpc`,
         async headers() {
           const tokens = await getStoredTokens();
           if (tokens?.accessToken) {
