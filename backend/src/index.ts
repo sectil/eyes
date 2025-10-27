@@ -49,7 +49,11 @@ app.use(
   '/trpc',
   trpcExpress.createExpressMiddleware({
     router: appRouter,
-    createContext: ({ req, res }): Context => ({ req, res }),
+    createContext: ({ req, res }): Context => {
+      console.log('🔵 TRPC Request:', req.method, req.url);
+      console.log('🔵 Headers:', JSON.stringify(req.headers, null, 2));
+      return { req, res };
+    },
     onError: ({ error, type, path, input, ctx, req }) => {
       logger.error('TRPC Error:', {
         type,
