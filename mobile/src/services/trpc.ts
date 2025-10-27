@@ -9,6 +9,11 @@ export const trpc = createTRPCReact<AppRouter>();
 export function getTRPCClient() {
   const apiUrl = Constants.expoConfig?.extra?.API_URL || 'http://localhost:3000';
 
+  console.log('=== TRPC CLIENT DEBUG ===');
+  console.log('API URL:', apiUrl);
+  console.log('Full TRPC URL:', `${apiUrl}/trpc`);
+  console.log('Constants.expoConfig?.extra:', Constants.expoConfig?.extra);
+
   return trpc.createClient({
     links: [
       httpBatchLink({
