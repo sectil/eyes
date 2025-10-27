@@ -19,6 +19,7 @@ export default function EyeTrackingScreen() {
   const [isTracking, setIsTracking] = useState(false);
   const [eyeData, setEyeData] = useState<any>(null);
   const [lastAnalysisTime, setLastAnalysisTime] = useState(0);
+  const [isCameraReady, setIsCameraReady] = useState(false);
   const cameraRef = useRef<any>(null);
   const trackingIntervalRef = useRef<any>(null);
   const isAnalyzingRef = useRef(false);
@@ -44,7 +45,7 @@ export default function EyeTrackingScreen() {
   };
 
   const captureAndAnalyze = async () => {
-    if (isAnalyzingRef.current || !cameraRef.current) {
+    if (isAnalyzingRef.current || !cameraRef.current || !isCameraReady) {
       return;
     }
 
@@ -52,9 +53,15 @@ export default function EyeTrackingScreen() {
       isAnalyzingRef.current = true;
       const startTime = Date.now();
 
+      // SDK 54: Use takePictureAsync method
+      if (!cameraRef.current.takePictureAsync) {
+        console.error('[Eye Tracking] takePictureAsync not available');
+        return;
+      }
+
       const photo = await cameraRef.current.takePictureAsync({
         base64: true,
-        quality: 0.3,  // Lower quality = smaller size
+        quality: 0.3,
         skipProcessing: true,
       });
 
@@ -146,7 +153,15 @@ export default function EyeTrackingScreen() {
       </Surface>
 
       <View style={styles.cameraContainer}>
-        <CameraView ref={cameraRef} style={styles.camera} facing="front" />
+        <CameraView
+          ref={cameraRef}
+          style={styles.camera}
+          facing="front"
+          onCameraReady={() => {
+            console.log('[Eye Tracking] Camera ready');
+            setIsCameraReady(true);
+          }}
+        />
 
         <View style={styles.overlay}>
           <View style={[styles.statusIndicator, isTracking && styles.statusActive]}>

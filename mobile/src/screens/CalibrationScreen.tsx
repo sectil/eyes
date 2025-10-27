@@ -32,6 +32,7 @@ export default function CalibrationScreen() {
   const [samplesCollected, setSamplesCollected] = useState(0);
   const [calibrationData, setCalibrationData] = useState<any[]>([]);
   const [progress, setProgress] = useState(0);
+  const [isCameraReady, setIsCameraReady] = useState(false);
   const cameraRef = useRef<any>(null);
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const isCollecting = useRef(false);
@@ -140,9 +141,15 @@ export default function CalibrationScreen() {
   };
 
   const captureAndAnalyze = async () => {
-    if (!cameraRef.current) return null;
+    if (!cameraRef.current || !isCameraReady) return null;
 
     try {
+      // SDK 54: Check if takePictureAsync is available
+      if (!cameraRef.current.takePictureAsync) {
+        console.error('[Calibration] takePictureAsync not available');
+        return null;
+      }
+
       const photo = await cameraRef.current.takePictureAsync({
         base64: true,
         quality: 0.3,
@@ -284,7 +291,15 @@ export default function CalibrationScreen() {
       )}
 
       <View style={styles.cameraContainer}>
-        <CameraView ref={cameraRef} style={styles.camera} facing="front" />
+        <CameraView
+          ref={cameraRef}
+          style={styles.camera}
+          facing="front"
+          onCameraReady={() => {
+            console.log('[Calibration] Camera ready');
+            setIsCameraReady(true);
+          }}
+        />
 
         {isCalibrating && (
           <View style={styles.calibrationOverlay}>
