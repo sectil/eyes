@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, Platform, TouchableOpacity, Animated } from 'react-native';
 import { Text, Button, Surface, IconButton, ProgressBar } from 'react-native-paper';
-import { Camera, CameraType } from 'expo-camera';
+import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -26,14 +26,14 @@ const CALIBRATION_POSITIONS = [
 
 export default function CalibrationScreen() {
   const navigation = useNavigation();
-  const [permission, requestPermission] = Camera.useCameraPermissions();
+  const [permission, requestPermission] = useCameraPermissions();
   const [isCalibrating, setIsCalibrating] = useState(false);
   const [currentPointIndex, setCurrentPointIndex] = useState(-1);
   const [samplesCollected, setSamplesCollected] = useState(0);
   const [calibrationData, setCalibrationData] = useState<any[]>([]);
   const [progress, setProgress] = useState(0);
   const [isCameraReady, setIsCameraReady] = useState(false);
-  const cameraRef = useRef<Camera>(null);
+  const cameraRef = useRef<any>(null);
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const isCollecting = useRef(false);
 
@@ -206,10 +206,10 @@ export default function CalibrationScreen() {
   return (
     <View style={styles.container}>
       {/* Camera */}
-      <Camera
+      <CameraView
         ref={cameraRef}
         style={styles.camera}
-        type={CameraType.front}
+        facing="front"
         onCameraReady={() => {
           console.log('[Calibration] Camera ready');
           setIsCameraReady(true);
