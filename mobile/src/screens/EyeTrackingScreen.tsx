@@ -5,7 +5,7 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@/navigation/AppNavigator';
-import { captureRef } from 'react-native-view-shot';
+import { GLView } from 'expo-gl';
 import * as FileSystem from 'expo-file-system';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
@@ -22,9 +22,38 @@ export default function EyeTrackingScreen() {
   const [eyeData, setEyeData] = useState<any>(null);
   const [lastAnalysisTime, setLastAnalysisTime] = useState(0);
   const [isCameraReady, setIsCameraReady] = useState(false);
+  const [isGLReady, setIsGLReady] = useState(false);
   const cameraRef = useRef<any>(null);
+  const glRef = useRef<any>(null);
+  const cameraTextureRef = useRef<any>(null);
   const trackingIntervalRef = useRef<any>(null);
   const isAnalyzingRef = useRef(false);
+
+  const onGLContextCreate = async (gl: any) => {
+    console.log('[Eye Tracking] GL Context created');
+
+    if (!cameraRef.current) {
+      console.log('[Eye Tracking] Camera ref not ready');
+      return;
+    }
+
+    try {
+      const texture = await gl.createCameraTextureAsync(cameraRef.current);
+      cameraTextureRef.current = texture;
+
+      console.log('[Eye Tracking] Camera texture created');
+      setIsGLReady(true);
+
+      const render = () => {
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        gl.endFrameEXP();
+        requestAnimationFrame(render);
+      };
+      render();
+    } catch (error) {
+      console.error('[Eye Tracking] GL setup error:', error);
+    }
+  };
 
   const startTracking = async () => {
     console.log('[Eye Tracking] Starting AI tracking...');
@@ -47,7 +76,7 @@ export default function EyeTrackingScreen() {
   };
 
   const captureAndAnalyze = async () => {
-    if (isAnalyzingRef.current || !cameraRef.current || !isCameraReady) {
+    if (isAnalyzingRef.current || !glRef.current || !isCameraReady || !isGLReady) {
       return;
     }
 
@@ -55,16 +84,17 @@ export default function EyeTrackingScreen() {
       isAnalyzingRef.current = true;
       const startTime = Date.now();
 
-      console.log('[Eye Tracking] Capturing screenshot...');
+      console.log('[Eye Tracking] Capturing GL snapshot...');
 
-      // Capture camera view screenshot
-      const uri = await captureRef(cameraRef, {
+      // Take snapshot from GLView
+      const snapshot = await glRef.current.takeSnapshotAsync({
         format: 'jpg',
         quality: 0.3,
+        compress: 0.3,
       });
 
       // Read as base64
-      const base64 = await FileSystem.readAsStringAsync(uri, {
+      const base64 = await FileSystem.readAsStringAsync(snapshot.uri, {
         encoding: FileSystem.EncodingType.Base64,
       });
 
@@ -155,18 +185,20 @@ export default function EyeTrackingScreen() {
         <View style={{ width: 40 }} />
       </Surface>
 
-      <View
-        style={styles.cameraContainer}
-        ref={cameraRef}
-        collapsable={false}
-      >
+      <View style={styles.cameraContainer}>
         <CameraView
+          ref={cameraRef}
           style={styles.camera}
           facing="front"
           onCameraReady={() => {
-            console.log('[Eye Tracking] Camera ready for screenshot capture');
+            console.log('[Eye Tracking] Camera ready');
             setIsCameraReady(true);
           }}
+        />
+        <GLView
+          ref={glRef}
+          style={StyleSheet.absoluteFill}
+          onContextCreate={onGLContextCreate}
         />
 
         <View style={styles.overlay}>

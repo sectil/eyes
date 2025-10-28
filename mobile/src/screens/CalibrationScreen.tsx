@@ -4,7 +4,7 @@ import { Text, Button, Surface, IconButton, ProgressBar } from 'react-native-pap
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { captureRef } from 'react-native-view-shot';
+import { GLView } from 'expo-gl';
 import * as FileSystem from 'expo-file-system';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
@@ -35,7 +35,10 @@ export default function CalibrationScreen() {
   const [calibrationData, setCalibrationData] = useState<any[]>([]);
   const [progress, setProgress] = useState(0);
   const [isCameraReady, setIsCameraReady] = useState(false);
+  const [isGLReady, setIsGLReady] = useState(false);
   const cameraRef = useRef<any>(null);
+  const glRef = useRef<any>(null);
+  const cameraTextureRef = useRef<any>(null);
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const isCollecting = useRef(false);
 
@@ -142,25 +145,54 @@ export default function CalibrationScreen() {
     }
   };
 
+  const onGLContextCreate = async (gl: any) => {
+    console.log('[Calibration] GL Context created');
+
+    if (!cameraRef.current) {
+      console.log('[Calibration] Camera ref not ready');
+      return;
+    }
+
+    try {
+      // Create camera texture from CameraView
+      const texture = await gl.createCameraTextureAsync(cameraRef.current);
+      cameraTextureRef.current = texture;
+
+      console.log('[Calibration] Camera texture created');
+      setIsGLReady(true);
+
+      // Simple rendering to display camera feed
+      const render = () => {
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        gl.endFrameEXP();
+        requestAnimationFrame(render);
+      };
+      render();
+    } catch (error) {
+      console.error('[Calibration] GL setup error:', error);
+    }
+  };
+
   const captureAndAnalyze = async () => {
-    if (!cameraRef.current || !isCameraReady) {
-      console.log('[Calibration] Camera not ready yet');
+    if (!glRef.current || !isCameraReady || !isGLReady) {
+      console.log('[Calibration] GL or Camera not ready yet');
       return null;
     }
 
     try {
-      console.log('[Calibration] Capturing camera view screenshot...');
+      console.log('[Calibration] Capturing GL snapshot...');
 
-      // Capture the camera view as an image
-      const uri = await captureRef(cameraRef, {
+      // Take snapshot from GLView
+      const snapshot = await glRef.current.takeSnapshotAsync({
         format: 'jpg',
         quality: 0.3,
+        compress: 0.3,
       });
 
-      console.log('[Calibration] Screenshot captured, reading file...');
+      console.log('[Calibration] Snapshot captured, reading file...');
 
       // Read the image as base64
-      const base64 = await FileSystem.readAsStringAsync(uri, {
+      const base64 = await FileSystem.readAsStringAsync(snapshot.uri, {
         encoding: FileSystem.EncodingType.Base64,
       });
 
@@ -305,18 +337,20 @@ export default function CalibrationScreen() {
         </View>
       )}
 
-      <View
-        style={styles.cameraContainer}
-        ref={cameraRef}
-        collapsable={false}
-      >
+      <View style={styles.cameraContainer}>
         <CameraView
+          ref={cameraRef}
           style={styles.camera}
           facing="front"
           onCameraReady={() => {
-            console.log('[Calibration] ✓ Camera ready for screenshot capture!');
+            console.log('[Calibration] ✓ Camera ready!');
             setIsCameraReady(true);
           }}
+        />
+        <GLView
+          ref={glRef}
+          style={StyleSheet.absoluteFill}
+          onContextCreate={onGLContextCreate}
         />
 
         {isCalibrating && (
