@@ -141,23 +141,32 @@ export default function CalibrationScreen() {
   };
 
   const captureAndAnalyze = async () => {
-    if (!cameraRef.current || !isCameraReady) return null;
+    if (!cameraRef.current || !isCameraReady) {
+      console.log('[Calibration] Camera not ready yet');
+      return null;
+    }
 
     try {
-      // SDK 54: Check if takePictureAsync is available
+      // SDK 54: Check if takePictureAsync exists
       if (!cameraRef.current.takePictureAsync) {
-        console.error('[Calibration] takePictureAsync not available');
+        console.error('[Calibration] takePictureAsync not available on CameraView');
+        console.log('[Calibration] Available methods:', Object.keys(cameraRef.current));
         return null;
       }
 
+      console.log('[Calibration] Taking picture...');
       const photo = await cameraRef.current.takePictureAsync({
         base64: true,
         quality: 0.3,
         skipProcessing: true,
       });
 
-      if (!photo?.base64) return null;
+      if (!photo?.base64) {
+        console.log('[Calibration] No base64 data in photo');
+        return null;
+      }
 
+      console.log('[Calibration] Sending to AI backend...');
       const response = await fetch('http://192.168.1.12:3000/trpc/eyeTracking.analyzeFace?batch=1', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -173,12 +182,15 @@ export default function CalibrationScreen() {
       const result = data[0]?.result?.data;
 
       if (result?.success && result?.face_detected) {
+        console.log('[Calibration] ✓ Face detected!');
         return result.analysis;
+      } else {
+        console.log('[Calibration] No face detected');
       }
 
       return null;
     } catch (error) {
-      console.error('Analysis error:', error);
+      console.error('[Calibration] Analysis error:', error);
       return null;
     }
   };
@@ -296,7 +308,7 @@ export default function CalibrationScreen() {
           style={styles.camera}
           facing="front"
           onCameraReady={() => {
-            console.log('[Calibration] Camera ready');
+            console.log('[Calibration] ✓ Camera ready!');
             setIsCameraReady(true);
           }}
         />
