@@ -17,6 +17,3 @@ __tests__/**/*
 *.test.tsx
 .vscode
 .idea
-node_modules.backup/**/*
-node_modules.old/**/*
-node_modules.old/**/*
