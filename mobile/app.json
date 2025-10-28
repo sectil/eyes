@@ -4,7 +4,6 @@
     "slug": "visioncare",
     "version": "1.0.0",
     "orientation": "portrait",
-    "main": "index.js",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
@@ -30,7 +29,10 @@
     ],
     "scheme": "visioncare",
     "extra": {
-      "API_URL": "http://192.168.1.12:3000"
+      "API_URL": "http://192.168.1.12:3000",
+      "eas": {
+        "projectId": "c29c0461-3bd5-4119-9f62-f5242abd7d00"
+      }
     }
   }
 }
