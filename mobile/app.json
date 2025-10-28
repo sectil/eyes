@@ -10,13 +10,16 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.visioncare.app",
       "infoPlist": {
-        "NSCameraUsageDescription": "VisionCare needs camera access for eye tracking and calibration tests."
+        "NSCameraUsageDescription": "VisionCare needs camera access for eye tracking and calibration tests.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
       "package": "com.visioncare.app",
       "permissions": [
-        "CAMERA"
+        "CAMERA",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "plugins": [
@@ -30,7 +33,11 @@
     ],
     "scheme": "visioncare",
     "extra": {
-      "API_URL": "http://192.168.1.12:3000"
-    }
+      "API_URL": "http://192.168.1.12:3000",
+      "eas": {
+        "projectId": "c29c0461-3bd5-4119-9f62-f5242abd7d00"
+      }
+    },
+    "owner": "eyesvisual"
   }
 }
