@@ -12,7 +12,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
 // Middleware
 app.use(helmet());
@@ -40,7 +40,7 @@ const limiter = rateLimit({
 app.use('/trpc', limiter);
 
 // Health check
-app.get('/health', (req, res) => {
+app.get('/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
@@ -54,7 +54,7 @@ app.use(
       console.log('🔵 Headers:', JSON.stringify(req.headers, null, 2));
       return { req, res };
     },
-    onError: ({ error, type, path, input, ctx, req }) => {
+    onError: ({ error, type, path, input, ctx }) => {
       logger.error('TRPC Error:', {
         type,
         path,
@@ -68,7 +68,7 @@ app.use(
 );
 
 // 404 handler
-app.use((req, res) => {
+app.use((_req, res) => {
   res.status(404).json({ error: 'Not found' });
 });
 
@@ -76,9 +76,9 @@ app.use((req, res) => {
 app.use(
   (
     err: Error,
-    req: express.Request,
+    _req: express.Request,
     res: express.Response,
-    next: express.NextFunction
+    _next: express.NextFunction
   ) => {
     logger.error('Express Error:', err);
     res.status(500).json({ error: 'Internal server error' });

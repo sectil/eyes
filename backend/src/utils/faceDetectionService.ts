@@ -12,7 +12,7 @@ export async function initializeFaceDetection() {
   
   const model = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
   const detectorConfig = {
-    runtime: 'tfjs',
+    runtime: 'tfjs' as const,
     refineLandmarks: true,
     maxFaces: 1,
   };

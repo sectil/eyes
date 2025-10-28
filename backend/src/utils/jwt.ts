@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'default-secret-change-this';
-const REFRESH_TOKEN_SECRET =
+const JWT_SECRET: string = process.env.JWT_SECRET || 'default-secret-change-this';
+const REFRESH_TOKEN_SECRET: string =
   process.env.REFRESH_TOKEN_SECRET || 'default-refresh-secret-change-this';
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '15m';
-const REFRESH_TOKEN_EXPIRES_IN = process.env.REFRESH_TOKEN_EXPIRES_IN || '7d';
+const JWT_EXPIRES_IN: string = process.env.JWT_EXPIRES_IN || '15m';
+const REFRESH_TOKEN_EXPIRES_IN: string = process.env.REFRESH_TOKEN_EXPIRES_IN || '7d';
 
 export interface JWTPayload {
   userId: string;

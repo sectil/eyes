@@ -92,6 +92,9 @@ export const profileRouter = router({
 
       const profileData = {
         ...input,
+        dailyScreenTime: input.dailyScreenTime?.toString(),
+        dailyOutdoorTime: input.dailyOutdoorTime?.toString(),
+        sleepHours: input.sleepHours?.toString(),
         lastEyeExam: input.lastEyeExam ? input.lastEyeExam : undefined,
         updatedAt: new Date(),
       };
