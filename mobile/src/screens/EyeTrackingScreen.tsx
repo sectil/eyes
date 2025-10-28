@@ -155,7 +155,11 @@ export default function EyeTrackingScreen() {
         <View style={{ width: 40 }} />
       </Surface>
 
-      <View style={styles.cameraContainer} ref={cameraRef}>
+      <View
+        style={styles.cameraContainer}
+        ref={cameraRef}
+        collapsable={false}
+      >
         <CameraView
           style={styles.camera}
           facing="front"

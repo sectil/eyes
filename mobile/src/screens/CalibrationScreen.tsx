@@ -305,7 +305,11 @@ export default function CalibrationScreen() {
         </View>
       )}
 
-      <View style={styles.cameraContainer} ref={cameraRef}>
+      <View
+        style={styles.cameraContainer}
+        ref={cameraRef}
+        collapsable={false}
+      >
         <CameraView
           style={styles.camera}
           facing="front"
