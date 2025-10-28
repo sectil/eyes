@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, Platform, TouchableOpacity, Animated } from 'react-native';
 import { Text, Button, Surface, IconButton, ProgressBar } from 'react-native-paper';
-import { CameraView, useCameraPermissions } from 'expo-camera';
+import { Camera, CameraView, useCameraPermissions } from 'expo-camera';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -303,12 +303,12 @@ export default function CalibrationScreen() {
       )}
 
       <View style={styles.cameraContainer}>
-        <CameraView
+        <Camera
           ref={cameraRef}
           style={styles.camera}
-          facing="front"
+          type="front"
           onCameraReady={() => {
-            console.log('[Calibration] ✓ Camera ready!');
+            console.log('[Calibration] ✓ Camera ready with takePictureAsync!');
             setIsCameraReady(true);
           }}
         />

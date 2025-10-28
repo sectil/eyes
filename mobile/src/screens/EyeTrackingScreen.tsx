@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { View, StyleSheet, Dimensions, Platform } from 'react-native';
 import { Text, Button, ActivityIndicator, Surface, IconButton } from 'react-native-paper';
-import { CameraView, useCameraPermissions } from 'expo-camera';
+import { Camera, CameraView, useCameraPermissions } from 'expo-camera';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@/navigation/AppNavigator';
@@ -153,12 +153,12 @@ export default function EyeTrackingScreen() {
       </Surface>
 
       <View style={styles.cameraContainer}>
-        <CameraView
+        <Camera
           ref={cameraRef}
           style={styles.camera}
-          facing="front"
+          type="front"
           onCameraReady={() => {
-            console.log('[Eye Tracking] Camera ready');
+            console.log('[Eye Tracking] Camera ready with takePictureAsync');
             setIsCameraReady(true);
           }}
         />
