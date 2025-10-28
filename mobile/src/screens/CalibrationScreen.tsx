@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, Platform, TouchableOpacity, Animated } from 'react-native';
 import { Text, Button, Surface, IconButton, ProgressBar } from 'react-native-paper';
 import { CameraView, useCameraPermissions } from 'expo-camera';
-import { Camera } from 'expo-camera/legacy';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { captureRef } from 'react-native-view-shot';
+import * as FileSystem from 'expo-file-system';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -148,22 +149,23 @@ export default function CalibrationScreen() {
     }
 
     try {
-      // SDK 54: Check if takePictureAsync exists
-      if (!cameraRef.current.takePictureAsync) {
-        console.error('[Calibration] takePictureAsync not available on CameraView');
-        console.log('[Calibration] Available methods:', Object.keys(cameraRef.current));
-        return null;
-      }
+      console.log('[Calibration] Capturing camera view screenshot...');
 
-      console.log('[Calibration] Taking picture...');
-      const photo = await cameraRef.current.takePictureAsync({
-        base64: true,
+      // Capture the camera view as an image
+      const uri = await captureRef(cameraRef, {
+        format: 'jpg',
         quality: 0.3,
-        skipProcessing: true,
       });
 
-      if (!photo?.base64) {
-        console.log('[Calibration] No base64 data in photo');
+      console.log('[Calibration] Screenshot captured, reading file...');
+
+      // Read the image as base64
+      const base64 = await FileSystem.readAsStringAsync(uri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+
+      if (!base64) {
+        console.log('[Calibration] Failed to read base64');
         return null;
       }
 
@@ -173,7 +175,7 @@ export default function CalibrationScreen() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           "0": {
-            image: `data:image/jpeg;base64,${photo.base64}`,
+            image: `data:image/jpeg;base64,${base64}`,
             timestamp: new Date().toISOString(),
           }
         }),
@@ -303,13 +305,12 @@ export default function CalibrationScreen() {
         </View>
       )}
 
-      <View style={styles.cameraContainer}>
-        <Camera
-          ref={cameraRef}
+      <View style={styles.cameraContainer} ref={cameraRef}>
+        <CameraView
           style={styles.camera}
-          type="front"
+          facing="front"
           onCameraReady={() => {
-            console.log('[Calibration] ✓ Camera ready with takePictureAsync!');
+            console.log('[Calibration] ✓ Camera ready for screenshot capture!');
             setIsCameraReady(true);
           }}
         />

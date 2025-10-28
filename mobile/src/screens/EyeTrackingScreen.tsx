@@ -2,10 +2,11 @@ import React, { useState, useRef } from 'react';
 import { View, StyleSheet, Dimensions, Platform } from 'react-native';
 import { Text, Button, ActivityIndicator, Surface, IconButton } from 'react-native-paper';
 import { CameraView, useCameraPermissions } from 'expo-camera';
-import { Camera } from 'expo-camera/legacy';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@/navigation/AppNavigator';
+import { captureRef } from 'react-native-view-shot';
+import * as FileSystem from 'expo-file-system';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -54,19 +55,20 @@ export default function EyeTrackingScreen() {
       isAnalyzingRef.current = true;
       const startTime = Date.now();
 
-      // SDK 54: Use takePictureAsync method
-      if (!cameraRef.current.takePictureAsync) {
-        console.error('[Eye Tracking] takePictureAsync not available');
-        return;
-      }
+      console.log('[Eye Tracking] Capturing screenshot...');
 
-      const photo = await cameraRef.current.takePictureAsync({
-        base64: true,
+      // Capture camera view screenshot
+      const uri = await captureRef(cameraRef, {
+        format: 'jpg',
         quality: 0.3,
-        skipProcessing: true,
       });
 
-      if (!photo?.base64) return;
+      // Read as base64
+      const base64 = await FileSystem.readAsStringAsync(uri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+
+      if (!base64) return;
 
       console.log('[Eye Tracking] Analyzing...');
 
@@ -78,7 +80,7 @@ export default function EyeTrackingScreen() {
         },
         body: JSON.stringify({
           "0": {
-            image: `data:image/jpeg;base64,${photo.base64}`,
+            image: `data:image/jpeg;base64,${base64}`,
             timestamp: new Date().toISOString(),
           }
         }),
@@ -153,13 +155,12 @@ export default function EyeTrackingScreen() {
         <View style={{ width: 40 }} />
       </Surface>
 
-      <View style={styles.cameraContainer}>
-        <Camera
-          ref={cameraRef}
+      <View style={styles.cameraContainer} ref={cameraRef}>
+        <CameraView
           style={styles.camera}
-          type="front"
+          facing="front"
           onCameraReady={() => {
-            console.log('[Eye Tracking] Camera ready with takePictureAsync');
+            console.log('[Eye Tracking] Camera ready for screenshot capture');
             setIsCameraReady(true);
           }}
         />
