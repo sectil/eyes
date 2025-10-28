@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, Dimensions, Platform, TouchableOpacity, Animated } from 'react-native';
 import { Text, Button, Surface, IconButton, ProgressBar } from 'react-native-paper';
-import { Camera, CameraView, useCameraPermissions } from 'expo-camera';
+import { CameraView, useCameraPermissions } from 'expo-camera';
+import { Camera } from 'expo-camera/legacy';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
