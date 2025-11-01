@@ -83,39 +83,51 @@ export default function HomeScreen() {
 
         <Card style={styles.card}>
           <Card.Title
-            title="Snellen Test"
-            subtitle="Test your visual acuity"
+            title="📊 İstatistikler & İlerleme"
+            subtitle="Göz sağlığı ilerlemenizi takip edin"
+            left={(props) => <Avatar.Icon {...props} icon="chart-line" />}
+          />
+          <Card.Actions>
+            <Button
+              mode="contained"
+              onPress={() => navigation.navigate('Progress')}
+              style={{ backgroundColor: '#9c27b0' }}
+            >
+              İstatistikleri Gör
+            </Button>
+          </Card.Actions>
+        </Card>
+
+        <Card style={styles.card}>
+          <Card.Title
+            title="👁️ Snellen Görme Testi"
+            subtitle="Görme keskinliğinizi ölçün"
             left={(props) => <Avatar.Icon {...props} icon="format-letter-case" />}
           />
           <Card.Actions>
-            <Button mode="contained" disabled>
-              Coming Soon
+            <Button
+              mode="contained"
+              onPress={() => navigation.navigate('SnellenTest')}
+              style={{ backgroundColor: '#2196F3' }}
+            >
+              Teste Başla
             </Button>
           </Card.Actions>
         </Card>
 
         <Card style={styles.card}>
           <Card.Title
-            title="Color Test"
-            subtitle="Check for color blindness"
+            title="🎨 Renk Körlüğü Testi"
+            subtitle="Renk görme yeteneğinizi test edin"
             left={(props) => <Avatar.Icon {...props} icon="palette" />}
           />
           <Card.Actions>
-            <Button mode="contained" disabled>
-              Coming Soon
-            </Button>
-          </Card.Actions>
-        </Card>
-
-        <Card style={styles.card}>
-          <Card.Title
-            title="Test History"
-            subtitle="View your past tests"
-            left={(props) => <Avatar.Icon {...props} icon="history" />}
-          />
-          <Card.Actions>
-            <Button mode="contained" disabled>
-              Coming Soon
+            <Button
+              mode="contained"
+              onPress={() => navigation.navigate('ColorBlindnessTest')}
+              style={{ backgroundColor: '#e91e63' }}
+            >
+              Teste Başla
             </Button>
           </Card.Actions>
         </Card>
