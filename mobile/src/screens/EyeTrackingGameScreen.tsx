@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, StyleSheet, Dimensions, Platform, Animated } from 'react-native';
+import { View, StyleSheet, Dimensions, Platform } from 'react-native';
 import { Text, Button, Surface, IconButton } from 'react-native-paper';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@/navigation/AppNavigator';
-import { GLView } from 'expo-gl';
+import * as FileSystem from 'expo-file-system';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -40,7 +40,6 @@ export default function EyeTrackingGameScreen() {
   const [lives, setLives] = useState(3);
   const [gameOver, setGameOver] = useState(false);
   const [isCameraReady, setIsCameraReady] = useState(false);
-  const [isGLReady, setIsGLReady] = useState(false);
 
   // Paddle position (controlled by eye tracking)
   const [paddleX, setPaddleX] = useState(GAME_WIDTH / 2 - PADDLE_WIDTH / 2);
@@ -55,8 +54,6 @@ export default function EyeTrackingGameScreen() {
   const [bricks, setBricks] = useState<Brick[]>([]);
 
   const cameraRef = useRef<any>(null);
-  const glRef = useRef<any>(null);
-  const cameraTextureRef = useRef<any>(null);
   const trackingIntervalRef = useRef<any>(null);
   const gameLoopRef = useRef<any>(null);
   const isAnalyzingRef = useRef(false);
@@ -80,33 +77,6 @@ export default function EyeTrackingGameScreen() {
     setBricks(newBricks);
   }, []);
 
-  // GL Context for camera texture
-  const onGLContextCreate = async (gl: any) => {
-    console.log('[Eye Game] GL Context created');
-
-    if (!cameraRef.current) {
-      console.log('[Eye Game] Camera ref not ready');
-      return;
-    }
-
-    try {
-      const texture = await gl.createCameraTextureAsync(cameraRef.current);
-      cameraTextureRef.current = texture;
-
-      console.log('[Eye Game] Camera texture created');
-      setIsGLReady(true);
-
-      const render = () => {
-        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-        gl.endFrameEXP();
-        requestAnimationFrame(render);
-      };
-      render();
-    } catch (error) {
-      console.error('[Eye Game] GL setup error:', error);
-    }
-  };
-
   // Eye tracking for paddle control
   const startEyeTracking = async () => {
     console.log('[Eye Game] Starting eye tracking...');
@@ -126,30 +96,28 @@ export default function EyeTrackingGameScreen() {
   };
 
   const captureAndAnalyze = async () => {
-    if (isAnalyzingRef.current || !glRef.current || !isCameraReady || !isGLReady) {
+    if (isAnalyzingRef.current || !cameraRef.current || !isCameraReady) {
       return;
     }
+
+    let photoUri: string | null = null;
 
     try {
       isAnalyzingRef.current = true;
 
-      // Take snapshot from GLView
-      const snapshot = await glRef.current.takeSnapshotAsync({
-        format: 'jpg',
-        quality: 0.4, // Lower quality for faster processing
-        compress: 0.6,
+      // Take picture from CameraView
+      const photo = await cameraRef.current.takePictureAsync({
+        quality: 0.3,
+        base64: false,
+        skipProcessing: true,
       });
 
-      const imageResponse = await fetch(snapshot.uri);
-      const blob = await imageResponse.blob();
-      const base64 = await new Promise<string>((resolve) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const result = reader.result as string;
-          const base64Data = result.split(',')[1] || result;
-          resolve(base64Data);
-        };
-        reader.readAsDataURL(blob);
+      if (!photo?.uri) return;
+      photoUri = photo.uri;
+
+      // Read as base64
+      const base64 = await FileSystem.readAsStringAsync(photo.uri, {
+        encoding: FileSystem.EncodingType.Base64,
       });
 
       if (!base64) return;
@@ -190,6 +158,14 @@ export default function EyeTrackingGameScreen() {
     } catch (error: any) {
       console.error('[Eye Game] Error:', error.message);
     } finally {
+      // Clean up photo file
+      if (photoUri) {
+        try {
+          await FileSystem.deleteAsync(photoUri, { idempotent: true });
+        } catch (cleanupError) {
+          console.log('[Eye Game] Photo cleanup warning:', cleanupError);
+        }
+      }
       isAnalyzingRef.current = false;
     }
   };
@@ -394,11 +370,6 @@ export default function EyeTrackingGameScreen() {
             console.log('[Eye Game] Camera ready');
             setIsCameraReady(true);
           }}
-        />
-        <GLView
-          ref={glRef}
-          style={{ width: 100, height: 100 }}
-          onContextCreate={onGLContextCreate}
         />
       </View>
 
