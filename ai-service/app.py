@@ -22,8 +22,8 @@ mp_face_mesh = mp.solutions.face_mesh
 face_mesh = mp_face_mesh.FaceMesh(
     max_num_faces=1,
     refine_landmarks=True,  # Enable iris landmarks
-    min_detection_confidence=0.5,
-    min_tracking_confidence=0.5
+    min_detection_confidence=0.3,  # Lower for low-light conditions
+    min_tracking_confidence=0.3    # Lower for low-light conditions
 )
 
 # Eye landmark indices for MediaPipe Face Mesh
@@ -41,6 +41,38 @@ def decode_image(base64_string):
     image_data = base64.b64decode(base64_string)
     image = Image.open(BytesIO(image_data))
     return cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+
+
+def enhance_low_light_image(image):
+    """
+    Enhance image for low-light conditions
+    Improves brightness and contrast for better face detection
+    """
+    # Convert to LAB color space
+    lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
+    l, a, b = cv2.split(lab)
+
+    # Apply CLAHE (Contrast Limited Adaptive Histogram Equalization) to L channel
+    clahe = cv2.createCLAHE(clipLimit=3.0, tileGridSize=(8, 8))
+    l_enhanced = clahe.apply(l)
+
+    # Merge channels back
+    enhanced_lab = cv2.merge([l_enhanced, a, b])
+    enhanced_image = cv2.cvtColor(enhanced_lab, cv2.COLOR_LAB2BGR)
+
+    # Additional brightness boost for very dark images
+    # Check average brightness
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    avg_brightness = np.mean(gray)
+
+    if avg_brightness < 80:  # Very dark image
+        # Apply gamma correction to brighten
+        gamma = 1.5
+        inv_gamma = 1.0 / gamma
+        table = np.array([((i / 255.0) ** inv_gamma) * 255 for i in range(256)]).astype("uint8")
+        enhanced_image = cv2.LUT(enhanced_image, table)
+
+    return enhanced_image
 
 
 def calculate_eye_aspect_ratio(eye_landmarks):
@@ -154,8 +186,12 @@ def detect_face():
 
         # Decode image
         image = decode_image(data['image'])
-        rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        h, w = image.shape[:2]
+
+        # Enhance image for low-light conditions
+        enhanced_image = enhance_low_light_image(image)
+
+        rgb_image = cv2.cvtColor(enhanced_image, cv2.COLOR_BGR2RGB)
+        h, w = enhanced_image.shape[:2]
 
         # Process image with MediaPipe
         results = face_mesh.process(rgb_image)
@@ -182,9 +218,20 @@ def detect_face():
         right_ear = calculate_eye_aspect_ratio(right_eye_points)
         avg_ear = (left_ear + right_ear) / 2.0
 
-        # EAR < 0.2 typically indicates closed eye
-        is_blinking = avg_ear < 0.2
-        eyes_open = avg_ear > 0.25
+        # EAR thresholds (dynamically adjusted)
+        # More intelligent threshold based on individual eye state
+        EAR_CLOSED_THRESHOLD = 0.13  # Very low = definitely closed/blinking
+        EAR_OPEN_THRESHOLD = 0.21    # Higher = definitely open
+
+        # Individual eye thresholds for better detection
+        left_eye_open = left_ear > EAR_OPEN_THRESHOLD
+        right_eye_open = right_ear > EAR_OPEN_THRESHOLD
+
+        # Blinking = both eyes clearly closed
+        is_blinking = left_ear < EAR_CLOSED_THRESHOLD and right_ear < EAR_CLOSED_THRESHOLD
+
+        # Eyes open = both eyes above threshold
+        eyes_open = left_eye_open and right_eye_open
 
         # Extract iris landmarks (pupil tracking)
         left_iris_points = [(face_landmarks.landmark[i].x * w,
@@ -220,17 +267,31 @@ def detect_face():
             'analysis': {
                 'eyes': {
                     'left': {
-                        'open': bool(left_ear > 0.25),
+                        'open': bool(left_eye_open),
                         'aspect_ratio': float(left_ear),
                         'pupil': left_pupil
                     },
                     'right': {
-                        'open': bool(right_ear > 0.25),
+                        'open': bool(right_eye_open),
                         'aspect_ratio': float(right_ear),
                         'pupil': right_pupil
                     },
                     'both_open': bool(eyes_open),
-                    'blinking': bool(is_blinking)
+                    'blinking': bool(is_blinking),
+                    'left_open': bool(left_eye_open),
+                    'right_open': bool(right_eye_open)
+                },
+                'pupils': {
+                    'left': {
+                        'x': left_pupil['x'],
+                        'y': left_pupil['y'],
+                        'center': left_pupil['center']
+                    },
+                    'right': {
+                        'x': right_pupil['x'],
+                        'y': right_pupil['y'],
+                        'center': right_pupil['center']
+                    }
                 },
                 'gaze': {
                     'direction': gaze_direction,

@@ -4,12 +4,13 @@ import { Text, Button, Surface, IconButton, ProgressBar } from 'react-native-pap
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Haptics from 'expo-haptics';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const CALIBRATION_POINTS = 9; // 3x3 grid
 const SAMPLES_PER_POINT = 5;
-const SAMPLE_INTERVAL = 200; // ms
+const SAMPLE_INTERVAL = 250; // ms - Balanced for reliability and responsiveness
 
 // 9 kalibrasyon noktası pozisyonları (%)
 const CALIBRATION_POSITIONS = [
@@ -33,9 +34,15 @@ export default function CalibrationScreen() {
   const [calibrationData, setCalibrationData] = useState<any[]>([]);
   const [progress, setProgress] = useState(0);
   const [isCameraReady, setIsCameraReady] = useState(false);
+  const [eyeTrackingData, setEyeTrackingData] = useState<any>(null);
+  const [faceDetected, setFaceDetected] = useState(false);
   const cameraRef = useRef<any>(null);
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const isCollecting = useRef(false);
+  const trackingIntervalRef = useRef<any>(null);
+  const isTakingPictureRef = useRef(false); // Lock to prevent concurrent camera access
+  const lastHapticTimeRef = useRef(0); // To prevent haptic spam
+  const isAlignedRef = useRef(false); // Track if eyes are aligned
 
   // Pulse animasyonu
   useEffect(() => {
@@ -60,17 +67,24 @@ export default function CalibrationScreen() {
   }, [isCalibrating, currentPointIndex]);
 
   const captureAndAnalyze = async () => {
+    // Prevent concurrent camera access
+    if (isTakingPictureRef.current) {
+      console.log('[Calibration] Skipping - camera busy');
+      return null;
+    }
+
     if (!cameraRef.current || !isCameraReady) {
       console.log('[Calibration] Camera not ready yet');
       return null;
     }
 
     try {
+      isTakingPictureRef.current = true;
       console.log('[Calibration] Taking picture...');
 
-      // Take photo with Camera
+      // Take photo with Camera - Optimized quality for performance
       const photo = await cameraRef.current.takePictureAsync({
-        quality: 0.3,
+        quality: 0.5,
         base64: true,
         skipProcessing: true,
       });
@@ -101,6 +115,9 @@ export default function CalibrationScreen() {
 
       if (result?.success && result?.face_detected) {
         console.log('[Calibration] ✓ Face detected!');
+        console.log('[Calibration] Eyes data:', JSON.stringify(result.analysis?.eyes, null, 2));
+        console.log('[Calibration] Pupils data:', JSON.stringify(result.analysis?.pupils, null, 2));
+        console.log('[Calibration] Gaze data:', JSON.stringify(result.analysis?.gaze, null, 2));
         return result.analysis;
       }
 
@@ -109,7 +126,58 @@ export default function CalibrationScreen() {
     } catch (error) {
       console.error('[Calibration] Analysis error:', error);
       return null;
+    } finally {
+      isTakingPictureRef.current = false;
     }
+  };
+
+  // Check if gaze is aligned with calibration point and trigger haptic feedback
+  const checkGazeAlignment = (analysis: any) => {
+    if (!analysis?.gaze || currentPointIndex < 0) return;
+
+    const currentPoint = CALIBRATION_POSITIONS[currentPointIndex];
+
+    // Convert calibration point (0-100%) to normalized coordinates (-1 to 1)
+    // Screen center is (50%, 50%) = (0, 0) in normalized coords
+    const targetX = (currentPoint.x - 50) / 50; // Convert 0-100% to -1 to 1
+    const targetY = (currentPoint.y - 50) / 50; // Convert 0-100% to -1 to 1
+
+    // Get current gaze position (-1 to 1)
+    const gazeX = analysis.gaze.x;
+    const gazeY = analysis.gaze.y;
+
+    // Calculate distance between gaze and target
+    const distance = Math.sqrt(
+      Math.pow(targetX - gazeX, 2) +
+      Math.pow(targetY - gazeY, 2)
+    );
+
+    // Debug: Log alignment data
+    console.log('[Calibration] Alignment check:', {
+      point: currentPointIndex + 1,
+      targetPos: { x: currentPoint.x + '%', y: currentPoint.y + '%' },
+      targetNorm: { x: targetX.toFixed(2), y: targetY.toFixed(2) },
+      gazeNorm: { x: gazeX.toFixed(2), y: gazeY.toFixed(2) },
+      distance: distance.toFixed(2),
+      aligned: distance < 0.5 ? '✓ YES' : '✗ NO'
+    });
+
+    // Threshold for alignment (more lenient for testing)
+    const ALIGNMENT_THRESHOLD = 0.5; // Increased for easier alignment
+    const isAligned = distance < ALIGNMENT_THRESHOLD;
+
+    // Trigger haptic feedback when alignment changes from not-aligned to aligned
+    if (isAligned && !isAlignedRef.current) {
+      const now = Date.now();
+      // Prevent haptic spam (at most once every 500ms)
+      if (now - lastHapticTimeRef.current > 500) {
+        console.log('[Calibration] 🎯 ALIGNED! Triggering haptic...');
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        lastHapticTimeRef.current = now;
+      }
+    }
+
+    isAlignedRef.current = isAligned;
   };
 
   const collectSampleForPoint = async () => {
@@ -119,6 +187,9 @@ export default function CalibrationScreen() {
     const analysis = await captureAndAnalyze();
 
     if (analysis) {
+      // Check gaze alignment and trigger haptic feedback
+      checkGazeAlignment(analysis);
+
       const currentPoint = CALIBRATION_POSITIONS[currentPointIndex];
       const newSample = {
         pointIndex: currentPointIndex,
@@ -153,11 +224,42 @@ export default function CalibrationScreen() {
       // Move to next point
       setCurrentPointIndex(prev => prev + 1);
       setSamplesCollected(0);
+      isAlignedRef.current = false; // Reset alignment for new point
     } else if (samplesCollected >= SAMPLES_PER_POINT && currentPointIndex === CALIBRATION_POINTS - 1) {
       // Calibration complete
       finishCalibration();
     }
   }, [samplesCollected]);
+
+  // Real-time eye tracking for visual feedback (only when NOT calibrating)
+  useEffect(() => {
+    if (!isCameraReady || isCalibrating) {
+      // Stop tracking if calibration starts
+      if (trackingIntervalRef.current) {
+        clearInterval(trackingIntervalRef.current);
+        trackingIntervalRef.current = null;
+      }
+      return;
+    }
+
+    // Start continuous eye tracking only when NOT calibrating
+    trackingIntervalRef.current = setInterval(async () => {
+      const analysis = await captureAndAnalyze();
+      if (analysis) {
+        setEyeTrackingData(analysis);
+        setFaceDetected(true);
+      } else {
+        setFaceDetected(false);
+      }
+    }, 300); // Update every 300ms - balanced for stability
+
+    return () => {
+      if (trackingIntervalRef.current) {
+        clearInterval(trackingIntervalRef.current);
+        trackingIntervalRef.current = null;
+      }
+    };
+  }, [isCameraReady, isCalibrating]);
 
   const startCalibration = () => {
     console.log('[Calibration] Starting calibration...');
@@ -166,6 +268,12 @@ export default function CalibrationScreen() {
     setSamplesCollected(0);
     setCalibrationData([]);
     setProgress(0);
+    // Clear eye tracking overlay during calibration
+    setEyeTrackingData(null);
+    setFaceDetected(false);
+    // Reset haptic feedback state
+    isAlignedRef.current = false;
+    lastHapticTimeRef.current = 0;
   };
 
   const finishCalibration = async () => {
@@ -210,6 +318,7 @@ export default function CalibrationScreen() {
         ref={cameraRef}
         style={styles.camera}
         facing="front"
+        enableTorch={false}
         onCameraReady={() => {
           console.log('[Calibration] Camera ready');
           setIsCameraReady(true);
@@ -270,10 +379,70 @@ export default function CalibrationScreen() {
           </View>
         )}
 
+        {/* Real-time Eye Tracking Overlay (hidden during calibration) */}
+        {eyeTrackingData && faceDetected && !isCalibrating && (
+          <View style={styles.eyeTrackingOverlay}>
+            <View style={styles.eyeStatusCard}>
+              <Text style={styles.eyeStatusTitle}>👁 Göz Takibi Aktif</Text>
+
+              <View style={styles.eyeRow}>
+                <Text style={styles.eyeLabel}>Sol Göz:</Text>
+                <Text style={[styles.eyeValue, eyeTrackingData.eyes.left_open && styles.eyeOpen]}>
+                  {eyeTrackingData.eyes.left_open ? '👁 Açık' : '😑 Kapalı'}
+                </Text>
+              </View>
+
+              <View style={styles.eyeRow}>
+                <Text style={styles.eyeLabel}>Sağ Göz:</Text>
+                <Text style={[styles.eyeValue, eyeTrackingData.eyes.right_open && styles.eyeOpen]}>
+                  {eyeTrackingData.eyes.right_open ? '👁 Açık' : '😑 Kapalı'}
+                </Text>
+              </View>
+
+              {eyeTrackingData.eyes.blinking && (
+                <Text style={styles.blinkingText}>👁️ Göz Kırpma Tespit Edildi</Text>
+              )}
+
+              <View style={styles.eyeRow}>
+                <Text style={styles.eyeLabel}>Bakış:</Text>
+                <Text style={styles.eyeValue}>{eyeTrackingData.gaze.direction}</Text>
+              </View>
+
+              {eyeTrackingData.pupils && (
+                <>
+                  <View style={styles.eyeRow}>
+                    <Text style={styles.eyeLabel}>Sol Pupil:</Text>
+                    <Text style={styles.eyeValue}>
+                      ({eyeTrackingData.pupils.left.x.toFixed(2)}, {eyeTrackingData.pupils.left.y.toFixed(2)})
+                    </Text>
+                  </View>
+                  <View style={styles.eyeRow}>
+                    <Text style={styles.eyeLabel}>Sağ Pupil:</Text>
+                    <Text style={styles.eyeValue}>
+                      ({eyeTrackingData.pupils.right.x.toFixed(2)}, {eyeTrackingData.pupils.right.y.toFixed(2)})
+                    </Text>
+                  </View>
+                </>
+              )}
+
+              <Text style={styles.landmarksText}>
+                ✓ {eyeTrackingData.face_quality?.landmarks_count || 0} yüz noktası tespit edildi
+              </Text>
+            </View>
+          </View>
+        )}
+
+        {!faceDetected && isCameraReady && (
+          <View style={styles.noFaceWarning}>
+            <Text style={styles.noFaceText}>⚠️ Yüz tespit edilemedi</Text>
+            <Text style={styles.noFaceSubtext}>Lütfen kameraya doğrudan bakın</Text>
+          </View>
+        )}
+
         {/* Debug info */}
         <View style={styles.debugInfo}>
           <Text style={styles.debugText}>
-            Camera: {isCameraReady ? '✓' : '✗'} | Samples: {calibrationData.length}
+            Camera: {isCameraReady ? '✓' : '✗'} | Face: {faceDetected ? '✓' : '✗'} | Samples: {calibrationData.length}
           </Text>
         </View>
       </View>
@@ -320,6 +489,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 4,
     elevation: 5,
+    zIndex: 1000, // Ensure calibration point always stays on top
   },
   startContainer: {
     flex: 1,
@@ -360,5 +530,79 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 12,
     fontFamily: Platform.OS === 'ios' ? 'Courier' : 'monospace',
+  },
+  eyeTrackingOverlay: {
+    position: 'absolute',
+    top: 80,
+    right: 10,
+    maxWidth: '50%',
+  },
+  eyeStatusCard: {
+    backgroundColor: 'rgba(0, 0, 0, 0.85)',
+    borderRadius: 12,
+    padding: 12,
+    borderWidth: 2,
+    borderColor: '#4CAF50',
+  },
+  eyeStatusTitle: {
+    color: '#4CAF50',
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  eyeRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 6,
+    alignItems: 'center',
+  },
+  eyeLabel: {
+    color: '#aaa',
+    fontSize: 12,
+  },
+  eyeValue: {
+    color: '#fff',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  eyeOpen: {
+    color: '#4CAF50',
+  },
+  blinkingText: {
+    color: '#ff9800',
+    fontSize: 11,
+    textAlign: 'center',
+    marginVertical: 4,
+    fontWeight: 'bold',
+  },
+  landmarksText: {
+    color: '#4CAF50',
+    fontSize: 10,
+    marginTop: 8,
+    textAlign: 'center',
+  },
+  noFaceWarning: {
+    position: 'absolute',
+    top: '40%',
+    left: '50%',
+    transform: [{ translateX: -100 }, { translateY: -50 }],
+    width: 200,
+    backgroundColor: 'rgba(244, 67, 54, 0.9)',
+    padding: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  noFaceText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  noFaceSubtext: {
+    color: '#fff',
+    fontSize: 12,
+    textAlign: 'center',
   },
 });

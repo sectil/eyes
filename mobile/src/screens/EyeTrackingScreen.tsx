@@ -6,7 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@/navigation/AppNavigator';
 import { GLView } from 'expo-gl';
-import * as FileSystem from 'expo-file-system';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -61,7 +60,7 @@ export default function EyeTrackingScreen() {
 
     trackingIntervalRef.current = setInterval(async () => {
       await captureAndAnalyze();
-    }, 1000);
+    }, 250); // 250ms - balanced for reliability and blink detection
   };
 
   const stopTracking = () => {
@@ -86,16 +85,25 @@ export default function EyeTrackingScreen() {
 
       console.log('[Eye Tracking] Capturing GL snapshot...');
 
-      // Take snapshot from GLView
+      // Take snapshot from GLView - Optimized quality for performance
       const snapshot = await glRef.current.takeSnapshotAsync({
         format: 'jpg',
-        quality: 0.3,
-        compress: 0.3,
+        quality: 0.5,
+        compress: 0.5,
       });
 
-      // Read as base64
-      const base64 = await FileSystem.readAsStringAsync(snapshot.uri, {
-        encoding: FileSystem.EncodingType.Base64,
+      // Read as base64 using fetch
+      const imageResponse = await fetch(snapshot.uri);
+      const blob = await imageResponse.blob();
+      const base64 = await new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const result = reader.result as string;
+          // Remove data:image/jpeg;base64, prefix if present
+          const base64Data = result.split(',')[1] || result;
+          resolve(base64Data);
+        };
+        reader.readAsDataURL(blob);
       });
 
       if (!base64) return;
@@ -120,9 +128,12 @@ export default function EyeTrackingScreen() {
       
       // TRPC batch response: [{ result: { data: ... } }]
       const result = data[0]?.result?.data;
-      
+
       if (result?.success && result?.face_detected) {
         console.log('[Eye Tracking] ✓ FACE!');
+        console.log('[Eye Tracking] Eyes:', JSON.stringify(result.analysis?.eyes, null, 2));
+        console.log('[Eye Tracking] Pupils:', JSON.stringify(result.analysis?.pupils, null, 2));
+        console.log('[Eye Tracking] Gaze:', JSON.stringify(result.analysis?.gaze, null, 2));
         setEyeData(result.analysis);
         setLastAnalysisTime(Date.now() - startTime);
       } else {

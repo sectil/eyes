@@ -66,6 +66,23 @@ export default function HomeScreen() {
 
         <Card style={styles.card}>
           <Card.Title
+            title="💪 Göz Egzersizleri"
+            subtitle="10 farklı göz egzersizi ile gözlerinizi güçlendirin"
+            left={(props) => <Avatar.Icon {...props} icon="dumbbell" />}
+          />
+          <Card.Actions>
+            <Button
+              mode="contained"
+              onPress={() => navigation.navigate('EyeExercises')}
+              style={{ backgroundColor: '#ff9800' }}
+            >
+              Egzersizlere Başla
+            </Button>
+          </Card.Actions>
+        </Card>
+
+        <Card style={styles.card}>
+          <Card.Title
             title="Snellen Test"
             subtitle="Test your visual acuity"
             left={(props) => <Avatar.Icon {...props} icon="format-letter-case" />}
