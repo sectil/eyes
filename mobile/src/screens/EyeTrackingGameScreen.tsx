@@ -62,6 +62,7 @@ export default function EyeTrackingGameScreen() {
   const ballPosRef = useRef({ x: GAME_WIDTH / 2, y: GAME_HEIGHT - 100 });
   const ballVelRef = useRef({ x: 3, y: -3 });
   const bricksRef = useRef<Brick[]>([]);
+  const isResettingRef = useRef(false); // Prevent multiple life losses
 
   // Initialize bricks
   useEffect(() => {
@@ -232,23 +233,29 @@ export default function EyeTrackingGameScreen() {
     }
 
     // Bottom (lose life)
-    if (newY >= GAME_HEIGHT) {
+    if (newY >= GAME_HEIGHT && !isResettingRef.current) {
+      isResettingRef.current = true; // Prevent multiple life losses
+
       setLives(l => {
         const newLives = l - 1;
         if (newLives <= 0) {
           stopGame();
           setGameOver(true);
         } else {
-          // Reset ball
+          // Reset ball after a delay
           setTimeout(() => {
             ballPosRef.current = { x: GAME_WIDTH / 2, y: GAME_HEIGHT - 100 };
             ballVelRef.current = { x: 3, y: -3 };
             setBallX(GAME_WIDTH / 2);
             setBallY(GAME_HEIGHT - 100);
-          }, 500);
+            isResettingRef.current = false; // Allow next life loss
+          }, 1000);
         }
         return newLives;
       });
+
+      // Stop ball movement temporarily
+      ballPosRef.current.y = GAME_HEIGHT - 100;
       return;
     }
 
