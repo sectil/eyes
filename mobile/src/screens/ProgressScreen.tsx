@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Platform, Dimensions } from 'react-native';
 import { Text, Surface, IconButton, Card, ProgressBar, SegmentedButtons } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { trpc } from '@/utils/trpc';
+import { trpc } from '@/services/trpc';
 
 const { width } = Dimensions.get('window');
 

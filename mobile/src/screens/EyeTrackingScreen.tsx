@@ -111,7 +111,7 @@ export default function EyeTrackingScreen() {
       console.log('[Eye Tracking] Analyzing...');
 
       // Simple TRPC format - no batching
-      const response = await fetch('http://192.168.1.12:3000/trpc/eyeTracking.analyzeFace?batch=1', {
+      const trpcResponse = await fetch('http://192.168.1.12:3000/trpc/eyeTracking.analyzeFace?batch=1', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ export default function EyeTrackingScreen() {
         }),
       });
 
-      const data = await response.json();
+      const data = await trpcResponse.json();
       
       // TRPC batch response: [{ result: { data: ... } }]
       const result = data[0]?.result?.data;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Platform } from 'react-native';
 import { Text, Button, Surface, IconButton, ProgressBar, TextInput } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { trpc } from '@/utils/trpc';
+import { trpc } from '@/services/trpc';
 import Svg, { Circle } from 'react-native-svg';
 
 // Ishihara-like color blindness test plates

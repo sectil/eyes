@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Platform } from 'react-native';
+import { View, StyleSheet, ScrollView, Platform, TouchableOpacity } from 'react-native';
 import { Text, Button, Surface, IconButton, ProgressBar, RadioButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { trpc } from '@/utils/trpc';
+import { trpc } from '@/services/trpc';
 
 // Snellen chart lines - standard visual acuity test
 const SNELLEN_LINES = [
@@ -263,14 +263,19 @@ export default function SnellenTestScreen() {
           </Text>
 
           {LETTER_OPTIONS.map((letter) => (
-            <View key={letter} style={styles.radioOption}>
+            <TouchableOpacity
+              key={letter}
+              style={styles.radioOption}
+              onPress={() => setSelectedAnswer(letter)}
+              activeOpacity={0.7}
+            >
               <RadioButton
                 value={letter}
                 status={selectedAnswer === letter ? 'checked' : 'unchecked'}
                 onPress={() => setSelectedAnswer(letter)}
               />
               <Text style={styles.radioLabel}>{letter}</Text>
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
 
