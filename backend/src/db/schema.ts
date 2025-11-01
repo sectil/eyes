@@ -33,6 +33,18 @@ export const timeOfDayEnum = pgEnum('time_of_day', [
   'afternoon',
   'evening',
 ]);
+export const exerciseTypeEnum = pgEnum('exercise_type', [
+  'blink',
+  'close',
+  'rectangle',
+  'star',
+  'horizontal',
+  'vertical',
+  'diagonal',
+  'circle',
+  'focus',
+  'rest',
+]);
 
 // Users Table
 export const users = pgTable('users', {
@@ -131,6 +143,36 @@ export const sessions = pgTable('sessions', {
   ipAddress: varchar('ip_address', { length: 50 }),
 });
 
+// Exercise Sessions Table
+export const exerciseSessions = pgTable('exercise_sessions', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  exerciseType: exerciseTypeEnum('exercise_type').notNull(),
+  duration: integer('duration').notNull(), // seconds
+  blinkCount: integer('blink_count').default(0),
+  completed: boolean('completed').notNull().default(true),
+  eyeData: jsonb('eye_data'), // Detailed eye tracking data during exercise
+  timestamp: timestamp('timestamp').notNull().defaultNow(),
+});
+
+// Daily Usage Table
+export const dailyUsage = pgTable('daily_usage', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('user_id')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  date: date('date').notNull(),
+  totalExerciseTime: integer('total_exercise_time').notNull().default(0), // seconds
+  totalTestTime: integer('total_test_time').notNull().default(0), // seconds
+  exerciseCount: integer('exercise_count').notNull().default(0),
+  testCount: integer('test_count').notNull().default(0),
+  totalBlinkCount: integer('total_blink_count').notNull().default(0),
+  lastActivity: timestamp('last_activity').notNull().defaultNow(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+});
+
 // Relations
 export const usersRelations = relations(users, ({ one, many }) => ({
   eyeProfile: one(eyeProfiles, {
@@ -141,6 +183,8 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   testResults: many(eyeTestResults),
   healthLogs: many(healthLogs),
   sessions: many(sessions),
+  exerciseSessions: many(exerciseSessions),
+  dailyUsageRecords: many(dailyUsage),
 }));
 
 export const eyeProfilesRelations = relations(eyeProfiles, ({ one }) => ({
@@ -182,6 +226,20 @@ export const healthLogsRelations = relations(healthLogs, ({ one }) => ({
 export const sessionsRelations = relations(sessions, ({ one }) => ({
   user: one(users, {
     fields: [sessions.userId],
+    references: [users.id],
+  }),
+}));
+
+export const exerciseSessionsRelations = relations(exerciseSessions, ({ one }) => ({
+  user: one(users, {
+    fields: [exerciseSessions.userId],
+    references: [users.id],
+  }),
+}));
+
+export const dailyUsageRelations = relations(dailyUsage, ({ one }) => ({
+  user: one(users, {
+    fields: [dailyUsage.userId],
     references: [users.id],
   }),
 }));
