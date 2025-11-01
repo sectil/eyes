@@ -43,10 +43,20 @@ export default function SnellenTestScreen() {
     setTestStartTime(Date.now());
   }, []);
 
-  const handleAnswer = () => {
-    if (!selectedAnswer) return;
+  const handleSelectAnswer = (letter: string) => {
+    setSelectedAnswer(letter);
 
-    const isCorrect = selectedAnswer === currentLetterToShow;
+    // Auto-advance after selection with a small delay for visual feedback
+    setTimeout(() => {
+      handleAnswer(letter);
+    }, 300);
+  };
+
+  const handleAnswer = (answer?: string) => {
+    const answerToCheck = answer || selectedAnswer;
+    if (!answerToCheck) return;
+
+    const isCorrect = answerToCheck === currentLetterToShow;
 
     if (!isCorrect) {
       setMistakes((prev) => prev + 1);
