@@ -131,6 +131,23 @@ export default function HomeScreen() {
             </Button>
           </Card.Actions>
         </Card>
+
+        <Card style={styles.card}>
+          <Card.Title
+            title="🎮 Göz Takipli Oyun"
+            subtitle="Gözlerinizle tuğla kırma oyunu oynayın"
+            left={(props) => <Avatar.Icon {...props} icon="gamepad-variant" />}
+          />
+          <Card.Actions>
+            <Button
+              mode="contained"
+              onPress={() => navigation.navigate('EyeTrackingGame')}
+              style={{ backgroundColor: '#00bcd4' }}
+            >
+              Oyuna Başla
+            </Button>
+          </Card.Actions>
+        </Card>
       </View>
     </ScrollView>
   );

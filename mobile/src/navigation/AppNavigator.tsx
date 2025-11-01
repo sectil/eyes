@@ -15,6 +15,7 @@ import EyeExercisesScreen from '@/screens/EyeExercisesScreen';
 import SnellenTestScreen from '@/screens/SnellenTestScreen';
 import ColorBlindnessTestScreen from '@/screens/ColorBlindnessTestScreen';
 import ProgressScreen from '@/screens/ProgressScreen';
+import EyeTrackingGameScreen from '@/screens/EyeTrackingGameScreen';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -27,6 +28,7 @@ export type RootStackParamList = {
   SnellenTest: undefined;
   ColorBlindnessTest: undefined;
   Progress: undefined;
+  EyeTrackingGame: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -64,6 +66,7 @@ export default function AppNavigator() {
             <Stack.Screen name="SnellenTest" component={SnellenTestScreen} />
             <Stack.Screen name="ColorBlindnessTest" component={ColorBlindnessTestScreen} />
             <Stack.Screen name="Progress" component={ProgressScreen} />
+            <Stack.Screen name="EyeTrackingGame" component={EyeTrackingGameScreen} />
           </>
         )}
       </Stack.Navigator>
