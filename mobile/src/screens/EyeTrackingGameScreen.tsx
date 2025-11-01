@@ -58,6 +58,11 @@ export default function EyeTrackingGameScreen() {
   const gameLoopRef = useRef<any>(null);
   const isAnalyzingRef = useRef(false);
 
+  // Use refs for game loop to avoid closure issues
+  const ballPosRef = useRef({ x: GAME_WIDTH / 2, y: GAME_HEIGHT - 100 });
+  const ballVelRef = useRef({ x: 3, y: -3 });
+  const bricksRef = useRef<Brick[]>([]);
+
   // Initialize bricks
   useEffect(() => {
     const newBricks: Brick[] = [];
@@ -75,6 +80,7 @@ export default function EyeTrackingGameScreen() {
       }
     }
     setBricks(newBricks);
+    bricksRef.current = newBricks;
   }, []);
 
   // Eye tracking for paddle control
@@ -178,13 +184,17 @@ export default function EyeTrackingGameScreen() {
     setLives(3);
 
     // Reset ball
+    ballPosRef.current = { x: GAME_WIDTH / 2, y: GAME_HEIGHT - 100 };
+    ballVelRef.current = { x: 3, y: -3 };
     setBallX(GAME_WIDTH / 2);
     setBallY(GAME_HEIGHT - 100);
     setBallVelX(3);
     setBallVelY(-3);
 
     // Reset bricks
-    setBricks(prev => prev.map(b => ({ ...b, visible: true })));
+    const resetBricks = bricksRef.current.map(b => ({ ...b, visible: true }));
+    bricksRef.current = resetBricks;
+    setBricks(resetBricks);
 
     // Start eye tracking
     startEyeTracking();
@@ -205,100 +215,101 @@ export default function EyeTrackingGameScreen() {
   };
 
   const updateGame = () => {
-    setBallX(prev => {
-      let newX = prev + ballVelX;
+    // Update ball position using refs
+    let newX = ballPosRef.current.x + ballVelRef.current.x;
+    let newY = ballPosRef.current.y + ballVelRef.current.y;
 
-      // Wall collision
-      if (newX <= 0 || newX >= GAME_WIDTH - BALL_SIZE) {
-        setBallVelX(v => -v);
-        newX = prev - ballVelX;
-      }
+    // Wall collision (horizontal)
+    if (newX <= 0 || newX >= GAME_WIDTH - BALL_SIZE) {
+      ballVelRef.current.x = -ballVelRef.current.x;
+      newX = ballPosRef.current.x - ballVelRef.current.x;
+    }
 
-      return newX;
-    });
+    // Top wall
+    if (newY <= 0) {
+      ballVelRef.current.y = -ballVelRef.current.y;
+      newY = 0;
+    }
 
-    setBallY(prev => {
-      let newY = prev + ballVelY;
+    // Bottom (lose life)
+    if (newY >= GAME_HEIGHT) {
+      setLives(l => {
+        const newLives = l - 1;
+        if (newLives <= 0) {
+          stopGame();
+          setGameOver(true);
+        } else {
+          // Reset ball
+          setTimeout(() => {
+            ballPosRef.current = { x: GAME_WIDTH / 2, y: GAME_HEIGHT - 100 };
+            ballVelRef.current = { x: 3, y: -3 };
+            setBallX(GAME_WIDTH / 2);
+            setBallY(GAME_HEIGHT - 100);
+          }, 500);
+        }
+        return newLives;
+      });
+      return;
+    }
 
-      // Top wall
-      if (newY <= 0) {
-        setBallVelY(v => -v);
-        newY = 0;
-      }
+    // Paddle collision
+    if (
+      newY + BALL_SIZE >= GAME_HEIGHT - 50 &&
+      newY + BALL_SIZE <= GAME_HEIGHT - 35 &&
+      ballPosRef.current.y + ballVelRef.current.y < GAME_HEIGHT - 50
+    ) {
+      setPaddleX(currentPaddleX => {
+        if (
+          newX + BALL_SIZE >= currentPaddleX &&
+          newX <= currentPaddleX + PADDLE_WIDTH
+        ) {
+          ballVelRef.current.y = -Math.abs(ballVelRef.current.y);
 
-      // Bottom (lose life)
-      if (newY >= GAME_HEIGHT) {
-        setLives(l => {
-          const newLives = l - 1;
-          if (newLives <= 0) {
-            stopGame();
-            setGameOver(true);
-          } else {
-            // Reset ball
-            setTimeout(() => {
-              setBallX(GAME_WIDTH / 2);
-              setBallY(GAME_HEIGHT - 100);
-              setBallVelX(3);
-              setBallVelY(-3);
-            }, 500);
-          }
-          return newLives;
-        });
-        return GAME_HEIGHT - 100;
-      }
+          // Add spin based on where ball hits paddle
+          const hitPos = (newX - currentPaddleX) / PADDLE_WIDTH;
+          ballVelRef.current.x = (hitPos - 0.5) * 6;
 
-      // Paddle collision
-      if (
-        newY + BALL_SIZE >= GAME_HEIGHT - 50 &&
-        newY + BALL_SIZE <= GAME_HEIGHT - 35 &&
-        prev + ballVelY < GAME_HEIGHT - 50 &&
-        ballX + BALL_SIZE >= paddleX &&
-        ballX <= paddleX + PADDLE_WIDTH
-      ) {
-        setBallVelY(v => -Math.abs(v)); // Always bounce up
-
-        // Add spin based on where ball hits paddle
-        const hitPos = (ballX - paddleX) / PADDLE_WIDTH;
-        setBallVelX(v => (hitPos - 0.5) * 6);
-
-        newY = GAME_HEIGHT - 50 - BALL_SIZE;
-      }
-
-      return newY;
-    });
+          newY = GAME_HEIGHT - 50 - BALL_SIZE;
+        }
+        return currentPaddleX;
+      });
+    }
 
     // Brick collision
-    setBricks(prev => {
-      let hitBrick = false;
-      const newBricks = prev.map(brick => {
-        if (!brick.visible) return brick;
+    let hitBrick = false;
+    const newBricks = bricksRef.current.map(brick => {
+      if (!brick.visible) return brick;
 
-        if (
-          ballX + BALL_SIZE >= brick.x &&
-          ballX <= brick.x + BRICK_WIDTH &&
-          ballY + BALL_SIZE >= brick.y &&
-          ballY <= brick.y + BRICK_HEIGHT
-        ) {
-          hitBrick = true;
-          setScore(s => s + 10);
-          return { ...brick, visible: false };
-        }
-        return brick;
-      });
-
-      if (hitBrick) {
-        setBallVelY(v => -v);
+      if (
+        newX + BALL_SIZE >= brick.x &&
+        newX <= brick.x + BRICK_WIDTH &&
+        newY + BALL_SIZE >= brick.y &&
+        newY <= brick.y + BRICK_HEIGHT
+      ) {
+        hitBrick = true;
+        setScore(s => s + 10);
+        return { ...brick, visible: false };
       }
+      return brick;
+    });
+
+    if (hitBrick) {
+      ballVelRef.current.y = -ballVelRef.current.y;
+      bricksRef.current = newBricks;
+      setBricks(newBricks);
 
       // Check win condition
       const allDestroyed = newBricks.every(b => !b.visible);
-      if (allDestroyed && isPlaying) {
+      if (allDestroyed) {
         stopGame();
         setGameOver(true);
       }
+    }
 
-      return newBricks;
-    });
+    // Update ball position
+    ballPosRef.current = { x: newX, y: newY };
+    setBallX(newX);
+    setBallY(newY);
   };
 
   useEffect(() => {
