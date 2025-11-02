@@ -44,6 +44,37 @@ export default function CalibrationScreen() {
   const lastHapticTimeRef = useRef(0); // To prevent haptic spam
   const isAlignedRef = useRef(false); // Track if eyes are aligned
 
+  // Face detection buffering for stability (last 5 frames)
+  const faceDetectionBufferRef = useRef<boolean[]>([]);
+  const BUFFER_SIZE = 5; // Keep last 5 detection results
+  const CONFIDENCE_THRESHOLD = 3; // At least 3/5 detections should succeed
+
+  // Update face detection buffer and check stability
+  const updateFaceDetectionBuffer = (detected: boolean): boolean => {
+    // Add new result to buffer
+    faceDetectionBufferRef.current.push(detected);
+
+    // Keep only last BUFFER_SIZE results
+    if (faceDetectionBufferRef.current.length > BUFFER_SIZE) {
+      faceDetectionBufferRef.current.shift();
+    }
+
+    // Count successful detections in buffer
+    const successfulDetections = faceDetectionBufferRef.current.filter(d => d).length;
+
+    // Face is "detected" if at least CONFIDENCE_THRESHOLD detections succeeded
+    const isStableDetection = successfulDetections >= CONFIDENCE_THRESHOLD;
+
+    console.log('[Calibration] Detection buffer:', {
+      buffer: faceDetectionBufferRef.current.map(d => d ? '✓' : '✗').join(''),
+      successful: successfulDetections,
+      threshold: CONFIDENCE_THRESHOLD,
+      stable: isStableDetection ? '✓ STABLE' : '✗ UNSTABLE'
+    });
+
+    return isStableDetection;
+  };
+
   // Pulse animasyonu
   useEffect(() => {
     if (isCalibrating && currentPointIndex >= 0) {
@@ -82,9 +113,9 @@ export default function CalibrationScreen() {
       isTakingPictureRef.current = true;
       console.log('[Calibration] Taking picture...');
 
-      // Take photo with Camera - Optimized quality for performance
+      // Take photo with Camera - Lower quality for faster processing
       const photo = await cameraRef.current.takePictureAsync({
-        quality: 0.5,
+        quality: 0.3, // Lower quality = faster processing & less data transfer
         base64: true,
         skipProcessing: true,
       });
@@ -245,13 +276,21 @@ export default function CalibrationScreen() {
     // Start continuous eye tracking only when NOT calibrating
     trackingIntervalRef.current = setInterval(async () => {
       const analysis = await captureAndAnalyze();
-      if (analysis) {
+
+      // Update buffer and get stable detection status
+      const detected = analysis !== null;
+      const isStableDetection = updateFaceDetectionBuffer(detected);
+
+      if (analysis && isStableDetection) {
+        // Only update tracking data and face status when detection is stable
         setEyeTrackingData(analysis);
         setFaceDetected(true);
-      } else {
+      } else if (!isStableDetection) {
+        // Only show "not detected" when buffer indicates unstable detection
         setFaceDetected(false);
       }
-    }, 300); // Update every 300ms - balanced for stability
+      // Keep last known tracking data when detection is temporarily lost
+    }, 200); // Faster updates (200ms) for more responsive tracking
 
     return () => {
       if (trackingIntervalRef.current) {
@@ -274,6 +313,8 @@ export default function CalibrationScreen() {
     // Reset haptic feedback state
     isAlignedRef.current = false;
     lastHapticTimeRef.current = 0;
+    // Clear face detection buffer for fresh start
+    faceDetectionBufferRef.current = [];
   };
 
   const finishCalibration = async () => {
