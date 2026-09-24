@@ -1,19 +1,56 @@
 import { useEffect, useRef, useState } from 'react'
 import { loadLandmarker, startCamera, measureFrame, createMedian, distanceMm } from '../lib/distance.js'
+import { startTrueDepth } from '../lib/native.js'
 
-// Ön kamerayı açar, her karede yüz noktalarını ölçer.
-// distanceCal: { irisPxAt40, videoW } — varsa mesafe (mm) hesaplanır.
-// onFrame: her kare için ham ölçümle çağrılır (göz kırpma modülü kullanır).
-export function useFaceTracking({ enabled = true, distanceCal = null, onFrame } = {}) {
+// Yüz takibi — iki kaynak:
+//  1) TrueDepth (iPhone uygulaması, Face ID kamerası): mesafe doğrudan mm olarak gelir,
+//     kalibrasyon gerekmez. distanceCal.method === 'truedepth' veya trueDepth: true.
+//  2) Ön kamera + MediaPipe (web ve TrueDepth'siz cihazlar): iris boyutundan mesafe,
+//     bir kez 40 cm'de kalibrasyon gerekir (distanceCal: { irisPxAt40, videoW }).
+// onFrame: her ölçümde çağrılır. TrueDepth'te { native: true, blinkLeft, blinkRight, mm }.
+export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, trueDepth = false } = {}) {
   const videoRef = useRef(null)
   const [state, setState] = useState({ ready: false, error: null, face: false, irisPx: null, mm: null })
   const onFrameRef = useRef(onFrame)
   onFrameRef.current = onFrame
   const calRef = useRef(distanceCal)
   calRef.current = distanceCal
+  const useNative = trueDepth || distanceCal?.method === 'truedepth'
 
+  // --- 1) TrueDepth ---
   useEffect(() => {
-    if (!enabled) return undefined
+    if (!enabled || !useNative) return undefined
+    let stop = null
+    let cancelled = false
+    const median = createMedian(5)
+    let lastUi = 0
+    ;(async () => {
+      try {
+        stop = await startTrueDepth((f) => {
+          if (cancelled) return
+          const ts = performance.now()
+          const mm = f.tracked && f.distanceMm ? median.push(f.distanceMm) : null
+          onFrameRef.current?.({ native: true, face: Boolean(f.tracked), mm, blinkLeft: f.blinkLeft, blinkRight: f.blinkRight, ts })
+          if (ts - lastUi > 100) {
+            lastUi = ts
+            setState({ ready: true, error: null, face: Boolean(f.tracked), irisPx: null, mm })
+          }
+        })
+        if (cancelled) stop?.()
+        else setState((s) => ({ ...s, ready: true }))
+      } catch {
+        if (!cancelled) setState((s) => ({ ...s, error: 'load' }))
+      }
+    })()
+    return () => {
+      cancelled = true
+      stop?.()
+    }
+  }, [enabled, useNative])
+
+  // --- 2) Ön kamera + MediaPipe ---
+  useEffect(() => {
+    if (!enabled || useNative) return undefined
     let stopCamera = null
     let raf = 0
     let cancelled = false
@@ -41,7 +78,7 @@ export function useFaceTracking({ enabled = true, distanceCal = null, onFrame } 
             // Kalibrasyon farklı video çözünürlüğünde yapıldıysa ölçekle
             const scale = cal?.videoW && m.videoW ? cal.videoW / m.videoW : 1
             const irisPx = median.push(m.irisPx ? m.irisPx * scale : null)
-            const mm = cal ? distanceMm(irisPx, cal.irisPxAt40) : null
+            const mm = cal?.irisPxAt40 ? distanceMm(irisPx, cal.irisPxAt40) : null
             onFrameRef.current?.({ ...m, irisPxSmoothed: irisPx, mm, ts, ctx })
             // Arayüzü saniyede ~10 kez güncelle
             if (ts - lastUi > 100) {
@@ -62,7 +99,7 @@ export function useFaceTracking({ enabled = true, distanceCal = null, onFrame } 
       cancelAnimationFrame(raf)
       stopCamera?.()
     }
-  }, [enabled])
+  }, [enabled, useNative])
 
-  return { videoRef, ...state }
+  return { videoRef, native: useNative, ...state }
 }

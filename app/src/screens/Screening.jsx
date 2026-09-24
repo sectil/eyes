@@ -27,7 +27,7 @@ const EXAM = [
   ['gt2', '2 yıldan uzun / hatırlamıyorum'],
 ]
 
-export default function Screening({ onDone }) {
+export default function Screening({ onDone, total = 3 }) {
   const [age, setAge] = useState('')
   const [flags, setFlags] = useState([])
   const [correction, setCorrection] = useState('')
@@ -44,7 +44,7 @@ export default function Screening({ onDone }) {
 
   return (
     <main className="screen fade-in">
-      <StepHeader step={1} total={3} title="Başlamadan önce" subtitle="Birkaç soru, sonuçlarını doğru yorumlamamız için." />
+      <StepHeader step={1} total={total} title="Başlamadan önce" subtitle="Birkaç soru, sonuçlarını doğru yorumlamamız için." />
 
       <div className="note">
         <ShieldCheck size={18} />

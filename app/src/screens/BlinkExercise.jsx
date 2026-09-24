@@ -9,7 +9,7 @@ import { cue, unlockAudio } from '../lib/cue.js'
 
 const BASELINE_MS = 2000
 
-export default function BlinkExercise({ onFinish, onBack }) {
+export default function BlinkExercise({ onFinish, onBack, trueDepth = false }) {
   const [useCam, setUseCam] = useState(false)
   const [phase, setPhase] = useState('intro') // intro | baseline | run | done
   const [rep, setRep] = useState(0)
@@ -23,7 +23,16 @@ export default function BlinkExercise({ onFinish, onBack }) {
 
   const cam = useFaceTracking({
     enabled: useCam && phase !== 'intro' && phase !== 'done',
+    trueDepth,
     onFrame: (m) => {
+      if (m.native) {
+        // TrueDepth: ARKit göz kırpma değeri 0 (açık) … 1 (kapalı) → açıklık = 1 − değer
+        if (!m.face || m.blinkLeft == null) return
+        const o = 1 - (m.blinkLeft + m.blinkRight) / 2
+        if (phaseRef.current === 'baseline') baseSamples.current.push(o)
+        else if (phaseRef.current === 'run' && counter.current?.update(o)) setClosures((c) => c + 1)
+        return
+      }
       if (!m.landmarks) return
       if (!idx.current) {
         idx.current = {

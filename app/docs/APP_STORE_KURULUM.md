@@ -112,6 +112,21 @@ Xcode'da:
 - [ ] Kilitliyken "Güvenlik bilgisi" ve "Verilerimi indir" çalışıyor mu?
 - [ ] Kamera izni metni Türkçe görünüyor mu?
 - [ ] Göz kırpma egzersizinde sesli yönlendirme duyuluyor mu?
+- [ ] **Akıllı kurulum (Face ID'li iPhone):** İlk açılışta "Adım 2 / 2" görünüyor mu (ekran ayarı
+  adımı atlanmalı)? "40 cm'yi bul" ekranında cm değeri yüzünü yaklaştırıp uzaklaştırınca değişiyor mu?
+  Bir cetvelle 40 cm'de tutunca ekran ~40 cm gösteriyor mu?
+- [ ] **Face ID'siz iPhone (SE, 8):** Mesafe adımı ön kamera + kalibrasyon ile açılıyor mu?
+- [ ] Tabloda olmayan yeni bir model çıkarsa uygulama elle ayar ekranını (cetvel/kart) göstermeli.
+
+### Yerel Swift eklentisi (FaceDistancePlugin)
+
+- `ios/App/App/FaceDistancePlugin.swift` (TrueDepth + ARKit) ve `MainViewController.swift`
+  (eklentiyi kaydeder) projeye eklidir; `Main.storyboard` bu denetleyiciyi kullanır.
+- Bu dosyalar Linux ortamında yazıldı, **Xcode'da ilk kez derlenecek**. Derleme hatası çıkarsa
+  hata metnini gönder.
+- TrueDepth **Simülatör'de çalışmaz**; gerçek Face ID'li iPhone gerekir.
+- Ekran ölçüsü tablosu: `src/lib/iphoneScreens.json` (kaynaklar `docs/iphone_ekran_tablosu.md`).
+  Yeni iPhone modelleri çıktıkça bu tabloya eklenmeli.
 
 ## 6. İnceleme (App Review) notları
 

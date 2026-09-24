@@ -443,3 +443,20 @@ details > summary::-webkit-details-marker { display: none; }
   background: var(--tabbar-bg); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
   border-top: 1px solid var(--border);
 }
+
+/* ---------- TrueDepth mesafe HUD ---------- */
+.hud { position: relative; width: min(84vw, 320px); aspect-ratio: 1; margin: 4px auto 0; }
+.hud-ring { width: 100%; height: 100%; }
+.hud-value { stroke: var(--ink-3); transition: stroke-dasharray 0.15s linear, stroke 0.3s; }
+.hud.ok .hud-value { stroke: var(--ok); }
+.hud.too-close .hud-value, .hud.too-far .hud-value { stroke: var(--warn); }
+.hud-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.hud-face { position: relative; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; color: var(--accent); overflow: hidden; border-radius: 16px; background: var(--accent-soft); }
+.hud-scan { position: absolute; left: 0; right: 0; height: 2px; background: var(--accent); box-shadow: 0 0 12px var(--accent); animation: hud-scan 1.4s ease-in-out infinite alternate; }
+@keyframes hud-scan { from { top: 6px; } to { top: 56px; } }
+.hud.locked .hud-face { background: var(--ok-bg); color: var(--ok); }
+.hud-cm { font-size: 4rem; font-weight: 800; letter-spacing: -0.05em; line-height: 1; font-variant-numeric: tabular-nums; }
+.hud-cm span { font-size: 1.1rem; font-weight: 600; color: var(--ink-3); margin-left: 4px; letter-spacing: 0; }
+.hud-target { font-size: 0.8rem; color: var(--ink-3); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.hud-msg { text-align: center; font-size: 1.15rem; font-weight: 650; min-height: 1.6em; }
+.hud.ok ~ .hud-msg { color: var(--ok); }
