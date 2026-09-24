@@ -375,3 +375,36 @@ details > summary::-webkit-details-marker { display: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
+
+/* ---------- Egzersiz setleri ---------- */
+.goal-card { display: flex; align-items: center; gap: 14px; }
+.goal-card.met { background: var(--ok-bg); border-color: transparent; box-shadow: none; }
+.set-card {
+  position: relative; display: flex; align-items: center; gap: 14px; width: 100%; text-align: left;
+  padding: 16px 16px 16px 22px; border-radius: 18px; border: 1px solid var(--border);
+  background: var(--surface); box-shadow: var(--shadow); cursor: pointer; overflow: hidden;
+}
+.set-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--set-color); }
+.set-card .grow { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.set-card .title { font-weight: 700; font-size: 1.05rem; display: inline-flex; align-items: center; gap: 8px; }
+.set-meta { display: inline-flex; gap: 14px; font-size: 0.8125rem; color: var(--ink-3); }
+.set-meta span { display: inline-flex; align-items: center; gap: 4px; }
+
+.routine-screen { min-height: 100dvh; }
+.seg-progress { flex: 1; display: flex; gap: 4px; }
+.seg-progress span { position: relative; flex: 1; height: 5px; border-radius: 3px; background: var(--surface-3); overflow: hidden; }
+.seg-progress span.done { background: var(--ink); }
+.seg-progress span i { position: absolute; inset: 0 auto 0 0; background: var(--accent-graphic); transition: width 1s linear; }
+.routine-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 10px; padding: 12px 0; animation: fade-in 0.3s ease both; }
+.routine-title { font-size: 1.6rem; }
+.routine-sub { color: var(--ink-2); font-size: 1rem; }
+.routine-count { font-size: 5.5rem; font-weight: 800; letter-spacing: -0.05em; line-height: 1; font-variant-numeric: tabular-nums; margin-top: 12px; }
+.routine-visual { min-height: 170px; display: flex; align-items: center; justify-content: center; }
+.routine-arrow { color: var(--accent-graphic); }
+.kind-tag { font-size: 0.75rem; font-weight: 650; padding: 4px 10px; border-radius: 999px; background: var(--surface-2); color: var(--ink-3); }
+.kind-tag.evidence { background: var(--accent-soft); color: var(--accent); }
+.orbit { position: relative; width: 150px; height: 150px; border-radius: 50%; border: 6px solid var(--surface-3); animation: spin 4s linear infinite; }
+.orbit.ccw { animation-direction: reverse; }
+.orbit-dot { position: absolute; top: -13px; left: 50%; width: 20px; height: 20px; margin-left: -10px; border-radius: 50%; background: var(--accent-graphic); box-shadow: 0 0 0 5px var(--accent-soft); }
+@keyframes spin { to { transform: rotate(360deg); } }
+.blink-orb.shut { transform: scaleY(0.12); }

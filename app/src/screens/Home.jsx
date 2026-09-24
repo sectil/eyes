@@ -1,10 +1,12 @@
-import { ScanEye, BookText, Eye, ChevronRight, TrendingUp, TrendingDown, Minus, TriangleAlert, Sparkles, Timer } from 'lucide-react'
+import { ScanEye, BookText, Eye, ChevronRight, TrendingUp, TrendingDown, Minus, TriangleAlert, Sparkles, Timer, Leaf, ThumbsUp, Dumbbell, Play, Clock, Trophy } from 'lucide-react'
+import { SETS, DAILY_GOAL_MIN, setDurationSec, formatMin, todaySeconds } from '../lib/routines.js'
 import { Ring, Sparkline } from '../components/ui.jsx'
 import { analyzeTrend, trendMessage } from '../lib/trend.js'
 import { activeDays, weekProgress } from '../lib/calendar.js'
 import { snellen20 } from '../lib/optotype.js'
 
 const WEEK_MS = 7 * 86400000
+const SET_ICONS = { leaf: Leaf, thumbs: ThumbsUp, dumbbell: Dumbbell }
 
 function greeting() {
   const h = new Date().getHours()
@@ -32,6 +34,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, onSta
   const due = (t) => !t || Date.now() - new Date(t.date).getTime() > WEEK_MS
   const weeklyDue = due(last('va-weekly'))
   const readingDue = due(last('reading'))
+  const todaySec = todaySeconds(sessions)
   const blinksToday = sessions.filter((s) => s.type === 'blink' && new Date(s.date).toDateString() === new Date().toDateString()).length
 
   return (
@@ -90,6 +93,38 @@ export default function Home({ tests, sessions, settings, distanceTracked, onSta
         </section>
       )}
 
+      <section className="stack">
+        <div className="row between">
+          <h2>Egzersiz setleri</h2>
+          <span className="muted small">Bugün {formatMin(todaySec)} / {DAILY_GOAL_MIN} dk</span>
+        </div>
+        {todaySec >= DAILY_GOAL_MIN * 60 && (
+          <div className="card goal-card met">
+            <Trophy size={22} />
+            <div className="stack" style={{ gap: 2 }}>
+              <strong>Günlük hedef tamam!</strong>
+              <span className="small">Bugünkü egzersiz süresi: {formatMin(todaySec)}</span>
+            </div>
+          </div>
+        )}
+        {SETS.map((s) => {
+          const Icon = SET_ICONS[s.icon]
+          return (
+            <button key={s.id} className="set-card" style={{ '--set-color': s.color }} onClick={() => onStart(`routine-${s.id}`)}>
+              <span className="grow">
+                <span className="title">{s.title} <Icon size={18} aria-hidden="true" /></span>
+                <span className="set-meta">
+                  <span><Play size={13} /> {s.steps.length} hareket</span>
+                  <span><Clock size={13} /> {formatMin(setDurationSec(s))}</span>
+                </span>
+              </span>
+              <ChevronRight className="chev" size={20} />
+            </button>
+          )
+        })}
+      </section>
+
+      <h2 style={{ marginTop: 6 }}>Ölçüm</h2>
       <button className="btn" onClick={() => onStart(weeklyDue ? 'weekly' : 'daily')}>
         <ScanEye size={20} aria-hidden="true" />
         {weeklyDue ? 'Haftalık tam test · ~5 dk' : 'Günlük test · ~2 dk'}

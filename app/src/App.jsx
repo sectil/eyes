@@ -13,6 +13,8 @@ import Schedule from './screens/Schedule.jsx'
 import BlinkExercise from './screens/BlinkExercise.jsx'
 import Evidence from './screens/Evidence.jsx'
 import Info from './screens/Info.jsx'
+import Routine from './screens/Routine.jsx'
+import { SETS, todaySeconds } from './lib/routines.js'
 
 const TAB_SCREENS = ['home', 'progress', 'calendar', 'info']
 
@@ -69,6 +71,20 @@ export default function App() {
       return <BlinkExercise onBack={back} onFinish={(s) => { store.addSession(s); refresh(); go('home') }} />
     case 'schedule':
       return <Schedule initial={settings.reminder} onBack={() => go('calendar')} onSave={(r) => { store.setSetting('reminder', r); refresh() }} />
+    case 'routine-lite':
+    case 'routine-normal':
+    case 'routine-full': {
+      const set = SETS.find((s) => `routine-${s.id}` === screen)
+      return (
+        <Routine
+          key={screen}
+          set={set}
+          todaySec={todaySeconds(sessions)}
+          onBack={back}
+          onFinish={(s) => { store.addSession(s); refresh(); go('home') }}
+        />
+      )
+    }
     case 'evidence':
       return <Evidence onBack={() => go('info')} />
     default:
