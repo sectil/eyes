@@ -8,6 +8,8 @@
 // VARSAYIM: ARKit'te "Left" kişinin sol gözüdür. Cihazda ters çıkarsa FLIP_X = -1 yapılır.
 // VARSAYIM: eşikler (aşağıdaki sabitler) ilk sürüm içindir; gerçek cihazda ayarlanacak.
 
+import { loadGazeModel, applyModel, createOneEuro } from './gazeCalib.js'
+
 export const FLIP_X = 1
 export const DIR_THRESHOLD = 0.3 // bir yöne "bakıyor" saymak için
 export const CIRCLE_MIN = 0.2 // daire takibinde merkezden en az uzaklık
@@ -257,7 +259,101 @@ function fitNeutral(points) {
 }
 
 // opts: { calibMs, enterDeg, exitDeg, flipX (1 | -1, kayıtlıyı ezer), persistKey (null → hatırlama) }
+// Histerezis + baskın eksen (derece ya da kalibre birim ×GAZE_FULL_DEG)
+function stepDir(cur, p, enterDeg, exitDeg) {
+  const ax = Math.abs(p.x)
+  const ay = Math.abs(p.y)
+  const d = ax >= ay ? (p.x >= 0 ? 'right' : 'left') : p.y >= 0 ? 'up' : 'down'
+  const mag = Math.max(ax, ay)
+  if (cur && cur !== 'center') {
+    const keep = cur === 'right' ? p.x : cur === 'left' ? -p.x : cur === 'up' ? p.y : -p.y
+    if (keep >= exitDeg) return d !== cur && mag >= enterDeg && mag > keep ? d : cur
+  }
+  return mag >= enterDeg ? d : 'center'
+}
+
+// Kişisel kalibrasyon modeliyle okuyucu (lib/gazeCalib.js). Eksen, işaret ve kazanç kullanıcının
+// kendi 5 nokta verisinden gelir; v birimi: kalibrasyondaki sağ/sol hedefi = ±GAZE_FULL_DEG.
+// recenter(): baş/telefon konumu kayınca merkezi düzeltir (yalnızca küçük ve sabit kayma kabul).
+const RECENTER_MAX_FRAC = 0.35 // aralığın bu oranından büyük kayma = kişi hedefe bakıyor, kabul etme
+const RECENTER_STABLE_FRAC = 0.15
+function createModelReader(model, opts) {
+  const enterDeg = opts.enterDeg ?? GAZE_ENTER_DEG
+  const exitDeg = opts.exitDeg ?? GAZE_EXIT_DEG
+  const calibMs = opts.calibMs ?? CAL_MS
+  const range = {
+    x: Math.min(Math.abs(model.x.pos - model.x.c), Math.abs(model.x.neg - model.x.c)),
+    y: Math.min(Math.abs(model.y.pos - model.y.c), Math.abs(model.y.neg - model.y.c)),
+  }
+  const fx = createOneEuro()
+  const fy = createOneEuro()
+  let shift = { x: 0, y: 0 }
+  let cal = { samples: [], start: null, attempts: 0 }
+  let dir = null
+  let v = { x: 0, y: 0 }
+  const out = (d, closed, tracked) => ({ dir: d, v: { x: v.x, y: v.y }, closed, calibrated: true, tracked, model: true })
+  const reset = () => {
+    dir = null
+    fx.reset()
+    fy.reset()
+  }
+  function collect(raw, ts) {
+    if (cal.start == null) cal.start = ts
+    cal.samples.push(raw)
+    if (ts - cal.start < calibMs || cal.samples.length < CAL_MIN_SAMPLES) return
+    const mx = median(cal.samples.map((p) => p.x))
+    const my = median(cal.samples.map((p) => p.y))
+    const sx = median(cal.samples.map((p) => Math.abs(p.x - mx)))
+    const sy = median(cal.samples.map((p) => Math.abs(p.y - my)))
+    const nx = mx - model.x.c
+    const ny = my - model.y.c
+    const stable = sx <= RECENTER_STABLE_FRAC * range.x && sy <= RECENTER_STABLE_FRAC * range.y
+    const near = Math.abs(nx) <= RECENTER_MAX_FRAC * range.x && Math.abs(ny) <= RECENTER_MAX_FRAC * range.y
+    if (stable && near) {
+      shift = { x: nx, y: ny }
+      cal = null
+      return
+    }
+    cal = cal.attempts + 1 >= CAL_MAX_ATTEMPTS ? null : { samples: [], start: null, attempts: cal.attempts + 1 }
+  }
+  return {
+    push(f = {}) {
+      const ts = Number.isFinite(f.ts) ? f.ts : Date.now()
+      if ((f.face ?? f.tracked) === false) {
+        reset()
+        return out(null, false, false)
+      }
+      if (eyeClosure(f) >= BLINK_CLOSE) {
+        dir = null
+        return out(null, true, true)
+      }
+      const r = applyModel(model, f, shift)
+      if (!r || !Number.isFinite(r.x) || !Number.isFinite(r.y)) return out(null, false, false)
+      if (cal) collect(r.raw, ts)
+      v = { x: fx.push(r.x * GAZE_FULL_DEG, ts), y: fy.push(r.y * GAZE_FULL_DEG, ts) }
+      dir = stepDir(dir, v, enterDeg, exitDeg)
+      return out(dir, false, true)
+    },
+    recenter() {
+      cal = { samples: [], start: null, attempts: 0 }
+      reset()
+    },
+    get neutral() {
+      return { x: 0, y: 0, source: 'model' }
+    },
+    get flipX() {
+      return 1
+    },
+    get usesModel() {
+      return true
+    },
+  }
+}
+
+// opts.model: kalibrasyon modeli; verilmezse kayıtlı model yüklenir (null → eski, kalibrasyonsuz yol)
 export function createGazeReader(opts = {}) {
+  const model = opts.model === undefined ? loadGazeModel() : opts.model
+  if (model) return createModelReader(model, opts)
   const calibMs = opts.calibMs ?? CAL_MS
   const enterDeg = opts.enterDeg ?? GAZE_ENTER_DEG
   const exitDeg = opts.exitDeg ?? GAZE_EXIT_DEG

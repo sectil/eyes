@@ -180,7 +180,12 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
             "gazeLeftX": jsNumber(gazeL?.x),
             "gazeLeftY": jsNumber(gazeL?.y),
             "gazeRightX": jsNumber(gazeR?.x),
-            "gazeRightY": jsNumber(gazeR?.y)
+            "gazeRightY": jsNumber(gazeR?.y),
+            // Ham ARKit bakış noktası (yüz koordinatı, metre). Eksen/işaret yorumu JS'teki kişisel
+            // kalibrasyonda (src/lib/gazeCalib.js) veriden öğrenilir; burada dönüştürülmez.
+            "lookAtX": jsNumber(face.isTracked ? Double(face.lookAtPoint.x) : nil),
+            "lookAtY": jsNumber(face.isTracked ? Double(face.lookAtPoint.y) : nil),
+            "lookAtZ": jsNumber(face.isTracked ? Double(face.lookAtPoint.z) : nil)
         ])
     }
 

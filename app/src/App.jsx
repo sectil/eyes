@@ -24,6 +24,9 @@ import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedba
 import { resolveAutoCalibration, estimateCalibration } from './lib/screenScale.js'
 import { BEST_KEY as SNAKE_BEST_KEY } from './lib/snake.js'
 import IPHONE_SCREENS from './lib/iphoneScreens.json'
+import GazeCalibration from './screens/GazeCalibration.jsx'
+import GazeTest from './screens/GazeTest.jsx'
+import { hasGazeModel } from './lib/gazeCalib.js'
 
 const TAB_SCREENS = ['home', 'progress', 'calendar', 'info']
 
@@ -127,9 +130,19 @@ export default function App() {
   const [lastTab, setLastTab] = useState('home')
   // Molası bekleyen hedef: { to: ekran, min: birikmiş dakika } | null
   const [restFor, setRestFor] = useState(null)
+  // Göz kalibrasyonu bekleyen hedef (TrueDepth'te göz kontrollü ekrandan önce, bir kez): { to } | null
+  const [gazeFor, setGazeFor] = useState(null)
+  const gazeSkipped = useRef(false) // "Şimdi değil" → bu oturumda tekrar sorma
   const activeTime = useActiveTime(isActiveScreen(screen))
   const refresh = () => setData(store.get())
   const go = (s) => {
+    const needsGaze = s === 'snake' || s.startsWith('routine-')
+    if (needsGaze && native.trueDepth && !gazeSkipped.current && !hasGazeModel()) {
+      setGazeFor({ to: s })
+      window.scrollTo(0, 0)
+      return
+    }
+    setGazeFor(null)
     const due = activeTime.read()
     if (REST_GATED.includes(s) && due >= REST_AFTER_MS) {
       setRestFor({ to: s, min: Math.floor(due / 60000) })
@@ -273,6 +286,18 @@ export default function App() {
   }
   if (locked && screen === 'evidence') return <Evidence onBack={() => go('home')} />
 
+  // --- Kişisel göz kalibrasyonu: göz kontrollü ekrandan önce (TrueDepth, model yoksa) ---
+  if (gazeFor) {
+    const target = gazeFor.to
+    return (
+      <GazeCalibration
+        onDone={() => go(target)}
+        onSkip={() => { gazeSkipped.current = true; go(target) }}
+        onCancel={() => { setGazeFor(null); window.scrollTo(0, 0) }}
+      />
+    )
+  }
+
   // --- Konfor molası: aktif ekrana geçmeden önce (bkz. dinlenme kuralı, dosya başı) ---
   if (restFor) {
     const target = restFor.to
@@ -353,6 +378,10 @@ export default function App() {
       )
     case 'evidence':
       return <Evidence onBack={() => go('info')} />
+    case 'gaze-test':
+      return <GazeTest onBack={() => go('info')} onCalibrate={() => go('gaze-cal')} />
+    case 'gaze-cal':
+      return <GazeCalibration onDone={() => go('gaze-test')} onCancel={() => go('info')} />
     default:
       break
   }
@@ -367,6 +396,7 @@ export default function App() {
       <Info
         onGo={go}
         iosApp={isIOSApp()}
+        trueDepth={native.trueDepth}
         calibration={settings.calibration}
         distanceSkipped={!distanceCal}
         exportJSON={store.exportJSON}

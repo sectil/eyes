@@ -132,6 +132,10 @@ Sonra Archive → Upload. ⚠️ **App Store'a incelemeye gönderilecek derleme 
 - [ ] **Egzersiz setleri (Face ID'li iPhone):** Kırpma adımında sayaç "1/5, 2/5…" diye gerçek kırpmaları
   sayıyor mu (tek kırpma iki kez sayılmamalı)? Üstte ✕ ve "3/9" gibi adım göstergesi var mı?
   Daire adımında turlar sayılıyor mu, bakış noktası dönen halkanın üstünde mi?
+- [ ] **Göz kalibrasyonu (5 nokta):** İlk egzersiz setine ya da Yılan'a girerken "Göz takibini sana göre
+  ayarlayalım" ekranı çıkıyor mu? Nokta ortaya, sola, sağa, yukarı, aşağı ve tekrar ortaya gidiyor; sonunda
+  "Hazır" ekranında gözünü gezdirince nokta **aynı yöne** gidiyor mu? Bilgi → **Göz takibi** ekranından
+  tekrar kalibre edilebiliyor mu? Sorun varsa aynı ekranda **Verileri paylaş** ile ham veriyi gönder.
 - [ ] **Göz takibi — sola/sağa bakış:** "Sola bak" adımında bakış panelindeki nokta **sola**, "Sağa bak"ta
   **sağa** gidiyor mu? Sola bakış sağ kadar kolay algılanıyor mu (eskiden sol zayıftı)? Başını
   çevirmeden yalnızca gözle bakınca da nokta hedef halkaya ulaşıyor mu? Ters gidiyorsa hangi yönün

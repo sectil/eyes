@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import {
   BookOpen, CreditCard, Camera, Bell, Download, Trash, ChevronRight, ShieldCheck,
-  Volume2, VolumeX, Vibrate, VibrateOff, Smartphone, CircleCheck, CircleAlert,
+  Volume2, VolumeX, Vibrate, VibrateOff, Smartphone, CircleCheck, CircleAlert, Crosshair,
 } from 'lucide-react'
 import { PageHeader, ThemeSwitch } from '../components/ui.jsx'
 import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
@@ -145,7 +145,7 @@ function FeedbackSettings({ iosApp }) {
   )
 }
 
-export default function Info({ onGo, onReset, exportJSON, distanceSkipped, iosApp = false, calibration = null }) {
+export default function Info({ onGo, onReset, exportJSON, distanceSkipped, iosApp = false, trueDepth = false, calibration = null }) {
   const [confirm, setConfirm] = useState(false)
 
   function download() {
@@ -196,6 +196,7 @@ export default function Info({ onGo, onReset, exportJSON, distanceSkipped, iosAp
             sub={iosApp ? 'Face ID kamerasıyla canlı göster' : "40 cm'yi yeniden öğret"}
             onClick={() => onGo('recalibrate-distance')}
           />
+          {trueDepth && <Row Icon={Crosshair} label="Göz takibi" sub="Kalibre et ve canlı dene" onClick={() => onGo('gaze-test')} />}
           <Row Icon={Bell} label="Çalışma günleri ve hatırlatma" onClick={() => onGo('schedule')} />
         </div>
       </section>
