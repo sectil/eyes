@@ -1,0 +1,9 @@
+{
+  "name": "Göz Ölçüm",
+  "short_name": "Göz Ölçüm",
+  "lang": "tr",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a"
+}
