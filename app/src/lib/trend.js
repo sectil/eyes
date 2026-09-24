@@ -97,20 +97,20 @@ export function trendMessage(r) {
     case 'empty':
       return 'Henüz test yok.'
     case 'familiarization':
-      return 'Alışma dönemi (ilk 7 gün). Bu günlerde sonuçlar testi öğrenmenizle değişebilir; değerlendirmeye katılmaz.'
+      return 'Alışma dönemi (ilk 7 gün). Bu günlerde sonuçlar testi öğrenmenle değişebilir; değerlendirmeye katılmaz.'
     case 'baseline':
-      return 'Başlangıç değeriniz oluşturuluyor (8.–21. günler). Şimdilik değişim yorumlanmıyor.'
+      return 'Başlangıç değerin oluşturuluyor (8.–21. günler). Şimdilik değişim yorumlanmıyor.'
     default:
       break
   }
   if (r.alert === 'red') {
-    return 'Son bir haftadır görme ölçümleriniz başlangıcınıza göre belirgin şekilde kötü. Lütfen bir göz doktoruna başvurun.'
+    return 'Son bir haftadır görme ölçümlerin başlangıcına göre belirgin şekilde kötü. Lütfen bir göz doktoruna başvur.'
   }
   if (r.alert === 'yellow') {
-    return 'Son ölçümleriniz başlangıcınızdan biraz kötü. Işık, yorgunluk ve mesafeyi kontrol edip birkaç gün daha test edin; devam ederse göz doktorunuza danışın.'
+    return 'Son ölçümlerin başlangıcından biraz kötü. Işık, yorgunluk ve mesafeyi kontrol edip birkaç gün daha test et; devam ederse göz doktoruna danış.'
   }
   if (r.trend === 'improving') {
-    return 'Son ölçümleriniz başlangıcınızdan daha iyi. Not: Bir kısmı teste alışmaktan kaynaklanabilir.'
+    return 'Son ölçümlerin başlangıcından daha iyi. Not: Bir kısmı teste alışmaktan kaynaklanabilir.'
   }
-  return 'Ölçümleriniz başlangıcınıza göre sabit (tek testin doğal oynaması ±0,2 logMAR).'
+  return 'Ölçümlerin başlangıcına göre sabit (tek testin doğal oynaması ±0,2 logMAR).'
 }

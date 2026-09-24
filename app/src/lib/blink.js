@@ -58,11 +58,11 @@ export function createClosureCounter(baseline, { ratio = CLOSE_RATIO, minFrames 
 // Tekrar sayısı Wolffsohn ve ark. 2025 (PMID 40467388): 15 tekrar, günde 3 kez.
 // VARSAYIM: iki çalışmanın birleşimi; "aç" ve dinlenme süreleri tarafımızdan seçildi.
 export const BLINK_CYCLE = [
-  { id: 'close1', text: 'Gözlerinizi hafifçe kapatın', ms: 2000, closed: true },
-  { id: 'open1', text: 'Açın', ms: 1000, closed: false },
-  { id: 'close2', text: 'Tekrar hafifçe kapatın', ms: 2000, closed: true },
-  { id: 'squeeze', text: 'Kapalıyken hafifçe sıkın', ms: 2000, closed: true },
-  { id: 'open2', text: 'Açın ve dinlenin', ms: 3000, closed: false },
+  { id: 'close1', text: 'Gözlerini hafifçe kapat', ms: 2000, closed: true },
+  { id: 'open1', text: 'Aç', ms: 1000, closed: false },
+  { id: 'close2', text: 'Tekrar hafifçe kapat', ms: 2000, closed: true },
+  { id: 'squeeze', text: 'Kapalıyken hafifçe sık', ms: 2000, closed: true },
+  { id: 'open2', text: 'Aç ve dinlen', ms: 3000, closed: false },
 ]
 export const BLINK_REPS = 15
 export const CLOSURES_PER_CYCLE = 2 // close1 ve close2+squeeze

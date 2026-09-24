@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { store } from './lib/storage.js'
-import { analyzeTrend, trendMessage } from './lib/trend.js'
-import { activeDays, weekProgress } from './lib/calendar.js'
+import { TabBar } from './components/ui.jsx'
+import Home from './screens/Home.jsx'
 import Screening from './screens/Screening.jsx'
 import CardCalibration, { calibrationStillValid } from './screens/CardCalibration.jsx'
 import DistanceCalibration from './screens/DistanceCalibration.jsx'
@@ -12,192 +12,91 @@ import Calendar from './screens/Calendar.jsx'
 import Schedule from './screens/Schedule.jsx'
 import BlinkExercise from './screens/BlinkExercise.jsx'
 import Evidence from './screens/Evidence.jsx'
+import Info from './screens/Info.jsx'
 
-const WEEK_MS = 7 * 86400000
+const TAB_SCREENS = ['home', 'progress', 'calendar', 'info']
 
 export default function App() {
   const [data, setData] = useState(store.get())
   const [screen, setScreen] = useState('home')
-  const [notice, setNotice] = useState(null)
+  const [lastTab, setLastTab] = useState('home')
   const refresh = () => setData(store.get())
   const go = (s) => {
-    setNotice(null)
+    if (TAB_SCREENS.includes(s)) setLastTab(s)
     setScreen(s)
     window.scrollTo(0, 0)
   }
+  const back = () => go(lastTab)
 
   const { settings, tests, sessions } = data
   const distanceCal = settings.distance?.irisPxAt40 ? settings.distance : null
 
-  // --- Kurulum akışı ---
+  // --- Kurulum akışı (3 adım) ---
   if (!settings.screening || settings.screening.referred) {
-    return (
-      <Screening
-        onDone={(s) => {
-          store.setSetting('screening', s)
-          refresh()
-        }}
-      />
-    )
+    return <Screening onDone={(s) => { store.setSetting('screening', s); refresh() }} />
   }
   if (!calibrationStillValid(settings.calibration) || screen === 'recalibrate') {
     return (
-      <>
-        {settings.calibration && screen !== 'recalibrate' && (
-          <p className="alert-warn screen">Ekran ayarı veya yakınlaştırma değişmiş; lütfen kalibrasyonu yenileyin.</p>
-        )}
-        <CardCalibration
-          initial={settings.calibration}
-          onDone={(c) => {
-            store.setSetting('calibration', c)
-            refresh()
-            go('home')
-          }}
-        />
-      </>
+      <CardCalibration
+        initial={settings.calibration}
+        changed={Boolean(settings.calibration) && screen !== 'recalibrate'}
+        onDone={(c) => { store.setSetting('calibration', c); refresh(); go(lastTab) }}
+      />
     )
   }
   if (!settings.distance || screen === 'recalibrate-distance') {
-    const done = (d) => {
-      store.setSetting('distance', d)
-      refresh()
-      go('home')
-    }
+    const done = (d) => { store.setSetting('distance', d); refresh(); go(lastTab) }
     return <DistanceCalibration onDone={done} onSkip={() => done({ skipped: true, date: new Date().toISOString() })} />
   }
 
-  // --- Ekranlar ---
+  // --- Tam ekran akışlar (sekme çubuğu yok) ---
   const saveTests = (results) => {
     ;[].concat(results).forEach((r) => store.addTest(r))
     refresh()
     go('progress')
   }
-  const common = { calibration: settings.calibration, distanceCal, onCancel: () => go('home') }
+  const common = { calibration: settings.calibration, distanceCal, onCancel: back }
 
   switch (screen) {
     case 'daily':
     case 'weekly':
-      return <AcuityTest plan={screen} {...common} onFinish={saveTests} />
+      return <AcuityTest key={screen} plan={screen} {...common} onFinish={saveTests} />
     case 'reading': {
       const recent = tests.filter((t) => t.type === 'reading').slice(-2).flatMap((t) => t.sentencesUsed ?? [])
       return <ReadingTest {...common} recentSentences={recent} onFinish={saveTests} />
     }
     case 'blink':
-      return (
-        <BlinkExercise
-          onBack={() => go('home')}
-          onFinish={(s) => {
-            store.addSession(s)
-            refresh()
-            go('home')
-            setNotice('Egzersiz kaydedildi.')
-          }}
-        />
-      )
-    case 'progress':
-      return <Progress tests={tests} onBack={() => go('home')} />
-    case 'calendar':
-      return (
-        <Calendar
-          records={[...tests, ...sessions]}
-          schedule={settings.reminder}
-          onBack={() => go('home')}
-          onEditSchedule={() => go('schedule')}
-        />
-      )
+      return <BlinkExercise onBack={back} onFinish={(s) => { store.addSession(s); refresh(); go('home') }} />
     case 'schedule':
-      return (
-        <Schedule
-          initial={settings.reminder}
-          onBack={() => go('calendar')}
-          onSave={(r) => {
-            store.setSetting('reminder', r)
-            refresh()
-          }}
-        />
-      )
+      return <Schedule initial={settings.reminder} onBack={() => go('calendar')} onSave={(r) => { store.setSetting('reminder', r); refresh() }} />
     case 'evidence':
-      return <Evidence onBack={() => go('home')} />
-    case 'settings':
-      return <Settings onGo={go} onReset={() => { store.clearAll(); refresh(); go('home') }} exportJSON={store.exportJSON} distanceSkipped={!distanceCal} />
+      return <Evidence onBack={() => go('info')} />
     default:
       break
   }
 
-  // --- Ana sayfa ---
-  const week = weekProgress(activeDays([...tests, ...sessions]), new Date(), settings.reminder?.weeklyTarget)
-  const ou = tests.filter((t) => (t.type === 'va-daily' || t.type === 'va-weekly') && t.eye === 'OU')
-  const trend = analyzeTrend(ou)
-  const lastWeekly = tests.filter((t) => t.type === 'va-weekly').at(-1)
-  const weeklyDue = !lastWeekly || Date.now() - new Date(lastWeekly.date).getTime() > WEEK_MS
-  const lastReading = tests.filter((t) => t.type === 'reading').at(-1)
-  const readingDue = !lastReading || Date.now() - new Date(lastReading.date).getTime() > WEEK_MS
-
-  return (
-    <main className="screen">
-      <h1>Göz Ölçüm</h1>
-      {notice && <p className="muted small" role="status">{notice}</p>}
-
-      <section className={`card ${trend.alert === 'red' ? 'alert-danger' : trend.alert === 'yellow' ? 'alert-warn' : ''}`}>
-        <p className="big">Bu hafta {week.done} / {week.target} gün</p>
-        <p className="small">{trendMessage(trend)}</p>
-        {!distanceCal && (
-          <p className="muted small">Mesafe takibi kapalı; sonuçlar daha az güvenilir. Ayarlar'dan açabilirsiniz.</p>
-        )}
-      </section>
-
-      <button className="btn" onClick={() => go(weeklyDue ? 'weekly' : 'daily')}>
-        {weeklyDue ? 'Haftalık tam test (~5 dk)' : 'Günlük kısa test (~2 dk)'}
-      </button>
-      {weeklyDue && <button className="btn btn-ghost" onClick={() => go('daily')}>Sadece kısa test (~2 dk)</button>}
-      <button className={readingDue ? 'btn' : 'btn btn-ghost'} onClick={() => go('reading')}>
-        Okuma hızı testi {readingDue ? '(bu hafta yapılmadı)' : ''}
-      </button>
-      <button className="btn btn-ghost" onClick={() => go('blink')}>Göz kırpma egzersizi (~2,5 dk)</button>
-
-      <nav className="grid-nav">
-        <button className="tile" onClick={() => go('progress')}>Gelişim</button>
-        <button className="tile" onClick={() => go('calendar')}>Takvim</button>
-        <button className="tile" onClick={() => go('evidence')}>Kanıtlar</button>
-        <button className="tile" onClick={() => go('settings')}>Ayarlar</button>
-      </nav>
-
-      <p className="muted small">
-        Bu uygulama teşhis koymaz ve göz muayenesinin yerini tutmaz. Tüm verileriniz yalnızca bu cihazda saklanır.
-      </p>
-    </main>
-  )
-}
-
-function Settings({ onGo, onReset, exportJSON, distanceSkipped }) {
-  const [confirm, setConfirm] = useState(false)
-  function download() {
-    const url = URL.createObjectURL(new Blob([exportJSON()], { type: 'application/json' }))
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'goz-olcum-veriler.json'
-    a.click()
-    setTimeout(() => URL.revokeObjectURL(url), 5000)
+  // --- Sekmeli ekranlar ---
+  const tab = TAB_SCREENS.includes(screen) ? screen : 'home'
+  let content
+  if (tab === 'progress') content = <Progress tests={tests} />
+  else if (tab === 'calendar') content = <Calendar records={[...tests, ...sessions]} schedule={settings.reminder} onEditSchedule={() => go('schedule')} />
+  else if (tab === 'info') {
+    content = (
+      <Info
+        onGo={go}
+        distanceSkipped={!distanceCal}
+        exportJSON={store.exportJSON}
+        onReset={() => { store.clearAll(); refresh(); go('home') }}
+      />
+    )
+  } else {
+    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} onStart={go} />
   }
+
   return (
-    <main className="screen">
-      <h1>Ayarlar</h1>
-      <button className="btn btn-ghost" onClick={() => onGo('recalibrate')}>Ekran kalibrasyonunu yenile</button>
-      <button className="btn btn-ghost" onClick={() => onGo('recalibrate-distance')}>
-        {distanceSkipped ? 'Mesafe takibini aç' : 'Mesafe kalibrasyonunu yenile'}
-      </button>
-      <button className="btn btn-ghost" onClick={() => onGo('schedule')}>Çalışma günleri ve hatırlatma</button>
-      <button className="btn btn-ghost" onClick={download}>Verilerimi indir (JSON)</button>
-      {!confirm ? (
-        <button className="btn btn-ghost danger" onClick={() => setConfirm(true)}>Tüm verileri sil</button>
-      ) : (
-        <div className="card alert-danger">
-          <p>Tüm test sonuçlarınız ve ayarlarınız bu cihazdan silinecek. Geri alınamaz.</p>
-          <button className="btn danger" onClick={onReset}>Evet, sil</button>
-          <button className="btn btn-ghost" onClick={() => setConfirm(false)}>Vazgeç</button>
-        </div>
-      )}
-      <button className="btn btn-ghost" onClick={() => onGo('home')}>Geri</button>
-    </main>
+    <>
+      <main className="screen has-tabbar fade-in" key={tab}>{content}</main>
+      <TabBar active={tab} onChange={go} />
+    </>
   )
 }

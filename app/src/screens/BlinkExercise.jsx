@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
+import { Camera, Play, Check, CircleCheck, ChevronRight, Volume2 } from 'lucide-react'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
+import { PageHeader } from '../components/ui.jsx'
 import { indicesFromConnections } from '../lib/distance.js'
 import { BLINK_CYCLE, BLINK_REPS, CLOSURES_PER_CYCLE, createClosureCounter, eyeOpenness } from '../lib/blink.js'
 import { median } from '../lib/trend.js'
@@ -90,42 +92,44 @@ export default function BlinkExercise({ onFinish, onBack }) {
   const s = BLINK_CYCLE[step]
 
   return (
-    <main className="screen">
+    <main className="screen fade-in">
       {useCam && <video ref={cam.videoRef} className="cam-hidden" playsInline muted />}
-      <h1>Göz kırpma egzersizi</h1>
+      <PageHeader onBack={phase === 'intro' ? onBack : undefined} eyebrow="Göz konforu" title="Göz kırpma egzersizi" />
 
       {phase === 'intro' && (
         <>
-          <p>
-            Ekranda uzun süre bakarken göz kırpmalarımız seyrekleşir ve yarım kalır. Bu egzersiz
-            tam göz kırpmayı hatırlatır. Yaklaşık 2,5 dakika sürer; günde 3 kez önerilir.
+          <p style={{ color: 'var(--ink-2)' }}>
+            Ekrana uzun süre bakarken göz kırpmalarımız seyrekleşir ve yarım kalır. Bu egzersiz tam göz
+            kırpmayı hatırlatır. Yaklaşık 2,5 dakika sürer; günde 3 kez önerilir.
           </p>
-          <p className="muted small">
-            Gözleriniz kapalıyken sizi sesle yönlendiririz; sesi açın. Türkçe sesli okuma yoksa:
-            kalın ses = kapatın, ince ses = açın.
+          <p className="note">
+            <Volume2 size={16} />
+            Gözlerin kapalıyken seni sesle yönlendiririz; sesi aç. Türkçe sesli okuma yoksa: kalın ses = kapat, ince ses = aç.
           </p>
-          <details className="card">
-            <summary>Bu neye dayanıyor?</summary>
+          <details className="card evidence">
+            <summary><ChevronRight size={16} /> Bu neye dayanıyor?</summary>
             <p className="small">
-              Kuru göz yakınması olan kişilerde yapılan kontrollü çalışmalarda benzer göz kırpma
-              egzersizleri yakınmaları ve yarım göz kırpmayı azalttı (Wolffsohn ve ark. 2025;
-              Kim ve ark. 2020). Egzersiz bırakılınca etki yaklaşık 2 haftada kayboldu.
-              Egzersiz bir tedavi değildir; yakınmalarınız sürerse göz doktorunuza başvurun.
+              Kuru göz yakınması olan kişilerde yapılan kontrollü çalışmalarda benzer göz kırpma egzersizleri
+              yakınmaları ve yarım göz kırpmayı azalttı (Wolffsohn ve ark. 2025; Kim ve ark. 2020). Egzersiz
+              bırakılınca etki yaklaşık 2 haftada kayboldu. Tedavi değildir; yakınmaların sürerse göz doktoruna başvur.
             </p>
           </details>
-          <button className="btn" onClick={() => start(true)}>Kamerayla başla (kapanmaları sayar)</button>
-          <button className="btn btn-ghost" onClick={() => start(false)}>Kamerasız başla</button>
-          <button className="btn btn-ghost" onClick={onBack}>Geri</button>
+          <button className="btn" onClick={() => start(true)}><Camera size={18} aria-hidden="true" /> Kamerayla başla</button>
+          <button className="btn btn-secondary" onClick={() => start(false)}><Play size={18} aria-hidden="true" /> Kamerasız başla</button>
         </>
       )}
 
       {phase === 'baseline' && (
-        <p className="big">{cam.ready ? 'Gözleriniz açık, ekrana bakın…' : 'Kamera hazırlanıyor…'}</p>
+        <section className="blink-stage open">
+          <div className="blink-orb" />
+          <p className="blink-cue">{cam.ready ? 'Gözlerin açık, ekrana bak' : 'Kamera hazırlanıyor…'}</p>
+        </section>
       )}
 
       {phase === 'run' && (
         <section className={`blink-stage ${s.closed ? 'closed' : 'open'}`} aria-live="assertive">
-          <p className="muted">Tekrar {rep + 1} / {BLINK_REPS}</p>
+          <span className="eyebrow">Tekrar {rep + 1} / {BLINK_REPS}</span>
+          <div className="blink-orb" />
           <p className="blink-cue">{s.text}</p>
           <div className="blink-bar" key={`${rep}-${step}`} style={{ animationDuration: `${s.ms}ms` }} />
           {useCam && counter.current && <p className="muted small">Algılanan kapanma: {closures}</p>}
@@ -135,14 +139,17 @@ export default function BlinkExercise({ onFinish, onBack }) {
 
       {phase === 'done' && (
         <>
-          <p className="big">Tamamlandı</p>
-          {useCam && counter.current && (
-            <p className="muted">
-              Algılanan kapanma: {closures} / beklenen {BLINK_REPS * CLOSURES_PER_CYCLE}.
-              Kamera sayımı ışık ve açıya bağlıdır; yaklaşık bir göstergedir.
-            </p>
-          )}
-          <button className="btn" onClick={save}>Kaydet</button>
+          <section className="card card-hero" style={{ alignItems: 'center', textAlign: 'center' }}>
+            <CircleCheck size={40} style={{ color: 'var(--accent)' }} />
+            <h2>Tamamlandı</h2>
+            {useCam && counter.current && (
+              <p className="muted small">
+                Algılanan kapanma: {closures} / beklenen {BLINK_REPS * CLOSURES_PER_CYCLE}. Kamera sayımı ışık ve açıya
+                bağlıdır; yaklaşık bir göstergedir.
+              </p>
+            )}
+          </section>
+          <button className="btn" onClick={save}><Check size={18} aria-hidden="true" /> Kaydet</button>
         </>
       )}
     </main>

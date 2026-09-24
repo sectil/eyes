@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react'
+import { Camera, Ruler } from 'lucide-react'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
+import { StepHeader } from '../components/ui.jsx'
 
 const SAMPLES = 30
 
@@ -39,47 +41,49 @@ export default function DistanceCalibration({ onDone, onSkip }) {
   }
 
   return (
-    <main className="screen">
-      <h1>Mesafe kalibrasyonu</h1>
-      <p className="muted">
-        Testlerde telefonun gözünüzden <strong>40 cm</strong> uzakta durması gerekir. Ön
-        kamera bunu gözünüzün (irisin) görüntüdeki boyutundan takip eder. Bunun için bir
-        kez ölçmemiz gerekiyor.
-      </p>
+    <main className="screen fade-in">
+      <StepHeader
+        step={3}
+        total={3}
+        title="40 cm'yi öğretelim"
+        subtitle="Testlerde telefon gözünden 40 cm uzakta durmalı. Ön kamera bunu irisinin boyutundan takip eder; bunun için bir kez ölçüyoruz."
+      />
       <ol className="steps">
-        <li>Bir cetvel, mezura veya 40 cm'lik bir ip hazırlayın.</li>
-        <li>Telefonu yüzünüzün karşısında, gözlerinizden tam 40 cm uzakta tutun (iyi ışıkta).</li>
-        <li>Uzak gözlüğünüz varsa takın; ekrana düz bakın.</li>
-        <li>"Ölç" düğmesine basın ve 2–3 saniye sabit durun.</li>
+        <li>Bir cetvel, mezura veya 40 cm'lik bir ip hazırla.</li>
+        <li>Telefonu yüzünün karşısında, gözlerinden tam <strong>40 cm</strong> uzakta, iyi ışıkta tut.</li>
+        <li>Uzak gözlüğün varsa tak; ekrana düz bak.</li>
+        <li>"Ölç"e bas ve 2–3 saniye sabit dur.</li>
       </ol>
 
-      <video ref={videoRef} className="cam-preview" playsInline muted />
+      <video ref={videoRef} className="cam-preview" playsInline muted hidden={phase === 'intro'} />
 
       {error === 'permission' && (
-        <p className="alert-warn">
-          Kamera izni verilmedi. Mesafe takibi olmadan da test yapabilirsiniz, ancak
-          sonuçlar daha az güvenilir olur.
-        </p>
+        <div className="card tone-warn small">Kamera izni verilmedi. Mesafe takibi olmadan da test yapabilirsin; sonuçlar daha az güvenilir olur.</div>
       )}
       {error === 'load' && (
-        <p className="alert-warn">
-          Yüz takip modeli yüklenemedi (ilk kullanımda internet gerekir).
-        </p>
+        <div className="card tone-warn small">Yüz takip modeli yüklenemedi (ilk kullanımda internet gerekir).</div>
       )}
 
       {phase === 'intro' && (
-        <button className="btn" onClick={() => setPhase('preview')}>Kamerayı aç</button>
+        <button className="btn" onClick={() => setPhase('preview')}>
+          <Camera size={18} aria-hidden="true" /> Kamerayı aç
+        </button>
       )}
       {phase === 'preview' && (
         <>
-          <p className="muted small">
-            {!ready ? 'Kamera hazırlanıyor…' : face ? 'Yüzünüz görünüyor ✓' : 'Yüzünüz görünmüyor — ışığı ve açıyı kontrol edin'}
-          </p>
-          <button className="btn" disabled={!ready || !face} onClick={start}>Ölç (40 cm'deyim)</button>
+          <span className={`chip ${face ? 'chip-ok' : 'chip-unknown'}`} style={{ alignSelf: 'flex-start' }}>
+            {!ready ? 'Kamera hazırlanıyor…' : face ? 'Yüzün görünüyor' : 'Yüzün görünmüyor — ışığı ve açıyı kontrol et'}
+          </span>
+          <button className="btn" disabled={!ready || !face} onClick={start}>
+            <Ruler size={18} aria-hidden="true" /> Ölç (40 cm'deyim)
+          </button>
         </>
       )}
       {phase === 'measuring' && (
-        <p className="muted">Ölçülüyor… {Math.round((progress / SAMPLES) * 100)}%</p>
+        <div className="stack">
+          <div className="stepper"><span className="on" style={{ flex: progress / SAMPLES }} /><span style={{ flex: 1 - progress / SAMPLES }} /></div>
+          <p className="muted">Ölçülüyor… {Math.round((progress / SAMPLES) * 100)}%</p>
+        </div>
       )}
 
       {(error || phase === 'intro') && onSkip && (

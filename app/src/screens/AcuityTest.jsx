@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
+import { ArrowLeft, ArrowUp, ArrowDown, ArrowRight, Play, Check, Info } from 'lucide-react'
 import TumblingE from '../components/TumblingE.jsx'
+import { PageHeader } from '../components/ui.jsx'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { distanceStatus, REFERENCE_MM } from '../lib/distance.js'
 import { logMARForHeight, renderSpec, smallestDrawableLogMAR, snellen20 } from '../lib/optotype.js'
 import { createZest, randomDirection, PLANS } from '../lib/zest.js'
 
 const EYES = [
-  { id: 'R', title: 'Sağ göz', cover: 'Sol gözünüzü avucunuzla hafifçe kapatın (bastırmadan).' },
-  { id: 'L', title: 'Sol göz', cover: 'Sağ gözünüzü avucunuzla hafifçe kapatın (bastırmadan).' },
-  { id: 'OU', title: 'İki göz', cover: 'İki gözünüz de açık.' },
+  { id: 'R', title: 'Sağ göz', cover: 'Sol gözünü avucunla hafifçe kapat (bastırmadan).' },
+  { id: 'L', title: 'Sol göz', cover: 'Sağ gözünü avucunla hafifçe kapat (bastırmadan).' },
+  { id: 'OU', title: 'İki göz', cover: 'İki gözün de açık.' },
 ]
 const WARMUP_LOGMAR = 0.9
 const SWIPE_MIN_PX = 30
@@ -117,8 +119,8 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, o
   const distanceChip = tracked && (
     <div className={`chip chip-${status}`}>
       {liveMm ? `${Math.round(liveMm / 10)} cm` : 'yüz aranıyor'}
-      {status === 'too-close' && ' · biraz uzaklaştırın'}
-      {status === 'too-far' && ' · biraz yaklaştırın'}
+      {status === 'too-close' && ' · biraz uzaklaştır'}
+      {status === 'too-far' && ' · biraz yaklaştır'}
     </div>
   )
 
@@ -127,19 +129,24 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, o
       {tracked && <video ref={cam.videoRef} className="cam-hidden" playsInline muted />}
 
       {phase === 'instructions' && (
-        <main className="screen">
-          <h1>{eye.title}</h1>
-          <p>{eye.cover}</p>
-          <ul className="steps">
-            <li>Telefonu gözlerinizden <strong>40 cm</strong> uzakta tutun.</li>
-            <li>Ekran parlaklığını en yükseğe alın; iyi aydınlatılmış bir yerde olun.</li>
-            <li>E harfinin açık tarafı hangi yöne bakıyorsa ekranda <strong>o yöne kaydırın</strong>.</li>
-            <li>Emin değilseniz de tahmin edin — test bunu hesaba katar.</li>
-            <li>İlk {warmup} harf alıştırmadır, sayılmaz.</li>
-          </ul>
+        <main className="screen fade-in">
+          <PageHeader
+            onBack={onCancel}
+            eyebrow={`${plan === 'daily' ? 'Günlük test' : 'Haftalık tam test'} · ${eyeIdx + 1}/${EYES.length}`}
+            title={eye.title}
+            subtitle={eye.cover}
+          />
+          <div className="card">
+            <ol className="steps">
+              <li>Telefonu gözlerinden <strong>40 cm</strong> uzakta tut.</li>
+              <li>Ekran parlaklığını en yükseğe al; iyi aydınlatılmış bir yerde ol.</li>
+              <li>E'nin açık tarafı hangi yöne bakıyorsa <strong>o yöne kaydır</strong> (veya oka dokun).</li>
+              <li>Emin değilsen de tahmin et — test bunu hesaba katar.</li>
+              <li>İlk {warmup} harf alıştırma, sayılmaz.</li>
+            </ol>
+          </div>
           {distanceChip}
-          <button className="btn" onClick={startEye}>Başla</button>
-          <button className="btn btn-ghost" onClick={onCancel}>Vazgeç</button>
+          <button className="btn" onClick={startEye}><Play size={18} aria-hidden="true" /> Başla</button>
         </main>
       )}
 
@@ -154,45 +161,51 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, o
             if (d) answer(d)
           }}
         >
+          <div className="progress-track"><i style={{ width: `${(trialNo / (warmup + trials)) * 100}%` }} /></div>
           <div className="stimulus-top">
             <span>{eye.title} · {isWarmup ? 'alıştırma' : `${trialNo - warmup + 1}/${trials}`}</span>
             {distanceChip}
           </div>
           {paused ? (
-            <p className="paused">Telefonu 40 cm'ye getirin</p>
+            <p className="paused">Telefonu 40 cm'ye getir</p>
           ) : spec.drawable && !feedback ? (
             <TumblingE unit={spec.unitCssPx} direction={dir} />
           ) : null}
+          {isWarmup && <span className="swipe-hint">E'nin açık tarafına doğru kaydır</span>}
           <div className="arrow-row" onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()}>
-            {[['left', '←'], ['up', '↑'], ['down', '↓'], ['right', '→']].map(([d, s]) => (
-              <button key={d} className="arrow" onClick={() => answer(d)} aria-label={d}>{s}</button>
+            {[['left', ArrowLeft, 'Sol'], ['up', ArrowUp, 'Yukarı'], ['down', ArrowDown, 'Aşağı'], ['right', ArrowRight, 'Sağ']].map(([d, Icon, label]) => (
+              <button key={d} className="arrow" onClick={() => answer(d)} aria-label={label}><Icon size={24} /></button>
             ))}
           </div>
         </div>
       )}
 
       {phase === 'eye-done' && (
-        <main className="screen">
-          <h1>{eye.title} tamamlandı</h1>
-          <p className="big">
-            {results.current.at(-1).logMAR.toFixed(2)} logMAR
-            <span className="muted"> ({snellen20(results.current.at(-1).logMAR)} karşılığı)</span>
-          </p>
+        <main className="screen fade-in">
+          <PageHeader eyebrow={`${eyeIdx + 1}/${EYES.length} tamamlandı`} title={eye.title} />
+          <section className="card card-hero">
+            <span className="eyebrow">Yakın görme keskinliği</span>
+            <div className="row" style={{ alignItems: 'baseline', gap: 8 }}>
+              <span className="result-big">{results.current.at(-1).logMAR.toFixed(2)}</span>
+              <span className="metric-unit">logMAR</span>
+            </div>
+            <span className="muted">{snellen20(results.current.at(-1).logMAR)} karşılığı</span>
+          </section>
           {results.current.at(-1).outOfRange === 'ceiling' && (
-            <p className="alert-warn small">
+            <div className="card tone-warn small">
               Sonuç ölçüm aralığının dışında (ekranın gösterebildiği en büyük harf görülemedi).
-              Test koşullarını kontrol edin; görmeniz gerçekten bu düzeydeyse bir göz doktoruna başvurun.
-            </p>
+              Test koşullarını kontrol et; görmen gerçekten bu düzeydeyse bir göz doktoruna başvur.
+            </div>
           )}
           {results.current.at(-1).outOfRange === 'floor' && (
-            <p className="muted small">Ekranın gösterebildiği en küçük harfi de gördünüz; gerçek değeriniz daha iyi olabilir.</p>
+            <p className="muted small">Ekranın gösterebildiği en küçük harfi de gördün; gerçek değerin daha iyi olabilir.</p>
           )}
-          <p className="muted small">
-            Tek bir testin doğal oynaması yaklaşık ±0,2 logMAR'dır. Değişimi grafikte,
-            birkaç günün ortalamasıyla değerlendiriyoruz.
+          <p className="note">
+            <Info size={16} />
+            Tek bir testin doğal oynaması yaklaşık ±0,2 logMAR. Değişimi grafikte, birkaç günün ortalamasıyla değerlendiriyoruz.
           </p>
           <button className="btn" onClick={nextEye}>
-            {eyeIdx + 1 < EYES.length ? `Sıradaki: ${EYES[eyeIdx + 1].title}` : 'Sonuçları kaydet'}
+            {eyeIdx + 1 < EYES.length ? <>Sıradaki: {EYES[eyeIdx + 1].title} <ArrowRight size={18} /></> : <><Check size={18} /> Sonuçları kaydet</>}
           </button>
         </main>
       )}

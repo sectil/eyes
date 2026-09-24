@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { CreditCard, Minus, Plus, Check, TriangleAlert } from 'lucide-react'
+import { StepHeader } from '../components/ui.jsx'
 
 // ISO/IEC 7810 ID-1 (kredi kartı, kimlik kartı) ölçüleri
 export const CARD_W_MM = 53.98 // dikey tutulduğunda en
@@ -14,7 +16,7 @@ export function calibrationStillValid(cal) {
   )
 }
 
-export default function CardCalibration({ onDone, initial }) {
+export default function CardCalibration({ onDone, initial, changed }) {
   // Başlangıç tahmini: CSS standardı 96 px/inç
   const [pxPerMm, setPxPerMm] = useState(initial?.pxPerMm ?? 96 / 25.4)
 
@@ -33,36 +35,34 @@ export default function CardCalibration({ onDone, initial }) {
   }
 
   return (
-    <main className="screen">
-      <h1>Ekran kalibrasyonu</h1>
-      <p className="muted">
-        Harflerin gerçek boyutta görünmesi için ekranınızın ölçüsünü öğrenmemiz
-        gerekiyor. Bir banka kartını (veya kimlik kartını) <strong>dikey</strong> olarak
-        ekrana yaslayın ve mavi dikdörtgen kartla tam aynı boyda olana kadar ayarlayın.
-      </p>
-      <p className="muted small">Tarayıcıda yakınlaştırma yapmayın; yaparsanız kalibrasyon yenilenir.</p>
+    <main className="screen fade-in">
+      <StepHeader
+        step={2}
+        total={3}
+        title="Ekranını ölçelim"
+        subtitle="Harflerin gerçek boyutta görünmesi için. Bir banka veya kimlik kartını dikey olarak ekrana yasla, çerçeveyi kartla aynı boya getir."
+      />
+      {changed && (
+        <div className="card tone-warn small">
+          <div className="row"><TriangleAlert size={18} /> Ekran ayarı veya yakınlaştırma değişmiş; lütfen yeniden ölç.</div>
+        </div>
+      )}
 
       <div className="card-frame">
         <div className="card-rect" style={{ width: `${w}px`, height: `${h}px` }} aria-label="Kart şablonu" />
       </div>
 
-      <div className="row">
-        <button className="btn btn-ghost" onClick={() => nudge(-0.1)} aria-label="Büyük küçült">−−</button>
-        <button className="btn btn-ghost" onClick={() => nudge(-0.01)} aria-label="Küçült">−</button>
-        <input
-          type="range"
-          min="2"
-          max="12"
-          step="0.005"
-          value={pxPerMm}
-          onChange={(e) => setPxPerMm(Number(e.target.value))}
-          aria-label="Boyut"
-        />
-        <button className="btn btn-ghost" onClick={() => nudge(0.01)} aria-label="Büyüt">+</button>
-        <button className="btn btn-ghost" onClick={() => nudge(0.1)} aria-label="Büyük büyüt">++</button>
+      <div className="slider-row">
+        <button className="btn-icon" onClick={() => nudge(-0.02)} aria-label="Küçült"><Minus size={20} /></button>
+        <input type="range" min="2" max="12" step="0.005" value={pxPerMm} onChange={(e) => setPxPerMm(Number(e.target.value))} aria-label="Boyut" />
+        <button className="btn-icon" onClick={() => nudge(0.02)} aria-label="Büyüt"><Plus size={20} /></button>
       </div>
 
-      <button className="btn" onClick={save}>Kart ile aynı boyda — kaydet</button>
+      <p className="note"><CreditCard size={16} /> Tarayıcıda yakınlaştırma yapma; yaparsan bu ölçüm yenilenir.</p>
+
+      <button className="btn" onClick={save}>
+        <Check size={18} aria-hidden="true" /> Kartla aynı boyda
+      </button>
     </main>
   )
 }

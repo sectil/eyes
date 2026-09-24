@@ -1,5 +1,7 @@
 import { useMemo, useRef, useState } from 'react'
+import { Info, Play } from 'lucide-react'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
+import { PageHeader } from '../components/ui.jsx'
 import { distanceStatus, REFERENCE_MM } from '../lib/distance.js'
 import { analyzeReading, fontSizeCssPx, measureXHeightRatio, pickSentences } from '../lib/reading.js'
 
@@ -80,22 +82,23 @@ export default function ReadingTest({ calibration, distanceCal, recentSentences 
 
   if (phase === 'instructions') {
     return (
-      <main className="screen">
+      <main className="screen fade-in">
         {tracked && <video ref={cam.videoRef} className="cam-hidden" playsInline muted />}
-        <h1>Okuma hızı</h1>
-        <ul className="steps">
-          <li>İki gözünüz açık, telefon <strong>40 cm</strong> uzakta. Okuma gözlüğü takmayın.</li>
-          <li>Her ekranda bir cümle çıkacak, yazı giderek küçülecek.</li>
-          <li>Cümleyi <strong>sesli ve olabildiğince hızlı</strong> okuyun, biter bitmez ekrana dokunun.</li>
-          <li>Okuyamayacak kadar küçüldüğünde "Okuyamıyorum"a basın.</li>
-        </ul>
-        <p className="muted small">
-          Bu test klinik olarak doğrulanmış bir test değildir. Sonuçlarınızı yalnızca bu
-          cihazda yaptığınız önceki okuma testleriyle karşılaştırın.
+        <PageHeader onBack={onCancel} eyebrow="Haftalık" title="Okuma hızı" subtitle="Yazı küçüldükçe ne kadar hızlı ve rahat okuduğunu ölçer." />
+        <div className="card">
+          <ol className="steps">
+            <li>İki gözün açık, telefon <strong>40 cm</strong> uzakta. Okuma gözlüğü takma.</li>
+            <li>Her ekranda bir cümle çıkacak, yazı giderek küçülecek.</li>
+            <li>Cümleyi <strong>sesli ve olabildiğince hızlı</strong> oku, biter bitmez ekrana dokun.</li>
+            <li>Okuyamayacak kadar küçülünce "Okuyamıyorum"a bas.</li>
+          </ol>
+        </div>
+        <p className="note">
+          <Info size={16} />
+          Klinik olarak doğrulanmış bir test değil. Sonuçlarını yalnızca bu cihazdaki önceki okuma testlerinle karşılaştır.
         </p>
         {chip}
-        <button className="btn" disabled={!sizes.length} onClick={() => setPhase('ready')}>Başla</button>
-        <button className="btn btn-ghost" onClick={onCancel}>Vazgeç</button>
+        <button className="btn" disabled={!sizes.length} onClick={() => setPhase('ready')}><Play size={18} aria-hidden="true" /> Başla</button>
       </main>
     )
   }
@@ -111,7 +114,7 @@ export default function ReadingTest({ calibration, distanceCal, recentSentences 
       </div>
       {phase === 'ready' && (
         <button className="btn" onClick={show} disabled={status !== 'ok'}>
-          {status === 'ok' ? 'Hazırım — cümleyi göster' : "Telefonu 40 cm'ye getirin"}
+          {status === 'ok' ? 'Hazırım — cümleyi göster' : "Telefonu 40 cm'ye getir"}
         </button>
       )}
       {phase === 'reading' && (
