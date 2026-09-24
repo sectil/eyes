@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { createZest, pCorrect, randomDirection, DIRECTIONS, GUESS } from './zest.js'
-import { shouldStop } from './zest.js'
+import { createZest, pCorrect, randomDirection, DIRECTIONS, GUESS, LAPSE, SLOPE, UNSEEN } from './zest.js'
+import { shouldStop, PLANS } from './zest.js'
 
 // Tekrarlanabilir rastgele sayı üreteci (mulberry32)
 function rng(seed) {
@@ -95,6 +95,86 @@ describe('createZest', () => {
   }
 })
 
+describe('createZest maxJump (sıçrama sınırı)', () => {
+  it('bir önceki gösterilenden en fazla maxJump uzaklaşır', () => {
+    const z = createZest({ priorMean: 0.4, priorSd: 0.5, maxJump: 0.2 })
+    z.update(0.8, false) // büyük harf yanlış → posterior yukarı kayar
+    z.update(0.8, false)
+    expect(z.next()).toBeLessThanOrEqual(1.0 + 1e-9)
+    const free = createZest({ priorMean: 0.4, priorSd: 0.5 })
+    free.update(0.8, true)
+    free.update(0.8, true)
+    const zz = createZest({ priorMean: 0.4, priorSd: 0.5, maxJump: 0.2 })
+    zz.update(0.8, true)
+    zz.update(0.8, true)
+    expect(zz.next()).toBeGreaterThanOrEqual(0.6 - 1e-9)
+    expect(free.next()).toBeLessThan(zz.next())
+  })
+  it('ilk denemede (geçmiş yokken) sınır uygulanmaz', () => {
+    const z = createZest({ priorMean: 0.4, maxJump: 0.2 })
+    expect(z.next()).toBeCloseTo(createZest({ priorMean: 0.4 }).next(), 9)
+  })
+})
+
+describe('"Göremiyorum" (UNSEEN)', () => {
+  it('harfi büyütür ama yanlış cevaptan daha az (şans doğrusu karşılıksız kalmaz)', () => {
+    const x0 = createZest().next()
+    const unseen = createZest()
+    unseen.update(x0, UNSEEN)
+    const wrong = createZest()
+    wrong.update(x0, false)
+    expect(unseen.next()).toBeGreaterThan(x0)
+    expect(unseen.next()).toBeLessThan(wrong.next())
+  })
+
+  it('rastgele yön seçmenin beklenen olabilirliğiyle işlenir: %25 doğru + %75 yanlış', () => {
+    // 4 kez Göremiyorum = 1 doğru + 3 yanlış (log-olabilirlik doğrusal olduğu için posterior aynı)
+    const a = createZest()
+    for (let i = 0; i < 4; i++) a.update(0.3, UNSEEN)
+    const b = createZest()
+    b.update(0.3, true)
+    for (let i = 0; i < 3; i++) b.update(0.3, false)
+    expect(a.estimate().logMAR).toBeCloseTo(b.estimate().logMAR, 9)
+    expect(a.estimate().sd).toBeCloseTo(b.estimate().sd, 9)
+  })
+
+  it('geçmişte ayrı işaretlenir, doğru sayılmaz', () => {
+    const z = createZest()
+    z.update(0.5, UNSEEN)
+    expect(z.history()).toEqual([{ x: 0.5, correct: false, unseen: true }])
+    expect(z.estimate().trials).toBe(1)
+  })
+
+  it('görmediği her harfte Göremiyorum\'a basan gözlemcide sapma ≤ 0,01 (yanlış saymak ≈ +0,03 kaydırıyordu)', () => {
+    // Gözlemci: harfi F olasılığıyla seçer; seçemezse tahmin etmez, düğmeye basar.
+    // Dikkat hatasında (λ) rastgele yön seçer.
+    const lapse = LAPSE / (1 - GUESS) // pCorrect = γ + (1 − γ − λ)F ile aynı model
+    const run = (unseenAs) => {
+      const errs = []
+      for (let s = 0; s < 300; s++) {
+        const r = rng(3000 + s)
+        const theta = -0.1 + (s % 9) * 0.1
+        const z = createZest()
+        for (let i = 0; i < 24; i++) {
+          const x = z.next()
+          let resp
+          if (r() < lapse) resp = r() < GUESS
+          else if (r() < 1 / (1 + Math.exp(-(x - theta) / SLOPE))) resp = true
+          else resp = unseenAs
+          z.update(x, resp)
+        }
+        errs.push(z.estimate().logMAR - theta)
+      }
+      return errs.reduce((a, b) => a + b, 0) / errs.length
+    }
+    const fixed = run(UNSEEN)
+    const asWrong = run(false)
+    console.log(`[sim] saf ZEST, hep Göremiyorum: UNSEEN sapma ${fixed.toFixed(4)} | yanlış sayılırsa ${asWrong.toFixed(4)}`)
+    expect(Math.abs(fixed)).toBeLessThanOrEqual(0.01)
+    expect(asWrong).toBeGreaterThan(0.02)
+  })
+})
+
 describe('randomDirection', () => {
   it('dört yönü de üretir', () => {
     const r = rng(1)
@@ -115,6 +195,19 @@ describe('shouldStop', () => {
   })
   it('en geç trials\'ta durur', () => {
     expect(shouldStop({ trials: 20, sd: 0.5 }, plan)).toBe(true)
+  })
+  it('minFine verilirse ince ayar denemesi yetmeden durmaz', () => {
+    const p = { trials: 24, minTrials: 18, minFine: 8, stopSd: 0.07 }
+    expect(shouldStop({ trials: 18, fineTrials: 7, sd: 0.01 }, p)).toBe(false)
+    expect(shouldStop({ trials: 18, fineTrials: 8, sd: 0.01 }, p)).toBe(true)
+    expect(shouldStop({ trials: 24, fineTrials: 2, sd: 0.5 }, p)).toBe(true)
+  })
+  it('planlar tutarlı: minTrials ≤ trials, ince ayar payı var', () => {
+    for (const p of Object.values(PLANS)) {
+      expect(p.minTrials).toBeLessThanOrEqual(p.trials)
+      expect(p.minFine).toBeLessThan(p.minTrials)
+      expect(p.warmup).toBeGreaterThanOrEqual(1)
+    }
   })
   it('tutarlı cevaplarla ZEST 20 denemeden önce yakınsar', () => {
     const z = createZest()

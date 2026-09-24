@@ -28,6 +28,12 @@ export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, t
       try {
         stop = await startTrueDepth((f) => {
           if (cancelled) return
+          // Oturum hatası (native: { tracked:false, error, errorCode }): ARKit oturumu durdurur, bir daha
+          // kare gelmez. Kare onFrame'e iletilmez (yüz karesi sayılmasın; yedek yollar error'a bakar).
+          if (f.error) {
+            setState((s) => ({ ...s, ready: true, error: f.errorCode === 'camera-denied' ? 'permission' : 'load', face: false, mm: null }))
+            return
+          }
           const ts = performance.now()
           const mm = f.tracked && f.distanceMm ? median.push(f.distanceMm) : null
           onFrameRef.current?.({ ...f, native: true, face: Boolean(f.tracked), mm, ts })
@@ -38,8 +44,9 @@ export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, t
         })
         if (cancelled) stop?.()
         else setState((s) => ({ ...s, ready: true }))
-      } catch {
-        if (!cancelled) setState((s) => ({ ...s, error: 'load' }))
+      } catch (e) {
+        // native start izin yoksa reject(code: 'camera-denied') döner.
+        if (!cancelled) setState((s) => ({ ...s, error: e?.code === 'camera-denied' ? 'permission' : 'load' }))
       }
     })()
     return () => {

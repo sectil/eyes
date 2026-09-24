@@ -10,6 +10,8 @@ import Capacitor
 /// - requestPermission() → { granted }   (mikrofon + konuşma tanıma izni)
 /// - start({locale, onDevice}) / stop()
 /// - "speech" olayı: { text, isFinal, segments: [{ text, t, d }] }  (t, d: saniye, ses başından)
+/// Ses oturumu: kayıtta .playAndRecord (titreşime izinli); bitince AppAudioSession
+/// (FeedbackPlugin.swift) üzerinden Feedback.setAudioMode tercihine döner.
 @objc(SpeechPlugin)
 public class SpeechPlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "SpeechPlugin"
@@ -59,8 +61,13 @@ public class SpeechPlugin: CAPPlugin, CAPBridgedPlugin {
         }
         self.recognizer = recognizer
         do {
+            // Kayıt süresince Feedback.setAudioMode tercihi uygulanmaz; stopInternal → endRecording geri döner.
+            AppAudioSession.shared.beginRecording()
             let session = AVAudioSession.sharedInstance()
             try session.setCategory(.playAndRecord, mode: .measurement, options: [.defaultToSpeaker, .allowBluetooth])
+            // iOS kayıt sırasında titreşim ve sistem seslerini varsayılan olarak susturur (kayda girmesinler diye).
+            // Okuma testinde dokunsal geri bildirim sürsün diye izin ver (AVAudioSession, iOS 13+).
+            try? session.setAllowHapticsAndSystemSoundsDuringRecording(true)
             try session.setActive(true, options: .notifyOthersOnDeactivation)
 
             let req = SFSpeechAudioBufferRecognitionRequest()
@@ -80,7 +87,8 @@ public class SpeechPlugin: CAPPlugin, CAPBridgedPlugin {
             try audioEngine.start()
 
             task = recognizer.recognitionTask(with: req) { [weak self] result, error in
-                guard let self = self else { return }
+                // İptal edilmiş eski görevin geç gelen sonucu (ör. hızlı stop → start) yeni kaydı durdurmasın.
+                guard let self = self, self.request === req else { return }
                 if let result = result {
                     let segs: [[String: Any]] = result.bestTranscription.segments.map {
                         ["text": $0.substring, "t": $0.timestamp, "d": $0.duration]
@@ -119,6 +127,8 @@ public class SpeechPlugin: CAPPlugin, CAPBridgedPlugin {
         task?.cancel()
         task = nil
         request = nil
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        // Oturumu bırak (diğer uygulamaların sesi devam etsin) ve Feedback'in kurduğu moda
+        // (.playback + mixWithOthers / .ambient) dön. Kayıt yoksa dokunmaz.
+        AppAudioSession.shared.endRecording()
     }
 }

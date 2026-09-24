@@ -7,5 +7,6 @@ class MainViewController: CAPBridgeViewController {
     override open func capacitorDidLoad() {
         bridge?.registerPluginInstance(FaceDistancePlugin())
         bridge?.registerPluginInstance(SpeechPlugin())
+        bridge?.registerPluginInstance(FeedbackPlugin())
     }
 }

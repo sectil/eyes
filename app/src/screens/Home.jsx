@@ -1,9 +1,12 @@
-import { ScanEye, BookText, Eye, ChevronRight, TrendingUp, TrendingDown, Minus, TriangleAlert, Sparkles, Timer, Leaf, ThumbsUp, Dumbbell, Play, Clock, Trophy } from 'lucide-react'
+import { ScanEye, BookText, Eye, ChevronRight, TrendingUp, TrendingDown, Minus, TriangleAlert, Sparkles, Timer, Leaf, ThumbsUp, Dumbbell, Play, Clock, Trophy, Gamepad2 } from 'lucide-react'
 import { SETS, DAILY_GOAL_MIN, setDurationSec, formatMin, todaySeconds } from '../lib/routines.js'
 import { Ring, Sparkline } from '../components/ui.jsx'
 import { analyzeTrend, trendMessage } from '../lib/trend.js'
 import { activeDays, weekProgress } from '../lib/calendar.js'
 import { snellen20 } from '../lib/optotype.js'
+import { decimalTr } from '../lib/stats.js'
+import { loadBest, bestFromSessions, loadSnakeOpts } from '../lib/snake.js'
+import '../styles/snake.css'
 
 const WEEK_MS = 7 * 86400000
 const SET_ICONS = { leaf: Leaf, thumbs: ThumbsUp, dumbbell: Dumbbell }
@@ -25,8 +28,10 @@ function TrendChip({ r }) {
   return <span className="trend-chip"><Minus size={14} /> Sabit</span>
 }
 
-export default function Home({ tests, sessions, settings, distanceTracked, onStart }) {
-  const week = weekProgress(activeDays([...tests, ...sessions]), new Date(), settings.reminder?.weeklyTarget)
+export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, onStart }) {
+  // Oyun oturumları (type 'game') egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
+  const exercise = sessions.filter((s) => s.type !== 'game')
+  const week = weekProgress(activeDays([...tests, ...exercise]), new Date(), settings.reminder?.weeklyTarget)
   const ou = tests.filter((t) => (t.type === 'va-daily' || t.type === 'va-weekly') && t.eye === 'OU')
   const r = analyzeTrend(ou)
   const shown = r.current7 ?? ou.at(-1)?.logMAR ?? null
@@ -34,8 +39,15 @@ export default function Home({ tests, sessions, settings, distanceTracked, onSta
   const due = (t) => !t || Date.now() - new Date(t.date).getTime() > WEEK_MS
   const weeklyDue = due(last('va-weekly'))
   const readingDue = due(last('reading'))
-  const todaySec = todaySeconds(sessions)
+  const todaySec = todaySeconds(exercise)
   const blinksToday = sessions.filter((s) => s.type === 'blink' && new Date(s.date).toDateString() === new Date().toDateString()).length
+  const snakeBest = Math.max(loadBest(), bestFromSessions(sessions))
+  // Oyunla aynı kural (SnakeGame loadSnakeOpts): TrueDepth varsa ve kayıtlı seçim 'touch'
+  // değilse gözle açılır. Kayıtlı mesafe yöntemine bakılmaz; TrueDepth'li cihazda eski kamera
+  // kalibrasyonu kalmış olabilir (App.jsx distanceCal).
+  // VARSAYIM: trueDepth prop'u verilmemişse (eski çağrı) mesafe yöntemine göre tahmin edilir.
+  const hasTrueDepth = trueDepth ?? settings.distance?.method === 'truedepth'
+  const eyeGame = loadSnakeOpts(Boolean(hasTrueDepth)).control === 'eyes'
 
   return (
     <>
@@ -71,7 +83,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, onSta
           <div className="row between" style={{ alignItems: 'flex-end' }}>
             <div className="metric">
               <span className="metric-value">
-                {shown.toFixed(2)}
+                {decimalTr(shown)}
                 <span className="metric-unit">logMAR</span>
               </span>
               <span className="muted small">
@@ -127,7 +139,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, onSta
       <h2 style={{ marginTop: 6 }}>Ölçüm</h2>
       <button className="btn" onClick={() => onStart(weeklyDue ? 'weekly' : 'daily')}>
         <ScanEye size={20} aria-hidden="true" />
-        {weeklyDue ? 'Haftalık tam test · ~5 dk' : 'Günlük test · ~2 dk'}
+        {weeklyDue ? 'Haftalık tam test · ~5 dk' : 'Günlük test · ~3 dk'}
       </button>
 
       <div className="action-list">
@@ -136,7 +148,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, onSta
             <span className="icon-bubble"><ScanEye size={22} /></span>
             <span className="grow">
               <span className="title">Sadece kısa test</span>
-              <span className="sub">"E hangi yönde" · ~2 dk</span>
+              <span className="sub">"E hangi yönde" · ~3 dk</span>
             </span>
             <ChevronRight className="chev" size={20} />
           </button>
@@ -154,6 +166,23 @@ export default function Home({ tests, sessions, settings, distanceTracked, onSta
           <span className="grow">
             <span className="title">Göz kırpma egzersizi {blinksToday > 0 && <span className="badge">Bugün {blinksToday}/3</span>}</span>
             <span className="sub">Ekran başında göz konforu · ~2,5 dk</span>
+          </span>
+          <ChevronRight className="chev" size={20} />
+        </button>
+      </div>
+
+      <h2 style={{ marginTop: 6 }}>Göz oyunu</h2>
+      <div className="action-list">
+        <button className="action snake-home" onClick={() => onStart('snake')}>
+          <span className="icon-bubble"><Gamepad2 size={22} aria-hidden="true" /></span>
+          <span className="grow">
+            <span className="title">
+              Yılan{' '}
+              {snakeBest > 0 && (
+                <span className="badge snake-badge"><Trophy size={11} aria-hidden="true" /> En iyi {snakeBest}</span>
+              )}
+            </span>
+            <span className="sub">{eyeGame ? 'Gözünle yönlendir · klasik oyun' : 'Kaydırarak yönlendir · klasik oyun'}</span>
           </span>
           <ChevronRight className="chev" size={20} />
         </button>

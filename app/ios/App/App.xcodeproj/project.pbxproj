@@ -19,6 +19,7 @@
 		648FAE067EFF7DBB53832EEC /* FaceDistancePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB7CE46A4AB015D46F80C8C /* FaceDistancePlugin.swift */; };
 		534A738740F1B2BC110711D7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAD69518EA60F0CC3D9D5D7 /* MainViewController.swift */; };
 		5D1C3B2A4E6F708192A3B4C5 /* SpeechPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C2E9A1B3D4F5061728394A5 /* SpeechPlugin.swift */; };
+		67E978CCF58A0DFFFAF0F364 /* FeedbackPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B32F900FAA3897A19868E63 /* FeedbackPlugin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		1AB7CE46A4AB015D46F80C8C /* FaceDistancePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDistancePlugin.swift; sourceTree = "<group>"; };
 		9FAD69518EA60F0CC3D9D5D7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7C2E9A1B3D4F5061728394A5 /* SpeechPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechPlugin.swift; sourceTree = "<group>"; };
+		1B32F900FAA3897A19868E63 /* FeedbackPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPlugin.swift; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -74,6 +76,7 @@
 				1AB7CE46A4AB015D46F80C8C /* FaceDistancePlugin.swift */,
 				9FAD69518EA60F0CC3D9D5D7 /* MainViewController.swift */,
 				7C2E9A1B3D4F5061728394A5 /* SpeechPlugin.swift */,
+				1B32F900FAA3897A19868E63 /* FeedbackPlugin.swift */,
 				50379B222058CBB4000EE86E /* capacitor.config.json */,
 				504EC3071FED79650016851F /* AppDelegate.swift */,
 				504EC30B1FED79650016851F /* Main.storyboard */,
@@ -172,6 +175,7 @@
 				648FAE067EFF7DBB53832EEC /* FaceDistancePlugin.swift in Sources */,
 				534A738740F1B2BC110711D7 /* MainViewController.swift in Sources */,
 				5D1C3B2A4E6F708192A3B4C5 /* SpeechPlugin.swift in Sources */,
+				67E978CCF58A0DFFFAF0F364 /* FeedbackPlugin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

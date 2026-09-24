@@ -47,7 +47,7 @@ export function buildReminderIcs(schedule, now = new Date()) {
     'DURATION:PT15M',
     `RRULE:FREQ=WEEKLY;BYDAY=${ordered.join(',')}`,
     `SUMMARY:${escapeText('Göz testi ve egzersiz (Eyelume)')}`,
-    `DESCRIPTION:${escapeText('Günlük kısa test: ~2 dakika. Uygulamayı açın.')}`,
+    `DESCRIPTION:${escapeText('Günlük kısa test: ~3 dakika. Uygulamayı açın.')}`,
     'BEGIN:VALARM',
     'ACTION:DISPLAY',
     `DESCRIPTION:${escapeText('Göz testi zamanı')}`,

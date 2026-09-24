@@ -1,7 +1,9 @@
 // Gözler kapalıyken yönlendirme: Türkçe sesli okuma varsa onu, yoksa ton kullanır.
 // Ton kuralı: kapatma adımları kalın (330 Hz), açma adımları ince (880 Hz).
+// Ayarlardan ses kapalıysa konuşma/ton çalınmaz; titreşim haptic() üzerinden kendi tercihine uyar.
 
-import { haptic } from './native.js'
+import { haptic, initFeedback } from './native.js'
+import { getPrefs, subscribePrefs } from './prefs.js'
 
 let audioCtx = null
 
@@ -29,8 +31,23 @@ function turkishVoiceAvailable() {
   }
 }
 
-// Kullanıcı dokunuşu içinde çağrılmalı (tarayıcılar sesi ancak etkileşimden sonra açar)
+function stopSpeech() {
+  try {
+    window.speechSynthesis?.cancel()
+  } catch {
+    // yoksay
+  }
+}
+
+// Ses egzersiz ortasında kapatılırsa süren konuşmayı hemen kes.
+subscribePrefs((next) => {
+  if (!next.sound) stopSpeech()
+})
+
+// Kullanıcı dokunuşu içinde çağrılmalı (tarayıcılar sesi ancak etkileşimden sonra açar).
+// Ses kapalı olsa da kilidi açar (1 Hz / 1 ms, duyulmaz): egzersiz sırasında ses açılırsa hazır olsun.
 export function unlockAudio() {
+  initFeedback() // iPhone ses modu (tekrar çağrı zararsız)
   tone(1, 1)
   try {
     window.speechSynthesis?.getVoices()
@@ -41,6 +58,7 @@ export function unlockAudio() {
 
 export function cue(text, closed) {
   haptic(closed ? 'warning' : 'success')
+  if (!getPrefs().sound) return
   if (turkishVoiceAvailable()) {
     try {
       window.speechSynthesis.cancel()

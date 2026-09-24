@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { ChevronRight } from 'lucide-react'
+import { decimalTr } from '../lib/stats.js'
 
 // Tek göz için görme keskinliği zaman serisi.
 // Y ekseni ters: yukarı = daha iyi görme (düşük logMAR).
@@ -67,7 +68,7 @@ export default function ProgressChart({ series, baseline }) {
         {ticks.map((v) => (
           <g key={v}>
             <line x1={PAD.l} x2={W - PAD.r} y1={y(v)} y2={y(v)} style={{ stroke: 'var(--chart-grid)', strokeWidth: 1 }} />
-            <text x={PAD.l - 6} y={y(v) + 3.5} textAnchor="end" style={text}>{v.toFixed(1)}</text>
+            <text x={PAD.l - 6} y={y(v) + 3.5} textAnchor="end" style={text}>{decimalTr(v, 1)}</text>
           </g>
         ))}
         <text x={PAD.l} y={H - 6} style={text}>{fmtDate(series[0].date)}</text>
@@ -85,7 +86,7 @@ export default function ProgressChart({ series, baseline }) {
       <span className="axis-note">logMAR · yukarı = daha iyi görme</span>
       {h && (
         <div className="tooltip" role="status">
-          {fmtDate(h.date)} · ölçüm {h.logMAR.toFixed(2)} · 7 gün {h.rolling7.toFixed(2)}
+          {fmtDate(h.date)} · ölçüm {decimalTr(h.logMAR)} · 7 gün {decimalTr(h.rolling7)}
         </div>
       )}
       <details>
@@ -94,7 +95,7 @@ export default function ProgressChart({ series, baseline }) {
           <thead><tr><th>Tarih</th><th>Ölçüm</th><th>7 günlük ortanca</th></tr></thead>
           <tbody>
             {series.map((p) => (
-              <tr key={p.date}><td>{fmtDate(p.date)}</td><td>{p.logMAR.toFixed(2)}</td><td>{p.rolling7.toFixed(2)}</td></tr>
+              <tr key={p.date}><td>{fmtDate(p.date)}</td><td>{decimalTr(p.logMAR)}</td><td>{decimalTr(p.rolling7)}</td></tr>
             ))}
           </tbody>
         </table>

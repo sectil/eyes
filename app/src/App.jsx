@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { store } from './lib/storage.js'
 import { TabBar } from './components/ui.jsx'
+import RestBreak from './components/RestBreak.jsx'
 import Home from './screens/Home.jsx'
 import Screening from './screens/Screening.jsx'
 import CardCalibration, { calibrationStillValid } from './screens/CardCalibration.jsx'
@@ -14,27 +15,136 @@ import BlinkExercise from './screens/BlinkExercise.jsx'
 import Evidence from './screens/Evidence.jsx'
 import Info from './screens/Info.jsx'
 import Routine from './screens/Routine.jsx'
+import SnakeGame from './screens/SnakeGame.jsx'
 import { SETS, todaySeconds } from './lib/routines.js'
 import Paywall from './screens/Paywall.jsx'
 import { getAccess } from './lib/subscription.js'
 import DistanceHud from './screens/DistanceHud.jsx'
-import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported } from './lib/native.js'
+import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback } from './lib/native.js'
 import { resolveAutoCalibration, estimateCalibration } from './lib/screenScale.js'
+import { BEST_KEY as SNAKE_BEST_KEY } from './lib/snake.js'
 import IPHONE_SCREENS from './lib/iphoneScreens.json'
 
 const TAB_SCREENS = ['home', 'progress', 'calendar', 'info']
+
+// --- Dinlenme kuralı (konfor molası) ---
+// Yakına odaklanılan "aktif" ekranlarda (ölçüm, egzersiz, oyun) geçen süre birikir. Toplam eşiği geçince
+// bir sonraki ölçüme ya da oyuna (REST_GATED) GEÇMEDEN ÖNCE tam ekran RestBreak gösterilir ("Atla" var).
+// Mola bitince ya da atlanınca sayaç sıfırlanır; ✕ ile kapatılırsa sıfırlanmaz, sonraki geçişte yine sorulur.
+// Ekran içindeki molalar (E testi gözler arası, Yılan) da RESTED_EVENT ile sayacı sıfırlar; böylece mola
+// biter bitmez ikinci bir mola çıkmaz ve molanın kendi süresi yakın süreye sayılmaz.
+// Kanıt notu: 20-20-20 kuralının semptomlara etkisi gösterilemedi (Johnson & Rosenfield 2022,
+// DOI 10.1097/OPX.0000000000001971; ayrıntı components/RestBreak.jsx). Bu yüzden mola zorunlu değil ve
+// metin sağlık iddiası taşımaz.
+// VARSAYIM: 10 dk eşiği (kanıt düşük; yalnızca konfor molası).
+const REST_AFTER_MS = 10 * 60 * 1000
+// VARSAYIM: aktif ekran dışında (sekmeler, uygulama arka planda) art arda 5 dk geçerse bu doğal bir mola
+// sayılır ve sayaç sıfırlanır. Yoksa iOS'ta arka planda günlerce açık kalan uygulamada dünkü dakikalar
+// bugünün ilk etkinliğine mola çıkarırdı.
+const REST_IDLE_RESET_MS = 5 * 60 * 1000
+const REST_SECONDS = 20
+const ACTIVE_SCREENS = ['daily', 'weekly', 'reading', 'blink', 'snake']
+const isActiveScreen = (s) => ACTIVE_SCREENS.includes(s) || s.startsWith('routine-')
+// Mola yalnızca bu ekranlardan önce sorulur. Egzersiz setleri ve göz kırpma zaten "Uzağa bak" /
+// "Gözlerini kapat" adımları içerir; önlerine ayrıca mola koymak art arda iki mola demektir.
+// O ekranlarda geçen süre yine de birikir (isActiveScreen).
+const REST_GATED = ['daily', 'weekly', 'reading', 'snake']
+// Ekran içindeki RestBreak bitince/atlanınca window'a yayılan olay (components/RestBreak.jsx ile aynı ad).
+const RESTED_EVENT = 'gozolcum:rested'
+
+// Mola metninde cümle içinde geçer ("Sırada günlük test var.", "Hazırsın, günlük test başlıyor").
+// Adlar Ana sayfadaki kartlara dayanır; "Yılan" oyunun adı olduğu için büyük harfle kalır.
+function activityLabel(s) {
+  if (s.startsWith('routine-')) {
+    const set = SETS.find((x) => `routine-${x.id}` === s)
+    return set ? `${set.title.toLocaleLowerCase('tr')} egzersiz seti` : 'egzersiz seti'
+  }
+  return {
+    daily: 'günlük test',
+    weekly: 'haftalık tam test',
+    reading: 'okuma hızı testi',
+    blink: 'göz kırpma egzersizi',
+    snake: 'Yılan oyunu',
+  }[s] ?? ''
+}
+
+// c: { ms: birikmiş aktif süre, since: şu anki aktif aralığın başı | null, idleFrom: aktiflikten çıkış | null }
+function readClock(c, now) {
+  if (c.since == null && c.idleFrom != null && now - c.idleFrom >= REST_IDLE_RESET_MS) {
+    c.ms = 0
+    c.idleFrom = null
+  }
+  return c.ms + (c.since != null ? Math.max(0, now - c.since) : 0)
+}
+
+function resetClock(c) {
+  c.ms = 0
+  c.idleFrom = null
+  if (c.since != null) c.since = Date.now()
+}
+
+// Aktif ekranda ve uygulama görünürken geçen duvar saati süresini biriktirir (arka plan sayılmaz).
+function useActiveTime(active) {
+  const clock = useRef({ ms: 0, since: null, idleFrom: null })
+  useEffect(() => {
+    const c = clock.current
+    const pause = () => {
+      if (c.since == null) return
+      const now = Date.now()
+      c.ms += Math.max(0, now - c.since)
+      c.since = null
+      c.idleFrom = now
+    }
+    const resume = () => {
+      if (!active || c.since != null || document.visibilityState === 'hidden') return
+      const now = Date.now()
+      readClock(c, now) // uzun aradan sonra önce sıfırla
+      c.since = now
+    }
+    const onVis = () => (document.visibilityState === 'hidden' ? pause() : resume())
+    resume()
+    document.addEventListener('visibilitychange', onVis)
+    return () => {
+      document.removeEventListener('visibilitychange', onVis)
+      pause()
+    }
+  }, [active])
+  // Ekran içindeki molalar (E testi gözler arası, Yılan) sayacı sıfırlar.
+  useEffect(() => {
+    const onRested = () => resetClock(clock.current)
+    window.addEventListener(RESTED_EVENT, onRested)
+    return () => window.removeEventListener(RESTED_EVENT, onRested)
+  }, [])
+  return {
+    read: () => readClock(clock.current, Date.now()),
+    reset: () => resetClock(clock.current),
+  }
+}
 
 export default function App() {
   const [data, setData] = useState(store.get())
   const [screen, setScreen] = useState('home')
   const [lastTab, setLastTab] = useState('home')
+  // Molası bekleyen hedef: { to: ekran, min: birikmiş dakika } | null
+  const [restFor, setRestFor] = useState(null)
+  const activeTime = useActiveTime(isActiveScreen(screen))
   const refresh = () => setData(store.get())
   const go = (s) => {
+    const due = activeTime.read()
+    if (REST_GATED.includes(s) && due >= REST_AFTER_MS) {
+      setRestFor({ to: s, min: Math.floor(due / 60000) })
+      window.scrollTo(0, 0)
+      return
+    }
+    setRestFor(null)
     if (TAB_SCREENS.includes(s)) setLastTab(s)
     setScreen(s)
     window.scrollTo(0, 0)
   }
   const back = () => go(lastTab)
+
+  // iPhone ses modu (sessiz tuşunda da ses) + ses tercihi değişikliklerini izle. Web'de etkisiz.
+  useEffect(() => initFeedback(), [])
 
   // Abonelik durumu (yalnızca iOS uygulamasında kilit; web'de açık)
   const [access, setAccess] = useState({ loading: true, premium: false })
@@ -163,6 +273,39 @@ export default function App() {
   }
   if (locked && screen === 'evidence') return <Evidence onBack={() => go('home')} />
 
+  // --- Konfor molası: aktif ekrana geçmeden önce (bkz. dinlenme kuralı, dosya başı) ---
+  if (restFor) {
+    const target = restFor.to
+    const label = activityLabel(target)
+    const proceed = () => {
+      activeTime.reset()
+      go(target)
+    }
+    // ✕: hedefe gitmeden bulunduğun ekrana dön. Sayaç sıfırlanmaz; sonraki geçişte mola yine sorulur.
+    const close = () => {
+      setRestFor(null)
+      window.scrollTo(0, 0)
+    }
+    return (
+      <RestBreak
+        key={target}
+        seconds={REST_SECONDS}
+        trueDepth={native.trueDepth}
+        title="Kısa bir mola"
+        subtitle={`${restFor.min} dakikadır yakına odaklanıyorsun.${label ? ` Sırada ${label} var.` : ''} Önce pencereden dışarı, 6 metreden uzak bir noktaya bak.`}
+        doneText={label ? `Hazırsın, ${label} başlıyor` : 'Hazırsın, devam edebilirsin'}
+        onDone={proceed}
+        onSkip={proceed}
+        onClose={close}
+      />
+    )
+  }
+
+  // Oyun oturumları (type 'game') egzersiz süresine ve takvimdeki çalışma günlerine sayılmaz
+  // (Home.jsx'teki haftalık hedef/günlük süre ile tutarlı). Gelişim de oyunları gün/seri/hafta sayımına
+  // katmaz; oyunları yalnızca listeler (lib/stats.js countsTowardGoal).
+  const exercise = sessions.filter((s) => s.type !== 'game')
+
   // --- Tam ekran akışlar (sekme çubuğu yok) ---
   const saveTests = (results) => {
     ;[].concat(results).forEach((r) => store.addTest(r))
@@ -191,13 +334,23 @@ export default function App() {
         <Routine
           key={screen}
           set={set}
-          todaySec={todaySeconds(sessions)}
+          todaySec={todaySeconds(exercise)}
           trueDepth={native.trueDepth}
           onBack={back}
           onFinish={(s) => { store.addSession(s); refresh(); go('home') }}
         />
       )
     }
+    case 'snake':
+      // Oyun bitince ekranda kalır (sonuç + "Tekrar oyna"); her bitiş bir oturum olarak kaydedilir.
+      // Abonelik kilidi yukarıdaki genel kuralla uygulanır (diğer premium ekranlar gibi).
+      return (
+        <SnakeGame
+          trueDepth={native.trueDepth}
+          onExit={() => go('home')}
+          onFinish={(s) => { store.addSession(s); refresh() }}
+        />
+      )
     case 'evidence':
       return <Evidence onBack={() => go('info')} />
     default:
@@ -207,8 +360,8 @@ export default function App() {
   // --- Sekmeli ekranlar ---
   const tab = TAB_SCREENS.includes(screen) ? screen : 'home'
   let content
-  if (tab === 'progress') content = <Progress tests={tests} />
-  else if (tab === 'calendar') content = <Calendar records={[...tests, ...sessions]} schedule={settings.reminder} onEditSchedule={() => go('schedule')} />
+  if (tab === 'progress') content = <Progress tests={tests} sessions={sessions} weeklyTarget={settings.reminder?.weeklyTarget} onStart={go} />
+  else if (tab === 'calendar') content = <Calendar records={[...tests, ...exercise]} schedule={settings.reminder} onEditSchedule={() => go('schedule')} />
   else if (tab === 'info') {
     content = (
       <Info
@@ -217,11 +370,28 @@ export default function App() {
         calibration={settings.calibration}
         distanceSkipped={!distanceCal}
         exportJSON={store.exportJSON}
-        onReset={() => { store.clearAll(); refresh(); go('home') }}
+        onReset={() => {
+          // iPhone'da ekran ölçüsü cihaz modelinden gelir (kullanıcı verisi değil) ve yalnızca açılışta yazılır.
+          // Silinirse testler uygulama yeniden açılana dek ölçeksiz kalır (AcuityTest calibration.pxPerMm → hata).
+          const autoCal = isIOSApp() && settings.calibration?.method === 'auto' ? settings.calibration : null
+          store.clearAll()
+          if (autoCal) store.setSetting('calibration', autoCal)
+          // Yılan oyununun cihazdaki rekoru ve seçenekleri (SnakeGame.jsx OPTS_KEY) de silinir;
+          // ses/titreşim tercihleri ve tema cihaz ayarı sayılır ve korunur.
+          for (const k of [SNAKE_BEST_KEY, 'gozolcum:snake-opts']) {
+            try {
+              localStorage.removeItem(k)
+            } catch {
+              // depolama yok: yoksay
+            }
+          }
+          refresh()
+          go('home')
+        }}
       />
     )
   } else {
-    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} onStart={go} />
+    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={native.trueDepth} onStart={go} />
   }
 
   return (

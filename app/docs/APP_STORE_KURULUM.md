@@ -130,27 +130,74 @@ Sonra Archive → Upload. ⚠️ **App Store'a incelemeye gönderilecek derleme 
 - [ ] Elle ayar ekranı yine de çıkarsa altında gri bir "Otomatik ölçüm yapılamadı: …" satırı olur;
   bu satırın ekran görüntüsünü gönder (model/çözünürlük bilgisi sorunu gösterir).
 - [ ] **Egzersiz setleri (Face ID'li iPhone):** Kırpma adımında sayaç "1/5, 2/5…" diye gerçek kırpmaları
-  sayıyor mu? Bakış adımlarında süre yalnızca doğru yöne bakınca azalıyor mu, küçük noktadaki bakış
-  yönü doğru tarafa gidiyor mu (sağa bakınca nokta sağa)? Daire adımında turlar sayılıyor mu?
-  "Gözlerini kapat" adımında süre yalnızca gözler kapalıyken ilerliyor mu? Yüzünü kameradan
-  çekince "Yüzün görünmüyor — süreyle devam ediyor" yazıyor mu?
+  sayıyor mu (tek kırpma iki kez sayılmamalı)? Üstte ✕ ve "3/9" gibi adım göstergesi var mı?
+  Daire adımında turlar sayılıyor mu, bakış noktası dönen halkanın üstünde mi?
+- [ ] **Göz takibi — sola/sağa bakış:** "Sola bak" adımında bakış panelindeki nokta **sola**, "Sağa bak"ta
+  **sağa** gidiyor mu? Sola bakış sağ kadar kolay algılanıyor mu (eskiden sol zayıftı)? Başını
+  çevirmeden yalnızca gözle bakınca da nokta hedef halkaya ulaşıyor mu? Ters gidiyorsa hangi yönün
+  ters olduğunu yaz (uygulama birkaç saniyede kendini düzeltmeli; düzeltmiyorsa ekran kaydı gönder).
+- [ ] **Gözler kapalıyken / yüz yokken bekleme:** "Gözlerini kapat" adımında sayaç yalnızca gözler
+  kapalıyken ilerliyor mu, bitince "Gözlerini aç" sesi geliyor mu? Yüzünü kameradan çekince sayaç
+  duruyor ve "Yüzünü kameraya göster" kartı çıkıyor mu? 15 sn ilerleme olmazsa "Bu adımı atla"
+  büyük düğmeye dönüşüyor mu? Avuçla gözlerini kapatınca ne oluyor (yüz kayboluyor mu)? Yaz.
 - [ ] **Uzağa bak / Yakın–uzak:** Uzağa bak adımında süre yalnızca uzaktaki bir noktaya odaklanınca
   işliyor mu? Yakın–uzak adımında başparmak↔uzak geçişleri "1/6, 2/6…" sayılıyor mu? (Eşikler
   VARSAYIM; yanlış sayıyorsa hangi durumda saydığını/saymadığını yaz.)
 - [ ] **Titreşim:** Her kırpmada hafif, her daire turunda orta, adım bitince başarı titreşimi var mı?
-- [ ] **E testi:** Sağ üstteki ✕ ile çıkılabiliyor mu? Telefonu 25–60 cm arasında ileri-geri
-  oynatınca harf boyutu anlık değişiyor mu (gözde aynı büyüklükte kalmalı)? "Göremiyorum" çalışıyor
-  mu? Sonuç netleşince test 20 denemeden önce bitiyor mu?
+- [ ] **Bilgi → Ses ve titreşim → "Titreşimi dene":** Basınca kısa bir titreşim hissediliyor mu ve
+  altında "Gönderildi…" yazıyor mu? *Ayarlar → Ses ve Dokunuş → Sistem Dokunuşları* **kapalıyken** de
+  dene; hissedilip hissedilmediğini yaz. "Titreşim" anahtarı kapalıyken "dene" düğmesi pasif mi ve
+  egzersiz/oyunda hiç titreşim olmuyor mu? Okuma testinde (mikrofon açıkken ve bitince) titreşim var mı?
+- [ ] **Sesler anahtarı:** Kapatınca egzersizde sesli yönlendirme ve tonlar tamamen susuyor mu (konuşma
+  ortasında kapatınca hemen kesilmeli)? Açıkken iPhone'un yan **sessiz tuşu** açıkken de ses geliyor
+  mu? Arkada müzik çalarken uygulama müziği kesiyor mu (kesmemeli, üstüne karışmalı)?
+- [ ] **E testi (yeni akış: iniş + ince ayar):** Sağ üstteki ✕ ile çıkılabiliyor mu (koyu temada ✕
+  açık renk mi)? Üstte evre adı "Alıştırma" → "Boyut küçülüyor" → "İnce ayar" sırayla değişiyor,
+  3 parçalı gösterge ve "~N harf kaldı" doğru ilerliyor mu (ilerleme çubuğu geri gitmemeli)? İlk
+  yanlışa kadar harf her doğruda **gözle görülür şekilde** küçülüyor mu (aynı boyut iki kez gelmemeli)?
+  "İnce ayar"da harf sınır çevresinde biraz büyüyüp küçülüyor mu? "Göremiyorum" yanlış sayılıp
+  sıradakine geçiyor mu? Göz başına ~18–24 harf; günlük test toplam kaç dakika sürdü, yaz.
+  Telefonu 25–60 cm arasında ileri-geri oynatınca harf boyutu anlık değişiyor mu?
+- [ ] **E testi — gözler arası mola:** Sağ göz bitince 20 sn'lik "Gözlerini dinlendir" ekranı çıkıyor mu?
+  Face ID'li iPhone'da sayaç yalnızca telefonun üstünden **uzağa** bakarken ilerliyor, ekrana bakınca
+  "sayaç bekliyor" diyor mu? "Atla" hemen sıradaki göze geçiriyor mu? Bitince titreşim + "Mola bitti"
+  sesi var mı? Sonuç ekranında değer 1,0'dan gerçek değere akıyor, Snellen karşılığı görünüyor mu?
+- [ ] **Uzun kullanımda konfor molası:** Test/egzersiz/oyunda toplam ~10 dk geçirdikten sonra ana
+  sayfadan yeni bir etkinlik başlatınca önce "Kısa bir mola" ekranı çıkıyor mu, "Atla" ile hemen
+  geçilebiliyor mu? Moladan sonra aynı etkinlik kendiliğinden açılıyor mu? 5 dk+ ara verince (ya da
+  uygulama arka plandayken) mola tekrar sorulmamalı.
+- [ ] **Gelişim → aktivite takvimi:** Üst kartta Aktivite / Dakika / Aktif gün (ve oynadıysan Yılan
+  rekoru) doğru mu? Takvimde test, egzersiz ve oyun yapılan günler işaretli mi (1 aktivite açık, 2+
+  koyu), bugün noktalı mı? Bir güne dokununca altta o günün etkinlikleri saatleriyle listeleniyor mu?
+  Ay okları çalışıyor mu (gelecek ay pasif)? Bir test akışı (Sağ/Sol/İki göz) **tek** aktivite sayılıyor mu?
+  "N gün üst üste" serisi ve "Bu hafta · n/7" doğru mu? Veri yokken boş durum anlamlı mı?
+- [ ] **Yılan oyunu (Ana sayfa → Göz oyunu → Yılan):** Face ID'li iPhone'da "Gözlerinle" varsayılan mı?
+  3-2-1'de "Ekranın ortasına bak" deniyor mu? Sağa/sola/yukarı/aşağı kısa bakışla yılan o yöne dönüyor
+  mu (aşağı bakış da çalışmalı; göz kapağı inip oyun "Gözlerin kapalı" diye duruyorsa yaz)? Yüzünü
+  çekince ya da gözlerini 1 sn'den uzun kapatınca oyun duruyor, ekrana bakınca kendiliğinden devam
+  ediyor mu? "Dokunarak" modunda kaydırma ve alttaki yön tuşları çalışıyor mu? Yem yiyince skor artıyor,
+  her 5 yemde hızlanıyor, rekor geçince "Rekor" rozeti çıkıyor mu? Oyun bitince "Tekrar oyna",
+  "Seçenekler", "Çık" var mı; skor Gelişim'de ve Ana sayfadaki "En iyi" rozetinde görünüyor mu?
+  Oyundaki ses düğmesi ve Bilgi'deki "Sesler" kapalıyken hiç ses çalmıyor mu? ✕ ile çıkılabiliyor mu?
+  Uygulamayı arka plana alınca oyun duruyor mu? 3 dk'dan uzun oynayınca oyun sonunda mola çıkıyor mu?
+- [ ] **Tüm verileri sil** sonrası Yılan "En iyi" rozeti de sıfırlanıyor mu?
 - [ ] **Okuma testi (sesli):** İlk "Başla"da mikrofon + konuşma tanıma izni soruyor mu? Cümleyi sesli
   okuyunca "Dinliyorum" altında duyulan metin görünüyor ve doğru okuyunca kendiliğinden sıradakine
   geçiyor mu? "Okudum" düğmesi yedek olarak çalışıyor mu? ✕ ile çıkılabiliyor mu?
 
-### Yerel Swift eklentisi (FaceDistancePlugin)
+### Yerel Swift eklentileri (FaceDistance, Feedback, Speech)
 
-- `ios/App/App/FaceDistancePlugin.swift` (TrueDepth + ARKit) ve `MainViewController.swift`
-  (eklentileri kaydeder) ve `SpeechPlugin.swift` (konuşma tanıma) projeye eklidir; `Main.storyboard` bu denetleyiciyi kullanır.
+- `ios/App/App/FaceDistancePlugin.swift` (TrueDepth + ARKit; yüz olayı ~30 Hz, bakış açıları
+  `gazeLeftX/Y`, `gazeRightX/Y` derece), `FeedbackPlugin.swift` (titreşim: Core Haptics, yoksa UIKit;
+  ses modu: sessiz tuşunda da ses), `SpeechPlugin.swift` (konuşma tanıma) ve `MainViewController.swift`
+  (eklentileri kaydeder) projeye eklidir; `Main.storyboard` bu denetleyiciyi kullanır.
+- Swift dosyası eklendiği/değiştiği için her güncellemede `npm run build && npx cap sync ios` ve
+  ardından Xcode'da yeniden derleme gerekir. Eski bir derlemede `Feedback` eklentisi yoksa uygulama
+  titreşimde `@capacitor/haptics`'e geri düşer (çalışır ama Sistem Dokunuşları kapalıyken hissedilmeyebilir).
 - Bu dosyalar Linux ortamında yazıldı, **Xcode'da ilk kez derlenecek**. Derleme hatası çıkarsa
-  hata metnini gönder.
+  hata metnini gönder. En riskli satırlar: `FeedbackPlugin.swift` içinde `override public func load()`,
+  `CHHapticEngine(audioSession: nil)`, `reason == .systemError`; `FaceDistancePlugin.swift` içindeki
+  uzun `[String: Any]` sözlüğü (derleyici "too complex" derse haber ver).
 - TrueDepth **Simülatör'de çalışmaz**; gerçek Face ID'li iPhone gerekir.
 - Ekran ölçüsü tablosu: `src/lib/iphoneScreens.json` (kaynaklar `docs/iphone_ekran_tablosu.md`).
   Yeni iPhone modelleri çıktıkça bu tabloya eklenmeli.

@@ -1,13 +1,45 @@
 import { useEffect, useRef, useState } from 'react'
-import { Camera, Play, Check, CircleCheck, ChevronRight, Volume2 } from 'lucide-react'
+import { Camera, Play, Check, CircleCheck, ChevronRight, Volume2, X } from 'lucide-react'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { PageHeader } from '../components/ui.jsx'
 import { indicesFromConnections } from '../lib/distance.js'
 import { BLINK_CYCLE, BLINK_REPS, CLOSURES_PER_CYCLE, createClosureCounter, eyeOpenness } from '../lib/blink.js'
+import { createBlinkCounter, blinkThresholds, BLINK_REFRACTORY_MS } from '../lib/gaze.js'
 import { median } from '../lib/trend.js'
 import { cue, unlockAudio } from '../lib/cue.js'
 
 const BASELINE_MS = 2000
+
+// Kapanma sayaçları — push(değer, ts) → true: yeni bir kapanma sayıldı.
+// TrueDepth: gaze.js createBlinkCounter (histerezis + doruk + refrakter). Eşikler kişinin
+// gözler açıkkenki kapanma değerine göre (blinkThresholds). Sayım göz yeniden açılınca yapılır.
+function trueDepthCounter(baseClosure) {
+  const c = createBlinkCounter(blinkThresholds(baseClosure))
+  return {
+    push(closure, ts) {
+      const before = c.count
+      return c.push(closure, ts) > before
+    },
+  }
+}
+
+// Ön kamera: blink.js createClosureCounter + refrakter. Göz açıldıktan sonra
+// BLINK_REFRACTORY_MS içinde yeniden kapanırsa aynı kapanmanın devamı sayılır
+// (hafifçe sıkarken titreyen değer çift saymasın).
+function cameraCounter(baselineOpenness) {
+  const c = createClosureCounter(baselineOpenness)
+  let wasClosed = false
+  let openedAt = -Infinity
+  return {
+    push(openness, ts) {
+      const started = c.update(openness)
+      const closed = c.closed()
+      if (wasClosed && !closed) openedAt = ts
+      wasClosed = closed
+      return started && ts - openedAt >= BLINK_REFRACTORY_MS
+    },
+  }
+}
 
 export default function BlinkExercise({ onFinish, onBack, trueDepth = false }) {
   const [useCam, setUseCam] = useState(false)
@@ -28,9 +60,9 @@ export default function BlinkExercise({ onFinish, onBack, trueDepth = false }) {
       if (m.native) {
         // TrueDepth: ARKit göz kırpma değeri 0 (açık) … 1 (kapalı) → açıklık = 1 − değer
         if (!m.face || m.blinkLeft == null) return
-        const o = 1 - (m.blinkLeft + m.blinkRight) / 2
-        if (phaseRef.current === 'baseline') baseSamples.current.push(o)
-        else if (phaseRef.current === 'run' && counter.current?.update(o)) setClosures((c) => c + 1)
+        const closure = (m.blinkLeft + m.blinkRight) / 2
+        if (phaseRef.current === 'baseline') baseSamples.current.push(1 - closure)
+        else if (phaseRef.current === 'run' && counter.current?.push(closure, m.ts)) setClosures((c) => c + 1)
         return
       }
       if (!m.landmarks) return
@@ -44,7 +76,7 @@ export default function BlinkExercise({ onFinish, onBack, trueDepth = false }) {
       if (!vals.length) return
       const o = vals.reduce((a, b) => a + b, 0) / vals.length
       if (phaseRef.current === 'baseline') baseSamples.current.push(o)
-      else if (phaseRef.current === 'run' && counter.current?.update(o)) setClosures((c) => c + 1)
+      else if (phaseRef.current === 'run' && counter.current?.push(o, m.ts)) setClosures((c) => c + 1)
     },
   })
 
@@ -52,8 +84,8 @@ export default function BlinkExercise({ onFinish, onBack, trueDepth = false }) {
   useEffect(() => {
     if (phase !== 'baseline') return undefined
     const t = setTimeout(() => {
-      const b = median(baseSamples.current)
-      counter.current = b ? createClosureCounter(b) : null
+      const b = median(baseSamples.current) // gözler açıkken açıklık ortancası
+      counter.current = b ? (cam.native ? trueDepthCounter(1 - b) : cameraCounter(b)) : null
       setPhase('run')
     }, BASELINE_MS)
     return () => clearTimeout(t)
@@ -103,7 +135,14 @@ export default function BlinkExercise({ onFinish, onBack, trueDepth = false }) {
   return (
     <main className="screen fade-in">
       {useCam && <video ref={cam.videoRef} className="cam-hidden" playsInline muted />}
-      <PageHeader onBack={phase === 'intro' ? onBack : undefined} eyebrow="Göz konforu" title="Göz kırpma egzersizi" />
+      {phase === 'baseline' || phase === 'run' ? (
+        <div className="row">
+          <button className="btn-icon" onClick={onBack} aria-label="Egzersizden çık"><X size={20} aria-hidden="true" /></button>
+          <span className="eyebrow">Göz kırpma egzersizi</span>
+        </div>
+      ) : (
+        <PageHeader onBack={phase === 'intro' ? onBack : undefined} eyebrow="Göz konforu" title="Göz kırpma egzersizi" />
+      )}
 
       {phase === 'intro' && (
         <>

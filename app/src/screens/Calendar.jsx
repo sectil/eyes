@@ -31,7 +31,7 @@ export default function Calendar({ records, schedule, onEditSchedule }) {
           <div className="stack" style={{ gap: 4 }}>
             <h2>{week.met ? 'Haftalık hedefe ulaştın' : 'Bu hafta'}</h2>
             <p className="muted small">
-              {week.met ? 'Seri yok, baskı yok — her hafta yeniden başlar.' : 'Hedef haftada en az 3 gün. Bir günü kaçırmak sorun değil.'}
+              {week.met ? 'Seri yok, baskı yok — her hafta yeniden başlar.' : `Hedef haftada en az ${week.target} gün. Bir günü kaçırmak sorun değil.`}
             </p>
           </div>
         </div>
