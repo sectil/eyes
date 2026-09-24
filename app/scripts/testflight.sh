@@ -26,22 +26,22 @@ step "1/6 Kod güncelleniyor"
 git checkout -- ios/App/App.xcodeproj/project.pbxproj ios/App/App/Info.plist package-lock.json 2>/dev/null || true
 git pull --ff-only
 
-step "2/6 Paketler ve web derlemesi (test kilidi: $TEST_UNLOCK)"
-npm install --no-audit --no-fund
-if [ "$TEST_UNLOCK" = "1" ]; then
-  VITE_TEST_UNLOCK=1 npm run build
-else
-  npm run build
-fi
-
-step "3/6 iOS senkron"
-npx cap sync ios
-
-step "4/6 Build numarası"
+step "2/6 Build numarası"
 LAST=$(cat "$COUNTER_FILE" 2>/dev/null || echo 1)
 BUILD=$((LAST + 1))
 echo "$BUILD" > "$COUNTER_FILE"
 echo "Build: $BUILD"
+
+step "3/6 Paketler ve web derlemesi (test kilidi: $TEST_UNLOCK)"
+npm install --no-audit --no-fund
+if [ "$TEST_UNLOCK" = "1" ]; then
+  VITE_APP_BUILD="$BUILD" VITE_TEST_UNLOCK=1 npm run build
+else
+  VITE_APP_BUILD="$BUILD" npm run build
+fi
+
+step "4/6 iOS senkron"
+npx cap sync ios
 
 step "5/6 Arşiv (birkaç dakika sürer)"
 rm -rf "$BUILD_DIR"

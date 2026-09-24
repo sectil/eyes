@@ -48,3 +48,12 @@ export function resolveAutoCalibration(model, screenInfo, table) {
   const why = model && table[model] ? 'çözünürlük tabloyla uyuşmuyor' : 'model tabloda yok'
   return { cal: null, reason: `Otomatik ölçüm yapılamadı: ${why} (${model || 'model bilinmiyor'}, ekran ${res}, ölçek ${screenInfo.nativeScale})` }
 }
+
+// Son yedek (iPhone'da elle ayar ekranı hiç gösterilmez): tabloda eşleşme yoksa ekran ölçeğine
+// göre tipik iPhone yoğunluğu kullanılır. VARSAYIM: 2x ekranlar 326 ppi, 3x ekranlar 460 ppi
+// (tablodaki 3x modeller 458–476 ppi → hata en fazla ~%3,5; 2x modellerin hepsi 326).
+export function estimateCalibration(nativeScale) {
+  if (!(nativeScale > 0)) return null
+  const ppi = nativeScale >= 2.5 ? 460 : 326
+  return { pxPerMm: pxPerMmFromPpi(ppi, nativeScale), estimated: true }
+}

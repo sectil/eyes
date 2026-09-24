@@ -19,7 +19,7 @@ import Paywall from './screens/Paywall.jsx'
 import { getAccess } from './lib/subscription.js'
 import DistanceHud from './screens/DistanceHud.jsx'
 import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported } from './lib/native.js'
-import { resolveAutoCalibration } from './lib/screenScale.js'
+import { resolveAutoCalibration, estimateCalibration } from './lib/screenScale.js'
 import IPHONE_SCREENS from './lib/iphoneScreens.json'
 
 const TAB_SCREENS = ['home', 'progress', 'calendar', 'info']
@@ -79,6 +79,11 @@ export default function App() {
         const r = resolveAutoCalibration(model, screenInfo, IPHONE_SCREENS)
         auto = r.cal
         reason = r.reason
+        if (!auto) {
+          // iPhone'da elle ayar yok: ekran ölçeğinden tahmin (eklenti yanıt vermezse devicePixelRatio)
+          const est = estimateCalibration(screenInfo?.nativeScale ?? window.devicePixelRatio)
+          if (est) auto = { ...est, model, name: model || 'iPhone' }
+        }
         const current = store.get().settings.calibration
         // iPhone'da otomatik ölçü (üretici ekran verisi) elle yapılan ayardan daha doğrudur;
         // varsa her açılışta onu kullan (eski elle ayarın yerine geçer).
@@ -86,6 +91,8 @@ export default function App() {
           store.setSetting('calibration', {
             pxPerMm: auto.pxPerMm,
             method: 'auto',
+            estimated: Boolean(auto.estimated),
+            reason,
             model: auto.model,
             deviceName: auto.name,
             dpr: window.devicePixelRatio,
@@ -103,7 +110,10 @@ export default function App() {
   }, [])
 
   const { settings, tests, sessions } = data
-  const distanceCal = settings.distance?.irisPxAt40 || settings.distance?.method === 'truedepth' ? settings.distance : null
+  // iPhone'da TrueDepth varsa mesafe her zaman sensörden gelir (eski kamera kalibrasyonu yok sayılır).
+  const distanceCal = native.trueDepth
+    ? { method: 'truedepth' }
+    : settings.distance?.irisPxAt40 || settings.distance?.method === 'truedepth' ? settings.distance : null
   const setupTotal = native.autoScreen ? 2 : 3
 
   if (!native.checked) {
@@ -114,7 +124,7 @@ export default function App() {
   if (!settings.screening || settings.screening.referred) {
     return <Screening total={setupTotal} onDone={(s) => { store.setSetting('screening', s); refresh() }} />
   }
-  if (!calibrationStillValid(settings.calibration) || screen === 'recalibrate') {
+  if (!isIOSApp() && (!calibrationStillValid(settings.calibration) || screen === 'recalibrate')) {
     return (
       <CardCalibration
         initial={settings.calibration}
@@ -203,6 +213,8 @@ export default function App() {
     content = (
       <Info
         onGo={go}
+        iosApp={isIOSApp()}
+        calibration={settings.calibration}
         distanceSkipped={!distanceCal}
         exportJSON={store.exportJSON}
         onReset={() => { store.clearAll(); refresh(); go('home') }}

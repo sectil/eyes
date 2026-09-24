@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { pxPerMmFromPpi, resolutionMatches, autoCalibration, resolveAutoCalibration } from './screenScale.js'
+import { pxPerMmFromPpi, resolutionMatches, autoCalibration, resolveAutoCalibration, estimateCalibration } from './screenScale.js'
 
 // Test verisi (örnek; gerçek tablo iphoneScreens.json'dadır)
 const table = {
@@ -75,5 +75,16 @@ describe('resolveAutoCalibration', () => {
     const r = resolveAutoCalibration('Test1,1', { nativeScale: 3, nativeWidth: 999, nativeHeight: 1999 }, table)
     expect(r.cal).toBeNull()
     expect(r.reason).toMatch(/999×1999/)
+  })
+})
+
+describe('estimateCalibration', () => {
+  it('3x → 460 ppi, 2x → 326 ppi', () => {
+    expect(estimateCalibration(3).pxPerMm).toBeCloseTo(460 / 3 / 25.4, 9)
+    expect(estimateCalibration(2).pxPerMm).toBeCloseTo(326 / 2 / 25.4, 9)
+    expect(estimateCalibration(3).estimated).toBe(true)
+  })
+  it('geçersiz ölçek → null', () => {
+    expect(estimateCalibration(0)).toBeNull()
   })
 })

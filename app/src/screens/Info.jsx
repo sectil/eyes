@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { BookOpen, CreditCard, Camera, Bell, Download, Trash, ChevronRight, ShieldCheck } from 'lucide-react'
 import { PageHeader, ThemeSwitch } from '../components/ui.jsx'
 
-export default function Info({ onGo, onReset, exportJSON, distanceSkipped }) {
+export default function Info({ onGo, onReset, exportJSON, distanceSkipped, iosApp = false, calibration = null }) {
   const [confirm, setConfirm] = useState(false)
 
   function download() {
@@ -44,8 +44,13 @@ export default function Info({ onGo, onReset, exportJSON, distanceSkipped }) {
       <section className="stack">
         <span className="eyebrow">Ölçüm ayarları</span>
         <div className="list">
-          <Row Icon={CreditCard} label="Ekran kalibrasyonu" sub="Kartla yeniden ölç" onClick={() => onGo('recalibrate')} />
-          <Row Icon={Camera} label={distanceSkipped ? 'Mesafe takibini aç' : 'Mesafe kalibrasyonu'} sub="40 cm'yi yeniden öğret" onClick={() => onGo('recalibrate-distance')} />
+          {!iosApp && <Row Icon={CreditCard} label="Ekran kalibrasyonu" sub="Kartla yeniden ölç" onClick={() => onGo('recalibrate')} />}
+          <Row
+            Icon={Camera}
+            label={iosApp ? '40 cm mesafe' : distanceSkipped ? 'Mesafe takibini aç' : 'Mesafe kalibrasyonu'}
+            sub={iosApp ? 'Face ID kamerasıyla canlı göster' : "40 cm'yi yeniden öğret"}
+            onClick={() => onGo('recalibrate-distance')}
+          />
           <Row Icon={Bell} label="Çalışma günleri ve hatırlatma" onClick={() => onGo('schedule')} />
         </div>
       </section>
@@ -67,6 +72,10 @@ export default function Info({ onGo, onReset, exportJSON, distanceSkipped }) {
         )}
       </section>
 
+      <p className="muted small" style={{ textAlign: 'center' }}>
+        Sürüm {import.meta.env.VITE_APP_BUILD ? `1.0 (${import.meta.env.VITE_APP_BUILD})` : 'web'}
+        {iosApp && calibration?.method === 'auto' && ` · ekran: ${calibration.deviceName}${calibration.estimated ? ' (tahmini)' : ''}`}
+      </p>
       <p className="note">
         <ShieldCheck size={16} />
         Tıbbi bir karar vermeden önce göz doktoruna danış. Ani görme kaybı, perde inmesi, ışık çakmaları veya göz ağrısında vakit kaybetmeden başvur.
