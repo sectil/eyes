@@ -97,6 +97,16 @@ Xcode'da:
    *Internal Testing* grubuna kendini ekle → iPhone'una **TestFlight** uygulamasını kur → davet
    e-postasından yükle.
 
+### Abonelik kurulmadan test (VITE_TEST_UNLOCK)
+RevenueCat henüz yoksa uygulama ilk ölçümden sonra ödeme ekranında kilitli kalır. Yalnızca test
+derlemesi için kilidi kapatmak:
+```bash
+VITE_TEST_UNLOCK=1 npm run build
+npx cap sync ios
+```
+Sonra Archive → Upload. ⚠️ **App Store'a incelemeye gönderilecek derleme bu değişken olmadan**
+(`npm run build`) yapılmalı; aksi halde uygulama herkese ücretsiz açılır.
+
 ### TestFlight'ta satın alma
 - TestFlight'ta abonelik satın almaları **sandbox**'tır: gerçek para çekilmez; süreler
   hızlandırılmıştır (7 günlük deneme birkaç dakika sürebilir). ⚠️ Kesin hızlandırma oranları için

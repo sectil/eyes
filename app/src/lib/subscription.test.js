@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { plansFromOffering, hasPremium } from './subscription.js'
+import { plansFromOffering, hasPremium, testUnlock } from './subscription.js'
 
 const product = (price, priceString, intro, pricePerMonthString = null) => ({
   price,
@@ -39,5 +39,14 @@ describe('hasPremium', () => {
     expect(hasPremium({ entitlements: { active: { premium: {} } } })).toBe(true)
     expect(hasPremium({ entitlements: { active: {} } })).toBe(false)
     expect(hasPremium(null)).toBe(false)
+  })
+})
+
+describe('testUnlock', () => {
+  it('yalnızca VITE_TEST_UNLOCK=1 iken açık', () => {
+    expect(testUnlock({ VITE_TEST_UNLOCK: '1' })).toBe(true)
+    expect(testUnlock({})).toBe(false)
+    expect(testUnlock({ VITE_TEST_UNLOCK: '0' })).toBe(false)
+    expect(testUnlock({ VITE_TEST_UNLOCK: 'true' })).toBe(false)
   })
 })

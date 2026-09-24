@@ -39,9 +39,14 @@ export function hasPremium(customerInfo) {
   return Boolean(customerInfo?.entitlements?.active?.[ENTITLEMENT])
 }
 
+// Yalnızca test derlemesi (TestFlight / Xcode) için: VITE_TEST_UNLOCK=1 ile derlenirse
+// uygulama kilitsiz açılır. App Store'a gönderilecek derlemede bu değişken OLMAMALI.
+export const testUnlock = (env = import.meta.env) => env?.VITE_TEST_UNLOCK === '1'
+
 // Abonelik durumu. Web'de her zaman açık (ödeme yok).
 export async function getAccess() {
   if (!isNative()) return { premium: true, native: false }
+  if (testUnlock()) return { premium: true, native: true, testUnlock: true }
   const P = await purchases()
   const { customerInfo } = await P.getCustomerInfo()
   return { premium: hasPremium(customerInfo), native: true }
