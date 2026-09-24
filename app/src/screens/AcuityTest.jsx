@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowLeft, ArrowUp, ArrowDown, ArrowRight, Play, Check, Info } from 'lucide-react'
+import { ArrowLeft, ArrowUp, ArrowDown, ArrowRight, Play, Check, Info, X, EyeOff } from 'lucide-react'
+import { haptic } from '../lib/native.js'
 import TumblingE from '../components/TumblingE.jsx'
 import { PageHeader } from '../components/ui.jsx'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { distanceStatus, REFERENCE_MM } from '../lib/distance.js'
 import { logMARForHeight, renderSpec, smallestDrawableLogMAR, snellen20 } from '../lib/optotype.js'
-import { createZest, randomDirection, PLANS } from '../lib/zest.js'
+import { createZest, randomDirection, shouldStop, PLANS } from '../lib/zest.js'
 
 const EYES = [
   { id: 'R', title: 'Sağ göz', cover: 'Sol gözünü avucunla hafifçe kapat (bastırmadan).' },
@@ -13,6 +14,10 @@ const EYES = [
   { id: 'OU', title: 'İki göz', cover: 'İki gözün de açık.' },
 ]
 const WARMUP_LOGMAR = 0.9
+// Canlı ölçek: harf, ölçülen mesafeye göre her karede yeniden boyutlanır (gözde sabit açı).
+// Bu aralığın dışında ekran çözünürlüğü/kamera güvenilirliği yetmez → duraklat.
+const LIVE_MIN_MM = 250
+const LIVE_MAX_MM = 600
 const SWIPE_MIN_PX = 30
 
 function swipeDirection(dx, dy) {
@@ -22,7 +27,8 @@ function swipeDirection(dx, dy) {
 }
 
 export default function AcuityTest({ plan = 'daily', calibration, distanceCal, onFinish, onCancel }) {
-  const { warmup, trials } = PLANS[plan]
+  const planSpec = PLANS[plan]
+  const { warmup, trials } = planSpec
   const pxPerMm = calibration.pxPerMm
   const dpr = calibration.dpr
   const tracked = Boolean(distanceCal)
@@ -40,13 +46,16 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, o
   const cam = useFaceTracking({ enabled: tracked, distanceCal })
   const liveMm = tracked ? cam.mm : null
   const status = tracked ? distanceStatus(liveMm) : 'ok'
-  const paused = tracked && phase === 'trial' && status !== 'ok'
+  // Mesafe canlı ölçülüyorsa 40 cm'ye kilitlenmez: harf ölçülen mesafeye göre ölçeklenir.
+  const liveOk = !tracked || (liveMm != null && liveMm >= LIVE_MIN_MM && liveMm <= LIVE_MAX_MM)
+  const paused = tracked && phase === 'trial' && !liveOk
+  const renderMm = tracked && liveOk ? liveMm : REFERENCE_MM
 
   const eye = EYES[eyeIdx]
   const isWarmup = trialNo < warmup
   const minX = Math.max(-0.3, smallestDrawableLogMAR(REFERENCE_MM, pxPerMm, dpr) + 0.02)
   const target = isWarmup ? WARMUP_LOGMAR : zest.current?.next() ?? 0.5
-  const spec = renderSpec(target, REFERENCE_MM, pxPerMm, dpr)
+  const spec = renderSpec(target, renderMm, pxPerMm, dpr)
 
   function startEye() {
     zest.current = createZest({ minX, maxX: 1.3 })
@@ -56,10 +65,12 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, o
     setPhase('trial')
   }
 
+  // choice: yön veya null ("Göremiyorum" → yanlış sayılır, rastgele tahmine zorlamaz)
   function answer(choice) {
     if (phase !== 'trial' || paused || feedback) return
     const correct = choice === dir
-    const mm = liveMm ?? REFERENCE_MM
+    const mm = renderMm
+    haptic('tick')
     if (!isWarmup) {
       // Gerçekte gösterilen boyut ve gerçek mesafe ile logMAR
       const heightMm = spec.heightCssPx / pxPerMm
@@ -71,7 +82,8 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, o
     setTimeout(() => {
       setFeedback(null)
       const next = trialNo + 1
-      if (next >= warmup + trials) {
+      const est = !isWarmup && zest.current ? zest.current.estimate() : null
+      if (next >= warmup + trials || (est && shouldStop(est, planSpec))) {
         finishEye()
       } else {
         setTrialNo(next)
@@ -94,6 +106,7 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, o
       meanDistanceMm: d.length ? Math.round(d.reduce((a, b) => a + b, 0) / d.length) : null,
       device: { pxPerMm, dpr, screenW: window.screen.width, screenH: window.screen.height },
     })
+    haptic('success')
     setPhase('eye-done')
   }
 
@@ -138,10 +151,10 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, o
           />
           <div className="card">
             <ol className="steps">
-              <li>Telefonu gözlerinden <strong>40 cm</strong> uzakta tut.</li>
+              <li>{tracked ? <>Telefonu rahat bir mesafede tut; harf boyutu ölçülen mesafeye göre <strong>kendiliğinden ayarlanır</strong>.</> : <>Telefonu gözlerinden <strong>40 cm</strong> uzakta tut.</>}</li>
               <li>Ekran parlaklığını en yükseğe al; iyi aydınlatılmış bir yerde ol.</li>
               <li>E'nin açık tarafı hangi yöne bakıyorsa <strong>o yöne kaydır</strong> (veya oka dokun).</li>
-              <li>Emin değilsen de tahmin et — test bunu hesaba katar.</li>
+              <li>Emin değilsen tahmin et; hiç seçemiyorsan "Göremiyorum"a bas. Sonuç netleşince test kendiliğinden biter.</li>
               <li>İlk {warmup} harf alıştırma, sayılmaz.</li>
             </ol>
           </div>
@@ -163,11 +176,12 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, o
         >
           <div className="progress-track"><i style={{ width: `${(trialNo / (warmup + trials)) * 100}%` }} /></div>
           <div className="stimulus-top">
+            <button className="btn-icon" onClick={onCancel} aria-label="Testten çık"><X size={20} /></button>
             <span>{eye.title} · {isWarmup ? 'alıştırma' : `${trialNo - warmup + 1}/${trials}`}</span>
             {distanceChip}
           </div>
           {paused ? (
-            <p className="paused">Telefonu 40 cm'ye getir</p>
+            <p className="paused">{liveMm == null ? 'Yüzün görünmüyor' : `Telefonu ${LIVE_MIN_MM / 10}–${LIVE_MAX_MM / 10} cm arasında tut`}</p>
           ) : spec.drawable && !feedback ? (
             <TumblingE unit={spec.unitCssPx} direction={dir} />
           ) : null}
@@ -177,6 +191,11 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, o
               <button key={d} className="arrow" onClick={() => answer(d)} aria-label={label}><Icon size={24} /></button>
             ))}
           </div>
+          {!isWarmup && (
+            <button className="link-btn cant-see" onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()} onClick={() => answer(null)}>
+              <EyeOff size={16} aria-hidden="true" /> Göremiyorum
+            </button>
+          )}
         </div>
       )}
 

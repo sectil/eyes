@@ -68,6 +68,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Okuma testinde cümleyi sesli okuduğunu doğrulamak için mikrofon kullanılır. Ses kaydedilmez, saklanmaz.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Okuma testinde okuduğun cümlenin ekrandakiyle eşleştiğini kontrol etmek için konuşma tanıma kullanılır.</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 </dict>

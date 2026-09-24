@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { gazeVector, gazeDirection, eyeClosure, createBlinkCounter, createHoldTimer, createCircleTracker, quadrantOf } from './gaze.js'
+import { gazeVector, gazeDirection, eyeClosure, createBlinkCounter, createHoldTimer, createCircleTracker, quadrantOf, focusZone, focusDistance, createNearFarCounter } from './gaze.js'
 
 const look = (o) => ({ lookUpLeft: 0, lookUpRight: 0, lookDownLeft: 0, lookDownRight: 0, lookInLeft: 0, lookInRight: 0, lookOutLeft: 0, lookOutRight: 0, ...o })
 const RIGHT = look({ lookInLeft: 0.7, lookOutRight: 0.7 })
@@ -85,5 +85,40 @@ describe('createCircleTracker', () => {
     const c = createCircleTracker('ccw')
     ;['up', 'left', 'down', 'right', 'up', 'left', 'down', 'right', 'up'].forEach((q) => c.push(V[q]))
     expect(c.state.laps).toBe(2)
+  })
+})
+
+describe('focusZone / focusDistance', () => {
+  it('konverjans yakın → near', () => {
+    expect(focusZone({ vergenceMm: 200, focusMm: 250 })).toBe('near')
+  })
+  it('paralel bakış (vergence null) → far', () => {
+    expect(focusZone({ vergenceMm: null, focusMm: 1500 })).toBe('far')
+    expect(focusZone({ vergenceMm: null, focusMm: 0 })).toBe('far')
+  })
+  it('arada → mid; veri yok → null', () => {
+    expect(focusZone({ vergenceMm: 450, focusMm: 500 })).toBe('mid')
+    expect(focusZone({ vergenceMm: 0, focusMm: 0 })).toBeNull()
+  })
+  it('iki kaynaktan küçük olan', () => {
+    expect(focusDistance({ vergenceMm: 900, focusMm: 250 })).toBe(250)
+  })
+})
+
+describe('createNearFarCounter', () => {
+  it('yakın ↔ uzak geçişleri sayar, kısa titremeleri saymaz', () => {
+    const c = createNearFarCounter({ minHoldMs: 700 })
+    const seq = [['near', 0], ['near', 800], ['far', 900], ['near', 1000], ['far', 1100], ['far', 1900], ['near', 2000], ['near', 2800]]
+    let st
+    for (const [z, t] of seq) st = c.push(z, t)
+    expect(st.switches).toBe(2)
+    expect(st.zone).toBe('near')
+  })
+  it('mid bölgesi yok sayılır', () => {
+    const c = createNearFarCounter()
+    c.push('near', 0)
+    c.push('mid', 500)
+    c.push('near', 800)
+    expect(c.state.zone).toBe('near')
   })
 })

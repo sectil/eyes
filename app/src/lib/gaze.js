@@ -119,3 +119,53 @@ export function createCircleTracker(dir) {
     },
   }
 }
+
+// --- Odak mesafesi (TrueDepth: focusMm = lookAtPoint, vergenceMm = konverjans) ---
+// VARSAYIM: 1 m ötesinde tahmin kabalaşır; "uzak" eşiği 800 mm, "yakın" (başparmak) 300 mm.
+// Eşikler ilk sürüm içindir, cihazda ayarlanacak.
+export const NEAR_MM = 300
+export const FAR_MM = 800
+
+export function focusDistance(f) {
+  const a = f.vergenceMm
+  const b = f.focusMm
+  if (a > 0 && b > 0) return Math.min(a, b) // ikisi de yakın diyorsa yakın; biri uzak diyorsa temkinli
+  if (a > 0) return a
+  if (b > 0) return b
+  return null
+}
+
+// 'near' | 'far' | 'mid' | null (veri yok). vergenceMm null (paralel) → far.
+export function focusZone(f) {
+  if (f.vergenceMm === null && !(f.focusMm > 0)) return 'far'
+  const d = focusDistance(f)
+  if (d == null) return null
+  if (d <= NEAR_MM) return 'near'
+  if (d >= FAR_MM || f.vergenceMm === null) return 'far'
+  return 'mid'
+}
+
+// Yakın–uzak geçiş sayacı: 'near' ve 'far' arasında her geçiş bir sayım; aynı bölgede kalmak saymaz.
+// minHoldMs: bölge en az bu kadar tutulmalı (gürültü). Döner { switches, zone }
+export function createNearFarCounter({ minHoldMs = 700 } = {}) {
+  let zone = null
+  let since = 0
+  let stable = null
+  let switches = 0
+  return {
+    push(z, ts) {
+      if (z !== 'near' && z !== 'far') return this.state
+      if (z !== zone) {
+        zone = z
+        since = ts
+      } else if (ts - since >= minHoldMs && stable !== z) {
+        if (stable != null) switches += 1
+        stable = z
+      }
+      return this.state
+    },
+    get state() {
+      return { switches, zone: stable }
+    },
+  }
+}

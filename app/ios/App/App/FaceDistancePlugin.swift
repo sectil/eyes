@@ -85,9 +85,27 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
             return face.blendShapes[key]?.doubleValue ?? 0
         }
 
+        // Odak mesafesi (mm): gözlerin baktığı noktanın (lookAtPoint, yüz koordinatları) iki göz
+        // ortasına uzaklığı. Yakına bakınca küçük, uzağa bakınca büyük.
+        let eyeMidLocal = (position(face.leftEyeTransform) + position(face.rightEyeTransform)) / 2
+        let focusMm = Double(simd_distance(face.lookAtPoint, eyeMidLocal)) * 1000.0
+        // Konverjans mesafesi (mm): iki gözün bakış doğrultuları arasındaki açıdan.
+        // Doğrultular paralele yakınsa (< 0,5°) uzak → nil.
+        let ipd = simd_distance(position(face.leftEyeTransform), position(face.rightEyeTransform))
+        let dirL = -simd_normalize(simd_float3(face.leftEyeTransform.columns.2.x, face.leftEyeTransform.columns.2.y, face.leftEyeTransform.columns.2.z))
+        let dirR = -simd_normalize(simd_float3(face.rightEyeTransform.columns.2.x, face.rightEyeTransform.columns.2.y, face.rightEyeTransform.columns.2.z))
+        let cosA = max(-1, min(1, simd_dot(dirL, dirR)))
+        let angle = acos(cosA)
+        var vergence: Any = NSNull()
+        if angle > 0.5 * Float.pi / 180 {
+            vergence = Double((ipd / 2) / tan(angle / 2)) * 1000.0
+        }
+
         notifyListeners("face", data: [
             "tracked": face.isTracked,
             "distanceMm": Double(distanceM) * 1000.0,
+            "focusMm": focusMm,
+            "vergenceMm": vergence,
             "blinkLeft": shape(.eyeBlinkLeft),
             "blinkRight": shape(.eyeBlinkRight),
             // Bakış yönü (0–1). In: burna doğru, Out: şakağa doğru.

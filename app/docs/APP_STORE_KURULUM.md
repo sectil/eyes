@@ -134,11 +134,21 @@ Sonra Archive → Upload. ⚠️ **App Store'a incelemeye gönderilecek derleme 
   yönü doğru tarafa gidiyor mu (sağa bakınca nokta sağa)? Daire adımında turlar sayılıyor mu?
   "Gözlerini kapat" adımında süre yalnızca gözler kapalıyken ilerliyor mu? Yüzünü kameradan
   çekince "Yüzün görünmüyor — süreyle devam ediyor" yazıyor mu?
+- [ ] **Uzağa bak / Yakın–uzak:** Uzağa bak adımında süre yalnızca uzaktaki bir noktaya odaklanınca
+  işliyor mu? Yakın–uzak adımında başparmak↔uzak geçişleri "1/6, 2/6…" sayılıyor mu? (Eşikler
+  VARSAYIM; yanlış sayıyorsa hangi durumda saydığını/saymadığını yaz.)
+- [ ] **Titreşim:** Her kırpmada hafif, her daire turunda orta, adım bitince başarı titreşimi var mı?
+- [ ] **E testi:** Sağ üstteki ✕ ile çıkılabiliyor mu? Telefonu 25–60 cm arasında ileri-geri
+  oynatınca harf boyutu anlık değişiyor mu (gözde aynı büyüklükte kalmalı)? "Göremiyorum" çalışıyor
+  mu? Sonuç netleşince test 20 denemeden önce bitiyor mu?
+- [ ] **Okuma testi (sesli):** İlk "Başla"da mikrofon + konuşma tanıma izni soruyor mu? Cümleyi sesli
+  okuyunca "Dinliyorum" altında duyulan metin görünüyor ve doğru okuyunca kendiliğinden sıradakine
+  geçiyor mu? "Okudum" düğmesi yedek olarak çalışıyor mu? ✕ ile çıkılabiliyor mu?
 
 ### Yerel Swift eklentisi (FaceDistancePlugin)
 
 - `ios/App/App/FaceDistancePlugin.swift` (TrueDepth + ARKit) ve `MainViewController.swift`
-  (eklentiyi kaydeder) projeye eklidir; `Main.storyboard` bu denetleyiciyi kullanır.
+  (eklentileri kaydeder) ve `SpeechPlugin.swift` (konuşma tanıma) projeye eklidir; `Main.storyboard` bu denetleyiciyi kullanır.
 - Bu dosyalar Linux ortamında yazıldı, **Xcode'da ilk kez derlenecek**. Derleme hatası çıkarsa
   hata metnini gönder.
 - TrueDepth **Simülatör'de çalışmaz**; gerçek Face ID'li iPhone gerekir.

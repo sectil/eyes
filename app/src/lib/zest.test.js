@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { createZest, pCorrect, randomDirection, DIRECTIONS, GUESS } from './zest.js'
+import { shouldStop } from './zest.js'
 
 // Tekrarlanabilir rastgele sayı üreteci (mulberry32)
 function rng(seed) {
@@ -100,5 +101,30 @@ describe('randomDirection', () => {
     const seen = new Set()
     for (let i = 0; i < 100; i++) seen.add(randomDirection(r))
     expect([...seen].sort()).toEqual([...DIRECTIONS].sort())
+  })
+})
+
+describe('shouldStop', () => {
+  const plan = { trials: 20, minTrials: 10, stopSd: 0.1 }
+  it('minTrials altında durmaz', () => {
+    expect(shouldStop({ trials: 9, sd: 0.05 }, plan)).toBe(false)
+  })
+  it('belirsizlik küçülünce durur', () => {
+    expect(shouldStop({ trials: 10, sd: 0.1 }, plan)).toBe(true)
+    expect(shouldStop({ trials: 12, sd: 0.2 }, plan)).toBe(false)
+  })
+  it('en geç trials\'ta durur', () => {
+    expect(shouldStop({ trials: 20, sd: 0.5 }, plan)).toBe(true)
+  })
+  it('tutarlı cevaplarla ZEST 20 denemeden önce yakınsar', () => {
+    const z = createZest()
+    let n = 0
+    while (!shouldStop({ trials: n, sd: z.estimate().sd }, plan)) {
+      const x = z.next()
+      z.update(x, x >= 0.3) // eşik 0,3: üstü hep doğru, altı hep yanlış
+      n += 1
+    }
+    expect(n).toBeLessThan(20)
+    expect(z.estimate().logMAR).toBeCloseTo(0.3, 0)
   })
 })

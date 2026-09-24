@@ -122,3 +122,36 @@ export function measureXHeightRatio(fontFamily) {
     return 0.52
   }
 }
+
+// Sesli okuma eşleşmesi: tanınan metindeki kelimelerin cümledeki kelimelerle örtüşme oranı (0–1).
+// Türkçe büyük/küçük harf ve noktalama normalize edilir; kelime sırası aranmaz (tanıma bazen
+// kelimeleri birleştirir/böler). VARSAYIM: ≥ 0,7 "okudu" sayılır.
+export const MATCH_THRESHOLD = 0.7
+
+export function normalizeTr(text) {
+  return (text || '')
+    .replace(/İ/g, 'i')
+    .replace(/I/g, 'ı')
+    .toLocaleLowerCase('tr')
+    .replace(/[^a-zçğıöşü\s]/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean)
+}
+
+export function matchRatio(sentence, heard) {
+  const target = normalizeTr(sentence)
+  if (!target.length) return 0
+  const pool = normalizeTr(heard)
+  const joined = pool.join('')
+  let hit = 0
+  for (const w of target) {
+    const i = pool.indexOf(w)
+    if (i >= 0) {
+      pool.splice(i, 1)
+      hit += 1
+    } else if (w.length >= 4 && joined.includes(w)) {
+      hit += 1 // birleşik/bölünmüş tanıma
+    }
+  }
+  return hit / target.length
+}

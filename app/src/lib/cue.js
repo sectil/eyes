@@ -1,6 +1,8 @@
 // Gözler kapalıyken yönlendirme: Türkçe sesli okuma varsa onu, yoksa ton kullanır.
 // Ton kuralı: kapatma adımları kalın (330 Hz), açma adımları ince (880 Hz).
 
+import { haptic } from './native.js'
+
 let audioCtx = null
 
 function tone(freq, ms = 180) {
@@ -38,11 +40,7 @@ export function unlockAudio() {
 }
 
 export function cue(text, closed) {
-  try {
-    navigator.vibrate?.(closed ? [80] : [40, 60, 40])
-  } catch {
-    // yoksay
-  }
+  haptic(closed ? 'warning' : 'success')
   if (turkishVoiceAvailable()) {
     try {
       window.speechSynthesis.cancel()

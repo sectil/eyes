@@ -469,3 +469,13 @@ details > summary::-webkit-details-marker { display: none; }
 .hud-target { font-size: 0.8rem; color: var(--ink-3); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
 .hud-msg { text-align: center; font-size: 1.15rem; font-weight: 650; min-height: 1.6em; }
 .hud.ok ~ .hud-msg { color: var(--ok); }
+
+/* ---------- Test ekranı ek ---------- */
+.cant-see { align-self: center; display: inline-flex; align-items: center; gap: 6px; color: var(--ink-3); margin-top: 6px; }
+.stimulus-top .btn-icon { width: 40px; height: 40px; }
+.reading-mic { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-3); font-size: 0.9rem; }
+.reading-mic.on { color: var(--accent); }
+.reading-mic .pulse { width: 10px; height: 10px; border-radius: 50%; background: currentColor; animation: pulse 1s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { transform: scale(0.8); opacity: 0.6; } 50% { transform: scale(1.2); opacity: 1; } }
+.reading-heard { color: var(--ink-3); font-size: 0.95rem; min-height: 1.4em; text-align: center; }
+.reading-heard .hit { color: var(--ok); }

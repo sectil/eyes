@@ -4,7 +4,7 @@
 // kind 'relax'    : rahatlama hareketi; görmeyi iyileştirdiğine dair kanıt YOK, iddia yok.
 // Kaynaklar: docs/arastirma/SENTEZ_RAPORU.md §2, §12, §14.
 // iPhone'da (TrueDepth) bakış, daire, kırpma ve göz kapalı adımları kamerayla takip edilir:
-// blinks = hedef kırpma sayısı, laps = hedef tur. VARSAYIM: 5 kırpma ≈ 20 sn ritim (4 sn/kırpma),
+// blinks = hedef kırpma sayısı, laps = hedef tur, switches = yakın↔uzak geçiş (odak mesafesinden). VARSAYIM: 5 kırpma ≈ 20 sn ritim (4 sn/kırpma),
 // 2 tur ≈ 10 sn. Takip yoksa (yüz görünmüyor / TrueDepth yok) adım seconds kadar süreyle ilerler.
 
 export const EXERCISES = {
@@ -14,8 +14,8 @@ export const EXERCISES = {
   lookDown: { title: 'Aşağı bak', sub: 'Başını çevirmeden', seconds: 5, visual: 'arrow', dir: 'down', kind: 'relax' },
   circleCw: { title: 'Gözlerini saat yönünde çevir', sub: 'Havada yavaşça bir daire çiz', seconds: 10, visual: 'circle', dir: 'cw', kind: 'relax', laps: 2 },
   circleCcw: { title: 'Şimdi ters yöne çevir', sub: 'Yavaş ve rahat', seconds: 10, visual: 'circle', dir: 'ccw', kind: 'relax', laps: 2 },
-  farLook: { title: 'Uzağa bak', sub: 'Pencereden 6 metreden uzak bir noktaya', seconds: 20, visual: 'far', kind: 'comfort' },
-  nearFar: { title: 'Yakın – uzak', sub: 'Başparmağına 3 sn, uzağa 3 sn; tekrarla', seconds: 18, visual: 'nearfar', kind: 'comfort' },
+  farLook: { title: 'Uzağa bak', sub: 'Pencereden 6 metreden uzak bir noktaya', seconds: 20, visual: 'far', kind: 'comfort' }, // sensör: gözler uzağa odaklıyken süre işler
+  nearFar: { title: 'Yakın – uzak', sub: 'Başparmağına 3 sn, uzağa 3 sn; tekrarla', seconds: 18, visual: 'nearfar', kind: 'comfort', switches: 6 }, // sensör: yakın↔uzak geçiş sayısı
   blink: { title: 'Tam göz kırp', sub: 'Kapat · hafifçe sık · aç — ritimle', seconds: 20, visual: 'blink', kind: 'evidence', closed: true, blinks: 5 },
   rest: { title: 'Gözlerini kapat', sub: 'Avuçlarını hafifçe üstüne koyabilirsin', seconds: 10, visual: 'rest', kind: 'relax', closed: true },
 }

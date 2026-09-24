@@ -82,7 +82,15 @@ export function randomDirection(rng = Math.random) {
 }
 
 // Test planları (bkz. SENTEZ_RAPORU.md §10)
+// Durma kuralı: en az minTrials, sonra tahminin belirsizliği (posterior SD) stopSd'nin altına
+// inince durur; en geç trials'ta biter. Kaynak: 18 deneme ≈ ±0,2, 24 ≈ ±0,1 logMAR
+// (13_gunluk_takip.md §4.2). VARSAYIM: stopSd değerleri.
 export const PLANS = {
-  daily: { warmup: 3, trials: 20 },
-  weekly: { warmup: 3, trials: 36 },
+  daily: { warmup: 3, trials: 20, minTrials: 10, stopSd: 0.1 },
+  weekly: { warmup: 3, trials: 36, minTrials: 18, stopSd: 0.07 },
+}
+
+export function shouldStop(estimate, plan) {
+  if (estimate.trials >= plan.trials) return true
+  return estimate.trials >= plan.minTrials && estimate.sd <= plan.stopSd
 }

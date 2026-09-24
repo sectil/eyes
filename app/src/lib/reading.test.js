@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { SENTENCES, pickSentences, wordsPerMinute, analyzeReading, fontSizeCssPx } from './reading.js'
+import { matchRatio, normalizeTr } from './reading.js'
 
 describe('SENTENCES', () => {
   it('en az 40 cümle', () => {
@@ -65,5 +66,24 @@ describe('fontSizeCssPx', () => {
   it('logMAR 0 @ 40 cm, oran 0.5 → x-yüksekliği 0.582 mm', () => {
     const px = fontSizeCssPx(0, 400, 10, 0.5)
     expect((px * 0.5) / 10).toBeCloseTo(0.5818, 3)
+  })
+})
+
+describe('matchRatio (sesli okuma)', () => {
+  const S = 'annem her sabah bahçedeki çiçekleri sulamayı hiç unutmaz'
+  it('birebir okuma → 1', () => {
+    expect(matchRatio(S, 'Annem her sabah bahçedeki çiçekleri sulamayı hiç unutmaz.')).toBe(1)
+  })
+  it('eksik/yanlış kelimeler oranı düşürür', () => {
+    expect(matchRatio(S, 'annem her sabah çiçekleri unutmaz')).toBeCloseTo(5 / 8, 5)
+  })
+  it('alakasız konuşma → düşük', () => {
+    expect(matchRatio(S, 'bugün hava çok güzel')).toBeLessThan(0.2)
+  })
+  it('Türkçe büyük İ/I doğru küçülür', () => {
+    expect(normalizeTr('İstanbul IŞIK')).toEqual(['istanbul', 'ışık'])
+  })
+  it('boş → 0', () => {
+    expect(matchRatio(S, '')).toBe(0)
   })
 })

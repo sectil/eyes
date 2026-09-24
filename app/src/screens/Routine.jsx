@@ -4,7 +4,8 @@ import { Ring } from '../components/ui.jsx'
 import { EXERCISES, DAILY_GOAL_MIN, formatMin, setDurationSec } from '../lib/routines.js'
 import { cue, unlockAudio } from '../lib/cue.js'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
-import { eyeClosure, gazeVector, gazeDirection, createBlinkCounter, createHoldTimer, createCircleTracker, BLINK_CLOSE } from '../lib/gaze.js'
+import { eyeClosure, gazeVector, gazeDirection, createBlinkCounter, createHoldTimer, createCircleTracker, createNearFarCounter, focusZone, BLINK_CLOSE } from '../lib/gaze.js'
+import { haptic } from '../lib/native.js'
 
 const ARROWS = { right: ArrowRight, left: ArrowLeft, up: ArrowUp, down: ArrowDown }
 const DIR_WORD = { right: 'sağa', left: 'sola', up: 'yukarı', down: 'aşağı' }
@@ -15,7 +16,7 @@ const KIND_LABEL = {
 }
 // Kamerayla takip edilen adımlar (görsel türüne göre). Diğerleri (uzak/yakın bakış) süreyle ilerler:
 // kamera gözün nereye odaklandığını ölçemez.
-const SENSOR_BY_VISUAL = { blink: 'blinks', arrow: 'hold', circle: 'laps', rest: 'closed' }
+const SENSOR_BY_VISUAL = { blink: 'blinks', arrow: 'hold', circle: 'laps', rest: 'closed', far: 'far', nearfar: 'switches' }
 const FACE_LOST_MS = 1500
 
 function Visual({ ex, tick }) {
@@ -66,7 +67,7 @@ function GazeDot({ gaze, ok }) {
 }
 
 function newTrackers(ex) {
-  return { blink: createBlinkCounter(), hold: createHoldTimer(), circle: createCircleTracker(ex?.dir) }
+  return { blink: createBlinkCounter(), hold: createHoldTimer(), circle: createCircleTracker(ex?.dir), nearFar: createNearFarCounter(), last: { value: 0, ok: false, wrongWay: false } }
 }
 
 export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = false }) {
@@ -116,7 +117,21 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
     } else if (kind === 'closed') {
       ok = !open
       value = t.hold.push(ok, m.ts) / 1000
+    } else if (kind === 'far') {
+      ok = open && focusZone(m) === 'far'
+      value = t.hold.push(ok, m.ts) / 1000
+    } else if (kind === 'switches') {
+      const st = t.nearFar.push(open ? focusZone(m) : null, m.ts)
+      value = st.switches
+      ok = st.zone != null
     }
+    // Titreşim: sayım artınca / doğru duruma girince / ters yön uyarısı
+    const L = t.last
+    if ((kind === 'blinks' || kind === 'switches') && value > L.value) haptic('tick')
+    else if (kind === 'laps' && Math.floor(value) > Math.floor(L.value)) haptic('hit')
+    else if ((kind === 'hold' || kind === 'closed' || kind === 'far') && ok && !L.ok) haptic('tick')
+    if (wrongWay && !L.wrongWay) haptic('warning')
+    t.last = { value, ok, wrongWay }
     if (m.ts - lastUi.current > 90 || value >= goalOf(cur, kind)) {
       lastUi.current = m.ts
       setLive({ value, ok, wrongWay, gaze })
@@ -161,6 +176,11 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
       setDone(true)
     }
   }
+
+  // Sensörle tamamlanan adımda başarı titreşimi
+  useEffect(() => {
+    if (sensorDone) haptic('success')
+  }, [sensorDone])
 
   useEffect(() => {
     unlockAudio()
@@ -208,6 +228,12 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
     } else if (sensor === 'closed') {
       count = Math.max(0, Math.ceil(goal - live.value))
       hint = live.ok ? 'Gözlerin kapalı, bitince sesle haber vereceğim' : 'Gözlerini kapat'
+    } else if (sensor === 'far') {
+      count = Math.max(0, Math.ceil(goal - live.value))
+      hint = live.ok ? 'Gözlerin uzağa odaklı, böyle kal' : 'Uzaktaki bir noktaya odaklan'
+    } else if (sensor === 'switches') {
+      count = `${Math.min(live.value, goal)}/${goal}`
+      hint = live.value === 0 ? 'Önce başparmağına, sonra uzağa bak' : 'Geçişleri sayıyorum'
     }
   }
 
@@ -248,5 +274,6 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
 function goalOf(ex, sensor) {
   if (sensor === 'blinks') return ex.blinks ?? 5
   if (sensor === 'laps') return ex.laps ?? 2
+  if (sensor === 'switches') return ex.switches ?? 6
   return ex.seconds
 }
