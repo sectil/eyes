@@ -19,7 +19,7 @@ import Paywall from './screens/Paywall.jsx'
 import { getAccess } from './lib/subscription.js'
 import DistanceHud from './screens/DistanceHud.jsx'
 import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported } from './lib/native.js'
-import { autoCalibration } from './lib/screenScale.js'
+import { resolveAutoCalibration } from './lib/screenScale.js'
 import IPHONE_SCREENS from './lib/iphoneScreens.json'
 
 const TAB_SCREENS = ['home', 'progress', 'calendar', 'info']
@@ -62,11 +62,27 @@ export default function App() {
       } catch {
         trueDepth = false
       }
+      let reason = null
       try {
-        const [model, screenInfo] = await Promise.all([getDeviceModel(), getScreenInfo()])
-        auto = autoCalibration(model, screenInfo, IPHONE_SCREENS)
+        let model = null
+        let screenInfo = null
+        try {
+          model = await getDeviceModel()
+        } catch {
+          model = null
+        }
+        try {
+          screenInfo = await getScreenInfo()
+        } catch {
+          screenInfo = null
+        }
+        const r = resolveAutoCalibration(model, screenInfo, IPHONE_SCREENS)
+        auto = r.cal
+        reason = r.reason
         const current = store.get().settings.calibration
-        if (auto && (!calibrationStillValid(current) || current?.method === 'auto')) {
+        // iPhone'da otomatik ölçü (üretici ekran verisi) elle yapılan ayardan daha doğrudur;
+        // varsa her açılışta onu kullan (eski elle ayarın yerine geçer).
+        if (auto && !(current?.method === 'auto' && calibrationStillValid(current) && current.pxPerMm === auto.pxPerMm)) {
           store.setSetting('calibration', {
             pxPerMm: auto.pxPerMm,
             method: 'auto',
@@ -81,7 +97,7 @@ export default function App() {
       } catch {
         auto = null
       }
-      setNative({ checked: true, trueDepth, autoScreen: Boolean(auto) })
+      setNative({ checked: true, trueDepth, autoScreen: Boolean(auto), autoReason: reason })
       refresh()
     })()
   }, [])
@@ -103,6 +119,7 @@ export default function App() {
       <CardCalibration
         initial={settings.calibration}
         changed={Boolean(settings.calibration) && screen !== 'recalibrate'}
+        autoReason={native.autoReason}
         onDone={(c) => { store.setSetting('calibration', c); refresh(); go(lastTab) }}
       />
     )
@@ -165,6 +182,7 @@ export default function App() {
           key={screen}
           set={set}
           todaySec={todaySeconds(sessions)}
+          trueDepth={native.trueDepth}
           onBack={back}
           onFinish={(s) => { store.addSession(s); refresh(); go('home') }}
         />

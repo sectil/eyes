@@ -29,3 +29,22 @@ export function autoCalibration(model, screenInfo, table) {
   if (!pxPerMm) return null
   return { pxPerMm, model, name: entry.name }
 }
+
+// Model eşleşmezse yedek: cihazın fiziksel çözünürlüğü tablodaki modellerle eşleşiyor ve
+// hepsi aynı ppi'yi paylaşıyorsa o ppi kullanılır (ör. tabloya henüz eklenmemiş yeni model).
+// VARSAYIM: aynı piksel çözünürlüğünde farklı ppi'li iki iPhone çıkarsa yedek devre dışı kalır.
+// Döner: { cal, reason } — cal null ise reason kullanıcıya/geliştiriciye gösterilecek açıklamadır.
+export function resolveAutoCalibration(model, screenInfo, table) {
+  if (!screenInfo) return { cal: null, reason: 'Ekran bilgisi alınamadı (yerel eklenti yanıt vermedi)' }
+  const byModel = autoCalibration(model, screenInfo, table)
+  if (byModel) return { cal: byModel, reason: null }
+  const matches = Object.values(table).filter((e) => resolutionMatches(e.px, screenInfo))
+  const ppis = new Set(matches.map((e) => e.ppi))
+  if (matches.length > 0 && ppis.size === 1) {
+    const pxPerMm = pxPerMmFromPpi(matches[0].ppi, screenInfo.nativeScale)
+    if (pxPerMm) return { cal: { pxPerMm, model, name: model || 'iPhone', byResolution: true }, reason: null }
+  }
+  const res = `${Math.round(screenInfo.nativeWidth)}×${Math.round(screenInfo.nativeHeight)}`
+  const why = model && table[model] ? 'çözünürlük tabloyla uyuşmuyor' : 'model tabloda yok'
+  return { cal: null, reason: `Otomatik ölçüm yapılamadı: ${why} (${model || 'model bilinmiyor'}, ekran ${res}, ölçek ${screenInfo.nativeScale})` }
+}

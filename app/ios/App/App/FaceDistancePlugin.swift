@@ -7,7 +7,7 @@ import Capacitor
 /// JS adı: "FaceDistance" (src/lib/native.js).
 /// - getScreenInfo: ekran ölçeği (fiziksel ekran ölçüsü hesabı için)
 /// - isSupported / start / stop: yüz takibi
-/// - "face" olayı (~15 Hz): { tracked, distanceMm, blinkLeft, blinkRight }
+/// - "face" olayı (~15 Hz): { tracked, distanceMm, blinkLeft, blinkRight, lookUp/Down/In/Out Left/Right }
 /// Mesafe: kameradan iki gözün ortalama uzaklığı (ön kamera ekran düzlemindedir).
 @objc(FaceDistancePlugin)
 public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate {
@@ -81,14 +81,24 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
         let rightEye = position(simd_mul(face.transform, face.rightEyeTransform))
         let distanceM = (simd_distance(leftEye, cameraPos) + simd_distance(rightEye, cameraPos)) / 2
 
-        let blinkLeft = face.blendShapes[.eyeBlinkLeft]?.doubleValue ?? 0
-        let blinkRight = face.blendShapes[.eyeBlinkRight]?.doubleValue ?? 0
+        func shape(_ key: ARFaceAnchor.BlendShapeLocation) -> Double {
+            return face.blendShapes[key]?.doubleValue ?? 0
+        }
 
         notifyListeners("face", data: [
             "tracked": face.isTracked,
             "distanceMm": Double(distanceM) * 1000.0,
-            "blinkLeft": blinkLeft,
-            "blinkRight": blinkRight
+            "blinkLeft": shape(.eyeBlinkLeft),
+            "blinkRight": shape(.eyeBlinkRight),
+            // Bakış yönü (0–1). In: burna doğru, Out: şakağa doğru.
+            "lookUpLeft": shape(.eyeLookUpLeft),
+            "lookUpRight": shape(.eyeLookUpRight),
+            "lookDownLeft": shape(.eyeLookDownLeft),
+            "lookDownRight": shape(.eyeLookDownRight),
+            "lookInLeft": shape(.eyeLookInLeft),
+            "lookInRight": shape(.eyeLookInRight),
+            "lookOutLeft": shape(.eyeLookOutLeft),
+            "lookOutRight": shape(.eyeLookOutRight)
         ])
     }
 

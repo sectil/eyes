@@ -42,7 +42,7 @@ function ScreenRuler({ pxPerMm }) {
   )
 }
 
-export default function CardCalibration({ onDone, initial, changed }) {
+export default function CardCalibration({ onDone, initial, changed, autoReason = null }) {
   // Başlangıç tahmini (kullanıcı ayarlar): dokunmatik cihazda ~6.1 px/mm
   // (390 CSS px ≈ 64 mm genişlikteki bir telefondan kaba hesap), masaüstünde CSS standardı 96 px/inç.
   const [pxPerMm, setPxPerMm] = useState(
@@ -116,6 +116,7 @@ export default function CardCalibration({ onDone, initial, changed }) {
       <button className="btn" onClick={save}>
         <Check size={18} aria-hidden="true" /> {method === 'ruler' ? '5 cm tam denk geliyor' : 'Kartla aynı boyda'}
       </button>
+      {autoReason && <p className="muted small" style={{ textAlign: 'center', margin: 0 }}>{autoReason}</p>}
       </div>
     </main>
   )

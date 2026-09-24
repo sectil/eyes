@@ -127,6 +127,13 @@ Sonra Archive → Upload. ⚠️ **App Store'a incelemeye gönderilecek derleme 
   Bir cetvelle 40 cm'de tutunca ekran ~40 cm gösteriyor mu?
 - [ ] **Face ID'siz iPhone (SE, 8):** Mesafe adımı ön kamera + kalibrasyon ile açılıyor mu?
 - [ ] Tabloda olmayan yeni bir model çıkarsa uygulama elle ayar ekranını (cetvel/kart) göstermeli.
+- [ ] Elle ayar ekranı yine de çıkarsa altında gri bir "Otomatik ölçüm yapılamadı: …" satırı olur;
+  bu satırın ekran görüntüsünü gönder (model/çözünürlük bilgisi sorunu gösterir).
+- [ ] **Egzersiz setleri (Face ID'li iPhone):** Kırpma adımında sayaç "1/5, 2/5…" diye gerçek kırpmaları
+  sayıyor mu? Bakış adımlarında süre yalnızca doğru yöne bakınca azalıyor mu, küçük noktadaki bakış
+  yönü doğru tarafa gidiyor mu (sağa bakınca nokta sağa)? Daire adımında turlar sayılıyor mu?
+  "Gözlerini kapat" adımında süre yalnızca gözler kapalıyken ilerliyor mu? Yüzünü kameradan
+  çekince "Yüzün görünmüyor — süreyle devam ediyor" yazıyor mu?
 
 ### Yerel Swift eklentisi (FaceDistancePlugin)
 

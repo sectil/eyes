@@ -408,6 +408,15 @@ details > summary::-webkit-details-marker { display: none; }
 .orbit-dot { position: absolute; top: -13px; left: 50%; width: 20px; height: 20px; margin-left: -10px; border-radius: 50%; background: var(--accent-graphic); box-shadow: 0 0 0 5px var(--accent-soft); }
 @keyframes spin { to { transform: rotate(360deg); } }
 .blink-orb.shut { transform: scaleY(0.12); }
+.routine-sub.routine-ok { color: var(--ok); font-weight: 650; }
+.routine-sub.routine-warn { color: var(--warn); font-weight: 650; }
+.gaze-pad { position: relative; width: 84px; height: 84px; border-radius: 50%; background: var(--surface-2); border: 2px solid var(--surface-3); transition: border-color 0.2s; }
+.gaze-pad.ok { border-color: var(--ok); }
+.gaze-cross { position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--surface-3); }
+.gaze-dot { position: absolute; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: var(--accent-graphic); box-shadow: 0 0 0 4px var(--accent-soft); transition: left 0.1s linear, top 0.1s linear; }
+.gaze-pad.ok .gaze-dot { background: var(--ok); }
+.track-status { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8125rem; color: var(--ink-3); margin: 0; }
+.track-status.on { color: var(--ok); }
 
 /* ---------- Ödeme ekranı ---------- */
 .paywall-badge {

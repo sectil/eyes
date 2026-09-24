@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { pxPerMmFromPpi, resolutionMatches, autoCalibration } from './screenScale.js'
+import { pxPerMmFromPpi, resolutionMatches, autoCalibration, resolveAutoCalibration } from './screenScale.js'
 
 // Test verisi (örnek; gerçek tablo iphoneScreens.json'dadır)
 const table = {
@@ -47,5 +47,33 @@ describe('autoCalibration', () => {
   })
   it('çözünürlük uyuşmazsa → null', () => {
     expect(autoCalibration('Test2,1', screen3x, table)).toBeNull()
+  })
+})
+
+describe('resolveAutoCalibration', () => {
+  const screen3x = { nativeScale: 3, nativeWidth: 1170, nativeHeight: 2532 }
+  it('model eşleşirse doğrudan', () => {
+    const r = resolveAutoCalibration('Test1,1', screen3x, table)
+    expect(r.cal.name).toBe('Örnek 3x')
+    expect(r.reason).toBeNull()
+  })
+  it('bilinmeyen model ama çözünürlük tek ppi ile eşleşiyor → yedek', () => {
+    const r = resolveAutoCalibration('iPhone99,9', screen3x, table)
+    expect(r.cal.byResolution).toBe(true)
+    expect(r.cal.pxPerMm).toBeCloseTo(6.037, 3)
+  })
+  it('aynı çözünürlükte farklı ppi → yedek yok, neden var', () => {
+    const t2 = { ...table, 'Test3,1': { name: 'Farklı', ppi: 470, px: [1170, 2532] } }
+    const r = resolveAutoCalibration('iPhone99,9', screen3x, t2)
+    expect(r.cal).toBeNull()
+    expect(r.reason).toMatch(/model tabloda yok/)
+  })
+  it('ekran bilgisi yoksa neden döner', () => {
+    expect(resolveAutoCalibration('Test1,1', null, table).reason).toMatch(/Ekran bilgisi/)
+  })
+  it('hiç eşleşme yok → çözünürlük bilgisiyle neden', () => {
+    const r = resolveAutoCalibration('Test1,1', { nativeScale: 3, nativeWidth: 999, nativeHeight: 1999 }, table)
+    expect(r.cal).toBeNull()
+    expect(r.reason).toMatch(/999×1999/)
   })
 })

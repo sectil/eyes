@@ -7,7 +7,7 @@ import { startTrueDepth } from '../lib/native.js'
 //     kalibrasyon gerekmez. distanceCal.method === 'truedepth' veya trueDepth: true.
 //  2) Ön kamera + MediaPipe (web ve TrueDepth'siz cihazlar): iris boyutundan mesafe,
 //     bir kez 40 cm'de kalibrasyon gerekir (distanceCal: { irisPxAt40, videoW }).
-// onFrame: her ölçümde çağrılır. TrueDepth'te { native: true, blinkLeft, blinkRight, mm }.
+// onFrame: her ölçümde çağrılır. TrueDepth'te { native: true, face, mm, blinkLeft/Right, lookUp/Down/In/Out Left/Right }.
 export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, trueDepth = false } = {}) {
   const videoRef = useRef(null)
   const [state, setState] = useState({ ready: false, error: null, face: false, irisPx: null, mm: null })
@@ -30,7 +30,7 @@ export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, t
           if (cancelled) return
           const ts = performance.now()
           const mm = f.tracked && f.distanceMm ? median.push(f.distanceMm) : null
-          onFrameRef.current?.({ native: true, face: Boolean(f.tracked), mm, blinkLeft: f.blinkLeft, blinkRight: f.blinkRight, ts })
+          onFrameRef.current?.({ ...f, native: true, face: Boolean(f.tracked), mm, ts })
           if (ts - lastUi > 100) {
             lastUi = ts
             setState({ ready: true, error: null, face: Boolean(f.tracked), irisPx: null, mm })
