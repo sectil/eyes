@@ -3,7 +3,7 @@ import { ShieldCheck, TriangleAlert, ArrowRight } from 'lucide-react'
 import { StepHeader } from '../components/ui.jsx'
 
 // Genel klinik uyarı işaretleri. Yayın öncesi bir göz hekimi tarafından
-// gözden geçirilmelidir (bkz. eyes-arastirma/SENTEZ_RAPORU.md §5).
+// gözden geçirilmelidir (bkz. docs/arastirma/SENTEZ_RAPORU.md §5).
 export const RED_FLAGS = [
   { id: 'sudden', text: 'Son günlerde bir veya iki gözde ani görme kaybı ya da ani bulanıklık' },
   { id: 'curtain', text: 'Görme alanına perde, gölge inmesi' },

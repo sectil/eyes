@@ -60,7 +60,7 @@ export function buildReminderIcs(schedule, now = new Date()) {
 }
 
 // Tarayıcıda dosyayı indirir / paylaşır. iOS'ta Ana Ekrana eklenmiş uygulamadan
-// açılış davranışı cihazda test edilmelidir (bkz. ajan-raporlari/13_gunluk_takip.md).
+// açılış davranışı cihazda test edilmelidir (bkz. docs/arastirma/ajan-raporlari/13_gunluk_takip.md).
 export async function downloadIcs(text, filename = 'goz-olcum-hatirlatma.ics') {
   const file = new File([text], filename, { type: 'text/calendar' })
   if (navigator.canShare?.({ files: [file] })) {

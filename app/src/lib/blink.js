@@ -1,7 +1,7 @@
 // Kamera ile göz kapanması algılama.
 // Göz kontur noktaları çalışma anında MediaPipe sabitlerinden alınır (indeks ezberlenmez).
 // Açıklık = kontur yüksekliği / genişliği. Eşik kişiye özel: gözler açıkken ölçülen
-// ortancanın CLOSE_RATIO katı. Kişiye özel eşik: bkz. ajan-raporlari/09 (PMID 37892616).
+// ortancanın CLOSE_RATIO katı. Kişiye özel eşik: bkz. docs/arastirma/ajan-raporlari/09 (PMID 37892616).
 // VARSAYIM: CLOSE_RATIO = 0.6 bu çalışmadan birebir alınmadı.
 
 export const CLOSE_RATIO = 0.6

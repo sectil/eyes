@@ -1,5 +1,5 @@
 // ZEST (QUEST'in posterior ortalama kuralı) ile adaptif görme keskinliği eşiği.
-// Kaynak gerekçesi: bkz. eyes-arastirma/ajan-raporlari/13_gunluk_takip.md (FrACT, ZEST).
+// Kaynak gerekçesi: bkz. docs/arastirma/ajan-raporlari/13_gunluk_takip.md (FrACT, ZEST).
 //
 // Psikometrik fonksiyon (4 seçenekli zorunlu seçim, tumbling E):
 //   p(doğru | x, θ) = γ + (1 − γ − λ) · 1 / (1 + exp(−(x − θ) / s))

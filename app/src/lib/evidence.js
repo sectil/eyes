@@ -1,4 +1,4 @@
-// Kanıt kartları. İçerik: eyes-arastirma/SENTEZ_RAPORU.md (PMID'ler PubMed ile doğrulandı).
+// Kanıt kartları. İçerik: docs/arastirma/SENTEZ_RAPORU.md (PMID'ler PubMed ile doğrulandı).
 // Kural: her iddia bir kaynağa dayanır; sınırlar açıkça yazılır.
 
 export const EVIDENCE = [
@@ -25,7 +25,7 @@ export const EVIDENCE = [
     basis:
       'İlk 7 gün alışma dönemi, 8–21. günler başlangıç değeri. Uyarı için tek kötü sonuç yetmez; ardışık sonuçlar gerekir. Tek teste dayalı ev takip sistemlerinde yanlış alarm oranı çok yüksek bulunmuştur.',
     limits: 'Kurallar yayımlanmış ev takip sistemlerinden uyarlanmıştır; bu uygulama için ayrıca doğrulanmamıştır.',
-    sources: ['Ev takibi ve tekrarlanabilirlik derlemesi: ajan-raporlari/13_gunluk_takip.md'],
+    sources: ['Ev takibi ve tekrarlanabilirlik derlemesi: docs/arastirma/ajan-raporlari/13_gunluk_takip.md'],
   },
   {
     id: 'reading',

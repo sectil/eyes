@@ -2,7 +2,7 @@
 // kind 'evidence': kontrollü çalışmada yakınmaları azalttığı gösterilmiş (göz kırpma).
 // kind 'comfort'  : göz konforu / aktif mola; kanıt karışık veya zayıf, iddia yok.
 // kind 'relax'    : rahatlama hareketi; görmeyi iyileştirdiğine dair kanıt YOK, iddia yok.
-// Kaynaklar: eyes-arastirma/SENTEZ_RAPORU.md §2, §12, §14.
+// Kaynaklar: docs/arastirma/SENTEZ_RAPORU.md §2, §12, §14.
 
 export const EXERCISES = {
   lookRight: { title: 'Sağa bak', sub: 'Başını çevirmeden', seconds: 5, visual: 'arrow', dir: 'right', kind: 'relax' },
