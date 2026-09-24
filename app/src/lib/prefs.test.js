@@ -20,30 +20,30 @@ afterEach(() => {
 describe('prefs', () => {
   it('varsayılan: ses ve titreşim açık', () => {
     const p = createPrefs(fakeBackend())
-    expect(p.get()).toEqual({ sound: true, haptics: true })
-    expect(DEFAULT_PREFS).toEqual({ sound: true, haptics: true })
+    expect(p.get()).toEqual({ sound: true, haptics: true, coach: false, coachHidden: false })
+    expect(DEFAULT_PREFS).toEqual({ sound: true, haptics: true, coach: false, coachHidden: false })
   })
 
   it('kalıcıdır: aynı depoyla yeniden açılınca geri gelir', () => {
     const b = fakeBackend()
     createPrefs(b).set({ sound: false })
-    expect(JSON.parse(b.map.get(KEY))).toEqual({ sound: false, haptics: true })
-    expect(createPrefs(b).get()).toEqual({ sound: false, haptics: true })
+    expect(JSON.parse(b.map.get(KEY))).toEqual({ sound: false, haptics: true, coach: false, coachHidden: false })
+    expect(createPrefs(b).get()).toEqual({ sound: false, haptics: true, coach: false, coachHidden: false })
   })
 
   it('bilinmeyen anahtarları ve boolean olmayan değerleri yok sayar', () => {
     const p = createPrefs(fakeBackend())
-    expect(p.set({ sound: 'no', haptics: 0, volume: 3 })).toEqual({ sound: true, haptics: true })
-    expect(p.set(null)).toEqual({ sound: true, haptics: true })
-    expect(p.set({ haptics: false, extra: true })).toEqual({ sound: true, haptics: false })
+    expect(p.set({ sound: 'no', haptics: 0, volume: 3 })).toEqual({ sound: true, haptics: true, coach: false, coachHidden: false })
+    expect(p.set(null)).toEqual({ sound: true, haptics: true, coach: false, coachHidden: false })
+    expect(p.set({ haptics: false, extra: true })).toEqual({ sound: true, haptics: false, coach: false, coachHidden: false })
     expect(p.get()).not.toHaveProperty('extra')
   })
 
   it('bozuk veya eksik kayıt varsayılana düşer', () => {
-    expect(createPrefs(fakeBackend({ [KEY]: '{bozuk' })).get()).toEqual({ sound: true, haptics: true })
-    expect(createPrefs(fakeBackend({ [KEY]: '[1,2]' })).get()).toEqual({ sound: true, haptics: true })
-    expect(createPrefs(fakeBackend({ [KEY]: '{"haptics":false}' })).get()).toEqual({ sound: true, haptics: false })
-    expect(createPrefs(fakeBackend({ [KEY]: '{"sound":"false"}' })).get()).toEqual({ sound: true, haptics: true })
+    expect(createPrefs(fakeBackend({ [KEY]: '{bozuk' })).get()).toEqual({ sound: true, haptics: true, coach: false, coachHidden: false })
+    expect(createPrefs(fakeBackend({ [KEY]: '[1,2]' })).get()).toEqual({ sound: true, haptics: true, coach: false, coachHidden: false })
+    expect(createPrefs(fakeBackend({ [KEY]: '{"haptics":false}' })).get()).toEqual({ sound: true, haptics: false, coach: false, coachHidden: false })
+    expect(createPrefs(fakeBackend({ [KEY]: '{"sound":"false"}' })).get()).toEqual({ sound: true, haptics: true, coach: false, coachHidden: false })
   })
 
   it('get() kopya döndürür (dışarıdan değiştirilemez)', () => {
@@ -59,8 +59,8 @@ describe('prefs', () => {
       setItem() { throw new Error('QuotaExceededError') },
     }
     const p = createPrefs(throwing)
-    expect(p.get()).toEqual({ sound: true, haptics: true })
-    expect(p.set({ haptics: false })).toEqual({ sound: true, haptics: false })
+    expect(p.get()).toEqual({ sound: true, haptics: true, coach: false, coachHidden: false })
+    expect(p.set({ haptics: false })).toEqual({ sound: true, haptics: false, coach: false, coachHidden: false })
     expect(p.get().haptics).toBe(false)
   })
 
@@ -68,7 +68,7 @@ describe('prefs', () => {
     const p1 = createPrefs(() => { throw new Error('SecurityError') })
     expect(p1.set({ sound: false }).sound).toBe(false)
     const p2 = createPrefs(undefined)
-    expect(p2.get()).toEqual({ sound: true, haptics: true })
+    expect(p2.get()).toEqual({ sound: true, haptics: true, coach: false, coachHidden: false })
   })
 
   it('aboneler yalnızca gerçek değişiklikte (yeni, önceki) ile çağrılır', () => {
@@ -79,7 +79,7 @@ describe('prefs', () => {
     expect(fn).not.toHaveBeenCalled()
     p.set({ sound: false })
     expect(fn).toHaveBeenCalledTimes(1)
-    expect(fn).toHaveBeenCalledWith({ sound: false, haptics: true }, { sound: true, haptics: true })
+    expect(fn).toHaveBeenCalledWith({ sound: false, haptics: true, coach: false, coachHidden: false }, { sound: true, haptics: true, coach: false, coachHidden: false })
     off()
     p.set({ sound: true })
     expect(fn).toHaveBeenCalledTimes(1)

@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import {
   BookOpen, CreditCard, Camera, Bell, Download, Trash, ChevronRight, ShieldCheck,
-  Volume2, VolumeX, Vibrate, VibrateOff, Smartphone, CircleCheck, CircleAlert, Crosshair,
+  Volume2, VolumeX, Vibrate, VibrateOff, Smartphone, CircleCheck, CircleAlert, Crosshair, Sparkles,
 } from 'lucide-react'
 import { PageHeader, ThemeSwitch } from '../components/ui.jsx'
 import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
@@ -39,6 +39,32 @@ const TEST_MESSAGES = {
   noHardware: 'Bu cihazda titreşim donanımı yok.',
   unsupported: 'Bu tarayıcı titreşimi desteklemiyor.',
   failed: 'Titreşim gönderilemedi. Uygulamayı kapatıp yeniden açmayı dene.',
+}
+
+// Jev Göz Koçu aç/kapa (ana sayfa "Bugün" kartı). Kapatınca sunucuya hiçbir veri gitmez.
+function CoachSettings() {
+  const [prefs, setLocal] = useState(getPrefs)
+  useEffect(() => subscribePrefs((p) => setLocal(p)), [])
+  return (
+    <section className="stack">
+      <span className="eyebrow">Jev Göz Koçu</span>
+      <div className="list">
+        <PrefToggle
+          Icon={Sparkles}
+          IconOff={Sparkles}
+          label="Günlük öneri (yapay zekâ)"
+          sub={prefs.coach ? 'Açık · yalnızca özet sayılar gönderilir' : 'Kapalı · sunucuya hiçbir veri gitmez'}
+          checked={prefs.coach}
+          onChange={(on) => setPrefs(on ? { coach: true, coachHidden: false } : { coach: false })}
+        />
+      </div>
+      <p className="note">
+        <ShieldCheck size={16} aria-hidden="true" />
+        Açıkken yalnızca özet sayılar (ör. haftalık gün sayısı, ölçüm ortancası) OpenRouter üzerinden bir yapay zekâ modeline gider;
+        kamera görüntüsü, ad ya da cihaz kimliği gitmez. Öneriler tıbbi tavsiye değildir.
+      </p>
+    </section>
+  )
 }
 
 function FeedbackSettings({ iosApp }) {
@@ -178,6 +204,7 @@ export default function Info({ onGo, onReset, exportJSON, distanceSkipped, iosAp
       </section>
 
       <FeedbackSettings iosApp={iosApp} />
+      <CoachSettings />
 
       <section className="stack">
         <span className="eyebrow">Bilim</span>

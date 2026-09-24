@@ -10,7 +10,8 @@
 
 const KEY = 'gozolcum:prefs'
 
-export const DEFAULT_PREFS = Object.freeze({ sound: true, haptics: true })
+// coach: Jev Göz Koçu (varsayılan kapalı, açık onayla açılır); coachHidden: ana sayfa tanıtım kartı gizli
+export const DEFAULT_PREFS = Object.freeze({ sound: true, haptics: true, coach: false, coachHidden: false })
 const KEYS = Object.keys(DEFAULT_PREFS)
 
 function sanitize(raw) {

@@ -1,0 +1,27 @@
+/* ---------- Jev Göz Koçu (Bugün kartı) ---------- */
+.coach-card { gap: 10px; position: relative; overflow: hidden; }
+.coach-card::before {
+  content: ''; position: absolute; inset: 0 0 auto 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent-graphic), var(--accent-soft));
+}
+.coach-badge {
+  display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700;
+  color: var(--accent); background: var(--accent-soft); padding: 5px 10px; border-radius: 999px;
+}
+.coach-hide { width: 36px; height: 36px; }
+.coach-lead { margin: 0; color: var(--ink-2); }
+.coach-insight { margin: 0; font-size: 1.05rem; font-weight: 600; line-height: 1.45; color: var(--ink); }
+.coach-action {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%;
+  min-height: 48px; padding: 10px 14px; border-radius: 14px; border: 0; cursor: pointer; text-align: left;
+  background: var(--surface-2); color: var(--accent); font-weight: 700; font-size: 0.95rem;
+}
+.coach-action.static { cursor: default; margin: 0; color: var(--ink-2); }
+.coach-offline { display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; color: var(--ink-3); }
+.coach-skeleton { display: flex; flex-direction: column; gap: 8px; }
+.coach-skeleton i {
+  display: block; height: 14px; border-radius: 7px; background: var(--surface-3);
+  animation: coach-shimmer 1.2s ease-in-out infinite;
+}
+.coach-skeleton i:last-child { width: 60%; height: 40px; border-radius: 14px; }
+@keyframes coach-shimmer { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }

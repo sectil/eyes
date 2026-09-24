@@ -1,6 +1,10 @@
 # Jev Göz Koçu — plan
 
-Durum: **Planlandı** (2026-09-24). Build 5 (göz takibi, E testi, Gelişim, Yılan) bittikten sonra başlar.
+Durum: **Faz 1a kodlandı** (2026-09-25): sunucu köprüsü `app/api/coach.js`, ortak mantık `app/src/lib/coachCore.js`,
+istemci `app/src/lib/coach.js`, ana sayfa "Bugün" kartı `app/src/components/CoachCard.jsx` (açık onayla, varsayılan kapalı),
+Bilgi'de aç/kapa. Kurulum: `bash app/scripts/coach-setup.sh` (anahtar Vercel'e Sensitive, model doğrulama, CLI ile production).
+Varsayılan model (VARSAYIM, kullanıcı kararı "varsayalım"): `google/gemini-3.1-flash-lite`, yoksa `google/gemini-2.5-flash-lite`.
+Sıradaki: haftalık rapor, 30 soruluk sınav (Faz 2 ile).
 
 ## Amaç
 Uygulamaya kişinin kendi verisiyle konuşan, hatırlayan ve eylem öneren bir koç eklemek.

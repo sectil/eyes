@@ -7,6 +7,7 @@ import { snellen20 } from '../lib/optotype.js'
 import { decimalTr } from '../lib/stats.js'
 import { loadBest, bestFromSessions, loadSnakeOpts } from '../lib/snake.js'
 import '../styles/snake.css'
+import CoachCard from '../components/CoachCard.jsx'
 
 const WEEK_MS = 7 * 86400000
 const SET_ICONS = { leaf: Leaf, thumbs: ThumbsUp, dumbbell: Dumbbell }
@@ -71,6 +72,8 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           </div>
         </div>
       </section>
+
+      <CoachCard tests={tests} sessions={sessions} weeklyTarget={week.target} onStart={onStart} />
 
       <section className="card">
         <div className="row between">
