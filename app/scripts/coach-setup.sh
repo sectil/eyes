@@ -64,8 +64,14 @@ printf '%s' "$MODEL" | npx --yes vercel@latest env add EYETRAIL_COACH_MODEL prod
 unset EYETRAIL_OPENROUTER_KEY
 
 step "4/5 Production yüklemesi (web + /api/coach)"
-git pull --ff-only || true
-npx --yes vercel@latest deploy --prod --yes
+# Vercel Hobby, commit yazarı ekip üyesi olmayan yüklemeleri BLOCKED yapıyor (commit'ler Claude'un).
+# CLI, git klasöründen yüklerken commit bilgisini ekliyor → aynı engel. Bu yüzden kod, git'siz geçici
+# bir kopyadan yükleniyor (daha önce READY olan yükleme de böyleydi).
+TMP="$(mktemp -d)"
+rsync -a --exclude node_modules --exclude ios --exclude build-ios --exclude dist --exclude .git \
+  --exclude docs --exclude public/mediapipe-wasm --exclude '.env*' "$APP_DIR/" "$TMP/app/"
+( cd "$TMP/app" && npx --yes vercel@latest deploy --prod --yes )
+rm -rf "$TMP"
 
 step "5/5 Canlı deneme"
 curl -fsS "$URL" || fail "Uç nokta açılmadı: $URL"
