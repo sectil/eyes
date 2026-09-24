@@ -1,6 +1,6 @@
 {
-  "name": "Göz Ölçüm",
-  "short_name": "Göz Ölçüm",
+  "name": "Eyelume: Görme Takibi",
+  "short_name": "Eyelume",
   "lang": "tr",
   "start_url": "./",
   "display": "standalone",
