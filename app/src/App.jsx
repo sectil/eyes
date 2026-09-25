@@ -16,6 +16,7 @@ import Evidence from './screens/Evidence.jsx'
 import Info from './screens/Info.jsx'
 import Routine from './screens/Routine.jsx'
 import SnakeGame from './screens/SnakeGame.jsx'
+import TrackGame from './screens/TrackGame.jsx'
 import { SETS, todaySeconds } from './lib/routines.js'
 import Paywall from './screens/Paywall.jsx'
 import { getAccess } from './lib/subscription.js'
@@ -23,6 +24,7 @@ import DistanceHud from './screens/DistanceHud.jsx'
 import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics } from './lib/native.js'
 import { resolveAutoCalibration, estimateCalibration } from './lib/screenScale.js'
 import { BEST_KEY as SNAKE_BEST_KEY } from './lib/snake.js'
+import { TRACK_BEST_KEY, TRACK_OPTS_KEY } from './lib/track.js'
 import IPHONE_SCREENS from './lib/iphoneScreens.json'
 import GazeCalibration from './screens/GazeCalibration.jsx'
 import GazeTest from './screens/GazeTest.jsx'
@@ -46,12 +48,12 @@ const REST_AFTER_MS = 10 * 60 * 1000
 // bugünün ilk etkinliğine mola çıkarırdı.
 const REST_IDLE_RESET_MS = 5 * 60 * 1000
 const REST_SECONDS = 20
-const ACTIVE_SCREENS = ['daily', 'weekly', 'reading', 'blink', 'snake']
+const ACTIVE_SCREENS = ['daily', 'weekly', 'reading', 'blink', 'snake', 'track']
 const isActiveScreen = (s) => ACTIVE_SCREENS.includes(s) || s.startsWith('routine-')
 // Mola yalnızca bu ekranlardan önce sorulur. Egzersiz setleri ve göz kırpma zaten "Uzağa bak" /
 // "Gözlerini kapat" adımları içerir; önlerine ayrıca mola koymak art arda iki mola demektir.
 // O ekranlarda geçen süre yine de birikir (isActiveScreen).
-const REST_GATED = ['daily', 'weekly', 'reading', 'snake']
+const REST_GATED = ['daily', 'weekly', 'reading', 'snake', 'track']
 // Ekran içindeki RestBreak bitince/atlanınca window'a yayılan olay (components/RestBreak.jsx ile aynı ad).
 const RESTED_EVENT = 'gozolcum:rested'
 
@@ -68,6 +70,7 @@ function activityLabel(s) {
     reading: 'okuma hızı testi',
     blink: 'göz kırpma egzersizi',
     snake: 'Yılan oyunu',
+    track: 'çember takibi',
   }[s] ?? ''
 }
 
@@ -136,7 +139,7 @@ export default function App() {
   const activeTime = useActiveTime(isActiveScreen(screen))
   const refresh = () => setData(store.get())
   const go = (s) => {
-    const needsGaze = s === 'snake' || s.startsWith('routine-')
+    const needsGaze = s === 'snake' || s === 'track' || s.startsWith('routine-')
     if (needsGaze && native.trueDepth && !gazeSkipped.current && !hasGazeModel()) {
       setGazeFor({ to: s })
       window.scrollTo(0, 0)
@@ -378,6 +381,16 @@ export default function App() {
           onFinish={(s) => { store.addSession(s); refresh() }}
         />
       )
+    case 'track':
+      // Göz pratiği: her tur bir oturum (type 'game', game 'track'); görme trendine katılmaz.
+      return (
+        <TrackGame
+          trueDepth={native.trueDepth}
+          sessions={sessions}
+          onExit={() => go('home')}
+          onFinish={(s) => { store.addSession(s); refresh() }}
+        />
+      )
     case 'evidence':
       return <Evidence onBack={() => go('info')} />
     case 'gaze-test':
@@ -408,9 +421,9 @@ export default function App() {
           const autoCal = isIOSApp() && settings.calibration?.method === 'auto' ? settings.calibration : null
           store.clearAll()
           if (autoCal) store.setSetting('calibration', autoCal)
-          // Yılan oyununun cihazdaki rekoru ve seçenekleri (SnakeGame.jsx OPTS_KEY) de silinir;
+          // Yılan ve çember takibinin cihazdaki rekorları ve seçenekleri de silinir;
           // ses/titreşim tercihleri ve tema cihaz ayarı sayılır ve korunur.
-          for (const k of [SNAKE_BEST_KEY, 'gozolcum:snake-opts']) {
+          for (const k of [SNAKE_BEST_KEY, 'gozolcum:snake-opts', TRACK_BEST_KEY, TRACK_OPTS_KEY]) {
             try {
               localStorage.removeItem(k)
             } catch {

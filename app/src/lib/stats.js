@@ -18,7 +18,7 @@ const EYE_LABEL = { R: 'Sağ göz', L: 'Sol göz', OU: 'İki göz' }
 // Bölünmez boşluk (\u00a0): dar ekranda "İki göz 0,20" satır sonunda bölünmez.
 const EYE_SHORT = { R: 'Sağ', L: 'Sol', OU: 'İki\u00a0göz' }
 const TEST_TITLE = { 'va-daily': 'Günlük görme testi', 'va-weekly': 'Haftalık görme testi', reading: 'Okuma hızı testi' }
-const GAME_NAME = { snake: 'Yılan' }
+const GAME_NAME = { snake: 'Yılan', track: 'Çember takibi' }
 const CONTROL_LABEL = { eyes: 'gözle', touch: 'dokunarak' }
 
 const finite = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : null)
@@ -139,10 +139,15 @@ function sessionActivity(s, ts, idx) {
       score,
       best: finite(s.best),
       control: s.control ?? null,
-      title: name ? `${name} oyunu` : 'Oyun',
+      title: s.game === 'track' ? name : name ? `${name} oyunu` : 'Oyun',
       seconds,
       estimated: false,
-      detail: join([score != null ? `${score}${NBSP}puan` : null, CONTROL_LABEL[s.control], durationPart(seconds, false)]),
+      detail: join([
+        score != null ? `${score}${NBSP}puan` : null,
+        s.game === 'track' && finite(s.followPct) != null ? `takip${NBSP}%${s.followPct}` : null,
+        CONTROL_LABEL[s.control],
+        durationPart(seconds, false),
+      ]),
     }
   }
   const seconds = own ?? 0
@@ -239,6 +244,10 @@ export function summary(activities = [], now = new Date()) {
     .filter((a) => a.type === 'game' && a.game === 'snake')
     .flatMap((a) => [a.score, a.best])
     .filter((v) => finite(v) != null)
+  const track = acts
+    .filter((a) => a.type === 'game' && a.game === 'track')
+    .flatMap((a) => [a.score, a.best])
+    .filter((v) => finite(v) != null)
 
   return {
     total: acts.length,
@@ -248,6 +257,7 @@ export function summary(activities = [], now = new Date()) {
     streakDays: streakFrom(days, now),
     thisWeekDays,
     bestSnake: snake.length ? Math.max(...snake) : null,
+    bestTrack: track.length ? Math.max(...track) : null,
   }
 }
 

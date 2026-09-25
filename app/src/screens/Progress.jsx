@@ -89,6 +89,7 @@ function SummaryCard({ s, days, now, weeklyTarget }) {
   ]
   // 0 puan rekor sayılmaz (Home rozeti ve SnakeGame '> 0' ile aynı)
   if (s.bestSnake > 0) tiles.push({ id: 'snake', Icon: Trophy, value: nf(s.bestSnake), label: 'Yılan rekoru' })
+  if (s.bestTrack > 0) tiles.push({ id: 'track', Icon: Trophy, value: nf(s.bestTrack), label: 'Çember rekoru' })
 
   const todayKey = dayKey(now)
   const todayActive = days.has(todayKey)
@@ -111,7 +112,7 @@ function SummaryCard({ s, days, now, weeklyTarget }) {
 
   return (
     <section className="card card-hero pg-summary" aria-label="Özet">
-      <div className={`pg-stats${tiles.length === 4 ? ' n4' : ''}`}>
+      <div className={`pg-stats${tiles.length === 4 ? ' n4' : tiles.length === 5 ? ' n5' : ''}`}>
         {tiles.map(({ id, Icon, value, label }) => (
           <div key={id} className="pg-stat">
             <span className="pg-stat-value">{value}</span>
@@ -400,7 +401,8 @@ export default function Progress({ tests = [], sessions = [], weeklyTarget, onSt
   // Oyun dışı kayıtlar: özet, seri, haftalık gün ve takvim işaretleri (Ana sayfa/Takvim ile aynı kural).
   const counted = useMemo(() => countedActivities(activities), [activities])
   const countedDays = useMemo(() => byDay(counted), [counted])
-  const s = { ...summary(counted, now), bestSnake: summary(activities, now).bestSnake }
+  const all = summary(activities, now) // rekorlar oyunlardan (hedef/seri sayımı oyunsuz)
+  const s = { ...summary(counted, now), bestSnake: all.bestSnake, bestTrack: all.bestTrack }
 
   const [ym, setYm] = useState({ y: now.getFullYear(), m: now.getMonth() })
   const [sel, setSel] = useState(todayKey)

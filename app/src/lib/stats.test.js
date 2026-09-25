@@ -192,7 +192,7 @@ describe('summary', () => {
   })
 
   it('boş liste ve yılan yoksa bestSnake null', () => {
-    expect(summary([], now)).toEqual({ total: 0, seconds: 0, minutes: 0, activeDays: 0, streakDays: 0, thisWeekDays: 0, bestSnake: null })
+    expect(summary([], now)).toEqual({ total: 0, seconds: 0, minutes: 0, activeDays: 0, streakDays: 0, thisWeekDays: 0, bestSnake: null, bestTrack: null })
     expect(summary(acts.filter((a) => a.type !== 'game'), now).bestSnake).toBeNull()
   })
 })
@@ -261,5 +261,18 @@ describe('countedActivities — oyunlar gün/seri/hafta sayımına girmez', () =
     expect(s.bestSnake).toBeNull()
     expect(summary(all, now).bestSnake).toBe(12)
     expect(monthTotals(counted, 2026, 8)).toMatchObject({ count: 2, seconds: 240 })
+  })
+})
+
+describe('çember takibi oturumları', () => {
+  it('oyun olarak listelenir, hedefe sayılmaz; rekor ayrı', async () => {
+    const { activitiesFrom, summary, countsTowardGoal } = await import('./stats.js')
+    const now = new Date('2026-09-25T12:00:00')
+    const acts = activitiesFrom([], [{ type: 'game', game: 'track', score: 42, best: 42, seconds: 40, followPct: 80, control: 'eyes', date: now.toISOString() }])
+    expect(acts[0].title).toBe('Çember takibi')
+    expect(acts[0].detail).toMatch(/42 puan/)
+    expect(acts[0].detail).toMatch(/takip %80/)
+    expect(countsTowardGoal(acts[0])).toBe(false)
+    expect(summary(acts, now).bestTrack).toBe(42)
   })
 })

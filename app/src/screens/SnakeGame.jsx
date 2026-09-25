@@ -954,7 +954,7 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
           <button type="button" className="btn-icon" onClick={onExit} aria-label="Oyundan çık">
             <X size={20} aria-hidden="true" />
           </button>
-          <span className="eyebrow">Göz oyunu</span>
+          <span className="eyebrow">Göz pratiği</span>
           <span className="snake-topbar-spacer" aria-hidden="true" />
         </div>
 
