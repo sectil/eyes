@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
-  makePlan, phaseAt, makeRecord, programProgress, calmChange, normalizePhases, loadBreathOpts, saveBreathOpts,
-  PATTERNS, PATTERN_ORDER, RAMP_SESSIONS, HOLD_MAX, PROGRAM_DAY_SEC, SESSION_TYPE, PHASE,
+  makePlan, phaseAt, phaseStartSec, makeRecord, programProgress, calmChange, normalizeSecs, loadBreathOpts, saveBreathOpts, normalizeOpts,
+  PATTERNS, PATTERN_ORDER, RAMP_SESSIONS, HOLD_MAX, PROGRAM_DAY_SEC, SESSION_TYPE, PHASE, DEFAULT_SOUNDS,
 } from './breath.js'
 
 const mem = () => {
@@ -26,16 +26,26 @@ describe('makePlan', () => {
     expect(makePlan({ pattern: 'sigh' }).phases.map((p) => p.kind)).toEqual(['in', 'in2', 'out'])
     expect(makePlan({ pattern: 'box' }).phases.map((p) => p.kind)).toEqual(['in', 'hold', 'out', 'hold2'])
   })
-  it('Özel: düzenleme sınırlar içinde, 0 sn aşamalar atılır, tutma en fazla HOLD_MAX', () => {
+  it('düzenleme her kalıpta: sınırlar içinde, 0 sn aşamalar atılır, tutma en fazla HOLD_MAX, yarım sn adım', () => {
     const p = makePlan({ pattern: 'custom', edits: { in: 5, hold: 12, out: 7, hold2: 0 } })
     expect(p.phases).toEqual([{ kind: 'in', sec: 5 }, { kind: 'hold', sec: HOLD_MAX }, { kind: 'out', sec: 7 }])
-    expect(normalizePhases({ in: 1, out: 30 })[0].sec).toBe(2)
-    expect(normalizePhases({ in: 1, out: 30 })[2].sec).toBe(12)
+    expect(normalizeSecs({ in: 1, out: 30 })).toMatchObject({ in: 2, out: 12, in2: 0 })
+    expect(normalizeSecs({ in: 4.3 }).in).toBe(4.5)
+    // Sakin ritim düzenlenince kademe uygulanmaz
+    const edited = makePlan({ pattern: 'calm', priorSessions: 0, edits: { in: 5, out: 5 } })
+    expect(edited.ramped).toBe(false)
+    expect(edited.phases).toEqual([{ kind: 'in', sec: 5 }, { kind: 'out', sec: 5 }])
+  })
+  it('phaseStartSec ve adım sayacı', () => {
+    const p = makePlan({ pattern: 'box', durationSec: 64 })
+    expect(phaseStartSec(p, 1, 2)).toBe(16 + 8)
+    expect(phaseAt(p, 0).steps).toBe(16)
+    expect(phaseAt(p, 24).step).toBe(7)
   })
   it('bilinmeyen kalıp → varsayılan', () => {
     expect(makePlan({ pattern: 'wimhof' }).pattern).toBe('calm')
     expect(PATTERN_ORDER.every((id) => PATTERNS[id])).toBe(true)
-    expect(Object.values(PATTERNS).every((p) => p.phases.every((ph) => PHASE[ph.kind]))).toBe(true)
+    expect(Object.values(PATTERNS).every((p) => Object.keys(p.secs).every((k) => PHASE[k]))).toBe(true)
   })
 })
 
@@ -70,12 +80,15 @@ describe('kayıt, program, sakinlik', () => {
     expect(calmChange(s)).toEqual({ n: 2, delta: 1 })
     expect(calmChange([])).toBeNull()
   })
-  it('tercihler: geçersiz değerler varsayılana döner', () => {
+  it('tercihler: geçersiz değerler varsayılana döner; sesler/görsel/ses seviyesi doğrulanır', () => {
     const st = mem()
-    expect(loadBreathOpts(st)).toEqual({ pattern: 'calm', durationSec: 180, edits: {} })
-    saveBreathOpts({ pattern: 'box', durationSec: 300, edits: { in: 5 } }, st)
-    expect(loadBreathOpts(st)).toEqual({ pattern: 'box', durationSec: 300, edits: { in: 5 } })
-    saveBreathOpts({ pattern: 'x', durationSec: 7 }, st)
-    expect(loadBreathOpts(st)).toEqual({ pattern: 'calm', durationSec: 180, edits: {} })
+    expect(loadBreathOpts(st)).toMatchObject({ pattern: 'calm', durationSec: 180, edits: null, visual: 'orb', vibrate: true, sound: true, voice: true, volume: 7, sounds: DEFAULT_SOUNDS })
+    saveBreathOpts({ pattern: 'box', durationSec: 300, edits: { in: 5 }, visual: 'scene', volume: 3, sounds: { in: 'tick', out: 'kaboom' }, voice: false }, st)
+    const o = loadBreathOpts(st)
+    expect(o).toMatchObject({ pattern: 'box', durationSec: 300, visual: 'scene', volume: 3, voice: false })
+    expect(o.edits).toEqual({ in: 5, in2: 0, hold: 4, out: 4, hold2: 4 })
+    expect(o.sounds.in).toBe('tick')
+    expect(o.sounds.out).toBe(DEFAULT_SOUNDS.out) // geçersiz ses → varsayılan
+    expect(normalizeOpts({ pattern: 'x', durationSec: 7, visual: 'gif', volume: 99 })).toMatchObject({ pattern: 'calm', durationSec: 180, visual: 'orb', volume: 10 })
   })
 })

@@ -3,7 +3,8 @@ import { X, ArrowRight, ArrowLeft, ArrowUp, ArrowDown, Mountain, EyeOff, Trophy,
 import { Ring } from '../components/ui.jsx'
 import { EXERCISES, DAILY_GOAL_MIN, formatMin, setDurationSec } from '../lib/routines.js'
 import { cue, speak, unlockAudio } from '../lib/cue.js'
-import { PHASE as BREATH_PHASE } from '../lib/breath.js'
+import { PHASE as BREATH_PHASE, loadBreathOpts } from '../lib/breath.js'
+import BreathVisual from '../components/BreathVisual.jsx'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import {
   eyeClosure,
@@ -122,7 +123,7 @@ function Visual({ ex, tick, gaze }) {
     const secLeft = k === 'in' ? BREATH_IN - (tick % BREATH_CYCLE) : BREATH_CYCLE - (tick % BREATH_CYCLE)
     return (
       <div className="stack" style={{ alignItems: 'center', gap: 18 }}>
-        <div className="br-orb" style={{ width: 150, height: 150, '--s': ph.scale, '--t': `${k === 'in' ? BREATH_IN : BREATH_CYCLE - BREATH_IN}s` }} aria-hidden="true" />
+        <BreathVisual visual={loadBreathOpts().visual} kind={k} phaseSec={k === 'in' ? BREATH_IN : BREATH_CYCLE - BREATH_IN} size={150} />
         <span className="routine-sub" aria-live="polite">{ph.label} · {secLeft}</span>
       </div>
     )

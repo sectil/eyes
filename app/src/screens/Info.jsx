@@ -1,37 +1,13 @@
-import { useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   BookOpen, CreditCard, Camera, Bell, Download, Trash, ChevronRight, ShieldCheck,
   Volume2, VolumeX, Vibrate, VibrateOff, Smartphone, CircleCheck, CircleAlert, Crosshair, Sparkles,
 } from 'lucide-react'
 import { PageHeader, ThemeSwitch } from '../components/ui.jsx'
+import PrefToggle from '../components/PrefToggle.jsx'
 import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
 import { haptic, initFeedback, testHaptic } from '../lib/native.js'
 import '../styles/info.css'
-
-// iOS Ayarlar tarzı anahtar. Satırın tamamı dokunulabilir; ekran okuyucu "anahtar, açık/kapalı" okur.
-function PrefToggle({ Icon, IconOff, label, sub, checked, onChange }) {
-  const id = useId()
-  return (
-    <button
-      type="button"
-      role="switch"
-      aria-checked={checked}
-      aria-labelledby={`${id}-l`}
-      aria-describedby={`${id}-s`}
-      className="list-row pref-row pref-toggle"
-      onClick={() => onChange(!checked)}
-    >
-      <span className={`pref-icon${checked ? ' on' : ''}`} aria-hidden="true">
-        {checked ? <Icon size={18} /> : <IconOff size={18} />}
-      </span>
-      <span className="pref-text">
-        <span id={`${id}-l`} className="pref-label">{label}</span>
-        <span id={`${id}-s`} className="pref-sub">{sub}</span>
-      </span>
-      <span className="pref-switch" aria-hidden="true"><span className="pref-knob" /></span>
-    </button>
-  )
-}
 
 const TEST_MESSAGES = {
   okApp: 'Gönderildi. Hissetmediysen aşağıdaki iPhone ayarına bak.',
