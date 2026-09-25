@@ -17,7 +17,7 @@ export const PROMPTS = [
   { id: 'change', text: 'Her gün geçtiğin yolda değişen bir şey fark et', ex: 'Yeni bir vitrin, budanmış bir ağaç.' },
 ]
 
-const dayNumber = (d) => {
+export const dayNumber = (d) => {
   const x = new Date(d)
   return Math.floor(Date.UTC(x.getFullYear(), x.getMonth(), x.getDate()) / 86400000)
 }

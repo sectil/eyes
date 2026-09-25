@@ -1,6 +1,6 @@
 import { Wind } from 'lucide-react'
 import Breath from '../../screens/Breath.jsx'
-import { programProgress, loadBreathOpts, PATTERNS } from '../../lib/breath.js'
+import { programProgress, loadBreathOpts, PATTERNS, PROGRAM_DAY_SEC } from '../../lib/breath.js'
 
 export default {
   icon: Wind,
@@ -12,9 +12,11 @@ export default {
     const p = programProgress(ctx.sessions)
     return p.todayDone ? 'Bugün tamam' : null
   },
-  render: (ctx) => (
+  render: (ctx, route) => (
     <Breath
+      key={route}
       sessions={ctx.sessions}
+      presetSec={route === 'breath-rest' ? PROGRAM_DAY_SEC : null}
       onBack={ctx.back}
       onFinish={(s) => { ctx.store.addSession(s); ctx.refresh(); ctx.go('home') }}
     />

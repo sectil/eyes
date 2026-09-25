@@ -54,7 +54,7 @@ export function buildSignals(tests = [], sessions = [], now = new Date(), weekly
 // Modül özetleri (registry coach()); bozuk modül diğerlerini düşürmez
 export function moduleSignals(sessions = [], now = new Date()) {
   const out = {}
-  for (const m of registry.modules) {
+  for (const m of registry.live) {
     if (typeof m.coach !== 'function') continue
     try {
       const v = m.coach(sessions, now)

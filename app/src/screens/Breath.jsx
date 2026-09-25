@@ -35,9 +35,11 @@ function SafetyRows() {
   )
 }
 
-export default function Breath({ sessions = [], onBack, onFinish }) {
+// presetSec: Bugünün yolundaki Nefes durağı 5 dk ile açar (kayıtlı süre tercihi değişmez; kullanıcı süreyi
+// kendisi değiştirirse o kaydedilir).
+export default function Breath({ sessions = [], presetSec = null, onBack, onFinish }) {
   const prior = sessions.filter(isBreath).length
-  const [opts, setOpts] = useState(() => loadBreathOpts())
+  const [opts, setOpts] = useState(() => (presetSec ? { ...loadBreathOpts(), durationSec: presetSec } : loadBreathOpts()))
   const [screen, setScreen] = useState(() => (safetySeen() ? 'setup' : 'safety')) // safety | setup | sound | info | run | result
   const [calmBefore, setCalmBefore] = useState(null)
   const [calmAfter, setCalmAfter] = useState(null)
@@ -59,7 +61,7 @@ export default function Breath({ sessions = [], onBack, onFinish }) {
   const update = (patch) => {
     const next = { ...opts, ...patch }
     setOpts(next)
-    saveBreathOpts(next)
+    saveBreathOpts(presetSec && !('durationSec' in patch) ? { ...next, durationSec: loadBreathOpts().durationSec } : next)
   }
   const stepSec = (kind, dir) => {
     const cur = secs[kind]

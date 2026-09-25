@@ -32,7 +32,8 @@ export default {
     if (!sessions.some((s) => s.type === SESSION_TYPE)) return null
     const week = withinDays(sessions.filter((s) => s.type === SESSION_TYPE), now)
     if (week.length >= WEEKLY && !doneToday(sessions, SESSION_TYPE, now)) return null
-    return { title: 'Hızlı Bakış', minutes: 5, done: doneToday(sessions, SESSION_TYPE, now) }
+    // Yolda: molanın ardından 2. bölümün tek göz durağı (50 deneme bütçe kilidine takılmasın; yol planı R5)
+    return { title: 'Hızlı Bakış', minutes: 5, slot: 'open', glyph: 'flash', openEnded: true, exclusive: true, dropRank: 1, done: doneToday(sessions, SESSION_TYPE, now) }
   },
   coach(sessions, now) {
     const fb = firstAndBest(sessions)

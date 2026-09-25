@@ -424,6 +424,35 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
     unlockAudio()
   }, [])
 
+  // Kayıt bir kez (yol grubunda kendiliğinden dönüş ile düğme yarışmasın)
+  const saved = useRef(false)
+  const save = () => {
+    if (saved.current) return
+    saved.current = true
+    onFinish({ type: 'routine', setId: set.id, seconds: spent.current, steps: steps.length })
+  }
+  // Yol grubu (lib/routines.js PATH_GROUPS): kısa bitiş, kayıt ve yola dönüş. VARSAYIM: 1,2 sn sonra kendiliğinden.
+  useEffect(() => {
+    if (!done || !set.group) return undefined
+    haptic('success')
+    const id = setTimeout(save, 1200)
+    return () => clearTimeout(id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [done])
+
+  if (done && set.group) {
+    return (
+      <main className="screen fade-in routine-screen">
+        <section className="card card-hero" style={{ alignItems: 'center', textAlign: 'center', gap: 14 }}>
+          <Check size={56} strokeWidth={2.6} style={{ color: 'var(--ok)' }} aria-hidden="true" />
+          <h1>{set.title} tamam</h1>
+          <p className="muted small">Hareketler rahatlamak için. Görmeyi iyileştirdiği gösterilmedi.</p>
+        </section>
+        <button className="btn" onClick={save}>Yola dön</button>
+      </main>
+    )
+  }
+
   if (done) {
     const total = todaySec + spent.current
     const dailyGoal = DAILY_GOAL_MIN * 60
@@ -440,7 +469,7 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
           <Info size={16} />
           Bakış ve daire hareketleri rahatlama amaçlıdır; görmeyi iyileştirdiklerine dair bilimsel kanıt yoktur. Görmendeki değişimi "E hangi yönde" testiyle ölçüyoruz.
         </p>
-        <button className="btn" onClick={() => onFinish({ type: 'routine', setId: set.id, seconds: spent.current, steps: steps.length })}>
+        <button className="btn" onClick={save}>
           Kaydet
         </button>
       </main>

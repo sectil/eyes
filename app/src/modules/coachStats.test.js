@@ -18,11 +18,11 @@ const sessions = [
 describe('modül coach() / stats() sözleşmesi', () => {
   it('her coach modülü yalnızca sayı/dize döndürür ve süzgeçten geçer', () => {
     const sig = moduleSignals(sessions, NOW)
-    expect(Object.keys(sig).sort()).toEqual(['breath', 'breath-count', 'snake', 'track']) // quick-look: oturum yok → sinyal yok
+    // quick-look: oturum yok → sinyal yok; breath-count emekli (Build 26) → koça gitmez
+    expect(Object.keys(sig).sort()).toEqual(['breath', 'snake', 'track'])
     expect(sig.track).toEqual({ best: 54, sessions7: 2, follow7: 85 })
     expect(sig.snake).toEqual({ best: 12, sessions7: 1, eyes7: 1 }) // bestFromSessions yalnızca score alanına bakar
     expect(sig.breath).toEqual({ sessions7: 1, minutes7: 5, calmDelta7: 2 })
-    expect(sig['breath-count']).toEqual({ sessions7: 2, accuracy7: 80, best: 90 })
     expect(sanitizeModules(sig)).toEqual(sig)
     expect(buildSignals([], sessions, NOW).modules.track.best).toBe(54)
     const withQl = moduleSignals([...sessions, { type: 'quick-look', threshold: 180, accuracy: 70, seconds: 300, date: ago(1) }], NOW)

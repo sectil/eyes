@@ -1,7 +1,7 @@
 // Nefes sayma ölçümü: farkındalığın davranışsal ölçüsü (Levinson 2014; bkz. lib/breathCount.js).
-// Dikkat halkasının ana ölçümü; haftada bir. Kayıt sessions deposuna gider (type 'breath-count').
+// Build 26: emekli (kullanıcı isteği; yol planı §13). Yeni ölçüm açılmaz; eski kayıtlar Gelişim'de okunur.
+// Kayıt sessions deposundadır (type 'breath-count').
 import { SESSION_TYPE, isBreathCount } from '../../lib/breathCount.js'
-import { lastOfType, isDue, doneToday } from '../../lib/today.js'
 import { NBSP, join, durationPart, mean } from '../../lib/format.js'
 import { withinDays } from '../../lib/today.js'
 
@@ -11,6 +11,7 @@ export default {
   label: 'nefes sayma ölçümü',
   ring: 'attention',
   kind: 'measure',
+  retired: true,
   gates: {}, // ekran karanlık; göz bütçesine sayılmaz
   home: { section: 'measure', order: 40 },
   coach(sessions, now) {
@@ -43,10 +44,5 @@ export default {
         ]),
       }
     },
-  },
-  // Haftada bir: zamanı geldiyse plana girer (okuma hızıyla aynı kural)
-  today({ sessions, now }) {
-    if (doneToday(sessions, SESSION_TYPE, now)) return { title: 'Nefes sayma', minutes: 3, done: true }
-    return isDue(lastOfType(sessions, SESSION_TYPE), now) ? { title: 'Nefes sayma', minutes: 3, done: false } : null
   },
 }

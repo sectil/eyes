@@ -7,8 +7,10 @@
 //
 // Süreler parça (seg) olarak tutulur: { kind: 'eye' | 'test', start, end } (ms, Date.now).
 //   eye  = bakışla oyunlar + göz hareketi egzersizleri → bütçe, saatlik ve günlük sınıra sayılır
-//   test = görme/okuma testleri → bütçe ve saatlik sınıra sayılır, günlük sınıra sayılmaz; testler
+//   test = görme/okuma testleri → bütçeye ve sınırlara sayılmaz (bkz. usage); mola sırasında kilitlidir,
 //          ortasında kesilmez (kilit bir sonraki ekrana geçişte başlar)
+// Mola sayılanlar: başlatılmış mola (startRest) ve hiç göz/test parçası olmayan en az restMs'lik gerçek ara
+// (Build 26, B: dünden kalan süre sabahki E testini kilitlemesin).
 
 export const EYE_BUDGET_KEY = 'gozolcum:eye-budget'
 const MIN = 60000
@@ -26,7 +28,7 @@ export const LIMITS = {
 }
 const KEEP_MS = 26 * 60 * MIN // bu kadar eski parçalar atılır (günlük hesap + tampon)
 const MERGE_GAP_MS = 2000
-export const REASONS = ['budget', 'hourly', 'daily', 'symptom']
+export const REASONS = ['budget', 'hourly', 'daily', 'symptom', 'path'] // path: Bugünün yolunda Nefes durağı (5 dk)
 
 export const emptyBudget = () => ({ v: 1, segs: [], rest: null, rests: [], motion: null, short: false })
 
@@ -62,12 +64,25 @@ const lastRestEnd = (state, now) => {
   const done = state.rests.filter((x) => x.until <= now).at(-1)
   return done ? done.until : 0
 }
+// Son gerçek aranın bittiği an: iki parça arasında (ya da son parçadan bu yana) en az restMs boşluk varsa
+// o ara mola sayılır. Parçalar zaman sırasıyla eklenir (addTime).
+const lastGapEnd = (segs, now) => {
+  let prevEnd = null
+  let since = 0
+  for (const s of segs) {
+    if (s.start > now) break
+    if (prevEnd != null && s.start - prevEnd >= LIMITS.restMs) since = s.start
+    prevEnd = Math.max(prevEnd ?? 0, s.end)
+  }
+  if (prevEnd != null && now - prevEnd >= LIMITS.restMs) since = now
+  return since
+}
 
 // Bütçeyi yalnızca 'eye' segmentleri (oyun, göz hareketi egzersizi) tüketir. Ölçüm testleri ('test')
 // bütçeye SAYILMAZ: 17a raporundaki 5 dk sınırı göz hareketi blokları içindir; bir E testi (3 göz) 3–4 dk
 // sürer ve bütçeyi bitirip molaya sokuyordu (Build 20 geri bildirimi). Testler mola sırasında yine kilitli.
 export function usage(state, now) {
-  const since = lastRestEnd(state, now)
+  const since = Math.max(lastRestEnd(state, now), lastGapEnd(state.segs, now))
   return {
     sinceRest: sum(state.segs, since, now, 'eye'),
     hour: sum(state.segs, now - LIMITS.hourWindowMs, now, 'eye'), // molalar arası da birikir (son 60 dk)
@@ -118,6 +133,7 @@ export const REASON_TEXT = {
   budget: { title: 'Gözlerin dinleniyor', sub: '5 dakikalık göz çalışmasından sonra kısa bir mola.' },
   hourly: { title: 'Uzun mola', sub: 'Son bir saatte 20 dakika göz çalıştın. Biraz daha uzun dinlenelim.' },
   daily: { title: 'Bugünlük bu kadar', sub: 'Günlük göz oyunu ve egzersiz süresi doldu. Yarın devam.' },
+  path: { title: 'Nefes molası', sub: 'Gözlerin dinlenirken nefes al.' },
   symptom: { title: 'Dinlenme zamanı', sub: 'Rahatsızlık hissettiğini söyledin. Baş dönmesi ya da ağrı sürerse bugün devam etme; geçmezse bir göz hekimine görün.' },
 }
 

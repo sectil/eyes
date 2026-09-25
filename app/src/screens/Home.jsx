@@ -7,7 +7,9 @@ import { trendMessage } from '../lib/trend.js'
 import { activeDays, weekProgress } from '../lib/calendar.js'
 import { snellen20 } from '../lib/optotype.js'
 import { activitiesFrom, countedActivities, summary } from '../lib/stats.js'
-import { todayPlan } from '../lib/today.js'
+import { buildPath, PATH } from '../lib/today.js'
+import { dayNumber } from '../lib/notice.js'
+import { eyeStatus, beginRest } from '../lib/eyeBudgetStore.js'
 import '../styles/home.css'
 import '../styles/restlock.css'
 import { REASON_TEXT, fmtLeft } from '../lib/eyeBudget.js'
@@ -82,7 +84,7 @@ function ModuleRows({ section, ctx, onStart }) {
   )
 }
 
-export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, onStart }) {
+export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, onStart }) {
   const now = new Date()
   // Oyun oturumları (type 'game') egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
   const exercise = sessions.filter((s) => s.type !== 'game')
@@ -96,7 +98,17 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   const tw = trendWords(r)
   const reads = tests.filter((t) => t.type === 'reading' && Number.isFinite(t.maxReadingSpeed))
   const todaySec = todaySeconds(exercise)
-  const plan = todayPlan(registry.modules, { tests, sessions, now, profile: settings.profile })
+  // Bugünün yolu (lib/today.js): göz bütçesi ve abonelik durumu yolu biçimlendirir (bölümler, kilit, ilk test)
+  const plan = buildPath(registry.live, { tests, sessions, now, profile: settings.profile, eye: eyeBudget, gate: { firstTestOnly: tests.length === 0 && !premium } })
+  // Yoldaki Nefes durağı 5 dk göz molasını başlatır (yol planı A): kilit yoksa ve son moladan beri ≥ 1 dk göz
+  // çalışması varsa. Saatlik/günlük sınır dolmuşsa o mola başlar (5 dk yetmez).
+  const startStop = (route) => {
+    if (route === 'breath-rest') {
+      const st = eyeStatus()
+      if (!st.locked && (st.due || st.used >= PATH.restMinUsed * 60000)) beginRest(st.due && st.due !== 'budget' ? st.due : 'path')
+    }
+    onStart(route)
+  }
   // Oyunla aynı kural (SnakeGame loadSnakeOpts): TrueDepth varsa ve kayıtlı seçim 'touch'
   // değilse gözle açılır. VARSAYIM: trueDepth prop'u verilmemişse mesafe yöntemine göre tahmin edilir.
   const hasTrueDepth = trueDepth ?? settings.distance?.method === 'truedepth'
@@ -145,16 +157,17 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
 
       <div className="home-h" style={{ marginTop: 4 }}>
         <h2>{plan.allDone ? 'Bugünkü yol tamam' : plan.next ? 'Bugünün yolu' : 'Serbest gün'}</h2>
-        <span className="muted small">{plan.total > 0 ? `${plan.doneCount}/${plan.total}` : ''}</span>
+        {plan.total > 0 && (
+          <span className="tp-count">{plan.allDone ? `${plan.total}/${plan.total} · tamam` : `${plan.doneCount}/${plan.total} · ≈ ${plan.minutesLeft} dk kaldı`}</span>
+        )}
       </div>
       {plan.total > 0 ? (
         <TodayPath
-          items={plan.items}
-          next={plan.next}
-          icons={Object.fromEntries(plan.items.map((it) => [it.id, viewFor(it.id)?.icon]))}
-          lockedIds={new Set(locked ? plan.items.filter((it) => registry.get(it.id)?.gates?.eyeBudget).map((it) => it.id) : [])}
-          lockLeft={lockLeft}
-          onStart={onStart}
+          plan={plan}
+          eye={eyeBudget}
+          day={dayNumber(now)}
+          icons={Object.fromEntries(plan.stops.map((s) => [s.id, viewFor(s.id)?.icon]))}
+          onStart={startStop}
           week={week.met ? `Bu hafta ${week.done} gün · hedef tamam` : `Bu hafta ${week.done}/${week.target} gün`}
         />
       ) : (

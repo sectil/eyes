@@ -11,7 +11,7 @@ import '../styles/restlock.css'
 
 // Zorunlu mola ekranı ("Atla" yok — ürün kararı; bkz. MOLA_KILIDI_VE_YILAN_ANIMASYONU.md §3).
 // Kalan süre gerçek saatle hesaplanır; uygulama kapanıp açılsa da doğru. Bu arada kilitsiz etkinlikler
-// (göz bütçesine sayılmayanlar: nefes, nefes sayma, göz kırpma) önerilir.
+// (göz bütçesine sayılmayanlar: nefes, göz kırpma, fark etme görevi) önerilir.
 // target: mola bitince gidilecek ekran (varsa "Devam" düğmesi); onGo(route); onHome().
 const SIZE = 220
 const STROKE = 12
@@ -52,7 +52,7 @@ export default function RestLock({ target = null, targetLabel = '', onGo, onHome
   const r = (SIZE - STROKE) / 2
   const c = 2 * Math.PI * r
   const frac = done ? 1 : total.current > 0 ? 1 - st.leftMs / total.current : 0
-  const free = registry.modules.filter((m) => !m.gates?.eyeBudget && m.home && viewFor(m.id))
+  const free = registry.live.filter((m) => !m.gates?.eyeBudget && m.home && viewFor(m.id))
 
   return (
     <main className="screen rl fade-in" aria-live="polite">

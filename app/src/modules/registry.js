@@ -20,8 +20,12 @@
 //                                       'test' = ölçüm (ortasında kesilmez). Yoksa kilitlenmez.
 //   storageKeys?: [...]                 "Tüm verileri sil"de temizlenecek localStorage anahtarları
 //   home?: { section: 'measure'|'exercise'|'practice', order: number }
-//   today?({ tests, sessions, now, profile? }) → null | { title, minutes, done, route? }
-//                                       Bugünün planına adım (lib/today.js toplar)
+//   retired?: true                      emekli: Bugün, Ana sayfa, Farkındalık, mola ekranı ve koçta görünmez;
+//                                       eski kayıtları Gelişim'de okunmaya devam eder (ör. breath-count)
+//   today?({ tests, sessions, now, profile? }) → null | durak | [durak, …]
+//                                       Bugünün yolu durakları (lib/today.js buildPath dizer). Durak:
+//                                       { title, minutes, done, route?, key?, sub?, slot?, order?, eyeMin?,
+//                                         glyph?, openEnded?, exclusive?, dropRank? } — alanlar today.js'te
 //   coach?(sessions, now) → { anahtar: sayı | kısa dize }   Jev'e giden 7 günlük özet (en çok 6 alan;
 //                                       lib/coachCore.js sanitizeSignals süzer). Yalnızca özet sayılar.
 //   stats?(sessions, now) → [{ label, value, sub? }]   Gelişim → Pratikler satırları (en çok 3)
@@ -53,6 +57,7 @@ export function validateManifest(m) {
   if (m.home != null) need(SECTIONS.includes(m.home.section) && Number.isFinite(m.home.order), 'home.section/order geçersiz')
   if (m.gates?.eyeBudget != null) need(m.gates.eyeBudget === 'eye' || m.gates.eyeBudget === 'test', "gates.eyeBudget 'eye' ya da 'test' olmalı")
   if (m.today != null) need(typeof m.today === 'function', 'today fonksiyon olmalı')
+  if (m.retired != null) need(typeof m.retired === 'boolean', 'retired true/false olmalı')
   if (m.coach != null) need(typeof m.coach === 'function', 'coach fonksiyon olmalı')
   if (m.stats != null) need(typeof m.stats === 'function', 'stats fonksiyon olmalı')
   if (m.sessions != null) {
@@ -84,13 +89,16 @@ export function createRegistry(manifests) {
     for (const r of routes) byRoute.set(r, m)
   }
   const order = (m) => m.home?.order ?? 999
+  const live = list.filter((m) => !m.retired)
   return {
     modules: list,
+    live, // emekli olmayanlar: listeler, yol, koç
+
     problems,
     get: (id) => list.find((m) => m.id === id) ?? null,
     forRoute: (route) => byRoute.get(route) ?? null,
     forSession: (s) => (s ? list.find((m) => m.sessions?.match(s)) ?? null : null),
-    inSection: (section) => list.filter((m) => m.home?.section === section).sort((a, b) => order(a) - order(b)),
+    inSection: (section) => live.filter((m) => m.home?.section === section).sort((a, b) => order(a) - order(b)),
     labelFor(route) {
       const m = byRoute.get(route)
       if (!m) return ''

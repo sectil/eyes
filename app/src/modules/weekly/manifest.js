@@ -11,7 +11,8 @@ export default {
   home: { section: 'measure', order: 10 },
   // Zamanı geldiyse (son haftalık testten 7 gün geçtiyse) bugünün ölçümü budur.
   today({ tests, now }) {
-    if (doneToday(tests, 'va-weekly', now)) return { title: 'Haftalık test', minutes: 5, done: true }
-    return isDue(lastOfType(tests, 'va-weekly'), now) ? { title: 'Haftalık test', minutes: 5, done: false } : null
+    const stop = { title: 'Haftalık E testi', sub: 'sağ, sol, iki göz', minutes: 5, slot: 'test', glyph: 'E' }
+    if (doneToday(tests, 'va-weekly', now)) return { ...stop, done: true }
+    return isDue(lastOfType(tests, 'va-weekly'), now) ? { ...stop, done: false } : null
   },
 }

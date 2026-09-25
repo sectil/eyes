@@ -1,7 +1,7 @@
 // Gelişim ekranı istatistikleri: görme testleri + egzersiz/oyun oturumları → tek aktivite listesi.
 // Saf fonksiyonlar. Tarihler yerel saatle günlere bölünür (calendar.js dayKey).
 import { dayKey, startOfWeek } from './calendar.js'
-import { SETS, setDurationSec } from './routines.js'
+import { findRoutine, setDurationSec } from './routines.js'
 import { NBSP, finite, join, formatDuration, durationPart } from './format.js'
 import { registry } from '../modules/registry.js'
 
@@ -84,7 +84,7 @@ function sessionActivity(s, ts, idx) {
   const own = positiveSec(s.seconds)
   const base = { id: `s:${s.id ?? idx}`, date: new Date(ts).toISOString(), ts, type: s.type ?? 'exercise' }
   if (s.type === 'routine') {
-    const set = SETS.find((x) => x.id === s.setId)
+    const set = findRoutine(s.setId) // set ya da yol grubu
     const est = own == null && set ? setDurationSec(set) : null
     const seconds = own ?? est ?? 0
     return {
@@ -94,7 +94,7 @@ function sessionActivity(s, ts, idx) {
       title: 'Egzersiz seti',
       seconds,
       estimated: est != null,
-      detail: join([set ? `${set.title} set` : null, durationPart(seconds, est != null)]),
+      detail: join([set ? (set.group ? set.title : `${set.title} set`) : null, durationPart(seconds, est != null)]),
     }
   }
   if (s.type === 'blink') {

@@ -11,7 +11,8 @@ export default {
   home: { section: 'measure', order: 30 },
   // Haftada bir: zamanı geldiyse plana girer, bugün yapıldıysa tamam görünür.
   today({ tests, now }) {
-    if (doneToday(tests, 'reading', now)) return { title: 'Okuma hızı', minutes: 3, done: true }
-    return isDue(lastOfType(tests, 'reading'), now) ? { title: 'Okuma hızı', minutes: 3, done: false } : null
+    const stop = { title: 'Okuma', minutes: 3, slot: 'measure', glyph: 'lines' }
+    if (doneToday(tests, 'reading', now)) return { ...stop, done: true }
+    return isDue(lastOfType(tests, 'reading'), now) ? { ...stop, done: false } : null
   },
 }

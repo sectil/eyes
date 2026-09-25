@@ -64,6 +64,21 @@ export const SETS = [
   },
 ]
 
+// Bugünün yolu durakları (lib/today.js): SETS'in yanında 2–3 adımlık kısa gruplar. Her grup yolda ayrı bir
+// durak; tamamlanınca { type: 'routine', setId: <grup id> } kaydı düşer. Adımlar yalnızca EXERCISES'ten.
+// VARSAYIM: yolda "1 dk" gösterilir (30–38 sn içerik + açılış/bitiş); TrueDepth adımları yüzü bekler.
+// glyph: yol durağındaki çizim (components/TodayPath.jsx).
+export const PATH_GROUPS = [
+  { id: 'isinma', title: 'Isınma', glyph: 'arrows', steps: ['blink', 'lookRight', 'lookLeft'] },
+  { id: 'uzak', title: 'Uzağa bakış', glyph: 'far', steps: ['farLook', 'rest'] },
+  { id: 'yakinuzak', title: 'Yakın–uzak', glyph: 'nearfar', steps: ['nearFar', 'farLook'] },
+  { id: 'daire', title: 'Daire', glyph: 'circle', steps: ['circleCw', 'circleCcw', 'rest'] },
+  { id: 'kirpma', title: 'Göz kırpma', glyph: 'lid', steps: ['blink', 'rest'] },
+].map((g) => ({ ...g, group: true }))
+
+// setId → set ya da yol grubu (Gelişim, rota)
+export const findRoutine = (id) => SETS.find((s) => s.id === id) ?? PATH_GROUPS.find((g) => g.id === id) ?? null
+
 // Günlük antrenman süresi hedefi (dakika). VARSAYIM: rakip uygulamalardaki
 // 1–3 dk setlere göre seçildi; bilimsel bir doz değildir.
 export const DAILY_GOAL_MIN = 3

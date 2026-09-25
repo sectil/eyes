@@ -158,3 +158,29 @@ describe('ölçüm testleri bütçeyi tüketmez (Build 20)', () => {
     expect(check(startRest(st, 'budget', T0 + 5 * 60000), T0 + 5 * 60000 + 1000).locked).toBe(true)
   })
 })
+
+describe('gerçek ara mola sayılır (Build 26, B)', () => {
+  it('dün akşamki 4 dk sabah bütçeyi yemez; 5 dk\'dan kısa ara saymaz', () => {
+    let s = add(emptyBudget(), 'eye', 0, 4)
+    expect(usage(s, T0 + 4 * MIN + 2 * MIN).sinceRest).toBe(4 * MIN) // 2 dk ara: mola değil
+    expect(usage(s, T0 + 4 * MIN + 5 * MIN).sinceRest).toBe(0) // 5 dk ara: mola
+    s = add(s, 'eye', 12 * 60, 12 * 60 + 1) // 12 saat sonra 1 dk
+    expect(usage(s, T0 + (12 * 60 + 1) * MIN).sinceRest).toBe(MIN)
+    expect(check(s, T0 + (12 * 60 + 1) * MIN).leftMs).toBe(4 * MIN)
+  })
+  it('testler de arayı böler (ölçüm sırasında dinlenme sayılmaz)', () => {
+    let s = add(emptyBudget(), 'eye', 0, 3)
+    s = add(s, 'test', 4, 8) // 1 dk ara + 4 dk test
+    s = add(s, 'eye', 8.5, 9)
+    expect(usage(s, T0 + 9 * MIN).sinceRest).toBe(3.5 * MIN)
+  })
+  it('yol molası (path): 5 dk, adıyla', () => {
+    const s = startRest(add(emptyBudget(), 'eye', 0, 3), 'path', T0 + 3 * MIN)
+    expect(s.rest.reason).toBe('path')
+    expect(s.rest.until - s.rest.start).toBe(LIMITS.restMs)
+    const st = check(s, T0 + 4 * MIN)
+    expect(st.locked && st.reason).toBe('path')
+    expect(check(s, T0 + 8 * MIN).used).toBe(0)
+  })
+})
+

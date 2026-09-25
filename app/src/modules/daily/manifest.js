@@ -13,6 +13,6 @@ export default {
   // VARSAYIM: haftalık zamanı gelmediyse günlük test her gün plandadır.
   today({ tests, now }) {
     if (doneToday(tests, 'va-weekly', now) || isDue(lastOfType(tests, 'va-weekly'), now)) return null
-    return { title: 'Günlük test', minutes: 3, done: doneToday(tests, 'va-daily', now) }
+    return { title: 'E testi', sub: 'sağ + sol göz', minutes: 3, slot: 'test', glyph: 'E', done: doneToday(tests, 'va-daily', now) }
   },
 }

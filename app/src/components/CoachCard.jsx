@@ -15,7 +15,6 @@ const ACTIONS = [
   [/^normal set/i, 'routine-normal'],
   [/^kırpma/i, 'blink'],
   [/^okuma/i, 'reading'],
-  [/^nefes say/i, 'breath-count'],
   [/^nefes/i, 'breath'],
   [/^çember/i, 'track'],
   [/^yılan/i, 'snake'],

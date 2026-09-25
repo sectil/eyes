@@ -12,8 +12,8 @@ export default function Awareness({ sessions = [], settings, native = {}, onGo, 
   const now = new Date()
   const sig = profileSignals(settings?.profile)
   const fb = firstAndBest(sessions)
-  const mods = registry.modules.filter((m) => m.ring === 'attention' && m.id !== 'awareness' && viewFor(m.id))
-  const order = { 'quick-look': 0, notice: 1, 'breath-count': 2 }
+  const mods = registry.live.filter((m) => m.ring === 'attention' && m.id !== 'awareness' && viewFor(m.id))
+  const order = { 'quick-look': 0, notice: 1 }
   mods.sort((a, b) => (order[a.id] ?? 9) - (order[b.id] ?? 9))
   return (
     <main className="screen fade-in">

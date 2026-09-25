@@ -1,27 +1,42 @@
-// Egzersiz setleri (Hafif / Normal / Tam). Tek modül, üç ekran. Kayıtları stats.js işler.
-import { SETS, DAILY_GOAL_MIN, setDurationSec, todaySeconds } from '../../lib/routines.js'
+// Egzersiz setleri (Hafif / Normal / Tam / Derin) ve Bugünün yolu egzersiz grupları. Tek modül, tek ekran.
+// Kayıtları stats.js işler.
+import { SETS, PATH_GROUPS } from '../../lib/routines.js'
+import { isSameDay } from '../../lib/today.js'
+
+// Yoldaki yerleri (lib/today.js ORDER): Isınma başta, Uzağa bakış ve Yakın–uzak 1. bölümde, Daire ve
+// Göz kırpma 2. bölümde (molanın ardından). Daire yol uzarsa düşen son duraktır (R7).
+const PATH_PLACE = {
+  isinma: { slot: 'warmup', order: 10 },
+  uzak: { slot: 'body', order: 30 },
+  yakinuzak: { slot: 'body', order: 50 },
+  daire: { slot: 'body', order: 70, dropRank: 3 },
+  kirpma: { slot: 'body', order: 90 },
+}
 
 export default {
   id: 'routine',
-  routes: SETS.map((s) => `routine-${s.id}`),
+  routes: [...SETS, ...PATH_GROUPS].map((s) => `routine-${s.id}`),
   title: 'Egzersiz setleri',
   label(route) {
-    const set = SETS.find((s) => `routine-${s.id}` === route)
-    return set ? `${set.title.toLocaleLowerCase('tr')} egzersiz seti` : 'egzersiz seti'
+    const set = [...SETS, ...PATH_GROUPS].find((s) => `routine-${s.id}` === route)
+    if (!set) return 'egzersiz seti'
+    return set.group ? `${set.title.toLocaleLowerCase('tr')} egzersizi` : `${set.title.toLocaleLowerCase('tr')} egzersiz seti`
   },
   ring: 'eye',
   kind: 'exercise',
   gates: { gaze: true, eyeBudget: 'eye' },
   home: { section: 'exercise', order: 10 },
-  // Günlük egzersiz hedefi (DAILY_GOAL_MIN). Kalan süreyi kapatan en kısa set önerilir.
-  // Nefesli Derin set isteğe bağlı: kullanıcı son egzersizinde onu seçmediyse plan önermez (VARSAYIM).
+  // Yolun gövdesi: beş kısa grup, her biri ayrı durak; bugün o grubun kaydı varsa tamam.
   today({ sessions, now }) {
-    const done = todaySeconds(sessions.filter((s) => s.type !== 'game'), now)
-    const left = DAILY_GOAL_MIN * 60 - done
-    const lastSet = sessions.filter((s) => s.type === 'routine').at(-1)?.setId
-    const pool = SETS.filter((s) => s.id !== 'deep' || s.id === lastSet)
-    const set = pool.find((s) => setDurationSec(s) >= left) ?? pool.at(-1)
-    if (left <= 0) return { title: 'Egzersiz', minutes: DAILY_GOAL_MIN, done: true }
-    return { title: `${set.title} set`, minutes: Math.max(1, Math.round(setDurationSec(set) / 60)), done: false, route: `routine-${set.id}` }
+    const doneIds = new Set(sessions.filter((s) => s.type === 'routine' && isSameDay(s, now)).map((s) => s.setId))
+    return PATH_GROUPS.map((g) => ({
+      key: g.id,
+      title: g.title,
+      minutes: 1,
+      glyph: g.glyph,
+      route: `routine-${g.id}`,
+      done: doneIds.has(g.id),
+      ...PATH_PLACE[g.id],
+    }))
   },
 }
