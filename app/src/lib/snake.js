@@ -287,7 +287,8 @@ export function loadSnakeOpts(trueDepth, storage) {
   try {
     const st = storage === undefined ? localStore() : storage
     const o = JSON.parse(st?.getItem(OPTS_KEY) || '{}') ?? {}
-    return { control: trueDepth && o.control !== 'touch' ? 'eyes' : 'touch', walls: o.walls === 'wrap' ? 'wrap' : 'classic' }
+    // practiced: "Şimdi sen dene" bakış pratiği bir kez tamamlandı/atlandı → tekrar sorulmaz
+    return { control: trueDepth && o.control !== 'touch' ? 'eyes' : 'touch', walls: o.walls === 'wrap' ? 'wrap' : 'classic', practiced: o.practiced === true }
   } catch {
     return fallback
   }
@@ -297,7 +298,14 @@ export function saveSnakeOpts(opts, storage) {
   try {
     const st = storage === undefined ? localStore() : storage
     if (!st) return false
-    st.setItem(OPTS_KEY, JSON.stringify({ control: opts?.control === 'touch' ? 'touch' : 'eyes', walls: opts?.walls === 'wrap' ? 'wrap' : 'classic' }))
+    let prev = {}
+    try {
+      prev = JSON.parse(st.getItem(OPTS_KEY) || '{}') ?? {}
+    } catch {
+      prev = {}
+    }
+    const practiced = typeof opts?.practiced === 'boolean' ? opts.practiced : prev.practiced === true
+    st.setItem(OPTS_KEY, JSON.stringify({ control: opts?.control === 'touch' ? 'touch' : 'eyes', walls: opts?.walls === 'wrap' ? 'wrap' : 'classic', practiced }))
     return true
   } catch {
     return false

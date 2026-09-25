@@ -63,7 +63,11 @@ import GazeTutorial from '../components/GazeTutorial.jsx'
 const COLS = 15
 const ROWS = 15
 const GAME_PHASES = new Set(['countdown', 'playing', 'paused', 'crashed', 'over'])
-const CAMERA_PHASES = new Set(['countdown', 'playing', 'paused'])
+const CAMERA_PHASES = new Set(['practice', 'countdown', 'playing', 'paused'])
+// "Şimdi sen dene": ilk gözle oyundan önce dört yöne birer kez bakma pratiği (atlanabilir)
+const PRACTICE_DIRS = ['right', 'up', 'left', 'down']
+const PRACTICE_TEXT = { right: 'Sağa bak', up: 'Yukarı bak', left: 'Sola bak', down: 'Aşağı bak' }
+const PRACTICE_HINT = { right: 'tahtanın sağ kenarının dışına', up: 'tahtanın üstünden dışarı', left: 'tahtanın sol kenarının dışına', down: 'tahtanın altından dışarı' }
 const AUTO_PAUSE = new Set(['face', 'eyes', 'calib'])
 
 // VARSAYIM: aşağıdaki eşik ve süreler ilk sürüm içindir; gerçek cihazda ayarlanacak.
@@ -413,6 +417,7 @@ function GazePanel({ ui, angle, camReady }) {
 
 export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
   const [initialOpts] = useState(() => loadSnakeOpts(trueDepth))
+  const [practiced, setPracticed] = useState(initialOpts.practiced)
   const [phase, setPhase] = useState('intro') // intro | countdown | playing | paused | crashed | rest | over
   const [control, setControl] = useState(initialOpts.control) // 'eyes' | 'touch'
   const [walls, setWalls] = useState(initialOpts.walls) // 'classic' | 'wrap'
@@ -484,6 +489,32 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
     steadyRef.current.reset()
     setCount({ n: 3, resume })
     go('countdown')
+  }
+
+  // --- Bakış pratiği (ilk gözle oyundan önce; "Nasıl oynanır?" ile her zaman) ---
+  const practiceRef = useRef({ i: 0, done: false })
+  const [practice, setPractice] = useState({ i: 0 })
+  function startPractice() {
+    unlockSfx()
+    readerRef.current = newGazeReader(readerRef.current)
+    faceRef.current.calibrated = false
+    dwellRef.current.reset()
+    practiceRef.current = { i: 0, done: false }
+    setPractice({ i: 0 })
+    if (!gameRef.current) {
+      const g = createGame({ cols: COLS, rows: ROWS, wrap: walls === 'wrap' })
+      gameRef.current = g
+      prevRef.current = g.snake
+    }
+    controlRef.current = control
+    go('practice')
+  }
+  function finishPractice(skipped) {
+    practiceRef.current.done = true
+    saveSnakeOpts({ control, walls, practiced: true })
+    setPracticed(true)
+    if (!skipped) haptic('success')
+    startGame()
   }
 
   function startGame() {
@@ -644,6 +675,21 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
     if (ph === 'playing') {
       dw = dwellRef.current.push(g.dir, ts)
       if (dw.fire) input(dw.fire)
+    } else if (ph === 'practice') {
+      dw = dwellRef.current.push(g.dir, ts)
+      const pr = practiceRef.current
+      if (dw.fire && !pr.done) {
+        if (dw.fire === PRACTICE_DIRS[pr.i]) {
+          pr.i += 1
+          haptic('hit')
+          playSfx('eat')
+          setPractice({ i: pr.i })
+          if (pr.i >= PRACTICE_DIRS.length) {
+            pr.done = true
+            setTimeout(() => finishPractice(false), 700)
+          }
+        } else haptic('warning')
+      }
     } else if (ph === 'paused' && AUTO_PAUSE.has(pauseReasonRef.current)) {
       // Otomatik devam: yüz görünür, göz açık ve bakış RESUME_LOOK_MS boyunca sabit → kısa geri
       // sayım. "Ortada" olması aranmaz: nötr eskimiş olabilir (duruş değişti) ve o zaman ekranın
@@ -1031,9 +1077,12 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
         {disclaimer}
 
         <div className="snake-cta">
-          <button type="button" className="btn" onClick={startGame}>
-            <Play size={20} aria-hidden="true" /> Başla
+          <button type="button" className="btn" onClick={eyes && !practiced ? startPractice : startGame}>
+            <Play size={20} aria-hidden="true" /> {eyes && !practiced ? 'Önce dene, sonra başla' : 'Başla'}
           </button>
+          {eyes && practiced && (
+            <button type="button" className="link-btn" onClick={startPractice}><ScanFace size={15} aria-hidden="true" /> Nasıl oynanır? Bir daha dene</button>
+          )}
         </div>
       </main>
     )
@@ -1045,10 +1094,28 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
   const over = phase === 'over'
   const canPause = phase === 'playing' || phase === 'countdown' || paused
   const liveRecord = best > 0 && hud.score > best
-  const showEdges = eyes && (phase === 'playing' || phase === 'countdown')
+  const showEdges = eyes && (phase === 'playing' || phase === 'countdown' || phase === 'practice')
+  const practiceTarget = phase === 'practice' ? PRACTICE_DIRS[Math.min(practice.i, PRACTICE_DIRS.length - 1)] : null
 
   let overlay = null
-  if (phase === 'countdown') {
+  if (phase === 'practice') {
+    const done = practice.i >= PRACTICE_DIRS.length
+    const t = practiceTarget
+    const status = !cam.ready ? 'Kamera hazırlanıyor…' : !gaze.tracked ? 'Yüzün görünmüyor' : gaze.closed ? 'Gözlerin kapalı' : !gaze.calibrated ? 'Önce ekranın ortasına bak' : gaze.cand === t ? `${PRACTICE_TEXT[t]}… tut` : gaze.cand ? `${DIR_WORD[gaze.cand]} bakıyorsun — ${PRACTICE_HINT[t]} bak` : null
+    overlay = (
+      <div className="snake-overlay snake-practice" role="dialog" aria-modal="false" aria-label="Bakış pratiği">
+        <span className="eyebrow">Şimdi sen dene · {Math.min(practice.i + 1, PRACTICE_DIRS.length)}/{PRACTICE_DIRS.length}</span>
+        <GazeTutorial frame={PRACTICE_DIRS.indexOf(t)} label={false} className="snake-practice-art" />
+        <h2>{done ? 'Harika, hazırsın' : PRACTICE_TEXT[t]}</h2>
+        {!done && <p className="snake-overlay-sub">Başını çevirmeden, gözünle {PRACTICE_HINT[t]} bak ve kısa bir an tut.</p>}
+        <div className="snake-practice-dots" aria-hidden="true">
+          {PRACTICE_DIRS.map((d, i) => <i key={d} className={i < practice.i ? 'done' : i === practice.i ? 'now' : ''} />)}
+        </div>
+        {status && !done && <span className="snake-gaze-status" aria-live="polite">{status}</span>}
+        {!done && <button type="button" className="link-btn" onClick={() => finishPractice(true)}>Atla, hemen başla</button>}
+      </div>
+    )
+  } else if (phase === 'countdown') {
     overlay = (
       <div className="snake-overlay is-light" role="status">
         <span className="snake-count" key={`${count.resume}-${count.n}`}>{count.n}</span>
@@ -1181,7 +1248,7 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
             const Icon = EDGE_ICONS[d]
             const p = gaze.cand === d ? gaze.progress : 0
             return (
-              <span key={d} className={`snake-edge ${d} ${p >= 1 ? 'is-fired' : ''}`} style={{ '--p': p }} aria-hidden="true">
+              <span key={d} className={`snake-edge ${d} ${p >= 1 ? 'is-fired' : ''} ${practiceTarget === d ? 'is-target' : ''}`} style={{ '--p': p }} aria-hidden="true">
                 <Icon size={22} strokeWidth={2.6} />
               </span>
             )

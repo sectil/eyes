@@ -295,3 +295,15 @@
   .snake-overlay.is-over .snake-stats div { padding: 6px 4px; }
   .snake-overlay.is-over .snake-overlay-btn { min-height: 46px; padding: 10px 16px; }
 }
+
+/* Bakış pratiği ("Şimdi sen dene") */
+.snake-edge.is-target { opacity: 1; color: var(--iris-1); animation: snake-edge-pulse 1.1s ease-in-out infinite; }
+@keyframes snake-edge-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+.snake-practice { justify-content: center; gap: 10px; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(6px); }
+.snake-practice-art { width: 150px; }
+.snake-practice h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 750; }
+.snake-practice-dots { display: flex; gap: 8px; }
+.snake-practice-dots i { width: 28px; height: 5px; border-radius: 3px; background: var(--surface-3); }
+.snake-practice-dots i.done { background: var(--accent-grad); }
+.snake-practice-dots i.now { background: color-mix(in srgb, var(--iris-1) 45%, var(--surface-3)); }
+@media (prefers-reduced-motion: reduce) { .snake-edge.is-target { animation: none; } }
