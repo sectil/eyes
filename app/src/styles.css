@@ -507,3 +507,50 @@ details > summary::-webkit-details-marker { display: none; }
 @keyframes pulse { 0%, 100% { transform: scale(0.8); opacity: 0.6; } 50% { transform: scale(1.2); opacity: 1; } }
 .reading-heard { color: var(--ink-3); font-size: 0.95rem; min-height: 1.4em; text-align: center; }
 .reading-heard .hit { color: var(--ok); }
+
+/* ---------- Ses düğmesi (SoundToggle) ---------- */
+.sound-toggle {
+  --w: 86px; --h: 36px; --k: 30px;
+  position: relative; display: inline-flex; align-items: center; flex: none;
+  width: var(--w); height: var(--h); padding: 0; border-radius: 999px; border: 1px solid var(--border);
+  background: var(--surface-2); cursor: pointer; overflow: visible;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+.sound-toggle.on { background: var(--accent-grad); border-color: transparent; box-shadow: var(--accent-glow); }
+.sound-knob {
+  position: absolute; top: 2px; left: 2px; width: var(--k); height: var(--k); border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface); color: var(--ink-2); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s;
+  animation: sound-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.sound-toggle.on .sound-knob { transform: translateX(calc(var(--w) - var(--k) - 6px)); color: #0b7480; }
+.sound-toggle.off .sound-knob { animation: sound-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), sound-wobble 0.6s ease 0.1s; }
+.sound-knob svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.sound-body { fill: currentColor; stroke: none; }
+.sound-wave { opacity: 0; transform-origin: 12px 12px; }
+.sound-toggle.on .sound-wave { opacity: 1; animation: sound-wave 1.4s ease-in-out infinite; }
+.sound-toggle.on .w2 { animation-delay: 0.2s; }
+.sound-slash { stroke-width: 2.4; stroke-dasharray: 22; stroke-dashoffset: 22; transition: stroke-dashoffset 0.3s ease; }
+.sound-toggle.off .sound-slash { stroke-dashoffset: 0; }
+.sound-text {
+  position: absolute; font-size: 0.66rem; font-weight: 750; letter-spacing: 0.02em; pointer-events: none;
+  transition: opacity 0.2s;
+}
+.sound-toggle.on .sound-text { left: 12px; color: var(--accent-ink); }
+.sound-toggle.off .sound-text { right: 11px; color: var(--ink-3); }
+@keyframes sound-pop { 0% { scale: 1; } 40% { scale: 1.28; } 70% { scale: 0.92; } 100% { scale: 1; } }
+@keyframes sound-wobble { 0%, 100% { rotate: 0deg; } 30% { rotate: -14deg; } 60% { rotate: 10deg; } 80% { rotate: -5deg; } }
+@keyframes sound-wave { 0%, 100% { opacity: 0.55; transform: scale(0.92); } 50% { opacity: 1; transform: scale(1.12); } }
+@media (prefers-reduced-motion: reduce) {
+  .sound-knob, .sound-toggle.off .sound-knob, .sound-toggle.on .sound-wave { animation: none; }
+  .sound-knob { transition: transform 0.2s ease; }
+}
+
+/* Yakın–uzak: ekrandaki daire yakın hedef */
+.nearfar-ring {
+  width: 72px; height: 72px; border-radius: 50%; display: inline-block;
+  border: 5px solid var(--accent-graphic); box-shadow: 0 0 0 6px var(--accent-soft);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s;
+}
+.nearfar-ring.far { transform: scale(0.55); opacity: 0.25; }

@@ -22,6 +22,7 @@ import {
   saveTrackSpeed,
 } from '../lib/track.js'
 import '../styles/track.css'
+import SoundToggle from '../components/SoundToggle.jsx'
 
 // Çember takibi — göz pratiği (lib/track.js). Çember kenar ve köşe noktaları arasında atlar; içinde
 // kısa bir söz yazar. Kişi gözüyle izler ve sözü okur. Her atlamada çok hafif tık (titreşim + ses).
@@ -256,7 +257,7 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
         <div className="row between">
           <button type="button" className="btn-icon" onClick={exit} aria-label="Kapat"><X size={20} /></button>
           <span className="eyebrow">Göz pratiği</span>
-          <span style={{ width: 40 }} aria-hidden="true" />
+          <SoundToggle />
         </div>
         <section className="card card-hero track-hero">
           <div className="track-hero-art" aria-hidden="true">

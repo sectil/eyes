@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Camera, Play, Check, CircleCheck, ChevronRight, Volume2, X } from 'lucide-react'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { PageHeader } from '../components/ui.jsx'
+import SoundToggle from '../components/SoundToggle.jsx'
 import { indicesFromConnections } from '../lib/distance.js'
 import { BLINK_CYCLE, BLINK_REPS, CLOSURES_PER_CYCLE, createClosureCounter, eyeOpenness } from '../lib/blink.js'
 import { createBlinkCounter, blinkThresholds, BLINK_REFRACTORY_MS } from '../lib/gaze.js'
@@ -138,7 +139,8 @@ export default function BlinkExercise({ onFinish, onBack, trueDepth = false }) {
       {phase === 'baseline' || phase === 'run' ? (
         <div className="row">
           <button className="btn-icon" onClick={onBack} aria-label="Egzersizden çık"><X size={20} aria-hidden="true" /></button>
-          <span className="eyebrow">Göz kırpma egzersizi</span>
+          <span className="eyebrow" style={{ flex: 1 }}>Göz kırpma egzersizi</span>
+          <SoundToggle />
         </div>
       ) : (
         <PageHeader onBack={phase === 'intro' ? onBack : undefined} eyebrow="Göz konforu" title="Göz kırpma egzersizi" />

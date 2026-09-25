@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { X, ArrowRight, ArrowLeft, ArrowUp, ArrowDown, Mountain, Hand, EyeOff, Trophy, Info, ScanFace, Check, SkipForward } from 'lucide-react'
+import { X, ArrowRight, ArrowLeft, ArrowUp, ArrowDown, Mountain, EyeOff, Trophy, Info, ScanFace, Check, SkipForward } from 'lucide-react'
 import { Ring } from '../components/ui.jsx'
 import { EXERCISES, DAILY_GOAL_MIN, formatMin, setDurationSec } from '../lib/routines.js'
 import { cue, unlockAudio } from '../lib/cue.js'
@@ -21,6 +21,7 @@ import {
 } from '../lib/gaze.js'
 import { haptic } from '../lib/native.js'
 import '../styles/routine.css'
+import SoundToggle from '../components/SoundToggle.jsx'
 
 const ARROWS = { right: ArrowRight, left: ArrowLeft, up: ArrowUp, down: ArrowDown }
 const DIR_WORD = { right: 'sağa', left: 'sola', up: 'yukarı', down: 'aşağı' }
@@ -109,11 +110,12 @@ function Visual({ ex, tick, gaze }) {
   }
   if (ex.visual === 'far') return <Mountain size={96} strokeWidth={1.6} className="routine-arrow" />
   if (ex.visual === 'nearfar') {
+    // Yakın hedef ekrandaki daire (başparmak değil: kamera daireye/uzağa bakışı ayırt eder). 3 sn ritim.
     const near = Math.floor(tick / 3) % 2 === 0
     return (
-      <div className="stack" style={{ alignItems: 'center' }}>
-        {near ? <Hand size={88} strokeWidth={1.6} className="routine-arrow" /> : <Mountain size={88} strokeWidth={1.6} className="routine-arrow" />}
-        <span className="routine-sub">{near ? 'Başparmağına bak' : 'Uzağa bak'}</span>
+      <div className="stack" style={{ alignItems: 'center', gap: 16 }}>
+        {near ? <span className="nearfar-ring" aria-hidden="true" /> : <Mountain size={88} strokeWidth={1.6} className="routine-arrow" />}
+        <span className="routine-sub">{near ? 'Daireye bak' : 'Uzağa bak'}</span>
       </div>
     )
   }
@@ -264,7 +266,11 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
       vr.phoneSince = phone ? vr.phoneSince ?? m.ts : null
       if (phone && m.ts - vr.stepStart >= FAR_GRACE_MS && m.ts - vr.phoneSince >= PHONE_WARN_MS) warn = 'Telefona değil, uzağa bak'
     } else if (kind === 'switches') {
-      const st = t.nearFar.push(open ? focusZone(m) : null, m.ts)
+      // Yakın = telefona (daireye) bakış, uzak = telefonun dışına bakış (kameraya göre bakış).
+      // Okuyucu kalibre değilse odak mesafesine (göz doğrultuları) düşer.
+      const atPhone = lookingAtPhone(g)
+      const zone = !open ? null : atPhone != null ? (atPhone ? 'near' : 'far') : focusZone(m)
+      const st = t.nearFar.push(zone, m.ts)
       value = st.switches
       ok = st.zone != null
     }
@@ -443,6 +449,7 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
           ))}
         </div>
         <span className="rt-step" aria-hidden="true">{idx + 1}/{steps.length}</span>
+        <SoundToggle />
       </div>
 
       <div className="routine-body" key={idx}>
@@ -514,7 +521,7 @@ function feedback(sensor, live, ex) {
       if (live.phone) return { hint: 'Telefona bakıyorsun · telefonun üstünden uzağa bak', tone: 'warn' }
       return live.ok ? { hint: 'Gözlerin uzakta, böyle kal', tone: 'ok' } : { hint: 'Telefonun üstünden uzaktaki bir noktaya bak', tone: '' }
     case 'switches':
-      return { hint: live.value === 0 ? 'Önce başparmağına, sonra uzağa bak' : 'Geçişleri sayıyorum', tone: '' }
+      return { hint: live.value === 0 ? 'Önce daireye, sonra telefonun üstünden uzağa bak' : 'Geçişleri sayıyorum', tone: '' }
     default:
       return { hint: null, tone: '' }
   }

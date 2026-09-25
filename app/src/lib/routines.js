@@ -21,7 +21,7 @@ export const EXERCISES = {
   circleCw: { title: 'Gözlerini saat yönünde çevir', sub: 'Havada yavaşça bir daire çiz', subTracked: 'Başını oynatmadan gözünle telefonun çevresinde büyük, yavaş bir daire çiz', seconds: 10, visual: 'circle', dir: 'cw', kind: 'relax', laps: 2 },
   circleCcw: { title: 'Şimdi ters yöne çevir', sub: 'Yavaş ve rahat', subTracked: 'Başını oynatmadan gözünle ters yönde büyük, yavaş bir daire çiz', seconds: 10, visual: 'circle', dir: 'ccw', kind: 'relax', laps: 2 },
   farLook: { title: 'Uzağa bak', sub: 'Pencereden 6 metreden uzak bir noktaya', subTracked: 'Telefonu yüzüne dönük tut, üstünden 6 metreden uzağa bak', seconds: 20, visual: 'far', kind: 'comfort' }, // sensör: gözler uzağa odaklıyken süre işler
-  nearFar: { title: 'Yakın – uzak', sub: 'Başparmağına 3 sn, uzağa 3 sn; tekrarla', seconds: 18, visual: 'nearfar', kind: 'comfort', switches: 6 }, // sensör: yakın↔uzak geçiş sayısı
+  nearFar: { title: 'Yakın – uzak', sub: 'Ekrandaki daireye 3 sn, uzağa 3 sn; tekrarla', seconds: 18, visual: 'nearfar', kind: 'comfort', switches: 6 }, // sensör: yakın↔uzak geçiş sayısı
   blink: { title: 'Tam göz kırp', sub: 'Kapat · hafifçe sık · aç — ritimle', seconds: 20, visual: 'blink', kind: 'evidence', closed: true, blinks: 5 },
   rest: { title: 'Gözlerini kapat', sub: 'Avuçlarını hafifçe üstüne koyabilirsin', subTracked: 'Telefonu yüzüne dönük tut; kamera kapalı gözlerini görmeli', say: 'Gözlerini kapat. Bitince sesle haber vereceğim.', seconds: 10, visual: 'rest', kind: 'relax', closed: true },
 }

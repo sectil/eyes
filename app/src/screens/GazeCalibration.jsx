@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { Check, Copy, Crosshair, RotateCcw, ScanFace, Share2, Volume2, VolumeX, X } from 'lucide-react'
+import { Check, Copy, Crosshair, RotateCcw, ScanFace, Share2, X } from 'lucide-react'
+import SoundToggle from '../components/SoundToggle.jsx'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { calibReport, fitModel, saveGazeModel, headRef, headTurned, TARGETS, DOWN_CLOSE_MAX, MIN_SCORE, HEAD_TURN_DEG } from '../lib/gazeCalib.js'
 import { shareText } from '../lib/share.js'
 import { createGazeReader, eyeClosure, BLINK_CLOSE, GAZE_FULL_DEG } from '../lib/gaze.js'
 import { haptic } from '../lib/native.js'
 import { cue, unlockAudio } from '../lib/cue.js'
-import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
 import '../styles/gazecal.css'
 
 // 5 noktalı kişisel göz kalibrasyonu (lib/gazeCalib.js, model sürüm 2).
@@ -60,13 +60,6 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   const [idx, setIdx] = useState(0)
   const [prog, setProg] = useState(0) // hedefteki kayıt ilerlemesi 0..1
   const [status, setStatus] = useState('ok') // ok | noface | closed | head
-  const [sound, setSound] = useState(() => getPrefs().sound)
-  useEffect(() => subscribePrefs((p) => setSound(p.sound)), [])
-  const toggleSound = () => {
-    const on = !sound
-    setPrefs({ sound: on })
-    if (on) unlockAudio()
-  }
   // Orta hedefteki baş duruşu; sonraki hedeflerde baş bundan HEAD_TURN_DEG'den çok dönerse kare sayılmaz
   const head = useRef({ ref: null, rejected: {}, lastWarn: 0 })
   const [result, setResult] = useState(null)
@@ -248,9 +241,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   return (
     <div className="gazecal-stage" role="application" aria-label="Göz kalibrasyonu">
       <button className="btn-icon gazecal-close" onClick={onCancel} aria-label="Kapat"><X size={20} /></button>
-      <button className="btn-icon gazecal-sound" onClick={toggleSound} aria-label={sound ? 'Sesi kapat' : 'Sesi aç'} aria-pressed={sound}>
-        {sound ? <Volume2 size={20} /> : <VolumeX size={20} />}
-      </button>
+      <SoundToggle className="gazecal-sound" />
       <div className="gazecal-steps" aria-hidden="true">
         {TARGETS.map((x, i) => <i key={x} className={i < idx ? 'done' : i === idx ? 'now' : ''} />)}
       </div>
