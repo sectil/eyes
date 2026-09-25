@@ -102,3 +102,21 @@
   align-self: center; color: var(--ink-3); font-weight: 550;
   min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
 }
+
+/* Tek göz örtme kontrolü (AcuityTest CoverCheck, lib/occlusion.js) */
+.cover-check { display: flex; flex-direction: column; gap: 10px; }
+.cover-check.ready { border-color: var(--accent); }
+.cover-eyes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.cover-eye {
+  display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 14px;
+  background: var(--surface-2); border: 1.5px solid var(--border);
+}
+.cover-eye.good { border-color: var(--accent); background: var(--accent-soft); }
+.cover-eye.bad { border-color: var(--warn); background: var(--warn-bg); }
+.cover-eye-name { font-size: 0.78rem; color: var(--ink-3); font-weight: 600; }
+.cover-eye strong { font-family: var(--font-display); font-size: 1.05rem; }
+.cover-eye-need { font-size: 0.75rem; color: var(--ink-3); }
+.cover-eye-raw { font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.cover-gate { height: 4px; border-radius: 2px; background: var(--surface-3); overflow: hidden; }
+.cover-gate i { display: block; height: 100%; background: var(--accent-graphic); transition: width 0.1s linear; }
+.cover-msg { margin: 0; font-weight: 600; }

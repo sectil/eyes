@@ -10,17 +10,20 @@ import { DistanceArt, SwipeEArt, ShrinkArt } from '../components/howtoArt.jsx'
 import { howtoSeen, markHowtoSeen } from '../lib/howto.js'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { distanceStatus, REFERENCE_MM } from '../lib/distance.js'
-import { logMARForHeight, renderSpec, smallestDrawableLogMAR, snellen20, snellen6 } from '../lib/optotype.js'
+import { logMARForHeight, renderSpec, smallestDrawableLogMAR, snellen20, snellen6, decimalAcuity } from '../lib/optotype.js'
 import { randomDirection, PLANS, UNSEEN } from '../lib/zest.js'
 import { createAcuityStaircase, finalizeEstimate, remainingDisplay } from '../lib/staircase.js'
+import { createOcclusionMonitor, coverFor, occlusionMessage } from '../lib/occlusion.js'
 import '../styles/acuity.css'
 import '../styles/profile.css' // pf-chips
 
-const EYES = [
-  { id: 'R', title: 'Sağ göz', cover: 'Sol gözünü avucunla hafifçe kapat (bastırmadan).' },
-  { id: 'L', title: 'Sol göz', cover: 'Sağ gözünü avucunla hafifçe kapat (bastırmadan).' },
+const ALL_EYES = [
+  { id: 'R', title: 'Sağ göz', cover: 'Sol gözünü kapat ve üstünü avucunla ört (bastırmadan). Sağ gözünü kısma.' },
+  { id: 'L', title: 'Sol göz', cover: 'Sağ gözünü kapat ve üstünü avucunla ört (bastırmadan). Sol gözünü kısma.' },
   { id: 'OU', title: 'İki göz', cover: 'İki gözün de açık.' },
 ]
+// Günlük test yalnız iki tek göz (Build 24: toplam harf yarıya indi); haftalık testte iki göz de ölçülür.
+const eyesFor = (plan) => (plan === 'daily' ? ALL_EYES.slice(0, 2) : ALL_EYES)
 // Isınma harfleri büyük (1,0 logMAR ≈ 20/200) ve sayılmaz; iniş 0,8'den başlar (staircase.js).
 const WARMUP_LOGMAR = 1.0
 // Canlı ölçek: harf, ölçülen mesafeye göre her karede yeniden boyutlanır (gözde sabit açı).
@@ -40,6 +43,9 @@ function swipeDirection(dx, dy) {
   if (Math.abs(dx) > Math.abs(dy)) return dx > 0 ? 'right' : 'left'
   return dy > 0 ? 'down' : 'up'
 }
+
+// Ondalık keskinlik (Türkiye'de reçete dili: 1,0 = 20/20): 1 / MAR
+const decimalTr = (logMAR) => decimalAcuity(logMAR).toFixed(2).replace('.', ',')
 
 // Türkçe ondalık, gerçek eksi işareti; −0,00 gösterilmez
 const fmt = (v) => {
@@ -126,6 +132,7 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
   const [howto, setHowto] = useState(() => !howtoSeen('acuity'))
   const planSpec = PLANS[plan]
   const { warmup } = planSpec
+  const EYES = eyesFor(plan)
   const pxPerMm = calibration.pxPerMm
   const dpr = calibration.dpr
   const tracked = Boolean(distanceCal)
@@ -146,12 +153,31 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
 
   // Molada TrueDepth oturumunu RestBreak kullanır; iki dinleyici aynı native oturumu
   // başlatıp durdurmasın diye burada kapatılır.
-  const cam = useFaceTracking({ enabled: tracked && !(phase === 'rest' && nativeTD), distanceCal })
+  // Tek göz örtme kontrolü (lib/occlusion.js): yalnızca TrueDepth göz kapanma değeri verdiği için iPhone
+  // uygulamasında kamerayla; diğer cihazlarda kişinin onayıyla (kayda yöntemi yazılır).
+  const occDetect = nativeTD
+  const occMon = useRef(null)
+  const [occ, setOcc] = useState(null)
+  const [selfCover, setSelfCover] = useState(false)
+  const occUi = useRef(0)
+  const cam = useFaceTracking({
+    enabled: tracked && !(phase === 'rest' && nativeTD),
+    distanceCal,
+    onFrame: (f) => {
+      if (!occDetect || !occMon.current) return
+      const snap = occMon.current.push(f, f.ts ?? performance.now())
+      if (f.ts - occUi.current > 90 || snap.blocked !== occ?.blocked) {
+        occUi.current = f.ts
+        setOcc(snap)
+      }
+    },
+  })
   const liveMm = tracked ? cam.mm : null
   const status = tracked ? distanceStatus(liveMm) : 'ok'
   // Mesafe canlı ölçülüyorsa 40 cm'ye kilitlenmez: harf ölçülen mesafeye göre ölçeklenir.
   const liveOk = !tracked || (liveMm != null && liveMm >= LIVE_MIN_MM && liveMm <= LIVE_MAX_MM)
-  const paused = tracked && phase === 'trial' && !liveOk
+  const occBlocked = occDetect && phase === 'trial' && Boolean(occ?.blocked)
+  const paused = (tracked && phase === 'trial' && !liveOk) || occBlocked
   const renderMm = tracked && liveOk ? liveMm : REFERENCE_MM
 
   // Çizilebilir en küçük boyut ve gerçekte çizilecek boyut (piksel yuvarlaması) — güncel mesafeyle
@@ -165,6 +191,14 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
   }
 
   const eye = EYES[eyeIdx]
+  const coverNeed = coverFor(eye.id)
+  // Her göz için yeni örtme izleyicisi (yönerge ekranında kapı, testte duraklatma)
+  useEffect(() => {
+    occMon.current = createOcclusionMonitor(coverNeed)
+    setOcc(null)
+    setSelfCover(false)
+  }, [eyeIdx, coverNeed])
+  const coverOk = occDetect ? Boolean(occ?.gateReady) : eye.id === 'OU' || selfCover
   const isWarmup = trialNo < warmup
   const minX = Math.max(-0.3, smallestDrawableLogMAR(REFERENCE_MM, pxPerMm, dpr) + 0.02)
   const step = !isWarmup && stair.current ? stair.current.next() : null
@@ -190,6 +224,7 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
   }
 
   function startEye() {
+    occMon.current?.resetStats()
     stair.current = createAcuityStaircase(planSpec, { minX, maxX: 1.3, quantize })
     distSamples.current = []
     progMax.current = 0
@@ -248,6 +283,11 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
       algorithm: ALGORITHM,
       outOfRange: fin.outOfRange,
       distanceTracked: tracked && d.length > 0,
+      // Örtme: kamerayla doğrulandı mı, test sırasında kaç kez bozuldu (lib/occlusion.js)
+      occlusion: occDetect
+        ? { method: 'camera', pauses: occMon.current?.snapshot(performance.now()).pauses ?? 0, blockedMs: occMon.current?.snapshot(performance.now()).blockedMs ?? 0 }
+        : { method: eye.id === 'OU' ? 'none' : 'self-report' },
+      trialsMax: planSpec.trials,
       meanDistanceMm: d.length ? Math.round(meanMm) : null,
       device: { pxPerMm, dpr, screenW: window.screen.width, screenH: window.screen.height },
     })
@@ -380,8 +420,9 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
               )}
             </div>
           )}
+          <CoverCheck detect={occDetect} need={coverNeed} occ={occ} selfCover={selfCover} onSelfCover={setSelfCover} />
           {distanceChip}
-          <button className="btn" onClick={startEye} disabled={eyeIdx === 0 && !correction}><Play size={18} aria-hidden="true" /> Başla</button>
+          <button className="btn" onClick={startEye} disabled={(eyeIdx === 0 && !correction) || !coverOk}><Play size={18} aria-hidden="true" /> Başla</button>
         </main>
       )}
 
@@ -411,7 +452,7 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
             {distanceChip || <span style={{ width: 40 }} aria-hidden="true" />}
           </div>
           {paused ? (
-            <p className="paused">{liveMm == null ? 'Yüzün görünmüyor' : `Telefonu ${LIVE_MIN_MM / 10}–${LIVE_MAX_MM / 10} cm arasında tut`}</p>
+            <p className="paused">{occBlocked ? occlusionMessage(occ?.state, coverNeed) : liveMm == null ? 'Yüzün görünmüyor' : `Telefonu ${LIVE_MIN_MM / 10}–${LIVE_MAX_MM / 10} cm arasında tut`}</p>
           ) : spec.drawable && !feedback ? (
             <div className="acuity-letter" key={trialNo}>
               <TumblingE unit={spec.unitCssPx} direction={dir} />
@@ -433,6 +474,7 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
 
       {phase === 'eye-done' && last && (
         <EyeResult
+          eyes={EYES}
           eyeIdx={eyeIdx}
           result={last}
           all={results.current}
@@ -458,7 +500,44 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
   )
 }
 
-function EyeResult({ eyeIdx, result, all, moreEyes, onNext, onFinishEarly }) {
+// Örtme kontrol kartı: canlı iki göz göstergesi + ham kapanma değerleri (0 açık, 1 kapalı).
+// Ham değerler cihazda eşik ve sol/sağ yönünü doğrulamak için (lib/occlusion.js VARSAYIM 1–2).
+function CoverCheck({ detect, need, occ, selfCover, onSelfCover }) {
+  if (!detect) {
+    if (need === 'none') return null
+    return (
+      <label className="choice">
+        <input type="checkbox" checked={selfCover} onChange={(e) => onSelfCover(e.target.checked)} />
+        <span>{need === 'L' ? 'Sol' : 'Sağ'} gözüm kapalı ve avucumla örtülü</span>
+      </label>
+    )
+  }
+  const eyeBox = (side) => {
+    const v = side === 'L' ? occ?.l : occ?.r
+    const shouldClose = need === side
+    const closed = Number.isFinite(v) && v >= 0.55
+    const open = Number.isFinite(v) && v <= 0.45
+    const good = shouldClose ? closed : open
+    return (
+      <div className={`cover-eye${good ? ' good' : Number.isFinite(v) ? ' bad' : ''}`}>
+        <span className="cover-eye-name">{side === 'L' ? 'Sol göz' : 'Sağ göz'}</span>
+        <strong>{!Number.isFinite(v) ? '—' : closed ? 'kapalı' : open ? 'açık' : 'yarı'}</strong>
+        <span className="cover-eye-need">{shouldClose ? 'kapalı olmalı' : 'açık olmalı'}</span>
+        <span className="cover-eye-raw">{Number.isFinite(v) ? v.toFixed(2).replace('.', ',') : '—'}</span>
+      </div>
+    )
+  }
+  const state = occ?.state ?? 'no-face'
+  return (
+    <div className={`card cover-check${occ?.gateReady ? ' ready' : ''}`} aria-live="polite">
+      <div className="cover-eyes">{eyeBox('R')}{eyeBox('L')}</div>
+      <div className="cover-gate"><i style={{ width: `${Math.round((occ?.gateFrac ?? 0) * 100)}%` }} /></div>
+      <p className="small cover-msg">{occ?.gateReady ? 'Tamam, başlayabilirsin' : occlusionMessage(state, need)}</p>
+    </div>
+  )
+}
+
+function EyeResult({ eyes: EYES, eyeIdx, result, all, moreEyes, onNext, onFinishEarly }) {
   const eye = EYES[eyeIdx]
   const v = useCountUp(result.logMAR)
   return (
@@ -471,10 +550,11 @@ function EyeResult({ eyeIdx, result, all, moreEyes, onNext, onFinishEarly }) {
           <span className="acuity-value" aria-label={`${fmt(result.logMAR)} logMAR`}>{fmt(v)}</span>
           <span className="metric-unit">logMAR</span>
         </div>
-        <span className="acuity-equiv">{snellen20(result.logMAR)} · {snellen6(result.logMAR)} karşılığı</span>
+        <span className="acuity-equiv">{snellen20(result.logMAR)} · {snellen6(result.logMAR)} · ondalık {decimalTr(result.logMAR)}</span>
         <AcuityScale value={v} />
         <div className="acuity-meta">
           <span className="acuity-pill">{result.trials} harf</span>
+          {result.occlusion?.method === 'camera' && <span className="acuity-pill">Örtme kamerayla doğrulandı{result.occlusion.pauses ? ` · ${result.occlusion.pauses} kez durdu` : ''}</span>}
           {result.meanDistanceMm && <span className="acuity-pill">ort. {Math.round(result.meanDistanceMm / 10)} cm</span>}
           <span className="acuity-pill">İniş {result.descentTrials} · İnce ayar {result.fineTrials}</span>
         </div>

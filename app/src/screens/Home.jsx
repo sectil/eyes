@@ -1,8 +1,9 @@
+import { pickSeries, EYE_LABEL } from '../lib/vaSeries.js'
 import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame, Lock, Eye, UserRound } from 'lucide-react'
 import { profileComplete } from '../lib/profile.js'
 import { DAILY_GOAL_MIN, formatMin, todaySeconds } from '../lib/routines.js'
 import { Sparkline, IrisMark } from '../components/ui.jsx'
-import { analyzeTrend, trendMessage } from '../lib/trend.js'
+import { trendMessage } from '../lib/trend.js'
 import { activeDays, weekProgress } from '../lib/calendar.js'
 import { snellen20 } from '../lib/optotype.js'
 import { activitiesFrom, countedActivities, summary } from '../lib/stats.js'
@@ -87,8 +88,10 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   const exercise = sessions.filter((s) => s.type !== 'game')
   const week = weekProgress(activeDays([...tests, ...exercise]), now, settings.reminder?.weeklyTarget)
   const streak = summary(countedActivities(activitiesFrom(tests, sessions)), now).streakDays
-  const ou = tests.filter((t) => (t.type === 'va-daily' || t.type === 'va-weekly') && t.eye === 'OU')
-  const r = analyzeTrend(ou)
+  // Öne çıkan göz serisi (lib/vaSeries.js): günlük test Build 24'ten beri yalnız sağ/sol göz
+  const vaPick = pickSeries(tests, now.toISOString())
+  const ou = vaPick.tests
+  const r = vaPick.trend
   const shown = r.current7 ?? ou.at(-1)?.logMAR ?? null
   const tw = trendWords(r)
   const reads = tests.filter((t) => t.type === 'reading' && Number.isFinite(t.maxReadingSpeed))
@@ -166,7 +169,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
       </div>
       <div className="home-tiles">
         <button className="home-tile" onClick={() => onStart(shown == null ? 'daily' : 'progress')}>
-          <span className="t">Yakın görme</span>
+          <span className="t">Yakın görme{vaPick.eye ? ` · ${EYE_LABEL[vaPick.eye].toLocaleLowerCase('tr-TR')}` : ''}</span>
           <span className="big">{shown == null ? '—' : snellen20(shown)}</span>
           <span className={`s ${shown == null ? '' : tw.tone}`}>{shown == null ? 'henüz ölçüm yok' : tw.text}</span>
           <Sparkline values={ou.slice(-14).map((t) => t.logMAR)} width={132} height={22} />

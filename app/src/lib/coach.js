@@ -1,7 +1,7 @@
 // Jev Göz Koçu — istemci (Bugün kartı). Sinyaller kural katmanında hesaplanır; sunucuya yalnızca
 // bu özet sayılar gider. Sunucu/model cevap vermezse kural tabanlı şablon metin gösterilir.
+import { pickSeries } from './vaSeries.js'
 import { activitiesFrom, countedActivities, summary } from './stats.js'
-import { analyzeTrend } from './trend.js'
 import { sanitizeSignals } from './coachCore.js'
 import { registry } from '../modules/registry.js'
 
@@ -21,8 +21,8 @@ export function buildSignals(tests = [], sessions = [], now = new Date(), weekly
   const since7 = now.getTime() - 7 * DAY
   const recent = acts.filter((a) => new Date(a.date).getTime() >= since7)
   const s = summary(acts, now)
-  const va = tests.filter((t) => (t.type === 'va-daily' || t.type === 'va-weekly') && t.eye === 'OU')
-  const tr = analyzeTrend(va, now.toISOString())
+  // Öne çıkan göz serisi (lib/vaSeries.js); günlük test Build 24'ten beri yalnız sağ/sol göz
+  const tr = pickSeries(tests, now.toISOString()).trend
   const lastOf = (arr) => (arr.length ? Math.max(...arr.map((x) => new Date(x.date).getTime())) : null)
   const lastTest = lastOf(tests)
   const ex = sessions.filter((x) => x.type !== 'game')

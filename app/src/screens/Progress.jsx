@@ -1,3 +1,4 @@
+import { pickSeries } from '../lib/vaSeries.js'
 import { useMemo, useState } from 'react'
 import {
   Activity,
@@ -346,7 +347,7 @@ function PracticeSection({ sessions, now, onStart }) {
 const CONDITION_TEXT = { none: 'gözlüksüz', reading: 'okuma gözlüğüyle', progressive: 'progresif gözlükle', distance: 'uzak gözlüğüyle', contacts: 'lensle', glasses: 'gözlüklü (eski kayıt)' }
 
 function VisionSection({ tests, onStart }) {
-  const [eye, setEye] = useState('OU')
+  const [eye, setEye] = useState(() => pickSeries(tests).eye ?? 'R')
   const va = useMemo(() => tests.filter((t) => t.type === 'va-daily' || t.type === 'va-weekly'), [tests])
   const r = useMemo(() => analyzeTrend(va.filter((t) => t.eye === eye)), [va, eye])
   const reading = tests.filter((t) => t.type === 'reading').slice(-6).reverse()

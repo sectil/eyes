@@ -168,3 +168,18 @@ Seçenekler:
   Apple ile giriş zorunlu. 5.1.1(v): hesapsız kullanım kalır ("Şimdilik hesapsız dene"). "Beni tanı": oturum cihazın güvenli
   deposunda, şifre bir daha sorulmaz; Face ID kilidi sonraki build. Eşleşen veri: profil + ölçüm özetleri; kamera verisi asla.
   Sağlık verisi rızası ve gizlilik politikası güncellemesi gerekir. Film sonundaki "Başla" 23b'de hesap düğmelerine dönüşür.
+
+## 10. Görme testi: daha az harf, tek göz örtme kontrolü (2026-09-25, onaylı) — YAPILDI (Build 24)
+- Şikâyet (Build 22 ekranı): "~23 harf kaldı", üç göz turu çok uzun; iki göz açıkken "sağ göz" testi yapılabiliyor.
+- Harf sayısı (`lib/zest.js` PLANS): günlük 20 (en az 14), haftalık 28 (en az 20). Günlük test yalnız sağ + sol göz;
+  iki göz yalnız haftalıkta. Simülasyon (550 sanal kişi): günlük hata SD 0,046→0,057, haftalık 0,031→0,042; ETDRS
+  test-tekrar farkı ≈ ±0,1 logMAR içinde. Bugün kutucuğu, Jev sinyali ve Gelişim artık tek 'OU' serisine değil
+  `lib/vaSeries.js` seçimine bakar (uyarısı en ciddi göz → son 14 günde en çok ölçülen → sağ).
+- Örtme (`lib/occlusion.js`): iPhone TrueDepth göz kapanma değeriyle. Test edilen göz açık, diğeri kapalı ve avuçla
+  örtülü 1 sn görülmeden "Başla" açılmaz; testte durum 0,7 sn'den uzun bozulursa harf gizlenir ("Sol gözünü kapat").
+  Kırpma testi durdurmaz. Yönerge ekranında iki göz için canlı durum + ham değer (0 açık, 1 kapalı). Kayda
+  `occlusion: { method: 'camera', pauses, blockedMs }`; TrueDepth yoksa kişinin onayı (`self-report`).
+- VARSAYIM (cihazda doğrulanacak): blinkLeft = kullanıcının kendi sol gözü (Apple belgesi açık yazmıyor);
+  avuçla örtülen gözün kapağı da indirilirse "kapalı" okunur; eşikler 0,55 / 0,45.
+- Sonuç: logMAR + 20/xx + 6/xx + ondalık (Türkiye reçete dili).
+- Gözlük: kamera gözlük takılı mı ayırt edemiyor (ARKit sinyali yok); koşul seçimi ve seri ayrımı kalır.

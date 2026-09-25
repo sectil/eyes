@@ -350,7 +350,10 @@ describe('deneme sayısı gerekçesi', () => {
     const ratio = info(0.25) / info(0.125)
     expect(ratio).toBeCloseTo(0.76, 2)
     expect(Math.round(18 / ratio)).toBe(24)
-    expect(PLANS.daily.trials).toBe(24)
+  })
+  it('Build 24: günlük 20 / haftalık 28 üst sınır (bilgi gerekçesinin altında; bedel simülasyonla ölçüldü, zest.js)', () => {
+    expect(PLANS.daily).toMatchObject({ trials: 20, minTrials: 14 })
+    expect(PLANS.weekly).toMatchObject({ trials: 28, minTrials: 20 })
   })
 })
 

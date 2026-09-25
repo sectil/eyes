@@ -124,10 +124,16 @@ export function randomDirection(rng = Math.random) {
 //  - Dağılıma (SD) bakarak erken durmak şans eseri çok erken bitirebilir (Bach 2024) →
 //    minTrials yüksek tutuldu; stopSd yalnızca üst sınırdan önce bitirmeye yarar.
 //  - Günlük ≈20, haftalık 30–40 deneme önerisi: 13_gunluk_takip.md §7.
+//  - Build 24 (kullanıcı geri bildirimi: üç göz × 24 harf fazla, test bırakılıyor): günlük 20 (en az 14),
+//    haftalık 28 (en az 20). Bedeli simülasyonla ölçüldü (550 sanal kişi, iki gözlemci modeli):
+//    günlük hata SD 0,046→0,057 (uyumsuz gözlemci 0,075→0,088), haftalık 0,031→0,042 (0,054→0,069).
+//    ETDRS'nin kendi test-tekrar farkı ≈ ±0,1 logMAR (Beck 2003, PMID 12566024); iki plan da bunun içinde.
+//    Bach 2024'ün 8 seçenekli testte gördüğü "18 denemede kırılma" 4 seçenekte daha geç gelir; günlükte
+//    bilerek bunun altına inildi, haftalık test daha kesin ölçüm olarak kalır. Günlük test yalnız iki tek göz.
 // VARSAYIM: minFine ve stopSd değerleri simülasyonla seçildi (staircase.test.js).
 export const PLANS = {
-  daily: { warmup: 2, trials: 24, minTrials: 18, minFine: 8, stopSd: 0.07 },
-  weekly: { warmup: 2, trials: 40, minTrials: 30, minFine: 14, stopSd: 0.05 },
+  daily: { warmup: 2, trials: 20, minTrials: 14, minFine: 8, stopSd: 0.07 },
+  weekly: { warmup: 2, trials: 28, minTrials: 20, minFine: 10, stopSd: 0.06 },
 }
 
 // estimate: { trials, sd, fineTrials? } — fineTrials verilmişse plan.minFine de aranır.
