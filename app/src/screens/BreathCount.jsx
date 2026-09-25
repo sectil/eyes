@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { X, Play, Wind, Check, RotateCcw, Hand, CircleHelp, Timer } from 'lucide-react'
-import { PageHeader } from '../components/ui.jsx'
+import { X, Play, Check, RotateCcw, ChevronLeft } from 'lucide-react'
+import { IrisMark, Ring } from '../components/ui.jsx'
+import NightScene from '../components/NightScene.jsx'
 import StepCards from '../components/StepCards.jsx'
 import { BreathTapArt, BreathHoldArt, LostCountArt } from '../components/howtoArt.jsx'
 import { howtoSeen, markHowtoSeen } from '../lib/howto.js'
@@ -13,26 +14,52 @@ import '../styles/breathcount.css'
 
 // Son 20 sn içinde yeni sorgu açılmaz (VARSAYIM: bitişe sıkışan sorgu yanıtlanamaz)
 const PROBE_TAIL_MS = 20000
+const HINT_MS = 1600
+const RIPPLE_MS = 3400
 const MW_LABEL = { 1: 'Tamamen nefeste', 6: 'Tamamen başka yerde' }
 const PHASE_TEXT = {
   familiarization: 'Alışma dönemi: ilk üç seans yalnızca tanışma; sayılar henüz karşılaştırılmaz.',
   baseline: 'Başlangıç noktan oluşuyor: birkaç seans daha, sonra değişimi izleyebiliriz.',
   tracking: null,
 }
+const JEV_INTRO = "Nefesini 1'den 9'a say. Her verişte suya dokun, 9'da basılı tut. Sayıyı ben görmem; sen bilirsin."
 
+let rippleSeq = 0
+
+// Sahne (gece göğü + su) sayıyı göstermez: Levinson 2014 protokolü korunur. Sahne yalnızca dokunuşa cevap verir.
+// VARSAYIM: gökteki yıldız = uzun basışla kapanan set (doğruluk değil); doğruluk yalnızca sonuçta görünür.
 export default function BreathCount({ sessions = [], onBack, onFinish }) {
   const [phase, setPhase] = useState('intro') // intro | run | result
   const [howto, setHowto] = useState(() => !howtoSeen('breath-count'))
+  const [seconds, setSeconds] = useState(() => durationFor(sessions))
   const [probe, setProbe] = useState(null) // null | { step: 'mw' | 'count', mw }
   const [left, setLeft] = useState(0)
   const [result, setResult] = useState(null)
-  const seconds = durationFor(sessions)
+  const [ripples, setRipples] = useState([])
+  const [stars, setStars] = useState(0)
+  const [hint, setHint] = useState({ text: '', tone: '' })
+  const [demo, setDemo] = useState('') // giriş küresi: '' | 'tap' | 'hold'
   const trendBefore = bcTrend(sessions)
 
   const counter = useRef(null)
   const t0 = useRef(0)
   const probeAt = useRef(0)
-  const press = useRef(null) // { at, timer, long }
+  const press = useRef(null) // { at, timer, long, x, y }
+  const hintTimer = useRef(null)
+  const stage = useRef(null)
+
+  useEffect(() => () => clearTimeout(hintTimer.current), [])
+
+  function say(text, tone = '', ms = HINT_MS) {
+    clearTimeout(hintTimer.current)
+    setHint({ text, tone })
+    if (ms) hintTimer.current = setTimeout(() => setHint({ text: '', tone: '' }), ms)
+  }
+  function ripple(x, y, extra = {}) {
+    const id = ++rippleSeq
+    setRipples((r) => [...r.slice(-8), { id, x, y, ...extra }])
+    setTimeout(() => setRipples((r) => r.filter((k) => k.id !== id)), RIPPLE_MS)
+  }
 
   function start() {
     counter.current = createBreathCounter()
@@ -40,8 +67,11 @@ export default function BreathCount({ sessions = [], onBack, onFinish }) {
     probeAt.current = nextProbeAt(t0.current)
     setProbe(null)
     setResult(null)
+    setRipples([])
+    setStars(0)
     setLeft(seconds)
     setPhase('run')
+    say('Nefes ver, suya dokun', '', 0)
     haptic('success')
   }
 
@@ -75,16 +105,28 @@ export default function BreathCount({ sessions = [], onBack, onFinish }) {
     haptic('success')
   }
 
-  // Dokunma yüzeyi: kısa dokunuş = 1–8, basılı tutma (≥ LONG_PRESS_MS) = 9
+  // Dokunuş yüzeyi: kısa dokunuş = 1–8, basılı tutma (≥ LONG_PRESS_MS) = 9. Konum: halka oraya çizilir.
+  function pos(e) {
+    const r = stage.current?.getBoundingClientRect()
+    if (!r) return { x: 50, y: 76 }
+    // Su alanının altına (%54+) düşmeyen dokunuşlar da suda halka yapar: y su bandına bağlanır.
+    const x = Math.max(4, Math.min(96, ((e.clientX - r.left) / r.width) * 100))
+    const y = Math.max(58, Math.min(94, ((e.clientY - r.top) / r.height) * 100))
+    return { x, y }
+  }
   function down(e) {
     if (probe) return
+    if (e.target.closest('[data-no-tap]')) return
     e.preventDefault()
     const at = performance.now()
+    const p = pos(e)
     const timer = setTimeout(() => {
-      press.current = { at, timer: null, long: true }
+      press.current = { ...press.current, timer: null, long: true }
+      ripple(p.x, p.y, { gold: true })
+      say('9 · basılı tut', 'gold')
       haptic('hit') // 9 kabul edildi
     }, LONG_PRESS_MS)
-    press.current = { at, timer, long: false }
+    press.current = { at, timer, long: false, ...p }
   }
   function up() {
     const p = press.current
@@ -92,15 +134,21 @@ export default function BreathCount({ sessions = [], onBack, onFinish }) {
     press.current = null
     if (p.timer) clearTimeout(p.timer)
     const ts = performance.now()
-    if (p.long) counter.current.nine(ts)
-    else {
+    if (p.long) {
+      const st = counter.current.nine(ts)
+      setStars(st.nines)
+    } else {
       counter.current.tap(ts)
+      ripple(p.x, p.y)
+      if (hint.text === 'Nefes ver, suya dokun') say('', '', 0)
       haptic('tick')
     }
   }
   function lost() {
     if (probe) return
     counter.current.reset(performance.now())
+    ripple(50, 76, { calm: true })
+    say("1'den başla", 'warn')
     haptic('warning')
   }
   function answerMw(mw) {
@@ -112,10 +160,24 @@ export default function BreathCount({ sessions = [], onBack, onFinish }) {
     setProbe(null)
   }
 
+  // Giriş küresi: dokun → dalga, basılı tut → altın (ölçüme sayılmaz)
+  function demoDown() {
+    const timer = setTimeout(() => { press.current = { timer: null, long: true }; setDemo('hold'); haptic('hit') }, LONG_PRESS_MS)
+    press.current = { timer, long: false }
+  }
+  function demoUp() {
+    const p = press.current
+    if (!p) return
+    press.current = null
+    if (p.timer) clearTimeout(p.timer)
+    if (!p.long) { setDemo('tap'); haptic('tick') }
+    setTimeout(() => setDemo(''), 900)
+  }
+
   if (phase === 'intro' && howto) {
     const cards = [
-      { key: 'tap', art: <BreathTapArt />, title: 'Nefes ver, ekrana bir kez dokun', why: "1'den 9'a say. Rahat otur; ekran karanlık kalır." },
-      { key: 'hold', art: <BreathHoldArt />, title: "9'da basılı tut, titreşimi hisset", why: "Sonra 1'den başla." },
+      { key: 'tap', art: <BreathTapArt />, title: 'Nefes ver, suya bir kez dokun', why: "1'den 9'a say. Ekran sayıyı göstermez; sen bilirsin." },
+      { key: 'hold', art: <BreathHoldArt />, title: "9'da basılı tut, titreşimi hisset", why: "Altın halka ve gökte bir yıldız. Sonra 1'den başla." },
       { key: 'lost', art: <LostCountArt />, title: 'Sayıyı kaybettiysen "Kaybettim"', why: 'Hata değil, fark etmenin kendisi. Arada bir soru sorarım; doğru cevap yok.' },
     ]
     return (
@@ -127,22 +189,35 @@ export default function BreathCount({ sessions = [], onBack, onFinish }) {
 
   if (phase === 'intro') {
     return (
-      <main className="screen fade-in">
-        <PageHeader onBack={onBack} eyebrow="Dikkat ölçümü" title="Nefes sayma" subtitle="Nefeslerini say; dikkatin nereye kaçtığını ölçelim." />
-        <div className="row between">
-          <span className="muted small">Nefes verişte dokun · 9'da basılı tut · kaybedince "Kaybettim"</span>
-          <button type="button" className="link-btn" onClick={() => setHowto(true)}>Nasıl yapılır?</button>
+      <main className="screen fade-in bc-intro">
+        <div className="bc-bar">
+          <button type="button" className="btn-icon" onClick={onBack} aria-label="Geri"><ChevronLeft size={22} /></button>
+          <span className="muted small">Dikkat ölçümü · {seconds / 60} dk</span>
+          <button type="button" className="link-btn" onClick={() => setHowto(true)}>Nasıl?</button>
         </div>
-        <div className="row" style={{ gap: 8, flexWrap: 'wrap' }}>
-          <span className="acuity-pill"><Timer size={14} aria-hidden="true" /> {seconds / 60} dk</span>
-          <span className="acuity-pill"><Hand size={14} aria-hidden="true" /> Dokun · 9'da basılı tut</span>
-          <span className="acuity-pill"><CircleHelp size={14} aria-hidden="true" /> 1–2 soru</span>
+        <div className="bc-jev">
+          <IrisMark size={40} />
+          <p className="bc-bubble">{JEV_INTRO}</p>
         </div>
-        <p className="muted small">
-          Nefes sayma, farkındalığın davranışla ölçülebilen bir göstergesi (Levinson 2014). İnsanların çoğu ilk seansta her beş setten birini
-          kaçırır; amaç yüksek puan değil, kendi çizgini görmek. {seconds === DURATIONS_SEC.short ? 'İlk seanslar 3 dakika.' : 'Standart seans 5 dakika.'}
-        </p>
+        <button
+          type="button"
+          className={`bc-orb${demo ? ` ${demo}` : ''}`}
+          aria-label="Deneme küresi: nefes ver ve dokun, 9 için basılı tut"
+          onPointerDown={demoDown}
+          onPointerUp={demoUp}
+          onPointerCancel={demoUp}
+          onPointerLeave={demoUp}
+          onContextMenu={(e) => e.preventDefault()}
+        />
+        <p className="muted small bc-center">{demo === 'hold' ? "9 · altın halka, gökte yıldız" : demo === 'tap' ? 'Suda bir halka. Sayı sende.' : 'Şimdi dene: nefes ver, küreye dokun. 9 için basılı tut.'}</p>
+        <div className="bc-durs" role="radiogroup" aria-label="Süre">
+          {[DURATIONS_SEC.short, DURATIONS_SEC.standard].map((s) => (
+            <button key={s} type="button" role="radio" aria-checked={seconds === s} className={`bc-dur${seconds === s ? ' on' : ''}`} onClick={() => setSeconds(s)}>{s / 60} dk</button>
+          ))}
+          <span className="muted small">{trendBefore.n < 3 ? 'ilk seanslar kısa' : 'standart 5 dk'}</span>
+        </div>
         <button className="btn" onClick={start}><Play size={18} aria-hidden="true" /> Başla</button>
+        <p className="muted small bc-center">Nefes sayma, farkındalığın davranışla ölçülebilen bir göstergesi (Levinson 2014). Amaç yüksek puan değil, kendi çizgin.</p>
       </main>
     )
   }
@@ -150,30 +225,39 @@ export default function BreathCount({ sessions = [], onBack, onFinish }) {
   if (phase === 'result') {
     const t = bcTrend([...sessions, makeRecord(result)])
     const phaseText = PHASE_TEXT[t.phase]
+    // Halka doğruluğu zaten gösterir; balonda cümle tekrar etmez
+    const comment = [resultText(result).replace(/^Doğruluk %[\d.]+\.\s*/, ''), phaseText ?? (t.reference != null
+      ? `Referansın %${t.reference}. Son üç seansın ortancası referansın ${t.delta > 0 ? `${t.delta} üstünde` : t.delta < 0 ? `${-t.delta} altında` : 'aynısı'}.`
+      : '')].filter(Boolean).join(' ')
+    const total = Math.max(result.sets, result.ok)
     return (
-      <main className="screen fade-in">
-        <PageHeader eyebrow="Nefes sayma" title={result.accuracy == null ? 'Veri yetersiz' : `%${result.accuracy}`} subtitle={resultText(result)} />
-        <div className="card stack" style={{ gap: 6 }}>
-          <Row k="Tamamlanan set" v={`${result.sets}`} />
-          <Row k="Doğru 9'lar" v={`${result.ok}`} />
-          <Row k="Fark etmeden kaçırılan" v={`${result.miss9 + result.early9}`} sub="dikkat kopması" />
-          <Row k="Kendi fark ettiğin" v={`${result.resets}`} sub="zihin gezinmesi" />
-          <Row k="Sorular" v={`${result.probes - result.probeWrong}/${result.probes} doğru sayı`} />
-          {result.mw != null && <Row k="Dikkat nerede (1–6)" v={`${result.mw}`} sub="1 nefeste · 6 başka yerde" />}
-          {result.bpm != null && <Row k="Nefes hızı" v={`~${result.bpm} / dk`} sub="dokunuşlardan" />}
+      <main className="screen fade-in bc-intro">
+        <div className="bc-bar">
+          <button type="button" className="btn-icon" onClick={onBack} aria-label="Kapat"><X size={20} /></button>
+          <span className="muted small">Nefes sayma · sonuç</span>
+          <span style={{ width: 40 }} aria-hidden="true" />
         </div>
-        {phaseText ? (
-          <p className="muted small">{phaseText}</p>
-        ) : (
-          t.reference != null && (
-            <p className="muted small">
-              Referansın %{t.reference}. Son üç seansın ortancası referansın {t.delta > 0 ? `${t.delta} üstünde` : t.delta < 0 ? `${-t.delta} altında` : 'aynısı'}.
-            </p>
-          )
-        )}
-        <button className="btn" onClick={() => onFinish(makeRecord(result))}><Check size={18} aria-hidden="true" /> Kaydet</button>
+        <div className="bc-stars" aria-label={`${result.ok} set tamam, ${total} set`}>
+          {Array.from({ length: Math.max(total, 1) }, (_, i) => <i key={i} className={i < result.ok ? 'lit' : ''} />)}
+        </div>
+        <div className="bc-ring">
+          <Ring value={result.accuracy ?? 0} max={100} size={150} stroke={12}>
+            <strong>{result.accuracy == null ? '—' : `%${Math.round(result.accuracy)}`}</strong>
+            <span className="muted small">doğruluk</span>
+          </Ring>
+        </div>
+        <div className="bc-kpi">
+          <div><b>{result.ok}/{result.sets}</b><span>set tamam</span></div>
+          <div><b>{result.resets}</b><span>kaybettim</span></div>
+          <div><b>{result.mw == null ? '—' : String(result.mw).replace('.', ',')}</b><span>dikkat ort.</span></div>
+        </div>
+        <div className="bc-jev">
+          <IrisMark size={40} />
+          <p className="bc-bubble">{comment}</p>
+        </div>
+        <button className="btn" onClick={() => onFinish(makeRecord(result))}><Check size={18} aria-hidden="true" /> Tamam</button>
         <button className="btn btn-ghost" onClick={start}><RotateCcw size={18} aria-hidden="true" /> Yeniden</button>
-        {trendBefore.phase === 'empty' && <p className="muted small" style={{ textAlign: 'center' }}>İlk ölçümün. Haftada bir tekrarlarsan çizgin oluşur.</p>}
+        {trendBefore.phase === 'empty' && <p className="muted small bc-center">İlk ölçümün. Haftada bir tekrarlarsan çizgin oluşur.</p>}
       </main>
     )
   }
@@ -181,41 +265,35 @@ export default function BreathCount({ sessions = [], onBack, onFinish }) {
   const mm = Math.floor(left / 60)
   const ss = String(left % 60).padStart(2, '0')
   return (
-    <div className="bc-stage" role="application" aria-label="Nefes sayma">
-      <div className="bc-top">
+    <div
+      ref={stage}
+      className={`bc-stage${probe ? ' probing' : ''}`}
+      role="application"
+      aria-label="Nefes sayma: her nefeste dokun, dokuzuncuda basılı tut"
+      onPointerDown={down}
+      onPointerUp={up}
+      onPointerCancel={up}
+      onContextMenu={(e) => e.preventDefault()}
+    >
+      <NightScene stars={stars} remaining={seconds ? left / seconds : 0} timeText={`${mm}:${ss}`} ripples={ripples} hint={hint.text} hintTone={hint.tone} />
+      <div className="bc-top" data-no-tap>
         <button type="button" className="btn-icon" onClick={onBack} aria-label="Kapat"><X size={20} /></button>
-        <span className="bc-time" aria-live="off">{mm}:{ss}</span>
-        <span style={{ width: 40 }} aria-hidden="true" />
       </div>
-      <button
-        type="button"
-        className={`bc-pad${probe ? ' muted-pad' : ''}`}
-        data-no-tap
-        aria-label="Her nefeste dokun, dokuzuncuda basılı tut"
-        onPointerDown={down}
-        onPointerUp={up}
-        onPointerCancel={up}
-        onPointerLeave={up}
-        onContextMenu={(e) => e.preventDefault()}
-      >
-        <Wind size={26} strokeWidth={1.6} aria-hidden="true" />
-        <span className="bc-hint">Her nefeste dokun · {SET_SIZE}'da basılı tut</span>
-      </button>
-      <button type="button" className="btn btn-ghost bc-lost" onClick={lost} disabled={Boolean(probe)}>
+      <button type="button" className="bc-lost" data-no-tap onClick={lost} disabled={Boolean(probe)}>
         Kaybettim · 1'den başla
       </button>
 
       {probe && (
-        <div className="bc-probe" role="dialog" aria-modal="true" aria-label="Kısa soru">
+        <div className="bc-probe" role="dialog" aria-modal="true" aria-label="Kısa soru" data-no-tap>
           {probe.step === 'mw' ? (
             <>
-              <h2>Az önce dikkatin neredeydi?</h2>
+              <h2>Bir saniye. Dikkatin neredeydi?</h2>
               <div className="bc-scale" role="group" aria-label="1 tamamen nefeste, 6 tamamen başka yerde">
                 {MW_SCALE.map((v) => (
                   <button key={v} type="button" onClick={() => answerMw(v)} aria-label={`${v}${MW_LABEL[v] ? `, ${MW_LABEL[v]}` : ''}`}>{v}</button>
                 ))}
               </div>
-              <div className="bc-scale-ends"><span>{MW_LABEL[1]}</span><span>{MW_LABEL[6]}</span></div>
+              <div className="bc-scale-ends"><span>1 tamamen nefeste</span><span>6 tamamen başka yerde</span></div>
             </>
           ) : (
             <>
@@ -224,21 +302,12 @@ export default function BreathCount({ sessions = [], onBack, onFinish }) {
                 {Array.from({ length: SET_SIZE }, (_, i) => i + 1).map((n) => (
                   <button key={n} type="button" onClick={() => answerCount(n)}>{n}</button>
                 ))}
+                <button type="button" className="bc-dunno" onClick={() => answerCount(0)} aria-label="Bilmiyorum">?</button>
               </div>
-              <button type="button" className="link-btn" onClick={() => answerCount(0)}>Bilmiyorum</button>
             </>
           )}
         </div>
       )}
-    </div>
-  )
-}
-
-function Row({ k, v, sub }) {
-  return (
-    <div className="row between bc-row">
-      <span className="bc-k">{k}{sub && <span className="muted small"> · {sub}</span>}</span>
-      <strong className="bc-v">{v}</strong>
     </div>
   )
 }

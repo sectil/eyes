@@ -146,3 +146,12 @@ Seçenekler:
 - "UFOV" adı kullanılmaz; skor yalnızca kişinin kendi geçmişiyle karşılaştırılır; düşük günlük dozun etkisi bilinmiyor.
 - Nöbet cevabı Evet/Emin değilim → kapalı; cevap yoksa ilk açılışta sorulur.
 - Günlük fark etme görevi: doğrudan kanıt yok (dolaylı: Horwood 2016, Graham 2011, Schofield 2015); iddiasız alıştırma.
+
+## 8. Nefes sayma sahnesi (2026-09-25, onaylı; Artifact "EyeTrail Nefes Sayma Tasarımı") — YAPILDI (Build 22)
+- Kural: ölçüm kısıtı boş sunumun mazereti değil. Sayı yine gösterilmez (Levinson 2014), ama sahne her dokunuşa cevap verir.
+- `components/NightScene.jsx`: gece göğü + su. Dokunuş → suda halka (dokunulan yerde), 9'da uzun basış → altın halka,
+  kapanan her set → gökte yıldız, kalan süre → ay dilimi. "Kaybettim" → sakin halka + "1'den başla".
+- Giriş: Jev tek cümle + canlı küre (dene: dokun/basılı tut) + 3/5 dk seçimi. Sonuç: yıldız sırası (doğru setler yanar),
+  doğruluk halkası, üç sayı (set tamam / kaybettim / dikkat ort.), Jev yorumu. Soru kartı suyun üstünde yüzer.
+- VARSAYIM: gökteki yıldız = uzun basışla kapanan set (doğruluk değil); doğruluk yalnızca sonuçta görünür.
+- Protokol ve formül değişmedi (`lib/breathCount.js`; state'e yalnızca `nines` sayısı eklendi).

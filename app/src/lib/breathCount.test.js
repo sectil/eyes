@@ -15,7 +15,7 @@ describe('createBreathCounter', () => {
   it('doğru set: 8 dokunuş + 9 → ok, sayaç sıfırlanır', () => {
     const c = createBreathCounter()
     okSet(c, 0)
-    expect(c.state).toEqual({ count: 0, probing: false, sets: 1, probes: 0 })
+    expect(c.state).toEqual({ count: 0, probing: false, sets: 1, probes: 0, nines: 1 })
     expect(c.summary(36).ok).toBe(1)
     expect(c.summary(36).accuracy).toBe(100)
   })

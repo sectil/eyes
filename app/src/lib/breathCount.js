@@ -83,7 +83,7 @@ export function createBreathCounter() {
       return this.state
     },
     get state() {
-      return { count, probing, sets: sets.length, probes: probes.length }
+      return { count, probing, sets: sets.length, probes: probes.length, nines: taps.filter((t) => t.kind === 'nine').length }
     },
     summary(seconds) {
       return summarize({ sets, probes, taps, seconds })
