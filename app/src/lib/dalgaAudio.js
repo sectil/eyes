@@ -2,6 +2,7 @@
 // iOS: bağlam kullanıcı dokunuşunda açılmalı (unlock). VARSAYIM (cihazda doğrulanacak): iPhone sessiz moddayken
 // WebAudio susabilir; ekran kilitlenince ses durabilir.
 import { makeComposer, stepSec, karplus, mtof, BINAURAL } from './dalgaMusic.js'
+import { mediaKeepAlive } from './audioUnmute.js'
 
 const LOOKAHEAD = 0.3 // sn
 const TICK_MS = 25
@@ -27,6 +28,7 @@ export function createDalgaEngine() {
   }
   function unlock() {
     sessionType('playback')
+    mediaKeepAlive(true)
     try {
       const AC = globalThis.AudioContext || globalThis.webkitAudioContext
       if (!AC) return false
@@ -318,7 +320,7 @@ export function createDalgaEngine() {
         master.gain.setTargetAtTime(0.0001, t, fast ? 0.35 : 0.9)
       }
       stopBinaural(t)
-      setTimeout(() => sessionType('auto'), 1500)
+      setTimeout(() => { sessionType('auto'); mediaKeepAlive(false) }, 1500)
     },
     get paused() {
       return S.paused
@@ -352,6 +354,7 @@ export function createDalgaEngine() {
     },
     close() {
       sessionType('auto')
+      mediaKeepAlive(false)
       clearInterval(S.timer)
       S.running = false
       try {
