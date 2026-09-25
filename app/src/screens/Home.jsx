@@ -207,7 +207,10 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
       )}
 
       {/* Pratikler: bakış kontrolü ve dikkat pratiği. "Ölçüm" değil — skorlar görme trendine girmez. */}
-      <div className="home-h"><h2>Pratikler</h2></div>
+      <div className="home-h">
+        <h2>Pratikler</h2>
+        <button className="link-btn" onClick={() => onStart('awareness')}>Farkındalık <ChevronRight size={15} aria-hidden="true" /></button>
+      </div>
       <div className="prax">
         {registry.inSection('practice').map((m) => {
           const v = viewFor(m.id)

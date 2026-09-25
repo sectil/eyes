@@ -18,13 +18,15 @@ const sessions = [
 describe('modül coach() / stats() sözleşmesi', () => {
   it('her coach modülü yalnızca sayı/dize döndürür ve süzgeçten geçer', () => {
     const sig = moduleSignals(sessions, NOW)
-    expect(Object.keys(sig).sort()).toEqual(['breath', 'breath-count', 'snake', 'track'])
+    expect(Object.keys(sig).sort()).toEqual(['breath', 'breath-count', 'snake', 'track']) // quick-look: oturum yok → sinyal yok
     expect(sig.track).toEqual({ best: 54, sessions7: 2, follow7: 85 })
     expect(sig.snake).toEqual({ best: 12, sessions7: 1, eyes7: 1 }) // bestFromSessions yalnızca score alanına bakar
     expect(sig.breath).toEqual({ sessions7: 1, minutes7: 5, calmDelta7: 2 })
     expect(sig['breath-count']).toEqual({ sessions7: 2, accuracy7: 80, best: 90 })
     expect(sanitizeModules(sig)).toEqual(sig)
     expect(buildSignals([], sessions, NOW).modules.track.best).toBe(54)
+    const withQl = moduleSignals([...sessions, { type: 'quick-look', threshold: 180, accuracy: 70, seconds: 300, date: ago(1) }], NOW)
+    expect(withQl['quick-look']).toEqual({ first: 180, last: 180, sessions7: 1, hours: 0.1 })
   })
   it('sanitizeModules: bozuk anahtar/değerler düşer, boşsa null', () => {
     expect(sanitizeModules({ 'Bad Key': { a: 1 }, track: { best: 'x'.repeat(30), n: 2, deep: { a: 1 }, huge: 1e9 } })).toEqual({ track: { n: 2 } })

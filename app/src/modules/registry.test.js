@@ -5,7 +5,7 @@ import { VIEWS } from './views.js'
 describe('modül soketi: gerçek modüller', () => {
   it('hepsi geçerli, sorun yok', () => {
     expect(registry.problems).toEqual([])
-    expect(registry.modules.map((m) => m.id).sort()).toEqual(['blink', 'breath', 'breath-count', 'daily', 'reading', 'routine', 'snake', 'track', 'weekly'])
+    expect(registry.modules.map((m) => m.id).sort()).toEqual(['awareness', 'blink', 'breath', 'breath-count', 'daily', 'notice', 'quick-look', 'reading', 'routine', 'snake', 'track', 'weekly'])
   })
   it('her modülün ekranı (view) var ve ekranı çiziyor', () => {
     for (const m of registry.modules) {
@@ -28,7 +28,7 @@ describe('modül soketi: gerçek modüller', () => {
     expect(registry.forSession({ type: 'game', game: 'snake' })?.id).toBe('snake')
     expect(registry.forSession({ type: 'game', game: 'yok' })).toBeNull()
     expect(registry.resetKeys()).toEqual(expect.arrayContaining(['gozolcum:snake-best', 'gozolcum:track-best']))
-    expect(registry.inSection('practice').map((m) => m.id)).toEqual(['track', 'snake', 'breath'])
+    expect(registry.inSection('practice').map((m) => m.id)).toEqual(['quick-look', 'track', 'snake', 'breath', 'notice'])
   })
 })
 
@@ -41,7 +41,7 @@ describe('modül soketi: tak / çıkar', () => {
     kind: 'practice',
     gates: { gaze: true, eyeBudget: 'eye' },
     storageKeys: ['gozolcum:hb-best'],
-    home: { section: 'practice', order: 5 },
+    home: { section: 'practice', order: 1 },
     sessions: {
       match: (s) => s.type === 'game' && s.game === 'hb',
       countsTowardGoal: false,

@@ -97,7 +97,7 @@ iOS'ta kalır. Bu yorum yanlışsa ne kastettiğini yaz.
 0. **Build 16**: kalibrasyon v2.1 cihazda doğrulama (nokta yeşil, "Hazır").
 1. **Profil anketi** (3a) + profil nesnesi + modüllerin profili okuması. ~1 derleme. **YAPILDI** (Build 18): `lib/profile.js`, `screens/Profile.jsx`; ekran 6+ sa → mola bütçesi 3 dk; uyku ≤4 / stres ≥5 → nefes plana girer; nöbet cevabı `flashSafe` olarak saklanır (Hızlı Bakış kapısı, adım 4'te kullanılacak). Eski kayıtlar: Bugün'de "Profilini tamamla" kartı; Bilgi → Profilim.
 2. **Sistem bütünlüğü** (§2): Jev sinyalleri, Gelişim satırları, kalibrasyon puanı. ~1 derleme. **YAPILDI** (Build 18): modül sözleşmesine `coach()` ve `stats()` eklendi; Çember, Yılan, nefes, nefes sayma özetleri Jev sinyaline `modules` alanıyla gider (yalnızca sayı; profil cevapları Jev'e GİTMEZ), Gelişim → Pratikler kartları, Göz takibi ekranında kalibrasyon ayrışma puanı ve kayma. Not: sunucu (`api/coach.js`) aynı `coachCore.js`'i kullanır; yeni `modules` alanının sunucuda geçmesi için Vercel yeniden dağıtımı gerekir (`bash app/scripts/coach-setup.sh`).
-3. **Farkındalık I**: 49 merkez + 50–52+56 Hızlı Bakış (native süre hassasiyeti: 133 ms gösterim
+3. **Farkındalık I** — ilk kısım YAPILDI (Build 20): 49 merkez (`modules/awareness`), 50–52+56 Hızlı Bakış (`modules/quick-look`, `lib/quicklook.js`, rapor 20), 55 günlük görev (`modules/notice`). Kalan: 53 Değişimi yakala, 54 Çoklu takip. Önceki metin: 49 merkez + 50–52+56 Hızlı Bakış (native süre hassasiyeti: 133 ms gösterim
    için `requestAnimationFrame` ölçümü; 08 raporu web'de <100 ms güvenilmez diyor → 133 ms sınır,
    cihazda ölçülecek) + 55 günlük görev. Sonra 53 Değişimi yakala, 54 Çoklu takip. ~3 derleme.
 4. **Ders motoru C** (11–16) + ilk 7 ders; içerik raporlardan kaynaklı. ~2 derleme.
@@ -136,3 +136,13 @@ Seçenekler:
 - Kartlara geçen ekranlar: görme testi (3), okuma testi (3), nefes sayma (3), Çember (2), göz kalibrasyonu (2);
   Yılan giriş satırları kısaltıldı (kişi animasyonu zaten var); nefes güvenliği üç kalın başlık.
 - Web'e özgü kart/mesafe kalibrasyonu (CardCalibration, DistanceCalibration) listede kaldı — iOS'ta görünmez.
+
+## 7. Hızlı Bakış kararları (rapor 20, 2026-09-25)
+- Süre 500 ms'den başlar, taban 100 ms (WKWebView'de daha kısası güvenilir değil); 2-aşağı 1-yukarı, ilk 2 dönüşe kadar
+  4 kare, sonra 1 kare; eşik = son 6 dönüş. 50 deneme, her 8.'si kolay (basamağa sayılmaz).
+- Uyaran kare döngüsünde doğrudan açılıp kapanır; ölçülen gerçek süre ve düşen kare sayısı kayda yazılır (cihazda doğrulanacak).
+- Merkez 1,9°, kenar hedef telefonda hedef 5,5° (dikey telefonda ~4° sığıyor; kayda yazılır), 35 cm. Maske 500 ms,
+  açık-koyu nokta (ortalama parlaklık zemine yakın). Seviyeler: 0 → 7 → 23 çeldirici.
+- "UFOV" adı kullanılmaz; skor yalnızca kişinin kendi geçmişiyle karşılaştırılır; düşük günlük dozun etkisi bilinmiyor.
+- Nöbet cevabı Evet/Emin değilim → kapalı; cevap yoksa ilk açılışta sorulur.
+- Günlük fark etme görevi: doğrudan kanıt yok (dolaylı: Horwood 2016, Graham 2011, Schofield 2015); iddiasız alıştırma.
