@@ -47,12 +47,15 @@ export const FEATURES = {
   headX: (f) => num(f.headX),
   headY: (f) => num(f.headY),
 }
-export const AXIS_FEATURES = { x: ['camX', 'angX', 'lookX', 'blendX'], y: ['camY', 'angY', 'lookY', 'blendY'] }
+// headX/headY de aday: yatay göz sinyali bazı kullanıcılarda ~0 (Build 16, 19); noktaya doğru başı çevirmek
+// doğal ve ölçülebilir (MAD 0,03–0,1°). En iyi ayrışan sinyal seçilir; kalibrasyon yönergesi başı serbest bırakır.
+export const AXIS_FEATURES = { x: ['camX', 'headX', 'angX', 'lookX', 'blendX'], y: ['camY', 'headY', 'angY', 'lookY', 'blendY'] }
 
 // Kalibrasyonda baş dönüşü: hedef penceresindeki baş açısı, orta hedefteki ortancadan bu kadar
 // saparsa kare sayılmaz ve "başını değil gözünü oynat" uyarısı verilir.
-// VARSAYIM: 5°. Kalibrasyon hedefleri ~20°; başın 5°'den az dönmesi göz sinyalini gölgelemez.
-export const HEAD_TURN_DEG = 5
+// Build 19: 5° guard, çöp orta referansı yüzünden doğru kareleri attı; camX/headX baş hareketini zaten ölçüyor.
+// Guard yalnızca kaba dönüşü (telefondan başka yere bakma) yakalar. VARSAYIM: 15°.
+export const HEAD_TURN_DEG = 15
 export function headOf(f) {
   const x = FEATURES.headX(f)
   const y = FEATURES.headY(f)
@@ -74,9 +77,9 @@ export function headTurned(ref, f, deg = HEAD_TURN_DEG) {
 // Sayısal taban gürültü (birim başına) — sıfıra bölmeyi ve aşırı iyimser skoru önler
 // VARSAYIM: cam 0,1° (Build 16: yatay hedef-içi MAD 0,02–0,04°, sol–sağ ayrım yalnızca 0,38°; 0,25 taban
 // bu temiz sinyali 1,5 puana düşürüyordu). ARKit'in yatay kazancı dikeyin ~1/5'i; ayrım küçük ama tutarlı.
-export const NOISE_FLOOR = { camX: 0.1, camY: 0.1, angX: 0.4, angY: 0.4, lookX: 0.002, lookY: 0.002, blendX: 0.02, blendY: 0.02 }
+export const NOISE_FLOOR = { camX: 0.1, camY: 0.1, headX: 0.15, headY: 0.15, angX: 0.4, angY: 0.4, lookX: 0.002, lookY: 0.002, blendX: 0.02, blendY: 0.02 }
 // Kalibrasyon ekranındaki "sabit bakış" ölçütü (taban gürültüden gevşek: hedef-içi MAD 0,03–0,10 gözlendi)
-export const STABLE_MAD = { camX: 0.25, camY: 0.25, angX: 0.4, angY: 0.4 }
+export const STABLE_MAD = { camX: 0.25, camY: 0.25, headX: 0.3, headY: 0.3, angX: 0.4, angY: 0.4 }
 
 // Blendshape bakış vektörü (gaze.js gazeVector ile aynı formül; döngüsel içe aktarımı önlemek için burada)
 const avg2 = (a, b) => ((a ?? 0) + (b ?? 0)) / 2
@@ -144,7 +147,7 @@ export function fitAxis(center, neg, pos, features, center2 = null) {
 // Kalibrasyon ekranı: bir hedefteki kareler "sabit bakış" mı? Mevcut eksen sinyallerinin her birinde
 // yayılım (MAD) taban gürültüyü aşmıyorsa evet. Nokta bu anda yeşile döner.
 // VARSAYIM: ölçüt taban gürültü (cam 0,25°, açı 0,4°); kırpma/baş dönüşü kareleri zaten elenmiş gelir.
-export const STABLE_FEATURES = ['camX', 'camY', 'angX', 'angY']
+export const STABLE_FEATURES = ['camX', 'camY', 'headX', 'headY', 'angX', 'angY']
 export function windowStable(frames, minFrames = 5) {
   if (!frames || frames.length < minFrames) return false
   const sum = summarize(frames)
@@ -165,12 +168,27 @@ export function closeThreshold(downFrames) {
   return Math.max(0.5, Math.min(DOWN_CLOSE_MAX, m + 0.2))
 }
 
+// Orta pencerelerinden kullanılabilir olanlar: [birincil, ikincil|null]
+export function usableCenters(windows) {
+  const c1 = windows.center?.length ? summarize(windows.center) : null
+  const c2 = windows.center2?.length ? summarize(windows.center2) : null
+  const s1 = c1 && windowStable(windows.center)
+  const s2 = c2 && windowStable(windows.center2)
+  if (s1 && s2) return [c1, c2]
+  if (s1) return [c1, null]
+  if (s2) return [c2, null]
+  return [c1 ?? c2, c1 && c2 ? c2 : null]
+}
+
 // windows: { center: frames[], left, right, up, down, center2? }
 export function fitModel(windows) {
   const S = {}
   for (const t of TARGETS) if (windows[t]?.length) S[t] = summarize(windows[t])
-  const x = S.center && S.left && S.right ? fitAxis(S.center, S.left, S.right, AXIS_FEATURES.x, S.center2) : null
-  const y = S.center && S.down && S.up ? fitAxis(S.center, S.down, S.up, AXIS_FEATURES.y, S.center2) : null
+  // Kararsız orta penceresi (Build 19: n=60, MAD 1,5°, kırpmalı) referans olamaz: temiz olan kullanılır;
+  // ikisi de temizse ikisi (drift ölçülür); hiçbiri temiz değilse ikisi de (eldeki en iyi).
+  const [C1, C2] = usableCenters(windows)
+  const x = C1 && S.left && S.right ? fitAxis(C1, S.left, S.right, AXIS_FEATURES.x, C2) : null
+  const y = C1 && S.down && S.up ? fitAxis(C1, S.down, S.up, AXIS_FEATURES.y, C2) : null
   const ok = Boolean(x && !x.weak && y && !y.weak)
   // Telefona bakış referansı: ortaya bakarken kameraya göre bakış açısı (ARKit'in sabit
   // sapmasını içerir). gaze.js lookingAtPhone bunun çevresindeki pencereyi "telefon" sayar.
@@ -193,8 +211,7 @@ export function calibReport(windows, model) {
       ...Object.fromEntries(Object.entries(sum).map(([k, v]) => [k, { med: r3(v.med), mad: r3(v.mad) }])),
     }
   }
-  const C = summarize(windows.center ?? [])
-  const C2 = windows.center2?.length ? summarize(windows.center2) : null
+  const [C, C2] = usableCenters(windows)
   const axisScores = (neg, pos, feats) =>
     Object.fromEntries(
       feats.map((k) => {
@@ -213,6 +230,7 @@ export function calibReport(windows, model) {
     targets,
     scores: { x: axisScores('left', 'right', AXIS_FEATURES.x), y: axisScores('down', 'up', AXIS_FEATURES.y) },
     minScore: MIN_SCORE,
+    centerStable: { center: windowStable(windows.center), center2: windowStable(windows.center2) },
     head,
     headTurnDeg: HEAD_TURN_DEG,
     model,

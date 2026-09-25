@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from 'vitest'
-import { windowStable, fitModel, fitAxis, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE, calibReport, closeThreshold, loadGazeModel, saveGazeModel, clearGazeModel, GAZE_MODEL_KEY, GAZE_MODEL_VERSION, DOWN_CLOSE_MAX, headRef, headTurned, HEAD_TURN_DEG } from './gazeCalib.js'
+import { windowStable, usableCenters, fitModel, fitAxis, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE, calibReport, closeThreshold, loadGazeModel, saveGazeModel, clearGazeModel, GAZE_MODEL_KEY, GAZE_MODEL_VERSION, DOWN_CLOSE_MAX, headRef, headTurned, HEAD_TURN_DEG } from './gazeCalib.js'
 import { createGazeReader, lookingAtPhone, GAZE_FULL_DEG } from './gaze.js'
 
 // Deterministik gürültü
@@ -206,7 +206,7 @@ describe('kalibrasyon v2: aşağı bakışta göz kapağı, rapor, sürüm', () 
     const rep = calibReport(w, m)
     expect(rep.targets.left.n).toBe(30)
     expect(rep.targets.left.angX.med).toBeTypeOf('number')
-    expect(Object.keys(rep.scores.x)).toEqual(['camX', 'angX', 'lookX', 'blendX'])
+    expect(Object.keys(rep.scores.x)).toEqual(['camX', 'headX', 'angX', 'lookX', 'blendX'])
     expect(rep.scores.x.angX).toBeGreaterThan(MIN_SCORE)
     expect(rep.model).toBe(m)
     expect(JSON.stringify(rep)).not.toMatch(/image|jpeg|png/i)
@@ -343,5 +343,39 @@ describe('kalibrasyon v2.1: drift, hedef-içi gürültü, kararlı pencere (Buil
     expect(windowStable(roam)).toBe(false)
     expect(windowStable(still.slice(0, 3))).toBe(false)
     expect(windowStable([])).toBe(false)
+  })
+})
+
+describe('Build 19: kararsız orta penceresi ve baş duruşu adayı', () => {
+  const S = (med, mad = 0.05) => ({ med, mad, n: 39 })
+  it('usableCenters: kararsız orta atılır, temiz orta2 referans olur; y ekseni geçer', () => {
+    const w = windows()
+    // ilk orta: baş hareketli ve kırpmalı (Build 19'daki gibi)
+    w.center = Array.from({ length: 60 }, (_, i) => makeFrame((i % 4) * 3 - 4, (i % 3) * 3, { r: rng(500 + i), head: { x: (i % 5) * 1.5, y: (i % 3) * 2 } }))
+    const [c1, c2] = usableCenters(w)
+    expect(c2).toBeNull()
+    expect(c1.camX.mad).toBeLessThan(0.3) // orta2'nin özeti
+    const m = fitModel(w)
+    expect(m.y.weak).toBeUndefined()
+    expect(calibReport(w, m).centerStable).toEqual({ center: false, center2: true })
+  })
+  it('Build 19 sayıları: temiz orta2 ile y camY geçer (1,1 yerine ~9); x aynı tarafta → null (gerçekten ayrışmadı)', () => {
+    const y = fitAxis({ camY: S(-0.0157, 0.1006) }, { camY: S(-2.0449, 0.1084) }, { camY: S(1.8078, 0.0452) }, ['camY'], null)
+    expect(y.weak).toBeUndefined()
+    expect(y.score).toBeGreaterThan(5)
+    const x = fitAxis({ camX: S(-3.3375, 0.0381) }, { camX: S(-3.4214, 0.1162) }, { camX: S(-4.2967, 0.0295) }, ['camX'], null)
+    expect(x).toBeNull()
+  })
+  it('baş duruşu aday: göz sinyali sıfırken baş noktaya döndüyse headX seçilir', () => {
+    const w = windows({ cam: true })
+    const still = (gx, hx) => Array.from({ length: 30 }, (_, i) => ({ ...makeFrame(0, 0, { r: rng(i + 7), head: { x: hx, y: 0 } }), gazeLeftX: 3 + (rng(i)() - 0.5) * 0.1, gazeRightX: 3 + (rng(i + 1)() - 0.5) * 0.1 }))
+    w.left = still(0, -6)
+    w.right = still(0, 6)
+    w.center = still(0, 0)
+    w.center2 = still(0, 0)
+    const m = fitModel(w)
+    expect(['camX', 'headX']).toContain(m.x.feature)
+    expect(m.x.weak).toBeUndefined()
+    expect(HEAD_TURN_DEG).toBe(15)
   })
 })

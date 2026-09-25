@@ -24,7 +24,8 @@ import '../styles/gazecal.css'
 const MOVE_MS = 450
 const SETTLE_MS = 1200
 const COLLECT_MS = 1300
-const MAX_COLLECT_MS = 5000
+const MAX_COLLECT_MS = 8000 // yan hedefler: bu sürede sabitlenmezse eldeki kareler alınır
+const CENTER_HINT_MS = 6000 // orta hedef: asla kararsız kabul edilmez; bu süreden sonra ipucu
 const ACCEPT_HOLD_MS = 450 // yeşil nokta görünür kalır
 const MAX_RETRY = 2 // eksen başına ek tur
 const ROLL_FRAMES = 60 // kararlılık beklerken tutulan son kare sayısı (~2 sn)
@@ -120,7 +121,14 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     setProg(Math.min(1, s.collected / COLLECT_MS))
     if (s.collected >= COLLECT_MS) {
       const stable = windowStable(win.current[t])
-      if (stable || s.collected >= MAX_COLLECT_MS) {
+      const isCenter = t === 'center' || t === 'center2'
+      // Orta pencereleri referanstır (baş duruşu, eksen merkezi): kararsızken KABUL EDİLMEZ (Build 19: n=60,
+      // MAD 1,5° çöp orta tüm eksenleri öldürdü). Yan hedeflerde süre dolunca eldeki alınır, raporda görünür.
+      if (isCenter && !stable && s.collected >= CENTER_HINT_MS && now - head.current.lastWarn >= HEAD_WARN_GAP_MS) {
+        head.current.lastWarn = now
+        cue('Sabit dur ve noktaya bak', true)
+      }
+      if (stable || (!isCenter && s.collected >= MAX_COLLECT_MS)) {
         s.accepted = true
         setStatus('done')
         haptic('tick')
@@ -142,7 +150,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
       const at = s.pos + 1
       s.queue.splice(at, 0, ...targets)
       for (let i = 0; i < targets.length; i++) s.again.add(at + i)
-      cue('Bir kez daha. Noktaya bak, yeşile dönene kadar orada kal', true)
+      cue('Bir kez daha. Noktaya doğru bak; başını çevirmen serbest', true)
     }
     const axisWeak = (axis) => {
       const [neg, pos] = axis === 'x' ? ['left', 'right'] : ['down', 'up']
@@ -164,7 +172,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
         const at = s.pos + 1
         s.queue.splice(at, 0, ...extra)
         for (let i = 0; i < extra.length; i++) s.again.add(at + i)
-        cue('Bir kez daha. Noktaya bak, yeşile dönene kadar orada kal', true)
+        cue('Bir kez daha. Noktaya doğru bak; başını çevirmen serbest', true)
       }
     }
     const np = s.pos + 1
@@ -236,7 +244,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
         <StepCards
           cards={[
             { key: 'face', art: <FaceLightArt />, title: 'Telefonu göz hizasında tut', why: 'Yüzün iyi aydınlansın. Yaklaşık 20 saniye, bir kez.' },
-            { key: 'dot', art: <DotFollowArt />, title: 'Noktaya bak, yeşile dönene kadar kal', why: 'Nokta beş yere gider. Başın hafifçe dönebilir; kırpmak sorun değil.' },
+            { key: 'dot', art: <DotFollowArt />, title: 'Noktaya bak, yeşile dönene kadar kal', why: 'Nokta beş yere gider. Başını noktaya doğru çevirmen serbest; kırpmak sorun değil.' },
           ]}
           eyebrow="Göz takibi · sana göre ayar"
           finishLabel="Başla"
@@ -328,7 +336,7 @@ function headTurnNote(report) {
   const where = TARGETS.filter((t) => rej[t] > 0).map((t) => DIR_LABEL[t] ?? t).join(', ')
   return (
     <p className="muted small">
-      Başın {HEAD_TURN_DEG}°'den fazla döndüğü için {n} kareyi saymadım ({where}). Başını sabit tutup yalnızca gözünü kaydırmayı dene.
+      Başın {HEAD_TURN_DEG}°'den fazla döndüğü için {n} kareyi saymadım ({where}). Telefon yüzünün karşısında kalsın; noktaya bakarken ekrandan uzaklaşma.
     </p>
   )
 }
