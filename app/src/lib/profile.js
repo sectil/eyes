@@ -112,12 +112,16 @@ export function normalizeProfile(raw) {
   }
 }
 
+// Yaş → anket yaş aralığı (18 altı için VARSAYIM: en alt aralık; uygulama yetişkinlere yönelik)
+export function ageBandFromAge(age) {
+  if (!Number.isFinite(age)) return null
+  return age < 40 ? '18-39' : age < 50 ? '40-49' : age < 60 ? '50-59' : age < 70 ? '60-69' : '70+'
+}
+
 // Eski kurulum kaydından (settings.screening: { age, flags, correction, lastExam }) kısmi profil
 export function profileFromScreening(s) {
   if (!s) return emptyProfile()
-  const age = Number(s.age)
-  const ageBand = !Number.isFinite(age) ? null : age < 40 ? '18-39' : age < 50 ? '40-49' : age < 60 ? '50-59' : age < 70 ? '60-69' : '70+'
-  return normalizeProfile({ ageBand, correction: s.correction, lastExam: s.lastExam, flags: s.flags })
+  return normalizeProfile({ ageBand: ageBandFromAge(Number(s.age)), correction: s.correction, lastExam: s.lastExam, flags: s.flags })
 }
 
 // Sayfa bazında zorunlu alanlar (kırmızı bayrak ve stres isteğe bağlı değil ama "hiç" seçilebilir)

@@ -193,7 +193,7 @@ export default function Info({ onGo, onReset, exportJSON, distanceSkipped, iosAp
       <section className="stack">
         <span className="eyebrow">Ölçüm ayarları</span>
         <div className="list">
-          <Row Icon={UserRound} label="Profilim" sub="Yaş, gözlük, ekran, uyku, stres" onClick={() => onGo('profile')} />
+          <Row Icon={UserRound} label="Profilim" sub="Ad, doğum tarihi, avatar, gözlük ve profil soruları" onClick={() => onGo('profile')} />
           {!iosApp && <Row Icon={CreditCard} label="Ekran kalibrasyonu" sub="Kartla yeniden ölç" onClick={() => onGo('recalibrate')} />}
           <Row
             Icon={Camera}

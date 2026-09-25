@@ -155,3 +155,16 @@ Seçenekler:
   doğruluk halkası, üç sayı (set tamam / kaybettim / dikkat ort.), Jev yorumu. Soru kartı suyun üstünde yüzer.
 - VARSAYIM: gökteki yıldız = uzun basışla kapanan set (doğruluk değil); doğruluk yalnızca sonuçta görünür.
 - Protokol ve formül değişmedi (`lib/breathCount.js`; state'e yalnızca `nines` sayısı eklendi).
+
+## 9. Giriş filmi ve Profilim (2026-09-25, onaylı; Artifact "EyeTrail Giriş Filmi") — 23a YAPILDI (Build 23)
+- `components/IntroFilm.jsx`: 15 sn sessiz film, iris içinden (SVG + SMIL, ağ yok). Gözlüğü çıkarır, koşar; bankın altındaki
+  kedi, patlak lastik, açan çiçek altın odak halkasıyla; çocuklukta bulut ata dönüşür; ata biner, at kanatlanır, gece göğüne
+  yükselir. Yazılar: Bak → Çıkar → Koş → Fark et → Yine → Bir daha → Hatırla → Hayal et → Uç. Sonda logo + "Başla".
+  Yalnızca ilk açılışta (`settings.intro.seen`); "Atla" her an; hareket azaltma açıksa oynamaz; Profilim'den yeniden izlenir.
+- `screens/ProfileHome.jsx` (`lib/identity.js`): avatar (harf + 5 iris rengi veya fotoğraf, cihazda 160 px'e küçültülür),
+  ad, doğum tarihi (anketin yaş aralığını otomatik doldurur), gözlük/lens; profil sorularına ve filme geçiş. Bugün'de selam ada göre.
+  Ad/doğum tarihi/fotoğraf yalnızca cihazda; Jev'e gitmez.
+- **23b (bekliyor):** hesap sistemi. Karar: Supabase (Apple + Google + e-posta sihirli bağlantı). App Store 4.8: Google varsa
+  Apple ile giriş zorunlu. 5.1.1(v): hesapsız kullanım kalır ("Şimdilik hesapsız dene"). "Beni tanı": oturum cihazın güvenli
+  deposunda, şifre bir daha sorulmaz; Face ID kilidi sonraki build. Eşleşen veri: profil + ölçüm özetleri; kamera verisi asla.
+  Sağlık verisi rızası ve gizlilik politikası güncellemesi gerekir. Film sonundaki "Başla" 23b'de hesap düğmelerine dönüşür.

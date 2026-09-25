@@ -8,6 +8,11 @@ import { LIMITS as EYE_LIMITS } from './lib/eyeBudget.js'
 import { onRestNotifyTap } from './lib/restNotify.js'
 import Home from './screens/Home.jsx'
 import Profile from './screens/Profile.jsx'
+import ProfileHome from './screens/ProfileHome.jsx'
+import IntroFilm from './components/IntroFilm.jsx'
+import { shouldPlayIntro } from './lib/intro.js'
+import { ageBandFromAge } from './lib/profile.js'
+import { ageFromBirthDate } from './lib/identity.js'
 import { screeningFromProfile, profileFromScreening } from './lib/profile.js'
 import { resetAllHowto } from './lib/howto.js'
 import CardCalibration, { calibrationStillValid } from './screens/CardCalibration.jsx'
@@ -67,6 +72,14 @@ function useEyeClock(kind) {
       document.removeEventListener('visibilitychange', onVis)
     }
   }, [kind])
+}
+
+function prefersReducedMotion() {
+  try {
+    return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
+  } catch {
+    return false
+  }
 }
 
 export default function App() {
@@ -265,11 +278,37 @@ export default function App() {
     store.setSetting('screening', screeningFromProfile(p))
     refresh()
   }
+  // Giriş filmi (components/IntroFilm.jsx): ilk açılışta bir kez, profil sorularından önce; Profilim'den yeniden izlenir.
+  const markIntro = () => { store.setSetting('intro', { seen: true, date: new Date().toISOString() }); refresh() }
+  if (screen === 'intro') return <IntroFilm replay onDone={() => go(lastTab)} />
+  if (shouldPlayIntro(settings, prefersReducedMotion())) return <IntroFilm onDone={markIntro} />
   if (!settings.screening || settings.screening.referred) {
     return <Profile initial={settings.profile ?? profileFromScreening(settings.screening)} step={1} total={setupTotal} onDone={saveProfile} />
   }
   if (screen === 'profile') {
-    return <Profile initial={settings.profile ?? profileFromScreening(settings.screening)} editing onDone={(p) => { saveProfile(p); go(lastTab) }} onBack={() => go(lastTab)} />
+    // Profilim (screens/ProfileHome.jsx): ad, doğum tarihi, avatar cihazda kalır; doğum tarihi anketin yaş aralığını doldurur.
+    const saveIdentity = (id, correction) => {
+      store.setSetting('identity', id)
+      const age = ageFromBirthDate(id.birthDate)
+      const band = ageBandFromAge(age)
+      const p = settings.profile ?? profileFromScreening(settings.screening)
+      if (p && ((band && p.ageBand !== band) || (correction && p.correction !== correction))) {
+        saveProfile({ ...p, ageBand: band ?? p.ageBand, correction: correction ?? p.correction })
+      } else refresh()
+    }
+    return (
+      <ProfileHome
+        identity={settings.identity}
+        profile={settings.profile ?? profileFromScreening(settings.screening)}
+        onSave={saveIdentity}
+        onQuestions={() => go('profile-questions')}
+        onIntro={() => go('intro')}
+        onBack={() => go(lastTab)}
+      />
+    )
+  }
+  if (screen === 'profile-questions') {
+    return <Profile initial={settings.profile ?? profileFromScreening(settings.screening)} editing onDone={(p) => { saveProfile(p); go('profile') }} onBack={() => go('profile')} />
   }
   if (!isIOSApp() && (!calibrationStillValid(settings.calibration) || screen === 'recalibrate')) {
     return (

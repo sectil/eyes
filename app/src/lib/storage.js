@@ -11,6 +11,8 @@ const EMPTY = () => ({
     calibration: null, // { pxPerMm, dpr, screenW, screenH, date }
     distance: null, // { focalPx, irisPxAt40, date }
     reminder: null, // { time: 'HH:MM', weeklyTarget: 3 }
+    identity: null, // lib/identity.js: { name, birthDate, avatar } — cihazda kalır
+    intro: null, // { seen: true, date } — giriş filmi bir kez oynar
   },
   tests: [], // bkz. addTest
   sessions: [], // { id, date, type: 'blink', ... }

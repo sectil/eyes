@@ -106,7 +106,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
       <header className="home-head">
         <div>
           <span className="eyebrow">{now.toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
-          <h1>{greeting()}</h1>
+          <h1>{greeting()}{settings?.identity?.name ? `, ${settings.identity.name}` : ''}</h1>
         </div>
         <div className="home-head-side">
           {streak > 0 && (
