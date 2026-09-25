@@ -303,3 +303,18 @@ konuşma eşleşmesi ≥ 0,7 olunca cümle biter (`MATCH_THRESHOLD`) → kişi b
   fark ekranda 10 kat yavaş. Ekran açık kalsın diye Screen Wake Lock denenir.
 - Cihazda doğrulanacak: iPhone sessiz modda WebAudio susuyor mu; Wake Lock WKWebView'da çalışıyor mu; ekran kilitlenince
   ses duruyor mu. Gerekirse yerel AVAudioSession/idleTimer eklentisi (ayrı iş, onayla).
+
+## 18. Yön (kendini tanıma + yazı egzersizleri) (2026-09-25, Build 29 — YAPILDI; 1. adım)
+- Taslak (onaylı): https://claude.ai/artifact/3Dwmcz7JF2kB3LmXEyb18y. Kaynak taraması: 4 ajan, PubMed (dil filtresi yok).
+- Modül: src/modules/yon (Yaşam halkası, pratik; günlük yola girmez). Mantık lib/yon.js, ekran screens/Yon.jsx.
+- Ayna: Öz-Şefkat Ölçeği Kısa Formu (Raes 2011), Türkçe uyarlama (Büyüköksüz 2025). Makalede 12 maddenin yalnız 6'sı
+  yayımlandı; şimdilik bu 6 madde. Tam form için ek dosya + ölçek sahibinin izni gerekli. Puanlama VARSAYIM (1–5, sert
+  maddeler ters, ortalama). Ayda bir önerilir; norm yok, kişi-içi gidişat.
+- Dışarıdan bak: görsel uzaklaşma (6 sn sahne) + adla/"sen" ile yazma; "ben/bana/beni…" sayacı (ek halindeki birinci
+  kişi sayılmaz). Öncesi/sonrası rahatsızlık 0–10. Kanıt: Guo 2022 (48 çalışma, g=−0,26; görsel+sözel daha güçlü),
+  Kross 2014 (7 çalışma, N=585).
+- Şefkatle ele al: bir dosta yazar gibi mektup + tek küçük adım; övgü cümlesi yok. Kanıt: Breines & Chen 2012; Wood 2009.
+- Gizlilik: kayıtlarda yalnız sayılar; yazılar yalnız "sakla" işaretlenirse bu cihazda (gozolcum:yon-notes); ad hiç
+  saklanmaz; koça gitmez. Kurgusal örnekler kullanıcının anlattığı olaylara benzemez.
+- Sonraki adımlar (onayla): kıyaslama eğilimi, saplanıp kalma (yüksekse destek bilgisi), "Şimdi mi, sonra mı?" oyunu,
+  WOOP planı, En iyi olası ben, cesaret adımı; ölçek lisansları kontrol edilmeli.
