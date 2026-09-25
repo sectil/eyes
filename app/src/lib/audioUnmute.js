@@ -41,10 +41,28 @@ export function mediaKeepAlive(on) {
         tag.src = url
       }
       tag.play()?.catch?.(() => {})
-    } else {
-      tag?.pause()
+    } else if (tag) {
+      tag.pause()
+      // Sonraki kullanım için sessiz döngüye dön
+      if (url && tag.src !== url) {
+        tag.src = url
+        tag.loop = true
+      }
     }
   } catch {
     // desteklenmiyor: Web Audio yine çalar, yalnız sessiz modda susabilir
+  }
+}
+
+// Aynı (dokunuşla açılmış) öğede başka bir kaynağı çal: uyku modunda hazırlanan müzik. Döner: çalma sözü.
+export function mediaPlay(src, { loop = false } = {}) {
+  try {
+    if (!tag) mediaKeepAlive(true)
+    if (!tag) return Promise.resolve(false)
+    tag.loop = loop
+    tag.src = src
+    return tag.play()?.then(() => true).catch(() => false) ?? Promise.resolve(true)
+  } catch {
+    return Promise.resolve(false)
   }
 }

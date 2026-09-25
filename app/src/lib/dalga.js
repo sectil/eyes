@@ -6,7 +6,10 @@
 export const SESSION_TYPE = 'dalga'
 export const isDalga = (s) => s?.type === SESSION_TYPE && typeof s.mode === 'string'
 export const DALGA_OPTS_KEY = 'gozolcum:dalga-opts'
-export const DURATIONS = [3, 5, 10] // dakika
+export const QUICK_MINUTES = [5, 15, 30, 60, 90] // hızlı seçim (dakika)
+export const MIN_MINUTES = 1
+export const MAX_MINUTES = 90
+export const DEFAULT_MINUTES = 5
 export const EXP_N = 6
 export const RATE_MAX = 10
 
@@ -40,9 +43,10 @@ const store = (s) => s ?? globalThis.localStorage
 export function normalizeOpts(o = {}) {
   return {
     mode: MODE_ORDER.includes(o.mode) ? o.mode : 'sakin',
-    minutes: DURATIONS.includes(o.minutes) ? o.minutes : 5,
+    minutes: Number.isInteger(o.minutes) && o.minutes >= MIN_MINUTES && o.minutes <= MAX_MINUTES ? o.minutes : DEFAULT_MINUTES,
     headphones: o.headphones !== false,
     experiment: o.experiment !== false,
+    sleep: o.sleep === true, // uyku modu (yalnız Sakin): soluk saat, sonda yavaşça kısılır, binaural yok
   }
 }
 export function loadDalgaOpts(storage) {
@@ -63,8 +67,8 @@ export function saveDalgaOpts(opts, storage) {
 // ---- Binaural katman ve deney ----
 const expRecords = (sessions = []) => sessions.filter((s) => isDalga(s) && s.exp === true && typeof s.binaural === 'boolean')
 // used: katman bu oturumda söz konusu mu (Sakin + kulaklık); exp: deney oturumu mu; on: katman çalıyor mu
-export function binauralPlan({ mode, headphones, experiment }, sessions = [], r = Math.random) {
-  const used = mode === 'sakin' && Boolean(headphones)
+export function binauralPlan({ mode, headphones, experiment, sleep = false }, sessions = [], r = Math.random) {
+  const used = mode === 'sakin' && Boolean(headphones) && !sleep
   if (!used) return { used: false, exp: false, on: false }
   if (!experiment) return { used: true, exp: false, on: true }
   const past = expRecords(sessions)
@@ -92,7 +96,7 @@ export function experimentText(e) {
 }
 
 // ---- Kayıt ----
-export function makeRecord({ mode, minutes, before, after, value = null, plan, seconds }, date = new Date()) {
+export function makeRecord({ mode, minutes, before = null, after = null, value = null, plan, seconds, sleep = false }, date = new Date()) {
   const rec = {
     type: SESSION_TYPE,
     date: new Date(date).toISOString(),
@@ -104,6 +108,7 @@ export function makeRecord({ mode, minutes, before, after, value = null, plan, s
     seconds: Math.round(seconds ?? 0),
   }
   if (mode === 'guc' && value) rec.value = value
+  if (sleep) rec.sleep = true
   if (plan?.used) {
     rec.binaural = Boolean(plan.on)
     rec.exp = Boolean(plan.exp)
@@ -121,11 +126,14 @@ export const FACTS = [
   { id: '528', modes: ['sakin', 'guc'], claim: '528 Hz "şifa frekansı"dır.', answer: 'none', body: 'Tek randomize çalışmada tükürükteki bazı belirteçler değişti, ama dikkat testinde fark çıkmadı. "Şifa" iddiasını gösteren bir çalışma bulamadık.', ref: 'Bozok ve ark. 2026 · Brain Behav', doi: '10.1002/brb3.71452' },
   { id: 'tempo', modes: ['motive'], claim: 'Hareket ederken hızlı müzik daha çok yardım eder.', answer: 'fact', body: '139 çalışmada müzik ruh halini ve performansı iyileştirdi, yorgunluk hissini azalttı. Performansa hızlı tempo daha çok yardım etti.', ref: 'Terry ve ark. 2020 · Psychol Bull', doi: '10.1037/bul0000216' },
   { id: 'music', modes: ['sakin', 'guc', 'motive'], claim: 'Müzik dinlemek stresi azaltır.', answer: 'fact', body: '104 randomize çalışmanın meta-analizinde müzik hem nabız ve tansiyon gibi bedensel ölçüleri hem de hissedilen stresi azalttı.', ref: 'de Witte ve ark. 2019 · Health Psychol Rev', doi: '10.1080/17437199.2019.1627897' },
+  { id: 'sleep', modes: [], claim: 'Uyumadan önce müzik dinlemek uyku kalitesini iyileştirebilir.', answer: 'fact', body: '13 çalışmada (1007 kişi) her gün 25–60 dk müzik dinleyenler uyku kalitelerini daha iyi bildirdi (orta kesinlik). Uyku cihazla ölçüldüğünde ise iyileşme görülmeyebilir.', ref: 'Jespersen ve ark. 2022 · Cochrane Database Syst Rev', doi: '10.1002/14651858.CD010459.pub3' },
   { id: 'flicker', modes: [], claim: 'Yanıp sönen ışık nöbet tetikleyebilir.', answer: 'fact', body: 'Işığa duyarlı kişilerde 1–65 Hz yanıp sönme nöbet tetikleyebilir; en riskli aralık 15–25 Hz. Dalga bu yüzden hiç yanıp sönmez.', ref: 'Fisher ve ark. 2005 · Epilepsia', doi: '10.1111/j.1528-1167.2005.31405.x' },
 ]
 export const ANSWER_TEXT = { fact: 'Doğru', none: 'Kanıt yok', mixed: 'Belirsiz' }
 // Sıradaki kart: bu moddaki tur sayısına göre sırayla (moda özel kartlar önce)
-export function factFor(sessions = [], mode = 'sakin') {
+export const SLEEP_FACT_ID = 'sleep'
+export function factFor(sessions = [], mode = 'sakin', { sleep = false } = {}) {
+  if (sleep) return FACTS.find((f) => f.id === SLEEP_FACT_ID)
   const pool = FACTS.filter((f) => f.modes.includes(mode))
   return pool[sessions.filter((s) => isDalga(s) && s.mode === mode).length % pool.length]
 }

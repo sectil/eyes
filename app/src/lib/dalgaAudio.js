@@ -7,75 +7,45 @@ import { mediaKeepAlive } from './audioUnmute.js'
 const LOOKAHEAD = 0.3 // sn
 const TICK_MS = 25
 
-export function createDalgaEngine() {
-  let ac = null, master, bus, analyser, noiseBuf
-  let bin = null
-  const ks = new Map()
-  const S = { running: false, paused: false, t0: 0, end: 0, next: 0, step: 0, timer: 0, compose: null, mode: null, volume: 0.6 }
-  let events = [] // görsel için: { t, kind, cue? }
-  const td = new Uint8Array(1024)
+function impulse(ac, sec, decay) {
+  const n = Math.floor(ac.sampleRate * sec)
+  const b = ac.createBuffer(2, n, ac.sampleRate)
+  for (let c = 0; c < 2; c++) {
+    const d = b.getChannelData(c)
+    for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, decay)
+  }
+  return b
+}
+// Ses grafiği: çalgılar → bus → (kuru + yankı) → sıkıştırıcı → master → out. Canlı ve önceden hazırlanan (uyku) çalma ortak.
+export function buildGraph(ac, out) {
+  const master = ac.createGain()
+  master.gain.value = 0.0001
+  const comp = ac.createDynamicsCompressor()
+  comp.threshold.value = -16
+  comp.ratio.value = 3
+  comp.attack.value = 0.01
+  comp.release.value = 0.3
+  const bus = ac.createGain()
+  bus.gain.value = 0.9
+  const rev = ac.createConvolver()
+  rev.buffer = impulse(ac, 3.4, 2.6)
+  const wet = ac.createGain()
+  wet.gain.value = 0.32
+  bus.connect(comp)
+  bus.connect(rev)
+  rev.connect(wet)
+  wet.connect(comp)
+  comp.connect(master)
+  master.connect(out)
+  const noiseBuf = ac.createBuffer(1, Math.floor(ac.sampleRate * 0.2), ac.sampleRate)
+  const nd = noiseBuf.getChannelData(0)
+  for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1
+  return { master, bus, noiseBuf }
+}
 
-  // iPhone sessiz modda Web Audio susabilir. WebKit'in Audio Session API'si (navigator.audioSession) sayfanın sesini
-  // "playback" türüne alır; sessiz tuşunda da çalar. VARSAYIM: WKWebView'de destekleniyor; cihazda doğrulanacak.
-  // Desteklenmeyen tarayıcıda hiçbir şey yapmaz. Dalga bitince 'auto'ya döner (diğer sesler etkilenmesin).
-  function sessionType(type) {
-    try {
-      const as = globalThis.navigator?.audioSession
-      if (as && 'type' in as) as.type = type
-    } catch {
-      // desteklenmiyor
-    }
-  }
-  function unlock() {
-    sessionType('playback')
-    mediaKeepAlive(true)
-    try {
-      const AC = globalThis.AudioContext || globalThis.webkitAudioContext
-      if (!AC) return false
-      if (!ac) {
-        ac = new AC()
-        master = ac.createGain()
-        master.gain.value = 0.0001
-        const comp = ac.createDynamicsCompressor()
-        comp.threshold.value = -16
-        comp.ratio.value = 3
-        comp.attack.value = 0.01
-        comp.release.value = 0.3
-        bus = ac.createGain()
-        bus.gain.value = 0.9
-        const rev = ac.createConvolver()
-        rev.buffer = impulse(3.4, 2.6)
-        const wet = ac.createGain()
-        wet.gain.value = 0.32
-        bus.connect(comp)
-        bus.connect(rev)
-        rev.connect(wet)
-        wet.connect(comp)
-        comp.connect(master)
-        analyser = ac.createAnalyser()
-        analyser.fftSize = 1024
-        master.connect(analyser)
-        analyser.connect(ac.destination)
-        noiseBuf = ac.createBuffer(1, Math.floor(ac.sampleRate * 0.2), ac.sampleRate)
-        const nd = noiseBuf.getChannelData(0)
-        for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1
-      }
-      if (ac.state === 'suspended') ac.resume().catch(() => {})
-      return true
-    } catch {
-      ac = null
-      return false
-    }
-  }
-  function impulse(sec, decay) {
-    const n = Math.floor(ac.sampleRate * sec)
-    const b = ac.createBuffer(2, n, ac.sampleRate)
-    for (let c = 0; c < 2; c++) {
-      const d = b.getChannelData(c)
-      for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, decay)
-    }
-    return b
-  }
+// Çalgılar (ac bağlamında). ping(t, kind): görsel için nota olayı; cue(t, kind): sessiz ölçü vb.
+export function makeVoices(ac, { bus, master, noiseBuf }, { ping = () => {}, cue = () => {} } = {}) {
+  const ks = new Map()
   const panNode = (p = 0) => {
     if (ac.createStereoPanner) {
       const s = ac.createStereoPanner()
@@ -84,7 +54,6 @@ export function createDalgaEngine() {
     }
     return ac.createGain()
   }
-  const ping = (t, kind) => events.push({ t, kind, x: 0.15 + Math.random() * 0.7, y: 0.36 + Math.random() * 0.32 })
 
   // ---- Çalgılar ----
   function piano(t, midi, vel, dur = 4, pan = 0, show = true) {
@@ -214,6 +183,63 @@ export function createDalgaEngine() {
     s.start(t)
     s.stop(t + 0.07)
   }
+
+  function play(e, t) {
+    if (e.inst === 'cue') return cue(t, e.cue)
+    if (e.inst === 'piano') return piano(t, e.midi, e.vel, e.dur, e.pan, e.ping !== false)
+    if (e.inst === 'guitar') return guitar(t, e.midi, e.vel, e.dur, e.pan)
+    if (e.inst === 'strum') return strum(t, e.notes, e.vel, e.up, e.dur)
+    if (e.inst === 'pad') return pad(t, e.notes, e.dur, e.vel)
+    if (e.inst === 'bass') return bass(t, e.midi, e.vel, e.dur)
+    if (e.inst === 'kick') return kick(t, e.vel)
+    if (e.inst === 'shaker') return shaker(t, e.vel)
+    return undefined
+  }
+  return { play }
+}
+
+export function createDalgaEngine() {
+  let ac = null, master, analyser
+  let bin = null
+  let voices = null
+  const S = { running: false, paused: false, t0: 0, end: 0, next: 0, step: 0, timer: 0, compose: null, mode: null, volume: 0.6 }
+  let events = [] // görsel için: { t, kind, cue? }
+  const td = new Uint8Array(1024)
+
+  // iPhone sessiz modda Web Audio susabilir. WebKit'in Audio Session API'si (navigator.audioSession) sayfanın sesini
+  // "playback" türüne alır; sessiz tuşunda da çalar. VARSAYIM: WKWebView'de destekleniyor; cihazda doğrulanacak.
+  // Desteklenmeyen tarayıcıda hiçbir şey yapmaz. Dalga bitince 'auto'ya döner (diğer sesler etkilenmesin).
+  function sessionType(type) {
+    try {
+      const as = globalThis.navigator?.audioSession
+      if (as && 'type' in as) as.type = type
+    } catch {
+      // desteklenmiyor
+    }
+  }
+  function unlock() {
+    sessionType('playback')
+    mediaKeepAlive(true)
+    try {
+      const AC = globalThis.AudioContext || globalThis.webkitAudioContext
+      if (!AC) return false
+      if (!ac) {
+        ac = new AC()
+        const g = buildGraph(ac, (analyser = ac.createAnalyser()))
+        analyser.fftSize = 1024
+        analyser.connect(ac.destination)
+        master = g.master
+        voices = makeVoices(ac, g, { ping, cue: (t, kind) => events.push({ t, kind, cue: true }) })
+      }
+      if (ac.state === 'suspended') ac.resume().catch(() => {})
+      return true
+    } catch {
+      ac = null
+      return false
+    }
+  }
+  const ping = (t, kind) => events.push({ t, kind, x: 0.15 + Math.random() * 0.7, y: 0.36 + Math.random() * 0.32 })
+
   // Binaural: sol kulak 200 Hz, sağ kulak 206 Hz. Yankıya girmez (kanallar karışmasın).
   function startBinaural(t) {
     const merger = ac.createChannelMerger(2)
@@ -239,24 +265,13 @@ export function createDalgaEngine() {
     bin = null
   }
 
-  function play(e, t) {
-    if (e.inst === 'cue') return events.push({ t, kind: e.cue, cue: true })
-    if (e.inst === 'piano') return piano(t, e.midi, e.vel, e.dur, e.pan, e.ping !== false)
-    if (e.inst === 'guitar') return guitar(t, e.midi, e.vel, e.dur, e.pan)
-    if (e.inst === 'strum') return strum(t, e.notes, e.vel, e.up, e.dur)
-    if (e.inst === 'pad') return pad(t, e.notes, e.dur, e.vel)
-    if (e.inst === 'bass') return bass(t, e.midi, e.vel, e.dur)
-    if (e.inst === 'kick') return kick(t, e.vel)
-    if (e.inst === 'shaker') return shaker(t, e.vel)
-    return undefined
-  }
   function schedule() {
     if (!S.running || S.paused || !ac) return
     const d = stepSec(S.mode)
     while (S.next < ac.currentTime + LOOKAHEAD) {
       if (S.next < S.end - 3) {
         const progress = Math.min(1, (S.next - S.t0) / (S.end - S.t0))
-        for (const e of S.compose(S.step, progress)) play(e, S.next + (e.at ?? 0))
+        for (const e of S.compose(S.step, progress)) voices.play(e, S.next + (e.at ?? 0))
       }
       S.step++
       S.next += d

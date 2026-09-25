@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
-import { X, Play, Pause, Headphones, FlaskConical } from 'lucide-react'
+import { X, Play, Pause, Headphones, FlaskConical, Moon } from 'lucide-react'
 import { ProgressBar } from '../components/QuestionFlow.jsx'
 import DalgaVisual from '../components/DalgaVisual.jsx'
 import { haptic } from '../lib/native.js'
 import { createDalgaEngine } from '../lib/dalgaAudio.js'
+import { createSleepPlayer } from '../lib/dalgaSleep.js'
 import { testUnlock } from '../lib/subscription.js'
 import {
-  MODES, MODE_ORDER, DURATIONS, VALUES, WHY_MIN, RATE_MAX, EXP_N, ANSWER_TEXT,
+  MODES, MODE_ORDER, QUICK_MINUTES, MIN_MINUTES, MAX_MINUTES, VALUES, WHY_MIN, RATE_MAX, EXP_N, ANSWER_TEXT,
   loadDalgaOpts, saveDalgaOpts, binauralPlan, makeRecord, factFor, experimentOf, experimentText,
 } from '../lib/dalga.js'
 import '../styles/dalga.css'
@@ -67,6 +68,10 @@ export default function Dalga({ sessions = [], onSave, onExit }) {
   const [record, setRecord] = useState(null)
   const [error, setError] = useState(null)
   const [diag, setDiag] = useState({ state: 'none', rate: 0, level: 0 })
+  const [sleepState, setSleepState] = useState('idle') // idle | preparing | playing
+  const [showCtl, setShowCtl] = useState(false)
+  const sleepRef = useRef(null)
+  const sleepMode = opts.mode === 'sakin' && opts.sleep
   const engineRef = useRef(null)
   const wakeRef = useRef(null)
   const playSec = useRef(0)
@@ -74,7 +79,7 @@ export default function Dalga({ sessions = [], onSave, onExit }) {
   const engine = engineRef.current
   const m = MODES[opts.mode]
 
-  useEffect(() => () => { engine.close(); wakeRef.current?.release?.().catch?.(() => {}) }, [engine])
+  useEffect(() => () => { engine.close(); sleepRef.current?.stop(); wakeRef.current?.release?.().catch?.(() => {}) }, [engine])
 
   const update = (patch) => setOpts((o) => {
     const n = { ...o, ...patch }
@@ -137,6 +142,55 @@ export default function Dalga({ sessions = [], onSave, onExit }) {
     setAfter(null)
     setPhase('after')
   }
+  // Uyku modu: puan sorulmaz; müzik hazırlanır, soluk saat, sonda yavaşça kısılır
+  async function startSleep() {
+    const p = createSleepPlayer()
+    sleepRef.current = p
+    setShowCtl(false)
+    setSleepState('preparing')
+    setLeft(opts.minutes * 60)
+    setPhase('sleep')
+    keepAwake(true)
+    try {
+      const ok = await p.start({
+        mode: 'sakin',
+        totalSec: opts.minutes * 60,
+        onTick: ({ left: l }) => setLeft(l),
+        onEnd: () => endSleep(false),
+      })
+      if (ok) setSleepState('playing')
+    } catch {
+      p.stop()
+      keepAwake(false)
+      setError('Müzik hazırlanamadı. Yeniden dene.')
+      setPhase('pick')
+    }
+  }
+  function endSleep(early) {
+    const p = sleepRef.current
+    if (!p) return
+    const sec = p.elapsed()
+    p.stop()
+    sleepRef.current = null
+    keepAwake(false)
+    setSleepState('idle')
+    if (sec < MIN_SAVE_SEC) {
+      setPhase('pick')
+      return
+    }
+    const rec = makeRecord({ mode: 'sakin', minutes: opts.minutes, plan: { used: false }, seconds: sec, sleep: true })
+    setFact(factFor(sessions, 'sakin', { sleep: true }))
+    setRecord(rec)
+    onSave?.(rec)
+    setPhase('result')
+  }
+  // Uyku ekranında dokununca denetimler 5 sn görünür
+  useEffect(() => {
+    if (!showCtl) return undefined
+    const id = setTimeout(() => setShowCtl(false), 5000)
+    return () => clearTimeout(id)
+  }, [showCtl])
+
   function togglePause() {
     if (paused) engine.resume()
     else engine.pause()
@@ -163,6 +217,22 @@ export default function Dalga({ sessions = [], onSave, onExit }) {
     </div>
   )
   const modeStyle = { '--dg1': m.c1, '--dg2': m.c2 }
+
+  if (phase === 'sleep') {
+    const now = new Date()
+    const hh = String(now.getHours()).padStart(2, '0'), mm = String(now.getMinutes()).padStart(2, '0')
+    return (
+      <main className="dg-sleep" onClick={() => setShowCtl(true)} aria-label="Dalga · uyku">
+        <div className="dg-clock">{hh}:{mm}</div>
+        <p className="dg-sleep-sub" aria-live="polite">
+          {sleepState === 'preparing' ? 'Müzik hazırlanıyor…' : `${Math.max(1, Math.ceil(left / 60))} dk sonra yavaşça susacak`}
+        </p>
+        {showCtl && (
+          <button className="dg-sleep-end" onClick={(e) => { e.stopPropagation(); endSleep(true) }}>Bitir</button>
+        )}
+      </main>
+    )
+  }
 
   if (phase === 'play') {
     const word = opts.mode === 'guc' ? value : silent ? 'sessizlik' : ''
@@ -234,6 +304,27 @@ export default function Dalga({ sessions = [], onSave, onExit }) {
     )
   }
 
+  if (phase === 'result' && record?.sleep) {
+    return (
+      <main className="screen fade-in dg" style={modeStyle}>
+        {top(1, false)}
+        <span className="dg-ey">Uyku · {Math.max(1, Math.round(record.seconds / 60))} dk</span>
+        <h1 className="dg-h">Günaydın.</h1>
+        {fact && (
+          <section className="dg-card">
+            <span className="dg-ey">Doğru mu, efsane mi?</span>
+            <p className="h">{fact.claim}</p>
+            <p><b className="ok">{ANSWER_TEXT[fact.answer]}.</b> {fact.body}</p>
+            <span className="dg-src">{fact.ref} · doi {fact.doi}</span>
+          </section>
+        )}
+        <p className="dg-src">Tedavi değildir. Uykusuzluk uzun sürüyorsa bir hekime danış.</p>
+        <div className="grow" />
+        <button className="btn" onClick={onExit}>Bitti</button>
+      </main>
+    )
+  }
+
   if (phase === 'result' && record) {
     const d = record.delta
     // Kaydedilen oturum, onSave → refresh sonrası sessions'ta zaten olabilir; iki kez sayılmasın
@@ -289,17 +380,26 @@ export default function Dalga({ sessions = [], onSave, onExit }) {
           </button>
         ))}
       </div>
-      <div className="dg-chips" role="radiogroup" aria-label="Süre">
-        {DURATIONS.map((min) => <button key={min} type="button" role="radio" className="dg-chip" aria-checked={opts.minutes === min} onClick={() => update({ minutes: min })}>{min} dk</button>)}
+      <div className="dg-dur">
+        <label htmlFor="dg-min">Süre <b>{opts.minutes} dk</b></label>
+        <input id="dg-min" type="range" min={MIN_MINUTES} max={MAX_MINUTES} step="1" value={opts.minutes} onChange={(e) => update({ minutes: +e.target.value })} />
+        <div className="dg-chips" role="radiogroup" aria-label="Hızlı süre">
+          {QUICK_MINUTES.map((min) => <button key={min} type="button" role="radio" className="dg-chip" aria-checked={opts.minutes === min} onClick={() => update({ minutes: min })}>{min}</button>)}
+        </div>
       </div>
       {opts.mode === 'sakin' && (
         <>
           <label className="dg-tog">
+            <Moon size={20} aria-hidden="true" />
+            <div><b>Uyku modu</b><span>Soluk saat; süre bitince yavaşça susar. Telefon kilitlenince de çalar.</span></div>
+            <input type="checkbox" checked={opts.sleep} onChange={(e) => update({ sleep: e.target.checked })} />
+          </label>
+          {!opts.sleep && <label className="dg-tog">
             <Headphones size={20} aria-hidden="true" />
             <div><b>Kulaklık takılı</b><span>Binaural katman için gerekli; hoparlörde çalmaz.</span></div>
             <input type="checkbox" checked={opts.headphones} onChange={(e) => update({ headphones: e.target.checked })} />
-          </label>
-          {opts.headphones && (
+          </label>}
+          {!opts.sleep && opts.headphones && (
             <label className="dg-tog">
               <FlaskConical size={20} aria-hidden="true" />
               <div><b>Kişisel deney</b><span>Katman bazen gizlice kapalı; {EXP_N} oturumda sonuç.</span></div>
@@ -310,7 +410,7 @@ export default function Dalga({ sessions = [], onSave, onExit }) {
       )}
       {error && <p className="dg-err" role="alert">{error}</p>}
       <div className="grow" />
-      <button className="btn" onClick={() => { engine.unlock(); setBefore(null); setPhase('before') }}>Başla</button>
+      <button className="btn" onClick={() => { engine.unlock(); setError(null); if (sleepMode) { startSleep(); return } setBefore(null); setPhase('before') }}>{sleepMode ? 'Uykuya başla' : 'Başla'}</button>
     </main>
   )
 }

@@ -318,3 +318,10 @@ konuşma eşleşmesi ≥ 0,7 olunca cümle biter (`MATCH_THRESHOLD`) → kişi b
   saklanmaz; koça gitmez. Kurgusal örnekler kullanıcının anlattığı olaylara benzemez.
 - Sonraki adımlar (onayla): kıyaslama eğilimi, saplanıp kalma (yüksekse destek bilgisi), "Şimdi mi, sonra mı?" oyunu,
   WOOP planı, En iyi olası ben, cesaret adımı; ölçek lisansları kontrol edilmeli.
+- (Ek, Build 29) Süre 1–90 dk (kaydırıcı + 5/15/30/60/90), varsayılan 5. Uyku modu (yalnız Sakin): puan sorulmaz,
+  binaural yok, siyah ekranda soluk saat, müzik 96 sn'lik döngü olarak önceden hazırlanır (OfflineAudioContext,
+  22 050 Hz, lib/dalgaSleep.js) ve <audio> ile döngüde çalar; son en çok 3 dk ayrı hazırlanmış kısılan parça.
+  Info.plist UIBackgroundModes: audio. Kanıt kartı: Jespersen 2022 (Cochrane; 13 çalışma, 1007 kişi; öznel uyku
+  kalitesi orta kesinlikte iyi, nesnel ölçümlerde iyileşme görülmeyebilir). Sessiz modda çalma: navigator.audioSession
+  'playback' + sessiz <audio> döngüsü (lib/audioUnmute.js). Cihazda doğrulanacak: sessiz mod, kilitli ekranda çalma,
+  sabah puanı (yapılmadı).

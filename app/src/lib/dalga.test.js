@@ -9,16 +9,22 @@ const rec = (over) => ({ type: 'dalga', mode: 'sakin', date: '2026-09-20T10:00:0
 
 describe('Dalga tercihleri', () => {
   it('bilinmeyen değerler varsayılana döner; kaydet/yükle', () => {
-    expect(normalizeOpts({ mode: 'x', minutes: 7 })).toEqual({ mode: 'sakin', minutes: 5, headphones: true, experiment: true })
+    expect(normalizeOpts({ mode: 'x', minutes: 95 })).toEqual({ mode: 'sakin', minutes: 5, headphones: true, experiment: true, sleep: false })
+    expect(normalizeOpts({ minutes: 47, sleep: true })).toMatchObject({ minutes: 47, sleep: true })
+    expect(normalizeOpts({ minutes: 0 }).minutes).toBe(5)
+    expect(normalizeOpts({ minutes: 2.5 }).minutes).toBe(5)
     const s = mem()
     saveDalgaOpts({ mode: 'motive', minutes: 10, headphones: false, experiment: false }, s)
     expect(JSON.parse(s.getItem(DALGA_OPTS_KEY)).mode).toBe('motive')
-    expect(loadDalgaOpts(s)).toEqual({ mode: 'motive', minutes: 10, headphones: false, experiment: false })
+    expect(loadDalgaOpts(s)).toEqual({ mode: 'motive', minutes: 10, headphones: false, experiment: false, sleep: false })
     expect(loadDalgaOpts({ getItem: () => '{bozuk' })).toEqual(normalizeOpts())
   })
 })
 
 describe('binaural katman planı', () => {
+  it('uyku modunda katman yok', () => {
+    expect(binauralPlan({ mode: 'sakin', headphones: true, experiment: true, sleep: true })).toEqual({ used: false, exp: false, on: false })
+  })
   it('yalnız Sakin + kulaklıkta; deney kapalıysa hep açık', () => {
     expect(binauralPlan({ mode: 'guc', headphones: true, experiment: true })).toEqual({ used: false, exp: false, on: false })
     expect(binauralPlan({ mode: 'sakin', headphones: false, experiment: true })).toEqual({ used: false, exp: false, on: false })
@@ -67,6 +73,15 @@ describe('kayıt', () => {
     const s = makeRecord({ mode: 'sakin', minutes: 5, before: 5, after: 5, value: 'Merak', plan: { used: true, exp: true, on: false }, seconds: 300 })
     expect(s).toMatchObject({ binaural: false, exp: true, delta: 0 })
     expect(s.value).toBeUndefined()
+  })
+})
+
+describe('uyku kaydı ve kartı', () => {
+  it('puansız uyku kaydı; kart Cochrane', () => {
+    const r = makeRecord({ mode: 'sakin', minutes: 30, plan: binauralPlan({ mode: 'sakin', headphones: true, sleep: true }), seconds: 1800, sleep: true })
+    expect(r).toMatchObject({ mode: 'sakin', minutes: 30, before: null, after: null, delta: null, sleep: true, seconds: 1800 })
+    expect(r.binaural).toBeUndefined()
+    expect(factFor([], 'sakin', { sleep: true }).doi).toBe('10.1002/14651858.CD010459.pub3')
   })
 })
 
