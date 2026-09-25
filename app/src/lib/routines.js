@@ -23,6 +23,10 @@ export const EXERCISES = {
   farLook: { title: 'Uzağa bak', sub: 'Pencereden 6 metreden uzak bir noktaya', subTracked: 'Telefonu yüzüne dönük tut, üstünden 6 metreden uzağa bak', seconds: 20, visual: 'far', kind: 'comfort' }, // sensör: gözler uzağa odaklıyken süre işler
   nearFar: { title: 'Yakın – uzak', sub: 'Ekrandaki daireye 3 sn, uzağa 3 sn; tekrarla', seconds: 18, visual: 'nearfar', kind: 'comfort', switches: 6 }, // sensör: yakın↔uzak geçiş sayısı
   blink: { title: 'Tam göz kırp', sub: 'Kapat · hafifçe sık · aç — ritimle', seconds: 20, visual: 'blink', kind: 'evidence', closed: true, blinks: 5 },
+  // Nefes adımları: süreyle sayar (sensör yok). Ritim 4 sn al / 6 sn ver (lib/breath.js Sakin ritim);
+  // görsel ve sesli aşamalar Routine.jsx'te. Kanıt/sınırlar: docs/yol-haritasi/NEFES_FARKINDALIK.md.
+  breathCalm: { title: 'Sakin nefes', sub: '4 sn al · 6 sn ver · burnundan', say: 'Sakin nefes. Nefes al, yavaşça ver.', seconds: 60, visual: 'breath', kind: 'calm' },
+  breathReset: { title: 'Üç nefes', sub: 'Gözlerini dinlendir: al, ver — üç kez', say: 'Üç nefes.', seconds: 30, visual: 'breath', kind: 'calm' },
   rest: { title: 'Gözlerini kapat', sub: 'Avuçlarını hafifçe üstüne koyabilirsin', subTracked: 'Telefonu yüzüne dönük tut; kamera kapalı gözlerini görmeli', say: 'Gözlerini kapat. Bitince sesle haber vereceğim.', seconds: 10, visual: 'rest', kind: 'relax', closed: true },
 }
 
@@ -47,6 +51,16 @@ export const SETS = [
     icon: 'dumbbell',
     color: '#ee6b6b',
     steps: ['blink', 'lookRight', 'lookLeft', 'lookUp', 'lookDown', 'circleCw', 'circleCcw', 'farLook', 'nearFar', 'blink', 'lookRight', 'lookLeft', 'farLook', 'nearFar', 'rest'],
+  },
+  {
+    // Derin: göz adımlarının başında/sonunda 1 dk sakin nefes, aralarda üç nefeslik molalar (~4,5 dk).
+    // VARSAYIM: mola sayısı ve yeri; nefesin göz egzersizine katkısı kanıtlanmış değil, mola ve
+    // farkındalık anı olarak konumlanır (16b raporu).
+    id: 'deep',
+    title: 'Derin',
+    icon: 'wind',
+    color: '#19c2d1',
+    steps: ['breathCalm', 'blink', 'lookRight', 'lookLeft', 'breathReset', 'lookUp', 'lookDown', 'circleCw', 'breathReset', 'farLook', 'nearFar', 'breathCalm', 'rest'],
   },
 ]
 

@@ -40,6 +40,14 @@ describe('todayPlan', () => {
     expect(r.route).toMatch(/^routine-/)
   })
 
+  it('Derin set yalnızca kullanıcı onu seçmişse planda; yoksa Tam set', () => {
+    const tests = [{ type: 'va-weekly', eye: 'OU', date: daysAgo(1) }, { type: 'reading', date: daysAgo(1) }]
+    const bc = { type: 'breath-count', accuracy: 80, date: daysAgo(1) }
+    expect(plan(tests, [bc]).items.find((i) => i.id === 'routine').title).toBe('Tam set')
+    const deep = { type: 'routine', setId: 'deep', seconds: 250, date: daysAgo(1) }
+    expect(plan(tests, [bc, deep]).items.find((i) => i.id === 'routine').route).toBe('routine-deep')
+  })
+
   it('takılan modül plana adım ekler, bozuk modül planı düşürmez', () => {
     const mods = [
       { id: 'a', kind: 'practice', today: () => ({ title: 'A', minutes: 2, done: false }) },

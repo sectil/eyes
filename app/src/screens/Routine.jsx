@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { X, ArrowRight, ArrowLeft, ArrowUp, ArrowDown, Mountain, EyeOff, Trophy, Info, ScanFace, Check, SkipForward } from 'lucide-react'
 import { Ring } from '../components/ui.jsx'
 import { EXERCISES, DAILY_GOAL_MIN, formatMin, setDurationSec } from '../lib/routines.js'
-import { cue, unlockAudio } from '../lib/cue.js'
+import { cue, speak, unlockAudio } from '../lib/cue.js'
+import { PHASE as BREATH_PHASE } from '../lib/breath.js'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import {
   eyeClosure,
@@ -21,6 +22,7 @@ import {
 } from '../lib/gaze.js'
 import { haptic } from '../lib/native.js'
 import '../styles/routine.css'
+import '../styles/breath.css'
 import SoundToggle from '../components/SoundToggle.jsx'
 
 const ARROWS = { right: ArrowRight, left: ArrowLeft, up: ArrowUp, down: ArrowDown }
@@ -29,7 +31,12 @@ const KIND_LABEL = {
   evidence: 'Kanıtlı egzersiz',
   comfort: 'Göz konforu molası',
   relax: 'Rahatlama hareketi',
+  calm: 'Nefes',
 }
+// Nefes adımı ritmi: 4 sn al, 6 sn ver (Sakin ritim). tick = adım başından geçen saniye.
+const BREATH_IN = 4
+const BREATH_CYCLE = 10
+const breathPhaseAt = (tick) => (tick % BREATH_CYCLE < BREATH_IN ? 'in' : 'out')
 // TrueDepth varken her adım kamerayla takip edilir ve ASLA süreyle ilerlemez: yüz görünmüyorsa
 // sayaç durur, kişi nazikçe beklenir. TrueDepth yoksa (web / eski iPhone) ya da kamera
 // açılamazsa adımlar süreyle ilerler.
@@ -109,6 +116,17 @@ function Visual({ ex, tick, gaze }) {
     )
   }
   if (ex.visual === 'far') return <Mountain size={96} strokeWidth={1.6} className="routine-arrow" />
+  if (ex.visual === 'breath') {
+    const k = breathPhaseAt(tick)
+    const ph = BREATH_PHASE[k]
+    const secLeft = k === 'in' ? BREATH_IN - (tick % BREATH_CYCLE) : BREATH_CYCLE - (tick % BREATH_CYCLE)
+    return (
+      <div className="stack" style={{ alignItems: 'center', gap: 18 }}>
+        <div className="br-orb" style={{ width: 150, height: 150, '--s': ph.scale, '--t': `${k === 'in' ? BREATH_IN : BREATH_CYCLE - BREATH_IN}s` }} aria-hidden="true" />
+        <span className="routine-sub" aria-live="polite">{ph.label} · {secLeft}</span>
+      </div>
+    )
+  }
   if (ex.visual === 'nearfar') {
     // Yakın hedef ekrandaki daire (başparmak değil: kamera daireye/uzağa bakışı ayırt eder). 3 sn ritim.
     const near = Math.floor(tick / 3) % 2 === 0
@@ -326,6 +344,16 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
     cue(prev?.visual === 'rest' ? `Gözlerini aç. ${say}` : say, Boolean(ex.closed))
     voice.current.lastCue = performance.now()
   }, [idx, done])
+
+  // Nefes adımı: aşama değişince kısa komut + aşamaya özgü titreşim (adım başı cue zaten konuşur)
+  useEffect(() => {
+    if (done || ex?.visual !== 'breath' || tick === 0) return
+    if (tick % BREATH_CYCLE !== 0 && tick % BREATH_CYCLE !== BREATH_IN) return
+    const ph = BREATH_PHASE[breathPhaseAt(tick)]
+    haptic(ph.haptic)
+    speak(ph.say)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tick])
 
   // Nabız: saniyede bir. TrueDepth'te süre ilerlemez; yalnızca bekleme (ilerlemesizlik) sayılır.
   useEffect(() => {

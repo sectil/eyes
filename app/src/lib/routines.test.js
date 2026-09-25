@@ -19,7 +19,15 @@ describe('SETS', () => {
   })
   it('kanıtsız hareketler iddia taşımaz (kind relax/comfort)', () => {
     const kinds = new Set(Object.values(EXERCISES).map((e) => e.kind))
-    expect([...kinds].every((k) => ['evidence', 'comfort', 'relax'].includes(k))).toBe(true)
+    expect([...kinds].every((k) => ['evidence', 'comfort', 'relax', 'calm'].includes(k))).toBe(true)
+  })
+  it('Derin: başta ve sonda 1 dk sakin nefes, arada nefes molaları, ~4–5 dk', () => {
+    const deep = SETS.find((s) => s.id === 'deep')
+    expect(deep.steps[0]).toBe('breathCalm')
+    expect(deep.steps.filter((id) => EXERCISES[id].visual === 'breath').length).toBeGreaterThanOrEqual(3)
+    expect(setDurationSec(deep)).toBeGreaterThanOrEqual(240)
+    expect(setDurationSec(deep)).toBeLessThanOrEqual(330)
+    expect(deep.steps.some((id) => EXERCISES[id].kind === 'evidence')).toBe(true)
   })
 })
 

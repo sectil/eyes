@@ -15,8 +15,7 @@ import {
   ScanEye,
   ThumbsUp,
   TriangleAlert,
-  Trophy,
-} from 'lucide-react'
+  Trophy, Wind } from 'lucide-react'
 import ProgressChart from '../components/ProgressChart.jsx'
 import { PageHeader } from '../components/ui.jsx'
 import { analyzeTrend, trendMessage } from '../lib/trend.js'
@@ -43,7 +42,7 @@ const EYES = [
   ['L', 'Sol'],
   ['OU', 'İki göz'],
 ]
-const SET_ICONS = { leaf: Leaf, thumbs: ThumbsUp, dumbbell: Dumbbell }
+const SET_ICONS = { leaf: Leaf, thumbs: ThumbsUp, dumbbell: Dumbbell, wind: Wind }
 const LITE_SET = SETS.find((s) => s.id === 'lite')
 
 const nf = (n) => n.toLocaleString('tr-TR')
