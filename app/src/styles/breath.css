@@ -1,0 +1,45 @@
+/* Nefes pratiği */
+.br-patterns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.br-pattern {
+  text-align: left; color: inherit; font: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 4px;
+  padding: 12px 14px; border-radius: 18px; background: var(--surface); border: 1.5px solid var(--border); box-shadow: var(--shadow);
+}
+.br-pattern[aria-pressed='true'] { border-color: var(--accent); background: var(--accent-soft); }
+.br-pattern .title { font-weight: 700; }
+.br-pattern .sub { font-size: 0.78rem; color: var(--ink-3); }
+.br-edit { display: flex; flex-direction: column; gap: 8px; }
+.br-edit-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.br-stepper { display: inline-flex; align-items: center; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--surface-2); }
+.br-stepper button { width: 42px; height: 40px; border: 0; background: none; color: var(--ink); font: inherit; font-size: 1.2rem; cursor: pointer; }
+.br-stepper button:disabled { opacity: 0.3; }
+.br-stepper span { min-width: 52px; text-align: center; font-family: var(--font-mono); font-size: 0.95rem; }
+.br-calm { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.br-calm button {
+  min-height: 48px; border-radius: 14px; border: 1.5px solid var(--border); background: var(--surface); color: var(--ink);
+  font: inherit; font-family: var(--font-display); font-weight: 650; cursor: pointer;
+}
+.br-calm button[aria-pressed='true'] { border-color: var(--accent); background: var(--accent-soft); }
+.br-calm-ends { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--ink-3); }
+
+/* Sahne */
+.br-stage {
+  position: fixed; inset: 0; z-index: 30; display: flex; flex-direction: column; align-items: center; gap: 14px;
+  padding: calc(env(safe-area-inset-top) + 12px) 16px calc(env(safe-area-inset-bottom) + 16px);
+  background: var(--bg); background-image: var(--bg-grad); color: var(--ink);
+}
+.br-top { width: 100%; display: flex; align-items: center; justify-content: space-between; }
+.br-time { font-family: var(--font-mono); font-size: 0.95rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.br-orb-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; width: 100%; }
+.br-orb {
+  width: 220px; height: 220px; border-radius: 50%;
+  background: radial-gradient(circle at 38% 34%, color-mix(in srgb, var(--iris-1) 55%, white) 0%, var(--iris-1) 45%, var(--iris-2) 100%);
+  box-shadow: 0 30px 70px -30px color-mix(in srgb, var(--iris-2) 70%, transparent), inset 0 -20px 40px rgba(0, 0, 0, 0.18);
+  transform: scale(var(--s, 0.55)); transition: transform var(--t, 4s) cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  will-change: transform;
+}
+.br-orb.hold { transition-duration: 0.3s; }
+.br-phase { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; letter-spacing: -0.02em; text-align: center; min-height: 1.3em; }
+.br-count { font-family: var(--font-mono); font-size: 1.1rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.br-cycle { color: var(--ink-3); font-size: 0.85rem; }
+.br-strain { align-self: center; }
+@media (prefers-reduced-motion: reduce) { .br-orb { transition-duration: 0.2s; } }

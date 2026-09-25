@@ -56,6 +56,24 @@ export function unlockAudio() {
   }
 }
 
+// Yalnızca konuşma (titreşimsiz): nefes aşamaları gibi kendi titreşimini veren yerler için
+export function speak(text, { rate = 1.1, fallbackTone = 660 } = {}) {
+  if (!getPrefs().sound) return
+  if (turkishVoiceAvailable()) {
+    try {
+      window.speechSynthesis.cancel()
+      const u = new SpeechSynthesisUtterance(text)
+      u.lang = 'tr-TR'
+      u.rate = rate
+      window.speechSynthesis.speak(u)
+      return
+    } catch {
+      // tona düş
+    }
+  }
+  tone(fallbackTone, 120)
+}
+
 export function cue(text, closed) {
   haptic(closed ? 'warning' : 'success')
   if (!getPrefs().sound) return
