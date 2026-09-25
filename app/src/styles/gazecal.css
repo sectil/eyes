@@ -16,6 +16,7 @@
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 .gazecal-close { position: absolute; top: calc(env(safe-area-inset-top) + 12px); left: 16px; z-index: 2; }
+.gazecal-sound { position: absolute; top: calc(env(safe-area-inset-top) + 12px); right: 16px; z-index: 2; }
 .gazecal-steps { position: absolute; top: calc(env(safe-area-inset-top) + 28px); left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
 .gazecal-steps i { width: 22px; height: 5px; border-radius: 3px; background: var(--surface-3); }
 .gazecal-steps i.done { background: var(--ink-3); }
@@ -57,12 +58,6 @@
 .gazetest-grid .hl { color: var(--accent); font-weight: 700; }
 
 /* Kalibrasyon v2: yön hedefleri ekranın dışını gösteren ok */
-.gazecal-out { position: absolute; left: 50%; top: 50%; margin: -15px 0 0 -15px; color: var(--accent-graphic); }
-.gazecal-out.left { animation: gazecal-nudge-x 1s ease-in-out infinite; --d: -6px; }
-.gazecal-out.right { animation: gazecal-nudge-x 1s ease-in-out infinite; --d: 6px; }
-.gazecal-out.up { animation: gazecal-nudge-y 1s ease-in-out infinite; --d: -6px; }
-.gazecal-out.down { animation: gazecal-nudge-y 1s ease-in-out infinite; --d: 6px; }
 @keyframes gazecal-nudge-x { 50% { transform: translateX(var(--d)); } }
 @keyframes gazecal-nudge-y { 50% { transform: translateY(var(--d)); } }
 .gazecal-scores { align-self: center; }
-@media (prefers-reduced-motion: reduce) { .gazecal-out { animation: none !important; } }

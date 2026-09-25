@@ -117,10 +117,11 @@ describe('offScreen', () => {
   const g = (x, y, extra = {}) => ({ calibrated: true, tracked: true, closed: false, v: { x, y }, ...extra })
   it('ekran içi bakış hayır, dışarı bakış evet, bilinmiyorsa null', () => {
     expect(offScreen(g(4, -5))).toBe(false)
-    expect(offScreen(g(15, 0))).toBe(true)
-    expect(offScreen(g(0, 14))).toBe(true)
-    expect(offScreen(g(0, -13))).toBe(false) // aşağıda pay daha geniş
-    expect(offScreen(g(0, -17))).toBe(true)
+    expect(offScreen(g(19, 0))).toBe(false) // ekran kenarı (kalibrasyon hedefi) içeride
+    expect(offScreen(g(28, 0))).toBe(true)
+    expect(offScreen(g(0, 28))).toBe(true)
+    expect(offScreen(g(0, -28))).toBe(false) // aşağıda pay daha geniş
+    expect(offScreen(g(0, -32))).toBe(true)
     expect(offScreen(g(0, 0, { closed: true }))).toBeNull()
     expect(offScreen(g(0, 0, { calibrated: false }))).toBeNull()
     expect(offScreen(null)).toBeNull()

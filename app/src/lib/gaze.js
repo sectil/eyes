@@ -188,7 +188,7 @@ export function createCircleTracker(dir, { min = CIRCLE_MIN } = {}) {
 // VARSAYIM: aşağıdaki eşik ve süreler ilk sürüm içindir; cihazda ayarlanacak.
 export const GAZE_ENTER_DEG = 8 // yöne girmek için
 export const GAZE_EXIT_DEG = 5 // yönden çıkmak için (histerezis)
-export const GAZE_FULL_DEG = 20 // arayüzde tam kenar; blendshape yolunda o yöndeki en güçlü bakış
+export const GAZE_FULL_DEG = 20 // v birimi: kalibrasyon hedefi (ekran kenarındaki nokta) = ±20; blendshape yolunda o yöndeki en güçlü bakış
 export const CIRCLE_MIN_DEG = 6 // daire takibinde merkezden en az uzaklık (derece)
 export const GAZE_FLIP_KEY = 'gozolcum:gaze-flip'
 

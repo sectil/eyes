@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Check, Copy, Crosshair, RotateCcw, ScanFace, Share2, X } from 'lucide-react'
+import { Check, Copy, Crosshair, RotateCcw, ScanFace, Share2, Volume2, VolumeX, X } from 'lucide-react'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { calibReport, fitModel, saveGazeModel, headRef, headTurned, TARGETS, DOWN_CLOSE_MAX, MIN_SCORE, HEAD_TURN_DEG } from '../lib/gazeCalib.js'
 import { shareText } from '../lib/share.js'
 import { createGazeReader, eyeClosure, BLINK_CLOSE, GAZE_FULL_DEG } from '../lib/gaze.js'
 import { haptic } from '../lib/native.js'
 import { cue, unlockAudio } from '../lib/cue.js'
+import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
 import '../styles/gazecal.css'
 
 // 5 noktalı kişisel göz kalibrasyonu (lib/gazeCalib.js, model sürüm 2).
@@ -25,7 +26,9 @@ const closeLimit = (t) => (t === 'down' ? DOWN_CLOSE_MAX : BLINK_CLOSE)
 // Baş dönüşü uyarısı (ses + titreşim) en az bu aralıkla tekrarlanır
 const HEAD_WARN_GAP_MS = 2500
 
-// Hedef konumları (ekran yüzdesi). Yön hedefleri kenarda, oku ekranın dışını gösterir.
+// Hedef konumları (ekran yüzdesi). Kullanıcı ekrandaki noktayı gözüyle takip eder; ekran dışına
+// bakması istenmez (Build 10 geri bildirimi: "kimse telefondan dışarı bakmaz, noktayı takip eder").
+// Sağ–sol hedef arası ~10°, üst–alt ~18° (35 cm'de). Model bu kenarları ±GAZE_FULL_DEG sayar.
 const POS = {
   center: { x: 50, y: 46 },
   left: { x: 8, y: 46 },
@@ -34,20 +37,22 @@ const POS = {
   down: { x: 50, y: 84 },
   center2: { x: 50, y: 46 },
 }
-const OUT = { left: ArrowLeft, right: ArrowRight, up: ArrowUp, down: ArrowDown }
 const LABEL = {
-  left: 'Telefonun solundan dışarı bak',
-  right: 'Telefonun sağından dışarı bak',
-  up: 'Telefonun üstünden yukarı bak',
-  down: 'Telefonun altından aşağı bak',
+  center: 'Noktaya bak',
+  left: 'Soldaki noktaya bak',
+  right: 'Sağdaki noktaya bak',
+  up: 'Üstteki noktaya bak',
+  down: 'Alttaki noktaya bak',
+  center2: 'Tekrar ortadaki noktaya bak',
 }
+// Sesli yönlendirme kısa; nokta zaten ekranda. Ses düğmesiyle kapatılabilir (Profil'deki "Sesler" tercihi).
 const SAY = {
   center: 'Ortadaki noktaya bak',
-  left: 'Başını çevirmeden telefonun solundan dışarı bak',
-  right: 'Şimdi sağından dışarı bak',
-  up: 'Üstünden yukarı bak',
-  down: 'Altından aşağı bak',
-  center2: 'Tekrar ortadaki noktaya bak',
+  left: 'Sol',
+  right: 'Sağ',
+  up: 'Yukarı',
+  down: 'Aşağı',
+  center2: 'Tekrar orta',
 }
 
 export default function GazeCalibration({ onDone, onSkip, onCancel }) {
@@ -55,6 +60,13 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   const [idx, setIdx] = useState(0)
   const [prog, setProg] = useState(0) // hedefteki kayıt ilerlemesi 0..1
   const [status, setStatus] = useState('ok') // ok | noface | closed | head
+  const [sound, setSound] = useState(() => getPrefs().sound)
+  useEffect(() => subscribePrefs((p) => setSound(p.sound)), [])
+  const toggleSound = () => {
+    const on = !sound
+    setPrefs({ sound: on })
+    if (on) unlockAudio()
+  }
   // Orta hedefteki baş duruşu; sonraki hedeflerde baş bundan HEAD_TURN_DEG'den çok dönerse kare sayılmaz
   const head = useRef({ ref: null, rejected: {}, lastWarn: 0 })
   const [result, setResult] = useState(null)
@@ -169,15 +181,14 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
         <div className="gazecal-hero"><Crosshair size={44} strokeWidth={1.6} /></div>
         <h1>Göz takibini sana göre ayarlayalım</h1>
         <p className="muted">
-          Herkesin gözü farklı hareket eder. Önce ortadaki noktaya bakacaksın. Sonra sesle söylediğim yöne,
-          <strong> telefonun kenarından dışarı, bir karış öteye</strong> bakacaksın: sol, sağ, üst, alt.
-          <strong> Başını çevirme, yalnızca gözünü kaydır.</strong> Yaklaşık 20 saniye sürer, bir kez yapılır.
+          Herkesin gözü farklı hareket eder. Ekranda bir nokta gezinecek: orta, sol, sağ, üst, alt.
+          <strong> Noktayı yalnızca gözünle takip et; başını çevirme.</strong> Yaklaşık 20 saniye sürer, bir kez yapılır.
         </p>
         <ul className="gazecal-tips">
-          <li>Sesi aç: dışarı bakarken ekranı göremezsin, yönü sesle söyleyeceğim.</li>
-          <li>Her yön bitince telefon kısa titrer; sıradaki yönü dinle.</li>
-          <li>Telefonu yüzünün karşısında sabit tut; yüzün iyi aydınlansın.</li>
-          <li>Göz kırpmak sorun değil, o anlar sayılmaz.</li>
+          <li>Telefonu yüzünün karşısında, göz hizasında sabit tut; yüzün iyi aydınlansın.</li>
+          <li>Her nokta bitince telefon kısa titrer; nokta yeni yerine geçer.</li>
+          <li>Başın dönerse uyarırım; o anlar sayılmaz.</li>
+          <li>Göz kırpmak sorun değil, o anlar da sayılmaz.</li>
         </ul>
         <button className="btn" onClick={start}><ScanFace size={18} aria-hidden="true" /> Başla</button>
         {onSkip && <button className="link-btn" style={{ alignSelf: 'center' }} onClick={onSkip}>Şimdi değil</button>}
@@ -195,7 +206,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
           <>
             <div className="gazecal-badge ok"><Check size={30} /></div>
             <h1>Hazır</h1>
-            <p className="muted">Dene: telefonun bir kenarından dışarı bak, nokta o yöne gitmeli. Ekrana bakınca ortada kalır.</p>
+            <p className="muted">Dene: ekranın bir kenarına bak, nokta o yöne gitmeli. Ortaya bakınca ortada kalır.</p>
             <div className={`gazecal-pad ${preview.dir && preview.dir !== 'center' ? 'on' : ''}`} aria-hidden="true">
               <span className="gazecal-cross" />
               <span className="gazecal-live" style={{ left: `${50 + px * 42}%`, top: `${50 - py * 42}%` }} />
@@ -211,7 +222,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
             <p className="muted">
               {!result?.x || result.x.weak ? 'Sağa ve sola bakışı ayırt edemedim. ' : ''}
               {!result?.y || result.y.weak ? 'Yukarı ve aşağı bakışı ayırt edemedim. ' : ''}
-              Başını sabit tut; gözünü telefonun kenarından dışarı, bir karış öteye kaydır ve titreşime kadar orada tut.
+              Başını sabit tut; noktayı yalnızca gözünle takip et ve titreşime kadar noktada kal.
             </p>
             {headTurnNote(report)}
             <div className="gazetest-grid gazecal-scores">
@@ -234,10 +245,12 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
 
   const t = TARGETS[idx]
   const p = POS[t]
-  const Out = OUT[t]
   return (
     <div className="gazecal-stage" role="application" aria-label="Göz kalibrasyonu">
       <button className="btn-icon gazecal-close" onClick={onCancel} aria-label="Kapat"><X size={20} /></button>
+      <button className="btn-icon gazecal-sound" onClick={toggleSound} aria-label={sound ? 'Sesi kapat' : 'Sesi aç'} aria-pressed={sound}>
+        {sound ? <Volume2 size={20} /> : <VolumeX size={20} />}
+      </button>
       <div className="gazecal-steps" aria-hidden="true">
         {TARGETS.map((x, i) => <i key={x} className={i < idx ? 'done' : i === idx ? 'now' : ''} />)}
       </div>
@@ -246,10 +259,10 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
           <circle cx="32" cy="32" r="28" className="bg" />
           <circle cx="32" cy="32" r="28" className="fg" style={{ strokeDasharray: `${prog * 176} 176` }} />
         </svg>
-        {Out ? <Out className={`gazecal-out ${t}`} size={30} strokeWidth={2.4} aria-hidden="true" /> : <span className="gazecal-dot" />}
+        <span className="gazecal-dot" />
       </div>
       <p className="gazecal-msg" role="status" aria-live="polite">
-        {!cam.ready ? 'Kamera açılıyor…' : cam.error ? 'Kamera açılamadı' : status === 'noface' ? 'Yüzünü kameraya göster' : status === 'closed' ? 'Gözlerini aç' : status === 'head' ? 'Başını çevirme, yalnızca gözünü kaydır' : LABEL[t] ?? 'Başını çevirmeden noktaya bak'}
+        {!cam.ready ? 'Kamera açılıyor…' : cam.error ? 'Kamera açılamadı' : status === 'noface' ? 'Yüzünü kameraya göster' : status === 'closed' ? 'Gözlerini aç' : status === 'head' ? 'Başını çevirme, yalnızca gözünü kaydır' : LABEL[t] ?? 'Noktaya bak'}
       </p>
     </div>
   )

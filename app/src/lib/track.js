@@ -170,9 +170,11 @@ export function scoreOf(summary, speedId) {
 // Ekrana bakmıyor mu? Okuyucu çıktısından (createGazeReader().push). Kalibrasyon v2'de ekran dışı
 // bakış ≈ ±20; ekran içinde gezinen bakış (köşeler dahil) bunun çok altında kalmalı.
 // VARSAYIM: yan/üst 12, alt 15 (aşağıda göz kapağı iner, değer oynak). null = bilinmiyor.
-export const OFF_SIDE = 12
-export const OFF_UP = 12
-export const OFF_DOWN = 15
+// v birimi: kalibrasyon hedefi = ekran kenarı = ±GAZE_FULL_DEG (20). Kenarın 1,3 katı ötesi "dışarı";
+// aşağıda pay daha geniş (göz kapağı iner, sinyal aşağıda kayar). VARSAYIM: cihazda ayarlanacak.
+export const OFF_SIDE = 26
+export const OFF_UP = 26
+export const OFF_DOWN = 30
 export function offScreen(g) {
   if (!g || !g.calibrated || !g.tracked || g.closed || !g.v) return null
   const { x, y } = g.v
