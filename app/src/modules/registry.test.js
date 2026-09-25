@@ -22,7 +22,7 @@ describe('modül soketi: gerçek modüller', () => {
     expect(registry.forRoute('breath')?.gates.eyeBudget).toBeUndefined()
     expect(registry.forRoute('home')).toBeNull()
     expect(registry.labelFor('routine-normal')).toBe('normal egzersiz seti')
-    expect(registry.labelFor('track')).toBe('çember takibi')
+    expect(registry.labelFor('track')).toBe('çemberler')
   })
   it('kayıtları tanır; silinecek anahtarlar modüllerden gelir', () => {
     expect(registry.forSession({ type: 'game', game: 'snake' })?.id).toBe('snake')
