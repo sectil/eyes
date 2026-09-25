@@ -10,17 +10,15 @@ function feed(m, l, r, fromMs, toMs) {
 }
 
 describe('classify', () => {
-  it('sağ göz testi: sol kapalı + sağ açık = ok', () => {
+  it('tek göz: iki göz birden açıksa uncovered; biri kapalıysa ok (Build 24 cihazı: 0,88 / 0,87 birlikte)', () => {
     expect(coverFor('R')).toBe('L')
+    expect(classify(0.87, 0.88, 'L')).toBe('ok')
     expect(classify(0.9, 0.05, 'L')).toBe('ok')
-    expect(classify(0.05, 0.05, 'L')).toBe('uncovered')
-    expect(classify(0.05, 0.9, 'L')).toBe('wrong-eye')
-    expect(classify(0.9, 0.9, 'L')).toBe('both-closed')
-    expect(classify(0.5, 0.05, 'L')).toBe('unclear')
-  })
-  it('sol göz testi simetrik; iki göz testi ikisi açık', () => {
     expect(classify(0.05, 0.9, 'R')).toBe('ok')
-    expect(classify(0.9, 0.05, 'R')).toBe('wrong-eye')
+    expect(classify(0.05, 0.05, 'L')).toBe('uncovered')
+    expect(classify(0.5, 0.3, 'L')).toBe('unclear')
+  })
+  it('iki göz testi ikisi açık', () => {
     expect(classify(0.1, 0.1, 'none')).toBe('ok')
     expect(classify(0.9, 0.1, 'none')).toBe('closed')
     expect(classify(null, 0.1, 'none')).toBe('no-face')
@@ -70,9 +68,8 @@ describe('createOcclusionMonitor', () => {
 
 describe('occlusionMessage', () => {
   it('Türkçe kısa yönerge', () => {
-    expect(occlusionMessage('uncovered', 'L')).toBe('Sol gözünü kapat ve avucunla ört')
-    expect(occlusionMessage('wrong-eye', 'L')).toBe('Diğer gözünü kapatmışsın: sol gözünü kapat')
-    expect(occlusionMessage('both-closed', 'R')).toBe('Sol gözünü aç')
+    expect(occlusionMessage('uncovered', 'L')).toBe('İki gözün açık · sol gözünü kapat')
+    expect(occlusionMessage('ok', 'L')).toBe('Bir gözün kapalı · sağ gözünle bak')
     expect(occlusionMessage('ok', 'none')).toBe('İki gözün açık')
   })
 })

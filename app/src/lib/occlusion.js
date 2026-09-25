@@ -1,15 +1,14 @@
 // Tek göz testi için örtme kontrolü (AcuityTest). Kaynak: iPhone TrueDepth yüz takibinin göz kapanma
 // değerleri (ARKit eyeBlinkLeft/Right, 0 = açık, 1 = kapalı; native "face" olayı blinkLeft/blinkRight).
 //
-// Kural: test edilen göz AÇIK, diğer göz KAPALI (kapağı indirilmiş, üstü avuçla örtülü). İki göz testinde
-// ikisi de açık. Doğru durum 1 sn kesintisiz görülmeden test başlamaz; test sırasında durum 0,7 sn'den
-// uzun bozulursa harf gizlenir (kırpma ≈ 0,1–0,4 sn sürer, kırpma testi durdurmaz).
-//
-// VARSAYIM 1: blinkLeft kullanıcının kendi SOL gözü (ARKit yüzün kendi koordinatını kullanır; Apple belgesi
-//   bunu açıkça yazmıyor). Ters çıkarsa kişi "diğer gözünü kapatmışsın" uyarısını görür; cihaz verisiyle
-//   doğrulanacak (Build 24 kontrol kartındaki ham değerler).
-// VARSAYIM 2: avuçla örtülen ama kapağı açık göz kamerada "açık" okunabilir; bu yüzden kişiden örtülen gözün
-//   kapağını da indirmesi istenir. Eşikler (0,55 / 0,45) cihaz verisiyle ayarlanacak.
+// Build 24.1 (cihaz verisi, Build 24): tek göz kapatılınca İKİ değer birlikte yükseliyor (sol kapalı → sağ 0,88,
+// sol 0,87); ARKit iki gözü ayrı ayrı ölçmüyor. El ile örtünce yüz takibi düşüyor (mesafe de kesiliyor).
+// Bu yüzden kural: tek göz testinde İKİ GÖZ BİRDEN AÇIK OLAMAZ (en az biri kapalı okunmalı); hangi gözün
+// kapalı olduğu bu sinyalle AYIRT EDİLEMEZ (yönerge + kişi). Göz kapağıyla kapatılır, el kullanılmaz ki yüz
+// görünsün. İki göz testinde ikisi de açık. Doğru durum 1 sn görülmeden test başlamaz; testte 0,7 sn'den
+// uzun bozulursa harf gizlenir (kırpma ≈ 0,1–0,4 sn, testi durdurmaz).
+// Hangi gözün örtüldüğünü ölçmek için derinlik haritası planı: ENVANTER_VE_PLAN.md §12.
+// VARSAYIM: eşikler 0,55 / 0,45 (Build 24 cihazında kapalı göz 0,87–0,88 okundu).
 export const CLOSED_MIN = 0.55
 export const OPEN_MAX = 0.45
 export const GATE_MS = 1000
@@ -20,28 +19,24 @@ const SMOOTH_N = 5 // ~30 Hz → ~0,17 sn ortanca
 // Test edilen göz → kapalı olması gereken göz
 export const coverFor = (eye) => (eye === 'R' ? 'L' : eye === 'L' ? 'R' : 'none')
 
-// l, r: 0–1 kapanma. need: 'L' | 'R' (kapalı olması gereken) | 'none' (ikisi açık)
+// l, r: 0–1 kapanma. need: 'L' | 'R' (kapalı olması gereken; ayırt edilemez, yalnızca "biri kapalı" aranır)
+// | 'none' (ikisi açık)
 export function classify(l, r, need) {
   if (!Number.isFinite(l) || !Number.isFinite(r)) return 'no-face'
-  const lc = l >= CLOSED_MIN
-  const rc = r >= CLOSED_MIN
-  const lo = l <= OPEN_MAX
-  const ro = r <= OPEN_MAX
+  const anyClosed = l >= CLOSED_MIN || r >= CLOSED_MIN
+  const bothOpen = l <= OPEN_MAX && r <= OPEN_MAX
   if (need === 'none') {
-    if (lo && ro) return 'ok'
-    if (lc || rc) return 'closed'
+    if (bothOpen) return 'ok'
+    if (anyClosed) return 'closed'
     return 'unclear'
   }
-  const [coverC, coverO, testC, testO] = need === 'L' ? [lc, lo, rc, ro] : [rc, ro, lc, lo]
-  if (coverC && testO) return 'ok'
-  if (coverC && testC) return 'both-closed'
-  if (coverO && testC) return 'wrong-eye'
-  if (coverO && testO) return 'uncovered'
+  if (anyClosed) return 'ok'
+  if (bothOpen) return 'uncovered'
   return 'unclear'
 }
 
 // Belirsiz (eşikler arası) durum testi durdurmaz; yalnızca açıkça yanlış durumlar durdurur.
-const BAD = new Set(['no-face', 'closed', 'both-closed', 'wrong-eye', 'uncovered'])
+const BAD = new Set(['no-face', 'closed', 'uncovered'])
 
 function median(arr) {
   const s = [...arr].sort((a, b) => a - b)
@@ -118,18 +113,16 @@ export function createOcclusionMonitor(need) {
   }
 }
 
-// Kullanıcıya kısa yönerge (duruma ve örtülecek göze göre)
+// Kullanıcıya kısa yönerge (duruma ve kapatılacak göze göre)
 const SIDE = { L: 'sol', R: 'sağ' }
 export function occlusionMessage(state, need) {
   const cover = SIDE[need]
   const test = need === 'L' ? 'sağ' : 'sol'
   switch (state) {
-    case 'ok': return need === 'none' ? 'İki gözün açık' : `${cap(cover)} gözün kapalı, ${test} gözün açık`
-    case 'no-face': return 'Yüzün görünmüyor'
+    case 'ok': return need === 'none' ? 'İki gözün açık' : `Bir gözün kapalı · ${test} gözünle bak`
+    case 'no-face': return need === 'none' ? 'Yüzün görünmüyor' : 'Yüzün görünmüyor · elini değil göz kapağını kullan'
     case 'closed': return 'İki gözünü de aç'
-    case 'both-closed': return `${cap(test)} gözünü aç`
-    case 'wrong-eye': return `Diğer gözünü kapatmışsın: ${cover} gözünü kapat`
-    case 'uncovered': return `${cap(cover)} gözünü kapat ve avucunla ört`
+    case 'uncovered': return `İki gözün açık · ${cover} gözünü kapat`
     default: return need === 'none' ? 'İki gözünü de aç' : `${cap(cover)} gözünü tam kapat, ${test} gözünü kısma`
   }
 }

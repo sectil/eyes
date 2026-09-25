@@ -18,8 +18,9 @@ import '../styles/acuity.css'
 import '../styles/profile.css' // pf-chips
 
 const ALL_EYES = [
-  { id: 'R', title: 'Sağ göz', cover: 'Sol gözünü kapat ve üstünü avucunla ört (bastırmadan). Sağ gözünü kısma.' },
-  { id: 'L', title: 'Sol göz', cover: 'Sağ gözünü kapat ve üstünü avucunla ört (bastırmadan). Sol gözünü kısma.' },
+  // Build 24.1: el değil göz kapağı; el yüzü örtünce kamera yüzü kaybediyor (mesafe de kesiliyor)
+  { id: 'R', title: 'Sağ göz', cover: 'Sol gözünü kapat; elini kullanma, kamera yüzünü görmeli. Sağ gözünü kısma.' },
+  { id: 'L', title: 'Sol göz', cover: 'Sağ gözünü kapat; elini kullanma, kamera yüzünü görmeli. Sol gözünü kısma.' },
   { id: 'OU', title: 'İki göz', cover: 'İki gözün de açık.' },
 ]
 // Günlük test yalnız iki tek göz (Build 24: toplam harf yarıya indi); haftalık testte iki göz de ölçülür.
@@ -283,9 +284,9 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
       algorithm: ALGORITHM,
       outOfRange: fin.outOfRange,
       distanceTracked: tracked && d.length > 0,
-      // Örtme: kamerayla doğrulandı mı, test sırasında kaç kez bozuldu (lib/occlusion.js)
+      // Örtme: 'camera-any' = kamera 'iki göz birden açık değil' dedi (hangi göz ayırt edilemez, lib/occlusion.js)
       occlusion: occDetect
-        ? { method: 'camera', pauses: occMon.current?.snapshot(performance.now()).pauses ?? 0, blockedMs: occMon.current?.snapshot(performance.now()).blockedMs ?? 0 }
+        ? { method: 'camera-any', pauses: occMon.current?.snapshot(performance.now()).pauses ?? 0, blockedMs: occMon.current?.snapshot(performance.now()).blockedMs ?? 0 }
         : { method: eye.id === 'OU' ? 'none' : 'self-report' },
       trialsMax: planSpec.trials,
       meanDistanceMm: d.length ? Math.round(meanMm) : null,
@@ -508,31 +509,23 @@ function CoverCheck({ detect, need, occ, selfCover, onSelfCover }) {
     return (
       <label className="choice">
         <input type="checkbox" checked={selfCover} onChange={(e) => onSelfCover(e.target.checked)} />
-        <span>{need === 'L' ? 'Sol' : 'Sağ'} gözüm kapalı ve avucumla örtülü</span>
+        <span>{need === 'L' ? 'Sol' : 'Sağ'} gözüm kapalı</span>
       </label>
     )
   }
-  const eyeBox = (side) => {
-    const v = side === 'L' ? occ?.l : occ?.r
-    const shouldClose = need === side
-    const closed = Number.isFinite(v) && v >= 0.55
-    const open = Number.isFinite(v) && v <= 0.45
-    const good = shouldClose ? closed : open
-    return (
-      <div className={`cover-eye${good ? ' good' : Number.isFinite(v) ? ' bad' : ''}`}>
-        <span className="cover-eye-name">{side === 'L' ? 'Sol göz' : 'Sağ göz'}</span>
-        <strong>{!Number.isFinite(v) ? '—' : closed ? 'kapalı' : open ? 'açık' : 'yarı'}</strong>
-        <span className="cover-eye-need">{shouldClose ? 'kapalı olmalı' : 'açık olmalı'}</span>
-        <span className="cover-eye-raw">{Number.isFinite(v) ? v.toFixed(2).replace('.', ',') : '—'}</span>
-      </div>
-    )
-  }
+  // Kamera iki gözü ayrı ölçmüyor (Build 24 cihaz verisi): tek durum gösterilir, ham değerler küçük yazıyla
   const state = occ?.state ?? 'no-face'
+  const good = state === 'ok'
+  const raw = (v) => (Number.isFinite(v) ? v.toFixed(2).replace('.', ',') : '—')
   return (
     <div className={`card cover-check${occ?.gateReady ? ' ready' : ''}`} aria-live="polite">
-      <div className="cover-eyes">{eyeBox('R')}{eyeBox('L')}</div>
+      <div className={`cover-eye${good ? ' good' : state === 'no-face' ? '' : ' bad'}`}>
+        <span className="cover-eye-name">{need === 'none' ? 'İki gözün açık olmalı' : `${need === 'L' ? 'Sol' : 'Sağ'} gözün kapalı olmalı`}</span>
+        <strong>{good ? (need === 'none' ? 'İki göz açık' : 'Bir göz kapalı') : state === 'no-face' ? 'Yüz aranıyor' : need === 'none' ? 'Bir göz kapalı' : 'İki göz açık'}</strong>
+      </div>
       <div className="cover-gate"><i style={{ width: `${Math.round((occ?.gateFrac ?? 0) * 100)}%` }} /></div>
       <p className="small cover-msg">{occ?.gateReady ? 'Tamam, başlayabilirsin' : occlusionMessage(state, need)}</p>
+      <span className="cover-eye-raw">kamera ham · sağ {raw(occ?.r)} · sol {raw(occ?.l)} (0 açık, 1 kapalı)</span>
     </div>
   )
 }
@@ -554,7 +547,7 @@ function EyeResult({ eyes: EYES, eyeIdx, result, all, moreEyes, onNext, onFinish
         <AcuityScale value={v} />
         <div className="acuity-meta">
           <span className="acuity-pill">{result.trials} harf</span>
-          {result.occlusion?.method === 'camera' && <span className="acuity-pill">Örtme kamerayla doğrulandı{result.occlusion.pauses ? ` · ${result.occlusion.pauses} kez durdu` : ''}</span>}
+          {result.occlusion?.method?.startsWith('camera') && <span className="acuity-pill">Tek göz kamerayla izlendi{result.occlusion.pauses ? ` · ${result.occlusion.pauses} kez durdu` : ''}</span>}
           {result.meanDistanceMm && <span className="acuity-pill">ort. {Math.round(result.meanDistanceMm / 10)} cm</span>}
           <span className="acuity-pill">İniş {result.descentTrials} · İnce ayar {result.fineTrials}</span>
         </div>
