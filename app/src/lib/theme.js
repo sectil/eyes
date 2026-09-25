@@ -4,7 +4,7 @@
 const KEY = 'gozolcum:theme'
 export const THEMES = ['system', 'light', 'dark']
 
-const META = { light: '#f5f7f7', dark: '#0b1414' }
+const META = { light: '#f3f6f8', dark: '#070c12' }
 
 export function getThemePref() {
   try {

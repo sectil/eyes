@@ -279,7 +279,7 @@ function renderScene(ctx, size, now, sc) {
     ctx.stroke()
     ctx.globalAlpha = 1 - k
     ctx.fillStyle = c.head
-    ctx.font = `800 ${Math.round(cell * 0.66)}px 'Inter Variable', system-ui, -apple-system, sans-serif`
+    ctx.font = `800 ${Math.round(cell * 0.66)}px 'Onest Variable', system-ui, -apple-system, sans-serif`
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
     ctx.fillText(`+${e.pts}`, cx, cy - cell * (0.7 + 0.8 * k))
