@@ -14,7 +14,19 @@ export function createDalgaEngine() {
   let events = [] // görsel için: { t, kind, cue? }
   const td = new Uint8Array(1024)
 
+  // iPhone sessiz modda Web Audio susabilir. WebKit'in Audio Session API'si (navigator.audioSession) sayfanın sesini
+  // "playback" türüne alır; sessiz tuşunda da çalar. VARSAYIM: WKWebView'de destekleniyor; cihazda doğrulanacak.
+  // Desteklenmeyen tarayıcıda hiçbir şey yapmaz. Dalga bitince 'auto'ya döner (diğer sesler etkilenmesin).
+  function sessionType(type) {
+    try {
+      const as = globalThis.navigator?.audioSession
+      if (as && 'type' in as) as.type = type
+    } catch {
+      // desteklenmiyor
+    }
+  }
   function unlock() {
+    sessionType('playback')
     try {
       const AC = globalThis.AudioContext || globalThis.webkitAudioContext
       if (!AC) return false
@@ -306,6 +318,7 @@ export function createDalgaEngine() {
         master.gain.setTargetAtTime(0.0001, t, fast ? 0.35 : 0.9)
       }
       stopBinaural(t)
+      setTimeout(() => sessionType('auto'), 1500)
     },
     get paused() {
       return S.paused
@@ -338,6 +351,7 @@ export function createDalgaEngine() {
       return events
     },
     close() {
+      sessionType('auto')
       clearInterval(S.timer)
       S.running = false
       try {
