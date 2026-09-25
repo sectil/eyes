@@ -106,3 +106,25 @@ iOS'ta kalır. Bu yorum yanlışsa ne kastettiğini yaz.
 7. 01 Hoş geldin (kendi gözün canlı), 10 Konfor molası (kameralı), 42 haftalık rapor, logo.
 
 Sıra değiştirilebilir; "1 ve 3 önce" gibi yaz.
+
+## 5. Ek istek (2026-09-25): E testinde gözlük — kaynak `ajan-raporlari/19_gozluk_ve_yakin_test.md`
+Mevcut durum (kod): E testi her ölçümde "Gözlüklü / Lensli / Gözlüksüz" soruyor ve kayda yazıyor (`AcuityTest.jsx` WEAR);
+trend (`lib/trend.js`) bu koşulu AYIRMIYOR; numara sorulmuyor; kameradan gözlük tespiti yok.
+Araştırma sonucu:
+- Numaradan yakın keskinlik hesaplanmaz: doğrulanmış model yok (yalnızca defokus eğimi ~0,2 logMAR/D ve yaşa göre
+  ortalama add tabloları; bireysel sapma ±0,5 D). Klinikte ilişki ters yönde: keskinlik ölçülür, add seçilir.
+  → Numara "hesaba katılmaz"; en fazla meta-veri.
+- Klinik/telefon testleri iki koşul kullanır: alışkanlık (presenting/habitual; DSÖ, Peek Acuity, V@home, HSVA) ya da
+  düzeltmesiz. Koşul değişince ölçümler karşılaştırılamaz (Brezilya: %96,5 → %81,1 → %20,5). Mevcut "uzak gözlük tak,
+  okuma gözlüğü takma" yönergesini hiçbir ev testi validasyonu kullanmamış → değiştirilecek.
+- iOS'ta yerleşik gözlük tespit API'si yok (ARKit blendShapes, Vision yüz noktaları, Core ML hazır modeller tek tek
+  doğrulandı). Yapılabilir: 1–3 MB Core ML ikili sınıflandırıcı (CelebA ticari kullanım dışı → kullanılmaz; MeGlass/MegaFace
+  lisansı hukukla doğrulanmalı). Apple 5.1.2(vi) engel değil (cihazda evet/hayır, kare saklanmaz).
+Seçenekler:
+- **A (önerilen, hemen):** Yönerge "yakını normalde nasıl görüyorsan öyle ölç (okuma/progresif gözlük varsa tak); her
+  seferinde aynı". Koşul alanı zorunlu ve ayrıntılı: yok / okuma gözlüğü / progresif-bifokal / yalnız uzak gözlüğü / lens.
+  Trend ve Gelişim yalnızca aynı koşuldaki ölçümleri birleştirir; koşul değişince yeni baz çizgisi. "Gözlüğün değişti mi?"
+  sorusu (yeni numara → yeni baz). Numara isteğe bağlı meta-veri (Profil'de), hesaba girmez.
+- **B (isteğe bağlı):** ayda bir ek gözlüksüz ölçüm ("düzeltme kazancı"); 60+ için taban etkisi riski.
+- **C (sonra):** kamera tutarlılık kontrolü — kullanıcı seçer, Core ML sınıflandırıcı yalnızca çelişkide "gözlük takılı
+  görünüyor" der; lisansı temiz eğitim verisi şart.
