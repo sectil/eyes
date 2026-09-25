@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Check, Copy, Crosshair, RotateCcw, ScanFace, Share2, X } from 'lucide-react'
 import SoundToggle from '../components/SoundToggle.jsx'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
-import { calibReport, fitModel, saveGazeModel, headRef, headTurned, TARGETS, DOWN_CLOSE_MAX, MIN_SCORE, HEAD_TURN_DEG } from '../lib/gazeCalib.js'
+import { calibReport, fitModel, fitAxis, summarize, windowStable, saveGazeModel, headRef, headTurned, TARGETS, AXIS_FEATURES, DOWN_CLOSE_MAX, MIN_SCORE, HEAD_TURN_DEG } from '../lib/gazeCalib.js'
 import { shareText } from '../lib/share.js'
 import { createGazeReader, eyeClosure, BLINK_CLOSE, GAZE_FULL_DEG } from '../lib/gaze.js'
 import { haptic } from '../lib/native.js'
@@ -10,21 +10,27 @@ import { cue, unlockAudio } from '../lib/cue.js'
 import '../styles/gazecal.css'
 
 // 5 noktalı kişisel göz kalibrasyonu (lib/gazeCalib.js, model sürüm 2).
-// Orta: ekrandaki noktaya bakılır. Sol/sağ/yukarı/aşağı: telefonun o yanından DIŞARI, bir karış
-// öteye bakılır (başı çevirmeden). Ekran kenarı yetmiyordu: ~30 cm'de ekranın yan kenarları yalnızca
-// ~±5° göz dönüşü veriyor, ARKit gürültüsüyle ayrılamadı (Build 7'de 3 denemede de "sağ–sol ayırt
-// edilemedi"). Dışarı bakış ~20°. Kullanıcı o sırada ekranı göremez: yön sesle söylenir, her hedef
-// bitince titreşim gelir.
-// Her hedefte: MOVE_MS geçiş + SETTLE_MS yerleşme (kayıt yok) + COLLECT_MS kayıt.
-// Yüz görünmez ya da gözler kapalıysa kayıt süresi durur (kareler atılır).
-// VARSAYIM: süreler ilk sürüm içindir (toplam ~20 sn); yerleşme sesli yönergenin söylenme süresine göre.
+// Kullanıcı ekrandaki noktayı gözüyle takip eder (orta, sol, sağ, üst, alt, tekrar orta).
+// Her hedefte: MOVE_MS geçiş + SETTLE_MS yerleşme (kayıt yok) + en az COLLECT_MS kayıt; kayıt
+// penceresi "sabit bakış" olunca (windowStable) nokta YEŞİLE döner, titreşim gelir, sıradakine geçilir.
+// Sabitlenmezse MAX_COLLECT_MS'e kadar beklenir, sonra eldeki kareler kabul edilir.
+// Yüz görünmez, gözler kapalı ya da baş dönükse kayıt durur (kareler atılır).
+// Sağ hedefi bitince sağ–sol ekseni hemen sınanır: zayıfsa yalnızca sol+sağ bir kez daha istenir
+// (en fazla MAX_RETRY). Alt hedefte üst–alt için aynı. Sonda tüm model zayıfsa yalnızca zayıf eksenin
+// noktaları + orta tekrar edilir; baştan alma yok (Build 15 geri bildirimi: "sonda tekrar dene saçma").
+// VARSAYIM: süreler ve MAX_RETRY ilk sürüm içindir; toplam ~20 sn (tekrarsız).
 const MOVE_MS = 450
 const SETTLE_MS = 1200
 const COLLECT_MS = 1300
+const MAX_COLLECT_MS = 5000
+const ACCEPT_HOLD_MS = 450 // yeşil nokta görünür kalır
+const MAX_RETRY = 2 // eksen başına ek tur
+const ROLL_FRAMES = 60 // kararlılık beklerken tutulan son kare sayısı (~2 sn)
 // Aşağı bakışta göz kapağı iner; o hedefte "kapalı" eşiği yüksek (gerçek kırpma yine elenir).
 const closeLimit = (t) => (t === 'down' ? DOWN_CLOSE_MAX : BLINK_CLOSE)
 // Baş dönüşü uyarısı (ses + titreşim) en az bu aralıkla tekrarlanır
 const HEAD_WARN_GAP_MS = 2500
+const AXIS_TARGETS = { x: ['left', 'right'], y: ['up', 'down'] }
 
 // Hedef konumları (ekran yüzdesi). Kullanıcı ekrandaki noktayı gözüyle takip eder; ekran dışına
 // bakması istenmez (Build 10 geri bildirimi: "kimse telefondan dışarı bakmaz, noktayı takip eder").
@@ -57,9 +63,9 @@ const SAY = {
 
 export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   const [phase, setPhase] = useState('intro') // intro | run | result
-  const [idx, setIdx] = useState(0)
+  const [view, setView] = useState({ queue: TARGETS, pos: 0, again: false }) // ekrandaki hedef sırası
   const [prog, setProg] = useState(0) // hedefteki kayıt ilerlemesi 0..1
-  const [status, setStatus] = useState('ok') // ok | noface | closed | head
+  const [status, setStatus] = useState('ok') // ok | noface | closed | head | hold | done
   // Orta hedefteki baş duruşu; sonraki hedeflerde baş bundan HEAD_TURN_DEG'den çok dönerse kare sayılmaz
   const head = useRef({ ref: null, rejected: {}, lastWarn: 0 })
   const [result, setResult] = useState(null)
@@ -67,9 +73,10 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   const [report, setReport] = useState(null)
   const [note, setNote] = useState('')
   const win = useRef({})
-  const step = useRef({ idx: 0, start: 0, collected: 0, lastTs: null })
+  const step = useRef({ queue: [...TARGETS], pos: 0, start: 0, collected: 0, lastTs: null, accepted: false, retry: { x: 0, y: 0 }, again: new Set() })
   const running = phase === 'run'
   const previewReader = useRef(null)
+  const holdTimer = useRef(null)
 
   const onFrame = (m) => {
     if (phase === 'result' && previewReader.current) {
@@ -79,15 +86,15 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     }
     if (!running) return
     const s = step.current
-    const t = TARGETS[s.idx]
+    if (s.accepted) return // yeşil nokta gösteriliyor; sıradaki hedef zamanlayıcıyla gelir
+    const t = s.queue[s.pos]
     if (!t) return
     const now = m.ts
     const since = now - s.start
     const face = m.face !== false && m.tracked !== false
     const closed = face && eyeClosure(m) >= closeLimit(t)
     const turned = face && !closed && t !== 'center' && headTurned(head.current.ref, m)
-    const nextStatus = !face ? 'noface' : closed ? 'closed' : turned ? 'head' : 'ok'
-    setStatus((p) => (p === nextStatus ? p : nextStatus))
+    let nextStatus = !face ? 'noface' : closed ? 'closed' : turned ? 'head' : 'ok'
     if (turned && since >= MOVE_MS + SETTLE_MS) {
       head.current.rejected[t] = (head.current.rejected[t] ?? 0) + 1
       if (now - head.current.lastWarn >= HEAD_WARN_GAP_MS) {
@@ -97,47 +104,100 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     }
     if (since < MOVE_MS + SETTLE_MS) {
       s.lastTs = now
+      setStatus((p) => (p === nextStatus ? p : nextStatus))
       return
     }
     if (nextStatus === 'ok') {
       const dt = s.lastTs == null ? 0 : Math.min(now - s.lastTs, 100)
       s.collected += dt
-      ;(win.current[t] ??= []).push(m)
+      const fr = (win.current[t] ??= [])
+      fr.push(m)
+      if (fr.length > ROLL_FRAMES) fr.shift()
     }
     s.lastTs = now
     setProg(Math.min(1, s.collected / COLLECT_MS))
     if (s.collected >= COLLECT_MS) {
-      haptic('tick')
-      if (t === 'center') head.current.ref = headRef(win.current.center)
-      const ni = s.idx + 1
-      if (ni >= TARGETS.length) {
-        step.current = { ...s, idx: TARGETS.length } // sonraki kareler yeniden bitirmesin
-        finish()
+      const stable = windowStable(win.current[t])
+      if (stable || s.collected >= MAX_COLLECT_MS) {
+        s.accepted = true
+        setStatus('done')
+        haptic('tick')
+        holdTimer.current = setTimeout(() => advance(t), ACCEPT_HOLD_MS)
+        return
       }
-      else {
-        step.current = { idx: ni, start: now, collected: 0, lastTs: null }
-        setIdx(ni)
-        setProg(0)
-        cue(SAY[TARGETS[ni]], false)
+      nextStatus = 'hold' // süre doldu ama bakış henüz sabit değil
+    }
+    setStatus((p) => (p === nextStatus ? p : nextStatus))
+  }
+
+  // Hedef kabul edildi: eksen kontrolü, gerekirse tekrar hedefi ekle, sıradakine geç ya da bitir
+  function advance(t) {
+    const s = step.current
+    const W = win.current
+    if (t === 'center') head.current.ref = headRef(W.center)
+    const insert = (axis, targets) => {
+      s.retry[axis] += 1
+      const at = s.pos + 1
+      s.queue.splice(at, 0, ...targets)
+      for (let i = 0; i < targets.length; i++) s.again.add(at + i)
+      cue('Bir kez daha. Başını sabit tut, yalnızca gözünü kaydır', true)
+    }
+    const axisWeak = (axis) => {
+      const [neg, pos] = axis === 'x' ? ['left', 'right'] : ['down', 'up']
+      const a = fitAxis(summarize(W.center ?? []), summarize(W[neg] ?? []), summarize(W[pos] ?? []), AXIS_FEATURES[axis], W.center2?.length ? summarize(W.center2) : null)
+      return !a || a.weak
+    }
+    if (t === 'right' && s.retry.x < MAX_RETRY && axisWeak('x')) insert('x', AXIS_TARGETS.x)
+    else if (t === 'down' && s.retry.y < MAX_RETRY && axisWeak('y')) insert('y', AXIS_TARGETS.y)
+    else if (t === 'center2') {
+      const extra = []
+      for (const axis of ['x', 'y']) {
+        if (s.retry[axis] < MAX_RETRY && axisWeak(axis)) {
+          s.retry[axis] += 1
+          extra.push(...AXIS_TARGETS[axis])
+        }
+      }
+      if (extra.length) {
+        extra.push('center2')
+        const at = s.pos + 1
+        s.queue.splice(at, 0, ...extra)
+        for (let i = 0; i < extra.length; i++) s.again.add(at + i)
+        cue('Bir kez daha. Başını sabit tut, yalnızca gözünü kaydır', true)
       }
     }
+    const np = s.pos + 1
+    if (np >= s.queue.length) {
+      s.pos = np
+      finish()
+      return
+    }
+    const nt = s.queue[np]
+    W[nt] = [] // tekrar hedefinde eski kareler atılır
+    step.current = { ...s, pos: np, start: performance.now(), collected: 0, lastTs: null, accepted: false }
+    setView({ queue: [...s.queue], pos: np, again: s.again.has(np) })
+    setProg(0)
+    setStatus('ok')
+    cue(SAY[nt], false)
   }
 
   const cam = useFaceTracking({ enabled: phase !== 'intro', trueDepth: true, onFrame })
 
   function start() {
     unlockAudio()
+    clearTimeout(holdTimer.current)
     win.current = {}
     head.current = { ref: null, rejected: {}, lastWarn: 0 }
-    step.current = { idx: 0, start: performance.now(), collected: 0, lastTs: null }
-    setIdx(0)
+    step.current = { queue: [...TARGETS], pos: 0, start: performance.now(), collected: 0, lastTs: null, accepted: false, retry: { x: 0, y: 0 }, again: new Set() }
+    setView({ queue: [...TARGETS], pos: 0, again: false })
     setProg(0)
+    setStatus('ok')
     setResult(null)
     setReport(null)
     setNote('')
     setPhase('run')
     cue(SAY.center, false)
   }
+  useEffect(() => () => clearTimeout(holdTimer.current), [])
 
   async function share() {
     const payload = JSON.stringify({ app: 'EyeTrail', kind: 'gaze-calib', build: import.meta.env.VITE_APP_BUILD ?? 'web', ...report })
@@ -148,7 +208,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   function finish() {
     const model = fitModel(win.current)
     setResult(model)
-    setReport({ ...calibReport(win.current, model), headRejected: head.current.rejected })
+    setReport({ ...calibReport(win.current, model), headRejected: head.current.rejected, retry: { ...step.current.retry } })
     setPhase('result')
     if (model.ok) {
       saveGazeModel(model)
@@ -211,18 +271,18 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
         ) : (
           <>
             <div className="gazecal-badge warn"><RotateCcw size={28} /></div>
-            <h1>Bir kez daha deneyelim</h1>
+            <h1>Ayırt edemedim</h1>
             <p className="muted">
-              {!result?.x || result.x.weak ? 'Sağa ve sola bakışı ayırt edemedim. ' : ''}
-              {!result?.y || result.y.weak ? 'Yukarı ve aşağı bakışı ayırt edemedim. ' : ''}
-              Başını sabit tut; noktayı yalnızca gözünle takip et ve titreşime kadar noktada kal.
+              {!result?.x || result.x.weak ? 'Sağa ve sola bakış, tekrarlara rağmen birbirinden ayrılmadı. ' : ''}
+              {!result?.y || result.y.weak ? 'Yukarı ve aşağı bakış, tekrarlara rağmen birbirinden ayrılmadı. ' : ''}
+              Işık yüzüne düşsün, telefon göz hizasında sabit dursun; nokta yeşile dönene kadar noktada kal.
             </p>
             {headTurnNote(report)}
             <div className="gazetest-grid gazecal-scores">
               <span>Sağ–sol ayrışma</span><span className={result?.x && !result.x.weak ? 'hl' : ''}>{scoreText(result?.x)}</span>
               <span>Yukarı–aşağı ayrışma</span><span className={result?.y && !result.y.weak ? 'hl' : ''}>{scoreText(result?.y)}</span>
             </div>
-            <button className="btn" onClick={start}><RotateCcw size={18} aria-hidden="true" /> Tekrar dene</button>
+            <button className="btn" onClick={start}><RotateCcw size={18} aria-hidden="true" /> Yeniden ayarla</button>
             {report && (
               <button className="btn btn-ghost" onClick={share}>
                 {navigator.share ? <Share2 size={18} aria-hidden="true" /> : <Copy size={18} aria-hidden="true" />} Verileri paylaş
@@ -236,24 +296,25 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     )
   }
 
-  const t = TARGETS[idx]
+  const t = view.queue[view.pos] ?? 'center'
   const p = POS[t]
+  const done = status === 'done'
   return (
     <div className="gazecal-stage" role="application" aria-label="Göz kalibrasyonu">
       <button className="btn-icon gazecal-close" onClick={onCancel} aria-label="Kapat"><X size={20} /></button>
       <SoundToggle className="gazecal-sound" />
       <div className="gazecal-steps" aria-hidden="true">
-        {TARGETS.map((x, i) => <i key={x} className={i < idx ? 'done' : i === idx ? 'now' : ''} />)}
+        {view.queue.map((x, i) => <i key={`${x}-${i}`} className={i < view.pos ? 'done' : i === view.pos ? 'now' : ''} />)}
       </div>
-      <div className="gazecal-target" style={{ left: `${p.x}%`, top: `${p.y}%` }}>
+      <div className={`gazecal-target${done ? ' ok' : ''}`} style={{ left: `${p.x}%`, top: `${p.y}%` }}>
         <svg viewBox="0 0 64 64" className="gazecal-ring">
           <circle cx="32" cy="32" r="28" className="bg" />
           <circle cx="32" cy="32" r="28" className="fg" style={{ strokeDasharray: `${prog * 176} 176` }} />
         </svg>
-        <span className="gazecal-dot" />
+        <span className="gazecal-dot">{done && <Check size={12} strokeWidth={3} aria-hidden="true" />}</span>
       </div>
       <p className="gazecal-msg" role="status" aria-live="polite">
-        {!cam.ready ? 'Kamera açılıyor…' : cam.error ? 'Kamera açılamadı' : status === 'noface' ? 'Yüzünü kameraya göster' : status === 'closed' ? 'Gözlerini aç' : status === 'head' ? 'Başını çevirme, yalnızca gözünü kaydır' : LABEL[t] ?? 'Noktaya bak'}
+        {!cam.ready ? 'Kamera açılıyor…' : cam.error ? 'Kamera açılamadı' : done ? 'Tamam' : status === 'noface' ? 'Yüzünü kameraya göster' : status === 'closed' ? 'Gözlerini aç' : status === 'head' ? 'Başını çevirme, yalnızca gözünü kaydır' : status === 'hold' ? 'Noktada kal…' : `${view.again ? 'Bir kez daha: ' : ''}${LABEL[t] ?? 'Noktaya bak'}`}
       </p>
     </div>
   )

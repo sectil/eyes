@@ -15,8 +15,8 @@
   position: fixed; inset: 0; background: var(--surface); overflow: hidden; touch-action: none;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
-.gazecal-close { position: absolute; top: calc(env(safe-area-inset-top) + 12px); left: 16px; z-index: 2; }
-.gazecal-sound { position: absolute; top: calc(env(safe-area-inset-top) + 12px); right: 16px; z-index: 2; }
+.gazecal-stage .gazecal-close { position: absolute; top: calc(env(safe-area-inset-top) + 12px); left: 16px; z-index: 2; }
+.gazecal-stage .gazecal-sound { position: absolute; top: calc(env(safe-area-inset-top) + 12px); right: 16px; z-index: 2; }
 .gazecal-steps { position: absolute; top: calc(env(safe-area-inset-top) + 28px); left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
 .gazecal-steps i { width: 22px; height: 5px; border-radius: 3px; background: var(--surface-3); }
 .gazecal-steps i.done { background: var(--ink-3); }
@@ -61,3 +61,10 @@
 @keyframes gazecal-nudge-x { 50% { transform: translateX(var(--d)); } }
 @keyframes gazecal-nudge-y { 50% { transform: translateY(var(--d)); } }
 .gazecal-scores { align-self: center; }
+
+/* Hedef kabul edildi: nokta yeşil, halka yeşil, nabız durur */
+.gazecal-target.ok .gazecal-dot {
+  background: var(--ok); box-shadow: 0 0 0 8px var(--ok-bg); animation: none; transform: scale(1.2);
+  display: inline-flex; align-items: center; justify-content: center; color: #fff; transition: background 0.15s, transform 0.2s;
+}
+.gazecal-target.ok .gazecal-ring .fg { stroke: var(--ok); }

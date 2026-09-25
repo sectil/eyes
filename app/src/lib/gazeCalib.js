@@ -34,14 +34,15 @@ export const FEATURES = {
   lookY: (f) => num(f.lookAtY),
   blendX: (f) => (hasBlend(f) ? blendVector(f).x : null),
   blendY: (f) => (hasBlend(f) ? blendVector(f).y : null),
-  // Kameraya göre bakış (baş + göz) ve baş duruşu; derece. Yön modeline girmez (egzersizde
-  // "sağa bak" yüze göre ölçülür), raporda ve telefona-bakış tespitinde kullanılır.
+  // Kameraya göre bakış (baş + göz; derece). Ekrandaki noktaya bakış küçük baş kaymalarından
+  // etkilenmez (göz başı telafi eder): Build 15 verisinde orta→orta2 kayması angX'te 0,94°,
+  // camX'te 0,26° — bu yüzden eksen adaylarında İLK sırada. headX/Y yalnızca rapor ve baş dönüşü uyarısı.
   camX: (f) => pick(f.camLeftX, f.camRightX),
   camY: (f) => pick(f.camLeftY, f.camRightY),
   headX: (f) => num(f.headX),
   headY: (f) => num(f.headY),
 }
-export const AXIS_FEATURES = { x: ['angX', 'lookX', 'blendX'], y: ['angY', 'lookY', 'blendY'] }
+export const AXIS_FEATURES = { x: ['camX', 'angX', 'lookX', 'blendX'], y: ['camY', 'angY', 'lookY', 'blendY'] }
 
 // Kalibrasyonda baş dönüşü: hedef penceresindeki baş açısı, orta hedefteki ortancadan bu kadar
 // saparsa kare sayılmaz ve "başını değil gözünü oynat" uyarısı verilir.
@@ -66,7 +67,8 @@ export function headTurned(ref, f, deg = HEAD_TURN_DEG) {
   return Math.abs(h.x - ref.x) > deg || Math.abs(h.y - ref.y) > deg
 }
 // Sayısal taban gürültü (birim başına) — sıfıra bölmeyi ve aşırı iyimser skoru önler
-const NOISE_FLOOR = { angX: 0.4, angY: 0.4, lookX: 0.002, lookY: 0.002, blendX: 0.02, blendY: 0.02 }
+// VARSAYIM: cam 0,25° (Build 15: hedef-içi MAD 0,03–0,26°).
+export const NOISE_FLOOR = { camX: 0.25, camY: 0.25, angX: 0.4, angY: 0.4, lookX: 0.002, lookY: 0.002, blendX: 0.02, blendY: 0.02 }
 
 // Blendshape bakış vektörü (gaze.js gazeVector ile aynı formül; döngüsel içe aktarımı önlemek için burada)
 const avg2 = (a, b) => ((a ?? 0) + (b ?? 0)) / 2
@@ -105,23 +107,42 @@ export function summarize(frames) {
 }
 
 // Bir eksen için en iyi sinyal. neg: sol/aşağı, pos: sağ/yukarı hedefinin özeti.
-export function fitAxis(center, neg, pos, features) {
+// center2: sondaki ikinci orta hedef (varsa). Merkez iki ortancanın ortalaması; iki orta arasındaki
+// fark "drift" (oturum içi kayma). Gürültü = hedef-İÇİ yayılımların en büyüğü, taban ve drift/2.
+// (Önceden orta+orta2 kareleri birleştirilip MAD alınıyordu: 0,9°'lik kayma MAD'ı 0,47'ye şişirip
+// 1°'lik net ayrımı 2,0 puana düşürüyordu — Build 15 raporu.)
+export function fitAxis(center, neg, pos, features, center2 = null) {
   let best = null
   for (const k of features) {
-    const c = center[k]
-    const a = neg[k]
-    const b = pos[k]
-    if (!c || !a || !b) continue
-    const dNeg = a.med - c.med
-    const dPos = b.med - c.med
+    const c1 = center?.[k]
+    const c2 = center2?.[k]
+    const a = neg?.[k]
+    const b = pos?.[k]
+    if (!c1 || !a || !b) continue
+    const cMed = c2 ? (c1.med + c2.med) / 2 : c1.med
+    const drift = c2 ? Math.abs(c1.med - c2.med) : 0
+    const dNeg = a.med - cMed
+    const dPos = b.med - cMed
     // İki yan merkezin zıt taraflarında olmalı (işaret ne olursa olsun)
     if (!(dNeg * dPos < 0)) continue
     const sep = Math.min(Math.abs(dNeg), Math.abs(dPos))
-    const noise = Math.max(c.mad, a.mad, b.mad, NOISE_FLOOR[k] ?? 1e-6)
+    const noise = Math.max(c1.mad, c2?.mad ?? 0, a.mad, b.mad, drift / 2, NOISE_FLOOR[k] ?? 1e-6)
     const score = sep / noise
-    if (!best || score > best.score) best = { feature: k, c: c.med, neg: a.med, pos: b.med, score }
+    if (!best || score > best.score) best = { feature: k, c: cMed, neg: a.med, pos: b.med, score, drift }
   }
   return best && best.score >= MIN_SCORE ? best : best ? { ...best, weak: true } : null
+}
+
+// Kalibrasyon ekranı: bir hedefteki kareler "sabit bakış" mı? Mevcut eksen sinyallerinin her birinde
+// yayılım (MAD) taban gürültüyü aşmıyorsa evet. Nokta bu anda yeşile döner.
+// VARSAYIM: ölçüt taban gürültü (cam 0,25°, açı 0,4°); kırpma/baş dönüşü kareleri zaten elenmiş gelir.
+export const STABLE_FEATURES = ['camX', 'camY', 'angX', 'angY']
+export function windowStable(frames, minFrames = 5) {
+  if (!frames || frames.length < minFrames) return false
+  const sum = summarize(frames)
+  const present = STABLE_FEATURES.filter((k) => sum[k])
+  if (!present.length) return false
+  return present.every((k) => sum[k].mad <= NOISE_FLOOR[k])
 }
 
 const closureOf = (f) => ((f.blinkLeft ?? 0) + (f.blinkRight ?? 0)) / 2
@@ -140,13 +161,12 @@ export function closeThreshold(downFrames) {
 export function fitModel(windows) {
   const S = {}
   for (const t of TARGETS) if (windows[t]?.length) S[t] = summarize(windows[t])
-  const centerFrames = [...(windows.center ?? []), ...(windows.center2 ?? [])]
-  const C = summarize(centerFrames)
-  const x = S.left && S.right ? fitAxis(C, S.left, S.right, AXIS_FEATURES.x) : null
-  const y = S.down && S.up ? fitAxis(C, S.down, S.up, AXIS_FEATURES.y) : null
+  const x = S.center && S.left && S.right ? fitAxis(S.center, S.left, S.right, AXIS_FEATURES.x, S.center2) : null
+  const y = S.center && S.down && S.up ? fitAxis(S.center, S.down, S.up, AXIS_FEATURES.y, S.center2) : null
   const ok = Boolean(x && !x.weak && y && !y.weak)
   // Telefona bakış referansı: ortaya bakarken kameraya göre bakış açısı (ARKit'in sabit
   // sapmasını içerir). gaze.js lookingAtPhone bunun çevresindeki pencereyi "telefon" sayar.
+  const C = summarize([...(windows.center ?? []), ...(windows.center2 ?? [])])
   const phone = C.camX && C.camY ? { x: C.camX.med, y: C.camY.med } : null
   return { version: GAZE_MODEL_VERSION, ok, x, y, closeAt: closeThreshold(windows.down), phone }
 }
@@ -165,11 +185,12 @@ export function calibReport(windows, model) {
       ...Object.fromEntries(Object.entries(sum).map(([k, v]) => [k, { med: r3(v.med), mad: r3(v.mad) }])),
     }
   }
-  const C = summarize([...(windows.center ?? []), ...(windows.center2 ?? [])])
+  const C = summarize(windows.center ?? [])
+  const C2 = windows.center2?.length ? summarize(windows.center2) : null
   const axisScores = (neg, pos, feats) =>
     Object.fromEntries(
       feats.map((k) => {
-        const a = fitAxis(C, summarize(windows[neg] ?? []), summarize(windows[pos] ?? []), [k])
+        const a = fitAxis(C, summarize(windows[neg] ?? []), summarize(windows[pos] ?? []), [k], C2)
         return [k, a ? r3(a.score) : null]
       }),
     )

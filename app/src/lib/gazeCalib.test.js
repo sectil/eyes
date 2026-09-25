@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from 'vitest'
-import { fitModel, fitAxis, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE, calibReport, closeThreshold, loadGazeModel, saveGazeModel, clearGazeModel, GAZE_MODEL_KEY, GAZE_MODEL_VERSION, DOWN_CLOSE_MAX, headRef, headTurned, HEAD_TURN_DEG } from './gazeCalib.js'
+import { windowStable, fitModel, fitAxis, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE, calibReport, closeThreshold, loadGazeModel, saveGazeModel, clearGazeModel, GAZE_MODEL_KEY, GAZE_MODEL_VERSION, DOWN_CLOSE_MAX, headRef, headTurned, HEAD_TURN_DEG } from './gazeCalib.js'
 import { createGazeReader, lookingAtPhone, GAZE_FULL_DEG } from './gaze.js'
 
 // Deterministik gürültü
@@ -206,7 +206,7 @@ describe('kalibrasyon v2: aşağı bakışta göz kapağı, rapor, sürüm', () 
     const rep = calibReport(w, m)
     expect(rep.targets.left.n).toBe(30)
     expect(rep.targets.left.angX.med).toBeTypeOf('number')
-    expect(Object.keys(rep.scores.x)).toEqual(['angX', 'lookX', 'blendX'])
+    expect(Object.keys(rep.scores.x)).toEqual(['camX', 'angX', 'lookX', 'blendX'])
     expect(rep.scores.x.angX).toBeGreaterThan(MIN_SCORE)
     expect(rep.model).toBe(m)
     expect(JSON.stringify(rep)).not.toMatch(/image|jpeg|png/i)
@@ -272,13 +272,18 @@ describe('kameraya göre bakış (cam*) ve baş duruşu (head*)', () => {
     expect(lookingAtPhone(feed(reader, 14, 0, {}, 20, 5000))).toBe(false)
   })
   it('cam alanı yoksa (eski eklenti) yön modeline düşer', () => {
-    const reader = createGazeReader({ model: m })
+    const reader = createGazeReader({ model: fitModel(windows({ cam: false })) }) // eski eklentiyle kalibre edilmiş
+    expect(fitModel(windows({ cam: false })).x.feature).not.toMatch(/^cam/)
     expect(lookingAtPhone(feed(reader, 0, 0, { cam: false }))).toBe(true)
     expect(lookingAtPhone(feed(reader, 0, 12, { cam: false }, 20, 1000))).toBe(false)
   })
   it('modelde phone yoksa (eski model) yön modeline düşer', () => {
-    const reader = createGazeReader({ model: { ...m, phone: null } })
+    const reader = createGazeReader({ model: { ...fitModel(windows({ cam: false })), phone: null } })
     expect(lookingAtPhone(feed(reader, 0, 0, { head: { x: 25, y: 0 } }))).toBe(true) // yüze göre ortada → eski davranış
+  })
+  it('cam varsa eksen adayı camX/camY seçilir; baş dönüşü bakışı kameraya göre okur', () => {
+    expect(m.x.feature).toBe('camX')
+    expect(m.y.feature).toBe('camY')
   })
   it('headRef / headTurned: orta hedef referansından HEAD_TURN_DEG üstü sapma', () => {
     const ref = headRef(Array.from({ length: 10 }, (_, i) => makeFrame(0, 0, { r: rng(i), head: { x: 3, y: -2 } })))
@@ -299,5 +304,36 @@ describe('kameraya göre bakış (cam*) ve baş duruşu (head*)', () => {
     expect(rep.head.right.dx).toBeCloseTo(0, 0)
     expect(rep.headTurnDeg).toBe(HEAD_TURN_DEG)
     expect(rep.targets.left.camX).toBeTruthy()
+  })
+})
+
+describe('kalibrasyon v2.1: drift, hedef-içi gürültü, kararlı pencere (Build 15 raporu)', () => {
+  // Build 15: angX orta 1,13 → orta2 0,19 (kayma 0,94°), sol 1,75, sağ −0,30; camX orta −1,04, orta2 −0,78, sol 0,34, sağ −2,08
+  const S = (med, mad = 0.05) => ({ med, mad, n: 39 })
+  it('orta→orta2 kayması birleşik MAD gibi sayılmaz; drift raporlanır', () => {
+    const a = fitAxis({ angX: S(1.1348, 0.0386) }, { angX: S(1.7545, 0.0395) }, { angX: S(-0.2987, 0.0597) }, ['angX'], { angX: S(0.1917, 0.0198) })
+    expect(a.drift).toBeCloseTo(0.943, 2)
+    expect(a.c).toBeCloseTo(0.663, 2)
+    expect(a.score).toBeCloseTo(0.962 / 0.4715, 1) // sep / (drift/2)
+    const cam = fitAxis({ camX: S(-1.0427, 0.0892) }, { camX: S(0.3431, 0.0623) }, { camX: S(-2.0846, 0.1217) }, ['camX'], { camX: S(-0.7824, 0.0321) })
+    expect(cam.weak).toBeUndefined()
+    expect(cam.score).toBeGreaterThan(MIN_SCORE)
+    expect(cam.score).toBeCloseTo(1.17 / 0.25, 0)
+  })
+  it('gerçek pencerelerde model camX/camY ile ok; baş 1° kayınca da', () => {
+    const w = windows()
+    w.center2 = Array.from({ length: 30 }, (_, i) => makeFrame(0, 0, { r: rng(90 + i), head: { x: 1.1, y: 2.3 } }))
+    const m = fitModel(w)
+    expect(m.ok).toBe(true)
+    expect(m.x.drift).toBeLessThan(0.5)
+  })
+  it('windowStable: sabit bakış kararlı, gezinen bakış değil, az kare değil', () => {
+    const r = rng(3)
+    const still = Array.from({ length: 20 }, () => makeFrame(0, 0, { noise: 0.2, r }))
+    expect(windowStable(still)).toBe(true)
+    const roam = Array.from({ length: 20 }, (_, i) => makeFrame(i % 2 ? -3 : 3, 0, { noise: 0.2, r }))
+    expect(windowStable(roam)).toBe(false)
+    expect(windowStable(still.slice(0, 3))).toBe(false)
+    expect(windowStable([])).toBe(false)
   })
 })
