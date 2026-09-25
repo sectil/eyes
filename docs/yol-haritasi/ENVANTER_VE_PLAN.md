@@ -257,3 +257,14 @@ konuşma eşleşmesi ≥ 0,7 olunca cümle biter (`MATCH_THRESHOLD`) → kişi b
   uyku/ekran/gece/stres → Jev (yalnız yeni `coachLife` onayıyla; eski onaylılar kartta tek dokunuşla ekler).
 - Veri: PROFILE_VERSION 2 (flagsChecked, prompts, firstLook); v1 cevapları aynen taşınır, tarihi olan v1'de flagsChecked doğru.
 - Cihazda doğrulanacak: TrueDepth ve web kamerasıyla 20 sn kırpma sayımı; koç sunucusu yeni alanlar için yeniden yayınlanmalı.
+
+## 15. Tek Bakışta (görsel menzil) (2026-09-25, Build 28 — YAPILDI)
+- Taslak (onaylı): https://claude.ai/artifact/7iPZhoEQzDkAUctZ7MzPT2. Rakip "Dinamik/Dikey Okuma" yalnızca niyet için okundu.
+- Modül: src/modules/tek-bakis (Göz halkası, pratik, göz bütçesi 'eye', ilk turdan önce epilepsi sorusu).
+- Yöntem: harf üçlüleri sabitlemenin ±1..6. yuvasında 100 ms (Kwon 2007); 4 seçenek + "Göremedim" (telefon uyarlaması,
+  sonuç "yaklaşık"); yuva başına 4 deneme (48 deneme ≈ 2 dk); yuva ≥ %75 doğruysa tanındı (taslaktaki %80 çizgisi 4
+  denemeyle ölçülemediği için); süre turdan tura ~%80 doğrulukta tutulur (Yu 2017). lib/span.js.
+- Bilim kartları: 8 kart, hepsi PubMed özetinden (Rayner 2016, Legge 2001/2007, Chung 2004, Yu 2010/2017, Lee 2010, Kwon 2007).
+- İddia sınırı ekranda: kazanım çevresel görüşte gösterildi; normal okumaya aktarımı ve görmeyi iyileştirdiği gösterilmedi.
+- Yol: son 7 günde 3 günden az yapıldıysa 2. bölümde 2 dk; o gün 2. bölüm payı (4 dk) için Yılan düşer.
+- Yapılmadı: TrueDepth ile harf anında göz kaydıysa denemeyi saymama; çevresel mod (sonraki sürüm).

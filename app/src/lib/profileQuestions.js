@@ -27,7 +27,7 @@ export const QUESTIONS = {
     source: 'BCLA CLEAR 2024: yakın görme kaybı yaşa bağlı ve çok yaygın.',
   },
   seizure: {
-    eyebrow: "Hızlı Bakış'tan önce",
+    eyebrow: 'Başlamadan önce', // flaşlı ilk görevden önce (Hızlı Bakış, Tek Bakışta)
     text: 'Epilepsi tanın var mı, ya da yanıp sönen ışıkla bayılma, kasılma yaşadın mı?',
     options: SEIZURE,
     row: true,
@@ -35,8 +35,8 @@ export const QUESTIONS = {
     set: (p, v) => ({ ...p, seizure: v }),
     why: (v) =>
       v === 'no'
-        ? 'Hızlı Bakış kısa yanıp sönen görüntüler kullanıyor; senin için açık.'
-        : "Hızlı Bakış senin için kapalı; diğer her şey açık. Cevabını Profilim'den değiştirebilirsin.",
+        ? 'Hızlı Bakış ve Tek Bakışta kısa süre görünen görüntüler kullanıyor; senin için açık.'
+        : "Hızlı Bakış ve Tek Bakışta senin için kapalı; diğer her şey açık. Cevabını Profilim'den değiştirebilirsin.",
     source: 'Epilepsy Foundation uzlaşısından tek madde (Fisher 2005/2022/2025).',
   },
   correction: {
@@ -172,7 +172,7 @@ export function questionRows(profile) {
     row('age', 'Yaş aralığı'),
     { id: 'flags', label: 'Uyarı işaretleri', value: p.flagsChecked ? (p.flags.length ? `${p.flags.length} işaret` : 'Hiçbiri yok') : null },
     { id: 'firstLook', label: 'İlk 20 sn', value: p.firstLook ? `${p.firstLook.blinks} kırpma${p.firstLook.method === 'self' ? ' · kendi sayım' : ''}` : null, later: 'dokun, dene' },
-    { ...row('seizure', 'Flaşlı görevler', "Hızlı Bakış'tan önce"), value: p.seizure == null ? null : p.seizure === 'no' ? 'Açık' : 'Kapalı' },
+    { ...row('seizure', 'Flaşlı görevler', 'ilk flaşlı görevden önce'), value: p.seizure == null ? null : p.seizure === 'no' ? 'Açık' : 'Kapalı' },
     row('correction', 'Gözlük / lens', 'ilk okuma testinde'),
     row('nearDifficulty', 'Küçük yazıda zorluk', 'okuma testinden sonra'),
     row('lastExam', 'Son muayene', 'ilk E testinden sonra'),

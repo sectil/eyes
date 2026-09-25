@@ -43,7 +43,7 @@ export default {
   },
   // Bugünün yolu: her gün, 1. bölümde (kullanıcı isteği). VARSAYIM: bir tur ≈ 1 dk.
   today({ sessions, now }) {
-    return { title: 'Çemberler', minutes: 1, slot: 'practice', glyph: 'constel', done: sessions.some((s) => isTrack(s) && isSameDay(s, now)) }
+    return { title: 'Çemberler', minutes: 1, slot: 'practice', glyph: 'constel', game: true, done: sessions.some((s) => isTrack(s) && isSameDay(s, now)) }
   },
   coach(sessions, now) {
     const week = withinDays(sessions.filter(isTrack), now)

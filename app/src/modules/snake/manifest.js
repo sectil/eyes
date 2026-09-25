@@ -32,7 +32,7 @@ export default {
   // Bugünün yolu: 2. bölümün son göz durağı, bonus (yol uzarsa ilk düşen; Hızlı Bakış günü yok).
   // VARSAYIM: bir tur ≈ 2 dk; oyunda tur sınırı yok, "1 tur" yalnızca öneri.
   today({ sessions, now }) {
-    return { title: 'Yılan', sub: '1 tur', minutes: 2, slot: 'open', glyph: 'snake', openEnded: true, dropRank: 1, done: sessions.some((s) => isSnake(s) && isSameDay(s, now)) }
+    return { title: 'Yılan', sub: '1 tur', minutes: 2, slot: 'open', glyph: 'snake', openEnded: true, game: true, dropRank: 1, done: sessions.some((s) => isSnake(s) && isSameDay(s, now)) }
   },
   coach(sessions, now) {
     const week = withinDays(sessions.filter(isSnake), now)

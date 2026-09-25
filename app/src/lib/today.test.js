@@ -6,10 +6,12 @@ const MIN = 60000
 const NOW = new Date('2026-09-25T10:00:00')
 const TODAY = NOW.toISOString()
 const daysAgo = (n) => new Date(NOW.getTime() - n * 86400000).toISOString()
-const path = (tests = [], sessions = [], extra = {}) => buildPath(registry.live, { tests, sessions, now: NOW, ...extra })
+const path = (tests = [], sessions = [], extra = {}) => buildPath(registry.live, { tests, sessions: [...SPAN3, ...sessions], now: NOW, ...extra })
 const keys = (p) => p.stops.map((s) => s.key)
 // Normal gün: haftalık test 2 gün, okuma 3 gün önce (yol planı §4, "Ali" kurgusal)
 const NORMAL = [{ type: 'va-weekly', eye: 'OU', date: daysAgo(2) }, { type: 'reading', date: daysAgo(3) }]
+// Tek Bakışta son 7 günde 3 gün yapıldı → bugün yolda yok (eski senaryolar değişmesin)
+const SPAN3 = [2, 3, 4].map((d) => ({ type: 'span', span: 8, left: 4, right: 4, durationMs: 100, accuracy: 0.8, seconds: 120, date: daysAgo(d) }))
 const DAY = ['routine:isinma', 'daily', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'routine:kirpma', 'snake']
 
 describe('buildPath: şablon', () => {
@@ -51,6 +53,15 @@ describe('buildPath: şablon', () => {
     const ok = path(NORMAL, [{ type: 'breath', seconds: 300, date: TODAY }])
     expect(ok.stops.find((s) => s.key === 'breath').done).toBe(true)
     expect(ok.stops.find((s) => s.key === 'breath').route).toBe('breath-rest')
+  })
+
+  it('Tek Bakışta haftada 3 gün: 2. bölümde 2 dk; o gün 2. bölüm payı için Yılan düşer', () => {
+    const p = buildPath(registry.live, { tests: NORMAL, sessions: [], now: NOW })
+    expect(keys(p)).toEqual(['routine:isinma', 'daily', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'routine:kirpma', 'tek-bakis'])
+    expect(p.blocks[1].eyeMin).toBe(4)
+    expect(keys(path(NORMAL))).not.toContain('tek-bakis') // bu hafta 3 gün yapılmış
+    const flashOff = buildPath(registry.live, { tests: NORMAL, sessions: [], now: NOW, profile: { seizure: 'unsure' } })
+    expect(keys(flashOff)).not.toContain('tek-bakis')
   })
 
   it('Nefes sayma emekli: yolda yok', () => {

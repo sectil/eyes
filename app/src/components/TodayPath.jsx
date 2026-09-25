@@ -27,6 +27,7 @@ const GLYPH = {
   constel: <><circle cx="6" cy="16.5" r="2.3" /><circle cx="12" cy="6.5" r="2.3" /><circle cx="18.5" cy="14.5" r="2.3" /><path d="M7.3 14.4l3.4-5.8M13.5 8.3l3.6 4.4" /></>,
   snake: <><path d="M17 5.5L8 9l8 5-9 4.5" strokeWidth="1.4" opacity=".6" /><circle cx="17" cy="5.5" r="2.2" fill="currentColor" /><circle cx="8" cy="9" r="1.8" fill="currentColor" /><circle cx="16" cy="14" r="1.8" fill="currentColor" /><circle cx="7" cy="18.5" r="1.8" fill="currentColor" /></>,
   flash: <path d="M13.5 2.5L5 13.5h6.5l-1.5 8 8.5-11H12z" />,
+  span: <><rect x="2.5" y="9" width="4" height="6" rx="1" /><rect x="17.5" y="9" width="4" height="6" rx="1" /><circle cx="12" cy="12" r="2.2" fill="currentColor" /></>,
   spark: <path d="M12 3.5v4.5M12 16v4.5M3.5 12H8M16 12h4.5M6.3 6.3l2.4 2.4M15.3 15.3l2.4 2.4M17.7 6.3l-2.4 2.4M8.7 15.3l-2.4 2.4" />,
   moon: <path d="M15 4a8 8 0 1 0 5 13.6A6.4 6.4 0 0 1 15 4z" fill="currentColor" stroke="none" />,
 }
@@ -40,6 +41,7 @@ const SCENE = {
   constel: <><path className="sc-l" d="M34 60L50 38L67 57" /><circle className="sc-c" cx="34" cy="60" r="7" /><circle className="sc-c" cx="50" cy="38" r="7" /><circle className="sc-c" cx="67" cy="57" r="7" /><circle className="sc-d" cx="50" cy="38" r="3.3" /></>,
   snake: <><path className="sc-s" d="M64 34L40 43L60 58L37 68" /><circle className="sc-d" cx="64" cy="34" r="6.5" /><circle className="sc-e" cx="40" cy="43" r="5" /><circle className="sc-e" cx="60" cy="58" r="5" /><circle className="sc-e" cx="37" cy="68" r="5" /></>,
   flash: <path className="sc-f" d="M55 26L37 54H50L45 76L64 46H51Z" />,
+  span: <><rect className="sc-c" x="22" y="43" width="11" height="15" rx="2" /><rect className="sc-c" x="67" y="43" width="11" height="15" rx="2" /><circle className="sc-d" cx="50" cy="50" r="5" /></>,
 }
 
 // Diyafram: 6 kanat. a = altıgen açıklığın iç yarıçapı (0..46; 100 birimlik kutu)

@@ -9,7 +9,8 @@
 //             slot?:  'warmup' | 'test' | 'body' | 'practice' | 'rest' | 'measure' | 'open' | 'finale',
 //             order?: şablondaki yer (ORDER), eyeMin?: göz bütçesinden düşen dk (varsayılan: 'eye' kapısında minutes),
 //             openEnded?: süresi kullanıcıya bağlı oyun (bölümün son göz durağı olur),
-//             exclusive?: o gün 2. bölümün tek göz durağı (Hızlı Bakış), dropRank?: yol uzarsa düşme sırası (1 ilk) }
+//             exclusive?: o gün 2. bölümün tek göz durağı (Hızlı Bakış), dropRank?: yol uzarsa düşme sırası (1 ilk),
+//             game?: oyun (Jev "Ritmi yakala" der) }
 //   null: modül bugün yolda yok (ör. haftalık test zamanı gelmedi)
 export const WEEK_MS = 7 * 86400000
 
@@ -73,6 +74,7 @@ function collect(modules, c) {
         budget,
         eyeMin: Number.isFinite(it.eyeMin) ? it.eyeMin : budget === 'eye' ? minutes ?? 1 : 0,
         openEnded: Boolean(it.openEnded),
+        game: Boolean(it.game),
         exclusive: Boolean(it.exclusive),
         dropRank: Number.isFinite(it.dropRank) ? it.dropRank : null,
         homeOrder: m.home?.order ?? 999,
@@ -275,7 +277,7 @@ export function jevLine(plan, { day = 0, fmt = (ms) => `${Math.ceil(ms / 60000)}
   } else if (nx.kind === 'measure') {
     word = pick('measure', day, n)
     line = `Sırada ${nx.title}${unitOf(nx) ? dot + unitOf(nx) : ''}`
-  } else if (nx.kind === 'practice' && nx.budget === 'eye' && !nx.exclusive) {
+  } else if (nx.game) {
     word = JEV_WORDS.game[0]
     line = `Sırada ${nx.title}${unitOf(nx) ? dot + unitOf(nx) : ''}`
   } else if (plan.stops.filter((s) => !s.done).length === 1) {
