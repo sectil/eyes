@@ -123,8 +123,44 @@ Gao 2021; 5 dk mola etkili, Galinsky 2000) ama zorunlu kilidin gönüllüden üs
   eşikler). Google Look to Speak aynı "ekranın dışına bak" metaforunu böyle öğretiyor (17b, arama özeti).
 - Modül sözleşmesine `tutorial` alanı: aynı bileşen Çember takibine de takılır.
 
+## 6b. Nefes pratiği ekranı: yeniden tasarım (öncelik 0)
+
+Mevcut ekran (5fbfaf9) kullanıcı tarafından "takip edilemiyor, yakışmamış" diye reddedildi. Sebep: verilen
+üç referans ekranın düzeni alınmadı; kalıp kartları, kanıt metni, düzenleyici ve sakinlik sorusu tek sayfaya
+yığıldı; oynatma ekranı yalnızca küre + küçük etiket. Yeniden tasarım referanslara birebir uyar:
+
+**A. Ayar ekranı (referans 1)**
+- Üstte kalıp seçici tek satır çip: Sakin ritim · Uzun veriş · Kutu · Özel. Seçim aşağıdaki satırları doldurur.
+- Dört satır, her biri `− değer +`: **Nefes al / Nefes tut / Nefes ver / Bekle** (Uzun veriş için "İkinci alış"
+  satırı görünür). Sınırlar aynı (tutma ≤ 7 sn, 0 = yok). Süre yarım saniye adımlı.
+- Ayrı kart: **Süre** (1 / 3 / 5 dk) · **Görsel** (›: Küre / Halka / Manzara) · **Titreşim** (anahtar + ⚙) ·
+  **Ses** (anahtar + ⚙ → B) · **Sesli komut** (anahtar: "Nefes al… tut…" söylensin mi).
+- Altta büyük **Başla**. Kanıt metni ve program bilgisi sayfadan kalkar; sağ üstte ⓘ ile açılır.
+- Sakinlik sorusu ayar ekranında **sorulmaz**; "Hazırlan" öncesi tek dokunuşluk küçük satır olarak sorulur.
+
+**B. Ses ekranı (referans 2)**
+- Aşama başına ses seçimi: Nefes al · Nefes tut · Nefes ver · Bekle · Bitiş. Seçenekler: Zil, Tık, Tahta,
+  Çınlama, Bildiri, Sessiz. Sesler kısa sentetik tonlar (WebAudio, dosya yok); ses seviyesi `− 10 +`.
+- Sesli komut açıksa ton + kelime birlikte; kapalıysa yalnız ton. Ses düğmesi (SoundToggle) hepsini susturur.
+
+**C. Oynatma ekranı (referans 3)**
+- Başta **"Hazırlan · 3, 2, 1"** büyük geri sayım.
+- Aşama adı ekranın üstünde **büyük** ("Nefes al"), altında büyük saniye sayacı; **aşama ilerleme çubuğu**
+  (dolarak ilerler) ve en altta **toplam ilerleme çubuğu** + "3 / 18".
+- Ortada büyük görsel: seçime göre küre / halka / çerçeveli manzara fotoğrafı; görsel nefesle büyür-küçülür.
+- Alt kontroller: ◀ önceki aşama · ⏸ duraklat · ▶ sonraki aşama. Sağ üst ⓘ, sol üst ✕.
+- Aşama değişiminde: ton + (açıksa) kelime + aşamaya özgü titreşim. Tutma aşamalarında sayaç kırmızıya
+  dönmez; renk tokenları.
+- Derin setteki nefes adımları aynı oynatma bileşenini kullanır.
+
+**D. Sonuç ekranı**: "Şimdi ne kadar sakinsin?" + Zorlandım + Kaydet (mevcut).
+
+Doğrulama: sahte cihazda üç ekranın görüntüsü kullanıcıya gösterilir, **onay alınmadan** TestFlight'a çıkmaz.
+Manzara görselleri: telifsiz, cihaz içinde, küçük (≤150 KB) — kaynak plan onayından sonra seçilir (VARSAYIM).
+
 ## 7. Yapım sırası
 
+0. **Nefes pratiği ekranı yeniden tasarımı (§6b)** — ayar, ses, oynatma; sahte cihaz görüntüleriyle onay.
 1. `lib/eyeBudget.js` (saf): bütçe, saatlik, günlük, hareket tutması, kilit başlat/kalan, kayıtlar; testler.
 2. Kilit ekranı, Ana sayfa göstergesi, oyun/egzersiz üst çubuğunda bütçe halkası + 1 dk uyarısı;
    modül sözleşmesine `gates.eyeBudget` (sayılır mı / kilitlenir mi); RestBreak ile birleştirme.
@@ -141,4 +177,6 @@ Gao 2021; 5 dk mola etkili, Galinsky 2000) ama zorunlu kilidin gönüllüden üs
 3. **Atla yok.** Ürün kararı olarak kaydediliyor; kanıt zorunluluğu desteklemiyor ama çelişmiyor da.
 4. **Mesafe uyarısı** 30 cm / 10 sn / 3 uyarıda duraklat. Uygun mu?
 5. **Yüz:** atlastaki çizgi göz dili mi, basit emoji tarzı mı?
-6. **Sıra:** kilit (1–3) → koruma katmanları (4–6) → animasyon (7). Uygun mu?
+6. **Sıra:** nefes ekranı (0) → kilit (1–3) → koruma katmanları (4–6) → animasyon (7). Uygun mu?
+7. **Nefes görseli:** Küre / Halka / Manzara üçü de olsun mu, yoksa yalnız manzara mı? Manzara fotoğrafı
+   için kaynak tercihin var mı (kendi fotoğrafların / telifsiz arşiv)?
