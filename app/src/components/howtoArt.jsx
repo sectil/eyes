@@ -87,3 +87,90 @@ export function LostCountArt() {
     </svg>
   )
 }
+
+// Sesli oku: cümle ve ses dalgası
+export function ReadAloudArt() {
+  return (
+    <svg viewBox="0 0 170 170">
+      <rect x="22" y="40" width="126" height="64" rx="14" fill={panel} stroke="var(--border)" />
+      <text x="85" y="66" textAnchor="middle" fontFamily="var(--font-body)" fontWeight="600" fontSize="12" fill={ink}>Sabah güneşi vadiye</text>
+      <text x="85" y="86" textAnchor="middle" fontFamily="var(--font-body)" fontWeight="600" fontSize="12" fill={ink}>yavaşça süzülüyordu.</text>
+      <g stroke={acc} strokeWidth="4" strokeLinecap="round">
+        {[60, 72, 84, 96, 108].map((x, i) => (
+          <line key={x} x1={x} y1="138" x2={x} y2="138">
+            <animate attributeName="y1" values={`134;${118 + (i % 2) * 6};134`} dur="1.1s" begin={`${i * 0.12}s`} repeatCount="indefinite" />
+            <animate attributeName="y2" values={`142;${158 - (i % 2) * 6};142`} dur="1.1s" begin={`${i * 0.12}s`} repeatCount="indefinite" />
+          </line>
+        ))}
+      </g>
+    </svg>
+  )
+}
+
+// Yazı küçülür; "Okuyamıyorum"
+export function ShrinkTextArt() {
+  return (
+    <svg viewBox="0 0 170 170">
+      <rect x="22" y="30" width="126" height="84" rx="14" fill={panel} stroke="var(--border)" />
+      <text x="85" y="78" textAnchor="middle" fontFamily="var(--font-body)" fontWeight="600" fill={ink} fontSize="16">
+        Küçük bir tavşan<animate attributeName="font-size" values="16;11;7;16" dur="3s" repeatCount="indefinite" />
+      </text>
+      <rect x="40" y="130" width="90" height="22" rx="11" fill="var(--accent-soft)" stroke={acc} />
+      <text x="85" y="145" textAnchor="middle" fontFamily="var(--font-body)" fontSize="10.5" fontWeight="700" fill={acc}>Okuyamıyorum</text>
+    </svg>
+  )
+}
+
+// Noktayı izle: dört kenarda nokta, yeşile dönen halka
+export function DotFollowArt() {
+  return (
+    <svg viewBox="0 0 170 170">
+      <rect x="45" y="18" width="80" height="134" rx="14" fill={panel} stroke="var(--border)" />
+      <circle r="7" fill={acc}>
+        <animate attributeName="cx" values="85;60;85;110;85;85;85" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="85;85;85;85;85;40;130" dur="6s" repeatCount="indefinite" />
+      </circle>
+      <circle r="13" fill="none" stroke="var(--ok)" strokeWidth="3">
+        <animate attributeName="cx" values="85;60;85;110;85;85;85" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="cy" values="85;85;85;85;85;40;130" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0;1;0;1;0;1;0" dur="6s" repeatCount="indefinite" />
+      </circle>
+    </svg>
+  )
+}
+
+// Yüz kameraya dönük, iyi ışık
+export function FaceLightArt() {
+  return (
+    <svg viewBox="0 0 170 170">
+      <circle cx="40" cy="40" r="14" fill="var(--lens-soft, var(--accent-soft))" stroke="var(--lens, var(--accent-graphic))" strokeWidth="2.5" />
+      <g stroke="var(--lens, var(--accent-graphic))" strokeWidth="2.5" strokeLinecap="round"><line x1="40" y1="14" x2="40" y2="20" /><line x1="60" y1="40" x2="66" y2="40" /><line x1="55" y1="25" x2="59" y2="21" /></g>
+      <circle cx="85" cy="96" r="30" fill="none" stroke={ink} strokeWidth="3" />
+      <ellipse cx="74" cy="92" rx="5" ry="3" fill={ink} /><ellipse cx="96" cy="92" rx="5" ry="3" fill={ink} />
+      <path d="M76 108q9 6 18 0" fill="none" stroke={ink} strokeWidth="2.5" strokeLinecap="round" />
+      <rect x="128" y="62" width="22" height="46" rx="5" fill={panel} stroke={acc} strokeWidth="2.5" />
+      <circle cx="139" cy="68" r="2" fill={acc} />
+    </svg>
+  )
+}
+
+// Çembere atla: iki nokta arasında sıçrayan halka
+export function JumpRingArt() {
+  return (
+    <svg viewBox="0 0 170 170">
+      <rect x="22" y="30" width="126" height="110" rx="16" fill={panel} stroke="var(--border)" />
+      {[[50, 60], [120, 60], [50, 112], [120, 112]].map(([x, y]) => <circle key={`${x}${y}`} cx={x} cy={y} r="4" fill="var(--surface-3)" />)}
+      <g>
+        <circle r="15" fill="var(--accent-soft)" stroke={acc} strokeWidth="3">
+          <animate attributeName="cx" values="50;50;120;120;50;50" dur="4s" calcMode="discrete" repeatCount="indefinite" />
+          <animate attributeName="cy" values="60;60;112;112;60;60" dur="4s" calcMode="discrete" repeatCount="indefinite" />
+        </circle>
+        <text textAnchor="middle" fontFamily="var(--font-body)" fontSize="7" fontWeight="700" fill={acc}>
+          Devam
+          <animate attributeName="x" values="50;50;120;120;50;50" dur="4s" calcMode="discrete" repeatCount="indefinite" />
+          <animate attributeName="y" values="63;63;115;115;63;63" dur="4s" calcMode="discrete" repeatCount="indefinite" />
+        </text>
+      </g>
+    </svg>
+  )
+}

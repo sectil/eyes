@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { Check, Copy, Crosshair, RotateCcw, ScanFace, Share2, X } from 'lucide-react'
 import SoundToggle from '../components/SoundToggle.jsx'
+import StepCards from '../components/StepCards.jsx'
+import { DotFollowArt, FaceLightArt } from '../components/howtoArt.jsx'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { calibReport, fitModel, fitAxis, summarize, windowStable, saveGazeModel, headRef, headTurned, TARGETS, AXIS_FEATURES, DOWN_CLOSE_MAX, MIN_SCORE, HEAD_TURN_DEG } from '../lib/gazeCalib.js'
 import { shareText } from '../lib/share.js'
@@ -231,19 +233,15 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
         <div className="row between">
           <button className="btn-icon" onClick={onCancel} aria-label="Kapat"><X size={20} /></button>
         </div>
-        <div className="gazecal-hero"><Crosshair size={44} strokeWidth={1.6} /></div>
-        <h1>Göz takibini sana göre ayarlayalım</h1>
-        <p className="muted">
-          Herkesin gözü farklı hareket eder. Ekranda bir nokta gezinecek: orta, sol, sağ, üst, alt.
-          <strong> Noktaya bak ve yeşile dönene kadar orada kal.</strong> Başın hafifçe dönerse sorun değil. Yaklaşık 20 saniye sürer, bir kez yapılır.
-        </p>
-        <ul className="gazecal-tips">
-          <li>Telefonu yüzünün karşısında, göz hizasında sabit tut; yüzün iyi aydınlansın.</li>
-          <li>Her nokta bitince telefon kısa titrer; nokta yeni yerine geçer.</li>
-          <li>Başın çok dönerse uyarırım; o anlar sayılmaz.</li>
-          <li>Göz kırpmak sorun değil, o anlar da sayılmaz.</li>
-        </ul>
-        <button className="btn" onClick={start}><ScanFace size={18} aria-hidden="true" /> Başla</button>
+        <StepCards
+          cards={[
+            { key: 'face', art: <FaceLightArt />, title: 'Telefonu göz hizasında tut', why: 'Yüzün iyi aydınlansın. Yaklaşık 20 saniye, bir kez.' },
+            { key: 'dot', art: <DotFollowArt />, title: 'Noktaya bak, yeşile dönene kadar kal', why: 'Nokta beş yere gider. Başın hafifçe dönebilir; kırpmak sorun değil.' },
+          ]}
+          eyebrow="Göz takibi · sana göre ayar"
+          finishLabel="Başla"
+          onFinish={start}
+        />
         {onSkip && <button className="link-btn" style={{ alignSelf: 'center' }} onClick={onSkip}>Şimdi değil</button>}
       </main>
     )

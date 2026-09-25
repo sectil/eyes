@@ -982,15 +982,14 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
     const eyes = control === 'eyes'
     const howto = eyes
       ? [
-          [ScanFace, 'Telefonu yüz hizasında tut, başını sabit tut.'],
-          [Eye, 'Yılanı döndürmek için gözünle o yöne, tahtanın dışına doğru kısaca bak.'],
-          [Crosshair, 'Başlarken ekranın ortasına bak; bakışın buna göre ayarlanır.'],
-          [EyeOff, 'Gözlerini 1 saniyeden uzun kapatırsan oyun durur; ekrana bakınca devam eder.'],
+          [Eye, 'Dönmek istediğin kenara bak; yılan döner.'],
+          [Crosshair, 'Başlarken ortaya bak.'],
+          [EyeOff, 'Gözünü kapatırsan durur, bakınca sürer.'],
         ]
       : [
-          [Hand, 'Tahtada parmağını kaydır ya da alttaki yön tuşlarına dokun.'],
-          [Zap, 'Her 5 yemde hızlanır; hızlandıkça yem daha çok puan verir.'],
-          [Pause, 'Sağ üstteki düğmeyle istediğin an duraklat. Klavyede ok tuşları da çalışır.'],
+          [Hand, 'Kaydır ya da yön tuşlarına dokun.'],
+          [Zap, 'Her 5 yemde hızlanır, puan artar.'],
+          [Pause, 'Sağ üstten duraklat.'],
         ]
     return (
       <main className="screen snake-root snake-intro fade-in">
@@ -1007,7 +1006,7 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
             <>
               <div className="stack" style={{ gap: 4 }}>
                 <h1>Yılan</h1>
-                <p className="muted small">Klasik yılan oyunu. Bu kez gözünle yönlendir: dönmek istediğin yöne, tahtanın dışına kısaca bak.</p>
+                <p className="muted small">Gözünle yönlendir: dönmek istediğin kenara bak.</p>
               </div>
               <GazeTutorial className="snake-tutorial" />
             </>

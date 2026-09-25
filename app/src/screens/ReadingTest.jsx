@@ -2,6 +2,9 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Info, Play, X, Mic, MicOff, Check } from 'lucide-react'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { PageHeader } from '../components/ui.jsx'
+import StepCards from '../components/StepCards.jsx'
+import { DistanceArt, ReadAloudArt, ShrinkTextArt } from '../components/howtoArt.jsx'
+import { howtoSeen, markHowtoSeen } from '../lib/howto.js'
 import { REFERENCE_MM } from '../lib/distance.js'
 import { analyzeReading, fontSizeCssPx, measureXHeightRatio, pickSentences, matchRatio, MATCH_THRESHOLD } from '../lib/reading.js'
 import { haptic, isIOSApp, speechAvailable, requestSpeechPermission, startSpeech } from '../lib/native.js'
@@ -46,6 +49,7 @@ export default function ReadingTest({ calibration, distanceCal, recentSentences 
 
   const [idx, setIdx] = useState(0)
   const [phase, setPhase] = useState('instructions') // instructions | ready | reading | done
+  const [howto, setHowto] = useState(() => !howtoSeen('reading'))
   const [speech, setSpeech] = useState({ checked: !isIOSApp(), enabled: false })
   const [heard, setHeard] = useState({ text: '', ratio: 0 })
   const [listening, setListening] = useState(false)
@@ -154,21 +158,35 @@ export default function ReadingTest({ calibration, distanceCal, recentSentences 
     </div>
   )
 
+  if (phase === 'instructions' && howto) {
+    const cm = liveMm ? Math.round(liveMm / 10) : null
+    const cards = [
+      {
+        key: 'distance',
+        art: <DistanceArt cm={cm} ok={Boolean(tracked && liveOk)} />,
+        title: tracked ? 'Telefonu kol boyu uzakta tut' : 'Telefonu 40 cm uzakta tut',
+        why: 'İki gözün açık. Yakını normalde nasıl görüyorsan öyle.',
+        live: tracked ? { ok: Boolean(liveOk), text: !liveMm ? 'yüz aranıyor' : liveOk ? `${cm} cm · tam yerinde` : `${cm} cm · ayarla` } : null,
+      },
+      { key: 'read', art: <ReadAloudArt />, title: 'Cümleyi sesli ve hızlı oku', why: speech.available ? 'Telefon duyar, kendiliğinden sıradakine geçer.' : 'Biter bitmez "Okudum"a bas.' },
+      { key: 'shrink', art: <ShrinkTextArt />, title: 'Küçülür; okuyamayınca "Okuyamıyorum"', why: 'Klinik bir test değil; yalnızca kendi önceki sonuçlarınla karşılaştır.' },
+    ]
+    return (
+      <main className="screen fade-in">
+        {tracked && <video ref={cam.videoRef} className="cam-hidden" playsInline muted />}
+        <StepCards cards={cards} eyebrow="Okuma hızı · nasıl yapılır" finishLabel="Anladım" onFinish={() => setHowto(false)} onDismiss={() => { markHowtoSeen('reading'); setHowto(false) }} onClose={onCancel} />
+      </main>
+    )
+  }
+
   if (phase === 'instructions') {
     return (
       <main className="screen fade-in">
         {tracked && <video ref={cam.videoRef} className="cam-hidden" playsInline muted />}
         <PageHeader onBack={onCancel} eyebrow="Haftalık" title="Okuma hızı" subtitle="Yazı küçüldükçe ne kadar hızlı ve rahat okuduğunu ölçer." />
-        <div className="card">
-          <ol className="steps">
-            <li>İki gözün açık. {tracked ? 'Telefonu rahat bir mesafede tut; yazı boyutu mesafeye göre kendiliğinden ayarlanır.' : 'Telefon 40 cm uzakta.'} Okuma gözlüğü takma.</li>
-            <li>Her ekranda bir cümle çıkacak, yazı giderek küçülecek.</li>
-            <li>
-              Cümleyi <strong>sesli ve olabildiğince hızlı</strong> oku.{' '}
-              {speech.available ? 'Telefon okuduğunu duyar ve kendiliğinden sıradakine geçer.' : 'Biter bitmez "Okudum"a bas.'}
-            </li>
-            <li>Okuyamayacak kadar küçülünce "Okuyamıyorum"a bas.</li>
-          </ol>
+        <div className="row between">
+          <span className="muted small">Kol boyu uzaklık · sesli ve hızlı oku · küçülünce "Okuyamıyorum"</span>
+          <button type="button" className="link-btn" onClick={() => setHowto(true)}>Nasıl yapılır?</button>
         </div>
         {speech.available && (
           <p className="note">

@@ -23,6 +23,9 @@ import {
 } from '../lib/track.js'
 import '../styles/track.css'
 import SoundToggle from '../components/SoundToggle.jsx'
+import StepCards from '../components/StepCards.jsx'
+import { FaceLightArt, JumpRingArt } from '../components/howtoArt.jsx'
+import { howtoSeen, markHowtoSeen } from '../lib/howto.js'
 import { requestEyeRound } from '../lib/eyeBudgetStore.js'
 
 // Çember takibi — göz pratiği (lib/track.js). Çember kenar ve köşe noktaları arasında atlar; içinde
@@ -42,6 +45,7 @@ const pos = (s) => ({ left: `${50 + s.x * PAD}%`, top: `${50 - s.y * PAD}%` })
 
 export default function TrackGame({ trueDepth = false, sessions = [], onExit, onFinish }) {
   const [phase, setPhase] = useState('intro') // intro | countdown | play | paused | result
+  const [howto, setHowto] = useState(() => !howtoSeen('track'))
   const [speed, setSpeedState] = useState(() => loadTrackSpeed())
   const [best, setBest] = useState(() => Math.max(loadTrackBest(), trackBestFromSessions(sessions)))
   const [count, setCount] = useState(3)
@@ -254,6 +258,18 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
   }
 
   // --- Giriş ---
+  if (phase === 'intro' && howto) {
+    const cards = [
+      { key: 'face', art: <FaceLightArt />, title: 'Telefonu yüzünün karşısında tut', why: 'Yüzün iyi aydınlansın; kamera gözünü izler.' },
+      { key: 'jump', art: <JumpRingArt />, title: 'Gözünle çembere atla, sözü oku', why: measuring ? 'Kamera, gözünün ne kadar hızlı geçtiğini ölçer. Başka yere bakarsan oyun durur.' : 'Bu cihazda kamera takibi yok; ritimle izle.' },
+    ]
+    return (
+      <main className="screen fade-in">
+        <StepCards cards={cards} eyebrow="Çember takibi · nasıl yapılır" finishLabel="Anladım" onFinish={() => setHowto(false)} onDismiss={() => { markHowtoSeen('track'); setHowto(false) }} onClose={onExit} />
+      </main>
+    )
+  }
+
   if (phase === 'intro') {
     return (
       <main className="screen track-intro fade-in">
@@ -287,18 +303,10 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
           <p className="muted small">Hızlandıkça her takip daha çok puan verir. Bir tur {JUMPS} atlama.</p>
         </section>
 
-        <section className="card">
-          <h3>Nasıl yapılır</h3>
-          <ul className="track-howto">
-            <li><ScanFace size={18} aria-hidden="true" /> Telefonu yüzünün karşısında tut, başını sabit tut.</li>
-            <li><Eye size={18} aria-hidden="true" /> Başını çevirmeden, yalnızca gözünle çembere atla.</li>
-            {measuring ? (
-              <li><Timer size={18} aria-hidden="true" /> Kamera, gözünün çembere ne kadar hızlı geçtiğini ölçer. Ekrandan başka yere bakarsan oyun durur.</li>
-            ) : (
-              <li><Timer size={18} aria-hidden="true" /> Bu cihazda kamera takibi yok; ritimle izle, puan tutulmaz.</li>
-            )}
-          </ul>
-        </section>
+        <div className="row between">
+          <span className="muted small">{measuring ? 'Gözünle çembere atla; kamera hızını ölçer' : 'Ritimle izle; bu cihazda puan tutulmaz'}</span>
+          <button type="button" className="link-btn" onClick={() => setHowto(true)}>Nasıl yapılır?</button>
+        </div>
 
         <p className="note"><InfoIcon size={16} aria-hidden="true" /> Eğlence ve bakış kontrolü pratiği. Görmeyi ölçmez, iyileştirdiği iddia edilmez.</p>
         <button type="button" className="btn" onClick={start}><Play size={18} aria-hidden="true" /> Başla</button>

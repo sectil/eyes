@@ -128,3 +128,11 @@ Seçenekler:
 - **B (isteğe bağlı):** ayda bir ek gözlüksüz ölçüm ("düzeltme kazancı"); 60+ için taban etkisi riski.
 - **C (sonra):** kamera tutarlılık kontrolü — kullanıcı seçer, Core ML sınıflandırıcı yalnızca çelişkide "gözlük takılı
   görünüyor" der; lisansı temiz eğitim verisi şart.
+
+## 6. Yönerge kalıbı (2026-09-25, onaylı; Artifact "EyeTrail Yönerge Kartları") — YAPILDI (Build 19)
+- `components/StepCards.jsx`: bir kartta bir iş (≤ 8 kelime), SVG çizim (`components/howtoArt.jsx`), kaydırarak geçiş,
+  canlı doğrulama rozeti (mesafe doğruysa kart kendiliğinden geçer), "Bir daha gösterme" (`lib/howto.js`).
+- `components/TodayPath.jsx`: Bugün'de plan menü değil yol (biten yeşil, sıradaki büyük, sonrakiler soluk, tek baloncuk).
+- Kartlara geçen ekranlar: görme testi (3), okuma testi (3), nefes sayma (3), Çember (2), göz kalibrasyonu (2);
+  Yılan giriş satırları kısaltıldı (kişi animasyonu zaten var); nefes güvenliği üç kalın başlık.
+- Web'e özgü kart/mesafe kalibrasyonu (CardCalibration, DistanceCalibration) listede kaldı — iOS'ta görünmez.

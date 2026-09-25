@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { X, Play, Wind, Check, RotateCcw, Hand, CircleHelp, Timer } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
+import StepCards from '../components/StepCards.jsx'
+import { BreathTapArt, BreathHoldArt, LostCountArt } from '../components/howtoArt.jsx'
+import { howtoSeen, markHowtoSeen } from '../lib/howto.js'
 import { haptic } from '../lib/native.js'
 import {
   createBreathCounter, nextProbeAt, durationFor, makeRecord, resultText, bcTrend,
@@ -19,6 +22,7 @@ const PHASE_TEXT = {
 
 export default function BreathCount({ sessions = [], onBack, onFinish }) {
   const [phase, setPhase] = useState('intro') // intro | run | result
+  const [howto, setHowto] = useState(() => !howtoSeen('breath-count'))
   const [probe, setProbe] = useState(null) // null | { step: 'mw' | 'count', mw }
   const [left, setLeft] = useState(0)
   const [result, setResult] = useState(null)
@@ -108,18 +112,26 @@ export default function BreathCount({ sessions = [], onBack, onFinish }) {
     setProbe(null)
   }
 
+  if (phase === 'intro' && howto) {
+    const cards = [
+      { key: 'tap', art: <BreathTapArt />, title: 'Nefes ver, ekrana bir kez dokun', why: "1'den 9'a say. Rahat otur; ekran karanlık kalır." },
+      { key: 'hold', art: <BreathHoldArt />, title: "9'da basılı tut, titreşimi hisset", why: "Sonra 1'den başla." },
+      { key: 'lost', art: <LostCountArt />, title: 'Sayıyı kaybettiysen "Kaybettim"', why: 'Hata değil, fark etmenin kendisi. Arada bir soru sorarım; doğru cevap yok.' },
+    ]
+    return (
+      <main className="screen fade-in">
+        <StepCards cards={cards} eyebrow="Nefes sayma · nasıl yapılır" finishLabel="Anladım" onFinish={() => setHowto(false)} onDismiss={() => { markHowtoSeen('breath-count'); setHowto(false) }} onClose={onBack} />
+      </main>
+    )
+  }
+
   if (phase === 'intro') {
     return (
       <main className="screen fade-in">
         <PageHeader onBack={onBack} eyebrow="Dikkat ölçümü" title="Nefes sayma" subtitle="Nefeslerini say; dikkatin nereye kaçtığını ölçelim." />
-        <div className="card">
-          <ol className="steps">
-            <li>Rahat otur, telefonu kucağına ya da masaya koy. Ekran karanlık kalacak.</li>
-            <li>Nefesini <strong>1'den 9'a</strong> kadar say. Her nefes verişte ekrana <strong>bir kez dokun</strong>.</li>
-            <li><strong>9. nefeste</strong> ekrana <strong>basılı tut</strong> (kısa titreşimi hisset), sonra 1'den başla.</li>
-            <li>Sayıyı kaybettiysen <strong>"Kaybettim"</strong>e bas; bu bir hata değil, fark etmenin kendisi.</li>
-            <li>Arada bir soru soracağım: dikkatin neredeydi, kaçtaydın? Dürüstçe cevapla; doğru cevap yok.</li>
-          </ol>
+        <div className="row between">
+          <span className="muted small">Nefes verişte dokun · 9'da basılı tut · kaybedince "Kaybettim"</span>
+          <button type="button" className="link-btn" onClick={() => setHowto(true)}>Nasıl yapılır?</button>
         </div>
         <div className="row" style={{ gap: 8, flexWrap: 'wrap' }}>
           <span className="acuity-pill"><Timer size={14} aria-hidden="true" /> {seconds / 60} dk</span>
