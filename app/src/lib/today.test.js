@@ -6,12 +6,14 @@ const MIN = 60000
 const NOW = new Date('2026-09-25T10:00:00')
 const TODAY = NOW.toISOString()
 const daysAgo = (n) => new Date(NOW.getTime() - n * 86400000).toISOString()
-const path = (tests = [], sessions = [], extra = {}) => buildPath(registry.live, { tests, sessions: [...SPAN3, ...sessions], now: NOW, ...extra })
+const path = (tests = [], sessions = [], extra = {}) => buildPath(registry.live, { tests, sessions: [...SPAN3, ...STREET3, ...sessions], now: NOW, ...extra })
 const keys = (p) => p.stops.map((s) => s.key)
 // Normal gün: haftalık test 2 gün, okuma 3 gün önce (yol planı §4, "Ali" kurgusal)
 const NORMAL = [{ type: 'va-weekly', eye: 'OU', date: daysAgo(2) }, { type: 'reading', date: daysAgo(3) }]
 // Tek Bakışta son 7 günde 3 gün yapıldı → bugün yolda yok (eski senaryolar değişmesin)
 const SPAN3 = [2, 3, 4].map((d) => ({ type: 'span', span: 8, left: 4, right: 4, durationMs: 100, accuracy: 0.8, seconds: 120, date: daysAgo(d) }))
+// Fark Ettin mi? de bu hafta 3 gün yapıldı → yolda yok
+const STREET3 = [2, 3, 4].map((d) => ({ type: 'street', noticed: 2, asked: 3, task: 1, level: 1, seconds: 60, date: daysAgo(d) }))
 const DAY = ['routine:isinma', 'daily', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'routine:kirpma', 'snake']
 
 describe('buildPath: şablon', () => {
@@ -56,12 +58,29 @@ describe('buildPath: şablon', () => {
   })
 
   it('Tek Bakışta haftada 3 gün: 2. bölümde 2 dk; o gün 2. bölüm payı için Yılan düşer', () => {
-    const p = buildPath(registry.live, { tests: NORMAL, sessions: [], now: NOW })
+    const p = buildPath(registry.live, { tests: NORMAL, sessions: STREET3, now: NOW })
     expect(keys(p)).toEqual(['routine:isinma', 'daily', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'routine:kirpma', 'tek-bakis'])
     expect(p.blocks[1].eyeMin).toBe(4)
     expect(keys(path(NORMAL))).not.toContain('tek-bakis') // bu hafta 3 gün yapılmış
-    const flashOff = buildPath(registry.live, { tests: NORMAL, sessions: [], now: NOW, profile: { seizure: 'unsure' } })
+    const flashOff = buildPath(registry.live, { tests: NORMAL, sessions: STREET3, now: NOW, profile: { seizure: 'unsure' } })
     expect(keys(flashOff)).not.toContain('tek-bakis')
+  })
+
+  it('Fark Ettin mi? haftada 3 gün: Nefes\'in hemen ardından; 2. bölüm payı için Yılan düşer', () => {
+    const p = buildPath(registry.live, { tests: NORMAL, sessions: SPAN3, now: NOW })
+    expect(keys(p)).toEqual(['routine:isinma', 'daily', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'fark-ettin', 'routine:daire', 'routine:kirpma'])
+    expect(p.blocks[1].eyeMin).toBe(4)
+  })
+
+  it('Tek Bakışta ile Fark Ettin mi? dönüşümlü: aynı gün ikisinden biri; bu hafta az yapılan önce; bugün yapılan kalır', () => {
+    const at = (d) => buildPath(registry.live, { tests: NORMAL, sessions: [], now: new Date(NOW.getTime() + d * 86400000) })
+    const pickOf = (p) => keys(p).filter((k) => k === 'fark-ettin' || k === 'tek-bakis')
+    expect(pickOf(at(0))).toHaveLength(1)
+    expect(new Set([pickOf(at(0))[0], pickOf(at(1))[0]]).size).toBe(2) // eşitken günlere göre sırayla
+    const oneSpan = [{ type: 'span', span: 8, durationMs: 100, accuracy: 0.8, seconds: 90, date: daysAgo(1) }]
+    expect(pickOf(buildPath(registry.live, { tests: NORMAL, sessions: oneSpan, now: NOW }))).toEqual(['fark-ettin'])
+    const spanToday = [{ type: 'span', span: 8, durationMs: 100, accuracy: 0.8, seconds: 90, date: TODAY }]
+    expect(pickOf(buildPath(registry.live, { tests: NORMAL, sessions: spanToday, now: NOW }))).toEqual(['tek-bakis'])
   })
 
   it('Nefes sayma emekli: yolda yok', () => {

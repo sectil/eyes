@@ -266,5 +266,24 @@ konuşma eşleşmesi ≥ 0,7 olunca cümle biter (`MATCH_THRESHOLD`) → kişi b
   denemeyle ölçülemediği için); süre turdan tura ~%80 doğrulukta tutulur (Yu 2017). lib/span.js.
 - Bilim kartları: 8 kart, hepsi PubMed özetinden (Rayner 2016, Legge 2001/2007, Chung 2004, Yu 2010/2017, Lee 2010, Kwon 2007).
 - İddia sınırı ekranda: kazanım çevresel görüşte gösterildi; normal okumaya aktarımı ve görmeyi iyileştirdiği gösterilmedi.
-- Yol: son 7 günde 3 günden az yapıldıysa 2. bölümde 2 dk; o gün 2. bölüm payı (4 dk) için Yılan düşer.
+- Yol: son 7 günde 3 günden az yapıldıysa 2. bölümde 2 dk; o gün 2. bölüm payı (4 dk) için Yılan düşer. Fark Ettin mi? ile
+  dönüşümlü (§16).
 - Yapılmadı: TrueDepth ile harf anında göz kaydıysa denemeyi saymama; çevresel mod (sonraki sürüm).
+
+## 16. Fark Ettin mi? (dikkat körlüğü alıştırması) (2026-09-25, Build 29 — YAPILDI; Faz 1)
+- Taslak (onaylı): https://claude.ai/artifact/TuUQfFg4SBqkqd8ZPHQWt8. Faz 2 (gün gün aşağı akan yol + puanlama) ayrı taslakla.
+- Modül: src/modules/fark-ettin (Dikkat halkası, pratik, göz bütçesi 'eye'). Mantık lib/street.js, çizim lib/streetSvg.js,
+  ekran screens/StreetWalk.jsx.
+- Yöntem (dikkat körlüğü düzeni; Simons & Chabris 1999): önce bir sayma görevi (mavi araba / taksi / kedi / bisiklet),
+  cadde ~40 sn akar, sonra görev sorusu, sonra 3 "fark ettin mi?" sorusu (gülen kadın, sarışın kadın, çocuklu kadın,
+  şapkalı adam, satıcı, yeşil tenteli dükkân; her biri 4 seçenek). Her tur tohumdan (seed) üretilir; her seferinde farklı.
+  Sorulan kişi/dükkân caddede tektir (yeşil tente tam 1 tane).
+- "Fark etmedim, tahmin edeceğim": tahminle doğru bilinen puana katılmaz, ayrı sayılır (Kreitz 2020).
+- Puan: görev 1 / ½ (bir fark) / 0; fark ettiklerin x/3. Seviye 1–3 (kişi 14/18/22, süre 40/36/32 sn): üst üste 2 tam
+  görev → +1; son görev 0 → −1 (VARSAYIM).
+- Bilim kartları: 7 kart, hepsi PubMed özetinden (Simons & Chabris 1999, Drew 2013, Schofield 2015, Kreitz 2020,
+  Simons & Jensen 2009, Pandit 2022, Simons 2024).
+- İddia sınırı ekranda: "Gerçek hayatta daha çok fark ettirdiği gösterilmedi."
+- Yol: son 7 günde 3 günden az yapıldıysa Nefes'ten hemen sonra 2 dk. Tek Bakışta ile aynı gün ikisinden biri çıkar
+  (lib/today.js `rotate`): bugün yapılan kalır, yoksa bu hafta az yapılan, eşitse güne göre sırayla. Sebep: ikisi aynı
+  gün çıkınca 2. bölüm payında Tek Bakışta hep düşüyordu. O gün Yılan yine düşer.

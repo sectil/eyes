@@ -1,0 +1,58 @@
+/* Fark Ettin mi? (screens/StreetWalk.jsx) */
+.sw { gap: 14px; min-height: 100dvh; }
+.sw > .grow { flex: 1; }
+.sw-top { display: flex; align-items: center; gap: 12px; min-height: 40px; }
+.sw-top .oq-bar { flex: 1; }
+.sw-ey { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.sw-h { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; line-height: 1.24; text-wrap: balance; margin: 0; }
+.sw-task { display: flex; gap: 12px; align-items: center; background: var(--surface); border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); border-radius: 18px; padding: 14px; }
+.sw-task b { display: block; font-family: var(--font-display); font-size: 1.05rem; }
+.sw-task-ico { width: 64px; height: 50px; flex: none; }
+.sw-jev { display: flex; gap: 10px; align-items: flex-start; }
+.sw-jev p { margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 10px 12px; font-size: 0.92rem; }
+.sw-src { font: 500 0.7rem/1.5 var(--font-mono); color: var(--ink-3); margin: 0; }
+
+/* Yürüyüş: tam ekran; üst gök, alt yol rengi (sahne ortada) */
+.sw-walk { position: relative; height: 100dvh; overflow: hidden; background: linear-gradient(#cfe7f2 50%, #4a4f57 50%); }
+.sw-scene svg { position: absolute; left: 0; width: auto; will-change: transform; }
+.sw-hud { position: absolute; left: 12px; right: 12px; top: calc(12px + env(safe-area-inset-top)); display: flex; align-items: center; gap: 8px; z-index: 2; }
+.sw-chip { font: 700 0.85rem var(--font-body); background: rgba(7, 12, 18, 0.8); color: #eef3f6; border-radius: 999px; padding: 8px 12px; }
+.sw-t { margin-left: auto; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.sw-walk .bob { animation: sw-bob 0.9s ease-in-out infinite; }
+@keyframes sw-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+
+/* Sorular: büyük seçenekler */
+.sw-opts { display: flex; flex-direction: column; gap: 10px; }
+.sw-opts.grid { display: grid; grid-template-columns: 1fr 1fr; }
+.sw-opt {
+  display: flex; align-items: center; gap: 10px; min-height: 60px; padding: 0 14px; border-radius: 16px; cursor: pointer; text-align: left;
+  border: 2px solid var(--border); background: var(--surface); color: var(--ink); font: 700 1.05rem var(--font-body);
+}
+.sw-opt.center { justify-content: center; font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+.sw-opt.ok { border-color: var(--ok); background: var(--ok-bg); }
+.sw-opt.no { border-color: var(--warn); background: var(--warn-bg); }
+.sw-opt.guess { grid-column: 1 / -1; justify-content: center; text-align: center; font-weight: 600; font-size: 0.95rem; min-height: 50px; color: var(--ink-2); border-style: dashed; }
+.sw-opt.guess.on { border-color: var(--lens); color: var(--lens-text); }
+.sw-opt:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.sw-swatch { width: 24px; height: 24px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ink) 30%, transparent); }
+.sw-fb { min-height: 2.6em; margin: 0; font-size: 0.95rem; }
+.sw-fb b.ok, .sw-card b.ok { color: var(--ok); }
+.sw-fb b.no, .sw-card b.no { color: var(--warn); }
+.sw-fb b.near { color: var(--lens-text); }
+
+/* Sonuç */
+.sw-stat { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sw-stat div { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 12px 14px; }
+.sw-stat b { display: block; font-family: var(--font-display); font-size: 1.9rem; }
+.sw-stat span { font-size: 0.8rem; color: var(--ink-3); }
+.sw-list { display: flex; flex-direction: column; gap: 8px; }
+.sw-list div { display: flex; gap: 8px; align-items: flex-start; font-size: 0.92rem; }
+.sw-list i { font-style: normal; font: 500 0.72rem var(--font-mono); padding: 2px 7px; border-radius: 6px; flex: none; }
+.sw-list i.ok { background: var(--ok-bg); color: var(--ok); }
+.sw-list i.no { background: var(--warn-bg); color: var(--warn); }
+.sw-list i.gs { background: var(--lens-soft); color: var(--lens-text); }
+.sw-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+.sw-card p { margin: 0; font-size: 0.92rem; }
+.sw-card .h { font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+.sw-cite { font: 500 0.7rem/1.5 var(--font-mono); color: var(--ink-3); overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: reduce) { .sw-walk .bob { animation: none; } }

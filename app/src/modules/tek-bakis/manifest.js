@@ -34,7 +34,7 @@ export default {
     const done = sessions.some((s) => isSpan(s) && isSameDay(s, now))
     const days = new Set(withinDays(sessions.filter(isSpan), now).map(dayKey)).size
     if (!done && days >= WEEKLY_DAYS) return null
-    return { title: 'Tek Bakışta', minutes: 2, slot: 'body', order: 95, glyph: 'span', dropRank: 1.5, done }
+    return { title: 'Tek Bakışta', minutes: 2, slot: 'body', order: 95, glyph: 'span', dropRank: 1.5, rotate: 'week3', weekDays: days, done }
   },
   coach(sessions, now) {
     const week = withinDays(sessions.filter(isSpan), now)

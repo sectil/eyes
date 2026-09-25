@@ -10,7 +10,9 @@
 //             order?: şablondaki yer (ORDER), eyeMin?: göz bütçesinden düşen dk (varsayılan: 'eye' kapısında minutes),
 //             openEnded?: süresi kullanıcıya bağlı oyun (bölümün son göz durağı olur),
 //             exclusive?: o gün 2. bölümün tek göz durağı (Hızlı Bakış), dropRank?: yol uzarsa düşme sırası (1 ilk),
-//             game?: oyun (Jev "Ritmi yakala" der) }
+//             game?: oyun (Jev "Ritmi yakala" der),
+//             rotate?: aynı gruptaki duraklardan günde biri (bugün yapılan, yoksa bu hafta en az yapılan, eşitse güne göre sırayla),
+//             weekDays?: bu durak son 7 günde kaç gün yapıldı (rotate seçimi için) }
 //   null: modül bugün yolda yok (ör. haftalık test zamanı gelmedi)
 export const WEEK_MS = 7 * 86400000
 
@@ -75,6 +77,8 @@ function collect(modules, c) {
         eyeMin: Number.isFinite(it.eyeMin) ? it.eyeMin : budget === 'eye' ? minutes ?? 1 : 0,
         openEnded: Boolean(it.openEnded),
         game: Boolean(it.game),
+        rotate: typeof it.rotate === 'string' ? it.rotate : null,
+        weekDays: Number.isFinite(it.weekDays) ? it.weekDays : 0,
         exclusive: Boolean(it.exclusive),
         dropRank: Number.isFinite(it.dropRank) ? it.dropRank : null,
         homeOrder: m.home?.order ?? 999,
@@ -127,6 +131,18 @@ export function buildPath(modules = [], ctx = {}) {
   const exclusive = items.find((s) => s.exclusive)
   if (exclusive) {
     items = items.filter((s) => s === exclusive || !(s.openEnded || (s.order > ORDER.rest && s.budget === 'eye' && s.order < ORDER.finale)))
+  }
+  // Dönüşümlü duraklar (rotate): gruptan günde biri
+  const dayIdx = Math.floor(new Date(c.now).getTime() / 86400000)
+  const groups = {}
+  for (const s of items) if (s.rotate) (groups[s.rotate] ??= []).push(s)
+  for (const list of Object.values(groups)) {
+    if (list.length < 2) continue
+    const done = list.find((s) => s.done)
+    const least = Math.min(...list.map((s) => s.weekDays))
+    const cands = list.filter((s) => s.weekDays === least).sort((a, b) => a.key.localeCompare(b.key))
+    const keep = done ?? cands[dayIdx % cands.length]
+    items = items.filter((s) => !list.includes(s) || s === keep)
   }
   // Günde en çok bir açık uçlu durak
   const opens = items.filter((s) => s.openEnded)
