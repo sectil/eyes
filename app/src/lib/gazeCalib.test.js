@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest'
-import { fitModel, fitAxis, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE } from './gazeCalib.js'
-import { createGazeReader, GAZE_FULL_DEG } from './gaze.js'
+import { describe, it, expect, afterEach, vi } from 'vitest'
+import { fitModel, fitAxis, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE, calibReport, closeThreshold, loadGazeModel, saveGazeModel, clearGazeModel, GAZE_MODEL_KEY, GAZE_MODEL_VERSION, DOWN_CLOSE_MAX } from './gazeCalib.js'
+import { createGazeReader, lookingAtPhone, GAZE_FULL_DEG } from './gaze.js'
 
 // Deterministik gürültü
 function rng(seed) {
@@ -167,5 +167,79 @@ describe('createGazeReader (model modu)', () => {
     const reader = createGazeReader({ model: m })
     expect(reader.push({ ...makeFrame(0, 0), blinkLeft: 0.9, blinkRight: 0.9, ts: 0 }).closed).toBe(true)
     expect(reader.push({ tracked: false, face: false, ts: 10 }).tracked).toBe(false)
+  })
+})
+
+describe('kalibrasyon v2: aşağı bakışta göz kapağı, rapor, sürüm', () => {
+  afterEach(() => vi.unstubAllGlobals())
+  const withClosure = (frames, c) => frames.map((f) => ({ ...f, blinkLeft: c, blinkRight: c }))
+
+  it('closeThreshold: aşağı bakış kapanma ortancası + 0,2; 0,5–0,85 aralığında', () => {
+    expect(closeThreshold([])).toBe(0.5)
+    expect(closeThreshold(withClosure(windows().down, 0.1))).toBe(0.5)
+    expect(closeThreshold(withClosure(windows().down, 0.45))).toBeCloseTo(0.65, 6)
+    expect(closeThreshold(withClosure(windows().down, 0.8))).toBe(DOWN_CLOSE_MAX)
+  })
+
+  it('model aşağı bakıştaki kapanmayı öğrenir; okuyucu aşağı bakışı "kapalı" saymaz, gerçek kırpmayı sayar', () => {
+    const w = windows()
+    w.down = withClosure(w.down, 0.55) // aşağı bakınca göz kapağı iner
+    const m = fitModel(w)
+    expect(m.ok).toBe(true)
+    expect(m.version).toBe(GAZE_MODEL_VERSION)
+    expect(m.closeAt).toBeCloseTo(0.75, 6)
+    const reader = createGazeReader({ model: m })
+    let r
+    for (let i = 0; i < 20; i++) r = reader.push({ ...makeFrame(0, -12, { noise: 0.2, r: rng(i) }), blinkLeft: 0.55, blinkRight: 0.55, ts: i * 33 })
+    expect(r.closed).toBe(false)
+    expect(r.dir).toBe('down')
+    expect(reader.push({ ...makeFrame(0, 0), blinkLeft: 0.95, blinkRight: 0.95, ts: 1000 }).closed).toBe(true)
+  })
+
+  it('calibReport: yalnızca sayılar, eksen başına tüm aday skorları', () => {
+    const w = windows()
+    const m = fitModel(w)
+    const rep = calibReport(w, m)
+    expect(rep.targets.left.n).toBe(30)
+    expect(rep.targets.left.angX.med).toBeTypeOf('number')
+    expect(Object.keys(rep.scores.x)).toEqual(['angX', 'lookX', 'blendX'])
+    expect(rep.scores.x.angX).toBeGreaterThan(MIN_SCORE)
+    expect(rep.model).toBe(m)
+    expect(JSON.stringify(rep)).not.toMatch(/image|jpeg|png/i)
+  })
+
+  it('eski sürüm (v1, ekran kenarı) model yüklenmez → yeniden kalibrasyon', () => {
+    const mem = new Map()
+    vi.stubGlobal('localStorage', { getItem: (k) => mem.get(k) ?? null, setItem: (k, v) => mem.set(k, String(v)), removeItem: (k) => mem.delete(k) })
+    const m = fitModel(windows())
+    saveGazeModel(m)
+    expect(loadGazeModel()?.version).toBe(GAZE_MODEL_VERSION)
+    mem.set(GAZE_MODEL_KEY, JSON.stringify({ ...m, version: 1 }))
+    expect(loadGazeModel()).toBeNull()
+    clearGazeModel()
+    expect(loadGazeModel()).toBeNull()
+  })
+})
+
+describe('lookingAtPhone', () => {
+  const m = fitModel(windows())
+  const feed = (reader, gx, gy, n = 20, t0 = 0) => {
+    let r
+    for (let i = 0; i < n; i++) r = reader.push({ ...makeFrame(gx, gy, { noise: 0.2, r: rng(i + t0) }), ts: t0 + i * 33 })
+    return r
+  }
+  it('ekranda gezinen bakış (±5°) telefona; üstünden/yanından dışarı bakış telefona değil', () => {
+    const reader = createGazeReader({ model: m })
+    expect(lookingAtPhone(feed(reader, 0, 0))).toBe(true)
+    expect(lookingAtPhone(feed(reader, 4, -3, 20, 1000))).toBe(true) // ekranın sağ alt köşesi
+    expect(lookingAtPhone(feed(reader, 0, 12, 20, 2000))).toBe(false) // telefonun üstünden uzağa
+    expect(lookingAtPhone(feed(reader, -15, 0, 20, 3000))).toBe(false) // yanından uzağa
+    expect(lookingAtPhone(feed(reader, 0, -12, 20, 4000))).toBe(true) // aşağı = telefon tarafı
+  })
+  it('bilinmiyorsa null: gözler kapalı, yüz yok, okuyucu kalibre değil', () => {
+    expect(lookingAtPhone(null)).toBeNull()
+    expect(lookingAtPhone({ dir: 'center', calibrated: false, tracked: true, closed: false })).toBeNull()
+    expect(lookingAtPhone({ dir: null, calibrated: true, tracked: true, closed: true })).toBeNull()
+    expect(lookingAtPhone({ dir: null, calibrated: true, tracked: false, closed: false })).toBeNull()
   })
 })

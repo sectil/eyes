@@ -55,3 +55,14 @@
 .gazetest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; font-variant-numeric: tabular-nums; font-size: 0.85rem; }
 .gazetest-grid span:nth-child(odd) { color: var(--ink-3); }
 .gazetest-grid .hl { color: var(--accent); font-weight: 700; }
+
+/* Kalibrasyon v2: yön hedefleri ekranın dışını gösteren ok */
+.gazecal-out { position: absolute; left: 50%; top: 50%; margin: -15px 0 0 -15px; color: var(--accent-graphic); }
+.gazecal-out.left { animation: gazecal-nudge-x 1s ease-in-out infinite; --d: -6px; }
+.gazecal-out.right { animation: gazecal-nudge-x 1s ease-in-out infinite; --d: 6px; }
+.gazecal-out.up { animation: gazecal-nudge-y 1s ease-in-out infinite; --d: -6px; }
+.gazecal-out.down { animation: gazecal-nudge-y 1s ease-in-out infinite; --d: 6px; }
+@keyframes gazecal-nudge-x { 50% { transform: translateX(var(--d)); } }
+@keyframes gazecal-nudge-y { 50% { transform: translateY(var(--d)); } }
+.gazecal-scores { align-self: center; }
+@media (prefers-reduced-motion: reduce) { .gazecal-out { animation: none !important; } }

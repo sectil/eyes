@@ -165,6 +165,21 @@ async function playHaptic(kind) {
   return null
 }
 
+// Her düğmeye dokunuşta hafif titreşim (tek dinleyici, tüm uygulama). Kendi titreşimini veren
+// öğeler atlanır: data-no-tap, anahtarlar (role="switch", aria-pressed) ve devre dışı düğmeler.
+// Döner: kaldırma fonksiyonu.
+export function installTapHaptics(root = typeof document !== 'undefined' ? document : null) {
+  if (!root?.addEventListener) return () => {}
+  const onClick = (e) => {
+    const el = e.target?.closest?.('button, [role="button"], a.btn')
+    if (!el || el.disabled || el.getAttribute('aria-disabled') === 'true') return
+    if (el.closest('[data-no-tap]') || el.getAttribute('role') === 'switch' || el.hasAttribute('aria-pressed')) return
+    haptic('tick')
+  }
+  root.addEventListener('click', onClick, true)
+  return () => root.removeEventListener('click', onClick, true)
+}
+
 // kind: 'tick' (hafif), 'hit' (orta), 'success', 'warning', 'error'. Bilinmeyen tür → 'tick'.
 // Ayarlardan titreşim kapalıysa hiçbir şey yapmaz.
 export async function haptic(kind = 'tick') {

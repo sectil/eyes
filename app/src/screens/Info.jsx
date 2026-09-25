@@ -154,6 +154,7 @@ function FeedbackSettings({ iosApp }) {
             type="button"
             className="btn btn-ghost btn-sm pref-test-btn"
             onClick={runTest}
+            data-no-tap
             disabled={!prefs.haptics || test.busy}
             aria-label="Titreşimi dene"
           >

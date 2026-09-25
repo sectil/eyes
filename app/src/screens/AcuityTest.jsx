@@ -343,11 +343,11 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, o
           {hint && !paused && <span className="acuity-hint" key={hint}>{hint}</span>}
           <div className="arrow-row" onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()}>
             {[['left', ArrowLeft, 'Sol'], ['up', ArrowUp, 'Yukarı'], ['down', ArrowDown, 'Aşağı'], ['right', ArrowRight, 'Sağ']].map(([d, Icon, label]) => (
-              <button key={d} className="arrow" onClick={() => answer(d)} aria-label={label}><Icon size={24} /></button>
+              <button key={d} className="arrow" data-no-tap onClick={() => answer(d)} aria-label={label}><Icon size={24} /></button>
             ))}
           </div>
           {!isWarmup && (
-            <button className="link-btn cant-see" onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()} onClick={() => answer(null)}>
+            <button className="link-btn cant-see" data-no-tap onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()} onClick={() => answer(null)}>
               <EyeOff size={16} aria-hidden="true" /> Göremiyorum
             </button>
           )}

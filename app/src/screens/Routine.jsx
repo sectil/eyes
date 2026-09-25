@@ -13,6 +13,7 @@ import {
   createCircleTracker,
   createNearFarCounter,
   focusZone,
+  lookingAtPhone,
   BLINK_CLOSE,
   CIRCLE_MIN_DEG,
   GAZE_ENTER_DEG,
@@ -41,6 +42,11 @@ const CUE_GAP_MS = 6000 // hatırlatmalar arası en az süre
 const MAX_REMINDERS = 3 // adım başına en çok sesli hatırlatma (sonra ekrandaki "Atla" yeter)
 const OPEN_NAG_MS = 3000 // "Gözlerini kapat" adımında gözler bu kadar açık kalırsa hatırlat
 const BLINK_OPEN_CUE_MS = 2000 // kırpma adımında göz bu kadar kapalı kalınca "Aç" de
+// Uyarı (titreşim + ses): yanlış yere bakınca. VARSAYIM: süreler ilk sürüm içindir.
+const WARN_GAP_MS = 4000 // iki uyarı arası en az süre
+const FAR_GRACE_MS = 3000 // "Uzağa bak" adımı başında yönergeyi okuma payı (uyarı yok)
+const PHONE_WARN_MS = 1200 // uzağa bakması gerekirken bu kadar telefona bakarsa uyar
+const WRONG_DIR_MS = 700 // bakış adımında bu kadar yanlış yöne bakarsa uyar
 const PAD_R = 42 // bakış panelinde noktanın merkezden en uzak konumu (%)
 // Kişiye göre kırpma eşiği: gözler açıkken (ekrana bakarken) ölçülen kapanma ortancası.
 // Telefona aşağı bakınca açık gözde bile kapanma 0,25'in üstünde olabilir; sabit eşikle sayaç
@@ -49,7 +55,7 @@ const BLINK_BASE_SAMPLES = 30
 // Daire görseli: .orbit 150 px kutu, 6 px kenarlık → kenarlık ortası 72 px (tur ilerleme yayı).
 const ORBIT_R = 72
 const ORBIT_LEN = 2 * Math.PI * ORBIT_R
-const EMPTY_LIVE = { value: 0, ok: false, wrongWay: false, gaze: { x: 0, y: 0 }, calibrated: true }
+const EMPTY_LIVE = { value: 0, ok: false, wrongWay: false, phone: false, gaze: { x: 0, y: 0 }, calibrated: true }
 
 const unit = (deg) => Math.max(-1, Math.min(1, deg / GAZE_FULL_DEG))
 
@@ -136,7 +142,17 @@ function newTrackers(ex, base) {
   }
 }
 
-const freshVoice = () => ({ lastCue: 0, reminders: 0, openSince: null, closedSince: null, openCued: false })
+const freshVoice = () => ({
+  lastCue: 0,
+  reminders: 0,
+  openSince: null,
+  closedSince: null,
+  openCued: false,
+  stepStart: null, // adımın ilk yüz karesi (ms)
+  lastWarn: -Infinity,
+  phoneSince: null, // "Uzağa bak"ta telefona bakış başlangıcı
+  wrongSince: null, // bakış adımında yanlış yöne bakış başlangıcı
+})
 
 export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = false }) {
   const steps = set.steps.map((id) => ({ id, ...EXERCISES[id] }))
@@ -179,6 +195,7 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
     const t = trackers.current
     const cur = exRef.current
     const vr = voice.current
+    if (vr.stepStart == null) vr.stepStart = m.ts
     const closure = eyeClosure(m)
     const open = closure < BLINK_CLOSE
     // Açık göz tabanı: yalnızca ekrana bakarken (kırpma adımı ya da bakış adımında merkez) toplanır;
@@ -195,6 +212,8 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
     let value = 0
     let ok = false
     let wrongWay = false
+    let phone = false // "Uzağa bak"ta telefona bakıyor
+    let warn = null // uyarı metni (titreşim + ses)
     if (kind === 'blinks') {
       // Taban bu adımda hazır olduysa eşikleri kişiye göre ayarla; sayım ve o anki kırpma korunur
       // (sabit eşikte "kapalı"da takılı kalmış kırpma, göz yeni eşiğe inince sayılır).
@@ -219,6 +238,10 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
     } else if (kind === 'hold') {
       ok = g.dir === cur.dir
       value = t.hold.push(ok, m.ts) / 1000
+      // Belirgin biçimde başka yöne bakıyorsa (merkez ya da kırpma değil) uyar
+      const wrong = g.dir != null && g.dir !== 'center' && g.dir !== cur.dir
+      vr.wrongSince = wrong ? vr.wrongSince ?? m.ts : null
+      if (wrong && m.ts - vr.wrongSince >= WRONG_DIR_MS) warn = `Başını çevirmeden ${DIR_WORD[cur.dir]} bak`
     } else if (kind === 'laps') {
       const st = g.dir != null ? t.circle.push(g.v) : t.circle.state
       value = st.laps + st.progress
@@ -231,23 +254,41 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
       if (ok) vr.openSince = null
       else if (vr.openSince == null) vr.openSince = m.ts
     } else if (kind === 'far') {
-      ok = open && focusZone(m) === 'far'
+      // Odak mesafesi (göz doğrultuları) tek başına yetmiyor: cihazda telefona bakarken de "uzak"
+      // okundu (Build 7). Bakış okuyucusu kalibreyse telefona (ekrana) bakış kesin elenir: süre
+      // yalnızca gözler telefonun dışına (üstünden/yanından) bakarken işler.
+      const atPhone = lookingAtPhone(g)
+      ok = open && (g.calibrated ? atPhone === false : focusZone(m) === 'far')
       value = t.hold.push(ok, m.ts) / 1000
+      phone = atPhone === true
+      vr.phoneSince = phone ? vr.phoneSince ?? m.ts : null
+      if (phone && m.ts - vr.stepStart >= FAR_GRACE_MS && m.ts - vr.phoneSince >= PHONE_WARN_MS) warn = 'Telefona değil, uzağa bak'
     } else if (kind === 'switches') {
       const st = t.nearFar.push(open ? focusZone(m) : null, m.ts)
       value = st.switches
       ok = st.zone != null
     }
-    // Titreşim: sayım artınca / doğru duruma girince / ters yön uyarısı
+    // Titreşim: sayım artınca / doğru duruma girince / geri sayımda her saniye / uyarılar
     const L = t.last
+    const timed = kind === 'hold' || kind === 'closed' || kind === 'far'
     if ((kind === 'blinks' || kind === 'switches') && value > L.value) haptic('tick')
     else if (kind === 'laps' && Math.floor(value) > Math.floor(L.value)) haptic('hit')
-    else if ((kind === 'hold' || kind === 'closed' || kind === 'far') && ok && !L.ok) haptic('tick')
+    else if (timed && ok && (!L.ok || Math.floor(value) > Math.floor(L.value))) haptic('tick')
     if (wrongWay && !L.wrongWay) haptic('warning')
+    // "Gözlerini kapat"ta gözler açılınca hemen uyarı titreşimi (sesli hatırlatma remind() ile)
+    if (kind === 'closed' && L.ok && !ok && open && m.ts - vr.lastWarn >= WARN_GAP_MS) {
+      haptic('warning')
+      vr.lastWarn = m.ts
+    }
+    if (warn && m.ts - vr.lastWarn >= WARN_GAP_MS) {
+      cue(warn, true) // uyarı titreşimi + ses (ses kapalıysa yalnızca titreşim)
+      vr.lastWarn = m.ts
+      vr.lastCue = performance.now()
+    }
     t.last = { value, ok, wrongWay }
     if (m.ts - lastUi.current > 90 || value >= goalOf(cur, kind)) {
       lastUi.current = m.ts
-      setLive({ value, ok, wrongWay, gaze: g.v, calibrated: g.calibrated })
+      setLive({ value, ok, wrongWay, phone, gaze: g.v, calibrated: g.calibrated })
     }
   }
 
@@ -470,7 +511,8 @@ function feedback(sensor, live, ex) {
     case 'closed':
       return live.ok ? { hint: 'Gözlerin kapalı, bitince sesle haber vereceğim', tone: 'ok' } : { hint: 'Gözlerini kapat', tone: '' }
     case 'far':
-      return live.ok ? { hint: 'Gözlerin uzağa odaklı, böyle kal', tone: 'ok' } : { hint: 'Uzaktaki bir noktaya odaklan', tone: '' }
+      if (live.phone) return { hint: 'Telefona bakıyorsun · telefonun üstünden uzağa bak', tone: 'warn' }
+      return live.ok ? { hint: 'Gözlerin uzakta, böyle kal', tone: 'ok' } : { hint: 'Telefonun üstünden uzaktaki bir noktaya bak', tone: '' }
     case 'switches':
       return { hint: live.value === 0 ? 'Önce başparmağına, sonra uzağa bak' : 'Geçişleri sayıyorum', tone: '' }
     default:

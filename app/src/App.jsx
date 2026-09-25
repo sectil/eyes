@@ -20,7 +20,7 @@ import { SETS, todaySeconds } from './lib/routines.js'
 import Paywall from './screens/Paywall.jsx'
 import { getAccess } from './lib/subscription.js'
 import DistanceHud from './screens/DistanceHud.jsx'
-import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback } from './lib/native.js'
+import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics } from './lib/native.js'
 import { resolveAutoCalibration, estimateCalibration } from './lib/screenScale.js'
 import { BEST_KEY as SNAKE_BEST_KEY } from './lib/snake.js'
 import IPHONE_SCREENS from './lib/iphoneScreens.json'
@@ -158,6 +158,8 @@ export default function App() {
 
   // iPhone ses modu (sessiz tuşunda da ses) + ses tercihi değişikliklerini izle. Web'de etkisiz.
   useEffect(() => initFeedback(), [])
+  // Her düğmede hafif titreşim (ayarlardan titreşim kapalıysa hiçbir şey)
+  useEffect(() => installTapHaptics(), [])
 
   // Abonelik durumu (yalnızca iOS uygulamasında kilit; web'de açık)
   const [access, setAccess] = useState({ loading: true, premium: false })

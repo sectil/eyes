@@ -323,7 +323,8 @@ function createModelReader(model, opts) {
         reset()
         return out(null, false, false)
       }
-      if (eyeClosure(f) >= BLINK_CLOSE) {
+      // Kişisel kapanma eşiği (kalibrasyonda aşağı bakıştan): aşağı bakış "göz kapalı" sanılmasın
+      if (eyeClosure(f) >= (Number.isFinite(model.closeAt) ? model.closeAt : BLINK_CLOSE)) {
         dir = null
         return out(null, true, true)
       }
@@ -515,6 +516,15 @@ export function createGazeReader(opts = {}) {
 // --- Odak mesafesi (TrueDepth: focusMm = lookAtPoint, vergenceMm = konverjans) ---
 // VARSAYIM: 1 m ötesinde tahmin kabalaşır; "uzak" eşiği 800 mm, "yakın" (başparmak) 300 mm.
 // Eşikler ilk sürüm içindir, cihazda ayarlanacak.
+// Telefona (ekrana) mı bakıyor? Okuyucu çıktısından (createGazeReader().push).
+// Kalibrasyon v2'de yön = ekranın dışına bakış; ekranda gezinen bakış 'center' kalır.
+// 'down' da telefona sayılır: telefon göz hizasının altında tutulur, uzağa bakış yukarı/yana olur.
+// Döner true | false | null (bilinmiyor: yüz yok, gözler kapalı ya da okuyucu kalibre değil).
+export function lookingAtPhone(g) {
+  if (!g || !g.calibrated || !g.tracked || g.closed || g.dir == null) return null
+  return g.dir === 'center' || g.dir === 'down'
+}
+
 export const NEAR_MM = 300
 export const FAR_MM = 800
 

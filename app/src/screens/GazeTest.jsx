@@ -9,8 +9,9 @@ import '../styles/gazecal.css'
 // Göz takibi testi (Bilgi): canlı bakış noktası + ham sinyaller. "Verileri paylaş" son ~5 sn'lik
 // ham kareyi ve kalibrasyon modelini metin olarak paylaşır/kopyalar — sorun olursa geliştiriciye
 // tahmin yerine gerçek veri gönderilir. Kamera görüntüsü içermez, yalnızca sayılar.
-const KEEP_FRAMES = 150
-const FIELDS = ['tracked', 'gazeLeftX', 'gazeLeftY', 'gazeRightX', 'gazeRightY', 'lookAtX', 'lookAtY', 'lookAtZ', 'lookInLeft', 'lookInRight', 'lookOutLeft', 'lookOutRight', 'lookUpLeft', 'lookUpRight', 'lookDownLeft', 'lookDownRight', 'blinkLeft', 'blinkRight', 'mm']
+// ~20 sn (native ~30 Hz): telefona ve uzağa bakışı aynı kayıtta toplamaya yetsin
+const KEEP_FRAMES = 600
+const FIELDS = ['tracked', 'focusMm', 'vergenceMm', 'gazeLeftX', 'gazeLeftY', 'gazeRightX', 'gazeRightY', 'lookAtX', 'lookAtY', 'lookAtZ', 'lookInLeft', 'lookInRight', 'lookOutLeft', 'lookOutRight', 'lookUpLeft', 'lookUpRight', 'lookDownLeft', 'lookDownRight', 'blinkLeft', 'blinkRight', 'mm']
 const DIR_LABEL = { left: '← Sol', right: 'Sağ →', up: '↑ Yukarı', down: '↓ Aşağı', center: 'Orta' }
 
 const fmt = (v, d = 2) => (Number.isFinite(v) ? v.toFixed(d) : '—')
@@ -25,7 +26,7 @@ export default function GazeTest({ onBack, onCalibrate }) {
 
   const onFrame = (m) => {
     const g = reader.current.push(m)
-    const rec = { t: Math.round(m.ts) }
+    const rec = { t: Math.round(m.ts), dir: g.dir }
     for (const k of FIELDS) if (m[k] !== undefined) rec[k] = typeof m[k] === 'number' ? +m[k].toFixed(4) : m[k]
     frames.current.push(rec)
     if (frames.current.length > KEEP_FRAMES) frames.current.shift()

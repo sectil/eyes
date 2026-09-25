@@ -10,6 +10,11 @@
 
 
 export const GAZE_MODEL_KEY = 'gozolcum:gaze-model-v1'
+// Sürüm 2: yön hedefleri ekranın DIŞINDA (telefonun yanından/üstünden/altından bakış, ~20°).
+// Sürüm 1 ekran kenarındaki noktaları kullanıyordu; telefon ekranı dar olduğundan yatay göz dönüşü
+// ~±5° kalıyor ve cihazda sağ–sol ayrılamıyordu (Build 7). ±1 artık "ekranın dışına bakış" demek;
+// ekranın içinde gezinen bakış merkeze yakın kalır. Eski (v1) modeller yüklenmez → yeniden kalibrasyon.
+export const GAZE_MODEL_VERSION = 2
 export const TARGETS = ['center', 'left', 'right', 'up', 'down', 'center2']
 // VARSAYIM: en az bu kadar "ayrışma / gürültü" oranı yoksa eksen güvenilmez sayılır.
 export const MIN_SCORE = 2.5
@@ -90,6 +95,18 @@ export function fitAxis(center, neg, pos, features) {
   return best && best.score >= MIN_SCORE ? best : best ? { ...best, weak: true } : null
 }
 
+const closureOf = (f) => ((f.blinkLeft ?? 0) + (f.blinkRight ?? 0)) / 2
+
+// Aşağı bakışta göz kapağı iner ve ARKit bunu kısmen "kapanma" sayar. Kişinin aşağı bakıştaki
+// kapanma ortancasından kapanma eşiği: bunun altı "açık göz" sayılır (gerçek kırpma ~0,9+).
+// VARSAYIM: pay +0,2, eşik 0,5–0,85 aralığında.
+export const DOWN_CLOSE_MAX = 0.85
+export function closeThreshold(downFrames) {
+  const m = median((downFrames ?? []).map(closureOf))
+  if (!Number.isFinite(m)) return 0.5
+  return Math.max(0.5, Math.min(DOWN_CLOSE_MAX, m + 0.2))
+}
+
 // windows: { center: frames[], left, right, up, down, center2? }
 export function fitModel(windows) {
   const S = {}
@@ -99,7 +116,37 @@ export function fitModel(windows) {
   const x = S.left && S.right ? fitAxis(C, S.left, S.right, AXIS_FEATURES.x) : null
   const y = S.down && S.up ? fitAxis(C, S.down, S.up, AXIS_FEATURES.y) : null
   const ok = Boolean(x && !x.weak && y && !y.weak)
-  return { version: 1, ok, x, y }
+  return { version: GAZE_MODEL_VERSION, ok, x, y, closeAt: closeThreshold(windows.down) }
+}
+
+// Teşhis raporu (yalnızca sayılar; görüntü yok): her hedefte kare sayısı, kapanma ortancası ve
+// aday sinyallerin ortanca/yayılımı + her eksen için tüm adayların skoru. "Verileri paylaş" için.
+export function calibReport(windows, model) {
+  const r3 = (v) => (Number.isFinite(v) ? +v.toFixed(4) : null)
+  const targets = {}
+  for (const t of TARGETS) {
+    const fr = windows[t] ?? []
+    const sum = summarize(fr)
+    targets[t] = {
+      n: fr.length,
+      closure: r3(median(fr.map(closureOf))),
+      ...Object.fromEntries(Object.entries(sum).map(([k, v]) => [k, { med: r3(v.med), mad: r3(v.mad) }])),
+    }
+  }
+  const C = summarize([...(windows.center ?? []), ...(windows.center2 ?? [])])
+  const axisScores = (neg, pos, feats) =>
+    Object.fromEntries(
+      feats.map((k) => {
+        const a = fitAxis(C, summarize(windows[neg] ?? []), summarize(windows[pos] ?? []), [k])
+        return [k, a ? r3(a.score) : null]
+      }),
+    )
+  return {
+    targets,
+    scores: { x: axisScores('left', 'right', AXIS_FEATURES.x), y: axisScores('down', 'up', AXIS_FEATURES.y) },
+    minScore: MIN_SCORE,
+    model,
+  }
 }
 
 // Eksen normalizasyonu: merkez 0, pos hedefi +1, neg hedefi −1 (iki yanın kazancı ayrı).
@@ -126,7 +173,7 @@ export function applyModel(model, f, shift = { x: 0, y: 0 }) {
 export function loadGazeModel() {
   try {
     const m = JSON.parse(globalThis.localStorage?.getItem(GAZE_MODEL_KEY) ?? 'null')
-    return m && m.version === 1 && m.ok && m.x && m.y ? m : null
+    return m && m.version === GAZE_MODEL_VERSION && m.ok && m.x && m.y ? m : null
   } catch {
     return null
   }
