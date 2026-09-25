@@ -4,6 +4,7 @@ import { ProgressBar } from '../components/QuestionFlow.jsx'
 import DalgaVisual from '../components/DalgaVisual.jsx'
 import { haptic } from '../lib/native.js'
 import { createDalgaEngine } from '../lib/dalgaAudio.js'
+import { testUnlock } from '../lib/subscription.js'
 import {
   MODES, MODE_ORDER, DURATIONS, VALUES, WHY_MIN, RATE_MAX, EXP_N, ANSWER_TEXT,
   loadDalgaOpts, saveDalgaOpts, binauralPlan, makeRecord, factFor, experimentOf, experimentText,
@@ -65,6 +66,7 @@ export default function Dalga({ sessions = [], onSave, onExit }) {
   const [silent, setSilent] = useState(false)
   const [record, setRecord] = useState(null)
   const [error, setError] = useState(null)
+  const [diag, setDiag] = useState({ state: 'none', rate: 0, level: 0 })
   const engineRef = useRef(null)
   const wakeRef = useRef(null)
   const playSec = useRef(0)
@@ -86,6 +88,7 @@ export default function Dalga({ sessions = [], onSave, onExit }) {
     const id = setInterval(() => {
       const l = engine.left()
       setLeft(l)
+      setDiag({ state: engine.state(), rate: engine.sampleRate(), level: engine.level() })
       if (l <= 0) finish(false)
     }, 250)
     const hint = setInterval(() => setHintI((i) => i + 1), HINT_SEC * 1000)
@@ -176,7 +179,11 @@ export default function Dalga({ sessions = [], onSave, onExit }) {
           {opts.mode === 'guc' && <span className="dg-say">{why}</span>}
         </div>
         <div className="dg-bot">
+          {!paused && diag.state !== 'running' && diag.state !== 'none' && (
+            <button className="dg-kick" onClick={() => engine.kick()}>Ses başlamadı · dokun ve başlat</button>
+          )}
           <p className="dg-hint">{m.hints[hintI % m.hints.length]}</p>
+          {testUnlock() && <p className="dg-diag">ses: {diag.state} · {diag.rate} Hz · düzey {diag.level.toFixed(3)}</p>}
           <div className="dg-ctrl">
             <button className="dg-pp" onClick={togglePause} aria-label={paused ? 'Devam et' : 'Duraklat'}>{paused ? <Play size={24} /> : <Pause size={24} />}</button>
             <label className="dg-vol">Ses

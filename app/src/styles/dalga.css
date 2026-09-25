@@ -83,3 +83,5 @@
 .dg-card b.no { color: var(--warn); }
 .dg-card b.op { color: var(--lens-text); }
 @media (prefers-reduced-motion: reduce) { .dg-word { transition: none; } }
+.dg-kick { align-self: center; font: 700 0.95rem var(--font-body); border-radius: 14px; padding: 12px 16px; border: 0; background: var(--dg1); color: #06090d; cursor: pointer; }
+.dg-diag { margin: 0; text-align: center; font: 500 0.7rem var(--font-mono); color: rgba(238, 243, 246, 0.55); }

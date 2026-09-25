@@ -310,6 +310,14 @@ export function createDalgaEngine() {
     get paused() {
       return S.paused
     },
+    // Tanı: bağlam durumu ('running' | 'suspended' | 'interrupted' | 'closed' | 'none') ve örnekleme hızı
+    state: () => (ac ? ac.state : 'none'),
+    sampleRate: () => (ac ? ac.sampleRate : 0),
+    // Dokunuşla yeniden başlatma (iOS kesintiden sonra 'interrupted' kalabilir)
+    kick() {
+      if (!ac) return
+      ac.resume().catch(() => {})
+    },
     elapsed: () => (ac ? Math.max(0, Math.min(ac.currentTime, S.end) - S.t0) : 0),
     left: () => (ac ? Math.max(0, S.end - ac.currentTime) : 0),
     // Ses düzeyi (RMS, 0..~0.5)
