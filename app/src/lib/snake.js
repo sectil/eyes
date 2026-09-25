@@ -283,7 +283,7 @@ function localStore() {
 
 // trueDepth yoksa kontrol her zaman 'touch'. Varsa kayıtlı seçim 'touch' değilse 'eyes'.
 export function loadSnakeOpts(trueDepth, storage) {
-  const fallback = { control: trueDepth ? 'eyes' : 'touch', walls: 'classic' }
+  const fallback = { control: trueDepth ? 'eyes' : 'touch', walls: 'classic', practiced: false }
   try {
     const st = storage === undefined ? localStore() : storage
     const o = JSON.parse(st?.getItem(OPTS_KEY) || '{}') ?? {}
