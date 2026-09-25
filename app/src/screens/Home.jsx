@@ -160,6 +160,19 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           </span>
           <Sparkline values={reads.slice(-8).map((t) => t.maxReadingSpeed)} width={132} height={22} higherIsBetter color="var(--lens)" />
         </button>
+        {/* Kutucuk tanımlayan ölçüm modülleri (view.tile) — takılınca burada görünür */}
+        {registry.inSection('measure').map((m) => {
+          const tile = viewFor(m.id)?.tile?.(ctx)
+          if (!tile) return null
+          return (
+            <button key={m.id} className="home-tile" onClick={() => onStart(tile.route ?? (m.routes ?? [m.id])[0])}>
+              <span className="t">{tile.label}</span>
+              <span className="big">{tile.value}</span>
+              <span className="s">{tile.sub}</span>
+              <Sparkline values={tile.values ?? []} width={132} height={22} higherIsBetter={Boolean(tile.higherIsBetter)} color={tile.color ?? 'var(--chart-line)'} />
+            </button>
+          )
+        })}
       </div>
 
       {r.alert && (

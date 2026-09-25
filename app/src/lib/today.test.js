@@ -9,7 +9,7 @@ const plan = (tests = [], sessions = []) => todayPlan(registry.modules, { tests,
 describe('todayPlan', () => {
   it('yeni kullanıcı: haftalık test, okuma, egzersiz — ölçüm önce', () => {
     const p = plan()
-    expect(p.items.map((i) => i.id)).toEqual(['weekly', 'reading', 'routine'])
+    expect(p.items.map((i) => i.id)).toEqual(['weekly', 'reading', 'breath-count', 'routine'])
     expect(p.next.id).toBe('weekly')
     expect(p.next.route).toBe('weekly')
     expect(p.allDone).toBe(false)
@@ -17,7 +17,7 @@ describe('todayPlan', () => {
 
   it('haftalık zamanı gelmediyse günlük test girer; okuma haftası dolmadıysa okuma girmez', () => {
     const tests = [{ type: 'va-weekly', eye: 'OU', date: daysAgo(2) }, { type: 'reading', date: daysAgo(3) }]
-    const p = plan(tests)
+    const p = plan(tests, [{ type: 'breath-count', accuracy: 80, date: daysAgo(2) }])
     expect(p.items.map((i) => i.id)).toEqual(['daily', 'routine'])
     expect(p.next.title).toBe('Günlük test')
   })
@@ -25,7 +25,7 @@ describe('todayPlan', () => {
   it('bugün yapılanlar tamam görünür; egzersiz hedefi dolunca plan biter', () => {
     const today = NOW.toISOString()
     const tests = [{ type: 'va-weekly', eye: 'OU', date: today }, { type: 'reading', date: today }]
-    const sessions = [{ type: 'routine', setId: 'full', seconds: 200, date: today }]
+    const sessions = [{ type: 'routine', setId: 'full', seconds: 200, date: today }, { type: 'breath-count', accuracy: 80, date: today }]
     const p = plan(tests, sessions)
     expect(p.items.every((i) => i.done)).toBe(true)
     expect(p.allDone).toBe(true)
@@ -34,7 +34,7 @@ describe('todayPlan', () => {
 
   it('oyun süresi egzersiz hedefine sayılmaz; kalan süreyi kapatan en kısa set önerilir', () => {
     const tests = [{ type: 'va-weekly', eye: 'OU', date: daysAgo(1) }, { type: 'reading', date: daysAgo(1) }]
-    const sessions = [{ type: 'game', game: 'snake', seconds: 600, date: NOW.toISOString() }]
+    const sessions = [{ type: 'game', game: 'snake', seconds: 600, date: NOW.toISOString() }, { type: 'breath-count', accuracy: 80, date: daysAgo(1) }]
     const r = plan(tests, sessions).items.find((i) => i.id === 'routine')
     expect(r.done).toBe(false)
     expect(r.route).toMatch(/^routine-/)

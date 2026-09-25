@@ -5,7 +5,7 @@ import { VIEWS } from './views.js'
 describe('modül soketi: gerçek modüller', () => {
   it('hepsi geçerli, sorun yok', () => {
     expect(registry.problems).toEqual([])
-    expect(registry.modules.map((m) => m.id).sort()).toEqual(['blink', 'daily', 'reading', 'routine', 'snake', 'track', 'weekly'])
+    expect(registry.modules.map((m) => m.id).sort()).toEqual(['blink', 'breath-count', 'daily', 'reading', 'routine', 'snake', 'track', 'weekly'])
   })
   it('her modülün ekranı (view) var ve ekranı çiziyor', () => {
     for (const m of registry.modules) {
