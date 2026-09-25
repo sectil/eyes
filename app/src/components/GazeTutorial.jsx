@@ -3,7 +3,9 @@ import '../styles/gazetutorial.css'
 // Yılan "gözle nasıl oynanır" animasyonu: üstte mini tahta, altta bir kişi. Kişinin gözbebekleri sırayla
 // sağa → yukarı → sola → aşağı, tahtanın DIŞINA kayar; gözbebeği kenara vardığı anda yılan o yöne döner ve
 // kenardaki ok dolar. Baş sabittir (öğretilen davranış: başını değil gözünü oynat).
-// SVG + CSS; ek kütüphane yok. frame: 0–3 verilirse sabit kare (hareket azaltma / ekran görüntüsü).
+// SVG + CSS; ek kütüphane yok. frame: 0–3 verilirse sabit kare (pratik adımı, hareket azaltma, ekran görüntüsü);
+// sabit karede gözbebeği SVG transform ÖZNİTELİĞİYLE konumlanır (iOS WebKit'te <g> üzerinde inline CSS transform
+// güvenilir değil: Build 17'de pratik komutlarında gözler oynamadı). Animasyonlu karede CSS animasyonu kullanılır.
 // Yön sırası: 0 sağ, 1 yukarı, 2 sol, 3 aşağı. Döngü 8 sn (her yön 2 sn).
 export const DIRS = ['right', 'up', 'left', 'down']
 const PUPIL = { right: [5.2, 0], up: [0, -3.2], left: [-5.2, 0], down: [0, 3.4] }
@@ -12,7 +14,7 @@ export default function GazeTutorial({ frame = null, className = '', label = tru
   const fixed = frame != null ? DIRS[frame % 4] : null
   const cls = `gt ${fixed ? `gt-fixed gt-${fixed}` : 'gt-anim'} ${className}`
   return (
-    <svg className={cls} viewBox="0 0 240 372" role="img" aria-label="Gözle oynama: dönmek istediğin yöne, tahtanın dışına kısaca bak; yılan o yöne döner">
+    <svg className={cls} viewBox="0 0 240 372" role="img" aria-label="Gözle oynama: dönmek istediğin yöne, tahtanın kenarına doğru bak; yılan o yöne döner">
       <defs>
         <linearGradient id="gt-skin" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#f0c4a6" />
@@ -103,14 +105,14 @@ export default function GazeTutorial({ frame = null, className = '', label = tru
           <ellipse cx="97" cy="211" rx="12.5" ry="7.2" fill="url(#gt-sclera)" />
           <ellipse cx="143" cy="211" rx="12.5" ry="7.2" fill="url(#gt-sclera)" />
           <g clipPath="url(#gt-eye-l)">
-            <g className="gt-pupil" style={fixed ? { transform: `translate(${PUPIL[fixed][0]}px, ${PUPIL[fixed][1]}px)` } : undefined}>
+            <g className="gt-pupil" transform={fixed ? `translate(${PUPIL[fixed][0]} ${PUPIL[fixed][1]})` : undefined}>
               <circle cx="97" cy="211" r="5.6" fill="url(#gt-iris)" />
               <circle cx="97" cy="211" r="2.6" fill="#0a0f14" />
               <circle cx="95" cy="209" r="1.1" fill="#fff" opacity="0.9" />
             </g>
           </g>
           <g clipPath="url(#gt-eye-r)">
-            <g className="gt-pupil" style={fixed ? { transform: `translate(${PUPIL[fixed][0]}px, ${PUPIL[fixed][1]}px)` } : undefined}>
+            <g className="gt-pupil" transform={fixed ? `translate(${PUPIL[fixed][0]} ${PUPIL[fixed][1]})` : undefined}>
               <circle cx="143" cy="211" r="5.6" fill="url(#gt-iris)" />
               <circle cx="143" cy="211" r="2.6" fill="#0a0f14" />
               <circle cx="141" cy="209" r="1.1" fill="#fff" opacity="0.9" />

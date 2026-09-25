@@ -31,6 +31,8 @@ import {
 } from 'lucide-react'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { createGazeReader, GAZE_FULL_DEG } from '../lib/gaze.js'
+import { FEATURES, loadGazeModel } from '../lib/gazeCalib.js'
+import { shareText } from '../lib/share.js'
 import { haptic } from '../lib/native.js'
 import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
 import { formatDuration } from '../lib/stats.js'
@@ -69,6 +71,10 @@ const PRACTICE_DIRS = ['right', 'up', 'left', 'down']
 const PRACTICE_TEXT = { right: 'Sağa bak', up: 'Yukarı bak', left: 'Sola bak', down: 'Aşağı bak' }
 const PRACTICE_HINT = { right: 'tahtanın sağ kenarının dışına', up: 'tahtanın üstünden dışarı', left: 'tahtanın sol kenarının dışına', down: 'tahtanın altından dışarı' }
 const AUTO_PAUSE = new Set(['face', 'eyes', 'calib'])
+// Teşhis: pratik ve oyun sırasında okuyucu çıktısı + ham açılar (yalnızca sayılar; görüntü yok). Son ~20 sn.
+// Oyun sonu / duraklatma ekranındaki "Bakış verisini paylaş" ile geliştiriciye gönderilir (kalibrasyondaki gibi).
+const DEBUG_FRAMES = 600
+const r2 = (v) => (Number.isFinite(v) ? +v.toFixed(2) : null)
 
 // VARSAYIM: aşağıdaki eşik ve süreler ilk sürüm içindir; gerçek cihazda ayarlanacak.
 // Bakış eşikleri oyunda Routine'dekinden (8°/5°) yüksek: tahtanın içinde gezinen bakış
@@ -435,6 +441,13 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
   const pauseReasonRef = useRef(null)
   const bestRef = useRef(best)
   const gameRef = useRef(null)
+  const debugRef = useRef([])
+  const [shareNote, setShareNote] = useState('')
+  async function shareGazeDebug() {
+    const payload = JSON.stringify({ app: 'EyeTrail', kind: 'snake-gaze', build: import.meta.env.VITE_APP_BUILD ?? 'web', enterDeg: ENTER_DEG, exitDeg: EXIT_DEG, model: loadGazeModel(), frames: debugRef.current })
+    const r = await shareText('EyeTrail yılan bakış verisi', payload)
+    setShareNote(r === 'shared' ? 'Paylaşıldı.' : r === 'copied' ? 'Panoya kopyalandı.' : 'Kopyalanamadı.')
+  }
   const prevRef = useRef([])
   const accRef = useRef(0)
   const playMsRef = useRef(0)
@@ -657,6 +670,11 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
     const g = readerRef.current.push(m)
     const f = faceRef.current
     const ts = Number.isFinite(m.ts) ? m.ts : performance.now()
+    if (phaseRef.current === 'playing' || phaseRef.current === 'practice') {
+      const d = debugRef.current
+      d.push({ t: Math.round(ts), ph: phaseRef.current === 'playing' ? 'p' : 'x', cx: r2(FEATURES.camX(m)), cy: r2(FEATURES.camY(m)), ax: r2(FEATURES.angX(m)), ay: r2(FEATURES.angY(m)), hx: r2(FEATURES.headX(m)), hy: r2(FEATURES.headY(m)), vx: r2(g.v?.x), vy: r2(g.v?.y), dir: g.dir ?? null, tr: g.tracked ? 1 : 0, cl: g.closed ? 1 : 0 })
+      if (d.length > DEBUG_FRAMES) d.splice(0, d.length - DEBUG_FRAMES)
+    }
     if (g.tracked) f.lastFaceTs = ts
     f.calibrated = g.calibrated
     if (g.closed) {
@@ -1086,7 +1104,7 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
         <span className="eyebrow">Şimdi sen dene · {Math.min(practice.i + 1, PRACTICE_DIRS.length)}/{PRACTICE_DIRS.length}</span>
         <GazeTutorial frame={PRACTICE_DIRS.indexOf(t)} label={false} className="snake-practice-art" />
         <h2>{done ? 'Harika, hazırsın' : PRACTICE_TEXT[t]}</h2>
-        {!done && <p className="snake-overlay-sub">Başını çevirmeden, gözünle {PRACTICE_HINT[t]} bak ve kısa bir an tut.</p>}
+        {!done && <p className="snake-overlay-sub">Gözünle {PRACTICE_HINT[t]} bak ve kısa bir an tut; başın hafifçe dönebilir.</p>}
         <div className="snake-practice-dots" aria-hidden="true">
           {PRACTICE_DIRS.map((d, i) => <i key={d} className={i < practice.i ? 'done' : i === practice.i ? 'now' : ''} />)}
         </div>
@@ -1129,6 +1147,9 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
               <Play size={18} aria-hidden="true" /> Devam et
             </button>
             <button type="button" className="link-btn" onClick={startGame}>Baştan başla</button>
+            {eyes && debugRef.current.length > 0 && (
+              <button type="button" className="link-btn" onClick={shareGazeDebug}>Bakış verisini paylaş{shareNote ? ` · ${shareNote}` : ''}</button>
+            )}
           </>
         )}
       </div>
@@ -1167,6 +1188,9 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
             Çık
           </button>
         </div>
+        {eyes && debugRef.current.length > 0 && (
+          <button type="button" className="link-btn" onClick={shareGazeDebug}>Bakış verisini paylaş{shareNote ? ` · ${shareNote}` : ''}</button>
+        )}
       </div>
     )
   }
