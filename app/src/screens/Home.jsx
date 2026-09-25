@@ -1,4 +1,5 @@
-import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame, Lock, Eye } from 'lucide-react'
+import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame, Lock, Eye, UserRound } from 'lucide-react'
+import { profileComplete } from '../lib/profile.js'
 import { DAILY_GOAL_MIN, formatMin, todaySeconds } from '../lib/routines.js'
 import { Sparkline, IrisMark } from '../components/ui.jsx'
 import { analyzeTrend, trendMessage } from '../lib/trend.js'
@@ -91,7 +92,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   const tw = trendWords(r)
   const reads = tests.filter((t) => t.type === 'reading' && Number.isFinite(t.maxReadingSpeed))
   const todaySec = todaySeconds(exercise)
-  const plan = todayPlan(registry.modules, { tests, sessions, now })
+  const plan = todayPlan(registry.modules, { tests, sessions, now, profile: settings.profile })
   // Oyunla aynı kural (SnakeGame loadSnakeOpts): TrueDepth varsa ve kayıtlı seçim 'touch'
   // değilse gözle açılır. VARSAYIM: trueDepth prop'u verilmemişse mesafe yöntemine göre tahmin edilir.
   const hasTrueDepth = trueDepth ?? settings.distance?.method === 'truedepth'
@@ -124,6 +125,17 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
             <span className="sub">Oyunlar, egzersizler ve testler mola bitince açılır. Nefes ve göz kırpma açık.</span>
           </span>
           <span className="eb-time">{lockLeft}</span>
+        </button>
+      )}
+
+      {!profileComplete(settings.profile) && (
+        <button type="button" className="eb-banner" onClick={() => onStart('profile')}>
+          <UserRound size={22} aria-hidden="true" style={{ color: 'var(--accent)', flex: 'none' }} />
+          <span className="grow">
+            <strong>Profilini tamamla</strong>
+            <span className="sub">Ekran, uyku ve stres; 2 dakika. Plan ve mola süreleri sana göre ayarlanır.</span>
+          </span>
+          <ChevronRight size={18} aria-hidden="true" style={{ color: 'var(--ink-3)' }} />
         </button>
       )}
 

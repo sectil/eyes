@@ -3,6 +3,7 @@
 import { SESSION_TYPE, PATTERNS, BREATH_OPTS_KEY, BREATH_SAFETY_KEY, PROGRAM_DAY_SEC, isBreath, programProgress } from '../../lib/breath.js'
 import { doneToday } from '../../lib/today.js'
 import { NBSP, join, durationPart } from '../../lib/format.js'
+import { profileSignals } from '../../lib/profile.js'
 
 export default {
   id: 'breath',
@@ -24,9 +25,11 @@ export default {
       }
     },
   },
-  // Program (günde 5 dk × 28 gün) yalnızca kullanıcı bir kez başladıysa plana girer (VARSAYIM: zorlama yok)
-  today({ sessions, now }) {
-    if (!sessions.some(isBreath)) return null
+  // Program (günde 5 dk × 28 gün) kullanıcı bir kez başladıysa plana girer (VARSAYIM: zorlama yok).
+  // Profil uyku ≤4 ya da stres yüksekse (lib/profile.js) daha önce başlamamış olsa da plana girer.
+  today({ sessions, now, profile }) {
+    const sig = profile ? profileSignals(profile) : null
+    if (!sessions.some(isBreath) && !(sig && (sig.poorSleep || sig.highStress))) return null
     const p = programProgress(sessions, now)
     return { title: 'Nefes', minutes: PROGRAM_DAY_SEC / 60, done: p.todayDone || doneToday(sessions, SESSION_TYPE, now) }
   },

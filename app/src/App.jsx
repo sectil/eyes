@@ -3,11 +3,12 @@ import { store } from './lib/storage.js'
 import { TabBar } from './components/ui.jsx'
 import RestLock from './components/RestLock.jsx'
 import EyeBudgetPill from './components/EyeBudgetPill.jsx'
-import { recordTime, eyeStatus, beginRest, resetBudget, flushBudget, EXHAUSTED_EVENT } from './lib/eyeBudgetStore.js'
+import { recordTime, eyeStatus, beginRest, resetBudget, flushBudget, setShortBudget, EXHAUSTED_EVENT } from './lib/eyeBudgetStore.js'
 import { LIMITS as EYE_LIMITS } from './lib/eyeBudget.js'
 import { onRestNotifyTap } from './lib/restNotify.js'
 import Home from './screens/Home.jsx'
-import Screening from './screens/Screening.jsx'
+import Profile from './screens/Profile.jsx'
+import { screeningFromProfile, profileFromScreening, profileSignals } from './lib/profile.js'
 import CardCalibration, { calibrationStillValid } from './screens/CardCalibration.jsx'
 import DistanceCalibration from './screens/DistanceCalibration.jsx'
 import Progress from './screens/Progress.jsx'
@@ -256,8 +257,19 @@ export default function App() {
   }
 
   // --- Kurulum akışı (web: 3 adım; iPhone otomatik ekranla: 2 adım) ---
+  // Profil anketi (lib/profile.js): kurulumun 1. adımı. Eski kayıtlarda (yalnızca screening) Bugün'de
+  // "Profilini tamamla" kartı çıkar; Bilgi → Profilim'den düzenlenir.
+  const saveProfile = (p) => {
+    store.setSetting('profile', p)
+    store.setSetting('screening', screeningFromProfile(p))
+    setShortBudget(profileSignals(p).heavyScreen)
+    refresh()
+  }
   if (!settings.screening || settings.screening.referred) {
-    return <Screening total={setupTotal} onDone={(s) => { store.setSetting('screening', s); refresh() }} />
+    return <Profile initial={settings.profile ?? profileFromScreening(settings.screening)} step={1} total={setupTotal} onDone={saveProfile} />
+  }
+  if (screen === 'profile') {
+    return <Profile initial={settings.profile ?? profileFromScreening(settings.screening)} editing onDone={(p) => { saveProfile(p); go(lastTab) }} onBack={() => go(lastTab)} />
   }
   if (!isIOSApp() && (!calibrationStillValid(settings.calibration) || screen === 'recalibrate')) {
     return (

@@ -28,7 +28,7 @@ const KEEP_MS = 26 * 60 * MIN // bu kadar eski parçalar atılır (günlük hesa
 const MERGE_GAP_MS = 2000
 export const REASONS = ['budget', 'hourly', 'daily', 'symptom']
 
-export const emptyBudget = () => ({ v: 1, segs: [], rest: null, rests: [], motion: null })
+export const emptyBudget = () => ({ v: 1, segs: [], rest: null, rests: [], motion: null, short: false })
 
 const overlap = (s, from, to) => Math.max(0, Math.min(s.end, to) - Math.max(s.start, from))
 const sum = (segs, from, to, kind) => segs.reduce((a, s) => a + (!kind || s.kind === kind ? overlap(s, from, to) : 0), 0)
@@ -77,7 +77,8 @@ export function check(state, now) {
   const r = state.rest
   if (r && r.until > now) return { locked: true, reason: r.reason, until: r.until, leftMs: r.until - now, due: null }
   const u = usage(state, now)
-  const budgetMs = state.motion === true ? LIMITS.budgetMotionMs : LIMITS.budgetMs
+  // Kısa bütçe (3 dk): hareket tutması geçmişi YA DA profil (günde 6+ saat ekran; lib/profile.js profileSignals)
+  const budgetMs = state.motion === true || state.short === true ? LIMITS.budgetMotionMs : LIMITS.budgetMs
   let due = null
   if (u.dayEye >= LIMITS.dayEyeMs) due = 'daily'
   else if (u.hour >= LIMITS.hourMs) due = 'hourly'
@@ -108,6 +109,7 @@ export function settle(state, now) {
 }
 
 export const setMotion = (state, yes) => ({ ...state, motion: yes === true ? true : yes === false ? false : null })
+export const setShort = (state, yes) => ({ ...state, short: yes === true })
 
 export const REASON_TEXT = {
   budget: { title: 'Gözlerin dinleniyor', sub: '5 dakikalık göz çalışmasından sonra kısa bir mola.' },
@@ -138,6 +140,7 @@ export function loadBudget(storage) {
       rest,
       rests: Array.isArray(o.rests) ? o.rests.filter((r) => r && REASONS.includes(r.reason) && Number.isFinite(r.until)) : [],
       motion: o.motion === true ? true : o.motion === false ? false : null,
+      short: o.short === true,
     }
   } catch {
     return emptyBudget()

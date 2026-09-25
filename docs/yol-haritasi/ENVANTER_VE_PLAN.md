@@ -95,7 +95,7 @@ iOS'ta kalır. Bu yorum yanlışsa ne kastettiğini yaz.
 
 ## 4. Yapım sırası (her adım ayrı TestFlight; onay bekliyor)
 0. **Build 16**: kalibrasyon v2.1 cihazda doğrulama (nokta yeşil, "Hazır").
-1. **Profil anketi** (3a) + profil nesnesi + modüllerin profili okuması. ~1 derleme.
+1. **Profil anketi** (3a) + profil nesnesi + modüllerin profili okuması. ~1 derleme. **YAPILDI** (Build 18): `lib/profile.js`, `screens/Profile.jsx`; ekran 6+ sa → mola bütçesi 3 dk; uyku ≤4 / stres ≥5 → nefes plana girer; nöbet cevabı `flashSafe` olarak saklanır (Hızlı Bakış kapısı, adım 4'te kullanılacak). Eski kayıtlar: Bugün'de "Profilini tamamla" kartı; Bilgi → Profilim.
 2. **Sistem bütünlüğü** (§2): Jev sinyalleri, Gelişim satırları, kalibrasyon puanı. ~1 derleme.
 3. **Farkındalık I**: 49 merkez + 50–52+56 Hızlı Bakış (native süre hassasiyeti: 133 ms gösterim
    için `requestAnimationFrame` ölçümü; 08 raporu web'de <100 ms güvenilmez diyor → 133 ms sınır,

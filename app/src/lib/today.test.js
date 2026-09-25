@@ -72,3 +72,14 @@ describe('yardımcılar', () => {
     expect(isSameDay({ date: 'bozuk' }, NOW)).toBe(false)
   })
 })
+
+describe('profil → plan', () => {
+  it('uyku ≤4 ya da stres yüksekse nefes hiç yapılmamış olsa da plana girer', () => {
+    const base = { tests: [], sessions: [], now: NOW }
+    expect(todayPlan(registry.modules, base).items.map((i) => i.id)).not.toContain('breath')
+    const poor = { ...base, profile: { sleep: 3, stress: { control: 0, overwhelmed: 0 } } }
+    expect(todayPlan(registry.modules, poor).items.map((i) => i.id)).toContain('breath')
+    const fine = { ...base, profile: { sleep: 8, stress: { control: 1, overwhelmed: 1 } } }
+    expect(todayPlan(registry.modules, fine).items.map((i) => i.id)).not.toContain('breath')
+  })
+})

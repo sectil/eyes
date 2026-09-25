@@ -119,3 +119,19 @@ describe('fmtLeft ve kalıcılık', () => {
     expect(loadBudget(null)).toEqual(emptyBudget())
   })
 })
+
+describe('kısa bütçe (profil: 6+ saat ekran)', () => {
+  it('short bayrağı bütçeyi 3 dk yapar; yükleme/kaydetme korur', async () => {
+    const { emptyBudget, setShort, addTime, check, LIMITS, saveBudget, loadBudget } = await import('./eyeBudget.js')
+    const T0 = 1_000_000
+    let st = setShort(emptyBudget(), true)
+    st = addTime(st, 'eye', T0, T0 + 3 * 60000)
+    expect(check(st, T0 + 3 * 60000).due).toBe('budget')
+    expect(check(st, T0 + 3 * 60000).budgetMs).toBe(LIMITS.budgetMotionMs)
+    const mem = new Map()
+    const storage = { getItem: (k) => mem.get(k) ?? null, setItem: (k, v) => mem.set(k, String(v)) }
+    saveBudget(st, storage)
+    expect(loadBudget(storage).short).toBe(true)
+    expect(check(setShort(st, false), T0 + 3 * 60000).due).toBeNull()
+  })
+})

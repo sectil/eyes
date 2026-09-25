@@ -6,7 +6,8 @@ const KEY = 'gozolcum:v1'
 const EMPTY = () => ({
   version: 1,
   settings: {
-    screening: null, // { date, flags: [], referred: bool }
+    screening: null, // { date, flags: [], referred: bool } — kurulum kapısı; profilden türetilir (lib/profile.js)
+    profile: null, // lib/profile.js emptyProfile(): 11 maddelik profil anketi
     calibration: null, // { pxPerMm, dpr, screenW, screenH, date }
     distance: null, // { focalPx, irisPxAt40, date }
     reminder: null, // { time: 'HH:MM', weeklyTarget: 3 }

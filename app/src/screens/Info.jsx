@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import {
   BookOpen, CreditCard, Camera, Bell, Download, Trash, ChevronRight, ShieldCheck,
-  Volume2, VolumeX, Vibrate, VibrateOff, Smartphone, CircleCheck, CircleAlert, Crosshair, Sparkles,
+  Volume2, VolumeX, Vibrate, VibrateOff, Smartphone, CircleCheck, CircleAlert, Crosshair, Sparkles, UserRound,
 } from 'lucide-react'
 import { PageHeader, ThemeSwitch } from '../components/ui.jsx'
 import PrefToggle from '../components/PrefToggle.jsx'
@@ -193,6 +193,7 @@ export default function Info({ onGo, onReset, exportJSON, distanceSkipped, iosAp
       <section className="stack">
         <span className="eyebrow">Ölçüm ayarları</span>
         <div className="list">
+          <Row Icon={UserRound} label="Profilim" sub="Yaş, gözlük, ekran, uyku, stres" onClick={() => onGo('profile')} />
           {!iosApp && <Row Icon={CreditCard} label="Ekran kalibrasyonu" sub="Kartla yeniden ölç" onClick={() => onGo('recalibrate')} />}
           <Row
             Icon={Camera}

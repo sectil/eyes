@@ -3,7 +3,7 @@
 // modül listesi parametre olarak gelir).
 //
 // manifest.today(ctx) → null | { title, minutes, done, route? }
-//   ctx = { tests, sessions, now }
+//   ctx = { tests, sessions, now, profile? }  (profile: lib/profile.js; modül profileSignals ile okur)
 //   null: modül bugün plana girmiyor (ör. haftalık test zamanı gelmedi)
 
 export const WEEK_MS = 7 * 86400000
