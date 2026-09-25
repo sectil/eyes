@@ -121,7 +121,7 @@ Araştırma sonucu:
   doğrulandı). Yapılabilir: 1–3 MB Core ML ikili sınıflandırıcı (CelebA ticari kullanım dışı → kullanılmaz; MeGlass/MegaFace
   lisansı hukukla doğrulanmalı). Apple 5.1.2(vi) engel değil (cihazda evet/hayır, kare saklanmaz).
 Seçenekler:
-- **A (önerilen, hemen):** Yönerge "yakını normalde nasıl görüyorsan öyle ölç (okuma/progresif gözlük varsa tak); her
+- **A (önerilen, hemen) — YAPILDI (Build 19):** Yönerge "yakını normalde nasıl görüyorsan öyle ölç (okuma/progresif gözlük varsa tak); her
   seferinde aynı". Koşul alanı zorunlu ve ayrıntılı: yok / okuma gözlüğü / progresif-bifokal / yalnız uzak gözlüğü / lens.
   Trend ve Gelişim yalnızca aynı koşuldaki ölçümleri birleştirir; koşul değişince yeni baz çizgisi. "Gözlüğün değişti mi?"
   sorusu (yeni numara → yeni baz). Numara isteğe bağlı meta-veri (Profil'de), hesaba girmez.

@@ -11,6 +11,7 @@ import { logMARForHeight, renderSpec, smallestDrawableLogMAR, snellen20, snellen
 import { randomDirection, PLANS, UNSEEN } from '../lib/zest.js'
 import { createAcuityStaircase, finalizeEstimate, remainingDisplay } from '../lib/staircase.js'
 import '../styles/acuity.css'
+import '../styles/profile.css' // pf-chips
 
 const EYES = [
   { id: 'R', title: 'Sağ göz', cover: 'Sol gözünü avucunla hafifçe kapat (bastırmadan).' },
@@ -98,17 +99,26 @@ function AcuityScale({ value }) {
   )
 }
 
-// Test sırasında gözlük/lens durumu. Klinik kural "çıkar" değil "her seferinde aynı koşul":
-// gözlüklü ve gözlüksüz ölçümler karşılaştırılamaz. Her kayda yazılır, bir sonraki testte hatırlatılır.
+// Test sırasında gözlük/lens durumu: ALIŞKANLIK koşulu (yakını normalde nasıl görüyorsan öyle; DSÖ "presenting",
+// Peek Acuity, V@home, HSVA; bkz. docs/arastirma/ajan-raporlari/19_gozluk_ve_yakin_test.md). Kural "çıkar" değil
+// "her seferinde aynı koşul": farklı koşuldaki ölçümler birleştirilmez (lib/trend.js comparableTests).
+// Gözlük numarası sorulmaz ve hesaba katılmaz (numaradan keskinlik tahmini için doğrulanmış model yok).
 export const WEAR = [
-  { id: 'glasses', text: 'Gözlüklü' },
-  { id: 'contacts', text: 'Lensli' },
   { id: 'none', text: 'Gözlüksüz' },
+  { id: 'reading', text: 'Okuma gözlüğü' },
+  { id: 'progressive', text: 'Progresif / bifokal' },
+  { id: 'distance', text: 'Yalnız uzak gözlüğü' },
+  { id: 'contacts', text: 'Lens' },
 ]
-const wearText = (id) => WEAR.find((w) => w.id === id)?.text.toLocaleLowerCase('tr') ?? null
+const LEGACY_WEAR = { glasses: 'gözlüklü' } // eski kayıtlar (Build ≤18)
+const wearText = (id) => LEGACY_WEAR[id] ?? WEAR.find((w) => w.id === id)?.text.toLocaleLowerCase('tr') ?? null
+const withCorrection = (id) => Boolean(id) && id !== 'none'
 // lastCorrection: önceki görme testindeki seçim ('glasses' | 'contacts' | 'none' | null)
 export default function AcuityTest({ plan = 'daily', calibration, distanceCal, lastCorrection = null, onFinish, onCancel }) {
-  const [correction, setCorrection] = useState(lastCorrection)
+  // Eski 'glasses' kaydı: hangi gözlük olduğu seçtirilir; seçilen tür eski seriyle birleşir (lib/trend.js sameCondition)
+  const legacy = lastCorrection === 'glasses'
+  const [correction, setCorrection] = useState(legacy ? null : lastCorrection)
+  const [changed, setChanged] = useState(false) // gözlük/lens numarası değişti → yeni baz çizgisi
   const planSpec = PLANS[plan]
   const { warmup } = planSpec
   const pxPerMm = calibration.pxPerMm
@@ -225,6 +235,7 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
       eye: eye.id,
       logMAR: +fin.logMAR.toFixed(3),
       correction,
+      ...(changed && withCorrection(correction) ? { newBaseline: true } : {}),
       sd: +est.sd.toFixed(3),
       trials: est.trials,
       descentTrials: est.descentTrials,
@@ -316,19 +327,31 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
           </div>
           {eyeIdx === 0 && (
             <div className="card stack" style={{ gap: 8 }}>
-              <span className="eyebrow">Bu testi nasıl yapıyorsun?</span>
-              <div className="segmented" role="group" aria-label="Gözlük veya lens">
+              <span className="eyebrow">Yakını normalde nasıl görüyorsun?</span>
+              <p className="muted small">Telefonu ve kitabı günlük hayatta nasıl okuyorsan testi öyle yap: okuma ya da progresif gözlük kullanıyorsan tak, kullanmıyorsan takma.</p>
+              <div className="pf-chips" role="radiogroup" aria-label="Gözlük veya lens">
                 {WEAR.map((w) => (
-                  <button key={w.id} type="button" aria-pressed={correction === w.id} onClick={() => setCorrection(w.id)}>{w.text}</button>
+                  <button key={w.id} type="button" role="radio" aria-checked={correction === w.id} className={`pf-chip${correction === w.id ? ' on' : ''}`} onClick={() => setCorrection(w.id)}>{w.text}</button>
                 ))}
               </div>
               <p className="muted small">
-                {lastCorrection && correction && correction !== lastCorrection
-                  ? `Geçen sefer ${wearText(lastCorrection)} ölçtün. Farklı koşulda ölçüm önceki sonuçlarla karşılaştırılamaz; sonucu ayrı değerlendir.`
+                {legacy
+                  ? 'Geçen sefer gözlüklü ölçtün; hangi gözlükle olduğunu seç. Gözlük seçersen serin devam eder.'
+                  : lastCorrection && correction && correction !== lastCorrection
+                  ? `Geçen sefer ${wearText(lastCorrection)} ölçtün. Bu ölçüm yeni bir seri başlatır; farklı koşuldaki sonuçlar birleştirilmez.`
                   : lastCorrection
-                    ? `Geçen sefer ${wearText(lastCorrection)} ölçtün; aynı şekilde yap ki değişim gerçek olsun.`
-                    : 'Her seferinde aynı şekilde ölç: gözlük varsa hep tak, yoksa hiç takma. Değişimi ancak böyle görürüz.'}
+                    ? `Geçen sefer de ${wearText(lastCorrection)} ölçtün; aynı koşul, aynı seri.`
+                    : 'Her seferinde aynı koşulda ölç. Değişimi ancak böyle görürüz.'}
               </p>
+              {withCorrection(correction) && (correction === lastCorrection || (legacy && correction !== 'contacts')) && (
+                <label className="choice">
+                  <input type="checkbox" checked={changed} onChange={(e) => setChanged(e.target.checked)} />
+                  <span>Gözlük / lens numaram geçen ölçümden beri değişti</span>
+                </label>
+              )}
+              {changed && withCorrection(correction) && (correction === lastCorrection || (legacy && correction !== 'contacts')) && (
+                <p className="muted small">Yeni numarayla yeni bir seri başlar; eski ölçümlerle karşılaştırılmaz. Numaranın kendisi hesaba girmez.</p>
+              )}
             </div>
           )}
           {distanceChip}

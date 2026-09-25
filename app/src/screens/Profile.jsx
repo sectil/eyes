@@ -94,7 +94,14 @@ export default function Profile({ initial = null, step = 1, total = 3, editing =
           <section className="stack">
             <h2>Gözlük / lens durumun</h2>
             <Radios name="correction" options={CORRECTION} value={p.correction} onChange={(v) => set({ correction: v })} />
-            <p className="muted small">Testlerde uzak gözlüğün varsa tak, okuma gözlüğünü takma.</p>
+            <p className="muted small">Görme testini yakını normalde nasıl görüyorsan öyle yaparsın; test başında her seferinde sorulur.</p>
+            {p.correction && p.correction !== 'none' && (
+              <label className="field">
+                <span>Gözlük / lens numaran (isteğe bağlı)</span>
+                <input className="input" type="text" maxLength={40} placeholder="Örn. yakın +2.00 / uzak −1.25" value={p.prescription ?? ''} onChange={(e) => set({ prescription: e.target.value })} />
+                <span className="muted small">Yalnızca kayıt için; sonuç hesabına girmez. Numara değişince testte "numaram değişti" işaretle.</span>
+              </label>
+            )}
           </section>
           <section className="stack">
             <h2>Son göz muayenen</h2>

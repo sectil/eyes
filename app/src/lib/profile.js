@@ -75,6 +75,7 @@ export const emptyProfile = () => ({
   date: null,
   ageBand: null,
   correction: null,
+  prescription: null, // isteğe bağlı serbest metin (≤40); HESABA GİRMEZ (rapor 19 §2)
   lastExam: null,
   flags: [],
   seizure: null,
@@ -96,6 +97,7 @@ export function normalizeProfile(raw) {
     date: typeof raw.date === 'string' ? raw.date : null,
     ageBand: oneOf(AGE_BANDS, raw.ageBand),
     correction: oneOf(CORRECTION, raw.correction),
+    prescription: typeof raw.prescription === 'string' && raw.prescription.trim() ? raw.prescription.trim().slice(0, 40) : null,
     lastExam: oneOf(EXAM, raw.lastExam),
     flags: Array.isArray(raw.flags) ? raw.flags.filter((f) => RED_FLAGS.some((r) => r.id === f)) : [],
     seizure: oneOf(SEIZURE, raw.seizure),

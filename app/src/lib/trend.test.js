@@ -83,3 +83,48 @@ describe('trendMessage', () => {
     expect(trendMessage({ phase: 'tracking', alert: null, trend: 'improving' })).toMatch(/alışmak/)
   })
 })
+
+describe('karşılaştırılabilir seri: gözlük koşulu ve yeni baz çizgisi', async () => {
+  const { comparableTests, analyzeTrend } = await import('./trend.js')
+  const d = (n) => new Date(2026, 8, n).toISOString()
+  it('yalnızca son testle aynı koşuldaki kayıtlar kalır', () => {
+    const tests = [
+      { date: d(1), logMAR: 0.3, correction: 'none' },
+      { date: d(2), logMAR: 0.1, correction: 'reading' },
+      { date: d(3), logMAR: 0.32, correction: 'none' },
+      { date: d(4), logMAR: 0.12, correction: 'reading' },
+    ]
+    const c = comparableTests(tests)
+    expect(c.condition).toBe('reading')
+    expect(c.tests.map((t) => t.logMAR)).toEqual([0.1, 0.12])
+    expect(c.dropped).toBe(2)
+    expect(analyzeTrend(tests, d(5)).condition).toBe('reading')
+  })
+  it('newBaseline işaretinden öncesi atılır; eski kayıtlarda correction yoksa hepsi aynı koşul', () => {
+    const tests = [
+      { date: d(1), logMAR: 0.3, correction: 'reading' },
+      { date: d(2), logMAR: 0.3, correction: 'reading' },
+      { date: d(10), logMAR: 0.1, correction: 'reading', newBaseline: true },
+      { date: d(11), logMAR: 0.12, correction: 'reading' },
+    ]
+    const c = comparableTests(tests)
+    expect(c.tests.map((t) => t.logMAR)).toEqual([0.1, 0.12])
+    expect(c.resetAt).toBe(d(10))
+    const legacy = [{ date: d(1), logMAR: 0.3 }, { date: d(2), logMAR: 0.31 }]
+    expect(comparableTests(legacy).tests).toHaveLength(2)
+    expect(comparableTests([]).tests).toEqual([])
+  })
+})
+
+describe('eski "glasses" kaydı yeni gözlük türleriyle aynı seri', async () => {
+  const { comparableTests, sameCondition } = await import('./trend.js')
+  const d = (n) => new Date(2026, 8, n).toISOString()
+  it('sameCondition ve seri birleşimi', () => {
+    expect(sameCondition('glasses', 'reading')).toBe(true)
+    expect(sameCondition('glasses', 'contacts')).toBe(false)
+    expect(sameCondition('none', 'reading')).toBe(false)
+    expect(sameCondition(null, null)).toBe(true)
+    const tests = [{ date: d(1), logMAR: 0.1, correction: 'glasses' }, { date: d(2), logMAR: 0.3, correction: 'none' }, { date: d(3), logMAR: 0.12, correction: 'reading' }]
+    expect(comparableTests(tests).tests.map((t) => t.logMAR)).toEqual([0.1, 0.12])
+  })
+})

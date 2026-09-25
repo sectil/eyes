@@ -342,6 +342,9 @@ function PracticeSection({ sessions, now, onStart }) {
   )
 }
 
+// Görme testi koşulu (AcuityTest WEAR + eski 'glasses'); trend yalnızca aynı koşulu birleştirir (lib/trend.js)
+const CONDITION_TEXT = { none: 'gözlüksüz', reading: 'okuma gözlüğüyle', progressive: 'progresif gözlükle', distance: 'uzak gözlüğüyle', contacts: 'lensle', glasses: 'gözlüklü (eski kayıt)' }
+
 function VisionSection({ tests, onStart }) {
   const [eye, setEye] = useState('OU')
   const va = useMemo(() => tests.filter((t) => t.type === 'va-daily' || t.type === 'va-weekly'), [tests])
@@ -353,7 +356,11 @@ function VisionSection({ tests, onStart }) {
     <>
       <div className="pg-section-head">
         <h2>Görme keskinliği</h2>
-        <p>Tek güne değil, haftalık eğilime bakıyoruz.</p>
+        <p>
+          Tek güne değil, haftalık eğilime bakıyoruz.
+          {r.condition ? ` Seri: ${CONDITION_TEXT[r.condition] ?? r.condition}.` : ''}
+          {r.dropped > 0 ? ` Farklı koşuldaki ${r.dropped} ölçüm bu seriye girmiyor.` : ''}
+        </p>
       </div>
 
       {!va.length ? (

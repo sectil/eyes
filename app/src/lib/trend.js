@@ -29,10 +29,29 @@ export function median(values) {
 }
 
 // tests: [{ date, logMAR }] (tek göz). now: değerlendirme anı (ISO)
-export function analyzeTrend(tests, now = new Date().toISOString()) {
+// Karşılaştırılabilir seri: yalnızca SON testle aynı gözlük/lens koşulundaki (correction) kayıtlar ve
+// son "gözlüğüm değişti" (newBaseline) işaretinden sonrası. Farklı koşullar birleştirilmez
+// (docs/arastirma/ajan-raporlari/19_gozluk_ve_yakin_test.md: alışkanlık koşulu, koşul değişince yeni baz).
+// Eski kayıtlarda correction yoksa (null) hepsi aynı koşul sayılır.
+// Eski kayıtlar (Build ≤18) yalnızca 'glasses' der; yeni ayrıntılı gözlük türleriyle aynı seri sayılır
+// (aynı gözlük olduğu varsayılır — VARSAYIM; seri kopmasın diye).
+const GLASSES_FAMILY = new Set(['glasses', 'reading', 'progressive', 'distance'])
+export const sameCondition = (a, b) => (a ?? null) === (b ?? null) || ((a === 'glasses' || b === 'glasses') && GLASSES_FAMILY.has(a) && GLASSES_FAMILY.has(b))
+export function comparableTests(tests) {
   const sorted = [...tests].filter((t) => Number.isFinite(t.logMAR)).sort((a, b) => a.date.localeCompare(b.date))
+  if (!sorted.length) return { tests: [], condition: null, resetAt: null }
+  const condition = sorted.at(-1).correction ?? null
+  const same = sorted.filter((t) => sameCondition(t.correction, condition))
+  const lastReset = same.map((t, i) => (t.newBaseline === true ? i : -1)).filter((i) => i >= 0).at(-1)
+  const cut = lastReset == null ? same : same.slice(lastReset)
+  return { tests: cut, condition, resetAt: lastReset == null ? null : cut[0].date, dropped: sorted.length - cut.length }
+}
+
+export function analyzeTrend(tests, now = new Date().toISOString()) {
+  const comp = comparableTests(tests)
+  const sorted = comp.tests
   if (!sorted.length) {
-    return { phase: 'empty', baseline: null, current7: null, delta: null, alert: null, trend: null, series: [] }
+    return { phase: 'empty', baseline: null, current7: null, delta: null, alert: null, trend: null, series: [], condition: null, resetAt: null, dropped: 0 }
   }
   const origin = sorted[0].date
   const withDay = sorted.map((t) => ({ ...t, day: dayIndex(t.date, origin) }))
@@ -82,6 +101,9 @@ export function analyzeTrend(tests, now = new Date().toISOString()) {
 
   return {
     phase,
+    condition: comp.condition,
+    resetAt: comp.resetAt,
+    dropped: comp.dropped,
     baseline: baseline != null ? +baseline.toFixed(3) : null,
     current7: current7 != null ? +current7.toFixed(3) : null,
     delta: delta != null ? +delta.toFixed(3) : null,
