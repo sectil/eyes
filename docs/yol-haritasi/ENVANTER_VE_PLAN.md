@@ -50,12 +50,30 @@ karşılaştırıldı. Tahmin yok; kontrol edilmeyen yerde "bakılmadı" yazıyo
 
 ## 3. Yeni istekler (bu mesaj)
 ### 3a. Profil anketi ("ilk girişte hâlâ yalnızca göz soruyor")
-Kaynak: `docs/arastirma/ajan-raporlari/18_profil_sorulari.md` (PubMed taraması; ajan raporu).
-Karar ilkesi: yalnızca **doğrulanmış, kısa, ücretsiz** ölçek maddeleri; 2 dakika; teşhis yok.
-Üç halkaya göre profil: Göz (yorgunluk, gözlük, muayene), Dikkat (zihin gezinmesi), Yaşam
-(uyku/ekran, stres, erteleme). Çıktı "profil" nesnesi: modüller `today()` ve Jev bunu okur
-(ör. yüksek ekran yorgunluğu → mola kilidi 3 dk; yüksek zihin gezinmesi → nefes sayma önce).
-Işığa duyarlı epilepsi maddesi Hızlı Bakış'ın kapısı olur.
+Kaynak: `docs/arastirma/ajan-raporlari/18_profil_sorulari.md` (PubMed taraması, 2026-09-25).
+Bulgu: Türkçe geçerliliği PubMed'de doğrulanan yalnızca üç araç var: DESQ-TR (13 madde, ekran göz
+yorgunluğu), Tek Maddeli Uyku Kalitesi (SQS-TR, 0–10) ve NEI-VFQ-25 TR. Zihin gezinmesi/farkındalık
+kısa ölçeklerinin (MAAS-5, MWQ, MW-S/D, ARCES) Türkçe doğrulaması bulunamadı; PSS-4'ün ayrı Türkçe
+doğrulaması yok (PSS-14 var). Işığa duyarlı nöbet için doğrulanmış tarama maddesi yok; Epilepsy
+Foundation uzlaşılarından tek madde türetildi.
+
+Önerilen anket (11 madde, ~2 dk; hiçbir puan tanı ya da risk seviyesi olarak gösterilmez):
+| # | Halka | Madde | Dayanak |
+|---|---|---|---|
+| 1–4 | Göz | Yaş aralığı, yakın gözlük, son muayene, kırmızı bayraklar | mevcut `Screening.jsx` |
+| 5 | Güvenlik | Epilepsi tanısı **veya** yanıp sönen ışık/desenle bayılma-kasılma (Evet/Hayır/Emin değilim) → "Evet/Emin değilim" flaşlı görevleri (Hızlı Bakış, Değişimi yakala) kapatır | Fisher 2005/2022/2025 |
+| 6 | Göz | Son ayda küçük yazı okurken zorlanma (5'li) | NEI-VFQ yakın etkinlik mantığı; doğrulanmamış tek madde, yalnızca kişi-içi izleme |
+| 7 | Yaşam | Günlük ekran saati (<2/2–4/4–6/>6) | betimsel |
+| 8 | Yaşam | Son 7 gün uyku kalitesi 0–10 | **SQS-TR** (Dereli & Kahraman 2021, PMID 34785424) |
+| 9 | Yaşam | Gece uyanınca telefona bakma sıklığı | Dissing 2021, Exelmans 2016; doğrulanmamış tek madde |
+| 10–11 | Yaşam | Algılanan stres 2 madde (PSS'nin olumsuz maddeleri) | Türkçe PSS-14 (Örücü & Demir 2009); madde metni tam metinden alınacak |
+| — | Dikkat | **Sorulmaz**; ilk haftada göz kırpma, nefes sayma ve Hızlı Bakış görevlerinden davranışsal çıkarılır | rapor §8 |
+
+Profil nesnesi (`settings.profile`): modüller `today()` ve Jev bunu okur (ör. ekran >6 sa →
+mola kilidi bütçesi 3 dk; uyku ≤4 → akşam nefes önerisi; nöbet "Evet" → flaşlı modüller kilitli).
+İsteğe bağlı derin modüller (halka içinde, ilk açılışta değil): DESQ-TR 13 madde (haftalık),
+MWQ 5 madde (CC BY; Türkçe çeviri "doğrulanmamış" etiketiyle), Vamping-TR 10 madde.
+Yayın öncesi: SQS ve DESQ kullanım izni, PSS Türkçe madde metinleri, nöbet maddesine nörolog onayı.
 
 ### 3b. Kalp, nefes, kamera ("sistem kalp, nefes, kamera takibi yapar")
 Teknik zemin hazır: `16c_nefes_teknik.md` §2 HealthKit (nabız, HRV, solunum hızı,
