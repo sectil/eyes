@@ -183,3 +183,22 @@ Seçenekler:
   avuçla örtülen gözün kapağı da indirilirse "kapalı" okunur; eşikler 0,55 / 0,45.
 - Sonuç: logMAR + 20/xx + 6/xx + ondalık (Türkiye reçete dili).
 - Gözlük: kamera gözlük takılı mı ayırt edemiyor (ARKit sinyali yok); koşul seçimi ve seri ayrımı kalır.
+
+## 11. Bakış motoru: Yılan hassasiyeti + gözle "Kaydır" (2026-09-25, PLAN — onay bekliyor, Build 25)
+Teşhis (kodda doğrulandı, cihaz verisi yok): kalibrasyon modeli bakışı "orta→kenar noktası = 20" biriminde verir;
+Yılan eşiği 10 "derece" sanılarak bu birimde kullanılıyor → eşik ≈ 82 pt ≈ 2,2° (tasarım 10°). Tahta ±179 pt; sağ/sol
+üçte biri dönüş bölgesi. Tahta altındaki gösterge "aşağı" eşiğinin altında. Süzgeç sakkadı geçiriyor, 220 ms bekleme her
+duraklamayı komut yapıyor. Göz sabitken bile mikrosakkad/kayma üretir (Martinez-Conde 2013, doi 10.1038/nrn3405).
+1. Bakış → ekran noktası (pt): kalibrasyon noktalarının ekran konumuyla; kararlar tahta hücresi cinsinden.
+2. Sakkad / duraklama ayrımı (hız eşiği); yalnızca duraklama konumu (pencere ortancası) karar üretir.
+3. Yılan: başa göre komut. Baş çevresinde ölü daire; dışı dört 90° dilim; geri dönüş yok sayılır.
+4. Ölü daire yarıçapı ölçümden: max(1,5 hücre, 2,5 × kalibrasyondaki orta-bakış titremesi). VARSAYIM: normal dağılım.
+5. Tahta dışındaki duraklama (gösterge, skor, yazı) komut değil.
+6. Yem yendiğinde son duraklama ≈ yem → bakış kayması yavaşça düzeltilir (örtük kalibrasyon).
+7. Dönüşten sonra baş bir hücre ilerleyene kadar yeni komut yok.
+8. **Gözle "Kaydır" (StepCards):** kalibrasyon modeli varsa "Kaydır ya da gözünle sağa bak". Ekranın sağ kenar bölgesinde
+   (x > %80) 0,6 sn duraklama bir sonraki karta geçer; "Kaydır ›" düğmesinde dolan halka gösterilir; yalnız ileri, son
+   kartta ana düğmeye basılmaz (yanlışlıkla başlatma olmasın). Aynı motor (1–2) kullanılır.
+   VARSAYIM: kamera yalnız zaten kamera kullanan ekranlarda açık (görme testi, okuma, Çember, Hızlı Bakış, göz kalibrasyonu);
+   Nefes sayma gibi kamerasız ekranlarda yalnız kaydırma. Kalibrasyon yoksa yalnız kaydırma.
+Doğrulama: sentetik bakış (sakkad + duraklama + gürültü) ile eski/yeni istenmeyen dönüş sayısı ve gecikme tablosu.
