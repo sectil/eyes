@@ -98,7 +98,17 @@ function AcuityScale({ value }) {
   )
 }
 
-export default function AcuityTest({ plan = 'daily', calibration, distanceCal, onFinish, onCancel }) {
+// Test sırasında gözlük/lens durumu. Klinik kural "çıkar" değil "her seferinde aynı koşul":
+// gözlüklü ve gözlüksüz ölçümler karşılaştırılamaz. Her kayda yazılır, bir sonraki testte hatırlatılır.
+export const WEAR = [
+  { id: 'glasses', text: 'Gözlüklü' },
+  { id: 'contacts', text: 'Lensli' },
+  { id: 'none', text: 'Gözlüksüz' },
+]
+const wearText = (id) => WEAR.find((w) => w.id === id)?.text.toLocaleLowerCase('tr') ?? null
+// lastCorrection: önceki görme testindeki seçim ('glasses' | 'contacts' | 'none' | null)
+export default function AcuityTest({ plan = 'daily', calibration, distanceCal, lastCorrection = null, onFinish, onCancel }) {
+  const [correction, setCorrection] = useState(lastCorrection)
   const planSpec = PLANS[plan]
   const { warmup } = planSpec
   const pxPerMm = calibration.pxPerMm
@@ -214,6 +224,7 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, o
       type: plan === 'daily' ? 'va-daily' : 'va-weekly',
       eye: eye.id,
       logMAR: +fin.logMAR.toFixed(3),
+      correction,
       sd: +est.sd.toFixed(3),
       trials: est.trials,
       descentTrials: est.descentTrials,
@@ -303,8 +314,25 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, o
               <li>İlk {warmup} harf alıştırma, sayılmaz.</li>
             </ol>
           </div>
+          {eyeIdx === 0 && (
+            <div className="card stack" style={{ gap: 8 }}>
+              <span className="eyebrow">Bu testi nasıl yapıyorsun?</span>
+              <div className="segmented" role="group" aria-label="Gözlük veya lens">
+                {WEAR.map((w) => (
+                  <button key={w.id} type="button" aria-pressed={correction === w.id} onClick={() => setCorrection(w.id)}>{w.text}</button>
+                ))}
+              </div>
+              <p className="muted small">
+                {lastCorrection && correction && correction !== lastCorrection
+                  ? `Geçen sefer ${wearText(lastCorrection)} ölçtün. Farklı koşulda ölçüm önceki sonuçlarla karşılaştırılamaz; sonucu ayrı değerlendir.`
+                  : lastCorrection
+                    ? `Geçen sefer ${wearText(lastCorrection)} ölçtün; aynı şekilde yap ki değişim gerçek olsun.`
+                    : 'Her seferinde aynı şekilde ölç: gözlük varsa hep tak, yoksa hiç takma. Değişimi ancak böyle görürüz.'}
+              </p>
+            </div>
+          )}
           {distanceChip}
-          <button className="btn" onClick={startEye}><Play size={18} aria-hidden="true" /> Başla</button>
+          <button className="btn" onClick={startEye} disabled={eyeIdx === 0 && !correction}><Play size={18} aria-hidden="true" /> Başla</button>
         </main>
       )}
 

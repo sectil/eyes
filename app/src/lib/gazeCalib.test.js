@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from 'vitest'
-import { fitModel, fitAxis, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE, calibReport, closeThreshold, loadGazeModel, saveGazeModel, clearGazeModel, GAZE_MODEL_KEY, GAZE_MODEL_VERSION, DOWN_CLOSE_MAX } from './gazeCalib.js'
+import { fitModel, fitAxis, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE, calibReport, closeThreshold, loadGazeModel, saveGazeModel, clearGazeModel, GAZE_MODEL_KEY, GAZE_MODEL_VERSION, DOWN_CLOSE_MAX, headRef, headTurned, HEAD_TURN_DEG } from './gazeCalib.js'
 import { createGazeReader, lookingAtPhone, GAZE_FULL_DEG } from './gaze.js'
 
 // Deterministik gürültü
@@ -16,8 +16,11 @@ function rng(seed) {
 
 // Kişinin gerçek bakışı (gx: sağ +, gy: yukarı +, derece) → cihazın verdiği ham sinyaller.
 // signX/signY: ARKit'in (bilinmeyen) işaret kuralı; kalibrasyon bunu bilmeden çözmeli.
-function makeFrame(gx, gy, { signX = 1, signY = 1, noise = 0.6, r = rng(1), angOffset = 3, lookGain = 0.004 } = {}) {
+// head: baş duruşu (kameraya göre, derece); cam = göz + baş (kameraya göre) + ARKit sabit sapması.
+// cam: false → eski eklenti (alanlar yok).
+function makeFrame(gx, gy, { signX = 1, signY = 1, noise = 0.6, r = rng(1), angOffset = 3, lookGain = 0.004, head = { x: 0, y: 0 }, cam = true } = {}) {
   const n = () => (r() - 0.5) * 2 * noise
+  const camF = cam ? { camLeftX: gx + head.x + 2 + n(), camRightX: gx + head.x + 2 + n(), camLeftY: gy + head.y - 6 + n(), camRightY: gy + head.y - 6 + n(), headX: head.x + n() * 0.5, headY: head.y + n() * 0.5 } : {}
   const ax = signX * gx + angOffset + n()
   const ay = signY * gy - 2 + n()
   return {
@@ -37,6 +40,7 @@ function makeFrame(gx, gy, { signX = 1, signY = 1, noise = 0.6, r = rng(1), angO
     lookUpRight: 0,
     lookDownLeft: 0,
     lookDownRight: 0,
+    ...camF,
     blinkLeft: 0.05,
     blinkRight: 0.05,
   }
@@ -241,5 +245,59 @@ describe('lookingAtPhone', () => {
     expect(lookingAtPhone({ dir: 'center', calibrated: false, tracked: true, closed: false })).toBeNull()
     expect(lookingAtPhone({ dir: null, calibrated: true, tracked: true, closed: true })).toBeNull()
     expect(lookingAtPhone({ dir: null, calibrated: true, tracked: false, closed: false })).toBeNull()
+  })
+})
+
+describe('kameraya göre bakış (cam*) ve baş duruşu (head*)', () => {
+  const m = fitModel(windows())
+  const feed = (reader, gx, gy, opts = {}, n = 20, t0 = 0) => {
+    let r
+    for (let i = 0; i < n; i++) r = reader.push({ ...makeFrame(gx, gy, { noise: 0.2, r: rng(i + t0), ...opts }), ts: t0 + i * 33 })
+    return r
+  }
+  it('model ortaya bakıştaki kameraya-göre açıyı (phone) öğrenir', () => {
+    expect(m.phone).toBeTruthy()
+    expect(m.phone.x).toBeCloseTo(2, 0)
+    expect(m.phone.y).toBeCloseTo(-6, 0)
+  })
+  it('baş çevrilip uzağa bakılınca (gözler yüze göre ortada) telefona bakmıyor sayılır', () => {
+    const reader = createGazeReader({ model: m })
+    expect(lookingAtPhone(feed(reader, 0, 0))).toBe(true)
+    expect(lookingAtPhone(feed(reader, 0, 0, { head: { x: 25, y: 0 } }, 20, 1000))).toBe(false)
+    expect(lookingAtPhone(feed(reader, 0, 0, { head: { x: 0, y: 20 } }, 20, 2000))).toBe(false)
+    // Baş hafif dönük ama gözler ekranda: telefon
+    expect(lookingAtPhone(feed(reader, -4, 0, { head: { x: 4, y: 0 } }, 20, 3000))).toBe(true)
+    // Gözle ekranın dışına: telefon değil (aşağı pencere 16° → −20 dışarıda)
+    expect(lookingAtPhone(feed(reader, 0, -20, {}, 20, 4000))).toBe(false)
+    expect(lookingAtPhone(feed(reader, 14, 0, {}, 20, 5000))).toBe(false)
+  })
+  it('cam alanı yoksa (eski eklenti) yön modeline düşer', () => {
+    const reader = createGazeReader({ model: m })
+    expect(lookingAtPhone(feed(reader, 0, 0, { cam: false }))).toBe(true)
+    expect(lookingAtPhone(feed(reader, 0, 12, { cam: false }, 20, 1000))).toBe(false)
+  })
+  it('modelde phone yoksa (eski model) yön modeline düşer', () => {
+    const reader = createGazeReader({ model: { ...m, phone: null } })
+    expect(lookingAtPhone(feed(reader, 0, 0, { head: { x: 25, y: 0 } }))).toBe(true) // yüze göre ortada → eski davranış
+  })
+  it('headRef / headTurned: orta hedef referansından HEAD_TURN_DEG üstü sapma', () => {
+    const ref = headRef(Array.from({ length: 10 }, (_, i) => makeFrame(0, 0, { r: rng(i), head: { x: 3, y: -2 } })))
+    expect(ref.x).toBeCloseTo(3, 0)
+    expect(headTurned(ref, makeFrame(-18, 0, { noise: 0, head: { x: 3, y: -2 } }))).toBe(false)
+    expect(headTurned(ref, makeFrame(0, 0, { noise: 0, head: { x: 3 - HEAD_TURN_DEG - 1, y: -2 } }))).toBe(true)
+    expect(headTurned(ref, makeFrame(0, 0, { noise: 0, head: { x: 3, y: -2 + HEAD_TURN_DEG + 1 } }))).toBe(true)
+    expect(headTurned(ref, makeFrame(0, 0, { noise: 0, head: { x: 3 + HEAD_TURN_DEG - 1, y: -2 } }))).toBe(false)
+    expect(headTurned(null, makeFrame(0, 0))).toBe(false)
+    expect(headTurned(ref, makeFrame(0, 0, { cam: false }))).toBe(false)
+    expect(headRef([makeFrame(0, 0, { cam: false })])).toBeNull()
+  })
+  it('calibReport baş sapmasını hedef başına verir', () => {
+    const w = windows()
+    w.left = Array.from({ length: 30 }, (_, i) => makeFrame(-18, 0, { r: rng(i), head: { x: -7, y: 0 } }))
+    const rep = calibReport(w, fitModel(w))
+    expect(rep.head.left.dx).toBeCloseTo(-7, 0)
+    expect(rep.head.right.dx).toBeCloseTo(0, 0)
+    expect(rep.headTurnDeg).toBe(HEAD_TURN_DEG)
+    expect(rep.targets.left.camX).toBeTruthy()
   })
 })

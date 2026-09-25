@@ -37,7 +37,7 @@ export async function trueDepthSupported() {
   }
 }
 
-// Yüz takibini başlatır; onFace({ tracked, distanceMm, blinkLeft, blinkRight, gazeLeftX/Y, gazeRightX/Y, … }) ~30 Hz.
+// Yüz takibini başlatır; onFace({ tracked, distanceMm, blinkLeft, blinkRight, gazeLeftX/Y, gazeRightX/Y, camLeftX/Y, camRightX/Y, headX/Y, … }) ~30 Hz.
 // Döner: durdurma fonksiyonu.
 export async function startTrueDepth(onFace) {
   const handle = await FaceDistance.addListener('face', onFace)

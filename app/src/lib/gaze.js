@@ -291,9 +291,13 @@ function createModelReader(model, opts) {
   let cal = { samples: [], start: null, attempts: 0 }
   let dir = null
   let v = { x: 0, y: 0 }
-  const out = (d, closed, tracked) => ({ dir: d, v: { x: v.x, y: v.y }, closed, calibrated: true, tracked, model: true })
+  let phone = null
+  let camHist = [] // son 3 kameraya-göre örnek (tek karelik sıçramaları eleyen ortanca)
+  const out = (d, closed, tracked) => ({ dir: d, v: { x: v.x, y: v.y }, closed, calibrated: true, tracked, model: true, phone })
   const reset = () => {
     dir = null
+    phone = null
+    camHist = []
     fx.reset()
     fy.reset()
   }
@@ -331,6 +335,11 @@ function createModelReader(model, opts) {
       const r = applyModel(model, f, shift)
       if (!r || !Number.isFinite(r.x) || !Number.isFinite(r.y)) return out(null, false, false)
       if (cal) collect(r.raw, ts)
+      const cam = camAngles(f)
+      if (cam && model.phone) {
+        camHist = [...camHist.slice(-2), cam]
+        phone = inPhoneWindow({ x: median(camHist.map((c) => c.x)), y: median(camHist.map((c) => c.y)) }, model.phone)
+      } else phone = null
       v = { x: fx.push(r.x * GAZE_FULL_DEG, ts), y: fy.push(r.y * GAZE_FULL_DEG, ts) }
       dir = stepDir(dir, v, enterDeg, exitDeg)
       return out(dir, false, true)
@@ -520,9 +529,29 @@ export function createGazeReader(opts = {}) {
 // Kalibrasyon v2'de yön = ekranın dışına bakış; ekranda gezinen bakış 'center' kalır.
 // 'down' da telefona sayılır: telefon göz hizasının altında tutulur, uzağa bakış yukarı/yana olur.
 // Döner true | false | null (bilinmiyor: yüz yok, gözler kapalı ya da okuyucu kalibre değil).
+// Öncelik: kameraya göre bakış (g.phone; baş dönüşünü de kapsar, model.phone referansı gerekir).
+// Yoksa yön modeli (yüze göre; baş çevrilip uzağa bakılınca 'center' kalabilir).
 export function lookingAtPhone(g) {
-  if (!g || !g.calibrated || !g.tracked || g.closed || g.dir == null) return null
+  if (!g || !g.calibrated || !g.tracked || g.closed) return null
+  if (g.phone != null) return g.phone
+  if (g.dir == null) return null
   return g.dir === 'center' || g.dir === 'down'
+}
+
+// Kameraya göre bakışın "telefon" penceresi: ortaya bakış referansından sapma (derece).
+// VARSAYIM: telefon ~7×15 cm, 30–40 cm'de; orta nokta ekranın %46'sında → üst kenar ~10–13°,
+// alt kenar ~12–15°, yan kenar ~5–7°. Pencere: yatay ±9°, yukarı 11°, aşağı 14°. Cihazda ayarlanacak.
+export const PHONE_WIN_DEG = { x: 9, up: 11, down: 14 }
+export function camAngles(f) {
+  const x = pick(f.camLeftX, f.camRightX)
+  const y = pick(f.camLeftY, f.camRightY)
+  return x == null || y == null ? null : { x, y }
+}
+export function inPhoneWindow(cam, ref, win = PHONE_WIN_DEG) {
+  if (!cam || !ref) return null
+  const dx = cam.x - ref.x
+  const dy = cam.y - ref.y
+  return Math.abs(dx) <= win.x && dy <= win.up && -dy <= win.down
 }
 
 export const NEAR_MM = 300

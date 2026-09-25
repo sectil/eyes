@@ -11,11 +11,19 @@ import Capacitor
 ///   start kamera iznine bakar: izin yoksa (reddedilmiş / kısıtlı ya da ilk soruda "İzin Verme")
 ///   reject(code: "camera-denied") döner, böylece JS tarafı yedeğe (süre / dokunma) düşebilir.
 /// - "face" olayı (~30 Hz): { tracked, distanceMm, focusMm, vergenceMm, blinkLeft, blinkRight,
-///   lookUp/Down/In/Out Left/Right, gazeLeftX, gazeLeftY, gazeRightX, gazeRightY }
+///   lookUp/Down/In/Out Left/Right, gazeLeftX, gazeLeftY, gazeRightX, gazeRightY,
+///   camLeftX, camLeftY, camRightX, camRightY, headX, headY }
 /// - Oturum hatası: "face" olayı { tracked: false, error: <açıklama>, errorCode: "camera-denied" | "session-failed" }.
 ///   ARKit bu durumda oturumu durdurur; bir daha kare gelmez.
 /// Mesafe: kameradan iki gözün ortalama uzaklığı (ön kamera ekran düzlemindedir).
 /// Bakış açısı (gaze*, derece, başa göre): X > 0 kişinin KENDİ sağı, Y > 0 yukarı; hesap yoksa null.
+/// Kameraya göre bakış (cam*, derece): gözün bakış doğrultusu ile gözden kameraya giden doğru arasındaki
+/// açı, yerçekimine hizalı dünya çerçevesinde. 0 = tam kameraya bakıyor. Baş dönüşü de dahildir;
+/// "telefona bakıyor mu" için doğru büyüklük budur (gaze* yüze göredir, baş dönünce değişmez).
+/// Baş duruşu (head*, derece): yüzün ileri yönü ile yüzden kameraya giden doğru arasındaki açı.
+/// 0 = yüz kameraya dönük. Kalibrasyon "başını değil gözünü oynat" uyarısı için.
+/// VARSAYIM: X işareti kişinin sağı için pozitif (dünya +y etrafında işaretli açı, çevrilmiş); JS
+/// tarafı kalibrasyonda işareti veriden doğrular, eşikler büyüklük üzerinden çalışır.
 @objc(FaceDistancePlugin)
 public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate {
     public let identifier = "FaceDistancePlugin"
@@ -159,6 +167,10 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
         // Göz başına bakış açısı (derece, başa göre). Yüz izlenmiyorsa dönüşümler bayat → null.
         let gazeL = face.isTracked ? gazeDegrees(face.leftEyeTransform) : nil
         let gazeR = face.isTracked ? gazeDegrees(face.rightEyeTransform) : nil
+        // Kameraya göre bakış ve baş duruşu (dünya çerçevesi, yerçekimi hizalı)
+        let camL = face.isTracked ? angleToCamera(simd_mul(face.transform, face.leftEyeTransform), cameraPos) : nil
+        let camR = face.isTracked ? angleToCamera(simd_mul(face.transform, face.rightEyeTransform), cameraPos) : nil
+        let head = face.isTracked ? angleToCamera(face.transform, cameraPos) : nil
 
         notifyListeners("face", data: [
             "tracked": face.isTracked,
@@ -181,6 +193,13 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
             "gazeLeftY": jsNumber(gazeL?.y),
             "gazeRightX": jsNumber(gazeR?.x),
             "gazeRightY": jsNumber(gazeR?.y),
+            // Kameraya göre bakış (derece; 0 = kameraya) ve baş duruşu (derece; 0 = yüz kameraya dönük)
+            "camLeftX": jsNumber(camL?.x),
+            "camLeftY": jsNumber(camL?.y),
+            "camRightX": jsNumber(camR?.x),
+            "camRightY": jsNumber(camR?.y),
+            "headX": jsNumber(head?.x),
+            "headY": jsNumber(head?.y),
             // Ham ARKit bakış noktası (yüz koordinatı, metre). Eksen/işaret yorumu JS'teki kişisel
             // kalibrasyonda (src/lib/gazeCalib.js) veriden öğrenilir; burada dönüştürülmez.
             "lookAtX": jsNumber(face.isTracked ? Double(face.lookAtPoint.x) : nil),
@@ -233,6 +252,33 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
         let pitch = atan2(y, hypot(x, z))
         let deg = 180.0 / Double.pi
         return (x: yaw * deg, y: pitch * deg)
+    }
+
+    /// Bir dönüşümün +z ekseni (bakış / yüz ileri yönü, dünya çerçevesi) ile o dönüşümün konumundan
+    /// kameraya giden doğru arasındaki açı (derece). x: dünya +y (yukarı) etrafında yatay açı, kişinin
+    /// sağı pozitif olacak şekilde çevrilmiş; y: yükseliş farkı (yukarı pozitif).
+    /// ARFaceTrackingConfiguration dünyası yerçekimine hizalıdır (+y yukarı), bu yüzden cihaz yönünden
+    /// bağımsızdır. Yatay bileşen için vektörler yatay düzleme izdüşürülür.
+    private func angleToCamera(_ t: simd_float4x4, _ cameraPos: simd_float3) -> (x: Double, y: Double)? {
+        let c = t.columns.2
+        let d = simd_float3(c.x, c.y, c.z)
+        let toCam = cameraPos - position(t)
+        let nd = simd_length(d), nc = simd_length(toCam)
+        guard nd.isFinite, nc.isFinite, nd > 1e-6, nc > 1e-6 else { return nil }
+        let a = d / nd, b = toCam / nc
+        // Yatay izdüşüm
+        let ah = simd_float3(a.x, 0, a.z), bh = simd_float3(b.x, 0, b.z)
+        let lah = simd_length(ah), lbh = simd_length(bh)
+        guard lah > 1e-6, lbh > 1e-6 else { return nil }
+        let ahn = ah / lah, bhn = bh / lbh
+        // b'den a'ya +y etrafında işaretli açı; kişinin sağına dönüş yukarıdan bakınca saat yönü (negatif) → çevrilir
+        let cross = simd_cross(bhn, ahn)
+        let yaw = -atan2(cross.y, simd_dot(bhn, ahn))
+        let pitch = asin(max(-1, min(1, a.y))) - asin(max(-1, min(1, b.y)))
+        let deg = 180.0 / Double.pi
+        let x = Double(yaw) * deg, y = Double(pitch) * deg
+        guard x.isFinite, y.isFinite else { return nil }
+        return (x: x, y: y)
     }
 
     /// JS'e sayı ya da null (NaN/sonsuz gönderme).

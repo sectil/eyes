@@ -34,8 +34,37 @@ export const FEATURES = {
   lookY: (f) => num(f.lookAtY),
   blendX: (f) => (hasBlend(f) ? blendVector(f).x : null),
   blendY: (f) => (hasBlend(f) ? blendVector(f).y : null),
+  // Kameraya göre bakış (baş + göz) ve baş duruşu; derece. Yön modeline girmez (egzersizde
+  // "sağa bak" yüze göre ölçülür), raporda ve telefona-bakış tespitinde kullanılır.
+  camX: (f) => pick(f.camLeftX, f.camRightX),
+  camY: (f) => pick(f.camLeftY, f.camRightY),
+  headX: (f) => num(f.headX),
+  headY: (f) => num(f.headY),
 }
 export const AXIS_FEATURES = { x: ['angX', 'lookX', 'blendX'], y: ['angY', 'lookY', 'blendY'] }
+
+// Kalibrasyonda baş dönüşü: hedef penceresindeki baş açısı, orta hedefteki ortancadan bu kadar
+// saparsa kare sayılmaz ve "başını değil gözünü oynat" uyarısı verilir.
+// VARSAYIM: 5°. Kalibrasyon hedefleri ~20°; başın 5°'den az dönmesi göz sinyalini gölgelemez.
+export const HEAD_TURN_DEG = 5
+export function headOf(f) {
+  const x = FEATURES.headX(f)
+  const y = FEATURES.headY(f)
+  return x == null || y == null ? null : { x, y }
+}
+export function headRef(frames) {
+  const xs = (frames ?? []).map(FEATURES.headX)
+  const ys = (frames ?? []).map(FEATURES.headY)
+  const x = median(xs)
+  const y = median(ys)
+  return x == null || y == null ? null : { x, y }
+}
+// Baş, referanstan HEAD_TURN_DEG'den fazla döndü mü? Baş verisi yoksa false (eski eklenti: engelleme).
+export function headTurned(ref, f, deg = HEAD_TURN_DEG) {
+  const h = headOf(f)
+  if (!ref || !h) return false
+  return Math.abs(h.x - ref.x) > deg || Math.abs(h.y - ref.y) > deg
+}
 // Sayısal taban gürültü (birim başına) — sıfıra bölmeyi ve aşırı iyimser skoru önler
 const NOISE_FLOOR = { angX: 0.4, angY: 0.4, lookX: 0.002, lookY: 0.002, blendX: 0.02, blendY: 0.02 }
 
@@ -116,7 +145,10 @@ export function fitModel(windows) {
   const x = S.left && S.right ? fitAxis(C, S.left, S.right, AXIS_FEATURES.x) : null
   const y = S.down && S.up ? fitAxis(C, S.down, S.up, AXIS_FEATURES.y) : null
   const ok = Boolean(x && !x.weak && y && !y.weak)
-  return { version: GAZE_MODEL_VERSION, ok, x, y, closeAt: closeThreshold(windows.down) }
+  // Telefona bakış referansı: ortaya bakarken kameraya göre bakış açısı (ARKit'in sabit
+  // sapmasını içerir). gaze.js lookingAtPhone bunun çevresindeki pencereyi "telefon" sayar.
+  const phone = C.camX && C.camY ? { x: C.camX.med, y: C.camY.med } : null
+  return { version: GAZE_MODEL_VERSION, ok, x, y, closeAt: closeThreshold(windows.down), phone }
 }
 
 // Teşhis raporu (yalnızca sayılar; görüntü yok): her hedefte kare sayısı, kapanma ortancası ve
@@ -141,10 +173,19 @@ export function calibReport(windows, model) {
         return [k, a ? r3(a.score) : null]
       }),
     )
+  // Baş dönüşü: her hedefte baş açısının orta hedeften sapması (derece; kabul edilen karelerde)
+  const ref = headRef(windows.center ?? [])
+  const head = {}
+  for (const t of TARGETS) {
+    const h = headRef(windows[t] ?? [])
+    head[t] = ref && h ? { dx: r3(h.x - ref.x), dy: r3(h.y - ref.y) } : null
+  }
   return {
     targets,
     scores: { x: axisScores('left', 'right', AXIS_FEATURES.x), y: axisScores('down', 'up', AXIS_FEATURES.y) },
     minScore: MIN_SCORE,
+    head,
+    headTurnDeg: HEAD_TURN_DEG,
     model,
   }
 }

@@ -11,7 +11,7 @@ import '../styles/gazecal.css'
 // tahmin yerine gerçek veri gönderilir. Kamera görüntüsü içermez, yalnızca sayılar.
 // ~20 sn (native ~30 Hz): telefona ve uzağa bakışı aynı kayıtta toplamaya yetsin
 const KEEP_FRAMES = 600
-const FIELDS = ['tracked', 'focusMm', 'vergenceMm', 'gazeLeftX', 'gazeLeftY', 'gazeRightX', 'gazeRightY', 'lookAtX', 'lookAtY', 'lookAtZ', 'lookInLeft', 'lookInRight', 'lookOutLeft', 'lookOutRight', 'lookUpLeft', 'lookUpRight', 'lookDownLeft', 'lookDownRight', 'blinkLeft', 'blinkRight', 'mm']
+const FIELDS = ['tracked', 'focusMm', 'vergenceMm', 'gazeLeftX', 'gazeLeftY', 'gazeRightX', 'gazeRightY', 'camLeftX', 'camLeftY', 'camRightX', 'camRightY', 'headX', 'headY', 'lookAtX', 'lookAtY', 'lookAtZ', 'lookInLeft', 'lookInRight', 'lookOutLeft', 'lookOutRight', 'lookUpLeft', 'lookUpRight', 'lookDownLeft', 'lookDownRight', 'blinkLeft', 'blinkRight', 'mm']
 const DIR_LABEL = { left: '← Sol', right: 'Sağ →', up: '↑ Yukarı', down: '↓ Aşağı', center: 'Orta' }
 
 const fmt = (v, d = 2) => (Number.isFinite(v) ? v.toFixed(d) : '—')

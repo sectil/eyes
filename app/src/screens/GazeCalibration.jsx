@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Check, Copy, Crosshair, RotateCcw, ScanFace, Share2, X } from 'lucide-react'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
-import { calibReport, fitModel, saveGazeModel, TARGETS, DOWN_CLOSE_MAX, MIN_SCORE } from '../lib/gazeCalib.js'
+import { calibReport, fitModel, saveGazeModel, headRef, headTurned, TARGETS, DOWN_CLOSE_MAX, MIN_SCORE, HEAD_TURN_DEG } from '../lib/gazeCalib.js'
 import { shareText } from '../lib/share.js'
 import { createGazeReader, eyeClosure, BLINK_CLOSE, GAZE_FULL_DEG } from '../lib/gaze.js'
 import { haptic } from '../lib/native.js'
@@ -22,6 +22,8 @@ const SETTLE_MS = 1200
 const COLLECT_MS = 1300
 // Aşağı bakışta göz kapağı iner; o hedefte "kapalı" eşiği yüksek (gerçek kırpma yine elenir).
 const closeLimit = (t) => (t === 'down' ? DOWN_CLOSE_MAX : BLINK_CLOSE)
+// Baş dönüşü uyarısı (ses + titreşim) en az bu aralıkla tekrarlanır
+const HEAD_WARN_GAP_MS = 2500
 
 // Hedef konumları (ekran yüzdesi). Yön hedefleri kenarda, oku ekranın dışını gösterir.
 const POS = {
@@ -52,7 +54,9 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   const [phase, setPhase] = useState('intro') // intro | run | result
   const [idx, setIdx] = useState(0)
   const [prog, setProg] = useState(0) // hedefteki kayıt ilerlemesi 0..1
-  const [status, setStatus] = useState('ok') // ok | noface | closed
+  const [status, setStatus] = useState('ok') // ok | noface | closed | head
+  // Orta hedefteki baş duruşu; sonraki hedeflerde baş bundan HEAD_TURN_DEG'den çok dönerse kare sayılmaz
+  const head = useRef({ ref: null, rejected: {}, lastWarn: 0 })
   const [result, setResult] = useState(null)
   const [preview, setPreview] = useState({ x: 0, y: 0, dir: null })
   const [report, setReport] = useState(null)
@@ -76,8 +80,16 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     const since = now - s.start
     const face = m.face !== false && m.tracked !== false
     const closed = face && eyeClosure(m) >= closeLimit(t)
-    const nextStatus = !face ? 'noface' : closed ? 'closed' : 'ok'
+    const turned = face && !closed && t !== 'center' && headTurned(head.current.ref, m)
+    const nextStatus = !face ? 'noface' : closed ? 'closed' : turned ? 'head' : 'ok'
     setStatus((p) => (p === nextStatus ? p : nextStatus))
+    if (turned && since >= MOVE_MS + SETTLE_MS) {
+      head.current.rejected[t] = (head.current.rejected[t] ?? 0) + 1
+      if (now - head.current.lastWarn >= HEAD_WARN_GAP_MS) {
+        head.current.lastWarn = now
+        cue('Başını değil, gözünü oynat', true)
+      }
+    }
     if (since < MOVE_MS + SETTLE_MS) {
       s.lastTs = now
       return
@@ -91,6 +103,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     setProg(Math.min(1, s.collected / COLLECT_MS))
     if (s.collected >= COLLECT_MS) {
       haptic('tick')
+      if (t === 'center') head.current.ref = headRef(win.current.center)
       const ni = s.idx + 1
       if (ni >= TARGETS.length) {
         step.current = { ...s, idx: TARGETS.length } // sonraki kareler yeniden bitirmesin
@@ -110,6 +123,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   function start() {
     unlockAudio()
     win.current = {}
+    head.current = { ref: null, rejected: {}, lastWarn: 0 }
     step.current = { idx: 0, start: performance.now(), collected: 0, lastTs: null }
     setIdx(0)
     setProg(0)
@@ -129,7 +143,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   function finish() {
     const model = fitModel(win.current)
     setResult(model)
-    setReport(calibReport(win.current, model))
+    setReport({ ...calibReport(win.current, model), headRejected: head.current.rejected })
     setPhase('result')
     if (model.ok) {
       saveGazeModel(model)
@@ -199,6 +213,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
               {!result?.y || result.y.weak ? 'Yukarı ve aşağı bakışı ayırt edemedim. ' : ''}
               Başını sabit tut; gözünü telefonun kenarından dışarı, bir karış öteye kaydır ve titreşime kadar orada tut.
             </p>
+            {headTurnNote(report)}
             <div className="gazetest-grid gazecal-scores">
               <span>Sağ–sol ayrışma</span><span className={result?.x && !result.x.weak ? 'hl' : ''}>{scoreText(result?.x)}</span>
               <span>Yukarı–aşağı ayrışma</span><span className={result?.y && !result.y.weak ? 'hl' : ''}>{scoreText(result?.y)}</span>
@@ -234,13 +249,26 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
         {Out ? <Out className={`gazecal-out ${t}`} size={30} strokeWidth={2.4} aria-hidden="true" /> : <span className="gazecal-dot" />}
       </div>
       <p className="gazecal-msg" role="status" aria-live="polite">
-        {!cam.ready ? 'Kamera açılıyor…' : cam.error ? 'Kamera açılamadı' : status === 'noface' ? 'Yüzünü kameraya göster' : status === 'closed' ? 'Gözlerini aç' : LABEL[t] ?? 'Başını çevirmeden noktaya bak'}
+        {!cam.ready ? 'Kamera açılıyor…' : cam.error ? 'Kamera açılamadı' : status === 'noface' ? 'Yüzünü kameraya göster' : status === 'closed' ? 'Gözlerini aç' : status === 'head' ? 'Başını çevirme, yalnızca gözünü kaydır' : LABEL[t] ?? 'Başını çevirmeden noktaya bak'}
       </p>
     </div>
   )
 }
 
 const DIR_LABEL = { left: '← Sol', right: 'Sağ →', up: '↑ Yukarı', down: '↓ Aşağı', center: 'Orta' }
+
+// Baş dönüşü yüzünden sayılmayan kare varsa söyle (yalnızca sayı; yeni eklentide gelir)
+function headTurnNote(report) {
+  const rej = report?.headRejected ?? {}
+  const n = Object.values(rej).reduce((a, b) => a + b, 0)
+  if (n < 10) return null
+  const where = TARGETS.filter((t) => rej[t] > 0).map((t) => DIR_LABEL[t] ?? t).join(', ')
+  return (
+    <p className="muted small">
+      Başın {HEAD_TURN_DEG}°'den fazla döndüğü için {n} kareyi saymadım ({where}). Başını sabit tutup yalnızca gözünü kaydırmayı dene.
+    </p>
+  )
+}
 
 // Eksen skoru: ayrışma / gürültü (en az MIN_SCORE gerekir)
 function scoreText(axis) {
