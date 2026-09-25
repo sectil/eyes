@@ -4,43 +4,12 @@ import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { PageHeader } from '../components/ui.jsx'
 import SoundToggle from '../components/SoundToggle.jsx'
 import { indicesFromConnections } from '../lib/distance.js'
-import { BLINK_CYCLE, BLINK_REPS, CLOSURES_PER_CYCLE, createClosureCounter, eyeOpenness } from '../lib/blink.js'
-import { createBlinkCounter, blinkThresholds, BLINK_REFRACTORY_MS } from '../lib/gaze.js'
+import { BLINK_CYCLE, BLINK_REPS, CLOSURES_PER_CYCLE, eyeOpenness } from '../lib/blink.js'
+import { trueDepthCounter, cameraCounter } from '../lib/blinkCounters.js'
 import { median } from '../lib/trend.js'
 import { cue, unlockAudio } from '../lib/cue.js'
 
 const BASELINE_MS = 2000
-
-// Kapanma sayaçları — push(değer, ts) → true: yeni bir kapanma sayıldı.
-// TrueDepth: gaze.js createBlinkCounter (histerezis + doruk + refrakter). Eşikler kişinin
-// gözler açıkkenki kapanma değerine göre (blinkThresholds). Sayım göz yeniden açılınca yapılır.
-function trueDepthCounter(baseClosure) {
-  const c = createBlinkCounter(blinkThresholds(baseClosure))
-  return {
-    push(closure, ts) {
-      const before = c.count
-      return c.push(closure, ts) > before
-    },
-  }
-}
-
-// Ön kamera: blink.js createClosureCounter + refrakter. Göz açıldıktan sonra
-// BLINK_REFRACTORY_MS içinde yeniden kapanırsa aynı kapanmanın devamı sayılır
-// (hafifçe sıkarken titreyen değer çift saymasın).
-function cameraCounter(baselineOpenness) {
-  const c = createClosureCounter(baselineOpenness)
-  let wasClosed = false
-  let openedAt = -Infinity
-  return {
-    push(openness, ts) {
-      const started = c.update(openness)
-      const closed = c.closed()
-      if (wasClosed && !closed) openedAt = ts
-      wasClosed = closed
-      return started && ts - openedAt >= BLINK_REFRACTORY_MS
-    },
-  }
-}
 
 export default function BlinkExercise({ onFinish, onBack, trueDepth = false }) {
   const [useCam, setUseCam] = useState(false)

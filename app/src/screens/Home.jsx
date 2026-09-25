@@ -1,6 +1,7 @@
 import { pickSeries, EYE_LABEL } from '../lib/vaSeries.js'
-import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame, Lock, Eye, UserRound } from 'lucide-react'
-import { profileComplete } from '../lib/profile.js'
+import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame, Lock, Eye } from 'lucide-react'
+import { pendingCard, snooze, skip } from '../lib/profileQuestions.js'
+import { profileFromScreening } from '../lib/profile.js'
 import { DAILY_GOAL_MIN, formatMin, todaySeconds } from '../lib/routines.js'
 import { Sparkline, IrisMark } from '../components/ui.jsx'
 import { trendMessage } from '../lib/trend.js'
@@ -84,7 +85,7 @@ function ModuleRows({ section, ctx, onStart }) {
   )
 }
 
-export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, onStart }) {
+export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, onStart, onAsk, onSaveProfile }) {
   const now = new Date()
   // Oyun oturumları (type 'game') egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
   const exercise = sessions.filter((s) => s.type !== 'game')
@@ -114,6 +115,9 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   const locked = Boolean(eyeBudget?.locked)
   const lockLeft = locked ? fmtLeft(eyeBudget.leftMs) : null
   const ctx = { native: { trueDepth: hasTrueDepth }, sessions, tests, settings, lockLeft }
+  // Profil öncesi (yalnız screening) kayıtlarda kurulum tarihi screening'den
+  const prof = { ...(settings.profile ?? profileFromScreening(settings.screening)), date: settings.profile?.date ?? settings.screening?.date ?? null }
+  const ask = onAsk ? pendingCard(prof, now) : null
 
   return (
     <>
@@ -143,15 +147,28 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
         </button>
       )}
 
-      {!profileComplete(settings.profile) && (
-        <button type="button" className="eb-banner" onClick={() => onStart('profile')}>
-          <UserRound size={22} aria-hidden="true" style={{ color: 'var(--accent)', flex: 'none' }} />
-          <span className="grow">
-            <strong>Profilini tamamla</strong>
-            <span className="sub">Ekran, uyku ve stres; 2 dakika. Plan ve mola süreleri sana göre ayarlanır.</span>
-          </span>
-          <ChevronRight size={18} aria-hidden="true" style={{ color: 'var(--ink-3)' }} />
-        </button>
+      {/* Yerinde sorular (lib/profileQuestions.js): akşam kontrolü ve ilk hafta sonu, Artifact "Önce Fark Ettir" Y4/Y6 */}
+      {ask === 'evening' && (
+        <section className="card ask-card evening">
+          <span className="eyebrow">Akşam kontrolü · 3 soru · 30 sn</span>
+          <h3>Günün nasıl geçti?</h3>
+          <p className="muted small">Ekran, uyku ve gece telefonu. Her ekranda tek soru.</p>
+          <div className="row">
+            <button type="button" className="btn btn-sm" onClick={() => onAsk?.('evening')}>Başla</button>
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => onSaveProfile?.(snooze(prof, 'evening', now))}>Sonra</button>
+          </div>
+        </section>
+      )}
+      {ask === 'stress' && (
+        <section className="card ask-card">
+          <span className="eyebrow">İlk haftan bitti · isteğe bağlı</span>
+          <h3>İki kısa soru daha</h3>
+          <p className="muted small">Son bir ayda nasıl hissettiğine dair. Cevaplamasan da her şey açık kalır.</p>
+          <div className="row">
+            <button type="button" className="btn btn-sm" onClick={() => onAsk?.('stress')}>Cevapla</button>
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => onSaveProfile?.(skip(prof, 'stress', now))}>Geç</button>
+          </div>
+        </section>
       )}
 
       <div className="home-h" style={{ marginTop: 4 }}>
@@ -173,7 +190,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
         <p className="muted small">Aşağıdan istediğin çalışmayı seç.</p>
       )}
 
-      <CoachCard tests={tests} sessions={sessions} weeklyTarget={week.target} onStart={onStart} />
+      <CoachCard tests={tests} sessions={sessions} profile={settings.profile} weeklyTarget={week.target} onStart={onStart} />
 
       <div className="home-h">
         <h2>Ölçümlerin</h2>

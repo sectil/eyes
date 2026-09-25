@@ -20,6 +20,9 @@
 //                                       'test' = ölçüm (ortasında kesilmez). Yoksa kilitlenmez.
 //   storageKeys?: [...]                 "Tüm verileri sil"de temizlenecek localStorage anahtarları
 //   home?: { section: 'measure'|'exercise'|'practice', order: number }
+//   ask?: { before?: [...], after?: [...] }  yerinde profil soruları (lib/profileQuestions.js kimlikleri):
+//                                       before: ekrana girmeden önce, cevaplanmamışsa bir kez; after: ekranda
+//                                       yeni test kaydedildiyse, çıkarken bir kez (App.jsx go)
 //   retired?: true                      emekli: Bugün, Ana sayfa, Farkındalık, mola ekranı ve koçta görünmez;
 //                                       eski kayıtları Gelişim'de okunmaya devam eder (ör. breath-count)
 //   today?({ tests, sessions, now, profile? }) → null | durak | [durak, …]
@@ -58,6 +61,10 @@ export function validateManifest(m) {
   if (m.gates?.eyeBudget != null) need(m.gates.eyeBudget === 'eye' || m.gates.eyeBudget === 'test', "gates.eyeBudget 'eye' ya da 'test' olmalı")
   if (m.today != null) need(typeof m.today === 'function', 'today fonksiyon olmalı')
   if (m.retired != null) need(typeof m.retired === 'boolean', 'retired true/false olmalı')
+  if (m.ask != null) {
+    const list = (v) => v == null || (Array.isArray(v) && v.every((x) => typeof x === 'string'))
+    need(typeof m.ask === 'object' && list(m.ask.before) && list(m.ask.after), 'ask.before/after dizi olmalı')
+  }
   if (m.coach != null) need(typeof m.coach === 'function', 'coach fonksiyon olmalı')
   if (m.stats != null) need(typeof m.stats === 'function', 'stats fonksiyon olmalı')
   if (m.sessions != null) {

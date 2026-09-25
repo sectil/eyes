@@ -1,7 +1,6 @@
 import { Zap } from 'lucide-react'
 import QuickLook from '../../screens/QuickLook.jsx'
 import { firstAndBest } from '../../lib/quicklook.js'
-import { normalizeProfile, profileFromScreening } from '../../lib/profile.js'
 
 export default {
   icon: Zap,
@@ -18,11 +17,6 @@ export default {
       trueDepth={ctx.native.trueDepth}
       onExit={() => ctx.go('home')}
       onFinish={(s) => { ctx.store.addSession(s); ctx.refresh() }}
-      onSaveSeizure={(v) => {
-        const p = normalizeProfile(ctx.settings.profile ?? profileFromScreening(ctx.settings.screening))
-        ctx.store.setSetting('profile', { ...p, seizure: v })
-        ctx.refresh()
-      }}
     />
   ),
 }

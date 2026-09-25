@@ -9,6 +9,7 @@ export default {
   ring: 'eye',
   kind: 'measure',
   gates: { eyeBudget: 'test' },
+  ask: { before: ['correction'], after: ['nearDifficulty'] }, // gözlük testten önce, yakın zorluk sonuçtan sonra
   home: { section: 'measure', order: 30 },
   // Haftada bir: zamanı geldiyse plana girer, bugün yapıldıysa tamam görünür.
   today({ tests, now }) {

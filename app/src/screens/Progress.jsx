@@ -22,6 +22,7 @@ import { PageHeader, IrisMark } from '../components/ui.jsx'
 import { analyzeTrend, trendMessage } from '../lib/trend.js'
 import { snellen20 } from '../lib/optotype.js'
 import { WEEKDAYS, dayKey, monthGrid, startOfWeek, weekProgress } from '../lib/calendar.js'
+import { normalizeProfile, NEAR_DIFFICULTY } from '../lib/profile.js'
 import { SETS, setDurationSec } from '../lib/routines.js'
 import {
   NBSP,
@@ -348,7 +349,7 @@ function PracticeSection({ sessions, now, onStart }) {
 // Görme testi koşulu (AcuityTest WEAR + eski 'glasses'); trend yalnızca aynı koşulu birleştirir (lib/trend.js)
 const CONDITION_TEXT = { none: 'gözlüksüz', reading: 'okuma gözlüğüyle', progressive: 'progresif gözlükle', distance: 'uzak gözlüğüyle', contacts: 'lensle', glasses: 'gözlüklü (eski kayıt)' }
 
-function VisionSection({ tests, onStart }) {
+function VisionSection({ tests, profile, onStart }) {
   const [eye, setEye] = useState(() => pickSeries(tests).eye ?? 'R')
   const va = useMemo(() => tests.filter((t) => t.type === 'va-daily' || t.type === 'va-weekly'), [tests])
   const r = useMemo(() => analyzeTrend(va.filter((t) => t.eye === eye)), [va, eye])
@@ -415,7 +416,7 @@ function VisionSection({ tests, onStart }) {
         </>
       )}
 
-      <ReadingCard tests={tests} onStart={onStart} />
+      <ReadingCard tests={tests} profile={profile} onStart={onStart} />
     </>
   )
 }
@@ -424,7 +425,9 @@ function VisionSection({ tests, onStart }) {
 // altında o testin küçük diyafram merdiveni. Eski "Okuma hızı" kayıtları silinmez; ayrı ve soluk durur,
 // karşılaştırmaya girmez.
 const shortDate = (iso) => new Date(iso).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' })
-function ReadingCard({ tests, onStart }) {
+function ReadingCard({ tests, profile, onStart }) {
+  // Kişinin kendi söylediği (okuma sonrası sorulan yakın zorluk; lib/profileQuestions.js): ölçümün yanında
+  const near = normalizeProfile(profile).nearDifficulty
   const v2 = readingV2(tests).slice(-6).reverse()
   const v1 = readingV1(tests).slice(-4).reverse()
   const jev = jevProgressLine(tests)
@@ -472,6 +475,9 @@ function ReadingCard({ tests, onStart }) {
           <p className="muted small">Eski test farklı ölçüyordu. Karşılaştırma yeni testlerle başlar.</p>
         </>
       )}
+      {near != null && v2.length > 0 && (
+        <p className="muted small">Küçük yazıda zorluk (senin cevabın): <b>{NEAR_DIFFICULTY[near]}</b></p>
+      )}
       {jev && (
         <div className="rd-jevline">
           <IrisMark size={34} />
@@ -486,7 +492,7 @@ function ReadingCard({ tests, onStart }) {
 // onStart (isteğe bağlı): boş durumlardaki "Hafif seti başlat" / "Günlük testi başlat" düğmeleri
 // için App'in go fonksiyonu. weeklyTarget (isteğe bağlı): settings.reminder?.weeklyTarget;
 // verilmezse calendar.js varsayılanı (Ana sayfa ve Takvim ile aynı).
-export default function Progress({ tests = [], sessions = [], weeklyTarget, onStart }) {
+export default function Progress({ tests = [], sessions = [], profile = null, weeklyTarget, onStart }) {
   const now = new Date()
   const todayKey = dayKey(now)
   // Tüm kayıtlar: gün listesi (oyunlar da görünür), ay gezinme sınırı, yılan rekoru.
@@ -539,7 +545,7 @@ export default function Progress({ tests = [], sessions = [], weeklyTarget, onSt
       />
       <DayPanel sel={sel} list={sel ? days.get(sel) ?? [] : []} now={now} last={activities.at(-1)} onJump={jump} onStart={onStart} />
       <PracticeSection sessions={sessions} now={now} onStart={onStart} />
-      <VisionSection tests={tests} onStart={onStart} />
+      <VisionSection tests={tests} profile={profile} onStart={onStart} />
     </>
   )
 }

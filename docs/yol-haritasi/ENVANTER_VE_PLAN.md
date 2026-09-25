@@ -244,3 +244,16 @@ konuşma eşleşmesi ≥ 0,7 olunca cümle biter (`MATCH_THRESHOLD`) → kişi b
   - Çemberler: lib/track.js + cemberDraw.js + TrackGame yeniden; Katman A yön algılama; Katman B (Build 25 motoru) yok.
   - Cihazda doğrulanacak: konuşma tanıma ile otomatik bitiş, Çemberler kamera modu, yol molası bildirimi.
   - Yapılmadı: Yılan "1 tur" sınırı ve "Yola dön" bitişi (Build 25'e bağlı), iki kötü okuma sonrası hekim önerisi (sağlık iddiasına yakın).
+
+## 14. Profil: önce fark ettir, sonra sor (2026-09-25, Build 27 — YAPILDI)
+- Taslak (onaylı): https://claude.ai/artifact/GUZJbvtuaP5w3UVxyFrQMK
+- İlk açılış: giriş filmi → 20 sn farkındalık anı (screens/FirstLook.jsx; okurken kırpma sayısı, kamera yoksa kendi sayım;
+  dayanak Abusharha 2017, DOI 10.2147/OPTO.S142718) → yaş aralığı → uyarı işaretleri (büyük "Hiçbiri yok"; işaret → sevk).
+- Yerinde sorular (lib/profileQuestions.js; manifest `ask.before/after`, App.jsx go): epilepsi Hızlı Bakış'tan önce, gözlük ilk
+  okuma testinden önce, yakın zorluk okuma sonrası, son muayene ilk E testi sonrası; ekran/uyku/gece telefonu akşam kontrolü
+  kartı (18:00 sonrası, "Sonra" ertesi akşama), PSS 2 madde 7. günden sonra isteğe bağlı ("Geç" bir daha sormaz).
+- Her cevaptan sonra "neden sordum" (components/QuestionFlow.jsx, 2 sn). Tek soru, tek ilerleme çubuğu; "Adım/Sayfa" kalktı.
+- Cevapların kullanımı: 40+ okuma testinde yakın gözlük ipucu; gözlük → okuma ön seçimi; yakın zorluk → Gelişim okuma kartı;
+  uyku/ekran/gece/stres → Jev (yalnız yeni `coachLife` onayıyla; eski onaylılar kartta tek dokunuşla ekler).
+- Veri: PROFILE_VERSION 2 (flagsChecked, prompts, firstLook); v1 cevapları aynen taşınır, tarihi olan v1'de flagsChecked doğru.
+- Cihazda doğrulanacak: TrueDepth ve web kamerasıyla 20 sn kırpma sayımı; koç sunucusu yeni alanlar için yeniden yayınlanmalı.

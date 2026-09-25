@@ -1,4 +1,6 @@
-// Profil anketi (ilk açılış, ~2 dk, 11 madde): kişiyi üç halkada tanır — Göz, Güvenlik, Yaşam.
+// Profil (v2, "önce fark ettir, sonra sor"): girişte yalnız yaş aralığı ve uyarı işaretleri; diğer sorular
+// ilgili anda tek tek sorulur (lib/profileQuestions.js, Artifact "Önce Fark Ettir"). Kişiyi üç halkada tanır:
+// Göz, Güvenlik, Yaşam.
 // Kaynak ve gerekçe: docs/arastirma/ajan-raporlari/18_profil_sorulari.md (PubMed taraması) ve
 // docs/yol-haritasi/ENVANTER_VE_PLAN.md §3a. Hiçbir puan tanı ya da risk seviyesi üretmez; cevaplar
 // yalnızca kişi-içi izleme ve uygulamanın kendini ayarlaması için (mola bütçesi, plan, flaşlı görevler).
@@ -6,7 +8,7 @@
 // Madde metinleri: Türkçe doğrulaması olan ölçeklerin resmî metni yayından önce tam metinden alınacak
 // (SQS-TR, PSS-TR); buradakiler "doğrulanmamış çeviri/tek madde" etiketiyle (VARSAYIM).
 
-export const PROFILE_VERSION = 1
+export const PROFILE_VERSION = 2 // 2: flagsChecked, prompts, firstLook (v1 cevapları aynen taşınır)
 
 // Genel klinik uyarı işaretleri (eski Screening ekranından). Yayın öncesi bir göz hekimi gözden geçirmeli.
 export const RED_FLAGS = [
@@ -26,12 +28,14 @@ export const AGE_BANDS = [
   { id: '70+', text: '70+' },
 ]
 export const CORRECTION = [
-  { id: 'none', text: 'Gözlük / lens kullanmıyorum' },
-  { id: 'distance', text: 'Sadece uzak gözlüğü / lens' },
-  { id: 'reading', text: 'Sadece okuma (yakın) gözlüğü' },
-  { id: 'progressive', text: 'Progresif / çift odaklı gözlük' },
-  { id: 'contacts-multi', text: 'Multifokal kontakt lens / göz içi lens' },
+  { id: 'none', text: 'Kullanmıyorum' },
+  { id: 'distance', text: 'Yalnız uzak gözlüğü / lens' },
+  { id: 'reading', text: 'Yalnız okuma gözlüğü' },
+  { id: 'progressive', text: 'Progresif / çift odaklı' },
+  { id: 'contacts-multi', text: 'Multifokal lens / göz içi lens' },
 ]
+// Profildeki gözlük → testteki "Bugün nasıl okuyorsun?" ön seçimi (AcuityTest WEAR kimlikleri)
+export const WEAR_FROM_CORRECTION = { none: 'none', distance: 'distance', reading: 'reading', progressive: 'progressive', 'contacts-multi': 'contacts' }
 export const EXAM = [
   { id: 'lt1', text: '1 yıldan yakın' },
   { id: '1to2', text: '1–2 yıl önce' },
@@ -84,7 +88,32 @@ export const emptyProfile = () => ({
   sleep: null, // 0–10
   nightPhone: null,
   stress: { control: null, overwhelmed: null }, // 0–4
+  flagsChecked: false, // uyarı işaretleri ekranı cevaplandı ("Hiçbiri yok" ya da işaret)
+  prompts: {}, // yerinde sorular: { [id]: { snoozedUntil?: iso, skipped?: iso } }
+  firstLook: null, // ilk 20 sn: { blinks, seconds, method: 'truedepth'|'camera'|'self', date }
 })
+
+export const LOOK_METHODS = ['truedepth', 'camera', 'self']
+const isoOrNull = (v) => (typeof v === 'string' && Number.isFinite(new Date(v).getTime()) ? v : null)
+function normalizePrompts(raw) {
+  const out = {}
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return out
+  for (const [id, v] of Object.entries(raw)) {
+    if (!/^[a-z][a-zA-Z]{0,23}$/.test(id) || !v || typeof v !== 'object') continue
+    const e = {}
+    if (isoOrNull(v.snoozedUntil)) e.snoozedUntil = v.snoozedUntil
+    if (isoOrNull(v.skipped)) e.skipped = v.skipped
+    if (Object.keys(e).length) out[id] = e
+  }
+  return out
+}
+function normalizeLook(raw) {
+  if (!raw || typeof raw !== 'object') return null
+  const blinks = intIn(raw.blinks, 0, 200)
+  const seconds = intIn(raw.seconds, 1, 120)
+  if (blinks == null || seconds == null || !LOOK_METHODS.includes(raw.method)) return null
+  return { blinks, seconds, method: raw.method, date: isoOrNull(raw.date) }
+}
 
 const oneOf = (list, v) => (list.some((o) => o.id === v) ? v : null)
 const intIn = (v, min, max) => (Number.isInteger(v) && v >= min && v <= max ? v : null)
@@ -109,6 +138,10 @@ export function normalizeProfile(raw) {
       control: intIn(raw.stress?.control, 0, STRESS_FREQ.length - 1),
       overwhelmed: intIn(raw.stress?.overwhelmed, 0, STRESS_FREQ.length - 1),
     },
+    // v1 → v2: tarihi olan eski profil uyarı işaretleri sayfasını geçmişti
+    flagsChecked: raw.flagsChecked === true || (raw.version !== 2 && typeof raw.date === 'string'),
+    prompts: normalizePrompts(raw.prompts),
+    firstLook: normalizeLook(raw.firstLook),
   }
 }
 
@@ -124,23 +157,11 @@ export function profileFromScreening(s) {
   return normalizeProfile({ ageBand: ageBandFromAge(Number(s.age)), correction: s.correction, lastExam: s.lastExam, flags: s.flags })
 }
 
-// Sayfa bazında zorunlu alanlar (kırmızı bayrak ve stres isteğe bağlı değil ama "hiç" seçilebilir)
-export const PAGES = ['eye', 'flags', 'safety', 'life']
-export function pageComplete(p, page) {
-  switch (page) {
-    case 'eye':
-      return Boolean(p.ageBand && p.correction && p.lastExam)
-    case 'flags':
-      return true
-    case 'safety':
-      return Boolean(p.seizure) && p.nearDifficulty != null
-    case 'life':
-      return Boolean(p.screenHours && p.nightPhone) && p.sleep != null && p.stress.control != null && p.stress.overwhelmed != null
-    default:
-      return false
-  }
+// Kurulum kapısı: yaş aralığı ve uyarı işaretleri cevaplandı, işaret yok. Diğer sorular yerinde sorulur.
+export const setupDone = (p) => {
+  const q = normalizeProfile(p)
+  return Boolean(q.ageBand) && q.flagsChecked && q.flags.length === 0
 }
-export const profileComplete = (p) => Boolean(p) && PAGES.every((pg) => pageComplete(p, pg))
 
 // Uygulamanın kendini ayarlaması için türetilen işaretler. Tanı değil; ekranda "risk" olarak gösterilmez.
 export function profileSignals(p) {

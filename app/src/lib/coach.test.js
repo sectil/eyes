@@ -115,3 +115,17 @@ describe('api/coach (Vercel fonksiyonu)', () => {
     expect(r.status).toBe(413)
   })
 })
+
+describe('profil özeti (coachLife onayı)', () => {
+  it('yalnız profil verilirse gider; tanı alanı üretmez', async () => {
+    const { buildSignals } = await import('./coach.js')
+    const now = new Date('2026-09-25T10:00:00')
+    const prof = { sleep: 3, screenHours: '6+', nightPhone: 'most', stress: { control: 3, overwhelmed: 2 } }
+    const withLife = buildSignals([], [], now, 3, prof)
+    expect(withLife).toMatchObject({ sleep7: 3, screenHours: '6+', nightPhone: 'most', stress8: 5 })
+    const without = buildSignals([], [], now, 3)
+    expect(without.sleep7).toBeUndefined()
+    expect(without.stress8).toBeUndefined()
+    expect(sanitizeSignals({ screenHours: '9 saat', sleep7: 11, stress8: 9 })).toEqual({})
+  })
+})

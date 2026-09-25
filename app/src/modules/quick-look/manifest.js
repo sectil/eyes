@@ -15,6 +15,7 @@ export default {
   ring: 'attention',
   kind: 'practice',
   gates: { eyeBudget: 'eye' },
+  ask: { before: ['seizure'] }, // flaşlı görevden hemen önce (lib/profileQuestions.js)
   home: { section: 'practice', order: 5 },
   sessions: {
     match: (s) => s.type === SESSION_TYPE,

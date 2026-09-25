@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { emptyProfile, normalizeProfile, profileFromScreening, profileSignals, profileComplete, pageComplete, screeningFromProfile, RED_FLAGS } from './profile.js'
+import { emptyProfile, normalizeProfile, profileFromScreening, profileSignals, setupDone, screeningFromProfile, RED_FLAGS, PROFILE_VERSION } from './profile.js'
 
 const full = () => ({
   ...emptyProfile(),
@@ -27,13 +27,38 @@ describe('profile', () => {
     expect(p.stress).toEqual({ control: 4, overwhelmed: null })
     expect(normalizeProfile(null)).toEqual(emptyProfile())
   })
-  it('tamamlık sayfa bazında; kırmızı bayrak sayfası her zaman tamam', () => {
-    const p = full()
-    expect(profileComplete(p)).toBe(true)
-    expect(pageComplete({ ...p, seizure: null }, 'safety')).toBe(false)
-    expect(pageComplete({ ...p, sleep: null }, 'life')).toBe(false)
-    expect(pageComplete(emptyProfile(), 'flags')).toBe(true)
-    expect(profileComplete(emptyProfile())).toBe(false)
+  it('kurulum kapısı: yaş ve uyarı işaretleri (Hiçbiri yok) yeter; işaret varsa kapalı', () => {
+    expect(setupDone(emptyProfile())).toBe(false)
+    expect(setupDone({ ...emptyProfile(), ageBand: '40-49' })).toBe(false) // işaretler cevaplanmadı
+    expect(setupDone({ ...emptyProfile(), version: 2, ageBand: '40-49', flagsChecked: true })).toBe(true)
+    expect(setupDone({ ...emptyProfile(), version: 2, ageBand: '40-49', flagsChecked: true, flags: ['curtain'] })).toBe(false)
+  })
+  it('v1 → v2 taşıma: cevaplar aynen, tarihi olan eski profilde işaretler cevaplanmış sayılır', () => {
+    const v1 = { ...full(), version: 1 }
+    delete v1.flagsChecked
+    delete v1.prompts
+    delete v1.firstLook
+    const p = normalizeProfile(v1)
+    expect(PROFILE_VERSION).toBe(2)
+    expect(p.version).toBe(2)
+    expect(p.flagsChecked).toBe(true)
+    expect(p.sleep).toBe(4)
+    expect(p.stress).toEqual({ control: 3, overwhelmed: 2 })
+    expect(p.prompts).toEqual({})
+    expect(p.firstLook).toBeNull()
+    expect(normalizeProfile({ version: 1 }).flagsChecked).toBe(false) // tarihsiz: işaret sayfası geçilmemiş
+    expect(normalizeProfile({ version: 2, date: '2026-09-25T10:00:00.000Z' }).flagsChecked).toBe(false) // v2 kendi alanını taşır
+  })
+  it('v2 alanları süzülür: firstLook ve prompts', () => {
+    const p = normalizeProfile({
+      version: 2,
+      firstLook: { blinks: 4, seconds: 20, method: 'camera', date: '2026-09-25T10:00:00.000Z' },
+      prompts: { evening: { snoozedUntil: '2026-09-26T15:00:00.000Z', junk: 1 }, 'bad id': { skipped: 'x' }, stress: { skipped: 'bozuk' } },
+    })
+    expect(p.firstLook).toEqual({ blinks: 4, seconds: 20, method: 'camera', date: '2026-09-25T10:00:00.000Z' })
+    expect(p.prompts).toEqual({ evening: { snoozedUntil: '2026-09-26T15:00:00.000Z' } })
+    expect(normalizeProfile({ firstLook: { blinks: -1, seconds: 20, method: 'camera' } }).firstLook).toBeNull()
+    expect(normalizeProfile({ firstLook: { blinks: 3, seconds: 20, method: 'göz' } }).firstLook).toBeNull()
   })
   it('sinyaller: ekran 6+ → kısa bütçe; uyku ≤4; nöbet evet/emin değilim → flaş kapalı', () => {
     const s = profileSignals(full())

@@ -86,14 +86,17 @@ export function PageHeader({ eyebrow, title, subtitle, onBack }) {
 }
 
 // Kurulum adımları (1/3 …)
+// Kurulum başlığı: tek sürekli ilerleme çubuğu ("Adım x / y" yazısı yok; Artifact "Önce Fark Ettir").
+// Adım 1 ilk açılış ekranlarıdır (screens/Onboarding.jsx, çubuğun ilk %60'ı); sonraki adımlar kalan payı böler.
+const SETUP_FIRST_SHARE = 0.6
 export function StepHeader({ step, total, title, subtitle }) {
+  const v = total > 1 ? SETUP_FIRST_SHARE + ((1 - SETUP_FIRST_SHARE) * (step - 1.5)) / (total - 1) : 1
   return (
     <header className="page-header">
-      <div className="stepper" aria-label={`Adım ${step} / ${total}`}>
-        {Array.from({ length: total }, (_, i) => <span key={i} className={i < step ? 'on' : ''} />)}
+      <div className="stepper" role="progressbar" aria-label="Kurulum" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(v * 100)}>
+        <span className="on" style={{ flex: 'none', width: `${Math.max(0, Math.min(1, v)) * 100}%` }} />
       </div>
-      <span className="eyebrow" style={{ marginTop: 10 }}>Adım {step} / {total}</span>
-      <h1>{title}</h1>
+      <h1 style={{ marginTop: 10 }}>{title}</h1>
       {subtitle && <p>{subtitle}</p>}
     </header>
   )

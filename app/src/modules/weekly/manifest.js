@@ -8,6 +8,7 @@ export default {
   ring: 'eye',
   kind: 'measure',
   gates: { eyeBudget: 'test' },
+  ask: { after: ['lastExam'] },
   home: { section: 'measure', order: 10 },
   // Zamanı geldiyse (son haftalık testten 7 gün geçtiyse) bugünün ölçümü budur.
   today({ tests, now }) {

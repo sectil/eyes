@@ -227,9 +227,9 @@ button { font: inherit; color: inherit; }
 .segmented button[aria-pressed='true'], .segmented button[aria-selected='true'] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
 
 /* ---------- Adım göstergesi ---------- */
-.stepper { display: flex; gap: 6px; }
-.stepper span { height: 4px; flex: 1; border-radius: 2px; background: var(--surface-3); }
-.stepper span.on { background: var(--accent); }
+.stepper { display: flex; height: 6px; border-radius: 3px; background: var(--surface-3); overflow: hidden; }
+.stepper span { height: 100%; border-radius: 3px; }
+.stepper span.on { background: var(--accent-grad); }
 
 /* ---------- Ana sayfa ---------- */
 .hero-row { display: flex; align-items: center; gap: 18px; }

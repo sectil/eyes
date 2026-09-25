@@ -2,6 +2,8 @@ import { BookText } from 'lucide-react'
 import ReadingTest from '../../screens/ReadingTest.jsx'
 import { lastOfType, isDue } from '../../lib/today.js'
 import { usedTextIds, readingV1, readingV2, cpsOf, cpsText } from '../../lib/reading.js'
+import { normalizeProfile, profileFromScreening, WEAR_FROM_CORRECTION } from '../../lib/profile.js'
+import { isOlder } from '../../lib/profileQuestions.js'
 
 // Son okuma testindeki gözlük koşulu (yalnız yeni yöntem); yoksa görme testindeki seçim
 const lastCorrection = (tests) =>
@@ -37,12 +39,16 @@ export default {
   },
   render(ctx) {
     const recent = usedTextIds(ctx.tests.filter((t) => t.type === 'reading').slice(-2))
+    // Profildeki gözlük cevabı: önceki test yoksa ön seçim; 40 yaş ve üstü: yakın gözlük hatırlatması
+    const profile = normalizeProfile(ctx.settings.profile ?? profileFromScreening(ctx.settings.screening))
     return (
       <ReadingTest
         {...ctx.common}
         tests={ctx.tests}
         recentTextIds={recent}
         lastCorrection={lastCorrection(ctx.tests)}
+        defaultCorrection={WEAR_FROM_CORRECTION[profile.correction] ?? null}
+        nearHint={isOlder(profile)}
         onSave={(r) => {
           ctx.store.addTest(r)
           ctx.refresh()

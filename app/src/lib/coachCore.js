@@ -25,6 +25,11 @@ const SCHEMA = {
   daysSinceLastExercise: NUM(0, 3650),
   snakeBest: NUM(0, 100000),
   hourNow: NUM(0, 23),
+  // Profil cevaplarının özeti (yalnız coachLife onayıyla; lib/coach.js lifeSignals)
+  screenHours: (v) => (['lt2', '2-4', '4-6', '6+'].includes(v) ? v : null),
+  sleep7: NUM(0, 10),
+  nightPhone: (v) => (['never', 'weekly', 'most', 'every'].includes(v) ? v : null),
+  stress8: NUM(0, 8),
   modules: sanitizeModules, // modül özetleri (registry coach()); yalnızca sayı ve kısa dize
 }
 
@@ -65,6 +70,7 @@ KESİN KURALLAR:
 - vaAlert "yellow" veya "red" ise yalnızca şunu öner: "Birkaç gün daha ölç; devam ederse bir göz doktoruna görün." Başka yorum yapma.
 - Egzersizleri "konfor" ve "düzen" diliyle öner; kırpma egzersizi ekran yorgunluğunda kanıtlı, bakış hareketleri yalnızca rahatlama.
 - "modules" alanı varsa son 7 günün pratik özetleridir: track = Çemberler (best rekor, follow7 isabet %, arrive7 ortanca varış ms), snake = Yılan (best), breath = Nefes pratiği (minutes7, calmDelta7 = sakinlik değişimi 1–5). Puanları görmeyle ilişkilendirme; yalnızca düzen ve pratik dilinde yorumla.
+- screenHours (günlük ekran süresi aralığı), sleep7 (kişinin son 7 günlük uyku puanı, 0–10), nightPhone (gece uyanınca telefona bakma sıklığı), stress8 (PSS'nin 2 maddesi, 0–8) varsa kişinin kendi cevaplarıdır; tanı, risk ya da "kötü/iyi" yargısı yazma. Yalnızca öneriyi seçerken dikkate al (ör. uyku puanı düşükse daha kısa, dinlendirici bir öneri; stres yüksekse nefes).
 - Uygulamadaki eylemlerden birini öner: "Günlük test", "Hafif set", "Normal set", "Kırpma egzersizi", "Okuma testi", "Uzağa bakış molası", "Nefes pratiği", "Çemberler", "Yılan oyunu".
 ÇIKTI: yalnızca şu JSON, başka hiçbir şey yazma:
 {"insight":"en fazla 160 karakter","action":"en fazla 60 karakter, eylem adıyla başlar"}`

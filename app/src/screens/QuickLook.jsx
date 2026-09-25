@@ -9,13 +9,12 @@ import { loadGazeModel } from '../lib/gazeCalib.js'
 import { haptic } from '../lib/native.js'
 import { requestEyeRound } from '../lib/eyeBudgetStore.js'
 import { howtoSeen, markHowtoSeen } from '../lib/howto.js'
-import { profileSignals, SEIZURE } from '../lib/profile.js'
+import { profileSignals } from '../lib/profile.js'
 import {
   PARAMS, DIR_LABELS, PROGRAM_HOURS, createStaircase, makeTrial, distractorSlots, isEasyTrial, easyFrames, peripheralOffset, eccentricityDeg, makeRecord, framesToMs, msLabel,
   isQuickLook, programHours, nextLevel, firstAndBest, rng,
 } from '../lib/quicklook.js'
 import '../styles/quicklook.css'
-import '../styles/profile.css' // pf-chips
 
 // Hızlı Bakış (lib/quicklook.js). Uyaran React çizimine bırakılmaz: kare döngüsünde (requestAnimationFrame)
 // doğrudan görünür/gizli yapılır; açılış ve kapanış zamanları ölçülür, kayda ölçülen süre yazılır.
@@ -25,7 +24,7 @@ import '../styles/profile.css' // pf-chips
 
 const deg2px = (deg, pxPerMm, mm) => Math.tan((deg * Math.PI) / 180) * mm * pxPerMm
 
-export default function QuickLook({ sessions = [], settings, calibration, trueDepth = false, onExit, onFinish, onSaveSeizure }) {
+export default function QuickLook({ sessions = [], settings, calibration, trueDepth = false, onExit, onFinish }) {
   const sig = profileSignals(settings?.profile)
   const [phase, setPhase] = useState(() => (sig.flashSafe === false ? 'blocked' : !howtoSeen('quick-look') ? 'howto' : 'intro'))
   const [stage, setStage] = useState('fix') // fix | show | ask-center | ask-pos | feedback
@@ -217,17 +216,6 @@ export default function QuickLook({ sessions = [], settings, calibration, trueDe
             <div><span className="muted small">Son eşik</span><strong>{msLabel(fb.last)}</strong></div>
             <div><span className="muted small">İlk ölçüm</span><strong>{msLabel(fb.first)}</strong></div>
             <div><span className="muted small">Seviye</span><strong>{level === 1 ? 'Temel' : `${level} · ${PARAMS.levels[level]} çeldirici`}</strong></div>
-          </section>
-        )}
-        {sig.flashSafe == null && (
-          <section className="card stack" style={{ gap: 8 }}>
-            <span className="eyebrow">Başlamadan önce</span>
-            <p className="small" style={{ margin: 0 }}>Epilepsi tanın var mı, ya da yanıp sönen ışık veya desenle bayılma-kasılma yaşadın mı?</p>
-            <div className="pf-chips">
-              {SEIZURE.map((o) => (
-                <button key={o.id} type="button" className="pf-chip" onClick={() => { onSaveSeizure?.(o.id); if (o.id !== 'no') setPhase('blocked') }}>{o.text}</button>
-              ))}
-            </div>
           </section>
         )}
         <div className="row between">

@@ -21,22 +21,26 @@ const ACTIONS = [
 ]
 const screenFor = (action) => ACTIONS.find(([re]) => re.test(action ?? ''))?.[1] ?? null
 
-export default function CoachCard({ tests, sessions, weeklyTarget, onStart }) {
+export default function CoachCard({ tests, sessions, profile = null, weeklyTarget, onStart }) {
   const [prefs, setLocal] = useState(getPrefs)
   const [consent, setConsent] = useState(false)
   const [tip, setTip] = useState(null)
 
   useEffect(() => subscribePrefs((p) => setLocal(p)), [])
 
+  // Profil cevaplarının özeti yalnız coachLife onayıyla gider (uyku, ekran, gece telefonu, stres)
+  const life = prefs.coachLife ? profile : null
+  const lifeKey = life ? JSON.stringify([life.screenHours, life.sleep, life.nightPhone, life.stress]) : ''
   useEffect(() => {
     if (!prefs.coach) return undefined
     let alive = true
     setTip(null)
-    getTodayInsight({ tests, sessions, weeklyTarget }).then((t) => alive && setTip(t))
+    getTodayInsight({ tests, sessions, weeklyTarget, profile: life }).then((t) => alive && setTip(t))
     return () => {
       alive = false
     }
-  }, [prefs.coach, tests.length, sessions.length, weeklyTarget])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [prefs.coach, prefs.coachLife, tests.length, sessions.length, weeklyTarget, lifeKey])
 
   if (!prefs.coach && prefs.coachHidden) return null
 
@@ -52,12 +56,13 @@ export default function CoachCard({ tests, sessions, weeklyTarget, onStart }) {
           <>
             <p className="note small">
               <ShieldCheck size={16} aria-hidden="true" />
-              Açarsan yalnızca özet sayılar (ör. bu hafta kaç gün çalıştığın, son 7 günün ölçüm ortancası) şifreli bağlantıyla
+              Açarsan yalnızca özet sayılar (ör. bu hafta kaç gün çalıştığın, son 7 günün ölçüm ortancası) ve profil
+              cevaplarından uyku puanı, ekran süresi, gece telefonu ve stres özeti şifreli bağlantıyla
               sunucumuza, oradan yapay zekâ sağlayıcısına (OpenRouter) gider. Kamera görüntüsü, adın ya da cihaz kimliğin
               gitmez. Öneriler tıbbi tavsiye değildir. Bilgi ekranından istediğin an kapatabilirsin.
             </p>
             <div className="row" style={{ gap: 10 }}>
-              <button className="btn btn-sm" onClick={() => setPrefs({ coach: true })}>Kabul et ve aç</button>
+              <button className="btn btn-sm" onClick={() => setPrefs({ coach: true, coachLife: true })}>Kabul et ve aç</button>
               <button className="btn btn-ghost btn-sm" onClick={() => setConsent(false)}>Vazgeç</button>
             </div>
           </>
@@ -69,6 +74,8 @@ export default function CoachCard({ tests, sessions, weeklyTarget, onStart }) {
   }
 
   const target = tip ? screenFor(tip.action) : null
+  // Eski onay profil cevaplarını kapsamıyordu: ayrıca sorulur (tek dokunuş)
+  const askLife = !prefs.coachLife && profile && (profile.sleep != null || profile.screenHours != null || profile.nightPhone != null)
   return (
     <section className="card coach-card" aria-live="polite">
       <div className="row between">
@@ -92,6 +99,12 @@ export default function CoachCard({ tests, sessions, weeklyTarget, onStart }) {
           <i />
           <i />
         </div>
+      )}
+      {askLife && (
+        <p className="muted small coach-life">
+          Uyku, ekran, gece telefonu ve stres cevaplarının özeti de Jev'e gitsin mi?{' '}
+          <button type="button" className="link-btn" onClick={() => setPrefs({ coachLife: true })}>Evet, ekle</button>
+        </p>
       )}
     </section>
   )

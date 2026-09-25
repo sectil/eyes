@@ -4,6 +4,7 @@ import { pickSeries } from './vaSeries.js'
 import { activitiesFrom, countedActivities, summary } from './stats.js'
 import { sanitizeSignals } from './coachCore.js'
 import { registry } from '../modules/registry.js'
+import { normalizeProfile } from './profile.js'
 
 export const COACH_URL = import.meta.env?.VITE_COACH_URL || 'https://eyetrail.vercel.app/api/coach'
 const CACHE_KEY = 'gozolcum:coach-today'
@@ -15,7 +16,14 @@ const dayKey = (d) => {
   return `${x.getFullYear()}-${x.getMonth() + 1}-${x.getDate()}`
 }
 
-export function buildSignals(tests = [], sessions = [], now = new Date(), weeklyTarget = 3) {
+// Profil cevaplarının özeti: yalnız kişinin kendi cevapları, tanı değil (lib/profileQuestions.js "neden sordum")
+export function lifeSignals(profile) {
+  const p = normalizeProfile(profile)
+  const st = p.stress.control != null && p.stress.overwhelmed != null ? p.stress.control + p.stress.overwhelmed : null
+  return { screenHours: p.screenHours, sleep7: p.sleep, nightPhone: p.nightPhone, stress8: st }
+}
+
+export function buildSignals(tests = [], sessions = [], now = new Date(), weeklyTarget = 3, profile = null) {
   const all = activitiesFrom(tests, sessions)
   const acts = countedActivities(all) // oyunlar hedefe/seriye sayılmaz
   const since7 = now.getTime() - 7 * DAY
@@ -48,6 +56,7 @@ export function buildSignals(tests = [], sessions = [], now = new Date(), weekly
     snakeBest: summary(all, now).bestSnake,
     hourNow: now.getHours(),
     modules: moduleSignals(sessions, now),
+    ...(profile ? lifeSignals(profile) : {}),
   })
 }
 
@@ -96,8 +105,9 @@ function writeCache(v) {
 }
 
 // Günde bir kez sunucudan (sinyaller değişince yeniden). Döner { insight, action, source: 'jev'|'rules' }
-export async function getTodayInsight({ tests, sessions, weeklyTarget, now = new Date(), fetchImpl = globalThis.fetch } = {}) {
-  const signals = buildSignals(tests, sessions, now, weeklyTarget)
+// profile: yalnız coachLife onayı varsa verilir (CoachCard)
+export async function getTodayInsight({ tests, sessions, weeklyTarget, profile = null, now = new Date(), fetchImpl = globalThis.fetch } = {}) {
+  const signals = buildSignals(tests, sessions, now, weeklyTarget, profile)
   const sig = JSON.stringify(signals)
   const today = dayKey(now)
   const cached = readCache()

@@ -8,6 +8,7 @@ export default {
   ring: 'eye',
   kind: 'measure',
   gates: { eyeBudget: 'test' },
+  ask: { after: ['lastExam'] }, // ilk E testinden sonra son muayene
   home: { section: 'measure', order: 20 },
   // Haftalık test bugün yapıldıysa ya da zamanı geldiyse ölçüm adımını o üstlenir.
   // VARSAYIM: haftalık zamanı gelmediyse günlük test her gün plandadır.

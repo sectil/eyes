@@ -36,7 +36,7 @@ const median = (arr) => {
 const inRange = (mm) => mm != null && mm >= READ_MIN_MM && mm <= READ_MAX_MM
 const wearText = (id) => WEAR.find((w) => w.id === id)?.text ?? null
 
-export default function ReadingTest({ calibration, distanceCal, tests = [], recentTextIds = [], lastCorrection = null, onSave, onDone, onCancel }) {
+export default function ReadingTest({ calibration, distanceCal, tests = [], recentTextIds = [], lastCorrection = null, defaultCorrection = null, nearHint = false, onSave, onDone, onCancel }) {
   const { pxPerMm, dpr } = calibration
   const xRatio = useMemo(() => measureXHeightRatio(FONT), [])
   const [ladder] = useState(() =>
@@ -49,7 +49,8 @@ export default function ReadingTest({ calibration, distanceCal, tests = [], rece
   const [phase, setPhase] = useState('intro') // intro | howto | ready | opening | reading | moment | low | distance | result
   const [howtoFirst] = useState(() => !howtoSeen('reading'))
   const howtoThenStart = useRef(false)
-  const [correction, setCorrection] = useState(() => (WEAR.some((w) => w.id === lastCorrection) ? lastCorrection : null))
+  const valid = (id) => WEAR.some((w) => w.id === id)
+  const [correction, setCorrection] = useState(() => (valid(lastCorrection) ? lastCorrection : valid(defaultCorrection) ? defaultCorrection : null))
   const [speech, setSpeech] = useState({ checked: !isIOSApp(), available: false, onDevice: false, enabled: false })
   const [step, setStep] = useState({ idx: 0, practice: firstTime, retry: false })
   const [text, setText] = useState(() => queue[0])
@@ -488,6 +489,7 @@ export default function ReadingTest({ calibration, distanceCal, tests = [], rece
               ? `Geçen sefer “${wearText(lastCorrection)}” seçtin. Farklı koşuldaki sonuçlar karşılaştırılmaz.`
               : 'Her seferinde aynı koşulda oku.'}
           </p>
+          {nearHint && <p className="muted small">Yakın gözlüğün varsa tak.</p>}
         </div>
         {speech.available && (
           <p className="note">

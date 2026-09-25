@@ -7,13 +7,16 @@ import { recordTime, eyeStatus, beginRest, resetBudget, flushBudget, EXHAUSTED_E
 import { LIMITS as EYE_LIMITS } from './lib/eyeBudget.js'
 import { onRestNotifyTap } from './lib/restNotify.js'
 import Home from './screens/Home.jsx'
-import Profile from './screens/Profile.jsx'
+import Onboarding from './screens/Onboarding.jsx'
+import ProfileQuestions from './screens/ProfileQuestions.jsx'
+import QuestionFlow from './components/QuestionFlow.jsx'
+import { missing, GROUPS } from './lib/profileQuestions.js'
 import ProfileHome from './screens/ProfileHome.jsx'
 import IntroFilm from './components/IntroFilm.jsx'
 import { shouldPlayIntro } from './lib/intro.js'
 import { ageBandFromAge } from './lib/profile.js'
 import { ageFromBirthDate } from './lib/identity.js'
-import { screeningFromProfile, profileFromScreening } from './lib/profile.js'
+import { screeningFromProfile, profileFromScreening, normalizeProfile } from './lib/profile.js'
 import { resetAllHowto } from './lib/howto.js'
 import CardCalibration, { calibrationStillValid } from './screens/CardCalibration.jsx'
 import DistanceCalibration from './screens/DistanceCalibration.jsx'
@@ -93,10 +96,27 @@ export default function App() {
   // Göz kalibrasyonu bekleyen hedef (TrueDepth'te göz kontrollü ekrandan önce, bir kez): { to } | null
   const [gazeFor, setGazeFor] = useState(null)
   const gazeSkipped = useRef(false) // "Şimdi değil" → bu oturumda tekrar sorma
+  // Yerinde profil sorusu (lib/profileQuestions.js; modül manifest ask.before / ask.after): { ids, then, back } | null
+  const [askFor, setAskFor] = useState(null)
+  const entryTests = useRef(0) // ekrana girerken test sayısı (ask.after: bu ekranda yeni test kaydedildi mi)
   const budgetKind = lockFor ? null : budgetKindOf(screen)
   useEyeClock(budgetKind)
   const refresh = () => setData(store.get())
-  const go = (s) => {
+  const profileNow = () => {
+    const st = store.get().settings
+    return normalizeProfile(st.profile ?? profileFromScreening(st.screening))
+  }
+  const go = (s, { noAsk = false } = {}) => {
+    // Test bitti, ekrandan çıkılıyor: modülün "sonra sor" sorusu (ör. okuma sonrası yakın zorluk) bir kez
+    const after = registry.forRoute(screen)?.ask?.after
+    if (!noAsk && after && s !== screen && store.get().tests.length > entryTests.current) {
+      const ids = missing(profileNow(), after)
+      if (ids.length) {
+        setAskFor({ ids, then: s, back: s })
+        window.scrollTo(0, 0)
+        return
+      }
+    }
     const needsGaze = Boolean(gatesOf(s).gaze)
     if (needsGaze && native.trueDepth && !gazeSkipped.current && !hasGazeModel()) {
       setGazeFor({ to: s })
@@ -120,8 +140,21 @@ export default function App() {
         return
       }
     }
+    // Modülün "önce sor" sorusu (ör. Hızlı Bakış'tan önce epilepsi); kapatılırsa hedefe gidilmez
+    const before = registry.forRoute(s)?.ask?.before
+    if (!noAsk && before) {
+      const ids = missing(profileNow(), before)
+      if (ids.length) {
+        setLockFor(null)
+        setAskFor({ ids, then: s, back: lastTab })
+        window.scrollTo(0, 0)
+        return
+      }
+    }
+    setAskFor(null)
     setLockFor(null)
     if (TAB_SCREENS.includes(s)) setLastTab(s)
+    entryTests.current = store.get().tests.length
     setScreen(s)
     window.scrollTo(0, 0)
   }
@@ -283,7 +316,8 @@ export default function App() {
   if (screen === 'intro') return <IntroFilm replay onDone={() => go(lastTab)} />
   if (shouldPlayIntro(settings, prefersReducedMotion())) return <IntroFilm onDone={markIntro} />
   if (!settings.screening || settings.screening.referred) {
-    return <Profile initial={settings.profile ?? profileFromScreening(settings.screening)} step={1} total={setupTotal} onDone={saveProfile} />
+    // İlk açılış: 20 sn farkındalık anı, yaş, uyarı işaretleri (Artifact "Önce Fark Ettir"). İşaret varsa kilitli kalır.
+    return <Onboarding initial={settings.profile ?? profileFromScreening(settings.screening)} trueDepth={native.trueDepth} onDone={saveProfile} />
   }
   if (screen === 'profile') {
     // Profilim (screens/ProfileHome.jsx): ad, doğum tarihi, avatar cihazda kalır; doğum tarihi anketin yaş aralığını doldurur.
@@ -308,7 +342,7 @@ export default function App() {
     )
   }
   if (screen === 'profile-questions') {
-    return <Profile initial={settings.profile ?? profileFromScreening(settings.screening)} editing onDone={(p) => { saveProfile(p); go('profile') }} onBack={() => go('profile')} />
+    return <ProfileQuestions profile={settings.profile ?? profileFromScreening(settings.screening)} trueDepth={native.trueDepth} onSave={saveProfile} onBack={() => go('profile')} />
   }
   if (!isIOSApp() && (!calibrationStillValid(settings.calibration) || screen === 'recalibrate')) {
     return (
@@ -381,6 +415,21 @@ export default function App() {
     )
   }
 
+  // --- Yerinde profil sorusu (tek soruluk ekranlar) ---
+  if (askFor) {
+    const { ids, then, back: backTo } = askFor
+    return (
+      <QuestionFlow
+        key={ids.join(',')}
+        ids={ids}
+        profile={settings.profile ?? profileFromScreening(settings.screening)}
+        onSave={saveProfile}
+        onDone={() => { setAskFor(null); go(then, { noAsk: true }) }}
+        onClose={() => { setAskFor(null); go(backTo ?? lastTab, { noAsk: true }) }}
+      />
+    )
+  }
+
   // Oyun oturumları (type 'game') egzersiz süresine ve takvimdeki çalışma günlerine sayılmaz
   // (Home.jsx'teki haftalık hedef/günlük süre ile tutarlı). Gelişim de oyunları gün/seri/hafta sayımına
   // katmaz; oyunları yalnızca listeler (lib/stats.js countsTowardGoal).
@@ -423,7 +472,7 @@ export default function App() {
   // --- Sekmeli ekranlar ---
   const tab = TAB_SCREENS.includes(screen) ? screen : 'home'
   let content
-  if (tab === 'progress') content = <Progress tests={tests} sessions={sessions} weeklyTarget={settings.reminder?.weeklyTarget} onStart={go} />
+  if (tab === 'progress') content = <Progress tests={tests} sessions={sessions} profile={settings.profile} weeklyTarget={settings.reminder?.weeklyTarget} onStart={go} />
   else if (tab === 'calendar') content = <Calendar records={[...tests, ...exercise]} schedule={settings.reminder} onEditSchedule={() => go('schedule')} />
   else if (tab === 'info') {
     content = (
@@ -456,7 +505,7 @@ export default function App() {
       />
     )
   } else {
-    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={native.trueDepth} eyeBudget={budget} premium={access.loading || access.premium} onStart={go} />
+    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={native.trueDepth} eyeBudget={budget} premium={access.loading || access.premium} onStart={go} onAsk={(group) => { const ids = missing(settings.profile, GROUPS[group] ?? []); if (ids.length) setAskFor({ ids, then: 'home', back: 'home' }) }} onSaveProfile={saveProfile} />
   }
 
   return (
