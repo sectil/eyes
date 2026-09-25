@@ -54,6 +54,7 @@ import {
 } from '../lib/snake.js'
 import { playSfx, unlockSfx } from '../lib/sfx.js'
 import '../styles/snake.css'
+import GazeTutorial from '../components/GazeTutorial.jsx'
 
 // Yılan — gözle (TrueDepth bakış yönü) ya da dokunarak oynanan Nokia klasiği.
 // Oyun motoru saf: src/lib/snake.js. Bu ekran yalnızca girdi, çizim, ses/titreşim ve akışı yönetir.
@@ -959,13 +960,23 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
         </div>
 
         <section className="card card-hero snake-hero">
-          <div className="snake-hero-row">
-            <SnakeArt />
-            <div className="stack" style={{ gap: 4 }}>
-              <h1>Yılan</h1>
-              <p className="muted small">{eyes ? 'Klasik yılan oyunu. Bu kez gözünle yönlendir.' : 'Klasik yılan oyunu. Kaydırarak yönlendir.'}</p>
+          {eyes ? (
+            <>
+              <div className="stack" style={{ gap: 4 }}>
+                <h1>Yılan</h1>
+                <p className="muted small">Klasik yılan oyunu. Bu kez gözünle yönlendir: dönmek istediğin yöne, tahtanın dışına kısaca bak.</p>
+              </div>
+              <GazeTutorial className="snake-tutorial" />
+            </>
+          ) : (
+            <div className="snake-hero-row">
+              <SnakeArt />
+              <div className="stack" style={{ gap: 4 }}>
+                <h1>Yılan</h1>
+                <p className="muted small">Klasik yılan oyunu. Kaydırarak yönlendir.</p>
+              </div>
             </div>
-          </div>
+          )}
           <div className="snake-best-row">
             <span className="snake-best-icon"><Trophy size={18} aria-hidden="true" /></span>
             <span className="grow">En yüksek skor</span>

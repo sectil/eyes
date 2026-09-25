@@ -227,6 +227,7 @@
 
 /* ---------- Başlangıç ekranı ---------- */
 .snake-hero { gap: 14px; }
+.snake-tutorial { max-width: 300px; margin: 0 auto; }
 .snake-hero-row { display: flex; align-items: center; gap: 16px; }
 .snake-art { width: 120px; height: 72px; flex: none; border-radius: 14px; }
 .snake-art-bg { fill: var(--surface-2); }
