@@ -215,3 +215,22 @@ Doğrulama: sentetik bakış (sakkad + duraklama + gürültü) ile eski/yeni ist
 - VARSAYIM (cihazda doğrulanacak): derinlik haritası renkli görüntüyle aynı görüş alanı (normalize eşleme; olay depthW/H,
   imageW/H gönderir); avuç–göz farkı ≥ 15 mm; eşik 0,55 / 0,45.
 - Bu makinede Swift derleyici yok; kod Apple API imzalarına göre elle denetlendi. İlk derleme kullanıcının Mac'inde.
+
+## 13. Bugünün yolu yeniden, Okuma testi, Çemberler (2026-09-25, PLAN — onay bekliyor)
+Bulgular (kodda): yol sırası `lib/today.js` kindRank ile "önce ölçüm, sonra egzersiz, sonra pratik"; egzersizler tek
+durak ("Tam set"); Çember takibi (`TrackGame`, sözler `lib/track.js` WORDS, TrueDepth tepki ölçümü) yolda değil (today() yok);
+"Çemberler" ekranı (kullanıcı ekran görüntüsü, k/d 85) bu depoda ve eyes-project.zip'te yok. Okuma testi tek cümle,
+konuşma eşleşmesi ≥ 0,7 olunca cümle biter (`MATCH_THRESHOLD`) → kişi bitirmeden geçiyor.
+1. **Yol**: gün = duraklar dizisi; egzersiz durakları gövde (set adımları 2–3'lü gruplanır: ısınma, uzak bakış,
+   yakın–uzak, göz kırpma), aralara ölçüm (E testi, Okuma) ve pratik (Çemberler, Nefes, Yılan, Hızlı Bakış) serpilir;
+   iki ölçüm art arda gelmez; toplam ≈ 15 dk. Biten durakta Jev balonu tek söz (WORDS havuzu). Duolingo değil: durak =
+   iris, yol = diyafram yayı (marka).
+2. **Nefes sayma**: yoldan ve Farkındalık'tan çıkar; modül fişten çekilir (kod kalır, eski kayıtlar Gelişim'de görünür).
+   VARSAYIM: "kaldır" = uygulamadan; yalnız yoldan istenirse söylenir.
+3. **Okuma** (ad "Okuma hızı" → "Okuma"): 3 satırlık sabit paragraf (kaymaz), her paragraf bir küçük boy (0,1 logMAR
+   adım); konuşma tanıma paragrafın TAMAMI okununca (eşleşme ≥ 0,85, VARSAYIM) ya da "Okudum" ile geçer, ortada geçmez;
+   "Okuyamıyorum" küçülmeyi bitirir. Sonuç: rahat okunan en küçük boy (kritik yazı boyu) + boy başına doğruluk ve süre.
+   Paragraf havuzu: kurgusal, kişisel bilgi yok, boy başına farklı metin.
+4. **Çemberler**: bağlı daireler (takımyıldız), işaret daireden daireye atlar, göz izler; TrueDepth: bakış hedefe
+   gitti mi + tepki süresi; her varışta söz. Kalp atışı (k/d) şimdi yok → HealthKit adımı (§ plan 7). Yola günlük durak.
+5. Sıra: taslaklar (yol, okuma, çemberler) → onay → kod (Build 26). Build 25 (Yılan bakış motoru, §11) ayrı onay bekler.
