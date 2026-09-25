@@ -8,11 +8,16 @@ import { startTrueDepth } from '../lib/native.js'
 //  2) Ön kamera + MediaPipe (web ve TrueDepth'siz cihazlar): iris boyutundan mesafe,
 //     bir kez 40 cm'de kalibrasyon gerekir (distanceCal: { irisPxAt40, videoW }).
 // onFrame: her ölçümde çağrılır. TrueDepth'te { native: true, face, mm, blinkLeft/Right, lookUp/Down/In/Out Left/Right }.
-export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, trueDepth = false } = {}) {
+// onDepth (yalnızca TrueDepth): ~10 Hz iki göz bölgesi derinliği { eyesKnown, leftMm, rightMm, eyeAgeMs, ts }.
+// depthDistance: yüz takibi düşünce (ör. el bir gözü örtünce) mesafe açık gözün derinliğinden sürer.
+export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, trueDepth = false, onDepth, depthDistance = false } = {}) {
   const videoRef = useRef(null)
   const [state, setState] = useState({ ready: false, error: null, face: false, irisPx: null, mm: null })
   const onFrameRef = useRef(onFrame)
   onFrameRef.current = onFrame
+  const onDepthRef = useRef(onDepth)
+  onDepthRef.current = onDepth
+  const wantDepth = Boolean(onDepth) || depthDistance
   const calRef = useRef(distanceCal)
   calRef.current = distanceCal
   const useNative = trueDepth || distanceCal?.method === 'truedepth'
@@ -23,7 +28,24 @@ export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, t
     let stop = null
     let cancelled = false
     const median = createMedian(5)
+    const depthMedian = createMedian(5)
     let lastUi = 0
+    let lastTracked = -Infinity
+    let lastDepthMm = -Infinity // derinlik yedeğinin son geçerli mesafe yazdığı an
+    const onDepthFrame = (d) => {
+      if (cancelled) return
+      const ts = performance.now()
+      onDepthRef.current?.({ ...d, ts })
+      // Yüz 300 ms'dir izlenmiyorsa mesafe açık gözün (uzak olan bölge) derinliğinden
+      if (!depthDistance || ts - lastTracked < 300 || !d?.eyesKnown) return
+      const vals = [d.leftMm, d.rightMm].filter((v) => Number.isFinite(v) && v > 150 && v < 900)
+      const mm = vals.length ? depthMedian.push(Math.max(...vals)) : null
+      if (mm != null) lastDepthMm = ts
+      if (ts - lastUi > 100) {
+        lastUi = ts
+        setState({ ready: true, error: null, face: false, irisPx: null, mm, depth: true })
+      }
+    }
     ;(async () => {
       try {
         stop = await startTrueDepth((f) => {
@@ -35,13 +57,15 @@ export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, t
             return
           }
           const ts = performance.now()
+          if (f.tracked) lastTracked = ts
           const mm = f.tracked && f.distanceMm ? median.push(f.distanceMm) : null
           onFrameRef.current?.({ ...f, native: true, face: Boolean(f.tracked), mm, ts })
-          if (ts - lastUi > 100) {
+          // Yüz yokken derinlik yedeği mesafeyi yazıyorsa izlenmeyen yüz karesi onu silmesin
+          if (ts - lastUi > 100 && (f.tracked || !depthDistance || ts - lastDepthMm > 300)) {
             lastUi = ts
             setState({ ready: true, error: null, face: Boolean(f.tracked), irisPx: null, mm })
           }
-        })
+        }, { onDepth: wantDepth ? onDepthFrame : undefined })
         if (cancelled) stop?.()
         else setState((s) => ({ ...s, ready: true }))
       } catch (e) {
@@ -53,7 +77,8 @@ export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, t
       cancelled = true
       stop?.()
     }
-  }, [enabled, useNative])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled, useNative, wantDepth])
 
   // --- 2) Ön kamera + MediaPipe ---
   useEffect(() => {

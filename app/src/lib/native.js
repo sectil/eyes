@@ -38,21 +38,24 @@ export async function trueDepthSupported() {
 }
 
 // Yüz takibini başlatır; onFace({ tracked, distanceMm, blinkLeft, blinkRight, gazeLeftX/Y, gazeRightX/Y, camLeftX/Y, camRightX/Y, headX/Y, … }) ~30 Hz.
+// onDepth (isteğe bağlı): ~10 Hz { eyesKnown, leftMm, rightMm, eyeAgeMs, … } — iki göz bölgesinin derinliği
+// (FaceDistancePlugin.swift "depth" olayı; görme testinde tek göz kontrolü ve yüz kaybolunca mesafe).
 // Döner: durdurma fonksiyonu.
-export async function startTrueDepth(onFace) {
-  const handle = await FaceDistance.addListener('face', onFace)
+export async function startTrueDepth(onFace, { onDepth } = {}) {
+  const handles = [await FaceDistance.addListener('face', onFace)]
   try {
-    await FaceDistance.start()
+    if (onDepth) handles.push(await FaceDistance.addListener('depth', onDepth))
+    await FaceDistance.start(onDepth ? { depth: true } : {})
   } catch (e) {
-    // start reddedilirse (izin yok / 'cancelled') dinleyici sızmasın.
-    await handle.remove().catch(() => {})
+    // start reddedilirse (izin yok / 'cancelled') dinleyiciler sızmasın.
+    await Promise.all(handles.map((h) => h.remove().catch(() => {})))
     throw e
   }
   return async () => {
     try {
       await FaceDistance.stop()
     } finally {
-      await handle.remove()
+      await Promise.all(handles.map((h) => h.remove()))
     }
   }
 }

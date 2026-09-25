@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { classify, createOcclusionMonitor, coverFor, occlusionMessage, GATE_MS, BREAK_MS, RESUME_MS } from './occlusion.js'
+import { classify, coveredSide, createOcclusionMonitor, coverFor, occlusionMessage, GATE_MS, BREAK_MS, RESUME_MS } from './occlusion.js'
 
 const frame = (l, r) => ({ face: true, blinkLeft: l, blinkRight: r })
 // 30 Hz kareler
@@ -22,6 +22,51 @@ describe('classify', () => {
     expect(classify(0.1, 0.1, 'none')).toBe('ok')
     expect(classify(0.9, 0.1, 'none')).toBe('closed')
     expect(classify(null, 0.1, 'none')).toBe('no-face')
+  })
+})
+
+describe('derinlik: hangi göz örtülü', () => {
+  it('coveredSide: 15 mm fark → yakın taraf örtülü; az fark → bilinmez', () => {
+    expect(coveredSide(372, 401)).toBe('L')
+    expect(coveredSide(400, 380)).toBe('R')
+    expect(coveredSide(400, 392)).toBeNull()
+    expect(coveredSide(null, 392)).toBeNull()
+  })
+  it('classify: derinlik tarafı belirleyici; yanlış göz yakalanır; iki göz testinde el = kapalı', () => {
+    expect(classify(null, null, 'L', 'L', true)).toBe('ok')
+    expect(classify(null, null, 'L', 'R', true)).toBe('wrong-eye')
+    expect(classify(0.05, 0.05, 'L', null, true)).toBe('uncovered')
+    expect(classify(null, null, 'L', null, true)).toBe('unclear')
+    expect(classify(0.1, 0.1, 'none', 'R', true)).toBe('closed')
+  })
+})
+
+// 10 Hz derinlik kareleri (yüz kareleri yok: el yüzü örttü, ARKit yüzü kaybetti)
+function feedDepth(m, dl, dr, fromMs, toMs) {
+  let snap = null
+  for (let t = fromMs; t <= toMs; t += 100) snap = m.pushDepth({ eyesKnown: true, leftMm: dl, rightMm: dr }, t)
+  return snap
+}
+
+describe('createOcclusionMonitor + derinlik', () => {
+  it('avuç sol gözde (yüz kareleri yok): sağ göz testi 1 sn sonra açılır, yöntem derinlik', () => {
+    const m = createOcclusionMonitor('L')
+    m.push({ face: false }, 0)
+    const s = feedDepth(m, 370, 400, 100, 1400)
+    expect(s.gateReady).toBe(true)
+    expect(s.method).toBe('depth')
+  })
+  it('yanlış göz örtülürse açılmaz, testte durdurur', () => {
+    const m = createOcclusionMonitor('L')
+    expect(feedDepth(m, 400, 370, 0, 1500)).toMatchObject({ gateReady: false, state: 'wrong-eye', blocked: true })
+  })
+  it('kareler tamamen durursa tick zamanı ilerletir → bayat bilgi durdurur', () => {
+    const m = createOcclusionMonitor('L')
+    feedDepth(m, 370, 400, 0, 1500)
+    // AcuityTest tick'i ~100 ms'de bir çağırır
+    let snap = null
+    for (let t = 1600; t <= 1500 + 600 + BREAK_MS + 200; t += 100) snap = m.tick(t)
+    expect(snap).toMatchObject({ state: 'no-face', blocked: true })
   })
 })
 
@@ -68,8 +113,9 @@ describe('createOcclusionMonitor', () => {
 
 describe('occlusionMessage', () => {
   it('Türkçe kısa yönerge', () => {
-    expect(occlusionMessage('uncovered', 'L')).toBe('İki gözün açık · sol gözünü kapat')
-    expect(occlusionMessage('ok', 'L')).toBe('Bir gözün kapalı · sağ gözünle bak')
+    expect(occlusionMessage('uncovered', 'L')).toBe('İki gözün açık · sol gözünü avucunla ört')
+    expect(occlusionMessage('ok', 'L')).toBe('Sol göz örtülü · sağ gözünle bak')
+    expect(occlusionMessage('wrong-eye', 'L')).toBe('Diğer gözünü örtmüşsün · sol gözünü ört')
     expect(occlusionMessage('ok', 'none')).toBe('İki gözün açık')
   })
 })

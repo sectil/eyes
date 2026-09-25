@@ -18,9 +18,9 @@ import '../styles/acuity.css'
 import '../styles/profile.css' // pf-chips
 
 const ALL_EYES = [
-  // Build 24.1: el değil göz kapağı; el yüzü örtünce kamera yüzü kaybediyor (mesafe de kesiliyor)
-  { id: 'R', title: 'Sağ göz', cover: 'Sol gözünü kapat; elini kullanma, kamera yüzünü görmeli. Sağ gözünü kısma.' },
-  { id: 'L', title: 'Sol göz', cover: 'Sağ gözünü kapat; elini kullanma, kamera yüzünü görmeli. Sol gözünü kısma.' },
+  // Build 25: avuç (derinlik haritası hangi gözün örtüldüğünü görür, mesafe açık gözden sürer) ya da göz kapağı
+  { id: 'R', title: 'Sağ göz', cover: 'Sol gözünü avucunla ört (bastırmadan) ya da kapat. Sağ gözünü kısma.' },
+  { id: 'L', title: 'Sol göz', cover: 'Sağ gözünü avucunla ört (bastırmadan) ya da kapat. Sol gözünü kısma.' },
   { id: 'OU', title: 'İki göz', cover: 'İki gözün de açık.' },
 ]
 // Günlük test yalnız iki tek göz (Build 24: toplam harf yarıya indi); haftalık testte iki göz de ölçülür.
@@ -160,19 +160,43 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
   const occMon = useRef(null)
   const [occ, setOcc] = useState(null)
   const [selfCover, setSelfCover] = useState(false)
+  const occStartMethod = useRef(null)
   const occUi = useRef(0)
+  const showOcc = (snap, ts) => {
+    if (ts - occUi.current > 90 || snap.blocked !== occ?.blocked || snap.gateReady !== occ?.gateReady) {
+      occUi.current = ts
+      setOcc(snap)
+    }
+  }
   const cam = useFaceTracking({
     enabled: tracked && !(phase === 'rest' && nativeTD),
     distanceCal,
     onFrame: (f) => {
       if (!occDetect || !occMon.current) return
-      const snap = occMon.current.push(f, f.ts ?? performance.now())
-      if (f.ts - occUi.current > 90 || snap.blocked !== occ?.blocked) {
-        occUi.current = f.ts
-        setOcc(snap)
-      }
+      const ts = f.ts ?? performance.now()
+      showOcc(occMon.current.push(f, ts), ts)
     },
+    // Derinlik (FaceDistancePlugin "depth"): hangi göz örtülü + el yüzü örtünce açık gözden mesafe
+    onDepth: occDetect
+      ? (d) => {
+        if (!occMon.current) return
+        const ts = d.ts ?? performance.now()
+        showOcc(occMon.current.pushDepth(d, ts), ts)
+      }
+      : undefined,
+    depthDistance: occDetect,
   })
+  // El yüzü örtünce kareler tamamen durabilir: izleyicinin zamanı yine ilerlesin
+  useEffect(() => {
+    if (!occDetect) return undefined
+    const id = setInterval(() => {
+      if (!occMon.current) return
+      const ts = performance.now()
+      showOcc(occMon.current.tick(ts), ts)
+    }, 100)
+    return () => clearInterval(id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [occDetect])
   const liveMm = tracked ? cam.mm : null
   const status = tracked ? distanceStatus(liveMm) : 'ok'
   // Mesafe canlı ölçülüyorsa 40 cm'ye kilitlenmez: harf ölçülen mesafeye göre ölçeklenir.
@@ -226,6 +250,7 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
 
   function startEye() {
     occMon.current?.resetStats()
+    occStartMethod.current = occ?.method ?? null
     stair.current = createAcuityStaircase(planSpec, { minX, maxX: 1.3, quantize })
     distSamples.current = []
     progMax.current = 0
@@ -284,9 +309,10 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
       algorithm: ALGORITHM,
       outOfRange: fin.outOfRange,
       distanceTracked: tracked && d.length > 0,
-      // Örtme: 'camera-any' = kamera 'iki göz birden açık değil' dedi (hangi göz ayırt edilemez, lib/occlusion.js)
+      // Örtme: 'camera-depth' = derinlik hangi gözün örtüldüğünü gördü; 'camera-lid' = kamera yalnızca "iki göz
+      // birden açık değil" dedi (hangi göz ayırt edilemez). Kaynak: lib/occlusion.js
       occlusion: occDetect
-        ? { method: 'camera-any', pauses: occMon.current?.snapshot(performance.now()).pauses ?? 0, blockedMs: occMon.current?.snapshot(performance.now()).blockedMs ?? 0 }
+        ? { method: occStartMethod.current ? `camera-${occStartMethod.current}` : 'camera', pauses: occMon.current?.snapshot(performance.now()).pauses ?? 0, blockedMs: occMon.current?.snapshot(performance.now()).blockedMs ?? 0 }
         : { method: eye.id === 'OU' ? 'none' : 'self-report' },
       trialsMax: planSpec.trials,
       meanDistanceMm: d.length ? Math.round(meanMm) : null,
@@ -517,15 +543,18 @@ function CoverCheck({ detect, need, occ, selfCover, onSelfCover }) {
   const state = occ?.state ?? 'no-face'
   const good = state === 'ok'
   const raw = (v) => (Number.isFinite(v) ? v.toFixed(2).replace('.', ',') : '—')
+  const mm = (v) => (Number.isFinite(v) ? `${Math.round(v)} mm` : '—')
   return (
     <div className={`card cover-check${occ?.gateReady ? ' ready' : ''}`} aria-live="polite">
       <div className={`cover-eye${good ? ' good' : state === 'no-face' ? '' : ' bad'}`}>
-        <span className="cover-eye-name">{need === 'none' ? 'İki gözün açık olmalı' : `${need === 'L' ? 'Sol' : 'Sağ'} gözün kapalı olmalı`}</span>
-        <strong>{good ? (need === 'none' ? 'İki göz açık' : 'Bir göz kapalı') : state === 'no-face' ? 'Yüz aranıyor' : need === 'none' ? 'Bir göz kapalı' : 'İki göz açık'}</strong>
+        <span className="cover-eye-name">{need === 'none' ? 'İki gözün açık olmalı' : `${need === 'L' ? 'Sol' : 'Sağ'} gözün örtülü olmalı`}</span>
+        <strong>{good ? (need === 'none' ? 'İki göz açık' : occ?.method === 'depth' ? `${need === 'L' ? 'Sol' : 'Sağ'} göz örtülü` : 'Bir göz kapalı') : state === 'no-face' ? 'Yüz aranıyor' : state === 'wrong-eye' ? 'Diğer göz örtülü' : need === 'none' ? 'Bir göz kapalı' : state === 'uncovered' ? 'İki göz açık' : 'Belirsiz'}</strong>
+        {good && need !== 'none' && <span className="cover-eye-need">{occ?.method === 'depth' ? 'kamera derinliği hangi gözün örtüldüğünü gördü' : 'kamera hangi gözün kapalı olduğunu ayırt edemiyor'}</span>}
       </div>
       <div className="cover-gate"><i style={{ width: `${Math.round((occ?.gateFrac ?? 0) * 100)}%` }} /></div>
       <p className="small cover-msg">{occ?.gateReady ? 'Tamam, başlayabilirsin' : occlusionMessage(state, need)}</p>
-      <span className="cover-eye-raw">kamera ham · sağ {raw(occ?.r)} · sol {raw(occ?.l)} (0 açık, 1 kapalı)</span>
+      <span className="cover-eye-raw">kapak · sağ {raw(occ?.r)} · sol {raw(occ?.l)} (0 açık, 1 kapalı)</span>
+      <span className="cover-eye-raw">derinlik · sağ {mm(occ?.dr)} · sol {mm(occ?.dl)} (avuç tarafı yakın)</span>
     </div>
   )
 }
@@ -547,7 +576,7 @@ function EyeResult({ eyes: EYES, eyeIdx, result, all, moreEyes, onNext, onFinish
         <AcuityScale value={v} />
         <div className="acuity-meta">
           <span className="acuity-pill">{result.trials} harf</span>
-          {result.occlusion?.method?.startsWith('camera') && <span className="acuity-pill">Tek göz kamerayla izlendi{result.occlusion.pauses ? ` · ${result.occlusion.pauses} kez durdu` : ''}</span>}
+          {result.occlusion?.method?.startsWith('camera') && <span className="acuity-pill">{result.occlusion.method === 'camera-depth' ? 'Örtülen göz kamerayla doğrulandı' : 'Tek göz kamerayla izlendi'}{result.occlusion.pauses ? ` · ${result.occlusion.pauses} kez durdu` : ''}</span>}
           {result.meanDistanceMm && <span className="acuity-pill">ort. {Math.round(result.meanDistanceMm / 10)} cm</span>}
           <span className="acuity-pill">İniş {result.descentTrials} · İnce ayar {result.fineTrials}</span>
         </div>

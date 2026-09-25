@@ -202,3 +202,16 @@ duraklamayı komut yapıyor. Göz sabitken bile mikrosakkad/kayma üretir (Marti
    VARSAYIM: kamera yalnız zaten kamera kullanan ekranlarda açık (görme testi, okuma, Çember, Hızlı Bakış, göz kalibrasyonu);
    Nefes sayma gibi kamerasız ekranlarda yalnız kaydırma. Kalibrasyon yoksa yalnız kaydırma.
 Doğrulama: sentetik bakış (sakkad + duraklama + gürültü) ile eski/yeni istenmeyen dönüş sayısı ve gecikme tablosu.
+
+## 12. Tek göz örtme: göz kapağı (24.1) + derinlik haritası (Build 25) — YAPILDI, cihazda doğrulanacak
+- Build 24 cihaz verisi: tek göz kapatınca ARKit iki gözü birlikte kapalı okur (0,88 / 0,87); el ile örtünce yüz takibi düşer.
+  Blendshape ile hangi gözün kapalı olduğu ayırt EDİLEMEZ (yöntem bırakıldı).
+- 24.1 (`lib/occlusion.js`): tek göz testinde "iki göz birden açık olamaz". Kayıt `camera-lid`.
+- Build 25: `FaceDistancePlugin.swift` start({ depth: true }) → "depth" olayı ~10 Hz: kişinin sol/sağ göz bölgesinin
+  ortanca derinliği (ARFrame.capturedDepthData). Göz yeri yüz izlenirken saklanır (projectPoint, landscapeRight,
+  imageResolution; kişinin solu = yüz koordinatında x'i büyük göz, Apple ARFaceAnchor belgesi), el yüzü örtünce son yer
+  kullanılır (≤ 30 sn). İki bölge farkı ≥ 15 mm → yakın taraf örtülü: doğru göz ise geçer (`camera-depth`), yanlışsa
+  "Diğer gözünü örtmüşsün". Yüz kaybolunca mesafe uzak bölgenin (açık göz) derinliğinden sürer (`useFaceTracking` depthDistance).
+- VARSAYIM (cihazda doğrulanacak): derinlik haritası renkli görüntüyle aynı görüş alanı (normalize eşleme; olay depthW/H,
+  imageW/H gönderir); avuç–göz farkı ≥ 15 mm; eşik 0,55 / 0,45.
+- Bu makinede Swift derleyici yok; kod Apple API imzalarına göre elle denetlendi. İlk derleme kullanıcının Mac'inde.

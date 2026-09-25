@@ -13,6 +13,13 @@ import Capacitor
 /// - "face" olayı (~30 Hz): { tracked, distanceMm, focusMm, vergenceMm, blinkLeft, blinkRight,
 ///   lookUp/Down/In/Out Left/Right, gazeLeftX, gazeLeftY, gazeRightX, gazeRightY,
 ///   camLeftX, camLeftY, camRightX, camRightY, headX, headY }
+/// - "depth" olayı (~10 Hz, yalnızca start({ depth: true }) ile): iki gözün bölgesindeki derinliğin ortancası (mm).
+///   { eyesKnown, leftMm, rightMm, leftN, rightN, eyeAgeMs, radiusPx, depthW, depthH, imageW, imageH, absolute }
+///   left/right = kişinin KENDİ sol/sağ gözü. Göz konumu yüz izlenirken saklanır; el yüzü örtüp ARKit yüzü
+///   kaybedince son konum kullanılır (eyeAgeMs). Görme testinde "hangi göz örtülü" (avuç göze yakındır) ve
+///   yüz kaybolunca açık gözün mesafesi için (src/lib/occlusion.js, src/hooks/useFaceTracking.js).
+///   VARSAYIM: derinlik haritası renkli görüntüyle aynı görüş alanını kaplar; konum normalize (0–1) koordinatla
+///   eşlenir. depthW/H ve imageW/H olayda gönderilir ki cihaz verisiyle doğrulanabilsin.
 /// - Oturum hatası: "face" olayı { tracked: false, error: <açıklama>, errorCode: "camera-denied" | "session-failed" }.
 ///   ARKit bu durumda oturumu durdurur; bir daha kare gelmez.
 /// Mesafe: kameradan iki gözün ortalama uzaklığı (ön kamera ekran düzlemindedir).
@@ -44,6 +51,19 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
     /// Her stop'ta artar (yalnızca ana kuyrukta okunur/yazılır). İzin sorusu açıkken stop gelirse,
     /// cevap sonradan "izin ver" olsa bile kamera açılmasın diye start bu sayacı karşılaştırır.
     private var stopGeneration = 0
+
+    // Derinlik (görme testi tek göz kontrolü). Yalnızca ana kuyrukta okunur/yazılır (ARSession temsilcisi ana kuyrukta).
+    private struct EyeCache {
+        let lu: Double, lv: Double, ru: Double, rv: Double
+        let t: TimeInterval
+    }
+    private var depthEnabled = false
+    private var eyeCache: EyeCache?
+    private var lastDepthEmit: TimeInterval = 0
+    private let depthInterval: TimeInterval = 0.1
+    /// El yüzü örtünce ARKit yüzü kaybedebilir; baş test boyunca az oynadığı için son göz konumu bu süre geçerli sayılır.
+    /// VARSAYIM: 30 sn (bir göz turu ≈ 1 dk; kaymada iki bölgenin farkı küçülür ve JS göz kapağı kuralına düşer).
+    private let eyeCacheMaxAge: TimeInterval = 30
 
     @objc func getScreenInfo(_ call: CAPPluginCall) {
         DispatchQueue.main.async {
@@ -113,6 +133,9 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
             session.delegate = self
             self.session = session
         }
+        depthEnabled = call.getBool("depth") ?? false
+        eyeCache = nil
+        lastDepthEmit = 0
         let config = ARFaceTrackingConfiguration()
         config.maximumNumberOfTrackedFaces = 1
         session?.run(config, options: [.resetTracking, .removeExistingAnchors])
@@ -123,6 +146,8 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
         DispatchQueue.main.async {
             self.stopGeneration += 1
             self.session?.pause()
+            self.depthEnabled = false
+            self.eyeCache = nil
             call.resolve()
         }
     }
@@ -171,6 +196,7 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
         let camL = face.isTracked ? angleToCamera(simd_mul(face.transform, face.leftEyeTransform), cameraPos) : nil
         let camR = face.isTracked ? angleToCamera(simd_mul(face.transform, face.rightEyeTransform), cameraPos) : nil
         let head = face.isTracked ? angleToCamera(face.transform, cameraPos) : nil
+        if depthEnabled && face.isTracked { cacheEyes(face, frame) }
 
         notifyListeners("face", data: [
             "tracked": face.isTracked,
@@ -206,6 +232,94 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
             "lookAtY": jsNumber(face.isTracked ? Double(face.lookAtPoint.y) : nil),
             "lookAtZ": jsNumber(face.isTracked ? Double(face.lookAtPoint.z) : nil)
         ])
+    }
+
+    /// Derinlik: ~10 Hz, iki göz bölgesinin ortanca derinliği. ARKit kareyi saklamamamızı ister; burada yalnızca
+    /// eşzamanlı okunur.
+    public func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        guard depthEnabled, frame.timestamp - lastDepthEmit >= depthInterval - emitSlack else { return }
+        guard let depth = frame.capturedDepthData else { return }
+        lastDepthEmit = frame.timestamp
+        guard let eyes = eyeCache, frame.timestamp - eyes.t <= eyeCacheMaxAge else {
+            notifyListeners("depth", data: ["eyesKnown": false])
+            return
+        }
+        let d32 = depth.depthDataType == kCVPixelFormatType_DepthFloat32
+            ? depth
+            : depth.converting(toDepthDataType: kCVPixelFormatType_DepthFloat32)
+        let map = d32.depthDataMap
+        CVPixelBufferLockBaseAddress(map, .readOnly)
+        defer { CVPixelBufferUnlockBaseAddress(map, .readOnly) }
+        let w = CVPixelBufferGetWidth(map)
+        let h = CVPixelBufferGetHeight(map)
+        let rowBytes = CVPixelBufferGetBytesPerRow(map)
+        guard w > 0, h > 0, let base = CVPixelBufferGetBaseAddress(map) else { return }
+        // Bölge yarıçapı: iki göz arası piksel uzaklığının %18'i (göz yuvası ≈ gözler arası mesafenin üçte biri genişlikte)
+        let sepPx = hypot((eyes.lu - eyes.ru) * Double(w), (eyes.lv - eyes.rv) * Double(h))
+        // Int() sınır dışında çöker: yarıçap 3–40 piksele sıkıştırılır
+        guard sepPx.isFinite else { return }
+        let r = Int(min(40.0, max(3.0, sepPx * 0.18)))
+
+        func sample(_ u: Double, _ v: Double) -> (mm: Double?, n: Int) {
+            // Görüntü dışındaki (ya da anormal) konum: ölçüm yok (Int() taşmasın)
+            guard u.isFinite, v.isFinite, u > -0.5, u < 1.5, v > -0.5, v < 1.5 else { return (nil, 0) }
+            let cx = Int((u * Double(w)).rounded())
+            let cy = Int((v * Double(h)).rounded())
+            let x0 = max(0, cx - r), x1 = min(w - 1, cx + r)
+            let y0 = max(0, cy - r), y1 = min(h - 1, cy + r)
+            guard x0 <= x1, y0 <= y1 else { return (nil, 0) }
+            var vals: [Float32] = []
+            vals.reserveCapacity((x1 - x0 + 1) * (y1 - y0 + 1))
+            for y in y0...y1 {
+                let row = base.advanced(by: y * rowBytes).assumingMemoryBound(to: Float32.self)
+                for x in x0...x1 {
+                    let d = row[x]
+                    // Geçerli derinlik: 10 cm – 1,5 m (metre). NaN/0 = ölçüm yok.
+                    if d.isFinite && d > 0.1 && d < 1.5 { vals.append(d) }
+                }
+            }
+            guard vals.count >= 5 else { return (nil, vals.count) }
+            vals.sort()
+            return (Double(vals[vals.count / 2]) * 1000.0, vals.count)
+        }
+
+        let left = sample(eyes.lu, eyes.lv)
+        let right = sample(eyes.ru, eyes.rv)
+        let res = frame.camera.imageResolution
+        notifyListeners("depth", data: [
+            "eyesKnown": true,
+            "leftMm": jsNumber(left.mm),
+            "rightMm": jsNumber(right.mm),
+            "leftN": left.n,
+            "rightN": right.n,
+            "eyeAgeMs": (frame.timestamp - eyes.t) * 1000.0,
+            "radiusPx": r,
+            "depthW": w,
+            "depthH": h,
+            "imageW": Double(res.width),
+            "imageH": Double(res.height),
+            "absolute": d32.depthDataAccuracy == .absolute
+        ])
+    }
+
+    /// İki gözün renkli görüntüdeki yeri (0–1). Kişinin kendi sol gözü, yüz koordinatında x'i büyük olandır:
+    /// Apple, ARFaceAnchor: "the positive x direction points to the viewer's right (that is, the face's own left)".
+    private func cacheEyes(_ face: ARFaceAnchor, _ frame: ARFrame) {
+        let res = frame.camera.imageResolution
+        guard res.width > 0, res.height > 0 else { return }
+        let a = face.leftEyeTransform
+        let b = face.rightEyeTransform
+        let aIsUserLeft = position(a).x >= position(b).x
+        let userLeft = aIsUserLeft ? a : b
+        let userRight = aIsUserLeft ? b : a
+        let wl = position(simd_mul(face.transform, userLeft))
+        let wr = position(simd_mul(face.transform, userRight))
+        let pl = frame.camera.projectPoint(wl, orientation: .landscapeRight, viewportSize: res)
+        let pr = frame.camera.projectPoint(wr, orientation: .landscapeRight, viewportSize: res)
+        let lu = Double(pl.x / res.width), lv = Double(pl.y / res.height)
+        let ru = Double(pr.x / res.width), rv = Double(pr.y / res.height)
+        guard lu.isFinite, lv.isFinite, ru.isFinite, rv.isFinite else { return }
+        eyeCache = EyeCache(lu: lu, lv: lv, ru: ru, rv: rv, t: frame.timestamp)
     }
 
     public func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
