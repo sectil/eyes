@@ -2,6 +2,10 @@
 // Saf fonksiyonlar. Tarihler yerel saatle günlere bölünür (calendar.js dayKey).
 import { dayKey, startOfWeek } from './calendar.js'
 import { SETS, setDurationSec } from './routines.js'
+import { NBSP, finite, join, formatDuration, durationPart } from './format.js'
+import { registry } from '../modules/registry.js'
+
+export { NBSP, formatDuration }
 
 // VARSAYIM: testler süre kaydetmez; ana ekrandaki tahmini sürelerle aynı değerler kullanılır
 // (günlük ~3 dk, haftalık ~5 dk, okuma ~3 dk; Home.jsx). Kayıtta seconds varsa o kullanılır.
@@ -18,16 +22,11 @@ const EYE_LABEL = { R: 'Sağ göz', L: 'Sol göz', OU: 'İki göz' }
 // Bölünmez boşluk (\u00a0): dar ekranda "İki göz 0,20" satır sonunda bölünmez.
 const EYE_SHORT = { R: 'Sağ', L: 'Sol', OU: 'İki\u00a0göz' }
 const TEST_TITLE = { 'va-daily': 'Günlük görme testi', 'va-weekly': 'Haftalık görme testi', reading: 'Okuma hızı testi' }
-const GAME_NAME = { snake: 'Yılan', track: 'Çember takibi' }
-const CONTROL_LABEL = { eyes: 'gözle', touch: 'dokunarak' }
-
-const finite = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : null)
 const positiveSec = (v) => {
   const n = finite(v)
   return n != null && n > 0 ? Math.round(n) : null
 }
 const list = (v) => (Array.isArray(v) ? v : [])
-const join = (parts) => parts.filter(Boolean).join(' · ')
 
 function timeOf(rec) {
   if (!rec || rec.date == null || rec.date === '') return null
@@ -42,20 +41,6 @@ export function decimalTr(v, digits = 2) {
   return (r === 0 ? 0 : r).toFixed(digits).replace('.', ',').replace('-', '−')
 }
 
-// Sayı ile birimi arasında bölünmez boşluk: dar ekranda "35 / sn" diye bölünmez.
-export const NBSP = '\u00a0'
-
-// Saniye → "45 sn", "2 dk 10 sn", "12 dk" (sayı–birim arası NBSP)
-export function formatDuration(sec) {
-  const s = Math.max(0, Math.round(finite(sec) ?? 0))
-  if (s < 60) return `${s}${NBSP}sn`
-  const m = Math.floor(s / 60)
-  const r = s % 60
-  if (m >= 10 || r === 0) return `${Math.round(s / 60)}${NBSP}dk`
-  return `${m}${NBSP}dk ${r}${NBSP}sn`
-}
-
-const durationPart = (seconds, estimated) => (seconds > 0 ? `${estimated ? '~' : ''}${formatDuration(seconds)}` : null)
 
 function vaDetail(results) {
   const sorted = [...results].sort((a, b) => EYE_ORDER.indexOf(a.eye) - EYE_ORDER.indexOf(b.eye))
@@ -128,27 +113,29 @@ function sessionActivity(s, ts, idx) {
       ]),
     }
   }
-  if (s.type === 'game') {
-    const name = GAME_NAME[s.game] ?? null
-    const score = finite(s.score)
+  // Modül soketi (src/modules): kaydı tanıyan modül kendi başlığını ve ayrıntısını verir.
+  const mod = registry.forSession(s)
+  if (mod) {
     const seconds = own ?? 0
+    const d = mod.sessions.describe(s, { seconds }) ?? {}
     return {
       ...base,
-      kind: 'game',
+      kind: mod.sessions.countsTowardGoal ? 'exercise' : 'game',
+      module: mod.id,
       game: s.game ?? null,
-      score,
-      best: finite(s.best),
-      control: s.control ?? null,
-      title: s.game === 'track' ? name : name ? `${name} oyunu` : 'Oyun',
+      score: finite(d.score),
+      best: finite(d.best),
+      control: d.control ?? null,
+      title: d.title ?? mod.title,
       seconds,
       estimated: false,
-      detail: join([
-        score != null ? `${score}${NBSP}puan` : null,
-        s.game === 'track' && finite(s.followPct) != null ? `takip${NBSP}%${s.followPct}` : null,
-        CONTROL_LABEL[s.control],
-        durationPart(seconds, false),
-      ]),
+      detail: d.detail ?? join([durationPart(seconds, false)]),
     }
+  }
+  if (s.type === 'game') {
+    // Modülü kaldırılmış eski oyun kaydı: listede kalır, ayrıntısız
+    const seconds = own ?? 0
+    return { ...base, kind: 'game', game: s.game ?? null, score: finite(s.score), best: finite(s.best), control: s.control ?? null, title: 'Oyun', seconds, estimated: false, detail: join([durationPart(seconds, false)]) }
   }
   const seconds = own ?? 0
   return { ...base, kind: 'exercise', title: 'Egzersiz', seconds, estimated: false, detail: join([durationPart(seconds, false)]) }
@@ -240,14 +227,13 @@ export function summary(activities = [], now = new Date()) {
     if (days.has(dayKey(d))) thisWeekDays++
   }
 
-  const snake = acts
-    .filter((a) => a.type === 'game' && a.game === 'snake')
-    .flatMap((a) => [a.score, a.best])
-    .filter((v) => finite(v) != null)
-  const track = acts
-    .filter((a) => a.type === 'game' && a.game === 'track')
-    .flatMap((a) => [a.score, a.best])
-    .filter((v) => finite(v) != null)
+  // Rekorlar: rekor tanımlayan her modül için (Gelişim kutuları bunu okur)
+  const bests = {}
+  for (const m of registry.modules) {
+    if (!m.sessions?.best) continue
+    const v = acts.filter((a) => a.module === m.id).flatMap((a) => [a.score, a.best]).filter((x) => finite(x) != null)
+    bests[m.id] = v.length ? Math.max(...v) : null
+  }
 
   return {
     total: acts.length,
@@ -256,8 +242,9 @@ export function summary(activities = [], now = new Date()) {
     activeDays: days.size,
     streakDays: streakFrom(days, now),
     thisWeekDays,
-    bestSnake: snake.length ? Math.max(...snake) : null,
-    bestTrack: track.length ? Math.max(...track) : null,
+    bests,
+    bestSnake: bests.snake ?? null, // geriye uyum (coach.js, eski testler)
+    bestTrack: bests.track ?? null,
   }
 }
 

@@ -1,14 +1,14 @@
-import { ScanEye, BookText, Eye, ChevronRight, TrendingUp, TrendingDown, Minus, TriangleAlert, Sparkles, Timer, Leaf, ThumbsUp, Dumbbell, Play, Clock, Trophy, Gamepad2, Crosshair } from 'lucide-react'
+import { ScanEye, BookText, Eye, ChevronRight, TrendingUp, TrendingDown, Minus, TriangleAlert, Sparkles, Timer, Leaf, ThumbsUp, Dumbbell, Play, Clock, Trophy } from 'lucide-react'
 import { SETS, DAILY_GOAL_MIN, setDurationSec, formatMin, todaySeconds } from '../lib/routines.js'
 import { Ring, Sparkline } from '../components/ui.jsx'
 import { analyzeTrend, trendMessage } from '../lib/trend.js'
 import { activeDays, weekProgress } from '../lib/calendar.js'
 import { snellen20 } from '../lib/optotype.js'
 import { decimalTr } from '../lib/stats.js'
-import { loadBest, bestFromSessions, loadSnakeOpts } from '../lib/snake.js'
-import { loadTrackBest, trackBestFromSessions } from '../lib/track.js'
 import '../styles/snake.css'
 import CoachCard from '../components/CoachCard.jsx'
+import { registry } from '../modules/registry.js'
+import { viewFor } from '../modules/views.js'
 
 const WEEK_MS = 7 * 86400000
 const SET_ICONS = { leaf: Leaf, thumbs: ThumbsUp, dumbbell: Dumbbell }
@@ -43,14 +43,11 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   const readingDue = due(last('reading'))
   const todaySec = todaySeconds(exercise)
   const blinksToday = sessions.filter((s) => s.type === 'blink' && new Date(s.date).toDateString() === new Date().toDateString()).length
-  const snakeBest = Math.max(loadBest(), bestFromSessions(sessions))
-  const trackBest = Math.max(loadTrackBest(), trackBestFromSessions(sessions))
   // Oyunla aynı kural (SnakeGame loadSnakeOpts): TrueDepth varsa ve kayıtlı seçim 'touch'
   // değilse gözle açılır. Kayıtlı mesafe yöntemine bakılmaz; TrueDepth'li cihazda eski kamera
   // kalibrasyonu kalmış olabilir (App.jsx distanceCal).
   // VARSAYIM: trueDepth prop'u verilmemişse (eski çağrı) mesafe yöntemine göre tahmin edilir.
   const hasTrueDepth = trueDepth ?? settings.distance?.method === 'truedepth'
-  const eyeGame = loadSnakeOpts(Boolean(hasTrueDepth)).control === 'eyes'
 
   return (
     <>
@@ -179,32 +176,26 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
       {/* Göz pratikleri: eğlence ve bakış kontrolü pratiği. "Ölçüm" değil — skorlar görme trendine girmez. */}
       <h2 style={{ marginTop: 6 }}>Göz pratikleri</h2>
       <div className="action-list">
-        <button className="action snake-home" onClick={() => onStart('snake')}>
-          <span className="icon-bubble"><Gamepad2 size={22} aria-hidden="true" /></span>
-          <span className="grow">
-            <span className="title">
-              Yılan{' '}
-              {snakeBest > 0 && (
-                <span className="badge snake-badge"><Trophy size={11} aria-hidden="true" /> En iyi {snakeBest}</span>
-              )}
-            </span>
-            <span className="sub">{eyeGame ? 'Gözünle yönlendir · klasik oyun' : 'Kaydırarak yönlendir · klasik oyun'}</span>
-          </span>
-          <ChevronRight className="chev" size={20} />
-        </button>
-        <button className="action" onClick={() => onStart('track')}>
-          <span className="icon-bubble"><Crosshair size={22} aria-hidden="true" /></span>
-          <span className="grow">
-            <span className="title">
-              Çember takibi{' '}
-              {trackBest > 0 && (
-                <span className="badge snake-badge"><Trophy size={11} aria-hidden="true" /> En iyi {trackBest}</span>
-              )}
-            </span>
-            <span className="sub">{hasTrueDepth ? 'Atlayan çemberi gözünle izle · tepki ölçülür' : 'Atlayan çemberi gözünle izle · ~40 sn'}</span>
-          </span>
-          <ChevronRight className="chev" size={20} />
-        </button>
+        {registry.inSection('practice').map((m) => {
+          const v = viewFor(m.id)
+          if (!v) return null
+          const Icon = v.icon
+          const ctx = { native: { trueDepth: hasTrueDepth }, sessions, tests, settings }
+          const badge = v.badge?.(ctx)
+          return (
+            <button key={m.id} className="action" onClick={() => onStart((m.routes ?? [m.id])[0])}>
+              <span className="icon-bubble"><Icon size={22} aria-hidden="true" /></span>
+              <span className="grow">
+                <span className="title">
+                  {m.title}{' '}
+                  {badge && <span className="badge snake-badge"><Trophy size={11} aria-hidden="true" /> {badge}</span>}
+                </span>
+                {v.sub && <span className="sub">{v.sub(ctx)}</span>}
+              </span>
+              <ChevronRight className="chev" size={20} />
+            </button>
+          )
+        })}
       </div>
 
       {!distanceTracked && (

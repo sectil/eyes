@@ -6,25 +6,18 @@ import Home from './screens/Home.jsx'
 import Screening from './screens/Screening.jsx'
 import CardCalibration, { calibrationStillValid } from './screens/CardCalibration.jsx'
 import DistanceCalibration from './screens/DistanceCalibration.jsx'
-import AcuityTest from './screens/AcuityTest.jsx'
-import ReadingTest from './screens/ReadingTest.jsx'
 import Progress from './screens/Progress.jsx'
 import Calendar from './screens/Calendar.jsx'
 import Schedule from './screens/Schedule.jsx'
-import BlinkExercise from './screens/BlinkExercise.jsx'
 import Evidence from './screens/Evidence.jsx'
 import Info from './screens/Info.jsx'
-import Routine from './screens/Routine.jsx'
-import SnakeGame from './screens/SnakeGame.jsx'
-import TrackGame from './screens/TrackGame.jsx'
-import { SETS, todaySeconds } from './lib/routines.js'
 import Paywall from './screens/Paywall.jsx'
 import { getAccess } from './lib/subscription.js'
 import DistanceHud from './screens/DistanceHud.jsx'
 import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics } from './lib/native.js'
 import { resolveAutoCalibration, estimateCalibration } from './lib/screenScale.js'
-import { BEST_KEY as SNAKE_BEST_KEY } from './lib/snake.js'
-import { TRACK_BEST_KEY, TRACK_OPTS_KEY } from './lib/track.js'
+import { registry } from './modules/registry.js'
+import { viewFor } from './modules/views.js'
 import IPHONE_SCREENS from './lib/iphoneScreens.json'
 import GazeCalibration from './screens/GazeCalibration.jsx'
 import GazeTest from './screens/GazeTest.jsx'
@@ -48,31 +41,16 @@ const REST_AFTER_MS = 10 * 60 * 1000
 // bugünün ilk etkinliğine mola çıkarırdı.
 const REST_IDLE_RESET_MS = 5 * 60 * 1000
 const REST_SECONDS = 20
-const ACTIVE_SCREENS = ['daily', 'weekly', 'reading', 'blink', 'snake', 'track']
-const isActiveScreen = (s) => ACTIVE_SCREENS.includes(s) || s.startsWith('routine-')
-// Mola yalnızca bu ekranlardan önce sorulur. Egzersiz setleri ve göz kırpma zaten "Uzağa bak" /
-// "Gözlerini kapat" adımları içerir; önlerine ayrıca mola koymak art arda iki mola demektir.
-// O ekranlarda geçen süre yine de birikir (isActiveScreen).
-const REST_GATED = ['daily', 'weekly', 'reading', 'snake', 'track']
+// Hangi ekranın yakın odak süresine sayıldığı (gates.active) ve önüne mola sorulduğu (gates.rest)
+// modül manifestlerinden gelir (src/modules). Egzersiz setleri ve göz kırpma zaten "Uzağa bak" /
+// "Gözlerini kapat" adımları içerir; önlerine ayrıca mola konmaz ama süreleri birikir.
+const gatesOf = (s) => registry.forRoute(s)?.gates ?? {}
+const isActiveScreen = (s) => Boolean(gatesOf(s).active)
 // Ekran içindeki RestBreak bitince/atlanınca window'a yayılan olay (components/RestBreak.jsx ile aynı ad).
 const RESTED_EVENT = 'gozolcum:rested'
 
-// Mola metninde cümle içinde geçer ("Sırada günlük test var.", "Hazırsın, günlük test başlıyor").
-// Adlar Ana sayfadaki kartlara dayanır; "Yılan" oyunun adı olduğu için büyük harfle kalır.
-function activityLabel(s) {
-  if (s.startsWith('routine-')) {
-    const set = SETS.find((x) => `routine-${x.id}` === s)
-    return set ? `${set.title.toLocaleLowerCase('tr')} egzersiz seti` : 'egzersiz seti'
-  }
-  return {
-    daily: 'günlük test',
-    weekly: 'haftalık tam test',
-    reading: 'okuma hızı testi',
-    blink: 'göz kırpma egzersizi',
-    snake: 'Yılan oyunu',
-    track: 'çember takibi',
-  }[s] ?? ''
-}
+// Mola metninde cümle içinde geçer ("Sırada günlük test var."): modülün label'ı.
+const activityLabel = (s) => registry.labelFor(s)
 
 // c: { ms: birikmiş aktif süre, since: şu anki aktif aralığın başı | null, idleFrom: aktiflikten çıkış | null }
 function readClock(c, now) {
@@ -139,7 +117,7 @@ export default function App() {
   const activeTime = useActiveTime(isActiveScreen(screen))
   const refresh = () => setData(store.get())
   const go = (s) => {
-    const needsGaze = s === 'snake' || s === 'track' || s.startsWith('routine-')
+    const needsGaze = Boolean(gatesOf(s).gaze)
     if (needsGaze && native.trueDepth && !gazeSkipped.current && !hasGazeModel()) {
       setGazeFor({ to: s })
       window.scrollTo(0, 0)
@@ -147,7 +125,7 @@ export default function App() {
     }
     setGazeFor(null)
     const due = activeTime.read()
-    if (REST_GATED.includes(s) && due >= REST_AFTER_MS) {
+    if (gatesOf(s).rest && due >= REST_AFTER_MS) {
       setRestFor({ to: s, min: Math.floor(due / 60000) })
       window.scrollTo(0, 0)
       return
@@ -344,53 +322,17 @@ export default function App() {
   }
   const common = { calibration: settings.calibration, distanceCal, onCancel: back }
 
+  // --- Modül ekranları (src/modules): ekran adını tanıyan modül kendi ekranını çizer ---
+  const mod = registry.forRoute(screen)
+  const view = mod && viewFor(mod.id)
+  if (view) {
+    const ctx = { native, settings, tests, sessions, exercise, common, go, back, refresh, store, saveTests }
+    return view.render(ctx, screen)
+  }
+
   switch (screen) {
-    case 'daily':
-    case 'weekly':
-      return <AcuityTest key={screen} plan={screen} {...common} onFinish={saveTests} />
-    case 'reading': {
-      const recent = tests.filter((t) => t.type === 'reading').slice(-2).flatMap((t) => t.sentencesUsed ?? [])
-      return <ReadingTest {...common} recentSentences={recent} onFinish={saveTests} />
-    }
-    case 'blink':
-      return <BlinkExercise trueDepth={native.trueDepth} onBack={back} onFinish={(s) => { store.addSession(s); refresh(); go('home') }} />
     case 'schedule':
       return <Schedule initial={settings.reminder} onBack={() => go('calendar')} onSave={(r) => { store.setSetting('reminder', r); refresh() }} />
-    case 'routine-lite':
-    case 'routine-normal':
-    case 'routine-full': {
-      const set = SETS.find((s) => `routine-${s.id}` === screen)
-      return (
-        <Routine
-          key={screen}
-          set={set}
-          todaySec={todaySeconds(exercise)}
-          trueDepth={native.trueDepth}
-          onBack={back}
-          onFinish={(s) => { store.addSession(s); refresh(); go('home') }}
-        />
-      )
-    }
-    case 'snake':
-      // Oyun bitince ekranda kalır (sonuç + "Tekrar oyna"); her bitiş bir oturum olarak kaydedilir.
-      // Abonelik kilidi yukarıdaki genel kuralla uygulanır (diğer premium ekranlar gibi).
-      return (
-        <SnakeGame
-          trueDepth={native.trueDepth}
-          onExit={() => go('home')}
-          onFinish={(s) => { store.addSession(s); refresh() }}
-        />
-      )
-    case 'track':
-      // Göz pratiği: her tur bir oturum (type 'game', game 'track'); görme trendine katılmaz.
-      return (
-        <TrackGame
-          trueDepth={native.trueDepth}
-          sessions={sessions}
-          onExit={() => go('home')}
-          onFinish={(s) => { store.addSession(s); refresh() }}
-        />
-      )
     case 'evidence':
       return <Evidence onBack={() => go('info')} />
     case 'gaze-test':
@@ -421,9 +363,9 @@ export default function App() {
           const autoCal = isIOSApp() && settings.calibration?.method === 'auto' ? settings.calibration : null
           store.clearAll()
           if (autoCal) store.setSetting('calibration', autoCal)
-          // Yılan ve çember takibinin cihazdaki rekorları ve seçenekleri de silinir;
+          // Modüllerin cihazdaki rekorları ve seçenekleri de silinir (manifest storageKeys);
           // ses/titreşim tercihleri ve tema cihaz ayarı sayılır ve korunur.
-          for (const k of [SNAKE_BEST_KEY, 'gozolcum:snake-opts', TRACK_BEST_KEY, TRACK_OPTS_KEY]) {
+          for (const k of registry.resetKeys()) {
             try {
               localStorage.removeItem(k)
             } catch {

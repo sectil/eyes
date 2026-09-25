@@ -192,7 +192,7 @@ describe('summary', () => {
   })
 
   it('boş liste ve yılan yoksa bestSnake null', () => {
-    expect(summary([], now)).toEqual({ total: 0, seconds: 0, minutes: 0, activeDays: 0, streakDays: 0, thisWeekDays: 0, bestSnake: null, bestTrack: null })
+    expect(summary([], now)).toEqual({ total: 0, seconds: 0, minutes: 0, activeDays: 0, streakDays: 0, thisWeekDays: 0, bests: { snake: null, track: null }, bestSnake: null, bestTrack: null })
     expect(summary(acts.filter((a) => a.type !== 'game'), now).bestSnake).toBeNull()
   })
 })

@@ -35,6 +35,7 @@ import {
   monthTotals,
   summary,
 } from '../lib/stats.js'
+import { registry } from '../modules/registry.js'
 import '../styles/progress.css'
 
 const EYES = [
@@ -88,8 +89,11 @@ function SummaryCard({ s, days, now, weeklyTarget }) {
     { id: 'days', Icon: CalendarDays, value: nf(s.activeDays), label: 'Aktif gün' },
   ]
   // 0 puan rekor sayılmaz (Home rozeti ve SnakeGame '> 0' ile aynı)
-  if (s.bestSnake > 0) tiles.push({ id: 'snake', Icon: Trophy, value: nf(s.bestSnake), label: 'Yılan rekoru' })
-  if (s.bestTrack > 0) tiles.push({ id: 'track', Icon: Trophy, value: nf(s.bestTrack), label: 'Çember rekoru' })
+  // Rekor kutuları modüllerden (src/modules: sessions.best + bestLabel). 0 puan rekor sayılmaz.
+  for (const m of registry.modules) {
+    const b = s.bests?.[m.id]
+    if (m.sessions?.bestLabel && b > 0) tiles.push({ id: m.id, Icon: Trophy, value: nf(b), label: m.sessions.bestLabel })
+  }
 
   const todayKey = dayKey(now)
   const todayActive = days.has(todayKey)
@@ -112,7 +116,7 @@ function SummaryCard({ s, days, now, weeklyTarget }) {
 
   return (
     <section className="card card-hero pg-summary" aria-label="Özet">
-      <div className={`pg-stats${tiles.length === 4 ? ' n4' : tiles.length === 5 ? ' n5' : ''}`}>
+      <div className={`pg-stats${tiles.length === 4 ? ' n4' : tiles.length >= 5 ? ' n5' : ''}`}>
         {tiles.map(({ id, Icon, value, label }) => (
           <div key={id} className="pg-stat">
             <span className="pg-stat-value">{value}</span>
@@ -402,7 +406,7 @@ export default function Progress({ tests = [], sessions = [], weeklyTarget, onSt
   const counted = useMemo(() => countedActivities(activities), [activities])
   const countedDays = useMemo(() => byDay(counted), [counted])
   const all = summary(activities, now) // rekorlar oyunlardan (hedef/seri sayımı oyunsuz)
-  const s = { ...summary(counted, now), bestSnake: all.bestSnake, bestTrack: all.bestTrack }
+  const s = { ...summary(counted, now), bests: all.bests }
 
   const [ym, setYm] = useState({ y: now.getFullYear(), m: now.getMonth() })
   const [sel, setSel] = useState(todayKey)
