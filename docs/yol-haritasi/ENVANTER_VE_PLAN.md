@@ -287,3 +287,19 @@ konuşma eşleşmesi ≥ 0,7 olunca cümle biter (`MATCH_THRESHOLD`) → kişi b
 - Yol: son 7 günde 3 günden az yapıldıysa Nefes'ten hemen sonra 2 dk. Tek Bakışta ile aynı gün ikisinden biri çıkar
   (lib/today.js `rotate`): bugün yapılan kalır, yoksa bu hafta az yapılan, eşitse güne göre sırayla. Sebep: ikisi aynı
   gün çıkınca 2. bölüm payında Tek Bakışta hep düşüyordu. O gün Yılan yine düşer.
+
+## 17. Dalga (ses: Sakin / Güç / Motivasyon) (2026-09-25, Build 29 — YAPILDI)
+- Taslak (onaylı): https://claude.ai/artifact/Us2DychtDmUtQWsoQJ6ebY. Modül: src/modules/dalga (Yaşam halkası, pratik; günlük yola girmez).
+- Mantık lib/dalga.js, beste lib/dalgaMusic.js (saf, olay listesi), ses motoru lib/dalgaAudio.js (WebAudio; dosya yok),
+  görsel components/DalgaVisual.jsx, ekran screens/Dalga.jsx.
+- Ses: piyano (üst tonlar), gitar (Karplus–Strong), arka ton; Sakin 60 BPM Re majör, her 6. ölçü tam sessiz (Bernardi 2005);
+  Güç 72 BPM Do majör yükselen dizi, önce öz-onaylama (değer + bir cümle; cümle kaydedilmez; Zhang 2025); Motivasyon
+  116 BPM La minör, ritmik gitar/bas/davul (Terry 2020). Binaural 200/206 Hz yalnız Sakin + kulaklık (Xiong 2025;
+  mekanizma tutarsız: Ingendoh 2023). 528 Hz yalnız "Kanıt yok" kartı (Bozok 2026). Tempo/frekans değerleri VARSAYIM.
+- Ölçü: önce/sonra 1–10 tek puan. 30 sn'den kısa dinleme kaydedilmez (VARSAYIM).
+- Kişisel deney (varsayılan açık): Sakin + kulaklıkta katman ikili bloklarda biri açık biri kapalı; 6 oturumda iki grubun
+  ortalama farkı. 1 puandan küçük fark "küçük" (VARSAYIM).
+- Güvenlik: yanıp sönme yok (Fisher 2005: 1–65 Hz, en riskli 15–25 Hz); parlaklık yalnız 0,1 Hz nefes hızında; binaural
+  fark ekranda 10 kat yavaş. Ekran açık kalsın diye Screen Wake Lock denenir.
+- Cihazda doğrulanacak: iPhone sessiz modda WebAudio susuyor mu; Wake Lock WKWebView'da çalışıyor mu; ekran kilitlenince
+  ses duruyor mu. Gerekirse yerel AVAudioSession/idleTimer eklentisi (ayrı iş, onayla).
