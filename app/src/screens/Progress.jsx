@@ -18,7 +18,7 @@ import {
   TriangleAlert,
   Trophy, Wind } from 'lucide-react'
 import ProgressChart from '../components/ProgressChart.jsx'
-import { PageHeader } from '../components/ui.jsx'
+import { PageHeader, IrisMark } from '../components/ui.jsx'
 import { analyzeTrend, trendMessage } from '../lib/trend.js'
 import { snellen20 } from '../lib/optotype.js'
 import { WEEKDAYS, dayKey, monthGrid, startOfWeek, weekProgress } from '../lib/calendar.js'
@@ -36,6 +36,8 @@ import {
   summary,
 } from '../lib/stats.js'
 import { registry } from '../modules/registry.js'
+import { LadderStrip } from '../components/readingArt.jsx'
+import { readingV1, readingV2, cpsText, fmtLogMAR, ladderStatus, jevProgressLine } from '../lib/reading.js'
 import '../styles/progress.css'
 
 const EYES = [
@@ -350,7 +352,6 @@ function VisionSection({ tests, onStart }) {
   const [eye, setEye] = useState(() => pickSeries(tests).eye ?? 'R')
   const va = useMemo(() => tests.filter((t) => t.type === 'va-daily' || t.type === 'va-weekly'), [tests])
   const r = useMemo(() => analyzeTrend(va.filter((t) => t.eye === eye)), [va, eye])
-  const reading = tests.filter((t) => t.type === 'reading').slice(-6).reverse()
   const tone = r.alert === 'red' ? 'tone-danger' : r.alert === 'yellow' ? 'tone-warn' : ''
 
   return (
@@ -414,27 +415,71 @@ function VisionSection({ tests, onStart }) {
         </>
       )}
 
-      <section className="card">
-        <div className="pg-card-head">
-          <span className="pg-card-icon"><BookText size={18} aria-hidden="true" /></span>
-          <h2>Okuma hızı</h2>
+      <ReadingCard tests={tests} onStart={onStart} />
+    </>
+  )
+}
+
+// Okuma kartı (O10). Yeni yöntemin (protocol 2) satırları: tarih · rahat boy · en küçük boy · soluk hız,
+// altında o testin küçük diyafram merdiveni. Eski "Okuma hızı" kayıtları silinmez; ayrı ve soluk durur,
+// karşılaştırmaya girmez.
+const shortDate = (iso) => new Date(iso).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' })
+function ReadingCard({ tests, onStart }) {
+  const v2 = readingV2(tests).slice(-6).reverse()
+  const v1 = readingV1(tests).slice(-4).reverse()
+  const jev = jevProgressLine(tests)
+  const showCond = new Set(v2.map((t) => t.correction ?? null)).size > 1 // koşul yalnız karışıksa yazılır
+  return (
+    <section className="card">
+      <div className="pg-card-head">
+        <span className="pg-card-icon"><BookText size={18} aria-hidden="true" /></span>
+        <h2>Okuma</h2>
+      </div>
+      {v2.length ? (
+        <ul className="rd-prog">
+          {v2.map((t) => (
+            <li key={t.id}>
+              <span className="d">{shortDate(t.date)}</span>
+              <span className="v">rahat <b>{cpsText(t)}</b> · en küçük <b>{fmtLogMAR(t.readingAcuity)}</b></span>
+              <span className="w">{t.maxReadingSpeed != null ? `${t.maxReadingSpeed} k/dk` : ''}</span>
+              <LadderStrip rows={ladderStatus(t)} cps={t.criticalPrintSize} ra={t.readingAcuity} />
+              {showCond && CONDITION_TEXT[t.correction] && <span className="cond">{CONDITION_TEXT[t.correction]}</span>}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="stack" style={{ gap: 8 }}>
+          <p className="muted small">{v1.length ? 'Okuma testi yenilendi. İlk yeni ölçümünle karşılaştırma başlar.' : 'Henüz okuma testi yok. Okuma testi yaklaşık 3 dakika sürer.'}</p>
+          {onStart && (
+            <button className="btn btn-sm" onClick={() => onStart('reading')}>
+              <Play size={16} aria-hidden="true" /> Okuma testini başlat
+            </button>
+          )}
         </div>
-        {reading.length ? (
-          <ul className="pg-read">
-            {reading.map((t) => (
+      )}
+      {v1.length > 0 && (
+        <>
+          <div className="rd-old-sep">Önceki yöntem (Okuma hızı)</div>
+          <ul className="rd-prog old">
+            {v1.map((t) => (
               <li key={t.id}>
-                <span className="muted">{new Date(t.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' })}</span>
-                <span><strong>{t.maxReadingSpeed ?? '—'}</strong> kelime/dk</span>
-                <span className="muted">kritik boyut {Number.isFinite(t.criticalPrintSize) ? decimalTr(t.criticalPrintSize) : '—'}</span>
+                <span className="d">{shortDate(t.date)}</span>
+                <span className="v">{t.maxReadingSpeed ?? '—'} kelime/dk</span>
+                <span className="w">kritik boyut {Number.isFinite(t.criticalPrintSize) ? decimalTr(t.criticalPrintSize) : '—'}</span>
               </li>
             ))}
           </ul>
-        ) : (
-          <p className="muted small">Henüz okuma testi yok. Okuma hızı testi yaklaşık 3 dakika sürer.</p>
-        )}
-        <p className="muted small">Okuma hızını yalnızca bu cihazdaki önceki sonuçlarınla karşılaştır.</p>
-      </section>
-    </>
+          <p className="muted small">Eski test farklı ölçüyordu. Karşılaştırma yeni testlerle başlar.</p>
+        </>
+      )}
+      {jev && (
+        <div className="rd-jevline">
+          <IrisMark size={34} />
+          <p className="rd-bubble">{jev}</p>
+        </div>
+      )}
+      <p className="muted small">Klinik test değil. Yalnızca bu telefondaki önceki sonuçlarınla, aynı gözlük koşulunda karşılaştır.</p>
+    </section>
   )
 }
 

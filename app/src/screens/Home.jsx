@@ -94,7 +94,6 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   const r = vaPick.trend
   const shown = r.current7 ?? ou.at(-1)?.logMAR ?? null
   const tw = trendWords(r)
-  const reads = tests.filter((t) => t.type === 'reading' && Number.isFinite(t.maxReadingSpeed))
   const todaySec = todaySeconds(exercise)
   const plan = todayPlan(registry.modules, { tests, sessions, now, profile: settings.profile })
   // Oyunla aynı kural (SnakeGame loadSnakeOpts): TrueDepth varsa ve kayıtlı seçim 'touch'
@@ -173,17 +172,6 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           <span className="big">{shown == null ? '—' : snellen20(shown)}</span>
           <span className={`s ${shown == null ? '' : tw.tone}`}>{shown == null ? 'henüz ölçüm yok' : tw.text}</span>
           <Sparkline values={ou.slice(-14).map((t) => t.logMAR)} width={132} height={22} />
-        </button>
-        <button className="home-tile" onClick={() => onStart(reads.length ? 'progress' : 'reading')}>
-          <span className="t">Okuma hızı</span>
-          <span className="big">
-            {reads.length ? reads.at(-1).maxReadingSpeed : '—'}
-            {reads.length > 0 && <small>k/dk</small>}
-          </span>
-          <span className="s">
-            {!reads.length ? 'henüz ölçüm yok' : reads.length > 1 ? `önceki ${reads.at(-2).maxReadingSpeed}` : 'ilk ölçüm'}
-          </span>
-          <Sparkline values={reads.slice(-8).map((t) => t.maxReadingSpeed)} width={132} height={22} higherIsBetter color="var(--lens)" />
         </button>
         {/* Kutucuk tanımlayan ölçüm modülleri (view.tile) — takılınca burada görünür */}
         {registry.inSection('measure').map((m) => {
