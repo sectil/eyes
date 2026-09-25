@@ -63,11 +63,14 @@ const lastRestEnd = (state, now) => {
   return done ? done.until : 0
 }
 
+// Bütçeyi yalnızca 'eye' segmentleri (oyun, göz hareketi egzersizi) tüketir. Ölçüm testleri ('test')
+// bütçeye SAYILMAZ: 17a raporundaki 5 dk sınırı göz hareketi blokları içindir; bir E testi (3 göz) 3–4 dk
+// sürer ve bütçeyi bitirip molaya sokuyordu (Build 20 geri bildirimi). Testler mola sırasında yine kilitli.
 export function usage(state, now) {
   const since = lastRestEnd(state, now)
   return {
-    sinceRest: sum(state.segs, since, now),
-    hour: sum(state.segs, Math.max(since, now - LIMITS.hourWindowMs), now),
+    sinceRest: sum(state.segs, since, now, 'eye'),
+    hour: sum(state.segs, now - LIMITS.hourWindowMs, now, 'eye'), // molalar arası da birikir (son 60 dk)
     dayEye: sum(state.segs, startOfDay(now), now, 'eye'),
   }
 }

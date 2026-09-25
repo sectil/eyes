@@ -183,3 +183,11 @@ Manzara görselleri: telifsiz, cihaz içinde, küçük (≤150 KB) — kaynak pl
 6. **Sıra:** nefes ekranı (0) → kilit (1–3) → koruma katmanları (4–6) → animasyon (7). Uygun mu?
 7. **Nefes görseli:** Küre / Halka / Manzara üçü de olsun mu, yoksa yalnız manzara mı? Manzara fotoğrafı
    için kaynak tercihin var mı (kendi fotoğrafların / telifsiz arşiv)?
+
+
+## Düzeltme (2026-09-25, Build 21)
+- Ölçüm testleri ('test') göz bütçesine, saatlik ve günlük sınıra SAYILMAZ. Gerekçe: 17a raporundaki 5 dk sınırı göz
+  hareketi blokları içindir; bir E testi (3 göz) 3–4 dk sürüp bütçeyi bitiriyordu (Build 20). Testler mola sırasında yine kilitli.
+- Profil "günde 6+ saat ekran" → bütçe 3 dk kuralı kaldırıldı (dayanağı yoktu; kullanıcı 3 dk'yı saçma buldu). Hareket
+  tutması → 3 dk kuralı duruyor.
+- Saatlik pencere (60 dk'da 20 dk göz çalışması) molalar arası birikir; önceden yalnızca son moladan sonrası sayılıyordu.

@@ -146,7 +146,7 @@ export function profileSignals(p) {
     referred: q.flags.length > 0,
     // null: sorulmadı; false: flaşlı görevler kapalı (Evet / Emin değilim)
     flashSafe: q.seizure == null ? null : q.seizure === 'no',
-    heavyScreen: q.screenHours === '6+', // mola bütçesi 3 dk (ENVANTER_VE_PLAN §3a; VARSAYIM)
+    heavyScreen: q.screenHours === '6+', // bilgi amaçlı; mola bütçesini KISALTMAZ (Build 20: 3 dk çok kısa bulundu; dayanağı da yoktu)
     poorSleep: q.sleep != null && q.sleep <= 4, // VARSAYIM: 0–10'da ≤4
     nightPhone: q.nightPhone === 'most' || q.nightPhone === 'every',
     nearDifficulty: q.nearDifficulty != null && q.nearDifficulty >= 3,

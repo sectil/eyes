@@ -3,12 +3,12 @@ import { store } from './lib/storage.js'
 import { TabBar } from './components/ui.jsx'
 import RestLock from './components/RestLock.jsx'
 import EyeBudgetPill from './components/EyeBudgetPill.jsx'
-import { recordTime, eyeStatus, beginRest, resetBudget, flushBudget, setShortBudget, EXHAUSTED_EVENT } from './lib/eyeBudgetStore.js'
+import { recordTime, eyeStatus, beginRest, resetBudget, flushBudget, EXHAUSTED_EVENT } from './lib/eyeBudgetStore.js'
 import { LIMITS as EYE_LIMITS } from './lib/eyeBudget.js'
 import { onRestNotifyTap } from './lib/restNotify.js'
 import Home from './screens/Home.jsx'
 import Profile from './screens/Profile.jsx'
-import { screeningFromProfile, profileFromScreening, profileSignals } from './lib/profile.js'
+import { screeningFromProfile, profileFromScreening } from './lib/profile.js'
 import { resetAllHowto } from './lib/howto.js'
 import CardCalibration, { calibrationStillValid } from './screens/CardCalibration.jsx'
 import DistanceCalibration from './screens/DistanceCalibration.jsx'
@@ -263,7 +263,6 @@ export default function App() {
   const saveProfile = (p) => {
     store.setSetting('profile', p)
     store.setSetting('screening', screeningFromProfile(p))
-    setShortBudget(profileSignals(p).heavyScreen)
     refresh()
   }
   if (!settings.screening || settings.screening.referred) {

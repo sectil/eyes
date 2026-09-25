@@ -21,7 +21,7 @@ describe('addTime / usage', () => {
     s = add(s, 'test', 2, 3)
     expect(s.segs.length).toBe(2)
     // 2 sn'den kısa boşluk birleşmede sayılır (ekran geçişi titreşimi)
-    expect(usage(s, T0 + 3 * MIN)).toEqual({ sinceRest: 3 * MIN, hour: 3 * MIN, dayEye: 2 * MIN })
+    expect(usage(s, T0 + 3 * MIN)).toEqual({ sinceRest: 2 * MIN, hour: 2 * MIN, dayEye: 2 * MIN }) // test segmenti bütçeye sayılmaz
   })
   it('geçersiz tür ve ters aralık yok sayılır', () => {
     const s = emptyBudget()
@@ -39,10 +39,10 @@ describe('check: bütçe, saatlik, günlük', () => {
     s = add(s, 'eye', 4.5, 5)
     expect(check(s, T0 + 5 * MIN).due).toBe('budget')
   })
-  it('testler bütçeye sayılır, günlük sınıra sayılmaz', () => {
-    const s = add(emptyBudget(), 'test', 0, 5)
-    expect(check(s, T0 + 5 * MIN).due).toBe('budget')
-    expect(usage(s, T0 + 5 * MIN).dayEye).toBe(0)
+  it('testler bütçeye, saatlik ve günlük sınıra sayılmaz (Build 20: bir E testi molaya sokuyordu)', () => {
+    const s = add(emptyBudget(), 'test', 0, 25)
+    expect(check(s, T0 + 25 * MIN).due).toBeNull()
+    expect(usage(s, T0 + 25 * MIN)).toEqual({ sinceRest: 0, hour: 0, dayEye: 0 })
   })
   it('hareket tutması: bütçe 3 dk', () => {
     const s = setMotion(add(emptyBudget(), 'eye', 0, 3), true)
@@ -57,21 +57,28 @@ describe('check: bütçe, saatlik, günlük', () => {
     s = add(s, 'eye', 10, 12)
     expect(check(s, T0 + 12 * MIN).used).toBe(2 * MIN)
   })
-  it('son 60 dk\'da 20 dk → hourly (15 dk mola); mola öncesi süre saatlik hesaba girmez', () => {
+  it('son 60 dk\'da 20 dk göz çalışması → hourly (15 dk mola); molalar arası birikir', () => {
     let s = emptyBudget()
-    // 4 blok × 5 dk, aralarda 5 dk mola → 20 dk göz çalışması 40 dk'da
+    // 4 blok × 5 dk, aralarda 5 dk mola → 20 dk göz çalışması 35 dk'da
     for (let i = 0; i < 4; i++) {
       s = add(s, 'eye', i * 10, i * 10 + 5)
       if (i < 3) s = startRest(s, 'budget', T0 + (i * 10 + 5) * MIN)
     }
-    // saatlik pencere son moladan sonrası: yalnızca son blok (5 dk) → budget
-    expect(check(s, T0 + 35 * MIN).due).toBe('budget')
+    expect(check(s, T0 + 35 * MIN).due).toBe('hourly') // 4. blok bütçeyi de doldurur; saatlik kural önce gelir
+    expect(check(s, T0 + 34 * MIN).due).toBeNull() // 19 dk: henüz değil
     expect(restLengthMs('hourly', T0)).toBe(15 * MIN)
   })
-  it('hourly: moladan sonra da 60 dk içinde 20 dk birikirse', () => {
-    // Mola yok, testler (budget kilidi testleri kesmez; kullanıcı arka arkaya test yaparsa birikir)
-    let s = add(emptyBudget(), 'test', 0, 20)
-    expect(check(s, T0 + 20 * MIN).due).toBe('hourly')
+  it('hourly: 60 dk içinde 20 dk göz süresi birikirse (molalar arası)', () => {
+    let s = add(emptyBudget(), 'eye', 0, 4)
+    s = startRest(s, 'budget', T0 + 4 * MIN)
+    // Mola bitince (9. dk) tekrar; sinceRest sıfırlanır ama saatlik pencere birikir
+    for (let i = 0; i < 4; i++) {
+      const a = 10 + i * 9
+      s = add(s, 'eye', a, a + 4)
+      if (i < 3) s = startRest(s, 'budget', T0 + (a + 4) * MIN)
+    }
+    expect(usage(s, T0 + 41 * MIN).hour).toBe(20 * MIN)
+    expect(check(s, T0 + 41 * MIN).due).toBe('hourly')
   })
   it('günlük 30 dk göz oyunu/egzersizi → daily, gece yarısına kadar', () => {
     let s = emptyBudget()
@@ -133,5 +140,21 @@ describe('kısa bütçe (profil: 6+ saat ekran)', () => {
     saveBudget(st, storage)
     expect(loadBudget(storage).short).toBe(true)
     expect(check(setShort(st, false), T0 + 3 * 60000).due).toBeNull()
+  })
+})
+
+describe('ölçüm testleri bütçeyi tüketmez (Build 20)', () => {
+  it('4 dk test + 1 dk oyun: bütçe yalnızca oyunu sayar; test yine mola sırasında kilitli', async () => {
+    const { emptyBudget, addTime, check, startRest, LIMITS } = await import('./eyeBudget.js')
+    const T0 = 1_000_000
+    let st = addTime(emptyBudget(), 'test', T0, T0 + 4 * 60000)
+    let c = check(st, T0 + 4 * 60000)
+    expect(c.due).toBeNull()
+    expect(c.used).toBe(0)
+    st = addTime(st, 'eye', T0 + 4 * 60000, T0 + 5 * 60000)
+    c = check(st, T0 + 5 * 60000)
+    expect(c.used).toBe(60000)
+    expect(c.leftMs).toBe(LIMITS.budgetMs - 60000)
+    expect(check(startRest(st, 'budget', T0 + 5 * 60000), T0 + 5 * 60000 + 1000).locked).toBe(true)
   })
 })
