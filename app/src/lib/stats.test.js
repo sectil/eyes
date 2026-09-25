@@ -269,7 +269,7 @@ describe('çember takibi oturumları', () => {
     const { activitiesFrom, summary, countsTowardGoal } = await import('./stats.js')
     const now = new Date('2026-09-25T12:00:00')
     const acts = activitiesFrom([], [{ type: 'game', game: 'track', score: 42, best: 42, seconds: 40, followPct: 80, control: 'eyes', date: now.toISOString() }])
-    expect(acts[0].title).toBe('Çember takibi')
+    expect(acts[0].title).toBe('Çemberler')
     expect(acts[0].detail).toMatch(/42 puan/)
     expect(acts[0].detail).toMatch(/takip %80/)
     expect(countsTowardGoal(acts[0])).toBe(false)
