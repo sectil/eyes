@@ -1,4 +1,4 @@
-import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame } from 'lucide-react'
+import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame, Lock, Eye } from 'lucide-react'
 import { DAILY_GOAL_MIN, formatMin, todaySeconds } from '../lib/routines.js'
 import { Sparkline, IrisMark } from '../components/ui.jsx'
 import { analyzeTrend, trendMessage } from '../lib/trend.js'
@@ -7,6 +7,8 @@ import { snellen20 } from '../lib/optotype.js'
 import { activitiesFrom, countedActivities, summary } from '../lib/stats.js'
 import { todayPlan } from '../lib/today.js'
 import '../styles/home.css'
+import '../styles/restlock.css'
+import { REASON_TEXT, fmtLeft } from '../lib/eyeBudget.js'
 import CoachCard from '../components/CoachCard.jsx'
 import { registry } from '../modules/registry.js'
 import { viewFor } from '../modules/views.js'
@@ -49,19 +51,25 @@ function Aperture() {
 function moduleEntries(m, ctx) {
   const v = viewFor(m.id)
   if (!v) return []
-  if (v.entries) return v.entries(ctx).map((e) => ({ ...e, key: e.route, Icon: v.icon }))
-  return [{ key: m.id, route: (m.routes ?? [m.id])[0], title: m.title, sub: v.sub?.(ctx), badge: v.badge?.(ctx), Icon: v.icon }]
+  const locked = Boolean(ctx.lockLeft && m.gates?.eyeBudget)
+  if (v.entries) return v.entries(ctx).map((e) => ({ ...e, key: e.route, Icon: v.icon, locked }))
+  return [{ key: m.id, route: (m.routes ?? [m.id])[0], title: m.title, sub: v.sub?.(ctx), badge: v.badge?.(ctx), Icon: v.icon, locked }]
+}
+
+// Mola sırasında kilitli modüllerde küçük etiket
+function LockTag({ left }) {
+  return <span className="eb-lock"><Lock size={11} aria-hidden="true" /> {left}</span>
 }
 
 function ModuleRows({ section, ctx, onStart }) {
   const rows = registry.inSection(section).flatMap((m) => moduleEntries(m, ctx))
   return (
     <div className="mod-rows">
-      {rows.map(({ key, route, title, sub, badge, color, Icon }) => (
+      {rows.map(({ key, route, title, sub, badge, color, Icon, locked }) => (
         <button key={key} className="mod-row" style={color ? { '--row-color': color } : undefined} onClick={() => onStart(route)}>
           <span className={`mod-ic${color ? ' tinted' : ''}`}><Icon size={20} aria-hidden="true" /></span>
           <span className="grow">
-            <span className="title">{title} {badge && <span className="badge">{badge}</span>}</span>
+            <span className="title">{title} {locked ? <LockTag left={ctx.lockLeft} /> : badge && <span className="badge">{badge}</span>}</span>
             {sub && <span className="sub">{sub}</span>}
           </span>
           <ChevronRight className="chev" size={18} aria-hidden="true" />
@@ -71,7 +79,7 @@ function ModuleRows({ section, ctx, onStart }) {
   )
 }
 
-export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, onStart }) {
+export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, onStart }) {
   const now = new Date()
   // Oyun oturumları (type 'game') egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
   const exercise = sessions.filter((s) => s.type !== 'game')
@@ -87,7 +95,9 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   // Oyunla aynı kural (SnakeGame loadSnakeOpts): TrueDepth varsa ve kayıtlı seçim 'touch'
   // değilse gözle açılır. VARSAYIM: trueDepth prop'u verilmemişse mesafe yöntemine göre tahmin edilir.
   const hasTrueDepth = trueDepth ?? settings.distance?.method === 'truedepth'
-  const ctx = { native: { trueDepth: hasTrueDepth }, sessions, tests, settings }
+  const locked = Boolean(eyeBudget?.locked)
+  const lockLeft = locked ? fmtLeft(eyeBudget.leftMs) : null
+  const ctx = { native: { trueDepth: hasTrueDepth }, sessions, tests, settings, lockLeft }
 
   return (
     <>
@@ -106,6 +116,17 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
         </div>
       </header>
 
+      {locked && (
+        <button type="button" className="eb-banner" onClick={() => onStart('eye-rest')}>
+          <Eye size={22} aria-hidden="true" style={{ color: 'var(--accent)', flex: 'none' }} />
+          <span className="grow">
+            <strong>{(REASON_TEXT[eyeBudget.reason] ?? REASON_TEXT.budget).title}</strong>
+            <span className="sub">Oyunlar, egzersizler ve testler mola bitince açılır. Nefes ve göz kırpma açık.</span>
+          </span>
+          <span className="eb-time">{lockLeft}</span>
+        </button>
+      )}
+
       <section className="plan-hero" aria-label="Bugünün planı">
         <Aperture />
         <span className="eyebrow">
@@ -123,8 +144,11 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
         )}
         {plan.next ? (
           <button className="btn" onClick={() => onStart(plan.next.route)}>
-            <Play size={18} aria-hidden="true" />
-            Başla{plan.next.minutes ? ` · ${plan.next.minutes} dk` : ''}
+            {locked && registry.get(plan.next.id)?.gates?.eyeBudget ? (
+              <><Lock size={18} aria-hidden="true" /> Mola · {lockLeft}</>
+            ) : (
+              <><Play size={18} aria-hidden="true" /> Başla{plan.next.minutes ? ` · ${plan.next.minutes} dk` : ''}</>
+            )}
           </button>
         ) : (
           <p className="plan-done small">
@@ -192,11 +216,12 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           if (!v) return null
           const Icon = v.icon
           const badge = v.badge?.(ctx)
+          const lockedHere = locked && m.gates?.eyeBudget
           return (
             <button key={m.id} className="prax-tile" onClick={() => onStart((m.routes ?? [m.id])[0])}>
               <Icon size={22} aria-hidden="true" />
               <span className="title">{m.title}</span>
-              <em>{badge ? <><Trophy size={11} aria-hidden="true" /> {badge}</> : 'Başla'}</em>
+              <em>{lockedHere ? <LockTag left={lockLeft} /> : badge ? <><Trophy size={11} aria-hidden="true" /> {badge}</> : 'Başla'}</em>
             </button>
           )
         })}

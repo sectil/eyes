@@ -23,6 +23,7 @@ import {
 } from '../lib/track.js'
 import '../styles/track.css'
 import SoundToggle from '../components/SoundToggle.jsx'
+import { requestEyeRound } from '../lib/eyeBudgetStore.js'
 
 // Çember takibi — göz pratiği (lib/track.js). Çember kenar ve köşe noktaları arasında atlar; içinde
 // kısa bir söz yazar. Kişi gözüyle izler ve sözü okur. Her atlamada çok hafif tık (titreşim + ses).
@@ -115,6 +116,8 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
   }
 
   function start() {
+    // Göz bütçesi dolduysa yeni tur başlamaz; App mola ekranını açar (lib/eyeBudgetStore.js)
+    if (!requestEyeRound()) return
     unlockAudio()
     unlockSfx()
     clearTimeout(timer.current)

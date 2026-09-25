@@ -8,7 +8,7 @@ export default {
   label: 'çember takibi',
   ring: 'attention',
   kind: 'practice',
-  gates: { gaze: true, rest: true, active: true },
+  gates: { gaze: true, eyeBudget: 'eye' },
   storageKeys: [TRACK_BEST_KEY, TRACK_OPTS_KEY],
   home: { section: 'practice', order: 10 },
   sessions: {

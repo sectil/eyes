@@ -11,7 +11,7 @@ export default {
   },
   ring: 'eye',
   kind: 'exercise',
-  gates: { gaze: true, active: true },
+  gates: { gaze: true, eyeBudget: 'eye' },
   home: { section: 'exercise', order: 10 },
   // Günlük egzersiz hedefi (DAILY_GOAL_MIN). Kalan süreyi kapatan en kısa set önerilir.
   // Nefesli Derin set isteğe bağlı: kullanıcı son egzersizinde onu seçmediyse plan önermez (VARSAYIM).

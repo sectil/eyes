@@ -29,7 +29,6 @@ import {
   Infinity as InfinityIcon,
   SlidersHorizontal,
 } from 'lucide-react'
-import RestBreak from '../components/RestBreak.jsx'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { createGazeReader, GAZE_FULL_DEG } from '../lib/gaze.js'
 import { haptic } from '../lib/native.js'
@@ -55,6 +54,7 @@ import {
 import { playSfx, unlockSfx } from '../lib/sfx.js'
 import '../styles/snake.css'
 import GazeTutorial from '../components/GazeTutorial.jsx'
+import { requestEyeRound } from '../lib/eyeBudgetStore.js'
 
 // Yılan — gözle (TrueDepth bakış yönü) ya da dokunarak oynanan Nokia klasiği.
 // Oyun motoru saf: src/lib/snake.js. Bu ekran yalnızca girdi, çizim, ses/titreşim ve akışı yönetir.
@@ -81,8 +81,6 @@ const RESUME_LOOK_MS = STEADY_HOLD_MS // otomatik devam için ekrana bu kadar sa
 const START_BEAT_MS = 900
 const RESUME_BEAT_MS = 550
 const CRASH_MS = 1000 // çarpma animasyonu, sonra sonuç
-const REST_AFTER_MS = 3 * 60 * 1000 // bu kadar oyundan sonra mola önerisi
-const REST_SEC = 20
 const SWIPE_PX = 18
 const UI_MS = 80 // bakış göstergesi güncelleme aralığı
 const TAU = Math.PI * 2
@@ -418,7 +416,7 @@ function GazePanel({ ui, angle, camReady }) {
 export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
   const [initialOpts] = useState(() => loadSnakeOpts(trueDepth))
   const [practiced, setPracticed] = useState(initialOpts.practiced)
-  const [phase, setPhase] = useState('intro') // intro | countdown | playing | paused | crashed | rest | over
+  const [phase, setPhase] = useState('intro') // intro | practice | countdown | playing | paused | crashed | over
   const [control, setControl] = useState(initialOpts.control) // 'eyes' | 'touch'
   const [walls, setWalls] = useState(initialOpts.walls) // 'classic' | 'wrap'
   const [best, setBest] = useState(() => loadBest())
@@ -440,7 +438,6 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
   const prevRef = useRef([])
   const accRef = useRef(0)
   const playMsRef = useRef(0)
-  const sinceRestRef = useRef(0)
   const fxRef = useRef([])
   const crashAtRef = useRef(null)
   const foodBornRef = useRef(0)
@@ -518,6 +515,8 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
   }
 
   function startGame() {
+    // Göz bütçesi dolduysa yeni tur başlamaz; App mola ekranını açar (lib/eyeBudgetStore.js)
+    if (!requestEyeRound()) return
     unlockSfx()
     clearTimeout(crashTimerRef.current)
     const g = createGame({ cols: COLS, rows: ROWS, wrap: walls === 'wrap' })
@@ -602,7 +601,6 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
       haptic('error')
     }
     const seconds = Math.max(1, Math.round(playMsRef.current / 1000))
-    sinceRestRef.current += playMsRef.current
     const prevBest = bestRef.current
     const record = final.score > prevBest
     const newBest = Math.max(prevBest, final.score)
@@ -629,7 +627,8 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
       // kayıt hatası oyunu durdurmasın
     }
     clearTimeout(crashTimerRef.current)
-    crashTimerRef.current = setTimeout(() => go(sinceRestRef.current >= REST_AFTER_MS ? 'rest' : 'over'), CRASH_MS)
+    // Mola kararı merkezi göz bütçesinde (App + lib/eyeBudget.js); oyun kendi molasını açmaz
+    crashTimerRef.current = setTimeout(() => go('over'), CRASH_MS)
   }
 
   function advance(now) {
@@ -651,11 +650,6 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
       setHud({ score: n.score, level: lvl, pop: pts, popKey: n.eaten })
     }
     if (n.dir !== s.dir) setHeading(headingOf(n))
-  }
-
-  function afterRest() {
-    sinceRestRef.current = 0
-    go('over')
   }
 
   // --- Bakış (TrueDepth) ---
@@ -881,7 +875,7 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
   const keyRef = useRef(null)
   keyRef.current = (e) => {
     const ph = phaseRef.current
-    if (ph === 'intro' || ph === 'rest') return
+    if (ph === 'intro') return
     // Odaktaki düğme boşluk/Enter'ı kendisi işler (aksi halde iki kez tetiklenirdi)
     if ((e.key === ' ' || e.key === 'Enter') && e.target?.closest?.('button')) return
     const d = KEY_DIR[e.key]
@@ -964,21 +958,6 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
       Eğlence ve bakış kontrolü pratiği. Görmeyi iyileştirdiği iddia edilmez.
     </p>
   )
-
-  // --- Mola ---
-  if (phase === 'rest') {
-    return (
-      <RestBreak
-        seconds={REST_SEC}
-        trueDepth={trueDepth}
-        title="Gözlerini dinlendir"
-        subtitle="Birkaç dakikadır oynuyorsun. 20 saniye pencereden dışarı, 6 metreden uzak bir noktaya bak."
-        onDone={afterRest}
-        onSkip={afterRest}
-        onClose={onExit}
-      />
-    )
-  }
 
   // --- Başlangıç ekranı ---
   if (phase === 'intro') {

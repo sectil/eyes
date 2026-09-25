@@ -8,7 +8,7 @@ export default {
   label: 'Yılan oyunu',
   ring: 'attention',
   kind: 'practice',
-  gates: { gaze: true, rest: true, active: true },
+  gates: { gaze: true, eyeBudget: 'eye' },
   storageKeys: [BEST_KEY, OPTS_KEY],
   home: { section: 'practice', order: 20 },
   sessions: {

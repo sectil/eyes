@@ -10,7 +10,7 @@ export default {
   label: 'nefes sayma ölçümü',
   ring: 'attention',
   kind: 'measure',
-  gates: { active: true },
+  gates: {}, // ekran karanlık; göz bütçesine sayılmaz
   home: { section: 'measure', order: 40 },
   sessions: {
     match: (s) => s.type === SESSION_TYPE,

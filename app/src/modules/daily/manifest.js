@@ -7,7 +7,7 @@ export default {
   label: 'günlük test',
   ring: 'eye',
   kind: 'measure',
-  gates: { rest: true, active: true },
+  gates: { eyeBudget: 'test' },
   home: { section: 'measure', order: 20 },
   // Haftalık test bugün yapıldıysa ya da zamanı geldiyse ölçüm adımını o üstlenir.
   // VARSAYIM: haftalık zamanı gelmediyse günlük test her gün plandadır.

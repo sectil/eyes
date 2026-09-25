@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { store } from './lib/storage.js'
 import { TabBar } from './components/ui.jsx'
-import RestBreak from './components/RestBreak.jsx'
+import RestLock from './components/RestLock.jsx'
+import EyeBudgetPill from './components/EyeBudgetPill.jsx'
+import { recordTime, eyeStatus, beginRest, resetBudget, flushBudget, EXHAUSTED_EVENT } from './lib/eyeBudgetStore.js'
+import { LIMITS as EYE_LIMITS } from './lib/eyeBudget.js'
 import Home from './screens/Home.jsx'
 import Screening from './screens/Screening.jsx'
 import CardCalibration, { calibrationStillValid } from './screens/CardCalibration.jsx'
@@ -14,7 +17,7 @@ import Info from './screens/Info.jsx'
 import Paywall from './screens/Paywall.jsx'
 import { getAccess } from './lib/subscription.js'
 import DistanceHud from './screens/DistanceHud.jsx'
-import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics } from './lib/native.js'
+import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics, haptic } from './lib/native.js'
 import { resolveAutoCalibration, estimateCalibration } from './lib/screenScale.js'
 import { registry } from './modules/registry.js'
 import { viewFor } from './modules/views.js'
@@ -25,96 +28,57 @@ import { hasGazeModel } from './lib/gazeCalib.js'
 
 const TAB_SCREENS = ['home', 'progress', 'calendar', 'info']
 
-// --- Dinlenme kuralı (konfor molası) ---
-// Yakına odaklanılan "aktif" ekranlarda (ölçüm, egzersiz, oyun) geçen süre birikir. Toplam eşiği geçince
-// bir sonraki ölçüme ya da oyuna (REST_GATED) GEÇMEDEN ÖNCE tam ekran RestBreak gösterilir ("Atla" var).
-// Mola bitince ya da atlanınca sayaç sıfırlanır; ✕ ile kapatılırsa sıfırlanmaz, sonraki geçişte yine sorulur.
-// Ekran içindeki molalar (E testi gözler arası, Yılan) da RESTED_EVENT ile sayacı sıfırlar; böylece mola
-// biter bitmez ikinci bir mola çıkmaz ve molanın kendi süresi yakın süreye sayılmaz.
-// Kanıt notu: 20-20-20 kuralının semptomlara etkisi gösterilemedi (Johnson & Rosenfield 2022,
-// DOI 10.1097/OPX.0000000000001971; ayrıntı components/RestBreak.jsx). Bu yüzden mola zorunlu değil ve
-// metin sağlık iddiası taşımaz.
-// VARSAYIM: 10 dk eşiği (kanıt düşük; yalnızca konfor molası).
-const REST_AFTER_MS = 10 * 60 * 1000
-// VARSAYIM: aktif ekran dışında (sekmeler, uygulama arka planda) art arda 5 dk geçerse bu doğal bir mola
-// sayılır ve sayaç sıfırlanır. Yoksa iOS'ta arka planda günlerce açık kalan uygulamada dünkü dakikalar
-// bugünün ilk etkinliğine mola çıkarırdı.
-const REST_IDLE_RESET_MS = 5 * 60 * 1000
-const REST_SECONDS = 20
-// Hangi ekranın yakın odak süresine sayıldığı (gates.active) ve önüne mola sorulduğu (gates.rest)
-// modül manifestlerinden gelir (src/modules). Egzersiz setleri ve göz kırpma zaten "Uzağa bak" /
-// "Gözlerini kapat" adımları içerir; önlerine ayrıca mola konmaz ama süreleri birikir.
+// --- Göz bütçesi ve zorunlu mola (lib/eyeBudget.js; plan MOLA_KILIDI_VE_YILAN_ANIMASYONU.md) ---
+// Hangi ekranın göz bütçesine sayıldığı ve molada kilitlendiği modül manifestinden gelir
+// (gates.eyeBudget: 'eye' | 'test'). Süre yalnızca ekran görünürken birikir (arka plan sayılmaz) ve
+// kalıcıdır; mola bitiş zamanı uygulama kapanıp açılsa da korunur. Eski 10 dk'lık atlanabilir konfor
+// molası (RestBreak) bu sistemin içine alındı: 20 sn'lik molaların etkisi gösterilemedi (Johnson 2022,
+// DOI 10.1097/OPX.0000000000001971), 5 dk'lık molalar göz yorgunluğunu azalttı (Galinsky 2000).
 const gatesOf = (s) => registry.forRoute(s)?.gates ?? {}
-const isActiveScreen = (s) => Boolean(gatesOf(s).active)
-// Ekran içindeki RestBreak bitince/atlanınca window'a yayılan olay (components/RestBreak.jsx ile aynı ad).
-const RESTED_EVENT = 'gozolcum:rested'
-
-// Mola metninde cümle içinde geçer ("Sırada günlük test var."): modülün label'ı.
+const budgetKindOf = (s) => gatesOf(s).eyeBudget ?? null
+// Mola metninde cümle içinde geçer ("Devam: günlük test"): modülün label'ı.
 const activityLabel = (s) => registry.labelFor(s)
+// Ana sayfadaki mola bandından açılan kilit ekranı (hedefsiz)
+const REST_ROUTE = 'eye-rest'
 
-// c: { ms: birikmiş aktif süre, since: şu anki aktif aralığın başı | null, idleFrom: aktiflikten çıkış | null }
-function readClock(c, now) {
-  if (c.since == null && c.idleFrom != null && now - c.idleFrom >= REST_IDLE_RESET_MS) {
-    c.ms = 0
-    c.idleFrom = null
-  }
-  return c.ms + (c.since != null ? Math.max(0, now - c.since) : 0)
-}
-
-function resetClock(c) {
-  c.ms = 0
-  c.idleFrom = null
-  if (c.since != null) c.since = Date.now()
-}
-
-// Aktif ekranda ve uygulama görünürken geçen duvar saati süresini biriktirir (arka plan sayılmaz).
-function useActiveTime(active) {
-  const clock = useRef({ ms: 0, since: null, idleFrom: null })
+// Göz ekranında ve uygulama görünürken geçen süreyi saniyede bir bütçeye yazar.
+function useEyeClock(kind) {
   useEffect(() => {
-    const c = clock.current
-    const pause = () => {
-      if (c.since == null) return
+    if (!kind) return undefined
+    let last = document.visibilityState === 'hidden' ? null : Date.now()
+    const tick = () => {
       const now = Date.now()
-      c.ms += Math.max(0, now - c.since)
-      c.since = null
-      c.idleFrom = now
+      if (last != null) recordTime(kind, last, now)
+      last = document.visibilityState === 'hidden' ? null : now
     }
-    const resume = () => {
-      if (!active || c.since != null || document.visibilityState === 'hidden') return
-      const now = Date.now()
-      readClock(c, now) // uzun aradan sonra önce sıfırla
-      c.since = now
+    const id = setInterval(tick, 1000)
+    const onVis = () => {
+      tick()
+      if (document.visibilityState === 'hidden') flushBudget()
     }
-    const onVis = () => (document.visibilityState === 'hidden' ? pause() : resume())
-    resume()
     document.addEventListener('visibilitychange', onVis)
     return () => {
+      tick()
+      flushBudget()
+      clearInterval(id)
       document.removeEventListener('visibilitychange', onVis)
-      pause()
     }
-  }, [active])
-  // Ekran içindeki molalar (E testi gözler arası, Yılan) sayacı sıfırlar.
-  useEffect(() => {
-    const onRested = () => resetClock(clock.current)
-    window.addEventListener(RESTED_EVENT, onRested)
-    return () => window.removeEventListener(RESTED_EVENT, onRested)
-  }, [])
-  return {
-    read: () => readClock(clock.current, Date.now()),
-    reset: () => resetClock(clock.current),
-  }
+  }, [kind])
 }
 
 export default function App() {
   const [data, setData] = useState(store.get())
   const [screen, setScreen] = useState('home')
   const [lastTab, setLastTab] = useState('home')
-  // Molası bekleyen hedef: { to: ekran, min: birikmiş dakika } | null
-  const [restFor, setRestFor] = useState(null)
+  // Zorunlu mola ekranı: { to: mola bitince devam edilecek ekran | null } | null
+  const [lockFor, setLockFor] = useState(null)
+  // Göz bütçesi durumu (gösterge, Ana sayfa bandı); göz ekranında ya da kilitliyken saniyede bir
+  const [budget, setBudget] = useState(() => eyeStatus())
   // Göz kalibrasyonu bekleyen hedef (TrueDepth'te göz kontrollü ekrandan önce, bir kez): { to } | null
   const [gazeFor, setGazeFor] = useState(null)
   const gazeSkipped = useRef(false) // "Şimdi değil" → bu oturumda tekrar sorma
-  const activeTime = useActiveTime(isActiveScreen(screen))
+  const budgetKind = lockFor ? null : budgetKindOf(screen)
+  useEyeClock(budgetKind)
   const refresh = () => setData(store.get())
   const go = (s) => {
     const needsGaze = Boolean(gatesOf(s).gaze)
@@ -124,18 +88,72 @@ export default function App() {
       return
     }
     setGazeFor(null)
-    const due = activeTime.read()
-    if (gatesOf(s).rest && due >= REST_AFTER_MS) {
-      setRestFor({ to: s, min: Math.floor(due / 60000) })
+    if (s === REST_ROUTE) {
+      setLockFor({ to: null })
       window.scrollTo(0, 0)
       return
     }
-    setRestFor(null)
+    // Göz bütçesi: kilitliyse ya da bütçe dolduysa hedef yerine mola ekranı
+    if (budgetKindOf(s)) {
+      const st = eyeStatus()
+      if (st.locked || st.due) {
+        if (!st.locked) beginRest(st.due)
+        setLockFor({ to: s })
+        setBudget(eyeStatus())
+        window.scrollTo(0, 0)
+        return
+      }
+    }
+    setLockFor(null)
     if (TAB_SCREENS.includes(s)) setLastTab(s)
     setScreen(s)
     window.scrollTo(0, 0)
   }
   const back = () => go(lastTab)
+
+  // Göz ekranında: 1 dk kala uyarı; bütçe dolunca oyun/egzersizde tur bitirme payı, sonra kilit.
+  // Testler kesilmez (kilit bir sonraki geçişte). Kilitliyken ve Ana sayfada gösterge/geri sayım.
+  const warned = useRef(false)
+  const dueSince = useRef(null)
+  useEffect(() => {
+    const watch = Boolean(budgetKind) || screen === 'home'
+    if (!watch) return undefined
+    warned.current = false
+    dueSince.current = null
+    const id = setInterval(() => {
+      const st = eyeStatus()
+      setBudget(st)
+      if (!budgetKind) return
+      if (st.warn && !warned.current) {
+        warned.current = true
+        haptic('tick')
+      }
+      if (st.due && budgetKind === 'eye') {
+        const now = Date.now()
+        if (dueSince.current == null) {
+          dueSince.current = now
+          haptic('warning')
+        } else if (now - dueSince.current >= EYE_LIMITS.graceMs) {
+          beginRest(st.due)
+          setLockFor({ to: screen })
+        }
+      }
+    }, 1000)
+    return () => clearInterval(id)
+  }, [budgetKind, screen])
+  // Ekran içinden yeni tur istenip bütçe doluysa (Yılan "Tekrar oyna" vb.) mola ekranı açılır
+  const screenRef = useRef(screen)
+  screenRef.current = screen
+  useEffect(() => {
+    const on = (e) => {
+      const st = e.detail ?? eyeStatus()
+      if (!st.locked && st.due) beginRest(st.due)
+      setLockFor({ to: screenRef.current })
+      setBudget(eyeStatus())
+    }
+    window.addEventListener(EXHAUSTED_EVENT, on)
+    return () => window.removeEventListener(EXHAUSTED_EVENT, on)
+  }, [])
 
   // iPhone ses modu (sessiz tuşunda da ses) + ses tercihi değişikliklerini izle. Web'de etkisiz.
   useEffect(() => initFeedback(), [])
@@ -281,30 +299,22 @@ export default function App() {
     )
   }
 
-  // --- Konfor molası: aktif ekrana geçmeden önce (bkz. dinlenme kuralı, dosya başı) ---
-  if (restFor) {
-    const target = restFor.to
-    const label = activityLabel(target)
-    const proceed = () => {
-      activeTime.reset()
-      go(target)
-    }
-    // ✕: hedefe gitmeden bulunduğun ekrana dön. Sayaç sıfırlanmaz; sonraki geçişte mola yine sorulur.
-    const close = () => {
-      setRestFor(null)
-      window.scrollTo(0, 0)
-    }
+  // --- Zorunlu mola (göz bütçesi) ---
+  if (lockFor) {
+    const target = lockFor.to
     return (
-      <RestBreak
-        key={target}
-        seconds={REST_SECONDS}
-        trueDepth={native.trueDepth}
-        title="Kısa bir mola"
-        subtitle={`${restFor.min} dakikadır yakına odaklanıyorsun.${label ? ` Sırada ${label} var.` : ''} Önce pencereden dışarı, 6 metreden uzak bir noktaya bak.`}
-        doneText={label ? `Hazırsın, ${label} başlıyor` : 'Hazırsın, devam edebilirsin'}
-        onDone={proceed}
-        onSkip={proceed}
-        onClose={close}
+      <RestLock
+        key={target ?? 'rest'}
+        target={target}
+        targetLabel={target ? activityLabel(target) : ''}
+        onGo={(r) => {
+          setLockFor(null)
+          go(r)
+        }}
+        onHome={() => {
+          setLockFor(null)
+          go('home')
+        }}
       />
     )
   }
@@ -327,7 +337,12 @@ export default function App() {
   const view = mod && viewFor(mod.id)
   if (view) {
     const ctx = { native, settings, tests, sessions, exercise, common, go, back, refresh, store, saveTests }
-    return view.render(ctx, screen)
+    return (
+      <>
+        {view.render(ctx, screen)}
+        {budgetKind && <EyeBudgetPill st={budget} kind={budgetKind} />}
+      </>
+    )
   }
 
   switch (screen) {
@@ -365,6 +380,7 @@ export default function App() {
           if (autoCal) store.setSetting('calibration', autoCal)
           // Modüllerin cihazdaki rekorları ve seçenekleri de silinir (manifest storageKeys);
           // ses/titreşim tercihleri ve tema cihaz ayarı sayılır ve korunur.
+          resetBudget()
           for (const k of registry.resetKeys()) {
             try {
               localStorage.removeItem(k)
@@ -378,7 +394,7 @@ export default function App() {
       />
     )
   } else {
-    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={native.trueDepth} onStart={go} />
+    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={native.trueDepth} eyeBudget={budget} onStart={go} />
   }
 
   return (

@@ -13,8 +13,11 @@
 //   label: 'Yılan oyunu' | (route)=>…   cümle içindeki ad ("Sırada Yılan oyunu var")
 //   ring: 'eye' | 'attention' | 'life', halka
 //   kind: 'measure' | 'exercise' | 'practice',
-//   gates?: { gaze?, rest?, active? }   göz kalibrasyonu ister mi, önüne mola sorulur mu,
-//                                       yakın odak süresine sayılır mı
+//   gates?: { gaze?, eyeBudget? }       gaze: göz kalibrasyonu ister mi.
+//                                       eyeBudget: 'eye' | 'test' — göz bütçesine sayılır ve mola
+//                                       sırasında kilitlenir (lib/eyeBudget.js). 'eye' = oyun ve göz
+//                                       hareketi egzersizi (günlük sınıra da sayılır, tur bitince kilit);
+//                                       'test' = ölçüm (ortasında kesilmez). Yoksa kilitlenmez.
 //   storageKeys?: [...]                 "Tüm verileri sil"de temizlenecek localStorage anahtarları
 //   home?: { section: 'measure'|'exercise'|'practice', order: number }
 //   today?({ tests, sessions, now }) → null | { title, minutes, done, route? }
@@ -45,6 +48,7 @@ export function validateManifest(m) {
   if (m.routes != null) need(Array.isArray(m.routes) && m.routes.length > 0 && m.routes.every((r) => typeof r === 'string'), 'routes dizi olmalı')
   if (m.storageKeys != null) need(Array.isArray(m.storageKeys), 'storageKeys dizi olmalı')
   if (m.home != null) need(SECTIONS.includes(m.home.section) && Number.isFinite(m.home.order), 'home.section/order geçersiz')
+  if (m.gates?.eyeBudget != null) need(m.gates.eyeBudget === 'eye' || m.gates.eyeBudget === 'test', "gates.eyeBudget 'eye' ya da 'test' olmalı")
   if (m.today != null) need(typeof m.today === 'function', 'today fonksiyon olmalı')
   if (m.sessions != null) {
     need(typeof m.sessions.match === 'function', 'sessions.match fonksiyon olmalı')

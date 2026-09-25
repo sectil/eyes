@@ -7,7 +7,7 @@ export default {
   label: 'haftalık tam test',
   ring: 'eye',
   kind: 'measure',
-  gates: { rest: true, active: true },
+  gates: { eyeBudget: 'test' },
   home: { section: 'measure', order: 10 },
   // Zamanı geldiyse (son haftalık testten 7 gün geçtiyse) bugünün ölçümü budur.
   today({ tests, now }) {

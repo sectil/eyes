@@ -7,7 +7,7 @@ export default {
   label: 'okuma hızı testi',
   ring: 'eye',
   kind: 'measure',
-  gates: { rest: true, active: true },
+  gates: { eyeBudget: 'test' },
   home: { section: 'measure', order: 30 },
   // Haftada bir: zamanı geldiyse plana girer, bugün yapıldıysa tamam görünür.
   today({ tests, now }) {

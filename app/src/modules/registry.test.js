@@ -16,8 +16,10 @@ describe('modül soketi: gerçek modüller', () => {
   })
   it('ekran adları ve kapılar', () => {
     expect(registry.forRoute('routine-lite')?.id).toBe('routine')
-    expect(registry.forRoute('snake')?.gates).toMatchObject({ gaze: true, rest: true, active: true })
-    expect(registry.forRoute('blink')?.gates.rest).toBeFalsy() // egzersizin kendi molası var
+    expect(registry.forRoute('snake')?.gates).toMatchObject({ gaze: true, eyeBudget: 'eye' })
+    expect(registry.forRoute('daily')?.gates.eyeBudget).toBe('test')
+    expect(registry.forRoute('blink')?.gates.eyeBudget).toBeUndefined() // dinlendirici; molada açık
+    expect(registry.forRoute('breath')?.gates.eyeBudget).toBeUndefined()
     expect(registry.forRoute('home')).toBeNull()
     expect(registry.labelFor('routine-normal')).toBe('normal egzersiz seti')
     expect(registry.labelFor('track')).toBe('çember takibi')
@@ -37,7 +39,7 @@ describe('modül soketi: tak / çıkar', () => {
     label: 'Hızlı Bakış',
     ring: 'attention',
     kind: 'practice',
-    gates: { gaze: true, rest: true, active: true },
+    gates: { gaze: true, eyeBudget: 'eye' },
     storageKeys: ['gozolcum:hb-best'],
     home: { section: 'practice', order: 5 },
     sessions: {
