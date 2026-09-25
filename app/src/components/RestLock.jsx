@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { Eye, Home as HomeIcon, Play, Wind } from 'lucide-react'
+import { Bell, BellOff, Eye, Home as HomeIcon, Play, Wind } from 'lucide-react'
 import { REASON_TEXT, fmtLeft } from '../lib/eyeBudget.js'
 import { eyeStatus } from '../lib/eyeBudgetStore.js'
 import { registry } from '../modules/registry.js'
 import { viewFor } from '../modules/views.js'
 import { haptic } from '../lib/native.js'
 import { cue } from '../lib/cue.js'
+import { notifyAsked, notifyPermission, askNotifyPermission, declineNotify, scheduleRestEnd } from '../lib/restNotify.js'
 import '../styles/restlock.css'
 
 // Zorunlu mola ekranı ("Atla" yok — ürün kararı; bkz. MOLA_KILIDI_VE_YILAN_ANIMASYONU.md §3).
@@ -24,6 +25,20 @@ export default function RestLock({ target = null, targetLabel = '', onGo, onHome
     return () => clearInterval(id)
   }, [])
   const done = !st.locked
+  // Bildirim izni: ilk molada kendi açıklama kartımız, sonra iOS izni (bir kez sorulur)
+  const [ask, setAsk] = useState(false)
+  useEffect(() => {
+    if (!st.locked || notifyAsked()) return
+    notifyPermission().then((p) => setAsk(p === 'prompt'))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  async function allowNotify() {
+    setAsk(false)
+    if (await askNotifyPermission()) {
+      const now = eyeStatus()
+      if (now.locked) scheduleRestEnd(now.until)
+    }
+  }
   useEffect(() => {
     if (done && !announced.current) {
       announced.current = true
@@ -63,6 +78,19 @@ export default function RestLock({ target = null, targetLabel = '', onGo, onHome
       <p className="rl-sub">{done ? 'Gözlerin dinlendi. Devam edebilirsin.' : txt.sub}</p>
       {!done && reason !== 'symptom' && (
         <p className="rl-tip">Pencereden dışarı, uzak bir noktaya bak; gözlerini birkaç kez yavaşça kırp.</p>
+      )}
+
+      {ask && !done && (
+        <div className="card rl-ask">
+          <div className="row" style={{ alignItems: 'flex-start', gap: 10 }}>
+            <Bell size={20} aria-hidden="true" style={{ color: 'var(--accent)', flex: 'none', marginTop: 2 }} />
+            <p className="small" style={{ textAlign: 'left' }}>Mola bitince haber vereyim mi? Telefonu bırakıp gidebilirsin; süre dolunca bildirim gelir.</p>
+          </div>
+          <div className="row" style={{ gap: 8 }}>
+            <button type="button" className="btn btn-sm" onClick={allowNotify}><Bell size={16} aria-hidden="true" /> Evet, haber ver</button>
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => { declineNotify(); setAsk(false) }}><BellOff size={16} aria-hidden="true" /> Gerek yok</button>
+          </div>
+        </div>
       )}
 
       {done && target && (

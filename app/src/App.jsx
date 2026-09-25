@@ -5,6 +5,7 @@ import RestLock from './components/RestLock.jsx'
 import EyeBudgetPill from './components/EyeBudgetPill.jsx'
 import { recordTime, eyeStatus, beginRest, resetBudget, flushBudget, EXHAUSTED_EVENT } from './lib/eyeBudgetStore.js'
 import { LIMITS as EYE_LIMITS } from './lib/eyeBudget.js'
+import { onRestNotifyTap } from './lib/restNotify.js'
 import Home from './screens/Home.jsx'
 import Screening from './screens/Screening.jsx'
 import CardCalibration, { calibrationStillValid } from './screens/CardCalibration.jsx'
@@ -153,6 +154,16 @@ export default function App() {
     }
     window.addEventListener(EXHAUSTED_EVENT, on)
     return () => window.removeEventListener(EXHAUSTED_EVENT, on)
+  }, [])
+  // "Mola bitti" bildirimine dokununca Ana sayfa (uygulama kapalıyken açılış dahil)
+  useEffect(() => {
+    let off = () => {}
+    onRestNotifyTap(() => {
+      setLockFor(null)
+      setScreen('home')
+      setBudget(eyeStatus())
+    }).then((f) => (off = f))
+    return () => off()
   }, [])
 
   // iPhone ses modu (sessiz tuşunda da ses) + ses tercihi değişikliklerini izle. Web'de etkisiz.

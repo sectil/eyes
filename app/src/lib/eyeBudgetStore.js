@@ -1,6 +1,7 @@
 // Göz bütçesinin uygulama içindeki tek kopyası (saf motor: lib/eyeBudget.js). App süreyi buraya yazar;
 // ekranlar (Yılan "Tekrar oyna" gibi yeni tur başlatan yerler) requestEyeRound() ile izin sorar.
 import { loadBudget, saveBudget, addTime, check, startRest, settle, setMotion, emptyBudget } from './eyeBudget.js'
+import { scheduleRestEnd, cancelRestEnd } from './restNotify.js'
 
 export const BUDGET_EVENT = 'gozolcum:eye-budget' // durum değişti (kilit başladı/bitti)
 export const EXHAUSTED_EVENT = 'gozolcum:eye-budget-exhausted' // yeni tur istendi ama bütçe dolu
@@ -34,6 +35,7 @@ export function eyeStatus(now = Date.now()) {
 export function beginRest(reason, now = Date.now()) {
   state = startRest(get(), reason, now)
   persist(true)
+  scheduleRestEnd(state.rest.until) // izin yoksa sessizce atlar
   emit(BUDGET_EVENT, eyeStatus(now))
   return state.rest
 }
@@ -47,6 +49,7 @@ export function flushBudget() {
   persist(true)
 }
 export function resetBudget() {
+  cancelRestEnd()
   state = emptyBudget()
   persist(true)
   emit(BUDGET_EVENT, eyeStatus())

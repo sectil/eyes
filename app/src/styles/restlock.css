@@ -10,6 +10,8 @@
 .rl-sub { color: var(--ink-2); max-width: 34ch; text-wrap: balance; }
 .rl-tip { color: var(--ink-3); font-size: 0.875rem; max-width: 34ch; }
 .rl .btn { width: 100%; }
+.rl-ask { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+.rl-ask .row .btn { flex: 1; width: auto; }
 .rl-free { width: 100%; display: flex; flex-direction: column; gap: 8px; text-align: left; margin-top: 6px; }
 .rl-free-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px; }
 .rl-free-item {

@@ -93,6 +93,9 @@ Gao 2021; 5 dk mola etkili, Galinsky 2000) ama zorunlu kilidin gönüllüden üs
   yine uygulama içinde tam çalışır (App Store 4.5.4 ilkesi).
 - Kalıcılık: `restUntil` iki yere (UserDefaults — `@capacitor/preferences` 8.0.1 + mevcut depo);
   `PrivacyInfo.xcprivacy` eklenir. Saat ileri alınarak atlatılabilir; kabul edilen risk.
+  **Uygulanan (4682061 sonrası):** yalnız uygulama deposu (`gozolcum:eye-budget`). Preferences ertelendi:
+  PrivacyInfo dosyasının Xcode projesine eklenmesi gerekiyor, elle pbxproj düzenlemesi riskli. Bildirim
+  iOS'ta kurulu olduğu için depo silinse bile bildirim gelir; yalnızca kilit ekranı sıfırlanır.
 
 ## 4. Veri
 
