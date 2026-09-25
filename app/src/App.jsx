@@ -9,6 +9,7 @@ import { onRestNotifyTap } from './lib/restNotify.js'
 import Home from './screens/Home.jsx'
 import Profile from './screens/Profile.jsx'
 import { screeningFromProfile, profileFromScreening, profileSignals } from './lib/profile.js'
+import { resetAllHowto } from './lib/howto.js'
 import CardCalibration, { calibrationStillValid } from './screens/CardCalibration.jsx'
 import DistanceCalibration from './screens/DistanceCalibration.jsx'
 import Progress from './screens/Progress.jsx'
@@ -403,7 +404,7 @@ export default function App() {
           if (autoCal) store.setSetting('calibration', autoCal)
           // Modüllerin cihazdaki rekorları ve seçenekleri de silinir (manifest storageKeys);
           // ses/titreşim tercihleri ve tema cihaz ayarı sayılır ve korunur.
-          resetBudget()
+          resetBudget(); resetAllHowto()
           for (const k of registry.resetKeys()) {
             try {
               localStorage.removeItem(k)

@@ -5,6 +5,9 @@ import { unlockAudio } from '../lib/cue.js'
 import TumblingE from '../components/TumblingE.jsx'
 import RestBreak from '../components/RestBreak.jsx'
 import { PageHeader } from '../components/ui.jsx'
+import StepCards from '../components/StepCards.jsx'
+import { DistanceArt, SwipeEArt, ShrinkArt } from '../components/howtoArt.jsx'
+import { howtoSeen, markHowtoSeen } from '../lib/howto.js'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { distanceStatus, REFERENCE_MM } from '../lib/distance.js'
 import { logMARForHeight, renderSpec, smallestDrawableLogMAR, snellen20, snellen6 } from '../lib/optotype.js'
@@ -119,6 +122,8 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
   const legacy = lastCorrection === 'glasses'
   const [correction, setCorrection] = useState(legacy ? null : lastCorrection)
   const [changed, setChanged] = useState(false) // gözlük/lens numarası değişti → yeni baz çizgisi
+  // "Nasıl yapılır" kartları: ilk seferde, sonra "Nasıl yapılır?" bağlantısıyla (lib/howto.js)
+  const [howto, setHowto] = useState(() => !howtoSeen('acuity'))
   const planSpec = PLANS[plan]
   const { warmup } = planSpec
   const pxPerMm = calibration.pxPerMm
@@ -298,7 +303,34 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
   const last = results.current.at(-1)
   const moreEyes = eyeIdx + 1 < EYES.length
 
-  return (
+  if (howto && eyeIdx === 0) {
+      const cm = liveMm ? Math.round(liveMm / 10) : null
+      const ok = tracked && status === 'ok'
+      const cards = [
+        {
+          key: 'distance',
+          art: <DistanceArt cm={cm} ok={ok} />,
+          title: tracked ? 'Telefonu kol boyu uzakta tut' : 'Telefonu 40 cm uzakta tut',
+          why: tracked ? 'Doğru uzaklıkta kart kendiliğinden geçer.' : 'Kol boyu kadar. Parlaklığı en yükseğe al.',
+          live: tracked ? { ok, text: !liveMm ? 'yüz aranıyor' : ok ? `${cm} cm · tam yerinde` : status === 'too-close' ? `${cm} cm · biraz uzaklaştır` : `${cm} cm · biraz yaklaştır` } : null,
+        },
+        { key: 'swipe', art: <SwipeEArt />, title: "E'nin açık tarafına doğru kaydır", why: 'Aşağı bakıyorsa aşağı kaydır. Emin değilsen tahmin et.' },
+        { key: 'shrink', art: <ShrinkArt />, title: 'Küçülür; seçemeyince "Göremiyorum"', why: `İlk ${warmup} harf alıştırma, sayılmaz. Yaklaşık bir dakika.` },
+      ]
+      return (
+        <main className="screen fade-in">
+          <StepCards
+            cards={cards}
+            eyebrow={plan === 'daily' ? 'Günlük test · nasıl yapılır' : 'Haftalık test · nasıl yapılır'}
+            finishLabel="Anladım"
+            onFinish={() => setHowto(false)}
+            onDismiss={() => { markHowtoSeen('acuity'); setHowto(false) }}
+            onClose={onCancel}
+          />
+        </main>
+      )
+    }
+    return (
     <div className="test-root">
       {tracked && <video ref={cam.videoRef} className="cam-hidden" playsInline muted />}
 
@@ -315,15 +347,9 @@ export default function AcuityTest({ plan = 'daily', calibration, distanceCal, l
             <span className="acuity-pill"><TrendingDown size={14} aria-hidden="true" /> Küçülme</span>
             <span className="acuity-pill"><Crosshair size={14} aria-hidden="true" /> İnce ayar</span>
           </div>
-          <div className="card">
-            <ol className="steps">
-              <li>{tracked ? <>Telefonu rahat bir mesafede tut; harf boyutu ölçülen mesafeye göre <strong>kendiliğinden ayarlanır</strong>.</> : <>Telefonu gözlerinden <strong>40 cm</strong> uzakta tut.</>}</li>
-              <li>Ekran parlaklığını en yükseğe al; iyi aydınlatılmış bir yerde ol.</li>
-              <li>E'nin açık tarafı hangi yöne bakıyorsa <strong>o yöne kaydır</strong> (veya oka dokun).</li>
-              <li>Harf önce <strong>adım adım küçülür</strong>; zorlandığın boyuta gelince test o çevrede <strong>ince ayar</strong> yapar.</li>
-              <li>Emin değilsen tahmin et; hiç seçemiyorsan "Göremiyorum"a bas.</li>
-              <li>İlk {warmup} harf alıştırma, sayılmaz.</li>
-            </ol>
+          <div className="row between">
+            <span className="muted small">{tracked ? 'Kol boyu uzaklık · E\'nin açık tarafına kaydır · küçülünce "Göremiyorum"' : '40 cm · E\'nin açık tarafına kaydır · küçülünce "Göremiyorum"'}</span>
+            <button type="button" className="link-btn" onClick={() => setHowto(true)}>Nasıl yapılır?</button>
           </div>
           {eyeIdx === 0 && (
             <div className="card stack" style={{ gap: 8 }}>

@@ -11,6 +11,7 @@ import '../styles/home.css'
 import '../styles/restlock.css'
 import { REASON_TEXT, fmtLeft } from '../lib/eyeBudget.js'
 import CoachCard from '../components/CoachCard.jsx'
+import TodayPath from '../components/TodayPath.jsx'
 import { registry } from '../modules/registry.js'
 import { viewFor } from '../modules/views.js'
 
@@ -139,38 +140,23 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
         </button>
       )}
 
-      <section className="plan-hero" aria-label="Bugünün planı">
-        <Aperture />
-        <span className="eyebrow">
-          Bugünün planı{plan.total > 0 ? ` · ${plan.doneCount}/${plan.total}` : ''}
-        </span>
-        <h2 className="plan-title">{plan.allDone ? 'Bugünkü plan tamam' : plan.next ? plan.next.title : 'Serbest gün'}</h2>
-        {plan.total > 0 && (
-          <ol className="plan-steps">
-            {plan.items.map((it) => (
-              <li key={it.id} className={it.done ? 'done' : it === plan.next ? 'now' : ''}>
-                <span>{it.done && <Check size={11} aria-hidden="true" />}{it.title}</span>
-              </li>
-            ))}
-          </ol>
-        )}
-        {plan.next ? (
-          <button className="btn" onClick={() => onStart(plan.next.route)}>
-            {locked && registry.get(plan.next.id)?.gates?.eyeBudget ? (
-              <><Lock size={18} aria-hidden="true" /> Mola · {lockLeft}</>
-            ) : (
-              <><Play size={18} aria-hidden="true" /> Başla{plan.next.minutes ? ` · ${plan.next.minutes} dk` : ''}</>
-            )}
-          </button>
-        ) : (
-          <p className="plan-done small">
-            {plan.allDone ? 'İstersen aşağıdan bir pratik seç.' : 'Aşağıdan istediğin çalışmayı seç.'}
-          </p>
-        )}
-        <span className="plan-week small">
-          {week.met ? `Bu hafta ${week.done} gün · hedef tamam` : `Bu hafta ${week.done}/${week.target} gün`}
-        </span>
-      </section>
+      <div className="home-h" style={{ marginTop: 4 }}>
+        <h2>{plan.allDone ? 'Bugünkü yol tamam' : plan.next ? 'Bugünün yolu' : 'Serbest gün'}</h2>
+        <span className="muted small">{plan.total > 0 ? `${plan.doneCount}/${plan.total}` : ''}</span>
+      </div>
+      {plan.total > 0 ? (
+        <TodayPath
+          items={plan.items}
+          next={plan.next}
+          icons={Object.fromEntries(plan.items.map((it) => [it.id, viewFor(it.id)?.icon]))}
+          lockedIds={new Set(locked ? plan.items.filter((it) => registry.get(it.id)?.gates?.eyeBudget).map((it) => it.id) : [])}
+          lockLeft={lockLeft}
+          onStart={onStart}
+          week={week.met ? `Bu hafta ${week.done} gün · hedef tamam` : `Bu hafta ${week.done}/${week.target} gün`}
+        />
+      ) : (
+        <p className="muted small">Aşağıdan istediğin çalışmayı seç.</p>
+      )}
 
       <CoachCard tests={tests} sessions={sessions} weeklyTarget={week.target} onStart={onStart} />
 

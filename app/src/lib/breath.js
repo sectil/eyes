@@ -252,6 +252,12 @@ export const markSafetySeen = (storage) => {
   }
 }
 
+// Aynı bilgi, üç kalın başlıkta (ekranda okunur olsun; Artifact "Yönerge Kartları" Y8)
+export const SAFETY_ROWS = [
+  { icon: 'dizzy', lead: 'Baş dönmesi, karıncalanma, nefes darlığı olursa', text: 'normal nefesine dön. Nefes tutmak isteğe bağlı; zorlanırsan atla ya da süreyi kısalt.' },
+  { icon: 'heart', lead: 'Gebelik, kalp ya da akciğer rahatsızlığı, glokom, nöbet, panik atak veya başka bir ruhsal sağlık durumu varsa', text: 'nefes tutmalı kalıplardan önce hekimine danış.' },
+  { icon: 'car', lead: 'Araç kullanırken, suda ya da ayaktayken yapma.', text: 'Bu bir alıştırmadır, tıbbi bir uygulama değil.' },
+]
 export const SAFETY_TEXT =
   'Bu alıştırma tıbbi bir uygulama değildir. Baş dönmesi, karıncalanma, nefes darlığı ya da huzursuzluk hissedersen normal nefesine dön. ' +
   'Nefes tutma bölümleri isteğe bağlıdır; zorlanırsan atla veya süreyi kısalt. Gebelik, kalp veya akciğer rahatsızlığı, glokom, nöbet öyküsü, ' +

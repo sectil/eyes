@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { X, Play, Pause, Check, RotateCcw, ShieldAlert, Info, ChevronRight, ChevronLeft, SkipBack, SkipForward, Settings2, Vibrate, VibrateOff, Volume2, VolumeX, MessageSquareText, MessageSquareOff } from 'lucide-react'
+import { X, Play, Pause, Check, RotateCcw, ShieldAlert, HeartPulse, Car, Info, ChevronRight, ChevronLeft, SkipBack, SkipForward, Settings2, Vibrate, VibrateOff, Volume2, VolumeX, MessageSquareText, MessageSquareOff } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
 import PrefToggle from '../components/PrefToggle.jsx'
 import BreathVisual from '../components/BreathVisual.jsx'
@@ -7,7 +7,7 @@ import { haptic } from '../lib/native.js'
 import { speak, unlockAudio } from '../lib/cue.js'
 import { playBreathSound, unlockBreathSfx } from '../lib/breathSfx.js'
 import {
-  PATTERNS, PATTERN_ORDER, PHASE, KIND_ORDER, LIMITS, STEP_SEC, DURATIONS_SEC, CALM_SCALE, SAFETY_TEXT, PREP_SEC,
+  PATTERNS, PATTERN_ORDER, PHASE, KIND_ORDER, LIMITS, STEP_SEC, DURATIONS_SEC, CALM_SCALE, SAFETY_ROWS, PREP_SEC,
   VISUALS, SOUNDS, SOUND_SLOTS,
   makePlan, resolveSecs, phaseAt, phaseStartSec, makeRecord, programProgress, loadBreathOpts, saveBreathOpts, safetySeen, markSafetySeen, isBreath,
 } from '../lib/breath.js'
@@ -16,6 +16,24 @@ import '../styles/breath.css'
 const KIND_ROW = { in: 'Nefes al', in2: 'İkinci alış', hold: 'Nefes tut', out: 'Nefes ver', hold2: 'Bekle' }
 const fmtSec = (v) => (Number.isInteger(v) ? `${v}` : v.toFixed(1).replace('.', ','))
 const visualTitle = (id) => VISUALS.find((v) => v.id === id)?.title ?? ''
+
+// Güvenlik metni: üç kalın başlıklı satır (lib/breath.js SAFETY_ROWS)
+const SAFETY_ICON = { dizzy: ShieldAlert, heart: HeartPulse, car: Car }
+function SafetyRows() {
+  return (
+    <div className="stack" style={{ gap: 8 }}>
+      {SAFETY_ROWS.map((r) => {
+        const Icon = SAFETY_ICON[r.icon] ?? ShieldAlert
+        return (
+          <div key={r.icon} className="card row" style={{ alignItems: 'flex-start', gap: 10 }}>
+            <Icon size={20} aria-hidden="true" style={{ flex: 'none', marginTop: 2, color: 'var(--warn)' }} />
+            <p className="small" style={{ margin: 0 }}><strong>{r.lead}</strong> {r.text}</p>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 
 export default function Breath({ sessions = [], onBack, onFinish }) {
   const prior = sessions.filter(isBreath).length
@@ -143,14 +161,9 @@ export default function Breath({ sessions = [], onBack, onFinish }) {
   if (screen === 'safety') {
     return (
       <main className="screen fade-in">
-        <PageHeader onBack={onBack} eyebrow="Başlamadan önce" title="Nefes pratiği" />
-        <div className="card tone-warn stack">
-          <div className="row" style={{ alignItems: 'flex-start' }}>
-            <ShieldAlert size={22} style={{ flex: 'none', marginTop: 2 }} aria-hidden="true" />
-            <p className="small">{SAFETY_TEXT}</p>
-          </div>
-        </div>
-        <p className="muted small">Bu metin Bilgi sekmesinde her zaman duracak. Bir daha sormayacağım.</p>
+        <PageHeader onBack={onBack} eyebrow="Bir kez" title="Başlamadan önce" />
+        <SafetyRows />
+        <p className="muted small">Bu metin nefes ekranındaki bilgi sayfasında her zaman duracak. Bir daha sormayacağım.</p>
         <button className="btn" onClick={() => { markSafetySeen(); setScreen('setup') }}><Check size={18} aria-hidden="true" /> Anladım</button>
       </main>
     )
@@ -168,7 +181,7 @@ export default function Breath({ sessions = [], onBack, onFinish }) {
           </div>
         ))}
         <p className="muted small">Program: günde 5 dk, 28 gün (Balban 2023). İlk üç seansta Sakin ritim biraz daha hızlı başlar; alışınca dakikada 6'ya iner.</p>
-        <div className="card tone-warn"><p className="small">{SAFETY_TEXT}</p></div>
+        <SafetyRows />
       </main>
     )
   }
