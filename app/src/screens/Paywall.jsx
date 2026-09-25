@@ -13,7 +13,7 @@ const BENEFITS = [
   { Icon: ScanEye, text: 'Günlük "E hangi yönde" testi ve haftalık tam ölçüm' },
   { Icon: ChartLine, text: 'Gelişim grafiği — gerçek değişimi gürültüden ayırır' },
   { Icon: Dumbbell, text: 'Hafif, Normal ve Tam egzersiz setleri' },
-  { Icon: Bell, text: 'Takvim, hatırlatma ve okuma hızı testi' },
+  { Icon: Bell, text: 'Takvim, hatırlatma ve okuma testi' },
 ]
 
 // Web'de ödeme yok: önizleme için örnek planlar

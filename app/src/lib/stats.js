@@ -4,6 +4,7 @@ import { dayKey, startOfWeek } from './calendar.js'
 import { findRoutine, setDurationSec } from './routines.js'
 import { NBSP, finite, join, formatDuration, durationPart } from './format.js'
 import { registry } from '../modules/registry.js'
+import { isReadingV2, cpsText } from './reading.js'
 
 export { NBSP, formatDuration }
 
@@ -61,13 +62,19 @@ function testActivity(t, ts, idx) {
     ts,
     kind: 'test',
     type: t.type ?? 'test',
-    title: TEST_TITLE[t.type] ?? 'Test',
+    // Okuma testi yenilendi (protocol 2): eski kayıtlar eski adıyla görünür
+    title: isReadingV2(t) ? 'Okuma testi' : TEST_TITLE[t.type] ?? 'Test',
     seconds,
     estimated: own == null && seconds > 0,
   }
   if (VA_TYPES.has(t.type)) {
     const results = [{ eye: t.eye ?? null, logMAR: finite(t.logMAR) }]
     return { ...base, results, lastTs: ts, detail: vaDetail(results) }
+  }
+  if (isReadingV2(t)) {
+    const speed = finite(t.maxReadingSpeed)
+    const rahat = cpsText(t)
+    return { ...base, detail: rahat === '—' ? 'Sonuç hesaplanamadı' : join([`rahat ${rahat}`, speed != null ? `${speed}${NBSP}k/dk` : null]) }
   }
   if (t.type === 'reading') {
     const speed = finite(t.maxReadingSpeed)

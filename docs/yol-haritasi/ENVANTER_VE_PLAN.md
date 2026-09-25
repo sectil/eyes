@@ -216,7 +216,7 @@ Doğrulama: sentetik bakış (sakkad + duraklama + gürültü) ile eski/yeni ist
   imageW/H gönderir); avuç–göz farkı ≥ 15 mm; eşik 0,55 / 0,45.
 - Bu makinede Swift derleyici yok; kod Apple API imzalarına göre elle denetlendi. İlk derleme kullanıcının Mac'inde.
 
-## 13. Bugünün yolu yeniden, Okuma testi, Çemberler (2026-09-25, PLAN — onay bekliyor)
+## 13. Bugünün yolu yeniden, Okuma testi, Çemberler (2026-09-25, Build 26 — YAPILDI)
 Bulgular (kodda): yol sırası `lib/today.js` kindRank ile "önce ölçüm, sonra egzersiz, sonra pratik"; egzersizler tek
 durak ("Tam set"); Çember takibi (`TrackGame`, sözler `lib/track.js` WORDS, TrueDepth tepki ölçümü) yolda değil (today() yok);
 "Çemberler" ekranı (kullanıcı ekran görüntüsü, k/d 85) bu depoda ve eyes-project.zip'te yok. Okuma testi tek cümle,
@@ -237,3 +237,10 @@ konuşma eşleşmesi ≥ 0,7 olunca cümle biter (`MATCH_THRESHOLD`) → kişi b
 - Taslaklar (2026-09-25, onay bekliyor): Bugünün Yolu https://claude.ai/artifact/8Cnzo13vuATjebm5VdCWrH ·
   Okuma https://claude.ai/artifact/61XmzZ25utUL66WZEZ1Tta · Çemberler https://claude.ai/artifact/XQz4ATKHvaCtCXHH22hhH4.
   Her taslağın sonunda "Karar gereken noktalar" ve VARSAYIM listesi var; kod bu kararlardan sonra (Build 26).
+- Build 26 (2026-09-25, onaylandı "canlıya al"; taslakların önerileriyle): yapıldı.
+  - Yol: lib/today.js buildPath (şablon + R1–R8), routines PATH_GROUPS (5 grup), Nefes her gün mola durağı (breath-rest 5 dk,
+    dokununca 'path' molası başlar = A), 5 dk gerçek ara mola sayılır (B), Nefes sayma emekli (registry retired), TodayPath yeni görsel.
+  - Okuma: lib/reading.js yeni protokol (protocol 2), 71 metin, yazı yerinde durur, sonuna kadar okunur; eski kayıtlar "Önceki yöntem".
+  - Çemberler: lib/track.js + cemberDraw.js + TrackGame yeniden; Katman A yön algılama; Katman B (Build 25 motoru) yok.
+  - Cihazda doğrulanacak: konuşma tanıma ile otomatik bitiş, Çemberler kamera modu, yol molası bildirimi.
+  - Yapılmadı: Yılan "1 tur" sınırı ve "Yola dön" bitişi (Build 25'e bağlı), iki kötü okuma sonrası hekim önerisi (sağlık iddiasına yakın).

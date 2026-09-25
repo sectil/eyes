@@ -99,6 +99,13 @@ describe('activitiesFrom — testler', () => {
     expect(b.detail).toBe('Sonuç hesaplanamadı')
   })
 
+  it('yeni okuma testi (protocol 2): rahat boy ve hız', () => {
+    const [a] = activitiesFrom([{ id: 'r3', type: 'reading', protocol: 2, maxReadingSpeed: 168, criticalPrintSize: 0.3, date: at(2026, 8, 24) }])
+    expect(plainAct(a)).toMatchObject({ kind: 'test', title: 'Okuma testi', detail: 'rahat 0,3 · 168 k/dk' })
+    const [b] = activitiesFrom([{ id: 'r4', type: 'reading', protocol: 2, criticalPrintSize: null, cpsCensored: 'above', ladderTop: 0.5, date: at(2026, 8, 24) }])
+    expect(b.detail).toBe('rahat > 0,5')
+  })
+
   it('kayıtta seconds varsa varsayılan yerine o kullanılır', () => {
     const [a] = activitiesFrom([{ id: 'x', type: 'va-daily', eye: 'OU', logMAR: 0.1, seconds: 95, date: at(2026, 8, 24) }])
     expect(a.seconds).toBe(95)

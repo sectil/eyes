@@ -29,12 +29,12 @@ export const EVIDENCE = [
   },
   {
     id: 'reading',
-    title: 'Okuma hızı testi',
-    claim: 'Farklı yazı boyutlarında okuma hızınızı ölçer.',
+    title: 'Okuma testi',
+    claim: 'Yazı küçüldükçe rahat okuduğun en küçük boyu bulur.',
     level: 'Düşük–Orta',
-    basis: 'MNREAD tipi okuma testlerinin mantığını izler; cümleler bu uygulama için yazılmıştır.',
+    basis: 'MNREAD ve Radner okuma kartlarının mantığını izler; yazılar bu uygulama için yazıldı.',
     limits:
-      'Klinik olarak doğrulanmış bir test değildir. Tablette ölçülen okuma hızı basılı teste göre farklı çıkar; sonuçlarınızı yalnızca aynı cihazdaki önceki sonuçlarınızla karşılaştırın.',
+      'Klinik olarak doğrulanmış bir test değil. Telefonda ölçülen hız kâğıttakinden farklı çıkar. Sonuçlarını yalnızca aynı telefondaki önceki sonuçlarınla karşılaştır.',
     sources: ['Altınbay, Şahlı, İdil 2022, MNREAD-TR tablet ve basılı karşılaştırması, Turk J Ophthalmol (PMID 35770299)'],
   },
   {
