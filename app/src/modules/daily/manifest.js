@@ -1,4 +1,6 @@
 // Günlük görme testi ("E hangi yönde", ~3 dk). Kayıtları tests deposuna gider; Gelişim'de stats.js işler.
+import { lastOfType, isDue, doneToday } from '../../lib/today.js'
+
 export default {
   id: 'daily',
   title: 'Günlük test',
@@ -7,4 +9,10 @@ export default {
   kind: 'measure',
   gates: { rest: true, active: true },
   home: { section: 'measure', order: 20 },
+  // Haftalık test bugün yapıldıysa ya da zamanı geldiyse ölçüm adımını o üstlenir.
+  // VARSAYIM: haftalık zamanı gelmediyse günlük test her gün plandadır.
+  today({ tests, now }) {
+    if (doneToday(tests, 'va-weekly', now) || isDue(lastOfType(tests, 'va-weekly'), now)) return null
+    return { title: 'Günlük test', minutes: 3, done: doneToday(tests, 'va-daily', now) }
+  },
 }

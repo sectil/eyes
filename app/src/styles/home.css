@@ -1,0 +1,119 @@
+/* Bugün (Ana sayfa) — atlas ekran 07. Renkler yalnızca styles.css tokenlarından. */
+
+.home-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding-top: 4px; }
+.home-head h1 { margin-top: 2px; }
+.home-head-side { display: flex; align-items: center; gap: 10px; flex: none; }
+
+.streak-chip {
+  display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 999px;
+  font-size: 0.8rem; font-weight: 700; white-space: nowrap;
+  color: var(--lens-text); background: var(--lens-soft);
+  border: 1px solid color-mix(in srgb, var(--lens) 38%, transparent);
+}
+
+/* Jev işareti (geçici; kamera açıkken kullanıcının kendi gözü gelecek) */
+.iris-mark {
+  position: relative; display: inline-block; flex: none; border-radius: 50%; overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, var(--surface-2) 0 58%, var(--surface-3) 100%);
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 3.5px var(--iris-1);
+}
+.iris-mark-iris {
+  position: absolute; left: 50%; top: 50%; width: 58%; aspect-ratio: 1; transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #041017 0 30%, transparent 31%),
+    conic-gradient(from 20deg, var(--iris-1), var(--iris-2), var(--iris-1), var(--iris-2), var(--iris-1));
+}
+.iris-mark-iris::after {
+  content: ''; position: absolute; width: 20%; height: 20%; top: 20%; left: 56%; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+}
+.iris-mark-lid {
+  position: absolute; left: 0; right: 0; top: 0; height: 0; background: var(--surface-3);
+  animation: iris-lid 6s infinite;
+}
+@keyframes iris-lid { 0%, 91%, 100% { height: 0; } 94% { height: 100%; } }
+
+/* Bugünün planı — diyafram kartı */
+.plan-hero {
+  position: relative; overflow: hidden; border-radius: 28px; padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+  background:
+    radial-gradient(120% 90% at 18% 0%, color-mix(in srgb, var(--iris-1) 20%, var(--surface)) 0%, var(--surface) 55%, var(--surface-2) 100%);
+  border: 1px solid var(--border); box-shadow: var(--shadow-lg);
+}
+.plan-hero > * { position: relative; z-index: 1; }
+.plan-hero .aperture { position: absolute; right: -72px; top: -78px; width: 232px; height: 232px; z-index: 0; opacity: 0.8; pointer-events: none; }
+.aperture circle { fill: none; stroke: url(#home-iris); stroke-linecap: round; transform-origin: center; }
+.aperture .r1 { stroke-width: 10; stroke-dasharray: 30 14; animation: aperture-spin 40s linear infinite; }
+.aperture .r2 { stroke-width: 4; stroke-dasharray: 2 9; opacity: 0.7; animation: aperture-spin 70s linear infinite reverse; }
+.aperture .r3 { stroke-width: 18; stroke-dasharray: 6 5; opacity: 0.35; animation: aperture-spin 90s linear infinite; }
+@keyframes aperture-spin { to { transform: rotate(360deg); } }
+
+.plan-title {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.45rem; line-height: 1.12;
+  letter-spacing: -0.01em; max-width: 13ch; text-wrap: balance; margin-top: 18px;
+}
+.plan-steps { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; }
+.plan-steps li { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem; color: var(--ink-3); }
+.plan-steps li::before { content: ''; height: 4px; border-radius: 2px; background: var(--surface-3); }
+.plan-steps li.done::before { background: var(--accent-grad); }
+.plan-steps li.now::before { background: color-mix(in srgb, var(--iris-1) 45%, var(--surface-3)); }
+.plan-steps li.now { color: var(--ink); font-weight: 650; }
+.plan-steps span { display: inline-flex; align-items: center; gap: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.plan-done { color: var(--ink-2); }
+.plan-week { color: var(--ink-3); }
+
+/* Bölüm başlığı */
+.home-h { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.home-h h2 { font-family: var(--font-display); font-size: 1.02rem; font-weight: 650; letter-spacing: -0.005em; }
+.home-h .link-btn { display: inline-flex; align-items: center; gap: 2px; padding: 6px 0; font-size: 0.875rem; }
+
+/* Ölçüm kutucukları */
+.home-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.home-tile {
+  min-width: 0; text-align: left; color: inherit; font: inherit; cursor: pointer;
+  display: flex; flex-direction: column; gap: 2px; padding: 14px 14px 10px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.home-tile .t { font-size: 0.8rem; font-weight: 550; color: var(--ink-3); }
+.home-tile .big { font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; line-height: 1.2; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.home-tile .big small { font-family: var(--font-body); font-weight: 600; font-size: 0.75rem; color: var(--ink-3); margin-left: 4px; letter-spacing: 0; }
+.home-tile .s { font-size: 0.8rem; color: var(--ink-3); }
+.home-tile .s.good { color: var(--ok); }
+.home-tile .s.warn { color: var(--warn); }
+.home-tile .s.bad { color: var(--danger); }
+.home-tile svg { width: 100%; height: 22px; margin-top: 6px; overflow: visible; }
+
+/* Pratikler */
+.prax { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px; }
+.prax-tile {
+  min-width: 0; min-height: 96px; text-align: left; color: inherit; font: inherit; cursor: pointer;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 8px; padding: 12px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow);
+}
+.prax-tile > svg { color: var(--accent); }
+.prax-tile .title { font-weight: 700; font-size: 0.92rem; line-height: 1.2; }
+.prax-tile em { font-style: normal; font-size: 0.75rem; font-weight: 550; color: var(--ink-3); display: inline-flex; align-items: center; gap: 4px; }
+
+/* Modül satırları (Egzersiz, Ölçüm) */
+.mod-rows { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.mod-row {
+  display: flex; align-items: center; gap: 12px; width: 100%; min-height: 60px; padding: 12px 14px;
+  text-align: left; color: inherit; font: inherit; cursor: pointer; background: none; border: 0;
+}
+.mod-row + .mod-row { border-top: 1px solid var(--border); }
+.mod-ic {
+  width: 38px; height: 38px; border-radius: 12px; flex: none; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent-soft); color: var(--accent);
+}
+.mod-ic.tinted { background: color-mix(in srgb, var(--row-color) 18%, transparent); color: color-mix(in srgb, var(--row-color) 70%, var(--ink)); }
+.mod-row .grow { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.mod-row .title { font-weight: 650; }
+.mod-row .sub { font-size: 0.8125rem; color: var(--ink-3); }
+.mod-row .chev { color: var(--ink-3); flex: none; }
+.mod-row:active, .home-tile:active, .prax-tile:active { background: var(--surface-2); }
+
+@media (prefers-reduced-motion: reduce) {
+  .aperture circle, .iris-mark-lid { animation: none; }
+}

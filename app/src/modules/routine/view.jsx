@@ -1,9 +1,11 @@
 import { Dumbbell } from 'lucide-react'
 import Routine from '../../screens/Routine.jsx'
-import { SETS, todaySeconds } from '../../lib/routines.js'
+import { SETS, todaySeconds, setDurationSec, formatMin } from '../../lib/routines.js'
 
 export default {
   icon: Dumbbell,
+  entries: () =>
+    SETS.map((s) => ({ route: `routine-${s.id}`, title: `${s.title} set`, sub: `${s.steps.length} hareket · ${formatMin(setDurationSec(s))}`, color: s.color })),
   render(ctx, route) {
     const set = SETS.find((s) => `routine-${s.id}` === route)
     return (

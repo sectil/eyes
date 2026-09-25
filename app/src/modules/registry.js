@@ -17,6 +17,8 @@
 //                                       yakın odak süresine sayılır mı
 //   storageKeys?: [...]                 "Tüm verileri sil"de temizlenecek localStorage anahtarları
 //   home?: { section: 'measure'|'exercise'|'practice', order: number }
+//   today?({ tests, sessions, now }) → null | { title, minutes, done, route? }
+//                                       Bugünün planına adım (lib/today.js toplar)
 //   sessions?: {                        kayıtların Gelişim'e nasıl gireceği
 //     match(s) → bool,
 //     countsTowardGoal: bool,           false: haftalık hedef/seriye sayılmaz (oyun)
@@ -43,6 +45,7 @@ export function validateManifest(m) {
   if (m.routes != null) need(Array.isArray(m.routes) && m.routes.length > 0 && m.routes.every((r) => typeof r === 'string'), 'routes dizi olmalı')
   if (m.storageKeys != null) need(Array.isArray(m.storageKeys), 'storageKeys dizi olmalı')
   if (m.home != null) need(SECTIONS.includes(m.home.section) && Number.isFinite(m.home.order), 'home.section/order geçersiz')
+  if (m.today != null) need(typeof m.today === 'function', 'today fonksiyon olmalı')
   if (m.sessions != null) {
     need(typeof m.sessions.match === 'function', 'sessions.match fonksiyon olmalı')
     need(typeof m.sessions.describe === 'function', 'sessions.describe fonksiyon olmalı')

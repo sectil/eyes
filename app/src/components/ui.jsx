@@ -49,22 +49,23 @@ export function Ring({ value, max, size = 104, stroke = 11, children }) {
   )
 }
 
-// Küçük gidiş çizgisi. values: logMAR (düşük = iyi → yukarıda çizilir)
-export function Sparkline({ values, width = 120, height = 36 }) {
+// Küçük gidiş çizgisi. Varsayılan logMAR (düşük = iyi → yukarıda çizilir);
+// higherIsBetter: okuma hızı gibi yüksek = iyi değerler
+export function Sparkline({ values, width = 120, height = 36, higherIsBetter = false, color = 'var(--chart-line)' }) {
   if (!values || values.length < 2) return null
   const lo = Math.min(...values)
   const hi = Math.max(...values)
   const span = hi - lo || 0.1
   const pts = values.map((v, i) => [
     (i / (values.length - 1)) * (width - 4) + 2,
-    ((v - lo) / span) * (height - 8) + 4,
+    ((higherIsBetter ? hi - v : v - lo) / span) * (height - 8) + 4,
   ])
   const d = pts.map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(1)},${y.toFixed(1)}`).join('')
   const [lx, ly] = pts.at(-1)
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} aria-hidden="true">
-      <path d={d} style={{ fill: 'none', stroke: 'var(--chart-line)', strokeWidth: 2, strokeLinejoin: 'round', strokeLinecap: 'round' }} />
-      <circle cx={lx} cy={ly} r="3.5" style={{ fill: 'var(--chart-line)', stroke: 'var(--surface)', strokeWidth: 2 }} />
+      <path d={d} style={{ fill: 'none', stroke: color, strokeWidth: 2, strokeLinejoin: 'round', strokeLinecap: 'round' }} />
+      <circle cx={lx} cy={ly} r="3.5" style={{ fill: color, stroke: 'var(--surface)', strokeWidth: 2 }} />
     </svg>
   )
 }
@@ -121,5 +122,16 @@ export function ThemeSwitch() {
         </button>
       ))}
     </div>
+  )
+}
+
+// Jev işareti: iris + göz bebeği, arada bir kırpar. Kamera kapalıyken kullanıcının kendi gözünün
+// yerine durur. VARSAYIM: logo seçilene kadar geçici işaret (atlas K bölümü).
+export function IrisMark({ size = 40 }) {
+  return (
+    <span className="iris-mark" style={{ width: size, height: size }} aria-hidden="true">
+      <span className="iris-mark-iris" />
+      <span className="iris-mark-lid" />
+    </span>
   )
 }

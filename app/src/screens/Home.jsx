@@ -1,17 +1,15 @@
-import { ScanEye, BookText, Eye, ChevronRight, TrendingUp, TrendingDown, Minus, TriangleAlert, Sparkles, Timer, Leaf, ThumbsUp, Dumbbell, Play, Clock, Trophy } from 'lucide-react'
-import { SETS, DAILY_GOAL_MIN, setDurationSec, formatMin, todaySeconds } from '../lib/routines.js'
-import { Ring, Sparkline } from '../components/ui.jsx'
+import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame } from 'lucide-react'
+import { DAILY_GOAL_MIN, formatMin, todaySeconds } from '../lib/routines.js'
+import { Sparkline, IrisMark } from '../components/ui.jsx'
 import { analyzeTrend, trendMessage } from '../lib/trend.js'
 import { activeDays, weekProgress } from '../lib/calendar.js'
 import { snellen20 } from '../lib/optotype.js'
-import { decimalTr } from '../lib/stats.js'
-import '../styles/snake.css'
+import { activitiesFrom, countedActivities, summary } from '../lib/stats.js'
+import { todayPlan } from '../lib/today.js'
+import '../styles/home.css'
 import CoachCard from '../components/CoachCard.jsx'
 import { registry } from '../modules/registry.js'
 import { viewFor } from '../modules/views.js'
-
-const WEEK_MS = 7 * 86400000
-const SET_ICONS = { leaf: Leaf, thumbs: ThumbsUp, dumbbell: Dumbbell }
 
 function greeting() {
   const h = new Date().getHours()
@@ -20,83 +18,149 @@ function greeting() {
   return 'İyi akşamlar'
 }
 
-function TrendChip({ r }) {
-  if (r.phase === 'empty') return null
-  if (r.phase === 'familiarization') return <span className="trend-chip"><Sparkles size={14} /> Alışma dönemi</span>
-  if (r.phase === 'baseline') return <span className="trend-chip"><Timer size={14} /> Başlangıç oluşuyor</span>
-  if (r.alert === 'red') return <span className="trend-chip bad"><TrendingDown size={14} /> Belirgin kötüleşme</span>
-  if (r.alert === 'yellow') return <span className="trend-chip warn"><TrendingDown size={14} /> Hafif kötüleşme</span>
-  if (r.trend === 'improving') return <span className="trend-chip good"><TrendingUp size={14} /> İyileşme eğilimi</span>
-  return <span className="trend-chip"><Minus size={14} /> Sabit</span>
+// Görme trendi → kısa, insan dilinde durum (trend.js aşamaları)
+function trendWords(r) {
+  if (r.phase === 'familiarization') return { text: 'alışma dönemi', tone: '' }
+  if (r.phase === 'baseline') return { text: 'başlangıç oluşuyor', tone: '' }
+  if (r.alert === 'red') return { text: 'belirgin kötüleşme', tone: 'bad' }
+  if (r.alert === 'yellow') return { text: 'hafif kötüleşme', tone: 'warn' }
+  if (r.trend === 'improving') return { text: 'iyileşme eğilimi', tone: 'good' }
+  return { text: 'değişim yok', tone: '' }
+}
+
+// Diyafram halkaları: iris dokusu gibi yavaş döner (hareket azaltma tercihinde durur)
+function Aperture() {
+  return (
+    <svg className="aperture" viewBox="0 0 232 232" aria-hidden="true">
+      <defs>
+        <linearGradient id="home-iris" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="var(--iris-1)" />
+          <stop offset="1" stopColor="var(--iris-2)" />
+        </linearGradient>
+      </defs>
+      <circle className="r3" cx="116" cy="116" r="100" />
+      <circle className="r1" cx="116" cy="116" r="74" />
+      <circle className="r2" cx="116" cy="116" r="50" />
+    </svg>
+  )
+}
+
+// Bir modül satırı (Egzersiz ve Ölçüm bölümleri). Birden çok girişi olan modül entries() verir.
+function moduleEntries(m, ctx) {
+  const v = viewFor(m.id)
+  if (!v) return []
+  if (v.entries) return v.entries(ctx).map((e) => ({ ...e, key: e.route, Icon: v.icon }))
+  return [{ key: m.id, route: (m.routes ?? [m.id])[0], title: m.title, sub: v.sub?.(ctx), badge: v.badge?.(ctx), Icon: v.icon }]
+}
+
+function ModuleRows({ section, ctx, onStart }) {
+  const rows = registry.inSection(section).flatMap((m) => moduleEntries(m, ctx))
+  return (
+    <div className="mod-rows">
+      {rows.map(({ key, route, title, sub, badge, color, Icon }) => (
+        <button key={key} className="mod-row" style={color ? { '--row-color': color } : undefined} onClick={() => onStart(route)}>
+          <span className={`mod-ic${color ? ' tinted' : ''}`}><Icon size={20} aria-hidden="true" /></span>
+          <span className="grow">
+            <span className="title">{title} {badge && <span className="badge">{badge}</span>}</span>
+            {sub && <span className="sub">{sub}</span>}
+          </span>
+          <ChevronRight className="chev" size={18} aria-hidden="true" />
+        </button>
+      ))}
+    </div>
+  )
 }
 
 export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, onStart }) {
+  const now = new Date()
   // Oyun oturumları (type 'game') egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
   const exercise = sessions.filter((s) => s.type !== 'game')
-  const week = weekProgress(activeDays([...tests, ...exercise]), new Date(), settings.reminder?.weeklyTarget)
+  const week = weekProgress(activeDays([...tests, ...exercise]), now, settings.reminder?.weeklyTarget)
+  const streak = summary(countedActivities(activitiesFrom(tests, sessions)), now).streakDays
   const ou = tests.filter((t) => (t.type === 'va-daily' || t.type === 'va-weekly') && t.eye === 'OU')
   const r = analyzeTrend(ou)
   const shown = r.current7 ?? ou.at(-1)?.logMAR ?? null
-  const last = (type) => tests.filter((t) => t.type === type).at(-1)
-  const due = (t) => !t || Date.now() - new Date(t.date).getTime() > WEEK_MS
-  const weeklyDue = due(last('va-weekly'))
-  const readingDue = due(last('reading'))
+  const tw = trendWords(r)
+  const reads = tests.filter((t) => t.type === 'reading' && Number.isFinite(t.maxReadingSpeed))
   const todaySec = todaySeconds(exercise)
-  const blinksToday = sessions.filter((s) => s.type === 'blink' && new Date(s.date).toDateString() === new Date().toDateString()).length
+  const plan = todayPlan(registry.modules, { tests, sessions, now })
   // Oyunla aynı kural (SnakeGame loadSnakeOpts): TrueDepth varsa ve kayıtlı seçim 'touch'
-  // değilse gözle açılır. Kayıtlı mesafe yöntemine bakılmaz; TrueDepth'li cihazda eski kamera
-  // kalibrasyonu kalmış olabilir (App.jsx distanceCal).
-  // VARSAYIM: trueDepth prop'u verilmemişse (eski çağrı) mesafe yöntemine göre tahmin edilir.
+  // değilse gözle açılır. VARSAYIM: trueDepth prop'u verilmemişse mesafe yöntemine göre tahmin edilir.
   const hasTrueDepth = trueDepth ?? settings.distance?.method === 'truedepth'
+  const ctx = { native: { trueDepth: hasTrueDepth }, sessions, tests, settings }
 
   return (
     <>
-      <header className="page-header">
-        <span className="eyebrow">{new Date().toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
-        <h1>{greeting()}</h1>
+      <header className="home-head">
+        <div>
+          <span className="eyebrow">{now.toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
+          <h1>{greeting()}</h1>
+        </div>
+        <div className="home-head-side">
+          {streak > 0 && (
+            <span className="streak-chip" aria-label={`${streak} günlük seri`}>
+              <Flame size={13} aria-hidden="true" /> {streak} gün
+            </span>
+          )}
+          <IrisMark size={40} />
+        </div>
       </header>
 
-      <section className="card card-hero">
-        <div className="hero-row">
-          <Ring value={week.done} max={week.target}>
-            <span className="ring-label">{week.done}/{week.target}</span>
-          </Ring>
-          <div className="stack" style={{ gap: 4 }}>
-            <h2>{week.met ? 'Haftalık hedef tamam' : 'Bu hafta'}</h2>
-            <p className="muted small">
-              {week.met
-                ? 'Harika — düzenli ölçüm, gerçek değişimi görmenin tek yolu.'
-                : `Haftada ${week.target} gün hedefi. Bir günü kaçırmak sorun değil.`}
-            </p>
-          </div>
-        </div>
+      <section className="plan-hero" aria-label="Bugünün planı">
+        <Aperture />
+        <span className="eyebrow">
+          Bugünün planı{plan.total > 0 ? ` · ${plan.doneCount}/${plan.total}` : ''}
+        </span>
+        <h2 className="plan-title">{plan.allDone ? 'Bugünkü plan tamam' : plan.next ? plan.next.title : 'Serbest gün'}</h2>
+        {plan.total > 0 && (
+          <ol className="plan-steps">
+            {plan.items.map((it) => (
+              <li key={it.id} className={it.done ? 'done' : it === plan.next ? 'now' : ''}>
+                <span>{it.done && <Check size={11} aria-hidden="true" />}{it.title}</span>
+              </li>
+            ))}
+          </ol>
+        )}
+        {plan.next ? (
+          <button className="btn" onClick={() => onStart(plan.next.route)}>
+            <Play size={18} aria-hidden="true" />
+            Başla{plan.next.minutes ? ` · ${plan.next.minutes} dk` : ''}
+          </button>
+        ) : (
+          <p className="plan-done small">
+            {plan.allDone ? 'İstersen aşağıdan bir pratik seç.' : 'Aşağıdan istediğin çalışmayı seç.'}
+          </p>
+        )}
+        <span className="plan-week small">
+          {week.met ? `Bu hafta ${week.done} gün · hedef tamam` : `Bu hafta ${week.done}/${week.target} gün`}
+        </span>
       </section>
 
       <CoachCard tests={tests} sessions={sessions} weeklyTarget={week.target} onStart={onStart} />
 
-      <section className="card">
-        <div className="row between">
-          <span className="eyebrow">Yakın görme · iki göz</span>
-          <TrendChip r={r} />
-        </div>
-        {shown == null ? (
-          <p className="muted">Henüz ölçüm yok. İlk testinle başlangıç noktanı oluştur.</p>
-        ) : (
-          <div className="row between" style={{ alignItems: 'flex-end' }}>
-            <div className="metric">
-              <span className="metric-value">
-                {decimalTr(shown)}
-                <span className="metric-unit">logMAR</span>
-              </span>
-              <span className="muted small">
-                {snellen20(shown)} karşılığı{r.current7 != null ? ' · son 7 gün ortancası' : ''}
-              </span>
-            </div>
-            <Sparkline values={ou.slice(-14).map((t) => t.logMAR)} />
-          </div>
-        )}
-        {r.phase === 'tracking' && <p className="small" style={{ color: 'var(--ink-2)' }}>{trendMessage(r)}</p>}
-      </section>
+      <div className="home-h">
+        <h2>Ölçümlerin</h2>
+        <button className="link-btn" onClick={() => onStart('progress')}>Gelişim <ChevronRight size={15} aria-hidden="true" /></button>
+      </div>
+      <div className="home-tiles">
+        <button className="home-tile" onClick={() => onStart(shown == null ? 'daily' : 'progress')}>
+          <span className="t">Yakın görme</span>
+          <span className="big">{shown == null ? '—' : snellen20(shown)}</span>
+          <span className={`s ${shown == null ? '' : tw.tone}`}>{shown == null ? 'henüz ölçüm yok' : tw.text}</span>
+          <Sparkline values={ou.slice(-14).map((t) => t.logMAR)} width={132} height={22} />
+        </button>
+        <button className="home-tile" onClick={() => onStart(reads.length ? 'progress' : 'reading')}>
+          <span className="t">Okuma hızı</span>
+          <span className="big">
+            {reads.length ? reads.at(-1).maxReadingSpeed : '—'}
+            {reads.length > 0 && <small>k/dk</small>}
+          </span>
+          <span className="s">
+            {!reads.length ? 'henüz ölçüm yok' : reads.length > 1 ? `önceki ${reads.at(-2).maxReadingSpeed}` : 'ilk ölçüm'}
+          </span>
+          <Sparkline values={reads.slice(-8).map((t) => t.maxReadingSpeed)} width={132} height={22} higherIsBetter color="var(--lens)" />
+        </button>
+      </div>
 
       {r.alert && (
         <section className={`card ${r.alert === 'red' ? 'tone-danger' : 'tone-warn'}`} role="alert">
@@ -107,96 +171,32 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
         </section>
       )}
 
-      <section className="stack">
-        <div className="row between">
-          <h2>Egzersiz setleri</h2>
-          <span className="muted small">Bugün {formatMin(todaySec)} / {DAILY_GOAL_MIN} dk</span>
-        </div>
-        {todaySec >= DAILY_GOAL_MIN * 60 && (
-          <div className="card goal-card met">
-            <Trophy size={22} />
-            <div className="stack" style={{ gap: 2 }}>
-              <strong>Günlük hedef tamam!</strong>
-              <span className="small">Bugünkü egzersiz süresi: {formatMin(todaySec)}</span>
-            </div>
-          </div>
-        )}
-        {SETS.map((s) => {
-          const Icon = SET_ICONS[s.icon]
-          return (
-            <button key={s.id} className="set-card" style={{ '--set-color': s.color }} onClick={() => onStart(`routine-${s.id}`)}>
-              <span className="grow">
-                <span className="title">{s.title} <Icon size={18} aria-hidden="true" /></span>
-                <span className="set-meta">
-                  <span><Play size={13} /> {s.steps.length} hareket</span>
-                  <span><Clock size={13} /> {formatMin(setDurationSec(s))}</span>
-                </span>
-              </span>
-              <ChevronRight className="chev" size={20} />
-            </button>
-          )
-        })}
-      </section>
-
-      <h2 style={{ marginTop: 6 }}>Ölçüm</h2>
-      <button className="btn" onClick={() => onStart(weeklyDue ? 'weekly' : 'daily')}>
-        <ScanEye size={20} aria-hidden="true" />
-        {weeklyDue ? 'Haftalık tam test · ~5 dk' : 'Günlük test · ~3 dk'}
-      </button>
-
-      <div className="action-list">
-        {weeklyDue && (
-          <button className="action" onClick={() => onStart('daily')}>
-            <span className="icon-bubble"><ScanEye size={22} /></span>
-            <span className="grow">
-              <span className="title">Sadece kısa test</span>
-              <span className="sub">"E hangi yönde" · ~3 dk</span>
-            </span>
-            <ChevronRight className="chev" size={20} />
-          </button>
-        )}
-        <button className="action" onClick={() => onStart('reading')}>
-          <span className="icon-bubble"><BookText size={22} /></span>
-          <span className="grow">
-            <span className="title">Okuma hızı {readingDue && <span className="badge">Bu hafta</span>}</span>
-            <span className="sub">Yazı küçüldükçe ne kadar hızlı okuyorsun · ~3 dk</span>
-          </span>
-          <ChevronRight className="chev" size={20} />
-        </button>
-        <button className="action" onClick={() => onStart('blink')}>
-          <span className="icon-bubble"><Eye size={22} /></span>
-          <span className="grow">
-            <span className="title">Göz kırpma egzersizi {blinksToday > 0 && <span className="badge">Bugün {blinksToday}/3</span>}</span>
-            <span className="sub">Ekran başında göz konforu · ~2,5 dk</span>
-          </span>
-          <ChevronRight className="chev" size={20} />
-        </button>
-      </div>
-
-      {/* Göz pratikleri: eğlence ve bakış kontrolü pratiği. "Ölçüm" değil — skorlar görme trendine girmez. */}
-      <h2 style={{ marginTop: 6 }}>Göz pratikleri</h2>
-      <div className="action-list">
+      {/* Pratikler: bakış kontrolü ve dikkat pratiği. "Ölçüm" değil — skorlar görme trendine girmez. */}
+      <div className="home-h"><h2>Pratikler</h2></div>
+      <div className="prax">
         {registry.inSection('practice').map((m) => {
           const v = viewFor(m.id)
           if (!v) return null
           const Icon = v.icon
-          const ctx = { native: { trueDepth: hasTrueDepth }, sessions, tests, settings }
           const badge = v.badge?.(ctx)
           return (
-            <button key={m.id} className="action" onClick={() => onStart((m.routes ?? [m.id])[0])}>
-              <span className="icon-bubble"><Icon size={22} aria-hidden="true" /></span>
-              <span className="grow">
-                <span className="title">
-                  {m.title}{' '}
-                  {badge && <span className="badge snake-badge"><Trophy size={11} aria-hidden="true" /> {badge}</span>}
-                </span>
-                {v.sub && <span className="sub">{v.sub(ctx)}</span>}
-              </span>
-              <ChevronRight className="chev" size={20} />
+            <button key={m.id} className="prax-tile" onClick={() => onStart((m.routes ?? [m.id])[0])}>
+              <Icon size={22} aria-hidden="true" />
+              <span className="title">{m.title}</span>
+              <em>{badge ? <><Trophy size={11} aria-hidden="true" /> {badge}</> : 'Başla'}</em>
             </button>
           )
         })}
       </div>
+
+      <div className="home-h">
+        <h2>Egzersiz</h2>
+        <span className="muted small">Bugün {formatMin(todaySec)} / {DAILY_GOAL_MIN} dk</span>
+      </div>
+      <ModuleRows section="exercise" ctx={ctx} onStart={onStart} />
+
+      <div className="home-h"><h2>Ölçüm</h2></div>
+      <ModuleRows section="measure" ctx={ctx} onStart={onStart} />
 
       {!distanceTracked && (
         <p className="note">
