@@ -140,7 +140,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
       const at = s.pos + 1
       s.queue.splice(at, 0, ...targets)
       for (let i = 0; i < targets.length; i++) s.again.add(at + i)
-      cue('Bir kez daha. Başını sabit tut, yalnızca gözünü kaydır', true)
+      cue('Bir kez daha. Noktaya bak, yeşile dönene kadar orada kal', true)
     }
     const axisWeak = (axis) => {
       const [neg, pos] = axis === 'x' ? ['left', 'right'] : ['down', 'up']
@@ -162,7 +162,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
         const at = s.pos + 1
         s.queue.splice(at, 0, ...extra)
         for (let i = 0; i < extra.length; i++) s.again.add(at + i)
-        cue('Bir kez daha. Başını sabit tut, yalnızca gözünü kaydır', true)
+        cue('Bir kez daha. Noktaya bak, yeşile dönene kadar orada kal', true)
       }
     }
     const np = s.pos + 1
@@ -235,12 +235,12 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
         <h1>Göz takibini sana göre ayarlayalım</h1>
         <p className="muted">
           Herkesin gözü farklı hareket eder. Ekranda bir nokta gezinecek: orta, sol, sağ, üst, alt.
-          <strong> Noktayı yalnızca gözünle takip et; başını çevirme.</strong> Yaklaşık 20 saniye sürer, bir kez yapılır.
+          <strong> Noktaya bak ve yeşile dönene kadar orada kal.</strong> Başın hafifçe dönerse sorun değil. Yaklaşık 20 saniye sürer, bir kez yapılır.
         </p>
         <ul className="gazecal-tips">
           <li>Telefonu yüzünün karşısında, göz hizasında sabit tut; yüzün iyi aydınlansın.</li>
           <li>Her nokta bitince telefon kısa titrer; nokta yeni yerine geçer.</li>
-          <li>Başın dönerse uyarırım; o anlar sayılmaz.</li>
+          <li>Başın çok dönerse uyarırım; o anlar sayılmaz.</li>
           <li>Göz kırpmak sorun değil, o anlar da sayılmaz.</li>
         </ul>
         <button className="btn" onClick={start}><ScanFace size={18} aria-hidden="true" /> Başla</button>
@@ -275,7 +275,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
             <p className="muted">
               {!result?.x || result.x.weak ? 'Sağa ve sola bakış, tekrarlara rağmen birbirinden ayrılmadı. ' : ''}
               {!result?.y || result.y.weak ? 'Yukarı ve aşağı bakış, tekrarlara rağmen birbirinden ayrılmadı. ' : ''}
-              Işık yüzüne düşsün, telefon göz hizasında sabit dursun; nokta yeşile dönene kadar noktada kal.
+              Işık yüzüne düşsün, telefon göz hizasında dursun; nokta yeşile dönene kadar noktada kal. Gözlükle zorlanıyorsa bir kez gözlüksüz dene.
             </p>
             {headTurnNote(report)}
             <div className="gazetest-grid gazecal-scores">

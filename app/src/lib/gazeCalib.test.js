@@ -318,7 +318,15 @@ describe('kalibrasyon v2.1: drift, hedef-içi gürültü, kararlı pencere (Buil
     const cam = fitAxis({ camX: S(-1.0427, 0.0892) }, { camX: S(0.3431, 0.0623) }, { camX: S(-2.0846, 0.1217) }, ['camX'], { camX: S(-0.7824, 0.0321) })
     expect(cam.weak).toBeUndefined()
     expect(cam.score).toBeGreaterThan(MIN_SCORE)
-    expect(cam.score).toBeCloseTo(1.17 / 0.25, 0)
+    expect(cam.score).toBeCloseTo(1.17 / 0.13, 0) // gürültü = drift/2 = 0,13
+  })
+  it('Build 16: sol–sağ ayrım 0,38° ama hedef-içi MAD 0,03 → camX ok (taban 0,1)', () => {
+    const cam = fitAxis({ camX: S(-2.6272, 0.0279) }, { camX: S(-2.1656, 0.0228) }, { camX: S(-2.9808, 0.0247) }, ['camX'], { camX: S(-2.5788, 0.0438) })
+    expect(cam.weak).toBeUndefined()
+    expect(cam.score).toBeCloseTo(0.378 / 0.1, 0)
+    // aynı veride angX: sol = orta → ayrışmaz (weak)
+    const ang = fitAxis({ angX: S(2.1297, 0.0371) }, { angX: S(2.1137, 0.0189) }, { angX: S(1.7261, 0.054) }, ['angX'], { angX: S(1.8719, 0.0257) })
+    expect(ang.weak).toBe(true)
   })
   it('gerçek pencerelerde model camX/camY ile ok; baş 1° kayınca da', () => {
     const w = windows()

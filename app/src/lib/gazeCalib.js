@@ -39,6 +39,11 @@ export const FEATURES = {
   // camX'te 0,26° — bu yüzden eksen adaylarında İLK sırada. headX/Y yalnızca rapor ve baş dönüşü uyarısı.
   camX: (f) => pick(f.camLeftX, f.camRightX),
   camY: (f) => pick(f.camLeftY, f.camRightY),
+  // Göz başına (yalnızca rapor: gözlük/tek göz sorununu görmek için; eksen adayı değil)
+  camLX: (f) => num(f.camLeftX),
+  camRX: (f) => num(f.camRightX),
+  camLY: (f) => num(f.camLeftY),
+  camRY: (f) => num(f.camRightY),
   headX: (f) => num(f.headX),
   headY: (f) => num(f.headY),
 }
@@ -67,8 +72,11 @@ export function headTurned(ref, f, deg = HEAD_TURN_DEG) {
   return Math.abs(h.x - ref.x) > deg || Math.abs(h.y - ref.y) > deg
 }
 // Sayısal taban gürültü (birim başına) — sıfıra bölmeyi ve aşırı iyimser skoru önler
-// VARSAYIM: cam 0,25° (Build 15: hedef-içi MAD 0,03–0,26°).
-export const NOISE_FLOOR = { camX: 0.25, camY: 0.25, angX: 0.4, angY: 0.4, lookX: 0.002, lookY: 0.002, blendX: 0.02, blendY: 0.02 }
+// VARSAYIM: cam 0,1° (Build 16: yatay hedef-içi MAD 0,02–0,04°, sol–sağ ayrım yalnızca 0,38°; 0,25 taban
+// bu temiz sinyali 1,5 puana düşürüyordu). ARKit'in yatay kazancı dikeyin ~1/5'i; ayrım küçük ama tutarlı.
+export const NOISE_FLOOR = { camX: 0.1, camY: 0.1, angX: 0.4, angY: 0.4, lookX: 0.002, lookY: 0.002, blendX: 0.02, blendY: 0.02 }
+// Kalibrasyon ekranındaki "sabit bakış" ölçütü (taban gürültüden gevşek: hedef-içi MAD 0,03–0,10 gözlendi)
+export const STABLE_MAD = { camX: 0.25, camY: 0.25, angX: 0.4, angY: 0.4 }
 
 // Blendshape bakış vektörü (gaze.js gazeVector ile aynı formül; döngüsel içe aktarımı önlemek için burada)
 const avg2 = (a, b) => ((a ?? 0) + (b ?? 0)) / 2
@@ -142,7 +150,7 @@ export function windowStable(frames, minFrames = 5) {
   const sum = summarize(frames)
   const present = STABLE_FEATURES.filter((k) => sum[k])
   if (!present.length) return false
-  return present.every((k) => sum[k].mad <= NOISE_FLOOR[k])
+  return present.every((k) => sum[k].mad <= STABLE_MAD[k])
 }
 
 const closureOf = (f) => ((f.blinkLeft ?? 0) + (f.blinkRight ?? 0)) / 2
