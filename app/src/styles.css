@@ -316,12 +316,15 @@ button { font: inherit; color: inherit; }
 .progress-track { position: absolute; top: calc(4px + env(safe-area-inset-top)); left: 16px; right: 16px; height: 3px; border-radius: 2px; background: #e2e8f0; overflow: hidden; }
 .progress-track > i { display: block; height: 100%; background: #0f766e; transition: width 0.2s; }
 .paused { font-size: 1.2rem; font-weight: 650; }
-.arrow-row { position: absolute; bottom: calc(24px + env(safe-area-inset-bottom)); display: flex; gap: 14px; }
+/* Yön düğmeleri: az gören kullanıcı için büyük ve yüksek kontrastlı (dokunma alanı 78 px; dar ekranda sığacak kadar) */
+.arrow-row { position: absolute; bottom: calc(20px + env(safe-area-inset-bottom)); display: flex; gap: 12px; }
 .arrow {
-  width: 60px; height: 60px; border-radius: 50%; border: 1px solid #e2e8f0; background: #f8fafc;
-  color: #334155; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+  width: min(78px, calc((100vw - 60px) / 4)); height: min(78px, calc((100vw - 60px) / 4)); border-radius: 50%;
+  border: 2px solid #64748b; background: #f8fafc; color: #0f172a;
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
 }
-.arrow:active { background: #e2e8f0; }
+.arrow:active { background: #e2e8f0; border-color: #0f172a; }
+.arrow:focus-visible { outline: 3px solid #0f766e; outline-offset: 3px; }
 .fb-ok { background: #f0fdf4; }
 .fb-no { background: #fff7ed; }
 .swipe-hint { position: absolute; bottom: calc(100px + env(safe-area-inset-bottom)); font-size: 0.8rem; color: #94a3b8; }
@@ -499,7 +502,12 @@ details > summary::-webkit-details-marker { display: none; }
 .hud.ok ~ .hud-msg { color: var(--ok); }
 
 /* ---------- Test ekranı ek ---------- */
-.cant-see { align-self: center; display: inline-flex; align-items: center; gap: 6px; color: var(--ink-3); margin-top: 6px; }
+.cant-see {
+  align-self: center; display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: 6px;
+  min-height: 60px; padding: 0 28px; border-radius: 999px; border: 2px solid #64748b; background: #fff;
+  color: #0f172a; font: 700 1.2rem var(--font-body); cursor: pointer;
+}
+.cant-see:active { background: #e2e8f0; }
 .stimulus-top .btn-icon { width: 40px; height: 40px; }
 .reading-mic { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-3); font-size: 0.9rem; }
 .reading-mic.on { color: var(--accent); }

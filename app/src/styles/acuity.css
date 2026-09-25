@@ -24,7 +24,7 @@
 
 .acuity-hint {
   position: absolute;
-  bottom: calc(100px + env(safe-area-inset-bottom));
+  bottom: calc(116px + env(safe-area-inset-bottom)); /* büyük yön düğmelerinin üstünde */
   left: 16px; right: 16px;
   text-align: center;
   font-size: 0.82rem;
