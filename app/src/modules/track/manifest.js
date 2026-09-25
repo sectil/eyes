@@ -1,6 +1,9 @@
 // Çember takibi: atlayan çemberi gözle izleme pratiği. Görmeyi ölçmez; skor görme trendine girmez.
 import { TRACK_BEST_KEY, TRACK_OPTS_KEY, trackBestFromSessions } from '../../lib/track.js'
-import { NBSP, finite, join, durationPart, CONTROL_LABEL } from '../../lib/format.js'
+import { NBSP, finite, join, durationPart, mean, CONTROL_LABEL } from '../../lib/format.js'
+import { withinDays } from '../../lib/today.js'
+const isTrack = (s) => s.type === 'game' && s.game === 'track'
+const r0 = (v) => (v == null ? null : Math.round(v))
 
 export default {
   id: 'track',
@@ -31,5 +34,19 @@ export default {
     },
     best: (sessions) => trackBestFromSessions(sessions),
     bestLabel: 'Çember rekoru',
+  },
+  coach(sessions, now) {
+    const week = withinDays(sessions.filter(isTrack), now)
+    return { best: trackBestFromSessions(sessions) || null, sessions7: week.length, follow7: r0(mean(week.map((s) => finite(s.followPct)))) }
+  },
+  stats(sessions, now) {
+    const best = trackBestFromSessions(sessions)
+    const week = withinDays(sessions.filter(isTrack), now)
+    const follow = r0(mean(week.map((s) => finite(s.followPct))))
+    if (!best && !week.length) return []
+    return [
+      { label: 'Rekor', value: best ? `${best}${NBSP}puan` : '—' },
+      { label: 'Takip · 7 gün', value: follow != null ? `%${follow}` : '—', sub: week.length ? `${week.length}${NBSP}tur` : 'tur yok' },
+    ]
   },
 }

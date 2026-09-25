@@ -25,6 +25,25 @@ const SCHEMA = {
   daysSinceLastExercise: NUM(0, 3650),
   snakeBest: NUM(0, 100000),
   hourNow: NUM(0, 23),
+  modules: sanitizeModules, // modül özetleri (registry coach()); yalnızca sayı ve kısa dize
+}
+
+// { 'track': { best: 54, follow7: 82 }, ... } — en çok 10 modül × 6 alan; sayı |v| ≤ 1e6 (3 hane), dize ≤ 24 karakter [\w-]
+export const MODULE_KEY_RE = /^[a-z][a-z0-9-]{0,23}$/
+export function sanitizeModules(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null
+  const out = {}
+  for (const [id, fields] of Object.entries(raw).slice(0, 10)) {
+    if (!MODULE_KEY_RE.test(id) || !fields || typeof fields !== 'object' || Array.isArray(fields)) continue
+    const f = {}
+    for (const [k, v] of Object.entries(fields).slice(0, 6)) {
+      if (!/^[a-zA-Z][a-zA-Z0-9]{0,23}$/.test(k)) continue
+      if (Number.isFinite(v) && Math.abs(v) <= 1e6) f[k] = +(+v).toFixed(3)
+      else if (typeof v === 'string' && /^[\w-]{1,24}$/.test(v)) f[k] = v
+    }
+    if (Object.keys(f).length) out[id] = f
+  }
+  return Object.keys(out).length ? out : null
 }
 
 export function sanitizeSignals(raw) {
@@ -45,7 +64,8 @@ KESİN KURALLAR:
 - Görme keskinliği (logMAR) değişimi ±0,1'in altındaysa bunu "doğal ölçüm oynaması, değişim yok" diye yorumla; iyileşme ya da kötüleşme deme.
 - vaAlert "yellow" veya "red" ise yalnızca şunu öner: "Birkaç gün daha ölç; devam ederse bir göz doktoruna görün." Başka yorum yapma.
 - Egzersizleri "konfor" ve "düzen" diliyle öner; kırpma egzersizi ekran yorgunluğunda kanıtlı, bakış hareketleri yalnızca rahatlama.
-- Uygulamadaki eylemlerden birini öner: "Günlük test", "Hafif set", "Normal set", "Kırpma egzersizi", "Okuma hızı testi", "Uzağa bakış molası".
+- "modules" alanı varsa son 7 günün pratik özetleridir: track = Çember takibi (best rekor, follow7 takip %), snake = Yılan (best), breath = Nefes pratiği (minutes7, calmDelta7 = sakinlik değişimi 1–5), breath-count = Nefes sayma (accuracy7 = doğruluk %, best). Puanları görmeyle ilişkilendirme; yalnızca düzen ve pratik dilinde yorumla.
+- Uygulamadaki eylemlerden birini öner: "Günlük test", "Hafif set", "Normal set", "Kırpma egzersizi", "Okuma hızı testi", "Uzağa bakış molası", "Nefes pratiği", "Nefes sayma", "Çember takibi", "Yılan oyunu".
 ÇIKTI: yalnızca şu JSON, başka hiçbir şey yazma:
 {"insight":"en fazla 160 karakter","action":"en fazla 60 karakter, eylem adıyla başlar"}`
 

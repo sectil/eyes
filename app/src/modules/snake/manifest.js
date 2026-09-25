@@ -1,6 +1,8 @@
 // Yılan: gözle ya da dokunarak oynanan göz pratiği. Eğlence; görmeyi ölçmez.
 import { BEST_KEY, OPTS_KEY, bestFromSessions } from '../../lib/snake.js'
 import { NBSP, finite, join, durationPart, CONTROL_LABEL } from '../../lib/format.js'
+import { withinDays } from '../../lib/today.js'
+const isSnake = (s) => s.type === 'game' && s.game === 'snake'
 
 export default {
   id: 'snake',
@@ -26,5 +28,18 @@ export default {
     },
     best: (sessions) => bestFromSessions(sessions),
     bestLabel: 'Yılan rekoru',
+  },
+  coach(sessions, now) {
+    const week = withinDays(sessions.filter(isSnake), now)
+    return { best: bestFromSessions(sessions) || null, sessions7: week.length, eyes7: week.filter((s) => s.control === 'eyes').length }
+  },
+  stats(sessions, now) {
+    const best = bestFromSessions(sessions)
+    const week = withinDays(sessions.filter(isSnake), now)
+    if (!best && !week.length) return []
+    return [
+      { label: 'Rekor', value: best ? `${best}${NBSP}puan` : '—' },
+      { label: 'Oyun · 7 gün', value: String(week.length), sub: week.length ? `${week.filter((s) => s.control === 'eyes').length}${NBSP}gözle` : null },
+    ]
   },
 }

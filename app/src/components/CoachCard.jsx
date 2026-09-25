@@ -15,6 +15,10 @@ const ACTIONS = [
   [/^normal set/i, 'routine-normal'],
   [/^kırpma/i, 'blink'],
   [/^okuma/i, 'reading'],
+  [/^nefes say/i, 'breath-count'],
+  [/^nefes/i, 'breath'],
+  [/^çember/i, 'track'],
+  [/^yılan/i, 'snake'],
 ]
 const screenFor = (action) => ACTIONS.find(([re]) => re.test(action ?? ''))?.[1] ?? null
 

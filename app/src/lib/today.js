@@ -19,6 +19,14 @@ export const isSameDay = (r, now = new Date()) => {
 export const lastOfType = (records = [], type) => records.filter((r) => r.type === type).at(-1) ?? null
 // Son kayıt yoksa ya da 7 günden eskiyse zamanı gelmiştir (Home.jsx eski "due" kuralı).
 export const isDue = (rec, now = new Date()) => !rec || time(rec) == null || new Date(now).getTime() - time(rec) > WEEK_MS
+// Son N gün içindeki kayıtlar (now dahil geriye)
+export const withinDays = (records = [], now = new Date(), days = 7) => {
+  const since = new Date(now).getTime() - days * 86400000
+  return records.filter((r) => {
+    const t = time(r)
+    return t != null && t >= since
+  })
+}
 export const doneToday = (records = [], type, now = new Date()) => records.some((r) => r.type === type && isSameDay(r, now))
 
 export function todayPlan(modules = [], ctx = {}) {

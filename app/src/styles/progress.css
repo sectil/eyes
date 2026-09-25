@@ -174,3 +174,13 @@
 .pg-read li + li { border-top: 1px solid var(--border); }
 
 @keyframes pg-rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* Gelişim → Pratikler: modül istatistik kartları (manifest.stats) */
+.pg-mods { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.pg-mod { display: flex; flex-direction: column; gap: 8px; text-align: left; font: inherit; color: inherit; cursor: pointer; }
+.pg-mod-title { font-weight: 700; }
+.pg-mod-rows { display: flex; flex-direction: column; gap: 4px; }
+.pg-mod-row { display: flex; justify-content: space-between; gap: 12px; font-size: 0.9rem; }
+.pg-mod-label { color: var(--ink-3); }
+.pg-mod-value { font-weight: 650; font-variant-numeric: tabular-nums; }
+.pg-mod-value small { font-weight: 500; color: var(--ink-3); }

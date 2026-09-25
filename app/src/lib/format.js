@@ -21,3 +21,9 @@ export function formatDuration(sec) {
 export const durationPart = (seconds, estimated) => (seconds > 0 ? `${estimated ? '~' : ''}${formatDuration(seconds)}` : null)
 
 export const CONTROL_LABEL = { eyes: 'gözle', touch: 'dokunarak' }
+
+// Sonlu sayıların ortalaması; yoksa null
+export const mean = (values = []) => {
+  const v = values.filter(Number.isFinite)
+  return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null
+}

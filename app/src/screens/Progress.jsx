@@ -304,6 +304,44 @@ function DayPanel({ sel, list, now, last, onJump, onStart }) {
 }
 
 // ---------- Görme keskinliği (önceki Gelişim ekranının içeriği) ----------
+// Modül istatistikleri (manifest.stats): Çember, Yılan, nefes, nefes sayma — modül takılınca kendiliğinden gelir
+function PracticeSection({ sessions, now, onStart }) {
+  const now2 = now
+  const cards = registry.modules
+    .filter((m) => typeof m.stats === 'function')
+    .map((m) => {
+      let rows = []
+      try {
+        rows = (m.stats(sessions, now2) ?? []).slice(0, 3)
+      } catch {
+        rows = []
+      }
+      return { m, rows }
+    })
+    .filter((c) => c.rows.length)
+  if (!cards.length) return null
+  return (
+    <section className="stack" aria-label="Pratikler">
+      <span className="eyebrow">Pratikler</span>
+      <div className="pg-mods">
+        {cards.map(({ m, rows }) => (
+          <button key={m.id} type="button" className="card pg-mod" onClick={() => onStart((m.routes ?? [m.id])[0])}>
+            <span className="pg-mod-title">{m.title}</span>
+            <span className="pg-mod-rows">
+              {rows.map((r) => (
+                <span key={r.label} className="pg-mod-row">
+                  <span className="pg-mod-label">{r.label}</span>
+                  <span className="pg-mod-value">{r.value}{r.sub ? <small> · {r.sub}</small> : null}</span>
+                </span>
+              ))}
+            </span>
+          </button>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 function VisionSection({ tests, onStart }) {
   const [eye, setEye] = useState('OU')
   const va = useMemo(() => tests.filter((t) => t.type === 'va-daily' || t.type === 'va-weekly'), [tests])
@@ -447,6 +485,7 @@ export default function Progress({ tests = [], sessions = [], weeklyTarget, onSt
         onSelect={setSel}
       />
       <DayPanel sel={sel} list={sel ? days.get(sel) ?? [] : []} now={now} last={activities.at(-1)} onJump={jump} onStart={onStart} />
+      <PracticeSection sessions={sessions} now={now} onStart={onStart} />
       <VisionSection tests={tests} onStart={onStart} />
     </>
   )

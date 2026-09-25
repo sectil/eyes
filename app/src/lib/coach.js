@@ -3,6 +3,7 @@
 import { activitiesFrom, countedActivities, summary } from './stats.js'
 import { analyzeTrend } from './trend.js'
 import { sanitizeSignals } from './coachCore.js'
+import { registry } from '../modules/registry.js'
 
 export const COACH_URL = import.meta.env?.VITE_COACH_URL || 'https://eyetrail.vercel.app/api/coach'
 const CACHE_KEY = 'gozolcum:coach-today'
@@ -46,7 +47,23 @@ export function buildSignals(tests = [], sessions = [], now = new Date(), weekly
     daysSinceLastExercise: lastEx == null ? null : Math.floor((now.getTime() - lastEx) / DAY),
     snakeBest: summary(all, now).bestSnake,
     hourNow: now.getHours(),
+    modules: moduleSignals(sessions, now),
   })
+}
+
+// Modül özetleri (registry coach()); bozuk modül diğerlerini düşürmez
+export function moduleSignals(sessions = [], now = new Date()) {
+  const out = {}
+  for (const m of registry.modules) {
+    if (typeof m.coach !== 'function') continue
+    try {
+      const v = m.coach(sessions, now)
+      if (v && typeof v === 'object') out[m.id] = v
+    } catch {
+      // atla
+    }
+  }
+  return out
 }
 
 // Kural tabanlı yedek (internet/sunucu yoksa ya da koç kapalıysa). Model kurallarıyla aynı çizgide.

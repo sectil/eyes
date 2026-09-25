@@ -77,6 +77,13 @@ export default function GazeTest({ onBack, onCalibrate }) {
         <div className="row between">
           <strong>Kalibrasyon</strong>
           <span className="muted small">{model ? `sağ/sol: ${model.x.feature} · yukarı/aşağı: ${model.y.feature}` : 'yapılmadı'}</span>
+          {model && (
+            <span className="muted small">
+              {`ayrışma sağ–sol ${model.x.score.toFixed(1)} · yukarı–aşağı ${model.y.score.toFixed(1)}`}
+              {Number.isFinite(model.x.drift) ? ` · kayma ${model.x.drift.toFixed(2)}°` : ''}
+              {model.date ? ` · ${new Date(model.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' })}` : ''}
+            </span>
+          )}
         </div>
         <button className="btn btn-ghost" onClick={onCalibrate}><Crosshair size={18} aria-hidden="true" /> {model ? 'Yeniden kalibre et' : 'Kalibre et'}</button>
       </section>

@@ -20,8 +20,11 @@
 //                                       'test' = ölçüm (ortasında kesilmez). Yoksa kilitlenmez.
 //   storageKeys?: [...]                 "Tüm verileri sil"de temizlenecek localStorage anahtarları
 //   home?: { section: 'measure'|'exercise'|'practice', order: number }
-//   today?({ tests, sessions, now }) → null | { title, minutes, done, route? }
+//   today?({ tests, sessions, now, profile? }) → null | { title, minutes, done, route? }
 //                                       Bugünün planına adım (lib/today.js toplar)
+//   coach?(sessions, now) → { anahtar: sayı | kısa dize }   Jev'e giden 7 günlük özet (en çok 6 alan;
+//                                       lib/coachCore.js sanitizeSignals süzer). Yalnızca özet sayılar.
+//   stats?(sessions, now) → [{ label, value, sub? }]   Gelişim → Pratikler satırları (en çok 3)
 //   sessions?: {                        kayıtların Gelişim'e nasıl gireceği
 //     match(s) → bool,
 //     countsTowardGoal: bool,           false: haftalık hedef/seriye sayılmaz (oyun)
@@ -50,6 +53,8 @@ export function validateManifest(m) {
   if (m.home != null) need(SECTIONS.includes(m.home.section) && Number.isFinite(m.home.order), 'home.section/order geçersiz')
   if (m.gates?.eyeBudget != null) need(m.gates.eyeBudget === 'eye' || m.gates.eyeBudget === 'test', "gates.eyeBudget 'eye' ya da 'test' olmalı")
   if (m.today != null) need(typeof m.today === 'function', 'today fonksiyon olmalı')
+  if (m.coach != null) need(typeof m.coach === 'function', 'coach fonksiyon olmalı')
+  if (m.stats != null) need(typeof m.stats === 'function', 'stats fonksiyon olmalı')
   if (m.sessions != null) {
     need(typeof m.sessions.match === 'function', 'sessions.match fonksiyon olmalı')
     need(typeof m.sessions.describe === 'function', 'sessions.describe fonksiyon olmalı')

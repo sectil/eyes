@@ -96,7 +96,7 @@ iOS'ta kalır. Bu yorum yanlışsa ne kastettiğini yaz.
 ## 4. Yapım sırası (her adım ayrı TestFlight; onay bekliyor)
 0. **Build 16**: kalibrasyon v2.1 cihazda doğrulama (nokta yeşil, "Hazır").
 1. **Profil anketi** (3a) + profil nesnesi + modüllerin profili okuması. ~1 derleme. **YAPILDI** (Build 18): `lib/profile.js`, `screens/Profile.jsx`; ekran 6+ sa → mola bütçesi 3 dk; uyku ≤4 / stres ≥5 → nefes plana girer; nöbet cevabı `flashSafe` olarak saklanır (Hızlı Bakış kapısı, adım 4'te kullanılacak). Eski kayıtlar: Bugün'de "Profilini tamamla" kartı; Bilgi → Profilim.
-2. **Sistem bütünlüğü** (§2): Jev sinyalleri, Gelişim satırları, kalibrasyon puanı. ~1 derleme.
+2. **Sistem bütünlüğü** (§2): Jev sinyalleri, Gelişim satırları, kalibrasyon puanı. ~1 derleme. **YAPILDI** (Build 18): modül sözleşmesine `coach()` ve `stats()` eklendi; Çember, Yılan, nefes, nefes sayma özetleri Jev sinyaline `modules` alanıyla gider (yalnızca sayı; profil cevapları Jev'e GİTMEZ), Gelişim → Pratikler kartları, Göz takibi ekranında kalibrasyon ayrışma puanı ve kayma. Not: sunucu (`api/coach.js`) aynı `coachCore.js`'i kullanır; yeni `modules` alanının sunucuda geçmesi için Vercel yeniden dağıtımı gerekir (`bash app/scripts/coach-setup.sh`).
 3. **Farkındalık I**: 49 merkez + 50–52+56 Hızlı Bakış (native süre hassasiyeti: 133 ms gösterim
    için `requestAnimationFrame` ölçümü; 08 raporu web'de <100 ms güvenilmez diyor → 133 ms sınır,
    cihazda ölçülecek) + 55 günlük görev. Sonra 53 Değişimi yakala, 54 Çoklu takip. ~3 derleme.
