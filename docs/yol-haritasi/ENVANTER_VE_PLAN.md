@@ -234,3 +234,6 @@ konuşma eşleşmesi ≥ 0,7 olunca cümle biter (`MATCH_THRESHOLD`) → kişi b
 4. **Çemberler**: bağlı daireler (takımyıldız), işaret daireden daireye atlar, göz izler; TrueDepth: bakış hedefe
    gitti mi + tepki süresi; her varışta söz. Kalp atışı (k/d) şimdi yok → HealthKit adımı (§ plan 7). Yola günlük durak.
 5. Sıra: taslaklar (yol, okuma, çemberler) → onay → kod (Build 26). Build 25 (Yılan bakış motoru, §11) ayrı onay bekler.
+- Taslaklar (2026-09-25, onay bekliyor): Bugünün Yolu https://claude.ai/artifact/8Cnzo13vuATjebm5VdCWrH ·
+  Okuma https://claude.ai/artifact/61XmzZ25utUL66WZEZ1Tta · Çemberler https://claude.ai/artifact/XQz4ATKHvaCtCXHH22hhH4.
+  Her taslağın sonunda "Karar gereken noktalar" ve VARSAYIM listesi var; kod bu kararlardan sonra (Build 26).
