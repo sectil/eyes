@@ -40,10 +40,10 @@ export function who5Card(sessions = [], now = new Date()) {
   const daysSince = last ? Math.floor((new Date(now) - new Date(last.date)) / DAY) : null
   const due = !last || daysSince >= WHO5_EVERY_DAYS
   const nextInDays = last ? Math.max(0, WHO5_EVERY_DAYS - daysSince) : 0
-  if (!last) return { n: 0, due, nextInDays, label: 'none' }
+  if (!last) return { n: 0, due, nextInDays, status: 'none' }
   const delta = recs.length > 1 ? last.score - first.score : null
-  const label = delta == null ? 'first' : Math.abs(delta) >= WHO5_MEANINGFUL ? (delta > 0 ? 'up' : 'down') : 'noise'
-  return { n: recs.length, last: last.score, first: first.score, delta, label, low: last.score < WHO5_LOW, due, nextInDays, series: recs.map((r) => ({ date: r.date, score: r.score })) }
+  const status = delta == null ? 'first' : Math.abs(delta) >= WHO5_MEANINGFUL ? (delta > 0 ? 'up' : 'down') : 'noise'
+  return { n: recs.length, last: last.score, first: first.score, delta, status, low: last.score < WHO5_LOW, due, nextInDays, series: recs.map((r) => ({ date: r.date, score: r.score })) }
 }
 
 // ---------- Ortalama ve %95 güven aralığı (t dağılımı) ----------
@@ -108,23 +108,23 @@ function welchDiff(a, b) {
 export function metricTrend(points = [], { better = 'up', meaningful = null } = {}) {
   const pts = points.filter((p) => p && Number.isFinite(p.value) && p.date).sort(byDate)
   const n = pts.length
-  if (!n) return { n: 0, label: 'none', series: [] }
+  if (!n) return { n: 0, status: 'none', series: [] }
   const vals = pts.map((p) => p.value)
   const base = { n, first: vals[0], last: vals.at(-1), series: pts }
-  if (n === 1) return { ...base, label: 'first' }
+  if (n === 1) return { ...base, status: 'first' }
   const sign = better === 'down' ? -1 : 1
   if (meaningful != null) {
     const delta = vals.at(-1) - vals[0]
     const good = sign * delta
-    return { ...base, delta, method: 'threshold', label: Math.abs(delta) >= meaningful ? (good > 0 ? 'better' : 'worse') : 'noise' }
+    return { ...base, delta, method: 'threshold', status: Math.abs(delta) >= meaningful ? (good > 0 ? 'better' : 'worse') : 'noise' }
   }
-  if (n < METRIC_MIN) return { ...base, delta: vals.at(-1) - vals[0], method: 'too-few', label: 'unsure' }
+  if (n < METRIC_MIN) return { ...base, delta: vals.at(-1) - vals[0], method: 'too-few', status: 'unsure' }
   const h = Math.floor(n / 2)
   const w = welchDiff(vals.slice(0, h), vals.slice(n - h))
   const goodLo = sign > 0 ? w.lo : -w.hi
   const goodHi = sign > 0 ? w.hi : -w.lo
-  const label = goodLo > 0 ? 'better' : goodHi < 0 ? 'worse' : 'noise'
-  return { ...base, first: w.first, last: w.last, delta: w.diff, lo: w.lo, hi: w.hi, method: 'halves', label }
+  const status = goodLo > 0 ? 'better' : goodHi < 0 ? 'worse' : 'noise'
+  return { ...base, first: w.first, last: w.last, delta: w.diff, lo: w.lo, hi: w.hi, method: 'halves', status }
 }
 
 export function metricCards({ tests = [], sessions = [], metrics = registry.metrics() } = {}) {

@@ -17,10 +17,10 @@ describe('WHO-5 (Eser 2019: 0–5 × 5, ham ×4, 14 gün, 10 puan anlamlı, ham 
   it('kart: anlamlı artış, düşük eşik, 14 günde bir', () => {
     const s = [makeWho5Record([2, 3, 2, 2, 3], day(0)), makeWho5Record([3, 3, 3, 3, 3], day(14))]
     const c = who5Card(s, day(15))
-    expect(c).toMatchObject({ n: 2, first: 48, last: 60, delta: 12, label: 'up', low: false, due: false, nextInDays: 13 })
-    expect(who5Card([s[0]], day(3))).toMatchObject({ label: 'first', low: true, nextInDays: 11 })
+    expect(c).toMatchObject({ n: 2, first: 48, last: 60, delta: 12, status: 'up', low: false, due: false, nextInDays: 13 })
+    expect(who5Card([s[0]], day(3))).toMatchObject({ status: 'first', low: true, nextInDays: 11 })
     const small = [makeWho5Record([3, 3, 3, 3, 3], day(0)), makeWho5Record([3, 3, 3, 3, 4], day(14))]
-    expect(who5Card(small, day(14)).label).toBe('noise') // +4 < 10
+    expect(who5Card(small, day(14)).status).toBe('noise') // +4 < 10
     expect(who5Card([], day(0))).toMatchObject({ n: 0, due: true })
   })
 })
@@ -60,15 +60,15 @@ describe('anlık etkiler (modül tanımlarından)', () => {
 describe('metrikler', () => {
   const pts = (vals) => vals.map((v, i) => ({ date: day(i), value: v }))
   it('eşik varsa eşikle, yoksa ilk yarı/son yarı; azsa belirsiz', () => {
-    expect(metricTrend(pts([40, 52]), { meaningful: 10 }).label).toBe('better')
-    expect(metricTrend(pts([40, 45]), { meaningful: 10 }).label).toBe('noise')
-    expect(metricTrend(pts([50, 60, 55]), {}).label).toBe('unsure')
-    expect(metricTrend(pts([50, 52, 51, 70, 72, 71]), {}).label).toBe('better')
-    expect(metricTrend(pts([50, 60, 45, 55, 48, 58]), {}).label).toBe('noise')
+    expect(metricTrend(pts([40, 52]), { meaningful: 10 }).status).toBe('better')
+    expect(metricTrend(pts([40, 45]), { meaningful: 10 }).status).toBe('noise')
+    expect(metricTrend(pts([50, 60, 55]), {}).status).toBe('unsure')
+    expect(metricTrend(pts([50, 52, 51, 70, 72, 71]), {}).status).toBe('better')
+    expect(metricTrend(pts([50, 60, 45, 55, 48, 58]), {}).status).toBe('noise')
   })
   it('düşük daha iyi (Hızlı Bakış eşiği ms)', () => {
-    expect(metricTrend(pts([200, 205, 198, 150, 148, 152]), { better: 'down' }).label).toBe('better')
-    expect(metricTrend(pts([150, 148, 152, 200, 205, 198]), { better: 'down' }).label).toBe('worse')
+    expect(metricTrend(pts([200, 205, 198, 150, 148, 152]), { better: 'down' }).status).toBe('better')
+    expect(metricTrend(pts([150, 148, 152, 200, 205, 198]), { better: 'down' }).status).toBe('worse')
   })
   it('modül metrikleri kayıtlardan kendiliğinden kurulur', () => {
     const sessions = [
@@ -76,8 +76,8 @@ describe('metrikler', () => {
       { type: 'span', date: day(1), span: 5 },
     ]
     const cards = metricCards({ sessions })
-    expect(cards.find((c) => c.key === 'street-noticed')).toMatchObject({ domain: 'awareness', n: 6, label: 'better' })
-    expect(cards.find((c) => c.key === 'tek-bakis-span')).toMatchObject({ domain: 'focus', n: 1, label: 'first' })
+    expect(cards.find((c) => c.key === 'street-noticed')).toMatchObject({ domain: 'awareness', n: 6, status: 'better', label: 'Fark etme isabeti' })
+    expect(cards.find((c) => c.key === 'tek-bakis-span')).toMatchObject({ domain: 'focus', n: 1, status: 'first' })
     expect(cards.find((c) => c.key === 'quick-look-threshold')).toBeUndefined() // kayıt yoksa kart yok
   })
 })

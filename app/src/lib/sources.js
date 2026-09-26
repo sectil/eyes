@@ -5,6 +5,9 @@
 
 export const DESIGNS = {
   meta: 'Meta-analiz',
+  review: 'Sistematik derleme',
+  cohort: 'Prospektif kohort çalışması',
+  validation: 'Geçerlik ve güvenirlik çalışması',
   rct: 'Randomize kontrollü çalışma',
   crossover: 'Randomize çapraz çalışma',
   experiment: 'Deney',
@@ -13,7 +16,7 @@ export const DESIGNS = {
   case: 'Olgu raporu',
 }
 // Kanıtın gücü için kaba sıra (yüksek = daha güçlü). Kullanıcıya "ne kadar güvenilir?" diye gösterilir.
-export const DESIGN_RANK = { meta: 4, rct: 3, crossover: 3, experiment: 2, prepost: 1, observational: 1, case: 0 }
+export const DESIGN_RANK = { meta: 4, review: 3, rct: 3, crossover: 3, cohort: 2, experiment: 2, validation: 1, prepost: 1, observational: 1, case: 0 }
 
 export const SOURCES = {
   ulrich1984: {
@@ -85,6 +88,42 @@ export const SOURCES = {
     titleTr: 'Doğa sesi ve çevresel gürültü sırasında stresten toparlanma.',
     journal: 'Int J Environ Res Public Health', cite: '7(3):1036-46', doi: '10.3390/ijerph7031036', pmid: '20617017',
     design: 'experiment', n: '40 kişi',
+  },
+  // Gelişim 2.0 (2026-09-26 PubMed'den doğrulandı)
+  topp2015: {
+    authors: ['Topp CW', 'Østergaard SD', 'Søndergaard S', 'Bech P'], year: 2015,
+    title: 'The WHO-5 Well-Being Index: a systematic review of the literature.',
+    titleTr: 'WHO-5 İyi Oluş İndeksi: literatürün sistematik derlemesi.',
+    journal: 'Psychother Psychosom', cite: '84(3):167-76', doi: '10.1159/000376585', pmid: '25831962',
+    design: 'review', n: '213 makale',
+  },
+  eser2019: {
+    authors: ['Eser E', 'Çevik C', 'Baydur H', 'Güneş S'], year: 2019,
+    title: 'Reliability and validity of the Turkish version of the WHO-5, in adults and older adults for its use in primary care settings.',
+    titleTr: 'WHO-5 Türkçe sürümünün yetişkinlerde ve yaşlılarda birinci basamakta kullanım için güvenirlik ve geçerliği.',
+    journal: 'Prim Health Care Res Dev', cite: '20:e100', doi: '10.1017/S1463423619000343', pmid: '32800004',
+    design: 'validation', n: '1752 kişi',
+  },
+  faes2021: {
+    authors: ['Faes L', 'Islam M', 'Bachmann LM', 'Lienhard KR'], year: 2021,
+    title: 'False alarms and the positive predictive value of smartphone-based hyperacuity home monitoring for the progression of macular disease: a prospective cohort study.',
+    titleTr: 'Akıllı telefonla evde görme takibinde yanlış alarmlar ve sarı nokta hastalığı ilerlemesini öngörme değeri: prospektif kohort.',
+    journal: 'Eye (Lond)', cite: '35(11):3035-3040', doi: '10.1038/s41433-020-01356-2', pmid: '33414531',
+    design: 'cohort', n: '56 hasta, 73 göz, 2258 test',
+  },
+  paluch2022: {
+    authors: ['Paluch AE', 'Bajpai S', 'Bassett DR', 'Carnethon MR'], year: 2022,
+    title: 'Daily steps and all-cause mortality: a meta-analysis of 15 international cohorts.',
+    titleTr: 'Günlük adım sayısı ve tüm nedenlere bağlı ölüm: 15 uluslararası kohortun meta-analizi.',
+    journal: 'Lancet Public Health', cite: '7(3):e219-e228', doi: '10.1016/S2468-2667(21)00302-9', pmid: '35247352',
+    design: 'meta', n: '15 kohort, 47 471 yetişkin',
+  },
+  zhang2025: {
+    authors: ['Zhang H', 'Wang S', 'Huang Y', 'Xiu L'], year: 2025,
+    title: 'Inverted-U association between daily steps and WHO-5 in university students: non-linear modeling and robustness checks.',
+    titleTr: 'Üniversite öğrencilerinde günlük adım ile WHO-5 arasında ters U ilişkisi.',
+    journal: 'Front Behav Neurosci', cite: '19:1693386', doi: '10.3389/fnbeh.2025.1693386', pmid: '41211589',
+    design: 'observational', n: '820 öğrenci',
   },
   gabriel2025: {
     authors: ['Gabriel A', 'Dimitry RS', 'Milad M', 'Kelada M'], year: 2025,

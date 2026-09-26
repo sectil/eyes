@@ -18,6 +18,7 @@ import {
   TriangleAlert,
   Trophy, Wind } from 'lucide-react'
 import ProgressChart from '../components/ProgressChart.jsx'
+import ProgressOverview, { DomainDetail } from '../components/ProgressOverview.jsx'
 import { PageHeader, IrisMark } from '../components/ui.jsx'
 import { analyzeTrend, trendMessage } from '../lib/trend.js'
 import { snellen20 } from '../lib/optotype.js'
@@ -506,6 +507,7 @@ export default function Progress({ tests = [], sessions = [], profile = null, we
 
   const [ym, setYm] = useState({ y: now.getFullYear(), m: now.getMonth() })
   const [sel, setSel] = useState(todayKey)
+  const [domain, setDomain] = useState(null) // Gelişim 2.0: açık alan ayrıntısı
 
   function showMonth(y, m) {
     setYm({ y, m })
@@ -528,9 +530,14 @@ export default function Progress({ tests = [], sessions = [], profile = null, we
     setSel(k)
   }
 
+  if (domain) {
+    return <DomainDetail domain={domain} tests={tests} sessions={sessions} onBack={() => { setDomain(null); window.scrollTo(0, 0) }} />
+  }
+
   return (
     <>
-      <PageHeader title="Gelişim" subtitle="Egzersizlerin, oyunların ve ölçümlerin gün gün burada." />
+      <PageHeader title="Gelişim" subtitle="Gözün, iyi oluşun, kendine yaklaşımın ve dikkatin; değişim ölçüm hatasından büyük mü, burada." />
+      <ProgressOverview tests={tests} sessions={sessions} onOpen={(k) => { setDomain(k); window.scrollTo(0, 0) }} />
       <SummaryCard s={s} days={countedDays} now={now} weeklyTarget={weeklyTarget} />
       <ActivityCalendar
         activities={activities}
