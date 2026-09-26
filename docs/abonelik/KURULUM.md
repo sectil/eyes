@@ -39,14 +39,14 @@ Product ID'ler sonradan değiştirilemez. Grup sırası: Yıllık → Aylık →
 
 ## RevenueCat
 - Proje adı panelde "nefeno" (yazım hatası olabilir → Nefona).
-- Yapılacak: Apps → New → App Store (Bundle ID `com.sectil.eyelume`), .p8 + Key ID + Issuer ID yükle
-  → `appl_…` anahtarı oluşur → koda varsayılan olarak eklenecek (herkese açık anahtar).
+- App Store uygulaması: **Nefona** (Bundle ID `com.sectil.eyelume`), .p8 + Key ID + Issuer ID yüklendi (2026-09-26).
+  Public API Key `appl_…` → `app/src/lib/subscription.js` içinde `RC_IOS_PUBLIC_KEY` (herkese açık; `VITE_RC_IOS_KEY` ile değiştirilebilir).
 - Products: üç ürün içe aktarılır. Entitlement: **`premium`** (üç ürün bağlı).
   Offering: **`default`**, paketler Annual/Monthly/Weekly → **Make current**.
 - Test Store (`test_…`) anahtarı yalnız sahte mağaza içindir; gerçek satın alma yapmaz.
 
 ## Sıradaki adımlar
-1. [ ] RevenueCat'e App Store uygulaması + .p8 → `appl_` anahtarı → Claude koda ekler
+1. [x] RevenueCat'e App Store uygulaması + .p8 → `appl_` anahtarı koda eklendi
 2. [ ] App Store Connect'te üç abonelik + 7 gün deneme
 3. [ ] RevenueCat ürünler, `premium`, `default` (current)
 4. [ ] Telefonda Sandbox hesabıyla deneme satın alma (`bash app/scripts/device-run.sh`)

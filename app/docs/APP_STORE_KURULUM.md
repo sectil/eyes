@@ -82,7 +82,7 @@ npx cap open ios                            # Xcode açılır
 
 `.env.production`:
 ```
-VITE_RC_IOS_KEY=appl_XXXXXXXXXXXXXXXX
+# VITE_RC_IOS_KEY=appl_…   (isteğe bağlı: anahtar kodda gömülü, lib/subscription.js RC_IOS_PUBLIC_KEY)
 VITE_PRIVACY_URL=https://…/gizlilik
 ```
 

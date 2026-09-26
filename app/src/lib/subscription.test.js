@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { plansFromOffering, hasPremium, testUnlock } from './subscription.js'
+import { plansFromOffering, hasPremium, testUnlock, rcApiKey, RC_IOS_PUBLIC_KEY } from './subscription.js'
 
 const product = (price, priceString, intro, pricePerMonthString = null) => ({
   price,
@@ -58,5 +58,21 @@ describe('testUnlock', () => {
     expect(testUnlock({})).toBe(false)
     expect(testUnlock({ VITE_TEST_UNLOCK: '0' })).toBe(false)
     expect(testUnlock({ VITE_TEST_UNLOCK: 'true' })).toBe(false)
+  })
+})
+
+describe('rcApiKey', () => {
+  it('varsayılan: gömülü herkese açık appl_ anahtarı', () => {
+    expect(RC_IOS_PUBLIC_KEY).toMatch(/^appl_/)
+    expect(rcApiKey({})).toBe(RC_IOS_PUBLIC_KEY)
+    expect(rcApiKey({ VITE_RC_IOS_KEY: '  ' })).toBe(RC_IOS_PUBLIC_KEY)
+  })
+  it('derleme değişkeni verilirse o kullanılır (appl_ / test_)', () => {
+    expect(rcApiKey({ VITE_RC_IOS_KEY: 'appl_abc123' })).toBe('appl_abc123')
+    expect(rcApiKey({ VITE_RC_IOS_KEY: 'test_abc123' })).toBe('test_abc123')
+  })
+  it('gizli sk_ anahtarı ve bozuk anahtar reddedilir', () => {
+    expect(() => rcApiKey({ VITE_RC_IOS_KEY: 'sk_abc123' })).toThrow(/sk_/)
+    expect(() => rcApiKey({ VITE_RC_IOS_KEY: 'goog_abc' })).toThrow(/geçersiz/)
   })
 })

@@ -4,11 +4,24 @@
 // - Ürünler App Store Connect'te tanımlanır: aylık + yıllık, 7 gün ücretsiz deneme
 //   (giriş teklifi). RevenueCat'te "premium" entitlement'ı ve "default" offering'i
 //   bu iki ürüne bağlanır. Adım adım: docs/APP_STORE_KURULUM.md
-// - API anahtarı: VITE_RC_IOS_KEY (RevenueCat'in herkese açık iOS anahtarı; gizli değil).
+// - API anahtarı: RevenueCat'in herkese açık iOS anahtarı (appl_…; gizli değil, uygulamaya gömülmek için).
+//   VITE_RC_IOS_KEY ile değiştirilebilir. Gizli anahtar (sk_…) ASLA buraya konmaz; rcApiKey onu reddeder.
 
 import { Capacitor } from '@capacitor/core'
 
 export const ENTITLEMENT = 'premium'
+
+// RevenueCat → Apps → Nefona (App Store, com.sectil.eyelume) → Public API Key
+export const RC_IOS_PUBLIC_KEY = 'appl_TSQtOoLWKaoxBCrlEeEzqpqAWQX'
+
+// Kullanılacak anahtar: derlemede VITE_RC_IOS_KEY verildiyse o, yoksa gömülü herkese açık anahtar.
+// Yalnız appl_ (App Store) ya da test_ (RevenueCat Test Store) kabul; sk_ gizli anahtar hata verir.
+export function rcApiKey(env = import.meta.env) {
+  const k = (env?.VITE_RC_IOS_KEY ?? '').trim() || RC_IOS_PUBLIC_KEY
+  if (/^sk_/i.test(k)) throw new Error('Gizli RevenueCat anahtarı (sk_) uygulamada kullanılamaz')
+  if (!/^(appl|test)_[A-Za-z0-9]+$/.test(k)) throw new Error('RevenueCat iOS anahtarı geçersiz')
+  return k
+}
 
 export const isNative = () => {
   try {
@@ -23,8 +36,7 @@ async function purchases() {
   if (!purchasesPromise) {
     purchasesPromise = (async () => {
       const { Purchases } = await import('@revenuecat/purchases-capacitor')
-      const apiKey = import.meta.env.VITE_RC_IOS_KEY
-      if (!apiKey) throw new Error('VITE_RC_IOS_KEY tanımlı değil')
+      const apiKey = rcApiKey()
       await Purchases.configure({ apiKey })
       return Purchases
     })()
