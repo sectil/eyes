@@ -57,3 +57,17 @@ describe('initialFor / hasIdentity', () => {
     expect(hasIdentity({ name: 'Ali' })).toBe(true)
   })
 })
+
+// Bug 12: Türkiye (UTC+3) cihazında her doğum tarihi "Bu tarih olamaz" oluyordu. Saat dilimi süreç
+// başında sabitlendiği için ayrı süreçte İstanbul ve New York saatiyle denenir.
+import { describe as describeTz, it as itTz, expect as expectTz } from 'vitest'
+import { execFileSync } from 'node:child_process'
+describeTz('doğum tarihi saat diliminden bağımsız', () => {
+  for (const tz of ['Europe/Istanbul', 'America/New_York', 'Pacific/Kiritimati']) {
+    itTz(tz, () => {
+      const code = "import('./src/lib/identity.js').then(m=>console.log(JSON.stringify(['1976-07-26','2000-01-01','2024-02-29','2023-02-29','1976-13-01'].map(s=>m.validBirthDate(s, new Date(2026,8,26))))))"
+      const out = execFileSync(process.execPath, ['-e', code], { env: { ...process.env, TZ: tz }, cwd: new URL('../..', import.meta.url).pathname }).toString().trim()
+      expectTz(JSON.parse(out)).toEqual([true, true, true, false, false])
+    })
+  }
+})

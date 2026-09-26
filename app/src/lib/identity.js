@@ -27,8 +27,11 @@ export function normalizeIdentity(raw) {
 // 'YYYY-MM-DD'; gelecekte olmayan, 120 yıldan eski olmayan gerçek bir tarih
 export function validBirthDate(s, now = new Date()) {
   if (typeof s !== 'string' || !DATE_RE.test(s)) return false
-  const d = new Date(`${s}T00:00:00`)
-  if (Number.isNaN(d.getTime()) || d.toISOString().slice(0, 10) !== s) return false
+  // Parçalarla ve yerel tarihle karşılaştır: toISOString (UTC) UTC+ saat diliminde (Türkiye) günü bir geri
+  // kaydırıp her tarihi reddediyordu (Bug 12). 31 Şubat gibi taşan tarihler burada yakalanır.
+  const [y, m, day] = s.split('-').map(Number)
+  const d = new Date(y, m - 1, day)
+  if (d.getFullYear() !== y || d.getMonth() !== m - 1 || d.getDate() !== day) return false
   const age = ageFromBirthDate(s, now)
   return age >= 0 && age <= 120
 }
