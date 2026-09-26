@@ -65,6 +65,27 @@ export const SOURCES = {
     journal: 'Sci Total Environ', cite: '974:179188', doi: '10.1016/j.scitotenv.2025.179188', pmid: '40154089',
     design: 'meta', n: '19 çalışma, 556 861 kişi (gözlemsel çalışmalar)',
   },
+  buxton2021: {
+    authors: ['Buxton RT', 'Pearson AL', 'Allou C', 'Fristrup K'], year: 2021,
+    title: 'A synthesis of health benefits of natural sounds and their distribution in national parks.',
+    titleTr: 'Doğa seslerinin sağlığa yararlarının bir sentezi ve milli parklardaki dağılımları.',
+    journal: 'Proc Natl Acad Sci U S A', cite: '118(14)', doi: '10.1073/pnas.2013097118', pmid: '33753555',
+    design: 'meta', n: '36 yayın; 18’i meta-analizde',
+  },
+  fan2024: {
+    authors: ['Fan L', 'Baharum MR'], year: 2024,
+    title: 'The effect of exposure to natural sounds on stress reduction: a systematic review and meta-analysis.',
+    titleTr: 'Doğa seslerine maruz kalmanın stres azaltmaya etkisi: sistematik derleme ve meta-analiz.',
+    journal: 'Stress', cite: '27(1):2402519', doi: '10.1080/10253890.2024.2402519', pmid: '39285764',
+    design: 'meta', n: 'özette yazmıyor',
+  },
+  alvarsson2010: {
+    authors: ['Alvarsson JJ', 'Wiens S', 'Nilsson ME'], year: 2010,
+    title: 'Stress recovery during exposure to nature sound and environmental noise.',
+    titleTr: 'Doğa sesi ve çevresel gürültü sırasında stresten toparlanma.',
+    journal: 'Int J Environ Res Public Health', cite: '7(3):1036-46', doi: '10.3390/ijerph7031036', pmid: '20617017',
+    design: 'experiment', n: '40 kişi',
+  },
   gabriel2025: {
     authors: ['Gabriel A', 'Dimitry RS', 'Milad M', 'Kelada M'], year: 2025,
     title: 'A Case of Bilateral Macular Phototoxicity and the Role of Multimodal Imaging.',

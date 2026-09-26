@@ -66,3 +66,13 @@ export function mediaPlay(src, { loop = false } = {}) {
     return Promise.resolve(false)
   }
 }
+
+// WebKit Audio Session API: sayfanın sesini "playback" türüne alır (sessiz tuşunda da çalar). Desteklenmezse etkisiz.
+export function setAudioSessionType(type) {
+  try {
+    const as = globalThis.navigator?.audioSession
+    if (as && 'type' in as) as.type = type
+  } catch {
+    // desteklenmiyor
+  }
+}

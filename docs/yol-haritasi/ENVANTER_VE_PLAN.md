@@ -337,3 +337,10 @@ konuşma eşleşmesi ≥ 0,7 olunca cümle biter (`MATCH_THRESHOLD`) → kişi b
 - Kaynakça altyapısı (plan 2. kısım başlangıcı): lib/sources.js (yazarlar, yıl, özgün başlık + Türkçe çeviri, dergi,
   cilt/sayfa, DOI, PMID, çalışma türü ve büyüklüğü), components/Sources.jsx (FactCard + açılır "Kaynaklar (n)").
   8 kaynak PubMed kayıtlarından doğrulandı. Diğer modüller sonraki adımda buna taşınacak.
+- (Ek, 2026-09-26) Yeniden tasarım (Artifact "Gökyüzü Molası 2", onaylı: https://claude.ai/artifact/DqdnfSpeztv85kJCZPcP2y):
+  manzara seçimi (deniz / şehir / dağ-orman / yalnız gökyüzü) ve betimleyici sorular ("denizle gökyüzünün birleştiği
+  çizgi"); tuval sahnesi lib/skyScene.js (katmanlı bulutlar, kuşlar, deniz/şehir/tepeler, güneş/ay, yıldızlar; soruyu
+  gösteren vurgu: ufuk boyunca ilerleyen ışık, uzak nokta halesi, bulut yön oku); isteğe bağlı arka plan sesi
+  lib/skyAmbience.js (uygulamada üretilen dalga/rüzgâr/yaprak; sessiz modda da çalsın diye audioUnmute); sesli okuma
+  varsayılan kapalı, açılırsa en iyi Türkçe ses. Yeni kaynaklar: Buxton 2021 (PNAS), Fan & Baharum 2024 (Stress),
+  Alvarsson 2010. Açık karar: gerçek doğa kayıtları (lisans serbest) eklensin mi.
