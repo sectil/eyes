@@ -493,7 +493,7 @@ function ReadingCard({ tests, profile, onStart }) {
 // onStart (isteğe bağlı): boş durumlardaki "Hafif seti başlat" / "Günlük testi başlat" düğmeleri
 // için App'in go fonksiyonu. weeklyTarget (isteğe bağlı): settings.reminder?.weeklyTarget;
 // verilmezse calendar.js varsayılanı (Ana sayfa ve Takvim ile aynı).
-export default function Progress({ tests = [], sessions = [], profile = null, weeklyTarget, reportDay = null, onStart }) {
+export default function Progress({ tests = [], sessions = [], profile = null, identity = null, weeklyTarget, reportDay = null, onStart }) {
   const now = new Date()
   const todayKey = dayKey(now)
   // Tüm kayıtlar: gün listesi (oyunlar da görünür), ay gezinme sınırı, yılan rekoru.
@@ -531,13 +531,13 @@ export default function Progress({ tests = [], sessions = [], profile = null, we
   }
 
   if (domain) {
-    return <DomainDetail domain={domain} tests={tests} sessions={sessions} onBack={() => { setDomain(null); window.scrollTo(0, 0) }} />
+    return <DomainDetail domain={domain} tests={tests} sessions={sessions} identity={identity} onBack={() => { setDomain(null); window.scrollTo(0, 0) }} />
   }
 
   return (
     <>
       <PageHeader title="Gelişim" subtitle="Gözün, iyi oluşun, kendine yaklaşımın ve dikkatin; değişim ölçüm hatasından büyük mü, burada." />
-      <ProgressOverview tests={tests} sessions={sessions} reportDay={reportDay} onReport={() => onStart('first-report')} onOpen={(k) => { setDomain(k); window.scrollTo(0, 0) }} />
+      <ProgressOverview tests={tests} sessions={sessions} identity={identity} reportDay={reportDay} onReport={() => onStart('first-report')} onOpen={(k) => { setDomain(k); window.scrollTo(0, 0) }} />
       <SummaryCard s={s} days={countedDays} now={now} weeklyTarget={weeklyTarget} />
       <ActivityCalendar
         activities={activities}

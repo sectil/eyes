@@ -48,3 +48,9 @@
 .p2-report { display: flex; justify-content: space-between; align-items: center; gap: 10px; text-align: left; padding: 13px 14px; border-radius: var(--radius-sm); border: 1px solid var(--accent); background: var(--accent-soft); color: var(--ink); font: inherit; cursor: pointer; }
 .p2-report span { display: grid; gap: 2px; }
 .p2-report small { color: var(--ink-2); font-size: 0.78rem; }
+.p2-export-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.p2-export-row .btn { flex: 1 1 auto; gap: 6px; }
+.p2-export-msg { margin: 0; font-size: 0.82rem; font-weight: 650; }
+.p2-export-msg.ok { color: var(--ok); }
+.p2-export-msg.warn { color: var(--warn); }
+.p2-export .spin { animation: spin 0.9s linear infinite; }

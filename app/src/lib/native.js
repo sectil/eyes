@@ -253,3 +253,31 @@ export function initFeedback() {
   }
   return feedbackStop
 }
+
+// Export: ios/App/App/ExportPlugin.swift — PDF (iOS yazdırma motoru, A4) + paylaşım sayfası.
+// Web'de (önizleme): CSV indirilir; rapor yeni sekmede açılıp yazdırma penceresi gelir ("PDF olarak kaydet").
+// Döner: { completed, activity } — completed=false: kullanıcı paylaşım sayfasını kapattı.
+export const Export = registerPlugin('Export')
+
+export async function shareTextFile(filename, text, type = 'text/csv') {
+  if (isIOSApp()) return Export.shareText({ filename, text })
+  const url = URL.createObjectURL(new Blob([text], { type: `${type};charset=utf-8` }))
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  document.body.appendChild(a)
+  a.click()
+  a.remove()
+  setTimeout(() => URL.revokeObjectURL(url), 5000)
+  return { completed: true, activity: 'download' }
+}
+
+export async function sharePdf(filename, html, footer) {
+  if (isIOSApp()) return Export.sharePdf({ filename, html, footer })
+  const w = window.open('', '_blank')
+  if (!w) throw new Error('Yeni sekme açılamadı')
+  w.document.write(html)
+  w.document.close()
+  setTimeout(() => w.print(), 400)
+  return { completed: true, activity: 'print' }
+}

@@ -4,6 +4,7 @@ import { domainSummary, DOMAIN_LABEL } from '../lib/progress.js'
 import { decimalTr } from '../lib/stats.js'
 import { EYE_LABEL } from '../lib/vaSeries.js'
 import { SourceList } from './Sources.jsx'
+import ExportCard from './ExportCard.jsx'
 import '../styles/progress2.css'
 
 // Gelişim 2.0 (Artifact "Gelişim Taslağı", onaylı): üstte göz uyarısı, altında alan kutucukları.
@@ -129,7 +130,7 @@ function tileOf(d) {
   return null
 }
 
-export default function ProgressOverview({ tests, sessions, onOpen, reportDay = null, onReport }) {
+export default function ProgressOverview({ tests, sessions, identity = null, onOpen, reportDay = null, onReport }) {
   const now = new Date()
   const dom = useMemo(() => domainSummary({ tests, sessions, now }), [tests, sessions]) // eslint-disable-line react-hooks/exhaustive-deps
   const eye = dom.eye.eye
@@ -169,12 +170,13 @@ export default function ProgressOverview({ tests, sessions, onOpen, reportDay = 
           {empty.some((x) => x.k === 'body') ? ' Beden verileri için Apple Sağlık bağlantısı yakında.' : ''}
         </p>
       )}
+      <ExportCard tests={tests} sessions={sessions} identity={identity} />
     </section>
   )
 }
 
 const LOGMAR = (v) => decimalTr(v, 2)
-export function DomainDetail({ domain, tests, sessions, onBack }) {
+export function DomainDetail({ domain, tests, sessions, identity = null, onBack }) {
   const now = new Date()
   const d = useMemo(() => domainSummary({ tests, sessions, now })[domain], [tests, sessions, domain]) // eslint-disable-line react-hooks/exhaustive-deps
   const srcs = SOURCES_OF[domain] ?? []
@@ -263,6 +265,8 @@ export function DomainDetail({ domain, tests, sessions, onBack }) {
       {!d.metrics.length && !d.effects.length && domain !== 'eye' && domain !== 'wellbeing' && domain !== 'body' && (
         <p className="p2-empty">Bu alanda henüz ölçüm yok.</p>
       )}
+
+      {domain === 'eye' && <ExportCard tests={tests} sessions={sessions} identity={identity} />}
 
       <section className="card p2-card p2-method">
         <span className="eyebrow">Yöntem</span>

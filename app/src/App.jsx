@@ -567,7 +567,7 @@ export default function App() {
   // --- Sekmeli ekranlar ---
   const tab = TAB_SCREENS.includes(screen) ? screen : 'home'
   let content
-  if (tab === 'progress') content = <Progress tests={tests} sessions={sessions} profile={settings.profile} weeklyTarget={settings.reminder?.weeklyTarget} reportDay={rDay} onStart={go} />
+  if (tab === 'progress') content = <Progress tests={tests} sessions={sessions} profile={settings.profile} identity={settings.identity} weeklyTarget={settings.reminder?.weeklyTarget} reportDay={rDay} onStart={go} />
   else if (tab === 'calendar') content = <Calendar records={[...tests, ...exercise]} schedule={settings.reminder} onEditSchedule={() => go('schedule')} />
   else if (tab === 'info') {
     content = (

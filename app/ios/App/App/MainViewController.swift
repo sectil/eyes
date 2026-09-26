@@ -8,5 +8,6 @@ class MainViewController: CAPBridgeViewController {
         bridge?.registerPluginInstance(FaceDistancePlugin())
         bridge?.registerPluginInstance(SpeechPlugin())
         bridge?.registerPluginInstance(FeedbackPlugin())
+        bridge?.registerPluginInstance(ExportPlugin())
     }
 }

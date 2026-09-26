@@ -51,7 +51,7 @@ export default function FirstReport({ tests = [], sessions = [], start, onClose,
           <span className="eyebrow">Ölçümler</span>
           {r.metrics.map((m) => (
             <p key={m.key} className="p2-msg">
-              <b>{m.label}</b> ({DOMAIN_LABEL[m.domain]}): {num(m.first, 0)} → {num(m.last, 0)} {m.unit} · {m.n} ölçüm <span className={`p2-pill ${metricStatus(m).tone}`}>{metricStatus(m).text}</span>
+              <b>{m.label}</b> ({DOMAIN_LABEL[m.domain]}): {m.method === 'halves' ? 'ilk yarı ort. ' : ''}{num(m.first, m.unit === '/5' ? 1 : 0)} → {m.method === 'halves' ? 'son yarı ort. ' : ''}{num(m.last, m.unit === '/5' ? 1 : 0)} {m.unit} · {m.n} ölçüm <span className={`p2-pill ${metricStatus(m).tone}`}>{metricStatus(m).text}</span>
             </p>
           ))}
           <p className="muted small">"Henüz belirsiz": değerlendirme için en az 6 ölçüm gerekir.</p>
