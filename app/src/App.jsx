@@ -5,7 +5,9 @@ import RestLock from './components/RestLock.jsx'
 import EyeBudgetPill from './components/EyeBudgetPill.jsx'
 import { recordTime, eyeStatus, beginRest, resetBudget, flushBudget, EXHAUSTED_EVENT } from './lib/eyeBudgetStore.js'
 import { LIMITS as EYE_LIMITS } from './lib/eyeBudget.js'
-import { onRestNotifyTap } from './lib/restNotify.js'
+import { onRestNotifyTap, onTrialNotifyTap } from './lib/restNotify.js'
+import FirstReport from './screens/FirstReport.jsx'
+import { reportDay, REPORT_DAY } from './lib/progress.js'
 import Home from './screens/Home.jsx'
 import Onboarding from './screens/Onboarding.jsx'
 import ProfileQuestions from './screens/ProfileQuestions.jsx'
@@ -211,12 +213,15 @@ export default function App() {
   // "Mola bitti" bildirimine dokununca Ana sayfa (uygulama kapalıyken açılış dahil)
   useEffect(() => {
     let off = () => {}
+    let offTrial = () => {}
     onRestNotifyTap(() => {
       setLockFor(null)
       setScreen('home')
       setBudget(eyeStatus())
     }).then((f) => (off = f))
-    return () => off()
+    // Deneme hatırlatması (5. gün) → İlk rapor
+    onTrialNotifyTap(() => setScreen('first-report')).then((f) => (offTrial = f))
+    return () => { off(); offTrial() }
   }, [])
 
   // iPhone ses modu (sessiz tuşunda da ses) + ses tercihi değişikliklerini izle. Web'de etkisiz.
@@ -396,6 +401,13 @@ export default function App() {
   if (unseen.length && screen !== 'evidence') {
     return <WhatsNew releases={unseen} onClose={() => { store.setSetting('releaseSeen', latestRelease().id); refresh() }} />
   }
+  // 5. gün "İlk rapor" (Gelişim 2.0): deneme/kurulum başlangıcından 5–14. gün arası bir kez kendiliğinden; her zaman açılabilir
+  const reportStart = settings.trialOffer?.date ?? settings.identitySetup?.date ?? null
+  const rDay = reportDay(reportStart)
+  const closeReport = (to) => { store.setSetting('firstReportSeen', { date: new Date().toISOString() }); refresh(); go(to) }
+  if (screen === 'first-report' || (!settings.firstReportSeen && rDay >= REPORT_DAY && rDay <= 14 && screen === 'home')) {
+    return <FirstReport tests={tests} sessions={sessions} start={reportStart} onClose={() => closeReport('home')} onProgress={() => closeReport('progress')} />
+  }
   if (screen === 'profile') {
     // Profilim (screens/ProfileHome.jsx): ad, doğum tarihi, avatar cihazda kalır; doğum tarihi anketin yaş aralığını doldurur.
     const saveIdentity = (id, correction) => {
@@ -555,7 +567,7 @@ export default function App() {
   // --- Sekmeli ekranlar ---
   const tab = TAB_SCREENS.includes(screen) ? screen : 'home'
   let content
-  if (tab === 'progress') content = <Progress tests={tests} sessions={sessions} profile={settings.profile} weeklyTarget={settings.reminder?.weeklyTarget} onStart={go} />
+  if (tab === 'progress') content = <Progress tests={tests} sessions={sessions} profile={settings.profile} weeklyTarget={settings.reminder?.weeklyTarget} reportDay={rDay} onStart={go} />
   else if (tab === 'calendar') content = <Calendar records={[...tests, ...exercise]} schedule={settings.reminder} onEditSchedule={() => go('schedule')} />
   else if (tab === 'info') {
     content = (

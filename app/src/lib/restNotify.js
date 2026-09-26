@@ -116,6 +116,21 @@ export async function onRestNotifyTap(cb) {
   }
 }
 
+// Deneme hatırlatmasına dokununca: 5. gün "İlk rapor" ekranı (Gelişim 2.0)
+export async function onTrialNotifyTap(cb) {
+  const pl = await plugin()
+  if (!pl) return () => {}
+  const { LN } = pl
+  try {
+    const h = await LN.addListener('localNotificationActionPerformed', (a) => {
+      if (a?.actionId === 'tap' && a?.notification?.id === TRIAL_NOTIFY_ID) cb()
+    })
+    return () => h.remove()
+  } catch {
+    return () => {}
+  }
+}
+
 // Deneme hatırlatması (Build 23b): 7 günlük denemenin 5. günü. İzin yoksa istenir; reddedilirse sessizce vazgeçilir.
 export const TRIAL_NOTIFY_ID = 7302
 export const TRIAL_REMIND_DAYS = 5
@@ -132,8 +147,8 @@ export async function scheduleTrialReminder(startMs = Date.now()) {
       notifications: [
         {
           id: TRIAL_NOTIFY_ID,
-          title: 'Deneme 2 gün sonra bitiyor',
-          body: 'İptal etmezsen seçtiğin plan başlar. Yönetmek için: Ayarlar → Apple Kimliği → Abonelikler.',
+          title: 'İlk 5 günün raporu hazır',
+          body: 'Neler değişti, bak. Deneme 2 gün sonra bitiyor; iptal etmezsen seçtiğin plan başlar (Ayarlar → Apple Kimliği → Abonelikler).',
           schedule: { at: new Date(startMs + TRIAL_REMIND_DAYS * 86400000) },
           interruptionLevel: 'active',
           foreground: false,

@@ -15,6 +15,7 @@ export const RELEASES = [
       { kind: 'new', text: 'Gelişim yenilendi: göz, kendine yaklaşım, farkındalık, sakinlik, dikkat kutucukları. Her birinde değişimin anlamlı mı yoksa doğal oynama mı olduğu, yöntem ve makale kaynağı.' },
       { kind: 'new', text: 'Göz kötüleşirse Gelişim\'in en üstünde açık uyarı: ne zaman tekrar ölçmeli, ne zaman göz doktoruna gitmeli (art arda 3 test kuralı, Faes 2021).' },
       { kind: 'new', text: 'Her uygulamadan sonra sorulan "şimdi nasıl hissediyorsun" puanları (Nefes, Gökyüzü, Dalga, Yön) artık Gelişim\'de: önce → sonra, ortalama ve güven aralığıyla.' },
+      { kind: 'new', text: '5. gün "İlk rapor": düzenin, uygulamalardan sonraki değişim ve ölçümlerin tek sayfada. Deneme hatırlatmasına dokununca da açılır; sonra Gelişim\'de durur.' },
       { kind: 'fix', text: 'Göz kalibrasyonu: baş duruşu hesaba katılıyor; "Ayırt edemedim" ekranı çok daha seyrek. Tekrar turu ortayı da yeniliyor.' },
       { kind: 'fix', text: 'Göz yönleri: kalibrasyonsuz kullanımda sağ–sol terslenmişti (ör. "Sola bak", saat yönünde daire). Düzeldi.' },
       { kind: 'change', text: 'Ödeme ekranında eski ad "Eyelume" yerine "EyeTrail".' },

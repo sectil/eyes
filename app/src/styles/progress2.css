@@ -45,3 +45,6 @@
 .p2-dumb .pre { fill: var(--ink-3); stroke: var(--surface); stroke-width: 2; }
 .p2-spark .tick, .p2-dumb .tick { fill: var(--ink-3); font-size: 10px; font-family: var(--font-body); }
 .p2-spark .endlbl, .p2-dumb .endlbl { fill: var(--ink); font-size: 11px; font-weight: 700; font-family: var(--font-body); }
+.p2-report { display: flex; justify-content: space-between; align-items: center; gap: 10px; text-align: left; padding: 13px 14px; border-radius: var(--radius-sm); border: 1px solid var(--accent); background: var(--accent-soft); color: var(--ink); font: inherit; cursor: pointer; }
+.p2-report span { display: grid; gap: 2px; }
+.p2-report small { color: var(--ink-2); font-size: 0.78rem; }

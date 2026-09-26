@@ -129,7 +129,7 @@ function tileOf(d) {
   return null
 }
 
-export default function ProgressOverview({ tests, sessions, onOpen }) {
+export default function ProgressOverview({ tests, sessions, onOpen, reportDay = null, onReport }) {
   const now = new Date()
   const dom = useMemo(() => domainSummary({ tests, sessions, now }), [tests, sessions]) // eslint-disable-line react-hooks/exhaustive-deps
   const eye = dom.eye.eye
@@ -144,6 +144,12 @@ export default function ProgressOverview({ tests, sessions, onOpen }) {
           <p>{eye.message}</p>
           <button type="button" className="btn btn-sm" onClick={() => onOpen('eye')}>Ayrıntı ve kural</button>
         </div>
+      )}
+      {reportDay >= 5 && reportDay <= 21 && onReport && (
+        <button type="button" className="p2-report" onClick={onReport}>
+          <span><b>İlk günlerinin raporu</b><small>Düzen, uygulamalardan sonraki değişim, ölçümler</small></span>
+          <ChevronRight size={18} aria-hidden="true" />
+        </button>
       )}
       {withData.length > 0 && (
         <div className="p2-tiles">
@@ -240,7 +246,7 @@ export function DomainDetail({ domain, tests, sessions, onBack }) {
             <div key={e.key} className="p2-eff">
               <p className="p2-eff-h"><b>{e.label}</b> · {e.measure}{e.better === 'down' ? ' (düşük daha iyi)' : ''} <Pill s={effectStatus(e)} /></p>
               <Dumbbell e={e} />
-              <p className="muted small">{e.n} oturum · ortalama {e.better === 'down' ? 'azalma' : 'artış'} {num(e.gain)}{e.lo != null ? ` (%95 GA ${num(e.lo)} – ${num(e.hi)})` : ''}.</p>
+              <p className="muted small">{e.n} oturum · ortalama {e.better === 'down' ? 'azalma' : 'artış'} {num(e.gain)}{e.n >= 3 && e.lo != null ? ` (%95 GA ${num(e.lo)} – ${num(e.hi)})` : ''}.</p>
             </div>
           ))}
           <p className="muted small">Kontrol grubu yok: bir kısmı beklenti ya da yalnızca mola vermenin etkisi olabilir. "Belirgin" için en az 3 oturum ve güven aralığının sıfırı içermemesi gerekir.</p>
