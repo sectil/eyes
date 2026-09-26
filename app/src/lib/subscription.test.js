@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { plansFromOffering, hasPremium, testUnlock, rcApiKey, RC_IOS_PUBLIC_KEY, withTimeout } from './subscription.js'
+import { plansFromOffering, hasPremium, testUnlock, rcApiKey, RC_IOS_PUBLIC_KEY, withTimeout, _purchasesForTest } from './subscription.js'
 
 const product = (price, priceString, intro, pricePerMonthString = null) => ({
   price,
@@ -86,5 +86,26 @@ describe('withTimeout', () => {
   })
   it('sözün kendi hatası korunur', async () => {
     await expect(withTimeout(Promise.reject(new Error('ağ yok')), 50, 'x')).rejects.toThrow('ağ yok')
+  })
+})
+
+// Bug 15: Capacitor eklentisi gibi her özelliğe ("then" dahil) fonksiyon veren nesne. Söz ile döndürülürse
+// then() çağrılır ve hiç cevap vermez → söz sonsuza kadar bekler.
+function capacitorLikePlugin(calls) {
+  return new Proxy({}, {
+    get(_, prop) {
+      if (prop === 'then') return () => { calls.push('then') } // yerelde yok: hiç çözülmez
+      return async () => { calls.push(String(prop)) }
+    },
+  })
+}
+
+describe('purchases (RevenueCat yükleme)', () => {
+  it('eklenti kutu içinde döner; then() çağrılmaz, söz takılmaz', async () => {
+    const calls = []
+    const Purchases = capacitorLikePlugin(calls)
+    const box = await withTimeout(_purchasesForTest(async () => ({ Purchases })), 200, 'takıldı')
+    expect(box.P).toBe(Purchases)
+    expect(calls).toEqual(['configure'])
   })
 })

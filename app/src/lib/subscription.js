@@ -31,20 +31,29 @@ export const isNative = () => {
   }
 }
 
+// DİKKAT (Bug 15): Capacitor eklentisi bir söz (Promise) ile DÖNDÜRÜLMEZ. Eklenti her özellik adına fonksiyon
+// verir, "then" dahil; söz onu thenable sanıp Purchases.then() çağırır, bu yerelde yok → söz hiç bitmez.
+// Bu yüzden eklenti { P } kutusu içinde taşınır: const { P } = await purchases()
 let purchasesPromise = null
-async function purchases() {
+async function purchases(load = () => import('@revenuecat/purchases-capacitor')) {
   if (!purchasesPromise) {
     purchasesPromise = (async () => {
-      const { Purchases } = await import('@revenuecat/purchases-capacitor')
+      const { Purchases } = await load()
       const apiKey = rcApiKey()
       await Purchases.configure({ apiKey })
-      return Purchases
+      return { P: Purchases }
     })()
     purchasesPromise.catch(() => {
       purchasesPromise = null
     })
   }
   return purchasesPromise
+}
+
+// Yalnız test için: RevenueCat modülünü sahte eklentiyle yükle, önbelleği sıfırla
+export function _purchasesForTest(load) {
+  purchasesPromise = null
+  return purchases(load)
 }
 
 export function hasPremium(customerInfo) {
@@ -59,7 +68,7 @@ export const testUnlock = (env = import.meta.env) => env?.VITE_TEST_UNLOCK === '
 export async function getAccess() {
   if (!isNative()) return { premium: true, native: false }
   if (testUnlock()) return { premium: true, native: true, testUnlock: true }
-  const P = await purchases()
+  const { P } = await purchases()
   const { customerInfo } = await P.getCustomerInfo()
   return { premium: hasPremium(customerInfo), native: true }
 }
@@ -76,7 +85,7 @@ export function withTimeout(promise, ms, message) {
 
 // Ödeme ekranında gösterilecek planlar. Boş liste yerine açıklayıcı hata atar (ekranda teşhis için görünür).
 export async function getPlans({ timeoutMs = PLANS_TIMEOUT_MS } = {}) {
-  const P = await withTimeout(purchases(), timeoutMs, 'RevenueCat başlatılamadı (zaman aşımı)')
+  const { P } = await withTimeout(purchases(), timeoutMs, 'RevenueCat başlatılamadı (zaman aşımı)')
   const offerings = await withTimeout(P.getOfferings(), timeoutMs, 'Planlar App Store/RevenueCat\'ten gelmedi (zaman aşımı)')
   const plans = plansFromOffering(offerings?.current)
   if (!plans.length) {
@@ -132,7 +141,7 @@ function trialDays(intro) {
 }
 
 export async function purchase(plan) {
-  const P = await purchases()
+  const { P } = await purchases()
   try {
     const { customerInfo } = await P.purchasePackage({ aPackage: plan.pkg })
     return { ok: hasPremium(customerInfo) }
@@ -143,7 +152,7 @@ export async function purchase(plan) {
 }
 
 export async function restore() {
-  const P = await purchases()
+  const { P } = await purchases()
   const { customerInfo } = await P.restorePurchases()
   return hasPremium(customerInfo)
 }
@@ -153,7 +162,7 @@ export async function restore() {
 export async function linkPurchaser(userId) {
   if (!isNative() || !userId) return
   try {
-    const P = await purchases()
+    const { P } = await purchases()
     await P.logIn({ appUserID: userId })
   } catch {
     // anahtar yok / ağ yok: bir sonraki açılışta yeniden denenir
@@ -163,7 +172,7 @@ export async function linkPurchaser(userId) {
 export async function unlinkPurchaser() {
   if (!isNative()) return
   try {
-    const P = await purchases()
+    const { P } = await purchases()
     await P.logOut()
   } catch {
     // anonim kullanıcıda logOut hata verir; yok say
