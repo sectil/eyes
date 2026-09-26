@@ -69,7 +69,7 @@ export function plansFromOffering(offering) {
     const intro = p.introPrice
     out.push({
       id: pkg.identifier,
-      period, // 'annual' | 'monthly'
+      period, // 'annual' | 'monthly' | 'weekly'
       priceString: p.priceString,
       pricePerMonthString: p.pricePerMonthString ?? null,
       price: p.price,
@@ -79,6 +79,7 @@ export function plansFromOffering(offering) {
   }
   add(offering.annual, 'annual')
   add(offering.monthly, 'monthly')
+  add(offering.weekly, 'weekly') // RevenueCat $rc_weekly (fiyatlar: haftalık 29,99 / aylık 89,99 / yıllık 899,99)
   // Yıllığın aylık karşılığı aylıktan ne kadar ucuz?
   const a = out.find((x) => x.period === 'annual')
   const m = out.find((x) => x.period === 'monthly')

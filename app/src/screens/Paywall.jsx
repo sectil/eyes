@@ -21,11 +21,13 @@ const BENEFITS = [
 
 // Web'de ödeme yok: önizleme için örnek planlar
 const PREVIEW_PLANS = [
-  { id: 'annual', period: 'annual', priceString: '₺599,99', pricePerMonthString: '₺50,00', freeTrialDays: 7, savePercent: 50 },
-  { id: 'monthly', period: 'monthly', priceString: '₺99,99', freeTrialDays: 7 },
+  { id: 'annual', period: 'annual', priceString: '₺899,99', pricePerMonthString: '₺75,00', freeTrialDays: 7, savePercent: 17 },
+  { id: 'monthly', period: 'monthly', priceString: '₺89,99', freeTrialDays: 7 },
+  { id: 'weekly', period: 'weekly', priceString: '₺29,99', freeTrialDays: 7 },
 ]
 
-const PERIOD = { annual: 'yıl', monthly: 'ay' }
+const PERIOD = { annual: 'yıl', monthly: 'ay', weekly: 'hafta' }
+const PERIOD_TITLE = { annual: 'Yıllık', monthly: 'Aylık', weekly: 'Haftalık' }
 
 // trial: ilk kurulumda profilden hemen sonra (Build 23b) — denemenin gün gün ne olduğu gösterilir.
 // onSkip: yalnız test derlemesinde (VITE_TEST_UNLOCK) ekranı görmek için "geç".
@@ -116,7 +118,7 @@ export default function Paywall({ onUnlocked, onExport, onSafety, preview = fals
             <span className="plan-radio">{selected === p.id && <Check size={14} strokeWidth={3} />}</span>
             <span className="grow">
               <span className="plan-title">
-                {p.period === 'annual' ? 'Yıllık' : 'Aylık'}
+                {PERIOD_TITLE[p.period] ?? p.period}
                 {p.savePercent > 0 && <span className="badge">%{p.savePercent} tasarruf</span>}
               </span>
               <span className="muted small">

@@ -32,6 +32,16 @@ describe('plansFromOffering', () => {
   it('offering yoksa boş', () => {
     expect(plansFromOffering(null)).toEqual([])
   })
+  it('haftalık paket de okunur (yıllık → aylık → haftalık sırası)', () => {
+    const plans = plansFromOffering({
+      annual: { identifier: '$rc_annual', product: product(899.99, '₺899,99', days7, '₺75,00') },
+      monthly: { identifier: '$rc_monthly', product: product(89.99, '₺89,99', days7) },
+      weekly: { identifier: '$rc_weekly', product: product(29.99, '₺29,99', days7) },
+    })
+    expect(plans.map((p) => p.period)).toEqual(['annual', 'monthly', 'weekly'])
+    expect(plans.find((p) => p.period === 'weekly')).toMatchObject({ priceString: '₺29,99', freeTrialDays: 7 })
+    expect(plans[0].savePercent).toBe(17)
+  })
 })
 
 describe('hasPremium', () => {
