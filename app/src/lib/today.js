@@ -10,7 +10,7 @@
 //             order?: şablondaki yer (ORDER), eyeMin?: göz bütçesinden düşen dk (varsayılan: 'eye' kapısında minutes),
 //             openEnded?: süresi kullanıcıya bağlı oyun (bölümün son göz durağı olur),
 //             exclusive?: o gün 2. bölümün tek göz durağı (Hızlı Bakış), dropRank?: yol uzarsa düşme sırası (1 ilk),
-//             game?: oyun (Jev "Ritmi yakala" der),
+//             game?: oyun (Nef "Ritmi yakala" der),
 //             rotate?: aynı gruptaki duraklardan günde biri (bugün yapılan, yoksa bu hafta en az yapılan, eşitse güne göre sırayla),
 //             weekDays?: bu durak son 7 günde kaç gün yapıldı (rotate seçimi için) }
 //   null: modül bugün yolda yok (ör. haftalık test zamanı gelmedi)
@@ -247,7 +247,7 @@ export function todayPlan(modules = [], ctx = {}) {
   return { ...p, items: p.stops }
 }
 
-// Jev baloncuğu (yol planı §5.3): tek kelime + tek satır. Kelimeler Çemberler'in motivasyon kelimeleri;
+// Nef baloncuğu (yol planı §5.3): tek kelime + tek satır. Kelimeler Çemberler'in motivasyon kelimeleri;
 // "Tam isabet" yolda kullanılmaz (test puanı gibi okunmasın). Seçim yerel, koça bir şey gitmez.
 export const JEV_WORDS = {
   praise: ['Harika', 'Çok iyi', 'Böyle devam', 'Süper', 'Güzel gidiyor', 'Aferin'],

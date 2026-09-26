@@ -6,7 +6,7 @@ import { normalizeProfile } from '../lib/profile.js'
 import '../styles/profile.css'
 
 // Tek soruluk ekranlar (Artifact "Önce Fark Ettir"): her ekranda tek soru ve tek ilerleme çubuğu. Cevaptan sonra
-// Jev neden sorduğunu tek cümleyle söyler; cümle 2 sn görünür, sonra kendiliğinden geçer ("Devam" hemen geçirir).
+// Nef neden sorduğunu tek cümleyle söyler; cümle 2 sn görünür, sonra kendiliğinden geçer ("Devam" hemen geçirir).
 // VARSAYIM (onaylı taslak): 2 sn. Hareket azaltma tercihinde kendiliğinden geçmez, "Devam" beklenir.
 // ids: soru kimlikleri (lib/profileQuestions.js); onSave(profil): her cevapta; onDone(profil): son sorudan sonra;
 // onClose(profil): X (o ana kadarki cevaplar kaydedilmiş olur). bar: [başlangıç, bitiş] genel ilerleme payı.

@@ -29,11 +29,11 @@
 //                                       Bugünün yolu durakları (lib/today.js buildPath dizer). Durak:
 //                                       { title, minutes, done, route?, key?, sub?, slot?, order?, eyeMin?,
 //                                         glyph?, openEnded?, exclusive?, dropRank? } — alanlar today.js'te
-//   coach?(sessions, now) → { anahtar: sayı | kısa dize }   Jev'e giden 7 günlük özet (en çok 6 alan;
+//   coach?(sessions, now) → { anahtar: sayı | kısa dize }   Nef'e giden 7 günlük özet (en çok 6 alan;
 //                                       lib/coachCore.js sanitizeSignals süzer). Yalnızca özet sayılar.
 //   stats?(sessions, now) → [{ label, value, sub? }]   Gelişim → Pratikler satırları (en çok 3)
 //   progress: {                         ZORUNLU (Gelişim 2.0): bu modül kişinin takibine neyi katar. Her yeni modül
-//                                       buradan Gelişim'e, istatistiğe, 5. gün raporuna ve Jev'e kendiliğinden bağlanır.
+//                                       buradan Gelişim'e, istatistiğe, 5. gün raporuna ve Nef'e kendiliğinden bağlanır.
 //     domain: 'eye'|'calm'|'self'|'awareness'|'focus'|'wellbeing'|'body',  sayıldığı alan (DOMAINS)
 //     effects?: [{ key, label, measure, max, domain?, pick(s) → [önce, sonra] | null }]
 //                                       oturum öncesi → sonrası puanı ("şu an nasıl hissediyorsun")

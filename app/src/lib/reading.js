@@ -401,7 +401,7 @@ export function previousComparable(tests, correction, beforeDate = null) {
 
 const steps = (a, b) => Math.round((a - b) / LADDER_STEP)
 
-// Sonuç ekranında Jev'in tek cümlesi. Sağlık iddiası yok.
+// Sonuç ekranında Nef'in tek cümlesi. Sağlık iddiası yok.
 export function jevResultLine(result, prev) {
   if (result.cpsCensored === 'nospeed') return 'Çok hızlı geçtin, rahat boyu hesaplayamadım; bir dahakine yazıları okuyarak dene.'
   if (result.cpsCensored === 'above') return 'En büyük yazıda bile zorlandın; gözlüğünle ya da daha iyi ışıkta tekrar dene.'
@@ -417,7 +417,7 @@ export function jevResultLine(result, prev) {
   return 'Bu sefer rahat boyun büyük çıktı; ışığı ve mesafeyi kontrol edip haftaya tekrar dene.'
 }
 
-// Gelişim kartındaki Jev cümlesi: son iki karşılaştırılabilir test
+// Gelişim kartındaki Nef cümlesi: son iki karşılaştırılabilir test
 export function jevProgressLine(tests) {
   const v2 = readingV2(tests).filter((t) => cpsOf(t) != null)
   const last = v2.at(-1)

@@ -27,7 +27,7 @@ describe('sorular ve "neden sordum"', () => {
     expect(QUESTIONS.correction.why('reading')).toMatch(/aynı gözlükle/)
     expect(QUESTIONS.lastExam.why('gt2', base())).toMatch(/40 yaş üstünde/)
     expect(QUESTIONS.lastExam.why('gt2', { ...base(), ageBand: '18-39' })).toMatch(/Bilgi'den/)
-    expect(QUESTIONS.stressControl.why(2)).toMatch(/Jev açıksa/)
+    expect(QUESTIONS.stressControl.why(2)).toMatch(/Nef açıksa/)
   })
   it('stres cevapları iki maddeyi ayrı yazar; missing sırayı korur', () => {
     let p = answer(base(), 'stressControl', 3)

@@ -74,7 +74,7 @@ export default function IntroFilm({ onDone, replay = false }) {
       {!ended && <button type="button" className="intro-skip" onClick={skip}>Atla</button>}
       <p className={`intro-cap${capOff || ended ? ' off' : ''}`} aria-live="polite">{cap}</p>
       <div className={`intro-final${ended ? ' on' : ''}`} aria-hidden={!ended}>
-        <div className="intro-logo">EyeTrail</div>
+        <div className="intro-logo">Nefona</div>
         <p className="intro-tag">Fark etmeyi yeniden öğren.</p>
         <button type="button" className="btn intro-start" onClick={finish} disabled={!ended}>{replay ? 'Kapat' : 'Başla'}</button>
       </div>

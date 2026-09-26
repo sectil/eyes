@@ -1,6 +1,6 @@
 {
   "appId": "com.sectil.eyelume",
-  "appName": "Eyelume",
+  "appName": "Nefona",
   "webDir": "dist",
   "ios": {
     "contentInset": "never",

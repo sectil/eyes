@@ -17,13 +17,13 @@ const TEST_MESSAGES = {
   failed: 'Titreşim gönderilemedi. Uygulamayı kapatıp yeniden açmayı dene.',
 }
 
-// Jev Göz Koçu aç/kapa (ana sayfa "Bugün" kartı). Kapatınca sunucuya hiçbir veri gitmez.
+// Nef Göz Koçu aç/kapa (ana sayfa "Bugün" kartı). Kapatınca sunucuya hiçbir veri gitmez.
 function CoachSettings() {
   const [prefs, setLocal] = useState(getPrefs)
   useEffect(() => subscribePrefs((p) => setLocal(p)), [])
   return (
     <section className="stack">
-      <span className="eyebrow">Jev Göz Koçu</span>
+      <span className="eyebrow">Nef Göz Koçu</span>
       <div className="list">
         <PrefToggle
           Icon={Sparkles}

@@ -11,7 +11,7 @@
   border: 1px solid color-mix(in srgb, var(--lens) 38%, transparent);
 }
 
-/* Jev işareti (geçici; kamera açıkken kullanıcının kendi gözü gelecek) */
+/* Nef işareti (geçici; kamera açıkken kullanıcının kendi gözü gelecek) */
 .iris-mark {
   position: relative; display: inline-block; flex: none; border-radius: 50%; overflow: hidden;
   background: radial-gradient(circle at 50% 50%, var(--surface-2) 0 58%, var(--surface-3) 100%);

@@ -8,7 +8,7 @@ import '../styles/todaypath.css'
 // Bugünün yolu (Build 26). Tasarım: Artifact "Bugünün Yolu" (yol planı §13). Duolingo'dan yalnızca niyet
 // alındı (sıralı duraklar, görünür ilerleme); biçim markanın kendi dünyası:
 //   egzersiz = diyafram (kanatlar kapalı → yarı açık → açık iris), ölçüm = mercek, pratik = kanatların
-//   ardında sahne, mola = su ve ay (Nefes), final = altın kenar (fark etme). Jev tek kelimeyle yol gösterir.
+//   ardında sahne, mola = su ve ay (Nefes), final = altın kenar (fark etme). Nef tek kelimeyle yol gösterir.
 // Her bölüm bir kanat yayı: 1. bölüm sağa ")", 2. bölüm sola "(" bükülür; arada su bandı.
 // plan: lib/today.js buildPath sonucu; eye: App eyeStatus(); day: lib/notice.js dayNumber(now).
 

@@ -232,7 +232,7 @@ describe('gösterim ve karşılaştırma', () => {
     expect(previousComparable(tests, 'progressive', '2026-09-20')).toBeNull()
     expect(previousComparable(tests, 'none', '2026-09-15')).toBeNull()
   })
-  it('Jev tek cümle: ilk, aynı, bir basamak, belirgin fark, sınırlar', () => {
+  it('Nef tek cümle: ilk, aynı, bir basamak, belirgin fark, sınırlar', () => {
     expect(jevResultLine({ criticalPrintSize: 0.3 }, null)).toMatch(/^İlk ölçümün bu/)
     expect(jevResultLine({ criticalPrintSize: 0.3 }, { criticalPrintSize: 0.3 })).toBe('Rahat boyun geçen testle aynı: 0,3.')
     expect(jevResultLine({ criticalPrintSize: 0.2 }, { criticalPrintSize: 0.3 })).toMatch(/bir basamak/)

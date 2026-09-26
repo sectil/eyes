@@ -218,8 +218,8 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   useEffect(() => () => clearTimeout(holdTimer.current), [])
 
   async function share() {
-    const payload = JSON.stringify({ app: 'EyeTrail', kind: 'gaze-calib', build: import.meta.env.VITE_APP_BUILD ?? 'web', ...report })
-    const r = await shareText('EyeTrail kalibrasyon verisi', payload)
+    const payload = JSON.stringify({ app: 'Nefona', kind: 'gaze-calib', build: import.meta.env.VITE_APP_BUILD ?? 'web', ...report })
+    const r = await shareText('Nefona kalibrasyon verisi', payload)
     setNote(r === 'shared' ? 'Paylaşıldı.' : r === 'copied' ? 'Panoya kopyalandı. Mesaja yapıştırıp gönderebilirsin.' : 'Kopyalanamadı.')
   }
 

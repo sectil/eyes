@@ -256,8 +256,8 @@ export function reportHtml(m) {
     .map((e) => `<tr><td>${esc(e.label)}</td><td>${esc(e.measure)} (/${e.max})</td><td class="n">${e.n}</td><td class="n">${esc(num(e.before))} → ${esc(num(e.after))}</td><td class="n">${esc(signed(e.better === 'down' ? -e.gain : e.gain))}${e.n >= 3 && e.lo != null ? ` (${esc(num(e.lo))} – ${esc(num(e.hi))})` : ''}</td><td>${e.sig ? 'belirgin' : 'belirsiz'}</td></tr>`)
     .join('')
   const w = m.who5
-  return `<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EyeTrail · Kişisel takip özeti</title><style>${CSS}</style></head><body>
-<div class="head"><div><div class="brand">EYETRAIL</div><h1>Kişisel takip özeti</h1></div><div class="meta">Oluşturma: ${esc(fmtDate(m.generatedAt))}<br>Telefonda yapılan kendi kendine ölçümler</div></div>
+  return `<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nefona · Kişisel takip özeti</title><style>${CSS}</style></head><body>
+<div class="head"><div><div class="brand">NEFONA</div><h1>Kişisel takip özeti</h1></div><div class="meta">Oluşturma: ${esc(fmtDate(m.generatedAt))}<br>Telefonda yapılan kendi kendine ölçümler</div></div>
 <div class="who">${who}</div>
 <p class="note">Bu belge, kişinin kendi telefonunda yaptığı ölçümlerin özetidir. Tanı koymaz ve göz muayenesinin yerini tutmaz. Yöntem ve sınırlar son bölümde.</p>
 
@@ -296,5 +296,5 @@ ${effectRows ? `<section class="block"><h2>Uygulama öncesi → sonrası (kişin
 </body></html>`
 }
 
-export const reportFilename = (now = new Date()) => `eyetrail-rapor-${fileStamp(new Date(now))}.pdf`
-export const csvFilename = (now = new Date()) => `eyetrail-veriler-${fileStamp(new Date(now))}.csv`
+export const reportFilename = (now = new Date()) => `nefona-rapor-${fileStamp(new Date(now))}.pdf`
+export const csvFilename = (now = new Date()) => `nefona-veriler-${fileStamp(new Date(now))}.csv`

@@ -128,7 +128,7 @@ export function ThemeSwitch() {
   )
 }
 
-// Jev işareti: iris + göz bebeği, arada bir kırpar. Kamera kapalıyken kullanıcının kendi gözünün
+// Nef işareti: iris + göz bebeği, arada bir kırpar. Kamera kapalıyken kullanıcının kendi gözünün
 // yerine durur. VARSAYIM: logo seçilene kadar geçici işaret (atlas K bölümü).
 export function IrisMark({ size = 40 }) {
   return (

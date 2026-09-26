@@ -71,7 +71,7 @@ describe('Doktor raporu', () => {
   })
   it('grafik: 2 noktadan az ise boş; dosya adları tarihli', () => {
     expect(eyeChartSvg([{ date: day(0), logMAR: 0.2 }])).toBe('')
-    expect(reportFilename(new Date(2026, 8, 6))).toBe('eyetrail-rapor-2026-09-06.pdf')
-    expect(csvFilename(new Date(2026, 8, 6))).toBe('eyetrail-veriler-2026-09-06.csv')
+    expect(reportFilename(new Date(2026, 8, 6))).toBe('nefona-rapor-2026-09-06.pdf')
+    expect(csvFilename(new Date(2026, 8, 6))).toBe('nefona-veriler-2026-09-06.csv')
   })
 })

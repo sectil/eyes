@@ -23,7 +23,7 @@ export const RELEASES = [
       { kind: 'fix', text: '"Verilerimi indir" iPhone\'da çalışmıyordu; artık paylaşım sayfası açılıyor (Dosyalar, Mail, AirDrop).' },
       { kind: 'fix', text: 'Göz kalibrasyonu: baş duruşu hesaba katılıyor; "Ayırt edemedim" ekranı çok daha seyrek. Tekrar turu ortayı da yeniliyor.' },
       { kind: 'fix', text: 'Göz yönleri: kalibrasyonsuz kullanımda sağ–sol terslenmişti (ör. "Sola bak", saat yönünde daire). Düzeldi.' },
-      { kind: 'change', text: 'Ödeme ekranında eski ad "Eyelume" yerine "EyeTrail".' },
+      { kind: 'change', text: 'Uygulamanın yeni adı Nefona; koçun adı Nef. Ana ekranda, ödeme ekranında, PDF raporunda ve dosya adlarında yeni ad.' },
     ],
   },
 ]

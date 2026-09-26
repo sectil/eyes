@@ -17,7 +17,7 @@ export default function ExportCard({ tests = [], sessions = [], identity = null 
       const now = new Date()
       const r =
         kind === 'pdf'
-          ? await sharePdf(reportFilename(now), reportHtml(reportModel({ tests, sessions, identity, now })), `EyeTrail · ${now.toLocaleDateString('tr-TR')}`)
+          ? await sharePdf(reportFilename(now), reportHtml(reportModel({ tests, sessions, identity, now })), `Nefona · ${now.toLocaleDateString('tr-TR')}`)
           : await shareTextFile(csvFilename(now), toCsv(csvRows({ tests, sessions })))
       if (r?.completed) setMsg({ tone: 'ok', text: kind === 'pdf' ? 'Rapor hazır.' : 'Veri dosyası hazır.' })
     } catch {
@@ -39,7 +39,7 @@ export default function ExportCard({ tests = [], sessions = [], identity = null 
       </div>
       <p className="muted small">
         {empty ? 'İlk ölçümünden sonra açılır. ' : ''}PDF: göz testlerin, uyarı kuralı ve diğer ölçümlerin özeti. CSV: tüm ölçümler, tablo programında açılır. Dosya yalnız
-        senin seçtiğin yere gider; EyeTrail sunucusuna gönderilmez.
+        senin seçtiğin yere gider; Nefona sunucusuna gönderilmez.
       </p>
       {msg && <p className={`p2-export-msg ${msg.tone}`} role="status">{msg.text}</p>}
     </section>

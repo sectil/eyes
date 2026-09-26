@@ -31,8 +31,8 @@ public class ExportPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate {
     // PDF işi (aynı anda bir tane; yalnız ana thread'de okunur/yazılır)
     private var pdfWebView: WKWebView?
     private var pdfCall: CAPPluginCall?
-    private var pdfName = "eyetrail-rapor.pdf"
-    private var pdfFooter = "EyeTrail"
+    private var pdfName = "nefona-rapor.pdf"
+    private var pdfFooter = "Nefona"
 
     // MARK: - JS yöntemleri
 
@@ -41,7 +41,7 @@ public class ExportPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate {
             call.reject("text yok")
             return
         }
-        let name = safeName(call.getString("filename"), fallback: "eyetrail.csv")
+        let name = safeName(call.getString("filename"), fallback: "nefona.csv")
         // Dosya ve paylaşım işi ana thread'de (sharePdf ile aynı yerde): iki dışa aktarma birbirinin dosyasını silmesin.
         // Capacitor yöntemleri "bridge" kuyruğunda çağırır (CapacitorBridge.swift handleJSCall).
         DispatchQueue.main.async {
@@ -63,8 +63,8 @@ public class ExportPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate {
             call.reject("html yok")
             return
         }
-        let name = safeName(call.getString("filename"), fallback: "eyetrail-rapor.pdf")
-        let footer = call.getString("footer") ?? "EyeTrail"
+        let name = safeName(call.getString("filename"), fallback: "nefona-rapor.pdf")
+        let footer = call.getString("footer") ?? "Nefona"
         DispatchQueue.main.async {
             if self.pdfCall != nil || self.sheetIsUp() {
                 call.reject("Rapor zaten hazırlanıyor")
@@ -134,8 +134,8 @@ public class ExportPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate {
         guard pages > 0 else { return Data() }
         let format = UIGraphicsPDFRendererFormat()
         format.documentInfo = [
-            kCGPDFContextTitle as String: "EyeTrail · Kişisel takip özeti",
-            kCGPDFContextCreator as String: "EyeTrail"
+            kCGPDFContextTitle as String: "Nefona · Kişisel takip özeti",
+            kCGPDFContextCreator as String: "Nefona"
         ]
         let pdf = UIGraphicsPDFRenderer(bounds: Self.paper, format: format)
         return pdf.pdfData { ctx in
@@ -249,7 +249,7 @@ public class ExportPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate {
     }
 }
 
-/// A4 sayfa, kenar boşlukları ve alt bilgi ("EyeTrail · 26.09.2026 · 1/3").
+/// A4 sayfa, kenar boşlukları ve alt bilgi ("Nefona · 26.09.2026 · 1/3").
 private final class PageRenderer: UIPrintPageRenderer {
     private let paper: CGRect
     private let margins: UIEdgeInsets

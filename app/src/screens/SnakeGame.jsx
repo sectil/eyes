@@ -444,8 +444,8 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
   const debugRef = useRef([])
   const [shareNote, setShareNote] = useState('')
   async function shareGazeDebug() {
-    const payload = JSON.stringify({ app: 'EyeTrail', kind: 'snake-gaze', build: import.meta.env.VITE_APP_BUILD ?? 'web', enterDeg: ENTER_DEG, exitDeg: EXIT_DEG, model: loadGazeModel(), frames: debugRef.current })
-    const r = await shareText('EyeTrail yılan bakış verisi', payload)
+    const payload = JSON.stringify({ app: 'Nefona', kind: 'snake-gaze', build: import.meta.env.VITE_APP_BUILD ?? 'web', enterDeg: ENTER_DEG, exitDeg: EXIT_DEG, model: loadGazeModel(), frames: debugRef.current })
+    const r = await shareText('Nefona yılan bakış verisi', payload)
     setShareNote(r === 'shared' ? 'Paylaşıldı.' : r === 'copied' ? 'Panoya kopyalandı.' : 'Kopyalanamadı.')
   }
   const prevRef = useRef([])

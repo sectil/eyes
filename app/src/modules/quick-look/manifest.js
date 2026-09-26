@@ -48,7 +48,7 @@ export default {
   },
   coach(sessions, now) {
     const fb = firstAndBest(sessions)
-    if (!fb.n) return null // hiç oynanmadıysa Jev'e alan gönderme
+    if (!fb.n) return null // hiç oynanmadıysa Nef'e alan gönderme
     const week = withinDays(sessions.filter(isQuickLook), now)
     return { first: fb.first, last: fb.last, sessions7: week.length, hours: +programHours(sessions).toFixed(1) }
   },

@@ -4,7 +4,7 @@ import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
 import { getTodayInsight } from '../lib/coach.js'
 import '../styles/coach.css'
 
-// Ana sayfa "Bugün" kartı — Jev Göz Koçu. Varsayılan KAPALI; açık onayla açılır
+// Ana sayfa "Bugün" kartı — Nef Göz Koçu. Varsayılan KAPALI; açık onayla açılır
 // (Apple 5.1.2: üçüncü taraf yapay zekâyla veri paylaşımı açıkça söylenir ve izin alınır).
 // Sunucu/model yoksa kural tabanlı öneri gösterilir (source: 'rules').
 
@@ -48,7 +48,7 @@ export default function CoachCard({ tests, sessions, profile = null, weeklyTarge
     return (
       <section className="card coach-card coach-intro">
         <div className="row between">
-          <span className="coach-badge"><Sparkles size={15} aria-hidden="true" /> Jev Göz Koçu</span>
+          <span className="coach-badge"><Sparkles size={15} aria-hidden="true" /> Nef Göz Koçu</span>
           <button className="btn-icon coach-hide" onClick={() => setPrefs({ coachHidden: true })} aria-label="Gizle"><X size={16} /></button>
         </div>
         <p className="coach-lead">Kendi verine bakıp her gün tek bir içgörü ve bir öneri yazar.</p>
@@ -79,7 +79,7 @@ export default function CoachCard({ tests, sessions, profile = null, weeklyTarge
   return (
     <section className="card coach-card" aria-live="polite">
       <div className="row between">
-        <span className="coach-badge"><Sparkles size={15} aria-hidden="true" /> Bugün · Jev</span>
+        <span className="coach-badge"><Sparkles size={15} aria-hidden="true" /> Bugün · Nef</span>
         {tip?.source === 'rules' && <span className="coach-offline"><WifiOff size={13} aria-hidden="true" /> çevrimdışı öneri</span>}
       </div>
       {tip ? (
@@ -95,14 +95,14 @@ export default function CoachCard({ tests, sessions, profile = null, weeklyTarge
           )}
         </>
       ) : (
-        <div className="coach-skeleton" aria-label="Jev düşünüyor">
+        <div className="coach-skeleton" aria-label="Nef düşünüyor">
           <i />
           <i />
         </div>
       )}
       {askLife && (
         <p className="muted small coach-life">
-          Uyku, ekran, gece telefonu ve stres cevaplarının özeti de Jev'e gitsin mi?{' '}
+          Uyku, ekran, gece telefonu ve stres cevaplarının özeti de Nef'e gitsin mi?{' '}
           <button type="button" className="link-btn" onClick={() => setPrefs({ coachLife: true })}>Evet, ekle</button>
         </p>
       )}

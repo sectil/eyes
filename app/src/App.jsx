@@ -339,7 +339,7 @@ export default function App() {
   // Tüm kayıt (JSON). iPhone'da <a download> WKWebView'da güvenilir değil (doğrulanmadı) → paylaşım sayfası
   // (ExportPlugin.swift); web'de indirme. Oturum anahtarları ayrı kayıtta (supabase.js storageKey), dosyaya girmez.
   const exportData = () => {
-    shareTextFile(`eyetrail-tum-veriler-${fileStamp()}.json`, store.exportJSON(), 'application/json').catch(() => {})
+    shareTextFile(`nefona-tum-veriler-${fileStamp()}.json`, store.exportJSON(), 'application/json').catch(() => {})
   }
   const finishAccount = async (acc, extra = {}) => {
     store.setSetting('account', acc)

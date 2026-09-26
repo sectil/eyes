@@ -38,10 +38,10 @@ export default function GazeTest({ onBack, onCalibrate }) {
   const cam = useFaceTracking({ enabled: true, trueDepth: true, onFrame })
 
   async function share() {
-    const payload = JSON.stringify({ app: 'EyeTrail', kind: 'gaze-debug', build: import.meta.env.VITE_APP_BUILD ?? 'web', model, frames: frames.current }, null, 0)
+    const payload = JSON.stringify({ app: 'Nefona', kind: 'gaze-debug', build: import.meta.env.VITE_APP_BUILD ?? 'web', model, frames: frames.current }, null, 0)
     try {
       if (navigator.share) {
-        await navigator.share({ title: 'EyeTrail göz verisi', text: payload })
+        await navigator.share({ title: 'Nefona göz verisi', text: payload })
         setNote('Paylaşıldı.')
         return
       }

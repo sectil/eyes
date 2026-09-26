@@ -10,7 +10,7 @@
 
 const KEY = 'gozolcum:prefs'
 
-// coach: Jev Göz Koçu (varsayılan kapalı, açık onayla açılır); coachHidden: ana sayfa tanıtım kartı gizli;
+// coach: Nef Göz Koçu (varsayılan kapalı, açık onayla açılır); coachHidden: ana sayfa tanıtım kartı gizli;
 // coachLife: profil cevaplarının özeti (uyku, ekran, gece telefonu, stres) de koça gider — ayrı onay (Build 27)
 export const DEFAULT_PREFS = Object.freeze({ sound: true, haptics: true, coach: false, coachHidden: false, coachLife: false })
 const KEYS = Object.keys(DEFAULT_PREFS)

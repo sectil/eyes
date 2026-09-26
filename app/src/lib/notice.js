@@ -2,7 +2,7 @@
 // fark ettiğini kaydedersin. Kanıt (rapor 20 §5): bu göreve doğrudan kanıt yok; dolaylı: yaşla fark edememe
 // (inattentional blindness) artıyor (Horwood 2016, Graham 2011), kısa bir farkındalık çalışması azalttı
 // (Schofield 2015). Aktarım iddiası YOK; dikkatini dışarıya yönelten küçük bir alıştırma.
-// Not metni yalnızca bu telefonda kalır; Jev'e yalnızca sayılar gider.
+// Not metni yalnızca bu telefonda kalır; Nef'e yalnızca sayılar gider.
 export const SESSION_TYPE = 'notice'
 export const COUNTS = ['0', '1', '2', '3+']
 export const NOTE_MAX = 140

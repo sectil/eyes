@@ -69,7 +69,7 @@ export function DistanceIris({ open = 1, tone = 'ok', cm = null, size = 112 }) {
   )
 }
 
-// Jev (paper sahnesinde): iris + göz bebeği; halkalar dışarıdan verilir
+// Nef (paper sahnesinde): iris + göz bebeği; halkalar dışarıdan verilir
 export function PaperJev({ ring = null, ripples = [], size = 40 }) {
   return (
     <span className="rd-jev" style={{ width: size, height: size }} aria-hidden="true">

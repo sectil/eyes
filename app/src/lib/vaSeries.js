@@ -1,6 +1,6 @@
 import { analyzeTrend } from './trend.js'
 
-// Görme keskinliği için "öne çıkan seri" (Bugün kutucuğu, Jev sinyali, Gelişim'in açılış sekmesi).
+// Görme keskinliği için "öne çıkan seri" (Bugün kutucuğu, Nef sinyali, Gelişim'in açılış sekmesi).
 // Build 24'ten beri günlük test yalnız sağ ve sol gözü ölçer; iki göz yalnız haftalık testte. Bu yüzden tek
 // seri (eskiden hep 'OU') yerine: uyarısı en ciddi göz → son 14 günde en çok ölçülen → sağ, sol, iki göz sırası.
 const EYES = ['R', 'L', 'OU']

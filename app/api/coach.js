@@ -1,4 +1,4 @@
-// Vercel Function: Jev Göz Koçu köprüsü (telefon → bu fonksiyon → OpenRouter).
+// Vercel Function: Nef Göz Koçu köprüsü (telefon → bu fonksiyon → OpenRouter).
 // API anahtarı yalnızca burada, ortam değişkeninde: EYETRAIL_OPENROUTER_KEY (Sensitive).
 // Model: EYETRAIL_COACH_MODEL (yoksa DEFAULT_MODEL). Kamera verisi/kimlik gelmez; yalnızca özet sayılar.
 // Biçim: Vercel "fetch Web Standard" (vercel.com/docs/functions/functions-api-reference).
@@ -59,7 +59,7 @@ export default {
           Authorization: `Bearer ${key}`,
           'Content-Type': 'application/json',
           'HTTP-Referer': 'https://eyetrail.vercel.app',
-          'X-Title': 'EyeTrail',
+          'X-Title': 'Nefona',
         },
         body: JSON.stringify({
           model,

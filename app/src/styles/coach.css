@@ -1,4 +1,4 @@
-/* ---------- Jev Göz Koçu (Bugün kartı) ---------- */
+/* ---------- Nef Göz Koçu (Bugün kartı) ---------- */
 .coach-card { gap: 10px; position: relative; overflow: hidden; }
 .coach-card::before {
   content: ''; position: absolute; inset: 0 0 auto 0; height: 3px;

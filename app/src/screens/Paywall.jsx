@@ -80,7 +80,7 @@ export default function Paywall({ onUnlocked, onExport, onSafety, preview = fals
   return (
     <main className="screen fade-in paywall">
       <header className="page-header" style={{ alignItems: 'center', textAlign: 'center', paddingTop: 12 }}>
-        <span className="paywall-badge"><Sparkles size={16} /> {trial ? `${trial} gün ücretsiz` : 'EyeTrail Premium'}</span>
+        <span className="paywall-badge"><Sparkles size={16} /> {trial ? `${trial} gün ücretsiz` : 'Nefona Premium'}</span>
         <h1>{firstRun && trial ? `${trial} gün boyunca her şey açık` : 'Görmeni ölç, takip et, düzenli kal'}</h1>
         <p>{firstRun ? 'Planını seç; deneme bugün başlar.' : 'Devam etmek için planını seç.'}</p>
       </header>

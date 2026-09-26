@@ -1,5 +1,5 @@
 // Profil soruları (v2): her soru tek ekranda, ilgili anın önünde ya da arkasında, bir kez sorulur.
-// Tasarım: Artifact "Önce Fark Ettir" (onaylı). Her cevaptan sonra Jev tek cümleyle neden sorduğunu söyler;
+// Tasarım: Artifact "Önce Fark Ettir" (onaylı). Her cevaptan sonra Nef tek cümleyle neden sorduğunu söyler;
 // cümle cevabın uygulamada gerçekten neyi değiştirdiğini anlatır, değiştirmediği bir şeyi vaat etmez.
 // Kaynak etiketleri lib/profile.js'teki listelerin yanında; burada ekranın altındaki kısa satır (source).
 import {
@@ -11,7 +11,7 @@ const OLDER = new Set(['40-49', '50-59', '60-69', '70+'])
 export const isOlder = (p) => OLDER.has(normalizeProfile(p).ageBand)
 const idx = (list) => list.map((text, i) => ({ id: i, text }))
 const withStress = (p, key, v) => ({ ...p, stress: { ...p.stress, [key]: v } })
-const JEV_OPTIONAL = 'Jev açıksa'
+const JEV_OPTIONAL = 'Nef açıksa'
 
 // kind: 'choice' (tek dokunuş) | 'slider'
 export const QUESTIONS = {

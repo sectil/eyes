@@ -1,5 +1,5 @@
 #!/bin/bash
-# Jev Göz Koçu sunucu kurulumu (Mac, tek komut):
+# Nef Göz Koçu sunucu kurulumu (Mac, tek komut):
 #   bash ~/Projects/eyes/app/scripts/coach-setup.sh
 # Yaptıkları:
 #  1) ~/.eyetrail_env içindeki EYETRAIL_OPENROUTER_KEY'i okur (ekrana basmaz)
@@ -79,7 +79,7 @@ echo
 curl -fsS -X POST "$URL" -H 'Content-Type: application/json' -H 'Origin: capacitor://localhost' \
   -d '{"kind":"today","signals":{"daysActive7":2,"weeklyTarget":3,"thisWeekDays":2,"vaPhase":"familiarization","daysSinceLastTest":1,"hourNow":10}}' \
   || fail "Koç cevabı alınamadı"
-printf '\n\n\033[1;32m✔ Jev Göz Koçu sunucusu hazır (%s).\033[0m Şimdi uygulama için: bash %s/scripts/testflight.sh\n' "$MODEL" "$APP_DIR"
+printf '\n\n\033[1;32m✔ Nef Göz Koçu sunucusu hazır (%s).\033[0m Şimdi uygulama için: bash %s/scripts/testflight.sh\n' "$MODEL" "$APP_DIR"
 }
 
 main "$@"

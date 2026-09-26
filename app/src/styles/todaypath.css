@@ -156,7 +156,7 @@
 .tp-gring i:nth-child(4) { transform: rotate(315deg) translateY(-42px); }
 @keyframes tp-gring { from { transform: scale(0.6); opacity: 1; } to { transform: scale(1.6); opacity: 0; } }
 
-/* Jev baloncuğu */
+/* Nef baloncuğu */
 .tp-jb { position: absolute; z-index: 4; transform: translateY(-50%); }
 .tp-jb .tp-jev { position: absolute; top: -14px; z-index: 1; display: flex; }
 .tp-jb[data-side='left'] .tp-jev { right: -12px; }

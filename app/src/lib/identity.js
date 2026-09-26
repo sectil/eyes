@@ -1,4 +1,4 @@
-// Kimlik: ad, doğum tarihi, şehir, avatar (Profilim / "Seni tanıyalım"). Cihazda kalır; Jev'e gitmez.
+// Kimlik: ad, doğum tarihi, şehir, avatar (Profilim / "Seni tanıyalım"). Cihazda kalır; Nef'e gitmez.
 // Hesap açıldıysa ad, doğum tarihi ve şehir Supabase'deki profile eşitlenir (lib/account.js); fotoğraf yalnız cihazda.
 import { normalizeCity } from './cities.js'
 export const NAME_MAX = 40

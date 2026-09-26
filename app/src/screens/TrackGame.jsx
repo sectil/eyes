@@ -383,7 +383,7 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
   async function share() {
     const r = result
     const payload = JSON.stringify({
-      app: 'EyeTrail',
+      app: 'Nefona',
       kind: 'track-debug',
       v: 2,
       build: import.meta.env.VITE_APP_BUILD ?? 'web',
@@ -393,7 +393,7 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
       steps: r?.steps,
       trials: r?.trials,
     })
-    const s = await shareText('EyeTrail Çemberler verisi', payload)
+    const s = await shareText('Nefona Çemberler verisi', payload)
     setNote(s === 'shared' ? 'Paylaşıldı.' : s === 'copied' ? 'Panoya kopyalandı.' : 'Kopyalanamadı.')
   }
 

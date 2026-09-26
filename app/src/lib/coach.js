@@ -1,4 +1,4 @@
-// Jev Göz Koçu — istemci (Bugün kartı). Sinyaller kural katmanında hesaplanır; sunucuya yalnızca
+// Nef Göz Koçu — istemci (Bugün kartı). Sinyaller kural katmanında hesaplanır; sunucuya yalnızca
 // bu özet sayılar gider. Sunucu/model cevap vermezse kural tabanlı şablon metin gösterilir.
 import { pickSeries } from './vaSeries.js'
 import { activitiesFrom, countedActivities, summary } from './stats.js'

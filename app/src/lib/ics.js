@@ -46,7 +46,7 @@ export function buildReminderIcs(schedule, now = new Date()) {
     `DTSTART:${localStamp(start)}`,
     'DURATION:PT15M',
     `RRULE:FREQ=WEEKLY;BYDAY=${ordered.join(',')}`,
-    `SUMMARY:${escapeText('Göz testi ve egzersiz (Eyelume)')}`,
+    `SUMMARY:${escapeText('Göz testi ve egzersiz (Nefona)')}`,
     `DESCRIPTION:${escapeText('Günlük kısa test: ~3 dakika. Uygulamayı açın.')}`,
     'BEGIN:VALARM',
     'ACTION:DISPLAY',
@@ -65,7 +65,7 @@ export async function downloadIcs(text, filename = 'goz-olcum-hatirlatma.ics') {
   const file = new File([text], filename, { type: 'text/calendar' })
   if (navigator.canShare?.({ files: [file] })) {
     try {
-      await navigator.share({ files: [file], title: 'Eyelume hatırlatma' })
+      await navigator.share({ files: [file], title: 'Nefona hatırlatma' })
       return 'shared'
     } catch {
       // kullanıcı iptal etti veya paylaşım başarısız → indirmeye düş
