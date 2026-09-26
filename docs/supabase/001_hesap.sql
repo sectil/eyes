@@ -28,6 +28,8 @@ create policy "profil: kendi satırını günceller" on public.profiles
 
 -- "Automatically expose new tables" kapalı olduğu için erişim burada açıkça verilir (yalnız giriş yapmış kişiye).
 revoke all on public.profiles from anon;
+-- Proje varsayılanı giriş yapmış role DELETE/TRUNCATE da veriyordu (2026-09-26 kontrol); uygulamanın ihtiyacı yok.
+revoke delete, truncate, references, trigger on public.profiles from authenticated;
 grant select, insert, update on public.profiles to authenticated;
 
 -- 2) Hesabımı sil (App Store 5.1.1(v)): kişi yalnız KENDİ hesabını siler; profil satırı cascade ile gider.

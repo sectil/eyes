@@ -4,19 +4,19 @@ Proje: `https://ueydpapmrpdjbnfeijgi.supabase.co` (Frankfurt). Uygulamadaki anah
 (`sb_publishable_…`). Gizli anahtar (`sb_secret_…` / service_role) uygulamaya, depoya ya da sohbete ASLA yazılmaz.
 
 ## 1. Tablolar ve güvenlik kuralları
-Supabase → **SQL Editor** → **New query** → `docs/supabase/001_hesap.sql` dosyasının tamamını yapıştır → **Run**.
-"Success. No rows returned" görmelisin. Tekrar çalıştırmak güvenli.
+YAPILDI (2026-09-26): tablo + RLS + delete_my_account kuruldu; Supabase bağlayıcısıyla doğrulandı ve fazla yetkiler
+(DELETE/TRUNCATE) geri alındı (migration `profiles_least_privilege`). Güvenlik denetiminde tek uyarı: giriş yapmış kişi
+`delete_my_account` çağırabilir — bilerek böyle (yalnız kendi hesabını siler; App Store 5.1.1(v)).
 
-## 2. E-posta ile 6 haneli kod
-Uygulama bağlantı yerine kod ister (uygulamadan çıkmadan giriş).
-1. **Authentication → Emails → Templates** (bazı arayüzlerde **Email Templates**).
-2. **Magic Link** ve **Confirm signup** şablonlarının ikisine de gövdeye şu satırı ekle:
-   `<p>Giriş kodun: <strong>{{ .Token }}</strong></p>`
-   (Konu satırı örneği: `EyeTrail giriş kodun`.)
-3. **Authentication → Sign In / Providers → Email**: **Email OTP Length** 6 olsun (uygulama 6–8 haneyi kabul eder).
-
-Not: Supabase'in hazır e-posta servisi saatte birkaç e-postayla sınırlıdır; yayından önce kendi SMTP (ör. Resend)
-bağlanmalı: **Authentication → Emails → SMTP Settings**.
+## 2. E-posta ile 6 haneli kod (kendi SMTP gerekir)
+Supabase belgesi (2026-09-26 okundu): hazır e-posta servisi YALNIZ proje ekibindeki adreslere gönderir; diğer herkes
+"Email address not authorized" alır. Şablonlar da kendi SMTP bağlanmadan düzenlenemez. Bu yüzden e-postayla giriş,
+kendi SMTP (ör. Resend; alan adı + DNS kaydı) bağlanana kadar gerçek kullanıcılar için ÇALIŞMAZ. Uygulama bu hatada
+"E-postayla giriş şu an açık değil. Apple ile devam et ya da hesapsız dene." der.
+SMTP bağlandıktan sonra:
+1. **Authentication → Emails → Templates**: **Magic link or OTP** ve **Confirm signup** gövdesine
+   `<p>Giriş kodun: <strong>{{ .Token }}</strong></p>` ekle.
+2. **Authentication → Sign In / Providers → Email**: **Email OTP Length** 6.
 
 ## 3. Apple ile giriş (iPhone)
 1. Supabase → **Authentication → Sign In / Providers → Apple** → **Enable**.

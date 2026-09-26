@@ -71,6 +71,7 @@ describe('hesap', () => {
     expect(friendlyError({ status: 429, message: 'x' })).toMatch(/Çok sık/)
     expect(friendlyError({ message: 'Token has expired or is invalid' })).toMatch(/Kod yanlış/)
     expect(friendlyError({ message: 'Failed to fetch' })).toMatch(/İnternete/)
+    expect(friendlyError({ message: 'Email address not authorized' })).toMatch(/açık değil/)
   })
   it('e-posta kodu: gönder ve doğrula', async () => {
     await sendEmailCode(' Ali@Posta.com ')

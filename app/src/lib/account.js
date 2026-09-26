@@ -51,6 +51,8 @@ export function friendlyError(err) {
   const code = String(err?.code ?? err?.error ?? '')
   if (/cancel|1001/i.test(msg) || code === '1001') return null
   if (err?.status === 429 || /rate limit|too many/i.test(msg)) return 'Çok sık denendi. Bir dakika sonra yeniden dene.'
+  // Supabase'in hazır e-posta servisi yalnız proje ekibine gönderir (kendi SMTP bağlanana kadar)
+  if (/not authorized/i.test(msg)) return 'E-postayla giriş şu an açık değil. Apple ile devam et ya da hesapsız dene.'
   if (/otp_expired|expired|invalid.*(token|otp)|token.*invalid/i.test(msg + ' ' + code)) return 'Kod yanlış ya da süresi dolmuş. Yeni kod iste.'
   if (/fetch|network|offline|load failed/i.test(msg)) return 'İnternete bağlanılamadı. Bağlantını kontrol edip yeniden dene.'
   return 'Bir sorun çıktı. Biraz sonra yeniden dene.'
