@@ -108,7 +108,7 @@ const KEY_DIR = {
   D: 'right',
 }
 const EDGE_ICONS = { up: ChevronUp, down: ChevronDown, left: ChevronLeft, right: ChevronRight }
-const EMPTY_GAZE = { x: 0, y: 0, tracked: false, closed: false, calibrated: false, cand: null, progress: 0, look: 0, rearm: false }
+const EMPTY_GAZE = { x: 0, y: 0, tracked: false, closed: false, calibrated: false, cand: null, progress: 0, look: 0 }
 const DEFAULT_PREFS = { sound: true, haptics: true }
 
 function safePrefs() {
@@ -390,7 +390,6 @@ function GazePanel({ ui, angle, camReady }) {
     text = 'Gözlerin kapalı'
     tone = 'warn'
   } else if (!ui.calibrated) text = 'Ekranın ortasına bak'
-  else if (ui.rearm) text = 'Yeni yön için önce ortaya bak'
   else if (ui.cand && ui.progress < 1) text = `${DIR_WORD[ui.cand]}…`
   else if (ui.cand) {
     text = `${DIR_WORD[ui.cand]} bakıyorsun`
@@ -716,7 +715,7 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
     }
     if (ts - f.lastUi >= UI_MS) {
       f.lastUi = ts
-      setGaze({ x: g.v.x, y: g.v.y, tracked: g.tracked, closed: g.closed, calibrated: g.calibrated, cand: dw.candidate, progress: dw.progress, look, rearm: Boolean(dw.waitCenter) })
+      setGaze({ x: g.v.x, y: g.v.y, tracked: g.tracked, closed: g.closed, calibrated: g.calibrated, cand: dw.candidate, progress: dw.progress, look })
     }
   }
 
@@ -1098,7 +1097,7 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
   if (phase === 'practice') {
     const done = practice.i >= PRACTICE_DIRS.length
     const t = practiceTarget
-    const status = !cam.ready ? 'Kamera hazırlanıyor…' : !gaze.tracked ? 'Yüzün görünmüyor' : gaze.closed ? 'Gözlerin kapalı' : !gaze.calibrated ? 'Önce ekranın ortasına bak' : gaze.rearm ? 'Şimdi ortaya bak, sonra sıradaki yöne' : gaze.cand === t ? `${PRACTICE_TEXT[t]}… tut` : gaze.cand ? `${DIR_WORD[gaze.cand]} bakıyorsun — ${PRACTICE_HINT[t]} bak` : null
+    const status = !cam.ready ? 'Kamera hazırlanıyor…' : !gaze.tracked ? 'Yüzün görünmüyor' : gaze.closed ? 'Gözlerin kapalı' : !gaze.calibrated ? 'Önce ekranın ortasına bak' : gaze.cand === t ? `${PRACTICE_TEXT[t]}… tut` : gaze.cand ? `${DIR_WORD[gaze.cand]} bakıyorsun — ${PRACTICE_HINT[t]} bak` : null
     overlay = (
       <div className="snake-overlay snake-practice" role="dialog" aria-modal="false" aria-label="Bakış pratiği">
         <span className="eyebrow">Şimdi sen dene · {Math.min(practice.i + 1, PRACTICE_DIRS.length)}/{PRACTICE_DIRS.length}</span>

@@ -22,8 +22,6 @@ import {
   START_MS,
   MIN_MS,
   DWELL_MS,
-  REARM_MS,
-  MIN_GAP_MS,
   STEADY_HOLD_MS,
 } from './snake.js'
 
@@ -267,78 +265,17 @@ describe('createDwell (bakışla yön)', () => {
     const d = createDwell()
     d.push('down', 0)
     expect(d.push('down', DWELL_MS).fire).toBe('down')
-    d.push('center', 400)
-    expect(d.push('center', 400 + REARM_MS).candidate).toBeNull() // ortada: kilit açıldı
-    d.push('down', 700)
-    expect(d.push('down', 700 + DWELL_MS).fire).toBe('down')
-    d.push('center', 1000)
-    d.push('center', 1000 + REARM_MS)
-    d.push('up', 1300)
-    expect(d.push(null, 1400).progress).toBe(0)
-    expect(d.push('up', 1450).fire).toBeNull()
+    expect(d.push('center', 400).candidate).toBeNull()
+    d.push('down', 500)
+    expect(d.push('down', 500 + DWELL_MS).fire).toBe('down')
+    d.push('up', 1000)
+    expect(d.push(null, 1100).progress).toBe(0)
+    expect(d.push('up', 1150).fire).toBeNull()
   })
   it('ilerleme 0..1', () => {
     const d = createDwell({ dwellMs: 200 })
     d.push('left', 0)
     expect(d.push('left', 100).progress).toBeCloseTo(0.5)
-  })
-})
-
-describe('createDwell: komut kilidi (Bug 16)', () => {
-  it('aşağı komutundan sonra göz yana kayarsa yeni yön alınmaz (ortaya dönmeden)', () => {
-    const d = createDwell()
-    d.push('down', 0)
-    expect(d.push('down', DWELL_MS).fire).toBe('down')
-    // göz ortaya dönmeden sağa kayıyor ve uzun süre orada kalıyor
-    for (let t = 300; t <= 2000; t += 33) {
-      const r = d.push('right', t)
-      expect(r.fire).toBeNull()
-      expect(r.waitCenter).toBe(true)
-    }
-  })
-  it('ortaya dönünce (REARM_MS) kilit açılır, sonraki yön kabul edilir', () => {
-    const d = createDwell()
-    d.push('up', 0)
-    d.push('up', DWELL_MS)
-    d.push('center', 500)
-    d.push('center', 500 + REARM_MS)
-    d.push('left', 800)
-    expect(d.push('left', 800 + DWELL_MS).fire).toBe('left')
-  })
-  it('kısa orta geçişi (dönüş sakkadı) kilidi açmaz', () => {
-    const d = createDwell()
-    d.push('down', 0)
-    d.push('down', DWELL_MS)
-    d.push('center', 400)
-    d.push('right', 400 + REARM_MS - 50) // ortada yeterince kalmadan sağa
-    expect(d.push('right', 400 + REARM_MS + DWELL_MS).fire).toBeNull()
-  })
-  it('göz kırpma (null) kilidi açmaz', () => {
-    const d = createDwell()
-    d.push('down', 0)
-    d.push('down', DWELL_MS)
-    d.push(null, 400)
-    d.push(null, 700)
-    d.push('right', 800)
-    expect(d.push('right', 800 + DWELL_MS).fire).toBeNull()
-  })
-  it('en kısa ara: ortaya çok hızlı dönülse de MIN_GAP_MS dolmadan kilit açılmaz', () => {
-    const d = createDwell()
-    d.push('left', 0)
-    d.push('left', DWELL_MS)
-    d.push('center', DWELL_MS + 10)
-    expect(d.push('center', DWELL_MS + 10 + REARM_MS).waitCenter).toBe(false)
-    d.push('up', DWELL_MS + 10 + REARM_MS + 5)
-    expect(d.push('up', DWELL_MS + 10 + REARM_MS + 5 + DWELL_MS).fire).toBeNull() // hâlâ kilitli (ara < MIN_GAP_MS)
-    expect(MIN_GAP_MS).toBeGreaterThan(DWELL_MS + REARM_MS)
-  })
-  it('reset kilidi açar (yeni oyun / devam)', () => {
-    const d = createDwell()
-    d.push('down', 0)
-    d.push('down', DWELL_MS)
-    d.reset()
-    d.push('right', 1000)
-    expect(d.push('right', 1000 + DWELL_MS).fire).toBe('right')
   })
 })
 

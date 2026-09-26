@@ -29,7 +29,6 @@ export const RELEASES = [
       { kind: 'fix', text: 'Giriş ya da ödeme ekranı hata verirse altında hata kodu görünüyor (destek için).' },
       { kind: 'fix', text: 'Ödeme ekranı "Planlar yükleniyor"da takılı kalıyordu (abonelik altyapısı hiç başlamıyordu); düzeldi. Planlar yine gelmezse 20 saniye sonra nedeni yazılır.' },
       { kind: 'fix', text: 'İlk bakış kırpma sayımı: okuma metni 20 saniyeden önce bitiyordu; metin uzadı, süre boyunca okuma sürüyor.' },
-      { kind: 'fix', text: 'Yılan (gözle): verdiğin yön, gözün istemsiz kaymasıyla hemen bozulmuyor. Yeni yön için önce ortaya bakman gerekiyor; ekranda "önce ortaya bak" yazar.' },
       { kind: 'change', text: 'Bugünün yolu artık sıralı: duraklar tek tek açılır. İlerideki bir durağa dokununca önce sıradakini yapman istenir; bitenleri istediğin kadar tekrar yapabilirsin.' },
       { kind: 'new', text: 'Abonelik: haftalık plan eklendi (yıllık, aylık, haftalık; hepsi 7 gün ücretsiz deneme). Ödeme ekranı App Store fiyatlarını yüklüyor.' },
       { kind: 'change', text: 'Yeni uygulama simgesi: Nefona\'nın "n" harfi bir göz kapağı, altında iris.' },
