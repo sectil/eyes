@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { errorDetail } from '../lib/account.js'
 import { ScanEye, ChartLine, Dumbbell, Bell, Check, ShieldCheck, Download, Sparkles } from 'lucide-react'
 import { getPlans, purchase, restore, isNative } from '../lib/subscription.js'
 import { scheduleTrialReminder, TRIAL_REMIND_DAYS } from '../lib/restNotify.js'
@@ -33,6 +34,7 @@ export default function Paywall({ onUnlocked, onExport, onSafety, preview = fals
   const [selected, setSelected] = useState(preview ? 'annual' : null)
   const [busy, setBusy] = useState(false)
   const [msg, setMsg] = useState(null)
+  const [detail, setDetail] = useState('') // Bug 14: ham hata metni (teşhis)
 
   useEffect(() => {
     if (preview) return
@@ -41,9 +43,10 @@ export default function Paywall({ onUnlocked, onExport, onSafety, preview = fals
         setPlans(p)
         setSelected(p[0]?.id ?? null)
       })
-      .catch(() => {
+      .catch((e) => {
         setPlans([])
         setMsg('Abonelik seçenekleri yüklenemedi. İnternet bağlantını kontrol edip tekrar dene.')
+        setDetail(errorDetail(e))
       })
   }, [preview])
 
@@ -140,6 +143,7 @@ export default function Paywall({ onUnlocked, onExport, onSafety, preview = fals
         </p>
       )}
       {msg && <p className="small" role="status" style={{ color: 'var(--warn)', textAlign: 'center' }}>{msg}</p>}
+      {detail && <p className="acct-detail muted small">{detail}</p>}
 
       <div className="paywall-links">
         <button className="link-btn" onClick={doRestore} disabled={busy}>Satın alımları geri yükle</button>
