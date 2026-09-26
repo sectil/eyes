@@ -1,0 +1,100 @@
+/* Dalga (screens/Dalga.jsx). Mod rengi: --dg1 / --dg2. Dinleme ekranı her temada koyu. */
+.dg { gap: 12px; min-height: 100dvh; }
+.dg > .grow { flex: 1; }
+.dg-top { display: flex; align-items: center; gap: 12px; min-height: 40px; }
+.dg-top .oq-bar { flex: 1; }
+.dg-ey { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.dg-h { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; line-height: 1.24; text-wrap: balance; margin: 0; }
+.dg-src { font: 500 0.7rem/1.5 var(--font-mono); color: var(--ink-3); margin: 0; overflow-wrap: anywhere; }
+.dg-err { margin: 0; color: var(--warn); font-size: 0.92rem; }
+
+.dg-modes { display: flex; flex-direction: column; gap: 9px; }
+.dg-mode {
+  display: flex; align-items: center; gap: 14px; text-align: left; min-height: 76px; padding: 11px 14px; border-radius: 20px; cursor: pointer;
+  border: 2px solid var(--border); background: var(--surface); color: var(--ink); font: inherit;
+}
+.dg-mode[aria-checked='true'] { border-color: var(--c1); background: color-mix(in srgb, var(--c1) 12%, var(--surface)); }
+.dg-mode svg { width: 48px; height: 48px; flex: none; }
+.dg-mode b { display: block; font: 700 1.08rem var(--font-display); }
+.dg-mode span { color: var(--ink-3); font-size: 0.82rem; }
+.dg-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.dg-chip {
+  font: 600 0.95rem var(--font-body); border-radius: 999px; padding: 9px 16px; min-height: 44px; cursor: pointer;
+  background: var(--surface); color: var(--ink-2); border: 1.5px solid var(--border);
+}
+.dg-chip[aria-checked='true'] { background: color-mix(in srgb, var(--dg1) 18%, var(--surface)); border-color: var(--dg1); color: var(--ink); }
+.dg-tog { display: flex; gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 10px 13px; cursor: pointer; color: var(--ink-2); }
+.dg-tog > div { flex: 1; }
+.dg-tog b { display: block; font-size: 0.95rem; color: var(--ink); }
+.dg-tog span { color: var(--ink-3); font-size: 0.8rem; }
+.dg-tog input { appearance: none; width: 46px; height: 28px; border-radius: 14px; background: var(--surface-3); position: relative; flex: none; cursor: pointer; margin: 0; transition: background 0.2s; }
+.dg-tog input::after { content: ''; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); transition: transform 0.2s; }
+.dg-tog input:checked { background: var(--dg1); }
+.dg-tog input:checked::after { transform: translateX(18px); }
+.dg-mode:focus-visible, .dg-chip:focus-visible, .dg-tog input:focus-visible, .dg-rate button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* Puan 1–10: büyük düğmeler */
+.dg-rate { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.dg-rate button {
+  font: 700 1.3rem var(--font-display); min-height: 60px; border-radius: 16px; cursor: pointer;
+  border: 2px solid var(--border); background: var(--surface); color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.dg-rate button[aria-checked='true'] { background: var(--dg1); border-color: var(--dg1); color: #06090d; }
+.dg-ends { display: flex; justify-content: space-between; color: var(--ink-3); font-size: 0.82rem; }
+.dg-lbl { color: var(--ink-2); font-size: 0.95rem; }
+.dg-why {
+  font: 500 1rem var(--font-body); width: 100%; min-height: 88px; border-radius: 16px; resize: none; padding: 12px 14px;
+  background: var(--surface); border: 1.5px solid var(--border); color: var(--ink);
+}
+.dg-why:focus { outline: none; border-color: var(--dg1); }
+
+/* Dinleme: tam ekran tuval */
+.dg-play { position: relative; height: 100dvh; overflow: hidden; background: #050a12; color: #eef3f6; }
+.dg-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.dg-hud { position: absolute; left: 16px; right: 16px; top: calc(12px + env(safe-area-inset-top)); display: flex; align-items: center; gap: 10px; z-index: 2; }
+.dg-hud .dg-ey { color: var(--dg1); }
+.dg-x { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; cursor: pointer; background: rgba(7, 12, 18, 0.5); color: #cfd8df; border: 1px solid rgba(255, 255, 255, 0.1); }
+.dg-t { margin-left: auto; font: 500 1rem var(--font-mono); font-variant-numeric: tabular-nums; color: rgba(238, 243, 246, 0.85); }
+.dg-mid { position: absolute; left: 24px; right: 24px; top: calc(76px + env(safe-area-inset-top)); z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; pointer-events: none; }
+.dg-word { font: 800 2rem var(--font-display); color: #fff; opacity: 0; transition: opacity 2.4s ease; min-height: 1.2em; }
+.dg-word.on { opacity: 0.9; }
+.dg-say { font-size: 1rem; color: rgba(238, 243, 246, 0.86); max-width: 26ch; text-wrap: balance; }
+.dg-bot { position: absolute; left: 18px; right: 18px; bottom: calc(22px + env(safe-area-inset-bottom)); z-index: 2; display: flex; flex-direction: column; gap: 12px; }
+.dg-hint { margin: 0; text-align: center; font-size: 0.9rem; color: rgba(238, 243, 246, 0.72); min-height: 1.4em; }
+.dg-ctrl { display: flex; gap: 12px; align-items: center; }
+.dg-pp { width: 60px; height: 60px; border-radius: 50%; border: 0; background: rgba(238, 243, 246, 0.95); color: #06090d; display: grid; place-items: center; cursor: pointer; flex: none; }
+.dg-vol { flex: 1; display: flex; align-items: center; gap: 8px; color: rgba(238, 243, 246, 0.7); font-size: 0.8rem; }
+.dg-vol input { flex: 1; accent-color: var(--dg1); }
+.dg-pp:focus-visible, .dg-x:focus-visible { outline: 3px solid var(--dg1); outline-offset: 3px; }
+
+/* Sonuç */
+.dg-delta { display: flex; align-items: baseline; gap: 10px; font-family: var(--font-display); }
+.dg-delta b { font-size: 2.8rem; font-weight: 800; }
+.dg-delta span { font-size: 1.4rem; color: var(--ink-3); }
+.dg-delta em { font-style: normal; margin-left: auto; font-size: 1.15rem; font-weight: 700; color: var(--accent); }
+.dg-exp { display: flex; gap: 10px; align-items: center; font-size: 0.85rem; color: var(--ink-2); }
+.dg-dots { display: flex; gap: 5px; flex: none; }
+.dg-dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--surface-3); }
+.dg-dots i.on { background: var(--dg1); }
+.dg-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+.dg-card p { margin: 0; font-size: 0.92rem; }
+.dg-card .h { font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+.dg-card b.ok { color: var(--ok); }
+.dg-card b.no { color: var(--warn); }
+.dg-card b.op { color: var(--lens-text); }
+@media (prefers-reduced-motion: reduce) { .dg-word { transition: none; } }
+.dg-kick { align-self: center; font: 700 0.95rem var(--font-body); border-radius: 14px; padding: 12px 16px; border: 0; background: var(--dg1); color: #06090d; cursor: pointer; }
+.dg-diag { margin: 0; text-align: center; font: 500 0.7rem var(--font-mono); color: rgba(238, 243, 246, 0.55); }
+
+/* Süre: kaydırıcı + hızlı seçim */
+.dg-dur { display: flex; flex-direction: column; gap: 8px; }
+.dg-dur label { color: var(--ink-2); font-size: 0.92rem; }
+.dg-dur label b { color: var(--ink); font-family: var(--font-display); }
+.dg-dur input[type='range'] { width: 100%; accent-color: var(--dg1); }
+.dg-dur .dg-chip { min-width: 52px; text-align: center; }
+
+/* Uyku: siyah zemin, soluk saat (OLED'de az güç) */
+.dg-sleep { height: 100dvh; background: #000; color: #eef3f6; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; position: relative; }
+.dg-clock { font: 300 4.2rem var(--font-display); letter-spacing: -0.02em; opacity: 0.2; font-variant-numeric: tabular-nums; }
+.dg-sleep-sub { margin: 0; font-size: 0.85rem; opacity: 0.16; }
+.dg-sleep-end { position: absolute; bottom: calc(40px + env(safe-area-inset-bottom)); font: 600 1rem var(--font-body); padding: 12px 28px; border-radius: 14px; background: rgba(238, 243, 246, 0.08); color: rgba(238, 243, 246, 0.6); border: 1px solid rgba(255, 255, 255, 0.12); cursor: pointer; }

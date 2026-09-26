@@ -1,0 +1,61 @@
+/* Hesap, "Seni tanıyalım", deneme çizelgesi ve Profilim hesap bölümü (Build 23b). Renkler tema belirteçlerinden. */
+.acct { min-height: 100dvh; display: flex; flex-direction: column; gap: 14px; }
+.acct .grow { flex: 1; }
+.acct-top { display: flex; justify-content: space-between; align-items: center; min-height: 44px; }
+.acct-ring { width: 128px; height: 128px; align-self: center; margin-top: 4vh; }
+.acct-title { font-family: var(--font-display); font-weight: 750; font-size: 1.6rem; letter-spacing: -0.01em; text-align: center; margin: 0; }
+.acct-sub { color: var(--ink-2); text-align: center; margin: 0; }
+.acct-actions { display: flex; flex-direction: column; gap: 10px; }
+.acct-btn {
+  width: 100%; min-height: 54px; border-radius: 16px; display: flex; gap: 10px; align-items: center; justify-content: center;
+  font: 650 1rem var(--font-body); cursor: pointer; border: 1px solid var(--border);
+}
+.acct-btn:disabled { opacity: 0.5; }
+.acct-btn.apple { background: #0b0d10; color: #fff; border-color: #0b0d10; }
+:root[data-theme='dark'] .acct-btn.apple { background: #f4f6f8; color: #05080c; border-color: #f4f6f8; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .acct-btn.apple { background: #f4f6f8; color: #05080c; border-color: #f4f6f8; } }
+.acct-btn.mail { background: var(--surface); color: var(--ink); border-color: var(--accent); }
+.acct-guest { align-self: center; font-weight: 600; }
+.acct-fine { font-size: 0.78rem; color: var(--ink-3); text-align: center; margin: 4px 0 0; line-height: 1.45; }
+.acct-fine a { color: var(--ink-2); }
+.acct-msg { color: var(--warn); text-align: center; margin: 0; font-size: 0.9rem; }
+.acct-icon { width: 76px; height: 76px; border-radius: 22px; display: grid; place-items: center; align-self: center; margin-top: 3vh; color: var(--accent); background: var(--accent-soft); }
+.acct-code { font-family: var(--font-mono); font-size: 1.5rem; letter-spacing: 0.3em; text-align: center; }
+
+.acct-badge { display: inline-flex; gap: 8px; align-items: center; font-size: 0.8rem; color: var(--ink-2); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; width: fit-content; }
+.acct-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+
+.bd-wrap { display: grid; gap: 4px; }
+.bd-boxes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.5fr); gap: 8px; }
+.bd-box { text-align: center; font-variant-numeric: tabular-nums; min-width: 0; width: 100%; box-sizing: border-box; }
+.bd-boxes.bad .bd-box { border-color: var(--warn); }
+
+.city { position: relative; }
+.city-input { position: relative; }
+.city-input svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.city-input .input { padding-left: 36px; width: 100%; box-sizing: border-box; }
+.city-list { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+.city-opt { font: 550 0.88rem var(--font-body); color: var(--ink); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 7px 12px; cursor: pointer; }
+
+.setup { display: flex; flex-direction: column; gap: 16px; }
+.setup-avatar { display: flex; gap: 14px; align-items: center; }
+.setup-req { color: var(--ink-3); font-weight: 400; }
+
+.trial-tl { list-style: none; margin: 4px 0; padding: 0; display: grid; }
+.trial-tl li { position: relative; display: grid; gap: 2px; padding: 0 0 14px 28px; color: var(--ink-2); font-size: 0.95rem; }
+.trial-tl li b { color: var(--ink); }
+.trial-tl li::before { content: ''; position: absolute; left: 4px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+.trial-tl li:not(:last-child)::after { content: ''; position: absolute; left: 9px; top: 18px; bottom: 0; width: 2px; background: var(--accent-soft); }
+
+.ph-acct .danger { color: var(--danger); }
+.acct-sheet-back { position: fixed; inset: 0; z-index: 50; background: rgba(0, 0, 0, 0.45); display: flex; align-items: flex-end; justify-content: center; }
+.acct-sheet {
+  width: min(100%, 520px); box-sizing: border-box; background: var(--surface); border: 1px solid var(--border); border-radius: 22px 22px 0 0;
+  padding: 20px 20px calc(env(safe-area-inset-bottom) + 20px); display: grid; gap: 12px; box-shadow: var(--shadow-lg);
+}
+.acct-sheet h2 { margin: 0; font-family: var(--font-display); font-size: 1.15rem; }
+.acct-sheet p { margin: 0; color: var(--ink-2); }
+/* Bug 13: açılır şehir listesi — boşken 81 il kaydırılır, yazınca süzülmüş öneriler */
+.city-list.all { flex-wrap: wrap; max-height: 220px; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-2); }
+.city-opt[aria-selected="true"] { border-color: var(--accent); color: var(--accent); }
+.acct-detail { margin: 4px 0 0; text-align: center; font-family: var(--font-mono); font-size: 0.7rem; overflow-wrap: anywhere; user-select: text; -webkit-user-select: text; }

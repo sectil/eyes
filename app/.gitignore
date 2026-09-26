@@ -1,0 +1,7 @@
+node_modules
+dist
+public/mediapipe-wasm
+.env
+.env.local
+.env.production
+build-ios

@@ -1,0 +1,78 @@
+/* Yılan "gözle nasıl oynanır" animasyonu (components/GazeTutorial.jsx). Döngü 8 sn: sağ, yukarı, sol, aşağı. */
+.gt { width: 100%; height: auto; display: block; }
+.gt-board-bg { fill: var(--surface-2); stroke: var(--border); stroke-width: 1.5; }
+.gt-dot { fill: var(--ink-3); opacity: 0.35; }
+.gt-body { fill: none; stroke: var(--iris-1); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+.gt-head { fill: var(--iris-1); }
+.gt-eye { fill: #061014; }
+.gt-food { fill: #ff7a59; }
+.gt-arrow { fill: var(--iris-1); opacity: 0.18; }
+.gt-brow { fill: none; stroke: #2b1f1a; stroke-width: 3; stroke-linecap: round; }
+.gt-lid { fill: none; stroke: #6b4a3a; stroke-width: 1.6; stroke-linecap: round; }
+.gt-blink { fill: #d9a283; opacity: 0; transform-origin: center; }
+.gt-nose { fill: none; stroke: #b47a5e; stroke-width: 1.6; stroke-linecap: round; }
+.gt-mouth { fill: none; stroke: #a8574a; stroke-width: 2; stroke-linecap: round; }
+.gt-label { font-family: var(--font-body); font-size: 11px; font-weight: 650; fill: var(--ink-2); }
+.gt-pupil { transition: transform 0.35s cubic-bezier(0.3, 0.9, 0.4, 1); }
+
+/* Sabit kare: yalnızca ilgili yılan/ok/metin görünür */
+.gt-fixed .gt-snake, .gt-fixed .gt-t { opacity: 0; }
+.gt-fixed.gt-right .gt-s-right, .gt-fixed.gt-up .gt-s-up, .gt-fixed.gt-left .gt-s-left, .gt-fixed.gt-down .gt-s-down { opacity: 1; }
+.gt-fixed.gt-right .gt-a-right, .gt-fixed.gt-up .gt-a-up, .gt-fixed.gt-left .gt-a-left, .gt-fixed.gt-down .gt-a-down { opacity: 1; }
+.gt-fixed.gt-right .gt-t-right, .gt-fixed.gt-up .gt-t-up, .gt-fixed.gt-left .gt-t-left, .gt-fixed.gt-down .gt-t-down { opacity: 1; }
+
+/* Animasyon: 8 sn döngü, her yön %25. Gözbebeği önce kayar (0–%4), yılan hemen ardından döner. */
+.gt-anim .gt-pupil { animation: gt-pupil 8s infinite; }
+.gt-anim .gt-snake { opacity: 0; animation: gt-show 8s infinite; }
+.gt-anim .gt-s-right { animation-delay: 0s; }
+.gt-anim .gt-s-up { animation-delay: 2s; }
+.gt-anim .gt-s-left { animation-delay: 4s; }
+.gt-anim .gt-s-down { animation-delay: 6s; }
+.gt-anim .gt-arrow { animation: gt-arrow 8s infinite; }
+.gt-anim .gt-a-right { animation-delay: 0s; }
+.gt-anim .gt-a-up { animation-delay: 2s; }
+.gt-anim .gt-a-left { animation-delay: 4s; }
+.gt-anim .gt-a-down { animation-delay: 6s; }
+.gt-anim .gt-t { opacity: 0; animation: gt-show 8s infinite; }
+.gt-anim .gt-t-right { animation-delay: 0s; }
+.gt-anim .gt-t-up { animation-delay: 2s; }
+.gt-anim .gt-t-left { animation-delay: 4s; }
+.gt-anim .gt-t-down { animation-delay: 6s; }
+.gt-anim .gt-blink { animation: gt-blink 8s infinite; }
+
+@keyframes gt-pupil {
+  0%, 2% { transform: translate(0, 0); }
+  6%, 22% { transform: translate(5.2px, 0); }
+  25%, 27% { transform: translate(0, 0); }
+  31%, 47% { transform: translate(0, -3.2px); }
+  50%, 52% { transform: translate(0, 0); }
+  56%, 72% { transform: translate(-5.2px, 0); }
+  75%, 77% { transform: translate(0, 0); }
+  81%, 97% { transform: translate(0, 3.4px); }
+  100% { transform: translate(0, 0); }
+}
+/* Her grup kendi 2 sn'lik diliminde görünür: %6–%25 (gecikmeyle kaydırılır) */
+@keyframes gt-show {
+  0%, 5% { opacity: 0; }
+  7%, 24.5% { opacity: 1; }
+  25.5%, 100% { opacity: 0; }
+}
+@keyframes gt-arrow {
+  0%, 5% { opacity: 0.18; }
+  7%, 22% { opacity: 1; }
+  25%, 100% { opacity: 0.18; }
+}
+@keyframes gt-blink {
+  0%, 23%, 26%, 48%, 51%, 73%, 76%, 98%, 100% { opacity: 0; transform: scaleY(1); }
+  24%, 49%, 74%, 99% { opacity: 1; transform: scaleY(7); }
+}
+.gt-blink { transform-origin: 120px 205px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gt-anim .gt-pupil, .gt-anim .gt-snake, .gt-anim .gt-arrow, .gt-anim .gt-t, .gt-anim .gt-blink { animation: none; }
+  .gt-anim .gt-s-right, .gt-anim .gt-a-right, .gt-anim .gt-t-right { opacity: 1; }
+  .gt-anim .gt-pupil { transform: translate(5.2px, 0); }
+}
+
+/* Dört kare yan yana (hareket azaltma ya da "Nasıl oynanır" sayfası) */
+.gt-frames { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }

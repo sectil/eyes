@@ -1,0 +1,56 @@
+/* Gelişim 2.0 (components/ProgressOverview.jsx) — tema belirteçleriyle */
+.p2 { display: grid; gap: 12px; }
+.p2-alert { display: grid; gap: 8px; border-color: var(--warn); background: var(--warn-bg); }
+.p2-alert.red { border-color: var(--danger); background: var(--danger-bg); }
+.p2-alert p { margin: 0; color: var(--ink); }
+.p2-alert-h { display: inline-flex; gap: 6px; align-items: center; font-weight: 700; font-size: 0.85rem; color: var(--warn); }
+.p2-alert.red .p2-alert-h { color: var(--danger); }
+.p2-alert .btn { width: auto; justify-self: start; }
+.p2-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.p2-tile {
+  display: grid; gap: 3px; text-align: left; align-content: start; padding: 12px 13px; border-radius: var(--radius-sm);
+  background: var(--surface); border: 1px solid var(--border); color: var(--ink); font: inherit; cursor: pointer;
+}
+.p2-tile .l { font-size: 0.78rem; font-weight: 650; color: var(--ink-2); }
+.p2-tile .v { font-size: 1.35rem; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+.p2-tile .v small { font-size: 0.75rem; font-weight: 500; color: var(--ink-3); margin-left: 4px; }
+.p2-tile .s { font-size: 0.75rem; color: var(--ink-3); overflow-wrap: anywhere; }
+.p2-pill { justify-self: start; display: inline-block; font-size: 0.7rem; font-weight: 700; border-radius: 999px; padding: 2px 8px; background: var(--surface-2); color: var(--ink-3); }
+.p2-pill.ok { background: var(--ok-bg); color: var(--ok); }
+.p2-pill.warn { background: var(--warn-bg); color: var(--warn); }
+.p2-pill.danger { background: var(--danger-bg); color: var(--danger); }
+.p2-empty { margin: 0; font-size: 0.85rem; color: var(--ink-3); }
+
+.p2-detail { display: flex; flex-direction: column; gap: 14px; }
+.p2-card { display: grid; gap: 10px; }
+.p2-msg { margin: 0; font-size: 0.92rem; color: var(--ink-2); line-height: 1.5; }
+.p2-kv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; text-align: center; }
+.p2-kv div { background: var(--surface-2); border-radius: var(--radius-sm); padding: 8px 4px; }
+.p2-kv b { display: block; font-variant-numeric: tabular-nums; }
+.p2-kv span { font-size: 0.72rem; color: var(--ink-3); }
+.p2-rule { display: grid; gap: 6px; font-size: 0.88rem; color: var(--ink-2); }
+.p2-rule p { margin: 0; }
+.p2-rule .warn { color: var(--warn); }
+.p2-rule .danger { color: var(--danger); }
+.p2-eff { display: grid; gap: 4px; }
+.p2-eff-h { margin: 0; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; font-size: 0.9rem; }
+.p2-eff p.muted { margin: 0; }
+
+.p2-spark, .p2-dumb { width: 100%; height: auto; display: block; overflow: visible; }
+.p2-spark .grid, .p2-dumb .grid { stroke: var(--chart-grid); stroke-width: 1; }
+.p2-spark .band { fill: var(--surface-2); opacity: 0.8; }
+.p2-spark .line, .p2-dumb .line { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.p2-spark .dot { fill: var(--accent); opacity: 0.55; }
+.p2-spark .end, .p2-dumb .end { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.p2-dumb .pre { fill: var(--ink-3); stroke: var(--surface); stroke-width: 2; }
+.p2-spark .tick, .p2-dumb .tick { fill: var(--ink-3); font-size: 10px; font-family: var(--font-body); }
+.p2-spark .endlbl, .p2-dumb .endlbl { fill: var(--ink); font-size: 11px; font-weight: 700; font-family: var(--font-body); }
+.p2-report { display: flex; justify-content: space-between; align-items: center; gap: 10px; text-align: left; padding: 13px 14px; border-radius: var(--radius-sm); border: 1px solid var(--accent); background: var(--accent-soft); color: var(--ink); font: inherit; cursor: pointer; }
+.p2-report span { display: grid; gap: 2px; }
+.p2-report small { color: var(--ink-2); font-size: 0.78rem; }
+.p2-export-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.p2-export-row .btn { flex: 1 1 auto; gap: 6px; }
+.p2-export-msg { margin: 0; font-size: 0.82rem; font-weight: 650; }
+.p2-export-msg.ok { color: var(--ok); }
+.p2-export-msg.warn { color: var(--warn); }
+.p2-export .spin { animation: spin 0.9s linear infinite; }

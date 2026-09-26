@@ -1,0 +1,116 @@
+/* ============================================================
+   RestBreak — tam ekran "uzağa bak" konfor molası
+   Yalnızca styles.css değişkenleri kullanılır (açık/koyu tema).
+   ============================================================ */
+
+.rest-root {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  overflow-y: auto;
+  background: var(--bg-grad), var(--bg);
+  color: var(--ink);
+  animation: rest-in 0.35s ease both;
+}
+@keyframes rest-in { from { opacity: 0; } to { opacity: 1; } }
+
+.rest-screen {
+  position: relative;
+  min-height: 100dvh;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.rest-head { display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 8px; }
+.rest-head h1 { font-size: 1.75rem; }
+.rest-head p { color: var(--ink-2); max-width: 30ch; }
+.rest-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent);
+  font-size: 0.8125rem; font-weight: 650; letter-spacing: 0.01em;
+}
+
+/* Dairesel geri sayım */
+.rest-dial {
+  position: relative;
+  width: min(232px, 64vw);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.rest-dial svg { width: 100%; height: 100%; }
+.rest-track { fill: none; stroke: var(--surface-3); }
+.rest-value {
+  fill: none;
+  stroke: var(--accent-graphic);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.25s linear, stroke 0.3s ease;
+}
+.rest-dial::before {
+  /* yumuşak hale: göz dinlenirken "nefes alan" bir arka plan */
+  content: '';
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+  animation: rest-breathe 5s ease-in-out infinite;
+}
+@keyframes rest-breathe { 0%, 100% { transform: scale(0.86); opacity: 0.7; } 50% { transform: scale(1.06); opacity: 1; } }
+.rest-dial.is-waiting { opacity: 0.55; }
+.rest-dial.is-waiting::before { animation-play-state: paused; }
+.rest-dial.is-done .rest-value { stroke: var(--ok); }
+.rest-dial.is-done { transform: scale(1.03); }
+
+.rest-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.rest-sec {
+  font-size: 4.5rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.rest-unit { font-size: 0.85rem; font-weight: 600; color: var(--ink-3); letter-spacing: 0.04em; }
+.rest-check {
+  width: 84px; height: 84px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--ok-bg); color: var(--ok);
+  animation: rest-pop 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.3) both;
+}
+@keyframes rest-pop { from { transform: scale(0.6); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.rest-status {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 2.6em;
+  padding: 8px 14px;
+  border-radius: 14px;
+  font-weight: 650;
+  font-size: 0.95rem;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.rest-status.is-calm { color: var(--ink-2); background: var(--surface-2); }
+.rest-status.is-ok { color: var(--ok); background: var(--ok-bg); }
+.rest-status.is-wait { color: var(--warn); background: var(--warn-bg); }
+
+.rest-foot { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.rest-tip { font-size: 0.85rem; color: var(--ink-3); max-width: 34ch; }
+.rest-skip { max-width: 320px; }
+
+/* ✕ (isteğe bağlı onClose): mola sayılmadan çık */
+.rest-close {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 12px);
+  left: 16px;
+  z-index: 1;
+}

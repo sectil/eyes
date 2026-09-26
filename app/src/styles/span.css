@@ -1,0 +1,77 @@
+/* Tek Bakışta (screens/SpanGame.jsx). Tur dışı ekranlar uygulama tokenlarıyla; test ekranı E testi gibi beyaz. */
+.sp { gap: 14px; min-height: 100dvh; }
+.sp > .grow { flex: 1; }
+.sp-top { display: flex; align-items: center; gap: 12px; min-height: 40px; }
+.sp-top .oq-bar { flex: 1; }
+.sp-ey { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.sp-h { font-family: var(--font-display); font-weight: 700; font-size: 1.45rem; line-height: 1.22; text-wrap: balance; margin: 0; }
+.sp-scene { position: relative; height: 140px; border-radius: 20px; border: 1px solid var(--border); overflow: hidden;
+  background: radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--iris-1) 18%, transparent), transparent 62%), var(--surface); }
+.sp-slots { position: absolute; left: 50%; top: 50%; display: flex; gap: 3px; transform: translate(-50%, -50%); }
+.sp-slots i { width: 16px; height: 24px; border-radius: 4px; background: color-mix(in srgb, var(--ink) 5%, transparent); border: 1px solid var(--border); }
+.sp-slots i.c { background: none; border: 0; display: grid; place-items: center; }
+.sp-slots i.c::after { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--iris-1); box-shadow: 0 0 12px var(--iris-1); }
+.sp-scene-cap { position: absolute; left: 12px; bottom: 10px; font: 500 0.7rem var(--font-mono); color: var(--ink-3); }
+.sp-jev { display: flex; gap: 10px; align-items: flex-start; }
+.sp-jev p { margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 10px 12px; font-size: 0.92rem; }
+.sp-src { font: 500 0.7rem/1.5 var(--font-mono); color: var(--ink-3); margin: 0; }
+
+/* Test ekranı: beyaz, yüksek kontrast; düğmeler büyük (az gören kullanıcı) */
+.sp-test {
+  min-height: 100dvh; display: flex; flex-direction: column; gap: 12px; background: #fff; color: #0b1219;
+  padding: calc(14px + env(safe-area-inset-top)) 16px calc(20px + env(safe-area-inset-bottom));
+}
+.sp-test-top { display: flex; align-items: center; gap: 12px; }
+.sp-test-top .oq-bar { flex: 1; background: #e2e8f0; }
+.sp-x { width: 44px; height: 44px; border-radius: 14px; border: 1px solid #e2e8f0; background: #f1f5f9; color: #334155; display: grid; place-items: center; cursor: pointer; flex: none; }
+.sp-test-ey { font: 500 0.72rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: #0b7480; }
+.sp-stage { position: relative; flex: 1; min-height: 180px; display: grid; place-items: center; }
+.sp-fix { width: 12px; height: 12px; border-radius: 50%; background: #0b7480; box-shadow: 0 0 0 6px rgba(11, 116, 128, 0.12); }
+.sp-tick { position: absolute; left: 50%; width: 3px; margin-left: -1.5px; border-radius: 2px; background: #0b7480; }
+.sp-letter { position: absolute; top: 50%; transform: translateY(-50%); text-align: center; font-weight: 700; line-height: 1; color: #000; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
+.sp-test-hint { text-align: center; margin: 0; font-size: 1rem; font-weight: 600; color: #334155; }
+.sp-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.sp-ch {
+  min-height: 68px; border-radius: 18px; border: 2px solid #64748b; background: #f8fafc; color: #0f172a; cursor: pointer;
+  font: 700 1.6rem/1 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; letter-spacing: 0.14em;
+}
+.sp-ch:disabled { cursor: default; }
+.sp-ch.ok { border-color: #13704b; background: #ecfdf5; }
+.sp-ch.no { border-color: #b4400f; background: #fff7ed; }
+.sp-ch:focus-visible, .sp-cant:focus-visible, .sp-tfb:focus-visible { outline: 3px solid #0f766e; outline-offset: 3px; }
+.sp-cant {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 60px; border-radius: 999px;
+  border: 2px solid #64748b; background: #fff; color: #0f172a; font: 700 1.2rem var(--font-body); cursor: pointer;
+}
+
+/* Sonuç */
+.sp-res { display: flex; align-items: baseline; gap: 10px; }
+.sp-res strong { font-family: var(--font-display); font-weight: 800; font-size: 4rem; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.sp-res span { color: var(--ink-2); }
+.sp-chart { width: 100%; height: auto; display: block; }
+.sp-chart .grid { stroke: var(--border); }
+.sp-chart .ax { fill: var(--ink-3); font: 500 9px var(--font-mono); }
+.sp-chart .area { fill: url(#sp-area); }
+.sp-chart .ln { fill: none; stroke: var(--iris-1); stroke-width: 2.5; stroke-linejoin: round; }
+.sp-chart .th { stroke: var(--lens); stroke-dasharray: 3 4; stroke-width: 1.5; }
+.sp-chart .thl { fill: var(--lens-text); font: 500 9px var(--font-mono); }
+.sp-lr { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sp-lr div { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 10px 12px; }
+.sp-lr b { display: block; font-family: var(--font-display); font-size: 1.3rem; }
+.sp-lr span { font-size: 0.8rem; color: var(--ink-3); }
+
+/* Bilim kartı */
+.sp-claim { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.sp-claim .st { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; line-height: 1.3; }
+.sp-tf { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sp-tfb { min-height: 58px; border-radius: 16px; border: 2px solid var(--border); background: var(--surface-2); color: var(--ink); font: 700 1.05rem var(--font-body); cursor: pointer; }
+.sp-tfb.good { border-color: var(--ok); background: var(--ok-bg); }
+.sp-tfb.bad { border-color: var(--warn); background: var(--warn-bg); }
+.sp-reveal { display: flex; flex-direction: column; gap: 8px; }
+.sp-reveal p { margin: 0; font-size: 0.95rem; }
+.sp-verdict { display: flex; align-items: center; gap: 6px; font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; }
+.sp-verdict.myth { color: var(--warn); }
+.sp-verdict.fact { color: var(--ok); }
+.sp-verdict.open { color: var(--lens-text); }
+.sp-cite { font: 500 0.7rem/1.5 var(--font-mono); color: var(--ink-3); border-top: 1px solid var(--border); padding-top: 8px; overflow-wrap: anywhere; }
+.sp-chart .fixm { stroke: var(--ink-3); stroke-dasharray: 2 3; }

@@ -1,0 +1,178 @@
+/* Bugünün yolu (components/TodayPath.jsx). Tasarım: Artifact "Bugünün Yolu" (yol planı §13).
+   Yol tokenları açık temada tanımlı; koyu tema aşağıda iki yerde (sistem + seçili). */
+@property --p { syntax: '<number>'; inherits: true; initial-value: 0; }
+
+.tp {
+  --tp-blade: #dce3e9; --tp-blade-2: #d0d9e0; --tp-blade-edge: rgba(11, 18, 25, 0.24); --tp-housing: #c4ced6; --tp-rim: rgba(11, 18, 25, 0.14);
+  --tp-soft: rgba(17, 169, 184, 0.16); --tp-water-1: rgba(17, 169, 184, 0.06); --tp-water-2: rgba(17, 169, 184, 0.14); --tp-waterline: rgba(17, 169, 184, 0.3);
+  --tp-star: #11a9b8; --tp-moon: #0b7480; --tp-moon-track: rgba(11, 18, 25, 0.1); --tp-moon-core: #ffffff; --tp-ripple: rgba(17, 169, 184, 0.7);
+  --tp-pill: #ddf3f5; --tp-pill-line: rgba(11, 116, 128, 0.3); --tp-bshadow: 0 10px 24px -14px rgba(11, 18, 25, 0.35); --tp-crescent: rgba(201, 211, 219, 0.35);
+  --tp-gold: #f5a623; --tp-gold-text: #9a5b06; --tp-ok: #1fa974; --tp-panel-3: #c9d3db;
+  position: relative; margin: 0 0 4px; overflow-x: clip;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .tp {
+    --tp-blade: #17222c; --tp-blade-2: #1c2934; --tp-blade-edge: rgba(255, 255, 255, 0.17); --tp-housing: #0b121a; --tp-rim: rgba(255, 255, 255, 0.1);
+    --tp-soft: rgba(25, 194, 209, 0.16); --tp-water-1: rgba(25, 194, 209, 0.06); --tp-water-2: rgba(25, 194, 209, 0.18); --tp-waterline: rgba(25, 194, 209, 0.25);
+    --tp-star: #ffffff; --tp-moon: #eef3f6; --tp-moon-track: rgba(255, 255, 255, 0.12); --tp-moon-core: #0b1626; --tp-ripple: rgba(94, 220, 230, 0.85);
+    --tp-pill: #0b2a33; --tp-pill-line: rgba(25, 194, 209, 0.35); --tp-bshadow: 0 12px 28px -14px rgba(0, 0, 0, 0.9); --tp-crescent: rgba(20, 30, 40, 0.4);
+    --tp-gold: #ffb13b; --tp-gold-text: #ffb13b; --tp-ok: #35d39a; --tp-panel-3: #1c2834;
+  }
+}
+:root[data-theme='dark'] .tp {
+  --tp-blade: #17222c; --tp-blade-2: #1c2934; --tp-blade-edge: rgba(255, 255, 255, 0.17); --tp-housing: #0b121a; --tp-rim: rgba(255, 255, 255, 0.1);
+  --tp-soft: rgba(25, 194, 209, 0.16); --tp-water-1: rgba(25, 194, 209, 0.06); --tp-water-2: rgba(25, 194, 209, 0.18); --tp-waterline: rgba(25, 194, 209, 0.25);
+  --tp-star: #ffffff; --tp-moon: #eef3f6; --tp-moon-track: rgba(255, 255, 255, 0.12); --tp-moon-core: #0b1626; --tp-ripple: rgba(94, 220, 230, 0.85);
+  --tp-pill: #0b2a33; --tp-pill-line: rgba(25, 194, 209, 0.35); --tp-bshadow: 0 12px 28px -14px rgba(0, 0, 0, 0.9); --tp-crescent: rgba(20, 30, 40, 0.4);
+  --tp-gold: #ffb13b; --tp-gold-text: #ffb13b; --tp-ok: #35d39a; --tp-panel-3: #1c2834;
+}
+
+/* Başlık satırı ve günün şeridi */
+.tp-count { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-3); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tp-ribbon { display: block; width: 100%; max-width: 300px; margin: 2px auto 6px; height: 16px; overflow: visible; }
+.rb-l { stroke: var(--tp-panel-3); stroke-width: 2; fill: none; }
+.rb-d { stroke: var(--iris-1); stroke-width: 2; fill: none; }
+.rb.l { fill: var(--tp-panel-3); }
+.rb.d { fill: var(--iris-1); }
+.rb.n { fill: var(--bg); stroke: var(--iris-1); stroke-width: 2; }
+.rb.k { fill: var(--tp-panel-3); stroke: var(--warn); stroke-width: 1.3; }
+.rb.rb-r.l { fill: var(--bg); stroke: var(--ink-3); stroke-width: 1.5; }
+.rb.rb-r.d { fill: var(--tp-moon); }
+
+/* Yol alanı: koordinatlar 300 px genişlikte, ortalanır (TodayPath px()) */
+.tp-pv { position: relative; width: 100%; }
+.tp-track { position: absolute; top: 0; overflow: visible; pointer-events: none; }
+.tp-cres { fill: var(--tp-crescent); }
+.tp-ln { fill: none; stroke-width: 6; stroke-linecap: round; }
+.tp-ln.todo { stroke: var(--surface-3); stroke-dasharray: 1 14; }
+.tp-ln.fill { stroke: url(#tp-iris); stroke-dasharray: 1 2; transition: stroke-dashoffset 0.4s ease-out; }
+
+/* Mola bandı: su, yıldızlar, halkalar (Nefes sayma dili) */
+.tp-band { position: absolute; left: -20px; right: -20px; background: linear-gradient(180deg, var(--tp-water-1), var(--tp-water-2)); border-top: 1px solid var(--tp-waterline); }
+.tp-btag { position: absolute; left: 24px; top: 10px; font: 500 10px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.tp-star { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--tp-star); transform: translate(-50%, -50%); }
+.tp-rp { position: absolute; width: 46px; height: 16px; margin: -8px 0 0 -23px; border-radius: 50%; border: 2px solid var(--tp-ripple); transform: scale(var(--k)); opacity: var(--o); pointer-events: none; }
+.tp-rp.live { animation: tp-rip 2.6s ease-out infinite; }
+.tp-rp.live.r2 { animation-delay: 0.9s; }
+.tp-rp.live.r3 { animation-delay: 1.8s; }
+@keyframes tp-rip { from { transform: scale(0.4); opacity: 0.95; } to { transform: scale(4.6); opacity: 0; } }
+
+/* Bölüm etiketi + göz payı ölçeği */
+.tp-sl { position: absolute; left: calc(50% - 150px); display: flex; flex-direction: column; gap: 3px; font: 500 10.5px/1.2 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); pointer-events: none; }
+.tp-sl .l1 { display: flex; align-items: center; gap: 8px; }
+.tp-sl .m { display: inline-flex; gap: 2px; }
+.tp-sl .m i { width: 8px; height: 5px; border-radius: 2px; background: var(--tp-panel-3); }
+.tp-sl .m i.p { background: transparent; box-shadow: inset 0 0 0 1px var(--iris-1); }
+.tp-sl .m i.d { background: var(--iris-1); }
+.tp-sl .g2 { color: var(--ink-3); }
+.tp-fn { position: absolute; left: 0; right: 0; margin: 0; font: 500 12px/1.45 var(--font-body); color: var(--ink-3); text-align: center; }
+.tp-week { position: absolute; right: 0; color: var(--ink-3); }
+
+/* Durak */
+.tp-st {
+  --s: 56px; position: absolute; width: var(--s); height: var(--s); transform: translate(-50%, -50%); border-radius: 50%; z-index: 1;
+  padding: 0; border: 0; background: none; cursor: pointer; font: inherit; color: inherit;
+  transition: width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), height 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s;
+}
+.tp-st::before { content: ''; position: absolute; inset: -6px; border-radius: 50%; } /* dokunma alanı ≥ 44 px */
+.tp-st.later { opacity: 0.65; }
+.tp-st.now { --s: 76px; }
+.tp-st.done { --s: 60px; }
+.tp-st.locked { opacity: 0.85; }
+.tp-st.rest { --s: 64px; }
+.tp-st.me { width: var(--lw); height: var(--lh); --lw: 64px; --lh: 48px; }
+.tp-st.me.now { --lw: 80px; --lh: 60px; }
+.tp-st.me.done { --lw: 70px; --lh: 52px; }
+.tp-st:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.tp-st .housing { position: absolute; inset: 0; border-radius: 50%; background: var(--tp-housing); box-shadow: inset 0 0 0 1px var(--border); }
+.tp-st.now .housing { box-shadow: 0 0 0 6px var(--tp-soft), 0 12px 30px -10px rgba(25, 194, 209, 0.55); }
+.tp-st .housing.fi { background: var(--surface); box-shadow: inset 0 0 0 2.5px var(--tp-gold); }
+.tp-st .iris { position: absolute; inset: 4%; border-radius: 50%; background: conic-gradient(from 0deg, #0e6b76, #19c2d1, #3e7bfa, #0e6b76, #19c2d1, #3e7bfa, #0e6b76); }
+.tp-st .iris i { position: absolute; left: 32%; top: 32%; width: 36%; height: 36%; border-radius: 50%; background: #041017; }
+.tp-st .iris i::after { content: ''; position: absolute; width: 30%; height: 30%; border-radius: 50%; background: #fff; top: 14%; left: 56%; }
+.tp-st .scene { position: absolute; inset: 4%; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 50% 42%, #12263d, #070e18 72%); }
+.tp-st .scene svg { display: block; width: 100%; height: 100%; }
+.sc-l { fill: none; stroke: rgba(255, 255, 255, 0.4); stroke-width: 1.8; }
+.sc-c { fill: rgba(25, 194, 209, 0.2); stroke: #19c2d1; stroke-width: 2.4; }
+.sc-d { fill: #3e7bfa; }
+.sc-s { fill: none; stroke: #19c2d1; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; opacity: 0.45; }
+.sc-e { fill: #19c2d1; }
+.sc-f { fill: #5edce6; }
+.tp-st .ap { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.tp-st .b0 { fill: var(--tp-blade); }
+.tp-st .b1 { fill: var(--tp-blade-2); }
+.tp-st .be { fill: none; stroke: var(--tp-blade-edge); stroke-width: 1.4; }
+.tp-st .rim { fill: none; stroke: var(--tp-rim); stroke-width: 2; }
+.tp-st.done .rim { stroke: var(--iris-1); stroke-opacity: 0.55; }
+.tp-st .gl { position: absolute; inset: 0; display: none; place-items: center; color: var(--ink-2); z-index: 1; }
+.tp-st .gl svg { width: 44%; height: 44%; }
+.tp-st.later .gl, .tp-st.locked .gl, .tp-st .gl.fi { display: grid; }
+.tp-st .gl.fi { color: var(--tp-gold-text); }
+.tp-st .lens { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.tp-st .lgl { fill: url(#tp-lens); stroke: var(--ink-2); stroke-width: 1.5; }
+.tp-st .lh { fill: none; stroke: #fff; stroke-opacity: 0.6; stroke-width: 3; stroke-linecap: round; }
+.tp-st .le { font-family: var(--font-display); font-weight: 800; font-size: 23px; fill: #041017; }
+.tp-st .ll { fill: none; stroke: #041017; stroke-width: 3; stroke-linecap: round; }
+.tp-st.me.now .lens { filter: drop-shadow(0 10px 18px rgba(25, 194, 209, 0.45)); }
+.tp-st.me.locked .lens { filter: saturate(0.2); }
+.tp-st .moonring { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(var(--tp-moon) calc(var(--p) * 1turn), var(--tp-moon-track) 0); }
+.tp-st .moonring::after { content: ''; position: absolute; inset: 5px; border-radius: 50%; background: var(--tp-moon-core); }
+.tp-st.rest.done { --p: 1; }
+.tp-st.running .moonring, .tp-st.rest.done .moonring { box-shadow: 0 0 28px rgba(238, 243, 246, 0.22); }
+.tp-st.rest.now .moonring { box-shadow: 0 0 0 6px var(--tp-soft); }
+.tp-st .moon-c { position: absolute; inset: 0; display: grid; place-items: center; z-index: 1; }
+.tp-st .moon-c .mg { width: 24px; height: 24px; color: var(--ink-2); }
+.tp-st .moon-t { font: 500 12px var(--font-mono); color: var(--ink); font-variant-numeric: tabular-nums; }
+.tp-st .pulse { position: absolute; inset: -7px; border-radius: 50%; border: 2px solid var(--iris-1); opacity: 0; pointer-events: none; }
+.tp-st.now .pulse, .tp-st.running .pulse { opacity: 0.55; animation: tp-pulse 2.4s ease-out infinite; }
+@keyframes tp-pulse { 0% { transform: scale(0.94); opacity: 0.6; } 70%, 100% { transform: scale(1.22); opacity: 0; } }
+.tp-st .badge { position: absolute; right: -3px; bottom: -3px; width: 19px; height: 19px; border-radius: 50%; display: none; place-items: center; box-shadow: 0 0 0 2px var(--bg); z-index: 2; }
+.tp-st .badge svg { width: 12px; height: 12px; }
+.tp-st .badge.ok { background: var(--tp-ok); color: #041017; }
+.tp-st .badge.lk { background: var(--surface-2); color: var(--ink-2); width: 17px; height: 17px; }
+.tp-st.me .badge { right: 2px; bottom: -1px; }
+.tp-st.done .badge.ok, .tp-st.locked .badge.lk { display: grid; }
+
+/* Etiket, "Başla", mola işareti */
+.tp-lb { position: absolute; z-index: 1; font: 700 13px/15px var(--font-body); color: var(--ink); white-space: nowrap; pointer-events: none; }
+.tp-lb .t { display: block; }
+.tp-lb small { display: block; font: 500 11.5px/14px var(--font-body); color: var(--ink-3); }
+.tp-lb small.lk { color: var(--warn); }
+.tp-lb .tag { display: block; font: 500 9.5px/12px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.tp-lb.left { transform: translate(-100%, -50%); text-align: right; }
+.tp-lb.right { transform: translateY(-50%); }
+.tp-lb.rest { transform: translateY(-50%); white-space: normal; width: 128px; }
+.tp-go { position: absolute; z-index: 2; transform: translateX(-50%); font: 700 11.5px/1 var(--font-body); color: var(--accent); background: var(--tp-pill); border: 1px solid var(--tp-pill-line); padding: 5px 11px; border-radius: 999px; pointer-events: none; }
+.tp-chip { position: absolute; z-index: 2; transform: translateY(-50%); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; font: 600 11px/1 var(--font-body); color: var(--ink); background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 10px 5px 8px; box-shadow: 0 6px 16px -10px rgba(0, 0, 0, 0.7); }
+.tp-chip.to-left { transform: translate(-100%, -50%); }
+.tp-chip svg { width: 12px; height: 12px; color: var(--warn); }
+
+/* Az önce biten durak: altın halka */
+.tp-gring { position: absolute; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; border: 2.5px solid var(--tp-gold); box-shadow: 0 0 18px rgba(255, 177, 59, 0.45); pointer-events: none; z-index: 3; animation: tp-gring 0.9s ease-out forwards; }
+.tp-gring i { position: absolute; left: 50%; top: 50%; width: 2.5px; height: 9px; margin: -4.5px 0 0 -1.25px; border-radius: 2px; background: var(--tp-gold); }
+.tp-gring i:nth-child(1) { transform: rotate(45deg) translateY(-42px); }
+.tp-gring i:nth-child(2) { transform: rotate(135deg) translateY(-42px); }
+.tp-gring i:nth-child(3) { transform: rotate(225deg) translateY(-42px); }
+.tp-gring i:nth-child(4) { transform: rotate(315deg) translateY(-42px); }
+@keyframes tp-gring { from { transform: scale(0.6); opacity: 1; } to { transform: scale(1.6); opacity: 0; } }
+
+/* Nef baloncuğu */
+.tp-jb { position: absolute; z-index: 4; transform: translateY(-50%); }
+.tp-jb .tp-jev { position: absolute; top: -14px; z-index: 1; display: flex; }
+.tp-jb[data-side='left'] .tp-jev { right: -12px; }
+.tp-jb[data-side='right'] .tp-jev { left: -12px; }
+.tp-jb-b { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 10px 12px; box-shadow: var(--tp-bshadow); }
+.tp-jb[data-side='left'] .tp-jb-b { padding-right: 24px; }
+.tp-jb[data-side='right'] .tp-jb-b { padding-left: 24px; }
+.tp-jb-b::after { content: ''; position: absolute; top: calc(50% - 6px); width: 12px; height: 12px; background: var(--surface); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.tp-jb[data-side='left'] .tp-jb-b::after { right: -7px; transform: rotate(-45deg); }
+.tp-jb[data-side='right'] .tp-jb-b::after { left: -7px; transform: rotate(135deg); }
+.tp-jb .w { display: block; font: 800 15px/1.15 var(--font-display); color: var(--ink); letter-spacing: -0.01em; transition: color 0.4s; }
+.tp-jb .w.gold { color: var(--tp-gold-text); }
+.tp-jb .l2 { display: block; font: 600 12px/1.3 var(--font-body); color: var(--ink-2); margin-top: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tp-st, .tp-ln.fill { transition: none !important; }
+  .tp-st .pulse, .tp-rp.live, .tp-gring { animation: none !important; }
+  .tp-st.now .pulse, .tp-st.running .pulse { opacity: 0.45; }
+}
