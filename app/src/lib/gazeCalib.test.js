@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from 'vitest'
-import { windowStable, usableCenters, fitModel, fitAxis, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE, calibReport, closeThreshold, loadGazeModel, saveGazeModel, clearGazeModel, GAZE_MODEL_KEY, GAZE_MODEL_VERSION, DOWN_CLOSE_MAX, headRef, headTurned, HEAD_TURN_DEG } from './gazeCalib.js'
+import { windowStable, usableCenters, fitModel, fitAxis, axisFrom, fitWindowsAxis, postureFit, roughModel, MIN_SCORE_ROUGH, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE, calibReport, closeThreshold, loadGazeModel, saveGazeModel, clearGazeModel, GAZE_MODEL_KEY, GAZE_MODEL_VERSION, DOWN_CLOSE_MAX, headRef, headTurned, HEAD_TURN_DEG } from './gazeCalib.js'
 import { createGazeReader, lookingAtPhone, GAZE_FULL_DEG } from './gaze.js'
 
 // Deterministik gürültü
@@ -377,5 +377,79 @@ describe('Build 19: kararsız orta penceresi ve baş duruşu adayı', () => {
     expect(['camX', 'headX']).toContain(m.x.feature)
     expect(m.x.weak).toBeUndefined()
     expect(HEAD_TURN_DEG).toBe(15)
+  })
+})
+
+describe('Build 30: ilk orta başka baş duruşunda (baş duruşu düzeltmesi)', () => {
+  const S = (med, mad) => ({ med, mad, n: 39 })
+  // Build 30 raporundan (ortanca, MAD): camY ~ headY; ilk orta headY 6,78, diğerleri 3,66–5,64
+  const T = {
+    center: { camX: S(-0.1194, 0.07), camY: S(2.7433, 0.1615), headX: S(-0.6238, 0.142), headY: S(6.7823, 0.2826) },
+    left: { camX: S(0.6155, 0.0675), camY: S(1.6594, 0.0659), headX: S(-0.4969, 0.0355), headY: S(5.636, 0.0479) },
+    right: { camX: S(-1.0892, 0.0334), camY: S(2.0538, 0.0416), headX: S(-0.4709, 0.0239), headY: S(5.4023, 0.0602) },
+    up: { camX: S(-0.8236, 0.0732), camY: S(3.3022, 0.1095), headX: S(-0.5298, 0.0867), headY: S(3.6589, 0.0529) },
+    down: { camX: S(-0.5517, 0.0447), camY: S(-0.5538, 0.1164), headX: S(-0.4362, 0.0506), headY: S(4.0071, 0.0468) },
+    center2: { camX: S(-0.5295, 0.058), camY: S(1.4236, 0.0605), headX: S(-0.1504, 0.0201), headY: S(4.0698, 0.0269) },
+  }
+  it('eski hesap: iki orta arasındaki duruş farkı gürültü sayılır → y zayıf (1,85; rapordaki değer)', () => {
+    const y = fitAxis(T.center, T.down, T.up, ['camY'], T.center2)
+    expect(y.weak).toBe(true)
+    expect(y.score).toBeCloseTo(1.847, 2)
+  })
+  it('duruş düzeltmesiyle y camY geçer; β ≈ 0,46; x camX aynı kalır', () => {
+    const y = axisFrom(T, T.center, T.center2, 'y')
+    expect(y.feature).toBe('camY')
+    expect(y.weak).toBeUndefined()
+    expect(y.score).toBeGreaterThan(8)
+    expect(y.posture.beta).toBeCloseTo(0.464, 2)
+    expect(y.drift).toBeLessThan(0.1) // duruşla açıklanamayan orta farkı
+    // model en son ortanın duruşunda: yukarı > orta > aşağı
+    expect(y.pos).toBeGreaterThan(y.c)
+    expect(y.neg).toBeLessThan(y.c)
+    const x = axisFrom(T, T.center, T.center2, 'x')
+    expect(x.feature).toBe('camX')
+    expect(x.weak).toBeUndefined()
+    expect(x.posture).toBeUndefined() // baş yatayda 0,47° oynadı (< 0,8) → düzeltme yok
+    expect(x.score).toBeCloseTo(3.73, 1)
+  })
+  it('ara kontrolde (orta2 yok) y de geçer → gereksiz tekrar turu açılmaz', () => {
+    const { center2, ...mid } = T
+    const y = axisFrom(mid, mid.center, null, 'y')
+    expect(y.weak).toBeUndefined()
+    expect(center2).toBeTruthy()
+  })
+  it('düzeltme ayrım uydurmaz: yukarı/aşağı duruşun öngördüğü yerdeyse eksen geçmez', () => {
+    const at = (h) => 1 + 0.5 * (h - 5) // gerçek eğim 0,5
+    const n = (h, mad = 0.05) => ({ camY: S(at(h), mad), headY: S(h, mad) })
+    const U = { center: n(6.8), left: n(5.6), right: n(5.4), center2: n(4.1), up: n(3.7), down: n(4.0) }
+    const y = axisFrom(U, U.center, U.center2, 'y', ['camY'])
+    expect(y === null || y.weak === true).toBe(true)
+  })
+  it('baş sinyalinin kendisi düzeltilmez; eğim [0, 1] aralığına sıkışır', () => {
+    const y = axisFrom(T, T.center, T.center2, 'y', ['headY'])
+    expect(y?.posture).toBeUndefined()
+    const neg = postureFit('camY', 'headY', [{ camY: S(3), headY: S(1) }, { camY: S(1), headY: S(3) }, { camY: S(2), headY: S(2) }])
+    expect(neg.beta).toBe(0)
+    const steep = postureFit('camY', 'headY', [{ camY: S(0), headY: S(0) }, { camY: S(5), headY: S(1) }, { camY: S(10), headY: S(2) }])
+    expect(steep.beta).toBe(1)
+    expect(postureFit('camY', 'headY', [{ camY: S(0), headY: S(0) }, { camY: S(1), headY: S(0.3) }, { camY: S(2), headY: S(0.5) }])).toBeNull() // aralık < 0,8
+  })
+  it('ekranın ara kontrolü ile son model aynı hesabı kullanır', () => {
+    const w = windows()
+    w.center = Array.from({ length: 30 }, (_, i) => makeFrame(0, 0, { r: rng(700 + i), head: { x: 0, y: 3 } }))
+    const m = fitModel(w)
+    expect(fitWindowsAxis(w, 'y')).toEqual(m.y)
+    expect(fitWindowsAxis(w, 'x')).toEqual(m.x)
+    expect(m.ok).toBe(true)
+  })
+})
+
+describe('kaba model (tüm tekrarlardan sonra)', () => {
+  it('iki eksen de ≥ MIN_SCORE_ROUGH ise kaydedilebilir (ok + rough); biri altındaysa null', () => {
+    const m = { version: 2, ok: false, x: { feature: 'camX', score: 3.7 }, y: { feature: 'camY', score: 1.8, weak: true } }
+    expect(roughModel(m)).toMatchObject({ ok: true, rough: true })
+    expect(roughModel({ ...m, y: { ...m.y, score: MIN_SCORE_ROUGH - 0.01 } })).toBeNull()
+    expect(roughModel({ ...m, y: null })).toBeNull()
+    expect(MIN_SCORE_ROUGH).toBeLessThan(MIN_SCORE)
   })
 })

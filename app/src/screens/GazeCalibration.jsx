@@ -4,7 +4,7 @@ import SoundToggle from '../components/SoundToggle.jsx'
 import StepCards from '../components/StepCards.jsx'
 import { DotFollowArt, FaceLightArt } from '../components/howtoArt.jsx'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
-import { calibReport, fitModel, fitAxis, summarize, windowStable, saveGazeModel, headRef, headTurned, TARGETS, AXIS_FEATURES, DOWN_CLOSE_MAX, MIN_SCORE, HEAD_TURN_DEG } from '../lib/gazeCalib.js'
+import { calibReport, fitModel, fitWindowsAxis, roughModel, windowStable, saveGazeModel, headRef, headTurned, TARGETS, DOWN_CLOSE_MAX, MIN_SCORE, HEAD_TURN_DEG } from '../lib/gazeCalib.js'
 import { shareText } from '../lib/share.js'
 import { createGazeReader, eyeClosure, BLINK_CLOSE, GAZE_FULL_DEG } from '../lib/gaze.js'
 import { haptic } from '../lib/native.js'
@@ -20,9 +20,15 @@ import '../styles/gazecal.css'
 // Sağ hedefi bitince sağ–sol ekseni hemen sınanır: zayıfsa yalnızca sol+sağ bir kez daha istenir
 // (en fazla MAX_RETRY). Alt hedefte üst–alt için aynı. Sonda tüm model zayıfsa yalnızca zayıf eksenin
 // noktaları + orta tekrar edilir; baştan alma yok (Build 15 geri bildirimi: "sonda tekrar dene saçma").
+// Her tekrar turu ORTAYI da yeniden toplar: Build 15/19/30'da zayıf eksenin sebebi bayat ilk ortaydı
+// (baş duruşu sonradan değişti); yalnız yan noktaları tekrarlamak bir şey değiştirmiyordu.
+// Tüm tekrarlardan sonra skor MIN_SCORE_ROUGH üstündeyse kaba model kaydedilir (lib/gazeCalib.js roughModel).
 // VARSAYIM: süreler ve MAX_RETRY ilk sürüm içindir; toplam ~20 sn (tekrarsız).
 const MOVE_MS = 450
 const SETTLE_MS = 1200
+// İlk hedef: kullanıcı telefonu yeni tutuyor, duruşu oturuyor (Build 30: ilk ortada baş 6,8°, sonra 4–5,6°).
+// VARSAYIM: 2,5 sn.
+const FIRST_SETTLE_MS = 2500
 const COLLECT_MS = 1300
 const MAX_COLLECT_MS = 8000 // yan hedefler: bu sürede sabitlenmezse eldeki kareler alınır
 const CENTER_HINT_MS = 6000 // orta hedef: asla kararsız kabul edilmez; bu süreden sonra ipucu
@@ -94,18 +100,19 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     if (!t) return
     const now = m.ts
     const since = now - s.start
+    const settle = MOVE_MS + (s.pos === 0 ? FIRST_SETTLE_MS : SETTLE_MS)
     const face = m.face !== false && m.tracked !== false
     const closed = face && eyeClosure(m) >= closeLimit(t)
     const turned = face && !closed && t !== 'center' && headTurned(head.current.ref, m)
     let nextStatus = !face ? 'noface' : closed ? 'closed' : turned ? 'head' : 'ok'
-    if (turned && since >= MOVE_MS + SETTLE_MS) {
+    if (turned && since >= settle) {
       head.current.rejected[t] = (head.current.rejected[t] ?? 0) + 1
       if (now - head.current.lastWarn >= HEAD_WARN_GAP_MS) {
         head.current.lastWarn = now
         cue('Başını değil, gözünü oynat', true)
       }
     }
-    if (since < MOVE_MS + SETTLE_MS) {
+    if (since < settle) {
       s.lastTs = now
       setStatus((p) => (p === nextStatus ? p : nextStatus))
       return
@@ -152,13 +159,13 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
       for (let i = 0; i < targets.length; i++) s.again.add(at + i)
       cue('Bir kez daha. Noktaya doğru bak; başını çevirmen serbest', true)
     }
+    // Son modelle aynı hesap (usableCenters + baş duruşu düzeltmesi)
     const axisWeak = (axis) => {
-      const [neg, pos] = axis === 'x' ? ['left', 'right'] : ['down', 'up']
-      const a = fitAxis(summarize(W.center ?? []), summarize(W[neg] ?? []), summarize(W[pos] ?? []), AXIS_FEATURES[axis], W.center2?.length ? summarize(W.center2) : null)
+      const a = fitWindowsAxis(W, axis)
       return !a || a.weak
     }
-    if (t === 'right' && s.retry.x < MAX_RETRY && axisWeak('x')) insert('x', AXIS_TARGETS.x)
-    else if (t === 'down' && s.retry.y < MAX_RETRY && axisWeak('y')) insert('y', AXIS_TARGETS.y)
+    if (t === 'right' && s.retry.x < MAX_RETRY && axisWeak('x')) insert('x', ['center', ...AXIS_TARGETS.x])
+    else if (t === 'down' && s.retry.y < MAX_RETRY && axisWeak('y')) insert('y', ['center', ...AXIS_TARGETS.y])
     else if (t === 'center2') {
       const extra = []
       for (const axis of ['x', 'y']) {
@@ -168,6 +175,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
         }
       }
       if (extra.length) {
+        extra.unshift('center')
         extra.push('center2')
         const at = s.pos + 1
         s.queue.splice(at, 0, ...extra)
@@ -216,7 +224,8 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   }
 
   function finish() {
-    const model = fitModel(win.current)
+    const fit = fitModel(win.current)
+    const model = fit.ok ? fit : (roughModel(fit) ?? fit)
     setResult(model)
     setReport({ ...calibReport(win.current, model), headRejected: head.current.rejected, retry: { ...step.current.retry } })
     setPhase('result')
@@ -266,6 +275,11 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
             <div className="gazecal-badge ok"><Check size={30} /></div>
             <h1>Hazır</h1>
             <p className="muted">Dene: ekranın bir kenarına bak, nokta o yöne gitmeli. Ortaya bakınca ortada kalır.</p>
+            {result.rough && (
+              <p className="muted small">
+                {result.x.weak && result.y.weak ? 'Sağ–sol ve yukarı–aşağı' : result.x.weak ? 'Sağ–sol' : 'Yukarı–aşağı'} ayrımı biraz zayıf çıktı. Nokta o yönde titrek giderse aydınlık bir yerde, telefon göz hizasındayken yeniden ayarla.
+              </p>
+            )}
             <div className={`gazecal-pad ${preview.dir && preview.dir !== 'center' ? 'on' : ''}`} aria-hidden="true">
               <span className="gazecal-cross" />
               <span className="gazecal-live" style={{ left: `${50 + px * 42}%`, top: `${50 - py * 42}%` }} />

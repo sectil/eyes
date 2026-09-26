@@ -117,12 +117,47 @@ export function summarize(frames) {
   return out
 }
 
+// Baş duruşu düzeltmesi (Build 30): camY, baş eğimini tam telafi etmiyor (nötr hedeflerde camY ~ headY
+// eğimi 0,46). İlk orta 6,8° baş eğimiyle, diğer hedefler 3,7–5,6° ile kaydedildi; iki orta arasındaki 1,3°'lik
+// fark gürültü sayılıp y ekseni 1,8 puana düştü (yalnız ikinci orta ile 16). Çözüm: eksenin ortasındaki hedefler
+// ("nötr": y için orta + sol + sağ, x için orta + üst + alt) üzerinden sinyal = a + β·baş doğrusu kurulur;
+// merkez her yan hedefin KENDİ baş duruşunda tahmin edilir. Başın kendisi (headX/headY) düzeltilmez: sinyalin ta kendisi.
+// VARSAYIM: en az 3 nötr hedef ve 0,8° baş aralığı (daha azında eğim gürültüden ayrılmaz); β [0, 1] aralığına
+// sıkıştırılır (0: göz başı tam telafi eder, 1: hiç etmez; dışı fiziksel değil).
+export const POSTURE_MIN_RANGE = 0.8
+export const POSTURE_BETA_MAX = 1
+export const AXIS_HEAD = { x: 'headX', y: 'headY' }
+export const AXIS_NEUTRALS = { x: ['up', 'down'], y: ['left', 'right'] }
+export const AXIS_SIDES = { x: ['left', 'right'], y: ['down', 'up'] } // [neg, pos]
+
+export function postureFit(k, headKey, neutrals) {
+  const pts = (neutrals ?? []).filter((s) => s?.[k] && s?.[headKey]).map((s) => [s[headKey].med, s[k].med])
+  if (pts.length < 3) return null
+  const hs = pts.map((p) => p[0])
+  if (Math.max(...hs) - Math.min(...hs) < POSTURE_MIN_RANGE) return null
+  const mh = hs.reduce((a, b) => a + b, 0) / pts.length
+  const mv = pts.reduce((a, p) => a + p[1], 0) / pts.length
+  let sxx = 0
+  let sxy = 0
+  for (const [h, v] of pts) {
+    sxx += (h - mh) ** 2
+    sxy += (h - mh) * (v - mv)
+  }
+  const beta = Math.max(0, Math.min(POSTURE_BETA_MAX, sxy / sxx))
+  const at = (h) => mv + beta * (h - mh)
+  // Doğrudan sapma (ortanca): tek bir nötr hedefin kendine özgü farkı gürültüyü şişirmesin
+  const resid = median(pts.map(([h, v]) => Math.abs(v - at(h))))
+  return { beta, at, resid }
+}
+
 // Bir eksen için en iyi sinyal. neg: sol/aşağı, pos: sağ/yukarı hedefinin özeti.
 // center2: sondaki ikinci orta hedef (varsa). Merkez iki ortancanın ortalaması; iki orta arasındaki
 // fark "drift" (oturum içi kayma). Gürültü = hedef-İÇİ yayılımların en büyüğü, taban ve drift/2.
 // (Önceden orta+orta2 kareleri birleştirilip MAD alınıyordu: 0,9°'lik kayma MAD'ı 0,47'ye şişirip
 // 1°'lik net ayrımı 2,0 puana düşürüyordu — Build 15 raporu.)
-export function fitAxis(center, neg, pos, features, center2 = null) {
+// posture: { head: 'headY', neutrals: [özet…] } verilirse merkez baş duruşuna göre tahmin edilir (yukarıda);
+// drift = duruşla AÇIKLANAMAYAN orta farkı. Model, en son ortadaki duruşa göre saklanır (c, neg, pos).
+export function fitAxis(center, neg, pos, features, center2 = null, posture = null) {
   let best = null
   for (const k of features) {
     const c1 = center?.[k]
@@ -130,18 +165,53 @@ export function fitAxis(center, neg, pos, features, center2 = null) {
     const a = neg?.[k]
     const b = pos?.[k]
     if (!c1 || !a || !b) continue
-    const cMed = c2 ? (c1.med + c2.med) / 2 : c1.med
-    const drift = c2 ? Math.abs(c1.med - c2.med) : 0
-    const dNeg = a.med - cMed
-    const dPos = b.med - cMed
+    const hk = posture?.head
+    const pf = hk && k !== hk && neg[hk] && pos[hk] && center[hk] ? postureFit(k, hk, posture.neutrals) : null
+    let cMed, drift, dNeg, dPos
+    if (pf) {
+      const off = (s) => s[k].med - pf.at(s[hk].med) // duruşa göre beklenenden sapma
+      drift = c2 && center2[hk] ? Math.abs(off(center) - off(center2)) : 0
+      dNeg = a.med - pf.at(neg[hk].med)
+      dPos = b.med - pf.at(pos[hk].med)
+      cMed = pf.at((c2 && center2[hk] ? center2 : center)[hk].med)
+    } else {
+      cMed = c2 ? (c1.med + c2.med) / 2 : c1.med
+      drift = c2 ? Math.abs(c1.med - c2.med) : 0
+      dNeg = a.med - cMed
+      dPos = b.med - cMed
+    }
     // İki yan merkezin zıt taraflarında olmalı (işaret ne olursa olsun)
     if (!(dNeg * dPos < 0)) continue
     const sep = Math.min(Math.abs(dNeg), Math.abs(dPos))
-    const noise = Math.max(c1.mad, c2?.mad ?? 0, a.mad, b.mad, drift / 2, NOISE_FLOOR[k] ?? 1e-6)
+    const noise = Math.max(c1.mad, c2?.mad ?? 0, a.mad, b.mad, drift / 2, pf?.resid ?? 0, NOISE_FLOOR[k] ?? 1e-6)
     const score = sep / noise
-    if (!best || score > best.score) best = { feature: k, c: cMed, neg: a.med, pos: b.med, score, drift }
+    if (!best || score > best.score) {
+      best = { feature: k, c: cMed, neg: pf ? cMed + dNeg : a.med, pos: pf ? cMed + dPos : b.med, score, drift }
+      if (pf) best.posture = { head: hk, beta: +pf.beta.toFixed(3), resid: +pf.resid.toFixed(4) }
+    }
   }
   return best && best.score >= MIN_SCORE ? best : best ? { ...best, weak: true } : null
+}
+
+// Hedef özetlerinden bir eksen (fitModel, calibReport ve kalibrasyon ekranı AYNI hesabı kullanır).
+// S: { hedef: özet }, C1/C2: usableCenters sonucu.
+export function axisFrom(S, C1, C2, axis, features = AXIS_FEATURES[axis]) {
+  const [negT, posT] = AXIS_SIDES[axis]
+  if (!C1 || !S[negT] || !S[posT]) return null
+  const neutrals = [C1, C2, ...AXIS_NEUTRALS[axis].map((t) => S[t])].filter(Boolean)
+  return fitAxis(C1, S[negT], S[posT], features, C2, { head: AXIS_HEAD[axis], neutrals })
+}
+
+const summaries = (windows) => {
+  const S = {}
+  for (const t of TARGETS) if (windows[t]?.length) S[t] = summarize(windows[t])
+  return S
+}
+
+// Ekranın ara kontrolü: bu anki pencerelerle eksen (null | {weak} | ok)
+export function fitWindowsAxis(windows, axis) {
+  const [C1, C2] = usableCenters(windows)
+  return axisFrom(summaries(windows), C1, C2, axis)
 }
 
 // Kalibrasyon ekranı: bir hedefteki kareler "sabit bakış" mı? Mevcut eksen sinyallerinin her birinde
@@ -182,19 +252,27 @@ export function usableCenters(windows) {
 
 // windows: { center: frames[], left, right, up, down, center2? }
 export function fitModel(windows) {
-  const S = {}
-  for (const t of TARGETS) if (windows[t]?.length) S[t] = summarize(windows[t])
+  const S = summaries(windows)
   // Kararsız orta penceresi (Build 19: n=60, MAD 1,5°, kırpmalı) referans olamaz: temiz olan kullanılır;
   // ikisi de temizse ikisi (drift ölçülür); hiçbiri temiz değilse ikisi de (eldeki en iyi).
   const [C1, C2] = usableCenters(windows)
-  const x = C1 && S.left && S.right ? fitAxis(C1, S.left, S.right, AXIS_FEATURES.x, C2) : null
-  const y = C1 && S.down && S.up ? fitAxis(C1, S.down, S.up, AXIS_FEATURES.y, C2) : null
+  const x = axisFrom(S, C1, C2, 'x')
+  const y = axisFrom(S, C1, C2, 'y')
   const ok = Boolean(x && !x.weak && y && !y.weak)
   // Telefona bakış referansı: ortaya bakarken kameraya göre bakış açısı (ARKit'in sabit
   // sapmasını içerir). gaze.js lookingAtPhone bunun çevresindeki pencereyi "telefon" sayar.
   const C = summarize([...(windows.center ?? []), ...(windows.center2 ?? [])])
   const phone = C.camX && C.camY ? { x: C.camX.med, y: C.camY.med } : null
   return { version: GAZE_MODEL_VERSION, ok, x, y, closeAt: closeThreshold(windows.down), phone }
+}
+
+// Kaba model: tüm tekrarlardan sonra bir eksen hâlâ MIN_SCORE altında ama belirgin ayrışıyorsa model yine
+// kaydedilir (kullanıcı "Ayırt edemedim" duvarı görmez; önizlemede kendisi dener). Oyunlar ±1 hedefini
+// eşiklerle kullanır; bu skorda yön doğru, konum daha titrek. VARSAYIM: 1,5.
+export const MIN_SCORE_ROUGH = 1.5
+export function roughModel(model) {
+  const pass = (a) => Boolean(a && a.score >= MIN_SCORE_ROUGH)
+  return pass(model?.x) && pass(model?.y) ? { ...model, ok: true, rough: true } : null
 }
 
 // Teşhis raporu (yalnızca sayılar; görüntü yok): her hedefte kare sayısı, kapanma ortancası ve
@@ -212,10 +290,11 @@ export function calibReport(windows, model) {
     }
   }
   const [C, C2] = usableCenters(windows)
-  const axisScores = (neg, pos, feats) =>
+  const S = summaries(windows)
+  const axisScores = (axis) =>
     Object.fromEntries(
-      feats.map((k) => {
-        const a = fitAxis(C, summarize(windows[neg] ?? []), summarize(windows[pos] ?? []), [k], C2)
+      AXIS_FEATURES[axis].map((k) => {
+        const a = axisFrom(S, C, C2, axis, [k])
         return [k, a ? r3(a.score) : null]
       }),
     )
@@ -228,7 +307,7 @@ export function calibReport(windows, model) {
   }
   return {
     targets,
-    scores: { x: axisScores('left', 'right', AXIS_FEATURES.x), y: axisScores('down', 'up', AXIS_FEATURES.y) },
+    scores: { x: axisScores('x'), y: axisScores('y') },
     minScore: MIN_SCORE,
     centerStable: { center: windowStable(windows.center), center2: windowStable(windows.center2) },
     head,
