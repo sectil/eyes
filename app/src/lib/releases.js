@@ -28,6 +28,7 @@ export const RELEASES = [
       { kind: 'fix', text: 'Şehir listesi açılmıyordu; artık dokununca 81 il açılıyor, yazdıkça süzülüyor.' },
       { kind: 'fix', text: 'Giriş ya da ödeme ekranı hata verirse altında hata kodu görünüyor (destek için).' },
       { kind: 'fix', text: 'Ödeme ekranı "Planlar yükleniyor"da takılı kalıyordu (abonelik altyapısı hiç başlamıyordu); düzeldi. Planlar yine gelmezse 20 saniye sonra nedeni yazılır.' },
+      { kind: 'fix', text: 'İlk bakış kırpma sayımı: okuma metni 20 saniyeden önce bitiyordu; metin uzadı, süre boyunca okuma sürüyor.' },
       { kind: 'new', text: 'Abonelik: haftalık plan eklendi (yıllık, aylık, haftalık; hepsi 7 gün ücretsiz deneme). Ödeme ekranı App Store fiyatlarını yüklüyor.' },
       { kind: 'change', text: 'Uygulamanın yeni adı Nefona; koçun adı Nef. Ana ekranda, ödeme ekranında, PDF raporunda ve dosya adlarında yeni ad.' },
     ],

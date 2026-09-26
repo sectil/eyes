@@ -18,9 +18,14 @@ export const LOOK_SEC = 20
 const BASELINE_MS = 2000
 const CAMERA_WAIT_MS = 8000 // kamera bu sürede hazır olmazsa dokunarak sayıma geçilir (VARSAYIM)
 
-const TEXT =
+// Metin 20 sn boyunca okunacak uzunlukta (~85 kelime ≈ dakikada 250 kelime). Erken biterse son saniyeler okuma değil
+// bekleme olur ve okurken azalan kırpma ölçülmez (TestFlight geri bildirimi: 38 kelime ~10 sn'de bitiyordu).
+export const TEXT =
   'Sabah vapuru iskeleye yaklaşırken martılar suyun üstünde alçaldı. Simitçi tezgâhını açtı, ilk çayın buğusu soğuk havaya karıştı. ' +
-  'Karşı kıyıdaki pencereler güneşi tek tek yakaladı. Bir çocuk korkuluğa yaslanıp dalgaları saydı; her dalga bir öncekinden biraz daha büyük göründü.'
+  'Karşı kıyıdaki pencereler güneşi tek tek yakaladı. Bir çocuk korkuluğa yaslanıp dalgaları saydı; her dalga bir öncekinden biraz daha büyük göründü. ' +
+  'Halat iskeleye atıldı, yolcular sırayla indi. Yaşlı bir adam gazetesini katlayıp bankın ucuna oturdu ve uzaktaki adalara uzun uzun baktı. ' +
+  'Rüzgâr döndükçe deniz rengini değiştirdi: önce gri, sonra yeşil, en sonunda derin, koyu bir mavi. ' +
+  'Vapur düdüğünü öttürüp yeniden açıldığında çocuk hâlâ sayıyordu; sayılar karıştıkça gülüyor, baştan başlıyordu.'
 
 function Ring({ left }) {
   const r = 23

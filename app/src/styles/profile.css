@@ -63,7 +63,7 @@
 .oq-flag.on { border-color: var(--warn); color: var(--ink); }
 
 /* İlk 20 sn (screens/FirstLook.jsx) */
-.fl-read { background: #f3f6f8; color: #0b1219; border-radius: 18px; padding: 18px; font-size: 1.05rem; line-height: 1.6; margin: 0; }
+.fl-read { background: #f3f6f8; color: #0b1219; border-radius: 18px; padding: 16px 18px; font-size: 1rem; line-height: 1.55; margin: 0; }
 .fl-timer { display: flex; align-items: center; gap: 12px; color: var(--ink-2); font-size: 0.9rem; }
 .fl-ring { width: 56px; height: 56px; flex: none; }
 .fl-ring circle { fill: none; stroke-width: 5; }
