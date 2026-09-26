@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ArrowLeft, Mail } from 'lucide-react'
 import { isIOSApp, haptic } from '../lib/native.js'
 import { TERMS_URL, PRIVACY_URL } from './Paywall.jsx'
-import { validEmail, normalizeEmail, cleanCode, validCode, sendEmailCode, verifyEmailCode, signInWithApple, friendlyError, RESEND_SEC, CODE_MAX } from '../lib/account.js'
+import { validEmail, normalizeEmail, cleanCode, validCode, sendEmailCode, verifyEmailCode, signInWithApple, friendlyError, errorDetail, RESEND_SEC, CODE_MAX } from '../lib/account.js'
 import '../styles/account.css'
 
 // Hesap (Build 23b; Artifact "Hesap ve Profil Taslağı", onaylı): giriş filminden sonra.
@@ -16,6 +16,7 @@ export default function AccountStart({ onDone, onCancel = null }) {
   const [code, setCode] = useState('')
   const [busy, setBusy] = useState(false)
   const [msg, setMsg] = useState('')
+  const [detail, setDetail] = useState('') // Bug 11: ham hata metni (teşhis)
   const [wait, setWait] = useState(0)
   const codeRef = useRef(null)
   const native = isIOSApp()
@@ -34,6 +35,7 @@ export default function AccountStart({ onDone, onCancel = null }) {
   async function apple() {
     setBusy(true)
     setMsg('')
+    setDetail('')
     try {
       const r = await signInWithApple()
       haptic('success')
@@ -41,6 +43,7 @@ export default function AccountStart({ onDone, onCancel = null }) {
     } catch (e) {
       const m = friendlyError(e)
       if (m) setMsg(m)
+      if (m && m.startsWith('Bir sorun çıktı')) setDetail(errorDetail(e))
     }
     setBusy(false)
   }
@@ -106,6 +109,7 @@ export default function AccountStart({ onDone, onCancel = null }) {
             <button type="button" className="acct-btn mail" onClick={() => { setStep('email'); setMsg('') }} disabled={busy}><Mail size={17} aria-hidden="true" /> E-posta ile devam et</button>
             <button type="button" className="link-btn acct-guest" onClick={() => onDone({ mode: 'guest', date: date() }, {})} disabled={busy}>Şimdilik hesapsız dene</button>
             {msg && <p className="acct-msg" role="alert">{msg}</p>}
+            {detail && <p className="acct-detail muted small">{detail}</p>}
             <p className="acct-fine">
               Devam edersen <a href={TERMS_URL} target="_blank" rel="noreferrer">Kullanım şartları</a>
               {PRIVACY_URL ? <> ve <a href={PRIVACY_URL} target="_blank" rel="noreferrer">Gizlilik politikası</a></> : null}nı kabul etmiş olursun. Kamera görüntüsü telefondan çıkmaz.

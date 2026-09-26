@@ -58,3 +58,4 @@
 /* Bug 13: açılır şehir listesi — boşken 81 il kaydırılır, yazınca süzülmüş öneriler */
 .city-list.all { flex-wrap: wrap; max-height: 220px; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-2); }
 .city-opt[aria-selected="true"] { border-color: var(--accent); color: var(--accent); }
+.acct-detail { margin: 4px 0 0; text-align: center; font-family: var(--font-mono); font-size: 0.7rem; overflow-wrap: anywhere; user-select: text; -webkit-user-select: text; }

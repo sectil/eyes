@@ -60,6 +60,14 @@ export function friendlyError(err) {
   return num ? `Bir sorun çıktı (kod ${num}). Biraz sonra yeniden dene.` : 'Bir sorun çıktı. Biraz sonra yeniden dene.'
 }
 
+// Genel "Bir sorun çıktı" durumunda ham hata metni (kısa): cihazda teşhis için ekranda küçük yazı (Bug 11).
+// Kişisel veri içermez (eklenti/Supabase hata metni); ekran görüntüsüyle iletilebilsin diye.
+export function errorDetail(err) {
+  const code = err?.code ?? err?.error ?? ''
+  const msg = String(err?.message ?? err ?? '').replace(/\s+/g, ' ').trim()
+  return [code && String(code), msg].filter(Boolean).join(' · ').slice(0, 180)
+}
+
 export async function sendEmailCode(email) {
   const { error } = await supabase().auth.signInWithOtp({ email: normalizeEmail(email), options: { shouldCreateUser: true } })
   if (error) throw error

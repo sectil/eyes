@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { webcrypto } from 'node:crypto'
 import { setSupabaseForTest, isSecretKey, SUPABASE_KEY } from './supabase.js'
 import {
-  normalizeEmail, validEmail, cleanCode, validCode, profileToRow, mergeProfile, friendlyError, makeNonce,
+  normalizeEmail, validEmail, cleanCode, validCode, profileToRow, mergeProfile, friendlyError, errorDetail, makeNonce,
   sendEmailCode, verifyEmailCode, signInWithApple, pushProfile, pullProfile, deleteAccount, signedIn, accountLabel,
 } from './account.js'
 
@@ -72,6 +72,8 @@ describe('hesap', () => {
     // Bug 11: gerçek hata kodu görünür (teşhis)
     expect(friendlyError({ message: 'The operation couldn’t be completed. (com.apple.AuthenticationServices.AuthorizationError error 1000.)' })).toBe('Bir sorun çıktı (kod 1000). Biraz sonra yeniden dene.')
     expect(friendlyError({ message: 'bilinmeyen' })).toBe('Bir sorun çıktı. Biraz sonra yeniden dene.')
+    expect(errorDetail({ code: 'UNIMPLEMENTED', message: '"SignInWithApple" plugin is not implemented on ios' })).toBe('UNIMPLEMENTED · "SignInWithApple" plugin is not implemented on ios')
+    expect(errorDetail('x'.repeat(400)).length).toBe(180)
     expect(friendlyError({ message: 'Token has expired or is invalid' })).toMatch(/Kod yanlış/)
     expect(friendlyError({ message: 'Failed to fetch' })).toMatch(/İnternete/)
     expect(friendlyError({ message: 'Email address not authorized' })).toMatch(/açık değil/)
