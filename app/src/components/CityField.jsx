@@ -1,11 +1,19 @@
 import { useState } from 'react'
 import { MapPin } from 'lucide-react'
-import { suggestCities, CITY_MAX } from '../lib/cities.js'
+import { suggestCities, CITY_MAX, TR_CITIES } from '../lib/cities.js'
 
-// Şehir kutucuğu: yazdıkça 81 ilden öneri; serbest metin de kabul (yurt dışı).
+// Şehir kutucuğu: dokununca açılır liste (boşken 81 il, yazdıkça süzülür); serbest metin de kabul (yurt dışı).
+// Bug 13: boş alanda liste hiç açılmıyordu; iPhone'da klavye kapanırken sayfa kayıp dokunuş kaçabiliyordu.
+// Parmak değince (pointerdown) varsayılan engellenir: alan odağı kaybetmez, klavye kapanmaz, sayfa kaymaz.
+// Seçim dokunuş bitince (click) yapılır; böylece uzun listede kaydırmak seçim sanılmaz.
 export default function CityField({ value, onChange, id = 'city' }) {
   const [open, setOpen] = useState(false)
-  const list = open ? suggestCities(value).filter((c) => c !== value) : []
+  const q = (value ?? '').trim()
+  const list = !open ? [] : q ? suggestCities(q, TR_CITIES, 8).filter((c) => c !== value) : TR_CITIES
+  const pick = (c) => {
+    onChange(c)
+    setOpen(false)
+  }
   return (
     <div className="city">
       <div className="city-input">
@@ -19,8 +27,11 @@ export default function CityField({ value, onChange, id = 'city' }) {
           autoComplete="address-level2"
           placeholder="Yaşadığın şehir"
           aria-label="Şehir"
+          aria-expanded={list.length > 0}
+          aria-controls={`${id}-list`}
           onFocus={() => setOpen(true)}
-          onBlur={() => setTimeout(() => setOpen(false), 150)}
+          onClick={() => setOpen(true)}
+          onBlur={() => setTimeout(() => setOpen(false), 200)}
           onChange={(e) => {
             onChange(e.target.value)
             setOpen(true)
@@ -28,9 +39,20 @@ export default function CityField({ value, onChange, id = 'city' }) {
         />
       </div>
       {list.length > 0 && (
-        <div className="city-list" role="listbox" aria-label="Şehir önerileri">
+        <div id={`${id}-list`} className={`city-list${q ? '' : ' all'}`} role="listbox" aria-label="Şehirler">
           {list.map((c) => (
-            <button key={c} type="button" role="option" aria-selected="false" className="city-opt" onMouseDown={(e) => e.preventDefault()} onClick={() => { onChange(c); setOpen(false) }}>{c}</button>
+            <button
+              key={c}
+              type="button"
+              role="option"
+              aria-selected={c === value}
+              className="city-opt"
+              onPointerDown={(e) => e.preventDefault()}
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={() => pick(c)}
+            >
+              {c}
+            </button>
           ))}
         </div>
       )}
