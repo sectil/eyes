@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { plansFromOffering, hasPremium, testUnlock, rcApiKey, RC_IOS_PUBLIC_KEY } from './subscription.js'
+import { plansFromOffering, hasPremium, testUnlock, rcApiKey, RC_IOS_PUBLIC_KEY, withTimeout } from './subscription.js'
 
 const product = (price, priceString, intro, pricePerMonthString = null) => ({
   price,
@@ -74,5 +74,17 @@ describe('rcApiKey', () => {
   it('gizli sk_ anahtarı ve bozuk anahtar reddedilir', () => {
     expect(() => rcApiKey({ VITE_RC_IOS_KEY: 'sk_abc123' })).toThrow(/sk_/)
     expect(() => rcApiKey({ VITE_RC_IOS_KEY: 'goog_abc' })).toThrow(/geçersiz/)
+  })
+})
+
+describe('withTimeout', () => {
+  it('süre dolmadan biten söz aynen döner', async () => {
+    await expect(withTimeout(Promise.resolve(5), 50, 'x')).resolves.toBe(5)
+  })
+  it('bitmeyen söz süre dolunca TIMEOUT koduyla hata verir', async () => {
+    await expect(withTimeout(new Promise(() => {}), 10, 'zaman aşımı')).rejects.toMatchObject({ code: 'TIMEOUT', message: 'zaman aşımı' })
+  })
+  it('sözün kendi hatası korunur', async () => {
+    await expect(withTimeout(Promise.reject(new Error('ağ yok')), 50, 'x')).rejects.toThrow('ağ yok')
   })
 })

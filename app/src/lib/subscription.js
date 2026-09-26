@@ -64,11 +64,29 @@ export async function getAccess() {
   return { premium: hasPremium(customerInfo), native: true }
 }
 
-// Ödeme ekranında gösterilecek planlar
-export async function getPlans() {
-  const P = await purchases()
-  const offerings = await P.getOfferings()
-  return plansFromOffering(offerings.current)
+// Söz belirli sürede bitmezse hata (Bug 15: ödeme ekranı "Planlar yükleniyor…"da sonsuza kadar kalıyordu)
+export const PLANS_TIMEOUT_MS = 20000
+export function withTimeout(promise, ms, message) {
+  let timer
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(Object.assign(new Error(message), { code: 'TIMEOUT' })), ms)
+  })
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer))
+}
+
+// Ödeme ekranında gösterilecek planlar. Boş liste yerine açıklayıcı hata atar (ekranda teşhis için görünür).
+export async function getPlans({ timeoutMs = PLANS_TIMEOUT_MS } = {}) {
+  const P = await withTimeout(purchases(), timeoutMs, 'RevenueCat başlatılamadı (zaman aşımı)')
+  const offerings = await withTimeout(P.getOfferings(), timeoutMs, 'Planlar App Store/RevenueCat\'ten gelmedi (zaman aşımı)')
+  const plans = plansFromOffering(offerings?.current)
+  if (!plans.length) {
+    throw new Error(
+      offerings?.current
+        ? `"${offerings.current.identifier}" offering'inde yıllık/aylık/haftalık paket yok`
+        : 'RevenueCat\'te current offering yok',
+    )
+  }
+  return plans
 }
 
 // Saf fonksiyon (test edilir): offering → sade plan listesi
