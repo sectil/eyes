@@ -5,7 +5,10 @@ import { NOTICE, FILM_SEC } from './introScene.js'
 describe('giriş filmi', () => {
   it('ilk açılışta oynar, izlendiyse veya hareket azaltma açıksa oynamaz', () => {
     expect(shouldPlayIntro({})).toBe(true)
-    expect(shouldPlayIntro({ intro: { seen: true } })).toBe(false)
+    expect(shouldPlayIntro({ intro: { seen: true, version: 2 } })).toBe(false)
+    // eski sürümün filmini izleyen (version yok) yeni filmi bir kez görür (Bug 11)
+    expect(shouldPlayIntro({ intro: { seen: true } })).toBe(true)
+    expect(shouldPlayIntro({ intro: { seen: true } }, true)).toBe(false)
     expect(shouldPlayIntro({}, true)).toBe(false)
   })
   it('yazılar sırayla, sonuncusu boş; film süresi içinde', () => {

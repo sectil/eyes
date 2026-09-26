@@ -69,6 +69,9 @@ describe('hesap', () => {
   it('hata mesajları Türkçe; vazgeçme sessiz', () => {
     expect(friendlyError({ message: 'The operation couldn’t be completed. (com.apple.AuthenticationServices.AuthorizationError error 1001.)' })).toBeNull()
     expect(friendlyError({ status: 429, message: 'x' })).toMatch(/Çok sık/)
+    // Bug 11: gerçek hata kodu görünür (teşhis)
+    expect(friendlyError({ message: 'The operation couldn’t be completed. (com.apple.AuthenticationServices.AuthorizationError error 1000.)' })).toBe('Bir sorun çıktı (kod 1000). Biraz sonra yeniden dene.')
+    expect(friendlyError({ message: 'bilinmeyen' })).toBe('Bir sorun çıktı. Biraz sonra yeniden dene.')
     expect(friendlyError({ message: 'Token has expired or is invalid' })).toMatch(/Kod yanlış/)
     expect(friendlyError({ message: 'Failed to fetch' })).toMatch(/İnternete/)
     expect(friendlyError({ message: 'Email address not authorized' })).toMatch(/açık değil/)

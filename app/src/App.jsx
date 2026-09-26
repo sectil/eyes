@@ -15,7 +15,7 @@ import QuestionFlow from './components/QuestionFlow.jsx'
 import { missing, GROUPS } from './lib/profileQuestions.js'
 import ProfileHome from './screens/ProfileHome.jsx'
 import IntroFilm from './components/IntroFilm.jsx'
-import { shouldPlayIntro } from './lib/intro.js'
+import { shouldPlayIntro, INTRO_VERSION } from './lib/intro.js'
 import { ageBandFromAge } from './lib/profile.js'
 import { ageFromBirthDate } from './lib/identity.js'
 import { screeningFromProfile, profileFromScreening, normalizeProfile } from './lib/profile.js'
@@ -324,7 +324,7 @@ export default function App() {
   }
   // Giriş filmi (components/IntroFilm.jsx): ilk açılışta bir kez, profil sorularından önce; Profilim'den yeniden izlenir.
   // İlk kurulumda sürüm notu gösterilmez (her şey zaten yeni): en son sürüm görülmüş sayılır
-  const markIntro = () => { store.setSetting('intro', { seen: true, date: new Date().toISOString() }); if (!settings.releaseSeen) store.setSetting('releaseSeen', latestRelease()?.id ?? null); refresh() }
+  const markIntro = () => { store.setSetting('intro', { seen: true, version: INTRO_VERSION, date: new Date().toISOString() }); if (!settings.releaseSeen) store.setSetting('releaseSeen', latestRelease()?.id ?? null); refresh() }
   if (screen === 'intro') return <IntroFilm replay onDone={() => go(lastTab)} />
   if (shouldPlayIntro(settings, prefersReducedMotion())) return <IntroFilm onDone={markIntro} />
 

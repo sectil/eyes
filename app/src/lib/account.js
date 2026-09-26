@@ -55,7 +55,9 @@ export function friendlyError(err) {
   if (/not authorized/i.test(msg)) return 'E-postayla giriş şu an açık değil. Apple ile devam et ya da hesapsız dene.'
   if (/otp_expired|expired|invalid.*(token|otp)|token.*invalid/i.test(msg + ' ' + code)) return 'Kod yanlış ya da süresi dolmuş. Yeni kod iste.'
   if (/fetch|network|offline|load failed/i.test(msg)) return 'İnternete bağlanılamadı. Bağlantını kontrol edip yeniden dene.'
-  return 'Bir sorun çıktı. Biraz sonra yeniden dene.'
+  // Apple/iOS hata kodu (ör. AuthorizationError 1000) görünsün: teşhis için (Bug 11)
+  const num = (msg.match(/error (\d{3,5})/i) ?? [])[1] ?? (/^\d{3,5}$/.test(code) ? code : null)
+  return num ? `Bir sorun çıktı (kod ${num}). Biraz sonra yeniden dene.` : 'Bir sorun çıktı. Biraz sonra yeniden dene.'
 }
 
 export async function sendEmailCode(email) {

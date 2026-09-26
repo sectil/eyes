@@ -6,10 +6,14 @@ export const INTRO_SCRIPT = [
   [9900, 'Hatırla.'], [11000, 'Hayal et.'], [13300, 'Uç.'], [14600, ''],
 ]
 
-// Hareket azaltma açıksa film oynamaz (yalnızca logo + düğme); daha önce izlendiyse oynamaz.
+// Film sürümü: yeni film gelince güncelleyen kullanıcı da bir kez görsün. Eski kayıtta version yok → 1 sayılır.
+// 2: "Oscar" filmi (2026-09-26; Bug 11: güncelleme kurulumunda yeni film hiç oynamıyordu).
+export const INTRO_VERSION = 2
+// Hareket azaltma açıksa film oynamaz (yalnızca logo + düğme); bu sürüm daha önce izlendiyse oynamaz.
 export function shouldPlayIntro(settings, reducedMotion = false) {
   if (reducedMotion) return false
-  return !settings?.intro?.seen
+  const i = settings?.intro
+  return !i?.seen || (i.version ?? 1) < INTRO_VERSION
 }
 
 export function captionAt(ms, script = INTRO_SCRIPT) {
