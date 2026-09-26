@@ -19,11 +19,12 @@ SMTP bağlandıktan sonra:
 2. **Authentication → Sign In / Providers → Email**: **Email OTP Length** 6.
 
 ## 3. Apple ile giriş (iPhone)
-1. Supabase → **Authentication → Sign In / Providers → Apple** → **Enable**.
+1. YAPILDI (2026-09-26): Supabase → **Authentication → Sign In / Providers → Apple** → **Enable**.
    **Client IDs** kutusuna uygulamanın paket kimliğini yaz: `com.sectil.eyelume` → **Save**.
    (Uygulama içi giriş Apple'ın kimlik belgesini doğrudan gönderir; web girişi için gereken "Secret Key" bu yöntemde gerekmez.)
-2. Xcode → **App** hedefi → **Signing & Capabilities** → **+ Capability** → **Sign in with Apple**.
-   Otomatik imzalama açıksa Apple Developer tarafındaki App ID ayarı kendiliğinden güncellenir.
+2. YAPILDI (depoda): `ios/App/App/App.entitlements` (com.apple.developer.applesignin) + `CODE_SIGN_ENTITLEMENTS`.
+   testflight.sh otomatik imzalama + `-allowProvisioningUpdates` ile App ID'ye yetkiyi kendisi ekler. Hata verirse:
+   Xcode → App → Signing & Capabilities → + Capability → Sign in with Apple.
 3. Mac'te: `npx cap sync ios` (testflight.sh bunu zaten yapar).
 
 ## 4. Google ile giriş (sonra)
