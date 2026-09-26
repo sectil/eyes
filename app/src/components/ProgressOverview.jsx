@@ -211,7 +211,7 @@ export function DomainDetail({ domain, tests, sessions, identity = null, onBack 
             <p><b className="warn">Sarı:</b> son 7 günün ortancası başlangıçtan en az 0,10 kötü ve art arda 3 test kötü → birkaç gün daha ölç.</p>
             <p><b className="danger">Kırmızı:</b> bir hafta boyunca her test en az 0,20 kötü → göz doktoruna git.</p>
             <p>Ani görme kaybı, perde inmesi, ışık çakması ya da ağrı: beklemeden başvur.</p>
-            <p className="muted small">Gri bant: başlangıç değerin ±0,10 logMAR. Bu tek testin oynaması değil, değişim eşiği: son 7 günün ortancası başlangıçtan en az 0,10 uzaklaşır ve son 3 testin her biri de aynı yönde en az 0,10 farklıysa değişim olarak işaretliyoruz. Noktalar tek testlerdir; bir noktanın bandın dışına düşmesi tek başına değişim demek değil (bir testten diğerine yaklaşık ±0,2 oynama olağan). İlk 7 gün alışma, 8–21. gün başlangıç; değerlendirme sonra başlar.</p>
+            <p className="muted small">Gri bant: başlangıç değerin ±0,10 logMAR. Bu tek testin oynaması değil, değişim eşiği: son 7 günün ortancası başlangıçtan en az 0,10 uzaklaşır ve son 3 testin her biri de aynı yönde en az 0,10 farklıysa değişim olarak işaretliyoruz. Noktalar tek testlerdir; bir noktanın bandın dışına düşmesi tek başına değişim demek değil (bir testten diğerine yaklaşık ±0,2 oynama olağan). İlk 7 gün alışma; başlangıç 8. günden itibaren en az 7 test (en erken 21. güne kadar); değerlendirme sonra başlar.</p>
           </div>
         </section>
       )}

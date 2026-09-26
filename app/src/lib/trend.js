@@ -5,7 +5,10 @@
 export const FAMILIARIZATION_DAYS = 7
 export const BASELINE_FROM_DAY = 8
 export const BASELINE_TO_DAY = 21
-export const MIN_BASELINE_TESTS = 3
+// 7 (önceden 3): kendi simülasyonumuzda 3 testlik başlangıçla 90 günde en az bir yanlış sarı olasılığı %7–34,
+// 14 testlikle %1–24 (test başına SD 0,057–0,10; 2026-09-26 kanıt kontrolü, kullanıcı onayı).
+export const MIN_BASELINE_TESTS = 7
+export const PROVISIONAL_MIN_TESTS = 3
 export const YELLOW_DELTA = 0.1
 export const RED_DELTA = 0.2
 // VARSAYIM: iyileşme için kötüleşme kuralının simetriği kullanılır.
@@ -65,14 +68,18 @@ export function analyzeTrend(tests, now = new Date().toISOString()) {
     rolling7: median(withDay.filter((u) => u.day > t.day - 7 && u.day <= t.day).map((u) => u.logMAR)),
   }))
 
-  const baseTests = withDay.filter((t) => t.day >= BASELINE_FROM_DAY && t.day <= BASELINE_TO_DAY)
-  const baselineReady = today > BASELINE_TO_DAY && baseTests.length >= MIN_BASELINE_TESTS
-  // Başlangıç henüz hazır değilse geçici başlangıç: tanışma sonrası mevcut testler
-  const provisional = withDay.filter((t) => t.day >= BASELINE_FROM_DAY)
+  // Başlangıç: 8. günden itibaren en az MIN_BASELINE_TESTS test, en erken 21. güne kadar. 21. günde yetmediyse
+  // pencere o sayıdaki teste kadar uzar (seyrek test eden kullanıcı hiç takibe geçmeden kalmasın).
+  const afterFam = withDay.filter((t) => t.day >= BASELINE_FROM_DAY)
+  const lastBase = afterFam[MIN_BASELINE_TESTS - 1]
+  const baseEnd = lastBase ? Math.max(BASELINE_TO_DAY, lastBase.day) : null
+  const baseTests = baseEnd == null ? [] : afterFam.filter((t) => t.day <= baseEnd)
+  const baselineReady = baseEnd != null && today > baseEnd
+  // Başlangıç henüz hazır değilse geçici başlangıç (yalnız görünüm; uyarı üretmez): tanışma sonrası mevcut testler
   const baseline = baselineReady
     ? median(baseTests.map((t) => t.logMAR))
-    : provisional.length >= MIN_BASELINE_TESTS
-      ? median(provisional.map((t) => t.logMAR))
+    : afterFam.length >= PROVISIONAL_MIN_TESTS
+      ? median(afterFam.map((t) => t.logMAR))
       : null
 
   const phase =
@@ -124,7 +131,7 @@ export function trendMessage(r) {
     case 'familiarization':
       return 'Alışma dönemi (ilk 7 gün). Bu günlerde sonuçlar testi öğrenmenle değişebilir; değerlendirmeye katılmaz.'
     case 'baseline':
-      return 'Başlangıç değerin oluşturuluyor (8.–21. günler). Şimdilik değişim yorumlanmıyor.'
+      return 'Başlangıç değerin oluşturuluyor (8. günden itibaren en az 7 test, en erken 21. güne kadar). Şimdilik değişim yorumlanmıyor.'
     default:
       break
   }

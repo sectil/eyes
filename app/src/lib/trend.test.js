@@ -91,6 +91,29 @@ describe('trendMessage', () => {
   })
 })
 
+describe('başlangıç en az 7 test; yetmezse pencere uzar', () => {
+  const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
+  // 8–21. günlerde yalnız 6 test (gün aşırı), sonra 25. günde 7. test
+  const sparse = [0, 2, 4, 9, 11, 13, 15, 17, 19].map((d) => ({ date: D(d), logMAR: 0.2 }))
+  it('21. günde 6 test: takip başlamaz (başlangıç sürüyor), geçici başlangıç görünür', () => {
+    const r = analyzeTrend(sparse, D(22))
+    expect(r.phase).toBe('baseline')
+    expect(r.baseline).toBe(0.2) // geçici, 3+ testle
+    expect(r.alert).toBeNull()
+  })
+  it('7. test 25. günde: 26. günden itibaren takip, başlangıç 7. testi içerir', () => {
+    const t = [...sparse, { date: D(24), logMAR: 0.26 }]
+    expect(analyzeTrend(t, D(24)).phase).toBe('baseline')
+    const r = analyzeTrend(t, D(25))
+    expect(r.phase).toBe('tracking')
+    expect(r.baseline).toBe(0.2) // 7 testin ortancası
+  })
+  it('seyrek kullanıcı da sonunda takibe geçer (asla takılı kalmaz)', () => {
+    const weekly = Array.from({ length: 10 }, (_, i) => ({ date: D(i * 7), logMAR: 0.2 }))
+    expect(analyzeTrend(weekly, D(9 * 7 + 1)).phase).toBe('tracking')
+  })
+})
+
 describe('eşik sınırı (kayan nokta)', () => {
   const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
   it('başlangıç 0,20, son testler tam 0,30 → sarı (0,30 − 0,20 = 0,0999… değil 0,10)', () => {

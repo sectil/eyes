@@ -124,7 +124,7 @@ const num = (v, d = 1) => (Number.isFinite(v) ? decimalTr(v, d) : '–')
 const signed = (v, d = 1) => (Number.isFinite(v) ? `${v > 0 ? '+' : v < 0 ? '−' : ''}${decimalTr(Math.abs(v), d)}` : '–')
 // logMAR → ondalık görme keskinliği (10^−logMAR); standart dönüşüm, yorum değil
 const decimalVa = (lm) => (Number.isFinite(lm) ? decimalTr(10 ** -lm, 2) : '–')
-const PHASE_TEXT = { familiarization: 'alışma dönemi (ilk 7 gün)', baseline: 'başlangıç oluşuyor (8.–21. gün)', tracking: 'takipte', empty: '–' }
+const PHASE_TEXT = { familiarization: 'alışma dönemi (ilk 7 gün)', baseline: 'başlangıç oluşuyor', tracking: 'takipte', empty: '–' }
 const STATUS_TEXT = { better: 'iyileşiyor', worse: 'geriliyor', noise: 'doğal oynama', unsure: 'henüz belirsiz', first: 'ilk ölçüm', up: 'anlamlı artış', down: 'anlamlı düşüş' }
 function eyeStatusText(t) {
   if (t.alert === 'red') return 'KIRMIZI: göz doktoruna başvurmalı'
@@ -262,11 +262,11 @@ export function reportHtml(m) {
 <p class="note">Bu belge, kişinin kendi telefonunda yaptığı ölçümlerin özetidir. Tanı koymaz ve göz muayenesinin yerini tutmaz. Yöntem ve sınırlar son bölümde.</p>
 
 <section><h2>Yakın görme · ekranda E testi (logMAR, küçük = daha iyi)</h2>
-<p class="small">Noktalar tek testlerdir. Gri bant: başlangıç ortancası ±0,10 logMAR (8.–21. günlerdeki testlerin ortancası, en az 3 test; 21. günden önce geçici değer). Bant değişim eşiğidir, tek testin oynaması değildir: kural son 7 günün ortancasına ve son 3 teste bakar (bkz. Uyarı kuralı). Sağ göz, sol göz ve iki göz ayrı değerlendirilir.</p>
+<p class="small">Noktalar tek testlerdir. Gri bant: başlangıç ortancası ±0,10 logMAR (8. günden itibaren en az 7 testin ortancası, en erken 21. güne kadar; o zamana dek geçici değer). Bant değişim eşiğidir, tek testin oynaması değildir: kural son 7 günün ortancasına ve son 3 teste bakar (bkz. Uyarı kuralı). Sağ göz, sol göz ve iki göz ayrı değerlendirilir.</p>
 ${eyeSection}</section>
 
 <section class="block rule"><h2>Uyarı kuralı</h2>
-<p><b>Başlangıç:</b> ilk 7 gün alışma (değerlendirilmez); 8.–21. günlerdeki testlerin ortancası (en az 3 test).</p>
+<p><b>Başlangıç:</b> ilk 7 gün alışma (değerlendirilmez); 8. günden itibaren en az 7 testin ortancası, en erken 21. güne kadar (21. günde 7 test yoksa 7. teste kadar uzar).</p>
 <p><b>Sarı:</b> son 7 günün ortancası başlangıçtan en az ${esc(decimalTr(YELLOW_DELTA, 2))} logMAR kötü ve art arda 3 test kötü → birkaç gün daha ölç.</p>
 <p><b>Kırmızı:</b> son 7 günde en az 3 test var, ilki en az 6 gün önce yapılmış ve hepsi başlangıçtan en az ${esc(decimalTr(RED_DELTA, 2))} logMAR kötü → göz doktoruna başvur.</p>
 <p><b>İyileşme:</b> sarı kuralın ters yönü (bir kısmı teste alışmaktan olabilir).</p>

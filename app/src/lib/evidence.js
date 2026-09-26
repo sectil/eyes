@@ -25,7 +25,7 @@ export const EVIDENCE = [
     claim: 'Gerçek değişimi günlük gürültüden ayırmaya çalışır; kalıcı kötüleşmede doktora yönlendirir.',
     level: 'Orta',
     basis:
-      'İlk 7 gün alışma dönemi, 8–21. günler başlangıç değeri. Uyarı için tek kötü sonuç yetmez; ardışık sonuçlar gerekir. Tek teste dayalı ev takip sistemlerinde yanlış alarm oranı çok yüksek bulunmuştur.',
+      'İlk 7 gün alışma dönemi; başlangıç değeri 8. günden itibaren en az 7 testten (en erken 21. güne kadar). Uyarı için tek kötü sonuç yetmez; ardışık sonuçlar gerekir. Tek teste dayalı ev takip sistemlerinde yanlış alarm oranı çok yüksek bulunmuştur.',
     limits: 'Kurallar yayımlanmış ev takip sistemlerinden uyarlanmıştır; bu uygulama için ayrıca doğrulanmamıştır.',
     sources: ['Ev takibi ve tekrarlanabilirlik derlemesi: docs/arastirma/ajan-raporlari/13_gunluk_takip.md'],
   },
