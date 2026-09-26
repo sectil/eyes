@@ -175,20 +175,46 @@ export function wrapDelta(a, b, cols, rows) {
 // Aynı yöne dwellMs boyunca bakılınca tek bir kez "fire" eder; yön değişmeden tekrar etmez.
 // 'center' / null (yüz yok, göz kapalı) bekleyeni sıfırlar. Histerezis bakış okuyucudadır
 // (createGazeReader enter/exit eşikleri).
-// VARSAYIM: 220 ms, kısa göz kaymalarını (sakkad + dönüş) elerken gecikmeyi düşük tutar.
+// Komut kilidi (Bug 16, cihaz geri bildirimi): bir yön kabul edildikten sonra göz ORTAYA dönmeden
+// (rearmMs boyunca 'center') ve minGapMs geçmeden yeni yön alınmaz. Aşağı/yukarı bakarken gözün istemsiz
+// yana kayması ya da dönüş sakkadı, verilmiş komutu hemen bozmasın. Göz kırpma (null) kilidi AÇMAZ.
+// waitCenter: kilitliyken kişi hâlâ bir yöne bakıyor → ekranda "ortaya dön".
+// VARSAYIM: 220 ms bekleme, 150 ms orta, 400 ms en kısa ara; cihazda ayarlanacak.
 export const DWELL_MS = 220
+export const REARM_MS = 150
+export const MIN_GAP_MS = 400
 const GAZE_DIRS = new Set(['up', 'down', 'left', 'right'])
 
-export function createDwell({ dwellMs = DWELL_MS } = {}) {
+export function createDwell({ dwellMs = DWELL_MS, rearmMs = REARM_MS, minGapMs = MIN_GAP_MS } = {}) {
   let cand = null
   let since = 0
   let fired = false
+  let armed = true
+  let firedAt = -Infinity
+  let centerSince = null
+  let centered = false // komuttan sonra en az rearmMs ortada kalındı
   return {
     push(dir, ts) {
+      if (!armed) {
+        if (dir === 'center') {
+          if (centerSince == null) centerSince = ts
+          if (ts - centerSince >= rearmMs) centered = true
+        } else if (dir != null && !centered) centerSince = null // yöne bakış orta sayacını bozar; kırpma (null) bozmaz
+        if (centered && ts - firedAt >= minGapMs) {
+          armed = true
+          centered = false
+          centerSince = null
+        }
+      }
+      if (!armed) {
+        cand = null
+        fired = false
+        return { fire: null, candidate: null, progress: 0, waitCenter: GAZE_DIRS.has(dir) && !centered }
+      }
       if (!GAZE_DIRS.has(dir)) {
         cand = null
         fired = false
-        return { fire: null, candidate: null, progress: 0 }
+        return { fire: null, candidate: null, progress: 0, waitCenter: false }
       }
       if (dir !== cand) {
         cand = dir
@@ -198,13 +224,21 @@ export function createDwell({ dwellMs = DWELL_MS } = {}) {
       const held = ts - since
       if (!fired && held >= dwellMs) {
         fired = true
-        return { fire: dir, candidate: dir, progress: 1 }
+        armed = false
+        firedAt = ts
+        centerSince = null
+        centered = false
+        return { fire: dir, candidate: dir, progress: 1, waitCenter: false }
       }
-      return { fire: null, candidate: dir, progress: fired ? 1 : Math.max(0, Math.min(1, held / dwellMs)) }
+      return { fire: null, candidate: dir, progress: fired ? 1 : Math.max(0, Math.min(1, held / dwellMs)), waitCenter: false }
     },
     reset() {
       cand = null
       fired = false
+      armed = true
+      firedAt = -Infinity
+      centerSince = null
+      centered = false
     },
   }
 }
