@@ -11,19 +11,23 @@ const low = (s) => s.toLocaleLowerCase('tr')
 // must / mustNot: metin ya da RegExp. Anlamca doğru eş ifadeler RegExp ile kabul edilir.
 // Her cevapta eski adlar geçmemeli (uygulama Nefona, koç Nef)
 const OLD_NAMES = ['jev', 'eyetrail', 'eyelume']
+// Noktalı ondalık (0.18) hiçbir cevapta olmamalı; Türkçe 0,18
+const DOT_DECIMAL = /\d\.\d/
+// "Değişim yok" denen durumlarda hiçbir ondalık sayı (0,18 / 0,3 gibi) yazılmamalı
+const ANY_DECIMAL = /\d[.,]\d/
 const NO_CHANGE = /doğrulanmış (bir )?değişim (yok|göstermiyor|görünmüyor)/
 const CASES = [
   {
     name: 'Takipte, +0,14 ama doğrulanmadı',
     signals: { vaPhase: 'tracking', vaBaseline: 0.3, vaCurrent7: 0.44, vaDelta: 0.14, vaTrend: 'stable' },
     must: [NO_CHANGE],
-    mustNot: ['0,14', '0.14', 'ortalama', 'kötüleş', 'iyileş', 'normal', 'aralı', 'küçük', 'yakın'],
+    mustNot: ['0,14', '0.14', 'ortalama', 'kötüleş', 'iyileş', 'normal', 'aralı', 'küçük', 'yakın', ANY_DECIMAL],
   },
   {
     name: 'Takipte, −0,12 ama doğrulanmadı',
     signals: { vaPhase: 'tracking', vaBaseline: 0.3, vaCurrent7: 0.18, vaDelta: -0.12, vaTrend: 'stable' },
     must: [NO_CHANGE],
-    mustNot: ['0,12', '0.12', 'ortalama', 'kötüleş', 'iyileş', 'daha iyi', 'normal', 'küçük', 'yakın'],
+    mustNot: ['0,12', '0.12', 'ortalama', 'kötüleş', 'iyileş', 'daha iyi', 'normal', 'küçük', 'yakın', ANY_DECIMAL],
   },
   {
     name: 'Sarı uyarı',
@@ -82,7 +86,7 @@ for (const c of CASES) {
     const t = low(text)
     const hit = (w) => (w instanceof RegExp ? w.test(t) : t.includes(low(w)))
     const missing = c.must.filter((w) => !hit(w))
-    const banned = [...c.mustNot, ...OLD_NAMES].filter(hit)
+    const banned = [...c.mustNot, ...OLD_NAMES, DOT_DECIMAL].filter(hit)
     const ok = !missing.length && !banned.length
     if (!ok) fail++
     console.log(`${ok ? '✔ GEÇTİ' : '✖ KALDI'} ${c.name} #${i}: ${text}`)
