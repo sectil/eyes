@@ -203,6 +203,7 @@ export default function Info({ onGo, onReset, exportJSON, distanceSkipped, iosAp
           />
           {trueDepth && <Row Icon={Crosshair} label="Göz takibi" sub="Kalibre et ve canlı dene" onClick={() => onGo('gaze-test')} />}
           <Row Icon={Bell} label="Çalışma günleri ve hatırlatma" onClick={() => onGo('schedule')} />
+          <Row Icon={Sparkles} label="Yenilikler" sub="Her güncellemede neler eklendi, neler düzeldi" onClick={() => onGo('whatsnew')} />
         </div>
       </section>
 

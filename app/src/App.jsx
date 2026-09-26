@@ -28,6 +28,8 @@ import Info from './screens/Info.jsx'
 import Paywall from './screens/Paywall.jsx'
 import { getAccess, linkPurchaser, unlinkPurchaser } from './lib/subscription.js'
 import AccountStart from './screens/AccountStart.jsx'
+import WhatsNew from './components/WhatsNew.jsx'
+import { RELEASES, unseenReleases, latestRelease } from './lib/releases.js'
 import ProfileSetup from './screens/ProfileSetup.jsx'
 import { signedIn, pullProfile, pushProfile, mergeProfile, signOut, deleteAccount, friendlyError } from './lib/account.js'
 import DistanceHud from './screens/DistanceHud.jsx'
@@ -315,7 +317,8 @@ export default function App() {
     refresh()
   }
   // Giriş filmi (components/IntroFilm.jsx): ilk açılışta bir kez, profil sorularından önce; Profilim'den yeniden izlenir.
-  const markIntro = () => { store.setSetting('intro', { seen: true, date: new Date().toISOString() }); refresh() }
+  // İlk kurulumda sürüm notu gösterilmez (her şey zaten yeni): en son sürüm görülmüş sayılır
+  const markIntro = () => { store.setSetting('intro', { seen: true, date: new Date().toISOString() }); if (!settings.releaseSeen) store.setSetting('releaseSeen', latestRelease()?.id ?? null); refresh() }
   if (screen === 'intro') return <IntroFilm replay onDone={() => go(lastTab)} />
   if (shouldPlayIntro(settings, prefersReducedMotion())) return <IntroFilm onDone={markIntro} />
 
@@ -386,6 +389,12 @@ export default function App() {
     const setupAge = ageBandFromAge(ageFromBirthDate(settings.identity?.birthDate))
     const initial = settings.profile ?? { ...profileFromScreening(settings.screening), ...(setupAge ? { ageBand: setupAge } : {}), ...(settings.setupCorrection ? { correction: settings.setupCorrection } : {}) }
     return <Onboarding initial={initial} trueDepth={native.trueDepth} onDone={saveProfile} />
+  }
+  if (screen === 'whatsnew') return <WhatsNew releases={RELEASES} title="Yenilikler" back onClose={() => go('info')} />
+  // Güncellemeden sonra ilk açılışta bir kez: görülmemiş sürüm notları
+  const unseen = unseenReleases(settings.releaseSeen)
+  if (unseen.length && screen !== 'evidence') {
+    return <WhatsNew releases={unseen} onClose={() => { store.setSetting('releaseSeen', latestRelease().id); refresh() }} />
   }
   if (screen === 'profile') {
     // Profilim (screens/ProfileHome.jsx): ad, doğum tarihi, avatar cihazda kalır; doğum tarihi anketin yaş aralığını doldurur.
