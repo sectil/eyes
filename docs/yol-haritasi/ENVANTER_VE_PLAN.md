@@ -157,7 +157,7 @@ Seçenekler:
 - Protokol ve formül değişmedi (`lib/breathCount.js`; state'e yalnızca `nines` sayısı eklendi).
 
 ## 9. Giriş filmi ve Profilim (2026-09-25, onaylı; Artifact "EyeTrail Giriş Filmi") — 23a YAPILDI (Build 23)
-- `components/IntroFilm.jsx`: 15 sn sessiz film, iris içinden (SVG + SMIL, ağ yok). Gözlüğü çıkarır, koşar; bankın altındaki
+- `components/IntroFilm.jsx` + `lib/introScene.js` (2026-09-26 yenilendi; Artifact "Giriş Filmi Taslağı"): 15 sn sessiz, tam ekran Canvas 2D (ağ yok, görsel dosya yok); iris yakın çekimden göz bebeğine dalış, tek parça siluetler, fark etme anlarında zaman yavaşlar + altın odak köşeleri, bulut atı → takımyıldızı Pegasus, son karede halka içinde Pegasus. Eski sürüm: SVG + SMIL. Gözlüğü çıkarır, koşar; bankın altındaki
   kedi, patlak lastik, açan çiçek altın odak halkasıyla; çocuklukta bulut ata dönüşür; ata biner, at kanatlanır, gece göğüne
   yükselir. Yazılar: Bak → Çıkar → Koş → Fark et → Yine → Bir daha → Hatırla → Hayal et → Uç. Sonda logo + "Başla".
   Yalnızca ilk açılışta (`settings.intro.seen`); "Atla" her an; hareket azaltma açıksa oynamaz; Profilim'den yeniden izlenir.

@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { shouldPlayIntro, captionAt, INTRO_SCRIPT, INTRO_MS, INTRO_END_MS } from './intro.js'
+import { NOTICE, FILM_SEC } from './introScene.js'
 
 describe('giriş filmi', () => {
   it('ilk açılışta oynar, izlendiyse veya hareket azaltma açıksa oynamaz', () => {
@@ -16,5 +17,11 @@ describe('giriş filmi', () => {
     expect([...ats].sort((a, b) => a - b)).toEqual(ats)
     expect(ats.at(-1)).toBeLessThan(INTRO_END_MS)
     expect(INTRO_END_MS).toBeLessThanOrEqual(INTRO_MS)
+  })
+  it('fark etme anları kendi yazısının içinde (kedi "Fark et.", lastik "Yine.", çiçek "Bir daha.")', () => {
+    expect(captionAt(NOTICE.cat * 1000)).toBe('Fark et.')
+    expect(captionAt(NOTICE.tire * 1000)).toBe('Yine.')
+    expect(captionAt(NOTICE.flower * 1000)).toBe('Bir daha.')
+    expect(FILM_SEC * 1000).toBe(INTRO_MS)
   })
 })
