@@ -10,9 +10,11 @@ export const EVIDENCE = [
     basis:
       'Akıllı telefon görme testleri klinik tablolarla karşılaştırılmış ve uyumlu bulunmuştur. Harf boyutu, ekranınızın kart ile kalibrasyonu sayesinde doğru ölçekte çizilir.',
     limits:
-      'Evde tek bir testin doğal oynaması yaklaşık ±0,2 logMAR (2 satır). Bu yüzden tek teste değil, birkaç günün ortalamasına bakıyoruz. Bu test göz muayenesinin yerini tutmaz.',
+      'Klinikte, gözetim altında tablet ve telefonla yapılan yakın görme testi tekrarlandığında, iki sonuç arasındaki fark çoğunlukla ±0,2 logMAR (2 satır) içinde kalıyor; evde bu fark daha büyük olabilir. Bu yüzden tek teste değil, son 7 günün ortancasına (sıralanınca ortadaki değer) bakıyoruz. Bu ortanca başlangıç ortancasından en az 0,10 ayrılır ve son 3 testin her biri de aynı yönde en az 0,10 farklıysa bunu değişim olarak işaretliyoruz. Bu test göz muayenesinin yerini tutmaz.',
     sources: [
+      'Joseph ve ark. 2023, Aphelion: tablet E testi, test-tekrar ±0,18 (PMID 38015309)',
       'Katibeh ve ark. 2022, Peek Near Vision (PMID 36583912)',
+      'Han ve ark. 2019, Vision at Home: yakın test-tekrar (PMID 31440424)',
       'Wu ve ark. 2024, WHOeyes (PMID 38514167)',
       'Steren ve ark. 2021, uygulamalarda harf boyutu hataları (PMID 33443550)',
     ],

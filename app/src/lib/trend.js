@@ -80,15 +80,18 @@ export function analyzeTrend(tests, now = new Date().toISOString()) {
 
   const last7 = withDay.filter((t) => t.day > today - 7 && t.day <= today)
   const current7 = median(last7.map((t) => t.logMAR))
-  const delta = baseline != null && current7 != null ? current7 - baseline : null
+  // Farklar 3 basamağa yuvarlanarak karşılaştırılır (kayıtlar 3 basamaklı): 0,30 − 0,20 kayan noktada
+  // 0,0999… çıkar ve "en az 0,10" kuralı sınırda tetiklenmezdi (ekranda +0,10 yazarken).
+  const r3 = (v) => Math.round(v * 1000) / 1000
+  const delta = baseline != null && current7 != null ? r3(current7 - baseline) : null
 
   let alert = null
   let trend = null
   if (phase === 'tracking' && delta != null) {
     const last3 = withDay.slice(-3)
-    const worse3 = last3.length === 3 && last3.every((t) => t.logMAR - baseline >= YELLOW_DELTA)
-    const better3 = last3.length === 3 && last3.every((t) => baseline - t.logMAR >= IMPROVE_DELTA)
-    const allRed = last7.length >= 3 && last7.every((t) => t.logMAR - baseline >= RED_DELTA)
+    const worse3 = last3.length === 3 && last3.every((t) => r3(t.logMAR - baseline) >= YELLOW_DELTA)
+    const better3 = last3.length === 3 && last3.every((t) => r3(baseline - t.logMAR) >= IMPROVE_DELTA)
+    const allRed = last7.length >= 3 && last7.every((t) => r3(t.logMAR - baseline) >= RED_DELTA)
     const spansWeek = last7.length >= 3 && today - last7[0].day >= 6
 
     if (allRed && spansWeek) alert = 'red'
@@ -134,5 +137,8 @@ export function trendMessage(r) {
   if (r.trend === 'improving') {
     return 'Son ölçümlerin başlangıcından daha iyi. Not: Bir kısmı teste alışmaktan kaynaklanabilir.'
   }
-  return 'Ölçümlerin başlangıcına göre sabit (tek testin doğal oynaması ±0,2 logMAR).'
+  // "Sabit" denmez: kural yalnız "doğrulanmış değişim yok" der (ortanca farkı eşik altında ya da son 3 test doğrulamıyor).
+  // ±0,2: iki tek test arasındaki %95 fark, klinikte gözetimli tablet/telefon yakın testleri (Joseph 2023,
+  // Katibeh 2022, Han 2019; lib/sources.js); evde daha geniş olabilir.
+  return 'Başlangıcına göre doğrulanmış bir değişim yok. Değerlendirme son 7 günün ortancası ve son 3 testle yapılır; tek testler bir testten diğerine yaklaşık ±0,2 logMAR oynayabilir.'
 }

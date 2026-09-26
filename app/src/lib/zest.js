@@ -127,7 +127,10 @@ export function randomDirection(rng = Math.random) {
 //  - Build 24 (kullanıcı geri bildirimi: üç göz × 24 harf fazla, test bırakılıyor): günlük 20 (en az 14),
 //    haftalık 28 (en az 20). Bedeli simülasyonla ölçüldü (550 sanal kişi, iki gözlemci modeli):
 //    günlük hata SD 0,046→0,057 (uyumsuz gözlemci 0,075→0,088), haftalık 0,031→0,042 (0,054→0,069).
-//    ETDRS'nin kendi test-tekrar farkı ≈ ±0,1 logMAR (Beck 2003, PMID 12566024); iki plan da bunun içinde.
+//    Günlük SD 0,057, iki test arasındaki fark olarak ≈ ±0,16 (%95) eder: klinikte gözetimli tablet/telefon yakın
+//    testlerinin test-tekrar aralığı ±0,13–0,24'ün içinde (Joseph 2023 PMID 38015309, Katibeh 2022 PMID 36583912,
+//    Han 2019 PMID 31440424; lib/sources.js). Eski not "ETDRS ±0,1 (Beck 2003)" doğrulanmadı: Beck özeti tekrarların
+//    %89'unun 0,1, %98'inin 0,2 içinde kaldığını söyler; "±0,1" diye özetlemek yanlıştı (2026-09-26 kanıt kontrolü).
 //    Bach 2024'ün 8 seçenekli testte gördüğü "18 denemede kırılma" 4 seçenekte daha geç gelir; günlükte
 //    bilerek bunun altına inildi, haftalık test daha kesin ölçüm olarak kalır. Günlük test yalnız iki tek göz.
 // VARSAYIM: minFine ve stopSd değerleri simülasyonla seçildi (staircase.test.js).

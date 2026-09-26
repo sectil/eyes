@@ -111,6 +111,30 @@ export const SOURCES = {
     journal: 'Eye (Lond)', cite: '35(11):3035-3040', doi: '10.1038/s41433-020-01356-2', pmid: '33414531',
     design: 'cohort', n: '56 hasta, 73 göz, 2258 test',
   },
+  // Tek testin oynaması (bir testten diğerine %95 fark): klinikte, gözetimli tablet/telefon yakın testleri.
+  // Joseph ±0,18 (4 E içinden farklıyı seç, iPad, 40 cm); Katibeh −0,19/+0,26 (PeekNV, 40 cm);
+  // Han −0,24/+0,20 (V@home, 40 cm, iki göz). Ev koşulunda yetişkinde ölçülmedi.
+  joseph2023: {
+    authors: ['Joseph A', 'Bullimore M', 'Drawnel F', 'Miranda M'], year: 2023,
+    title: 'Remote Monitoring of Visual Function in Patients with Maculopathy: The Aphelion Study.',
+    titleTr: 'Sarı nokta hastalığında görme işlevinin uzaktan takibi: Aphelion çalışması.',
+    journal: 'Ophthalmol Ther', cite: '13(1):409-422', doi: '10.1007/s40123-023-00854-2', pmid: '38015309',
+    design: 'validation', n: '122 hasta (klinikte, gözetimli)',
+  },
+  katibeh2022: {
+    authors: ['Katibeh M', 'Sanyam SD', 'Watts E', 'Bolster NM'], year: 2022,
+    title: 'Development and Validation of a Digital (Peek) Near Visual Acuity Test for Clinical Practice, Community-Based Survey, and Research.',
+    titleTr: 'Klinik, saha taraması ve araştırma için dijital (Peek) yakın görme testinin geliştirilmesi ve geçerliği.',
+    journal: 'Transl Vis Sci Technol', cite: '11(12):18', doi: '10.1167/tvst.11.12.18', pmid: '36583912',
+    design: 'validation', n: '483 kişi',
+  },
+  han2019: {
+    authors: ['Han X', 'Scheetz J', 'Keel S', 'Liao C'], year: 2019,
+    title: 'Development and Validation of a Smartphone-Based Visual Acuity Test (Vision at Home).',
+    titleTr: 'Akıllı telefonla görme keskinliği testinin (Vision at Home) geliştirilmesi ve geçerliği.',
+    journal: 'Transl Vis Sci Technol', cite: '8(4):27', doi: '10.1167/tvst.8.4.27', pmid: '31440424',
+    design: 'validation', n: 'üç çalışma grubu',
+  },
   paluch2022: {
     authors: ['Paluch AE', 'Bajpai S', 'Bassett DR', 'Carnethon MR'], year: 2022,
     title: 'Daily steps and all-cause mortality: a meta-analysis of 15 international cohorts.',

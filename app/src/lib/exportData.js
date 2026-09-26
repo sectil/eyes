@@ -130,10 +130,11 @@ function eyeStatusText(t) {
   if (t.alert === 'red') return 'KIRMIZI: göz doktoruna başvurmalı'
   if (t.alert === 'yellow') return 'SARI: birkaç gün daha ölçmeli'
   if (t.phase !== 'tracking') return PHASE_TEXT[t.phase]
-  return t.trend === 'improving' ? 'iyileşme' : 'sabit'
+  return t.trend === 'improving' ? 'iyileşme' : 'doğrulanmış değişim yok'
 }
 
-// logMAR eğilimi: yukarı = daha iyi (ters eksen), gri bant = başlangıç ±0,10. Baskı için sabit renkler.
+// logMAR eğilimi: yukarı = daha iyi (ters eksen), gri bant = başlangıç ±0,10 (değişim eşiği; tek testin oynaması
+// değil). Baskı için sabit renkler.
 export function eyeChartSvg(series = [], baseline = null) {
   const W = 320
   const H = 120
@@ -260,12 +261,15 @@ export function reportHtml(m) {
 <div class="who">${who}</div>
 <p class="note">Bu belge, kişinin kendi telefonunda yaptığı ölçümlerin özetidir. Tanı koymaz ve göz muayenesinin yerini tutmaz. Yöntem ve sınırlar son bölümde.</p>
 
-<section><h2>Yakın görme · ekranda E testi (logMAR, küçük = daha iyi)</h2>${eyeSection}</section>
+<section><h2>Yakın görme · ekranda E testi (logMAR, küçük = daha iyi)</h2>
+<p class="small">Noktalar tek testlerdir. Gri bant: başlangıç ortancası ±0,10 logMAR (8.–21. günlerdeki testlerin ortancası, en az 3 test; 21. günden önce geçici değer). Bant değişim eşiğidir, tek testin oynaması değildir: kural son 7 günün ortancasına ve son 3 teste bakar (bkz. Uyarı kuralı). Sağ göz, sol göz ve iki göz ayrı değerlendirilir.</p>
+${eyeSection}</section>
 
 <section class="block rule"><h2>Uyarı kuralı</h2>
 <p><b>Başlangıç:</b> ilk 7 gün alışma (değerlendirilmez); 8.–21. günlerdeki testlerin ortancası (en az 3 test).</p>
 <p><b>Sarı:</b> son 7 günün ortancası başlangıçtan en az ${esc(decimalTr(YELLOW_DELTA, 2))} logMAR kötü ve art arda 3 test kötü → birkaç gün daha ölç.</p>
-<p><b>Kırmızı:</b> en az bir hafta boyunca her test en az ${esc(decimalTr(RED_DELTA, 2))} logMAR kötü → göz doktoruna başvur.</p>
+<p><b>Kırmızı:</b> son 7 günde en az 3 test var, ilki en az 6 gün önce yapılmış ve hepsi başlangıçtan en az ${esc(decimalTr(RED_DELTA, 2))} logMAR kötü → göz doktoruna başvur.</p>
+<p><b>İyileşme:</b> sarı kuralın ters yönü (bir kısmı teste alışmaktan olabilir).</p>
 <p>Yalnız aynı gözlük/lens koşulundaki testler karşılaştırılır. Ani görme kaybı, perde inmesi, ışık çakması ya da ağrıda beklenmeden başvurulmalı.</p>
 <p class="src">"Art arda 3 test" yaklaşımı, akıllı telefonla evde görme takibinde yanlış alarmı azaltmak için kullanılan kuraldan uyarlandı (farklı test: hiperkeskinlik): Faes L ve ark. 2021, Eye (Lond) 35(11):3035-3040. doi:10.1038/s41433-020-01356-2</p>
 </section>
@@ -285,7 +289,9 @@ ${effectRows ? `<section class="block"><h2>Uygulama öncesi → sonrası (kişin
 
 <section class="block"><h2>Yöntem ve sınırlar</h2>
 <p class="small">Görme: telefon ekranında dört yöne dönen E harfi; sağ ve sol göz ayrı ayrı (diğeri kapatılarak), haftalık testte ayrıca iki göz birlikte. Harf boyutu uyarlamalı yöntemle (iniş + ZEST, Bayes eşik tahmini) ayarlanır; sonuç logMAR. Hedef mesafe 40 cm; destekleyen iPhone'larda mesafe ön kamerayla (TrueDepth) ölçülür ve harf boyutu ölçülen mesafeye göre hesaplanır. "ondalık" sütunu 10<sup>−logMAR</sup> dönüşümüdür.</p>
-<p class="small">Sınırlar: ışık, ekran parlaklığı, yorgunluk, dikkat ve mesafe sonucu etkiler; tek bir test yorumlanmamalı, eğilime bakılmalı. Ölçümler klinik bir cihazla yapılmamıştır.</p>
+<p class="small">Deneme sayısı: günlük testte 14–20, haftalık testte 20–28 (göz başına).</p>
+<p class="small">Tekrarlanabilirlik: benzer tablet ve telefon yakın testlerinde, klinikte ve gözetim altında, iki test arasındaki farkın %95 sınırı ±0,13–0,24 logMAR (çoğunda yaklaşık ±0,2); ev koşulunda ölçülmedi, daha geniş olabilir. Joseph A ve ark. 2023, Ophthalmol Ther 13(1):409-422, doi:10.1007/s40123-023-00854-2 · Katibeh M ve ark. 2022, Transl Vis Sci Technol 11(12):18, doi:10.1167/tvst.11.12.18 · Han X ve ark. 2019, Transl Vis Sci Technol 8(4):27, doi:10.1167/tvst.8.4.27</p>
+<p class="small">Sınırlar: ışık, ekran parlaklığı, yorgunluk, dikkat ve mesafe sonucu etkiler; tek bir test yorumlanmamalı, eğilime bakılmalı. Yakın mesafe ölçümüdür; uzak ETDRS değerleriyle doğrudan karşılaştırılmamalıdır. Ölçümler klinik bir cihazla yapılmamıştır.</p>
 </section>
 </body></html>`
 }

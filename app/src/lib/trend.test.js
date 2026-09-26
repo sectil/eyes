@@ -82,6 +82,31 @@ describe('trendMessage', () => {
   it('iyileşmede alışma etkisini belirtir', () => {
     expect(trendMessage({ phase: 'tracking', alert: null, trend: 'improving' })).toMatch(/alışmak/)
   })
+  it('uyarı yoksa "sabit" değil "doğrulanmış değişim yok"; ortanca ve ±0,2', () => {
+    const m = trendMessage({ phase: 'tracking', alert: null, trend: 'stable' })
+    expect(m).toMatch(/doğrulanmış bir değişim yok/)
+    expect(m).toMatch(/ortanca/)
+    expect(m).toMatch(/±0,2/)
+    expect(m).not.toMatch(/sabit/)
+  })
+})
+
+describe('eşik sınırı (kayan nokta)', () => {
+  const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
+  it('başlangıç 0,20, son testler tam 0,30 → sarı (0,30 − 0,20 = 0,0999… değil 0,10)', () => {
+    const t = []
+    for (let d = 7; d <= 21; d++) t.push({ date: D(d), logMAR: 0.2 })
+    for (let d = 22; d <= 30; d++) t.push({ date: D(d), logMAR: 0.3 })
+    const r = analyzeTrend(t, D(30))
+    expect(r.delta).toBe(0.1)
+    expect(r.alert).toBe('yellow')
+  })
+  it('iyileşme sınırı da simetrik: 0,30 → 0,20', () => {
+    const t = []
+    for (let d = 7; d <= 21; d++) t.push({ date: D(d), logMAR: 0.3 })
+    for (let d = 22; d <= 30; d++) t.push({ date: D(d), logMAR: 0.2 })
+    expect(analyzeTrend(t, D(30)).trend).toBe('improving')
+  })
 })
 
 describe('karşılaştırılabilir seri: gözlük koşulu ve yeni baz çizgisi', async () => {

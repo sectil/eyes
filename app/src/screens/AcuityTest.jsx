@@ -624,7 +624,7 @@ function EyeResult({ eyes: EYES, eyeIdx, result, all, moreEyes, onNext, onFinish
 
       <p className="note">
         <Info size={16} />
-        Tek bir testin doğal oynaması yaklaşık ±0,2 logMAR. Değişimi grafikte, birkaç günün ortalamasıyla değerlendiriyoruz.
+        Bir testten diğerine yaklaşık ±0,2 logMAR doğal oynama olabilir. Değişimi tek teste göre değil, son 7 günün ortancasına ve son 3 teste bakarak değerlendiriyoruz.
       </p>
 
       <div className="acuity-actions">
