@@ -30,14 +30,15 @@ describe('CSV', () => {
     const rows = csvRows({ sessions: [], metrics: [fake], effects: [] })
     expect(rows).toEqual([expect.objectContaining({ measure: 'Deneme metriği', value: 4, module: registry.get('breath').title })])
   })
-  it('RFC 4180 kaçış, BOM, CRLF, formül koruması, noktalı ondalık', () => {
-    const csv = toCsv([
-      { date: day(0), module: 'A, "B"', domain: 'eye', measure: '=1+1', value: -0.1234, unit: 'logMAR', note: 'satır\nsonu' },
-    ])
-    expect(csv.startsWith('﻿' + CSV_HEADER.join(','))).toBe(true)
+  it('Türkçe Excel: ";" ayırıcı, virgüllü ondalık; kaçış, BOM, CRLF, formül koruması', () => {
+    const rows = [{ date: day(0), module: 'A; "B"', domain: 'eye', measure: '=1+1', value: -0.1234, unit: 'logMAR', note: 'satır\nsonu' }]
+    const csv = toCsv(rows)
+    expect(csv.startsWith('\uFEFF' + CSV_HEADER.join(';'))).toBe(true)
     const line = csv.split('\r\n')[1]
-    expect(line).toBe(`${localStamp(day(0))},"A, ""B""",Göz,'=1+1,-0.123,logMAR,"satır\nsonu"`)
+    expect(line).toBe(`${localStamp(day(0))};"A; ""B""";Göz;'=1+1;-0,123;logMAR;"satır\nsonu"`)
     expect(csv.endsWith('\r\n')).toBe(true)
+    // başka dil için: virgül ve nokta
+    expect(toCsv(rows, { sep: ',', decimal: '.' }).split('\r\n')[1]).toBe(`${localStamp(day(0))},"A; ""B""",Göz,'=1+1,-0.123,logMAR,"satır\nsonu"`)
   })
   it('geçersiz tarih ve sayı atlanır', () => {
     const rows = csvRows({ tests: [va(0, 'R', NaN), { ...va(0, 'R', 0.2), date: 'yok' }], sessions: [] })

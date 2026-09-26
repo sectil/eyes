@@ -42,13 +42,19 @@ public class ExportPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate {
             return
         }
         let name = safeName(call.getString("filename"), fallback: "eyetrail.csv")
-        do {
-            let url = try writeTemp(Data(text.utf8), name: name)
-            DispatchQueue.main.async {
-                self.present(url, call)
+        // Dosya ve paylaşım işi ana thread'de (sharePdf ile aynı yerde): iki dışa aktarma birbirinin dosyasını silmesin.
+        // Capacitor yöntemleri "bridge" kuyruğunda çağırır (CapacitorBridge.swift handleJSCall).
+        DispatchQueue.main.async {
+            if self.pdfCall != nil || self.sheetIsUp() {
+                call.reject("Dışa aktarma sürüyor")
+                return
             }
-        } catch {
-            call.reject("Dosya yazılamadı: \(error.localizedDescription)")
+            do {
+                let url = try self.writeTemp(Data(text.utf8), name: name)
+                self.present(url, call)
+            } catch {
+                call.reject("Dosya yazılamadı: \(error.localizedDescription)")
+            }
         }
     }
 
@@ -60,7 +66,7 @@ public class ExportPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate {
         let name = safeName(call.getString("filename"), fallback: "eyetrail-rapor.pdf")
         let footer = call.getString("footer") ?? "EyeTrail"
         DispatchQueue.main.async {
-            if self.pdfCall != nil {
+            if self.pdfCall != nil || self.sheetIsUp() {
                 call.reject("Rapor zaten hazırlanıyor")
                 return
             }
@@ -174,13 +180,36 @@ public class ExportPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate {
         return cleaned.isEmpty || cleaned.hasPrefix(".") ? fallback : cleaned
     }
 
-    private func present(_ url: URL, _ call: CAPPluginCall) {
+    /// Yalnız ana thread. Paylaşım sayfası açıksa ya da açılıyorsa true (presentedViewController, present()
+    /// çağrılır çağrılmaz dolar).
+    private func sheetIsUp() -> Bool {
+        var top = bridge?.viewController
+        while let next = top?.presentedViewController {
+            top = next
+        }
+        guard let shown = top else { return false }
+        return shown is UIActivityViewController
+    }
+
+    private func present(_ url: URL, _ call: CAPPluginCall, attempt: Int = 0) {
         guard var top = bridge?.viewController else {
             call.reject("Görünüm yok")
             return
         }
-        while let next = top.presentedViewController {
+        while let next = top.presentedViewController, !next.isBeingDismissed {
             top = next
+        }
+        // Üstte kapanmakta olan bir görünüm varsa UIKit present()'i yalnız günlüğe yazıp yok sayar; o zaman
+        // tamamlanma hiç gelmez ve JS sözü askıda kalır. Kısa bekleyip yeniden dene; olmazsa reddet (söz hep biter).
+        if top.presentedViewController != nil || top.isBeingDismissed || top.viewIfLoaded?.window == nil {
+            if attempt < 5 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.present(url, call, attempt: attempt + 1)
+                }
+            } else {
+                call.reject("Paylaşım sayfası açılamadı")
+            }
+            return
         }
         let sheet = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         // iPad: paylaşım sayfası açılır pencere olarak gösterilir, bir kaynak noktası şart
@@ -189,12 +218,32 @@ public class ExportPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate {
             pop.sourceRect = CGRect(x: top.view.bounds.midX, y: top.view.bounds.midY, width: 1, height: 1)
             pop.permittedArrowDirections = []
         }
-        sheet.completionWithItemsHandler = { activity, completed, _, error in
+        // Söz yalnız bir kez biter. iOS 13+: kullanıcı bir eklentiden (Mail, Mesajlar…) vazgeçince tamamlanma
+        // (etkinlik, false) ile gelir ama sayfa açık kalır; asıl sonuç sayfa kapanınca ikinci çağrıda gelir.
+        var settled = false
+        let finish: (UIActivity.ActivityType?, Bool) -> Void = { activity, completed in
+            if settled { return }
+            settled = true
+            call.resolve(["completed": completed, "activity": activity?.rawValue ?? ""])
+        }
+        sheet.completionWithItemsHandler = { [weak sheet] activity, completed, _, error in
+            if settled { return }
             if let error = error {
+                settled = true
                 call.reject(error.localizedDescription)
                 return
             }
-            call.resolve(["completed": completed, "activity": activity?.rawValue ?? ""])
+            if !completed, activity != nil {
+                // Bir sonraki turda bak: sayfa kapandıysa bitir, hâlâ açıksa sonraki çağrıyı bekle
+                DispatchQueue.main.async {
+                    if let open = sheet, open.presentingViewController != nil, !open.isBeingDismissed {
+                        return
+                    }
+                    finish(activity, completed)
+                }
+                return
+            }
+            finish(activity, completed)
         }
         top.present(sheet, animated: true)
     }

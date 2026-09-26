@@ -35,7 +35,8 @@ import { RELEASES, unseenReleases, latestRelease } from './lib/releases.js'
 import ProfileSetup from './screens/ProfileSetup.jsx'
 import { signedIn, pullProfile, pushProfile, mergeProfile, signOut, deleteAccount, friendlyError } from './lib/account.js'
 import DistanceHud from './screens/DistanceHud.jsx'
-import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics, haptic } from './lib/native.js'
+import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics, haptic, shareTextFile } from './lib/native.js'
+import { fileStamp } from './lib/exportData.js'
 import { resolveAutoCalibration, estimateCalibration } from './lib/screenScale.js'
 import { registry } from './modules/registry.js'
 import { viewFor } from './modules/views.js'
@@ -335,13 +336,10 @@ export default function App() {
     const a = store.get().settings.account
     if (signedIn(a)) pushProfile(a.userId, id, corr).catch(() => {})
   }
+  // Tüm kayıt (JSON). iPhone'da <a download> WKWebView'da güvenilir değil (doğrulanmadı) → paylaşım sayfası
+  // (ExportPlugin.swift); web'de indirme. Oturum anahtarları ayrı kayıtta (supabase.js storageKey), dosyaya girmez.
   const exportData = () => {
-    const url = URL.createObjectURL(new Blob([store.exportJSON()], { type: 'application/json' }))
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'eyetrail-veriler.json'
-    a.click()
-    setTimeout(() => URL.revokeObjectURL(url), 5000)
+    shareTextFile(`eyetrail-tum-veriler-${fileStamp()}.json`, store.exportJSON(), 'application/json').catch(() => {})
   }
   const finishAccount = async (acc, extra = {}) => {
     store.setSetting('account', acc)
@@ -577,7 +575,7 @@ export default function App() {
         trueDepth={native.trueDepth}
         calibration={settings.calibration}
         distanceSkipped={!distanceCal}
-        exportJSON={store.exportJSON}
+        onExport={exportData}
         onReset={() => {
           // iPhone'da ekran ölçüsü cihaz modelinden gelir (kullanıcı verisi değil) ve yalnızca açılışta yazılır.
           // Silinirse testler uygulama yeniden açılana dek ölçeksiz kalır (AcuityTest calibration.pxPerMm → hata).

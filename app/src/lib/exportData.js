@@ -26,7 +26,9 @@ export function localStamp(iso) {
 export const fileStamp = (d = new Date()) => `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`
 
 // ---------- CSV ----------
-// Uzun ("tidy") biçim: her satır tek ölçüm. Sayılar noktalı ondalık (RFC 4180 + tablolama programları).
+// Uzun ("tidy") biçim: her satır tek ölçüm. Türkçe Excel uzlaşımı: ayırıcı ";", virgüllü ondalık (Türkçe
+// Windows'ta liste ayırıcısı ";"; virgüllü dosya tek sütuna düşer). Tırnaklama RFC 4180 gibi.
+// Başka dil eklenince CSV_FORMAT dile göre seçilir (ör. en: "," ve nokta).
 export const CSV_HEADER = ['tarih', 'modül', 'alan', 'ölçüm', 'değer', 'birim', 'not']
 
 export function csvRows({ tests = [], sessions = [], metrics = registry.metrics(), effects = registry.effects() } = {}) {
@@ -68,17 +70,19 @@ export function csvRows({ tests = [], sessions = [], metrics = registry.metrics(
   return rows.sort(byDate)
 }
 
-const csvNumber = (v) => (Number.isFinite(v) ? String(+v.toFixed(3)) : '')
-function csvCell(v) {
-  let s = v == null ? '' : String(v).replace(/ /g, ' ')
+export const CSV_FORMAT = { sep: ';', decimal: ',' }
+const csvNumber = (v, decimal) => (Number.isFinite(v) ? String(+v.toFixed(3)).replace('.', decimal) : '')
+function csvCell(v, sep) {
+  let s = v == null ? '' : String(v).replace(/\u00a0/g, ' ')
   // Tablolama programında formül sanılmasın (sayılar hariç)
   if (/^[=+\-@]/.test(s) && !/^-?\d/.test(s)) s = `'${s}`
-  return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
+  // Tırnak yalnız gerektiğinde: çift tırnak, satır sonu ya da o anki ayırıcı (virgüllü ondalık tırnaksız kalır)
+  return s.includes('"') || s.includes(sep) || /[\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
 }
-// BOM: Excel dosyayı UTF-8 okusun (ş, ğ, ı)
-export function toCsv(rows) {
-  const lines = [CSV_HEADER, ...rows.map((r) => [localStamp(r.date), r.module, DOMAIN_LABEL[r.domain] ?? '', r.measure, csvNumber(r.value), r.unit, r.note])]
-  return '﻿' + lines.map((l) => l.map(csvCell).join(',')).join('\r\n') + '\r\n'
+// BOM: Excel dosyayı UTF-8 okusun (ş, ğ, ı). "sep=" satırı eklenmez: Excel o zaman BOM'u yok sayar.
+export function toCsv(rows, { sep, decimal } = CSV_FORMAT) {
+  const lines = [CSV_HEADER, ...rows.map((r) => [localStamp(r.date), r.module, DOMAIN_LABEL[r.domain] ?? '', r.measure, csvNumber(r.value, decimal), r.unit, r.note])]
+  return '\uFEFF' + lines.map((l) => l.map((c) => csvCell(c, sep)).join(sep)).join('\r\n') + '\r\n'
 }
 
 // ---------- "Doktoruma göster" raporu ----------

@@ -148,17 +148,8 @@ function FeedbackSettings({ iosApp }) {
   )
 }
 
-export default function Info({ onGo, onReset, exportJSON, distanceSkipped, iosApp = false, trueDepth = false, calibration = null }) {
+export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp = false, trueDepth = false, calibration = null }) {
   const [confirm, setConfirm] = useState(false)
-
-  function download() {
-    const url = URL.createObjectURL(new Blob([exportJSON()], { type: 'application/json' }))
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'goz-olcum-veriler.json'
-    a.click()
-    setTimeout(() => URL.revokeObjectURL(url), 5000)
-  }
 
   const Row = ({ Icon, label, sub, onClick, danger }) => (
     <button className={`list-row ${danger ? 'danger' : ''}`} onClick={onClick}>
@@ -210,7 +201,7 @@ export default function Info({ onGo, onReset, exportJSON, distanceSkipped, iosAp
       <section className="stack">
         <span className="eyebrow">Verilerim</span>
         <div className="list">
-          <Row Icon={Download} label="Verilerimi indir" sub="JSON dosyası — göz doktorunla paylaşabilirsin" onClick={download} />
+          <Row Icon={Download} label="Verilerimi indir" sub="JSON dosyası — göz doktorunla paylaşabilirsin" onClick={onExport} />
           <Row Icon={Trash} label="Tüm verileri sil" danger onClick={() => setConfirm(true)} />
         </div>
         {confirm && (

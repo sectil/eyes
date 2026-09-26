@@ -256,7 +256,8 @@ export function initFeedback() {
 
 // Export: ios/App/App/ExportPlugin.swift — PDF (iOS yazdırma motoru, A4) + paylaşım sayfası.
 // Web'de (önizleme): CSV indirilir; rapor yeni sekmede açılıp yazdırma penceresi gelir ("PDF olarak kaydet").
-// Döner: { completed, activity } — completed=false: kullanıcı paylaşım sayfasını kapattı.
+// Döner: { completed, activity } — completed=false: kullanıcı bir yer seçmeden paylaşım sayfasını kapattı
+// (bir eklentiden vazgeçmek sayfayı kapatmaz; sonuç sayfa kapanınca gelir). Başka dışa aktarma sürerken reddedilir.
 export const Export = registerPlugin('Export')
 
 export async function shareTextFile(filename, text, type = 'text/csv') {
