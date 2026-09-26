@@ -1,0 +1,46 @@
+/* Gökyüzü molası (screens/Gokyuzu.jsx) */
+.gk { gap: 12px; min-height: 100dvh; }
+.gk > .grow { flex: 1; }
+.gk-top { display: flex; align-items: center; gap: 12px; min-height: 40px; }
+.gk-top .oq-bar { flex: 1; }
+.gk-ey { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.gk-h { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; line-height: 1.24; text-wrap: balance; margin: 0; }
+.gk-lbl { color: var(--ink-2); font-size: 0.92rem; }
+.gk-sun { display: flex; gap: 10px; align-items: flex-start; background: var(--warn-bg); border: 1px solid color-mix(in srgb, var(--warn) 45%, transparent); border-radius: 14px; padding: 10px 12px; color: var(--ink); }
+.gk-sun svg { color: var(--warn); flex: none; margin-top: 2px; }
+.gk-sun p { margin: 0; font-size: 0.88rem; }
+.gk-r10 { display: grid; grid-template-columns: repeat(11, 1fr); gap: 4px; }
+.gk-r10 button { font: 700 0.9rem var(--font-mono); min-height: 46px; padding: 0; border-radius: 10px; cursor: pointer; border: 1.5px solid var(--border); background: var(--surface); color: var(--ink); }
+.gk-r10 button[aria-checked='true'] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.gk-r10 button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.gk-ends { display: flex; justify-content: space-between; color: var(--ink-3); font-size: 0.78rem; }
+.gk-why { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 10px 14px; display: flex; flex-direction: column; gap: 8px; }
+.gk-why summary { cursor: pointer; font-weight: 700; min-height: 32px; display: flex; align-items: center; }
+.gk-why p { margin: 8px 0; font-size: 0.88rem; color: var(--ink-2); }
+.gk-why .src-list { border: 0; padding: 0; }
+.gk-delta { display: flex; align-items: baseline; gap: 10px; font-family: var(--font-display); }
+.gk-delta b { font-size: 2.6rem; font-weight: 800; }
+.gk-delta span { font-size: 1.3rem; color: var(--ink-3); }
+.gk-delta em { font-style: normal; margin-left: auto; font-size: 1.1rem; font-weight: 700; }
+.gk-delta em.ok { color: var(--ok); }
+.gk-delta em.down { color: var(--lens-text); }
+.gk-hist { margin: 0; font-size: 0.9rem; color: var(--ink-2); }
+
+/* Mola: tam ekran gökyüzü (her temada aynı) */
+.gk-run { position: relative; height: 100dvh; overflow: hidden; color: #eef3f6; background: #070c12; }
+.gk-sky { position: absolute; inset: 0; background: linear-gradient(180deg, var(--t) 0%, var(--m) 50%, var(--l) 85%); }
+.gk-sky::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7, 12, 18, 0.5), rgba(7, 12, 18, 0.05) 40%, rgba(7, 12, 18, 0.45)); }
+.gk-stars { position: absolute; inset: 0; width: 100%; height: 100%; }
+.gk-cloud { position: absolute; left: -40%; opacity: 0.75; animation: gk-drift linear infinite; }
+@keyframes gk-drift { from { transform: translateX(0); } to { transform: translateX(190vw); } }
+.gk-hz { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 90px; }
+.gk-run-in { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; gap: 14px; padding: calc(40px + env(safe-area-inset-top)) 20px calc(22px + env(safe-area-inset-bottom)); }
+.gk-run-in > .grow { flex: 1; }
+.gk-ring { width: 190px; height: 190px; margin: 0 auto; position: relative; }
+.gk-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.gk-ring .t { position: absolute; inset: 0; display: grid; place-items: center; font: 300 2.6rem var(--font-display); font-variant-numeric: tabular-nums; }
+.gk-prompt { margin: 0; text-align: center; font: 600 1.25rem/1.35 var(--font-display); text-wrap: balance; min-height: 3.4em; animation: gk-in 1.4s ease; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35); }
+@keyframes gk-in { from { opacity: 0; } to { opacity: 1; } }
+.gk-note { margin: 0; text-align: center; font-size: 0.82rem; color: rgba(238, 243, 246, 0.75); }
+.gk-stop { font: 600 1rem var(--font-body); min-height: 52px; border-radius: 16px; background: rgba(7, 12, 18, 0.45); color: #eef3f6; border: 1px solid rgba(255, 255, 255, 0.2); cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { .gk-cloud, .gk-prompt { animation: none; } }

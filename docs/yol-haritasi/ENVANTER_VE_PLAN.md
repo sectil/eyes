@@ -325,3 +325,15 @@ konuşma eşleşmesi ≥ 0,7 olunca cümle biter (`MATCH_THRESHOLD`) → kişi b
   kalitesi orta kesinlikte iyi, nesnel ölçümlerde iyileşme görülmeyebilir). Sessiz modda çalma: navigator.audioSession
   'playback' + sessiz <audio> döngüsü (lib/audioUnmute.js). Cihazda doğrulanacak: sessiz mod, kilitli ekranda çalma,
   sabah puanı (yapılmadı).
+
+## 19. Gökyüzü molası + kaynakça altyapısı (2026-09-26, Build 29 — YAPILDI)
+- Taslak (onaylı): https://claude.ai/artifact/C48CLo8P66JNxveWyebNFW. Kaynak taraması: 3 ajan (PubMed, dil filtresi yok).
+- Modül: src/modules/gokyuzu (Yaşam halkası, pratik; günlük yola girmez). lib/gokyuzu.js, screens/Gokyuzu.jsx.
+- 2 dk (VARSAYIM): önce/sonra dinlenmişlik 0–10; 20 sn'de bir soru, yazılı + sesli (Ses açıksa); bitince ton + titreşim;
+  günün saatine göre gökyüzü (sabah/gündüz/akşam/gece; gece soruları yıldız/ay); güneş uyarısı her girişte.
+  3 puanlı moladan sonra "kendi verin" (ortalama değişim).
+- Dürüstlük: gündüz gerçek gökyüzüne bakmayı doğrudan test eden çalışma yok; mola yakın kanıtlara dayanıyor
+  ("Bu işe yarıyor mu?" açılır bölümü bunu yazar). "Bulut izlemek" kartı: Araştırılmamış.
+- Kaynakça altyapısı (plan 2. kısım başlangıcı): lib/sources.js (yazarlar, yıl, özgün başlık + Türkçe çeviri, dergi,
+  cilt/sayfa, DOI, PMID, çalışma türü ve büyüklüğü), components/Sources.jsx (FactCard + açılır "Kaynaklar (n)").
+  8 kaynak PubMed kayıtlarından doğrulandı. Diğer modüller sonraki adımda buna taşınacak.
