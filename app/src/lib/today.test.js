@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildPath, todayPlan, jevLine, isDue, isSameDay, PATH } from './today.js'
+import { buildPath, todayPlan, jevLine, isDue, isSameDay, PATH, canOpen } from './today.js'
 import { registry } from '../modules/registry.js'
 
 const MIN = 60000
@@ -185,5 +185,25 @@ describe('yardımcılar', () => {
     expect(isSameDay({ date: NOW.toISOString() }, NOW)).toBe(true)
     expect(isSameDay({ date: daysAgo(1) }, NOW)).toBe(false)
     expect(isSameDay({ date: 'bozuk' }, NOW)).toBe(false)
+  })
+})
+
+describe('canOpen: sıralı yol', () => {
+  it('yalnız sıradaki ve biten duraklar açılır; ileridekiler kapalı', () => {
+    const s = [{ type: 'routine', setId: 'isinma', seconds: 40, date: TODAY }]
+    const p = path(NORMAL, s)
+    const i = p.stops.indexOf(p.next)
+    expect(canOpen(p, p.stops[0])).toBe(true) // bitti: tekrar yapılabilir
+    expect(canOpen(p, p.next)).toBe(true)
+    expect(p.stops.slice(i + 1).filter((st) => !st.done).every((st) => !canOpen(p, st))).toBe(true)
+  })
+  it('mola kilidinde sıradaki Nefes açık, kilitli duraklar kapalı', () => {
+    const p = path(NORMAL, [], { eye: { locked: true, leftMs: 2 * MIN, reason: 'budget' } })
+    expect(canOpen(p, p.next)).toBe(true)
+    expect(p.stops.filter((st) => st.locked).some((st) => canOpen(p, st))).toBe(false)
+  })
+  it('boş plan ya da durak yoksa kapalı', () => {
+    expect(canOpen(null, {})).toBe(false)
+    expect(canOpen({ next: null }, null)).toBe(false)
   })
 })

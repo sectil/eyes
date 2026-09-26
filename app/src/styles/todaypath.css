@@ -131,7 +131,7 @@
 .tp-st .badge.ok { background: var(--tp-ok); color: #041017; }
 .tp-st .badge.lk { background: var(--surface-2); color: var(--ink-2); width: 17px; height: 17px; }
 .tp-st.me .badge { right: 2px; bottom: -1px; }
-.tp-st.done .badge.ok, .tp-st.locked .badge.lk { display: grid; }
+.tp-st.done .badge.ok, .tp-st.locked .badge.lk, .tp-st.later .badge.lk { display: grid; }
 
 /* Etiket, "Başla", mola işareti */
 .tp-lb { position: absolute; z-index: 1; font: 700 13px/15px var(--font-body); color: var(--ink); white-space: nowrap; pointer-events: none; }
@@ -176,3 +176,11 @@
   .tp-st .pulse, .tp-rp.live, .tp-gring { animation: none !important; }
   .tp-st.now .pulse, .tp-st.running .pulse { opacity: 0.45; }
 }
+
+/* Sıralı yol: ilerideki durağa dokununca uyarı; sıradaki durağın "Başla"sı sallanır */
+.tp-nudge { position: absolute; z-index: 4; transform: translateX(-50%); display: flex; align-items: center; gap: 5px; white-space: nowrap; font: 700 11.5px/1 var(--font-body); color: var(--ink); background: var(--surface); border: 1px solid var(--tp-pill-line); box-shadow: 0 6px 18px rgba(3, 10, 18, 0.25); padding: 6px 10px; border-radius: 999px; pointer-events: none; animation: tp-nudge-in 0.18s ease-out; }
+.tp-nudge svg { width: 12px; height: 12px; color: var(--ink-2); }
+.tp-go.nudge { animation: tp-shake 0.5s ease-in-out 2; }
+@keyframes tp-nudge-in { from { opacity: 0; transform: translate(-50%, -4px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes tp-shake { 0%, 100% { transform: translateX(-50%); } 20%, 60% { transform: translateX(calc(-50% - 5px)); } 40%, 80% { transform: translateX(calc(-50% + 5px)); } }
+@media (prefers-reduced-motion: reduce) { .tp-nudge, .tp-go.nudge { animation: none; } }

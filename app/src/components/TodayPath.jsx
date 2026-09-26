@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { IrisMark } from './ui.jsx'
-import { jevLine } from '../lib/today.js'
+import { jevLine, canOpen } from '../lib/today.js'
 import { fmtLeft, LIMITS } from '../lib/eyeBudget.js'
 import { haptic } from '../lib/native.js'
 import '../styles/todaypath.css'
@@ -261,6 +261,19 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // Sıralı yol: ilerideki durağa dokununca "önce sıradaki" uyarısı (2,4 sn), durak açılmaz
+  const [nudge, setNudge] = useState(null)
+  useEffect(() => {
+    if (!nudge) return undefined
+    const id = setTimeout(() => setNudge(null), 2400)
+    return () => clearTimeout(id)
+  }, [nudge])
+  const tap = (s, st) => {
+    if (st === 'running' || canOpen(plan, s)) return onStart(s.route)
+    haptic('warning')
+    setNudge({ key: s.key, t: Date.now() })
+  }
+
   const L = layout(stops)
   // Yoldaki Nefes molası sürüyor mu (Nefes durağından başlatılan 5 dk)
   const pathRest = Boolean(eye?.locked && eye.reason === 'path')
@@ -361,8 +374,9 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
                 type="button"
                 className={`tp-st ${form} ${st}`}
                 style={{ left: px(x), top: y, ...(s.restSlot ? { '--p': restP } : {}) }}
-                onClick={() => onStart(s.route)}
-                aria-label={`${s.title}, ${KIND_TR[form]}${s.minutes ? `, ${s.minutes} dakika` : ''}, ${STATE_TR[st]}${st === 'locked' ? ` (${sub})` : ''}`}
+                onClick={() => tap(s, st)}
+                aria-disabled={st === 'later' ? 'true' : undefined}
+                aria-label={`${s.title}, ${KIND_TR[form]}${s.minutes ? `, ${s.minutes} dakika` : ''}, ${STATE_TR[st]}${st === 'locked' ? ` (${sub})` : ''}${st === 'later' && plan.next ? `. Önce ${plan.next.title}` : ''}`}
               >
                 <StopInner stop={{ ...s, runLeft: st === 'running' ? fmtLeft(eye.leftMs) : '' }} form={form} state={st} icon={icons[s.id]} fromA={isFresh ? A_NOW : null} />
               </button>
@@ -376,7 +390,12 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
                 </span>
               )}
               {st === 'now' && (
-                <span className="tp-go" style={{ left: px(x), top: y + r[1] + 8 }} aria-hidden="true">Başla</span>
+                <span key={nudge?.t ?? 0} className={`tp-go${nudge ? ' nudge' : ''}`} style={{ left: px(x), top: y + r[1] + 8 }} aria-hidden="true">Başla</span>
+              )}
+              {nudge?.key === s.key && plan.next && (
+                <span className="tp-nudge" style={{ left: px(x), top: y + r[1] + 8 }} role="status">
+                  <Svg>{LOCK}</Svg>Önce: {plan.next.title}
+                </span>
               )}
             </div>
           )

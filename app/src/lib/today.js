@@ -241,6 +241,14 @@ export function buildPath(modules = [], ctx = {}) {
   }
 }
 
+// Sıralı yol (Duolingo gibi): yalnız biten duraklar (tekrar) ve sıradaki durak açılır. İlerideki bir durağa
+// dokunmak önce sıradakini ister; kullanıcı atlaya atlaya gidemez. Mola kilidinde sıradaki zaten molaya uygun
+// durağa kayar (R8), o yüzden kilit yolu tıkamaz.
+export function canOpen(plan, stop) {
+  if (!plan || !stop) return false
+  return Boolean(stop.done) || stop === plan.next
+}
+
 // Eski arayüz (items/next/doneCount/total/allDone); items = duraklar
 export function todayPlan(modules = [], ctx = {}) {
   const p = buildPath(modules, ctx)
