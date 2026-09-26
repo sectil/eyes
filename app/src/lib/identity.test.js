@@ -11,7 +11,9 @@ describe('normalizeIdentity', () => {
   })
   it('ad kırpılır, tarih doğrulanır, bilinmeyen alan atılır', () => {
     const n = normalizeIdentity({ name: '  Ali  ', birthDate: '1988-03-14', avatar: { kind: 'letter', hue: 32 }, extra: 1 })
-    expect(n).toEqual({ name: 'Ali', birthDate: '1988-03-14', avatar: { kind: 'letter', hue: 32, dataUrl: null } })
+    expect(n).toEqual({ name: 'Ali', birthDate: '1988-03-14', city: '', avatar: { kind: 'letter', hue: 32, dataUrl: null } })
+    expect(normalizeIdentity({ city: '  izmir ' }).city).toBe('İzmir') // 81 il listesinden yazımı düzeltilir
+    expect(normalizeIdentity({ city: 'Berlin' }).city).toBe('Berlin') // yurt dışı serbest metin
     expect(normalizeIdentity({ name: 'a'.repeat(60) }).name).toHaveLength(40)
     expect(normalizeIdentity({ birthDate: '2031-01-01' }).birthDate).toBeNull()
     expect(normalizeIdentity({ avatar: { hue: 999 } }).avatar.hue).toBe(AVATAR_HUES[0])

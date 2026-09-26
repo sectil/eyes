@@ -1,5 +1,6 @@
-// Kimlik: ad, doğum tarihi, avatar (Profilim ekranı). Cihazda kalır; Jev'e ve sunucuya gitmez.
-// Hesap sistemi (Build 23b) geldiğinde ad/doğum tarihi hesapla eşleşir; fotoğraf yine cihazda kalır (VARSAYIM).
+// Kimlik: ad, doğum tarihi, şehir, avatar (Profilim / "Seni tanıyalım"). Cihazda kalır; Jev'e gitmez.
+// Hesap açıldıysa ad, doğum tarihi ve şehir Supabase'deki profile eşitlenir (lib/account.js); fotoğraf yalnız cihazda.
+import { normalizeCity } from './cities.js'
 export const NAME_MAX = 40
 export const AVATAR_PX = 160 // fotoğraf bu boyuta küçültülür (~10–20 KB, localStorage'a sığar)
 export const AVATAR_HUES = [188, 222, 262, 32, 150] // iris renkleri: cam göbeği, mavi, mor, altın, yeşil
@@ -7,7 +8,7 @@ export const AVATAR_HUES = [188, 222, 262, 32, 150] // iris renkleri: cam göbe�
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/
 
 export function emptyIdentity() {
-  return { name: '', birthDate: null, avatar: { kind: 'letter', hue: AVATAR_HUES[0], dataUrl: null } }
+  return { name: '', birthDate: null, city: '', avatar: { kind: 'letter', hue: AVATAR_HUES[0], dataUrl: null } }
 }
 
 // Geçersiz/eksik alanlar güvenli değere düşer; bilinmeyen alanlar atılır.
@@ -20,7 +21,7 @@ export function normalizeIdentity(raw) {
   const hue = AVATAR_HUES.includes(a.hue) ? a.hue : e.avatar.hue
   const dataUrl = typeof a.dataUrl === 'string' && a.dataUrl.startsWith('data:image/') && a.dataUrl.length < 200000 ? a.dataUrl : null
   const kind = a.kind === 'photo' && dataUrl ? 'photo' : 'letter'
-  return { name, birthDate, avatar: { kind, hue, dataUrl: kind === 'photo' ? dataUrl : null } }
+  return { name, birthDate, city: normalizeCity(raw.city), avatar: { kind, hue, dataUrl: kind === 'photo' ? dataUrl : null } }
 }
 
 // 'YYYY-MM-DD'; gelecekte olmayan, 120 yıldan eski olmayan gerçek bir tarih
@@ -49,5 +50,5 @@ export function initialFor(name) {
 
 export function hasIdentity(id) {
   const n = normalizeIdentity(id)
-  return Boolean(n.name || n.birthDate || n.avatar.kind === 'photo')
+  return Boolean(n.name || n.birthDate || n.city || n.avatar.kind === 'photo')
 }

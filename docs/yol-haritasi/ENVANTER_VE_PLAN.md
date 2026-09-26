@@ -164,7 +164,8 @@ Seçenekler:
 - `screens/ProfileHome.jsx` (`lib/identity.js`): avatar (harf + 5 iris rengi veya fotoğraf, cihazda 160 px'e küçültülür),
   ad, doğum tarihi (anketin yaş aralığını otomatik doldurur), gözlük/lens; profil sorularına ve filme geçiş. Bugün'de selam ada göre.
   Ad/doğum tarihi/fotoğraf yalnızca cihazda; Jev'e gitmez.
-- **23b (bekliyor):** hesap sistemi. Karar: Supabase (Apple + Google + e-posta sihirli bağlantı). App Store 4.8: Google varsa
+- **23b (2026-09-26 yapıldı, Artifact "Hesap ve Profil Taslağı"):** film → Hesap (Apple / e-posta 6 haneli kod / hesapsız) → "Seni tanıyalım" (ad, doğum tarihi kutucukları, şehir 81 il önerisi, gözlük) → 7 gün ücretsiz (profilden hemen sonra; 5. gün bildirim) → kurulum soruları. Supabase `profiles` + RLS + `delete_my_account` (`docs/supabase/001_hesap.sql`, kurulum `docs/supabase/KURULUM.md`). Profilim: çıkış, hesap silme. RevenueCat kimliği = hesap kimliği. Doğum saati/astroloji YOK (bilimsel dayanak yok, App Store 4.3(b)); yerine kronotip anketi (sonraki adım). Google girişi Google ayarı gelince.
+- **23b eski not:** hesap sistemi. Karar: Supabase (Apple + Google + e-posta sihirli bağlantı). App Store 4.8: Google varsa
   Apple ile giriş zorunlu. 5.1.1(v): hesapsız kullanım kalır ("Şimdilik hesapsız dene"). "Beni tanı": oturum cihazın güvenli
   deposunda, şifre bir daha sorulmaz; Face ID kilidi sonraki build. Eşleşen veri: profil + ölçüm özetleri; kamera verisi asla.
   Sağlık verisi rızası ve gizlilik politikası güncellemesi gerekir. Film sonundaki "Başla" 23b'de hesap düğmelerine dönüşür.

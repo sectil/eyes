@@ -26,7 +26,10 @@ import Schedule from './screens/Schedule.jsx'
 import Evidence from './screens/Evidence.jsx'
 import Info from './screens/Info.jsx'
 import Paywall from './screens/Paywall.jsx'
-import { getAccess } from './lib/subscription.js'
+import { getAccess, linkPurchaser, unlinkPurchaser } from './lib/subscription.js'
+import AccountStart from './screens/AccountStart.jsx'
+import ProfileSetup from './screens/ProfileSetup.jsx'
+import { signedIn, pullProfile, pushProfile, mergeProfile, signOut, deleteAccount, friendlyError } from './lib/account.js'
 import DistanceHud from './screens/DistanceHud.jsx'
 import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics, haptic } from './lib/native.js'
 import { resolveAutoCalibration, estimateCalibration } from './lib/screenScale.js'
@@ -315,9 +318,74 @@ export default function App() {
   const markIntro = () => { store.setSetting('intro', { seen: true, date: new Date().toISOString() }); refresh() }
   if (screen === 'intro') return <IntroFilm replay onDone={() => go(lastTab)} />
   if (shouldPlayIntro(settings, prefersReducedMotion())) return <IntroFilm onDone={markIntro} />
+
+  // --- Hesap → Seni tanıyalım → 7 gün ücretsiz (Build 23b; Artifact "Hesap ve Profil Taslağı") ---
+  // Hesap açıldıysa ad, doğum tarihi, şehir, gözlük Supabase'e eşitlenir (lib/account.js); ağ yoksa telefonda kalır.
+  const nowIso = () => new Date().toISOString()
+  const currentCorrection = () => { const st = store.get().settings; return st.profile?.correction ?? st.setupCorrection ?? null }
+  const syncUp = (id, corr) => {
+    const a = store.get().settings.account
+    if (signedIn(a)) pushProfile(a.userId, id, corr).catch(() => {})
+  }
+  const exportData = () => {
+    const url = URL.createObjectURL(new Blob([store.exportJSON()], { type: 'application/json' }))
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'eyetrail-veriler.json'
+    a.click()
+    setTimeout(() => URL.revokeObjectURL(url), 5000)
+  }
+  const finishAccount = async (acc, extra = {}) => {
+    store.setSetting('account', acc)
+    if (signedIn(acc)) {
+      linkPurchaser(acc.userId)
+      try {
+        const cur = store.get().settings
+        const local = { ...cur.identity, name: cur.identity?.name || extra.givenName || '' }
+        const m = mergeProfile(await pullProfile(acc.userId), local, currentCorrection())
+        store.setSetting('identity', m.identity)
+        if (m.correction) store.setSetting('setupCorrection', m.correction)
+        if (cur.identitySetup) syncUp(m.identity, m.correction)
+      } catch {
+        // ağ yok ya da tablo kurulmamış: bilgiler telefonda kalır, sonraki kayıtta eşitlenir
+      }
+    }
+    refresh()
+    if (screen === 'account') go('profile')
+  }
+  if (screen === 'account') return <AccountStart onDone={finishAccount} onCancel={() => go('profile')} />
+  if (!settings.account) return <AccountStart onDone={finishAccount} />
+  if (!settings.identitySetup) {
+    const done = (id, corr) => {
+      store.setSetting('identity', id)
+      store.setSetting('setupCorrection', corr)
+      store.setSetting('identitySetup', { date: nowIso() })
+      const p = settings.profile
+      const band = ageBandFromAge(ageFromBirthDate(id.birthDate))
+      if (p && ((band && p.ageBand !== band) || (corr && p.correction !== corr))) saveProfile({ ...p, ageBand: band ?? p.ageBand, correction: corr ?? p.correction })
+      else refresh()
+      syncUp(id, corr)
+    }
+    return <ProfileSetup identity={settings.identity} correction={currentCorrection()} account={settings.account} onSave={done} />
+  }
+  // Deneme teklifi bir kez, profilden hemen sonra. Web'de ödeme yok (atlanır); test derlemesinde "geç" ile görülebilir.
+  if (!settings.trialOffer && !access.loading && access.native && (!access.premium || access.testUnlock) && screen !== 'evidence') {
+    return (
+      <Paywall
+        trial
+        onUnlocked={() => { store.setSetting('trialOffer', { date: nowIso(), started: true }); setAccess({ loading: false, premium: true, native: true }); refresh() }}
+        onSkip={access.testUnlock ? () => { store.setSetting('trialOffer', { date: nowIso(), skipped: true }); refresh() } : null}
+        onSafety={() => go('evidence')}
+        onExport={exportData}
+      />
+    )
+  }
   if (!settings.screening || settings.screening.referred) {
     // İlk açılış: 20 sn farkındalık anı, yaş, uyarı işaretleri (Artifact "Önce Fark Ettir"). İşaret varsa kilitli kalır.
-    return <Onboarding initial={settings.profile ?? profileFromScreening(settings.screening)} trueDepth={native.trueDepth} onDone={saveProfile} />
+    // Profil kurulumundaki doğum tarihi ve gözlük, anketin yaş ve gözlük sorularını önceden doldurur
+    const setupAge = ageBandFromAge(ageFromBirthDate(settings.identity?.birthDate))
+    const initial = settings.profile ?? { ...profileFromScreening(settings.screening), ...(setupAge ? { ageBand: setupAge } : {}), ...(settings.setupCorrection ? { correction: settings.setupCorrection } : {}) }
+    return <Onboarding initial={initial} trueDepth={native.trueDepth} onDone={saveProfile} />
   }
   if (screen === 'profile') {
     // Profilim (screens/ProfileHome.jsx): ad, doğum tarihi, avatar cihazda kalır; doğum tarihi anketin yaş aralığını doldurur.
@@ -329,7 +397,9 @@ export default function App() {
       if (p && ((band && p.ageBand !== band) || (correction && p.correction !== correction))) {
         saveProfile({ ...p, ageBand: band ?? p.ageBand, correction: correction ?? p.correction })
       } else refresh()
+      syncUp(id, correction ?? p?.correction ?? null)
     }
+    const toGuest = () => { unlinkPurchaser(); store.setSetting('account', { mode: 'guest', date: nowIso() }); refresh() }
     return (
       <ProfileHome
         identity={settings.identity}
@@ -338,6 +408,18 @@ export default function App() {
         onQuestions={() => go('profile-questions')}
         onIntro={() => go('intro')}
         onBack={() => go(lastTab)}
+        account={settings.account}
+        onAccount={() => go('account')}
+        onSignOut={async () => { try { await signOut() } catch { /* çevrimdışı: yerel oturum yine kapanır */ } toGuest() }}
+        onDeleteAccount={async () => {
+          try {
+            await deleteAccount()
+          } catch (e) {
+            return friendlyError(e) ?? 'Hesap silinemedi. Biraz sonra yeniden dene.'
+          }
+          toGuest()
+          return null
+        }}
       />
     )
   }
@@ -360,24 +442,16 @@ export default function App() {
     return <DistanceCalibration onDone={done} onSkip={() => done({ skipped: true, date: new Date().toISOString() })} />
   }
 
-  // --- Abonelik kilidi: ilk ölçüm ücretsiz, sonra ödeme ekranı ---
+  // --- Abonelik kilidi: deneme ilk kurulumda başlar (Build 23b); abonelik/deneme yoksa ödeme ekranı ---
   const previewPaywall = new URLSearchParams(window.location.search).get('paywall') === 'preview'
-  const firstTestFree = tests.length === 0 && (screen === 'daily' || screen === 'weekly' || screen === 'home')
-  const locked = previewPaywall || (!access.loading && !access.premium && !firstTestFree)
+  const locked = previewPaywall || (!access.loading && !access.premium)
   if (locked && screen !== 'evidence') {
     return (
       <Paywall
         preview={previewPaywall}
         onUnlocked={() => { setAccess({ loading: false, premium: true, native: true }); go('home') }}
         onSafety={() => go('evidence')}
-        onExport={() => {
-          const url = URL.createObjectURL(new Blob([store.exportJSON()], { type: 'application/json' }))
-          const a = document.createElement('a')
-          a.href = url
-          a.download = 'eyelume-veriler.json'
-          a.click()
-          setTimeout(() => URL.revokeObjectURL(url), 5000)
-        }}
+        onExport={exportData}
       />
     )
   }

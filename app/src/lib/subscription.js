@@ -116,3 +116,25 @@ export async function restore() {
   const { customerInfo } = await P.restorePurchases()
   return hasPremium(customerInfo)
 }
+
+// Abonelik hesaba bağlanır (yeni telefonda da devam): RevenueCat kullanıcı kimliği = Supabase kullanıcı kimliği.
+// Hesapsız kullanımda RevenueCat'in anonim kimliği kalır. Hata abonelik akışını durdurmaz (sessiz).
+export async function linkPurchaser(userId) {
+  if (!isNative() || !userId) return
+  try {
+    const P = await purchases()
+    await P.logIn({ appUserID: userId })
+  } catch {
+    // anahtar yok / ağ yok: bir sonraki açılışta yeniden denenir
+  }
+}
+
+export async function unlinkPurchaser() {
+  if (!isNative()) return
+  try {
+    const P = await purchases()
+    await P.logOut()
+  } catch {
+    // anonim kullanıcıda logOut hata verir; yok say
+  }
+}

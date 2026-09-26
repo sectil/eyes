@@ -115,3 +115,33 @@ export async function onRestNotifyTap(cb) {
     return () => {}
   }
 }
+
+// Deneme hatırlatması (Build 23b): 7 günlük denemenin 5. günü. İzin yoksa istenir; reddedilirse sessizce vazgeçilir.
+export const TRIAL_NOTIFY_ID = 7302
+export const TRIAL_REMIND_DAYS = 5
+export async function scheduleTrialReminder(startMs = Date.now()) {
+  const pl = await plugin()
+  if (!pl) return false
+  let perm = await notifyPermission()
+  if (perm === 'prompt') perm = (await askNotifyPermission()) ? 'granted' : 'denied'
+  if (perm !== 'granted') return false
+  const { LN } = pl
+  try {
+    await LN.cancel({ notifications: [{ id: TRIAL_NOTIFY_ID }] })
+    await LN.schedule({
+      notifications: [
+        {
+          id: TRIAL_NOTIFY_ID,
+          title: 'Deneme 2 gün sonra bitiyor',
+          body: 'İptal etmezsen seçtiğin plan başlar. Yönetmek için: Ayarlar → Apple Kimliği → Abonelikler.',
+          schedule: { at: new Date(startMs + TRIAL_REMIND_DAYS * 86400000) },
+          interruptionLevel: 'active',
+          foreground: false,
+        },
+      ],
+    })
+    return true
+  } catch {
+    return false
+  }
+}

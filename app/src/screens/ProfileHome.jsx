@@ -1,13 +1,18 @@
 import { useRef, useState } from 'react'
-import { Camera, Check, ChevronRight, Film, ListChecks } from 'lucide-react'
+import { Camera, Check, ChevronRight, Film, ListChecks, LogOut, Trash2, UserRound } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
 import { emptyIdentity, normalizeIdentity, validBirthDate, ageFromBirthDate, initialFor, AVATAR_HUES, AVATAR_PX, NAME_MAX } from '../lib/identity.js'
 import { CORRECTION } from '../lib/profile.js'
+import { accountLabel, signedIn } from '../lib/account.js'
+import BirthDateBoxes from '../components/BirthDateBoxes.jsx'
+import CityField from '../components/CityField.jsx'
+import '../styles/account.css'
 import { haptic } from '../lib/native.js'
 import '../styles/profilehome.css'
 
-// Profilim: avatar (harf + iris rengi veya fotoğraf), ad, doğum tarihi, gözlük; profil sorularına ve giriş filmine geçiş.
+// Profilim: avatar (harf + iris rengi veya fotoğraf), ad, doğum tarihi, şehir, gözlük; profil sorularına ve giriş filmine geçiş.
 // Fotoğraf cihazda küçültülür (AVATAR_PX) ve yalnızca cihazda saklanır; hiçbir yere gönderilmez.
+// Hesap bölümü (Build 23b): hesapsızsa "Hesap aç"; hesap varsa çıkış ve uygulama içinden hesap silme (App Store 5.1.1(v)).
 const SHORT = { none: 'Yok', distance: 'Uzak', reading: 'Okuma', progressive: 'Progresif', 'contacts-multi': 'Multifokal lens' }
 
 export function Avatar({ identity, size = 96 }) {
@@ -17,7 +22,7 @@ export function Avatar({ identity, size = 96 }) {
   return <span className="ph-avatar letter" style={style}>{initialFor(id.name) || '•'}</span>
 }
 
-async function shrinkImage(file, px = AVATAR_PX) {
+export async function shrinkImage(file, px = AVATAR_PX) {
   const url = URL.createObjectURL(file)
   try {
     const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = url })
@@ -32,10 +37,14 @@ async function shrinkImage(file, px = AVATAR_PX) {
   }
 }
 
-export default function ProfileHome({ identity, profile, onSave, onQuestions, onIntro, onBack }) {
+export default function ProfileHome({ identity, profile, account = null, onSave, onQuestions, onIntro, onBack, onAccount, onSignOut, onDeleteAccount }) {
   const [id, setId] = useState(() => normalizeIdentity(identity ?? emptyIdentity()))
   const [correction, setCorrection] = useState(profile?.correction ?? null)
   const [err, setErr] = useState('')
+  const [sheet, setSheet] = useState(false)
+  const [acctBusy, setAcctBusy] = useState(false)
+  const [acctMsg, setAcctMsg] = useState('')
+  const inAcct = signedIn(account)
   const file = useRef(null)
   const dateOk = !id.birthDate || validBirthDate(id.birthDate)
   const age = id.birthDate && dateOk ? ageFromBirthDate(id.birthDate) : null
@@ -62,7 +71,7 @@ export default function ProfileHome({ identity, profile, onSave, onQuestions, on
 
   return (
     <main className="screen fade-in ph">
-      <PageHeader onBack={onBack} eyebrow="Profilim" title={id.name ? id.name : 'Sen'} subtitle="Bunlar yalnızca bu cihazda kalır." />
+      <PageHeader onBack={onBack} eyebrow="Profilim" title={id.name ? id.name : 'Sen'} subtitle={inAcct ? 'Ad, doğum tarihi, şehir ve gözlük hesabınla eşitlenir; fotoğraf telefonda kalır.' : 'Bunlar yalnızca bu cihazda kalır.'} />
       <div className="ph-top">
         <button type="button" className="ph-avatar-btn" onClick={() => file.current?.click()} aria-label="Fotoğraf seç">
           <Avatar identity={id} size={104} />
@@ -90,11 +99,14 @@ export default function ProfileHome({ identity, profile, onSave, onQuestions, on
         <span>Ad</span>
         <input className="input" type="text" value={id.name} maxLength={NAME_MAX} autoComplete="given-name" placeholder="Sana nasıl seslenelim?" onChange={(e) => setId((q) => ({ ...q, name: e.target.value }))} />
       </label>
-      <label className="field">
-        <span>Doğum tarihi {age != null && <span className="muted">· {age} yaş</span>}</span>
-        <input className={`input${dateOk ? '' : ' bad'}`} type="date" value={id.birthDate ?? ''} max={new Date().toISOString().slice(0, 10)} onChange={(e) => setId((q) => ({ ...q, birthDate: e.target.value || null }))} />
-        {!dateOk && <span className="muted small">Bu tarih olamaz.</span>}
-      </label>
+      <div className="field">
+        <span id="ph-birth-label">Doğum tarihi {age != null && <span className="muted">· {age} yaş</span>}</span>
+        <BirthDateBoxes id="ph-birth" value={id.birthDate} onChange={(v) => setId((q) => ({ ...q, birthDate: v }))} />
+      </div>
+      <div className="field">
+        <span>Şehir</span>
+        <CityField id="ph-city" value={id.city} onChange={(v) => setId((q) => ({ ...q, city: v }))} />
+      </div>
       <div className="field">
         <span>Gözlük / lens</span>
         <div className="pf-chips" role="radiogroup" aria-label="Gözlük veya lens">
@@ -105,6 +117,31 @@ export default function ProfileHome({ identity, profile, onSave, onQuestions, on
       </div>
 
       <button className="btn" onClick={save} disabled={!dirty || !dateOk}><Check size={18} aria-hidden="true" /> Kaydet</button>
+
+      <div className="list ph-acct">
+        {inAcct ? (
+          <>
+            <div className="list-row">
+              <UserRound size={20} aria-hidden="true" />
+              <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Hesap</span><span className="muted small">{account.mode === 'apple' ? 'Apple' : accountLabel(account)} · eşitleniyor</span></span>
+            </div>
+            <button className="list-row" onClick={async () => { setAcctBusy(true); await onSignOut?.(); setAcctBusy(false) }} disabled={acctBusy}>
+              <LogOut size={20} aria-hidden="true" />
+              <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Çıkış yap</span><span className="muted small">Veriler bu telefonda kalır</span></span>
+            </button>
+            <button className="list-row danger" onClick={() => { setAcctMsg(''); setSheet(true) }}>
+              <Trash2 size={20} aria-hidden="true" />
+              <span className="grow" style={{ fontWeight: 600 }}>Hesabımı sil</span>
+            </button>
+          </>
+        ) : (
+          <button className="list-row" onClick={onAccount}>
+            <UserRound size={20} aria-hidden="true" />
+            <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Hesap aç ya da giriş yap</span><span className="muted small">Yeni telefonda da ilerlemen seninle kalsın</span></span>
+            <ChevronRight size={18} className="muted" />
+          </button>
+        )}
+      </div>
 
       <div className="list">
         <button className="list-row" onClick={onQuestions}>
@@ -118,6 +155,30 @@ export default function ProfileHome({ identity, profile, onSave, onQuestions, on
           <ChevronRight size={18} className="muted" />
         </button>
       </div>
+
+      {sheet && (
+        <div className="acct-sheet-back" role="presentation" onClick={() => !acctBusy && setSheet(false)}>
+          <div className="acct-sheet" role="dialog" aria-modal="true" aria-labelledby="del-title" onClick={(e) => e.stopPropagation()}>
+            <h2 id="del-title">Hesabın silinsin mi?</h2>
+            <p>Sunucudaki profilin kalıcı olarak silinir. Telefondaki veriler kalır. Aboneliğin varsa Apple'da ayrıca iptal etmelisin: Ayarlar → Apple Kimliği → Abonelikler.</p>
+            {acctMsg && <p role="alert" style={{ color: 'var(--warn)' }}>{acctMsg}</p>}
+            <button
+              className="btn btn-danger"
+              disabled={acctBusy}
+              onClick={async () => {
+                setAcctBusy(true)
+                const m = await onDeleteAccount?.()
+                setAcctBusy(false)
+                if (m) setAcctMsg(m)
+                else setSheet(false)
+              }}
+            >
+              {acctBusy ? 'Siliniyor…' : 'Hesabımı kalıcı olarak sil'}
+            </button>
+            <button className="link-btn" style={{ alignSelf: 'center' }} disabled={acctBusy} onClick={() => setSheet(false)}>Vazgeç</button>
+          </div>
+        </div>
+      )}
     </main>
   )
 }

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { ScanEye, ChartLine, Dumbbell, Bell, Check, ShieldCheck, Download, Sparkles } from 'lucide-react'
 import { getPlans, purchase, restore, isNative } from '../lib/subscription.js'
+import { scheduleTrialReminder, TRIAL_REMIND_DAYS } from '../lib/restNotify.js'
+import '../styles/account.css'
 
 // Apple App Store Review Guideline 3.1.2 gereği: fiyat + dönem, deneme koşulu,
 // otomatik yenileme ve iptal bilgisi, satın alımları geri yükleme, şartlar ve gizlilik.
@@ -24,7 +26,9 @@ const PREVIEW_PLANS = [
 
 const PERIOD = { annual: 'yıl', monthly: 'ay' }
 
-export default function Paywall({ onUnlocked, onExport, onSafety, preview = false }) {
+// trial: ilk kurulumda profilden hemen sonra (Build 23b) — denemenin gün gün ne olduğu gösterilir.
+// onSkip: yalnız test derlemesinde (VITE_TEST_UNLOCK) ekranı görmek için "geç".
+export default function Paywall({ onUnlocked, onExport, onSafety, preview = false, trial: firstRun = false, onSkip = null }) {
   const [plans, setPlans] = useState(preview ? PREVIEW_PLANS : null)
   const [selected, setSelected] = useState(preview ? 'annual' : null)
   const [busy, setBusy] = useState(false)
@@ -55,6 +59,7 @@ export default function Paywall({ onUnlocked, onExport, onSafety, preview = fals
     setMsg(null)
     const r = await purchase(plan)
     setBusy(false)
+    if (r.ok && trial) await scheduleTrialReminder()
     if (r.ok) onUnlocked()
     else if (!r.cancelled) setMsg(r.error)
   }
@@ -75,16 +80,24 @@ export default function Paywall({ onUnlocked, onExport, onSafety, preview = fals
   return (
     <main className="screen fade-in paywall">
       <header className="page-header" style={{ alignItems: 'center', textAlign: 'center', paddingTop: 12 }}>
-        <span className="paywall-badge"><Sparkles size={16} /> {trial ? `${trial} gün ücretsiz` : 'Eyelume Premium'}</span>
-        <h1>Görmeni ölç, takip et, düzenli kal</h1>
-        <p>İlk ölçümünü yaptın. Devam etmek için planını seç.</p>
+        <span className="paywall-badge"><Sparkles size={16} /> {trial ? `${trial} gün ücretsiz` : 'EyeTrail Premium'}</span>
+        <h1>{firstRun && trial ? `${trial} gün boyunca her şey açık` : 'Görmeni ölç, takip et, düzenli kal'}</h1>
+        <p>{firstRun ? 'Planını seç; deneme bugün başlar.' : 'Devam etmek için planını seç.'}</p>
       </header>
 
-      <ul className="benefits">
-        {BENEFITS.map(({ Icon, text }) => (
-          <li key={text}><span className="icon-bubble"><Icon size={20} /></span>{text}</li>
-        ))}
-      </ul>
+      {firstRun && trial ? (
+        <ol className="trial-tl" aria-label="Deneme süreci">
+          <li><b>Bugün</b><span>Bütün ölçümler, egzersizler ve oyunlar açılır.</span></li>
+          <li><b>{TRIAL_REMIND_DAYS}. gün</b><span>İzin verirsen bildirimle hatırlatırız: deneme bitmek üzere.</span></li>
+          <li><b>{trial}. gün</b><span>İptal etmediysen seçtiğin plan başlar.</span></li>
+        </ol>
+      ) : (
+        <ul className="benefits">
+          {BENEFITS.map(({ Icon, text }) => (
+            <li key={text}><span className="icon-bubble"><Icon size={20} /></span>{text}</li>
+          ))}
+        </ul>
+      )}
 
       {plans == null && <p className="muted" style={{ textAlign: 'center' }}>Planlar yükleniyor…</p>}
 
@@ -133,6 +146,8 @@ export default function Paywall({ onUnlocked, onExport, onSafety, preview = fals
         <a className="link-btn" href={TERMS_URL} target="_blank" rel="noreferrer">Kullanım şartları</a>
         {PRIVACY_URL && <a className="link-btn" href={PRIVACY_URL} target="_blank" rel="noreferrer">Gizlilik</a>}
       </div>
+
+      {onSkip && <button type="button" className="link-btn" style={{ alignSelf: 'center' }} onClick={onSkip}>Test derlemesi: şimdilik geç</button>}
 
       <div className="paywall-links muted">
         <button className="link-btn subtle" onClick={onSafety}><ShieldCheck size={14} /> Güvenlik bilgisi</button>
