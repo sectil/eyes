@@ -9,6 +9,16 @@ export default {
   label: 'fark etme görevi',
   ring: 'attention',
   kind: 'practice',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: {
+    domain: 'awareness',
+    metrics: [
+      {
+        key: 'notice-count', label: 'Bugünün görevinde fark edilen', unit: 'kez', better: 'up',
+        series: ({ sessions }) => sessions.filter((s) => s?.type === SESSION_TYPE && Number.isFinite(s.count)).map((s) => ({ date: s.date, value: s.count })),
+      },
+    ],
+  },
   gates: {},
   home: { section: 'practice', order: 40 },
   sessions: {

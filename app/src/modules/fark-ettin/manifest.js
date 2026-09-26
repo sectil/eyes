@@ -13,6 +13,16 @@ export default {
   label: 'Fark Ettin mi?',
   ring: 'attention',
   kind: 'practice',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: {
+    domain: 'awareness',
+    metrics: [
+      {
+        key: 'street-noticed', label: 'Fark etme isabeti', unit: '%', better: 'up',
+        series: ({ sessions }) => sessions.filter((s) => s?.type === SESSION_TYPE && Number.isFinite(s.noticed) && s.asked > 0).map((s) => ({ date: s.date, value: (100 * s.noticed) / s.asked })),
+      },
+    ],
+  },
   gates: { eyeBudget: 'eye' },
   home: { section: 'practice', order: 8 },
   sessions: {

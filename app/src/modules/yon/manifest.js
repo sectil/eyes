@@ -13,6 +13,17 @@ export default {
   label: 'Yön',
   ring: 'life',
   kind: 'practice',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: {
+    domain: 'self',
+    effects: [{ key: 'yon-uzak', label: 'Yön · Dışarıdan bak', measure: 'rahatsızlık', max: 10, better: 'down', pick: (s) => (s?.type === SESSION_TYPE && s.tool === 'uzak' ? [s.before, s.after] : null) }],
+    metrics: [
+      {
+        key: 'yon-ayna', label: 'Kendine yaklaşım (Ayna)', unit: '/5', better: 'up',
+        series: ({ sessions }) => sessions.filter((s) => s?.type === SESSION_TYPE && s.tool === 'ayna' && Number.isFinite(s.score)).map((s) => ({ date: s.date, value: s.score })),
+      },
+    ],
+  },
   gates: {},
   storageKeys: [YON_NOTES_KEY],
   home: { section: 'practice', order: 37 },

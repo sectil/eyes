@@ -7,6 +7,8 @@ export default {
   label: 'günlük test',
   ring: 'eye',
   kind: 'measure',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: { domain: 'eye' }, // görme keskinliği lib/progress.js eyeCard (trend.js) ile
   gates: { eyeBudget: 'test' },
   ask: { after: ['lastExam'] }, // ilk E testinden sonra son muayene
   home: { section: 'measure', order: 20 },

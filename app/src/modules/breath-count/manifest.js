@@ -11,6 +11,16 @@ export default {
   label: 'nefes sayma ölçümü',
   ring: 'attention',
   kind: 'measure',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: {
+    domain: 'awareness',
+    metrics: [
+      {
+        key: 'breath-count-accuracy', label: 'Nefes sayma doğruluğu', unit: '%', better: 'up',
+        series: ({ sessions }) => sessions.filter((s) => s?.type === SESSION_TYPE && Number.isFinite(s.accuracy)).map((s) => ({ date: s.date, value: s.accuracy })),
+      },
+    ],
+  },
   retired: true,
   gates: {}, // ekran karanlık; göz bütçesine sayılmaz
   home: { section: 'measure', order: 40 },

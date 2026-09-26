@@ -32,6 +32,16 @@
 //   coach?(sessions, now) → { anahtar: sayı | kısa dize }   Jev'e giden 7 günlük özet (en çok 6 alan;
 //                                       lib/coachCore.js sanitizeSignals süzer). Yalnızca özet sayılar.
 //   stats?(sessions, now) → [{ label, value, sub? }]   Gelişim → Pratikler satırları (en çok 3)
+//   progress: {                         ZORUNLU (Gelişim 2.0): bu modül kişinin takibine neyi katar. Her yeni modül
+//                                       buradan Gelişim'e, istatistiğe, 5. gün raporuna ve Jev'e kendiliğinden bağlanır.
+//     domain: 'eye'|'calm'|'self'|'awareness'|'focus'|'wellbeing'|'body',  sayıldığı alan (DOMAINS)
+//     effects?: [{ key, label, measure, max, domain?, pick(s) → [önce, sonra] | null }]
+//                                       oturum öncesi → sonrası puanı ("şu an nasıl hissediyorsun")
+//     metrics?: [{ key, label, unit, better: 'up'|'down', domain?, meaningful?, source?,
+//                  series({ tests, sessions }) → [{ date, value }] }]
+//                                       zaman içindeki ölçüm. meaningful: yayımlanmış anlamlı değişim eşiği
+//                                       (birim cinsinden); yoksa ilk yarı / son yarı istatistiğiyle bakılır
+//   }
 //   sessions?: {                        kayıtların Gelişim'e nasıl gireceği
 //     match(s) → bool,
 //     countsTowardGoal: bool,           false: haftalık hedef/seriye sayılmaz (oyun)
@@ -44,6 +54,33 @@
 export const RINGS = ['eye', 'attention', 'life']
 export const KINDS = ['measure', 'exercise', 'practice']
 export const SECTIONS = ['measure', 'exercise', 'practice']
+export const DOMAINS = ['eye', 'calm', 'self', 'awareness', 'focus', 'wellbeing', 'body']
+const KEY_RE = /^[a-z][a-z0-9-]*$/
+
+function validateProgress(p, need) {
+  need(p && typeof p === 'object', 'progress yok (her modül Gelişim\'e ne kattığını söylemeli)')
+  if (!p || typeof p !== 'object') return
+  need(DOMAINS.includes(p.domain), `progress.domain şunlardan biri olmalı: ${DOMAINS.join(', ')}`)
+  if (p.effects != null) {
+    need(Array.isArray(p.effects), 'progress.effects dizi olmalı')
+    for (const e of p.effects ?? []) {
+      need(KEY_RE.test(e?.key ?? '') && typeof e.label === 'string' && typeof e.measure === 'string', 'effect key/label/measure eksik')
+      need(Number.isFinite(e?.max) && e.max > 0, `effect ${e?.key}: max sayı olmalı`)
+      need(typeof e?.pick === 'function', `effect ${e?.key}: pick fonksiyon olmalı`)
+      if (e?.domain != null) need(DOMAINS.includes(e.domain), `effect ${e.key}: domain geçersiz`)
+    }
+  }
+  if (p.metrics != null) {
+    need(Array.isArray(p.metrics), 'progress.metrics dizi olmalı')
+    for (const x of p.metrics ?? []) {
+      need(KEY_RE.test(x?.key ?? '') && typeof x.label === 'string' && typeof x.unit === 'string', 'metric key/label/unit eksik')
+      need(x?.better === 'up' || x?.better === 'down', `metric ${x?.key}: better 'up' ya da 'down' olmalı`)
+      need(typeof x?.series === 'function', `metric ${x?.key}: series fonksiyon olmalı`)
+      if (x?.meaningful != null) need(Number.isFinite(x.meaningful) && x.meaningful > 0, `metric ${x.key}: meaningful pozitif sayı olmalı`)
+      if (x?.domain != null) need(DOMAINS.includes(x.domain), `metric ${x.key}: domain geçersiz`)
+    }
+  }
+}
 
 export function validateManifest(m) {
   const errors = []
@@ -65,6 +102,7 @@ export function validateManifest(m) {
     const list = (v) => v == null || (Array.isArray(v) && v.every((x) => typeof x === 'string'))
     need(typeof m.ask === 'object' && list(m.ask.before) && list(m.ask.after), 'ask.before/after dizi olmalı')
   }
+  validateProgress(m.progress, need)
   if (m.coach != null) need(typeof m.coach === 'function', 'coach fonksiyon olmalı')
   if (m.stats != null) need(typeof m.stats === 'function', 'stats fonksiyon olmalı')
   if (m.sessions != null) {
@@ -112,6 +150,9 @@ export function createRegistry(manifests) {
       return typeof m.label === 'function' ? m.label(route) : m.label
     },
     resetKeys: () => [...new Set(list.flatMap((m) => m.storageKeys ?? []))],
+    // Gelişim 2.0: tüm modüllerin (emekliler dahil: eski kayıtlar okunur) önce→sonra etkileri ve metrikleri
+    effects: () => list.flatMap((m) => (m.progress.effects ?? []).map((e) => ({ ...e, module: m.id, domain: e.domain ?? m.progress.domain }))),
+    metrics: () => list.flatMap((m) => (m.progress.metrics ?? []).map((x) => ({ ...x, module: m.id, domain: x.domain ?? m.progress.domain }))),
   }
 }
 

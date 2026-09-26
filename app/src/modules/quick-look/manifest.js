@@ -14,6 +14,16 @@ export default {
   label: 'Hızlı Bakış',
   ring: 'attention',
   kind: 'practice',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: {
+    domain: 'focus',
+    metrics: [
+      {
+        key: 'quick-look-threshold', label: 'Algı hızı eşiği', unit: 'ms', better: 'down',
+        series: ({ sessions }) => sessions.filter((s) => s?.type === SESSION_TYPE && Number.isFinite(s.threshold)).map((s) => ({ date: s.date, value: s.threshold })),
+      },
+    ],
+  },
   gates: { eyeBudget: 'eye' },
   ask: { before: ['seizure'] }, // flaşlı görevden hemen önce (lib/profileQuestions.js)
   home: { section: 'practice', order: 5 },

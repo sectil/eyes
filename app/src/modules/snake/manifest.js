@@ -10,6 +10,8 @@ export default {
   label: 'Yılan oyunu',
   ring: 'attention',
   kind: 'practice',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: { domain: 'focus' }, // oyun puanı gelişim ölçüsü sayılmaz (rekor ayrı)
   gates: { gaze: true, eyeBudget: 'eye' },
   storageKeys: [BEST_KEY, OPTS_KEY],
   home: { section: 'practice', order: 20 },

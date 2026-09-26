@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { registry, createRegistry, validateManifest } from './registry.js'
+import { registry, createRegistry, validateManifest, DOMAINS } from './registry.js'
 import { VIEWS } from './views.js'
 
 describe('modül soketi: gerçek modüller', () => {
@@ -42,6 +42,11 @@ describe('modül soketi: tak / çıkar', () => {
     gates: { gaze: true, eyeBudget: 'eye' },
     storageKeys: ['gozolcum:hb-best'],
     home: { section: 'practice', order: 1 },
+    progress: {
+      domain: 'focus',
+      effects: [{ key: 'hb-mood', label: 'Hızlı Bakış', measure: 'odak', max: 10, pick: (s) => (s.game === 'hb' ? [s.focusBefore, s.focusAfter] : null) }],
+      metrics: [{ key: 'hb-ms', label: 'Tepki süresi', unit: 'ms', better: 'down', series: ({ sessions }) => sessions.filter((s) => s.game === 'hb').map((s) => ({ date: s.date, value: s.ms })) }],
+    },
     sessions: {
       match: (s) => s.type === 'game' && s.game === 'hb',
       countsTowardGoal: false,
@@ -57,6 +62,49 @@ describe('modül soketi: tak / çıkar', () => {
     expect(r.inSection('practice')[0].id).toBe('hizli-bakis')
     expect(r.forSession({ type: 'game', game: 'hb' })?.sessions.describe({ ms: 180 }).detail).toBe('180 ms')
     expect(r.resetKeys()).toContain('gozolcum:hb-best')
+    // Gelişim'e kendiliğinden bağlanır: etkiler ve metrikler kayıt defterinden okunur
+    expect(r.effects().find((e) => e.key === 'hb-mood')).toMatchObject({ module: 'hizli-bakis', domain: 'focus', measure: 'odak' })
+    expect(r.metrics().find((m) => m.key === 'hb-ms')).toMatchObject({ module: 'hizli-bakis', domain: 'focus', better: 'down' })
+  })
+  it('Gelişim\'e ne kattığını söylemeyen modül reddedilir (unutulamaz)', () => {
+    const { progress, ...eksik } = yeni
+    expect(progress).toBeTruthy()
+    const r = createRegistry([...registry.modules, eksik])
+    expect(r.problems.join(' ')).toMatch(/progress yok/)
+    expect(r.get('hizli-bakis')).toBeNull()
+    expect(validateManifest({ ...yeni, progress: { domain: 'yok' } }).join(' ')).toMatch(/progress.domain/)
+    expect(validateManifest({ ...yeni, progress: { domain: 'focus', metrics: [{ key: 'x', label: 'x', unit: 'x', better: 'yan', series: () => [] }] } }).join(' ')).toMatch(/better/)
+  })
+  it('gerçek modüllerin hepsi Gelişim\'e bağlı; kayıt tutanların etkisi/metriği kendi kayıt türünü okur', () => {
+    for (const m of registry.modules) expect(DOMAINS, m.id).toContain(m.progress.domain)
+    const keys = [...registry.effects().map((e) => e.key), ...registry.metrics().map((x) => x.key)]
+    expect(new Set(keys).size).toBe(keys.length)
+    // Her modülün kendi eşleştirdiği kayıtla metrik/etki okunabiliyor (tür adı yanlış yazılmadı)
+    const sample = {
+      breath: { type: 'breath', date: '2026-01-01', calmBefore: 2, calmAfter: 4 },
+      gokyuzu: { type: 'gokyuzu', date: '2026-01-01', before: 3, after: 6 },
+      dalga: { type: 'dalga', mode: 'guc', date: '2026-01-01', before: 4, after: 7 },
+      yon: { type: 'yon', tool: 'uzak', date: '2026-01-01', before: 7, after: 4 },
+    }
+    for (const e of registry.effects()) {
+      const s = sample[e.module]
+      if (!s) continue
+      expect(registry.forSession(s)?.id, e.key).toBe(e.module)
+    }
+    const metSample = {
+      'fark-ettin': { type: 'street', date: '2026-01-01', noticed: 3, asked: 4 },
+      'tek-bakis': { type: 'span', date: '2026-01-01', span: 5 },
+      'quick-look': { type: 'quick-look', date: '2026-01-01', threshold: 120 },
+      notice: { type: 'notice', date: '2026-01-01', count: 2 },
+      'breath-count': { type: 'breath-count', date: '2026-01-01', accuracy: 90 },
+      yon: { type: 'yon', tool: 'ayna', date: '2026-01-01', score: 3.4 },
+    }
+    for (const x of registry.metrics()) {
+      const s = metSample[x.module]
+      expect(s, x.key).toBeTruthy()
+      expect(registry.forSession(s)?.id, x.key).toBe(x.module)
+      expect(x.series({ tests: [], sessions: [s] }).length, x.key).toBe(1)
+    }
   })
   it('çıkarılınca iz kalmaz', () => {
     const r = createRegistry(registry.modules.filter((m) => m.id !== 'snake'))

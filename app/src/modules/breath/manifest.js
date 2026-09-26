@@ -14,6 +14,11 @@ export default {
   label: 'nefes pratiği',
   ring: 'life',
   kind: 'practice',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: {
+    domain: 'calm',
+    effects: [{ key: 'breath-calm', label: 'Nefes', measure: 'sakinlik', max: 5, pick: (s) => (s?.type === SESSION_TYPE ? [s.calmBefore, s.calmAfter] : null) }],
+  },
   gates: {},
   storageKeys: [BREATH_OPTS_KEY, BREATH_SAFETY_KEY],
   home: { section: 'practice', order: 30 },

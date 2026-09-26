@@ -10,6 +10,11 @@ export default {
   label: 'Gökyüzü molası',
   ring: 'life',
   kind: 'practice',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: {
+    domain: 'calm',
+    effects: [{ key: 'gokyuzu-rest', label: 'Gökyüzü molası', measure: 'dinlenmişlik', max: 10, pick: (s) => (s?.type === SESSION_TYPE ? [s.before, s.after] : null) }],
+  },
   gates: {},
   home: { section: 'practice', order: 36 },
   sessions: {

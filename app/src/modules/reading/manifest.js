@@ -8,6 +8,8 @@ export default {
   label: 'okuma testi',
   ring: 'eye',
   kind: 'measure',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: { domain: 'eye' },
   gates: { eyeBudget: 'test' },
   ask: { before: ['correction'], after: ['nearDifficulty'] }, // gözlük testten önce, yakın zorluk sonuçtan sonra
   home: { section: 'measure', order: 30 },

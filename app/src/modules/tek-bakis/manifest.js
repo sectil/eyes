@@ -15,6 +15,16 @@ export default {
   label: 'Tek Bakışta',
   ring: 'eye',
   kind: 'practice',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: {
+    domain: 'focus',
+    metrics: [
+      {
+        key: 'tek-bakis-span', label: 'Tek bakışta kavranan', unit: 'harf', better: 'up',
+        series: ({ sessions }) => sessions.filter((s) => s?.type === SESSION_TYPE && Number.isFinite(s.span)).map((s) => ({ date: s.date, value: s.span })),
+      },
+    ],
+  },
   gates: { eyeBudget: 'eye' },
   ask: { before: ['seizure'] },
   home: { section: 'practice', order: 15 },

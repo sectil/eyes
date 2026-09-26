@@ -24,6 +24,8 @@ export default {
   },
   ring: 'eye',
   kind: 'exercise',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: { domain: 'eye' },
   gates: { gaze: true, eyeBudget: 'eye' },
   home: { section: 'exercise', order: 10 },
   // Yolun gövdesi: beş kısa grup, her biri ayrı durak; bugün o grubun kaydı varsa tamam.

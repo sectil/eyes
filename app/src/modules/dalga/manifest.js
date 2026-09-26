@@ -13,6 +13,15 @@ export default {
   label: 'Dalga',
   ring: 'life',
   kind: 'practice',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: {
+    domain: 'calm',
+    effects: [
+      { key: 'dalga-sakin', label: 'Dalga · Sakin', measure: 'sakinlik', max: 10, pick: (s) => (s?.type === SESSION_TYPE && s.mode === 'sakin' ? [s.before, s.after] : null) },
+      { key: 'dalga-guc', label: 'Dalga · Güç', measure: 'kendine güven', max: 10, domain: 'self', pick: (s) => (s?.type === SESSION_TYPE && s.mode === 'guc' ? [s.before, s.after] : null) },
+      { key: 'dalga-motive', label: 'Dalga · Motive', measure: 'enerji', max: 10, domain: 'wellbeing', pick: (s) => (s?.type === SESSION_TYPE && s.mode === 'motive' ? [s.before, s.after] : null) },
+    ],
+  },
   gates: {},
   storageKeys: [DALGA_OPTS_KEY],
   home: { section: 'practice', order: 35 },

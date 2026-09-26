@@ -6,5 +6,7 @@ export default {
   label: 'Farkındalık merkezi',
   ring: 'attention',
   kind: 'practice',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: { domain: 'awareness' },
   gates: {},
 }
