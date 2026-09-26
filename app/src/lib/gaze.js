@@ -5,12 +5,16 @@
 // Apple: eyeLookInLeft = "movement of the left eyelids consistent with a rightward gaze"
 // (developer.apple.com/documentation/arkit/arfaceanchor/blendshapelocation/eyelookinleft) →
 // sağa bakış = lookInLeft + lookOutRight. createGazeReader açı işaretini buna göre doğrular.
-// VARSAYIM: ARKit'te "Left" kişinin sol gözüdür. Cihazda ters çıkarsa FLIP_X = -1 yapılır.
+// Cihazda ölçüldü (Build 15/16/30 kalibrasyon raporları + Bug 10): ekranın solundaki noktaya bakışta
+// (lookInLeft + lookOutRight) − (lookOutLeft + lookInRight) POZİTİF, göz açısı gazeLeft/RightX de POZİTİF.
+// Yani ham x ekseninde + = kişinin SOLU (Apple belgesindeki okumanın tersi). FLIP_X ve ANGLE_FLIP bunu çevirir:
+// okuyucunun çıktısında x > 0 = kişinin sağı. Kalibrasyon modeli işareti kendi verisinden bulur (etkilenmez).
 // VARSAYIM: eşikler (aşağıdaki sabitler) ilk sürüm içindir; gerçek cihazda ayarlanacak.
 
 import { loadGazeModel, applyModel, createOneEuro } from './gazeCalib.js'
 
-export const FLIP_X = 1
+export const FLIP_X = -1
+export const ANGLE_FLIP = -1
 export const DIR_THRESHOLD = 0.3 // bir yöne "bakıyor" saymak için
 export const CIRCLE_MIN = 0.2 // daire takibinde merkezden en az uzaklık
 export const BLINK_CLOSE = 0.5 // göz kapandı
@@ -425,7 +429,7 @@ export function createGazeReader(opts = {}) {
   function checkSign(ang, blend) {
     const na = neutral.angle ?? { x: 0, y: 0 }
     const nb = neutral.blend ?? { x: 0, y: 0 }
-    const ax = flip * (ang.x - na.x)
+    const ax = ANGLE_FLIP * flip * (ang.x - na.x)
     const bx = blend.x - nb.x
     if (Math.abs(ax) <= SIGN_MIN_DEG || Math.abs(bx) <= SIGN_MIN_BLEND) return
     signBuf.push(Math.sign(ax) === Math.sign(bx))
@@ -478,7 +482,7 @@ export function createGazeReader(opts = {}) {
       }
       source = src
       const n = neutral[src] ?? { x: 0, y: 0 }
-      const rel = ang ? { x: flip * (ang.x - n.x), y: ang.y - n.y } : { x: blend.x - n.x, y: blend.y - n.y }
+      const rel = ang ? { x: ANGLE_FLIP * flip * (ang.x - n.x), y: ang.y - n.y } : { x: blend.x - n.x, y: blend.y - n.y }
       hist.push(rel)
       if (hist.length > 3) hist.shift()
       const s = { x: median(hist.map((p) => p.x)), y: median(hist.map((p) => p.y)) }
@@ -514,7 +518,7 @@ export function createGazeReader(opts = {}) {
         return b ? { x: b.x * k, y: b.y * k, source: 'blend' } : null
       }
       const a = neutral.angle
-      return a ? { x: flip * a.x, y: a.y, source: 'angle' } : null
+      return a ? { x: ANGLE_FLIP * flip * a.x, y: a.y, source: 'angle' } : null
     },
     get flipX() {
       return flip

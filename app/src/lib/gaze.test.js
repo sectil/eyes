@@ -20,13 +20,24 @@ import {
   GAZE_FLIP_KEY,
 } from './gaze.js'
 
-const look = (o) => ({ lookUpLeft: 0, lookUpRight: 0, lookDownLeft: 0, lookDownRight: 0, lookInLeft: 0, lookInRight: 0, lookOutLeft: 0, lookOutRight: 0, ...o })
+// look(): KİŞİNİN bakış yönüyle yazılır (Apple adlandırması: sağa bakış = lookInLeft + lookOutRight) ve cihazın
+// gerçekte verdiği ham değere çevrilir. Cihazda ölçüldü (Bug 10, Build 15/16/30): ham değerler aynalı → In ↔ Out.
+const MIRROR = { lookInLeft: 'lookOutLeft', lookOutLeft: 'lookInLeft', lookInRight: 'lookOutRight', lookOutRight: 'lookInRight' }
+const look = (o) => {
+  const raw = { lookUpLeft: 0, lookUpRight: 0, lookDownLeft: 0, lookDownRight: 0, lookInLeft: 0, lookInRight: 0, lookOutLeft: 0, lookOutRight: 0 }
+  for (const [k, v] of Object.entries(o)) raw[MIRROR[k] ?? k] = v
+  return raw
+}
 const RIGHT = look({ lookInLeft: 0.7, lookOutRight: 0.7 })
 const LEFT = look({ lookOutLeft: 0.7, lookInRight: 0.7 })
 const UP = look({ lookUpLeft: 0.6, lookUpRight: 0.6 })
 const DOWN = look({ lookDownLeft: 0.6, lookDownRight: 0.6 })
 
 describe('gazeVector / gazeDirection', () => {
+  it('cihaz verisi: ekranın soluna bakışta ham (lookInLeft + lookOutRight) büyük → sol (Build 30: blendX +0,026)', () => {
+    const raw = { lookInLeft: 0.3, lookOutRight: 0.3, lookOutLeft: 0.05, lookInRight: 0.05 }
+    expect(gazeVector(raw).x).toBeLessThan(0)
+  })
   it('sağ gözün dışa, sol gözün içe bakması → sağ', () => {
     expect(gazeDirection(gazeVector(RIGHT))).toBe('right')
     expect(gazeDirection(gazeVector(LEFT))).toBe('left')
@@ -212,17 +223,19 @@ describe('createCircleTracker', () => {
 })
 
 // --- createGazeReader ---------------------------------------------------------------
-// Sentetik kare: x/y = iki gözün açısı (derece), blend = blendshape değerleri.
+// Sentetik kare: x/y = kişinin bakış açısı (derece; x > 0 kişinin sağı), blend = blendshape değerleri.
+// Ham göz açısı cihazda aynalı (Bug 10: sol hedefte gazeLeftX +0,9, sağda −0,6) → ham x = −x.
 const frame = ({ x = null, y = null, blend = {}, closed = false, tracked = true, ts }) => ({
   tracked,
   face: tracked,
-  gazeLeftX: x,
-  gazeRightX: x,
+  gazeLeftX: x == null ? null : -x,
+  gazeRightX: x == null ? null : -x,
   gazeLeftY: y,
   gazeRightY: y,
   blinkLeft: closed ? 0.9 : 0.05,
   blinkRight: closed ? 0.9 : 0.05,
-  ...look(blend),
+  ...look({}),
+  ...blend,
   ts,
 })
 
@@ -411,6 +424,23 @@ describe('createGazeReader', () => {
     feed({ x: 0, y: 0 }, 15)
     expect(() => feed({ x: 12, y: 0, blend: LEFT }, 20)).not.toThrow()
     expect(r.flipX).toBe(-1)
+  })
+
+  it('Bug 10: kalibrasyonsuz yol cihaz işaretini doğru çevirir (ham açı + ve ham In-Left/Out-Right = kişinin solu)', () => {
+    const r = createGazeReader({ persistKey: null })
+    let t = 0
+    const push = (ax, bl, n) => {
+      let o
+      for (let i = 0; i < n; i++) o = r.push({ tracked: true, face: true, gazeLeftX: ax, gazeRightX: ax, gazeLeftY: -8, gazeRightY: -8, blinkLeft: 0.05, blinkRight: 0.05, ...bl, ts: (t += 66) })
+      return o
+    }
+    const raw = (inL, outL) => ({ lookInLeft: inL, lookOutRight: inL, lookOutLeft: outL, lookInRight: outL, lookUpLeft: 0, lookUpRight: 0, lookDownLeft: 0, lookDownRight: 0 })
+    push(0, raw(0.05, 0.05), 15) // nötr
+    const left = push(12, raw(0.6, 0.05), 20) // cihaz: sola bakış (Build 30 sol hedef: angX +0,9, blendX +0,026)
+    expect(left.dir).toBe('left')
+    expect(r.flipX).toBe(1) // açı ve blend tutarlı → çevirme yok
+    push(0, raw(0.05, 0.05), 6)
+    expect(push(-12, raw(0.05, 0.6), 20).dir).toBe('right')
   })
 
   it('flipX seçeneği kaydı ezer', () => {
