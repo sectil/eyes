@@ -7,6 +7,7 @@ export const RELEASES = [
     id: '2026-09-27',
     title: '27 Eylül güncellemesi',
     items: [
+      { kind: 'new', text: 'Google ile giriş (iPhone): Apple\'ın güvenli oturum penceresinde Google hesabını seçersin; ek bir Google ya da Facebook yazılımı uygulamaya girmez.' },
       { kind: 'change', text: 'Yeni hoş geldin ekranı: Pegasus gökyüzü ve ufuk kavisi; Apple ya da e-posta ile devam et, istersen hesapsız dene. Açık ve koyu temada ayrı tasarlandı.' },
       { kind: 'change', text: 'Yeni giriş ekranı: film kalktı. Gece göğünde Pegasus, altın odakta tek yıldız ve ufuktan doğan göz; Başla göz bebeğinde. Hareket yok, beklemeden başlarsın.' },
       { kind: 'new', text: 'Hatırlatmalar (Bilgi → Hatırlatmalar): mola, yürüyüş, nefes ve su. Hangilerinin geleceğini ve saatini sen seçersin; her türden günde en çok bir hatırlatma. Ana sayfada bir kez sorarız, cevap vermeden hiçbiri kurulmaz.' },

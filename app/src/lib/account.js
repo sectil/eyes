@@ -1,8 +1,9 @@
-// Hesap (Build 23b): Apple ile giriş (iPhone), e-posta ile 6 haneli kod, hesapsız kullanım.
+// Hesap (Build 23b): Apple ile giriş (iPhone), Google ile giriş (iPhone), e-posta ile 6 haneli kod, hesapsız kullanım.
 // Hesap açıldıysa ad, doğum tarihi, şehir ve gözlük/lens Supabase'deki "profiles" satırına eşitlenir; fotoğraf ve
 // ölçümler cihazda kalır. Kamera görüntüsü hiçbir yere gönderilmez. Hesap silme uygulama içinden (App Store 5.1.1(v)).
-// settings.account: { mode: 'apple' | 'email' | 'guest', userId?, email?, date }
+// settings.account: { mode: 'apple' | 'google' | 'email' | 'guest', userId?, email?, date }
 import { supabase, SUPABASE_URL } from './supabase.js'
+import { AuthSession, isIOSApp } from './native.js'
 import { normalizeIdentity } from './identity.js'
 import { CORRECTION } from './profile.js'
 
@@ -49,7 +50,7 @@ export function mergeProfile(row, identity, correction) {
 export function friendlyError(err) {
   const msg = String(err?.message ?? err ?? '')
   const code = String(err?.code ?? err?.error ?? '')
-  if (/cancel|1001/i.test(msg) || code === '1001') return null
+  if (/cancel|1001/i.test(msg) || code === '1001' || /cancel/i.test(code)) return null
   if (err?.status === 429 || /rate limit|too many/i.test(msg)) return 'Çok sık denendi. Bir dakika sonra yeniden dene.'
   // Supabase'in hazır e-posta servisi yalnız proje ekibine gönderir (kendi SMTP bağlanana kadar)
   if (/not authorized/i.test(msg)) return 'E-postayla giriş şu an açık değil. Apple ile devam et ya da hesapsız dene.'
@@ -124,9 +125,44 @@ export async function pushProfile(userId, identity, correction) {
   if (error) throw error
 }
 
-export const accountLabel = (a) => (a?.mode === 'apple' ? 'Apple' : a?.mode === 'email' ? (a.email ?? 'E-posta') : null)
-export const signedIn = (a) => Boolean(a && (a.mode === 'apple' || a.mode === 'email') && a.userId)
+export const accountLabel = (a) => (a?.mode === 'apple' ? 'Apple' : a?.mode === 'google' ? 'Google' : a?.mode === 'email' ? (a.email ?? 'E-posta') : null)
+export const signedIn = (a) => Boolean(a && (a.mode === 'apple' || a.mode === 'google' || a.mode === 'email') && a.userId)
 
-// Google ile giriş: düğme ve tasarım hazır (AccountStart). Google Cloud'da iOS ve web istemci kimlikleri oluşturulup
-// Supabase'de Google sağlayıcısı açılınca ve yerel Google oturum eklentisi eklenince true olur. O zamana dek düğme görünmez.
-export const googleSignInReady = () => false
+// Google ile giriş (iPhone): üçüncü taraf SDK yok (Facebook SDK'sı taşıyan eklentiler bilerek seçilmedi). Supabase'in
+// Google adresi Apple'ın güvenli oturum penceresinde açılır (AuthSessionPlugin.swift); Google → Supabase → GOOGLE_REDIRECT.
+// Supabase'de: Google sağlayıcısı açık (web istemci kimliği + gizli anahtar) ve GOOGLE_REDIRECT izinli yönlendirmelerde.
+// Dönüş iki biçimde gelebilir: ?code= (PKCE) ya da #access_token=…&refresh_token=… (istemcinin varsayılanı: implicit).
+export const GOOGLE_REDIRECT = 'com.sectil.eyelume://auth-callback'
+export const googleSignInReady = () => isIOSApp()
+
+// plugin: { start({ url, scheme }) → { url } } (testte sahte). Capacitor eklenti nesnesi promise'ten döndürülmez (Bug 15).
+export async function signInWithGoogle(plugin = null) {
+  const P = plugin ?? AuthSession
+  const sb = supabase()
+  const { data, error } = await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: GOOGLE_REDIRECT, skipBrowserRedirect: true, queryParams: { prompt: 'select_account' } },
+  })
+  if (error) throw error
+  const { url } = await P.start({ url: data.url, scheme: GOOGLE_REDIRECT.split('://')[0] })
+  const back = new URL(url)
+  const q = new URLSearchParams(back.search)
+  const h = new URLSearchParams(back.hash.replace(/^#/, ''))
+  const fail = q.get('error_description') || h.get('error_description') || q.get('error') || h.get('error')
+  if (fail) throw new Error(fail)
+  const code = q.get('code')
+  let res
+  if (code) {
+    res = await sb.auth.exchangeCodeForSession(code)
+  } else {
+    const access = h.get('access_token')
+    const refresh = h.get('refresh_token')
+    if (!access || !refresh) throw new Error('Google girişi tamamlanamadı (oturum bilgisi gelmedi)')
+    res = await sb.auth.setSession({ access_token: access, refresh_token: refresh })
+  }
+  if (res.error) throw res.error
+  const user = res.data?.user ?? res.data?.session?.user
+  if (!user) throw new Error('Google girişi tamamlanamadı (kullanıcı yok)')
+  const meta = user.user_metadata ?? {}
+  return { user, givenName: meta.given_name ?? String(meta.full_name ?? meta.name ?? '').split(' ')[0] ?? '' }
+}

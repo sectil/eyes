@@ -115,7 +115,7 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
             />
           ))}
         </div>
-        <span className="ph-login">{inAcct ? (account.mode === 'apple' ? 'Apple ile giriş' : accountLabel(account)) : 'Hesapsız · yalnız bu telefonda'}</span>
+        <span className="ph-login">{inAcct ? (account.mode === 'apple' ? 'Apple ile giriş' : account.mode === 'google' ? 'Google ile giriş' : accountLabel(account)) : 'Hesapsız · yalnız bu telefonda'}</span>
         {err && <p className="muted small" role="alert">{err}</p>}
       </div>
 

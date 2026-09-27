@@ -3,7 +3,7 @@ import { webcrypto } from 'node:crypto'
 import { setSupabaseForTest, isSecretKey, SUPABASE_KEY } from './supabase.js'
 import {
   normalizeEmail, validEmail, cleanCode, validCode, profileToRow, mergeProfile, friendlyError, errorDetail, makeNonce,
-  sendEmailCode, verifyEmailCode, signInWithApple, pushProfile, pullProfile, deleteAccount, signedIn, accountLabel,
+  sendEmailCode, verifyEmailCode, signInWithApple, signInWithGoogle, GOOGLE_REDIRECT, pushProfile, pullProfile, deleteAccount, signedIn, accountLabel,
 } from './account.js'
 
 // Sahte Supabase istemcisi: çağrıları kaydeder
@@ -119,5 +119,51 @@ describe('hesap', () => {
     expect(signedIn({ mode: 'guest' })).toBe(false)
     expect(signedIn({ mode: 'apple', userId: 'u' })).toBe(true)
     expect(accountLabel({ mode: 'email', email: 'a@b.co' })).toBe('a@b.co')
+  })
+})
+
+describe('Google ile giriş (güvenli oturum penceresi)', () => {
+  const user = { id: 'g1', email: 'a@b.co', user_metadata: { full_name: 'Deniz Yılmaz' } }
+  function sb(over = {}) {
+    const calls = []
+    return {
+      calls,
+      auth: {
+        signInWithOAuth: (a) => { calls.push(['oauth', a]); return Promise.resolve(over.oauth ?? { data: { url: 'https://x.supabase.co/auth/v1/authorize?provider=google' }, error: null }) },
+        exchangeCodeForSession: (c) => { calls.push(['exchange', c]); return Promise.resolve({ data: { user, session: {} }, error: null }) },
+        setSession: (t) => { calls.push(['setSession', t]); return Promise.resolve({ data: { user, session: {} }, error: null }) },
+      },
+    }
+  }
+  const win = (url) => ({ start: (o) => { win.last = o; return Promise.resolve({ url }) } })
+
+  it('Supabase adresini pencerede açar, uygulama şemasına döner; tarayıcıya kendisi gitmez', async () => {
+    const c = sb(); setSupabaseForTest(c)
+    const r = await signInWithGoogle(win(`${GOOGLE_REDIRECT}#access_token=A&refresh_token=R`))
+    const [, a] = c.calls[0]
+    expect(a.provider).toBe('google')
+    expect(a.options).toMatchObject({ redirectTo: GOOGLE_REDIRECT, skipBrowserRedirect: true })
+    expect(win.last).toEqual({ url: 'https://x.supabase.co/auth/v1/authorize?provider=google', scheme: 'com.sectil.eyelume' })
+    expect(c.calls.at(-1)).toEqual(['setSession', { access_token: 'A', refresh_token: 'R' }])
+    expect(r.user.id).toBe('g1')
+    expect(r.givenName).toBe('Deniz')
+  })
+  it('?code= ile dönerse kod oturuma çevrilir', async () => {
+    const c = sb(); setSupabaseForTest(c)
+    await signInWithGoogle(win(`${GOOGLE_REDIRECT}?code=K1`))
+    expect(c.calls.at(-1)).toEqual(['exchange', 'K1'])
+  })
+  it('Google/Supabase hatası kullanıcıya iletilir; oturum bilgisi yoksa hata', async () => {
+    setSupabaseForTest(sb())
+    await expect(signInWithGoogle(win(`${GOOGLE_REDIRECT}#error=access_denied&error_description=Reddedildi`))).rejects.toThrow('Reddedildi')
+    setSupabaseForTest(sb())
+    await expect(signInWithGoogle(win(`${GOOGLE_REDIRECT}#`))).rejects.toThrow(/tamamlanamadı/)
+  })
+  it('vazgeçme sessiz geçer (hata mesajı yok)', () => {
+    expect(friendlyError({ message: 'canceled', code: 'CANCELED' })).toBeNull()
+  })
+  it('Google hesabı oturum açmış sayılır ve etiketi Google', () => {
+    expect(signedIn({ mode: 'google', userId: 'g1' })).toBe(true)
+    expect(accountLabel({ mode: 'google' })).toBe('Google')
   })
 })

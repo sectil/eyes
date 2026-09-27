@@ -54,7 +54,7 @@ export default function ProfileSetup({ identity, correction: initialCorrection =
 
   return (
     <main className="screen fade-in setup">
-      {who && <span className="acct-badge">{account.mode === 'apple' ? 'Apple ile giriş yapıldı' : `${who} ile giriş yapıldı`}</span>}
+      {who && <span className="acct-badge">{`${who} ile giriş yapıldı`}</span>}
       <header className="page-header" style={{ paddingTop: 4 }}>
         <h1>Seni tanıyalım</h1>
         <p>{who ? 'Bilgilerin telefonda kalır; hesabınla eşitlemek için ayrıca iznini soracağız. Fotoğraf hep telefonda.' : 'Bilgilerin yalnızca bu telefonda kalır.'}</p>

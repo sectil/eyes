@@ -22,6 +22,7 @@
 		67E978CCF58A0DFFFAF0F364 /* FeedbackPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B32F900FAA3897A19868E63 /* FeedbackPlugin.swift */; };
 		9D1FAA7CA32ECBEE8AAE8BD0 /* ExportPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB402C931E107EA218D82AD5 /* ExportPlugin.swift */; };
 		5C6566AA870CE6FE1C539465 /* HealthPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879122AB7626D8043358C87E /* HealthPlugin.swift */; };
+		D95049F54BD71CB2B5B1D198 /* AuthSessionPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F9A858278129AD93FFE2F5 /* AuthSessionPlugin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		1B32F900FAA3897A19868E63 /* FeedbackPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPlugin.swift; sourceTree = "<group>"; };
 		AB402C931E107EA218D82AD5 /* ExportPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPlugin.swift; sourceTree = "<group>"; };
 		879122AB7626D8043358C87E /* HealthPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPlugin.swift; sourceTree = "<group>"; };
+		78F9A858278129AD93FFE2F5 /* AuthSessionPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSessionPlugin.swift; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -83,6 +85,7 @@
 				1B32F900FAA3897A19868E63 /* FeedbackPlugin.swift */,
 				AB402C931E107EA218D82AD5 /* ExportPlugin.swift */,
 				879122AB7626D8043358C87E /* HealthPlugin.swift */,
+				78F9A858278129AD93FFE2F5 /* AuthSessionPlugin.swift */,
 				50379B222058CBB4000EE86E /* capacitor.config.json */,
 				504EC3071FED79650016851F /* AppDelegate.swift */,
 				504EC30B1FED79650016851F /* Main.storyboard */,
@@ -184,6 +187,7 @@
 				67E978CCF58A0DFFFAF0F364 /* FeedbackPlugin.swift in Sources */,
 				9D1FAA7CA32ECBEE8AAE8BD0 /* ExportPlugin.swift in Sources */,
 				5C6566AA870CE6FE1C539465 /* HealthPlugin.swift in Sources */,
+				D95049F54BD71CB2B5B1D198 /* AuthSessionPlugin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

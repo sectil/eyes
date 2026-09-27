@@ -104,8 +104,9 @@ Son güncelleme: 2026-09-27.
 
 ## Bekleyen kararlar / içerik
 - [ ] Boy ve kilo: kullanım amacı yok → amaç belirlenmedikçe eklenmez
-- [ ] Google ile giriş: düğme ve tasarım hazır (AccountStart, gizli). Gerekenler: Google Cloud iOS + web istemci kimliği,
-      Supabase'de Google sağlayıcısı, yerel Google oturum eklentisi; sonra lib/account.js googleSignInReady → true
+- [ ] Google ile giriş: kod bitti (AuthSessionPlugin.swift + signInWithGoogle; SDK yok). Google Cloud "Nefona" projesi,
+      iOS + web istemcisi, Supabase Google sağlayıcısı açık. Kalan: Supabase Redirect URLs'e com.sectil.eyelume://auth-callback,
+      "Skip nonce checks" kapat (bu yolda gerekmiyor), Google Auth Platform → Audience → Publish app, cihazda deneme
 - [ ] WHO-5 resmi Türkçe madde metni kullanıcıdan
 - [ ] Nef'e "Yön" serbest metni: ayrı açık rıza
 - [ ] i18n, kronotip, özel SMTP

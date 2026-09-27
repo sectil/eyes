@@ -334,3 +334,6 @@ export async function walkGuardLog() {
     return { cancelled: [] }
   }
 }
+
+// Güvenli web oturumu (ios/App/App/AuthSessionPlugin.swift): Google ile giriş penceresi (lib/account.js)
+export const AuthSession = registerPlugin('AuthSession')
