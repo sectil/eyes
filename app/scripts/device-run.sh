@@ -27,6 +27,10 @@ VITE_APP_BUILD="dev" VITE_TEST_UNLOCK=1 npm run build
 npx cap sync ios
 
 step "3/5 iOS derlemesi (birkaç dakika sürebilir)"
+# Önceki derlemenin uygulaması silinir: derleme başarısız olursa ESKİ uygulama kurulmasın (önceden oluyordu).
+mkdir -p "$DD"
+rm -rf "$DD"/Build/Products/Debug-iphoneos/*.app
+set +e
 xcodebuild \
   -project ios/App/App.xcodeproj \
   -scheme App \
@@ -36,11 +40,16 @@ xcodebuild \
   -allowProvisioningUpdates \
   DEVELOPMENT_TEAM="$TEAM_ID" \
   CODE_SIGN_STYLE=Automatic \
-  build | grep -E "error:|BUILD (SUCCEEDED|FAILED)" || true
+  build > "$DD/build.log" 2>&1
+RC=$?
+set -e
+grep -E "error:|BUILD (SUCCEEDED|FAILED)" "$DD/build.log" | head -40 || true
 
 APP="$(find "$DD/Build/Products/Debug-iphoneos" -maxdepth 1 -name '*.app' 2>/dev/null | head -1)"
-if [ -z "$APP" ]; then
-  echo "Derleme olmadı. Yukarıdaki 'error:' satırlarını Claude'a gönder."
+if [ "$RC" -ne 0 ] || [ -z "$APP" ]; then
+  printf '\n\033[1;31m✖ Derleme başarısız; telefona hiçbir şey kurulmadı.\033[0m\n'
+  echo "Yukarıdaki 'error:' satırlarını Claude'a gönder. Satır yoksa şunun çıktısını gönder:"
+  echo "  tail -40 \"$DD/build.log\""
   exit 1
 fi
 
