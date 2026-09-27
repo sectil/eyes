@@ -1,4 +1,25 @@
-# Bildirim planı (kanıta dayalı) — KARAR BEKLİYOR
+# Bildirim planı (kanıta dayalı) — KARARLAR ALINDI, UYGULAMA PLANI ONAY BEKLİYOR
+
+## Sahibinin kararları (2026-09-27)
+1. Günün tek bildirimi: **göz + kalkma molası** ("1 dakikalık mola? Kalk, pencereden uzağa bak.").
+2. **Odak oturumu ilk sürümde**: kişi başlatır, oturum boyunca 60 dakikada bir mola hatırlatması (Morris 2020).
+3. Ölçme: **evet, yalnızca telefonda** (bazı günler bildirim bilerek gönderilmez; sonuç kişinin kendi Gelişim'inde;
+   veri telefondan çıkmaz, yeni izin gerekmez).
+Yürüyüş, nefes ve su bildirimleri "tek alışkanlıkla başla" kuralı gereği sonraya (ilk alışkanlık oturunca, ~8 hafta).
+
+## Uygulama planı (v1) — onay bekliyor
+1. Mola ekranı (yeni, ~1 dk): kalk → pencereye yürü → uzağa bak → birkaç kez yavaşça kırp → bitti; "mola" kaydı.
+   İddiasız; kaynak Galinsky 2007, Redondo 2025. "20-20-20 kuralı" yazılmaz (Johnson & Rosenfield 2022: etkisiz).
+2. Hatırlatmalar (mevcut "Çalışma günleri" ekranı genişler): mola bildirimi aç/kapat, saat (VARSAYIM: 12:30),
+   günde 0–3 (varsayılan 1), günler. iOS izni yalnız anahtar açılınca, önce kendi açıklama kartımızla.
+   Dokununca Mola ekranı. O gün mola yapıldıysa kalan bildirim iptal. 5–6 dönüşümlü metin, varsa gerçek veriyle.
+   3 bildirim üst üste açılmazsa sıklık yarıya iner ve bir kez sorulur. 14. gün tek seferlik "devam mı, seyreltelim mi?".
+3. Odak oturumu: 1 / 2 / 4 saat; 60 dakikada bir mola bildirimi; açıkken ana sayfada küçük şerit (kalan süre, Bitir).
+4. Ölçme (telefonda): günlük bildirimde her gün %30 olasılıkla "sessiz gün"; ≥21 gün sonra Gelişim'de
+   "bildirim gelen günlerde mola oranın / sessiz günlerde". Hatırlatmalar ekranında açıkça yazılır.
+5. Kaynaklar listesine: Klasnja 2019, Bell 2023, Galinsky 2007, Morris 2020, Singh 2024.
+6. Saf mantık lib'de ve testli; iki temada görsel kontrol; sürüm notu. Swift değişikliği yok
+   (@capacitor/local-notifications zaten kurulu; iOS 64 bekleyen bildirim sınırı → 7 günlük kayan plan).
 
 Tarih: 2026-09-27. Soru (sahibi): "Su içtin mi, hareket ettin mi, nefes egzersizi yaptın mı… nasıl bildirim
 göndereceğimizi bilmiyorum; en güzel destek PubMed."

@@ -18,10 +18,10 @@ Son güncelleme: 2026-09-27.
 - [ ] Ana sayfa ilk ekran ≤5 öğe + "Gözlerin" satırı; sekmeler Bugün · Keşfet · Gelişim
 - [ ] Gabor algısal öğrenme modülü (iddiasız; SENTEZ_RAPORU.md §6 protokolü; <100 ms uyaran için yerel/native zamanlama gerekebilir — önce doğrulanacak)
 
-### 0b. Bildirimler (docs/yol-haritasi/BILDIRIM_PLANI.md) — PubMed taraması bitti, SAHİBİNİN KARARI BEKLENİYOR
-- [ ] 3 karar: günün tek bildirimi hangi alışkanlık (öneri: göz + kalkma molası); "odak oturumu" ilk sürümde mi;
-      ürün içi deney (bazı günler bildirim bilerek gönderilmez) kabul mü (ayrı KVKK maddesi)
-- [ ] Karardan sonra: bildirim izni (ayrı), saat seçimi, günde 0–3 (varsayılan 1), sessiz saatler, "zaten yaptıysan gönderme"
+### 0b. Bildirimler (docs/yol-haritasi/BILDIRIM_PLANI.md) — kararlar alındı, uygulama planı onay bekliyor
+- [x] Kararlar: günün tek bildirimi göz + kalkma molası; odak oturumu ilk sürümde; ölçme yalnız telefonda
+- [ ] v1: Mola ekranı, Hatırlatmalar (saat, günde 0–3, günler, izin kartı), odak oturumu, sessiz gün ölçümü, kaynaklar
+- [ ] Sonra (ilk alışkanlık oturunca, ~8 hafta): yürüyüş (adım düşükse), nefes molası, su (isteğe bağlı)
 - Kanıtla EKLENMEYECEKLER: "çok oturdun" uyarısı, "su içtin mi / nefes yaptın mı" soruları, nabız/HRV tetikli bildirim,
   "bugün 4 saat oldu" mesajı; nabız/HRV yalnızca Gelişim'de, yorumsuz
 
