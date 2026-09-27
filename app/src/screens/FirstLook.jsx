@@ -4,7 +4,7 @@ import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { ProgressBar } from '../components/QuestionFlow.jsx'
 import { indicesFromConnections } from '../lib/distance.js'
 import { eyeOpenness } from '../lib/blink.js'
-import { trueDepthCounter, cameraCounter } from '../lib/blinkCounters.js'
+import { readingBlinkCounter, cameraCounter } from '../lib/blinkCounters.js'
 import { median } from '../lib/trend.js'
 import { haptic } from '../lib/native.js'
 import '../styles/profile.css'
@@ -15,6 +15,7 @@ import '../styles/profile.css'
 // Görüntü kaydedilmez; yalnız sayı saklanır (lib/profile.js firstLook).
 // Dayanak: tablette okurken kırpma dakikada ~20'den ~15'e düştü (Abusharha 2017, DOI 10.2147/OPTO.S142718).
 export const LOOK_SEC = 20
+const DEV = import.meta.env?.VITE_APP_BUILD === 'dev' // telefona doğrudan kurulum (scripts/device-run.sh)
 const BASELINE_MS = 2000
 const CAMERA_WAIT_MS = 8000 // kamera bu sürede hazır olmazsa dokunarak sayıma geçilir (VARSAYIM)
 
@@ -47,6 +48,7 @@ export default function FirstLook({ trueDepth = false, bar = [0, 0.2], onDone })
   const [count, setCount] = useState(0)
   const [running, setRunning] = useState(false) // sayım başladı (kamera: temel ölçümden sonra; dokunma: ilk dokunuşta)
   const [note, setNote] = useState(null)
+  const [diag, setDiag] = useState(null) // geliştirme derlemesi: sayaç tanısı (kare/sn, taban, doruklar)
   const counter = useRef(null)
   const base = useRef([])
   const idx = useRef(null)
@@ -100,7 +102,8 @@ export default function FirstLook({ trueDepth = false, bar = [0, 0.2], onDone })
         setPhase('tap')
         return
       }
-      counter.current = cam.native ? trueDepthCounter(1 - b) : cameraCounter(b)
+      // TrueDepth: okumaya dayanıklı sayaç (aşağı bakışta kalkan taban, hızlı kırpma) — debug-firstlook, Bug 16
+      counter.current = cam.native ? readingBlinkCounter(1 - b) : cameraCounter(b)
       countRef.current = 0
       stage.current = 'run'
       setMethod(cam.native ? 'truedepth' : 'camera')
@@ -120,6 +123,7 @@ export default function FirstLook({ trueDepth = false, bar = [0, 0.2], onDone })
       if (l === 0) {
         clearInterval(id)
         stage.current = 'off'
+        setDiag(counter.current?.stats?.() ?? null)
         setCount(countRef.current)
         setRunning(false)
         haptic('success')
@@ -155,6 +159,7 @@ export default function FirstLook({ trueDepth = false, bar = [0, 0.2], onDone })
         <p className="oq-sub">Bunu her gün yolda, Göz kırpma durağında birlikte çalışacağız.</p>
         <div className="grow" />
         <p className="oq-src">Abusharha 2017: tablette okurken kırpma dakikada ~20'den ~15'e düştü. Senin sayın bir değerlendirme değil, bir başlangıç.</p>
+        {DEV && diag && <p className="oq-src" style={{ fontFamily: 'var(--font-mono)' }}>tanı · {diag.fps} kare/sn · taban {diag.base} · doruklar {diag.peaks.join(' ') || '—'}</p>}
         <button type="button" className="btn" onClick={() => onDone({ blinks: count, seconds: LOOK_SEC, method: method ?? 'self', date: new Date().toISOString() })}>
           Devam <ArrowRight size={18} aria-hidden="true" />
         </button>
