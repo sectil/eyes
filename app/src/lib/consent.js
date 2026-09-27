@@ -23,16 +23,18 @@ const HEALTH_FACTS = [
 const HEALTH_CHECK = 'Hareket verilerimin (sağlık verisi) yukarıdaki amaçla, yalnızca bu telefonda işlenmesine açık rıza veriyorum.'
 
 export const CONSENTS = {
+  // Metin sahibinin isteğiyle sadeleşti (27 Eylül: "cümleler anlaşılmıyor"). Kapsam aynı (ne, amaç, yer, süre), bu yüzden
+  // sürüm artmadı; daha önce izin vermiş kişiye yeniden sorulmaz.
   profileSync: {
-    title: 'Profilin başka telefonda da seninle olsun mu?',
-    lead: 'Karar senin. İzin vermesen de uygulamanın tamamı açık kalır; bilgilerin yalnız bu telefonda durur.',
+    title: 'Profilini hesabına kaydedelim mi?',
+    lead: 'Kaydedersen telefonunu değiştirdiğinde ya da uygulamayı silip yeniden kurduğunda bilgilerin geri gelir. Kaydetmezsen hiçbir şey kapanmaz; bilgilerin yalnız bu telefonda kalır.',
     facts: [
-      ['Ne', 'Adın, doğum tarihin, şehrin, gözlük/lens bilgin (fotoğrafın değil)'],
-      ['Neden', 'Yeni telefonda ya da yeniden kurulumda profilini geri getirmek'],
-      ['Nerede', 'Supabase sunucusu, Frankfurt (Almanya) · şifreli bağlantı'],
-      ['Ne kadar', 'İznini geri çekene ya da hesabını silene kadar'],
+      ['Ne kaydedilir?', 'Adın, doğum tarihin, şehrin ve gözlük/lens bilgin. Fotoğrafın kaydedilmez.'],
+      ['Ne işe yarar?', 'Yeni telefonda ya da yeniden kurulumda bunları tekrar yazman gerekmez.'],
+      ['Nerede durur?', "Supabase'in Almanya'daki (Frankfurt) sunucusunda. Oraya şifreli bağlantıyla gider."],
+      ['Ne kadar kalır?', 'İzni geri çekene ya da hesabını silene kadar.'],
     ],
-    check: 'Bu bilgilerimin yukarıdaki amaçla işlenmesine, yurt dışındaki sunucuda saklanmasına açık rıza veriyorum.',
+    check: "Adımın, doğum tarihimin, şehrimin ve gözlük bilgimin, profilimi geri getirmek için yurt dışındaki (Almanya) sunucuda saklanmasına izin veriyorum.",
   },
   // Apple Sağlık: hareket verisi sağlık verisidir (KVKK md. 6, özel nitelikli) → ayrı açık rıza.
   // "Ne": yürüyüş koruması (HealthPlugin.swift WalkGuard) uygulama kapalıyken de bugünün adım toplamını okur.

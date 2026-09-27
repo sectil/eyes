@@ -7,6 +7,7 @@ export const RELEASES = [
     id: '2026-09-27',
     title: '27 Eylül güncellemesi',
     items: [
+      { kind: 'change', text: "Profil kaydetme izninin metni sadeleşti: ne kaydedilir, ne işe yarar, nerede durur, ne kadar kalır; her biri tam cümleyle." },
       { kind: 'change', text: "Güvenlik ekranı artık soru değil, bilgi: göz doktoruna gitmeyi gerektiren belirtiler listelenir, \"Anladım, devam\" ile uygulamayı kullanırsın; hiçbir durumda kilitlenmez. Aynı liste Bilgi sekmesinde ve Gelişim'deki göz uyarısında da durur." },
       { kind: 'new', text: "İris haritası: gözünden başlayıp bütün insana. Göz bebeğinin çevresinde yedi alan (Göz, Dikkat, Farkındalık, Sakinlik, Kendine yaklaşım, İyi oluş, Beden); kurulumda başlangıç haritan dolar, 28. günde yeniden bakıp yan yana görürsün." },
       { kind: 'change', text: "Yeni kurulum sırası: güvenlik kontrolü testten önce, sonra İlk Bakış ve dört kısa soru (stres, uyku, hareket, kendine şefkat; her biri araştırmada kullanılan tek soruluk ölçeklerden). Yaş artık doğum tarihinden; ayrıca sorulmaz." },

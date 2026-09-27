@@ -10,9 +10,9 @@
 .cs-sheet h2 { margin: 0; font: 700 1.35rem/1.15 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
 .cs-lead { margin: -6px 0 0; color: var(--ink-2); font-size: 0.9rem; }
 .cs-facts { margin: 0; display: grid; gap: 1px; border-radius: 18px; overflow: hidden; background: var(--border); }
-.cs-facts div { display: grid; grid-template-columns: 74px 1fr; gap: 10px; padding: 11px 14px; background: var(--surface-2); }
-.cs-facts dt { font: 500 0.66rem/1.7 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
-.cs-facts dd { margin: 0; font-size: 0.82rem; line-height: 1.35; color: var(--ink); }
+.cs-facts div { display: grid; gap: 3px; padding: 11px 14px; background: var(--surface-2); }
+.cs-facts dt { font-size: 0.78rem; font-weight: 600; line-height: 1.3; color: var(--ink-3); }
+.cs-facts dd { margin: 0; font-size: 0.9rem; line-height: 1.4; color: var(--ink); }
 .cs-ok { position: relative; display: flex; gap: 12px; align-items: flex-start; padding: 14px; border-radius: 18px; border: 1.5px solid var(--border); cursor: pointer; }
 .cs-ok.on { border-color: var(--accent); }
 .cs-ok input { position: absolute; opacity: 0; width: 1px; height: 1px; }

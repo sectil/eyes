@@ -29,7 +29,7 @@ describe('açık rıza kayıtları', () => {
     expect(c.other.granted).toBe(true)
   })
   it('metin: dört satır (ne, neden, nerede, ne kadar) ve yurt dışı açıkça yazılı', () => {
-    expect(CONSENTS.profileSync.facts.map((f) => f[0])).toEqual(['Ne', 'Neden', 'Nerede', 'Ne kadar'])
+    expect(CONSENTS.profileSync.facts.map((f) => f[0])).toEqual(['Ne kaydedilir?', 'Ne işe yarar?', 'Nerede durur?', 'Ne kadar kalır?'])
     expect(CONSENTS.profileSync.facts[2][1]).toMatch(/Almanya/)
     expect(CONSENTS.profileSync.check).toMatch(/yurt dışı/)
   })
