@@ -4,7 +4,7 @@ import { haptic } from '../lib/native.js'
 import '../styles/intro.css'
 
 // Giriş ekranı (Artifact "Nefona Giriş Ekranı", onaylı): hareketsiz tek kare, tam ekran. Çizim lib/introStill.js'te;
-// yazılar tuvalde (ekran okuyucu için ayrıca gizli başlık), "Başla" göz bebeğinin karanlığında gerçek düğme.
+// tuvalde yazı yok: marka ve alt yazı DOM'da (çevrilebilir), "Başla" göz bebeğinin karanlığında gerçek düğme.
 // Eski 15 sn'lik film kaldırıldı. Ad geriye uyum için IntroFilm kaldı (App.jsx).
 export default function IntroFilm({ onDone, replay = false }) {
   const canvas = useRef(null)
@@ -25,13 +25,9 @@ export default function IntroFilm({ onDone, replay = false }) {
       still.draw(el.getContext('2d'), el.width, el.height)
     }
     paint()
-    // Yazı tipleri yüklenince yeniden çiz (ilk karede yedek yazı tipi görünmesin)
-    let alive = true
-    document.fonts?.ready.then(() => alive && paint())
     const ro = new ResizeObserver(paint)
     ro.observe(el)
     return () => {
-      alive = false
       ro.disconnect()
     }
   }, [])
@@ -44,7 +40,10 @@ export default function IntroFilm({ onDone, replay = false }) {
   return (
     <div className="intro" role="dialog" aria-labelledby="intro-title">
       <canvas ref={canvas} className="intro-canvas" aria-hidden="true" />
-      <h1 id="intro-title" className="sr-only">Nefona. Fark etmeyi yeniden öğren.</h1>
+      <div className="intro-brand">
+        <h1 id="intro-title">Nefona</h1>
+        <p>Fark etmeyi yeniden öğren.</p>
+      </div>
       <button type="button" className="btn intro-start" onClick={finish}>{replay ? 'Kapat' : 'Başla'}</button>
     </div>
   )

@@ -11,7 +11,7 @@ Son güncelleme: 2026-09-27.
   satır atlar ve uzar; yönler başlangıç/bitiş (margin-inline vb.) — Arapça/İbranice sağdan sola kendiliğinden döner;
   bağlantılı cümleler bütün cümle olarak çevrilir (Türkçe ek koda gömülmez). Arapça için yazı tipi: Noto Sans Arabic.
 - Claude beğenmediği tasarımı sahibine sunmaz; önce görsel (Artifact), onaydan sonra kod.
-- [ ] Giriş ekranı: "Nefona" ve alt yazı şu an tuvale çiziliyor → çeviri için DOM'a taşınacak
+- [x] Giriş ekranı: "Nefona" ve alt yazı tuvalden DOM'a taşındı (çevrilebilir)
 
 ## Sıradaki iş (sırayla)
 
@@ -104,7 +104,8 @@ Son güncelleme: 2026-09-27.
 
 ## Bekleyen kararlar / içerik
 - [ ] Boy ve kilo: kullanım amacı yok → amaç belirlenmedikçe eklenmez
-- [ ] Google ile giriş: Google Cloud istemci kimlikleri kullanıcıdan
+- [ ] Google ile giriş: düğme ve tasarım hazır (AccountStart, gizli). Gerekenler: Google Cloud iOS + web istemci kimliği,
+      Supabase'de Google sağlayıcısı, yerel Google oturum eklentisi; sonra lib/account.js googleSignInReady → true
 - [ ] WHO-5 resmi Türkçe madde metni kullanıcıdan
 - [ ] Nef'e "Yön" serbest metni: ayrı açık rıza
 - [ ] i18n, kronotip, özel SMTP

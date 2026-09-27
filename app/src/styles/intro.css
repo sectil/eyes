@@ -13,6 +13,11 @@
 }
 .intro .intro-start:active { transform: translate(-50%, -50%) scale(0.98); }
 .intro .intro-start:focus-visible { outline: 2px solid #eaf2f6; outline-offset: 3px; }
-.intro .sr-only {
-  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+/* Marka ve alt yazı (tasarımda tuvaldeydi; çeviri için DOM). u: 390 × 844 tasarım ölçeği (introStill.js ile aynı).
+   Alt yazının taban çizgisi ekranın ~%49,7'sinde: blok altı %50,5'te durur; uzun çeviride yukarı doğru büyür. */
+.intro-brand {
+  --u: min(calc(100vw / 390), calc(100vh / 844));
+  position: absolute; left: 24px; right: 24px; bottom: 50.5%; z-index: 1; margin: 0; text-align: center; color: #eaf2f6;
 }
+.intro-brand h1 { margin: 0; font: 700 calc(40 * var(--u)) / 1.1 var(--font-display); letter-spacing: calc(-0.8 * var(--u)); text-wrap: balance; }
+.intro-brand p { margin: calc(8 * var(--u)) 0 0; font: 400 calc(16.5 * var(--u)) / 1.35 var(--font-body); color: rgba(234, 242, 246, 0.72); text-wrap: balance; }

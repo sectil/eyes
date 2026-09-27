@@ -2,13 +2,17 @@ import { useEffect, useRef, useState } from 'react'
 import { ArrowLeft, Mail } from 'lucide-react'
 import { isIOSApp, haptic } from '../lib/native.js'
 import { TERMS_URL, PRIVACY_URL } from './Paywall.jsx'
-import { validEmail, normalizeEmail, cleanCode, validCode, sendEmailCode, verifyEmailCode, signInWithApple, friendlyError, errorDetail, RESEND_SEC, CODE_MAX } from '../lib/account.js'
+import { validEmail, normalizeEmail, cleanCode, validCode, sendEmailCode, verifyEmailCode, signInWithApple, googleSignInReady, friendlyError, errorDetail, RESEND_SEC, CODE_MAX } from '../lib/account.js'
+import SkyChart from '../components/SkyChart.jsx'
 import '../styles/account.css'
 
-// Hesap (Build 23b; Artifact "Hesap ve Profil Taslağı", onaylı): giriş filminden sonra.
+// Hesap (Build 23b; tasarım: Artifact "Nefona Hoş Geldin Ekranı" öneri 2, onaylı 2026-09-27): giriş ekranından sonra.
+// Seçim adımı tam ekran sahne: üstte Pegasus gökyüzü (SkyChart), altta giriş ekranındaki iris ufku gibi kavisli zemin;
+// başlık ve seçenekler kavisin altında tek blok. E-posta ve kod adımları aynı dilde (altın odak köşeli simge).
 // Apple ile giriş yalnız iPhone uygulamasında. E-posta: 6 haneli kod (bağlantı yerine kod: uygulamadan çıkmadan,
 // derin bağlantı gerektirmeden). "Şimdilik hesapsız dene" her zaman var (App Store 5.1.1(v)).
-// Google girişi Supabase'de Google ayarı yapılınca eklenecek (Google varsa Apple zorunlu; Apple zaten var).
+// Google: düğme hazır; Google Cloud istemci kimlikleri ve eklenti gelene dek görünmez (lib/account.js googleSignInReady).
+// Google varsa Apple zorunlu (App Store 4.8); Apple zaten var.
 // onDone({ mode, userId?, email?, date }, { givenName? })
 export default function AccountStart({ onDone, onCancel = null }) {
   const [step, setStep] = useState('choose') // choose | email | code
@@ -79,34 +83,31 @@ export default function AccountStart({ onDone, onCancel = null }) {
 
   const back = step === 'code' ? () => { setStep('email'); setMsg('') } : step === 'email' ? () => { setStep('choose'); setMsg('') } : onCancel
 
-  return (
-    <main className="screen fade-in acct">
-      <div className="acct-top">
-        {back ? <button type="button" className="btn-icon" onClick={back} aria-label="Geri"><ArrowLeft size={20} /></button> : <span />}
-      </div>
-
-      {step === 'choose' && (
-        <>
-          <svg className="acct-ring" viewBox="0 0 120 120" aria-hidden="true">
-            <circle cx="60" cy="60" r="56" fill="none" stroke="#19c2d1" strokeWidth="2.5" strokeDasharray="17 8" opacity=".6" />
-            <circle cx="60" cy="60" r="50" fill="#0b1422" stroke="#3e7bfa" strokeWidth="1" strokeDasharray="2 6" opacity=".9" />
-            <g stroke="#a9d8ff" strokeWidth="1" opacity=".8" fill="none">
-              <path d="M34 62 L48 58 L72 57 L82 50 L88 44 M88 44 L92 48 M72 57 L78 70 L76 78 M48 58 L44 72 L50 80 M48 58 L40 68" />
-              <path d="M60 57 L54 38 L42 30 L32 28" stroke="#7fe3ee" />
-            </g>
-            <g fill="#fff"><circle cx="34" cy="62" r="1.6" /><circle cx="48" cy="58" r="1.8" /><circle cx="72" cy="57" r="1.8" /><circle cx="88" cy="44" r="1.6" /><circle cx="76" cy="78" r="1.4" /><circle cx="50" cy="80" r="1.4" /><circle cx="32" cy="28" r="1.6" /></g>
-          </svg>
-          <h1 className="acct-title">Hoş geldin</h1>
-          <p className="acct-sub">Hesabınla ilerlemen yeni telefonda da seninle kalır.</p>
-          <div className="grow" />
-          <div className="acct-actions">
+  const G = googleSignInReady()
+  if (step === 'choose') {
+    return (
+      <main className="acct-hello fade-in">
+        <div className="hello-top">
+          {back && <button type="button" className="btn-icon" onClick={back} aria-label="Geri"><ArrowLeft size={20} /></button>}
+        </div>
+        <div className="hello-sky"><SkyChart /></div>
+        <div className="hello-base">
+          <h1 className="hello-title">Hoş geldin</h1>
+          <p className="hello-sub">Hesabınla ilerlemen yeni telefonda da seninle kalır.</p>
+          <div className="hello-acts">
             {native && (
               <button type="button" className="acct-btn apple" onClick={apple} disabled={busy}>
-                <svg width="15" height="17" viewBox="0 0 15 17" aria-hidden="true"><path fill="currentColor" d="M12.4 9c0-2 1.7-3 1.7-3-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.8-3.1.8-.7 0-1.6-.8-2.7-.7C3.9 3.5 2.6 4.3 1.9 5.6.4 8.2 1.5 12 3 14.1c.7 1 1.5 2.2 2.6 2.1 1.1 0 1.5-.7 2.7-.7 1.3 0 1.6.7 2.7.7 1.1 0 1.8-1 2.5-2 .8-1.2 1.1-2.3 1.1-2.4 0 0-2.2-.8-2.2-2.8ZM10.3 3c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.6.6-1 1.6-.9 2.6.9.1 1.9-.5 2.5-1.2Z" /></svg>
-                Apple ile devam et
+                <svg width="16" height="19" viewBox="0 0 15 17" aria-hidden="true"><path fill="currentColor" d="M12.4 9c0-2 1.7-3 1.7-3-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.8-3.1.8-.7 0-1.6-.8-2.7-.7C3.9 3.5 2.6 4.3 1.9 5.6.4 8.2 1.5 12 3 14.1c.7 1 1.5 2.2 2.6 2.1 1.1 0 1.5-.7 2.7-.7 1.3 0 1.6.7 2.7.7 1.1 0 1.8-1 2.5-2 .8-1.2 1.1-2.3 1.1-2.4 0 0-2.2-.8-2.2-2.8ZM10.3 3c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.6.6-1 1.6-.9 2.6.9.1 1.9-.5 2.5-1.2Z" /></svg>
+                <span>Apple ile devam et</span>
               </button>
             )}
-            <button type="button" className="acct-btn mail" onClick={() => { setStep('email'); setMsg('') }} disabled={busy}><Mail size={17} aria-hidden="true" /> E-posta ile devam et</button>
+            {G && (
+              <button type="button" className="acct-btn google" disabled={busy}>
+                <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" /><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" /><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" /><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" /></svg>
+                <span>Google ile devam et</span>
+              </button>
+            )}
+            <button type="button" className="acct-btn mail" onClick={() => { setStep('email'); setMsg('') }} disabled={busy}><Mail size={19} aria-hidden="true" /><span>E-posta ile devam et</span></button>
             <button type="button" className="link-btn acct-guest" onClick={() => onDone({ mode: 'guest', date: date() }, {})} disabled={busy}>Şimdilik hesapsız dene</button>
             {msg && <p className="acct-msg" role="alert">{msg}</p>}
             {detail && <p className="acct-detail muted small">{detail}</p>}
@@ -115,12 +116,24 @@ export default function AccountStart({ onDone, onCancel = null }) {
               {PRIVACY_URL ? <> ve <a href={PRIVACY_URL} target="_blank" rel="noreferrer">Gizlilik politikası</a></> : null}nı kabul etmiş olursun. Kamera görüntüsü telefondan çıkmaz.
             </p>
           </div>
-        </>
-      )}
-
+        </div>
+      </main>
+    )
+  }
+  const mailHero = (
+    <div className="acct-mailhero" aria-hidden="true">
+      <div><Mail size={26} /></div>
+      <i className="k tl" /><i className="k tr" /><i className="k bl" /><i className="k br" />
+    </div>
+  )
+  return (
+    <main className="screen fade-in acct">
+      <div className="acct-top">
+        <button type="button" className="btn-icon" onClick={back} aria-label="Geri"><ArrowLeft size={20} /></button>
+      </div>
       {step === 'email' && (
         <>
-          <div className="acct-icon"><Mail size={32} aria-hidden="true" /></div>
+          {mailHero}
           <h1 className="acct-title">E-postanı yaz</h1>
           <p className="acct-sub">Sana 6 haneli bir giriş kodu göndereceğiz. Şifre yok.</p>
           <label className="field">
@@ -135,7 +148,7 @@ export default function AccountStart({ onDone, onCancel = null }) {
 
       {step === 'code' && (
         <>
-          <div className="acct-icon"><Mail size={32} aria-hidden="true" /></div>
+          {mailHero}
           <h1 className="acct-title">Postana bak</h1>
           <p className="acct-sub"><b>{normalizeEmail(email)}</b> adresine gelen kodu yaz.</p>
           <label className="field">

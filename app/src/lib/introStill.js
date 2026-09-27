@@ -1,7 +1,7 @@
 // Giriş ekranı (components/IntroFilm.jsx; Artifact "Nefona Giriş Ekranı", onaylı 2026-09-27): HAREKETSİZ tek kare.
 // Eski 15 sn'lik film kaldırıldı (sahibi: "amatör"). Filmin öğeleri tek karede: gece göğünde Pegasus; yıldızlardan
 // yalnız biri (Enif) net ve altın odak köşelerinde ("fark et" anı); alttan iris ufuk gibi doğar, göz bebeğinin
-// karanlığında "Başla" (DOM düğmesi, konum PUPIL_Y). Canvas 2D, prosedürel: ağ yok, görsel dosyası yok.
+// karanlığında "Başla". Yazılar DOM'da (çevrilebilir); "Başla" göz bebeği merkezinde (PUPIL_Y). Canvas 2D, prosedürel: ağ yok, görsel dosyası yok.
 // Sağlık iddiası yok.
 
 const TAU = Math.PI * 2
@@ -129,11 +129,10 @@ function brackets(g, x, y, size, a, u) {
   g.shadowBlur = 0
 }
 
-// Tek kare. W, H: cihaz pikseli. Yazılar (Nefona, alt yazı) tuvalde; "Başla" DOM'da (PUPIL_Y).
+// Tek kare. W, H: cihaz pikseli. Tuvalde yazı YOK (çeviri): "Nefona", alt yazı ve "Başla" DOM'da (IntroFilm.jsx, intro.css).
 export function createIntroStill(doc = document) {
   const IRIS = irisTexture(doc)
   const PEG = pegasusXY()
-  const font = (w, px, fam) => `${w} ${px}px '${fam} Variable', '${fam}', system-ui, sans-serif`
   function draw(g, W, H) {
     // u: 390 × 844 tasarımına göre ölçek; geniş ekranda (iPad) yüksekliğe göre sınırlanır
     const u = Math.min(W / 390, H / 844)
@@ -197,15 +196,6 @@ export function createIntroStill(doc = document) {
     // ufuk çizgisi
     g.save(); g.strokeStyle = rgba(PALE, 0.35); g.lineWidth = 1.2 * u; g.shadowColor = rgba(TEAL, 0.9); g.shadowBlur = 18 * u
     g.beginPath(); g.arc(cx, iy, R * 0.985, Math.PI * 1.08, Math.PI * 1.92); g.stroke(); g.restore()
-    // marka
-    g.textAlign = 'center'; g.textBaseline = 'alphabetic'; g.fillStyle = rgba(INK, 1)
-    g.font = font(700, 40 * u, 'Unbounded')
-    if ('letterSpacing' in g) g.letterSpacing = `${-0.8 * u}px`
-    g.fillText('Nefona', cx, H * 0.455)
-    g.font = font(400, 16.5 * u, 'Onest')
-    if ('letterSpacing' in g) g.letterSpacing = '0px'
-    g.fillStyle = 'rgba(234,242,246,0.72)'
-    g.fillText('Fark etmeyi yeniden öğren.', cx, H * 0.497)
   }
   return { draw }
 }

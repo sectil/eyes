@@ -126,3 +126,7 @@ export async function pushProfile(userId, identity, correction) {
 
 export const accountLabel = (a) => (a?.mode === 'apple' ? 'Apple' : a?.mode === 'email' ? (a.email ?? 'E-posta') : null)
 export const signedIn = (a) => Boolean(a && (a.mode === 'apple' || a.mode === 'email') && a.userId)
+
+// Google ile giriş: düğme ve tasarım hazır (AccountStart). Google Cloud'da iOS ve web istemci kimlikleri oluşturulup
+// Supabase'de Google sağlayıcısı açılınca ve yerel Google oturum eklentisi eklenince true olur. O zamana dek düğme görünmez.
+export const googleSignInReady = () => false
