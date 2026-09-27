@@ -5,6 +5,14 @@ Kural: her özellik PubMed kaynaklı bilimsel dayanakla gelir (uygulamadaki kayn
 makalesi ve DOI'siyle girer); sağlık iddiası yok; KVKK açık rıza her veri amacı için ayrı.
 Son güncelleme: 2026-09-27.
 
+## Tasarım kuralları (sahibi, her ekran için geçerli)
+- Uygulamaya girdikten sonraki her ekran koyu VE açık temada kusursuz olur (giriş ekranı bilinçli olarak tek sahne: gece).
+- İleride bütün diller gelecek: hiçbir metin çizime/görsele gömülmez; düğme ve başlıklar uzun çeviride (Almanca vb.)
+  satır atlar ve uzar; yönler başlangıç/bitiş (margin-inline vb.) — Arapça/İbranice sağdan sola kendiliğinden döner;
+  bağlantılı cümleler bütün cümle olarak çevrilir (Türkçe ek koda gömülmez). Arapça için yazı tipi: Noto Sans Arabic.
+- Claude beğenmediği tasarımı sahibine sunmaz; önce görsel (Artifact), onaydan sonra kod.
+- [ ] Giriş ekranı: "Nefona" ve alt yazı şu an tuvale çiziliyor → çeviri için DOM'a taşınacak
+
 ## Sıradaki iş (sırayla)
 
 ### 0. Yeniden düşünme planı (docs/yol-haritasi/YENIDEN_DUSUNME.md) — kararlar alındı
