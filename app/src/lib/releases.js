@@ -7,6 +7,7 @@ export const RELEASES = [
     id: '2026-09-27',
     title: '27 Eylül güncellemesi',
     items: [
+      { kind: 'new', text: "Nefes yenilendi: sekiz kalıp, her birinin ritmi çizili ve kanıt düzeyi (güçlü, orta, sınırlı) yanında. Yeni: Eşit ritim, Karın nefesi, Burun değiştir (hangi taraftan alıp vereceğin ekranda) ve Vızıltı (mırıldanarak veriş). 1 dakikada sakinleş kısayolu; sakinlik puanı Başla'dan sonra tek dokunuş, istersen puansız başlarsın." },
       { kind: 'change', text: "Profil kaydetme izninin metni sadeleşti: ne kaydedilir, ne işe yarar, nerede durur, ne kadar kalır; her biri tam cümleyle." },
       { kind: 'change', text: "Güvenlik ekranı artık soru değil, bilgi: göz doktoruna gitmeyi gerektiren belirtiler listelenir, \"Anladım, devam\" ile uygulamayı kullanırsın; hiçbir durumda kilitlenmez. Aynı liste Bilgi sekmesinde ve Gelişim'deki göz uyarısında da durur." },
       { kind: 'new', text: "İris haritası: gözünden başlayıp bütün insana. Göz bebeğinin çevresinde yedi alan (Göz, Dikkat, Farkındalık, Sakinlik, Kendine yaklaşım, İyi oluş, Beden); kurulumda başlangıç haritan dolar, 28. günde yeniden bakıp yan yana görürsün." },

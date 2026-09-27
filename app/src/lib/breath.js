@@ -30,28 +30,94 @@ export const PHASE = {
 export const LIMITS = { in: [2, 10], in2: [0, 3], hold: [0, HOLD_MAX], out: [2, 12], hold2: [0, HOLD_MAX] }
 export const STEP_SEC = 0.5
 
-// Kalıp = dört (uzun verişte beş) aşamanın süreleri; hepsi düzenlenebilir
+// Kalıp = dört (uzun verişte beş) aşamanın süreleri; hepsi düzenlenebilir.
+// level: kanıt düzeyi (Artifact "Nefona Nefes", onaylı): 'strong' tutarlı meta-analiz; 'moderate' en az bir iyi RKÇ;
+// 'limited' küçük/karışık çalışmalar. rhythm: kartta kısa ritim; blurb: seçili kartın cümlesi; how: nasıl yapılır.
+// sides: aşamalara sırayla burun deliği (burun değiştir; tur = sides.length / aşama sayısı kez tekrar);
+// hum: verişte mırıldanma (vızıltı). Yeni kalıpların süreleri makalede açık değil → VARSAYIM, kullanıcı değiştirir.
+export const LEVELS = { strong: 'Güçlü kanıt', moderate: 'Orta kanıt', limited: 'Sınırlı kanıt' }
 export const PATTERNS = {
   calm: {
     id: 'calm',
     title: 'Sakin ritim',
     sub: '4 sn al · 6 sn ver · dakikada 6 nefes',
+    rhythm: '4 · 6',
+    level: 'strong',
+    blurb: '4 saniye al, 6 saniye ver. Kanıtı en sağlam kalıp: yavaş nefes sırasında kalp ritmi değişkenliği artıyor.',
+    how: ['Burnundan 4 saniye al.', '6 saniyede yavaşça ver.', 'İlk seanslar biraz daha hızlı başlar; alışınca dakikada 6 nefese iner.'],
     evidence: 'En sağlam kanıt bu kalıpta: yavaş nefes sırasında kalp ritmi değişkenliği tutarlı biçimde artıyor (Laborde 2022; Marchant 2025).',
     secs: { in: 4, in2: 0, hold: 0, out: 6, hold2: 0 },
     ramp: { in: 3.5, in2: 0, hold: 0, out: 4.5, hold2: 0 },
+  },
+  equal: {
+    id: 'equal',
+    title: 'Eşit ritim',
+    sub: '5 sn al · 5 sn ver · dakikada 6 nefes',
+    rhythm: '5 · 5',
+    level: 'strong',
+    blurb: '5 saniye al, 5 saniye ver. Dakikada 6 nefes; alış ve veriş eşit.',
+    how: ['5 saniye al.', '5 saniye ver.', 'Nefes akıcı olsun, arada durma.'],
+    evidence: "5:5 oranı, 4:6 kadar kalp ritmi değişkenliğini artırdı; ikisi de kutu ve 4-7-8'den önde (Marchant 2025, n=84; Laborde 2022).",
+    secs: { in: 5, in2: 0, hold: 0, out: 5, hold2: 0 },
   },
   sigh: {
     id: 'sigh',
     title: 'Uzun veriş',
     sub: 'İki kısa alış (burun) · uzun veriş (ağız)',
+    rhythm: '2+1 · 5',
+    level: 'moderate',
+    blurb: 'Burundan al, sonuna kısa bir alış daha ekle, ağızdan uzun ver.',
+    how: ['Burnundan al.', 'Sonuna kısa bir alış daha ekle.', 'Ağzından uzun ve yavaş ver.'],
     evidence: 'Günde 5 dk, 28 gün: ruh halinde meditasyondan daha iyi; kaygıda fark yok (Balban 2023, n=108).',
     // VARSAYIM: Balban süre vermez ("uzun veriş"); 2 + 1 + 5 sn ≈ 7,5/dk
     secs: { in: 2, in2: 1, hold: 0, out: 5, hold2: 0 },
+  },
+  belly: {
+    id: 'belly',
+    title: 'Karın nefesi',
+    sub: '5 sn al · 7 sn ver · karından',
+    rhythm: '5 · 7',
+    level: 'limited',
+    blurb: 'Bir elin göğsünde, biri karnında: alırken karnın yükselir, göğsün sabit kalır.',
+    how: ['Bir elin göğsünde, biri karnında olsun.', 'Alırken karnın yükselsin, göğsün sabit kalsın.', 'Verirken karnın yavaşça insin.'],
+    evidence: '8 haftada 20 seans karın nefesi: sürekli dikkat arttı, olumsuz duygu ve kortizol azaldı (Ma 2017, n=40; küçük, tek çalışma).',
+    // VARSAYIM: Ma 2017'de ortalama dakikada 4 nefes (geri bildirim cihazıyla); başlangıç için 5/dk
+    secs: { in: 5, in2: 0, hold: 0, out: 7, hold2: 0 },
+  },
+  nose: {
+    id: 'nose',
+    title: 'Burun değiştir',
+    sub: 'Soldan al · sağdan ver · sağdan al · soldan ver',
+    rhythm: '4 · 6 ×2',
+    level: 'limited',
+    blurb: 'Bir burun deliğinden al, diğerinden ver; her iki nefeste taraf değişir.',
+    how: ['Sağ elinin başparmağı sağ burun deliğinde, yüzük parmağı solda dursun.', 'Sağı kapat, soldan al; solu kapat, sağdan ver. Sonra sağdan al, soldan ver.', 'Ekran hangi taraftan alıp vereceğini gösterir; burnun tıkalıysa bu kalıbı atla.'],
+    evidence: 'Kaygı azaldı, ama sessiz dinlenmede de azaldı (Telles 2026, n=45). Göz içi basıncını artırmadı (Kulkarni 2022, n=164).',
+    // VARSAYIM: süreler; gelenekte tutma da var, burada yok (tutma isteğe bağlı)
+    secs: { in: 4, in2: 0, hold: 0, out: 6, hold2: 0 },
+    sides: ['L', 'R', 'R', 'L'],
+  },
+  hum: {
+    id: 'hum',
+    title: 'Vızıltı',
+    sub: 'Burundan al · "mmm" diye mırıldanarak ver',
+    rhythm: '4 · 7 mmm',
+    level: 'limited',
+    blurb: 'Burundan al, ağzın kapalı "mmm" diye mırıldanarak ver; titreşimi hisset.',
+    how: ['Burnundan al.', 'Ağzın kapalı, "mmm" diye mırıldanarak ver; titreşimi hisset.', 'Sesin başkasını rahatsız etmeyeceği bir yerde yap.'],
+    evidence: '5 dk vızıltılı nefes, yavaş nefese göre toparlanmada kalp ritmi değişkenliğini daha çok artırdı; tansiyon farkı yok (Ghati 2020, n=70, hipertansif). Mırıldanmak burundaki nitrik oksidi artırır (Maniscalco 2003).',
+    // VARSAYIM: süreler (Ghati 2020 süre vermez)
+    secs: { in: 4, in2: 0, hold: 0, out: 7, hold2: 0 },
+    hum: true,
   },
   box: {
     id: 'box',
     title: 'Kutu',
     sub: 'Al · tut · ver · bekle — 4 aşama',
+    rhythm: '4·4·4·4',
+    level: 'limited',
+    blurb: 'Al, tut, ver, bekle; hepsi aynı süre. Tutmalar isteğe bağlı.',
+    how: ['Al, tut, ver, bekle; hepsi aynı süre.', 'Tutmalar zorlarsa kısalt ya da 0 yap.'],
     evidence: "Kısa vadeli, tutarsız fayda; doğrudan karşılaştırmada 6/dk'nın gerisinde (Marchant 2025; Dujawara 2026). İsteğe bağlı.",
     secs: { in: 4, in2: 0, hold: 4, out: 4, hold2: 4 },
   },
@@ -59,12 +125,29 @@ export const PATTERNS = {
     id: 'custom',
     title: 'Özel',
     sub: 'Süreleri kendin kur',
+    rhythm: 'kendin kur',
+    level: null,
+    blurb: 'Al, tut, ver, bekle sürelerini kendin kur.',
+    how: ['Süreleri kendin kur; tutmalar isteğe bağlı.', 'Zorlanırsan süreyi kısalt.'],
     evidence: 'Kendi kalıbın. Tutmalar isteğe bağlı; zorlanırsan süreyi kısalt.',
     secs: { in: 4, in2: 0, hold: 0, out: 6, hold2: 0 },
   },
 }
-export const PATTERN_ORDER = ['calm', 'sigh', 'box', 'custom']
+export const PATTERN_ORDER = ['calm', 'equal', 'sigh', 'belly', 'nose', 'hum', 'box', 'custom']
 export const DEFAULT_PATTERN = 'calm'
+// 1 dakikada sakinleş (Nefes ekranındaki kısayol): Uzun veriş, 60 sn. Riedl 2026 pilot (n=47): 1 dk kutu ya da uzun veriş
+// durum kaygısını pasif kontrolden çok düşürdü. Etki iddiası yok; kısayol.
+export const QUICK = { pattern: 'sigh', durationSec: 60 }
+
+// Aşamanın ekranda ve seste adı: burun değiştirmede taraf, vızıltıda mırıldanma
+const SIDE_WORD = { L: { in: 'Soldan al', out: 'Soldan ver' }, R: { in: 'Sağdan al', out: 'Sağdan ver' } }
+export function phaseText(phase) {
+  const base = PHASE[phase.kind]
+  const side = phase.side && SIDE_WORD[phase.side]?.[phase.kind]
+  if (side) return { label: side, say: side, sub: `${phase.side === 'L' ? 'Sağ' : 'Sol'} burun deliğin kapalı` }
+  if (phase.hum && phase.kind === 'out') return { label: 'Mırıldanarak ver', say: 'Mmm', sub: 'Ağzın kapalı, "mmm"' }
+  return { label: base.label, say: base.say, sub: null }
+}
 
 // Görsel ve ses seçenekleri (referans 1–2)
 export const VISUALS = [
@@ -125,9 +208,21 @@ export function resolveSecs({ pattern = DEFAULT_PATTERN, edits = null, priorSess
 // Seans planı: aşamalar (0 sn'ler atılmış), döngü sayısı, toplam süre
 export function makePlan({ pattern = DEFAULT_PATTERN, durationSec = 180, priorSessions = 0, edits = null } = {}) {
   const { secs, ramped, def } = resolveSecs({ pattern, edits, priorSessions })
-  const phases = KIND_ORDER.filter((k) => secs[k] > 0).map((k) => ({ kind: k, sec: secs[k] }))
+  let phases = KIND_ORDER.filter((k) => secs[k] > 0).map((k) => ({ kind: k, sec: secs[k] }))
+  // Burun değiştir: tur iki nefes (sides uzunluğu kadar alış/veriş), her aşamaya taraf; tutmalar tarafsız
+  if (def.sides?.length) {
+    const breaths = def.sides.filter((_, i) => i % 2 === 0).length
+    const one = phases
+    phases = []
+    let si = 0
+    for (let b = 0; b < breaths; b++) {
+      for (const p of one) phases.push(p.kind === 'in' || p.kind === 'out' ? { ...p, side: def.sides[si++] } : { ...p })
+    }
+  }
+  if (def.hum) phases = phases.map((p) => (p.kind === 'out' ? { ...p, hum: true } : p))
   const cycleSec = phases.reduce((a, p) => a + p.sec, 0)
   const cycles = Math.max(1, Math.round(durationSec / cycleSec))
+  const breathsPerCycle = Math.max(1, phases.filter((p) => p.kind === 'in').length)
   return {
     pattern: def.id,
     title: def.title,
@@ -135,7 +230,7 @@ export function makePlan({ pattern = DEFAULT_PATTERN, durationSec = 180, priorSe
     cycleSec,
     cycles,
     totalSec: cycles * cycleSec,
-    bpm: +(60 / cycleSec).toFixed(1),
+    bpm: +((60 * breathsPerCycle) / cycleSec).toFixed(1),
     ramped,
   }
 }
@@ -254,11 +349,7 @@ export const markSafetySeen = (storage) => {
 
 // Aynı bilgi, üç kalın başlıkta (ekranda okunur olsun; Artifact "Yönerge Kartları" Y8)
 export const SAFETY_ROWS = [
-  { icon: 'dizzy', lead: 'Baş dönmesi, karıncalanma, nefes darlığı olursa', text: 'normal nefesine dön. Nefes tutmak isteğe bağlı; zorlanırsan atla ya da süreyi kısalt.' },
-  { icon: 'heart', lead: 'Gebelik, kalp ya da akciğer rahatsızlığı, glokom, nöbet, panik atak veya başka bir ruhsal sağlık durumu varsa', text: 'nefes tutmalı kalıplardan önce hekimine danış.' },
-  { icon: 'car', lead: 'Araç kullanırken, suda ya da ayaktayken yapma.', text: 'Bu bir alıştırmadır, tıbbi bir uygulama değil.' },
+  { icon: 'dizzy', lead: 'Başın döner ya da karıncalanırsa dur', text: 'Normal nefesine dön. Tutmalar isteğe bağlı; zorlanırsan süreyi kısalt.' },
+  { icon: 'heart', lead: 'Bir sağlık durumun varsa önce sor', text: 'Gebelik, kalp ya da akciğer rahatsızlığı, glokom, nöbet ya da panik atakta nefes tutmalı kalıplardan önce hekimine danış.' },
+  { icon: 'car', lead: 'Araç kullanırken, suda ya da ayaktayken yapma', text: 'Bu bir alıştırma; tıbbi bir uygulama değil.' },
 ]
-export const SAFETY_TEXT =
-  'Bu alıştırma tıbbi bir uygulama değildir. Baş dönmesi, karıncalanma, nefes darlığı ya da huzursuzluk hissedersen normal nefesine dön. ' +
-  'Nefes tutma bölümleri isteğe bağlıdır; zorlanırsan atla veya süreyi kısalt. Gebelik, kalp veya akciğer rahatsızlığı, glokom, nöbet öyküsü, ' +
-  'panik atak ya da başka bir ruhsal sağlık durumun varsa nefes tutmalı kalıplardan önce hekimine danış. Araç kullanırken, suda veya ayaktayken yapma.'

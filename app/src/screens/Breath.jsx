@@ -1,33 +1,51 @@
 import { useEffect, useRef, useState } from 'react'
-import { X, Play, Pause, Check, RotateCcw, ShieldAlert, HeartPulse, Car, Info, ChevronRight, ChevronLeft, SkipBack, SkipForward, Settings2, Vibrate, VibrateOff, Volume2, VolumeX, MessageSquareText, MessageSquareOff } from 'lucide-react'
+import { X, Play, Pause, Check, RotateCcw, ShieldAlert, HeartPulse, Car, Info, ChevronRight, ChevronLeft, SkipBack, SkipForward, Settings2, Volume2, VolumeX, SlidersHorizontal, Zap } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
-import PrefToggle from '../components/PrefToggle.jsx'
+import BreathWave from '../components/BreathWave.jsx'
 import BreathVisual from '../components/BreathVisual.jsx'
 import { haptic } from '../lib/native.js'
 import { speak, unlockAudio } from '../lib/cue.js'
 import { playBreathSound, unlockBreathSfx } from '../lib/breathSfx.js'
 import {
   PATTERNS, PATTERN_ORDER, PHASE, KIND_ORDER, LIMITS, STEP_SEC, DURATIONS_SEC, CALM_SCALE, SAFETY_ROWS, PREP_SEC,
-  VISUALS, SOUNDS, SOUND_SLOTS,
+  VISUALS, SOUNDS, SOUND_SLOTS, LEVELS, QUICK, phaseText,
   makePlan, resolveSecs, phaseAt, phaseStartSec, makeRecord, programProgress, loadBreathOpts, saveBreathOpts, safetySeen, markSafetySeen, isBreath,
 } from '../lib/breath.js'
 import '../styles/breath.css'
 
-const KIND_ROW = { in: 'Nefes al', in2: 'İkinci alış', hold: 'Nefes tut', out: 'Nefes ver', hold2: 'Bekle' }
+const KIND_ROW = { in: 'Al', in2: 'Ek alış', hold: 'Tut', out: 'Ver', hold2: 'Bekle' }
 const fmtSec = (v) => (Number.isInteger(v) ? `${v}` : v.toFixed(1).replace('.', ','))
-const visualTitle = (id) => VISUALS.find((v) => v.id === id)?.title ?? ''
+const fmtNum = (v) => fmtSec(+v) // Türkçe ondalık virgül (7,5)
+const LEVEL_SHORT = { strong: 'güçlü', moderate: 'orta', limited: 'sınırlı' }
+
+// Kanıt düzeyi rozeti (Artifact "Nefona Nefes"): güçlü · orta · sınırlı; renk tek başına anlam taşımaz, yazı hep yanında
+function Level({ level, short = false }) {
+  if (!level) return null
+  return <span className={`br-ev ${level}${short ? ' sm' : ''}`}><i aria-hidden="true" />{short ? LEVEL_SHORT[level] : LEVELS[level]}</span>
+}
+
+// Basit anahtar satırı (ayrıntı ekranı): etiket + anahtar; trailing: anahtarın solunda ek düğme
+function SwitchRow({ label, sub, checked, onChange, trailing = null }) {
+  return (
+    <div className="br-sw">
+      <span className="lbl">{label}{sub && <small>{sub}</small>}</span>
+      {trailing}
+      <button type="button" role="switch" aria-checked={checked} aria-label={label} className="br-switch" onClick={() => onChange(!checked)}><i /></button>
+    </div>
+  )
+}
 
 // Güvenlik metni: üç kalın başlıklı satır (lib/breath.js SAFETY_ROWS)
 const SAFETY_ICON = { dizzy: ShieldAlert, heart: HeartPulse, car: Car }
 function SafetyRows() {
   return (
-    <div className="stack" style={{ gap: 8 }}>
+    <div className="br-safe">
       {SAFETY_ROWS.map((r) => {
         const Icon = SAFETY_ICON[r.icon] ?? ShieldAlert
         return (
-          <div key={r.icon} className="card row" style={{ alignItems: 'flex-start', gap: 10 }}>
-            <Icon size={20} aria-hidden="true" style={{ flex: 'none', marginTop: 2, color: 'var(--warn)' }} />
-            <p className="small" style={{ margin: 0 }}><strong>{r.lead}</strong> {r.text}</p>
+          <div key={r.icon}>
+            <Icon size={20} aria-hidden="true" />
+            <p><b>{r.lead}</b>{r.text}</p>
           </div>
         )
       })}
@@ -48,14 +66,23 @@ export function planAtLeast(args, minSec = null) {
 // kendisi değiştirirse o kaydedilir).
 // askCalm false: başta ve sonda sakinlik puanı sorulmaz (hatırlatmadan açılan 1 dk nefes; kayıt calmBefore/After null).
 // minSec: seans en az bu kadar sürer (hatırlatmadan açılan 1 dk nefes; planAtLeast).
+// Tasarım: Artifact "Nefona Nefes" (onaylı) — seçim (ritmi çizili kalıplar, kanıt düzeyi), ayrıntı, başlarken sakinlik
+// (alttan sayfa, puansız başlanabilir), seans (burun değiştirmede taraf, vızıltıda "mmm"), güvenlik bir kez.
 export default function Breath({ sessions = [], presetSec = null, askCalm = true, minSec = null, onBack, onFinish }) {
   const prior = sessions.filter(isBreath).length
   const [opts, setOpts] = useState(() => (presetSec ? { ...loadBreathOpts(), durationSec: presetSec } : loadBreathOpts()))
-  const [screen, setScreen] = useState(() => (safetySeen() ? 'setup' : 'safety')) // safety | setup | sound | info | run | result
+  const [screen, setScreen] = useState(() => (safetySeen() ? 'pick' : 'safety')) // safety | pick | detail | sound | info | run | result
+  const [back, setBack] = useState('pick') // bilgi/ses ekranından dönülecek yer
+  const [sheet, setSheet] = useState(false) // başlarken sakinlik sayfası
+  const [quick, setQuick] = useState(false) // 1 dakikada sakinleş (kayıtlı tercih değişmez)
   const [calmBefore, setCalmBefore] = useState(null)
   const [calmAfter, setCalmAfter] = useState(null)
   const [strained, setStrained] = useState(false)
-  const plan = planAtLeast({ pattern: opts.pattern, durationSec: opts.durationSec, priorSessions: prior, edits: opts.edits }, minSec)
+  const ask = askCalm && !quick
+  const planArgs = quick
+    ? { pattern: QUICK.pattern, durationSec: QUICK.durationSec, priorSessions: prior, edits: null }
+    : { pattern: opts.pattern, durationSec: opts.durationSec, priorSessions: prior, edits: opts.edits }
+  const plan = planAtLeast(planArgs, minSec)
   const { secs } = resolveSecs({ pattern: opts.pattern, edits: opts.edits, priorSessions: prior })
   const def = PATTERNS[opts.pattern]
   const program = programProgress(sessions)
@@ -80,10 +107,13 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
     const v = Math.min(hi, Math.max(lo, cur + dir * STEP_SEC))
     update({ edits: { ...secs, [kind]: v } })
   }
+  const pick = (id) => update({ pattern: id, edits: null })
+  const open = (to) => { setBack(screen); setScreen(to); window.scrollTo?.(0, 0) }
 
   function start() {
     unlockAudio()
     unlockBreathSfx()
+    setSheet(false)
     setPrep(PREP_SEC)
     setPaused(false)
     lastKey.current = -1
@@ -91,6 +121,17 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
     setLive(phaseAt(plan, 0))
     setScreen('run')
   }
+  // Başla: sakinlik sorulacaksa önce alttan sayfa; kısayol ve hatırlatmadan açılan nefes doğrudan başlar
+  const begin = () => (ask ? setSheet(true) : start())
+  const beginQuick = () => {
+    setQuick(true)
+    setCalmBefore(null)
+  }
+  // Kısayol seçilince plan yeniden hesaplanır; seans bir sonraki çizimde başlar (plan güncel olsun)
+  useEffect(() => {
+    if (quick && screen !== 'run' && screen !== 'result') start()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [quick])
 
   // Hazırlık geri sayımı, sonra seans
   useEffect(() => {
@@ -115,7 +156,7 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
       const key = st.cycle * 100 + st.index
       if (!st.done && key !== lastKey.current) {
         lastKey.current = key
-        cuePhase(st.phase.kind)
+        cuePhase(st.phase)
       }
       if (st.done) {
         clearInterval(id)
@@ -129,11 +170,11 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screen, prep, paused])
 
-  function cuePhase(kind) {
-    const ph = PHASE[kind]
+  function cuePhase(phase) {
+    const ph = PHASE[phase.kind]
     if (opts.vibrate) haptic(ph.haptic)
-    if (opts.sound) playBreathSound(opts.sounds[kind] ?? 'none', opts.volume)
-    if (opts.sound && opts.voice) speak(ph.say)
+    if (opts.sound) playBreathSound(opts.sounds[phase.kind] ?? 'none', opts.volume)
+    if (opts.sound && opts.voice) speak(phaseText(phase).say)
   }
   function seekTo(sec) {
     t0.current = performance.now() - sec * 1000
@@ -173,27 +214,30 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
 
   if (screen === 'safety') {
     return (
-      <main className="screen fade-in">
-        <PageHeader onBack={onBack} eyebrow="Bir kez" title="Başlamadan önce" />
+      <main className="screen fade-in br">
+        <PageHeader onBack={onBack} eyebrow="Nefesten önce · bir kez" title="Üç şey bil, sonra başla" />
         <SafetyRows />
-        <p className="muted small">Bu metin nefes ekranındaki bilgi sayfasında her zaman duracak. Bir daha sormayacağım.</p>
-        <button className="btn" onClick={() => { markSafetySeen(); setScreen('setup') }}><Check size={18} aria-hidden="true" /> Anladım</button>
+        <p className="muted small">Bu üç madde Nefes'in bilgi sayfasında hep durur.</p>
+        <div className="grow" />
+        <button className="btn" onClick={() => { markSafetySeen(); setScreen('pick') }}><Check size={18} aria-hidden="true" /> Anladım</button>
       </main>
     )
   }
 
   if (screen === 'info') {
     return (
-      <main className="screen fade-in">
-        <PageHeader onBack={() => setScreen('setup')} eyebrow="Nefes pratiği" title="Kalıplar ve kanıt" />
-        {PATTERN_ORDER.map((id) => (
-          <div key={id} className="card stack" style={{ gap: 4 }}>
-            <strong>{PATTERNS[id].title}</strong>
-            <span className="muted small">{PATTERNS[id].sub}</span>
-            <p className="small">{PATTERNS[id].evidence}</p>
-          </div>
-        ))}
-        <p className="muted small">Program: günde 5 dk, 28 gün (Balban 2023). İlk üç seansta Sakin ritim biraz daha hızlı başlar; alışınca dakikada 6'ya iner.</p>
+      <main className="screen fade-in br">
+        <PageHeader onBack={() => setScreen(back === 'info' ? 'pick' : back)} eyebrow="Nefes" title="Kalıplar ve kanıt" subtitle="Kanıt düzeyi PubMed'deki çalışmalara göre: güçlü, orta, sınırlı." />
+        <div className="br-evlist">
+          {PATTERN_ORDER.map((id) => (
+            <div key={id}>
+              <div className="h"><b>{PATTERNS[id].title}</b><Level level={PATTERNS[id].level} short /></div>
+              <span className="r">{PATTERNS[id].sub}</span>
+              <p>{PATTERNS[id].evidence}</p>
+            </div>
+          ))}
+        </div>
+        <p className="muted small">Program: günde 5 dk, 28 gün (Balban 2023). İlk üç seansta Sakin ritim biraz daha hızlı başlar; alışınca dakikada 6'ya iner. 4-7-8 ve hızlı nefes teknikleri bilerek yok: kanıtı zayıf ya da riskli.</p>
         <SafetyRows />
       </main>
     )
@@ -201,21 +245,21 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
 
   if (screen === 'sound') {
     return (
-      <main className="screen fade-in">
-        <PageHeader onBack={() => setScreen('setup')} eyebrow="Nefes pratiği" title="Ses" />
+      <main className="screen fade-in br">
+        <PageHeader onBack={() => setScreen('detail')} eyebrow="Nefes" title="Ses" />
         <div className="list">
           {SOUND_SLOTS.map((slot) => (
             <div key={slot.id} className="br-row" style={{ flexDirection: 'column', alignItems: 'stretch', gap: 8 }}>
               <span className="lbl">{slot.title}</span>
               <div className="br-sound-grid" role="group" aria-label={`${slot.title} sesi`}>
-                {SOUNDS.map((s) => (
+                {SOUNDS.map((so) => (
                   <button
-                    key={s.id}
+                    key={so.id}
                     type="button"
-                    aria-pressed={opts.sounds[slot.id] === s.id}
-                    onClick={() => { unlockBreathSfx(); update({ sounds: { ...opts.sounds, [slot.id]: s.id } }); playBreathSound(s.id, opts.volume) }}
+                    aria-pressed={opts.sounds[slot.id] === so.id}
+                    onClick={() => { unlockBreathSfx(); update({ sounds: { ...opts.sounds, [slot.id]: so.id } }); playBreathSound(so.id, opts.volume) }}
                   >
-                    {s.title}
+                    {so.title}
                   </button>
                 ))}
               </div>
@@ -230,80 +274,135 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
             </span>
           </div>
         </div>
-        <p className="muted small">Sesli komut açıksa ton ile birlikte "Nefes al… tut… ver…" de söylenir. Sağ üstteki ses düğmesi hepsini susturur.</p>
+        <p className="muted small">Sesli komut açıksa ton ile birlikte "Nefes al… tut… ver…" de söylenir. Burun değiştirmede "Soldan al, sağdan ver", vızıltıda "Mmm" denir.</p>
       </main>
     )
   }
 
-  if (screen === 'setup') {
-    const canStart = !askCalm || calmBefore != null
-    return (
-      <main className="screen fade-in">
-        <div className="row between">
-          <PageHeader onBack={onBack} eyebrow="Yaşam · nefes" title="Nefes pratiği" subtitle={program.days > 0 ? `Program ${program.days}/${program.target} gün · bugün ${Math.round(program.todaySec / 60)} dk` : undefined} />
-          <button type="button" className="btn-icon" onClick={() => setScreen('info')} aria-label="Bilgi"><Info size={20} /></button>
-        </div>
-
-        <div className="br-chips" role="group" aria-label="Kalıp">
-          {PATTERN_ORDER.map((id) => (
-            <button key={id} type="button" className="br-chip" aria-pressed={opts.pattern === id} onClick={() => update({ pattern: id, edits: null })}>{PATTERNS[id].title}</button>
+  const calmSheet = sheet && (
+    <>
+      <div className="br-scrim" onClick={() => setSheet(false)} aria-hidden="true" />
+      <div className="br-sheet" role="dialog" aria-modal="true" aria-labelledby="br-calm-t">
+        <i className="grab" aria-hidden="true" />
+        <h2 id="br-calm-t">Şu an ne kadar sakinsin?</h2>
+        <p>Bittiğinde aynı soruyu sorarım; önce ve sonrası Gelişim'e yazılır.</p>
+        <div className="br-calm5" role="group" aria-label="1 gergin, 5 çok sakin">
+          {CALM_SCALE.map((v) => (
+            <button key={v} type="button" aria-pressed={calmBefore === v} onClick={() => setCalmBefore(v)}>{v}</button>
           ))}
         </div>
+        <div className="br-ends"><span>1 · gergin</span><span>5 · çok sakin</span></div>
+        <button type="button" className="btn" onClick={start} disabled={calmBefore == null}><Play size={18} aria-hidden="true" /> Başla</button>
+        <button type="button" className="br-link" onClick={() => { setCalmBefore(null); start() }}>Puansız başla</button>
+      </div>
+    </>
+  )
 
-        <div className="list">
-          {KIND_ORDER.filter((k) => k !== 'in2' || opts.pattern === 'sigh' || secs.in2 > 0).map((k) => {
+  if (screen === 'detail') {
+    const kinds = KIND_ORDER.filter((k) => k !== 'in2' || opts.pattern === 'sigh' || secs.in2 > 0)
+    const sideLegend = plan.phases.some((p) => p.side)
+    return (
+      <main className="screen fade-in br">
+        <PageHeader onBack={() => setScreen('pick')} eyebrow={opts.edits ? 'Kalıp · düzenlendi' : 'Kalıp'} title={def.title} />
+        <div className="br-detwave">
+          <BreathWave phases={plan.phases} width={300} height={86} labels className="big" />
+          {sideLegend && <div className="br-ends"><span className="l">● sol burun</span><span className="r">● sağ burun</span></div>}
+        </div>
+        <p className="muted small br-meta">dakikada {fmtNum(plan.bpm)} nefes · {plan.cycles} döngü{plan.ramped ? ' · ilk seanslarda biraz hızlı' : ''}</p>
+        <div className="br-steps" style={{ '--n': kinds.length }}>
+          {kinds.map((k) => {
             const [lo, hi] = LIMITS[k]
             const v = secs[k]
             return (
-              <div key={k} className="br-row">
-                <span className="lbl">{KIND_ROW[k]}{(k === 'hold' || k === 'hold2') && <small>isteğe bağlı · 0 = yok</small>}</span>
-                <span className="br-stepper">
+              <div key={k} className={`st${v === 0 ? ' off' : ''}`}>
+                <small>{KIND_ROW[k]}</small>
+                <b aria-label={`${KIND_ROW[k]} ${fmtSec(v)} saniye`}>{fmtSec(v)}<em>sn</em></b>
+                <span className="pm">
                   <button type="button" onClick={() => stepSec(k, -1)} disabled={v <= lo} aria-label={`${KIND_ROW[k]} azalt`}>−</button>
-                  <output aria-label={`${KIND_ROW[k]} ${fmtSec(v)} saniye`}>{fmtSec(v)}</output>
                   <button type="button" onClick={() => stepSec(k, 1)} disabled={v >= hi} aria-label={`${KIND_ROW[k]} artır`}>+</button>
                 </span>
               </div>
             )
           })}
         </div>
-        <p className="muted small" style={{ marginTop: -6 }}>
-          {def.title}{opts.edits ? ' · düzenlendi' : ''} · dakikada ~{plan.bpm} nefes · {plan.cycles} döngü{plan.ramped ? ' · ilk seanslar biraz hızlı, alışınca yavaşlar' : ''}
-        </p>
-
-        <div className="list">
-          <button type="button" className="br-nav" onClick={() => update({ durationSec: DURATIONS_SEC[(DURATIONS_SEC.indexOf(opts.durationSec) + 1) % DURATIONS_SEC.length] })}>
-            <span className="lbl">Süre</span>
-            <span className="val">{opts.durationSec / 60} dakika <ChevronRight size={18} className="chev" aria-hidden="true" /></span>
-          </button>
-          <button type="button" className="br-nav" onClick={() => update({ visual: VISUALS[(VISUALS.findIndex((v) => v.id === opts.visual) + 1) % VISUALS.length].id })}>
-            <span className="lbl">Görsel</span>
-            <span className="val">{visualTitle(opts.visual)} <ChevronRight size={18} className="chev" aria-hidden="true" /></span>
-          </button>
-          <PrefToggle Icon={Vibrate} IconOff={VibrateOff} label="Titreşim" checked={opts.vibrate} onChange={(on) => update({ vibrate: on })} />
-          <PrefToggle
-            Icon={Volume2}
-            IconOff={VolumeX}
-            label="Ses"
-            checked={opts.sound}
-            onChange={(on) => update({ sound: on })}
-            trailing={<button type="button" className="br-gear" onClick={() => setScreen('sound')} aria-label="Ses ayarları" data-no-tap><Settings2 size={18} /></button>}
-          />
-          <PrefToggle Icon={MessageSquareText} IconOff={MessageSquareOff} label="Sesli komut" sub="Nefes al · tut · ver söylensin" checked={opts.voice} onChange={(on) => update({ voice: on })} />
-        </div>
-
-        {askCalm && (
-          <div className="br-calm-row">
-            <span className="lbl" style={{ fontWeight: 600 }}>Şu an ne kadar sakinsin?</span>
-            <div className="br-calm" role="group" aria-label="1 gergin, 5 sakin">
-              {CALM_SCALE.map((v) => (
-                <button key={v} type="button" aria-pressed={calmBefore === v} onClick={() => setCalmBefore(v)}>{v}</button>
-              ))}
-            </div>
+        <ol className="br-how">{def.how.map((t) => <li key={t}>{t}</li>)}</ol>
+        {def.level && (
+          <div className="br-evid">
+            <Level level={def.level} />
+            <p>{def.evidence}</p>
           </div>
         )}
+        <div className="br-set">
+          <span className="h">Seans</span>
+          <div className="br-seg" role="group" aria-label="Süre">
+            {DURATIONS_SEC.map((d) => <button key={d} type="button" aria-pressed={opts.durationSec === d} onClick={() => update({ durationSec: d })}>{d / 60} dk</button>)}
+          </div>
+          <div className="br-seg" role="group" aria-label="Görsel">
+            {VISUALS.map((v) => <button key={v.id} type="button" aria-pressed={opts.visual === v.id} onClick={() => update({ visual: v.id })}>{v.title}</button>)}
+          </div>
+          <div className="br-sws">
+            <SwitchRow label="Titreşim" checked={opts.vibrate} onChange={(on) => update({ vibrate: on })} />
+            <SwitchRow label="Ses" checked={opts.sound} onChange={(on) => update({ sound: on })} trailing={<button type="button" className="br-gear" onClick={() => open('sound')} aria-label="Ses ayarları"><Settings2 size={18} /></button>} />
+            <SwitchRow label="Sesli komut" sub="Nefes al · tut · ver söylensin" checked={opts.voice} onChange={(on) => update({ voice: on })} />
+          </div>
+        </div>
+        <button className="btn" onClick={begin}><Play size={18} aria-hidden="true" /> Başla · {opts.durationSec / 60} dk</button>
+        {calmSheet}
+      </main>
+    )
+  }
 
-        <button className="btn" onClick={start} disabled={!canStart}><Play size={18} aria-hidden="true" /> Başla</button>
-        {!canStart && <p className="muted small" style={{ textAlign: 'center' }}>Başlamak için sakinlik puanını seç (1 gergin · 5 sakin).</p>}
+  if (screen === 'pick') {
+    const others = PATTERN_ORDER.filter((id) => id !== 'custom' && id !== opts.pattern)
+    return (
+      <main className="screen fade-in br">
+        <div className="br-top">
+          <button type="button" className="btn-icon" onClick={onBack} aria-label="Geri"><ChevronLeft size={20} /></button>
+          <button type="button" className="btn-icon" onClick={() => open('info')} aria-label="Kalıplar ve kanıt"><Info size={20} /></button>
+        </div>
+        <span className="eyebrow br-ey">Sakinlik · nefes</span>
+        <h1 className="br-title">Nefes</h1>
+        <div className="br-prog" aria-label={`28 günlük program, ${program.days}. gün`}>
+          <span className="d" aria-hidden="true">{Array.from({ length: program.target }, (_, i) => <i key={i} className={i < program.days ? 'f' : ''} />)}</span>
+          <span><b>{program.target} günlük program</b> · {program.days > 0 ? `${program.days}. gün` : 'başla'}{program.todaySec > 0 ? ` · bugün ${Math.round(program.todaySec / 60)} dk` : ''}</span>
+        </div>
+        <section className="br-hero" aria-label={def.title}>
+          <div className="h1"><b>{def.title}</b><Level level={def.level} /></div>
+          <p>{def.blurb}</p>
+          <BreathWave phases={plan.phases} repeat={plan.phases.length > 3 ? 1 : 2} width={300} height={58} />
+          <div className="meta"><span><b>{fmtNum(plan.bpm)}</b>/dk nefes</span><span><b>{opts.durationSec / 60}</b> dk</span><span><b>{plan.cycles}</b> döngü</span></div>
+          <div className="row2">
+            <button type="button" className="btn" onClick={begin}><Play size={18} aria-hidden="true" /> Başla</button>
+            <button type="button" className="btn btn-ghost br-adj" onClick={() => open('detail')} aria-label={`${def.title} ayarları`}><SlidersHorizontal size={20} /></button>
+          </div>
+        </section>
+        {askCalm && (
+          <button type="button" className="br-quick" onClick={beginQuick}>
+            <Zap size={20} aria-hidden="true" />
+            <span><b>1 dakikada sakinleş</b><small>{PATTERNS[QUICK.pattern].title}, tek dakika</small></span>
+            <em>Başla →</em>
+          </button>
+        )}
+        <div className="br-sec"><span>Diğer kalıplar</span><button type="button" onClick={() => open('info')}>Hepsinin kanıtı →</button></div>
+        <div className="br-grid">
+          {others.map((id) => {
+            const p = PATTERNS[id]
+            const ph = makePlan({ pattern: id, priorSessions: 99 }).phases
+            return (
+              <button key={id} type="button" className="br-tile" onClick={() => { pick(id); window.scrollTo?.(0, 0) }} aria-label={`${p.title}, ${p.rhythm}`}>
+                <b>{p.title}</b>
+                <BreathWave phases={ph} width={140} height={26} />
+                <span className="r"><span>{p.rhythm}</span><Level level={p.level} short /></span>
+              </button>
+            )
+          })}
+        </div>
+        <button type="button" className="br-cust" onClick={() => { pick('custom'); open('detail') }}>
+          <SlidersHorizontal size={20} aria-hidden="true" />
+          <span><b>Özel kalıp</b><small>Al, tut, ver, bekle sürelerini kendin kur</small></span>
+          <ChevronRight size={18} aria-hidden="true" />
+        </button>
+        {calmSheet}
       </main>
     )
   }
@@ -311,16 +410,17 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
   if (screen === 'result') {
     const secsDone = Math.round(Math.min(elapsedRef.current, plan.totalSec))
     return (
-      <main className="screen fade-in">
-        <PageHeader eyebrow="Nefes pratiği" title={secsDone >= plan.totalSec - 1 ? 'Tamamlandı' : 'Erken bitti'} subtitle={`${plan.title} · ${Math.round(secsDone / 60)} dk · ${Math.round(secsDone / plan.cycleSec)} döngü`} />
-        {askCalm && (
-          <div className="br-calm-row">
-            <span className="lbl" style={{ fontWeight: 600 }}>Şimdi ne kadar sakinsin?</span>
-            <div className="br-calm" role="group" aria-label="1 gergin, 5 sakin">
+      <main className="screen fade-in br">
+        <PageHeader eyebrow="Nefes" title={secsDone >= plan.totalSec - 1 ? 'Tamamlandı' : 'Erken bitti'} subtitle={`${plan.title} · ${Math.round(secsDone / 60)} dk · ${Math.round(secsDone / plan.cycleSec)} döngü`} />
+        {ask && calmBefore != null && (
+          <div className="br-calmcard">
+            <b>Şimdi ne kadar sakinsin?</b>
+            <div className="br-calm5" role="group" aria-label="1 gergin, 5 çok sakin">
               {CALM_SCALE.map((v) => (
                 <button key={v} type="button" aria-pressed={calmAfter === v} onClick={() => setCalmAfter(v)}>{v}</button>
               ))}
             </div>
+            <div className="br-ends"><span>1 · gergin</span><span>5 · çok sakin</span></div>
           </div>
         )}
         {calmBefore != null && calmAfter != null && <p className="muted small">Önce {calmBefore}, sonra {calmAfter}. Bu senin puanın; bir iddia değil, kendi çizgin.</p>}
@@ -328,8 +428,8 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
           {strained ? <Check size={18} aria-hidden="true" /> : null} Zorlandım{strained ? ' · kaydedildi' : ''}
         </button>
         {strained && <p className="muted small">Bir sonraki seansta süreyi ya da tutmaları kısalt. Baş dönmesi olduysa bugün tekrar etme.</p>}
-        <button className="btn" onClick={save} disabled={askCalm && calmAfter == null}><Check size={18} aria-hidden="true" /> Kaydet</button>
-        <button className="btn btn-ghost" onClick={() => { setCalmAfter(null); setStrained(false); setScreen('setup') }}><RotateCcw size={18} aria-hidden="true" /> Yeniden</button>
+        <button className="btn" onClick={save} disabled={ask && calmBefore != null && calmAfter == null}><Check size={18} aria-hidden="true" /> Kaydet</button>
+        <button className="btn btn-ghost" onClick={() => { setCalmAfter(null); setCalmBefore(null); setStrained(false); setQuick(false); setScreen('pick') }}><RotateCcw size={18} aria-hidden="true" /> Yeniden</button>
       </main>
     )
   }
@@ -337,24 +437,34 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
   // run
   const st = live ?? phaseAt(plan, 0)
   const kind = st.phase.kind
-  const ph = PHASE[kind]
+  const txt = phaseText(st.phase)
   const inPrep = prep > 0
   const secLeft = inPrep ? prep : Math.max(1, Math.ceil(st.phase.sec - st.phaseElapsed))
   const mm = Math.floor(st.left / 60)
   const ss = String(Math.floor(st.left % 60)).padStart(2, '0')
+  const nextPh = plan.phases[(st.index + 1) % plan.phases.length]
+  const side = inPrep ? null : st.phase.side
   return (
     <div className="br-stage" role="application" aria-label="Nefes pratiği">
       <div className="br-top">
         <button type="button" className="btn-icon" onClick={stopEarly} aria-label="Bitir"><X size={20} /></button>
         <span className="br-time">{mm}:{ss}</span>
-        <button type="button" className="btn-icon" onClick={() => setScreen('info')} aria-label="Bilgi"><Info size={20} /></button>
+        <button type="button" className="btn-icon" onClick={() => update({ sound: !opts.sound })} aria-label={opts.sound ? 'Sesi kapat' : 'Sesi aç'}>{opts.sound ? <Volume2 size={20} /> : <VolumeX size={20} />}</button>
       </div>
-      <div className={`br-phase-name${inPrep ? ' prep' : ''}`} aria-live="polite">{inPrep ? 'Hazırlan' : ph.label}</div>
-      <div className="br-phase-sec" aria-hidden="true">{secLeft}</div>
-      <div className="br-phase-bar" aria-hidden="true"><i style={{ transform: `scaleX(${inPrep ? (PREP_SEC - prep + 1) / PREP_SEC : st.phaseFrac})` }} /></div>
+      <div className="br-phase">
+        <small>{plan.title}{inPrep ? '' : ` · ${st.step} / ${st.steps}`}</small>
+        <b aria-live="polite">{inPrep ? 'Hazırlan' : txt.label}</b>
+        <span>{inPrep ? `${plan.cycles} döngü · ${Math.round(plan.totalSec / 60)} dk` : txt.sub ?? ' '}</span>
+      </div>
       <div className="br-mid">
         <BreathVisual visual={opts.visual} kind={inPrep ? 'hold2' : kind} phaseSec={st.phase.sec} paused={paused || inPrep} />
-        <span className="br-cycle">{inPrep ? `${plan.title} · ${plan.cycles} döngü` : `${st.step} / ${st.steps} · ${plan.title}`}</span>
+        <span className="br-count" aria-hidden="true">{secLeft}</span>
+        {plan.phases.some((p) => p.side) && (
+          <div className="br-nose" aria-hidden="true">
+            <span className={side === 'L' ? 'on' : side ? 'shut' : ''}><i />Sol</span>
+            <span className={side === 'R' ? 'on' : side ? 'shut' : ''}><i />Sağ</span>
+          </div>
+        )}
       </div>
       <div className="br-controls">
         <button type="button" onClick={prevPhase} disabled={inPrep} aria-label="Önceki aşama"><SkipBack size={22} /></button>
@@ -362,6 +472,7 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
         <button type="button" onClick={nextPhase} disabled={inPrep} aria-label="Sonraki aşama"><SkipForward size={22} /></button>
       </div>
       <div className="br-total" aria-hidden="true"><i style={{ transform: `scaleX(${inPrep ? 0 : 1 - st.left / plan.totalSec})` }} /></div>
+      <p className="br-next" aria-hidden="true">{inPrep ? ' ' : `sonraki: ${phaseText(nextPh).label.toLocaleLowerCase('tr-TR')} · ${fmtSec(nextPh.sec)} sn`}</p>
     </div>
   )
 }
