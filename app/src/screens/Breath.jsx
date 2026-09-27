@@ -5,7 +5,8 @@ import BreathWave from '../components/BreathWave.jsx'
 import BreathVisual from '../components/BreathVisual.jsx'
 import { haptic } from '../lib/native.js'
 import { speak, unlockAudio } from '../lib/cue.js'
-import { playBreathSound, unlockBreathSfx } from '../lib/breathSfx.js'
+import { playBreathSound, unlockBreathSfx, breathContext } from '../lib/breathSfx.js'
+import { VOICES, VOICE_LABEL, VOICE_LANG, phraseId, PHRASES, preloadVoice, playPhrase, loadIndex, availableFrom } from '../lib/voicePack.js'
 import {
   PATTERNS, PATTERN_ORDER, PHASE, KIND_ORDER, LIMITS, STEP_SEC, DURATIONS_SEC, CALM_SCALE, SAFETY_ROWS, PREP_SEC,
   VISUALS, SOUNDS, SOUND_SLOTS, LEVELS, QUICK, phaseText,
@@ -79,6 +80,14 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
   const [calmAfter, setCalmAfter] = useState(null)
   const [strained, setStrained] = useState(false)
   const ask = askCalm && !quick
+  // Seslendirme: hangi seste dosya var (public/voice/index.json); seçilen sesi önceden çöz
+  const [voiceAvail, setVoiceAvail] = useState(null)
+  useEffect(() => {
+    loadIndex().then((ix) => setVoiceAvail(availableFrom(ix)))
+  }, [])
+  useEffect(() => {
+    preloadVoice(breathContext(), opts.voiceId)
+  }, [opts.voiceId])
   const planArgs = quick
     ? { pattern: QUICK.pattern, durationSec: QUICK.durationSec, priorSessions: prior, edits: null }
     : { pattern: opts.pattern, durationSec: opts.durationSec, priorSessions: prior, edits: opts.edits }
@@ -120,6 +129,7 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
     elapsedRef.current = 0
     setLive(phaseAt(plan, 0))
     setScreen('run')
+    say('prep', 'Hazırlan')
   }
   // Başla: sakinlik sorulacaksa önce alttan sayfa; kısayol ve hatırlatmadan açılan nefes doğrudan başlar
   const begin = () => (ask ? setSheet(true) : start())
@@ -162,7 +172,7 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
         clearInterval(id)
         if (opts.vibrate) haptic('success')
         if (opts.sound) playBreathSound(opts.sounds.end, opts.volume)
-        if (opts.sound && opts.voice) speak('Tamamlandı')
+        say('done', 'Tamamlandı')
         setScreen('result')
       }
     }, 100)
@@ -170,11 +180,16 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screen, prep, paused])
 
+  // Sesli komut: seçilen seslendirme (ElevenLabs dosyası), yoksa telefonun sesi
+  const say = (id, text) => {
+    if (!opts.sound || !opts.voice) return
+    if (!playPhrase(breathContext(), opts.voiceId, id, opts.volume)) speak(text)
+  }
   function cuePhase(phase) {
     const ph = PHASE[phase.kind]
     if (opts.vibrate) haptic(ph.haptic)
     if (opts.sound) playBreathSound(opts.sounds[phase.kind] ?? 'none', opts.volume)
-    if (opts.sound && opts.voice) speak(phaseText(phase).say)
+    say(phaseId(phase), phaseText(phase).say)
   }
   function seekTo(sec) {
     t0.current = performance.now() - sec * 1000
@@ -343,7 +358,18 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
           <div className="br-sws">
             <SwitchRow label="Titreşim" checked={opts.vibrate} onChange={(on) => update({ vibrate: on })} />
             <SwitchRow label="Ses" checked={opts.sound} onChange={(on) => update({ sound: on })} trailing={<button type="button" className="br-gear" onClick={() => open('sound')} aria-label="Ses ayarları"><Settings2 size={18} /></button>} />
-            <SwitchRow label="Sesli komut" sub="Nefes al · tut · ver söylensin" checked={opts.voice} onChange={(on) => update({ voice: on })} />
+            <div className="br-voice">
+              <span className="lbl">Sesli komut<small>{voiceAvail && !voiceAvail[opts.voiceId]?.size ? 'Seslendirme dosyası yok; telefonun sesi kullanılır' : 'Nefes al · tut · ver söylenir'}</small></span>
+              <div className="br-seg" role="group" aria-label="Sesli komut">
+                <button type="button" aria-pressed={!opts.voice} onClick={() => update({ voice: false })}>Kapalı</button>
+                {VOICES.map((v) => (
+                  <button key={v} type="button" aria-pressed={opts.voice && opts.voiceId === v} onClick={() => { unlockBreathSfx(); update({ voice: true, voiceId: v }) }}>{VOICE_LABEL[VOICE_LANG][v]}</button>
+                ))}
+              </div>
+              <button type="button" className="br-listen" disabled={!opts.voice || !opts.sound} onClick={() => { unlockAudio(); unlockBreathSfx(); preloadVoice(breathContext(), opts.voiceId).then(() => say('in', PHRASES[VOICE_LANG].in)) }}>
+                <Volume2 size={16} aria-hidden="true" /> Dinle
+              </button>
+            </div>
           </div>
         </div>
         <button className="btn" onClick={begin}><Play size={18} aria-hidden="true" /> Başla · {opts.durationSec / 60} dk</button>

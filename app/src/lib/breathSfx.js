@@ -15,6 +15,8 @@ function context() {
 export function unlockBreathSfx() {
   context()
 }
+// Seslendirme paketi (lib/voicePack.js) aynı bağlamı kullanır
+export const breathContext = () => context()
 
 // id → [ {freq, type, ms, gain, delayMs} ... ]  (üst üste çalınır)
 const RECIPES = {
