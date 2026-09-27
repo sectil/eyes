@@ -96,3 +96,49 @@ export function drawIris(cv, { size, filled = [], cur = -1, dark = true, fibers 
     g.restore()
   }
 }
+
+// Göz kalibrasyonu hedefi (Artifact "Nefona Göz Kalibrasyonu", onaylı): tek parça küçük iris. Bakış noktası göz bebeğinin
+// ortasında altın nokta; iris ince bir artıyla bölünür (Thaler ve ark. 2013, Vision Res, doi:10.1016/j.visres.2012.10.012:
+// halka + artı + merkez nokta en sabit bakışı verdi). Artı "delik" çizilir (destination-out): arkadaki zemin görünür,
+// tema renginden bağımsız. pupil: göz bebeği yarıçap oranı (kabulde küçülür); fix: altın nokta çizilsin mi.
+export function drawCalIris(cv, { size = 52, dark = true, pupil = 0.3, fix = true, dpr = 2 } = {}) {
+  const S = Math.round(size * dpr)
+  cv.width = cv.height = S
+  const g = cv.getContext('2d')
+  if (!g) return
+  const R = S / 2
+  g.translate(R, R)
+  const gr = g.createRadialGradient(0, 0, R * 0.2, 0, 0, R)
+  if (dark) { gr.addColorStop(0, '#05141a'); gr.addColorStop(0.32, '#0e4148'); gr.addColorStop(0.55, '#138692'); gr.addColorStop(0.78, '#1a63a8'); gr.addColorStop(0.95, '#0a2248'); gr.addColorStop(1, '#040a16') }
+  else { gr.addColorStop(0, '#0a2a30'); gr.addColorStop(0.32, '#135c63'); gr.addColorStop(0.55, '#1896a4'); gr.addColorStop(0.78, '#2c70c2'); gr.addColorStop(0.95, '#1d3f7a'); gr.addColorStop(1, '#12305f') }
+  g.fillStyle = gr; g.beginPath(); g.arc(0, 0, R, 0, TAU); g.fill()
+  // lifler: göz bebeğinden limbusa; birkaçı altın (sıcak yaka)
+  for (let i = 0; i < 900; i++) {
+    const a = hash(i) * TAU, r0 = R * (pupil + 0.04 + hash(i, 1) * 0.12), r1 = R * (0.62 + hash(i, 2) * 0.34)
+    const w = a + (hash(i, 3) - 0.5) * 0.18
+    g.strokeStyle = hash(i, 4) < 0.18 ? rgba(GOLD, 0.18 + hash(i, 5) * 0.3) : rgba(PALE, 0.05 + hash(i, 5) * 0.18)
+    g.lineWidth = (0.6 + hash(i, 6) * 1.1) * (S / 240)
+    g.beginPath(); g.moveTo(Math.cos(a) * r0, Math.sin(a) * r0)
+    g.quadraticCurveTo(Math.cos(w) * (r0 + r1) / 2, Math.sin(w) * (r0 + r1) / 2, Math.cos(a) * r1, Math.sin(a) * r1); g.stroke()
+  }
+  const col = g.createRadialGradient(0, 0, R * pupil, 0, 0, R * (pupil + 0.22))
+  col.addColorStop(0, rgba(GOLD, 0.42)); col.addColorStop(1, rgba(GOLD, 0))
+  g.fillStyle = col; g.beginPath(); g.arc(0, 0, R * (pupil + 0.22), 0, TAU); g.fill()
+  const lim = g.createRadialGradient(0, 0, R * 0.84, 0, 0, R)
+  lim.addColorStop(0, 'rgba(3,8,20,0)'); lim.addColorStop(1, 'rgba(3,8,20,0.9)')
+  g.fillStyle = lim; g.beginPath(); g.arc(0, 0, R, 0, TAU); g.fill()
+  g.fillStyle = '#02060a'; g.beginPath(); g.arc(0, 0, R * pupil, 0, TAU); g.fill()
+  g.fillStyle = 'rgba(255,255,255,0.55)'; g.beginPath(); g.arc(-R * 0.34, -R * 0.36, R * 0.07, 0, TAU); g.fill()
+  // artı: göz bebeği kenarından limbusa, zemin görünsün diye delik
+  g.save(); g.globalCompositeOperation = 'destination-out'; g.lineWidth = S * 0.045; g.lineCap = 'butt'
+  const r0 = R * (pupil + 0.02)
+  g.beginPath()
+  for (const [cx, cy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { g.moveTo(cx * r0, cy * r0); g.lineTo(cx * R, cy * R) }
+  g.stroke(); g.restore()
+  if (fix) {
+    const fg = g.createRadialGradient(0, 0, 0, 0, 0, R * 0.2)
+    fg.addColorStop(0, rgba(GOLD, 0.55)); fg.addColorStop(1, rgba(GOLD, 0))
+    g.fillStyle = fg; g.beginPath(); g.arc(0, 0, R * 0.2, 0, TAU); g.fill()
+    g.fillStyle = rgba(GOLD, 1); g.beginPath(); g.arc(0, 0, R * 0.085, 0, TAU); g.fill()
+  }
+}

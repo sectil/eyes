@@ -7,6 +7,7 @@ export const RELEASES = [
     id: '2026-09-27',
     title: '27 Eylül güncellemesi',
     items: [
+      { kind: 'change', text: 'Göz kalibrasyonu yenilendi: bakacağın nokta artık bir iris; ortasındaki altın noktaya bakarsın, altın halka dolunca o nokta tamam. Yüz görünmezse iris solar, başını çok çevirirsen halka turuncuya döner. Yönlendirmeler Profilim\'de seçtiğin sesle (kadın ya da erkek) söylenir. Noktaların yeri ve süreler aynı.' },
       { kind: 'change', text: 'Seslendirme sesi (kadın ya da erkek) artık bir kez Profilim → Seslendirme\'den seçilir; nefes ve diğer sesli yönlendirmeler hep o sesi kullanır. Nefes ayarında yalnız sesli komutu açıp kapatırsın.' },
       { kind: 'fix', text: 'Nefes seansında sesli komutlar ("Nefes al", "Tut", "Nefes ver") çalmıyordu; düzeldi. Telefon sessizdeyken de duyulur.' },
       { kind: 'new', text: 'Nefeste sesli komutlar artık profesyonel Türkçe seslendirme: kadın ya da erkek sesi seç (nefes ayrıntısında "Sesli komut"), "Dinle" ile önce duy. Sesler uygulamanın içinde; internet gerekmez.' },

@@ -25,6 +25,17 @@ export const PHRASES = {
     outR: 'Sağdan ver.',
     hum: 'Mırıldanarak ver.',
     done: 'Tamamlandı.',
+    // Göz kalibrasyonu (screens/GazeCalibration.jsx)
+    calCenter: 'Ortadaki noktaya bak.',
+    calLeft: 'Soldaki noktaya bak.',
+    calRight: 'Sağdaki noktaya bak.',
+    calUp: 'Yukarıdaki noktaya bak.',
+    calDown: 'Aşağıdaki noktaya bak.',
+    calCenter2: 'Son kez, ortadaki noktaya bak.',
+    calHead: 'Başını çok çevirme, gözünle takip et.',
+    calSteady: 'Sabit dur, noktaya bakmaya devam et.',
+    calAgain: 'Bir kez daha deneyelim.',
+    calDone: 'Tamam. Göz takibi sana göre ayarlandı.',
   },
 }
 export const PHRASE_IDS = Object.keys(PHRASES.tr)

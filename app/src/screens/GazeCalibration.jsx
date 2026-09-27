@@ -8,7 +8,11 @@ import { calibReport, fitModel, fitWindowsAxis, roughModel, windowStable, saveGa
 import { shareText } from '../lib/share.js'
 import { createGazeReader, eyeClosure, BLINK_CLOSE, GAZE_FULL_DEG } from '../lib/gaze.js'
 import { haptic } from '../lib/native.js'
-import { cue, unlockAudio } from '../lib/cue.js'
+import { speak, unlockAudio } from '../lib/cue.js'
+import { getPrefs } from '../lib/prefs.js'
+import { PHRASES, VOICE_LANG, playPhrase, preloadVoice } from '../lib/voicePack.js'
+import { breathContext, unlockBreathSfx, releaseBreathSfx } from '../lib/breathSfx.js'
+import CalIris from '../components/CalIris.jsx'
 import '../styles/gazecal.css'
 
 // 5 noktalı kişisel göz kalibrasyonu (lib/gazeCalib.js, model sürüm 2).
@@ -52,23 +56,11 @@ const POS = {
   down: { x: 50, y: 84 },
   center2: { x: 50, y: 46 },
 }
-const LABEL = {
-  center: 'Noktaya bak',
-  left: 'Soldaki noktaya bak',
-  right: 'Sağdaki noktaya bak',
-  up: 'Üstteki noktaya bak',
-  down: 'Alttaki noktaya bak',
-  center2: 'Tekrar ortadaki noktaya bak',
-}
-// Sesli yönlendirme kısa; nokta zaten ekranda. Ses düğmesiyle kapatılabilir (Profil'deki "Sesler" tercihi).
-const SAY = {
-  center: 'Ortadaki noktaya bak',
-  left: 'Sol',
-  right: 'Sağ',
-  up: 'Yukarı',
-  down: 'Aşağı',
-  center2: 'Tekrar orta',
-}
+// Ekrandaki cümle ve ses aynı (Artifact "Nefona Göz Kalibrasyonu", onaylı). Ses: ElevenLabs dosyaları (lib/voicePack.js),
+// ses Profilim → Seslendirme'deki seçim; dosya yoksa telefonun sesi. Ses düğmesiyle kapatılabilir (prefs.sound).
+const SAY = { center: 'calCenter', left: 'calLeft', right: 'calRight', up: 'calUp', down: 'calDown', center2: 'calCenter2' }
+const LABEL = Object.fromEntries(Object.entries(SAY).map(([t, id]) => [t, PHRASES[VOICE_LANG][id].replace(/\.$/, '')]))
+const AGAIN_GAP_MS = 1500 // "Bir kez daha deneyelim"den sonra hedef cümlesi (üst üste binmesin)
 
 export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   const [phase, setPhase] = useState('intro') // intro | run | result
@@ -86,6 +78,28 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   const running = phase === 'run'
   const previewReader = useRef(null)
   const holdTimer = useRef(null)
+  const sayTimer = useRef(null)
+  const [trail, setTrail] = useState(null) // { from, to, key }: noktanın geldiği yön (0,45 sn)
+
+  // Sesli yönlendirme: seçilen seslendirme; yoksa telefonun sesi. Önceki cümleyi keser.
+  const say = (id, delayMs = 0) => {
+    clearTimeout(sayTimer.current)
+    const run = () => {
+      const p = getPrefs()
+      if (!p.sound) return
+      if (!playPhrase(breathContext(), p.voice, id, 8)) speak(PHRASES[VOICE_LANG][id])
+    }
+    if (delayMs > 0) sayTimer.current = setTimeout(run, delayMs)
+    else run()
+  }
+  // Seslendirmeyi baştan çöz (Başla'ya basınca ilk cümle beklemeden çalsın); ekrandan çıkınca ses oturumu bırakılır
+  useEffect(() => {
+    preloadVoice(breathContext(), getPrefs().voice)
+    return () => {
+      clearTimeout(sayTimer.current)
+      releaseBreathSfx(0)
+    }
+  }, [])
 
   const onFrame = (m) => {
     if (phase === 'result' && previewReader.current) {
@@ -109,7 +123,8 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
       head.current.rejected[t] = (head.current.rejected[t] ?? 0) + 1
       if (now - head.current.lastWarn >= HEAD_WARN_GAP_MS) {
         head.current.lastWarn = now
-        cue('Başını değil, gözünü oynat', true)
+        haptic('warning')
+        say('calHead')
       }
     }
     if (since < settle) {
@@ -133,7 +148,8 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
       // MAD 1,5° çöp orta tüm eksenleri öldürdü). Yan hedeflerde süre dolunca eldeki alınır, raporda görünür.
       if (isCenter && !stable && s.collected >= CENTER_HINT_MS && now - head.current.lastWarn >= HEAD_WARN_GAP_MS) {
         head.current.lastWarn = now
-        cue('Sabit dur ve noktaya bak', true)
+        haptic('warning')
+        say('calSteady')
       }
       if (stable || (!isCenter && s.collected >= MAX_COLLECT_MS)) {
         s.accepted = true
@@ -151,13 +167,14 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   function advance(t) {
     const s = step.current
     const W = win.current
+    let again = false // bu adımda tekrar turu eklendi mi (sesle söylenir)
     if (t === 'center') head.current.ref = headRef(W.center)
     const insert = (axis, targets) => {
       s.retry[axis] += 1
       const at = s.pos + 1
       s.queue.splice(at, 0, ...targets)
       for (let i = 0; i < targets.length; i++) s.again.add(at + i)
-      cue('Bir kez daha. Noktaya doğru bak; başını çevirmen serbest', true)
+      again = true
     }
     // Son modelle aynı hesap (usableCenters + baş duruşu düzeltmesi)
     const axisWeak = (axis) => {
@@ -180,7 +197,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
         const at = s.pos + 1
         s.queue.splice(at, 0, ...extra)
         for (let i = 0; i < extra.length; i++) s.again.add(at + i)
-        cue('Bir kez daha. Noktaya doğru bak; başını çevirmen serbest', true)
+        again = true
       }
     }
     const np = s.pos + 1
@@ -193,16 +210,23 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     W[nt] = [] // tekrar hedefinde eski kareler atılır
     step.current = { ...s, pos: np, start: performance.now(), collected: 0, lastTs: null, accepted: false }
     setView({ queue: [...s.queue], pos: np, again: s.again.has(np) })
+    setTrail({ from: t, to: nt, key: np })
     setProg(0)
     setStatus('ok')
-    cue(SAY[nt], false)
+    if (again) {
+      haptic('warning')
+      say('calAgain')
+      say(SAY[nt], AGAIN_GAP_MS)
+    } else say(SAY[nt])
   }
 
   const cam = useFaceTracking({ enabled: phase !== 'intro', trueDepth: true, onFrame })
 
   function start() {
     unlockAudio()
+    unlockBreathSfx() // ses oturumu 'playback': sessiz tuşunda da duyulur
     clearTimeout(holdTimer.current)
+    setTrail(null)
     win.current = {}
     head.current = { ref: null, rejected: {}, lastWarn: 0 }
     step.current = { queue: [...TARGETS], pos: 0, start: performance.now(), collected: 0, lastTs: null, accepted: false, retry: { x: 0, y: 0 }, again: new Set() }
@@ -213,7 +237,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     setReport(null)
     setNote('')
     setPhase('run')
-    cue(SAY.center, false)
+    say(SAY.center)
   }
   useEffect(() => () => clearTimeout(holdTimer.current), [])
 
@@ -233,10 +257,11 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
       saveGazeModel(model)
       previewReader.current = createGazeReader({ model })
       haptic('success')
-      cue('Tamam, göz takibi sana göre ayarlandı', false)
+      say('calDone')
     } else {
       haptic('warning')
     }
+    releaseBreathSfx()
   }
 
   // Kareler gelmeye başlayınca ilk hedefin zamanını kameranın saatine hizala
@@ -253,7 +278,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
         <StepCards
           cards={[
             { key: 'face', art: <FaceLightArt />, title: 'Telefonu göz hizasında tut', why: 'Yüzün iyi aydınlansın. Yaklaşık 20 saniye, bir kez.' },
-            { key: 'dot', art: <DotFollowArt />, title: 'Noktaya bak, yeşile dönene kadar kal', why: 'Nokta beş yere gider. Başını noktaya doğru çevirmen serbest; kırpmak sorun değil.' },
+            { key: 'dot', art: <DotFollowArt />, title: 'İrisin ortasına bak, halka dolana kadar kal', why: 'Nokta beş yere gider. Başını hafifçe çevirebilirsin; asıl gözünle takip et. Kırpmak sorun değil.' },
           ]}
           eyebrow="Göz takibi · sana göre ayar"
           finishLabel="Başla"
@@ -295,7 +320,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
             <p className="muted">
               {!result?.x || result.x.weak ? 'Sağa ve sola bakış, tekrarlara rağmen birbirinden ayrılmadı. ' : ''}
               {!result?.y || result.y.weak ? 'Yukarı ve aşağı bakış, tekrarlara rağmen birbirinden ayrılmadı. ' : ''}
-              Işık yüzüne düşsün, telefon göz hizasında dursun; nokta yeşile dönene kadar noktada kal. Gözlükle zorlanıyorsa bir kez gözlüksüz dene.
+              Işık yüzüne düşsün, telefon göz hizasında dursun; altın halka dolana kadar noktada kal. Gözlükle zorlanıyorsa bir kez gözlüksüz dene.
             </p>
             {headTurnNote(report)}
             <div className="gazetest-grid gazecal-scores">
@@ -319,25 +344,44 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   const t = view.queue[view.pos] ?? 'center'
   const p = POS[t]
   const done = status === 'done'
+  const camErr = cam.error === 'permission' ? 'perm' : cam.error ? 'err' : null
+  // Ana cümle ve durum satırı (Artifact: yazı noktanın yolunu kesmez; hedef alttayken üste çıkar)
+  const line = camErr === 'perm' ? ['Kamera izni yok', 'Ayarlar → Nefona → Kamera', 'warn']
+    : camErr ? ['Kamera açılamadı', 'Kapatıp yeniden dene', 'warn']
+      : !cam.ready ? [LABEL[t], 'Kamera açılıyor…', 'gold']
+        : done ? ['Tamam', 'Kaydedildi', 'gold']
+          : status === 'noface' ? ['Yüzünü kameraya göster', 'Yüz görünmüyor · kayıt durdu', 'warn']
+            : status === 'closed' ? ['Gözlerini aç', 'Gözler kapalı · kayıt bekliyor', 'warn']
+              : status === 'head' ? ['Başını çok çevirme, gözünle takip et', 'Baş dönük · kayıt bekliyor', 'warn']
+                : status === 'hold' ? [LABEL[t], 'Noktada kal', 'gold']
+                  : [LABEL[t], 'Yüzün görünüyor', 'ok']
+  const irisState = done ? 'ok' : status === 'noface' || camErr ? 'off' : status === 'head' ? 'warn' : ''
   return (
-    <div className="gazecal-stage" role="application" aria-label="Göz kalibrasyonu">
-      <button className="btn-icon gazecal-close" onClick={onCancel} aria-label="Kapat"><X size={20} /></button>
+    <div className={`gazecal-stage${t === 'up' ? ' dim' : ''}${status === 'noface' && !done ? ' noface' : ''}`} role="application" aria-label="Göz kalibrasyonu">
+      <button className="gazecal-ic gazecal-close" onClick={onCancel} aria-label="Kapat"><X size={19} /></button>
       <SoundToggle className="gazecal-sound" />
-      <div className="gazecal-steps" aria-hidden="true">
-        {view.queue.map((x, i) => <i key={`${x}-${i}`} className={i < view.pos ? 'done' : i === view.pos ? 'now' : ''} />)}
+      {trail && <CalTrail key={trail.key} from={POS[trail.from]} to={POS[trail.to]} />}
+      <div className="gazecal-target" style={{ left: `${p.x}%`, top: `${p.y}%` }}>
+        <CalIris state={irisState} progress={done ? 1 : prog} />
       </div>
-      <div className={`gazecal-target${done ? ' ok' : ''}`} style={{ left: `${p.x}%`, top: `${p.y}%` }}>
-        <svg viewBox="0 0 64 64" className="gazecal-ring">
-          <circle cx="32" cy="32" r="28" className="bg" />
-          <circle cx="32" cy="32" r="28" className="fg" style={{ strokeDasharray: `${prog * 176} 176` }} />
-        </svg>
-        <span className="gazecal-dot">{done && <Check size={12} strokeWidth={3} aria-hidden="true" />}</span>
+      <div className={`gazecal-copy ${t === 'down' ? 'top' : 'bottom'}`}>
+        <span className="gazecal-step">Göz ayarı · <b>{Math.min(view.pos + 1, view.queue.length)} / {view.queue.length}</b>{view.again ? ' · bir kez daha' : ''}</span>
+        <span className="gazecal-say" role="status" aria-live="polite">{line[0]}</span>
+        <span className={`gazecal-st ${line[2]}`}>{line[1]}</span>
       </div>
-      <p className="gazecal-msg" role="status" aria-live="polite">
-        {cam.error === 'permission' ? "Kamera izni yok · Ayarlar → Nefona → Kamera" : cam.error ? 'Kamera açılamadı' : !cam.ready ? 'Kamera açılıyor…' : done ? 'Tamam' : status === 'noface' ? 'Yüzünü kameraya göster' : status === 'closed' ? 'Gözlerini aç' : status === 'head' ? 'Başını çevirme, yalnızca gözünü kaydır' : status === 'hold' ? 'Noktada kal…' : `${view.again ? 'Bir kez daha: ' : ''}${LABEL[t] ?? 'Noktaya bak'}`}
-      </p>
     </div>
   )
+}
+
+// Nokta yer değiştirirken geldiği yönde soluk altın iz (0,45 sn; CSS'te söner). Konumlar ekran yüzdesi.
+function CalTrail({ from, to }) {
+  const W = globalThis.innerWidth || 390
+  const H = globalThis.innerHeight || 844
+  const dx = ((to.x - from.x) / 100) * W
+  const dy = ((to.y - from.y) / 100) * H
+  const len = Math.max(0, Math.hypot(dx, dy) - 34)
+  const ang = (Math.atan2(dy, dx) * 180) / Math.PI
+  return <span className="gazecal-trail" aria-hidden="true" style={{ left: `${from.x}%`, top: `${from.y}%`, width: len, transform: `rotate(${ang}deg)` }} />
 }
 
 const DIR_LABEL = { left: '← Sol', right: 'Sağ →', up: '↑ Yukarı', down: '↓ Aşağı', center: 'Orta' }
