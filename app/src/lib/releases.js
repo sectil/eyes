@@ -7,6 +7,9 @@ export const RELEASES = [
     id: '2026-09-27',
     title: '27 Eylül güncellemesi',
     items: [
+      { kind: 'new', text: "İris haritası: gözünden başlayıp bütün insana. Göz bebeğinin çevresinde yedi alan (Göz, Dikkat, Farkındalık, Sakinlik, Kendine yaklaşım, İyi oluş, Beden); kurulumda başlangıç haritan dolar, 28. günde yeniden bakıp yan yana görürsün." },
+      { kind: 'change', text: "Yeni kurulum sırası: güvenlik kontrolü testten önce, sonra İlk Bakış ve dört kısa soru (stres, uyku, hareket, kendine şefkat; her biri araştırmada kullanılan tek soruluk ölçeklerden). Yaş artık doğum tarihinden; ayrıca sorulmaz." },
+      { kind: 'change', text: "Deneme ekranı yenilendi: haritan en üstte, Premium'da ne olduğu üç satırda, deneme günleri tek çizgide; satın alma düğmesi hep görünür." },
       { kind: 'change', text: "İlk Bakış yenilendi: okuduğun kelime sarıyla ilerler, üstte hızın yazar. Okuma metni bir araştırmadan: hayal ettiğin ışığa göz bebeğin tepki veriyor (Laeng ve Sulutvedt 2014). Sonuçta 20 saniyelik kırpma çizgin, en uzun kırpmadığın ara ve o arada okuduğun satırlar çıkar." },
       { kind: 'fix', text: "İlk Bakış'ta okurken yapılan kırpmaların çoğu sayılmıyordu (okurken göz kapağı hafif iner); sayım okumaya göre yeniden yazıldı." },
       { kind: 'new', text: 'Google ile giriş (iPhone): Apple\'ın güvenli oturum penceresinde Google hesabını seçersin; ek bir Google ya da Facebook yazılımı uygulamaya girmez.' },

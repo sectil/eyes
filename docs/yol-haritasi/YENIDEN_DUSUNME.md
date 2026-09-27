@@ -12,9 +12,15 @@
 
 ## 1. Nefona tek cümlede
 
-**Nefona, ekran başında gözü yorulan ve yakını eskisi kadar net göremeyen 40 yaş üstü yetişkinin yakın görmesini evde düzenli ölçer. Doğrulanmış bir değişim olursa söyler ve göz molasını günlük alışkanlık yapar. Tedavi etmez, gözlük bıraktırmaz.** Hedef kitle SENTEZ_RAPORU.md:96 ve :168'de tanımlı.
+**Nefona gözünden başlar: gözünü, dikkatini, sakinliğini, bedenini ve kendine bakışını birlikte izler, değişimi gösterir ve günlük alışkanlığa çevirir. Tanı koymaz, tedavi etmez.**
 
-Bu cümle film sonunda, deneme ekranında, Premium kartında ve App Store metninde aynen kullanılır. Nefes, Dalga ve oyunlar yan faydadır; uygulamanın kimliğini belirlemez.
+> **Sahibinin kararı (2026-09-27, ikinci):** "Gözden başlayıp bütün insanı baştan yaratıyoruz, iristen başlıyoruz." Önceki cümle
+> ("40 yaş üstü yetişkinin yakın görmesini ölçer … Nefes, Dalga ve oyunlar yan faydadır") KALDIRILDI: uygulamayı yalnız göz
+> gibi gösteriyordu. Model: iris haritası — merkezde göz bebeği, çevresinde Gelişim'in 7 alanı (Göz, Dikkat, Farkındalık,
+> Sakinlik, Kendine yaklaşım, İyi oluş, Beden). Kurulumda başlangıç haritası dolar, 28. günde yeniden (Artifact "Nefona Başlangıç Kartı").
+
+Bu cümle deneme ekranında, Premium kartında ve App Store metninde aynen kullanılır. Göz giriş kapısıdır; nefes, dikkat görevleri,
+hareket ve kendine yaklaşım uygulamanın parçasıdır, yan fayda değildir.
 
 **Kullanılmayacak ifadeler:**
 - "Gözlükten kurtulun", "numaranı düşür", "göz kaslarını güçlendirir", "görmeyi iyileştirir" (SENTEZ_RAPORU.md:80-82)

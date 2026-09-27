@@ -1,0 +1,62 @@
+// Kurulum yazıları (güvenlik, iris soruları, iris haritası, deneme) — dil başına tek nesne. Başka dil eklenince aynı
+// anahtarlarla yeni nesne; ekranlarda gömülü yazı yok. Sayı/sıra içeren cümleler fonksiyon (her dil kendi sırasını kurar).
+// Soru metinleri lib/profileQuestions.js'te (soruların tek yeri); uyarı işaretleri lib/profile.js RED_FLAGS.
+import { STRESS_NOW, SELF_AGREE } from './profile.js'
+
+const tr = {
+  domains: { eye: 'Göz', focus: 'Dikkat', awareness: 'Farkındalık', calm: 'Sakinlik', self: 'Kendine yaklaşım', wellbeing: 'İyi oluş', body: 'Beden' },
+  // İris hücresindeki değer (null: henüz dolmadı → later)
+  cell: {
+    eye: (v) => `${v} kırpma`,
+    calm: (v) => (v === 0 ? 'Stres yok' : `${STRESS_NOW[v]} stres`),
+    self: (v) => SELF_AGREE[v],
+    wellbeing: (v) => `Uyku ${v}/10`,
+    body: (v) => `${v} gün hareket`,
+  },
+  later: { eye: 'İlk Bakış\'ta', focus: 'ilk oyunda', awareness: 'ilk görevde', calm: 'soruda', self: 'soruda', wellbeing: 'soruda', body: 'soruda' },
+  safety: {
+    eyebrow: 'Başlamadan önce',
+    title: 'Şu an bunlardan biri var mı?',
+    sub: 'Bunlar evde ölçülemez. Biri varsa uygulama değil, bir göz doktoru bakmalı.',
+    none: 'Hiçbiri yok, devam',
+    sheetTitle: 'Önce bir göz doktoruna görün',
+    sheetBody: ['İşaretlediğin belirti evde değerlendirilemez. Aniden başladıysa bugün bir göz doktoruna ya da acile git.', 'Geçtikten ve doktorun onayladıktan sonra buraya dönüp devam edebilirsin.'],
+    ok: 'Anladım',
+    wrong: 'Yanlış seçtim',
+    locked: 'İşaretlerin kayıtlı. Doktorun onayladıktan sonra işaretleri kaldırıp devam edebilirsin.',
+  },
+  q: {
+    map: (n) => `İris haritan · ${n}/7`,
+    count: (i, n) => `Soru ${i} / ${n}`,
+    again: '28. günde aynı soruyu yeniden soracağım.',
+    againRecheck: 'Başlangıçtaki cevabınla yan yana koyacağım.',
+    done: 'Tamam',
+    slide: 'Kaydırarak seç',
+    ends: ['çok kötü', 'mükemmel'],
+  },
+  plan: {
+    eyebrow: 'İris haritan',
+    title: (name) => (name ? `${name}, gözünden başladık. 28. günde haritana yeniden bakacağız.` : 'Gözünden başladık. 28. günde haritana yeniden bakacağız.'),
+    steps: [['Her gün', "~15 dk'lık yol"], ['5. gün', 'İlk rapor'], ['28. gün', 'Harita yeniden, yan yana']],
+    honest: 'Tanı koymaz, tedavi etmez. Ölçer, değişimi gösterir, alışkanlık kurar.',
+    cta: 'Planımı başlat',
+    compareEyebrow: '28. gün',
+    compareTitle: (name) => (name ? `${name}, haritan yan yana` : 'Haritan yan yana'),
+    beforeShort: (v) => `önce: ${v}`,
+    compareNote: 'Tek soruluk ölçekler kişi içinde karşılaştırma içindir; küçük farklar günlük oynama olabilir. Gelişim\'de her alanın ayrıntısı durur.',
+    close: 'Ana sayfaya dön',
+  },
+  paywall: {
+    eyebrow: 'Nefona Premium',
+    trialTitle: (d) => `${d} gün ücretsiz, haritanın hepsi açık`,
+    title: 'Haritanı doldurmaya devam et',
+    purpose: 'Nefona gözünden başlar: gözünü, dikkatini, sakinliğini, bedenini ve kendine bakışını birlikte izler, değişimi gösterir, günlük alışkanlığa çevirir.',
+    features: [['Günlük yol ve hatırlatmalar:', 'göz, dikkat, nefes, hareket'], ['İris haritası:', '7 alanda değişim gerçek mi'], ['Günlük E testi', 've haftalık tam ölçüm']],
+    trial: (remind, days) => [['Bugün', 'Her şey açılır'], [`${remind}. gün`, 'Bitmeden hatırlatırız'], [`${days}. gün`, 'İptal etmezsen plan başlar']],
+  },
+}
+
+const TEXT = { tr }
+export function setupText(lang = 'tr') {
+  return TEXT[lang] ?? tr
+}

@@ -1,88 +1,58 @@
-import { useState } from 'react'
-import { Check, TriangleAlert } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import FirstLook from './FirstLook.jsx'
-import QuestionFlow, { ProgressBar, WhyLine, WHY_MS } from '../components/QuestionFlow.jsx'
-import { RED_FLAGS, normalizeProfile } from '../lib/profile.js'
-import '../styles/profile.css'
+import Safety from './Safety.jsx'
+import IrisQuestions from './IrisQuestions.jsx'
+import { normalizeProfile } from '../lib/profile.js'
+import { IRIS_QUESTIONS, missing } from '../lib/profileQuestions.js'
+import { withBaseline } from '../lib/iris.js'
 
-// İlk açılış (Artifact "Önce Fark Ettir"): 20 sn farkındalık anı → yaş aralığı → uyarı işaretleri. Diğer sorular
-// yerinde sorulur (lib/profileQuestions.js). Uyarı işareti seçilirse eski sevk kuralı: devam edilmez.
-// bar: bu ekranların kurulum ilerleme çubuğundaki payı [başlangıç, bitiş]; sonraki kurulum adımları (mesafe)
-// StepHeader ile aynı çubuğu sürdürür.
+// İlk açılış (Artifact "Nefona Başlangıç Kartı", onaylı; sahibinin 27 Eylül kararı): güvenlik → İlk Bakış (Göz) →
+// iris haritasının 4 sorusu. Yaş sorulmaz: doğum tarihi sonraki "Seni tanıyalım" ekranında (App.jsx). Uyarı işareti
+// seçilirse sevk kuralı: kaydedilir, kurulum ilerlemez. Son soruda iris başlangıcı yazılır (lib/iris.js).
+// bar: bu ekranların kurulum ilerleme çubuğundaki payı; sonraki adımlar kalan payı böler.
 export const ONBOARD_SHARE = 0.6
 
-export function Flags({ profile, bar, onDone }) {
-  const [flags, setFlags] = useState(profile.flags ?? [])
-  const [cleared, setCleared] = useState(false)
-  const referred = flags.length > 0
-  const toggle = (id) => setFlags((f) => (f.includes(id) ? f.filter((x) => x !== id) : [...f, id]))
-  const none = () => {
-    setFlags([])
-    setCleared(true)
-    onDone({ ...profile, flags: [], flagsChecked: true }, true)
+// Profilim → Sorularım da aynı güvenlik ekranını kullanır
+export const Flags = Safety
+
+// onDone(profil): güvenlik temiz ve sorular bitti ya da işaret kaydedildi (referred; kurulum kilitli kalır).
+export default function Onboarding({ initial = null, trueDepth = false, sessions = [], domainOf, onDone }) {
+  const [p, setP] = useState(() => normalizeProfile(initial))
+  const firstStep = (q) => (!q.flagsChecked || q.flags.length ? 'safety' : !q.firstLook ? 'look' : 'questions')
+  const [step, setStep] = useState(() => firstStep(p))
+  const share = (a, b) => [a * ONBOARD_SHARE, b * ONBOARD_SHARE]
+  const date = () => p.date ?? new Date().toISOString()
+
+  if (step === 'safety') {
+    return (
+      <Safety
+        profile={p}
+        bar={0.06 * ONBOARD_SHARE}
+        onDone={(np, clear) => {
+          if (!clear) {
+            onDone({ ...np, date: date() }) // sevk: kaydedilir, kurulum burada durur
+            return
+          }
+          setP(np)
+          setStep(np.firstLook ? 'questions' : 'look')
+        }}
+      />
+    )
   }
-  return (
-    <main className="screen fade-in oq">
-      <div className="oq-top"><ProgressBar value={bar} /></div>
-      <h1 className="oq-q">Şu an bunlardan biri var mı?</h1>
-      <button type="button" className="oq-none" onClick={none}>
-        <Check size={24} strokeWidth={2.6} aria-hidden="true" /> Hiçbiri yok
-      </button>
-      {cleared && <WhyLine text="Bunlardan biri ortaya çıkarsa beni değil, bir göz doktorunu ara." />}
-      <span className="muted small">Varsa işaretle:</span>
-      <div className="oq-flags">
-        {RED_FLAGS.map((f) => (
-          <label key={f.id} className={`oq-flag${flags.includes(f.id) ? ' on' : ''}`}>
-            <input type="checkbox" checked={flags.includes(f.id)} onChange={() => toggle(f.id)} />
-            <span>{f.text}</span>
-          </label>
-        ))}
-      </div>
-      {referred && (
-        <>
-          <section className="card tone-danger" role="alert">
-            <div className="row" style={{ alignItems: 'flex-start' }}>
-              <TriangleAlert size={20} style={{ flex: 'none', marginTop: 2 }} />
-              <div className="stack" style={{ gap: 6 }}>
-                <h3>Lütfen önce bir göz doktoruna başvur</h3>
-                <p className="small">
-                  İşaretlediğin belirtiler acil değerlendirme gerektirebilir; bu uygulama bunları değerlendiremez.
-                  Aniden başladıysa bugün bir göz doktoruna veya acil servise git.
-                </p>
-              </div>
-            </div>
-          </section>
-          <button type="button" className="btn" onClick={() => onDone({ ...profile, flags, flagsChecked: true }, false)}>Kaydet</button>
-          <p className="muted small">Belirtiler geçtikten ve doktorun onayladıktan sonra bu ekranı yeniden doldurabilirsin.</p>
-        </>
-      )}
-    </main>
-  )
+  if (step === 'look') {
+    return <FirstLook trueDepth={trueDepth} bar={share(0.1, 0.45)} onDone={(look) => { setP((q) => ({ ...q, firstLook: look })); setStep('questions') }} />
+  }
+  return <Questions profile={p} bar={share(0.5, 1)} sessions={sessions} domainOf={domainOf} onSave={setP} onDone={(np) => onDone(withBaseline({ ...np, date: np.date ?? date() }))} />
 }
 
-// onDone(profil): yaş ve işaretler cevaplandı (işaret varsa referred profil kaydedilir, kurulum kilitli kalır).
-// skipLook: eski kullanıcı ya da işaret sonrası geri dönüş (20 sn anı yeniden gösterilmez).
-export default function Onboarding({ initial = null, trueDepth = false, skipLook = false, onDone }) {
-  const [p, setP] = useState(() => normalizeProfile(initial))
-  const [step, setStep] = useState(() => (skipLook || p.firstLook ? (p.ageBand ? 'flags' : 'age') : 'look'))
-  const share = (a, b) => [a * ONBOARD_SHARE, b * ONBOARD_SHARE]
-
-  if (step === 'look') {
-    return <FirstLook trueDepth={trueDepth} bar={share(0, 0.5)} onDone={(look) => { setP((q) => ({ ...q, firstLook: look })); setStep('age') }} />
-  }
-  if (step === 'age') {
-    return <QuestionFlow ids={['age']} profile={p} bar={share(0.5, 0.75)} onSave={setP} onDone={(np) => { setP(np); setStep('flags') }} />
-  }
-  return (
-    <Flags
-      profile={p}
-      bar={0.8 * ONBOARD_SHARE}
-      onDone={(np, clear) => {
-        const done = { ...np, date: np.date ?? new Date().toISOString() }
-        // "Hiçbiri yok": cümle kısa bir an görünsün, sonra kurulum devam etsin
-        if (clear) setTimeout(() => onDone(done), WHY_MS)
-        else onDone(done)
-      }}
-    />
-  )
+// Soru listesi girişte bir kez sabitlenir: cevaplanan soru listeden düşüp sırayı kaydırmasın (tarayıcıda görüldü:
+// 1. sorudan sonra uyku atlanıyordu)
+function Questions({ profile, onDone, ...rest }) {
+  const [ids] = useState(() => missing(profile, IRIS_QUESTIONS))
+  const empty = ids.length === 0
+  useEffect(() => {
+    if (empty) onDone(profile)
+  }, [empty]) // eslint-disable-line react-hooks/exhaustive-deps
+  if (empty) return null
+  return <IrisQuestions ids={ids} profile={profile} onDone={onDone} {...rest} />
 }

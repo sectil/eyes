@@ -11,6 +11,8 @@ Son güncelleme: 2026-09-27.
   satır atlar ve uzar; yönler başlangıç/bitiş (margin-inline vb.) — Arapça/İbranice sağdan sola kendiliğinden döner;
   bağlantılı cümleler bütün cümle olarak çevrilir (Türkçe ek koda gömülmez). Arapça için yazı tipi: Noto Sans Arabic.
 - Claude beğenmediği tasarımı sahibine sunmaz; önce görsel (Artifact), onaydan sonra kod.
+- Göndermeden önce ekran ekran yazılı eleştiri listesi; "mükemmel değil" diyen tek madde kalırsa gönderilmez.
+- Vizyon: göz giriş kapısı, hedef bütün insan (iris haritası, 7 alan). Tasarım ve metin yalnız göze daralmaz.
 - [x] Giriş ekranı: "Nefona" ve alt yazı tuvalden DOM'a taşındı (çevrilebilir)
 - Sayı ve ondalıklar dile göre yazılır (Intl.NumberFormat: 7,4 / 7.4); kelimeye bölme Intl.Segmenter ile (Japonca,
   Çince, Tayca gibi boşluksuz yazılan diller de çalışsın).
@@ -23,7 +25,12 @@ Son güncelleme: 2026-09-27.
 - [x] Küçük düzeltmeler: kamerasız devam, "yalnızca bu cihazda" metni, Nef'in iki ayrı izni (Bilgi anahtarı dahil), 18 yaş sınırı
       (6743d54) + denetimin 29 doğrulanmış bulgusu düzeltildi (Nef rızası kayıtlı ve sürümlü, eski izinsiz kayıt kapanır;
       kamera izni mesajları; kamerasız mod tüm uygulamada; 18 altına "Hesabımı sil")
-- [ ] İlk açılış sırası: film → güvenlik → 20 sn göz kırpma → ad/doğum tarihi → 7 gün deneme → Bugün (hesap, 40 cm, bildirim, Apple Sağlık, Ekran Süresi sonraya)
+- [x] İlk açılış sırası (iris haritası): hoş geldin → güvenlik → İlk Bakış → 4 soru (stres, uyku, hareket, öz-şefkat) →
+      Seni tanıyalım → İris haritan → 7 gün deneme → Bugün. Yaş doğum tarihinden. 28. günde Ana sayfa kartı: İlk Bakış +
+      aynı 4 soru + yan yana harita (lib/iris.js, screens/Iris*.jsx)
+- [ ] Stres (Elo 2003) ve öz-şefkat (Zhang 2022) sorularının cevap seçeneklerini tam metinden doğrula (şimdilik VARSAYIM)
+- [ ] Profilim'den iris haritasını yeniden açma satırı; Gelişim'de 7 alanla iris bağı
+- [ ] Bildirim izni ve mesafe (40 cm) adımlarının yeni sıradaki yeri (şimdi denemeden sonra)
       — yaş kapısı böylece hesaptan ÖNCE olur (denetim: şu an 18 altı kişinin hesabı sunucuda açılıyor, sonra durduruluyor)
 - [ ] Yol 4–5 durak (~11 dk); Isınma/Daire/Yakın–uzak Keşfet'e; Çemberler dönüşümlü; yol yalnız yoldan başlatılan oturumla tamamlanır
 - [ ] Seri kalır; Takvim "Seri yok, baskı yok" metni seriyle uyumlu hale gelir

@@ -18,6 +18,9 @@ import FirstReport from './screens/FirstReport.jsx'
 import { reportDay, REPORT_DAY } from './lib/progress.js'
 import Home from './screens/Home.jsx'
 import Onboarding from './screens/Onboarding.jsx'
+import IrisPlan from './screens/IrisPlan.jsx'
+import IrisRecheck from './screens/IrisRecheck.jsx'
+import { irisCells, filledIndexes, snapshot } from './lib/iris.js'
 import ProfileQuestions from './screens/ProfileQuestions.jsx'
 import QuestionFlow from './components/QuestionFlow.jsx'
 import { missing, GROUPS } from './lib/profileQuestions.js'
@@ -68,6 +71,9 @@ const gatesOf = (s) => registry.forRoute(s)?.gates ?? {}
 const budgetKindOf = (s) => gatesOf(s).eyeBudget ?? null
 // Mola metninde cümle içinde geçer ("Devam: günlük test"): modülün label'ı.
 const activityLabel = (s) => registry.labelFor(s)
+// İris haritası: oturumun sayıldığı alan (Dikkat, Farkındalık ilk görevle dolar; lib/iris.js)
+const domainOfSession = (s) => registry.forSession(s)?.progress?.domain ?? null
+const irisFilled = (profile) => filledIndexes(irisCells(profile?.iris?.baseline ?? snapshot(profile ?? {}), {}))
 // Ana sayfadaki mola bandından açılan kilit ekranı (hedefsiz)
 const REST_ROUTE = 'eye-rest'
 
@@ -666,6 +672,14 @@ export default function App() {
   }
   if (screen === 'account') return <AccountStart onDone={finishAccount} onCancel={() => go('profile')} />
   if (!settings.account) return <AccountStart onDone={finishAccount} />
+  if (!settings.screening || settings.screening.referred) {
+    // İlk açılış (Artifact "Nefona Başlangıç Kartı"; sahibinin 27 Eylül kararı): güvenlik → İlk Bakış → iris haritasının
+    // 4 sorusu. Hesaptan hemen sonra, "Seni tanıyalım"dan ve denemeden önce. İşaret varsa kilitli kalır.
+    // Doğum tarihi ve gözlük daha önce girildiyse (eski sıra) anketin yaş ve gözlük alanlarını önceden doldurur
+    const setupAge = ageBandFromAge(ageFromBirthDate(settings.identity?.birthDate))
+    const initial = settings.profile ?? { ...profileFromScreening(settings.screening), ...(setupAge ? { ageBand: setupAge } : {}), ...(settings.setupCorrection ? { correction: settings.setupCorrection } : {}) }
+    return <Onboarding initial={initial} trueDepth={native.trueDepth} sessions={sessions} domainOf={domainOfSession} onDone={saveProfile} />
+  }
   if (!settings.identitySetup) {
     const done = (id, corr) => {
       store.setSetting('identity', id)
@@ -693,24 +707,21 @@ export default function App() {
       : null
     return <ProfileSetup identity={settings.identity} correction={currentCorrection()} account={settings.account} onSave={done} onDeleteAccount={deleteMinor} />
   }
-  // Deneme teklifi bir kez, profilden hemen sonra. Web'de ödeme yok (atlanır); test derlemesinde "geç" ile görülebilir.
+  // İris haritan: kurulumun sonunda bir kez, denemeden önce (yalnız yeni kurulumda başlangıç haritası varsa)
+  if (!settings.irisPlanSeen && settings.profile?.iris?.baseline && screen !== 'evidence') {
+    return <IrisPlan profile={settings.profile} name={settings.identity?.name ?? ''} sessions={sessions} domainOf={domainOfSession} onDone={() => { store.setSetting('irisPlanSeen', { date: nowIso() }); refresh() }} />
+  }
+  // Deneme teklifi bir kez, iris haritasından hemen sonra. Web'de ödeme yok (atlanır); test derlemesinde "geç" ile görülebilir.
   if (!settings.trialOffer && !access.loading && access.native && (!access.premium || access.testUnlock) && screen !== 'evidence') {
     return (
       <Paywall
-        trial
+        filled={irisFilled(settings.profile)}
         onUnlocked={() => { store.setSetting('trialOffer', { date: nowIso(), started: true }); setAccess({ loading: false, premium: true, native: true }); refresh() }}
         onSkip={access.testUnlock ? () => { store.setSetting('trialOffer', { date: nowIso(), skipped: true }); refresh() } : null}
         onSafety={() => go('evidence')}
         onExport={exportData}
       />
     )
-  }
-  if (!settings.screening || settings.screening.referred) {
-    // İlk açılış: 20 sn farkındalık anı, yaş, uyarı işaretleri (Artifact "Önce Fark Ettir"). İşaret varsa kilitli kalır.
-    // Profil kurulumundaki doğum tarihi ve gözlük, anketin yaş ve gözlük sorularını önceden doldurur
-    const setupAge = ageBandFromAge(ageFromBirthDate(settings.identity?.birthDate))
-    const initial = settings.profile ?? { ...profileFromScreening(settings.screening), ...(setupAge ? { ageBand: setupAge } : {}), ...(settings.setupCorrection ? { correction: settings.setupCorrection } : {}) }
-    return <Onboarding initial={initial} trueDepth={native.trueDepth} onDone={saveProfile} />
   }
   if (screen === 'whatsnew') return <WhatsNew releases={RELEASES} title="Yenilikler" back onClose={() => go('info')} />
   // Güncellemeden sonra ilk açılışta bir kez: görülmemiş sürüm notları
@@ -722,6 +733,10 @@ export default function App() {
   const reportStart = settings.trialOffer?.date ?? settings.identitySetup?.date ?? null
   const rDay = reportDay(reportStart)
   const closeReport = (to) => { store.setSetting('firstReportSeen', { date: new Date().toISOString() }); refresh(); go(to) }
+  // 28. gün: iris haritası yeniden (Ana sayfa kartı)
+  if (screen === 'iris-recheck') {
+    return <IrisRecheck profile={settings.profile} trueDepth={native.trueDepth} name={settings.identity?.name ?? ''} sessions={sessions} domainOf={domainOfSession} onSave={saveProfile} onClose={() => go('home')} />
+  }
   if (screen === 'first-report' || (!settings.firstReportSeen && rDay >= REPORT_DAY && rDay <= 14 && screen === 'home')) {
     return <FirstReport tests={tests} sessions={sessions} start={reportStart} onClose={() => closeReport('home')} onProgress={() => closeReport('progress')} />
   }
@@ -800,6 +815,7 @@ export default function App() {
   if (locked && screen !== 'evidence') {
     return (
       <Paywall
+        filled={irisFilled(settings.profile)}
         preview={previewPaywall}
         onUnlocked={() => { setAccess({ loading: false, premium: true, native: true }); go('home') }}
         onSafety={() => go('evidence')}
@@ -973,7 +989,7 @@ export default function App() {
         onHealthConsent={answerHealth}
         healthSheetKind={healthSheetKind}
         onCoach={setCoach} onStart={go}
-        onAsk={(group) => { const ids = missing(settings.profile, GROUPS[group] ?? []); if (ids.length) setAskFor({ ids, then: 'home', back: 'home' }) }}
+        onAsk={(group) => { if (group === 'iris') { go('iris-recheck'); return } const ids = missing(settings.profile, GROUPS[group] ?? []); if (ids.length) setAskFor({ ids, then: 'home', back: 'home' }) }}
         onSaveProfile={saveProfile}
         // Hatırlatma kartı yalnız iPhone uygulamasında (web'de bildirim yok); Home rıza sayfası açıkken göstermez
         reminderAsk={isIOSApp() && normalizeReminders(settings.reminders).optIn == null}

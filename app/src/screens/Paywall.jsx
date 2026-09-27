@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
 import { errorDetail } from '../lib/account.js'
-import { ScanEye, ChartLine, Dumbbell, Bell, Check, ShieldCheck, Download, Sparkles } from 'lucide-react'
+import { Route, ChartLine, ScanEye, Check, ShieldCheck, Download } from 'lucide-react'
+import IrisMap from '../components/IrisMap.jsx'
+import { setupText } from '../lib/setupText.js'
 import { getPlans, purchase, restore, isNative } from '../lib/subscription.js'
 import { scheduleTrialReminder, TRIAL_REMIND_DAYS } from '../lib/restNotify.js'
 import '../styles/account.css'
+import '../styles/setup.css'
 
 // Apple App Store Review Guideline 3.1.2 gereği: fiyat + dönem, deneme koşulu,
 // otomatik yenileme ve iptal bilgisi, satın alımları geri yükleme, şartlar ve gizlilik.
@@ -12,12 +15,8 @@ import '../styles/account.css'
 export const TERMS_URL = 'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/'
 export const PRIVACY_URL = import.meta.env.VITE_PRIVACY_URL || ''
 
-const BENEFITS = [
-  { Icon: ScanEye, text: 'Günlük "E hangi yönde" testi ve haftalık tam ölçüm' },
-  { Icon: ChartLine, text: 'Gelişim grafiği — gerçek değişimi gürültüden ayırır' },
-  { Icon: Dumbbell, text: 'Hafif, Normal ve Tam egzersiz setleri' },
-  { Icon: Bell, text: 'Takvim, hatırlatma ve okuma testi' },
-]
+// Premium'un üç satırı (Artifact "Nefona Başlangıç Kartı", onaylı); yazılar lib/setupText.js
+const FEATURE_ICONS = [Route, ChartLine, ScanEye]
 
 // Web'de ödeme yok: önizleme için örnek planlar
 const PREVIEW_PLANS = [
@@ -29,9 +28,11 @@ const PREVIEW_PLANS = [
 const PERIOD = { annual: 'yıl', monthly: 'ay', weekly: 'hafta' }
 const PERIOD_TITLE = { annual: 'Yıllık', monthly: 'Aylık', weekly: 'Haftalık' }
 
-// trial: ilk kurulumda profilden hemen sonra (Build 23b) — denemenin gün gün ne olduğu gösterilir.
+// Deneme varsa (planın freeTrialDays) denemenin üç günü gösterilir: bugün, hatırlatma, plan başlar.
 // onSkip: yalnız test derlemesinde (VITE_TEST_UNLOCK) ekranı görmek için "geç".
-export default function Paywall({ onUnlocked, onExport, onSafety, preview = false, trial: firstRun = false, onSkip = null }) {
+// filled: kişinin iris haritasında dolu alanlar (üstteki iris; lib/iris.js)
+export default function Paywall({ onUnlocked, onExport, onSafety, preview = false, onSkip = null, filled = [] }) {
+  const S = setupText().paywall
   const [plans, setPlans] = useState(preview ? PREVIEW_PLANS : null)
   const [selected, setSelected] = useState(preview ? 'annual' : null)
   const [busy, setBusy] = useState(false)
@@ -84,24 +85,24 @@ export default function Paywall({ onUnlocked, onExport, onSafety, preview = fals
 
   return (
     <main className="screen fade-in paywall">
-      <header className="page-header" style={{ alignItems: 'center', textAlign: 'center', paddingTop: 12 }}>
-        <span className="paywall-badge"><Sparkles size={16} /> {trial ? `${trial} gün ücretsiz` : 'Nefona Premium'}</span>
-        <h1>{firstRun && trial ? `${trial} gün boyunca her şey açık` : 'Görmeni ölç, takip et, düzenli kal'}</h1>
-        <p>{firstRun ? 'Planını seç; deneme bugün başlar.' : 'Devam etmek için planını seç.'}</p>
+      <header className="pw-head">
+        <IrisMap size={66} filled={filled} />
+        <span className="oq-ey pw-ey">{S.eyebrow}</span>
+        <h1>{trial ? S.trialTitle(trial) : S.title}</h1>
+        <p>{S.purpose}</p>
       </header>
 
-      {firstRun && trial ? (
-        <ol className="trial-tl" aria-label="Deneme süreci">
-          <li><b>Bugün</b><span>Bütün ölçümler, egzersizler ve oyunlar açılır.</span></li>
-          <li><b>{TRIAL_REMIND_DAYS}. gün</b><span>Bildirimlere izin verdiysen hatırlatırız; vermediysen uygulamada söyleriz: deneme bitmek üzere.</span></li>
-          <li><b>{trial}. gün</b><span>İptal etmediysen seçtiğin plan başlar.</span></li>
+      <ul className="pw-feat">
+        {S.features.map(([b, t], i) => {
+          const Icon = FEATURE_ICONS[i] ?? Check
+          return <li key={b}><Icon size={18} aria-hidden="true" /><span><b>{b}</b> {t}</span></li>
+        })}
+      </ul>
+
+      {trial > 0 && (
+        <ol className="pw-trial" aria-label="Deneme süreci">
+          {S.trial(TRIAL_REMIND_DAYS, trial).map(([h, t]) => <li key={h}><i aria-hidden="true" /><b>{h}</b><span>{t}</span></li>)}
         </ol>
-      ) : (
-        <ul className="benefits">
-          {BENEFITS.map(({ Icon, text }) => (
-            <li key={text}><span className="icon-bubble"><Icon size={20} /></span>{text}</li>
-          ))}
-        </ul>
       )}
 
       {plans == null && <p className="muted" style={{ textAlign: 'center' }}>Planlar yükleniyor…</p>}
@@ -130,7 +131,7 @@ export default function Paywall({ onUnlocked, onExport, onSafety, preview = fals
         ))}
       </div>
 
-      <button className="btn" disabled={!plan || busy} onClick={buy}>
+      <button className="btn pw-cta" disabled={!plan || busy} onClick={buy}>
         {busy ? 'Bekle…' : trial ? `${trial} gün ücretsiz başla` : 'Abone ol'}
       </button>
 

@@ -317,6 +317,17 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
       )}
 
       {/* Yerinde sorular (lib/profileQuestions.js): akşam kontrolü ve ilk hafta sonu, Artifact "Önce Fark Ettir" Y4/Y6 */}
+      {ask === 'iris' && (
+        <section className="card ask-card evening">
+          <span className="eyebrow">28. gün · ~2 dk</span>
+          <h3>İris haritan yeniden</h3>
+          <p className="muted small">İlk Bakış ve aynı dört soru; sonra başlangıçtaki haritanla yan yana.</p>
+          <div className="row">
+            <button type="button" className="btn btn-sm" onClick={() => onAsk?.('iris')}>Başla</button>
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => onSaveProfile?.(snooze(prof, 'iris', now))}>Sonra</button>
+          </div>
+        </section>
+      )}
       {ask === 'evening' && (
         <section className="card ask-card evening">
           <span className="eyebrow">Akşam kontrolü · 3 soru · 30 sn</span>

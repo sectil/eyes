@@ -4,8 +4,9 @@
 // Kaynak etiketleri lib/profile.js'teki listelerin yanında; burada ekranın altındaki kısa satır (source).
 import {
   AGE_BANDS, CORRECTION, EXAM, SEIZURE, NEAR_DIFFICULTY, SCREEN_HOURS, SLEEP_MIN, SLEEP_MAX, NIGHT_PHONE, STRESS_FREQ, STRESS_ITEMS,
-  normalizeProfile,
+  STRESS_NOW, ACTIVITY_DAYS_MAX, SELF_AGREE, normalizeProfile,
 } from './profile.js'
+import { recheckDue } from './iris.js'
 
 const OLDER = new Set(['40-49', '50-59', '60-69', '70+'])
 export const isOlder = (p) => OLDER.has(normalizeProfile(p).ageBand)
@@ -121,6 +122,49 @@ export const QUESTIONS = {
   },
 }
 
+// İris haritası soruları (kurulum ve 28. gün; screens/IrisQuestions.jsx). ui: ekrandaki giriş biçimi.
+// Onaylı taslakta cevaptan sonra "neden" cümlesi yok (akış hızlı); why Profilim'den düzenlerken görünür.
+Object.assign(QUESTIONS, {
+  stressNow: {
+    domain: 'calm',
+    ui: 'levels',
+    text: 'Son günlerde kendini gergin, huzursuz ya da kafan dolu olduğu için uykusuz hissettin mi?',
+    options: idx(STRESS_NOW),
+    get: (p) => p.stressNow,
+    set: (p, v) => ({ ...p, stressNow: v }),
+    why: () => 'Sakinlik alanının başlangıcı. Tanı ya da puan değil; 28. günde aynı soruyla karşılaştırırız.',
+    source: 'Stres belirtileri için tek madde (Elo 2003).',
+  },
+  activityDays: {
+    domain: 'body',
+    ui: 'days',
+    text: 'Geçen hafta kaç gün, nefesini hızlandıracak kadar en az 30 dakika hareket ettin?',
+    hint: 'Apple Sağlık izni verirsen adımların da bu alana eklenir.',
+    options: Array.from({ length: ACTIVITY_DAYS_MAX + 1 }, (_, i) => ({ id: i, text: String(i) })),
+    row: true,
+    ends: ['hiç', 'her gün'],
+    get: (p) => p.activityDays,
+    set: (p, v) => ({ ...p, activityDays: v }),
+    why: () => 'Beden alanının başlangıcı; 28. günde aynı soruyla karşılaştırırız.',
+    source: 'Fiziksel etkinlik tek madde (Milton 2010, 2012).',
+  },
+  selfCompassion: {
+    domain: 'self',
+    ui: 'agree',
+    text: 'Bu cümle sana ne kadar uyuyor?',
+    quote: 'Kendime karşı şefkatliyim.',
+    options: idx(SELF_AGREE),
+    get: (p) => p.selfCompassion,
+    set: (p, v) => ({ ...p, selfCompassion: v }),
+    why: () => 'Kendine yaklaşım alanının başlangıcı; 28. günde aynı cümleyle karşılaştırırız.',
+    source: 'Öz-şefkat tek madde (Zhang 2022; Türkiye örnekleminde de denendi).',
+  },
+})
+QUESTIONS.sleep.domain = 'wellbeing'
+QUESTIONS.sleep.ui = 'slider'
+// Kurulumdaki sıra (iris haritası; Artifact "Nefona Başlangıç Kartı")
+export const IRIS_QUESTIONS = ['stressNow', 'sleep', 'activityDays', 'selfCompassion']
+
 // Ana sayfa kartıyla sorulan gruplar
 export const GROUPS = {
   evening: ['screenHours', 'sleep', 'nightPhone'],
@@ -134,7 +178,7 @@ export const answered = (p, id) => QUESTIONS[id]?.get(normalizeProfile(p)) != nu
 export const missing = (p, ids = []) => ids.filter((id) => QUESTIONS[id] && !answered(p, id))
 export const answer = (p, id, v) => QUESTIONS[id].set(normalizeProfile(p), v)
 
-// Ana sayfada gösterilecek kart: 'evening' | 'stress' | null. Kurulum bitmemişse hiçbiri.
+// Ana sayfada gösterilecek kart: 'iris' | 'evening' | 'stress' | null. Kurulum bitmemişse hiçbiri.
 export function pendingCard(profile, now = new Date()) {
   const p = normalizeProfile(profile)
   if (!p.date) return null
@@ -144,6 +188,8 @@ export function pendingCard(profile, now = new Date()) {
     if (pr?.skipped) return false
     return !(pr?.snoozedUntil && new Date(pr.snoozedUntil).getTime() > t)
   }
+  // 28. gün: iris haritası yeniden (Ana sayfa kartı; ertelenebilir, atlanmaz)
+  if (recheckDue(p, now) && open('iris')) return 'iris'
   if (new Date(now).getHours() >= EVENING_HOUR && missing(p, GROUPS.evening).length && open('evening')) return 'evening'
   const days = (t - new Date(p.date).getTime()) / 86400000
   if (days >= STRESS_AFTER_DAYS && missing(p, GROUPS.stress).length && open('stress')) return 'stress'
@@ -176,6 +222,9 @@ export function questionRows(profile) {
     row('correction', 'Gözlük / lens', 'ilk okuma testinde'),
     row('nearDifficulty', 'Küçük yazıda zorluk', 'okuma testinden sonra'),
     row('lastExam', 'Son muayene', 'ilk E testinden sonra'),
+    row('stressNow', 'Stres', 'kurulumda'),
+    row('activityDays', 'Hareket günü', 'kurulumda'),
+    row('selfCompassion', 'Kendine şefkat', 'kurulumda'),
     row('screenHours', 'Ekran saati', 'akşam sorulacak'),
     row('sleep', 'Uyku (0–10)', 'akşam sorulacak'),
     row('nightPhone', 'Gece telefonu', 'akşam sorulacak'),

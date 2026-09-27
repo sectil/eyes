@@ -12,11 +12,11 @@ export const PROFILE_VERSION = 2 // 2: flagsChecked, prompts, firstLook (v1 ceva
 
 // Genel klinik uyarı işaretleri (eski Screening ekranından). Yayın öncesi bir göz hekimi gözden geçirmeli.
 export const RED_FLAGS = [
-  { id: 'sudden', text: 'Son günlerde bir veya iki gözde ani görme kaybı ya da ani bulanıklık' },
-  { id: 'curtain', text: 'Görme alanına perde, gölge inmesi' },
-  { id: 'flashes', text: 'Yeni başlayan ışık çakmaları veya uçuşan noktalarda ani artış' },
+  { id: 'sudden', text: 'Son günlerde bir ya da iki gözde ani görme kaybı ya da ani bulanıklık' },
+  { id: 'curtain', text: 'Görme alanına perde ya da gölge inmesi' },
+  { id: 'flashes', text: 'Yeni başlayan ışık çakmaları ya da uçuşan noktalarda ani artış' },
   { id: 'distortion', text: 'Düz çizgilerin eğri, dalgalı görünmesi' },
-  { id: 'pain', text: 'Göz ağrısı, belirgin kızarıklık veya ışığa aşırı hassasiyet' },
+  { id: 'pain', text: 'Göz ağrısı, belirgin kızarıklık ya da ışığa aşırı hassasiyet' },
   { id: 'diplopia', text: 'Yeni başlayan çift görme' },
 ]
 
@@ -74,6 +74,16 @@ export const STRESS_ITEMS = [
   { id: 'overwhelmed', text: 'Son bir ayda, işlerin seni aştığını ne sıklıkla hissettin?' },
 ]
 
+// İris haritası başlangıç soruları (Artifact "Nefona Başlangıç Kartı", onaylı): her biri doğrulanmış tek maddelik bir
+// ölçekten; kurulumda ve 28. günde sorulur (lib/iris.js). Tanı ya da puan değil; kişi-içi karşılaştırma.
+// Stres: Elo 2003 (DOI 10.5271/sjweh.752; grup düzeyinde doğrulandı). Seçenek ifadeleri VARSAYIM: tam metinden doğrulanacak.
+export const STRESS_NOW = ['Hiç', 'Biraz', 'Bir ölçüde', 'Epey', 'Çok']
+// Hareket: Milton 2010/2012 (DOI 10.1136/bjsm.2009.068395, 10.1136/bjsports-2011-090899): geçen hafta ≥30 dk nefesi hızlandıran etkinlik günü
+export const ACTIVITY_DAYS_MAX = 7
+// Öz-şefkat: SISC, Zhang 2022 (DOI 10.1002/cpp.2714). 5 basamak VARSAYIM (özgün yanıt ölçeği tam metinden doğrulanacak).
+export const SELF_AGREE = ['Hiç uymuyor', 'Pek uymuyor', 'Kısmen', 'Oldukça uyuyor', 'Tam uyuyor']
+const IRIS_KEYS = ['blinks', 'stressNow', 'sleep', 'activityDays', 'selfCompassion']
+
 export const emptyProfile = () => ({
   version: PROFILE_VERSION,
   date: null,
@@ -91,6 +101,10 @@ export const emptyProfile = () => ({
   flagsChecked: false, // uyarı işaretleri ekranı cevaplandı ("Hiçbiri yok" ya da işaret)
   prompts: {}, // yerinde sorular: { [id]: { snoozedUntil?: iso, skipped?: iso } }
   firstLook: null, // ilk 20 sn: { blinks, seconds, method: 'truedepth'|'camera'|'self', date }
+  stressNow: null, // 0–4 (STRESS_NOW)
+  activityDays: null, // 0–7
+  selfCompassion: null, // 0–4 (SELF_AGREE)
+  iris: { baseline: null, recheck: null }, // { date, blinks, stressNow, sleep, activityDays, selfCompassion } (lib/iris.js)
 })
 
 export const LOOK_METHODS = ['truedepth', 'camera', 'self']
@@ -105,6 +119,13 @@ function normalizePrompts(raw) {
     if (isoOrNull(v.skipped)) e.skipped = v.skipped
     if (Object.keys(e).length) out[id] = e
   }
+  return out
+}
+function normalizeSnap(raw) {
+  if (!raw || typeof raw !== 'object' || !isoOrNull(raw.date)) return null
+  const lim = { blinks: [0, 200], stressNow: [0, STRESS_NOW.length - 1], sleep: [SLEEP_MIN, SLEEP_MAX], activityDays: [0, ACTIVITY_DAYS_MAX], selfCompassion: [0, SELF_AGREE.length - 1] }
+  const out = { date: raw.date }
+  for (const k of IRIS_KEYS) out[k] = intIn(raw[k], ...lim[k])
   return out
 }
 function normalizeLook(raw) {
@@ -142,6 +163,10 @@ export function normalizeProfile(raw) {
     flagsChecked: raw.flagsChecked === true || (raw.version !== 2 && typeof raw.date === 'string'),
     prompts: normalizePrompts(raw.prompts),
     firstLook: normalizeLook(raw.firstLook),
+    stressNow: intIn(raw.stressNow, 0, STRESS_NOW.length - 1),
+    activityDays: intIn(raw.activityDays, 0, ACTIVITY_DAYS_MAX),
+    selfCompassion: intIn(raw.selfCompassion, 0, SELF_AGREE.length - 1),
+    iris: { baseline: normalizeSnap(raw.iris?.baseline), recheck: normalizeSnap(raw.iris?.recheck) },
   }
 }
 
