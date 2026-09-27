@@ -68,7 +68,7 @@ describe('Sorularım satırları', () => {
     const rows = questionRows({ ...base(), seizure: 'no', firstLook: { blinks: 4, seconds: 20, method: 'self', date: null } })
     const by = Object.fromEntries(rows.map((r) => [r.id, r]))
     expect(by.age.value).toBe('40–49')
-    expect(by.flags.value).toBe('Hiçbiri yok')
+    expect(by.flags.value).toBe('Okundu') // güvenlik bir soru değil, bilgi (27 Eylül kararı)
     expect(by.seizure.value).toBe('Açık')
     expect(by.firstLook.value).toBe('4 kırpma · kendi sayım')
     expect(by.sleep.value).toBeNull()

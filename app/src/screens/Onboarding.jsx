@@ -6,19 +6,19 @@ import { normalizeProfile } from '../lib/profile.js'
 import { IRIS_QUESTIONS, missing } from '../lib/profileQuestions.js'
 import { withBaseline } from '../lib/iris.js'
 
-// İlk açılış (Artifact "Nefona Başlangıç Kartı", onaylı; sahibinin 27 Eylül kararı): güvenlik → İlk Bakış (Göz) →
-// iris haritasının 4 sorusu. Yaş sorulmaz: doğum tarihi sonraki "Seni tanıyalım" ekranında (App.jsx). Uyarı işareti
-// seçilirse sevk kuralı: kaydedilir, kurulum ilerlemez. Son soruda iris başlangıcı yazılır (lib/iris.js).
+// İlk açılış (Artifact "Nefona Başlangıç Kartı", onaylı; sahibinin 27 Eylül kararı): güvenlik bilgisi → İlk Bakış (Göz) →
+// iris haritasının 4 sorusu. Yaş sorulmaz: doğum tarihi sonraki "Seni tanıyalım" ekranında (App.jsx). Güvenlik soru
+// değil bilgi; kilit yok. Son soruda iris başlangıcı yazılır (lib/iris.js).
 // bar: bu ekranların kurulum ilerleme çubuğundaki payı; sonraki adımlar kalan payı böler.
 export const ONBOARD_SHARE = 0.6
 
-// Profilim → Sorularım da aynı güvenlik ekranını kullanır
+// Profilim → Sorularım da aynı güvenlik bilgisini açar
 export const Flags = Safety
 
-// onDone(profil): güvenlik temiz ve sorular bitti ya da işaret kaydedildi (referred; kurulum kilitli kalır).
+// onDone(profil): güvenlik bilgisi okundu ve sorular bitti.
 export default function Onboarding({ initial = null, trueDepth = false, sessions = [], domainOf, onDone }) {
   const [p, setP] = useState(() => normalizeProfile(initial))
-  const firstStep = (q) => (!q.flagsChecked || q.flags.length ? 'safety' : !q.firstLook ? 'look' : 'questions')
+  const firstStep = (q) => (!q.flagsChecked ? 'safety' : !q.firstLook ? 'look' : 'questions')
   const [step, setStep] = useState(() => firstStep(p))
   const share = (a, b) => [a * ONBOARD_SHARE, b * ONBOARD_SHARE]
   const date = () => p.date ?? new Date().toISOString()
@@ -28,11 +28,7 @@ export default function Onboarding({ initial = null, trueDepth = false, sessions
       <Safety
         profile={p}
         bar={0.06 * ONBOARD_SHARE}
-        onDone={(np, clear) => {
-          if (!clear) {
-            onDone({ ...np, date: date() }) // sevk: kaydedilir, kurulum burada durur
-            return
-          }
+        onDone={(np) => {
           setP(np)
           setStep(np.firstLook ? 'questions' : 'look')
         }}

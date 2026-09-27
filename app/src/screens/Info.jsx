@@ -9,7 +9,11 @@ import CoachConsent from '../components/CoachConsent.jsx'
 import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
 import { coachAllowed } from '../lib/consent.js'
 import { haptic, initFeedback, testHaptic } from '../lib/native.js'
+import WarningSigns from '../components/WarningSigns.jsx'
+import { setupText } from '../lib/setupText.js'
 import '../styles/info.css'
+
+const SAFETY = setupText().safety
 
 const TEST_MESSAGES = {
   okApp: 'Gönderildi. Hissetmediysen aşağıdaki iPhone ayarına bak.',
@@ -249,10 +253,12 @@ export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp 
         Sürüm {import.meta.env.VITE_APP_BUILD ? `1.0 (${import.meta.env.VITE_APP_BUILD})` : 'web'}
         {iosApp && calibration?.method === 'auto' && ` · ekran: ${calibration.deviceName}${calibration.estimated ? ' (tahmini)' : ''}`}
       </p>
-      <p className="note">
-        <ShieldCheck size={16} />
-        Tıbbi bir karar vermeden önce göz doktoruna danış. Ani görme kaybı, perde inmesi, ışık çakmaları veya göz ağrısında vakit kaybetmeden başvur.
-      </p>
+      <section className="card info-warn" aria-labelledby="info-warn-h">
+        <h3 id="info-warn-h"><ShieldCheck size={18} aria-hidden="true" /> {SAFETY.infoTitle}</h3>
+        <p className="muted small">{SAFETY.infoSub}</p>
+        <WarningSigns compact label={SAFETY.infoTitle} />
+        <p className="muted small">Tıbbi bir karar vermeden önce göz doktoruna danış.</p>
+      </section>
     </>
   )
 }

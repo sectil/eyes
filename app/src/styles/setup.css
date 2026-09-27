@@ -14,28 +14,15 @@
 .su-shield { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); flex: none; }
 .su-q { margin: 12px 0 0; font: 650 1.5rem/1.25 var(--font-body); letter-spacing: -0.01em; text-wrap: balance; }
 .su-sub { margin-top: 6px; font-size: 0.92rem; }
-.su-list { margin-top: 14px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); overflow: hidden; }
-.su-item { width: 100%; display: flex; align-items: center; gap: 12px; padding: 10px 14px; min-height: 52px; border: 0; border-top: 1px solid var(--border); background: transparent; color: var(--ink); font: inherit; font-size: 0.92rem; line-height: 1.32; text-align: start; cursor: pointer; }
-.su-item:first-child { border-top: 0; }
-.su-item span { flex: 1; min-width: 0; }
-.su-item .g { color: var(--ink-3); flex: none; }
-.su-item .cb { width: 22px; height: 22px; flex: none; border-radius: 7px; box-shadow: inset 0 0 0 1.6px var(--ink-3); display: grid; place-items: center; }
-.su-item.on { background: var(--su-warn-bg); }
-.su-item.on .g { color: var(--su-warn); }
-.su-item.on .cb { background: var(--su-warn); box-shadow: none; color: var(--su-warn-ink); }
-.su-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.su-card { margin-top: 14px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); overflow: hidden; }
+.su-note { margin: 12px 0 0; font-size: 0.85rem; line-height: 1.45; color: var(--ink-3); }
 .su > .btn { margin-top: 14px; }
-.su-alert { margin-top: 14px; display: grid; grid-template-columns: auto 1fr; gap: 10px 12px; padding: 14px; border-radius: 16px; background: var(--su-warn-bg); border: 1px solid color-mix(in srgb, var(--su-warn) 40%, transparent); color: var(--su-warn); }
-.su-alert p { margin: 0; font-size: 0.9rem; line-height: 1.45; color: var(--ink-2); }
-.su-alert .btn { grid-column: 1 / -1; }
-.su-scrim { position: fixed; inset: 0; background: var(--su-scrim); z-index: 40; animation: su-fade 0.2s ease-out; }
-.su-sheet { position: fixed; inset-inline: 0; bottom: 0; z-index: 41; display: grid; gap: 10px; padding: 12px 22px calc(22px + env(safe-area-inset-bottom)); border-radius: 26px 26px 0 0; background: var(--surface); box-shadow: 0 -1px 0 var(--border), 0 -20px 50px -20px rgba(0, 0, 0, 0.5); animation: su-up 0.24s ease-out; max-width: 560px; margin-inline: auto; }
-.su-sheet .grab { justify-self: center; width: 38px; height: 5px; border-radius: 3px; background: var(--surface-3); margin-bottom: 4px; }
-.su-sheet-h { display: flex; align-items: center; gap: 10px; color: var(--su-warn); }
-.su-sheet-h h2 { margin: 0; font: 700 1.1rem/1.25 var(--font-display); color: var(--ink); letter-spacing: -0.01em; }
-.su-sheet p { margin: 0; font-size: 0.92rem; line-height: 1.5; color: var(--ink-2); }
-@keyframes su-up { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
-@keyframes su-fade { from { opacity: 0; } to { opacity: 1; } }
+/* Uyarı belirtileri listesi (components/WarningSigns.jsx) */
+.ws-list { list-style: none; margin: 0; padding: 0; }
+.ws-list li { display: flex; align-items: center; gap: 12px; padding: 11px 14px; min-height: 50px; border-top: 1px solid var(--border); font-size: 0.92rem; line-height: 1.35; color: var(--ink); }
+.ws-list li:first-child { border-top: 0; }
+.ws-list li svg { color: var(--su-warn); flex: none; }
+.ws-list.compact li { padding: 7px 0; min-height: 0; font-size: 0.85rem; gap: 10px; }
 
 /* ---------- İris soruları ---------- */
 .iq { gap: 0; }
@@ -105,7 +92,6 @@
 .ip > .btn { margin-top: 10px; }
 [dir='rtl'] .ip-arrow { transform: scaleX(-1); }
 
-@media (prefers-reduced-motion: reduce) { .su-scrim, .su-sheet { animation: none; } }
 
 /* ---------- Deneme (Paywall) ---------- */
 .pw-head { display: grid; justify-items: center; gap: 6px; text-align: center; padding-top: 6px; }
@@ -129,3 +115,11 @@
 /* Satın alma düğmesi altta sabit: planlar (App Store'dan 3 plan) ekranı uzatsa da görünür kalır */
 .btn.pw-cta { position: sticky; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 5; }
 .ip-lab em { font-style: normal; font-size: 0.68rem; line-height: 1.3; color: var(--ink-3); }
+/* Bilgi sekmesi ve göz uyarısındaki belirti listesi */
+.info-warn { display: grid; gap: 8px; }
+.info-warn h3 { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 1rem; }
+.info-warn h3 svg { color: var(--su-warn); }
+.info-warn p { margin: 0; }
+.p2-signs { margin: 4px 0 8px; }
+.p2-signs summary { cursor: pointer; font-weight: 600; font-size: 0.88rem; }
+.p2-signs p { margin: 6px 0 2px; color: var(--ink-2); }

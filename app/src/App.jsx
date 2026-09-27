@@ -672,9 +672,11 @@ export default function App() {
   }
   if (screen === 'account') return <AccountStart onDone={finishAccount} onCancel={() => go('profile')} />
   if (!settings.account) return <AccountStart onDone={finishAccount} />
-  if (!settings.screening || settings.screening.referred) {
-    // İlk açılış (Artifact "Nefona Başlangıç Kartı"; sahibinin 27 Eylül kararı): güvenlik → İlk Bakış → iris haritasının
-    // 4 sorusu. Hesaptan hemen sonra, "Seni tanıyalım"dan ve denemeden önce. İşaret varsa kilitli kalır.
+  if (!settings.screening) {
+    // İlk açılış (Artifact "Nefona Başlangıç Kartı"; sahibinin 27 Eylül kararı): güvenlik bilgisi → İlk Bakış → iris
+    // haritasının 4 sorusu. Hesaptan hemen sonra, "Seni tanıyalım"dan ve denemeden önce. Güvenlik bilgi ekranıdır; uygulama
+    // hiçbir durumda kilitlenmez (sahibinin kararı: "bilgi olarak çıkmalı, uygulama kullanılabilmeli"). Eski sürümde
+    // işaret seçip kilitli kalanlar (screening.referred) da artık geçer.
     // Doğum tarihi ve gözlük daha önce girildiyse (eski sıra) anketin yaş ve gözlük alanlarını önceden doldurur
     const setupAge = ageBandFromAge(ageFromBirthDate(settings.identity?.birthDate))
     const initial = settings.profile ?? { ...profileFromScreening(settings.screening), ...(setupAge ? { ageBand: setupAge } : {}), ...(settings.setupCorrection ? { correction: settings.setupCorrection } : {}) }

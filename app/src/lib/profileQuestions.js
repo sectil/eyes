@@ -216,7 +216,7 @@ export function questionRows(profile) {
   const row = (id, label, later) => ({ id, label, value: textOf(QUESTIONS[id], QUESTIONS[id].get(p)), later })
   return [
     row('age', 'Yaş aralığı'),
-    { id: 'flags', label: 'Uyarı işaretleri', value: p.flagsChecked ? (p.flags.length ? `${p.flags.length} işaret` : 'Hiçbiri yok') : null },
+    { id: 'flags', label: 'Güvenlik bilgisi', value: p.flagsChecked ? 'Okundu' : null },
     { id: 'firstLook', label: 'İlk 20 sn', value: p.firstLook ? `${p.firstLook.blinks} kırpma${p.firstLook.method === 'self' ? ' · kendi sayım' : ''}` : null, later: 'dokun, dene' },
     { ...row('seizure', 'Flaşlı görevler', 'ilk flaşlı görevden önce'), value: p.seizure == null ? null : p.seizure === 'no' ? 'Açık' : 'Kapalı' },
     row('correction', 'Gözlük / lens', 'ilk okuma testinde'),

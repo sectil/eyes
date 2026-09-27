@@ -6,7 +6,11 @@ import { decimalTr } from '../lib/stats.js'
 import { EYE_LABEL } from '../lib/vaSeries.js'
 import { SourceList } from './Sources.jsx'
 import ExportCard from './ExportCard.jsx'
+import WarningSigns from './WarningSigns.jsx'
+import { setupText } from '../lib/setupText.js'
 import '../styles/progress2.css'
+
+const SAFETY = setupText().safety
 
 // Gelişim 2.0 (Artifact "Gelişim Taslağı", onaylı): üstte göz uyarısı, altında alan kutucukları.
 // Kutucuğa dokununca alan ayrıntısı: metrik eğilimleri, oturum öncesi→sonrası etkileri, yöntem ve kaynak.
@@ -146,6 +150,11 @@ export default function ProgressOverview({ tests, sessions, identity = null, hea
         <div className={`card p2-alert ${eye.alert}`} role="alert">
           <span className="p2-alert-h">{eye.alert === 'red' ? <OctagonAlert size={16} aria-hidden="true" /> : <TriangleAlert size={16} aria-hidden="true" />} {eye.alert === 'red' ? 'Göz doktoruna git' : 'Dikkat'} · {EYE_LABEL[eye.eye]}</span>
           <p>{eye.message}</p>
+          <details className="p2-signs">
+            <summary>{SAFETY.alertMore}</summary>
+            <p className="small">{SAFETY.infoSub}</p>
+            <WarningSigns compact label={SAFETY.alertMore} />
+          </details>
           <button type="button" className="btn btn-sm" onClick={() => onOpen('eye')}>Ayrıntı ve kural</button>
         </div>
       )}
