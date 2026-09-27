@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { normalizeIdentity, emptyIdentity, validBirthDate, ageFromBirthDate, initialFor, hasIdentity, AVATAR_HUES } from './identity.js'
+import { normalizeIdentity, emptyIdentity, validBirthDate, ageFromBirthDate, initialFor, hasIdentity, AVATAR_HUES, isAdult, MIN_AGE } from './identity.js'
 import { ageBandFromAge } from './profile.js'
 
 const NOW = new Date('2026-09-25T12:00:00')
@@ -70,4 +70,17 @@ describeTz('doğum tarihi saat diliminden bağımsız', () => {
       expectTz(JSON.parse(out)).toEqual([true, true, true, false, false])
     })
   }
+})
+
+describe('18 yaş sınırı (isAdult)', () => {
+  const now = new Date(2026, 8, 27)
+  it('18. doğum gününde yetişkin, bir gün önce değil', () => {
+    expect(isAdult('2008-09-27', now)).toBe(true)
+    expect(isAdult('2008-09-28', now)).toBe(false)
+    expect(MIN_AGE).toBe(18)
+  })
+  it('tarih yoksa ya da bozuksa yetişkin sayılmaz', () => {
+    expect(isAdult(null, now)).toBe(false)
+    expect(isAdult('1984-13-40', now)).toBe(false)
+  })
 })

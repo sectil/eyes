@@ -7,15 +7,24 @@ import { distanceStatus, REFERENCE_MM } from '../lib/distance.js'
 // TrueDepth (Face ID kamerası) ile canlı mesafe. Kalibrasyon yok: sensör gerçek
 // uzaklığı ölçer. Bu ekran yalnızca kullanıcıya 40 cm'nin nasıl bir mesafe olduğunu
 // gösterir; doğru mesafe 1,5 sn tutulunca devam edilir.
+// Kamera izni yoksa, sensör başlamazsa ya da NO_FACE_MS boyunca yüz görünmezse "Kamerasız devam et" çıkar
+// (önceden çıkış yoktu: izin reddedilince kurulum burada kilitleniyordu). VARSAYIM: 10 sn.
 const HOLD_MS = 1500
+const NO_FACE_MS = 10000
 const MIN_MM = 200
 const MAX_MM = 700
 
-export default function DistanceHud({ step, total, onDone }) {
+export default function DistanceHud({ step, total, onDone, onSkip = null }) {
   const { mm, face, ready, error } = useFaceTracking({ enabled: true, trueDepth: true })
   const status = face ? distanceStatus(mm) : 'unknown'
   const [held, setHeld] = useState(0)
   const since = useRef(null)
+  const [slow, setSlow] = useState(false)
+  useEffect(() => {
+    if (face) return undefined
+    const t = setTimeout(() => setSlow(true), NO_FACE_MS)
+    return () => clearTimeout(t)
+  }, [face])
 
   useEffect(() => {
     if (status === 'ok') {
@@ -38,8 +47,10 @@ export default function DistanceHud({ step, total, onDone }) {
   const arc = 0.75 * C
   const message = !ready
     ? 'Sensör başlatılıyor…'
-    : error
-      ? 'TrueDepth sensörü başlatılamadı'
+    : error === 'permission'
+      ? "Kamera izni yok. Ayarlar → Nefona → Kamera'dan açabilir ya da kamerasız devam edebilirsin."
+      : error
+      ? 'Face ID kamerası başlatılamadı'
       : !face
         ? 'Yüzünü kameraya göster'
         : status === 'too-close'
@@ -99,8 +110,13 @@ export default function DistanceHud({ step, total, onDone }) {
       <button className="btn" disabled={!done} onClick={() => onDone({ method: 'truedepth', date: new Date().toISOString() })}>
         Devam <ArrowRight size={18} aria-hidden="true" />
       </button>
+      {onSkip && (error || slow) && !done && (
+        <button type="button" className="btn btn-ghost" onClick={onSkip}>Kamerasız devam et</button>
+      )}
       <p className="muted small" style={{ textAlign: 'center' }}>
-        Testlerde bu mesafe sürekli ölçülür; uzaklaşırsan harf boyutu otomatik düzeltilir.
+        {onSkip && (error || slow) && !done
+          ? 'Kamerasız devam edersen test sonuçları daha az güvenilir olur; mesafeyi sonra Bilgi sekmesinden açabilirsin.'
+          : 'Testlerde bu mesafe sürekli ölçülür; uzaklaşırsan harf boyutu otomatik düzeltilir.'}
       </p>
     </main>
   )

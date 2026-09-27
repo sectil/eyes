@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Camera, Check, ChevronRight, Film, ListChecks, LogOut, Trash2, UserRound, ShieldCheck, Footprints } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
-import { emptyIdentity, normalizeIdentity, validBirthDate, ageFromBirthDate, initialFor, AVATAR_HUES, AVATAR_PX, NAME_MAX } from '../lib/identity.js'
+import { emptyIdentity, normalizeIdentity, validBirthDate, ageFromBirthDate, initialFor, AVATAR_HUES, AVATAR_PX, NAME_MAX, MIN_AGE } from '../lib/identity.js'
 import { CORRECTION } from '../lib/profile.js'
 import { accountLabel, signedIn } from '../lib/account.js'
 import BirthDateBoxes from '../components/BirthDateBoxes.jsx'
@@ -64,8 +64,10 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
     }
   }, [loadMembership])
   const file = useRef(null)
-  const dateOk = !id.birthDate || validBirthDate(id.birthDate)
-  const age = id.birthDate && dateOk ? ageFromBirthDate(id.birthDate) : null
+  const validDate = !id.birthDate || validBirthDate(id.birthDate)
+  const age = id.birthDate && validDate ? ageFromBirthDate(id.birthDate) : null
+  const minor = age != null && age < MIN_AGE
+  const dateOk = validDate && !minor
   const dirty = JSON.stringify(normalizeIdentity(identity)) !== JSON.stringify(id) || correction !== (profile?.correction ?? null)
 
   async function pick(e) {
@@ -123,6 +125,7 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
       <div className="field">
         <span id="ph-birth-label">Doğum tarihi {age != null && <span className="muted">· {age} yaş</span>}</span>
         <BirthDateBoxes id="ph-birth" value={id.birthDate} onChange={(v) => setId((q) => ({ ...q, birthDate: v }))} />
+        {minor && <p className="small" role="alert" style={{ color: 'var(--warn)', margin: 0 }}>Nefona 18 yaş ve üstü içindir.</p>}
       </div>
       <div className="field">
         <span>Şehir</span>

@@ -333,7 +333,8 @@ export default function App() {
     }
   }, [healthOk, healthTick])
   // iPhone'da TrueDepth varsa mesafe her zaman sensörden gelir (eski kamera kalibrasyonu yok sayılır).
-  const distanceCal = native.trueDepth
+  // Kamerasız devam edildiyse (settings.distance.skipped) TrueDepth olsa da mesafe "ölçülmüyor" sayılır.
+  const distanceCal = native.trueDepth && !settings.distance?.skipped
     ? { method: 'truedepth' }
     : settings.distance?.irisPxAt40 || settings.distance?.method === 'truedepth' ? settings.distance : null
   const setupTotal = native.autoScreen ? 2 : 3
@@ -504,8 +505,9 @@ export default function App() {
   }
   if (!settings.distance || screen === 'recalibrate-distance') {
     const done = (d) => { store.setSetting('distance', d); refresh(); go(lastTab) }
-    if (native.trueDepth) return <DistanceHud step={setupTotal} total={setupTotal} onDone={done} />
-    return <DistanceCalibration onDone={done} onSkip={() => done({ skipped: true, date: new Date().toISOString() })} />
+    const skip = () => done({ skipped: true, date: new Date().toISOString() })
+    if (native.trueDepth) return <DistanceHud step={setupTotal} total={setupTotal} onDone={done} onSkip={skip} />
+    return <DistanceCalibration onDone={done} onSkip={skip} />
   }
 
   // --- Abonelik kilidi: deneme ilk kurulumda başlar (Build 23b); abonelik/deneme yoksa ödeme ekranı ---

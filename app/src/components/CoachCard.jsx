@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Sparkles, ChevronRight, ShieldCheck, WifiOff, X } from 'lucide-react'
+import { Sparkles, ChevronRight, WifiOff, X } from 'lucide-react'
 import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
 import { getTodayInsight } from '../lib/coach.js'
+import CoachConsent from './CoachConsent.jsx'
 import '../styles/coach.css'
 
 // Ana sayfa "Bugün" kartı — Nef Göz Koçu. Varsayılan KAPALI; açık onayla açılır
@@ -53,19 +54,7 @@ export default function CoachCard({ tests, sessions, profile = null, weeklyTarge
         </div>
         <p className="coach-lead">Kendi verine bakıp her gün tek bir içgörü ve bir öneri yazar.</p>
         {consent ? (
-          <>
-            <p className="note small">
-              <ShieldCheck size={16} aria-hidden="true" />
-              Açarsan yalnızca özet sayılar (ör. bu hafta kaç gün çalıştığın, son 7 günün ölçüm ortancası) ve profil
-              cevaplarından uyku puanı, ekran süresi, gece telefonu ve stres özeti şifreli bağlantıyla
-              sunucumuza, oradan yapay zekâ sağlayıcısına (OpenRouter) gider. Kamera görüntüsü, adın ya da cihaz kimliğin
-              gitmez. Öneriler tıbbi tavsiye değildir. Bilgi ekranından istediğin an kapatabilirsin.
-            </p>
-            <div className="row" style={{ gap: 10 }}>
-              <button className="btn btn-sm" onClick={() => setPrefs({ coach: true, coachLife: true })}>Kabul et ve aç</button>
-              <button className="btn btn-ghost btn-sm" onClick={() => setConsent(false)}>Vazgeç</button>
-            </div>
-          </>
+          <CoachConsent idPrefix="cc-home" onAccept={({ life }) => setPrefs({ coach: true, coachLife: life })} onCancel={() => setConsent(false)} />
         ) : (
           <button className="btn btn-ghost btn-sm" onClick={() => setConsent(true)}>Nasıl çalışır, aç</button>
         )}

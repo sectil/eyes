@@ -29,6 +29,7 @@ export const RELEASES = [
       { kind: 'fix', text: 'Giriş ya da ödeme ekranı hata verirse altında hata kodu görünüyor (destek için).' },
       { kind: 'fix', text: 'Ödeme ekranı "Planlar yükleniyor"da takılı kalıyordu (abonelik altyapısı hiç başlamıyordu); düzeldi. Planlar yine gelmezse 20 saniye sonra nedeni yazılır.' },
       { kind: 'fix', text: 'İlk bakış kırpma sayımı: okuma metni 20 saniyeden önce bitiyordu; metin uzadı, süre boyunca okuma sürüyor.' },
+      { kind: 'fix', text: 'Kamera izni vermezsen 40 cm ekranında takılmıyorsun: "Kamerasız devam et" çıkıyor. Nef göz koçu artık iki ayrı izinle açılıyor (özet sayılar / profil cevapları). Nefona 18 yaş ve üstü içindir.' },
       { kind: 'new', text: 'Apple Sağlık (izninle, yalnız okuma): bugünkü adımın ana sayfada, son 7 gün Gelişim → Beden\'de. Uzun süre kalkmadıysan Nef önce 2 dakika yürümeni önerir. Veriler telefonundan çıkmaz.' },
       { kind: 'change', text: 'KVKK: profilin sunucuya ancak açık iznine göre eşitlenir. Ne, neden, nerede (Frankfurt), ne kadar süre tek sayfada; kutu önceden işaretli değil. İznini Profilim → İzinlerim\'den geri çekersen sunucudaki kopya silinir.' },
       { kind: 'new', text: 'Profilim: Premium kartı (deneme kaç gün kaldı, ne zaman biter, aboneliği yönet), giriş şeklin ve İzinlerim: hangi verinin nereye gittiği; Nef izinlerini buradan kapatabilirsin.' },

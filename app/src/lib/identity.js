@@ -36,6 +36,12 @@ export function validBirthDate(s, now = new Date()) {
   return age >= 0 && age <= 120
 }
 
+// Nefona yetişkinler içindir (hedef kitle 40+; KVKK'da çocuk verisi veli rızası ister). 18 altı kurulumda durdurulur.
+export const MIN_AGE = 18
+export function isAdult(s, now = new Date()) {
+  return validBirthDate(s, now) && ageFromBirthDate(s, now) >= MIN_AGE
+}
+
 export function ageFromBirthDate(s, now = new Date()) {
   if (typeof s !== 'string' || !DATE_RE.test(s)) return null
   const [y, m, d] = s.split('-').map(Number)

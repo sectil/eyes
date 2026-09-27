@@ -5,6 +5,7 @@ import {
 } from 'lucide-react'
 import { PageHeader, ThemeSwitch } from '../components/ui.jsx'
 import PrefToggle from '../components/PrefToggle.jsx'
+import CoachConsent from '../components/CoachConsent.jsx'
 import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
 import { haptic, initFeedback, testHaptic } from '../lib/native.js'
 import '../styles/info.css'
@@ -18,8 +19,10 @@ const TEST_MESSAGES = {
 }
 
 // Nef Göz Koçu aç/kapa (ana sayfa "Bugün" kartı). Kapatınca sunucuya hiçbir veri gitmez.
+// Açmak açık rıza ister (CoachConsent: iki ayrı işaretsiz kutu); kapatmak tek dokunuş.
 function CoachSettings() {
   const [prefs, setLocal] = useState(getPrefs)
+  const [asking, setAsking] = useState(false)
   useEffect(() => subscribePrefs((p) => setLocal(p)), [])
   return (
     <section className="stack">
@@ -31,9 +34,16 @@ function CoachSettings() {
           label="Günlük öneri (yapay zekâ)"
           sub={prefs.coach ? 'Açık · yalnızca özet sayılar gönderilir' : 'Kapalı · sunucuya hiçbir veri gitmez'}
           checked={prefs.coach}
-          onChange={(on) => setPrefs(on ? { coach: true, coachHidden: false } : { coach: false })}
+          onChange={(on) => (on ? setAsking(true) : (setAsking(false), setPrefs({ coach: false, coachLife: false })))}
         />
       </div>
+      {asking && !prefs.coach && (
+        <CoachConsent
+          idPrefix="cc-info"
+          onAccept={({ life }) => { setAsking(false); setPrefs({ coach: true, coachHidden: false, coachLife: life }) }}
+          onCancel={() => setAsking(false)}
+        />
+      )}
       <p className="note">
         <ShieldCheck size={16} aria-hidden="true" />
         Açıkken yalnızca özet sayılar (ör. haftalık gün sayısı, ölçüm ortancası) OpenRouter üzerinden bir yapay zekâ modeline gider;

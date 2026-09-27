@@ -7,6 +7,14 @@ Son güncelleme: 2026-09-27.
 
 ## Sıradaki iş (sırayla)
 
+### 0. Yeniden düşünme planı (docs/yol-haritasi/YENIDEN_DUSUNME.md) — kararlar alındı
+- [ ] Küçük düzeltmeler: kamerasız devam, "yalnızca bu cihazda" metni, Nef'in iki ayrı izni (Bilgi anahtarı dahil), 18 yaş sınırı — yazıldı, denetimde
+- [ ] İlk açılış sırası: film → güvenlik → 20 sn göz kırpma → ad/doğum tarihi → 7 gün deneme → Bugün (hesap, 40 cm, bildirim, Apple Sağlık, Ekran Süresi sonraya)
+- [ ] Yol 4–5 durak (~11 dk); Isınma/Daire/Yakın–uzak Keşfet'e; Çemberler dönüşümlü; yol yalnız yoldan başlatılan oturumla tamamlanır
+- [ ] Seri kalır; Takvim "Seri yok, baskı yok" metni seriyle uyumlu hale gelir
+- [ ] Ana sayfa ilk ekran ≤5 öğe + "Gözlerin" satırı; sekmeler Bugün · Keşfet · Gelişim
+- [ ] Gabor algısal öğrenme modülü (iddiasız; SENTEZ_RAPORU.md §6 protokolü; <100 ms uyaran için yerel/native zamanlama gerekebilir — önce doğrulanacak)
+
 ### 1. Hareket: Apple Sağlık (HealthKit) — kod bitti, CİHAZDA DENENMEDİ
 - [ ] Telefonda: izin sayfaları (bizim + iOS), adım satırı, Beden kartı; Swift derlemesi Mac'te (burada derlenemiyor)
 - [ ] Uyku süresi (Gelişim yer tutucusunda vardı) — ayrı karar

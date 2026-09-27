@@ -3,7 +3,7 @@ import { Camera, Check } from 'lucide-react'
 import { Avatar, shrinkImage } from './ProfileHome.jsx'
 import BirthDateBoxes from '../components/BirthDateBoxes.jsx'
 import CityField from '../components/CityField.jsx'
-import { emptyIdentity, normalizeIdentity, validBirthDate, ageFromBirthDate, NAME_MAX } from '../lib/identity.js'
+import { emptyIdentity, normalizeIdentity, validBirthDate, ageFromBirthDate, NAME_MAX, MIN_AGE } from '../lib/identity.js'
 import { CORRECTION } from '../lib/profile.js'
 import { accountLabel } from '../lib/account.js'
 import { haptic } from '../lib/native.js'
@@ -12,7 +12,8 @@ import '../styles/account.css'
 
 // "Seni tanıyalım" (Build 23b; Artifact "Hesap ve Profil Taslağı"): hesap ekranından sonra, denemeden önce.
 // Her bilgi ayrı kutucuk. Zorunlu: ad + doğum tarihi (yaşa göre ölçüm aralıkları). Şehir ve gözlük/lens isteğe bağlı.
-// Fotoğraf yalnız telefonda; hesap varsa ad, doğum tarihi, şehir, gözlük eşitlenir (App.jsx → lib/account.js).
+// Fotoğraf yalnız telefonda; hesap varsa ad, doğum tarihi, şehir, gözlük YALNIZ açık rızayla eşitlenir (App.jsx syncUp, lib/consent.js).
+// 18 yaş altı durdurulur (lib/identity.js MIN_AGE).
 const SHORT = { none: 'Yok', distance: 'Uzak', reading: 'Okuma', progressive: 'Progresif', 'contacts-multi': 'Multifokal lens' }
 
 export default function ProfileSetup({ identity, correction: initialCorrection = null, account = null, onSave }) {
@@ -21,7 +22,8 @@ export default function ProfileSetup({ identity, correction: initialCorrection =
   const [err, setErr] = useState('')
   const file = useRef(null)
   const age = id.birthDate && validBirthDate(id.birthDate) ? ageFromBirthDate(id.birthDate) : null
-  const ready = id.name.trim().length > 0 && age != null
+  const minor = age != null && age < MIN_AGE
+  const ready = id.name.trim().length > 0 && age != null && !minor
   const who = accountLabel(account)
 
   async function pick(e) {
@@ -48,7 +50,7 @@ export default function ProfileSetup({ identity, correction: initialCorrection =
       {who && <span className="acct-badge">{account.mode === 'apple' ? 'Apple ile giriş yapıldı' : `${who} ile giriş yapıldı`}</span>}
       <header className="page-header" style={{ paddingTop: 4 }}>
         <h1>Seni tanıyalım</h1>
-        <p>{who ? 'Bilgilerin hesabınla eşitlenir; fotoğraf telefonda kalır.' : 'Bilgilerin yalnızca bu telefonda kalır.'}</p>
+        <p>{who ? 'Bilgilerin telefonda kalır; hesabınla eşitlemek için ayrıca iznini soracağız. Fotoğraf hep telefonda.' : 'Bilgilerin yalnızca bu telefonda kalır.'}</p>
       </header>
 
       <div className="setup-avatar">
@@ -69,6 +71,7 @@ export default function ProfileSetup({ identity, correction: initialCorrection =
       <div className="field">
         <span id="setup-birth-label">Doğum tarihi {age != null && <span className="muted">· {age} yaş</span>}</span>
         <BirthDateBoxes id="setup-birth" value={id.birthDate} onChange={(v) => setId((q) => ({ ...q, birthDate: v }))} />
+        {minor && <p className="small" role="alert" style={{ color: 'var(--warn)', margin: 0 }}>Nefona 18 yaş ve üstü içindir. Gözlerinle ilgili bir sorunun varsa bir göz doktoruna başvur.</p>}
       </div>
 
       <div className="field">

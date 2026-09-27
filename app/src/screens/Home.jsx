@@ -325,7 +325,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           Mesafe takibi kapalı; sonuçlar daha az güvenilir. Bilgi sekmesinden açabilirsin.
         </p>
       )}
-      <p className="muted small">Bu uygulama teşhis koymaz ve göz muayenesinin yerini tutmaz. Verilerin yalnızca bu cihazda.</p>
+      <p className="muted small">Bu uygulama teşhis koymaz ve göz muayenesinin yerini tutmaz. Ölçümlerin bu telefonda kalır; sunucuya yalnızca izin verdiklerin gider (Profilim → İzinlerim).</p>
     </>
   )
 }
