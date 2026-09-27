@@ -1,5 +1,5 @@
-// Seslendirme paketi: sesli komutlar ElevenLabs ile önceden üretilmiş ses dosyalarıdır (scripts/voices.mjs); uygulama
-// ağa çıkmaz, anahtar taşımaz. Dosyalar public/voice/{dil}/{ses}/{cümle}.mp3, liste public/voice/index.json.
+// Seslendirme paketi: sesli komutlar ElevenLabs ile önceden üretilmiş ses dosyalarıdır (hangi ses ve model:
+// voice/index.json); uygulama ağa çıkmaz, anahtar taşımaz. Dosyalar public/voice/{dil}/{ses}/{cümle}.mp3, liste public/voice/index.json.
 // Dil başına cümleler aşağıda (yeni dil = yeni nesne + betikle üretim). Dosya yoksa ya da çözülemezse çağıran telefonun
 // kendi sesine düşer (lib/cue.js speak). Çalarken baştaki/sondaki sessizlik kırpılır, ses seviyesi eşitlenir.
 
@@ -65,10 +65,15 @@ export function trimBounds(samples, { threshold = 0.02, padSamples = 441 } = {})
 export const TARGET_PEAK = 0.8
 export const gainFor = (peak) => (peak > 0 ? Math.min(4, TARGET_PEAK / peak) : 1)
 
+// Kenar yumuşatma: bazı dosyalarda ses ilk örnekte başlıyor ("Soldan", "Sağdan" s'si); tık sesi olmasın diye
+// başa ve sona kısa doğrusal geçiş
+export const FADE_SEC = 0.008
+
 // ---- Tarayıcı / uygulama tarafı (WebAudio) ----
 const base = () => (typeof import.meta !== 'undefined' && import.meta.env?.BASE_URL) || './'
 let indexPromise = null
 const buffers = new Map() // `${dil}/${ses}/${kimlik}` → { buffer, gain }
+const loading = new Map() // aynı dosya iki kez indirilmesin (önceden yükleme + Dinle aynı anda)
 let current = null
 
 export function loadIndex() {
@@ -85,24 +90,29 @@ export async function preloadVoice(ctx, voice, lang = VOICE_LANG) {
   if (!ctx || !VOICES.includes(voice)) return false
   const avail = availableFrom(await loadIndex(), lang)[voice]
   if (!avail.size) return false
-  await Promise.all([...avail].map(async (id) => {
+  await Promise.all([...avail].map((id) => {
     const key = `${lang}/${voice}/${id}`
-    if (buffers.has(key)) return
-    try {
-      const res = await fetch(`${base()}voice/${key}.mp3`)
-      if (!res.ok) return
-      const raw = await ctx.decodeAudioData(await res.arrayBuffer())
-      const ch = raw.getChannelData(0)
-      const { start, end, peak } = trimBounds(ch)
-      if (end <= start) return
-      const buf = ctx.createBuffer(raw.numberOfChannels, end - start, raw.sampleRate)
-      for (let c = 0; c < raw.numberOfChannels; c++) buf.copyToChannel(raw.getChannelData(c).subarray(start, end), c)
-      buffers.set(key, { buffer: buf, gain: gainFor(peak) })
-    } catch {
-      // bu cümle yok → telefonun sesi
-    }
+    if (buffers.has(key)) return null
+    if (!loading.has(key)) loading.set(key, decodeOne(ctx, key).finally(() => loading.delete(key)))
+    return loading.get(key)
   }))
   return true
+}
+
+// Tek dosya: indir, çöz, sessizliği kırp, seviyeyi hesapla
+async function decodeOne(ctx, key) {
+  try {
+    const res = await fetch(`${base()}voice/${key}.mp3`)
+    if (!res.ok) return
+    const raw = await ctx.decodeAudioData(await res.arrayBuffer())
+    const { start, end, peak } = trimBounds(raw.getChannelData(0))
+    if (end <= start) return
+    const buf = ctx.createBuffer(raw.numberOfChannels, end - start, raw.sampleRate)
+    for (let c = 0; c < raw.numberOfChannels; c++) buf.copyToChannel(raw.getChannelData(c).subarray(start, end), c)
+    buffers.set(key, { buffer: buf, gain: gainFor(peak) })
+  } catch {
+    // bu cümle yok → telefonun sesi
+  }
 }
 
 // Çal: true = çalındı; false = dosya yok (çağıran telefonun sesine düşer). Önceki cümle kesilir (üst üste binmesin).
@@ -118,9 +128,15 @@ export function playPhrase(ctx, voice, id, volume = 7, lang = VOICE_LANG) {
     const src = ctx.createBufferSource()
     const g = ctx.createGain()
     src.buffer = item.buffer
-    g.gain.value = item.gain * Math.min(1, Math.max(0, volume / 10))
+    const level = item.gain * Math.min(1, Math.max(0, volume / 10))
+    const t0 = ctx.currentTime
+    const t1 = t0 + item.buffer.duration
+    g.gain.setValueAtTime(0, t0)
+    g.gain.linearRampToValueAtTime(level, t0 + FADE_SEC)
+    g.gain.setValueAtTime(level, Math.max(t0 + FADE_SEC, t1 - FADE_SEC))
+    g.gain.linearRampToValueAtTime(0, t1)
     src.connect(g).connect(ctx.destination)
-    src.start()
+    src.start(t0)
     current = src
     return true
   } catch {

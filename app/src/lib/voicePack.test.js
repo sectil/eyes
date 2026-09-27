@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { PHRASES, PHRASE_IDS, VOICES, VOICE_LABEL, phraseId, availableFrom, trimBounds, gainFor, TARGET_PEAK } from './voicePack.js'
 import { makePlan, normalizeOpts } from './breath.js'
+import { readFileSync, existsSync } from 'node:fs'
 
 describe('seslendirme paketi', () => {
   it('her dilde her cümle ve iki ses adı var', () => {
@@ -40,5 +41,14 @@ describe('seslendirme paketi', () => {
     expect(normalizeOpts({}).voiceId).toBe('female')
     expect(normalizeOpts({ voiceId: 'male' }).voiceId).toBe('male')
     expect(normalizeOpts({ voiceId: 'x' }).voiceId).toBe('female')
+  })
+  it('paket: index.json her iki seste bütün cümleleri listeler ve her dosya diskte var', () => {
+    const dir = new URL('../../public/voice/', import.meta.url)
+    const index = JSON.parse(readFileSync(new URL('index.json', dir), 'utf8'))
+    const avail = availableFrom(index)
+    for (const v of VOICES) {
+      expect([...avail[v]].sort()).toEqual([...PHRASE_IDS].sort())
+      for (const id of PHRASE_IDS) expect(existsSync(new URL(`tr/${v}/${id}.mp3`, dir))).toBe(true)
+    }
   })
 })
