@@ -7,6 +7,8 @@ export const RELEASES = [
     id: '2026-09-27',
     title: '27 Eylül güncellemesi',
     items: [
+      { kind: 'change', text: "İlk Bakış yenilendi: okuduğun kelime sarıyla ilerler, üstte hızın yazar. Okuma metni bir araştırmadan: hayal ettiğin ışığa göz bebeğin tepki veriyor (Laeng ve Sulutvedt 2014). Sonuçta 20 saniyelik kırpma çizgin, en uzun kırpmadığın ara ve o arada okuduğun satırlar çıkar." },
+      { kind: 'fix', text: "İlk Bakış'ta okurken yapılan kırpmaların çoğu sayılmıyordu (okurken göz kapağı hafif iner); sayım okumaya göre yeniden yazıldı." },
       { kind: 'new', text: 'Google ile giriş (iPhone): Apple\'ın güvenli oturum penceresinde Google hesabını seçersin; ek bir Google ya da Facebook yazılımı uygulamaya girmez.' },
       { kind: 'change', text: 'Yeni hoş geldin ekranı: Pegasus gökyüzü ve ufuk kavisi; Apple ya da e-posta ile devam et, istersen hesapsız dene. Açık ve koyu temada ayrı tasarlandı.' },
       { kind: 'change', text: 'Yeni giriş ekranı: film kalktı. Gece göğünde Pegasus, altın odakta tek yıldız ve ufuktan doğan göz; Başla göz bebeğinde. Hareket yok, beklemeden başlarsın.' },

@@ -12,6 +12,10 @@ Son güncelleme: 2026-09-27.
   bağlantılı cümleler bütün cümle olarak çevrilir (Türkçe ek koda gömülmez). Arapça için yazı tipi: Noto Sans Arabic.
 - Claude beğenmediği tasarımı sahibine sunmaz; önce görsel (Artifact), onaydan sonra kod.
 - [x] Giriş ekranı: "Nefona" ve alt yazı tuvalden DOM'a taşındı (çevrilebilir)
+- Sayı ve ondalıklar dile göre yazılır (Intl.NumberFormat: 7,4 / 7.4); kelimeye bölme Intl.Segmenter ile (Japonca,
+  Çince, Tayca gibi boşluksuz yazılan diller de çalışsın).
+- [x] İlk Bakış: bütün yazılar lib/firstLookText.js'de dil başına tek nesnede. Yeni dilde okuma metni çeviri değil,
+  aynı bulgunun o dilde yeniden yazımıdır; sarı işaretin hızı (wpm) her dil için ayrı ayarlanır (VARSAYIM: Türkçe 200).
 
 ## Sıradaki iş (sırayla)
 
