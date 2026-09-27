@@ -14,10 +14,11 @@ import ProfileQuestions from './screens/ProfileQuestions.jsx'
 import QuestionFlow from './components/QuestionFlow.jsx'
 import { missing, GROUPS } from './lib/profileQuestions.js'
 import ProfileHome from './screens/ProfileHome.jsx'
+import { hasConsent, shouldAsk, recordConsent } from './lib/consent.js'
 import IntroFilm from './components/IntroFilm.jsx'
 import { shouldPlayIntro, INTRO_VERSION } from './lib/intro.js'
 import { ageBandFromAge } from './lib/profile.js'
-import { ageFromBirthDate } from './lib/identity.js'
+import { ageFromBirthDate, emptyIdentity } from './lib/identity.js'
 import { screeningFromProfile, profileFromScreening, normalizeProfile } from './lib/profile.js'
 import { resetAllHowto } from './lib/howto.js'
 import CardCalibration, { calibrationStillValid } from './screens/CardCalibration.jsx'
@@ -332,9 +333,21 @@ export default function App() {
   // Hesap açıldıysa ad, doğum tarihi, şehir, gözlük Supabase'e eşitlenir (lib/account.js); ağ yoksa telefonda kalır.
   const nowIso = () => new Date().toISOString()
   const currentCorrection = () => { const st = store.get().settings; return st.profile?.correction ?? st.setupCorrection ?? null }
+  // Eşitleme yalnız açık rızayla (lib/consent.js; KVKK). İzin yoksa bilgiler telefonda kalır.
   const syncUp = (id, corr) => {
-    const a = store.get().settings.account
-    if (signedIn(a)) pushProfile(a.userId, id, corr).catch(() => {})
+    const st = store.get().settings
+    if (signedIn(st.account) && hasConsent(st.consents, 'profileSync')) pushProfile(st.account.userId, id, corr).catch(() => {})
+  }
+  // İzin ver / reddet / geri çek. Geri çekilince sunucudaki kopya boşaltılır (ad, doğum tarihi, şehir, gözlük → boş).
+  const setConsent = (key, granted) => {
+    const st = store.get().settings
+    const had = hasConsent(st.consents, key)
+    store.setSetting('consents', recordConsent(st.consents, key, granted))
+    if (key === 'profileSync' && signedIn(st.account)) {
+      if (granted) syncUp(st.identity, currentCorrection())
+      else if (had) pushProfile(st.account.userId, emptyIdentity(), null).catch(() => {})
+    }
+    refresh()
   }
   // Tüm kayıt (JSON). iPhone'da <a download> WKWebView'da güvenilir değil (doğrulanmadı) → paylaşım sayfası
   // (ExportPlugin.swift); web'de indirme. Oturum anahtarları ayrı kayıtta (supabase.js storageKey), dosyaya girmez.
@@ -428,6 +441,8 @@ export default function App() {
         onIntro={() => go('intro')}
         onBack={() => go(lastTab)}
         account={settings.account}
+        syncConsent={hasConsent(settings.consents, 'profileSync')}
+        onConsent={(g) => setConsent('profileSync', g)}
         onAccount={() => go('account')}
         onSignOut={async () => { try { await signOut() } catch { /* çevrimdışı: yerel oturum yine kapanır */ } toGuest() }}
         onDeleteAccount={async () => {
@@ -598,7 +613,7 @@ export default function App() {
       />
     )
   } else {
-    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={native.trueDepth} eyeBudget={budget} premium={access.loading || access.premium} member={Boolean(access.native && access.premium && !access.testUnlock)} onStart={go} onAsk={(group) => { const ids = missing(settings.profile, GROUPS[group] ?? []); if (ids.length) setAskFor({ ids, then: 'home', back: 'home' }) }} onSaveProfile={saveProfile} />
+    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={native.trueDepth} eyeBudget={budget} premium={access.loading || access.premium} member={Boolean(access.native && access.premium && !access.testUnlock)} askConsent={signedIn(settings.account) && shouldAsk(settings.consents, 'profileSync')} onConsent={(g) => setConsent('profileSync', g)} onStart={go} onAsk={(group) => { const ids = missing(settings.profile, GROUPS[group] ?? []); if (ids.length) setAskFor({ ids, then: 'home', back: 'home' }) }} onSaveProfile={saveProfile} />
   }
 
   return (

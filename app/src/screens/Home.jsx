@@ -19,6 +19,7 @@ import TodayPath from '../components/TodayPath.jsx'
 import DayDial from '../components/DayDial.jsx'
 import { Avatar } from './ProfileHome.jsx'
 import { homeSuggestion } from '../lib/homeSuggest.js'
+import ConsentSheet from '../components/ConsentSheet.jsx'
 import { registry } from '../modules/registry.js'
 import { viewFor } from '../modules/views.js'
 
@@ -88,7 +89,7 @@ function ModuleRows({ section, ctx, onStart }) {
   )
 }
 
-export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, onStart, onAsk, onSaveProfile }) {
+export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, onStart, onAsk, onSaveProfile }) {
   const now = new Date()
   // Oyun oturumları (type 'game') egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
   const exercise = sessions.filter((s) => s.type !== 'game')
@@ -129,6 +130,8 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
 
   return (
     <>
+      {/* Hesabı olan ve profil eşitlemeye henüz cevap vermemiş kişiye bir kez (KVKK açık rıza) */}
+      {askConsent && onConsent && <ConsentSheet kind="profileSync" onAnswer={onConsent} />}
       <header className="home-head">
         <div>
           <span className="eyebrow">{now.toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })}</span>

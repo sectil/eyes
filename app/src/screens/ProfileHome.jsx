@@ -10,6 +10,7 @@ import '../styles/account.css'
 import { haptic } from '../lib/native.js'
 import { getMembership, PLAN_NAME } from '../lib/subscription.js'
 import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
+import ConsentSheet from '../components/ConsentSheet.jsx'
 import '../styles/profilehome.css'
 
 // Profilim: avatar (harf + iris rengi veya fotoğraf), ad, doğum tarihi, şehir, gözlük; profil sorularına ve giriş filmine geçiş.
@@ -39,7 +40,7 @@ export async function shrinkImage(file, px = AVATAR_PX) {
   }
 }
 
-export default function ProfileHome({ identity, profile, account = null, onSave, onQuestions, onIntro, onBack, onAccount, onSignOut, onDeleteAccount, loadMembership = getMembership }) {
+export default function ProfileHome({ identity, profile, account = null, onSave, onQuestions, onIntro, onBack, onAccount, onSignOut, onDeleteAccount, loadMembership = getMembership, syncConsent = false, onConsent }) {
   const [id, setId] = useState(() => normalizeIdentity(identity ?? emptyIdentity()))
   const [correction, setCorrection] = useState(profile?.correction ?? null)
   const [err, setErr] = useState('')
@@ -48,6 +49,8 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
   const [acctMsg, setAcctMsg] = useState('')
   const inAcct = signedIn(account)
   const [member, setMember] = useState(null)
+  const [askSync, setAskSync] = useState(false)
+  const syncing = inAcct && syncConsent
   const [prefs, setLocalPrefs] = useState(getPrefs)
   useEffect(() => subscribePrefs((p) => setLocalPrefs(p)), [])
   useEffect(() => {
@@ -85,7 +88,7 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
 
   return (
     <main className="screen fade-in ph">
-      <PageHeader onBack={onBack} eyebrow="Profilim" title={id.name ? id.name : 'Sen'} subtitle={inAcct ? 'Ad, doğum tarihi, şehir ve gözlük hesabınla eşitlenir; fotoğraf telefonda kalır.' : 'Bunlar yalnızca bu cihazda kalır.'} />
+      <PageHeader onBack={onBack} eyebrow="Profilim" title={id.name ? id.name : 'Sen'} subtitle={syncing ? 'Ad, doğum tarihi, şehir ve gözlük hesabınla eşitlenir; fotoğraf telefonda kalır.' : 'Bunlar yalnızca bu cihazda kalır.'} />
       <div className="ph-top">
         <button type="button" className="ph-avatar-btn" onClick={() => file.current?.click()} aria-label="Fotoğraf seç">
           <Avatar identity={id} size={104} />
@@ -140,7 +143,7 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
           <>
             <div className="list-row">
               <UserRound size={20} aria-hidden="true" />
-              <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Hesap</span><span className="muted small">{account.mode === 'apple' ? 'Apple' : accountLabel(account)} · eşitleniyor</span></span>
+              <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Hesap</span><span className="muted small">{account.mode === 'apple' ? 'Apple' : accountLabel(account)} · {syncing ? 'eşitleniyor' : 'eşitleme kapalı'}</span></span>
             </div>
             <button className="list-row" onClick={async () => { setAcctBusy(true); await onSignOut?.(); setAcctBusy(false) }} disabled={acctBusy}>
               <LogOut size={20} aria-hidden="true" />
@@ -165,8 +168,14 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
         <div className="list">
           <div className="list-row">
             <ShieldCheck size={20} aria-hidden="true" />
-            <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Profil eşitleme</span><span className="muted small">Ad, doğum tarihi, şehir, gözlük · hesabınla</span></span>
-            <span className={`ph-st ${inAcct ? 'on' : ''}`}>{inAcct ? 'Açık' : 'Kapalı'}</span>
+            <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Profil eşitleme</span><span className="muted small">{syncing ? 'Ad, doğum tarihi, şehir, gözlük · Frankfurt sunucusunda' : 'Kapatınca sunucudaki kopya silinir'}</span></span>
+            {!inAcct ? (
+              <span className="ph-st">Hesap yok</span>
+            ) : syncing ? (
+              <button type="button" className="ph-st on as-btn" onClick={() => onConsent?.(false)} aria-label="Profil eşitleme iznini geri çek">Açık · kapat</button>
+            ) : (
+              <button type="button" className="ph-st as-btn" onClick={() => setAskSync(true)} aria-label="Profil eşitleme iznini ver">Kapalı · aç</button>
+            )}
           </div>
           <div className="list-row">
             <ShieldCheck size={20} aria-hidden="true" />
@@ -207,6 +216,8 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
           <ChevronRight size={18} className="muted" />
         </button>
       </div>
+
+      {askSync && <ConsentSheet kind="profileSync" onAnswer={(g) => { setAskSync(false); onConsent?.(g) }} />}
 
       {sheet && (
         <div className="acct-sheet-back" role="presentation" onClick={() => !acctBusy && setSheet(false)}>
