@@ -1,6 +1,11 @@
 // Nefes aşama sesleri: kısa sentetik tonlar (dosya yok). WebAudio; iOS'ta bağlam kullanıcı dokunuşunda
 // açılır (Başla düğmesi → unlockBreathSfx). volume 0–10.
+// iPhone sessiz tuşu Web Audio'yu susturur (seslendirme dosyaları da Web Audio ile çalar). Dalga'daki çözüm:
+// ses oturumu 'playback' + sessiz <audio> döngüsü (lib/audioUnmute.js). Seans bitince bırakılır.
+import { mediaKeepAlive, setAudioSessionType } from './audioUnmute.js'
+
 let ctx = null
+let releaseTimer = 0
 function context() {
   try {
     const AC = globalThis.AudioContext || globalThis.webkitAudioContext
@@ -13,7 +18,18 @@ function context() {
   }
 }
 export function unlockBreathSfx() {
+  clearTimeout(releaseTimer)
+  setAudioSessionType('playback')
+  mediaKeepAlive(true)
   context()
+}
+// Son söz ("Tamamlandı") bitsin diye biraz bekleyip oturumu bırak
+export function releaseBreathSfx(delayMs = 3000) {
+  clearTimeout(releaseTimer)
+  releaseTimer = setTimeout(() => {
+    mediaKeepAlive(false)
+    setAudioSessionType('auto')
+  }, delayMs)
 }
 // Seslendirme paketi (lib/voicePack.js) aynı bağlamı kullanır
 export const breathContext = () => context()

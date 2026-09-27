@@ -7,6 +7,7 @@ export const RELEASES = [
     id: '2026-09-27',
     title: '27 Eylül güncellemesi',
     items: [
+      { kind: 'fix', text: 'Nefes seansında sesli komutlar ("Nefes al", "Tut", "Nefes ver") çalmıyordu; düzeldi. Telefon sessizdeyken de duyulur.' },
       { kind: 'new', text: 'Nefeste sesli komutlar artık profesyonel Türkçe seslendirme: kadın ya da erkek sesi seç (nefes ayrıntısında "Sesli komut"), "Dinle" ile önce duy. Sesler uygulamanın içinde; internet gerekmez.' },
       { kind: 'new', text: "Nefes yenilendi: sekiz kalıp, her birinin ritmi çizili ve kanıt düzeyi (güçlü, orta, sınırlı) yanında. Yeni: Eşit ritim, Karın nefesi, Burun değiştir (hangi taraftan alıp vereceğin ekranda) ve Vızıltı (mırıldanarak veriş). 1 dakikada sakinleş kısayolu; sakinlik puanı Başla'dan sonra tek dokunuş, istersen puansız başlarsın." },
       { kind: 'change', text: "Profil kaydetme izninin metni sadeleşti: ne kaydedilir, ne işe yarar, nerede durur, ne kadar kalır; her biri tam cümleyle." },

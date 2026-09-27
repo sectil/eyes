@@ -5,7 +5,7 @@ import BreathWave from '../components/BreathWave.jsx'
 import BreathVisual from '../components/BreathVisual.jsx'
 import { haptic } from '../lib/native.js'
 import { speak, unlockAudio } from '../lib/cue.js'
-import { playBreathSound, unlockBreathSfx, breathContext } from '../lib/breathSfx.js'
+import { playBreathSound, unlockBreathSfx, releaseBreathSfx, breathContext } from '../lib/breathSfx.js'
 import { VOICES, VOICE_LABEL, VOICE_LANG, phraseId, PHRASES, preloadVoice, playPhrase, loadIndex, availableFrom } from '../lib/voicePack.js'
 import {
   PATTERNS, PATTERN_ORDER, PHASE, KIND_ORDER, LIMITS, STEP_SEC, DURATIONS_SEC, CALM_SCALE, SAFETY_ROWS, PREP_SEC,
@@ -88,6 +88,11 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
   useEffect(() => {
     preloadVoice(breathContext(), opts.voiceId)
   }, [opts.voiceId])
+  // Sessiz tuşunda da duyulsun diye açılan ses oturumu: seans bitince ve ekrandan çıkınca bırakılır
+  useEffect(() => {
+    if (screen === 'result') releaseBreathSfx()
+  }, [screen])
+  useEffect(() => () => releaseBreathSfx(0), [])
   const planArgs = quick
     ? { pattern: QUICK.pattern, durationSec: QUICK.durationSec, priorSessions: prior, edits: null }
     : { pattern: opts.pattern, durationSec: opts.durationSec, priorSessions: prior, edits: opts.edits }
@@ -189,7 +194,7 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
     const ph = PHASE[phase.kind]
     if (opts.vibrate) haptic(ph.haptic)
     if (opts.sound) playBreathSound(opts.sounds[phase.kind] ?? 'none', opts.volume)
-    say(phaseId(phase), phaseText(phase).say)
+    say(phraseId(phase), phaseText(phase).say)
   }
   function seekTo(sec) {
     t0.current = performance.now() - sec * 1000
