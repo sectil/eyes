@@ -109,6 +109,10 @@ Son güncelleme: 2026-09-27.
 - [ ] Sandbox test hesabı örnek e-postayla açıldı (ornek.kisi+nefona1@gmail.com): gerçek adresle yenilenmeli
 
 ## Açık hatalar
+- [ ] Egzersiz sahnesi (Artifact "Nefona Egzersiz Sahnesi"): tarayıcıda sahte kamerayla denendi, CİHAZDA DENENMEDİ.
+      Cihazda bak: kırpma ritmi sesi ("Kapat, hafifçe sık" / "Aç") kişinin gerçek kırpmasıyla çakışıyor mu; bakış noktası
+      ve hedefe oturan altın halka; "Gözlerini kapat"ta kararan ekran; ElevenLabs seslerinin telefonda gerçekten çalması
+      (nefeste telefon sesi duyulmuştu; nefes ekranındaki geliştirici "tanı" satırı bekleniyor).
 - [ ] Yılan (gözle): aşağı bakış "sağ" okunuyor (eksen karışması). Kalibrasyon verisi gerek; "orta"ya bağlı kilit
       denendi, geri alındı (c48eca6). Kullanıcıdan: geri almadan sonra gözle yön alma çalışıyor mu?
 - [ ] "Aboneliği yönet" bağlantısının iPhone'da App Store abonelik sayfasını açtığı doğrulanmadı

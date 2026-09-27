@@ -11,23 +11,23 @@
 //   Daire adımlarında bakış telefonun dışına taşmalı: ekrandaki küçük halkayı izlemek gözü
 //   25–40 cm'de yalnızca ~2–3° döndürür; takip çeyrek saymak için en az CIRCLE_MIN_DEG (6°) ister.
 //   VARSAYIM: "telefonun çevresinde" çizilen daire 30 cm'de ≥7° (telefon kenarı ≈ 7–14°); cihazda doğrulanacak.
-// say: adım başında seslendirilen metin (yoksa title).
+// voice: adım başında seslendirilen cümle (lib/voicePack.js PHRASES kimliği; ElevenLabs, Profilim'deki ses).
 
 export const EXERCISES = {
-  lookRight: { title: 'Sağa bak', sub: 'Başını çevirmeden', seconds: 5, visual: 'arrow', dir: 'right', kind: 'relax' },
-  lookLeft: { title: 'Sola bak', sub: 'Başını çevirmeden', seconds: 5, visual: 'arrow', dir: 'left', kind: 'relax' },
-  lookUp: { title: 'Yukarı bak', sub: 'Başını çevirmeden', seconds: 5, visual: 'arrow', dir: 'up', kind: 'relax' },
-  lookDown: { title: 'Aşağı bak', sub: 'Başını çevirmeden', seconds: 5, visual: 'arrow', dir: 'down', kind: 'relax' },
-  circleCw: { title: 'Gözlerini saat yönünde çevir', sub: 'Havada yavaşça bir daire çiz', subTracked: 'Başını oynatmadan gözünle telefonun çevresinde büyük, yavaş bir daire çiz', seconds: 10, visual: 'circle', dir: 'cw', kind: 'relax', laps: 2 },
-  circleCcw: { title: 'Şimdi ters yöne çevir', sub: 'Yavaş ve rahat', subTracked: 'Başını oynatmadan gözünle ters yönde büyük, yavaş bir daire çiz', seconds: 10, visual: 'circle', dir: 'ccw', kind: 'relax', laps: 2 },
-  farLook: { title: 'Uzağa bak', sub: 'Pencereden 6 metreden uzak bir noktaya', subTracked: 'Telefonu yüzüne dönük tut, üstünden 6 metreden uzağa bak', seconds: 20, visual: 'far', kind: 'comfort' }, // sensör: gözler uzağa odaklıyken süre işler
-  nearFar: { title: 'Yakın – uzak', sub: 'Ekrandaki daireye 3 sn, uzağa 3 sn; tekrarla', seconds: 18, visual: 'nearfar', kind: 'comfort', switches: 6 }, // sensör: yakın↔uzak geçiş sayısı
-  blink: { title: 'Tam göz kırp', sub: 'Kapat · hafifçe sık · aç — ritimle', seconds: 20, visual: 'blink', kind: 'evidence', closed: true, blinks: 5 },
+  lookRight: { title: 'Sağa bak', sub: 'Başını çevirmeden', voice: 'exRight', seconds: 5, visual: 'arrow', dir: 'right', kind: 'relax' },
+  lookLeft: { title: 'Sola bak', sub: 'Başını çevirmeden', voice: 'exLeft', seconds: 5, visual: 'arrow', dir: 'left', kind: 'relax' },
+  lookUp: { title: 'Yukarı bak', sub: 'Başını çevirmeden', voice: 'exUp', seconds: 5, visual: 'arrow', dir: 'up', kind: 'relax' },
+  lookDown: { title: 'Aşağı bak', sub: 'Başını çevirmeden', voice: 'exDown', seconds: 5, visual: 'arrow', dir: 'down', kind: 'relax' },
+  circleCw: { title: 'Saat yönünde daire', sub: 'Havada yavaşça büyük bir daire çiz', subTracked: 'Başını oynatmadan, telefonun çevresinde büyük ve yavaş', voice: 'exCw', seconds: 10, visual: 'circle', dir: 'cw', kind: 'relax', laps: 2 },
+  circleCcw: { title: 'Ters yönde daire', sub: 'Yavaş ve rahat', subTracked: 'Başını oynatmadan, ters yönde büyük ve yavaş', voice: 'exCcw', seconds: 10, visual: 'circle', dir: 'ccw', kind: 'relax', laps: 2 },
+  farLook: { title: 'Uzağa bak', sub: 'Pencereden 6\u00a0metreden uzak bir noktaya', subTracked: 'Telefonun üstünden, 6\u00a0metreden uzak bir noktaya', voice: 'exFar', seconds: 20, visual: 'far', kind: 'comfort' }, // sensör: gözler uzağa odaklıyken süre işler
+  nearFar: { title: 'Yakın – uzak', sub: 'Ortadaki irise 3 sn, uzağa 3 sn', voice: 'exNear', seconds: 18, visual: 'nearfar', kind: 'comfort', switches: 6 }, // sensör: yakın↔uzak geçiş sayısı
+  blink: { title: 'Tam göz kırp', sub: 'Ritmi sesle veririm, gözün kapalıyken dinle', voice: 'exBlink', seconds: 20, visual: 'blink', kind: 'evidence', closed: true, blinks: 5 },
   // Nefes adımları: süreyle sayar (sensör yok). Ritim 4 sn al / 6 sn ver (lib/breath.js Sakin ritim);
   // görsel ve sesli aşamalar Routine.jsx'te. Kanıt/sınırlar: docs/yol-haritasi/NEFES_FARKINDALIK.md.
-  breathCalm: { title: 'Sakin nefes', sub: '4 sn al · 6 sn ver · burnundan', say: 'Sakin nefes. Nefes al, yavaşça ver.', seconds: 60, visual: 'breath', kind: 'calm' },
-  breathReset: { title: 'Üç nefes', sub: 'Gözlerini dinlendir: al, ver — üç kez', say: 'Üç nefes.', seconds: 30, visual: 'breath', kind: 'calm' },
-  rest: { title: 'Gözlerini kapat', sub: 'Avuçlarını hafifçe üstüne koyabilirsin', subTracked: 'Telefonu yüzüne dönük tut; kamera kapalı gözlerini görmeli', say: 'Gözlerini kapat. Bitince sesle haber vereceğim.', seconds: 10, visual: 'rest', kind: 'relax', closed: true },
+  breathCalm: { title: 'Sakin nefes', sub: '4 sn al · 6 sn ver · burnundan', voice: 'exCalm', seconds: 60, visual: 'breath', kind: 'calm' },
+  breathReset: { title: 'Üç nefes', sub: 'Gözlerini dinlendir: al, ver — üç kez', voice: 'exThree', seconds: 30, visual: 'breath', kind: 'calm' },
+  rest: { title: 'Gözlerini kapat', sub: 'Avuçlarını hafifçe üstüne koyabilirsin', subTracked: 'Telefonu yüzüne dönük tut; kamera kapalı gözlerini görmeli', voice: 'exRest', seconds: 10, visual: 'rest', kind: 'relax', closed: true },
 }
 
 export const SETS = [

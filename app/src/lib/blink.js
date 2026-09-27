@@ -57,12 +57,13 @@ export function createClosureCounter(baseline, { ratio = CLOSE_RATIO, minFrames 
 // 2 sn hafif kapat → aç → 2 sn hafif kapat → kapalıyken 2 sn sık → aç.
 // Tekrar sayısı Wolffsohn ve ark. 2025 (PMID 40467388): 15 tekrar, günde 3 kez.
 // VARSAYIM: iki çalışmanın birleşimi; "aç" ve dinlenme süreleri tarafımızdan seçildi.
+// voice: seslendirme cümlesi (lib/voicePack.js); label: ritim şeridindeki kısa ad.
 export const BLINK_CYCLE = [
-  { id: 'close1', text: 'Gözlerini hafifçe kapat', ms: 2000, closed: true },
-  { id: 'open1', text: 'Aç', ms: 1000, closed: false },
-  { id: 'close2', text: 'Tekrar hafifçe kapat', ms: 2000, closed: true },
-  { id: 'squeeze', text: 'Kapalıyken hafifçe sık', ms: 2000, closed: true },
-  { id: 'open2', text: 'Aç ve dinlen', ms: 3000, closed: false },
+  { id: 'close1', text: 'Gözlerini hafifçe kapat', voice: 'blClose', label: 'Kapat', ms: 2000, closed: true },
+  { id: 'open1', text: 'Aç', voice: 'open', label: 'Aç', ms: 1000, closed: false },
+  { id: 'close2', text: 'Tekrar hafifçe kapat', voice: 'blClose2', label: 'Kapat', ms: 2000, closed: true },
+  { id: 'squeeze', text: 'Kapalıyken hafifçe sık', voice: 'blSqueeze', label: 'Sık', ms: 2000, closed: true, squeeze: true },
+  { id: 'open2', text: 'Aç ve dinlen', voice: 'blRest', label: 'Aç · dinlen', ms: 3000, closed: false },
 ]
 export const BLINK_REPS = 15
 export const CLOSURES_PER_CYCLE = 2 // close1 ve close2+squeeze

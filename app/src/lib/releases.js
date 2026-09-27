@@ -7,6 +7,8 @@ export const RELEASES = [
     id: '2026-09-27',
     title: '27 Eylül güncellemesi',
     items: [
+      { kind: 'change', text: 'Egzersizler yenilendi: her hareket aynı sahnede çizilir (kırpmada göz, bakışta hedef iris, dairede yörünge, uzağa bakışta ufuk, nefeste küre); çevresindeki altın halka ne kadar kaldığını gösterir. Setten önce hareketlerin listesi çıkar, Başla ile başlarsın. "Gözlerini kapat" adımında ekran iki temada da kararır. Göz kırpma egzersizinde bir tekrarın adımları ritim şeridinde görünür.' },
+      { kind: 'new', text: 'Egzersizlerde bütün sesli yönlendirmeler Profilim\'de seçtiğin sesle (kadın ya da erkek) söylenir. Kırpma adımında "Kapat, hafifçe sık" ve "Aç" ritmi kamerasız da sesle verilir; yakın–uzakta "İrise bak" ve "Uzağa bak" sırayla söylenir.' },
       { kind: 'change', text: 'Göz kalibrasyonu yenilendi: bakacağın nokta artık bir iris; ortasındaki altın noktaya bakarsın, altın halka dolunca o nokta tamam. Yüz görünmezse iris solar, başını çok çevirirsen halka turuncuya döner. Yönlendirmeler Profilim\'de seçtiğin sesle (kadın ya da erkek) söylenir. Noktaların yeri ve süreler aynı.' },
       { kind: 'change', text: 'Seslendirme sesi (kadın ya da erkek) artık bir kez Profilim → Seslendirme\'den seçilir; nefes ve diğer sesli yönlendirmeler hep o sesi kullanır. Nefes ayarında yalnız sesli komutu açıp kapatırsın.' },
       { kind: 'fix', text: 'Nefes seansında sesli komutlar ("Nefes al", "Tut", "Nefes ver") çalmıyordu; düzeldi. Telefon sessizdeyken de duyulur.' },

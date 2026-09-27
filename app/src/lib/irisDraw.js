@@ -100,8 +100,9 @@ export function drawIris(cv, { size, filled = [], cur = -1, dark = true, fibers 
 // Göz kalibrasyonu hedefi (Artifact "Nefona Göz Kalibrasyonu", onaylı): tek parça küçük iris. Bakış noktası göz bebeğinin
 // ortasında altın nokta; iris ince bir artıyla bölünür (Thaler ve ark. 2013, Vision Res, doi:10.1016/j.visres.2012.10.012:
 // halka + artı + merkez nokta en sabit bakışı verdi). Artı "delik" çizilir (destination-out): arkadaki zemin görünür,
-// tema renginden bağımsız. pupil: göz bebeği yarıçap oranı (kabulde küçülür); fix: altın nokta çizilsin mi.
-export function drawCalIris(cv, { size = 52, dark = true, pupil = 0.3, fix = true, dpr = 2 } = {}) {
+// tema renginden bağımsız. pupil: göz bebeği yarıçap oranı (kabulde küçülür); fix: altın nokta çizilsin mi;
+// cross: artı çizilsin mi (egzersizlerdeki göz çiziminde doğal iris için kapalı).
+export function drawCalIris(cv, { size = 52, dark = true, pupil = 0.3, fix = true, cross = true, dpr = 2 } = {}) {
   const S = Math.round(size * dpr)
   cv.width = cv.height = S
   const g = cv.getContext('2d')
@@ -130,11 +131,13 @@ export function drawCalIris(cv, { size = 52, dark = true, pupil = 0.3, fix = tru
   g.fillStyle = '#02060a'; g.beginPath(); g.arc(0, 0, R * pupil, 0, TAU); g.fill()
   g.fillStyle = 'rgba(255,255,255,0.55)'; g.beginPath(); g.arc(-R * 0.34, -R * 0.36, R * 0.07, 0, TAU); g.fill()
   // artı: göz bebeği kenarından limbusa, zemin görünsün diye delik
-  g.save(); g.globalCompositeOperation = 'destination-out'; g.lineWidth = S * 0.045; g.lineCap = 'butt'
-  const r0 = R * (pupil + 0.02)
-  g.beginPath()
-  for (const [cx, cy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { g.moveTo(cx * r0, cy * r0); g.lineTo(cx * R, cy * R) }
-  g.stroke(); g.restore()
+  if (cross) {
+    g.save(); g.globalCompositeOperation = 'destination-out'; g.lineWidth = S * 0.045; g.lineCap = 'butt'
+    const r0 = R * (pupil + 0.02)
+    g.beginPath()
+    for (const [cx, cy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { g.moveTo(cx * r0, cy * r0); g.lineTo(cx * R, cy * R) }
+    g.stroke(); g.restore()
+  }
   if (fix) {
     const fg = g.createRadialGradient(0, 0, 0, 0, 0, R * 0.2)
     fg.addColorStop(0, rgba(GOLD, 0.55)); fg.addColorStop(1, rgba(GOLD, 0))

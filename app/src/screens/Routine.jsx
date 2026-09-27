@@ -1,10 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
-import { X, ArrowRight, ArrowLeft, ArrowUp, ArrowDown, Mountain, EyeOff, Trophy, Info, ScanFace, Check, SkipForward } from 'lucide-react'
-import { Ring } from '../components/ui.jsx'
+import { X, ChevronLeft, ArrowRight, ArrowLeft, ArrowUp, ArrowDown, RotateCw, RotateCcw, Mountain, EyeClosed, Eye, Wind, Clock, ScanFace, SkipForward, Check, Play, Volume2 } from 'lucide-react'
 import { EXERCISES, DAILY_GOAL_MIN, formatMin, setDurationSec } from '../lib/routines.js'
-import { cue, speak, unlockAudio } from '../lib/cue.js'
+import { unlockAudio } from '../lib/cue.js'
+import { cuePhrase, sayPhrase, preloadPhrases } from '../lib/voiceCue.js'
+import { unlockBreathSfx, releaseBreathSfx } from '../lib/breathSfx.js'
+import { VOICE_LABEL, VOICE_LANG } from '../lib/voicePack.js'
+import { getPrefs } from '../lib/prefs.js'
 import { PHASE as BREATH_PHASE, loadBreathOpts } from '../lib/breath.js'
 import BreathVisual from '../components/BreathVisual.jsx'
+import { Arena, EyeArt, LookArt, OrbitArt, HorizonArt, NearArt, RestArt, DoneArt, Pips, NearFarIcon, useIrisArt } from '../components/ExerciseArt.jsx'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import {
   eyeClosure,
@@ -18,26 +22,36 @@ import {
   lookingAtPhone,
   BLINK_CLOSE,
   CIRCLE_MIN_DEG,
-  GAZE_ENTER_DEG,
   GAZE_FULL_DEG,
 } from '../lib/gaze.js'
 import { haptic } from '../lib/native.js'
-import '../styles/routine.css'
+import '../styles/exercise.css'
 import '../styles/breath.css'
 import SoundToggle from '../components/SoundToggle.jsx'
 
-const ARROWS = { right: ArrowRight, left: ArrowLeft, up: ArrowUp, down: ArrowDown }
+// Egzersiz sahnesi (Artifact "Nefona Egzersiz Sahnesi", onaylı): başlangıç → hareketler → bitiş.
+// Görünüm components/ExerciseArt.jsx + styles/exercise.css; sesli komutlar ElevenLabs (lib/voiceCue.js).
 const DIR_WORD = { right: 'sağa', left: 'sola', up: 'yukarı', down: 'aşağı' }
-const KIND_LABEL = {
-  evidence: 'Kanıtlı egzersiz',
-  comfort: 'Göz konforu molası',
-  relax: 'Rahatlama hareketi',
-  calm: 'Nefes',
+const DIR_VOICE = { right: 'exRight', left: 'exLeft', up: 'exUp', down: 'exDown' }
+const KIND_LABEL = { evidence: 'kanıtlı', comfort: 'göz konforu', relax: 'rahatlama', calm: 'nefes' }
+// Başlangıç listesindeki simge ve hedef
+const ARROW_ICON = { right: ArrowRight, left: ArrowLeft, up: ArrowUp, down: ArrowDown }
+const CIRCLE_ICON = { cw: RotateCw, ccw: RotateCcw }
+const OTHER_ICON = { far: Mountain, nearfar: NearFarIcon, blink: Eye, breath: Wind, rest: EyeClosed }
+const moveIcon = (ex) => (ex.visual === 'arrow' ? ARROW_ICON[ex.dir] : ex.visual === 'circle' ? CIRCLE_ICON[ex.dir] : OTHER_ICON[ex.visual])
+const moveGoal = (ex, trueDepth) => {
+  if (trueDepth && ex.visual === 'blink') return `${ex.blinks ?? 5} kırpma`
+  if (trueDepth && ex.visual === 'circle') return `${ex.laps ?? 2} tur`
+  if (trueDepth && ex.visual === 'nearfar') return `${ex.switches ?? 6} geçiş`
+  return `${ex.seconds} sn`
 }
 // Nefes adımı ritmi: 4 sn al, 6 sn ver (Sakin ritim). tick = adım başından geçen saniye.
 const BREATH_IN = 4
 const BREATH_CYCLE = 10
 const breathPhaseAt = (tick) => (tick % BREATH_CYCLE < BREATH_IN ? 'in' : 'out')
+// Kırpma ritmi: 2 sn kapat · hafifçe sık, 2 sn aç. Yakın–uzak: 3 sn iris, 3 sn uzak.
+const BLINK_HALF = 2
+const NEARFAR_HALF = 3
 // TrueDepth varken her adım kamerayla takip edilir ve ASLA süreyle ilerlemez: yüz görünmüyorsa
 // sayaç durur, kişi nazikçe beklenir. TrueDepth yoksa (web / eski iPhone) ya da kamera
 // açılamazsa adımlar süreyle ilerler.
@@ -46,110 +60,23 @@ const GAZE_SENSORS = new Set(['hold', 'laps'])
 const FACE_LOST_MS = 1500
 const STALL_SKIP_SEC = 15 // bu kadar saniye ilerleme olmazsa "Atla" öne çıkar
 const DONE_BEAT_MS = 600 // adım bitince kısa başarı anı, sonra sonraki adım
+const REST_OPEN_GAP_MS = 900 // gözler kapalı adımdan sonra: "Aç." ile sonraki komut arası
 // VARSAYIM: sesli hatırlatma süreleri ilk sürüm içindir; cihazda ayarlanacak.
 const CUE_GAP_MS = 6000 // hatırlatmalar arası en az süre
 const MAX_REMINDERS = 3 // adım başına en çok sesli hatırlatma (sonra ekrandaki "Atla" yeter)
 const OPEN_NAG_MS = 3000 // "Gözlerini kapat" adımında gözler bu kadar açık kalırsa hatırlat
-const BLINK_OPEN_CUE_MS = 2000 // kırpma adımında göz bu kadar kapalı kalınca "Aç" de
 // Uyarı (titreşim + ses): yanlış yere bakınca. VARSAYIM: süreler ilk sürüm içindir.
 const WARN_GAP_MS = 4000 // iki uyarı arası en az süre
 const FAR_GRACE_MS = 3000 // "Uzağa bak" adımı başında yönergeyi okuma payı (uyarı yok)
 const PHONE_WARN_MS = 1200 // uzağa bakması gerekirken bu kadar telefona bakarsa uyar
 const WRONG_DIR_MS = 700 // bakış adımında bu kadar yanlış yöne bakarsa uyar
-const PAD_R = 42 // bakış panelinde noktanın merkezden en uzak konumu (%)
 // Kişiye göre kırpma eşiği: gözler açıkken (ekrana bakarken) ölçülen kapanma ortancası.
 // Telefona aşağı bakınca açık gözde bile kapanma 0,25'in üstünde olabilir; sabit eşikle sayaç
 // ilk kırpmadan sonra hiç "açıldı" demez. VARSAYIM: 30 açık göz karesi ≈ 1 sn (native ~30 Hz).
 const BLINK_BASE_SAMPLES = 30
-// Daire görseli: .orbit 150 px kutu, 6 px kenarlık → kenarlık ortası 72 px (tur ilerleme yayı).
-const ORBIT_R = 72
-const ORBIT_LEN = 2 * Math.PI * ORBIT_R
-const EMPTY_LIVE = { value: 0, ok: false, wrongWay: false, phone: false, gaze: { x: 0, y: 0 }, calibrated: true }
+const EMPTY_LIVE = { value: 0, ok: false, wrongWay: false, wrongDir: false, phone: false, gaze: { x: 0, y: 0 }, calibrated: true }
 
 const unit = (deg) => Math.max(-1, Math.min(1, deg / GAZE_FULL_DEG))
-
-// Bakış paneli (bakış adımları): hedef dilim + yön eşiği halkası + canlı bakış noktası.
-// Ölçek: ±GAZE_FULL_DEG tam kenar; kesikli halka GAZE_ENTER_DEG.
-function GazePad({ dir, gaze, ok }) {
-  const Icon = ARROWS[dir]
-  const ring = (GAZE_ENTER_DEG / GAZE_FULL_DEG) * PAD_R * 2
-  return (
-    <div className={`rt-pad ${ok ? 'ok' : ''}`} aria-hidden="true">
-      <span className={`rt-pad-target ${dir}`} />
-      <span className="rt-pad-ring" style={{ width: `${ring}%`, height: `${ring}%` }} />
-      <Icon size={26} strokeWidth={2.4} className={`rt-pad-arrow ${dir}`} />
-      <span className="rt-pad-dot" style={{ left: `${50 + unit(gaze.x) * PAD_R}%`, top: `${50 - unit(gaze.y) * PAD_R}%` }} />
-    </div>
-  )
-}
-
-// gaze: { v, ok, value } kamera bakışı izlerken; yoksa null (yönerge görseli).
-function Visual({ ex, tick, gaze }) {
-  if (ex.visual === 'arrow') {
-    if (gaze) return <GazePad dir={ex.dir} gaze={gaze.v} ok={gaze.ok} />
-    const Icon = ARROWS[ex.dir]
-    return <Icon size={96} strokeWidth={2.2} className="routine-arrow" />
-  }
-  if (ex.visual === 'circle') {
-    const orbit = (
-      <div className={`orbit ${ex.dir}`}>
-        <span className="orbit-dot" />
-      </div>
-    )
-    if (!gaze) return <div className="rt-orbit">{orbit}</div>
-    // Kamera modu: dönen nokta yalnızca yön/tempo gösterir (soluk) — gözle izlenecek hedef değil;
-    // ekrandaki halkayı izlemek gözü ~2–3° döndürür, çeyrek sayımı ise CIRCLE_MIN_DEG ister.
-    // Kesikli halka o eşiği, halka üstündeki yay turun çeyrek ilerlemesini gösterir.
-    // Ölçek: kutu kenarı ±GAZE_FULL_DEG. VARSAYIM: cihazda doğrulanacak.
-    const lap = Math.floor(gaze.value)
-    const part = Math.max(0, gaze.value - lap)
-    const out = Math.hypot(gaze.v.x, gaze.v.y) >= CIRCLE_MIN_DEG
-    const minRing = (CIRCLE_MIN_DEG / GAZE_FULL_DEG) * 100
-    return (
-      <div className={`rt-orbit tracked ${gaze.ok ? '' : 'warn'}`} aria-hidden="true">
-        {orbit}
-        <svg className={`rt-orbit-arc ${ex.dir}`} viewBox="0 0 150 150">
-          <circle key={lap} cx="75" cy="75" r={ORBIT_R} style={{ strokeDasharray: ORBIT_LEN, strokeDashoffset: ORBIT_LEN * (1 - part) }} />
-        </svg>
-        <span className="rt-orbit-min" style={{ width: `${minRing}%`, height: `${minRing}%` }} />
-        <span className={`rt-orbit-gaze ${out ? 'out' : ''}`} style={{ left: `${50 + unit(gaze.v.x) * 50}%`, top: `${50 - unit(gaze.v.y) * 50}%` }} />
-      </div>
-    )
-  }
-  if (ex.visual === 'far') return <Mountain size={96} strokeWidth={1.6} className="routine-arrow" />
-  if (ex.visual === 'breath') {
-    const k = breathPhaseAt(tick)
-    const ph = BREATH_PHASE[k]
-    const secLeft = k === 'in' ? BREATH_IN - (tick % BREATH_CYCLE) : BREATH_CYCLE - (tick % BREATH_CYCLE)
-    return (
-      <div className="stack" style={{ alignItems: 'center', gap: 18 }}>
-        <BreathVisual visual={loadBreathOpts().visual} kind={k} phaseSec={k === 'in' ? BREATH_IN : BREATH_CYCLE - BREATH_IN} size={150} />
-        <span className="routine-sub" aria-live="polite">{ph.label} · {secLeft}</span>
-      </div>
-    )
-  }
-  if (ex.visual === 'nearfar') {
-    // Yakın hedef ekrandaki daire (başparmak değil: kamera daireye/uzağa bakışı ayırt eder). 3 sn ritim.
-    const near = Math.floor(tick / 3) % 2 === 0
-    return (
-      <div className="stack" style={{ alignItems: 'center', gap: 16 }}>
-        {near ? <span className="nearfar-ring" aria-hidden="true" /> : <Mountain size={88} strokeWidth={1.6} className="routine-arrow" />}
-        <span className="routine-sub">{near ? 'Daireye bak' : 'Uzağa bak'}</span>
-      </div>
-    )
-  }
-  if (ex.visual === 'blink') {
-    // 4 sn ritim: 2 sn kapat, 2 sn aç
-    const closed = Math.floor(tick / 2) % 2 === 0
-    return (
-      <div className="stack" style={{ alignItems: 'center', gap: 14 }}>
-        <div className={`blink-orb ${closed ? 'shut' : ''}`} />
-        <span className="routine-sub">{closed ? 'Kapat · hafifçe sık' : 'Aç'}</span>
-      </div>
-    )
-  }
-  return <EyeOff size={88} strokeWidth={1.6} className="routine-arrow" />
-}
 
 // base: açık göz kapanma tabanı (henüz yoksa null → varsayılan eşikler; taban gelince retune).
 function newTrackers(ex, base) {
@@ -167,8 +94,6 @@ const freshVoice = () => ({
   lastCue: 0,
   reminders: 0,
   openSince: null,
-  closedSince: null,
-  openCued: false,
   stepStart: null, // adımın ilk yüz karesi (ms)
   lastWarn: -Infinity,
   phoneSince: null, // "Uzağa bak"ta telefona bakış başlangıcı
@@ -177,6 +102,7 @@ const freshVoice = () => ({
 
 export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = false }) {
   const steps = set.steps.map((id) => ({ id, ...EXERCISES[id] }))
+  const [started, setStarted] = useState(false)
   const [idx, setIdx] = useState(0)
   const [tick, setTick] = useState(0) // adım başından beri geçen saniye (görsel ritim için)
   const [timer, setTimer] = useState(0) // süreyle ilerleme (yalnızca TrueDepth yokken)
@@ -191,6 +117,9 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
   const pulseValue = useRef(0)
   const pulseLost = useRef(false)
   const voice = useRef(freshVoice())
+  const sayTimer = useRef(0)
+  const startedRef = useRef(started)
+  startedRef.current = started
   const idxRef = useRef(idx)
   idxRef.current = idx
   const doneRef = useRef(done)
@@ -204,12 +133,14 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
   if (!trackers.current) trackers.current = newTrackers(ex, blinkBase.current)
   // Tek okuyucu: nötr bakış ilk adımda (ekrana bakarken) öğrenilir, adımlar arasında korunur.
   if (!reader.current) reader.current = createGazeReader()
+  const artImgs = useIrisArt()
 
   const faceLost = () => performance.now() - faceTs.current > FACE_LOST_MS
 
   const onFrame = (m) => {
     const kind = sensorRef.current
-    if (!kind) return
+    // Başlangıç ekranında kamera ısınır ama hiçbir şey sayılmaz
+    if (!kind || !startedRef.current) return
     const g = reader.current.push(m) // her kare: kalibrasyon ve işaret doğrulama sürekli öğrenir
     if (!m.face) return
     faceTs.current = m.ts
@@ -233,8 +164,9 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
     let value = 0
     let ok = false
     let wrongWay = false
+    let wrongDir = false
     let phone = false // "Uzağa bak"ta telefona bakıyor
-    let warn = null // uyarı metni (titreşim + ses)
+    let warn = null // uyarı cümlesi (titreşim + ses)
     if (kind === 'blinks') {
       // Taban bu adımda hazır olduysa eşikleri kişiye göre ayarla; sayım ve o anki kırpma korunur
       // (sabit eşikte "kapalı"da takılı kalmış kırpma, göz yeni eşiğe inince sayılır).
@@ -245,24 +177,14 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
       value = t.blink.push(closure, m.ts)
       // Taban yokken sabit eşiğin "kapalı" durumu açık gözde takılı kalabilir → ham kapanmaya bak.
       ok = t.blinkTuned ? t.blink.closed : !open
-      // Gözler kapalıyken ekran okunamaz: ritmi sesle ver
-      if (!open) {
-        if (vr.closedSince == null) vr.closedSince = m.ts
-        if (!vr.openCued && m.ts - vr.closedSince >= BLINK_OPEN_CUE_MS) {
-          vr.openCued = true
-          cue('Aç', false)
-        }
-      } else {
-        vr.closedSince = null
-        vr.openCued = false
-      }
     } else if (kind === 'hold') {
       ok = g.dir === cur.dir
       value = t.hold.push(ok, m.ts) / 1000
       // Belirgin biçimde başka yöne bakıyorsa (merkez ya da kırpma değil) uyar
       const wrong = g.dir != null && g.dir !== 'center' && g.dir !== cur.dir
       vr.wrongSince = wrong ? vr.wrongSince ?? m.ts : null
-      if (wrong && m.ts - vr.wrongSince >= WRONG_DIR_MS) warn = `Başını çevirmeden ${DIR_WORD[cur.dir]} bak`
+      wrongDir = wrong && m.ts - vr.wrongSince >= WRONG_DIR_MS
+      if (wrongDir) warn = DIR_VOICE[cur.dir]
     } else if (kind === 'laps') {
       const st = g.dir != null ? t.circle.push(g.v) : t.circle.state
       value = st.laps + st.progress
@@ -283,9 +205,9 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
       value = t.hold.push(ok, m.ts) / 1000
       phone = atPhone === true
       vr.phoneSince = phone ? vr.phoneSince ?? m.ts : null
-      if (phone && m.ts - vr.stepStart >= FAR_GRACE_MS && m.ts - vr.phoneSince >= PHONE_WARN_MS) warn = 'Telefona değil, uzağa bak'
+      if (phone && m.ts - vr.stepStart >= FAR_GRACE_MS && m.ts - vr.phoneSince >= PHONE_WARN_MS) warn = 'exPhone'
     } else if (kind === 'switches') {
-      // Yakın = telefona (daireye) bakış, uzak = telefonun dışına bakış (kameraya göre bakış).
+      // Yakın = telefona (irise) bakış, uzak = telefonun dışına bakış (kameraya göre bakış).
       // Okuyucu kalibre değilse odak mesafesine (göz doğrultuları) düşer.
       const atPhone = lookingAtPhone(g)
       const zone = !open ? null : atPhone != null ? (atPhone ? 'near' : 'far') : focusZone(m)
@@ -306,21 +228,37 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
       vr.lastWarn = m.ts
     }
     if (warn && m.ts - vr.lastWarn >= WARN_GAP_MS) {
-      cue(warn, true) // uyarı titreşimi + ses (ses kapalıysa yalnızca titreşim)
+      cuePhrase(warn, true) // uyarı titreşimi + ses (ses kapalıysa yalnızca titreşim)
       vr.lastWarn = m.ts
       vr.lastCue = performance.now()
     }
     t.last = { value, ok, wrongWay }
     if (m.ts - lastUi.current > 90 || value >= goalOf(cur, kind)) {
       lastUi.current = m.ts
-      setLive({ value, ok, wrongWay, phone, gaze: g.v, calibrated: g.calibrated })
+      setLive({ value, ok, wrongWay, wrongDir, phone, gaze: g.v, calibrated: g.calibrated })
     }
   }
 
+  // Kamera başlangıç ekranında ısınır (Başla'ya basınca hazır olsun); sayım yalnız başladıktan sonra.
   const cam = useFaceTracking({ enabled: trueDepth && !done, trueDepth: true, onFrame })
   // Kamera açılamazsa (izin / hata) süreye düşülür; aksi halde kullanıcı takılı kalırdı.
   const sensor = trueDepth && !cam.error && ex ? SENSOR_BY_VISUAL[ex.visual] ?? null : null
   sensorRef.current = sensor
+
+  // Seslendirmeyi baştan çöz; ekrandan çıkınca ses oturumu bırakılır
+  useEffect(() => {
+    preloadPhrases()
+    return () => {
+      clearTimeout(sayTimer.current)
+      releaseBreathSfx(0)
+    }
+  }, [])
+
+  function start() {
+    unlockAudio()
+    unlockBreathSfx() // ses oturumu 'playback': sessiz tuşunda da duyulur
+    setStarted(true)
+  }
 
   // "Gözlerini kapat" adımında sesli yönlendirme: kullanıcı ekranı göremez.
   function remind(kind) {
@@ -328,37 +266,54 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
     const vr = voice.current
     const now = performance.now()
     if (now - vr.lastCue < CUE_GAP_MS || vr.reminders >= MAX_REMINDERS) return
-    let text = null
-    if (faceLost()) text = 'Kamera yüzünü göremiyor. Telefonu yüzüne doğru tut, gözlerin kapalı kalsın.'
-    else if (vr.openSince != null && now - vr.openSince >= OPEN_NAG_MS) text = 'Gözlerini kapat'
-    if (!text) return
-    cue(text, true)
+    let id = null
+    if (faceLost()) id = 'exNoFace'
+    else if (vr.openSince != null && now - vr.openSince >= OPEN_NAG_MS) id = 'exCloseNag'
+    if (!id) return
+    cuePhrase(id, true)
     vr.lastCue = now
     vr.reminders += 1
   }
 
   // Adım başında sesli yönlendirme (gözler kapalı adımlarda ekran okunamaz)
   useEffect(() => {
-    if (done || !ex) return
+    if (!started || done || !ex) return undefined
     const prev = steps[idx - 1]
-    const say = ex.say ?? ex.title
-    cue(prev?.visual === 'rest' ? `Gözlerini aç. ${say}` : say, Boolean(ex.closed))
+    clearTimeout(sayTimer.current)
+    if (prev?.visual === 'rest') {
+      cuePhrase('open', false)
+      sayTimer.current = setTimeout(() => sayPhrase(ex.voice), REST_OPEN_GAP_MS)
+    } else cuePhrase(ex.voice, Boolean(ex.closed))
     voice.current.lastCue = performance.now()
-  }, [idx, done])
+    return undefined
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idx, done, started])
 
-  // Nefes adımı: aşama değişince kısa komut + aşamaya özgü titreşim (adım başı cue zaten konuşur)
+  // Ritimli adımlar: nefes aşaması, kırpma (kapat/aç), yakın–uzak (iris/uzak). Adım başı komutu 0. saniyede çalar.
   useEffect(() => {
-    if (done || ex?.visual !== 'breath' || tick === 0) return
-    if (tick % BREATH_CYCLE !== 0 && tick % BREATH_CYCLE !== BREATH_IN) return
-    const ph = BREATH_PHASE[breathPhaseAt(tick)]
-    haptic(ph.haptic)
-    speak(ph.say)
+    if (!started || done || !ex || tick === 0) return
+    if (ex.visual === 'breath') {
+      if (tick % BREATH_CYCLE !== 0 && tick % BREATH_CYCLE !== BREATH_IN) return
+      const k = breathPhaseAt(tick)
+      haptic(BREATH_PHASE[k].haptic)
+      sayPhrase(k)
+    } else if (ex.visual === 'blink') {
+      if (tick % BLINK_HALF !== 0) return
+      const closed = Math.floor(tick / BLINK_HALF) % 2 === 0
+      // Kamerasız: ritmi titreşim de taşır (gözler kapalı); kamerada sayım titreşimi zaten var
+      if (sensor) sayPhrase(closed ? 'exBlink' : 'open')
+      else cuePhrase(closed ? 'exBlink' : 'open', closed)
+    } else if (ex.visual === 'nearfar') {
+      if (tick % NEARFAR_HALF !== 0) return
+      const near = Math.floor(tick / NEARFAR_HALF) % 2 === 0
+      sayPhrase(near ? 'exNear' : 'exFarShort')
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tick])
 
   // Nabız: saniyede bir. TrueDepth'te süre ilerlemez; yalnızca bekleme (ilerlemesizlik) sayılır.
   useEffect(() => {
-    if (done) return undefined
+    if (!started || done) return undefined
     const t = setInterval(() => {
       spent.current += 1
       setTick((v) => v + 1)
@@ -378,7 +333,8 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
       remind(kind)
     }, 1000)
     return () => clearInterval(t)
-  }, [done])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [done, started])
 
   function advance(from) {
     if (doneRef.current || from !== idxRef.current) return
@@ -397,7 +353,9 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
       setStall(0)
     } else {
       doneRef.current = true
-      cue(steps[from].visual === 'rest' ? 'Tamamlandı. Gözlerini açabilirsin.' : 'Tamamlandı', false)
+      clearTimeout(sayTimer.current)
+      cuePhrase(steps[from].visual === 'rest' ? 'exDoneOpen' : 'done', false)
+      releaseBreathSfx() // son söz bitsin diye bekleyip bırakır
       setDone(true)
     }
   }
@@ -408,7 +366,7 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
 
   // Adım sonu: süreyle hemen; sensörle kısa bir başarı anından sonra
   useEffect(() => {
-    if (done) return undefined
+    if (!started || done) return undefined
     if (timerDone) {
       advance(idx)
       return undefined
@@ -418,11 +376,8 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
     const from = idx
     const t = setTimeout(() => advance(from), DONE_BEAT_MS)
     return () => clearTimeout(t)
-  }, [sensorDone, timerDone, idx, done])
-
-  useEffect(() => {
-    unlockAudio()
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sensorDone, timerDone, idx, done, started])
 
   // Kayıt bir kez (yol grubunda kendiliğinden dönüş ile düğme yarışmasın)
   const saved = useRef(false)
@@ -440,15 +395,59 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [done])
 
+  // ---------- Başlangıç ----------
+  if (!started) {
+    const voiceName = VOICE_LABEL[VOICE_LANG]?.[getPrefs().voice] ?? 'Kadın'
+    return (
+      <main className="ex-stage ex-start">
+        <div className="ex-top">
+          <button type="button" className="ex-ic" onClick={onBack} aria-label="Geri"><ChevronLeft aria-hidden="true" /></button>
+          <span style={{ flex: 1 }} />
+          <SoundToggle className="ex-sound" />
+        </div>
+        <div className="ex-intro">
+          <span className="ex-step">{set.group ? 'Bugünün yolu' : 'Egzersiz seti'} · {steps.length} hareket</span>
+          <h1 className="ex-title">{set.group ? set.title : `${set.title} set`}</h1>
+          <div className="ex-meta">
+            <span className="ex-chip"><Clock aria-hidden="true" />≈ {formatMin(setDurationSec(set))}</span>
+            <span className="ex-chip">{trueDepth ? <ScanFace aria-hidden="true" /> : <Clock aria-hidden="true" />}{trueDepth ? 'Kamera sayar' : 'Süreyle ilerler'}</span>
+          </div>
+        </div>
+        <ol className="ex-moves" aria-label="Hareketler">
+          {steps.map((s, i) => {
+            const Icon = moveIcon(s)
+            return (
+              <li className="ex-mv" key={`${s.id}-${i}`}>
+                <span className="g"><Icon aria-hidden="true" /></span>
+                <span className="nm">{s.title}{s.kind === 'evidence' && <span className="ex-tag">kanıtlı</span>}</span>
+                <span className="v">{moveGoal(s, trueDepth)}</span>
+              </li>
+            )
+          })}
+        </ol>
+        <div className="ex-foot">
+          {trueDepth && <p className="ex-fine">Kamera yalnız hareketi sayar; görüntü telefondan çıkmaz.</p>}
+          <p className="ex-voice"><Volume2 aria-hidden="true" /><span>Sesli yönlendirme · <b>{voiceName}</b> · Profilim'den değişir</span></p>
+          <button type="button" className="ex-btn" onClick={start}><Play aria-hidden="true" fill="currentColor" /> Başla</button>
+        </div>
+      </main>
+    )
+  }
+
+  // ---------- Bitiş ----------
   if (done && set.group) {
     return (
-      <main className="screen fade-in routine-screen">
-        <section className="card card-hero" style={{ alignItems: 'center', textAlign: 'center', gap: 14 }}>
-          <Check size={56} strokeWidth={2.6} style={{ color: 'var(--ok)' }} aria-hidden="true" />
-          <h1>{set.title} tamam</h1>
-          <p className="muted small">Hareketler rahatlamak için. Görmeyi iyileştirdiği gösterilmedi.</p>
-        </section>
-        <button className="btn" onClick={save}>Yola dön</button>
+      <main className="ex-stage ex-end">
+        <div className="ex-res">
+          <Badge />
+          <span className="ex-step">Bugünün yolu · <b>durak tamam</b></span>
+          <h1 className="ex-title">{set.title} tamam</h1>
+          <p className="ex-honest">Hareketler rahatlamak için. Görmeyi iyileştirdiği gösterilmedi.</p>
+        </div>
+        <div className="ex-foot">
+          <button type="button" className="ex-skip" onClick={save}>Yola dön</button>
+          <p className="ex-fine">Kendiliğinden yola dönülüyor…</p>
+        </div>
       </main>
     )
   }
@@ -456,132 +455,166 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
   if (done) {
     const total = todaySec + spent.current
     const dailyGoal = DAILY_GOAL_MIN * 60
+    const reached = total >= dailyGoal
+    const mins = formatMin(total).replace(' dk', '') // üst satırla aynı yuvarlama
     return (
-      <main className="screen fade-in routine-screen">
-        <section className="card card-hero" style={{ alignItems: 'center', textAlign: 'center', gap: 14 }}>
-          <Ring value={Math.min(total, dailyGoal)} max={dailyGoal} size={132} stroke={12}>
-            {total >= dailyGoal ? <Trophy size={40} style={{ color: 'var(--accent)' }} /> : <span className="ring-label">{formatMin(total)}</span>}
-          </Ring>
-          <h1>{total >= dailyGoal ? 'Günlük hedef tamam!' : `${set.title} set tamamlandı`}</h1>
-          <p className="muted">Bugünkü toplam: {formatMin(total)} · hedef {DAILY_GOAL_MIN} dk</p>
-        </section>
-        <p className="note">
-          <Info size={16} />
-          Bakış ve daire hareketleri rahatlama amaçlıdır; görmeyi iyileştirdiklerine dair bilimsel kanıt yoktur. Görmendeki değişimi "E hangi yönde" testiyle ölçüyoruz.
-        </p>
-        <button className="btn" onClick={save}>
-          Kaydet
-        </button>
+      <main className="ex-stage ex-end">
+        <div className="ex-res">
+          <GoalRing frac={Math.min(1, total / dailyGoal)} reached={reached} mins={mins} />
+          <span className="ex-step">{reached ? <b>Günlük hedef tamam</b> : <>Bugün · <b>{formatMin(total)} / {DAILY_GOAL_MIN} dk</b></>}</span>
+          <h1 className="ex-title">{set.title} set tamam</h1>
+          <div className="ex-stats">
+            <div><b>{steps.length}</b><span>hareket</span></div>
+            <div><b>{clock(spent.current)}</b><span>süre</span></div>
+            <div><b>{formatMin(total)}</b><span>bugün</span></div>
+          </div>
+          <p className="ex-honest">Bakış ve daire hareketleri rahatlama içindir; görmeyi iyileştirdikleri gösterilmedi. Görmendeki değişimi "E hangi yönde" testiyle ölçüyoruz.</p>
+        </div>
+        <div className="ex-foot">
+          <button type="button" className="ex-btn" onClick={save}><Check aria-hidden="true" /> Kaydet</button>
+        </div>
       </main>
     )
   }
 
-  // Takip durumu (TrueDepth adımları)
+  // ---------- Hareket ----------
   const faceVisible = Boolean(sensor) && cam.ready && !faceLost()
   const paused = Boolean(sensor) && !faceVisible
-  const stuck = Boolean(sensor) && stall >= STALL_SKIP_SEC
+  const stuck = Boolean(sensor) && stall >= STALL_SKIP_SEC && !sensorDone
   const frac = sensor ? Math.min(1, live.value / goal) : Math.min(1, timer / ex.seconds)
   const sub = sensor ? ex.subTracked ?? ex.sub : ex.sub
-  const gaze = faceVisible && GAZE_SENSORS.has(sensor) ? { v: live.gaze, ok: live.ok, value: live.value } : null
-
-  const tally = sensor === 'blinks' || sensor === 'laps' || sensor === 'switches'
-  const count = !sensor
-    ? Math.max(0, ex.seconds - timer)
-    : tally
-      ? `${Math.min(Math.floor(live.value), goal)}/${goal}`
-      : Math.max(0, Math.ceil(goal - live.value))
-  const { hint, tone } = sensor ? feedback(sensor, live, ex) : { hint: null, tone: '' }
+  const gazeOn = faceVisible && GAZE_SENSORS.has(sensor)
+  const gaze = gazeOn ? { x: unit(live.gaze.x), y: unit(live.gaze.y) } : null
+  const secLeft = !sensor ? Math.max(0, ex.seconds - timer) : Math.max(0, Math.ceil(goal - live.value))
   const skip = () => advance(idx)
 
+  // Sahne çizimi
+  let art = null
+  let overlay = null
+  let now = null
+  const closedPhase = Math.floor(tick / BLINK_HALF) % 2 === 0
+  const nearPhase = Math.floor(tick / NEARFAR_HALF) % 2 === 0
+  if (sensorDone) {
+    art = <DoneArt />
+    now = <span className="ex-big gold">Tamam</span>
+  } else if (ex.visual === 'blink') {
+    const eyeClosed = sensor ? live.ok : closedPhase
+    art = <EyeArt state={eyeClosed ? 'closed' : 'open'} img={artImgs.eye} />
+    now = (
+      <>
+        <span className="ex-word">{closedPhase ? 'Kapat · hafifçe sık' : 'Aç'}{!sensor && <small>{secLeft} sn</small>}</span>
+        {sensor === 'blinks' && <Pips n={goal} f={Math.min(Math.floor(live.value), goal)} label="kırpma" />}
+      </>
+    )
+  } else if (ex.visual === 'arrow') {
+    art = <LookArt dir={ex.dir} img={artImgs.tgt} gaze={gaze} ok={gazeOn && live.ok} warn={live.wrongDir} />
+    now = <span className="ex-big">{secLeft}<small>sn</small></span>
+  } else if (ex.visual === 'circle') {
+    const out = gaze ? Math.hypot(live.gaze.x, live.gaze.y) >= CIRCLE_MIN_DEG : false
+    art = <OrbitArt dir={ex.dir} img={artImgs.eye} tracked={gazeOn} minR={CIRCLE_MIN_DEG / GAZE_FULL_DEG} gaze={gaze} out={out} warn={live.wrongWay} />
+    now = sensor === 'laps'
+      ? <><span className="ex-word">{Math.min(Math.floor(live.value) + 1, goal)}. tur</span><Pips n={goal} f={Math.min(Math.floor(live.value), goal)} label="tur" /></>
+      : <span className="ex-big">{secLeft}<small>sn</small></span>
+  } else if (ex.visual === 'far') {
+    art = <HorizonArt />
+    now = <span className="ex-big">{secLeft}<small>sn</small></span>
+  } else if (ex.visual === 'nearfar') {
+    art = nearPhase ? <><HorizonArt faint /><NearArt img={artImgs.tgt} /></> : <HorizonArt />
+    now = (
+      <>
+        <span className="ex-word">{nearPhase ? 'İrise bak' : 'Uzağa bak'}{!sensor && <small>{secLeft} sn</small>}</span>
+        {sensor === 'switches' && <Pips n={goal} f={Math.min(Math.floor(live.value), goal)} label="geçiş" />}
+      </>
+    )
+  } else if (ex.visual === 'breath') {
+    const k = breathPhaseAt(tick)
+    const phLeft = k === 'in' ? BREATH_IN - (tick % BREATH_CYCLE) : BREATH_CYCLE - (tick % BREATH_CYCLE)
+    overlay = <BreathVisual visual={loadBreathOpts().visual} kind={k} phaseSec={k === 'in' ? BREATH_IN : BREATH_CYCLE - BREATH_IN} size={170} />
+    now = <span className="ex-word" aria-live="polite">{BREATH_PHASE[k].label}<small>{phLeft}</small></span>
+  } else {
+    art = <RestArt />
+    now = <span className="ex-big">{secLeft}<small>sn</small></span>
+  }
+  const noBase = ex.visual === 'far' || ex.visual === 'nearfar'
+
+  // Durum satırı
+  let st = null
+  if (sensorDone) {
+    const nx = steps[idx + 1]
+    st = { text: nx ? `Sıradaki: ${nx.title}` : 'Son hareket tamam', tone: 'g' }
+  } else if (trueDepth && cam.error) st = { text: 'Kamera kullanılamıyor · süreyle ilerliyor', tone: 'n' }
+  else if (!sensor) st = { text: 'Süreyle ilerler', tone: 'n' }
+  else if (!cam.ready) st = { text: 'Kamera hazırlanıyor…', tone: 'n' }
+  else if (paused) st = { text: 'Yüzün görünmüyor · sayaç durdu', tone: 'w' }
+  else st = feedback(sensor, live, ex, stuck)
+
+  const warnRing = live.wrongWay && sensor === 'laps'
+
   return (
-    <main className="screen routine-screen rt">
-      <div className="rt-top">
-        <button className="btn-icon" onClick={onBack} aria-label="Egzersizden çık">
-          <X size={20} aria-hidden="true" />
-        </button>
-        <div className="seg-progress" role="progressbar" aria-label={`Adım ${idx + 1} / ${steps.length}`} aria-valuemin={0} aria-valuemax={steps.length} aria-valuenow={idx + 1}>
+    <main className={`ex-stage${ex.visual === 'rest' ? ' rest' : ''}${paused ? ' noface' : ''}`}>
+      <div className="ex-top">
+        <button type="button" className="ex-ic" onClick={onBack} aria-label="Egzersizden çık"><X aria-hidden="true" /></button>
+        <div className="ex-segs" role="progressbar" aria-label={`Adım ${idx + 1} / ${steps.length}`} aria-valuemin={0} aria-valuemax={steps.length} aria-valuenow={idx + 1}>
           {steps.map((s, i) => (
-            <span key={i} className={i < idx ? 'done' : i === idx ? 'now' : ''}>
+            <span key={i} className={i < idx ? 'd' : ''}>
               {i === idx && <i style={{ width: `${frac * 100}%` }} />}
             </span>
           ))}
         </div>
-        <span className="rt-step" aria-hidden="true">{idx + 1}/{steps.length}</span>
-        <SoundToggle />
+        <SoundToggle className="ex-sound" />
       </div>
 
-      <div className="routine-body" key={idx}>
-        <span className={`kind-tag ${ex.kind}`}>{KIND_LABEL[ex.kind]}</span>
-        <h1 className="routine-title">{ex.title}</h1>
-        <p className="routine-sub">{sub}</p>
-        <div className={`routine-count ${paused ? 'rt-paused' : ''}`} aria-live="polite">
-          {sensorDone ? <Check size={76} strokeWidth={2.6} className="rt-count-done" aria-label="Tamam" /> : count}
-        </div>
-        <div className={`routine-visual ${paused ? 'rt-paused' : ''}`}>
-          <Visual ex={ex} tick={tick} gaze={gaze} />
-        </div>
-        {sensor && paused && (
-          <div className="rt-wait" role="status">
-            <span className="rt-wait-icon"><ScanFace size={22} aria-hidden="true" /></span>
-            <div>
-              <strong>{cam.ready ? 'Yüzünü kameraya göster' : 'Kamera hazırlanıyor…'}</strong>
-              <span>{cam.ready ? 'Sayaç, yüzün görününce kaldığı yerden devam eder.' : 'Bir an sürebilir.'}</span>
-            </div>
-          </div>
-        )}
-        {sensor && !paused && hint && (
-          <p className={`rt-live ${tone}`}>
-            {tone === 'ok' ? <Check size={16} aria-hidden="true" /> : <ScanFace size={16} aria-hidden="true" />}
-            {hint}
-          </p>
-        )}
-        {trueDepth && cam.error && (
-          <p className="track-status">
-            <ScanFace size={15} aria-hidden="true" />
-            Kamera kullanılamıyor — süreyle devam ediyor
-          </p>
-        )}
+      <div className="ex-copy" key={idx}>
+        <span className="ex-step">{set.title} · <b>{idx + 1} / {steps.length}</b> · <em>{KIND_LABEL[ex.kind]}</em></span>
+        <h1 className="ex-title">{ex.title}</h1>
+        {sub && <p className="ex-sub">{sub}</p>}
       </div>
 
-      <div className="rt-foot">
-        {stuck ? (
+      <div className="ex-mid">
+        <Arena progress={frac} tone={warnRing ? 'warn' : 'gold'} off={paused} base={!noBase} overlay={overlay}>{art}</Arena>
+      </div>
+
+      <div className={`ex-now${paused ? ' paused' : ''}`} aria-live="polite">{now}</div>
+      <div className="ex-st" role="status">{st && <span className={st.tone}>{st.text}</span>}</div>
+
+      <div className="ex-foot">
+        {sensorDone ? null : stuck ? (
           <>
-            <button className="btn" onClick={skip}>
-              <SkipForward size={18} aria-hidden="true" /> Bu adımı atla
-            </button>
-            <p className="muted small">{paused ? 'Yüzün görünmediği için sayaç duruyor.' : 'Hareket algılanmıyorsa bu adımı geçebilirsin.'}</p>
+            <button type="button" className="ex-btn ghost" onClick={skip}><SkipForward aria-hidden="true" /> Bu adımı atla</button>
+            <p className="ex-fine">{paused ? 'Yüzün görünmediği için sayaç duruyor.' : 'Hareket algılanmıyorsa bu adımı geçebilirsin.'}</p>
           </>
         ) : (
-          <button className="link-btn" onClick={skip}>Atla</button>
+          <button type="button" className="ex-skip" onClick={skip}>Atla <SkipForward aria-hidden="true" /></button>
         )}
-        <p className="muted small">{set.title} · toplam {formatMin(setDurationSec(set))}</p>
       </div>
     </main>
   )
 }
 
-// Canlı geri bildirim metni ve tonu ('ok' | 'warn' | '')
-function feedback(sensor, live, ex) {
+// Canlı geri bildirim: metin ve ton ('ok' yeşil nokta · 'g' altın · 'w' turuncu · 'n' gri)
+function feedback(sensor, live, ex, stuck) {
   switch (sensor) {
     case 'blinks':
-      return { hint: live.ok ? 'Kapalı… hafifçe sık, sonra aç' : 'Her tam kırpmayı sayıyorum', tone: '' }
+      if (stuck) return { text: 'Kırpma algılanmıyor', tone: 'w' }
+      return live.ok ? { text: 'Kapalı… hafifçe sık, sonra aç', tone: 'ok' } : { text: 'Yüzün görünüyor · kırpmaları sayıyorum', tone: 'ok' }
     case 'hold':
-      if (!live.calibrated) return { hint: 'Önce bir an ekrana bak', tone: '' }
-      return live.ok ? { hint: 'Harika, böyle tut', tone: 'ok' } : { hint: `Başını çevirmeden ${DIR_WORD[ex.dir]} bak`, tone: '' }
+      if (!live.calibrated) return { text: 'Önce bir an ekrana bak', tone: 'n' }
+      if (live.wrongDir) return { text: `Başını çevirmeden ${DIR_WORD[ex.dir]} bak`, tone: 'w' }
+      return live.ok ? { text: 'Böyle tut', tone: 'g' } : { text: 'Yüzün görünüyor', tone: 'ok' }
     case 'laps':
-      // Ekrandaki halkayı izlemek yetmez (bkz. Visual): bakış telefonun dışına taşmalı.
-      if (!live.calibrated) return { hint: 'Önce bir an ekrana bak', tone: '' }
-      if (live.wrongWay) return { hint: 'Ters yöne dönüyorsun', tone: 'warn' }
-      return live.value > 0 ? { hint: 'Güzel, büyük ve yavaş devam et', tone: 'ok' } : { hint: 'Büyük ve yavaş çiz, ekranın dışına taşsın', tone: '' }
+      // Ekrandaki halkayı izlemek yetmez (bkz. OrbitArt): bakış telefonun dışına taşmalı.
+      if (!live.calibrated) return { text: 'Önce bir an ekrana bak', tone: 'n' }
+      if (live.wrongWay) return { text: 'Ters yöne dönüyorsun', tone: 'w' }
+      return live.value > 0 ? { text: 'Güzel, büyük ve yavaş devam et', tone: 'g' } : { text: 'Büyük ve yavaş çiz, ekranın dışına taşsın', tone: 'ok' }
     case 'closed':
-      return live.ok ? { hint: 'Gözlerin kapalı, bitince sesle haber vereceğim', tone: 'ok' } : { hint: 'Gözlerini kapat', tone: '' }
+      return live.ok ? { text: 'Gözlerin kapalı · bitince sesle haber vereceğim', tone: 'ok' } : { text: 'Gözlerini kapat', tone: 'w' }
     case 'far':
-      if (live.phone) return { hint: 'Telefona bakıyorsun · telefonun üstünden uzağa bak', tone: 'warn' }
-      return live.ok ? { hint: 'Gözlerin uzakta, böyle kal', tone: 'ok' } : { hint: 'Telefonun üstünden uzaktaki bir noktaya bak', tone: '' }
+      if (live.phone) return { text: 'Telefona bakıyorsun · üstünden uzağa bak', tone: 'w' }
+      return live.ok ? { text: 'Gözlerin uzakta, böyle kal', tone: 'g' } : { text: 'Telefonun üstünden uzaktaki bir noktaya bak', tone: 'ok' }
     case 'switches':
-      return { hint: live.value === 0 ? 'Önce daireye, sonra telefonun üstünden uzağa bak' : 'Geçişleri sayıyorum', tone: '' }
+      return { text: live.value === 0 ? 'Önce irise, sonra telefonun üstünden uzağa bak' : 'Geçişleri sayıyorum', tone: 'ok' }
     default:
-      return { hint: null, tone: '' }
+      return null
   }
 }
 
@@ -590,4 +623,38 @@ function goalOf(ex, sensor) {
   if (sensor === 'laps') return ex.laps ?? 2
   if (sensor === 'switches') return ex.switches ?? 6
   return ex.seconds
+}
+
+const clock = (sec) => `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`
+
+// Günlük hedef halkası (dakika): dolunca altın onay
+function GoalRing({ frac, reached, mins }) {
+  const L = 2 * Math.PI * 80
+  return (
+    <svg className="ex-goal" viewBox="0 0 180 180" aria-hidden="true">
+      <circle className="trk" cx="90" cy="90" r="80" />
+      {frac > 0 && <circle className="arc" cx="90" cy="90" r="80" style={{ strokeDasharray: `${frac * L} ${L}` }} transform="rotate(-90 90 90)" />}
+      {reached ? (
+        <g className="ex-badge">
+          <circle className="disc" cx="90" cy="90" r="34" />
+          <path className="tick" d="M75 91 l10 10 l21 -22" strokeWidth="6" />
+        </g>
+      ) : (
+        <>
+          <text className="num" x="90" y="92" textAnchor="middle">{mins}</text>
+          <text className="unit" x="90" y="118" textAnchor="middle">/ {DAILY_GOAL_MIN} DK</text>
+        </>
+      )}
+    </svg>
+  )
+}
+
+function Badge() {
+  return (
+    <svg className="ex-badge" viewBox="0 0 180 180" width="160" height="160" aria-hidden="true">
+      <circle className="halo" cx="90" cy="90" r="70" />
+      <circle className="disc" cx="90" cy="90" r="46" />
+      <path className="tick" d="M70 91 l14 14 l28 -30" strokeWidth="8" />
+    </svg>
+  )
 }
