@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Camera, Check, ChevronRight, Eye, ListChecks, LogOut, Trash2, UserRound, ShieldCheck, Footprints } from 'lucide-react'
+import { Camera, Check, ChevronRight, Eye, ListChecks, LogOut, Trash2, UserRound, ShieldCheck, Footprints, Volume2 } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
 import { emptyIdentity, normalizeIdentity, validBirthDate, ageFromBirthDate, isAdult, initialFor, AVATAR_HUES, AVATAR_PX, NAME_MAX } from '../lib/identity.js'
 import { CORRECTION } from '../lib/profile.js'
@@ -9,7 +9,9 @@ import CityField from '../components/CityField.jsx'
 import '../styles/account.css'
 import { haptic } from '../lib/native.js'
 import { getMembership, PLAN_NAME } from '../lib/subscription.js'
-import { getPrefs, subscribePrefs } from '../lib/prefs.js'
+import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
+import { VOICES, VOICE_LABEL, VOICE_LANG, PHRASES, previewVoice } from '../lib/voicePack.js'
+import { speak, unlockAudio } from '../lib/cue.js'
 import { coachAllowed } from '../lib/consent.js'
 import ConsentSheet from '../components/ConsentSheet.jsx'
 import '../styles/profilehome.css'
@@ -170,6 +172,8 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
         )}
       </div>
 
+      <VoicePref />
+
       <section className="ph-perm" aria-labelledby="ph-perm-h">
         <h2 id="ph-perm-h" className="ph-sec">İzinlerim</h2>
         <div className="list">
@@ -303,6 +307,34 @@ function MembershipCard({ m }) {
             : <>{plan && <b>{plan} · </b>}<b>{fmtDate(m.expires)}</b>'de biter; yenilenmeyecek.</>}
       </p>
       <a className="link" href={manage} target="_blank" rel="noreferrer">Aboneliği yönet →</a>
+    </section>
+  )
+}
+
+// Seslendirme sesi: bir kez burada seçilir; nefes, göz kalibrasyonu ve diğer sesli modüller bunu kullanır (prefs.voice)
+function VoicePref() {
+  const [voice, setVoice] = useState(() => getPrefs().voice)
+  useEffect(() => subscribePrefs((p) => setVoice(p.voice)), [])
+  const choose = (v) => {
+    setPrefs({ voice: v })
+    haptic('tick')
+  }
+  const listen = async () => {
+    unlockAudio()
+    if (!(await previewVoice(voice))) speak(PHRASES[VOICE_LANG].in)
+  }
+  return (
+    <section className="ph-voice" aria-labelledby="ph-voice-h">
+      <h2 id="ph-voice-h" className="ph-sec">Seslendirme</h2>
+      <div className="ph-voice-row">
+        <div className="pf-chips" role="radiogroup" aria-label="Seslendirme sesi">
+          {VOICES.map((v) => (
+            <button key={v} type="button" role="radio" aria-checked={voice === v} className={`pf-chip${voice === v ? ' on' : ''}`} onClick={() => choose(v)}>{VOICE_LABEL[VOICE_LANG][v]}</button>
+          ))}
+        </div>
+        <button type="button" className="ph-listen" onClick={listen}><Volume2 size={16} aria-hidden="true" /> Dinle</button>
+      </div>
+      <p className="muted small">Sesli komutlar bu sesle söylenir: nefes, göz kalibrasyonu ve diğer yönlendirmeler.</p>
     </section>
   )
 }

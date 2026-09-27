@@ -1,8 +1,8 @@
 // Cihaz başına geri bildirim tercihleri: ses ve titreşim.
 // Ölçüm verisinden (storage.js) ayrı saklanır; "Tüm verileri sil" bunlara dokunmaz (tema gibi).
 //
-//   getPrefs()          → { sound, haptics }  (kopya; varsayılan ikisi de true)
-//   setPrefs(patch)     → yeni tercihler; yalnızca bilinen anahtarlar ve boolean değerler kabul edilir
+//   getPrefs()          → { sound, haptics, …, voice }  (kopya; ses ve titreşim varsayılan açık)
+//   setPrefs(patch)     → yeni tercihler; yalnızca bilinen anahtarlar: açık/kapalılar boolean, voice 'female' | 'male'
 //   subscribePrefs(fn)  → abonelikten çıkma fonksiyonu; fn(yeni, önceki) yalnızca gerçek değişiklikte çağrılır
 //
 // localStorage'a her erişim try/catch içinde: gizli sekme, engellenmiş site verisi veya Node testleri
@@ -12,13 +12,16 @@ const KEY = 'gozolcum:prefs'
 
 // coach: Nef Göz Koçu (varsayılan kapalı, açık onayla açılır); coachHidden: ana sayfa tanıtım kartı gizli;
 // coachLife: profil cevaplarının özeti (uyku, ekran, gece telefonu, stres) de koça gider — ayrı onay (Build 27)
-export const DEFAULT_PREFS = Object.freeze({ sound: true, haptics: true, coach: false, coachHidden: false, coachLife: false })
+// voice: seslendirme sesi (lib/voicePack.js); Profilim'de bir kez seçilir, bütün modüller bunu kullanır
+export const DEFAULT_PREFS = Object.freeze({ sound: true, haptics: true, coach: false, coachHidden: false, coachLife: false, voice: 'female' })
 const KEYS = Object.keys(DEFAULT_PREFS)
+const CHOICES = { voice: ['female', 'male'] }
+const valid = (k, v) => (CHOICES[k] ? CHOICES[k].includes(v) : typeof v === 'boolean')
 
 function sanitize(raw) {
   const out = { ...DEFAULT_PREFS }
   if (raw && typeof raw === 'object' && !Array.isArray(raw)) {
-    for (const k of KEYS) if (typeof raw[k] === 'boolean') out[k] = raw[k]
+    for (const k of KEYS) if (valid(k, raw[k])) out[k] = raw[k]
   }
   return out
 }
@@ -61,7 +64,7 @@ export function createPrefs(storage) {
     const next = { ...prev }
     let changed = false
     for (const k of KEYS) {
-      if (typeof patch[k] === 'boolean' && patch[k] !== prev[k]) {
+      if (valid(k, patch[k]) && patch[k] !== prev[k]) {
         next[k] = patch[k]
         changed = true
       }

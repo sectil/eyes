@@ -46,3 +46,10 @@
 .ph-st { flex: none; font: 600 0.7rem/1 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; padding: 6px 8px; border-radius: 999px; color: var(--ink-3); background: color-mix(in srgb, var(--ink) 7%, transparent); border: 0; }
 .ph-st.on { color: var(--ok, #1fa974); background: color-mix(in srgb, var(--ok, #1fa974) 14%, transparent); }
 .ph-st.as-btn { cursor: pointer; }
+
+/* Seslendirme sesi (Profilim) */
+.ph-voice { display: flex; flex-direction: column; gap: 8px; }
+.ph-voice .ph-sec { margin-bottom: 0; }
+.ph-voice > p { margin: 0 0 0 4px; }
+.ph-voice-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.ph-listen { display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); color: var(--ink); font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; }

@@ -179,7 +179,6 @@ export const DEFAULT_OPTS = Object.freeze({
   vibrate: true,
   sound: true,
   voice: true,
-  voiceId: 'female', // seslendirme: 'female' | 'male' (lib/voicePack.js; ElevenLabs ile önceden üretilmiş)
   sounds: DEFAULT_SOUNDS,
   volume: 7, // 0–10
 })
@@ -315,7 +314,6 @@ export function normalizeOpts(o = {}) {
     vibrate: typeof o.vibrate === 'boolean' ? o.vibrate : DEFAULT_OPTS.vibrate,
     sound: typeof o.sound === 'boolean' ? o.sound : DEFAULT_OPTS.sound,
     voice: typeof o.voice === 'boolean' ? o.voice : DEFAULT_OPTS.voice,
-    voiceId: o.voiceId === 'male' || o.voiceId === 'female' ? o.voiceId : DEFAULT_OPTS.voiceId,
     sounds,
     volume: Number.isInteger(o.volume) ? clamp(o.volume, [0, 10]) : DEFAULT_OPTS.volume,
   }

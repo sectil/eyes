@@ -37,10 +37,8 @@ describe('seslendirme paketi', () => {
     expect(gainFor(b.peak) * b.peak).toBeCloseTo(TARGET_PEAK, 2)
     expect(trimBounds(new Float32Array(10)).end).toBe(0)
   })
-  it('ses tercihi: kadın varsayılan, erkek saklanır, bilinmeyen kadına döner', () => {
-    expect(normalizeOpts({}).voiceId).toBe('female')
-    expect(normalizeOpts({ voiceId: 'male' }).voiceId).toBe('male')
-    expect(normalizeOpts({ voiceId: 'x' }).voiceId).toBe('female')
+  it('nefes ayarı ses seçmez (ses Profilim tercihinden gelir)', () => {
+    expect(normalizeOpts({ voiceId: 'male' })).not.toHaveProperty('voiceId')
   })
   it('paket: index.json her iki seste bütün cümleleri listeler ve her dosya diskte var', () => {
     const dir = new URL('../../public/voice/', import.meta.url)

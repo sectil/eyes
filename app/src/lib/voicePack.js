@@ -4,6 +4,7 @@
 // kendi sesine düşer (lib/cue.js speak). Çalarken baştaki/sondaki sessizlik kırpılır, ses seviyesi eşitlenir.
 
 import { mediaPlayOnce } from './audioUnmute.js'
+import { breathContext, unlockBreathSfx } from './breathSfx.js'
 
 export const VOICE_LANG = 'tr'
 export const VOICES = ['female', 'male']
@@ -176,3 +177,11 @@ export function playPhrase(ctx, voice, id, volume = 7, lang = VOICE_LANG) {
 }
 
 export const hasVoice = async (voice, lang = VOICE_LANG) => availableFrom(await loadIndex(), lang)[voice]?.size > 0
+
+// Önizleme (Profilim ve modüllerdeki "Dinle"): kullanıcı dokunuşu içinde çağrılır. Döner: kayıtlı ses çaldı mı.
+export async function previewVoice(voice, id = 'in', volume = 7) {
+  unlockBreathSfx()
+  const ctx = breathContext()
+  await preloadVoice(ctx, voice)
+  return playPhrase(ctx, voice, id, volume)
+}
