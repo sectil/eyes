@@ -100,7 +100,7 @@ Hangi türlerin açık olacağını kullanıcı seçer. Her türden günde en ç
 - **Nefes:** 60 saniyelik yeni rota; başta istenen sakinlik puanı bu rotada atlanır (Breath.jsx:228).
 - **`lib/health.js`:** `walkLowToday(today, avg, readAt)`.
 - **Ekranlar ve diğerleri:** `Reminders.jsx` (yeni), `Schedule.jsx` (metin düzeltmesi), `Home.jsx` (izin kartı ve oturum şeridi), `Progress.jsx` (ölçüm kartı), `consent.js` (rıza başına sürüm ve testleri), `restNotify.js`.
-- **`App.jsx`:** yeniden planlama tetikleri. "Tüm verileri sil" şunları da siler: planlanmış bildirimler, 7302, günlük, `habit-log` ve tohum.
+- **`App.jsx`:** yeniden planlama tetikleri. "Tüm verileri sil" şunları da siler: planlanmış bildirimler, günlük, `habit-log` ve tohum. (Uygulamada: 7302 deneme bitiş uyarısı SİLİNMEZ — abonelik denemesi sürüyor; onay metni bunu söylüyor.)
 - **BILDIRIM_PLANI.md:**
   - Kaynak listesine eklenir: James 2016 (PMID 27311332), Spring 2018 (PMID 29921561, PMC6030572), Wilson 2015 (PMID 25528345, PMC4801324).
   - Yöntem satırı şöyle olur: "Tam metni okunanlar: Singh 2024, Wilson 2015, Spring 2018; diğerlerinin yalnız özeti okundu."

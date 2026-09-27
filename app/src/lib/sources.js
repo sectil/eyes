@@ -9,14 +9,17 @@ export const DESIGNS = {
   cohort: 'Prospektif kohort çalışması',
   validation: 'Geçerlik ve güvenirlik çalışması',
   rct: 'Randomize kontrollü çalışma',
+  mrt: 'Mikro-randomize deneme',
   crossover: 'Randomize çapraz çalışma',
   experiment: 'Deney',
+  field: 'Saha çalışması',
+  quasi: 'Yarı-randomize çalışma',
   prepost: 'Öncesi–sonrası çalışma (kontrol grubu yok)',
   observational: 'Gözlemsel çalışma',
   case: 'Olgu raporu',
 }
 // Kanıtın gücü için kaba sıra (yüksek = daha güçlü). Kullanıcıya "ne kadar güvenilir?" diye gösterilir.
-export const DESIGN_RANK = { meta: 4, review: 3, rct: 3, crossover: 3, cohort: 2, experiment: 2, validation: 1, prepost: 1, observational: 1, case: 0 }
+export const DESIGN_RANK = { meta: 4, review: 3, rct: 3, mrt: 3, crossover: 3, cohort: 2, experiment: 2, field: 2, quasi: 2, validation: 1, prepost: 1, observational: 1, case: 0 }
 
 export const SOURCES = {
   ulrich1984: {
@@ -169,6 +172,49 @@ export const SOURCES = {
     titleTr: 'İki gözde ışığa bağlı sarı nokta hasarı: Bir olgu ve çok yönlü görüntülemenin rolü.',
     journal: 'Cureus', cite: '17(12):e99791', doi: '10.7759/cureus.99791', pmid: '41573477',
     design: 'case', n: '1 kişi',
+  },
+  // Bildirim planı v2 (docs/yol-haritasi/BILDIRIM_PLANI.md; 2026-09-27 PubMed'den doğrulandı)
+  klasnja2019: {
+    authors: ['Klasnja P', 'Smith S', 'Seewald NJ', 'Lee A'], year: 2019,
+    title: 'Efficacy of Contextually Tailored Suggestions for Physical Activity: A Micro-randomized Optimization Trial of HeartSteps.',
+    titleTr: 'Bağlama göre uyarlanmış fiziksel aktivite önerilerinin etkinliği: HeartSteps mikro-randomize optimizasyon denemesi.',
+    journal: 'Ann Behav Med', cite: '53(6):573-582', doi: '10.1093/abm/kay067', pmid: '30192907',
+    design: 'mrt', n: '44 yetişkin, 6 hafta',
+  },
+  bell2023: {
+    authors: ['Bell L', 'Garnett C', 'Bao Y', 'Cheng Z'], year: 2023,
+    title: 'How Notifications Affect Engagement With a Behavior Change App: Results From a Micro-Randomized Trial.',
+    titleTr: 'Bildirimler bir davranış değişikliği uygulamasıyla etkileşimi nasıl etkiliyor: mikro-randomize deneme sonuçları.',
+    journal: 'JMIR Mhealth Uhealth', cite: '11:e38342', doi: '10.2196/38342', pmid: '37294612',
+    design: 'mrt', n: '350 kişi (+ iki paralel kol: 98 ve 121 kişi), 30 gün',
+  },
+  galinsky2007: {
+    authors: ['Galinsky T', 'Swanson N', 'Sauter S', 'Dunkin R'], year: 2007,
+    title: 'Supplementary breaks and stretching exercises for data entry operators: a follow-up field study.',
+    titleTr: 'Veri girişi çalışanlarında ek molalar ve germe egzersizleri: bir izleme saha çalışması.',
+    journal: 'Am J Ind Med', cite: '50(7):519-27', doi: '10.1002/ajim.20472', pmid: '17514726',
+    design: 'field', n: '51 veri girişi çalışanı',
+  },
+  morris2020: {
+    authors: ['Morris AS', 'Mackintosh KA', 'Dunstan D', 'Owen N'], year: 2020,
+    title: "Rise and Recharge: Effects on Activity Outcomes of an e-Health Smartphone Intervention to Reduce Office Workers' Sitting Time.",
+    titleTr: 'Kalk ve tazelen: Ofis çalışanlarının oturma süresini azaltmaya yönelik akıllı telefon uygulamasının hareket sonuçlarına etkisi.',
+    journal: 'Int J Environ Res Public Health', cite: '17(24)', doi: '10.3390/ijerph17249300', pmid: '33322678',
+    design: 'quasi', n: '56 ofis çalışanı, 12 hafta',
+  },
+  singh2024: {
+    authors: ['Singh B', 'Murphy A', 'Maher C', 'Smith AE'], year: 2024,
+    title: 'Time to Form a Habit: A Systematic Review and Meta-Analysis of Health Behaviour Habit Formation and Its Determinants.',
+    titleTr: 'Alışkanlık ne zaman oluşur: Sağlık davranışlarında alışkanlık oluşumu ve belirleyicileri üzerine sistematik derleme ve meta-analiz.',
+    journal: 'Healthcare (Basel)', cite: '12(23)', doi: '10.3390/healthcare12232488', pmid: '39685110',
+    design: 'meta', n: '20 çalışma, 2601 kişi',
+  },
+  wilson2015: {
+    authors: ['Wilson K', 'Senay I', 'Durantini M', 'Sánchez F'], year: 2015,
+    title: 'When it comes to lifestyle recommendations, more is sometimes less: a meta-analysis of theoretical assumptions underlying the effectiveness of interventions promoting multiple behavior domain change.',
+    titleTr: 'Yaşam tarzı önerilerinde bazen az çoktur: Birden çok davranış alanında değişimi hedefleyen müdahalelerin etkinliğine dair kuramsal varsayımların meta-analizi.',
+    journal: 'Psychol Bull', cite: '141(2):474-509', doi: '10.1037/a0038295', pmid: '25528345',
+    design: 'meta', n: '150 araştırma raporu',
   },
 }
 

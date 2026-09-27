@@ -1,26 +1,31 @@
 import { useState } from 'react'
-import { CalendarDays, Check, ShieldCheck } from 'lucide-react'
+import { Check, Bell } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
 import { WEEKDAYS, DEFAULT_WEEKLY_TARGET } from '../lib/calendar.js'
-import { buildReminderIcs, downloadIcs } from '../lib/ics.js'
+import { normalizeReminders, timeError } from '../lib/reminders.js'
 
-export default function Schedule({ initial, onSave, onBack }) {
+// Çalışma günleri (Takvim, Ana sayfa ve Gelişim bunu kullanır). Hatırlatması artık uygulama bildirimi
+// (bildirim planı v2 §6; lib/notifyPlan.js "study"): Bilgi → Hatırlatmalar'dan açılır. Hatırlatma açıksa saat,
+// diğer hatırlatmalarla 1 saat aralık kuralına uymalı (lib/reminders.js timeError; Reminders.jsx ile aynı kural).
+// reminders: settings.reminders (ham) — verilmezse denetim yok. iosApp false (web): bildirim yok, Hatırlatmalar satırı yok.
+export default function Schedule({ initial, reminders = null, iosApp = true, onSave, onBack }) {
   const [days, setDays] = useState(initial?.days ?? ['MO', 'WE', 'FR'])
   const [time, setTime] = useState(initial?.time ?? '20:00')
   const [msg, setMsg] = useState(null)
 
-  const toggle = (id) => setDays((d) => (d.includes(id) ? d.filter((x) => x !== id) : [...d, id]))
-  const valid = days.length > 0 && /^\d{2}:\d{2}$/.test(time)
+  const toggle = (id) => {
+    setMsg(null)
+    setDays((d) => (d.includes(id) ? d.filter((x) => x !== id) : [...d, id]))
+  }
+  const rem = reminders ? normalizeReminders(reminders) : null
+  const studyOn = Boolean(rem?.types.study.on)
+  const remindOn = studyOn && rem.optIn === 'yes'
+  const err = studyOn ? timeError('study', time, rem, { days, time }) : null
+  const valid = days.length > 0 && /^\d{2}:\d{2}$/.test(time) && !err
 
   function save() {
     onSave({ days, time, weeklyTarget: DEFAULT_WEEKLY_TARGET })
     setMsg('Kaydedildi.')
-  }
-
-  async function addToCalendar() {
-    save()
-    const r = await downloadIcs(buildReminderIcs({ days, time }))
-    setMsg(r === 'shared' ? 'Paylaşım menüsünden Takvim uygulamasını seç.' : 'Dosya indirildi. Açınca telefonunun takvimine eklemeyi onayla.')
   }
 
   return (
@@ -45,20 +50,32 @@ export default function Schedule({ initial, onSave, onBack }) {
         )}
         <label className="field" style={{ marginTop: 6 }}>
           <span>Saat</span>
-          <input className="input" type="time" value={time} onChange={(e) => setTime(e.target.value)} />
+          <input
+            className="input"
+            type="time"
+            value={time}
+            onChange={(e) => {
+              setMsg(null)
+              setTime(e.target.value)
+            }}
+            aria-invalid={err ? true : undefined}
+            aria-describedby="schedule-err"
+          />
         </label>
+        <p id="schedule-err" className="small" style={{ color: 'var(--warn)', margin: 0 }} aria-live="polite">{err ?? ''}</p>
       </section>
 
-      <button className="btn" disabled={!valid} onClick={addToCalendar}>
-        <CalendarDays size={18} aria-hidden="true" /> Telefon takvimime ekle
-      </button>
-      <button className="btn btn-secondary" disabled={!valid} onClick={save}>
-        <Check size={18} aria-hidden="true" /> Sadece kaydet
+      <button className="btn" disabled={!valid} onClick={save}>
+        <Check size={18} aria-hidden="true" /> Kaydet
       </button>
       {msg && <p className="muted small" role="status">{msg}</p>}
       <p className="note">
-        <ShieldCheck size={16} />
-        Hatırlatmayı telefonunun takvimi yapar; uygulama bildirim göndermez, hiçbir veri sunucuya gitmez. Günleri değiştirirsen takvimdeki eski etkinliği silip yenisini ekle.
+        <Bell size={16} aria-hidden="true" />
+        {!iosApp
+          ? 'Hatırlatmalar yalnız iPhone uygulamasında gelir.'
+          : remindOn
+            ? 'Hatırlatma açık: seçtiğin günlerde bu saatte bildirim gelir. Takvimine daha önce eklediysen oradaki etkinliği sil.'
+            : "Hatırlatmayı Bilgi → Hatırlatmalar'dan aç. Takvimine daha önce eklediysen oradaki etkinliği sil."}
       </p>
     </main>
   )

@@ -8,6 +8,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // Yürüyüş koruması (HealthPlugin.swift): HealthKit arka planda uyandırdığında gözlemci hazır olsun diye
+        // açılışta kurulur (Apple: observer query'ler didFinishLaunching'de). Koruma yoksa hiçbir şey yapmaz.
+        WalkGuard.shared.start()
         return true
     }
 

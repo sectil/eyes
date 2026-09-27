@@ -1,11 +1,19 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { store } from './lib/storage.js'
 import { TabBar } from './components/ui.jsx'
 import RestLock from './components/RestLock.jsx'
 import EyeBudgetPill from './components/EyeBudgetPill.jsx'
 import { recordTime, eyeStatus, beginRest, resetBudget, flushBudget, EXHAUSTED_EVENT } from './lib/eyeBudgetStore.js'
 import { LIMITS as EYE_LIMITS } from './lib/eyeBudget.js'
-import { onRestNotifyTap, onTrialNotifyTap } from './lib/restNotify.js'
+import { REST_NOTIFY_ID, TRIAL_NOTIFY_ID, TRIAL_REMIND_DAYS, scheduleTrialReminder } from './lib/restNotify.js'
+import { applyPlan, cancelOwn, onNotifyTap, notifyPermission, askNotifyPermission } from './lib/notifyApply.js'
+import { planNotifications } from './lib/notifyPlan.js'
+import { loadLog, saveLog, mergeForPermission, markTapped, getSeed, evaluate, thinCandidate } from './lib/notifyLog.js'
+import { loadHabits, dayKey } from './lib/habitLog.js'
+import { loadFocus, startFocus, stopFocus } from './lib/focus.js'
+import { NUDGE_TYPES, normalizeReminders, enabledTypes } from './lib/reminders.js'
+import Reminders from './screens/Reminders.jsx'
+import ConsentSheet from './components/ConsentSheet.jsx'
 import FirstReport from './screens/FirstReport.jsx'
 import { reportDay, REPORT_DAY } from './lib/progress.js'
 import Home from './screens/Home.jsx'
@@ -14,7 +22,7 @@ import ProfileQuestions from './screens/ProfileQuestions.jsx'
 import QuestionFlow from './components/QuestionFlow.jsx'
 import { missing, GROUPS } from './lib/profileQuestions.js'
 import ProfileHome from './screens/ProfileHome.jsx'
-import { hasConsent, shouldAsk, recordConsent } from './lib/consent.js'
+import { hasConsent, shouldAsk, recordConsent, recordDecline } from './lib/consent.js'
 import { getPrefs, setPrefs } from './lib/prefs.js'
 import IntroFilm from './components/IntroFilm.jsx'
 import { shouldPlayIntro, INTRO_VERSION } from './lib/intro.js'
@@ -30,14 +38,14 @@ import Schedule from './screens/Schedule.jsx'
 import Evidence from './screens/Evidence.jsx'
 import Info from './screens/Info.jsx'
 import Paywall from './screens/Paywall.jsx'
-import { getAccess, linkPurchaser, unlinkPurchaser } from './lib/subscription.js'
+import { getAccess, getMembership, linkPurchaser, unlinkPurchaser } from './lib/subscription.js'
 import AccountStart from './screens/AccountStart.jsx'
 import WhatsNew from './components/WhatsNew.jsx'
 import { RELEASES, unseenReleases, latestRelease } from './lib/releases.js'
 import ProfileSetup from './screens/ProfileSetup.jsx'
 import { signedIn, pullProfile, pushProfile, mergeProfile, signOut, deleteAccount, friendlyError } from './lib/account.js'
 import DistanceHud from './screens/DistanceHud.jsx'
-import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics, haptic, shareTextFile, healthAvailable, requestHealthAccess, readHealth } from './lib/native.js'
+import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics, haptic, shareTextFile, healthAvailable, requestHealthAccess, readHealth, walkGuardLog, setWalkGuards } from './lib/native.js'
 import { summarizeHealth } from './lib/health.js'
 import { fileStamp } from './lib/exportData.js'
 import { resolveAutoCalibration, estimateCalibration } from './lib/screenScale.js'
@@ -62,6 +70,22 @@ const budgetKindOf = (s) => gatesOf(s).eyeBudget ?? null
 const activityLabel = (s) => registry.labelFor(s)
 // Ana sayfadaki mola bandından açılan kilit ekranı (hedefsiz)
 const REST_ROUTE = 'eye-rest'
+
+// --- Bildirim planı v2 (docs/yol-haritasi/BILDIRIM_PLANI.md; sözleşme §6) ---
+// Hatırlatmaya dokununca açılan ekran (yürüyüş ve Çalışma günleri → Ana sayfa); çalışma oturumu → mola
+const TAP_ROUTE = { mola: 'mola', walk: 'home', breath: 'breath-1', water: 'water', study: 'home' }
+const DAY_MS = 86400000
+// Apple Sağlık'tan okunan gün sayısı: Gelişim'deki yürüyüş ölçümü geçmiş günlerin adımına bakar (Swift dailyTotals
+// en çok 60 gün). Ana sayfa ve Gelişim özeti yine son 7 günden (summarizeHealth; ortalama = önceki 6 gün).
+const STEP_DAYS = 60
+// Deneme şeridi (izni olmayana, 5. günden sonra) en geç bu güne dek; İlk rapor penceresiyle aynı (5–14. gün)
+const TRIAL_NOTE_LAST_DAY = 14
+// Sağlık rızası varken açılışta ilk okuma bu kadar beklenir; takılırsa plan sağlıksız kurulur (VARSAYIM: HealthKit'in
+// soğuk açılıştaki 60 günlük sorgusu birkaç yüz ms–birkaç sn)
+const HEALTH_WAIT_MS = 15000
+// "Tüm verileri sil"de korunan ayarlar: abonelik denemesinin zaman çizelgesi (satın alma durumu, kullanıcı verisi değil;
+// Apple denemesi yerel veriyle birlikte bitmez). Deneme hatırlatması (7302) da iptal edilmez.
+const TRIAL_KEYS = ['trialOffer', 'trialReminder', 'trialNoteSeen', 'firstReportSeen']
 
 // Göz ekranında ve uygulama görünürken geçen süreyi saniyede bir bütçeye yazar.
 function useEyeClock(kind) {
@@ -110,6 +134,50 @@ export default function App() {
   // Yerinde profil sorusu (lib/profileQuestions.js; modül manifest ask.before / ask.after): { ids, then, back } | null
   const [askFor, setAskFor] = useState(null)
   const entryTests = useRef(0) // ekrana girerken test sayısı (ask.after: bu ekranda yeni test kaydedildi mi)
+  // Bildirim planı: yeniden kurma tetiği (kayıt dışı olaylar: oturum, dokunuş, öne gelme) ve bildirim izni
+  const [planTick, setPlanTick] = useState(0)
+  const replan = () => setPlanTick((t) => t + 1)
+  const [notifyPerm, setNotifyPerm] = useState(null) // 'granted' | 'denied' | 'prompt' | 'unsupported' | null (bakılıyor)
+  const [healthSheet, setHealthSheet] = useState(false) // Hatırlatmalar'da yürüyüş açılırken Sağlık rızası sayfası
+  const [scheduleBack, setScheduleBack] = useState('calendar') // Çalışma günleri'nden dönülecek ekran
+  const [trialNote, setTrialNote] = useState(null) // { daysLeft } — izni olmayana deneme şeridi
+  // Tek bildirim dokunma dağıtıcısı (lib/notifyApply.js onNotifyTap). Uygulama kapalıyken yapılan dokunuş yalnız
+  // İLK bağlanan dinleyiciye gider: her şeyden önce, bir kez bağlanır (restNotify'ın eski iki dinleyicisi kalktı).
+  // 7301 mola bitti → Ana sayfa · 7302 deneme → İlk rapor · hatırlatma → günlükte "dokunuldu" + türün ekranı ·
+  // çalışma oturumu → mola. go her çizimde değişir; dağıtıcı son halini goRef'ten okur.
+  const goRef = useRef(null)
+  useEffect(() => {
+    let alive = true
+    let off = () => {}
+    onNotifyTap(({ id, extra }) => {
+      if (id === REST_NOTIFY_ID) {
+        setLockFor(null)
+        setScreen('home')
+        setBudget(eyeStatus())
+        return
+      }
+      if (id === TRIAL_NOTIFY_ID) {
+        setScreen('first-report')
+        return
+      }
+      if (extra?.kind === 'focus') {
+        goRef.current?.('mola')
+        return
+      }
+      if (extra?.kind === 'nudge') {
+        if (NUDGE_TYPES.includes(extra.type) && extra.date) saveLog(markTapped(loadLog(), extra.date, extra.type))
+        setPlanTick((t) => t + 1)
+        goRef.current?.(TAP_ROUTE[extra.type] ?? 'home')
+      }
+    }).then((f) => {
+      if (alive) off = f
+      else f()
+    })
+    return () => {
+      alive = false
+      off()
+    }
+  }, [])
   const budgetKind = lockFor ? null : budgetKindOf(screen)
   useEyeClock(budgetKind)
   const refresh = () => setData(store.get())
@@ -169,6 +237,7 @@ export default function App() {
     setScreen(s)
     window.scrollTo(0, 0)
   }
+  goRef.current = go
   const back = () => go(lastTab)
 
   // Göz ekranında: 1 dk kala uyarı; bütçe dolunca oyun/egzersizde tur bitirme payı, sonra kilit.
@@ -214,18 +283,22 @@ export default function App() {
     window.addEventListener(EXHAUSTED_EVENT, on)
     return () => window.removeEventListener(EXHAUSTED_EVENT, on)
   }, [])
-  // "Mola bitti" bildirimine dokununca Ana sayfa (uygulama kapalıyken açılış dahil)
+  // Bildirim izni: açılışta ve öne gelince (iOS Ayarlar'dan değişmiş olabilir); öne gelince plan da yeniden kurulur.
+  // Açılışta native yürüyüş korumasının günlüğü okunur (okununca native tarafta temizlenir). Günlükteki kayıtlar
+  // 'doneBefore'a ÇEVRİLMEZ: koruma yalnız bildirimi giden günlerde kurulu; yalnız onları ölçümden çıkarmak sessiz
+  // günleri iyi, hatırlatmayı olduğundan etkisiz gösterirdi. Yürüyüş günleri bu yüzden zarın atandığı kolda sayılır
+  // (iptal edilen gün de "hatırlatma günü"); Gelişim kartı bunu yazar.
   useEffect(() => {
-    let off = () => {}
-    let offTrial = () => {}
-    onRestNotifyTap(() => {
-      setLockFor(null)
-      setScreen('home')
-      setBudget(eyeStatus())
-    }).then((f) => (off = f))
-    // Deneme hatırlatması (5. gün) → İlk rapor
-    onTrialNotifyTap(() => setScreen('first-report')).then((f) => (offTrial = f))
-    return () => { off(); offTrial() }
+    const check = () => notifyPermission().then(setNotifyPerm).catch(() => setNotifyPerm('unsupported'))
+    check()
+    walkGuardLog().catch(() => {})
+    const onVis = () => {
+      if (document.visibilityState !== 'visible') return
+      check()
+      setPlanTick((t) => t + 1)
+    }
+    document.addEventListener('visibilitychange', onVis)
+    return () => document.removeEventListener('visibilitychange', onVis)
   }, [])
 
   // iPhone ses modu (sessiz tuşunda da ses) + ses tercihi değişikliklerini izle. Web'de etkisiz.
@@ -308,31 +381,44 @@ export default function App() {
 
   const { settings, tests, sessions } = data
   // Apple Sağlık (yalnız okuma, telefonda kalır; lib/health.js). Yalnız açık rızayla okunur; öne gelince tazelenir.
-  const [healthAvail, setHealthAvail] = useState(false)
+  // Rıza sürümü (lib/consent.js): v1 izni ("yan yana göstermek") okumaya ve göstermeye yeter (healthShow); yürüyüş
+  // hatırlatması, planlayıcıya adım ve Gelişim'deki yürüyüş ölçümü v2 ister (healthOk). v1 izni olan kişi güncel
+  // metne "Şimdi değil" derse adımları görünmeye devam eder (answerHealth → recordDecline).
+  const [healthAvail, setHealthAvail] = useState(null) // null: bakılıyor
   const [health, setHealth] = useState(null)
   const [healthTick, setHealthTick] = useState(0) // iOS izin sayfası kapanınca yeniden oku
+  const healthShow = hasConsent(settings.consents, 'health', 1)
   const healthOk = hasConsent(settings.consents, 'health')
+  // Yürüyüş rızası (v2) varken açılıştaki ilk okuma bitene dek plan kurulmaz: sağlıksız plan (health null) bekleyen
+  // yürüyüş bildirimlerini ve native korumayı iptal eder, günlüğe 'noData' yazardı. İlk çizimde doğru olmalı (plan
+  // etkisi aynı turda çalışır), bu yüzden başlangıç değeri rızadan.
+  const [healthWait, setHealthWait] = useState(() => isIOSApp() && hasConsent(data.settings.consents, 'health'))
   useEffect(() => {
     healthAvailable().then(setHealthAvail).catch(() => setHealthAvail(false))
   }, [])
   useEffect(() => {
-    if (!healthOk || !isIOSApp()) {
+    if (!healthShow || !isIOSApp()) {
       setHealth(null)
+      setHealthWait(false)
       return undefined
     }
     let alive = true
+    // Okuma hatasında son başarılı değer kalır (yoksa null: yürüyüş 'noData'); null'a düşmek planı sarsardı
     const load = () =>
-      readHealth()
-        .then((h) => alive && h && setHealth({ ...summarizeHealth(h.days), recentSteps: h.recentSteps, at: h.at }))
-        .catch(() => alive && setHealth(null))
+      readHealth({ days: STEP_DAYS })
+        .then((h) => alive && h && setHealth({ ...summarizeHealth(h.days.slice(-7)), stepRows: summarizeHealth(h.days).rows, recentSteps: h.recentSteps, at: h.at }))
+        .catch(() => {})
+        .finally(() => alive && setHealthWait(false))
     load()
+    const waitCap = setTimeout(() => alive && setHealthWait(false), HEALTH_WAIT_MS)
     const onVis = () => document.visibilityState === 'visible' && load()
     document.addEventListener('visibilitychange', onVis)
     return () => {
       alive = false
+      clearTimeout(waitCap)
       document.removeEventListener('visibilitychange', onVis)
     }
-  }, [healthOk, healthTick])
+  }, [healthShow, healthTick])
   // Nef: eski sürümler rıza sormadan (Bilgi anahtarı) ya da iki amacı tek dokunuşla açabiliyordu. Kayıtlı açık
   // rızası olmayan tercih kapatılır; tanıtım kartı yeniden çıkar, CoachConsent iki kutuyla sorar.
   // (Gönderim zaten coachAllowed ile rızaya bağlı; bu yalnızca tercihi kayıtla uyumlu tutar.)
@@ -341,6 +427,88 @@ export default function App() {
     if (p.coach && !hasConsent(settings.consents, 'coach')) setPrefs({ coach: false, coachLife: false, coachHidden: false })
     else if (p.coachLife && !hasConsent(settings.consents, 'coachLife')) setPrefs({ coachLife: false })
   }, [settings.consents])
+  // --- Bildirim planı (sözleşme §6): girdiler → planNotifications → günlük → izin 'granted' ise applyPlan (tek sıra,
+  // 400 ms birleştirme; son plan kazanır). Tetikler: açılış, öne gelme, sağlık okuması, her kayıt (data), hatırlatma
+  // ayarı (data), oturum başla/bitir ve dokunuş (planTick), izin değişimi.
+  // Günlüğe yalnız kurulabilen plan yazılır (notifyLog.mergeForPermission): izin 'granted' değilse bildirimi
+  // kurulmayan gün Gelişim'de "hatırlatma gelen gün" sayılmasın; izne hâlâ bakılıyorsa (null) hiç yazılmaz.
+  // Sağlık rızası varken ilk okuma bitmeden plan kurulmaz (healthWait). Adım planlayıcıya yalnız v2 rızasıyla gider.
+  // Ana anahtar kapalıysa (optIn 'yes' değil) kendi aralığımız bir kez iptal edilir; 7301/7302'ye dokunulmaz.
+  const applied = useRef(null) // 'on' | 'off' | null
+  useEffect(() => {
+    if (healthWait) return
+    const st = store.get()
+    const now = new Date()
+    const r = normalizeReminders(st.settings.reminders)
+    const on = r.optIn === 'yes'
+    const log = loadLog()
+    const plan = planNotifications({
+      now,
+      reminders: r,
+      study: st.settings.reminder,
+      habits: loadHabits(),
+      sessions: st.sessions,
+      health: healthOk && health ? { todaySteps: health.today?.steps ?? null, avgSteps: health.avgSteps, readAt: health.at } : null,
+      focus: loadFocus(now),
+      seed: on ? getSeed() : '',
+      log,
+    })
+    const nextLog = mergeForPermission(log, plan.log, notifyPerm, dayKey(now), now)
+    if (nextLog) saveLog(nextLog)
+    if (!on) {
+      if (applied.current !== 'off') cancelOwn()
+      applied.current = 'off'
+      return
+    }
+    if (notifyPerm !== 'granted') return
+    applied.current = 'on'
+    applyPlan(plan)
+  }, [planTick, data, health, healthOk, healthWait, notifyPerm])
+  // Seyreltme sorusu (Ana sayfa, tür başına bir kez): son 3 hatırlatma gününde ne dokunma ne kayıt. Bildirim izni
+  // yokken sorulmaz (hatırlatma zaten gelmiyor; web'de de).
+  const thinAsk = useMemo(() => {
+    if (notifyPerm !== 'granted') return null
+    const st = store.get()
+    const walkData = hasConsent(st.settings.consents, 'health')
+    return thinCandidate(loadLog(), st.settings.reminders, { habits: loadHabits(), sessions: st.sessions, healthDays: walkData ? health?.stepRows ?? [] : [], avgSteps: walkData ? health?.avgSteps ?? null : null })
+    // planTick: dokunuş ve günlük değişimi
+  }, [data, health, planTick, notifyPerm])
+  // Deneme hatırlatması (7302): izin hangi yoldan verilirse verilsin (Ana sayfa kartı, Hatırlatmalar, mola kilidi,
+  // iOS Ayarlar) 'granted' görülünce, deneme 5. günden önceyse ve üyelik gerçekten denemedeyse kurulur; kurulduğu
+  // settings.trialReminder'a yazılır (şerit kararı). scheduleTrialReminder önce iptal edip kurar: tekrar çağrı zararsız.
+  const trialOffer = data.settings.trialOffer
+  const trialMs = trialOffer?.started ? Date.parse(trialOffer.date) : NaN
+  useEffect(() => {
+    if (notifyPerm !== 'granted' || !Number.isFinite(trialMs) || Date.now() >= trialMs + TRIAL_REMIND_DAYS * DAY_MS) return
+    const startIso = trialOffer.date
+    getMembership()
+      .then((m) => (m?.state === 'trial' ? scheduleTrialReminder(trialMs) : false))
+      .then((ok) => {
+        if (!ok || store.get().settings.trialReminder?.start === startIso) return
+        store.setSetting('trialReminder', { start: startIso, date: new Date().toISOString() })
+        refresh()
+      })
+      .catch(() => {})
+  }, [notifyPerm, trialMs])
+  // Deneme şeridi: 5. günden sonra Ana sayfada bir kez; 7302 bu deneme için kurulmadıysa ya da izin şimdi kapalıysa
+  // (kurulu bildirim de gelmez). Yalnız gerçekten ücretsiz denemedeyse (RevenueCat periodType TRIAL).
+  const trialDay = Number.isFinite(trialMs) ? reportDay(trialOffer.date) : null
+  const trialDue = trialDay != null && Date.now() >= trialMs + TRIAL_REMIND_DAYS * DAY_MS && trialDay <= TRIAL_NOTE_LAST_DAY
+  const trialSet = data.settings.trialReminder?.start != null && data.settings.trialReminder.start === trialOffer?.date
+  const trialNoteOk = trialDue && notifyPerm != null && (notifyPerm !== 'granted' || !trialSet) && !data.settings.trialNoteSeen && access.native && !access.testUnlock
+  useEffect(() => {
+    if (!trialNoteOk) {
+      setTrialNote(null)
+      return undefined
+    }
+    let alive = true
+    getMembership()
+      .then((m) => alive && setTrialNote(m?.state === 'trial' ? { daysLeft: m.daysLeft } : null))
+      .catch(() => alive && setTrialNote(null))
+    return () => {
+      alive = false
+    }
+  }, [trialNoteOk])
   // iPhone'da TrueDepth varsa mesafe her zaman sensörden gelir (eski kamera kalibrasyonu yok sayılır).
   // DistanceHud'da "Kamerasız devam et" denildiyse (skipped + via:'truedepth') kamera hiçbir yerde açılmaz:
   // mesafe ölçülmez, göz kalibrasyonu sorulmaz, modüller kamerasız çalışır. Eski sürümlerin web kalibrasyonu
@@ -386,12 +554,28 @@ export default function App() {
     store.setSetting('consents', recordConsent(st.consents, key, granted))
     // Apple Sağlık: bizim iznimizden sonra iOS'un kendi izin sayfası (geri çekmek iOS Ayarlar'dan; biz okumayı bırakırız)
     if (key === 'health' && granted) requestHealthAccess().catch(() => {}).finally(() => setHealthTick((t) => t + 1))
+    // Geri çekilince native yürüyüş koruması (uygulama kapalıyken adım okur) izinden bağımsız hemen boşalır: bildirim
+    // izni kapalıyken plan uygulanmaz, applyPlan yolu korumayı temizleyemez (rıza metni: "geri çekince okumaz")
+    if (key === 'health' && !granted) setWalkGuards([]).catch(() => {})
     if (key === 'profileSync' && signedIn(st.account)) {
       if (granted) syncUp(st.identity, currentCorrection())
       else if (had) pushProfile(st.account.userId, emptyIdentity(), null).catch(() => {})
     }
     refresh()
   }
+  // Sağlık rıza sayfasının cevabı (Ana sayfa, Hatırlatmalar). Eski metne (v1) izin vermiş kişinin güncel metne
+  // "Şimdi değil" demesi v1 iznini geri çekmez: yalnız bu sürüm reddedildi diye yazılır, bir daha sorulmaz; adımlar
+  // görünmeye devam eder, yürüyüş hatırlatması açılmaz. Profilim → İzinlerim'deki kapatma gerçek geri çekmedir.
+  const answerHealth = (granted) => {
+    const st = store.get().settings
+    if (!granted && hasConsent(st.consents, 'health', 1)) {
+      store.setSetting('consents', recordDecline(st.consents, 'health'))
+      refresh()
+      return
+    }
+    setConsent('health', granted)
+  }
+  const healthSheetKind = healthShow ? 'healthUpdate' : 'health'
   // Nef açık rızası: iki amaç iki ayrı kayıt (settings.consents) + cihaz tercihi (prefs). Kapatmak ikisini de geri çeker.
   const setCoach = ({ on, life = false }) => {
     let c = recordConsent(store.get().settings.consents, 'coach', on)
@@ -405,6 +589,65 @@ export default function App() {
     setPrefs({ coachLife: Boolean(granted) })
     refresh()
   }
+  // --- Hatırlatmalar (bildirim planı v2) ---
+  // Bildirim izni: sorulmadıysa iOS penceresi; sonuç ne olursa olsun durum yeniden okunur (plan etkisi uygular;
+  // izin verildiyse deneme hatırlatmasını da 7302 etkisi kurar).
+  const askPermission = async () => {
+    let p = await notifyPermission()
+    if (p === 'prompt') {
+      await askNotifyPermission()
+      p = await notifyPermission()
+    }
+    setNotifyPerm(p)
+    return p
+  }
+  // Ana sayfa kartı: "Evet" → optIn 'yes' ve izin (reddedilse de 'yes' kalır; Ana sayfa ayar yolunu gösterir)
+  const answerReminders = async (yes) => {
+    const r = normalizeReminders(store.get().settings.reminders)
+    store.setSetting('reminders', { ...r, optIn: yes ? 'yes' : 'no', askedAt: nowIso() })
+    refresh()
+    return yes ? askPermission() : null
+  }
+  const saveReminders = (r) => {
+    store.setSetting('reminders', r)
+    refresh()
+  }
+  // Seyreltme sorusunun cevabı: 'alt' → gün aşırı; her iki cevapta da bir daha sorulmaz
+  const answerThin = (type, choice) => {
+    const r = normalizeReminders(store.get().settings.reminders)
+    saveReminders({ ...r, thin: choice === 'alt' ? { ...r.thin, [type]: 'alt' } : r.thin, thinAsked: { ...r.thinAsked, [type]: nowIso() } })
+  }
+  const beginFocus = (h) => {
+    startFocus(h)
+    replan()
+  }
+  const endFocus = () => {
+    stopFocus()
+    replan()
+  }
+  const openSchedule = (from) => {
+    setScheduleBack(from)
+    go('schedule')
+  }
+  // Gelişim ölçüm kartı: açık deney türleri (lib/notifyLog.js evaluate); web'de hatırlatma yok, kart da yok.
+  // Yürüyüşte yalnız adımı okunabilen günler (son STEP_DAYS gün) sayılır; daha eskisi "yapılmadı" sayılmasın.
+  // Yürüyüş ölçülemiyorsa neden (blocked) kartta sayı yerine yazılır: HealthKit yok / v2 rızası yok / adım okunamıyor.
+  const nudgeStats = () => {
+    if (!isIOSApp()) return []
+    const r = normalizeReminders(settings.reminders)
+    const on = r.optIn === 'yes' ? enabledTypes(r) : []
+    if (!on.length) return []
+    const rows = healthOk ? health?.stepRows ?? [] : []
+    const oldest = rows[0]?.date ?? null
+    const log = loadLog().filter((e) => e.type !== 'walk' || (oldest != null && e.date >= oldest))
+    const ev = evaluate(log, { habits: loadHabits(), sessions, healthDays: rows, avgSteps: healthOk ? health?.avgSteps ?? null : null })
+    const walkBlocked = healthAvail === false ? 'noHealth' : !healthOk ? 'consent' : health && !health.hasData ? 'steps' : null
+    return on.map((type) => ({ type, ...ev[type], blocked: type === 'walk' ? walkBlocked : null }))
+  }
+  // Çalışma oturumu bildirimi gelebilir mi (mola bitti ekranı, Ana sayfa şeridi): 'web' | 'off' (hatırlatmalar
+  // kapalı) | 'perm' (bildirim izni yok) | null. İzne hâlâ bakılıyorsa engel sayılmaz.
+  const focusBlock = !isIOSApp() ? 'web' : normalizeReminders(settings.reminders).optIn !== 'yes' ? 'off' : notifyPerm != null && notifyPerm !== 'granted' ? 'perm' : null
+
   // Tüm kayıt (JSON). iPhone'da <a download> WKWebView'da güvenilir değil (doğrulanmadı) → paylaşım sayfası
   // (ExportPlugin.swift); web'de indirme. Oturum anahtarları ayrı kayıtta (supabase.js storageKey), dosyaya girmez.
   const exportData = () => {
@@ -513,8 +756,8 @@ export default function App() {
         account={settings.account}
         syncConsent={hasConsent(settings.consents, 'profileSync')}
         onConsent={(g) => setConsent('profileSync', g)}
-        healthAvail={healthAvail}
-        healthConsent={healthOk}
+        healthAvail={Boolean(healthAvail)}
+        healthConsent={healthShow}
         onHealthConsent={(g) => setConsent('health', g)}
         consents={settings.consents}
         onCoach={setCoach}
@@ -637,7 +880,8 @@ export default function App() {
   const mod = registry.forRoute(screen)
   const view = mod && viewFor(mod.id)
   if (view) {
-    const ctx = { native: { ...native, trueDepth: camOk }, settings, tests, sessions, exercise, common, go, back, refresh, store, saveTests }
+    // refresh: kayıt (mola/su habit-log, nefes oturumu) ya da çalışma oturumu değişti → bildirim planı da yenilenir
+    const ctx = { native: { ...native, trueDepth: camOk }, settings, tests, sessions, exercise, common, go, back, refresh: () => { refresh(); replan() }, store, saveTests, focusBlock }
     return (
       <>
         {view.render(ctx, screen)}
@@ -648,7 +892,29 @@ export default function App() {
 
   switch (screen) {
     case 'schedule':
-      return <Schedule initial={settings.reminder} onBack={() => go('calendar')} onSave={(r) => { store.setSetting('reminder', r); refresh() }} />
+      return <Schedule initial={settings.reminder} reminders={settings.reminders} iosApp={isIOSApp()} onBack={() => go(scheduleBack)} onSave={(r) => { store.setSetting('reminder', r); refresh() }} />
+    case 'reminders':
+      return (
+        <>
+          <Reminders
+            reminders={settings.reminders}
+            study={settings.reminder}
+            permission={notifyPerm}
+            healthConsent={healthOk}
+            stepsMissing={Boolean(healthOk && health && !health.hasData)}
+            focus={loadFocus()}
+            onSave={saveReminders}
+            onStudy={() => openSchedule('reminders')}
+            onAskPermission={askPermission}
+            // HealthKit yoksa (web, bazı iPad'ler) izin yolu yok: Reminders düğme yerine nedenini yazar
+            onAskHealth={healthAvail === false ? undefined : () => healthAvail && setHealthSheet(true)}
+            onStartFocus={beginFocus}
+            onStopFocus={endFocus}
+            onBack={() => go('info')}
+          />
+          {healthSheet && <ConsentSheet kind={healthSheetKind} onAnswer={(g) => { setHealthSheet(false); answerHealth(g) }} />}
+        </>
+      )
     case 'evidence':
       return <Evidence onBack={() => go('info')} />
     case 'gaze-test':
@@ -662,12 +928,12 @@ export default function App() {
   // --- Sekmeli ekranlar ---
   const tab = TAB_SCREENS.includes(screen) ? screen : 'home'
   let content
-  if (tab === 'progress') content = <Progress tests={tests} sessions={sessions} profile={settings.profile} identity={settings.identity} health={health} weeklyTarget={settings.reminder?.weeklyTarget} reportDay={rDay} onStart={go} />
-  else if (tab === 'calendar') content = <Calendar records={[...tests, ...exercise]} schedule={settings.reminder} onEditSchedule={() => go('schedule')} />
+  if (tab === 'progress') content = <Progress tests={tests} sessions={sessions} profile={settings.profile} identity={settings.identity} health={health} weeklyTarget={settings.reminder?.weeklyTarget} reportDay={rDay} nudges={nudgeStats()} notifyOff={isIOSApp() && notifyPerm != null && notifyPerm !== 'granted'} onStart={go} />
+  else if (tab === 'calendar') content = <Calendar records={[...tests, ...exercise]} schedule={settings.reminder} onEditSchedule={() => openSchedule('calendar')} />
   else if (tab === 'info') {
     content = (
       <Info
-        onGo={go}
+        onGo={(s) => (s === 'schedule' ? openSchedule('info') : go(s))}
         iosApp={isIOSApp()}
         trueDepth={native.trueDepth}
         calibration={settings.calibration}
@@ -679,11 +945,18 @@ export default function App() {
           // iPhone'da ekran ölçüsü cihaz modelinden gelir (kullanıcı verisi değil) ve yalnızca açılışta yazılır.
           // Silinirse testler uygulama yeniden açılana dek ölçeksiz kalır (AcuityTest calibration.pxPerMm → hata).
           const autoCal = isIOSApp() && settings.calibration?.method === 'auto' ? settings.calibration : null
+          const trialKept = TRIAL_KEYS.filter((k) => settings[k] != null).map((k) => [k, settings[k]])
           store.clearAll()
           if (autoCal) store.setSetting('calibration', autoCal)
+          for (const [k, v] of trialKept) store.setSetting(k, v)
           // Modüllerin cihazdaki rekorları ve seçenekleri de silinir (manifest storageKeys);
           // ses/titreşim tercihleri ve tema cihaz ayarı sayılır ve korunur.
           resetBudget(); resetAllHowto()
+          // Bildirimler: kendi hatırlatmalarımız (74xx/75xx) iptal; native yürüyüş koruması boşalır (cancelOwn) ve
+          // günlüğü okunup atılır. Deneme hatırlatması (7302) kalır (TRIAL_KEYS). Günlük, tohum, habit-log ve çalışma
+          // oturumu mola modülünün storageKeys listesinden aşağıda silinir.
+          cancelOwn()
+          walkGuardLog().catch(() => {})
           for (const k of registry.resetKeys()) {
             try {
               localStorage.removeItem(k)
@@ -697,7 +970,30 @@ export default function App() {
       />
     )
   } else {
-    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={camOk} eyeBudget={budget} premium={access.loading || access.premium} member={Boolean(access.native && access.premium && !access.testUnlock)} askConsent={signedIn(settings.account) && shouldAsk(settings.consents, 'profileSync')} onConsent={(g) => setConsent('profileSync', g)} health={health} askHealth={healthAvail && !(signedIn(settings.account) && shouldAsk(settings.consents, 'profileSync')) && shouldAsk(settings.consents, 'health')} onHealthConsent={(g) => setConsent('health', g)} onCoach={setCoach} onStart={go} onAsk={(group) => { const ids = missing(settings.profile, GROUPS[group] ?? []); if (ids.length) setAskFor({ ids, then: 'home', back: 'home' }) }} onSaveProfile={saveProfile} />
+    content = (
+      <Home
+        tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={camOk} eyeBudget={budget}
+        premium={access.loading || access.premium} member={Boolean(access.native && access.premium && !access.testUnlock)}
+        askConsent={signedIn(settings.account) && shouldAsk(settings.consents, 'profileSync')} onConsent={(g) => setConsent('profileSync', g)}
+        health={health}
+        askHealth={Boolean(healthAvail) && !(signedIn(settings.account) && shouldAsk(settings.consents, 'profileSync')) && shouldAsk(settings.consents, 'health')}
+        onHealthConsent={answerHealth}
+        healthSheetKind={healthSheetKind}
+        onCoach={setCoach} onStart={go}
+        onAsk={(group) => { const ids = missing(settings.profile, GROUPS[group] ?? []); if (ids.length) setAskFor({ ids, then: 'home', back: 'home' }) }}
+        onSaveProfile={saveProfile}
+        // Hatırlatma kartı yalnız iPhone uygulamasında (web'de bildirim yok); Home rıza sayfası açıkken göstermez
+        reminderAsk={isIOSApp() && normalizeReminders(settings.reminders).optIn == null}
+        onReminders={answerReminders}
+        focus={loadFocus()}
+        focusBlock={focusBlock}
+        onStopFocus={endFocus}
+        trialNote={trialNote}
+        onTrialNote={() => { store.setSetting('trialNoteSeen', { date: nowIso() }); refresh() }}
+        thinAsk={thinAsk}
+        onThin={answerThin}
+      />
+    )
   }
 
   return (

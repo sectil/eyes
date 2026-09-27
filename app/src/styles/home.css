@@ -200,3 +200,17 @@
 .hh-alt b { font: 600 0.9rem/1.2 var(--font-body); }
 .hh-alt small { font: 400 0.75rem/1.2 var(--font-body); color: var(--ink-3); }
 @media (max-width: 360px) { .dd { width: 140px; height: 140px; } .hh-big b { font-size: 2.6rem; } }
+
+/* ---- Hatırlatmalar (bildirim planı v2): tek kart yuvası ve çalışma oturumu şeridi; yalnız tokenlar ---- */
+.hh-ask { display: grid; gap: 8px; }
+.hh-ask h3 { margin: 0; font: 650 1.02rem/1.3 var(--font-display); color: var(--ink); }
+.hh-ask p { margin: 0; color: var(--ink-2); }
+.hh-focus {
+  display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; border-radius: 16px;
+  background: var(--accent-soft); color: var(--ink); font-size: 0.875rem; line-height: 1.3;
+}
+.hh-focus > svg { flex: none; color: var(--accent); }
+.hh-focus .grow { flex: 1; min-width: 0; }
+.hh-focus b { font-weight: 650; }
+.hh-focus .btn { flex: none; }
+.hh-focus-note { display: block; margin-top: 2px; font-size: 0.8rem; color: var(--ink-2); }

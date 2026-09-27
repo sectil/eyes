@@ -4,6 +4,21 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    id: '2026-09-27',
+    title: '27 Eylül güncellemesi',
+    items: [
+      { kind: 'new', text: 'Hatırlatmalar (Bilgi → Hatırlatmalar): mola, yürüyüş, nefes ve su. Hangilerinin geleceğini ve saatini sen seçersin; her türden günde en çok bir hatırlatma. Ana sayfada bir kez sorarız, cevap vermeden hiçbiri kurulmaz.' },
+      { kind: 'new', text: '1 dakikalık mola: kalk, uzağa yürü, 20 saniye uzağa bak, yavaşça göz kırp. Atlayabilirsin; kayıt Nef\'e ve seriye girmez.' },
+      { kind: 'new', text: 'Çalışma oturumu: 1, 2 ya da 4 saat seç; saatte bir mola hatırlatması gelir. Ana sayfadaki şeritten bitirebilirsin.' },
+      { kind: 'new', text: 'Su kaydı ve 1 dakikalık nefes: hatırlatmaya dokununca açılır; nefeste başta ve sonda puan sorulmaz.' },
+      { kind: 'new', text: 'Yürüyüş hatırlatması adımın o saate kadar yeterliyse gelmez; uygulamayı açmasan da telefon kendisi iptal eder (Apple Sağlık iznin varsa).' },
+      { kind: 'new', text: 'Gelişim: açık her hatırlatma için ölçüm kartı. Bazı günler bilerek göndermiyoruz; gelen ve gelmeyen günlerde ne yaptığın sayıyla yazar. Veri telefonundan çıkmaz.' },
+      { kind: 'change', text: 'Çalışma günleri hatırlatması artık uygulama bildirimi; takvim dosyası düğmesi kalktı. Takvimine daha önce eklediysen oradaki etkinliği silebilirsin.' },
+      { kind: 'change', text: 'Apple Sağlık izin metnine yürüyüş hatırlatması ve ölçüm amacı eklendi; bu yüzden izni bir kez yeniden soruyoruz. "Şimdi değil" dersen adımların yine görünür, yalnız yürüyüş hatırlatması açılmaz.' },
+      { kind: 'fix', text: 'Sürüm notlarındaki bir yazım hatası uygulamanın derlenmesini engelliyordu; düzeldi.' },
+    ],
+  },
+  {
     id: '2026-09-26',
     title: '26 Eylül güncellemesi',
     items: [
@@ -30,8 +45,8 @@ export const RELEASES = [
       { kind: 'fix', text: 'Ödeme ekranı "Planlar yükleniyor"da takılı kalıyordu (abonelik altyapısı hiç başlamıyordu); düzeldi. Planlar yine gelmezse 20 saniye sonra nedeni yazılır.' },
       { kind: 'fix', text: 'İlk bakış kırpma sayımı: okuma metni 20 saniyeden önce bitiyordu; metin uzadı, süre boyunca okuma sürüyor.' },
       { kind: 'fix', text: 'Kamera izni vermezsen 40 cm ekranında takılmıyorsun: "Kamerasız devam et" çıkıyor. Nef göz koçu artık iki ayrı izinle açılıyor (özet sayılar / profil cevapları). Nefona 18 yaş ve üstü içindir.' },
-      { kind: 'fix', text: 'Kamera izni yokken ekranlar "başlatılıyor" diye bekletmiyor, iznin nereden açılacağını yazıyor. "Kamerasız devam et" dersen oyunlar ve egzersizler de kamerasız çalışır; Bilgi → "Mesafe takibini aç" ile geri açarsın. Bilgi'den açılan 40 cm ekranında artık "Vazgeç" var.' },
-      { kind: 'change', text: 'Nef izinleri kayıt altında: ne gittiği (görme ölçümü ve nefes sonrası sakinlik farkı dahil), nereye (yurt dışı) ve ne kadar süre tek tek yazıyor. Eski sürümde izin sormadan açılmış Nef bir kez kapanır ve yeniden sorar. Profil cevapları için ayrı izni Profilim → İzinlerim'den verirsin.' },
+      { kind: 'fix', text: 'Kamera izni yokken ekranlar "başlatılıyor" diye bekletmiyor, iznin nereden açılacağını yazıyor. "Kamerasız devam et" dersen oyunlar ve egzersizler de kamerasız çalışır; Bilgi → "Mesafe takibini aç" ile geri açarsın. Bilgi\'den açılan 40 cm ekranında artık "Vazgeç" var.' },
+      { kind: 'change', text: 'Nef izinleri kayıt altında: ne gittiği (görme ölçümü ve nefes sonrası sakinlik farkı dahil), nereye (yurt dışı) ve ne kadar süre tek tek yazıyor. Eski sürümde izin sormadan açılmış Nef bir kez kapanır ve yeniden sorar. Profil cevapları için ayrı izni Profilim → İzinlerim\'den verirsin.' },
       { kind: 'fix', text: '18 yaş altında kurulum ekranında "Hesabımı sil" var; yanlış "Ad ve doğum tarihi gerekli" uyarısı kalktı. Ana sayfa ve profil sorularındaki "yalnız bu telefonda" metinleri neyin nereye gittiğini doğru söylüyor.' },
       { kind: 'new', text: 'Apple Sağlık (izninle, yalnız okuma): bugünkü adımın ana sayfada, son 7 gün Gelişim → Beden\'de. Uzun süre kalkmadıysan Nef önce 2 dakika yürümeni önerir. Veriler telefonundan çıkmaz.' },
       { kind: 'change', text: 'KVKK: profilin sunucuya ancak açık iznine göre eşitlenir. Ne, neden, nerede (Frankfurt), ne kadar süre tek sayfada; kutu önceden işaretli değil. İznini Profilim → İzinlerim\'den geri çekersen sunucudaki kopya silinir.' },

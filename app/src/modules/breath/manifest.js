@@ -9,7 +9,8 @@ const minutesOf = (list) => Math.round(list.reduce((m, s) => m + (Number.isFinit
 
 export default {
   id: 'breath',
-  routes: ['breath', 'breath-rest'],
+  // 'breath-1': nefes hatırlatmasından açılan 1 dk nefes (sakinlik puanı sorulmaz; kayıt aynı biçimde)
+  routes: ['breath', 'breath-rest', 'breath-1'],
   title: 'Nefes',
   label: 'nefes pratiği',
   ring: 'life',

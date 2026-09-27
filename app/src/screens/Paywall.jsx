@@ -93,7 +93,7 @@ export default function Paywall({ onUnlocked, onExport, onSafety, preview = fals
       {firstRun && trial ? (
         <ol className="trial-tl" aria-label="Deneme süreci">
           <li><b>Bugün</b><span>Bütün ölçümler, egzersizler ve oyunlar açılır.</span></li>
-          <li><b>{TRIAL_REMIND_DAYS}. gün</b><span>İzin verirsen bildirimle hatırlatırız: deneme bitmek üzere.</span></li>
+          <li><b>{TRIAL_REMIND_DAYS}. gün</b><span>Bildirimlere izin verdiysen hatırlatırız; vermediysen uygulamada söyleriz: deneme bitmek üzere.</span></li>
           <li><b>{trial}. gün</b><span>İptal etmediysen seçtiğin plan başlar.</span></li>
         </ol>
       ) : (

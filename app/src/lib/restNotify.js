@@ -101,45 +101,22 @@ export async function cancelRestEnd() {
   }
 }
 
-// Bildirime dokununca (uygulama kapalıyken açılış dahil; olay dinleyici bağlanana dek bekletilir)
-export async function onRestNotifyTap(cb) {
-  const pl = await plugin()
-  if (!pl) return () => {}
-  const { LN } = pl
-  try {
-    const h = await LN.addListener('localNotificationActionPerformed', (a) => {
-      if (a?.actionId === 'tap' && a?.notification?.id === REST_NOTIFY_ID) cb()
-    })
-    return () => h.remove()
-  } catch {
-    return () => {}
-  }
-}
+// Dokunma dinleyicisi burada YOK: uygulama kapalıyken yapılan dokunuş yalnız ilk bağlanan dinleyiciye gider.
+// Tek dinleyici lib/notifyApply.js onNotifyTap'te; App 7301'i (Ana sayfa) ve 7302'yi (İlk rapor) oradan dağıtır.
 
-// Deneme hatırlatmasına dokununca: 5. gün "İlk rapor" ekranı (Gelişim 2.0)
-export async function onTrialNotifyTap(cb) {
-  const pl = await plugin()
-  if (!pl) return () => {}
-  const { LN } = pl
-  try {
-    const h = await LN.addListener('localNotificationActionPerformed', (a) => {
-      if (a?.actionId === 'tap' && a?.notification?.id === TRIAL_NOTIFY_ID) cb()
-    })
-    return () => h.remove()
-  } catch {
-    return () => {}
-  }
-}
-
-// Deneme hatırlatması (Build 23b): 7 günlük denemenin 5. günü. İzin yoksa istenir; reddedilirse sessizce vazgeçilir.
+// Deneme hatırlatması (Build 23b): 7 günlük denemenin 5. günü. İzin İSTEMEZ (bildirim planı v2 §4): izin yoksa
+// kurulmaz; o kişiye 5. gün Ana sayfada uygulama içi şerit çıkar (App.jsx). İzin hangi yoldan verilirse verilsin
+// (Ana sayfa kartı, Hatırlatmalar, mola kilidi, iOS Ayarlar) App 'granted' görünce 5. günden önce yeniden çağırır.
+// Önce iptal edip kurar: tekrar çağrı zararsız. Zamanı geçmişse kurulmaz (geçmiş an hemen çalar).
+// "Tüm verileri sil" bunu iptal ETMEZ: Apple denemesi yerel veriyle birlikte bitmez, ücretlendirme öncesi uyarı kalır.
 export const TRIAL_NOTIFY_ID = 7302
 export const TRIAL_REMIND_DAYS = 5
 export async function scheduleTrialReminder(startMs = Date.now()) {
+  const at = startMs + TRIAL_REMIND_DAYS * 86400000
+  if (!Number.isFinite(at) || at <= Date.now()) return false
   const pl = await plugin()
   if (!pl) return false
-  let perm = await notifyPermission()
-  if (perm === 'prompt') perm = (await askNotifyPermission()) ? 'granted' : 'denied'
-  if (perm !== 'granted') return false
+  if ((await notifyPermission()) !== 'granted') return false
   const { LN } = pl
   try {
     await LN.cancel({ notifications: [{ id: TRIAL_NOTIFY_ID }] })
@@ -149,7 +126,7 @@ export async function scheduleTrialReminder(startMs = Date.now()) {
           id: TRIAL_NOTIFY_ID,
           title: 'İlk 5 günün raporu hazır',
           body: 'Neler değişti, bak. Deneme 2 gün sonra bitiyor; iptal etmezsen seçtiğin plan başlar (Ayarlar → Apple Kimliği → Abonelikler).',
-          schedule: { at: new Date(startMs + TRIAL_REMIND_DAYS * 86400000) },
+          schedule: { at: new Date(at) },
           interruptionLevel: 'active',
           foreground: false,
         },

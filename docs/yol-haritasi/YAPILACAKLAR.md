@@ -18,12 +18,38 @@ Son güncelleme: 2026-09-27.
 - [ ] Ana sayfa ilk ekran ≤5 öğe + "Gözlerin" satırı; sekmeler Bugün · Keşfet · Gelişim
 - [ ] Gabor algısal öğrenme modülü (iddiasız; SENTEZ_RAPORU.md §6 protokolü; <100 ms uyaran için yerel/native zamanlama gerekebilir — önce doğrulanacak)
 
-### 0b. Bildirimler (docs/yol-haritasi/BILDIRIM_PLANI.md) — v2 plan onay bekliyor
+### 0b. Bildirimler (docs/yol-haritasi/BILDIRIM_PLANI.md) — v2 kodu yazıldı, CİHAZDA DENENMEDİ
 - [x] Kararlar: ana bildirim göz + kalkma molası; odak (çalışma) oturumu; ölçme yalnız telefonda;
       yürüyüş, nefes, su da BU SÜRÜMDE ("8 hafta" kuralı kaynaksız çıkarımdı, kaldırıldı)
-- [ ] v2 uygulaması: Mola ve Su ekranları, Hatırlatmalar ekranı (tür başına aç/kapa + saat), 7 günlük kayan plan,
-      tek dokunma dinleyicisi, sessiz gün ölçümü + Gelişim kartı, çalışma oturumu, rıza başına sürüm, kaynaklar
-- [ ] Karar: yürüyüş bildirimi uygulama açılmayan günlerde de mi? (evet → HealthKit background delivery, Swift)
+- [x] v2 uygulaması (2026-09-27, commit yok): Mola ve Su ekranları, Hatırlatmalar ekranı (Bilgi → Hatırlatmalar),
+      7 günlük kayan plan (`lib/notifyPlan.js`, `notifyApply.js`), tek dokunma dinleyicisi (App), sessiz gün ölçümü +
+      Gelişim kartı, çalışma oturumu + Ana sayfa şeridi, Ana sayfa izin kartı, seyreltme sorusu, rıza başına sürüm
+      (health v2), kaynaklar (Klasnja 2019, Bell 2023, Galinsky 2007, Morris 2020, Singh 2024, Wilson 2015);
+      Çalışma günleri .ics yerine uygulama bildirimi; deneme hatırlatması izin istemiyor (izni yoksa 5. gün şerit)
+- [x] Karar: yürüyüş bildirimi uygulama açılmayan günlerde de → HealthKit background delivery (`HealthPlugin.swift` WalkGuard)
+- [ ] Mac'te: Swift derlemesi (WalkGuard, setWalkGuards/walkGuardLog); iki yeni yetkinin (HealthKit background
+      delivery, time-sensitive bildirim) otomatik imzada profile girmesi (VARSAYIM)
+- [ ] Cihazda: uygulama kapalıyken teslim; her türe dokununca doğru ekran ve günlükte "dokunuldu"; kilit ekranı metni;
+      İş/Rahatsız Etme açıkken oturum bildirimi; adım eşiği aşılınca yürüyüş bildiriminin arka planda iptali;
+      izin reddinde Ana sayfa/Hatırlatmalar metni; "Tüm verileri sil" sonrası kendi bildirimlerimizin (74xx/75xx)
+      kalmaması, deneme hatırlatmasının (7302) kalması; izni mola kilidinden/iOS Ayarlar'dan verince 7302'nin kurulması
+- [ ] Yürüyüş ölçümü: native koruma yalnız bildirimi giden günlerde kurulu. Ölçüm bu yüzden zar koluna göre
+      (iptal edilen gün de "hatırlatma günü") sayılıyor; iptal edilen günler 'doneBefore'a çevrilmiyor (yalnız bir kolu
+      ayıklamak sonucu hatırlatma aleyhine bozardı). İstenirse: sessiz günler için de native bekçi (bildirimsiz,
+      yalnız günlüğe) → iki kolda aynı ayıklama yapılabilir (Swift + notifyApply + notifyPlan)
+- [ ] Hukukçuya soru (KVKK): bildirim günlüğü (`gozolcum:notify-log`: hangi gün hangi hatırlatma, dokunuldu mu;
+      yalnız telefonda, sunucuya gitmez) için ayrı açık rıza gerekir mi? Yürüyüş için adım okunuyor (health rızası v2
+      metninde amaç yazıyor); mola/su/nefes günlüğü sağlık verisi sayılır mı?
+- [ ] Hukukçuya/metne: health rızası v2 "Neden" satırı uygulama içi "son 1 saatte az adım → 2 dk yürü" önerisini
+      (`lib/health.js`, `lib/homeSuggest.js`) yalnız dolaylı kapsıyor; eski metinde açıkça yazıyordu
+- [ ] Info.plist `NSHealthShareUsageDescription`: yürüyüş hatırlatması amacını da ansın
+- [ ] `lib/ics.js` artık yalnız testinde kullanılıyor (Çalışma günleri .ics düğmesi kalktı): silinsin mi?
+- [ ] `Paywall.jsx` "5. gün — İzin verirsen bildirimle hatırlatırız": satın almada izin artık sorulmuyor. Ya deneme
+      başlarken tek cümleyle izin iste ya da metni "izin verdiysen bildirimle, vermediysen Ana sayfada" yap
+- [ ] BILDIRIM_PLANI.md §"App.jsx" (7302'yi de siler) eskidi: "Tüm verileri sil" 7302'yi ve deneme zaman çizelgesini
+      (trialOffer, trialReminder, İlk rapor/şerit görüldü) korur; Apple denemesi yerel veriyle bitmez
+- [ ] Çalışma günleri bildirimi: saatinden ≤60 sn önce yeniden planlama olursa iptal edilir (günlüğü yok; deney
+      türlerindeki "önceden planlanan an korunur" kuralı buna uygulanamadı)
 - Kanıtla EKLENMEYECEKLER: "çok oturdun" uyarısı, "su içtin mi / nefes yaptın mı" soruları, nabız/HRV tetikli bildirim,
   "bugün 4 saat oldu" mesajı; nabız/HRV yalnızca Gelişim'de, yorumsuz
 

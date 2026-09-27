@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { pickSeries, EYE_LABEL } from '../lib/vaSeries.js'
-import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame, Lock, Eye, CalendarDays, CircleDot, Moon, Waves, Footprints } from 'lucide-react'
+import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame, Lock, Eye, CalendarDays, CircleDot, Moon, Waves, Footprints, Bell, BellOff, GlassWater } from 'lucide-react'
 import { pendingCard, snooze, skip } from '../lib/profileQuestions.js'
 import { profileFromScreening } from '../lib/profile.js'
 import { DAILY_GOAL_MIN, formatMin, todaySeconds } from '../lib/routines.js'
@@ -23,6 +24,9 @@ import { walkNudge, fmtSteps } from '../lib/health.js'
 import ConsentSheet from '../components/ConsentSheet.jsx'
 import { registry } from '../modules/registry.js'
 import { viewFor } from '../modules/views.js'
+import { normalizeReminders, TYPE_LABEL } from '../lib/reminders.js'
+import { coachAllowed } from '../lib/consent.js'
+import { getPrefs } from '../lib/prefs.js'
 
 function greeting() {
   const h = new Date().getHours()
@@ -90,7 +94,58 @@ function ModuleRows({ section, ctx, onStart }) {
   )
 }
 
-export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, onCoach, onStart, onAsk, onSaveProfile }) {
+// Hatırlatma izni kartı (bildirim planı v2 §6): optIn henüz yoksa bir kez. "Evet" → iOS izni istenir; izin
+// reddedilse de cevap 'yes' kalır ve kart ayar yolunu gösterir. onAnswer(yes) → Promise<izin | null>.
+// "Her gün" denmez: uygun günlerin bir kısmında bilerek gönderilmez (notifyPlan SILENT_RATE); bu, açılış anında
+// tek cümleyle söylenir (plan §4 "her tür açılırken tek cümle").
+function ReminderAsk({ time, onAnswer }) {
+  const [busy, setBusy] = useState(false)
+  return (
+    <section className="card tone-accent hh-ask" aria-label="Hatırlatma">
+      <span className="eyebrow">Hatırlatma · isteğe bağlı</span>
+      <h3>Günde bir mola hatırlatması ister misin?</h3>
+      <p className="small">{`Günde en çok bir kez (saat ${time}), bir dakikalık mola: kalk, uzağa bak. Bazı günler bilerek göndermiyoruz; işine yarayıp yaramadığını Gelişim'de görmen için. Saatini ve diğer hatırlatmaları Bilgi → Hatırlatmalar'dan seçersin.`}</p>
+      <div className="row">
+        <button type="button" className="btn btn-sm" disabled={busy} onClick={() => { setBusy(true); onAnswer(true) }}>
+          <Bell size={16} aria-hidden="true" /> Evet
+        </button>
+        <button type="button" className="btn btn-ghost btn-sm" disabled={busy} onClick={() => onAnswer(false)}>Şimdi değil</button>
+      </div>
+    </section>
+  )
+}
+
+// Çalışma oturumu şeridi (açıkken): sıradaki mola ve Bitir. focus: loadFocus() (App her çizimde okur).
+// Canlı bölge değil: geri sayım her dakika değişir, ekran okuyucu her seferinde okumasın (EyeBudgetPill gibi).
+// block (App focusBlock): bildirim gelemiyorsa nedeni şeridin altında yazar.
+const FOCUS_BLOCK_TEXT = {
+  off: 'Hatırlatmalar kapalı; mola bildirimi gelmez.',
+  perm: 'Bildirimler kapalı; mola bildirimi gelmez (Ayarlar > Nefona > Bildirimler).',
+  web: 'Mola bildirimi yalnız iPhone uygulamasında gelir.',
+}
+function FocusStrip({ focus, now, block = null, onStop }) {
+  const next = focus?.nextBreakAt instanceof Date ? focus.nextBreakAt.getTime() : NaN
+  if (!Number.isFinite(next)) return null
+  const min = Math.max(1, Math.ceil((next - now.getTime()) / 60000))
+  const note = FOCUS_BLOCK_TEXT[block] ?? null
+  return (
+    <div className="hh-focus">
+      <Timer size={18} aria-hidden="true" />
+      <span className="grow">
+        <b>Çalışma oturumu</b> · {min >= 60 ? '1 saat' : `${min} dk`} sonra mola
+        {note && <small className="hh-focus-note">{note}</small>}
+      </span>
+      <button type="button" className="btn btn-ghost btn-sm" onClick={onStop} aria-label="Çalışma oturumunu bitir">Bitir</button>
+    </div>
+  )
+}
+
+// Bildirim planı v2 (App verir): reminderAsk + onReminders(yes) izin kartı; focus + focusBlock + onStopFocus oturum şeridi;
+// trialNote ({ daysLeft }) + onTrialNote: izni olmayana deneme 5. gün şeridi; thinAsk (tür) + onThin(tür, 'keep'|'alt').
+// İlk ekran kalabalıklaşmasın: kart yuvası tek (izin kartı → deneme şeridi → seyreltme sorusu), rıza sayfası açıkken boş.
+// healthSheetKind: 'health' ya da eski metne izin vermiş kişiye 'healthUpdate' (lib/consent.js; cevap yine onHealthConsent).
+export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, healthSheetKind = 'health', onCoach, onStart, onAsk, onSaveProfile, reminderAsk = false, onReminders, focus = null, focusBlock = null, onStopFocus, trialNote = null, onTrialNote, thinAsk = null, onThin }) {
+  const [permNote, setPermNote] = useState(false) // "Evet" dendi ama izin kapalı: ayar yolu (bir kez, bu ekranda)
   const now = new Date()
   // Oyun oturumları (type 'game') egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
   const exercise = sessions.filter((s) => s.type !== 'game')
@@ -128,12 +183,25 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   // Profil öncesi (yalnız screening) kayıtlarda kurulum tarihi screening'den
   const prof = { ...(settings.profile ?? profileFromScreening(settings.screening)), date: settings.profile?.date ?? settings.screening?.date ?? null }
   const ask = onAsk ? pendingCard(prof, now) : null
+  const rem = normalizeReminders(settings.reminders)
+  // Kart yuvası: rıza sayfası açıkken hiçbiri; yoksa sırayla tek kart
+  const sheetOpen = Boolean((askConsent && onConsent) || (askHealth && onHealthConsent))
+  const slot = sheetOpen ? null : reminderAsk && onReminders ? 'remind' : permNote ? 'perm' : trialNote && onTrialNote ? 'trial' : thinAsk && onThin ? 'thin' : null
+  // Nef tanıtım kartı da bir rıza kartı: hatırlatma kartı açıkken gizlenir (ikisi aynı anda çıkmasın)
+  const prefs = getPrefs()
+  const coachIntro = !coachAllowed(prefs, settings.consents).on && !prefs.coachHidden
+  const answerReminders = async (yes) => {
+    const perm = await onReminders(yes)
+    if (yes && perm === 'denied') setPermNote(true)
+  }
+  const waterOn = rem.optIn === 'yes' && rem.types.water.on
+  const WaterIcon = viewFor('water')?.icon ?? GlassWater
 
   return (
     <>
       {/* Hesabı olan ve profil eşitlemeye henüz cevap vermemiş kişiye bir kez (KVKK açık rıza) */}
       {askConsent && onConsent && <ConsentSheet kind="profileSync" onAnswer={onConsent} />}
-      {!askConsent && askHealth && onHealthConsent && <ConsentSheet kind="health" onAnswer={onHealthConsent} />}
+      {!askConsent && askHealth && onHealthConsent && <ConsentSheet kind={healthSheetKind} onAnswer={onHealthConsent} />}
       <header className="home-head">
         <div>
           <span className="eyebrow">{now.toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
@@ -151,6 +219,8 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           )}
         </button>
       </header>
+
+      {focus && onStopFocus && <FocusStrip focus={focus} now={now} block={focusBlock} onStop={onStopFocus} />}
 
       {/* Günün diyaframı + sayılar (tasarım: Artifact "Nefona Bugün ve Profil") */}
       <section className="hh-day" aria-label="Bugün">
@@ -199,6 +269,41 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           </div>
         )}
       </section>
+
+      {slot === 'remind' && <ReminderAsk time={rem.types.mola.time} onAnswer={answerReminders} />}
+      {slot === 'perm' && (
+        <section className="card hh-ask" role="status">
+          <p className="small row" style={{ alignItems: 'flex-start' }}>
+            <BellOff size={18} aria-hidden="true" style={{ flex: 'none', marginTop: 1 }} />
+            <span>{'Bildirimler kapalı: Ayarlar > Nefona > Bildirimler. Açınca hatırlatman kendiliğinden kurulur.'}</span>
+          </p>
+          <div className="row">
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => setPermNote(false)}>Tamam</button>
+          </div>
+        </section>
+      )}
+      {slot === 'trial' && (
+        <section className="card tone-accent hh-ask" aria-label="Deneme süresi">
+          <span className="eyebrow">Deneme süresi</span>
+          <p className="small">
+            {`Deneme süren ${trialNote.daysLeft >= 1 ? `${trialNote.daysLeft} gün sonra bitiyor` : 'bugün bitiyor'}. İptal etmezsen seçtiğin plan başlar (Ayarlar → Apple Kimliği → Abonelikler).`}
+          </p>
+          <div className="row">
+            <button type="button" className="btn btn-sm" onClick={() => { onTrialNote(); onStart('first-report') }}>İlk raporun</button>
+            <button type="button" className="btn btn-ghost btn-sm" onClick={onTrialNote}>Tamam</button>
+          </div>
+        </section>
+      )}
+      {slot === 'thin' && (
+        <section className="card hh-ask" aria-label="Hatırlatma sıklığı">
+          <span className="eyebrow">Hatırlatma · bir kez soruyoruz</span>
+          <p className="small">{`${TYPE_LABEL[thinAsk]} hatırlatması son günlerde pek işine yaramıyor olabilir. Böyle mi kalsın, gün aşırı mı gelsin?`}</p>
+          <div className="row">
+            <button type="button" className="btn btn-sm btn-secondary" onClick={() => onThin(thinAsk, 'keep')}>Böyle kalsın</button>
+            <button type="button" className="btn btn-sm btn-secondary" onClick={() => onThin(thinAsk, 'alt')}>Gün aşırı</button>
+          </div>
+        </section>
+      )}
 
       {locked && (
         <button type="button" className="eb-banner" onClick={() => onStart('eye-rest')}>
@@ -251,7 +356,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
         <p className="muted small">Aşağıdan istediğin çalışmayı seç.</p>
       )}
 
-      <CoachCard tests={tests} sessions={sessions} profile={settings.profile} weeklyTarget={week.target} consents={settings.consents} onCoach={onCoach} onStart={onStart} />
+      {!(slot === 'remind' && coachIntro) && <CoachCard tests={tests} sessions={sessions} profile={settings.profile} weeklyTarget={week.target} consents={settings.consents} onCoach={onCoach} onStart={onStart} />}
 
       <div className="home-h">
         <h2>Ölçümlerin</h2>
@@ -308,6 +413,14 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
             </button>
           )
         })}
+        {/* Su hatırlatması açıksa kayıt yolu her gün açık (bildirim gelmeyen günlerde de; ölçüm karşılaştırması için) */}
+        {waterOn && (
+          <button className="prax-tile" onClick={() => onStart('water')}>
+            <WaterIcon size={22} aria-hidden="true" />
+            <span className="title">Su</span>
+            <em>Kaydet</em>
+          </button>
+        )}
       </div>
 
       <div className="home-h">

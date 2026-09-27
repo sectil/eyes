@@ -74,7 +74,7 @@ export default function Calendar({ records, schedule, onEditSchedule }) {
       <button className="action" onClick={onEditSchedule}>
         <span className="icon-bubble"><Bell size={22} /></span>
         <span className="grow">
-          <span className="title">Çalışma günleri ve hatırlatma</span>
+          <span className="title">Çalışma günleri</span>
           <span className="sub">{plannedLabel}</span>
         </span>
         <ChevronRight className="chev" size={20} />

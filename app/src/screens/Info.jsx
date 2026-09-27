@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  BookOpen, CreditCard, Camera, Bell, Download, Trash, ChevronRight, ShieldCheck,
+  BookOpen, CreditCard, Camera, Bell, CalendarDays, Download, Trash, ChevronRight, ShieldCheck,
   Volume2, VolumeX, Vibrate, VibrateOff, Smartphone, CircleCheck, CircleAlert, Crosshair, Sparkles, UserRound,
 } from 'lucide-react'
 import { PageHeader, ThemeSwitch } from '../components/ui.jsx'
@@ -195,6 +195,15 @@ export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp 
       <CoachSettings consents={consents} onCoach={onCoach} />
 
       <section className="stack">
+        <span className="eyebrow">Günlük düzen</span>
+        <div className="list">
+          {/* Hatırlatmalar yalnız iPhone uygulamasında gelir: web'de satır yok (izin 'unsupported'; ölçüm de yok) */}
+          {iosApp && <Row Icon={Bell} label="Hatırlatmalar" sub="Mola, yürüyüş, nefes, su; saatlerini sen seç" onClick={() => onGo('reminders')} />}
+          <Row Icon={CalendarDays} label="Çalışma günleri" sub="Haftanın hangi günleri, saat kaçta" onClick={() => onGo('schedule')} />
+        </div>
+      </section>
+
+      <section className="stack">
         <span className="eyebrow">Bilim</span>
         <div className="list">
           <Row Icon={BookOpen} label="Bu neye dayanıyor?" sub="Her özelliğin kaynağı, kanıt düzeyi ve sınırları" onClick={() => onGo('evidence')} />
@@ -213,7 +222,6 @@ export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp 
             onClick={() => onGo('recalibrate-distance')}
           />
           {trueDepth && <Row Icon={Crosshair} label="Göz takibi" sub="Kalibre et ve canlı dene" onClick={() => onGo('gaze-test')} />}
-          <Row Icon={Bell} label="Çalışma günleri ve hatırlatma" onClick={() => onGo('schedule')} />
           <Row Icon={Sparkles} label="Yenilikler" sub="Her güncellemede neler eklendi, neler düzeldi" onClick={() => onGo('whatsnew')} />
         </div>
       </section>
@@ -227,7 +235,7 @@ export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp 
         {confirm && (
           <div className="card tone-danger">
             <p className="small">
-              {`Tüm ölçüm sonuçların, egzersiz ve oyun geçmişin, Yılan rekorun, ön tarama yanıtların, ${iosApp ? '' : 'ekran ve mesafe kalibrasyonun, '}hatırlatıcı ayarın bu cihazdan silinecek. Tema ile ses ve titreşim tercihlerin korunur. Geri alınamaz.`}
+              {`Tüm ölçüm sonuçların, egzersiz ve oyun geçmişin, Yılan rekorun, ön tarama yanıtların, ${iosApp ? '' : 'ekran ve mesafe kalibrasyonun, '}hatırlatma ayarların ve hatırlatma günlüğün bu cihazdan silinecek; kurulu hatırlatmalar iptal edilir. Tema ile ses ve titreşim tercihlerin korunur.${iosApp ? ' Aboneliğin bu silmeyle iptal olmaz; denemedeysen deneme bitiş uyarısı kalır.' : ''} Geri alınamaz.`}
             </p>
             <div className="row">
               <button className="btn btn-danger btn-sm" onClick={onReset}>Evet, sil</button>

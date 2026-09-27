@@ -310,3 +310,27 @@ export async function readHealth({ days = 7, recentMinutes = 60 } = {}) {
   const [d, r] = await Promise.all([Health.dailyTotals({ days }), Health.recentSteps({ minutes: recentMinutes })])
   return { days: d?.days ?? [], recentSteps: r?.steps ?? null, at: new Date().toISOString() }
 }
+
+// Yürüyüş koruması (HealthPlugin.swift WalkGuard): günün adımı eşiğe ulaşınca o günün yürüyüş bildirimi,
+// uygulama açılmasa da, native tarafta silinir. guards: [{ id, date: 'YYYY-MM-DD', threshold }] (lib/notifyPlan.js).
+// Boş liste korumayı kapatır. iOS değilse ya da eski derlemede metot yoksa sessizce geçer.
+export async function setWalkGuards(guards) {
+  if (!isIOSApp()) return
+  try {
+    await Health.setWalkGuards({ guards: Array.isArray(guards) ? guards : [] })
+  } catch {
+    // yoksay
+  }
+}
+
+// Native'in sildiği yürüyüş bildirimleri; okununca native günlük temizlenir.
+// Döner: { cancelled: [{ id, date, steps, at }] } — web / hata → { cancelled: [] }
+export async function walkGuardLog() {
+  if (!isIOSApp()) return { cancelled: [] }
+  try {
+    const r = await Health.walkGuardLog()
+    return { cancelled: Array.isArray(r?.cancelled) ? r.cancelled : [] }
+  } catch {
+    return { cancelled: [] }
+  }
+}

@@ -35,16 +35,27 @@ function SafetyRows() {
   )
 }
 
+// Seans planı, en az minSec sürecek biçimde. makePlan döngü sayısını yuvarlar: düzenlenmiş kalıpta 1 dk 56–57 sn
+// kalabiliyor (ör. 4-4-6 → 4×14 = 56) ve hatırlatmadan açılan nefes "yapıldı" eşiğine (lib/notifyLog.js
+// BREATH_DONE_SEC) hiç ulaşmıyordu. Kısa kalırsa döngü sayısı yukarı yuvarlanır.
+export function planAtLeast(args, minSec = null) {
+  const plan = makePlan(args)
+  if (!(minSec > 0) || plan.totalSec >= minSec) return plan
+  return makePlan({ ...args, durationSec: plan.cycleSec * Math.ceil(minSec / plan.cycleSec) })
+}
+
 // presetSec: Bugünün yolundaki Nefes durağı 5 dk ile açar (kayıtlı süre tercihi değişmez; kullanıcı süreyi
 // kendisi değiştirirse o kaydedilir).
-export default function Breath({ sessions = [], presetSec = null, onBack, onFinish }) {
+// askCalm false: başta ve sonda sakinlik puanı sorulmaz (hatırlatmadan açılan 1 dk nefes; kayıt calmBefore/After null).
+// minSec: seans en az bu kadar sürer (hatırlatmadan açılan 1 dk nefes; planAtLeast).
+export default function Breath({ sessions = [], presetSec = null, askCalm = true, minSec = null, onBack, onFinish }) {
   const prior = sessions.filter(isBreath).length
   const [opts, setOpts] = useState(() => (presetSec ? { ...loadBreathOpts(), durationSec: presetSec } : loadBreathOpts()))
   const [screen, setScreen] = useState(() => (safetySeen() ? 'setup' : 'safety')) // safety | setup | sound | info | run | result
   const [calmBefore, setCalmBefore] = useState(null)
   const [calmAfter, setCalmAfter] = useState(null)
   const [strained, setStrained] = useState(false)
-  const plan = makePlan({ pattern: opts.pattern, durationSec: opts.durationSec, priorSessions: prior, edits: opts.edits })
+  const plan = planAtLeast({ pattern: opts.pattern, durationSec: opts.durationSec, priorSessions: prior, edits: opts.edits }, minSec)
   const { secs } = resolveSecs({ pattern: opts.pattern, edits: opts.edits, priorSessions: prior })
   const def = PATTERNS[opts.pattern]
   const program = programProgress(sessions)
@@ -225,7 +236,7 @@ export default function Breath({ sessions = [], presetSec = null, onBack, onFini
   }
 
   if (screen === 'setup') {
-    const canStart = calmBefore != null
+    const canStart = !askCalm || calmBefore != null
     return (
       <main className="screen fade-in">
         <div className="row between">
@@ -280,14 +291,16 @@ export default function Breath({ sessions = [], presetSec = null, onBack, onFini
           <PrefToggle Icon={MessageSquareText} IconOff={MessageSquareOff} label="Sesli komut" sub="Nefes al · tut · ver söylensin" checked={opts.voice} onChange={(on) => update({ voice: on })} />
         </div>
 
-        <div className="br-calm-row">
-          <span className="lbl" style={{ fontWeight: 600 }}>Şu an ne kadar sakinsin?</span>
-          <div className="br-calm" role="group" aria-label="1 gergin, 5 sakin">
-            {CALM_SCALE.map((v) => (
-              <button key={v} type="button" aria-pressed={calmBefore === v} onClick={() => setCalmBefore(v)}>{v}</button>
-            ))}
+        {askCalm && (
+          <div className="br-calm-row">
+            <span className="lbl" style={{ fontWeight: 600 }}>Şu an ne kadar sakinsin?</span>
+            <div className="br-calm" role="group" aria-label="1 gergin, 5 sakin">
+              {CALM_SCALE.map((v) => (
+                <button key={v} type="button" aria-pressed={calmBefore === v} onClick={() => setCalmBefore(v)}>{v}</button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <button className="btn" onClick={start} disabled={!canStart}><Play size={18} aria-hidden="true" /> Başla</button>
         {!canStart && <p className="muted small" style={{ textAlign: 'center' }}>Başlamak için sakinlik puanını seç (1 gergin · 5 sakin).</p>}
@@ -300,20 +313,22 @@ export default function Breath({ sessions = [], presetSec = null, onBack, onFini
     return (
       <main className="screen fade-in">
         <PageHeader eyebrow="Nefes pratiği" title={secsDone >= plan.totalSec - 1 ? 'Tamamlandı' : 'Erken bitti'} subtitle={`${plan.title} · ${Math.round(secsDone / 60)} dk · ${Math.round(secsDone / plan.cycleSec)} döngü`} />
-        <div className="br-calm-row">
-          <span className="lbl" style={{ fontWeight: 600 }}>Şimdi ne kadar sakinsin?</span>
-          <div className="br-calm" role="group" aria-label="1 gergin, 5 sakin">
-            {CALM_SCALE.map((v) => (
-              <button key={v} type="button" aria-pressed={calmAfter === v} onClick={() => setCalmAfter(v)}>{v}</button>
-            ))}
+        {askCalm && (
+          <div className="br-calm-row">
+            <span className="lbl" style={{ fontWeight: 600 }}>Şimdi ne kadar sakinsin?</span>
+            <div className="br-calm" role="group" aria-label="1 gergin, 5 sakin">
+              {CALM_SCALE.map((v) => (
+                <button key={v} type="button" aria-pressed={calmAfter === v} onClick={() => setCalmAfter(v)}>{v}</button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
         {calmBefore != null && calmAfter != null && <p className="muted small">Önce {calmBefore}, sonra {calmAfter}. Bu senin puanın; bir iddia değil, kendi çizgin.</p>}
         <button type="button" className="btn btn-ghost" aria-pressed={strained} onClick={() => setStrained((v) => !v)}>
           {strained ? <Check size={18} aria-hidden="true" /> : null} Zorlandım{strained ? ' · kaydedildi' : ''}
         </button>
         {strained && <p className="muted small">Bir sonraki seansta süreyi ya da tutmaları kısalt. Baş dönmesi olduysa bugün tekrar etme.</p>}
-        <button className="btn" onClick={save} disabled={calmAfter == null}><Check size={18} aria-hidden="true" /> Kaydet</button>
+        <button className="btn" onClick={save} disabled={askCalm && calmAfter == null}><Check size={18} aria-hidden="true" /> Kaydet</button>
         <button className="btn btn-ghost" onClick={() => { setCalmAfter(null); setStrained(false); setScreen('setup') }}><RotateCcw size={18} aria-hidden="true" /> Yeniden</button>
       </main>
     )

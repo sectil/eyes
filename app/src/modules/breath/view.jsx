@@ -1,6 +1,12 @@
 import { Wind } from 'lucide-react'
 import Breath from '../../screens/Breath.jsx'
 import { programProgress, loadBreathOpts, PATTERNS, PROGRAM_DAY_SEC } from '../../lib/breath.js'
+import { BREATH_DONE_SEC } from '../../lib/notifyLog.js'
+
+// 'breath-1' (nefes hatırlatması): 1 dk, sakinlik puanı sorulmaz. Süre VARSAYIM (plan §2; Schwerdtfeger 2025'te 1 dk denendi).
+// Seans en az BREATH_DONE_SEC sürer: tamamlanan 1 dk nefes Gelişim ölçümünde "yapıldı" sayılsın (düzenlenmiş kalıpta
+// döngü yuvarlaması süreyi 60 sn'nin altına düşürüyordu).
+const QUICK_SEC = 60
 
 export default {
   icon: Wind,
@@ -16,7 +22,9 @@ export default {
     <Breath
       key={route}
       sessions={ctx.sessions}
-      presetSec={route === 'breath-rest' ? PROGRAM_DAY_SEC : null}
+      presetSec={route === 'breath-rest' ? PROGRAM_DAY_SEC : route === 'breath-1' ? QUICK_SEC : null}
+      askCalm={route !== 'breath-1'}
+      minSec={route === 'breath-1' ? BREATH_DONE_SEC : null}
       onBack={ctx.back}
       onFinish={(s) => { ctx.store.addSession(s); ctx.refresh(); ctx.go('home') }}
     />

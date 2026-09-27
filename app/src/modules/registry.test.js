@@ -5,7 +5,7 @@ import { VIEWS } from './views.js'
 describe('modül soketi: gerçek modüller', () => {
   it('hepsi geçerli, sorun yok', () => {
     expect(registry.problems).toEqual([])
-    expect(registry.modules.map((m) => m.id).sort()).toEqual(['awareness', 'blink', 'breath', 'breath-count', 'daily', 'dalga', 'fark-ettin', 'gokyuzu', 'notice', 'quick-look', 'reading', 'routine', 'snake', 'tek-bakis', 'track', 'weekly', 'yon'])
+    expect(registry.modules.map((m) => m.id).sort()).toEqual(['awareness', 'blink', 'breath', 'breath-count', 'daily', 'dalga', 'fark-ettin', 'gokyuzu', 'mola', 'notice', 'quick-look', 'reading', 'routine', 'snake', 'tek-bakis', 'track', 'water', 'weekly', 'yon'])
   })
   it('her modülün ekranı (view) var ve ekranı çiziyor', () => {
     for (const m of registry.modules) {
@@ -27,8 +27,9 @@ describe('modül soketi: gerçek modüller', () => {
   it('kayıtları tanır; silinecek anahtarlar modüllerden gelir', () => {
     expect(registry.forSession({ type: 'game', game: 'snake' })?.id).toBe('snake')
     expect(registry.forSession({ type: 'game', game: 'yok' })).toBeNull()
-    expect(registry.resetKeys()).toEqual(expect.arrayContaining(['gozolcum:snake-best', 'gozolcum:track-best']))
-    expect(registry.inSection('practice').map((m) => m.id)).toEqual(['quick-look', 'fark-ettin', 'track', 'tek-bakis', 'snake', 'breath', 'dalga', 'gokyuzu', 'yon', 'notice'])
+    expect(registry.resetKeys()).toEqual(expect.arrayContaining(['gozolcum:snake-best', 'gozolcum:track-best', 'gozolcum:habit-log', 'gozolcum:notify-log', 'gozolcum:notify-seed', 'gozolcum:focus']))
+    // mola ve quick-look aynı sırada (5): eşitlikte klasör sırası (import.meta.glob), mola önde. Su Ana sayfada yok (hatırlatmadan açılır)
+    expect(registry.inSection('practice').map((m) => m.id)).toEqual(['mola', 'quick-look', 'fark-ettin', 'track', 'tek-bakis', 'snake', 'breath', 'dalga', 'gokyuzu', 'yon', 'notice'])
   })
 })
 
