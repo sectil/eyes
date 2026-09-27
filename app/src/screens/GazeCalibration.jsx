@@ -334,7 +334,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
         <span className="gazecal-dot">{done && <Check size={12} strokeWidth={3} aria-hidden="true" />}</span>
       </div>
       <p className="gazecal-msg" role="status" aria-live="polite">
-        {!cam.ready ? 'Kamera açılıyor…' : cam.error ? 'Kamera açılamadı' : done ? 'Tamam' : status === 'noface' ? 'Yüzünü kameraya göster' : status === 'closed' ? 'Gözlerini aç' : status === 'head' ? 'Başını çevirme, yalnızca gözünü kaydır' : status === 'hold' ? 'Noktada kal…' : `${view.again ? 'Bir kez daha: ' : ''}${LABEL[t] ?? 'Noktaya bak'}`}
+        {cam.error === 'permission' ? "Kamera izni yok · Ayarlar → Nefona → Kamera" : cam.error ? 'Kamera açılamadı' : !cam.ready ? 'Kamera açılıyor…' : done ? 'Tamam' : status === 'noface' ? 'Yüzünü kameraya göster' : status === 'closed' ? 'Gözlerini aç' : status === 'head' ? 'Başını çevirme, yalnızca gözünü kaydır' : status === 'hold' ? 'Noktada kal…' : `${view.again ? 'Bir kez daha: ' : ''}${LABEL[t] ?? 'Noktaya bak'}`}
       </p>
     </div>
   )

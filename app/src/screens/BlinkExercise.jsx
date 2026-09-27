@@ -141,7 +141,7 @@ export default function BlinkExercise({ onFinish, onBack, trueDepth = false }) {
       {phase === 'baseline' && (
         <section className="blink-stage open">
           <div className="blink-orb" />
-          <p className="blink-cue">{cam.ready ? 'Gözlerin açık, ekrana bak' : 'Kamera hazırlanıyor…'}</p>
+          <p className="blink-cue">{cam.error ? 'Kamera açılamadı; sayım olmadan devam' : cam.ready ? 'Gözlerin açık, ekrana bak' : 'Kamera hazırlanıyor…'}</p>
         </section>
       )}
 

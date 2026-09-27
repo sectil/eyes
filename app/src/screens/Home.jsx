@@ -90,7 +90,7 @@ function ModuleRows({ section, ctx, onStart }) {
   )
 }
 
-export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, onStart, onAsk, onSaveProfile }) {
+export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, onCoach, onStart, onAsk, onSaveProfile }) {
   const now = new Date()
   // Oyun oturumları (type 'game') egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
   const exercise = sessions.filter((s) => s.type !== 'game')
@@ -251,7 +251,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
         <p className="muted small">Aşağıdan istediğin çalışmayı seç.</p>
       )}
 
-      <CoachCard tests={tests} sessions={sessions} profile={settings.profile} weeklyTarget={week.target} onStart={onStart} />
+      <CoachCard tests={tests} sessions={sessions} profile={settings.profile} weeklyTarget={week.target} consents={settings.consents} onCoach={onCoach} onStart={onStart} />
 
       <div className="home-h">
         <h2>Ölçümlerin</h2>
@@ -325,7 +325,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           Mesafe takibi kapalı; sonuçlar daha az güvenilir. Bilgi sekmesinden açabilirsin.
         </p>
       )}
-      <p className="muted small">Bu uygulama teşhis koymaz ve göz muayenesinin yerini tutmaz. Ölçümlerin bu telefonda kalır; sunucuya yalnızca izin verdiklerin gider (Profilim → İzinlerim).</p>
+      <p className="muted small">Bu uygulama teşhis koymaz ve göz muayenesinin yerini tutmaz. Ölçümlerin bu telefonda saklanır. Hesap açarsan giriş bilgin, abonelik için App Store satın alma kaydın (RevenueCat) sunucuya gider; profil eşitleme ve Nef yalnızca izin verirsen (Profilim → İzinlerim).</p>
     </>
   )
 }

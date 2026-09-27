@@ -7,6 +7,7 @@ import { PageHeader, ThemeSwitch } from '../components/ui.jsx'
 import PrefToggle from '../components/PrefToggle.jsx'
 import CoachConsent from '../components/CoachConsent.jsx'
 import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
+import { coachAllowed } from '../lib/consent.js'
 import { haptic, initFeedback, testHaptic } from '../lib/native.js'
 import '../styles/info.css'
 
@@ -18,12 +19,19 @@ const TEST_MESSAGES = {
   failed: 'Titreşim gönderilemedi. Uygulamayı kapatıp yeniden açmayı dene.',
 }
 
-// Nef Göz Koçu aç/kapa (ana sayfa "Bugün" kartı). Kapatınca sunucuya hiçbir veri gitmez.
-// Açmak açık rıza ister (CoachConsent: iki ayrı işaretsiz kutu); kapatmak tek dokunuş.
-function CoachSettings() {
+// Nef Göz Koçu aç/kapa (ana sayfa "Bugün" kartı). Kapatınca Nef'e hiçbir veri gitmez.
+// Açmak açık rıza ister (CoachConsent: iki ayrı işaretsiz kutu; App rızayı settings.consents'e kaydeder);
+// kapatmak tek dokunuş. Rıza paneli açıkken anahtara yeniden dokunmak paneli kapatır.
+function CoachSettings({ consents = null, onCoach }) {
   const [prefs, setLocal] = useState(getPrefs)
   const [asking, setAsking] = useState(false)
+  const panel = useRef(null)
   useEffect(() => subscribePrefs((p) => setLocal(p)), [])
+  // Panel açılınca odak ilk kutuya (VoiceOver, anahtarın altında sessizce beliren paneli duyurmuyordu)
+  useEffect(() => {
+    if (asking) panel.current?.querySelector('input')?.focus()
+  }, [asking])
+  const allowed = coachAllowed(prefs, consents)
   return (
     <section className="stack">
       <span className="eyebrow">Nef Göz Koçu</span>
@@ -32,22 +40,24 @@ function CoachSettings() {
           Icon={Sparkles}
           IconOff={Sparkles}
           label="Günlük öneri (yapay zekâ)"
-          sub={prefs.coach ? 'Açık · yalnızca özet sayılar gönderilir' : 'Kapalı · sunucuya hiçbir veri gitmez'}
-          checked={prefs.coach}
-          onChange={(on) => (on ? setAsking(true) : (setAsking(false), setPrefs({ coach: false, coachLife: false })))}
+          sub={allowed.on ? (allowed.life ? 'Açık · günlük özetler ve profil cevapların gider' : 'Açık · günlük özetler gider') : "Kapalı · Nef'e veri gitmez"}
+          checked={allowed.on}
+          onChange={(on) => (on ? setAsking((a) => !a) : (setAsking(false), onCoach?.({ on: false })))}
         />
       </div>
-      {asking && !prefs.coach && (
-        <CoachConsent
-          idPrefix="cc-info"
-          onAccept={({ life }) => { setAsking(false); setPrefs({ coach: true, coachHidden: false, coachLife: life }) }}
-          onCancel={() => setAsking(false)}
-        />
+      {asking && !allowed.on && (
+        <div ref={panel} role="region" aria-label="Nef için açık rıza">
+          <CoachConsent
+            idPrefix="cc-info"
+            onAccept={({ life }) => { setAsking(false); onCoach?.({ on: true, life }) }}
+            onCancel={() => setAsking(false)}
+          />
+        </div>
       )}
       <p className="note">
         <ShieldCheck size={16} aria-hidden="true" />
-        Açıkken yalnızca özet sayılar (ör. haftalık gün sayısı, ölçüm ortancası) OpenRouter üzerinden bir yapay zekâ modeline gider;
-        kamera görüntüsü, ad ya da cihaz kimliği gitmez. Öneriler tıbbi tavsiye değildir.
+        Açıkken son 7 günün özetleri (görme ölçümü dahil) yurt dışındaki bir yapay zekâ modeline gider; profil cevapların
+        yalnızca ayrıca izin verirsen. Kamera görüntüsü, ad ya da cihaz kimliği gitmez. Öneriler tıbbi tavsiye değildir.
       </p>
     </section>
   )
@@ -158,7 +168,7 @@ function FeedbackSettings({ iosApp }) {
   )
 }
 
-export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp = false, trueDepth = false, calibration = null }) {
+export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp = false, trueDepth = false, calibration = null, consents = null, onCoach }) {
   const [confirm, setConfirm] = useState(false)
 
   const Row = ({ Icon, label, sub, onClick, danger }) => (
@@ -182,7 +192,7 @@ export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp 
       </section>
 
       <FeedbackSettings iosApp={iosApp} />
-      <CoachSettings />
+      <CoachSettings consents={consents} onCoach={onCoach} />
 
       <section className="stack">
         <span className="eyebrow">Bilim</span>
@@ -198,8 +208,8 @@ export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp 
           {!iosApp && <Row Icon={CreditCard} label="Ekran kalibrasyonu" sub="Kartla yeniden ölç" onClick={() => onGo('recalibrate')} />}
           <Row
             Icon={Camera}
-            label={iosApp ? '40 cm mesafe' : distanceSkipped ? 'Mesafe takibini aç' : 'Mesafe kalibrasyonu'}
-            sub={iosApp ? 'Face ID kamerasıyla canlı göster' : "40 cm'yi yeniden öğret"}
+            label={distanceSkipped ? 'Mesafe takibini aç' : iosApp ? '40 cm mesafe' : 'Mesafe kalibrasyonu'}
+            sub={distanceSkipped ? 'Kapalı · testler 40 cm varsayar' : iosApp ? 'Face ID kamerasıyla canlı göster' : "40 cm'yi yeniden öğret"}
             onClick={() => onGo('recalibrate-distance')}
           />
           {trueDepth && <Row Icon={Crosshair} label="Göz takibi" sub="Kalibre et ve canlı dene" onClick={() => onGo('gaze-test')} />}

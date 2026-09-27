@@ -8,12 +8,22 @@ Son güncelleme: 2026-09-27.
 ## Sıradaki iş (sırayla)
 
 ### 0. Yeniden düşünme planı (docs/yol-haritasi/YENIDEN_DUSUNME.md) — kararlar alındı
-- [ ] Küçük düzeltmeler: kamerasız devam, "yalnızca bu cihazda" metni, Nef'in iki ayrı izni (Bilgi anahtarı dahil), 18 yaş sınırı — yazıldı, denetimde
+- [x] Küçük düzeltmeler: kamerasız devam, "yalnızca bu cihazda" metni, Nef'in iki ayrı izni (Bilgi anahtarı dahil), 18 yaş sınırı
+      (6743d54) + denetimin 29 doğrulanmış bulgusu düzeltildi (Nef rızası kayıtlı ve sürümlü, eski izinsiz kayıt kapanır;
+      kamera izni mesajları; kamerasız mod tüm uygulamada; 18 altına "Hesabımı sil")
 - [ ] İlk açılış sırası: film → güvenlik → 20 sn göz kırpma → ad/doğum tarihi → 7 gün deneme → Bugün (hesap, 40 cm, bildirim, Apple Sağlık, Ekran Süresi sonraya)
+      — yaş kapısı böylece hesaptan ÖNCE olur (denetim: şu an 18 altı kişinin hesabı sunucuda açılıyor, sonra durduruluyor)
 - [ ] Yol 4–5 durak (~11 dk); Isınma/Daire/Yakın–uzak Keşfet'e; Çemberler dönüşümlü; yol yalnız yoldan başlatılan oturumla tamamlanır
 - [ ] Seri kalır; Takvim "Seri yok, baskı yok" metni seriyle uyumlu hale gelir
 - [ ] Ana sayfa ilk ekran ≤5 öğe + "Gözlerin" satırı; sekmeler Bugün · Keşfet · Gelişim
 - [ ] Gabor algısal öğrenme modülü (iddiasız; SENTEZ_RAPORU.md §6 protokolü; <100 ms uyaran için yerel/native zamanlama gerekebilir — önce doğrulanacak)
+
+### 0b. Bildirimler (docs/yol-haritasi/BILDIRIM_PLANI.md) — PubMed taraması bitti, SAHİBİNİN KARARI BEKLENİYOR
+- [ ] 3 karar: günün tek bildirimi hangi alışkanlık (öneri: göz + kalkma molası); "odak oturumu" ilk sürümde mi;
+      ürün içi deney (bazı günler bildirim bilerek gönderilmez) kabul mü (ayrı KVKK maddesi)
+- [ ] Karardan sonra: bildirim izni (ayrı), saat seçimi, günde 0–3 (varsayılan 1), sessiz saatler, "zaten yaptıysan gönderme"
+- Kanıtla EKLENMEYECEKLER: "çok oturdun" uyarısı, "su içtin mi / nefes yaptın mı" soruları, nabız/HRV tetikli bildirim,
+  "bugün 4 saat oldu" mesajı; nabız/HRV yalnızca Gelişim'de, yorumsuz
 
 ### 1. Hareket: Apple Sağlık (HealthKit) — kod bitti, CİHAZDA DENENMEDİ
 - [ ] Telefonda: izin sayfaları (bizim + iOS), adım satırı, Beden kartı; Swift derlemesi Mac'te (burada derlenemiyor)
@@ -43,6 +53,8 @@ Son güncelleme: 2026-09-27.
 ### 3. Mağazaya çıkmadan önce zorunlu
 - [ ] Gizlilik politikası sayfası + adresi (`VITE_PRIVACY_URL`; HealthKit ve abonelik için Apple zorunlu)
 - [ ] KVKK aydınlatma metni: veri sorumlusu adı/adresi (kullanıcıdan), hukukçu onayı
+- [ ] Nef yurt dışı aktarımı: hukuki dayanak (KVKK md. 9, 7499 s. Kanun sonrası), OpenRouter ve model sağlayıcısının
+      saklama süresi, Vercel fonksiyon bölgesi — hukukçuya/doğrulamaya (rıza metni "yurt dışı" diyor, ülke yazmıyor)
 - [ ] Abonelik inceleme ekran görüntüleri (App Store Connect, 3 abonelik) + ilk abonelik yeni sürümle gönderilir
 - [ ] Sandbox satın alma denemesi (7 gün ücretsiz başla) — henüz yapılmadı
 - [ ] Aylık fiyat App Store'da ₺99,99 görünüyor, istenen ₺89,99 → düzeltilecek

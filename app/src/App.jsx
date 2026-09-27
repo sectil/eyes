@@ -15,6 +15,7 @@ import QuestionFlow from './components/QuestionFlow.jsx'
 import { missing, GROUPS } from './lib/profileQuestions.js'
 import ProfileHome from './screens/ProfileHome.jsx'
 import { hasConsent, shouldAsk, recordConsent } from './lib/consent.js'
+import { getPrefs, setPrefs } from './lib/prefs.js'
 import IntroFilm from './components/IntroFilm.jsx'
 import { shouldPlayIntro, INTRO_VERSION } from './lib/intro.js'
 import { ageBandFromAge } from './lib/profile.js'
@@ -128,7 +129,7 @@ export default function App() {
       }
     }
     const needsGaze = Boolean(gatesOf(s).gaze)
-    if (needsGaze && native.trueDepth && !gazeSkipped.current && !hasGazeModel()) {
+    if (needsGaze && camOk && !gazeSkipped.current && !hasGazeModel()) {
       setGazeFor({ to: s })
       window.scrollTo(0, 0)
       return
@@ -332,9 +333,21 @@ export default function App() {
       document.removeEventListener('visibilitychange', onVis)
     }
   }, [healthOk, healthTick])
+  // Nef: eski sürümler rıza sormadan (Bilgi anahtarı) ya da iki amacı tek dokunuşla açabiliyordu. Kayıtlı açık
+  // rızası olmayan tercih kapatılır; tanıtım kartı yeniden çıkar, CoachConsent iki kutuyla sorar.
+  // (Gönderim zaten coachAllowed ile rızaya bağlı; bu yalnızca tercihi kayıtla uyumlu tutar.)
+  useEffect(() => {
+    const p = getPrefs()
+    if (p.coach && !hasConsent(settings.consents, 'coach')) setPrefs({ coach: false, coachLife: false, coachHidden: false })
+    else if (p.coachLife && !hasConsent(settings.consents, 'coachLife')) setPrefs({ coachLife: false })
+  }, [settings.consents])
   // iPhone'da TrueDepth varsa mesafe her zaman sensörden gelir (eski kamera kalibrasyonu yok sayılır).
-  // Kamerasız devam edildiyse (settings.distance.skipped) TrueDepth olsa da mesafe "ölçülmüyor" sayılır.
-  const distanceCal = native.trueDepth && !settings.distance?.skipped
+  // DistanceHud'da "Kamerasız devam et" denildiyse (skipped + via:'truedepth') kamera hiçbir yerde açılmaz:
+  // mesafe ölçülmez, göz kalibrasyonu sorulmaz, modüller kamerasız çalışır. Eski sürümlerin web kalibrasyonu
+  // atlaması (via yok) TrueDepth'te eskisi gibi yok sayılır.
+  const cameraOff = native.trueDepth && Boolean(settings.distance?.skipped) && settings.distance?.via === 'truedepth'
+  const camOk = native.trueDepth && !cameraOff
+  const distanceCal = camOk
     ? { method: 'truedepth' }
     : settings.distance?.irisPxAt40 || settings.distance?.method === 'truedepth' ? settings.distance : null
   const setupTotal = native.autoScreen ? 2 : 3
@@ -379,6 +392,19 @@ export default function App() {
     }
     refresh()
   }
+  // Nef açık rızası: iki amaç iki ayrı kayıt (settings.consents) + cihaz tercihi (prefs). Kapatmak ikisini de geri çeker.
+  const setCoach = ({ on, life = false }) => {
+    let c = recordConsent(store.get().settings.consents, 'coach', on)
+    c = recordConsent(c, 'coachLife', Boolean(on && life))
+    store.setSetting('consents', c)
+    setPrefs(on ? { coach: true, coachHidden: false, coachLife: Boolean(life) } : { coach: false, coachLife: false })
+    refresh()
+  }
+  const setCoachLife = (granted) => {
+    store.setSetting('consents', recordConsent(store.get().settings.consents, 'coachLife', granted))
+    setPrefs({ coachLife: Boolean(granted) })
+    refresh()
+  }
   // Tüm kayıt (JSON). iPhone'da <a download> WKWebView'da güvenilir değil (doğrulanmadı) → paylaşım sayfası
   // (ExportPlugin.swift); web'de indirme. Oturum anahtarları ayrı kayıtta (supabase.js storageKey), dosyaya girmez.
   const exportData = () => {
@@ -415,7 +441,21 @@ export default function App() {
       else refresh()
       syncUp(id, corr)
     }
-    return <ProfileSetup identity={settings.identity} correction={currentCorrection()} account={settings.account} onSave={done} />
+    // 18 yaş altı: kurulum burada durur; hesap açıldıysa sunucudaki kaydı silmenin yolu bu ekranda (Profilim'e ulaşılamaz)
+    const deleteMinor = signedIn(settings.account)
+      ? async () => {
+          try {
+            await deleteAccount()
+          } catch (e) {
+            return friendlyError(e) ?? 'Hesap silinemedi. Biraz sonra yeniden dene.'
+          }
+          unlinkPurchaser()
+          store.setSetting('account', { mode: 'guest', date: nowIso() })
+          refresh()
+          return null
+        }
+      : null
+    return <ProfileSetup identity={settings.identity} correction={currentCorrection()} account={settings.account} onSave={done} onDeleteAccount={deleteMinor} />
   }
   // Deneme teklifi bir kez, profilden hemen sonra. Web'de ödeme yok (atlanır); test derlemesinde "geç" ile görülebilir.
   if (!settings.trialOffer && !access.loading && access.native && (!access.premium || access.testUnlock) && screen !== 'evidence') {
@@ -476,6 +516,9 @@ export default function App() {
         healthAvail={healthAvail}
         healthConsent={healthOk}
         onHealthConsent={(g) => setConsent('health', g)}
+        consents={settings.consents}
+        onCoach={setCoach}
+        onCoachLife={setCoachLife}
         onAccount={() => go('account')}
         onSignOut={async () => { try { await signOut() } catch { /* çevrimdışı: yerel oturum yine kapanır */ } toGuest() }}
         onDeleteAccount={async () => {
@@ -505,9 +548,14 @@ export default function App() {
   }
   if (!settings.distance || screen === 'recalibrate-distance') {
     const done = (d) => { store.setSetting('distance', d); refresh(); go(lastTab) }
-    const skip = () => done({ skipped: true, date: new Date().toISOString() })
-    if (native.trueDepth) return <DistanceHud step={setupTotal} total={setupTotal} onDone={done} onSkip={skip} />
-    return <DistanceCalibration onDone={done} onSkip={skip} />
+    // Bilgi'den açılınca (kayıt var) atlama yerine Vazgeç: ayar değişmeden geri döner
+    const again = Boolean(settings.distance)
+    if (native.trueDepth) {
+      return again
+        ? <DistanceHud step={setupTotal} total={setupTotal} onDone={done} onCancel={() => go(lastTab)} />
+        : <DistanceHud step={setupTotal} total={setupTotal} onDone={done} onSkip={() => done({ skipped: true, via: 'truedepth', date: new Date().toISOString() })} />
+    }
+    return <DistanceCalibration onDone={done} onSkip={() => done({ skipped: true, date: new Date().toISOString() })} />
   }
 
   // --- Abonelik kilidi: deneme ilk kurulumda başlar (Build 23b); abonelik/deneme yoksa ödeme ekranı ---
@@ -589,7 +637,7 @@ export default function App() {
   const mod = registry.forRoute(screen)
   const view = mod && viewFor(mod.id)
   if (view) {
-    const ctx = { native, settings, tests, sessions, exercise, common, go, back, refresh, store, saveTests }
+    const ctx = { native: { ...native, trueDepth: camOk }, settings, tests, sessions, exercise, common, go, back, refresh, store, saveTests }
     return (
       <>
         {view.render(ctx, screen)}
@@ -624,6 +672,8 @@ export default function App() {
         trueDepth={native.trueDepth}
         calibration={settings.calibration}
         distanceSkipped={!distanceCal}
+        consents={settings.consents}
+        onCoach={setCoach}
         onExport={exportData}
         onReset={() => {
           // iPhone'da ekran ölçüsü cihaz modelinden gelir (kullanıcı verisi değil) ve yalnızca açılışta yazılır.
@@ -647,7 +697,7 @@ export default function App() {
       />
     )
   } else {
-    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={native.trueDepth} eyeBudget={budget} premium={access.loading || access.premium} member={Boolean(access.native && access.premium && !access.testUnlock)} askConsent={signedIn(settings.account) && shouldAsk(settings.consents, 'profileSync')} onConsent={(g) => setConsent('profileSync', g)} health={health} askHealth={healthAvail && !(signedIn(settings.account) && shouldAsk(settings.consents, 'profileSync')) && shouldAsk(settings.consents, 'health')} onHealthConsent={(g) => setConsent('health', g)} onStart={go} onAsk={(group) => { const ids = missing(settings.profile, GROUPS[group] ?? []); if (ids.length) setAskFor({ ids, then: 'home', back: 'home' }) }} onSaveProfile={saveProfile} />
+    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={camOk} eyeBudget={budget} premium={access.loading || access.premium} member={Boolean(access.native && access.premium && !access.testUnlock)} askConsent={signedIn(settings.account) && shouldAsk(settings.consents, 'profileSync')} onConsent={(g) => setConsent('profileSync', g)} health={health} askHealth={healthAvail && !(signedIn(settings.account) && shouldAsk(settings.consents, 'profileSync')) && shouldAsk(settings.consents, 'health')} onHealthConsent={(g) => setConsent('health', g)} onCoach={setCoach} onStart={go} onAsk={(group) => { const ids = missing(settings.profile, GROUPS[group] ?? []); if (ids.length) setAskFor({ ids, then: 'home', back: 'home' }) }} onSaveProfile={saveProfile} />
   }
 
   return (

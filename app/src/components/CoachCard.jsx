@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Sparkles, ChevronRight, WifiOff, X } from 'lucide-react'
 import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
 import { getTodayInsight } from '../lib/coach.js'
+import { coachAllowed } from '../lib/consent.js'
 import CoachConsent from './CoachConsent.jsx'
 import '../styles/coach.css'
 
@@ -22,18 +23,20 @@ const ACTIONS = [
 ]
 const screenFor = (action) => ACTIONS.find(([re]) => re.test(action ?? ''))?.[1] ?? null
 
-export default function CoachCard({ tests, sessions, profile = null, weeklyTarget, onStart }) {
+// consents: settings.consents (Nef yalnız kayıtlı açık rızayla konuşur) · onCoach({ on, life }): App rızayı kaydeder
+export default function CoachCard({ tests, sessions, profile = null, weeklyTarget, consents = null, onCoach, onStart }) {
   const [prefs, setLocal] = useState(getPrefs)
   const [consent, setConsent] = useState(false)
   const [tip, setTip] = useState(null)
 
   useEffect(() => subscribePrefs((p) => setLocal(p)), [])
 
-  // Profil cevaplarının özeti yalnız coachLife onayıyla gider (uyku, ekran, gece telefonu, stres)
-  const life = prefs.coachLife ? profile : null
+  // Profil cevaplarının özeti yalnız coachLife rızasıyla gider (uyku, ekran, gece telefonu, stres)
+  const allowed = coachAllowed(prefs, consents)
+  const life = allowed.life ? profile : null
   const lifeKey = life ? JSON.stringify([life.screenHours, life.sleep, life.nightPhone, life.stress]) : ''
   useEffect(() => {
-    if (!prefs.coach) return undefined
+    if (!allowed.on) return undefined
     let alive = true
     setTip(null)
     getTodayInsight({ tests, sessions, weeklyTarget, profile: life }).then((t) => alive && setTip(t))
@@ -41,11 +44,11 @@ export default function CoachCard({ tests, sessions, profile = null, weeklyTarge
       alive = false
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [prefs.coach, prefs.coachLife, tests.length, sessions.length, weeklyTarget, lifeKey])
+  }, [allowed.on, allowed.life, tests.length, sessions.length, weeklyTarget, lifeKey])
 
-  if (!prefs.coach && prefs.coachHidden) return null
+  if (!allowed.on && prefs.coachHidden) return null
 
-  if (!prefs.coach) {
+  if (!allowed.on) {
     return (
       <section className="card coach-card coach-intro">
         <div className="row between">
@@ -54,7 +57,7 @@ export default function CoachCard({ tests, sessions, profile = null, weeklyTarge
         </div>
         <p className="coach-lead">Kendi verine bakıp her gün tek bir içgörü ve bir öneri yazar.</p>
         {consent ? (
-          <CoachConsent idPrefix="cc-home" onAccept={({ life }) => setPrefs({ coach: true, coachLife: life })} onCancel={() => setConsent(false)} />
+          <CoachConsent idPrefix="cc-home" onAccept={({ life }) => { setConsent(false); onCoach?.({ on: true, life }) }} onCancel={() => setConsent(false)} />
         ) : (
           <button className="btn btn-ghost btn-sm" onClick={() => setConsent(true)}>Nasıl çalışır, aç</button>
         )}
@@ -62,9 +65,9 @@ export default function CoachCard({ tests, sessions, profile = null, weeklyTarge
     )
   }
 
+  // Profil cevapları için ayrı soru burada sorulmaz: CoachConsent ikisini ayrı kutuda sordu; sonradan eklemek
+  // Profilim → İzinlerim'den, bilgilendirme sayfasıyla (ConsentSheet 'coachLife').
   const target = tip ? screenFor(tip.action) : null
-  // Eski onay profil cevaplarını kapsamıyordu: ayrıca sorulur (tek dokunuş)
-  const askLife = !prefs.coachLife && profile && (profile.sleep != null || profile.screenHours != null || profile.nightPhone != null)
   return (
     <section className="card coach-card" aria-live="polite">
       <div className="row between">
@@ -88,12 +91,6 @@ export default function CoachCard({ tests, sessions, profile = null, weeklyTarge
           <i />
           <i />
         </div>
-      )}
-      {askLife && (
-        <p className="muted small coach-life">
-          Uyku, ekran, gece telefonu ve stres cevaplarının özeti de Nef'e gitsin mi?{' '}
-          <button type="button" className="link-btn" onClick={() => setPrefs({ coachLife: true })}>Evet, ekle</button>
-        </p>
       )}
     </section>
   )

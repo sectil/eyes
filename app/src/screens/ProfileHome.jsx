@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Camera, Check, ChevronRight, Film, ListChecks, LogOut, Trash2, UserRound, ShieldCheck, Footprints } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
-import { emptyIdentity, normalizeIdentity, validBirthDate, ageFromBirthDate, initialFor, AVATAR_HUES, AVATAR_PX, NAME_MAX, MIN_AGE } from '../lib/identity.js'
+import { emptyIdentity, normalizeIdentity, validBirthDate, ageFromBirthDate, isAdult, initialFor, AVATAR_HUES, AVATAR_PX, NAME_MAX } from '../lib/identity.js'
 import { CORRECTION } from '../lib/profile.js'
 import { accountLabel, signedIn } from '../lib/account.js'
 import BirthDateBoxes from '../components/BirthDateBoxes.jsx'
@@ -9,7 +9,8 @@ import CityField from '../components/CityField.jsx'
 import '../styles/account.css'
 import { haptic } from '../lib/native.js'
 import { getMembership, PLAN_NAME } from '../lib/subscription.js'
-import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
+import { getPrefs, subscribePrefs } from '../lib/prefs.js'
+import { coachAllowed } from '../lib/consent.js'
 import ConsentSheet from '../components/ConsentSheet.jsx'
 import '../styles/profilehome.css'
 
@@ -40,7 +41,7 @@ export async function shrinkImage(file, px = AVATAR_PX) {
   }
 }
 
-export default function ProfileHome({ identity, profile, account = null, onSave, onQuestions, onIntro, onBack, onAccount, onSignOut, onDeleteAccount, loadMembership = getMembership, syncConsent = false, onConsent, healthAvail = false, healthConsent = false, onHealthConsent }) {
+export default function ProfileHome({ identity, profile, account = null, onSave, onQuestions, onIntro, onBack, onAccount, onSignOut, onDeleteAccount, loadMembership = getMembership, syncConsent = false, onConsent, healthAvail = false, healthConsent = false, onHealthConsent, consents = null, onCoach, onCoachLife }) {
   const [id, setId] = useState(() => normalizeIdentity(identity ?? emptyIdentity()))
   const [correction, setCorrection] = useState(profile?.correction ?? null)
   const [err, setErr] = useState('')
@@ -51,9 +52,11 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
   const [member, setMember] = useState(null)
   const [askSync, setAskSync] = useState(false)
   const [askHealth, setAskHealth] = useState(false)
+  const [askCoachLife, setAskCoachLife] = useState(false)
   const syncing = inAcct && syncConsent
   const [prefs, setLocalPrefs] = useState(getPrefs)
   useEffect(() => subscribePrefs((p) => setLocalPrefs(p)), [])
+  const coach = coachAllowed(prefs, consents)
   useEffect(() => {
     let alive = true
     loadMembership?.()
@@ -66,7 +69,7 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
   const file = useRef(null)
   const validDate = !id.birthDate || validBirthDate(id.birthDate)
   const age = id.birthDate && validDate ? ageFromBirthDate(id.birthDate) : null
-  const minor = age != null && age < MIN_AGE
+  const minor = age != null && !isAdult(id.birthDate)
   const dateOk = validDate && !minor
   const dirty = JSON.stringify(normalizeIdentity(identity)) !== JSON.stringify(id) || correction !== (profile?.correction ?? null)
 
@@ -183,21 +186,21 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
           </div>
           <div className="list-row">
             <ShieldCheck size={20} aria-hidden="true" />
-            <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Nef göz koçu</span><span className="muted small">Özet sayılar şifreli bağlantıyla sunucuya gider</span></span>
-            {prefs.coach ? (
-              <button type="button" className="ph-st on as-btn" onClick={() => setPrefs({ coach: false, coachLife: false })} aria-label="Nef göz koçunu kapat">Açık · kapat</button>
+            <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Nef göz koçu</span><span className="muted small">{coach.on ? 'Son 7 günün özetleri · yurt dışındaki yapay zekâ modeline' : "Açmak için Bugün'deki Nef kartı ya da Bilgi"}</span></span>
+            {coach.on ? (
+              <button type="button" className="ph-st on as-btn" onClick={() => onCoach?.({ on: false })} aria-label="Nef göz koçunu kapat">Açık · kapat</button>
             ) : (
               <span className="ph-st">Kapalı</span>
             )}
           </div>
-          {prefs.coach && (
+          {coach.on && (
             <div className="list-row">
               <ShieldCheck size={20} aria-hidden="true" />
               <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Profil cevapları Nef'e</span><span className="muted small">Uyku, ekran süresi, gece telefonu, stres özeti</span></span>
-              {prefs.coachLife ? (
-                <button type="button" className="ph-st on as-btn" onClick={() => setPrefs({ coachLife: false })} aria-label="Profil cevaplarının Nef'e gitmesini kapat">Açık · kapat</button>
+              {coach.life ? (
+                <button type="button" className="ph-st on as-btn" onClick={() => onCoachLife?.(false)} aria-label="Profil cevaplarının Nef'e gitmesini kapat">Açık · kapat</button>
               ) : (
-                <span className="ph-st">Kapalı</span>
+                <button type="button" className="ph-st as-btn" onClick={() => setAskCoachLife(true)} aria-label="Profil cevaplarının Nef'e gitmesine izin ver">Kapalı · aç</button>
               )}
             </div>
           )}
@@ -232,6 +235,7 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
         </button>
       </div>
 
+      {askCoachLife && <ConsentSheet kind="coachLife" onAnswer={(g) => { setAskCoachLife(false); onCoachLife?.(g) }} />}
       {askHealth && <ConsentSheet kind="health" onAnswer={(g) => { setAskHealth(false); onHealthConsent?.(g) }} />}
       {askSync && <ConsentSheet kind="profileSync" onAnswer={(g) => { setAskSync(false); onConsent?.(g) }} />}
 

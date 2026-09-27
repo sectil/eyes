@@ -29,6 +29,40 @@ export const CONSENTS = {
     ],
     check: 'Hareket verilerimin (sağlık verisi) yukarıdaki amaçla, yalnızca bu telefonda işlenmesine açık rıza veriyorum.',
   },
+  // Nef göz koçu: iki ayrı amaç, iki ayrı kayıt (CoachConsent iki işaretsiz kutu; coachLife sonradan İzinlerim'den
+  // ConsentSheet ile). "Ne" listesi lib/coach.js buildSignals + modül coach() özetleriyle birebir tutulmalı.
+  // Görme ölçümü ve nefes öncesi/sonrası sakinlik farkı sağlığa ilişkin veri sayılır (KVKK md. 6).
+  // Sunucu (api/coach.js) içeriği kaydetmez; sağlayıcıların saklama süresi ve yurt dışı aktarım dayanağı hukukçuya
+  // doğrulatılacak (docs/yol-haritasi/YAPILACAKLAR.md).
+  coach: {
+    title: 'Nef sana her gün bir öneri yazsın mı?',
+    lead: "Karar senin. Kapalıyken Nef'e hiçbir veri gitmez; uygulamanın geri kalanı aynen çalışır.",
+    facts: [
+      ['Ne', 'Son 7 günün özetleri: çalışma günü, dakika ve seri; görme ölçümü ortancası, başlangıçtan farkı ve uyarı düzeyi; okuma hızı; oyun ve egzersiz puanları (nefes öncesi/sonrası sakinlik farkı dahil); günün saati. Kamera görüntüsü, adın, e-postan ya da cihaz kimliğin gitmez'],
+      ['Neden', "Nef'in sana günlük tek bir içgörü ve öneri yazması (tıbbi tavsiye değildir)"],
+      ['Nerede', 'Yurt dışında: sunucumuz (Vercel) ve OpenRouter üzerinden bir yapay zekâ modeli · şifreli bağlantı'],
+      ['Ne kadar', "Sunucumuz içeriği kaydetmez. Nef'i kapattığın an gönderim durur"],
+    ],
+    check: 'Bu özetlerin (görme ölçümü sağlığa ilişkin veridir) yukarıdaki amaçla yurt dışına aktarılmasına açık rıza veriyorum.',
+  },
+  coachLife: {
+    title: "Profil cevapların da Nef'e gitsin mi?",
+    lead: 'İsteğe bağlı. İzin vermesen de Nef çalışır; yalnızca öneriler uykunu ve ekran süreni hesaba katmaz.',
+    facts: [
+      ['Ne', 'Profil sorularına verdiğin cevapların özeti: uyku puanı, günlük ekran süresi, gece telefona bakma sıklığı, stres puanı'],
+      ['Neden', "Nef'in önerisini günlük hayatına göre yazması"],
+      ['Nerede', 'Yurt dışında: sunucumuz (Vercel) ve OpenRouter üzerinden bir yapay zekâ modeli · şifreli bağlantı'],
+      ['Ne kadar', 'Sunucumuz içeriği kaydetmez. İznini geri çektiğin an gönderim durur'],
+    ],
+    check: 'Profil cevaplarımın özetinin (uyku puanı, günlük ekran süresi, gece telefona bakma sıklığı, stres puanı; sağlığa ilişkin veri) de aynı amaçla yurt dışına aktarılmasına açık rıza veriyorum.',
+  },
+}
+
+// Nef ancak kayıtlı açık rızayla konuşur: tercih (prefs.coach) tek başına yetmez. Eski sürümler rıza
+// sormadan ya da iki amacı tek dokunuşla açabiliyordu; o kayıtlar burada "kapalı" sayılır.
+export function coachAllowed(prefs, consents) {
+  const on = Boolean(prefs?.coach) && hasConsent(consents, 'coach')
+  return { on, life: on && Boolean(prefs?.coachLife) && hasConsent(consents, 'coachLife') }
 }
 
 export function consentOf(consents, key) {

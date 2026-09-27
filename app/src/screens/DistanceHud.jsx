@@ -7,24 +7,27 @@ import { distanceStatus, REFERENCE_MM } from '../lib/distance.js'
 // TrueDepth (Face ID kamerası) ile canlı mesafe. Kalibrasyon yok: sensör gerçek
 // uzaklığı ölçer. Bu ekran yalnızca kullanıcıya 40 cm'nin nasıl bir mesafe olduğunu
 // gösterir; doğru mesafe 1,5 sn tutulunca devam edilir.
-// Kamera izni yoksa, sensör başlamazsa ya da NO_FACE_MS boyunca yüz görünmezse "Kamerasız devam et" çıkar
-// (önceden çıkış yoktu: izin reddedilince kurulum burada kilitleniyordu). VARSAYIM: 10 sn.
+// İlk kurulumda (onSkip): kamera izni yoksa, sensör başlamazsa ya da sensör hazır olduktan sonra NO_FACE_MS
+// içinde 40 cm tutulamazsa "Kamerasız devam et" çıkar (önceden çıkış yoktu: izin reddedilince kurulum burada
+// kilitleniyordu). VARSAYIM: 10 sn. Sayaç sensör hazır olunca başlar (iOS izin sorusu okunurken işlemez) ve
+// yüz arada bir görünse de sıfırlanmaz (kısa yüz yakalamaları çıkışı sonsuza dek ertelemesin).
+// Bilgi'den açılınca (onCancel) atlama yok, "Vazgeç" var: çalışan mesafe takibi yanlışlıkla kapanmasın.
 const HOLD_MS = 1500
 const NO_FACE_MS = 10000
 const MIN_MM = 200
 const MAX_MM = 700
 
-export default function DistanceHud({ step, total, onDone, onSkip = null }) {
+export default function DistanceHud({ step, total, onDone, onSkip = null, onCancel = null }) {
   const { mm, face, ready, error } = useFaceTracking({ enabled: true, trueDepth: true })
   const status = face ? distanceStatus(mm) : 'unknown'
   const [held, setHeld] = useState(0)
   const since = useRef(null)
   const [slow, setSlow] = useState(false)
   useEffect(() => {
-    if (face) return undefined
+    if (!ready) return undefined
     const t = setTimeout(() => setSlow(true), NO_FACE_MS)
     return () => clearTimeout(t)
-  }, [face])
+  }, [ready])
 
   useEffect(() => {
     if (status === 'ok') {
@@ -38,6 +41,7 @@ export default function DistanceHud({ step, total, onDone, onSkip = null }) {
   }, [status])
 
   const done = held >= 1
+  const canSkip = Boolean(onSkip) && (error || slow) && !done
   const cm = mm ? Math.round(mm / 10) : null
   // Gösterge: 20–70 cm aralığı 270° yaya eşlenir
   const frac = mm ? Math.max(0, Math.min(1, (mm - MIN_MM) / (MAX_MM - MIN_MM))) : 0
@@ -45,13 +49,16 @@ export default function DistanceHud({ step, total, onDone, onSkip = null }) {
   const R = 110
   const C = 2 * Math.PI * R
   const arc = 0.75 * C
-  const message = !ready
-    ? 'Sensör başlatılıyor…'
-    : error === 'permission'
+  // Hata önce: izin reddinde sensör hiç hazır olmaz (ready false kalır), "başlatılıyor" yazısı yanıltır
+  const message = error === 'permission'
+    ? onSkip
       ? "Kamera izni yok. Ayarlar → Nefona → Kamera'dan açabilir ya da kamerasız devam edebilirsin."
-      : error
+      : "Kamera izni yok. Ayarlar → Nefona → Kamera'dan açabilirsin."
+    : error
       ? 'Face ID kamerası başlatılamadı'
-      : !face
+      : !ready
+        ? 'Sensör başlatılıyor…'
+        : !face
         ? 'Yüzünü kameraya göster'
         : status === 'too-close'
           ? 'Biraz uzaklaştır'
@@ -110,12 +117,15 @@ export default function DistanceHud({ step, total, onDone, onSkip = null }) {
       <button className="btn" disabled={!done} onClick={() => onDone({ method: 'truedepth', date: new Date().toISOString() })}>
         Devam <ArrowRight size={18} aria-hidden="true" />
       </button>
-      {onSkip && (error || slow) && !done && (
+      {canSkip && (
         <button type="button" className="btn btn-ghost" onClick={onSkip}>Kamerasız devam et</button>
       )}
+      {onCancel && (
+        <button type="button" className="btn btn-ghost" onClick={onCancel}>Vazgeç</button>
+      )}
       <p className="muted small" style={{ textAlign: 'center' }}>
-        {onSkip && (error || slow) && !done
-          ? 'Kamerasız devam edersen test sonuçları daha az güvenilir olur; mesafeyi sonra Bilgi sekmesinden açabilirsin.'
+        {canSkip && (error || !face)
+          ? 'Kamerasız devam edersen test sonuçları daha az güvenilir olur; kamerayı sonra Bilgi → Mesafe takibini aç ile açabilirsin.'
           : 'Testlerde bu mesafe sürekli ölçülür; uzaklaşırsan harf boyutu otomatik düzeltilir.'}
       </p>
     </main>

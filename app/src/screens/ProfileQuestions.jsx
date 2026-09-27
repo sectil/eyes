@@ -36,7 +36,7 @@ export default function ProfileQuestions({ profile, trueDepth = false, onSave, o
           </button>
         ))}
       </div>
-      <p className="muted small">Cevaplar yalnızca bu telefonda kalır. Puan ya da tanı üretmez.</p>
+      <p className="muted small">Cevapların bu telefonda saklanır; Nef'e yalnızca izin verdiysen uyku, ekran süresi, gece telefonu ve stres özeti gider, eşitleme açıksa gözlük/lens bilgin hesabınla eşitlenir (Profilim → İzinlerim). Puan ya da tanı üretmez.</p>
     </main>
   )
 }

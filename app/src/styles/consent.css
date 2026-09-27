@@ -17,7 +17,7 @@
 .cs-ok.on { border-color: var(--accent); }
 .cs-ok input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .cs-ok input:focus-visible + .cs-box { outline: 2px solid var(--accent); outline-offset: 2px; }
-.cs-box { width: 24px; height: 24px; flex: none; margin-top: 1px; border-radius: 7px; border: 2px solid var(--ink-3); display: grid; place-items: center; color: #031018; }
+.cs-box { width: 24px; height: 24px; flex: none; margin-top: 1px; border-radius: 7px; border: 2px solid var(--ink-3); display: grid; place-items: center; color: var(--accent-ink); }
 .cs-ok.on .cs-box { background: var(--accent); border-color: var(--accent); }
 .cs-ok > span:last-child { font-weight: 500; font-size: 0.88rem; line-height: 1.4; }
 .cs-btns { display: grid; gap: 8px; }

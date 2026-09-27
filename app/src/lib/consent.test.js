@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { hasConsent, shouldAsk, recordConsent, consentOf, CONSENT_VERSION, CONSENTS } from './consent.js'
+import { hasConsent, shouldAsk, recordConsent, consentOf, coachAllowed, CONSENT_VERSION, CONSENTS } from './consent.js'
 
 describe('açık rıza kayıtları', () => {
   const now = new Date('2026-09-27T09:00:00Z')
@@ -32,5 +32,36 @@ describe('açık rıza kayıtları', () => {
     expect(CONSENTS.profileSync.facts.map((f) => f[0])).toEqual(['Ne', 'Neden', 'Nerede', 'Ne kadar'])
     expect(CONSENTS.profileSync.facts[2][1]).toMatch(/Almanya/)
     expect(CONSENTS.profileSync.check).toMatch(/yurt dışı/)
+  })
+})
+
+describe('Nef göz koçu: tercih + kayıtlı rıza', () => {
+  const now = new Date('2026-09-27T09:00:00Z')
+  const both = recordConsent(recordConsent(null, 'coach', true, now), 'coachLife', true, now)
+  it('eski sürümden kalan tercih (rıza kaydı yok) Nef\'i açmaz', () => {
+    expect(coachAllowed({ coach: true, coachLife: true }, null)).toEqual({ on: false, life: false })
+    expect(coachAllowed({ coach: true, coachLife: true }, {})).toEqual({ on: false, life: false })
+  })
+  it('iki amaç ayrı: temel rıza profil cevaplarını kapsamaz', () => {
+    const base = recordConsent(null, 'coach', true, now)
+    expect(coachAllowed({ coach: true, coachLife: true }, base)).toEqual({ on: true, life: false })
+    expect(coachAllowed({ coach: true, coachLife: false }, both)).toEqual({ on: true, life: false })
+    expect(coachAllowed({ coach: true, coachLife: true }, both)).toEqual({ on: true, life: true })
+  })
+  it('tercih kapalıysa ya da rıza geri çekildiyse gönderim yok', () => {
+    expect(coachAllowed({ coach: false, coachLife: true }, both)).toEqual({ on: false, life: false })
+    const off = recordConsent(both, 'coach', false, now)
+    expect(coachAllowed({ coach: true, coachLife: true }, off)).toEqual({ on: false, life: false })
+  })
+  it('metin: gönderilenleri sayar; sağlık verisi ve yurt dışı açıkça yazılı', () => {
+    for (const k of ['coach', 'coachLife']) {
+      expect(CONSENTS[k].facts.map((f) => f[0])).toEqual(['Ne', 'Neden', 'Nerede', 'Ne kadar'])
+      expect(CONSENTS[k].facts[2][1]).toMatch(/Yurt dışında/)
+      expect(CONSENTS[k].check).toMatch(/sağlığa ilişkin/)
+      expect(CONSENTS[k].check).toMatch(/yurt dışına/)
+    }
+    expect(CONSENTS.coach.facts[0][1]).toMatch(/görme ölçümü/)
+    expect(CONSENTS.coach.facts[0][1]).toMatch(/sakinlik farkı/)
+    expect(CONSENTS.coachLife.check).toMatch(/uyku.*ekran süresi.*gece.*stres/)
   })
 })
