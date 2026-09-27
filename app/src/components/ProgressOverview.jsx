@@ -13,7 +13,7 @@ import '../styles/progress2.css'
 // Veriler modüllerin progress tanımından gelir (modules/registry.js): yeni modül kendiliğinden görünür.
 
 const ORDER = ['eye', 'wellbeing', 'self', 'awareness', 'calm', 'focus', 'body']
-const SOURCES_OF = { eye: ['faes2021', 'joseph2023', 'katibeh2022', 'han2019'], wellbeing: ['topp2015', 'eser2019', 'zhang2025'], body: ['paluch2022', 'dunstan2012'] }
+const SOURCES_OF = { eye: ['faes2021', 'joseph2023', 'katibeh2022', 'han2019'], wellbeing: ['topp2015', 'eser2019', 'zhang2025'], body: ['paluch2022', 'paluch2022cvd', 'dunstan2012'] }
 
 const num = (v, d = 1) => (Number.isFinite(v) ? decimalTr(v, d) : '–')
 const signed = (v, d = 1) => (Number.isFinite(v) ? `${v > 0 ? '+' : v < 0 ? '−' : ''}${decimalTr(Math.abs(v), d)}` : '–')

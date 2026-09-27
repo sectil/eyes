@@ -142,6 +142,13 @@ export const SOURCES = {
     journal: 'Lancet Public Health', cite: '7(3):e219-e228', doi: '10.1016/S2468-2667(21)00302-9', pmid: '35247352',
     design: 'meta', n: '15 kohort, 47 471 yetişkin',
   },
+  paluch2022cvd: {
+    authors: ['Paluch AE', 'Bajpai S', 'Ballin M', 'Bassett DR'], year: 2022,
+    title: 'Prospective Association of Daily Steps With Cardiovascular Disease: A Harmonized Meta-Analysis.',
+    titleTr: 'Günlük adım sayısı ile kalp-damar hastalığı arasındaki ileriye dönük ilişki: uyumlaştırılmış meta-analiz.',
+    journal: 'Circulation', cite: '147(2):122-131', doi: '10.1161/CIRCULATIONAHA.122.061288', pmid: '36537288',
+    design: 'meta', n: '8 kohort, 20 152 yetişkin (ilişki yalnız 60 yaş üstünde anlamlı)',
+  },
   dunstan2012: {
     authors: ['Dunstan DW', 'Kingwell BA', 'Larsen R', 'Healy GN'], year: 2012,
     title: 'Breaking up prolonged sitting reduces postprandial glucose and insulin responses.',
