@@ -62,20 +62,33 @@ fi
 
 step "5/5 Telefona kurulum"
 xcrun devicectl list devices --json-output "$DD/devices.json" >/dev/null 2>&1 || true
-# VARSAYIM: devicectl JSON'u result.devices[] { identifier, deviceProperties.name, hardwareProperties.platform,
-# connectionProperties.{tunnelState,transportType} }. Bulunamazsa liste yazdırılır, elle seçilir.
-DEV="$(node -e '
+# VARSAYIM: devicectl JSON'u result.devices[] { identifier, deviceProperties.name, hardwareProperties.{platform,deviceType},
+# connectionProperties.{tunnelState,transportType}, capabilities[].featureIdentifier }. Bulunamazsa liste yazdırılır.
+# Seçim: DEVICE="iPhone adı ya da kimliği" verilirse o; yoksa uygulama kurabilen cihazlar arasında önce iPhone
+# (yanında bağlı iPad varken iPad seçilip "Install Application is not supported" hatası alınmıştı), sonra bağlı olan.
+DEV="$(DEVICE="${DEVICE:-}" node -e '
   const fs = require("fs")
   try {
-    const d = JSON.parse(fs.readFileSync(process.argv[1], "utf8")).result.devices
+    const all = JSON.parse(fs.readFileSync(process.argv[1], "utf8")).result.devices
       .filter((x) => x.hardwareProperties?.platform === "iOS")
-    const pick = d.find((x) => x.connectionProperties?.tunnelState === "connected")
-      ?? d.find((x) => x.connectionProperties?.transportType === "wired") ?? d[0]
+    const want = process.env.DEVICE
+    if (want) {
+      const m = all.find((x) => x.identifier === want || x.deviceProperties?.name === want)
+      if (m) { console.error("Cihaz (seçilen): " + (m.deviceProperties?.name ?? m.identifier)); console.log(m.identifier) }
+      else console.error("DEVICE=" + want + " bulunamadı.")
+      process.exit(0)
+    }
+    const canInstall = (x) => !Array.isArray(x.capabilities) || x.capabilities.some((c) => c.featureIdentifier === "com.apple.coredevice.feature.installapp")
+    const isPhone = (x) => x.hardwareProperties?.deviceType === "iPhone" || /iphone/i.test(x.deviceProperties?.name ?? "")
+    const ok = all.filter(canInstall)
+    const rank = (x) => (isPhone(x) ? 0 : 4) + (x.connectionProperties?.tunnelState === "connected" ? 0 : 2) + (x.connectionProperties?.transportType === "wired" ? 0 : 1)
+    const pick = ok.sort((a, b) => rank(a) - rank(b))[0]
     if (pick) { console.error("Cihaz: " + (pick.deviceProperties?.name ?? pick.identifier)); console.log(pick.identifier) }
   } catch {}
 ' "$DD/devices.json")"
 if [ -z "$DEV" ]; then
-  echo "Bağlı iPhone bulunamadı. Kablo, kilit, 'Güven' ve Geliştirici Modu'nu kontrol et. Görünen cihazlar:"
+  echo "Uygulama kurabilen bir iPhone bulunamadı. Kablo, kilit, 'Güven' ve Geliştirici Modu'nu kontrol et."
+  echo "Elle seçmek için: DEVICE=\"iPhone adın\" bash app/scripts/device-run.sh   Görünen cihazlar:"
   xcrun devicectl list devices || true
   exit 1
 fi
