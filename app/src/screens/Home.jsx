@@ -163,7 +163,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           <div className="hh-facts">
             <div className="hh-fact"><Flame size={14} aria-hidden="true" className="f1" /><b>{streak}</b>gün seri</div>
             <div className="hh-fact">
-              <CalendarDays size={14} aria-hidden="true" className="f2" /><b>{week.met ? week.done : `${week.done}/${week.target}`}</b>{week.met ? 'gün bu hafta' : 'hafta'}
+              <CalendarDays size={14} aria-hidden="true" className="f2" /><b>{week.met ? `${week.done}✓` : `${week.done}/${week.target}`}</b>hafta
               <span className="hh-wk" aria-hidden="true">{weekDots.map((c, i) => <i key={i} className={c} />)}</span>
             </div>
             <div className="hh-fact"><CircleDot size={14} aria-hidden="true" className="f3" /><b>{totalDays}</b>gün seninle</div>
