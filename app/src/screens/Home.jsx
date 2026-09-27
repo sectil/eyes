@@ -1,5 +1,5 @@
 import { pickSeries, EYE_LABEL } from '../lib/vaSeries.js'
-import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame, Lock, Eye, CalendarDays, CircleDot, Moon, Waves } from 'lucide-react'
+import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame, Lock, Eye, CalendarDays, CircleDot, Moon, Waves, Footprints } from 'lucide-react'
 import { pendingCard, snooze, skip } from '../lib/profileQuestions.js'
 import { profileFromScreening } from '../lib/profile.js'
 import { DAILY_GOAL_MIN, formatMin, todaySeconds } from '../lib/routines.js'
@@ -19,6 +19,7 @@ import TodayPath from '../components/TodayPath.jsx'
 import DayDial from '../components/DayDial.jsx'
 import { Avatar } from './ProfileHome.jsx'
 import { homeSuggestion } from '../lib/homeSuggest.js'
+import { walkNudge, fmtSteps } from '../lib/health.js'
 import ConsentSheet from '../components/ConsentSheet.jsx'
 import { registry } from '../modules/registry.js'
 import { viewFor } from '../modules/views.js'
@@ -89,7 +90,7 @@ function ModuleRows({ section, ctx, onStart }) {
   )
 }
 
-export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, onStart, onAsk, onSaveProfile }) {
+export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, onStart, onAsk, onSaveProfile }) {
   const now = new Date()
   // Oyun oturumları (type 'game') egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
   const exercise = sessions.filter((s) => s.type !== 'game')
@@ -117,7 +118,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   const totalDays = activeDays([...tests, ...sessions]).size
   const weekActive = activeDays([...tests, ...exercise])
   const weekDots = weekDayKeys(now).map((k, i) => (weekActive.has(k) ? 'd' : i === mondayIndex(now) ? 't' : ''))
-  const sug = homeSuggestion({ plan, eye: eyeBudget })
+  const sug = homeSuggestion({ plan, eye: eyeBudget, walk: walkNudge({ recentSteps: health?.recentSteps, hasData: health?.hasData, hour: now.getHours() }) })
   // Oyunla aynı kural (SnakeGame loadSnakeOpts): TrueDepth varsa ve kayıtlı seçim 'touch'
   // değilse gözle açılır. VARSAYIM: trueDepth prop'u verilmemişse mesafe yöntemine göre tahmin edilir.
   const hasTrueDepth = trueDepth ?? settings.distance?.method === 'truedepth'
@@ -132,6 +133,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
     <>
       {/* Hesabı olan ve profil eşitlemeye henüz cevap vermemiş kişiye bir kez (KVKK açık rıza) */}
       {askConsent && onConsent && <ConsentSheet kind="profileSync" onAnswer={onConsent} />}
+      {!askConsent && askHealth && onHealthConsent && <ConsentSheet kind="health" onAnswer={onHealthConsent} />}
       <header className="home-head">
         <div>
           <span className="eyebrow">{now.toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
@@ -166,6 +168,12 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
               <CalendarDays size={14} aria-hidden="true" className="f2" /><b>{week.met ? `${week.done}✓` : `${week.done}/${week.target}`}</b>hafta
               <span className="hh-wk" aria-hidden="true">{weekDots.map((c, i) => <i key={i} className={c} />)}</span>
             </div>
+            {health && (
+              <div className="hh-fact">
+                <Footprints size={14} aria-hidden="true" className="f4" />
+                {health.hasData ? <><b>{fmtSteps(health.today?.steps)}</b>adım bugün</> : <><b>—</b>adım · veri yok</>}
+              </div>
+            )}
             <div className="hh-fact"><CircleDot size={14} aria-hidden="true" className="f3" /><b>{totalDays}</b>gün seninle</div>
           </div>
         </div>

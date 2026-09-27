@@ -168,6 +168,7 @@
 .hh-fact .f1 { color: var(--lens-text); }
 .hh-fact .f2 { color: var(--iris-1); }
 .hh-fact .f3 { color: var(--iris-2); }
+.hh-fact .f4 { color: var(--ok); }
 .hh-wk { display: inline-flex; gap: 3px; margin-left: auto; flex: none; }
 .hh-wk i { width: 6px; height: 6px; border-radius: 2px; background: var(--surface-3); }
 .hh-wk i.d { background: var(--iris-1); }

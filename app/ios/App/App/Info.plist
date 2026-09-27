@@ -6,6 +6,8 @@
 	<string>$(CAPACITOR_DEBUG)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>tr</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Nefona, günlük adımını, yürüme mesafeni ve egzersiz dakikanı göz çalışmalarınla yan yana göstermek için Apple Sağlık'tan yalnızca okur. Veriler telefonundan çıkmaz.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Ön kamera, testlerde telefonun gözünden 40 cm uzakta olduğunu doğrulamak ve göz kırpma egzersizinde kapanmaları saymak için kullanılır. Görüntüler cihazdan çıkmaz ve kaydedilmez.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>

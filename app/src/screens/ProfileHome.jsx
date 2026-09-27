@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Camera, Check, ChevronRight, Film, ListChecks, LogOut, Trash2, UserRound, ShieldCheck } from 'lucide-react'
+import { Camera, Check, ChevronRight, Film, ListChecks, LogOut, Trash2, UserRound, ShieldCheck, Footprints } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
 import { emptyIdentity, normalizeIdentity, validBirthDate, ageFromBirthDate, initialFor, AVATAR_HUES, AVATAR_PX, NAME_MAX } from '../lib/identity.js'
 import { CORRECTION } from '../lib/profile.js'
@@ -40,7 +40,7 @@ export async function shrinkImage(file, px = AVATAR_PX) {
   }
 }
 
-export default function ProfileHome({ identity, profile, account = null, onSave, onQuestions, onIntro, onBack, onAccount, onSignOut, onDeleteAccount, loadMembership = getMembership, syncConsent = false, onConsent }) {
+export default function ProfileHome({ identity, profile, account = null, onSave, onQuestions, onIntro, onBack, onAccount, onSignOut, onDeleteAccount, loadMembership = getMembership, syncConsent = false, onConsent, healthAvail = false, healthConsent = false, onHealthConsent }) {
   const [id, setId] = useState(() => normalizeIdentity(identity ?? emptyIdentity()))
   const [correction, setCorrection] = useState(profile?.correction ?? null)
   const [err, setErr] = useState('')
@@ -50,6 +50,7 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
   const inAcct = signedIn(account)
   const [member, setMember] = useState(null)
   const [askSync, setAskSync] = useState(false)
+  const [askHealth, setAskHealth] = useState(false)
   const syncing = inAcct && syncConsent
   const [prefs, setLocalPrefs] = useState(getPrefs)
   useEffect(() => subscribePrefs((p) => setLocalPrefs(p)), [])
@@ -197,6 +198,17 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
               )}
             </div>
           )}
+          {healthAvail && (
+            <div className="list-row">
+              <Footprints size={20} aria-hidden="true" />
+              <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Apple Sağlık · hareket</span><span className="muted small">{healthConsent ? 'Adım, mesafe, egzersiz · yalnız bu telefonda' : 'Adımların göz çalışmalarınla yan yana'}</span></span>
+              {healthConsent ? (
+                <button type="button" className="ph-st on as-btn" onClick={() => onHealthConsent?.(false)} aria-label="Apple Sağlık iznini geri çek">Açık · kapat</button>
+              ) : (
+                <button type="button" className="ph-st as-btn" onClick={() => setAskHealth(true)} aria-label="Apple Sağlık iznini ver">Kapalı · aç</button>
+              )}
+            </div>
+          )}
           <div className="list-row">
             <Camera size={20} aria-hidden="true" />
             <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Kamera ve fotoğraf</span><span className="muted small">Görüntü telefondan hiç çıkmaz</span></span>
@@ -217,6 +229,7 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
         </button>
       </div>
 
+      {askHealth && <ConsentSheet kind="health" onAnswer={(g) => { setAskHealth(false); onHealthConsent?.(g) }} />}
       {askSync && <ConsentSheet kind="profileSync" onAnswer={(g) => { setAskSync(false); onConsent?.(g) }} />}
 
       {sheet && (

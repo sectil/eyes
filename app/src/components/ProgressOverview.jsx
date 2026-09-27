@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { fmtSteps } from '../lib/health.js'
 import { ChevronRight, TriangleAlert, OctagonAlert, ArrowLeft } from 'lucide-react'
 import { domainSummary, DOMAIN_LABEL } from '../lib/progress.js'
 import { decimalTr } from '../lib/stats.js'
@@ -12,7 +13,7 @@ import '../styles/progress2.css'
 // Veriler modüllerin progress tanımından gelir (modules/registry.js): yeni modül kendiliğinden görünür.
 
 const ORDER = ['eye', 'wellbeing', 'self', 'awareness', 'calm', 'focus', 'body']
-const SOURCES_OF = { eye: ['faes2021', 'joseph2023', 'katibeh2022', 'han2019'], wellbeing: ['topp2015', 'eser2019', 'zhang2025'], body: ['paluch2022'] }
+const SOURCES_OF = { eye: ['faes2021', 'joseph2023', 'katibeh2022', 'han2019'], wellbeing: ['topp2015', 'eser2019', 'zhang2025'], body: ['paluch2022', 'dunstan2012'] }
 
 const num = (v, d = 1) => (Number.isFinite(v) ? decimalTr(v, d) : '–')
 const signed = (v, d = 1) => (Number.isFinite(v) ? `${v > 0 ? '+' : v < 0 ? '−' : ''}${decimalTr(Math.abs(v), d)}` : '–')
@@ -130,11 +131,13 @@ function tileOf(d) {
   return null
 }
 
-export default function ProgressOverview({ tests, sessions, identity = null, onOpen, reportDay = null, onReport }) {
+export default function ProgressOverview({ tests, sessions, identity = null, health = null, onOpen, reportDay = null, onReport }) {
   const now = new Date()
   const dom = useMemo(() => domainSummary({ tests, sessions, now }), [tests, sessions]) // eslint-disable-line react-hooks/exhaustive-deps
   const eye = dom.eye.eye
-  const tiles = ORDER.map((k) => ({ k, d: dom[k], t: tileOf(dom[k]) }))
+  // Beden: Apple Sağlık adımları (izin + veri varsa); yoksa boş sayılır
+  const bodyTile = health?.hasData ? { value: fmtSteps(health.today?.steps), unit: ' adım', sub: health.avgSteps ? `7 gün ort. ${fmtSteps(health.avgSteps)}` : 'bugün', status: null } : null
+  const tiles = ORDER.map((k) => ({ k, d: dom[k], t: k === 'body' ? bodyTile : tileOf(dom[k]) }))
   const withData = tiles.filter((x) => x.t)
   const empty = tiles.filter((x) => !x.t)
   return (
@@ -167,7 +170,7 @@ export default function ProgressOverview({ tests, sessions, identity = null, onO
       {empty.length > 0 && (
         <p className="p2-empty">
           Henüz verisi olmayan: {empty.map((x) => DOMAIN_LABEL[x.k]).join(', ')}.
-          {empty.some((x) => x.k === 'body') ? ' Beden verileri için Apple Sağlık bağlantısı yakında.' : ''}
+          {empty.some((x) => x.k === 'body') ? " Adımların için: Profilim → İzinlerim → Apple Sağlık." : ''}
         </p>
       )}
       <ExportCard tests={tests} sessions={sessions} identity={identity} />
@@ -176,7 +179,7 @@ export default function ProgressOverview({ tests, sessions, identity = null, onO
 }
 
 const LOGMAR = (v) => decimalTr(v, 2)
-export function DomainDetail({ domain, tests, sessions, identity = null, onBack }) {
+export function DomainDetail({ domain, tests, sessions, identity = null, health = null, onBack }) {
   const now = new Date()
   const d = useMemo(() => domainSummary({ tests, sessions, now })[domain], [tests, sessions, domain]) // eslint-disable-line react-hooks/exhaustive-deps
   const srcs = SOURCES_OF[domain] ?? []
@@ -257,8 +260,19 @@ export function DomainDetail({ domain, tests, sessions, identity = null, onBack 
 
       {domain === 'body' && (
         <section className="card p2-card">
-          <span className="eyebrow">Apple Sağlık</span>
-          <p className="p2-msg">Adım, egzersiz dakikası ve uyku süresi izninle Apple Sağlık'tan okunacak (sonraki güncelleme).</p>
+          <span className="eyebrow">Apple Sağlık · son 7 gün</span>
+          {health?.hasData ? (
+            <>
+              <p className="p2-msg">
+                Bugün <b>{fmtSteps(health.today?.steps)}</b> adım{health.today?.exerciseMin ? `, ${health.today.exerciseMin} dk egzersiz` : ''}
+                {health.avgSteps ? ` · önceki günlerin ortalaması ${fmtSteps(health.avgSteps)}` : ''}.
+              </p>
+              <Sparkline points={health.rows.map((r) => ({ date: r.date, value: r.steps }))} format={(v) => fmtSteps(v)} ariaLabel="Günlük adım, son 7 gün" />
+              <p className="muted small">Araştırmalarda günlük adım arttıkça risk azalıyor ve 60 yaş üstünde ~6–8 bin, altında ~8–10 bin adımda düzleşiyor (gözlemsel; neden-sonuç göstermez). Uzun oturmayı kısa yürüyüşle bölmek küçük bir deneyde yemek sonrası şekeri düşürdü.</p>
+            </>
+          ) : (
+            <p className="p2-msg">{health ? 'Apple Sağlık\'tan veri gelmedi. iPhone Ayarlar → Sağlık → Veri Erişimi → Nefona\'da okuma izinlerini aç.' : 'Adım, yürüme mesafesi ve egzersiz dakikası izninle Apple Sağlık\'tan okunur: Profilim → İzinlerim → Apple Sağlık.'}</p>
+          )}
         </section>
       )}
 

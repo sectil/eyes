@@ -36,7 +36,8 @@ import { RELEASES, unseenReleases, latestRelease } from './lib/releases.js'
 import ProfileSetup from './screens/ProfileSetup.jsx'
 import { signedIn, pullProfile, pushProfile, mergeProfile, signOut, deleteAccount, friendlyError } from './lib/account.js'
 import DistanceHud from './screens/DistanceHud.jsx'
-import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics, haptic, shareTextFile } from './lib/native.js'
+import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics, haptic, shareTextFile, healthAvailable, requestHealthAccess, readHealth } from './lib/native.js'
+import { summarizeHealth } from './lib/health.js'
 import { fileStamp } from './lib/exportData.js'
 import { resolveAutoCalibration, estimateCalibration } from './lib/screenScale.js'
 import { registry } from './modules/registry.js'
@@ -305,6 +306,32 @@ export default function App() {
   }, [])
 
   const { settings, tests, sessions } = data
+  // Apple Sağlık (yalnız okuma, telefonda kalır; lib/health.js). Yalnız açık rızayla okunur; öne gelince tazelenir.
+  const [healthAvail, setHealthAvail] = useState(false)
+  const [health, setHealth] = useState(null)
+  const [healthTick, setHealthTick] = useState(0) // iOS izin sayfası kapanınca yeniden oku
+  const healthOk = hasConsent(settings.consents, 'health')
+  useEffect(() => {
+    healthAvailable().then(setHealthAvail).catch(() => setHealthAvail(false))
+  }, [])
+  useEffect(() => {
+    if (!healthOk || !isIOSApp()) {
+      setHealth(null)
+      return undefined
+    }
+    let alive = true
+    const load = () =>
+      readHealth()
+        .then((h) => alive && h && setHealth({ ...summarizeHealth(h.days), recentSteps: h.recentSteps, at: h.at }))
+        .catch(() => alive && setHealth(null))
+    load()
+    const onVis = () => document.visibilityState === 'visible' && load()
+    document.addEventListener('visibilitychange', onVis)
+    return () => {
+      alive = false
+      document.removeEventListener('visibilitychange', onVis)
+    }
+  }, [healthOk, healthTick])
   // iPhone'da TrueDepth varsa mesafe her zaman sensörden gelir (eski kamera kalibrasyonu yok sayılır).
   const distanceCal = native.trueDepth
     ? { method: 'truedepth' }
@@ -343,6 +370,8 @@ export default function App() {
     const st = store.get().settings
     const had = hasConsent(st.consents, key)
     store.setSetting('consents', recordConsent(st.consents, key, granted))
+    // Apple Sağlık: bizim iznimizden sonra iOS'un kendi izin sayfası (geri çekmek iOS Ayarlar'dan; biz okumayı bırakırız)
+    if (key === 'health' && granted) requestHealthAccess().catch(() => {}).finally(() => setHealthTick((t) => t + 1))
     if (key === 'profileSync' && signedIn(st.account)) {
       if (granted) syncUp(st.identity, currentCorrection())
       else if (had) pushProfile(st.account.userId, emptyIdentity(), null).catch(() => {})
@@ -443,6 +472,9 @@ export default function App() {
         account={settings.account}
         syncConsent={hasConsent(settings.consents, 'profileSync')}
         onConsent={(g) => setConsent('profileSync', g)}
+        healthAvail={healthAvail}
+        healthConsent={healthOk}
+        onHealthConsent={(g) => setConsent('health', g)}
         onAccount={() => go('account')}
         onSignOut={async () => { try { await signOut() } catch { /* çevrimdışı: yerel oturum yine kapanır */ } toGuest() }}
         onDeleteAccount={async () => {
@@ -580,7 +612,7 @@ export default function App() {
   // --- Sekmeli ekranlar ---
   const tab = TAB_SCREENS.includes(screen) ? screen : 'home'
   let content
-  if (tab === 'progress') content = <Progress tests={tests} sessions={sessions} profile={settings.profile} identity={settings.identity} weeklyTarget={settings.reminder?.weeklyTarget} reportDay={rDay} onStart={go} />
+  if (tab === 'progress') content = <Progress tests={tests} sessions={sessions} profile={settings.profile} identity={settings.identity} health={health} weeklyTarget={settings.reminder?.weeklyTarget} reportDay={rDay} onStart={go} />
   else if (tab === 'calendar') content = <Calendar records={[...tests, ...exercise]} schedule={settings.reminder} onEditSchedule={() => go('schedule')} />
   else if (tab === 'info') {
     content = (
@@ -613,7 +645,7 @@ export default function App() {
       />
     )
   } else {
-    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={native.trueDepth} eyeBudget={budget} premium={access.loading || access.premium} member={Boolean(access.native && access.premium && !access.testUnlock)} askConsent={signedIn(settings.account) && shouldAsk(settings.consents, 'profileSync')} onConsent={(g) => setConsent('profileSync', g)} onStart={go} onAsk={(group) => { const ids = missing(settings.profile, GROUPS[group] ?? []); if (ids.length) setAskFor({ ids, then: 'home', back: 'home' }) }} onSaveProfile={saveProfile} />
+    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={native.trueDepth} eyeBudget={budget} premium={access.loading || access.premium} member={Boolean(access.native && access.premium && !access.testUnlock)} askConsent={signedIn(settings.account) && shouldAsk(settings.consents, 'profileSync')} onConsent={(g) => setConsent('profileSync', g)} health={health} askHealth={healthAvail && !(signedIn(settings.account) && shouldAsk(settings.consents, 'profileSync')) && shouldAsk(settings.consents, 'health')} onHealthConsent={(g) => setConsent('health', g)} onStart={go} onAsk={(group) => { const ids = missing(settings.profile, GROUPS[group] ?? []); if (ids.length) setAskFor({ ids, then: 'home', back: 'home' }) }} onSaveProfile={saveProfile} />
   }
 
   return (

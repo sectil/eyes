@@ -17,6 +17,18 @@ export const CONSENTS = {
     ],
     check: 'Bu bilgilerimin yukarıdaki amaçla işlenmesine, yurt dışındaki sunucuda saklanmasına açık rıza veriyorum.',
   },
+  // Apple Sağlık: hareket verisi sağlık verisidir (KVKK md. 6, özel nitelikli) → ayrı açık rıza.
+  health: {
+    title: 'Hareketini de görelim mi?',
+    lead: 'İstersen adımlarını göz çalışmalarınla yan yana gösteririz. İzin vermesen de her şey açık kalır.',
+    facts: [
+      ['Ne', "Adım, yürüme mesafesi, egzersiz dakikası (Apple Sağlık'tan, yalnızca okuma)"],
+      ['Neden', 'Hareketini göz çalışmalarınla yan yana göstermek; uzun süre kalkmadığında "2 dk yürü" hatırlatması'],
+      ['Nerede', "Yalnızca bu telefonda. Sunucuya ve Nef'e gitmez"],
+      ['Ne kadar', 'İznini geri çekene kadar; geri çekince Nefona bu verileri okumaz'],
+    ],
+    check: 'Hareket verilerimin (sağlık verisi) yukarıdaki amaçla, yalnızca bu telefonda işlenmesine açık rıza veriyorum.',
+  },
 }
 
 export function consentOf(consents, key) {

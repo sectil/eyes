@@ -1,7 +1,7 @@
 // Ana sayfa önerisi (tasarım: Artifact "Nefona Bugün ve Profil"): tek büyük düğme + sakin seçenekler.
 // Kural yalnız kayıtlı veriden; sağlık iddiası yok.
 //  1. Göz molası kilidi ya da molası gelmişse → Nefes (5 dk)
-//  2. Bugünün yolu yarımsa → sıradaki durak (yol sıralı; canOpen ile aynı durak)
+//  2. Bugünün yolu yarımsa → sıradaki durak (yol sıralı; canOpen ile aynı durak); uzun süre kalkmadıysa önce 2 dk yürü
 //  3. Yol bittiyse ya da bugün yol yoksa → Dalga
 // Sakin seçenekler: Nefes ve Dalga'dan birincil olmayanlar (ikisi de göz bütçesine bağlı değil).
 const CALM = {
@@ -9,7 +9,7 @@ const CALM = {
   dalga: { kind: 'dalga', title: 'Dalga', sub: 'sakinleş', route: 'dalga' },
 }
 
-export function homeSuggestion({ plan = null, eye = null } = {}) {
+export function homeSuggestion({ plan = null, eye = null, walk = false } = {}) {
   let primary
   if (eye?.locked || eye?.due) {
     primary = { kind: 'breath', eyebrow: 'Göz molası', title: 'Nefes · 5 dk', line: 'Gözlerin mola istiyor.', sub: 'Ekrandan uzak, yavaş nefes', route: 'breath-rest' }
@@ -21,8 +21,9 @@ export function homeSuggestion({ plan = null, eye = null } = {}) {
       kind: 'path',
       eyebrow: started ? 'Yola devam et' : 'Güne başla',
       title: [s.title, min].filter(Boolean).join(' · '),
-      line: started ? `Kaldığın yerden devam: ${s.title}.` : `Güne ${s.title} ile başla.`,
-      sub: s.sub || (min ? `${min}` : ''),
+      // walk: Apple Sağlık'a göre son 1 saatte neredeyse hiç yürümedi (lib/health.js walkNudge; Dunstan 2012)
+      line: walk ? `Önce kalk, 2 dakika yürü; sonra ${s.title}.` : started ? `Kaldığın yerden devam: ${s.title}.` : `Güne ${s.title} ile başla.`,
+      sub: walk ? 'Son 1 saatte çok az adım var' : s.sub || (min ? `${min}` : ''),
       route: s.route,
     }
   } else {

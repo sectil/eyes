@@ -26,3 +26,15 @@ describe('homeSuggestion', () => {
     expect(homeSuggestion({ plan: null }).alts.map((a) => a.kind)).toEqual(['breath'])
   })
 })
+
+describe('homeSuggestion: yürüyüş molası', () => {
+  it('son 1 saatte az adım → Nef önce 2 dk yürümeyi söyler, düğme yine sıradaki durak', () => {
+    const s = homeSuggestion({ plan: { next: stop(), doneCount: 1, allDone: false }, walk: true })
+    expect(s.primary.kind).toBe('path')
+    expect(s.primary.line).toBe('Önce kalk, 2 dakika yürü; sonra Isınma.')
+    expect(s.primary.sub).toBe('Son 1 saatte çok az adım var')
+  })
+  it('mola kilidinde Nefes önceliği değişmez', () => {
+    expect(homeSuggestion({ plan: { next: stop(), doneCount: 1 }, eye: { locked: true }, walk: true }).primary.kind).toBe('breath')
+  })
+})

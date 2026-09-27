@@ -282,3 +282,31 @@ export async function sharePdf(filename, html, footer) {
   setTimeout(() => w.print(), 400)
   return { completed: true, activity: 'print' }
 }
+
+// Health: ios/App/App/HealthPlugin.swift — Apple Sağlık, YALNIZ OKUMA (adım, yürüme mesafesi, egzersiz dakikası).
+// Web'de yok (null döner). iOS okuma izninin verilip verilmediğini söylemez: izin yoksa değerler 0 gelir.
+// DİKKAT (Bug 15): eklenti nesnesi async fonksiyondan döndürülmez; yalnız sonuç nesneleri döner.
+export const Health = registerPlugin('Health')
+
+export async function healthAvailable() {
+  if (!isIOSApp()) return false
+  try {
+    const r = await Health.isAvailable()
+    return Boolean(r?.available)
+  } catch {
+    return false
+  }
+}
+
+export async function requestHealthAccess() {
+  if (!isIOSApp()) return false
+  const r = await Health.requestAuthorization()
+  return Boolean(r?.requested)
+}
+
+// { days: [{ date, steps, distanceM, exerciseMin }], recentSteps, at } ya da null (web / hata)
+export async function readHealth({ days = 7, recentMinutes = 60 } = {}) {
+  if (!isIOSApp()) return null
+  const [d, r] = await Promise.all([Health.dailyTotals({ days }), Health.recentSteps({ minutes: recentMinutes })])
+  return { days: d?.days ?? [], recentSteps: r?.steps ?? null, at: new Date().toISOString() }
+}

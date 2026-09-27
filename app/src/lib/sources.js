@@ -142,6 +142,13 @@ export const SOURCES = {
     journal: 'Lancet Public Health', cite: '7(3):e219-e228', doi: '10.1016/S2468-2667(21)00302-9', pmid: '35247352',
     design: 'meta', n: '15 kohort, 47 471 yetişkin',
   },
+  dunstan2012: {
+    authors: ['Dunstan DW', 'Kingwell BA', 'Larsen R', 'Healy GN'], year: 2012,
+    title: 'Breaking up prolonged sitting reduces postprandial glucose and insulin responses.',
+    titleTr: 'Uzun oturmayı bölmek yemek sonrası şeker ve insülin yanıtını düşürüyor.',
+    journal: 'Diabetes Care', cite: '35(5):976-83', doi: '10.2337/dc11-1931', pmid: '22374636',
+    design: 'crossover', n: '19 yetişkin (45–65 yaş, fazla kilolu)',
+  },
   zhang2025: {
     authors: ['Zhang H', 'Wang S', 'Huang Y', 'Xiu L'], year: 2025,
     title: 'Inverted-U association between daily steps and WHO-5 in university students: non-linear modeling and robustness checks.',
