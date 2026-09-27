@@ -7,6 +7,7 @@ export const RELEASES = [
     id: '2026-09-27',
     title: '27 Eylül güncellemesi',
     items: [
+      { kind: 'change', text: 'Yeni giriş ekranı: film kalktı. Gece göğünde Pegasus, altın odakta tek yıldız ve ufuktan doğan göz; Başla göz bebeğinde. Hareket yok, beklemeden başlarsın.' },
       { kind: 'new', text: 'Hatırlatmalar (Bilgi → Hatırlatmalar): mola, yürüyüş, nefes ve su. Hangilerinin geleceğini ve saatini sen seçersin; her türden günde en çok bir hatırlatma. Ana sayfada bir kez sorarız, cevap vermeden hiçbiri kurulmaz.' },
       { kind: 'new', text: '1 dakikalık mola: kalk, uzağa yürü, 20 saniye uzağa bak, yavaşça göz kırp. Atlayabilirsin; kayıt Nef\'e ve seriye girmez.' },
       { kind: 'new', text: 'Çalışma oturumu: 1, 2 ya da 4 saat seç; saatte bir mola hatırlatması gelir. Ana sayfadaki şeritten bitirebilirsin.' },

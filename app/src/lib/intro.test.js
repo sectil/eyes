@@ -1,30 +1,28 @@
 import { describe, it, expect } from 'vitest'
-import { shouldPlayIntro, captionAt, INTRO_SCRIPT, INTRO_MS, INTRO_END_MS } from './intro.js'
-import { NOTICE, FILM_SEC } from './introScene.js'
+import { shouldPlayIntro, INTRO_VERSION } from './intro.js'
+import { PEGASUS, PEGASUS_LINES, pegasusXY, PUPIL_Y } from './introStill.js'
 
-describe('giriş filmi', () => {
-  it('ilk açılışta oynar, izlendiyse veya hareket azaltma açıksa oynamaz', () => {
+describe('giriş ekranı', () => {
+  it('ilk açılışta bir kez; eski sürümü görene yeni ekran bir kez', () => {
     expect(shouldPlayIntro({})).toBe(true)
-    expect(shouldPlayIntro({ intro: { seen: true, version: 2 } })).toBe(false)
-    // eski sürümün filmini izleyen (version yok) yeni filmi bir kez görür (Bug 11)
-    expect(shouldPlayIntro({ intro: { seen: true } })).toBe(true)
-    expect(shouldPlayIntro({ intro: { seen: true } }, true)).toBe(false)
-    expect(shouldPlayIntro({}, true)).toBe(false)
+    expect(shouldPlayIntro({ intro: { seen: true, version: INTRO_VERSION } })).toBe(false)
+    expect(shouldPlayIntro({ intro: { seen: true, version: 2 } })).toBe(true) // eski filmi izleyen
+    expect(shouldPlayIntro({ intro: { seen: true } })).toBe(true) // version yok → 1
   })
-  it('yazılar sırayla, sonuncusu boş; film süresi içinde', () => {
-    expect(captionAt(0)).toBe('')
-    expect(captionAt(500)).toBe('Bak.')
-    expect(captionAt(5000)).toBe('Fark et.')
-    expect(captionAt(14700)).toBe('')
-    const ats = INTRO_SCRIPT.map((s) => s[0])
-    expect([...ats].sort((a, b) => a - b)).toEqual(ats)
-    expect(ats.at(-1)).toBeLessThan(INTRO_END_MS)
-    expect(INTRO_END_MS).toBeLessThanOrEqual(INTRO_MS)
+  it('Pegasus: her çizgi iki geçerli yıldızı bağlar; izdüşüm merkezde ve en uzun kenar 1', () => {
+    for (const [a, b] of PEGASUS_LINES) {
+      expect(PEGASUS[a]).toBeTruthy()
+      expect(PEGASUS[b]).toBeTruthy()
+      expect(a).not.toBe(b)
+    }
+    const xy = pegasusXY()
+    const xs = xy.map((p) => p[0])
+    const ys = xy.map((p) => p[1])
+    expect(Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys))).toBeCloseTo(1, 6)
+    expect(Math.min(...xs) + Math.max(...xs)).toBeCloseTo(0, 6)
+    expect(Math.min(...ys) + Math.max(...ys)).toBeCloseTo(0, 6)
   })
-  it('fark etme anları kendi yazısının içinde (kedi "Fark et.", lastik "Yine.", çiçek "Bir daha.")', () => {
-    expect(captionAt(NOTICE.cat * 1000)).toBe('Fark et.')
-    expect(captionAt(NOTICE.tire * 1000)).toBe('Yine.')
-    expect(captionAt(NOTICE.flower * 1000)).toBe('Bir daha.')
-    expect(FILM_SEC * 1000).toBe(INTRO_MS)
+  it('"Başla" göz bebeği merkezinde: CSS top ile aynı oran', () => {
+    expect(PUPIL_Y).toBe(0.902)
   })
 })

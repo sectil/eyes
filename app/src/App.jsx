@@ -112,13 +112,6 @@ function useEyeClock(kind) {
   }, [kind])
 }
 
-function prefersReducedMotion() {
-  try {
-    return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
-  } catch {
-    return false
-  }
-}
 
 export default function App() {
   const [data, setData] = useState(store.get())
@@ -532,11 +525,11 @@ export default function App() {
     store.setSetting('screening', screeningFromProfile(p))
     refresh()
   }
-  // Giriş filmi (components/IntroFilm.jsx): ilk açılışta bir kez, profil sorularından önce; Profilim'den yeniden izlenir.
+  // Giriş ekranı (components/IntroFilm.jsx, hareketsiz): ilk açılışta bir kez, profil sorularından önce; Profilim'den yeniden görülür.
   // İlk kurulumda sürüm notu gösterilmez (her şey zaten yeni): en son sürüm görülmüş sayılır
   const markIntro = () => { store.setSetting('intro', { seen: true, version: INTRO_VERSION, date: new Date().toISOString() }); if (!settings.releaseSeen) store.setSetting('releaseSeen', latestRelease()?.id ?? null); refresh() }
   if (screen === 'intro') return <IntroFilm replay onDone={() => go(lastTab)} />
-  if (shouldPlayIntro(settings, prefersReducedMotion())) return <IntroFilm onDone={markIntro} />
+  if (shouldPlayIntro(settings)) return <IntroFilm onDone={markIntro} />
 
   // --- Hesap → Seni tanıyalım → 7 gün ücretsiz (Build 23b; Artifact "Hesap ve Profil Taslağı") ---
   // Hesap açıldıysa ad, doğum tarihi, şehir, gözlük Supabase'e eşitlenir (lib/account.js); ağ yoksa telefonda kalır.

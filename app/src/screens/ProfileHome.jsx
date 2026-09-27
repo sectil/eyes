@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Camera, Check, ChevronRight, Film, ListChecks, LogOut, Trash2, UserRound, ShieldCheck, Footprints } from 'lucide-react'
+import { Camera, Check, ChevronRight, Eye, ListChecks, LogOut, Trash2, UserRound, ShieldCheck, Footprints } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
 import { emptyIdentity, normalizeIdentity, validBirthDate, ageFromBirthDate, isAdult, initialFor, AVATAR_HUES, AVATAR_PX, NAME_MAX } from '../lib/identity.js'
 import { CORRECTION } from '../lib/profile.js'
@@ -229,8 +229,8 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
           <ChevronRight size={18} className="muted" />
         </button>
         <button className="list-row" onClick={onIntro}>
-          <Film size={20} aria-hidden="true" />
-          <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Giriş filmini izle</span><span className="muted small">15 saniye</span></span>
+          <Eye size={20} aria-hidden="true" />
+          <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Giriş ekranı</span><span className="muted small">Açılıştaki ilk ekranı yeniden gör</span></span>
           <ChevronRight size={18} className="muted" />
         </button>
       </div>

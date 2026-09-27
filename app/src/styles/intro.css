@@ -1,28 +1,18 @@
-/* Giriş filmi (components/IntroFilm.jsx) — tam ekran tuval, her temada gece. Son halka tuvalde çizilir (lib/introScene.js finalCircle). */
+/* Giriş ekranı (components/IntroFilm.jsx) — hareketsiz tam ekran tuval, her temada gece (lib/introStill.js).
+   "Başla" göz bebeğinin merkezine ortalanır: top = PUPIL_Y (0.902) ekran yüksekliği. */
 .intro {
-  position: fixed; inset: 0; z-index: 40; display: flex; flex-direction: column; align-items: center;
-  background: #060a12; color: #eef3f6; color-scheme: dark; overflow: hidden;
-  padding: calc(env(safe-area-inset-top) + 16px) 22px calc(env(safe-area-inset-bottom) + 28px);
-  container-type: inline-size;
+  position: fixed; inset: 0; z-index: 40; background: #02050a; color: #eaf2f6; color-scheme: dark; overflow: hidden;
 }
 .intro-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.intro-skip {
-  position: absolute; right: 18px; top: calc(env(safe-area-inset-top) + 14px); z-index: 2;
-  font: 600 0.85rem var(--font-body, inherit); color: #aab6c1; background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 999px; padding: 8px 14px; min-height: 40px; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+.intro .intro-start {
+  position: absolute; left: 50%; top: 90.2%; transform: translate(-50%, -50%); z-index: 1;
+  width: min(50%, 240px); min-height: 48px; height: min(6.2%, 56px); padding: 0; border-radius: 999px;
+  /* sahne her temada gece: düğme de temadan bağımsız (onaylı tasarım) */
+  background: linear-gradient(90deg, #19c2d1, #3e7bfa); color: #041017; font-size: 1.06rem; font-weight: 600;
+  box-shadow: 0 0 30px rgba(25, 194, 209, 0.45);
 }
-.intro-cap {
-  position: absolute; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom) + 17%); z-index: 1; margin: 0;
-  text-align: center; font-family: var(--font-display); font-weight: 500; font-size: clamp(1.1rem, 5.6cqw, 1.55rem); letter-spacing: 0.08em;
-  color: #f4f8fb; text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6), 0 0 18px rgba(120, 210, 235, 0.25); pointer-events: none;
-  transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.5s ease;
+.intro .intro-start:active { transform: translate(-50%, -50%) scale(0.98); }
+.intro .intro-start:focus-visible { outline: 2px solid #eaf2f6; outline-offset: 3px; }
+.intro .sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
-.intro-cap.off { opacity: 0; transform: translateY(8px); filter: blur(6px); }
-.intro-final {
-  position: relative; z-index: 1; margin-top: auto; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px;
-  opacity: 0; transform: translateY(14px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); pointer-events: none;
-}
-.intro-final.on { opacity: 1; transform: none; pointer-events: auto; }
-.intro-logo { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.7rem, 9cqw, 2.3rem); letter-spacing: -0.01em; }
-.intro-tag { margin: 0 0 8px; color: #b9c4cd; font-weight: 500; text-align: center; }
-.intro-start { width: 100%; }
