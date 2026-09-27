@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react'
-import { Camera, Check, ChevronRight, Film, ListChecks, LogOut, Trash2, UserRound } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { Camera, Check, ChevronRight, Film, ListChecks, LogOut, Trash2, UserRound, ShieldCheck } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
 import { emptyIdentity, normalizeIdentity, validBirthDate, ageFromBirthDate, initialFor, AVATAR_HUES, AVATAR_PX, NAME_MAX } from '../lib/identity.js'
 import { CORRECTION } from '../lib/profile.js'
@@ -8,6 +8,8 @@ import BirthDateBoxes from '../components/BirthDateBoxes.jsx'
 import CityField from '../components/CityField.jsx'
 import '../styles/account.css'
 import { haptic } from '../lib/native.js'
+import { getMembership, PLAN_NAME } from '../lib/subscription.js'
+import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
 import '../styles/profilehome.css'
 
 // Profilim: avatar (harf + iris rengi veya fotoğraf), ad, doğum tarihi, şehir, gözlük; profil sorularına ve giriş filmine geçiş.
@@ -37,7 +39,7 @@ export async function shrinkImage(file, px = AVATAR_PX) {
   }
 }
 
-export default function ProfileHome({ identity, profile, account = null, onSave, onQuestions, onIntro, onBack, onAccount, onSignOut, onDeleteAccount }) {
+export default function ProfileHome({ identity, profile, account = null, onSave, onQuestions, onIntro, onBack, onAccount, onSignOut, onDeleteAccount, loadMembership = getMembership }) {
   const [id, setId] = useState(() => normalizeIdentity(identity ?? emptyIdentity()))
   const [correction, setCorrection] = useState(profile?.correction ?? null)
   const [err, setErr] = useState('')
@@ -45,6 +47,18 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
   const [acctBusy, setAcctBusy] = useState(false)
   const [acctMsg, setAcctMsg] = useState('')
   const inAcct = signedIn(account)
+  const [member, setMember] = useState(null)
+  const [prefs, setLocalPrefs] = useState(getPrefs)
+  useEffect(() => subscribePrefs((p) => setLocalPrefs(p)), [])
+  useEffect(() => {
+    let alive = true
+    loadMembership?.()
+      .then((m) => alive && setMember(m))
+      .catch(() => alive && setMember(null))
+    return () => {
+      alive = false
+    }
+  }, [loadMembership])
   const file = useRef(null)
   const dateOk = !id.birthDate || validBirthDate(id.birthDate)
   const age = id.birthDate && dateOk ? ageFromBirthDate(id.birthDate) : null
@@ -92,8 +106,11 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
             />
           ))}
         </div>
+        <span className="ph-login">{inAcct ? (account.mode === 'apple' ? 'Apple ile giriş' : accountLabel(account)) : 'Hesapsız · yalnız bu telefonda'}</span>
         {err && <p className="muted small" role="alert">{err}</p>}
       </div>
+
+      {member && <MembershipCard m={member} />}
 
       <label className="field">
         <span>Ad</span>
@@ -143,6 +160,41 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
         )}
       </div>
 
+      <section className="ph-perm" aria-labelledby="ph-perm-h">
+        <h2 id="ph-perm-h" className="ph-sec">İzinlerim</h2>
+        <div className="list">
+          <div className="list-row">
+            <ShieldCheck size={20} aria-hidden="true" />
+            <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Profil eşitleme</span><span className="muted small">Ad, doğum tarihi, şehir, gözlük · hesabınla</span></span>
+            <span className={`ph-st ${inAcct ? 'on' : ''}`}>{inAcct ? 'Açık' : 'Kapalı'}</span>
+          </div>
+          <div className="list-row">
+            <ShieldCheck size={20} aria-hidden="true" />
+            <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Nef göz koçu</span><span className="muted small">Özet sayılar şifreli bağlantıyla sunucuya gider</span></span>
+            {prefs.coach ? (
+              <button type="button" className="ph-st on as-btn" onClick={() => setPrefs({ coach: false, coachLife: false })} aria-label="Nef göz koçunu kapat">Açık · kapat</button>
+            ) : (
+              <span className="ph-st">Kapalı</span>
+            )}
+          </div>
+          {prefs.coach && (
+            <div className="list-row">
+              <ShieldCheck size={20} aria-hidden="true" />
+              <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Profil cevapları Nef'e</span><span className="muted small">Uyku, ekran süresi, gece telefonu, stres özeti</span></span>
+              {prefs.coachLife ? (
+                <button type="button" className="ph-st on as-btn" onClick={() => setPrefs({ coachLife: false })} aria-label="Profil cevaplarının Nef'e gitmesini kapat">Açık · kapat</button>
+              ) : (
+                <span className="ph-st">Kapalı</span>
+              )}
+            </div>
+          )}
+          <div className="list-row">
+            <Camera size={20} aria-hidden="true" />
+            <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Kamera ve fotoğraf</span><span className="muted small">Görüntü telefondan hiç çıkmaz</span></span>
+          </div>
+        </div>
+      </section>
+
       <div className="list">
         <button className="list-row" onClick={onQuestions}>
           <ListChecks size={20} aria-hidden="true" />
@@ -180,5 +232,46 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
         </div>
       )}
     </main>
+  )
+}
+
+// Premium kartı (tasarım: Artifact "Nefona Bugün ve Profil"). Deneme günleri 7 çizgiyle; fiyat yazılmaz
+// (customerInfo fiyat taşımaz; yanlış fiyat göstermemek için yalnız plan adı).
+const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' }) : '')
+function MembershipCard({ m }) {
+  const plan = PLAN_NAME[m.plan] ?? ''
+  const manage = m.manageUrl || 'https://apps.apple.com/account/subscriptions'
+  if (m.state === 'none') {
+    return (
+      <section className="ph-pass none" aria-label="Abonelik">
+        <div className="r1"><b>NEFONA PREMIUM</b><span className="chip">Yok</span></div>
+        <p>Şu an aboneliğin yok. Planlar ve 7 gün ücretsiz deneme ödeme ekranında.</p>
+      </section>
+    )
+  }
+  const trial = m.state === 'trial'
+  const used = trial && m.daysLeft != null ? Math.max(0, Math.min(7, 7 - m.daysLeft)) : 0
+  return (
+    <section className="ph-pass" aria-label="Abonelik">
+      <div className="r1">
+        <b>NEFONA PREMIUM</b>
+        <span className="chip">{trial ? `Deneme · ${m.daysLeft ?? '?'} gün` : 'Aktif'}</span>
+      </div>
+      {trial && (
+        <div className="days" aria-hidden="true">
+          {Array.from({ length: 7 }, (_, i) => <i key={i} className={i < used ? 'd' : ''} />)}
+        </div>
+      )}
+      <p>
+        {trial
+          ? m.willRenew
+            ? <>Deneme <b>{fmtDate(m.expires)}</b>'de biter, sonra {plan ? <b>{plan}</b> : 'seçtiğin'} plan başlar. Bitmeden iptal edersen ücret alınmaz.</>
+            : <>Deneme <b>{fmtDate(m.expires)}</b>'de biter; iptal ettiğin için yenilenmeyecek.</>
+          : m.willRenew
+            ? <>{plan && <b>{plan} · </b>}Sonraki yenilenme <b>{fmtDate(m.expires)}</b>.</>
+            : <>{plan && <b>{plan} · </b>}<b>{fmtDate(m.expires)}</b>'de biter; yenilenmeyecek.</>}
+      </p>
+      <a className="link" href={manage} target="_blank" rel="noreferrer">Aboneliği yönet →</a>
+    </section>
   )
 }

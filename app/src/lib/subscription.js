@@ -83,6 +83,34 @@ export function withTimeout(promise, ms, message) {
   return Promise.race([promise, timeout]).finally(() => clearTimeout(timer))
 }
 
+// Profilim Premium kartı: RevenueCat customerInfo → sade üyelik durumu (saf fonksiyon, test edilir).
+// state: 'trial' | 'active' | 'none'; daysLeft: bitişe kalan gün (yukarı yuvarlanır); plan: ürün kimliğinden.
+export const PLAN_NAME = { annual: 'Yıllık', monthly: 'Aylık', weekly: 'Haftalık' }
+export function membershipFrom(customerInfo, now = new Date()) {
+  const e = customerInfo?.entitlements?.active?.[ENTITLEMENT]
+  if (!e) return { state: 'none', manageUrl: customerInfo?.managementURL ?? null }
+  const exp = e.expirationDate ? new Date(e.expirationDate) : null
+  const daysLeft = exp && !Number.isNaN(exp.getTime()) ? Math.max(0, Math.ceil((exp.getTime() - now.getTime()) / 86400000)) : null
+  const id = String(e.productIdentifier ?? '')
+  const plan = /annual|year/i.test(id) ? 'annual' : /month/i.test(id) ? 'monthly' : /week/i.test(id) ? 'weekly' : null
+  return {
+    state: String(e.periodType).toUpperCase() === 'TRIAL' ? 'trial' : 'active',
+    expires: e.expirationDate ?? null,
+    daysLeft,
+    willRenew: Boolean(e.willRenew),
+    plan,
+    manageUrl: customerInfo?.managementURL ?? null,
+  }
+}
+
+// Yalnız iPhone uygulamasında; web'de null (kart gösterilmez)
+export async function getMembership() {
+  if (!isNative()) return null
+  const { P } = await purchases()
+  const { customerInfo } = await P.getCustomerInfo()
+  return membershipFrom(customerInfo)
+}
+
 // Ödeme ekranında gösterilecek planlar. Boş liste yerine açıklayıcı hata atar (ekranda teşhis için görünür).
 export async function getPlans({ timeoutMs = PLANS_TIMEOUT_MS } = {}) {
   const { P } = await withTimeout(purchases(), timeoutMs, 'RevenueCat başlatılamadı (zaman aşımı)')

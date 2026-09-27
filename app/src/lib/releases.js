@@ -29,6 +29,7 @@ export const RELEASES = [
       { kind: 'fix', text: 'Giriş ya da ödeme ekranı hata verirse altında hata kodu görünüyor (destek için).' },
       { kind: 'fix', text: 'Ödeme ekranı "Planlar yükleniyor"da takılı kalıyordu (abonelik altyapısı hiç başlamıyordu); düzeldi. Planlar yine gelmezse 20 saniye sonra nedeni yazılır.' },
       { kind: 'fix', text: 'İlk bakış kırpma sayımı: okuma metni 20 saniyeden önce bitiyordu; metin uzadı, süre boyunca okuma sürüyor.' },
+      { kind: 'new', text: 'Profilim: Premium kartı (deneme kaç gün kaldı, ne zaman biter, aboneliği yönet), giriş şeklin ve İzinlerim: hangi verinin nereye gittiği; Nef izinlerini buradan kapatabilirsin.' },
       { kind: 'new', text: 'Ana sayfa yenilendi: günün diyaframı (bugün yaptıkça açılır), seri, bu hafta ve toplam gün; Nef\'in tek önerisi ve Nefes / Dalga kısayolları. Sağ üstteki avatarınla Profilim açılır.' },
       { kind: 'change', text: 'Bugünün yolu artık sıralı: duraklar tek tek açılır. İlerideki bir durağa dokununca önce sıradakini yapman istenir; bitenleri istediğin kadar tekrar yapabilirsin.' },
       { kind: 'new', text: 'Abonelik: haftalık plan eklendi (yıllık, aylık, haftalık; hepsi 7 gün ücretsiz deneme). Ödeme ekranı App Store fiyatlarını yüklüyor.' },

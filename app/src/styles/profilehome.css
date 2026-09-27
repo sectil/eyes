@@ -20,3 +20,29 @@
 .ph-hue.on { border-color: var(--ink); box-shadow: 0 0 0 2px var(--bg) inset; }
 .ph .input.bad { border-color: var(--danger); }
 .ph .input[type='date'] { min-height: 52px; -webkit-appearance: none; appearance: none; }
+
+/* Giriş satırı, Premium kartı, İzinlerim (tasarım: Artifact "Nefona Bugün ve Profil") */
+.ph-login { font-size: 0.82rem; color: var(--ink-3); }
+.ph-pass { position: relative; overflow: hidden; display: grid; gap: 12px; padding: 16px 18px; border-radius: 24px;
+  --gold: #b86e00; --gold-bg1: #fff7e8; --gold-bg2: #fdefd4; --gold-line: rgba(184, 110, 0, 0.35); --gold-text: #5a4520; --gold-ink: #fff;
+  background: linear-gradient(135deg, var(--gold-bg1), var(--gold-bg2) 70%); border: 1px solid var(--gold-line); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .ph-pass { --gold: #ffb13b; --gold-bg1: #1a1508; --gold-bg2: #0f0c06; --gold-line: rgba(255, 177, 59, 0.35); --gold-text: #d9c9a8; --gold-ink: #1a1204; }
+}
+:root[data-theme='dark'] .ph-pass { --gold: #ffb13b; --gold-bg1: #1a1508; --gold-bg2: #0f0c06; --gold-line: rgba(255, 177, 59, 0.35); --gold-text: #d9c9a8; --gold-ink: #1a1204; }
+.ph-pass::after { content: ''; position: absolute; right: -70px; top: -90px; width: 170px; height: 170px; border-radius: 50%; border: 16px solid color-mix(in srgb, var(--gold) 8%, transparent); pointer-events: none; }
+.ph-pass > * { position: relative; z-index: 1; }
+.ph-pass .r1 { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.ph-pass .r1 b { font: 700 0.95rem/1 var(--font-display); color: var(--gold); letter-spacing: 0.01em; }
+.ph-pass .chip { font: 600 0.68rem/1 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-ink); background: var(--gold); padding: 5px 8px; border-radius: 999px; white-space: nowrap; }
+.ph-pass .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.ph-pass .days i { height: 6px; border-radius: 3px; background: color-mix(in srgb, var(--gold) 22%, transparent); }
+.ph-pass .days i.d { background: var(--gold); }
+.ph-pass p { margin: 0; font-size: 0.85rem; line-height: 1.45; color: var(--gold-text); }
+.ph-pass p b { color: var(--ink); font-weight: 600; }
+.ph-pass .link { font-weight: 600; font-size: 0.85rem; color: var(--gold); text-decoration: none; justify-self: start; }
+.ph-pass.none .chip { background: var(--surface-3); color: var(--ink-2); }
+.ph-sec { margin: 0 0 8px 4px; font: 500 0.7rem/1 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+.ph-st { flex: none; font: 600 0.7rem/1 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; padding: 6px 8px; border-radius: 999px; color: var(--ink-3); background: color-mix(in srgb, var(--ink) 7%, transparent); border: 0; }
+.ph-st.on { color: var(--ok, #1fa974); background: color-mix(in srgb, var(--ok, #1fa974) 14%, transparent); }
+.ph-st.as-btn { cursor: pointer; }

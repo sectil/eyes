@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { plansFromOffering, hasPremium, testUnlock, rcApiKey, RC_IOS_PUBLIC_KEY, withTimeout, _purchasesForTest } from './subscription.js'
+import { plansFromOffering, hasPremium, testUnlock, rcApiKey, RC_IOS_PUBLIC_KEY, withTimeout, _purchasesForTest, membershipFrom } from './subscription.js'
 
 const product = (price, priceString, intro, pricePerMonthString = null) => ({
   price,
@@ -107,5 +107,24 @@ describe('purchases (RevenueCat yükleme)', () => {
     const box = await withTimeout(_purchasesForTest(async () => ({ Purchases })), 200, 'takıldı')
     expect(box.P).toBe(Purchases)
     expect(calls).toEqual(['configure'])
+  })
+})
+
+describe('membershipFrom (Profilim Premium kartı)', () => {
+  const now = new Date('2026-09-27T09:00:00Z')
+  const ci = (e, extra = {}) => ({ entitlements: { active: e ? { premium: e } : {} }, managementURL: 'https://apps.apple.com/account/subscriptions', ...extra })
+  it('deneme: kalan gün yukarı yuvarlanır, plan ürün kimliğinden', () => {
+    const m = membershipFrom(ci({ periodType: 'TRIAL', expirationDate: '2026-10-02T08:00:00Z', willRenew: true, productIdentifier: 'nefona_premium_annual' }), now)
+    expect(m).toMatchObject({ state: 'trial', daysLeft: 5, willRenew: true, plan: 'annual' })
+    expect(m.manageUrl).toContain('apps.apple.com')
+  })
+  it('ücretli dönem: active; iptal edilmişse willRenew false', () => {
+    const m = membershipFrom(ci({ periodType: 'NORMAL', expirationDate: '2026-10-27T09:00:00Z', willRenew: false, productIdentifier: 'nefona_premium_monthly' }), now)
+    expect(m).toMatchObject({ state: 'active', daysLeft: 30, willRenew: false, plan: 'monthly' })
+  })
+  it('entitlement yoksa none; süresi geçmiş tarih 0 gün', () => {
+    expect(membershipFrom(ci(null), now).state).toBe('none')
+    expect(membershipFrom(null, now).state).toBe('none')
+    expect(membershipFrom(ci({ periodType: 'TRIAL', expirationDate: '2026-09-20T00:00:00Z', productIdentifier: 'nefona_premium_weekly' }), now)).toMatchObject({ daysLeft: 0, plan: 'weekly' })
   })
 })
