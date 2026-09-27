@@ -14,9 +14,9 @@ import '../styles/todaypath.css'
 
 const W = 300 // yol koordinatı (px); ortalanır
 const STEP = 116
-const A_CLOSED = 1.5
+export const A_CLOSED = 1.5
 const A_NOW = 20
-const A_DONE = 38
+export const A_DONE = 38
 
 const GLYPH = {
   arrows: <><path d="M3 12h18" /><path d="M7 8l-4 4 4 4" /><path d="M17 8l4 4-4 4" /></>,
@@ -48,7 +48,7 @@ const SCENE = {
 
 // Diyafram: 6 kanat. a = altıgen açıklığın iç yarıçapı (0..46; 100 birimlik kutu)
 const rotFor = (a) => (a <= A_NOW ? (15 * (a - A_CLOSED)) / (A_NOW - A_CLOSED) : 15 + (30 * (a - A_NOW)) / (A_DONE - A_NOW))
-function bladePaths(a) {
+export function bladePaths(a) {
   const R = 46
   const C = 50
   const rot = (rotFor(a) * Math.PI) / 180

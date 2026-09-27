@@ -598,7 +598,7 @@ export default function App() {
       />
     )
   } else {
-    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={native.trueDepth} eyeBudget={budget} premium={access.loading || access.premium} onStart={go} onAsk={(group) => { const ids = missing(settings.profile, GROUPS[group] ?? []); if (ids.length) setAskFor({ ids, then: 'home', back: 'home' }) }} onSaveProfile={saveProfile} />
+    content = <Home tests={tests} sessions={sessions} settings={settings} distanceTracked={Boolean(distanceCal)} trueDepth={native.trueDepth} eyeBudget={budget} premium={access.loading || access.premium} member={Boolean(access.native && access.premium && !access.testUnlock)} onStart={go} onAsk={(group) => { const ids = missing(settings.profile, GROUPS[group] ?? []); if (ids.length) setAskFor({ ids, then: 'home', back: 'home' }) }} onSaveProfile={saveProfile} />
   }
 
   return (

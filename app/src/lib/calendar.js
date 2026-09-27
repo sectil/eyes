@@ -29,6 +29,16 @@ export function startOfWeek(d) {
   return x
 }
 
+// Bu haftanın 7 günü (Pazartesi → Pazar) 'YYYY-MM-DD' olarak
+export function weekDayKeys(now = new Date()) {
+  const start = startOfWeek(now)
+  return Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(start)
+    d.setDate(start.getDate() + i)
+    return dayKey(d)
+  })
+}
+
 // Test veya seans yapılan günler
 export function activeDays(records) {
   return new Set(records.map((r) => dayKey(r.date)))

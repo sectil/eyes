@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { dayKey, mondayIndex, startOfWeek, activeDays, weekProgress, monthGrid, isPlanned } from './calendar.js'
+import { dayKey, mondayIndex, startOfWeek, activeDays, weekProgress, monthGrid, isPlanned, weekDayKeys } from './calendar.js'
 
 describe('temel', () => {
   it('dayKey yerel tarih', () => {
@@ -48,5 +48,12 @@ describe('isPlanned', () => {
   it('seçili günleri tanır', () => {
     expect(isPlanned(new Date(2026, 8, 21), ['MO', 'WE'])).toBe(true)
     expect(isPlanned(new Date(2026, 8, 22), ['MO', 'WE'])).toBe(false)
+  })
+})
+
+describe('weekDayKeys', () => {
+  it('Pazartesiden Pazara 7 gün (yerel tarih)', () => {
+    const keys = weekDayKeys(new Date(2026, 8, 27, 9, 35)) // 27 Eylül 2026 Pazar
+    expect(keys).toEqual(['2026-09-21', '2026-09-22', '2026-09-23', '2026-09-24', '2026-09-25', '2026-09-26', '2026-09-27'])
   })
 })

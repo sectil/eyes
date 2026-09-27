@@ -1,11 +1,11 @@
 import { pickSeries, EYE_LABEL } from '../lib/vaSeries.js'
-import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame, Lock, Eye } from 'lucide-react'
+import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame, Lock, Eye, CalendarDays, CircleDot, Moon, Waves } from 'lucide-react'
 import { pendingCard, snooze, skip } from '../lib/profileQuestions.js'
 import { profileFromScreening } from '../lib/profile.js'
 import { DAILY_GOAL_MIN, formatMin, todaySeconds } from '../lib/routines.js'
-import { Sparkline, IrisMark } from '../components/ui.jsx'
+import { Sparkline } from '../components/ui.jsx'
 import { trendMessage } from '../lib/trend.js'
-import { activeDays, weekProgress } from '../lib/calendar.js'
+import { activeDays, weekProgress, weekDayKeys, mondayIndex } from '../lib/calendar.js'
 import { snellen20 } from '../lib/optotype.js'
 import { activitiesFrom, countedActivities, summary } from '../lib/stats.js'
 import { buildPath, PATH } from '../lib/today.js'
@@ -16,6 +16,9 @@ import '../styles/restlock.css'
 import { REASON_TEXT, fmtLeft } from '../lib/eyeBudget.js'
 import CoachCard from '../components/CoachCard.jsx'
 import TodayPath from '../components/TodayPath.jsx'
+import DayDial from '../components/DayDial.jsx'
+import { Avatar } from './ProfileHome.jsx'
+import { homeSuggestion } from '../lib/homeSuggest.js'
 import { registry } from '../modules/registry.js'
 import { viewFor } from '../modules/views.js'
 
@@ -85,7 +88,7 @@ function ModuleRows({ section, ctx, onStart }) {
   )
 }
 
-export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, onStart, onAsk, onSaveProfile }) {
+export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, onStart, onAsk, onSaveProfile }) {
   const now = new Date()
   // Oyun oturumları (type 'game') egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
   const exercise = sessions.filter((s) => s.type !== 'game')
@@ -109,6 +112,11 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
     }
     onStart(route)
   }
+  // Ana sayfa başı: toplam gün (oyunlar dahil her kayıt), haftanın günleri (bugün çerçeveli), Nef önerisi
+  const totalDays = activeDays([...tests, ...sessions]).size
+  const weekActive = activeDays([...tests, ...exercise])
+  const weekDots = weekDayKeys(now).map((k, i) => (weekActive.has(k) ? 'd' : i === mondayIndex(now) ? 't' : ''))
+  const sug = homeSuggestion({ plan, eye: eyeBudget })
   // Oyunla aynı kural (SnakeGame loadSnakeOpts): TrueDepth varsa ve kayıtlı seçim 'touch'
   // değilse gözle açılır. VARSAYIM: trueDepth prop'u verilmemişse mesafe yöntemine göre tahmin edilir.
   const hasTrueDepth = trueDepth ?? settings.distance?.method === 'truedepth'
@@ -124,17 +132,62 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
       <header className="home-head">
         <div>
           <span className="eyebrow">{now.toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
-          <h1>{greeting()}{settings?.identity?.name ? `, ${settings.identity.name}` : ''}</h1>
+          <h1>
+            {greeting()}
+            {settings?.identity?.name ? <>,<br /><em className="hh-name">{settings.identity.name}</em></> : ''}
+          </h1>
         </div>
-        <div className="home-head-side">
-          {streak > 0 && (
-            <span className="streak-chip" aria-label={`${streak} günlük seri`}>
-              <Flame size={13} aria-hidden="true" /> {streak} gün
-            </span>
+        <button type="button" className="hh-me" onClick={() => onStart('profile')} aria-label={member ? 'Profilim, Premium' : 'Profilim'}>
+          <Avatar identity={settings.identity} size={44} />
+          {member && (
+            <i className="hh-star" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7-6.3-3.9-6.3 3.9 1.7-7L2 9.5l7.1-.6z" /></svg>
+            </i>
           )}
-          <IrisMark size={40} />
-        </div>
+        </button>
       </header>
+
+      {/* Günün diyaframı + sayılar (tasarım: Artifact "Nefona Bugün ve Profil") */}
+      <section className="hh-day" aria-label="Bugün">
+        {plan.total > 0 && <DayDial plan={plan} />}
+        <div className="hh-num">
+          {plan.total > 0 && (
+            <>
+              <div className="hh-big"><b>{plan.doneCount}</b><small>/ {plan.total}</small></div>
+              <span className="hh-lbl">{plan.allDone ? 'durak · bugün tamam' : `durak · ≈${plan.minutesLeft} dk kaldı`}</span>
+            </>
+          )}
+          <div className="hh-facts">
+            <div className="hh-fact"><Flame size={14} aria-hidden="true" className="f1" /><b>{streak}</b>gün seri</div>
+            <div className="hh-fact">
+              <CalendarDays size={14} aria-hidden="true" className="f2" /><b>{week.met ? week.done : `${week.done}/${week.target}`}</b>{week.met ? 'gün bu hafta' : 'hafta'}
+              <span className="hh-wk" aria-hidden="true">{weekDots.map((c, i) => <i key={i} className={c} />)}</span>
+            </div>
+            <div className="hh-fact"><CircleDot size={14} aria-hidden="true" className="f3" /><b>{totalDays}</b>gün seninle</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="hh-now" aria-label="Şimdi">
+        <div className="hh-nef">
+          <span className="hh-nef-eye" aria-hidden="true" />
+          <p>{sug.primary.line}{sug.primary.sub && <span>Nef · {sug.primary.sub}</span>}</p>
+        </div>
+        <button type="button" className="hh-go" onClick={() => startStop(sug.primary.route)}>
+          <span className="t"><small>{sug.primary.eyebrow}</small><b>{sug.primary.title}</b></span>
+          <span className="ar"><Play size={20} aria-hidden="true" fill="currentColor" /></span>
+        </button>
+        {sug.alts.length > 0 && (
+          <div className={`hh-alt n${sug.alts.length}`}>
+            {sug.alts.map((a) => (
+              <button type="button" key={a.kind} onClick={() => startStop(a.route)}>
+                <span className={`ic ${a.kind}`}>{a.kind === 'breath' ? <Moon size={18} aria-hidden="true" fill="currentColor" /> : <Waves size={18} aria-hidden="true" />}</span>
+                <span className="tx"><b>{a.title}</b><small>{a.sub}</small></span>
+              </button>
+            ))}
+          </div>
+        )}
+      </section>
 
       {locked && (
         <button type="button" className="eb-banner" onClick={() => onStart('eye-rest')}>
@@ -173,9 +226,6 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
 
       <div className="home-h" style={{ marginTop: 4 }}>
         <h2>{plan.allDone ? 'Bugünkü yol tamam' : plan.next ? 'Bugünün yolu' : 'Serbest gün'}</h2>
-        {plan.total > 0 && (
-          <span className="tp-count">{plan.allDone ? `${plan.total}/${plan.total} · tamam` : `${plan.doneCount}/${plan.total} · ≈ ${plan.minutesLeft} dk kaldı`}</span>
-        )}
       </div>
       {plan.total > 0 ? (
         <TodayPath
