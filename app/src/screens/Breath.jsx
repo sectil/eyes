@@ -6,7 +6,7 @@ import BreathVisual from '../components/BreathVisual.jsx'
 import { haptic } from '../lib/native.js'
 import { speak, unlockAudio } from '../lib/cue.js'
 import { playBreathSound, unlockBreathSfx, releaseBreathSfx, breathContext } from '../lib/breathSfx.js'
-import { VOICES, VOICE_LABEL, VOICE_LANG, phraseId, PHRASES, preloadVoice, playPhrase, loadIndex, availableFrom } from '../lib/voicePack.js'
+import { VOICES, VOICE_LABEL, VOICE_LANG, phraseId, PHRASES, preloadVoice, playPhrase, loadIndex, availableFrom, voiceStatus } from '../lib/voicePack.js'
 import {
   PATTERNS, PATTERN_ORDER, PHASE, KIND_ORDER, LIMITS, STEP_SEC, DURATIONS_SEC, CALM_SCALE, SAFETY_ROWS, PREP_SEC,
   VISUALS, SOUNDS, SOUND_SLOTS, LEVELS, QUICK, phaseText,
@@ -69,6 +69,10 @@ export function planAtLeast(args, minSec = null) {
 // minSec: seans en az bu kadar sürer (hatırlatmadan açılan 1 dk nefes; planAtLeast).
 // Tasarım: Artifact "Nefona Nefes" (onaylı) — seçim (ritmi çizili kalıplar, kanıt düzeyi), ayrıntı, başlarken sakinlik
 // (alttan sayfa, puansız başlanabilir), seans (burun değiştirmede taraf, vızıltıda "mmm"), güvenlik bir kez.
+// Geliştirici derlemesinde seslendirme tanısı (cihazda neden çalmadığını görmek için)
+const DEV_BUILD = import.meta.env.VITE_APP_BUILD === 'dev'
+const diagText = (st) => `tanı: liste ${st.index} · çözülen ${st.decoded} · hata ${st.failed}${st.path ? ` · yol ${st.path}` : ''}${st.error ? ` · ${st.error}` : ''}`
+
 export default function Breath({ sessions = [], presetSec = null, askCalm = true, minSec = null, onBack, onFinish }) {
   const prior = sessions.filter(isBreath).length
   const [opts, setOpts] = useState(() => (presetSec ? { ...loadBreathOpts(), durationSec: presetSec } : loadBreathOpts()))
@@ -82,11 +86,12 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
   const ask = askCalm && !quick
   // Seslendirme: hangi seste dosya var (public/voice/index.json); seçilen sesi önceden çöz
   const [voiceAvail, setVoiceAvail] = useState(null)
+  const [, setDiagTick] = useState(0) // tanı satırı tazelensin (yalnız geliştirici derlemesi)
   useEffect(() => {
     loadIndex().then((ix) => setVoiceAvail(availableFrom(ix)))
   }, [])
   useEffect(() => {
-    preloadVoice(breathContext(), opts.voiceId)
+    preloadVoice(breathContext(), opts.voiceId).then(() => setDiagTick((t) => t + 1))
   }, [opts.voiceId])
   // Sessiz tuşunda da duyulsun diye açılan ses oturumu: seans bitince ve ekrandan çıkınca bırakılır
   useEffect(() => {
@@ -364,14 +369,14 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
             <SwitchRow label="Titreşim" checked={opts.vibrate} onChange={(on) => update({ vibrate: on })} />
             <SwitchRow label="Ses" checked={opts.sound} onChange={(on) => update({ sound: on })} trailing={<button type="button" className="br-gear" onClick={() => open('sound')} aria-label="Ses ayarları"><Settings2 size={18} /></button>} />
             <div className="br-voice">
-              <span className="lbl">Sesli komut<small>{voiceAvail && !voiceAvail[opts.voiceId]?.size ? 'Seslendirme dosyası yok; telefonun sesi kullanılır' : 'Nefes al · tut · ver söylenir'}</small></span>
+              <span className="lbl">Sesli komut<small>{voiceAvail && !voiceAvail[opts.voiceId]?.size ? 'Seslendirme dosyası yok; telefonun sesi kullanılır' : 'Nefes al · tut · ver söylenir'}</small>{DEV_BUILD && <small className="br-diag">{diagText(voiceStatus())}</small>}</span>
               <div className="br-seg" role="group" aria-label="Sesli komut">
                 <button type="button" aria-pressed={!opts.voice} onClick={() => update({ voice: false })}>Kapalı</button>
                 {VOICES.map((v) => (
                   <button key={v} type="button" aria-pressed={opts.voice && opts.voiceId === v} onClick={() => { unlockBreathSfx(); update({ voice: true, voiceId: v }) }}>{VOICE_LABEL[VOICE_LANG][v]}</button>
                 ))}
               </div>
-              <button type="button" className="br-listen" disabled={!opts.voice || !opts.sound} onClick={() => { unlockAudio(); unlockBreathSfx(); preloadVoice(breathContext(), opts.voiceId).then(() => say('in', PHRASES[VOICE_LANG].in)) }}>
+              <button type="button" className="br-listen" disabled={!opts.voice || !opts.sound} onClick={() => { unlockAudio(); unlockBreathSfx(); preloadVoice(breathContext(), opts.voiceId).then(() => { say('in', PHRASES[VOICE_LANG].in); setTimeout(() => setDiagTick((t) => t + 1), 800) }) }}>
                 <Volume2 size={16} aria-hidden="true" /> Dinle
               </button>
             </div>

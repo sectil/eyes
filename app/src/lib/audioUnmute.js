@@ -67,6 +67,29 @@ export function mediaPlay(src, { loop = false } = {}) {
   }
 }
 
+// Aynı öğede kısa bir dosyayı bir kez çal, bitince sessiz döngüye dön (seslendirme yedeği: Web Audio dosyayı
+// çözemezse). Döner: çalma sözü (true = başladı).
+export function mediaPlayOnce(src) {
+  try {
+    if (!tag) mediaKeepAlive(true)
+    if (!tag) return Promise.resolve(false)
+    const el = tag
+    el.onended = () => {
+      el.onended = null
+      if (url) {
+        el.src = url
+        el.loop = true
+        el.play()?.catch?.(() => {})
+      }
+    }
+    el.loop = false
+    el.src = src
+    return el.play()?.then(() => true).catch(() => false) ?? Promise.resolve(true)
+  } catch {
+    return Promise.resolve(false)
+  }
+}
+
 // WebKit Audio Session API: sayfanın sesini "playback" türüne alır (sessiz tuşunda da çalar). Desteklenmezse etkisiz.
 export function setAudioSessionType(type) {
   try {
