@@ -1,33 +1,145 @@
-# Bildirim planı (kanıta dayalı) — KARARLAR ALINDI, UYGULAMA PLANI ONAY BEKLİYOR
+# Bildirim planı (kanıta dayalı) — v2 PLAN ONAY BEKLİYOR
 
 ## Sahibinin kararları (2026-09-27)
 1. Günün tek bildirimi: **göz + kalkma molası** ("1 dakikalık mola? Kalk, pencereden uzağa bak.").
 2. **Odak oturumu ilk sürümde**: kişi başlatır, oturum boyunca 60 dakikada bir mola hatırlatması (Morris 2020).
 3. Ölçme: **evet, yalnızca telefonda** (bazı günler bildirim bilerek gönderilmez; sonuç kişinin kendi Gelişim'inde;
    veri telefondan çıkmaz, yeni izin gerekmez).
-Yürüyüş, nefes ve su bildirimleri "tek alışkanlıkla başla" kuralı gereği sonraya (ilk alışkanlık oturunca, ~8 hafta).
+4. (aynı gün, sonradan) **Yürüyüş, nefes ve su bildirimleri de BU SÜRÜMDE.** Önceki "8 hafta tek alışkanlık" kuralı
+   kaynağın söylemediği bir çıkarımdı (Singh 2024 yalnız alışkanlığın ~2 ayda oturduğunu söyler); kaldırıldı.
 
-## Uygulama planı (v1) — onay bekliyor
-1. Mola ekranı (yeni, ~1 dk): kalk → pencereye yürü → uzağa bak → birkaç kez yavaşça kırp → bitti; "mola" kaydı.
-   İddiasız; kaynak Galinsky 2007, Redondo 2025. "20-20-20 kuralı" yazılmaz (Johnson & Rosenfield 2022: etkisiz).
-2. Hatırlatmalar (mevcut "Çalışma günleri" ekranı genişler): mola bildirimi aç/kapat, saat (VARSAYIM: 12:30),
-   günde 0–3 (varsayılan 1), günler. iOS izni yalnız anahtar açılınca, önce kendi açıklama kartımızla.
-   Dokununca Mola ekranı. O gün mola yapıldıysa kalan bildirim iptal. 5–6 dönüşümlü metin, varsa gerçek veriyle.
-   3 bildirim üst üste açılmazsa sıklık yarıya iner ve bir kez sorulur. 14. gün tek seferlik "devam mı, seyreltelim mi?".
-3. Odak oturumu: 1 / 2 / 4 saat; 60 dakikada bir mola bildirimi; açıkken ana sayfada küçük şerit (kalan süre, Bitir).
-4. Ölçme (telefonda): günlük bildirimde her gün %30 olasılıkla "sessiz gün"; ≥21 gün sonra Gelişim'de
-   "bildirim gelen günlerde mola oranın / sessiz günlerde". Hatırlatmalar ekranında açıkça yazılır.
-5. Kaynaklar listesine: Klasnja 2019, Bell 2023, Galinsky 2007, Morris 2020, Singh 2024.
-6. Saf mantık lib'de ve testli; iki temada görsel kontrol; sürüm notu. Swift değişikliği yok
-   (@capacitor/local-notifications zaten kurulu; iOS 64 bekleyen bildirim sınırı → 7 günlük kayan plan).
+## Uygulama planı v2 (birleşik, eleştiriyle düzeltilmiş) — onay bekliyor
 
-Tarih: 2026-09-27. Soru (sahibi): "Su içtin mi, hareket ettin mi, nefes egzersizi yaptın mı… nasıl bildirim
-göndereceğimizi bilmiyorum; en güzel destek PubMed."
+### 0. Ne değişti, neden
+- **"8 hafta tek alışkanlık" kuralı silindi.** Singh 2024'ün tam metni (PMID 39685110) böyle bir bekleme önermiyor. İncelenen 20 çalışmanın 8'i birden çok davranışı birlikte hedefledi. Yazarlar yalnız "basit, tekrarlanan davranışlarla (su içmek gibi) başla" diyor ve süre vermiyor. İki kaynak davranışlara aynı anda ya da sırayla başlamayı benzer buldu: James 2016 (PMID 27311332; 6 RKÇ, kanıt sınırlı) ve Spring 2018 (PMID 29921561; 212 kişi, 9 ay, koçluk ve parasal teşvik içeren bir program). Spring'de sıralı yol yalnız 6. ayda biraz öndeydi. Sıralı yol yanlış değil ama zorunlu da değil. Haklıydın: bu kural bizim çıkarımımızdı.
+- **"Aynı gün ayrı türde bildirim gönderme" kuralı silindi.** Golbus 2026'nın (PMID 41499691) tasarımı aynı gün iki türe izin veriyordu; ortalama gönderim günde 0,96'ydı. Klasnja 2019 (PMID 30192907) da iki tür gönderdi. Bunu yasaklayan bir kaynak yok.
+- **Hatırlatmalar tamamen kesilmez.** Kontrol grubu olmayan 29 kişilik bir çalışmada hatırlatıcı bırakılınca belirtilerdeki iyileşme 1 hafta içinde sürmedi (Talens-Estarelles 2022). Head 2013 (SMS, 19 RKÇ) ise zamanla azalan ya da kişiye göre ayarlanan sıklığı, sabit sıklıktan daha başarılı buldu. v1'de sıklığın kendiliğinden azaltılmaması VARSAYIM. 30. günden sonra telefondaki ölçüm etkinin düştüğünü gösterirse seyreltme yeniden ele alınır (Golbus 2024: etki ilk 30 günde görüldü).
+- **Kaynak düzeltmeleri:** Ishak 2026'da gece bildirimi uykunun anlamlı yordayıcısı çıkmadı (p=0,068; kesitsel, 402 öğrenci). Sessiz saat bu yüzden kanıta değil, nezaket kuralına dayanır. "Johnson & Rosenfield 2022" kaynak listesinde yok; "20-20-20 etkisiz" cümlesi silinir.
+
+### 1. Tek cümlede
+Hangi türlerin açık olacağını kullanıcı seçer. Her türden günde en çok 1 hatırlatma gelir (VARSAYIM). Telefon bunları 7 gün önceden kurar, o gün yapılanı iptal eder, bazı günler bilerek göndermez ve sonucu yalnız telefonda gösterir.
+
+### 2. Türler
+| Tür | Ne zaman, hangi veriyle | Örnek metin | Dayanak |
+|---|---|---|---|
+| **Mola** (göz + kalk), varsayılan açık | 12:30 (VARSAYIM; Trinquart 2023'te saatin etkisi çıkmadı); o gün mola kaydı yoksa | "Bir dakika yeter: kalk, uzağa bak." | Leppe-Zamora 2025 (bilgisayar yazılımı, 18 RKÇ, kesinlik düşük-orta) ve Morris 2020 (telefon uygulaması, 56 kişi, yarı-randomize): 30–60 dakikada bir gelen hatırlatma oturmayı azalttı. Günde tek bildirim test edilmedi (VARSAYIM). "Uzağa bak" adımının dayanağı bir mola düzeni çalışması (Galinsky 2007); göz iddiası yazılmaz |
+| **Yürüyüş** | 15:00 (VARSAYIM); yalnız taze adım verisi varsa ve adım düşükse (§3) | "Birkaç dakikalık yürüyüş? Şimdi yapabilirsin." (rakam yok) | Klasnja 2019 (44 kişi, 6 hafta): sonraki 30 dakikadaki adım %24 arttı; artış başta %107'ydi, zamanla azaldı. NeCamp 2020: etki, önceki haftanın adımına bağlıydı |
+| **Nefes** | 16:30 (VARSAYIM); bugün en az 60 sn nefes yapılmadıysa. Dokununca 1 dakikalık rehberli nefes açılır | "1 dakika nefes? Dokun, birlikte yapalım." | Egzersizin kendisi: Fincham 2023 (12 RKÇ, öznel stres g=−0,35, yanlılık riski orta). Bildirimin etkisi gösterilmedi: Lee 2026'da farkındalık öneren bildirim anlık stresi değiştirmedi. 1 dakika Schwerdtfeger 2025'te denendi (3 gün); süre VARSAYIM |
+| **Su** | 11:00 (VARSAYIM); 18:00'den sonra gönderilmez (VARSAYIM); bugün "İçtim" kaydı yoksa | "Birkaç yudum su?" | Stout 2022: böbrek taşı hastalarında akıllı şişe (kayıt + hatırlatma), yalnız öneriye göre daha iyi sonuç verdi. Güven aralıkları geniş, takip kaybı büyük. Telefon bildirimi tek başına ve masa başı çalışanlar test edilmedi |
+| **Çalışma oturumu** (senin "odak oturumu" kararın) | Kişi başlatır; 60 dakikada bir | "Bir saat oldu. Kalk, uzağa bak; sonra devam edebilirsin." | Morris 2020 (60 dakikalık kol) |
+
+- Hiçbir türde sağlık sonucu vaat edilmez (Singh 2022, Nguyen 2022, de Freitas Gonçalves 2022).
+- "Yapabilirsin" ifadesinin dayanağı Tannenbaum 2015: öz-yeterlik ifadesi mesajın etkisini güçlendirdi (bulgu korku mesajları üzerine). Her türün metinlerinden en az biri böyle bir ifade içerir. Suçlamasız, korkutmasız ton ise ürün kuralıdır (VARSAYIM).
+- Her tür için 5–6 metin sırayla kullanılır (VARSAYIM). Bell 2023'te metin bankası tek metinle aynı sonucu verdi; ölçülen şey uygulamanın açılmasıydı.
+- Su türünü kendi açan kişi hatırlatma istediğini beyan etmiş sayılır (VARSAYIM).
+
+### 3. Günlük kurallar
+- **Sayı:** Her türden günde en çok 1 bildirim gelir, yani toplam en çok açık tür sayısı kadardır (en çok 4; çalışma oturumu bunun dışında). Ayrı bir toplam tavan ya da öncelik sırası yok. Tavan, bir türün gidip gitmemesini başka türe bağlıyordu: hem ölçümü bozuyordu hem de "neden gelmedi" sorusu doğuruyordu. Sayılar VARSAYIM; bildirim dozunu karşılaştıran bir çalışma bulunmadı.
+- **Saatler:** İki türün saati arasında en az 60 dakika olur (VARSAYIM). Bunu saat seçici ayar anında sağlar; bildirim anında kaydırma yapılmaz. Bildirimler 09:00–21:00 arasında gelir (VARSAYIM). Saat seçici bu aralıkla, su için 18:00 ile sınırlıdır.
+- **Yaptıysan gönderme:** Bir tür o gün yapıldıysa o türün kalan bildirimi iptal edilir. NeCamp haftalık bakıyordu; kuralı aynı güne uygulamak VARSAYIM.
+- **Çalışma oturumu sürerken** diğer türler gelmez (VARSAYIM).
+- **Yürüyüş kararı:** Yürüyüş bildirimi yalnız son sağlık okuması bildirim saatinden en çok 3 saat önce yapıldıysa kurulur (VARSAYIM). Okuma anındaki bugünkü adım, ortalama × (okuma saati / 24) değerinden azsa bildirim gider (VARSAYIM). Ortalama, son 6 günün (adımı 0'dan büyük günler) ortalamasıdır; mevcut `summarizeHealth.avgSteps` fonksiyonu bugünü ve 0 adımlı günleri zaten dışarıda bırakıyor. Okuma eskiyse o gün yürüyüş bildirimi kurulmaz.
+- **Seyreltme:** Bir türde üst üste 3 gün ne dokunma ne de kayıt olursa kullanıcıya bir kez sorulur: [Böyle kalsın] [Gün aşırı]. Kayıt, yürüyüşte ortalamaya ulaşan adım demektir. Dayanak Head 2013 (SMS); "3" eşiği ve kuralın tür bazında işlemesi VARSAYIM.
+
+### 4. Ayarlar ve izinler
+- **Ekranlar:** Schedule.jsx "Çalışma günleri" olarak kalır, çünkü Takvim, Ana sayfa ve Gelişim onu kullanıyor. Yalnız 59–62. satırdaki "uygulama bildirim göndermez" metni düzeltilir. Yeni ekran `screens/Reminders.jsx` olur ve Info'da ayrı bir satırda durur. Ekranda şunlar var: ana anahtar; dört türün her biri için aç/kapa; görünür varsayılan saat, değiştirmek için "Saati değiştir". İsteğe bağlı "Planın" satırı katlanmış durur (Silva 2018; kaynak fiziksel aktivite üzerine).
+- **Wilson uyarısı:** Üçüncü tür açılırken bir not çıkar (mola iki davranış sayılıyor; VARSAYIM): "Aynı anda 2–3 alışkanlıkla başlayanlarda sonuç en iyiydi, 4 ve üstünde etki düştü (Wilson 2015; bildirim değil, yaşam tarzı önerileri). Seçim senin." Hiçbir tür engellenmez.
+- **Bildirim izni:**
+  - Ayrı anahtar kullanılır: `gozolcum:notify-optin` = { mola: 'yes'|'no', askedAt }. RestLock'un `gozolcum:rest-notify` bayrağı bu iş için kullanılmaz.
+  - Yeni ve mevcut kullanıcıya Ana sayfada bir kez kart çıkar: "Günde bir mola hatırlatması ister misin?" Ardından iOS izin penceresi gelir.
+  - İzin zaten verilmiş olsa bile mola hatırlatması yalnız bu karta "Evet" denince açılır.
+  - İzin verilmemişse `schedule` hiç çağrılmaz, çünkü eklenti izni kendisi istiyor.
+  - İzin reddedilmişse ekranda şu yazar: "Bildirimler kapalı: Ayarlar > Nefona > Bildirimler."
+  - `scheduleTrialReminder` artık izin istemez. İzni olmayan kişiye deneme uyarısı 5. gün uygulama içinde bir şeritle gösterilir.
+- **Her tür açılırken tek cümle:** "Bazı günler bilerek göndermiyoruz; hatırlatmanın bu türdeki kayıtlarına etkisini görmen için."
+- **Apple Sağlık:** Yürüyüş açılırken `health` rızası yoksa ya da daha önce reddedildiyse rıza ekranı (ConsentSheet('health')) doğrudan açılır. Adım okunamıyorsa şu satır çıkar: "Adımların okunamıyor: Sağlık > Veri Erişimi > Nefona."
+- **KVKK:**
+  - Rıza sürümü artık her rıza için ayrı tutulur: `CONSENT_VERSIONS = { health: 2, profileSync: 1, coach: 1, coachLife: 1 }`. Bugün tek bir sürüm var (consent.js:6); o artırılırsa bütün rızalar birden geçersiz olur.
+  - `health` rızasının "Neden" satırına iki amaç eklenir: "adımın düşük olduğu günlerde yürüyüş hatırlatması" ve "hatırlatmanın işine yarayıp yaramadığını bu telefonda sana göstermek".
+  - Bildirim günlüğü için ayrı rıza gerekip gerekmediği, hukukçuya sorulacak soru olarak YAPILACAKLAR.md'ye yazılır.
+- **Su:** Tür açılırken şu not çıkar: "Doktorun sıvını kısıtladıysa bunu açma." Cevap saklanmaz, litre hedefi konmaz.
+
+### 5. Çalışma oturumu
+Özellik senin kararınla aynı; yalnız ekrandaki adı "Çalışma oturumu" olur. Sebep: Türkçe iOS'taki "Odak" özelliğiyle karışmasın (iOS'taki adı cihazda doğrulanmadı).
+- 1, 2 ya da 4 saatlik oturum seçilir. Başlatınca 60., 120., 180. ve 240. dakikalara tek seferlik bildirimler kurulur.
+- Ana sayfadaki şeritte kalan süre ve [Bitir] düğmesi görünür; Bitir tüm oturum bildirimlerini iptal eder. Uygulama kapatılsa da bildirimler gelir.
+- Bildirime dokununca 1 dakikalık mola ekranı açılır; ekranda Atla düğmesi var. Süre VARSAYIM; Leppe-Zamora'da molalar 1–10 dakikaydı.
+- iOS'ta İş ya da Rahatsız Etme modu açıkken de gelmesi için yalnız bu bildirimler `timeSensitive` düzeyinde gönderilir. Bunun için `com.apple.developer.usernotifications.time-sensitive` yetkisi eklenir ve provisioning güncellenir; Swift gerekmez.
+- Oturumda bilerek boş bırakılan gün yoktur (VARSAYIM).
+
+### 6. Telefonda ölçme
+- **Günlük:** `gozolcum:notify-log` içinde her gün ve her tür için tek kayıt tutulur: { date, type, eligible, arm:'send'|'silent', skipReason: null|'focus'|'window'|'noData'|'doneBefore', plannedAt, tapped }. Burada `eligible` "o gün kurallara göre gönderilebilir miydi", `skipReason` "gönderilmediyse neden" demek.
+- **Zar:** Önce o günün uygun olup olmadığına bakılır, sonra zar atılır. Uygun günlerin %25'inde bildirim bilerek gönderilmez (VARSAYIM). Sessiz kalan türün yerine başka tür gönderilmez.
+- **Tohum:** İlk açılışta rastgele bir tohum üretilip `gozolcum:notify-seed` içinde saklanır (kodda bir kurulum kimliği yok). Zar, tohum + tarih + türden türetilir, bu yüzden plan yeniden kurulunca değişmez. "Tüm verileri sil" tohumu da yeniler.
+- **Karşılaştırma:** Yalnız uygun olan ve başka bir kural yüzünden atlanmayan günler karşılaştırmaya girer. Bildirimin "gitti" sayılması için zamanı geçmiş, iptal edilmemiş ve izin verilmiş olması yeter. Bu bilgi `getAll` ile alınmaz, çünkü o yalnız Bildirim Merkezi'nde hâlâ duranları döndürüyor.
+- **Ne ölçülür:** Mola, nefes ve suda ölçü, uygulamada tamamlanan kayıttır. Bu davranışın kendisi değil, etkileşim ölçüsüdür. Bell 2023'te bildirim uygulamanın açılma olasılığını 3,5 kat artırdı ama bırakmayı değiştirmedi; Golbus 2026'da etkileşim arttı, davranış değişmedi. Uygulama dışında verilen mola ya da içilen su görünmez. Davranışa en yakın ölçü yürüyüşteki günlük adım; kartta bu öne çıkar. Saatlik adım verisi olmadığı için Klasnja'daki 30 dakikalık ölçü yapılamaz.
+- **Gelişim kartı:** Önce "Ölçüm sürüyor: 9/21 gün" yazar. 21 gün geçip en az 5 boş gün biriktikten sonra (VARSAYIM) örneğin şöyle yazar: "Hatırlatma gelen 16 günün 10'unda, gelmeyen 5 günün 2'sinde Nefona'da mola ekranını tamamladın. Uygulama dışındaki molalarını göremiyoruz. Sayılar küçük, kesin sonuç değil." Oran değil, sayı yazılır. Fark belirsizse "Henüz fark belli değil" yazar.
+- Günlük için `coach()` tanımlanmaz; veri Nef'e gitmez, telefondan çıkmaz.
+
+### 7. Teknik
+**Yapılamayan:** Uygulama kapalıyken kod çalışmaz. Yerel bildirimin saati ve metni kurulduğu anda sabitlenir. Gönderimden hemen önce koşul kontrol edecek bir kanca yok; Notification Service Extension yalnız sunucudan gelen bildirimde çalışır.
+
+**v1 çözümü (Swift gerekmez):**
+- Saf bir `planla(now, veri, ayarlar)` fonksiyonu önümüzdeki 7 günü hesaplar.
+- Uygulayıcı tek sıra hâlinde çalışır: çağrılar bir promise zincirinde sıralanır ve 300–500 ms bekletilerek birleştirilir. Böylece iki yeniden planlama birbirine karışıp eski veriyle kurulmuş bir bildirim bırakamaz.
+- Uygulayıcı `getPending` ile bekleyenleri alır, yeni planda olmayan kendi id'lerini iptal eder ve eksik olanları tek seferlik `schedule:{at}` ile kurar.
+- Plan şu anlarda yeniden kurulur: açılış, uygulama öne gelince, sağlık verisi okununca, her kayıttan sonra, ayar değişince, oturum başlayınca ve bitince.
+- Geçmiş bir an kurulmaz, çünkü geçmiş an hemen çalar. `on` ve `every` kullanılmaz: tek bir günü atlayamıyorlar. `cancelAll` kullanılmaz; 7301 ve 7302 korunur.
+- **Id şeması:** 7400 + gün×10 + tür; oturum için 7500–7503 (VARSAYIM). En kötü durumda 7×4+4 = 32 bildirim bekler; iOS sınırı 64, bizim payımız 62. Her bildirime `extra: { date, type, arm }` konur. Dokunulan bildirimin tarihi ve türü id'den değil, bu alandan okunur.
+- **Tek dokunma dinleyicisi:** Uygulama kapalıyken yapılan dokunuş yalnız ilk bağlanan dinleyiciye iletiliyor (CAPPlugin.m:55-63). Bugün iki ayrı dinleyici var; üçüncüsü eklenirse yeni türlerin dokunuşları kaybolur. Bu yüzden `notifyApply.js` içinde tek bir `onNotifyTap` olur ve id'ye göre dağıtır: 7301 → Ana sayfa, 7302 → first-report, 74xx ve 75xx → ilgili ekran ve günlük kaydı. App.jsx'te her şeyden önce bir kez bağlanır; `onRestNotifyTap` ve `onTrialNotifyTap` bunun içine alınır.
+- **Kayıt yeri:** Mola ve su kayıtları `store.sessions`'a yazılmaz. `coach.js:36`, `Home.jsx:96` ve `App.jsx:626` bu listeden yalnız oyunları çıkarıyor. Oraya yazılan her kayıt Nef'e gider; haftalık hedefi ve seriyi de şişirir. Bu kayıtlar ayrı bir anahtarda tutulur: `gozolcum:habit-log` { date, type }. Anahtar modülün `storageKeys` listesine eklenir. Nefes kayıtları mevcut yolda kalır.
+- **Bildirimde düğme yok:** Arka planda çalışan düğme güvenilir değil (cihazda doğrulanmadı). Bildirime dokununca ilgili ekran açılır; "İçtim" orada tek dokunuş. Kilit ekranında görünen metin nötrdür, adım bilgisi içermez.
+- **Swift yalnız bir durumda gerekir:** Yürüyüş bildirimi uygulamanın açılmadığı günlerde de isteniyorsa. Bunun için HealthKit background delivery ve yeni bir Apple yetkisi gerekir; tahmini iş 1–2 gün (VARSAYIM).
+
+### 8. İş listesi ve testler
+- **Yeni lib dosyaları:** `notifyPlan.js`, `notifyApply.js` (`{ LN }` kalıbıyla, tek dinleyiciyle), `notifyLog.js`, `habitLog.js`, `focus.js`.
+- **`modules/mola/`:** 1 dakikalık ekran ve Atla düğmesi; `domain:'eye'`, `coach` yok, RestLock kullanılmaz.
+  - İsteğe bağlı boyun-omuz hareketi: Andersen 2010'daki egzersiz elastik bantlıydı; bantsız hareketin etkisi test edilmedi (VARSAYIM). Ağrıyla ilgili iddia yazılmaz.
+  - Her molada isteğe bağlı olarak şu yazar: "İstersen: gözlerini kapat, hafifçe sık, aç." Wolffsohn 2025'te bu egzersiz kuru göz hastalarında günde 2–4 seans yapıldı; moladaki tek adım bu dozun altında (VARSAYIM). Gözün kuruyor mu diye sorulmaz, cevap saklanmaz, kuru göz iddiası yazılmaz.
+- **`modules/water/`:** [İçtim] düğmesi; kayıt `habit-log`'a gider, `coach` yok.
+- **Nefes:** 60 saniyelik yeni rota; başta istenen sakinlik puanı bu rotada atlanır (Breath.jsx:228).
+- **`lib/health.js`:** `walkLowToday(today, avg, readAt)`.
+- **Ekranlar ve diğerleri:** `Reminders.jsx` (yeni), `Schedule.jsx` (metin düzeltmesi), `Home.jsx` (izin kartı ve oturum şeridi), `Progress.jsx` (ölçüm kartı), `consent.js` (rıza başına sürüm ve testleri), `restNotify.js`.
+- **`App.jsx`:** yeniden planlama tetikleri. "Tüm verileri sil" şunları da siler: planlanmış bildirimler, 7302, günlük, `habit-log` ve tohum.
+- **BILDIRIM_PLANI.md:**
+  - Kaynak listesine eklenir: James 2016 (PMID 27311332), Spring 2018 (PMID 29921561, PMC6030572), Wilson 2015 (PMID 25528345, PMC4801324).
+  - Yöntem satırı şöyle olur: "Tam metni okunanlar: Singh 2024, Wilson 2015, Spring 2018; diğerlerinin yalnız özeti okundu."
+  - Plandaki atıflara PMID yazılır.
+
+**Testler:**
+- Geçmiş bir an planlanmaz; her türden günde en çok 1 bildirim gider.
+- Saat seçici 60 dakika aralığı ve 09:00–21:00 aralığını zorlar; 18:00'den sonra su bildirimi gitmez.
+- O gün yapılan türün kalan bildirimi iptal edilir; oturum sürerken diğer türler gelmez.
+- Zar yalnız uygun günde atılır ve plan yeniden kurulunca değişmez; sessiz kalan türün yerine başka tür gitmez; yaz saati geçişi doğru işler.
+- Adım verisi eski ya da eksikse yürüyüş planlanmaz; yürüyüş metninde rakam geçmez.
+- İzin yoksa `schedule` çağrılmaz; 7301 ve 7302 korunur; tek bir dokunma dinleyicisi bağlanır.
+- Mola ve su kayıtları Nef'e giden sinyalleri ve haftalık gün sayısını değiştirmez.
+- İki yeniden planlama aynı anda tetiklenince eski veriyle kurulmuş bildirim kalmaz.
+- **Cihazda doğrulanacak:** uygulama kapalıyken teslim; her türe dokununca doğru ekranın açılması ve günlüğe yazılması; kilit ekranındaki metin; İş odağı açıkken oturum bildiriminin gelmesi.
+
+### 9. Sahibine üç soru
+1. **Yürüyüş bildirimi, uygulamanın öğleden sonra hiç açılmadığı günlerde de gelsin mi?** Hayır dersen v1 Swift gerekmeden çıkar. Evet dersen HealthKit background delivery gerekir: 1–2 gün iş ve yeni bir Apple yetkisi (VARSAYIM). Not: uygulamanın açıldığı günlerde bile karar son açılıştaki adım verisiyle verilir.
+2. **Bildirimin bilerek gönderilmediği günlerin oranı %25 mi olsun?** Oran yükselirse sonuç daha çabuk çıkar, ama kullanıcı daha az hatırlatma alır.
+3. **Göz çalışması hatırlatması nasıl olsun?**
+   - (a) iOS'ta bugünkü takvim dosyası (.ics) yolu kalır.
+   - (b) Yerel bildirim türü olarak eklenir ve .ics'in yerine geçer. Ekrana "Takvimine daha önce eklediysen oradaki etkinliği sil" notu konur.
+
+### Uygulanmayan eleştiriler
+- **"Aynı anda en çok 3 tür açılabilsin":** Uygulanmadı. Dört türün bu sürümde olması senin kararın. Singh 2024'te kişinin kendi seçtiği alışkanlık daha güçlü oluştu. Wilson eleştirisi de yasak değil, uyarı öneriyordu. Eleştirinin asıl derdi (tavan, öncelik sırası, sessizce düşen tür), toplam tavanın kaldırılmasıyla çözüldü.
+- **"Tavan kalsın, sessiz gün tavanda yer tutsun":** Tavan kaldırıldığı için gereksiz kaldı. Günlükteki "tavan yüzünden gitmedi" nedeni de bu yüzden kalktı.
+- **"İzin ekranına götüren Swift düğmesi":** v1'de düz metin yeterli. Böylece v1 Swift'siz kalır; düğme sonra eklenebilir.
+- **"Su açılırken 'içmeyi unutuyor musun?' diye sor":** Seçilmedi. Türü kendi açmak beyan sayılır (VARSAYIM). Böylece fazladan bir soru ve saklanan bir cevap olmaz.
+- **"Ertesi gün 'Dün mola verdin mi?' diye sor":** v1'de yok; kafa karıştırır ve günlüğe yük ekler. Ölçümün sınırı kartta zaten açıkça yazıyor.
+
+---
+
+## İlk tarama (2026-09-27, v1) — aşağıdaki iki kural GEÇERSİZ (v2 §0)
 
 Yöntem: 7 konu PubMed'de ayrı ayrı tarandı (bildirimin etkisi, doğru an/JITAI, oturmayı bölme, nefes ve nabız,
 su, ekran ve göz, alışkanlık); eksikler için ek tarama yapıldı. Her kaynak ayrı bir ajanla PubMed kaydından
 (PMID) açılıp bulgunun özetle uyuşup uyuşmadığı denetlendi: 80 kaynak, düşen yok, 3 bulgu özete göre
-düzeltildi (aşağıda işaretli). YALNIZ ÖZETLER okundu; tam metin okunmadı. Kod yazılmadı.
+düzeltildi (aşağıda işaretli). v2 (aynı gün): tam metni okunanlar Singh 2024 (PMC11641623), Wilson 2015 (PMC4801324),
+Spring 2018 (PMC6030572); diğerlerinin yalnız özeti okundu.
 
 Ürün kuralı (her zaman): sağlık/tedavi iddiası yok; KVKK açık rıza her amaç için ayrı; bildirim izni ve
 sağlık verisi izni ayrı ayrı, özellik açılırken istenir.
@@ -62,7 +174,7 @@ Bildirim, kullanıcının uygulamayı açmasını sağlıyor. Bildirimden sonrak
 2. **Saati kullanıcı seçer.** Varsayılan öneri öğle arası. Bu bir hipotez; hafta içi ile hafta sonu farkı anlamlı değildi (Bidargaddi 2018, PMID 30497999). Sabah ile akşam arasında fark bulunmadı (Trinquart 2023, PMID 36662544).
 3. **Sessiz saatler.** Gece ve yatmadan önceki 60 dakikada bildirim yok; iOS Odak ve Uyku modu aşılmaz (Ishak 2026, PMID 42174036, kanıt zayıf). Su bildirimi 18:00'den sonra gönderilmez; sıvıyı artıran müdahalede gece idrara kalkma arttı (Desai 2026). Bu saat sınırları VARSAYIM.
 4. **Zaten yaptıysa gönderme.** O gün hedefine ulaşan, son 1 saatte uygulamayı açan ya da egzersizini yapmış kişiye bildirim gönderilmez (NeCamp 2020; Bell 2023, yalnızca eğilim).
-5. **Tek alışkanlıkla başla.** Yaklaşık 8 hafta tek alışkanlık; ikincisi ilki oturunca önerilir. Alışkanlığın oturması ortalama (medyan) 59–66 gün, kişiden kişiye 4 ile 335 gün arasında (Singh 2024, PMID 39685110).
+5. ~~**Tek alışkanlıkla başla.**~~ [GEÇERSİZ: kaynak bunu söylemiyor, çıkarımdı — v2 §0] Yaklaşık 8 hafta tek alışkanlık; ikincisi ilki oturunca önerilir. Alışkanlığın oturması ortalama (medyan) 59–66 gün, kişiden kişiye 4 ile 335 gün arasında (Singh 2024, PMID 39685110).
 6. **Azalan etkiye karşı.** İlk 2–4 haftadan sonra bildirim sıklığı düşürülür, metinler dönüşümlü değiştirilir (Head 2013, PMID 24161087; Golbus 2024, PMID 38887953). Mesaj sayısını çoğaltmaya emek harcanmaz: 30 farklı mesaj, tek standart mesajdan daha etkili değildi (Bell 2023).
 7. **Bıkkınlık belirtisi.** Kullanıcı üst üste 3 bildirimi yok sayar ya da susturursa sıklık yarıya iner ve kullanıcıya sorulur (Head 2013; Chandrasekaran 2025, PMID 40199231: uyum belirgin biçimde düştü). "3" eşiği VARSAYIM.
 8. **Kişiselleştirme gerçek veriyle yapılır.** Örnek: "Dün 3 mola verdin." (Trinquart 2023). Mesaja yalnızca isim eklemenin etkisi görülmedi (Atluri 2026, PMID 42580690).
@@ -95,7 +207,7 @@ Bildirim, kullanıcının uygulamayı açmasını sağlıyor. Bildirimden sonrak
 
 ## 6. Yapılmayacaklar
 
-- Su, nefes, hareket, göz ve ekran için aynı gün ayrı ayrı bildirim göndermek (Golbus 2026; Klasnja 2019).
+- ~~Su, nefes, hareket, göz ve ekran için aynı gün ayrı ayrı bildirim göndermek (Golbus 2026; Klasnja 2019).~~ [GEÇERSİZ: iki kaynak da aynı gün iki tür gönderdi — v2 §0]
 - Günde 4–5 bildirimle başlamak (Klasnja 2019; Golbus 2024).
 - "Kalk, çok oturdun" gibi genel uyarılar (Klasnja 2019).
 - Suçlayıcı ya da korkutucu dil: "Yine su içmedin!", "Seriyi kaybettin!", "Gözlerin bozuluyor" (Tannenbaum 2015; sağlık iddiası yasağı).
@@ -224,3 +336,8 @@ Bildirim, kullanıcının uygulamayı açmasını sağlıyor. Bildirimden sonrak
 - Xu 2025, NPJ Digit Med — Prospektif randomize çalışma: akıllı telefonda göz kırpma eğitimi uygulaması ya da müdahalesiz kontrol, 30 gün, 40. PMID 41266739 · doi:10.1038/s41746-025-02053-8. (olumlu) 30 günün sonunda uygulama grubunda göz kırpma davranışı ve göz yüzeyi parametreleri anlamlı iyileşti; kontrol grubunda anlamlı değişiklik olmadı. Özette sayısal etki büyüklüğü verilmemiş. OSDI'deki değişim; eğitim süresi, OPI, göz kırpma hızı ve cinsiyetle bağımsız olarak ilişkiliydi.
 - Kim 2020, Cont Lens Anterior Eye — Kontrolsüz önce-sonra çalışması: 4 hafta boyunca uyanık saatlerde 20 dakikada bir, 10 saniyelik göz kırpma egzersizi döngüsü talimatı, 54 başladı, 41 tamamladı; kuru göz belirtisi olanlar. PMID 32409236 · doi:10.1016/j.clae.2020.04.014. (olumlu) Katılımcılar günde ortalama 25,6 döngü yaptıklarını bildirdi. DEQ-5 11'den 7'ye, OSDI 36'dan 22'ye düştü (p<0,001). NIBUT 6,5 sn'den 8,1 sn'ye çıktı (p<0,04). Eksik göz kırpma oranı %54'ten %34'e indi (p<0,001). Gözyaşı menisküs yüksekliği ve lipit tabakası kalınlığı değişmedi. Kontrol grubu yok.
 - Sadhwani 2024, Cureus — Tek kör RKÇ: bilgisayar görme sendromu için olağan tedavi artı optimize göz kırpma egzersizi ya da yalnız olağan tedavi, 6 ay, 38 (20 müdahale, 18 kontrol); 18–40 yaş; CVS-Q 6 ve üstü. PMID 39185289 · doi:10.7759/cureus.67653. (karışık) CVS-Q skoru iki grupta da anlamlı düştü (ikisinde de p<0,001). Müdahale grubunda düzeltmesiz görme keskinliği ve sferik eşdeğerde değişiklik, TBUT'ta artış bildirildi; kontrol grubunda TBUT azaldı. Schirmer testi iki grupta da değişmedi. Yakın konverjans noktası yalnızca kontrol grubunda iyileşti (p=0,042). Çalışma küçük ve tek merkezli. Kırma kusurunun değiştiği iddiası olağan dışı; sağlık iddiasına dayanak yapılmamalı.
+
+### v2 ek kaynakları (aynı gün alışkanlık sayısı; PubMed kaydıyla doğrulandı)
+- James 2016, Preventive Medicine — sistematik derleme, 6 RKÇ. PMID 27311332 · doi:10.1016/j.ypmed.2016.06.012. (karışık) Kanıt sınırlı; 6 denemenin 3'ünde fark vardı: 2'si (sigara) sıralı, 1'i (yağ alımı) aynı anda başlamayı destekledi.
+- Spring 2018, J Med Internet Res — RKÇ (Make Better Choices 2), 212 kişi, 9 ay; haftalık telefon koçluğu + haftada 5 $ teşvik + ivmeölçer (yalnız uygulama değil). PMID 29921561 · doi:10.2196/10528 (PMC6030572). (karışık) Aynı anda ve sıralı başlama benzer; sıralı kol yalnız 6. ayda küçük ama anlamlı öndeydi (P=0,03), 3. ve 9. ayda fark yok.
+- Wilson 2015, Psychological Bulletin — meta-analiz (yaşam tarzı önerisi sayısı). PMID 25528345 · doi:10.1037/a0038295 (PMC4801324). (karışık) 2–3 öneri 2,03, 4 ve üstü 1,26, tek öneri 0,69; orta süreli ve uzun müdahalelerde orta sayı 0,28, yüksek sayı 0,07, tek öneri 0,00. Bildirim değil, davranış önerisi sayısı.
