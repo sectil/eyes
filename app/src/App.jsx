@@ -21,6 +21,7 @@ import Onboarding from './screens/Onboarding.jsx'
 import IrisPlan from './screens/IrisPlan.jsx'
 import IrisRecheck from './screens/IrisRecheck.jsx'
 import { irisCells, filledIndexes, snapshot } from './lib/iris.js'
+import { domainOfSession } from './lib/dataHub.js'
 import ProfileQuestions from './screens/ProfileQuestions.jsx'
 import QuestionFlow from './components/QuestionFlow.jsx'
 import { missing, GROUPS } from './lib/profileQuestions.js'
@@ -72,8 +73,9 @@ const budgetKindOf = (s) => gatesOf(s).eyeBudget ?? null
 // Mola metninde cümle içinde geçer ("Devam: günlük test"): modülün label'ı.
 const activityLabel = (s) => registry.labelFor(s)
 // İris haritası: oturumun sayıldığı alan (Dikkat, Farkındalık ilk görevle dolar; lib/iris.js)
-const domainOfSession = (s) => registry.forSession(s)?.progress?.domain ?? null
-const irisFilled = (profile) => filledIndexes(irisCells(profile?.iris?.baseline ?? snapshot(profile ?? {}), {}))
+// Oturum → alan: veri merkezi (lib/dataHub.js) tek kaynak
+// Ödeme ekranı haritası da oturumları görür (önce verilmiyordu: Dikkat ve Farkındalık hep boş kalıyordu)
+const irisFilled = (profile, sessions = []) => filledIndexes(irisCells(profile?.iris?.baseline ?? snapshot(profile ?? {}), { sessions, domainOf: domainOfSession }))
 // Ana sayfadaki mola bandından açılan kilit ekranı (hedefsiz)
 const REST_ROUTE = 'eye-rest'
 
@@ -717,7 +719,7 @@ export default function App() {
   if (!settings.trialOffer && !access.loading && access.native && (!access.premium || access.testUnlock) && screen !== 'evidence') {
     return (
       <Paywall
-        filled={irisFilled(settings.profile)}
+        filled={irisFilled(settings.profile, sessions)}
         onUnlocked={() => { store.setSetting('trialOffer', { date: nowIso(), started: true }); setAccess({ loading: false, premium: true, native: true }); refresh() }}
         onSkip={access.testUnlock ? () => { store.setSetting('trialOffer', { date: nowIso(), skipped: true }); refresh() } : null}
         onSafety={() => go('evidence')}
@@ -817,7 +819,7 @@ export default function App() {
   if (locked && screen !== 'evidence') {
     return (
       <Paywall
-        filled={irisFilled(settings.profile)}
+        filled={irisFilled(settings.profile, sessions)}
         preview={previewPaywall}
         onUnlocked={() => { setAccess({ loading: false, premium: true, native: true }); go('home') }}
         onSafety={() => go('evidence')}

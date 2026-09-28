@@ -31,6 +31,7 @@ export default function BlinkExercise({ onFinish, onBack, trueDepth = false }) {
   const phaseRef = useRef(phase)
   phaseRef.current = phase
   const stepStart = useRef(0)
+  const startedAt = useRef(0) // süre kaydı (veri merkezi: Gelişim tahmin değil gerçek süre görsün)
   const art = useIrisArt()
 
   const cam = useFaceTracking({
@@ -121,6 +122,7 @@ export default function BlinkExercise({ onFinish, onBack, trueDepth = false }) {
     setClosures(0)
     setRep(0)
     setStep(0)
+    startedAt.current = performance.now()
     setPhase(withCam ? 'baseline' : 'run')
   }
 
@@ -132,6 +134,7 @@ export default function BlinkExercise({ onFinish, onBack, trueDepth = false }) {
       cameraUsed: tracked,
       detectedClosures: tracked ? closures : null,
       expectedClosures: BLINK_REPS * CLOSURES_PER_CYCLE,
+      seconds: startedAt.current ? Math.round((performance.now() - startedAt.current) / 1000) : undefined,
     })
   }
 

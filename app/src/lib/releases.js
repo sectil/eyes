@@ -7,6 +7,7 @@ export const RELEASES = [
     id: '2026-09-28',
     title: '28 Eylül güncellemesi',
     items: [
+      { kind: 'fix', text: 'Göz kırpma egzersizinin gerçek süresi kaydedilir (önceden tahmin ediliyordu). Deneme ekranındaki iris haritasında Dikkat ve Farkındalık alanları yaptığın görevlerle dolar; önce hep boş görünüyordu.' },
       { kind: 'change', text: 'Egzersiz adı sadeleşti: "Tam göz kırp" artık "Göz kırp".' },
       { kind: 'new', text: 'Göz takibi kullandıkça kendini iyileştirir: egzersizdeki "Sağa bak", "Sola bak", "Yukarı bak", "Aşağı bak" adımlarında gözünün gerçekte nereye gittiği öğrenilir ve ayar sessizce sana oturur. Yeniden göz ayarı yapmana gerek kalmaz; tutarsız ölçümler (başka yere bakma, kırpma) sayılmaz.' },
       { kind: 'change', text: 'Göz ayarında yönlendirme daha net: "Ortadaki göz bebeğinin içindeki noktaya bak." Ekrandaki gözün tam ortasındaki noktaya bakınca ayar daha doğru olur; sesli yönlendirmeler de buna göre yenilendi.' },

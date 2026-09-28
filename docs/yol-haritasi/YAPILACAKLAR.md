@@ -24,6 +24,18 @@ Son güncelleme: 2026-09-28.
 7. [ ] **Ölçüm ilkesi açıkları:** her modül istatistik kaydeder ve Gelişim'de görünür (ANA_BELGE §4). Taramada
    bulunan eksikler aşağıda "Ölçüm ilkesi" bölümünde.
 
+## Veri merkezi ve kendini geliştiren sistem (sahibin yönü, 2026-09-28)
+- [x] **1. Veri merkezi (okuma kapısı):** `lib/dataHub.js`. Testler, oturumlar, istatistik çekirdeği (`progress.js`),
+      profil cevapları (başlangıç ve 28. gün) ve mola/su günlüğü 7 alan altında. Canlı her modülün merkeze ulaştığı
+      testle denetleniyor. Göz kırp süre kaydediyor. Göz kırp ve egzersiz setleri merkeze bağlandı. Ödeme ekranındaki
+      iris haritası oturumları görüyor (Dikkat ve Farkındalık hep boş kalıyordu).
+- [ ] **2. İris haritası ve Gelişim merkezden beslenir:** her alanın değeri modül verisinden; harita Gelişim'in başında
+      ve Ana sayfada; WHO-5 ekranı. Tasarım önce Artifact. Ayrıntı aşağıda "Ölçüm ilkesi".
+- [ ] **3. Anonim teşhis verisi (ürünün kendini geliştirmesi):** açık rızayla, hesapsız, görüntüsüz yalnız sayılar
+      Supabase'e (Frankfurt). Örnek: kalibrasyon kontrol yüzdeleri, ekran hataları. Ayrı KVKK rıza sayfası ve gizlilik
+      politikası; hukukçu onayı. Sonra "Verileri paylaş" kullanıcı arayüzünden kalkar, yalnız test derlemesinde kalır.
+- [ ] **4. Kişiye uyum merkezden okur:** oyun zorluğu, günün yolu (zayıf alana ağırlık), Nef'in önerileri.
+
 ## Ölçüm ilkesi: her modül kaydeder, gelişim görünür (ANA_BELGE §4; plan + onay gerekir)
 - [ ] **İris haritası modül verisiyle yaşasın.** Bugün 5 alan yalnız kurulumdaki ve 28. gündeki sorulardan, Dikkat ve
       Farkındalık yalnız dolu/boş dolar.
@@ -34,8 +46,8 @@ Son güncelleme: 2026-09-28.
       - Tasarım önce Artifact.
 - [ ] **WHO-5 iyi oluş:** ekranı yok, `makeWho5Record` hiç çağrılmıyor; Gelişim İyi oluş kartı hep "yakında".
       Resmi Türkçe madde metni sahibinden bekleniyor (aşağıda "Bekleyen kararlar").
-- [ ] **Göz kırp** süre (`seconds`) kaydetsin; şu an 150 sn varsayılıyor (`stats.js:15`). Algılanan kırpma sayısı Gelişim'de
-      zamanla görünsün.
+- [x] **Göz kırp** süre (`seconds`) kaydediyor (eski kayıtlarda 150 sn varsayımı sürer).
+- [ ] Göz kırpta algılanan kırpma sayısı Gelişim'de zamanla görünsün.
 - [ ] **Zaman serisi:** Nefes, Dalga, Gökyüzü ve Yön-Dışarıdan bak için önce→sonra etkisi haftalara göre görünsün (bugün
       yalnız ortalama). Yılan, Çemberler (isabet, varış süresi) ve okuma testi için trend grafiği.
 - [ ] **Okuma testi** Göz alan kutucuğuna girsin.

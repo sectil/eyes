@@ -54,6 +54,14 @@ ve özgüven veriyor mu, yoksa sıkıyor mu? Ücretli kullanıcı en ufak hatada
   model `eleven_multilingual_v2`. Ses Profilim → Seslendirme'de bir kez seçilir; modüller sormaz.
   Ekrandaki cümle ile ses aynıdır.
 
+**Veri merkezi (sahibin baştan beri koyduğu ilke)**
+- Bütün veri tek kapıdan okunur: `app/src/lib/dataHub.js`. Gelişim, iris haritası, Nef ve raporlar kendi ayrı hesabını
+  kurmaz; merkezden okur.
+- Bir modül ya da görünüm merkeze yazmıyor ve merkezden okumuyorsa bitmiş sayılmaz. Commit'ten önce kontrol edilir.
+- `dataHub.test.js` canlı her modülün merkeze ulaştığını denetler; ulaşmayan yeni modül testi kırar.
+- Hata kaydı (2026-09-28): Gelişim 2.0 (`70ff54f`), iris haritası (`812f568`) ve mola/su günlüğü bu ilkeye aykırı
+  olarak ayrı yazıldı; sahibin sözü baştan beri buydu.
+
 **Süreç**
 - Her değişiklik `app/src/lib/releases.js`'e bir sürüm notu maddesi ekler.
 - Her açık iş `yol-haritasi/YAPILACAKLAR.md`'ye yazılır.
