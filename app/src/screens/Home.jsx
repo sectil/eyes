@@ -144,7 +144,7 @@ function FocusStrip({ focus, now, block = null, onStop }) {
 
 // Bildirim planı v2 (App verir): reminderAsk + onReminders(yes) izin kartı; focus + focusBlock + onStopFocus oturum şeridi;
 // trialNote ({ daysLeft }) + onTrialNote: izni olmayana deneme 5. gün şeridi; thinAsk (tür) + onThin(tür, 'keep'|'alt').
-// alarmStatus ({ platform, auth }; App) + alarmTest (14.00 eşiği): başlığın hemen altındaki alarm kartı (AlarmCard).
+// alarmStatus ({ platform, auth }; App) + alarmTest (14.00 eşiği): "Bugünün yolu"nun altındaki alarm kartı (AlarmCard).
 // İlk ekran kalabalıklaşmasın: kart yuvası tek (izin kartı → deneme şeridi → seyreltme sorusu), rıza sayfası açıkken boş.
 // healthSheetKind: 'health' ya da eski metne izin vermiş kişiye 'healthUpdate' (lib/consent.js; cevap yine onHealthConsent).
 export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, healthSheetKind = 'health', onCoach, onStart, onAsk, onSaveProfile, reminderAsk = false, onReminders, focus = null, focusBlock = null, onStopFocus, trialNote = null, onTrialNote, thinAsk = null, onThin, alarmStatus = null, alarmTest = false }) {
@@ -222,8 +222,6 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           )}
         </button>
       </header>
-
-      {alarmStatus && !sheetOpen && <AlarmCard status={alarmStatus} sessions={sessions} test={alarmTest} onStart={onStart} now={now} />}
 
       {focus && onStopFocus && <FocusStrip focus={focus} now={now} block={focusBlock} onStop={onStopFocus} />}
 
@@ -373,6 +371,9 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
       ) : (
         <p className="muted small">Aşağıdan istediğin çalışmayı seç.</p>
       )}
+
+      {/* Alarm kartı yolun altında (Artifact v4); Profil → Alarm'dan ya da ⋯ menüsünden kaldırılır */}
+      {alarmStatus && !sheetOpen && <AlarmCard status={alarmStatus} sessions={sessions} test={alarmTest} onStart={onStart} now={now} />}
 
       {!(slot === 'remind' && coachIntro) && <CoachCard tests={tests} sessions={sessions} profile={settings.profile} weeklyTarget={week.target} consents={settings.consents} onCoach={onCoach} onStart={onStart} />}
 

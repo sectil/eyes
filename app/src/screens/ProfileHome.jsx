@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { Camera, Check, ChevronRight, Eye, ListChecks, LogOut, Trash2, UserRound, ShieldCheck, Footprints, Volume2 } from 'lucide-react'
+import { Camera, Check, ChevronRight, Eye, ListChecks, LogOut, Trash2, UserRound, ShieldCheck, Footprints, Volume2, AlarmClock, Moon, LayoutDashboard } from 'lucide-react'
+import '../styles/info.css'
 import { PageHeader } from '../components/ui.jsx'
 import { emptyIdentity, normalizeIdentity, validBirthDate, ageFromBirthDate, isAdult, initialFor, AVATAR_HUES, AVATAR_PX, NAME_MAX } from '../lib/identity.js'
 import { CORRECTION } from '../lib/profile.js'
@@ -43,7 +44,7 @@ export async function shrinkImage(file, px = AVATAR_PX) {
   }
 }
 
-export default function ProfileHome({ identity, profile, account = null, onSave, onQuestions, onIntro, onBack, onAccount, onSignOut, onDeleteAccount, loadMembership = getMembership, syncConsent = false, onConsent, healthAvail = false, healthConsent = false, onHealthConsent, consents = null, onCoach, onCoachLife }) {
+export default function ProfileHome({ identity, profile, account = null, onSave, onQuestions, onIntro, onBack, onAccount, onSignOut, onDeleteAccount, loadMembership = getMembership, syncConsent = false, onConsent, healthAvail = false, healthConsent = false, onHealthConsent, consents = null, onCoach, onCoachLife, alarm = null }) {
   const [id, setId] = useState(() => normalizeIdentity(identity ?? emptyIdentity()))
   const [correction, setCorrection] = useState(profile?.correction ?? null)
   const [err, setErr] = useState('')
@@ -171,6 +172,8 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
           </button>
         )}
       </div>
+
+      {alarm && <AlarmPref alarm={alarm} />}
 
       <VoicePref />
 
@@ -312,6 +315,43 @@ function MembershipCard({ m }) {
 }
 
 // Seslendirme sesi: bir kez burada seçilir; nefes, göz kalibrasyonu ve diğer sesli modüller bunu kullanır (prefs.voice)
+// Profil → Alarm (Artifact "Nefona Alarm" v4): alarm (kurulum sayfası), "Ana sayfada göster" (prefs.alarmCard; varsayılan
+// açık), uyku sesi. Kart kapalıyken alarm yine çalar; yalnız Ana sayfada görünmez. alarm: App alarmProfile().
+function AlarmPref({ alarm }) {
+  const [show, setShow] = useState(() => getPrefs().alarmCard)
+  useEffect(() => subscribePrefs((p) => setShow(p.alarmCard)), [])
+  return (
+    <section className="ph-alarm" aria-labelledby="ph-alarm-h">
+      <h2 id="ph-alarm-h" className="ph-sec">Alarm</h2>
+      <div className="list">
+        <button className="list-row" onClick={alarm.onOpen} aria-label={alarm.time ? `Alarm ${alarm.time}, ${alarm.days}. Değiştir` : 'Alarm kur'}>
+          <AlarmClock size={20} aria-hidden="true" />
+          <span className="grow stack" style={{ gap: 2 }}>
+            <span className={alarm.time ? 'ph-alarm-time' : ''} style={{ fontWeight: 600 }}>{alarm.time ?? 'Alarm kurulu değil'}</span>
+            <span className="muted small">{alarm.time ? alarm.days : 'Kurmak için dokun'}</span>
+            {alarm.time && <span className="muted small">{alarm.sound}</span>}
+          </span>
+          <ChevronRight size={18} className="muted" />
+        </button>
+        {/* Öteki satırlarla aynı hiza: düz simge + metin + anahtar (PrefToggle'ın renkli simge kutusu burada yok) */}
+        <button type="button" role="switch" aria-checked={show} className="list-row pref-toggle ph-alarm-sw" onClick={() => setPrefs({ alarmCard: !show })}>
+          <LayoutDashboard size={20} aria-hidden="true" />
+          <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Ana sayfada göster</span><span className="muted small">Yolun altında alarm kartı</span></span>
+          <span className="pref-switch" aria-hidden="true"><span className="pref-knob" /></span>
+        </button>
+        {alarm.sleep && (
+          <button className="list-row" onClick={alarm.onSleep}>
+            <Moon size={20} aria-hidden="true" />
+            <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Uyku sesi</span><span className="muted small">{alarm.sleep}</span></span>
+            <ChevronRight size={18} className="muted" />
+          </button>
+        )}
+      </div>
+      {!show && <p className="muted small ph-alarm-note">Kart kapalıyken alarm yine çalar; yalnız Ana sayfada görünmez.</p>}
+    </section>
+  )
+}
+
 function VoicePref() {
   const [voice, setVoice] = useState(() => getPrefs().voice)
   useEffect(() => subscribePrefs((p) => setVoice(p.voice)), [])

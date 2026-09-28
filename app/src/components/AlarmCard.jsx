@@ -1,16 +1,23 @@
 import { useState } from 'react'
-import { AlarmClock, Moon, Sun } from 'lucide-react'
-import { eveningCard, morningCard, ringLabel, untilText, setupDefaults, buildAlarm, hhmm, withSuffix, latency, nextLatency, bedtimeFor, minOfDay, SLEEP_TARGET_H } from '../lib/alarm.js'
+import { Moon, ChevronRight, Ellipsis } from 'lucide-react'
+import {
+  eveningCard, morningCard, nextRing, ringLabel, untilText, setupDefaults, buildAlarm, hhmm, withSuffix, latency, nextLatency,
+  bedtimeFor, minOfDay, daysLabel, sleepMinutes, SLEEP_TARGET_H,
+} from '../lib/alarm.js'
 import { loadAlarm, loadAlarmLog, addAlarmEvent, saveAlarm } from '../lib/alarmLog.js'
-import { soundById, DEFAULT_SOUND } from '../lib/alarmSounds.js'
+import { DEFAULT_SOUND } from '../lib/alarmSounds.js'
 import { scheduleAlarm } from '../lib/alarmNative.js'
+import { getPrefs, setPrefs } from '../lib/prefs.js'
 import '../styles/alarm.css'
 
-// Ana sayfa alarm kartı (Artifact "Nefona Alarm" v3, ekran 1, 3, 4, 5). Başlığın hemen altında, tek kart:
-//  sabah: "Uyanınca" seçildiyse o (1 dk nefes / Dalga), sonra "Ses bittiğinde uyumuş muydun?"
-//  akşam (19.00, test derlemesinde 14.00): kurulu alarm yoksa "Yarın sabah · Alarm kurayım mı?", kuruluysa durum
-// status: { platform: 'alarmkit'|'notify'|'web', auth } (lib/alarmNative.js alarmStatus; App verir).
-// Kayıtlar lib/alarmLog.js'e; kart her dokunuşta günlüğü yeniden okur.
+// Ana sayfa alarm kartı (Artifact "Nefona Alarm" v4, onaylı 28 Eylül: https://claude.ai/artifact/GJU5G7RieTuyNTUbezJn8d).
+// "Bugünün yolu"nun altında; Profil → Alarm "Ana sayfada göster" (prefs.alarmCard) ya da ⋯ → "Ana sayfadan kaldır".
+// Kart gizliyken alarm yine çalar; akşam sorusu ve sabah kartı da çıkmaz. Tek kart, hallerine göre:
+//  sabah: "Uyanınca" (1 dk nefes / Dalga / gün ışığı), sonra "Ses bittiğinde uyumuş muydun?"
+//  kurulu: saat (Ana sayfanın sayı dili), gece kadranı (yatma → alarm, nokta şimdi), uyku sesi satırı, yatma saati
+//  akşam (19.00, test derlemesinde 14.00), alarm yoksa: "Yarın sabah · Alarm kurayım mı?"
+//  gün içinde alarm yoksa: tek satır "Kurulu değil · Kur"
+// status: { platform: 'alarmkit'|'notify'|'web', auth } (App: lib/alarmNative.js alarmStatus). Web'de kart yok.
 const ANSWERS = [
   { id: 'yes', label: 'Evet' },
   { id: 'no', label: 'Hayır' },
@@ -20,65 +27,123 @@ const DENIED = {
   alarmkit: { eyebrow: 'Alarm izni kapalı', path: 'Ayarlar → Nefona → Alarmlar' },
   notify: { eyebrow: 'Bildirim izni kapalı', path: 'Ayarlar → Nefona → Bildirimler' },
 }
+const WAKE_TITLE = { breath: 'Bir dakika nefes, sonra güne başla', dalga: 'Güne bir Dalga ile başla', light: 'Perdeyi aç, gün ışığı al' }
+const WAKE_GO = { breath: 'Başla · 1 dk', dalga: 'Başla', light: 'Açtım' }
+const HOUR = 3600000
 
-function Head({ icon = 'alarm', eyebrow, title }) {
-  const Icon = icon === 'moon' ? Moon : icon === 'sun' ? Sun : AlarmClock
+// Gece kadranı: 12 saatlik; vurgu yayı yatma saatinden alarma, altın nokta şimdi (günün diyaframının gece karşılığı)
+const C = 34, R = 27
+const deg = (d) => (((d.getHours() % 12) + d.getMinutes() / 60) / 12) * 360
+const at = (a, r = R) => {
+  const t = ((a - 90) * Math.PI) / 180
+  return [C + r * Math.cos(t), C + r * Math.sin(t)]
+}
+export function NightDial({ bed, ring, now }) {
+  const a0 = deg(bed), a1 = deg(ring)
+  const span = (((a1 - a0) % 360) + 360) % 360
+  const [x0, y0] = at(a0), [x1, y1] = at(a1), [nx, ny] = at(deg(now))
   return (
-    <div className="al-head">
-      <span className={`al-ic${icon === 'moon' ? ' moon' : ''}`}><Icon size={20} aria-hidden="true" /></span>
-      <div>
-        <span className="eyebrow">{eyebrow}</span>
-        <h3 className="al-title">{title}</h3>
+    <svg className="al-dial" viewBox="0 0 68 68" aria-hidden="true">
+      <circle cx={C} cy={C} r={R} className="trk" />
+      {Array.from({ length: 12 }, (_, i) => {
+        const [ax, ay] = at(i * 30, 31), [bx, by] = at(i * 30, 33)
+        return <line key={i} x1={ax} y1={ay} x2={bx} y2={by} className="tk" />
+      })}
+      {span > 0 && <path d={`M${x0} ${y0} A${R} ${R} 0 ${span > 180 ? 1 : 0} 1 ${x1} ${y1}`} className="slp" />}
+      <circle cx={nx} cy={ny} r="3.2" className="now" />
+      <path d="M36.2 27.4a7 7 0 1 0 5 11.2 5.6 5.6 0 0 1-5-11.2z" className="moon" transform="translate(-1.8 -0.6)" />
+    </svg>
+  )
+}
+
+function Shell({ eyebrow, label, menu, children }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <section className="card al-wg" aria-label={label ?? eyebrow}>
+      <div className="al-wg-top">
+        <span className="al-ey">{eyebrow}</span>
+        {menu && (
+          <button type="button" className="al-more" aria-label="Alarm seçenekleri" aria-expanded={open} onClick={() => setOpen((v) => !v)}>
+            <Ellipsis size={18} aria-hidden="true" />
+          </button>
+        )}
       </div>
-    </div>
+      {children}
+      {open && menu && (
+        <div className="al-menu" role="menu">
+          {menu.map((m) => (
+            <button key={m.label} type="button" role="menuitem" className={m.danger ? 'danger' : ''} onClick={() => { setOpen(false); m.onClick() }}>{m.label}</button>
+          ))}
+        </div>
+      )}
+    </section>
   )
 }
 
 export default function AlarmCard({ status, sessions = [], test = false, onStart, now = new Date() }) {
   const [, setTick] = useState(0)
-  const [thanks, setThanks] = useState(null) // sabah cevabından sonra: bu gecenin süresi (dk)
-  const [prefOff, setPrefOff] = useState(false) // "Çıkmasın" dendi: ayar yolu (bir kez, bu ekranda)
+  const [thanks, setThanks] = useState(null) // sabah cevabından sonra: yeni "Sana göre" süresi (dk)
+  const [askOff, setAskOff] = useState(false) // "Sorma" dendi: bir kez bilgi
+  const [removed, setRemoved] = useState(false) // "Ana sayfadan kaldır" sonrası geri al şeridi
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState(null)
   const bump = () => setTick((t) => t + 1)
+  const platform = status?.platform ?? 'web'
+  if (platform === 'web') return null
+
+  if (removed) {
+    return (
+      <div className="al-toast" role="status">
+        <span className="grow">{"Alarm kartı kaldırıldı. Profil → Alarm'dan geri eklersin; alarm yine çalar."}</span>
+        <button type="button" onClick={() => { setPrefs({ alarmCard: true }); setRemoved(false) }}>Geri al</button>
+      </div>
+    )
+  }
+  if (!getPrefs().alarmCard) return null
+
   const alarm = loadAlarm()
   const log = loadAlarmLog()
-  const platform = status?.platform ?? 'web'
+  const notify = platform === 'notify'
+  const liveNext = nextRing(alarm, now)
+  const hide = () => { setPrefs({ alarmCard: false }); setRemoved(true) }
+  const menu = [
+    { label: liveNext ? 'Alarmı değiştir' : 'Alarm kur', onClick: () => onStart('alarm') },
+    ...(liveNext && alarm.sleep !== 'off' ? [{ label: 'Uyku sesi', onClick: () => onStart('alarm-sleep') }] : []),
+    { label: 'Ana sayfadan kaldır', danger: true, onClick: hide },
+  ]
 
   if (thanks != null) {
     return (
-      <section className="card al-card" aria-label="Uyku sesi" role="status">
-        <Head icon="moon" eyebrow="Kaydedildi" title={`"Sana göre" süren artık ${thanks} dk.`} />
+      <Shell eyebrow="Kaydedildi" label="Uyku sesi">
+        <p className="al-q">{`"Sana göre" süren artık ${thanks} dk.`}</p>
         <div className="al-btns"><button type="button" className="btn btn-secondary btn-sm al-fit" onClick={() => setThanks(null)}>Tamam</button></div>
-      </section>
+      </Shell>
     )
   }
-  if (prefOff) {
+  if (askOff) {
     return (
-      <section className="card al-card" role="status">
-        <p className="al-sub">{"Tamam, akşamları çıkmayacak. Alarmı istediğinde Bilgi → Hatırlatmalar'dan kurarsın."}</p>
-        <div className="al-btns"><button type="button" className="btn btn-secondary btn-sm al-fit" onClick={() => setPrefOff(false)}>Tamam</button></div>
-      </section>
+      <Shell eyebrow="Tamam" label="Akşam sorusu">
+        <p className="al-sub">{'Akşamları sormayacağım. Kart burada kalır; alarmı istediğinde "Kur"a dokun.'}</p>
+        <div className="al-btns"><button type="button" className="btn btn-secondary btn-sm al-fit" onClick={() => setAskOff(false)}>Tamam</button></div>
+      </Shell>
     )
   }
 
-  const m = platform === 'web' ? null : morningCard({ now, alarm, log, sessions })
+  const m = morningCard({ now, alarm, log, sessions })
   if (m?.kind === 'wake') {
-    const breath = m.action === 'breath'
-    const light = m.action === 'light'
     const go = () => {
-      if (!light) return onStart(breath ? 'breath-1' : 'dalga')
+      if (m.action !== 'light') return onStart(m.action === 'breath' ? 'breath-1' : 'dalga')
       addAlarmEvent('wakeDone', { ring: m.ring.toISOString(), action: 'light' })
       bump()
     }
     return (
-      <section className="card al-card" aria-label="Günaydın">
-        <Head icon="sun" eyebrow="Günaydın" title={light ? 'Perdeyi aç, gün ışığı al' : breath ? 'Bir dakika nefes, sonra güne başla' : 'Güne bir Dalga ile başla'} />
+      <Shell eyebrow={`Günaydın · ${hhmm(minOfDay(new Date(now)))}`} label="Günaydın" menu={menu}>
+        <p className="al-q">{WAKE_TITLE[m.action]}</p>
         <div className="al-btns">
-          <button type="button" className="btn btn-sm" onClick={go}>{light ? 'Açtım' : breath ? 'Başla · 1 dk' : 'Başla'}</button>
-          <button type="button" className="btn btn-ghost btn-sm al-fit" onClick={() => { addAlarmEvent('wakeSkip', { ring: m.ring.toISOString() }); bump() }}>Şimdi değil</button>
+          <button type="button" className="btn btn-sm" onClick={go}>{WAKE_GO[m.action]}</button>
+          <button type="button" className="btn btn-secondary btn-sm al-fit" onClick={() => { addAlarmEvent('wakeSkip', { ring: m.ring.toISOString() }); bump() }}>Şimdi değil</button>
         </div>
-      </section>
+      </Shell>
     )
   }
   if (m?.kind === 'question') {
@@ -89,73 +154,93 @@ export default function AlarmCard({ status, sessions = [], test = false, onStart
       setThanks(after)
     }
     return (
-      <section className="card al-card" aria-label="Uyku sesi · tek soru">
-        <Head icon="moon" eyebrow="Uyku sesi · tek soru" title="Ses bittiğinde uyumuş muydun?" />
+      <Shell eyebrow="Uyku sesi · tek soru" menu={menu}>
+        <p className="al-q">Ses bittiğinde uyumuş muydun?</p>
         <div className="al-btns" role="group" aria-label="Cevap">
           {ANSWERS.map((a) => <button key={a.id} type="button" className="btn btn-secondary btn-sm" onClick={() => answer(a.id)}>{a.label}</button>)}
         </div>
         <p className="al-sub">&quot;Hayır&quot; dersen bu geceki süre 5 dakika uzar, &quot;Çok önce&quot; dersen kısalır.</p>
-      </section>
+      </Shell>
+    )
+  }
+
+  if (liveNext) {
+    const soon = liveNext.getTime() - new Date(now).getTime() <= 24 * HOUR
+    const bed = bedtimeFor(liveNext, now)
+    const sleepMin = sleepMinutes(alarm, log, now)
+    const when = untilText(liveNext, now)
+    return (
+      <Shell eyebrow={notify ? 'Sabah · hatırlatma' : 'Sabah · alarm'} menu={menu}>
+        <button type="button" className="al-main" onClick={() => onStart('alarm')} aria-label={`Alarm ${ringLabel(liveNext, now)}, ${when}. Değiştir`}>
+          <span className="al-num">
+            <b>{hhmm(minOfDay(liveNext))}</b>
+            <span className="al-lbl">{soon ? when : `${ringLabel(liveNext, now).split(' ')[0]} · ${when}`}<br />{daysLabel(alarm.days)}</span>
+          </span>
+          {soon && <NightDial bed={new Date(liveNext.getTime() - SLEEP_TARGET_H * HOUR)} ring={liveNext} now={new Date(now)} />}
+        </button>
+        {alarm.sleep !== 'off' && (
+          <button type="button" className="al-row" onClick={() => onStart('alarm-sleep')}>
+            <Moon size={15} aria-hidden="true" />
+            <span className="grow"><b>Uyku sesi</b></span>
+            <span className="al-row-val">{`${alarm.sleep === 'auto' ? 'Sana göre ' : ''}${sleepMin > 0 ? `${sleepMin} dk` : 'bu gece yok'}`}</span>
+            <ChevronRight size={16} aria-hidden="true" />
+          </button>
+        )}
+        {notify && <p className="al-warn">Bu telefonda gerçek alarm yok (iOS 26 gerekir); sessiz modda ses çıkmaz.</p>}
+        {bed && <p className="al-foot">{`${SLEEP_TARGET_H} saat uyku için en geç ${withSuffix(minOfDay(bed), 'loc')} yatakta ol`}</p>}
+      </Shell>
     )
   }
 
   const c = eveningCard({ now, alarm, log, platform, auth: status?.auth, test })
-  if (!c) return null
-
-  if (c.kind === 'set') {
-    const notify = alarm.kind === 'notify'
-    const bed = bedtimeFor(c.next, now)
-    return (
-      <section className="card al-card" aria-label={notify ? 'Hatırlatma kurulu' : 'Alarm kurulu'}>
-        <Head eyebrow={notify ? 'Hatırlatma kurulu' : 'Alarm kurulu'} title={<>{ringLabel(c.next, now)} <small>· {untilText(c.next, now)}</small></>} />
-        <p className="al-sub">{notify ? 'Bildirim · sessiz modda ses çıkmaz' : `${soundById(alarm.sound).name} · sessiz modda da çalar`}</p>
-        {bed && <p className="al-sub al-bed">{`${SLEEP_TARGET_H} saat uyku için en geç ${withSuffix(minOfDay(bed), 'loc')} yatakta ol`}</p>}
-        <div className="al-btns">
-          {alarm.sleep !== 'off' && <button type="button" className="btn btn-sm" onClick={() => onStart('alarm-sleep')}><Moon size={16} aria-hidden="true" /> Uyku sesi</button>}
-          <button type="button" className={`btn btn-secondary btn-sm${alarm.sleep !== 'off' ? ' al-fit' : ''}`} onClick={() => onStart('alarm')}>Değiştir</button>
-        </div>
-      </section>
-    )
-  }
-  if (c.kind === 'pref') {
+  if (c?.kind === 'pref') {
     const pick = (show) => {
       addAlarmEvent('cardPref', { show })
-      if (!show) setPrefOff(true)
+      if (!show) setAskOff(true)
       bump()
     }
     return (
-      <section className="card al-card" aria-label="Akşam kartı">
-        <Head eyebrow="Bir kez soruyoruz" title="Bu kart akşamları çıksın mı?" />
+      <Shell eyebrow="Bir kez soruyoruz" menu={menu}>
+        <p className="al-q">Akşamları alarmı sorayım mı?</p>
         <div className="al-btns">
-          <button type="button" className="btn btn-secondary btn-sm" onClick={() => pick(true)}>Çıksın</button>
-          <button type="button" className="btn btn-secondary btn-sm" onClick={() => pick(false)}>Çıkmasın</button>
+          <button type="button" className="btn btn-secondary btn-sm" onClick={() => pick(true)}>Sor</button>
+          <button type="button" className="btn btn-secondary btn-sm" onClick={() => pick(false)}>Sorma</button>
         </div>
-      </section>
+      </Shell>
     )
   }
-  if (c.kind === 'denied') {
+  if (c?.kind === 'denied') {
     const d = DENIED[c.via] ?? DENIED.alarmkit
     return (
-      <section className="card al-card" aria-label={d.eyebrow}>
-        <Head eyebrow={d.eyebrow} title={d.path} />
+      <Shell eyebrow={d.eyebrow} menu={menu}>
+        <p className="al-q">{d.path}</p>
         <p className="al-sub">İzin verince kart yeniden &quot;Yarın sabah&quot; olur.</p>
         <div className="al-btns"><button type="button" className="btn btn-secondary btn-sm al-fit" onClick={() => { addAlarmEvent('dismiss', { reason: 'denied' }); bump() }}>Tamam</button></div>
-      </section>
+      </Shell>
     )
   }
-
   const dismiss = () => {
     addAlarmEvent('dismiss')
     bump()
   }
-  if (c.kind === 'askNotify') {
-    // iOS 26 öncesi: gerçek alarm yok, bildirimle hatırlatılır. Tek dokunuş: önerilen saat, YALNIZ YARIN (kart
-    // "Yarın sabah" diyor; öğrenilen günler yarını içermeyebilir). Günlü hatırlatma "Değiştir"den.
-    const d = { ...setupDefaults({ log, now, defaultSound: DEFAULT_SOUND }), days: [] }
+  if (c?.kind === 'ask' || c?.kind === 'askNotify') {
+    const d = setupDefaults({ log, now, defaultSound: DEFAULT_SOUND })
+    if (c.kind === 'ask') {
+      return (
+        <Shell eyebrow="Yarın sabah" menu={menu}>
+          <p className="al-q">Alarm kurayım mı?</p>
+          <div className="al-btns">
+            <button type="button" className="btn btn-sm" onClick={() => onStart('alarm')}>{`Evet · ${hhmm(d.time)}`}</button>
+            <button type="button" className="btn btn-secondary btn-sm al-fit" onClick={dismiss}>Bu akşam değil</button>
+          </div>
+        </Shell>
+      )
+    }
+    // iOS 26 öncesi: tek dokunuş, YALNIZ YARIN (kart "Yarın sabah" diyor); günlü hatırlatma ⋯ → "Alarm kur"dan
     const setNow = async () => {
       setBusy(true)
       setErr(null)
-      const cfg = buildAlarm({ ...d, kind: 'notify' }, new Date())
+      const cfg = buildAlarm({ ...d, days: [], kind: 'notify' }, new Date())
       const r = await scheduleAlarm(cfg, 'notify')
       setBusy(false)
       if (!r.ok) {
@@ -163,29 +248,29 @@ export default function AlarmCard({ status, sessions = [], test = false, onStart
         return
       }
       saveAlarm(cfg)
-      addAlarmEvent('set', { hour: cfg.hour, minute: cfg.minute, days: cfg.days, sound: cfg.sound, sleep: cfg.sleep, wake: cfg.wake, kind: 'notify', suggested: d.times.map(hhmm), picked: 'suggest', daysChanged: true, via: 'card', snooze: false })
+      addAlarmEvent('set', { hour: cfg.hour, minute: cfg.minute, days: [], sound: cfg.sound, sleep: cfg.sleep, wake: cfg.wake, kind: 'notify', suggested: d.times.map(hhmm), picked: 'suggest', daysChanged: true, via: 'card', snooze: false })
       bump()
     }
     return (
-      <section className="card al-card" aria-label="Yarın sabah">
-        <Head eyebrow="Yarın sabah" title={`${withSuffix(d.time, 'loc')} hatırlat`} />
+      <Shell eyebrow="Yarın sabah · hatırlatma" menu={menu}>
+        <p className="al-q">{`${withSuffix(d.time, 'loc')} hatırlatayım mı?`}</p>
         <p className="al-warn">Bu telefonda gerçek alarm yok (iOS 26 gerekir). Bildirim olarak gelir; sessiz modda ses çıkmaz.</p>
         {err && <p className="al-err" role="alert">{err}</p>}
         <div className="al-btns">
           <button type="button" className="btn btn-sm" disabled={busy} onClick={setNow}>{`${withSuffix(d.time, 'dat')} kur`}</button>
-          <button type="button" className="btn btn-secondary btn-sm al-fit" onClick={() => onStart('alarm')}>Değiştir</button>
+          <button type="button" className="btn btn-secondary btn-sm al-fit" onClick={dismiss}>Bu akşam değil</button>
         </div>
-        <button type="button" className="al-link" onClick={dismiss}>Bu akşam değil</button>
-      </section>
+      </Shell>
     )
   }
+
+  // Gün içinde (ya da akşam sorusu kapandıysa) alarm yok: tek satır
   return (
-    <section className="card al-card" aria-label="Yarın sabah">
-      <Head eyebrow="Yarın sabah" title="Alarm kurayım mı?" />
-      <div className="al-btns">
-        <button type="button" className="btn btn-sm" onClick={() => onStart('alarm')}>Evet</button>
-        <button type="button" className="btn btn-secondary btn-sm al-fit" onClick={dismiss}>Bu akşam değil</button>
+    <Shell eyebrow={notify ? 'Sabah · hatırlatma' : 'Sabah · alarm'} menu={menu}>
+      <div className="al-line">
+        <span className="grow">Kurulu değil</span>
+        <button type="button" className="al-pill" onClick={() => onStart('alarm')}>Kur</button>
       </div>
-    </section>
+    </Shell>
   )
 }

@@ -53,3 +53,8 @@
 .ph-voice > p { margin: 0 0 0 4px; }
 .ph-voice-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 .ph-listen { display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); color: var(--ink); font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+
+/* Profil → Alarm (Artifact "Nefona Alarm" v4) */
+.ph-alarm-time { font: 700 1.15rem/1.1 var(--font-display); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+.list-row.ph-alarm-sw { justify-content: flex-start; color: inherit; font: inherit; }
+.ph-alarm-note { margin: 8px 4px 0; }

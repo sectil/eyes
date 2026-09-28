@@ -61,7 +61,8 @@ import GazeCalibration from './screens/GazeCalibration.jsx'
 import GazeTest from './screens/GazeTest.jsx'
 import { alarmStatus, consumeOpen, cancelAlarm, ALARM_CHANGED } from './lib/alarmNative.js'
 import { loadAlarm, loadAlarmLog, addAlarmEvent } from './lib/alarmLog.js'
-import { wakeSignal, morningCard, nextRing, ringLabel, daysLabel } from './lib/alarm.js'
+import { wakeSignal, morningCard, nextRing, daysLabel, hhmm, minOfDay, latency } from './lib/alarm.js'
+import { soundById } from './lib/alarmSounds.js'
 import { hasGazeModel } from './lib/gazeCalib.js'
 
 const TAB_SCREENS = ['home', 'progress', 'calendar', 'info']
@@ -801,6 +802,20 @@ export default function App() {
       syncUp(id, correction ?? p?.correction ?? null)
     }
     const toGuest = () => { unlinkPurchaser(); store.setSetting('account', { mode: 'guest', date: nowIso() }); refresh() }
+    // Profil → Alarm (Artifact v4): özet, "Ana sayfada göster" (prefs.alarmCard), uyku sesi
+    const alarmProfile = () => {
+      const a = loadAlarm()
+      const n = new Date()
+      const next = nextRing(a, n)
+      return {
+        time: next ? hhmm(minOfDay(next)) : null,
+        days: next ? daysLabel(a.days) : null,
+        sound: next ? (a.kind === 'notify' ? 'Bildirim' : soundById(a.sound).name) : null,
+        sleep: next && a.sleep !== 'off' ? (a.sleep === 'auto' ? `Sana göre · şu an ${latency(loadAlarmLog())} dk` : `${a.sleep} dk`) : null,
+        onOpen: () => go('alarm-pro'),
+        onSleep: () => go('alarm-sleep'),
+      }
+    }
     return (
       <ProfileHome
         identity={settings.identity}
@@ -818,6 +833,7 @@ export default function App() {
         consents={settings.consents}
         onCoach={setCoach}
         onCoachLife={setCoachLife}
+        alarm={alarmSt.platform === 'web' ? null : alarmProfile()}
         onAccount={() => go('account')}
         onSignOut={async () => { try { await signOut() } catch { /* çevrimdışı: yerel oturum yine kapanır */ } toGuest() }}
         onDeleteAccount={async () => {
@@ -947,13 +963,6 @@ export default function App() {
     )
   }
 
-  // Hatırlatmalar'daki sabah satırı: "07:00 · Pazartesi–Cuma" ya da kurulu değil (null)
-  const alarmRowText = () => {
-    const a = loadAlarm()
-    const next = nextRing(a, new Date())
-    return next ? `${ringLabel(next, new Date())} · ${daysLabel(a.days)}` : null
-  }
-
   switch (screen) {
     case 'schedule':
       return <Schedule initial={settings.reminder} reminders={settings.reminders} iosApp={isIOSApp()} onBack={() => go(scheduleBack)} onSave={(r) => { store.setSetting('reminder', r); refresh() }} />
@@ -974,8 +983,6 @@ export default function App() {
             onAskHealth={healthAvail === false ? undefined : () => healthAvail && setHealthSheet(true)}
             onStartFocus={beginFocus}
             onStopFocus={endFocus}
-            alarmText={alarmSt.platform === 'web' ? null : alarmRowText()}
-            onAlarm={alarmSt.platform === 'web' ? null : () => go('alarm-rem')}
             onBack={() => go('info')}
           />
           {healthSheet && <ConsentSheet kind={healthSheetKind} onAnswer={(g) => { setHealthSheet(false); answerHealth(g) }} />}

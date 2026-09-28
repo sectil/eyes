@@ -55,6 +55,7 @@ describe('biçim', () => {
     expect(daysLabel([0, 1, 2, 3, 4, 5, 6])).toBe('Her gün')
     expect(daysLabel([1, 3, 5])).toBe('Pt, Ça, Cu')
     expect(daysLabel([6, 0])).toBe('Ct, Pz')
+    expect(daysLabel([6])).toBe('Her Cumartesi')
   })
   it('kalan süre ve gün adı', () => {
     expect(untilText(at(2026, 9, 29, 7, 0), at(2026, 9, 28, 21, 44))).toBe('9 sa 16 dk sonra')

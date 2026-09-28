@@ -162,8 +162,15 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
       30 dk'dan (Cochrane 2022; sınır 5–60), yatma saati satırı (7 saat, Watson 2015; yalnız 24 saat içindeki alarmda),
       "Uyanınca: Gün ışığı" (Windred 2024 PNAS). Kaynaklar uygulamadaki kanıt listesinde ("Sabah alarmı ve uyku sesi").
       Bug 22 düzeltmesi (uyku sesi dokunuş içinde; "Yine de çal").
-- [ ] **Tasarım bekliyor (sahibi, 2026-09-28):** alarm Ana sayfada kaldırılıp eklenebilen widget; yolun altında;
-      Profil'den "Alarm" bölümü ("Ana sayfada göster" işareti); kartın saat görünümü temaya uymuyor → Artifact.
+- [~] **Tasarım v4 (onaylı, 2026-09-28, https://claude.ai/artifact/GJU5G7RieTuyNTUbezJn8d) kodda:** kart "Bugünün
+      yolu"nun altında; Ana sayfanın sayı dili (Unbounded saat, mono etiket), 12 saatlik gece kadranı (yatma → alarm,
+      altın nokta şimdi), sakin "Uyku sesi" satırı, ⋯ menüsü (değiştir, uyku sesi, Ana sayfadan kaldır + Geri al).
+      Profil → Alarm: alarm satırı, "Ana sayfada göster" (prefs.alarmCard, varsayılan açık), uyku sesi. Hatırlatmalar'daki
+      "Sabah" satırı kalktı. Akşam sorusu yalnız kartta (VARSAYIM: "ok" = üç sorudaki önerilerim; soru 2 → uygulama içi
+      kart, iOS ana ekran widget'ı DEĞİL). Gün içinde alarm yoksa kart tek satır "Kurulu değil · Kur".
+      Görsel kontrol: bütün haller iki temada, 390 ve 320 px; bulunup düzeltilen: 320'de "Uyku sesi" ve değer bölünmesi,
+      "Çok önce" düğmesi, tek günde "Ct" → "Her Cumartesi", kadrandaki ay merkezde değildi, Profil satırında gün/ses
+      bölünmesi ve anahtar satırının hizası.
 - [ ] **Cihazda bak (alarm):** (1) derleniyor mu (Xcode 26); (2) 14.00'ten sonra Ana sayfada kart; Evet → Kur;
       iOS alarm izni; (3) haftalık alarm seçilen günlerde çalıyor mu, tek seferlik bir kez; (4) Dalga sesi çalıyor mu,
       25 sn'de susuyor mu tekrar mı ediyor; (5) "Nefona'yı aç" uygulamayı açıp sabah kartını/ekranını getiriyor mu;

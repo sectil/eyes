@@ -5,8 +5,8 @@ import { ALARM_KEY, ALARM_LOG_KEY } from '../../lib/alarmLog.js'
 
 export default {
   id: 'alarm',
-  // alarm: kurulum (Ana sayfadan) · alarm-rem: aynı kurulum Hatırlatmalar'dan · alarm-sleep: uyku sesi (Dalga uyku ekranı) · alarm-morning: "Nefona'yı aç" sonrası
-  routes: ['alarm', 'alarm-rem', 'alarm-sleep', 'alarm-morning'],
+  // alarm: kurulum (Ana sayfadan) · alarm-pro: aynı kurulum Profil → Alarm'dan · alarm-sleep: uyku sesi (Dalga uyku ekranı) · alarm-morning: "Nefona'yı aç" sonrası
+  routes: ['alarm', 'alarm-pro', 'alarm-sleep', 'alarm-morning'],
   title: 'Alarm',
   label: 'alarm',
   ring: 'life',

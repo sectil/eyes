@@ -65,6 +65,7 @@ export function daysLabel(days) {
   const d = [...new Set(days ?? [])]
   if (!d.length) return 'Yalnız yarın'
   if (d.length === 7) return 'Her gün'
+  if (d.length === 1) return `Her ${WEEKDAY_LONG[d[0]]}`
   const ord = WEEK_ORDER.filter((x) => d.includes(x))
   const idx = ord.map((x) => WEEK_ORDER.indexOf(x))
   const run = idx.every((v, i) => i === 0 || v === idx[i - 1] + 1)

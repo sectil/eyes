@@ -13,7 +13,8 @@ const KEY = 'gozolcum:prefs'
 // coach: Nef Göz Koçu (varsayılan kapalı, açık onayla açılır); coachHidden: ana sayfa tanıtım kartı gizli;
 // coachLife: profil cevaplarının özeti (uyku, ekran, gece telefonu, stres) de koça gider — ayrı onay (Build 27)
 // voice: seslendirme sesi (lib/voicePack.js); Profilim'de bir kez seçilir, bütün modüller bunu kullanır
-export const DEFAULT_PREFS = Object.freeze({ sound: true, haptics: true, coach: false, coachHidden: false, coachLife: false, voice: 'female' })
+// alarmCard: Ana sayfada alarm kartı (Profil → Alarm "Ana sayfada göster"; kartın ⋯ menüsünden kaldırılır). Alarm yine çalar.
+export const DEFAULT_PREFS = Object.freeze({ sound: true, haptics: true, coach: false, coachHidden: false, coachLife: false, voice: 'female', alarmCard: true })
 const KEYS = Object.keys(DEFAULT_PREFS)
 const CHOICES = { voice: ['female', 'male'] }
 const valid = (k, v) => (CHOICES[k] ? CHOICES[k].includes(v) : typeof v === 'boolean')

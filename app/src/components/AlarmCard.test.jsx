@@ -17,6 +17,7 @@ const { createRoot } = await import('react-dom/client')
 const { default: AlarmCard } = await import('./AlarmCard.jsx')
 const { default: AlarmSetup } = await import('../screens/AlarmSetup.jsx')
 const { loadAlarmLog, loadAlarm, ALARM_KEY, ALARM_LOG_KEY } = await import('../lib/alarmLog.js')
+const { getPrefs, setPrefs } = await import('../lib/prefs.js')
 
 const at = (y, mo, d, h = 0, mi = 0) => new Date(y, mo - 1, d, h, mi)
 const EVE = at(2026, 9, 28, 21, 44) // Pazartesi akşamı
@@ -31,49 +32,73 @@ async function mount(el) {
 }
 const card = (props = {}) => h(AlarmCard, { status: { platform: 'alarmkit', auth: 'notDetermined' }, onStart: () => {}, now: EVE, ...props })
 
-describe('alarm kartı', () => {
+describe('alarm kartı (v4: yolun altında)', () => {
   beforeEach(() => mem.clear())
-  it('web\'de ve 19.00\'dan önce çizilmez', async () => {
+  it('web\'de yok; gün içinde alarm yoksa tek satır "Kurulu değil · Kur"', async () => {
     expect((await mount(card({ status: { platform: 'web', auth: null } }))).text()).toBe('')
-    expect((await mount(card({ now: at(2026, 9, 28, 18, 0) }))).text()).toBe('')
+    const onStart = vi.fn()
+    const r = await mount(card({ now: at(2026, 9, 28, 14, 0), onStart }))
+    expect(r.text()).toContain('Kurulu değil')
+    await r.tap('Kur')
+    expect(onStart).toHaveBeenCalledWith('alarm')
   })
-  it('"Evet" kurulumu açar; "Bu akşam değil" günlüğe yazar ve kartı gizler', async () => {
+  it('akşam: "Evet · 07:00" kurulumu açar; "Bu akşam değil" günlüğe yazar, kart tek satıra döner', async () => {
     const onStart = vi.fn()
     const r = await mount(card({ onStart }))
     expect(r.text()).toContain('Alarm kurayım mı?')
-    await r.tap('Evet')
+    await r.tap('Evet · 07:00')
     expect(onStart).toHaveBeenCalledWith('alarm')
     await r.tap('Bu akşam değil')
     expect(loadAlarmLog().map((e) => e.type)).toEqual(['dismiss'])
-    expect(r.text()).toBe('')
+    expect(r.text()).toContain('Kurulu değil')
   })
-  it('3. "Bu akşam değil"den sonra bir kez sorulur; "Çıkmasın" kaydedilir ve ayar yolu yazılır', async () => {
+  it('3. "Bu akşam değil"den sonra bir kez sorulur; "Sorma" kaydedilir', async () => {
     mem.set(ALARM_LOG_KEY, JSON.stringify([
       { type: 'dismiss', at: at(2026, 9, 26, 21).toISOString(), date: '2026-09-26' },
       { type: 'dismiss', at: at(2026, 9, 27, 21).toISOString(), date: '2026-09-27' },
     ]))
     const r = await mount(card())
     await r.tap('Bu akşam değil')
-    expect(r.text()).toContain('Bu kart akşamları çıksın mı?')
-    await r.tap('Çıkmasın')
+    expect(r.text()).toContain('Akşamları alarmı sorayım mı?')
+    await r.tap('Sorma')
     expect(loadAlarmLog().at(-1)).toMatchObject({ type: 'cardPref', show: false })
-    expect(r.text()).toContain('Hatırlatmalar')
+    expect(r.text()).toContain('Akşamları sormayacağım')
     await r.tap('Tamam')
-    expect(r.text()).toBe('')
+    expect(r.text()).toContain('Kurulu değil')
   })
-  it('kurulu alarm: durum; uyku sesi kapalıysa "Uyku sesi" düğmesi yok', async () => {
+  it('kurulu: saat, kalan süre, günler, uyku sesi satırı, yatma saati; uyku sesi kapalıysa satır yok', async () => {
     const alarm = { on: true, hour: 7, minute: 0, days: [1, 2, 3, 4, 5, 6], sound: 'dalga-motive', sleep: 'auto', wake: 'none', kind: 'alarmkit', setAt: at(2026, 9, 27).toISOString() }
     mem.set(ALARM_KEY, JSON.stringify(alarm))
     const onStart = vi.fn()
     const r = await mount(card({ onStart }))
-    expect(r.text()).toContain('Alarm kurulu07:00 · 9 sa 16 dk sonra')
+    expect(r.text()).toContain('Sabah · alarm')
+    expect(r.text()).toContain('07:00')
+    expect(r.text()).toContain('9 sa 16 dk sonra')
+    expect(r.text()).toContain('Pazartesi–Cumartesi')
+    expect(r.text()).toContain('Uyku sesiSana göre 30 dk')
     expect(r.text()).toContain("7 saat uyku için en geç 00:00'da yatakta ol")
-    expect(r.text()).toContain('Dalga · Motivasyon · sessiz modda da çalar')
-    await r.tap('Uyku sesi')
+    expect(r.container.querySelectorAll((n) => n.nodeName === 'svg' && n.getAttribute('class') === 'al-dial')).toHaveLength(1)
+    const row = r.container.querySelectorAll((n) => n.nodeName === 'BUTTON' && n.getAttribute('class') === 'al-row')[0]
+    await act(async () => row.click())
     expect(onStart).toHaveBeenCalledWith('alarm-sleep')
     mem.set(ALARM_KEY, JSON.stringify({ ...alarm, sleep: 'off' }))
-    const r2 = await mount(card())
-    expect(r2.text()).not.toContain('Uyku sesi')
+    expect((await mount(card())).text()).not.toContain('Uyku sesi')
+  })
+  it('⋯ → "Ana sayfadan kaldır": kart gider, geri al şeridi; "Geri al" kartı getirir', async () => {
+    const r = await mount(card({ now: at(2026, 9, 28, 14, 0) }))
+    const more = r.container.querySelectorAll((n) => n.nodeName === 'BUTTON' && n.getAttribute('aria-label') === 'Alarm seçenekleri')[0]
+    await act(async () => more.click())
+    await r.tap('Ana sayfadan kaldır')
+    expect(getPrefs().alarmCard).toBe(false)
+    expect(r.text()).toContain('Alarm kartı kaldırıldı')
+    await r.tap('Geri al')
+    expect(getPrefs().alarmCard).toBe(true)
+    expect(r.text()).toContain('Kurulu değil')
+  })
+  it('Profil\'den kapatılmışsa hiç çizilmez (akşam sorusu da)', async () => {
+    setPrefs({ alarmCard: false })
+    expect((await mount(card())).text()).toBe('')
+    setPrefs({ alarmCard: true })
   })
   it('sabah sorusu: cevap ve öncesi/sonrası süre kaydedilir', async () => {
     mem.set(ALARM_KEY, JSON.stringify({ on: true, hour: 7, minute: 0, days: [2], sound: 'phone', sleep: 'auto', wake: 'none', kind: 'alarmkit', setAt: at(2026, 9, 28, 21).toISOString() }))
@@ -84,12 +109,12 @@ describe('alarm kartı', () => {
     expect(loadAlarmLog().at(-1)).toMatchObject({ type: 'morning', answer: 'no', before: 30, after: 35, ring: at(2026, 9, 29, 7, 0).toISOString() })
     expect(r.text()).toContain('"Sana göre" süren artık 35 dk.')
   })
-  it('izin reddi: Tamam gizler ama "Bu akşam değil" serisine sayılmaz', async () => {
+  it('izin reddi: Tamam kapatır ama "Bu akşam değil" serisine sayılmaz', async () => {
     const r = await mount(card({ status: { platform: 'alarmkit', auth: 'denied' } }))
     expect(r.text()).toContain('Ayarlar → Nefona → Alarmlar')
     await r.tap('Tamam')
     expect(loadAlarmLog().at(-1)).toMatchObject({ type: 'dismiss', reason: 'denied' })
-    expect(r.text()).toBe('')
+    expect(r.text()).toContain('Kurulu değil')
   })
 })
 
