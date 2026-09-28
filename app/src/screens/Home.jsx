@@ -20,6 +20,7 @@ import TodayPath from '../components/TodayPath.jsx'
 import DayDial from '../components/DayDial.jsx'
 import { Avatar } from './ProfileHome.jsx'
 import { homeSuggestion } from '../lib/homeSuggest.js'
+import HomeMap from '../components/HomeMap.jsx'
 import { walkNudge, fmtSteps } from '../lib/health.js'
 import ConsentSheet from '../components/ConsentSheet.jsx'
 import { registry } from '../modules/registry.js'
@@ -269,6 +270,8 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           </div>
         )}
       </section>
+
+      <HomeMap tests={tests} sessions={sessions} profile={settings?.profile ?? null} onStart={onStart} />
 
       {slot === 'remind' && <ReminderAsk time={rem.types.mola.time} onAnswer={answerReminders} />}
       {slot === 'perm' && (

@@ -650,13 +650,13 @@ export default function Progress({ tests = [], sessions = [], profile = null, id
   }
 
   if (domain) {
-    return <DomainDetail domain={domain} tests={tests} sessions={sessions} identity={identity} health={health} onBack={() => { setDomain(null); window.scrollTo(0, 0) }} />
+    return <DomainDetail domain={domain} tests={tests} sessions={sessions} profile={profile} identity={identity} health={health} onStart={onStart} onBack={() => { setDomain(null); window.scrollTo(0, 0) }} />
   }
 
   return (
     <>
       <PageHeader title="Gelişim" subtitle="Gözün, iyi oluşun, kendine yaklaşımın ve dikkatin; değişim ölçüm hatasından büyük mü, burada." />
-      <ProgressOverview tests={tests} sessions={sessions} identity={identity} health={health} reportDay={reportDay} onReport={() => onStart('first-report')} onOpen={(k) => { setDomain(k); window.scrollTo(0, 0) }} />
+      <ProgressOverview tests={tests} sessions={sessions} profile={profile} identity={identity} health={health} reportDay={reportDay} onReport={() => onStart('first-report')} onOpen={(k) => { setDomain(k); window.scrollTo(0, 0) }} />
       <SummaryCard s={s} days={countedDays} now={now} weeklyTarget={weeklyTarget} />
       <ActivityCalendar
         activities={activities}

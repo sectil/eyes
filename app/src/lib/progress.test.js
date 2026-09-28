@@ -18,7 +18,7 @@ describe('WHO-5 (Eser 2019: 0–5 × 5, ham ×4, 14 gün, 10 puan anlamlı, ham 
     const s = [makeWho5Record([2, 3, 2, 2, 3], day(0)), makeWho5Record([3, 3, 3, 3, 3], day(14))]
     const c = who5Card(s, day(15))
     expect(c).toMatchObject({ n: 2, first: 48, last: 60, delta: 12, status: 'up', low: false, due: false, nextInDays: 13 })
-    expect(who5Card([s[0]], day(3))).toMatchObject({ status: 'first', low: true, nextInDays: 11 })
+    expect(who5Card([s[0]], day(3))).toMatchObject({ status: 'first', low: true, nextInDays: 11, daysSince: 3 })
     const small = [makeWho5Record([3, 3, 3, 3, 3], day(0)), makeWho5Record([3, 3, 3, 3, 4], day(14))]
     expect(who5Card(small, day(14)).status).toBe('noise') // +4 < 10
     expect(who5Card([], day(0))).toMatchObject({ n: 0, due: true })

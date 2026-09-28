@@ -7,6 +7,10 @@ export const RELEASES = [
     id: '2026-09-28',
     title: '28 Eylül güncellemesi',
     items: [
+      { kind: 'new', text: "Gelişim haritası: iris artık her alanda son 28 günde kaç gün bir şey yaptığınla dolar; bütün modüller, testler, mola ve su kaydı aynı yerde toplanır. Bir alanda değişim ölçüm hatasından büyükse dış kenarda altın (iyileşiyor) ya da turuncu (geriliyor) yay çıkar. 35. günden sonra ilk 28 günün ile son 28 gününü karşılaştırabilirsin." },
+      { kind: 'new', text: "Alan ayrıntısında 28 günlük düzen şeridi, hangi modülden kaç kayıt geldiği ve başlangıç soruların görünür." },
+      { kind: 'new', text: "İyi oluş: 14 günde bir 5 kısa soru (WHO-5, resmî Türkçe metin). Puan 0–100; 10 puan ve üstü değişim anlamlı sayılır. Tanı değildir, yalnız kendinle karşılaştırılır." },
+      { kind: 'new', text: "Ana sayfada küçük harita: kaç alanda kaydın olduğunu ve hangisinin iyileştiğini gösterir; en az ilgilendiğin alan için tek bir öneri sunar (vakti geldiyse İyi oluş soruları)." },
       { kind: 'fix', text: 'Göz kırpma egzersizinin gerçek süresi kaydedilir (önceden tahmin ediliyordu). Deneme ekranındaki iris haritasında Dikkat ve Farkındalık alanları yaptığın görevlerle dolar; önce hep boş görünüyordu.' },
       { kind: 'change', text: 'Egzersiz adı sadeleşti: "Tam göz kırp" artık "Göz kırp".' },
       { kind: 'new', text: 'Göz takibi kullandıkça kendini iyileştirir: egzersizdeki "Sağa bak", "Sola bak", "Yukarı bak", "Aşağı bak" adımlarında gözünün gerçekte nereye gittiği öğrenilir ve ayar sessizce sana oturur. Yeniden göz ayarı yapmana gerek kalmaz; tutarsız ölçümler (başka yere bakma, kırpma) sayılmaz.' },

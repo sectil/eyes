@@ -29,11 +29,17 @@ Son güncelleme: 2026-09-28.
       profil cevapları (başlangıç ve 28. gün) ve mola/su günlüğü 7 alan altında. Canlı her modülün merkeze ulaştığı
       testle denetleniyor. Göz kırp süre kaydediyor. Göz kırp ve egzersiz setleri merkeze bağlandı. Ödeme ekranındaki
       iris haritası oturumları görüyor (Dikkat ve Farkındalık hep boş kalıyordu).
-- [ ] **2. İris haritası ve Gelişim merkezden beslenir:** her alanın değeri modül verisinden; harita Gelişim'in başında
-      ve Ana sayfada; WHO-5 ekranı. Ayrıntı aşağıda "Ölçüm ilkesi".
-      - Tasarım: Artifact "Nefona Gelişim Haritası" (https://claude.ai/artifact/2RHScxNg7Cro1bXcDo2mvX), ONAY BEKLİYOR.
+- [x] **2. İris haritası ve Gelişim merkezden beslenir:** `dataHub.growthMap`. Harita Gelişim'in başında (7 satır,
+      28 günlük şerit) ve Ana sayfada (küçük harita + tek öneri); alan ayrıntısında düzen şeridi, kaynaklar, başlangıç
+      soruları, önce→sonra etkisinin haftalık seyri; WHO-5 modülü (`modules/who5`, `screens/Who5.jsx`).
+      - Tasarım: Artifact "Nefona Gelişim Haritası" (https://claude.ai/artifact/2RHScxNg7Cro1bXcDo2mvX), onaylandı.
         Kural: dilimin doluluğu = son 28 günde kaydı olan gün; dış kenar yayı = doğrulanmış değişim (altın iyileşiyor,
         turuncu geriliyor).
+      - Tasarımdan sapmalar: karşılaştırma düğmesi "İlk 28 gün / Son 28 gün" ve 35. günden sonra çıkar (iki pencere
+        en az bir hafta ayrışsın); Nef'in ana önerisi değişmedi, en az düzenli alan önerisi Ana sayfa harita kartında;
+        WHO-5 ilk gün sorulmaz (en erken 2. gün).
+      - Açık: kurulumdaki ve 28. gündeki iris (`lib/iris.js`, IrisPlan) hâlâ sorulardan çizilir; merkeze bağlanması
+        ayrı iş.
       - WHO-5 Türkçe metni WHO'nun belgesinden (Eser, 1998 sürümü) birebir alındı. Hukukçuya: WHO-5 artık WHO açık
         erişim ürünü; ücretli uygulamada kullanım lisansı (ticari kullanım koşulu) DOĞRULANMADI.
 - [ ] **3. Anonim teşhis verisi (ürünün kendini geliştirmesi):** açık rızayla, hesapsız, görüntüsüz yalnız sayılar
@@ -42,21 +48,21 @@ Son güncelleme: 2026-09-28.
 - [ ] **4. Kişiye uyum merkezden okur:** oyun zorluğu, günün yolu (zayıf alana ağırlık), Nef'in önerileri.
 
 ## Ölçüm ilkesi: her modül kaydeder, gelişim görünür (ANA_BELGE §4; plan + onay gerekir)
-- [ ] **İris haritası modül verisiyle yaşasın.** Bugün 5 alan yalnız kurulumdaki ve 28. gündeki sorulardan, Dikkat ve
-      Farkındalık yalnız dolu/boş dolar.
+- [x] **İris haritası modül verisiyle yaşasın** (Gelişim ve Ana sayfa; adım 2). Kurulum/28. gün iris'i hâlâ sorulardan.
+      Önceki durum: 5 alan yalnız kurulumdaki ve 28. gündeki sorulardan, Dikkat ve Farkındalık yalnız dolu/boş dolardı.
       - Her alanın değeri kendi modüllerinden gelsin: Göz ← testler ve egzersizler; Sakinlik ← Nefes, Dalga, Gökyüzü;
         Kendine yaklaşım ← Yön; Beden ← adım, mola, su; İyi oluş ← WHO-5.
       - Harita Gelişim'in başında ve Ana sayfada görünsün.
       - Gelişim'in 7 kutucuğu (`lib/progress.js`) ile iris haritası (`lib/iris.js`) tek hesaba bağlansın.
       - Tasarım önce Artifact.
-- [ ] **WHO-5 iyi oluş:** ekranı yok, `makeWho5Record` hiç çağrılmıyor; Gelişim İyi oluş kartı hep "yakında".
-      Resmi Türkçe madde metni sahibinden bekleniyor (aşağıda "Bekleyen kararlar").
+- [x] **WHO-5 iyi oluş:** ekran, kayıt ve sonuç; 14 günde bir; Gelişim İyi oluş ayrıntısında "Yeniden yanıtla".
+      Resmi Türkçe metin WHO belgesinden. Ticari kullanım lisansı hukukçuya soruldu (yukarıda).
 - [x] **Göz kırp** süre (`seconds`) kaydediyor (eski kayıtlarda 150 sn varsayımı sürer).
 - [ ] Göz kırpta algılanan kırpma sayısı Gelişim'de zamanla görünsün.
-- [ ] **Zaman serisi:** Nefes, Dalga, Gökyüzü ve Yön-Dışarıdan bak için önce→sonra etkisi haftalara göre görünsün (bugün
-      yalnız ortalama). Yılan, Çemberler (isabet, varış süresi) ve okuma testi için trend grafiği.
+- [x] Önce→sonra etkisi (Nefes, Dalga, Gökyüzü, Yön-Dışarıdan bak) haftalara göre görünür (alan ayrıntısı, 6 hafta).
+- [ ] **Zaman serisi:** Yılan, Çemberler (isabet, varış süresi) ve okuma testi için trend grafiği.
 - [ ] **Okuma testi** Göz alan kutucuğuna girsin.
-- [ ] **Mola ve su** günlüğü (`habit-log`) Gelişim özetine ve takvime girsin; yalnız hatırlatma açıkken değil.
+- [ ] **Mola ve su** günlüğü (`habit-log`) takvime girsin. (Gelişim haritasında Beden alanına giriyor.)
 - [ ] **Şefkatle ele al:** ölçüm yok (yalnız "yapıldı"). Kanıta uygun bir ölçüm var mı, PubMed'e bakılacak.
 - [ ] **İlk Bakış** kırpma sayısı ve 4 soru (stres, uyku, hareket, öz-şefkat) Gelişim'de görünsün; bugün yalnız
       IrisPlan'da.
@@ -192,7 +198,7 @@ Son güncelleme: 2026-09-28.
 - [ ] Google ile giriş: kod bitti (AuthSessionPlugin.swift + signInWithGoogle; SDK yok). Google Cloud "Nefona" projesi,
       iOS + web istemcisi, Supabase Google sağlayıcısı açık. Kalan: Supabase Redirect URLs'e com.sectil.eyelume://auth-callback,
       "Skip nonce checks" kapat (bu yolda gerekmiyor), Google Auth Platform → Audience → Publish app, cihazda deneme
-- [ ] WHO-5 resmi Türkçe madde metni kullanıcıdan
+- [x] WHO-5 resmi Türkçe madde metni (WHO belgesinden alındı)
 - [ ] Nef'e "Yön" serbest metni: ayrı açık rıza
 - [ ] i18n, kronotip, özel SMTP
 - [ ] Small Business Program başvurusu (isteğe bağlı)

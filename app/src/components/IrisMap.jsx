@@ -4,7 +4,8 @@ import { resolvedTheme } from '../lib/theme.js'
 
 // İris haritası (Artifact "Nefona Başlangıç Kartı", onaylı): canvas çizimi lib/irisDraw.js, alan sırası lib/iris.js.
 // filled: dolu dilim sıraları (0 = Göz); cur: sıradaki dilim (altın). Alan adları ve değerler çağıran ekranda (DOM).
-export default function IrisMap({ size = 120, filled = [], cur = -1, className = '', label }) {
+// frac/marks: Gelişim haritası (lib/dataHub.js growthMap) — dilim başına düzen oranı ve doğrulanmış değişim yayı
+export default function IrisMap({ size = 120, filled = [], cur = -1, frac = null, marks = null, className = '', label }) {
   const ref = useRef(null)
   const [dark, setDark] = useState(() => resolvedTheme() === 'dark')
   useEffect(() => {
@@ -24,9 +25,9 @@ export default function IrisMap({ size = 120, filled = [], cur = -1, className =
       mo?.disconnect()
     }
   }, [])
-  const key = filled.join(',')
+  const key = `${filled.join(',')}|${frac ? frac.map((f) => f.toFixed(3)).join(',') : ''}|${marks ? marks.join(',') : ''}`
   useEffect(() => {
-    if (ref.current) drawIris(ref.current, { size, filled, cur, dark })
+    if (ref.current) drawIris(ref.current, { size, filled, cur, dark, frac, marks })
   }, [size, key, cur, dark]) // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <canvas

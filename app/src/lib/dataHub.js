@@ -14,6 +14,7 @@
 import { domainSummary, DOMAIN_LABEL } from './progress.js'
 import { registry, DOMAINS } from '../modules/registry.js'
 import { normalizeProfile } from './profile.js'
+import { dayKey } from './calendar.js'
 
 const DAY = 86400000
 
@@ -78,3 +79,109 @@ export function hub({ tests = [], sessions = [], profile = null, habits = [], no
 
 // Merkezin özeti: hangi alanda veri var, hangisinde yok (Gelişim "henüz verisi olmayan" satırı, iris dolu/boş)
 export const domainsWithData = (h) => DOMAINS.filter((d) => h?.domains?.[d]?.hasData)
+
+// ---------- Gelişim haritası (Artifact "Nefona Gelişim Haritası", onaylı) ----------
+// Dilimin doluluğu = düzen: pencere (28 gün) içinde o alanda kaydı olan gün sayısı. Ölçüm değil, yapılanın kendisi.
+// Dış kenar yayı = doğrulanmış değişim: yalnız istatistik ya da yayımlanmış eşik değişimi ölçüm hatasından
+// ayırabildiğinde 'up' (iyileşiyor) / 'down' (geriliyor); yoksa null (doğal oynama ya da henüz belirsiz).
+// Karşılaştırma: 'recent' son 28 gün, 'first' ilk kaydın günüyle başlayan 28 gün. Yay yalnız 'recent'te anlamlı.
+export const WINDOW_DAYS = 28
+// İki pencere en az bir hafta ayrışınca karşılaştırma gösterilir
+export const COMPARE_MIN_DAYS = WINDOW_DAYS + 7
+
+const dayAt = (t) => dayKey(new Date(t))
+function domainDays({ tests, sessions, profile, habits }) {
+  const days = Object.fromEntries(DOMAINS.map((d) => [d, new Set()]))
+  const add = (d, date) => {
+    const t = new Date(date).getTime()
+    if (days[d] && Number.isFinite(t)) days[d].add(dayAt(t))
+  }
+  for (const s of sessions) {
+    const d = domainOfSession(s)
+    if (d) add(d, s.date)
+  }
+  for (const t of tests) add(TEST_DOMAIN, t.date)
+  for (const h of habits) if (HABIT_DOMAIN[h?.type]) add(HABIT_DOMAIN[h.type], h.at)
+  const iris = normalizeProfile(profile ?? {}).iris ?? {}
+  for (const snap of [iris.baseline, iris.recheck]) {
+    if (!snap?.date) continue
+    for (const f of ANSWER_FIELDS) if (Number.isFinite(snap[f.key])) add(f.domain, snap.date)
+  }
+  return days
+}
+
+// Kayıtların başladığı gün (karşılaştırma penceresinin başı)
+export function firstDay({ tests = [], sessions = [], habits = [], profile = null } = {}) {
+  const iris = normalizeProfile(profile ?? {}).iris ?? {}
+  const ts = [...tests.map((t) => t.date), ...sessions.map((s) => s.date), ...habits.map((h) => h.at), iris.baseline?.date]
+    .map((d) => new Date(d).getTime())
+    .filter(Number.isFinite)
+  return ts.length ? Math.min(...ts) : null
+}
+
+// Alanın doğrulanmış değişimi: göz uyarısı ya da gerileyen ölçü/etki önce (temkin), sonra iyileşme
+export function verifiedChange(dom) {
+  if (!dom) return null
+  const eye = dom.eye
+  const who5 = dom.who5
+  const downs = [
+    eye?.alert === 'red' || eye?.alert === 'yellow' || eye?.trend === 'worsening',
+    who5?.status === 'down',
+    dom.metrics?.some((m) => m.status === 'worse'),
+    dom.effects?.some((e) => e.sig && e.gain < 0),
+  ]
+  if (downs.some(Boolean)) return 'down'
+  const ups = [eye?.trend === 'improving', who5?.status === 'up', dom.metrics?.some((m) => m.status === 'better'), dom.effects?.some((e) => e.sig && e.gain > 0)]
+  return ups.some(Boolean) ? 'up' : null
+}
+
+// Harita: alan başına { days, frac, status, strip (28 gün, eskiden bugüne), sources } + pencere bilgisi
+export function growthMap({ tests = [], sessions = [], profile = null, habits = [], now = new Date(), window = 'recent' } = {}) {
+  const t = new Date(now).getTime()
+  const start = firstDay({ tests, sessions, habits, profile })
+  const sinceStart = start == null ? 0 : Math.floor((t - start) / DAY) + 1
+  const from = window === 'first' && start != null ? new Date(new Date(start).setHours(0, 0, 0, 0)).getTime() : new Date(new Date(t).setHours(0, 0, 0, 0)).getTime() - (WINDOW_DAYS - 1) * DAY
+  const keys = Array.from({ length: WINDOW_DAYS }, (_, i) => dayAt(from + i * DAY + DAY / 2))
+  const all = domainDays({ tests, sessions, profile, habits })
+  const h = window === 'recent' ? hub({ tests, sessions, profile, habits, now }) : null
+  const inWin = (date) => {
+    const x = new Date(date).getTime()
+    return Number.isFinite(x) && x >= from && x < from + WINDOW_DAYS * DAY
+  }
+  const domains = {}
+  for (const d of DOMAINS) {
+    const strip = keys.map((k) => all[d].has(k))
+    const days = strip.filter(Boolean).length
+    // Kaynaklar: penceredeki kayıtlar modül (ya da test/alışkanlık) başına
+    const src = new Map()
+    const bump = (key, label) => src.set(key, { label, n: (src.get(key)?.n ?? 0) + 1 })
+    for (const s of sessions) {
+      if (!inWin(s.date)) continue
+      const m = registry.forSession(s)
+      if (m?.progress?.domain === d) bump(m.id, m.title)
+    }
+    if (d === TEST_DOMAIN) for (const x of tests) if (inWin(x.date)) bump(`test:${x.type}`, x.type === 'reading' ? 'Okuma testi' : 'Görme testi')
+    for (const x of habits) if (HABIT_DOMAIN[x?.type] === d && inWin(x.at)) bump(`habit:${x.type}`, x.type === 'mola' ? 'Mola' : 'Su')
+    domains[d] = {
+      domain: d,
+      label: DOMAIN_LABEL[d],
+      days,
+      frac: days / WINDOW_DAYS,
+      strip,
+      status: h ? verifiedChange(h.domains[d]) : null,
+      sources: [...src.values()].sort((a, b) => b.n - a.n),
+      summary: h?.domains[d] ?? null,
+    }
+  }
+  return { window, from: new Date(from).toISOString(), sinceStart, canCompare: sinceStart >= COMPARE_MIN_DAYS, domains }
+}
+
+// En az düzenli alan (öneri için): pencerede en az günü olan; eşitlikte haritadaki sıra (Göz tepede)
+export function weakestDomain(map, order = ['eye', 'focus', 'awareness', 'calm', 'self', 'wellbeing', 'body']) {
+  let best = null
+  for (const d of order) {
+    const x = map?.domains?.[d]
+    if (x && (!best || x.days < best.days)) best = x
+  }
+  return best
+}

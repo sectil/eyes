@@ -137,12 +137,14 @@ Kaynak: kod taraması (2026-09-28). Üç ana bulgu ayrıca elle doğrulandı: `i
 | Adım (Apple Sağlık) | ◐ depoya yazılmaz, canlı okunur | ✔ Beden kutucuğu, 7 gün | ✘ (Beden yalnız hareket sorusundan) |
 | İlk Bakış (20 sn kırpma) | ✔ profilde | ✘ | ✔ Göz hücresi |
 | İris soruları, 28. gün | ✔ profilde | ✘ (yalnız IrisPlan'da yan yana) | ✔ |
-| WHO-5 iyi oluş | ✘ ekranı yok | ✘ kart "yakında" | ✘ |
+| WHO-5 iyi oluş | ✔ (2026-09-28) | ✔ sparkline, anlamlı değişim | ✔ İyi oluş |
 | Göz kalibrasyonu, bakış testi, göz bütçesi | ◐ / ✘ | ✘ | ✘ |
 
-**Ana açık:** Gelişim'in 7 alan kutucuğu (`lib/progress.js`) modül verisini kullanıyor, ama iris haritası
-(`lib/iris.js`) kullanmıyor. İkisi birbirine bağlı değil. İris haritası Gelişim'de ve Ana sayfada da yok.
-Yani "her modül ölçer, gelişim tek haritada görünür" ilkesi bugün tam karşılanmıyor.
+**Güncelleme (2026-09-28, adım 2):** Gelişim'in başındaki ve Ana sayfadaki iris haritası artık veri merkezinden
+(`dataHub.growthMap`): her canlı modülün, testlerin ve mola/su günlüğünün kaydı kendi alanını doldurur (son 28 günde
+kayıtlı gün); dış kenar yayı modül ölçülerinden doğrulanmış değişim. Tablodaki "İris haritasına girer" sütunu kurulum
+iris'i içindir; Gelişim haritasına sessions.match'i olan her modül girer.
+**Kalan açık:** kurulumdaki ve 28. gündeki iris (`lib/iris.js`) hâlâ yalnız sorulardan çizilir.
 İş listesi: `YAPILACAKLAR.md` → "Ölçüm ilkesi".
 
 ---
@@ -205,3 +207,7 @@ Ayrıntı `git log` ve `releases.js`'de. Aşağıda alan alan özet ve önemli c
   - Bu ana belge yazıldı.
   - Hata günlüğü repoya taşındı (`HATA_GUNLUGU.md`).
   - `YAPILACAKLAR.md` en üstüne "Şimdi" sırası eklendi.
+- **Veri merkezi (adım 1):** `lib/dataHub.js` tek okuma kapısı; canlı her modülün merkeze ulaştığı testle denetlenir
+  (`23f86e9`).
+- **Gelişim haritası (adım 2):** iris Gelişim'de ve Ana sayfada merkezden dolar (28 günde kayıtlı gün + doğrulanmış
+  değişim yayı); alan ayrıntısında düzen şeridi ve haftalık etki; WHO-5 iyi oluş modülü (14 günde bir).

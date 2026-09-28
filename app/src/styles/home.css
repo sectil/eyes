@@ -214,3 +214,14 @@
 .hh-focus b { font-weight: 650; }
 .hh-focus .btn { flex: none; }
 .hh-focus-note { display: block; margin-top: 2px; font-size: 0.8rem; color: var(--ink-2); }
+
+/* Ana sayfa gelişim haritası (Artifact "Nefona Gelişim Haritası" ekran 3) */
+.hm { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 14px; align-items: center; }
+.hm-map { border: 0; background: none; padding: 0; width: 76px; height: 76px; border-radius: 50%; cursor: pointer; }
+.hm-tx { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.hm-tx > b { font-weight: 650; }
+.hm-tx > span { font-size: 0.82rem; color: var(--ink-2); overflow-wrap: anywhere; }
+.hm-act { margin-top: 4px; display: flex; align-items: center; justify-content: space-between; gap: 8px; border: 0; border-radius: 12px; background: var(--surface-2); color: var(--ink); padding: 9px 10px; text-align: start; font: inherit; cursor: pointer; }
+.hm-act span { display: flex; flex-direction: column; min-width: 0; }
+.hm-act b { font-size: 0.88rem; font-weight: 650; }
+.hm-act small { font-size: 0.72rem; color: var(--ink-3); }

@@ -5,38 +5,66 @@
 const TAU = Math.PI * 2
 const hash = (i, s = 0) => { const x = Math.sin(i * 127.1 + s * 311.7) * 43758.5453; return x - Math.floor(x) }
 const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`
-const TEAL = [25, 194, 209], BLUE = [62, 123, 250], GOLD = [255, 177, 59], PALE = [150, 232, 240]
+const TEAL = [25, 194, 209], BLUE = [62, 123, 250], GOLD = [255, 177, 59], PALE = [150, 232, 240], ORANGE = [255, 122, 89]
 const N = 7
 const secOf = (a) => { // a: tepeden saat yönünde radyan
   const d = ((a / TAU) * 360 + 360 / N / 2 + 360) % 360
   return Math.floor(d / (360 / N))
 }
-export function drawIris(cv, { size, filled = [], cur = -1, dark = true, fibers = size > 150 ? 2600 : 1500, ground = dark ? '#070c12' : '#f3f6f8', dpr = 2 } = {}) {
+// Gelişim haritası (Artifact "Nefona Gelişim Haritası", onaylı): frac verilirse dilim içten dışa kısmen dolar
+// (0 boş … 1 tam; düzen = son 28 günde kayıtlı gün / 28). marks: dilim başına 'up' (altın yay, iyileşiyor) |
+// 'down' (turuncu yay, geriliyor) | null. frac yoksa eski davranış: filled dilimler tam dolu.
+export function drawIris(cv, { size, filled = [], cur = -1, dark = true, frac = null, marks = null, fibers = size > 150 ? 2600 : 1500, ground = dark ? '#070c12' : '#f3f6f8', dpr = 2 } = {}) {
   const S = Math.round(size * dpr)
   cv.width = cv.height = S
   const g = cv.getContext('2d')
   if (!g) return
   const R = S * 0.44
-  const on = new Set(filled)
+  // Dilimin dolu yarıçapı: tam dolu = R; kısmi = göz bebeği kenarından dışa doğru
+  const rf = Array.from({ length: N }, (_, i) => {
+    if (Array.isArray(frac)) {
+      const f = Number(frac[i]) || 0
+      return f > 0 ? R * (0.36 + 0.64 * Math.min(1, f)) : 0
+    }
+    return filled.includes(i) ? R : 0
+  })
+  const on = new Set(rf.map((r, i) => (r > 0 ? i : -1)).filter((i) => i >= 0))
   g.translate(S / 2, S / 2)
   // taban disk: dolu dilimler renkli iris gradyanı, boşlar nötr
   for (let i = 0; i < N; i++) {
     const a0 = -Math.PI / 2 + (i - 0.5) * (TAU / N), a1 = a0 + TAU / N
     g.save(); g.beginPath(); g.moveTo(0, 0); g.arc(0, 0, R, a0, a1); g.closePath(); g.clip()
-    const gr = g.createRadialGradient(0, 0, R * 0.25, 0, 0, R)
-    if (on.has(i) || i === cur) {
+    const lit = () => {
+      const gr = g.createRadialGradient(0, 0, R * 0.25, 0, 0, R)
       if (dark) { gr.addColorStop(0, '#05141a'); gr.addColorStop(0.3, '#0d3a3f'); gr.addColorStop(0.52, '#127b86'); gr.addColorStop(0.74, '#155fa0'); gr.addColorStop(0.92, '#0b2450'); gr.addColorStop(1, 'rgba(3,8,20,0)') }
       else { gr.addColorStop(0, '#0a2a30'); gr.addColorStop(0.3, '#12555c'); gr.addColorStop(0.52, '#1792a0'); gr.addColorStop(0.74, '#2c6fc0'); gr.addColorStop(0.92, '#1d3f7a'); gr.addColorStop(1, 'rgba(29,63,122,0)') }
-      if (i === cur && !on.has(i)) g.globalAlpha = 0.55
-    } else if (dark) { gr.addColorStop(0, '#0a1016'); gr.addColorStop(0.5, '#18222c'); gr.addColorStop(0.9, '#121a22'); gr.addColorStop(1, 'rgba(10,16,22,0)') }
-    else { gr.addColorStop(0, '#c9d3db'); gr.addColorStop(0.5, '#dbe3e9'); gr.addColorStop(0.9, '#d2dbe2'); gr.addColorStop(1, 'rgba(210,219,226,0)') }
-    g.fillStyle = gr; g.beginPath(); g.arc(0, 0, R, 0, TAU); g.fill(); g.restore()
+      return gr
+    }
+    const neutral = () => {
+      const gr = g.createRadialGradient(0, 0, R * 0.25, 0, 0, R)
+      if (dark) { gr.addColorStop(0, '#0a1016'); gr.addColorStop(0.5, '#18222c'); gr.addColorStop(0.9, '#121a22'); gr.addColorStop(1, 'rgba(10,16,22,0)') }
+      else { gr.addColorStop(0, '#c9d3db'); gr.addColorStop(0.5, '#dbe3e9'); gr.addColorStop(0.9, '#d2dbe2'); gr.addColorStop(1, 'rgba(210,219,226,0)') }
+      return gr
+    }
+    if (on.has(i) && rf[i] >= R) {
+      g.fillStyle = lit(); g.beginPath(); g.arc(0, 0, R, 0, TAU); g.fill()
+    } else if (on.has(i)) {
+      // kısmi: dış kısım nötr, göz bebeğinden dolu yarıçapa kadar renkli
+      g.fillStyle = neutral(); g.beginPath(); g.arc(0, 0, R, 0, TAU); g.fill()
+      g.beginPath(); g.arc(0, 0, rf[i], 0, TAU); g.clip()
+      g.fillStyle = lit(); g.beginPath(); g.arc(0, 0, R, 0, TAU); g.fill()
+    } else if (i === cur) {
+      g.globalAlpha = 0.55; g.fillStyle = lit(); g.beginPath(); g.arc(0, 0, R, 0, TAU); g.fill()
+    } else {
+      g.fillStyle = neutral(); g.beginPath(); g.arc(0, 0, R, 0, TAU); g.fill()
+    }
+    g.restore()
   }
   // sıcak yaka (yalnız dolu dilimlerde belirgin)
   for (let i = 0; i < N; i++) {
     if (!on.has(i)) continue
     const a0 = -Math.PI / 2 + (i - 0.5) * (TAU / N), a1 = a0 + TAU / N
-    g.save(); g.beginPath(); g.moveTo(0, 0); g.arc(0, 0, R, a0, a1); g.closePath(); g.clip()
+    g.save(); g.beginPath(); g.moveTo(0, 0); g.arc(0, 0, rf[i], a0, a1); g.closePath(); g.clip()
     const gr = g.createRadialGradient(0, 0, R * 0.28, 0, 0, R * 0.56)
     gr.addColorStop(0, rgba(GOLD, dark ? 0.5 : 0.45)); gr.addColorStop(0.55, rgba([210, 140, 40], 0.2)); gr.addColorStop(1, rgba(GOLD, 0))
     g.fillStyle = gr; g.beginPath(); g.arc(0, 0, R * 0.56, 0, TAU); g.fill(); g.restore()
@@ -47,9 +75,10 @@ export function drawIris(cv, { size, filled = [], cur = -1, dark = true, fibers 
   for (let j = 0; j < fibers; j++) {
     const a = hash(j, 1) * TAU // tepeden saat yönü
     const sec = secOf(a)
-    const lit = on.has(sec), focus = sec === cur
+    const focus = sec === cur
     const r0 = R * (0.3 + hash(j, 2) * 0.08)
     const r1 = R * (0.62 + hash(j, 3) * 0.35)
+    const lit = on.has(sec) && r1 <= rf[sec] + R * 0.04
     const bend = (hash(j, 4) - 0.5) * 0.09
     let col, al
     if (focus) { col = hash(j, 5) < 0.7 ? GOLD : [255, 214, 160]; al = 0.1 + hash(j, 8) * 0.28 }
@@ -65,7 +94,7 @@ export function drawIris(cv, { size, filled = [], cur = -1, dark = true, fibers 
   g.globalCompositeOperation = 'source-over'
   // yaka çizgisi (yalnız dolu dilimlerde)
   g.save(); g.beginPath()
-  for (let i = 0; i < N; i++) { if (!on.has(i)) continue; const a0 = -Math.PI / 2 + (i - 0.5) * (TAU / N); g.moveTo(0, 0); g.arc(0, 0, R, a0, a0 + TAU / N); g.closePath() }
+  for (let i = 0; i < N; i++) { if (!on.has(i)) continue; const a0 = -Math.PI / 2 + (i - 0.5) * (TAU / N); g.moveTo(0, 0); g.arc(0, 0, rf[i], a0, a0 + TAU / N); g.closePath() }
   g.clip()
   g.strokeStyle = dark ? 'rgba(255,196,110,0.2)' : 'rgba(180,120,30,0.22)'; g.lineWidth = 4 * k * 1.4
   g.beginPath()
@@ -73,7 +102,7 @@ export function drawIris(cv, { size, filled = [], cur = -1, dark = true, fibers 
   g.closePath(); g.stroke(); g.restore()
   // dilim aralıkları: ince, iris dokusunu bölmeden
   g.strokeStyle = ground; g.lineWidth = 2.2 * k * 1.6
-  for (let i = 0; i < N; i++) { const a = (i - 0.5) * (TAU / N); g.beginPath(); g.moveTo(Math.sin(a) * R * 0.34, -Math.cos(a) * R * 0.34); g.lineTo(Math.sin(a) * R * 1.01, -Math.cos(a) * R * 1.01); g.stroke() }
+  for (let i = 0; i < N; i++) { const a = (i - 0.5) * (TAU / N); g.beginPath(); g.moveTo(Math.sin(a) * R * 0.34, -Math.cos(a) * R * 0.34); g.lineTo(Math.sin(a) * R * 0.98, -Math.cos(a) * R * 0.98); g.stroke() }
   // limbus
   let gr = g.createRadialGradient(0, 0, R * 0.8, 0, 0, R)
   gr.addColorStop(0, 'rgba(2,6,16,0)'); gr.addColorStop(0.78, dark ? 'rgba(2,6,16,0.7)' : 'rgba(20,40,60,0.28)'); gr.addColorStop(1, 'rgba(2,6,16,0)')
@@ -94,6 +123,22 @@ export function drawIris(cv, { size, filled = [], cur = -1, dark = true, fibers 
     g.beginPath(); g.arc(0, 0, R * 1.07, a0, a1); g.stroke()
     for (const a of [a0, a1]) { g.beginPath(); g.moveTo(Math.cos(a) * R * 1.07, Math.sin(a) * R * 1.07); g.lineTo(Math.cos(a) * R * 0.98, Math.sin(a) * R * 0.98); g.stroke() }
     g.restore()
+  }
+  // kısmi dilimin dolu kenarı: ince ışık çizgisi (dolu kısmın bittiği yer okunur)
+  for (let i = 0; i < N; i++) {
+    if (!on.has(i) || rf[i] >= R) continue
+    const a0 = -Math.PI / 2 + (i - 0.5) * (TAU / N) + 0.02, a1 = a0 + TAU / N - 0.04
+    g.strokeStyle = dark ? 'rgba(150,232,240,0.55)' : 'rgba(10,80,90,0.45)'; g.lineWidth = 2.4 * k * 1.6
+    g.beginPath(); g.arc(0, 0, rf[i] - k, a0, a1); g.stroke()
+  }
+  // doğrulanmış değişim yayı: altın = iyileşiyor, turuncu = geriliyor
+  for (let i = 0; i < N; i++) {
+    const m = marks?.[i]
+    if (m !== 'up' && m !== 'down') continue
+    const c = m === 'up' ? GOLD : ORANGE
+    const a0 = -Math.PI / 2 + (i - 0.5) * (TAU / N) + 0.07, a1 = a0 + TAU / N - 0.14
+    g.save(); g.strokeStyle = rgba(c, 0.95); g.lineWidth = 3.2 * k * 1.6 * (size > 150 ? 1 : 1.4); g.lineCap = 'round'; g.shadowColor = rgba(c, 0.7); g.shadowBlur = 10 * k
+    g.beginPath(); g.arc(0, 0, R * 1.08, a0, a1); g.stroke(); g.restore()
   }
 }
 

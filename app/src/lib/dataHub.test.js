@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { hub, domainOfSession, domainsWithData, ANSWER_FIELDS } from './dataHub.js'
+import { hub, domainOfSession, domainsWithData, ANSWER_FIELDS, growthMap, verifiedChange, weakestDomain } from './dataHub.js'
 import { registry, DOMAINS } from '../modules/registry.js'
 
 // Ölçüm ilkesi (ANA_BELGE.md §1): canlı her modül veri merkezine ulaşır. Merkeze başka yoldan giren modüller açıkça
@@ -66,5 +66,40 @@ describe('veri merkezi: hub', () => {
     expect(h.domains.calm.records.total).toBe(4)
     expect(Array.isArray(h.domains.calm.effects)).toBe(true)
     expect(h.domains.wellbeing.who5).toBeTruthy()
+  })
+})
+
+describe('veri merkezi: gelişim haritası', () => {
+  const now = new Date('2026-09-28T12:00:00')
+  const d = (days) => new Date(now.getTime() - days * 86400000).toISOString()
+  it('düzen: son 28 günde o alanda kaydı olan gün (aynı gün iki kayıt bir gün)', () => {
+    const sessions = [{ type: 'blink', date: d(0) }, { type: 'blink', date: d(0) }, { type: 'routine', setId: 'isinma', date: d(3) }, { type: 'blink', date: d(40) }]
+    const habits = [{ type: 'mola', date: '2026-09-27', at: d(1) }]
+    const m = growthMap({ sessions, habits, now })
+    expect(m.domains.eye.days).toBe(2)
+    expect(m.domains.eye.frac).toBeCloseTo(2 / 28, 6)
+    expect(m.domains.eye.strip.length).toBe(28)
+    expect(m.domains.eye.strip.at(-1)).toBe(true)
+    expect(m.domains.body.days).toBe(1)
+    expect(m.domains.focus.days).toBe(0)
+    expect(m.domains.eye.sources[0]).toMatchObject({ label: 'Göz kırpma egzersizi', n: 2 })
+  })
+  it('ilk 28 gün penceresi ve karşılaştırma eşiği', () => {
+    const sessions = [{ type: 'blink', date: d(40) }, { type: 'blink', date: d(39) }, { type: 'blink', date: d(1) }]
+    const first = growthMap({ sessions, now, window: 'first' })
+    expect(first.domains.eye.days).toBe(2)
+    expect(first.canCompare).toBe(true)
+    expect(growthMap({ sessions: [{ type: 'blink', date: d(10) }], now }).canCompare).toBe(false)
+  })
+  it('doğrulanmış değişim: gerileme önce gelir; yoksa iyileşme; ikisi de yoksa null', () => {
+    expect(verifiedChange({ metrics: [{ status: 'better' }], effects: [] })).toBe('up')
+    expect(verifiedChange({ metrics: [{ status: 'better' }, { status: 'worse' }], effects: [] })).toBe('down')
+    expect(verifiedChange({ metrics: [{ status: 'noise' }], effects: [{ sig: false, gain: 2 }] })).toBeNull()
+    expect(verifiedChange({ metrics: [], effects: [], eye: { alert: 'yellow' } })).toBe('down')
+    expect(verifiedChange({ metrics: [], effects: [], who5: { status: 'up' } })).toBe('up')
+  })
+  it('en az düzenli alan önerisi', () => {
+    const m = growthMap({ sessions: [{ type: 'blink', date: d(1) }], now })
+    expect(weakestDomain(m).domain).toBe('focus')
   })
 })

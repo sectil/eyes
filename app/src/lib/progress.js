@@ -43,7 +43,7 @@ export function who5Card(sessions = [], now = new Date()) {
   if (!last) return { n: 0, due, nextInDays, status: 'none' }
   const delta = recs.length > 1 ? last.score - first.score : null
   const status = delta == null ? 'first' : Math.abs(delta) >= WHO5_MEANINGFUL ? (delta > 0 ? 'up' : 'down') : 'noise'
-  return { n: recs.length, last: last.score, first: first.score, delta, status, low: last.score < WHO5_LOW, due, nextInDays, series: recs.map((r) => ({ date: r.date, score: r.score })) }
+  return { n: recs.length, last: last.score, first: first.score, delta, status, low: last.score < WHO5_LOW, due, nextInDays, daysSince, series: recs.map((r) => ({ date: r.date, score: r.score })) }
 }
 
 // ---------- Ortalama ve %95 güven aralığı (t dağılımı) ----------
@@ -86,6 +86,28 @@ export function acuteEffects(sessions = [], { since = null, effects = registry.e
       return { key: e.key, module: e.module, domain: e.domain, label: e.label, measure: e.measure, max: e.max, better: down ? 'down' : 'up', n: ci.n, before, after, gain: ci.mean, lo: ci.lo, hi: ci.hi, sig }
     })
     .filter(Boolean)
+}
+
+// Etkinin haftalara göre seyri (Gelişim alan ayrıntısı): son `weeks` haftanın her birinde ortalama iyileşme farkı ve
+// %95 GA. Hafta, bugünden geriye 7'şer gün. Oturumu olmayan hafta atlanır. better 'down' ise iyileşme = önce − sonra.
+export function effectWeeks(sessions = [], effect, { now = new Date(), weeks = 6 } = {}) {
+  const t = new Date(now).getTime()
+  const out = []
+  for (let w = weeks - 1; w >= 0; w--) {
+    const hi = t - w * 7 * DAY
+    const lo = hi - 7 * DAY
+    const pairs = sessions
+      .filter((s) => {
+        const x = new Date(s?.date).getTime()
+        return x > lo && x <= hi
+      })
+      .map((s) => effect.pick(s))
+      .filter((p) => p && Number.isFinite(p[0]) && Number.isFinite(p[1]))
+    if (!pairs.length) continue
+    const ci = meanCI(pairs.map(([b, x]) => (effect.better === 'down' ? b - x : x - b)))
+    out.push({ date: new Date(hi).toISOString(), value: ci.mean, n: ci.n, lo: ci.lo, hi: ci.hi })
+  }
+  return out
 }
 
 // ---------- Zaman içindeki ölçümler (modüllerin progress.metrics tanımından) ----------
