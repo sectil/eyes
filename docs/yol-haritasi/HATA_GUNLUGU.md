@@ -614,3 +614,8 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   kanıt ve ölçütler design/uyanma-sesleri/README.md. Varsayılan ses artık Gün Işığı.
 - Cihazda duyulduğu DOĞRULANMADI; sahibinden: uyku müziği duyuluyor mu (tanı satırında medya ses düzeyi ve çıkış),
   alarmda hangi ses çaldı.
+- Bağımsız inceleme (ee5894e): engelleyici yok, 4 düzeltilmeli + 5 küçük. Düzeltildi: AlarmKit sesi bir kez (~24 sn)
+  çaldığı için Gün Işığı 11,5 sn'de, Kuş Bahçesi 16 sn'de tam sese çıkıyordu → ikisi de ~6 sn (Marşı zaten 5 sn);
+  Kaida 2005 cümlesi çalışmanın söylediğine indirildi (9 yaşlı kişi, öğle uykusu, zorla vs kendiliğinden uyanma);
+  alt yazılar betimleyici ("hafif/derin uykuya" kanıtsızdı); sıra etkisi ve Dalga tık ölçütü belgelendi; eski
+  Dalga üretim yolu README'de "kullanılmaz"; __pycache__ depodan çıktı; CAF testine biçim/bayrak (mutasyonla denendi).

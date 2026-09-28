@@ -422,6 +422,11 @@ describe('alarm sesleri uygulama paketinde (AlarmKit yalnız paketteki dosyayı 
       // CAF: 'caff' + sürüm; 'desc' (8) + boy (12) + örnekleme hızı (20, big-endian double) … kanal (44), bit (48);
       // 'data' (52) + boy (56, düzenleme sayacı dahil)
       expect(buf.readDoubleBE(20)).toBe(44100)
+      // biçim 'lpcm' (28), bayrak 2 = küçük-endian tamsayı (32), paket başına 4 bayt (36), paket başına 1 kare (40)
+      expect(buf.subarray(28, 32).toString()).toBe('lpcm')
+      expect(buf.readUInt32BE(32)).toBe(2)
+      expect(buf.readUInt32BE(36)).toBe(4)
+      expect(buf.readUInt32BE(40)).toBe(1)
       const ch = buf.readUInt32BE(44)
       expect(buf.readUInt32BE(48)).toBe(16)
       expect(buf.subarray(52, 56).toString()).toBe('data')

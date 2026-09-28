@@ -5,3 +5,4 @@ public/mediapipe-wasm
 .env.local
 .env.production
 build-ios
+__pycache__/

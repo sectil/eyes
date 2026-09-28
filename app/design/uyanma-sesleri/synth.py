@@ -196,7 +196,7 @@ def gunisigi():
     end = bars * bar
     for k, n in enumerate(['C5', 'E5', 'G5', 'C6']):
         tr.add(end + k * 0.01, vibraphone(hz(n), 0.8, 0.32), (k - 1.5) * 0.08)
-    return master(tr.stereo(), [(0, -9), (2.3, -9), (7.0, -3), (11.5, 0), (99, 0)])
+    return master(tr.stereo(), [(0, -9), (1.5, -9), (4.0, -3), (6.0, 0), (99, 0)])
 
 
 def kusbahcesi():
@@ -226,7 +226,7 @@ def kusbahcesi():
     end = bars * bar
     for k, n in enumerate(['G4', 'B4', 'D5', 'G5']):
         tr.add(end + k * 0.012, marimba(hz(n), 1.2, 0.34), (k - 1.5) * 0.08)
-    return master(tr.stereo(), [(0, -10), (3.0, -10), (10.0, -4), (16.0, 0), (99, 0)])
+    return master(tr.stereo(), [(0, -10), (1.5, -10), (4.5, -4), (6.5, 0), (99, 0)])
 
 
 def marsi():
