@@ -70,8 +70,12 @@ Araştırma (2026-09-28; doğrulanamayan VARSAYIM):
   bulmadı; gerçek davranışa dayalı kişisel mesaj etkiliydi (doi:10.2196/40784). → Saati kişi seçer; sistem saat
   öğrenmez, yalnız "bu saatte 3 kez ertelendi, değiştirmek ister misin?" diye sorar (VARSAYIM).
 Kalan:
-- [ ] Cihazda deneme derlemesi (spike): AlarmKit sade alarm + özel WAV (Library/Sounds) + ikinci düğme uygulamayı
-      açıyor mu; uzantı gerekiyor mu.
+- [~] Cihazda deneme derlemesi (spike): kod yazıldı (`AlarmSpikePlugin.swift`, `components/AlarmSpikePanel.jsx`;
+      Dalga ekranının altında, yalnız test derlemesinde). Bu ortamda Swift derlenemedi; Mac'te derleme ve cihaz
+      sonucu bekleniyor. Sorular: (1) sessiz modda çalıyor mu, (2) Dalga WAV sesi mi varsayılan ses mi çaldı,
+      (3) "Nefona'yı aç" uygulamayı açtı mı, (4) kurarken hata var mı (uzantı gerekiyorsa burada görünür).
+      AlarmKit ve AppIntents zayıf bağlı (OTHER_LDFLAGS); iOS 15–25'te açılış çökmesi olmamalı (VARSAYIM,
+      SwiftData örneği: forums.swift.org). Sonuçtan sonra panel ve eklenti asıl özelliğe dönüşür ya da kaldırılır.
 - [ ] Uygulanmış bildirim sistemi (v2, `8bccf79`, Hatırlatmalar ekranı; cihazda denenmedi) ile tek "Hatırlatma ve
       alarm" planında birleştir. Açık: sessiz gün oranı %25 (kodda VARSAYIM; sahibinin onayı kayıtlı değil).
 - [ ] iOS 26 öncesi davranış (hatırlatmaya düşer, ekranda açıkça söylenir) ve ölçüm yükü (her sabah soru yok) tasarla.

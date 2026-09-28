@@ -31,5 +31,7 @@ class MainViewController: CAPBridgeViewController {
         // Apple ile giriş: uygulamanın kendi eklentisi (npm eklentisi TestFlight'ta "not implemented" verdi,
         // `import SignInWithApple` uygulama hedefinde derlenmedi — AppleSignInPlugin.swift)
         bridge?.registerPluginInstance(AppleSignInPlugin())
+        // Alarm denemesi (AlarmKit, iOS 26+; yalnız test derlemesindeki gizli panelden çağrılır)
+        bridge?.registerPluginInstance(AlarmSpikePlugin())
     }
 }

@@ -340,3 +340,7 @@ export const AuthSession = registerPlugin('AuthSession')
 
 // Apple ile giriş (ios/App/App/AppleSignInPlugin.swift): uygulamanın kendi eklentisi (lib/account.js signInWithApple)
 export const AppleSignIn = registerPlugin('AppleSignIn')
+
+// Alarm denemesi (ios/App/App/AlarmSpikePlugin.swift; AlarmKit, iOS 26+). Yalnız test derlemesindeki gizli panel
+// (components/AlarmSpikePanel.jsx) kullanır; asıl alarm özelliği tasarım onayından sonra.
+export const AlarmSpike = registerPlugin('AlarmSpike')
