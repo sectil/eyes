@@ -101,7 +101,12 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
       alarmda çaldığı cihazda denenecek (forumda .caf/.mp3/.aiff beta 4'te çalmamıştı, sonra düzeldiği bildirildi).
 - Deneme sonucu 1 (14:05): AlarmKit kuruldu, izin verildi, iki alarm da 2 dk sonra çaldı; Library/Sounds'taki Dalga
   sesi çalmadı (Bug 20). Deneme 2: paketteki sesler (`f6cc639`) — sonuç bekleniyor.
-- [ ] Tasarım Artifact'i, sahibinin onayı, sonra kod.
+- [~] Tasarım Artifact'i "Nefona Alarm" (https://claude.ai/artifact/SQrWCSABUKbSEf9qAbDpYG): akşam Ana sayfa en
+      üstte "Yarın sabah" kartı (19:00'dan sonra; test derlemesinde 12:00), alarm sayfası (saat, tekrar, ses listesi,
+      uyku sesi), kuruldu durumu, sabah "Nefona'yı aç" → 1 dk nefes, iOS 26 öncesi ve izin yok durumları.
+      ONAY BEKLİYOR + sahibine 5 soru (akşam eşiği, varsayılan 07:00, "bu akşam değil", sabah akışı, İyi oluş alanı).
+      Nefesle kapanma ölçüm işi onaylandı (2026-09-28); tasarıma girmez, ayrı iş.
+- [ ] Onaydan ve deneme 2 sonucundan sonra kod.
 
  (sahibin yönü, 2026-09-28)
 - [~] **1. Veri merkezi (okuma kapısı):** `lib/dataHub.js`. Testler, oturumlar, istatistik çekirdeği (`progress.js`),
