@@ -127,6 +127,3 @@
   background: radial-gradient(circle at 40% 35%, var(--accent-soft), transparent 70%), var(--surface-2);
   color: var(--accent); font-weight: 650;
 }
-
-/* ---------- Hatırlatmalar'daki sabah satırı ---------- */
-.list .rem-time.al-rem { margin-top: 14px; }

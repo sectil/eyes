@@ -813,7 +813,7 @@ export default function App() {
         sound: next ? (a.kind === 'notify' ? 'Bildirim' : soundById(a.sound).name) : null,
         sleep: next && a.sleep !== 'off' ? (a.sleep === 'auto' ? `Sana göre · şu an ${latency(loadAlarmLog())} dk` : `${a.sleep} dk`) : null,
         onOpen: () => go('alarm-pro'),
-        onSleep: () => go('alarm-sleep'),
+        onSleep: () => go('alarm-sleep-pro'),
       }
     }
     return (

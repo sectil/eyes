@@ -8,7 +8,7 @@ import { sleepMinutes, lateSleepMinutes, nextRing, lastRing, hhmm, minOfDay } fr
 
 // Uyku sesi: Dalga uyku ekranı, süre alarm kuralından (lib/alarm.js sleepMinutes)
 // Süre ekran açılınca bir kez hesaplanır (çalarken yeniden çizimde kaymasın)
-function AlarmSleep({ ctx }) {
+function AlarmSleep({ ctx, back = 'home' }) {
   const [preset] = useState(() => {
     const now = new Date()
     const alarm = loadAlarm()
@@ -22,7 +22,7 @@ function AlarmSleep({ ctx }) {
       sleepPreset={preset}
       onSleepEnd={(e) => addAlarmEvent('sleep', e)}
       onSave={(s) => { ctx.store.addSession(s); ctx.refresh() }}
-      onExit={() => ctx.go('home')}
+      onExit={() => ctx.go(back)}
     />
   )
 }
@@ -49,6 +49,7 @@ export default {
   icon: AlarmClock,
   render: (ctx, route) => {
     if (route === 'alarm-sleep') return <AlarmSleep ctx={ctx} />
+    if (route === 'alarm-sleep-pro') return <AlarmSleep ctx={ctx} back="profile" />
     if (route === 'alarm-morning') return <Morning ctx={ctx} />
     // alarm-pro: Profil → Alarm'dan; bitince oraya döner
     const to = route === 'alarm-pro' ? 'profile' : 'home'

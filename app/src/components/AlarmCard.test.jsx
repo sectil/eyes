@@ -33,7 +33,7 @@ async function mount(el) {
 const card = (props = {}) => h(AlarmCard, { status: { platform: 'alarmkit', auth: 'notDetermined' }, onStart: () => {}, now: EVE, ...props })
 
 describe('alarm kartı (v4: yolun altında)', () => {
-  beforeEach(() => mem.clear())
+  beforeEach(() => { mem.clear(); setPrefs({ alarmCard: true }) })
   it('web\'de yok; gün içinde alarm yoksa tek satır "Kurulu değil · Kur"', async () => {
     expect((await mount(card({ status: { platform: 'web', auth: null } }))).text()).toBe('')
     const onStart = vi.fn()
@@ -83,6 +83,41 @@ describe('alarm kartı (v4: yolun altında)', () => {
     expect(onStart).toHaveBeenCalledWith('alarm-sleep')
     mem.set(ALARM_KEY, JSON.stringify({ ...alarm, sleep: 'off' }))
     expect((await mount(card())).text()).not.toContain('Uyku sesi')
+  })
+  it('kadran yalnız alarma 12 saatten az kalınca; 24 saatten uzak yarın "Yarın", daha uzak gün adı', async () => {
+    const alarm = { on: true, hour: 7, minute: 0, days: [2], sound: 'phone', sleep: 'off', wake: 'none', kind: 'alarmkit', setAt: at(2026, 9, 20).toISOString() }
+    mem.set(ALARM_KEY, JSON.stringify(alarm))
+    const dials = (r) => r.container.querySelectorAll((n) => n.nodeName === 'svg' && n.getAttribute('class') === 'al-dial')
+    const noon = await mount(card({ now: at(2026, 9, 28, 14, 0) })) // Salı 07:00'ye 17 sa
+    expect(noon.text()).toContain('17 sa sonra')
+    expect(dials(noon)).toHaveLength(0)
+    const early = await mount(card({ now: at(2026, 9, 28, 6, 0) })) // Salı 07:00'ye 25 sa: yarın
+    expect(early.text()).toContain('Yarın')
+    expect(early.text()).not.toContain('07:00 ·')
+    mem.set(ALARM_KEY, JSON.stringify({ ...alarm, days: [6] }))
+    expect((await mount(card({ now: at(2026, 9, 28, 14, 0) }))).text()).toContain('Cumartesi · 5 gün sonra')
+  })
+  it('başlık: öğleden sonraki alarm "Alarm"; eski bildirim yedeği iOS 26 telefonda yeniden kurmayı söyler', async () => {
+    const alarm = { on: true, hour: 20, minute: 0, days: [0, 1, 2, 3, 4, 5, 6], sound: 'phone', sleep: 'off', wake: 'none', kind: 'alarmkit', setAt: at(2026, 9, 28, 14).toISOString() }
+    mem.set(ALARM_KEY, JSON.stringify(alarm))
+    const r = await mount(card({ now: at(2026, 9, 28, 15, 0) }))
+    expect(r.text()).toContain('20:00')
+    expect(r.text().startsWith('Alarm')).toBe(true)
+    expect(r.text()).not.toContain('Sabah')
+    mem.set(ALARM_KEY, JSON.stringify({ ...alarm, hour: 7, kind: 'notify' }))
+    const n = await mount(card({ now: at(2026, 9, 28, 15, 0), status: { platform: 'alarmkit', auth: 'authorized' } }))
+    expect(n.text()).toContain('Sabah · hatırlatma')
+    expect(n.text()).toContain('Yeniden kurarsan gerçek alarm olur')
+    const old = await mount(card({ now: at(2026, 9, 28, 15, 0), status: { platform: 'notify', auth: 'authorized' } }))
+    expect(old.text()).toContain('iOS 26 gerekir')
+  })
+  it('uyku sesi bu gece sığmıyorsa "Bu gece yok" ("Sana göre" öneki olmadan)', async () => {
+    mem.set(ALARM_KEY, JSON.stringify({ on: true, hour: 22, minute: 30, days: [0, 1, 2, 3, 4, 5, 6], sound: 'phone', sleep: 'auto', wake: 'none', kind: 'alarmkit', setAt: at(2026, 9, 28, 21).toISOString() }))
+    const t = (await mount(card())).text()
+    expect(t).toContain('Uyku sesiBu gece yok')
+    // yatma saati (15:30) geçti: kadran yok (nokta uyku yayının içine düşerdi)
+    expect((await mount(card())).container.querySelectorAll((n) => n.nodeName === 'svg' && n.getAttribute('class') === 'al-dial')).toHaveLength(0)
+    expect(t).not.toContain('Sana göre bu')
   })
   it('⋯ → "Ana sayfadan kaldır": kart gider, geri al şeridi; "Geri al" kartı getirir', async () => {
     const r = await mount(card({ now: at(2026, 9, 28, 14, 0) }))

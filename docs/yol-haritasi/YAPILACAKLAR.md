@@ -171,6 +171,15 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
       Görsel kontrol: bütün haller iki temada, 390 ve 320 px; bulunup düzeltilen: 320'de "Uyku sesi" ve değer bölünmesi,
       "Çok önce" düğmesi, tek günde "Ct" → "Her Cumartesi", kadrandaki ay merkezde değildi, Profil satırında gün/ses
       bölünmesi ve anahtar satırının hizası.
+- [~] **v4 ikinci bağımsız inceleme (8 bulgu, engelleyici yok) düzeltildi:** kartta tür alarmın kendisinden
+      (`alarm.kind`; iOS 26'ya geçmiş telefonda eski bildirim hatırlatması "Yeniden kurarsan gerçek alarm olur" der);
+      her kart hâline ayrı `key` (⋯ menüsü hâller arasında açık kalmıyordu); 24 saatten uzak yarın "Yarın" (saat iki kez
+      yazılıyordu); kadran yalnız yatma saatinden önce ve alarma ≤12 saat kala (öğleden sonra ve akşam alarmında nokta
+      uyku yayının içine düşüyordu); Profil → Uyku sesi bitince Profil'e döner (`alarm-sleep-pro`); "Kaydedildi" ve
+      "Tamam" kartları `role="status"`, kaldırınca odak "Geri al"da, ⋯ listesi düz düğmeler; "Bu gece yok" ("Sana göre"
+      öneki kalktı); başlık "Sabah" yalnız 12.00'den önceki alarmda. Testler: prefs her testte sıfırlanır, kadran/Yarın/
+      başlık/eski yedek/Bu gece yok testleri. Görsel: yeni hâller iki temada, 390 ve 320 px; kart 320'de taşmıyor
+      (sayfadaki 14 px taşma Ana sayfa haritasından: Bug 21).
 - [ ] **Cihazda bak (alarm):** (1) derleniyor mu (Xcode 26); (2) 14.00'ten sonra Ana sayfada kart; Evet → Kur;
       iOS alarm izni; (3) haftalık alarm seçilen günlerde çalıyor mu, tek seferlik bir kez; (4) Dalga sesi çalıyor mu,
       25 sn'de susuyor mu tekrar mı ediyor; (5) "Nefona'yı aç" uygulamayı açıp sabah kartını/ekranını getiriyor mu;
