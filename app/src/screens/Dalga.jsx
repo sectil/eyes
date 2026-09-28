@@ -5,7 +5,6 @@ import DalgaVisual from '../components/DalgaVisual.jsx'
 import { haptic } from '../lib/native.js'
 import { createDalgaEngine } from '../lib/dalgaAudio.js'
 import { createSleepPlayer } from '../lib/dalgaSleep.js'
-import { mediaProbe } from '../lib/audioUnmute.js'
 import { LATE_GAP_MIN } from '../lib/alarm.js'
 import { greeting } from '../lib/greeting.js'
 import { testUnlock } from '../lib/subscription.js'
@@ -243,37 +242,6 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
     onSave?.(rec)
     setPhase('result')
   }
-  // Tanı satırı (yalnız test derlemesi; Bug 22): uyku sesinin telefonda hangi adımda takıldığını gösterir
-  const [probe, setProbe] = useState('')
-  useEffect(() => {
-    if (!testUnlock() || (phase !== 'sleep-ready' && phase !== 'sleep')) return undefined
-    const tick = () => {
-      const d = sleepRef.current?.diag ?? {}
-      if (d.native) {
-        // iPhone oynatıcısı: medya sesi (0–100), çıkış (hoparlör/kulaklık), kategori
-        sleepRef.current.refresh?.()
-        const i = d.info ?? {}
-        setProbe([
-          `oynatıcı: iOS${d.err ? ` · HATA ${d.err}` : ''}`,
-          `çal: ${d.played == null ? '—' : d.played ? 'evet' : 'HAYIR'} · ${i.playing ? 'çalıyor' : 'duruyor'} ${Math.round(i.time ?? 0)} sn · kazanç ${Math.round((i.gain ?? 0) * 100)}`,
-          `telefon medya sesi: ${i.outputVolume == null ? '—' : Math.round(i.outputVolume * 100)} / 100`,
-          `çıkış: ${i.route || '—'} · ${String(i.category ?? '—').replace('AVAudioSessionCategory', '')}`,
-        ].join('\n'))
-        return
-      }
-      const m = mediaProbe()
-      setProbe([
-        `dosya: ${d.files ?? '—'}${d.fadeAt ? ` · şimdi ${d.fadeAt}` : ''}`,
-        `çal: ${d.played == null ? '—' : d.played ? 'evet' : 'HAYIR'}${m.err ? ` · ${m.err}` : ''}`,
-        m.tag ? `öğe: ${m.paused ? 'duruyor' : 'çalıyor'} ${m.time} sn · ${m.silent ? 'sessiz döngü' : 'müzik'} · hazır ${m.ready}${m.mediaErr ? ` · medya hatası ${m.mediaErr}` : ''}` : 'öğe: yok',
-        `ses bağlamı: ${engine.state()}`,
-      ].join('\n'))
-    }
-    tick()
-    const id = setInterval(tick, 1000)
-    return () => clearInterval(id)
-  }, [phase, engine])
-  const diagLine = probe && <pre className="dg-diag" aria-hidden="true">{probe}</pre>
   // Uyku ekranında dokununca denetimler 5 sn görünür
   useEffect(() => {
     if (!showCtl) return undefined
@@ -327,7 +295,6 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
           </p>
         )}
         {sleepPreset?.alarmLabel && <p className="dg-sleep-alarm">Alarm {sleepPreset.alarmLabel}</p>}
-        {diagLine}
         {showCtl && (
           <button className="dg-sleep-end" onClick={(e) => { e.stopPropagation(); endSleep(true) }}>Bitir</button>
         )}
@@ -352,7 +319,6 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
         </p>
         {sleepPreset.alarmLabel && <p className="dg-sleep-alarm">Alarm {sleepPreset.alarmLabel}</p>}
         {error && <p className="dg-err" role="alert">{error}</p>}
-        {diagLine}
         <div className="dg-sleep-go">
           {!late && (
             <button className="btn" disabled={!sleepReady} onClick={() => { engine.unlock(); setError(null); startSleep() }}>
