@@ -362,6 +362,18 @@ describe('createGazeReader', () => {
     expect(res.dir).toBe('left')
   })
 
+  it('recenter({maxFrac}): ortada hedef gösterilirken uzak ama sabit nötr kabul edilir (Çemberler duraklaması)', () => {
+    const r = createGazeReader({ persistKey: null })
+    const feed = feeder(r)
+    feed({ x: 0, y: 0 }, 15)
+    r.recenter({ maxFrac: 3 })
+    expect(r.recentering.active).toBe(true)
+    const res = feed({ x: -15, y: 1 }, 15)
+    expect(r.neutral).toMatchObject({ x: -15, y: 1 })
+    expect(res.dir).toBe('center')
+    expect(r.recentering.active).toBe(false)
+  })
+
   it('kararsız pencere (göz gezinirken) nötr olmaz', () => {
     const r = createGazeReader({ persistKey: null })
     let t = 0

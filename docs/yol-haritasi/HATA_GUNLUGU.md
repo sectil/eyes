@@ -627,3 +627,17 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   "Uyanınca" satırının "değiştir"inin arkasındaydı. Düzeltme: "Uyandıran ses" satırının kendi "değiştir"i, her satır
   yalnız kendi bölümünü açar (test: AlarmCard.test.jsx "Kurulum özeti").
 - Açık: alarmda Gün Işığı çaldı mı, "9" simgesi görünüyor mu (sahibinden bekleniyor).
+
+## Bug 23: Çemberler "Ekrana bak"ta takılı kalıyor (2026-09-28 22:46, sahibi, cihaz)
+- Ekran: "Ekrana bak / Bakışın ekranın dışında…" (yüz görünüyor); sahibi ekrana bakıyor, duraklama bitmiyor.
+- Kod: duraklama offScreen===true 1,5 sn; devam offScreen===false 400 ms (TrackGame.jsx). Okuyucu yalnız tur başında
+  yeniden ortalanıyor ve en çok aralığın 0,35'i kadar kaymayı kabul ediyor (gaze.js). Tur içinde baş/telefon kayarsa
+  ortaya bakış kenarın ≥ 1,3 katı okunur → duraklama ve çıkış yok. Göz "kapalı" sayılırsa offScreen null → yine çıkış yok.
+  Hangisi olduğu cihazda doğrulanmadı (test derlemesinde tanı satırı eklendi).
+- Düzeltme: duraklamada ortada göz bebeği (kalibrasyon orta noktası %50/%46) + ElevenLabs "Ortadaki göz bebeğinin
+  içindeki noktaya bak" (önceden iOS'un kendi sesiyle "Ekrana bak"); kişi bakarken okuyucu yeniden ortalanır
+  (0,8 sn sabit bakış, kayma sınırı aralığın 3 katı — duraklatan eşik 1,3–1,5 kat olduğu için sınır ondan büyük olmalı;
+  ilk seçilen 1 kat bu yüzden hiç kabul etmeyecekti, test yazarken yakalandı). 8 sn'de olmazsa "Ölçmeden devam et"
+  (tur ölçümsüz sürer; kamera kareleri artık ne sayar ne duraklatır — yoksa 1,5 sn sonra yine duruyordu).
+- Test: gazeCalib.test.js kayma senaryosu (eski sınırla takılı, yenisiyle içeride; mutasyonla doğrulandı), gaze.test.js
+  eski okuyucu. Görsel: 428/375/320, iki tema.

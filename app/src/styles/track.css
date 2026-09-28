@@ -81,7 +81,11 @@
 .cm-camnote { position: absolute; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom) + 20px); margin: 0; text-align: center; color: #8b98a5; font-size: 0.85rem; }
 
 /* Ç8 duraklatma */
-.cm-veil { position: absolute; inset: 0; z-index: 3; background: rgba(6, 10, 18, 0.88); display: flex; align-items: center; justify-content: center; padding: 22px; }
+.cm-veil {
+  position: absolute; inset: 0; z-index: 3; background: rgba(6, 10, 18, 0.88); display: flex; align-items: center; justify-content: center; padding: 22px;
+  /* Sahne hep koyu: düğmeler açık temada da koyu temanın renklerini alsın (styles.css koyu değerleri) */
+  --accent-grad: linear-gradient(90deg, #19c2d1, #3e7bfa); --accent-ink: #041017; --accent-glow: 0 8px 24px -8px rgba(25, 194, 209, 0.55);
+}
 .cm-pcard {
   width: 100%; max-width: 360px; background: rgba(15, 23, 31, 0.92); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 22px;
   padding: 22px 18px 18px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;
@@ -135,3 +139,17 @@
 @media (prefers-reduced-motion: reduce) {
   .cm-spin, .cm-lj-ring, .cm-lj-iris, .cm-lj-gold, .cm-lj-glint, .cm-count-num { animation: none !important; }
 }
+
+/* Duraklama: ortada göz bebeği (kalibrasyon orta noktası %50 / %46) ve altında metin. Sahne hep koyu:
+   iris renkleri temadan bağımsız koyu değerlerle (gazecal.css değişkenleri burada sabitlenir). */
+.cm-rec { display: block; padding: 0; --cal-gold: #ffb13b; --cal-glow: rgba(25, 194, 209, 0.22); --ink: #eef3f6; --warn: #ff7a59; }
+.cm-rec-target { position: absolute; left: 50%; top: 46%; width: 52px; height: 52px; margin: -26px 0 0 -26px; }
+.cm-rec-text {
+  position: absolute; left: 16px; right: 16px; top: calc(46% + 56px); margin: 0 auto; max-width: 360px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;
+}
+.cm-rec-text h2 { margin: 0; font-family: var(--font-display); font-size: 1.2rem; text-wrap: balance; }
+.cm-rec-text p { margin: 0; color: #8b98a5; font-size: 0.9rem; }
+.cm-rec-text .btn { width: 100%; margin-top: 4px; }
+/* Tanı satırı (yalnız test derlemesi): üstte, metni itmesin (320 pt'de taşıyordu) */
+.cm-diag { position: absolute; left: 16px; right: 16px; top: calc(env(safe-area-inset-top) + 64px); margin: 0; font-family: var(--font-mono); font-size: 11px; line-height: 1.5; color: #8b98a5; white-space: pre-wrap; text-align: left; }

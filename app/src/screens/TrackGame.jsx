@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
-import { X, Trophy, ScanFace, Pause, Play, RotateCcw, Share2, Copy, Info as InfoIcon } from 'lucide-react'
+import { X, Trophy, Pause, Play, RotateCcw, Share2, Copy, Info as InfoIcon } from 'lucide-react'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { createGazeReader } from '../lib/gaze.js'
 import { loadGazeModel } from '../lib/gazeCalib.js'
 import { haptic } from '../lib/native.js'
-import { cue, unlockAudio } from '../lib/cue.js'
+import { unlockAudio } from '../lib/cue.js'
+import { sayPhrase, preloadPhrases } from '../lib/voiceCue.js'
+import { testUnlock } from '../lib/subscription.js'
+import CalIris from '../components/CalIris.jsx'
 import { playSfx, unlockSfx } from '../lib/sfx.js'
 import { shareText } from '../lib/share.js'
 import {
@@ -30,6 +33,7 @@ import {
 import { createLensEngine, safeId } from '../lib/cemberDraw.js'
 import { LensPreview, LensJumpArt, ResultIris, StepStrip } from '../components/CemberArt.jsx'
 import { IrisMark } from '../components/ui.jsx'
+import '../styles/gazecal.css'
 import '../styles/track.css'
 import SoundToggle from '../components/SoundToggle.jsx'
 import StepCards from '../components/StepCards.jsx'
@@ -48,7 +52,13 @@ import { requestEyeRound, beginRest, eyeStatus } from '../lib/eyeBudgetStore.js'
 // VARSAYIM: süreler ilk sürüm içindir.
 const AWAY_MS = 1500 // bu kadar ekran dışı/yüz yok → duraklat ve uyar (kırpma ve kısa kayma sayılmaz)
 const RESUME_MS = 400 // ekrana bu kadar dönünce devam
-const WARN_GAP_MS = 4000 // uyarılar arası en az süre
+const WARN_GAP_MS = 7000 // sesli uyarılar arası en az süre (cümle ~3 sn; üst üste binmesin)
+// Duraklamada ortada göz bebeği hedefi: kişi ona bakarken okuyucu yeniden ortalanır. Hedef gösterildiği için
+// büyük kayma da gerçektir (baş/telefon kaymış). Sınır, duraklatan eşikten (OFF_SIDE/OFF_UP = aralığın 1,3 katı,
+// OFF_DOWN 1,5 katı) BÜYÜK olmalı: yoksa yanlış duraklamaya yol açan kayma hiç kabul edilmez. Yalnız 0,8 sn sabit
+// bakış kabul edilir (gaze.js RECENTER_STABLE_FRAC).
+const RECOVER_MAX_FRAC = 3
+const STUCK_MS = 8000 // duraklama bu kadar sürerse "Ölçmeden devam et" çıkar: kişi asla takılı kalmaz
 const COUNT_MS = 800 // geri sayım adımı
 const RESUME_STEP_MS = 350 // duraklamadan dönüşte sonraki hareket
 const FOOT = 'Kamera gözünün doğru yöne geçip geçmediğine bakar. Yaklaşık bir değerdir, görme ölçüsü değildir.'
@@ -72,6 +82,9 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
   const [roundId, setRoundId] = useState(0)
   const [result, setResult] = useState(null)
   const [note, setNote] = useState('')
+  const [rec, setRec] = useState({ progress: 0, stuck: false, diag: '' }) // duraklamada ortalama ilerlemesi
+  const recRef = useRef(rec)
+  const showDiag = testUnlock()
   const phaseRef = useRef(phase)
   phaseRef.current = phase
   const det = useRef(null)
@@ -122,6 +135,8 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
   function onFrame(m) {
     const p = phaseRef.current
     if (p !== 'countdown' && p !== 'play' && p !== 'paused') return
+    // "Ölçmeden devam et"ten sonra kamera açık kalsa da tur ölçümsüz: kare ne sayılır ne duraklatır
+    if (round.current.rhythm) return
     const g = reader.current.push(m)
     if (m.face) camOk.current = true
     if (p === 'play' && det.current) {
@@ -141,11 +156,29 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
       a.since = null
       a.back ??= m.ts
     }
-    if (p === 'play' && a.since != null && m.ts - a.since >= AWAY_MS) pause(m.ts)
-    else if (p === 'paused') {
-      if (a.since != null && m.ts - a.lastWarn >= WARN_GAP_MS) warn(m.ts)
+    if (p === 'play' && a.since != null && m.ts - a.since >= AWAY_MS) pause(m.ts, m.face)
+    else if (p === 'paused' && !round.current.rhythm) {
+      // Ortadaki hedefe bakarken yeniden ortala; kararsız pencere (kıpırdama, kırpma) reddedilince yeniden başla
+      const rc = reader.current.recentering
+      if (m.face && rc && !rc.active) reader.current.recenter({ maxFrac: RECOVER_MAX_FRAC })
+      if (a.since != null && m.ts - a.lastWarn >= WARN_GAP_MS) warn(m.ts, m.face)
       if (off === false && a.back != null && m.ts - a.back >= RESUME_MS) resume()
+      else showRec(rc, g, off)
     }
+  }
+
+  // Duraklama ekranındaki halka ve (test derlemesinde) tanı satırı; kare başına değil, değişince çizilir
+  function showRec(rc, g, off) {
+    const progress = rc?.active ? Math.round(rc.progress * 20) / 20 : 0
+    const sh = reader.current?.shift
+    const f = (n) => (Number.isFinite(n) ? n.toFixed(1) : '–')
+    const diag = showDiag
+      ? `bakış ${f(g?.v?.x)} / ${f(g?.v?.y)} · dışarı: ${off == null ? '?' : off ? 'evet' : 'hayır'} · kapalı: ${g?.closed ? 'evet' : 'hayır'}\nortalama ${rc?.active ? `%${Math.round(rc.progress * 100)}` : 'bitti'} · kayma ${sh ? `${f(sh.x)} / ${f(sh.y)}` : '–'}`
+      : ''
+    const cur = recRef.current
+    if (cur.progress === progress && cur.diag === diag) return
+    recRef.current = { ...cur, progress, diag }
+    setRec(recRef.current)
   }
 
   const cam = useFaceTracking({ enabled: trueDepth && (phase === 'countdown' || phase === 'play' || phase === 'paused'), trueDepth: true, onFrame })
@@ -159,9 +192,12 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
     }
   }, [cam.error])
 
-  function warn(ts) {
+  // Uyarı: titreşim + (yüz görünüyorsa) ElevenLabs "Ortadaki göz bebeğinin içindeki noktaya bak." (ses kapalıysa
+  // yalnız titreşim). Yüz görünmüyorsa yalnız titreşim; ekranda "Telefonu yüzüne dönük tut" yazar.
+  function warn(ts, face = true) {
     away.current.lastWarn = ts
-    cue('Ekrana bak', true) // uyarı titreşimi + ses (ses kapalıysa yalnızca titreşim)
+    haptic('warning')
+    if (face) sayPhrase('calCenter')
   }
 
   function start() {
@@ -169,6 +205,7 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
     if (!requestEyeRound()) return
     unlockAudio()
     unlockSfx()
+    preloadPhrases()
     reader.current = createGazeReader()
     det.current = createFollowDetector()
     lastStep.current = null
@@ -183,6 +220,16 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
     go('countdown')
     playSfx('count')
   }
+
+  // Duraklama STUCK_MS sürerse ölçümsüz devam seçeneği (bakış okunamıyor: kaymış model, kapalı sayılan göz…)
+  useEffect(() => {
+    if (phase !== 'paused' || round.current.rhythm) return undefined
+    const t = setTimeout(() => {
+      recRef.current = { ...recRef.current, stuck: true }
+      setRec(recRef.current)
+    }, STUCK_MS)
+    return () => clearTimeout(t)
+  }, [phase])
 
   // Sahne motoru: her tur için yeni (sahne countdown/play/paused boyunca aynı SVG'de kalır)
   useEffect(() => {
@@ -284,15 +331,26 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, count, roundId])
 
-  function pause(ts) {
+  function pause(ts, face = true) {
     if (phaseRef.current !== 'play') return
     runClock(false)
     eng.current?.pause()
     det.current?.cancel()
     go('paused')
     away.current.back = null
-    if (!round.current.rhythm) warn(ts)
-    else playSfx('pause')
+    recRef.current = { progress: 0, stuck: false, diag: '' }
+    setRec(recRef.current)
+    if (!round.current.rhythm) {
+      reader.current?.recenter({ maxFrac: RECOVER_MAX_FRAC })
+      warn(ts, face)
+    } else playSfx('pause')
+  }
+
+  // Takılı kalmasın: bakış hâlâ okunamıyorsa tur ölçümsüz (ritim) sürer; puan çıkmaz, hareketler devam eder
+  function continueUnmeasured() {
+    round.current.rhythm = true
+    eng.current?.setGaze('none')
+    resume()
   }
 
   function resume() {
@@ -587,15 +645,29 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
         <IrisMark size={22} />
         {hintText}
       </div>
-      {phase === 'paused' && (
+      {phase === 'paused' && rhythm && (
         <div className="cm-veil" role="alert">
           <div className="cm-pcard">
-            <span className={`cm-warnic${rhythm ? ' calm' : ''}`}>{rhythm ? <Pause size={26} aria-hidden="true" /> : <ScanFace size={26} aria-hidden="true" />}</span>
-            <h2>{rhythm ? 'Durdu' : 'Ekrana bak'}</h2>
-            <p>{rhythm ? 'Hazır olunca devam et.' : cam.face ? 'Bakışın ekranın dışında. Ekrana dönünce devam edeceğim.' : 'Yüzün görünmüyor. Telefonu yüzüne dönük tut.'}</p>
-            {rhythm && <button type="button" className="btn" onClick={resume}><Play size={18} aria-hidden="true" /> Devam</button>}
+            <span className="cm-warnic calm"><Pause size={26} aria-hidden="true" /></span>
+            <h2>Durdu</h2>
+            <p>Hazır olunca devam et.</p>
+            <button type="button" className="btn" onClick={resume}><Play size={18} aria-hidden="true" /> Devam</button>
             <button type="button" className="cm-pbtn-line" onClick={symptom}>Başım dönüyor, bırak</button>
           </div>
+        </div>
+      )}
+      {phase === 'paused' && !rhythm && (
+        // Ortada göz bebeği (kalibrasyonun orta noktasıyla aynı yer: %50, %46): bakınca halka dolar, okuyucu
+        // yeniden ortalanır ve tur kaldığı yerden sürer. Yüz görünmüyorsa soluk iris ve yönlendirme.
+        <div className="cm-veil cm-rec" role="alert">
+          <div className="cm-rec-target"><CalIris dark progress={cam.face ? rec.progress : 0} state={cam.face ? '' : 'off'} /></div>
+          <div className="cm-rec-text">
+            <h2>{cam.face ? 'Ortadaki göz bebeğine bak' : 'Yüzün görünmüyor'}</h2>
+            <p>{cam.face ? 'Halka dolunca kaldığın yerden devam ederiz.' : 'Telefonu yüzüne dönük tut.'}</p>
+            {rec.stuck && <button type="button" className="btn" onClick={continueUnmeasured}><Play size={18} aria-hidden="true" /> Ölçmeden devam et</button>}
+            <button type="button" className="cm-pbtn-line" onClick={symptom}>Başım dönüyor, bırak</button>
+          </div>
+          {rec.diag && <pre className="cm-diag" aria-hidden="true">{rec.diag}</pre>}
         </div>
       )}
       {!rhythm && phase === 'play' && !cam.ready && <p className="cm-camnote">Kamera açılıyor…</p>}

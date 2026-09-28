@@ -1,6 +1,7 @@
 import { describe, it, expect, afterEach, vi } from 'vitest'
 import { windowStable, usableCenters, fitModel, fitAxis, axisFrom, fitWindowsAxis, postureFit, roughModel, MIN_SCORE_ROUGH, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE, calibReport, closeThreshold, loadGazeModel, saveGazeModel, clearGazeModel, GAZE_MODEL_KEY, GAZE_MODEL_VERSION, DOWN_CLOSE_MAX, headRef, headTurned, HEAD_TURN_DEG, twoPointAxis, axisCenterKey, geomCheck, PT_PER_MM, FEATURES } from './gazeCalib.js'
 import { createGazeReader, lookingAtPhone, GAZE_FULL_DEG } from './gaze.js'
+import { offScreen } from './track.js'
 
 // Deterministik gürültü
 function rng(seed) {
@@ -166,6 +167,37 @@ describe('createGazeReader (model modu)', () => {
     // Kişi baştan sola bakıyor: kayma büyük → kabul edilmez, sol algılanır
     const r = feed(reader, -15, 0, 60)
     expect(r.dir).toBe('left')
+  })
+  // Çemberler "Ekrana bak"ta takılma (sahibi, 2026-09-28 22:46): baş/telefon kayınca ortaya bakış kenarın 1,4 katı
+  // okunuyor → duraklama; eski sınırla (0,35) yeniden ortalama reddedilir, kişi ekrana baksa da çıkamaz.
+  it('duraklamada ortadaki hedef: recenter({maxFrac:3}) büyük kaymayı kabul eder, ortaya bakış "içeride" olur', () => {
+    const drift = -21 // kalibrasyon kenarı ±15 → 1,4 kat
+    const stuck = createGazeReader({ model: m })
+    stuck.recenter()
+    const before = feed(stuck, drift, 0, 150) // 4 deneme × 0,8 sn biter
+    expect(offScreen(before)).toBe(true)
+    expect(stuck.recentering.active).toBe(false) // eski sınır: denemeler bitti, kayma reddedildi
+    const reader = createGazeReader({ model: m })
+    reader.recenter({ maxFrac: 3 })
+    const mid = feed(reader, drift, 0, 10)
+    expect(reader.recentering.active).toBe(true)
+    expect(reader.recentering.progress).toBeGreaterThan(0)
+    expect(reader.recentering.progress).toBeLessThan(1)
+    expect(offScreen(mid)).toBe(true) // kabul edilene dek hâlâ dışarı
+    const after = feed(reader, drift, 0, 40, 330)
+    expect(reader.recentering.active).toBe(false)
+    expect(offScreen(after)).toBe(false)
+    expect(Math.abs(after.v.x)).toBeLessThan(5)
+    expect(reader.shift.x).not.toBe(0)
+  })
+  it('duraklamada kıpırdayan bakış (gezinme) ortalanmaz', () => {
+    const reader = createGazeReader({ model: m })
+    reader.recenter({ maxFrac: 3 })
+    let r
+    for (let i = 0; i < 60; i++) r = reader.push({ ...makeFrame(-21 + (i % 10) * 4, 0, { signX: -1, noise: 0.2, r: rng(i) }), ts: i * 33 })
+    expect(r.tracked).toBe(true)
+    expect(reader.shift.x).toBe(0) // kararsız pencere: kayma kabul edilmedi
+    expect(reader.recentering.progress).toBeLessThan(1)
   })
   it('gözler kapalı / yüz yok', () => {
     const reader = createGazeReader({ model: m })

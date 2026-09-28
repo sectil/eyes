@@ -307,6 +307,7 @@ function createModelReader(model, opts) {
   }
   function collect(raw, ts) {
     if (cal.start == null) cal.start = ts
+    cal.last = ts
     cal.samples.push(raw)
     if (ts - cal.start < calibMs || cal.samples.length < CAL_MIN_SAMPLES) return
     const mx = median(cal.samples.map((p) => p.x))
@@ -316,13 +317,14 @@ function createModelReader(model, opts) {
     const nx = mx - model.x.c
     const ny = my - model.y.c
     const stable = sx <= RECENTER_STABLE_FRAC * range.x && sy <= RECENTER_STABLE_FRAC * range.y
-    const near = Math.abs(nx) <= RECENTER_MAX_FRAC * range.x && Math.abs(ny) <= RECENTER_MAX_FRAC * range.y
+    const lim = cal.maxFrac ?? RECENTER_MAX_FRAC
+    const near = Math.abs(nx) <= lim * range.x && Math.abs(ny) <= lim * range.y
     if (stable && near) {
       shift = { x: nx, y: ny }
       cal = null
       return
     }
-    cal = cal.attempts + 1 >= CAL_MAX_ATTEMPTS ? null : { samples: [], start: null, attempts: cal.attempts + 1 }
+    cal = cal.attempts + 1 >= CAL_MAX_ATTEMPTS ? null : { samples: [], start: null, attempts: cal.attempts + 1, maxFrac: cal.maxFrac }
   }
   return {
     push(f = {}) {
@@ -348,9 +350,18 @@ function createModelReader(model, opts) {
       dir = stepDir(dir, v, enterDeg, exitDeg)
       return out(dir, false, true)
     },
-    recenter() {
-      cal = { samples: [], start: null, attempts: 0 }
+    // maxFrac: kabul edilen en büyük kayma (aralığın oranı). Kişiye ortada bir hedef gösterilirken (ör. duraklamada
+    // "ortadaki göz bebeğine bak") büyük kayma da gerçektir: baş/telefon kaymıştır, kabul edilir.
+    recenter({ maxFrac } = {}) {
+      cal = { samples: [], start: null, attempts: 0, maxFrac }
       reset()
+    },
+    // Yeniden ortalama sürüyor mu ve pencerenin ne kadarı doldu (0..1; kıpırdayınca 0'a döner)
+    get recentering() {
+      return { active: Boolean(cal), progress: cal && cal.start != null ? Math.min(1, (cal.last - cal.start) / calibMs) : 0 }
+    },
+    get shift() {
+      return { x: shift.x, y: shift.y }
     },
     get neutral() {
       return { x: 0, y: 0, source: 'model' }
@@ -406,6 +417,7 @@ export function createGazeReader(opts = {}) {
 
   function collect(ang, blend, ts) {
     if (cal.start == null) cal.start = ts
+    cal.last = ts
     cal.samples.push({ ang, blend })
     if (ts - cal.start < calibMs || cal.samples.length < CAL_MIN_SAMPLES) return
     const angs = cal.samples.filter((p) => p.ang).map((p) => p.ang)
@@ -416,11 +428,13 @@ export function createGazeReader(opts = {}) {
       const c = fitNeutral(pts)
       if (c.spread > stableTol) return { status: 'unstable' }
       const prev = neutral[key]
-      if (prev && Math.hypot(c.x - prev.x, c.y - prev.y) > maxShift) return { status: 'far' }
+      if (prev && Math.hypot(c.x - prev.x, c.y - prev.y) > maxShift) return { status: 'far', value: { x: c.x, y: c.y } }
       return { status: 'ok', value: { x: c.x, y: c.y } }
     }
     const fits = { angle: fit('angle', angs, STABLE_DEG, RECENTER_MAX_DEG), blend: fit('blend', blends, STABLE_BLEND, RECENTER_MAX_BLEND) }
-    const r = fits[primary].status
+    // force: kişiye ortada hedef gösteriliyor → uzak ama sabit nötr de gerçek kaymadır, kabul edilir
+    const r = cal.force && fits[primary].status === 'far' ? 'ok' : fits[primary].status
+    if (cal.force) for (const key of ['angle', 'blend']) if (fits[key].status === 'far') fits[key].status = 'ok'
     if (r === 'ok' || r === 'far') {
       // 'far': sabit ama önceki nötrden uzak → kişi büyük olasılıkla hedefe bakıyor; eski nötr kalır.
       // İkincil kaynak (işaret doğrulamada kullanılır) yalnızca birincil kabul edildiğinde güncellenir.
@@ -428,7 +442,7 @@ export function createGazeReader(opts = {}) {
       collecting = false
       return
     }
-    cal = { samples: [], start: null, attempts: cal.attempts + 1 }
+    cal = { samples: [], start: null, attempts: cal.attempts + 1, force: cal.force }
     if (neutral[primary] && cal.attempts >= CAL_MAX_ATTEMPTS) collecting = false
   }
 
@@ -511,10 +525,17 @@ export function createGazeReader(opts = {}) {
     },
     // Nötrü yeniden topla (ör. adım başında). Öğrenilen ölçek ve işaret korunur; yeni nötr
     // yalnızca sabit ve eskisine yakınsa kabul edilir.
-    recenter() {
-      cal = { samples: [], start: null, attempts: 0 }
+    // maxFrac verilirse (ortada hedef gösteriliyor) eskisinden uzak nötr de kabul edilir
+    recenter({ maxFrac } = {}) {
+      cal = { samples: [], start: null, attempts: 0, force: maxFrac != null }
       collecting = true
       resetMotion()
+    },
+    get recentering() {
+      return { active: collecting, progress: collecting && cal.start != null ? Math.min(1, (cal.last - cal.start) / calibMs) : 0 }
+    },
+    get shift() {
+      return null
     },
     // Aktif kaynağın nötrü (derece, kişinin sağı +x) ya da null. Blendshape için yaklaşık.
     get neutral() {
