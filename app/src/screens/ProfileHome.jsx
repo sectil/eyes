@@ -336,7 +336,7 @@ function AlarmPref({ alarm }) {
         {/* Öteki satırlarla aynı hiza: düz simge + metin + anahtar (PrefToggle'ın renkli simge kutusu burada yok) */}
         <button type="button" role="switch" aria-checked={show} className="list-row pref-toggle ph-alarm-sw" onClick={() => setPrefs({ alarmCard: !show })}>
           <LayoutDashboard size={20} aria-hidden="true" />
-          <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Ana sayfada göster</span><span className="muted small">Yolun altında alarm kartı</span></span>
+          <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Ana sayfada göster</span><span className="muted small">Üstte alarm satırı, akşam ve sabah kartı</span></span>
           <span className="pref-switch" aria-hidden="true"><span className="pref-knob" /></span>
         </button>
         {alarm.sleep && (

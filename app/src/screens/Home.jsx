@@ -21,6 +21,7 @@ import DayDial from '../components/DayDial.jsx'
 import { Avatar } from './ProfileHome.jsx'
 import { homeSuggestion } from '../lib/homeSuggest.js'
 import HomeMap from '../components/HomeMap.jsx'
+import AlarmLine from '../components/AlarmLine.jsx'
 import AlarmCard from '../components/AlarmCard.jsx'
 import { walkNudge, fmtSteps } from '../lib/health.js'
 import ConsentSheet from '../components/ConsentSheet.jsx'
@@ -248,6 +249,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
               </div>
             )}
             <div className="hh-fact"><CircleDot size={14} aria-hidden="true" className="f3" /><b>{totalDays}</b>gün seninle</div>
+            {alarmStatus && <AlarmLine status={alarmStatus} onStart={onStart} now={now} />}
           </div>
         </div>
       </section>

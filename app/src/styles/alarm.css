@@ -127,3 +127,57 @@
   background: radial-gradient(circle at 40% 35%, var(--accent-soft), transparent 70%), var(--surface-2);
   color: var(--accent); font-weight: 650;
 }
+
+/* ---------- Ana sayfa alarm satırı + seçenekler (v5; components/AlarmLine.jsx) ---------- */
+/* Satır, üstteki sayı satırlarıyla (home.css .hh-fact) aynı; yalnız dokunulabilir */
+.hh-fact.al-fact {
+  width: calc(100% + 4px); margin: -6px 0 -6px -4px; padding: 6px 0 6px 4px; min-height: 32px; border: 0; border-radius: 9px;
+  background: none; text-align: left; cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.hh-fact.al-fact:active { background: var(--surface-2); }
+.hh-fact.al-fact:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
+/* Dar ekranda (≤ 360 px) ok gizlenir: sayı sütunu zaten sığmıyor (HATA_GUNLUGU Bug 21); satır öteki satırlardan uzun olmasın */
+@media (max-width: 360px) { .hh-fact.al-fact .al-fact-ar { display: none; } }
+.hh-fact .f5 { color: var(--lens); }
+.hh-fact.al-fact .al-fact-ar { margin-left: auto; color: var(--ink-3); }
+.hh-fact.al-fact.off, .hh-fact.al-fact.off b { color: var(--ink-3); }
+.hh-fact.al-fact.off .f5 { opacity: 0.55; }
+/* Alt sayfa */
+.al-sh-back { position: fixed; inset: 0; z-index: 1000; background: rgba(2, 5, 8, 0.6); display: flex; align-items: flex-end; justify-content: center; }
+.al-sh {
+  width: 100%; max-width: 560px; max-height: 92vh; overflow-y: auto; display: flex; flex-direction: column; gap: 14px;
+  padding: 10px 20px calc(22px + env(safe-area-inset-bottom, 0px)); border-radius: 24px 24px 0 0;
+  background: var(--surface); border-top: 1px solid var(--border); animation: al-sh-up 0.22s ease-out;
+}
+@keyframes al-sh-up { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .al-sh { animation: none; } }
+.al-sh-grab { width: 40px; height: 5px; border-radius: 3px; background: var(--surface-3); align-self: center; }
+.al-sh-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.al-sh-top .al-num { gap: 8px; }
+.al-sh-rows { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
+.al-sh-rows button {
+  display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 2px; border: 0; border-bottom: 1px solid var(--border);
+  background: none; color: var(--ink); font: inherit; font-size: 0.98rem; text-align: left; cursor: pointer;
+}
+.al-sh-rows button:last-child { border-bottom: 0; }
+.al-sh-rows button > svg { color: var(--accent); flex: none; }
+.al-sh-rows button.danger, .al-sh-rows button.danger > svg { color: var(--warn); }
+.al-sh-rows .grow { flex: 1; min-width: 0; }
+.al-sh-v { flex: none; white-space: nowrap; color: var(--ink-3); font-size: 0.85rem; }
+.al-sh-confirm { display: flex; flex-direction: column; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--warn-bg); }
+.al-sh-confirm p { margin: 0; color: var(--warn); font-size: 0.92rem; line-height: 1.4; }
+/* Kapatınca "Geri al": sekme çubuğunun üstünde */
+.al-toast.al-float {
+  position: fixed; z-index: 1001; left: 16px; right: 16px; bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  max-width: 528px; margin: 0 auto;
+}
+/* Kurulum: büyük saat (v5); saydam <input type=time> kutunun üstünde, dokunuş doğrudan iOS çarkını açar */
+.al-clock {
+  position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 16px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); cursor: pointer;
+}
+.al-clock b { font: 800 2.9rem/0.9 var(--font-display); letter-spacing: -0.03em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.al-clock-ch { flex: none; padding: 9px 14px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.9rem; font-weight: 650; white-space: nowrap; }
+.al-clock > input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; -webkit-appearance: none; appearance: none; border: 0; font-size: 16px; }
+.al-clock:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 360px) { .al-clock b { font-size: 2.5rem; } .al-clock-ch { padding-inline: 11px; font-size: 0.85rem; } }

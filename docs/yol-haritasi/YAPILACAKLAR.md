@@ -180,6 +180,15 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
       öneki kalktı); başlık "Sabah" yalnız 12.00'den önceki alarmda. Testler: prefs her testte sıfırlanır, kadran/Yarın/
       başlık/eski yedek/Bu gece yok testleri. Görsel: yeni hâller iki temada, 390 ve 320 px; kart 320'de taşmıyor
       (sayfadaki 14 px taşma Ana sayfa haritasından: Bug 21).
+- [~] **Tasarım v5 (2026-09-28, https://claude.ai/artifact/5QhWAtgBFCWo5TmXPZo11n) kodda.** VARSAYIM: sahibinin
+      16:38 ve 17:03 mesajları ("adım gün senin altında alarm saati kurulu gibi temaya uygun bir satır", "profilde
+      gözükmüyor demiştim") v5 onayı; açık 3 soruda önerilerim uygulandı: alarm yokken sönük "— alarm yok" satırı,
+      kurulu alarmın büyük kartı kalktı (kart yalnız akşam/sabah soruları için). Yatma saati bildirimi (soru 3)
+      YAPILMADI, sahibinin cevabı bekleniyor. `components/AlarmLine.jsx` (satır + alt sayfa + kapat onayı + Geri al;
+      geri alma kurulamazsa söyler), kurulumda büyük saat + iOS çarkı, öneriler yalnız 04.00–11.59 uyanışlarından
+      (`lib/alarm.js` suggestTimes), `dayShort`. Görsel: iki tema, 390 ve 320 px; bulunup düzeltilen: sayfadaki
+      değerler sağa yaslanmıyordu, "alarm yok" yazısı öteki satırlarla hizasızdı, satır 320'de taşmayı 4 px
+      artırıyordu (14 → 18; şimdi 14, Bug 21).
 - [ ] **Cihazda bak (alarm):** (1) derleniyor mu (Xcode 26); (2) 14.00'ten sonra Ana sayfada kart; Evet → Kur;
       iOS alarm izni; (3) haftalık alarm seçilen günlerde çalıyor mu, tek seferlik bir kez; (4) Dalga sesi çalıyor mu,
       25 sn'de susuyor mu tekrar mı ediyor; (5) "Nefona'yı aç" uygulamayı açıp sabah kartını/ekranını getiriyor mu;

@@ -356,3 +356,23 @@ describe('bildirim yedeği ve sesler', () => {
     expect(soundById(DEFAULT_SOUND).name).toBe('Dalga · Motivasyon')
   })
 })
+
+describe('v5: satır günü ve sabah önerileri', () => {
+  it('dayShort: bugün · yarın · kısa gün', async () => {
+    const { dayShort } = await import('./alarm.js')
+    const now = new Date(2026, 8, 28, 14, 0) // Pazartesi
+    expect(dayShort(new Date(2026, 8, 28, 20, 0), now)).toBe('bugün')
+    expect(dayShort(new Date(2026, 8, 29, 7, 0), now)).toBe('yarın')
+    expect(dayShort(new Date(2026, 9, 3, 7, 0), now)).toBe('Ct')
+  })
+  it('öneriler yalnız sabah uyanışlarından (04.00–11.59); öğleden sonraki deneme alarmları öneri üretmez', async () => {
+    const { suggestTimes, DEFAULT_TIMES } = await import('./alarm.js')
+    const now = new Date(2026, 8, 28, 21, 0)
+    const set = (d, hour, minute) => ({ type: 'set', at: new Date(2026, 8, d, 15, 0).toISOString(), date: `2026-09-${d}`, hour, minute, days: [1, 2, 3, 4, 5] })
+    expect(suggestTimes([set(27, 15, 40), set(28, 16, 15)], now)).toMatchObject({ times: DEFAULT_TIMES, learned: false })
+    const r = suggestTimes([set(27, 15, 40), set(28, 6, 30)], now)
+    expect(r.learned).toBe(true)
+    expect(r.pick).toBe(6 * 60 + 30)
+    expect(r.times.every((t) => t >= 4 * 60 && t < 12 * 60)).toBe(true)
+  })
+})

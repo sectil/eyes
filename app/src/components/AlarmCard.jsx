@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { Moon, ChevronRight, Ellipsis } from 'lucide-react'
+import { Ellipsis } from 'lucide-react'
 import {
-  eveningCard, morningCard, nextRing, ringLabel, untilText, setupDefaults, buildAlarm, hhmm, withSuffix, latency, nextLatency,
-  bedtimeFor, minOfDay, daysLabel, sleepMinutes, SLEEP_TARGET_H, WEEKDAY_LONG,
+  eveningCard, morningCard, nextRing, setupDefaults, buildAlarm, hhmm, withSuffix, latency, nextLatency, minOfDay, WEEKDAY_LONG,
 } from '../lib/alarm.js'
 import { dayKey, keyDay } from '../lib/habitLog.js'
 import { loadAlarm, loadAlarmLog, addAlarmEvent, saveAlarm } from '../lib/alarmLog.js'
@@ -11,13 +10,12 @@ import { scheduleAlarm } from '../lib/alarmNative.js'
 import { getPrefs, setPrefs } from '../lib/prefs.js'
 import '../styles/alarm.css'
 
-// Ana sayfa alarm kartı (Artifact "Nefona Alarm" v4, onaylı 28 Eylül: https://claude.ai/artifact/GJU5G7RieTuyNTUbezJn8d).
-// "Bugünün yolu"nun altında; Profil → Alarm "Ana sayfada göster" (prefs.alarmCard) ya da ⋯ → "Ana sayfadan kaldır".
-// Kart gizliyken alarm yine çalar; akşam sorusu ve sabah kartı da çıkmaz. Tek kart, hallerine göre:
+// Ana sayfa alarm kartı (Artifact "Nefona Alarm" v4 https://claude.ai/artifact/GJU5G7RieTuyNTUbezJn8d; v5
+// https://claude.ai/artifact/5QhWAtgBFCWo5TmXPZo11n). "Bugünün yolu"nun altında; Profil → Alarm "Ana sayfada göster"
+// (prefs.alarmCard) ya da ⋯ → "Ana sayfadan kaldır". Kart gizliyken alarm yine çalar. Kart yalnız sorular için:
 //  sabah: "Uyanınca" (1 dk nefes / Dalga / gün ışığı), sonra "Ses bittiğinde uyumuş muydun?"
-//  kurulu: saat (Ana sayfanın sayı dili), gece kadranı (yatma → alarm, nokta şimdi), uyku sesi satırı, yatma saati
 //  akşam (19.00, test derlemesinde 14.00), alarm yoksa: "Yarın sabah · Alarm kurayım mı?"
-//  gün içinde alarm yoksa: tek satır "Kurulu değil · Kur"
+//  kurulu alarm ve "alarm yok": kart yok, üstteki satır (components/AlarmLine.jsx)
 // status: { platform: 'alarmkit'|'notify'|'web', auth } (App: lib/alarmNative.js alarmStatus). Web'de kart yok.
 const ANSWERS = [
   { id: 'yes', label: 'Evet' },
@@ -30,16 +28,16 @@ const DENIED = {
 }
 const WAKE_TITLE = { breath: 'Bir dakika nefes, sonra güne başla', dalga: 'Güne bir Dalga ile başla', light: 'Perdeyi aç, gün ışığı al' }
 const WAKE_GO = { breath: 'Başla · 1 dk', dalga: 'Başla', light: 'Açtım' }
-const HOUR = 3600000
-const DIAL_H = 12 // kadran 12 saatlik: "şimdi" noktası ancak alarma 12 saatten az kalınca tek ve doğru yerde durur (ve yatma saatinden önce: yayın dışında)
+export const HOUR = 3600000
+export const DIAL_H = 12 // kadran 12 saatlik: "şimdi" noktası ancak alarma 12 saatten az kalınca tek ve doğru yerde durur (ve yatma saatinden önce: yayın dışında)
 
 // Etiket günü: Bugün / Yarın / gün adı (takvim günüyle)
-function dayWord(next, now) {
+export function dayWord(next, now) {
   const diff = keyDay(dayKey(next)) - keyDay(dayKey(new Date(now)))
   return diff <= 0 ? 'Bugün' : diff === 1 ? 'Yarın' : WEEKDAY_LONG[next.getDay()]
 }
 // Başlık: sabah saatleri için "Sabah", değilse yalnız tür
-const eyebrowOf = (kind, next) => {
+export const eyebrowOf = (kind, next) => {
   const base = kind === 'notify' ? 'hatırlatma' : 'alarm'
   return next && next.getHours() < 12 ? `Sabah · ${base}` : base === 'alarm' ? 'Alarm' : 'Hatırlatma'
 }
@@ -120,7 +118,6 @@ export default function AlarmCard({ status, sessions = [], test = false, onStart
 
   const alarm = loadAlarm()
   const log = loadAlarmLog()
-  const notify = platform === 'notify'
   const liveNext = nextRing(alarm, now)
   const hide = () => { setPrefs({ alarmCard: false }); setRemoved(true) }
   const menu = [
@@ -181,41 +178,8 @@ export default function AlarmCard({ status, sessions = [], test = false, onStart
     )
   }
 
-  if (liveNext) {
-    // Tür alarmın kendisinden: iOS 26'ya güncellenmiş telefonda eski bildirim yedeği hâlâ bildirimdir
-    const setNotify = alarm.kind === 'notify'
-    const bed = bedtimeFor(liveNext, now)
-    // Kadran yatma saatinden alarma kadar olan yayı çizer: yatma saati geçmişse (akşam alarmı, gece yarısından sonra) anlamsız
-    const dial = bed != null && liveNext.getTime() - new Date(now).getTime() <= DIAL_H * HOUR
-    const sleepMin = sleepMinutes(alarm, log, now)
-    const when = untilText(liveNext, now)
-    const tomorrowish = liveNext.getTime() - new Date(now).getTime() <= 24 * HOUR
-    return (
-      <Shell key="set" eyebrow={eyebrowOf(alarm.kind, liveNext)} menu={menu}>
-        <button type="button" className="al-main" onClick={() => onStart('alarm')} aria-label={`Alarm ${ringLabel(liveNext, now)}, ${when}. Değiştir`}>
-          <span className="al-num">
-            <b>{hhmm(minOfDay(liveNext))}</b>
-            <span className="al-lbl">{tomorrowish ? when : dayWord(liveNext, now) === 'Yarın' ? 'Yarın' : `${dayWord(liveNext, now)} · ${when}`}<br />{daysLabel(alarm.days)}</span>
-          </span>
-          {dial && <NightDial bed={new Date(liveNext.getTime() - SLEEP_TARGET_H * HOUR)} ring={liveNext} now={new Date(now)} />}
-        </button>
-        {alarm.sleep !== 'off' && (
-          <button type="button" className="al-row" onClick={() => onStart('alarm-sleep')}>
-            <Moon size={15} aria-hidden="true" />
-            <span className="grow"><b>Uyku sesi</b></span>
-            <span className="al-row-val">{sleepMin > 0 ? `${alarm.sleep === 'auto' ? 'Sana göre ' : ''}${sleepMin} dk` : 'Bu gece yok'}</span>
-            <ChevronRight size={16} aria-hidden="true" />
-          </button>
-        )}
-        {setNotify && (
-          <p className="al-warn">
-            {notify ? 'Bu telefonda gerçek alarm yok (iOS 26 gerekir); sessiz modda ses çıkmaz.' : 'Bu bir bildirim hatırlatması; sessiz modda ses çıkmaz. Yeniden kurarsan gerçek alarm olur.'}
-          </p>
-        )}
-        {bed && <p className="al-foot">{`${SLEEP_TARGET_H} saat uyku için en geç ${withSuffix(minOfDay(bed), 'loc')} yatakta ol`}</p>}
-      </Shell>
-    )
-  }
+  // Kurulu alarm Ana sayfanın üstündeki satırda (components/AlarmLine.jsx, tasarım v5); kart yalnız sorular için
+  if (liveNext) return null
 
   const c = eveningCard({ now, alarm, log, platform, auth: status?.auth, test })
   if (c?.kind === 'pref') {
@@ -289,13 +253,6 @@ export default function AlarmCard({ status, sessions = [], test = false, onStart
     )
   }
 
-  // Gün içinde (ya da akşam sorusu kapandıysa) alarm yok: tek satır
-  return (
-    <Shell key="line" eyebrow={notify ? 'Hatırlatma' : 'Alarm'} menu={menu}>
-      <div className="al-line">
-        <span className="grow">Kurulu değil</span>
-        <button type="button" className="al-pill" onClick={() => onStart('alarm')}>Kur</button>
-      </div>
-    </Shell>
-  )
+  // Gün içinde (ya da akşam sorusu kapandıysa) alarm yok: kart yok; üstteki satır "— alarm yok" (AlarmLine)
+  return null
 }

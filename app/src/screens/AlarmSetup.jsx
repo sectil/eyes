@@ -125,16 +125,18 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
 
       <section className="al-q" aria-labelledby="al-q1">
         <h2 id="al-q1">Kaçta uyanmak istersin?</h2>
-        <div className="al-chips" role="radiogroup" aria-labelledby="al-q1">
+        {/* Tasarım v5: büyük saat; dokununca iOS saat çarkı (saydam gerçek alan kutunun üstünde) */}
+        <label className="al-clock">
+          <b>{hhmm(time)}</b>
+          <span className="al-clock-ch">Saati değiştir</span>
+          <input type="time" aria-label={`Saat ${hhmm(time)}. Değiştir`} value={hhmm(time)} onChange={(e) => { const t = parseHhmm(e.target.value); if (t != null) pickTime(t, !d.times.includes(t)) }} />
+        </label>
+        <div className="al-chips" role="radiogroup" aria-label="Hızlı seçim">
           {d.times.map((t) => (
             <button key={t} type="button" role="radio" className="al-chip" aria-checked={time === t && !otherTime} onClick={() => pickTime(t)}>{hhmm(t)}</button>
           ))}
-          <label className={`al-chip${otherTime ? ' on' : ''}`}>
-            {otherTime ? hhmm(time) : 'Başka'}
-            <input type="time" aria-label="Başka saat" value={hhmm(time)} onChange={(e) => { const t = parseHhmm(e.target.value); if (t != null) pickTime(t, true) }} />
-          </label>
         </div>
-        <p className="al-q-sub">{d.learned ? 'Öneriler uyandığın saatlerden gelir' : 'Sonraki öneriler uyandığın saatlerden gelir'}</p>
+        <p className="al-q-sub">{d.learned ? 'Hızlı seçim: uyandığın sabah saatlerinden' : 'Hızlı seçim · sonra uyandığın sabah saatlerinden öğrenir'}</p>
       </section>
 
       <section className="al-q" aria-labelledby="al-q2">

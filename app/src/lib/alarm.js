@@ -123,6 +123,11 @@ export function untilText(next, now) {
   const h = Math.floor(m / 60), mm = m % 60
   return `${h ? `${h} sa ` : ''}${h && !mm ? '' : `${mm} dk `}sonra`
 }
+// Ana sayfa satırı: "bugün" · "yarın" · kısa gün ("Ct")
+export function dayShort(next, now) {
+  const diff = keyDay(dayKey(next)) - keyDay(dayKey(new Date(now)))
+  return diff <= 0 ? 'bugün' : diff === 1 ? 'yarın' : WEEKDAY_SHORT[next.getDay()]
+}
 // Kartta alarmın zamanı: yarınsa yalnız saat, değilse gün adıyla
 export function ringLabel(next, now) {
   const t = new Date(now)
@@ -165,8 +170,11 @@ const byCount = (samples, filter = () => true) => {
 
 // Üç öneri (artan sırada) ve seçili gelen. İlk kez 07:00 · 08:00 · 09:00; sonra en sık üçü; eksikse en sıkın
 // ±30 dk komşuları. Seçili: hedef günde (yarın) en sık, yoksa genel en sık, yoksa 07:00.
+export const MORNING_FROM = 4 * 60
+export const MORNING_TO = 12 * 60
 export function suggestTimes(log, now) {
-  const samples = wakeSamples(log, now)
+  // Öneri yalnız sabah uyanışlarından (04.00–11.59): öğleden sonraki deneme alarmları "15:15" gibi öneri üretmesin
+  const samples = wakeSamples(log, now).filter((s) => s.min >= MORNING_FROM && s.min < MORNING_TO)
   const ranked = byCount(samples)
   if (!ranked.length) return { times: DEFAULT_TIMES, pick: DEFAULT_TIME, learned: false }
   const times = ranked.slice(0, 3)
