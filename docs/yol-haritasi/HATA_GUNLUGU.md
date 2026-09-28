@@ -517,3 +517,10 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
 ### Deneme logu
 - DENEME-1 (HİP-1): üç Dalga modunu (Sakin, Güç, Motivasyon) derleme anında 25 sn WAV'a basıp uygulama paketine
   gömmek; panelde "Paketteki Dalga sesiyle 2 dk" düğmesi.
+
+## Bug 21: Ana sayfa 320 px'te 14 px yana taşıyor (2026-09-28, tarayıcıda görüldü)
+## Durum: AÇIK (sahibine soruldu; alarm işinin kapsamı dışında)
+- Bulgu: alarm kartı görsel kontrolünde `document.scrollWidth − innerWidth = 14` (320 px, iki tema). Kart yokken
+  (18.30, kart çıkmaz) de aynı 14 px → alarm kartından değil. Görüntüde "DURAK · ≈19 DK KALDI" satırı kesiliyor
+  (`.hh-num`, günün diyaframının yanı).
+- Düzeltilmedi: sorulmadan kapsam büyütülmez.

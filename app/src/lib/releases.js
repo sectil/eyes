@@ -7,6 +7,9 @@ export const RELEASES = [
     id: '2026-09-28',
     title: '28 Eylül güncellemesi',
     items: [
+      { kind: 'new', text: 'Sabah alarmı: akşam Ana sayfanın en üstünde "Yarın sabah · Alarm kurayım mı?" Üç soru hazır cevaplı gelir (saat, günler, uykuya dalarken ses); tek dokunuşla kurarsın. iOS 26\'da gerçek alarm: sessiz modda da çalar; Dalga sesleriyle ya da telefonun alarm sesiyle uyanırsın. Daha eski iOS\'ta bildirimle hatırlatılır.' },
+      { kind: 'new', text: 'Uykuya dalarken ses: Dalga\'nın sakin müziği seçtiğin sürede ya da "Sana göre" çalar. "Sana göre" uykunu dinlemez; sabah "Ses bittiğinde uyumuş muydun?" cevabına göre süreyi 5 dakika uzatır ya da kısaltır.' },
+      { kind: 'new', text: 'Alarmdaki "Nefona\'yı aç" ile güne 1 dakika nefesle ya da bir Dalga ile başlayabilirsin (isteğe bağlı). Uyandığın günler Gelişim\'de İyi oluş alanına yazılır; önerilen saatler zamanla kendi uyanış saatlerinden gelir.' },
       { kind: 'change', text: 'Yeni uygulama simgesi: aynı "n" göz kapağı, altında artık yukarı bakan bir iris. iOS 26\'da cam görünümlü katmanlı simge; koyu ve renklendirilmiş ana ekranda kendi sürümleri.' },
       { kind: 'fix', text: 'Açılışta bir an başka bir logo (geliştirme aracının varsayılan görseli) görünüyordu; artık Nefona işareti, koyu temada koyu zeminde. Koyu temada açılırken ekranın açık gri yanıp sönmesi de düzeldi.' },
       { kind: 'new', text: "Gelişim haritası: iris artık her alanda son 28 günde kaç gün bir şey yaptığınla dolar; bütün modüller, testler, mola ve su kaydı aynı yerde toplanır. Bir alanda değişim ölçüm hatasından büyükse dış kenarda altın (iyileşiyor) ya da turuncu (geriliyor) yay çıkar. 35. günden sonra ilk 28 günün ile son 28 gününü karşılaştırabilirsin." },

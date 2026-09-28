@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import { Bell, BellOff, Eye, Footprints, Wind, GlassWater, CalendarDays, Clock, ChevronRight, Info, Timer } from 'lucide-react'
+import { Bell, BellOff, Eye, Footprints, Wind, GlassWater, CalendarDays, Clock, ChevronRight, Info, Timer, AlarmClock } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
 import PrefToggle from '../components/PrefToggle.jsx'
 import { NUDGE_TYPES, TYPE_LABEL, normalizeReminders, timeError, behaviorCount } from '../lib/reminders.js'
@@ -180,6 +180,8 @@ export default function Reminders({
   onAskHealth,
   onStartFocus,
   onStopFocus,
+  alarmText = null,
+  onAlarm = null,
   onBack,
 }) {
   const r = normalizeReminders(reminders)
@@ -365,6 +367,22 @@ export default function Reminders({
                   </span>
                 </button>
               )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Sabah alarmı (AlarmKit; iOS 26 öncesi bildirim): akşam kartı kapatılsa da buradan kurulur */}
+      {onAlarm && (
+        <section className="stack">
+          <span className="eyebrow">Sabah</span>
+          <div className="list">
+            <div className="rem-group">
+              <button type="button" className="rem-time al-rem" onClick={onAlarm} aria-label={alarmText ? `Alarmı değiştir. Şu an ${alarmText}` : 'Alarm kur'}>
+                <AlarmClock size={18} aria-hidden="true" />
+                <span className="rem-time-val rem-days">{alarmText ? <strong>{alarmText}</strong> : <span>Alarm kurulu değil</span>}</span>
+                <span className="rem-time-go">{alarmText ? 'Değiştir' : 'Kur'} <ChevronRight size={16} aria-hidden="true" /></span>
+              </button>
             </div>
           </div>
         </section>

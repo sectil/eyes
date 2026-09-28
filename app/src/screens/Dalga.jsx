@@ -52,9 +52,12 @@ function Rate({ value, onChange, label }) {
 const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`
 
 // onSave(kayıt): sonra-puanı verilince; onExit(): çıkış
-export default function Dalga({ sessions = [], onSave, onExit }) {
+// sleepPreset (alarm kartındaki "Uyku sesi"; lib/alarm.js sleepMinutes): { minutes, auto, alarmLabel } → doğrudan
+// uyku hazırlığı; minutes 0 ise alarma 1 saatten az kalmıştır, çalmaz. onSleepEnd({ planned, seconds, early, auto }):
+// uyku sesi bitince (alarm günlüğüne; kısa da olsa).
+export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = null, onSleepEnd }) {
   const [opts, setOpts] = useState(() => loadDalgaOpts())
-  const [phase, setPhase] = useState('pick') // pick | before | value | play | after | result
+  const [phase, setPhase] = useState(sleepPreset ? 'sleep-ready' : 'pick') // pick | before | value | play | after | result | sleep-ready | sleep
   const [before, setBefore] = useState(null)
   const [after, setAfter] = useState(null)
   const [value, setValue] = useState(null)
@@ -144,18 +147,19 @@ export default function Dalga({ sessions = [], onSave, onExit }) {
     setPhase('after')
   }
   // Uyku modu: puan sorulmaz; müzik hazırlanır, soluk saat, sonda yavaşça kısılır
+  const sleepMin = sleepPreset ? sleepPreset.minutes : opts.minutes
   async function startSleep() {
     const p = createSleepPlayer()
     sleepRef.current = p
     setShowCtl(false)
     setSleepState('preparing')
-    setLeft(opts.minutes * 60)
+    setLeft(sleepMin * 60)
     setPhase('sleep')
     keepAwake(true)
     try {
       const ok = await p.start({
         mode: 'sakin',
-        totalSec: opts.minutes * 60,
+        totalSec: sleepMin * 60,
         onTick: ({ left: l }) => setLeft(l),
         onEnd: () => endSleep(false),
       })
@@ -164,7 +168,7 @@ export default function Dalga({ sessions = [], onSave, onExit }) {
       p.stop()
       keepAwake(false)
       setError('Müzik hazırlanamadı. Yeniden dene.')
-      setPhase('pick')
+      setPhase(sleepPreset ? 'sleep-ready' : 'pick')
     }
   }
   function endSleep(early) {
@@ -175,11 +179,13 @@ export default function Dalga({ sessions = [], onSave, onExit }) {
     sleepRef.current = null
     keepAwake(false)
     setSleepState('idle')
+    if (sleepPreset) onSleepEnd?.({ planned: sleepMin, seconds: Math.round(sec), early, auto: Boolean(sleepPreset.auto) })
     if (sec < MIN_SAVE_SEC) {
-      setPhase('pick')
+      if (sleepPreset) onExit?.()
+      else setPhase('pick')
       return
     }
-    const rec = makeRecord({ mode: 'sakin', minutes: opts.minutes, plan: { used: false }, seconds: sec, sleep: true })
+    const rec = makeRecord({ mode: 'sakin', minutes: sleepMin, plan: { used: false }, seconds: sec, sleep: true })
     setFact(factFor(sessions, 'sakin', { sleep: true }))
     setRecord(rec)
     onSave?.(rec)
@@ -228,9 +234,32 @@ export default function Dalga({ sessions = [], onSave, onExit }) {
         <p className="dg-sleep-sub" aria-live="polite">
           {sleepState === 'preparing' ? 'Müzik hazırlanıyor…' : `${Math.max(1, Math.ceil(left / 60))} dk sonra yavaşça susacak`}
         </p>
+        {sleepPreset?.alarmLabel && <p className="dg-sleep-alarm">Alarm {sleepPreset.alarmLabel}</p>}
         {showCtl && (
           <button className="dg-sleep-end" onClick={(e) => { e.stopPropagation(); endSleep(true) }}>Bitir</button>
         )}
+      </main>
+    )
+  }
+
+  // Alarm kartından: tek dokunuşla uyku sesi (ses ancak dokunuşla açılır: iOS). Süre alarm kuralından gelir.
+  if (phase === 'sleep-ready') {
+    const late = !(sleepMin > 0)
+    return (
+      <main className="dg-sleep dg-sleep-ready" aria-label="Uyku sesi">
+        <span className="dg-ey">Uyku sesi · Dalga · Sakin</span>
+        <h1 className="dg-h">{late ? 'Alarmına 1 saatten az kaldı' : `${sleepMin} dk, sonra yavaşça susar`}</h1>
+        <p className="dg-sleep-sub">
+          {late
+            ? 'Uyku sesi alarmdan en az 1 saat önce biter; bu gece çalmıyor.'
+            : sleepPreset.auto ? 'Sana göre: süre sabah cevaplarınla ayarlanır.' : 'Telefon kilitlenince de çalar.'}
+        </p>
+        {sleepPreset.alarmLabel && <p className="dg-sleep-alarm">Alarm {sleepPreset.alarmLabel}</p>}
+        {error && <p className="dg-err" role="alert">{error}</p>}
+        <div className="dg-sleep-go">
+          {!late && <button className="btn" onClick={() => { engine.unlock(); setError(null); startSleep() }}><Moon size={18} aria-hidden="true" /> Başlat</button>}
+          <button className="btn btn-ghost" onClick={onExit}>{late ? 'Tamam' : 'Vazgeç'}</button>
+        </div>
       </main>
     )
   }

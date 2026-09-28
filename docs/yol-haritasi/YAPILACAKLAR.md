@@ -41,6 +41,8 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
    - WHO-5 çok düşükse (ör. 28 altı) yalnız "bir sağlık uzmanıyla konuşmak iyi gelebilir" yazıyor. Kriz hattı ya da
      yardım kaynağı eklensin mi? (Hukukçu ile birlikte.)
    - WHO-5 ticari kullanım lisansı (hukukçu; aşağıda adım 2).
+   - Ana sayfa 320 px'te (iPhone SE 1. nesil) 14 px yana taşıyor: günün diyaframı yanındaki "DURAK · ≈19 DK KALDI"
+     satırı (Bug 21; alarm işinden önce de vardı). Düzeltilsin mi?
 9. [ ] **Ölçüm ilkesi açıkları:** her modül istatistik kaydeder ve Gelişim'de görünür (ANA_BELGE §4). Taramada
    bulunan eksikler aşağıda "Ölçüm ilkesi" bölümünde.
 
@@ -116,7 +118,30 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
       alanına (Scott 2021, 65 RKÇ, g=−0,53, doi:10.1016/j.smrv.2021.101556; WHO-5 "sabahları taze ve dinlenmiş");
       süre kelimesi "Sana göre" (uyku algılıyormuş izlenimi vermesin). Kod: sahibinin "başla"sı + deneme 2 sonucu.
       Nefesle kapanma ölçüm işi onaylandı (2026-09-28); tasarıma girmez, ayrı iş.
-- [ ] Onaydan ve deneme 2 sonucundan sonra kod.
+- [~] **Kod (v3, sahibinin "başla"sı, 2026-09-28; CİHAZDA DOĞRULANMADI):**
+      - Swift `AlarmPlugin.swift` (JS "Alarm"): AlarmKit `.relative` + `.weekly` / `.never`, paketteki ses `.named`,
+        önizleme (AVAudioPlayer, ses oturumuna dokunmaz), "Nefona'yı aç" anı UserDefaults → `consumeOpen`. Bu ortamda
+        Xcode yok: DERLENMEDİ. `NefonaAlarmMeta` ve `OpenNefonaIntent` deneme dosyasından buraya taşındı.
+      - `lib/alarm.js` (kurallar, testli), `lib/alarmLog.js` (ayar + günlük), `lib/alarmNative.js` (AlarmKit ya da
+        iOS 26 öncesi bildirim 7600–7607), `lib/alarmSounds.js` (tek ses listesi; yeni ses = bir satır + dosya).
+      - Ana sayfa kartı (`components/AlarmCard.jsx`): akşam soru / kurulu / izin yok / iOS 26 öncesi / "Bu kart
+        akşamları çıksın mı?"; sabah "Uyanınca" ve "Ses bittiğinde uyumuş muydun?". Kurulum `screens/AlarmSetup.jsx`,
+        sabah ekranı `screens/AlarmMorning.jsx`, uyku sesi Dalga uyku ekranı (`sleepPreset`). Hatırlatmalar'da
+        "Sabah" satırı (kart kapatılırsa kurulum yolu). Veri merkezi: uyanma ve sabah cevabı olan gün → İyi oluş.
+      - Görsel kontrol: 37 durum × iki tema, 390 ve 320 px (tarayıcıda, sahte saatle).
+      - Tasarımdan sapmalar: (1) "07:00'a kur" yerine "07:00'ye kur" / "07:00'de hatırlat" (saat okunduğu gibi
+        ek alır: yedi → yediye); (2) iOS 26 öncesi kartına "Bu akşam değil" bağlantısı eklendi (yoksa kart her akşam
+        kapanamaz çıkıyordu); (3) sabah ekranı yalnız "Nefona'yı aç" ile açılınca; sonra gelen kişiye aynı şey Ana
+        sayfa kartında; (4) iOS 26 öncesinde uyandıran ses bildirim sesi (Dalga sesi bildirimde denenmedi).
+      - VARSAYIM (kodda işaretli): Dalga sesi alarmda çalar (deneme 2 bekleniyor; çalmazsa `DEFAULT_SOUND` = 'phone');
+        çaldıktan sonra 2 saat içindeki ilk açılış uyanma işareti; "Uyanınca" kartı 4 saat, soru 8 saat; iki soru
+        arası ≥ 3 gün; gece 04.00'ten önce "yarın" = bu sabah; akşam kartı yalnız 19.00–23.59.
+- [ ] **Cihazda bak (alarm):** (1) derleniyor mu (Xcode 26); (2) 14.00'ten sonra Ana sayfada kart; Evet → Kur;
+      iOS alarm izni; (3) haftalık alarm seçilen günlerde çalıyor mu, tek seferlik bir kez; (4) Dalga sesi çalıyor mu,
+      25 sn'de susuyor mu tekrar mı ediyor; (5) "Nefona'yı aç" uygulamayı açıp sabah kartını/ekranını getiriyor mu;
+      (6) uyku sesi kilitli ekranda sürüyor mu, süre bitince susuyor mu; (7) ertesi sabah soru; (8) izin reddi kartı
+      ve Ayarlar'daki adı ("Alarmlar" mı); (9) Değiştir → Alarmı kaldır; (10) Tüm verileri sil alarmı iptal ediyor mu.
+      Sonra deneme paneli ve `AlarmSpikePlugin` kaldırılır (geliştirme aracı).
 
  (sahibin yönü, 2026-09-28)
 - [~] **1. Veri merkezi (okuma kapısı):** `lib/dataHub.js`. Testler, oturumlar, istatistik çekirdeği (`progress.js`),

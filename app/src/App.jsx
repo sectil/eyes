@@ -59,6 +59,9 @@ import { viewFor } from './modules/views.js'
 import IPHONE_SCREENS from './lib/iphoneScreens.json'
 import GazeCalibration from './screens/GazeCalibration.jsx'
 import GazeTest from './screens/GazeTest.jsx'
+import { alarmStatus, consumeOpen, cancelAlarm } from './lib/alarmNative.js'
+import { loadAlarm, loadAlarmLog, addAlarmEvent } from './lib/alarmLog.js'
+import { wakeSignal, morningCard, nextRing, ringLabel, daysLabel } from './lib/alarm.js'
 import { hasGazeModel } from './lib/gazeCalib.js'
 
 const TAB_SCREENS = ['home', 'progress', 'calendar', 'info']
@@ -166,6 +169,11 @@ export default function App() {
         goRef.current?.('mola')
         return
       }
+      // iOS 26 öncesi alarm bildirimi (7600–7607): dokunuş uyanma işaretidir
+      if (extra?.kind === 'alarm') {
+        wakeCheck.current?.(Date.now())
+        return
+      }
       if (extra?.kind === 'nudge') {
         if (NUDGE_TYPES.includes(extra.type) && extra.date) saveLog(markTapped(loadLog(), extra.date, extra.type))
         setPlanTick((t) => t + 1)
@@ -241,6 +249,33 @@ export default function App() {
   }
   goRef.current = go
   const back = () => go(lastTab)
+
+  // --- Nefona alarmı (lib/alarm*.js; Artifact "Nefona Alarm" v3) ---
+  // Durum: AlarmKit (iOS 26+) ya da bildirim yedeği ve izni; açılışta ve öne gelince. Aynı anda uyanma işareti:
+  // alarmdaki "Nefona'yı aç" (native consumeOpen) ya da çaldıktan sonraki ilk açılış günlüğe yazılır. "Nefona'yı aç"
+  // ile açıldıysa "Uyanınca" seçimi varsa sabah ekranı, yoksa Ana sayfa.
+  const [alarmSt, setAlarmSt] = useState({ platform: 'web', auth: null })
+  const wakeCheck = useRef(null)
+  wakeCheck.current = (openedAt) => {
+    const alarm = loadAlarm()
+    const now = new Date()
+    const w = wakeSignal({ alarm, log: loadAlarmLog(), now, openedAt })
+    if (w) addAlarmEvent('wake', { via: w.via, ring: w.ring }, w.at)
+    if (openedAt == null) return
+    const m = morningCard({ now, alarm, log: loadAlarmLog(), sessions: store.get().sessions })
+    goRef.current?.(m?.kind === 'wake' ? 'alarm-morning' : 'home')
+  }
+  useEffect(() => {
+    if (!isIOSApp()) return undefined
+    const check = async () => {
+      setAlarmSt(await alarmStatus())
+      wakeCheck.current?.(await consumeOpen())
+    }
+    check()
+    const onVis = () => document.visibilityState === 'visible' && check()
+    document.addEventListener('visibilitychange', onVis)
+    return () => document.removeEventListener('visibilitychange', onVis)
+  }, [])
 
   // Göz ekranında: 1 dk kala uyarı; bütçe dolunca oyun/egzersizde tur bitirme payı, sonra kilit.
   // Testler kesilmez (kilit bir sonraki geçişte). Kilitliyken ve Ana sayfada gösterge/geri sayım.
@@ -904,6 +939,13 @@ export default function App() {
     )
   }
 
+  // Hatırlatmalar'daki sabah satırı: "07:00 · Pazartesi–Cuma" ya da kurulu değil (null)
+  const alarmRowText = () => {
+    const a = loadAlarm()
+    const next = nextRing(a, new Date())
+    return next ? `${ringLabel(next, new Date())} · ${daysLabel(a.days)}` : null
+  }
+
   switch (screen) {
     case 'schedule':
       return <Schedule initial={settings.reminder} reminders={settings.reminders} iosApp={isIOSApp()} onBack={() => go(scheduleBack)} onSave={(r) => { store.setSetting('reminder', r); refresh() }} />
@@ -924,6 +966,8 @@ export default function App() {
             onAskHealth={healthAvail === false ? undefined : () => healthAvail && setHealthSheet(true)}
             onStartFocus={beginFocus}
             onStopFocus={endFocus}
+            alarmText={alarmSt.platform === 'web' ? null : alarmRowText()}
+            onAlarm={alarmSt.platform === 'web' ? null : () => go('alarm')}
             onBack={() => go('info')}
           />
           {healthSheet && <ConsentSheet kind={healthSheetKind} onAnswer={(g) => { setHealthSheet(false); answerHealth(g) }} />}
@@ -970,6 +1014,7 @@ export default function App() {
           // günlüğü okunup atılır. Deneme hatırlatması (7302) kalır (TRIAL_KEYS). Günlük, tohum, habit-log ve çalışma
           // oturumu mola modülünün storageKeys listesinden aşağıda silinir.
           cancelOwn()
+          cancelAlarm()
           walkGuardLog().catch(() => {})
           for (const k of registry.resetKeys()) {
             try {
@@ -1006,6 +1051,8 @@ export default function App() {
         onTrialNote={() => { store.setSetting('trialNoteSeen', { date: nowIso() }); refresh() }}
         thinAsk={thinAsk}
         onThin={answerThin}
+        alarmStatus={alarmSt}
+        alarmTest={Boolean(access.testUnlock)}
       />
     )
   }

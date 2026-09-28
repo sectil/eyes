@@ -7,7 +7,8 @@
 //  - istatistik çekirdeği : lib/progress.js domainSummary — modül metrikleri (zaman serisi) ve önce→sonra etkileri
 //  - profile              : İlk Bakış kırpma sayısı ve 4 soru; başlangıç (iris.baseline) ve 28. gün (iris.recheck)
 //  - habits               : lib/habitLog.js (mola, su) — bilerek sessions'a yazılmaz (seri/hedef/Nef'e sayılmasın,
-//                           BILDIRIM_PLANI.md §7); merkez yine de okur ve Beden alanına koyar
+//                           BILDIRIM_PLANI.md §7); merkez yine de okur ve Beden alanına koyar. Alarm günleri
+//                           (lib/alarmLog.js alarmHabits) aynı yoldan İyi oluş alanına; okuyan: loadHubHabits
 //
 // Yeni modül kuralı: kaydı sessions'a (ya da tests'e) yazar ve manifestinde progress.domain + sessions.match tanımlar;
 // böylece merkez onu hangi alana koyacağını bilir. dataHub.test.js canlı her modülün merkeze ulaştığını denetler.
@@ -27,7 +28,9 @@ export const ANSWER_FIELDS = [
   { key: 'sleep', domain: 'wellbeing', label: 'Uyku' },
   { key: 'activityDays', domain: 'body', label: 'Hareketli gün' },
 ]
-const HABIT_DOMAIN = { mola: 'body', water: 'body' }
+// alarm: uyanma işareti ya da sabah cevabı olan gün (lib/alarmLog.js alarmHabits; Scott 2021, WHO-5 uyku maddesi)
+const HABIT_DOMAIN = { mola: 'body', water: 'body', alarm: 'wellbeing' }
+const HABIT_LABEL = { mola: 'Mola', water: 'Su', alarm: 'Alarm' }
 
 // Kaydın alanı: modülün bildirdiği (sessions.match) ya da görme/okuma testi → Göz
 export function domainOfSession(s) {
@@ -176,7 +179,7 @@ export function growthMap({ tests = [], sessions = [], profile = null, habits = 
     const bump = (key, label) => src.set(key, { label, n: (src.get(key)?.n ?? 0) + 1 })
     for (const m of winSessions) if (m.progress?.domain === d) bump(m.id, m.title)
     if (d === TEST_DOMAIN) for (const x of tests) if (ok(x) && inWin(x.date)) bump(`test:${x.type}`, TEST_LABEL[x.type] ?? 'Görme testi')
-    for (const x of habits) if (HABIT_DOMAIN[x?.type] === d && inWin(x.at)) bump(`habit:${x.type}`, x.type === 'mola' ? 'Mola' : 'Su')
+    for (const x of habits) if (HABIT_DOMAIN[x?.type] === d && inWin(x.at)) bump(`habit:${x.type}`, HABIT_LABEL[x.type])
     domains[d] = {
       domain: d,
       label: DOMAIN_LABEL[d],

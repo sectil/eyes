@@ -11,6 +11,7 @@ const OTHER_ROUTE = {
   mola: 'habit-log (Beden; bilerek sessions dışında)',
   water: 'habit-log (Beden; bilerek sessions dışında)',
   awareness: 'yalnız giriş kapısı (Farkındalık merkezi), kendi kaydı yok',
+  alarm: 'alarm-log (İyi oluş; uyanma ve sabah cevabı günleri, lib/alarmLog.js alarmHabits)',
 }
 
 describe('veri merkezi: her modül merkeze ulaşır', () => {

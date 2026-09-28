@@ -155,18 +155,4 @@ public class AlarmSpikePlugin: CAPPlugin, CAPBridgedPlugin {
     }
     #endif
 }
-
-#if canImport(AlarmKit)
-/// Alarm ekranına ek veri yok (AlarmMetadata boş olabilir; Apple belgesi).
-@available(iOS 26.0, *)
-struct NefonaAlarmMeta: AlarmMetadata {}
-
-/// Alarmın ikinci düğmesi: uygulamayı açar (openAppWhenRun). Asıl özellikte ilgili pratiğe gider.
-@available(iOS 26.0, *)
-struct OpenNefonaIntent: LiveActivityIntent {
-    static let title: LocalizedStringResource = "Nefona'yı aç"
-    static let openAppWhenRun: Bool = true
-    init() {}
-    func perform() async throws -> some IntentResult { .result() }
-}
-#endif
+// NefonaAlarmMeta ve OpenNefonaIntent: AlarmPlugin.swift (asıl alarmla ortak)

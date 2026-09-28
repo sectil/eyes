@@ -344,3 +344,6 @@ export const AppleSignIn = registerPlugin('AppleSignIn')
 // Alarm denemesi (ios/App/App/AlarmSpikePlugin.swift; AlarmKit, iOS 26+). Yalnız test derlemesindeki gizli panel
 // (components/AlarmSpikePanel.jsx) kullanır; asıl alarm özelliği tasarım onayından sonra.
 export const AlarmSpike = registerPlugin('AlarmSpike')
+
+// Nefona alarmı (ios/App/App/AlarmPlugin.swift; AlarmKit, iOS 26+). lib/alarm.js dışında çağrılmaz.
+export const Alarm = registerPlugin('Alarm')

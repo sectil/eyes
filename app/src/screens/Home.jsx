@@ -21,6 +21,7 @@ import DayDial from '../components/DayDial.jsx'
 import { Avatar } from './ProfileHome.jsx'
 import { homeSuggestion } from '../lib/homeSuggest.js'
 import HomeMap from '../components/HomeMap.jsx'
+import AlarmCard from '../components/AlarmCard.jsx'
 import { walkNudge, fmtSteps } from '../lib/health.js'
 import ConsentSheet from '../components/ConsentSheet.jsx'
 import { registry } from '../modules/registry.js'
@@ -143,9 +144,10 @@ function FocusStrip({ focus, now, block = null, onStop }) {
 
 // Bildirim planı v2 (App verir): reminderAsk + onReminders(yes) izin kartı; focus + focusBlock + onStopFocus oturum şeridi;
 // trialNote ({ daysLeft }) + onTrialNote: izni olmayana deneme 5. gün şeridi; thinAsk (tür) + onThin(tür, 'keep'|'alt').
+// alarmStatus ({ platform, auth }; App) + alarmTest (14.00 eşiği): başlığın hemen altındaki alarm kartı (AlarmCard).
 // İlk ekran kalabalıklaşmasın: kart yuvası tek (izin kartı → deneme şeridi → seyreltme sorusu), rıza sayfası açıkken boş.
 // healthSheetKind: 'health' ya da eski metne izin vermiş kişiye 'healthUpdate' (lib/consent.js; cevap yine onHealthConsent).
-export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, healthSheetKind = 'health', onCoach, onStart, onAsk, onSaveProfile, reminderAsk = false, onReminders, focus = null, focusBlock = null, onStopFocus, trialNote = null, onTrialNote, thinAsk = null, onThin }) {
+export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, healthSheetKind = 'health', onCoach, onStart, onAsk, onSaveProfile, reminderAsk = false, onReminders, focus = null, focusBlock = null, onStopFocus, trialNote = null, onTrialNote, thinAsk = null, onThin, alarmStatus = null, alarmTest = false }) {
   const [permNote, setPermNote] = useState(false) // "Evet" dendi ama izin kapalı: ayar yolu (bir kez, bu ekranda)
   const now = new Date()
   // Oyun oturumları (type 'game') ve WHO-5 egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
@@ -220,6 +222,8 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           )}
         </button>
       </header>
+
+      {alarmStatus && !sheetOpen && <AlarmCard status={alarmStatus} sessions={sessions} test={alarmTest} onStart={onStart} now={now} />}
 
       {focus && onStopFocus && <FocusStrip focus={focus} now={now} block={focusBlock} onStop={onStopFocus} />}
 
