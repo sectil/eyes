@@ -7,6 +7,9 @@ export const RELEASES = [
     id: '2026-09-28',
     title: '28 Eylül güncellemesi',
     items: [
+      { kind: 'fix', text: 'Göz takibi bakışını artık telefonun ekranına göre ölçüyor. Önceden yerçekimine göre ölçülüyordu: telefon yana yatınca ya da başın kayınca yönler karışabiliyordu. Yeni ölçüm için göz ayarı bir kez yeniden istenir.' },
+      { kind: 'new', text: 'Göz ayarının sonunda beş noktalık kısa kontrol: her yön gerçekten doğru okunuyor mu ölçülür; zayıf kalan yön varsa söylenir.' },
+      { kind: 'change', text: 'Göz takibi açıkken ekran dikey kalır; ayar dikeyde yapıldığı için yan çevirince yönler şaşmasın.' },
       { kind: 'fix', text: 'Göz kalibrasyonu, ayar sırasında telefon ya da baş biraz kayınca sağ–sol ve yukarı–aşağı bakışı ayırt edemiyordu; artık bu kaymayı hesaba katıyor. Tekrar gerekirse nokta sola, ortaya, sonra sağa gider (yukarı, orta, aşağı için de aynı).' },
       { kind: 'change', text: 'Kalibrasyon bir çıkmazla bitmez: ayrım bu sefer yetmezse "Temel ayarla devam" dersin, egzersizler yine çalışır; istersen hemen yeniden ayarlarsın.' },
     ],

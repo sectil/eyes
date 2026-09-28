@@ -116,6 +116,11 @@ Son güncelleme: 2026-09-27.
 - [ ] Göz kalibrasyonu (Build 38 "Ayırt edemedim"): iki nokta yedeği, duruşlu/duruşsuz en iyi aday, tekrar turu sol → orta → sağ
       (eksene özel orta) ve çıkmaz yerine "Temel ayarla devam" yazıldı; eski raporlarla (Build 8–38) ve sahte kamerayla
       denendi, CİHAZDA DENENMEDİ. Cihazda bak: kaç turda "Hazır"; paylaşılan raporda model.x.twoPoint var mı.
+- [ ] Ekrandaki bakış noktası (FaceDistancePlugin.swift screenHit, scrX/scrY mm) + 5 nokta kontrol + takipte dikey kilit:
+      Swift burada DERLENMEDİ, CİHAZDA DENENMEDİ. İlk derlemede paylaşılan raporda bak: targets.*.scrX/scrY dolu mu,
+      model.x/y.feature scrX/scrY mi, geom.x/y.ratio (ölçülen / ekrandaki mesafe), model.verify (her yön ≥ 0,95 hedef).
+      Sonra: geom oranına göre fiziksel eşik, çalışırken yeniden ortalama eşiği (gaze.js RECENTER_MAX_FRAC), NOISE_FLOOR scr.
+      Yılan'da aşağı bakışın "sağ" okunması bu ölçümle yeniden denenecek.
 - [ ] Sonraki aşama (onay bekliyor): egzersizdeki "Sağa bak / Sola bak" adımlarından kalibrasyonu sessizce iyileştirme;
       kullanıcı ikinci kez ayar yapmak zorunda kalmaz.
 - [ ] Yılan (gözle): aşağı bakış "sağ" okunuyor (eksen karışması). Kalibrasyon verisi gerek; "orta"ya bağlı kilit

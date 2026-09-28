@@ -66,10 +66,18 @@ const POS = {
 // ses Profilim → Seslendirme'deki seçim; dosya yoksa telefonun sesi. Ses düğmesiyle kapatılabilir (prefs.sound).
 const SAY = { center: 'calCenter', left: 'calLeft', right: 'calRight', up: 'calUp', down: 'calDown', center2: 'calCenter2' }
 const LABEL = Object.fromEntries(Object.entries(SAY).map(([t, id]) => [t, PHRASES[VOICE_LANG][id].replace(/\.$/, '')]))
+// Doğrulama turu (kalibrasyondan sonra): model kaydedilmeden önce aynı 5 noktada okuyucunun (lib/gaze.js,
+// egzersizlerin kullandığı) doğru yönü söylediği karelerin oranı ölçülür. "Mükemmel" tahminle değil sayıyla
+// değerlendirilir; rapora yazılır. VARSAYIM: yerleşme 0,9 sn, ölçüm 1,2 sn; bir yön %80'in altındaysa model
+// kaba (rough) sayılır ve kullanıcıya söylenir. Kabul hedefimiz her yönde ≥ %95 (cihaz verisiyle izlenir).
+const VERIFY = ['center', 'left', 'right', 'up', 'down']
+const VERIFY_SETTLE_MS = 900
+const VERIFY_MS = 1200
+export const VERIFY_MIN = 0.8
 const AGAIN_GAP_MS = 1500 // "Bir kez daha deneyelim"den sonra hedef cümlesi (üst üste binmesin)
 
 export default function GazeCalibration({ onDone, onSkip, onCancel }) {
-  const [phase, setPhase] = useState('intro') // intro | run | result
+  const [phase, setPhase] = useState('intro') // intro | run | verify | result
   const [view, setView] = useState({ queue: TARGETS, pos: 0, again: false }) // ekrandaki hedef sırası
   const [prog, setProg] = useState(0) // hedefteki kayıt ilerlemesi 0..1
   const [status, setStatus] = useState('ok') // ok | noface | closed | head | hold | done
@@ -83,6 +91,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   const step = useRef({ queue: [...TARGETS], pos: 0, start: 0, collected: 0, lastTs: null, accepted: false, retry: { x: 0, y: 0 }, again: new Set() })
   const running = phase === 'run'
   const previewReader = useRef(null)
+  const verify = useRef(null) // { model, reader, pos, start, lastTs, n, hits, results }
   const holdTimer = useRef(null)
   const sayTimer = useRef(null)
   const [trail, setTrail] = useState(null) // { from, to, key }: noktanın geldiği yön (0,45 sn)
@@ -111,6 +120,10 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     if (phase === 'result' && previewReader.current) {
       const g = previewReader.current.push(m)
       setPreview({ x: g.v.x, y: g.v.y, dir: g.dir })
+      return
+    }
+    if (phase === 'verify') {
+      verifyFrame(m)
       return
     }
     if (!running) return
@@ -234,6 +247,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     clearTimeout(holdTimer.current)
     setTrail(null)
     win.current = {}
+    verify.current = null
     head.current = { ref: null, rejected: {}, lastWarn: 0 }
     step.current = { queue: [...TARGETS], pos: 0, start: performance.now(), collected: 0, lastTs: null, accepted: false, retry: { x: 0, y: 0 }, again: new Set() }
     setView({ queue: [...TARGETS], pos: 0, again: false })
@@ -253,11 +267,65 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     setNote(r === 'shared' ? 'Paylaşıldı.' : r === 'copied' ? 'Panoya kopyalandı. Mesaja yapıştırıp gönderebilirsin.' : 'Kopyalanamadı.')
   }
 
+  // Doğrulama: her noktada yerleşmeden sonra VERIFY_MS boyunca okuyucunun yönü sayılır (kapalı göz/yüz yok sayılmaz)
+  function verifyFrame(m) {
+    const v = verify.current
+    if (!v) return
+    const t = VERIFY[v.pos]
+    if (!t) return
+    const g = v.reader.push(m) // yerleşirken de beslenir: filtre ve ilk ortalama (recenter) otursun
+    const face = m.face !== false && m.tracked !== false
+    const nextStatus = !face ? 'noface' : g.closed ? 'closed' : 'ok'
+    setStatus((p) => (p === nextStatus ? p : nextStatus))
+    const since = m.ts - v.start - MOVE_MS - VERIFY_SETTLE_MS
+    if (since < 0) return
+    if (g.tracked && !g.closed) {
+      v.n += 1
+      if (g.dir === t) v.hits += 1
+    }
+    setProg(Math.min(1, since / VERIFY_MS))
+    if (since < VERIFY_MS) return
+    v.results[t] = v.n ? +(v.hits / v.n).toFixed(3) : null
+    const np = v.pos + 1
+    if (np >= VERIFY.length) {
+      verify.current = null
+      complete(v.model, v.results)
+      return
+    }
+    haptic('tick')
+    Object.assign(v, { pos: np, start: performance.now(), n: 0, hits: 0 })
+    setView({ queue: VERIFY, pos: np, again: false, verify: true })
+    setTrail({ from: t, to: VERIFY[np], key: `v${np}` })
+    setProg(0)
+    say(SAY[VERIFY[np]])
+  }
+
   function finish() {
     const fit = fitModel(win.current)
     const model = fit.ok ? fit : (roughModel(fit) ?? fit)
+    if (!model.ok) {
+      complete(model, null)
+      return
+    }
+    // Model var: kaydetmeden önce doğrulama turu
+    verify.current = { model, reader: createGazeReader({ model }), pos: 0, start: performance.now(), n: 0, hits: 0, results: {} }
+    setView({ queue: VERIFY, pos: 0, again: false, verify: true })
+    setTrail(null)
+    setProg(0)
+    setStatus('ok')
+    setPhase('verify')
+    say(SAY.center)
+  }
+
+  function complete(fitted, results) {
+    let model = fitted
+    if (results) {
+      const vals = VERIFY.map((t) => results[t])
+      const worst = vals.some((v) => v == null) ? 0 : Math.min(...vals)
+      model = { ...model, verify: results, ...(worst < VERIFY_MIN ? { rough: true } : {}) }
+    }
     setResult(model)
-    setReport({ ...calibReport(win.current, model), headRejected: head.current.rejected, retry: { ...step.current.retry } })
+    setReport({ ...calibReport(win.current, model, { w: globalThis.innerWidth || null, h: globalThis.innerHeight || null }), headRejected: head.current.rejected, retry: { ...step.current.retry } })
     setPhase('result')
     if (model.ok) {
       saveGazeModel(model)
@@ -308,7 +376,9 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
             <p className="muted">Dene: ekranın bir kenarına bak, nokta o yöne gitmeli. Ortaya bakınca ortada kalır.</p>
             {result.rough && (
               <p className="muted small">
-                {result.x.weak && result.y.weak ? 'Sağ–sol ve yukarı–aşağı' : result.x.weak ? 'Sağ–sol' : 'Yukarı–aşağı'} ayrımı biraz zayıf çıktı. Nokta o yönde titrek giderse aydınlık bir yerde, telefon göz hizasındayken yeniden ayarla.
+                {verifyWeak(result).length
+                  ? `Kontrolde ${verifyWeak(result).map((t) => VERIFY_LABEL[t]).join(', ')} bakışını her seferinde doğru okuyamadım. Telefonu yüzünün karşısında sabit tutup yeniden ayarlarsan daha iyi olur.`
+                  : `${result.x.weak && result.y.weak ? 'Sağ–sol ve yukarı–aşağı' : result.x.weak ? 'Sağ–sol' : 'Yukarı–aşağı'} ayrımı biraz zayıf çıktı. Nokta o yönde titrek giderse aydınlık bir yerde, telefon göz hizasındayken yeniden ayarla.`}
               </p>
             )}
             <div className={`gazecal-pad ${preview.dir && preview.dir !== 'center' ? 'on' : ''}`} aria-hidden="true">
@@ -367,7 +437,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
         <CalIris state={irisState} progress={done ? 1 : prog} />
       </div>
       <div className={`gazecal-copy ${t === 'down' ? 'top' : 'bottom'}`}>
-        <span className="gazecal-step">Göz ayarı · <b>{Math.min(view.pos + 1, view.queue.length)} / {view.queue.length}</b>{view.again ? ' · bir kez daha' : ''}</span>
+        <span className="gazecal-step">{view.verify ? 'Kontrol' : 'Göz ayarı'} · <b>{Math.min(view.pos + 1, view.queue.length)} / {view.queue.length}</b>{view.again ? ' · bir kez daha' : ''}</span>
         <span className="gazecal-say" role="status" aria-live="polite">{line[0]}</span>
         <span className={`gazecal-st ${line[2]}`}>{line[1]}</span>
       </div>
@@ -384,6 +454,13 @@ function CalTrail({ from, to }) {
   const len = Math.max(0, Math.hypot(dx, dy) - 34)
   const ang = (Math.atan2(dy, dx) * 180) / Math.PI
   return <span className="gazecal-trail" aria-hidden="true" style={{ left: `${from.x}%`, top: `${from.y}%`, width: len, transform: `rotate(${ang}deg)` }} />
+}
+
+// Doğrulamada %VERIFY_MIN altında kalan yönler
+const VERIFY_LABEL = { center: 'orta', left: 'sol', right: 'sağ', up: 'yukarı', down: 'aşağı' }
+function verifyWeak(model) {
+  const r = model?.verify
+  return r ? VERIFY.filter((t) => !(r[t] >= VERIFY_MIN)) : []
 }
 
 const DIR_LABEL = { left: '← Sol', right: 'Sağ →', up: '↑ Yukarı', down: '↓ Aşağı', center: 'Orta' }

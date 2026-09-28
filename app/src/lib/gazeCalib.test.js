@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from 'vitest'
-import { windowStable, usableCenters, fitModel, fitAxis, axisFrom, fitWindowsAxis, postureFit, roughModel, MIN_SCORE_ROUGH, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE, calibReport, closeThreshold, loadGazeModel, saveGazeModel, clearGazeModel, GAZE_MODEL_KEY, GAZE_MODEL_VERSION, DOWN_CLOSE_MAX, headRef, headTurned, HEAD_TURN_DEG, twoPointAxis, axisCenterKey } from './gazeCalib.js'
+import { windowStable, usableCenters, fitModel, fitAxis, axisFrom, fitWindowsAxis, postureFit, roughModel, MIN_SCORE_ROUGH, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE, calibReport, closeThreshold, loadGazeModel, saveGazeModel, clearGazeModel, GAZE_MODEL_KEY, GAZE_MODEL_VERSION, DOWN_CLOSE_MAX, headRef, headTurned, HEAD_TURN_DEG, twoPointAxis, axisCenterKey, geomCheck, PT_PER_MM, FEATURES } from './gazeCalib.js'
 import { createGazeReader, lookingAtPhone, GAZE_FULL_DEG } from './gaze.js'
 
 // Deterministik gürültü
@@ -206,7 +206,7 @@ describe('kalibrasyon v2: aşağı bakışta göz kapağı, rapor, sürüm', () 
     const rep = calibReport(w, m)
     expect(rep.targets.left.n).toBe(30)
     expect(rep.targets.left.angX.med).toBeTypeOf('number')
-    expect(Object.keys(rep.scores.x)).toEqual(['camX', 'headX', 'angX', 'lookX', 'blendX'])
+    expect(Object.keys(rep.scores.x)).toEqual(['scrX', 'camX', 'headX', 'angX', 'lookX', 'blendX'])
     expect(rep.scores.x.angX).toBeGreaterThan(MIN_SCORE)
     expect(rep.model).toBe(m)
     expect(JSON.stringify(rep)).not.toMatch(/image|jpeg|png/i)
@@ -517,5 +517,63 @@ describe('Build 38: yan hedefler başka duruşta (iki nokta yedeği, duruşsuz a
     const rep = calibReport(w, m)
     expect(rep.targets['center@x'].n).toBe(30)
     expect(rep.targets['center@y']).toBeUndefined()
+  })
+})
+
+describe('Ekrandaki bakış noktası (scrX/scrY, mm): duruş kaymasından bağımsız', () => {
+  // Hedeflerin ekrandaki konumu (mm, kamera orijinli; X kısa kenar, Y uzun kenar). ARKit kazancı 0,6 (VARSAYIM).
+  const MM = { center: [0, 70], left: [-27, 70], right: [27, 70], up: [0, 20], down: [0, 125], center2: [0, 70] }
+  const frames = (t, head, seed, gain = 0.6) =>
+    Array.from({ length: 30 }, (_, i) => {
+      const r = rng(seed + i)
+      const n = () => (r() - 0.5) * 0.6
+      const [x, y] = MM[t]
+      // cam*: duruşla kayar (Build 38 gibi); scr*: kaymaz
+      const f = makeFrame(0, 0, { r, head, noise: 0.1 })
+      return { ...f, scrLX: x * gain + n(), scrRX: x * gain + n(), scrLY: y * gain + n(), scrRY: y * gain + n(), scrZ: 330 + n() }
+    })
+  const A = { x: 1, y: 8 }
+  const B = { x: -3, y: 4 }
+  const build38 = () => ({
+    center: frames('center', A, 1),
+    left: frames('left', B, 100),
+    right: frames('right', B, 200),
+    up: frames('up', A, 300),
+    down: frames('down', A, 400),
+    center2: frames('center2', A, 500),
+  })
+  it('Build 38 deseni (sağ/sol başka duruşta): model scrX/scrY ile ok, iki nokta yedeğine gerek yok', () => {
+    const m = fitModel(build38())
+    expect(m.ok).toBe(true)
+    expect(m.x.feature).toBe('scrX')
+    expect(m.y.feature).toBe('scrY')
+    expect(m.x.twoPoint).toBeUndefined()
+    expect(m.x.score).toBeGreaterThan(20)
+  })
+  it('ekran-noktası adayı eşiği geçiyorsa daha yüksek skorlu başka sinyale tercih edilir', () => {
+    const S = (med, mad) => ({ med, mad })
+    const c = { scrX: S(0, 0.5), camX: S(0, 0.05) }
+    const a = fitAxis(c, { scrX: S(-3, 0.5), camX: S(-2, 0.05) }, { scrX: S(3, 0.5), camX: S(2, 0.05) }, ['scrX', 'camX'])
+    expect(a.feature).toBe('scrX')
+    expect(a.score).toBeCloseTo(6, 5)
+    // ekran-noktası zayıfsa en iyi aday
+    const b = fitAxis(c, { scrX: S(-0.8, 0.5), camX: S(-2, 0.05) }, { scrX: S(0.8, 0.5), camX: S(2, 0.05) }, ['scrX', 'camX'])
+    expect(b.feature).toBe('camX')
+  })
+  it('çift göz ortalaması; tek göz varsa o kullanılır', () => {
+    expect(FEATURES.scrX({ scrLX: 2, scrRX: 4 })).toBe(3)
+    expect(FEATURES.scrY({ scrLY: null, scrRY: 5 })).toBe(5)
+    expect(FEATURES.scrX({})).toBeNull()
+  })
+  it('fiziksel sağlama: ölçülen / ekrandaki mesafe oranı raporlanır', () => {
+    const w = build38()
+    const g = geomCheck(w, { w: 390, h: 844 })
+    expect(g.x.screenMm).toBeCloseTo((0.84 * 390) / PT_PER_MM, 1)
+    expect(g.x.measuredMm).toBeCloseTo(54 * 0.6, 0)
+    expect(g.x.ratio).toBeGreaterThan(0.5)
+    expect(g.y.measuredMm).toBeCloseTo(105 * 0.6, 0)
+    expect(g.eyeZmm).toBeCloseTo(330, 0)
+    expect(calibReport(w, fitModel(w), { w: 390, h: 844 }).geom.x.ratio).toBe(g.x.ratio)
+    expect(geomCheck({}, null)).toEqual({ x: null, y: null, eyeZmm: null })
   })
 })

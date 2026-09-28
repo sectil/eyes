@@ -12,7 +12,7 @@ import Capacitor
 ///   reject(code: "camera-denied") döner, böylece JS tarafı yedeğe (süre / dokunma) düşebilir.
 /// - "face" olayı (~30 Hz): { tracked, distanceMm, focusMm, vergenceMm, blinkLeft, blinkRight,
 ///   lookUp/Down/In/Out Left/Right, gazeLeftX, gazeLeftY, gazeRightX, gazeRightY,
-///   camLeftX, camLeftY, camRightX, camRightY, headX, headY }
+///   camLeftX, camLeftY, camRightX, camRightY, headX, headY, scrLX, scrLY, scrRX, scrRY, scrZ }
 /// - "depth" olayı (~10 Hz, yalnızca start({ depth: true }) ile): iki gözün bölgesindeki derinliğin ortancası (mm).
 ///   { eyesKnown, leftMm, rightMm, leftN, rightN, eyeAgeMs, radiusPx, depthW, depthH, imageW, imageH, absolute }
 ///   left/right = kişinin KENDİ sol/sağ gözü. Göz konumu yüz izlenirken saklanır; el yüzü örtüp ARKit yüzü
@@ -31,6 +31,12 @@ import Capacitor
 /// 0 = yüz kameraya dönük. Kalibrasyon "başını değil gözünü oynat" uyarısı için.
 /// VARSAYIM: X işareti kişinin sağı için pozitif (dünya +y etrafında işaretli açı, çevrilmiş); JS
 /// tarafı kalibrasyonda işareti veriden doğrular, eşikler büyüklük üzerinden çalışır.
+/// Ekrandaki bakış noktası (scr*, mm): her gözün bakış ışınının TELEFONUN ekran düzlemiyle kesişimi, cihaza sabit
+/// kamera uzayında (screenHit). cam* yerçekimine göredir: telefon yana yatınca eksenler karışır, baş/telefon
+/// kayınca aynı noktaya bakışın açısı değişir (Build 38). scr* bunlardan etkilenmez. X: telefonun kısa kenarı
+/// boyunca (dikey tutuşta yatay), Y: uzun kenarı boyunca (dikey tutuşta düşey); işaret JS kalibrasyonunda öğrenilir.
+/// scrZ: gözlerin ekran düzlemine uzaklığı (mm, işaretli; cihaz verisiyle doğrulanacak).
+/// Takip açıkken ekran dikey kilitlenir (MainViewController.portraitLock): kalibrasyon dikeyde yapılır.
 @objc(FaceDistancePlugin)
 public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate {
     public let identifier = "FaceDistancePlugin"
@@ -139,6 +145,7 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
         let config = ARFaceTrackingConfiguration()
         config.maximumNumberOfTrackedFaces = 1
         session?.run(config, options: [.resetTracking, .removeExistingAnchors])
+        setPortraitLock(true)
         call.resolve()
     }
 
@@ -146,6 +153,7 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
         DispatchQueue.main.async {
             self.stopGeneration += 1
             self.session?.pause()
+            self.setPortraitLock(false)
             self.depthEnabled = false
             self.eyeCache = nil
             call.resolve()
@@ -196,6 +204,12 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
         let camL = face.isTracked ? angleToCamera(simd_mul(face.transform, face.leftEyeTransform), cameraPos) : nil
         let camR = face.isTracked ? angleToCamera(simd_mul(face.transform, face.rightEyeTransform), cameraPos) : nil
         let head = face.isTracked ? angleToCamera(face.transform, cameraPos) : nil
+        // Ekrandaki bakış noktası: göz dönüşümü kamera uzayına (cihaza sabit) taşınır, ışın ekran düzlemiyle kesilir
+        let camInv = simd_inverse(frame.camera.transform)
+        let hitL = face.isTracked ? screenHit(simd_mul(camInv, simd_mul(face.transform, face.leftEyeTransform))) : nil
+        let hitR = face.isTracked ? screenHit(simd_mul(camInv, simd_mul(face.transform, face.rightEyeTransform))) : nil
+        var scrZ: Double? = nil
+        if let l = hitL, let r = hitR { scrZ = (l.z + r.z) / 2 } else { scrZ = hitL?.z ?? hitR?.z }
         if depthEnabled && face.isTracked { cacheEyes(face, frame) }
 
         notifyListeners("face", data: [
@@ -226,6 +240,12 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
             "camRightY": jsNumber(camR?.y),
             "headX": jsNumber(head?.x),
             "headY": jsNumber(head?.y),
+            // Ekrandaki bakış noktası (mm, kamera orijinli; X kısa kenar, Y uzun kenar boyunca)
+            "scrLX": jsNumber(hitL?.x),
+            "scrLY": jsNumber(hitL?.y),
+            "scrRX": jsNumber(hitR?.x),
+            "scrRY": jsNumber(hitR?.y),
+            "scrZ": jsNumber(scrZ),
             // Ham ARKit bakış noktası (yüz koordinatı, metre). Eksen/işaret yorumu JS'teki kişisel
             // kalibrasyonda (src/lib/gazeCalib.js) veriden öğrenilir; burada dönüştürülmez.
             "lookAtX": jsNumber(face.isTracked ? Double(face.lookAtPoint.x) : nil),
@@ -393,6 +413,39 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
         let x = Double(yaw) * deg, y = Double(pitch) * deg
         guard x.isFinite, y.isFinite else { return nil }
         return (x: x, y: y)
+    }
+
+    /// Göz ışınının telefon ekran düzlemiyle kesişimi (mm). m: gözün kamera uzayındaki dönüşümü.
+    /// Apple, ARCamera.transform: kamera uzayı cihaz yönünden bağımsızdır; x ekseni cihazın uzun kenarı boyunca
+    /// (ön kameradan Home tarafına), y kısa kenar boyunca, z ekranın olduğu taraftan dışarı (kullanıcıya doğru).
+    /// Ön kamera orijinde ve ekranla aynı düzlemde sayılır (z = 0). Işın doğrusu kullanılır: bakış yönünün
+    /// işareti (+z / −z) sonucu değiştirmez. Işın ekrana neredeyse paralelse (|cos| < 0,3) ya da göz düzleme
+    /// 5 cm'den yakınsa nil.
+    /// Dönen: x = kısa kenar (kamera y), y = uzun kenar (kamera x), z = gözün düzleme uzaklığı; hepsi mm.
+    private func screenHit(_ m: simd_float4x4) -> (x: Double, y: Double, z: Double)? {
+        let o = position(m)
+        let c = m.columns.2
+        let d = simd_float3(c.x, c.y, c.z)
+        let n = simd_length(d)
+        guard n.isFinite, n > 1e-6, abs(o.z) > 0.05, abs(d.z / n) > 0.3 else { return nil }
+        let t = -o.z / d.z
+        let p = o + t * d
+        let x = Double(p.y) * 1000.0
+        let y = Double(p.x) * 1000.0
+        let z = Double(o.z) * 1000.0
+        guard x.isFinite, y.isFinite, z.isFinite else { return nil }
+        return (x: x, y: y, z: z)
+    }
+
+    /// Göz takibi açıkken ekranı dikey kilitler (kalibrasyon dikeyde yapılır; yan çevrilince model geçersiz olur).
+    private func setPortraitLock(_ on: Bool) {
+        MainViewController.portraitLock = on
+        guard let vc = bridge?.viewController else { return }
+        if #available(iOS 16.0, *) {
+            vc.setNeedsUpdateOfSupportedInterfaceOrientations()
+        } else {
+            UIViewController.attemptRotationToDeviceOrientation()
+        }
     }
 
     /// JS'e sayı ya da null (NaN/sonsuz gönderme).

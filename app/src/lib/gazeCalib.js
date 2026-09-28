@@ -14,7 +14,9 @@ export const GAZE_MODEL_KEY = 'gozolcum:gaze-model-v1'
 // Sürüm 1 ekran kenarındaki noktaları kullanıyordu; telefon ekranı dar olduğundan yatay göz dönüşü
 // ~±5° kalıyor ve cihazda sağ–sol ayrılamıyordu (Build 7). ±1 artık "ekranın dışına bakış" demek;
 // ekranın içinde gezinen bakış merkeze yakın kalır. Eski (v1) modeller yüklenmez → yeniden kalibrasyon.
-export const GAZE_MODEL_VERSION = 2
+// Sürüm 3: ekrandaki bakış noktası (scrX/scrY, mm) aday oldu ve öncelikli; sürüm 2 modelleri yerçekimine göre
+// ölçülen açılarla (camX/camY) kurulmuştu → bir kez yeniden kalibrasyon.
+export const GAZE_MODEL_VERSION = 3
 export const TARGETS = ['center', 'left', 'right', 'up', 'down', 'center2']
 // VARSAYIM: en az bu kadar "ayrışma / gürültü" oranı yoksa eksen güvenilmez sayılır.
 export const MIN_SCORE = 2.5
@@ -46,10 +48,19 @@ export const FEATURES = {
   camRY: (f) => num(f.camRightY),
   headX: (f) => num(f.headX),
   headY: (f) => num(f.headY),
+  // Ekrandaki bakış noktası (mm; FaceDistancePlugin.swift screenHit): bakış ışınının TELEFONUN ekran düzlemiyle
+  // kesişimi, cihaza sabit eksende. Aynı noktaya bakıldıkça baş/telefon kayması ve telefonun yana yatması bunu
+  // değiştirmez (camX/camY yerçekimine göre: Build 38 duruş kayması, Yılan'da aşağı → "sağ").
+  scrX: (f) => pick(f.scrLX, f.scrRX),
+  scrY: (f) => pick(f.scrLY, f.scrRY),
+  scrZ: (f) => num(f.scrZ), // yalnızca rapor: gözün ekrana uzaklığı
 }
 // headX/headY de aday: yatay göz sinyali bazı kullanıcılarda ~0 (Build 16, 19); noktaya doğru başı çevirmek
 // doğal ve ölçülebilir (MAD 0,03–0,1°). En iyi ayrışan sinyal seçilir; kalibrasyon yönergesi başı serbest bırakır.
-export const AXIS_FEATURES = { x: ['camX', 'headX', 'angX', 'lookX', 'blendX'], y: ['camY', 'headY', 'angY', 'lookY', 'blendY'] }
+export const AXIS_FEATURES = { x: ['scrX', 'camX', 'headX', 'angX', 'lookX', 'blendX'], y: ['scrY', 'camY', 'headY', 'angY', 'lookY', 'blendY'] }
+// Eşik geçen bir ekran-noktası adayı varsa skoru daha düşük olsa bile o seçilir: çalışırken duruş kaymasına
+// dayanıklı olan odur (kalibrasyon skoru yalnızca o anki oturumu ölçer).
+export const PREFERRED_FEATURES = new Set(['scrX', 'scrY'])
 
 // Kalibrasyonda baş dönüşü: hedef penceresindeki baş açısı, orta hedefteki ortancadan bu kadar
 // saparsa kare sayılmaz ve "başını değil gözünü oynat" uyarısı verilir.
@@ -77,7 +88,8 @@ export function headTurned(ref, f, deg = HEAD_TURN_DEG) {
 // Sayısal taban gürültü (birim başına) — sıfıra bölmeyi ve aşırı iyimser skoru önler
 // VARSAYIM: cam 0,1° (Build 16: yatay hedef-içi MAD 0,02–0,04°, sol–sağ ayrım yalnızca 0,38°; 0,25 taban
 // bu temiz sinyali 1,5 puana düşürüyordu). ARKit'in yatay kazancı dikeyin ~1/5'i; ayrım küçük ama tutarlı.
-export const NOISE_FLOOR = { camX: 0.1, camY: 0.1, headX: 0.15, headY: 0.15, angX: 0.4, angY: 0.4, lookX: 0.002, lookY: 0.002, blendX: 0.02, blendY: 0.02 }
+// scr: mm. VARSAYIM 0,5 mm (35 cm'de ~0,1°; cam tabanıyla aynı açı), cihaz verisiyle ayarlanacak.
+export const NOISE_FLOOR = { scrX: 0.5, scrY: 0.5, camX: 0.1, camY: 0.1, headX: 0.15, headY: 0.15, angX: 0.4, angY: 0.4, lookX: 0.002, lookY: 0.002, blendX: 0.02, blendY: 0.02 }
 // Kalibrasyon ekranındaki "sabit bakış" ölçütü (taban gürültüden gevşek: hedef-içi MAD 0,03–0,10 gözlendi)
 export const STABLE_MAD = { camX: 0.25, camY: 0.25, headX: 0.3, headY: 0.3, angX: 0.4, angY: 0.4 }
 
@@ -162,8 +174,11 @@ export function postureFit(k, headKey, neutrals) {
 // Üç noktalı hesap geçmezse iki nokta yedeği (twoPointAxis) de denenir.
 export function fitAxis(center, neg, pos, features, center2 = null, posture = null) {
   let best = null
+  let pref = null // en iyi ekran-noktası adayı (PREFERRED_FEATURES)
   const take = (cand) => {
-    if (cand && (!best || cand.score > best.score)) best = cand
+    if (!cand) return
+    if (!best || cand.score > best.score) best = cand
+    if (PREFERRED_FEATURES.has(cand.feature) && (!pref || cand.score > pref.score)) pref = cand
   }
   for (const k of features) {
     const c1 = center?.[k]
@@ -177,6 +192,7 @@ export function fitAxis(center, neg, pos, features, center2 = null, posture = nu
     take(threePoint(k, center, neg, pos, center2, null, null))
   }
   if (!best || best.score < MIN_SCORE) take(twoPointAxis(center, neg, pos, features, center2, posture))
+  if (pref && pref.score >= MIN_SCORE) return pref
   return best && best.score >= MIN_SCORE ? best : best ? { ...best, weak: true } : null
 }
 
@@ -337,9 +353,29 @@ export function roughModel(model) {
   return pass(model?.x) && pass(model?.y) ? { ...model, ok: true, rough: true } : null
 }
 
+// Fiziksel sağlama (rapor): ekran-noktası sinyalinde sol↔sağ ve üst↔alt hedefleri arasında ÖLÇÜLEN mesafe (mm)
+// ile ekrandaki GERÇEK mesafenin oranı. 1'e yakınsa ölçüm ekran geometrisiyle tutarlı. ARKit göz dönüşünü küçük
+// gösterebilir (Build 16: yatay kazanç dikeyin ~1/5'i), bu yüzden şimdilik eşik yok; ilk cihaz verisiyle konacak.
+// VARSAYIM: iPhone'da 1 mm ≈ 6,1 pt (153–163 pt/inç). Hedef aralıkları GazeCalibration.jsx POS ile aynı olmalı.
+export const PT_PER_MM = 6.1
+export const TARGET_SPAN = { x: 0.84, y: 0.72 } // sol %8 – sağ %92, üst %12 – alt %84
+export function geomCheck(windows, screen) {
+  const S = summaries(windows)
+  const one = (axis, negT, posT, k, px) => {
+    const a = S[negT]?.[k]
+    const b = S[posT]?.[k]
+    if (!a || !b || !(px > 0)) return null
+    const measuredMm = Math.abs(b.med - a.med)
+    const screenMm = (TARGET_SPAN[axis] * px) / PT_PER_MM
+    return { measuredMm: +measuredMm.toFixed(2), screenMm: +screenMm.toFixed(2), ratio: +(measuredMm / screenMm).toFixed(3) }
+  }
+  const z = median([...(windows.center ?? []), ...(windows.center2 ?? [])].map(FEATURES.scrZ))
+  return { x: one('x', 'left', 'right', 'scrX', screen?.w), y: one('y', 'down', 'up', 'scrY', screen?.h), eyeZmm: Number.isFinite(z) ? +z.toFixed(1) : null }
+}
+
 // Teşhis raporu (yalnızca sayılar; görüntü yok): her hedefte kare sayısı, kapanma ortancası ve
 // aday sinyallerin ortanca/yayılımı + her eksen için tüm adayların skoru. "Verileri paylaş" için.
-export function calibReport(windows, model) {
+export function calibReport(windows, model, screen = null) {
   const r3 = (v) => (Number.isFinite(v) ? +v.toFixed(4) : null)
   const targets = {}
   const keys = [...TARGETS, axisCenterKey('x'), axisCenterKey('y')].filter((t) => TARGETS.includes(t) || windows[t]?.length)
@@ -374,6 +410,8 @@ export function calibReport(windows, model) {
     centerStable: { center: windowStable(windows.center), center2: windowStable(windows.center2) },
     head,
     headTurnDeg: HEAD_TURN_DEG,
+    geom: geomCheck(windows, screen),
+    screen,
     model,
   }
 }
