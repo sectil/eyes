@@ -14,7 +14,8 @@ import AppIntents
 /// Ses: uygulama paketindeki dosya adı (Library/Sounds'taki dosya çalmıyor — HATA_GUNLUGU Bug 20); nil = iOS varsayılanı.
 /// - status() → { available, auth: authorized|denied|notDetermined|unavailable }
 /// - requestAuth() → { auth }
-/// - schedule({ hour, minute, weekdays: [0..6] (0 = Pazar, JS Date.getDay), sound? }) → { id }
+/// - schedule({ hour, minute, weekdays: [0..6] (0 = Pazar, JS Date.getDay), sound? }) → { id, snooze }
+///   İkinci düğme "Ertele" (9 dk); iOS reddederse "Nefona'yı aç" ile kurulur (snooze: false).
 ///   weekdays boşsa tek sefer: bir sonraki hour:minute.
 /// - cancel() → { cancelled }
 /// - current() → { id?, scheduled } (iOS'ta hâlâ kurulu mu; çalıp kapanan alarm iOS'ta silinir)
@@ -37,6 +38,7 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
 
     static let idKey = "nefona.alarm.id"
     static let openedKey = "nefona.alarm.openedAt"
+    static let snoozeSeconds: TimeInterval = 9 * 60 // iOS saat uygulamasıyla aynı 9 dk
     private var player: AVAudioPlayer?
 
     @objc func status(_ call: CAPPluginCall) {
@@ -78,31 +80,57 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
         if #available(iOS 26.0, *) {
             Task {
                 do {
-                    let alert = AlarmPresentation.Alert(
-                        title: "Nefona · Günaydın",
-                        stopButton: AlarmButton(text: "Kapat", textColor: .white, systemImageName: "stop.circle"),
-                        secondaryButton: AlarmButton(text: "Nefona'yı aç", textColor: .white, systemImageName: "sun.max"),
-                        secondaryButtonBehavior: .custom)
-                    let attributes = AlarmAttributes<NefonaAlarmMeta>(
-                        presentation: AlarmPresentation(alert: alert),
-                        metadata: NefonaAlarmMeta(),
-                        tintColor: Color(red: 0.10, green: 0.76, blue: 0.82))
                     let weekdays: [Locale.Weekday] = Array(Set(days)).sorted().map { Self.weekday($0) }
                     let schedule = Alarm.Schedule.relative(Alarm.Schedule.Relative(
                         time: Alarm.Schedule.Relative.Time(hour: hour, minute: minute),
                         repeats: weekdays.isEmpty ? .never : .weekly(weekdays)))
-                    let config: AlarmManager.AlarmConfiguration<NefonaAlarmMeta>
-                    if let sound {
-                        config = .alarm(schedule: schedule, attributes: attributes, secondaryIntent: OpenNefonaIntent(), sound: .named(sound))
-                    } else {
-                        config = .alarm(schedule: schedule, attributes: attributes, secondaryIntent: OpenNefonaIntent())
-                    }
+                    let tint = Color(red: 0.10, green: 0.76, blue: 0.82)
+                    let stop = AlarmButton(text: "Kapat", textColor: .white, systemImageName: "stop.circle")
                     // Önce yenisi: kurulamazsa eski alarm yerinde kalır (JS de eskisini gösterir)
                     let id = UUID()
-                    _ = try await AlarmManager.shared.schedule(id: id, configuration: config)
+                    var snooze = true
+                    do {
+                        // İkinci düğme "Ertele": .countdown → postAlert (9 dk) sonra yeniden çalar (Apple örneği
+                        // "Scheduling an alarm with AlarmKit"). Sahibinin kararı (2026-09-28): "Nefona'yı aç" yerine erteleme.
+                        let alert = AlarmPresentation.Alert(
+                            title: "Nefona · Günaydın",
+                            stopButton: stop,
+                            secondaryButton: AlarmButton(text: "Ertele", textColor: .white, systemImageName: "repeat"),
+                            secondaryButtonBehavior: .countdown)
+                        let attributes = AlarmAttributes<NefonaAlarmMeta>(
+                            presentation: AlarmPresentation(alert: alert, countdown: AlarmPresentation.Countdown(title: "Ertelendi")),
+                            metadata: NefonaAlarmMeta(),
+                            tintColor: tint)
+                        let countdown = Alarm.CountdownDuration(preAlert: nil, postAlert: Self.snoozeSeconds)
+                        let config: AlarmManager.AlarmConfiguration<NefonaAlarmMeta>
+                        if let sound {
+                            config = AlarmManager.AlarmConfiguration<NefonaAlarmMeta>(countdownDuration: countdown, schedule: schedule, attributes: attributes, sound: .named(sound))
+                        } else {
+                            config = AlarmManager.AlarmConfiguration<NefonaAlarmMeta>(countdownDuration: countdown, schedule: schedule, attributes: attributes)
+                        }
+                        _ = try await AlarmManager.shared.schedule(id: id, configuration: config)
+                    } catch {
+                        // VARSAYIM: geri sayım (erteleme) widget uzantısı isteyebilir; reddedilirse alarm yine kurulur,
+                        // ikinci düğme eskisi gibi "Nefona'yı aç" olur. JS { snooze: false } ile öğrenir ve günlüğe yazar.
+                        snooze = false
+                        let alert = AlarmPresentation.Alert(
+                            title: "Nefona · Günaydın",
+                            stopButton: stop,
+                            secondaryButton: AlarmButton(text: "Nefona'yı aç", textColor: .white, systemImageName: "sun.max"),
+                            secondaryButtonBehavior: .custom)
+                        let attributes = AlarmAttributes<NefonaAlarmMeta>(
+                            presentation: AlarmPresentation(alert: alert), metadata: NefonaAlarmMeta(), tintColor: tint)
+                        let config: AlarmManager.AlarmConfiguration<NefonaAlarmMeta>
+                        if let sound {
+                            config = .alarm(schedule: schedule, attributes: attributes, secondaryIntent: OpenNefonaIntent(), sound: .named(sound))
+                        } else {
+                            config = .alarm(schedule: schedule, attributes: attributes, secondaryIntent: OpenNefonaIntent())
+                        }
+                        _ = try await AlarmManager.shared.schedule(id: id, configuration: config)
+                    }
                     Self.cancelStored()
                     UserDefaults.standard.set(id.uuidString, forKey: Self.idKey)
-                    call.resolve(["id": id.uuidString])
+                    call.resolve(["id": id.uuidString, "snooze": snooze])
                 } catch {
                     call.reject("Alarm kurulamadı: \(error)", "SCHEDULE")
                 }

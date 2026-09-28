@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AlarmClock, Moon, Sun } from 'lucide-react'
-import { eveningCard, morningCard, ringLabel, untilText, setupDefaults, buildAlarm, hhmm, withSuffix, latency, nextLatency } from '../lib/alarm.js'
+import { eveningCard, morningCard, ringLabel, untilText, setupDefaults, buildAlarm, hhmm, withSuffix, latency, nextLatency, bedtimeFor, minOfDay, SLEEP_TARGET_H } from '../lib/alarm.js'
 import { loadAlarm, loadAlarmLog, addAlarmEvent, saveAlarm } from '../lib/alarmLog.js'
 import { soundById, DEFAULT_SOUND } from '../lib/alarmSounds.js'
 import { scheduleAlarm } from '../lib/alarmNative.js'
@@ -65,11 +65,17 @@ export default function AlarmCard({ status, sessions = [], test = false, onStart
   const m = platform === 'web' ? null : morningCard({ now, alarm, log, sessions })
   if (m?.kind === 'wake') {
     const breath = m.action === 'breath'
+    const light = m.action === 'light'
+    const go = () => {
+      if (!light) return onStart(breath ? 'breath-1' : 'dalga')
+      addAlarmEvent('wakeDone', { ring: m.ring.toISOString(), action: 'light' })
+      bump()
+    }
     return (
       <section className="card al-card" aria-label="Günaydın">
-        <Head icon="sun" eyebrow="Günaydın" title={breath ? 'Bir dakika nefes, sonra güne başla' : 'Güne bir Dalga ile başla'} />
+        <Head icon="sun" eyebrow="Günaydın" title={light ? 'Perdeyi aç, gün ışığı al' : breath ? 'Bir dakika nefes, sonra güne başla' : 'Güne bir Dalga ile başla'} />
         <div className="al-btns">
-          <button type="button" className="btn btn-sm" onClick={() => onStart(breath ? 'breath-1' : 'dalga')}>{breath ? 'Başla · 1 dk' : 'Başla'}</button>
+          <button type="button" className="btn btn-sm" onClick={go}>{light ? 'Açtım' : breath ? 'Başla · 1 dk' : 'Başla'}</button>
           <button type="button" className="btn btn-ghost btn-sm al-fit" onClick={() => { addAlarmEvent('wakeSkip', { ring: m.ring.toISOString() }); bump() }}>Şimdi değil</button>
         </div>
       </section>
@@ -98,10 +104,12 @@ export default function AlarmCard({ status, sessions = [], test = false, onStart
 
   if (c.kind === 'set') {
     const notify = alarm.kind === 'notify'
+    const bed = bedtimeFor(c.next, now)
     return (
       <section className="card al-card" aria-label={notify ? 'Hatırlatma kurulu' : 'Alarm kurulu'}>
         <Head eyebrow={notify ? 'Hatırlatma kurulu' : 'Alarm kurulu'} title={<>{ringLabel(c.next, now)} <small>· {untilText(c.next, now)}</small></>} />
         <p className="al-sub">{notify ? 'Bildirim · sessiz modda ses çıkmaz' : `${soundById(alarm.sound).name} · sessiz modda da çalar`}</p>
+        {bed && <p className="al-sub al-bed">{`${SLEEP_TARGET_H} saat uyku için en geç ${withSuffix(minOfDay(bed), 'loc')} yatakta ol`}</p>}
         <div className="al-btns">
           {alarm.sleep !== 'off' && <button type="button" className="btn btn-sm" onClick={() => onStart('alarm-sleep')}><Moon size={16} aria-hidden="true" /> Uyku sesi</button>}
           <button type="button" className={`btn btn-secondary btn-sm${alarm.sleep !== 'off' ? ' al-fit' : ''}`} onClick={() => onStart('alarm')}>Değiştir</button>
@@ -155,7 +163,7 @@ export default function AlarmCard({ status, sessions = [], test = false, onStart
         return
       }
       saveAlarm(cfg)
-      addAlarmEvent('set', { hour: cfg.hour, minute: cfg.minute, days: cfg.days, sound: cfg.sound, sleep: cfg.sleep, wake: cfg.wake, kind: 'notify', suggested: d.times.map(hhmm), picked: 'suggest', daysChanged: true, via: 'card' })
+      addAlarmEvent('set', { hour: cfg.hour, minute: cfg.minute, days: cfg.days, sound: cfg.sound, sleep: cfg.sleep, wake: cfg.wake, kind: 'notify', suggested: d.times.map(hhmm), picked: 'suggest', daysChanged: true, via: 'card', snooze: false })
       bump()
     }
     return (

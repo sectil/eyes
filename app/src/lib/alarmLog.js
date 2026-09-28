@@ -8,21 +8,23 @@
 //                              sleep: 'off'|'auto'|dakika, wake: 'none'|'breath'|'dalga', kind: 'alarmkit'|'notify', setAt }
 //   gozolcum:alarm-log → [{ type, at: ISO, date: 'YYYY-MM-DD' (yerel), ...alanlar }] (en yeni sonda)
 //     set       { hour, minute, days, sound, sleep, wake, kind, suggested: ['07:00',…], picked: 'suggest'|'other',
-//                 daysChanged: bool }
+//                 daysChanged: bool, snooze: bool (alarmda Ertele düğmesi) }
 //     cancel    {}
 //     dismiss   {}                        "Bu akşam değil"
 //     cardPref  { show: bool }            "Bu kart akşamları çıksın mı?" cevabı
 //     sleep     { planned: dk, seconds, early: bool, auto: bool }   uykuya dalarken ses (başladığı an = at − seconds)
 //     wake      { via: 'button'|'open', ring: ISO }  "Nefona'yı aç" ya da çalıştıktan sonraki ilk açılış
 //     wakeSkip  { ring: ISO }             sabah kartında "Şimdi değil"
+//     wakeDone  { ring: ISO, action }     sabah kartında "Açtım" (gün ışığı; nefes/Dalga oturumdan anlaşılır)
 //     morning   { answer: 'yes'|'no'|'early', ring: ISO, before: dk, after: dk }  "Ses bittiğinde uyumuş muydun?"
 import { dayKey, keyDay, loadHabits } from './habitLog.js'
 
 export const ALARM_KEY = 'gozolcum:alarm'
 export const ALARM_LOG_KEY = 'gozolcum:alarm-log'
 export const ALARM_LOG_MAX = 800
-export const EVENT_TYPES = ['set', 'cancel', 'dismiss', 'cardPref', 'sleep', 'wake', 'wakeSkip', 'morning']
-export const WAKE_ACTIONS = ['none', 'breath', 'dalga']
+export const EVENT_TYPES = ['set', 'cancel', 'dismiss', 'cardPref', 'sleep', 'wake', 'wakeSkip', 'wakeDone', 'morning']
+// light: "Perdeyi aç, gün ışığı al" (Windred 2024 PNAS, doi:10.1073/pnas.2405924121; gözlemsel)
+export const WAKE_ACTIONS = ['none', 'breath', 'dalga', 'light']
 export const MORNING_ANSWERS = ['yes', 'no', 'early']
 
 const store = (s) => s ?? globalThis.localStorage

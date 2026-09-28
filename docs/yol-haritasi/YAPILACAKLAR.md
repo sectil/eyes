@@ -157,6 +157,13 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
   - Süre: yetişkine gecede en az 7 saat (AASM/SRS uzlaşısı, Watson 2015, doi:10.5665/sleep.4716) → "yatma saati" satırı.
   - Yatmayı erteleme: sıkıntıyla ilişkili (Azeem 2026 meta, gözlemsel, doi:10.3389/fpsyg.2026.1767938); etkili
     gösterilen müdahale yoğun BDT (Rasouli 2025, n=32) → basit hatırlatıcı için kanıt YOK.
+- [~] **Sahibinin kararları (2026-09-28, 2. tur) kodda:** erteleme (ikinci düğme "Ertele" 9 dk; iOS reddederse
+      "Nefona'yı aç"; VARSAYIM: geri sayım widget uzantısı istemez), "Her gün" + düzen notu (Windred 2024), "Sana göre"
+      30 dk'dan (Cochrane 2022; sınır 5–60), yatma saati satırı (7 saat, Watson 2015; yalnız 24 saat içindeki alarmda),
+      "Uyanınca: Gün ışığı" (Windred 2024 PNAS). Kaynaklar uygulamadaki kanıt listesinde ("Sabah alarmı ve uyku sesi").
+      Bug 22 düzeltmesi (uyku sesi dokunuş içinde; "Yine de çal").
+- [ ] **Tasarım bekliyor (sahibi, 2026-09-28):** alarm Ana sayfada kaldırılıp eklenebilen widget; yolun altında;
+      Profil'den "Alarm" bölümü ("Ana sayfada göster" işareti); kartın saat görünümü temaya uymuyor → Artifact.
 - [ ] **Cihazda bak (alarm):** (1) derleniyor mu (Xcode 26); (2) 14.00'ten sonra Ana sayfada kart; Evet → Kur;
       iOS alarm izni; (3) haftalık alarm seçilen günlerde çalıyor mu, tek seferlik bir kez; (4) Dalga sesi çalıyor mu,
       25 sn'de susuyor mu tekrar mı ediyor; (5) "Nefona'yı aç" uygulamayı açıp sabah kartını/ekranını getiriyor mu;

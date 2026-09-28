@@ -50,45 +50,87 @@ export async function renderLoop(mode = 'sakin', { sampleRate = SLEEP_RATE, tail
 const urlOf = (bytes) => URL.createObjectURL(new Blob([bytes], { type: 'audio/wav' }))
 
 // Uyku oynatıcı. onTick({ left }) ve onEnd() ile ekranı bilgilendirir.
+// iOS sesi yalnız dokunuşun İÇİNDE başlatır (HATA_GUNLUGU Bug 22): müzik hazırlanması saniyeler sürer, bu yüzden
+// prepare() önceden (ekran açılınca) çağrılır; start() hazırsa çalmayı dokunuşla aynı anda, beklemeden başlatır.
+// Çalma yine reddedilirse phase 'blocked' olur; ekran "dokun, başlat" gösterir ve resume() dokunuş içinde çağrılır.
 export function createSleepPlayer() {
-  let timer = 0, urls = [], phase = 'idle', endAt = 0, fadeAt = 0, startedAt = 0, fadeUrl = null
+  let timer = 0, urls = [], phase = 'idle', endAt = 0, fadeAt = 0, startedAt = 0
+  let loopUrl = null, fadeUrl = null, ready = null, pending = null, cb = {}
   const cleanup = () => { clearInterval(timer); urls.forEach((u) => URL.revokeObjectURL(u)); urls = [] }
-  return {
-    get phase() { return phase },
-    // Hazırla ve başlat. totalSec: kullanıcının seçtiği süre.
-    async start({ mode = 'sakin', totalSec, onTick, onEnd }) {
-      phase = 'preparing'
+  function stop() {
+    if (phase === 'stopped') return
+    phase = 'stopped'
+    cleanup()
+    mediaKeepAlive(false)
+  }
+  // Müziği hazırlar (döngü + kısılan son parça). Aynı süre için bir kez; süre değişirse yeniden.
+  async function prepare({ mode = 'sakin', totalSec }) {
+    if (ready?.totalSec === totalSec && ready.mode === mode) return true
+    if (pending) return pending
+    phase = 'preparing'
+    pending = (async () => {
       const r = await renderLoop(mode)
+      if (phase === 'stopped') return false
+      cleanup()
       const F = fadeSeconds(totalSec)
-      const loopUrl = urlOf(encodeWav(r.channels, r.sampleRate))
+      loopUrl = urlOf(encodeWav(r.channels, r.sampleRate))
       fadeUrl = urlOf(encodeWav(r.channels.map((ch) => fadeFrom(ch, Math.round(F * r.sampleRate))), r.sampleRate))
       urls = [loopUrl, fadeUrl]
-      if (phase === 'stopped') { cleanup(); return false }
-      startedAt = Date.now()
-      endAt = startedAt + totalSec * 1000
-      fadeAt = endAt - F * 1000
-      phase = 'loop'
-      mediaPlay(loopUrl, { loop: true })
-      timer = setInterval(() => {
-        const now = Date.now()
-        if (phase === 'loop' && now >= fadeAt) {
-          phase = 'fade'
-          mediaPlay(fadeUrl, { loop: false })
-        }
-        onTick?.({ left: Math.max(0, (endAt - now) / 1000) })
-        if (now >= endAt + 1500) {
-          this.stop()
-          onEnd?.()
-        }
-      }, 500)
+      ready = { totalSec, mode, F }
+      phase = 'ready'
+      return true
+    })()
+    try {
+      return await pending
+    } finally {
+      pending = null
+    }
+  }
+  function run() {
+    startedAt = Date.now()
+    endAt = startedAt + ready.totalSec * 1000
+    fadeAt = endAt - ready.F * 1000
+    phase = 'loop'
+    clearInterval(timer)
+    timer = setInterval(() => {
+      const now = Date.now()
+      if (phase === 'loop' && now >= fadeAt) {
+        phase = 'fade'
+        mediaPlay(fadeUrl, { loop: false })
+      }
+      cb.onTick?.({ left: Math.max(0, (endAt - now) / 1000) })
+      if (now >= endAt + 1500) {
+        stop()
+        cb.onEnd?.()
+      }
+    }, 500)
+  }
+  return {
+    get phase() { return phase },
+    prepare,
+    // Başlat. Hazırsa mediaPlay dokunuşla aynı çağrıda (await'ten önce) yapılır. Döner: çaldı mı.
+    async start({ mode = 'sakin', totalSec, onTick, onEnd }) {
+      cb = { onTick, onEnd }
+      const warm = ready?.totalSec === totalSec && ready.mode === mode
+      if (!warm && !(await prepare({ mode, totalSec }))) return false
+      const ok = await mediaPlay(loopUrl, { loop: true })
+      if (phase === 'stopped') return false
+      if (!ok) {
+        phase = 'blocked'
+        return false
+      }
+      run()
+      return true
+    },
+    // Çalma reddedildiyse yeniden dene (dokunuşun içinde çağrılır)
+    async resume() {
+      if (phase !== 'blocked') return false
+      const ok = await mediaPlay(loopUrl, { loop: true })
+      if (!ok || phase === 'stopped') return false
+      run()
       return true
     },
     elapsed: () => (startedAt ? Math.min(Date.now(), endAt) - startedAt : 0) / 1000,
-    stop() {
-      if (phase === 'stopped') return
-      phase = 'stopped'
-      cleanup()
-      mediaKeepAlive(false)
-    },
+    stop,
   }
 }

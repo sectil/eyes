@@ -13,11 +13,12 @@ export const DEFAULT_TIME = 7 * 60
 export const DEFAULT_DAYS = [1, 2, 3, 4, 5] // VARSAYIM: ilk kez Pazartesi–Cuma
 export const SUGGEST_DAYS = 14
 export const ROUND_MIN = 15
-// "Sana göre": ilk gece 15 dk (VARSAYIM; uykuya dalma süresi yaşla uzar, Ohayon 2004); sabah cevabıyla ±5, sınır 5–45
-export const LATENCY_START = 15
+// "Sana göre": ilk gece 30 dk (sahibinin kararı, 2026-09-28: uyku müziği çalışmalarında 25–60 dk/gece, Cochrane
+// Jespersen 2022, doi:10.1002/14651858.CD010459.pub3); sabah cevabıyla ±5, sınır 5–60 (uyku sesi en çok 60 dk)
+export const LATENCY_START = 30
 export const LATENCY_STEP = 5
 export const LATENCY_MIN = 5
-export const LATENCY_MAX = 45
+export const LATENCY_MAX = 60
 export const SLEEP_CHOICES = ['auto', 5, 10, 15] // + "Başka"
 export const SLEEP_OTHER = [20, 25, 30, 40, 45, 60]
 export const SLEEP_MAX_MIN = 60 // uyku sesi en çok 60 dk …
@@ -210,6 +211,27 @@ export function sleepMinutes(alarm, log, now) {
   return cap >= 1 ? Math.min(base, cap) : 0
 }
 
+// Yatma saati: yetişkine gecede en az 7 saat (AASM/SRS uzlaşısı, Watson 2015, doi:10.5665/sleep.4716).
+// Sıradaki çalıştan 7 saat önce; o an geçtiyse ya da çalış 24 saatten uzaksa null (geç kalana baskı yok;
+// "00:00'da yatakta ol" bu geceyi anlatsın).
+export const SLEEP_TARGET_H = 7
+export function bedtimeFor(next, now) {
+  if (!next || next.getTime() - new Date(now).getTime() > 24 * HOUR) return null
+  const b = new Date(next.getTime() - SLEEP_TARGET_H * HOUR)
+  return b.getTime() > new Date(now).getTime() ? b : null
+}
+
+// Alarma 1 saatten az kaldıysa "Yine de çal" süresi: alarmdan 5 dk önce susar (kişinin seçimi; kural dışı). 0: çalmaz
+export const LATE_GAP_MIN = 5
+export function lateSleepMinutes(alarm, log, now) {
+  if (!alarm || alarm.sleep === 'off') return 0
+  const ring = nextRing(alarm, now)
+  if (!ring) return 0
+  const base = alarm.sleep === 'auto' ? latency(log) : alarm.sleep
+  const m = Math.min(base, SLEEP_MAX_MIN, Math.floor((ring.getTime() - new Date(now).getTime()) / MIN) - LATE_GAP_MIN)
+  return m >= 1 ? m : 0
+}
+
 // Son kurulumdan / kart cevabından beri üst üste "Bu akşam değil" sayısı (izin kartındaki Tamam sayılmaz)
 export function dismissStreak(log) {
   let n = 0
@@ -259,7 +281,7 @@ export function questionDue(log, ring, now) {
 }
 
 // Sabah kartı: "Uyanınca" seçildiyse önce o (yapılmadıysa, atlanmadıysa), sonra soru.
-// Döner: null | { kind: 'wake', action: 'breath'|'dalga', ring } | { kind: 'question', ring }
+// Döner: null | { kind: 'wake', action: 'breath'|'dalga'|'light', ring } | { kind: 'question', ring }
 export function morningCard({ now = new Date(), alarm = null, log = [], sessions = [] } = {}) {
   const ring = lastRing(alarm, now)
   if (!ring) return null
@@ -273,7 +295,9 @@ export function morningCard({ now = new Date(), alarm = null, log = [], sessions
   if (alarm.wake !== 'none' && t - r <= WAKE_CARD_H * HOUR && !log.some((e) => e?.type === 'wakeSkip' && e.ring === iso)) {
     const done = alarm.wake === 'breath'
       ? sessions.some((s) => isBreath(s) && s.seconds >= BREATH_DONE_SEC && after(s.date))
-      : sessions.some((s) => isDalga(s) && after(s.date))
+      : alarm.wake === 'dalga'
+        ? sessions.some((s) => isDalga(s) && after(s.date))
+        : log.some((e) => e?.type === 'wakeDone' && e.ring === iso)
     if (!done) return { kind: 'wake', action: alarm.wake, ring }
   }
   return questionDue(log, ring, now) ? { kind: 'question', ring } : null

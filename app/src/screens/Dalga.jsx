@@ -72,7 +72,9 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
   const [record, setRecord] = useState(null)
   const [error, setError] = useState(null)
   const [diag, setDiag] = useState({ state: 'none', rate: 0, level: 0 })
-  const [sleepState, setSleepState] = useState('idle') // idle | preparing | playing
+  const [sleepState, setSleepState] = useState('idle') // idle | preparing | playing | blocked
+  const [sleepReady, setSleepReady] = useState(false) // alarm kartından: müzik önceden hazır mı
+  const [lateGo, setLateGo] = useState(false) // alarma 1 saatten az: "Yine de çal" dendi
   const [showCtl, setShowCtl] = useState(false)
   const sleepRef = useRef(null)
   const sleepMode = opts.mode === 'sakin' && opts.sleep
@@ -147,23 +149,40 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
     setPhase('after')
   }
   // Uyku modu: puan sorulmaz; müzik hazırlanır, soluk saat, sonda yavaşça kısılır
-  const sleepMin = sleepPreset ? sleepPreset.minutes : opts.minutes
+  const sleepMin = sleepPreset ? (lateGo ? sleepPreset.lateMinutes : sleepPreset.minutes) : opts.minutes
+  const player = () => (sleepRef.current ??= createSleepPlayer())
+  // Alarm kartından gelince müzik ekran açılır açılmaz hazırlanır: "Başlat" dokunuşunda beklemeden çalsın
+  // (iOS sesi yalnız dokunuşun içinde başlatır; Bug 22)
+  useEffect(() => {
+    if (phase !== 'sleep-ready' || !(sleepMin > 0)) return undefined
+    let alive = true
+    setSleepReady(false)
+    player().prepare({ mode: 'sakin', totalSec: sleepMin * 60 })
+      .then((ok) => alive && setSleepReady(ok))
+      .catch(() => alive && setError('Müzik hazırlanamadı. Yeniden dene.'))
+    return () => {
+      alive = false
+    }
+    // player() aynı nesneyi döndürür
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase, sleepMin])
   async function startSleep() {
-    const p = createSleepPlayer()
-    sleepRef.current = p
+    const p = player()
     setShowCtl(false)
     setSleepState('preparing')
     setLeft(sleepMin * 60)
-    setPhase('sleep')
     keepAwake(true)
     try {
-      const ok = await p.start({
+      // Hazırsa start() çalmayı bu dokunuşun içinde başlatır; ekran geçişi sonra
+      const run = p.start({
         mode: 'sakin',
         totalSec: sleepMin * 60,
         onTick: ({ left: l }) => setLeft(l),
         onEnd: () => endSleep(false),
       })
-      if (ok) setSleepState('playing')
+      setPhase('sleep')
+      const ok = await run
+      setSleepState(ok ? 'playing' : p.phase === 'blocked' ? 'blocked' : 'idle')
     } catch {
       p.stop()
       keepAwake(false)
@@ -231,9 +250,18 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
     return (
       <main className="dg-sleep" onClick={() => setShowCtl(true)} aria-label="Dalga · uyku">
         <div className="dg-clock">{hh}:{mm}</div>
-        <p className="dg-sleep-sub" aria-live="polite">
-          {sleepState === 'preparing' ? 'Müzik hazırlanıyor…' : `${Math.max(1, Math.ceil(left / 60))} dk sonra yavaşça susacak`}
-        </p>
+        {sleepState === 'blocked' ? (
+          // iOS çalmayı reddetti: yeni bir dokunuşla yeniden dene (dokunuşun içinde)
+          <button className="btn dg-sleep-kick" onClick={(e) => {
+            e.stopPropagation()
+            engine.unlock()
+            sleepRef.current?.resume().then((ok) => setSleepState(ok ? 'playing' : 'blocked'))
+          }}>Ses başlamadı · dokun, başlat</button>
+        ) : (
+          <p className="dg-sleep-sub" aria-live="polite">
+            {sleepState === 'preparing' ? 'Müzik hazırlanıyor…' : `${Math.max(1, Math.ceil(left / 60))} dk sonra yavaşça susacak`}
+          </p>
+        )}
         {sleepPreset?.alarmLabel && <p className="dg-sleep-alarm">Alarm {sleepPreset.alarmLabel}</p>}
         {showCtl && (
           <button className="dg-sleep-end" onClick={(e) => { e.stopPropagation(); endSleep(true) }}>Bitir</button>
@@ -245,20 +273,28 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
   // Alarm kartından: tek dokunuşla uyku sesi (ses ancak dokunuşla açılır: iOS). Süre alarm kuralından gelir.
   if (phase === 'sleep-ready') {
     const late = !(sleepMin > 0)
+    const canLate = late && sleepPreset.lateMinutes > 0
     return (
       <main className="dg-sleep dg-sleep-ready" aria-label="Uyku sesi">
         <span className="dg-ey">Uyku sesi · Dalga · Sakin</span>
         <h1 className="dg-h">{late ? 'Alarmına 1 saatten az kaldı' : `${sleepMin} dk, sonra yavaşça susar`}</h1>
         <p className="dg-sleep-sub">
           {late
-            ? 'Uyku sesi alarmdan en az 1 saat önce biter; bu gece çalmıyor.'
+            ? canLate
+              ? `Uyku sesi normalde alarmdan 1 saat önce biter. İstersen ${sleepPreset.lateMinutes} dk çalar, alarmdan 5 dk önce susar.`
+              : 'Alarm çok yakın; uyku sesi çalmıyor.'
             : sleepPreset.auto ? 'Sana göre: süre sabah cevaplarınla ayarlanır.' : 'Telefon kilitlenince de çalar.'}
         </p>
         {sleepPreset.alarmLabel && <p className="dg-sleep-alarm">Alarm {sleepPreset.alarmLabel}</p>}
         {error && <p className="dg-err" role="alert">{error}</p>}
         <div className="dg-sleep-go">
-          {!late && <button className="btn" onClick={() => { engine.unlock(); setError(null); startSleep() }}><Moon size={18} aria-hidden="true" /> Başlat</button>}
-          <button className="btn btn-ghost" onClick={onExit}>{late ? 'Tamam' : 'Vazgeç'}</button>
+          {!late && (
+            <button className="btn" disabled={!sleepReady} onClick={() => { engine.unlock(); setError(null); startSleep() }}>
+              <Moon size={18} aria-hidden="true" /> {sleepReady ? 'Başlat' : 'Müzik hazırlanıyor…'}
+            </button>
+          )}
+          {canLate && <button className="btn" onClick={() => setLateGo(true)}><Moon size={18} aria-hidden="true" /> {`Yine de çal · ${sleepPreset.lateMinutes} dk`}</button>}
+          <button className="btn btn-ghost" onClick={onExit}>{late && !canLate ? 'Tamam' : 'Vazgeç'}</button>
         </div>
       </main>
     )

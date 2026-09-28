@@ -105,6 +105,7 @@
 .dg-sleep-ready .dg-sleep-sub { opacity: 0.62; max-width: 34ch; line-height: 1.45; }
 .dg-sleep-ready .dg-sleep-alarm { opacity: 0.5; margin-top: 4px; }
 .dg-sleep-ready .dg-err { color: #ff9a7d; }
+.dg-sleep-kick { width: auto; max-width: 320px; margin-top: 8px; }
 .dg-sleep-go { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
 .dg-sleep-go .btn-ghost { color: rgba(238, 243, 246, 0.72); border-color: rgba(255, 255, 255, 0.16); }
 .dg-sleep-end { position: absolute; bottom: calc(40px + env(safe-area-inset-bottom)); font: 600 1rem var(--font-body); padding: 12px 28px; border-radius: 14px; background: rgba(238, 243, 246, 0.08); color: rgba(238, 243, 246, 0.6); border: 1px solid rgba(255, 255, 255, 0.12); cursor: pointer; }

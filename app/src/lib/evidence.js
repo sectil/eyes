@@ -67,6 +67,25 @@ export const EVIDENCE = [
       'Livingston ve ark. 2024, Lancet Demans Komisyonu raporu (PMID 39096926)',
     ],
   },
+  {
+    id: 'alarm',
+    title: 'Sabah alarmı ve uyku sesi',
+    claim: 'Seçtiğin saatte uyandırır, uyurken sakin müzik çalar; uyku düzenini kendin görürsün.',
+    level: 'Sınırlı',
+    basis:
+      'Uyku müziği, uykusuzluk yaşayan yetişkinlerde öznel uyku kalitesini artırdı (orta kesinlik; çalışmalarda gecede 25–60 dk); "Sana göre" bu yüzden 30 dakikadan başlar. Yetişkine gecede en az 7 saat uyku önerilir; kart yatma saatini buna göre yazar. Her gün aynı saatte kalkmak (düzen) büyük bir kohortta uyku süresinden daha güçlü bir gösterge çıktı. Gecelerin yarısından çoğu ertelemeyle bitiyor; alışkın ertelemecilerde kısa erteleme bilişi bozmadı.',
+    limits:
+      '"Sana göre" uykuyu algılamaz; sabah cevabına göre ayarlanan bir zamanlayıcıdır. Düzen, gün ışığı ve erteleme bulguları gözlemsel ya da küçük çalışmalardan; nedensellik göstermez. Melodik alarm sesiyle daha az sersemlik yalnız küçük çalışmalarda görüldü. Tedavi değildir; uykusuzluk sürüyorsa bir hekime danış.',
+    sources: [
+      'Jespersen ve ark. 2022, Cochrane: uykusuzlukta müzik dinleme (PMID 36000763)',
+      'Watson ve ark. 2015, AASM/SRS uzlaşısı: yetişkinde en az 7 saat (PMID 26039963)',
+      'Windred ve ark. 2024, uyku düzenliliği ve ölüm riski (PMID 37738616)',
+      'Windred ve ark. 2024, gündüz ve gece ışığı ile ölüm riski (PMID 39405349)',
+      'Robbins ve ark. 2025, 3 milyon gecede erteleme (PMID 40389592)',
+      'Sundelin ve ark. 2023, erteleme ve uyku ataleti (PMID 37849039)',
+      'McFarlane ve ark. 2020, melodik alarm ve uyku ataleti (doi:10.1371/journal.pone.0215788)',
+    ],
+  },
 ]
 
 // Açıkça yapmadığımız iddialar (bkz. SENTEZ §5, §13)

@@ -4,7 +4,7 @@ import AlarmSetup from '../../screens/AlarmSetup.jsx'
 import AlarmMorning from '../../screens/AlarmMorning.jsx'
 import Dalga from '../../screens/Dalga.jsx'
 import { loadAlarm, loadAlarmLog, addAlarmEvent } from '../../lib/alarmLog.js'
-import { sleepMinutes, nextRing, lastRing, hhmm, minOfDay } from '../../lib/alarm.js'
+import { sleepMinutes, lateSleepMinutes, nextRing, lastRing, hhmm, minOfDay } from '../../lib/alarm.js'
 
 // Uyku sesi: Dalga uyku ekranı, süre alarm kuralından (lib/alarm.js sleepMinutes)
 // Süre ekran açılınca bir kez hesaplanır (çalarken yeniden çizimde kaymasın)
@@ -13,7 +13,8 @@ function AlarmSleep({ ctx }) {
     const now = new Date()
     const alarm = loadAlarm()
     const ring = nextRing(alarm, now)
-    return { minutes: sleepMinutes(alarm, loadAlarmLog(), now) ?? 0, auto: alarm?.sleep === 'auto', alarmLabel: ring ? hhmm(minOfDay(ring)) : null }
+    const log = loadAlarmLog()
+    return { minutes: sleepMinutes(alarm, log, now) ?? 0, lateMinutes: lateSleepMinutes(alarm, log, now), auto: alarm?.sleep === 'auto', alarmLabel: ring ? hhmm(minOfDay(ring)) : null }
   })
   return (
     <Dalga
@@ -28,13 +29,20 @@ function AlarmSleep({ ctx }) {
 
 function Morning({ ctx }) {
   const alarm = loadAlarm()
-  const action = alarm?.wake === 'dalga' ? 'dalga' : 'breath'
+  const action = ['dalga', 'light'].includes(alarm?.wake) ? alarm.wake : 'breath'
+  const ringIso = () => lastRing(alarm, new Date())?.toISOString()
   const skip = () => {
-    const r = lastRing(alarm, new Date())
-    if (r) addAlarmEvent('wakeSkip', { ring: r.toISOString() })
+    const r = ringIso()
+    if (r) addAlarmEvent('wakeSkip', { ring: r })
     ctx.go('home')
   }
-  return <AlarmMorning action={action} onStart={() => ctx.go(action === 'breath' ? 'breath-1' : 'dalga')} onSkip={skip} />
+  const start = () => {
+    if (action !== 'light') return ctx.go(action === 'breath' ? 'breath-1' : 'dalga')
+    const r = ringIso()
+    if (r) addAlarmEvent('wakeDone', { ring: r, action: 'light' })
+    ctx.go('home')
+  }
+  return <AlarmMorning action={action} onStart={start} onSkip={skip} />
 }
 
 export default {

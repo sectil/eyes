@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import {
   hhmm, roundTo, withSuffix, daysLabel, targetDay, nextOccurrence, nextRing, lastRing, untilText, ringLabel,
   suggestTimes, suggestDays, latency, nextLatency, sleepMinutes, dismissStreak, eveningCard, questionDue, morningCard,
-  wakeSignal, setupDefaults, buildAlarm, DEFAULT_TIMES, LATENCY_START,
+  wakeSignal, setupDefaults, buildAlarm, DEFAULT_TIMES, LATENCY_START, lateSleepMinutes, bedtimeFor,
 } from './alarm.js'
 import { normalizeAlarm, alarmHabits, addAlarmEvent, loadAlarmLog, saveAlarm, loadAlarm, ALARM_LOG_MAX, loadHubHabits } from './alarmLog.js'
 import { hub, growthMap } from './dataHub.js'
@@ -132,13 +132,14 @@ describe('öğrenme', () => {
     const log = [ev('set', at(2026, 9, 20, 21, 0), { hour: 7, minute: 0, days: [1, 2, 3, 4, 5, 6] }), ev('set', at(2026, 9, 27, 21, 0), { hour: 7, minute: 0, days: [] })]
     expect(suggestDays(log)).toEqual([1, 2, 3, 4, 5, 6])
   })
-  it('"Sana göre": 15 dk başlar, Hayır +5, Çok önce −5, 5–45', () => {
-    expect(latency([])).toBe(LATENCY_START)
+  it('"Sana göre": 30 dk başlar, Hayır +5, Çok önce −5, 5–60', () => {
+    expect(latency([])).toBe(30)
+    expect(LATENCY_START).toBe(30)
     const m = (answer) => ({ type: 'morning', answer })
-    expect(latency([m('no'), m('no'), m('yes')])).toBe(25)
-    expect(latency([m('early'), m('early'), m('early'), m('early')])).toBe(5)
-    expect(latency(Array.from({ length: 10 }, () => m('no')))).toBe(45)
-    expect(nextLatency(45, 'no')).toBe(45)
+    expect(latency([m('no'), m('no'), m('yes')])).toBe(40)
+    expect(latency(Array.from({ length: 6 }, () => m('early')))).toBe(5)
+    expect(latency(Array.from({ length: 10 }, () => m('no')))).toBe(60)
+    expect(nextLatency(60, 'no')).toBe(60)
     expect(nextLatency(15, 'early')).toBe(10)
     expect(nextLatency(15, 'yes')).toBe(15)
   })
@@ -147,13 +148,30 @@ describe('öğrenme', () => {
 describe('uyku sesi süresi', () => {
   it('kapalıysa null; sana göre öğrenilen süre; en çok 60 dk', () => {
     expect(sleepMinutes(alarmOf({ sleep: 'off', at: iso(2026, 9, 29, 7, 0) }), [], MON(23))).toBeNull()
-    expect(sleepMinutes(alarmOf({ at: iso(2026, 9, 29, 7, 0) }), [], MON(23))).toBe(15)
+    expect(sleepMinutes(alarmOf({ at: iso(2026, 9, 29, 7, 0) }), [], MON(23))).toBe(30)
     expect(sleepMinutes(alarmOf({ sleep: 90, at: iso(2026, 9, 29, 7, 0) }), [], MON(23))).toBe(60)
   })
   it('alarmdan en az 1 saat önce biter; yetmezse 0', () => {
     const a = alarmOf({ sleep: 45, at: iso(2026, 9, 29, 7, 0) })
     expect(sleepMinutes(a, [], at(2026, 9, 29, 5, 40))).toBe(20) // 80 dk kaldı → 20
     expect(sleepMinutes(a, [], at(2026, 9, 29, 6, 10))).toBe(0)
+  })
+  it('"Yine de çal": alarmdan 5 dk önce susar; 5 dk\'dan az kaldıysa 0', () => {
+    const a = alarmOf({ at: iso(2026, 9, 29, 7, 0) })
+    expect(lateSleepMinutes(a, [], at(2026, 9, 29, 6, 30))).toBe(25)
+    expect(lateSleepMinutes(a, [], at(2026, 9, 29, 6, 10))).toBe(30) // sana göre 30 < 45
+    expect(lateSleepMinutes(a, [], at(2026, 9, 29, 6, 56))).toBe(0)
+    expect(lateSleepMinutes({ ...a, sleep: 'off' }, [], at(2026, 9, 29, 6, 30))).toBe(0)
+  })
+})
+
+describe('yatma saati (7 saat)', () => {
+  it('sıradaki çalıştan 7 saat önce; geçtiyse yok', () => {
+    const next = at(2026, 9, 29, 7, 0)
+    expect(bedtimeFor(next, MON(21, 44))).toEqual(at(2026, 9, 29, 0, 0))
+    expect(bedtimeFor(next, at(2026, 9, 29, 0, 30))).toBeNull()
+    expect(bedtimeFor(null, MON())).toBeNull()
+    expect(bedtimeFor(at(2026, 10, 3, 7, 0), MON(21, 44))).toBeNull() // Cumartesi alarmı, bu gece değil
   })
 })
 
@@ -226,6 +244,10 @@ describe('sabah', () => {
     const skip = ev('wakeSkip', at(2026, 9, 29, 7, 9), { ring: ring.toISOString() })
     expect(morningCard({ now, alarm: a, log: [night, skip], sessions: [] })).toEqual({ kind: 'question', ring })
     expect(morningCard({ now: at(2026, 9, 29, 11, 30), alarm: a, log: [], sessions: [] })).toBeNull() // 4 saat geçti
+    const light = { ...alarm, wake: 'light' }
+    expect(morningCard({ now, alarm: light, log: [], sessions: [] })).toEqual({ kind: 'wake', action: 'light', ring })
+    const lit = ev('wakeDone', at(2026, 9, 29, 7, 6), { ring: ring.toISOString(), action: 'light' })
+    expect(morningCard({ now, alarm: light, log: [lit], sessions: [] })).toBeNull()
     const dalga = { ...alarm, wake: 'dalga' }
     expect(morningCard({ now, alarm: dalga, log: [], sessions: [{ type: 'dalga', mode: 'sakin', date: iso(2026, 9, 29, 7, 9) }] })).toBeNull()
   })

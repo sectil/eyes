@@ -69,10 +69,11 @@ async function scheduleOn(cfg, platform) {
       if (auth === 'notDetermined') auth = (await Alarm.requestAuth())?.auth
       if (auth !== 'authorized') return { ok: false, reason: 'denied' }
       const file = soundById(cfg.sound).file
-      await Alarm.schedule({ hour: cfg.hour, minute: cfg.minute, weekdays: cfg.days, ...(file ? { sound: file } : {}) })
+      const r = await Alarm.schedule({ hour: cfg.hour, minute: cfg.minute, weekdays: cfg.days, ...(file ? { sound: file } : {}) })
       // iOS 26'ya güncellemeden önce kurulmuş bildirim yedeği kalmasın (ikisi birden çalmasın)
       await cancelFallback()
-      return { ok: true }
+      // snooze: alarmda "Ertele" düğmesi var mı (iOS reddederse "Nefona'yı aç" ile kurulur; AlarmPlugin.swift)
+      return { ok: true, snooze: r?.snooze !== false }
     } catch (e) {
       return { ok: false, reason: 'error', detail: String(e?.message ?? e) }
     }

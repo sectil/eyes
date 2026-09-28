@@ -16,8 +16,10 @@ const WAKE = [
   { id: 'none', label: 'Hiçbiri' },
   { id: 'breath', label: '1 dk nefes' },
   { id: 'dalga', label: 'Dalga sesi' },
+  { id: 'light', label: 'Gün ışığı' },
 ]
-const WAKE_TEXT = { none: 'hiçbiri', breath: '1 dk nefes', dalga: 'Dalga sesi' }
+const WAKE_TEXT = { none: 'hiçbiri', breath: '1 dk nefes', dalga: 'Dalga sesi', light: 'gün ışığı' }
+const ALL_DAYS = [0, 1, 2, 3, 4, 5, 6]
 const sleepText = (v) => (v === 'auto' ? 'Sana göre' : `${v} dk`)
 
 // status: test/önizleme için dışarıdan verilebilir; yoksa telefondan okunur. onDone(): kuruldu ya da kaldırıldı.
@@ -99,7 +101,7 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
     addAlarmEvent('set', {
       hour: cfg.hour, minute: cfg.minute, days: cfg.days, sound, sleep, wake, kind: cfg.kind,
       suggested: d.times.map(hhmm), picked: d.times.includes(time) && !otherTime ? 'suggest' : 'other',
-      daysChanged: days.join() !== d.days.join(), edit: Boolean(live),
+      daysChanged: days.join() !== d.days.join(), edit: Boolean(live), snooze: Boolean(r.snooze),
     })
     onDone?.()
   }
@@ -137,6 +139,9 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
 
       <section className="al-q" aria-labelledby="al-q2">
         <h2 id="al-q2">Hangi günler?</h2>
+        <div className="al-chips">
+          <button type="button" className="al-chip" aria-pressed={days.length === 7} onClick={() => setDays(days.length === 7 ? [] : ALL_DAYS)}>Her gün</button>
+        </div>
         <div className="al-days" role="group" aria-labelledby="al-q2">
           {WEEK_ORDER.map((x) => (
             <button key={x} type="button" role="checkbox" className="al-day" aria-checked={days.includes(x)} aria-label={WEEKDAY_LONG[x]} onClick={() => toggleDay(x)}>{WEEKDAY_SHORT[x]}</button>
@@ -144,6 +149,8 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
         </div>
         <p className="al-q-sub">{days.length ? `${daysLabel(days)} · dokun, çıkar ya da ekle` : 'Yalnız yarın · gün seçersen her hafta çalar'}</p>
         {first && !firstIsTomorrow && <p className="al-q-sub">Yarın çalmaz · ilk: {ringLabel(first, now)}</p>}
+        {/* Windred 2024 (doi:10.1093/sleep/zsad253): düzenli uyku-uyanma, süreden güçlü bir gösterge (gözlemsel) */}
+        {days.length > 0 && days.length < 7 && <p className="al-q-sub">Her gün aynı saatte kalkmak uyku düzenini korur.</p>}
       </section>
 
       <section className="al-q" aria-labelledby="al-q3">
@@ -206,7 +213,7 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
               <div className="al-chips" role="radiogroup" aria-labelledby="al-wake">
                 {WAKE.map((w) => <button key={w.id} type="button" role="radio" className="al-chip" aria-checked={wake === w.id} onClick={() => setWake(w.id)}>{w.label}</button>)}
               </div>
-              <p className="al-q-sub">{notify ? 'Hatırlatmaya dokununca açılır. İsteğe bağlı.' : "Alarmdaki \"Nefona'yı aç\"a dokununca açılır. İsteğe bağlı."}</p>
+              <p className="al-q-sub">{notify ? 'Hatırlatmaya dokununca ya da uygulamayı açınca çıkar. İsteğe bağlı.' : 'Alarmdan sonra uygulamayı açınca Ana sayfada çıkar. İsteğe bağlı.'}</p>
             </div>
           </div>
         )}

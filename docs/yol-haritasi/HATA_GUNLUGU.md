@@ -524,3 +524,16 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   (18.30, kart çıkmaz) de aynı 14 px → alarm kartından değil. Görüntüde "DURAK · ≈19 DK KALDI" satırı kesiliyor
   (`.hh-num`, günün diyaframının yanı).
 - Düzeltilmedi: sorulmadan kapsam büyütülmez.
+
+## Bug 22: Alarm/uyku sesi çalmıyor (2026-09-28 15:37, sahibi, TestFlight, iOS 26, yan ses düğmesi açık)
+## Durum: DÜZELTME YAZILDI (cihazda doğrulanacak); alarm sesi kısmı AÇIK
+- Semptom: "Alarm kurdum ama dalga sesi çıkmıyor veya uyku için istediğim ses çalmıyor." Ekran: alarm 15:40, saat 15:37.
+- HİP-4 (DOĞRULANDI, kodla): 3 dk sonraki alarmda uyku sesi tasarım kuralı gereği çalmaz (alarmdan ≥ 1 saat önce
+  bitmeli); ekran "bu gece çalmıyor" diyordu, Başlat yoktu → kişi arıza sanar. Düzeltme: "Yine de çal · N dk"
+  (alarmdan 5 dk önce susar).
+- HİP-1 (OLASI, cihazda doğrulanacak): uyku müziği dokunuştan SONRA saniyelerce hazırlanıp çalınıyordu; iOS
+  dokunuş dışı çalmayı reddedebilir ve kod sonucu yok sayıyordu. Düzeltme: `dalgaSleep` prepare() ekran açılınca,
+  start() hazırsa dokunuşla aynı çağrıda çalar; reddedilirse "Ses başlamadı · dokun, başlat" (resume()).
+  Eski Dalga uyku modu (ac5e143) da hiç cihazda doğrulanmamıştı.
+- HİP-2 (AÇIK): 15:40'ta alarmda Dalga sesi mi, varsayılan ses mi çaldı — sahibine soruldu (Bug 20 deneme 2 ile aynı soru).
+- Günlük: scratchpad/debug-alarm-ses.md
