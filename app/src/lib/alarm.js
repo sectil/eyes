@@ -231,7 +231,8 @@ export function bedtimeFor(next, now) {
 }
 
 // Alarma 1 saatten az kaldıysa "Yine de çal" süresi: alarmdan 5 dk önce susar (kişinin seçimi; kural dışı). 0: çalmaz
-export const LATE_GAP_MIN = 5
+// Sahibi yakın alarmla (2 dk sonra) deniyor: 5 dk pay sesi tamamen kapatıyordu (Bug 22). 1 dk: alarmla üst üste binmez.
+export const LATE_GAP_MIN = 1
 export function lateSleepMinutes(alarm, log, now) {
   if (!alarm || alarm.sleep === 'off') return 0
   const ring = nextRing(alarm, now)

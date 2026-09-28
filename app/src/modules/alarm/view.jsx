@@ -5,6 +5,7 @@ import AlarmMorning from '../../screens/AlarmMorning.jsx'
 import Dalga from '../../screens/Dalga.jsx'
 import { loadAlarm, loadAlarmLog, addAlarmEvent } from '../../lib/alarmLog.js'
 import { sleepMinutes, lateSleepMinutes, nextRing, lastRing, hhmm, minOfDay } from '../../lib/alarm.js'
+import { takeSleepSession } from '../../lib/sleepSession.js'
 
 // Uyku sesi: Dalga uyku ekranı, süre alarm kuralından (lib/alarm.js sleepMinutes)
 // Süre ekran açılınca bir kez hesaplanır (çalarken yeniden çizimde kaymasın)
@@ -14,7 +15,11 @@ function AlarmSleep({ ctx, back = 'home' }) {
     const alarm = loadAlarm()
     const ring = nextRing(alarm, now)
     const log = loadAlarmLog()
-    return { minutes: sleepMinutes(alarm, log, now) ?? 0, lateMinutes: lateSleepMinutes(alarm, log, now), auto: alarm?.sleep === 'auto', alarmLabel: ring ? hhmm(minOfDay(ring)) : null }
+    const alarmLabel = ring ? hhmm(minOfDay(ring)) : null
+    // Kurulumda "Kur" ile başlamış müzik varsa doğrudan uyku ekranı (lib/sleepSession.js)
+    const session = takeSleepSession()
+    if (session) return { minutes: session.minutes, lateMinutes: 0, auto: session.auto, alarmLabel, session }
+    return { minutes: sleepMinutes(alarm, log, now) ?? 0, lateMinutes: lateSleepMinutes(alarm, log, now), auto: alarm?.sleep === 'auto', alarmLabel }
   })
   return (
     <Dalga
@@ -53,6 +58,8 @@ export default {
     if (route === 'alarm-morning') return <Morning ctx={ctx} />
     // alarm-pro: Profil → Alarm'dan; bitince oraya döner
     const to = route === 'alarm-pro' ? 'profile' : 'home'
-    return <AlarmSetup onDone={() => ctx.go(to)} onBack={() => ctx.go(to)} />
+    // onDone('sleep'): "Kur"la uyku sesi de başladı → uyku ekranı (bitince aynı yere döner)
+    const done = (r) => ctx.go(r === 'sleep' ? (route === 'alarm-pro' ? 'alarm-sleep-pro' : 'alarm-sleep') : to)
+    return <AlarmSetup onDone={done} onBack={() => ctx.go(to)} />
   },
 }

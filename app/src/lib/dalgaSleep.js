@@ -115,6 +115,8 @@ export function createSleepPlayer() {
   return {
     get phase() { return phase },
     get diag() { return diag },
+    // Başka ekranda başlamış oturumu ekrana bağla (lib/sleepSession.js)
+    listen({ onTick, onEnd }) { cb = { onTick, onEnd } },
     prepare,
     // Başlat. Hazırsa mediaPlay dokunuşla aynı çağrıda (await'ten önce) yapılır. Döner: çaldı mı.
     async start({ mode = 'sakin', totalSec, onTick, onEnd }) {

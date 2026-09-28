@@ -569,3 +569,15 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   sağdan kesiliyordu (telefondaki yazı tipi tarayıcıdakinden geniş). `.hh-day` ızgarası: sayı sütunu yazının tamamı
   kadar (max-content), diyafram kalan yere (96–172 px). Ölçüm: 428/390/375/320 px'te içerik kesilmiyor, sayfa yana
   kaymıyor (320'deki 14 px taşma da kalktı).
+
+## Bug 22 (kök neden, 2026-09-28 18:03): sahibi "Kur"a basınca müziğin başlamasını bekliyordu
+- Ekran görüntüsü: kurulum ekranı 18:03, alarm 18:05, uyku sesi 5 dk; "Kurulu ama yine uyku sesi yok".
+- KÖK NEDEN (akış): "Kur" yalnız alarmı kuruyordu; müzik ayrı yoldan (Ana sayfa → satır → Uyku sesini başlat →
+  Başlat) açılıyordu. Ayrıca 2 dk sonraki alarmda kural müziği tamamen kapatıyordu (alarmdan 1 sa önce bitmeli;
+  "Yine de çal" payı 5 dk).
+- Hata (benim): dört tur boyunca ses çalma tekniğini düzelttim, kişinin neye dokunup ne beklediğini ekran
+  görüntüsünden çıkarmadım. KURAL: "çalışmıyor" raporunda önce kişinin dokunduğu düğmeyi ve beklediği sonucu yaz.
+- DÜZELTME: uyku sesi Evet ise kurulumda "Kur ve uyku sesini başlat" (müzik AYNI dokunuşta, alarm kurulmadan önce
+  başlar; kurulamazsa durur; `lib/sleepSession.js`), ardından uyku ekranı ona bağlanır. "Yalnız kur" ayrıca var.
+  Süre: kuraldaki süre, yetmezse alarmdan 1 dk önceye kadar (LATE_GAP_MIN 5 → 1). Tarayıcıda uçtan uca denendi:
+  dokunuşta çaldı, 1 dk sonra kısılıp sustu, uyku kaydı yazıldı.

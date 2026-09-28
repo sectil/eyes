@@ -2,8 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import { X, Play, Square } from 'lucide-react'
 import {
   setupDefaults, buildAlarm, hhmm, withSuffix, parseHhmm, daysLabel, latency, LATENCY_START, nextOccurrence, nextRing, ringLabel,
-  WEEK_ORDER, WEEKDAY_SHORT, WEEKDAY_LONG, SLEEP_CHOICES, SLEEP_OTHER,
+  WEEK_ORDER, WEEKDAY_SHORT, WEEKDAY_LONG, SLEEP_CHOICES, SLEEP_OTHER, sleepMinutes, lateSleepMinutes,
 } from '../lib/alarm.js'
+import { startSleepSession, stopSleepSession } from '../lib/sleepSession.js'
 import { loadAlarm, loadAlarmLog, saveAlarm, addAlarmEvent } from '../lib/alarmLog.js'
 import { dayKey, keyDay } from '../lib/habitLog.js'
 import { ALARM_SOUNDS, DEFAULT_SOUND, soundById } from '../lib/alarmSounds.js'
@@ -80,16 +81,25 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
     setPlaying(ok ? id : null)
   }
 
-  async function submit() {
+  // Bu gece uyku sesi kaç dk: kuraldaki süre (alarmdan 1 saat önce biter); yetmezse alarmdan 1 dk önceye kadar
+  const sleepFor = (cfg, at) => (sleepOn ? sleepMinutes(cfg, log, at) || lateSleepMinutes(cfg, log, at) : 0)
+  const tonight = sleepFor(buildAlarm({ time, days, sleep, sound, wake, kind: notify ? 'notify' : 'alarmkit' }, now), now)
+
+  // withSound: "Kur ve uyku sesini başlat". Müzik AYNI dokunuşta, alarm kurulmadan (beklemeden) önce başlar: iOS sesi
+  // yalnız dokunuşun içinde açar (Bug 22). Alarm kurulamazsa müzik durur.
+  async function submit(withSound = false) {
     if (!platform) return
+    const cfg = buildAlarm({ time, days, sleep, sound, wake, kind: notify ? 'notify' : 'alarmkit' }, new Date())
+    const m = withSound ? sleepFor(cfg, new Date()) : 0
+    const session = m > 0 ? startSleepSession({ minutes: m, auto: sleep === 'auto' }) : null
     setBusy(true)
     setErr(null)
     await stopPreview()
     setPlaying(null)
-    const cfg = buildAlarm({ time, days, sleep, sound, wake, kind: notify ? 'notify' : 'alarmkit' }, new Date())
     const r = await scheduleAlarm(cfg, platform)
     setBusy(false)
     if (!r.ok) {
+      if (session) stopSleepSession()
       setErr(
         r.reason === 'denied'
           ? notify ? 'Bildirim izni kapalı: Ayarlar → Nefona → Bildirimler.' : 'Alarm izni kapalı: Ayarlar → Nefona → Alarmlar.'
@@ -102,9 +112,9 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
     addAlarmEvent('set', {
       hour: cfg.hour, minute: cfg.minute, days: cfg.days, sound, sleep, wake, kind: cfg.kind,
       suggested: d.times.map(hhmm), picked: d.times.includes(time) && !otherTime ? 'suggest' : 'other',
-      daysChanged: days.join() !== d.days.join(), edit: Boolean(live), snooze: Boolean(r.snooze),
+      daysChanged: days.join() !== d.days.join(), edit: Boolean(live), snooze: Boolean(r.snooze), sleepNow: session ? m : 0,
     })
-    onDone?.()
+    onDone?.(session ? 'sleep' : undefined)
   }
 
   async function remove() {
@@ -225,9 +235,25 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
       {notify && <p className="al-warn">Bu telefonda gerçek alarm yok (iOS 26 gerekir). Bildirim olarak gelir; sessiz modda ses çıkmaz.</p>}
       {err && <p className="al-err" role="alert">{err}</p>}
       <div className="grow" />
-      <button type="button" className="btn" disabled={busy || !platform} onClick={submit}>
-        {notify ? `${withSuffix(time, 'loc')} hatırlat` : `Kur · ${hhmm(time)}`}
-      </button>
+      {sleepOn && (
+        <p className="al-q-sub al-now">
+          {tonight > 0 ? `Kurunca uyku sesi hemen başlar: ${tonight} dk, sonra yavaşça susar.` : 'Alarma çok az var; uyku sesi çalmaz.'}
+        </p>
+      )}
+      {sleepOn && tonight > 0 ? (
+        <>
+          <button type="button" className="btn" disabled={busy || !platform} onClick={() => submit(true)}>
+            {notify ? 'Hatırlat ve uyku sesini başlat' : 'Kur ve uyku sesini başlat'}
+          </button>
+          <button type="button" className="btn btn-secondary" disabled={busy || !platform} onClick={() => submit(false)}>
+            {notify ? 'Yalnız hatırlat' : `Yalnız kur · ${hhmm(time)}`}
+          </button>
+        </>
+      ) : (
+        <button type="button" className="btn" disabled={busy || !platform} onClick={() => submit(false)}>
+          {notify ? `${withSuffix(time, 'loc')} hatırlat` : `Kur · ${hhmm(time)}`}
+        </button>
+      )}
       {live && <button type="button" className="btn btn-ghost" disabled={busy} onClick={remove}>{notify ? 'Hatırlatmayı kaldır' : 'Alarmı kaldır'}</button>}
     </main>
   )

@@ -6,6 +6,7 @@ import { haptic } from '../lib/native.js'
 import { createDalgaEngine } from '../lib/dalgaAudio.js'
 import { createSleepPlayer } from '../lib/dalgaSleep.js'
 import { mediaProbe } from '../lib/audioUnmute.js'
+import { LATE_GAP_MIN } from '../lib/alarm.js'
 import { testUnlock } from '../lib/subscription.js'
 import AlarmSpikePanel from '../components/AlarmSpikePanel.jsx'
 import {
@@ -55,17 +56,19 @@ const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(
 // onSave(kayıt): sonra-puanı verilince; onExit(): çıkış
 // sleepPreset (alarm kartındaki "Uyku sesi"; lib/alarm.js sleepMinutes): { minutes, auto, alarmLabel } → doğrudan
 // uyku hazırlığı; minutes 0 ise alarma 1 saatten az kalmıştır, çalmaz. onSleepEnd({ planned, seconds, early, auto }):
-// uyku sesi bitince (alarm günlüğüne; kısa da olsa).
+// uyku sesi bitince (alarm günlüğüne; kısa da olsa). sleepPreset.session: alarm kurulumundaki "Kur" dokunuşunda
+// başlamış müzik (lib/sleepSession.js); ekran doğrudan uyku ekranı olarak açılır ve ona bağlanır.
 export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = null, onSleepEnd }) {
   const [opts, setOpts] = useState(() => loadDalgaOpts())
-  const [phase, setPhase] = useState(sleepPreset ? 'sleep-ready' : 'pick') // pick | before | value | play | after | result | sleep-ready | sleep
+  const session = sleepPreset?.session ?? null
+  const [phase, setPhase] = useState(session ? 'sleep' : sleepPreset ? 'sleep-ready' : 'pick') // pick | before | value | play | after | result | sleep-ready | sleep
   const [before, setBefore] = useState(null)
   const [after, setAfter] = useState(null)
   const [value, setValue] = useState(null)
   const [why, setWhy] = useState('')
   const [plan, setPlan] = useState(null)
   const [fact, setFact] = useState(null)
-  const [left, setLeft] = useState(0)
+  const [left, setLeft] = useState(() => (session ? session.minutes * 60 : 0))
   const [paused, setPaused] = useState(false)
   const [volume, setVolume] = useState(0.55)
   const [hintI, setHintI] = useState(0)
@@ -73,11 +76,11 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
   const [record, setRecord] = useState(null)
   const [error, setError] = useState(null)
   const [diag, setDiag] = useState({ state: 'none', rate: 0, level: 0 })
-  const [sleepState, setSleepState] = useState('idle') // idle | preparing | playing | blocked
+  const [sleepState, setSleepState] = useState(session ? 'preparing' : 'idle') // idle | preparing | playing | blocked
   const [sleepReady, setSleepReady] = useState(false) // alarm kartından: müzik önceden hazır mı
   const [lateGo, setLateGo] = useState(false) // alarma 1 saatten az: "Yine de çal" dendi
   const [showCtl, setShowCtl] = useState(false)
-  const sleepRef = useRef(null)
+  const sleepRef = useRef(session?.player ?? null)
   const sleepMode = opts.mode === 'sakin' && opts.sleep
   const engineRef = useRef(null)
   const wakeRef = useRef(null)
@@ -167,6 +170,20 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
     // player() aynı nesneyi döndürür
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, sleepMin])
+  // "Kur"la başlamış müziğe bağlan: süre sayacı, bitiş, çaldı mı
+  useEffect(() => {
+    if (!session) return undefined
+    const p = session.player
+    p.listen({ onTick: ({ left: l }) => setLeft(l), onEnd: () => endSleep(false) })
+    keepAwake(true)
+    let alive = true
+    session.run.then((ok) => alive && setSleepState(ok ? 'playing' : p.phase === 'blocked' ? 'blocked' : 'idle'))
+    return () => {
+      alive = false
+    }
+    // yalnız açılışta; endSleep güncel ref'leri okur
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session])
   async function startSleep() {
     const p = player()
     setShowCtl(false)
@@ -302,7 +319,7 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
         <p className="dg-sleep-sub">
           {late
             ? canLate
-              ? `Uyku sesi normalde alarmdan 1 saat önce biter. İstersen ${sleepPreset.lateMinutes} dk çalar, alarmdan 5 dk önce susar.`
+              ? `Uyku sesi normalde alarmdan 1 saat önce biter. İstersen ${sleepPreset.lateMinutes} dk çalar, alarmdan ${LATE_GAP_MIN} dk önce susar.`
               : 'Alarm çok yakın; uyku sesi çalmıyor.'
             : sleepPreset.auto ? 'Sana göre: süre sabah cevaplarınla ayarlanır.' : 'Telefon kilitlenince de çalar.'}
         </p>

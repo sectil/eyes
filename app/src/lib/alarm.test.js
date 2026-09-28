@@ -157,11 +157,12 @@ describe('uyku sesi süresi', () => {
     expect(sleepMinutes(a, [], at(2026, 9, 29, 5, 40))).toBe(20) // 80 dk kaldı → 20
     expect(sleepMinutes(a, [], at(2026, 9, 29, 6, 10))).toBe(0)
   })
-  it('"Yine de çal": alarmdan 5 dk önce susar; 5 dk\'dan az kaldıysa 0', () => {
+  it('"Yine de çal": alarmdan 1 dk önce susar; 2 dk\'dan az kaldıysa 0', () => {
     const a = alarmOf({ at: iso(2026, 9, 29, 7, 0) })
-    expect(lateSleepMinutes(a, [], at(2026, 9, 29, 6, 30))).toBe(25)
-    expect(lateSleepMinutes(a, [], at(2026, 9, 29, 6, 10))).toBe(30) // sana göre 30 < 45
-    expect(lateSleepMinutes(a, [], at(2026, 9, 29, 6, 56))).toBe(0)
+    expect(lateSleepMinutes(a, [], at(2026, 9, 29, 6, 30))).toBe(29)
+    expect(lateSleepMinutes(a, [], at(2026, 9, 29, 6, 10))).toBe(30) // sana göre 30 < 49
+    expect(lateSleepMinutes(a, [], at(2026, 9, 29, 6, 58))).toBe(1) // 2 dk kaldı → 1 dk
+    expect(lateSleepMinutes(a, [], at(2026, 9, 29, 6, 59))).toBe(0)
     expect(lateSleepMinutes({ ...a, sleep: 'off' }, [], at(2026, 9, 29, 6, 30))).toBe(0)
   })
 })
