@@ -105,6 +105,13 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
       üstte "Yarın sabah" kartı (19:00'dan sonra; test derlemesinde 12:00), alarm sayfası (saat, tekrar, ses listesi,
       uyku sesi), kuruldu durumu, sabah "Nefona'yı aç" → 1 dk nefes, iOS 26 öncesi ve izin yok durumları.
       ONAY BEKLİYOR + sahibine 5 soru (akşam eşiği, varsayılan 07:00, "bu akşam değil", sabah akışı, İyi oluş alanı).
+      v2 (sahibinin kararları, 2026-09-28): akşam eşiği 19:00 (test derlemesinde 14:00); kart "Alarm kurayım mı?"
+      [Evet]; kurulum üç soru, hepsi önceden cevaplı: saat (üç öneri, uyandığın saatlerden öğrenilir; ilk kez
+      07:00·08:00·09:00 + Başka), günler (yedi yuvarlak, öğrenilir; sahibi 6 gün), "Uykuya dalarken ses çalsın mı?"
+      (süre: Kendiliğinden [varsayılan] · 5 · 10 · 15 · Başka). "Kendiliğinden" ilk sürümde öğrenen zamanlayıcı
+      (ilk gece 15 dk VARSAYIM; sabah "Ses bittiğinde uyumuş muydun?" ile ±5 dk; 5–45 dk). Bütün seçimler ve sabah
+      cevapları analiz için kaydedilir (sahibi: "bu verileri analizde kullanacağız"). Açık: "Bu akşam değil", sabah
+      akışı, İyi oluş alanı, "Kendiliğinden" kelimesi.
       Nefesle kapanma ölçüm işi onaylandı (2026-09-28); tasarıma girmez, ayrı iş.
 - [ ] Onaydan ve deneme 2 sonucundan sonra kod.
 
