@@ -352,7 +352,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
         <StepCards
           cards={[
             { key: 'face', art: <FaceLightArt />, title: 'Telefonu göz hizasında tut', why: 'Yüzün iyi aydınlansın. Yaklaşık 20 saniye, bir kez.' },
-            { key: 'dot', art: <DotFollowArt />, title: 'İrisin ortasına bak, halka dolana kadar kal', why: 'Nokta beş yere gider. Başını hafifçe çevirebilirsin; asıl gözünle takip et. Kırpmak sorun değil.' },
+            { key: 'dot', art: <DotFollowArt />, title: 'Göz bebeğinin içindeki noktaya bak', why: 'Ekrandaki göz beş yere gider. Her seferinde göz bebeğinin ortasındaki küçük noktaya bak, halka dolana kadar kal. Tam o noktaya bakmak ayarı daha doğru yapar. Kırpmak sorun değil.' },
           ]}
           eyebrow="Göz takibi · sana göre ayar"
           finishLabel="Başla"

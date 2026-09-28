@@ -122,19 +122,21 @@ export function ShrinkTextArt() {
 }
 
 // Noktayı izle: dört kenarda nokta, yeşile dönen halka
+// Kalibrasyon hedefi: ekrandaki gibi küçük göz (iris, göz bebeği, ortasında altın nokta; CalIris) beş yere gider
 export function DotFollowArt() {
+  const path = '85 85;60 85;85 85;110 85;85 85;85 40;85 130'
   return (
     <svg viewBox="0 0 170 170">
       <rect x="45" y="18" width="80" height="134" rx="14" fill={panel} stroke="var(--border)" />
-      <circle r="7" fill={acc}>
-        <animate attributeName="cx" values="85;60;85;110;85;85;85" dur="6s" repeatCount="indefinite" />
-        <animate attributeName="cy" values="85;85;85;85;85;40;130" dur="6s" repeatCount="indefinite" />
-      </circle>
-      <circle r="13" fill="none" stroke="var(--ok)" strokeWidth="3">
-        <animate attributeName="cx" values="85;60;85;110;85;85;85" dur="6s" repeatCount="indefinite" />
-        <animate attributeName="cy" values="85;85;85;85;85;40;130" dur="6s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0;1;0;1;0;1;0" dur="6s" repeatCount="indefinite" />
-      </circle>
+      <g>
+        <animateTransform attributeName="transform" type="translate" values={path} dur="6s" repeatCount="indefinite" />
+        <circle r="10" fill={acc} />
+        <circle r="4.6" fill="#0b1219" />
+        <circle r="1.7" fill="var(--cal-gold, #b57300)" />
+        <circle r="14" fill="none" stroke="var(--ok)" strokeWidth="3">
+          <animate attributeName="opacity" values="0;1;0;1;0;1;0" dur="6s" repeatCount="indefinite" />
+        </circle>
+      </g>
     </svg>
   )
 }
