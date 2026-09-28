@@ -1,4 +1,7 @@
-# Bildirim planı (kanıta dayalı) — v2 PLAN ONAY BEKLİYOR
+# Bildirim planı (kanıta dayalı) — v2 UYGULANDI (8bccf79, 2026-09-27), CİHAZDA DENENMEDİ
+Durum için YAPILACAKLAR.md §0b esastır; bu başlık 2026-09-28'e kadar yanlışlıkla "onay bekliyor" diyordu.
+Sahibinin 3 sorusu: yürüyüş = uygulama kapalıyken de (HealthKit background); göz çalışması = uygulama bildirimi
+(.ics yerine); sessiz gün oranı %25 = kodda VARSAYIM, onay kaydı yok.
 
 ## Sahibinin kararları (2026-09-27)
 1. Günün tek bildirimi: **göz + kalkma molası** ("1 dakikalık mola? Kalk, pencereden uzağa bak.").

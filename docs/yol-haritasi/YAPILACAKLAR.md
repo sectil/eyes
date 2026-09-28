@@ -5,6 +5,8 @@ işaretlenir, yeni iş buraya eklenir. Hatalar `HATA_GUNLUGU.md`'ye yazılır.
 Kural: her özellik PubMed kaynaklı bilimsel dayanakla gelir (uygulamadaki kaynaklar listesine
 makalesi ve DOI'siyle girer); sağlık iddiası yok; KVKK açık rıza her veri amacı için ayrı.
 Son güncelleme: 2026-09-28.
+İşaretler (sahibinin kuralı, 2026-09-28): `[x]` = cihazda doğrulandı ve mükemmel; `[~]` = kodda bitti ama cihazda
+doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. Mükemmel olmayan hiçbir iş `[x]` olmaz.
 
 ## Şimdi (öncelik sırası)
 1. [ ] **TestFlight derlemesi** (`bash ~/Projects/eyes/app/scripts/testflight.sh`), içinde `fffa276`, `1a85b1c`, `fe06f26`,
@@ -54,16 +56,17 @@ Planı mükemmel yapmadan önce:
 - [ ] Dalga sesleri dosya mı, canlı üretim mi, bak.
 - [ ] "Belli saate pratik kurmak" (eğer–o zaman planı) kanıtı: PubMed'de doğrula.
 - [ ] "Ertelemeden en iyi saati öğrenme": dayanak ara; yoksa VARSAYIM diye işaretle.
-- [ ] Bildirim planı v2 (onay bekliyor, 3 soru cevapsız) ile tek "Hatırlatma ve alarm" planında birleştir.
+- [ ] Uygulanmış bildirim sistemi (v2, `8bccf79`, Hatırlatmalar ekranı; cihazda denenmedi) ile tek "Hatırlatma ve
+      alarm" planında birleştir. Açık: sessiz gün oranı %25 (kodda VARSAYIM; sahibinin onayı kayıtlı değil).
 - [ ] iOS 26 öncesi davranış (hatırlatmaya düşer, ekranda açıkça söylenir) ve ölçüm yükü (her sabah soru yok) tasarla.
 - [ ] Tasarım Artifact'i, sahibinin onayı, sonra kod.
 
  (sahibin yönü, 2026-09-28)
-- [x] **1. Veri merkezi (okuma kapısı):** `lib/dataHub.js`. Testler, oturumlar, istatistik çekirdeği (`progress.js`),
+- [~] **1. Veri merkezi (okuma kapısı):** `lib/dataHub.js`. Testler, oturumlar, istatistik çekirdeği (`progress.js`),
       profil cevapları (başlangıç ve 28. gün) ve mola/su günlüğü 7 alan altında. Canlı her modülün merkeze ulaştığı
       testle denetleniyor. Göz kırp süre kaydediyor. Göz kırp ve egzersiz setleri merkeze bağlandı. Ödeme ekranındaki
       iris haritası oturumları görüyor (Dikkat ve Farkındalık hep boş kalıyordu).
-- [x] **2. İris haritası ve Gelişim merkezden beslenir:** `dataHub.growthMap`. Harita Gelişim'in başında (7 satır,
+- [~] **2. İris haritası ve Gelişim merkezden beslenir:** `dataHub.growthMap`. Harita Gelişim'in başında (7 satır,
       28 günlük şerit) ve Ana sayfada (küçük harita + tek öneri); alan ayrıntısında düzen şeridi, kaynaklar, başlangıç
       soruları, önce→sonra etkisinin haftalık seyri; WHO-5 modülü (`modules/who5`, `screens/Who5.jsx`).
       - Tasarım: Artifact "Nefona Gelişim Haritası" (https://claude.ai/artifact/2RHScxNg7Cro1bXcDo2mvX), onaylandı.
@@ -82,18 +85,18 @@ Planı mükemmel yapmadan önce:
 - [ ] **4. Kişiye uyum merkezden okur:** oyun zorluğu, günün yolu (zayıf alana ağırlık), Nef'in önerileri.
 
 ## Ölçüm ilkesi: her modül kaydeder, gelişim görünür (ANA_BELGE §4; plan + onay gerekir)
-- [x] **İris haritası modül verisiyle yaşasın** (Gelişim ve Ana sayfa; adım 2). Kurulum/28. gün iris'i hâlâ sorulardan.
+- [~] **İris haritası modül verisiyle yaşasın** (Gelişim ve Ana sayfa; adım 2). Kurulum/28. gün iris'i hâlâ sorulardan.
       Önceki durum: 5 alan yalnız kurulumdaki ve 28. gündeki sorulardan, Dikkat ve Farkındalık yalnız dolu/boş dolardı.
       - Her alanın değeri kendi modüllerinden gelsin: Göz ← testler ve egzersizler; Sakinlik ← Nefes, Dalga, Gökyüzü;
         Kendine yaklaşım ← Yön; Beden ← adım, mola, su; İyi oluş ← WHO-5.
       - Harita Gelişim'in başında ve Ana sayfada görünsün.
       - Gelişim'in 7 kutucuğu (`lib/progress.js`) ile iris haritası (`lib/iris.js`) tek hesaba bağlansın.
       - Tasarım önce Artifact.
-- [x] **WHO-5 iyi oluş:** ekran, kayıt ve sonuç; 14 günde bir; Gelişim İyi oluş ayrıntısında "Yeniden yanıtla".
+- [~] **WHO-5 iyi oluş:** ekran, kayıt ve sonuç; 14 günde bir; Gelişim İyi oluş ayrıntısında "Yeniden yanıtla".
       Resmi Türkçe metin WHO belgesinden. Ticari kullanım lisansı hukukçuya soruldu (yukarıda).
-- [x] **Göz kırp** süre (`seconds`) kaydediyor (eski kayıtlarda 150 sn varsayımı sürer).
+- [~] **Göz kırp** süre (`seconds`) kaydediyor (eski kayıtlarda 150 sn varsayımı sürer).
 - [ ] Göz kırpta algılanan kırpma sayısı Gelişim'de zamanla görünsün.
-- [x] Önce→sonra etkisi (Nefes, Dalga, Gökyüzü, Yön-Dışarıdan bak) haftalara göre görünür (alan ayrıntısı, 6 hafta).
+- [~] Önce→sonra etkisi (Nefes, Dalga, Gökyüzü, Yön-Dışarıdan bak) haftalara göre görünür (alan ayrıntısı, 6 hafta).
 - [ ] **Zaman serisi:** Yılan, Çemberler (isabet, varış süresi) ve okuma testi için trend grafiği.
 - [ ] **Okuma testi** Göz alan kutucuğuna girsin.
 - [ ] **Mola ve su** günlüğü (`habit-log`) takvime girsin. (Gelişim haritasında Beden alanına giriyor.)
@@ -136,7 +139,7 @@ Planı mükemmel yapmadan önce:
 ### 0b. Bildirimler (docs/yol-haritasi/BILDIRIM_PLANI.md) — v2 kodu yazıldı, CİHAZDA DENENMEDİ
 - [x] Kararlar: ana bildirim göz + kalkma molası; odak (çalışma) oturumu; ölçme yalnız telefonda;
       yürüyüş, nefes, su da BU SÜRÜMDE ("8 hafta" kuralı kaynaksız çıkarımdı, kaldırıldı)
-- [x] v2 uygulaması (2026-09-27, commit yok): Mola ve Su ekranları, Hatırlatmalar ekranı (Bilgi → Hatırlatmalar),
+- [~] v2 uygulaması (2026-09-27, commit yok): Mola ve Su ekranları, Hatırlatmalar ekranı (Bilgi → Hatırlatmalar),
       7 günlük kayan plan (`lib/notifyPlan.js`, `notifyApply.js`), tek dokunma dinleyicisi (App), sessiz gün ölçümü +
       Gelişim kartı, çalışma oturumu + Ana sayfa şeridi, Ana sayfa izin kartı, seyreltme sorusu, rıza başına sürüm
       (health v2), kaynaklar (Klasnja 2019, Bell 2023, Galinsky 2007, Morris 2020, Singh 2024, Wilson 2015);

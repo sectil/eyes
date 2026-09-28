@@ -67,6 +67,10 @@ ve özgüven veriyor mu, yoksa sıkıyor mu? Ücretli kullanıcı en ufak hatada
   olarak ayrı yazıldı; sahibin sözü baştan beri buydu.
 
 **Süreç**
+- Mükemmel olmayan iş tamamlandı diye işaretlenmez (sahibinin kuralı, 2026-09-28). `[x]` yalnız cihazda doğrulanmış
+  ve eksiksiz iş içindir; kodda bitip cihazda görülmeyen `[~]` (tamamlandı sayılmaz). Görev listesi de böyle.
+- Bir işin durumunu söylemeden önce YAPILACAKLAR.md ve `git log` okunur; belge başlıkları eskiyebilir
+  (2026-09-28: BILDIRIM_PLANI başlığı "onay bekliyor" diyordu, oysa v2 uygulanmıştı).
 - Her değişiklik `app/src/lib/releases.js`'e bir sürüm notu maddesi ekler.
 - Her açık iş `yol-haritasi/YAPILACAKLAR.md`'ye yazılır.
 - Her hata `yol-haritasi/HATA_GUNLUGU.md`'ye işlenir.
