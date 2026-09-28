@@ -383,3 +383,20 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
 - [ ] Nef'e "Yön" serbest metni: ayrı açık rıza
 - [ ] i18n, kronotip, özel SMTP
 - [ ] Small Business Program başvurusu (isteğe bağlı)
+
+## Haftalık E testi yeniden tasarım (2026-09-28, sahibinin şikâyeti) — ONAY BEKLİYOR
+Sahibi: "bir sayfada gösterilmeli aşağı doğru gitmemeli; gözlük seçimi yapılmadan diğer aşamaya geçmiyor ama hiç belli
+değil; PubMed'e uygun, hesaplamada kusursuz; sesler ElevenLabs'tan."
+- İnceleme (45 ajan: kod/akış, hesap denetimi + benzetim, PubMed, 5 boyut × 2 tema ölçüm, geçmiş kararlar; hata
+  bulguları çürütme denemesinden geçti). Doğrulananlar: "Başla" gözlük seçilmeden sebepsiz kapalı (AcuityTest.jsx:452;
+  örtme kartı yine "Tamam, başlayabilirsin" diyor :555); kurulum 375×812'de 326–372 pt taşıyor; ham kapak/derinlik
+  satırları herkese görünüyor (:556-557); harf boyutu piksele yuvarlanıyor (optotype.js:30 Math.round; 0,1 → 0,155);
+  harf deneme içinde yeniden boyutlanıyor; sayılan harf 25–60 cm'de (:32-33); kamerasız kayıtlar seriye karışıyor; iki
+  göz serisinde kırmızı çıkamıyor; haftalık fiilen 20 harfte bitiyor; parlaklık denetlenmiyor; 2. gözde Geri/✕ biten
+  gözü siliyor; tek göz kaydı haftayı "tamam" sayıyor; kapak yolu yanlış gözü ayırt etmiyor (occlusion.js:49-51).
+- Tasarım Artifact'i "Nefona E Testi" (https://claude.ai/artifact/V2p6hrLEU8GJgXP6gaFq32): her göz için tek ekran,
+  üç satır (Gözlük · Örtme · Mesafe), düğme ilk eksiği yazar; 31 ekran/durum × 3 boyut × 2 tema ölçüldü: hepsi tek
+  ekrana sığıyor, yazı kırpılmıyor (uygulamanın kendi yazı tipleriyle).
+- Karar bekleyen 13 konu (S1–S13, öneriler Artifact'te); ElevenLabs sesli yönlendirme 10 cümle × 2 ses (S13).
+- Plan ayrıntısı: bu oturumun çalışma notu PLAN.md (bölüm 1–7: bulgular, hesap H1–H9, kanıt K1–K17, ekranlar E0–E10,
+  uygulama adımları, mutasyon testleri, cihaz listesi). Onaydan önce kod değişmez.
