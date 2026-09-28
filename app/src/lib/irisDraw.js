@@ -72,6 +72,7 @@ export function drawIris(cv, { size, filled = [], cur = -1, dark = true, frac = 
   // lifler
   const cols = [TEAL, PALE, BLUE, [120, 170, 255]]
   const k = S / 1024
+  const px = S / size // bir CSS pikseli (küçük haritada çizgiler kaybolmasın)
   for (let j = 0; j < fibers; j++) {
     const a = hash(j, 1) * TAU // tepeden saat yönü
     const sec = secOf(a)
@@ -128,16 +129,17 @@ export function drawIris(cv, { size, filled = [], cur = -1, dark = true, frac = 
   for (let i = 0; i < N; i++) {
     if (!on.has(i) || rf[i] >= R) continue
     const a0 = -Math.PI / 2 + (i - 0.5) * (TAU / N) + 0.02, a1 = a0 + TAU / N - 0.04
-    g.strokeStyle = dark ? 'rgba(150,232,240,0.55)' : 'rgba(10,80,90,0.45)'; g.lineWidth = 2.4 * k * 1.6
+    g.strokeStyle = dark ? 'rgba(150,232,240,0.55)' : 'rgba(10,80,90,0.45)'; g.lineWidth = Math.max(2.4 * k * 1.6, px)
     g.beginPath(); g.arc(0, 0, rf[i] - k, a0, a1); g.stroke()
   }
   // doğrulanmış değişim yayı: altın = iyileşiyor, turuncu = geriliyor
   for (let i = 0; i < N; i++) {
     const m = marks?.[i]
     if (m !== 'up' && m !== 'down') continue
-    const c = m === 'up' ? GOLD : ORANGE
+    // renkler styles.css --lens / --mark-down ile aynı (açık temada koyu zeminli değil, daha doygun ton)
+    const c = m === 'up' ? (dark ? GOLD : [245, 166, 35]) : (dark ? ORANGE : [234, 88, 12])
     const a0 = -Math.PI / 2 + (i - 0.5) * (TAU / N) + 0.07, a1 = a0 + TAU / N - 0.14
-    g.save(); g.strokeStyle = rgba(c, 0.95); g.lineWidth = 3.2 * k * 1.6 * (size > 150 ? 1 : 1.4); g.lineCap = 'round'; g.shadowColor = rgba(c, 0.7); g.shadowBlur = 10 * k
+    g.save(); g.strokeStyle = rgba(c, 0.95); g.lineWidth = Math.max(3.2 * k * 1.6, 2 * px); g.lineCap = 'round'; g.shadowColor = rgba(c, 0.7); g.shadowBlur = 10 * k
     g.beginPath(); g.arc(0, 0, R * 1.08, a0, a1); g.stroke(); g.restore()
   }
 }

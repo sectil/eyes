@@ -15,6 +15,7 @@ import { domainSummary, DOMAIN_LABEL } from './progress.js'
 import { registry, DOMAINS } from '../modules/registry.js'
 import { normalizeProfile } from './profile.js'
 import { dayKey } from './calendar.js'
+import { keyDay } from './habitLog.js'
 
 const DAY = 86400000
 
@@ -43,6 +44,9 @@ function answerSeries(profile) {
   })).filter((a) => a.series.length)
 }
 
+// bozuk kayıt (null, nesne değil) merkeze girmez
+const ok = (x) => x != null && typeof x === 'object'
+
 const within = (date, now, days) => {
   const t = new Date(date).getTime()
   return Number.isFinite(t) && t <= now && now - t < days * DAY
@@ -50,6 +54,8 @@ const within = (date, now, days) => {
 
 // Bütün veriyi 7 alan altında toplar. Saf fonksiyon: girdi aynıysa çıktı aynı.
 export function hub({ tests = [], sessions = [], profile = null, habits = [], now = new Date() } = {}) {
+  tests = tests.filter(ok)
+  sessions = sessions.filter(ok)
   const t = new Date(now).getTime()
   const core = domainSummary({ tests, sessions, now })
   const answers = answerSeries(profile)
@@ -97,10 +103,10 @@ function domainDays({ tests, sessions, profile, habits }) {
     if (days[d] && Number.isFinite(t)) days[d].add(dayAt(t))
   }
   for (const s of sessions) {
-    const d = domainOfSession(s)
+    const d = ok(s) ? domainOfSession(s) : null
     if (d) add(d, s.date)
   }
-  for (const t of tests) add(TEST_DOMAIN, t.date)
+  for (const t of tests) if (ok(t)) add(TEST_DOMAIN, t.date)
   for (const h of habits) if (HABIT_DOMAIN[h?.type]) add(HABIT_DOMAIN[h.type], h.at)
   const iris = normalizeProfile(profile ?? {}).iris ?? {}
   for (const snap of [iris.baseline, iris.recheck]) {
@@ -113,11 +119,16 @@ function domainDays({ tests, sessions, profile, habits }) {
 // Kayıtların başladığı gün (karşılaştırma penceresinin başı)
 export function firstDay({ tests = [], sessions = [], habits = [], profile = null } = {}) {
   const iris = normalizeProfile(profile ?? {}).iris ?? {}
-  const ts = [...tests.map((t) => t.date), ...sessions.map((s) => s.date), ...habits.map((h) => h.at), iris.baseline?.date]
-    .map((d) => new Date(d).getTime())
-    .filter(Number.isFinite)
-  return ts.length ? Math.min(...ts) : null
+  let min = Infinity
+  for (const d of [...tests.map((t) => t?.date), ...sessions.map((s) => s?.date), ...habits.map((h) => h?.at), iris.baseline?.date]) {
+    const x = new Date(d).getTime()
+    if (Number.isFinite(x) && x < min) min = x
+  }
+  return Number.isFinite(min) ? min : null
 }
+
+// Takvim günü farkı (saat değil): dün 23.00'te başlayan için bugün 07.00 "2. gün"dür
+export const calendarDays = (from, to) => keyDay(dayKey(new Date(to))) - keyDay(dayKey(new Date(from)))
 
 // Alanın doğrulanmış değişimi: göz uyarısı ya da gerileyen ölçü/etki önce (temkin), sonra iyileşme
 export function verifiedChange(dom) {
@@ -135,19 +146,27 @@ export function verifiedChange(dom) {
   return ups.some(Boolean) ? 'up' : null
 }
 
+const TEST_LABEL = { 'va-daily': 'Günlük görme testi', 'va-weekly': 'Haftalık görme testi', reading: 'Okuma testi' }
+
 // Harita: alan başına { days, frac, status, strip (28 gün, eskiden bugüne), sources } + pencere bilgisi
 export function growthMap({ tests = [], sessions = [], profile = null, habits = [], now = new Date(), window = 'recent' } = {}) {
+  tests = tests.filter(ok)
+  sessions = sessions.filter(ok)
   const t = new Date(now).getTime()
   const start = firstDay({ tests, sessions, habits, profile })
-  const sinceStart = start == null ? 0 : Math.floor((t - start) / DAY) + 1
+  const sinceStart = start == null ? 0 : calendarDays(start, t) + 1
   const from = window === 'first' && start != null ? new Date(new Date(start).setHours(0, 0, 0, 0)).getTime() : new Date(new Date(t).setHours(0, 0, 0, 0)).getTime() - (WINDOW_DAYS - 1) * DAY
   const keys = Array.from({ length: WINDOW_DAYS }, (_, i) => dayAt(from + i * DAY + DAY / 2))
   const all = domainDays({ tests, sessions, profile, habits })
   const h = window === 'recent' ? hub({ tests, sessions, profile, habits, now }) : null
+  // pencere gün anahtarlarıyla (yaz saati geçişinde saat kayması olmasın)
+  const keySet = new Set(keys)
   const inWin = (date) => {
     const x = new Date(date).getTime()
-    return Number.isFinite(x) && x >= from && x < from + WINDOW_DAYS * DAY
+    return Number.isFinite(x) && keySet.has(dayAt(x))
   }
+  // oturum → modül eşlemesi bir kez (alan döngüsünde 7 kez değil)
+  const winSessions = sessions.filter((s) => ok(s) && inWin(s.date)).map((s) => registry.forSession(s)).filter(Boolean)
   const domains = {}
   for (const d of DOMAINS) {
     const strip = keys.map((k) => all[d].has(k))
@@ -155,12 +174,8 @@ export function growthMap({ tests = [], sessions = [], profile = null, habits = 
     // Kaynaklar: penceredeki kayıtlar modül (ya da test/alışkanlık) başına
     const src = new Map()
     const bump = (key, label) => src.set(key, { label, n: (src.get(key)?.n ?? 0) + 1 })
-    for (const s of sessions) {
-      if (!inWin(s.date)) continue
-      const m = registry.forSession(s)
-      if (m?.progress?.domain === d) bump(m.id, m.title)
-    }
-    if (d === TEST_DOMAIN) for (const x of tests) if (inWin(x.date)) bump(`test:${x.type}`, x.type === 'reading' ? 'Okuma testi' : 'Görme testi')
+    for (const m of winSessions) if (m.progress?.domain === d) bump(m.id, m.title)
+    if (d === TEST_DOMAIN) for (const x of tests) if (ok(x) && inWin(x.date)) bump(`test:${x.type}`, TEST_LABEL[x.type] ?? 'Görme testi')
     for (const x of habits) if (HABIT_DOMAIN[x?.type] === d && inWin(x.at)) bump(`habit:${x.type}`, x.type === 'mola' ? 'Mola' : 'Su')
     domains[d] = {
       domain: d,
@@ -169,7 +184,7 @@ export function growthMap({ tests = [], sessions = [], profile = null, habits = 
       frac: days / WINDOW_DAYS,
       strip,
       status: h ? verifiedChange(h.domains[d]) : null,
-      sources: [...src.values()].sort((a, b) => b.n - a.n),
+      sources: [...src.entries()].map(([key, v]) => ({ key, ...v })).sort((a, b) => b.n - a.n),
       summary: h?.domains[d] ?? null,
     }
   }
@@ -177,7 +192,8 @@ export function growthMap({ tests = [], sessions = [], profile = null, habits = 
 }
 
 // En az düzenli alan (öneri için): pencerede en az günü olan; eşitlikte haritadaki sıra (Göz tepede)
-export function weakestDomain(map, order = ['eye', 'focus', 'awareness', 'calm', 'self', 'wellbeing', 'body']) {
+// İyi oluş varsayılan sırada yok: tek kaydı 14 günde bir WHO-5; pratikle dolmaz, vakti gelince ayrıca önerilir.
+export function weakestDomain(map, order = ['eye', 'focus', 'awareness', 'calm', 'self', 'body']) {
   let best = null
   for (const d of order) {
     const x = map?.domains?.[d]

@@ -6,20 +6,23 @@ import { who5Card, DOMAIN_LABEL } from '../lib/progress.js'
 import { loadHabits } from '../lib/habitLog.js'
 import { IRIS_ORDER } from '../lib/iris.js'
 import { registry } from '../modules/registry.js'
+import { dayKey } from '../lib/calendar.js'
 
 // Ana sayfa: küçük gelişim haritası (Artifact "Nefona Gelişim Haritası" ekran 3, onaylı). Haritaya dokununca Gelişim.
 // Tek düğme: WHO-5 zamanı geldiyse o; yoksa son 28 günde en az kaydı olan alanın bir modülü. Nef'in ana önerisi
 // (bugünün yolu) ayrı kalır; bu kart yalnız alanlar arasındaki dengeyi gösterir. Veri: lib/dataHub.js.
-// Alan → açılacak modül (o alanın en kısa, kamerasız başlangıcı)
-const DOMAIN_MODULE = { eye: 'blink', focus: 'quick-look', awareness: 'fark-ettin', calm: 'breath', self: 'yon', wellbeing: 'dalga', body: 'mola' }
+// Alan → açılacak modül (o alanın en kısa, kamerasız başlangıcı). Modülün kaydı o alana düşmeli (HomeMap.test.js).
+// İyi oluş yok: tek kaydı WHO-5 (14 günde bir); vakti gelince aşağıda ayrıca önerilir.
+export const DOMAIN_MODULE = { eye: 'blink', focus: 'quick-look', awareness: 'fark-ettin', calm: 'breath', self: 'yon', body: 'mola' }
 // WHO-5 ilk gün sorulmaz (kurulum zaten soru dolu)
 const WHO5_FROM_DAY = 2
 
 export default function HomeMap({ tests = [], sessions = [], profile = null, onStart }) {
   const now = new Date()
-  const habits = useMemo(() => loadHabits(), [sessions]) // eslint-disable-line react-hooks/exhaustive-deps
-  const map = useMemo(() => growthMap({ tests, sessions, profile, habits, now }), [tests, sessions, profile, habits]) // eslint-disable-line react-hooks/exhaustive-deps
-  const who5 = useMemo(() => who5Card(sessions, now), [sessions]) // eslint-disable-line react-hooks/exhaustive-deps
+  const today = dayKey(now) // gece yarısı geçince pencere kayar
+  const habits = useMemo(() => loadHabits(), [sessions, today]) // eslint-disable-line react-hooks/exhaustive-deps
+  const map = useMemo(() => growthMap({ tests, sessions, profile, habits, now }), [tests, sessions, profile, habits, today]) // eslint-disable-line react-hooks/exhaustive-deps
+  const who5 = useMemo(() => who5Card(sessions, now), [sessions, today]) // eslint-disable-line react-hooks/exhaustive-deps
   if (!map.sinceStart) return null
   const withData = IRIS_ORDER.filter((d) => map.domains[d].days > 0).length
   const ups = IRIS_ORDER.filter((d) => map.domains[d].status === 'up').map((d) => DOMAIN_LABEL[d])

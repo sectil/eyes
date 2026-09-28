@@ -283,3 +283,12 @@ describe('çember takibi oturumları', () => {
     expect(summary(acts, now).bestTrack).toBe(42)
   })
 })
+
+describe('isExerciseSession', () => {
+  it('oyun ve WHO-5 egzersiz günü sayılmaz', async () => {
+    const { isExerciseSession } = await import('./stats.js')
+    expect(isExerciseSession({ type: 'game' })).toBe(false)
+    expect(isExerciseSession({ type: 'who5' })).toBe(false)
+    expect(isExerciseSession({ type: 'blink' })).toBe(true)
+  })
+})

@@ -16,6 +16,7 @@ import Reminders from './screens/Reminders.jsx'
 import ConsentSheet from './components/ConsentSheet.jsx'
 import FirstReport from './screens/FirstReport.jsx'
 import { reportDay, REPORT_DAY } from './lib/progress.js'
+import { isExerciseSession } from './lib/stats.js'
 import Home from './screens/Home.jsx'
 import Onboarding from './screens/Onboarding.jsx'
 import IrisPlan from './screens/IrisPlan.jsx'
@@ -879,7 +880,7 @@ export default function App() {
   // Oyun oturumları (type 'game') egzersiz süresine ve takvimdeki çalışma günlerine sayılmaz
   // (Home.jsx'teki haftalık hedef/günlük süre ile tutarlı). Gelişim de oyunları gün/seri/hafta sayımına
   // katmaz; oyunları yalnızca listeler (lib/stats.js countsTowardGoal).
-  const exercise = sessions.filter((s) => s.type !== 'game')
+  const exercise = sessions.filter(isExerciseSession) // oyun ve WHO-5 hariç
 
   // --- Tam ekran akışlar (sekme çubuğu yok) ---
   const saveTests = (results) => {

@@ -31,6 +31,7 @@
   --iris-1: #11a9b8;
   --iris-2: #2f6bea;
   --lens: #f5a623;
+  --mark-down: #ea580c; /* Gelişim haritası 'geriliyor' yayı (canvas irisDraw ile aynı) */
   --lens-ink: #2a1600;
   --lens-soft: rgba(245, 166, 35, 0.16);
   --lens-text: #9a5b06;
@@ -69,6 +70,7 @@
     --iris-1: #19c2d1;
     --iris-2: #3e7bfa;
     --lens: #ffb13b;
+    --mark-down: #ff7a59;
     --lens-ink: #2a1600;
     --lens-soft: rgba(255, 177, 59, 0.15);
     --lens-text: #ffb13b;
@@ -106,6 +108,7 @@
   --iris-1: #19c2d1;
   --iris-2: #3e7bfa;
   --lens: #ffb13b;
+  --mark-down: #ff7a59;
   --lens-ink: #2a1600;
   --lens-soft: rgba(255, 177, 59, 0.15);
   --lens-text: #ffb13b;

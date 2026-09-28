@@ -1,7 +1,7 @@
 // Nef Göz Koçu — istemci (Bugün kartı). Sinyaller kural katmanında hesaplanır; sunucuya yalnızca
 // bu özet sayılar gider. Sunucu/model cevap vermezse kural tabanlı şablon metin gösterilir.
 import { pickSeries } from './vaSeries.js'
-import { activitiesFrom, countedActivities, summary } from './stats.js'
+import { activitiesFrom, countedActivities, summary, isExerciseSession } from './stats.js'
 import { sanitizeSignals } from './coachCore.js'
 import { registry } from '../modules/registry.js'
 import { normalizeProfile } from './profile.js'
@@ -33,7 +33,7 @@ export function buildSignals(tests = [], sessions = [], now = new Date(), weekly
   const tr = pickSeries(tests, now.toISOString()).trend
   const lastOf = (arr) => (arr.length ? Math.max(...arr.map((x) => new Date(x.date).getTime())) : null)
   const lastTest = lastOf(tests)
-  const ex = sessions.filter((x) => x.type !== 'game')
+  const ex = sessions.filter(isExerciseSession)
   const lastEx = lastOf(ex)
   const reading = tests.filter((t) => t.type === 'reading' && Number.isFinite(t.maxReadingSpeed)).at(-1)
   return sanitizeSignals({

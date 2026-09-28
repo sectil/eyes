@@ -2,11 +2,13 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { fmtSteps } from '../lib/health.js'
 import { ChevronRight, TriangleAlert, OctagonAlert, ArrowLeft } from 'lucide-react'
 import { domainSummary, DOMAIN_LABEL, effectWeeks } from '../lib/progress.js'
-import { growthMap, WINDOW_DAYS } from '../lib/dataHub.js'
+import { growthMap, calendarDays, WINDOW_DAYS } from '../lib/dataHub.js'
+import { dayKey } from '../lib/calendar.js'
 import { loadHabits } from '../lib/habitLog.js'
 import { IRIS_ORDER } from '../lib/iris.js'
 import { registry } from '../modules/registry.js'
 import { STRESS_NOW, SELF_AGREE } from '../lib/profile.js'
+import { who5Text } from '../lib/who5.js'
 import IrisMap from './IrisMap.jsx'
 import { decimalTr } from '../lib/stats.js'
 import { EYE_LABEL } from '../lib/vaSeries.js'
@@ -132,7 +134,7 @@ function EffectWeeks({ e, sessions }) {
   return (
     <>
       <Sparkline points={pts.map((p) => ({ date: p.date, value: p.value }))} format={(v) => signed(v)} height={100} ariaLabel={`${e.label}: haftalara göre ortalama fark`} />
-      <p className="muted small">Haftalara göre ortalama fark (son {pts.length} hafta, oturumu olan haftalar).</p>
+      <p className="muted small">Haftalara göre ortalama fark (son 6 haftada oturumu olan {pts.length} hafta).</p>
     </>
   )
 }
@@ -191,24 +193,41 @@ export default function ProgressOverview({ tests, sessions, profile = null, iden
   )
 }
 
-// Kutunun genişliği (harita çizimi piksel ister; ekran genişliğine göre)
+// Kutunun genişliği (harita çizimi piksel ister; ekran genişliğine göre) ve kutunun iki yanındaki boşluk
+// (etiketler ekran kenar boşluğuna taşabilir, ekran dışına taşamaz)
 function useBoxWidth(max = 340) {
   const ref = useRef(null)
-  const [w, setW] = useState(max)
+  const [w, setW] = useState({ box: max, side: 0 })
   useEffect(() => {
     const el = ref.current
     if (!el) return undefined
-    const on = () => setW(Math.min(max, Math.round(el.clientWidth || max)))
+    const on = () => {
+      const box = Math.min(max, Math.round(el.clientWidth || max))
+      const r = el.getBoundingClientRect?.()
+      const vw = globalThis.innerWidth || 0
+      // kutunun solundaki ve sağındaki boşluğun küçüğü (ekran kenarına 6 px kala)
+      const side = r && vw ? Math.max(0, Math.min(r.left, vw - r.right) - 6) : 0
+      setW((o) => (o.box === box && o.side === side ? o : { box, side }))
+    }
     on()
     if (typeof ResizeObserver !== 'function') return undefined
     const ro = new ResizeObserver(on)
     ro.observe(el)
     return () => ro.disconnect()
   }, [max])
-  return [ref, w]
+  return [ref, w.box, w.side]
 }
+// Etiketin yarı genişliği (en geniş: "Farkındalık"); dar ekranda iris küçülür, etiket ekranda kalır
+const LBL_HALF = 38
 
 const STATUS_WORD = { up: 'iyileşiyor', down: 'geriliyor' }
+// Ölçüsü olmayan satır: son başlangıç/28. gün cevabı varsa o, yoksa kayıtlı gün sayısı
+function rowLine(x, isRecent) {
+  const a = isRecent ? x.summary?.answers?.[0] : null
+  const p = a?.series?.at(-1)
+  if (p) return a.key === 'blinks' ? `İlk Bakış: 20 sn'de ${p.value} kırpma` : `${a.label}: ${ANSWER_TEXT[a.key]?.(p.value) ?? p.value}`
+  return x.days ? `${x.days} gün kayıt` : 'Henüz kayıt yok'
+}
 function Days28({ strip, label }) {
   return (
     <span className="gm-bar" role="img" aria-label={label}>
@@ -220,12 +239,17 @@ function Days28({ strip, label }) {
 export function GrowthMap({ tests, sessions, profile, tiles = {}, onOpen }) {
   const now = new Date()
   const habits = useMemo(() => loadHabits(), [sessions]) // eslint-disable-line react-hooks/exhaustive-deps
-  const recent = useMemo(() => growthMap({ tests, sessions, profile, habits, now }), [tests, sessions, profile, habits]) // eslint-disable-line react-hooks/exhaustive-deps
+  const today = dayKey(now) // gece yarısı geçince pencere kayar
+  const recent = useMemo(() => growthMap({ tests, sessions, profile, habits, now }), [tests, sessions, profile, habits, today]) // eslint-disable-line react-hooks/exhaustive-deps
   const first = useMemo(() => (recent.canCompare ? growthMap({ tests, sessions, profile, habits, now, window: 'first' }) : null), [recent]) // eslint-disable-line react-hooks/exhaustive-deps
   const [win, setWin] = useState('recent')
   const map = win === 'first' && first ? first : recent
-  const [ref, box] = useBoxWidth(340)
-  const size = Math.round(box * 0.64)
+  const isRecent = map === recent
+  const winLabel = isRecent ? `Son ${WINDOW_DAYS} günde` : `İlk ${WINDOW_DAYS} günde`
+  const [ref, box, side] = useBoxWidth(340)
+  const rx = Math.min(box * 0.43, box / 2 + side - LBL_HALF) // etiketlerin yatay yarıçapı
+  const ry = box * 0.43
+  const size = Math.round(Math.min(box * 0.64, 2 * (rx - LBL_HALF - 4)))
   const frac = IRIS_ORDER.map((d) => map.domains[d].frac)
   const marks = map === recent ? IRIS_ORDER.map((d) => recent.domains[d].status) : null
   const withData = IRIS_ORDER.filter((d) => recent.domains[d].days > 0).length
@@ -239,12 +263,12 @@ export function GrowthMap({ tests, sessions, profile, tiles = {}, onOpen }) {
       )}
       <div className="gm-iris" ref={ref} style={{ height: box }}>
         <IrisMap size={size} frac={frac} marks={marks} label={`Gelişim haritası: ${withData} alanda kayıt var`} />
-        <span className="gm-day" aria-hidden="true"><b>{recent.sinceStart || 1}</b><small>GÜN</small></span>
+        {recent.sinceStart > 0 && <span className="gm-day" aria-hidden="true"><b>{recent.sinceStart}</b><small>GÜN</small></span>}
         {IRIS_ORDER.map((d, i) => {
           const a = (i * Math.PI * 2) / IRIS_ORDER.length
           const st = map === recent ? recent.domains[d].status : null
           return (
-            <span key={d} className={`gm-lbl${st ? ` ${st}` : ''}`} style={{ left: `${50 + Math.sin(a) * 43}%`, top: `${50 - Math.cos(a) * 43}%` }}>
+            <span key={d} className={`gm-lbl${st ? ` ${st}` : ''}`} style={{ left: box / 2 + Math.sin(a) * rx, top: box / 2 - Math.cos(a) * ry }}>
               <b>{d === 'self' ? <>Kendine<br />yaklaşım</> : DOMAIN_LABEL[d]}</b>
               <small>{map.domains[d].days}/{WINDOW_DAYS}</small>
             </span>
@@ -258,16 +282,16 @@ export function GrowthMap({ tests, sessions, profile, tiles = {}, onOpen }) {
       </p>
       <div className="card gm-rows">
         {IRIS_ORDER.map((d) => {
-          const x = recent.domains[d]
-          const t = tiles[d]
-          const line = t ? `${t.value}${t.unit ? (t.unit.startsWith('/') ? t.unit : ` ${t.unit.trim()}`) : ''}${t.sub ? ` · ${t.sub}` : ''}` : x.days ? `${x.days} gün kayıt · henüz ölçü yok` : 'Henüz kayıt yok'
+          const x = map.domains[d]
+          const t = isRecent ? tiles[d] : null
+          const line = t ? `${t.value}${t.unit ? (t.unit.startsWith('/') ? t.unit : ` ${t.unit.trim()}`) : ''}${t.sub ? ` · ${t.sub}` : ''}` : rowLine(x, isRecent)
           return (
             <button key={d} type="button" className="gm-row" onClick={() => onOpen(d)}>
-              <span className="n">{DOMAIN_LABEL[d]}{x.status ? <span className={`gm-dot ${x.status}`} aria-label={STATUS_WORD[x.status]} /> : null}</span>
+              <span className="n">{DOMAIN_LABEL[d]}{isRecent && x.status ? <span className={`gm-dot ${x.status}`} role="img" aria-label={STATUS_WORD[x.status]} /> : null}</span>
               <span className="m">{line}</span>
               <span className="r">
                 {t?.status?.text ? <Pill s={t.status} /> : null}
-                <Days28 strip={x.strip} label={`Son ${WINDOW_DAYS} günde ${x.days} gün kayıt`} />
+                <Days28 strip={x.strip} label={`${winLabel} ${x.days} gün kayıt`} />
               </span>
             </button>
           )
@@ -285,10 +309,11 @@ const ANSWER_TEXT = {
   sleep: (v) => `${v} / 10`,
   activityDays: (v) => `${v} gün`,
 }
-const dayOf = (iso, start) => (start ? Math.floor((new Date(iso) - new Date(start)) / 86400000) + 1 : null)
+const dayOf = (iso, start) => (start ? calendarDays(start, iso) + 1 : null)
 function DomainRegularity({ domain, tests, sessions, profile }) {
   const habits = useMemo(() => loadHabits(), [sessions]) // eslint-disable-line react-hooks/exhaustive-deps
-  const map = useMemo(() => growthMap({ tests, sessions, profile, habits, now: new Date() }), [tests, sessions, profile, habits])
+  const today = dayKey(new Date())
+  const map = useMemo(() => growthMap({ tests, sessions, profile, habits, now: new Date() }), [tests, sessions, profile, habits, today])
   const x = map.domains[domain]
   const answers = x.summary?.answers ?? []
   const start = answers[0]?.series?.[0]?.date ?? null
@@ -300,10 +325,10 @@ function DomainRegularity({ domain, tests, sessions, profile }) {
         <span className="gm-strip" role="img" aria-label={`Son ${WINDOW_DAYS} günde ${x.days} gün kayıt`}>
           {x.strip.map((on, i) => <i key={i} className={`${on ? 'on' : ''}${i === x.strip.length - 1 ? ' today' : ''}`} />)}
         </span>
-        <p className="muted small">Her kare bir gün, en sağdaki bugün. Dolu kare: o gün bu alanda bir kaydın var.</p>
+        <p className="muted small">Her kare bir gün; soldan sağa, üst satırdan alta. Çerçeveli kare bugün. Dolu kare: o gün bu alanda bir kaydın var.</p>
         {x.sources.length > 0 && (
           <div className="gm-src" aria-label="Bu alanı besleyen kayıtlar">
-            {x.sources.map((s) => <div key={s.label}><span>{s.label}</span><em>{s.n} kayıt</em></div>)}
+            {x.sources.map((s) => <div key={s.key}><span>{s.label}</span><em>{s.n} kayıt</em></div>)}
           </div>
         )}
       </section>
@@ -368,7 +393,7 @@ export function DomainDetail({ domain, tests, sessions, profile = null, identity
           <span className="eyebrow">WHO-5 iyi oluş · 0–100 · 14 günde bir</span>
           {d.who5.n > 1 && <Sparkline points={d.who5.series.map((p) => ({ date: p.date, value: p.score }))} format={(v) => String(Math.round(v))} ariaLabel="WHO-5 eğilimi" />}
           {d.who5.n > 0 ? (
-            <p className="p2-msg"><Pill s={metricStatus(d.who5)} /> Son puan {d.who5.last}{d.who5.delta != null ? ` (${signed(d.who5.delta, 0)})` : ''}. 10 puan ve üstü değişim klinik olarak anlamlı sayılır.{d.who5.low ? ' 52 altı: düşük iyi oluş — tanı değil; sürerse bir uzmanla konuşmak iyi gelebilir.' : ''}</p>
+            <p className="p2-msg"><Pill s={metricStatus(d.who5)} /> Son puan {d.who5.last}{d.who5.delta != null ? ` (${signed(d.who5.delta, 0)})` : ''}. {who5Text().meaningful}{d.who5.low ? ` ${who5Text().low}` : ''}</p>
           ) : (
             <p className="p2-msg">5 soruluk iyi oluş ölçeği (WHO-5): son iki haftanı 1 dakikada değerlendir. 14 günde bir sorulur.</p>
           )}

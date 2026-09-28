@@ -7,7 +7,8 @@ makalesi ve DOI'siyle girer); sağlık iddiası yok; KVKK açık rıza her veri 
 Son güncelleme: 2026-09-28.
 
 ## Şimdi (öncelik sırası)
-1. [ ] **TestFlight derlemesi** (`bash ~/Projects/eyes/app/scripts/testflight.sh`), içinde `fffa276`, `1a85b1c`, `fe06f26`.
+1. [ ] **TestFlight derlemesi** (`bash ~/Projects/eyes/app/scripts/testflight.sh`), içinde `fffa276`, `1a85b1c`, `fe06f26`,
+   `ee417db` ve düzeltmeleri (Gelişim haritası, WHO-5).
 2. [ ] **Göz ayarı raporu:** göz ayarı yapılır, "Verileri paylaş" çıktısı gönderilir. Kontrol edilecekler:
    - `targets.*.scrX/scrY` dolu mu?
    - Model `scrX`/`scrY` seçmiş mi?
@@ -21,7 +22,19 @@ Son güncelleme: 2026-09-28.
    (packageClassList). Her biri TestFlight'ta bir kez denenir; biri çalışmıyorsa aynı yöntemle (kendi eklentisi ya da
    açık kayıt) çözülür.
 6. [ ] **Karar bekliyor:** "KANITLI" etiketi. Seçenekler: kaldır / "Araştırmalı" / olduğu gibi kalsın (sahibine soruldu).
-7. [ ] **Ölçüm ilkesi açıkları:** her modül istatistik kaydeder ve Gelişim'de görünür (ANA_BELGE §4). Taramada
+7. [ ] **Cihazda bak (Gelişim haritası, `ee417db` + düzeltmeleri):** Gelişim'in başındaki harita ve 7 satır;
+   "İlk 28 gün / Son 28 gün" (35. günden sonra); bir alana dokununca 28 günlük şerit; Ana sayfa harita kartı;
+   İyi oluş 5 soru (son soru "Kaydet"). İki temada.
+8. [ ] **Karar bekliyor (sahibine soruldu, 2026-09-28):**
+   - İyi oluş dilimi hep boşa yakın (tek kaydı 14 günde bir WHO-5 → en fazla 2/28). Seçenekler: (a) İyi oluş için
+     doluluk "WHO-5 zamanında cevaplandı mı" olsun (son 14 günde cevap varsa dolu); (b) Dalga "Motive" gibi iyi oluş
+     etkisi ölçen oturumlar da İyi oluş gününe sayılsın; (c) olduğu gibi kalsın.
+   - "Bugünün görevi" (notice) `countsTowardGoal: false` ama haftalık hedefte ve takvimde egzersiz günü sayılıyor
+     (önceden var). Sayılmasın mı?
+   - WHO-5 çok düşükse (ör. 28 altı) yalnız "bir sağlık uzmanıyla konuşmak iyi gelebilir" yazıyor. Kriz hattı ya da
+     yardım kaynağı eklensin mi? (Hukukçu ile birlikte.)
+   - WHO-5 ticari kullanım lisansı (hukukçu; aşağıda adım 2).
+9. [ ] **Ölçüm ilkesi açıkları:** her modül istatistik kaydeder ve Gelişim'de görünür (ANA_BELGE §4). Taramada
    bulunan eksikler aşağıda "Ölçüm ilkesi" bölümünde.
 
 ## Veri merkezi ve kendini geliştiren sistem (sahibin yönü, 2026-09-28)

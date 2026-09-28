@@ -3,7 +3,7 @@
 Debug sürecinin kaydı: her kontrol, hipotez, deneme ve sonuç. Kural (debug protokolü): bir şeyi ikinci kez kontrol
 etmeden önce burası okunur; aynı yöntem iki kez başarısızsa yöntem değişir. Oturumlar arasında kaybolmasın diye
 repoda durur (önce /home/claude/.debug-journal.md idi; 2026-09-28'de buraya taşındı). Yeni kayıt buraya eklenir.
-Hata numaraları: Bug 1–17. "Bug 12" iki kez kullanılmıştı; kalibrasyon olanı Bug 17 oldu.
+Hata numaraları: Bug 1–18. "Bug 12" iki kez kullanılmıştı; kalibrasyon olanı Bug 17 oldu.
 
 # Debug Journal
 ## Bug: Kalibrasyon x puanı 2.01 < minScore 2.5 → "tekrar dene"; kullanıcı nokta bazlı canlı onay (yeşil) istiyor
@@ -436,3 +436,51 @@ Hata numaraları: Bug 1–17. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
 #### DENEME-1 sonuç
 - readingBlinkCounter + 7 test: okurken 5/5, düz bakış 3/3, yavaş iniş/titreşim 0, titreyen kırpma 1, uzun kapatma sayılmaz, 60 Hz aynı.
 - FirstLook bağlandı; dev derlemede tanı satırı. Başarılı mı: SENTETİKTE EVET — cihazda doğrulanmadı (tanı satırından veri beklenecek).
+
+## Bug 18: Gelişim haritası (ee417db) "bitti" denip her durumu görülmeden gönderildi (2026-09-28)
+## Durum: DÜZELTİLDİ (ee417db'den sonraki commit)
+
+### Kök neden (süreç)
+- ee417db'de yalnız "dolu veri" durumu ekranda görüldü; yeni kullanıcı, boş veri, "İlk 28 gün", gerileme, etki
+  grafiği, WHO-5 son soru görülmeden "bitti" yazıldı. Kullanıcı sordu: "mükemmel mi?" Cevap: hayır.
+- Kural (ANA_BELGE §2'ye eklendi): bir ekranın her durumu (boş, 1. gün, dolu, iyileşme, gerileme, dar ekran) iki
+  temada görülmeden ve kod bağımsız gözle incelenmeden "bitti" denmez.
+
+### Bulgular ve düzeltmeler (ekran incelemesi + bağımsız kod incelemesi)
+1. Ana sayfa önerisi "İyi oluş → Dalga" her gün dönebilirdi: Dalga kaydı Sakinlik'e yazar, İyi oluş'u doldurmaz.
+   Düzeltme: İyi oluş en az düzenli alan önerisinden çıktı (WHO-5 vakti gelince ayrıca önerilir); öneri modülünün
+   kendi alanına yazdığı testle denetleniyor (HomeMap.test.js).
+2. WHO-5 kaydı Ana sayfa haftalık hedefinde, takvimde ve Nef'te egzersiz günü sayılıyordu (filtre yalnız 'game').
+   Düzeltme: `stats.isExerciseSession` (oyun ve WHO-5 hariç) üç yerde.
+   Ayrıca görüldü, DOKUNULMADI: "Bugünün görevi" (notice) de `countsTowardGoal: false` ama aynı filtreden geçip
+   sayılıyor; önceden var, davranış değişikliği → sahibine soruldu (YAPILACAKLAR).
+3. "GÜN" sayısı saat farkıyla hesaplanıyordu (dün 23.00 → bugün 07.00 "1. gün"). Düzeltme: takvim günü
+   (`dataHub.calendarDays`); alan ayrıntısındaki "N. gün" de.
+4. WHO-5 son soruda yanlış dokunuş anında kaydediliyordu (sonra 14 gün düzeltilemez). Düzeltme: son soru "Kaydet".
+5. WHO-5'te çift dokunuş sonraki soruyu da cevaplıyordu. Düzeltme: seçimden sonra 180 ms işaret, bu arada dokunuş
+   yok sayılır.
+6. "İlk 28 gün" seçilince harita değişiyor, satırlar "son 28 gün"de kalıyordu (Beden haritada 1/28, satırda
+   "Henüz kayıt yok"). Düzeltme: satırlar seçili pencereyi izler; durum (pill, nokta) yalnız "Son 28 gün"de.
+7. "geriliyor" rengi: açık temada harita yayı açık turuncu, lejant koyu kahve. Düzeltme: `--mark-down` tek jeton;
+   canvas aynı rengi kullanır.
+8. Boş veride ortada "1 GÜN" yazıyordu. Düzeltme: kayıt yoksa gün yazılmaz.
+9. Yeni kullanıcıda 7 satır "henüz ölçü yok" diyordu; başlangıç cevapları vardı. Düzeltme: ölçüsü olmayan satır
+   başlangıç cevabını gösterir ("Stres: Epey", "İlk Bakış: 20 sn'de 9 kırpma").
+10. İyi oluş ayrıntısı "klinik olarak anlamlı" ve farklı düşük puan cümlesi kullanıyordu; WHO-5 ekranı başka. Düzeltme:
+    tek kaynak `who5.js` (meaningful, low).
+11. Türkçe ek hatası: "İlk ölçümün 60'di" (60'tı olmalı). Düzeltme: "İlk ölçümün: 60."
+12. Kaynak listesinde günlük/haftalık test aynı adla iki satır, aynı React anahtarı. Düzeltme: ayrı ad, ayrı anahtar.
+13. Pencere sınırı yaz saati geçişinde bir saat kayıyordu. Düzeltme: pencere gün anahtarlarıyla.
+14. Küçük haritada durum yayı ~0,5 px (görünmez). Düzeltme: en az 2 CSS px.
+15. Bozuk kayıt (null) haritayı düşürüyordu. Düzeltme: merkez girişte eler.
+16. Erişilebilirlik: pencere düğmeleri 30 px (44'e çıktı); WHO-5'te yeni soru ekran okuyucuya okunmuyordu (odak soruya);
+    durum noktası role="img".
+17. Metin: "en sağdaki bugün" (şerit iki satır) → "Çerçeveli kare bugün"; etki grafiği "son N hafta" yanlış sayıyordu.
+18. Gece yarısı geçince açık ekranda pencere kaymıyordu (memo bağımlılığına gün eklendi).
+19. İris ayraç çizgileri kenardan taşıyordu (1.01R → 0.98R; önceden vardı).
+20. Ana sayfa kartında "14 gün oldu" sabit yazılmıştı → gerçek gün sayısı (ee417db içinde düzeltildi).
+21. İyi oluş satırında "68 /100" → "68/100" (ee417db içinde düzeltildi).
+
+### Karar bekleyen (tasarım): İyi oluş dilimi hep boşa yakın
+- Doluluk = son 28 günde kayıtlı gün; İyi oluş'un tek kaydı WHO-5 (14 günde bir) → en fazla 2/28. Düzenli cevaplayan
+  kişide de dilim boş görünür. Sahibine soruldu (YAPILACAKLAR "Şimdi").

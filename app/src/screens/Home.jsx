@@ -8,7 +8,7 @@ import { Sparkline } from '../components/ui.jsx'
 import { trendMessage } from '../lib/trend.js'
 import { activeDays, weekProgress, weekDayKeys, mondayIndex } from '../lib/calendar.js'
 import { snellen20 } from '../lib/optotype.js'
-import { activitiesFrom, countedActivities, summary } from '../lib/stats.js'
+import { activitiesFrom, countedActivities, summary, isExerciseSession } from '../lib/stats.js'
 import { buildPath, PATH } from '../lib/today.js'
 import { dayNumber } from '../lib/notice.js'
 import { eyeStatus, beginRest } from '../lib/eyeBudgetStore.js'
@@ -148,8 +148,8 @@ function FocusStrip({ focus, now, block = null, onStop }) {
 export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, healthSheetKind = 'health', onCoach, onStart, onAsk, onSaveProfile, reminderAsk = false, onReminders, focus = null, focusBlock = null, onStopFocus, trialNote = null, onTrialNote, thinAsk = null, onThin }) {
   const [permNote, setPermNote] = useState(false) // "Evet" dendi ama izin kapalı: ayar yolu (bir kez, bu ekranda)
   const now = new Date()
-  // Oyun oturumları (type 'game') egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
-  const exercise = sessions.filter((s) => s.type !== 'game')
+  // Oyun oturumları (type 'game') ve WHO-5 egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
+  const exercise = sessions.filter(isExerciseSession)
   const week = weekProgress(activeDays([...tests, ...exercise]), now, settings.reminder?.weeklyTarget)
   const streak = summary(countedActivities(activitiesFrom(tests, sessions)), now).streakDays
   // Öne çıkan göz serisi (lib/vaSeries.js): günlük test Build 24'ten beri yalnız sağ/sol göz

@@ -50,6 +50,10 @@ ve özgüven veriyor mu, yoksa sıkıyor mu? Ücretli kullanıcı en ufak hatada
 - Bütün dillere hazır: metin çizime gömülmez, uzun çeviriye ve sağdan sola yazıma uyar.
 - Önce tasarım (Artifact), onaydan sonra kod. Göndermeden önce ekran ekran yazılı öz eleştiri yapılır;
   "mükemmel değil" diyen tek madde kalırsa gönderilmez.
+- "Bitti" denmeden önce (Bug 18, 2026-09-28'de ihlal edildi): ekranın her durumu iki temada görülür — boş veri,
+  1. gün, dolu, iyileşme, gerileme, dar ekran (320 px), akışın her adımı; kod bağımsız bir gözle (ayrı inceleme)
+  taranır; bulgular HATA_GUNLUGU'na, kalanlar YAPILACAKLAR'a yazılır. Görülmeyen durum varsa "bitti" denmez,
+  "şu durumlara bakmadım" denir.
 - Sesler ElevenLabs'ten: kadın Neslihan (`wQ7dVQFxIqwokkwsMqqn`), erkek Hakan (`DwjDVVARfPVjBKepXK2c`),
   model `eleven_multilingual_v2`. Ses Profilim → Seslendirme'de bir kez seçilir; modüller sormaz.
   Ekrandaki cümle ile ses aynıdır.

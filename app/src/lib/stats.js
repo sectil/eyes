@@ -189,6 +189,8 @@ export function activitiesFrom(tests = [], sessions = []) {
 // seri, haftalık gün, aktif gün, aktivite/dakika toplamları ve takvim işaretleri bu listeden
 // hesaplanır; oyunlar yalnızca gün listesinde ve "Yılan rekoru"nda görünür.
 export const countsTowardGoal = (a) => a?.kind !== 'game'
+// Egzersiz süresi / haftalık hedef / takvim çalışma günü: oyun ve ölçüm anketi (WHO-5) sayılmaz
+export const isExerciseSession = (s) => s?.type !== 'game' && s?.type !== 'who5'
 export const countedActivities = (activities = []) => list(activities).filter(countsTowardGoal)
 
 // Aktivite sayısı → takvim yoğunluğu: 0 | 1 | 2 (2 ve üzeri)
