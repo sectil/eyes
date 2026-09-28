@@ -144,6 +144,19 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
         penceresinden sonra kart durumu yenilenmiyordu; üç metin. Karar sahibinde: alarm kartı Ana sayfanın tek kart
         yuvasının dışında (tasarımda en üstte ayrı kart), hatırlatma kartıyla aynı anda görünebilir.
         Bilinen: deneme paneli alarmındaki "Nefona'yı aç" da uyanma damgası yazar (yalnız test derlemesi; panel kalkınca biter).
+- Araştırma 2 (2026-09-28, PubMed; öneriler sahibine soruldu, karar bekliyor):
+  - Erteleme: gecelerin %55,6'sı ertelemeyle bitti, ortalama 2,4 kez / 10,8 dk (Robbins 2025, 3 milyon gece,
+    doi:10.1038/s41598-025-99563-y). Alışkın ertelemecilerde 30 dk erteleme bilişi bozmadı, ~6 dk uyku kaybı
+    (Sundelin 2023, n=31, doi:10.1111/jsr.14054). Bizim alarmda erteleme düğmesi YOK (iki düğme: Kapat, Nefona'yı aç).
+  - Düzen: uyku düzenliliği ölümü uyku süresinden daha güçlü öngördü (Windred 2024, 60 977 kişi, gözlemsel,
+    doi:10.1093/sleep/zsad253) → hafta sonu da aynı saat.
+  - Işık: gündüz parlak ışık düşük, gece ışığı yüksek ölüm riskiyle ilişkili (Windred 2024 PNAS, 88 905 kişi,
+    gözlemsel, doi:10.1073/pnas.2405924121) → sabah "perdeyi aç" seçeneği.
+  - Uyku müziği: öznel uyku kalitesi arttı (orta kesinlik; PSQI −2,79; çalışmalarda 25–60 dk/gece; Cochrane,
+    Jespersen 2022, doi:10.1002/14651858.CD010459.pub3). Bizim "Sana göre" 15 dk'dan başlıyor (çalışılandan kısa).
+  - Süre: yetişkine gecede en az 7 saat (AASM/SRS uzlaşısı, Watson 2015, doi:10.5665/sleep.4716) → "yatma saati" satırı.
+  - Yatmayı erteleme: sıkıntıyla ilişkili (Azeem 2026 meta, gözlemsel, doi:10.3389/fpsyg.2026.1767938); etkili
+    gösterilen müdahale yoğun BDT (Rasouli 2025, n=32) → basit hatırlatıcı için kanıt YOK.
 - [ ] **Cihazda bak (alarm):** (1) derleniyor mu (Xcode 26); (2) 14.00'ten sonra Ana sayfada kart; Evet → Kur;
       iOS alarm izni; (3) haftalık alarm seçilen günlerde çalıyor mu, tek seferlik bir kez; (4) Dalga sesi çalıyor mu,
       25 sn'de susuyor mu tekrar mı ediyor; (5) "Nefona'yı aç" uygulamayı açıp sabah kartını/ekranını getiriyor mu;
