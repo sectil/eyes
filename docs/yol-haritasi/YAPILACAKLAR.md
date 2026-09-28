@@ -1,9 +1,28 @@
 # Yapılacaklar (tek liste)
 
-Her oturumun başında bu dosya okunur; iş bitince işaretlenir, yeni iş buraya eklenir.
+Her oturumun başında önce `docs/ANA_BELGE.md` (amaç, kurallar, belge haritası), sonra bu dosya okunur; iş bitince
+işaretlenir, yeni iş buraya eklenir. Hatalar `HATA_GUNLUGU.md`'ye yazılır.
 Kural: her özellik PubMed kaynaklı bilimsel dayanakla gelir (uygulamadaki kaynaklar listesine
 makalesi ve DOI'siyle girer); sağlık iddiası yok; KVKK açık rıza her veri amacı için ayrı.
-Son güncelleme: 2026-09-27.
+Son güncelleme: 2026-09-28.
+
+## Şimdi (öncelik sırası)
+1. [ ] **TestFlight derlemesi** (`bash ~/Projects/eyes/app/scripts/testflight.sh`), içinde `fffa276`, `1a85b1c`, `fe06f26`.
+2. [ ] **Göz ayarı raporu:** göz ayarı yapılır, "Verileri paylaş" çıktısı gönderilir. Kontrol edilecekler:
+   - `targets.*.scrX/scrY` dolu mu?
+   - Model `scrX`/`scrY` seçmiş mi?
+   - `geom.x/y.ratio` (ölçülen / ekrandaki mesafe) kaç?
+   - `model.verify` her yönde ≥ 0,95 mi?
+   (Açık hatalar → "Ekrandaki bakış noktası")
+3. [ ] **Kendini iyileştirme:** birkaç egzersizden sonra yeniden göz ayarı ve rapor; `previousAdapt` alanına bakılır.
+4. [ ] **Yılan:** aşağı bakış hâlâ "sağ" okunuyor mu? Yeni ölçümle yeniden dene.
+5. [ ] **Diğer npm eklentileri Release'te çalışıyor mu?** Titreşim (Haptics), bildirim (LocalNotifications), satın alma
+   (Purchases), cihaz (Device). Apple girişi npm eklentisi TestFlight'ta "not implemented" vermişti; aynı kayıt yolu
+   (packageClassList). Her biri TestFlight'ta bir kez denenir; biri çalışmıyorsa aynı yöntemle (kendi eklentisi ya da
+   açık kayıt) çözülür.
+6. [ ] **Karar bekliyor:** "KANITLI" etiketi. Seçenekler: kaldır / "Araştırmalı" / olduğu gibi kalsın (sahibine soruldu).
+7. [ ] **Ölçüm ilkesi açıkları:** her modül istatistik kaydeder ve Gelişim'de görünür (ANA_BELGE §4). Taramada
+   bulunan eksikler aşağıda "Ölçüm ilkesi" bölümünde.
 
 ## Tasarım kuralları (sahibi, her ekran için geçerli)
 - Uygulamaya girdikten sonraki her ekran koyu VE açık temada kusursuz olur (giriş ekranı bilinçli olarak tek sahne: gece).
@@ -109,6 +128,8 @@ Son güncelleme: 2026-09-27.
 - [ ] Sandbox test hesabı örnek e-postayla açıldı (ornek.kisi+nefona1@gmail.com): gerçek adresle yenilenmeli
 
 ## Açık hatalar
+- [x] Apple ile giriş TestFlight'ta "UNIMPLEMENTED" (Bug 11): kendi eklentimiz AppleSignInPlugin.swift (b4dc6f3); cihazda
+      çalıştı (kullanıcı, 2026-09-28). Çıkmaz: npm eklentisini uygulama hedefinden import etmek (derlenmiyor).
 - [ ] Egzersiz sahnesi (Artifact "Nefona Egzersiz Sahnesi"): tarayıcıda sahte kamerayla denendi, CİHAZDA DENENMEDİ.
       Cihazda bak: kırpma ritmi sesi ("Kapat, hafifçe sık" / "Aç") kişinin gerçek kırpmasıyla çakışıyor mu; bakış noktası
       ve hedefe oturan altın halka; "Gözlerini kapat"ta kararan ekran; ElevenLabs seslerinin telefonda gerçekten çalması
@@ -117,7 +138,8 @@ Son güncelleme: 2026-09-27.
       (eksene özel orta) ve çıkmaz yerine "Temel ayarla devam" yazıldı; eski raporlarla (Build 8–38) ve sahte kamerayla
       denendi, CİHAZDA DENENMEDİ. Cihazda bak: kaç turda "Hazır"; paylaşılan raporda model.x.twoPoint var mı.
 - [ ] Ekrandaki bakış noktası (FaceDistancePlugin.swift screenHit, scrX/scrY mm) + 5 nokta kontrol + takipte dikey kilit:
-      Swift burada DERLENMEDİ, CİHAZDA DENENMEDİ. İlk derlemede paylaşılan raporda bak: targets.*.scrX/scrY dolu mu,
+      Mac'te derlendi ve cihazda çalıştı (kullanıcı, 2026-09-28: "göz takibi tamam"). RAPOR VERİSİ GELMEDİ.
+      Paylaşılan raporda bak: targets.*.scrX/scrY dolu mu,
       model.x/y.feature scrX/scrY mi, geom.x/y.ratio (ölçülen / ekrandaki mesafe), model.verify (her yön ≥ 0,95 hedef).
       Sonra: geom oranına göre fiziksel eşik, çalışırken yeniden ortalama eşiği (gaze.js RECENTER_MAX_FRAC), NOISE_FLOOR scr.
       Yılan'da aşağı bakışın "sağ" okunması bu ölçümle yeniden denenecek.
