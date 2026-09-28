@@ -633,6 +633,7 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
 - Kod: duraklama offScreen===true 1,5 sn; devam offScreen===false 400 ms (TrackGame.jsx). Okuyucu yalnız tur başında
   yeniden ortalanıyor ve en çok aralığın 0,35'i kadar kaymayı kabul ediyor (gaze.js). Tur içinde baş/telefon kayarsa
   ortaya bakış kenarın ≥ 1,3 katı okunur → duraklama ve çıkış yok. Göz "kapalı" sayılırsa offScreen null → yine çıkış yok.
+  (Bu 0,35 sınırı model okuyucusunda; kalibrasyonsuz eski okuyucuda sınır 4°, uzak nötr reddedilir.)
   Hangisi olduğu cihazda doğrulanmadı (test derlemesinde tanı satırı eklendi).
 - Düzeltme: duraklamada ortada göz bebeği (kalibrasyon orta noktası %50/%46) + ElevenLabs "Ortadaki göz bebeğinin
   içindeki noktaya bak" (önceden iOS'un kendi sesiyle "Ekrana bak"); kişi bakarken okuyucu yeniden ortalanır
@@ -641,3 +642,24 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   (tur ölçümsüz sürer; kamera kareleri artık ne sayar ne duraklatır — yoksa 1,5 sn sonra yine duruyordu).
 - Test: gazeCalib.test.js kayma senaryosu (eski sınırla takılı, yenisiyle içeride; mutasyonla doğrulandı), gaze.test.js
   eski okuyucu. Görsel: 428/375/320, iki tema.
+- Bağımsız inceleme (5c6102f): 1 engelleyici + 3 düzeltilmeli, hepsi düzeltildi:
+  (1) Başarılı kurtarmadan sonra TrackGame yeniden ortalamayı tekrar başlatıyordu ve oyuna taşıyordu; oyunda bir
+  düğüme 1,2 sn sabit bakış merkez sayılıp aynı yanlış "Ekrana bak" geri geliyordu (benzetimle gösterildi) →
+  okuyucuya sonuç (recentering.result) ve stopRecenter(); karar saf işlevde (track.js pausedAction, testli): kabul →
+  devam, asla yeniden başlatma; devam edince kurtarma durur. (2) Sabit bakıp kaçma (telefonun üstünden odaya) merkez
+  sayılıp oyun kişi bakmazken sürüyordu; eski okuyucuda sınır yoktu → kurtarma örneği yalnız odak uzak değilken ve
+  kameraya göre bakış kalibrasyondaki telefon penceresinin 1,5 katı içindeyken sayılır (VARSAYIM 1,5); sınır 3 → 2;
+  eski okuyucuda kenarın 2 katı. (3) Metin "Halka dolunca" iken hızlı dönüşte halka dolmadan sürüyordu → "Bakınca
+  kaldığın yerden devam ederiz." (4) Ses oturumu açılmıyordu (sessiz tuşunda duyulmayabilirdi) → unlockBreathSfx /
+  releaseBreathSfx. Küçükler: tanı satırı 10 Hz, ses paketi ekran açılınca çözülür, X örtünün üstünde (her an çıkış),
+  ölçmeden devamda kamera kapanır, arka plana geçişte sessiz duraklama, kurtarmada yüz kaybolunca pencere baştan.
+  Testler mutasyonla doğrulandı (telefon/odak denetimi kapatılınca 2, stopRecenter boşaltılınca 1 test düşer).
+- Yeniden inceleme: 2 düzeltilmeli, düzeltildi: (1) tek kötü kare kurtarma penceresini baştan başlatıyordu ve odak
+  denetimi önce geliyordu (cihazda telefona bakarken de "uzak" okunmuştu, Build 7) → telefon penceresi varsa yalnız o
+  (son 3 karenin ortancası), yoksa odak; 4 ardışık kötü karede pencere baştan, pencerede %25'ten çok kötü kare varsa
+  red; tanı satırı red nedenini yazar (odak uzak / telefon dışı). (2) Kamera hatasıyla ritme dönen tur kamerayı
+  kapatıyordu → hata hiç temizlenmiyor, sonraki turlar hep ölçümsüz kalıyordu → kamerayı yalnız "Ölçmeden devam et"
+  kapatır (ayrı bayrak, yeni turda açılır). Kabulde süzgeç sıfırlanır (sonraki kare yeni merkeze göre).
+- Bilinen sınır: telefon penceresi olmayan okuyucuda (kalibrasyonsuz ya da kamerasız model) aralığın 1,3–2 katı arası
+  sabit bakıp kaçma, odak "uzak" okunmuyorsa merkez sayılabilir; oyun bir süre bakmazken sürer, bakınca yeniden durup
+  ortalanır. TrackGame resume() → stopRecenter() çağrısı birim testle kapsanmıyor (okuyucu ve pausedAction testli).

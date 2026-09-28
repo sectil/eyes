@@ -50,8 +50,9 @@
   --accent: #19c2d1; --accent-soft: rgba(25, 194, 209, 0.14);
 }
 .cm-scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* z-index 4: duraklama örtüsünün (3) üstünde; X her durumda dokunulur (takılı kalınmaz) */
 .cm-top {
-  position: absolute; z-index: 2; left: 16px; right: 16px; top: calc(env(safe-area-inset-top) + 10px);
+  position: absolute; z-index: 4; left: 16px; right: 16px; top: calc(env(safe-area-inset-top) + 10px);
   display: flex; align-items: center; justify-content: space-between; pointer-events: none;
 }
 .cm-top > * { pointer-events: auto; }

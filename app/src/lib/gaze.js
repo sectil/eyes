@@ -281,6 +281,32 @@ function stepDir(cur, p, enterDeg, exitDeg) {
 // recenter(): baş/telefon konumu kayınca merkezi düzeltir (yalnızca küçük ve sabit kayma kabul).
 const RECENTER_MAX_FRAC = 0.35 // aralığın bu oranından büyük kayma = kişi hedefe bakıyor, kabul etme
 const RECENTER_STABLE_FRAC = 0.15
+// Kurtarma (recenter({maxFrac})) örneği yalnız kişi gerçekten telefona bakarken sayılır; kayan değerden bağımsız işaret:
+// kameraya göre bakışın (son 3 karenin ortancası) kalibrasyondaki "telefon" penceresi — baş kaymasından az etkilenir;
+// burada 1,5 kat gevşek (VARSAYIM, cihazda ayarlanacak). Pencere referansı yoksa yedek: gözün odak uzaklığı 'far'
+// (telefonun üstünden odaya). Odak tek başına güvenilmez: cihazda telefona bakarken de 'uzak' okundu (Build 7,
+// Routine.jsx) — bu yüzden pencere varken kullanılmaz.
+// Tek kötü kare pencereyi bozmaz: RECOVER_BAD_RUN ardışık kötü karede pencere baştan; pencerede kötü oranı
+// RECOVER_BAD_MAX'ı aşarsa pencere reddedilir. Döner: null (iyi) | 'window' | 'far' (neden; tanı satırı için).
+const RECOVER_PHONE_SLACK = 1.5
+const RECOVER_BAD_RUN = 4 // ~130 ms
+const RECOVER_BAD_MAX = 0.25
+function recoveryBad(f, camMed, phoneRef) {
+  if (camMed && phoneRef) {
+    const w = { x: PHONE_WIN_DEG.x * RECOVER_PHONE_SLACK, up: PHONE_WIN_DEG.up * RECOVER_PHONE_SLACK, down: PHONE_WIN_DEG.down * RECOVER_PHONE_SLACK }
+    return inPhoneWindow(camMed, phoneRef, w) ? null : 'window'
+  }
+  return focusZone(f) === 'far' ? 'far' : null
+}
+// Pencereye kötü kare yaz: true = pencere baştan başlatılmalı
+function markBad(cal, why) {
+  cal.bad = (cal.bad ?? 0) + 1
+  cal.badRun = (cal.badRun ?? 0) + 1
+  cal.why = why
+  return cal.badRun >= RECOVER_BAD_RUN
+}
+const clearWindow = (cal) => Object.assign(cal, { samples: [], start: null, bad: 0, badRun: 0 })
+const tooBad = (cal) => (cal.bad ?? 0) > RECOVER_BAD_MAX * (cal.samples.length + (cal.bad ?? 0))
 function createModelReader(model, opts) {
   const enterDeg = opts.enterDeg ?? GAZE_ENTER_DEG
   const exitDeg = opts.exitDeg ?? GAZE_EXIT_DEG
@@ -297,6 +323,7 @@ function createModelReader(model, opts) {
   let v = { x: 0, y: 0 }
   let phone = null
   let camHist = [] // son 3 kameraya-göre örnek (tek karelik sıçramaları eleyen ortanca)
+  let result = null // son yeniden ortalamanın sonucu: 'ok' | 'failed' | null (sürüyor ya da hiç)
   const out = (d, closed, tracked) => ({ dir: d, v: { x: v.x, y: v.y }, closed, calibrated: true, tracked, model: true, phone })
   const reset = () => {
     dir = null
@@ -305,7 +332,12 @@ function createModelReader(model, opts) {
     fx.reset()
     fy.reset()
   }
-  function collect(raw, ts) {
+  function collect(raw, ts, bad = null) {
+    if (bad) {
+      if (markBad(cal, bad)) clearWindow(cal)
+      return
+    }
+    cal.badRun = 0
     if (cal.start == null) cal.start = ts
     cal.last = ts
     cal.samples.push(raw)
@@ -319,18 +351,27 @@ function createModelReader(model, opts) {
     const stable = sx <= RECENTER_STABLE_FRAC * range.x && sy <= RECENTER_STABLE_FRAC * range.y
     const lim = cal.maxFrac ?? RECENTER_MAX_FRAC
     const near = Math.abs(nx) <= lim * range.x && Math.abs(ny) <= lim * range.y
-    if (stable && near) {
+    if (stable && near && !tooBad(cal)) {
       shift = { x: nx, y: ny }
       cal = null
+      result = 'ok'
+      // Süzgeç eski merkezin değerlerini taşımasın: sonraki kare doğrudan yeni merkeze göre
+      fx.reset()
+      fy.reset()
       return
     }
-    cal = cal.attempts + 1 >= CAL_MAX_ATTEMPTS ? null : { samples: [], start: null, attempts: cal.attempts + 1, maxFrac: cal.maxFrac }
+    if (cal.attempts + 1 >= CAL_MAX_ATTEMPTS) {
+      cal = null
+      result = 'failed'
+    } else cal = { samples: [], start: null, attempts: cal.attempts + 1, maxFrac: cal.maxFrac, why: cal.why }
   }
   return {
     push(f = {}) {
       const ts = Number.isFinite(f.ts) ? f.ts : Date.now()
       if ((f.face ?? f.tracked) === false) {
         reset()
+        // Kurtarmada yüz kaybolunca pencere baştan: kayıp öncesi örnekler sonrakilerle karışmasın
+        if (cal?.maxFrac != null) clearWindow(cal)
         return out(null, false, false)
       }
       // Kişisel kapanma eşiği (kalibrasyonda aşağı bakıştan): aşağı bakış "göz kapalı" sanılmasın
@@ -340,25 +381,34 @@ function createModelReader(model, opts) {
       }
       const r = applyModel(model, f, shift)
       if (!r || !Number.isFinite(r.x) || !Number.isFinite(r.y)) return out(null, false, false)
-      if (cal) collect(r.raw, ts)
       const cam = camAngles(f)
+      let camMed = null
       if (cam && model.phone) {
         camHist = [...camHist.slice(-2), cam]
-        phone = inPhoneWindow({ x: median(camHist.map((c) => c.x)), y: median(camHist.map((c) => c.y)) }, model.phone)
+        camMed = { x: median(camHist.map((c) => c.x)), y: median(camHist.map((c) => c.y)) }
+        phone = inPhoneWindow(camMed, model.phone)
       } else phone = null
+      if (cal) collect(r.raw, ts, cal.maxFrac == null ? null : recoveryBad(f, camMed, model.phone))
       v = { x: fx.push(r.x * GAZE_FULL_DEG, ts), y: fy.push(r.y * GAZE_FULL_DEG, ts) }
       dir = stepDir(dir, v, enterDeg, exitDeg)
       return out(dir, false, true)
     },
     // maxFrac: kabul edilen en büyük kayma (aralığın oranı). Kişiye ortada bir hedef gösterilirken (ör. duraklamada
     // "ortadaki göz bebeğine bak") büyük kayma da gerçektir: baş/telefon kaymıştır, kabul edilir.
+    // Kurtarmada örnek yalnız kişi telefona bakarken sayılır (recoveryBad; tek kötü kare pencereyi bozmaz).
     recenter({ maxFrac } = {}) {
       cal = { samples: [], start: null, attempts: 0, maxFrac }
+      result = null
       reset()
     },
-    // Yeniden ortalama sürüyor mu ve pencerenin ne kadarı doldu (0..1; kıpırdayınca 0'a döner)
+    // Kurtarma (maxFrac'lı) yeniden ortalamayı bitir: oyun sürerken bir hedefe sabit bakış merkez sanılmasın
+    stopRecenter() {
+      if (cal?.maxFrac != null) cal = null
+    },
+    // active: sürüyor mu; progress: geçerli pencerenin dolan oranı (0..1; pencere reddedilince ya da kişi telefondan
+    // başka yere bakınca 0'a döner); result: son sonuç 'ok' | 'failed' | null
     get recentering() {
-      return { active: Boolean(cal), progress: cal && cal.start != null ? Math.min(1, (cal.last - cal.start) / calibMs) : 0 }
+      return { active: Boolean(cal), progress: cal && cal.start != null ? Math.min(1, (cal.last - cal.start) / calibMs) : 0, result, why: cal?.why ?? null }
     },
     get shift() {
       return { x: shift.x, y: shift.y }
@@ -403,6 +453,7 @@ export function createGazeReader(opts = {}) {
   let v = { x: 0, y: 0 }
   let source = null // son açık gözlü karenin kaynağı: 'angle' | 'blend'
   let signBuf = []
+  let result = null // son yeniden ortalamanın sonucu: 'ok' | 'failed' | null
 
   const calibrated = () => Boolean(source ? neutral[source] : neutral.angle || neutral.blend)
 
@@ -428,22 +479,30 @@ export function createGazeReader(opts = {}) {
       const c = fitNeutral(pts)
       if (c.spread > stableTol) return { status: 'unstable' }
       const prev = neutral[key]
-      if (prev && Math.hypot(c.x - prev.x, c.y - prev.y) > maxShift) return { status: 'far', value: { x: c.x, y: c.y } }
+      if (prev && Math.hypot(c.x - prev.x, c.y - prev.y) > maxShift) return { status: 'far' }
       return { status: 'ok', value: { x: c.x, y: c.y } }
     }
-    const fits = { angle: fit('angle', angs, STABLE_DEG, RECENTER_MAX_DEG), blend: fit('blend', blends, STABLE_BLEND, RECENTER_MAX_BLEND) }
-    // force: kişiye ortada hedef gösteriliyor → uzak ama sabit nötr de gerçek kaymadır, kabul edilir
-    const r = cal.force && fits[primary].status === 'far' ? 'ok' : fits[primary].status
-    if (cal.force) for (const key of ['angle', 'blend']) if (fits[key].status === 'far') fits[key].status = 'ok'
-    if (r === 'ok' || r === 'far') {
+    // Kurtarma (maxFrac): ortada hedef gösteriliyor → kenarın maxFrac katına kadar kayma kabul (açı: kenar = GAZE_FULL_DEG,
+    // blendshape: kenar = SPAN_FLOOR); ötesi reddedilir ve yeniden denenir (eski nötr korunur)
+    const rec = cal.maxFrac != null
+    const fits = {
+      angle: fit('angle', angs, STABLE_DEG, rec ? cal.maxFrac * GAZE_FULL_DEG : RECENTER_MAX_DEG),
+      blend: fit('blend', blends, STABLE_BLEND, rec ? cal.maxFrac * SPAN_FLOOR : RECENTER_MAX_BLEND),
+    }
+    const r = rec && tooBad(cal) ? 'unstable' : fits[primary].status
+    if (r === 'ok' || (r === 'far' && !rec)) {
       // 'far': sabit ama önceki nötrden uzak → kişi büyük olasılıkla hedefe bakıyor; eski nötr kalır.
       // İkincil kaynak (işaret doğrulamada kullanılır) yalnızca birincil kabul edildiğinde güncellenir.
       if (r === 'ok') for (const key of ['angle', 'blend']) if (fits[key].status === 'ok') neutral[key] = fits[key].value
+      if (r === 'ok') result = 'ok'
       collecting = false
       return
     }
-    cal = { samples: [], start: null, attempts: cal.attempts + 1, force: cal.force }
-    if (neutral[primary] && cal.attempts >= CAL_MAX_ATTEMPTS) collecting = false
+    cal = { samples: [], start: null, attempts: cal.attempts + 1, maxFrac: cal.maxFrac, why: cal.why }
+    if (neutral[primary] && cal.attempts >= CAL_MAX_ATTEMPTS) {
+      collecting = false
+      result = 'failed'
+    }
   }
 
   // Açı işareti blendshape ile güçlü örneklerde sürekli ters çıkıyorsa X'i çevir ve hatırla.
@@ -493,7 +552,13 @@ export function createGazeReader(opts = {}) {
       }
       const ang = eyeAngles(f)
       const blend = gazeVector(f)
-      if (collecting) collect(ang, blend, ts)
+      // Kurtarmada odak uzaksa (telefonun üstünden odaya) örnek sayılmaz; ardışık kötü karede pencere baştan
+      if (collecting && cal.maxFrac != null && focusZone(f) === 'far') {
+        if (markBad(cal, 'far')) clearWindow(cal)
+      } else if (collecting) {
+        cal.badRun = 0
+        collect(ang, blend, ts)
+      }
       if (ang) checkSign(ang, blend)
 
       const src = ang ? 'angle' : 'blend'
@@ -525,14 +590,21 @@ export function createGazeReader(opts = {}) {
     },
     // Nötrü yeniden topla (ör. adım başında). Öğrenilen ölçek ve işaret korunur; yeni nötr
     // yalnızca sabit ve eskisine yakınsa kabul edilir.
-    // maxFrac verilirse (ortada hedef gösteriliyor) eskisinden uzak nötr de kabul edilir
+    // maxFrac verilirse (ortada hedef gösteriliyor) eskisinden uzak nötr de kenarın maxFrac katına kadar kabul edilir
     recenter({ maxFrac } = {}) {
-      cal = { samples: [], start: null, attempts: 0, force: maxFrac != null }
+      cal = { samples: [], start: null, attempts: 0, maxFrac }
+      result = null
       collecting = true
       resetMotion()
     },
+    // Kurtarma yeniden ortalamasını bitir (nötr hiç yoksa ilk toplama sürer)
+    stopRecenter() {
+      if (cal.maxFrac == null) return
+      cal = { samples: [], start: null, attempts: 0 }
+      if (neutral.angle || neutral.blend) collecting = false
+    },
     get recentering() {
-      return { active: collecting, progress: collecting && cal.start != null ? Math.min(1, (cal.last - cal.start) / calibMs) : 0 }
+      return { active: collecting, progress: collecting && cal.start != null ? Math.min(1, (cal.last - cal.start) / calibMs) : 0, result, why: cal.why ?? null }
     },
     get shift() {
       return null

@@ -210,6 +210,18 @@ export function offScreen(g) {
   return Math.abs(x) > OFF_SIDE || y > OFF_UP || y < -OFF_DOWN
 }
 
+// Duraklamada kare başına karar (TrackGame). rc: okuyucunun recentering'i; face: yüz görünüyor mu; off: offScreen;
+// backMs: ekrana dönüş kaç ms sürdü (null = dönmedi).
+//  'resume'  : kurtarma kabul edildi (halka doldu) ya da bakış kendiliğinden içeride ≥ resumeMs
+//  'restart' : kurtarma sürmüyor ve başarılı değil (reddedildi / hiç başlamadı) → yeniden başlat
+//  'wait'    : bekle. Başarılı kurtarmadan sonra ASLA yeniden başlatılmaz (oyunda bir hedefe sabit bakış merkez sanılır).
+export function pausedAction({ rc, face, off, backMs, resumeMs }) {
+  if (rc?.result === 'ok') return 'resume'
+  if (off === false && backMs != null && backMs >= resumeMs) return 'resume'
+  if (face && rc && !rc.active) return 'restart'
+  return 'wait'
+}
+
 // Rekor (cihazda) ve seçenekler
 export const TRACK_BEST_KEY = 'gozolcum:track-best'
 export const TRACK_OPTS_KEY = 'gozolcum:track-opts'

@@ -366,12 +366,34 @@ describe('createGazeReader', () => {
     const r = createGazeReader({ persistKey: null })
     const feed = feeder(r)
     feed({ x: 0, y: 0 }, 15)
-    r.recenter({ maxFrac: 3 })
+    r.recenter({ maxFrac: 2 })
     expect(r.recentering.active).toBe(true)
     const res = feed({ x: -15, y: 1 }, 15)
     expect(r.neutral).toMatchObject({ x: -15, y: 1 })
     expect(res.dir).toBe('center')
-    expect(r.recentering.active).toBe(false)
+    expect(r.recentering).toMatchObject({ active: false, result: 'ok' })
+  })
+
+  it('recenter({maxFrac}) sınırsız değil: kenarın 2 katından uzak nötr kabul edilmez (eski nötr kalır)', () => {
+    const r = createGazeReader({ persistKey: null })
+    const feed = feeder(r)
+    feed({ x: 0, y: 0 }, 15)
+    r.recenter({ maxFrac: 2 })
+    feed({ x: -60, y: 25 }, 80)
+    expect(r.neutral).toMatchObject({ x: 0, y: 0 })
+  })
+
+  it('recenter({maxFrac}): odak sürekli uzaksa kabul edilmez; ara sıra uzak okuması engellemez', () => {
+    const r = createGazeReader({ persistKey: null })
+    const feed = feeder(r)
+    feed({ x: 0, y: 0 }, 15)
+    r.recenter({ maxFrac: 2 })
+    let t = 5000
+    for (let i = 0; i < 40; i++) r.push({ ...frame({ x: -15, y: 1, ts: (t += 33) }), vergenceMm: null })
+    expect(r.neutral).toMatchObject({ x: 0, y: 0 })
+    expect(r.recentering.why).toBe('far')
+    for (let i = 0; i < 40; i++) r.push({ ...frame({ x: -15, y: 1, ts: (t += 33) }), ...(i % 10 === 5 ? { vergenceMm: null } : {}) })
+    expect(r.neutral).toMatchObject({ x: -15, y: 1 })
   })
 
   it('kararsız pencere (göz gezinirken) nötr olmaz', () => {

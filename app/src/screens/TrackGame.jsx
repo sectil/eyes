@@ -6,6 +6,7 @@ import { loadGazeModel } from '../lib/gazeCalib.js'
 import { haptic } from '../lib/native.js'
 import { unlockAudio } from '../lib/cue.js'
 import { sayPhrase, preloadPhrases } from '../lib/voiceCue.js'
+import { unlockBreathSfx, releaseBreathSfx } from '../lib/breathSfx.js'
 import { testUnlock } from '../lib/subscription.js'
 import CalIris from '../components/CalIris.jsx'
 import { playSfx, unlockSfx } from '../lib/sfx.js'
@@ -16,6 +17,7 @@ import {
   ROUND_MS,
   createFollowDetector,
   offScreen,
+  pausedAction,
   loadTrackBest,
   saveTrackBest,
   trackBestFromSessions,
@@ -55,9 +57,11 @@ const RESUME_MS = 400 // ekrana bu kadar dönünce devam
 const WARN_GAP_MS = 7000 // sesli uyarılar arası en az süre (cümle ~3 sn; üst üste binmesin)
 // Duraklamada ortada göz bebeği hedefi: kişi ona bakarken okuyucu yeniden ortalanır. Hedef gösterildiği için
 // büyük kayma da gerçektir (baş/telefon kaymış). Sınır, duraklatan eşikten (OFF_SIDE/OFF_UP = aralığın 1,3 katı,
-// OFF_DOWN 1,5 katı) BÜYÜK olmalı: yoksa yanlış duraklamaya yol açan kayma hiç kabul edilmez. Yalnız 0,8 sn sabit
-// bakış kabul edilir (gaze.js RECENTER_STABLE_FRAC).
-const RECOVER_MAX_FRAC = 3
+// OFF_DOWN 1,5 katı) BÜYÜK olmalı: yoksa yanlış duraklamaya yol açan kayma hiç kabul edilmez; 2 ile 1,5–2 kat arası
+// gerçek bakıp kaçmalar ayrıca telefon penceresi ve odak uzaklığıyla elenir (gaze.js recoverySampleOk).
+// Kabul: 0,8 sn'lik pencerede ortanca yayılım ≤ aralığın 0,15'i (gaze.js RECENTER_STABLE_FRAC).
+const RECOVER_MAX_FRAC = 2
+const DIAG_MS = 100 // tanı satırı en çok 10 Hz çizilir
 const STUCK_MS = 8000 // duraklama bu kadar sürerse "Ölçmeden devam et" çıkar: kişi asla takılı kalmaz
 const COUNT_MS = 800 // geri sayım adımı
 const RESUME_STEP_MS = 350 // duraklamadan dönüşte sonraki hareket
@@ -84,6 +88,7 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
   const [note, setNote] = useState('')
   const [rec, setRec] = useState({ progress: 0, stuck: false, diag: '' }) // duraklamada ortalama ilerlemesi
   const recRef = useRef(rec)
+  const [camOff, setCamOff] = useState(false) // "Ölçmeden devam et": bu turda kamera kapalı (yeni turda açılır)
   const showDiag = testUnlock()
   const phaseRef = useRef(phase)
   phaseRef.current = phase
@@ -158,30 +163,34 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
     }
     if (p === 'play' && a.since != null && m.ts - a.since >= AWAY_MS) pause(m.ts, m.face)
     else if (p === 'paused' && !round.current.rhythm) {
-      // Ortadaki hedefe bakarken yeniden ortala; kararsız pencere (kıpırdama, kırpma) reddedilince yeniden başla
+      // Ortadaki hedefe bakarken yeniden ortalanır (kabul = halka doldu → devam); reddedilince yeniden başlar
       const rc = reader.current.recentering
-      if (m.face && rc && !rc.active) reader.current.recenter({ maxFrac: RECOVER_MAX_FRAC })
+      const act = pausedAction({ rc, face: m.face, off, backMs: a.back == null ? null : m.ts - a.back, resumeMs: RESUME_MS })
+      if (act === 'resume') return resume()
+      if (act === 'restart') reader.current.recenter({ maxFrac: RECOVER_MAX_FRAC })
       if (a.since != null && m.ts - a.lastWarn >= WARN_GAP_MS) warn(m.ts, m.face)
-      if (off === false && a.back != null && m.ts - a.back >= RESUME_MS) resume()
-      else showRec(rc, g, off)
+      showRec(rc, g, off, m.ts)
     }
   }
 
   // Duraklama ekranındaki halka ve (test derlemesinde) tanı satırı; kare başına değil, değişince çizilir
-  function showRec(rc, g, off) {
+  function showRec(rc, g, off, ts) {
     const progress = rc?.active ? Math.round(rc.progress * 20) / 20 : 0
-    const sh = reader.current?.shift
-    const f = (n) => (Number.isFinite(n) ? n.toFixed(1) : '–')
-    const diag = showDiag
-      ? `bakış ${f(g?.v?.x)} / ${f(g?.v?.y)} · dışarı: ${off == null ? '?' : off ? 'evet' : 'hayır'} · kapalı: ${g?.closed ? 'evet' : 'hayır'}\nortalama ${rc?.active ? `%${Math.round(rc.progress * 100)}` : 'bitti'} · kayma ${sh ? `${f(sh.x)} / ${f(sh.y)}` : '–'}`
-      : ''
     const cur = recRef.current
+    let diag = cur.diag
+    if (showDiag && !(ts - (cur.diagTs ?? -Infinity) < DIAG_MS)) {
+      const sh = reader.current?.shift
+      const f = (n) => (Number.isFinite(n) ? n.toFixed(1) : '–')
+      diag = `bakış ${f(g?.v?.x)} / ${f(g?.v?.y)} · dışarı: ${off == null ? '?' : off ? 'evet' : 'hayır'} · kapalı: ${g?.closed ? 'evet' : 'hayır'}\nortalama ${rc?.active ? `%${Math.round(rc.progress * 100)}` : rc?.result ?? '–'}${rc?.why ? ` (red: ${rc.why === 'far' ? 'odak uzak' : 'telefon dışı'})` : ''} · kayma ${sh ? `${f(sh.x)} / ${f(sh.y)}` : '–'}`
+    }
     if (cur.progress === progress && cur.diag === diag) return
-    recRef.current = { ...cur, progress, diag }
+    recRef.current = { ...cur, progress, diag, diagTs: diag !== cur.diag ? ts : cur.diagTs }
     setRec(recRef.current)
   }
 
-  const cam = useFaceTracking({ enabled: trueDepth && (phase === 'countdown' || phase === 'play' || phase === 'paused'), trueDepth: true, onFrame })
+  // "Ölçmeden devam et"ten sonra bu turda kamera kapanır. Ayrı bayrak: kamera hatasıyla ritme dönen tur kamerayı
+  // kapatmaz (hata ancak kare gelince temizlenir; kapatsaydık sonraki turlar hep ölçümsüz kalırdı).
+  const cam = useFaceTracking({ enabled: trueDepth && !camOff && (phase === 'countdown' || phase === 'play' || phase === 'paused'), trueDepth: true, onFrame })
   const measuring = trueDepth && !cam.error
 
   // Kamera açılamadıysa tur ritim moduna döner (ölçüm yok)
@@ -205,7 +214,8 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
     if (!requestEyeRound()) return
     unlockAudio()
     unlockSfx()
-    preloadPhrases()
+    unlockBreathSfx() // sesli yönlendirme (ElevenLabs) sessiz tuşunda da duyulsun: ses oturumu 'playback'
+    setCamOff(false)
     reader.current = createGazeReader()
     det.current = createFollowDetector()
     lastStep.current = null
@@ -220,6 +230,12 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
     go('countdown')
     playSfx('count')
   }
+
+  // Seslendirmeyi ekran açılınca çöz (tur başında kamera açılırken değil); ekrandan çıkınca ses oturumu bırakılır
+  useEffect(() => {
+    preloadPhrases()
+    return () => releaseBreathSfx(0)
+  }, [])
 
   // Duraklama STUCK_MS sürerse ölçümsüz devam seçeneği (bakış okunamıyor: kaymış model, kapalı sayılan göz…)
   useEffect(() => {
@@ -331,7 +347,8 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, count, roundId])
 
-  function pause(ts, face = true) {
+  // quiet: uygulama arka plana geçerken duraklama (ses ve titreşim yok; dönünce ekranda hedef)
+  function pause(ts, face = true, quiet = false) {
     if (phaseRef.current !== 'play') return
     runClock(false)
     eng.current?.pause()
@@ -342,18 +359,21 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
     setRec(recRef.current)
     if (!round.current.rhythm) {
       reader.current?.recenter({ maxFrac: RECOVER_MAX_FRAC })
-      warn(ts, face)
-    } else playSfx('pause')
+      if (quiet) away.current.lastWarn = ts
+      else warn(ts, face)
+    } else if (!quiet) playSfx('pause')
   }
 
   // Takılı kalmasın: bakış hâlâ okunamıyorsa tur ölçümsüz (ritim) sürer; puan çıkmaz, hareketler devam eder
   function continueUnmeasured() {
     round.current.rhythm = true
+    setCamOff(true)
     eng.current?.setGaze('none')
     resume()
   }
 
   function resume() {
+    reader.current?.stopRecenter?.() // kurtarma oyuna taşmasın (bir düğüme sabit bakış merkez sanılır)
     away.current = { since: null, back: null, lastWarn: away.current.lastWarn }
     playSfx('resume')
     go('play')
@@ -366,6 +386,7 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
     const e = eng.current
     if (!e) return
     runClock(false)
+    releaseBreathSfx()
     det.current?.finish()
     const ls = lastStep.current
     if (ls && ls.step.res == null) e.settle(ls.step, ls.rec.followed === false ? 'miss' : 'u')
@@ -431,7 +452,7 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
   // Uygulama arka plana giderse duraklat
   useEffect(() => {
     const onVis = () => {
-      if (document.visibilityState !== 'visible' && phaseRef.current === 'play') pause(clock())
+      if (document.visibilityState !== 'visible' && phaseRef.current === 'play') pause(clock(), true, true)
     }
     document.addEventListener('visibilitychange', onVis)
     return () => document.removeEventListener('visibilitychange', onVis)
@@ -663,7 +684,7 @@ export default function TrackGame({ trueDepth = false, sessions = [], onExit, on
           <div className="cm-rec-target"><CalIris dark progress={cam.face ? rec.progress : 0} state={cam.face ? '' : 'off'} /></div>
           <div className="cm-rec-text">
             <h2>{cam.face ? 'Ortadaki göz bebeğine bak' : 'Yüzün görünmüyor'}</h2>
-            <p>{cam.face ? 'Halka dolunca kaldığın yerden devam ederiz.' : 'Telefonu yüzüne dönük tut.'}</p>
+            <p>{cam.face ? 'Bakınca kaldığın yerden devam ederiz.' : 'Telefonu yüzüne dönük tut.'}</p>
             {rec.stuck && <button type="button" className="btn" onClick={continueUnmeasured}><Play size={18} aria-hidden="true" /> Ölçmeden devam et</button>}
             <button type="button" className="cm-pbtn-line" onClick={symptom}>Başım dönüyor, bırak</button>
           </div>
