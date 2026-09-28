@@ -87,6 +87,18 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
       (`dalgaSleep.js`, sonunda kısılarak susar) ya da (b) nefesten uyuduğunu anlayıp. (b) için araştırılacak: telefon
       mikrofonuyla uyku/nefes algılamanın doğruluğu (PubMed), gece boyu mikrofon izni ve KVKK (ses telefondan çıkmaz),
       pil. Doğrulanmadan söz verilmez.
+      Araştırma (2026-09-28, PubMed): 9 telefon uygulaması 495 gecede PSG ile karşılaştırıldı; uyku verimi, uyanık
+      süre, hafif/derin uykuda anlamlı ilişki YOK, yalnız horlama süresi uydu (Kim 2021, doi:10.1007/s11325-021-02493-y).
+      Mikrofon sesinden uyku evresi (derin öğrenme): telefon kaydında %68 dönem uyumu (Hong 2022,
+      doi:10.2147/NSS.S361270). Tüketici cihazları uyku süresini fazla gösterir (Kolla 2016, doi:10.1586/17434440.2016.1171708).
+      Teknik engel: uyku sesi çalarken mikrofon önce bizim müziğimizi duyar (nefes maskelenir).
+      → Öneri: (a) zamanlayıcı ilk sürümde (var, güvenilir). (b) "nefesle kapanma" ayrı araştırma işi; ilk adım telefonda
+      ölçüm (sessiz aralıklarda kısa dinleme + hareketsizlik), kişinin kendi sabah bildirimiyle karşılaştırılır; sağlık
+      iddiası yok. Sahibinin kararı bekleniyor.
+- [ ] Normal alarm sesleri: iOS sistem sesleri (Radar, Chimes) AlarmKit'te adla çalınamıyor (forum 795417) → varsayılan
+      ses + kendi ürettiğimiz klasik tonlar (paket içinde).
+- [ ] Ses dosyası boyutu: 25 sn WAV ≈ 1,1 MB; 10+ ses için Mac'te `afconvert` ile küçültme (CAF/M4A). Hangi biçimin
+      alarmda çaldığı cihazda denenecek (forumda .caf/.mp3/.aiff beta 4'te çalmamıştı, sonra düzeldiği bildirildi).
 - Deneme sonucu 1 (14:05): AlarmKit kuruldu, izin verildi, iki alarm da 2 dk sonra çaldı; Library/Sounds'taki Dalga
   sesi çalmadı (Bug 20). Deneme 2: paketteki sesler (`f6cc639`) — sonuç bekleniyor.
 - [ ] Tasarım Artifact'i, sahibinin onayı, sonra kod.
