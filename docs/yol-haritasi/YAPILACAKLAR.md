@@ -121,8 +121,9 @@ Son güncelleme: 2026-09-27.
       model.x/y.feature scrX/scrY mi, geom.x/y.ratio (ölçülen / ekrandaki mesafe), model.verify (her yön ≥ 0,95 hedef).
       Sonra: geom oranına göre fiziksel eşik, çalışırken yeniden ortalama eşiği (gaze.js RECENTER_MAX_FRAC), NOISE_FLOOR scr.
       Yılan'da aşağı bakışın "sağ" okunması bu ölçümle yeniden denenecek.
-- [ ] Sonraki aşama (onay bekliyor): egzersizdeki "Sağa bak / Sola bak" adımlarından kalibrasyonu sessizce iyileştirme;
-      kullanıcı ikinci kez ayar yapmak zorunda kalmaz.
+- [ ] Kendini iyileştiren göz modeli (lib/gazeAdapt.js, Routine.jsx learnFromStep): yazıldı, testli (birim + ekran akışı),
+      CİHAZDA DENENMEDİ. Cihazda bak: birkaç egzersizden sonra yeniden kalibrasyonun raporunda previousAdapt (n, base → x/y
+      farkı); egzersizde "Sağa bak" adımının daha hızlı tamamlanıp tamamlanmadığı. Eşikler (ADAPT_*) cihaz verisiyle ayarlanacak.
 - [ ] Yılan (gözle): aşağı bakış "sağ" okunuyor (eksen karışması). Kalibrasyon verisi gerek; "orta"ya bağlı kilit
       denendi, geri alındı (c48eca6). Kullanıcıdan: geri almadan sonra gözle yön alma çalışıyor mu?
 - [ ] "Aboneliği yönet" bağlantısının iPhone'da App Store abonelik sayfasını açtığı doğrulanmadı

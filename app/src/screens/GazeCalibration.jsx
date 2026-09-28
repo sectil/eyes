@@ -4,7 +4,7 @@ import SoundToggle from '../components/SoundToggle.jsx'
 import StepCards from '../components/StepCards.jsx'
 import { DotFollowArt, FaceLightArt } from '../components/howtoArt.jsx'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
-import { axisCenterKey, calibReport, fitModel, fitWindowsAxis, roughModel, windowStable, saveGazeModel, headRef, headTurned, TARGETS, DOWN_CLOSE_MAX, HEAD_TURN_DEG } from '../lib/gazeCalib.js'
+import { axisCenterKey, calibReport, fitModel, fitWindowsAxis, roughModel, windowStable, saveGazeModel, loadGazeModel, headRef, headTurned, TARGETS, DOWN_CLOSE_MAX, HEAD_TURN_DEG } from '../lib/gazeCalib.js'
 import { shareText } from '../lib/share.js'
 import { createGazeReader, eyeClosure, BLINK_CLOSE, GAZE_FULL_DEG } from '../lib/gaze.js'
 import { haptic } from '../lib/native.js'
@@ -92,6 +92,8 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   const running = phase === 'run'
   const previewReader = useRef(null)
   const verify = useRef(null) // { model, reader, pos, start, lastTs, n, hits, results }
+  // Önceki modelin egzersizlerde ne kadar öğrendiği (lib/gazeAdapt.js); yeni kalibrasyon bunu sıfırlar, rapora girer
+  const prevAdapt = useRef(null)
   const holdTimer = useRef(null)
   const sayTimer = useRef(null)
   const [trail, setTrail] = useState(null) // { from, to, key }: noktanın geldiği yön (0,45 sn)
@@ -242,6 +244,8 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
   const cam = useFaceTracking({ enabled: phase !== 'intro', trueDepth: true, onFrame })
 
   function start() {
+    const prev = loadGazeModel()
+    prevAdapt.current = prev?.adapt && prev.base ? { n: prev.adapt.n, at: prev.adapt.at, obs: prev.adapt.obs.length, base: prev.base, x: { c: prev.x.c, neg: prev.x.neg, pos: prev.x.pos }, y: { c: prev.y.c, neg: prev.y.neg, pos: prev.y.pos } } : null
     unlockAudio()
     unlockBreathSfx() // ses oturumu 'playback': sessiz tuşunda da duyulur
     clearTimeout(holdTimer.current)
@@ -325,7 +329,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
       model = { ...model, verify: results, ...(worst < VERIFY_MIN ? { rough: true } : {}) }
     }
     setResult(model)
-    setReport({ ...calibReport(win.current, model, { w: globalThis.innerWidth || null, h: globalThis.innerHeight || null }), headRejected: head.current.rejected, retry: { ...step.current.retry } })
+    setReport({ ...calibReport(win.current, model, { w: globalThis.innerWidth || null, h: globalThis.innerHeight || null }), headRejected: head.current.rejected, retry: { ...step.current.retry }, previousAdapt: prevAdapt.current })
     setPhase('result')
     if (model.ok) {
       saveGazeModel(model)

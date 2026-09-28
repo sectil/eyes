@@ -355,6 +355,13 @@ function createModelReader(model, opts) {
     get neutral() {
       return { x: 0, y: 0, source: 'model' }
     },
+    // Okuyucunun o anki merkezi (ham birimde: model merkezi + yeniden ortalama kayması; lib/gazeAdapt.js)
+    get center() {
+      return { x: model.x.c + shift.x, y: model.y.c + shift.y }
+    },
+    get model() {
+      return model
+    },
     get flipX() {
       return 1
     },

@@ -446,9 +446,11 @@ export function loadGazeModel() {
   }
 }
 
-export function saveGazeModel(model) {
+// keepDate: kendini iyileştirme güncellemesi kalibrasyon tarihini değiştirmez (lib/gazeAdapt.js)
+export function saveGazeModel(model, { keepDate = false } = {}) {
   try {
-    globalThis.localStorage?.setItem(GAZE_MODEL_KEY, JSON.stringify({ ...model, date: new Date().toISOString() }))
+    const date = keepDate && model.date ? model.date : new Date().toISOString()
+    globalThis.localStorage?.setItem(GAZE_MODEL_KEY, JSON.stringify({ ...model, date }))
   } catch {
     // depolama yok → yalnızca bu oturum
   }

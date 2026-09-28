@@ -7,6 +7,7 @@ export const RELEASES = [
     id: '2026-09-28',
     title: '28 Eylül güncellemesi',
     items: [
+      { kind: 'new', text: 'Göz takibi kullandıkça kendini iyileştirir: egzersizdeki "Sağa bak", "Sola bak", "Yukarı bak", "Aşağı bak" adımlarında gözünün gerçekte nereye gittiği öğrenilir ve ayar sessizce sana oturur. Yeniden göz ayarı yapmana gerek kalmaz; tutarsız ölçümler (başka yere bakma, kırpma) sayılmaz.' },
       { kind: 'change', text: 'Göz ayarında yönlendirme daha net: "Ortadaki göz bebeğinin içindeki noktaya bak." Ekrandaki gözün tam ortasındaki noktaya bakınca ayar daha doğru olur; sesli yönlendirmeler de buna göre yenilendi.' },
       { kind: 'fix', text: 'Göz takibi bakışını artık telefonun ekranına göre ölçüyor. Önceden yerçekimine göre ölçülüyordu: telefon yana yatınca ya da başın kayınca yönler karışabiliyordu. Yeni ölçüm için göz ayarı bir kez yeniden istenir.' },
       { kind: 'new', text: 'Göz ayarının sonunda beş noktalık kısa kontrol: her yön gerçekten doğru okunuyor mu ölçülür; zayıf kalan yön varsa söylenir.' },

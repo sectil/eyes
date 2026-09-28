@@ -25,6 +25,8 @@ import {
   GAZE_FULL_DEG,
 } from '../lib/gaze.js'
 import { haptic } from '../lib/native.js'
+import { createObsCollector, adaptModel } from '../lib/gazeAdapt.js'
+import { loadGazeModel, saveGazeModel } from '../lib/gazeCalib.js'
 import '../styles/exercise.css'
 import '../styles/breath.css'
 import SoundToggle from '../components/SoundToggle.jsx'
@@ -113,6 +115,7 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
   const faceTs = useRef(-Infinity) // son yüz karesi; hiç görülmediyse "yok"
   const trackers = useRef(null)
   const reader = useRef(null)
+  const obsCol = useRef(null) // { idx, col }: bakış adımında kendini iyileştirme gözlemi (lib/gazeAdapt.js)
   const lastUi = useRef(0)
   const pulseValue = useRef(0)
   const pulseLost = useRef(false)
@@ -178,6 +181,13 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
       // Taban yokken sabit eşiğin "kapalı" durumu açık gözde takılı kalabilir → ham kapanmaya bak.
       ok = t.blinkTuned ? t.blink.closed : !open
     } else if (kind === 'hold') {
+      // Kendini iyileştirme: bu adımın gözlemi (yalnız kalibrasyon modeli varken)
+      // Yön adım numarasından: adım değiştiği ilk karede exRef henüz eski adımı gösterir (render sonrası güncellenir)
+      if (obsCol.current?.idx !== idxRef.current) {
+        const rm = reader.current.model
+        obsCol.current = { idx: idxRef.current, col: rm ? createObsCollector(rm, steps[idxRef.current]?.dir) : null }
+      }
+      obsCol.current.col?.push(m, g, reader.current.center)
       ok = g.dir === cur.dir
       value = t.hold.push(ok, m.ts) / 1000
       // Belirgin biçimde başka yöne bakıyorsa (merkez ya da kırpma değil) uyar
@@ -336,8 +346,26 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [done, started])
 
+  // Bakış adımı bitti: gözlemi hedefin ekrandaki konumuyla modele işle (sonraki oturumda kullanılır)
+  function learnFromStep(from) {
+    const o = obsCol.current
+    obsCol.current = null
+    if (!o?.col || o.idx !== from) return
+    const el = document.querySelector('.ex-look .ex-tint')
+    const r = el?.getBoundingClientRect?.()
+    const W = globalThis.innerWidth
+    const H = globalThis.innerHeight
+    if (!r || !(W > 0) || !(H > 0)) return
+    const obs = o.col.finish({ x: (r.left + r.width / 2) / W, y: (r.top + r.height / 2) / H })
+    const saved = loadGazeModel()
+    if (!obs || !saved) return
+    const res = adaptModel(saved, obs)
+    if (res.changed) saveGazeModel(res.model, { keepDate: true })
+  }
+
   function advance(from) {
     if (doneRef.current || from !== idxRef.current) return
+    learnFromStep(from)
     if (from + 1 < steps.length) {
       const nx = steps[from + 1]
       idxRef.current = from + 1
