@@ -76,6 +76,15 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
         }
         let days = (call.getArray("weekdays", Int.self) ?? []).filter { (0...6).contains($0) }
         let sound = call.getString("sound")
+        // Paket kökünde olmayan ad AlarmKit'te sessizce varsayılan sese düşer (Apple forum 802620); önce kendimiz bakarız
+        if let sound {
+            let name = (sound as NSString).deletingPathExtension
+            let ext = (sound as NSString).pathExtension
+            if sound.contains("/") || Bundle.main.url(forResource: name, withExtension: ext.isEmpty ? nil : ext) == nil {
+                call.reject("Ses pakette yok: \(sound)", "MISSING")
+                return
+            }
+        }
         #if canImport(AlarmKit)
         if #available(iOS 26.0, *) {
             Task {

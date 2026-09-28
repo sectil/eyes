@@ -57,7 +57,7 @@ export default function AlarmSpikePanel({ mode = 'sakin' }) {
     return { yazıldı: w.bytes, ...s }
   })
   // Bug 20 DENEME-1: uygulama paketine gömülü parça (ios/App/App/Sounds, derleme anında _harness ile basıldı)
-  const bundled = (m) => run(`paketteki Dalga (${m}), 2 dk`, () => AlarmSpike.schedule({ seconds: 120, sound: `nefona-dalga-${m}.wav` }))
+  const bundled = (m) => run(`paketteki Dalga (${m}), 2 dk`, () => AlarmSpike.schedule({ seconds: 120, sound: `nefona-dalga-${m}.caf` }))
   const copy = () => { navigator.clipboard?.writeText(log.join('\n')).catch(() => {}) }
   return (
     <section className="card" style={{ display: 'flex', flexDirection: 'column', gap: 8 }} aria-label="Alarm denemesi">

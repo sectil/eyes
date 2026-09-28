@@ -350,7 +350,7 @@ describe('bildirim yedeği ve sesler', () => {
   })
   it('ses listesi: telefonun sesi dosyasız; Dalga sesleri paketteki dosya; bilinmeyen → telefon', () => {
     expect(ALARM_SOUNDS[0]).toMatchObject({ id: 'phone', file: null })
-    expect(ALARM_SOUNDS.filter((s) => s.file).map((s) => s.file)).toEqual(['nefona-dalga-sakin.wav', 'nefona-dalga-guc.wav', 'nefona-dalga-motive.wav'])
+    expect(ALARM_SOUNDS.filter((s) => s.file).map((s) => s.file)).toEqual(['nefona-dalga-sakin.caf', 'nefona-dalga-guc.caf', 'nefona-dalga-motive.caf'])
     expect(new Set(ALARM_SOUNDS.map((s) => s.id)).size).toBe(ALARM_SOUNDS.length)
     expect(soundById('yok').id).toBe('phone')
     expect(soundById(DEFAULT_SOUND).name).toBe('Dalga · Motivasyon')

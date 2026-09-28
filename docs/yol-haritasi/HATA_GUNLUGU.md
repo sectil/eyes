@@ -517,6 +517,14 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
 ### Deneme logu
 - DENEME-1 (HİP-1): üç Dalga modunu (Sakin, Güç, Motivasyon) derleme anında 25 sn WAV'a basıp uygulama paketine
   gömmek; panelde "Paketteki Dalga sesiyle 2 dk" düğmesi.
+  SONUÇ (sahibi, 16:38): BAŞARISIZ — "Okyanus sesi vs ayarlı ses gelmiyor". Paketteki WAV da çalmadı.
+- KONTROL: Apple forum 802620 — iOS 26.0'da özel ses hiç çalmıyor, Apple mühendisi "bilinen sorun, iOS 26.1'de
+  düzeltildi". 797172 — paketteki ses çalar ama tekrar etmez (bir kez, < 30 sn). Çalıştığı bilinen örnek (SnoozePay
+  PR 857): CAF, `afconvert -f caff -d LEI16@44100` (2 kanal), paket kökünde, `.named("<ad>.caf")`.
+- DENEME-2 (HİP-2 biçim + iOS sürümü): üç parça CAF'a çevrildi (16 bit, 44100 Hz, 2 kanal; design/alarm-sesleri/
+  to_caf.py, libsndfile ile doğrulandı); WAV'lar paketten çıktı. Swift kurmadan önce dosyanın pakette olduğuna bakar
+  (yoksa hata; sessizce varsayılana düşmez). Sahibine iOS sürümü soruldu: 26.0.x ise dosyayla düzelmez, iOS güncellenmeli.
+  Not: özel ses tekrar etmez (Apple sınırı); 25 sn çalar, sonra susar.
 
 ## Bug 21: Ana sayfa 320 px'te 14 px yana taşıyor (2026-09-28, tarayıcıda görüldü)
 ## Durum: AÇIK (sahibine soruldu; alarm işinin kapsamı dışında)
