@@ -665,3 +665,10 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
 - Bilinen sınır: telefon penceresi olmayan okuyucuda (kalibrasyonsuz ya da kamerasız model) aralığın 1,3–2 katı arası
   sabit bakıp kaçma, odak "uzak" okunmuyorsa merkez sayılabilir; oyun bir süre bakmazken sürer, bakınca yeniden durup
   ortalanır. TrackGame resume() → stopRecenter() çağrısı birim testle kapsanmıyor (okuyucu ve pausedAction testli).
+
+## Cihaz sonuçları (2026-09-28 gece, sahibi)
+- Bug 23 (Çemberler "Ekrana bak" takılma): düzeltme (4aabad9) cihazda "tamam". Hangi hipotezin (kayma / kapalı göz)
+  asıl neden olduğu tanı satırından okunmadı; sorun tekrarlarsa tanı satırı ekran görüntüsü istenecek.
+- Alarm: seçilen uyandırma sesi (Gün Işığı) AlarmKit alarmında çaldı; "9 dk ertele" simgesi görünüyor (Bug 20'nin
+  "hangi ses çaldı" sorusu kapandı).
+- Uyandırma sesleri sahibinin seçimiyle ElevenLabs Music sürümlerine geçti (design/uyanma-sesleri/README.md).

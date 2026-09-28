@@ -5,13 +5,32 @@ Alarm (AlarmKit) sesleri. AlarmKit özel sesi **bir kez** çalar (tekrar etmez) 
 
 ## Üretim ve denetim
 
+Pakettekiler **ElevenLabs Music** (eleven_music_v2_5, sözsüz, 26 sn) çıktısından hazırlanır; sahibi telefonda dinleyip
+seçti (2026-09-28). Ham dosyalar `eleven/` altında; hoparlöre göre hazırlama `master_eleven.py` (stereo daraltma,
+400 Hz yüksek geçiren + raf, ~6 sn'de tam ses, −12 LUFS, ≤ −1,2 dBTP, 24,5 sn CAF).
+
 ```sh
-cd app
-python3 design/uyanma-sesleri/synth.py ios/App/App/Sounds        # 3 ses (tohumlu; her derlemede aynı)
-python3 design/uyanma-sesleri/analyze.py ios/App/App/Sounds/nefona-uyan-*.caf        # uyandırma ölçütleri
-python3 design/uyanma-sesleri/analyze.py --profil=dalga ios/App/App/Sounds/nefona-dalga-*.caf   # Dalga parçaları
+cd app/design/uyanma-sesleri
+for n in gunisigi kusbahcesi marsi; do python3 master_eleven.py eleven/$n.mp3 $n ../../ios/App/App/Sounds/nefona-uyan-$n.caf; done
+python3 analyze.py ../../ios/App/App/Sounds/nefona-uyan-*.caf                 # uyandırma ölçütleri
+python3 analyze.py --profil=dalga ../../ios/App/App/Sounds/nefona-dalga-*.caf  # Dalga parçaları
 ```
 
+| Ses | ElevenLabs üretimi (flow IuAASAm07FEHzjRcHU8c) | İstem özü |
+|---|---|---|
+| Gün Işığı | ggzIgH3y1vDCilz2pnU5 | vibrafon C6–E7, Do majör, 105 BPM, tahta vuruş 1. ve 3. vuruşta, C5 kare dalga, bassız |
+| Kuş Bahçesi | X8zjj4FKZO4rsNjoZ6tP | glockenspiel + celesta G5–G7, Sol majör, 96 BPM, kuş cıvıltısı, bassız |
+| Uyanış Marşı | RDcga4CuDwjfUripZOkk | çan + glockenspiel, Do majör, 124 BPM, çekme teller, C5 kare dalga, bassız |
+
+Ölçüm (analyze.py): üçü de −12 LUFS, −1,2 dBTP, 500 Hz–4 kHz %99,3 / %99,6 / %93,7, 300 Hz altı ≈ 0. Uyanış Marşı
+bütün ölçütleri geçer. Bilerek kabul edilen iki ölçüt dışılık (sahibi dinleyerek onayladı):
+- "iç tık" (Gün Işığı 19,9 · Kuş Bahçesi 24,6 dB): 10 kHz üstündeki kısa tepeler tokmak/çan vuruşları — olayların
+  %100'ü tempo ızgarasında (rastgele beklenti %34–41), 12–52 ms, düz spektrum değil; sayısal tık değil. Dalga
+  müziklerinde de bu ölçüt uygulanmaz.
+- Gün Işığı spektral merkezi 760 Hz (ölçüt 900–2500): model istenen C6–E7 yerine C5–E5'te çaldı (iki istem denendi).
+  Hoparlör bandındaki ses yüksekliği Uyanış Marşı ile aynı (−12,3 LUFS, 500 Hz–4 kHz); sahibi cihazda duydu.
+
+Önceki (numpy) sürüm `synth.py`'de durur: `python3 synth.py ../../ios/App/App/Sounds` onları yeniden üretir.
 Gerekenler: `pip install numpy scipy soundfile pyloudnorm`. Hepsi geçmezse `analyze.py` 1 ile çıkar.
 
 ## Kanıt (PubMed; ayrıntı ve tam liste uygulamadaki "Sabah alarmı ve uyku sesi" kartında)

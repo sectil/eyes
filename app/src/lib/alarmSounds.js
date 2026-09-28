@@ -1,9 +1,10 @@
 // Alarm sesleri (Artifact "Nefona Alarm" v3). Yeni ses = bu listeye bir satır + ios/App/App/Sounds/ içine dosya
 // (uygulama paketinde, ≤ 30 sn, CAF 44100 Hz 2 kanal; Library/Sounds'taki ve paketteki 22050 Hz WAV AlarmKit'te çalmadı —
 // HATA_GUNLUGU Bug 20; üretim design/alarm-sesleri ve design/uyanma-sesleri).
-// Uyandırma sesleri (uyan-*): kanıta dayalı tasarım (design/uyanma-sesleri/README.md; PubMed): melodik (McFarlane 2020),
-// ~520 Hz zengin ton melodinin içinde (Bruck 2009, Smith 2019), duyulur başlayıp ~6 sn'de tam sese çıkar (Kaida 2005, dolaylı). Hepsi telefon
-// hoparlörü için ölçülerek denetlendi (analyze.py: 500 Hz–4 kHz ≥ %75, −12 LUFS, ≤ −1 dBTP, tık yok).
+// Uyandırma sesleri (uyan-*): ElevenLabs Music, istemleri kanıta göre (design/uyanma-sesleri/README.md; PubMed): melodik
+// (McFarlane 2020), ~520 Hz zengin ton melodinin içinde (Bruck 2009, Smith 2019), duyulur başlayıp ~6 sn'de tam sese çıkar
+// (Kaida 2005, dolaylı). Telefon hoparlörü için hazırlanıp ölçüldü (master_eleven.py, analyze.py: 500 Hz–4 kHz ≥ %93,
+// −12 LUFS, ≤ −1,2 dBTP); bilerek kabul edilen ölçüt dışılıklar README'de. Sahibi telefonda dinleyip seçti.
 // iOS kendi alarm seslerini (Radar, Zil…) başka uygulamaya adla vermez: "Telefonun alarm sesi" yalnız varsayılandır.
 //   file: paketteki dosya adı (AlarmKit .named, bildirimde sound, önizlemede AVAudioPlayer); null = iOS varsayılanı
 import { MODES } from './dalga.js'
