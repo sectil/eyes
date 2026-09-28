@@ -351,10 +351,10 @@ describe('bildirim yedeği ve sesler', () => {
   })
   it('ses listesi: telefonun sesi dosyasız; Dalga sesleri paketteki dosya; bilinmeyen → telefon', () => {
     expect(ALARM_SOUNDS[0]).toMatchObject({ id: 'phone', file: null })
-    expect(ALARM_SOUNDS.filter((s) => s.file).map((s) => s.file)).toEqual(['nefona-dalga-sakin.caf', 'nefona-dalga-guc.caf', 'nefona-dalga-motive.caf'])
+    expect(ALARM_SOUNDS.filter((s) => s.file).map((s) => s.file)).toEqual(['nefona-uyan-gunisigi.caf', 'nefona-uyan-kusbahcesi.caf', 'nefona-uyan-marsi.caf', 'nefona-dalga-sakin.caf', 'nefona-dalga-guc.caf', 'nefona-dalga-motive.caf'])
     expect(new Set(ALARM_SOUNDS.map((s) => s.id)).size).toBe(ALARM_SOUNDS.length)
     expect(soundById('yok').id).toBe('phone')
-    expect(soundById(DEFAULT_SOUND).name).toBe('Dalga · Motivasyon')
+    expect(soundById(DEFAULT_SOUND).name).toBe('Gün Işığı')
   })
 })
 
@@ -408,5 +408,28 @@ describe('yakın alarmda uyku sesi saniyeyle (Bug 22)', () => {
     expect(lateSleepSeconds(a, [], new Date(2026, 8, 28, 18, 3, 30))).toBe(30)
     expect(lateSleepSeconds(a, [], new Date(2026, 8, 28, 18, 3, 31))).toBe(0)
     expect(lateSleepSeconds(a, [], new Date(2026, 8, 28, 17, 0, 0))).toBe(300)
+  })
+})
+
+describe('alarm sesleri uygulama paketinde (AlarmKit yalnız paketteki dosyayı çalar)', () => {
+  it('her ses dosyası Sounds klasöründe ve Xcode kaynaklarında; 30 sn\'den kısa CAF', async () => {
+    const fs = await import('node:fs')
+    const root = new URL('../../ios/App/', import.meta.url)
+    const pbx = fs.readFileSync(new URL('App.xcodeproj/project.pbxproj', root), 'utf8')
+    for (const s of ALARM_SOUNDS.filter((x) => x.file)) {
+      const buf = fs.readFileSync(new URL(`App/Sounds/${s.file}`, root))
+      expect(buf.subarray(0, 4).toString()).toBe('caff')
+      // CAF: 'caff' + sürüm; 'desc' (8) + boy (12) + örnekleme hızı (20, big-endian double) … kanal (44), bit (48);
+      // 'data' (52) + boy (56, düzenleme sayacı dahil)
+      expect(buf.readDoubleBE(20)).toBe(44100)
+      const ch = buf.readUInt32BE(44)
+      expect(buf.readUInt32BE(48)).toBe(16)
+      expect(buf.subarray(52, 56).toString()).toBe('data')
+      const bytes = Number(buf.readBigInt64BE(56)) - 4
+      expect(ch).toBe(2)
+      expect(bytes / (44100 * ch * 2)).toBeLessThan(30)
+      expect(pbx).toContain(`${s.file} in Resources */,`)
+      expect(pbx).toContain(`path = "Sounds/${s.file}"`)
+    }
   })
 })

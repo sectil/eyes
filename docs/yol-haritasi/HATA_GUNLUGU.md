@@ -602,3 +602,15 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   tercihi (ambient) çalan uyku sesini sessiz tuşuna bağlayıp arka planda durdurabiliyordu → AppAudioSession
   beginSleep/endSleep (uyku sesi sürerken tercih uygulanmaz; kayıt sürüyorsa başlamaz); arama/Siri kesintisinden sonra
   iOS izin verirse kaldığı yerden sürer; bitince oturum bırakılır (kesilen podcast/müzik devam eder).
+
+## Bug 20/22 (asıl kök neden, 2026-09-28 20:30): sesler telefon hoparlörünün çalamadığı bantta
+- Ölçüm (design/uyanma-sesleri/analyze.py): eski uyku müziği ve üç Dalga alarm sesinin enerjisinin %77–87'si 300 Hz
+  altında. iPhone hoparlörü ~250 Hz altında neredeyse ses vermez, 1–4 kHz'de en verimlidir. Tanı satırı "çalıyor"
+  derken sahibinin "müzik sesi yok" demesi bununla uyumlu: dosya çalıyor, hoparlörden çıkan çok az.
+- Düzeltme: Dalga parçaları bir oktav yukarıda basılır (`renderLoop(..., {transpose: 12})`), 400 Hz yüksek geçiren
+  + 1 kHz üstü +4/+6 dB raf + −12 LUFS (design/alarm-sesleri/master_dalga.py). Uyku müziği 300 Hz yüksek geçiren +
+  +4 dB raf, −16 LUFS, dikişsiz döngü (design/dalga-uyku/master.py). Sonuç (ölçüldü): 300 Hz altı uyku müziğinde %8,2, Dalga seslerinde %0–1,6.
+- Yeni üç uyandırma sesi (Gün Işığı, Kuş Bahçesi, Uyanış Marşı) baştan 500 Hz–4 kHz'de üretildi (≥ %93);
+  kanıt ve ölçütler design/uyanma-sesleri/README.md. Varsayılan ses artık Gün Işığı.
+- Cihazda duyulduğu DOĞRULANMADI; sahibinden: uyku müziği duyuluyor mu (tanı satırında medya ses düzeyi ve çıkış),
+  alarmda hangi ses çaldı.

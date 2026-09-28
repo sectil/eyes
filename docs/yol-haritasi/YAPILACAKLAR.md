@@ -85,6 +85,9 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
 - [ ] Alarm sesi seçimi: normal alarm sesleri + Dalga sesleri. Sahibi (onayladı): Dalga sesleri 4, ileride 10 ve üstü;
       genişleyebilir olmalı → sesler tek kayıt listesinden (modül kaydı gibi), yeni ses = listeye bir satır + dosya.
       Sesler uygulama paketinde (Library/Sounds çalmıyor, Bug 20) → yeni ses uygulama güncellemesiyle gelir.
+      [~] 2026-09-28: 3 yeni uyandırma sesi (Gün Işığı varsayılan, Kuş Bahçesi, Uyanış Marşı; PubMed dayanağı ve
+      hoparlör ölçütleri design/uyanma-sesleri/README.md) + Dalga sesleri ve uyku müziği hoparlöre göre yeniden
+      hazırlandı (Bug 20/22 kök neden). Cihazda duyulduğu doğrulanacak.
 - [ ] Uyku sesi (sahibi onayladı: "aynen öyle"): alarm sabaha kurulunca uyumak için ses; kapanma (a) zamanlayıcıyla — Dalga uyku modu zaten var
       (`dalgaSleep.js`, sonunda kısılarak susar) ya da (b) nefesten uyuduğunu anlayıp. (b) için araştırılacak: telefon
       mikrofonuyla uyku/nefes algılamanın doğruluğu (PubMed), gece boyu mikrofon izni ve KVKK (ses telefondan çıkmaz),

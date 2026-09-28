@@ -73,9 +73,9 @@ export const EVIDENCE = [
     claim: 'Seçtiğin saatte uyandırır, uyurken sakin müzik çalar; uyku düzenini kendin görürsün.',
     level: 'Sınırlı',
     basis:
-      'Uyku müziği, uykusuzluk yaşayan yetişkinlerde öznel uyku kalitesini artırdı (orta kesinlik; çalışmalarda gecede 25–60 dk); "Sana göre" bu yüzden 30 dakikadan başlar. Yetişkine gecede en az 7 saat uyku önerilir; kart yatma saatini buna göre yazar. Her gün aynı saatte kalkmak (düzen) büyük bir kohortta uyku süresinden daha güçlü bir gösterge çıktı. Gecelerin yarısından çoğu ertelemeyle bitiyor; alışkın ertelemecilerde kısa erteleme bilişi bozmadı.',
+      'Uyku müziği, uykusuzluk yaşayan yetişkinlerde öznel uyku kalitesini artırdı (orta kesinlik; çalışmalarda gecede 25–60 dk); "Sana göre" bu yüzden 30 dakikadan başlar. Yetişkine gecede en az 7 saat uyku önerilir; kart yatma saatini buna göre yazar. Her gün aynı saatte kalkmak (düzen) büyük bir kohortta uyku süresinden daha güçlü bir gösterge çıktı. Gecelerin yarısından çoğu ertelemeyle bitiyor; alışkın ertelemecilerde kısa erteleme bilişi bozmadı. Uyandırma sesleri bu bulgulara göre yapıldı: melodik alarmla uyanan küçük bir grupta dikkat hataları azaldı (105 BPM, Do majör, vibrafon; Gün Işığı bunu izler); derin uykudan uyandırmada ~500 Hz zengin ton, tiz alarm tonundan daha çok kişiyi uyandırdı (bu ton melodinin içinde); ani ve sert uyandırma kalp atışını ve tansiyonu birden yükseltti, bu yüzden sesler duyulur ama yumuşak başlayıp yükselir.',
     limits:
-      '"Sana göre" uykuyu algılamaz; sabah cevabına göre ayarlanan bir zamanlayıcıdır. Düzen, gün ışığı ve erteleme bulguları gözlemsel ya da küçük çalışmalardan; nedensellik göstermez. Melodik alarm sesiyle daha az sersemlik yalnız küçük çalışmalarda görüldü. Tedavi değildir; uykusuzluk sürüyorsa bir hekime danış.',
+      '"Sana göre" uykuyu algılamaz; sabah cevabına göre ayarlanan bir zamanlayıcıdır. Düzen, gün ışığı ve erteleme bulguları gözlemsel ya da küçük çalışmalardan; nedensellik göstermez. Melodik alarm sesiyle daha az sersemlik yalnız küçük çalışmalarda görüldü (anket n=50; 10\'ar kişilik iki grup). ~500 Hz ton bulguları yangın alarmı çalışmalarından (gençler ve 5–12 yaş çocuklar; uyku ataleti ölçülmedi); hızlı tempo bulgusu uyanık kişilerde. Hiçbir ses sersemliği tümüyle gidermez. Tedavi değildir; uykusuzluk sürüyorsa bir hekime danış.',
     sources: [
       'Jespersen ve ark. 2022, Cochrane: uykusuzlukta müzik dinleme (PMID 36000763)',
       'Watson ve ark. 2015, AASM/SRS uzlaşısı: yetişkinde en az 7 saat (PMID 26039963)',
@@ -83,7 +83,12 @@ export const EVIDENCE = [
       'Windred ve ark. 2024, gündüz ve gece ışığı ile ölüm riski (PMID 39405349)',
       'Robbins ve ark. 2025, 3 milyon gecede erteleme (PMID 40389592)',
       'Sundelin ve ark. 2023, erteleme ve uyku ataleti (PMID 37849039)',
-      'McFarlane ve ark. 2020, melodik alarm ve uyku ataleti (doi:10.1371/journal.pone.0215788)',
+      'McFarlane ve ark. 2020, melodik alarm ve uyku ataleti, anket (PMID 31990906)',
+      'McFarlane ve ark. 2020, melodi ve ritim: uyanınca dikkat testi (PMID 33089201)',
+      'Bruck ve ark. 2009, sesin perdesi ve uyanma eşiği (PMID 19302343)',
+      'Smith ve ark. 2019, çocuklarda 500 Hz ton ve ses alarmı (PMID 31276840)',
+      'Kaida ve ark. 2005, zorla uyandırmada kalp atışı ve tansiyon (PMID 15732320)',
+      'Bernardi ve ark. 2006, müzik temposu ve uyarılma (PMID 16199412)',
     ],
   },
 ]

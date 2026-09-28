@@ -15,6 +15,9 @@
 		2D3E4F5A6B7C8D9E0F1A2B3C /* nefona-dalga-sakin.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1C2D3E4F5A6B7C8D9E0F1A2B /* nefona-dalga-sakin.caf */; };
 		4F5A6B7C8D9E0F1A2B3C4D5E /* nefona-dalga-guc.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3E4F5A6B7C8D9E0F1A2B3C4D /* nefona-dalga-guc.caf */; };
 		6B7C8D9E0F1A2B3C4D5E6F70 /* nefona-dalga-motive.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5A6B7C8D9E0F1A2B3C4D5E6F /* nefona-dalga-motive.caf */; };
+		A1B2C3D4E5F60718293A4B5D /* nefona-uyan-gunisigi.caf in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* nefona-uyan-gunisigi.caf */; };
+		B2C3D4E5F60718293A4B5C6E /* nefona-uyan-kusbahcesi.caf in Resources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F60718293A4B5C6D /* nefona-uyan-kusbahcesi.caf */; };
+		C3D4E5F60718293A4B5C6D7F /* nefona-uyan-marsi.caf in Resources */ = {isa = PBXBuildFile; fileRef = C3D4E5F60718293A4B5C6D7E /* nefona-uyan-marsi.caf */; };
 		E5C8F2A3B4D5C6E7F8091A23 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = D4B7E1F2A3C4B5D6E7F80912 /* AppIcon.icon */; };
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
@@ -41,6 +44,9 @@
 		1C2D3E4F5A6B7C8D9E0F1A2B /* nefona-dalga-sakin.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nefona-dalga-sakin.caf"; path = "Sounds/nefona-dalga-sakin.caf"; sourceTree = "<group>"; };
 		3E4F5A6B7C8D9E0F1A2B3C4D /* nefona-dalga-guc.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nefona-dalga-guc.caf"; path = "Sounds/nefona-dalga-guc.caf"; sourceTree = "<group>"; };
 		5A6B7C8D9E0F1A2B3C4D5E6F /* nefona-dalga-motive.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nefona-dalga-motive.caf"; path = "Sounds/nefona-dalga-motive.caf"; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B5C /* nefona-uyan-gunisigi.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nefona-uyan-gunisigi.caf"; path = "Sounds/nefona-uyan-gunisigi.caf"; sourceTree = "<group>"; };
+		B2C3D4E5F60718293A4B5C6D /* nefona-uyan-kusbahcesi.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nefona-uyan-kusbahcesi.caf"; path = "Sounds/nefona-uyan-kusbahcesi.caf"; sourceTree = "<group>"; };
+		C3D4E5F60718293A4B5C6D7E /* nefona-uyan-marsi.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nefona-uyan-marsi.caf"; path = "Sounds/nefona-uyan-marsi.caf"; sourceTree = "<group>"; };
 		D4B7E1F2A3C4B5D6E7F80912 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		504EC30E1FED79650016851F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		504EC3111FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -111,6 +117,9 @@
 				1C2D3E4F5A6B7C8D9E0F1A2B /* nefona-dalga-sakin.caf */,
 				3E4F5A6B7C8D9E0F1A2B3C4D /* nefona-dalga-guc.caf */,
 				5A6B7C8D9E0F1A2B3C4D5E6F /* nefona-dalga-motive.caf */,
+				A1B2C3D4E5F60718293A4B5C /* nefona-uyan-gunisigi.caf */,
+				B2C3D4E5F60718293A4B5C6D /* nefona-uyan-kusbahcesi.caf */,
+				C3D4E5F60718293A4B5C6D7E /* nefona-uyan-marsi.caf */,
 				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
 				504EC3131FED79650016851F /* Info.plist */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
@@ -191,6 +200,9 @@
 				2D3E4F5A6B7C8D9E0F1A2B3C /* nefona-dalga-sakin.caf in Resources */,
 				4F5A6B7C8D9E0F1A2B3C4D5E /* nefona-dalga-guc.caf in Resources */,
 				6B7C8D9E0F1A2B3C4D5E6F70 /* nefona-dalga-motive.caf in Resources */,
+				A1B2C3D4E5F60718293A4B5D /* nefona-uyan-gunisigi.caf in Resources */,
+				B2C3D4E5F60718293A4B5C6E /* nefona-uyan-kusbahcesi.caf in Resources */,
+				C3D4E5F60718293A4B5C6D7F /* nefona-uyan-marsi.caf in Resources */,
 				50379B232058CBB4000EE86E /* capacitor.config.json in Resources */,
 				504EC30D1FED79650016851F /* Main.storyboard in Resources */,
 				2FAD9763203C412B000D30F8 /* config.xml in Resources */,

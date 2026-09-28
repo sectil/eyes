@@ -30,7 +30,8 @@ export function fadeFrom(loop, len) {
   return out
 }
 
-export async function renderLoop(mode = 'sakin', { sampleRate = SLEEP_RATE, tail = 8, level = 0.8 } = {}) {
+// transpose (yarım ses): telefon hoparlörü için bir oktav yukarı (+12; design/dalga-uyku, Bug 22 KONTROL-8)
+export async function renderLoop(mode = 'sakin', { sampleRate = SLEEP_RATE, tail = 8, level = 0.8, transpose = 0 } = {}) {
   const OAC = globalThis.OfflineAudioContext || globalThis.webkitOfflineAudioContext
   if (!OAC) throw new Error('OfflineAudioContext yok')
   const L = loopSeconds(mode)
@@ -41,7 +42,8 @@ export async function renderLoop(mode = 'sakin', { sampleRate = SLEEP_RATE, tail
   const compose = makeComposer(mode)
   const d = stepSec(mode)
   const steps = Math.round(L / d)
-  for (let i = 0; i < steps; i++) for (const e of compose(i, 0.5)) voices.play(e, 0.05 + i * d + (e.at ?? 0))
+  const tx = (e) => (transpose ? { ...e, ...(e.midi != null ? { midi: e.midi + transpose } : {}), ...(e.notes ? { notes: e.notes.map((n) => n + transpose) } : {}) } : e)
+  for (let i = 0; i < steps; i++) for (const e of compose(i, 0.5)) voices.play(tx(e), 0.05 + i * d + (e.at ?? 0))
   const buf = await ctx.startRendering()
   const len = Math.round(L * sampleRate)
   return { sampleRate, channels: [0, 1].map((c) => foldTail(buf.getChannelData(c), len)) }

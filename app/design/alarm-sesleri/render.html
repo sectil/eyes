@@ -1,12 +1,17 @@
 <!doctype html><html><body><script type="module">
+// Dalga alarm parçaları: bir oktav yukarıda, 44,1 kHz (telefon hoparlörü kalın sesleri zayıf verir; son işlem
+// master_dalga.py). Döngü 96 sn'den uzun olabilir; ilk 24,5 sn kullanılır.
 import { renderLoop } from '../../src/lib/dalgaSleep.js'
 import { encodeWav } from '../../src/lib/wav.js'
-import { spikeClip, toBase64 } from '../../src/components/AlarmSpikePanel.jsx'
+import { toBase64 } from '../../src/components/AlarmSpikePanel.jsx'
+// Her derlemede aynı notalar: besteci Math.random kullanır → tohumlu üreteç (mulberry32). Baytlar birebir aynı
+// olmayabilir (tarayıcının ses motoru küçük sayısal farklar üretir); ölçümler aynı kalır.
+let seed = 20260928
+Math.random = () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296 }
 window.renderClip = async (mode) => {
-  const { sampleRate, channels } = await renderLoop(mode)
-  const clip = spikeClip(channels, sampleRate)
-  let peak = 0; for (const v of clip) peak = Math.max(peak, Math.abs(v))
-  return { b64: toBase64(encodeWav([clip], sampleRate)), sec: clip.length / sampleRate, rate: sampleRate, peak }
+  const { sampleRate, channels } = await renderLoop(mode, { sampleRate: 44100, transpose: 12 })
+  const n = Math.min(channels[0].length, Math.round(25 * sampleRate))
+  return { b64: toBase64(encodeWav(channels.map((c) => c.slice(0, n)), sampleRate)), sec: n / sampleRate, rate: sampleRate }
 }
 window.ready = true
 </script></body></html>

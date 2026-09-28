@@ -1,14 +1,16 @@
 <!doctype html><html><body><script type="module">
-// Uyku müziği (Dalga · Sakin): cihazda 10+ sn süren hazırlık yerine derlemede bir kez basılır (Bug 22)
-import { renderLoop, fadeFrom, SLEEP_FADES } from '../../src/lib/dalgaSleep.js'
+// Uyku müziği (Dalga · Sakin): cihazda üretmek yerine derlemede bir kez basılır (Bug 22). Bir oktav yukarıda,
+// 44,1 kHz: telefon hoparlörü kalın sesleri zayıf verir (KONTROL-8). Son işlem master.py.
+import { renderLoop } from '../../src/lib/dalgaSleep.js'
 import { encodeWav } from '../../src/lib/wav.js'
 import { toBase64 } from '../../src/components/AlarmSpikePanel.jsx'
+// Her derlemede aynı notalar: besteci Math.random kullanır → tohumlu üreteç (mulberry32). Baytlar birebir aynı
+// olmayabilir (tarayıcının ses motoru küçük sayısal farklar üretir); ölçümler aynı kalır.
+let seed = 20260928
+Math.random = () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296 }
 window.renderSleep = async () => {
-  const { sampleRate, channels } = await renderLoop('sakin')
-  // Her kısılma süresi için tam uzunlukta ayrı parça: baştan tam sesle başlar, sonunda susar
-  const fades = {}
-  for (const F of SLEEP_FADES) fades[F] = toBase64(encodeWav(channels.map((ch) => fadeFrom(ch, Math.round(F * sampleRate))), sampleRate))
-  return { rate: sampleRate, loop: toBase64(encodeWav(channels, sampleRate)), fades, sec: channels[0].length / sampleRate }
+  const { sampleRate, channels } = await renderLoop('sakin', { sampleRate: 44100, transpose: 12 })
+  return { rate: sampleRate, loop: toBase64(encodeWav(channels, sampleRate)), sec: channels[0].length / sampleRate }
 }
 window.ready = true
 </script></body></html>
