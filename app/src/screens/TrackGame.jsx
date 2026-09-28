@@ -58,7 +58,7 @@ const WARN_GAP_MS = 7000 // sesli uyarılar arası en az süre (cümle ~3 sn; ü
 // Duraklamada ortada göz bebeği hedefi: kişi ona bakarken okuyucu yeniden ortalanır. Hedef gösterildiği için
 // büyük kayma da gerçektir (baş/telefon kaymış). Sınır, duraklatan eşikten (OFF_SIDE/OFF_UP = aralığın 1,3 katı,
 // OFF_DOWN 1,5 katı) BÜYÜK olmalı: yoksa yanlış duraklamaya yol açan kayma hiç kabul edilmez; 2 ile 1,5–2 kat arası
-// gerçek bakıp kaçmalar ayrıca telefon penceresi ve odak uzaklığıyla elenir (gaze.js recoverySampleOk).
+// gerçek bakıp kaçmalar ayrıca telefon penceresi ya da odak uzaklığıyla elenir (gaze.js recoveryBad).
 // Kabul: 0,8 sn'lik pencerede ortanca yayılım ≤ aralığın 0,15'i (gaze.js RECENTER_STABLE_FRAC).
 const RECOVER_MAX_FRAC = 2
 const DIAG_MS = 100 // tanı satırı en çok 10 Hz çizilir

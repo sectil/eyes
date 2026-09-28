@@ -355,7 +355,7 @@ function createModelReader(model, opts) {
       shift = { x: nx, y: ny }
       cal = null
       result = 'ok'
-      // Süzgeç eski merkezin değerlerini taşımasın: sonraki kare doğrudan yeni merkeze göre
+      // Süzgeç eski merkezin değerlerini taşımasın; push kabul karesini yeni merkezle yeniden hesaplar
       fx.reset()
       fy.reset()
       return
@@ -379,7 +379,7 @@ function createModelReader(model, opts) {
         dir = null
         return out(null, true, true)
       }
-      const r = applyModel(model, f, shift)
+      let r = applyModel(model, f, shift)
       if (!r || !Number.isFinite(r.x) || !Number.isFinite(r.y)) return out(null, false, false)
       const cam = camAngles(f)
       let camMed = null
@@ -388,7 +388,9 @@ function createModelReader(model, opts) {
         camMed = { x: median(camHist.map((c) => c.x)), y: median(camHist.map((c) => c.y)) }
         phone = inPhoneWindow(camMed, model.phone)
       } else phone = null
+      const before = shift
       if (cal) collect(r.raw, ts, cal.maxFrac == null ? null : recoveryBad(f, camMed, model.phone))
+      if (shift !== before) r = applyModel(model, f, shift) // kabul karesi de yeni merkeze göre (süzgeç sıfırlandı)
       v = { x: fx.push(r.x * GAZE_FULL_DEG, ts), y: fy.push(r.y * GAZE_FULL_DEG, ts) }
       dir = stepDir(dir, v, enterDeg, exitDeg)
       return out(dir, false, true)

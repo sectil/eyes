@@ -235,7 +235,7 @@ describe('createGazeReader (model modu)', () => {
       res = reader.push({ ...f, ts: i * 33 })
     }
     expect(reader.recentering.result).toBe('ok')
-    // kabul karesi eski merkezle hesaplanır; sonraki kare yeni merkeze göre (süzgeç sıfırlandı)
+    expect(offScreen(res)).toBe(false) // kabul karesi de yeni merkeze göre
     for (let i = 0; i < 2; i++) res = reader.push({ ...makeFrame(drift, 0, { signX: -1, noise: 0.2, r: rng(900 + i), cam: false }), camLeftX: 2, camRightX: 2, camLeftY: -6, camRightY: -6, ts: 4000 + i * 33 })
     expect(offScreen(res)).toBe(false)
   })

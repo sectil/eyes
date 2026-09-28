@@ -659,7 +659,9 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   (son 3 karenin ortancası), yoksa odak; 4 ardışık kötü karede pencere baştan, pencerede %25'ten çok kötü kare varsa
   red; tanı satırı red nedenini yazar (odak uzak / telefon dışı). (2) Kamera hatasıyla ritme dönen tur kamerayı
   kapatıyordu → hata hiç temizlenmiyor, sonraki turlar hep ölçümsüz kalıyordu → kamerayı yalnız "Ölçmeden devam et"
-  kapatır (ayrı bayrak, yeni turda açılır). Kabulde süzgeç sıfırlanır (sonraki kare yeni merkeze göre).
+  kapatır (ayrı bayrak, yeni turda açılır). Kabulde süzgeç sıfırlanır ve kabul karesi de yeni merkezle yeniden hesaplanır (3. inceleme: önceki sürümde
+  sıfırlama etkisizdi; test kabul karesini denetler, mutasyonla doğrulandı). Son bağımsız kontrol: temiz (benzetimde
+  %5–20 kötü karede 20/20 kurtarma, ~0,8–0,9 sn).
 - Bilinen sınır: telefon penceresi olmayan okuyucuda (kalibrasyonsuz ya da kamerasız model) aralığın 1,3–2 katı arası
   sabit bakıp kaçma, odak "uzak" okunmuyorsa merkez sayılabilir; oyun bir süre bakmazken sürer, bakınca yeniden durup
   ortalanır. TrackGame resume() → stopRecenter() çağrısı birim testle kapsanmıyor (okuyucu ve pausedAction testli).
