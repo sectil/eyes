@@ -29,3 +29,11 @@ export function encodeWav(channels, sampleRate) {
   }
   return buf
 }
+
+// Bayt dizisi → base64 (büyük diziler parça parça; btoa tek seferde yığını taşırır). Tasarım betikleri kullanır
+// (design/alarm-sesleri, design/dalga-uyku render.html).
+export function toBase64(bytes) {
+  let s = ''
+  for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000))
+  return btoa(s)
+}

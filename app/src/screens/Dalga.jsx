@@ -8,7 +8,6 @@ import { createSleepPlayer } from '../lib/dalgaSleep.js'
 import { LATE_GAP_MIN } from '../lib/alarm.js'
 import { greeting } from '../lib/greeting.js'
 import { testUnlock } from '../lib/subscription.js'
-import AlarmSpikePanel from '../components/AlarmSpikePanel.jsx'
 import {
   MODES, MODE_ORDER, QUICK_MINUTES, MIN_MINUTES, MAX_MINUTES, VALUES, WHY_MIN, RATE_MAX, EXP_N, ANSWER_TEXT,
   loadDalgaOpts, saveDalgaOpts, binauralPlan, makeRecord, factFor, experimentOf, experimentText,
@@ -506,7 +505,6 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
           )}
         </>
       )}
-      <AlarmSpikePanel mode={opts.mode} />
       {error && <p className="dg-err" role="alert">{error}</p>}
       <div className="grow" />
       <button className="btn" onClick={() => { engine.unlock(); setError(null); if (sleepMode) { startSleep(); return } setBefore(null); setPhase('before') }}>{sleepMode ? 'Uykuya başla' : 'Başla'}</button>

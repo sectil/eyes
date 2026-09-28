@@ -72,7 +72,10 @@ Araştırma (2026-09-28; doğrulanamayan VARSAYIM):
   bulmadı; gerçek davranışa dayalı kişisel mesaj etkiliydi (doi:10.2196/40784). → Saati kişi seçer; sistem saat
   öğrenmez, yalnız "bu saatte 3 kez ertelendi, değiştirmek ister misin?" diye sorar (VARSAYIM).
 Kalan:
-- [~] Cihazda deneme derlemesi (spike): kod yazıldı (`AlarmSpikePlugin.swift`, `components/AlarmSpikePanel.jsx`;
+- [x] 2026-09-28 gece: sahibi "test bitti, canlıdayız" dedi → deneme paneli ve `AlarmSpikePlugin.swift` kaldırıldı (asıl
+      alarm `AlarmPlugin.swift`'te; cihazda doğrulanan: seçilen paket sesi (Gün Işığı) çaldı, 9 dk ertele görünüyor;
+      sessiz modda çalma ayrıca doğrulanmadı).
+- [x] (geçmiş) Cihazda deneme derlemesi (spike): kod yazıldı (`AlarmSpikePlugin.swift`, `components/AlarmSpikePanel.jsx`;
       Dalga ekranının altında, yalnız test derlemesinde). Bu ortamda Swift derlenemedi; Mac'te derleme ve cihaz
       sonucu bekleniyor. Sorular: (1) sessiz modda çalıyor mu, (2) Dalga WAV sesi mi varsayılan ses mi çaldı,
       (3) "Nefona'yı aç" uygulamayı açtı mı, (4) kurarken hata var mı (uzantı gerekiyorsa burada görünür).
@@ -146,7 +149,7 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
         tek seferlik alarm "değiştir" açılıyordu; Hatırlatmalar'dan açılan kurulum Ana sayfaya dönüyordu; izin
         penceresinden sonra kart durumu yenilenmiyordu; üç metin. Karar sahibinde: alarm kartı Ana sayfanın tek kart
         yuvasının dışında (tasarımda en üstte ayrı kart), hatırlatma kartıyla aynı anda görünebilir.
-        Bilinen: deneme paneli alarmındaki "Nefona'yı aç" da uyanma damgası yazar (yalnız test derlemesi; panel kalkınca biter).
+        Bilinen (kapandı 2026-09-28): deneme paneli alarmındaki "Nefona'yı aç" da uyanma damgası yazıyordu; panel kaldırıldı.
 - Araştırma 2 (2026-09-28, PubMed; öneriler sahibine soruldu, karar bekliyor):
   - Erteleme: gecelerin %55,6'sı ertelemeyle bitti, ortalama 2,4 kez / 10,8 dk (Robbins 2025, 3 milyon gece,
     doi:10.1038/s41598-025-99563-y). Alışkın ertelemecilerde 30 dk erteleme bilişi bozmadı, ~6 dk uyku kaybı
@@ -203,7 +206,7 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
       25 sn'de susuyor mu tekrar mı ediyor; (5) "Nefona'yı aç" uygulamayı açıp sabah kartını/ekranını getiriyor mu;
       (6) uyku sesi kilitli ekranda sürüyor mu, süre bitince susuyor mu; (7) ertesi sabah soru; (8) izin reddi kartı
       ve Ayarlar'daki adı ("Alarmlar" mı); (9) Değiştir → Alarmı kaldır; (10) Tüm verileri sil alarmı iptal ediyor mu.
-      Sonra deneme paneli ve `AlarmSpikePlugin` kaldırılır (geliştirme aracı).
+      Deneme paneli ve `AlarmSpikePlugin` kaldırıldı (2026-09-28, sahibi "test bitti, canlıdayız").
 
  (sahibin yönü, 2026-09-28)
 - [~] **1. Veri merkezi (okuma kapısı):** `lib/dataHub.js`. Testler, oturumlar, istatistik çekirdeği (`progress.js`),

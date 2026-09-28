@@ -3,7 +3,7 @@
 // master_dalga.py). Döngü 96 sn'den uzun olabilir; ilk 24,5 sn kullanılır.
 import { renderLoop } from '../../src/lib/dalgaSleep.js'
 import { encodeWav } from '../../src/lib/wav.js'
-import { toBase64 } from '../../src/components/AlarmSpikePanel.jsx'
+import { toBase64 } from '../../src/lib/wav.js'
 // Her derlemede aynı notalar: besteci Math.random kullanır → tohumlu üreteç (mulberry32). Baytlar birebir aynı
 // olmayabilir (tarayıcının ses motoru küçük sayısal farklar üretir); ölçümler aynı kalır.
 let seed = 20260928
