@@ -6,6 +6,7 @@
 import { makeComposer, stepSec, SILENT_EVERY } from './dalgaMusic.js'
 import { buildGraph, makeVoices } from './dalgaAudio.js'
 import { mediaPlay, mediaKeepAlive } from './audioUnmute.js'
+import { Alarm, isIOSApp } from './native.js'
 
 export const SLEEP_RATE = 22050
 export const SLEEP_FADE_MAX = 180 // sn: son 3 dakikada yavaşça kısılır
@@ -64,7 +65,83 @@ export function sleepFadeUrl(F, left = F) {
 // iOS sesi yalnız dokunuşun İÇİNDE başlatır (HATA_GUNLUGU Bug 22): start() hazırlığı eşzamanlı yapar ve çalmayı
 // dokunuşla aynı çağrıda başlatır (araya await girmez). Çalma yine reddedilirse phase 'blocked' olur; ekran
 // "dokun, başlat" gösterir ve resume() dokunuş içinde çağrılır.
+// iPhone uygulamasında iOS'un kendi oynatıcısı (AlarmPlugin.sleepStart; Bug 22: web görünümündeki <audio> telefonda
+// "çalıyor" görünüp duyulmuyordu: tanı satırı 6,4 sn, müzik, hazır 4). Tarayıcıda <audio>.
 export function createSleepPlayer() {
+  return isIOSApp() ? createNativeSleepPlayer() : createWebSleepPlayer()
+}
+
+// Yerel oynatıcı: döngü, kısılma ve durma iOS'ta (kilitli ekranda JS zamanlayıcısına bağlı değil). JS yalnız ekran
+// sayacını ve bitişi izler. Dokunuş gerekmez.
+export function createNativeSleepPlayer(plugin = Alarm) {
+  let phase = 'idle', timer = 0, endAt = 0, startedAt = 0, secs = 0, cb = {}
+  const diag = { files: 'iOS oynatıcı · döngü', played: null, native: true, info: null, err: null }
+  const refresh = () => plugin.sleepStatus().then((i) => { diag.info = i }).catch(() => {})
+  function stop() {
+    if (phase === 'stopped') return
+    phase = 'stopped'
+    clearInterval(timer)
+    plugin.sleepStop().catch(() => {})
+  }
+  function run() {
+    startedAt = Date.now()
+    endAt = startedAt + secs * 1000
+    phase = 'loop'
+    clearInterval(timer)
+    timer = setInterval(() => {
+      const now = Date.now()
+      cb.onTick?.({ left: Math.max(0, (endAt - now) / 1000) })
+      if (now >= endAt + 1500) {
+        stop()
+        cb.onEnd?.()
+      }
+    }, 500)
+  }
+  async function begin() {
+    try {
+      diag.info = await plugin.sleepStart({ seconds: secs, fade: fadeSeconds(secs) })
+      diag.played = true
+      diag.err = null
+    } catch (e) {
+      diag.played = false
+      diag.err = `${e?.code ?? 'Hata'}: ${e?.message ?? e}`.slice(0, 120)
+    }
+    if (phase === 'stopped') {
+      plugin.sleepStop().catch(() => {})
+      return false
+    }
+    if (!diag.played) {
+      phase = 'blocked'
+      return false
+    }
+    run()
+    return true
+  }
+  return {
+    get phase() { return phase },
+    get diag() { return diag },
+    listen({ onTick, onEnd }) { cb = { onTick, onEnd } },
+    refresh,
+    async prepare() {
+      if (phase === 'idle') phase = 'ready'
+      return phase !== 'stopped'
+    },
+    async start({ totalSec, onTick, onEnd }) {
+      cb = { onTick, onEnd }
+      if (phase === 'stopped') return false
+      secs = totalSec
+      return begin()
+    },
+    async resume() {
+      if (phase !== 'blocked') return false
+      return begin()
+    },
+    elapsed: () => (startedAt ? Math.min(Date.now(), endAt) - startedAt : 0) / 1000,
+    stop,
+  }
+}
+
+function createWebSleepPlayer() {
   let timer = 0, phase = 'idle', endAt = 0, fadeAt = 0, startedAt = 0
   let loopUrl = null, fadeUrl = null, ready = null, cb = {}
   const diag = { files: null, played: null, fadeAt: null } // tanı (test derlemesi, Bug 22)

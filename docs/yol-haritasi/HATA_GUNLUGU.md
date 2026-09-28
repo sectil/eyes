@@ -586,3 +586,15 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   süre 10 sn'de bir tazelenir; dokunduğun an süre bittiyse sessizce müziksiz kurmaz, söyler. Web'de müzik düğmesi yok.
   Kurulum sürerken X kapalı. Geliştirmede StrictMode sahte sökümü devredilen müziği susturuyordu: söküm bir tik sonra.
   Test: çalma isteği alarm kurulmadan ÖNCE (sıra değişince test düşüyor, denendi); kurulamazsa müzik durur.
+
+## Bug 22 (cihaz kanıtı, 2026-09-28 19:55): ses öğesi çalıyor ama duyulmuyor
+- Sahibinin ekranı (tanı satırı): "çal: evet · öğe: çalıyor 6.4 sn · müzik · hazır 4 · ses bağlamı: none"; "Müzik
+  sesi yok". Yani çalma başlıyor, dosya yüklü, zaman ilerliyor; ses hoparlöre ulaşmıyor. Dosya sessiz değil (tepe
+  0,43, rms 0,075).
+- Web görünümündeki <audio> ile 4 tur uğraşıldı → YÖNTEM DEĞİŞTİ: uyku sesi iOS'un kendi oynatıcısıyla
+  (AlarmPlugin.sleepStart: AVAudioPlayer, public/sleep/sakin-loop.wav döngüde, son F sn'de setVolume(0, fadeDuration:),
+  süre bitince durur; ses oturumu .playback, bitince kullanıcının tercihine döner). Dokunuş gerekmez; kilitli ekranda
+  iOS sürdürür. Tarayıcıda eski <audio> yolu kalır.
+- Tanı satırı artık: oynatıcı, çalıyor mu + saniye, telefonun MEDYA ses düzeyi (0–100), çıkış (Speaker / kulaklık /
+  Bluetooth), kategori. Yine duyulmazsa neden bu satırda görünür (ör. medya sesi 0, çıkış Bluetooth).
+- Swift bu ortamda derlenmedi; cihazda derlenip denenecek.

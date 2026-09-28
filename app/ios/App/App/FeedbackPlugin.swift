@@ -255,6 +255,14 @@ final class AppAudioSession {
         try applyPreferredLocked()
     }
 
+    /// Uyku sesi (AlarmPlugin) bitince kullanıcının tercihine dön. Tercih yoksa dokunmaz.
+    func restorePreferred() {
+        lock.lock()
+        defer { lock.unlock() }
+        if recording { return }
+        try? applyPreferredLocked()
+    }
+
     /// SpeechPlugin: kategoriyi .playAndRecord'a çevirmeden önce.
     func beginRecording() {
         lock.lock()

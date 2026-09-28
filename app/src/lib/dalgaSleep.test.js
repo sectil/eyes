@@ -82,3 +82,48 @@ describe('uyku oynatıcı: hazır dosyalar (Bug 22)', () => {
     q.stop()
   })
 })
+
+describe('uyku oynatıcı: iPhone yerel oynatıcı (Bug 22)', () => {
+  const fake = (over = {}) => ({
+    sleepStart: vi.fn(async () => ({ playing: true, time: 0, gain: 1, outputVolume: 0.5, category: 'AVAudioSessionCategoryPlayback', route: 'Speaker' })),
+    sleepStop: vi.fn(async () => {}),
+    sleepStatus: vi.fn(async () => ({ playing: true, time: 3, gain: 1, outputVolume: 0.5, route: 'Speaker' })),
+    ...over,
+  })
+  it('süre ve kısılma iOS\'a verilir; çalınca döngüde, durunca iOS da durur', async () => {
+    const { createNativeSleepPlayer } = await import('./dalgaSleep.js')
+    const plugin = fake()
+    const p = createNativeSleepPlayer(plugin)
+    expect(await p.prepare()).toBe(true)
+    expect(await p.start({ totalSec: 300 })).toBe(true)
+    expect(plugin.sleepStart).toHaveBeenCalledWith({ seconds: 300, fade: 150 })
+    expect(p.phase).toBe('loop')
+    expect(p.diag).toMatchObject({ native: true, played: true, info: { route: 'Speaker', outputVolume: 0.5 } })
+    await p.refresh()
+    expect(p.diag.info.time).toBe(3)
+    p.stop()
+    expect(plugin.sleepStop).toHaveBeenCalled()
+    expect(p.phase).toBe('stopped')
+  })
+  it('iOS reddederse blocked ve hata metni; "dokun, başlat" yeniden dener', async () => {
+    const { createNativeSleepPlayer } = await import('./dalgaSleep.js')
+    const err = Object.assign(new Error('Uyku sesi pakette yok'), { code: 'MISSING' })
+    const plugin = fake({ sleepStart: vi.fn().mockRejectedValueOnce(err).mockResolvedValueOnce({ playing: true }) })
+    const p = createNativeSleepPlayer(plugin)
+    expect(await p.start({ totalSec: 60 })).toBe(false)
+    expect(p.phase).toBe('blocked')
+    expect(p.diag.err).toBe('MISSING: Uyku sesi pakette yok')
+    expect(await p.resume()).toBe(true)
+    expect(p.phase).toBe('loop')
+    p.stop()
+  })
+  it('başlarken durdurulursa iOS\'taki ses de durdurulur', async () => {
+    const { createNativeSleepPlayer } = await import('./dalgaSleep.js')
+    const plugin = fake()
+    const p = createNativeSleepPlayer(plugin)
+    const run = p.start({ totalSec: 60 })
+    p.stop()
+    expect(await run).toBe(false)
+    expect(plugin.sleepStop).toHaveBeenCalledTimes(2)
+  })
+})

@@ -22,6 +22,10 @@ import AppIntents
 /// - current() → { id?, scheduled } (iOS'ta hâlâ kurulu mu; çalıp kapanan alarm iOS'ta silinir)
 /// - preview({ file }) / stopPreview(): paketteki sesi uygulamanın içinde çalar (alarm kurmadan)
 /// - consumeOpen() → { openedAt? } alarmdaki "Nefona'yı aç"a dokunulduğu an (sn), okununca silinir
+/// - sleepStart({ seconds, fade }) / sleepStop() / sleepStatus(): uyku sesi iOS'un kendi oynatıcısıyla (Bug 22: web
+///   görünümündeki <audio> çalıyor görünüp duyulmuyordu). public/sleep/sakin-loop.wav döngüde; son `fade` sn'de
+///   setVolume(0, fadeDuration:) ile kısılır, süre bitince durur; kilitli ekranda sürer (UIBackgroundModes: audio).
+///   Döner/raporlar: { playing, time, gain, outputVolume (telefonun medya sesi 0–1), category, route }
 @objc(AlarmPlugin)
 public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "AlarmPlugin"
@@ -34,7 +38,10 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "current", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "preview", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "stopPreview", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "consumeOpen", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "consumeOpen", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "sleepStart", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "sleepStop", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "sleepStatus", returnType: CAPPluginReturnPromise)
     ]
 
     static let idKey = "nefona.alarm.id"
@@ -205,6 +212,89 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
             self.player = nil
             call.resolve()
         }
+    }
+
+    // MARK: Uyku sesi (yerel oynatıcı)
+    private var sleepPlayer: AVAudioPlayer?
+    private var sleepFade: DispatchWorkItem?
+    private var sleepEnd: DispatchWorkItem?
+
+    @objc func sleepStart(_ call: CAPPluginCall) {
+        let seconds = call.getDouble("seconds") ?? 0
+        guard seconds >= 1 else {
+            call.reject("seconds gerekli", "ARGS")
+            return
+        }
+        let fade = max(1, min(call.getDouble("fade") ?? 180, seconds / 2))
+        guard let url = Bundle.main.url(forResource: "sakin-loop", withExtension: "wav", subdirectory: "public/sleep") else {
+            call.reject("Uyku sesi pakette yok", "MISSING")
+            return
+        }
+        DispatchQueue.main.async {
+            self.stopSleepOnMain()
+            do {
+                // Sessiz tuşunda ve kilitli ekranda da çalsın; kullanıcının "ses kapalı" (ambient) tercihinden bağımsız
+                let session = AVAudioSession.sharedInstance()
+                try session.setCategory(.playback, mode: .default, options: [])
+                try session.setActive(true)
+                let p = try AVAudioPlayer(contentsOf: url)
+                p.numberOfLoops = -1
+                p.volume = 1
+                p.prepareToPlay()
+                guard p.play() else {
+                    AppAudioSession.shared.restorePreferred()
+                    call.reject("Çalınamadı", "PLAY")
+                    return
+                }
+                self.sleepPlayer = p
+                let f = DispatchWorkItem { [weak self] in self?.sleepPlayer?.setVolume(0, fadeDuration: fade) }
+                let e = DispatchWorkItem { [weak self] in self?.stopSleepOnMain() }
+                self.sleepFade = f
+                self.sleepEnd = e
+                DispatchQueue.main.asyncAfter(deadline: .now() + max(0, seconds - fade), execute: f)
+                DispatchQueue.main.asyncAfter(deadline: .now() + seconds + 1, execute: e)
+                call.resolve(Self.audioInfo(p))
+            } catch {
+                AppAudioSession.shared.restorePreferred()
+                call.reject("Çalınamadı: \(error)", "PLAY")
+            }
+        }
+    }
+
+    @objc func sleepStop(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            self.stopSleepOnMain()
+            call.resolve()
+        }
+    }
+
+    @objc func sleepStatus(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            call.resolve(Self.audioInfo(self.sleepPlayer))
+        }
+    }
+
+    private func stopSleepOnMain() {
+        sleepFade?.cancel()
+        sleepEnd?.cancel()
+        sleepFade = nil
+        sleepEnd = nil
+        guard let p = sleepPlayer else { return }
+        p.stop()
+        sleepPlayer = nil
+        AppAudioSession.shared.restorePreferred()
+    }
+
+    static func audioInfo(_ p: AVAudioPlayer?) -> [String: Any] {
+        let s = AVAudioSession.sharedInstance()
+        return [
+            "playing": p?.isPlaying ?? false,
+            "time": p?.currentTime ?? 0,
+            "gain": Double(p?.volume ?? 0),
+            "outputVolume": Double(s.outputVolume),
+            "category": s.category.rawValue,
+            "route": s.currentRoute.outputs.map { $0.portType.rawValue }.joined(separator: ","),
+        ]
     }
 
     @objc func consumeOpen(_ call: CAPPluginCall) {

@@ -248,6 +248,18 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
     if (!testUnlock() || (phase !== 'sleep-ready' && phase !== 'sleep')) return undefined
     const tick = () => {
       const d = sleepRef.current?.diag ?? {}
+      if (d.native) {
+        // iPhone oynatıcısı: medya sesi (0–100), çıkış (hoparlör/kulaklık), kategori
+        sleepRef.current.refresh?.()
+        const i = d.info ?? {}
+        setProbe([
+          `oynatıcı: iOS${d.err ? ` · HATA ${d.err}` : ''}`,
+          `çal: ${d.played == null ? '—' : d.played ? 'evet' : 'HAYIR'} · ${i.playing ? 'çalıyor' : 'duruyor'} ${Math.round(i.time ?? 0)} sn · kazanç ${Math.round((i.gain ?? 0) * 100)}`,
+          `telefon medya sesi: ${i.outputVolume == null ? '—' : Math.round(i.outputVolume * 100)} / 100`,
+          `çıkış: ${i.route || '—'} · ${String(i.category ?? '—').replace('AVAudioSessionCategory', '')}`,
+        ].join('\n'))
+        return
+      }
       const m = mediaProbe()
       setProbe([
         `dosya: ${d.files ?? '—'}${d.fadeAt ? ` · şimdi ${d.fadeAt}` : ''}`,
