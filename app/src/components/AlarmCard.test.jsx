@@ -325,3 +325,19 @@ describe('kurulum sayfası', () => {
     expect(r.text()).toContain('Yarın çalmaz · ilk: Pazartesi 07:00')
   })
 })
+
+describe('Kurulum özeti: her satırın kendi "değiştir"i (sahibi, 2026-09-28 21:28)', () => {
+  it('"Uyandıran ses" yanındaki değiştir yalnız ses listesini, "Uyanınca" yanındaki yalnız uyanınca seçimini açar', async () => {
+    const r = await mount(h(AlarmSetup, { status: { platform: 'alarmkit', auth: 'authorized' }, now: EVE, onDone: () => {}, onBack: () => {} }))
+    const links = () => r.container.querySelectorAll((n) => n.nodeName === 'BUTTON' && n.getAttribute('class') === 'link-btn')
+    expect(links().map((b) => b.textContent)).toEqual(['değiştir', 'değiştir'])
+    expect(r.text()).not.toContain('Kuş Bahçesi')
+    await act(async () => links()[0].click()) // Uyandıran ses
+    expect(r.text()).toContain('Kuş Bahçesi')
+    expect(r.text()).not.toContain('Alarmdan sonra uygulamayı açınca')
+    await act(async () => links()[1].click()) // Uyanınca: ses listesi kapanır
+    expect(r.text()).not.toContain('Kuş Bahçesi')
+    expect(r.text()).toContain('Alarmdan sonra uygulamayı açınca')
+    expect(links().map((b) => b.textContent)).toEqual(['değiştir', 'kapat'])
+  })
+})

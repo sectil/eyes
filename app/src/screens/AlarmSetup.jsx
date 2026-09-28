@@ -39,7 +39,7 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
   const [sleep, setSleep] = useState(d.sleep)
   const [sound, setSound] = useState(d.sound)
   const [wake, setWake] = useState(d.wake)
-  const [more, setMore] = useState(false)
+  const [open, setOpen] = useState(null) // Özet'te açık bölüm: 'sound' | 'wake' | null
   const [playing, setPlaying] = useState(null)
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState(null)
@@ -69,6 +69,15 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
   const pickTime = (t, other = false) => {
     setTime(t)
     setOtherTime(other)
+  }
+
+  // Özet'te bir bölüm açılır; ses listesi kapanınca çalan önizleme de susar
+  function toggle(part) {
+    if (open === 'sound' && playing) {
+      stopPreview()
+      setPlaying(null)
+    }
+    setOpen((v) => (v === part ? null : part))
   }
 
   async function play(id) {
@@ -212,30 +221,35 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
       </section>
 
       <section className="al-sum" aria-label="Özet">
-        <div className="al-sum-row"><span>Uyandıran ses:</span><b>{notify ? 'bildirim sesi' : soundById(sound).name}</b></div>
+        <div className="al-sum-row">
+          <span>Uyandıran ses:</span><b>{notify ? 'bildirim sesi' : soundById(sound).name}</b>
+          {!notify && <button type="button" className="link-btn" aria-expanded={open === 'sound'} onClick={() => toggle('sound')}>{open === 'sound' ? 'kapat' : 'değiştir'}</button>}
+        </div>
+        {open === 'sound' && !notify && (
+          <div className="al-sheet">
+            <div role="radiogroup" aria-label="Uyandıran ses">
+              {ALARM_SOUNDS.map((s) => (
+                <div key={s.id} className="al-snd">
+                  <label>
+                    <input type="radio" name="al-sound" checked={sound === s.id} onChange={() => setSound(s.id)} />
+                    <span className="al-snd-name"><b>{s.name}</b><span>{s.sub}</span></span>
+                  </label>
+                  {s.file && (
+                    <button type="button" className="al-play" aria-pressed={playing === s.id} aria-label={playing === s.id ? `${s.name}: durdur` : `${s.name}: dinle`} onClick={() => play(s.id)}>
+                      {playing === s.id ? <Square size={14} fill="currentColor" aria-hidden="true" /> : <Play size={16} fill="currentColor" aria-hidden="true" />}
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="al-sum-row">
           <span>Uyanınca:</span><b>{WAKE_TEXT[wake]}</b>
-          <button type="button" className="link-btn" aria-expanded={more} onClick={() => setMore((v) => !v)}>{more ? 'kapat' : 'değiştir'}</button>
+          <button type="button" className="link-btn" aria-expanded={open === 'wake'} onClick={() => toggle('wake')}>{open === 'wake' ? 'kapat' : 'değiştir'}</button>
         </div>
-        {more && (
+        {open === 'wake' && (
           <div className="al-sheet">
-            {!notify && (
-              <div role="radiogroup" aria-label="Uyandıran ses">
-                {ALARM_SOUNDS.map((s) => (
-                  <div key={s.id} className="al-snd">
-                    <label>
-                      <input type="radio" name="al-sound" checked={sound === s.id} onChange={() => setSound(s.id)} />
-                      <span className="al-snd-name"><b>{s.name}</b><span>{s.sub}</span></span>
-                    </label>
-                    {s.file && (
-                      <button type="button" className="al-play" aria-pressed={playing === s.id} aria-label={playing === s.id ? `${s.name}: durdur` : `${s.name}: dinle`} onClick={() => play(s.id)}>
-                        {playing === s.id ? <Square size={14} fill="currentColor" aria-hidden="true" /> : <Play size={16} fill="currentColor" aria-hidden="true" />}
-                      </button>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
             <div className="al-q">
               <p className="al-q-label" id="al-wake">Uyanınca</p>
               <div className="al-chips" role="radiogroup" aria-labelledby="al-wake">

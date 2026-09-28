@@ -619,3 +619,11 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   Kaida 2005 cümlesi çalışmanın söylediğine indirildi (9 yaşlı kişi, öğle uykusu, zorla vs kendiliğinden uyanma);
   alt yazılar betimleyici ("hafif/derin uykuya" kanıtsızdı); sıra etkisi ve Dalga tık ölçütü belgelendi; eski
   Dalga üretim yolu README'de "kullanılmaz"; __pycache__ depodan çıktı; CAF testine biçim/bayrak (mutasyonla denendi).
+
+## Cihaz sonucu (2026-09-28 21:24, sahibi, kabloyla Xcode derlemesi)
+- Uyku müziği ÇALIYOR ve duyuluyor: tanı "oynatıcı: iOS · çalıyor 15 sn · kazanç 100 · medya sesi 40/100 · Speaker ·
+  Playback". Bug 22 cihazda doğrulandı (yerel oynatıcı + hoparlöre göre yeniden hazırlanan ses).
+- Sahibi yeni sesleri bulamadı ("diğer sesler yok gibi"): eski deneme panelinde yeni sesler yok; kurulumda ses listesi
+  "Uyanınca" satırının "değiştir"inin arkasındaydı. Düzeltme: "Uyandıran ses" satırının kendi "değiştir"i, her satır
+  yalnız kendi bölümünü açar (test: AlarmCard.test.jsx "Kurulum özeti").
+- Açık: alarmda Gün Işığı çaldı mı, "9" simgesi görünüyor mu (sahibinden bekleniyor).
