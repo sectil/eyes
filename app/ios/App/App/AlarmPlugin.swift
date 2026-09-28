@@ -10,7 +10,7 @@ import AppIntents
 /// Nefona alarmı (Artifact "Nefona Alarm" v3, onaylı 2026-09-28). JS adı: "Alarm" (lib/alarm.js, lib/native.js).
 /// AlarmKit yalnız iOS 26+ (sessiz ve Odak modunu deler). iOS 15–25'te JS tarafı bildirimle hatırlatır.
 /// AlarmKit ve AppIntents zayıf bağlı (OTHER_LDFLAGS -weak_framework); her çağrı #available ile korunur.
-/// Tek alarm: kimliği UserDefaults'ta; yeniden kurmak eskisini iptal eder.
+/// Tek alarm: kimliği UserDefaults'ta; yeniden kurmak yenisi kurulduktan SONRA eskisini iptal eder.
 /// Ses: uygulama paketindeki dosya adı (Library/Sounds'taki dosya çalmıyor — HATA_GUNLUGU Bug 20); nil = iOS varsayılanı.
 /// - status() → { available, auth: authorized|denied|notDetermined|unavailable }
 /// - requestAuth() → { auth }
@@ -78,7 +78,6 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
         if #available(iOS 26.0, *) {
             Task {
                 do {
-                    Self.cancelStored()
                     let alert = AlarmPresentation.Alert(
                         title: "Nefona · Günaydın",
                         stopButton: AlarmButton(text: "Kapat", textColor: .white, systemImageName: "stop.circle"),
@@ -98,8 +97,10 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
                     } else {
                         config = .alarm(schedule: schedule, attributes: attributes, secondaryIntent: OpenNefonaIntent())
                     }
+                    // Önce yenisi: kurulamazsa eski alarm yerinde kalır (JS de eskisini gösterir)
                     let id = UUID()
                     _ = try await AlarmManager.shared.schedule(id: id, configuration: config)
+                    Self.cancelStored()
                     UserDefaults.standard.set(id.uuidString, forKey: Self.idKey)
                     call.resolve(["id": id.uuidString])
                 } catch {

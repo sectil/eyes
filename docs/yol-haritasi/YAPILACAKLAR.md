@@ -136,6 +136,14 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
       - VARSAYIM (kodda işaretli): Dalga sesi alarmda çalar (deneme 2 bekleniyor; çalmazsa `DEFAULT_SOUND` = 'phone');
         çaldıktan sonra 2 saat içindeki ilk açılış uyanma işareti; "Uyanınca" kartı 4 saat, soru 8 saat; iki soru
         arası ≥ 3 gün; gece 04.00'ten önce "yarın" = bu sabah; akşam kartı yalnız 19.00–23.59.
+      - Bağımsız kod incelemesi (2026-09-28): 11 bulgu. Düzeltildi: "Yarın sabah" tek dokunuşu öğrenilen günlerle
+        kuruyordu (artık yalnız yarın); yeniden kurma hata verirse eski alarm siliniyordu (artık önce yenisi, iki
+        yolda da); iOS 26'ya geçişte eski bildirim yedeği kalıyordu; kalmış "Nefona'yı aç" damgası saatler sonra
+        ekrandan koparıyordu (artık ≤ 10 dk, VARSAYIM); harita yeni uyanmayı ertesi güne dek göstermiyordu; çalmış
+        tek seferlik alarm "değiştir" açılıyordu; Hatırlatmalar'dan açılan kurulum Ana sayfaya dönüyordu; izin
+        penceresinden sonra kart durumu yenilenmiyordu; üç metin. Karar sahibinde: alarm kartı Ana sayfanın tek kart
+        yuvasının dışında (tasarımda en üstte ayrı kart), hatırlatma kartıyla aynı anda görünebilir.
+        Bilinen: deneme paneli alarmındaki "Nefona'yı aç" da uyanma damgası yazar (yalnız test derlemesi; panel kalkınca biter).
 - [ ] **Cihazda bak (alarm):** (1) derleniyor mu (Xcode 26); (2) 14.00'ten sonra Ana sayfada kart; Evet → Kur;
       iOS alarm izni; (3) haftalık alarm seçilen günlerde çalıyor mu, tek seferlik bir kez; (4) Dalga sesi çalıyor mu,
       25 sn'de susuyor mu tekrar mı ediyor; (5) "Nefona'yı aç" uygulamayı açıp sabah kartını/ekranını getiriyor mu;

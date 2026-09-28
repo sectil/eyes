@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { X, Play, Square } from 'lucide-react'
 import {
-  setupDefaults, buildAlarm, hhmm, withSuffix, parseHhmm, daysLabel, latency, LATENCY_START, nextOccurrence, ringLabel,
+  setupDefaults, buildAlarm, hhmm, withSuffix, parseHhmm, daysLabel, latency, LATENCY_START, nextOccurrence, nextRing, ringLabel,
   WEEK_ORDER, WEEKDAY_SHORT, WEEKDAY_LONG, SLEEP_CHOICES, SLEEP_OTHER,
 } from '../lib/alarm.js'
 import { loadAlarm, loadAlarmLog, saveAlarm, addAlarmEvent } from '../lib/alarmLog.js'
@@ -23,10 +23,13 @@ const sleepText = (v) => (v === 'auto' ? 'Sana göre' : `${v} dk`)
 // status: test/önizleme için dışarıdan verilebilir; yoksa telefondan okunur. onDone(): kuruldu ya da kaldırıldı.
 export default function AlarmSetup({ status: given = null, now: nowProp = null, onDone, onBack }) {
   const [status, setStatus] = useState(given)
-  const existing = useMemo(() => loadAlarm(), [])
-  const live = existing && existing.on ? existing : null
-  const log = useMemo(() => loadAlarmLog(), [])
   const now = useMemo(() => nowProp ?? new Date(), [nowProp])
+  // Kurulu = sırada bir çalışı var (çalmış "Yalnız yarın" alarmı değiştirilecek alarm değildir)
+  const live = useMemo(() => {
+    const a = loadAlarm()
+    return a && nextRing(a, now) ? a : null
+  }, [now])
+  const log = useMemo(() => loadAlarmLog(), [])
   const d = useMemo(() => setupDefaults({ log, alarm: live, now, defaultSound: DEFAULT_SOUND }), [log, live, now])
   const [time, setTime] = useState(d.time)
   const [days, setDays] = useState(d.days)
@@ -203,7 +206,7 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
               <div className="al-chips" role="radiogroup" aria-labelledby="al-wake">
                 {WAKE.map((w) => <button key={w.id} type="button" role="radio" className="al-chip" aria-checked={wake === w.id} onClick={() => setWake(w.id)}>{w.label}</button>)}
               </div>
-              <p className="al-q-sub">{"Alarmdaki \"Nefona'yı aç\"a dokununca açılır. İsteğe bağlı."}</p>
+              <p className="al-q-sub">{notify ? 'Hatırlatmaya dokununca açılır. İsteğe bağlı.' : "Alarmdaki \"Nefona'yı aç\"a dokununca açılır. İsteğe bağlı."}</p>
             </div>
           </div>
         )}

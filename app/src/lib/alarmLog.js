@@ -105,5 +105,14 @@ export function alarmHabits(log) {
   }
   return out
 }
-// Veri merkezine giden alışkanlık listesi: mola/su (habit-log) + alarm günleri
+// Veri merkezine giden alışkanlık listesi: mola/su (habit-log) + alarm günleri. hubHabitsKey: iki günlüğün ham
+// uzunluğu (ayrıştırmadan; ekranlar yeni kayıtta yeniden okusun diye memo anahtarı)
+export function hubHabitsKey(storage) {
+  try {
+    const s = store(storage)
+    return `${s?.getItem(ALARM_LOG_KEY)?.length ?? 0}:${s?.getItem('gozolcum:habit-log')?.length ?? 0}`
+  } catch {
+    return ''
+  }
+}
 export const loadHubHabits = (storage) => [...loadHabits(storage), ...alarmHabits(loadAlarmLog(storage))]

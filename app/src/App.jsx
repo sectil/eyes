@@ -59,7 +59,7 @@ import { viewFor } from './modules/views.js'
 import IPHONE_SCREENS from './lib/iphoneScreens.json'
 import GazeCalibration from './screens/GazeCalibration.jsx'
 import GazeTest from './screens/GazeTest.jsx'
-import { alarmStatus, consumeOpen, cancelAlarm } from './lib/alarmNative.js'
+import { alarmStatus, consumeOpen, cancelAlarm, ALARM_CHANGED } from './lib/alarmNative.js'
 import { loadAlarm, loadAlarmLog, addAlarmEvent } from './lib/alarmLog.js'
 import { wakeSignal, morningCard, nextRing, ringLabel, daysLabel } from './lib/alarm.js'
 import { hasGazeModel } from './lib/gazeCalib.js'
@@ -87,6 +87,8 @@ const REST_ROUTE = 'eye-rest'
 // Hatırlatmaya dokununca açılan ekran (yürüyüş ve Çalışma günleri → Ana sayfa); çalışma oturumu → mola
 const TAP_ROUTE = { mola: 'mola', walk: 'home', breath: 'breath-1', water: 'water', study: 'home' }
 const DAY_MS = 86400000
+// "Nefona'yı aç" dokunuşu en çok bu kadar eskiyse sabah ekranına/Ana sayfaya götürür (VARSAYIM)
+const OPEN_NAV_MS = 10 * 60000
 // Apple Sağlık'tan okunan gün sayısı: Gelişim'deki yürüyüş ölçümü geçmiş günlerin adımına bakar (Swift dailyTotals
 // en çok 60 gün). Ana sayfa ve Gelişim özeti yine son 7 günden (summarizeHealth; ortalama = önceki 6 gün).
 const STEP_DAYS = 60
@@ -261,7 +263,8 @@ export default function App() {
     const now = new Date()
     const w = wakeSignal({ alarm, log: loadAlarmLog(), now, openedAt })
     if (w) addAlarmEvent('wake', { via: w.via, ring: w.ring }, w.at)
-    if (openedAt == null) return
+    // Yalnız taze dokunuş yönlendirir: kalmış bir zaman damgası saatler sonra kişiyi ekranından koparmasın
+    if (openedAt == null || now.getTime() - openedAt > OPEN_NAV_MS) return
     const m = morningCard({ now, alarm, log: loadAlarmLog(), sessions: store.get().sessions })
     goRef.current?.(m?.kind === 'wake' ? 'alarm-morning' : 'home')
   }
@@ -273,8 +276,13 @@ export default function App() {
     }
     check()
     const onVis = () => document.visibilityState === 'visible' && check()
+    const onChange = () => alarmStatus().then(setAlarmSt).catch(() => {})
     document.addEventListener('visibilitychange', onVis)
-    return () => document.removeEventListener('visibilitychange', onVis)
+    window.addEventListener(ALARM_CHANGED, onChange)
+    return () => {
+      document.removeEventListener('visibilitychange', onVis)
+      window.removeEventListener(ALARM_CHANGED, onChange)
+    }
   }, [])
 
   // Göz ekranında: 1 dk kala uyarı; bütçe dolunca oyun/egzersizde tur bitirme payı, sonra kilit.
@@ -967,7 +975,7 @@ export default function App() {
             onStartFocus={beginFocus}
             onStopFocus={endFocus}
             alarmText={alarmSt.platform === 'web' ? null : alarmRowText()}
-            onAlarm={alarmSt.platform === 'web' ? null : () => go('alarm')}
+            onAlarm={alarmSt.platform === 'web' ? null : () => go('alarm-rem')}
             onBack={() => go('info')}
           />
           {healthSheet && <ConsentSheet kind={healthSheetKind} onAnswer={(g) => { setHealthSheet(false); answerHealth(g) }} />}

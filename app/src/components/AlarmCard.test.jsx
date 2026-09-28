@@ -81,7 +81,7 @@ describe('alarm kartı', () => {
     expect(r.text()).toContain('Ses bittiğinde uyumuş muydun?')
     await r.tap('Hayır')
     expect(loadAlarmLog().at(-1)).toMatchObject({ type: 'morning', answer: 'no', before: 15, after: 20, ring: at(2026, 9, 29, 7, 0).toISOString() })
-    expect(r.text()).toContain('Bu gece uyku sesi 20 dk çalacak.')
+    expect(r.text()).toContain('"Sana göre" süren artık 20 dk.')
   })
   it('izin reddi: Tamam gizler ama "Bu akşam değil" serisine sayılmaz', async () => {
     const r = await mount(card({ status: { platform: 'alarmkit', auth: 'denied' } }))

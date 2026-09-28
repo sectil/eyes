@@ -11,6 +11,15 @@ export const FALLBACK_ONCE = 7607
 const FALLBACK_IDS = Array.from({ length: 8 }, (_, i) => FALLBACK_BASE + i)
 export const ALARM_TITLE = 'Nefona · Günaydın'
 export const FALLBACK_BODY = 'Güne başlama vakti.'
+// Kurma/kaldırma sonrası (izin penceresi görünürlük olayı tetiklemez): App durumu yeniden okur
+export const ALARM_CHANGED = 'nefona:alarm-changed'
+const changed = () => {
+  try {
+    globalThis.dispatchEvent?.(new Event(ALARM_CHANGED))
+  } catch {
+    // ortamda Event yok
+  }
+}
 
 let modPromise = null
 const loadMod = () => {
@@ -45,8 +54,15 @@ export function fallbackNotifications(cfg) {
 }
 
 // Kurar. Döner: { ok: true } | { ok: false, reason: 'denied'|'unsupported'|'error', detail? }
-// İzin burada istenir (kişi "Kur"a dokundu). Önce eskisi iptal edilir (tek alarm).
+// İzin burada istenir (kişi "Kur"a dokundu). Tek alarm: yenisi kurulduktan sonra eskisi iptal edilir.
 export async function scheduleAlarm(cfg, platform) {
+  try {
+    return await scheduleOn(cfg, platform)
+  } finally {
+    changed()
+  }
+}
+async function scheduleOn(cfg, platform) {
   if (platform === 'alarmkit') {
     try {
       let { auth } = await Alarm.status()
@@ -54,6 +70,8 @@ export async function scheduleAlarm(cfg, platform) {
       if (auth !== 'authorized') return { ok: false, reason: 'denied' }
       const file = soundById(cfg.sound).file
       await Alarm.schedule({ hour: cfg.hour, minute: cfg.minute, weekdays: cfg.days, ...(file ? { sound: file } : {}) })
+      // iOS 26'ya güncellemeden önce kurulmuş bildirim yedeği kalmasın (ikisi birden çalmasın)
+      await cancelFallback()
       return { ok: true }
     } catch (e) {
       return { ok: false, reason: 'error', detail: String(e?.message ?? e) }
@@ -67,15 +85,28 @@ export async function scheduleAlarm(cfg, platform) {
       let { display } = await LN.checkPermissions()
       if (display !== 'granted' && display !== 'denied') display = (await LN.requestPermissions())?.display
       if (display !== 'granted') return { ok: false, reason: 'denied' }
-      await LN.cancel({ notifications: FALLBACK_IDS.map((id) => ({ id })) })
+      // Önce yenisi (aynı kimlik bekleyeni değiştirir); kurulamazsa eskisi yerinde kalır. Sonra kullanılmayanlar iptal.
       const list = fallbackNotifications(cfg)
       if (list.length) await LN.schedule({ notifications: list })
+      const used = new Set(list.map((n) => n.id))
+      const stale = FALLBACK_IDS.filter((id) => !used.has(id))
+      if (stale.length) await LN.cancel({ notifications: stale.map((id) => ({ id })) })
       return { ok: true }
     } catch (e) {
       return { ok: false, reason: 'error', detail: String(e?.message ?? e) }
     }
   }
   return { ok: false, reason: 'unsupported' }
+}
+
+async function cancelFallback() {
+  const pl = await ln()
+  if (!pl) return
+  try {
+    await pl.LN.cancel({ notifications: FALLBACK_IDS.map((id) => ({ id })) })
+  } catch {
+    // yoksay
+  }
 }
 
 // İki yolu da iptal eder (kaldır, "Tüm verileri sil"). Hata yutulur.
@@ -86,13 +117,8 @@ export async function cancelAlarm() {
   } catch {
     // AlarmKit yok
   }
-  const pl = await ln()
-  if (!pl) return
-  try {
-    await pl.LN.cancel({ notifications: FALLBACK_IDS.map((id) => ({ id })) })
-  } catch {
-    // yoksay
-  }
+  await cancelFallback()
+  changed()
 }
 
 // "Nefona'yı aç"a dokunulan an (ms) ya da null; okununca native tarafta silinir

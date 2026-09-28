@@ -3,7 +3,7 @@ import { ChevronRight } from 'lucide-react'
 import IrisMap from './IrisMap.jsx'
 import { growthMap, weakestDomain, WINDOW_DAYS } from '../lib/dataHub.js'
 import { who5Card, DOMAIN_LABEL } from '../lib/progress.js'
-import { loadHubHabits } from '../lib/alarmLog.js'
+import { loadHubHabits, hubHabitsKey } from '../lib/alarmLog.js'
 import { IRIS_ORDER } from '../lib/iris.js'
 import { registry } from '../modules/registry.js'
 import { dayKey } from '../lib/calendar.js'
@@ -20,7 +20,7 @@ const WHO5_FROM_DAY = 2
 export default function HomeMap({ tests = [], sessions = [], profile = null, onStart }) {
   const now = new Date()
   const today = dayKey(now) // gece yarısı geçince pencere kayar
-  const habits = useMemo(() => loadHubHabits(), [sessions, today]) // eslint-disable-line react-hooks/exhaustive-deps
+  const habits = useMemo(() => loadHubHabits(), [sessions, today, hubHabitsKey()]) // eslint-disable-line react-hooks/exhaustive-deps
   const map = useMemo(() => growthMap({ tests, sessions, profile, habits, now }), [tests, sessions, profile, habits, today]) // eslint-disable-line react-hooks/exhaustive-deps
   const who5 = useMemo(() => who5Card(sessions, now), [sessions, today]) // eslint-disable-line react-hooks/exhaustive-deps
   if (!map.sinceStart) return null

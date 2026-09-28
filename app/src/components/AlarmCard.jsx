@@ -48,7 +48,7 @@ export default function AlarmCard({ status, sessions = [], test = false, onStart
   if (thanks != null) {
     return (
       <section className="card al-card" aria-label="Uyku sesi" role="status">
-        <Head icon="moon" eyebrow="Kaydedildi" title={`Bu gece uyku sesi ${thanks} dk çalacak.`} />
+        <Head icon="moon" eyebrow="Kaydedildi" title={`"Sana göre" süren artık ${thanks} dk.`} />
         <div className="al-btns"><button type="button" className="btn btn-secondary btn-sm al-fit" onClick={() => setThanks(null)}>Tamam</button></div>
       </section>
     )
@@ -88,7 +88,7 @@ export default function AlarmCard({ status, sessions = [], test = false, onStart
         <div className="al-btns" role="group" aria-label="Cevap">
           {ANSWERS.map((a) => <button key={a.id} type="button" className="btn btn-secondary btn-sm" onClick={() => answer(a.id)}>{a.label}</button>)}
         </div>
-        <p className="al-sub">Cevabına göre bu gecenin süresi 5 dakika uzar ya da kısalır.</p>
+        <p className="al-sub">&quot;Hayır&quot; dersen bu geceki süre 5 dakika uzar, &quot;Çok önce&quot; dersen kısalır.</p>
       </section>
     )
   }

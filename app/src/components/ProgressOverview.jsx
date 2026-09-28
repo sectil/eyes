@@ -4,7 +4,7 @@ import { ChevronRight, TriangleAlert, OctagonAlert, ArrowLeft } from 'lucide-rea
 import { domainSummary, DOMAIN_LABEL, effectWeeks } from '../lib/progress.js'
 import { growthMap, calendarDays, WINDOW_DAYS } from '../lib/dataHub.js'
 import { dayKey } from '../lib/calendar.js'
-import { loadHubHabits } from '../lib/alarmLog.js'
+import { loadHubHabits, hubHabitsKey } from '../lib/alarmLog.js'
 import { IRIS_ORDER } from '../lib/iris.js'
 import { registry } from '../modules/registry.js'
 import { STRESS_NOW, SELF_AGREE } from '../lib/profile.js'
@@ -238,7 +238,7 @@ function Days28({ strip, label }) {
 
 export function GrowthMap({ tests, sessions, profile, tiles = {}, onOpen }) {
   const now = new Date()
-  const habits = useMemo(() => loadHubHabits(), [sessions]) // eslint-disable-line react-hooks/exhaustive-deps
+  const habits = useMemo(() => loadHubHabits(), [sessions, hubHabitsKey()]) // eslint-disable-line react-hooks/exhaustive-deps
   const today = dayKey(now) // gece yarısı geçince pencere kayar
   const recent = useMemo(() => growthMap({ tests, sessions, profile, habits, now }), [tests, sessions, profile, habits, today]) // eslint-disable-line react-hooks/exhaustive-deps
   const first = useMemo(() => (recent.canCompare ? growthMap({ tests, sessions, profile, habits, now, window: 'first' }) : null), [recent]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -311,7 +311,7 @@ const ANSWER_TEXT = {
 }
 const dayOf = (iso, start) => (start ? calendarDays(start, iso) + 1 : null)
 function DomainRegularity({ domain, tests, sessions, profile }) {
-  const habits = useMemo(() => loadHubHabits(), [sessions]) // eslint-disable-line react-hooks/exhaustive-deps
+  const habits = useMemo(() => loadHubHabits(), [sessions, hubHabitsKey()]) // eslint-disable-line react-hooks/exhaustive-deps
   const today = dayKey(new Date())
   const map = useMemo(() => growthMap({ tests, sessions, profile, habits, now: new Date() }), [tests, sessions, profile, habits, today])
   const x = map.domains[domain]

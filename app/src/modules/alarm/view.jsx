@@ -42,6 +42,8 @@ export default {
   render: (ctx, route) => {
     if (route === 'alarm-sleep') return <AlarmSleep ctx={ctx} />
     if (route === 'alarm-morning') return <Morning ctx={ctx} />
-    return <AlarmSetup onDone={() => ctx.go('home')} onBack={() => ctx.go('home')} />
+    // alarm-rem: Hatırlatmalar'daki "Sabah" satırından; bitince oraya döner
+    const to = route === 'alarm-rem' ? 'reminders' : 'home'
+    return <AlarmSetup onDone={() => ctx.go(to)} onBack={() => ctx.go(to)} />
   },
 }
