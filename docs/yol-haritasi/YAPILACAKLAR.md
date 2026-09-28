@@ -42,7 +42,23 @@ Son güncelleme: 2026-09-28.
 9. [ ] **Ölçüm ilkesi açıkları:** her modül istatistik kaydeder ve Gelişim'de görünür (ANA_BELGE §4). Taramada
    bulunan eksikler aşağıda "Ölçüm ilkesi" bölümünde.
 
-## Veri merkezi ve kendini geliştiren sistem (sahibin yönü, 2026-09-28)
+## Fikir: Nefona alarmı (sahibinden, 2026-09-28) — plan henüz mükemmel değil
+Sahibinin fikri: ekranda Nefes/Dalga görürken "alarm kur"; uygulamanın kendi alarmı, Dalga sesleriyle; "10 uygulama
+yerine tek uygulama". Değerlendirme: amaca bağlı alarm (uyanış = Dalga + sabah nefesi; akşam pratiği) mantıklı ve
+veri merkezine yazar (çaldı mı, yapıldı mı, erteleme). Genel saat uygulaması (dünya saati, kronometre) değil.
+Dayanak: AlarmKit (iOS 26+; sessiz ve Odak modunu deler). Melodik alarm ile uyku ataleti arasında ilişki var
+(McFarlane 2020, PLoS One doi:10.1371/journal.pone.0215788 ve Clocks Sleep doi:10.3390/clockssleep2020017; 50 ve
+20 kişi; iddia olarak söylenmez).
+Planı mükemmel yapmadan önce:
+- [ ] AlarmKit özel ses (uygulamaya gömülü dosya) destekliyor mu, doğrula.
+- [ ] Dalga sesleri dosya mı, canlı üretim mi, bak.
+- [ ] "Belli saate pratik kurmak" (eğer–o zaman planı) kanıtı: PubMed'de doğrula.
+- [ ] "Ertelemeden en iyi saati öğrenme": dayanak ara; yoksa VARSAYIM diye işaretle.
+- [ ] Bildirim planı v2 (onay bekliyor, 3 soru cevapsız) ile tek "Hatırlatma ve alarm" planında birleştir.
+- [ ] iOS 26 öncesi davranış (hatırlatmaya düşer, ekranda açıkça söylenir) ve ölçüm yükü (her sabah soru yok) tasarla.
+- [ ] Tasarım Artifact'i, sahibinin onayı, sonra kod.
+
+ (sahibin yönü, 2026-09-28)
 - [x] **1. Veri merkezi (okuma kapısı):** `lib/dataHub.js`. Testler, oturumlar, istatistik çekirdeği (`progress.js`),
       profil cevapları (başlangıç ve 28. gün) ve mola/su günlüğü 7 alan altında. Canlı her modülün merkeze ulaştığı
       testle denetleniyor. Göz kırp süre kaydediyor. Göz kırp ve egzersiz setleri merkeze bağlandı. Ödeme ekranındaki
