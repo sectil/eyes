@@ -34,6 +34,11 @@ Son güncelleme: 2026-09-28.
    - WHO-5 çok düşükse (ör. 28 altı) yalnız "bir sağlık uzmanıyla konuşmak iyi gelebilir" yazıyor. Kriz hattı ya da
      yardım kaynağı eklensin mi? (Hukukçu ile birlikte.)
    - WHO-5 ticari kullanım lisansı (hukukçu; aşağıda adım 2).
+   - Uygulama simgesi yeni çizim (Artifact "Nefona Simgesi", https://claude.ai/artifact/MG7F9LpSPajYQoKjmHgGW8):
+     iris eklendi, göz kemerle aynı merkezde, tek ışık, göz yukarı bakıyor; açık/koyu/renklendirilmiş üç sürüm.
+     ONAY BEKLİYOR. Çizim kaynağı: SVG (onaydan sonra repoya).
+   - Açılış ekranında Capacitor'ın varsayılan logosu (beyaz zeminde mavi "X") görünüyor; koyu temada da beyaz.
+     Öneri: uygulama zemininde yeni işaret (aynı Artifact'te). AYRI ONAY.
 9. [ ] **Ölçüm ilkesi açıkları:** her modül istatistik kaydeder ve Gelişim'de görünür (ANA_BELGE §4). Taramada
    bulunan eksikler aşağıda "Ölçüm ilkesi" bölümünde.
 
