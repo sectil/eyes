@@ -22,7 +22,7 @@ export const EXERCISES = {
   circleCcw: { title: 'Ters yönde daire', sub: 'Yavaş ve rahat', subTracked: 'Başını oynatmadan, ters yönde büyük ve yavaş', voice: 'exCcw', seconds: 10, visual: 'circle', dir: 'ccw', kind: 'relax', laps: 2 },
   farLook: { title: 'Uzağa bak', sub: 'Pencereden 6\u00a0metreden uzak bir noktaya', subTracked: 'Telefonun üstünden, 6\u00a0metreden uzak bir noktaya', voice: 'exFar', seconds: 20, visual: 'far', kind: 'comfort' }, // sensör: gözler uzağa odaklıyken süre işler
   nearFar: { title: 'Yakın – uzak', sub: 'Ortadaki irise 3 sn, uzağa 3 sn', voice: 'exNear', seconds: 18, visual: 'nearfar', kind: 'comfort', switches: 6 }, // sensör: yakın↔uzak geçiş sayısı
-  blink: { title: 'Tam göz kırp', sub: 'Ritmi sesle veririm, gözün kapalıyken dinle', voice: 'exBlink', seconds: 20, visual: 'blink', kind: 'evidence', closed: true, blinks: 5 },
+  blink: { title: 'Göz kırp', sub: 'Ritmi sesle veririm, gözün kapalıyken dinle', voice: 'exBlink', seconds: 20, visual: 'blink', kind: 'evidence', closed: true, blinks: 5 },
   // Nefes adımları: süreyle sayar (sensör yok). Ritim 4 sn al / 6 sn ver (lib/breath.js Sakin ritim);
   // görsel ve sesli aşamalar Routine.jsx'te. Kanıt/sınırlar: docs/yol-haritasi/NEFES_FARKINDALIK.md.
   breathCalm: { title: 'Sakin nefes', sub: '4 sn al · 6 sn ver · burnundan', voice: 'exCalm', seconds: 60, visual: 'breath', kind: 'calm' },
