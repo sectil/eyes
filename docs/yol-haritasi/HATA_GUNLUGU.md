@@ -672,3 +672,19 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
 - Alarm: seçilen uyandırma sesi (Gün Işığı) AlarmKit alarmında çaldı; "9 dk ertele" simgesi görünüyor (Bug 20'nin
   "hangi ses çaldı" sorusu kapandı).
 - Uyandırma sesleri sahibinin seçimiyle ElevenLabs Music sürümlerine geçti (design/uyanma-sesleri/README.md).
+
+## Uyku ekranı: gece saati (2026-09-28, tasarım değişikliği; hata değil)
+- Eski uyku ekranı (soluk beyaz tek satır saat + "N dk sonra yavaşça susacak") yerine tasarım A (sahibi seçti):
+  kehribar, kısık, alt alta büyük saat; kalan müzik çizgisi; alarm + kalan süre. Müzik kendiliğinden bitince sonuç
+  ekranına geçilmez: saat ve alarm kalır (sleepState 'done'), kayıt o anda saklanır, ekran açık tutulmaz; "Bitir" sonuca.
+- Bağımsız inceleme (3 ajan: mantık, tasarım/erişilebilirlik, gerileme) 0 BLOCKER; bulunup düzeltilenler:
+  alarma kalan süre dakikanın ikinci yarısında 1 dk eksikti (saniye yuvarlaması; artık ekrandaki dakikadan hesaplanır,
+  testli); VoiceOver'da "Bitir" 5 sn dolunca odaktayken kayboluyordu (odakta süre durur); açık temada iOS esnemesi siyah
+  ekranın kenarında açık gri gösterebilirdi (gece ekranı açıkken html/body siyah, esneme kapalı; cihazda bakılacak);
+  "Bitir" çıkar çıkmaz ikinci dokunuş müziği bitirebiliyordu (400 ms koruma); StrictMode'da ekran kilidi isteği sızıyordu
+  (yalnız son istek tutulur); kayma yeni oturumda sıfırlanmıyordu; "Hareketi Azalt" gece içinde değişince uyulmuyordu;
+  kilit açılınca saat yenilemesi başka koda bağlıydı (visibilitychange); 24 saatten uzak alarm gün adı olmadan "2 gün"
+  yazıyordu (artık "Cuma 06:29"); VoiceOver kısaltmaları ("sa", "dk") açık yazılır, durum tek canlı satırda.
+- Ölçüm: 8 durum × 320/375/428 (taşma yok; saat durum değişince yerinden oynamıyor, yalnız kayma kadar); çalışan
+  uygulamada sahte saatle 3 dk: kayma adımları ≤ 8, "Hareketi Azalt"ta 0. Testler: lib 7, bileşen 5, akış 2; 7 mutasyonun
+  7'si yakalandı. Tam takım 1134/1134, derleme temiz.

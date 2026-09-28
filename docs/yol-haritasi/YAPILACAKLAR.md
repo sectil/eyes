@@ -95,6 +95,11 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
       (`dalgaSleep.js`, sonunda kısılarak susar) ya da (b) nefesten uyuduğunu anlayıp. (b) için araştırılacak: telefon
       mikrofonuyla uyku/nefes algılamanın doğruluğu (PubMed), gece boyu mikrofon izni ve KVKK (ses telefondan çıkmaz),
       pil. Doğrulanmadan söz verilmez.
+      [~] 2026-09-28: uyku ekranı "gece saati" (tasarım A "Amber Saat", sahibi seçti; `components/NightClock.jsx`,
+      `lib/nightClock.js`, `styles/dalga.css .dg-night`). Müzik kendiliğinden bitince saat + alarm kalır (kayıt o anda
+      saklanır), ekran açık tutulmaz; "Bitir" sonuca götürür. Cihazda doğrulanacak: müzik bitince telefon kendiliğinden
+      kilitleniyor mu; kilit açılınca saat hemen güncel mi; kayma (en çok 8 nokta/dk, merkezden en çok 16) göze batıyor mu;
+      "Hareketi Azalt" açıkken kaymıyor mu; açık temada ekranı aşağı çekince gri kenar görünmüyor mu.
       Araştırma (2026-09-28, PubMed): 9 telefon uygulaması 495 gecede PSG ile karşılaştırıldı; uyku verimi, uyanık
       süre, hafif/derin uykuda anlamlı ilişki YOK, yalnız horlama süresi uydu (Kim 2021, doi:10.1007/s11325-021-02493-y).
       Mikrofon sesinden uyku evresi (derin öğrenme): telefon kaydında %68 dönem uyumu (Hong 2022,

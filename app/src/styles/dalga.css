@@ -95,7 +95,6 @@
 
 /* Uyku: siyah zemin, soluk saat (OLED'de az güç) */
 .dg-sleep { height: 100dvh; background: #000; color: #eef3f6; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; position: relative; }
-.dg-clock { font: 300 4.2rem var(--font-display); letter-spacing: -0.02em; opacity: 0.2; font-variant-numeric: tabular-nums; }
 .dg-sleep-sub { margin: 0; font-size: 0.85rem; opacity: 0.16; }
 .dg-sleep-alarm { margin: 18px 0 0; font-size: 0.85rem; opacity: 0.14; font-variant-numeric: tabular-nums; }
 /* Alarm kartından "Uyku sesi": aynı siyah zemin; okunur metin, tek düğme (tema dışı: uyku ekranı hep karanlık) */
@@ -108,6 +107,25 @@
 .dg-sleep-kick { width: auto; max-width: 320px; margin-top: 8px; }
 .dg-sleep-go { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
 .dg-sleep-go .btn-ghost { color: rgba(238, 243, 246, 0.72); border-color: rgba(255, 255, 255, 0.16); }
-.dg-sleep-end { position: absolute; bottom: calc(40px + env(safe-area-inset-bottom)); font: 600 1rem var(--font-body); padding: 12px 28px; border-radius: 14px; background: rgba(238, 243, 246, 0.08); color: rgba(238, 243, 246, 0.6); border: 1px solid rgba(255, 255, 255, 0.12); cursor: pointer; }
+/* Gece saati (tasarım A "Amber Saat", sahibi 2026-09-28): tam siyah, kehribar ve kısık; en parlak yer saatin kendisi.
+   Saat ve dakika alt alta, ekranı dolduran ince rakamlar; altında kalan müzik ince çizgi, yanında alarm. Tema dışı: hep karanlık.
+   Kısa dalga (mavi) ışık tasarım gerekçesi: Chang 2015 PNAS doi:10.1073/pnas.1418490112 (sağlık iddiası olarak yazılmaz). */
+.dg-night { color: #ffb13b; overflow: hidden; }
+.dg-nc { display: flex; flex-direction: column; align-items: center; transform: translate(var(--dx, 0px), var(--dy, 0px)); transition: transform 1.2s ease; }
+.dg-nc-clock { font-family: var(--font-display); font-weight: 200; font-size: min(44vw, 27dvh); line-height: 0.86; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; text-align: center; opacity: 0.4; }
+.dg-nc-clock span { display: block; }
+/* Alt bilgi sabit yükseklikte (en büyük hâli: "dokun, başlat" + alarm): durum değişince saat yerinden oynamaz */
+.dg-nc-meta { margin-top: 26px; min-height: 80px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; font-size: 13px; letter-spacing: 0.02em; }
+.dg-nc-line { width: 120px; height: 2px; border-radius: 1px; background: rgba(255, 177, 59, 0.14); overflow: hidden; opacity: 0.4; }
+.dg-nc-line i { display: block; height: 100%; background: #ffb13b; transition: width 1s linear; }
+.dg-nc-sub, .dg-nc-row { opacity: 0.3; font-variant-numeric: tabular-nums; }
+.dg-nc-row { display: flex; gap: 14px; }
+.dg-night .dg-sleep-kick { font: 600 0.95rem var(--font-body); padding: 12px 22px; border-radius: 14px; background: rgba(255, 177, 59, 0.08); color: rgba(255, 177, 59, 0.7); border: 1px solid rgba(255, 177, 59, 0.2); cursor: pointer; }
+.dg-sleep-end { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(40px + env(safe-area-inset-bottom)); font: 600 1rem var(--font-body); padding: 12px 30px; border-radius: 16px; background: rgba(255, 177, 59, 0.08); color: rgba(255, 177, 59, 0.7); border: 1px solid rgba(255, 177, 59, 0.2); cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { .dg-nc, .dg-nc-line i { transition: none; } }
+/* Gece ekranı açıkken sayfanın kendisi de siyah ve esnemez: iOS'ta çekince açık tema zemini (açık gri) parlamasın */
+html:has(.dg-night), body:has(.dg-night) { background: #000; overscroll-behavior: none; }
+/* Yalnız VoiceOver için (ekranda görünmez; tasarım "başka yazı yok") */
+.dg-sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 /* Tanı satırı (yalnız test derlemesi; Bug 22) */
 .dg-diag { margin: 0; padding: 8px 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.06); color: #9fb0bd; font: 500 0.7rem/1.45 var(--font-mono); white-space: pre-wrap; text-align: left; max-width: 100%; }

@@ -6,6 +6,8 @@ import { haptic } from '../lib/native.js'
 import { createDalgaEngine } from '../lib/dalgaAudio.js'
 import { createSleepPlayer } from '../lib/dalgaSleep.js'
 import { LATE_GAP_MIN } from '../lib/alarm.js'
+import { nextDrift } from '../lib/nightClock.js'
+import NightClock from '../components/NightClock.jsx'
 import { greeting } from '../lib/greeting.js'
 import { testUnlock } from '../lib/subscription.js'
 import {
@@ -53,7 +55,7 @@ function Rate({ value, onChange, label }) {
 const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`
 
 // onSave(kayıt): sonra-puanı verilince; onExit(): çıkış
-// sleepPreset (alarm kartındaki "Uyku sesi"; lib/alarm.js sleepMinutes): { minutes, auto, alarmLabel } → doğrudan
+// sleepPreset (alarm kartındaki "Uyku sesi"; lib/alarm.js sleepMinutes): { minutes, auto, alarmLabel, alarmAt } → doğrudan
 // uyku hazırlığı; minutes 0 ise alarma 1 saatten az kalmıştır, çalmaz. onSleepEnd({ planned, seconds, early, auto }):
 // uyku sesi bitince (alarm günlüğüne; kısa da olsa). sleepPreset.session: alarm kurulumundaki "Kur" dokunuşunda
 // başlamış müzik (lib/sleepSession.js); ekran doğrudan uyku ekranı olarak açılır ve ona bağlanır.
@@ -75,14 +77,18 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
   const [record, setRecord] = useState(null)
   const [error, setError] = useState(null)
   const [diag, setDiag] = useState({ state: 'none', rate: 0, level: 0 })
-  const [sleepState, setSleepState] = useState(session ? 'preparing' : 'idle') // idle | preparing | playing | blocked
+  const [sleepState, setSleepState] = useState(session ? 'preparing' : 'idle') // idle | preparing | playing | blocked | done
   const [sleepReady, setSleepReady] = useState(false) // alarm kartından: müzik önceden hazır mı
   const [lateGo, setLateGo] = useState(false) // alarma 1 saatten az: "Yine de çal" dendi
   const [showCtl, setShowCtl] = useState(false)
+  const [ctlHold, setCtlHold] = useState(false) // "Bitir" odakta (VoiceOver): 5 sn süresi durur
+  const [, setClockTick] = useState(0) // gece saati: dakika başında yeniden çiz
+  const [drift, setDrift] = useState([0, 0])
   const sleepRef = useRef(session?.player ?? null)
   const sleepMode = opts.mode === 'sakin' && opts.sleep
   const engineRef = useRef(null)
   const wakeRef = useRef(null)
+  const wakeSeq = useRef(0) // ekran kilidi istekleri: geride kalan (üst üste) istek bırakılır
   const playSec = useRef(0)
   if (!engineRef.current) engineRef.current = createDalgaEngine()
   const engine = engineRef.current
@@ -125,12 +131,20 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, engine])
 
+  // Ekran açık kalsın (çalarken). Üst üste çağrı (StrictMode'un çift etkisi, hızlı başlat/bitir) kilit sızdırmasın: yalnız
+  // son isteğin sonucu tutulur, geride kalan kilit hemen bırakılır.
   async function keepAwake(on) {
+    const seq = ++wakeSeq.current
     try {
-      if (on) wakeRef.current = await globalThis.navigator?.wakeLock?.request?.('screen')
-      else {
-        await wakeRef.current?.release?.()
+      if (on) {
+        if (wakeRef.current) return
+        const lock = await globalThis.navigator?.wakeLock?.request?.('screen')
+        if (seq !== wakeSeq.current || wakeRef.current) lock?.release?.().catch?.(() => {})
+        else wakeRef.current = lock ?? null
+      } else {
+        const lock = wakeRef.current
         wakeRef.current = null
+        await lock?.release?.()
       }
     } catch {
       wakeRef.current = null // desteklenmiyorsa ekran kendi süresinde kararabilir (VARSAYIM: cihazda doğrulanacak)
@@ -200,6 +214,7 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
   async function startSleep() {
     const p = player()
     setShowCtl(false)
+    setDrift([0, 0])
     setSleepState('preparing')
     setLeft(sleepMin * 60)
     keepAwake(true)
@@ -228,25 +243,56 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
     p.stop()
     sleepRef.current = null
     keepAwake(false)
-    setSleepState('idle')
     if (sleepPreset) onSleepEnd?.({ planned: sleepMin, seconds: Math.round(sec), early, auto: Boolean(sleepPreset.auto) })
-    if (sec < MIN_SAVE_SEC) {
-      if (sleepPreset) onExit?.()
-      else setPhase('pick')
+    const rec = sec < MIN_SAVE_SEC ? null : makeRecord({ mode: 'sakin', minutes: sleepMin, plan: { used: false }, seconds: sec, sleep: true })
+    if (rec) {
+      setFact(factFor(sessions, 'sakin', { sleep: true }))
+      setRecord(rec)
+      onSave?.(rec)
+    }
+    // Müzik kendiliğinden bitti: saat ve alarm ekranda kalır (gece saati); ekran açık tutulmaz, telefon kendi kilidiyle
+    // kapanır. Sonuç ekranına "Bitir"le geçilir.
+    if (!early) {
+      setShowCtl(false)
+      setSleepState('done')
       return
     }
-    const rec = makeRecord({ mode: 'sakin', minutes: sleepMin, plan: { used: false }, seconds: sec, sleep: true })
-    setFact(factFor(sessions, 'sakin', { sleep: true }))
-    setRecord(rec)
-    onSave?.(rec)
-    setPhase('result')
+    leaveSleep(rec)
+  }
+  function leaveSleep(rec) {
+    setSleepState('idle')
+    setShowCtl(false)
+    setCtlHold(false)
+    setDrift([0, 0])
+    if (rec) setPhase('result')
+    else if (sleepPreset) onExit?.()
+    else setPhase('pick')
   }
   // Uyku ekranında dokununca denetimler 5 sn görünür
   useEffect(() => {
-    if (!showCtl) return undefined
+    if (!showCtl || ctlHold) return undefined
     const id = setTimeout(() => setShowCtl(false), 5000)
     return () => clearTimeout(id)
-  }, [showCtl])
+  }, [showCtl, ctlHold])
+  // Gece saati: her dakika başında yeniden çiz ve (Hareketi Azalt kapalıysa) birkaç nokta kaydır; OLED'de iz kalmasın
+  // "Hareketi Azalt" her dakika yeniden okunur (gece içinde açılırsa hemen durur). Kilit açılınca saat beklemeden yenilenir.
+  useEffect(() => {
+    if (phase !== 'sleep') return undefined
+    let id
+    const still = () => Boolean(globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches)
+    const tick = () => {
+      setClockTick((n) => n + 1)
+      setDrift((d) => (still() ? [0, 0] : nextDrift(d)))
+      id = setTimeout(tick, 60000 - (Date.now() % 60000) + 50)
+    }
+    id = setTimeout(tick, 60000 - (Date.now() % 60000) + 50)
+    const onVis = () => document.visibilityState === 'visible' && setClockTick((n) => n + 1)
+    document.addEventListener('visibilitychange', onVis)
+    return () => {
+      clearTimeout(id)
+      document.removeEventListener('visibilitychange', onVis)
+    }
+  }, [phase])
 
   function togglePause() {
     if (paused) engine.resume()
@@ -276,28 +322,26 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
   const modeStyle = { '--dg1': m.c1, '--dg2': m.c2 }
 
   if (phase === 'sleep') {
-    const now = new Date()
-    const hh = String(now.getHours()).padStart(2, '0'), mm = String(now.getMinutes()).padStart(2, '0')
     return (
-      <main className="dg-sleep" onClick={() => setShowCtl(true)} aria-label="Dalga · uyku">
-        <div className="dg-clock">{hh}:{mm}</div>
-        {sleepState === 'blocked' ? (
+      <NightClock
+        now={new Date()}
+        left={left}
+        total={sleepMin * 60}
+        state={sleepState}
+        alarmLabel={sleepPreset?.alarmLabel}
+        alarmAt={sleepPreset?.alarmAt}
+        drift={drift}
+        showEnd={showCtl}
+        onTap={() => setShowCtl(true)}
+        onEndFocus={() => setCtlHold(true)}
+        onEndBlur={() => setCtlHold(false)}
+        onEnd={() => (sleepState === 'done' ? leaveSleep(record) : endSleep(true))}
+        onKick={() => {
           // iOS çalmayı reddetti: yeni bir dokunuşla yeniden dene (dokunuşun içinde)
-          <button className="btn dg-sleep-kick" onClick={(e) => {
-            e.stopPropagation()
-            engine.unlock()
-            sleepRef.current?.resume().then((ok) => setSleepState(ok ? 'playing' : 'blocked'))
-          }}>Ses başlamadı · dokun, başlat</button>
-        ) : (
-          <p className="dg-sleep-sub" aria-live="polite">
-            {sleepState === 'preparing' ? 'Müzik hazırlanıyor…' : `${Math.max(1, Math.ceil(left / 60))} dk sonra yavaşça susacak`}
-          </p>
-        )}
-        {sleepPreset?.alarmLabel && <p className="dg-sleep-alarm">Alarm {sleepPreset.alarmLabel}</p>}
-        {showCtl && (
-          <button className="dg-sleep-end" onClick={(e) => { e.stopPropagation(); endSleep(true) }}>Bitir</button>
-        )}
-      </main>
+          engine.unlock()
+          sleepRef.current?.resume().then((ok) => setSleepState(ok ? 'playing' : 'blocked'))
+        }}
+      />
     )
   }
 

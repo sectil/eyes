@@ -4,7 +4,8 @@ import AlarmSetup from '../../screens/AlarmSetup.jsx'
 import AlarmMorning from '../../screens/AlarmMorning.jsx'
 import Dalga from '../../screens/Dalga.jsx'
 import { loadAlarm, loadAlarmLog, addAlarmEvent } from '../../lib/alarmLog.js'
-import { sleepMinutes, lateSleepMinutes, nextRing, lastRing, hhmm, minOfDay } from '../../lib/alarm.js'
+import { sleepMinutes, lateSleepMinutes, nextRing, lastRing } from '../../lib/alarm.js'
+import { alarmLabel as ringText } from '../../lib/nightClock.js'
 import { takeSleepSession } from '../../lib/sleepSession.js'
 
 // Uyku sesi: Dalga uyku ekranı, süre alarm kuralından (lib/alarm.js sleepMinutes)
@@ -15,11 +16,12 @@ function AlarmSleep({ ctx, back = 'home' }) {
     const alarm = loadAlarm()
     const ring = nextRing(alarm, now)
     const log = loadAlarmLog()
-    const alarmLabel = ring ? hhmm(minOfDay(ring)) : null
+    const alarmLabel = ringText(ring, now) // 24 saatten uzaksa gün adıyla ("Cuma 06:29")
+    const alarmAt = ring ? ring.getTime() : null // gece saatinde "6 sa 37 dk"
     // Kurulumda "Kur" ile başlamış müzik varsa doğrudan uyku ekranı (lib/sleepSession.js)
     const session = takeSleepSession()
-    if (session) return { minutes: session.minutes, lateMinutes: 0, auto: session.auto, alarmLabel, session }
-    return { minutes: sleepMinutes(alarm, log, now) ?? 0, lateMinutes: lateSleepMinutes(alarm, log, now), auto: alarm?.sleep === 'auto', alarmLabel }
+    if (session) return { minutes: session.minutes, lateMinutes: 0, auto: session.auto, alarmLabel, alarmAt, session }
+    return { minutes: sleepMinutes(alarm, log, now) ?? 0, lateMinutes: lateSleepMinutes(alarm, log, now), auto: alarm?.sleep === 'auto', alarmLabel, alarmAt }
   })
   return (
     <Dalga
