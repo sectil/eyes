@@ -3,7 +3,7 @@
 Debug sürecinin kaydı: her kontrol, hipotez, deneme ve sonuç. Kural (debug protokolü): bir şeyi ikinci kez kontrol
 etmeden önce burası okunur; aynı yöntem iki kez başarısızsa yöntem değişir. Oturumlar arasında kaybolmasın diye
 repoda durur (önce /home/claude/.debug-journal.md idi; 2026-09-28'de buraya taşındı). Yeni kayıt buraya eklenir.
-Hata numaraları: Bug 1–18. "Bug 12" iki kez kullanılmıştı; kalibrasyon olanı Bug 17 oldu.
+Hata numaraları: Bug 1–19. "Bug 12" iki kez kullanılmıştı; kalibrasyon olanı Bug 17 oldu.
 
 # Debug Journal
 ## Bug: Kalibrasyon x puanı 2.01 < minScore 2.5 → "tekrar dene"; kullanıcı nokta bazlı canlı onay (yeşil) istiyor
@@ -484,3 +484,15 @@ Hata numaraları: Bug 1–18. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
 ### Karar bekleyen (tasarım): İyi oluş dilimi hep boşa yakın
 - Doluluk = son 28 günde kayıtlı gün; İyi oluş'un tek kaydı WHO-5 (14 günde bir) → en fazla 2/28. Düzenli cevaplayan
   kişide de dilim boş görünür. Sahibine soruldu (YAPILACAKLAR "Şimdi").
+
+## Bug 19: Açılış ekranında Capacitor'ın varsayılan logosu; koyu temada açık gri yanıp sönme (2026-09-28)
+## Durum: DÜZELTİLDİ (cihazda doğrulanacak)
+- Bulgu: `Splash.imageset` Capacitor şablonundan hiç değişmemişti (beyaz zeminde mavi "X"); `LaunchScreen.storyboard`
+  her açılışta gösteriyor. `capacitor.config.json` `ios.backgroundColor` tek renk (#f5f7f7): koyu temada açılıştan
+  sonra web görünümü açık gri.
+- Düzeltme: Splash açık (#f3f6f8) ve koyu (#070c12) zeminde Nefona işareti (`app/design/simge/simge.py`);
+  `MainViewController.capacitorDidLoad` web görünümü zeminini temaya göre ayarlar.
+- Simge: iOS 26 için `AppIcon.icon` (Icon Composer biçimi; anahtarlar gerçek bir Icon Composer kaydından, proje
+  satırları Proxmox'un Flutter yamasındaki `folder.iconcomposer.icon` ile aynı). Risk: Capacitor projelerinde .icon
+  ile derleme hatası bildirilmiş (ionic-team/capacitor#8179, "None of the input catalogs contained ... 'AppIcon'");
+  PNG seti aynı adla korunduğu için beklenmiyor, ama DOĞRULANMADI (bu ortamda Xcode yok).

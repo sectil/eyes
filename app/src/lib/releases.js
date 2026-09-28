@@ -7,6 +7,8 @@ export const RELEASES = [
     id: '2026-09-28',
     title: '28 Eylül güncellemesi',
     items: [
+      { kind: 'change', text: 'Yeni uygulama simgesi: aynı "n" göz kapağı, altında artık yukarı bakan bir iris. iOS 26\'da cam görünümlü katmanlı simge; koyu ve renklendirilmiş ana ekranda kendi sürümleri.' },
+      { kind: 'fix', text: 'Açılışta bir an başka bir logo (geliştirme aracının varsayılan görseli) görünüyordu; artık Nefona işareti, koyu temada koyu zeminde. Koyu temada açılırken ekranın açık gri yanıp sönmesi de düzeldi.' },
       { kind: 'new', text: "Gelişim haritası: iris artık her alanda son 28 günde kaç gün bir şey yaptığınla dolar; bütün modüller, testler, mola ve su kaydı aynı yerde toplanır. Bir alanda değişim ölçüm hatasından büyükse dış kenarda altın (iyileşiyor) ya da turuncu (geriliyor) yay çıkar. 35. günden sonra ilk 28 günün ile son 28 gününü karşılaştırabilirsin." },
       { kind: 'new', text: "Alan ayrıntısında 28 günlük düzen şeridi, hangi modülden kaç kayıt geldiği ve başlangıç soruların görünür." },
       { kind: 'new', text: "İyi oluş: 14 günde bir 5 kısa soru (WHO-5, resmî Türkçe metin). Puan 0–100; 10 puan ve üstü değişim anlamlı sayılır. Tanı değildir, yalnız kendinle karşılaştırılır." },

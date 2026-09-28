@@ -12,6 +12,16 @@ class MainViewController: CAPBridgeViewController {
     }
 
     override open func capacitorDidLoad() {
+        // Açılış ekranından sonra, sayfa çizilene kadar görünen zemin: uygulamanın zemini, temayı izler
+        // (capacitor.config'deki tek renk #f5f7f7 koyu temada açık gri yanıp sönüyordu). Açılış görseli de aynı iki renk.
+        let ground = UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(red: 7 / 255, green: 12 / 255, blue: 18 / 255, alpha: 1)
+                : UIColor(red: 243 / 255, green: 246 / 255, blue: 248 / 255, alpha: 1)
+        }
+        webView?.backgroundColor = ground
+        webView?.scrollView.backgroundColor = ground
+
         bridge?.registerPluginInstance(FaceDistancePlugin())
         bridge?.registerPluginInstance(SpeechPlugin())
         bridge?.registerPluginInstance(FeedbackPlugin())

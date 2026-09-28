@@ -215,3 +215,6 @@ Ayrıntı `git log` ve `releases.js`'de. Aşağıda alan alan özet ve önemli c
   (`23f86e9`).
 - **Gelişim haritası (adım 2):** iris Gelişim'de ve Ana sayfada merkezden dolar (28 günde kayıtlı gün + doğrulanmış
   değişim yayı); alan ayrıntısında düzen şeridi ve haftalık etki; WHO-5 iyi oluş modülü (14 günde bir).
+- **Uygulama simgesi ve açılış ekranı:** simge yeniden çizildi (iris, aynı merkez, tek ışık, yukarı bakış);
+  iOS 26 katmanlı `AppIcon.icon` + iOS 18 yedek PNG'ler (açık/koyu/renkli). Açılışta Capacitor'ın varsayılan logosu
+  vardı; artık Nefona işareti, iki tema. Tek kaynak: `app/design/simge/simge.py`.
