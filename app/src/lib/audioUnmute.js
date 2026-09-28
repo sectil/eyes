@@ -55,15 +55,37 @@ export function mediaKeepAlive(on) {
 }
 
 // Aynı (dokunuşla açılmış) öğede başka bir kaynağı çal: uyku modunda hazırlanan müzik. Döner: çalma sözü.
+// Tanı (test derlemesinde uyku ekranında görünür; Bug 22): son çalma hatası
+export const mediaDiag = { err: null }
+const errText = (e) => (e ? `${e.name ?? 'Hata'}: ${e.message ?? e}`.slice(0, 120) : null)
 export function mediaPlay(src, { loop = false } = {}) {
   try {
     if (!tag) mediaKeepAlive(true)
-    if (!tag) return Promise.resolve(false)
+    if (!tag) {
+      mediaDiag.err = 'audio öğesi yok'
+      return Promise.resolve(false)
+    }
     tag.loop = loop
     tag.src = src
-    return tag.play()?.then(() => true).catch(() => false) ?? Promise.resolve(true)
-  } catch {
+    mediaDiag.err = null
+    return tag.play()?.then(() => true).catch((e) => { mediaDiag.err = errText(e); return false }) ?? Promise.resolve(true)
+  } catch (e) {
+    mediaDiag.err = errText(e)
     return Promise.resolve(false)
+  }
+}
+// Ses öğesinin şu anki durumu (tanı): çalıyor mu, kaçıncı saniyede, hangi kaynak, medya hatası
+export function mediaProbe() {
+  if (!tag) return { tag: false }
+  return {
+    tag: true,
+    paused: tag.paused,
+    time: Math.round(tag.currentTime * 10) / 10,
+    ready: tag.readyState,
+    silent: tag.src === url,
+    loop: tag.loop,
+    mediaErr: tag.error ? tag.error.code : null,
+    err: mediaDiag.err,
   }
 }
 

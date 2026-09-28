@@ -109,3 +109,5 @@
 .dg-sleep-go { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
 .dg-sleep-go .btn-ghost { color: rgba(238, 243, 246, 0.72); border-color: rgba(255, 255, 255, 0.16); }
 .dg-sleep-end { position: absolute; bottom: calc(40px + env(safe-area-inset-bottom)); font: 600 1rem var(--font-body); padding: 12px 28px; border-radius: 14px; background: rgba(238, 243, 246, 0.08); color: rgba(238, 243, 246, 0.6); border: 1px solid rgba(255, 255, 255, 0.12); cursor: pointer; }
+/* Tanı satırı (yalnız test derlemesi; Bug 22) */
+.dg-diag { margin: 0; padding: 8px 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.06); color: #9fb0bd; font: 500 0.7rem/1.45 var(--font-mono); white-space: pre-wrap; text-align: left; max-width: 100%; }

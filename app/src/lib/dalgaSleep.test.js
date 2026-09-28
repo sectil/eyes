@@ -45,3 +45,25 @@ describe('WAV kodlayıcı', () => {
     expect(dv.getInt16(54, true)).toBe(-32768) // −2 → kırpılır
   })
 })
+
+describe('uyku oynatıcı: hazır dosyalar (Bug 22)', () => {
+  it('adresler: döngü WAV, kısılan parça 3 dk\'dan kısaysa ortasından başlar', async () => {
+    const { sleepLoopUrl, sleepFadeUrl } = await import('./dalgaSleep.js')
+    expect(sleepLoopUrl()).toMatch(/sleep\/sakin-loop\.wav$/)
+    expect(sleepFadeUrl(180)).toMatch(/sleep\/sakin-fade\.mp3$/)
+    expect(sleepFadeUrl(150)).toMatch(/sleep\/sakin-fade\.mp3#t=30$/)
+  })
+  it('hazırlık anında: üretim yok, ilk dokunuşta çalma aynı çağrıda istenir', async () => {
+    const { createSleepPlayer } = await import('./dalgaSleep.js')
+    const p = createSleepPlayer()
+    const t0 = Date.now()
+    expect(await p.prepare({ totalSec: 300 })).toBe(true)
+    expect(Date.now() - t0).toBeLessThan(50)
+    expect(p.phase).toBe('ready')
+    // Sahte ortamda <audio> yok: çalma reddedilir, 'blocked' olur (ekran "dokun, başlat" gösterir)
+    const run = p.start({ totalSec: 300 })
+    expect(await run).toBe(false)
+    expect(p.phase).toBe('blocked')
+    p.stop()
+  })
+})

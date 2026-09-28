@@ -129,7 +129,11 @@
 .hh-star { position: absolute; right: -2px; bottom: -2px; width: 17px; height: 17px; border-radius: 50%; background: #ffb13b; border: 2.5px solid var(--bg); display: grid; place-items: center; }
 .hh-star svg { width: 9px; height: 9px; fill: #1a1204; }
 
-.hh-day { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: center; margin-top: 4px; }
+/* Sayı sütunu yazının tamamı kadar yer alır (telefondaki yazı tipi daha geniş olabilir; HATA_GUNLUGU Bug 21);
+   diyafram kalan yere sığar: en çok 172, en az 112 px */
+.hh-day { position: relative; display: grid; grid-template-columns: minmax(112px, 172px) max-content; justify-content: space-between; gap: 14px; align-items: center; margin-top: 4px; }
+.hh-day > .dd { width: 100%; height: auto; }
+.hh-day > .hh-num:first-child { grid-column: 1 / -1; } /* bugün plan yoksa diyafram yok: sütun tüm genişlik */
 .hh-day::before { content: ''; position: absolute; left: -30px; top: -30px; width: 232px; height: 232px; border-radius: 50%; pointer-events: none;
   background: radial-gradient(circle, color-mix(in srgb, var(--iris-1) 20%, transparent), color-mix(in srgb, var(--iris-2) 7%, transparent) 45%, transparent 70%); }
 .dd { position: relative; display: block; max-width: 100%; }

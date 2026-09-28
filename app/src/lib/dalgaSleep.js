@@ -1,11 +1,10 @@
-// Dalga uyku modu: müzik önce bir döngü olarak hazırlanır (OfflineAudioContext), sonra HTML <audio> ile döngüde
-// çalınır; telefon kilitliyken de sürsün diye (Info.plist UIBackgroundModes: audio). Süre bitmeden önce ayrı hazırlanmış
-// "kısılan" parçaya geçilir ve o parça sessizlikle biter. Binaural katman yok. Ekranda soluk saat.
+// Dalga uyku modu: hazır döngü (uygulama içindeki dosya) HTML <audio> ile döngüde çalınır; telefon kilitliyken de
+// sürsün diye (Info.plist UIBackgroundModes: audio). Süre bitmeden önce "kısılan" parçaya geçilir ve o parça sessizlikle
+// biter. Binaural katman yok. Ekranda soluk saat. renderLoop yalnız dosyaları üretmek için (design/dalga-uyku).
 // VARSAYIM (cihazda doğrulanacak): kilitli ekranda WKWebView'de <audio> ve JS sayacı çalışmayı sürdürür; dokunuşla
-// açılmış aynı <audio> öğesine sonradan yeni kaynak verilip çalınabilir.
+// açılmış aynı <audio> öğesine sonradan yeni kaynak verilip çalınabilir; Capacitor uygulama içi dosyayı (Range) verir.
 import { makeComposer, stepSec, SILENT_EVERY } from './dalgaMusic.js'
 import { buildGraph, makeVoices } from './dalgaAudio.js'
-import { encodeWav } from './wav.js'
 import { mediaPlay, mediaKeepAlive } from './audioUnmute.js'
 
 export const SLEEP_RATE = 22050
@@ -47,44 +46,41 @@ export async function renderLoop(mode = 'sakin', { sampleRate = SLEEP_RATE, tail
   return { sampleRate, channels: [0, 1].map((c) => foldTail(buf.getChannelData(c), len)) }
 }
 
-const urlOf = (bytes) => URL.createObjectURL(new Blob([bytes], { type: 'audio/wav' }))
+// Uyku müziği uygulamanın içinde hazır gelir (design/dalga-uyku; Bug 22): cihazda üretmek 10+ sn sürüyordu, "Başlat"
+// o arada kapalı kalıyordu. sakin-loop.wav: 96 sn boşluksuz döngü; sakin-fade.mp3: 180 sn, yavaşça susar. Kısılma
+// SLEEP_FADE_MAX'tan kısaysa parça ortasından başlar (medya parçası #t=; başlangıç sesi en az %93).
+const base = () => (typeof import.meta !== 'undefined' && import.meta.env?.BASE_URL) || './'
+export const sleepLoopUrl = () => `${base()}sleep/sakin-loop.wav`
+export const sleepFadeUrl = (F) => `${base()}sleep/sakin-fade.mp3${F < SLEEP_FADE_MAX ? `#t=${Math.round((SLEEP_FADE_MAX - F) * 10) / 10}` : ''}`
 
 // Uyku oynatıcı. onTick({ left }) ve onEnd() ile ekranı bilgilendirir.
-// iOS sesi yalnız dokunuşun İÇİNDE başlatır (HATA_GUNLUGU Bug 22): müzik hazırlanması saniyeler sürer, bu yüzden
-// prepare() önceden (ekran açılınca) çağrılır; start() hazırsa çalmayı dokunuşla aynı anda, beklemeden başlatır.
-// Çalma yine reddedilirse phase 'blocked' olur; ekran "dokun, başlat" gösterir ve resume() dokunuş içinde çağrılır.
+// iOS sesi yalnız dokunuşun İÇİNDE başlatır (HATA_GUNLUGU Bug 22): start() hazırlığı eşzamanlı yapar ve çalmayı
+// dokunuşla aynı çağrıda başlatır (araya await girmez). Çalma yine reddedilirse phase 'blocked' olur; ekran
+// "dokun, başlat" gösterir ve resume() dokunuş içinde çağrılır.
 export function createSleepPlayer() {
-  let timer = 0, urls = [], phase = 'idle', endAt = 0, fadeAt = 0, startedAt = 0
-  let loopUrl = null, fadeUrl = null, ready = null, pending = null, cb = {}
-  const cleanup = () => { clearInterval(timer); urls.forEach((u) => URL.revokeObjectURL(u)); urls = [] }
+  let timer = 0, phase = 'idle', endAt = 0, fadeAt = 0, startedAt = 0
+  let loopUrl = null, fadeUrl = null, ready = null, cb = {}
+  const diag = { prepMs: 0, prepErr: null, bytes: 0, played: null } // tanı (test derlemesi, Bug 22)
+  const cleanup = () => clearInterval(timer)
   function stop() {
     if (phase === 'stopped') return
     phase = 'stopped'
     cleanup()
     mediaKeepAlive(false)
   }
-  // Müziği hazırlar (döngü + kısılan son parça). Aynı süre için bir kez; süre değişirse yeniden.
-  async function prepare({ mode = 'sakin', totalSec }) {
-    if (ready?.totalSec === totalSec && ready.mode === mode) return true
-    if (pending) return pending
-    phase = 'preparing'
-    pending = (async () => {
-      const r = await renderLoop(mode)
-      if (phase === 'stopped') return false
-      cleanup()
-      const F = fadeSeconds(totalSec)
-      loopUrl = urlOf(encodeWav(r.channels, r.sampleRate))
-      fadeUrl = urlOf(encodeWav(r.channels.map((ch) => fadeFrom(ch, Math.round(F * r.sampleRate))), r.sampleRate))
-      urls = [loopUrl, fadeUrl]
-      ready = { totalSec, mode, F }
-      phase = 'ready'
-      return true
-    })()
-    try {
-      return await pending
-    } finally {
-      pending = null
-    }
+  // Eşzamanlı hazırlık: yalnız adresler ve süreler (dosyalar uygulamada)
+  function setup({ mode = 'sakin', totalSec }) {
+    if (ready?.totalSec === totalSec && ready.mode === mode) return
+    const F = fadeSeconds(totalSec)
+    loopUrl = sleepLoopUrl()
+    fadeUrl = sleepFadeUrl(F)
+    ready = { totalSec, mode, F }
+    if (phase !== 'stopped') phase = 'ready'
+  }
+  // Ekranla uyum için söz döndürür; hemen hazırdır
+  async function prepare(o) {
+    setup(o)
+    return phase !== 'stopped'
   }
   function run() {
     startedAt = Date.now()
@@ -107,13 +103,16 @@ export function createSleepPlayer() {
   }
   return {
     get phase() { return phase },
+    get diag() { return diag },
     prepare,
     // Başlat. Hazırsa mediaPlay dokunuşla aynı çağrıda (await'ten önce) yapılır. Döner: çaldı mı.
     async start({ mode = 'sakin', totalSec, onTick, onEnd }) {
       cb = { onTick, onEnd }
-      const warm = ready?.totalSec === totalSec && ready.mode === mode
-      if (!warm && !(await prepare({ mode, totalSec }))) return false
+      if (phase === 'stopped') return false
+      setup({ mode, totalSec })
+      // Dokunuşla aynı çağrıda (await'ten önce) çalmaya başlar
       const ok = await mediaPlay(loopUrl, { loop: true })
+      diag.played = ok
       if (phase === 'stopped') return false
       if (!ok) {
         phase = 'blocked'

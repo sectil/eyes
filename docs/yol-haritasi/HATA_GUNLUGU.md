@@ -545,3 +545,23 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   Eski Dalga uyku modu (ac5e143) da hiç cihazda doğrulanmamıştı.
 - HİP-2 (AÇIK): 15:40'ta alarmda Dalga sesi mi, varsayılan ses mi çaldı — sahibine soruldu (Bug 20 deneme 2 ile aynı soru).
 - Günlük: scratchpad/debug-alarm-ses.md
+
+## Bug 22 (devam): Uyku sesi hâlâ çalmıyor (sahibi, 2026-09-28 17:35, iOS 27.0, iPhone 14 Plus)
+- Aynı yöntem (dokunuş içinde çal + önceden hazırla) iki kez denendi, sahibi yine "çalmıyor" dedi → YÖNTEM DEĞİŞTİ:
+  tahmin yerine ölçüm.
+- ÖLÇÜM (Chromium, tanı satırı): müziği cihazda üretmek (OfflineAudioContext, 96 sn döngü) **10,5 sn** sürdü; bu
+  sürede "Başlat" kapalı ve "Müzik hazırlanıyor…" yazıyor. Beklemeden dokunan kişi için hiçbir şey çalmaz. Telefonda
+  süre bilinmiyor (VARSAYIM: benzer ya da daha uzun).
+- DÜZELTME: müzik derlemede bir kez basılır ve uygulamanın içinde gelir: `public/sleep/sakin-loop.wav` (96 sn, boşluksuz
+  döngü; MP3 başa/sona ~50 ms boşluk ekliyordu) ve `sakin-fade.mp3` (180 sn, yavaşça susar; kısa kısılmada `#t=` ile
+  ortasından). Üretim `design/dalga-uyku` (aynı müzik motoru, Chromium). Tarayıcıda: "Başlat" 0,1 sn'de açıldı, müzik
+  hemen çaldı, 30. sn'de kısılan parçaya doğru yerden (150. sn) geçti.
+- TANI: test derlemesinde uyku ekranlarında 4 satır (hazırlık, çal: evet/HAYIR + hata, ses öğesinin durumu, ses
+  bağlamı). Telefonda yine çalmazsa ekran görüntüsü nedeni gösterir.
+- Cihazda doğrulanmadı.
+
+## Bug 21 (düzeltildi, cihazda doğrulanacak)
+- Sahibinin ekranında (iPhone 14 Plus, 428 px) de görüldü: adım satırı varken hafta noktaları ve alarm satırının oku
+  sağdan kesiliyordu (telefondaki yazı tipi tarayıcıdakinden geniş). `.hh-day` ızgarası: sayı sütunu yazının tamamı
+  kadar (max-content), diyafram kalan yere (112–172 px). Ölçüm: 428/390/375/320 px'te içerik kesilmiyor, sayfa yana
+  kaymıyor (320'deki 14 px taşma da kalktı).
