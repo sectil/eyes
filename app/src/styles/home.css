@@ -130,8 +130,8 @@
 .hh-star svg { width: 9px; height: 9px; fill: #1a1204; }
 
 /* Sayı sütunu yazının tamamı kadar yer alır (telefondaki yazı tipi daha geniş olabilir; HATA_GUNLUGU Bug 21);
-   diyafram kalan yere sığar: en çok 172, en az 112 px */
-.hh-day { position: relative; display: grid; grid-template-columns: minmax(112px, 172px) max-content; justify-content: space-between; gap: 14px; align-items: center; margin-top: 4px; }
+   diyafram kalan yere sığar: en çok 172, en az 96 px */
+.hh-day { position: relative; display: grid; grid-template-columns: minmax(96px, 172px) max-content; justify-content: space-between; gap: 14px; align-items: center; margin-top: 4px; }
 .hh-day > .dd { width: 100%; height: auto; }
 .hh-day > .hh-num:first-child { grid-column: 1 / -1; } /* bugün plan yoksa diyafram yok: sütun tüm genişlik */
 .hh-day::before { content: ''; position: absolute; left: -30px; top: -30px; width: 232px; height: 232px; border-radius: 50%; pointer-events: none;
@@ -203,7 +203,7 @@
 .hh-alt .tx { display: grid; gap: 1px; }
 .hh-alt b { font: 600 0.9rem/1.2 var(--font-body); }
 .hh-alt small { font: 400 0.75rem/1.2 var(--font-body); color: var(--ink-3); }
-@media (max-width: 360px) { .dd { width: 140px; height: 140px; } .hh-big b { font-size: 2.6rem; } }
+@media (max-width: 360px) { .hh-big b { font-size: 2.6rem; } }
 
 /* ---- Hatırlatmalar (bildirim planı v2): tek kart yuvası ve çalışma oturumu şeridi; yalnız tokenlar ---- */
 .hh-ask { display: grid; gap: 8px; }

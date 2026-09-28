@@ -1,12 +1,14 @@
 <!doctype html><html><body><script type="module">
 // Uyku müziği (Dalga · Sakin): cihazda 10+ sn süren hazırlık yerine derlemede bir kez basılır (Bug 22)
-import { renderLoop, fadeFrom, SLEEP_FADE_MAX } from '../../src/lib/dalgaSleep.js'
+import { renderLoop, fadeFrom, SLEEP_FADES } from '../../src/lib/dalgaSleep.js'
 import { encodeWav } from '../../src/lib/wav.js'
 import { toBase64 } from '../../src/components/AlarmSpikePanel.jsx'
 window.renderSleep = async () => {
   const { sampleRate, channels } = await renderLoop('sakin')
-  const fade = channels.map((ch) => fadeFrom(ch, Math.round(SLEEP_FADE_MAX * sampleRate)))
-  return { rate: sampleRate, loop: toBase64(encodeWav(channels, sampleRate)), fade: toBase64(encodeWav(fade, sampleRate)), sec: channels[0].length / sampleRate }
+  // Her kısılma süresi için tam uzunlukta ayrı parça: baştan tam sesle başlar, sonunda susar
+  const fades = {}
+  for (const F of SLEEP_FADES) fades[F] = toBase64(encodeWav(channels.map((ch) => fadeFrom(ch, Math.round(F * sampleRate))), sampleRate))
+  return { rate: sampleRate, loop: toBase64(encodeWav(channels, sampleRate)), fades, sec: channels[0].length / sampleRate }
 }
 window.ready = true
 </script></body></html>

@@ -558,10 +558,14 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   hemen çaldı, 30. sn'de kısılan parçaya doğru yerden (150. sn) geçti.
 - TANI: test derlemesinde uyku ekranlarında 4 satır (hazırlık, çal: evet/HAYIR + hata, ses öğesinin durumu, ses
   bağlamı). Telefonda yine çalmazsa ekran görüntüsü nedeni gösterir.
+- Bağımsız inceleme: tek 180 sn kısılma parçasını ortasından başlatmak kısa seslerde ani düşüş yapıyordu (2 dk'da
+  %100 → %25). Artık her kısılma süresi (30, 60 … 180 sn) için tam uzunlukta ayrı parça (`sakin-fade-{F}.mp3`, 64
+  kbit/sn); başlangıç noktası geçiş anında kalan süreden (kilitli ekranda zamanlayıcı gecikse de tam bitişte susar).
+  Test: çalma isteği dokunuşla aynı çağrıda mı (araya await konunca test düşüyor, denendi); dosyalar var mı.
 - Cihazda doğrulanmadı.
 
 ## Bug 21 (düzeltildi, cihazda doğrulanacak)
 - Sahibinin ekranında (iPhone 14 Plus, 428 px) de görüldü: adım satırı varken hafta noktaları ve alarm satırının oku
   sağdan kesiliyordu (telefondaki yazı tipi tarayıcıdakinden geniş). `.hh-day` ızgarası: sayı sütunu yazının tamamı
-  kadar (max-content), diyafram kalan yere (112–172 px). Ölçüm: 428/390/375/320 px'te içerik kesilmiyor, sayfa yana
+  kadar (max-content), diyafram kalan yere (96–172 px). Ölçüm: 428/390/375/320 px'te içerik kesilmiyor, sayfa yana
   kaymıyor (320'deki 14 px taşma da kalktı).

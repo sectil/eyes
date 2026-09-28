@@ -3,7 +3,7 @@ import sys, wave
 import lameenc
 w = wave.open(sys.argv[1])
 enc = lameenc.Encoder()
-enc.set_bit_rate(96)
+enc.set_bit_rate(int(sys.argv[3]) if len(sys.argv) > 3 else 96)
 enc.set_in_sample_rate(w.getframerate())
 enc.set_channels(w.getnchannels())
 enc.set_quality(2)

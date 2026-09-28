@@ -1,4 +1,7 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
+// Ses öğesi taklidi: çalma isteğinin ne zaman yapıldığını görmek için
+const { mediaPlay } = vi.hoisted(() => ({ mediaPlay: vi.fn(() => Promise.resolve(true)) }))
+vi.mock('./audioUnmute.js', () => ({ mediaPlay, mediaKeepAlive: vi.fn() }))
 import { loopSeconds, fadeSeconds, fadeGain, foldTail, fadeFrom, SLEEP_FADE_MAX } from './dalgaSleep.js'
 import { encodeWav } from './wav.js'
 
@@ -47,23 +50,35 @@ describe('WAV kodlayıcı', () => {
 })
 
 describe('uyku oynatıcı: hazır dosyalar (Bug 22)', () => {
-  it('adresler: döngü WAV, kısılan parça 3 dk\'dan kısaysa ortasından başlar', async () => {
+  it('adresler: döngü WAV; kısılma kendi uzunluğundaki parçadan, geç geçişte kalan süre kadar ortasından', async () => {
     const { sleepLoopUrl, sleepFadeUrl } = await import('./dalgaSleep.js')
     expect(sleepLoopUrl()).toMatch(/sleep\/sakin-loop\.wav$/)
-    expect(sleepFadeUrl(180)).toMatch(/sleep\/sakin-fade\.mp3$/)
-    expect(sleepFadeUrl(150)).toMatch(/sleep\/sakin-fade\.mp3#t=30$/)
+    expect(sleepFadeUrl(180)).toMatch(/sleep\/sakin-fade-180\.mp3$/)
+    expect(sleepFadeUrl(60)).toMatch(/sleep\/sakin-fade-60\.mp3$/)
+    expect(sleepFadeUrl(150, 120)).toMatch(/sleep\/sakin-fade-150\.mp3#t=30$/) // 30 sn geç geçiş
   })
-  it('hazırlık anında: üretim yok, ilk dokunuşta çalma aynı çağrıda istenir', async () => {
+  it('her kısılma süresinin dosyası uygulamada var (ad değişirse test düşer)', async () => {
+    const { SLEEP_FADES, fadeSeconds } = await import('./dalgaSleep.js')
+    const fs = await import('node:fs')
+    const dir = new URL('../../public/sleep/', import.meta.url)
+    expect(fs.existsSync(new URL('sakin-loop.wav', dir))).toBe(true)
+    for (const F of SLEEP_FADES) expect(fs.existsSync(new URL(`sakin-fade-${F}.mp3`, dir))).toBe(true)
+    // tam dakikalık her süre (1–120 dk) bu kümeden bir kısılmaya düşer
+    for (let m = 1; m <= 120; m++) expect(SLEEP_FADES).toContain(fadeSeconds(m * 60))
+  })
+  it('çalma dokunuşla aynı çağrıda istenir (araya await girmez); reddedilirse blocked', async () => {
+    mediaPlay.mockClear()
     const { createSleepPlayer } = await import('./dalgaSleep.js')
     const p = createSleepPlayer()
-    const t0 = Date.now()
-    expect(await p.prepare({ totalSec: 300 })).toBe(true)
-    expect(Date.now() - t0).toBeLessThan(50)
-    expect(p.phase).toBe('ready')
-    // Sahte ortamda <audio> yok: çalma reddedilir, 'blocked' olur (ekran "dokun, başlat" gösterir)
-    const run = p.start({ totalSec: 300 })
-    expect(await run).toBe(false)
-    expect(p.phase).toBe('blocked')
+    const run = p.start({ totalSec: 300 }) // beklemeden
+    expect(mediaPlay).toHaveBeenCalledTimes(1)
+    expect(mediaPlay).toHaveBeenCalledWith(expect.stringMatching(/sleep\/sakin-loop\.wav$/), { loop: true })
+    expect(await run).toBe(true)
     p.stop()
+    mediaPlay.mockResolvedValueOnce(false)
+    const q = createSleepPlayer()
+    expect(await q.start({ totalSec: 300 })).toBe(false)
+    expect(q.phase).toBe('blocked')
+    q.stop()
   })
 })

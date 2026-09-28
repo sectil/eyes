@@ -219,7 +219,7 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
       const d = sleepRef.current?.diag ?? {}
       const m = mediaProbe()
       setProbe([
-        `hazırlık ${d.prepMs ?? '—'} ms${d.bytes ? ` · ${(d.bytes / 1e6).toFixed(1)} MB` : ''}${d.prepErr ? ` · HATA ${d.prepErr}` : ''}`,
+        `dosya: ${d.files ?? '—'}${d.fadeAt ? ` · şimdi ${d.fadeAt}` : ''}`,
         `çal: ${d.played == null ? '—' : d.played ? 'evet' : 'HAYIR'}${m.err ? ` · ${m.err}` : ''}`,
         m.tag ? `öğe: ${m.paused ? 'duruyor' : 'çalıyor'} ${m.time} sn · ${m.silent ? 'sessiz döngü' : 'müzik'} · hazır ${m.ready}${m.mediaErr ? ` · medya hatası ${m.mediaErr}` : ''}` : 'öğe: yok',
         `ses bağlamı: ${engine.state()}`,

@@ -47,11 +47,18 @@ export async function renderLoop(mode = 'sakin', { sampleRate = SLEEP_RATE, tail
 }
 
 // Uyku müziği uygulamanın içinde hazır gelir (design/dalga-uyku; Bug 22): cihazda üretmek 10+ sn sürüyordu, "Başlat"
-// o arada kapalı kalıyordu. sakin-loop.wav: 96 sn boşluksuz döngü; sakin-fade.mp3: 180 sn, yavaşça susar. Kısılma
-// SLEEP_FADE_MAX'tan kısaysa parça ortasından başlar (medya parçası #t=; başlangıç sesi en az %93).
+// o arada kapalı kalıyordu. sakin-loop.wav: 96 sn boşluksuz döngü; sakin-fade-{F}.mp3: her kısılma süresi için tam
+// uzunlukta parça (baştan tam sesle başlar, sonunda susar). Tam dakikalık sürelerde F hep bu kümededir (fadeSeconds).
+export const SLEEP_FADES = [30, 60, 90, 120, 150, 180]
 const base = () => (typeof import.meta !== 'undefined' && import.meta.env?.BASE_URL) || './'
 export const sleepLoopUrl = () => `${base()}sleep/sakin-loop.wav`
-export const sleepFadeUrl = (F) => `${base()}sleep/sakin-fade.mp3${F < SLEEP_FADE_MAX ? `#t=${Math.round((SLEEP_FADE_MAX - F) * 10) / 10}` : ''}`
+// F sn kısılma, kalan left sn: F'ye eşit ya da ondan uzun en kısa parça; kalan süreye göre ortasından başlar (#t=).
+// Geçiş (zamanlayıcı kilitli ekranda gecikirse) geç olursa parça yine tam bitiş anında susar.
+export function sleepFadeUrl(F, left = F) {
+  const len = SLEEP_FADES.find((x) => x >= F - 0.01) ?? SLEEP_FADE_MAX
+  const at = Math.max(0, Math.round((len - Math.max(0, Math.min(left, len))) * 10) / 10)
+  return `${base()}sleep/sakin-fade-${len}.mp3${at > 0 ? `#t=${at}` : ''}`
+}
 
 // Uyku oynatıcı. onTick({ left }) ve onEnd() ile ekranı bilgilendirir.
 // iOS sesi yalnız dokunuşun İÇİNDE başlatır (HATA_GUNLUGU Bug 22): start() hazırlığı eşzamanlı yapar ve çalmayı
@@ -60,7 +67,7 @@ export const sleepFadeUrl = (F) => `${base()}sleep/sakin-fade.mp3${F < SLEEP_FAD
 export function createSleepPlayer() {
   let timer = 0, phase = 'idle', endAt = 0, fadeAt = 0, startedAt = 0
   let loopUrl = null, fadeUrl = null, ready = null, cb = {}
-  const diag = { prepMs: 0, prepErr: null, bytes: 0, played: null } // tanı (test derlemesi, Bug 22)
+  const diag = { files: null, played: null, fadeAt: null } // tanı (test derlemesi, Bug 22)
   const cleanup = () => clearInterval(timer)
   function stop() {
     if (phase === 'stopped') return
@@ -74,6 +81,7 @@ export function createSleepPlayer() {
     const F = fadeSeconds(totalSec)
     loopUrl = sleepLoopUrl()
     fadeUrl = sleepFadeUrl(F)
+    diag.files = `döngü + kısılma ${F} sn`
     ready = { totalSec, mode, F }
     if (phase !== 'stopped') phase = 'ready'
   }
@@ -92,6 +100,9 @@ export function createSleepPlayer() {
       const now = Date.now()
       if (phase === 'loop' && now >= fadeAt) {
         phase = 'fade'
+        // Başlangıç noktası geçiş anında: kalan süre kadar çalıp tam bitişte susar
+        fadeUrl = sleepFadeUrl(ready.F, (endAt - now) / 1000)
+        diag.fadeAt = fadeUrl.split('/').pop()
         mediaPlay(fadeUrl, { loop: false })
       }
       cb.onTick?.({ left: Math.max(0, (endAt - now) / 1000) })
