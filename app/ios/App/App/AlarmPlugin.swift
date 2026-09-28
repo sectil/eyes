@@ -15,7 +15,8 @@ import AppIntents
 /// - status() → { available, auth: authorized|denied|notDetermined|unavailable }
 /// - requestAuth() → { auth }
 /// - schedule({ hour, minute, weekdays: [0..6] (0 = Pazar, JS Date.getDay), sound? }) → { id, snooze }
-///   İkinci düğme "Ertele" (9 dk); iOS reddederse "Nefona'yı aç" ile kurulur (snooze: false).
+///   İkinci düğme "9 dk ertele" (simgesi 9); iOS reddederse "Nefona'yı aç" ile kurulur (snooze: false).
+///   Başlık saate göre: sabah "Nefona · Günaydın", değilse "Nefona · Alarm".
 ///   weekdays boşsa tek sefer: bir sonraki hour:minute.
 /// - cancel() → { cancelled }
 /// - current() → { id?, scheduled } (iOS'ta hâlâ kurulu mu; çalıp kapanan alarm iOS'ta silinir)
@@ -95,6 +96,10 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
                         repeats: weekdays.isEmpty ? .never : .weekly(weekdays)))
                     let tint = Color(red: 0.10, green: 0.76, blue: 0.82)
                     let stop = AlarmButton(text: "Kapat", textColor: .white, systemImageName: "stop.circle")
+                    // Başlık saate göre: sabah (04.00–11.59) "Günaydın", değilse "Alarm" (sahibi 18:05'te "Günaydın" gördü)
+                    let title = (4...11).contains(hour) ? "Nefona · Günaydın" : "Nefona · Alarm"
+                    // Üstten gelen şeritte iOS düğmenin yalnız simgesini gösterir: süre simgede de görünsün (9 yuvarlak içinde)
+                    let snoozeMin = Int(Self.snoozeSeconds / 60)
                     // Önce yenisi: kurulamazsa eski alarm yerinde kalır (JS de eskisini gösterir)
                     let id = UUID()
                     var snooze = true
@@ -102,12 +107,12 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
                         // İkinci düğme "Ertele": .countdown → postAlert (9 dk) sonra yeniden çalar (Apple örneği
                         // "Scheduling an alarm with AlarmKit"). Sahibinin kararı (2026-09-28): "Nefona'yı aç" yerine erteleme.
                         let alert = AlarmPresentation.Alert(
-                            title: "Nefona · Günaydın",
+                            title: "\(title)",
                             stopButton: stop,
-                            secondaryButton: AlarmButton(text: "Ertele", textColor: .white, systemImageName: "repeat"),
+                            secondaryButton: AlarmButton(text: "\(snoozeMin) dk ertele", textColor: .white, systemImageName: "\(snoozeMin).circle.fill"),
                             secondaryButtonBehavior: .countdown)
                         let attributes = AlarmAttributes<NefonaAlarmMeta>(
-                            presentation: AlarmPresentation(alert: alert, countdown: AlarmPresentation.Countdown(title: "Ertelendi")),
+                            presentation: AlarmPresentation(alert: alert, countdown: AlarmPresentation.Countdown(title: "\(snoozeMin) dk ertelendi")),
                             metadata: NefonaAlarmMeta(),
                             tintColor: tint)
                         let countdown = Alarm.CountdownDuration(preAlert: nil, postAlert: Self.snoozeSeconds)
@@ -123,7 +128,7 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
                         // ikinci düğme eskisi gibi "Nefona'yı aç" olur. JS { snooze: false } ile öğrenir ve günlüğe yazar.
                         snooze = false
                         let alert = AlarmPresentation.Alert(
-                            title: "Nefona · Günaydın",
+                            title: "\(title)",
                             stopButton: stop,
                             secondaryButton: AlarmButton(text: "Nefona'yı aç", textColor: .white, systemImageName: "sun.max"),
                             secondaryButtonBehavior: .custom)
