@@ -4,11 +4,14 @@ import '../test/fakeDom.js'
 import { createElement as h, act } from 'react'
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true
+// <audio>.play taklidi: çalma isteğinin sırasını görmek için (impl null: hemen çalar)
+const audioPlay = { impl: null }
 // Sahte DOM'da <select>.options yok (React seçili değeri buradan kurar); yalnız bu testte eklenir
 const mk = document.createElement
 document.createElement = (t) => {
   const n = mk(t)
   if (String(t).toUpperCase() === 'SELECT') Object.defineProperty(n, 'options', { get: () => n.childNodes.filter((c) => c.nodeName === 'OPTION') })
+  if (String(t).toUpperCase() === 'AUDIO') { n.play = () => (audioPlay.impl ? audioPlay.impl() : Promise.resolve()); n.pause = () => {} }
   return n
 }
 // Sahte DOM'da gövdenin sahibi yok; React portalı (alt sayfa) öğeyi ownerDocument ile yaratır
@@ -262,24 +265,38 @@ describe('kurulum sayfası', () => {
     expect(r.text()).toContain('Kaçta uyanmak istersin?')
     expect(r.text()).toContain('Pazartesi–Cuma · dokun, çıkar ya da ekle')
     expect(r.text()).toContain('ilk gece 30 dk')
-    expect(r.text()).toContain('Kurunca uyku sesi hemen başlar: 30 dk, sonra yavaşça susar.')
-    await r.tap('Kur ve uyku sesini başlat')
+    expect(r.text()).not.toContain('Kur ve uyku sesini başlat') // web'de müzik düğmesi yok
+    await r.tap('Kur · 07:00')
     expect(r.text()).toContain('Alarm yalnız iPhone uygulamasında kurulur.')
     expect(onDone).not.toHaveBeenCalled()
     expect(loadAlarm()).toBeNull()
     expect(loadAlarmLog()).toEqual([])
-    expect(takeSleepSession()).toBeNull() // kurulamadı: müzik durduruldu
   })
-  it('"Kur ve uyku sesini başlat": müzik aynı dokunuşta başlar, sonra uyku ekranı; "Yalnız kur" müziği başlatmaz', async () => {
+  it('"Kur ve uyku sesini başlat": müzik aynı dokunuşta, alarm kurulmadan ÖNCE başlar; sonra uyku ekranı; "Yalnız kur" müziği başlatmaz', async () => {
     const onDone = vi.fn()
-    native.scheduleAlarm.mockResolvedValueOnce({ ok: true, snooze: true })
+    const order = []
+    audioPlay.impl = () => { order.push('play'); return Promise.resolve() }
+    native.scheduleAlarm.mockImplementationOnce(async () => { order.push('schedule'); return { ok: true, snooze: true } })
     const r = await mount(h(AlarmSetup, { status: { platform: 'alarmkit', auth: 'authorized' }, now: EVE, onDone, onBack: () => {} }))
+    expect(r.text()).toContain('Kurunca uyku sesi hemen başlar: 30 dk, sonra yavaşça susar.')
     await r.tap('Kur ve uyku sesini başlat')
+    // ses öğesi ilk kez yaratılırken önce sessiz döngü, sonra müzik çalar; ikisi de alarm kurulmadan önce
+    expect(order.at(-1)).toBe('schedule')
+    expect(order.slice(0, -1)).toEqual(['play', 'play'])
     expect(onDone).toHaveBeenCalledWith('sleep')
     expect(loadAlarmLog().at(-1)).toMatchObject({ type: 'set', sleepNow: 30 })
     const s = takeSleepSession()
     expect(s).toMatchObject({ minutes: 30, auto: true })
+    expect(await s.run).toBe(true)
+    expect(s.player.phase).toBe('loop')
     s.player.stop()
+    audioPlay.impl = null
+    // alarm kurulamazsa müzik durur
+    native.scheduleAlarm.mockResolvedValueOnce({ ok: false, reason: 'error' })
+    const rf = await mount(h(AlarmSetup, { status: { platform: 'alarmkit', auth: 'authorized' }, now: EVE, onDone: () => {}, onBack: () => {} }))
+    await rf.tap('Kur ve uyku sesini başlat')
+    expect(rf.text()).toContain('Kurulamadı')
+    expect(takeSleepSession()).toBeNull()
     native.scheduleAlarm.mockResolvedValueOnce({ ok: true, snooze: true })
     const r2 = await mount(h(AlarmSetup, { status: { platform: 'alarmkit', auth: 'authorized' }, now: EVE, onDone, onBack: () => {} }))
     await r2.tap('Yalnız kur · 07:00')

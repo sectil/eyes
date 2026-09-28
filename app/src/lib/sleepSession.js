@@ -6,12 +6,13 @@ import { setAudioSessionType } from './audioUnmute.js'
 
 let cur = null
 
-export function startSleepSession({ minutes, auto = false }) {
+// seconds: çalma süresi (sn). minutes: uyku ekranı ve günlük için (kesirli olabilir)
+export function startSleepSession({ seconds, auto = false }) {
   stopSleepSession()
   setAudioSessionType('playback') // sessiz tuşunda da çalsın (Dalga motoru da böyle yapar)
   const player = createSleepPlayer()
-  const run = player.start({ mode: 'sakin', totalSec: minutes * 60 })
-  cur = { player, minutes, auto, run }
+  const run = player.start({ mode: 'sakin', totalSec: seconds })
+  cur = { player, minutes: seconds / 60, auto, run }
   return cur
 }
 // Uyku ekranı oturumu devralır (bir kez)

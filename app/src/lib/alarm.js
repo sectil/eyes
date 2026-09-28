@@ -230,7 +230,7 @@ export function bedtimeFor(next, now) {
   return b.getTime() > new Date(now).getTime() ? b : null
 }
 
-// Alarma 1 saatten az kaldıysa "Yine de çal" süresi: alarmdan 5 dk önce susar (kişinin seçimi; kural dışı). 0: çalmaz
+// Alarma 1 saatten az kaldıysa "Yine de çal" süresi: alarmdan LATE_GAP_MIN dk önce susar (kişinin seçimi; kural dışı). 0: çalmaz
 // Sahibi yakın alarmla (2 dk sonra) deniyor: 5 dk pay sesi tamamen kapatıyordu (Bug 22). 1 dk: alarmla üst üste binmez.
 export const LATE_GAP_MIN = 1
 export function lateSleepMinutes(alarm, log, now) {
@@ -240,6 +240,18 @@ export function lateSleepMinutes(alarm, log, now) {
   const base = alarm.sleep === 'auto' ? latency(log) : alarm.sleep
   const m = Math.min(base, SLEEP_MAX_MIN, Math.floor((ring.getTime() - new Date(now).getTime()) / MIN) - LATE_GAP_MIN)
   return m >= 1 ? m : 0
+}
+
+// Aynı kural saniye olarak (kurulumdaki "Kur ve uyku sesini başlat"): dakikaya yuvarlamadan. 2 dk'dan az kalan
+// alarmda da (1 dk 50 sn → 50 sn) çalar; 30 sn'den kısaysa 0. Bug 22: sahibi 18:03'te 18:05'e kuruyor.
+export const LATE_MIN_SEC = 30
+export function lateSleepSeconds(alarm, log, now) {
+  if (!alarm || alarm.sleep === 'off') return 0
+  const ring = nextRing(alarm, now)
+  if (!ring) return 0
+  const base = (alarm.sleep === 'auto' ? latency(log) : alarm.sleep) * 60
+  const s = Math.floor(Math.min(base, SLEEP_MAX_MIN * 60, (ring.getTime() - new Date(now).getTime()) / 1000 - LATE_GAP_MIN * 60))
+  return s >= LATE_MIN_SEC ? s : 0
 }
 
 // Son kurulumdan / kart cevabından beri üst üste "Bu akşam değil" sayısı (izin kartındaki Tamam sayılmaz)

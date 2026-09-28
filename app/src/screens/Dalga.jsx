@@ -89,7 +89,21 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
   const engine = engineRef.current
   const m = MODES[opts.mode]
 
-  useEffect(() => () => { engine.close(); sleepRef.current?.stop(); wakeRef.current?.release?.().catch?.(() => {}) }, [engine])
+  // Ekrandan çıkınca ses durur. Geliştirmede StrictMode sahte söküp yeniden takar: gerçek sökümü bir tik sonra anla
+  // (yoksa "Kur"la başlamış müzik açılır açılmaz susuyordu)
+  const mounted = useRef(false)
+  useEffect(() => {
+    mounted.current = true
+    return () => {
+      mounted.current = false
+      setTimeout(() => {
+        if (mounted.current) return
+        engine.close()
+        sleepRef.current?.stop()
+        wakeRef.current?.release?.().catch?.(() => {})
+      }, 0)
+    }
+  }, [engine])
 
   const update = (patch) => setOpts((o) => {
     const n = { ...o, ...patch }

@@ -398,3 +398,15 @@ describe('v5 inceleme düzeltmeleri', () => {
     }
   })
 })
+
+describe('yakın alarmda uyku sesi saniyeyle (Bug 22)', () => {
+  it('18:03:30\'da 18:05 alarm → 30 sn (1 dk pay); 18:03:31 → 0; uzak alarmda seçilen süre', async () => {
+    const { lateSleepSeconds } = await import('./alarm.js')
+    const a = { on: true, hour: 18, minute: 5, days: [1, 2, 3, 4, 5], at: null, sound: 'phone', sleep: 5, wake: 'none', kind: 'alarmkit', setAt: new Date(2026, 8, 28, 18, 0).toISOString() }
+    expect(lateSleepSeconds(a, [], new Date(2026, 8, 28, 18, 3, 0))).toBe(60)
+    expect(lateSleepSeconds(a, [], new Date(2026, 8, 28, 18, 3, 10))).toBe(50)
+    expect(lateSleepSeconds(a, [], new Date(2026, 8, 28, 18, 3, 30))).toBe(30)
+    expect(lateSleepSeconds(a, [], new Date(2026, 8, 28, 18, 3, 31))).toBe(0)
+    expect(lateSleepSeconds(a, [], new Date(2026, 8, 28, 17, 0, 0))).toBe(300)
+  })
+})

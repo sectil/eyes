@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { X, Play, Square } from 'lucide-react'
 import {
   setupDefaults, buildAlarm, hhmm, withSuffix, parseHhmm, daysLabel, latency, LATENCY_START, nextOccurrence, nextRing, ringLabel,
-  WEEK_ORDER, WEEKDAY_SHORT, WEEKDAY_LONG, SLEEP_CHOICES, SLEEP_OTHER, sleepMinutes, lateSleepMinutes,
+  WEEK_ORDER, WEEKDAY_SHORT, WEEKDAY_LONG, SLEEP_CHOICES, SLEEP_OTHER, sleepMinutes, lateSleepSeconds,
 } from '../lib/alarm.js'
 import { startSleepSession, stopSleepSession } from '../lib/sleepSession.js'
 import { loadAlarm, loadAlarmLog, saveAlarm, addAlarmEvent } from '../lib/alarmLog.js'
@@ -81,9 +81,18 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
     setPlaying(ok ? id : null)
   }
 
-  // Bu gece uyku sesi kaç dk: kuraldaki süre (alarmdan 1 saat önce biter); yetmezse alarmdan 1 dk önceye kadar
-  const sleepFor = (cfg, at) => (sleepOn ? sleepMinutes(cfg, log, at) || lateSleepMinutes(cfg, log, at) : 0)
-  const tonight = sleepFor(buildAlarm({ time, days, sleep, sound, wake, kind: notify ? 'notify' : 'alarmkit' }, now), now)
+  // Bu gece uyku sesi kaç sn: kuraldaki süre (alarmdan 1 saat önce biter); yetmezse alarmdan 1 dk önceye kadar
+  const sleepFor = (cfg, at) => (sleepOn ? (sleepMinutes(cfg, log, at) || 0) * 60 || lateSleepSeconds(cfg, log, at) : 0)
+  // Ekrandaki süre açık kaldıkça tazelenir (yakın alarmda saniyeler önemli); testte verilen saat sabit kalır
+  const [clock, setClock] = useState(() => now)
+  useEffect(() => {
+    if (nowProp) return undefined
+    const id = setInterval(() => setClock(new Date()), 10000)
+    return () => clearInterval(id)
+  }, [nowProp])
+  const tonight = sleepFor(buildAlarm({ time, days, sleep, sound, wake, kind: notify ? 'notify' : 'alarmkit' }, clock), clock)
+  const tonightText = tonight >= 60 ? `${Math.round(tonight / 60)} dk` : `${tonight} sn`
+  const withSoundOk = sleepOn && tonight > 0 && platform !== 'web'
 
   // withSound: "Kur ve uyku sesini başlat". Müzik AYNI dokunuşta, alarm kurulmadan (beklemeden) önce başlar: iOS sesi
   // yalnız dokunuşun içinde açar (Bug 22). Alarm kurulamazsa müzik durur.
@@ -91,7 +100,13 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
     if (!platform) return
     const cfg = buildAlarm({ time, days, sleep, sound, wake, kind: notify ? 'notify' : 'alarmkit' }, new Date())
     const m = withSound ? sleepFor(cfg, new Date()) : 0
-    const session = m > 0 ? startSleepSession({ minutes: m, auto: sleep === 'auto' }) : null
+    // Dokunduğun an süre bitmişse (alarm çok yaklaştı) sessizce müziksiz kurma: söyle
+    if (withSound && m <= 0) {
+      setErr('Alarma çok az kaldı; uyku sesi çalamaz. "Yalnız kur" ya da saati değiştir.')
+      setClock(new Date())
+      return
+    }
+    const session = m > 0 ? startSleepSession({ seconds: m, auto: sleep === 'auto' }) : null
     setBusy(true)
     setErr(null)
     await stopPreview()
@@ -112,7 +127,7 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
     addAlarmEvent('set', {
       hour: cfg.hour, minute: cfg.minute, days: cfg.days, sound, sleep, wake, kind: cfg.kind,
       suggested: d.times.map(hhmm), picked: d.times.includes(time) && !otherTime ? 'suggest' : 'other',
-      daysChanged: days.join() !== d.days.join(), edit: Boolean(live), snooze: Boolean(r.snooze), sleepNow: session ? m : 0,
+      daysChanged: days.join() !== d.days.join(), edit: Boolean(live), snooze: Boolean(r.snooze), sleepNow: session ? Math.round(m / 6) / 10 : 0,
     })
     onDone?.(session ? 'sleep' : undefined)
   }
@@ -130,7 +145,7 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
   return (
     <main className="screen fade-in al-setup">
       <div className="al-top">
-        <button type="button" className="btn-icon" onClick={onBack} aria-label="Kapat"><X size={20} /></button>
+        <button type="button" className="btn-icon" onClick={onBack} disabled={busy} aria-label="Kapat"><X size={20} /></button>
         <span className="eyebrow">{notify ? 'Hatırlatma' : 'Alarm'}{live ? ' · değiştir' : ''}</span>
       </div>
 
@@ -235,12 +250,12 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
       {notify && <p className="al-warn">Bu telefonda gerçek alarm yok (iOS 26 gerekir). Bildirim olarak gelir; sessiz modda ses çıkmaz.</p>}
       {err && <p className="al-err" role="alert">{err}</p>}
       <div className="grow" />
-      {sleepOn && (
+      {sleepOn && platform !== 'web' && (
         <p className="al-q-sub al-now">
-          {tonight > 0 ? `Kurunca uyku sesi hemen başlar: ${tonight} dk, sonra yavaşça susar.` : 'Alarma çok az var; uyku sesi çalmaz.'}
+          {tonight > 0 ? `Kurunca uyku sesi hemen başlar: ${tonightText}, sonra yavaşça susar.` : 'Alarma çok az var; uyku sesi çalmaz.'}
         </p>
       )}
-      {sleepOn && tonight > 0 ? (
+      {withSoundOk ? (
         <>
           <button type="button" className="btn" disabled={busy || !platform} onClick={() => submit(true)}>
             {notify ? 'Hatırlat ve uyku sesini başlat' : 'Kur ve uyku sesini başlat'}

@@ -581,3 +581,8 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   başlar; kurulamazsa durur; `lib/sleepSession.js`), ardından uyku ekranı ona bağlanır. "Yalnız kur" ayrıca var.
   Süre: kuraldaki süre, yetmezse alarmdan 1 dk önceye kadar (LATE_GAP_MIN 5 → 1). Tarayıcıda uçtan uca denendi:
   dokunuşta çaldı, 1 dk sonra kısılıp sustu, uyku kaydı yazıldı.
+- Bağımsız inceleme (9d9e901): sahibinin tam durumu (18:03:xx'te 18:05) yine müziksizdi: süre dakikaya aşağı
+  yuvarlanıp 1 dk pay çıkınca 0 oluyordu. Artık saniye (`lateSleepSeconds`; 18:03:30 → 30 sn, en az 30 sn). Ekrandaki
+  süre 10 sn'de bir tazelenir; dokunduğun an süre bittiyse sessizce müziksiz kurmaz, söyler. Web'de müzik düğmesi yok.
+  Kurulum sürerken X kapalı. Geliştirmede StrictMode sahte sökümü devredilen müziği susturuyordu: söküm bir tik sonra.
+  Test: çalma isteği alarm kurulmadan ÖNCE (sıra değişince test düşüyor, denendi); kurulamazsa müzik durur.
