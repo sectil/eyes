@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { AlarmClock } from 'lucide-react'
 import AlarmSetup from '../../screens/AlarmSetup.jsx'
 import AlarmMorning from '../../screens/AlarmMorning.jsx'
@@ -6,15 +7,18 @@ import { loadAlarm, loadAlarmLog, addAlarmEvent } from '../../lib/alarmLog.js'
 import { sleepMinutes, nextRing, lastRing, hhmm, minOfDay } from '../../lib/alarm.js'
 
 // Uyku sesi: Dalga uyku ekranı, süre alarm kuralından (lib/alarm.js sleepMinutes)
+// Süre ekran açılınca bir kez hesaplanır (çalarken yeniden çizimde kaymasın)
 function AlarmSleep({ ctx }) {
-  const now = new Date()
-  const alarm = loadAlarm()
-  const minutes = sleepMinutes(alarm, loadAlarmLog(), now) ?? 0
-  const ring = nextRing(alarm, now)
+  const [preset] = useState(() => {
+    const now = new Date()
+    const alarm = loadAlarm()
+    const ring = nextRing(alarm, now)
+    return { minutes: sleepMinutes(alarm, loadAlarmLog(), now) ?? 0, auto: alarm?.sleep === 'auto', alarmLabel: ring ? hhmm(minOfDay(ring)) : null }
+  })
   return (
     <Dalga
       sessions={ctx.sessions}
-      sleepPreset={{ minutes, auto: alarm?.sleep === 'auto', alarmLabel: ring ? hhmm(minOfDay(ring)) : null }}
+      sleepPreset={preset}
       onSleepEnd={(e) => addAlarmEvent('sleep', e)}
       onSave={(s) => { ctx.store.addSession(s); ctx.refresh() }}
       onExit={() => ctx.go('home')}

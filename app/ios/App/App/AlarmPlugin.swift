@@ -168,7 +168,9 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
         let d = UserDefaults.standard
         let t = d.double(forKey: Self.openedKey)
         d.removeObject(forKey: Self.openedKey)
-        call.resolve(t > 0 ? ["openedAt": t] : [:])
+        var out: [String: Any] = [:]
+        if t > 0 { out["openedAt"] = t }
+        call.resolve(out)
     }
 
     /// Kayıtlı alarmı iptal eder; bir şey iptal edildiyse true

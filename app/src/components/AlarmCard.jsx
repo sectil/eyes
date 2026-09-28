@@ -141,8 +141,9 @@ export default function AlarmCard({ status, sessions = [], test = false, onStart
     bump()
   }
   if (c.kind === 'askNotify') {
-    // iOS 26 öncesi: gerçek alarm yok, bildirimle hatırlatılır. Tek dokunuş: kurulum sayfasının önceden cevaplı hali.
-    const d = setupDefaults({ log, now, defaultSound: DEFAULT_SOUND })
+    // iOS 26 öncesi: gerçek alarm yok, bildirimle hatırlatılır. Tek dokunuş: önerilen saat, YALNIZ YARIN (kart
+    // "Yarın sabah" diyor; öğrenilen günler yarını içermeyebilir). Günlü hatırlatma "Değiştir"den.
+    const d = { ...setupDefaults({ log, now, defaultSound: DEFAULT_SOUND }), days: [] }
     const setNow = async () => {
       setBusy(true)
       setErr(null)
@@ -154,7 +155,7 @@ export default function AlarmCard({ status, sessions = [], test = false, onStart
         return
       }
       saveAlarm(cfg)
-      addAlarmEvent('set', { hour: cfg.hour, minute: cfg.minute, days: cfg.days, sound: cfg.sound, sleep: cfg.sleep, wake: cfg.wake, kind: 'notify', suggested: d.times.map(hhmm), picked: 'suggest', daysChanged: false, via: 'card' })
+      addAlarmEvent('set', { hour: cfg.hour, minute: cfg.minute, days: cfg.days, sound: cfg.sound, sleep: cfg.sleep, wake: cfg.wake, kind: 'notify', suggested: d.times.map(hhmm), picked: 'suggest', daysChanged: true, via: 'card' })
       bump()
     }
     return (

@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { X, Play, Square } from 'lucide-react'
 import {
-  setupDefaults, buildAlarm, hhmm, withSuffix, parseHhmm, daysLabel, latency, LATENCY_START,
+  setupDefaults, buildAlarm, hhmm, withSuffix, parseHhmm, daysLabel, latency, LATENCY_START, nextOccurrence, ringLabel,
   WEEK_ORDER, WEEKDAY_SHORT, WEEKDAY_LONG, SLEEP_CHOICES, SLEEP_OTHER,
 } from '../lib/alarm.js'
 import { loadAlarm, loadAlarmLog, saveAlarm, addAlarmEvent } from '../lib/alarmLog.js'
+import { dayKey, keyDay } from '../lib/habitLog.js'
 import { ALARM_SOUNDS, DEFAULT_SOUND, soundById } from '../lib/alarmSounds.js'
 import { alarmStatus, scheduleAlarm, cancelAlarm, previewSound, stopPreview } from '../lib/alarmNative.js'
 import '../styles/alarm.css'
@@ -55,6 +56,9 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
   const sleepOn = sleep !== 'off'
   const sleepOther = sleepOn && sleep !== 'auto' && !SLEEP_CHOICES.includes(sleep)
 
+  // Seçili günler yarını içermiyorsa ilk çalış yazılır ("Kur · 07:00" yarın sanılmasın)
+  const first = nextOccurrence({ hour: Math.floor(time / 60), minute: time % 60, days }, now)
+  const firstIsTomorrow = first && keyDay(dayKey(first)) - keyDay(dayKey(now)) <= 1
   const toggleDay = (x) => setDays((ds) => (ds.includes(x) ? ds.filter((y) => y !== x) : [...ds, x].sort((a, b) => a - b)))
   const pickTime = (t, other = false) => {
     setTime(t)
@@ -136,6 +140,7 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
           ))}
         </div>
         <p className="al-q-sub">{days.length ? `${daysLabel(days)} · dokun, çıkar ya da ekle` : 'Yalnız yarın · gün seçersen her hafta çalar'}</p>
+        {first && !firstIsTomorrow && <p className="al-q-sub">Yarın çalmaz · ilk: {ringLabel(first, now)}</p>}
       </section>
 
       <section className="al-q" aria-labelledby="al-q3">
