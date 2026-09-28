@@ -30,7 +30,12 @@ Son güncelleme: 2026-09-28.
       testle denetleniyor. Göz kırp süre kaydediyor. Göz kırp ve egzersiz setleri merkeze bağlandı. Ödeme ekranındaki
       iris haritası oturumları görüyor (Dikkat ve Farkındalık hep boş kalıyordu).
 - [ ] **2. İris haritası ve Gelişim merkezden beslenir:** her alanın değeri modül verisinden; harita Gelişim'in başında
-      ve Ana sayfada; WHO-5 ekranı. Tasarım önce Artifact. Ayrıntı aşağıda "Ölçüm ilkesi".
+      ve Ana sayfada; WHO-5 ekranı. Ayrıntı aşağıda "Ölçüm ilkesi".
+      - Tasarım: Artifact "Nefona Gelişim Haritası" (https://claude.ai/artifact/2RHScxNg7Cro1bXcDo2mvX), ONAY BEKLİYOR.
+        Kural: dilimin doluluğu = son 28 günde kaydı olan gün; dış kenar yayı = doğrulanmış değişim (altın iyileşiyor,
+        turuncu geriliyor).
+      - WHO-5 Türkçe metni WHO'nun belgesinden (Eser, 1998 sürümü) birebir alındı. Hukukçuya: WHO-5 artık WHO açık
+        erişim ürünü; ücretli uygulamada kullanım lisansı (ticari kullanım koşulu) DOĞRULANMADI.
 - [ ] **3. Anonim teşhis verisi (ürünün kendini geliştirmesi):** açık rızayla, hesapsız, görüntüsüz yalnız sayılar
       Supabase'e (Frankfurt). Örnek: kalibrasyon kontrol yüzdeleri, ekran hataları. Ayrı KVKK rıza sayfası ve gizlilik
       politikası; hukukçu onayı. Sonra "Verileri paylaş" kullanıcı arayüzünden kalkar, yalnız test derlemesinde kalır.
