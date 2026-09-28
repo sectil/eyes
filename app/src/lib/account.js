@@ -3,7 +3,7 @@
 // ölçümler cihazda kalır. Kamera görüntüsü hiçbir yere gönderilmez. Hesap silme uygulama içinden (App Store 5.1.1(v)).
 // settings.account: { mode: 'apple' | 'google' | 'email' | 'guest', userId?, email?, date }
 import { supabase, SUPABASE_URL } from './supabase.js'
-import { AuthSession, isIOSApp } from './native.js'
+import { AppleSignIn, AuthSession, isIOSApp } from './native.js'
 import { normalizeIdentity } from './identity.js'
 import { CORRECTION } from './profile.js'
 
@@ -89,7 +89,7 @@ export async function makeNonce(cryptoImpl = globalThis.crypto) {
 
 // Apple ile giriş (yalnız iPhone uygulaması). Apple'a özetlenmiş nonce, Supabase'e ham nonce gider.
 export async function signInWithApple(plugin = null) {
-  const P = plugin ?? (await import('@capacitor-community/apple-sign-in')).SignInWithApple
+  const P = plugin ?? AppleSignIn // AppleSignInPlugin.swift (npm eklentisi Release'te kayıtlı değildi)
   const nonce = await makeNonce()
   const { response } = await P.authorize({ clientId: APPLE_CLIENT_ID, redirectURI: `${SUPABASE_URL}/auth/v1/callback`, scopes: 'email name', nonce: nonce.hashed })
   const { data, error } = await supabase().auth.signInWithIdToken({ provider: 'apple', token: response.identityToken, nonce: nonce.raw })

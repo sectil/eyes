@@ -18,7 +18,7 @@ export const RELEASES = [
     id: '2026-09-27',
     title: '27 Eylül güncellemesi',
     items: [
-      { kind: 'fix', text: 'TestFlight sürümünde "Apple ile devam et" hata veriyordu (Apple girişi uygulamaya bağlanmamıştı); giriş artık açıkça bağlanıyor.' },
+      { kind: 'fix', text: 'TestFlight sürümünde "Apple ile devam et" hata veriyordu (Apple girişi uygulamaya bağlanmamıştı); Apple girişi artık uygulamanın kendi parçası.' },
       { kind: 'fix', text: 'Apple Sağlık izin açıklamasına "Nefona Sağlık\'a hiçbir veri yazmaz" cümlesi eklendi; Apple bu açıklama olmadan güncellemeyi kabul etmiyordu.' },
       { kind: 'change', text: 'Egzersizler yenilendi: her hareket aynı sahnede çizilir (kırpmada göz, bakışta hedef iris, dairede yörünge, uzağa bakışta ufuk, nefeste küre); çevresindeki altın halka ne kadar kaldığını gösterir. Setten önce hareketlerin listesi çıkar, Başla ile başlarsın. "Gözlerini kapat" adımında ekran iki temada da kararır. Göz kırpma egzersizinde bir tekrarın adımları ritim şeridinde görünür.' },
       { kind: 'new', text: 'Egzersizlerde bütün sesli yönlendirmeler Profilim\'de seçtiğin sesle (kadın ya da erkek) söylenir. Kırpma adımında "Kapat, hafifçe sık" ve "Aç" ritmi kamerasız da sesle verilir; yakın–uzakta "İrise bak" ve "Uzağa bak" sırayla söylenir.' },

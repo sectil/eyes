@@ -337,3 +337,6 @@ export async function walkGuardLog() {
 
 // Güvenli web oturumu (ios/App/App/AuthSessionPlugin.swift): Google ile giriş penceresi (lib/account.js)
 export const AuthSession = registerPlugin('AuthSession')
+
+// Apple ile giriş (ios/App/App/AppleSignInPlugin.swift): uygulamanın kendi eklentisi (lib/account.js signInWithApple)
+export const AppleSignIn = registerPlugin('AppleSignIn')
