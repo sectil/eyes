@@ -21,9 +21,9 @@ Gerekenler: `pip install numpy scipy soundfile pyloudnorm`. Hepsi geçmezse `ana
 | Melodi (düz bip değil) | McFarlane 2020 PLoS One, PMID 31990906 (anket n=50); McFarlane 2020 Clocks Sleep, PMID 33089201 (10+10 kişi; melodik alarm dikkat hatalarını azalttı, ritim tek başına değil) | zayıf / ön bulgu |
 | Gün Işığı: 105 BPM, Do majör, vibrafon C6–E7, D6 tahta vuruş 1. ve 3. vuruşta | McFarlane 2020 (PMID 33089201) uyaranının parametreleri | aynı uyaran |
 | ~520 Hz tek harmonikli zengin "çapa" ton (melodinin içinde, düz bip değil) | Bruck 2009 J Sleep Res, PMID 19302343 (400/520 Hz kare dalga en düşük uyanma eşiği); Smith 2019 Acad Pediatr, PMID 31276840 (çocuklarda 500 Hz ton %88) | güçlü, ama acil uyandırma; atalet ölçülmedi |
-| Duyulur başlayıp ~6 sn'de tam sese çıkan zarf (ses bir kez, ~24 sn çalar; ~18 sn'si tam ses), 8–15 ms saldırı | Kaida 2005 Ind Health, PMID 15732320 (9 yaşlı kişi, öğle uykusu: zorla uyandırma kendiliğinden uyanmaya göre kalp atışı ve tansiyonu daha çok yükseltti; yavaş yükselen ses denenmedi) | dolaylı |
+| Duyulur başlayıp ~6 sn'de tam sese çıkan zarf (ses bir kez, ~24 sn çalar; ~18 sn'si tam ses), 8–15 ms saldırı | Kaida 2005 Ind Health, PMID 15732320 (9 yaşlı kişi, öğle uykusu: zorla uyandırmada kalp atışı ve tansiyon birden yükseldi, önceden karar verilen saatte kendiliğinden uyanmada ani artış yok; yavaş yükselen ses denenmedi) | dolaylı |
 | Uyanış Marşı 124 BPM (hızlı tempo uyarır) | Bernardi 2006 Heart, PMID 16199412 (uyanık kişilerde) | orta, uyanık kişilerde |
-| Kuş Bahçesi: kuş cıvıltısı yalnız ruh hali için (alt yazı betimleyici: "yumuşak, kuş sesli") | Stobbe 2022 Sci Rep, PMID 36229489 (uyanık kişilerde; bilişe etki yok) | uyandırma için kanıt yok; en yumuşak seçenek |
+| Kuş Bahçesi: kuş cıvıltısı yalnız ruh hali için (alt yazı betimleyici: "yumuşak, kuş sesli") | Stobbe 2022 Sci Rep, PMID 36229489 (uyanık kişilerde; bilişe etki yok) | uyandırma için kanıt yok; uyandırma seslerinin en yumuşağı |
 
 Kaçınılanlar: yangın alarmı kalıpları (3'lü darbe, siren), 3 kHz bip, çıplak kare dalga, 0 ms tam ses başlangıç,
 minör ve yavaş (< 80 BPM) müzik (Lin 2023, PMID 36910785: yavaş tempo işlem hızını düşürdü).

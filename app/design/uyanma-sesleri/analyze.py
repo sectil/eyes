@@ -96,7 +96,8 @@ def analyze(path, profile='uyandirma'):
     }
     if profile == 'dalga':
         # Dalga müzikleri (Sakin/Güç/Motivasyon) uyandırma için değil rahatlama/odak için bestelendi: tempo, yükselme
-        # ve bant payı "uyandırma sesi" ölçütü değil; bunlar yalnız bilgi. Teknik kusur ölçütleri aynen geçerli.
+        # ve bant payı "uyandırma sesi" ölçütü değil; bunlar yalnız bilgi. İç tık ölçütü de düşer (vurmalılar 10 kHz üstünde
+        # kısa tepe yapar; README). Öteki teknik kusur ölçütleri aynen geçerli.
         for k in ['yükselen (son 5 sn ≥ ilk 5 sn + 3 LU)', '500 Hz–4 kHz ≥ %75 (hoparlörün iyi çaldığı bant)', 'spektral merkez 900–2500 Hz', 'ritim 2–6 vuruş/sn', 'iç tık yok (< 12 dB)', '300 Hz altı ≤ %3']:
             c.pop(k)
         c['300 Hz altı ≤ %5 (Dalga)'] = r['share_below_300'] <= 0.05
