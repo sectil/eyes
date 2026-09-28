@@ -1,5 +1,5 @@
 # ElevenLabs Music çıktısını (mp3/wav) AlarmKit uyandırma sesine çevirir: 44,1 kHz 2 kanal, ≤ 24,5 sn, telefon hoparlörü
-# için yüksek geçiren + 1 kHz üstü raf, duyulur başlayıp ~6 sn'de tam ses, −12 LUFS, ≤ −1,2 dBTP, CAF 16 bit.
+# için stereo daraltma (yan × 0,35) + yüksek geçiren + 1 kHz üstü raf, duyulur başlayıp ~6 sn'de tam ses, −12 LUFS, ≤ −1,2 dBTP, CAF 16 bit.
 # Kullanım: python3 master_eleven.py girdi.mp3 {gunisigi|kusbahcesi|marsi} çıktı.caf [başlangıç_sn]
 # Denetim: python3 analyze.py çıktı.caf (README'deki uyandırma ölçütleri)
 import sys
@@ -32,10 +32,17 @@ def load(path, start=None):
     return x, start
 
 
+def narrow(x, side=0.35):
+    """Stereo daraltma: telefon hoparlörleri birbirine yakın; geniş karışım tek kanala inince ses kaybeder
+    (analyze.py mono ölçütü). Yan sinyal (L−R)/2 × side."""
+    mid, sd = (x[:, 0] + x[:, 1]) / 2, (x[:, 0] - x[:, 1]) / 2 * side
+    return np.stack([mid + sd, mid - sd], axis=1)
+
+
 if __name__ == '__main__':
     src, name, out = sys.argv[1:4]
     start = float(sys.argv[4]) if len(sys.argv) > 4 else None
     x, s = load(src, start)
-    y = synth.master(x, RAMP[name], hp=(400, 4), shelf_db=4)
+    y = synth.master(narrow(x), RAMP[name], hp=(400, 4), shelf_db=4)
     synth.write_caf(out, y)
     print(name, 'başlangıç', round(s, 3), 'sn ·', round(len(y) / synth.SR, 2), 'sn →', out)
