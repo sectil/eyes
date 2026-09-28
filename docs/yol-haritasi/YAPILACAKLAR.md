@@ -79,6 +79,15 @@ Kalan:
 - [ ] Uygulanmış bildirim sistemi (v2, `8bccf79`, Hatırlatmalar ekranı; cihazda denenmedi) ile tek "Hatırlatma ve
       alarm" planında birleştir. Açık: sessiz gün oranı %25 (kodda VARSAYIM; sahibinin onayı kayıtlı değil).
 - [ ] iOS 26 öncesi davranış (hatırlatmaya düşer, ekranda açıkça söylenir) ve ölçüm yükü (her sabah soru yok) tasarla.
+Sahibinin istekleri (2026-09-28, deneme sonrası):
+- [ ] Alarm sesi seçimi: normal alarm sesleri + Dalga sesleri; Dalga modları 3'ten 4'e çıkabilir (yeni mod tasarımı
+      ayrıca; kanıt ve ses tasarımı önce).
+- [ ] Uyku sesi: alarm sabaha kurulunca uyumak için ses; kapanma (a) zamanlayıcıyla — Dalga uyku modu zaten var
+      (`dalgaSleep.js`, sonunda kısılarak susar) ya da (b) nefesten uyuduğunu anlayıp. (b) için araştırılacak: telefon
+      mikrofonuyla uyku/nefes algılamanın doğruluğu (PubMed), gece boyu mikrofon izni ve KVKK (ses telefondan çıkmaz),
+      pil. Doğrulanmadan söz verilmez.
+- Deneme sonucu 1 (14:05): AlarmKit kuruldu, izin verildi, iki alarm da 2 dk sonra çaldı; Library/Sounds'taki Dalga
+  sesi çalmadı (Bug 20). Deneme 2: paketteki sesler (`f6cc639`) — sonuç bekleniyor.
 - [ ] Tasarım Artifact'i, sahibinin onayı, sonra kod.
 
  (sahibin yönü, 2026-09-28)
