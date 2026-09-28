@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from 'vitest'
-import { windowStable, usableCenters, fitModel, fitAxis, axisFrom, fitWindowsAxis, postureFit, roughModel, MIN_SCORE_ROUGH, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE, calibReport, closeThreshold, loadGazeModel, saveGazeModel, clearGazeModel, GAZE_MODEL_KEY, GAZE_MODEL_VERSION, DOWN_CLOSE_MAX, headRef, headTurned, HEAD_TURN_DEG } from './gazeCalib.js'
+import { windowStable, usableCenters, fitModel, fitAxis, axisFrom, fitWindowsAxis, postureFit, roughModel, MIN_SCORE_ROUGH, summarize, normAxis, applyModel, createOneEuro, MIN_SCORE, calibReport, closeThreshold, loadGazeModel, saveGazeModel, clearGazeModel, GAZE_MODEL_KEY, GAZE_MODEL_VERSION, DOWN_CLOSE_MAX, headRef, headTurned, HEAD_TURN_DEG, twoPointAxis, axisCenterKey } from './gazeCalib.js'
 import { createGazeReader, lookingAtPhone, GAZE_FULL_DEG } from './gaze.js'
 
 // Deterministik gürültü
@@ -451,5 +451,71 @@ describe('kaba model (tüm tekrarlardan sonra)', () => {
     expect(roughModel({ ...m, y: { ...m.y, score: MIN_SCORE_ROUGH - 0.01 } })).toBeNull()
     expect(roughModel({ ...m, y: null })).toBeNull()
     expect(MIN_SCORE_ROUGH).toBeLessThan(MIN_SCORE)
+  })
+})
+
+describe('Build 38: yan hedefler başka duruşta (iki nokta yedeği, duruşsuz aday, eksene özel orta)', () => {
+  const S = (med, mad) => ({ med, mad, n: 60 })
+  const n = (camX, headX, camY, headY, lookY) => ({ camX: S(...camX), headX: S(...headX), camY: S(...camY), headY: S(...headY), lookY: S(...lookY) })
+  // Build 38 raporundan (ortanca, MAD). Sağ/sol, orta/üst/alt/orta2'den ~4° farklı baş duruşunda.
+  const T = {
+    center: n([-1.832, 0.202], [1.119, 0.11], [-0.453, 0.135], [8.092, 0.084], [-0.181, 0.002]),
+    left: n([-2.901, 0.116], [-2.868, 0.175], [-3.04, 0.247], [3.945, 0.078], [-0.151, 0.004]),
+    right: n([-4.035, 0.089], [-2.834, 0.072], [-1.222, 0.099], [3.296, 0.088], [-0.113, 0.002]),
+    up: n([-1.453, 0.163], [1.124, 0.059], [0.354, 0.151], [7.609, 0.054], [-0.161, 0.002]),
+    down: n([-2.557, 0.107], [1.287, 0.062], [-1.859, 0.126], [8.087, 0.088], [-0.207, 0.004]),
+    center2: n([-2.362, 0.115], [0.983, 0.049], [-1.087, 0.231], [7.593, 0.093], [-0.187, 0.003]),
+  }
+  it('x: orta yanların arasında değil ama yanlar aynı duruşta → iki nokta, camX ≈ 4,9 geçer', () => {
+    const x = axisFrom(T, T.center, T.center2, 'x')
+    expect(x.twoPoint).toBe(true)
+    expect(x.feature).toBe('camX')
+    expect(x.weak).toBeUndefined()
+    expect(x.score).toBeCloseTo(4.88, 1)
+    expect(x.c).toBeCloseTo((-2.901 + -4.035) / 2, 3)
+    expect(normAxis(x, -2.901)).toBeCloseTo(-1, 5)
+    expect(normAxis(x, -4.035)).toBeCloseTo(1, 5)
+  })
+  it('y: duruş düzeltmesi zayıf (camY 1,8) ama düzeltmesiz lookY 5,9 → en iyisi alınır', () => {
+    const y = axisFrom(T, T.center, T.center2, 'y')
+    expect(y.feature).toBe('lookY')
+    expect(y.weak).toBeUndefined()
+    expect(y.score).toBeGreaterThan(5.5) // raporda 5,92 (burada 3 haneye yuvarlanmış değerler)
+    // camY: duruş düzeltmeli 1,76 (rapordaki), düzeltmesiz 3,4 → düzeltmesiz olan seçilir
+    const onlyCam = axisFrom(T, T.center, T.center2, 'y', ['camY'])
+    expect(onlyCam.posture).toBeUndefined()
+    expect(onlyCam.score).toBeCloseTo(3.43, 1)
+  })
+  it('iki nokta, aynı duruşta ölçülmüş bir orta varsa devreye girmez (Build 19: sol = orta, ayrım yok)', () => {
+    // Build 19: temiz orta2 yanlarla yatayda 1,0° farklı (dikeyde 2,2°) → kayma yok sayılır
+    const B = {
+      center2: { camX: S(-3.3375, 0.0381), headX: S(-5.3, 0.05), headY: S(3.0, 0.05) },
+      left: { camX: S(-3.4214, 0.1162), headX: S(-6.4, 0.05), headY: S(5.6, 0.05) },
+      right: { camX: S(-4.2967, 0.0295), headX: S(-6.2, 0.05), headY: S(4.7, 0.05) },
+    }
+    expect(twoPointAxis(B.center2, B.left, B.right, ['camX'], null, { head: 'headX' })).toBeNull()
+    expect(axisFrom(B, B.center2, null, 'x', ['camX'])).toBeNull()
+  })
+  it('iki nokta: yanlar farklı duruştaysa ya da baş verisi yoksa kullanılmaz; baş sinyali aday değildir', () => {
+    const turned = { ...T.right, headX: S(1.5, 0.07) }
+    expect(twoPointAxis(T.center, T.left, turned, ['camX'], T.center2, { head: 'headX' })).toBeNull()
+    expect(twoPointAxis(T.center, T.left, T.right, ['camX'], T.center2, null)).toBeNull()
+    expect(twoPointAxis(T.center, T.left, T.right, ['headX'], T.center2, { head: 'headX' })).toBeNull()
+  })
+  it('eksene özel orta (center@x): tekrar turunda yanlar arasında toplanan orta kullanılır, üç noktalı hesap geçer', () => {
+    // Genel ortalar duruş A'da; sağ/sol ve eksenin ortası duruş B'de (baş 4° kaymış)
+    const A = { x: 1, y: 8 }
+    const Bp = { x: -3, y: 4 }
+    const mk = (gx, gy, head, seed) => Array.from({ length: 30 }, (_, i) => makeFrame(gx, gy, { r: rng(seed + i), head, noise: 0.2 }))
+    const w = { center: mk(0, 0, A, 10), up: mk(0, 12, A, 20), down: mk(0, -12, A, 30), center2: mk(0, 0, A, 40), left: mk(-15, 0, Bp, 50), right: mk(15, 0, Bp, 60) }
+    w[axisCenterKey('x')] = mk(0, 0, Bp, 70)
+    const m = fitModel(w)
+    expect(m.ok).toBe(true)
+    expect(m.x.twoPoint).toBeUndefined()
+    expect(m.x.weak).toBeUndefined()
+    expect(fitWindowsAxis(w, 'x')).toEqual(m.x)
+    const rep = calibReport(w, m)
+    expect(rep.targets['center@x'].n).toBe(30)
+    expect(rep.targets['center@y']).toBeUndefined()
   })
 })

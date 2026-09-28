@@ -4,7 +4,7 @@ import SoundToggle from '../components/SoundToggle.jsx'
 import StepCards from '../components/StepCards.jsx'
 import { DotFollowArt, FaceLightArt } from '../components/howtoArt.jsx'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
-import { calibReport, fitModel, fitWindowsAxis, roughModel, windowStable, saveGazeModel, headRef, headTurned, TARGETS, DOWN_CLOSE_MAX, MIN_SCORE, HEAD_TURN_DEG } from '../lib/gazeCalib.js'
+import { axisCenterKey, calibReport, fitModel, fitWindowsAxis, roughModel, windowStable, saveGazeModel, headRef, headTurned, TARGETS, DOWN_CLOSE_MAX, HEAD_TURN_DEG } from '../lib/gazeCalib.js'
 import { shareText } from '../lib/share.js'
 import { createGazeReader, eyeClosure, BLINK_CLOSE, GAZE_FULL_DEG } from '../lib/gaze.js'
 import { haptic } from '../lib/native.js'
@@ -21,11 +21,13 @@ import '../styles/gazecal.css'
 // penceresi "sabit bakış" olunca (windowStable) nokta YEŞİLE döner, titreşim gelir, sıradakine geçilir.
 // Sabitlenmezse MAX_COLLECT_MS'e kadar beklenir, sonra eldeki kareler kabul edilir.
 // Yüz görünmez, gözler kapalı ya da baş dönükse kayıt durur (kareler atılır).
-// Sağ hedefi bitince sağ–sol ekseni hemen sınanır: zayıfsa yalnızca sol+sağ bir kez daha istenir
-// (en fazla MAX_RETRY). Alt hedefte üst–alt için aynı. Sonda tüm model zayıfsa yalnızca zayıf eksenin
-// noktaları + orta tekrar edilir; baştan alma yok (Build 15 geri bildirimi: "sonda tekrar dene saçma").
+// Sağ hedefi bitince sağ–sol ekseni hemen sınanır: zayıfsa sol → orta → sağ bir kez daha istenir
+// (en fazla MAX_RETRY). Alt hedefte üst → orta → alt için aynı. Sonda tüm model zayıfsa yalnızca zayıf eksenin
+// turu tekrar edilir; baştan alma yok (Build 15 geri bildirimi: "sonda tekrar dene saçma").
 // Her tekrar turu ORTAYI da yeniden toplar: Build 15/19/30'da zayıf eksenin sebebi bayat ilk ortaydı
 // (baş duruşu sonradan değişti); yalnız yan noktaları tekrarlamak bir şey değiştirmiyordu.
+// Tekrar turunun ortası iki yanın ARASINDA toplanır ve o eksene ait pencereye yazılır ('center@x', 'center@y'):
+// Build 38'de yukarı–aşağı tekrarı ortak ortayı yeniden ölçtü, sağ–sol eski duruşta kalıp "veri yok" çıktı.
 // Tüm tekrarlardan sonra skor MIN_SCORE_ROUGH üstündeyse kaba model kaydedilir (lib/gazeCalib.js roughModel).
 // VARSAYIM: süreler ve MAX_RETRY ilk sürüm içindir; toplam ~20 sn (tekrarsız).
 const MOVE_MS = 450
@@ -44,6 +46,10 @@ const closeLimit = (t) => (t === 'down' ? DOWN_CLOSE_MAX : BLINK_CLOSE)
 // Baş dönüşü uyarısı (ses + titreşim) en az bu aralıkla tekrarlanır
 const HEAD_WARN_GAP_MS = 2500
 const AXIS_TARGETS = { x: ['left', 'right'], y: ['up', 'down'] }
+// Tekrar turu: yan → eksenin ortası → yan
+const retryRound = (axis) => [AXIS_TARGETS[axis][0], axisCenterKey(axis), AXIS_TARGETS[axis][1]]
+// Pencere adı → ekrandaki hedef ('center@x' → 'center')
+const baseT = (t) => t.split('@')[0]
 
 // Hedef konumları (ekran yüzdesi). Kullanıcı ekrandaki noktayı gözüyle takip eder; ekran dışına
 // bakması istenmez (Build 10 geri bildirimi: "kimse telefondan dışarı bakmaz, noktayı takip eder").
@@ -112,11 +118,12 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     if (s.accepted) return // yeşil nokta gösteriliyor; sıradaki hedef zamanlayıcıyla gelir
     const t = s.queue[s.pos]
     if (!t) return
+    const bt = baseT(t)
     const now = m.ts
     const since = now - s.start
     const settle = MOVE_MS + (s.pos === 0 ? FIRST_SETTLE_MS : SETTLE_MS)
     const face = m.face !== false && m.tracked !== false
-    const closed = face && eyeClosure(m) >= closeLimit(t)
+    const closed = face && eyeClosure(m) >= closeLimit(bt)
     const turned = face && !closed && t !== 'center' && headTurned(head.current.ref, m)
     let nextStatus = !face ? 'noface' : closed ? 'closed' : turned ? 'head' : 'ok'
     if (turned && since >= settle) {
@@ -143,7 +150,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     setProg(Math.min(1, s.collected / COLLECT_MS))
     if (s.collected >= COLLECT_MS) {
       const stable = windowStable(win.current[t])
-      const isCenter = t === 'center' || t === 'center2'
+      const isCenter = bt === 'center' || bt === 'center2'
       // Orta pencereleri referanstır (baş duruşu, eksen merkezi): kararsızken KABUL EDİLMEZ (Build 19: n=60,
       // MAD 1,5° çöp orta tüm eksenleri öldürdü). Yan hedeflerde süre dolunca eldeki alınır, raporda görünür.
       if (isCenter && !stable && s.collected >= CENTER_HINT_MS && now - head.current.lastWarn >= HEAD_WARN_GAP_MS) {
@@ -168,7 +175,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     const s = step.current
     const W = win.current
     let again = false // bu adımda tekrar turu eklendi mi (sesle söylenir)
-    if (t === 'center') head.current.ref = headRef(W.center)
+    if (baseT(t) === 'center') head.current.ref = headRef(W[t])
     const insert = (axis, targets) => {
       s.retry[axis] += 1
       const at = s.pos + 1
@@ -181,18 +188,17 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
       const a = fitWindowsAxis(W, axis)
       return !a || a.weak
     }
-    if (t === 'right' && s.retry.x < MAX_RETRY && axisWeak('x')) insert('x', ['center', ...AXIS_TARGETS.x])
-    else if (t === 'down' && s.retry.y < MAX_RETRY && axisWeak('y')) insert('y', ['center', ...AXIS_TARGETS.y])
+    if (t === 'right' && s.retry.x < MAX_RETRY && axisWeak('x')) insert('x', retryRound('x'))
+    else if (t === 'down' && s.retry.y < MAX_RETRY && axisWeak('y')) insert('y', retryRound('y'))
     else if (t === 'center2') {
       const extra = []
       for (const axis of ['x', 'y']) {
         if (s.retry[axis] < MAX_RETRY && axisWeak(axis)) {
           s.retry[axis] += 1
-          extra.push(...AXIS_TARGETS[axis])
+          extra.push(...retryRound(axis))
         }
       }
       if (extra.length) {
-        extra.unshift('center')
         extra.push('center2')
         const at = s.pos + 1
         s.queue.splice(at, 0, ...extra)
@@ -216,8 +222,8 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     if (again) {
       haptic('warning')
       say('calAgain')
-      say(SAY[nt], AGAIN_GAP_MS)
-    } else say(SAY[nt])
+      say(SAY[baseT(nt)], AGAIN_GAP_MS)
+    } else say(SAY[baseT(nt)])
   }
 
   const cam = useFaceTracking({ enabled: phase !== 'intro', trueDepth: true, onFrame })
@@ -259,7 +265,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
       haptic('success')
       say('calDone')
     } else {
-      haptic('warning')
+      haptic('tick')
     }
     releaseBreathSfx()
   }
@@ -315,33 +321,29 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
           </>
         ) : (
           <>
-            <div className="gazecal-badge warn"><RotateCcw size={28} /></div>
-            <h1>Ayırt edemedim</h1>
+            {/* Çıkmaz yok (Build 38 geri bildirimi: "ücretli kullanıcılar sıkılabilir"): ayrım yetmediyse kullanıcı
+                takılmaz, kalibrasyonsuz (temel) okuyucuyla devam eder; yeniden ayar isteğe bağlı. */}
+            <div className="gazecal-badge"><Crosshair size={30} /></div>
+            <h1>Temel ayarla devam</h1>
             <p className="muted">
-              {!result?.x || result.x.weak ? 'Sağa ve sola bakış, tekrarlara rağmen birbirinden ayrılmadı. ' : ''}
-              {!result?.y || result.y.weak ? 'Yukarı ve aşağı bakış, tekrarlara rağmen birbirinden ayrılmadı. ' : ''}
-              Işık yüzüne düşsün, telefon göz hizasında dursun; altın halka dolana kadar noktada kal. Gözlükle zorlanıyorsa bir kez gözlüksüz dene.
+              Bu sefer bakışını tam ayıramadım. Egzersizler yine çalışır; yön takibi biraz daha kaba olur. Telefonu ayar boyunca aynı yerde tutarsan bir dahaki sefere daha iyi sonuç alırsın.
             </p>
             {headTurnNote(report)}
-            <div className="gazetest-grid gazecal-scores">
-              <span>Sağ–sol ayrışma</span><span className={result?.x && !result.x.weak ? 'hl' : ''}>{scoreText(result?.x)}</span>
-              <span>Yukarı–aşağı ayrışma</span><span className={result?.y && !result.y.weak ? 'hl' : ''}>{scoreText(result?.y)}</span>
-            </div>
-            <button className="btn" onClick={start}><RotateCcw size={18} aria-hidden="true" /> Yeniden ayarla</button>
+            <button className="btn" onClick={onSkip ?? onCancel}>Devam</button>
+            <button className="link-btn" style={{ alignSelf: 'center' }} onClick={start}><RotateCcw size={15} aria-hidden="true" /> Yeniden ayarla</button>
             {report && (
-              <button className="btn btn-ghost" onClick={share}>
-                {navigator.share ? <Share2 size={18} aria-hidden="true" /> : <Copy size={18} aria-hidden="true" />} Verileri paylaş
+              <button className="link-btn subtle" style={{ alignSelf: 'center' }} onClick={share}>
+                {navigator.share ? <Share2 size={15} aria-hidden="true" /> : <Copy size={15} aria-hidden="true" />}Verileri paylaş
               </button>
             )}
             {note && <p className="muted small" role="status" style={{ textAlign: 'center' }}>{note}</p>}
-            {onSkip && <button className="link-btn" style={{ alignSelf: 'center' }} onClick={onSkip}>Şimdi değil</button>}
           </>
         )}
       </main>
     )
   }
 
-  const t = view.queue[view.pos] ?? 'center'
+  const t = baseT(view.queue[view.pos] ?? 'center')
   const p = POS[t]
   const done = status === 'done'
   const camErr = cam.error === 'permission' ? 'perm' : cam.error ? 'err' : null
@@ -360,7 +362,7 @@ export default function GazeCalibration({ onDone, onSkip, onCancel }) {
     <div className={`gazecal-stage${t === 'up' ? ' dim' : ''}${status === 'noface' && !done ? ' noface' : ''}`} role="application" aria-label="Göz kalibrasyonu">
       <button className="gazecal-ic gazecal-close" onClick={onCancel} aria-label="Kapat"><X size={19} /></button>
       <SoundToggle className="gazecal-sound" />
-      {trail && <CalTrail key={trail.key} from={POS[trail.from]} to={POS[trail.to]} />}
+      {trail && <CalTrail key={trail.key} from={POS[baseT(trail.from)]} to={POS[baseT(trail.to)]} />}
       <div className="gazecal-target" style={{ left: `${p.x}%`, top: `${p.y}%` }}>
         <CalIris state={irisState} progress={done ? 1 : prog} />
       </div>
@@ -397,10 +399,4 @@ function headTurnNote(report) {
       Başın {HEAD_TURN_DEG}°'den fazla döndüğü için {n} kareyi saymadım ({where}). Telefon yüzünün karşısında kalsın; noktaya bakarken ekrandan uzaklaşma.
     </p>
   )
-}
-
-// Eksen skoru: ayrışma / gürültü (en az MIN_SCORE gerekir)
-function scoreText(axis) {
-  if (!axis) return 'veri yok'
-  return `${axis.score.toFixed(1)} / ${MIN_SCORE}`
 }

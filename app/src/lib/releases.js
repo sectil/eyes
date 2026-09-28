@@ -4,6 +4,14 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    id: '2026-09-28',
+    title: '28 Eylül güncellemesi',
+    items: [
+      { kind: 'fix', text: 'Göz kalibrasyonu, ayar sırasında telefon ya da baş biraz kayınca sağ–sol ve yukarı–aşağı bakışı ayırt edemiyordu; artık bu kaymayı hesaba katıyor. Tekrar gerekirse nokta sola, ortaya, sonra sağa gider (yukarı, orta, aşağı için de aynı).' },
+      { kind: 'change', text: 'Kalibrasyon bir çıkmazla bitmez: ayrım bu sefer yetmezse "Temel ayarla devam" dersin, egzersizler yine çalışır; istersen hemen yeniden ayarlarsın.' },
+    ],
+  },
+  {
     id: '2026-09-27',
     title: '27 Eylül güncellemesi',
     items: [

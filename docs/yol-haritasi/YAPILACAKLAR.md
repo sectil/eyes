@@ -113,6 +113,11 @@ Son güncelleme: 2026-09-27.
       Cihazda bak: kırpma ritmi sesi ("Kapat, hafifçe sık" / "Aç") kişinin gerçek kırpmasıyla çakışıyor mu; bakış noktası
       ve hedefe oturan altın halka; "Gözlerini kapat"ta kararan ekran; ElevenLabs seslerinin telefonda gerçekten çalması
       (nefeste telefon sesi duyulmuştu; nefes ekranındaki geliştirici "tanı" satırı bekleniyor).
+- [ ] Göz kalibrasyonu (Build 38 "Ayırt edemedim"): iki nokta yedeği, duruşlu/duruşsuz en iyi aday, tekrar turu sol → orta → sağ
+      (eksene özel orta) ve çıkmaz yerine "Temel ayarla devam" yazıldı; eski raporlarla (Build 8–38) ve sahte kamerayla
+      denendi, CİHAZDA DENENMEDİ. Cihazda bak: kaç turda "Hazır"; paylaşılan raporda model.x.twoPoint var mı.
+- [ ] Sonraki aşama (onay bekliyor): egzersizdeki "Sağa bak / Sola bak" adımlarından kalibrasyonu sessizce iyileştirme;
+      kullanıcı ikinci kez ayar yapmak zorunda kalmaz.
 - [ ] Yılan (gözle): aşağı bakış "sağ" okunuyor (eksen karışması). Kalibrasyon verisi gerek; "orta"ya bağlı kilit
       denendi, geri alındı (c48eca6). Kullanıcıdan: geri almadan sonra gözle yön alma çalışıyor mu?
 - [ ] "Aboneliği yönet" bağlantısının iPhone'da App Store abonelik sayfasını açtığı doğrulanmadı

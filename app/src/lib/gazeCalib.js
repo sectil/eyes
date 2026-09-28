@@ -157,8 +157,14 @@ export function postureFit(k, headKey, neutrals) {
 // 1°'lik net ayrımı 2,0 puana düşürüyordu — Build 15 raporu.)
 // posture: { head: 'headY', neutrals: [özet…] } verilirse merkez baş duruşuna göre tahmin edilir (yukarıda);
 // drift = duruşla AÇIKLANAMAYAN orta farkı. Model, en son ortadaki duruşa göre saklanır (c, neg, pos).
+// Her sinyal hem duruş düzeltmeli hem düzeltmesiz denenir, en iyi skor alınır (Build 38: nötr hedefler
+// başka duruştaydı, düzeltme artığı şişirdi → camY 1,8; düzeltmesiz lookY 5,9).
+// Üç noktalı hesap geçmezse iki nokta yedeği (twoPointAxis) de denenir.
 export function fitAxis(center, neg, pos, features, center2 = null, posture = null) {
   let best = null
+  const take = (cand) => {
+    if (cand && (!best || cand.score > best.score)) best = cand
+  }
   for (const k of features) {
     const c1 = center?.[k]
     const c2 = center2?.[k]
@@ -167,38 +173,79 @@ export function fitAxis(center, neg, pos, features, center2 = null, posture = nu
     if (!c1 || !a || !b) continue
     const hk = posture?.head
     const pf = hk && k !== hk && neg[hk] && pos[hk] && center[hk] ? postureFit(k, hk, posture.neutrals) : null
-    let cMed, drift, dNeg, dPos
-    if (pf) {
-      const off = (s) => s[k].med - pf.at(s[hk].med) // duruşa göre beklenenden sapma
-      drift = c2 && center2[hk] ? Math.abs(off(center) - off(center2)) : 0
-      dNeg = a.med - pf.at(neg[hk].med)
-      dPos = b.med - pf.at(pos[hk].med)
-      cMed = pf.at((c2 && center2[hk] ? center2 : center)[hk].med)
-    } else {
-      cMed = c2 ? (c1.med + c2.med) / 2 : c1.med
-      drift = c2 ? Math.abs(c1.med - c2.med) : 0
-      dNeg = a.med - cMed
-      dPos = b.med - cMed
-    }
-    // İki yan merkezin zıt taraflarında olmalı (işaret ne olursa olsun)
-    if (!(dNeg * dPos < 0)) continue
-    const sep = Math.min(Math.abs(dNeg), Math.abs(dPos))
-    const noise = Math.max(c1.mad, c2?.mad ?? 0, a.mad, b.mad, drift / 2, pf?.resid ?? 0, NOISE_FLOOR[k] ?? 1e-6)
-    const score = sep / noise
-    if (!best || score > best.score) {
-      best = { feature: k, c: cMed, neg: pf ? cMed + dNeg : a.med, pos: pf ? cMed + dPos : b.med, score, drift }
-      if (pf) best.posture = { head: hk, beta: +pf.beta.toFixed(3), resid: +pf.resid.toFixed(4) }
-    }
+    if (pf) take(threePoint(k, center, neg, pos, center2, pf, hk))
+    take(threePoint(k, center, neg, pos, center2, null, null))
   }
+  if (!best || best.score < MIN_SCORE) take(twoPointAxis(center, neg, pos, features, center2, posture))
   return best && best.score >= MIN_SCORE ? best : best ? { ...best, weak: true } : null
 }
 
+function threePoint(k, center, neg, pos, center2, pf, hk) {
+  const c1 = center[k]
+  const c2 = center2?.[k]
+  const a = neg[k]
+  const b = pos[k]
+  let cMed, drift, dNeg, dPos
+  if (pf) {
+    const off = (s) => s[k].med - pf.at(s[hk].med) // duruşa göre beklenenden sapma
+    drift = c2 && center2[hk] ? Math.abs(off(center) - off(center2)) : 0
+    dNeg = a.med - pf.at(neg[hk].med)
+    dPos = b.med - pf.at(pos[hk].med)
+    cMed = pf.at((c2 && center2[hk] ? center2 : center)[hk].med)
+  } else {
+    cMed = c2 ? (c1.med + c2.med) / 2 : c1.med
+    drift = c2 ? Math.abs(c1.med - c2.med) : 0
+    dNeg = a.med - cMed
+    dPos = b.med - cMed
+  }
+  // İki yan merkezin zıt taraflarında olmalı (işaret ne olursa olsun)
+  if (!(dNeg * dPos < 0)) return null
+  const sep = Math.min(Math.abs(dNeg), Math.abs(dPos))
+  const noise = Math.max(c1.mad, c2?.mad ?? 0, a.mad, b.mad, drift / 2, pf?.resid ?? 0, NOISE_FLOOR[k] ?? 1e-6)
+  const out = { feature: k, c: cMed, neg: pf ? cMed + dNeg : a.med, pos: pf ? cMed + dPos : b.med, score: sep / noise, drift }
+  if (pf) out.posture = { head: hk, beta: +pf.beta.toFixed(3), resid: +pf.resid.toFixed(4) }
+  return out
+}
+
+// İki nokta yedeği (Build 38): iki yan hedef AYNI baş duruşunda, ortalar ise BAŞKA bir duruşta kaydedildiyse
+// "orta iki yanın arasında" şartı duruş kaymasıyla bozulur (sağ–sol 10× gürültü ayrışırken x "veri yok" çıktı).
+// Bu durumda yalnızca iki yan karşılaştırılır; merkez ikisinin ortası (hedefler ekranda simetrik: %8 ve %92,
+// %12 ve %84 → ortaya göre yaklaşık eşit). Oyunlar her adımda merkezi zaten yeniden alır (applyModel shift).
+// Güvenlik: aynı duruşta ölçülmüş bir orta varsa üç noktalı hesabın kararı geçerlidir, yedek devreye girmez
+// (Build 19: sola bakış ortayla aynıydı, gerçek ayrım yoktu). Baş sinyalinin kendisi bu yolda aday değildir.
+// VARSAYIM: yanlar arası baş farkı ≤ 1,5°, ortaların yanlardan farkı ≥ 2° (hedef-içi baş MAD 0,05–0,2°).
+export const TWO_POINT_SIDE_DEG = 1.5
+export const TWO_POINT_SHIFT_DEG = 2
+const HEADS = ['headX', 'headY']
+export function twoPointAxis(center, neg, pos, features, center2 = null, posture = null) {
+  const hk = posture?.head
+  if (!hk || !neg?.[hk] || !pos?.[hk]) return null
+  const heads = HEADS.filter((h) => neg[h] && pos[h])
+  if (heads.some((h) => Math.abs(neg[h].med - pos[h].med) > TWO_POINT_SIDE_DEG)) return null
+  // Kayma, eksenin KENDİ baş açısında aranır (x için headX). Build 19: orta2 yanlardan yalnızca dikeyde 2,2°
+  // farklıydı (yatayda 1,0°) ve sola bakış ortayla aynıydı → yedek açılmamalı.
+  const mid = (neg[hk].med + pos[hk].med) / 2
+  const centers = [center, center2].filter(Boolean)
+  if (!centers.length || !centers.every((c) => c[hk] && Math.abs(c[hk].med - mid) >= TWO_POINT_SHIFT_DEG)) return null
+  let best = null
+  for (const k of features) {
+    if (HEADS.includes(k)) continue
+    const a = neg[k]
+    const b = pos[k]
+    if (!a || !b) continue
+    const noise = Math.max(a.mad, b.mad, NOISE_FLOOR[k] ?? 1e-6)
+    const score = Math.abs(b.med - a.med) / 2 / noise
+    if (!best || score > best.score) best = { feature: k, c: (a.med + b.med) / 2, neg: a.med, pos: b.med, score, drift: 0, twoPoint: true }
+  }
+  return best
+}
+
 // Hedef özetlerinden bir eksen (fitModel, calibReport ve kalibrasyon ekranı AYNI hesabı kullanır).
-// S: { hedef: özet }, C1/C2: usableCenters sonucu.
-export function axisFrom(S, C1, C2, axis, features = AXIS_FEATURES[axis]) {
+// S: { hedef: özet }, C1/C2: eksenin ortaları (axisCenters), extra: duruş eğimi için ek nötr (orta) özetleri.
+export function axisFrom(S, C1, C2, axis, features = AXIS_FEATURES[axis], extra = []) {
   const [negT, posT] = AXIS_SIDES[axis]
   if (!C1 || !S[negT] || !S[posT]) return null
-  const neutrals = [C1, C2, ...AXIS_NEUTRALS[axis].map((t) => S[t])].filter(Boolean)
+  const neutrals = [C1, C2, ...extra, ...AXIS_NEUTRALS[axis].map((t) => S[t])].filter(Boolean)
   return fitAxis(C1, S[negT], S[posT], features, C2, { head: AXIS_HEAD[axis], neutrals })
 }
 
@@ -208,10 +255,26 @@ const summaries = (windows) => {
   return S
 }
 
+// Eksene özel orta (Build 38): tekrar turunda orta, o eksenin iki yanı ARASINDA toplanır (sol → orta → sağ)
+// ve 'center@x' / 'center@y' penceresine yazılır. Böylece orta, yanlarla aynı duruşta ölçülür ve öbür eksenin
+// tekrar turu bu ortayı ezmez (Build 38: yukarı–aşağı tekrarı ortayı yeniden ölçtü, sağ–sol eski duruşta kaldı).
+// Yoksa genel ortalar (usableCenters). Döner: [C1, C2, extra] — extra, duruş eğimine katılan diğer ortalar.
+export const axisCenterKey = (axis) => `center@${axis}`
+export function axisCenters(windows, axis) {
+  const [g1, g2] = usableCenters(windows)
+  const own = windows[axisCenterKey(axis)]
+  if (own?.length) return [summarize(own), null, [g1, g2].filter(Boolean)]
+  return [g1, g2, []]
+}
+
+function windowsAxis(windows, axis, S = summaries(windows), features) {
+  const [C1, C2, extra] = axisCenters(windows, axis)
+  return axisFrom(S, C1, C2, axis, features, extra)
+}
+
 // Ekranın ara kontrolü: bu anki pencerelerle eksen (null | {weak} | ok)
 export function fitWindowsAxis(windows, axis) {
-  const [C1, C2] = usableCenters(windows)
-  return axisFrom(summaries(windows), C1, C2, axis)
+  return windowsAxis(windows, axis)
 }
 
 // Kalibrasyon ekranı: bir hedefteki kareler "sabit bakış" mı? Mevcut eksen sinyallerinin her birinde
@@ -255,9 +318,8 @@ export function fitModel(windows) {
   const S = summaries(windows)
   // Kararsız orta penceresi (Build 19: n=60, MAD 1,5°, kırpmalı) referans olamaz: temiz olan kullanılır;
   // ikisi de temizse ikisi (drift ölçülür); hiçbiri temiz değilse ikisi de (eldeki en iyi).
-  const [C1, C2] = usableCenters(windows)
-  const x = axisFrom(S, C1, C2, 'x')
-  const y = axisFrom(S, C1, C2, 'y')
+  const x = windowsAxis(windows, 'x', S)
+  const y = windowsAxis(windows, 'y', S)
   const ok = Boolean(x && !x.weak && y && !y.weak)
   // Telefona bakış referansı: ortaya bakarken kameraya göre bakış açısı (ARKit'in sabit
   // sapmasını içerir). gaze.js lookingAtPhone bunun çevresindeki pencereyi "telefon" sayar.
@@ -280,7 +342,8 @@ export function roughModel(model) {
 export function calibReport(windows, model) {
   const r3 = (v) => (Number.isFinite(v) ? +v.toFixed(4) : null)
   const targets = {}
-  for (const t of TARGETS) {
+  const keys = [...TARGETS, axisCenterKey('x'), axisCenterKey('y')].filter((t) => TARGETS.includes(t) || windows[t]?.length)
+  for (const t of keys) {
     const fr = windows[t] ?? []
     const sum = summarize(fr)
     targets[t] = {
@@ -289,19 +352,18 @@ export function calibReport(windows, model) {
       ...Object.fromEntries(Object.entries(sum).map(([k, v]) => [k, { med: r3(v.med), mad: r3(v.mad) }])),
     }
   }
-  const [C, C2] = usableCenters(windows)
   const S = summaries(windows)
   const axisScores = (axis) =>
     Object.fromEntries(
       AXIS_FEATURES[axis].map((k) => {
-        const a = axisFrom(S, C, C2, axis, [k])
+        const a = windowsAxis(windows, axis, S, [k])
         return [k, a ? r3(a.score) : null]
       }),
     )
   // Baş dönüşü: her hedefte baş açısının orta hedeften sapması (derece; kabul edilen karelerde)
   const ref = headRef(windows.center ?? [])
   const head = {}
-  for (const t of TARGETS) {
+  for (const t of keys) {
     const h = headRef(windows[t] ?? [])
     head[t] = ref && h ? { dx: r3(h.x - ref.x), dy: r3(h.y - ref.y) } : null
   }
