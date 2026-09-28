@@ -24,6 +24,26 @@ Son güncelleme: 2026-09-28.
 7. [ ] **Ölçüm ilkesi açıkları:** her modül istatistik kaydeder ve Gelişim'de görünür (ANA_BELGE §4). Taramada
    bulunan eksikler aşağıda "Ölçüm ilkesi" bölümünde.
 
+## Ölçüm ilkesi: her modül kaydeder, gelişim görünür (ANA_BELGE §4; plan + onay gerekir)
+- [ ] **İris haritası modül verisiyle yaşasın.** Bugün 5 alan yalnız kurulumdaki ve 28. gündeki sorulardan, Dikkat ve
+      Farkındalık yalnız dolu/boş dolar.
+      - Her alanın değeri kendi modüllerinden gelsin: Göz ← testler ve egzersizler; Sakinlik ← Nefes, Dalga, Gökyüzü;
+        Kendine yaklaşım ← Yön; Beden ← adım, mola, su; İyi oluş ← WHO-5.
+      - Harita Gelişim'in başında ve Ana sayfada görünsün.
+      - Gelişim'in 7 kutucuğu (`lib/progress.js`) ile iris haritası (`lib/iris.js`) tek hesaba bağlansın.
+      - Tasarım önce Artifact.
+- [ ] **WHO-5 iyi oluş:** ekranı yok, `makeWho5Record` hiç çağrılmıyor; Gelişim İyi oluş kartı hep "yakında".
+      Resmi Türkçe madde metni sahibinden bekleniyor (aşağıda "Bekleyen kararlar").
+- [ ] **Göz kırp** süre (`seconds`) kaydetsin; şu an 150 sn varsayılıyor (`stats.js:15`). Algılanan kırpma sayısı Gelişim'de
+      zamanla görünsün.
+- [ ] **Zaman serisi:** Nefes, Dalga, Gökyüzü ve Yön-Dışarıdan bak için önce→sonra etkisi haftalara göre görünsün (bugün
+      yalnız ortalama). Yılan, Çemberler (isabet, varış süresi) ve okuma testi için trend grafiği.
+- [ ] **Okuma testi** Göz alan kutucuğuna girsin.
+- [ ] **Mola ve su** günlüğü (`habit-log`) Gelişim özetine ve takvime girsin; yalnız hatırlatma açıkken değil.
+- [ ] **Şefkatle ele al:** ölçüm yok (yalnız "yapıldı"). Kanıta uygun bir ölçüm var mı, PubMed'e bakılacak.
+- [ ] **İlk Bakış** kırpma sayısı ve 4 soru (stres, uyku, hareket, öz-şefkat) Gelişim'de görünsün; bugün yalnız
+      IrisPlan'da.
+
 ## Tasarım kuralları (sahibi, her ekran için geçerli)
 - Uygulamaya girdikten sonraki her ekran koyu VE açık temada kusursuz olur (giriş ekranı bilinçli olarak tek sahne: gece).
 - İleride bütün diller gelecek: hiçbir metin çizime/görsele gömülmez; düğme ve başlıklar uzun çeviride (Almanca vb.)

@@ -99,7 +99,43 @@ ve özgüven veriyor mu, yoksa sıkıyor mu? Ücretli kullanıcı en ufak hatada
 
 ## 4. Modüller ve ölçtükleri
 
-(Tarama sonucu bu bölüme işlenecek.)
+Kaynak: kod taraması (2026-09-28). Üç ana bulgu ayrıca elle doğrulandı: `iris.js:17-27`, `BlinkExercise.jsx:127-135`,
+`makeWho5Record` hiç çağrılmıyor. Dosya:satır referansları o güne aittir.
+
+**Kayıt altyapısı**
+- Tek depo: localStorage `gozolcum:v1` = `{ settings, tests[], sessions[] }` (`lib/storage.js` `addTest`/`addSession`).
+- Modül sözleşmesi (`modules/registry.js`):
+  - `progress.domain` / `metrics` / `effects` → Gelişim alan kutucukları.
+  - `stats()` → Gelişim "Pratikler" bölümü.
+  - `sessions.match` → gün listesi, rekorlar ve iris.
+
+**Durum tablosu** (✔ var · ◐ kısmen · ✘ yok)
+
+| Modül | Kaydeder | Gelişim'de zamanla görünür | İris haritasına girer |
+|---|---|---|---|
+| Günlük / haftalık E testi | ✔ | ✔ (grafik, sparkline) | ✘ (Göz hücresi yalnız İlk Bakış'tan) |
+| Okuma testi | ✔ | ◐ liste var, grafik yok; Göz kutucuğuna girmiyor | ✘ |
+| Göz kırp | ◐ süre kaydetmiyor | ◐ yalnız gün listesi | ✘ |
+| Egzersiz setleri / yol | ✔ | ◐ yalnız gün listesi | ✘ |
+| Nefes | ✔ | ◐ önce→sonra ortalaması, zaman serisi yok | ✘ (Sakinlik yalnız stres sorusundan) |
+| Dalga | ✔ | ◐ ortalama, zaman serisi yok | ✘ |
+| Gökyüzü molası | ✔ | ◐ ortalama, zaman serisi yok | ✘ |
+| Fark Ettin mi? · Bugünün görevi · Nefes sayma | ✔ | ✔ sparkline | ◐ Farkındalık yalnız dolu/boş |
+| Hızlı Bakış · Tek Bakışta | ✔ | ✔ sparkline | ◐ Dikkat yalnız dolu/boş |
+| Yılan · Çemberler | ✔ | ◐ rekor ve 7 gün özeti, trend yok | ◐ Dikkat yalnız dolu/boş |
+| Yön (Ayna, Dışarıdan bak) | ✔ | ◐ Ayna sparkline; Dışarıdan bak ortalama | ✘ |
+| Yön (Şefkatle ele al) | ◐ yalnız "yapıldı" | ◐ sayım | ✘ |
+| Mola · Su | ◐ ayrı günlük (`habit-log`) | ◐ yalnız hatırlatma deney kartı | ✘ |
+| Adım (Apple Sağlık) | ◐ depoya yazılmaz, canlı okunur | ✔ Beden kutucuğu, 7 gün | ✘ (Beden yalnız hareket sorusundan) |
+| İlk Bakış (20 sn kırpma) | ✔ profilde | ✘ | ✔ Göz hücresi |
+| İris soruları, 28. gün | ✔ profilde | ✘ (yalnız IrisPlan'da yan yana) | ✔ |
+| WHO-5 iyi oluş | ✘ ekranı yok | ✘ kart "yakında" | ✘ |
+| Göz kalibrasyonu, bakış testi, göz bütçesi | ◐ / ✘ | ✘ | ✘ |
+
+**Ana açık:** Gelişim'in 7 alan kutucuğu (`lib/progress.js`) modül verisini kullanıyor, ama iris haritası
+(`lib/iris.js`) kullanmıyor. İkisi birbirine bağlı değil. İris haritası Gelişim'de ve Ana sayfada da yok.
+Yani "her modül ölçer, gelişim tek haritada görünür" ilkesi bugün tam karşılanmıyor.
+İş listesi: `YAPILACAKLAR.md` → "Ölçüm ilkesi".
 
 ---
 
