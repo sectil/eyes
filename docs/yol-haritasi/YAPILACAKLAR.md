@@ -110,8 +110,11 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
       07:00·08:00·09:00 + Başka), günler (yedi yuvarlak, öğrenilir; sahibi 6 gün), "Uykuya dalarken ses çalsın mı?"
       (süre: Kendiliğinden [varsayılan] · 5 · 10 · 15 · Başka). "Kendiliğinden" ilk sürümde öğrenen zamanlayıcı
       (ilk gece 15 dk VARSAYIM; sabah "Ses bittiğinde uyumuş muydun?" ile ±5 dk; 5–45 dk). Bütün seçimler ve sabah
-      cevapları analiz için kaydedilir (sahibi: "bu verileri analizde kullanacağız"). Açık: "Bu akşam değil", sabah
-      akışı, İyi oluş alanı, "Kendiliğinden" kelimesi.
+      cevapları analiz için kaydedilir (sahibi: "bu verileri analizde kullanacağız").
+      v3 (2026-09-28, bütün kararlar): "Bu akşam değil" kalır (3 kez üst üste → bir kez "Bu kart akşamları çıksın
+      mı?"); sabah akışı isteğe bağlı ("Uyanınca": hiçbiri [varsayılan] · 1 dk nefes · Dalga sesi); veri "İyi oluş"
+      alanına (Scott 2021, 65 RKÇ, g=−0,53, doi:10.1016/j.smrv.2021.101556; WHO-5 "sabahları taze ve dinlenmiş");
+      süre kelimesi "Sana göre" (uyku algılıyormuş izlenimi vermesin). Kod: sahibinin "başla"sı + deneme 2 sonucu.
       Nefesle kapanma ölçüm işi onaylandı (2026-09-28); tasarıma girmez, ayrı iş.
 - [ ] Onaydan ve deneme 2 sonucundan sonra kod.
 
