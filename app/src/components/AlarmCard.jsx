@@ -8,6 +8,7 @@ import { loadAlarm, loadAlarmLog, addAlarmEvent, saveAlarm } from '../lib/alarmL
 import { DEFAULT_SOUND } from '../lib/alarmSounds.js'
 import { scheduleAlarm } from '../lib/alarmNative.js'
 import { getPrefs, setPrefs } from '../lib/prefs.js'
+import { greeting } from '../lib/greeting.js'
 import '../styles/alarm.css'
 
 // Ana sayfa alarm kartı (Artifact "Nefona Alarm" v4 https://claude.ai/artifact/GJU5G7RieTuyNTUbezJn8d; v5
@@ -151,7 +152,7 @@ export default function AlarmCard({ status, sessions = [], test = false, onStart
       bump()
     }
     return (
-      <Shell key="wake" eyebrow={`Günaydın · ${hhmm(minOfDay(new Date(now)))}`} label="Günaydın" menu={menu}>
+      <Shell key="wake" eyebrow={`${greeting(now)} · ${hhmm(minOfDay(new Date(now)))}`} label={greeting(now)} menu={menu}>
         <p className="al-q">{WAKE_TITLE[m.action]}</p>
         <div className="al-btns">
           <button type="button" className="btn btn-sm" onClick={go}>{WAKE_GO[m.action]}</button>

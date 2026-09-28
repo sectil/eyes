@@ -7,6 +7,7 @@ import { createDalgaEngine } from '../lib/dalgaAudio.js'
 import { createSleepPlayer } from '../lib/dalgaSleep.js'
 import { mediaProbe } from '../lib/audioUnmute.js'
 import { LATE_GAP_MIN } from '../lib/alarm.js'
+import { greeting } from '../lib/greeting.js'
 import { testUnlock } from '../lib/subscription.js'
 import AlarmSpikePanel from '../components/AlarmSpikePanel.jsx'
 import {
@@ -440,7 +441,7 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
       <main className="screen fade-in dg" style={modeStyle}>
         {top(1, false)}
         <span className="dg-ey">Uyku · {Math.max(1, Math.round(record.seconds / 60))} dk</span>
-        <h1 className="dg-h">Günaydın.</h1>
+        <h1 className="dg-h">{greeting()}.</h1>
         {fact && (
           <section className="dg-card">
             <span className="dg-ey">Doğru mu, efsane mi?</span>

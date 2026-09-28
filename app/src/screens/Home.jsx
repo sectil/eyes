@@ -30,13 +30,8 @@ import { viewFor } from '../modules/views.js'
 import { normalizeReminders, TYPE_LABEL } from '../lib/reminders.js'
 import { coachAllowed } from '../lib/consent.js'
 import { getPrefs } from '../lib/prefs.js'
+import { greeting } from '../lib/greeting.js'
 
-function greeting() {
-  const h = new Date().getHours()
-  if (h < 12) return 'Günaydın'
-  if (h < 18) return 'İyi günler'
-  return 'İyi akşamlar'
-}
 
 // Görme trendi → kısa, insan dilinde durum (trend.js aşamaları)
 function trendWords(r) {
