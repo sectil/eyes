@@ -93,7 +93,8 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
       setErr(
         r.reason === 'denied'
           ? notify ? 'Bildirim izni kapalı: Ayarlar → Nefona → Bildirimler.' : 'Alarm izni kapalı: Ayarlar → Nefona → Alarmlar.'
-          : r.reason === 'unsupported' ? 'Alarm yalnız iPhone uygulamasında kurulur.' : 'Kurulamadı. Yeniden dene.',
+          : r.reason === 'unsupported' ? 'Alarm yalnız iPhone uygulamasında kurulur.'
+            : r.reason === 'missing' ? 'Bu ses uygulamada bulunamadı. "Telefonun alarm sesi"ni seç.' : 'Kurulamadı. Yeniden dene.',
       )
       return
     }

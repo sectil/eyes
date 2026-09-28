@@ -376,3 +376,24 @@ describe('v5: satır günü ve sabah önerileri', () => {
     expect(r.times.every((t) => t >= 4 * 60 && t < 12 * 60)).toBe(true)
   })
 })
+
+describe('v5 inceleme düzeltmeleri', () => {
+  it('bu akşam alarm kapatıldıysa akşam kartı sormaz', async () => {
+    const { eveningCard } = await import('./alarm.js')
+    const now = new Date(2026, 8, 28, 21, 44)
+    const cancel = { type: 'cancel', at: now.toISOString(), date: '2026-09-28', via: 'home' }
+    expect(eveningCard({ now, alarm: null, log: [], platform: 'alarmkit', auth: 'authorized' })).toMatchObject({ kind: 'ask' })
+    expect(eveningCard({ now, alarm: null, log: [cancel], platform: 'alarmkit', auth: 'authorized' })).toBeNull()
+    expect(eveningCard({ now: new Date(2026, 8, 29, 21, 44), alarm: null, log: [cancel], platform: 'alarmkit', auth: 'authorized' })).toMatchObject({ kind: 'ask' })
+  })
+  it('komşu öneriler de sabah aralığında kalır (11:30 → 12:00 yok; 04:00 → 03:30 yok)', async () => {
+    const { suggestTimes } = await import('./alarm.js')
+    const now = new Date(2026, 8, 28, 21, 0)
+    const set = (hour, minute) => [{ type: 'set', at: new Date(2026, 8, 27, 21, 0).toISOString(), date: '2026-09-27', hour, minute, days: [1, 2, 3, 4, 5] }]
+    for (const [h, m] of [[11, 30], [4, 0]]) {
+      const r = suggestTimes(set(h, m), now)
+      expect(r.times).toHaveLength(3)
+      expect(r.times.every((t) => t >= 4 * 60 && t < 12 * 60)).toBe(true)
+    }
+  })
+})

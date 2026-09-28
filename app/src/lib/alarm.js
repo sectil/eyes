@@ -178,10 +178,10 @@ export function suggestTimes(log, now) {
   const ranked = byCount(samples)
   if (!ranked.length) return { times: DEFAULT_TIMES, pick: DEFAULT_TIME, learned: false }
   const times = ranked.slice(0, 3)
-  for (const step of [30, -30, 60, -60, 90]) {
+  for (const step of [30, -30, 60, -60, 90, -90, 120, -120]) {
     if (times.length >= 3) break
     const c = roundTo(ranked[0] + step)
-    if (!times.includes(c)) times.push(c)
+    if (c >= MORNING_FROM && c < MORNING_TO && !times.includes(c)) times.push(c)
   }
   const wd = targetDay(now)
   const pick = byCount(samples, (s) => s.days.includes(wd))[0] ?? ranked[0]
@@ -267,6 +267,8 @@ export function eveningCard({ now = new Date(), alarm = null, log = [], platform
     return dismissStreak(log) >= DISMISS_ASK && !prefs.length ? { kind: 'pref' } : null
   }
   if (prefs.at(-1)?.show === false) return null
+  // Bu akşam alarmı kendisi kapattı: hemen "kurayım mı?" diye sorma
+  if (log.some((e) => e?.type === 'cancel' && e.date === today)) return null
   if (auth === 'denied') return { kind: 'denied', via: platform }
   return { kind: platform === 'notify' ? 'askNotify' : 'ask' }
 }

@@ -161,7 +161,7 @@ describe('Ana sayfa alarm satırı ve kartı (v5)', () => {
     const open = () => r.tapLabel('Alarm 07:00, 9 sa 16 dk sonra. Seçenekler')
     await open()
     await tapBody('Alarmı kapat')
-    expect(sheetText()).toContain("Alarm kapatılsın mı? Yarın 07:00'de çalmaz.")
+    expect(sheetText()).toContain('Alarm kapatılsın mı? Pazartesi–Cumartesi 07:00 alarmı artık çalmaz.')
     await tapBody('Vazgeç')
     expect(sheetText()).toContain('Alarmı düzenle')
     expect(native.cancelAlarm).not.toHaveBeenCalled()
@@ -170,6 +170,8 @@ describe('Ana sayfa alarm satırı ve kartı (v5)', () => {
     expect(native.cancelAlarm).toHaveBeenCalledTimes(1)
     expect(loadAlarm().on).toBe(false)
     expect(loadAlarmLog().at(-1)).toMatchObject({ type: 'cancel', via: 'home' })
+    // App ALARM_CHANGED ile Ana sayfayı yeniden çizer: akşam "kurayım mı?" kartı bu akşam çıkmamalı
+    await r.rerender(card({ status: { platform: 'alarmkit', auth: 'authorized' } }))
     expect(r.text()).toBe('—alarm yok')
     expect(sheetText()).toContain('Alarm kapatıldı.Geri al')
     native.scheduleAlarm.mockResolvedValueOnce({ ok: true, snooze: true })
@@ -184,6 +186,36 @@ describe('Ana sayfa alarm satırı ve kartı (v5)', () => {
     await tapBody('Geri al')
     expect(sheetText()).toContain('Geri alınamadı')
     expect(loadAlarm().on).toBe(false)
+  })
+  it('Geri al: eski bildirim hatırlatması kendi türüyle; saati geçmiş tek seferlik alarm kurulmaz, söylenir', async () => {
+    const legacy = { on: true, hour: 7, minute: 0, days: [1, 2, 3, 4, 5, 6], sound: 'phone', sleep: 'off', wake: 'none', kind: 'notify', setAt: at(2026, 9, 27).toISOString() }
+    mem.set(ALARM_KEY, JSON.stringify(legacy))
+    const r = await mount(card({ status: { platform: 'alarmkit', auth: 'authorized' } }))
+    await r.tapLabel('Hatırlatma 07:00, 9 sa 16 dk sonra. Seçenekler')
+    await tapBody('Hatırlatmayı kapat')
+    expect(sheetText()).toContain('Pazartesi–Cumartesi 07:00 hatırlatması artık gelmez.')
+    await tapBody('Kapat')
+    native.scheduleAlarm.mockResolvedValueOnce({ ok: true })
+    await tapBody('Geri al')
+    expect(native.scheduleAlarm).toHaveBeenLastCalledWith(expect.objectContaining({ kind: 'notify' }), 'notify')
+    document.body.childNodes.length = 0
+    native.scheduleAlarm.mockClear()
+    const once = { on: true, hour: 21, minute: 50, days: [], at: at(2026, 9, 28, 21, 50).toISOString(), sound: 'phone', sleep: 'off', wake: 'none', kind: 'alarmkit', setAt: at(2026, 9, 28, 21).toISOString() }
+    mem.set(ALARM_KEY, JSON.stringify(once))
+    const o = await mount(card({ status: { platform: 'alarmkit', auth: 'authorized' } }))
+    await o.tapLabel('Alarm 21:50, 6 dk sonra. Seçenekler')
+    await tapBody('Alarmı kapat')
+    expect(sheetText()).toContain("Bugün 21:50'de çalmaz.")
+    await tapBody('Kapat')
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(at(2026, 9, 28, 21, 51))
+    try {
+      await tapBody('Geri al')
+    } finally {
+      vi.useRealTimers()
+    }
+    expect(native.scheduleAlarm).not.toHaveBeenCalled()
+    expect(sheetText()).toContain('Saati geçti')
   })
   it('⋯ → "Ana sayfadan kaldır": kart ve satır gider, geri al şeridi; "Geri al" ikisini getirir', async () => {
     const r = await mount(card())

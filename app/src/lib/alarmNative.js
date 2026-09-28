@@ -75,7 +75,8 @@ async function scheduleOn(cfg, platform) {
       // snooze: alarmda "Ertele" düğmesi var mı (iOS reddederse "Nefona'yı aç" ile kurulur; AlarmPlugin.swift)
       return { ok: true, snooze: r?.snooze !== false }
     } catch (e) {
-      return { ok: false, reason: 'error', detail: String(e?.message ?? e) }
+      // MISSING: ses dosyası uygulama paketinde yok (AlarmPlugin.swift); yeniden denemek işe yaramaz
+      return { ok: false, reason: e?.code === 'MISSING' ? 'missing' : 'error', detail: String(e?.message ?? e) }
     }
   }
   if (platform === 'notify') {

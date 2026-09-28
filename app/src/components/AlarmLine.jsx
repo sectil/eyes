@@ -19,17 +19,18 @@ export default function AlarmLine({ status, onStart, now = new Date() }) {
   const [open, setOpen] = useState(false)
   const [confirm, setConfirm] = useState(false)
   const [undo, setUndo] = useState(null) // kapatılan alarm (5 sn geri al)
-  const [fail, setFail] = useState(false) // geri alma kurulamadı
+  const [fail, setFail] = useState(null) // geri alma kurulamadı: gösterilecek metin
   const [busy, setBusy] = useState(false)
   const [show, setShow] = useState(() => getPrefs().alarmCard)
   const [, setTick] = useState(0)
   const undoRef = useRef(null)
   const firstRef = useRef(null)
+  const rowRef = useRef(null)
   useEffect(() => subscribePrefs((p) => setShow(p.alarmCard)), [])
   useEffect(() => {
     if (!undo) return undefined
     undoRef.current?.focus()
-    const t = setTimeout(() => setUndo(null), UNDO_MS)
+    const t = setTimeout(() => { setUndo(null); rowRef.current?.focus() }, UNDO_MS)
     return () => clearTimeout(t)
   }, [undo])
   useEffect(() => {
@@ -37,23 +38,33 @@ export default function AlarmLine({ status, onStart, now = new Date() }) {
     const t = setTimeout(() => setFail(false), UNDO_MS)
     return () => clearTimeout(t)
   }, [fail])
-  useEffect(() => {
-    if (!open) return undefined
-    firstRef.current?.focus()
-    const onKey = (e) => e.key === 'Escape' && close()
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [open])
-
   const platform = status?.platform ?? 'web'
-  if (platform === 'web' || !show) return null
-
   const alarm = loadAlarm()
   const next = nextRing(alarm, now)
   const kind = alarm?.kind === 'notify' ? 'hatırlatma' : 'alarm'
+  const sheet = open && Boolean(next) && platform !== 'web' && show
+  // Açık alt sayfa: ilk düğmeye odak (onay açılıp kapanınca da), Escape kapatır, arkadaki sayfa erişilemez (inert)
+  useEffect(() => {
+    if (!sheet) return undefined
+    firstRef.current?.focus()
+    const onKey = (e) => e.key === 'Escape' && close()
+    window.addEventListener('keydown', onKey)
+    const root = globalThis.document?.getElementById?.('root') ?? null
+    root?.setAttribute('inert', '')
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      root?.removeAttribute('inert')
+    }
+  }, [sheet, confirm])
+  // Alarm sayfa açıkken geçerse (tek seferlik çaldı) sayfa kapansın
+  useEffect(() => {
+    if (open && !next) setOpen(false)
+  }, [open, next])
+
   function close() {
     setOpen(false)
     setConfirm(false)
+    setTimeout(() => rowRef.current?.focus(), 0)
   }
   const go = (route) => {
     close()
@@ -72,18 +83,24 @@ export default function AlarmLine({ status, onStart, now = new Date() }) {
     const a = undo
     setUndo(null)
     if (!a) return
-    const r = await scheduleAlarm(a, platform)
+    // Tek seferlik alarmın saati bu arada geçtiyse geri kurmak onu yarına kaydırır: kurma, söyle
+    if (!a.days.length && !nextRing(a, new Date())) {
+      setFail('Saati geçti. Satıra dokunup yeniden kur.')
+      return
+    }
+    // Kendi türüyle geri kur (eski bildirim hatırlatması iOS 26'da AlarmKit izni istemesin)
+    const r = await scheduleAlarm(a, a.kind === 'notify' ? 'notify' : platform)
     if (r.ok) {
       saveAlarm(a)
       addAlarmEvent('set', { hour: a.hour, minute: a.minute, days: a.days, sound: a.sound, sleep: a.sleep, wake: a.wake, kind: a.kind, undo: true, snooze: Boolean(r.snooze) })
-    } else setFail(true)
+    } else setFail('Geri alınamadı. Satıra dokunup yeniden kur.')
     setTick((t) => t + 1)
   }
 
   const toast = (undo || fail) && createPortal(
     <div className="al-toast al-float" role="status">
       {fail ? (
-        <span className="grow">Geri alınamadı. Satıra dokunup yeniden kur.</span>
+        <span className="grow">{fail}</span>
       ) : (
         <>
           <span className="grow">{undo.kind === 'notify' ? 'Hatırlatma kapatıldı.' : 'Alarm kapatıldı.'}</span>
@@ -94,6 +111,9 @@ export default function AlarmLine({ status, onStart, now = new Date() }) {
     document.body,
   )
 
+  if (platform === 'web') return null
+  // Kart/satır kapatılsa da "Geri al" şeridi 5 sn kalır (gövdede)
+  if (!show) return toast || null
   if (!next) {
     return (
       <>
@@ -116,12 +136,12 @@ export default function AlarmLine({ status, onStart, now = new Date() }) {
 
   return (
     <>
-      <button type="button" className="hh-fact al-fact" onClick={() => setOpen(true)} aria-haspopup="dialog" aria-label={`${kind === 'alarm' ? 'Alarm' : 'Hatırlatma'} ${time}, ${when}. Seçenekler`}>
+      <button type="button" ref={rowRef} className="hh-fact al-fact" onClick={() => setOpen(true)} aria-haspopup="dialog" aria-label={`${kind === 'alarm' ? 'Alarm' : 'Hatırlatma'} ${time}, ${when}. Seçenekler`}>
         <AlarmClock size={14} aria-hidden="true" className="f5" /><b>{time}</b>{`${kind} · ${day}`}
         <ChevronRight size={13} aria-hidden="true" className="al-fact-ar" />
       </button>
       {toast}
-      {open && createPortal(
+      {sheet && createPortal(
         <div className="al-sh-back" role="presentation" onClick={() => !busy && close()}>
           <div className="al-sh" role="dialog" aria-modal="true" aria-labelledby="al-sh-t" onClick={(e) => e.stopPropagation()}>
             <span className="al-sh-grab" aria-hidden="true" />
@@ -135,7 +155,11 @@ export default function AlarmLine({ status, onStart, now = new Date() }) {
             </div>
             {confirm ? (
               <div className="al-sh-confirm" role="alert">
-                <p>{`${kind === 'alarm' ? 'Alarm' : 'Hatırlatma'} kapatılsın mı? ${day === 'bugün' ? 'Bugün' : day === 'yarın' ? 'Yarın' : 'Artık'} ${withSuffix(minOfDay(next), 'loc')} çalmaz.`}</p>
+                <p>{`${kind === 'alarm' ? 'Alarm' : 'Hatırlatma'} kapatılsın mı? ${
+                  alarm.days.length
+                    ? `${daysLabel(alarm.days)} ${time} ${kind === 'alarm' ? 'alarmı artık çalmaz' : 'hatırlatması artık gelmez'}.`
+                    : `${day === 'bugün' ? 'Bugün' : day === 'yarın' ? 'Yarın' : 'Artık'} ${withSuffix(minOfDay(next), 'loc')} çalmaz.`
+                }`}</p>
                 <div className="al-btns">
                   <button type="button" className="btn btn-secondary btn-sm" ref={firstRef} disabled={busy} onClick={() => setConfirm(false)}>Vazgeç</button>
                   <button type="button" className="btn btn-danger btn-sm" disabled={busy} onClick={turnOff}>Kapat</button>
@@ -153,7 +177,7 @@ export default function AlarmLine({ status, onStart, now = new Date() }) {
                       <span className="al-sh-v">{sleepMin > 0 ? `${alarm.sleep === 'auto' ? 'Sana göre ' : ''}${sleepMin} dk` : 'Bu gece yok'}</span>
                     </button>
                   )}
-                  <button type="button" className="danger" onClick={() => { setConfirm(true); setTimeout(() => firstRef.current?.focus(), 0) }}>
+                  <button type="button" className="danger" onClick={() => setConfirm(true)}>
                     <AlarmClockOff size={17} aria-hidden="true" /><span className="grow">{kind === 'alarm' ? 'Alarmı kapat' : 'Hatırlatmayı kapat'}</span>
                   </button>
                 </div>
