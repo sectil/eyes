@@ -51,11 +51,27 @@ veri merkezine yazar (çaldı mı, yapıldı mı, erteleme). Genel saat uygulama
 Dayanak: AlarmKit (iOS 26+; sessiz ve Odak modunu deler). Melodik alarm ile uyku ataleti arasında ilişki var
 (McFarlane 2020, PLoS One doi:10.1371/journal.pone.0215788 ve Clocks Sleep doi:10.3390/clockssleep2020017; 50 ve
 20 kişi; iddia olarak söylenmez).
-Planı mükemmel yapmadan önce:
-- [ ] AlarmKit özel ses (uygulamaya gömülü dosya) destekliyor mu, doğrula.
-- [ ] Dalga sesleri dosya mı, canlı üretim mi, bak.
-- [ ] "Belli saate pratik kurmak" (eğer–o zaman planı) kanıtı: PubMed'de doğrula.
-- [ ] "Ertelemeden en iyi saati öğrenme": dayanak ara; yoksa VARSAYIM diye işaretle.
+Araştırma (2026-09-28; doğrulanamayan VARSAYIM):
+- AlarmKit: sessiz ve Odak modunu deler; tek seferlik ve haftalık tekrar; erteleme; ikinci düğme App Intent ile
+  uygulamayı açabilir (`openAppWhenRun`); izin `AlarmManager.requestAuthorization()` + `NSAlarmKitUsageDescription`
+  (Apple belgesi). Özel ses: `AlertConfiguration.AlertSound.named(_:)`, dosya uygulama paketinde ya da
+  Library/Sounds'ta (Apple belgesi + WWDC25 notları). Biçim ve süre sınırı: BELGEDE YOK. Gerçek cihazda özel sesin
+  çalmadığına dair bir geliştirici kuşkusu var (Bartlett blog yorumu) → CİHAZDA DENEME ŞART.
+  Sade alarm için widget (Live Activity) uzantısı gerekir mi: BELGEDE AÇIK DEĞİL → CİHAZDA DENEME ŞART.
+- Dalga sesi dosya değil, anlık üretim (Web Audio). Ama `dalgaSleep.js` müziği zaten WAV'a basıyor
+  (OfflineAudioContext + encodeWav) → alarm sesi telefonda üretilip Library/Sounds'a yazılabilir (VARSAYIM: yazma
+  yeri ve biçim cihazda denenecek).
+- iOS 26 payı: App Store'da işlem yapan cihazların %79'u (Apple, 7 Haziran 2026). iOS 15–18'de yalnız bildirim.
+- Eğer–o zaman planı: fiziksel aktivitede etki 0,25 (Silva 2018, 13 RKÇ, doi:10.1371/journal.pone.0206294);
+  sağlıklı beslenme d=0,51 (Adriaanse 2011, doi:10.1016/j.appet.2010.10.012); ruh sağlığı sorunu olanlarda hedefe
+  ulaşma d=0,99 (Toli 2016, doi:10.1111/bjc.12086). SINIR: alkolde çevrim içi verilen plan etkisiz (d=−0,04;
+  Cooke 2023, doi:10.1111/dar.13553). Alarm dış hatırlatmadır; kişinin kendi "eğer–o zaman" planıyla aynı değil.
+- "Ertelemeden en iyi saati öğren": dayanak BULUNAMADI. Trinquart 2023 (655 kişi) sabah/akşam gönderimde fark
+  bulmadı; gerçek davranışa dayalı kişisel mesaj etkiliydi (doi:10.2196/40784). → Saati kişi seçer; sistem saat
+  öğrenmez, yalnız "bu saatte 3 kez ertelendi, değiştirmek ister misin?" diye sorar (VARSAYIM).
+Kalan:
+- [ ] Cihazda deneme derlemesi (spike): AlarmKit sade alarm + özel WAV (Library/Sounds) + ikinci düğme uygulamayı
+      açıyor mu; uzantı gerekiyor mu.
 - [ ] Uygulanmış bildirim sistemi (v2, `8bccf79`, Hatırlatmalar ekranı; cihazda denenmedi) ile tek "Hatırlatma ve
       alarm" planında birleştir. Açık: sessiz gün oranı %25 (kodda VARSAYIM; sahibinin onayı kayıtlı değil).
 - [ ] iOS 26 öncesi davranış (hatırlatmaya düşer, ekranda açıkça söylenir) ve ölçüm yükü (her sabah soru yok) tasarla.
