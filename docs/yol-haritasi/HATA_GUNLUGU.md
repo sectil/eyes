@@ -3,7 +3,7 @@
 Debug sürecinin kaydı: her kontrol, hipotez, deneme ve sonuç. Kural (debug protokolü): bir şeyi ikinci kez kontrol
 etmeden önce burası okunur; aynı yöntem iki kez başarısızsa yöntem değişir. Oturumlar arasında kaybolmasın diye
 repoda durur (önce /home/claude/.debug-journal.md idi; 2026-09-28'de buraya taşındı). Yeni kayıt buraya eklenir.
-Hata numaraları: Bug 1–19. "Bug 12" iki kez kullanılmıştı; kalibrasyon olanı Bug 17 oldu.
+Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon olanı Bug 17 oldu.
 
 # Debug Journal
 ## Bug: Kalibrasyon x puanı 2.01 < minScore 2.5 → "tekrar dene"; kullanıcı nokta bazlı canlı onay (yeşil) istiyor
@@ -496,3 +496,24 @@ Hata numaraları: Bug 1–19. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   satırları Proxmox'un Flutter yamasındaki `folder.iconcomposer.icon` ile aynı). Risk: Capacitor projelerinde .icon
   ile derleme hatası bildirilmiş (ionic-team/capacitor#8179, "None of the input catalogs contained ... 'AppIcon'");
   PNG seti aynı adla korunduğu için beklenmiyor, ama DOĞRULANMADI (bu ortamda Xcode yok).
+
+## Bug 20: Alarm denemesi — Dalga sesli alarm çaldı ama Dalga sesi çalmadı (2026-09-28, TestFlight, iOS 26)
+## Durum: AÇIK
+
+### Semptomlar (sahibinin raporu, 14:05)
+- İzin: authorized. İki alarm da 2 dk sonra çaldı (varsayılan sesli ve "Dalga sesli").
+- Dalga sesli olanda Dalga müziği çalmadı. VARSAYIM: yerine varsayılan alarm sesi çaldı (sahibine soruldu).
+- Günlük: `writeSound` 1.102.544 bayt yazdı (Library/Sounds/nefona-dalga.wav; 25 sn, 22050 Hz, tek kanal, 16 bit PCM).
+
+### Hipotezler
+1. [ ] HİP-1 (en olası): AlarmKit Library/Sounds'taki dosyayı çalmıyor, varsayılana düşüyor. Kanıt: Apple forumları
+   798140, 795417, 797172 ("Library/Sounds do not play", "App Bundle — play once, without repeat"); olmayan bir ad
+   verilince de varsayılan çalıyor (802620). Apple DTS: "desteklenen biçim ve 30 sn'den kısa" olmalı, düzeldi diyor.
+   Test: aynı Dalga parçasını uygulama paketine göm (Resources), `.named("nefona-dalga-sakin.wav")` ile kur.
+2. [ ] HİP-2: Biçim (WAV 22050 Hz tek kanal) reddediliyor. Test: HİP-1 çürürse aynı parçayı 44100 Hz stereo / CAF dene.
+3. [ ] HİP-3: Ses çaldı ama Sakin'in ilk saniyeleri çok yumuşak, duyulmadı. Test: sahibine "hiç ses yok mu,
+   telefonun alarm sesi mi" diye soruldu.
+
+### Deneme logu
+- DENEME-1 (HİP-1): üç Dalga modunu (Sakin, Güç, Motivasyon) derleme anında 25 sn WAV'a basıp uygulama paketine
+  gömmek; panelde "Paketteki Dalga sesiyle 2 dk" düğmesi.

@@ -1,0 +1,12 @@
+<!doctype html><html><body><script type="module">
+import { renderLoop } from '../../src/lib/dalgaSleep.js'
+import { encodeWav } from '../../src/lib/wav.js'
+import { spikeClip, toBase64 } from '../../src/components/AlarmSpikePanel.jsx'
+window.renderClip = async (mode) => {
+  const { sampleRate, channels } = await renderLoop(mode)
+  const clip = spikeClip(channels, sampleRate)
+  let peak = 0; for (const v of clip) peak = Math.max(peak, Math.abs(v))
+  return { b64: toBase64(encodeWav([clip], sampleRate)), sec: clip.length / sampleRate, rate: sampleRate, peak }
+}
+window.ready = true
+</script></body></html>
