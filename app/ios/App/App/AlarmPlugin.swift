@@ -218,6 +218,8 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
     private var sleepPlayer: AVAudioPlayer?
     private var sleepFade: DispatchWorkItem?
     private var sleepEnd: DispatchWorkItem?
+    private var sleepEndsAt: Date?
+    private var interruptObserver: NSObjectProtocol?
 
     @objc func sleepStart(_ call: CAPPluginCall) {
         let seconds = call.getDouble("seconds") ?? 0
@@ -233,20 +235,27 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
         DispatchQueue.main.async {
             self.stopSleepOnMain()
             do {
-                // Sessiz tuşunda ve kilitli ekranda da çalsın; kullanıcının "ses kapalı" (ambient) tercihinden bağımsız
-                let session = AVAudioSession.sharedInstance()
-                try session.setCategory(.playback, mode: .default, options: [])
-                try session.setActive(true)
+                // Sessiz tuşunda ve kilitli ekranda da çalsın; kullanıcının "ses kapalı" (ambient) tercihi bitene kadar
+                // oturumu değiştirmez (AppAudioSession, FeedbackPlugin.swift)
+                guard try AppAudioSession.shared.beginSleep() else {
+                    call.reject("Ses kaydı sürüyor", "BUSY")
+                    return
+                }
                 let p = try AVAudioPlayer(contentsOf: url)
                 p.numberOfLoops = -1
                 p.volume = 1
                 p.prepareToPlay()
                 guard p.play() else {
-                    AppAudioSession.shared.restorePreferred()
+                    AppAudioSession.shared.endSleep()
                     call.reject("Çalınamadı", "PLAY")
                     return
                 }
                 self.sleepPlayer = p
+                self.sleepEndsAt = Date().addingTimeInterval(seconds)
+                // Arama, Siri ya da başka uygulama sesi keserse: kesinti bitince (iOS izin verirse) kaldığı yerden sürdür
+                self.interruptObserver = NotificationCenter.default.addObserver(
+                    forName: AVAudioSession.interruptionNotification, object: nil, queue: .main
+                ) { [weak self] note in self?.sleepInterrupted(note) }
                 let f = DispatchWorkItem { [weak self] in self?.sleepPlayer?.setVolume(0, fadeDuration: fade) }
                 let e = DispatchWorkItem { [weak self] in self?.stopSleepOnMain() }
                 self.sleepFade = f
@@ -255,7 +264,7 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
                 DispatchQueue.main.asyncAfter(deadline: .now() + seconds + 1, execute: e)
                 call.resolve(Self.audioInfo(p))
             } catch {
-                AppAudioSession.shared.restorePreferred()
+                AppAudioSession.shared.endSleep()
                 call.reject("Çalınamadı: \(error)", "PLAY")
             }
         }
@@ -279,10 +288,26 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
         sleepEnd?.cancel()
         sleepFade = nil
         sleepEnd = nil
+        sleepEndsAt = nil
+        if let o = interruptObserver {
+            NotificationCenter.default.removeObserver(o)
+            interruptObserver = nil
+        }
         guard let p = sleepPlayer else { return }
         p.stop()
         sleepPlayer = nil
-        AppAudioSession.shared.restorePreferred()
+        AppAudioSession.shared.endSleep()
+    }
+
+    private func sleepInterrupted(_ note: Notification) {
+        guard let p = sleepPlayer, let info = note.userInfo,
+              let raw = info[AVAudioSessionInterruptionTypeKey] as? UInt,
+              AVAudioSession.InterruptionType(rawValue: raw) == .ended,
+              let end = sleepEndsAt, Date() < end else { return }
+        let optRaw = info[AVAudioSessionInterruptionOptionKey] as? UInt ?? 0
+        guard AVAudioSession.InterruptionOptions(rawValue: optRaw).contains(.shouldResume) else { return }
+        try? AVAudioSession.sharedInstance().setActive(true)
+        p.play()
     }
 
     static func audioInfo(_ p: AVAudioPlayer?) -> [String: Any] {

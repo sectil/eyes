@@ -598,3 +598,7 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
 - Tanı satırı artık: oynatıcı, çalıyor mu + saniye, telefonun MEDYA ses düzeyi (0–100), çıkış (Speaker / kulaklık /
   Bluetooth), kategori. Yine duyulmazsa neden bu satırda görünür (ör. medya sesi 0, çıkış Bluetooth).
 - Swift bu ortamda derlenmedi; cihazda derlenip denenecek.
+- Bağımsız inceleme (7763ba2): derlenir, engelleyici yok. Düzeltildi: ekran açılınca yeniden uygulanan "ses kapalı"
+  tercihi (ambient) çalan uyku sesini sessiz tuşuna bağlayıp arka planda durdurabiliyordu → AppAudioSession
+  beginSleep/endSleep (uyku sesi sürerken tercih uygulanmaz; kayıt sürüyorsa başlamaz); arama/Siri kesintisinden sonra
+  iOS izin verirse kaldığı yerden sürer; bitince oturum bırakılır (kesilen podcast/müzik devam eder).

@@ -244,6 +244,7 @@ final class AppAudioSession {
     private let lock = NSLock()
     private var preferredPlayback: Bool?
     private var recording = false
+    private var sleepActive = false // uyku sesi çalarken tercih uygulanmaz (AlarmPlugin.sleepStart)
 
     private init() {}
 
@@ -251,16 +252,8 @@ final class AppAudioSession {
         lock.lock()
         defer { lock.unlock() }
         preferredPlayback = playback
-        if recording { return } // kayıt bitince endRecording() uygular
+        if recording || sleepActive { return } // kayıt / uyku sesi bitince uygulanır
         try applyPreferredLocked()
-    }
-
-    /// Uyku sesi (AlarmPlugin) bitince kullanıcının tercihine dön. Tercih yoksa dokunmaz.
-    func restorePreferred() {
-        lock.lock()
-        defer { lock.unlock() }
-        if recording { return }
-        try? applyPreferredLocked()
     }
 
     /// SpeechPlugin: kategoriyi .playAndRecord'a çevirmeden önce.
@@ -278,6 +271,36 @@ final class AppAudioSession {
         recording = false
         let session = AVAudioSession.sharedInstance()
         // Kayıt, karışmayan (.playAndRecord) oturumla diğer sesleri kesmişti; onlara devam etmelerini bildir.
+        try? session.setActive(false, options: .notifyOthersOnDeactivation)
+        if sleepActive {
+            // Uyku sesi sürüyor: tercihe değil, uyku oturumuna dön
+            try? session.setCategory(.playback, mode: .default, options: [])
+            try? session.setActive(true)
+            return
+        }
+        try? applyPreferredLocked()
+    }
+
+    /// Uyku sesi başlarken: oturum .playback (sessiz tuşunda ve kilitli ekranda çalar). Bitene kadar kullanıcının
+    /// tercihi (ör. ekran açılınca yeniden uygulanan "ses kapalı" = ambient) oturumu değiştirmez. Kayıt sürüyorsa false.
+    func beginSleep() throws -> Bool {
+        lock.lock()
+        defer { lock.unlock() }
+        if recording { return false }
+        sleepActive = true
+        let session = AVAudioSession.sharedInstance()
+        try session.setCategory(.playback, mode: .default, options: [])
+        try session.setActive(true)
+        return true
+    }
+
+    /// Uyku sesi bitince: oturumu bırak (kesilen başka uygulamanın sesi devam etsin), sonra tercihe dön.
+    func endSleep() {
+        lock.lock()
+        defer { lock.unlock() }
+        guard sleepActive else { return }
+        sleepActive = false
+        let session = AVAudioSession.sharedInstance()
         try? session.setActive(false, options: .notifyOthersOnDeactivation)
         try? applyPreferredLocked()
     }
