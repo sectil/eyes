@@ -1,6 +1,6 @@
 // Okuma testi (MNREAD tarzı, sesli okuma doğrulamalı; eski adı "Okuma hızı"). Ana sonuç rahat okuduğun
 // en küçük yazı (kritik yazı boyu). Ayrıntı: lib/reading.js, screens/ReadingTest.jsx.
-import { lastOfType, isDue, doneToday } from '../../lib/today.js'
+import { readingStatus } from '../../lib/today.js'
 
 export default {
   id: 'reading',
@@ -13,10 +13,12 @@ export default {
   gates: { eyeBudget: 'test' },
   ask: { before: ['correction'], after: ['nearDifficulty'] }, // gözlük testten önce, yakın zorluk sonuçtan sonra
   home: { section: 'measure', order: 30 },
-  // Haftada bir: zamanı geldiyse plana girer, bugün yapıldıysa tamam görünür.
-  today({ tests, now }) {
+  // Haftada bir, takvim günüyle; haftalık E testiyle aynı güne düşerse bir gün sonra (lib/today.js readingStatus,
+  // karar 2026-09-29). Bugün yapıldıysa tamam görünür.
+  today({ tests, sessions, now }) {
     const stop = { title: 'Okuma', minutes: 3, slot: 'measure', glyph: 'lines' }
-    if (doneToday(tests, 'reading', now)) return { ...stop, done: true }
-    return isDue(lastOfType(tests, 'reading'), now) ? { ...stop, done: false } : null
+    const s = readingStatus(tests, now, sessions)
+    if (s.state === 'done') return { ...stop, done: true }
+    return s.state === 'due' ? { ...stop, done: false } : null
   },
 }

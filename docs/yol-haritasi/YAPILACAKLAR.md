@@ -117,15 +117,28 @@ Uygulama sırası (her biri ayrı onay, test, TestFlight): (a) E testi haftada b
       geçmişte ve CSV'de "Kısa görme testi"); haftalık testi olmayan seri de pendingMode'a girer (Bug 27 notu).
       Arditi 1993 kaynak listesine eklenmedi: PubMed kaydında DOI yok, liste her kayıtta DOI istiyor (kanıt kartı
       kaynak satırında PMID ile duruyor).
-      Testler 1392/1392 (101 dosya), uygulama ve site derlemesi tamam.
+      Testler 1392/1392 (101 dosya), uygulama ve site derlemesi tamam (commit b7cdccf).
+      Sahibinin kararları (2026-09-29, açık sorulara cevap): "Kısa E testi" adı kalır (D1); isteğe bağlı kısa test
+      sonuçları başlangıca ve uyarılara girmeye devam eder (D2); okuma testi haftalık E testinden ayrı güne alınır (D7)
+      ve takvim günüyle gelir. Uygulandı: `lib/today.js` readingStatus. Okuma testi son okuma gününden 7 takvim günü
+      sonra, günün başından; haftalık E testi o gün yoldaysa (zamanı geldi, yarım ya da bugün bitti) bir gün sonraya
+      kayar, en çok bir gün (zamanı dünden beri gelmişse E testi yolda olsa da gelir). Hiç yapılmamış okuma testinin
+      zamanı kayıtların başladığı günden sayılır: 1. gün E testi, 2. gün okuma, sonra birer gün arayla haftada bir.
+      Bir günlük kayma VARSAYIM (yolun yükünü bölmek için; iki test aynı gün yolu 20 dk sınırına dayıyordu). Ana sayfa
+      rozeti "Bu hafta" zamanı gelince (kaysa da) görünür; Ölçüm listesinden her gün yapılabilir. `isDue` (saatle)
+      artık yalnız Nefes sayma rozetinde. Testler 1401/1401.
       Açık: **TestFlight'tan önce sunucu (`api/coach.js`, Vercel) yeniden yayımlanmalı** (SYSTEM_PROMPT ve `weeklyDue`
       değişti; o zamana dek eski istemle gelen "Günlük test" cevabı istemcide atılır, kart çevrimdışı öneri gösterir;
-      çevrimiçi Nef haftalık testi `daysSinceLastTest`e göre önerir). Okuma testi hâlâ saatle geliyor (`isDue`, Bug 24
-      notu; ayrı onay). Sitenin Gelişim ve Ana sayfa ekran görüntüleri eski örnek veriyle (günlük kısa testler) çekildi;
+      çevrimiçi Nef haftalık testi `daysSinceLastTest`e göre önerir). Nef'in "Okuma testi" önerisi günden bağımsız
+      (istemde okuma zamanı sinyali yok). Sitenin Gelişim ve Ana sayfa ekran görüntüleri eski örnek veriyle (günlük kısa testler) çekildi;
       görünür bir günlük test cümlesi yok, istenirse yeniden çekilir.
       Cihazda bak:
       - Yeni kurulum, 1. gün: Bugün'de tek E durağı "Haftalık E testi" ("3 bölüm · sağ, sol, iki göz"); üç göz bitince
         "✓ Bu hafta tamam". Ana sayfa → Ölçüm'de de adı "Haftalık E testi".
+      - Okuma testi: 1. gün yolda yok (E testi günü); 2. gün yolda, E testi yok. Okuma testinin zamanı E testinin
+        gününe denk gelirse okuma ertesi güne kayar; E testi o gün yapılmazsa ertesi gün ikisi birlikte yolda. Son okuma
+        testinden 7 gün sonra, önceki testin saatini beklemeden günün başından yolda. Ana sayfa → Ölçüm'de okuma
+        satırında zamanı gelince "Bu hafta" rozeti (kaydığı gün de).
       - 2.–7. gün: Bugün'de E testi yok. Ana sayfa → Ölçüm'de "Kısa E testi · İsteğe bağlı · sağ + sol göz" önce sağ, sonra
         sol gözle çalışıyor; özet başlığı "Kısa test bitti". Yarıda çıkınca çıkış sayfası "Kalanlar Bugün'de bekler."
         demiyor; Ölçüm satırı "Kalan: Sol göz" diyor.

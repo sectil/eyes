@@ -29,8 +29,8 @@ export const isSameDay = (r, now = new Date()) => {
   return t != null && new Date(t).toDateString() === new Date(now).toDateString()
 }
 export const lastOfType = (records = [], type) => records.filter((r) => r.type === type).at(-1) ?? null
-// Son kayıt yoksa ya da 7 günden eskiyse zamanı gelmiştir (Home.jsx eski "due" kuralı). Okuma testi ve rozetler bunu
-// kullanır (saatle, > 7×24 saat); haftalık E testi takvim günüyle: isDueWeekly (Bug 24).
+// Son kayıt yoksa ya da 7 günden eskiyse zamanı gelmiştir (Home.jsx eski "due" kuralı). Saatle sayar (> 7×24 saat);
+// yalnız Nefes sayma rozeti kullanır. Haftalık E testi (isDueWeekly) ve okuma testi (readingStatus) takvim günüyle.
 export const isDue = (rec, now = new Date()) => !rec || time(rec) == null || new Date(now).getTime() - time(rec) > WEEK_MS
 // Son N gün içindeki kayıtlar (now dahil geriye)
 export const withinDays = (records = [], now = new Date(), days = 7) => {
@@ -113,6 +113,36 @@ export function weeklyStatus(records = [], now = new Date()) {
   const state = day.complete ? 'done' : day.started ? 'half' : due ? 'due' : 'idle'
   const sub = state === 'half' ? remainingText(day.remaining) : state === 'due' ? WEEKLY_SUB : WEEKLY_DONE
   return { state, due, sub, warn: state === 'half', done: day.done, remaining: day.remaining }
+}
+
+// Okuma testinin bugünkü durumu (karar 2026-09-29, sahibi: okuma testi haftalık E testinden ayrılsın ve takvim
+// günüyle gelsin). 'done' bugün yapıldı · 'due' zamanı geldi, bugün yolda · 'later' zamanı geldi ama haftalık E testi
+// bugün yolda olduğu için yarına kaydı · 'idle' bu hafta yapıldı. due: zamanı geldi mi ('due' ve 'later'; Ana sayfa
+// rozeti "Bu hafta").
+//  - Zamanı: son okuma testinin gününden 7 takvim günü sonra, günün başından (saatine bakılmaz; isDueWeekly gibi).
+//    Hiç yapılmadıysa zamanı gelmiştir.
+//  - Ayırma: haftalık E testi bugün yoldaysa (zamanı geldi, yarım ya da bugün bitti) okuma testi bir gün sonraya kayar.
+//    En çok bir gün: zamanı dünden beri gelmişse E testi yolda olsa da bugün gelir (E testi yapılmadıkça okuma testi
+//    hiç gelmemezlik etmesin). Hiç yapılmamış okuma testinin zamanı kayıtların başladığı günden (test ya da pratik)
+//    sayılır: 1. gün E testi, 2. gün okuma; sonra ikisi birer gün arayla haftada bir.
+//  VARSAYIM: bir günlük kayma yeterli; kanıta değil yolun yükünü bölmeye dayanır (E testi ve okuma aynı gün yolu
+//  20 dk sınırına dayıyordu).
+export function readingStatus(tests = [], now = new Date(), sessions = []) {
+  if (doneToday(tests, 'reading', now)) return { state: 'done', due: false }
+  const today = dayKey(now)
+  const last = lastOfType(tests, 'reading')
+  const lastDay = last ? runDayOf(last) : null
+  const since = lastDay == null ? null : calendarDaysBetween(lastDay, today)
+  if (since != null && since < 7) return { state: 'idle', due: false }
+  // Zamanı geleli kaç gün oldu (bugün = 0)
+  let overdue = 0
+  if (since != null) overdue = since - 7
+  else {
+    const keys = [...tests, ...sessions].map(runDayOf).filter(Boolean).sort()
+    overdue = keys.length ? Math.max(0, calendarDaysBetween(keys[0], today)) : 0
+  }
+  const later = overdue < 1 && weeklyStatus(tests, now).state !== 'idle'
+  return { state: later ? 'later' : 'due', due: true }
 }
 
 // Yarım günde teste dönünce atlanacak (bugün biten) gözler; test ilk eksik gözden başlar (E0). Günlük ve haftalık

@@ -24,6 +24,8 @@ describe('sürüm notları', () => {
     expect(t.match(/haftada bir/g)).toHaveLength(1)
     // Bug 24: haftalık test takvim günüyle gelir
     expect(items29().find((x) => x.startsWith('Haftalık E testi son testin saatini'))).toMatch(/7 gün sonra, o günün başından itibaren/)
+    // Okuma testi E testinden ayrı gün (karar 2026-09-29)
+    expect(items29().find((x) => x.startsWith('Okuma testi artık'))).toMatch(/aynı güne düşmez.*en çok bir gün.*7 gün sonra/)
     expect(WEEKLY_MIN_BASELINE_TESTS).toBe(3)
     expect(MIN_BASELINE_TESTS).toBe(7)
     expect(BASELINE_TO_DAY + 1).toBe(22)

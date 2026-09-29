@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildPath, todayPlan, jevLine, isDue, isDueWeekly, isSameDay, PATH, canOpen, eyeDay, lastComplete, weeklyStatus, skipEyesToday, runDayOf, WEEKLY_SUB, WEEKLY_DONE } from './today.js'
+import { buildPath, todayPlan, jevLine, isDue, isDueWeekly, isSameDay, PATH, canOpen, eyeDay, lastComplete, weeklyStatus, skipEyesToday, runDayOf, readingStatus, WEEKLY_SUB, WEEKLY_DONE } from './today.js'
 import { registry } from '../modules/registry.js'
 import { dayKey } from './calendar.js'
 
@@ -32,7 +32,8 @@ describe('buildPath: şablon', () => {
     expect(p.stops.some((s) => s.slot === 'test' || s.glyph === 'E')).toBe(false)
   })
 
-  it('haftalık gün: Haftalık E testi + Okuma; 20 dk sınırı için Yılan düşer (R7); ölçümler yan yana değil (R1)', () => {
+  // Hiç test yok, kayıtlar 4 gün önce başladı: okuma testi en çok bir gün kayar, E testiyle aynı gün gelir
+  it('ikisi de gecikmiş gün: Haftalık E testi + Okuma; 20 dk sınırı için Yılan düşer (R7); ölçümler yan yana değil (R1)', () => {
     const p = path()
     expect(keys(p)).toEqual(['routine:isinma', 'weekly', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'reading', 'routine:kirpma'])
     expect(p.minutesLeft).toBe(19)
@@ -383,5 +384,58 @@ describe('kısa E testi (isteğe bağlı): Bugün\'ün yolunda yok (karar 2026-0
     expect(skipEyesToday(half, 'va-daily', NOW)).toEqual(['R'])
     expect(skipEyesToday([...NORMAL, { type: 'va-daily', eye: 'R', date: daysAgo(1) }], 'va-daily', NOW)).toEqual([])
     noDaily(path(half))
+  })
+})
+
+// Karar 2026-09-29 (sahibi): okuma testi haftalık E testinden ayrılır ve takvim günüyle gelir (readingStatus)
+describe('okuma testi: haftalık E testinden ayrı gün, takvim günüyle', () => {
+  const bare = (tests = [], sessions = [], now = NOW) => keys(buildPath(registry.live, { tests, sessions, now }))
+  const E = (date) => wk(['R', 'L', 'OU'], date)
+  const R = (date) => ({ type: 'reading', date })
+  it('1. gün hiç kayıt yok: E testi yolda, okuma yarına kalır', () => {
+    expect(bare()).toContain('weekly')
+    expect(bare()).not.toContain('reading')
+    expect(readingStatus([], NOW)).toEqual({ state: 'later', due: true })
+  })
+  it('1. gün E testi bitti: okuma yine yarına', () => {
+    expect(bare(E(TODAY))).not.toContain('reading')
+  })
+  it('2. gün: E testi dün bitti; okuma yolda, E testi yok', () => {
+    const k = bare(E(daysAgo(1)))
+    expect(k).toContain('reading')
+    expect(k).not.toContain('weekly')
+  })
+  it('aynı güne düşünce (ikisi de 7 gün önce): E testi yolda, okuma yarına', () => {
+    const k = bare([...E(daysAgo(7)), R(daysAgo(7))])
+    expect(k).toContain('weekly')
+    expect(k).not.toContain('reading')
+    expect(readingStatus([...E(daysAgo(7)), R(daysAgo(7))], NOW).state).toBe('later')
+  })
+  it('ertesi gün E testi bitmişse okuma yolda', () => {
+    const k = bare([...E(daysAgo(1)), R(daysAgo(8))])
+    expect(k).toContain('reading')
+    expect(k).not.toContain('weekly')
+  })
+  it('en çok bir gün: E testi hâlâ yapılmadıysa okuma ertesi gün yine gelir', () => {
+    const k = bare([...E(daysAgo(8)), R(daysAgo(8))])
+    expect(k).toContain('weekly')
+    expect(k).toContain('reading')
+  })
+  it('takvim günü: 7 gün önce 18.00\'de yapılan okuma bugün 10.00\'da yolda (saati beklemez)', () => {
+    const r = R(new Date('2026-09-18T18:00:00').toISOString())
+    expect(isDue(r, NOW)).toBe(false) // eski saat kuralı
+    expect(readingStatus([...E(daysAgo(3)), r], NOW)).toEqual({ state: 'due', due: true })
+    expect(bare([...E(daysAgo(3)), r])).toContain('reading')
+  })
+  it('6 gün önce yapıldıysa zamanı gelmedi; bugün yapıldıysa tamam', () => {
+    expect(readingStatus([R(daysAgo(6))], NOW)).toEqual({ state: 'idle', due: false })
+    expect(readingStatus([...E(TODAY), R(TODAY)], NOW)).toEqual({ state: 'done', due: false })
+    const stop = buildPath(registry.live, { tests: [...E(TODAY), R(TODAY)], sessions: [], now: NOW }).stops.find((x) => x.key === 'reading')
+    expect(stop?.done).toBe(true)
+  })
+  it('hiç okuma yok, pratik kayıtları dün başladı: E testi yolda olsa da okuma bugün gelir (en çok bir gün)', () => {
+    const k = bare([], [{ type: 'breath', seconds: 300, date: daysAgo(1) }])
+    expect(k).toContain('weekly')
+    expect(k).toContain('reading')
   })
 })

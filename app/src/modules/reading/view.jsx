@@ -1,6 +1,6 @@
 import { BookText } from 'lucide-react'
 import ReadingTest from '../../screens/ReadingTest.jsx'
-import { lastOfType, isDue } from '../../lib/today.js'
+import { readingStatus } from '../../lib/today.js'
 import { usedTextIds, readingV1, readingV2, cpsOf, cpsText } from '../../lib/reading.js'
 import { normalizeProfile, profileFromScreening, WEAR_FROM_CORRECTION } from '../../lib/profile.js'
 import { isOlder } from '../../lib/profileQuestions.js'
@@ -12,7 +12,8 @@ const lastCorrection = (tests) =>
 export default {
   icon: BookText,
   sub: () => 'Rahat okuduğun en küçük yazıyı bulur · ~3 dk',
-  badge: (ctx) => (isDue(lastOfType(ctx.tests, 'reading')) ? 'Bu hafta' : null),
+  // Zamanı geldiyse (yarına kaysa da) "Bu hafta": Ölçüm listesinden her gün yapılabilir
+  badge: (ctx) => (readingStatus(ctx.tests, new Date(), ctx.sessions).due ? 'Bu hafta' : null),
   // Ana sayfa "Ölçümlerin" kutucuğu (O10): büyük değer rahat boy; kıvrım rahat boydan, yukarısı daha küçük yazı.
   tile(ctx) {
     const v2 = readingV2(ctx.tests)

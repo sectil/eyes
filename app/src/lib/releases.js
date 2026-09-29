@@ -29,6 +29,9 @@ export const RELEASES = [
       { kind: 'fix', text: "Gelişim'de son testten bir hafta geçince \"Son 7 gün\" kutusu boş kalıyordu. Artık son 7 günde 3 test yoksa kutu \"Son 3 test\" yazar ve son 3 testin ortancasını gösterir; başlangıçla karşılaştırılan değer budur." },
       // Bug 24 (HATA_GUNLUGU): isDue saatle sayıyordu; haftalık E testi artık takvim günüyle (lib/today.js isDueWeekly)
       { kind: 'fix', text: "Haftalık E testi son testin saatini bekliyordu: her gün aynı saatte açınca test 8 günde bir geliyor, akşam \"tamam\" olmuş yola yeniden ekleniyordu. Artık son testten 7 gün sonra, o günün başından itibaren yolda." },
+      // Karar 2026-09-29 (sahibi): okuma testi haftalık E testinden ayrılır, takvim günüyle gelir (lib/today.js
+      // readingStatus; bir günlük kayma VARSAYIM). Cihazda denenmedi.
+      { kind: 'change', text: "Okuma testi artık haftalık E testiyle aynı güne düşmez; o gün yerine ertesi gün yola eklenir. E testi yapılmadan kalsa da okuma testi en çok bir gün bekler. Sonra haftada bir gelir: son okuma testinden 7 gün sonra, o günün başından itibaren yoldadır." },
     ],
   },
   {
