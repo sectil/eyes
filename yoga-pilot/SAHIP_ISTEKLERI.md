@@ -31,3 +31,12 @@ Sonraki aşamaya (metin + ses + tasarım iş akışı) bu dosya olduğu gibi ver
      sürümler; modül yola entegre olur, günlere göre yolda yer alır. Not: PLAN.v2'nin alt sınırı 5 dk (3 dk yok);
      yol tasarımındaki iki belge yoganın yoldaki yerini farklı yazıyor (docs/yol-haritasi/tasarim/YOL.ilerleme.md
      §5.13 ve YOL.moduller.md §4.6) — birleşik planda tek karara bağlanacak.
+
+## Sahibin 2026-09-29 gece kararı
+7. "onay" → PLAN.v3 (yoga-pilot/v3/PLAN.v3.md) Kapı 1 geçti; yedi karar öneriyle: (1) tasarlanan hoca sesi tarifi
+   "sıcak, alçak perdeli, orta yaşta, İstanbul Türkçesiyle konuşan bir meditasyon hocası", örnek cümle Ders 2'nin açılışı;
+   (2) inceleyici adı verilmedi → bütün rollerde yedek (iki bağımsız model incelemesi + sahibin kulağı; psikolog yerine
+   karar 5.3 yedek kuralı; panel yerine sahibin kör dinlemesi); (3) tavan parti başına 195 bin, toplam 600 bin kredi;
+   (4) 3 dk yalnız yedi derste, Ders 2'ye 20 dk, 38/43 sn istisnaları, 3 dk'da 45 sn şafak; (5) yoga durağı ilk yayında,
+   (c)'den bağımsız, her gün bir dersin kısa sürümü, Ders 4 ve 7 yolda psikolog yedeğiyle; (6) hepsi pakette, boyut
+   Kapı 4'te ölçümle; (7) sonsuz yol araştırması şimdi başlar, yoga üretimiyle birlikte yürür; kodu yoga yayınından sonra.

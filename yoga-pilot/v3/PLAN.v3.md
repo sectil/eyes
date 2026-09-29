@@ -1,6 +1,6 @@
 # Nefona Yoga · İlk yayın ve yola entegrasyon planı (sürüm 3)
 
-Tarih: 2026-09-29. Durum: **PLAN, sahibin onayına**. Uygulama koduna dokunulmadı, ücretli ElevenLabs çağrısı yapılmadı.
+Tarih: 2026-09-29. Durum: **ONAYLANDI (sahibi, 2026-09-29: "onay"; yedi kararın hepsi öneriyle).** İnceleyici adı verilmedi; ad verilene kadar bütün rollerde karar 2'nin yedeği uygulanır. Uygulama koduna dokunulmadı, ücretli ElevenLabs çağrısı yapılmadı.
 Bu belge ve çalışma notları `yoga-pilot/v3/` klasöründedir. Bu belge `yoga-pilot/PLAN.v2.md`'yi (on dersin tasarımı, metin kılavuzu, ses kuralları) ve
 yol tasarım belgelerini tekrar etmez; onlara atıf yapar. Yalnız **ilk yayını (Yoga v1)** ve **yola entegrasyonu** kesin
 kararlarla anlatır.
