@@ -74,10 +74,7 @@ const LESSONS = { 1: ['Nefesin Ritmi', 3], 2: ['Derin Dinlenme', 5], 3: ['Uykuya
 const SEQ = [1, 2, 5, 7, 4, 6, 8, 9, 10]
 const UNLOCK_YOGA = 2, SHORT_BEFORE_FULL = 6
 const night = (h) => h >= 20 || h < 5
-// Psikolog yedeği (onaylı yoga planı karar 5.3; yoga-pilot/SAHIP_ISTEKLERI.md madde 7 (2) ve (5)): psikolog adı verilene
-// kadar Zor Anlar İçin (4) yolda aday değildir; Kendine Şefkat (7) yalnız 17.00'den sonra adaydır. PSIKOLOG=onay kuralı kaldırır.
-const YEDEK = process.env.PSIKOLOG !== 'onay'
-const timeOk = (l, h) => (l === 6 ? h >= 5 && h < 12 : true) && (!YEDEK || (l !== 4 && (l !== 7 || h >= 17))) // Sabah Niyeti yalnız öğleden önce (VARSAYIM)
+const timeOk = (l, h) => (l === 6 ? h >= 5 && h < 12 : true) // Sabah Niyeti yalnız öğleden önce (VARSAYIM)
 function yogaOpen(ctx) { return ctx.progression.totalDays >= UNLOCK_YOGA }
 function eDayToday(tests, sessions, now) { // E testinin zamanı BUGÜN geldiyse (gün başındaki kayıtlarla; gün içinde değişmez)
   const today = dayKey(now)

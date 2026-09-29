@@ -132,7 +132,7 @@ const yoga = { id: 'yoga', kind: 'practice', ring: 'life', gates: {}, home: { or
     return null
   } }
 
-const MODULES = [weekly, reading, routine, track, breath, snake, notice, farkEttin, tekBakis, yoga].filter((m) => !(process.env.NOYOGA && m.id === 'yoga'))
+const MODULES = [weekly, reading, routine, track, breath, snake, notice, farkEttin, tekBakis, yoga, walk].filter((m) => !(process.env.NOYOGA && m.id === 'yoga'))
 const tests = []; const sessions = []
 const rows = []
 for (let n = 1; n <= DAYS; n++) {
