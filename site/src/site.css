@@ -123,6 +123,7 @@ p { margin: 0; }
 .theme-btn { border: 1px solid var(--border); background: var(--surface); color: var(--ink-2); width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; cursor: pointer; padding: 0; }
 .theme-btn svg { width: 18px; height: 18px; }
 .menu-btn { display: none; }
+@media (min-width: 761px) { .nav-links { order: 2; margin-left: auto; } .theme-btn[data-theme-toggle] { order: 3; margin-left: 4px; } }
 
 @media (max-width: 760px) {
   .nav .wrap { flex-wrap: wrap; row-gap: 0; }

@@ -368,6 +368,13 @@ destek/SSS, yenilikler. Kaynakça, kanıt kartları, sürüm notları, modül li
 - [~] İlk sürüm yazıldı; bağımsız inceleme (5 engel, 19 gerekli, 19 küçük) uygulandı; iki temada 320/390/820/1280'de
       ölçüldü (taşma yok, yazı tipleri yüklü, hata yok); atlama bağlantısı, Escape ile menü, tek turluk iris canlandırması
       (Hareketi Azalt'ta sabit), OG görseli (`site/public/og.png`, Chromium ile üretildi). Sahibi Tailscale üzerinden bakacak.
+- [~] Ana sayfa yeniden (sahibi: "çok basit, Nefona'yı anlatmıyor; 5 saniyede çıkarsın"): kural = yabancı testi (ürünü
+      bilmeyen inceleyici beş soruya siteden cevap veremiyorsa bitmemiştir; gerçek ekran yoksa bitmemiştir). Giriş: canlı E
+      tadımlığı (5 harf, 0,1 logMAR adım; ölçüm değil, öyle yazar) + "Gözün değişiyor. Sen de gör."; uygulamanın gerçek
+      ekranları (HEAD'deki sürümden ayrı çalışma ağacında 28 günlük örnek veriyle çekildi: `site/public/screens/*.webp`,
+      düzenek `_harness/site.jsx` + `siteSeed.js` — depoya girmedi); bir günün akışı, 1./5./28. gün, Gelişim + Nef,
+      ses örnekleri (`site/public/voice`, uygulamadaki mp3'ler), gizlilik, "Bilime dayanır" (sahibinin isteğiyle
+      "Ne yapmıyoruz" listesi ana sayfadan çıktı, Bilim sayfasında kaldı).
 - [ ] Yayından önce: gizlilik ve koşullar metinleri hukukçu incelemesi + veri sorumlusu unvanı/adresi; destek e-postası
       (alan adı ile birlikte Resend/SMTP: Supabase e-posta girişi de buna bağlı); App Store bağlantısı.
 - [ ] Yayın: Vercel projesi "nefona" (kök `site/`, build `npm run build`, çıktı `dist`), alan adı satın alma ve bağlama.

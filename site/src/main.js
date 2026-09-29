@@ -2,6 +2,7 @@
 // (src/data.json, scripts/data.mjs üretir) ilgili sayfaya basılması. Her sayfa hangi parçaları istediğini data-render ile söyler.
 import './site.css'
 import data from './data.json'
+import './home.js'
 
 const root = document.documentElement
 const THEME_KEY = 'nefona-site-theme'
@@ -23,6 +24,7 @@ function applyTheme(t) {
     b.innerHTML = isDark() ? icons.sun : icons.moon
     b.setAttribute('aria-label', isDark() ? 'Açık temaya geç' : 'Koyu temaya geç')
   }
+  document.dispatchEvent(new CustomEvent('nefona:theme'))
 }
 try {
   applyTheme(localStorage.getItem(THEME_KEY) || '')
@@ -75,24 +77,24 @@ const MOD_DESC = {
   daily: 'Her gün kısa E testi: hangi yöne baktığını söylersin, yakın görme keskinliğin logMAR olarak kaydedilir.',
   weekly: 'Haftada bir tam ölçüm: sağ göz, sol göz ve iki göz, her biri 28 harf.',
   reading: 'Yazı küçüldükçe rahat okuduğun en küçük boyu bulur.',
-  blink: 'Tam göz kırpmayı hatırlatır; ekran başında yarım kırpmaya karşı.',
-  routine: 'Egzersiz setleri: uzağa bakış, göz hareketleri, kırpma ve nefes adımları.',
-  'tek-bakis': 'Kısa bir bakışta ne kadarını yakaladığını ölçer.',
+  blink: 'Ekran başında yarım kalan kırpmaya karşı tam göz kırpmayı ritimle yaptırır.',
+  routine: 'Uzağa bakış, göz hareketleri, kırpma ve nefes adımlarını sesli yönlendirmeyle yaptırır; hafif ya da normal set seçilir.',
+  'tek-bakis': 'Kısa süre görünen bir sahneden kaç ayrıntı yakaladığını ölçer.',
   'quick-look': 'Kısa süre görünen hedefleri bulursun; tepki süresi ve isabet kaydedilir.',
   'fark-ettin': 'Sahnedeki küçük değişimi fark etme görevi.',
   notice: 'Günün tek fark etme görevi; sonunda ne fark ettiğini yazarsın.',
   'breath-count': 'Nefesini sayarsın; dikkatin ne kadar sürdüğü ölçülür.',
-  snake: 'Bakışınla oynanan yılan oyunu; göz takibiyle.',
+  snake: 'Yılanı gözünle yönlendirirsin; kamera bakışını izler.',
   track: 'Hareket eden çemberleri gözünle izlersin; tepki ve isabet ölçülür.',
-  awareness: 'Farkındalık merkezi: görevler ve ölçümler tek yerde.',
-  breath: 'Sekiz nefes kalıbı, sesli yönlendirme; önce ve sonra tek soru.',
-  dalga: 'Sakin, Güç ve Motivasyon modlarında müzik; sessiz anlar da müziğin parçası.',
-  gokyuzu: 'Gökyüzü molası: kısa bir süre uzağa ve yukarı bakış.',
-  mola: '1 dakikalık mola; göz bütçesi dolunca kilit.',
+  awareness: 'Dikkat ve fark etme görevlerinin toplandığı yer; hangisini ne zaman yaptığın burada görünür.',
+  breath: 'Sekiz nefes kalıbından birini sesli yönlendirmeyle yaparsın; öncesinde ve sonrasında nasıl hissettiğin sorulur.',
+  dalga: 'Sakin, Güç ve Motivasyon modlarında müzik; molada ve uykuya dalarken çalar.',
+  gokyuzu: 'Bir dakika uzağa ve yukarı bakarsın; öncesi ve sonrası tek soruyla kaydedilir.',
+  mola: 'Bir dakikalık göz molası; günlük oyun ve göz hareketi süresi dolunca kendiliğinden kilitler.',
   water: 'Su kaydı ve hatırlatma.',
-  alarm: 'Sabah alarmı, uyandırma sesleri ve uykuya dalarken ses.',
-  who5: 'İyi oluş: 14 günde bir beş kısa soru (WHO-5, resmî Türkçe metin).',
-  yon: 'Yön: kendini tanıma, dışarıdan bakış ve kendine şefkat pratikleri.',
+  alarm: 'Sabah alarmı, Nefona\'ya özel uyandırma sesleri ve uykuya dalarken yavaşça susan ses.',
+  who5: 'İki haftada bir beş kısa soruyla iyi oluş puanı (WHO-5 ölçeği, resmî Türkçe metin).',
+  yon: 'Kendini tanıma ve kendine şefkat için kısa yazılı pratikler.',
 }
 
 const renderers = {
@@ -125,7 +127,7 @@ const renderers = {
   sources(el) {
     el.innerHTML = data.sources
       .map(
-        (s) => `<li><span class="who">${esc(s.authors.length === 2 ? `${s.authors[0].split(' ')[0]} ve ${s.authors[1].split(' ')[0]}` : s.authors.length > 2 ? `${s.authors[0].split(' ')[0]} ve ark.` : s.authors[0].split(' ')[0])} ${s.year}</span><span class="rank">${esc(s.designText)}${s.n && s.n !== 'özette yazmıyor' ? ' · ' + esc(s.n) : ''}</span>
+        (s) => `<li id="src-${esc(s.id)}"><span class="who">${esc(s.authors.length === 2 ? `${s.authors[0].split(' ')[0]} ve ${s.authors[1].split(' ')[0]}` : s.authors.length > 2 ? `${s.authors[0].split(' ')[0]} ve ark.` : s.authors[0].split(' ')[0])} ${s.year}</span><span class="rank">${esc(s.designText)}${s.n && s.n !== 'özette yazmıyor' ? ' · ' + esc(s.n) : ''}</span>
         <span class="tr">${esc(s.titleTr)}</span><span class="en">${esc(s.title)} · <i>${esc(s.journal)}</i> ${esc(s.cite)}</span>
         <span class="links"><a href="https://doi.org/${esc(s.doi)}" rel="noopener">doi:${esc(s.doi)}</a><a href="https://pubmed.ncbi.nlm.nih.gov/${esc(s.pmid)}/" rel="noopener">PMID ${esc(s.pmid)}</a></span></li>`,
       )

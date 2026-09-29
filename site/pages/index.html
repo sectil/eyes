@@ -1,69 +1,236 @@
-<!-- title: Nefona · Gözünden başla, kendini bütün olarak izle -->
-<!-- desc: Nefona gözünden başlar: gözünü, dikkatini, sakinliğini, bedenini ve kendine bakışını birlikte izler, değişimi gösterir ve günlük alışkanlığa çevirir. Tanı koymaz, tedavi etmez. -->
-<section class="hero">
+<!-- title: Nefona · Gözün değişiyor. Sen de gör. -->
+<!-- desc: Nefona yakın görmeni telefonunla ölçer ve 28 günde değişimi sayıyla gösterir. Her gün 15 dakikalık bir yol; gözünü, dikkatini, uykunu ve sakinliğini tek haritada izlersin. Kamera görüntün telefondan çıkmaz. -->
+<section class="hero2">
   <div class="wrap">
     <div class="hero-text">
       <span class="eyebrow">iPhone için · yakında App Store'da</span>
-      <h1>Gözünden başla. Kendini bütün olarak izle.</h1>
-      <p class="lead">Nefona gözünden başlar: gözünü, dikkatini, sakinliğini, bedenini ve kendine bakışını birlikte izler, değişimi gösterir ve günlük alışkanlığa çevirir. Tanı koymaz, tedavi etmez.</p>
+      <h1>Gözün değişiyor.<br>Sen de gör.</h1>
+      <p class="hero-ask">Telefonu biraz daha uzağa mı tutuyorsun? Akşamları harfler mi bulanıyor?</p>
+      <p class="lead">Nefona yakın görmeni telefonunla ölçer ve 28 günde değişimi sayıyla gösterir. Her gün 15 dakikalık bir yol; gözünü, dikkatini, uykunu ve sakinliğini tek haritada izlersin.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/nasil-calisir.html">Nasıl çalışır</a>
-        <a class="btn btn-secondary" href="/bilim.html">Neye dayanıyor</a>
+        <a class="btn btn-primary" href="#dene">E hangi yöne bakıyor? Dene</a>
+        <a class="btn btn-secondary" href="#gun">Bir günün nasıl geçer</a>
       </div>
-      <p class="hero-honest">Ölçer, değişimi gösterir, alışkanlık kurar.</p>
+      <ul class="hero-facts" aria-label="Kısa gerçekler">
+        <li>Kamera görüntün telefondan çıkmaz</li>
+        <li>7 gün ücretsiz, 18 yaş ve üstü</li>
+        <li>Tanı koymaz, tedavi etmez</li>
+      </ul>
     </div>
-    <div class="hero-art">{{iris}}</div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap stack">
-    <span class="eyebrow">İris haritası</span>
-    <h2>Merkezde göz, çevresinde yedi alan</h2>
-    <p class="lead">Kurulumda başlangıç haritan dolar. 28. günde aynı sorulara yeniden bakılır ve iki harita yan yana durur. Değişim sözle vaat edilmez; sayıyla görünür.</p>
-    <ul class="legend" data-render="domains"></ul>
-  </div>
-</section>
-
-<section>
-  <div class="wrap stack">
-    <span class="eyebrow">Her gün</span>
-    <h2>Ölç, çalış, gör</h2>
-    <div class="grid steps">
-      <article class="card"><h3>Ölç</h3><p>Yakın görme testi (E hangi yönde), okuma testi, iyi oluş soruları; kurulumda ve 28. günde 20 saniyelik kırpma sayımı. Telefonun kamerası mesafeni ve gözünü ölçer; görüntü telefondan çıkmaz.</p></article>
-      <article class="card"><h3>Çalış</h3><p>Yaklaşık 15 dakikalık günlük yol: göz egzersizleri, nefes, dikkat görevleri, bakışla oynanan oyunlar, kısa molalar. Sesli yönlendirme kadın ya da erkek sesiyle; Profilim'den bir kez seçilir.</p></article>
-      <article class="card"><h3>Gör</h3><p>Her kayıt Gelişim'e ve iris haritasına yazılır. 5. günde ilk rapor, 28. günde haritan yan yana. İstersen "Doktoruma göster" ile PDF çıkarırsın.</p></article>
+    <div class="hero-demo" id="dene">
+      <div class="phone lg">
+        <div class="screen edemo" tabindex="0" role="group" aria-label="Yakın görme testi tadımlığı">
+          <div class="edemo-head"><span class="eyebrow">E testi · tadımlık</span><span class="n">Harf 1/5</span></div>
+          <div class="edemo-play">
+            <div class="edemo-stage"><div class="edemo-e" aria-hidden="true"><svg viewBox="0 0 5 5"><path d="M0 0h5v1H1v1h3v1H1v1h4v1H0z"/></svg></div></div>
+            <p class="edemo-q">E'nin açık tarafı hangi yönde?</p>
+            <div class="edemo-fb" aria-live="polite"></div>
+            <div class="edemo-pad">
+              <button type="button" class="u" data-dir="up" aria-label="Yukarı"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+              <button type="button" class="l" data-dir="left" aria-label="Sol"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg></button>
+              <div class="c" aria-hidden="true">yön</div>
+              <button type="button" class="r" data-dir="right" aria-label="Sağ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+              <button type="button" class="d" data-dir="down" aria-label="Aşağı"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></button>
+            </div>
+            <button type="button" class="edemo-cant" data-dir="cant">Göremiyorum</button>
+            <div class="edemo-foot" aria-label="Uygulamadaki gerçek testte"><span>Kartla kalibrasyon</span><span>TrueDepth mesafe</span><span>Sonuç: logMAR</span></div>
+          </div>
+          <div class="edemo-result" hidden>
+            <span class="eyebrow">Bitti</span>
+            <div class="big" tabindex="-1">0/5</div>
+            <p>Bu bir tadımlıktı, ölçüm değil: ekranın kalibre değil, mesafen bilinmiyor. Uygulamada harf boyutu bir kartla kalibre edilir, mesafe TrueDepth kamerayla ölçülür, sonuç logMAR olarak kaydedilir ve 28 günde eğilim çıkar.</p>
+            <button type="button" class="btn btn-secondary edemo-again">Yeniden</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section>
+<section id="neden">
   <div class="wrap stack">
-    <span class="eyebrow">Dürüstlük</span>
-    <h2>Ne yapmıyoruz</h2>
-    <p class="lead">Kanıt olmayan hiçbir şeyi vaat etmiyoruz. Bunlar uygulamanın içinde de aynen yazar.</p>
-    <ul class="checks no" data-render="notClaimed" aria-label="Yapmadığımız iddialar"></ul>
-    <p class="muted">Her özelliğin altında hangi çalışmaya dayandığı, çalışmanın türü ve sınırı yazar. <a href="/bilim.html">Bilim ve kaynaklar</a></p>
+    <span class="eyebrow">Neden gözden başlıyoruz</span>
+    <h2>Göz, yorgunluğu ilk gösteren yer</h2>
+    <p class="lead">Gün boyu yakına bakıyoruz: göz yoruluyor, kırpma seyreliyor, akşam harfler bulanıyor. Nefona en iyi ölçülebilen şeyden, gözden başlar; uyku, dikkat ve sakinlik aynı günün parçası olduğu için aynı haritada durur.</p>
+    <div class="beats">
+      <article class="beat reveal">
+        <span class="num">20-20-20</span>
+        <h3>Mola hatırlatıldıkça işe yaradı</h3>
+        <p>Her 20 dakikada 20 saniye uzağa bakma kuralı 29 ekran kullanıcısında iki hafta hatırlatıcıyla denendi: dijital göz yorgunluğu ve kuru göz yakınmaları azaldı; hatırlatıcı bırakılınca bir hafta içinde geri geldi. Nefona'nın günlük yolundaki uzağa bakış ve mola bu kuralı uygular ve her gün hatırlatır.</p>
+        <span class="src">Kaynak: <a href="/bilim.html#src-talens2022">Talens-Estarelles ve ark. 2022</a>, önce–sonra çalışması</span>
+      </article>
+      <article class="beat reveal">
+        <span class="num">Işık · uyku</span>
+        <h3>Işık ve iç saat</h3>
+        <p>Üniversite öğrencilerinde gündüz alınan ışık, uykunun ve iç saatin mevsimle nasıl değiştiğini en güçlü açıklayan etken çıktı; 19 çalışmayı (556 861 kişi) toplayan bir meta-analizde gece ışığına maruz kalanlarda depresyon ve kaygı daha sık görüldü (gözlemsel ilişki, neden-sonuç değil). Bu yüzden Nefona'da sabah alarmı gün ışığına, gece saati karanlığa göre tasarlandı.</p>
+        <span class="src">Kaynaklar: <a href="/bilim.html#src-dunster2022">Dunster ve ark. 2022</a> · <a href="/bilim.html#src-deprato2025">Deprato ve ark. 2025</a></span>
+      </article>
+      <article class="beat reveal">
+        <span class="num">±0,2 logMAR</span>
+        <h3>Tek test aldatır, seri aldatmaz</h3>
+        <p>logMAR, görme tablosunun satır ölçüsüdür: 0,1 bir satır. Tek bir yakın görme testi ±0,2 oynayabilir, yani yaklaşık iki satır. Evde tek teste dayalı takipte yanlış alarm oranı yüksek bulundu; akıllı telefon testleri ise başka çalışmalarda klinikteki görme tablosuyla karşılaştırıldı ve uyumlu çıktı. Nefona bu yüzden tek sonuca değil son 7 günün ortancasına (sıralayınca ortadaki değere) bakar ve değişimi ancak ardışık sonuçlar aynı yöndeyse işaretler. Nefona'nın kendi testi henüz ayrı bir klinik karşılaştırmadan geçmedi; bunu da açıkça yazıyoruz.</p>
+        <span class="src">Kaynaklar: <a href="/bilim.html#src-faes2021">Faes ve ark. 2021</a> · <a href="/bilim.html#src-han2019">Han ve ark. 2019</a> · <a href="/bilim.html#src-katibeh2022">Katibeh ve ark. 2022</a></span>
+      </article>
+    </div>
   </div>
 </section>
 
-<section>
+<section id="gun" class="timeline">
+  <div class="wrap stack">
+    <span class="eyebrow">Bir günün Nefona'yla</span>
+    <h2>Sabah bir nefes, gün içinde 15 dakika, gece sakin bir saat</h2>
+    <p class="lead">Uygulamanın gerçek ekranları. Her durak kaydettiğini Gelişim sekmesine ve iris haritasına yazar; iris haritası gerçek bir göz fotoğrafı değil, yedi alanda ne kadar kayıt biriktiğini gösteren bir çizimdir.</p>
+    <div class="phones">
+      <figure class="reveal">
+        <div class="phone"><img src="/screens/morning-light.webp" data-light="/screens/morning-light.webp" data-dark="/screens/morning-dark.webp" width="780" height="1688" loading="lazy" alt="Sabah ekranı: 'Bir dakika nefes, sonra güne başla' ve 'Başla · 1 dk' düğmesi"></div>
+        <figcaption><b><span class="t">07:00</span> · Sabah</b>Alarm çalar; bir dakikalık nefesle gün başlar. Uyandırma sesleri Nefona'ya özel bestelendi.</figcaption>
+      </figure>
+      <figure class="reveal">
+        <div class="phone"><img src="/screens/home-light.webp" data-light="/screens/home-light.webp" data-dark="/screens/home-dark.webp" width="780" height="1688" loading="lazy" alt="Bugün ekranı: 'Günaydın, Deniz', 3/8 durak, gün serisi, haftalık hedef, kurulu alarm ve 'Yola devam et' kartı"></div>
+        <figcaption><b><span class="t">09:00</span> · Bugün</b>Günün yolu: kaç durak kaldı, kaç gündür aralıksız, haftalık hedef ve Nef'in (uygulamanın koçu) tek cümlelik önerisi.</figcaption>
+      </figure>
+      <figure class="reveal">
+        <div class="phone"><img src="/screens/home-path-light.webp" data-light="/screens/home-path-light.webp" data-dark="/screens/home-path-dark.webp" width="780" height="1688" loading="lazy" alt="Bugünün yolu: E testi tamam, uzağa bakış, çemberler, yakın–uzak ve 5 dakikalık nefes molası durakları"></div>
+        <figcaption><b><span class="t">~15 dk</span> · Yol</b>E testi, uzağa bakış, göz hareketleri, bakışla oynanan bir oyun ve nefes molası sırayla gelir; hepsi yaklaşık 15 dakika sürer.</figcaption>
+      </figure>
+      <figure class="reveal">
+        <div class="phone"><img src="/screens/night-light.webp" data-light="/screens/night-light.webp" data-dark="/screens/night-dark.webp" width="780" height="1688" loading="lazy" alt="Gece saati: siyah ekranda kehribar renkli 23:41, 'Müzik · 22 dk sonra susar', 'Alarm 06:30'"></div>
+        <figcaption><b><span class="t">23:41</span> · Gece</b>Uyku için seçtiğin ses yavaşça susar; ekran yalnız kehribar rengi bir saat gösterir, gece telefona baktığında gözünü ışıkla yormaz. Alarm sabaha hazır.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="harita">
+  <div class="wrap stack">
+    <span class="eyebrow">28 gün</span>
+    <h2>Başlangıçta bir harita, 28. günde yan yana</h2>
+    <p class="lead">Kurulumda kamera 20 saniyede kaç kez göz kırptığını sayar; sonra dört kısa soruya cevap verirsin. İris haritanın başlangıcı budur: merkezde göz, çevresinde yedi alan. 5. günde ilk rapor gelir. 28. günde aynı ölçüm ve aynı sorular yeniden yapılır, iki harita yan yana durur. Değişim sözle vaat edilmez, sayıyla görünür.</p>
+    <div class="phones">
+      <figure class="reveal">
+        <div class="phone"><img src="/screens/plan-light.webp" data-light="/screens/plan-light.webp" data-dark="/screens/plan-dark.webp" width="780" height="1688" loading="lazy" alt="Kurulum: 'Deniz, gözünden başladık. 28. günde haritana yeniden bakacağız.' İris haritası ve yedi alanın başlangıç değerleri"></div>
+        <figcaption><b>1. gün</b>Başlangıç haritan: 4 kırpma, uyku 6/10, 2 gün hareket; stres ve kendine yaklaşım için birer cevap.</figcaption>
+      </figure>
+      <figure class="reveal">
+        <div class="phone"><img src="/screens/report-light.webp" data-light="/screens/report-light.webp" data-dark="/screens/report-dark.webp" width="780" height="1688" loading="lazy" alt="İlk rapor · 5. gün: 'İlk günlerinde neler oldu'; aktif gün, dakika ve seri sayıları, uygulamalardan sonra öncesi–sonrası puanları"></div>
+        <figcaption><b>5. gün</b>İlk rapor, ilk günlerde gerçekten ölçülebilenleri gösterir: düzen, nefes ve molaların öncesi–sonrası puanları. Göz için henüz yorum yapmaz; başlangıç değeri 8. günden sonra kurulur.</figcaption>
+      </figure>
+      <figure class="reveal">
+        <div class="phone"><img src="/screens/compare-light.webp" data-light="/screens/compare-light.webp" data-dark="/screens/compare-dark.webp" width="780" height="1688" loading="lazy" alt="28. gün: 'Deniz, haritan yan yana'; Göz 7 kırpma (önce 4), Beden 4 gün hareket (önce 2), Uyku 7/10 (önce 6)"></div>
+        <figcaption><b>28. gün</b>Aynı ölçüm, aynı sorular; iki harita yan yana. Küçük farkların günlük oynama olabileceğini ekran da söyler.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="gelisim">
+  <div class="wrap split">
+    <div class="stack">
+      <span class="eyebrow">Gelişim</span>
+      <h2>Değişim gerçek mi, günlük oynama mı? Burada yazar.</h2>
+      <p class="lead">Her modül kaydettiğini aynı yere yazar; Gelişim sekmesi, iris haritası, Nef ve raporlar aynı kayıtları okur. Göz için kural açık: son 7 günün ortancası (sıralayınca ortadaki değer) başlangıçtan en az 0,10 logMAR, yani bir satır farklıysa ve son 3 test aynı yöndeyse "doğrulanmış değişim" der; değilse demez. Örnek ekranda demiyor; dürüstlük böyle görünür.</p>
+      <ul class="checks">
+        <li><b>Nef</b>, uygulamanın koçu: günde tek bir içgörü ve bir öneri yazar. Öneriyi bir dil modeli üretir; yalnız sen açık rıza verirsen çalışır ve o zaman da yalnız son 7 günün özet sayıları gider, kamera görüntüsü, ad ya da e-posta gitmez. Kapalıyken hiçbir veri telefondan çıkmaz. Önerileri tıbbi tavsiye değildir.</li>
+        <li><b>Doktoruma göster:</b> ölçümlerinin ve hesaplama kurallarının yazılı olduğu PDF ve CSV.</li>
+        <li><b>Ölçümler art arda kötüye giderse</b> uygulama "göz doktoruna git" der; kendisi karar vermez.</li>
+      </ul>
+      <img class="card-img reveal" src="/screens/coach-light.webp" data-light="/screens/coach-light.webp" data-dark="/screens/coach-dark.webp" width="700" height="412" loading="lazy" alt="Nef kartı: 'Sabah yaptığın testler akşamkilerden 0,05 daha iyi çıkıyor. Bugün de sabah ölç; karşılaştırma tutarlı kalsın.' ve 'Günlük test — sabah' düğmesi">
+    </div>
+    <figure class="reveal" style="margin:0">
+      <div class="phone lg"><img src="/screens/progress-light.webp" data-light="/screens/progress-light.webp" data-dark="/screens/progress-dark.webp" width="780" height="1688" loading="lazy" alt="Gelişim ekranı: 28 günlük iris haritası, Göz 25/28, Sakinlik 21/28, Dikkat 12/28; altta 'Göz 0,14 logMAR · doğrulanmış değişim yok'"></div>
+    </figure>
+  </div>
+</section>
+
+<section id="olcum">
+  <div class="wrap split rev">
+    <div class="stats">
+      <div class="stat reveal"><b>40 cm</b><span>kol boyu mesafe; TrueDepth kamera mesafeyi ölçer, çok yakın ya da uzaksan uyarır</span></div>
+      <div class="stat reveal"><b>Tek göz</b><span>günlük test sağ ya da sol gözle, öteki göz avuçla örtülü; haftada bir üç ölçüm: sağ, sol, iki göz</span></div>
+      <div class="stat reveal"><b>Aynı koşul</b><span>her seferinde aynı gözlükle ya da gözlüksüz; uygulama sorar ve farklı koşulları ayrı seri tutar</span></div>
+      <div class="stat reveal"><b>~1 dk</b><span>bir göz için 14–20 harf; E küçülür, "Göremiyorum" de geçerli cevaptır</span></div>
+    </div>
+    <div class="stack">
+      <span class="eyebrow">Nasıl ölçer</span>
+      <h2>Kartla kalibre, kamerayla mesafe, sonuç logMAR</h2>
+      <p class="lead">Kurulumda ekrana bir banka kartı koyarsın; harfler gerçek boyutta çizilir. Testte parmağını E'nin açık tarafına doğru kaydırırsın; harf küçülür, seçemeyince "Göremiyorum" dersin. Sonuç logMAR ölçeğinde kaydedilir; klinikteki tabloyla aynı birim.</p>
+      <div class="hero-cta"><a class="btn btn-secondary" href="/nasil-calisir.html">Kurulumdan 28. güne</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="moduller">
+  <div class="wrap stack mods-compact">
+    <span class="eyebrow">Modüller</span>
+    <h2>Ölçümler, egzersizler, pratikler</h2>
+    <p class="lead">Her modül bir şey ölçer ya da kaydeder ve Gelişim'de gösterir. <a href="/moduller.html">Hepsinin listesi</a></p>
+    <div data-render="modules"></div>
+  </div>
+</section>
+
+<section id="sesler">
+  <div class="wrap stack">
+    <span class="eyebrow">Sesler</span>
+    <h2>Yönlendirme sesli: ekranda ne yazıyorsa onu duyarsın</h2>
+    <p class="lead">Egzersiz ve testlerde ekrana bakmak zorunda kalmazsın; cümleler önceden kaydedilmiş iki sesten biriyle gelir; sesi profil sayfasından bir kez seçersin. Uygulama ses için ağa çıkmaz. Dinle:</p>
+    <div class="voices">
+      <article class="voice reveal">
+        <h3>Kadın ses <small>egzersiz · mola</small></h3>
+        <div class="clip"><button type="button" aria-label="Dinle"></button><div class="txt"><q>Telefonun üstünden uzaktaki bir noktaya bak.</q><div class="bar"><i></i></div></div><audio preload="none" src="/voice/female/exFar.mp3"></audio></div>
+        <div class="clip"><button type="button" aria-label="Dinle"></button><div class="txt"><q>Gözlerini kapat. Bitince sesle haber vereceğim.</q><div class="bar"><i></i></div></div><audio preload="none" src="/voice/female/exRest.mp3"></audio></div>
+      </article>
+      <article class="voice reveal">
+        <h3>Erkek ses <small>egzersiz · mola</small></h3>
+        <div class="clip"><button type="button" aria-label="Dinle"></button><div class="txt"><q>Telefonun üstünden uzaktaki bir noktaya bak.</q><div class="bar"><i></i></div></div><audio preload="none" src="/voice/male/exFar.mp3"></audio></div>
+        <div class="clip"><button type="button" aria-label="Dinle"></button><div class="txt"><q>Gözlerini kapat. Bitince sesle haber vereceğim.</q><div class="bar"><i></i></div></div><audio preload="none" src="/voice/male/exRest.mp3"></audio></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="gizlilik">
   <div class="wrap stack">
     <span class="eyebrow">Gizlilik</span>
-    <h2>Kamera görüntüsü telefondan çıkmaz</h2>
-    <ul class="checks">
-      <li>Kamera yalnız mesafe ve gözün ölçümü için çalışır; görüntü işlenir, kaydedilmez, gönderilmez. Yalnız sayılar tutulur.</li>
-      <li>Verilerin telefonunda kalır. Profilini hesabına kaydetme, adımlarını görme ya da koç önerisi alma ayrı ayrı sorulur; her biri için ayrı açık rıza alınır ve her birini istediğin an geri çekebilirsin.</li>
-      <li>"Tüm verileri sil" (Bilgi sekmesinde) ölçümlerini ve geçmişini telefondan siler; hesabını da uygulamadan silersin.</li>
-    </ul>
+    <h2>Kamera görüntün telefondan çıkmaz</h2>
+    <p class="lead">Kamera yalnız mesafeyi, göz kırpmayı ve bakış yönünü ölçmek için çalışır. Görüntü telefonda işlenir ve anında atılır; yalnız sayılar kalır.</p>
+    <div class="flow">
+      <div class="stat reveal"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h3l2-3h6l2 3h3v12H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span><b>Görüntü</b><span>İşlenir, atılır. Kaydedilmez, gönderilmez, ekranda bile gösterilmez.</span></div>
+      <div class="stat reveal"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h16M6 15V9M12 15V5M18 15v-4"/></svg></span><b>Sayılar</b><span>Mesafe, kırpma sayısı, bakış yönü, test sonuçları: telefonunda kalır. Hesap açmak zorunlu değil.</span></div>
+      <div class="stat reveal"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><b>Rıza</b><span>Profili hesaba kaydetme, Sağlık uygulamasından adım verisi ve Nef ayrı ayrı sorulur; her birini istediğin an geri çekersin. "Tüm verileri sil" tek dokunuş.</span></div>
+    </div>
     <p class="muted"><a href="/gizlilik.html">Gizlilik ve KVKK</a></p>
   </div>
 </section>
 
-<section>
-  <div class="narrow stack" style="text-align:center;align-items:center">
-    <h2>Yakında App Store'da</h2>
-    <p class="lead">7 gün ücretsiz deneme; iptal etmezsen 7. günde seçtiğin plan (haftalık, aylık ya da yıllık) başlar. 18 yaş ve üstü içindir. iPhone'da çalışır; kamera ölçümleri Face ID'li modellerde.</p>
-    <a class="btn btn-primary" href="/destek.html">Sorular ve destek</a>
+<section id="bilim">
+  <div class="wrap split rev">
+    <div class="stats">
+      <div class="stat reveal"><b data-render="sourceCount">27</b><span>hakemli çalışma, künyesi ve DOI'siyle uygulamanın içinde</span></div>
+      <div class="stat reveal"><b>6</b><span>kanıt kartı: ana ölçüm ve pratiklerin dayanağı, sınırı ve kanıt düzeyi</span></div>
+      <div class="stat reveal"><b>7</b><span>alan tek haritada: göz, dikkat, farkındalık, sakinlik, kendine yaklaşım, iyi oluş, beden</span></div>
+      <div class="stat reveal"><b>7 gün</b><span>ortanca: göz için tek teste değil son yedi günün ortasına bakılır</span></div>
+    </div>
+    <div class="stack">
+      <span class="eyebrow">Bilime dayanır</span>
+      <h2>Ölçümlerin ve pratiklerin dayandığı çalışmalar yazar</h2>
+      <p class="lead">Nefona'daki ölçümler ve ana pratikler hakemli çalışmalara dayanır; kanıtın türü (meta-analiz, randomize çalışma, gözlemsel) ve sınırı da yanında durur. Bir çalışma "şu koşulda şu görüldü" der; Nefona da öyle yazar, fazlasını söylemez.</p>
+      <div class="hero-cta"><a class="btn btn-secondary" href="/bilim.html">Bilim ve kaynaklar</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="deneme">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <div class="stack" style="gap:10px">
+        <span class="eyebrow">Yakında App Store'da</span>
+        <h2>7 gün ücretsiz. Her şey açık.</h2>
+        <p class="lead">Kurulumda plan seçilir: haftalık, aylık ya da yıllık; fiyat ve deneme koşulu satın alma ekranında yazar. İptal etmezsen 7. günde plan başlar; deneme sırasında iptal edersen ücret alınmaz. 18 yaş ve üstü içindir. iPhone'da çalışır. Kamera ölçümleri (mesafe, kırpma, bakış) Face ID'li modellerde yapılır; öteki modellerde testler ve pratikler kamerasız çalışır.</p>
+      </div>
+      <div class="btns">
+        <a class="btn btn-primary" href="/nasil-calisir.html">Nasıl çalışır</a>
+        <a class="btn btn-secondary" href="/destek.html">Sorular ve destek</a>
+      </div>
+    </div>
   </div>
 </section>
