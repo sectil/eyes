@@ -22,3 +22,12 @@ Sonraki aşamaya (metin + ses + tasarım iş akışı) bu dosya olduğu gibi ver
   çekim (generations_count) ölçülüp en iyisi seçilir. v3 yön etiketi kullanılmaz (etiket okundu).
 - Hoca sesi: **Neslihan, Hakan + yeni aday**. ElevenLabs ses tasarımıyla (creative_design_voice) derslere özel bir
   "hoca sesi" adayı; pilotta üçü kör karşılaştırılır, sahibi dinleyip seçer.
+
+## Sahibin 2026-09-29 akşam mesajı (kelimesi kelimesine)
+6. "abi profesyenel bir yoga modlü olacak planaımız belliydi tam bir istiyorum 10 ders ve her ders 30 dakiakdan
+   planlanmıştı bu şekilde demi... ilk etapta 3 -5-15 dakikda gibi bölümler olacak... yol da modl entegre olacak
+   gnlere göre yga müdlleri yoolarda yer alacak... plan daha önceden bu lekidleyid planı bul daha önceki"
+   → Okunuşu: tam, profesyonel yoga modülü; 10 ders, her biri 30 dk olarak tasarlanır; ilk yayında 3, 5 ve 15 dk
+     sürümler; modül yola entegre olur, günlere göre yolda yer alır. Not: PLAN.v2'nin alt sınırı 5 dk (3 dk yok);
+     yol tasarımındaki iki belge yoganın yoldaki yerini farklı yazıyor (docs/yol-haritasi/tasarim/YOL.ilerleme.md
+     §5.13 ve YOL.moduller.md §4.6) — birleşik planda tek karara bağlanacak.
