@@ -33,7 +33,7 @@ describe('sürüm notları', () => {
     expect([...items29(), ...items292()].join(' ')).not.toMatch(/en az 7 testle/)
     const nef = items292().find((x) => x.startsWith('Nef artık'))
     expect(nef).toMatch(/günlük test önermez/)
-    const fix = RELEASES.find((r) => r.id === '2026-09-29-2').items.find((i) => i.kind === 'fix')
+    const fix = RELEASES.find((r) => r.id === '2026-09-29-2').items.find((i) => i.kind === 'fix' && i.text.includes('Son 7 gün'))
     expect(fix.text).toContain('"Son 3 test"')
     // her gün test isteyen cümle yok
     expect([...items29(), ...items292()].join(' ')).not.toMatch(/her gün (E )?test|günlük E testi/i)
@@ -51,6 +51,15 @@ describe('sürüm notları', () => {
       expect(items29().some((t) => t.startsWith(start)), start).toBe(false)
     }
     expect(items292()[0]).toBe("Yeni kurulumda önce ölçüm: uygulamayı ilk kez açan kişi giriş ekranından sonra doğrudan İlk Bakış'a geçer, kamera 20 saniyede kaç kez göz kırptığını sayar. Hesap, güvenlik bilgisi ve sorular sonuçtan sonra gelir. Kurulumu bitirmiş olan için hiçbir şey değişmez.")
+  })
+  // Bug 32: hesap yalnız izinle profili (ad, doğum tarihi, şehir, gözlük) eşitler; ölçümler telefonda kalır
+  it('Bug 32: hesap ekranı ve Profilim satırı eşitlenmeyen ilerlemeyi vaat etmez', () => {
+    const acc = readFileSync(new URL('../screens/AccountStart.jsx', import.meta.url), 'utf8')
+    const home = readFileSync(new URL('../screens/ProfileHome.jsx', import.meta.url), 'utf8')
+    expect(acc).toContain("export const ACCOUNT_KEEPS = 'İzin verirsen profilin hesabına kaydedilir; ölçümlerin yalnız telefonunda kalır.'")
+    expect(home).toContain('İzin verirsen profilin hesabına kaydedilir')
+    for (const src of [acc, home]) expect(src).not.toMatch(/ilerlemen[^\n]*yeni telefonda|yeni telefonda[^\n]*ilerlemen/)
+    expect(items292().find((t) => t.startsWith('Hesap ekranı ve Profilim'))).toMatch(/izin verirsen profilin .* hesabına kaydedilir; ölçümlerin yalnız telefonunda kalır/)
   })
   it('29 Eylül: her cümle doğru ve yalın; aynı cümle parçasında iki "ve" yok', () => {
     for (const t of [...items29(), ...items292()]) {

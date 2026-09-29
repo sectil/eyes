@@ -787,10 +787,17 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   Bedel: Build 58'i atlayıp doğrudan Build 59'u kuran kişi bu beş maddeyi bir kez daha görür.
 
 ## Bug 32: Hesap ekranı "Hesabınla ilerlemen yeni telefonda da seninle kalır" diyor; ilerleme eşitlenmiyor (2026-09-29, (b) tarayıcı denetimi)
-## Durum: AÇIK — sahibinin kararı bekleniyor (onaylı ekran metni)
+## Durum: DÜZELTİLDİ (metin + test; sahibinin onayı "cümleyi düzelt"); cihazda görülecek
 - `app/src/screens/AccountStart.jsx` satır 111. Hesap yalnız `profiles` tablosunu eşitler: ad, doğum tarihi, şehir, gözlük
   (`lib/account.js` pullProfile/pushProfile). Ölçümler, pratikler, iris haritası ve İlk Bakış sonucu telefonda kalır;
   yeni telefonda gelmez. Cümle 27 Eylül'deki onaylı ekrandan; (b) ile gelmedi, ama (b)'den sonra İlk Bakış sonucunun
   hemen ardından okunuyor ve sonucun saklandığı sanılabilir.
 - Öneri (sahibine): cümleyi koda uydurmak (ör. "Hesabınla adın ve gözlük bilgin yeni telefonda da seninle kalır.")
   ya da ilerlemeyi gerçekten eşitlemek (ayrı iş: veri modeli, gizlilik metni, sağlık verisi rızası).
+- Düzeltme: hesap ekranı "İzin verirsen profilin hesabına kaydedilir; ölçümlerin yalnız telefonunda kalır."
+  (`AccountStart.jsx` ACCOUNT_KEEPS); Profilim → hesap satırı "İzin verirsen profilin hesabına kaydedilir" (aynı yanlış
+  vaat orada da vardı: "Yeni telefonda da ilerlemen seninle kalsın"). Sahibine önce "Adın ve gözlük bilgin hesabında
+  saklanır" önerilmişti; o da yanlıştı: profil yalnız "Profilini hesabına kaydet" izniyle gider (App.jsx syncUp,
+  consent profileSync) ve doğum tarihi ile şehri de içerir. Kural: ekran cümlesi önerilmeden önce koşuluyla birlikte
+  koddan doğrulanır. Eski sürüm notu ("profilin yeni telefonda da seninle") geçmiş kaydı olarak kaldı. Test:
+  releases.test.js "Bug 32". Sürüm notu: '2026-09-29-2' fix maddesi.
