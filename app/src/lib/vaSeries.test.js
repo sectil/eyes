@@ -12,6 +12,12 @@ describe('pickSeries', () => {
   it('eski kullanıcı (yalnız iki göz serisi) aynı seriyi görür', () => {
     expect(pickSeries([va('OU', 3), va('OU', 2)], NOW).eye).toBe('OU')
   })
+  it('yalnız haftalık test (karar 2026-09-29): üç göz eşit ölçülür, sağ göz öne çıkar; trendi haftalık yolda', () => {
+    const tests = [28, 21, 14, 7, 0].flatMap((n) => ['R', 'L', 'OU'].map((eye) => va(eye, n, 0.1, 'va-weekly')))
+    const p = pickSeries(tests, NOW)
+    expect(p.eye).toBe('R')
+    expect(p.trend).toMatchObject({ phase: 'tracking', baselineMode: 'weekly', baselineTests: 3 })
+  })
   it('günlük test yalnız R/L: son 14 günde çok ölçülen öne çıkar, eşitse sağ', () => {
     const tests = [va('OU', 30, 0.1, 'va-weekly'), va('R', 3), va('L', 3), va('R', 2), va('L', 2)]
     expect(pickSeries(tests, NOW).eye).toBe('R')

@@ -2,7 +2,7 @@
 // S10). Saf yardımcılar: kayıtlar App'in tests dizisinden ve profilden okunur, yazma yalnız store.addTest ile olur
 // (lib/dataHub.js ilkesi: ayrı depo yok). Kullanan: modules/weekly/view.jsx, modules/daily/view.jsx.
 import { readingV2 } from './reading.js'
-import { skipEyesToday, runDayOf, weeklyStatus } from './today.js'
+import { skipEyesToday, runDayOf } from './today.js'
 import { dayKey } from './calendar.js'
 import { normalizeProfile, profileFromScreening } from './profile.js'
 
@@ -45,12 +45,13 @@ export const profileOf = (settings = {}) => normalizeProfile(settings?.profile ?
 //   lastCorrection: son E testindeki seçim (eski davranış) · defaultCorrection: ön seçim ya da null
 //   correctionSource: ön seçimin kaynağı ("geçen seferki" etiketi yalnız 'acuity' / 'reading' için doğru)
 //     Yarım günde (skipEyes dolu) gözlük satırı kilitlidir: ön seçim bu koşuda kaydedilen gözün seçimi; arada yapılan
-//     başka bir test (ör. günlük E testi) onu değiştirmez. Diğer günlerde S10 önceliği (defaultCorrection).
+//     başka bir test (ör. kısa E testi) onu değiştirmez. Diğer günlerde S10 önceliği (defaultCorrection).
 //   newBaseline: yarım günde biten gözlerden biri "Evet, yenilendi" ile kaydedildiyse true. Kalan gözler de yeni
 //     gözlükle ölçülür; onların serisi de yeniden başlamalı (gözlük satırı 2./3. gözde kilitli, soru yeniden sorulmaz).
-//   todayHolds: yarım kalırsa kalan gözler Bugün kartında görünecek mi (E10 "Kalanlar Bugün'de bekler."). Haftalık test
-//     bugün yoldayken günlük test Bugün'de gösterilmez (modules/daily/manifest.js). Gece yarısı geçtiyse ekran bunu
-//     ayrıca denetler (koşu günü bitti: kalanlar beklemez, test ertesi gün baştan açılır).
+//   todayHolds: yarım kalırsa kalan gözler Bugün kartında görünecek mi (E10 "Kalanlar Bugün'de bekler."). Yalnız
+//     haftalık test: kısa E testi 2026-09-29'dan beri Bugün'ün yolunda yok (modules/daily/manifest.js), kalan gözü
+//     yalnız Ana sayfa → Ölçüm satırı söyler. Gece yarısı geçtiyse ekran bunu ayrıca denetler (koşu günü bitti:
+//     kalanlar beklemez, test ertesi gün baştan açılır).
 export function acuityStart({ plan = 'daily', tests = [], settings = {}, now = new Date() } = {}) {
   const type = plan === 'weekly' ? 'va-weekly' : 'va-daily'
   const runDay = dayKey(now)
@@ -66,7 +67,7 @@ export function acuityStart({ plan = 'daily', tests = [], settings = {}, now = n
     defaultCorrection: c.value,
     correctionSource: c.source,
     newBaseline: saved.some((t) => t.newBaseline === true),
-    todayHolds: plan === 'weekly' || weeklyStatus(tests, now).state === 'idle',
+    todayHolds: plan === 'weekly',
     runDay,
   }
 }

@@ -167,6 +167,11 @@ export function eyeCard(tests = [], now = new Date()) {
     trend: trend.trend,
     baseline: trend.baseline,
     current7: trend.current7,
+    // Başlangıçla karşılaştırılan değer ve penceresi (trend.js): son 7 günde test yoksa son 3 testin ortancası
+    current: trend.current,
+    currentWindow: trend.currentWindow,
+    sparse: trend.sparse,
+    baselineMode: trend.baselineMode ?? null,
     delta: trend.delta,
     last: finite(t.at(-1)?.logMAR),
     series: trend.series,

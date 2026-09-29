@@ -14,7 +14,7 @@ import { bandCm, distanceHint } from './trialGate.js'
 // yalnız 36–44 cm'de (H3, S1). lib/trend.js methodEra bununla yeni seri başlatır.
 export const ALGORITHM = 'descent-zest-v4'
 
-// Günlük: iki tek göz; haftalık: sağ, sol, iki göz
+// Kısa test (plan 'daily'): iki tek göz; haftalık: sağ, sol, iki göz
 export const EYE_ORDER = { daily: ['R', 'L'], weekly: ['R', 'L', 'OU'] }
 export const eyesFor = (plan) => (plan === 'weekly' ? EYE_ORDER.weekly : EYE_ORDER.daily)
 
@@ -63,8 +63,8 @@ export function glassesOutcome({ choice, last = null }) {
 
 // E10 · çıkış sayfası. saved: bu koşuda kaydedilen gözler (onSaveEye), started: bu gözün denemesi başladı mı.
 //   direct: kaybolacak veri yoksa (biten göz yok, deneme başlamadı) sayfa açılmadan çıkılır.
-//   todayHolds: kalan gözler Bugün kartında görünür mü (lib/acuityStart.js). Haftalık test bugün yoldayken günlük
-//   test Bugün'de gösterilmez (modules/daily/manifest.js); o zaman "Kalanlar Bugün'de bekler." yazılmaz.
+//   todayHolds: kalan gözler Bugün kartında görünür mü (lib/acuityStart.js). Kısa E testi Bugün'ün yolunda yok
+//   (modules/daily/manifest.js, karar 2026-09-29); onda "Kalanlar Bugün'de bekler." yazılmaz.
 // "Çık" biten gözleri silmez; yalnız yarım kalan göz atılır.
 // Kaydedilen: "Sağ göz kaydedildi." · "Sol göz kaydedildi." · "Sağ ve sol göz kaydedildi." · "İki göz ölçümü
 // kaydedildi." · iki göz ölçümüyle birlikte tek göz de varsa "2 ölçüm kaydedildi."
@@ -209,7 +209,7 @@ export function rulerPos(v) {
   return 4 + ((x + 0.3) / 1.3) * 92
 }
 
-export const summaryTitle = (plan) => (plan === 'weekly' ? 'Haftalık test bitti' : 'Günlük test bitti')
+export const summaryTitle = (plan) => (plan === 'weekly' ? 'Haftalık test bitti' : 'Kısa test bitti')
 // E9 özetinde bu koşudan önce kaydedilmiş (atlanan) göz. "Bugün" denmez: gece yarısını geçen koşuda o göz koşu
 // gününde, yani dünkü tarihte kaydedilmiş olabilir.
 export const SKIPPED_TEXT = 'Daha önce kaydedildi'

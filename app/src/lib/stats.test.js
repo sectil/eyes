@@ -60,7 +60,7 @@ describe('activitiesFrom — testler', () => {
     const acts = activitiesFrom(tests, [])
     expect(acts).toHaveLength(1)
     const [a] = acts
-    expect(a).toMatchObject({ id: 't:a', kind: 'test', type: 'va-daily', title: 'Günlük görme testi', seconds: 180, estimated: true })
+    expect(a).toMatchObject({ id: 't:a', kind: 'test', type: 'va-daily', title: 'Kısa görme testi', seconds: 180, estimated: true })
     expect(plain(a.detail)).toBe('logMAR · Sağ 0,32 · Sol 0,28 · İki göz 0,20')
     expect(a.detail).toContain('İki\u00a0göz\u00a00,20')
     expect(a.results).toHaveLength(3)

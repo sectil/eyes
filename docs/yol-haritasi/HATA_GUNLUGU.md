@@ -688,3 +688,77 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
 - Ölçüm: 8 durum × 320/375/428 (taşma yok; saat durum değişince yerinden oynamıyor, yalnız kayma kadar); çalışan
   uygulamada sahte saatle 3 dk: kayma adımları ≤ 8, "Hareketi Azalt"ta 0. Testler: lib 7, bileşen 5, akış 2; 7 mutasyonun
   7'si yakalandı. Tam takım 1134/1134, derleme temiz.
+
+## Bug 24: Haftalık E testi takvim gününe değil saate göre geliyor; yol "tamam"dan "tamam değil"e dönebiliyor (2026-09-29, kod okuma + benzetim)
+## Durum: ÇÖZÜLDÜ (kod + test, 2026-09-29, (a) inceleme turunda); cihazda doğrulanacak. Okuma testi hâlâ saatle (ayrı)
+- Nerede: `app/src/lib/today.js` `isDue` (satır 33): son TAM haftalık kayıttan bu yana > 7×24 saat. Haftalık test
+  (`modules/weekly/manifest.js`) ve okuma testi (`modules/reading/manifest.js`) bunu kullanır.
+- Benzetim (çalışma notu `sim3.mjs`): son haftalık 21 Eylül 10.00; 28 Eylül 09.05'te durum 'idle', 11.00'de 'due'.
+  (a)'dan önce: 8. gün sabahı günlük test yoldaydı, öğleden sonra haftalık da geliyordu (aynı gün iki E testi).
+  (a)'dan sonra: 8. gün sabahı yolda E testi yok; kişi yolu bitirirse "Bugünkü yol tamam", önceki testin saati geçince
+  haftalık E testi yeni açık durak olarak çıkar ve yol yeniden "tamam değil" olur.
+- Önerilen düzeltme: gün farkı takvimle (`dayKey(now)` ile `runDayOf(lastComplete)` arasında ≥ 7 gün). Mevcut testler
+  (today.test.js 6 gün / 8 gün) geçerli kalır; 7. takvim gününün sabahı için yeni test eklenmeli.
+- (a)'dan sonra asıl etkisi (inceleme, 2026-09-29): günlük E testi yoldan çıkınca haftalık düzeni bu kural belirliyor.
+  Her gün aynı saatte açıp birkaç dakika sonra test eden kişiye haftalık test 8 günde bir geliyordu (benzetim, 84 gün,
+  TZ Europe/Istanbul: test günleri 1, 9, 17, …, 81; 12 haftada 11 test), 8. günün 23.30'unda "tamam" olmuş yola
+  yeni durak ekleniyordu. Sürüm notu "haftada bir" diyordu.
+- Düzeltme: `lib/today.js` `isDueWeekly` (takvim günü farkı, `calendarDaysBetween`, Date.UTC ile yaz saatinde de tam
+  gün); `weeklyStatus` bunu kullanır (Nef'in `weeklyDue`'su da). `isDue` okuma testi ve rozetler için saatle kaldı
+  (okuma testinde aynı kayma var; ayrı onay). Testler (today.test.js): 1. gün 09.05 → 8. gün 00.01 ve 09.00'da zamanı
+  gelmiş, 7. gün 23.30'da gelmemiş; 8. gün testten sonra akşam yol "tamam"; 12 haftada test günleri 1, 8, …, 78.
+  `isDue`'ya geri çevirme (mutasyon) iki testi düşürüyor.
+
+## Bug 27: Başlangıç dönemi metni son testin türüne göre seçiliyordu (2026-09-29, (a) incelemesi)
+## Durum: ÇÖZÜLDÜ (kod + test); cihazda doğrulanacak
+- `app/src/lib/trend.js` `baselineMode`: başlangıç hazır değilken son test haftalıksa 'weekly', değilse 'daily'.
+  Haftalık plandaki yeni kullanıcı (1. ve 8. gün haftalık) 10. gün bir isteğe bağlı kısa test yapınca Gelişim ve
+  Ana sayfa "Başlangıç değerin oluşturuluyor (8. günden itibaren en az 7 test, en erken 21. güne kadar)" diyordu
+  (neredeyse her gün test ister gibi; sahibinin kararıyla çelişki); İlk rapordaki haftalık plan cümlesi de kayboluyordu.
+  Sonraki haftalık testte metin geri dönüyordu.
+- Düzeltme: `pendingMode` hangi yolun önce biteceğine bakar (günlük yol 8. günden beri görülen test sıklığıyla,
+  haftalık yol haftada bir testle; eşitlikte haftalık). Yalnız metni seçer, kural değişmez. Üçüncü tur (ana oturum):
+  haftalık testi hiç olmayan seri de bu tahmine girer (önceden hep günlük metin alıyordu; seyrek kısa test eden yeni
+  kullanıcıya gün aşırı test ister gibi konuşuyordu); günlük yolu 7 teste varmış seri günlük kalır. Testler (trend.weekly.test.js): 10., 11., 14. gün haftalık metin; alışma haftasında kısa test;
+  her gün kısa test eden günlük metinde (sabah test öncesi de); haftalığı aksatan haftalık metinde; haftalık testi
+  olmayan seride her gün kısa test günlük, seyrek kısa test haftalık metin, 7 testi tamam olan günlük.
+
+## Bug 28: Haftalık başlangıç iyileşmede de donuyordu; sonraki gerçek kötüleşme kırmızıya çıkamıyordu (2026-09-29, (a) incelemesi)
+## Durum: ÇÖZÜLDÜ (kod + test + simülasyon)
+- `trend.js` `growingBaseline`: son 3 test aynı yönde (kötü ya da iyi) ≥ 0,10 ayrılınca büyüme kalıcı duruyordu.
+  Haftalık planda yalnız 1. test alışma; öğrenme 2.–4. teste taşarsa başlangıç öğrenme öncesi kötü düzeyde donuyor.
+  Belirlenimci örnek: 2.–4. test 0,2, 5.–9. test 0,1, 10. testten 0,3 (gerçek +0,2): başlangıç 0,2'de donuyor, 12.
+  testten sonra yalnız sarı, kırmızı hiç yok; eski kural 12. testte kırmızı. İnceleyicinin Monte Carlo'su (SD 0,065,
+  öğrenme 0,10): 3. kötü teste kadar uyarı %40,6 (yalnız kötüleşmede durunca %54,7).
+- Düzeltme: büyüme yalnız "son 3 testin her biri ≥ 0,10 kötü" olunca durur (uyarı başlangıca karışmasın, plan H5);
+  iyileşme başlangıca katılır. Simülasyon yeniden (10 000 kişi × 26 hafta): yanlış uyarı bir gözde %0,7–19,4 (önce
+  %0,7–18,4), kişi başına %2,5–48,1; yanlış kırmızı kişi başına en çok %4,9; +0,10 kötüleşmeyi yakalama %67–70 (önce
+  %66–67). Kanıt kartı sayıları güncellendi. Test: belirlenimci örnekte 12. testte kırmızı (eski kurala çevirince düşüyor).
+
+## Bug 29: Nef çevrimiçi cevabı denetimsizdi; "Haftalık test" düğmesi zamanı gelmemiş testi açıyordu (2026-09-29, (a) incelemesi)
+## Durum: ÇÖZÜLDÜ (kod + test); sunucu yayımı TestFlight'tan önce
+- `lib/coach.js` `getTodayInsight` sunucu cevabını olduğu gibi gösteriyordu; sunucu yeniden yayımlanana dek eski istem
+  "Günlük test" ve "Birkaç gün daha ölç" diyebilirdi. `CoachCard.jsx` "Günlük test" ve "Haftalık test"i zamanına
+  bakmadan haftalık teste bağlıyordu: hafta ortasında tam haftalık testi açıp haftalık düzeni kaydırabilirdi. İstem
+  "Haftalık test"i `daysSinceLastTest`e bağlıyordu (kısa ya da okuma testinden sonra zamanı gelmiş haftalık gizleniyordu).
+- Düzeltme: `coachCore.js` STALE_ADVICE (günlük test / her gün test-ölç / birkaç gün daha): istemci (cevap ve önbellek)
+  ve sunucu (`parseCoachReply`) atar, kural tabanlı öneri gösterilir. `weeklyDue` sinyali (weeklyStatus) sunucuya
+  gider, istem ona bakar. Kartta `actionTarget`: haftalık test yalnız zamanı gelince düğme, yoksa düz yazı. Testler:
+  coach.test.js.
+
+## Bug 25: Nef çevrimdışı önerisi kırmızı uyarıda "birkaç gün daha ölç" diyordu (2026-09-29, kod okuma)
+## Durum: ÇÖZÜLDÜ (kod + test); cihazda doğrulanacak
+- `app/src/lib/coach.js` `fallbackInsight`: sarı ve kırmızı aynı dal; eylem "Günlük test — birkaç gün daha ölç; sürerse
+  göz doktoruna görün". Gelişim (trend.js kırmızı: "Lütfen bir göz doktoruna başvur") ve SYSTEM_PROMPT ("Birkaç gün
+  daha ölç deme, bekletme") ile çelişiyordu; coach.test.js yalnız /göz doktoru/ arıyordu.
+- Düzeltme: kırmızıda yalnız "Lütfen bir göz doktoruna başvur"; sarıda "Işığı ve mesafeyi kontrol et; sürerse göz
+  doktoruna danış"; test yalnız haftalık testin zamanı gelince önerilir ("Haftalık test"). Testler: coach.test.js.
+
+## Bug 26: Gelişim'de "Son 7 gün" kutusu son testten bir hafta sonra "—" (2026-09-29, kod okuma)
+## Durum: ÇÖZÜLDÜ (kod + test); cihazda doğrulanacak
+- `app/src/screens/Progress.jsx` ve `components/ProgressOverview.jsx` kutuya `current7` yazıyordu; son 7 günde test
+  yoksa null. Uyarı ve metin ise `current` ile (son 3 testin ortancası) sürüyordu. Doktor raporu (exportData.js) bunu
+  zaten "Son 3 test (ortanca)" diye çözmüştü. Haftalık testte (2026-09-29'dan beri olağan plan) test bir gün
+  gecikince kutu boş kalıyordu.
+- Düzeltme: kutu `current` değerini ve `currentWindow`'a göre "Son 7 gün" / "Son 3 test" etiketini yazar.
+  Test: Progress.vision.test.jsx.

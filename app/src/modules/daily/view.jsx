@@ -32,7 +32,7 @@ const halfSub = (tests) => {
 
 export default {
   icon: ScanEye,
-  // Süre yazılmaz: cihazda ölçülmedi
-  sub: (ctx) => halfSub(ctx.tests) ?? '"E hangi yönde" · sağ + sol göz',
+  // Süre yazılmaz: cihazda ölçülmedi. İsteğe bağlı (karar 2026-09-29): yolda yok, her gün yapılması beklenmez.
+  sub: (ctx) => halfSub(ctx.tests) ?? 'İsteğe bağlı · sağ + sol göz',
   render: (ctx) => <DailyRun key="daily" ctx={ctx} />,
 }

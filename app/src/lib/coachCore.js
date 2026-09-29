@@ -21,6 +21,9 @@ const SCHEMA = {
   vaTrend: (v) => (['improving', 'stable', 'worsening'].includes(v) ? v : null),
   vaAlert: (v) => (['yellow', 'red'].includes(v) ? v : null),
   readingWpm: NUM(0, 1000),
+  // Haftalık E testinin zamanı geldi mi (istemcide lib/today.js weeklyStatus; çevrimdışı öneriyle aynı kural). Yalnız
+  // daysSinceLastTest'e bakmak isteğe bağlı kısa test ya da okuma testinden sonra zamanı gelmiş haftalık testi gizliyordu.
+  weeklyDue: (v) => (typeof v === 'boolean' ? v : null),
   daysSinceLastTest: NUM(0, 3650),
   daysSinceLastExercise: NUM(0, 3650),
   snakeBest: NUM(0, 100000),
@@ -66,15 +69,16 @@ Görevin: sana verilen SAYILARI (kullanıcının kendi verisi) okuyup bugün iç
 KESİN KURALLAR:
 - Yalnızca verilen sayıları kullan; yeni sayı, yüzde veya tarih UYDURMA. Sayı söylersen verilenle birebir aynı olsun; ondalıkları Türkçe virgülle yaz (0,18; 0.18 değil).
 - Tıbbi iddia yok: "iyileştirir", "tedavi eder", "gözlükten kurtarır", "numara düşürür", "göz kaslarını güçlendirir" gibi ifadeler YASAK. Teşhis koyma.
-- Görme keskinliği: vaDelta, son 7 günün ortancası ile başlangıç ortancası arasındaki farktır (logMAR; artı değer kötüleşme demektir). Görme için "ortalama" deme; "ortanca" ya da "son 7 günün ortadaki değeri" de.
-- vaPhase "tracking" değilse (alışma ya da başlangıç dönemi) görme değişimi hakkında HİÇBİR şey söyleme: "değişim var", "değişim yok", "doğrulanmış", iyileşme ya da kötüleşme deme. İstersen yalnızca "başlangıç değerin oluşuyor, düzenli test et" diyebilirsin.
-- vaAlert "red" ise görme için yalnızca şunu yaz: "Son bir haftadır ölçümlerin belirgin şekilde kötü; lütfen bir göz doktoruna başvur." "Birkaç gün daha ölç" deme, bekletme. Başka görme yorumu yapma.
-- vaAlert "yellow" ise görme için yalnızca şunu yaz: "Birkaç gün daha ölç; devam ederse bir göz doktoruna görün." Ortanca, fark ya da "farklı görünüyor" gibi başka görme yorumu ekleme.
+- Görme keskinliği: vaDelta, son ölçümlerin ortancası (son 7 günde en az 3 test varsa onların, yoksa son 3 testin) ile başlangıç ortancası arasındaki farktır (logMAR; artı değer kötüleşme demektir). Görme için "ortalama" deme; "ortanca" ya da "ortadaki değer" de. E testi haftada birdir; her gün test önerme.
+- vaPhase "tracking" değilse (alışma ya da başlangıç dönemi) görme değişimi hakkında HİÇBİR şey söyleme: "değişim var", "değişim yok", "doğrulanmış", iyileşme ya da kötüleşme deme. İstersen yalnızca "başlangıç değerin oluşuyor, haftalık testi sürdür" diyebilirsin.
+- vaAlert "red" ise görme için yalnızca şunu yaz: "Son ölçümlerin başlangıcına göre belirgin şekilde kötü; lütfen bir göz doktoruna başvur." "Birkaç gün daha ölç" deme, bekletme. Başka görme yorumu yapma.
+- vaAlert "yellow" ise görme için yalnızca şunu yaz: "Işığı ve mesafeyi kontrol et; sonraki testlerde de sürerse bir göz doktoruna danış." "Birkaç gün daha ölç" deme. Ortanca, fark ya da "farklı görünüyor" gibi başka görme yorumu ekleme.
 - vaPhase "tracking" ve vaAlert yoksa: vaTrend "improving" ise yalnızca "son ölçümlerin başlangıcından daha iyi; bir kısmı teste alışmaktan olabilir" de. Değilse, vaDelta kaç olursa olsun, yalnızca "doğrulanmış bir değişim yok" de; iyileşme ya da kötüleşme deme, vaDelta, vaCurrent7 ya da vaBaseline sayılarını yazma, "küçük", "yakın", "normal" ya da "aralıkta" gibi gerekçe ekleme (değişim yok denmesinin nedeni sayının küçüklüğü değil, kuralın doğrulamamasıdır). vaDelta'yı tek testlerin oynamasıyla (±0,2) karşılaştırma; ±0,2 yalnızca tek bir testin sonucu sorulursa geçerlidir: tek bir ölçüm yaklaşık ±0,2 logMAR oynayabilir; tek bir ölçümü değişim diye yorumlama.
 - Egzersizleri "konfor" ve "düzen" diliyle öner; kırpma egzersizi ekran yorgunluğunda kanıtlı, bakış hareketleri yalnızca rahatlama.
 - "modules" alanı varsa son 7 günün pratik özetleridir: track = Çemberler (best rekor, follow7 isabet %, arrive7 ortanca varış ms), snake = Yılan (best), breath = Nefes pratiği (minutes7, calmDelta7 = sakinlik değişimi 1–5). Puanları görmeyle ilişkilendirme; yalnızca düzen ve pratik dilinde yorumla.
 - screenHours (günlük ekran süresi aralığı), sleep7 (kişinin son 7 günlük uyku puanı, 0–10), nightPhone (gece uyanınca telefona bakma sıklığı), stress8 (PSS'nin 2 maddesi, 0–8) varsa kişinin kendi cevaplarıdır; tanı, risk ya da "kötü/iyi" yargısı yazma. Yalnızca öneriyi seçerken dikkate al (ör. uyku puanı düşükse daha kısa, dinlendirici bir öneri; stres yüksekse nefes).
-- Uygulamadaki eylemlerden birini öner: "Günlük test", "Hafif set", "Normal set", "Kırpma egzersizi", "Okuma testi", "Uzağa bakış molası", "Nefes pratiği", "Çemberler", "Yılan oyunu".
+- "Haftalık test"i yalnızca weeklyDue true ise öner (haftalık E testinin zamanı geldi); weeklyDue false ise E testi önerme. weeklyDue verilmemişse yalnızca daysSinceLastTest yoksa ya da 7 veya daha büyükse öner.
+- Uygulamadaki eylemlerden birini öner: "Haftalık test", "Hafif set", "Normal set", "Kırpma egzersizi", "Okuma testi", "Uzağa bakış molası", "Nefes pratiği", "Çemberler", "Yılan oyunu".
 ÇIKTI: yalnızca şu JSON, başka hiçbir şey yazma:
 {"insight":"en fazla 160 karakter","action":"en fazla 60 karakter, eylem adıyla başlar"}`
 
@@ -99,6 +103,11 @@ export function passesGuard(text) {
   return !FORBIDDEN.some((re) => re.test(text))
 }
 
+// Karar 2026-09-29: E testi haftada bir. Günlük test, "her gün test/ölç" ya da "birkaç gün daha ölç" diyen cevap
+// atılır (sunucu eski istemle çalışırken ya da model kuralı çiğnerse); istemci de aynı taramayı yapar (lib/coach.js).
+export const STALE_ADVICE = /günlük (e )?test|her gün (e )?(test|ölç)|birkaç gün daha/i
+export const isStaleAdvice = (...texts) => texts.some((t) => typeof t === 'string' && STALE_ADVICE.test(t))
+
 // Model cevabından JSON'u çıkarır ve doğrular. Geçersizse null.
 export function parseCoachReply(text) {
   if (typeof text !== 'string') return null
@@ -113,6 +122,6 @@ export function parseCoachReply(text) {
   const insight = typeof obj.insight === 'string' ? obj.insight.trim() : ''
   const action = typeof obj.action === 'string' ? obj.action.trim() : ''
   if (!insight || !action || insight.length > 240 || action.length > 90) return null
-  if (!passesGuard(insight) || !passesGuard(action)) return null
+  if (!passesGuard(insight) || !passesGuard(action) || isStaleAdvice(insight, action)) return null
   return { insight, action }
 }

@@ -130,7 +130,7 @@ Kaynak: kod taraması (2026-09-28). Üç ana bulgu ayrıca elle doğrulandı: `i
 
 | Modül | Kaydeder | Gelişim'de zamanla görünür | İris haritasına girer |
 |---|---|---|---|
-| Günlük / haftalık E testi | ✔ | ✔ (grafik, sparkline) | ✘ (Göz hücresi yalnız İlk Bakış'tan) |
+| Haftalık E testi (kısa E testi isteğe bağlı, 2026-09-29) | ✔ | ✔ (grafik, sparkline) | ✘ (Göz hücresi yalnız İlk Bakış'tan) |
 | Okuma testi | ✔ | ◐ liste var, grafik yok; Göz kutucuğuna girmiyor | ✘ |
 | Göz kırp | ◐ süre kaydetmiyor | ◐ yalnız gün listesi | ✘ |
 | Egzersiz setleri / yol | ✔ | ◐ yalnız gün listesi | ✘ |

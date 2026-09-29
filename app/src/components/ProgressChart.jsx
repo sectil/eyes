@@ -46,7 +46,8 @@ export default function ProgressChart({ series, baseline }) {
   return (
     <figure className="chart stack" style={{ margin: 0 }}>
       <div className="legend">
-        <span><i className="dot" /> Günlük ölçüm</span>
+        {/* Nokta = tek test (E testi haftada bir; kısa test isteğe bağlı): "günlük" denmez */}
+        <span><i className="dot" /> Ölçüm</span>
         <span><i className="bar" /> 7 günlük ortanca</span>
         {baseline != null && <span><i className="dash" /> Başlangıç</span>}
       </div>

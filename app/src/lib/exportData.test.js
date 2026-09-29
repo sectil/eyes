@@ -77,8 +77,22 @@ describe('Doktor raporu', () => {
     expect(m.eyes[0].trend).toMatchObject({ alert: 'red', sparse: true })
     const html = reportHtml(m)
     const rule = html.slice(html.indexOf('<h2>Uyarı kuralı</h2>'), html.indexOf('</section>', html.indexOf('<h2>Uyarı kuralı</h2>')))
-    expect(rule).toMatch(/Seyrek seride \(son 7 günde 3 test yoksa/)
+    expect(rule).toMatch(/Haftalık ölçümde ve seyrek seride \(son 7 günde 3 test yoksa\)/)
     expect(rule).toMatch(/son 3 teste uygulanır; ilki sonuncudan en az 6 gün önce/)
+    // Karar 2026-09-29: haftalık başlangıç kuralı (trend.js WEEKLY_MIN_BASELINE_TESTS) ve varsayım olduğu yazılı
+    expect(rule).toMatch(/Haftalık ölçümde başlangıç, 8\. günden sonraki ilk testlerin \(en az 3\) ortancasıdır: 3 haftalık test tamamlanınca, en erken 22\. günde hazır olur; sonra 7 teste kadar büyür/)
+    // İnceleme 2026-09-29: "değerlendirilen son 3 test başlangıca girmez" 22.–36. günlerde doğru değildi; en erken uyarı
+    // günü ve büyümenin yalnız kötüleşmede durduğu yazılır
+    expect(rule).toMatch(/haftada bir testte 22\.–36\. günler\) son 3 test başlangıç testlerini de içerir/)
+    expect(rule).toMatch(/iyileşmede sürer/)
+    expect(rule).toMatch(/ilk uyarı en erken 36\. günde/)
+    expect(rule).toMatch(/Her gün test edenlerde başlangıç 8\. günden itibaren en az 7 testin ortancası/)
+    // Rosser 2003 ETDRS çizelgesi içindir; telefon testine aynen taşınmaz
+    expect(rule).toMatch(/Eşikler \(ETDRS çizelgesiyle, sağlıklı gönüllülerde, okuma mesafesi değiştirilerek/)
+    expect(rule).toMatch(/Haftalık başlangıcın 3 testle kurulup 7 teste büyümesi varsayımdır/)
+    expect(rule).toContain('doi:10.1167/iovs.02-1100')
+    expect(html).not.toMatch(/birkaç gün daha ölç|günlük testte/)
+    expect(html).toMatch(/kısa testte \(eski adı günlük test\) 14–20/)
     expect(rule).toMatch(/aynı ölçüm yöntemi sürümü, aynı mesafe ölçümü \(kamerayla \/ kamerasız/)
     expect(rule).toMatch(/aynı gözlük\/lens koşulu/)
     expect(rule).not.toMatch(/Yalnız aynı gözlük\/lens koşulundaki testler karşılaştırılır/)
@@ -96,7 +110,8 @@ describe('Doktor raporu', () => {
   // İnceleme bulgusu R-N1: "Değişim" okuyanın gördüğü iki sayının farkı olmalı
   it('Değişim yazılan yuvarlanmış değerlerden: başlangıç 0,12 → son 7 gün 0,20 = "+0,08" (ham fark 0,089)', () => {
     const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
-    const tests = [...Array.from({ length: 21 }, (_, n) => ({ type: 'va-daily', eye: 'R', date: D(n), logMAR: 0.115 })), { type: 'va-daily', eye: 'R', date: D(30), logMAR: 0.204 }]
+    // son 7 günde 3 test (sık seri): karşılaştırılan değer son 7 günün ortancası
+    const tests = [...Array.from({ length: 21 }, (_, n) => ({ type: 'va-daily', eye: 'R', date: D(n), logMAR: 0.115 })), ...[28, 29, 30].map((n) => ({ type: 'va-daily', eye: 'R', date: D(n), logMAR: 0.204 }))]
     const m = reportModel({ tests, sessions: [], now: new Date(D(30)) })
     expect(m.eyes[0].trend).toMatchObject({ phase: 'tracking', baseline: 0.115, current7: 0.204, delta: 0.089, currentWindow: 'days7' })
     const kvOf = (html) => html.slice(html.indexOf('<div class="kv">'), html.indexOf('</div>', html.indexOf('<div class="kv">')))

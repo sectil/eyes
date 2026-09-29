@@ -29,7 +29,8 @@ export const isSameDay = (r, now = new Date()) => {
   return t != null && new Date(t).toDateString() === new Date(now).toDateString()
 }
 export const lastOfType = (records = [], type) => records.filter((r) => r.type === type).at(-1) ?? null
-// Son kayıt yoksa ya da 7 günden eskiyse zamanı gelmiştir (Home.jsx eski "due" kuralı).
+// Son kayıt yoksa ya da 7 günden eskiyse zamanı gelmiştir (Home.jsx eski "due" kuralı). Okuma testi ve rozetler bunu
+// kullanır (saatle, > 7×24 saat); haftalık E testi takvim günüyle: isDueWeekly (Bug 24).
 export const isDue = (rec, now = new Date()) => !rec || time(rec) == null || new Date(now).getTime() - time(rec) > WEEK_MS
 // Son N gün içindeki kayıtlar (now dahil geriye)
 export const withinDays = (records = [], now = new Date(), days = 7) => {
@@ -89,12 +90,26 @@ export function lastComplete(records = [], type) {
   return best?.last ?? null
 }
 
+// Takvim günü farkı: 'YYYY-MM-DD' (yerel gün anahtarı) → gün sayısı. Date.UTC ile: yaz saati geçişinde de tam gün.
+const dayNumber = (key) => {
+  const [y, m, d] = key.split('-').map(Number)
+  return Date.UTC(y, m - 1, d) / 86400000
+}
+export const calendarDaysBetween = (fromKey, toKey) => Math.round(dayNumber(toKey) - dayNumber(fromKey))
+// Haftalık E testinin zamanı takvim günüyle gelir (Bug 24): son TAM koşu gününden (runDay) bugüne en az 7 gün. Saatine
+// bakılmaz: 1. gün 09.05'te biten testten sonra 8. gün sabah 09.00'da da zamanı gelmiştir. Önceden (isDue, > 7×24 saat)
+// aynı saatte açan kişiye test 8 günde bir geliyor, 8. günün akşamı "tamam" olmuş yola yeni durak ekleniyordu.
+export const isDueWeekly = (rec, now = new Date()) => {
+  const k = rec ? runDayOf(rec) : null
+  return k == null || calendarDaysBetween(k, dayKey(now)) >= 7
+}
+
 // Haftalık testin bugünkü durumu (Bugün kartı E0 ve Ana sayfa satırı):
-//   'done' bugün üç göz de bitti · 'half' bugün başlandı, göz kaldı · 'due' zamanı geldi (son tam günden 7 gün
-//   geçti ya da hiç yok) · 'idle' bu hafta tamamlandı, bugün yolda yok.
+//   'done' bugün üç göz de bitti · 'half' bugün başlandı, göz kaldı · 'due' zamanı geldi (son tam koşu gününden 7
+//   takvim günü geçti ya da hiç yok) · 'idle' bu hafta tamamlandı, bugün yolda yok.
 export function weeklyStatus(records = [], now = new Date()) {
   const day = eyeDay(records, 'va-weekly', now)
-  const due = isDue(lastComplete(records, 'va-weekly'), now)
+  const due = isDueWeekly(lastComplete(records, 'va-weekly'), now)
   const state = day.complete ? 'done' : day.started ? 'half' : due ? 'due' : 'idle'
   const sub = state === 'half' ? remainingText(day.remaining) : state === 'due' ? WEEKLY_SUB : WEEKLY_DONE
   return { state, due, sub, warn: state === 'half', done: day.done, remaining: day.remaining }

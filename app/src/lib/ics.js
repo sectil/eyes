@@ -47,7 +47,8 @@ export function buildReminderIcs(schedule, now = new Date()) {
     'DURATION:PT15M',
     `RRULE:FREQ=WEEKLY;BYDAY=${ordered.join(',')}`,
     `SUMMARY:${escapeText('Göz testi ve egzersiz (Nefona)')}`,
-    `DESCRIPTION:${escapeText('Günlük kısa test: ~3 dakika. Uygulamayı açın.')}`,
+    // Kullanılmıyor (içe aktaran yok); yeniden kullanılırsa günlük test istemesin (karar 2026-09-29: E testi haftada bir)
+    `DESCRIPTION:${escapeText('E testi haftada bir. Uygulamayı açın.')}`,
     'BEGIN:VALARM',
     'ACTION:DISPLAY',
     `DESCRIPTION:${escapeText('Göz testi zamanı')}`,

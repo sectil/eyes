@@ -2,9 +2,10 @@
 // bu özet sayılar gider. Sunucu/model cevap vermezse kural tabanlı şablon metin gösterilir.
 import { pickSeries } from './vaSeries.js'
 import { activitiesFrom, countedActivities, summary, isExerciseSession } from './stats.js'
-import { sanitizeSignals } from './coachCore.js'
+import { sanitizeSignals, isStaleAdvice } from './coachCore.js'
 import { registry } from '../modules/registry.js'
 import { normalizeProfile } from './profile.js'
+import { weeklyStatus } from './today.js'
 
 export const COACH_URL = import.meta.env?.VITE_COACH_URL || 'https://eyetrail.vercel.app/api/coach'
 const CACHE_KEY = 'gozolcum:coach-today'
@@ -29,7 +30,7 @@ export function buildSignals(tests = [], sessions = [], now = new Date(), weekly
   const since7 = now.getTime() - 7 * DAY
   const recent = acts.filter((a) => new Date(a.date).getTime() >= since7)
   const s = summary(acts, now)
-  // Öne çıkan göz serisi (lib/vaSeries.js); günlük test Build 24'ten beri yalnız sağ/sol göz
+  // Öne çıkan göz serisi (lib/vaSeries.js): uyarısı en ciddi göz → son 14 günde en çok ölçülen → sağ, sol, iki göz
   const tr = pickSeries(tests, now.toISOString()).trend
   const lastOf = (arr) => (arr.length ? Math.max(...arr.map((x) => new Date(x.date).getTime())) : null)
   const lastTest = lastOf(tests)
@@ -51,6 +52,8 @@ export function buildSignals(tests = [], sessions = [], now = new Date(), weekly
     vaTrend: tr.trend ?? null,
     vaAlert: tr.alert ?? null,
     readingWpm: reading?.maxReadingSpeed ?? null,
+    // Haftalık E testinin zamanı (lib/today.js weeklyStatus): sistem istemi "Haftalık test"i buna göre önerir
+    weeklyDue: weeklyStatus(tests, now).due,
     daysSinceLastTest: lastTest == null ? null : Math.floor((now.getTime() - lastTest) / DAY),
     daysSinceLastExercise: lastEx == null ? null : Math.floor((now.getTime() - lastEx) / DAY),
     snakeBest: summary(all, now).bestSnake,
@@ -75,13 +78,26 @@ export function moduleSignals(sessions = [], now = new Date()) {
   return out
 }
 
-// Kural tabanlı yedek (internet/sunucu yoksa ya da koç kapalıysa). Model kurallarıyla aynı çizgide.
-export function fallbackInsight(sig) {
-  if (sig.vaAlert) {
-    return { insight: 'Son ölçümlerin başlangıcından belirgin farklı görünüyor.', action: 'Günlük test — birkaç gün daha ölç; sürerse göz doktoruna görün' }
+// Kural tabanlı yedek (internet/sunucu yoksa ya da koç kapalıysa). Model kurallarıyla (coachCore.js SYSTEM_PROMPT) ve
+// Gelişim metinleriyle (trend.js trendMessage) aynı çizgide. Karar 2026-09-29: E testi haftada bir; Nef günlük test
+// önermez. Kırmızıda yalnız göz doktoru (bekletme yok); sarıda "sonraki testlerde de sürerse".
+// opts.weeklyDue: haftalık E testinin zamanı geldi mi (lib/today.js weeklyStatus). Verilmezse sig.weeklyDue (buildSignals
+// yazar; sistem istemi de buna bakar), o da yoksa: hiç ölçüm yok ya da son 7 günde ölçüm yok ve son ölçüm 7+ gün önce.
+export function fallbackInsight(sig, opts = {}) {
+  if (sig.vaAlert === 'red') {
+    return { insight: 'Son ölçümlerin başlangıcına göre belirgin şekilde kötü.', action: 'Lütfen bir göz doktoruna başvur' }
   }
-  if (!sig.tests7 && (sig.daysSinceLastTest == null || sig.daysSinceLastTest >= 3)) {
-    return { insight: sig.daysSinceLastTest == null ? 'Henüz ölçüm yok; ilk ölçüm başlangıç noktan olacak.' : `${sig.daysSinceLastTest} gündür ölçüm yapmadın.`, action: 'Günlük test (~3 dk)' }
+  if (sig.vaAlert === 'yellow') {
+    return { insight: 'Son ölçümlerin başlangıcından biraz kötü.', action: 'Işığı ve mesafeyi kontrol et; sürerse göz doktoruna danış' }
+  }
+  const weeklyDue = typeof opts.weeklyDue === 'boolean'
+    ? opts.weeklyDue
+    : typeof sig.weeklyDue === 'boolean'
+      ? sig.weeklyDue
+      : sig.daysSinceLastTest == null || (!sig.tests7 && sig.daysSinceLastTest >= 7)
+  if (weeklyDue) {
+    // İlk test alışmadır (lib/trend.js WEEKLY_PLAN_NOTE); "ilk ölçüm başlangıç noktan olacak" demez
+    return { insight: sig.daysSinceLastTest == null ? 'Henüz ölçüm yok. İlk haftalık test alışma sayılır; başlangıç değerin sonraki 3 haftalık testle oluşur.' : 'Haftalık E testinin zamanı geldi.', action: 'Haftalık test' }
   }
   if ((sig.thisWeekDays ?? 0) < (sig.weeklyTarget ?? 3)) {
     return { insight: `Bu hafta ${sig.thisWeekDays ?? 0}/${sig.weeklyTarget ?? 3} gün çalıştın.`, action: 'Hafif set (1 dk)' }
@@ -106,13 +122,16 @@ function writeCache(v) {
 
 // Günde bir kez sunucudan (sinyaller değişince yeniden). Döner { insight, action, source: 'jev'|'rules' }
 // profile: yalnız coachLife onayı varsa verilir (CoachCard)
+// Sunucu cevabı (ve önbellekteki cevap) günlük test ya da "birkaç gün daha ölç" diyorsa kullanılmaz, kural tabanlı
+// öneri gösterilir (coachCore.js STALE_ADVICE): sunucu yeni istemle yeniden yayımlanana dek ve model kuralı
+// çiğnediğinde de Nef günlük test önermez (karar 2026-09-29).
 export async function getTodayInsight({ tests, sessions, weeklyTarget, profile = null, now = new Date(), fetchImpl = globalThis.fetch } = {}) {
   const signals = buildSignals(tests, sessions, now, weeklyTarget, profile)
   const sig = JSON.stringify(signals)
   const today = dayKey(now)
   const cached = readCache()
-  if (cached?.day === today && cached.sig === sig && cached.source === 'jev') return cached
-  const fallback = { ...fallbackInsight(signals), source: 'rules' }
+  if (cached?.day === today && cached.sig === sig && cached.source === 'jev' && !isStaleAdvice(cached.insight, cached.action)) return cached
+  const fallback = { ...fallbackInsight(signals, { weeklyDue: weeklyStatus(tests, now).due }), source: 'rules' }
   if (typeof fetchImpl !== 'function') return fallback
   const ctrl = typeof AbortController === 'function' ? new AbortController() : null
   const timer = ctrl ? setTimeout(() => ctrl.abort(), TIMEOUT_MS) : null
@@ -124,7 +143,7 @@ export async function getTodayInsight({ tests, sessions, weeklyTarget, profile =
       signal: ctrl?.signal,
     })
     const data = await r.json()
-    if (!data?.ok || !data.insight || !data.action) return fallback
+    if (!data?.ok || !data.insight || !data.action || isStaleAdvice(data.insight, data.action)) return fallback
     const out = { insight: data.insight, action: data.action, source: 'jev', day: today, sig }
     writeCache(out)
     return out

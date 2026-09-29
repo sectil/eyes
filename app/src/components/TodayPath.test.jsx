@@ -29,9 +29,13 @@ describe('Bugün kartı · haftalık E testi (E0)', () => {
     expect(stopSub(done, 'done')).toEqual({ text: WEEKLY_DONE, warn: false })
     expect(WEEKLY_DONE).toBe('✓ Bu hafta tamam')
   })
-  it('günlük E testinde de süre yazılmaz; süresi olan egzersiz durağında yazılır', () => {
+  it('haftalık testin olmadığı gün yolda E testi yok (karar 2026-09-29); süresi olan egzersiz durağında süre yazılır', () => {
     const p = path([...wk(['R', 'L', 'OU'], daysAgo(2)), { type: 'reading', date: daysAgo(3) }])
-    expect(stopSub(stopOf(p, 'daily'), 'later').text).toBe('sağ + sol göz')
+    expect(stopOf(p, 'daily')).toBeUndefined()
+    expect(p.stops.some((s) => s.glyph === 'E')).toBe(false)
+    const html = renderToStaticMarkup(h(TodayPath, { plan: p, eye: null, day: 1, onStart: () => {} }))
+    expect(html).not.toContain('class="e-glyph"')
+    expect(html).not.toMatch(/E testi/)
     expect(stopSub(stopOf(p, 'routine:uzak'), 'later').text).toMatch(/^\d+ dk$/)
   })
   it('çizim: yarım durak etiketinde uyarı sınıfı ve "!"; E simgesi <text> değil', () => {

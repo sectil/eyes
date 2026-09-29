@@ -95,7 +95,8 @@ describe('trendMessage', () => {
       'Başlangıç değerine göre doğrulanmış bir değişim yok. Değerlendirme son 7 günün ortancası ve son 3 testle yapılır; tek bir ölçüm yaklaşık ±0,2 logMAR oynayabilir.',
     )
     expect(trendMessage({ phase: 'tracking', alert: null, trend: 'stable', sparse: true })).toBe(
-      'Başlangıç değerine göre doğrulanmış bir değişim yok. Ölçümler seyrek olduğu için değerlendirme son 3 testle yapılır; tek bir ölçüm yaklaşık ±0,2 logMAR oynayabilir.',
+      // Haftalık plan (2026-09-29) olağan: "seyrek" denmez, kullanıcının kusuru gibi okunmasın
+      'Başlangıç değerine göre doğrulanmış bir değişim yok. Değerlendirme son 3 testle yapılır; tek bir ölçüm yaklaşık ±0,2 logMAR oynayabilir.',
     )
     for (const sparse of [false, true]) {
       const m = trendMessage({ phase: 'tracking', alert: null, trend: 'stable', sparse })
@@ -419,9 +420,14 @@ describe('seyrek seri: kırmızı için son 3 test (S9), uyarı zamanla kaybolma
     expect(m).toMatch(/son 3 testle/)
     expect(m).not.toMatch(/son 7 günün/)
     expect(m).toMatch(/±0,2/)
-    // günlük (seyrek olmayan) metinler aynı
+    // sık ölçülen (seyrek olmayan) seride kırmızı metni aynı; sarı iki yolda da "sonraki testlerde de sürerse"
+    // (2026-09-29: E testi haftada bir; hiçbir metin her gün test istemez)
     expect(trendMessage({ phase: 'tracking', alert: 'red', sparse: false })).toMatch(/Son bir haftadır/)
-    expect(trendMessage({ phase: 'tracking', alert: 'yellow', sparse: false })).toMatch(/birkaç gün daha test et/)
+    for (const sparse of [false, true]) {
+      const y = trendMessage({ phase: 'tracking', alert: 'yellow', sparse })
+      expect(y).toBe('Son ölçümlerin başlangıcından biraz kötü. Işığı ve mesafeyi kontrol et; sonraki testlerde de sürerse göz doktoruna danış.')
+      expect(y).not.toMatch(/birkaç gün/)
+    }
   })
 })
 

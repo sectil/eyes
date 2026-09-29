@@ -3,13 +3,18 @@ import { CalendarCheck, Clock, Flame } from 'lucide-react'
 import { firstReport, DOMAIN_LABEL } from '../lib/progress.js'
 import { metricStatus, effectStatus } from '../components/ProgressOverview.jsx'
 import { decimalTr } from '../lib/stats.js'
+import { WEEKLY_PLAN_NOTE } from '../lib/trend.js'
 import '../styles/progress2.css'
 
 // 5. gün "İlk rapor" (Gelişim 2.0; onaylı): deneme 7 gün, kullanıcı ödeme kararından önce görsün.
 // Yalnız kısa sürede gerçekten ölçülebilenler: düzen, oturum öncesi→sonrası etkiler, modül metrikleri.
-// Göz ve WHO-5 için dürüst durum: göz 8–21. günde başlangıç oluşturur; WHO-5 14 günde bir.
+// Göz ve WHO-5 için dürüst durum: E testi haftada bir (karar 2026-09-29); ilk test alışma, başlangıç sonraki 3 haftalık
+// testle (en erken 22. gün; lib/trend.js). Her gün test eden eski kullanıcıda 8–21. günlerde. WHO-5 14 günde bir.
 const num = (v, d = 1) => (Number.isFinite(v) ? decimalTr(v, d) : '–')
 const signed = (v, d = 1) => (Number.isFinite(v) ? `${v > 0 ? '+' : v < 0 ? '−' : ''}${decimalTr(Math.abs(v), d)}` : '–')
+
+// Haftalık planın takvim cümlesi: henüz test yoksa ya da haftalık yolda alışma/başlangıç dönemindeyse
+export const eyeWhen = (eye) => eye?.phase === 'empty' || ((eye?.phase === 'familiarization' || eye?.phase === 'baseline') && eye?.baselineMode === 'weekly')
 
 export default function FirstReport({ tests = [], sessions = [], start, onClose, onProgress }) {
   const r = useMemo(() => firstReport({ tests, sessions, start, now: new Date() }), [tests, sessions, start])
@@ -61,6 +66,8 @@ export default function FirstReport({ tests = [], sessions = [], start, onClose,
       <section className="card p2-card">
         <span className="eyebrow">Göz</span>
         <p className="p2-msg">{r.eye.message}</p>
+        {/* 5. günde göz henüz değerlendirilmez: ne zaman değerlendirileceği (haftalık plan) tek cümle */}
+        {eyeWhen(r.eye) && <p className="muted small">{WEEKLY_PLAN_NOTE}</p>}
       </section>
 
       <section className="card p2-card">

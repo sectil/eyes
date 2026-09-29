@@ -3,8 +3,10 @@ import { weeklyStatus, WEEKLY_DONE } from '../../lib/today.js'
 
 export default {
   id: 'weekly',
-  title: 'Haftalık tam test',
-  label: 'haftalık tam test',
+  // Ad yolda, ödeme ekranında ve sürüm notunda da "Haftalık E testi" (inceleme 2026-09-29: dört farklı ad vardı).
+  // Ses paketinde kayıtlı cümle değil.
+  title: 'Haftalık E testi',
+  label: 'haftalık E testi',
   ring: 'eye',
   kind: 'measure',
   // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
@@ -14,7 +16,7 @@ export default {
   home: { section: 'measure', order: 10 },
   // Bugün kartı (E0, karar S3): "tamam" = aynı gün sağ, sol ve iki göz kaydı. Yarım günde kart kalan gözleri söyler
   // ve zamanı gelmemiş olsa da yolda kalır (biten göz kaydedildi, kalanlar Bugün'de bekler); ertesi gün test
-  // baştan açılır. Zamanı: son TAM haftalık günden 7 gün geçtiyse (lib/today.js weeklyStatus).
+  // baştan açılır. Zamanı: son TAM haftalık koşu gününden 7 takvim günü geçtiyse (lib/today.js weeklyStatus, Bug 24).
   // minutes: yol bütçesi için tahmin (cihazda ölçülmedi; S2 ile test uzadı): kartta süre yazılmaz (hideMinutes).
   // Bitince kartta "✓ Bu hafta tamam" (doneSub).
   today({ tests, now }) {

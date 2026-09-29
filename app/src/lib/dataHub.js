@@ -149,7 +149,8 @@ export function verifiedChange(dom) {
   return ups.some(Boolean) ? 'up' : null
 }
 
-const TEST_LABEL = { 'va-daily': 'Günlük görme testi', 'va-weekly': 'Haftalık görme testi', reading: 'Okuma testi' }
+// 'va-daily': kısa test (eski adı günlük test; 2026-09-29'dan beri isteğe bağlı)
+const TEST_LABEL = { 'va-daily': 'Kısa görme testi', 'va-weekly': 'Haftalık görme testi', reading: 'Okuma testi' }
 
 // Harita: alan başına { days, frac, status, strip (28 gün, eskiden bugüne), sources } + pencere bilgisi
 export function growthMap({ tests = [], sessions = [], profile = null, habits = [], now = new Date(), window = 'recent' } = {}) {

@@ -94,13 +94,13 @@ describe('acuityStart: teste başlarken hazır gelenler', () => {
     expect(acuityStart({ plan: 'weekly', tests: [{ ...r, type: 'va-daily' }, today('R')], now: NOW }).newBaseline).toBe(false)
   })
 
-  it('günlük: haftalık test bugün yoldaysa kalanlar Bugün\'de görünmez (todayHolds false)', () => {
-    // hiç haftalık yok → haftalık zamanı geldi → günlük kart gizli
+  it('kısa test (plan daily) Bugün\'ün yolunda yok: kalanlar Bugün\'de beklemez (todayHolds false); haftalıkta bekler', () => {
+    // karar 2026-09-29: kısa E testi hiçbir gün yolda değil (haftalık zamanı gelmiş ya da bu hafta tamam)
     expect(acuityStart({ plan: 'daily', tests: [], now: NOW }).todayHolds).toBe(false)
-    // bu hafta haftalık tamam (dün üç göz) → günlük kart Bugün'de
     const yday = (eye) => ({ type: 'va-weekly', eye, logMAR: 0.1, date: new Date(NOW.getTime() - 26 * 3600000).toISOString() })
-    expect(acuityStart({ plan: 'daily', tests: ['R', 'L', 'OU'].map(yday), now: NOW }).todayHolds).toBe(true)
+    expect(acuityStart({ plan: 'daily', tests: ['R', 'L', 'OU'].map(yday), now: NOW }).todayHolds).toBe(false)
     expect(acuityStart({ plan: 'weekly', tests: [], now: NOW }).todayHolds).toBe(true)
+    expect(acuityStart({ plan: 'weekly', tests: ['R', 'L', 'OU'].map(yday), now: NOW }).todayHolds).toBe(true)
   })
 
   it('günlük plan yalnız günlük kayıtlarına bakar; haftalık kaydı günlükte göz atlatmaz', () => {

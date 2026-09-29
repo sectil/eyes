@@ -363,7 +363,7 @@ describe('E7 / E9 · sonuç satırları', () => {
   })
   it('özet başlığı ve mola önizlemesi', () => {
     expect(summaryTitle('weekly')).toBe('Haftalık test bitti')
-    expect(summaryTitle('daily')).toBe('Günlük test bitti')
+    expect(summaryTitle('daily')).toBe('Kısa test bitti') // kısa E testi (eski adı günlük test; karar 2026-09-29)
     // koşudan önce kaydedilmiş göz: "Bugün" denmez (gece yarısını geçen koşuda dün kaydedilmiş olabilir)
     expect(SKIPPED_TEXT).toBe('Daha önce kaydedildi')
     expect(restNext('R')).toEqual({ eye: 'R', text: 'Sağ göz · sol gözünü ört' })

@@ -3,6 +3,7 @@ import { Sparkles, ChevronRight, WifiOff, X } from 'lucide-react'
 import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
 import { getTodayInsight } from '../lib/coach.js'
 import { coachAllowed } from '../lib/consent.js'
+import { weeklyStatus } from '../lib/today.js'
 import CoachConsent from './CoachConsent.jsx'
 import '../styles/coach.css'
 
@@ -10,9 +11,11 @@ import '../styles/coach.css'
 // (Apple 5.1.2: üçüncü taraf yapay zekâyla veri paylaşımı açıkça söylenir ve izin alınır).
 // Sunucu/model yoksa kural tabanlı öneri gösterilir (source: 'rules').
 
-// Öneri metnindeki eylem → uygulama ekranı
+// Öneri metnindeki eylem → uygulama ekranı. Karar 2026-09-29: E testi haftada bir. Günlük test diyen cevap zaten
+// kullanılmaz (lib/coach.js, coachCore.js STALE_ADVICE); eşleme yalnız savunma için haftalık teste gider.
 const ACTIONS = [
-  [/^günlük test/i, 'daily'],
+  [/^haftalık test/i, 'weekly'],
+  [/^günlük test/i, 'weekly'],
   [/^hafif set/i, 'routine-lite'],
   [/^normal set/i, 'routine-normal'],
   [/^kırpma/i, 'blink'],
@@ -21,7 +24,15 @@ const ACTIONS = [
   [/^çember/i, 'track'],
   [/^yılan/i, 'snake'],
 ]
-const screenFor = (action) => ACTIONS.find(([re]) => re.test(action ?? ''))?.[1] ?? null
+export const screenFor = (action) => ACTIONS.find(([re]) => re.test(action ?? ''))?.[1] ?? null
+// Düğmenin açacağı ekran: haftalık test yalnız zamanı gelince açılır (lib/today.js weeklyStatus). Zamanı gelmemişken
+// (ör. çevrimiçi Nef hafta ortasında "Haftalık test" dediyse) eylem düğme olmaz, düz yazı kalır: tam haftalık testi
+// hafta ortasında açıp haftalık düzeni kaydırmasın.
+export function actionTarget(action, tests = [], now = new Date()) {
+  const target = screenFor(action)
+  if (target === 'weekly' && !weeklyStatus(tests, now).due) return null
+  return target
+}
 
 // consents: settings.consents (Nef yalnız kayıtlı açık rızayla konuşur) · onCoach({ on, life }): App rızayı kaydeder
 export default function CoachCard({ tests, sessions, profile = null, weeklyTarget, consents = null, onCoach, onStart }) {
@@ -67,7 +78,7 @@ export default function CoachCard({ tests, sessions, profile = null, weeklyTarge
 
   // Profil cevapları için ayrı soru burada sorulmaz: CoachConsent ikisini ayrı kutuda sordu; sonradan eklemek
   // Profilim → İzinlerim'den, bilgilendirme sayfasıyla (ConsentSheet 'coachLife').
-  const target = tip ? screenFor(tip.action) : null
+  const target = tip ? actionTarget(tip.action, tests) : null
   return (
     <section className="card coach-card" aria-live="polite">
       <div className="row between">

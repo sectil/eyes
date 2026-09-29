@@ -138,6 +138,31 @@ export const SOURCES = {
     journal: 'Transl Vis Sci Technol', cite: '8(4):27', doi: '10.1167/tvst.8.4.27', pmid: '31440424',
     design: 'validation', n: 'üç çalışma grubu',
   },
+  // Haftalık görme kuralı (lib/trend.js, 2026-09-29; PubMed MCP ile doğrulandı): değişim eşikleri ve alışma etkisi
+  rosser2003: {
+    authors: ['Rosser DA', 'Cousens SN', 'Murdoch IE', 'Fitzke FW'], year: 2003,
+    title: 'How sensitive to clinical change are ETDRS logMAR visual acuity measurements?',
+    titleTr: 'ETDRS logMAR görme keskinliği ölçümleri klinik değişime ne kadar duyarlı?',
+    journal: 'Invest Ophthalmol Vis Sci', cite: '44(8):3278-81', doi: '10.1167/iovs.02-1100', pmid: '12882770',
+    design: 'experiment', n: 'sağlıklı gönüllüler, mesafeyle benzetilen değişim',
+  },
+  lim2010: {
+    authors: ['Lim LA', 'Frost NA', 'Powell RJ', 'Hewson P'], year: 2010,
+    title: "Comparison of the ETDRS logMAR, 'compact reduced logMar' and Snellen charts in routine clinical practice.",
+    titleTr: "Rutin klinik uygulamada ETDRS logMAR, 'kompakt kısaltılmış logMAR' ve Snellen çizelgelerinin karşılaştırılması.",
+    journal: 'Eye (Lond)', cite: '24(4):673-7', doi: '10.1038/eye.2009.147', pmid: '19557025',
+    design: 'validation', n: '40 hastanın 40 gözü',
+  },
+  // Ev takibinde yanlış alarm (PubMed MCP ile doğrulandı 2026-09-29; e-yayın 2020): ForeseeHome (başka bir test:
+  // tercihli hiperkeskinlik perimetrisi), gerçek kullanım; bir merkezde 52 uyarının 47'si yanlış (yazarların oranı %93,2; 47/52 = %90,4, makale kendi içinde tutarsız, metinde sayılar). Faes 2021 bunu
+  // söylemez (orada art arda 3 "kırmızı" kuralında yanlış alarm %6,1, "düşük").
+  yu2021: {
+    authors: ['Yu HJ', 'Kiernan DF', 'Eichenbaum D', 'Sheth VS'], year: 2021,
+    title: 'Home Monitoring of Age-Related Macular Degeneration: Utility of the ForeseeHome Device for Detection of Neovascularization.',
+    titleTr: 'Yaşa bağlı makula dejenerasyonunda ev takibi: ForeseeHome cihazının yeni damarlanmayı saptamadaki yararı.',
+    journal: 'Ophthalmol Retina', cite: '5(4):348-356', doi: '10.1016/j.oret.2020.08.003', pmid: '32810682',
+    design: 'observational', n: '4 merkezde 775 göz (geriye dönük); uyarılar bir merkezde 136 gözde',
+  },
   paluch2022: {
     authors: ['Paluch AE', 'Bajpai S', 'Bassett DR', 'Carnethon MR'], year: 2022,
     title: 'Daily steps and all-cause mortality: a meta-analysis of 15 international cohorts.',

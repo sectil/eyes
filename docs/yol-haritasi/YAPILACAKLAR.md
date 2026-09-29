@@ -77,6 +77,89 @@ Tasarımın özü:
 Uygulama sırası (her biri ayrı onay, test, TestFlight): (a) E testi haftada bir + başlangıç kuralı, (b) ilk açılışta
 önce ölçüm, (c) ilerleme motoru + nefes ve göz merdivenleri, (d) sessiz ölçüm tercihi, (e) uyku (Sağlık) ve yürüyüş,
 (f) Nef haftalık/aylık, (g) meditasyon ve yoga modülleri.
+- [~] **(a) E testi haftada bir + başlangıç kuralı** (2026-09-29): kodda bitti, CİHAZDA DENENMEDİ, TestFlight'a girmedi.
+      Yapılan: kısa E testi (eski adı "Günlük test", `modules/daily`) Bugün'ün yolundan çıktı (`today()` → null); Ana
+      sayfa → Ölçüm'de "Kısa E testi · İsteğe bağlı · sağ + sol göz" olarak kalır. Haftalık E testi 1. gün yolda, sonra
+      son tam koşu gününden 7 takvim günü sonra, günün başından itibaren (Bug 24 düzeltildi: `lib/today.js`
+      `isDueWeekly`; önceden saatle sayıyordu, aynı saatte açana 8 günde bir geliyordu). Başlangıç kuralı `lib/trend.js`
+      WEEKLY_MIN_BASELINE_TESTS: ilk haftalık test alışma; başlangıç 8. günden sonraki ilk testlerin (en az 3)
+      ortancası, 3 haftalık test tamamlanınca (en erken 22. gün) hazır; 7 teste kadar büyür; son 3 testin her biri
+      ≥ 0,10 KÖTÜ olunca büyüme durur (iyileşmede sürer). Değişim kuralı (S9; sarı 0,10, kırmızı 0,20) aynı. Her gün
+      test edenin (8.–21. günlerde 7 test) başlangıcı değişmez (hangi yol önce hazırsa o). 3 → 7 test VARSAYIM (kendi
+      simülasyonumuz; kodda ve kanıt kartı sınırlarında yazar). Kaynaklar PubMed MCP ile doğrulandı: Rosser 2003 (PMID
+      12882770), Lim 2010 (PMID 19557025), Arditi 1993 (PMID 8425819), Faes 2021 (PMID 33414531), Yu 2021 (PMID
+      32810682). Ayrıca: Nef çevrimdışı önerisi ve sistem istemi (günlük test önermez; kırmızıda yalnız doktor, Bug 25),
+      Gelişim metinleri ve "Son 3 test" kutusu (Bug 26), doktor raporu kural metni, kanıt kartları, ödeme ekranı satırı,
+      sürüm notu (29 Eylül), site (modül açıklaması, ana sayfa, Nasıl çalışır, Destek).
+      İnceleme düzeltmeleri (2026-09-29, ikinci tur; davranış + metin): başlangıç dönemindeki metin artık hangi yol önce
+      biterse onu söyler (`trend.js` pendingMode; tek bir kısa test günlük kuralın "8. günden itibaren en az 7 test"
+      metnini getiriyordu, Bug 27); büyüme yalnız kötüleşmede durur (iyileşmede donunca öğrenme sonrası gerçek +0,20
+      kırmızıya çıkamıyordu, Bug 28; simülasyon yeniden koşuldu); seyrek seride karşılaştırılan değer hep son 3 testin
+      ortancası ("Son 3 test"; uyarı değişmez); Nef çevrimiçi cevabı "günlük test / her gün ölç / birkaç gün daha ölç"
+      derse atılır (istemcide ve sunucuda `coachCore.js` STALE_ADVICE), sunucuya `weeklyDue` sinyali gider, "Haftalık
+      test" düğmesi yalnız zamanı gelince haftalık testi açar (Bug 29); "N haftalık testle hesaplandı" → "N testle"
+      (kısa testler de girer); "ilk ölçüm başlangıç noktan olacak" (Nef, boş Gelişim) → "ilk test alışmadır"; kanıt
+      kartı: Rosser bulgusu ETDRS çizelgesiyle sınırlı, "tek teste dayalı ev takibinde yanlış alarm çok yüksek" yerine
+      doğrulanmış Yu 2021 (bir merkezde 52 uyarının 47'si), kişi başına yanlış uyarı (%2,5–48,1) ve yanlış kırmızı (en çok %4,9), en erken uyarı
+      36. gün; doktor raporu (22.–36. günlerde son 3 test başlangıç testlerini de içerir; Rosser = ETDRS, sağlıklı gönüllüler);
+      sürüm notu cümlesi ("İstersen … durur" düzeltildi; eski ölçümlere de uygulandığı yazıldı); modül adı "Haftalık E
+      testi" (dört ad birleşti); sarı öneri her yerde "Işığı ve mesafeyi kontrol et"; site: giriş cümlesi ("28 günde
+      değişimi sayıyla gösterir" → "28. günde haritanı başlangıçla yan yana gösterir"), Nef kartı ve yol ekran
+      görüntüleri çalışma ağacındaki kodla yeniden çekildi (Nef: "Haftalık E testinin zamanı geldi." / "Haftalık test";
+      yol: E testsiz bir gün), yanlış alarm cümlesi Yu 2021'e bağlandı; `lib/ics.js` (kullanılmıyor) günlük test demiyor.
+      Üçüncü tur (ana oturum, 2026-09-29; ikinci doğrulamada kalan 3 BLOCKER + 5 SHOULD): Rosser 2003 "klinikte"
+      değil, sağlıklı gönüllülerde mesafeyle taklit edilen değişim (PubMed ile doğrulandı; kanıt kartı, kaynak satırı,
+      doktor raporu); Yu 2021 yüzde yerine sayıyla (makalenin kendi yüzdeleri tutarsız); kanıt kartı dil bilgisi ("her
+      gün test etmeye göre", "yanlış kırmızı uyarı olasılığı", "testler arasındaki olağan oynamadan"); site bilim
+      istatistiği "7 gün ortanca" → "3 test art arda", E demosu "en erken 22. günde", Gelişim başlığı "testten
+      teste oynama"; Nef istemi vaDelta tanımı ("son 7 günde en az 3 test varsa") ve "E testi önerme"; Nef çevrimdışı
+      "sonraki 3 haftalık testle"; sürüm notu "yola eklenir" ve eski ad ("eski adıyla Günlük test"; kayıtlar
+      geçmişte ve CSV'de "Kısa görme testi"); haftalık testi olmayan seri de pendingMode'a girer (Bug 27 notu).
+      Arditi 1993 kaynak listesine eklenmedi: PubMed kaydında DOI yok, liste her kayıtta DOI istiyor (kanıt kartı
+      kaynak satırında PMID ile duruyor).
+      Testler 1392/1392 (101 dosya), uygulama ve site derlemesi tamam.
+      Açık: **TestFlight'tan önce sunucu (`api/coach.js`, Vercel) yeniden yayımlanmalı** (SYSTEM_PROMPT ve `weeklyDue`
+      değişti; o zamana dek eski istemle gelen "Günlük test" cevabı istemcide atılır, kart çevrimdışı öneri gösterir;
+      çevrimiçi Nef haftalık testi `daysSinceLastTest`e göre önerir). Okuma testi hâlâ saatle geliyor (`isDue`, Bug 24
+      notu; ayrı onay). Sitenin Gelişim ve Ana sayfa ekran görüntüleri eski örnek veriyle (günlük kısa testler) çekildi;
+      görünür bir günlük test cümlesi yok, istenirse yeniden çekilir.
+      Cihazda bak:
+      - Yeni kurulum, 1. gün: Bugün'de tek E durağı "Haftalık E testi" ("3 bölüm · sağ, sol, iki göz"); üç göz bitince
+        "✓ Bu hafta tamam". Ana sayfa → Ölçüm'de de adı "Haftalık E testi".
+      - 2.–7. gün: Bugün'de E testi yok. Ana sayfa → Ölçüm'de "Kısa E testi · İsteğe bağlı · sağ + sol göz" önce sağ, sonra
+        sol gözle çalışıyor; özet başlığı "Kısa test bitti". Yarıda çıkınca çıkış sayfası "Kalanlar Bugün'de bekler."
+        demiyor; Ölçüm satırı "Kalan: Sol göz" diyor.
+      - 7. gün gece yarısına kadar yolda E testi yok; 8. gün sabahtan (günün başından) "Haftalık E testi" yolda, önceki
+        testin saatini beklemiyor (Bug 24). 8. gün test bitince yol akşam da "tamam" kalıyor.
+      - Gelişim → Görme: 1. hafta "Alışma dönemi. İlk haftalık testin sonucu…"; 2. ve 3. testten sonra "Başlangıç değerin
+        3 haftalık testle oluşuyor; N test tamam."; 4. testte (22. gün) takip ve "Başlangıç değerin 3 testle hesaplandı;
+        …" notu. Başlık "Tek teste değil, art arda ölçümlere bakıyoruz."; grafik açıklaması "Ölçüm"; haftalık seride
+        kutu hep "Son 3 test" ve değer yazıyor ("—" değil; bir kötü testten sonra tek teste atlamıyor).
+      - 1. ve 8. gün haftalık test, 10. gün bir kısa test: Gelişim yine "Başlangıç değerin 3 haftalık testle oluşuyor;
+        1 test tamam." diyor ("8. günden itibaren en az 7 test" demiyor).
+      - Gelişim → Göz ayrıntısı: kural metni (sarı / kırmızı / gri bant) haftalık kuralla ("Başlangıç, ilk haftadan
+        sonraki ilk testlerin ortancasıdır: 3 haftalık test tamamlanınca…"); kaynaklarda Rosser 2003 ve Lim 2010;
+        "son 3 test" kutusu. Bilgi → kanıt kartı "Gelişim grafiği ve uyarılar": ETDRS cümlesi (sağlıklı gönüllüler),
+        "52 uyarının 47'si" (Yu 2021), kişi başına yanlış uyarı olasılığı ve en erken uyarı günü.
+      - Boş Ana sayfa "Yakın görme" kutusu ve Gelişim'deki "Haftalık testi başlat" haftalık testi açıyor; boş Gelişim
+        "İlk test alışmadır; sonraki 3 haftalık test…" diyor.
+      - Nef çevrimdışı: hiç ölçüm yokken "Henüz ölçüm yok. İlk haftalık test alışma sayılır; …"; son haftalık testten
+        7 gün sonra "Haftalık E testinin zamanı geldi." ve "Haftalık test" düğmesi haftalık testi açıyor; arada test
+        önerilmiyor. Nef çevrimiçi: "Günlük test" önerisi yok (sunucu yayımlanmadan da); hafta ortasında "Haftalık
+        test" derse düğme değil düz yazı.
+      - İlk rapor (5. gün) göz kartında "E testi haftada bir. İlk test alışmadır; …" cümlesi.
+      - "Doktoruma göster" PDF: uyarı kuralı haftalık başlangıçla (22.–36. gün notu, en erken uyarı 36. gün, Rosser =
+        ETDRS); sarıda "SARI: sonraki testlerle izlenmeli"; CSV'de eski günlük kayıtlar "Kısa görme testi".
+      - Ödeme ekranında 3. satır "Haftalık E testi: sağ, sol ve iki göz"; Yenilikler'de 29 Eylül maddeleri bir kez.
+      - Eski hesap (TestFlight verisi), yeni test yapmadan önce: 8.–21. günlerde en az 7 testi olan (her gün test
+        edilmiş) sağ/sol göz serisinde başlangıç ve uyarı güncelleme öncesiyle aynı. İki göz serisi (hep haftalık) ve
+        seyrek test edilmiş sağ/sol seriler güncellemeyle değerlendirmeye geçebilir, başlangıçları değişebilir ve yeni
+        test olmadan uyarı görünebilir (beklenen; sürüm notunda yazıyor). Öne çıkan seri en ciddi uyarılı göz
+        olduğundan Ana sayfa kutusu ve Nef iki göze ve uyarıya geçebilir. İlk yeni testten sonra yeni yöntemle yeni seri
+        başlar (alışma yeniden).
+      - Karışık seyrek eski hesap (ör. 8., 15., 22. gün haftalık, arada birkaç kısa test; 21. güne kadar 7 test yok):
+        güncellemeyle haftalık yola geçer; Gelişim notu "Başlangıç değerin N testle hesaplandı" (kısa testler de
+        sayılır), takip 22. günden beri.
 
 ## Fikir: Nefona alarmı (sahibinden, 2026-09-28) — plan henüz mükemmel değil
 Sahibinin fikri: ekranda Nefes/Dalga görürken "alarm kur"; uygulamanın kendi alarmı, Dalga sesleriyle; "10 uygulama

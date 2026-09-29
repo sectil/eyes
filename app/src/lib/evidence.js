@@ -10,7 +10,7 @@ export const EVIDENCE = [
     basis:
       'Akıllı telefon görme testleri klinik tablolarla karşılaştırılmış ve uyumlu bulunmuştur. Harf boyutu, ekranının kart ile kalibrasyonu sayesinde doğru ölçekte çizilir.',
     limits:
-      'Klinikte, gözetim altında tablet ve telefonla yapılan yakın görme testi tekrarlandığında, iki sonuç arasındaki fark çoğunlukla ±0,2 logMAR (2 satır) içinde kalıyor; evde bu fark daha büyük olabilir. Bu yüzden tek teste değil, son 7 günün ortancasına (sıralanınca ortadaki değer) bakıyoruz. Bu ortanca başlangıç ortancasından en az 0,10 ayrılır ve son 3 testin her biri de aynı yönde en az 0,10 farklıysa bunu değişim olarak işaretliyoruz. Bu test göz muayenesinin yerini tutmaz.',
+      'Klinikte, gözetim altında tablet ve telefonla yapılan yakın görme testi tekrarlandığında, iki sonuç arasındaki fark çoğunlukla ±0,2 logMAR (2 satır) içinde kalıyor; evde bu fark daha büyük olabilir. Bu yüzden tek teste bakmıyoruz: art arda son 3 testin her biri başlangıç değerinden (ortanca, yani sıralanınca ortadaki değer) aynı yönde en az 0,10 farklıysa bunu değişim olarak işaretliyoruz; sık test edenlerde son 7 günün ortancası da bu kadar ayrılmalı. Bu test göz muayenesinin yerini tutmaz.',
     sources: [
       'Joseph ve ark. 2023, Aphelion: tablet E testi, test-tekrar ±0,18 (PMID 38015309)',
       'Katibeh ve ark. 2022, Peek Near Vision (PMID 36583912)',
@@ -22,12 +22,30 @@ export const EVIDENCE = [
   {
     id: 'trend',
     title: 'Gelişim grafiği ve uyarılar',
-    claim: 'Gerçek değişimi günlük gürültüden ayırmaya çalışır; kalıcı kötüleşmede doktora yönlendirir.',
+    claim: 'Gerçek değişimi testler arasındaki olağan oynamadan ayırmaya çalışır; kalıcı kötüleşmede doktora yönlendirir.',
     level: 'Orta',
+    // Karar 2026-09-29: E testi ilk günden haftada bir (lib/trend.js WEEKLY_MIN_BASELINE_TESTS). 3 → 7 test: VARSAYIM,
+    // limits'te açıkça yazar. Kaynaklar PubMed MCP ile doğrulandı (2026-09-29).
+    // İnceleme 2026-09-29 (metin, 2 tur): Rosser 2003'ün "0,2 ayrılır, 0,1 ayrılmaz" bulgusu ETDRS çizelgesiyle, sağlıklı
+    // gönüllülerde, okuma mesafesi değiştirilerek taklit edilen değişim içindir (makalede klinik ortam yok); telefon testine aynen taşınmaz (acuity kartı telefon testinin ±0,2 oynadığını söyler). "Tek
+    // teste dayalı ev takibinde yanlış alarm çok yüksek" cümlesi Faes 2021'de yok (orada %6,1, "düşük"): %93 bulgusu
+    // Yu 2021 (ForeseeHome, gerçek kullanım, bir merkezde 52 uyarının 47'si), PubMed MCP ile doğrulandı. Metinde yüzde değil
+    // sayılar: makalede yazarların oranı %93,2, 47/52 ise %90,4 (makale kendi içinde tutarsız).
+    // Simülasyon sayıları (limits): kural_sim, 10 000 kişi × 26 hafta, haftalık test, test başına SD 0,05 / 0,065 /
+    // 0,08 / 0,10; büyüme yalnız kötüleşmede durur (2026-09-29 düzeltmesi). Yanlış uyarı (sarı ya da kırmızı) bir
+    // gözde %0,7 / %4,3 / %10,3 / %19,4, kişi başına (sağ, sol, iki göz) %2,5 / %11,7 / %28 / %48,1; yanlış kırmızı kişi
+    // başına %0 / %0,1 / %0,8 / %4,9.
     basis:
-      'İlk 7 gün alışma dönemi; başlangıç değeri 8. günden itibaren en az 7 testten (en erken 21. güne kadar). Uyarı için tek kötü sonuç yetmez; ardışık sonuçlar gerekir. Tek teste dayalı ev takip sistemlerinde yanlış alarm oranı çok yüksek bulunmuştur.',
-    limits: 'Kurallar yayımlanmış ev takip sistemlerinden uyarlanmıştır; bu uygulama için ayrıca doğrulanmamıştır.',
-    sources: ['Faes ve ark. 2021, akıllı telefonla ev takibinde yanlış alarmlar ve öngörü değeri (PMID 33414531)'],
+      "İlk test (ilk 7 gün) alışma sayılır; tekrarlı ölçümde ilk sonuç biraz farklı çıkabiliyor. Başlangıç değeri, ilk haftadan sonraki ilk testlerin ortancasıdır: 3 haftalık test tamamlanınca (en erken 22. gün) hazır olur ve yeni testlerle 7 teste kadar güçlenir. Her gün test edenlerde başlangıç, 8.–21. günlerdeki en az 7 testin ortancasıdır. Uyarı için tek kötü sonuç yetmez; art arda 3 sonuç gerekir. Sağlıklı gönüllülerle ETDRS çizelgesinde yapılan bir deneyde 0,20'lik değişim ölçüm oynamasından güvenle ayrılabildi, 0,10'luk ayrılamadı; telefon testinin oynaması daha büyük olduğu için tek teste değil art arda 3 teste bakılır. Başka bir ev takip cihazının gerçek kullanımında, bir merkezdeki 52 uyarının 47'si yanlış çıktı.",
+    limits:
+      'Kurallar yayımlanmış çalışmalardan ve ev takip sistemlerinden uyarlanmıştır; bu uygulama için ayrıca doğrulanmamıştır. Haftalık başlangıcın 3 testle kurulup 7 teste kadar büyümesi bir varsayımdır: kendi simülasyonumuzla seçildi, bir çalışmayla sınanmadı. Bu simülasyonda, gerçek değişim yokken 26 haftada en az bir yanlış uyarı olasılığı, test başına oynamaya göre bir gözde %0,7 ile %19,4 arasında çıktı; sağ, sol ve iki göz ayrı değerlendirildiği için bir kişide %2,5 ile %48,1 arasında. Yanlış kırmızı uyarı olasılığı bir kişide en çok %4,9 çıktı. Haftada bir testte ilk uyarı en erken 36. günde çıkabilir; 8.–21. günlerde başlayan bir değişim başlangıç değerine karışır, uyarı vermez. Haftada bir testle küçük (0,10) bir değişim, her gün test etmeye göre daha geç görülür.',
+    sources: [
+      'Faes ve ark. 2021, akıllı telefonla ev takibinde yanlış alarmlar ve öngörü değeri (PMID 33414531)',
+      'Yu ve ark. 2021, bir ev takip cihazının (ForeseeHome) gerçek kullanımı: bir merkezde 52 uyarının 47\'si yanlış (PMID 32810682)',
+      'Rosser ve ark. 2003, ETDRS çizelgesinin değişime duyarlılığı, sağlıklı gönüllülerde: 0,2 ayrılır, 0,1 ayrılmaz (PMID 12882770)',
+      'Arditi ve Cagenello 1993, harf çizelgesiyle görme keskinliği ölçümünün tekrarlanabilirliği (PMID 8425819)',
+      'Lim ve ark. 2010, üç çizelgede test–tekrar test oynaması ve küçük alışma etkisi (PMID 19557025)',
+    ],
   },
   {
     id: 'reading',

@@ -50,7 +50,7 @@ const tr = {
     trialTitle: (d) => `${d} gün ücretsiz, haritanın hepsi açık`,
     title: 'Haritanı doldurmaya devam et',
     purpose: 'Nefona gözünden başlar: gözünü, dikkatini, sakinliğini, bedenini ve kendine bakışını birlikte izler, değişimi gösterir, günlük alışkanlığa çevirir.',
-    features: [['Günlük yol ve hatırlatmalar:', 'göz, dikkat, nefes, hareket'], ['İris haritası:', '7 alanda değişim gerçek mi'], ['Günlük E testi', 've haftalık tam ölçüm']],
+    features: [['Günlük yol ve hatırlatmalar:', 'göz, dikkat, nefes, hareket'], ['İris haritası:', '7 alanda değişim gerçek mi'], ['Haftalık E testi:', 'sağ, sol ve iki göz']],
     trial: (remind, days) => [['Bugün', 'Her şey açılır'], [`${remind}. gün`, 'Bitmeden hatırlatırız'], [`${days}. gün`, 'İptal etmezsen plan başlar']],
   },
 }

@@ -75,7 +75,7 @@ const TAB_SCREENS = ['home', 'progress', 'calendar', 'info']
 // DOI 10.1097/OPX.0000000000001971), 5 dk'lık molalar göz yorgunluğunu azalttı (Galinsky 2000).
 const gatesOf = (s) => registry.forRoute(s)?.gates ?? {}
 const budgetKindOf = (s) => gatesOf(s).eyeBudget ?? null
-// Mola metninde cümle içinde geçer ("Devam: günlük test"): modülün label'ı.
+// Mola metninde cümle içinde geçer ("Devam: kısa E testi"): modülün label'ı.
 const activityLabel = (s) => registry.labelFor(s)
 // İris haritası: oturumun sayıldığı alan (Dikkat, Farkındalık ilk görevle dolar; lib/iris.js)
 // Oturum → alan: veri merkezi (lib/dataHub.js) tek kaynak

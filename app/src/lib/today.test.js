@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import { buildPath, todayPlan, jevLine, isDue, isSameDay, PATH, canOpen, eyeDay, lastComplete, weeklyStatus, skipEyesToday, runDayOf, WEEKLY_SUB, WEEKLY_DONE } from './today.js'
+import { buildPath, todayPlan, jevLine, isDue, isDueWeekly, isSameDay, PATH, canOpen, eyeDay, lastComplete, weeklyStatus, skipEyesToday, runDayOf, WEEKLY_SUB, WEEKLY_DONE } from './today.js'
 import { registry } from '../modules/registry.js'
+import { dayKey } from './calendar.js'
 
 const MIN = 60000
 const NOW = new Date('2026-09-25T10:00:00')
@@ -11,23 +12,24 @@ const keys = (p) => p.stops.map((s) => s.key)
 // Normal gün: haftalık test (üç göz) 2 gün, okuma 3 gün önce (yol planı §4, "Ali" kurgusal)
 const wk = (eyes, date) => eyes.map((eye) => ({ type: 'va-weekly', eye, date }))
 const NORMAL = [...wk(['R', 'L', 'OU'], daysAgo(2)), { type: 'reading', date: daysAgo(3) }]
-// Günlük test bugün iki gözüyle bitti
+// İsteğe bağlı kısa E testi (eski adı günlük test) bugün iki gözüyle yapıldı: yola durak eklemez
 const DAILY_DONE = ['R', 'L'].map((eye) => ({ type: 'va-daily', eye, date: TODAY }))
 // Tek Bakışta son 7 günde 3 gün yapıldı → bugün yolda yok (eski senaryolar değişmesin)
 const SPAN3 = [2, 3, 4].map((d) => ({ type: 'span', span: 8, left: 4, right: 4, durationMs: 100, accuracy: 0.8, seconds: 120, date: daysAgo(d) }))
 // Fark Ettin mi? de bu hafta 3 gün yapıldı → yolda yok
 const STREET3 = [2, 3, 4].map((d) => ({ type: 'street', noticed: 2, asked: 3, task: 1, level: 1, seconds: 60, date: daysAgo(d) }))
-const DAY = ['routine:isinma', 'daily', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'routine:kirpma', 'snake']
+// Karar 2026-09-29: E testi haftada bir; haftalık testin olmadığı günlerde yolda E testi yok
+const DAY = ['routine:isinma', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'routine:kirpma', 'snake']
 
 describe('buildPath: şablon', () => {
-  it('normal gün: egzersizler gövde, E testi 2. durak, Nefes iki bölüm arasında, Yılan sonda (16 dk)', () => {
+  it('normal gün (haftalık test bu hafta yapıldı): E testi yok; egzersizler gövde, Nefes iki bölüm arasında, Yılan sonda (13 dk)', () => {
     const p = path(NORMAL)
     expect(keys(p)).toEqual(DAY)
-    expect(p.stops.map((s) => s.block)).toEqual([1, 1, 1, 1, 1, 0, 2, 2, 2])
-    expect(p.minutesLeft).toBe(16)
+    expect(p.stops.map((s) => s.block)).toEqual([1, 1, 1, 1, 0, 2, 2, 2])
+    expect(p.minutesLeft).toBe(13)
     expect(p.blocks.map((b) => b.eyeMin)).toEqual([4, 4]) // bölüm payı ≤ bütçe − 1 dk (R2)
     expect(p.next.key).toBe('routine:isinma')
-    expect(p.stops.find((s) => s.key === 'daily').title).toBe('E testi')
+    expect(p.stops.some((s) => s.slot === 'test' || s.glyph === 'E')).toBe(false)
   })
 
   it('haftalık gün: Haftalık E testi + Okuma; 20 dk sınırı için Yılan düşer (R7); ölçümler yan yana değil (R1)', () => {
@@ -46,7 +48,7 @@ describe('buildPath: şablon', () => {
   it('Hızlı Bakış günü 2. bölüm yalnız o (R5); Yılan, Daire ve Göz kırpma o gün yok', () => {
     const ql = { type: 'quick-look', threshold: 200, accuracy: 70, seconds: 240, date: daysAgo(2) }
     const p = path(NORMAL, [ql])
-    expect(keys(p)).toEqual(['routine:isinma', 'daily', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'quick-look'])
+    expect(keys(p)).toEqual(['routine:isinma', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'quick-look'])
     const flashOff = path(NORMAL, [ql], { profile: { seizure: 'yes' } })
     expect(keys(flashOff)).not.toContain('quick-look')
   })
@@ -62,7 +64,7 @@ describe('buildPath: şablon', () => {
 
   it('Tek Bakışta haftada 3 gün: 2. bölümde 2 dk; o gün 2. bölüm payı için Yılan düşer', () => {
     const p = buildPath(registry.live, { tests: NORMAL, sessions: STREET3, now: NOW })
-    expect(keys(p)).toEqual(['routine:isinma', 'daily', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'routine:kirpma', 'tek-bakis'])
+    expect(keys(p)).toEqual(['routine:isinma', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'routine:kirpma', 'tek-bakis'])
     expect(p.blocks[1].eyeMin).toBe(4)
     expect(keys(path(NORMAL))).not.toContain('tek-bakis') // bu hafta 3 gün yapılmış
     const flashOff = buildPath(registry.live, { tests: NORMAL, sessions: STREET3, now: NOW, profile: { seizure: 'unsure' } })
@@ -71,7 +73,7 @@ describe('buildPath: şablon', () => {
 
   it('Fark Ettin mi? haftada 3 gün: Nefes\'in hemen ardından; 2. bölüm payı için Yılan düşer', () => {
     const p = buildPath(registry.live, { tests: NORMAL, sessions: SPAN3, now: NOW })
-    expect(keys(p)).toEqual(['routine:isinma', 'daily', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'fark-ettin', 'routine:daire', 'routine:kirpma'])
+    expect(keys(p)).toEqual(['routine:isinma', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'fark-ettin', 'routine:daire', 'routine:kirpma'])
     expect(p.blocks[1].eyeMin).toBe(4)
   })
 
@@ -98,7 +100,7 @@ describe('buildPath: tamamlama, sıradaki, kilit', () => {
     const p = path(NORMAL, s)
     expect(keys(p)).toEqual(DAY) // sıra değişmez
     expect(p.doneCount).toBe(2)
-    expect(p.next.key).toBe('daily') // sırayla değil dokunulan yapıldı; sıradaki E testi
+    expect(p.next.key).toBe('track') // sırayla değil dokunulan yapıldı; sıradaki ilk tamamlanmamış durak
     const eskiSet = path(NORMAL, [{ type: 'routine', setId: 'full', seconds: 176, date: TODAY }])
     expect(eskiSet.doneCount).toBe(0) // eski setler grup duraklarını tamamlamaz
   })
@@ -126,9 +128,9 @@ describe('buildPath: tamamlama, sıradaki, kilit', () => {
     expect(p.stops[0].lockLeftMs).toBe(2 * MIN)
   })
 
-  it('dünden 4 dk kaldıysa E testinden önce "Burada 5 dk mola var"', () => {
+  it('dünden 4 dk kaldıysa Isınma\'dan sonraki bütçeli duraktan önce "Burada 5 dk mola var"', () => {
     const p = path(NORMAL, [], { eye: { locked: false, due: null, used: 4 * MIN, budgetMs: 5 * MIN, leftMs: MIN } })
-    expect(p.forcedRestBefore).toBe('daily')
+    expect(p.forcedRestBefore).toBe('routine:uzak')
     expect(path(NORMAL, [], { eye: { locked: false, due: null, used: 0, budgetMs: 5 * MIN, leftMs: 5 * MIN } }).forcedRestBefore).toBeNull()
   })
 })
@@ -168,9 +170,11 @@ describe('jevLine', () => {
     const s = ['isinma', 'uzak', 'yakinuzak'].map((id) => ({ type: 'routine', setId: id, seconds: 40, date: TODAY }))
     const toRest = path([...NORMAL, ...DAILY_DONE], [...s, { type: 'game', game: 'track', seconds: 40, date: TODAY }])
     expect(jevLine(toRest, { day }).line).toBe('Sırada Nefes · 5 dk mola')
-    const toTest = path(NORMAL, s.slice(0, 1))
+    // Haftalık testin günü: Isınma'dan sonra sıradaki ölçüm (Haftalık E testi)
+    const toTest = path([], s.slice(0, 1))
+    expect(toTest.next.key).toBe('weekly')
     expect(['Odaklan', 'Odak sende']).toContain(jevLine(toTest, { day }).word)
-    expect(jevLine(path(NORMAL, s.slice(0, 1)), { day, gold: true }).word).not.toBe('Odaklan')
+    expect(jevLine(path([], s.slice(0, 1)), { day, gold: true }).word).not.toBe('Odaklan')
   })
   it('"Tam isabet" yolda hiç çıkmaz', () => {
     const p = path(NORMAL)
@@ -253,7 +257,7 @@ describe('haftalık E testi: "tamam" = aynı gün sağ, sol ve iki göz (karar S
     expect(weeklyStatus(tests, NOW)).toMatchObject({ state: 'due', due: true })
   })
 
-  it('bu hafta tamamlandıysa haftalık yolda yok, günlük test var; bugün yarım başlarsa "Kalan" kartı döner', () => {
+  it('bu hafta tamamlandıysa haftalık yolda yok, E testi de yok; bugün yarım başlarsa "Kalan" kartı döner', () => {
     expect(weeklyStatus(NORMAL, NOW)).toMatchObject({ state: 'idle', due: false, sub: WEEKLY_DONE })
     expect(keys(path(NORMAL))).toEqual(DAY)
     // zamanı gelmemişken de başlanan haftalık Bugün'de bekler (S4: "Kalanlar Bugün'de bekler"); ölçüm adımı onun
@@ -279,10 +283,10 @@ describe('haftalık E testi: "tamam" = aynı gün sağ, sol ve iki göz (karar S
     expect(weeklyStatus(full, after)).toMatchObject({ state: 'idle', due: false, warn: false })
     expect(lastComplete(full, 'va-weekly')).toBe(full[2])
     expect(eyeDay(full, 'va-weekly', new Date('2026-09-24T23:59:59'))).toMatchObject({ complete: true })
-    // hafta tamam: 25'inin yolunda haftalık yok, günlük test var
+    // hafta tamam: 25'inin yolunda haftalık yok, kısa E testi de yok (karar 2026-09-29)
     const p = buildPath(registry.live, { tests: [...NORMAL.slice(3), ...full], sessions: [...SPAN3, ...STREET3], now: after })
     expect(keys(p)).not.toContain('weekly')
-    expect(keys(p)).toContain('daily')
+    expect(keys(p)).not.toContain('daily')
     // aynı koşu 00:01'de yarıda kaldı (sağ 23:59, sol 00:01): 25'inde test baştan açılır, "Kalan" yok, göz atlanmaz
     const half = full.slice(0, 2)
     expect(weeklyStatus(half, after)).toMatchObject({ state: 'due', warn: false, sub: WEEKLY_SUB })
@@ -297,6 +301,36 @@ describe('haftalık E testi: "tamam" = aynı gün sağ, sol ve iki göz (karar S
     expect(runDayOf({ date: 'bozuk' })).toBeNull()
   })
 
+  // Bug 24: zaman saatle (> 7×24 sa) değil takvim günüyle. Aynı saatte açıp birkaç dakika sonra test eden kişiye test
+  // 8 günde bir geliyor, 8. günün akşamı "tamam" olmuş yola yeni durak ekleniyordu.
+  it('Bug 24: 1. gün 09.05\'te biten testten sonra 8. gün 09.00\'da zamanı gelmiş; 7. gün 23.30\'da gelmemiş', () => {
+    const at = (d, h, m = 0) => new Date(2026, 9, 1 + d, h, m)
+    const run = (d) => ['R', 'L', 'OU'].map((eye, i) => ({ type: 'va-weekly', eye, date: at(d, 9, 3 + i).toISOString(), runDay: dayKey(at(d, 9)) }))
+    const tests = run(0)
+    expect(weeklyStatus(tests, at(6, 23, 30))).toMatchObject({ state: 'idle', due: false })
+    expect(weeklyStatus(tests, at(7, 0, 1))).toMatchObject({ state: 'due', due: true })
+    expect(weeklyStatus(tests, at(7, 9, 0))).toMatchObject({ state: 'due', due: true })
+    expect(isDueWeekly(tests[2], at(7, 9, 0))).toBe(true)
+    // yol: 8. gün sabahı E durağı var; 8. gün testten sonra "tamam" kalır, akşam yeni durak gelmez
+    const pathOn = (tsts, now) => buildPath(registry.live, { tests: tsts, sessions: [], now })
+    expect(keys(pathOn(tests, at(7, 9, 0)))).toContain('weekly')
+    const both = [...tests, ...run(7)]
+    expect(pathOn(both, at(7, 23, 30)).stops.find((s) => s.key === 'weekly')).toMatchObject({ done: true })
+    expect(weeklyStatus(both, at(14, 8, 0)).due).toBe(true) // 15. gün sabahı: bir hafta sonra yeniden
+    expect(weeklyStatus(both, at(13, 22, 0)).due).toBe(false)
+  })
+  it('Bug 24: 12 hafta, her gün 09.00\'da açıp 09.05\'te test eden kişi haftalık testi 7 günde bir yapar', () => {
+    const at = (d, h, m = 0) => new Date(2026, 9, 1 + d, h, m)
+    const tests = []
+    const days = []
+    for (let d = 0; d < 84; d++) {
+      if (!weeklyStatus(tests, at(d, 9, 0)).due) continue
+      days.push(d + 1)
+      for (const [i, eye] of ['R', 'L', 'OU'].entries()) tests.push({ type: 'va-weekly', eye, date: at(d, 9, 5 + i).toISOString(), runDay: dayKey(at(d, 9, 5)) })
+    }
+    expect(days).toEqual([1, 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78])
+  })
+
   it('atlanacak gözler: yarım günde bitenler; tam ya da boş günde yok', () => {
     expect(skipEyesToday(wk(['R'], TODAY), 'va-weekly', NOW)).toEqual(['R'])
     expect(skipEyesToday(wk(['R', 'L'], TODAY), 'va-weekly', NOW)).toEqual(['R', 'L'])
@@ -306,16 +340,48 @@ describe('haftalık E testi: "tamam" = aynı gün sağ, sol ve iki göz (karar S
   })
 })
 
-describe('günlük E testi: her göz ayrı kayıt (karar S4)', () => {
-  const daily = (p) => p.stops.find((s) => s.key === 'daily')
-  it('yalnız sağ göz bugün: tamam değil, "Kalan: Sol göz"; sağ + sol: tamam', () => {
-    const half = daily(path([...NORMAL, { type: 'va-daily', eye: 'R', date: TODAY }]))
-    expect(half).toMatchObject({ done: false, sub: 'Kalan: Sol göz', remaining: ['L'], warn: true })
-    const full = daily(path([...NORMAL, ...DAILY_DONE]))
-    expect(full).toMatchObject({ done: true, sub: 'sağ + sol göz', warn: false })
+describe('kısa E testi (isteğe bağlı): Bugün\'ün yolunda yok (karar 2026-09-29)', () => {
+  const noDaily = (p) => expect(keys(p)).not.toContain('daily')
+  it('hiçbir durumda yolda değil: ilk gün, normal gün, yarım ya da tam kısa test, yarım ya da tam haftalık', () => {
+    for (const tests of [
+      [],
+      NORMAL,
+      [...NORMAL, { type: 'va-daily', eye: 'R', date: TODAY }],
+      [...NORMAL, ...DAILY_DONE],
+      [...NORMAL, { type: 'va-daily', eye: 'R', date: daysAgo(1) }],
+      [...NORMAL.slice(3), ...wk(['R'], TODAY)],
+      [...NORMAL.slice(3), ...wk(['R', 'L', 'OU'], TODAY)],
+      [...wk(['R', 'L', 'OU'], daysAgo(9))],
+    ]) {
+      noDaily(path(tests))
+      noDaily(path(tests, [], { gate: { firstTestOnly: true } }))
+    }
+    expect(registry.get('daily').today({ tests: [], now: NOW })).toBeNull()
+    // modül Ana sayfa → Ölçüm listesinde isteğe bağlı kalır (haftalık testin ardından)
+    expect(registry.inSection('measure').map((m) => m.id).slice(0, 2)).toEqual(['weekly', 'daily'])
+    expect(registry.get('daily')).toMatchObject({ title: 'Kısa E testi', label: 'kısa E testi' })
   })
-  it('dünkü yarım günlük bugün baştan', () => {
-    const d = daily(path([...NORMAL, { type: 'va-daily', eye: 'R', date: daysAgo(1) }]))
-    expect(d).toMatchObject({ done: false, sub: 'sağ + sol göz', remaining: null })
+  it('ilk günden haftada bir: 1. gün haftalık E testi yolda, 2.–7. günler E testi yok, 8. gün yeniden (haftalık akış aynı)', () => {
+    const at = (d, h = 12) => new Date(2026, 8, 1 + d, h, 0)
+    const done = (d) => wk(['R', 'L', 'OU'], at(d, 9).toISOString())
+    const pathOn = (d, tests) => buildPath(registry.live, { tests, sessions: [], now: at(d) })
+    // 1. gün, test öncesi: tek E durağı, haftalık, "3 bölüm · sağ, sol, iki göz"
+    const first = pathOn(0, [])
+    expect(first.stops.filter((s) => s.glyph === 'E').map((s) => [s.key, s.title, s.sub])).toEqual([['weekly', 'Haftalık E testi', WEEKLY_SUB]])
+    // 1. gün, test sonrası: "✓ Bu hafta tamam"
+    expect(pathOn(0, done(0)).stops.find((s) => s.key === 'weekly')).toMatchObject({ done: true, sub: WEEKLY_DONE })
+    for (const d of [1, 2, 3, 4, 5, 6]) {
+      const p = pathOn(d, done(0))
+      expect(p.stops.some((s) => s.glyph === 'E'), `${d + 1}. gün`).toBe(false)
+    }
+    expect(keys(pathOn(7, done(0)))).toContain('weekly') // 8. gün öğlen (son test 9.00'da)
+    noDaily(pathOn(7, done(0)))
+  })
+  it('yarım kısa test: kalan göz yalnız kayıtta (Ana sayfa satırı), yolda durak yok; ertesi gün baştan', () => {
+    const half = [...NORMAL, { type: 'va-daily', eye: 'R', date: TODAY }]
+    expect(eyeDay(half, 'va-daily', NOW)).toMatchObject({ started: true, complete: false, remaining: ['L'] })
+    expect(skipEyesToday(half, 'va-daily', NOW)).toEqual(['R'])
+    expect(skipEyesToday([...NORMAL, { type: 'va-daily', eye: 'R', date: daysAgo(1) }], 'va-daily', NOW)).toEqual([])
+    noDaily(path(half))
   })
 })

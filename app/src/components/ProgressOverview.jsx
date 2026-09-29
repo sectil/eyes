@@ -27,7 +27,7 @@ const SAFETY = setupText().safety
 // Veriler modüllerin progress tanımından gelir (modules/registry.js): yeni modül kendiliğinden görünür.
 
 const ORDER = ['eye', 'wellbeing', 'self', 'awareness', 'calm', 'focus', 'body']
-const SOURCES_OF = { eye: ['faes2021', 'joseph2023', 'katibeh2022', 'han2019'], wellbeing: ['topp2015', 'eser2019', 'zhang2025'], body: ['paluch2022', 'paluch2022cvd', 'dunstan2012'] }
+const SOURCES_OF = { eye: ['faes2021', 'rosser2003', 'lim2010', 'joseph2023', 'katibeh2022', 'han2019'], wellbeing: ['topp2015', 'eser2019', 'zhang2025'], body: ['paluch2022', 'paluch2022cvd', 'dunstan2012'] }
 
 const num = (v, d = 1) => (Number.isFinite(v) ? decimalTr(v, d) : '–')
 const signed = (v, d = 1) => (Number.isFinite(v) ? `${v > 0 ? '+' : v < 0 ? '−' : ''}${decimalTr(Math.abs(v), d)}` : '–')
@@ -374,16 +374,17 @@ export function DomainDetail({ domain, tests, sessions, profile = null, identity
           {d.eye.baseline != null && (
             <div className="p2-kv">
               <div><b>{LOGMAR(d.eye.baseline)}</b><span>başlangıç</span></div>
-              <div><b>{d.eye.current7 != null ? LOGMAR(d.eye.current7) : '–'}</b><span>son 7 gün</span></div>
+              <div><b>{d.eye.current != null ? LOGMAR(d.eye.current) : '–'}</b><span>{d.eye.currentWindow === 'last3' ? 'son 3 test' : 'son 7 gün'}</span></div>
               <div><b>{d.eye.delta != null ? signed(d.eye.delta, 2) : '–'}</b><span>değişim</span></div>
             </div>
           )}
           <p className="p2-msg"><Pill s={eyeStatus(d.eye)} /> {d.eye.message}</p>
+          {/* Kural metni lib/trend.js ile aynı (karar 2026-09-29: E testi haftada bir; sık ölçende ek koşul ayrı cümlede) */}
           <div className="p2-rule">
-            <p><b className="warn">Sarı:</b> son 7 günün ortancası başlangıçtan en az 0,10 kötü ve art arda 3 test kötü → birkaç gün daha ölç.</p>
-            <p><b className="danger">Kırmızı:</b> bir hafta boyunca her test en az 0,20 kötü → göz doktoruna git.</p>
+            <p><b className="warn">Sarı:</b> art arda son 3 testin her biri başlangıçtan en az 0,10 kötü → ışığı ve mesafeyi kontrol et; sonraki testlerde de sürerse göz doktoruna danış.</p>
+            <p><b className="danger">Kırmızı:</b> art arda en az 3 testin her biri en az 0,20 kötü ve bu testler en az bir haftaya yayılıyor → göz doktoruna git.</p>
             <p>Ani görme kaybı, perde inmesi, ışık çakması ya da ağrı: beklemeden başvur.</p>
-            <p className="muted small">Gri bant: başlangıç değerin ±0,10 logMAR. Bu tek testin oynaması değil, değişim eşiği: son 7 günün ortancası başlangıçtan en az 0,10 uzaklaşır ve son 3 testin her biri de aynı yönde en az 0,10 farklıysa değişim olarak işaretliyoruz. Noktalar tek testlerdir; bir noktanın bandın dışına düşmesi tek başına değişim demek değil (bir testten diğerine yaklaşık ±0,2 oynama olağan). İlk 7 gün alışma; başlangıç 8. günden itibaren en az 7 test (en erken 21. güne kadar); değerlendirme sonra başlar.</p>
+            <p className="muted small">Gri bant: başlangıç değerin ±0,10 logMAR. Bu tek testin oynaması değil, değişim eşiği: son 3 testin her biri aynı yönde en az 0,10 farklıysa değişim olarak işaretliyoruz{d.eye.sparse ? '' : ' (son 7 günde 3 ya da daha çok test varsa son 7 günün ortancası da bu kadar ayrılmalı)'}. Noktalar tek testlerdir; bir noktanın bandın dışına düşmesi tek başına değişim demek değil (bir testten diğerine yaklaşık ±0,2 oynama olağan). İlk test (ilk 7 gün) alışmadır. Başlangıç, ilk haftadan sonraki ilk testlerin ortancasıdır: 3 haftalık test tamamlanınca (en erken 22. gün) hazır olur ve yeni testlerle 7 teste kadar güçlenir. Her gün test edenlerde başlangıç, 8.–21. günlerdeki en az 7 testin ortancasıdır. Değerlendirme başlangıç hazır olunca başlar.</p>
           </div>
         </section>
       )}

@@ -1,4 +1,4 @@
-// Haftalık / günlük yakın görme E testi (PLAN.md bölüm 4, E1–E10; kararlar S1–S13; onaylı tasarım
+// Haftalık / kısa (isteğe bağlı) yakın görme E testi (PLAN.md bölüm 4, E1–E10; kararlar S1–S13; onaylı tasarım
 // nefona-e-testi.html). Akış: E1 nasıl yapılır → her göz için E2 hazırlık → E5 deneme (E6 duraklama) →
 // E7 göz sonucu → E8 mola → … → E9 özet. E3 gözlük sayfası, E10 çıkış sayfası ve "Bu sayı ne anlatıyor?" alt sayfadır.
 // İlkeler: deneme dışındaki her ekran 100dvh ve kaydırmasız; hiçbir düğme nedensiz kapalı değil (hazırlık tek

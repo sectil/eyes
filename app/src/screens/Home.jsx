@@ -150,7 +150,8 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   const exercise = sessions.filter(isExerciseSession)
   const week = weekProgress(activeDays([...tests, ...exercise]), now, settings.reminder?.weeklyTarget)
   const streak = summary(countedActivities(activitiesFrom(tests, sessions)), now).streakDays
-  // Öne çıkan göz serisi (lib/vaSeries.js): günlük test Build 24'ten beri yalnız sağ/sol göz
+  // Öne çıkan göz serisi (lib/vaSeries.js): uyarısı en ciddi göz → son 14 günde en çok ölçülen → sağ, sol, iki göz.
+  // Haftalık testte (2026-09-29'dan beri olağan plan) üç göz eşit ölçülür: eşitlikte sağ göz.
   const vaPick = pickSeries(tests, now.toISOString())
   const ou = vaPick.tests
   const r = vaPick.trend
@@ -379,7 +380,8 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
         <button className="link-btn" onClick={() => onStart('progress')}>Gelişim <ChevronRight size={15} aria-hidden="true" /></button>
       </div>
       <div className="home-tiles">
-        <button className="home-tile" onClick={() => onStart(shown == null ? 'daily' : 'progress')}>
+        {/* Henüz ölçüm yoksa ilk test Haftalık E testi (Bugün'ün 1. günü ile aynı; karar 2026-09-29) */}
+        <button className="home-tile" onClick={() => onStart(shown == null ? 'weekly' : 'progress')}>
           <span className="t">Yakın görme{vaPick.eye ? ` · ${EYE_LABEL[vaPick.eye].toLocaleLowerCase('tr-TR')}` : ''}</span>
           <span className="big">{shown == null ? '—' : snellen20(shown)}</span>
           <span className={`s ${shown == null ? '' : tw.tone}`}>{shown == null ? 'henüz ölçüm yok' : tw.text}</span>

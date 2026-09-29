@@ -115,10 +115,10 @@ describe('veri merkezi: gelişim haritası', () => {
     const m = growthMap({ sessions: [null, { type: 'blink' }, { type: 'blink', date: d(1) }], tests: [null], now })
     expect(m.domains.eye.days).toBe(1)
   })
-  it('kaynaklar: günlük ve haftalık görme testi ayrı satır ve ayrı anahtar', () => {
+  it('kaynaklar: kısa (eski adı günlük) ve haftalık görme testi ayrı satır ve ayrı anahtar', () => {
     const tests = [{ type: 'va-daily', date: d(1) }, { type: 'va-weekly', date: d(2) }]
     const src = growthMap({ tests, now }).domains.eye.sources
-    expect(src.map((x) => x.label).sort()).toEqual(['Günlük görme testi', 'Haftalık görme testi'])
+    expect(src.map((x) => x.label).sort()).toEqual(['Haftalık görme testi', 'Kısa görme testi'])
     expect(new Set(src.map((x) => x.key)).size).toBe(2)
   })
 })

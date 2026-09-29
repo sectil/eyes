@@ -1,8 +1,10 @@
 import { analyzeTrend } from './trend.js'
 
 // Görme keskinliği için "öne çıkan seri" (Bugün kutucuğu, Nef sinyali, Gelişim'in açılış sekmesi).
-// Build 24'ten beri günlük test yalnız sağ ve sol gözü ölçer; iki göz yalnız haftalık testte. Bu yüzden tek
-// seri (eskiden hep 'OU') yerine: uyarısı en ciddi göz → son 14 günde en çok ölçülen → sağ, sol, iki göz sırası.
+// Kısa test (eski adı günlük test, Build 24'ten beri) yalnız sağ ve sol gözü ölçer; iki göz yalnız haftalık testte.
+// Bu yüzden tek seri (eskiden hep 'OU') yerine: uyarısı en ciddi göz → son 14 günde en çok ölçülen → sağ, sol, iki göz
+// sırası. Karar 2026-09-29 (E testi ilk günden haftada bir): yeni kullanıcıda üç göz eşit ölçülür, sağ göz öne çıkar;
+// günlük geçmişi olan kullanıcıda seçim ve her serinin başlangıcı değişmez (trend.js: günlük yol önce hazırsa o).
 const EYES = ['R', 'L', 'OU']
 const SEVERITY = { red: 2, yellow: 1 }
 export const EYE_LABEL = { R: 'Sağ göz', L: 'Sol göz', OU: 'İki göz' }

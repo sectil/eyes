@@ -9,7 +9,7 @@ import { isReadingV2, cpsText } from './reading.js'
 export { NBSP, formatDuration }
 
 // VARSAYIM: testler süre kaydetmez; ana ekrandaki tahmini sürelerle aynı değerler kullanılır
-// (günlük ~3 dk, haftalık ~5 dk, okuma ~3 dk; Home.jsx). Kayıtta seconds varsa o kullanılır.
+// (kısa test ~3 dk, haftalık ~5 dk, okuma ~3 dk; Home.jsx). Kayıtta seconds varsa o kullanılır.
 export const DEFAULT_TEST_SECONDS = { 'va-daily': 180, 'va-weekly': 300, reading: 180 }
 // Göz kırpma oturumu süre kaydetmez; routines.todaySeconds ile aynı varsayılan (150 sn).
 export const DEFAULT_BLINK_SECONDS = 150
@@ -25,7 +25,8 @@ const EYE_ORDER = ['R', 'L', 'OU']
 const EYE_LABEL = { R: 'Sağ göz', L: 'Sol göz', OU: 'İki göz' }
 // Bölünmez boşluk (\u00a0): dar ekranda "İki göz 0,20" satır sonunda bölünmez.
 const EYE_SHORT = { R: 'Sağ', L: 'Sol', OU: 'İki\u00a0göz' }
-const TEST_TITLE = { 'va-daily': 'Günlük görme testi', 'va-weekly': 'Haftalık görme testi', reading: 'Okuma hızı testi' }
+// 'va-daily': kısa test (eski adı günlük test; 2026-09-29'dan beri isteğe bağlı, eski kayıtlar da aynı test)
+const TEST_TITLE = { 'va-daily': 'Kısa görme testi', 'va-weekly': 'Haftalık görme testi', reading: 'Okuma hızı testi' }
 const positiveSec = (v) => {
   const n = finite(v)
   return n != null && n > 0 ? Math.round(n) : null

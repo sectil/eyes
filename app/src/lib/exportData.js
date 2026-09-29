@@ -12,7 +12,8 @@ import { DOMAIN_LABEL, WHO5_TYPE, acuteEffects, metricCards, practiceCard, who5C
 import { ageFromBirthDate } from './identity.js'
 
 const isVa = (t) => t?.type === 'va-daily' || t?.type === 'va-weekly'
-const VA_TITLE = { 'va-daily': 'Günlük görme testi', 'va-weekly': 'Haftalık görme testi' }
+// 'va-daily': kısa test (eski adı günlük test; 2026-09-29'dan beri isteğe bağlı). Eski kayıtlar da aynı testtir.
+const VA_TITLE = { 'va-daily': 'Kısa görme testi', 'va-weekly': 'Haftalık görme testi' }
 export const CONDITION_TEXT = { none: 'gözlüksüz', reading: 'okuma gözlüğüyle', progressive: 'progresif gözlükle', distance: 'uzak gözlüğüyle', contacts: 'lensle', glasses: 'gözlüklü (eski kayıt)' }
 const validDate = (iso) => Number.isFinite(new Date(iso).getTime())
 const byDate = (a, b) => new Date(a.date) - new Date(b.date)
@@ -138,7 +139,7 @@ const PHASE_TEXT = { familiarization: 'alışma dönemi (ilk 7 gün)', baseline:
 const STATUS_TEXT = { better: 'iyileşiyor', worse: 'geriliyor', noise: 'doğal oynama', unsure: 'henüz belirsiz', first: 'ilk ölçüm', up: 'anlamlı artış', down: 'anlamlı düşüş' }
 function eyeStatusText(t) {
   if (t.alert === 'red') return 'KIRMIZI: göz doktoruna başvurmalı'
-  if (t.alert === 'yellow') return 'SARI: birkaç gün daha ölçmeli'
+  if (t.alert === 'yellow') return 'SARI: sonraki testlerle izlenmeli'
   if (t.phase !== 'tracking') return PHASE_TEXT[t.phase]
   return t.trend === 'improving' ? 'iyileşme' : 'doğrulanmış değişim yok'
 }
@@ -228,7 +229,7 @@ td.n,th.n{text-align:right}
 function eyeBlock(e) {
   const t = e.trend
   const tone = t.alert ?? ''
-  // Başlangıçla karşılaştırılan değer: son 7 günün ortancası; son 7 günde test yoksa son 3 testin ortancası (trend.js)
+  // Başlangıçla karşılaştırılan değer: son 7 günün ortancası; son 7 günde 3 test yoksa son 3 testin ortancası (trend.js)
   const cur = t.currentWindow === 'last3' ? { label: 'Son 3 test (ortanca)', value: t.current } : { label: 'Son 7 gün (ortanca)', value: t.current7 }
   const rows = e.recent
     .map((r) => `<tr><td>${esc(localStamp(r.date))}</td><td class="n">${esc(lmText(r.logMAR))}</td><td class="n">${esc(decimalVa(r.logMAR))}</td><td>${esc(CONDITION_TEXT[r.correction] ?? '–')}</td><td class="n">${Number.isFinite(r.meanDistanceMm) ? esc(String(Math.round(r.meanDistanceMm / 10))) + ' cm' : '–'}</td></tr>`)
@@ -274,16 +275,16 @@ export function reportHtml(m) {
 <p class="note">Bu belge, kişinin kendi telefonunda yaptığı ölçümlerin özetidir. Tanı koymaz ve göz muayenesinin yerini tutmaz. Yöntem ve sınırlar son bölümde.</p>
 
 <section><h2>Yakın görme · ekranda E testi (logMAR, küçük = daha iyi)</h2>
-<p class="small">Noktalar tek testlerdir. Gri bant: başlangıç ortancası ±0,10 logMAR (8. günden itibaren en az 7 testin ortancası, en erken 21. güne kadar; o zamana dek geçici değer). Bant değişim eşiğidir, tek testin oynaması değildir: kural son 7 günün ortancasına ve son 3 teste bakar (bkz. Uyarı kuralı). Sağ göz, sol göz ve iki göz ayrı değerlendirilir.</p>
+<p class="small">Noktalar tek testlerdir. Gri bant: başlangıç ortancası ±0,10 logMAR (nasıl kurulduğu: Uyarı kuralı; kurulana dek geçici değer). Bant değişim eşiğidir, tek testin oynaması değildir: kural art arda son 3 teste, sık ölçümde ayrıca son 7 günün ortancasına bakar (bkz. Uyarı kuralı). Sağ göz, sol göz ve iki göz ayrı değerlendirilir. E testi haftada birdir (sağ, sol, iki göz); sağ ve sol göz için kısa test isteğe bağlıdır.</p>
 ${eyeSection}</section>
 
 <section class="block rule"><h2>Uyarı kuralı</h2>
-<p><b>Başlangıç:</b> ilk 7 gün alışma (değerlendirilmez); 8. günden itibaren en az 7 testin ortancası, en erken 21. güne kadar (21. günde 7 test yoksa 7. teste kadar uzar).</p>
-<p><b>Sarı:</b> son 7 günün ortancası (son 7 günde test yoksa son 3 testin ortancası) başlangıçtan en az ${esc(decimalTr(YELLOW_DELTA, 2))} logMAR kötü ve art arda 3 test kötü → birkaç gün daha ölç.</p>
-<p><b>Kırmızı:</b> son 7 günde en az 3 test var, ilki en az 6 gün önce yapılmış ve hepsi başlangıçtan en az ${esc(decimalTr(RED_DELTA, 2))} logMAR kötü → göz doktoruna başvur. Seyrek seride (son 7 günde 3 test yoksa; ör. yalnız haftalık ölçülen iki göz) kural son testle biten 7 güne, orada 3 test yoksa son 3 teste uygulanır; ilki sonuncudan en az 6 gün önce olmalı.</p>
+<p><b>Başlangıç:</b> ilk 7 gün (ilk haftalık test) alışma, değerlendirilmez. Haftalık ölçümde başlangıç, 8. günden sonraki ilk testlerin (en az 3) ortancasıdır: 3 haftalık test tamamlanınca, en erken 22. günde hazır olur; sonra 7 teste kadar büyür. Büyürken değerlendirilen son 3 test başlangıca katılmaz; ilk haftalarda (haftada bir testte 22.–36. günler) son 3 test başlangıç testlerini de içerir. Son 3 testin her biri başlangıçtan en az ${esc(decimalTr(YELLOW_DELTA, 2))} kötü olunca büyüme durur; iyileşmede sürer. Haftada bir testte ilk uyarı en erken 36. günde çıkabilir (art arda üçüncü kötü test). Her gün test edenlerde başlangıç 8. günden itibaren en az 7 testin ortancası, en erken 21. güne kadar (21. günde 7 test yoksa 7. teste kadar uzar). Hangisi önce hazırsa o kullanılır.</p>
+<p><b>Sarı:</b> art arda son 3 testin her biri başlangıçtan en az ${esc(decimalTr(YELLOW_DELTA, 2))} logMAR kötü ve son 7 günün ortancası (son 7 günde 3 test yoksa son 3 testin ortancası) da en az bu kadar kötü → ışık ve mesafe kontrol edilir; sonraki testlerde de sürerse göz doktoruna danışılır.</p>
+<p><b>Kırmızı:</b> son 7 günde en az 3 test var, ilki en az 6 gün önce yapılmış ve hepsi başlangıçtan en az ${esc(decimalTr(RED_DELTA, 2))} logMAR kötü → göz doktoruna başvur. Haftalık ölçümde ve seyrek seride (son 7 günde 3 test yoksa) kural son testle biten 7 güne, orada 3 test yoksa son 3 teste uygulanır; ilki sonuncudan en az 6 gün önce olmalı.</p>
 <p><b>İyileşme:</b> sarı kuralın ters yönü (bir kısmı teste alışmaktan olabilir).</p>
 <p>Yalnız aynı seri karşılaştırılır. Seriyi son test belirler: aynı ölçüm yöntemi sürümü, aynı mesafe ölçümü (kamerayla / kamerasız, 40 cm varsayılarak) ve aynı gözlük/lens koşulu; gözlük yenilendiyse o testten sonrası. Eski yöntemle (descent-zest-v4 öncesi) kamerayla yapılan ölçümlerde ortalama mesafe de seriyi ayırır: ${BAND_MIN_MM / 10}–${BAND_MAX_MM / 10} cm'deki, ${BAND_MIN_MM / 10} cm'den yakın ve ${BAND_MAX_MM / 10} cm'den uzak ölçümler üç ayrı seridir. Ani görme kaybı, perde inmesi, ışık çakması ya da ağrıda beklenmeden başvurulmalı.</p>
-<p class="src">"Art arda 3 test" yaklaşımı, akıllı telefonla evde görme takibinde yanlış alarmı azaltmak için kullanılan kuraldan uyarlandı (farklı test: hiperkeskinlik): Faes L ve ark. 2021, Eye (Lond) 35(11):3035-3040. doi:10.1038/s41433-020-01356-2</p>
+<p class="src">"Art arda 3 test" yaklaşımı, akıllı telefonla evde görme takibinde yanlış alarmı azaltmak için kullanılan kuraldan uyarlandı (farklı test: hiperkeskinlik): Faes L ve ark. 2021, Eye (Lond) 35(11):3035-3040. doi:10.1038/s41433-020-01356-2 · Eşikler (ETDRS çizelgesiyle, sağlıklı gönüllülerde, okuma mesafesi değiştirilerek: 0,20 güvenle ayrılır, 0,10 ayrılmaz; telefon testinde oynama daha büyük olabilir): Rosser DA ve ark. 2003, Invest Ophthalmol Vis Sci 44(8):3278-81. doi:10.1167/iovs.02-1100 · Haftalık başlangıcın 3 testle kurulup 7 teste büyümesi varsayımdır: kendi simülasyonumuzla seçildi, klinik olarak doğrulanmadı.</p>
 </section>
 
 <section class="block"><h2>Düzen</h2>
@@ -301,7 +302,7 @@ ${effectRows ? `<section class="block"><h2>Uygulama öncesi → sonrası (kişin
 
 <section class="block"><h2>Yöntem ve sınırlar</h2>
 <p class="small">Görme: telefon ekranında dört yöne dönen E harfi; sağ ve sol göz ayrı ayrı (diğeri kapatılarak), haftalık testte ayrıca iki göz birlikte. Harf boyutu uyarlamalı yöntemle (iniş + ZEST, Bayes eşik tahmini) ayarlanır; sonuç logMAR. Hedef mesafe 40 cm; destekleyen iPhone'larda mesafe ön kamerayla (TrueDepth) ölçülür ve harf boyutu ölçülen mesafeye göre hesaplanır. "ondalık" sütunu 10<sup>−logMAR</sup> dönüşümüdür.</p>
-<p class="small">Deneme sayısı (göz başına): günlük testte 14–20, haftalık testte 28 (eski yöntemle yapılan kayıtlarda 20–28). Yeni yöntemde (descent-zest-v4) sayılan harfler yalnız telefon 36–44 cm'deyken alınır; kamerasız ölçümde mesafe ölçülmez, 40 cm varsayılır.</p>
+<p class="small">Deneme sayısı (göz başına): kısa testte (eski adı günlük test) 14–20, haftalık testte 28 (eski yöntemle yapılan kayıtlarda 20–28). Yeni yöntemde (descent-zest-v4) sayılan harfler yalnız telefon 36–44 cm'deyken alınır; kamerasız ölçümde mesafe ölçülmez, 40 cm varsayılır.</p>
 <p class="small">Tekrarlanabilirlik: benzer tablet ve telefon yakın testlerinde, klinikte ve gözetim altında, iki test arasındaki farkın %95 sınırı ±0,13–0,24 logMAR (çoğunda yaklaşık ±0,2); ev koşulunda ölçülmedi, daha geniş olabilir. Joseph A ve ark. 2023, Ophthalmol Ther 13(1):409-422, doi:10.1007/s40123-023-00854-2 · Katibeh M ve ark. 2022, Transl Vis Sci Technol 11(12):18, doi:10.1167/tvst.11.12.18 · Han X ve ark. 2019, Transl Vis Sci Technol 8(4):27, doi:10.1167/tvst.8.4.27</p>
 <p class="small">Sınırlar: ışık, ekran parlaklığı, yorgunluk, dikkat ve mesafe sonucu etkiler; tek bir test yorumlanmamalı, eğilime bakılmalı. Yakın mesafe ölçümüdür; uzak ETDRS değerleriyle doğrudan karşılaştırılmamalıdır. Ölçümler klinik bir cihazla yapılmamıştır.</p>
 </section>

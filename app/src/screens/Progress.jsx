@@ -471,11 +471,15 @@ const CONDITION_TEXT = { none: 'gözlüksüz', reading: 'okuma gözlüğüyle', 
 // Görme bölümü başlığının altındaki satırlar (analyzeTrend sonucu): seri koşulu, tek satırlık seri notları
 // (S6 "Ölçüm yöntemi güncellendi; yeni seri.", S5 "Mesafe ölçülmedi · 40 cm varsayıldı") ve seriye girmeyen
 // kayıtlar nedeniyle ("Farklı koşuldaki" yalnız gözlük/lens koşulu için; lib/trend.js droppedNotes).
+// Karar 2026-09-29 (E testi haftada bir): "haftalık eğilim" denmez; bir hafta tek test demek.
 export function visionHeadLines(r) {
-  const lead = `Tek güne değil, haftalık eğilime bakıyoruz.${r?.condition ? ` Seri: ${CONDITION_TEXT[r.condition] ?? r.condition}.` : ''}`
+  const lead = `Tek teste değil, art arda ölçümlere bakıyoruz.${r?.condition ? ` Seri: ${CONDITION_TEXT[r.condition] ?? r.condition}.` : ''}`
   return { lead, notes: [...seriesNotes(r), ...droppedNotes(r)] }
 }
 // Başlangıç / Son 7 gün kutusu: logMAR ve 20/x aynı yuvarlanmış değerden (H8; E7 ile aynı biçim)
+// Karşılaştırılan değerin etiketi (trend.js currentWindow; exportData.js ile aynı): son 7 günde test yoksa son 3 testin
+// ortancası. Haftalık testte bir gün gecikince kutu "—" kalmasın (Bug 26).
+export const currentLabel = (r) => (r?.currentWindow === 'last3' ? 'Son 3 test' : 'Son 7 gün')
 export const visionMetric = (v) => (v != null && Number.isFinite(v) ? { value: formatLogMAR(v), snellen: snellen20(v) } : { value: '—', snellen: '' })
 
 export function VisionSection({ tests, profile, onStart }) {
@@ -485,7 +489,7 @@ export function VisionSection({ tests, profile, onStart }) {
   const tone = r.alert === 'red' ? 'tone-danger' : r.alert === 'yellow' ? 'tone-warn' : ''
   const head = visionHeadLines(r)
   const base = visionMetric(r.baseline)
-  const cur = visionMetric(r.current7)
+  const cur = visionMetric(r.current)
 
   return (
     <>
@@ -498,10 +502,11 @@ export function VisionSection({ tests, profile, onStart }) {
       {!va.length ? (
         <section className="card">
           <EmptyState icon={ScanEye} title="Henüz görme ölçümü yok">
-            <p>İlk ölçümün, sonraki sonuçları karşılaştıracağımız başlangıç noktası olur.</p>
+            {/* İlk test alışmadır (lib/trend.js WEEKLY_PLAN_NOTE; inceleme 2026-09-29: "ilk ölçümün başlangıç noktası olur" çelişiyordu) */}
+            <p>İlk test alışmadır; sonraki 3 haftalık test, sonuçlarını karşılaştıracağımız başlangıç değerini oluşturur.</p>
             {onStart && (
-              <button className="btn btn-sm" onClick={() => onStart('daily')}>
-                <Play size={16} aria-hidden="true" /> Günlük testi başlat
+              <button className="btn btn-sm" onClick={() => onStart('weekly')}>
+                <Play size={16} aria-hidden="true" /> Haftalık testi başlat
               </button>
             )}
           </EmptyState>
@@ -527,7 +532,7 @@ export function VisionSection({ tests, profile, onStart }) {
                   <span className="muted small">{base.snellen}</span>
                 </div>
                 <div className="metric">
-                  <span className="eyebrow">Son 7 gün</span>
+                  <span className="eyebrow">{currentLabel(r)}</span>
                   <span className="pg-metric-value">{cur.value}</span>
                   <span className="muted small">{cur.snellen}</span>
                 </div>
@@ -539,7 +544,7 @@ export function VisionSection({ tests, profile, onStart }) {
             {r.series.length ? (
               <ProgressChart series={r.series} baseline={r.baseline} />
             ) : (
-              <p className="muted small">Bu göz için henüz ölçüm yok. Günlük test sağ ve sol gözü, haftalık test ayrıca iki gözü birlikte ölçer.</p>
+              <p className="muted small">Bu göz için henüz ölçüm yok. Haftalık test sağ, sol ve iki gözü ölçer; isteğe bağlı kısa test yalnız sağ ve sol gözü.</p>
             )}
           </section>
         </>
@@ -618,7 +623,7 @@ function ReadingCard({ tests, profile, onStart }) {
   )
 }
 
-// onStart (isteğe bağlı): boş durumlardaki "Hafif seti başlat" / "Günlük testi başlat" düğmeleri
+// onStart (isteğe bağlı): boş durumlardaki "Hafif seti başlat" / "Haftalık testi başlat" düğmeleri
 // için App'in go fonksiyonu. weeklyTarget (isteğe bağlı): settings.reminder?.weeklyTarget;
 // verilmezse calendar.js varsayılanı (Ana sayfa ve Takvim ile aynı).
 // nudges (isteğe bağlı): açık hatırlatma türlerinin ölçümü (App: lib/notifyLog.js evaluate)

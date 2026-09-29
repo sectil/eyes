@@ -1,8 +1,9 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
-import { sanitizeSignals, parseCoachReply, passesGuard, SYSTEM_PROMPT } from './coachCore.js'
+import { sanitizeSignals, parseCoachReply, passesGuard, SYSTEM_PROMPT, isStaleAdvice } from './coachCore.js'
 import { buildSignals, fallbackInsight, getTodayInsight } from './coach.js'
 import { trendMessage } from './trend.js'
 import handler from '../../api/coach.js'
+import { screenFor, actionTarget } from '../components/CoachCard.jsx'
 
 const NOW = new Date('2026-09-24T10:00:00')
 const day = (d) => new Date(NOW.getTime() - d * 86400000).toISOString()
@@ -61,8 +62,48 @@ describe('buildSignals / fallbackInsight', () => {
   it('uyarı varsa doktor önerisi', () => {
     expect(fallbackInsight({ vaAlert: 'red' }).action).toMatch(/göz doktoru/)
   })
-  it('ölçüm yoksa günlük test', () => {
-    expect(fallbackInsight({}).action).toMatch(/^Günlük test/)
+  // Bug 25 (HATA_GUNLUGU): kırmızı uyarıda yedek metin "birkaç gün daha ölç" diyordu (trend.js ve SYSTEM_PROMPT ile çelişki)
+  it('kırmızıda yalnız göz doktoru: bekletmez, test önermez; sarıda "sürerse göz doktoruna"', () => {
+    const red = fallbackInsight({ vaAlert: 'red' })
+    expect(red).toEqual({ insight: 'Son ölçümlerin başlangıcına göre belirgin şekilde kötü.', action: 'Lütfen bir göz doktoruna başvur' })
+    const yellow = fallbackInsight({ vaAlert: 'yellow' })
+    expect(yellow.action).toBe('Işığı ve mesafeyi kontrol et; sürerse göz doktoruna danış')
+    for (const t of [red, yellow]) expect(`${t.insight} ${t.action}`).not.toMatch(/birkaç gün|günlük test/i)
+  })
+  // Karar 2026-09-29: E testi haftada bir; Nef günlük test önermez
+  it('ölçüm yoksa haftalık test', () => {
+    // İlk test alışmadır (inceleme 2026-09-29: "ilk ölçüm başlangıç noktan olacak" yeni kuralla çelişiyordu)
+    expect(fallbackInsight({})).toEqual({ insight: 'Henüz ölçüm yok. İlk haftalık test alışma sayılır; başlangıç değerin sonraki 3 haftalık testle oluşur.', action: 'Haftalık test' })
+  })
+  it('haftalık test yalnız zamanı gelince önerilir; arada test istenmez', () => {
+    const quiet = { tests7: 0, daysSinceLastTest: 4, thisWeekDays: 1, weeklyTarget: 3 }
+    expect(fallbackInsight(quiet, { weeklyDue: false }).action).not.toMatch(/test/i)
+    expect(fallbackInsight(quiet).action).not.toMatch(/test/i) // 4 gün: haftalık zamanı gelmedi
+    expect(fallbackInsight({ ...quiet, daysSinceLastTest: 8 })).toEqual({ insight: 'Haftalık E testinin zamanı geldi.', action: 'Haftalık test' })
+    expect(fallbackInsight({ ...quiet, daysSinceLastTest: 2 }, { weeklyDue: true }).action).toBe('Haftalık test')
+  })
+  it('çevrimdışı yedek haftalık durumu kayıtlardan okur (sunucuya gitmez)', async () => {
+    const offline = async () => { throw new Error('offline') }
+    const wk = (d) => ['R', 'L', 'OU'].map((eye) => ({ type: 'va-weekly', eye, logMAR: 0.1, date: day(d) }))
+    // haftalık 3 gün önce tamam; arada 1 gün önce okuma testi → test önerilmez
+    const recent = await getTodayInsight({ tests: [...wk(3), { type: 'reading', maxReadingSpeed: 120, date: day(1) }], sessions: [], now: NOW, fetchImpl: offline })
+    expect(recent.action).not.toMatch(/test/i)
+    // haftalık 8 gün önce; dün okuma testi yapılmış olsa da haftalık zamanı gelmiş
+    const due = await getTodayInsight({ tests: [...wk(8), { type: 'reading', maxReadingSpeed: 120, date: day(1) }], sessions: [], now: NOW, fetchImpl: offline })
+    expect(due).toMatchObject({ source: 'rules', action: 'Haftalık test' })
+  })
+  it('Nef eylemi → ekran: "Haftalık test" ve eski "Günlük test" cevabı haftalık teste gider', () => {
+    expect(screenFor('Haftalık test')).toBe('weekly')
+    expect(screenFor('Günlük test — sabah')).toBe('weekly')
+    expect(screenFor('Lütfen bir göz doktoruna başvur')).toBeNull()
+    expect(screenFor('Hafif set (1 dk)')).toBe('routine-lite')
+  })
+  it('sistem istemi günlük test önermez; eylem listesinde "Haftalık test"', () => {
+    expect(SYSTEM_PROMPT).toContain('"Haftalık test"')
+    expect(SYSTEM_PROMPT).not.toContain('"Günlük test"')
+    expect(SYSTEM_PROMPT).toContain('her gün test önerme')
+    expect(SYSTEM_PROMPT).toContain('"Haftalık test"i yalnızca weeklyDue true ise öner')
+    expect(SYSTEM_PROMPT).not.toMatch(/Birkaç gün daha ölç;|Son bir haftadır/)
   })
 })
 
@@ -136,5 +177,49 @@ describe('profil özeti (coachLife onayı)', () => {
     expect(without.sleep7).toBeUndefined()
     expect(without.stress8).toBeUndefined()
     expect(sanitizeSignals({ screenHours: '9 saat', sleep7: 11, stress8: 9 })).toEqual({})
+  })
+})
+
+// İnceleme 2026-09-29: çevrimiçi Nef cevabı hiç denetlenmiyordu. Sunucu eski istemle ("Günlük test", "Birkaç gün daha
+// ölç") yayımdayken ya da model kuralı çiğnerse kart günlük test önerebilirdi; "Haftalık test" düğmesi de zamanı
+// gelmemiş haftalık testi açabiliyordu. Çevrimiçi ve çevrimdışı Nef aynı "zamanı geldi" kuralına bakar (weeklyDue).
+describe('Nef: günlük test öneren cevap kullanılmaz; haftalık test yalnız zamanı gelince', () => {
+  const wk = (d) => ['R', 'L', 'OU'].map((eye) => ({ type: 'va-weekly', eye, logMAR: 0.1, date: day(d) }))
+  const reply = (insight, action) => async () => ({ json: async () => ({ ok: true, insight, action }) })
+  it('günlük test / her gün ölç / birkaç gün daha ölç diyen sunucu cevabı → kural tabanlı öneri', async () => {
+    for (const [i, a] of [
+      ['Sabah testlerin daha iyi. Bugün de sabah ölç.', 'Günlük test — sabah'],
+      ['Son ölçümlerin biraz kötü; birkaç gün daha ölç.', 'Haftalık test'],
+      ['Her gün test etmek düzeni korur.', 'Hafif set'],
+      ['Düzenin iyi.', 'Günlük E testi'],
+    ]) {
+      const r = await getTodayInsight({ tests: wk(3), sessions: [], now: NOW, fetchImpl: reply(i, a) })
+      expect(r.source, a).toBe('rules')
+      expect(`${r.insight} ${r.action}`).not.toMatch(/günlük test|birkaç gün/i)
+    }
+    const ok = await getTodayInsight({ tests: wk(3), sessions: [], now: NOW, fetchImpl: reply('Bu hafta 2 gün çalıştın.', 'Hafif set') })
+    expect(ok).toMatchObject({ source: 'jev', action: 'Hafif set' })
+  })
+  it('sunucu tarafı da aynı taramayı yapar (parseCoachReply)', () => {
+    expect(parseCoachReply('{"insight":"Bugün de sabah ölç.","action":"Günlük test — sabah"}')).toBeNull()
+    expect(isStaleAdvice('Birkaç gün daha ölç')).toBe(true)
+    expect(isStaleAdvice('Haftalık E testinin zamanı geldi.', 'Haftalık test')).toBe(false)
+  })
+  it('weeklyDue sinyali: kısa test ya da okuma testinden sonra da haftalığın zamanı gelmişse true', () => {
+    const shortToday = ['R', 'L'].map((eye) => ({ type: 'va-daily', eye, logMAR: 0.1, date: day(0) }))
+    const s = buildSignals([...wk(8), ...shortToday], [], NOW, 3)
+    expect(s).toMatchObject({ weeklyDue: true, daysSinceLastTest: 0 })
+    expect(buildSignals(wk(3), [], NOW, 3).weeklyDue).toBe(false)
+    expect(sanitizeSignals({ weeklyDue: 'evet' })).toEqual({})
+    expect(sanitizeSignals({ weeklyDue: false })).toEqual({ weeklyDue: false })
+    // çevrimdışı öneri de aynı sinyale bakar
+    expect(fallbackInsight(s)).toEqual({ insight: 'Haftalık E testinin zamanı geldi.', action: 'Haftalık test' })
+  })
+  it('"Haftalık test" düğmesi yalnız zamanı gelince haftalık testi açar; yoksa düz yazı', () => {
+    expect(actionTarget('Haftalık test', wk(8), NOW)).toBe('weekly')
+    expect(actionTarget('Haftalık test', wk(3), NOW)).toBeNull()
+    expect(actionTarget('Günlük test — sabah', wk(3), NOW)).toBeNull()
+    expect(actionTarget('Hafif set (1 dk)', wk(3), NOW)).toBe('routine-lite')
+    expect(actionTarget('Haftalık test', [], NOW)).toBe('weekly') // hiç ölçüm yok: ilk haftalık test
   })
 })

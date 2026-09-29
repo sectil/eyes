@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { RELEASES, unseenReleases, latestRelease } from './releases.js'
+import { WEEKLY_MIN_BASELINE_TESTS, MIN_BASELINE_TESTS, BASELINE_TO_DAY } from './trend.js'
 
 describe('sürüm notları', () => {
   it('en yeni en üstte, kimlikler benzersiz ve azalan; her maddenin türü geçerli', () => {
@@ -11,8 +12,29 @@ describe('sürüm notları', () => {
   })
   it('yeni E testi (yeni seri, 36–44 cm, parlaklık, her göz kaydı) sürüm notunda; sağlık iddiası yok', () => {
     const text = RELEASES.find((r) => r.id === '2026-09-29').items.map((i) => i.text).join(' ')
-    for (const s of ['yeni seri', '36–44 cm', 'parlaklığı', 'Her göz bittiği an kaydedilir', 'en az 7 testle', 'ters çevirme']) expect(text).toContain(s)
+    for (const s of ['yeni seri', '36–44 cm', 'parlaklığı', 'Her göz bittiği an kaydedilir', 'başlangıç değerin yeniden oluşur', 'ters çevirme']) expect(text).toContain(s)
     expect(text).not.toMatch(/tanı|hastalık|iyileştir|tedavi/i)
+  })
+  // Karar 2026-09-29 (YAPILACAKLAR "Sonsuz yol ve ilk 5 saniye" (a)): E testi ilk günden haftada bir
+  it('29 Eylül: E testi haftada bir; kısa test isteğe bağlı; haftalık başlangıç kuralı trend.js ile aynı sayılar', () => {
+    // İnceleme 2026-09-29 (metin): "İstersen … durur" anlatım bozukluğu ve art arda iki "haftada bir" düzeltildi; eski
+    // ölçümlere de uygulandığı (iki göz serisinde uyarı yeni test olmadan gelebilir) söylenir
+    const t = items29().find((x) => x.startsWith('E testi artık haftada bir:'))
+    expect(t).toBe("E testi artık haftada bir: haftalık E testi (sağ, sol, iki göz) ilk gün yola eklenir, sonra her hafta; öteki günlerde yolda E testi yok. İstersen kısa E testini (eski adıyla Günlük test; sağ ve sol göz) Ana sayfadaki Ölçüm listesinden yapabilirsin. Eski günlük test kayıtların geçmişte ve CSV dosyasında \"Kısa görme testi\" adıyla görünür. Gelişim'de ilk test alışma sayılır; başlangıç değerin 3 haftalık testle, en erken 22. günde hazır olur ve yeni testlerle 7 teste kadar güçlenir. Bu kural eski ölçümlerine de uygulanır: özellikle iki göz serisinde, yeni test yapmasan da değerlendirme hemen başlayabilir, bir uyarı da görebilirsin.")
+    expect(t.match(/haftada bir/g)).toHaveLength(1)
+    // Bug 24: haftalık test takvim günüyle gelir
+    expect(items29().find((x) => x.startsWith('Haftalık E testi son testin saatini'))).toMatch(/7 gün sonra, o günün başından itibaren/)
+    expect(WEEKLY_MIN_BASELINE_TESTS).toBe(3)
+    expect(MIN_BASELINE_TESTS).toBe(7)
+    expect(BASELINE_TO_DAY + 1).toBe(22)
+    // eski "en az 7 testle oluşur" cümlesi haftalık testte doğru değil: hiçbir 29 Eylül maddesinde yok
+    expect(items29().join(' ')).not.toMatch(/en az 7 testle/)
+    const nef = items29().find((x) => x.startsWith('Nef artık'))
+    expect(nef).toMatch(/günlük test önermez/)
+    const fix = RELEASES.find((r) => r.id === '2026-09-29').items.find((i) => i.kind === 'fix')
+    expect(fix.text).toContain('"Son 3 test"')
+    // her gün test isteyen cümle yok
+    expect(items29().join(' ')).not.toMatch(/her gün (E )?test|günlük E testi/i)
   })
   // İkinci inceleme: V-S3 (cihazda doğrulanmamış davranış), V-N4 ("Kalan" kartı yalnız haftalıkta), V-N5 (çift "ve", ses açıksa)
   const items29 = () => RELEASES.find((r) => r.id === '2026-09-29').items.map((i) => i.text)

@@ -15,8 +15,20 @@ export const RELEASES = [
       // sürüm notundan çıkarılır (YAPILACAKLAR). Metin yalnız kodun yaptığını söyler.
       { kind: 'change', text: "Test başlayınca ekran parlaklığı en yükseğe alınır; test bitince, testten çıkınca ya da uygulamadan ayrılınca eski değerine döner. Renkleri ters çevirme açıksa test başlamaz ve nasıl kapatılacağı yazar." },
       { kind: 'change', text: "Her göz bittiği an kaydedilir. Haftalık testi yarıda bırakırsan kalan gözler o gün Bugün kartında \"Kalan: …\" diye bekler; test ancak üç göz de bitince tamam sayılır, ertesi güne kalan yarım test baştan açılır." },
-      { kind: 'change', text: "Ölçüm yöntemi değiştiği için Gelişim'de görme için yeni seri başlar (\"Ölçüm yöntemi güncellendi; yeni seri.\"); başlangıç değerin yeniden en az 7 testle oluşur. Eski ölçümler silinmez; CSV dosyasında hepsi durur. Kamerasız yapılan ölçümler ayrı seridir." },
+      // Başlangıcın kaç testle oluştuğu aşağıdaki haftalık E testi maddesinde (karar 2026-09-29; "en az 7 testle"
+      // haftalık testte artık doğru değildi)
+      { kind: 'change', text: "Ölçüm yöntemi değiştiği için Gelişim'de görme için yeni seri başlar (\"Ölçüm yöntemi güncellendi; yeni seri.\"); başlangıç değerin yeniden oluşur. Eski ölçümler silinmez; CSV dosyasında hepsi durur. Kamerasız yapılan ölçümler ayrı seridir." },
       { kind: 'new', text: "E testinde sesli yönlendirme (ses açıksa, Profilim'de seçtiğin sesle): yalnız hazırlıkta, test durunca ve gözler arasındaki molada; harf ekrandayken konuşmaz. Söylenen cümle o an ekranda da yazılıdır." },
+      // Karar 2026-09-29 (YAPILACAKLAR "Sonsuz yol ve ilk 5 saniye" (a)): E testi ilk günden haftada bir. Başlangıç
+      // kuralı lib/trend.js WEEKLY_MIN_BASELINE_TESTS (3 → 7 test; VARSAYIM, kanıt kartında yazar). Cihazda denenmedi.
+      // Son cümle (inceleme 2026-09-29): kural eski ölçümlere de uygulanır; iki göz serisi (hep haftalık) ve seyrek
+      // test edilmiş sağ/sol seriler yeni test olmadan takibe geçebilir, uyarı gösterebilir. Her gün test edilmiş (8.–21.
+      // günlerde 7 test) sağ/sol serilerde başlangıç ve uyarı değişmez.
+      { kind: 'change', text: "E testi artık haftada bir: haftalık E testi (sağ, sol, iki göz) ilk gün yola eklenir, sonra her hafta; öteki günlerde yolda E testi yok. İstersen kısa E testini (eski adıyla Günlük test; sağ ve sol göz) Ana sayfadaki Ölçüm listesinden yapabilirsin. Eski günlük test kayıtların geçmişte ve CSV dosyasında \"Kısa görme testi\" adıyla görünür. Gelişim'de ilk test alışma sayılır; başlangıç değerin 3 haftalık testle, en erken 22. günde hazır olur ve yeni testlerle 7 teste kadar güçlenir. Bu kural eski ölçümlerine de uygulanır: özellikle iki göz serisinde, yeni test yapmasan da değerlendirme hemen başlayabilir, bir uyarı da görebilirsin." },
+      { kind: 'change', text: "Nef artık günlük test önermez: haftalık testin zamanı gelince onu hatırlatır. Görme uyarısında \"birkaç gün daha ölç\" denmez; sarıda sonraki testlere bakılır, kırmızıda yalnız göz doktoruna başvurman söylenir." },
+      { kind: 'fix', text: "Gelişim'de son testten bir hafta geçince \"Son 7 gün\" kutusu boş kalıyordu. Artık son 7 günde 3 test yoksa kutu \"Son 3 test\" yazar ve son 3 testin ortancasını gösterir; başlangıçla karşılaştırılan değer budur." },
+      // Bug 24 (HATA_GUNLUGU): isDue saatle sayıyordu; haftalık E testi artık takvim günüyle (lib/today.js isDueWeekly)
+      { kind: 'fix', text: "Haftalık E testi son testin saatini bekliyordu: her gün aynı saatte açınca test 8 günde bir geliyor, akşam \"tamam\" olmuş yola yeniden ekleniyordu. Artık son testten 7 gün sonra, o günün başından itibaren yolda." },
     ],
   },
   {

@@ -245,7 +245,7 @@ describe('biten göz hemen kaydedilir; çıkış onu silmez (S4, E10)', () => {
     await r.tap(r.btn('Atla'))
     await selfStart(r)
     await runEye(r)
-    expect(r.text()).toContain('Günlük test bitti')
+    expect(r.text()).toContain('Kısa test bitti')
     expect(r.text()).toContain('Bilgi amaçlıdır; göz muayenesinin yerini tutmaz.')
     expect(r.calls.save.map((x) => x.eye)).toEqual(['R', 'L'])
     // Özette konuşulmaz (ekranda "Test bitti." cümlesi yok; S13 yalnız hazırlık, duraklama ve mola)
