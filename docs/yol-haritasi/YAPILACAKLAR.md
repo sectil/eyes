@@ -127,9 +127,9 @@ Uygulama sırası (her biri ayrı onay, test, TestFlight): (a) E testi haftada b
       Bir günlük kayma VARSAYIM (yolun yükünü bölmek için; iki test aynı gün yolu 20 dk sınırına dayıyordu). Ana sayfa
       rozeti "Bu hafta" zamanı gelince (kaysa da) görünür; Ölçüm listesinden her gün yapılabilir. `isDue` (saatle)
       artık yalnız Nefes sayma rozetinde. Testler 1401/1401.
-      Açık: **TestFlight'tan önce sunucu (`api/coach.js`, Vercel) yeniden yayımlanmalı** (SYSTEM_PROMPT ve `weeklyDue`
-      değişti; o zamana dek eski istemle gelen "Günlük test" cevabı istemcide atılır, kart çevrimdışı öneri gösterir;
-      çevrimiçi Nef haftalık testi `daysSinceLastTest`e göre önerir). Nef'in "Okuma testi" önerisi günden bağımsız
+      Yayın (2026-09-29): TestFlight Build 59 (commit 26419b4: haftalık E testi + okuma testi ayrı gün) yüklendi. Nef
+      sunucusu (`api/coach.js`, Vercel) yeni istemle yayımlandı (commit 97f2f87, 499 dosya; Bug 30 düzeltmesiyle);
+      canlı deneme cevabı: "Başlangıç değerlerin oluşuyor, haftalık testini düzenli sürdürmen…". Nef'in "Okuma testi" önerisi günden bağımsız
       (istemde okuma zamanı sinyali yok). Sitenin Gelişim ve Ana sayfa ekran görüntüleri eski örnek veriyle (günlük kısa testler) çekildi;
       görünür bir günlük test cümlesi yok, istenirse yeniden çekilir.
       Cihazda bak:
