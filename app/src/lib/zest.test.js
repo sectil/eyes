@@ -221,3 +221,30 @@ describe('shouldStop', () => {
     expect(z.estimate().logMAR).toBeCloseTo(0.3, 0)
   })
 })
+
+describe('haftalık plan: her göz sabit 28 harf (karar S2)', () => {
+  it('PLANS.weekly en az = en çok = 28; günlük değişmedi', () => {
+    expect(PLANS.weekly).toMatchObject({ trials: 28, minTrials: 28 })
+    expect(PLANS.daily).toMatchObject({ trials: 20, minTrials: 14 })
+  })
+  it('belirsizlik ne kadar küçük olursa olsun 28\'den önce durmaz, 28\'de durur', () => {
+    for (let n = 20; n < 28; n++) expect(shouldStop({ trials: n, fineTrials: n, sd: 0.001 }, PLANS.weekly)).toBe(false)
+    expect(shouldStop({ trials: 28, fineTrials: 28, sd: 0.5 }, PLANS.weekly)).toBe(true)
+  })
+  it('simülasyon: hiçbir haftalık koşu 20\'de durmaz, hepsi tam 28 harf', () => {
+    const counts = []
+    for (let s = 0; s < 60; s++) {
+      const r = rng(9000 + s)
+      const theta = -0.1 + (s % 9) * 0.1
+      const z = createZest()
+      let n = 0
+      while (!shouldStop({ trials: n, sd: z.estimate().sd }, PLANS.weekly)) {
+        const x = z.next()
+        z.update(x, r() < pCorrect(x, theta))
+        n += 1
+      }
+      counts.push(n)
+    }
+    expect(counts.every((n) => n === 28)).toBe(true)
+  })
+})

@@ -84,6 +84,28 @@ describe('activitiesFrom — testler', () => {
     expect(activitiesFrom(tests).map((a) => a.id)).toEqual(['t:a', 't:b', 't:c', 't:d'])
   })
 
+  it('her göz bittiği an kaydedilir (S4): gerçek süreler toplanır, tahmin her parçaya yazılmaz', () => {
+    const t0 = new Date(at(2026, 8, 24, 9)).getTime()
+    const iso = (ms) => new Date(t0 + ms).toISOString()
+    // Göz başına ~3,5 dk, aralarında 20 sn mola: kayıtlar 6 dk arayla ama her göz öncekinden 20 sn sonra başladı
+    const run = [
+      { id: 'a', type: 'va-weekly', eye: 'R', logMAR: 0.1, seconds: 210, date: iso(210000) },
+      { id: 'b', type: 'va-weekly', eye: 'L', logMAR: 0.12, seconds: 340, date: iso(210000 + 20000 + 340000) },
+      { id: 'c', type: 'va-weekly', eye: 'OU', logMAR: 0.0, seconds: 200, date: iso(210000 + 20000 + 340000 + 20000 + 200000) },
+    ]
+    const acts = activitiesFrom(run)
+    expect(acts).toHaveLength(1)
+    expect(acts[0]).toMatchObject({ seconds: 750, estimated: false })
+    expect(acts[0].results).toHaveLength(3)
+    // Yarım gün: sabah sağ, akşam sol + iki göz → iki aktivite, her biri kendi gerçek süresiyle (300 + 300 değil)
+    const half = [
+      { ...run[0], date: iso(0) },
+      { ...run[1], date: iso(11 * 3600000) },
+      { ...run[2], date: iso(11 * 3600000 + 220000) },
+    ]
+    expect(activitiesFrom(half).map((a) => [a.results.length, a.seconds, a.estimated])).toEqual([[1, 210, false], [2, 540, false]])
+  })
+
   it('farklı test türleri birleşmez', () => {
     const tests = [
       { id: 'a', type: 'va-daily', eye: 'R', logMAR: 0.2, date: at(2026, 8, 24, 9) },

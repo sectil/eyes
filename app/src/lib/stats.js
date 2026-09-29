@@ -13,8 +13,11 @@ export { NBSP, formatDuration }
 export const DEFAULT_TEST_SECONDS = { 'va-daily': 180, 'va-weekly': 300, reading: 180 }
 // Göz kırpma oturumu süre kaydetmez; routines.todaySeconds ile aynı varsayılan (150 sn).
 export const DEFAULT_BLINK_SECONDS = 150
-// VARSAYIM: bir görme testi akışı her gözü (Sağ, Sol, İki göz) ayrı kayıt olarak aynı anda ekler
-// (App.saveTests). Aynı türden, 5 dk içinde, farklı göze ait kayıtlar tek aktivite sayılır.
+// Bir görme testi her gözü ayrı kayıt olarak ekler: eski akış hepsini sonda aynı anda (App.saveTests), yeni akış
+// (karar S4) her gözü bittiği an. Aynı türden, farklı göze ait ve 5 dk içinde kayıtlar tek aktivite sayılır. Kayıtta
+// gerçek süre (seconds) varsa aralık bu gözün BAŞINDAN ölçülür (önceki göz bittikten sonra bu gözün başlamasına dek
+// geçen süre) ve aktivitenin süresi gözlerin gerçek sürelerinin toplamıdır; tüm testin tahmini süresi (300 sn) her
+// parçaya ayrı ayrı yazılmaz.
 export const TEST_GROUP_WINDOW_MS = 5 * 60 * 1000
 
 const VA_TYPES = new Set(['va-daily', 'va-weekly'])
@@ -159,16 +162,23 @@ export function activitiesFrom(tests = [], sessions = []) {
 
   let lastVa = null
   for (const { t, i, ts } of sortedTests) {
+    const own = VA_TYPES.has(t.type) ? positiveSec(t.seconds) : null
+    const startTs = own != null ? ts - own * 1000 : ts
     if (
       VA_TYPES.has(t.type) &&
       lastVa &&
       lastVa.type === t.type &&
-      ts - lastVa.lastTs <= TEST_GROUP_WINDOW_MS &&
+      startTs - lastVa.lastTs <= TEST_GROUP_WINDOW_MS &&
       !lastVa.results.some((r) => r.eye === (t.eye ?? null))
     ) {
       lastVa.results.push({ eye: t.eye ?? null, logMAR: finite(t.logMAR) })
       lastVa.lastTs = ts
       lastVa.detail = vaDetail(lastVa.results)
+      // Gerçek süreler toplanır; ilk parça tahminse (eski kayıt) tahmin bir kez kalır
+      if (own != null) {
+        lastVa.seconds = lastVa.estimated ? own : lastVa.seconds + own
+        lastVa.estimated = false
+      }
       continue
     }
     const a = testActivity(t, ts, i)

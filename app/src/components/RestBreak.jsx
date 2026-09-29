@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { Check, MountainSnow, ScanFace, SkipForward, X } from 'lucide-react'
+import { Check, Eye, Hand, X } from 'lucide-react'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { createHoldTimer, focusZone } from '../lib/gaze.js'
 import { cue } from '../lib/cue.js'
-import '../styles/rest.css'
+import { haptic } from '../lib/native.js'
+import '../styles/acuity.css'
 
 // Tam ekran "uzağa bak" konfor molası.
 // Kanıt notu: 20-20-20 kuralının (20 dk'da bir, 20 sn, 6 m) semptomlara etkisi gösterilemedi
@@ -17,6 +18,9 @@ import '../styles/rest.css'
 //
 // trueDepth: sayaç yalnızca yüz görünür ve focusZone(kare) === 'far' iken ilerler.
 // Odak verisi gelmezse (eski native sürüm) ya da takip başlamazsa düz geri sayıma düşer.
+// Görünüm (yakın E testi E8, PLAN.md; styles/acuity.css): ✕ · "Uzağa bak" · halka (sayı sayfa metni) · sıradaki
+// gözün önizlemesi ("Sonra: Sol göz · sağ gözünü ört") · "Atla". Tek ekran, kaydırmasız (320×568'de "Atla" görünür).
+// endCue=false: bitişte yalnız titreşim (sıradaki ekran kendi sesli cümlesini söyler; iki ses üst üste binmesin).
 
 const NO_FRAME_FALLBACK_MS = 4000 // bu sürede hiç kare gelmezse düz sayaç
 const NO_FOCUS_FALLBACK_MS = 3000 // yüz görünüyor ama odak alanları yoksa düz sayaç
@@ -35,12 +39,14 @@ function announceRested() {
 export default function RestBreak({
   seconds = 20,
   trueDepth = false,
-  title = 'Gözlerini dinlendir',
-  subtitle = 'Pencereden dışarı, 6 metreden uzak bir noktaya bak.',
-  doneText = 'Hazırsın, devam edebilirsin', // bitişteki durum satırı (çağıran bağlama göre verir)
+  title = 'Uzağa bak',
+  subtitle = 'Pencereden ya da odanın ucuna bak.',
+  doneText = 'Hazırsın', // bitişteki durum satırı (çağıran bağlama göre verir)
+  next = null, // { eye: 'R' | 'L' | 'OU', text: 'Sol göz · sağ gözünü ört' } — sıradaki gözün önizlemesi
+  endCue = true,
   onDone,
   onSkip,
-  onClose, // verilirse sol üstte ✕ (mola sayılmadan çıkış; olay/haptic yok)
+  onClose, // verilirse sol üstte ✕ (çağıran çıkış sayfasını açar; olay/haptic yok)
 }) {
   const totalMs = Math.max(1, seconds) * 1000
   const [mode, setMode] = useState(trueDepth ? 'track' : 'timer') // track | timer
@@ -66,7 +72,8 @@ export default function RestBreak({
     setElapsedMs(totalMs)
     setFinished(true)
     // cue(…, false) haptic('success') da verir (src/lib/cue.js); göz uzaktayken sesli haber verir.
-    cue(END_TEXT, false)
+    if (endCue) cue(END_TEXT, false)
+    else haptic('success')
     doneTimer.current = setTimeout(() => onDoneRef.current?.(), 700)
   }
 
@@ -138,79 +145,77 @@ export default function RestBreak({
   const leftSec = Math.max(0, Math.ceil((totalMs - elapsedMs) / 1000))
   const frac = Math.min(1, elapsedMs / totalMs)
   const tracking = mode === 'track'
+  const waiting = tracking && !finished && gaze !== 'far'
   const status = finished
-    ? { tone: 'ok', text: doneText }
-    : !tracking
-      ? { tone: 'calm', text: 'Rahatça göz kırp, omuzlarını gevşet' }
-      : gaze === 'far'
-        ? { tone: 'ok', text: 'Harika, uzağa bakıyorsun' }
+    ? doneText
+    : !tracking || gaze === 'far'
+      ? `${leftSec} saniye`
+      : gaze === 'noface'
+        ? 'Telefonu yüzüne dönük tut'
         : gaze === 'near'
-          ? { tone: 'wait', text: 'Ekrana değil, uzağa bak — sayaç bekliyor' }
-          : gaze === 'noface'
-            ? { tone: 'wait', text: 'Yüzün görünmüyor — telefonu yüzüne dönük tut' }
-            : { tone: 'calm', text: 'Yüzün aranıyor…' }
+          ? 'Uzağa bakınca sayaç ilerler'
+          : 'Yüzün aranıyor'
 
-  const size = 232
-  const stroke = 12
+  const size = 120
+  const stroke = 8
   const r = (size - stroke) / 2
   const c = 2 * Math.PI * r
 
   return (
-    <div className="rest-root" role="dialog" aria-modal="true" aria-labelledby="rest-title">
-      <main className="screen rest-screen">
-        {onClose && (
-          <button type="button" className="btn-icon rest-close" onClick={() => onClose()} aria-label="Kapat">
-            <X size={20} aria-hidden="true" />
-          </button>
-        )}
-        <header className="rest-head">
-          <span className="rest-badge"><MountainSnow size={15} aria-hidden="true" /> Konfor molası</span>
+    <div className="acu-scr acu-rest" role="dialog" aria-modal="true" aria-labelledby="rest-title">
+      <div className="acu-body">
+        <div className="acu-top">
+          {onClose ? (
+            <button type="button" className="acu-ib" onClick={() => onClose()} aria-label="Testten çık">
+              <X size={20} aria-hidden="true" />
+            </button>
+          ) : (
+            <span className="acu-ib-sp" aria-hidden="true" />
+          )}
+          <span className="acu-prog">Mola</span>
+          <span className="acu-ib-sp" aria-hidden="true" />
+        </div>
+        <div className="acu-ttl center">
           <h1 id="rest-title">{title}</h1>
           <p>{subtitle}</p>
-        </header>
-
-        <div className={`rest-dial ${finished ? 'is-done' : ''} ${tracking && gaze !== 'far' && !finished ? 'is-waiting' : ''}`}>
-          <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
-            <circle className="rest-track" cx={size / 2} cy={size / 2} r={r} strokeWidth={stroke} />
-            <circle
-              className="rest-value"
-              cx={size / 2}
-              cy={size / 2}
-              r={r}
-              strokeWidth={stroke}
-              strokeDasharray={c}
-              strokeDashoffset={c * (1 - frac)}
-              transform={`rotate(-90 ${size / 2} ${size / 2})`}
-            />
-          </svg>
-          <div className="rest-center" aria-live="off">
-            {finished ? (
-              <span className="rest-check"><Check size={44} strokeWidth={2.6} aria-hidden="true" /></span>
-            ) : (
-              <>
-                <span className="rest-sec" aria-label={`${leftSec} saniye kaldı`}>{leftSec}</span>
-                <span className="rest-unit">saniye</span>
-              </>
-            )}
+        </div>
+        <div className="acu-ring">
+          <div className={`acu-dial${finished ? ' done' : ''}${waiting ? ' waiting' : ''}`}>
+            <svg viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
+              <circle className="acu-dial-track" cx={size / 2} cy={size / 2} r={r} strokeWidth={stroke} />
+              <circle
+                className="acu-dial-value"
+                cx={size / 2}
+                cy={size / 2}
+                r={r}
+                strokeWidth={stroke}
+                strokeDasharray={c}
+                strokeDashoffset={c * (1 - frac)}
+                transform={`rotate(-90 ${size / 2} ${size / 2})`}
+              />
+            </svg>
+            <span className="acu-dial-num" aria-hidden="true">
+              {finished ? <Check size={40} strokeWidth={2.6} /> : leftSec}
+            </span>
           </div>
         </div>
-
-        <p className={`rest-status is-${status.tone}`} aria-live="polite">
-          {tracking && !finished && <ScanFace size={16} aria-hidden="true" />}
-          {status.text}
-        </p>
-
-        <div className="rest-foot">
-          {tracking ? (
-            <p className="rest-tip">Başını çevirmeden telefonun üstünden uzağa bak; sayaç yalnızca uzağa bakarken ilerler.</p>
-          ) : (
-            <p className="rest-tip">Uzağa bakınca gözün odaklanma kası gevşer. Bu kısa mola isteğe bağlıdır.</p>
-          )}
-          <button className="btn btn-ghost rest-skip" onClick={skip} disabled={finished}>
-            <SkipForward size={18} aria-hidden="true" /> Atla
-          </button>
-        </div>
-      </main>
+        <p className={`acu-note acu-rest-status${waiting ? ' wait' : ''}`} aria-live="off">{status}</p>
+        {/* VoiceOver: saniye sayısı her saniye okunmaz; yalnız bakış yönlendirmesi ("Uzağa bakınca sayaç ilerler",
+            "Telefonu yüzüne dönük tut") ve bitiş kibarca okunur */}
+        <span className="acu-sr" aria-live="polite">{finished || waiting ? status : ''}</span>
+        {next && (
+          <div className="acu-rows acu-rest-next">
+            <div className="acu-row">
+              <span className="acu-ic wait" aria-hidden="true">{next.eye === 'OU' ? <Eye size={15} /> : <Hand size={15} />}</span>
+              <span className="acu-rt">
+                <span className="k">Sonra</span>
+                <span className="v">{next.text}</span>
+              </span>
+            </div>
+          </div>
+        )}
+        <button type="button" className="acu-cta ghost" onClick={skip} disabled={finished}>Atla</button>
+      </div>
     </div>
   )
 }

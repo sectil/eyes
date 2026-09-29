@@ -69,6 +69,74 @@ describe('Doktor raporu', () => {
     expect(reportHtml(reportModel({ tests: [], sessions: [] }))).toContain('Henüz görme testi yok')
     expect(reportHtml(reportModel({ tests: [], sessions: [] }))).not.toContain('Ad:')
   })
+  it('uyarı kuralı metni trend kuralıyla aynı: seyrek seride son 3 test; seri anahtarı (yöntem, mesafe, gözlük)', () => {
+    // Haftalık iki göz (OU): haftada 1 test, 10. testten itibaren kayıp → seyrek seride kırmızı (S9)
+    const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
+    const ou = Array.from({ length: 12 }, (_, k) => ({ type: 'va-weekly', eye: 'OU', date: D(7 * k), logMAR: k >= 9 ? 0.5 : 0.0, correction: 'none', distanceTracked: true, meanDistanceMm: 400, algorithm: 'descent-zest-v4' }))
+    const m = reportModel({ tests: ou, sessions: [], now: new Date(D(77)) })
+    expect(m.eyes[0].trend).toMatchObject({ alert: 'red', sparse: true })
+    const html = reportHtml(m)
+    const rule = html.slice(html.indexOf('<h2>Uyarı kuralı</h2>'), html.indexOf('</section>', html.indexOf('<h2>Uyarı kuralı</h2>')))
+    expect(rule).toMatch(/Seyrek seride \(son 7 günde 3 test yoksa/)
+    expect(rule).toMatch(/son 3 teste uygulanır; ilki sonuncudan en az 6 gün önce/)
+    expect(rule).toMatch(/aynı ölçüm yöntemi sürümü, aynı mesafe ölçümü \(kamerayla \/ kamerasız/)
+    expect(rule).toMatch(/aynı gözlük\/lens koşulu/)
+    expect(rule).not.toMatch(/Yalnız aynı gözlük\/lens koşulundaki testler karşılaştırılır/)
+    expect(html).toMatch(/haftalık testte 28/)
+  })
+
+  it('seriye girmeyen kayıtlar nedeniyle; yöntem değişikliğinde S6 notu ("farklı gözlük" denmez)', () => {
+    const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
+    const v3 = Array.from({ length: 5 }, (_, n) => ({ type: 'va-daily', eye: 'R', date: D(n), logMAR: 0.1, correction: 'none', distanceTracked: true, meanDistanceMm: 400, algorithm: 'descent-zest-v3' }))
+    const html = reportHtml(reportModel({ tests: [...v3, { ...v3[0], date: D(6), algorithm: 'descent-zest-v4' }], sessions: [], now: new Date(D(6)) }))
+    expect(html).toContain('Ölçüm yöntemi güncellendi; yeni seri.')
+    expect(html).not.toMatch(/Farklı gözlük\/lens koşulundaki 5/)
+  })
+
+  // İnceleme bulgusu R-N1: "Değişim" okuyanın gördüğü iki sayının farkı olmalı
+  it('Değişim yazılan yuvarlanmış değerlerden: başlangıç 0,12 → son 7 gün 0,20 = "+0,08" (ham fark 0,089)', () => {
+    const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
+    const tests = [...Array.from({ length: 21 }, (_, n) => ({ type: 'va-daily', eye: 'R', date: D(n), logMAR: 0.115 })), { type: 'va-daily', eye: 'R', date: D(30), logMAR: 0.204 }]
+    const m = reportModel({ tests, sessions: [], now: new Date(D(30)) })
+    expect(m.eyes[0].trend).toMatchObject({ phase: 'tracking', baseline: 0.115, current7: 0.204, delta: 0.089, currentWindow: 'days7' })
+    const kvOf = (html) => html.slice(html.indexOf('<div class="kv">'), html.indexOf('</div>', html.indexOf('<div class="kv">')))
+    const kv = kvOf(reportHtml(m))
+    expect(kv).toContain('<span>Başlangıç (ortanca)</span><b>0,12</b>')
+    expect(kv).toContain('<span>Son 7 gün (ortanca)</span><b>0,20</b>')
+    expect(kv).toContain('<span>Değişim</span><b>+0,08</b>')
+    // iyileşme gerçek eksiyle; fark yuvarlanınca sıfırsa işaretsiz
+    const eye = (trend) => ({ ...m.eyes[0], trend: { ...m.eyes[0].trend, ...trend } })
+    const kvFor = (trend) => kvOf(reportHtml({ ...m, eyes: [eye(trend)] }))
+    expect(kvFor({ baseline: 0.204, current7: 0.115, current: 0.115, delta: -0.089 })).toContain('<span>Değişim</span><b>−0,08</b>')
+    expect(kvFor({ baseline: 0.104, current7: 0.096, current: 0.096, delta: -0.008 })).toContain('<span>Değişim</span><b>0,00</b>')
+    // son 7 günde test yoksa karşılaştırılan değer son 3 testin ortancası: o yazılır, fark ondan
+    const last3 = kvFor({ current7: null, current: 0.204, currentWindow: 'last3', delta: 0.089 })
+    expect(last3).toContain('<span>Son 3 test (ortanca)</span><b>0,20</b>')
+    expect(last3).toContain('<span>Değişim</span><b>+0,08</b>')
+  })
+
+  // İnceleme bulgusu R-N3: kural metni trend.js seri anahtarının eski mesafe ayrımını da söyler
+  it('uyarı kuralı metni eski yöntemin yakın / uzak mesafe ayrımını söyler (trend.js seri anahtarı)', () => {
+    const html = reportHtml(reportModel({ tests: [], sessions: [] }))
+    const rule = html.slice(html.indexOf('<h2>Uyarı kuralı</h2>'), html.indexOf('</section>', html.indexOf('<h2>Uyarı kuralı</h2>')))
+    expect(rule).toContain("Eski yöntemle (descent-zest-v4 öncesi) kamerayla yapılan ölçümlerde ortalama mesafe de seriyi ayırır: 36–44 cm'deki, 36 cm'den yakın ve 44 cm'den uzak ölçümler üç ayrı seridir.")
+    // metin kuralla aynı: 35 cm, 40 cm ve 45 cm'deki eski kayıtlar üç ayrı seri; v4 kayıtları ayrılmaz
+    const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
+    const old = (n, mm) => ({ type: 'va-daily', eye: 'R', date: D(n), logMAR: 0.1, correction: 'none', distanceTracked: true, meanDistanceMm: mm, algorithm: 'descent-zest-v3' })
+    const near = [old(0, 355), old(1, 400), old(2, 445), old(3, 359)]
+    expect(reportModel({ tests: near, sessions: [], now: new Date(D(3)) }).eyes[0].trend.droppedBy).toMatchObject({ band: 2 })
+    const v4 = near.map((t) => ({ ...t, algorithm: 'descent-zest-v4' }))
+    expect(reportModel({ tests: v4, sessions: [], now: new Date(D(3)) }).eyes[0].trend.droppedBy).toMatchObject({ band: 0 })
+  })
+
+  it('logMAR ve ondalık aynı yuvarlanmış değerden (H8): 0,004 → "0,00" ve "1,00"; 0,105 → "0,11"', () => {
+    const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
+    const html = reportHtml(reportModel({ tests: [{ type: 'va-daily', eye: 'R', date: D(0), logMAR: 0.004 }, { type: 'va-daily', eye: 'R', date: D(1), logMAR: 0.105 }], sessions: [], now: new Date(D(1)) }))
+    expect(html).toContain('<td class="n">0,00</td><td class="n">1,00</td>')
+    expect(html).toContain('<td class="n">0,11</td><td class="n">0,78</td>')
+    expect(html).toContain('0,11 logMAR (≈ 0,78)')
+  })
+
   it('grafik: 2 noktadan az ise boş; dosya adları tarihli', () => {
     expect(eyeChartSvg([{ date: day(0), logMAR: 0.2 }])).toBe('')
     expect(reportFilename(new Date(2026, 8, 6))).toBe('nefona-rapor-2026-09-06.pdf')

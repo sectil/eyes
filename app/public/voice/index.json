@@ -46,11 +46,19 @@
         "blClose",
         "blClose2",
         "blSqueeze",
-        "blRest"
+        "blRest",
+        "acuCoverL",
+        "acuCoverR",
+        "acuBoth",
+        "acuWrong",
+        "acuCloser",
+        "acuFarther",
+        "acuFace",
+        "acuPaused"
       ],
       "voiceName": "Neslihan",
       "model": "eleven_multilingual_v2",
-      "date": "2026-09-27"
+      "date": "2026-09-28"
     },
     "male": {
       "phrases": [
@@ -98,11 +106,19 @@
         "blClose",
         "blClose2",
         "blSqueeze",
-        "blRest"
+        "blRest",
+        "acuCoverL",
+        "acuCoverR",
+        "acuBoth",
+        "acuWrong",
+        "acuCloser",
+        "acuFarther",
+        "acuFace",
+        "acuPaused"
       ],
       "voiceName": "Hakan",
       "model": "eleven_multilingual_v2",
-      "date": "2026-09-27"
+      "date": "2026-09-28"
     }
   }
 }

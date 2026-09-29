@@ -20,8 +20,8 @@ import {
 import ProgressChart from '../components/ProgressChart.jsx'
 import ProgressOverview, { DomainDetail } from '../components/ProgressOverview.jsx'
 import { PageHeader, IrisMark } from '../components/ui.jsx'
-import { analyzeTrend, trendMessage } from '../lib/trend.js'
-import { snellen20 } from '../lib/optotype.js'
+import { analyzeTrend, trendMessage, seriesNotes, droppedNotes } from '../lib/trend.js'
+import { snellen20, formatLogMAR } from '../lib/optotype.js'
 import { WEEKDAYS, dayKey, monthGrid, startOfWeek, weekProgress } from '../lib/calendar.js'
 import { normalizeProfile, NEAR_DIFFICULTY } from '../lib/profile.js'
 import { SETS, setDurationSec } from '../lib/routines.js'
@@ -468,27 +468,37 @@ function NudgeSection({ nudges, notifyOff = false }) {
 // Görme testi koşulu (AcuityTest WEAR + eski 'glasses'); trend yalnızca aynı koşulu birleştirir (lib/trend.js)
 const CONDITION_TEXT = { none: 'gözlüksüz', reading: 'okuma gözlüğüyle', progressive: 'progresif gözlükle', distance: 'uzak gözlüğüyle', contacts: 'lensle', glasses: 'gözlüklü (eski kayıt)' }
 
-function VisionSection({ tests, profile, onStart }) {
+// Görme bölümü başlığının altındaki satırlar (analyzeTrend sonucu): seri koşulu, tek satırlık seri notları
+// (S6 "Ölçüm yöntemi güncellendi; yeni seri.", S5 "Mesafe ölçülmedi · 40 cm varsayıldı") ve seriye girmeyen
+// kayıtlar nedeniyle ("Farklı koşuldaki" yalnız gözlük/lens koşulu için; lib/trend.js droppedNotes).
+export function visionHeadLines(r) {
+  const lead = `Tek güne değil, haftalık eğilime bakıyoruz.${r?.condition ? ` Seri: ${CONDITION_TEXT[r.condition] ?? r.condition}.` : ''}`
+  return { lead, notes: [...seriesNotes(r), ...droppedNotes(r)] }
+}
+// Başlangıç / Son 7 gün kutusu: logMAR ve 20/x aynı yuvarlanmış değerden (H8; E7 ile aynı biçim)
+export const visionMetric = (v) => (v != null && Number.isFinite(v) ? { value: formatLogMAR(v), snellen: snellen20(v) } : { value: '—', snellen: '' })
+
+export function VisionSection({ tests, profile, onStart }) {
   const [eye, setEye] = useState(() => pickSeries(tests).eye ?? 'R')
   const va = useMemo(() => tests.filter((t) => t.type === 'va-daily' || t.type === 'va-weekly'), [tests])
   const r = useMemo(() => analyzeTrend(va.filter((t) => t.eye === eye)), [va, eye])
   const tone = r.alert === 'red' ? 'tone-danger' : r.alert === 'yellow' ? 'tone-warn' : ''
+  const head = visionHeadLines(r)
+  const base = visionMetric(r.baseline)
+  const cur = visionMetric(r.current7)
 
   return (
     <>
       <div className="pg-section-head">
         <h2>Görme keskinliği</h2>
-        <p>
-          Tek güne değil, haftalık eğilime bakıyoruz.
-          {r.condition ? ` Seri: ${CONDITION_TEXT[r.condition] ?? r.condition}.` : ''}
-          {r.dropped > 0 ? ` Farklı koşuldaki ${r.dropped} ölçüm bu seriye girmiyor.` : ''}
-        </p>
+        <p>{head.lead}</p>
+        {head.notes.map((n) => <p key={n}>{n}</p>)}
       </div>
 
       {!va.length ? (
         <section className="card">
           <EmptyState icon={ScanEye} title="Henüz görme ölçümü yok">
-            <p>Günlük test yaklaşık 3 dakika sürer. İlk ölçümün, sonraki sonuçları karşılaştıracağımız başlangıç noktası olur.</p>
+            <p>İlk ölçümün, sonraki sonuçları karşılaştıracağımız başlangıç noktası olur.</p>
             {onStart && (
               <button className="btn btn-sm" onClick={() => onStart('daily')}>
                 <Play size={16} aria-hidden="true" /> Günlük testi başlat
@@ -513,13 +523,13 @@ function VisionSection({ tests, profile, onStart }) {
               <div className="pg-metrics">
                 <div className="metric">
                   <span className="eyebrow">Başlangıç</span>
-                  <span className="pg-metric-value">{decimalTr(r.baseline)}</span>
-                  <span className="muted small">{snellen20(r.baseline)}</span>
+                  <span className="pg-metric-value">{base.value}</span>
+                  <span className="muted small">{base.snellen}</span>
                 </div>
                 <div className="metric">
                   <span className="eyebrow">Son 7 gün</span>
-                  <span className="pg-metric-value">{r.current7 != null ? decimalTr(r.current7) : '—'}</span>
-                  <span className="muted small">{r.current7 != null ? snellen20(r.current7) : ''}</span>
+                  <span className="pg-metric-value">{cur.value}</span>
+                  <span className="muted small">{cur.snellen}</span>
                 </div>
               </div>
             )}
@@ -529,7 +539,7 @@ function VisionSection({ tests, profile, onStart }) {
             {r.series.length ? (
               <ProgressChart series={r.series} baseline={r.baseline} />
             ) : (
-              <p className="muted small">Bu göz için henüz ölçüm yok. Günlük test sağ, sol ve iki gözü sırayla ölçer.</p>
+              <p className="muted small">Bu göz için henüz ölçüm yok. Günlük test sağ ve sol gözü, haftalık test ayrıca iki gözü birlikte ölçer.</p>
             )}
           </section>
         </>

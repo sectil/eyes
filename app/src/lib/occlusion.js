@@ -9,8 +9,14 @@
 // uzun bozulursa harf gizlenir (kırpma ≈ 0,1–0,4 sn, testi durdurmaz).
 //
 // Derinlik (Build 25, FaceDistancePlugin "depth" olayı): iki göz bölgesinin ortanca uzaklığı. Avuç göze bir iki
-// santim yakın durur → örtülen tarafın bölgesi diğerinden belirgin yakın. Fark DEPTH_DELTA_MM'i aşarsa hangi gözün
-// örtüldüğü KESİN bilinir (yanlış göz de yakalanır). Fark küçükse göz kapağı kuralına düşülür.
+// santim yakın durur → örtülen tarafın bölgesi diğerinden belirgin yakın. Fark DEPTH_DELTA_MM'e ulaşırsa (≥ 15 mm)
+// hangi gözün örtüldüğü KESİN bilinir (yanlış göz de yakalanır). Fark küçükse göz kapağı kuralına düşülür.
+//
+// Kapak yolu (PLAN.md 1.8, karar S8): derinlik taraf bulamazken bir gözün kapalı okunması, HANGİ gözün kapalı
+// olduğunu söylemez (sol kapalı → iki değer birlikte ~0,88). Bu yüzden kapak yolu kendi başına 'ok' değildir:
+// durum 'lid-ask' olur ve kişi tek dokunuşla onaylar ("Evet, sol gözüm kapalı" → confirmLid). Onaydan sonra
+// kapak yolu 'ok' sayılır, yöntem 'lid' (kayıtta camera-lid+self). Derinlik yanlış tarafı görürse onay geçersiz
+// kalır ('wrong-eye'). Onay o gözün izleyicisi boyunca geçerlidir (her göz için yeni izleyici kurulur).
 // VARSAYIM: eşikler 0,55 / 0,45 (Build 24 cihazında kapalı göz 0,87–0,88 okundu); derinlik farkı 15 mm
 // (avuç–göz arası; cihaz verisiyle ayarlanacak).
 export const CLOSED_MIN = 0.55
@@ -36,7 +42,9 @@ export const coverFor = (eye) => (eye === 'R' ? 'L' : eye === 'L' ? 'R' : 'none'
 
 // l, r: 0–1 kapanma (null = yüz karesi yok). need: 'L' | 'R' (örtülmesi gereken) | 'none' (ikisi açık).
 // side: derinlikten örtülen taraf ('L' | 'R' | null), depthKnown: derinlik ölçüldü mü.
-export function classify(l, r, need, side = null, depthKnown = false) {
+// lidConfirmed: kişi kapak yolunda kapalı gözün doğru göz olduğunu onayladı mı.
+// Durumlar: 'ok' | 'no-face' | 'closed' | 'uncovered' | 'wrong-eye' | 'lid-ask' | 'unclear'
+export function classify(l, r, need, side = null, depthKnown = false, lidConfirmed = false) {
   const blinkKnown = Number.isFinite(l) && Number.isFinite(r)
   if (need === 'none') {
     if (side) return 'closed' // bir gözün önünde el var
@@ -47,12 +55,15 @@ export function classify(l, r, need, side = null, depthKnown = false) {
   }
   if (side) return side === need ? 'ok' : 'wrong-eye'
   if (!blinkKnown) return depthKnown ? 'unclear' : 'no-face'
-  if (l >= CLOSED_MIN || r >= CLOSED_MIN) return 'ok'
+  // Bir göz kapalı ama hangisi bilinmiyor: yalnız kişinin onayıyla kabul
+  if (l >= CLOSED_MIN || r >= CLOSED_MIN) return lidConfirmed ? 'ok' : 'lid-ask'
   if (l <= OPEN_MAX && r <= OPEN_MAX) return 'uncovered'
   return 'unclear'
 }
 
 // Belirsiz (eşikler arası) durum testi durdurmaz; yalnızca açıkça yanlış durumlar durdurur.
+// 'lid-ask' de durdurmaz (bir göz kapalı; taraf bilinmiyor), ama 'ok' da sayılmaz: kapı açılmaz, duraklama
+// bitmez. Testte onay düğmesi yok; duraklamadan avuçla (derinlik) ya da onaylı kapakla çıkılır.
 const BAD = new Set(['no-face', 'closed', 'uncovered', 'wrong-eye'])
 
 function median(arr) {
@@ -72,7 +83,11 @@ export function createOcclusionMonitor(need) {
   let dl = null
   let dr = null
   let state = null
-  let method = null // 'depth' | 'lid' | null — son 'ok' kararının kaynağı
+  // Son 'ok' kararının kaynağı: 'depth' (avuç tarafı derinlikten) | 'lid' (kapak + kişinin onayı) |
+  // 'open' (iki göz testi: ikisi açık görüldü) | null. İki göz testinde örtme yok; 'lid' yazılmaz (PLAN.md 1.8).
+  let method = null
+  let lidConfirmed = false
+  let faceWaitSince = null // yüz görünüyor ama durum 'ok' değil: başlangıcı (S8 "Örttüm" yedeği için)
   let okSince = null
   let badSince = null
   let blocked = false
@@ -89,8 +104,10 @@ export function createOcclusionMonitor(need) {
     const blinkFresh = blinkTs != null && ts - blinkTs <= BLINK_FRESH_MS
     const depthFresh = depthTs != null && ts - depthTs <= DEPTH_FRESH_MS
     const side = depthFresh ? coveredSide(dl, dr) : null
-    state = classify(blinkFresh ? l : null, blinkFresh ? r : null, need, side, depthFresh)
-    method = state === 'ok' ? (side ? 'depth' : blinkFresh ? 'lid' : 'depth') : null
+    state = classify(blinkFresh ? l : null, blinkFresh ? r : null, need, side, depthFresh, lidConfirmed)
+    method = state !== 'ok' ? null : need === 'none' ? 'open' : side ? 'depth' : 'lid'
+    if (state === 'ok' || state === 'no-face') faceWaitSince = null
+    else if (faceWaitSince == null) faceWaitSince = ts
     if (state === 'ok') {
       if (okSince == null) okSince = ts
       badSince = null
@@ -120,6 +137,11 @@ export function createOcclusionMonitor(need) {
       dr,
       gateReady: state === 'ok' && okSince != null && ts - okSince >= GATE_MS,
       gateFrac: state === 'ok' && okSince != null ? Math.min(1, (ts - okSince) / GATE_MS) : 0,
+      // 'ok' ne kadardır sürüyor (ms); "Böyle kal…" dolumu (lib/acuityReadiness.js)
+      holdMs: state === 'ok' && okSince != null ? Math.max(0, ts - okSince) : 0,
+      // Yüz görünüyor ama 'ok' gelmiyor: ne kadardır (ms). 4 sn'de "Örttüm" yedeği (karar S8)
+      sinceFaceMs: faceWaitSince != null ? Math.max(0, ts - faceWaitSince) : 0,
+      lidConfirmed,
       blocked,
       pauses,
       blockedMs: Math.round(blockedMs + (blocked && blockedAt != null ? ts - blockedAt : 0)),
@@ -162,6 +184,12 @@ export function createOcclusionMonitor(need) {
     tick(ts) {
       return evaluate(ts)
     },
+    // Kapak yolu onayı ("Evet, sol gözüm kapalı"). Yalnız durum 'lid-ask' iken kabul edilir: dokunuş ile
+    // ekran arasında durum değiştiyse (ör. derinlik yanlış gözü gördü) onay yok sayılır.
+    confirmLid(ts) {
+      if (state === 'lid-ask') lidConfirmed = true
+      return evaluate(ts)
+    },
     // Test başlarken çağrılır: yönerge ekranındaki bekleme duraklama sayılmasın
     resetStats() {
       pauses = 0
@@ -173,18 +201,28 @@ export function createOcclusionMonitor(need) {
   }
 }
 
-// Kullanıcıya kısa yönerge (duruma ve kapatılacak göze göre)
+// Kullanıcıya kısa yönerge: YALNIZ emir cümlesi (duraklama kartı, E6). Durum bildirmez; hangi gözün örtülü
+// olduğunu gerçek gibi söylemez (kapak yolunda kamera tarafı ayırt edemiyor, PLAN.md 1.4). "Başlayabilirsin"
+// demez: hazır olmayı yalnız ana düğme söyler (lib/acuityReadiness.js).
+// method: 'depth' | 'lid' | 'open' | null — kişinin örtme yolu; yalnız belirsiz durumda fiili seçer (ört / kapat).
 const SIDE = { L: 'sol', R: 'sağ' }
-export function occlusionMessage(state, need) {
-  const cover = SIDE[need]
-  const test = need === 'L' ? 'sağ' : 'sol'
+const SIDE_ACC = { L: 'solu', R: 'sağı' }
+export function occlusionMessage(state, need, method = null) {
+  if (need === 'none') {
+    if (state === 'ok') return 'Böyle kal'
+    if (state === 'no-face') return 'Yüzünü kameraya göster'
+    return 'İki gözünü de aç'
+  }
+  const cover = SIDE[need] ?? 'sol'
+  const test = need === 'R' ? 'sol' : 'sağ'
   switch (state) {
-    case 'ok': return need === 'none' ? 'İki gözün açık' : `${cap(cover)} göz örtülü · ${test} gözünle bak`
-    case 'no-face': return 'Yüzün görünmüyor'
-    case 'closed': return 'İki gözünü de aç'
-    case 'uncovered': return `İki gözün açık · ${cover} gözünü avucunla ört`
-    case 'wrong-eye': return `Diğer gözünü örtmüşsün · ${cover} gözünü ört`
-    default: return need === 'none' ? 'İki gözünü de aç' : `${cap(cover)} gözünü tam ört, ${test} gözünü kısma`
+    case 'ok': return 'Böyle kal'
+    case 'no-face': return 'Yüzünü kameraya göster'
+    case 'wrong-eye': return `Yanlış göz · ${SIDE_ACC[need] ?? 'solu'} ört`
+    case 'unclear':
+      return method === 'lid' ? `${cap(cover)} gözünü tam kapat, ${test} gözünü kısma` : `${cap(cover)} gözünü tam ört, ${test} gözünü kısma`
+    // 'uncovered', 'lid-ask' (testte onay yok: avuçla derinlik tarafı doğrular) ve bilinmeyen durumlar
+    default: return `${cap(cover)} gözünü avucunla ört`
   }
 }
 const cap = (s) => (s ? s[0].toLocaleUpperCase('tr-TR') + s.slice(1) : s)

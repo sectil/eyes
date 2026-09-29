@@ -54,10 +54,10 @@ export const PRIOR = { mean: 0.4, sd: 0.5 }
 const round3 = (v) => Math.round(v * 1000) / 1000
 
 // Saf iniş merdiveni (Evre A). Yalnızca doğru/yanlış bilgisiyle çalışır.
-// quantize (isteğe bağlı): hedef logMAR → ekranda gerçekten çizilecek logMAR. Harf birimi cihaz
-// pikseline yuvarlandığı için (optotype.js renderSpec) küçük boyutlarda iki komşu satır aynı
-// büyüklükte çizilebilir; kullanıcı "harf küçülmedi" görmesin diye bir sonraki satır, gerçekten
-// daha küçük çizilen ilk boyuta atlar.
+// quantize (isteğe bağlı): hedef logMAR → ekranda gerçekten çizilecek logMAR. Harf artık tam hedef
+// boyutta çizilir (optotype.js renderSpec, birim yuvarlanmaz; H1 2026-09-28); iki komşu satır yalnız
+// ekranın tabanında (1 cihaz pikseli birim) aynı büyüklüğe kısılabilir. Kullanıcı "harf küçülmedi"
+// görmesin diye bir sonraki satır, gerçekten daha küçük çizilen ilk boyuta atlar; yoksa iniş 'floor' ile biter.
 // Döner: { level, mode: 'fast'|'row', done, reason, lastPassed, update(correct), trials }
 export function createDescent({ start = START_LOGMAR, fastStep = FAST_STEP, fineStep = FINE_STEP, minX = -0.3, maxX = 1.3, quantize = null } = {}) {
   const s = {
@@ -117,7 +117,7 @@ export function createDescent({ start = START_LOGMAR, fastStep = FAST_STEP, fine
 }
 
 // Tam test: iniş + ince ayar. plan: zest.js PLANS öğesi.
-// shown (update'e verilen): gerçekte çizilen boyutun logMAR'ı (piksel yuvarlaması, canlı mesafe).
+// shown (update'e verilen): gerçekte çizilen boyutun logMAR'ı (taban kısıtı, canlı mesafe).
 // quantize: bkz. createDescent (canlı mesafede her çağrıda güncel mesafeyle hesaplanabilir).
 export function createAcuityStaircase(plan, { minX = -0.3, maxX = 1.3, start = START_LOGMAR, quantize = null } = {}) {
   const descent = createDescent({ start, minX, maxX, quantize })
@@ -181,7 +181,8 @@ export function createAcuityStaircase(plan, { minX = -0.3, maxX = 1.3, start = S
 // en küçük sayı (ilk çağrıda Infinity; dönen shown bir sonraki çağrıya verilir).
 //   'last'  : kesin üst sınır ≤ 2 → "son harfler" (yalnızca gerçekten bitmek üzereyken)
 //   'few'   : tahmin ≤ 2 ama bitiş posterior belirsizliğine bağlı (üst sınır > 2) → sayı verilmez
-//             ("az kaldı"; en çok plan.trials − minTrials harf sürer: günlükte 6, haftalıkta 10)
+//             ("az kaldı"; en çok plan.trials − minTrials harf sürer: günlükte 6. Haftalıkta en az = en çok
+//             28 olduğundan (S2, 2026-09-28) hiç görünmez: kalan sayı hep kesindir, sonra "son harfler")
 //   'approx': ~count harf; tahmin büyürse sayı bir öncekinde kalır, hiç artmaz
 // Neden: ince ayarda posterior SD durma eşiğine inmezse remaining() 2'de kalır; "son harfler"
 // yazısı günlükte 8, haftalıkta 12 harf sürebiliyordu. İnişte satır başına harf 1'den 2'ye

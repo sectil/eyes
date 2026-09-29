@@ -37,6 +37,20 @@ import Capacitor
 /// boyunca (dikey tutuşta yatay), Y: uzun kenarı boyunca (dikey tutuşta düşey); işaret JS kalibrasyonunda öğrenilir.
 /// scrZ: gözlerin ekran düzlemine uzaklığı (mm, işaretli; cihaz verisiyle doğrulanacak).
 /// Takip açıkken ekran dikey kilitlenir (MainViewController.portraitLock): kalibrasyon dikeyde yapılır.
+///
+/// Görme testi ekranı (S7, S12; src/lib/brightnessSession.js, src/lib/invertedColors.js):
+/// - getBrightness → { brightness } (0–1)
+/// - setBrightness({ brightness, restoreOnLeave? }) → { brightness } (okunan değer). Değerler 0–1'e sıkıştırılır.
+///   restoreOnLeave verilirse uygulama etkinliğini yitirince (Denetim Merkezi, arama, uygulama değiştirme)
+///   ekran bu değere döner. Apple QA1751: "you cannot set the brightness once the app leaves the foreground" →
+///   geri yükleme arka plana geçişte değil, etkinlik kaybında (willResignActive) yapılır. Tek seferliktir:
+///   yüklenince koruma kalkar, "brightness" olayı { reason: "restored", brightness } gider. Uygulama yeniden
+///   etkinleşince { reason: "active" } gider; test sürüyorsa JS %100'ü yeniden uygular. Native kendi başına
+///   %100'e dönmez (sayfa yeniden yüklenirse ekran parlak kalmasın). restoreOnLeave verilmezse koruma kalkar.
+/// - isInvertColorsEnabled → { enabled } (UIAccessibility.isInvertColorsEnabled); "invertColors" olayı { enabled }
+///   ayar değişince (UIAccessibility.invertColorsStatusDidChangeNotification).
+///   VARSAYIM (doğrulanmadı): Apple Forum 91039 (2017) bu değerin yalnız Akıllı Ters Çevir'de true, Klasik'te
+///   false döndüğünü bildiriyor; Klasik ters çevirme algılanmayabilir.
 @objc(FaceDistancePlugin)
 public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate {
     public let identifier = "FaceDistancePlugin"
@@ -45,7 +59,10 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
         CAPPluginMethod(name: "getScreenInfo", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "isSupported", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "start", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "stop", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "stop", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getBrightness", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "setBrightness", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "isInvertColorsEnabled", returnType: CAPPluginReturnPromise)
     ]
 
     private var session: ARSession?
@@ -70,6 +87,28 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
     /// El yüzü örtünce ARKit yüzü kaybedebilir; baş test boyunca az oynadığı için son göz konumu bu süre geçerli sayılır.
     /// VARSAYIM: 30 sn (bir göz turu ≈ 1 dk; kaymada iki bölgenin farkı küçülür ve JS göz kapağı kuralına düşer).
     private let eyeCacheMaxAge: TimeInterval = 30
+
+    // Görme testi parlaklığı (S7). Yalnızca ana kuyrukta okunur/yazılır.
+    /// Etkinlik kaybında geri yüklenecek parlaklık (0–1); nil = koruma yok.
+    private var brightnessRestore: CGFloat?
+    /// Etkinlik kaybında parlaklık geri yüklendi; yeniden etkinleşince JS'e { reason: "active" } bildirilecek.
+    private var brightnessActiveNotice = false
+
+    override public func load() {
+        let center = NotificationCenter.default
+        // Uygulama sahne tabanlı (SceneDelegate): UIScene bildirimleri. UIApplication bildirimleri de dinlenir;
+        // hangisi önce gelirse iş onda yapılır, ikincisi etkisizdir (koruma / bildirim bayrağı tek seferlik).
+        center.addObserver(self, selector: #selector(appWillResignActive(_:)),
+                           name: UIScene.willDeactivateNotification, object: nil)
+        center.addObserver(self, selector: #selector(appWillResignActive(_:)),
+                           name: UIApplication.willResignActiveNotification, object: nil)
+        center.addObserver(self, selector: #selector(appDidBecomeActive(_:)),
+                           name: UIScene.didActivateNotification, object: nil)
+        center.addObserver(self, selector: #selector(appDidBecomeActive(_:)),
+                           name: UIApplication.didBecomeActiveNotification, object: nil)
+        center.addObserver(self, selector: #selector(invertColorsChanged(_:)),
+                           name: UIAccessibility.invertColorsStatusDidChangeNotification, object: nil)
+    }
 
     @objc func getScreenInfo(_ call: CAPPluginCall) {
         DispatchQueue.main.async {
@@ -157,6 +196,88 @@ public class FaceDistancePlugin: CAPPlugin, CAPBridgedPlugin, ARSessionDelegate 
             self.depthEnabled = false
             self.eyeCache = nil
             call.resolve()
+        }
+    }
+
+    // MARK: - Ekran parlaklığı ve renkleri ters çevirme (görme testi S7, S12)
+
+    @objc func getBrightness(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            call.resolve(["brightness": Double(self.currentScreen().brightness)])
+        }
+    }
+
+    @objc func setBrightness(_ call: CAPPluginCall) {
+        guard let value = call.getDouble("brightness"), value.isFinite else {
+            call.reject("Parlaklık değeri gerekli (0–1)")
+            return
+        }
+        let restore = call.getDouble("restoreOnLeave")
+        DispatchQueue.main.async {
+            if let r = restore, r.isFinite {
+                self.brightnessRestore = CGFloat(min(1.0, max(0.0, r)))
+            } else {
+                self.brightnessRestore = nil
+            }
+            self.brightnessActiveNotice = false
+            let screen = self.currentScreen()
+            screen.brightness = CGFloat(min(1.0, max(0.0, value)))
+            call.resolve(["brightness": Double(screen.brightness)])
+        }
+    }
+
+    @objc func isInvertColorsEnabled(_ call: CAPPluginCall) {
+        DispatchQueue.main.async {
+            call.resolve(["enabled": UIAccessibility.isInvertColorsEnabled])
+        }
+    }
+
+    /// Etkinlik kaybı: parlaklık hâlâ ön plandayken geri yüklenir (QA1751). Eşzamanlı çalışmalı: bildirim ana
+    /// kuyrukta gelir ve iş, uygulama ön plandan çıkmadan bitmelidir.
+    @objc private func appWillResignActive(_ notification: Notification) {
+        onMain {
+            guard let value = self.brightnessRestore else { return }
+            self.brightnessRestore = nil
+            self.brightnessActiveNotice = true
+            self.currentScreen().brightness = value
+            self.notifyListeners("brightness", data: ["reason": "restored", "brightness": Double(value)])
+        }
+    }
+
+    @objc private func appDidBecomeActive(_ notification: Notification) {
+        onMain {
+            guard self.brightnessActiveNotice else { return }
+            self.brightnessActiveNotice = false
+            self.notifyListeners("brightness", data: ["reason": "active"])
+        }
+    }
+
+    @objc private func invertColorsChanged(_ notification: Notification) {
+        onMain {
+            self.notifyListeners("invertColors", data: ["enabled": UIAccessibility.isInvertColorsEnabled])
+        }
+    }
+
+    /// Parlaklığın uygulanacağı ekran: uygulama penceresinin sahnesi. UIScreen.main iOS 16'dan beri kullanımdan
+    /// kalkıyor ("Use a UIScreen instance found through context instead: i.e, view.window.windowScene.screen");
+    /// UIWindowScene.screen iOS 13+ (hedef iOS 15). Pencere yoksa bağlı ilk pencere sahnesi, o da yoksa UIScreen.main.
+    /// Ana kuyrukta çağrılmalı.
+    private func currentScreen() -> UIScreen {
+        if let screen = bridge?.viewController?.viewIfLoaded?.window?.windowScene?.screen {
+            return screen
+        }
+        if let scene = UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }).first {
+            return scene.screen
+        }
+        return UIScreen.main
+    }
+
+    /// Ana kuyruktaysa hemen (eşzamanlı), değilse ana kuyrukta çalıştırır.
+    private func onMain(_ work: @escaping () -> Void) {
+        if Thread.isMainThread {
+            work()
+        } else {
+            DispatchQueue.main.async { work() }
         }
     }
 

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { createDescent, createAcuityStaircase, finalizeEstimate, remainingDisplay, FAST_STEP, FINE_STEP, MAX_JUMP, START_LOGMAR } from './staircase.js'
 import { createZest, pCorrect, shouldStop, PLANS, GUESS, LAPSE, SLOPE, UNSEEN } from './zest.js'
-import { logMARForHeight, renderSpec, smallestDrawableLogMAR } from './optotype.js'
+import { logMARForHeight, renderSpec, smallestDrawableLogMAR, letterHeightMm } from './optotype.js'
 
 // Tekrarlanabilir rastgele sayı üreteci (mulberry32)
 function rng(seed) {
@@ -238,6 +238,26 @@ describe('createAcuityStaircase (iniş + ince ayar)', () => {
     }
   })
 
+  it('S2: en az = en çok 28 harfte "az kaldı" hiç görünmez; "~N" kesin sayıdır ve her harfte 1 azalır', () => {
+    const plan = { ...PLANS.weekly, minTrials: PLANS.weekly.trials }
+    for (let s = 0; s < 60; s++) {
+      const r = rng(8100 + s)
+      const theta = -0.2 + r() * 1.2
+      const st = createAcuityStaircase(plan)
+      let shown = Infinity
+      while (!st.done()) {
+        const p = st.progress()
+        const d = remainingDisplay(p, shown)
+        shown = d.shown
+        expect(d.kind).not.toBe('few')
+        expect(d.count).toBe(p.remainingMax)
+        const { logMAR } = st.next()
+        st.update(logMAR, r() < observerMismatch(logMAR, theta))
+      }
+      expect(st.estimate().trials).toBe(plan.trials)
+    }
+  })
+
   it('kalan harf yazısı: "son" yalnızca kesin üst sınır ≤ 2 iken; sayı büyürse eski sayıda kalır', () => {
     expect(remainingDisplay({ remaining: 2, remainingMax: 6 }).kind).toBe('few')
     expect(remainingDisplay({ remaining: 2, remainingMax: 2 })).toEqual({ kind: 'last', count: 2, shown: 2 })
@@ -353,7 +373,10 @@ describe('deneme sayısı gerekçesi', () => {
   })
   it('Build 24: günlük 20 / haftalık 28 üst sınır (bilgi gerekçesinin altında; bedel simülasyonla ölçüldü, zest.js)', () => {
     expect(PLANS.daily).toMatchObject({ trials: 20, minTrials: 14 })
-    expect(PLANS.weekly).toMatchObject({ trials: 28, minTrials: 20 })
+    expect(PLANS.weekly.trials).toBe(28)
+    // S2 (2026-09-28): haftalıkta en az = en çok 28 (zest.js). Kesin değeri zest.test.js sınar; burada yalnız sınır.
+    expect(PLANS.weekly.minTrials).toBeGreaterThanOrEqual(20)
+    expect(PLANS.weekly.minTrials).toBeLessThanOrEqual(PLANS.weekly.trials)
   })
 })
 
@@ -375,7 +398,7 @@ describe('simülasyon: yeni (iniş + ince ayar) ve eski (saf ZEST)', () => {
     }
   }
 
-  it('gerçek piksel ızgarasıyla (460 ppi, dpr 3, 40 cm): sapma < 0,05 ve SD eskiden kötü değil', () => {
+  it('gerçek ekranla (460 ppi, dpr 3, 40 cm; renderSpec, taban 1 cihaz pikseli): sapma < 0,05 ve SD eskiden kötü değil', () => {
     const px = 6.04 // CSS px / mm
     const dpr = 3
     const floor = smallestDrawableLogMAR(400, px, dpr)
@@ -399,7 +422,7 @@ describe('simülasyon: yeni (iniş + ince ayar) ve eski (saf ZEST)', () => {
       const e = s.estimate()
       return { est: e.logMAR, n: e.trials }
     }, 50, 21)
-    console.log(`[sim] piksel ızgarası daily: ESKİ ${JSON.stringify(oldR)} | YENİ ${JSON.stringify(newR)}`)
+    console.log(`[sim] gerçek ekran daily: ESKİ ${JSON.stringify(oldR)} | YENİ ${JSON.stringify(newR)}`)
     expect(Math.abs(newR.bias)).toBeLessThan(0.05)
     expect(newR.sd).toBeLessThanOrEqual(oldR.sd + 0.02)
   })
@@ -443,6 +466,97 @@ describe('simülasyon: yeni (iniş + ince ayar) ve eski (saf ZEST)', () => {
       expect(always.sd).toBeLessThanOrEqual(guesser.sd)
     })
   }
+
+  // H1 (2026-09-28): harf birimi artık yuvarlanmıyor (optotype.js renderSpec). Eski testin ortalaması
+  // (θ −0,1…0,9 birlikte) pikselleme sapmasını gizliyordu: sapma θ'ya göre işaret değiştirir. Burada θ BAŞINA
+  // bakılır. Akış AcuityTest.jsx'in birebir taklidi (drawable → renderSpec → logMARForHeight → finalizeEstimate).
+  // Karşılaştırma: aynı tohumlarla "sürekli" akış (çizilen = hedef, aynı taban kısıtı; ideal çizici).
+  // Kabul (her θ ∈ [taban + 0,05; 0,2], 300/400/440 mm, günlük ve haftalık, gözlemci eğimi s = 0,035/0,044/0,075):
+  //   - çizimin eklediği sapma |sapma(uygulama) − sapma(sürekli)| ≤ 0,02
+  //   - SD(uygulama) ≤ SD(sürekli) + 0,01
+  //   - mutlak |sapma| ≤ 0,02 (s = 0,035 ve 0,044; ideal çizicinin gerçek sapması en çok 0,007 ve 0,011).
+  //   - s = 0,075'te mutlak sınır 0,05 (bu dosyadaki diğer simülasyonların ölçütü). Neden: bu gözlemcide ideal
+  //     çizicinin KENDİ sapması tabana yakın θ'da 0,02'yi aşıyor. 2000 kişilik ayrı simülasyon (2026-09-28, 458 ppi,
+  //     sürekli çizim): günlük 400 mm θ −0,25 → +0,028 ± 0,0014, θ −0,20 → +0,022; 300 mm θ −0,127 → +0,025.
+  //     Sapma çizimden bağımsızdır (algoritmanın eğimi 0,05, gözlemcininki 0,075). 150 kişide ortalamanın standart
+  //     hatası ≈0,006 olduğundan 0,03 gibi bir sınır tohum şansına kalırdı. Planın "s = 0,075'te de ≤ 0,02" ölçütü
+  //     ideal çizicide bile tutmuyor; orada çizimin payı yukarıdaki iki eşleştirilmiş koşulla sınanır.
+  // taban: kaydın kısıldığı gerçek taban (finalizeEstimate floorLimit = max(minX, ekran tabanı + 0,02)).
+  // Math.round geri gelirse (mutasyon, 2026-09-28): çizimin eklediği sapma 0,04–0,074 → kırmızı.
+  const ABS_LIMIT = (s) => (s < 0.05 ? 0.02 : 0.05)
+  describe('H1: sürekli boyut, θ başına sapma (458 ppi, dpr 3)', () => {
+    const PX = 458 / 25.4 / 3
+    const DPR = 3
+    const N = 150
+    const obsSlope = (s) => (x, t) => GUESS + (1 - GUESS - LAPSE) / (1 + Math.exp(-(x - t) / s))
+    const floorAt = (d) => smallestDrawableLogMAR(d, PX, DPR)
+    const minX = Math.max(-0.3, floorAt(400) + 0.02)
+    const ideal = (x, mm) => ({ drawable: true, heightCssPx: letterHeightMm(x, mm) * PX, realizedLogMAR: x })
+    function flow(theta, plan, mm, observer, r, render) {
+      const drawable = (x) => Math.max(x, floorAt(mm))
+      const quantize = (x) => {
+        const sp = render(drawable(x), mm, PX, DPR)
+        return sp.drawable ? sp.realizedLogMAR : x
+      }
+      const st = createAcuityStaircase(plan, { minX, maxX: 1.3, quantize })
+      while (!st.done()) {
+        const target = drawable(st.next().logMAR)
+        const sp = render(target, mm, PX, DPR)
+        const shown = sp.drawable ? logMARForHeight(sp.heightCssPx / PX, mm) : target
+        st.update(shown, r() < observer(shown, theta))
+      }
+      const floorLimit = Math.min(1.3, Math.max(minX, floorAt(mm) + 0.02))
+      return finalizeEstimate(st.estimate(), floorLimit).logMAR
+    }
+    // Sürekli akışın sonucu yalnız tabana kısmanın etkin olup olmadığına bağlı (400 ve 440 mm'de değil): bir kez hesaplanır
+    const contMemo = new Map()
+    function contErrs(planName, mm, s, th) {
+      const clamp = floorAt(mm) > minX ? floorAt(mm).toFixed(6) : 'none'
+      const floorLimit = Math.min(1.3, Math.max(minX, floorAt(mm) + 0.02)).toFixed(6)
+      const key = `${planName}|${clamp}|${floorLimit}|${s}|${th.toFixed(6)}`
+      if (!contMemo.has(key)) {
+        const observer = obsSlope(s)
+        const errs = []
+        for (let i = 0; i < N; i++) errs.push(flow(th, PLANS[planName], mm, observer, rng(60000 + i), ideal) - th)
+        contMemo.set(key, errs)
+      }
+      return contMemo.get(key)
+    }
+    const stats = (errs) => {
+      const b = errs.reduce((a, v) => a + v, 0) / errs.length
+      return { bias: b, sd: Math.sqrt(errs.reduce((a, v) => a + (v - b) ** 2, 0) / errs.length) }
+    }
+    for (const planName of ['daily', 'weekly']) {
+      for (const mm of [300, 400, 440]) {
+        it(`${planName} · ${mm} mm`, () => {
+          const plan = PLANS[planName]
+          const taban = Math.min(1.3, Math.max(minX, floorAt(mm) + 0.02))
+          const thetas = []
+          for (let t = taban + 0.05; t <= 0.2 + 1e-9; t += 0.05) thetas.push(t)
+          if (thetas.at(-1) < 0.2 - 0.01) thetas.push(0.2)
+          const worst = {}
+          for (const s of [0.035, 0.044, 0.075]) {
+            const observer = obsSlope(s)
+            const w = (worst[s] = { bias: 0, added: 0, sdExtra: -Infinity })
+            for (const th of thetas) {
+              const app = []
+              for (let i = 0; i < N; i++) app.push(flow(th, plan, mm, observer, rng(60000 + i), renderSpec) - th)
+              const a = stats(app)
+              const c = stats(contErrs(planName, mm, s, th))
+              const where = `${planName} ${mm} mm s=${s} θ=${th.toFixed(3)}`
+              expect(Math.abs(a.bias - c.bias), `çizim sapması ${where}`).toBeLessThanOrEqual(0.02)
+              expect(a.sd, `SD ${where}`).toBeLessThanOrEqual(c.sd + 0.01)
+              expect(Math.abs(a.bias), `mutlak sapma ${where}`).toBeLessThanOrEqual(ABS_LIMIT(s))
+              if (Math.abs(a.bias) > Math.abs(w.bias)) w.bias = +a.bias.toFixed(4)
+              w.added = Math.max(w.added, +Math.abs(a.bias - c.bias).toFixed(4))
+              w.sdExtra = Math.max(w.sdExtra, +(a.sd - c.sd).toFixed(4))
+            }
+          }
+          console.log(`[sim] H1 ${planName} ${mm} mm θ ${thetas[0].toFixed(3)}…0,2: ${JSON.stringify(worst)}`)
+        }, 60000)
+      }
+    }
+  })
 
   it('eşit deneme sayısında (18) da iniş maliyeti küçük: SD ≤ eski + 0,02', () => {
     const fixed = { trials: 18, minTrials: 18, minFine: 0, stopSd: 0 }

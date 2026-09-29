@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { analyzeTrend, median, trendMessage } from './trend.js'
+import { analyzeTrend, median, trendMessage, comparableTests, methodEra, seriesNotes, droppedNotes, METHOD_RESET_NOTE, BAND_MIN_MM, BAND_MAX_MM } from './trend.js'
 
 // Gün numarasından (1 = ilk gün) ISO tarih üretir, öğlen saatinde
 const day = (n) => new Date(Date.UTC(2026, 0, n, 12)).toISOString().replace('Z', '')
@@ -89,6 +89,20 @@ describe('trendMessage', () => {
     expect(m).toMatch(/±0,2/)
     expect(m).not.toMatch(/sabit/)
   })
+  // İnceleme bulgusu V-N6: sahipsiz iyelik ("Başlangıcına göre") ve "tek testler bir testten diğerine" tekrarı
+  it('"değişim yok" metni doğal Türkçe: "Başlangıç değerine göre", "tek bir ölçüm"; "test" sözcüğü bir kez', () => {
+    expect(trendMessage({ phase: 'tracking', alert: null, trend: 'stable' })).toBe(
+      'Başlangıç değerine göre doğrulanmış bir değişim yok. Değerlendirme son 7 günün ortancası ve son 3 testle yapılır; tek bir ölçüm yaklaşık ±0,2 logMAR oynayabilir.',
+    )
+    expect(trendMessage({ phase: 'tracking', alert: null, trend: 'stable', sparse: true })).toBe(
+      'Başlangıç değerine göre doğrulanmış bir değişim yok. Ölçümler seyrek olduğu için değerlendirme son 3 testle yapılır; tek bir ölçüm yaklaşık ±0,2 logMAR oynayabilir.',
+    )
+    for (const sparse of [false, true]) {
+      const m = trendMessage({ phase: 'tracking', alert: null, trend: 'stable', sparse })
+      expect(m).not.toMatch(/^Başlangıcına|bir testten diğerine|tek testler/)
+      expect(m.match(/\btest/gi)).toHaveLength(1)
+    }
+  })
 })
 
 describe('başlangıç en az 7 test; yetmezse pencere uzar', () => {
@@ -174,5 +188,274 @@ describe('eski "glasses" kaydı yeni gözlük türleriyle aynı seri', async () 
     expect(sameCondition(null, null)).toBe(true)
     const tests = [{ date: d(1), logMAR: 0.1, correction: 'glasses' }, { date: d(2), logMAR: 0.3, correction: 'none' }, { date: d(3), logMAR: 0.12, correction: 'reading' }]
     expect(comparableTests(tests).tests.map((t) => t.logMAR)).toEqual([0.1, 0.12])
+  })
+})
+
+// ---------- E testi yeniden tasarımı (plan H3–H5, kararlar S5, S6, S8, S9) ----------
+describe('mesafe modu: kamerasız ölçümler ayrı seri (S5)', () => {
+  const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
+  // 30 gün kameralı ölçüm (gerçek 0,20, 40 cm). Sonra kamera kapalı, telefon 55 cm'de: harf 40 cm varsayımıyla
+  // çizildiği için kayıt log10(550/400) = +0,138 kötü görünür (görme değişmedi).
+  const tracked = Array.from({ length: 30 }, (_, n) => ({ date: D(n), logMAR: 0.2, correction: 'reading', distanceTracked: true, meanDistanceMm: 400, algorithm: 'descent-zest-v4' }))
+  const at55 = +(0.2 + Math.log10(550 / 400)).toFixed(3)
+  const untracked = Array.from({ length: 7 }, (_, i) => ({ date: D(30 + i), logMAR: at55, correction: 'reading', distanceTracked: false, meanDistanceMm: null, algorithm: 'descent-zest-v4' }))
+
+  it('kamerasız kayıt kameralı seriye girmez; son test kamerasızsa seri yalnız kamerasız kayıtlardır', () => {
+    const c = comparableTests([...tracked, ...untracked])
+    expect(c.distanceTracked).toBe(false)
+    expect(c.tests).toHaveLength(7)
+    expect(c.tests.every((t) => t.distanceTracked === false)).toBe(true)
+    expect(c.droppedBy.distance).toBe(30)
+    expect(c.dropped).toBe(30)
+    // Son test kameralıysa kamerasız kayıtlar atılır
+    const back = comparableTests([...tracked, ...untracked, { ...tracked[0], date: D(37) }])
+    expect(back.distanceTracked).toBe(true)
+    expect(back.tests).toHaveLength(31)
+    expect(back.droppedBy.distance).toBe(7)
+  })
+
+  it('55 cm senaryosu: görme değişmeden sahte sarı uyarı çıkmaz', () => {
+    const r = analyzeTrend([...tracked, ...untracked], D(36))
+    expect(r.alert).toBeNull()
+    expect(r.trend).not.toBe('worsening')
+    expect(r.phase).toBe('familiarization') // kamerasız seri yeni başladı
+    expect(seriesNotes(r)).toContain('Mesafe ölçülmedi · 40 cm varsayıldı')
+  })
+
+  it('30 cm senaryosu: sahte "iyileşiyor" çıkmaz', () => {
+    const at30 = +(0.2 + Math.log10(300 / 400)).toFixed(3)
+    const u30 = untracked.map((t) => ({ ...t, logMAR: at30 }))
+    const r = analyzeTrend([...tracked, ...u30], D(36))
+    expect(r.trend).not.toBe('improving')
+  })
+
+  it('distanceTracked alanı olmayan eski/elle kayıt kameralı sayılır', () => {
+    const c = comparableTests([{ date: D(0), logMAR: 0.2 }, { date: D(1), logMAR: 0.2, distanceTracked: true }])
+    expect(c.tests).toHaveLength(2)
+    expect(c.distanceTracked).toBe(true)
+  })
+
+  it('örtme yöntemi seri anahtarı değildir (S8)', () => {
+    const methods = ['camera-depth', 'camera-lid+self', 'camera-self', 'self-report']
+    const ts = methods.map((method, i) => ({ date: D(i), logMAR: 0.2, algorithm: 'descent-zest-v4', distanceTracked: true, meanDistanceMm: 400, occlusion: { method } }))
+    expect(comparableTests(ts).tests).toHaveLength(4)
+  })
+})
+
+describe('ölçüm yöntemi v4: yeni seri ve not (S6)', () => {
+  const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
+  const v3 = Array.from({ length: 30 }, (_, n) => ({ date: D(n), logMAR: 0.2, correction: 'none', distanceTracked: true, meanDistanceMm: 400, algorithm: n < 5 ? undefined : 'descent-zest-v3' }))
+  const v4 = [30, 31, 32].map((n) => ({ date: D(n), logMAR: 0.35, correction: 'none', distanceTracked: true, meanDistanceMm: 400, algorithm: 'descent-zest-v4' }))
+
+  it('methodEra: v3 ve alan yok → 0; v4 → 4', () => {
+    expect(methodEra(undefined)).toBe(0)
+    expect(methodEra('descent-zest-v3')).toBe(0)
+    expect(methodEra('descent-zest-v4')).toBe(4)
+  })
+
+  it('v4 kaydı eski kayıtlarla karşılaştırılmaz; seri yeniden alışma döneminde; not görünür', () => {
+    const c = comparableTests([...v3, ...v4])
+    expect(c.tests.map((t) => t.algorithm)).toEqual(['descent-zest-v4', 'descent-zest-v4', 'descent-zest-v4'])
+    expect(c.droppedBy.method).toBe(30)
+    expect(c.methodReset).toBe(true)
+    const r = analyzeTrend([...v3, ...v4], D(32))
+    expect(r.phase).toBe('familiarization')
+    expect(r.alert).toBeNull()
+    expect(r.methodReset).toBe(true)
+    expect(seriesNotes(r)).toEqual(['Ölçüm yöntemi güncellendi; yeni seri.'])
+    expect(METHOD_RESET_NOTE).toBe('Ölçüm yöntemi güncellendi; yeni seri.')
+  })
+
+  it('yalnız eski kayıtlar: seri eskisi gibi (v3 ve alanı olmayanlar birlikte), not yok', () => {
+    const r = analyzeTrend(v3, D(29))
+    expect(r.methodReset).toBe(false)
+    expect(r.dropped).toBe(0)
+    expect(seriesNotes(r)).toEqual([])
+    expect(r.phase).toBe('tracking')
+  })
+
+  it('yalnız v4 kayıtları: not yok', () => {
+    expect(comparableTests(v4).methodReset).toBe(false)
+  })
+})
+
+describe('eski yöntemde bant dışı kayıtlar ayrılır (H3)', () => {
+  const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
+  // Uyumu azalmış presbiyop, görme değişmedi: 40 cm'de ≈0,265, 60 cm'de ≈0,126 ölçülür (plan f6 simülasyonu)
+  const at40 = Array.from({ length: 28 }, (_, n) => ({ date: D(n), logMAR: 0.265, correction: 'none', distanceTracked: true, meanDistanceMm: 400, algorithm: 'descent-zest-v3' }))
+  const at60 = Array.from({ length: 7 }, (_, i) => ({ date: D(28 + i), logMAR: 0.126, correction: 'none', distanceTracked: true, meanDistanceMm: 600, algorithm: 'descent-zest-v3' }))
+
+  it('40 cm başlangıç, sonra 60 cm testleri: sahte "iyileşiyor" yok', () => {
+    const r = analyzeTrend([...at40, ...at60], D(34))
+    expect(r.trend).not.toBe('improving')
+    expect(r.droppedBy.band).toBe(28)
+  })
+
+  it('tersi (60 cm başlangıç, sonra 40 cm): sahte sarı yok', () => {
+    const a = Array.from({ length: 28 }, (_, n) => ({ ...at60[0], date: D(n) }))
+    const b = Array.from({ length: 7 }, (_, i) => ({ ...at40[0], date: D(28 + i) }))
+    // 60 cm'lik 28 kayıt ayrı; seri 40 cm'lik kayıtlarla başlar (eski kuralda +0,139 sarı)
+    const r = analyzeTrend([...a, ...b], D(34))
+    expect(r.alert).toBeNull()
+    expect(r.trend).not.toBe('worsening')
+    expect(r.droppedBy.band).toBe(28)
+  })
+
+  it('sınırlar dahil: 360 ve 440 mm bant içi; 359 ve 441 dışı', () => {
+    const mk = (mm, n) => ({ date: D(n), logMAR: 0.2, distanceTracked: true, meanDistanceMm: mm, algorithm: 'descent-zest-v3' })
+    expect(comparableTests([mk(360, 0), mk(440, 1), mk(400, 2)]).tests).toHaveLength(3)
+    expect(comparableTests([mk(359, 0), mk(441, 1), mk(400, 2)]).tests).toHaveLength(1)
+    expect(BAND_MIN_MM).toBe(360)
+    expect(BAND_MAX_MM).toBe(440)
+  })
+
+  it('yakın (< 36 cm) ve uzak (> 44 cm) eski kayıtlar da ayrı seri: ters yönlü sapmalar karışmaz', () => {
+    const mk = (mm, n) => ({ date: D(n), logMAR: mm < 400 ? -0.05 : 0.2, correction: 'none', distanceTracked: true, meanDistanceMm: mm, algorithm: 'descent-zest-v3' })
+    const alt = Array.from({ length: 20 }, (_, n) => mk(n % 2 ? 300 : 560, n))
+    const c = comparableTests(alt)
+    // son kayıt 300 mm (yakın): seri yalnız yakın kayıtlar
+    expect([...new Set(c.tests.map((t) => t.meanDistanceMm))]).toEqual([300])
+    expect(c.tests).toHaveLength(10)
+    expect(c.droppedBy.band).toBe(10)
+    const far = comparableTests([...alt, mk(580, 20)])
+    expect([...new Set(far.tests.map((t) => t.meanDistanceMm))].sort()).toEqual([560, 580])
+  })
+
+  it('v4 kayıtlarına bant ayrımı uygulanmaz (v4 zaten yalnız bantta sayar)', () => {
+    const mk = (mm, n) => ({ date: D(n), logMAR: 0.2, distanceTracked: true, meanDistanceMm: mm, algorithm: 'descent-zest-v4' })
+    expect(comparableTests([mk(445, 0), mk(400, 1)]).tests).toHaveLength(2)
+  })
+})
+
+describe('newBaseline her mesafe modunda aynı gözlük koşulunu sıfırlar', () => {
+  const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
+  it('kamerasız testte "numaram değişti" → kameralı seri de o testten sonra başlar', () => {
+    const base = { correction: 'reading', algorithm: 'descent-zest-v4', meanDistanceMm: 400 }
+    const ts = [
+      { ...base, date: D(0), logMAR: 0.3, distanceTracked: true },
+      { ...base, date: D(1), logMAR: 0.3, distanceTracked: true },
+      { ...base, date: D(2), logMAR: 0.1, distanceTracked: false, newBaseline: true },
+      { ...base, date: D(3), logMAR: 0.1, distanceTracked: true },
+    ]
+    const c = comparableTests(ts)
+    expect(c.tests.map((t) => t.date)).toEqual([D(3)])
+    expect(c.resetAt).toBe(D(2))
+    expect(c.droppedBy).toMatchObject({ distance: 1, reset: 2 })
+  })
+  it('seriyi etkilemeyen eski sıfırlama resetAt vermez', () => {
+    const ts = [
+      { date: D(0), logMAR: 0.3, correction: 'reading', algorithm: 'descent-zest-v3', newBaseline: true },
+      { date: D(1), logMAR: 0.3, correction: 'reading', algorithm: 'descent-zest-v4' },
+    ]
+    const c = comparableTests(ts)
+    expect(c.resetAt).toBeNull()
+    expect(c.tests).toHaveLength(1)
+  })
+})
+
+describe('seyrek seri: kırmızı için son 3 test (S9), uyarı zamanla kaybolmaz (H5)', () => {
+  const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
+  // İki göz (OU) yalnız haftalık: 10. testten itibaren +0,35 kayıp
+  const weekly = (bad) => Array.from({ length: 14 }, (_, i) => ({ date: D(i * 7), logMAR: bad(i + 1) }))
+  const alertsAtEachTest = (ts) => ts.map((t, i) => analyzeTrend(ts.slice(0, i + 1), t.date).alert)
+
+  it('haftalık kayıp: 12. testte kırmızı (öncesinde uyarı yok)', () => {
+    const a = alertsAtEachTest(weekly((k) => (k >= 10 ? 0.35 : 0)))
+    expect(a.slice(0, 11)).toEqual(Array(11).fill(null))
+    expect(a[11]).toBe('red')
+    expect(a[12]).toBe('red')
+    const r = analyzeTrend(weekly((k) => (k >= 10 ? 0.35 : 0)).slice(0, 12), D(11 * 7))
+    expect(r.sparse).toBe(true)
+    expect(trendMessage(r)).toMatch(/Son 3 ölçümün de/)
+    expect(trendMessage(r)).not.toMatch(/bir haftadır/)
+  })
+
+  it('haftalıkta tek ya da iki kötü test kırmızı vermez', () => {
+    expect(alertsAtEachTest(weekly((k) => (k === 11 ? 0.25 : 0))).every((x) => x == null)).toBe(true)
+    expect(alertsAtEachTest(weekly((k) => (k === 11 || k === 12 ? 0.25 : 0))).every((x) => x == null)).toBe(true)
+  })
+
+  it('günlük davranış değişmedi: 40. günden +0,35 → 43. gün sarı, 46. gün kırmızı', () => {
+    const d = Array.from({ length: 48 }, (_, i) => ({ date: D(i), logMAR: i + 1 >= 40 ? 0.35 : 0 }))
+    const at = (day) => analyzeTrend(d.slice(0, day), D(day - 1)).alert
+    expect([40, 41, 42].map(at)).toEqual([null, null, null])
+    expect([43, 44, 45].map(at)).toEqual(['yellow', 'yellow', 'yellow'])
+    expect([46, 47, 48].map(at)).toEqual(['red', 'red', 'red'])
+    expect(analyzeTrend(d.slice(0, 46), D(45)).sparse).toBe(false)
+  })
+
+  it('son testten 7 günden fazla geçince sarı kaybolmaz (son 3 testin ortancası)', () => {
+    // 8 günde bir test; 11. testten itibaren +0,15
+    const ts = Array.from({ length: 13 }, (_, i) => ({ date: D(i * 8), logMAR: i + 1 >= 11 ? 0.15 : 0 }))
+    for (const wait of [0, 7, 8, 20]) {
+      const r = analyzeTrend(ts, D(12 * 8 + wait))
+      expect(r.alert).toBe('yellow')
+      expect(r.trend).toBe('worsening')
+    }
+    const late = analyzeTrend(ts, D(12 * 8 + 10))
+    expect(late.current7).toBeNull() // "Son 7 gün" etiketi yalan söylemez
+    expect(late.current).toBe(0.15)
+    expect(late.currentWindow).toBe('last3')
+    expect(late.delta).toBe(0.15)
+  })
+
+  it('yalnız beklemek sarıyı kırmızıya çevirmez (3 günlük kötü seri, 5 gün sonra)', () => {
+    const t = []
+    for (let d = 7; d <= 21; d++) t.push({ date: D(d), logMAR: 0.2 })
+    for (const d of [26, 27, 28]) t.push({ date: D(d), logMAR: 0.5 })
+    expect(analyzeTrend(t, D(28)).alert).toBe('yellow')
+    expect(analyzeTrend(t, D(33)).alert).toBe('yellow')
+    expect(analyzeTrend(t, D(40)).alert).toBe('yellow')
+  })
+
+  it('günlük kırmızı, test bırakılınca sarıya düşmez', () => {
+    const d = Array.from({ length: 46 }, (_, i) => ({ date: D(i), logMAR: i + 1 >= 40 ? 0.35 : 0 }))
+    for (const day of [47, 51, 53, 80]) expect(analyzeTrend(d, D(day - 1)).alert).toBe('red')
+  })
+
+  it('seyrek seride sarı ve "değişim yok" metinleri son 3 teste dayanır', () => {
+    expect(trendMessage({ phase: 'tracking', alert: 'yellow', sparse: true })).not.toMatch(/birkaç gün/)
+    const m = trendMessage({ phase: 'tracking', alert: null, trend: 'stable', sparse: true })
+    expect(m).toMatch(/son 3 testle/)
+    expect(m).not.toMatch(/son 7 günün/)
+    expect(m).toMatch(/±0,2/)
+    // günlük (seyrek olmayan) metinler aynı
+    expect(trendMessage({ phase: 'tracking', alert: 'red', sparse: false })).toMatch(/Son bir haftadır/)
+    expect(trendMessage({ phase: 'tracking', alert: 'yellow', sparse: false })).toMatch(/birkaç gün daha test et/)
+  })
+})
+
+describe('seriye girmeyen kayıtların notu: nedeniyle (Gelişim, rapor)', () => {
+  const D = (n) => new Date(Date.UTC(2026, 0, 1 + n, 9)).toISOString()
+  const base = { correction: 'none', distanceTracked: true, meanDistanceMm: 400, algorithm: 'descent-zest-v4' }
+
+  it('yöntem değişikliği: yalnız S6 notu; "farklı koşul" denmez', () => {
+    const v3 = Array.from({ length: 30 }, (_, n) => ({ ...base, date: D(n), logMAR: 0.1, algorithm: 'descent-zest-v3' }))
+    const r = analyzeTrend([...v3, { ...base, date: D(31), logMAR: 0.1 }], D(31))
+    expect(seriesNotes(r)).toEqual(['Ölçüm yöntemi güncellendi; yeni seri.'])
+    expect(droppedNotes(r)).toEqual([])
+    expect([...seriesNotes(r), ...droppedNotes(r)].join(' ')).not.toMatch(/koşul/)
+  })
+
+  it('kamerasız / kameralı, eski bant, gözlük koşulu ve yeni gözlük ayrı cümleler', () => {
+    const cam = Array.from({ length: 3 }, (_, n) => ({ ...base, date: D(n), logMAR: 0.1 }))
+    const noCam = { ...base, date: D(5), logMAR: 0.1, distanceTracked: false, meanDistanceMm: null }
+    const r1 = analyzeTrend([...cam, noCam], D(5))
+    expect(seriesNotes(r1)).toEqual(['Mesafe ölçülmedi · 40 cm varsayıldı'])
+    expect(droppedNotes(r1)).toEqual(['Kamerayla yapılan 3 ölçüm bu seriye girmiyor.'])
+    const r2 = analyzeTrend([noCam, ...cam.map((t) => ({ ...t, date: D(6 + cam.indexOf(t)) }))], D(9))
+    expect(droppedNotes(r2)).toEqual(['Kamerasız 1 ölçüm bu seriye girmiyor.'])
+    const glasses = Array.from({ length: 2 }, (_, n) => ({ ...base, date: D(n), logMAR: 0.1, correction: 'reading' }))
+    const r3 = analyzeTrend([...glasses, { ...base, date: D(4), logMAR: 0.1 }], D(4))
+    expect(droppedNotes(r3)).toEqual(['Farklı gözlük/lens koşulundaki 2 ölçüm bu seriye girmiyor.'])
+    const reset = [{ ...base, date: D(0), logMAR: 0.1, correction: 'reading' }, { ...base, date: D(1), logMAR: 0.1, correction: 'reading', newBaseline: true }]
+    expect(droppedNotes(analyzeTrend(reset, D(1)))).toEqual(['Gözlük yenilenmeden önceki 1 ölçüm bu seriye girmiyor.'])
+    const legacy = [{ ...base, date: D(0), logMAR: 0.1, algorithm: 'descent-zest-v3', meanDistanceMm: 560 }, { ...base, date: D(1), logMAR: 0.1, algorithm: 'descent-zest-v3' }]
+    expect(droppedNotes(analyzeTrend(legacy, D(1)))).toEqual(['Farklı mesafede yapılan 1 eski ölçüm bu seriye girmiyor.'])
+  })
+
+  it('hiçbir şey düşmediyse boş', () => {
+    expect(droppedNotes(analyzeTrend([{ ...base, date: D(0), logMAR: 0.1 }], D(0)))).toEqual([])
+    expect(droppedNotes(null)).toEqual([])
   })
 })

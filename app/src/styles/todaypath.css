@@ -111,7 +111,6 @@
 .tp-st .lens { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .tp-st .lgl { fill: url(#tp-lens); stroke: var(--ink-2); stroke-width: 1.5; }
 .tp-st .lh { fill: none; stroke: #fff; stroke-opacity: 0.6; stroke-width: 3; stroke-linecap: round; }
-.tp-st .le { font-family: var(--font-display); font-weight: 800; font-size: 23px; fill: #041017; }
 .tp-st .ll { fill: none; stroke: #041017; stroke-width: 3; stroke-linecap: round; }
 .tp-st.me.now .lens { filter: drop-shadow(0 10px 18px rgba(25, 194, 209, 0.45)); }
 .tp-st.me.locked .lens { filter: saturate(0.2); }
@@ -138,6 +137,9 @@
 .tp-lb .t { display: block; }
 .tp-lb small { display: block; font: 500 11.5px/14px var(--font-body); color: var(--ink-3); }
 .tp-lb small.lk { color: var(--warn); }
+/* Yarım kalan ölçüm (E0 "Kalan: …"): uyarı rengi ve "!" */
+.tp-lb small.warn, .tp-jb-b .l2.warn { color: var(--warn); font-weight: 650; }
+.tp-lb small .wi, .tp-jb-b .l2 .wi { margin-right: 4px; font-weight: 800; }
 .tp-lb .tag { display: block; font: 500 9.5px/12px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
 .tp-lb.left { transform: translate(-100%, -50%); text-align: right; }
 .tp-lb.right { transform: translateY(-50%); }

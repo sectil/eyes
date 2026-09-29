@@ -5,7 +5,9 @@
 //
 // manifest.today(ctx) → null | durak | [durak, …]
 //   ctx = { tests, sessions, now, profile? }
-//   durak = { title, minutes, done, route?, key?, sub?, glyph?,
+//   durak = { title, minutes, done, route?, key?, sub?, glyph?, remaining?: kalan gözler, warn?: yarım kaldı,
+//             doneSub?: bitince kartta yazan (varsayılan "tamam"), hideMinutes?: süre kartta yazılmaz (cihazda ölçülmedi;
+//             minutes yalnız yol bütçesi tahmini),
 //             slot?:  'warmup' | 'test' | 'body' | 'practice' | 'rest' | 'measure' | 'open' | 'finale',
 //             order?: şablondaki yer (ORDER), eyeMin?: göz bütçesinden düşen dk (varsayılan: 'eye' kapısında minutes),
 //             openEnded?: süresi kullanıcıya bağlı oyun (bölümün son göz durağı olur),
@@ -14,6 +16,8 @@
 //             rotate?: aynı gruptaki duraklardan günde biri (bugün yapılan, yoksa bu hafta en az yapılan, eşitse güne göre sırayla),
 //             weekDays?: bu durak son 7 günde kaç gün yapıldı (rotate seçimi için) }
 //   null: modül bugün yolda yok (ör. haftalık test zamanı gelmedi)
+import { dayKey } from './calendar.js'
+
 export const WEEK_MS = 7 * 86400000
 
 const time = (r) => {
@@ -36,6 +40,72 @@ export const withinDays = (records = [], now = new Date(), days = 7) => {
   })
 }
 export const doneToday = (records = [], type, now = new Date()) => records.some((r) => r.type === type && isSameDay(r, now))
+
+// ---------------------------------------------------------------------------------------------
+// E testi günleri (karar S3, S4). Her göz bittiği an ayrı kayıt olur; bir gün ancak testin bütün gözleri aynı
+// koşu gününde kayıtlıysa "tamam" sayılır. Yarım günde biten gözler veride ve seride kalır; o gün kart kalanları
+// söyler ("Kalan: Sol göz, İki göz"), ertesi gün test baştan açılır.
+// Koşu günü (runDay): koşunun başladığı yerel gün ('YYYY-MM-DD'); AcuityTest her göz kaydına yazar
+// (lib/acuityStart.js). 23:58'de başlayıp 00:03'te biten koşunun üç gözü başladığı güne sayılır, test tamam olur.
+// runDay alanı olmayan eski kayıtta kaydın kendi yerel günü kullanılır.
+const RUN_DAY = /^\d{4}-\d{2}-\d{2}$/
+export function runDayOf(r) {
+  if (typeof r?.runDay === 'string' && RUN_DAY.test(r.runDay)) return r.runDay
+  const t = time(r)
+  return t == null ? null : dayKey(t)
+}
+export const TEST_EYES = { 'va-weekly': ['R', 'L', 'OU'], 'va-daily': ['R', 'L'] }
+export const EYE_TITLE = { R: 'Sağ göz', L: 'Sol göz', OU: 'İki göz' }
+export const WEEKLY_SUB = '3 bölüm · sağ, sol, iki göz'
+export const WEEKLY_DONE = '✓ Bu hafta tamam'
+export const remainingText = (eyes = []) => `Kalan: ${eyes.map((e) => EYE_TITLE[e] ?? e).join(', ')}`
+
+// Bugün başlanan koşuların kayıtlarına göre gözler: done (sırayla), remaining, started (en az bir göz), complete (hepsi)
+export function eyeDay(records = [], type, now = new Date()) {
+  const eyes = TEST_EYES[type] ?? []
+  const today = dayKey(now)
+  const seen = new Set(records.filter((r) => r?.type === type && runDayOf(r) === today).map((r) => r.eye))
+  const done = eyes.filter((e) => seen.has(e))
+  const remaining = eyes.filter((e) => !seen.has(e))
+  return { done, remaining, started: done.length > 0, complete: eyes.length > 0 && remaining.length === 0 }
+}
+
+// En son tamamlanmış (koşu) günün en son kaydı (yarım günler sayılmaz); yoksa null. isDue bununla bakar.
+export function lastComplete(records = [], type) {
+  const eyes = TEST_EYES[type] ?? []
+  if (!eyes.length) return null
+  const days = new Map()
+  for (const r of records) {
+    const t = r?.type === type ? time(r) : null
+    if (t == null) continue
+    const k = runDayOf(r)
+    const d = days.get(k) ?? { eyes: new Set(), last: null, t: -Infinity }
+    d.eyes.add(r.eye)
+    if (t >= d.t) Object.assign(d, { last: r, t })
+    days.set(k, d)
+  }
+  let best = null
+  for (const d of days.values()) if (eyes.every((e) => d.eyes.has(e)) && (!best || d.t > best.t)) best = d
+  return best?.last ?? null
+}
+
+// Haftalık testin bugünkü durumu (Bugün kartı E0 ve Ana sayfa satırı):
+//   'done' bugün üç göz de bitti · 'half' bugün başlandı, göz kaldı · 'due' zamanı geldi (son tam günden 7 gün
+//   geçti ya da hiç yok) · 'idle' bu hafta tamamlandı, bugün yolda yok.
+export function weeklyStatus(records = [], now = new Date()) {
+  const day = eyeDay(records, 'va-weekly', now)
+  const due = isDue(lastComplete(records, 'va-weekly'), now)
+  const state = day.complete ? 'done' : day.started ? 'half' : due ? 'due' : 'idle'
+  const sub = state === 'half' ? remainingText(day.remaining) : state === 'due' ? WEEKLY_SUB : WEEKLY_DONE
+  return { state, due, sub, warn: state === 'half', done: day.done, remaining: day.remaining }
+}
+
+// Yarım günde teste dönünce atlanacak (bugün biten) gözler; test ilk eksik gözden başlar (E0). Günlük ve haftalık
+// için aynı kural; tam ya da boş günde [] (bugün üçü de bittiyse yeni test baştan).
+export function skipEyesToday(records = [], type, now = new Date()) {
+  const day = eyeDay(records, type, now)
+  return day.started && !day.complete ? day.done : []
+}
 
 // Şablon (yol planı §3.2): 1. bölüm | mola | 2. bölüm | final. Ritim: egzersiz, ölçüm, egzersiz, pratik…
 export const ORDER = { warmup: 10, test: 20, body: 30, practice: 40, rest: 60, measure: 80, open: 100, finale: 110 }
@@ -81,6 +151,11 @@ function collect(modules, c) {
         weekDays: Number.isFinite(it.weekDays) ? it.weekDays : 0,
         exclusive: Boolean(it.exclusive),
         dropRank: Number.isFinite(it.dropRank) ? it.dropRank : null,
+        // Yarım kalan ölçüm (E0 "Kalan: …"): kalan gözler ve uyarı rengi işareti
+        remaining: Array.isArray(it.remaining) ? it.remaining : null,
+        warn: Boolean(it.warn),
+        doneSub: typeof it.doneSub === 'string' ? it.doneSub : null,
+        hideMinutes: Boolean(it.hideMinutes),
         homeOrder: m.home?.order ?? 999,
       })
     }
@@ -267,7 +342,9 @@ export const JEV_WORDS = {
 }
 const NB = ' '
 const dot = `${NB}·${NB}`
-const unitOf = (s) => (s.sub && s.openEnded ? s.sub : s.minutes ? `${s.minutes}${NB}dk` : '')
+// Durağın kısa birimi: süresi kişiye bağlı oyunda ve yarım kalan ölçümde ("Kalan: …") alt satır, yoksa süre (süresi
+// ölçülmemiş duraklarda yazılmaz)
+const unitOf = (s) => (s.sub && (s.openEnded || s.warn) ? s.sub : s.minutes && !s.hideMinutes ? `${s.minutes}${NB}dk` : '')
 const pick = (pool, day, n) => {
   const a = JEV_WORDS[pool]
   return a[(((day + n) % a.length) + a.length) % a.length]

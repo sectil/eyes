@@ -7,9 +7,17 @@
 //   x: gösterilen logMAR, θ: eşik logMAR (bu noktada F = 0.5 → p ≈ %62)
 //   γ = 0,25: 4 yönde rastgele tahminle doğru bilme olasılığı (Carkeet 2001,
 //   Optom Vis Sci 78:529, DOI 10.1097/00006324-200107000-00017, PMID 11503943).
-// VARSAYIM: eğim s = 0.05 logMAR ve dikkat hatası λ = 0.02 literatürden birebir
-// alınmadı; makul varsayımlardır. Simülasyon testleri (staircase.test.js) eğim/λ
-// uyumsuz gözlemcide de sapmanın küçük kaldığını doğrular.
+// Eğim s = 0,05 logMAR (lojistik). Dayanak, harf tablosunda ölçülen psikometrik "probit size"
+// (kümülatif normalin genişliği):
+//   - Carkeet 2001, Optom Vis Sci 78:113, PMID 11265926, DOI 10.1097/00006324-200102000-00012:
+//     iyi düzeltilmiş gözde ≈0,07 logMAR, +1/+2 D bulanıklıkla 0,12'ye kadar.
+//   - Carkeet & Bailey 2017, Ophthalmic Physiol Opt 37:118, PMID 28211180, DOI 10.1111/opo.12357:
+//     yüksek kontrastlı harfte 0,064–0,071 logMAR (Monte Carlo'ya göre gerçek değer 0,016–0,019 daha geniş).
+//   Orta noktada eğim eşlenirse lojistik s = σ·√(2π)/4 ≈ 0,63·σ: σ 0,07 → s 0,044; σ 0,12 → s 0,075.
+//   s = 0,05 bu aralıkta. VARSAYIM: "probit size" normalin σ'sı olarak okundu (özetlerden; tam metin okunmadı).
+//   Bu ölçümler Sloan / Bailey-Lovie harfleriyle yapıldı, tumbling E ile değil.
+// Dikkat hatası λ = 0,02: yukarıdaki iki çalışmanın özetleri bir dikkat hatası oranı vermez. VARSAYIM olarak
+// kalır. Simülasyon testleri (staircase.test.js) eğim/λ uyumsuz gözlemcide de sapmanın küçük kaldığını doğrular.
 
 export const GUESS = 0.25
 export const LAPSE = 0.02
@@ -133,10 +141,14 @@ export function randomDirection(rng = Math.random) {
 //    %89'unun 0,1, %98'inin 0,2 içinde kaldığını söyler; "±0,1" diye özetlemek yanlıştı (2026-09-26 kanıt kontrolü).
 //    Bach 2024'ün 8 seçenekli testte gördüğü "18 denemede kırılma" 4 seçenekte daha geç gelir; günlükte
 //    bilerek bunun altına inildi, haftalık test daha kesin ölçüm olarak kalır. Günlük test yalnız iki tek göz.
+//  - Haftalık sabit 28 (karar S2, 2026-09-28): en az 20 iken simülasyonda koşuların %69–78'i tam 20'de
+//    duruyordu (SD ≤ 0,06). Tekrar ölçüm uyum sınırı ±0,128 → ±0,104 (model gözlemci), ±0,197 → ±0,168
+//    (uyumsuz gözlemci); |hata| > 0,15 oranı %3,7 → %1,8 (plan H6, kendi simülasyonumuz). Bach 2024 (yukarıda):
+//    SD'ye bakıp durmak erken bitirebilir. Haftalıkta minTrials = trials olduğu için stopSd kullanılmaz.
 // VARSAYIM: minFine ve stopSd değerleri simülasyonla seçildi (staircase.test.js).
 export const PLANS = {
   daily: { warmup: 2, trials: 20, minTrials: 14, minFine: 8, stopSd: 0.07 },
-  weekly: { warmup: 2, trials: 28, minTrials: 20, minFine: 10, stopSd: 0.06 },
+  weekly: { warmup: 2, trials: 28, minTrials: 28, minFine: 10, stopSd: 0.06 },
 }
 
 // estimate: { trials, sd, fineTrials? } — fineTrials verilmişse plan.minFine de aranır.

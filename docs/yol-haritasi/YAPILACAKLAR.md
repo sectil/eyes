@@ -4,7 +4,7 @@ Her oturumun başında önce `docs/ANA_BELGE.md` (amaç, kurallar, belge haritas
 işaretlenir, yeni iş buraya eklenir. Hatalar `HATA_GUNLUGU.md`'ye yazılır.
 Kural: her özellik PubMed kaynaklı bilimsel dayanakla gelir (uygulamadaki kaynaklar listesine
 makalesi ve DOI'siyle girer); sağlık iddiası yok; KVKK açık rıza her veri amacı için ayrı.
-Son güncelleme: 2026-09-28.
+Son güncelleme: 2026-09-29.
 İşaretler (sahibinin kuralı, 2026-09-28): `[x]` = cihazda doğrulandı ve mükemmel; `[~]` = kodda bitti ama cihazda
 doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. Mükemmel olmayan hiçbir iş `[x]` olmaz.
 
@@ -413,7 +413,17 @@ destek/SSS, yenilikler. Kaynakça, kanıt kartları, sürüm notları, modül li
 - [ ] i18n, kronotip, özel SMTP
 - [ ] Small Business Program başvurusu (isteğe bağlı)
 
-## Haftalık E testi yeniden tasarım (2026-09-28, sahibinin şikâyeti) — ONAY BEKLİYOR
+## Haftalık E testi yeniden tasarım (2026-09-28, sahibinin şikâyeti) — UYGULANDI, CİHAZDA DENENMEDİ
+- [~] Uygulama (2026-09-29, onaylı S1–S13): tek ekranlı hazırlık (Gözlük · Örtme · Mesafe), 36–44 cm sayım bandı ve
+      35–45 cm duraklama (300 ms kural, neden kare kare değişmez), örtme kararı 400 ms penceresinde çoğunlukla, harf
+      kesin boyutta ve sabit, haftalıkta 28 harf, göz göz kayıt + runDay (gece yarısı), yeni görme serisi, kamerasız ayrı
+      seri, sesli yönlendirme 8 cümle × 2 ses (yalnız hazırlık/duraklama/mola), parlaklık ve ters renk (aşağıda).
+      Doğrulama: üç bağımsız tur + mutasyon denetimi (24/24 mutant yakalandı), 400 rastgele koşu özellik denemesi,
+      1335/1335 test, derleme tamam. Cihazda bak: 44 cm çevresinde harf akışı duraklamadan sürüyor mu; yanlış göz
+      örtülünce kart "Yanlış göz" diyor ve doğru göze dönünce kalkıyor mu; harf ekrandayken ses susuyor mu; gece yarısını
+      geçen yarım haftalık test ertesi gün baştan açılıyor mu; "Doktoruma göster" PDF'de Değişim satırı görünen
+      değerlerle tutarlı mı. Kaldırılan üç ses cümlesi (acuStart, acuEyeDone, acuDone): ekranda karşılığı yok, sahibi
+      isterse geri gelir.
 Sahibi: "bir sayfada gösterilmeli aşağı doğru gitmemeli; gözlük seçimi yapılmadan diğer aşamaya geçmiyor ama hiç belli
 değil; PubMed'e uygun, hesaplamada kusursuz; sesler ElevenLabs'tan."
 - İnceleme (45 ajan: kod/akış, hesap denetimi + benzetim, PubMed, 5 boyut × 2 tema ölçüm, geçmiş kararlar; hata
@@ -429,3 +439,11 @@ değil; PubMed'e uygun, hesaplamada kusursuz; sesler ElevenLabs'tan."
 - Karar bekleyen 13 konu (S1–S13, öneriler Artifact'te); ElevenLabs sesli yönlendirme 10 cümle × 2 ses (S13).
 - Plan ayrıntısı: bu oturumun çalışma notu PLAN.md (bölüm 1–7: bulgular, hesap H1–H9, kanıt K1–K17, ekranlar E0–E10,
   uygulama adımları, mutasyon testleri, cihaz listesi). Onaydan önce kod değişmez.
+- [~] **Parlaklık ve renkleri ters çevirme (S7, S12): TestFlight'tan önce cihazda doğrulanacak.** Kod yazıldı
+      (`FaceDistancePlugin.swift` getBrightness / setBrightness / isInvertColorsEnabled, `lib/brightnessSession.js`,
+      `lib/invertedColors.js`); Swift bu ortamda derlenmedi, CİHAZDA DENENMEDİ. 29 Eylül sürüm notunun parlaklık ve ters
+      renk maddesi (`lib/releases.js`) buna dayanıyor: doğrulanmazsa sürüm notundan çıkarılır.
+      Cihazda bak: "Başla"da parlaklık en yükseğe çıkıyor mu; test bitince, testten çıkınca ve uygulamadan ayrılınca
+      (Denetim Merkezi, arama, uygulama değiştirme) eski değerine dönüyor mu; uygulamaya dönünce test sürüyorsa yeniden
+      en yükseğe çıkıyor mu. Akıllı ve Klasik ters çevirme ayrı ayrı açıkken test başlamıyor ve "Renkleri ters çevirme
+      açık." uyarısı çıkıyor mu (VARSAYIM: Klasik ters çevirme algılanmayabilir; Apple Forum 91039).

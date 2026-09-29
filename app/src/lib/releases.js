@@ -4,6 +4,22 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    id: '2026-09-29',
+    title: '29 Eylül güncellemesi',
+    items: [
+      { kind: 'change', text: "E testi yenilendi: her göz için tek ekran; Gözlük, Örtme, Mesafe satırları ve tek düğme. Düğme hazır değilse eksik adımı yazar, dokununca o satırı gösterir. Gözlük seçimin hatırlanır, her testte yeniden sorulmaz." },
+      { kind: 'change', text: "Harfler yalnız telefon 36–44 cm uzaktayken sayılır (ilk iki alıştırma harfi 25–60 cm'de). Bu aralığın dışında sayılan harf gelmez: mesafe göstergesi uyarır, harfin yerinde ne yapacağın yazar; 35–45 cm'nin dışına çıkınca test durur. Düzelince aynı boyutta, yeni yönde bir harfle sürer. Bir cevap sayılmazsa nedeni de harfin yerinde yazar. Harf tam istenen boyutta çizilir ve göründüğü an boyutu sabit kalır. Haftalık testte her gözde 28 harf sayılır." },
+      // Parlaklık (FaceDistancePlugin.swift setBrightness, lib/brightnessSession.js) ve ters renk algılama
+      // (lib/invertedColors.js) kodda var, cihazda doğrulanmadı (Swift burada derlenmedi; WKWebView'de inverted-colors
+      // sorgusu ve UIAccessibility.isInvertColorsEnabled VARSAYIM). TestFlight'tan önce doğrulanacak; doğrulanmazsa
+      // sürüm notundan çıkarılır (YAPILACAKLAR). Metin yalnız kodun yaptığını söyler.
+      { kind: 'change', text: "Test başlayınca ekran parlaklığı en yükseğe alınır; test bitince, testten çıkınca ya da uygulamadan ayrılınca eski değerine döner. Renkleri ters çevirme açıksa test başlamaz ve nasıl kapatılacağı yazar." },
+      { kind: 'change', text: "Her göz bittiği an kaydedilir. Haftalık testi yarıda bırakırsan kalan gözler o gün Bugün kartında \"Kalan: …\" diye bekler; test ancak üç göz de bitince tamam sayılır, ertesi güne kalan yarım test baştan açılır." },
+      { kind: 'change', text: "Ölçüm yöntemi değiştiği için Gelişim'de görme için yeni seri başlar (\"Ölçüm yöntemi güncellendi; yeni seri.\"); başlangıç değerin yeniden en az 7 testle oluşur. Eski ölçümler silinmez; CSV dosyasında hepsi durur. Kamerasız yapılan ölçümler ayrı seridir." },
+      { kind: 'new', text: "E testinde sesli yönlendirme (ses açıksa, Profilim'de seçtiğin sesle): yalnız hazırlıkta, test durunca ve gözler arasındaki molada; harf ekrandayken konuşmaz. Söylenen cümle o an ekranda da yazılıdır." },
+    ],
+  },
+  {
     id: '2026-09-28',
     title: '28 Eylül güncellemesi',
     items: [

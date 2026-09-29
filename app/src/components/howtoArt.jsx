@@ -1,6 +1,7 @@
 // Yönerge kartlarının çizimleri (SVG + SMIL; dış görsel yok). Renkler tasarım tokenlarından.
 // prefers-reduced-motion: stepcards.css animasyonları durdurur (SMIL için begin="indefinite" yerine
 // CSS ile gizlenir; kare yine anlamlıdır).
+
 const ink = 'var(--ink)'
 const acc = 'var(--accent-graphic)'
 const panel = 'var(--surface-2)'
@@ -21,34 +22,8 @@ export function DistanceArt({ cm = null, ok = false }) {
   )
 }
 
-// E'nin açık tarafına doğru kaydır: beyaz alan, döndürülmüş E, aşağı kayan parmak
-export function SwipeEArt() {
-  return (
-    <svg viewBox="0 0 170 170">
-      <rect x="30" y="26" width="110" height="110" rx="18" fill="#FFFFFF" />
-      <text x="85" y="100" textAnchor="middle" fontFamily="var(--font-display)" fontWeight="800" fontSize="54" fill="#0B1219" transform="rotate(90 85 81)">E</text>
-      <g fill="none" stroke={acc} strokeWidth="4" strokeLinecap="round">
-        <path d="M85 112v22"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite" /></path>
-        <path d="M75 126l10 10 10-10"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite" /></path>
-      </g>
-      <circle cx="85" cy="150" r="9" fill={acc} opacity="0.9"><animate attributeName="cy" values="126;152;152" dur="1.8s" repeatCount="indefinite" /></circle>
-    </svg>
-  )
-}
-
-// Harf küçülür; seçemeyince "Göremiyorum"
-export function ShrinkArt() {
-  return (
-    <svg viewBox="0 0 170 170">
-      <rect x="30" y="34" width="110" height="90" rx="16" fill="#FFFFFF" />
-      <text x="85" y="94" textAnchor="middle" fontFamily="var(--font-display)" fontWeight="800" fontSize="40" fill="#0B1219">
-        E<animate attributeName="font-size" values="40;24;14;40" dur="3s" repeatCount="indefinite" />
-      </text>
-      <rect x="45" y="136" width="80" height="18" rx="9" fill={panel} stroke="var(--border)" />
-      <text x="85" y="149" textAnchor="middle" fontFamily="var(--font-body)" fontSize="9.5" fontWeight="700" fill="var(--ink-3)">Göremiyorum</text>
-    </svg>
-  )
-}
+// (Yakın E testinin eski SwipeEArt / ShrinkArt çizimleri kaldırıldı: E yazı tipi harfiydi ve çizimde metin vardı.
+// Yerine AcuitySwipeArt / AcuityShrinkArt, aşağıda.)
 
 // Nefes ver, ekrana bir kez dokun: nefes halkası + dokunan parmak
 export function BreathTapArt({ count = 3 }) {
@@ -173,6 +148,119 @@ export function JumpRingArt() {
           <animate attributeName="y" values="63;63;115;115;63;63" dur="4s" calcMode="discrete" repeatCount="indefinite" />
         </text>
       </g>
+    </svg>
+  )
+}
+
+// ——— Yakın E testi (screens/AcuityTest.jsx; PLAN.md E1, E2) ———
+// Çizimde metin yok ("40 cm", "Göremiyorum" sayfa metnidir). E, gerçek 5×5 tumbling E geometrisiyle
+// (lib/optotype.js eRects ile aynı hücreler) tek bir dış çizgi olarak çizilir; yazı tipi harfi kullanılmaz. Beyaz
+// karo açık temada 1 pt kenarlı.
+
+// E'nin dış çizgisi (5×5 ızgara birimi): sağa açık E'nin 12 köşesi, yönler lib/optotype.js eRects ile aynı
+// dönüşümle (sol: yatay ayna; aşağı: köşegen yansıma; yukarı: aşağının dikey aynası). Tek kapalı çokgen: yan yana
+// dikdörtgenlerin ortak kenarında kenar yumuşatma gri bir dikiş bırakıyordu (sırt–kol birleşimi).
+const E_OUTLINE_RIGHT = [[0, 0], [5, 0], [5, 1], [1, 1], [1, 2], [5, 2], [5, 3], [1, 3], [1, 4], [5, 4], [5, 5], [0, 5]]
+const E_MAP = {
+  right: ([px, py]) => [px, py],
+  left: ([px, py]) => [5 - px, py],
+  down: ([px, py]) => [py, px],
+  up: ([px, py]) => [py, 5 - px],
+}
+export function eOutline(dir) {
+  const f = E_MAP[dir]
+  if (!f) throw new RangeError(`Bilinmeyen E yönü: ${dir}`)
+  return E_OUTLINE_RIGHT.map(f)
+}
+
+// size: E'nin kenarı (kullanıcı birimi); x, y: sol üst köşe; dir: açık tarafın yönü. Tek <path> (dikişsiz).
+export function EGlyph({ x = 0, y = 0, size = 50, dir = 'right', fill = '#000' }) {
+  const u = size / 5
+  const n = (v) => +v.toFixed(3)
+  const d = `${eOutline(dir).map(([px, py], i) => `${i ? 'L' : 'M'}${n(x + px * u)} ${n(y + py * u)}`).join('')}Z`
+  return <path className="e-glyph" d={d} fill={fill} />
+}
+
+// Beyaz karo içinde E (test alanıyla aynı: her temada beyaz zemin, siyah harf)
+function ETile({ x, y, tile, size, dir, r = 12 }) {
+  const pad = (tile - size) / 2
+  return (
+    <g>
+      <rect x={x + 0.5} y={y + 0.5} width={tile - 1} height={tile - 1} rx={r} fill="#FFFFFF" stroke="var(--border)" strokeWidth="1" />
+      <EGlyph x={x + pad} y={y + pad} size={size} dir={dir} fill="#000000" />
+    </g>
+  )
+}
+
+// Kart 1 · "Telefonu 40 cm uzakta tut": yüz, kesik mesafe çizgisi, telefon. ok: doğru uzaklık (yeşil)
+export function AcuityDistanceArt({ ok = false }) {
+  const col = ok ? 'var(--ok)' : 'var(--accent)'
+  return (
+    <svg viewBox="0 0 200 140" aria-hidden="true">
+      <ellipse cx="44" cy="70" rx="26" ry="32" fill="none" stroke="var(--ink-2)" strokeWidth="2.5" />
+      <rect x="150" y="40" width="30" height="58" rx="6" fill="none" stroke={col} strokeWidth="3" />
+      <path d="M76 70 H144" stroke={col} strokeWidth="2.5" strokeDasharray="5 6" />
+      <path d="M76 64 v12 M144 64 v12" stroke={col} strokeWidth="2.5" />
+    </svg>
+  )
+}
+
+// Kart 2 · "E'nin açık tarafına kaydır": sağa açık E ve sağa ok (klasik örnek; aşağı bakan E "m" gibi okunuyordu)
+export function AcuitySwipeArt() {
+  return (
+    <svg viewBox="0 0 200 120" aria-hidden="true">
+      <ETile x={20} y={6} tile={108} size={64} dir="right" r={22} />
+      <path d="M146 60 H186 M172 46 L186 60 L172 74" fill="none" stroke="var(--accent)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+// Kart 3 · "Harf küçülür; seçemeyince Göremiyorum": küçülen dört E (farklı yönlerde)
+export function AcuityShrinkArt() {
+  const items = [[46, 'right'], [30, 'up'], [18, 'left'], [10, 'down']]
+  const gap = 12
+  const w = items.reduce((t, [s]) => t + s + 20, 0) + gap * (items.length - 1)
+  let x = 4
+  return (
+    <svg viewBox={`0 0 ${w + 8} 80`} aria-hidden="true">
+      {items.map(([s, d]) => {
+        const tile = s + 20
+        const g = <ETile key={d} x={x} y={76 - tile} tile={tile} size={s} dir={d} r={12} />
+        x += tile + gap
+        return g
+      })}
+    </svg>
+  )
+}
+
+// E2 · hazırlık çizimi: çizgi yüz, ayna görünümü (kişinin solu ekranın solunda). cover: örtülecek göz 'L' | 'R'
+// (iki göz testinde null → avuç yok). state: 'ok' (doğrulandı, yeşil) | 'bad' (yanlış, uyarı) | 'wait'.
+// Avuç örtülecek gözün tarafında çizilir. Göz değişiminde kayma animasyonu YOK: hazırlık ekranı her göz için yeniden
+// kurulur (arada deneme, sonuç ve mola ekranları var), önceki konum olmadığından geçiş oynatılamaz.
+export function FaceCoverArt({ cover = 'L', state = 'wait' }) {
+  const line = 'var(--ink-2)'
+  const col = state === 'ok' ? 'var(--ok)' : state === 'bad' ? 'var(--warn)' : 'var(--accent)'
+  const eye = (x, closed) =>
+    closed ? null : (
+      <g key={x}>
+        <ellipse cx={x} cy="98" rx="11" ry="7" fill="none" stroke={line} strokeWidth="2.5" />
+        <circle cx={x} cy="98" r="3.5" fill={line} />
+      </g>
+    )
+  // Avuç 62'de çizilir; sağ göz örtülecekse 76 birim sağa kayar (138)
+  const dx = cover === 'R' ? 76 : 0
+  return (
+    <svg viewBox="0 0 200 200" aria-hidden="true" className="face-cover-art">
+      <ellipse cx="100" cy="104" rx="62" ry="78" fill="none" stroke={line} strokeWidth="2.5" />
+      {eye(72, cover === 'L')}
+      {eye(128, cover === 'R')}
+      <path d="M100 104 L94 128 L104 128" fill="none" stroke={line} strokeWidth="2.2" strokeLinecap="round" />
+      <path d="M82 150 Q100 160 118 150" fill="none" stroke={line} strokeWidth="2.4" strokeLinecap="round" />
+      {cover && (
+        <g className="face-cover-palm" style={{ transform: `translateX(${dx}px)` }}>
+          <path d="M32 150 C 28 110, 36 84, 56 80 C 78 76, 96 90, 94 118 L 88 150 Z" fill={col} fillOpacity="0.22" stroke={col} strokeWidth="3" strokeLinejoin="round" />
+        </g>
+      )}
     </svg>
   )
 }

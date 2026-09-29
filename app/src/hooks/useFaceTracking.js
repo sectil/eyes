@@ -10,6 +10,12 @@ import { startTrueDepth } from '../lib/native.js'
 // onFrame: her ölçümde çağrılır. TrueDepth'te { native: true, face, mm, blinkLeft/Right, lookUp/Down/In/Out Left/Right }.
 // onDepth (yalnızca TrueDepth): ~10 Hz iki göz bölgesi derinliği { eyesKnown, leftMm, rightMm, eyeAgeMs, ts }.
 // depthDistance: yüz takibi düşünce (ör. el bir gözü örtünce) mesafe açık gözün derinliğinden sürer.
+
+// Kamera yeniden açılırken eski hata silinir (ör. "Kamerasız devam"dan sonra sıradaki gözde kamera yeniden denenir;
+// yine açılmazsa hata yeniden gelir). Eski hata kalsaydı ekran bir an "Kamera açılamadı" gösterirdi.
+const noStaleError = (s) => (s.error ? { ...s, error: null } : s)
+
+// Yüz takibi kancası (yukarıdaki iki kaynak)
 export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, trueDepth = false, onDepth, depthDistance = false } = {}) {
   const videoRef = useRef(null)
   const [state, setState] = useState({ ready: false, error: null, face: false, irisPx: null, mm: null })
@@ -25,6 +31,7 @@ export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, t
   // --- 1) TrueDepth ---
   useEffect(() => {
     if (!enabled || !useNative) return undefined
+    setState(noStaleError)
     let stop = null
     let cancelled = false
     const median = createMedian(5)
@@ -81,11 +88,18 @@ export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, t
   }, [enabled, useNative, wantDepth])
 
   // --- 2) Ön kamera + MediaPipe ---
+  // Akış sonradan biterse (izin geri alındı, kamera başka uygulamaya geçti: video izinin 'ended' olayı) hata 'load'
+  // olur ve döngü durur; yoksa son kare donmuş görüntü olarak ölçülmeye devam eder, AcuityTest "Kamera durdu"
+  // kartını hiç göstermezdi. 'mute' (geçici kesinti) hata sayılmaz. VARSAYIM: WebKit izin geri alınınca 'ended'
+  // gönderir; cihazda doğrulanmadı (AcuityTest ayrıca yüz uzun süre görünmezse "Kamerasız devam" sunar).
   useEffect(() => {
     if (!enabled || useNative) return undefined
+    setState(noStaleError)
     let stopCamera = null
     let raf = 0
     let cancelled = false
+    let ended = false
+    let offEnded = null
     const median = createMedian(9)
     let lastUi = 0
 
@@ -98,10 +112,23 @@ export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, t
           stop()
           return
         }
+        const track = video?.srcObject?.getVideoTracks?.()?.[0] ?? null
+        const onEnded = () => {
+          if (cancelled || ended) return
+          ended = true
+          cancelAnimationFrame(raf)
+          setState((s) => ({ ...s, error: 'load', face: false, irisPx: null, mm: null }))
+        }
+        track?.addEventListener?.('ended', onEnded)
+        offEnded = () => track?.removeEventListener?.('ended', onEnded)
+        if (track?.readyState === 'ended') {
+          onEnded()
+          return
+        }
         setState((s) => ({ ...s, ready: true }))
         let lastTs = -1
         const loop = () => {
-          if (cancelled) return
+          if (cancelled || ended) return
           const ts = performance.now()
           if (video.readyState >= 2 && ts > lastTs) {
             lastTs = ts
@@ -129,6 +156,7 @@ export function useFaceTracking({ enabled = true, distanceCal = null, onFrame, t
     return () => {
       cancelled = true
       cancelAnimationFrame(raf)
+      offEnded?.()
       stopCamera?.()
     }
   }, [enabled, useNative])

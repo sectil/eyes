@@ -69,7 +69,7 @@ export function createMedian(size = 9) {
   }
 }
 
-// Mesafe testte kabul aralığında mı? (±%10 → logMAR hatası ≤ ~0.04)
+// Mesafe testte kabul aralığında mı? (±%10 → logMAR hatası ≤ 0,046: log10(400/360); uzak uçta log10(440/400) = 0,041)
 export function distanceStatus(mm, target = REFERENCE_MM, tolerance = 0.1) {
   if (mm == null) return 'unknown'
   if (mm < target * (1 - tolerance)) return 'too-close'

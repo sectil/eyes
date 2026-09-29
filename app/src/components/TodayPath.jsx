@@ -3,6 +3,7 @@ import { IrisMark } from './ui.jsx'
 import { jevLine, canOpen } from '../lib/today.js'
 import { fmtLeft, LIMITS } from '../lib/eyeBudget.js'
 import { haptic } from '../lib/native.js'
+import { EGlyph } from './howtoArt.jsx'
 import '../styles/todaypath.css'
 
 // Bugünün yolu (Build 26). Tasarım: Artifact "Bugünün Yolu" (yol planı §13). Duolingo'dan yalnızca niyet
@@ -157,7 +158,7 @@ function StopInner({ stop, form, state, icon: Icon, fromA }) {
         <svg className="lens" viewBox="0 0 80 60" aria-hidden="true">
           <path className="lgl" d="M4 30A37.9 37.9 0 0 1 76 30A37.9 37.9 0 0 1 4 30Z" />
           <path className="lh" d="M16 20Q27 9 44 9" />
-          {stop.glyph === 'lines' ? <path className="ll" d="M27 22.5h26M27 30h26M27 37.5h17" /> : <text className="le" x="40" y="38.5" textAnchor="middle">E</text>}
+          {stop.glyph === 'lines' ? <path className="ll" d="M27 22.5h26M27 30h26M27 37.5h17" /> : <EGlyph x={31} y={21} size={18} dir="right" fill="#041017" />}
         </svg>
         {badges}
       </>
@@ -191,6 +192,19 @@ function StopInner({ stop, form, state, icon: Icon, fromA }) {
       {badges}
     </>
   )
+}
+
+// Durağın alt satırı: { text, warn }. Yarım kalan ölçüm (warn) uyarı renginde ve "!" ile (E0 "Kalan: Sol göz, İki
+// göz"). Süresi ölçülmemiş durakta (hideMinutes) süre yazılmaz. Bitince doneSub ("✓ Bu hafta tamam") ya da "tamam".
+export function stopSub(s, st, { leftMs = 0 } = {}) {
+  if (st === 'done') return { text: s.doneSub ?? 'tamam', warn: false }
+  if (st === 'locked') return { text: `mola ${fmtLeft(s.lockLeftMs ?? 0)}`, warn: false }
+  if (s.restSlot) return { text: st === 'running' ? `Mola · ${fmtLeft(leftMs)}` : s.sub ?? '', warn: false }
+  const min = s.minutes && !s.hideMinutes ? `${s.minutes} dk` : ''
+  const warn = Boolean(s.warn)
+  if (s.openEnded && s.sub) return { text: s.sub, warn }
+  if (s.kind === 'measure' && s.sub) return { text: min ? `${s.sub} · ${min}` : s.sub, warn }
+  return { text: min, warn }
 }
 
 // Yerleşim: bölüm 1 sağa bükülen yay, mola bandı, bölüm 2 sola bükülen yay
@@ -301,15 +315,7 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const subOf = (s, st) => {
-    if (st === 'done') return 'tamam'
-    if (st === 'locked') return `mola ${fmtLeft(s.lockLeftMs ?? 0)}`
-    if (s.restSlot) return st === 'running' ? `Mola · ${fmtLeft(eye.leftMs)}` : s.sub ?? ''
-    const min = s.minutes ? `${s.minutes} dk` : ''
-    if (s.openEnded && s.sub) return s.sub
-    if (s.kind === 'measure' && s.sub) return `${s.sub} · ${min}`
-    return min
-  }
+  const subOf = (s, st) => stopSub(s, st, { leftMs: eye?.leftMs ?? 0 })
   const sections = [1, 2].map((b, i) => ({ b, y: i === 0 ? 0 : L.label2, ...plan.blocks[i] })).filter((x) => x.y != null && stops.some((s) => s.block === x.b && !s.finale))
   const chipAt = plan.forcedRestBefore ? stops.findIndex((s) => s.key === plan.forcedRestBefore) : -1
 
@@ -365,7 +371,8 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
           const r = radius(form, st)
           const side = s.restSlot ? 'rest' : x > W / 2 ? 'left' : 'right'
           const labelX = side === 'left' ? x - r[0] - 8 : side === 'rest' ? x + r[0] + 12 : x + r[0] + 8
-          const sub = subOf(s, st)
+          const subLine = subOf(s, st)
+          const sub = subLine.text
           const showLabel = i !== jIdx
           return (
             <div key={s.key}>
@@ -376,7 +383,7 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
                 style={{ left: px(x), top: y, ...(s.restSlot ? { '--p': restP } : {}) }}
                 onClick={() => tap(s, st)}
                 aria-disabled={st === 'later' ? 'true' : undefined}
-                aria-label={`${s.title}, ${KIND_TR[form]}${s.minutes ? `, ${s.minutes} dakika` : ''}, ${STATE_TR[st]}${st === 'locked' ? ` (${sub})` : ''}${st === 'later' && plan.next ? `. Önce ${plan.next.title}` : ''}`}
+                aria-label={`${s.title}, ${KIND_TR[form]}${s.minutes && !s.hideMinutes ? `, ${s.minutes} dakika` : ''}${subLine.warn ? `, ${sub}` : ''}, ${STATE_TR[st]}${st === 'locked' ? ` (${sub})` : ''}${st === 'later' && plan.next ? `. Önce ${plan.next.title}` : ''}`}
               >
                 <StopInner stop={{ ...s, runLeft: st === 'running' ? fmtLeft(eye.leftMs) : '' }} form={form} state={st} icon={icons[s.id]} fromA={isFresh ? A_NOW : null} />
               </button>
@@ -386,7 +393,10 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
                   {form === 'me' && <span className="tag">Ölçüm</span>}
                   {form === 'rest' && <span className="tag">Mola</span>}
                   <span className="t">{form === 'rest' ? `${s.title} · ${s.minutes ?? 5} dk` : s.title}</span>
-                  <small className={st === 'locked' ? 'lk' : ''}>{sub}</small>
+                  <small className={st === 'locked' ? 'lk' : subLine.warn ? 'warn' : ''}>
+                    {subLine.warn && <b className="wi">!</b>}
+                    {sub}
+                  </small>
                 </span>
               )}
               {st === 'now' && (
@@ -432,7 +442,11 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
               <span className="tp-jev"><IrisMark size={32} /></span>
               <div className="tp-jb-b">
                 <b className={`w${gold ? ' gold' : ''}`}>{jev.word}</b>
-                <span className="l2">{jev.line}</span>
+                {/* Sıradaki durak yarım kalan ölçümse ("Kalan: …") satır uyarı renginde ve "!" ile (E0) */}
+                <span className={`l2${s.warn && !s.done ? ' warn' : ''}`}>
+                  {s.warn && !s.done && <b className="wi" aria-hidden="true">!</b>}
+                  {jev.line}
+                </span>
               </div>
             </div>
           )

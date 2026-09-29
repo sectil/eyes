@@ -304,32 +304,9 @@ button { font: inherit; color: inherit; }
 .chip-too-close, .chip-too-far { background: #fde68a; color: #713f12; }
 .steps { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; color: var(--ink-2); line-height: 1.5; }
 
-/* ---------- Test ekranı: tema ne olursa olsun beyaz zemin, siyah harf ---------- */
-.test-root { min-height: 100dvh; }
-.stimulus-area {
-  position: fixed; inset: 0; background: #fff; color: #0f172a;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
-  touch-action: none; user-select: none; -webkit-user-select: none; padding: 16px;
-  color-scheme: light;
-}
-.stimulus-top {
-  position: absolute; top: calc(14px + env(safe-area-inset-top)); left: 16px; right: 16px;
-  display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; color: #475569;
-}
-.progress-track { position: absolute; top: calc(4px + env(safe-area-inset-top)); left: 16px; right: 16px; height: 3px; border-radius: 2px; background: #e2e8f0; overflow: hidden; }
-.progress-track > i { display: block; height: 100%; background: #0f766e; transition: width 0.2s; }
+/* ---------- Test ekranı ---------- */
+/* Yakın E testi (her temada beyaz ölçüm alanı, siyah E; yön düğmeleri 78 px, Göremiyorum 60 px): styles/acuity.css */
 .paused { font-size: 1.2rem; font-weight: 650; }
-/* Yön düğmeleri: az gören kullanıcı için büyük ve yüksek kontrastlı (dokunma alanı 78 px; dar ekranda sığacak kadar) */
-.arrow-row { position: absolute; bottom: calc(20px + env(safe-area-inset-bottom)); display: flex; gap: 12px; }
-.arrow {
-  width: min(78px, calc((100vw - 60px) / 4)); height: min(78px, calc((100vw - 60px) / 4)); border-radius: 50%;
-  border: 2px solid #64748b; background: #f8fafc; color: #0f172a;
-  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
-}
-.arrow:active { background: #e2e8f0; border-color: #0f172a; }
-.arrow:focus-visible { outline: 3px solid #0f766e; outline-offset: 3px; }
-.fb-ok { background: #f0fdf4; }
-.fb-no { background: #fff7ed; }
 .swipe-hint { position: absolute; bottom: calc(100px + env(safe-area-inset-bottom)); font-size: 0.8rem; color: #94a3b8; }
 .reading-area .btn { max-width: 340px; background: #0f766e; color: #fff; }
 .reading-area .btn-ghost { max-width: 340px; background: transparent; color: #334155; border-color: #cbd5e1; }
@@ -505,13 +482,6 @@ details > summary::-webkit-details-marker { display: none; }
 .hud.ok ~ .hud-msg { color: var(--ok); }
 
 /* ---------- Test ekranı ek ---------- */
-.cant-see {
-  align-self: center; display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: 6px;
-  min-height: 60px; padding: 0 28px; border-radius: 999px; border: 2px solid #64748b; background: #fff;
-  color: #0f172a; font: 700 1.2rem var(--font-body); cursor: pointer;
-}
-.cant-see:active { background: #e2e8f0; }
-.stimulus-top .btn-icon { width: 40px; height: 40px; }
 .reading-mic { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-3); font-size: 0.9rem; }
 .reading-mic.on { color: var(--accent); }
 .reading-mic .pulse { width: 10px; height: 10px; border-radius: 50%; background: currentColor; animation: pulse 1s ease-in-out infinite; }

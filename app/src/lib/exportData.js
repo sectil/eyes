@@ -5,7 +5,8 @@
 // süreleri kendiliğinden eklenir.
 import { registry } from '../modules/registry.js'
 import { activitiesFrom, decimalTr } from './stats.js'
-import { analyzeTrend, trendMessage, YELLOW_DELTA, RED_DELTA } from './trend.js'
+import { analyzeTrend, trendMessage, seriesNotes, droppedNotes, YELLOW_DELTA, RED_DELTA, BAND_MIN_MM, BAND_MAX_MM } from './trend.js'
+import { formatLogMAR, formatEquivalents, roundLogMAR } from './optotype.js'
 import { EYE_LABEL } from './vaSeries.js'
 import { DOMAIN_LABEL, WHO5_TYPE, acuteEffects, metricCards, practiceCard, who5Card } from './progress.js'
 import { ageFromBirthDate } from './identity.js'
@@ -122,8 +123,17 @@ const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString('tr-TR', { day:
 const fmtShort = (iso) => new Date(iso).toLocaleDateString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric' })
 const num = (v, d = 1) => (Number.isFinite(v) ? decimalTr(v, d) : '–')
 const signed = (v, d = 1) => (Number.isFinite(v) ? `${v > 0 ? '+' : v < 0 ? '−' : ''}${decimalTr(Math.abs(v), d)}` : '–')
-// logMAR → ondalık görme keskinliği (10^−logMAR); standart dönüşüm, yorum değil
-const decimalVa = (lm) => (Number.isFinite(lm) ? decimalTr(10 ** -lm, 2) : '–')
+// logMAR → ondalık görme keskinliği (10^−logMAR); standart dönüşüm, yorum değil. H8: logMAR önce 2 haneye yuvarlanır,
+// ondalık bu değerden türetilir (uygulamadaki E7 ile aynı: 0,004 → "0,00" ve "1,00", "0,99" değil).
+const decimalVa = (lm) => formatEquivalents(lm)?.decimal ?? '–'
+const lmText = (lm) => (Number.isFinite(lm) ? formatLogMAR(lm) : '–')
+// Değişim, raporda yazan iki yuvarlanmış değerin farkıdır: 0,12 → 0,20 "+0,08" (ham farkın yuvarlaması +0,09 olabilirdi
+// ve okuyan iki sayıyı çıkarınca tutmazdı). Eksi işareti gerçek eksi (−).
+function lmChange(current, baseline) {
+  if (!Number.isFinite(current) || !Number.isFinite(baseline)) return '–'
+  const d = roundLogMAR(roundLogMAR(current) - roundLogMAR(baseline))
+  return `${d > 0 ? '+' : ''}${formatLogMAR(d)}`
+}
 const PHASE_TEXT = { familiarization: 'alışma dönemi (ilk 7 gün)', baseline: 'başlangıç oluşuyor', tracking: 'takipte', empty: '–' }
 const STATUS_TEXT = { better: 'iyileşiyor', worse: 'geriliyor', noise: 'doğal oynama', unsure: 'henüz belirsiz', first: 'ilk ölçüm', up: 'anlamlı artış', down: 'anlamlı düşüş' }
 function eyeStatusText(t) {
@@ -218,22 +228,24 @@ td.n,th.n{text-align:right}
 function eyeBlock(e) {
   const t = e.trend
   const tone = t.alert ?? ''
+  // Başlangıçla karşılaştırılan değer: son 7 günün ortancası; son 7 günde test yoksa son 3 testin ortancası (trend.js)
+  const cur = t.currentWindow === 'last3' ? { label: 'Son 3 test (ortanca)', value: t.current } : { label: 'Son 7 gün (ortanca)', value: t.current7 }
   const rows = e.recent
-    .map((r) => `<tr><td>${esc(localStamp(r.date))}</td><td class="n">${esc(decimalTr(r.logMAR, 2))}</td><td class="n">${esc(decimalVa(r.logMAR))}</td><td>${esc(CONDITION_TEXT[r.correction] ?? '–')}</td><td class="n">${Number.isFinite(r.meanDistanceMm) ? esc(String(Math.round(r.meanDistanceMm / 10))) + ' cm' : '–'}</td></tr>`)
+    .map((r) => `<tr><td>${esc(localStamp(r.date))}</td><td class="n">${esc(lmText(r.logMAR))}</td><td class="n">${esc(decimalVa(r.logMAR))}</td><td>${esc(CONDITION_TEXT[r.correction] ?? '–')}</td><td class="n">${Number.isFinite(r.meanDistanceMm) ? esc(String(Math.round(r.meanDistanceMm / 10))) + ' cm' : '–'}</td></tr>`)
     .join('')
   return `<div class="eye"><div class="eye-sum">
 <div class="top"><h3>${esc(e.label)}</h3><span class="status ${tone}">${esc(eyeStatusText(t))}</span></div>
 <div>${eyeChartSvg(t.series, t.baseline)}</div>
 <div class="kv">
-<span>Son ölçüm</span><b>${esc(decimalTr(e.last.logMAR, 2))} logMAR (≈ ${esc(decimalVa(e.last.logMAR))})</b>
-<span>Başlangıç (ortanca)</span><b>${t.baseline != null ? esc(decimalTr(t.baseline, 2)) : '–'}</b>
-<span>Son 7 gün (ortanca)</span><b>${t.current7 != null ? esc(decimalTr(t.current7, 2)) : '–'}</b>
-<span>Değişim</span><b>${t.delta != null ? esc(signed(t.delta, 2)) : '–'}</b>
+<span>Son ölçüm</span><b>${esc(lmText(e.last.logMAR))} logMAR (≈ ${esc(decimalVa(e.last.logMAR))})</b>
+<span>Başlangıç (ortanca)</span><b>${t.baseline != null ? esc(lmText(t.baseline)) : '–'}</b>
+<span>${esc(cur.label)}</span><b>${cur.value != null ? esc(lmText(cur.value)) : '–'}</b>
+<span>Değişim</span><b>${t.delta != null ? esc(lmChange(cur.value, t.baseline)) : '–'}</b>
 <span>Test sayısı</span><b>${e.n}</b>
 <span>İlk test</span><b>${esc(fmtDate(e.first))}</b>
 <span>Koşul</span><b>${esc(CONDITION_TEXT[t.condition] ?? '–')}</b>
 </div>
-<p class="msg">${esc(e.message)}${t.dropped ? ` Farklı gözlük/lens koşulundaki ${t.dropped} test değerlendirmeye katılmadı (tabloda görünür).` : ''}</p>
+<p class="msg">${esc([e.message, ...seriesNotes(t), ...droppedNotes(t)].join(' '))}${t.dropped ? ' Seriye girmeyen ölçümler tabloda görünür.' : ''}</p>
 </div>
 <div class="tbl"><table><thead><tr><th>Tarih</th><th class="n">logMAR</th><th class="n">ondalık</th><th>Koşul</th><th class="n">Mesafe</th></tr></thead><tbody>${rows}</tbody></table>
 ${e.n > e.recent.length ? `<p class="small">Son ${e.recent.length} test; tamamı CSV dosyasında.</p>` : ''}</div>
@@ -267,10 +279,10 @@ ${eyeSection}</section>
 
 <section class="block rule"><h2>Uyarı kuralı</h2>
 <p><b>Başlangıç:</b> ilk 7 gün alışma (değerlendirilmez); 8. günden itibaren en az 7 testin ortancası, en erken 21. güne kadar (21. günde 7 test yoksa 7. teste kadar uzar).</p>
-<p><b>Sarı:</b> son 7 günün ortancası başlangıçtan en az ${esc(decimalTr(YELLOW_DELTA, 2))} logMAR kötü ve art arda 3 test kötü → birkaç gün daha ölç.</p>
-<p><b>Kırmızı:</b> son 7 günde en az 3 test var, ilki en az 6 gün önce yapılmış ve hepsi başlangıçtan en az ${esc(decimalTr(RED_DELTA, 2))} logMAR kötü → göz doktoruna başvur.</p>
+<p><b>Sarı:</b> son 7 günün ortancası (son 7 günde test yoksa son 3 testin ortancası) başlangıçtan en az ${esc(decimalTr(YELLOW_DELTA, 2))} logMAR kötü ve art arda 3 test kötü → birkaç gün daha ölç.</p>
+<p><b>Kırmızı:</b> son 7 günde en az 3 test var, ilki en az 6 gün önce yapılmış ve hepsi başlangıçtan en az ${esc(decimalTr(RED_DELTA, 2))} logMAR kötü → göz doktoruna başvur. Seyrek seride (son 7 günde 3 test yoksa; ör. yalnız haftalık ölçülen iki göz) kural son testle biten 7 güne, orada 3 test yoksa son 3 teste uygulanır; ilki sonuncudan en az 6 gün önce olmalı.</p>
 <p><b>İyileşme:</b> sarı kuralın ters yönü (bir kısmı teste alışmaktan olabilir).</p>
-<p>Yalnız aynı gözlük/lens koşulundaki testler karşılaştırılır. Ani görme kaybı, perde inmesi, ışık çakması ya da ağrıda beklenmeden başvurulmalı.</p>
+<p>Yalnız aynı seri karşılaştırılır. Seriyi son test belirler: aynı ölçüm yöntemi sürümü, aynı mesafe ölçümü (kamerayla / kamerasız, 40 cm varsayılarak) ve aynı gözlük/lens koşulu; gözlük yenilendiyse o testten sonrası. Eski yöntemle (descent-zest-v4 öncesi) kamerayla yapılan ölçümlerde ortalama mesafe de seriyi ayırır: ${BAND_MIN_MM / 10}–${BAND_MAX_MM / 10} cm'deki, ${BAND_MIN_MM / 10} cm'den yakın ve ${BAND_MAX_MM / 10} cm'den uzak ölçümler üç ayrı seridir. Ani görme kaybı, perde inmesi, ışık çakması ya da ağrıda beklenmeden başvurulmalı.</p>
 <p class="src">"Art arda 3 test" yaklaşımı, akıllı telefonla evde görme takibinde yanlış alarmı azaltmak için kullanılan kuraldan uyarlandı (farklı test: hiperkeskinlik): Faes L ve ark. 2021, Eye (Lond) 35(11):3035-3040. doi:10.1038/s41433-020-01356-2</p>
 </section>
 
@@ -289,7 +301,7 @@ ${effectRows ? `<section class="block"><h2>Uygulama öncesi → sonrası (kişin
 
 <section class="block"><h2>Yöntem ve sınırlar</h2>
 <p class="small">Görme: telefon ekranında dört yöne dönen E harfi; sağ ve sol göz ayrı ayrı (diğeri kapatılarak), haftalık testte ayrıca iki göz birlikte. Harf boyutu uyarlamalı yöntemle (iniş + ZEST, Bayes eşik tahmini) ayarlanır; sonuç logMAR. Hedef mesafe 40 cm; destekleyen iPhone'larda mesafe ön kamerayla (TrueDepth) ölçülür ve harf boyutu ölçülen mesafeye göre hesaplanır. "ondalık" sütunu 10<sup>−logMAR</sup> dönüşümüdür.</p>
-<p class="small">Deneme sayısı: günlük testte 14–20, haftalık testte 20–28 (göz başına).</p>
+<p class="small">Deneme sayısı (göz başına): günlük testte 14–20, haftalık testte 28 (eski yöntemle yapılan kayıtlarda 20–28). Yeni yöntemde (descent-zest-v4) sayılan harfler yalnız telefon 36–44 cm'deyken alınır; kamerasız ölçümde mesafe ölçülmez, 40 cm varsayılır.</p>
 <p class="small">Tekrarlanabilirlik: benzer tablet ve telefon yakın testlerinde, klinikte ve gözetim altında, iki test arasındaki farkın %95 sınırı ±0,13–0,24 logMAR (çoğunda yaklaşık ±0,2); ev koşulunda ölçülmedi, daha geniş olabilir. Joseph A ve ark. 2023, Ophthalmol Ther 13(1):409-422, doi:10.1007/s40123-023-00854-2 · Katibeh M ve ark. 2022, Transl Vis Sci Technol 11(12):18, doi:10.1167/tvst.11.12.18 · Han X ve ark. 2019, Transl Vis Sci Technol 8(4):27, doi:10.1167/tvst.8.4.27</p>
 <p class="small">Sınırlar: ışık, ekran parlaklığı, yorgunluk, dikkat ve mesafe sonucu etkiler; tek bir test yorumlanmamalı, eğilime bakılmalı. Yakın mesafe ölçümüdür; uzak ETDRS değerleriyle doğrudan karşılaştırılmamalıdır. Ölçümler klinik bir cihazla yapılmamıştır.</p>
 </section>

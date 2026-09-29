@@ -1,5 +1,5 @@
-// Günlük görme testi ("E hangi yönde", ~3 dk). Kayıtları tests deposuna gider; Gelişim'de stats.js işler.
-import { lastOfType, isDue, doneToday } from '../../lib/today.js'
+// Günlük görme testi ("E hangi yönde", sağ + sol göz). Kayıtları tests deposuna gider; Gelişim'de stats.js işler.
+import { weeklyStatus, eyeDay, remainingText } from '../../lib/today.js'
 
 export default {
   id: 'daily',
@@ -12,10 +12,16 @@ export default {
   gates: { eyeBudget: 'test' },
   ask: { after: ['lastExam'] }, // ilk E testinden sonra son muayene
   home: { section: 'measure', order: 20 },
-  // Haftalık test bugün yapıldıysa ya da zamanı geldiyse ölçüm adımını o üstlenir.
-  // VARSAYIM: haftalık zamanı gelmediyse günlük test her gün plandadır.
+  // Haftalık test bugün yoldaysa (zamanı geldi, bugün yarım kaldı ya da bugün üç gözüyle bitti) ölçüm adımını o
+  // üstlenir; yarım bir haftalık artık "yapıldı" sayılmaz (karar S3). VARSAYIM: haftalık zamanı gelmediyse günlük
+  // test her gün plandadır. Günlük de her göz bitince kaydedilir (S4): "tamam" = bugün sağ ve sol göz; yalnız biri
+  // varsa kart "Kalan: Sol göz" der.
   today({ tests, now }) {
-    if (doneToday(tests, 'va-weekly', now) || isDue(lastOfType(tests, 'va-weekly'), now)) return null
-    return { title: 'E testi', sub: 'sağ + sol göz', minutes: 3, slot: 'test', glyph: 'E', done: doneToday(tests, 'va-daily', now) }
+    if (weeklyStatus(tests, now).state !== 'idle') return null
+    const day = eyeDay(tests, 'va-daily', now)
+    // minutes yalnız yol bütçesi tahmini (cihazda ölçülmedi): kartta yazılmaz
+    const stop = { title: 'E testi', sub: 'sağ + sol göz', minutes: 3, hideMinutes: true, slot: 'test', glyph: 'E', done: day.complete }
+    if (day.started && !day.complete) return { ...stop, sub: remainingText(day.remaining), remaining: day.remaining, warn: true }
+    return stop
   },
 }

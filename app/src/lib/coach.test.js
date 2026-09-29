@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { sanitizeSignals, parseCoachReply, passesGuard, SYSTEM_PROMPT } from './coachCore.js'
 import { buildSignals, fallbackInsight, getTodayInsight } from './coach.js'
+import { trendMessage } from './trend.js'
 import handler from '../../api/coach.js'
 
 const NOW = new Date('2026-09-24T10:00:00')
@@ -37,6 +38,14 @@ describe('parseCoachReply / passesGuard', () => {
   it('sistem istemi temel yasakları içerir', () => {
     expect(SYSTEM_PROMPT).toMatch(/UYDURMA/)
     expect(SYSTEM_PROMPT).toMatch(/Teşhis koyma/)
+  })
+  // Üçüncü doğrulama (2. doğrulayıcı, NIT 3): istem, ekrandan V-N6 ile kaldırılan "tek testler bir testten diğerine"
+  // kalıbını taşıyordu; koç onu aynen yazabilirdi. Tek ölçümün oynaması Gelişim'deki cümlenin sözleriyle anlatılır.
+  it('sistem istemi tek ölçümün oynamasını Gelişim ekranındaki sözlerle anlatır', () => {
+    const phrase = 'tek bir ölçüm yaklaşık ±0,2 logMAR oynayabilir'
+    for (const sparse of [false, true]) expect(trendMessage({ phase: 'tracking', alert: null, trend: 'stable', sparse })).toContain(phrase)
+    expect(SYSTEM_PROMPT).toContain(phrase)
+    expect(SYSTEM_PROMPT).not.toMatch(/bir testten diğerine|tek testler\b|tek testi\b/)
   })
 })
 

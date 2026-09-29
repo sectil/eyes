@@ -61,6 +61,19 @@ export const PHRASES = {
     blClose2: 'Tekrar hafifçe kapat.',
     blSqueeze: 'Kapalıyken hafifçe sık.',
     blRest: 'Aç ve dinlen.',
+    // Haftalık yakın görme E testi (screens/AcuityTest.jsx). Yalnız hazırlıkta, duraklamada ve gözler arasında;
+    // harf gösterilirken konuşulmaz. Her cümle, söylendiği anda ekranda aynen yazılıdır: alt başlık, örtme / mesafe
+    // satırı, düğme ya da duraklama kartı (eşleme: lib/acuityFlow.js setupPhraseId, PAUSE_SUB, REST_TITLE; denetim:
+    // acuityFlow.test.js "ekrandaki cümle = sesli cümle" ve AcuityTest.test.jsx checkSpoken). Gözler arası molada
+    // 'exFarShort' ("Uzağa bak.", mola başlığı) söylenir. "Başla" hazırken, göz sonucunda ve özette konuşulmaz.
+    acuCoverL: 'Sol gözünü avucunla ört, bastırma.',
+    acuCoverR: 'Sağ gözünü avucunla ört, bastırma.',
+    acuBoth: 'İki gözünü de açık tut.',
+    acuWrong: 'Yanlış göz. Diğer gözünü ört.',
+    acuCloser: 'Biraz yaklaştır.',
+    acuFarther: 'Biraz uzaklaştır.',
+    acuFace: 'Yüzünü kameraya göster.',
+    acuPaused: 'Test durdu. Düzelince sürer.',
   },
 }
 export const PHRASE_IDS = Object.keys(PHRASES.tr)

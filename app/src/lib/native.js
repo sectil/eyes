@@ -1,5 +1,5 @@
 // iPhone uygulamasına özel yetenekler (Capacitor). Web'de bu fonksiyonlar "yok" döner.
-// FaceDistance: ios/App/App/FaceDistancePlugin.swift (TrueDepth + ARKit)
+// FaceDistance: ios/App/App/FaceDistancePlugin.swift (TrueDepth + ARKit; görme testi için ekran parlaklığı ve ters renk)
 // Feedback: ios/App/App/FeedbackPlugin.swift (titreşim + ses modu); tercihler src/lib/prefs.js
 
 import { Capacitor, registerPlugin } from '@capacitor/core'
@@ -58,6 +58,92 @@ export async function startTrueDepth(onFace, { onDepth } = {}) {
       await Promise.all(handles.map((h) => h.remove()))
     }
   }
+}
+
+// --- Ekran parlaklığı ve renkleri ters çevirme (görme testi S7, S12; FaceDistancePlugin.swift) ---
+// Web'de ve eski iOS derlemesinde (metot yok → Capacitor UNIMPLEMENTED ile reddeder) hiçbir şey yapmaz, null döner.
+// Oturum mantığı src/lib/brightnessSession.js, algılama src/lib/invertedColors.js.
+const clamp01 = (x) => Math.min(1, Math.max(0, x))
+
+// Döner: 0–1 ya da null (web / hata).
+export async function getScreenBrightness() {
+  if (!isIOSApp()) return null
+  try {
+    const r = await FaceDistance.getBrightness()
+    const v = Number(r?.brightness)
+    return Number.isFinite(v) ? v : null
+  } catch {
+    return null
+  }
+}
+
+// value: 0–1 (sıkıştırılır). restoreOnLeave (0–1): uygulama etkinliğini yitirince (Denetim Merkezi, arama,
+// uygulama değiştirme) native taraf ekranı bu değere döndürür; verilmezse bu koruma kalkar.
+// Döner: native'in okuduğu değer ya da null (web / hata / geçersiz değer).
+export async function setScreenBrightness(value, { restoreOnLeave } = {}) {
+  if (!isIOSApp() || !Number.isFinite(value)) return null
+  const opts = { brightness: clamp01(value) }
+  if (Number.isFinite(restoreOnLeave)) opts.restoreOnLeave = clamp01(restoreOnLeave)
+  try {
+    const r = await FaceDistance.setBrightness(opts)
+    const v = Number(r?.brightness)
+    return Number.isFinite(v) ? v : opts.brightness
+  } catch {
+    return null
+  }
+}
+
+// Native olay dinleyicisi; dinleyici eklenmeden durdurulursa eklenince hemen kaldırılır. Döner: durdurma fonksiyonu.
+function listenNative(eventName, onEvent) {
+  if (!isIOSApp()) return () => {}
+  let handle = null
+  let stopped = false
+  const drop = (h) => {
+    try {
+      Promise.resolve(h?.remove?.()).catch(() => {})
+    } catch {
+      // yoksay
+    }
+  }
+  Promise.resolve()
+    .then(() =>
+      FaceDistance.addListener(eventName, (e) => {
+        if (!stopped) onEvent(e)
+      }),
+    )
+    .then((h) => {
+      if (stopped) drop(h)
+      else handle = h
+    })
+    .catch(() => {})
+  return () => {
+    stopped = true
+    if (handle) drop(handle)
+    handle = null
+  }
+}
+
+// "brightness" olayı: { reason: 'restored', brightness } (etkinlik kaybında native geri yükledi) ya da
+// { reason: 'active' } (uygulama yeniden etkin). Döner: durdurma fonksiyonu (web'de boş).
+export function watchScreenBrightness(onEvent) {
+  return listenNative('brightness', onEvent)
+}
+
+// iPhone erişilebilirlik ayarı (UIAccessibility.isInvertColorsEnabled). Döner: true / false / null (web / hata).
+// VARSAYIM (doğrulanmadı): yalnız Akıllı Ters Çevir'i bildiriyor olabilir (FaceDistancePlugin.swift notu).
+export async function nativeInvertColors() {
+  if (!isIOSApp()) return null
+  try {
+    const r = await FaceDistance.isInvertColorsEnabled()
+    return typeof r?.enabled === 'boolean' ? r.enabled : null
+  } catch {
+    return null
+  }
+}
+
+// Ayar değişince onChange(enabled). Döner: durdurma fonksiyonu (web'de boş).
+export function watchNativeInvertColors(onChange) {
+  return listenNative('invertColors', (e) => onChange(e?.enabled === true))
 }
 
 // --- Konuşma tanıma (ios/App/App/SpeechPlugin.swift) ---

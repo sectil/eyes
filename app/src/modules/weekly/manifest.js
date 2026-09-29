@@ -1,5 +1,5 @@
-// Haftalık tam test (~5 dk): iki göz ayrı ayrı ve birlikte.
-import { lastOfType, isDue, doneToday } from '../../lib/today.js'
+// Haftalık E testi: sağ göz, sol göz ve iki göz birlikte (üç bölüm).
+import { weeklyStatus, WEEKLY_DONE } from '../../lib/today.js'
 
 export default {
   id: 'weekly',
@@ -12,10 +12,17 @@ export default {
   gates: { eyeBudget: 'test' },
   ask: { after: ['lastExam'] },
   home: { section: 'measure', order: 10 },
-  // Zamanı geldiyse (son haftalık testten 7 gün geçtiyse) bugünün ölçümü budur.
+  // Bugün kartı (E0, karar S3): "tamam" = aynı gün sağ, sol ve iki göz kaydı. Yarım günde kart kalan gözleri söyler
+  // ve zamanı gelmemiş olsa da yolda kalır (biten göz kaydedildi, kalanlar Bugün'de bekler); ertesi gün test
+  // baştan açılır. Zamanı: son TAM haftalık günden 7 gün geçtiyse (lib/today.js weeklyStatus).
+  // minutes: yol bütçesi için tahmin (cihazda ölçülmedi; S2 ile test uzadı): kartta süre yazılmaz (hideMinutes).
+  // Bitince kartta "✓ Bu hafta tamam" (doneSub).
   today({ tests, now }) {
-    const stop = { title: 'Haftalık E testi', sub: 'sağ, sol, iki göz', minutes: 5, slot: 'test', glyph: 'E' }
-    if (doneToday(tests, 'va-weekly', now)) return { ...stop, done: true }
-    return isDue(lastOfType(tests, 'va-weekly'), now) ? { ...stop, done: false } : null
+    const w = weeklyStatus(tests, now)
+    if (w.state === 'idle') return null
+    const stop = { title: 'Haftalık E testi', sub: w.sub, minutes: 5, hideMinutes: true, slot: 'test', glyph: 'E' }
+    if (w.state === 'done') return { ...stop, done: true, doneSub: WEEKLY_DONE }
+    if (w.state === 'half') return { ...stop, done: false, remaining: w.remaining, warn: true }
+    return { ...stop, done: false }
   },
 }
