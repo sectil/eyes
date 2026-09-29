@@ -167,7 +167,7 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
         ) : (
           <button className="list-row" onClick={onAccount}>
             <UserRound size={20} aria-hidden="true" />
-            <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Hesap aç ya da giriş yap</span><span className="muted small">İzin verirsen profilin hesabına kaydedilir</span></span>
+            <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Hesap aç ya da giriş yap</span><span className="muted small">Apple, Google ya da e-posta ile</span></span>
             <ChevronRight size={18} className="muted" />
           </button>
         )}

@@ -185,16 +185,17 @@ Uygulama sırası (her biri ayrı onay, test, TestFlight): (a) E testi haftada b
       ortasında güncelleyen önce İlk Bakış'ı, sonra kaldığı yeri görür. Sürüm notu yeni girdide ('2026-09-29-2'; Bug 31).
       Tarayıcıda iki temada baştan sona denendi (kamerasız sayımla). Bağımsız doğrulama (1 tur): kritik hata yok; 4 öneri
       ve 1 not düzeltildi (belge, hesap cümlesi, eski yorumlar, kayıt yazma/silme testleri, sonuç ekranında kaybolma).
-      Bug 32 düzeltildi: hesap ekranı "İzin verirsen profilin hesabına kaydedilir; ölçümlerin telefonunda saklanır."
+      Bug 32 düzeltildi: "Hoş geldin" altında tek satır "Giriş yap ya da hesap oluştur."; Profilim hesap satırı "Apple,
+      Google ya da e-posta ile".
       Not (sahibinin planının sonucu): kamera ve İlk Bakış, hesap ekranındaki "Kullanım şartlarını kabul" satırından önce
       çalışır; görüntü telefondan çıkmaz, yalnız kırpma sayısı telefonda saklanır.
       Cihazda bak:
       - Uygulamayı silip yeniden kur: giriş ekranı → "Başla" → İlk Bakış ("20 saniye · Önce bir şey fark edelim"),
         üstte ilerleme çubuğu yok. "Başla"da kamera izni sorulur; izin verince 20 sn okuma, sonra "X kez kırptın".
       - Sonuç ekranında ("X kez kırptın") uygulamayı tamamen kapatıp aç: "Hoş geldin" gelir, İlk Bakış yeniden istenmez.
-      - "Devam" → "Hoş geldin" (hesap); altında "İzin verirsen profilin hesabına kaydedilir; ölçümlerin telefonunda
-        saklanır." Burada uygulamayı tamamen kapatıp aç: yine "Hoş geldin", İlk Bakış yeniden istenmez.
-      - Profilim → hesap satırı (hesapsız): "İzin verirsen profilin hesabına kaydedilir".
+      - "Devam" → "Hoş geldin" (hesap); altında tek satır "Giriş yap ya da hesap oluştur."; Apple, Google, e-posta ve
+        "Şimdilik hesapsız dene". Burada uygulamayı tamamen kapatıp aç: yine "Hoş geldin", İlk Bakış yeniden istenmez.
+      - Profilim → hesap satırı (hesapsız): "Hesap aç ya da giriş yap" · "Apple, Google ya da e-posta ile".
       - Hesaptan sonra güvenlik bilgisi "Yola başlamadan önce"; "Anladım, devam" → iris soruları (İlk Bakış yeniden gelmez);
         çubuk soruların başında küçük, kesintisiz ilerler.
       - Kurulum bitince Profilim → Sorularım → "İlk 20 sn" satırında aynı kırpma sayısı; iris haritası başlangıcında kırpma.

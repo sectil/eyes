@@ -15,7 +15,7 @@ export const RELEASES = [
       // Cihazda denenmedi.
       { kind: 'change', text: "Yeni kurulumda önce ölçüm: uygulamayı ilk kez açan kişi giriş ekranından sonra doğrudan İlk Bakış'a geçer, kamera 20 saniyede kaç kez göz kırptığını sayar. Hesap, güvenlik bilgisi ve sorular sonuçtan sonra gelir. Kurulumu bitirmiş olan için hiçbir şey değişmez." },
       // Bug 32 (sahibinin onayı): hesap ekranı eşitlenmeyen ilerlemeyi vaat ediyordu. Profil yalnız izinle gider.
-      { kind: 'fix', text: "Hesap ekranı ve Profilim'deki hesap satırı artık doğru söylüyor: izin verirsen profilin (ad, doğum tarihi, şehir, gözlük) hesabına kaydedilir; ölçümlerin telefonunda saklanır. Önceki metin ilerlemenin yeni telefona taşındığını söylüyordu, taşınmıyordu." },
+      { kind: 'fix', text: "Hesap ekranında \"Hoş geldin\" altındaki yazı artık \"Giriş yap ya da hesap oluştur.\" Önceki metin ilerlemenin yeni telefona taşındığını söylüyordu; ölçümler hesaba gitmez, telefonunda saklanır." },
       // Karar 2026-09-29 (YAPILACAKLAR "Sonsuz yol ve ilk 5 saniye" (a)): E testi ilk günden haftada bir. Başlangıç
       // kuralı lib/trend.js WEEKLY_MIN_BASELINE_TESTS (3 → 7 test; VARSAYIM, kanıt kartında yazar). Cihazda denenmedi.
       // Son cümle (inceleme 2026-09-29): kural eski ölçümlere de uygulanır; iki göz serisi (hep haftalık) ve seyrek
@@ -43,8 +43,8 @@ export const RELEASES = [
       // sürüm notundan çıkarılır (YAPILACAKLAR). Metin yalnız kodun yaptığını söyler.
       { kind: 'change', text: "Test başlayınca ekran parlaklığı en yükseğe alınır; test bitince, testten çıkınca ya da uygulamadan ayrılınca eski değerine döner. Renkleri ters çevirme açıksa test başlamaz ve nasıl kapatılacağı yazar." },
       { kind: 'change', text: "Her göz bittiği an kaydedilir. Haftalık testi yarıda bırakırsan kalan gözler o gün Bugün kartında \"Kalan: …\" diye bekler; test ancak üç göz de bitince tamam sayılır, ertesi güne kalan yarım test baştan açılır." },
-      // Başlangıcın kaç testle oluştuğu aşağıdaki haftalık E testi maddesinde (karar 2026-09-29; "en az 7 testle"
-      // haftalık testte artık doğru değildi)
+      // Başlangıcın kaç testle oluştuğu '2026-09-29-2' girdisindeki haftalık E testi maddesinde (karar 2026-09-29; "en az
+      // 7 testle" haftalık testte artık doğru değildi; madde Bug 31 ile oraya taşındı)
       { kind: 'change', text: "Ölçüm yöntemi değiştiği için Gelişim'de görme için yeni seri başlar (\"Ölçüm yöntemi güncellendi; yeni seri.\"); başlangıç değerin yeniden oluşur. Eski ölçümler silinmez; CSV dosyasında hepsi durur. Kamerasız yapılan ölçümler ayrı seridir." },
       { kind: 'new', text: "E testinde sesli yönlendirme (ses açıksa, Profilim'de seçtiğin sesle): yalnız hazırlıkta, test durunca ve gözler arasındaki molada; harf ekrandayken konuşmaz. Söylenen cümle o an ekranda da yazılıdır." },
     ],

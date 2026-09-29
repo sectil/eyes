@@ -56,12 +56,11 @@ describe('sürüm notları', () => {
   it('Bug 32: hesap ekranı ve Profilim satırı eşitlenmeyen ilerlemeyi vaat etmez', () => {
     const acc = readFileSync(new URL('../screens/AccountStart.jsx', import.meta.url), 'utf8')
     const home = readFileSync(new URL('../screens/ProfileHome.jsx', import.meta.url), 'utf8')
-    expect(acc).toContain("export const ACCOUNT_KEEPS = 'İzin verirsen profilin hesabına kaydedilir; ölçümlerin telefonunda saklanır.'")
-    // Nef açıksa özet sayılar sunucuya gider: "yalnız telefonunda" denmez
-    expect(acc).not.toMatch(/'[^'\n]*yalnız telefonunda[^'\n]*'/)
-    expect(home).toContain('İzin verirsen profilin hesabına kaydedilir')
+    // Sahibi: öteki uygulamalardaki gibi kısa, vaatsiz bir yönlendirme
+    expect(acc).toContain("export const ACCOUNT_SUB = 'Giriş yap ya da hesap oluştur.'")
+    expect(home).toContain('Apple, Google ya da e-posta ile')
     for (const src of [acc, home]) expect(src).not.toMatch(/ilerlemen[^\n]*yeni telefonda|yeni telefonda[^\n]*ilerlemen/)
-    expect(items292().find((t) => t.startsWith('Hesap ekranı ve Profilim'))).toMatch(/izin verirsen profilin .* hesabına kaydedilir; ölçümlerin telefonunda saklanır/)
+    expect(items292().find((t) => t.startsWith('Hesap ekranında'))).toMatch(/Giriş yap ya da hesap oluştur\..*ölçümler hesaba gitmez, telefonunda saklanır/)
   })
   it('29 Eylül: her cümle doğru ve yalın; aynı cümle parçasında iki "ve" yok', () => {
     for (const t of [...items29(), ...items292()]) {

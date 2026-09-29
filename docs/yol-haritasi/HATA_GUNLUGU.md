@@ -794,11 +794,12 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   hemen ardından okunuyor ve sonucun saklandığı sanılabilir.
 - Öneri (sahibine): cümleyi koda uydurmak (ör. "Hesabınla adın ve gözlük bilgin yeni telefonda da seninle kalır.")
   ya da ilerlemeyi gerçekten eşitlemek (ayrı iş: veri modeli, gizlilik metni, sağlık verisi rızası).
-- Düzeltme: hesap ekranı "İzin verirsen profilin hesabına kaydedilir; ölçümlerin telefonunda saklanır."
-  (`AccountStart.jsx` ACCOUNT_KEEPS); Profilim → hesap satırı "İzin verirsen profilin hesabına kaydedilir" (aynı yanlış
-  vaat orada da vardı: "Yeni telefonda da ilerlemen seninle kalsın"). Sahibine önce "Adın ve gözlük bilgin hesabında
-  saklanır" önerilmişti; o da yanlıştı: profil yalnız "Profilini hesabına kaydet" izniyle gider (App.jsx syncUp,
-  consent profileSync) ve doğum tarihi ile şehri de içerir. Kural: ekran cümlesi önerilmeden önce koşuluyla birlikte
-  koddan doğrulanır. İlk düzeltmedeki "ölçümlerin yalnız telefonunda kalır" da tam doğru değildi (bağımsız doğrulama):
-  Nef açıksa görme ölçümünün özet sayıları Nef sunucusuna gider (saklanmaz); "telefonunda saklanır" denir. Eski sürüm notu ("profilin yeni telefonda da seninle") geçmiş kaydı olarak kaldı. Test:
-  releases.test.js "Bug 32". Sürüm notu: '2026-09-29-2' fix maddesi.
+- Düzeltme (son hali, sahibinin isteğiyle: "öteki uygulamalarda ne yazıyorsa, tasarıma uygun"): "Hoş geldin" altında
+  tek satır "Giriş yap ya da hesap oluştur." (`AccountStart.jsx` ACCOUNT_SUB); Profilim → hesap satırı "Apple, Google ya
+  da e-posta ile". Aynı yanlış vaat Profilim'de de vardı ("Yeni telefonda da ilerlemen seninle kalsın"). Ara denemeler
+  yanlış ya da ağırdı: "Adın ve gözlük bilgin hesabında saklanır" (profil yalnız "Profilini hesabına kaydet" izniyle
+  gider, doğum tarihi ve şehir de gider), "ölçümlerin yalnız telefonunda kalır" (Nef açıksa özet sayılar Nef
+  sunucusuna gider), "İzin verirsen profilin hesabına kaydedilir; ölçümlerin telefonunda saklanır" (doğru ama bir hoş
+  geldin alt yazısı için ağır). Kurallar: ekran cümlesi önerilmeden önce koşuluyla birlikte koddan doğrulanır; hoş
+  geldin alt yazısı yalnız yönlendirir, vaat ve açıklama taşımaz (ayrıntı izin ekranında ve gizlilik sayfasında).
+  Eski sürüm notu ("profilin yeni telefonda da seninle") geçmiş kaydı olarak kaldı. Test: releases.test.js "Bug 32".

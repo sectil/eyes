@@ -15,10 +15,11 @@ import '../styles/account.css'
 // Google: iPhone'da Apple'ın güvenli oturum penceresiyle (lib/account.js signInWithGoogle; SDK yok).
 // Google varsa Apple zorunlu (App Store 4.8); Apple zaten var.
 // onDone({ mode, userId?, email?, date }, { givenName? })
-// Hesabın sakladığı (Profilim'deki hesap satırı da aynı gerçeği söyler). Profil (ad, doğum tarihi, şehir, gözlük) yalnız
-// "Profilini hesabına kaydet" izniyle gider (App.jsx syncUp, lib/consent.js profileSync); ölçümler hesaba gitmez, telefonda
-// saklanır. "Yalnız telefonunda kalır" denmez: Nef açıksa özet sayılar Nef sunucusuna gider (saklanmaz; consent.js coach).
-export const ACCOUNT_KEEPS = 'İzin verirsen profilin hesabına kaydedilir; ölçümlerin telefonunda saklanır.'
+// Başlığın altındaki tek satır (sahibi 2026-09-29: "öteki uygulamalarda ne yazıyorsa"): yalnız yönlendirir, vaat etmez.
+// Bug 32: eski metin eşitlenmeyen ilerlemeyi vaat ediyordu. Hesap yalnız "Profilini hesabına kaydet" izniyle profili (ad,
+// doğum tarihi, şehir, gözlük) eşitler (App.jsx syncUp, lib/consent.js profileSync); ölçümler hesaba gitmez. Ayrıntı izin
+// ekranında ve gizlilik sayfasında; burada anlatılmaz.
+export const ACCOUNT_SUB = 'Giriş yap ya da hesap oluştur.'
 
 export default function AccountStart({ onDone, onCancel = null }) {
   const [step, setStep] = useState('choose') // choose | email | code
@@ -114,10 +115,7 @@ export default function AccountStart({ onDone, onCancel = null }) {
         <div className="hello-sky"><SkyChart /></div>
         <div className="hello-base">
           <h1 className="hello-title">Hoş geldin</h1>
-          {/* Bug 32 (sahibinin onayı 2026-09-29): hesap yalnız ad, doğum tarihi, şehir, gözlük eşitler (lib/account.js);
-              yalnız izinle; ölçümler telefonda kalır (site gizlilik sayfası). "İlerlemen yeni telefonda da seninle kalır"
-              doğru değildi. */}
-          <p className="hello-sub">{ACCOUNT_KEEPS}</p>
+          <p className="hello-sub">{ACCOUNT_SUB}</p>
           <div className="hello-acts">
             {native && (
               <button type="button" className="acct-btn apple" onClick={apple} disabled={busy}>

@@ -10,7 +10,11 @@ globalThis.IS_REACT_ACT_ENVIRONMENT = true
 vi.mock('../hooks/useFaceTracking.js', () => ({ useFaceTracking: () => ({ videoRef: { current: null }, ready: false, error: null, native: false }) }))
 vi.mock('../lib/native.js', async (orig) => ({ ...(await orig()), haptic: () => {} }))
 // Sorular ekranı tuvale çizer (iris); burada yalnız sıra sınanır
-vi.mock('./IrisQuestions.jsx', async () => { const { createElement } = await import('react'); return { default: () => createElement('p', null, 'IRIS-SORULARI') } })
+// "Bitir" düğmesi kurulumu gelen profille bitirir (iris cevapları testte önemsiz; başlangıç kırpması sınanır)
+vi.mock('./IrisQuestions.jsx', async () => {
+  const { createElement } = await import('react')
+  return { default: ({ profile, onDone }) => createElement('div', null, createElement('p', null, 'IRIS-SORULARI'), createElement('button', { type: 'button', onClick: () => onDone(profile) }, 'Bitir')) }
+})
 
 const { createRoot } = await import('react-dom/client')
 const { default: Onboarding, Flags } = await import('./Onboarding.jsx')
@@ -41,6 +45,12 @@ describe('kurulum: İlk Bakış hesaptan önce yapıldıysa', () => {
     expect(m.container.textContent).not.toContain('Önce bir şey fark edelim')
     expect(m.container.textContent).not.toContain('Yola başlamadan önce')
     expect(m.container.textContent).toContain('IRIS-SORULARI')
+    // Kurulum biter: profil erken ölçümü taşır, iris başlangıcı o kırpma sayısını okur (lib/iris.js)
+    await m.tap('Bitir')
+    expect(m.done).toHaveLength(1)
+    expect(m.done[0].firstLook).toEqual(LOOK)
+    expect(m.done[0].iris.baseline.blinks).toBe(6)
+    expect(m.done[0].flagsChecked).toBe(true)
     await m.unmount()
   })
   it('yedek: sonuç yoksa güvenlik bilgisinden sonra İlk Bakış gelir (eski sıra)', async () => {
