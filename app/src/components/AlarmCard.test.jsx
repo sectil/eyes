@@ -1,5 +1,5 @@
 // Alarm kartı ve kurulum sayfası akışı: dokunuşlar günlüğe doğru yazılıyor mu (analiz verisi), kart doğru duruma geçiyor mu.
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import '../test/fakeDom.js'
 import { createElement as h, act } from 'react'
 
@@ -46,6 +46,9 @@ async function mount(el) {
 // Ana sayfadaki gibi: üstte satır (AlarmLine, "gün seninle"nin altında), yolun altında kart (AlarmCard)
 const card = (props = {}) => {
   const p = { status: { platform: 'alarmkit', auth: 'notDetermined' }, onStart: () => {}, now: EVE, ...props }
+  // Kart "şimdi"yi prop'tan okur, dokunuşlar günlüğe gerçek saatle yazılır: ikisi aynı an olsun (yoksa test takvim
+  // günü 28 Eylül'ü geçince "Bu akşam değil" başka güne yazılıp kart geri geliyordu)
+  if (vi.isFakeTimers()) vi.setSystemTime(p.now)
   return h('div', null, h(AlarmLine, p), h(AlarmCard, p))
 }
 // Alt sayfa ve "Geri al" şeridi gövdeye taşınır (portal)
@@ -58,7 +61,12 @@ async function tapBody(label) {
 }
 
 describe('Ana sayfa alarm satırı ve kartı (v5)', () => {
-  beforeEach(() => { mem.clear(); setPrefs({ alarmCard: true }); document.body.childNodes.length = 0; native.scheduleAlarm.mockClear(); native.cancelAlarm.mockClear() })
+  beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(EVE)
+    mem.clear(); setPrefs({ alarmCard: true }); document.body.childNodes.length = 0; native.scheduleAlarm.mockClear(); native.cancelAlarm.mockClear()
+  })
+  afterEach(() => vi.useRealTimers())
   it('web\'de yok; gün içinde alarm yoksa kart yok, satır "— alarm yok" kuruluma götürür', async () => {
     expect((await mount(card({ status: { platform: 'web', auth: null } }))).text()).toBe('')
     const onStart = vi.fn()
