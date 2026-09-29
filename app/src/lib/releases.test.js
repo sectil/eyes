@@ -19,29 +19,41 @@ describe('sürüm notları', () => {
   it('29 Eylül: E testi haftada bir; kısa test isteğe bağlı; haftalık başlangıç kuralı trend.js ile aynı sayılar', () => {
     // İnceleme 2026-09-29 (metin): "İstersen … durur" anlatım bozukluğu ve art arda iki "haftada bir" düzeltildi; eski
     // ölçümlere de uygulandığı (iki göz serisinde uyarı yeni test olmadan gelebilir) söylenir
-    const t = items29().find((x) => x.startsWith('E testi artık haftada bir:'))
+    const t = items292().find((x) => x.startsWith('E testi artık haftada bir:'))
     expect(t).toBe("E testi artık haftada bir: haftalık E testi (sağ, sol, iki göz) ilk gün yola eklenir, sonra her hafta; öteki günlerde yolda E testi yok. İstersen kısa E testini (eski adıyla Günlük test; sağ ve sol göz) Ana sayfadaki Ölçüm listesinden yapabilirsin. Eski günlük test kayıtların geçmişte ve CSV dosyasında \"Kısa görme testi\" adıyla görünür. Gelişim'de ilk test alışma sayılır; başlangıç değerin 3 haftalık testle, en erken 22. günde hazır olur ve yeni testlerle 7 teste kadar güçlenir. Bu kural eski ölçümlerine de uygulanır: özellikle iki göz serisinde, yeni test yapmasan da değerlendirme hemen başlayabilir, bir uyarı da görebilirsin.")
     expect(t.match(/haftada bir/g)).toHaveLength(1)
     // Bug 24: haftalık test takvim günüyle gelir
-    expect(items29().find((x) => x.startsWith('Haftalık E testi son testin saatini'))).toMatch(/7 gün sonra, o günün başından itibaren/)
+    expect(items292().find((x) => x.startsWith('Haftalık E testi son testin saatini'))).toMatch(/7 gün sonra, o günün başından itibaren/)
     // Okuma testi E testinden ayrı gün (karar 2026-09-29)
-    expect(items29().find((x) => x.startsWith('Okuma testi artık'))).toMatch(/aynı güne düşmez.*en çok bir gün.*7 gün sonra/)
+    expect(items292().find((x) => x.startsWith('Okuma testi artık'))).toMatch(/aynı güne düşmez.*en çok bir gün.*7 gün sonra/)
     expect(WEEKLY_MIN_BASELINE_TESTS).toBe(3)
     expect(MIN_BASELINE_TESTS).toBe(7)
     expect(BASELINE_TO_DAY + 1).toBe(22)
     // eski "en az 7 testle oluşur" cümlesi haftalık testte doğru değil: hiçbir 29 Eylül maddesinde yok
-    expect(items29().join(' ')).not.toMatch(/en az 7 testle/)
-    const nef = items29().find((x) => x.startsWith('Nef artık'))
+    expect([...items29(), ...items292()].join(' ')).not.toMatch(/en az 7 testle/)
+    const nef = items292().find((x) => x.startsWith('Nef artık'))
     expect(nef).toMatch(/günlük test önermez/)
-    const fix = RELEASES.find((r) => r.id === '2026-09-29').items.find((i) => i.kind === 'fix')
+    const fix = RELEASES.find((r) => r.id === '2026-09-29-2').items.find((i) => i.kind === 'fix')
     expect(fix.text).toContain('"Son 3 test"')
     // her gün test isteyen cümle yok
-    expect(items29().join(' ')).not.toMatch(/her gün (E )?test|günlük E testi/i)
+    expect([...items29(), ...items292()].join(' ')).not.toMatch(/her gün (E )?test|günlük E testi/i)
   })
   // İkinci inceleme: V-S3 (cihazda doğrulanmamış davranış), V-N4 ("Kalan" kartı yalnız haftalıkta), V-N5 (çift "ve", ses açıksa)
   const items29 = () => RELEASES.find((r) => r.id === '2026-09-29').items.map((i) => i.text)
+  const items292 = () => RELEASES.find((r) => r.id === '2026-09-29-2').items.map((i) => i.text)
+  // Bug 31: Build 59'da 29 Eylül girdisine eklenen maddeler Build 58'de o girdiyi görmüş kişiye gösterilmedi. Yeni
+  // girdiye taşındı; 29 Eylül'ü görmüş kişi yeni girdiyi görür.
+  it('Bug 31: 29 Eylül\'ü görmüş kişi ikinci güncellemeyi görür; taşınan maddeler 29 Eylül\'de yok; (b) maddesi var', () => {
+    expect(unseenReleases('2026-09-29').map((r) => r.id)).toEqual(['2026-09-29-2'])
+    expect(latestRelease().id).toBe('2026-09-29-2')
+    for (const start of ['E testi artık haftada bir:', 'Nef artık', "Gelişim'de son testten", 'Haftalık E testi son testin saatini', 'Okuma testi artık']) {
+      expect(items292().some((t) => t.startsWith(start)), start).toBe(true)
+      expect(items29().some((t) => t.startsWith(start)), start).toBe(false)
+    }
+    expect(items292()[0]).toBe("Yeni kurulumda önce ölçüm: uygulamayı ilk kez açan kişi giriş ekranından sonra doğrudan İlk Bakış'a geçer, kamera 20 saniyede kaç kez göz kırptığını sayar. Hesap, güvenlik bilgisi ve sorular sonuçtan sonra gelir. Kurulumu bitirmiş olan için hiçbir şey değişmez.")
+  })
   it('29 Eylül: her cümle doğru ve yalın; aynı cümle parçasında iki "ve" yok', () => {
-    for (const t of items29()) {
+    for (const t of [...items29(), ...items292()]) {
       for (const part of t.split(/[.;:]/)) expect(part.match(/(^|\s)ve\s/g)?.length ?? 0, part).toBeLessThanOrEqual(1)
     }
     expect(items29()[0]).toBe('E testi yenilendi: her göz için tek ekran; Gözlük, Örtme, Mesafe satırları ve tek düğme. Düğme hazır değilse eksik adımı yazar, dokununca o satırı gösterir. Gözlük seçimin hatırlanır, her testte yeniden sorulmaz.')

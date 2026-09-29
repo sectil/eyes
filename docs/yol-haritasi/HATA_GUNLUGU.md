@@ -773,3 +773,24 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
 - Düzeltme: yükleme yalnız git'teki son commit'ten yapılır (`git archive HEAD:app`); iOS projesi, belgeler, tasarım,
   ekran görüntüsü düzeneği ve .env* çıkarılır; dosya sayısı yazılır, 15 000 ve üstünde yükleme başlamaz. Bu
   ortamda denendi: 500 dosya, kopyadan `npm run build` başarılı (yükleme yapılmadı).
+
+## Bug 31: Build 59'daki yeni sürüm notu maddeleri Build 58'de notu görmüş kişiye gösterilmedi (2026-09-29, plan incelemesi)
+## Durum: DÜZELTİLDİ (kod + test); sonraki TestFlight'ta görülecek
+- `app/src/lib/releases.js`: Build 58 "29 Eylül güncellemesi" (id '2026-09-29') girdisiyle çıktı. (a) işinde haftalık E
+  testi, Nef, "Son 3 test", Bug 24 ve okuma testi maddeleri AYNI girdiye eklendi ve Build 59'la gitti. Uygulama görülen
+  girdiyi id'sinden tanır (`unseenReleases`: id > görülen id); Build 58'de "Yenilikler"i kapatan kişide görülen id
+  '2026-09-29' olduğundan Build 59'da pencere hiç açılmadı, beş madde yalnız Bilgi → Yenilikler listesinde kaldı.
+  Sahibi de bu durumda (Build 58'i açmıştı).
+- Düzeltme: yeni girdi '2026-09-29-2' ("29 Eylül, ikinci güncelleme"); beş madde oraya taşındı, (b) maddesi eklendi.
+  releases.js başına kural: TestFlight'a gitmiş girdiye madde eklenmez, her TestFlight yeni id alır. Test
+  (releases.test.js "Bug 31"): 29 Eylül'ü görmüş kişi yeni girdiyi görür; taşınan maddeler 29 Eylül'de yok.
+  Bedel: Build 58'i atlayıp doğrudan Build 59'u kuran kişi bu beş maddeyi bir kez daha görür.
+
+## Bug 32: Hesap ekranı "Hesabınla ilerlemen yeni telefonda da seninle kalır" diyor; ilerleme eşitlenmiyor (2026-09-29, (b) tarayıcı denetimi)
+## Durum: AÇIK — sahibinin kararı bekleniyor (onaylı ekran metni)
+- `app/src/screens/AccountStart.jsx` satır 111. Hesap yalnız `profiles` tablosunu eşitler: ad, doğum tarihi, şehir, gözlük
+  (`lib/account.js` pullProfile/pushProfile). Ölçümler, pratikler, iris haritası ve İlk Bakış sonucu telefonda kalır;
+  yeni telefonda gelmez. Cümle 27 Eylül'deki onaylı ekrandan; (b) ile gelmedi, ama (b)'den sonra İlk Bakış sonucunun
+  hemen ardından okunuyor ve sonucun saklandığı sanılabilir.
+- Öneri (sahibine): cümleyi koda uydurmak (ör. "Hesabınla adın ve gözlük bilgin yeni telefonda da seninle kalır.")
+  ya da ilerlemeyi gerçekten eşitlemek (ayrı iş: veri modeli, gizlilik metni, sağlık verisi rızası).

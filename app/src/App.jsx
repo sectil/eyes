@@ -19,6 +19,7 @@ import { reportDay, REPORT_DAY } from './lib/progress.js'
 import { isExerciseSession } from './lib/stats.js'
 import Home from './screens/Home.jsx'
 import Onboarding from './screens/Onboarding.jsx'
+import FirstLook from './screens/FirstLook.jsx'
 import IrisPlan from './screens/IrisPlan.jsx'
 import IrisRecheck from './screens/IrisRecheck.jsx'
 import { irisCells, filledIndexes, snapshot } from './lib/iris.js'
@@ -30,7 +31,8 @@ import ProfileHome from './screens/ProfileHome.jsx'
 import { hasConsent, shouldAsk, recordConsent, recordDecline } from './lib/consent.js'
 import { getPrefs, setPrefs } from './lib/prefs.js'
 import IntroFilm from './components/IntroFilm.jsx'
-import { shouldPlayIntro, INTRO_VERSION } from './lib/intro.js'
+import { INTRO_VERSION } from './lib/intro.js'
+import { firstOpenStep, withPendingLook } from './lib/setupFlow.js'
 import { ageBandFromAge } from './lib/profile.js'
 import { ageFromBirthDate, emptyIdentity } from './lib/identity.js'
 import { screeningFromProfile, profileFromScreening, normalizeProfile } from './lib/profile.js'
@@ -582,7 +584,14 @@ export default function App() {
   // İlk kurulumda sürüm notu gösterilmez (her şey zaten yeni): en son sürüm görülmüş sayılır
   const markIntro = () => { store.setSetting('intro', { seen: true, version: INTRO_VERSION, date: new Date().toISOString() }); if (!settings.releaseSeen) store.setSetting('releaseSeen', latestRelease()?.id ?? null); refresh() }
   if (screen === 'intro') return <IntroFilm replay onDone={() => go(lastTab)} />
-  if (shouldPlayIntro(settings)) return <IntroFilm onDone={markIntro} />
+  // İlk açılış sırası (lib/setupFlow.js; karar 2026-09-29 (b) "ilk açılışta önce ölçüm"): giriş → İlk Bakış → hesap →
+  // kurulum. İlk Bakış'ta ilerleme çubuğu yok (hesap ekranında da yok; ilk an form gibi değil). Sonuç biter bitmez
+  // ayrı kayda yazılır: uygulama hesap ekranında kapansa da kaybolmaz.
+  const first = firstOpenStep(settings)
+  if (first === 'intro') return <IntroFilm onDone={markIntro} />
+  if (first === 'look') {
+    return <FirstLook trueDepth={native.trueDepth} bar={null} onDone={(look) => { store.setSetting('firstLookPending', look); refresh() }} />
+  }
 
   // --- Hesap → Seni tanıyalım → 7 gün ücretsiz (Build 23b; Artifact "Hesap ve Profil Taslağı") ---
   // Hesap açıldıysa ad, doğum tarihi, şehir, gözlük Supabase'e eşitlenir (lib/account.js); ağ yoksa telefonda kalır.
@@ -718,16 +727,22 @@ export default function App() {
     if (screen === 'account') go('profile')
   }
   if (screen === 'account') return <AccountStart onDone={finishAccount} onCancel={() => go('profile')} />
-  if (!settings.account) return <AccountStart onDone={finishAccount} />
-  if (!settings.screening) {
+  if (first === 'account') return <AccountStart onDone={finishAccount} />
+  if (first === 'onboarding') {
     // İlk açılış (Artifact "Nefona Başlangıç Kartı"; sahibinin 27 Eylül kararı): güvenlik bilgisi → İlk Bakış → iris
     // haritasının 4 sorusu. Hesaptan hemen sonra, "Seni tanıyalım"dan ve denemeden önce. Güvenlik bilgi ekranıdır; uygulama
     // hiçbir durumda kilitlenmez (sahibinin kararı: "bilgi olarak çıkmalı, uygulama kullanılabilmeli"). Eski sürümde
     // işaret seçip kilitli kalanlar (screening.referred) da artık geçer.
     // Doğum tarihi ve gözlük daha önce girildiyse (eski sıra) anketin yaş ve gözlük alanlarını önceden doldurur
     const setupAge = ageBandFromAge(ageFromBirthDate(settings.identity?.birthDate))
-    const initial = settings.profile ?? { ...profileFromScreening(settings.screening), ...(setupAge ? { ageBand: setupAge } : {}), ...(settings.setupCorrection ? { correction: settings.setupCorrection } : {}) }
-    return <Onboarding initial={initial} trueDepth={native.trueDepth} sessions={sessions} domainOf={domainOfSession} onDone={saveProfile} />
+    // İlk Bakış kurulumdan önce yapıldı (lib/setupFlow.js): sonucu kurulumun ilk ekranından itibaren profilde; kurulum
+    // bitince ayrı kayıt silinir
+    const initial = withPendingLook(settings.profile ?? { ...profileFromScreening(settings.screening), ...(setupAge ? { ageBand: setupAge } : {}), ...(settings.setupCorrection ? { correction: settings.setupCorrection } : {}) }, settings)
+    const finishSetup = (p) => {
+      store.setSetting('firstLookPending', null)
+      saveProfile(p)
+    }
+    return <Onboarding initial={initial} trueDepth={native.trueDepth} sessions={sessions} domainOf={domainOfSession} onDone={finishSetup} />
   }
   if (!settings.identitySetup) {
     const done = (id, corr) => {

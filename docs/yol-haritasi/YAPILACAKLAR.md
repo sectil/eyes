@@ -175,6 +175,29 @@ Uygulama sırası (her biri ayrı onay, test, TestFlight): (a) E testi haftada b
         güncellemeyle haftalık yola geçer; Gelişim notu "Başlangıç değerin N testle hesaplandı" (kısa testler de
         sayılır), takip 22. günden beri.
 
+- [~] **(b) İlk açılışta önce ölçüm** (2026-09-29, sahibinin onayıyla): kodda bitti, CİHAZDA DENENMEDİ, TestFlight'a
+      girmedi. Sıra: giriş ekranı → İlk Bakış → hesap → güvenlik bilgisi → 4 soru → Seni tanıyalım → deneme (önce: giriş →
+      hesap → güvenlik → İlk Bakış → sorular). `lib/setupFlow.js` firstOpenStep (sıra kararı, testli); İlk Bakış'ta
+      ilerleme çubuğu yok (`bar={null}`, hesap ekranında da yok); sonuç biter bitmez `settings.firstLookPending`'e yazılır
+      (hesap ekranında kapatıp açınca korunur), kurulumun ilk ekranından itibaren profilde (iris başlangıcı kırpma
+      sayısını okur), kurulum bitince silinir. Güvenlik bilgisinin üst satırı kurulumda "Yola başlamadan önce"
+      (Profilim → Sorularım'da eskisi gibi "Başlamadan önce"). Kurulumu bitmiş kişi hiçbir şey görmez; kurulumun
+      ortasında güncelleyen önce İlk Bakış'ı, sonra kaldığı yeri görür. Sürüm notu yeni girdide ('2026-09-29-2'; Bug 31).
+      Tarayıcıda iki temada baştan sona denendi (kamerasız sayımla); testler 1414/1414. Açık: Bug 32 (hesap ekranı
+      cümlesi, sahibinin kararı).
+      Cihazda bak:
+      - Uygulamayı silip yeniden kur: giriş ekranı → "Başla" → İlk Bakış ("20 saniye · Önce bir şey fark edelim"),
+        üstte ilerleme çubuğu yok. "Başla"da kamera izni sorulur; izin verince 20 sn okuma, sonra "X kez kırptın".
+      - "Devam" → "Hoş geldin" (hesap). Burada uygulamayı tamamen kapatıp aç: yine "Hoş geldin", İlk Bakış yeniden
+        istenmez.
+      - Hesaptan sonra güvenlik bilgisi "Yola başlamadan önce"; "Anladım, devam" → iris soruları (İlk Bakış yeniden gelmez);
+        çubuk soruların başında küçük, kesintisiz ilerler.
+      - Kurulum bitince Profilim → Sorularım → "İlk 20 sn" satırında aynı kırpma sayısı; iris haritası başlangıcında kırpma.
+      - Kamera izni reddedilince: "Kameraya erişilemedi; kendin sayabilirsin." ve dokunarak sayım; sonra hesap.
+      - Profilim → Sorularım → güvenlik bilgisi "Başlamadan önce" (değişmedi).
+      - Güncelleme sonrası (Build 58/59'u açmış telefon): "Yenilikler" penceresi "29 Eylül, ikinci güncelleme"yi gösterir
+        (haftalık E testi, Nef, okuma testi ve (b) maddeleri); kurulumu bitmiş hesapta sıra değişmez.
+
 ## Fikir: Nefona alarmı (sahibinden, 2026-09-28) — plan henüz mükemmel değil
 Sahibinin fikri: ekranda Nefes/Dalga görürken "alarm kur"; uygulamanın kendi alarmı, Dalga sesleriyle; "10 uygulama
 yerine tek uygulama". Değerlendirme: amaca bağlı alarm (uyanış = Dalga + sabah nefesi; akşam pratiği) mantıklı ve

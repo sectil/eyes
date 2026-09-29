@@ -74,7 +74,8 @@ function Timeline({ times, gap }) {
   )
 }
 
-// bar: kurulum ilerleme payı [başlangıç, bitiş]; onDone({ blinks, seconds, method, date })
+// bar: kurulum ilerleme payı [başlangıç, bitiş] ya da null (çubuk yok: ilk açılışta hesaptan önce, lib/setupFlow.js;
+// üstteki boşluk kalır, yerleşim kaymaz); onDone({ blinks, seconds, method, date })
 export default function FirstLook({ trueDepth = false, bar = [0, 0.2], onDone }) {
   const [phase, setPhase] = useState('intro') // intro | look | tap | result
   const [method, setMethod] = useState(null) // 'truedepth' | 'camera' | 'self'
@@ -202,7 +203,7 @@ export default function FirstLook({ trueDepth = false, bar = [0, 0.2], onDone })
   }
 
   const frac = { intro: 0, look: 0.35, tap: 0.35, result: 1 }[phase]
-  const barValue = bar[0] + (bar[1] - bar[0]) * frac
+  const barValue = bar ? bar[0] + (bar[1] - bar[0]) * frac : 0
 
   const res = useMemo(() => {
     if (phase !== 'result') return null
@@ -217,7 +218,7 @@ export default function FirstLook({ trueDepth = false, bar = [0, 0.2], onDone })
     const { gap, reading, quote, pause } = res
     return (
       <main className="screen fade-in oq fl" dir={C.dir} lang={C.locale}>
-        <div className="oq-top"><ProgressBar value={barValue} /></div>
+        <div className="oq-top">{bar && <ProgressBar value={barValue} />}</div>
         <span className="oq-ey">{U.resultEyebrow}</span>
         <div className="fl-big">
           <strong>{num0.format(count)}</strong>
@@ -252,7 +253,7 @@ export default function FirstLook({ trueDepth = false, bar = [0, 0.2], onDone })
   if (phase === 'tap') {
     return (
       <main className="screen fade-in oq fl" dir={C.dir} lang={C.locale}>
-        <div className="oq-top"><ProgressBar value={barValue} /></div>
+        <div className="oq-top">{bar && <ProgressBar value={barValue} />}</div>
         <span className="oq-ey">{U.tapEyebrow}</span>
         <h1 className="oq-q">{U.tapTitle}</h1>
         {note && <p className="oq-sub">{note}</p>}
@@ -270,7 +271,7 @@ export default function FirstLook({ trueDepth = false, bar = [0, 0.2], onDone })
   if (phase === 'look') {
     return (
       <main className="screen fade-in oq fl" dir={C.dir} lang={C.locale}>
-        <div className="oq-top"><ProgressBar value={barValue} /></div>
+        <div className="oq-top">{bar && <ProgressBar value={barValue} />}</div>
         {!cam.native && <video ref={cam.videoRef} className="fl-cam" playsInline muted />}
         <div className="fl-meta">
           <Ring left={running ? left : LOOK_SEC} />
@@ -293,7 +294,7 @@ export default function FirstLook({ trueDepth = false, bar = [0, 0.2], onDone })
 
   return (
     <main className="screen fade-in oq fl" dir={C.dir} lang={C.locale}>
-      <div className="oq-top"><ProgressBar value={barValue} /></div>
+      <div className="oq-top">{bar && <ProgressBar value={barValue} />}</div>
       <span className="oq-ey">{U.introEyebrow}</span>
       <h1 className="oq-q">{U.introTitle}</h1>
       <p className="oq-sub">{U.introSub}</p>

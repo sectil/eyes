@@ -16,6 +16,8 @@ const tr = {
   later: { eye: 'İlk Bakış\'ta', focus: 'ilk oyunda', awareness: 'ilk görevde', calm: 'soruda', self: 'soruda', wellbeing: 'soruda', body: 'soruda' },
   safety: {
     eyebrow: 'Başlamadan önce',
+    // Kurulumda güvenlik bilgisi İlk Bakış'tan sonra gelir (karar 2026-09-29 (b)); Profilim → Sorularım 'eyebrow'la kalır
+    setupEyebrow: 'Yola başlamadan önce',
     title: 'Bunlardan biri olursa göz doktoruna git',
     sub: 'Bunlar evde ölçülemez; uygulama değil, bir göz doktoru bakmalı.',
     note: 'Aniden başladıysa aynı gün bir göz doktoruna ya da acile git. Bu liste Bilgi sekmesinde de durur.',
