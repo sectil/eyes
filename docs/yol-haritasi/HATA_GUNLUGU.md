@@ -762,3 +762,14 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   gecikince kutu boş kalıyordu.
 - Düzeltme: kutu `current` değerini ve `currentWindow`'a göre "Son 7 gün" / "Son 3 test" etiketini yazar.
   Test: Progress.vision.test.jsx.
+
+## Bug 30: Nef sunucu yüklemesi Vercel'in 15 000 dosya sınırına takıldı (2026-09-29, Mac çıktısı)
+## Durum: DÜZELTİLDİ (betik); Mac'te yeniden çalıştırılacak
+- `app/scripts/coach-setup.sh` 4. adım: "Error: Invalid request: `files` should NOT have more than 15000 items,
+  received 15727." Betik uygulama klasörünü dışlama listesiyle (node_modules, ios, build-ios, dist, docs…) geçici
+  kopyaya alıyordu. Bu ortamdaki kopyada yüklenecek dosya 550'nin altında; Mac'teki klasörde git dışı bir klasör
+  (hangisi olduğu bakılmadı) listeye takılmadan yüklemeye giriyordu. TestFlight (Build 59) yüklendi, sunucu
+  yüklenmedi: Nef'in yeni istemi (haftalık E testi, `weeklyDue`) canlıda değil.
+- Düzeltme: yükleme yalnız git'teki son commit'ten yapılır (`git archive HEAD:app`); iOS projesi, belgeler, tasarım,
+  ekran görüntüsü düzeneği ve .env* çıkarılır; dosya sayısı yazılır, 15 000 ve üstünde yükleme başlamaz. Bu
+  ortamda denendi: 500 dosya, kopyadan `npm run build` başarılı (yükleme yapılmadı).

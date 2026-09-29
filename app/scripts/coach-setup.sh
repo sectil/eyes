@@ -67,9 +67,18 @@ step "4/5 Production yüklemesi (web + /api/coach)"
 # Vercel Hobby, commit yazarı ekip üyesi olmayan yüklemeleri BLOCKED yapıyor (commit'ler Claude'un).
 # CLI, git klasöründen yüklerken commit bilgisini ekliyor → aynı engel. Bu yüzden kod, git'siz geçici
 # bir kopyadan yükleniyor (daha önce READY olan yükleme de böyleydi).
+# Yalnız git'teki son commit (HEAD) yüklenir: Mac'teki git dışı klasörler yüklemeyi Vercel'in 15 000 dosya sınırının
+# üstüne çıkarıyordu (2026-09-29: 15 727 dosya). Yayına giden kod tam olarak gönderilen koddur. Uygulamaya gerekmeyen
+# klasörler (iOS projesi, belgeler, tasarım, ekran görüntüsü düzeneği) ve .env* dosyaları çıkarılır.
 TMP="$(mktemp -d)"
-rsync -a --exclude node_modules --exclude ios --exclude build-ios --exclude dist --exclude .git \
-  --exclude docs --exclude public/mediapipe-wasm --exclude '.env*' "$APP_DIR/" "$TMP/app/"
+mkdir -p "$TMP/app"
+REPO="$(git -C "$APP_DIR" rev-parse --show-toplevel)"
+SUB="$(git -C "$APP_DIR" rev-parse --show-prefix)"
+git -C "$REPO" archive --format=tar "HEAD:${SUB%/}" | tar -x -C "$TMP/app"
+rm -rf "$TMP/app/ios" "$TMP/app/docs" "$TMP/app/design" "$TMP/app/_harness" "$TMP/app"/.env*
+COUNT="$(find "$TMP/app" -type f | wc -l | tr -d ' ')"
+echo "Yüklenecek dosya: $COUNT (commit $(git -C "$REPO" rev-parse --short HEAD))"
+[ "$COUNT" -lt 15000 ] || { rm -rf "$TMP"; fail "Yüklenecek dosya çok: $COUNT (sınır 15 000)."; }
 ( cd "$TMP/app" && npx --yes vercel@latest deploy --prod --yes )
 rm -rf "$TMP"
 
