@@ -1,0 +1,39 @@
+{
+ "file": "common/donus.synth-D5.wav",
+ "src_sr": 44100,
+ "src_channels": 2,
+ "duration_s": 4.0,
+ "lufs_i": -15.16,
+ "true_peak_dbtp": -5.99,
+ "sample_peak_dbfs": -6.0,
+ "clipped_samples": 0,
+ "dc": [
+  -0.0,
+  -0.0
+ ],
+ "lr_corr": 1.0,
+ "lead_silence_ms": 1.0,
+ "tail_silence_ms": 106.5,
+ "onsets": {
+  "pulse_clarity": 0.0,
+  "percussive_share": 0.0,
+  "events_per_min": 0.0,
+  "strong_onsets_per_min": 0.0,
+  "flux_mean_db": 0.0011,
+  "flux_median_db": 0.0,
+  "flux_p99_db": 0.01,
+  "flux_max_db": 0.233,
+  "flux_max_at_s": 0.02
+ },
+ "clicks_hf": {
+  "count": 0,
+  "first": []
+ },
+ "spectrum": {
+  "centroid_hz": 591.9,
+  "share_lt300": 0.0,
+  "share_500_4k": 1.0,
+  "share_1k5_4k": 0.0001,
+  "share_gt8k": 0.0
+ }
+}

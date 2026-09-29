@@ -1,0 +1,11 @@
+vd1 örnek 13408605 olay 405 sn 288.3
+vd2 örnek 13408605 olay 398 sn 285.1
+vd3 örnek 13408605 olay 393 sn 300.3
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+page.evaluate: Target page, context or browser has been closed
+    at /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/work/render_dalga.mjs:24:21
+
+Node.js v22.22.2

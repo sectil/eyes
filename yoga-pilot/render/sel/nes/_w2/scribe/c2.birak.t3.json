@@ -1,0 +1,16 @@
+{
+ "unit": "c2.birak",
+ "take": "t3",
+ "ref_node": "GeTmLIOYJuq7ZtH5CeFZ",
+ "asset_id": "kcF4hcDJ7We7VeMGFwAj",
+ "stt_node": "rvykdU1Iy51XNlDEjna6",
+ "session_id": "FwipESvz1AaGGC1PntYB",
+ "generation_id": "DlvLsOIng8R4xyDuXFxp",
+ "actual_credits": 27.72,
+ "actual_cents": 0.504,
+ "spoken_duration_secs": 4.86,
+ "scribe_text": "Sayıları bırakabilirsin. Zihnin arada başka yerlere kaydıysa o da olur",
+ "tts": "Sayıları bırakabilirsin. Zihnin arada başka yerlere kaydıysa o da olur.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 10\n}"
+}

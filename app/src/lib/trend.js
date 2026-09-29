@@ -151,7 +151,7 @@ export function comparableTests(tests) {
 // büyüyen başlangıç tanışma sonrası bütün testlerden (isteğe bağlı kısa testler dahil) kurulur, yalnız haftalıktan değil.
 export const baselineGrowingNote = (n) => `Başlangıç değerin ${n} testle hesaplandı; yeni testlerle 7 teste kadar güçlenecek.`
 // Haftalık planın göz takvimi (İlk rapor ve başlangıç dönemi için tek cümle)
-export const WEEKLY_PLAN_NOTE = 'E testi haftada bir. İlk test alışmadır; sonraki 3 haftalık test başlangıç değerini oluşturur, değerlendirme en erken 22. günde başlar.'
+export const WEEKLY_PLAN_NOTE = 'E testi haftada bir yapılır. İlk test alışmadır; sonraki 3 haftalık test başlangıç değerini oluşturur, değerlendirme en erken 22. günde başlar.'
 export function seriesNotes(r) {
   const notes = []
   if (r?.phase === 'tracking' && r.baselineMode === 'weekly' && r.baselineTests < MIN_BASELINE_TESTS && !r.baselineFrozen) {

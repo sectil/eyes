@@ -13,22 +13,22 @@ export const RELEASES = [
     items: [
       // Karar 2026-09-29 (YAPILACAKLAR "Sonsuz yol ve ilk 5 saniye" (b)): ilk açılışta önce ölçüm (lib/setupFlow.js).
       // Cihazda denenmedi.
-      { kind: 'change', text: "Yeni kurulumda önce ölçüm: uygulamayı ilk kez açan kişi giriş ekranından sonra doğrudan İlk Bakış'a geçer, kamera 20 saniyede kaç kez göz kırptığını sayar. Hesap, güvenlik bilgisi ve sorular sonuçtan sonra gelir. Kurulumu bitirmiş olan için hiçbir şey değişmez." },
+      { kind: 'change', text: "Yeni kurulumda önce ölçüm: uygulamayı ilk kez açan kişi, giriş ekranından sonra doğrudan İlk Bakış'a geçer; 20 saniye boyunca kamera göz kırpmalarını sayar. Hesap, güvenlik bilgisi ve sorular sonuçtan sonra gelir. Kurulumunu bitirdiysen senin için hiçbir şey değişmez." },
       // Bug 32 (sahibinin onayı): hesap ekranı eşitlenmeyen ilerlemeyi vaat ediyordu. Profil yalnız izinle gider.
-      { kind: 'fix', text: "Hesap ekranında \"Hoş geldin\" altındaki yazı artık \"Giriş yap ya da hesap oluştur.\" Önceki metin ilerlemenin yeni telefona taşındığını söylüyordu; ölçümler hesaba gitmez, telefonunda saklanır." },
+      { kind: 'fix', text: "Hesap ekranında \"Hoş geldin\" başlığının altında artık \"Giriş yap ya da hesap oluştur.\" yazıyor. Önceki yazı, ilerlemenin yeni telefona taşındığını söylüyordu; oysa ölçümlerin hesaba gitmez, telefonunda saklanır." },
       // Karar 2026-09-29 (YAPILACAKLAR "Sonsuz yol ve ilk 5 saniye" (a)): E testi ilk günden haftada bir. Başlangıç
       // kuralı lib/trend.js WEEKLY_MIN_BASELINE_TESTS (3 → 7 test; VARSAYIM, kanıt kartında yazar). Cihazda denenmedi.
       // Son cümle (inceleme 2026-09-29): kural eski ölçümlere de uygulanır; iki göz serisi (hep haftalık) ve seyrek
       // test edilmiş sağ/sol seriler yeni test olmadan takibe geçebilir, uyarı gösterebilir. Her gün test edilmiş (8.–21.
       // günlerde 7 test) sağ/sol serilerde başlangıç ve uyarı değişmez.
-      { kind: 'change', text: "E testi artık haftada bir: haftalık E testi (sağ, sol, iki göz) ilk gün yola eklenir, sonra her hafta; öteki günlerde yolda E testi yok. İstersen kısa E testini (eski adıyla Günlük test; sağ ve sol göz) Ana sayfadaki Ölçüm listesinden yapabilirsin. Eski günlük test kayıtların geçmişte ve CSV dosyasında \"Kısa görme testi\" adıyla görünür. Gelişim'de ilk test alışma sayılır; başlangıç değerin 3 haftalık testle, en erken 22. günde hazır olur ve yeni testlerle 7 teste kadar güçlenir. Bu kural eski ölçümlerine de uygulanır: özellikle iki göz serisinde, yeni test yapmasan da değerlendirme hemen başlayabilir, bir uyarı da görebilirsin." },
+      { kind: 'change', text: "E testi artık haftada bir yapılıyor: haftalık E testi (sağ, sol, iki göz) ilk gün yola eklenir, sonra her hafta gelir; öteki günlerde yolda E testi olmaz. İstersen kısa E testini (eski adıyla Günlük test; sağ ve sol göz) Ana sayfadaki Ölçüm listesinden yapabilirsin. Eski günlük test kayıtların geçmişte ve CSV dosyasında \"Kısa görme testi\" adıyla görünür. Gelişim'de ilk test alışma sayılır; başlangıç değerin 3 haftalık testle, en erken 22. günde hazır olur ve yeni testlerle 7 teste kadar güçlenir. Bu kural eski ölçümlerine de uygulanır: özellikle iki göz serisinde, yeni test yapmasan da değerlendirme hemen başlayabilir, bir uyarı da görebilirsin." },
       { kind: 'change', text: "Nef artık günlük test önermez: haftalık testin zamanı gelince onu hatırlatır. Görme uyarısında \"birkaç gün daha ölç\" denmez; sarıda sonraki testlere bakılır, kırmızıda yalnız göz doktoruna başvurman söylenir." },
-      { kind: 'fix', text: "Gelişim'de son testten bir hafta geçince \"Son 7 gün\" kutusu boş kalıyordu. Artık son 7 günde 3 test yoksa kutu \"Son 3 test\" yazar ve son 3 testin ortancasını gösterir; başlangıçla karşılaştırılan değer budur." },
+      { kind: 'fix', text: "Gelişim'de son testten bir hafta geçince \"Son 7 gün\" kutusu boş kalıyordu. Artık son 7 günde 3 test yoksa kutuda \"Son 3 test\" yazar ve son 3 testin ortancası görünür; başlangıçla karşılaştırılan değer budur." },
       // Bug 24 (HATA_GUNLUGU): isDue saatle sayıyordu; haftalık E testi artık takvim günüyle (lib/today.js isDueWeekly)
-      { kind: 'fix', text: "Haftalık E testi son testin saatini bekliyordu: her gün aynı saatte açınca test 8 günde bir geliyor, akşam \"tamam\" olmuş yola yeniden ekleniyordu. Artık son testten 7 gün sonra, o günün başından itibaren yolda." },
+      { kind: 'fix', text: "Haftalık E testi son testin saatini bekliyordu: uygulamayı her gün aynı saatte açan kişiye test 8 günde bir geliyor, akşam da \"tamam\" görünen yola yeniden ekleniyordu. Artık son testten 7 gün sonra, o günün başından itibaren yolda." },
       // Karar 2026-09-29 (sahibi): okuma testi haftalık E testinden ayrılır, takvim günüyle gelir (lib/today.js
       // readingStatus; bir günlük kayma VARSAYIM). Cihazda denenmedi.
-      { kind: 'change', text: "Okuma testi artık haftalık E testiyle aynı güne düşmez; o gün yerine ertesi gün yola eklenir. E testi yapılmadan kalsa da okuma testi en çok bir gün bekler. Sonra haftada bir gelir: son okuma testinden 7 gün sonra, o günün başından itibaren yoldadır." },
+      { kind: 'change', text: "Okuma testi artık haftalık E testiyle aynı güne düşmez; o gün yerine ertesi gün yola eklenir. E testini yapmasan da okuma testi en çok bir gün bekler. Sonra haftada bir gelir: son okuma testinden 7 gün sonra, o günün başından itibaren yoldadır." },
     ],
   },
   {
@@ -45,7 +45,7 @@ export const RELEASES = [
       { kind: 'change', text: "Her göz bittiği an kaydedilir. Haftalık testi yarıda bırakırsan kalan gözler o gün Bugün kartında \"Kalan: …\" diye bekler; test ancak üç göz de bitince tamam sayılır, ertesi güne kalan yarım test baştan açılır." },
       // Başlangıcın kaç testle oluştuğu '2026-09-29-2' girdisindeki haftalık E testi maddesinde (karar 2026-09-29; "en az
       // 7 testle" haftalık testte artık doğru değildi; madde Bug 31 ile oraya taşındı)
-      { kind: 'change', text: "Ölçüm yöntemi değiştiği için Gelişim'de görme için yeni seri başlar (\"Ölçüm yöntemi güncellendi; yeni seri.\"); başlangıç değerin yeniden oluşur. Eski ölçümler silinmez; CSV dosyasında hepsi durur. Kamerasız yapılan ölçümler ayrı seridir." },
+      { kind: 'change', text: "Ölçüm yöntemi değiştiği için Gelişim'de görmede yeni bir seri başlar (\"Ölçüm yöntemi güncellendi; yeni seri.\"); başlangıç değerin yeniden oluşur. Eski ölçümler silinmez; CSV dosyasında hepsi durur. Kamerasız yapılan ölçümler ayrı seridir." },
       { kind: 'new', text: "E testinde sesli yönlendirme (ses açıksa, Profilim'de seçtiğin sesle): yalnız hazırlıkta, test durunca ve gözler arasındaki molada; harf ekrandayken konuşmaz. Söylenen cümle o an ekranda da yazılıdır." },
     ],
   },

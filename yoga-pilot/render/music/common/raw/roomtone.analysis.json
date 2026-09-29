@@ -1,0 +1,58 @@
+{
+ "common/oda-sesi-1.wav": {
+  "rms_dbfs": [
+   -58.0,
+   -58.0
+  ],
+  "seam": {
+   "wrap_sample_step": 0.00017,
+   "interior_step_p999": 0.001322,
+   "wrap_level_jump_100ms_db": 0.13,
+   "interior_level_jump_p95_db": 0.78,
+   "wrap_level_jump_percentile": 0.253,
+   "wrap_hf_jump_100ms_db": 0.26,
+   "interior_hf_jump_p95_db": 0.45,
+   "wrap_hf_jump_percentile": 0.693,
+   "verdict": "PASS (seam indistinguishable from interior cuts)"
+  },
+  "clicks": 0,
+  "octave_band_level_rel_125_250_db": {
+   "125": 0.0,
+   "250": -3.0,
+   "500": -6.0,
+   "1k": -9.1,
+   "2k": -12.3,
+   "4k": -17.6,
+   "8k": -28.4
+  },
+  "digital_silence": false
+ },
+ "common/oda-sesi-2.wav": {
+  "rms_dbfs": [
+   -58.0,
+   -58.0
+  ],
+  "seam": {
+   "wrap_sample_step": 0.000333,
+   "interior_step_p999": 0.001318,
+   "wrap_level_jump_100ms_db": 0.85,
+   "interior_level_jump_p95_db": 0.9,
+   "wrap_level_jump_percentile": 0.943,
+   "wrap_hf_jump_100ms_db": 0.48,
+   "interior_hf_jump_p95_db": 0.55,
+   "wrap_hf_jump_percentile": 0.913,
+   "verdict": "PASS (seam indistinguishable from interior cuts)"
+  },
+  "clicks": 0,
+  "octave_band_level_rel_125_250_db": {
+   "125": 0.0,
+   "250": -3.1,
+   "500": -6.1,
+   "1k": -9.1,
+   "2k": -12.4,
+   "4k": -17.7,
+   "8k": -28.5
+  },
+  "digital_silence": false
+ }
+}

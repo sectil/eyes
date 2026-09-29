@@ -1,0 +1,176 @@
+{
+ "order": {
+  "c2.akis": [
+   "t2",
+   "t3",
+   "t1"
+  ],
+  "c2.sayac": [
+   "t2",
+   "t1",
+   "t3"
+  ],
+  "car.sayi": [
+   "t1",
+   "t2",
+   "t3"
+  ],
+  "c2.birak": [
+   "t1",
+   "t2",
+   "t3"
+  ],
+  "c2.kal": [
+   "t3",
+   "t2",
+   "t1"
+  ],
+  "br.k2": [
+   "t3",
+   "t2",
+   "t1"
+  ],
+  "br.orta": [
+   "t1",
+   "t2"
+  ],
+  "c4.yer": [
+   "t2",
+   "t1",
+   "t3"
+  ],
+  "c4.gelmezse": [
+   "t3",
+   "t1",
+   "t2"
+  ],
+  "c4.patika": [
+   "t3",
+   "t1",
+   "t2"
+  ],
+  "c4.yol": [
+   "t1",
+   "t2",
+   "t3"
+  ],
+  "c4.ses": [
+   "t2",
+   "t1",
+   "t3"
+  ],
+  "c4.gunes": [
+   "t2",
+   "t1",
+   "t3"
+  ],
+  "c4.don": [
+   "t3",
+   "t2",
+   "t1"
+  ],
+  "c4.solma": [
+   "t3",
+   "t2",
+   "t1"
+  ],
+  "n2.hatirla": [
+   "t1",
+   "t3",
+   "t2"
+  ],
+  "n2.dilek": [
+   "t3",
+   "t2",
+   "t1"
+  ],
+  "k.anahtar3": [
+   "t3",
+   "t1",
+   "t2"
+  ],
+  "k.donus": [
+   "t2",
+   "t3",
+   "t1"
+  ],
+  "k.nefes": [
+   "t1",
+   "t3",
+   "t2"
+  ],
+  "k.sesler": [
+   "t1",
+   "t2"
+  ],
+  "k.hareket": [
+   "t2",
+   "t3",
+   "t1"
+  ],
+  "k.goz": [
+   "t1",
+   "t2",
+   "t3"
+  ],
+  "k.oda.ayrinti": [
+   "t1",
+   "t2",
+   "t3"
+  ],
+  "k.zaman": [
+   "t1",
+   "t2",
+   "t3"
+  ],
+  "k.yan": [
+   "t1",
+   "t2",
+   "t3"
+  ],
+  "k.yandakal": [
+   "t2",
+   "t3",
+   "t1"
+  ],
+  "k.otur": [
+   "t2",
+   "t3",
+   "t1"
+  ],
+  "k.bekle": [
+   "t3",
+   "t2",
+   "t1"
+  ],
+  "k.kalk": [
+   "t3",
+   "t1",
+   "t2"
+  ],
+  "k.son": [
+   "t2",
+   "t1",
+   "t3"
+  ],
+  "c2.durak": [
+   "t2",
+   "t1",
+   "t3"
+  ],
+  "a.x.kipir": [
+   "t2",
+   "t3",
+   "t1"
+  ],
+  "c2.x.ritim": [
+   "t2",
+   "t3",
+   "t1"
+  ]
+ },
+ "extra_excluded": {
+  "br.orta/t3": "file-end transient: last 10 ms rise -85 -> -39 dBFS right at EOF after 140 ms silence (abrupt, unfaded edge) - SPEC 4.1(a) tik",
+  "k.sesler/t3": "file-start transient: -32/-35 dBFS burst in first 4 ms, then dip to -55 dBFS before speech onset at 32 ms - SPEC 4.1(a) tik"
+ }
+}

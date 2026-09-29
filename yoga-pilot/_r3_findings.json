@@ -1,0 +1,722 @@
+[
+ {
+  "id": "TR2-01",
+  "severity": "BLOCKER",
+  "where": "K / k.zaman (optional, fillRank 270): \"Saatin kaç olduğunu, nerede olduğunu hatırlayabilirsin.\"",
+  "problem": "Double ambiguity (özne eksikliği plus homograph). \"olduğunu\" can be 2sg (olduğun+u) or 3sg (olduğu+nu). Because the first clause has a 3sg subject (\"saatin kaç olduğu\"), the parallel reading of the second is also 3sg. \"Saatin\" is also a homograph of \"your watch\" (saat+in). A listener can therefore hear \"you can remember where your watch is\". This is a textbook anlatım bozukluğu in the closing, which every medium and long version plays, and the owner explicitly forbids it.",
+  "fix": "\"Günün hangi saatinde ve nerede olduğunu hatırlayabilirsin.\" (Both adverbials now modify the one 2sg predicate, and there is no competing 3sg subject.) Recount the syllables and rerun timing.py.",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-02",
+  "severity": "BLOCKER",
+  "where": "C5 / c5.x.dayanak (extension): \"Ağırlığın ve zeminin desteği: İkisi de burada.\"",
+  "problem": "Tamlama karışıklığı. \"Ağırlığın\" sounds the same whether it means 2sg \"your weight\" or the genitive \"of the weight\". Before \"ve zeminin desteği\" it parses as the coordinated genitive [ağırlığın ve zeminin] desteği, \"the support of the weight and of the ground\". \"İkisi\" then has no clear referent. Prosody cannot disambiguate it. The owner forbids this kind of anlatım bozukluğu.",
+  "fix": "\"Bedeninin ağırlığı ve onu taşıyan zemin: İkisi de burada.\" (This also echoes a.agirlik and c4.solma, so the anchor language stays one voice.)",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-03",
+  "severity": "SHOULD",
+  "where": "5-min plan (§4.1), 0:16–1:37 and the whole 5-min version: a.durus, a.gozler, a.izin, a.kolay, n1.sec, n1.ornek, n1.soyle, c1.cerceve, c1.k1, c2.dikkat, c2.kal, n2.hatirla, k.nefes, k.hareket, k.goz, k.son",
+  "problem": "The T18 check counts only sentence-final \"-(y)abilir\" and allows runs of 3. The ear hears every occurrence. In the 5-min version, 23 sentence clips contain 21 occurrences of \"-(y)abil-\". In the first 81 s (a.durus → c1.cerceve), 8 consecutive clips carry 12 occurrences (a.gozler 2, a.izin 3, c1.cerceve 2). This is the version the owner is most likely to try first, and it sounds like a permission loop, not world-class teacher speech.",
+  "fix": "Rewrite four or five clips without \"-abil-\": a.durus → \"Sırtüstü ya da yan, sana en rahat gelen biçimde uzanman yeterli.\" (this also fixes TR2-06); a.gozler → \"Gözlerini kapatmak ya da bir noktaya yumuşakça bakmak sana kalmış.\"; c1.cerceve is safety-tagged, so it may use the imperative: \"Saydığım her yeri fark edebilirsin; seni rahatsız eden bir yer olursa onu atla.\"; n1.soyle → \"Şimdi niyetini içinden üç kez söylüyorsun.\"; c2.kal → \"Bir süre hiçbir şey yapmadan, yalnızca dinleniyorsun.\" Add a check to timing.py: at most 3 occurrences of \"-(y)abil-\" anywhere in a sentence in any 60 s, not only at the sentence end.",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-04",
+  "severity": "SHOULD",
+  "where": "N1 / n1.ornek and N2 / n2.hatirla: the ready intention \"Dinlenmeye izin veriyorum.\"",
+  "problem": "This is a calque of \"I give myself permission to rest\". \"-meye izin vermek\" normally needs a beneficiary (\"çocuğun oynamasına izin veriyorum\"). Bare \"Dinlenmeye izin veriyorum\" sounds like someone in authority permitting resting in general, not the self-permission that was intended. It is the lesson's core phrase and is heard at both the start and the end. (Do not use \"Dinlenmeme izin veriyorum\": \"dinlenmeme\" is a homograph of the negative \"not resting\".)",
+  "fix": "\"Kendime dinlenme izni veriyorum.\" Use it in n1.ornek, n2.hatirla, §0, §1.5 and the on-screen label. This adds 3 syllables per clip, so rerun timing.py.",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-05",
+  "severity": "SHOULD",
+  "where": "N2 / n2.hatirla (required, every version, e.g. 3:06 in 5 min): \"Başta seçtiğin niyeti ya da \"Dinlenmeye izin veriyorum.\" cümlesini içinden üç kez söyleyebilirsin.\"",
+  "problem": "The period inside the quote is TDK-correct, but TTS will render it as a sentence end: a falling contour and a pause. The continuation \"cümlesini içinden üç kez söyleyebilirsin\" is then heard as a subjectless fragment. It is also the longest nested sentence in the lesson (35 syllables) and it comes in the Derin phase. The conjoined objects \"niyeti ya da … cümlesini\" are also unlike.",
+  "fix": "Split it so the quote comes last, mirroring n1.ornek: \"Başta seçtiğin niyeti şimdi içinden üç kez söyleyebilirsin. Ya da yine şunu: \"Kendime dinlenme izni veriyorum.\"\" (Keep the TR2-04 wording, or use the current phrase if TR2-04 is rejected.)",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-06",
+  "severity": "SHOULD",
+  "where": "A / a.durus (required): \"Sırtüstü, yan yatarak ya da sana en rahat gelen biçimde uzanabilirsin.\"",
+  "problem": "Two problems. (1) \"yan yatarak uzanmak\" is pleonastic: yatmak and uzanmak are the same act. (2) The three coordinated items do not match. \"Sana en rahat gelen biçim\" is the category that already contains the first two, so \"ya da\" does not offer a real alternative. The correct pattern is \"X, Y ya da başka bir Z\".",
+  "fix": "\"Sırtüstü, yan ya da sana rahat gelen başka bir biçimde uzanabilirsin.\" If TR2-03 is applied, use \"Sırtüstü ya da yan, sana en rahat gelen biçimde uzanman yeterli.\"",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-07",
+  "severity": "SHOULD",
+  "where": "A / a.kolay (required, every version): \"Gevşemek kolay gelmeyebilir; bunda bir sakınca yok.\"",
+  "problem": "The register is wrong. \"sakınca\" is officialese (\"sakıncası yoktur\", \"askerlik sakıncası\") and sounds like a doctor or a clerk. This is the one normalising sentence that every listener hears in the first minute, so it needs the warmest register in the lesson.",
+  "fix": "\"Gevşemek her zaman kolay olmayabilir; bunda yanlış bir şey yok.\"",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-08",
+  "severity": "SHOULD",
+  "where": "C1 / c1.tekrar (optional, fillRank 130): \"Her birini içinden tekrarlaman yeterli; başka bir çabaya gerek yok.\"",
+  "problem": "Wrong referent. \"Her birini\" points back to \"saydığım her yer\" in c1.cerceve, and you cannot repeat a place, only its name. c1.kacirma already uses \"ad\" (\"Bir adı kaçırırsan…\"), so the word is available.",
+  "fix": "\"Her adı içinden tekrarlaman yeterli; başka bir çabaya gerek yok.\"",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-09",
+  "severity": "SHOULD",
+  "where": "C5 / c5.x.hepsi (extension): \"Nefes de sesler de bedendeki hisler de kendiliğinden oluyor.\"",
+  "problem": "The shared predicate does not fit all its subjects. \"Nefes oluyor\" and \"sesler oluyor\" are not idiomatic Turkish; this is a calque of \"happen on their own\". T02 removed \"beden … oluyor\" but kept the same faulty predicate for nefes and sesler.",
+  "fix": "\"Nefes de sesler de bedendeki hisler de kendiliğinden akıyor.\" (This does not collide with \"gelip gidiyor\" in c5.dusunce, which follows directly.)",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-10",
+  "severity": "SHOULD",
+  "where": "C5 / c5.pencere: \"Zor gelirse zemini hissedebilirsin. Bir süre sessizce izleyebilirsin; sonra yine seslenirim.\" Also BR.orta / br.orta second sentence: \"Zor gelirse zemini hissedebilirsin.\"",
+  "problem": "The conditional has no subject, and in c5.pencere it opens the clip before its referent (the silence) has been announced. It directly follows \"Bütün bunları fark eden sensin.\", so the listener cannot tell what \"zor gelirse\" refers to. In br.orta the preceding sentence is about opening the eyes, so the subject is again unclear.",
+  "fix": "c5.pencere → \"Bir süre sessizce izleyebilirsin; sonra yine seslenirim. Bir şey zor gelirse zemini hissedebilirsin.\" br.orta → \"Hatırlatayım: İstediğin an gözlerini açabilir ya da ara verebilirsin. Bir şey zor gelirse zemini hissedebilirsin.\"",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-11",
+  "severity": "SHOULD",
+  "where": "C4 / c4.x.donus2 (extension, fillRank 1095): \"Her adımda bu odaya biraz daha yaklaşıyorsun.\"",
+  "problem": "\"bu odaya\" is an explicit re-orientation cue: it takes the listener back to the room. In the long versions C5 (a deep witness block with a 45–90 s silent window) and N2 still follow, and the real return (\"Artık dönüş zamanı.\") comes about 3–4 minutes later, so the listener hears a false ending. The phrase also assumes the listener is in a room. \"Artık … dönüyorsun\" in c4.don and \"Artık dönüş zamanı\" in k.donus repeat the same formula.",
+  "fix": "c4.x.donus2 → \"Her adımda patikanın başına biraz daha yaklaşıyorsun.\" Optional: c4.don → \"Aynı patikadan, acele etmeden geri dönüyorsun.\" (drop \"Artık\", so \"Artık\" belongs only to k.donus).",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-12",
+  "severity": "SHOULD",
+  "where": "C2 play order: c2.alt (fillRank 100) directly before c2.yer (570), then c2.akis and c2.durak",
+  "problem": "This is a coherence break. c2.alt tells a listener who finds the breath hard to move attention to the hands. The very next clip, \"Nefesini en net hissettiğin yeri bulabilirsin: burun, göğüs, karın…\", sends them straight back to the breath, and the clips after it stay on the breath. A listener who took the hand anchor is abandoned.",
+  "fix": "Keep the order but reword c2.yer to address the listener who stayed with the breath: \"Nefesle kalıyorsan, onu en net hissettiğin yeri bulabilirsin: burun, göğüs, karın ya da başka bir nokta.\" Alternatively, move c2.alt after c2.durak in the clip list.",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-13",
+  "severity": "SHOULD",
+  "where": "C2 / c2.birak: \"Sayıları bırakabilirsin; zihnin bir yere kaydıysa da olsun.\"",
+  "problem": "\"…kaydıysa da olsun\" is a marginal construction. Sentence-final \"olsun\" can be heard as a jussive (\"let it have wandered\") or as a dismissive \"so what\". \"bir yere kaymak\" is also weaker than the idiomatic \"başka bir yere kaymak\".",
+  "fix": "\"Sayıları bırakabilirsin. Zihnin arada başka yerlere kaydıysa, o da olur.\"",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-14",
+  "severity": "NIT",
+  "where": "A / a.karar: \"Ne kadar gevşeyeceğine sen karar verirsin.\"",
+  "problem": "The aorist \"sen karar verirsin\" echoes the dismissive \"sen bilirsin\" (\"suit yourself\"). The present tense sounds warmer and more immediate.",
+  "fix": "\"Ne kadar gevşeyeceğine sen karar veriyorsun.\"",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-15",
+  "severity": "NIT",
+  "where": "C1 / c1.x01 \"Bir de yere değen noktalar.\" and c1.x07 \"Her biri altındaki zemine yaslanıyor.\"",
+  "problem": "The lesson made \"zemin\" its single anchor word, but c1.x01 uses \"yere\". \"yaslanmak\" (to lean against, sideways or backwards) is the wrong verb for heels or the back of the head resting on a surface. \"altındaki zemin\" is the phrase T03 removed from c4.solma for being ambiguous.",
+  "fix": "c1.x01 → \"Bir de zemine değen noktalar.\"; c1.x07 → \"Zemin her birini taşıyor.\" (parallel to c3.zemin).",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-16",
+  "severity": "NIT",
+  "where": "C4 / c4.pencere: \"Burada biraz dinlenme zamanı. Zor gelirse gözlerini açabilirsin. Bir süre susacağım, sonra yine seslenirim.\"",
+  "problem": "\"susacağım\" is blunt for an intimate teacher voice (\"sus\" means \"be quiet\"). \"Zor gelirse\" also has no subject (see TR2-10).",
+  "fix": "\"Burada biraz dinlenme zamanı. Bir şey zor gelirse gözlerini açabilirsin. Bir süre sessiz kalacağım, sonra yine seslenirim.\"",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-17",
+  "severity": "NIT",
+  "where": "C5 / c5.genis: \"Dikkatin geniş kalabilir. Hiçbir yere gitmesi gerekmiyor.\"",
+  "problem": "\"dikkat geniş kalmak\" is a calque of \"let your attention stay wide\" and sounds translated.",
+  "fix": "\"Dikkatin tek bir yere odaklanmak zorunda değil; geniş ve açık kalabilir.\"",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-18",
+  "severity": "NIT",
+  "where": "C5 / c5.beden: \"Uzanırken kendini baştan ayağa tek bir bütün olarak fark edebilirsin.\"",
+  "problem": "\"kendini … olarak fark etmek\" is a calque of \"notice yourself as a whole\". \"hissetmek\" is the natural verb here, and \"fark et-\" is already frequent in the lesson.",
+  "fix": "\"Uzanırken kendini baştan ayağa tek bir bütün olarak hissedebilirsin.\"",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-19",
+  "severity": "NIT",
+  "where": "K / k.donus → k.nefes (2.5 s apart): \"Artık dönüş zamanı.\" / \"Nefesin kendi olağan ritmine dönebilir.\"",
+  "problem": "The root \"dön-\" appears in two consecutive clips 2.5 s apart. \"kendi olağan\" is also mildly redundant.",
+  "fix": "k.nefes → \"Nefesin kendi olağan ritmini bulabilir.\" This still satisfies safety rule §11.B-14 and does not deepen the breath.",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-20",
+  "severity": "NIT",
+  "where": "K / k.hareket: \"…zorlamadan gerinebilirsin; ağrı olursa bırak.\" and k.sesler \"Odanın sesleri, dışarıdan gelenler de yeniden duyuluyor.\"",
+  "problem": "\"ağrı olursa bırak\": \"bırak\" has no object and \"ağrı olmak\" is stiff. k.sesler uses an asymmetric coordination (\"X, Y de\") where the symmetric \"X de Y de\" is cleaner spoken Turkish.",
+  "fix": "k.hareket → \"El ve ayak parmaklarını oynatabilir, zorlamadan gerinebilirsin; bir yerin ağrırsa hemen bırak.\" k.sesler → \"Odanın sesleri de dışarıdan gelenler de yeniden duyuluyor.\"",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-21",
+  "severity": "NIT",
+  "where": "C1 carrier car.butun / c1.w03, c1.w06: \"iki bacak birden… iki kol birden…\"",
+  "problem": "\"birden\" first means \"suddenly\". As an elliptic list item it can be heard as \"two legs, suddenly…\". The canonical Turkish body-scan form is \"her iki\".",
+  "fix": "\"Bütün sağ bacak… bütün sol bacak… her iki bacak… bütün sağ kol… bütün sol kol… her iki kol… baştan ayağa bütün beden… bütün beden… bütün beden.\"",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-22",
+  "severity": "NIT",
+  "where": "C3 / c3.agir: \"İstemezsen bu kısmı geçip zemini hissedebilirsin.\"; C2 / c2.x.kendin \"Bir turu da içinden, kendi hızında sayabilirsin: ondan bire. Bire varınca baştan başlayabilirsin; …\"",
+  "problem": "The skip verb differs from c1.cerceve (\"atla-\"). \"geçmek\" can also mean \"to go through\", the opposite of what is meant. \"bir turu saymak\" is slightly calqued, and \"baştan başlamak\" is vague about where to restart (ten).",
+  "fix": "c3.agir → \"Bir ağırlık hissi belirebilir. İstemezsen bu bölümü atlayıp zemini hissedebilirsin.\" c2.x.kendin → \"Bu kez sen içinden, kendi hızında ondan bire sayabilirsin. Bire varınca yeniden ondan başlayabilirsin; sonra yine seslenirim.\"",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-23",
+  "severity": "NIT",
+  "where": "lesson.json preparationCard, tagline, openingNotice",
+  "problem": "The preparationCard items are not parallel: \"Dizlerinin altına bir yastık\" is a dative directive, and the other two are noun phrases. In the tagline \"Uyanık kalarak derin bir dinlenme.\", an -arak converb modifies a concrete noun phrase (\"derin bir dinlenme\"). \"Araç ya da makine kullanırken dinleme.\" is readable either as a noun (\"listening while…\") or as a negative imperative. It is a safety line, so it should allow only one reading.",
+  "fix": "preparationCard: \"İnce bir örtü · Dizlerinin altı için bir yastık · Uzanabileceğin rahat bir yüzey\"; tagline: \"Uyanıkken derin bir dinlenme.\"; openingNotice/openingScreen: \"Bu dersi araç ya da makine kullanmıyorken dinle.\"",
+  "lens": "turkce"
+ },
+ {
+  "id": "TR2-24",
+  "severity": "NIT",
+  "where": "§6 söyleyiş izleme listesi",
+  "problem": "The list is missing the homograph and stress traps found in this review, and the punctuation of conditional clauses is inconsistent: \"Bu sana zor gelirse, dikkatini…\" has a comma, but \"Aklına bir şey gelmezse şunu…\" and \"Zor gelirse zemini…\" do not, so TTS pause length differs by accident.",
+  "fix": "Add to the list: \"Saatin\" (genitive vs. 2sg possessive), \"Ağırlığın\" (genitive vs. 2sg), \"birden\" (suddenly), \"dinleme\" (noun vs. imperative, on-screen), \"hâline\" and \"rüzgârda\" (circumflex; check that v2 and v4 do not produce an odd vowel). Either drop the comma in c2.alt (\"Bu sana zor gelirse dikkatini ellerine verebilirsin.\") or apply one rule everywhere.",
+  "lens": "turkce"
+ },
+ {
+  "id": "G2-01",
+  "severity": "BLOCKER",
+  "where": "C2 (c2.dikkat, c2.alt; 5–6 min versions and the C2 block at 7–30 min); script §5.2 rows 2 and 8",
+  "problem": "Breach of §11.B-2 and §11.B-8, and §5.2 claims compliance it does not have. (a) `c2.alt` is optional (fillRank 100). timing.py plans show it first enters at 7 min (6 min only at 6.6-lo). So the 5- and 6-minute versions ask for breath attention (`c2.dikkat` → `c2.kal`) with no exit door. The script itself says breath is not a neutral anchor for everyone (Ley 1988, §1.5), and §5.2 row 8 names `c2.alt` as the breath door. (b) Rule 2 says the eyes-open option is repeated before long inward sections. In the 30-min plan (5.6-hi) C2 runs 7:38–12:13: about 4.5 min of inward focus, including a 50 s silent counting window. The last eyes-open line before it is `a.izin` at 1:25. `c2.alt` offers the hands only, not the eyes. The same gap exists from 7 min up.",
+  "fix": "Put the door inside the required clip so no clip is added. `c2.dikkat` → \"Nefesini değiştirmeden izleyebilirsin; zor gelirse gözlerini açabilir ya da ellerini hissedebilirsin.\" (12 words, one safety door, ~34 syllables, gap unchanged 8/10/14). Then either delete `c2.alt`, or keep it for ≥7 min with new text so it does not repeat the door: \"Dikkat ellerde de kalabilir; ikisi de olur.\" Mark `c2.dikkat` with `güvenlik: anchor` and `gözleri açma seçeneği`. Add a timing.py check: every plan has an eyes-open clip within 60 s before `c2.dikkat`. Correct §5.2 rows 2 and 8. Re-run timing.py. The 5.2-hi 5-min slack drops by about 3 s (see G2-10).",
+  "lens": "guvenlik"
+ },
+ {
+  "id": "G2-02",
+  "severity": "SHOULD",
+  "where": "c2.x.kendin (announced silent window, 50/50/60 s; enters at 24–26 min)",
+  "problem": "This is the only announced window with no exit door. `c4.pencere` has \"Zor gelirse gözlerini açabilirsin.\" and `c5.pencere` has \"Zor gelirse zemini hissedebilirsin.\" But `c2.x.kendin` sends the listener into up to 60 s of silent inward counting with no way back (§11.B-8: \"Zor bölüm sırasında bu dayanağa dönüş kapısı söylenir\"). This breaks the lesson's own S1/P-S9 pattern.",
+  "fix": "`c2.x.kendin` → \"Bir turu da içinden, kendi hızında sayabilirsin: ondan bire. Bire varınca baştan başlarsın; zor gelirse gözlerin açık kalsın. Sonra yine seslenirim.\" This avoids a 4th consecutive \"-abilir\" ending (T18), and the jussive \"kalsın\" is not an imperative. Tag it `güvenlik: door` and `gözleri açma seçeneği`. Extend the timing.py rule \"every window announcement carries a door tag\" to all windows.",
+  "lens": "guvenlik"
+ },
+ {
+  "id": "G2-03",
+  "severity": "SHOULD",
+  "where": "a.izin, br.orta, openingScreen[0] (and PLAN A.1, which fixlog T08 says was changed for all 10 lessons)",
+  "problem": "The verified dossier fixes the per-lesson sentence word for word (§0 decision 2 and §11.A: \"…ya da durabilirsin\", \"ses ve ekran aynı\"). The onboarding card says \"İstediğin an durabilirsin… Durmak da pratiğin bir parçası.\" T08 replaced this with \"ara verebilirsin\". The ambiguity of \"durabilirsin\" (stop vs. stay) was a real problem. But \"ara vermek\" means pause and resume, so the audio never gives permission to end the lesson completely, and a distressed listener most needs exactly that. The card and the lesson now say different things, and §5.2 row 3 does not mention the deviation.",
+  "fix": "Use an unambiguous full-stop verb (+1 syllable). `a.izin` and `openingScreen[0]` → \"İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.\" `br.orta` → \"Hatırlatayım: İstediğin an gözlerini açabilir ya da dersi bitirebilirsin. Zor gelirse zemini hissedebilirsin.\" Apply the same change to PLAN A.1 / C.5 / C.8. Record in §5.2 row 3 and §7: \"§11.A 'durabilirsin' → 'dersi bitirebilirsin' (T08 belirsizliği); kart metni de aynı fiile çekilmeli — sahip/editör onayı.\" If a pause option is also wanted, use it on the screen only (the Durdur button), not in the audio.",
+  "lens": "guvenlik"
+ },
+ {
+  "id": "G2-04",
+  "severity": "SHOULD",
+  "where": "k.son (main closing, K.hizli) — orthostatic step",
+  "problem": "The script cites Tran 2021 (initial BP drop *on standing*, 29 % over 65). But the audio only covers dizziness while sitting (`k.bekle`: \"Başın dönerse biraz daha bekle\"). At the moment of risk, standing up, it gives nothing: `k.son` says \"kalkabilirsin\", then 6 s and the lesson ends. §11.B-1 gives \"Başın dönerse otur.\" as the model safety imperative, and the card says \"Başın dönerse otur ve bekle\". That line never reaches the ear after standing.",
+  "fix": "`k.son` → \"Sonra acele etmeden kalkabilirsin; başın dönerse yeniden otur. Buradasın; uyanık ve dinlenmiş.\" (3 sentences ≤ 14 words each, +~10 syllables). Tag it `emir kipi (güvenlik/beden)`. Add a timing.py rule: the clip carrying the rise step must also carry a dizziness line (\"baş\" + \"dön\"). It applies to both K and K.hizli.",
+  "lens": "guvenlik"
+ },
+ {
+  "id": "G2-05",
+  "severity": "SHOULD",
+  "where": "D.durdur / extras.stopReturn d.bekle",
+  "problem": "On the Durdur path, the listener most likely to be distressed or dizzy is given permission to stand in the same breath as the wait: \"Birkaç nefes bekle; ardından kalkabilirsin.\" (gap 2 s, then the audio ends). There is no silent wait, which breaks the T1 rule \"birkaç nefes\" → ≥10 s, and there is no dizziness line. The main closing gives 12 s of sitting before the rise. The §11.D-4 screen text does not include standing at all.",
+  "fix": "`d.bekle` → \"Birkaç nefes otur; başın dönerse biraz daha bekle.\" (gap 2 s, audio ends while the listener is seated; screen text unchanged). Duration stays within 20–30 s. Apply the T1 check to extras.stopReturn as well.",
+  "lens": "guvenlik"
+ },
+ {
+  "id": "G2-06",
+  "severity": "SHOULD",
+  "where": "c1.f20 göğüs (required), c1.f21 karın — gapAfter 2/3/4.5 vs 1/1.5/2.8 for neighbouring points",
+  "problem": "§11.B-9 says there is no long pause on sensitive areas (chest, belly, hip), and the script says \"tek adla geçer, üzerlerinde durulmaz\". Yet chest and belly get twice the silence of every neighbouring point (3 s vs 1.5 s pref). In the 5-min version chest is followed by 2.7 s while alın, göz kapakları and çene get 1.3 s, so the listener stays longest on the chest.",
+  "fix": "Set `c1.f20` and `c1.f21` gapAfter to 1 / 1.5 / 2.8 (same as the other points). Let the section-end pause fall on the next whole-body item (`c1.w07` already has 2/3/4.5). Add a timing.py check that the sensitive-region clips (göğüs, karın, kalça, kalçalar) never have gap.pref above the block's median micro-clip gap.",
+  "lens": "guvenlik"
+ },
+ {
+  "id": "G2-07",
+  "severity": "SHOULD",
+  "where": "k.hareket (K and K.hizli)",
+  "problem": "§11.B-17 says every movement gets \"ağrı ya da baş dönmesi olursa bırak\". `k.hareket` says only \"ağrı olursa bırak\". §5.2 row 17 fills the gap by pointing to `k.bekle`, but that comes three clips later, after a different movement (sitting up).",
+  "fix": "`k.hareket` → \"El ve ayak parmaklarını oynatabilir, zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.\" (13 words, +6 syllables). Update §5.2 row 17.",
+  "lens": "guvenlik"
+ },
+ {
+  "id": "G2-08",
+  "severity": "NIT",
+  "where": "br.k2 \"Beden dinleniyor; sen uyanıksın.\" and k.anahtar3 \"Dinleniyorsun; uyanıksın.\"",
+  "problem": "Passes 2 and 3 of the key sentence state a relaxed state as fact. That runs against the spirit of §11.B-5 (\"Yapma: 'Şimdi tamamen gevşemiş durumdasın'\") and against `a.kolay`. They are also whitelisted from the E12 check. For a listener who struggled (Braith 1988: 17 %), \"Dinleniyorsun\" heard right before the return contradicts what they actually felt.",
+  "fix": "Keep the shortening arc but drop the assertion. `br.k2` → \"Beden dinlenebilir; sen uyanıksın.\" (11 syllables). `k.anahtar3` → \"Dinlenmek de uyanıklık da burada.\" (11 syllables), or keep 9 syllables with \"Dinlen; uyanık kal.\" only if the editor rejects the first option. Remove them from the E12 whitelist.",
+  "lens": "guvenlik"
+ },
+ {
+  "id": "G2-09",
+  "severity": "NIT",
+  "where": "c4.yerles \"Kendine rahat bir yer bulup oturabilir ya da uzanabilirsin.\"",
+  "problem": "The imagined action uses the same verbs as the real closing actions (\"otur\", \"uzan\"). An eyes-open or drowsy listener may take it literally and sit up in the middle of the deep phase. The later real `k.otur` then loses its meaning as a distinct step.",
+  "fix": "\"Orada kendine rahat bir dinlenme yeri bulabilirsin.\" (no posture verb). Keep gap 14/16/18.",
+  "lens": "guvenlik"
+ },
+ {
+  "id": "G2-10",
+  "severity": "NIT",
+  "where": "5-min budget after the fixes above (T6, 5.2-hi corner)",
+  "problem": "G2-01, 03, 04, 07 and 06 together change the 5-min 5.2-hi slack by about +3 +0.2 +2 +1.2 −1 ≈ +5.4 s of speech. That drops the 17.6 s slack to about 12 s, below the T6 15 s floor (VARSAYIM).",
+  "fix": "Re-run timing.py after the edits. If T6 fails, rebudget from non-safety gaps only, e.g. `c2.kal` min 12 → 10 or `n1.soyle` min 9 → 8. Never take it from k.yan / k.otur / k.bekle / a.izin / c1.cerceve, and never lower T6 silently. Record the choice in §7.",
+  "lens": "guvenlik"
+ },
+ {
+  "id": "G2-11",
+  "severity": "NIT",
+  "where": "music.windowBedAboveDuckDb (+6 dB) — lesson.json",
+  "problem": "§11.D-7 says no sudden loud onsets during deep relaxation. The window swell and its drop before the window ends (\"pencere bitmeden iner\") have no ramp or lead times in the data, so the engine could jump +6 dB.",
+  "fix": "Add `music.windowSwell = {\"rampUpSec\": 6, \"rampDownSec\": 6, \"downLeadSec\": 8}` (VARSAYIM) and a QA check that the short-term loudness rise stays ≤ 1 dB/s in and around windows.",
+  "lens": "guvenlik"
+ },
+ {
+  "id": "G2-12",
+  "severity": "NIT",
+  "where": "c4.x.donus2 \"…bu odaya…\", k.sesler \"Odanın sesleri…\", k.goz \"…odada…\"",
+  "problem": "These assume the listener is in a room. Orientation lines that don't match the listener's real surroundings (garden, balcony) weaken the grounding on return (§11.B-14: see a few things around you).",
+  "fix": "`c4.x.donus2` → \"Her adımda bulunduğun yere biraz daha yaklaşıyorsun.\" `k.sesler` → \"Çevrendeki sesler, uzaktan gelenler de yeniden duyuluyor.\" `k.goz` → \"…açıp çevrende birkaç şeye bakabilirsin.\"",
+  "lens": "guvenlik"
+ },
+ {
+  "id": "G2-13",
+  "severity": "NIT",
+  "where": "a.gozler / br.orta (eye comfort for the eyes-open option; eye-first product)",
+  "problem": "The eyes-open option asks for a fixed soft gaze (\"bir noktaya yumuşakça bakabilirsin\") that can last up to 30 min, and nothing ever frees it. A long fixed stare lowers the blink rate. In an eye-origin app, the eyes-open path should never become an eye-strain task.",
+  "fix": "In `br.orta` (≥12 min), add eye comfort to the eyes-open half: \"Hatırlatayım: İstediğin an gözlerini açabilir ya da dersi bitirebilirsin; açıksa bakışın serbestçe dolaşabilir. Zor gelirse zemini hissedebilirsin.\" If the 14-word limit is hit, put the new half on the screen instead.",
+  "lens": "guvenlik"
+ },
+ {
+  "id": "H1",
+  "severity": "BLOCKER",
+  "where": "5-min version (§4.1, §4.2); E.6 #1; PLAN.v2 §B.3 step 8 and the Ders 2 table (C2 0:55 at 5 min); §5.1 row 1",
+  "problem": "E.6 #1 fails and §5.1 marks it 'yes'. PLAN says no core block may be shorter than 0:55, and no intention block shorter than 0:20. In the 5-min version C2 lasts 0:31–0:33 at every rate, and N2 lasts 0:19 at 5.2-hi. §5.1 #1 checks only the action gaps and never mentions block length. As a teacher I also hear the 5 minutes as a cut. Arrival (0:55) plus closing (1:30–1:37) take 54% of the spoken syllables (287/528). The actual practice is 1:30. C2 is just two lines: 'Şimdi nefesini … izleyebilirsin.' and then, 9 s later, 'Bir süre hiçbir şey yapmadan burada dinlenebilirsin.' The second line cancels the first. It is also the 4th 'dinlen-' in 62 s (c1.k1 2:24, c2.kal 2:48, N2 3:06, k.anahtar3 3:26), which weakens the key sentence.",
+  "fix": "(a) Content, at no time cost: at 5–6 min replace c2.kal with c2.akis (both 18 syllables), so C2 = dikkat → akis. Make c2.kal required from 7 min only. Or rewrite c2.kal as a callback to the opening line: 'Bir süre hiçbir şey yapmadan burada dinlenmek var.' (16 syllables). (b) Budget: merge n1.sec and n1.ornek for ≤6 min into 'Kendine kısa bir niyet seçebilirsin; aklına bir şey gelmezse: Dinlenmeye izin veriyorum.' and merge k.donus into k.nefes ('Artık dönüş zamanı; nefes kendi olağan ritmini bulabilir.'). Together this saves ≈9 s. (c) Even so, C2 cannot reach 0:55 while T6 keeps 15 s of slack. So pick one of these and write it down: either lower T6 to ≥8 s (it is a VARSAYIM) and add c2.dikkat → c2.akis → c2.kal for C2 ≈0:50–0:55, or put an explicit owner-visible amendment into PLAN B.3 step 8 / E.6 #1 for Ders 2 at 5 min (C2 ≥0:30, N2 ≥0:18, reason: the safety closing grew from 1:15 to 1:34). In both cases change §5.1 #1 to show the per-block durations and mark it 'kısmen', not 'evet'.",
+  "lens": "hoca"
+ },
+ {
+  "id": "H2",
+  "severity": "BLOCKER",
+  "where": "C4 at 12 min (every rate), at 13 min for 5.2-hi and 6.6-hi, and at 12–14 min generally (C4 has only 7 clips)",
+  "problem": "When imagery first appears it has nothing in it. At 12 min (5.6-hi, 7:24–9:18) the whole arc is: place → 'gelmese de olur' → path → 'Yol önünde açılıyor; kendi hızında yürüyorsun.' → 'Kendine rahat bir yer bulup oturabilir ya da uzanabilirsin.' → 15 s → 'Artık aynı patikadan … geri dönüyorsun.' → fade. There is no sound, no touch, no warmth and no smell: the listener walks, sits and walks back. Every non-visual sense comes later: c4.ses/gunes/koku at 13–14 min, c4.adim at 15–16 min, tas1/tas2 at 16–17 min. The owner asked for an absorbing, vivid imagery arc at any length, and no master teacher would ship this version.",
+  "fix": "Put one sound and one touch detail into C4's minimal set. Make c4.ses ('Uzaktan gelip giden bir ses …') and c4.gunes ('Güneş tenini tatlı tatlı ısıtıyor.') required, and move c4.adim to rank ≈305 so the soles come next. Move c4.yerles from required to optional (rank ≈420): sitting down is an action that needs 14–16 s but adds no sensation. Net cost ≈ +12 s per C4 plan. Rerun timing.py (T5/T6 and the subset rule), accept that C4 may enter about half a minute to a minute later, and add a check: every plan with C4 has ≥2 non-visual sense clips before c4.don.",
+  "lens": "hoca"
+ },
+ {
+  "id": "H3",
+  "severity": "SHOULD",
+  "where": "br.k2 → N2 → k.anahtar3 at 7–11 min (every rate) and 12 min at 5.2-hi; §1.2 'Yerleşim'",
+  "problem": "The slogan effect that B2/P-S12 removed at 5–6 min is back one minute later. At 7–11 min, passes 2 and 3 of the key sentence are 34–53 s apart ('Beden dinleniyor; sen uyanıksın.' 4:44 → N2 → 'Dinleniyorsun; uyanıksın.' 5:21 at 7 min, 5.6-hi). All three passes fall within ≈2.5 min. §1.2 says the problem was fixed.",
+  "fix": "Play br.k2 only when a block sits between C2 and N2, i.e. when C3 or C4 is selected. Change its condition from '>= 7 dk' to 'requiresAnyBlock: [C3, C4]'. Below that point the key sentence is heard twice (c1.k1, k.anahtar3), as at 5–6 min. Add a timing.py check: consecutive key-sentence passes ≥90 s apart. Update §1.2 and the E.6 key-sentence check (1-2-3 only when C3 or C4 is present).",
+  "lens": "hoca"
+ },
+ {
+  "id": "H4",
+  "severity": "SHOULD",
+  "where": "k.anahtar3 → k.donus → k.nefes (every version)",
+  "problem": "The lesson's thesis is given 3 s before 'Artık dönüş zamanı.' cuts across it, so it never lands. It is spoken in the Derin phase and then immediately withdrawn. 'dönüş' is followed at once by 'dönebilir' in consecutive clips, with 'yanına dön' soon after: three 'dön-' in about 40 s.",
+  "fix": "Set k.anahtar3 gapAfter to 5/6/9 (5-min slack at 5.2-hi: 17.6 → ≈15.6, T6 still passes). Change k.nefes to 'Nefesin kendi olağan ritmini bulabilir.' (15 syllables, same count, same safety meaning as §11.B-14). If H1(b) is adopted, the merged clip reads 'Artık dönüş zamanı; nefes kendi olağan ritmini bulabilir.'",
+  "lens": "hoca"
+ },
+ {
+  "id": "H5",
+  "severity": "SHOULD",
+  "where": "a.agirlik (fillRank 315, enters at 13–15 min); br.orta at 12–14 min; §5.2 row 8",
+  "problem": "There is no weight-to-ground settling cue from 5 to 12–14 min, although it is the first settling cue of any nidra. The ground anchor is also offered before it has ever been practised. At 12–14 min the first 'zemin' of the lesson is br.orta itself ('Zor gelirse zemini hissedebilirsin.'), about 20 s before the imagery. §5.2 row 8 says 'Önce: dayanak zemin (varış …)', which is false for every plan in which C4 appears before a.agirlik does.",
+  "fix": "Move a.agirlik ('Bedeninin ağırlığını zemine bırakabilirsin.') to fillRank ≈95, so it enters at 6–7 min and is present in every plan with C4, before a.konfor and a.karar. Add a timing.py check: in every plan with C4, a 'zemin' clip plays in Varış or C1 before br.orta. Correct §5.2 row 8 to match the data.",
+  "lens": "hoca"
+ },
+ {
+  "id": "H6",
+  "severity": "SHOULD",
+  "where": "c4.ses, c4.koku, c5.dusunce, c4.x.yaklas; music.nature.default; §7 'Sahne seçici'",
+  "problem": "Inside the trance the listener hears a menu: 'dalgalar ya da rüzgârda hışırdayan yapraklar' and again 'dalgaların ya da yaprakların sesi gibi'. The smell is generic ('temiz, taze bir koku'). The background sound is always wind and leaves, so for someone who chose the shore, voice and background contradict each other ('ses–arka plan tam uyumlu' fails). The scene-neutral fallback was used to avoid building the picker, but that costs vividness exactly where the owner asked for it.",
+  "fix": "Build the Kıyı/Orman picker (one tap before start, stored with variantIndex). Record scene pairs for 5 clips (≈10 short TTS requests): c4.ses 'Uzaktan gelip giden dalgaların sesi.' / 'Rüzgârda hışırdayan yaprakların sesi.'; c4.koku 'Havada tuzlu, ılık bir deniz kokusu var.' / 'Havada ıslak toprak ve çam kokusu var.'; c4.iz 'Kumda ardında belli belirsiz izler kalıyor.' / 'Yosunlu toprakta belli belirsiz izler kalıyor.'; c5.dusunce '…; tıpkı dalgaların sesi gibi.' / '…; tıpkı yaprakların sesi gibi.'; c4.x.yaklas unchanged. The nature layer follows the scene: for the shore, distant soft surf, which requires the owner's water-layer decision (default off, per S12). If the owner declines, keep the fallback and mark E.6 #15 'kısmen' for shore listeners.",
+  "lens": "hoca"
+ },
+ {
+  "id": "H7",
+  "severity": "SHOULD",
+  "where": "C2 play order: c2.alt → c2.yer (≥19–21 min); c2.x.donus → c2.x.ritim → c2.birak (≥25–27 min)",
+  "problem": "At 7:53 the hands are offered as the alternative. Thirteen seconds later comes 'Nefesini en net hissettiğin yeri bulabilirsin…', followed by three more breath lines, so a listener who chose the hands is left behind. After the own-count window, 'Sayıları bırakabilirsin' comes 28 s after the count has already been left ('hangi sayıda kaldığın önemli değil', then 'Nefes kendi ritminde sürüyor'), so the release arrives late.",
+  "fix": "Change the C2 play order to: c2.dikkat → c2.yer → c2.alt → c2.akis → c2.durak → c2.sayac … and, after the window, c2.x.donus → c2.birak → c2.x.ritim → c2.kal. The rank and fill logic stays the same; only the order in playOrder changes. Rerun the T18 run check and the repetition check.",
+  "lens": "hoca"
+ },
+ {
+  "id": "H8",
+  "severity": "SHOULD",
+  "where": "c5.x.dayanak, k.zaman, k.sesler, a.durus (Turkish; E.6 #16)",
+  "problem": "These are anlatım bozuklukları a native editor would flag. (1) c5.x.dayanak 'Ağırlığın ve zeminin desteği: İkisi de burada.' 'Ağırlığın' reads either as 'your weight' or as the genitive 'of the weight', i.e. 'the support of weight and ground'. (2) k.zaman 'Saatin kaç olduğunu, nerede olduğunu …': the second clause can take 'saat' as its subject ('where the clock is'). (3) k.sesler 'Odanın sesleri, dışarıdan gelenler de …': the comma makes the outside sounds look like an apposition to the room's sounds. (4) a.durus 'yan yatarak … uzanabilirsin': yatmak and uzanmak together are redundant.",
+  "fix": "(1) 'Bedeninin ağırlığı ve onu taşıyan zemin: İkisi de burada.' (2) 'Nerede olduğunu, saatin kaç olduğunu hatırlayabilirsin.' (same 22 syllables; the subject is fixed first) (3) 'Odadaki ve dışarıdaki sesler yeniden duyuluyor.' (19 syllables) (4) 'Sırtüstü, yan dönerek ya da sana en rahat gelen biçimde uzanabilirsin.' (same syllable count). Regenerate from ders2_kaynak.py and rerun the lint.",
+  "lens": "hoca"
+ },
+ {
+  "id": "H9",
+  "severity": "SHOULD",
+  "where": "k.son (every version, also K.hizli)",
+  "problem": "'Buradasın; uyanık ve dinlenmiş.' has two problems. (a) After the semicolon 'uyanık ve dinlenmiş' has no predicate of its own, which an editor will call a missing copula (cümle düşüklüğü). (b) It asserts a result ('dinlenmiş'), which contradicts a.kolay ('Gevşemek kolay gelmeyebilir') and §1.5 'Hiçbir sürüm sonuç vaat etmez'. The E12 exemption hides this.",
+  "fix": "Close the intention arc instead of asserting a result: 'Sonra acele etmeden kalkabilirsin. Buradasın, uyanıksın; dinlenmeye izin verdin.' (≈+5 syllables ≈ +1 s; 5-min slack stays ≥15 s even with H4). It mirrors 'Dinlenmeye izin veriyorum' (present → past) and the key sentence's 'uyanık'. Remove k.son from the E12 whitelist.",
+  "lens": "hoca"
+ },
+ {
+  "id": "H10",
+  "severity": "SHOULD",
+  "where": "n2.hatirla (every version)",
+  "problem": "'Başta seçtiğin niyeti ya da \"Dinlenmeye izin veriyorum.\" cümlesini içinden üç kez söyleyebilirsin.' is 35 syllables with a full stop inside the quotation mid-sentence. TTS will put sentence-final intonation and a pause after 'veriyorum.', so 'cümlesini içinden üç kez söyleyebilirsin' arrives as a fragment. It also makes the last thing heard an instruction rather than the intention itself.",
+  "fix": "'Başta seçtiğin niyeti ya da hazır cümleyi içinden üç kez söyleyebilirsin: Dinlenmeye izin veriyorum.' (36 syllables, budget unchanged). It ends on the intention, the same shape as n1.ornek, and the teacher models the sentence once more. Update the §6 watch-list entry for the quoted intention.",
+  "lens": "hoca"
+ },
+ {
+  "id": "H11",
+  "severity": "SHOULD",
+  "where": "5-min version, whole text (E.6 #9 ear test; T18 counts only sentence endings)",
+  "problem": "The 5-min version has 21 '-(y)abilir' forms in 23 sentence clips (uzanabilirsin, kapatabilir/bakabilirsin, açabilir/kıpırdayabilir/verebilirsin, seçebilirsin, kullanabilirsin, söyleyebilirsin, edebilirsin/atlayabilirsin, dinlenebilir, izleyebilirsin, dinlenebilirsin, …). The sentence-final run rule passes, but the ear hears a 'can… can… can…' drone. The shortest version sounds the most mechanical.",
+  "fix": "In required clips that are not safety wording, use the '-mek yeterli' and noun-sentence forms the text already uses elsewhere. c2.dikkat → 'Şimdi nefesi izlemek yeterli: olduğu gibi, değiştirmeden.' (21 syllables). n1.soyle → 'Niyetini içinden üç kez söylemek yeterli.' (15). n1.ornek → 'Aklına bir şey gelmezse hazır bir cümle var: \"Dinlenmeye izin veriyorum.\"'. c2.kal → as in H1(a). Add a timing.py information metric: '-abilir' forms per sentence clip in the 5-min plan, with a target ≤0.6.",
+  "lens": "hoca"
+ },
+ {
+  "id": "H12",
+  "severity": "SHOULD",
+  "where": "Derin phase clips; E.6 #13 'cümleler kısalıyor'; §5.1 row 13",
+  "problem": "The requirement that sentences get shorter is not met. Mean syllables per sentence at 30 min (5.6-hi): Derinleşme 13.6, Derin 15.9. At 12 min: Derinleşme 18.1 ≈ Derin 18.2. The longest clips in the lesson all sit in the Derin phase: c2.x.kendin 42, br.orta 40, c4.pencere 39, n2.hatirla 35, c5.pencere 33, c2.yer/c2.durak 30. §5.1 #13 checks only levels and speed.",
+  "fix": "Trim the Derin meta clips. br.orta → 'İstediğin an gözlerini açabilir ya da ara verebilirsin; zor gelirse zemini hissedebilirsin.' (drop the chatty 'Hatırlatayım:'). c2.x.kendin → 'Bir turu da içinden sayabilirsin, ondan bire; bitince baştan başlayabilirsin. Sonra yine seslenirim.' c2.durak → drop 'onu'. c5.pencere → invitation before the door: 'Bir süre sessizce izleyebilirsin; zor gelirse zemini hissedebilirsin. Sonra yine seslenirim.' Add a timing.py check: mean syllables per sentence in Derin < Derinleşme < Varış, per plan.",
+  "lens": "hoca"
+ },
+ {
+  "id": "H13",
+  "severity": "SHOULD",
+  "where": "defaultMinutes 15; C3 entryRank 500 (enters at 17–19 min); PLAN.v2 Ders 2 table (15 min: C3 2:00)",
+  "problem": "The version most users will hear, the 15-min default, has no pairs of opposites, even though opposites are a defining nidra stage. PLAN anchors C3 at 2:00 in the 15-min version. §7 records the C4 delay but not this C3 deviation.",
+  "fix": "Either (a) give C3 a minimal core (c3.agir, a1, a2, a3, c3.hafif, h1, h2, h3, c3.birak ≈ 75–85 s) with entryRank ≈315, ahead of c4.pencere (320) and the C4 detail waves, keeping sıcak/serin as a later wave; or (b) set defaultMinutes to 20 and state it. In either case, list the C3 entry deviation in §7.",
+  "lens": "hoca"
+ },
+ {
+  "id": "H14",
+  "severity": "NIT",
+  "where": "c4.x.donus2 'Her adımda bu odaya biraz daha yaklaşıyorsun.' (≥27–29 min)",
+  "problem": "This brings the listener back to the room at ≈23:22, and then 3 min of deep witnessing (C5) follow. The room belongs to the closing ('Odanın sesleri…'). This inverts the depth arc.",
+  "fix": "'Her adımda patikanın başına biraz daha yaklaşıyorsun.' (20 syllables). The imagery then ends at the path's start and at the ground (c4.solma), and the room stays in K.",
+  "lens": "hoca"
+ },
+ {
+  "id": "H15",
+  "severity": "NIT",
+  "where": "c2.alt, br.orta, c4.pencere, c5.pencere (30 min: 'zor gel-' ×4)",
+  "problem": "The formula 'Zor gelirse…' is heard four times, which primes difficulty right at the absorption peaks (21:42 imagery window, 25:59 witness window).",
+  "fix": "Keep the door but vary the frame. c4.pencere: 'Burada biraz dinlenme zamanı. Gözlerini açmak her an senin elinde. Bir süre susacağım, sonra yine seslenirim.' c5.pencere: see H12 (invitation first). Leave c2.alt and br.orta as they are.",
+  "lens": "hoca"
+ },
+ {
+  "id": "H16",
+  "severity": "NIT",
+  "where": "C1 order at ≥24–27 min: car.butun ('…bütün beden… bütün beden.') → c1.x01–x07 contact round",
+  "problem": "The contact round comes after the triple 'bütün beden' climax, which is an anticlimax. 'Bir de yere değen noktalar.' also uses 'yer' instead of the lesson's single anchor word 'zemin'.",
+  "fix": "Play c1.x01–x07 before c1.w01 (contact → whole body → key sentence). Text: 'Bir de zemine değen noktalar.' (same syllable count).",
+  "lens": "hoca"
+ },
+ {
+  "id": "H17",
+  "severity": "NIT",
+  "where": "Varış order at ≥14 min (a.gozler at 1:17 in the 30-min version)",
+  "problem": "The listener settles, moves and releases weight for over a minute with eyes open; closing or softening the eyes is normally the second cue.",
+  "fix": "Order: durus → konfor → gozler → x.kipir → agirlik → karar → izin → kolay. a.izin still comes after a.gozler (T33), and the 5-min order is unchanged.",
+  "lens": "hoca"
+ },
+ {
+  "id": "EV2-01",
+  "severity": "SHOULD",
+  "where": "K block `k.son` (also `extras.quickClosing.clips[6]`); §0 'Kapanış' row; §1.2 item 3; §5.1 #12; §5.2 #14; timing.py FORBIDDEN_WHITELIST",
+  "problem": "\"Buradasın; uyanık ve dinlenmiş.\" tells the listener how the session turned out, which is an over-promise. The same sentence also plays after \"Kapanışa geç\", when someone may have skipped ahead because the lesson was not working for them. It contradicts the lesson's own `a.kolay` (\"Gevşemek kolay gelmeyebilir\"), the evidence in §1.5 (Braith 1988, PMID 3069875: anxiety rose in 5 of 30 people, 17%), and §1.5 and §8's own line \"Hiçbir sürüm sonuç vaat etmez\". Güvenlik §11.B-5 lists \"Şimdi tamamen gevşemiş durumdasın\" as a Yapma example, and \"dinlenmiş\" is the same kind of assertion. §11.B-14 gives the sentence only as an example (\"… gibi bir cümle\"), so a claim-free variant still follows the rule. The line passes lint only because k.son is whitelisted from E12.",
+  "fix": "`k.son` → \"Sonra acele etmeden kalkabilirsin. Buradasın ve uyanıksın.\" (8 syllables instead of 10, so the quick-closing ceiling of 87.4 s and the 5-min slack can only improve). A warmer option for the main closing only: \"Sonra acele etmeden kalkabilirsin. Buradasın, uyanıksın; bu dakikaları kendine ayırdın.\" This calls back `a.hosgeldin`; re-run timing.py so quickClosing stays ≤ 90 s. Remove 'k.son' from FORBIDDEN_WHITELIST and add 'dinlenmiş' to FORBIDDEN_E12. Update the quoted sentence in §0, §1.2 item 3 (\"Kapanışın son cümlesi yayı kapatır …\"), §5.1 #12 and §5.2 #14.",
+  "lens": "kanit"
+ },
+ {
+  "id": "EV2-02",
+  "severity": "SHOULD",
+  "where": "N2 `n2.x.his` (extension, rank 1130)",
+  "problem": "\"Belki bu sözler bedende de küçük bir iz bırakıyor.\" suggests that repeating an affirmation leaves a trace in the body. The script cites Wood 2009 (PMID 19493324) precisely because repeated positive statements can backfire for low self-esteem listeners. No verified dossier supports this body effect, and \"Belki\" does not remove the implication. E12 does not catch it because it has no stem for it.",
+  "fix": "Replace with a claim-free noun sentence that keeps the rhythm (no \"-abilir\"): `n2.x.his` → \"Sözlerin ardından kısa bir sessizlik.\" Keep the gap at 9 / 12 / 16. Add 'iz bırak' to FORBIDDEN_E12. In §5.3 row 3, change \"niyetin bedendeki izi\" to \"niyetten sonra kısa sessizlik\".",
+  "lens": "kanit"
+ },
+ {
+  "id": "EV2-03",
+  "severity": "SHOULD",
+  "where": "N1 `n1.birak`; N2 `n2.dilek`; timing.py FORBIDDEN_E12",
+  "problem": "Two future assurances survived round 1's E11 fix. \"Niyetin seninle kalacak.\" promises that the intention will persist, and \"Niyetin günün geri kalanında da seninle.\" states the same carry-over as a fact. These are the same class as the removed \"iyi gelecek\". The lint misses them because 'kalacak' and 'seninle' are not in FORBIDDEN_E12.",
+  "fix": "`n1.birak` → \"Sonda niyetini yeniden hatırlatacağım. Şimdilik ona tutunman gerekmiyor.\" This is true, because N2 is P1 and plays in every version, and it keeps the singular teacher voice (\"seslenirim\"). `n2.dilek` → \"İstersen niyetin günün geri kalanında da seninle olsun.\" This is optative and leaves the choice to the listener, with no double permission. Add 'kalacak' to FORBIDDEN_E12. Re-run timing.py: +5 and +4 syllables, both clips optional.",
+  "lens": "kanit"
+ },
+ {
+  "id": "EV2-04",
+  "severity": "SHOULD",
+  "where": "§2.5 (six 'yaşlı dinleyici çıtası … KARŞILANIYOR / karşılanmıyor' lines and the 'Okuma' paragraph); §6 MCP bullet; §7 'Yaşlı dinleyici çıtası'; timing.out.txt 'bilgi' lines; lesson.json qa.derinClipRateCeil",
+  "problem": "The label presents an unsupported design number as an older-listener standard. None of the verified dossiers links 5.0 syll/s, or any rate, to older listeners. The only rate recommendation there is teslim S4, itself a VARSAYIM, which says 2.5–3.0 syll/s in the deep section with the same metric (\"hece / cümle sesinin süresi\"), and no path meets it. Printing \"yaşlı dinleyici çıtası … KARŞILANIYOR\" for the 5.2-hi case reads as if the lesson had passed an evidence-based bar for older listeners. That misleads the owner's REST/MCP decision (PLAN §G5). qa.derinClipRateCeil also has no VARSAYIM note in the JSON.",
+  "fix": "Rename the bar everywhere to \"Derin evre iç hız tavanı (VARSAYIM; kanıta dayanmaz)\". Change the output wording to \"tavanın altında / üstünde\" instead of \"KARŞILANIYOR / karşılanmıyor\", and drop the words \"yaşlı dinleyici\". Add one sentence to §2.5: \"teslim S4'ün 2,5–3,0 hece/sn bandını (VARSAYIM) hiçbir yol karşılamaz; bu bant ancak sözcük uzatarak tutulabilir, bu da S3 ve Shuminsky 2026 yönüne aykırıdır. Yaşlı dinleyiciye uygunluk kör panelde (CRITIQUE #22, 65+ üye) dinlenerek sınanacak.\" Add `\"derinClipRateCeilNote\": \"VARSAYIM; kanıta dayanmaz\"` to lesson.json qa.",
+  "lens": "kanit"
+ },
+ {
+  "id": "EV2-05",
+  "severity": "NIT",
+  "where": "C3 `c3.birak`",
+  "problem": "\"Beden doğal hâline dönüyor.\" states that the preceding suggestions changed the body's state, which is a small implied effect claim. Everything else in C3 is framed as an invitation.",
+  "fix": "`c3.birak` → \"Bu hisleri bırakabilirsin. Beden kendi hâlinde.\" This is a noun sentence and adds no \"-abilir\" to the run.",
+  "lens": "kanit"
+ },
+ {
+  "id": "EV2-06",
+  "severity": "NIT",
+  "where": "§1.5 'Nefes' bullet, Ley 1988 sentence",
+  "problem": "The sentence leaves out the population the dossier gives: guvenlik §2 says \"Kronik olarak hızlı soluyan kişi oturup ya da uzanıp gevşediğinde …\". Without it, the sentence reads as a general mechanism.",
+  "fix": "Change it to \"…kronik olarak hızlı soluyan kişilerde, uzanıp gevşerken kandaki CO₂'nin düşüp panik benzeri duyumlara yol açabileceğini anlatan kuramsal bir derleme var (Ley 1988; …ikinci turda yeniden doğrulanmadı; PMID 3148637, DOI 10.1016/0005-7916(88)90054-7).\"",
+  "lens": "kanit"
+ },
+ {
+  "id": "EV2-07",
+  "severity": "NIT",
+  "where": "§1.5 'Hız ve sessizlik' (Shuminsky) and §8 row 42757902",
+  "problem": "\"İngilizce\" is not in teslim.dogrulanmis.md. I re-fetched the record from PubMed today: the article is in English and from Hofstra University, NY, but the abstract does not state the talkers' language. The 1.72 syll/s condition was \"trained clear speech\" (a 30-min clear-speech training aimed at listeners with hearing loss), not simply \"aşırı yavaş\" speech. [DOI 10.1044/2026_JSLHR-25-00691](https://doi.org/10.1044/2026_JSLHR-25-00691)",
+  "fix": "Change the §1.5 sentence to \"ABD'de yapılan bir deneyde (12 konuşmacı, 28 dinleyici) 30 dakikalık 'net konuşma' eğitimiyle üretilen 1,72 hece/sn'lik konuşma en az doğal bulundu; en çok ve en uzun duraklamalar da bu koşuldaydı…\". In §8, change \"(İngilizce; …)\" to \"(ABD; net konuşma ve doğallık; konuşma dili özette belirtilmemiş)\".",
+  "lens": "kanit"
+ },
+ {
+  "id": "EV2-08",
+  "severity": "NIT",
+  "where": "§1.5 'Huzursuzluk olağandır' (Farias 2020)",
+  "problem": "\"seyrek değil\" is not quantified. The dossier gives an overall prevalence of 8.3%, with 3.7% in experimental and 33.2% in observational studies. The experimental figure is the one closest to a recorded app lesson.",
+  "fix": "Change to \"Meditasyonla ilişkili istenmeyen etkiler 83 çalışmada toplam %8,3 sıklıkta görüldü (deneysel çalışmalarda %3,7, gözlemsel çalışmalarda %33,2; Farias 2020, PMID 32820538, DOI 10.1111/acps.13225).\"",
+  "lens": "kanit"
+ },
+ {
+  "id": "EV2-09",
+  "severity": "NIT",
+  "where": "§1.5 'Hız ve sessizlik', Lieutaud & Bourhis 2026 sentence",
+  "problem": "The sentence leaves out the dossier's confound note (teslim §: \"Program koçluk da içerdiği için yalnız ses rehberliğinin payı ayrılamaz\"). The design inference that follows it (\"sessizlik … rehbersiz kalmamalı\") leans on the guidance component alone.",
+  "fix": "After \"…daha büyük değişimle birlikte gitti\", add \"; program koçluk da içerdiği için yalnız ses rehberliğinin payı ayrılamaz\".",
+  "lens": "kanit"
+ },
+ {
+  "id": "EV2-10",
+  "severity": "NIT",
+  "where": "§1.1 'Doğa katmanı' (\"su herkese iyi gelmeyebilir (güvenlik §11.B-10)\") and §1.3 (\"Kıyıda suya girilmez; ormanda karanlık ya da kapalı alan yoktur (güvenlik §11.B-10)\")",
+  "problem": "§11.B-10 cites Luu 2024, but sakin.dogrulanmis §11.7 and its correction #11 say the water, depth and closed-space examples are not in Luu's abstract. They are a design suggestion. As written, the reader may assume they rest on evidence.",
+  "fix": "Add \"(tasarım önerisi; Luu 2024 özetinde yok, sakin §11.7 düzeltmesi)\" after both §11.B-10 references.",
+  "lens": "kanit"
+ },
+ {
+  "id": "EV2-11",
+  "severity": "NIT",
+  "where": "K `k.hareket`; §5.2 #17",
+  "problem": "Güvenlik §11.B-17 says every movement comes with \"ağrı ya da baş dönmesi olursa bırak\". The stretch clip says only \"ağrı olursa bırak\". Row 17 counts the rule as met by pointing to `k.bekle`, which covers standing up, not the stretch.",
+  "fix": "`k.hareket` → \"El ve ayak parmaklarını oynatabilir, zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.\" This adds 5 syllables (about 1 s). Re-check the 5-min slack (17.6 s now) and the quickClosing ceiling (87.4 s now; the EV2-01 fix saves about 0.4 s). Update §5.2 #17.",
+  "lens": "kanit"
+ },
+ {
+  "id": "EV2-12",
+  "severity": "NIT",
+  "where": "lesson.json music.bpmFeel = 50",
+  "problem": "This design value has no VARSAYIM label, unlike the neighbouring `key`. It implies a pulse, while sakin.dogrulanmis (Bernardi 2006, correction #10) says simpler rhythms raised arousal and recommends pulse-free textures (untested). CRITIQUE #10 also says ElevenLabs Music has no tempo control.",
+  "fix": "Replace with `\"bpmFeel\": null, \"pulseNote\": \"ritimsiz/pulssuz doku (drone, pad) önerisi; test edilmedi (sakin §11.5, Bernardi 2006 düzeltmesi); ElevenLabs Music'te tempo parametresi yok (CRITIQUE #10); VARSAYIM\"`, or keep 50 with `\"bpmFeelNote\": \"VARSAYIM; üretimde ölçülecek\"`.",
+  "lens": "kanit"
+ },
+ {
+  "id": "Z2-01",
+  "severity": "SHOULD",
+  "where": "ders2.lesson.json extras.stopReturn (d.goz, d.kalk, d.bekle); ders2.script.md §1.5 'Dönüş'",
+  "problem": "On the Durdur path, d.kalk ('Uzanıyorsan önce yana dön, sonra otur.') gets 10 s for two actions. The main closing gives the same two actions 16.9–17.6 s (k.yan gap 6 + k.otur clip 2.9–3.6 s + k.otur gap 8). d.bekle ('Birkaç nefes bekle…') is followed by only 2 s. timing.py's T1 rule (≥10 s after 'birkaç nefes') runs only on plans, never on extras. §1.5 says '\"Kapanışa geç\" ve Durdur yolu da aynı süreleri kullanır', which is false for Durdur.",
+  "fix": "Set d.kalk gapAfter {min:13,pref:13,max:14}, d.goz {3,3,4} and d.bekle {1,1,2}. I re-ran timing.lint_text with these values: stopReturn becomes 24.7–28.4 s, still inside STOP_BOUNDS 20–30, and 78/78 still pass. Rewrite the §1.5 sentence as: '\"Kapanışa geç\" aynı süreleri kullanır; Durdur yolu yana dönüp oturmaya 13 sn verir, bekleme ondan sonra ekran metniyle sessizce sürer.' In timing.py, run the BREATH_WAIT check on extras as well, and exempt a sequence's last clip explicitly with a comment.",
+  "lens": "zaman"
+ },
+ {
+  "id": "Z2-02",
+  "severity": "SHOULD",
+  "where": "ders2.lesson.json C2: c2.alt (fillRank 100) vs group sayi5 (fillRank 90)",
+  "problem": "The non-breath safety anchor ranks after the breath-linked count it protects. In the 6-min plans for 5.2-lo, 5.6-lo, 5.6-hi and 6.6-hi, the count ('Geriye doğru sayacağım… beş… dört…') plays and c2.alt ('…dikkatini ellerine verebilirsin') does not. At 5 min and at 5.2-hi 6 min, breath focus has no alternative at all. This contradicts §1.5 ('nefese bakmak zor gelirse eller (c2.alt)'). The 51.7-s sayi5 group also blocks every smaller increment, so 5.2-hi 6 min is a plateau identical to 5 min. Only raising the rank does not work: it trips T18 (4 '-abilir' endings in a row at 6 min).",
+  "fix": "Set c2.alt fillRank 85 and change the text to 'Bu sana zor gelirse, dikkatini ellerine vermen de olur.' (the Turkish lens should confirm the wording). Verified in simulation: 78/78 pass, lint passes, 5-min slack at 5.2-hi unchanged at 17.6 s, and c2.alt is present at 6 min in all 6 rate/profile cases. Making c2.alt required at 5 min drops the 5.2-hi slack to 8.0 s, below the T6 floor of 15 s. If the owner wants the alternative at 5 min, fold the clause into c2.dikkat instead (text-lens decision).",
+  "lens": "zaman"
+ },
+ {
+  "id": "Z2-03",
+  "severity": "SHOULD",
+  "where": "ders2.lesson.json K: k.yandakal gapAfter 7/7/10",
+  "problem": "'Bir süre yan yatarak dinlenebilirsin.' promises 'bir süre' but 'Ellerinden destek alarak… doğrulup otur.' comes 7 s later. The side rest is about 9 s in total with the clip. Elsewhere 'Bir süre…' (c2.kal) gets 13.7–18 s. This fails criterion #1: the instruction does not get enough time.",
+  "fix": "Set k.yandakal gapAfter {min:12,pref:12,max:15}. Alone this passes 78/78 (simulated). Combined with Z2-05 it trips the brittle T2 check at 5.2-hi 26 min; see Z2-04.",
+  "lens": "zaman"
+ },
+ {
+  "id": "Z2-04",
+  "severity": "SHOULD",
+  "where": "timing.py run_all (T2 per-minute growth from 20 min); ders2.lesson.json group x.saymak; the T6 floor",
+  "problem": "The 78/78 result is knife-edge. Scaling every clip duration by ×0.95 or ×1.05 (well inside the model error: the pause profiles differ 4×) makes 1 case fail 'T2: N dk içeriği N−1 dk ile aynı'. At ×0.90 five cases fail: one on T2, plus the density caps at 6.6-lo 7/11/27 min (152–156 syllables per 60 s; Derin 110–117). Adding 5–7 s of safe gaps (Z2-03 + Z2-05) also flips 5.2-hi 26 min to FAIL. Root cause: x.saymak (c2.x.kendin + 50-s window + c2.x.donus) is 65.6–71.4 s, which is more than 60 s, and it enters in the ≥20-min zone, so one plateau minute is unavoidable whenever it is next in line. Once real voice.*.sec values replace the estimates, the per-minute rule will almost certainly fail somewhere. Separately, the T6 floor (5-min slack ≥15 s at 5.2-hi) is only reported and never asserted.",
+  "fix": "In run_all, replace `if m >= 20 and set(ids[m]) == set(ids[m-1])` with a rule allowing at most 1 consecutive plateau minute from 20 min (fail only when ids[m] == ids[m-1] == ids[m-2]). Verified: the longest plateau is 1 minute at every scale ×0.90–×1.10. Add a perturbation sweep (clip_dur ×0.90/0.95/1.05/1.10) to timing.out.txt that lists which checks fail at each scale, and state the ×0.90 density margin in §7. Add `assert 300 - (speech + gaps_min) >= 15` for 5.2-hi at 5 min.",
+  "lens": "zaman"
+ },
+ {
+  "id": "Z2-05",
+  "severity": "NIT",
+  "where": "ders2.lesson.json K: k.goz gapAfter 7/7/10",
+  "problem": "'Gözlerini ışığa alıştıra alıştıra açıp odada birkaç şeye bakabilirsin.' asks for two actions: open the eyes gradually, then look at several things. Below the minute where k.oda.ayrinti enters (8–10 min, 5–9 min at every rate), the next instruction (k.yan) comes 7 s later.",
+  "fix": "Set k.goz gapAfter {min:9,pref:9,max:12}. Simulated: 78/78 pass alone; 5-min slack at 5.2-hi becomes 15.6 s (still ≥15); quickClosing becomes 79.7–89.4 s (inside 60–90). Apply together with the Z2-04 T2 fix.",
+  "lens": "zaman"
+ },
+ {
+  "id": "Z2-06",
+  "severity": "SHOULD",
+  "where": "5-min plan (all rates); güvenlik §11.D-1",
+  "problem": "§11.D-1 suggests about 45 s yerleşme / 3 min çekirdek / 75 s kapanış for 5 minutes. The actual split is A 59–60 s, N1+C1+C2+N2 145–151 s, K 89–97 s. The first body point is at 1:46. The actual practice (C1+C2) is 87–93 s, or 29–31% of the lesson, and the 13 body points get 1.2-s gaps (compressed below pref). The script does not report this deviation anywhere. A 5-min Ders 2 is mostly frame (arrival, intention, rise).",
+  "fix": "Add a per-anchor split line to timing.out.txt and script.md §4.2: A / N1+N2 / core / K in seconds for 5, 10, 15, 20 and 30 min. Record in §7, as an owner decision, that K exceeds §11.D-1 by 14–22 s because the rise gaps (B2/T1/E7) are uncompressible. Optionally reclaim 2–4 s by merging a.hosgeldin and a.acilis into one clip (text lens).",
+  "lens": "zaman"
+ },
+ {
+  "id": "Z2-07",
+  "severity": "NIT",
+  "where": "ders2.lesson.json C2 c2.n10…c2.n01 gapAfter 5.5/5.75/5.95; timingModel.edgeMicroSec 0.15",
+  "problem": "The count cadence is defined as a gap after each micro-clip, and the modeled micro-clip length (0.30–0.54 s = syll/rate + 0.15) is unmeasured. Single list-intonation words with a trailing ellipsis are plausibly 0.5–0.8 s long. Then the onset period reaches up to 6.75 s at max stretch, beyond NUMBER_PERIOD 6.5, and differs from number to number.",
+  "fix": "Store the cadence as an onset period, e.g. C2 `cadence: {periodSec: {min:5.8, pref:6.0, max:6.3}}`, and have the app compute gap = period − real voice.sec. Measure the cut micro-clip durations in the first pilot generation and replace EDGE_MICRO 0.15 (VARSAYIM) with the measured value.",
+  "lens": "zaman"
+ },
+ {
+  "id": "L2-01",
+  "severity": "BLOCKER",
+  "where": "C2 · c2.dikkat / c2.alt · all 5-min cases and 6-min cases at 5.2-lo, 5.6-lo/hi, 6.6-hi (c2.alt first enters at 6–7 min per planner probe)",
+  "problem": "Persona (b), the anxious 41-year-old, hears in the 5-min version \"Şimdi nefesini olduğu gibi, değiştirmeden izleyebilirsin.\" followed by about 25–30 s of breath focus (9.3 s gap, c2.kal, 14.6 s gap) with no alternative anchor. Script §1.5 says the anchor changes by section: \"nefese bakmak zor gelirse eller (c2.alt)\". It cites Ley 1988 as the reason, and safety §11.B-8 requires a neutral anchor before each hard section. In the most-used short versions that promise is false: c2.alt is optional (rank 100) and only enters at 6–7 min.",
+  "fix": "Make the breath door required in every version. The cheapest way is a second sentence inside required c2.dikkat: \"Şimdi nefesini olduğu gibi, değiştirmeden izleyebilirsin. Nefes yerine ellerini de izleyebilirsin.\" (+16 syllables, about +4.2 s at 5.2-hi). c2.alt then drops out. The line avoids another \"zor gelirse\" and has no double permission. Re-run timing.py. If the 5-min slack at 5.2-hi falls below T6's 15 s (that threshold is a VARSAYIM), apply the fixlog conflict rule (safety wins): accept 12 s or more, or take 3 s from the a.hosgeldin/a.acilis gaps. Then correct §1.5 and §5.2 row 8.",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-02",
+  "severity": "SHOULD",
+  "where": "K · k.anahtar3 → k.donus (27:46–27:55 at 30 min; 12:45 at 15 min; 3:26 at 5 min); voicePhaseGainDb.kapanisGecisi; music cues",
+  "problem": "Persona (c), the 68-year-old who has dozed off, gets no orientation cue at the most important transition. k.anahtar3 plays at Derin level (−3 dB). \"Artık dönüş zamanı.\" is only 1.6 s long and starts at −3 dB, because the 4.5-s ramp begins at k.donus. Unlike the three post-window greetings, k.donus has no returnTone. The first full-level sentence is k.nefes, so a dozer is likely to wake mid-sequence (at k.hareket, or even at \"…doğrulup otur.\") without having heard that the return has begun. Standing up is exactly where the script cites Tran 2021 (orthostatic drop, 29% of people over 65).",
+  "fix": "(1) Add `returnTone:-2s` to k.donus, the same tone the windows use, so the dozer has one learned 'I'm back' signal. (2) Move the ramp so it runs during the 3-s gap after k.anahtar3: −3 → 0 dB from the end of k.anahtar3 to the start of k.donus. \"Artık dönüş zamanı.\" then plays at 0 dB. Update voicePhaseGainDb.kapanisGecisi and §1.1. (3) Set k.donus min gap from 2.5 to 3.5 s (VARSAYIM) so a waking listener can register it before instructions start.",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-03",
+  "severity": "SHOULD",
+  "where": "music.nature.default (\"uzak, yumuşak rüzgâr ve yaprak dokusu\") during C4 (c4.yer … c4.solma), c4.ses, c4.x.yaklas, c5.dusunce",
+  "problem": "Voice, background and imagery conflict. A listener who picks \"bir kıyı\" at c4.yer hears rustling leaves under the whole shore walk, including \"Uzaktaki ses bir yaklaşıyor, bir uzaklaşıyor.\" when the real background does no such thing. The owner explicitly required \"ses - arka plan - görsel … tam uyumlu\"; a shore image over a forest bed is audible to anyone who picks the shore, the owner included.",
+  "fix": "Either (a) build the scene picker (P-S2, already listed in §7) so the nature layer follows the chosen scene inside C4 only: distant surf for Kıyı (no immersion cues, so §11.B-10 is still respected) and leaves for Orman. Or (b), as a minimum, add music cues `nature:duck -8dB` at c4.yer (image:on) and `nature:restore` at c4.solma (image:off), so the listener's imagination supplies the waves or leaves. Add a QA line: no scene-specific nature texture is audible between image:on and image:off unless it matches the chosen scene.",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-04",
+  "severity": "SHOULD",
+  "where": "C4 text (c4.iz, c4.koku, c4.gunes, c4.isik, c4.ses, c5.dusunce); §7 'Sahne seçici'",
+  "problem": "Persona (a), the easily bored 26-year-old, has nothing to hold on to in the centerpiece of the 12–30-min versions. To fit both scenes, every detail was made scene-neutral: \"temiz, taze bir koku\", \"Işık dört bir yanda oynuyor\", \"Güneş tenini tatlı tatlı ısıtıyor\". Each \"X ya da Y\" (\"dalgalar ya da rüzgârda hışırdayan yapraklar\", \"dalgaların ya da yaprakların sesi gibi\") reminds the listener that this is a template. At about 7 minutes of imagery with one sentence every ~17 s, generic detail is where the skeptic drifts, which conflicts with the owner's \"kimse sıkılmayacak … hayranlıkla\". The warm stone (c4.tas1/2) is the only concrete, memorable moment.",
+  "fix": "Implement the picker (screen chip \"Kıyı / Orman\" before start, default = last choice, stored with variantIndex) and write 5–6 scene-specific clips per scene that replace c4.iz, c4.koku, c4.ses, c4.isik, c4.x.yaklas and c5.dusunce. Examples: Kıyı: \"Ayaklarının altında ılık, ince kum.\", \"Havada hafif bir tuz kokusu var.\", \"Dalgalar kıyıya gelip çekiliyor.\" Orman: \"Ayaklarının altında yumuşak, kuru yapraklar.\", \"Havada çam ve toprak kokusu var.\", \"Rüzgâr yaprakları bir kıpırdatıyor, bir bırakıyor.\" Keep the safety limits (no entering water, no dark or closed areas). The same clip ids per scene keep timing.py and the planner unchanged; run both scene sets through all 78 cases, the same way the variant sets are run.",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-05",
+  "severity": "SHOULD",
+  "where": "C3 · c3.agir → c3.a1…c3.a3, c3.h1…c3.h3 (12:28–16:55 at 30 min, 5.6-hi)",
+  "problem": "C3 is the only block with no failure normalization, although script §5.1 #10 lists one for names, mind-wandering, images, dozing and counting. It asserts \"Kollar ağır… bacaklar ağır… bütün beden ağır.\" and about 30 s later \"bütün beden hafif.\" The skeptic (a), who feels no heaviness, reacts with 'no they're not' and loses trust in the voice. The anxious listener (b) may read the missing feeling as doing it wrong.",
+  "fix": "Add an optional clip right after c3.agir (rank about 505, enters with C3): `c3.gelmezse` \"Hissetmesen de olur; sözcükleri dinlemen yeter.\" (13 syllables, gap 3/4/6). Tag it 'başarısızlığı normalleştirir' and list it in §5.1 #10. It does not echo c4.gelmezse (\"gelmese de olur\") word for word; check it against the consecutive-repetition lint.",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-06",
+  "severity": "SHOULD",
+  "where": "BR.orta · br.orta \"Hatırlatayım: İstediğin an gözlerini açabilir ya da ara verebilirsin. Zor gelirse zemini hissedebilirsin.\"",
+  "problem": "At 16:55 (30 min), when listeners are most absorbed, \"Hatırlatayım:\" is an administrative, cabin-announcement word that breaks immersion. Together with c2.alt, c4.pencere and c5.pencere, it gives four \"zor gelirse\" in the 30-min lesson, three of them in the last 10 minutes and each just before a silence. For the anxious listener (b), repeatedly announcing difficulty before the imagery primes the expectation that something hard is coming. §11.B-8 asks for an anchor to be set up before the hard section, not for the difficulty to be predicted.",
+  "fix": "Rewrite as: \"İstediğin an gözlerini açabilir ya da ara verebilirsin. Zemin hep seni taşıyor.\" The middle-of-lesson restatement (rule 3) and the neutral anchor (rule 8) stay. The line reuses the lesson's own motif, echoed later by c4.solma's \"seni taşıyan zemin\", and one \"zor gelirse\" disappears. Update §0 'Ortak çıkış cümlesi', §1.1, §5.1 #11 and §5.2 rows 2, 3 and 8.",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-07",
+  "severity": "SHOULD",
+  "where": "C5 · c5.pencere \"Zor gelirse zemini hissedebilirsin. Bir süre sessizce izleyebilirsin; sonra yine seslenirim.\"",
+  "problem": "The sentence opens with \"Zor gelirse\" before its referent exists: the silence is only announced in the following sentence. That is the same missing-referent fault that removed \"Fark ettiğin an…\" (T01). Listeners (a) and (c) hear 'if it is hard…' with no idea what 'it' is.",
+  "fix": "Reorder so the invitation comes first and the reassurance comes last: \"Bir süre sessizce izleyebilirsin; zor gelirse zemini hissedebilirsin. Sonra yine seslenirim.\" The syllable count is unchanged (33), so timing is unaffected. The window announcement still states that the voice will return (§11.B-16).",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-08",
+  "severity": "SHOULD",
+  "where": "C1 micro-lists: gapAfter 1 / 1.5 / 2.8 after each item; 5-min body list (5.2-hi: \"diz…\" 0.34 s + 1.21 s gap)",
+  "problem": "The gap is measured after each clip ends, but item lengths range from 0.3 s (\"diz…\") to 1.8 s (\"omurga, boydan boya…\"), so the beat stumbles. Onset-to-onset time swings between about 1.5 s and 3.3 s: monosyllables come in a rush and long names drag. In the 5-min version at 5.2-hi, \"omuz… diz…\" come every ~1.55 s. That sounds like a checklist read aloud, not a teacher's steady rotation. Persona (c), with slight hearing loss, has no time to place attention before the next name.",
+  "fix": "Plan the micro-lists by onset-to-onset period, not by gap after the clip: a period of at least 2.4 s (VARSAYIM; for example min 2.4 / pref 2.7 / max 3.2), with the gap = period − clip. Numbers already work this way (about 6.1–6.3 s). To pay for it in 5 min, drop c1.f16 \"çene…\" from the required set: 13 points at ≥2.4 s cost roughly the same time as 14 points at ~1.9 s. Add a timing.py check: onset-period spread within a micro-list ≤ 0.6 s.",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-09",
+  "severity": "SHOULD",
+  "where": "C1 at 30 min: 4:10–6:57 (5.6-hi), 62 micro items with no sentence (left side → back → face → whole)",
+  "problem": "The skeptic (a) hears 2:47 of body-part names every ~2.3 s. That passes the ≤300-s texture rule but is the lesson's biggest boredom point. The dozer or hard-of-hearing listener (c) who misses a few names cannot tell where the teacher is (still the left leg? already the face?). A world-class teacher names the region.",
+  "fix": "Add two short required region cues inside C1, played whenever their region plays (1–2 s each): `c1.gecis.arka` \"Bedenin arka tarafı.\" before c1.b0x/c1.b04, and `c1.gecis.on` \"Şimdi yüz ve bedenin önü.\" before c1.f0x. (\"Şimdi\" is used only twice so far; if the filler rule objects, use \"Yüz ve bedenin önü.\") Put them in the same `fillGroup` logic as their region so plan(T) ⊆ plan(T+1) holds, then re-run timing.py. This also resets the texture run so no C1 list run exceeds about 90 s.",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-10",
+  "severity": "SHOULD",
+  "where": "voicePhaseGainDb (Derin −3 dB for ~20 min: 7:38–27:51 at 30 min); music.speechClarityOption; preparationCard",
+  "problem": "Persona (c) sets the volume during Varış at 0 dB. For about 20 minutes the voice then sits 3 dB lower, against a bed only 15 dB below it (VARSAYIM), and soft consonants and the 0.3-s monosyllables (\"on…\", \"beş…\", \"üç…\", \"diz…\") fall below comfort. The \"Konuşma netliği\" setting exists but appears only in the settings, so the person who needs it will not find it mid-lesson with eyes closed.",
+  "fix": "(1) Put a one-tap toggle \"Konuşmayı daha net duymak istiyorum\" on the preparation card, remembered per user. (2) When it is on, cap the phase drop at −1 dB (Derinleşme −0.5, Derin −1), lower the bed by 6 dB and raise `qa.speechOverBedDbMin` for that mode to 21 dB (VARSAYIM). (3) Micro clips of 1 syllable are RMS-matched to the phase reference +1 dB (VARSAYIM) so they are not the quietest events. Add \"Derin evrede sayılar ve tek heceli adlar net mi\" as an explicit item in the 65+ blind-panel protocol (CRITIQUE #22).",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-11",
+  "severity": "SHOULD",
+  "where": "N2 · n2.hatirla 'Başta seçtiğin niyeti ya da \"Dinlenmeye izin veriyorum.\" cümlesini içinden üç kez söyleyebilirsin.'",
+  "problem": "The period inside the quotation sits in the middle of the sentence. TTS will almost certainly give a sentence-final fall and a 0.2–0.9-s pause after \"veriyorum\", which strands \"…cümlesini içinden üç kez söyleyebilirsin\" as a headless fragment. Persona (c) hears the sentence end, then a dangling object: a delivery-level 'cümle düşüklüğü'.",
+  "fix": "Keep the TDK form for on-screen text, but send TTS a text with no inner period: 'Başta seçtiğin niyeti ya da \"Dinlenmeye izin veriyorum\" cümlesini içinden üç kez söyleyebilirsin.' Add a separate `ttsText` field to the schema for this case, and add the inner-period rule to the §6 Scribe normalization. Add n2.hatirla to the §6 listening watch-list: one continuous intonation arc, no fall at \"veriyorum\".",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-12",
+  "severity": "SHOULD",
+  "where": "C5 · c5.x.dayanak \"Ağırlığın ve zeminin desteği: İkisi de burada.\"",
+  "problem": "The phrase has two readings (anlatım belirsizliği): '[your weight] and [the ground's support]', or 'the support of [weight and ground]' with both genitives attached to \"desteği\". The second reading does not make sense. Persona (c), who hears it once at −3 dB, gets a puzzle instead of an anchor, which breaks the owner's no-anlatım-bozukluğu rule.",
+  "fix": "\"Bedeninin ağırlığı ve onu taşıyan zemin: İkisi de burada.\" (21 syllables, +3). It also echoes the \"zemin … taşıyor\" motif. Re-run timing.py (extension clip; 30-min stretch is 0.01–0.03, so the room exists).",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-13",
+  "severity": "SHOULD",
+  "where": "music.phases (varis / derinlesme / derin / kapanis); cues at c3.agir, c4.yer, c4.solma, c5.basla",
+  "problem": "At 30 min one \"Derin\" bed runs unchanged for about 20 minutes (7:38–27:51), changing only in three window swells. Nidra, contrasts, imagery and witness have very different characters, but the music does not turn the page with them. The visual does (image:on/off), so voice, music and visuals fall out of step, and the skeptic (a) loses the chapter feeling that holds attention.",
+  "fix": "Add sub-phase music cues that change texture, not loudness (the duck levels stay): `layer:zitlik` at c3.agir (thinner pad), `layer:imge` at c4.yer (adds the sparse distant piano and the scene's nature texture, see L2-03), `layer:imge-off` at c4.solma, and `layer:tanik` at c5.basla (sustained low strings only). Crossfade each over 8 s or more, under speech, never in a gap under 20 s. QA: at most one texture change per block and no audible loop repeat within one layer (CRITIQUE #9).",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-14",
+  "severity": "NIT",
+  "where": "K · k.donus \"Artık dönüş zamanı.\" → k.nefes \"Nefesin kendi olağan ritmine dönebilir.\" (4 s apart; also c4.don \"geri dönüyorsun\", k.yan \"dön\")",
+  "problem": "Four forms of 'dön-' within about 2.5 minutes, two of them back to back. The repetition lint misses them because it compares whole words, not roots. The ear hears \"dönüş… dönebilir\" as a stutter.",
+  "fix": "k.nefes → \"Nefesin kendi olağan ritmini bulabilir.\" (15 syllables, unchanged; still meets §11.B-14 'nefesi normale bırak'). Change it in both K and K.hizli. Extend the timing.py repetition lint to a 5-char stem match within 10 s.",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-15",
+  "severity": "NIT",
+  "where": "K · k.sesler \"Odanın sesleri, dışarıdan gelenler de yeniden duyuluyor.\"",
+  "problem": "The appositive with \"de\" reads like a written afterthought and is heavy to follow by ear.",
+  "fix": "\"Odanın ve dışarının sesleri yeniden duyuluyor.\" (16 syllables, down 5; frees about 1 s).",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-16",
+  "severity": "NIT",
+  "where": "C4 · c4.x.istemiyor \"Burada kimse senden bir şey istemiyor.\" (extension, rank 1055, so only in the longest plans)",
+  "problem": "This is the single best line for persona (b), someone lying down after a demanding workday, yet it is only heard at about 25 min or longer. The 12–24-min versions, where most people will be, never get it.",
+  "fix": "Change its tier to optional with rank about 330, right after c4.gunes/c4.pencere enter. At 13 syllables and a 10/15/19 gap it is about 18 s. Re-run the planner and check that the prefix rule and the ≤110-syllables-per-60-s Derin limit still hold.",
+  "lens": "dinleyici"
+ },
+ {
+  "id": "L2-17",
+  "severity": "NIT",
+  "where": "N2 · n2.dilek \"Niyetin günün geri kalanında da seninle.\"; lesson card (daypart: day)",
+  "problem": "Persona (b) listening at 22:00 after work hears \"günün geri kalanında\" and is then told to get up. That feels wrong in the evening, and nothing tells them the sleep lesson exists.",
+  "fix": "n2.dilek → \"Niyetin bundan sonra da seninle.\" (time-neutral). On the lesson card after 20:00 local time, show one line: \"Akşam uyumadan önce dinliyorsan uyku dersi daha uygun olabilir.\" (UI, VARSAYIM).",
+  "lens": "dinleyici"
+ }
+]

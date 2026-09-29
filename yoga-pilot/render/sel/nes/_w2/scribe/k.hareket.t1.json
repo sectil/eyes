@@ -1,0 +1,16 @@
+{
+ "unit": "k.hareket",
+ "take": "t1",
+ "ref_node": "6N930Z0SDwvHXY66FZZh",
+ "asset_id": "5NUQQF4nraZiZmDfDvfZ",
+ "stt_node": "tJmTt9YtLO0nDiUSXV76",
+ "session_id": "PA5rL3qj33S1ZkzALVDV",
+ "generation_id": "754n08alZ7sltc8ey5TF",
+ "actual_credits": 44.44,
+ "actual_cents": 0.808,
+ "spoken_duration_secs": 7.86,
+ "scribe_text": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin. Bir yerin ağrırsa ya da başın dönerse hareketi bırak",
+ "tts": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin. Bir yerin ağrırsa ya da başın dönerse hareketi bırak.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 16\n}"
+}

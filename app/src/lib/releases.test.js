@@ -19,8 +19,8 @@ describe('sürüm notları', () => {
   it('29 Eylül: E testi haftada bir; kısa test isteğe bağlı; haftalık başlangıç kuralı trend.js ile aynı sayılar', () => {
     // İnceleme 2026-09-29 (metin): "İstersen … durur" anlatım bozukluğu ve art arda iki "haftada bir" düzeltildi; eski
     // ölçümlere de uygulandığı (iki göz serisinde uyarı yeni test olmadan gelebilir) söylenir
-    const t = items292().find((x) => x.startsWith('E testi artık haftada bir:'))
-    expect(t).toBe("E testi artık haftada bir: haftalık E testi (sağ, sol, iki göz) ilk gün yola eklenir, sonra her hafta; öteki günlerde yolda E testi yok. İstersen kısa E testini (eski adıyla Günlük test; sağ ve sol göz) Ana sayfadaki Ölçüm listesinden yapabilirsin. Eski günlük test kayıtların geçmişte ve CSV dosyasında \"Kısa görme testi\" adıyla görünür. Gelişim'de ilk test alışma sayılır; başlangıç değerin 3 haftalık testle, en erken 22. günde hazır olur ve yeni testlerle 7 teste kadar güçlenir. Bu kural eski ölçümlerine de uygulanır: özellikle iki göz serisinde, yeni test yapmasan da değerlendirme hemen başlayabilir, bir uyarı da görebilirsin.")
+    const t = items292().find((x) => x.startsWith('E testi artık haftada bir yapılıyor:'))
+    expect(t).toBe("E testi artık haftada bir yapılıyor: haftalık E testi (sağ, sol, iki göz) ilk gün yola eklenir, sonra her hafta gelir; öteki günlerde yolda E testi olmaz. İstersen kısa E testini (eski adıyla Günlük test; sağ ve sol göz) Ana sayfadaki Ölçüm listesinden yapabilirsin. Eski günlük test kayıtların geçmişte ve CSV dosyasında \"Kısa görme testi\" adıyla görünür. Gelişim'de ilk test alışma sayılır; başlangıç değerin 3 haftalık testle, en erken 22. günde hazır olur ve yeni testlerle 7 teste kadar güçlenir. Bu kural eski ölçümlerine de uygulanır: özellikle iki göz serisinde, yeni test yapmasan da değerlendirme hemen başlayabilir, bir uyarı da görebilirsin.")
     expect(t.match(/haftada bir/g)).toHaveLength(1)
     // Bug 24: haftalık test takvim günüyle gelir
     expect(items292().find((x) => x.startsWith('Haftalık E testi son testin saatini'))).toMatch(/7 gün sonra, o günün başından itibaren/)
@@ -46,11 +46,11 @@ describe('sürüm notları', () => {
   it('Bug 31: 29 Eylül\'ü görmüş kişi ikinci güncellemeyi görür; taşınan maddeler 29 Eylül\'de yok; (b) maddesi var', () => {
     expect(unseenReleases('2026-09-29').map((r) => r.id)).toEqual(['2026-09-29-2'])
     expect(latestRelease().id).toBe('2026-09-29-2')
-    for (const start of ['E testi artık haftada bir:', 'Nef artık', "Gelişim'de son testten", 'Haftalık E testi son testin saatini', 'Okuma testi artık']) {
+    for (const start of ['E testi artık haftada bir yapılıyor:', 'Nef artık', "Gelişim'de son testten", 'Haftalık E testi son testin saatini', 'Okuma testi artık']) {
       expect(items292().some((t) => t.startsWith(start)), start).toBe(true)
       expect(items29().some((t) => t.startsWith(start)), start).toBe(false)
     }
-    expect(items292()[0]).toBe("Yeni kurulumda önce ölçüm: uygulamayı ilk kez açan kişi giriş ekranından sonra doğrudan İlk Bakış'a geçer, kamera 20 saniyede kaç kez göz kırptığını sayar. Hesap, güvenlik bilgisi ve sorular sonuçtan sonra gelir. Kurulumu bitirmiş olan için hiçbir şey değişmez.")
+    expect(items292()[0]).toBe("Yeni kurulumda önce ölçüm: uygulamayı ilk kez açan kişi, giriş ekranından sonra doğrudan İlk Bakış'a geçer; 20 saniye boyunca kamera göz kırpmalarını sayar. Hesap, güvenlik bilgisi ve sorular sonuçtan sonra gelir. Kurulumunu bitirdiysen senin için hiçbir şey değişmez.")
   })
   // Bug 32: hesap yalnız izinle profili (ad, doğum tarihi, şehir, gözlük) eşitler; ölçümler telefonda kalır
   it('Bug 32: hesap ekranı ve Profilim satırı eşitlenmeyen ilerlemeyi vaat etmez', () => {
@@ -60,7 +60,7 @@ describe('sürüm notları', () => {
     expect(acc).toContain("export const ACCOUNT_SUB = 'Giriş yap ya da hesap oluştur.'")
     expect(home).toContain('Apple, Google ya da e-posta ile')
     for (const src of [acc, home]) expect(src).not.toMatch(/ilerlemen[^\n]*yeni telefonda|yeni telefonda[^\n]*ilerlemen/)
-    expect(items292().find((t) => t.startsWith('Hesap ekranında'))).toMatch(/Giriş yap ya da hesap oluştur\..*ölçümler hesaba gitmez, telefonunda saklanır/)
+    expect(items292().find((t) => t.startsWith('Hesap ekranında'))).toMatch(/Giriş yap ya da hesap oluştur\." yazıyor.*ölçümlerin hesaba gitmez, telefonunda saklanır/)
   })
   it('29 Eylül: her cümle doğru ve yalın; aynı cümle parçasında iki "ve" yok', () => {
     for (const t of [...items29(), ...items292()]) {

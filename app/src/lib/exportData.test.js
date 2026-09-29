@@ -86,7 +86,7 @@ describe('Doktor raporu', () => {
     expect(rule).toMatch(/haftada bir testte 22\.–36\. günler\) son 3 test başlangıç testlerini de içerir/)
     expect(rule).toMatch(/iyileşmede sürer/)
     expect(rule).toMatch(/ilk uyarı en erken 36\. günde/)
-    expect(rule).toMatch(/Her gün test edenlerde başlangıç 8\. günden itibaren en az 7 testin ortancası/)
+    expect(rule).toMatch(/Her gün test edenlerde başlangıç, 8\. günden itibaren en az 7 testin ortancasıdır/)
     // Rosser 2003 ETDRS çizelgesi içindir; telefon testine aynen taşınmaz
     expect(rule).toMatch(/Eşikler \(ETDRS çizelgesiyle, sağlıklı gönüllülerde, okuma mesafesi değiştirilerek/)
     expect(rule).toMatch(/Haftalık başlangıcın 3 testle kurulup 7 teste büyümesi varsayımdır/)

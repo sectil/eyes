@@ -74,8 +74,8 @@ const RING = { eye: 'Göz', attention: 'Dikkat ve farkındalık', life: 'Yaşam'
 const KIND = { measure: 'ölçüm', exercise: 'egzersiz', practice: 'pratik' }
 // Modül açıklamaları (siteye özgü tek cümle; iddiasız). Manifestte açıklama yok, id ile eşleşir.
 const MOD_DESC = {
-  daily: 'İsteğe bağlı kısa E testi, sağ ve sol göz: hangi yöne baktığını söylersin, yakın görme keskinliğin logMAR olarak kaydedilir.',
-  weekly: 'İlk günden haftada bir tam ölçüm: sağ göz, sol göz ve iki göz, her biri 28 harf.',
+  daily: 'İsteğe bağlı kısa E testi, sağ ve sol göz için: E\'nin hangi yöne baktığını söylersin, yakın görme keskinliğin logMAR olarak kaydedilir.',
+  weekly: 'İlk günden itibaren haftada bir tam ölçüm: sağ göz, sol göz ve iki göz, her biri 28 harf.',
   reading: 'Yazı küçüldükçe rahat okuduğun en küçük boyu bulur.',
   blink: 'Ekran başında yarım kalan kırpmaya karşı tam göz kırpmayı ritimle yaptırır.',
   routine: 'Uzağa bakış, göz hareketleri, kırpma ve nefes adımlarını sesli yönlendirmeyle yaptırır; hafif ya da normal set seçilir.',

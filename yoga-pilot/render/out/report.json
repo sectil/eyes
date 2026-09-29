@@ -1,0 +1,2381 @@
+{
+ "generated_utc": "2026-09-29T14:01:57.543828+00:00",
+ "spec": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/SPEC.md §6-§7",
+ "tool": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/tools/mix.py",
+ "T": 900,
+ "plans": {
+  "nes": {
+   "status": "ok",
+   "mode": "pref→max",
+   "f": 0.1132,
+   "total": 900.0,
+   "speech_sec": 286.364,
+   "sel": [
+    "N1",
+    "C1",
+    "C2",
+    "N2",
+    "C4"
+   ],
+   "stop": [
+    285,
+    "c2.durak",
+    "sığmadı"
+   ],
+   "notes": [],
+   "units_missing": [],
+   "check_plan": {
+    "pass": true,
+    "fails": [],
+    "density": {
+     "syll": 119.0,
+     "frac": 0.47,
+     "deep_syll": 96.83,
+     "deep_frac": 0.346,
+     "dead": [],
+     "avg": 81.867
+    }
+   },
+   "n_events": 110,
+   "n_speech_pieces": 127,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/plan-nes.json"
+  },
+  "hak": {
+   "status": "ok",
+   "mode": "pref→max",
+   "f": 0.0456,
+   "total": 900.0,
+   "speech_sec": 278.429,
+   "sel": [
+    "N1",
+    "C1",
+    "C2",
+    "N2",
+    "C4"
+   ],
+   "stop": [
+    290,
+    "butun",
+    "sığmadı"
+   ],
+   "notes": [],
+   "units_missing": [],
+   "check_plan": {
+    "pass": true,
+    "fails": [],
+    "density": {
+     "syll": 125.962,
+     "frac": 0.454,
+     "deep_syll": 99.0,
+     "deep_frac": 0.336,
+     "dead": [],
+     "avg": 83.8
+    }
+   },
+   "n_events": 111,
+   "n_speech_pieces": 129,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/plan-hak.json"
+  }
+ },
+ "tone": {
+  "file_choice": "synth",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/donus.synth-D5.wav"
+ },
+ "bed_eq": true,
+ "mixes": {
+  "ders2-15dk-nes-A": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-nes-A.mp3",
+   "bytes": 12606318,
+   "encoding": {
+    "mode": "ABR 120 kbit/s",
+    "bytes": 12606318,
+    "kbps_avg": 112.1,
+    "tried": [
+     "VBR V2 (mtrh, q=2)",
+     "ABR 120 kbit/s"
+    ]
+   },
+   "sample_rate": 44100,
+   "channels": 2,
+   "duration_s": 900.049,
+   "mp3_decoder_offset_samples": 1105,
+   "duration_float_mix_s": 900.0,
+   "integrated_lufs": -17.39,
+   "integrated_lufs_float_mix": -16.94,
+   "true_peak_dbtp": -2.76,
+   "true_peak_dbtp_float_mix": -2.22,
+   "true_peak_dbtp_before_limiter": -2.22,
+   "tp_limiter": [
+    {
+     "ceiling_dbtp": -2.0,
+     "limiter": {
+      "ceiling_dbtp": -2.0,
+      "max_reduction_db": 0.0,
+      "sec_over_0_5db": 0.0,
+      "sec_over_1db": 0.0
+     },
+     "tp_float_after_limiter": -2.22,
+     "tp_mp3": -2.76
+    }
+   ],
+   "speech_over_bed": {
+    "Varış": {
+     "pieces_ge_1s": 9,
+     "min_diff_ge_1s": 17.31,
+     "worst_piece": "a.izin",
+     "p10_diff_ge_1s": 17.38,
+     "median_diff_ge_1s": 17.49,
+     "pieces_all": 10,
+     "min_diff_all": 17.31,
+     "n_below_15_all": 0,
+     "speech_lufs_median": -14.99,
+     "bed_st_under_speech_median": -32.52,
+     "st3_windows_ge90pct_speech": 157,
+     "st3_min_diff": 14.93,
+     "st3_median_diff": 17.73,
+     "st3_n_below_15": 1,
+     "st3_pct_below_15": 0.6,
+     "st3_worst_at_s": 12.7,
+     "st3_worst_pieces": [
+      "a.acilis"
+     ],
+     "below_15_pieces": [],
+     "pass_ge_1s": true
+    },
+    "Derinleşme": {
+     "pieces_ge_1s": 47,
+     "min_diff_ge_1s": 16.91,
+     "worst_piece": "c1.l13",
+     "p10_diff_ge_1s": 17.22,
+     "median_diff_ge_1s": 17.8,
+     "pieces_all": 62,
+     "min_diff_all": 15.3,
+     "n_below_15_all": 0,
+     "speech_lufs_median": -16.49,
+     "bed_st_under_speech_median": -34.32,
+     "st3_windows_ge90pct_speech": 101,
+     "st3_min_diff": 14.75,
+     "st3_median_diff": 17.38,
+     "st3_n_below_15": 1,
+     "st3_pct_below_15": 1.0,
+     "st3_worst_at_s": 337.8,
+     "st3_worst_pieces": [
+      "c1.k1"
+     ],
+     "below_15_pieces": [],
+     "pass_ge_1s": true
+    },
+    "Derin": {
+     "pieces_ge_1s": 32,
+     "min_diff_ge_1s": 16.6,
+     "worst_piece": "c4.don",
+     "p10_diff_ge_1s": 17.01,
+     "median_diff_ge_1s": 18.04,
+     "pieces_all": 41,
+     "min_diff_all": 16.06,
+     "n_below_15_all": 0,
+     "speech_lufs_median": -17.99,
+     "bed_st_under_speech_median": -36.1,
+     "st3_windows_ge90pct_speech": 258,
+     "st3_min_diff": 15.51,
+     "st3_median_diff": 17.55,
+     "st3_n_below_15": 0,
+     "st3_pct_below_15": 0.0,
+     "st3_worst_at_s": 530.7,
+     "st3_worst_pieces": [
+      "br.k2"
+     ],
+     "below_15_pieces": [],
+     "pass_ge_1s": true
+    },
+    "Kapanış": {
+     "pieces_ge_1s": 14,
+     "min_diff_ge_1s": 16.96,
+     "worst_piece": "k.hareket#1",
+     "p10_diff_ge_1s": 17.1,
+     "median_diff_ge_1s": 17.84,
+     "pieces_all": 14,
+     "min_diff_all": 16.96,
+     "n_below_15_all": 0,
+     "speech_lufs_median": -14.99,
+     "bed_st_under_speech_median": -32.83,
+     "st3_windows_ge90pct_speech": 171,
+     "st3_min_diff": 15.21,
+     "st3_median_diff": 17.85,
+     "st3_n_below_15": 0,
+     "st3_pct_below_15": 0.0,
+     "st3_worst_at_s": 813.2,
+     "st3_worst_pieces": [
+      "k.oda.ayrinti"
+     ],
+     "below_15_pieces": [],
+     "pass_ge_1s": true
+    }
+   },
+   "loudness_rise": {
+    "bed_stem": {
+     "stem": "yatak (müzik + doğa + oda + tını)",
+     "max_rise_db_per_s": 6.82,
+     "at_s": 751.5,
+     "max_rise_in_speech_free_s": 6.82,
+     "at_speech_free_s": 751.5,
+     "n_1s_steps_over_1db": 50,
+     "top5": [
+      [
+       751.5,
+       6.82
+      ],
+      [
+       751.4,
+       6.71
+      ],
+      [
+       751.3,
+       6.59
+      ],
+      [
+       751.2,
+       6.42
+      ],
+      [
+       751.1,
+       6.21
+      ]
+     ]
+    },
+    "music_stem": {
+     "stem": "yalnız müzik",
+     "max_rise_db_per_s": 4.75,
+     "at_s": 1.5,
+     "max_rise_in_speech_free_s": 4.75,
+     "at_speech_free_s": 1.5,
+     "n_1s_steps_over_1db": 36,
+     "top5": [
+      [
+       1.5,
+       4.75
+      ],
+      [
+       1.6,
+       4.57
+      ],
+      [
+       1.7,
+       4.17
+      ],
+      [
+       1.8,
+       4.08
+      ],
+      [
+       1.9,
+       4.06
+      ]
+     ]
+    },
+    "bed_stem_without_tone": {
+     "stem": "yatak, tınısız",
+     "max_rise_db_per_s": 2.95,
+     "at_s": 1.5,
+     "max_rise_in_speech_free_s": 2.95,
+     "at_speech_free_s": 1.5,
+     "n_1s_steps_over_1db": 35,
+     "top5": [
+      [
+       1.5,
+       2.95
+      ],
+      [
+       1.6,
+       2.89
+      ],
+      [
+       1.7,
+       2.76
+      ],
+      [
+       2.5,
+       2.72
+      ],
+      [
+       1.8,
+       2.71
+      ]
+     ]
+    },
+    "full_mix_speech_free": {
+     "stem": "tam karışım",
+     "max_rise_db_per_s": 18.52,
+     "at_s": 2.4,
+     "max_rise_in_speech_free_s": 6.82,
+     "at_speech_free_s": 751.5,
+     "n_1s_steps_over_1db": 2120,
+     "top5": [
+      [
+       2.4,
+       18.52
+      ],
+      [
+       2.3,
+       18.33
+      ],
+      [
+       2.5,
+       18.26
+      ],
+      [
+       890.8,
+       18.25
+      ],
+      [
+       890.7,
+       18.17
+      ]
+     ]
+    },
+    "tone_times_s": [
+     753.015
+    ]
+   },
+   "windows_in_plan": 0,
+   "texture_changes": [
+    {
+     "what": "yatak geçişi",
+     "t0": 105.238,
+     "t1": 113.238,
+     "speech_cover": 0.87
+    },
+    {
+     "what": "yatak geçişi",
+     "t0": 346.565,
+     "t1": 354.565,
+     "speech_cover": 0.77
+    },
+    {
+     "what": "yatak geçişi",
+     "t0": 571.102,
+     "t1": 579.102,
+     "speech_cover": 0.43
+    },
+    {
+     "what": "yatak geçişi",
+     "t0": 755.015,
+     "t1": 763.015,
+     "speech_cover": 0.52
+    },
+    {
+     "what": "imge katmanı girişi",
+     "t0": 571.102,
+     "t1": 579.102,
+     "speech_cover": 0.43
+    },
+    {
+     "what": "imge katmanı çıkışı",
+     "t0": 687.13,
+     "t1": 695.13,
+     "speech_cover": 0.68
+    }
+   ],
+   "clicks_float_mix": {
+    "edit_point": 0,
+    "speech_content": 127,
+    "bed_content": 3,
+    "mix_only": 0
+   },
+   "clicks_stems": {
+    "voice_only": 368,
+    "bed_only": 3
+   },
+   "clicks_list": {
+    "float_bed_content": [
+     [
+      134.014,
+      null,
+      -53.2,
+      -240.0,
+      -53.2
+     ],
+     [
+      321.357,
+      null,
+      -53.0,
+      -240.0,
+      -53.0
+     ],
+     [
+      358.911,
+      null,
+      -53.7,
+      -240.0,
+      -53.7
+     ]
+    ],
+    "float_mix_only": [],
+    "float_edit_point": [],
+    "mp3_bed_content": [],
+    "mp3_mix_only": [],
+    "mp3_edit_point": [],
+    "item": "[t_s, konuşma parçası, karışım HF dB, konuşma izi HF dB, yatak izi HF dB]"
+   },
+   "clicks_mp3": {
+    "edit_point": 0,
+    "speech_content": 90,
+    "bed_content": 0,
+    "mix_only": 0
+   },
+   "digital_silence_mp3": {
+    "longest_run_s": 0.0264,
+    "at_s": 900.023,
+    "runs_over_100ms": 0,
+    "threshold": "|x| <= 1/32768 on both channels"
+   },
+   "digital_silence_float_mix": {
+    "longest_run_s": 0.0054,
+    "at_s": 899.995,
+    "runs_over_100ms": 0,
+    "threshold": "|x| <= 1/32768 on both channels"
+   },
+   "bed_levels_lufs_target": {
+    "Varış": -33.41,
+    "Derinleşme": -34.91,
+    "Derin": -36.41,
+    "Kapanış": -33.41
+   },
+   "bed_offset_vs_duckedBedLufs_db": {
+    "Varış": 0.0,
+    "Derinleşme": 0.0,
+    "Derin": 0.0,
+    "Kapanış": 0.0
+   },
+   "bed_measured_st3_median_by_phase": {
+    "Varış": {
+     "bg_total": -32.88,
+     "music": -33.34,
+     "nature": -43.69,
+     "music_minus_nature": 10.31
+    },
+    "Derinleşme": {
+     "bg_total": -34.4,
+     "music": -34.78,
+     "nature": -45.58,
+     "music_minus_nature": 10.57
+    },
+    "Derin": {
+     "bg_total": -36.14,
+     "music": -36.6,
+     "nature": -46.89,
+     "music_minus_nature": 10.44
+    },
+    "Kapanış": {
+     "bg_total": -32.88,
+     "music": -33.32,
+     "nature": -43.46,
+     "music_minus_nature": 10.14
+    }
+   },
+   "nature_minus_music_db": -10.0,
+   "md5": "84a08dee40ddff3cf1e7ad0395f8e3a2",
+   "speech_over_bed_iterations": [
+    {
+     "iter": 0,
+     "offsets_db": {
+      "Varış": 0.0,
+      "Derinleşme": 0.0,
+      "Derin": 0.0,
+      "Kapanış": 0.0
+     },
+     "min_diff_ge_1s": {
+      "A": {
+       "Varış": 17.31,
+       "Derinleşme": 16.91,
+       "Derin": 16.6,
+       "Kapanış": 16.96
+      },
+      "B": {
+       "Varış": 16.85,
+       "Derinleşme": 16.73,
+       "Derin": 16.43,
+       "Kapanış": 16.27
+      }
+     }
+    }
+   ],
+   "order_check": {
+    "plan_pieces": 127,
+    "timeline_pieces": 127,
+    "same_order_and_text": true,
+    "monotonic": true,
+    "duplicates": 0,
+    "screen_equals_spoken_all": true,
+    "screen_ne_spoken": []
+   },
+   "position_check_mp3": {
+    "pieces": 127,
+    "min_corr": 0.984,
+    "min_corr_piece": "c2.n08",
+    "median_corr": 0.991,
+    "max_abs_offset_ms": 0.05,
+    "n_corr_below_0_9": 0,
+    "order_ok": true
+   },
+   "timeline": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-nes-A.timeline.json"
+  },
+  "ders2-15dk-nes-B": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-nes-B.mp3",
+   "bytes": 12384385,
+   "encoding": {
+    "mode": "ABR 120 kbit/s",
+    "bytes": 12384385,
+    "kbps_avg": 110.1,
+    "tried": [
+     "VBR V2 (mtrh, q=2)",
+     "ABR 120 kbit/s"
+    ]
+   },
+   "sample_rate": 44100,
+   "channels": 2,
+   "duration_s": 900.049,
+   "mp3_decoder_offset_samples": 1105,
+   "duration_float_mix_s": 900.0,
+   "integrated_lufs": -17.81,
+   "integrated_lufs_float_mix": -17.37,
+   "true_peak_dbtp": -2.97,
+   "true_peak_dbtp_float_mix": -2.51,
+   "true_peak_dbtp_before_limiter": -2.51,
+   "tp_limiter": [
+    {
+     "ceiling_dbtp": -2.0,
+     "limiter": {
+      "ceiling_dbtp": -2.0,
+      "max_reduction_db": 0.0,
+      "sec_over_0_5db": 0.0,
+      "sec_over_1db": 0.0
+     },
+     "tp_float_after_limiter": -2.51,
+     "tp_mp3": -2.97
+    }
+   ],
+   "speech_over_bed": {
+    "Varış": {
+     "pieces_ge_1s": 9,
+     "min_diff_ge_1s": 16.85,
+     "worst_piece": "a.kolay",
+     "p10_diff_ge_1s": 16.89,
+     "median_diff_ge_1s": 17.14,
+     "pieces_all": 10,
+     "min_diff_all": 16.85,
+     "n_below_15_all": 0,
+     "speech_lufs_median": -14.99,
+     "bed_st_under_speech_median": -32.28,
+     "st3_windows_ge90pct_speech": 157,
+     "st3_min_diff": 15.6,
+     "st3_median_diff": 18.25,
+     "st3_n_below_15": 0,
+     "st3_pct_below_15": 0.0,
+     "st3_worst_at_s": 12.7,
+     "st3_worst_pieces": [
+      "a.acilis"
+     ],
+     "below_15_pieces": [],
+     "pass_ge_1s": true
+    },
+    "Derinleşme": {
+     "pieces_ge_1s": 47,
+     "min_diff_ge_1s": 16.73,
+     "worst_piece": "c1.gecis.on#2",
+     "p10_diff_ge_1s": 16.98,
+     "median_diff_ge_1s": 17.5,
+     "pieces_all": 62,
+     "min_diff_all": 14.75,
+     "n_below_15_all": 1,
+     "speech_lufs_median": -16.49,
+     "bed_st_under_speech_median": -33.96,
+     "st3_windows_ge90pct_speech": 101,
+     "st3_min_diff": 14.77,
+     "st3_median_diff": 17.24,
+     "st3_n_below_15": 1,
+     "st3_pct_below_15": 1.0,
+     "st3_worst_at_s": 337.8,
+     "st3_worst_pieces": [
+      "c1.k1"
+     ],
+     "below_15_pieces": [
+      [
+       "c1.l08",
+       0.91,
+       14.75
+      ]
+     ],
+     "pass_ge_1s": true
+    },
+    "Derin": {
+     "pieces_ge_1s": 32,
+     "min_diff_ge_1s": 16.43,
+     "worst_piece": "n2.dilek",
+     "p10_diff_ge_1s": 16.78,
+     "median_diff_ge_1s": 17.42,
+     "pieces_all": 41,
+     "min_diff_all": 15.93,
+     "n_below_15_all": 0,
+     "speech_lufs_median": -17.99,
+     "bed_st_under_speech_median": -35.49,
+     "st3_windows_ge90pct_speech": 258,
+     "st3_min_diff": 15.15,
+     "st3_median_diff": 17.77,
+     "st3_n_below_15": 0,
+     "st3_pct_below_15": 0.0,
+     "st3_worst_at_s": 738.4,
+     "st3_worst_pieces": [
+      "n2.dilek"
+     ],
+     "below_15_pieces": [],
+     "pass_ge_1s": true
+    },
+    "Kapanış": {
+     "pieces_ge_1s": 14,
+     "min_diff_ge_1s": 16.27,
+     "worst_piece": "k.son",
+     "p10_diff_ge_1s": 16.81,
+     "median_diff_ge_1s": 17.22,
+     "pieces_all": 14,
+     "min_diff_all": 16.27,
+     "n_below_15_all": 0,
+     "speech_lufs_median": -14.99,
+     "bed_st_under_speech_median": -32.21,
+     "st3_windows_ge90pct_speech": 171,
+     "st3_min_diff": 15.95,
+     "st3_median_diff": 17.93,
+     "st3_n_below_15": 0,
+     "st3_pct_below_15": 0.0,
+     "st3_worst_at_s": 858.1,
+     "st3_worst_pieces": [
+      "k.otur"
+     ],
+     "below_15_pieces": [],
+     "pass_ge_1s": true
+    }
+   },
+   "loudness_rise": {
+    "bed_stem": {
+     "stem": "yatak (müzik + doğa + oda + tını)",
+     "max_rise_db_per_s": 6.82,
+     "at_s": 239.2,
+     "max_rise_in_speech_free_s": 6.28,
+     "at_speech_free_s": 119.3,
+     "n_1s_steps_over_1db": 1242,
+     "top5": [
+      [
+       239.2,
+       6.82
+      ],
+      [
+       23.1,
+       6.79
+      ],
+      [
+       239.1,
+       6.78
+      ],
+      [
+       551.3,
+       6.7
+      ],
+      [
+       239.0,
+       6.69
+      ]
+     ]
+    },
+    "music_stem": {
+     "stem": "yalnız müzik",
+     "max_rise_db_per_s": 11.05,
+     "at_s": 22.5,
+     "max_rise_in_speech_free_s": 10.77,
+     "at_speech_free_s": 862.5,
+     "n_1s_steps_over_1db": 1324,
+     "top5": [
+      [
+       22.5,
+       11.05
+      ],
+      [
+       766.5,
+       10.94
+      ],
+      [
+       862.5,
+       10.77
+      ],
+      [
+       670.5,
+       10.76
+      ],
+      [
+       382.5,
+       10.71
+      ]
+     ]
+    },
+    "bed_stem_without_tone": {
+     "stem": "yatak, tınısız",
+     "max_rise_db_per_s": 6.82,
+     "at_s": 239.2,
+     "max_rise_in_speech_free_s": 6.28,
+     "at_speech_free_s": 119.3,
+     "n_1s_steps_over_1db": 1227,
+     "top5": [
+      [
+       239.2,
+       6.82
+      ],
+      [
+       23.1,
+       6.79
+      ],
+      [
+       239.1,
+       6.78
+      ],
+      [
+       551.3,
+       6.7
+      ],
+      [
+       239.0,
+       6.69
+      ]
+     ]
+    },
+    "full_mix_speech_free": {
+     "stem": "tam karışım",
+     "max_rise_db_per_s": 23.94,
+     "at_s": 527.1,
+     "max_rise_in_speech_free_s": 6.28,
+     "at_speech_free_s": 119.3,
+     "n_1s_steps_over_1db": 2501,
+     "top5": [
+      [
+       527.1,
+       23.94
+      ],
+      [
+       527.0,
+       23.46
+      ],
+      [
+       839.1,
+       23.15
+      ],
+      [
+       765.7,
+       22.82
+      ],
+      [
+       839.0,
+       22.79
+      ]
+     ]
+    },
+    "tone_times_s": [
+     753.015
+    ]
+   },
+   "windows_in_plan": 0,
+   "texture_changes": [
+    {
+     "what": "yatak geçişi",
+     "t0": 105.238,
+     "t1": 113.238,
+     "speech_cover": 0.87
+    },
+    {
+     "what": "yatak geçişi",
+     "t0": 346.565,
+     "t1": 354.565,
+     "speech_cover": 0.77
+    },
+    {
+     "what": "yatak geçişi",
+     "t0": 755.015,
+     "t1": 763.015,
+     "speech_cover": 0.52
+    },
+    {
+     "what": "imge katmanı girişi",
+     "t0": 571.102,
+     "t1": 579.102,
+     "speech_cover": 0.43
+    },
+    {
+     "what": "imge katmanı çıkışı",
+     "t0": 687.13,
+     "t1": 695.13,
+     "speech_cover": 0.68
+    }
+   ],
+   "clicks_float_mix": {
+    "edit_point": 0,
+    "speech_content": 127,
+    "bed_content": 3,
+    "mix_only": 0
+   },
+   "clicks_stems": {
+    "voice_only": 368,
+    "bed_only": 3
+   },
+   "clicks_list": {
+    "float_bed_content": [
+     [
+      134.014,
+      null,
+      -53.2,
+      -240.0,
+      -53.2
+     ],
+     [
+      321.357,
+      null,
+      -53.0,
+      -240.0,
+      -53.0
+     ],
+     [
+      358.911,
+      null,
+      -53.7,
+      -240.0,
+      -53.7
+     ]
+    ],
+    "float_mix_only": [],
+    "float_edit_point": [],
+    "mp3_bed_content": [],
+    "mp3_mix_only": [],
+    "mp3_edit_point": [],
+    "item": "[t_s, konuşma parçası, karışım HF dB, konuşma izi HF dB, yatak izi HF dB]"
+   },
+   "clicks_mp3": {
+    "edit_point": 0,
+    "speech_content": 89,
+    "bed_content": 0,
+    "mix_only": 0
+   },
+   "digital_silence_mp3": {
+    "longest_run_s": 0.0264,
+    "at_s": 900.023,
+    "runs_over_100ms": 0,
+    "threshold": "|x| <= 1/32768 on both channels"
+   },
+   "digital_silence_float_mix": {
+    "longest_run_s": 0.0054,
+    "at_s": 899.995,
+    "runs_over_100ms": 0,
+    "threshold": "|x| <= 1/32768 on both channels"
+   },
+   "bed_levels_lufs_target": {
+    "Varış": -33.41,
+    "Derinleşme": -34.91,
+    "Derin": -36.41,
+    "Kapanış": -33.41
+   },
+   "bed_offset_vs_duckedBedLufs_db": {
+    "Varış": 0.0,
+    "Derinleşme": 0.0,
+    "Derin": 0.0,
+    "Kapanış": 0.0
+   },
+   "bed_measured_st3_median_by_phase": {
+    "Varış": {
+     "bg_total": -33.04,
+     "music": -33.51,
+     "nature": -43.69,
+     "music_minus_nature": 9.72
+    },
+    "Derinleşme": {
+     "bg_total": -34.46,
+     "music": -34.96,
+     "nature": -45.58,
+     "music_minus_nature": 10.04
+    },
+    "Derin": {
+     "bg_total": -36.08,
+     "music": -36.54,
+     "nature": -46.89,
+     "music_minus_nature": 9.61
+    },
+    "Kapanış": {
+     "bg_total": -33.02,
+     "music": -33.57,
+     "nature": -43.46,
+     "music_minus_nature": 9.12
+    }
+   },
+   "nature_minus_music_db": -10.0,
+   "md5": "364af4cf49b36d00d78683f560749652",
+   "speech_over_bed_iterations": [
+    {
+     "iter": 0,
+     "offsets_db": {
+      "Varış": 0.0,
+      "Derinleşme": 0.0,
+      "Derin": 0.0,
+      "Kapanış": 0.0
+     },
+     "min_diff_ge_1s": {
+      "A": {
+       "Varış": 17.31,
+       "Derinleşme": 16.91,
+       "Derin": 16.6,
+       "Kapanış": 16.96
+      },
+      "B": {
+       "Varış": 16.85,
+       "Derinleşme": 16.73,
+       "Derin": 16.43,
+       "Kapanış": 16.27
+      }
+     }
+    }
+   ],
+   "order_check": {
+    "plan_pieces": 127,
+    "timeline_pieces": 127,
+    "same_order_and_text": true,
+    "monotonic": true,
+    "duplicates": 0,
+    "screen_equals_spoken_all": true,
+    "screen_ne_spoken": []
+   },
+   "position_check_mp3": {
+    "pieces": 127,
+    "min_corr": 0.977,
+    "min_corr_piece": "c1.s19",
+    "median_corr": 0.99,
+    "max_abs_offset_ms": 0.05,
+    "n_corr_below_0_9": 0,
+    "order_ok": true
+   },
+   "timeline": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-nes-B.timeline.json"
+  },
+  "ders2-15dk-hak-A": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-hak-A.mp3",
+   "bytes": 12800641,
+   "encoding": {
+    "mode": "ABR 120 kbit/s",
+    "bytes": 12800641,
+    "kbps_avg": 113.8,
+    "tried": [
+     "VBR V2 (mtrh, q=2)",
+     "ABR 120 kbit/s"
+    ]
+   },
+   "sample_rate": 44100,
+   "channels": 2,
+   "duration_s": 900.049,
+   "mp3_decoder_offset_samples": 1105,
+   "duration_float_mix_s": 900.0,
+   "integrated_lufs": -17.65,
+   "integrated_lufs_float_mix": -17.2,
+   "true_peak_dbtp": -1.83,
+   "true_peak_dbtp_float_mix": -2.0,
+   "true_peak_dbtp_before_limiter": -1.12,
+   "tp_limiter": [
+    {
+     "ceiling_dbtp": -2.0,
+     "limiter": {
+      "ceiling_dbtp": -2.0,
+      "max_reduction_db": 0.88,
+      "sec_over_0_5db": 0.46,
+      "sec_over_1db": 0.0,
+      "at_s": 842.623
+     },
+     "tp_float_after_limiter": -2.0,
+     "tp_mp3": -1.83
+    }
+   ],
+   "speech_over_bed": {
+    "Varış": {
+     "pieces_ge_1s": 9,
+     "min_diff_ge_1s": 17.47,
+     "worst_piece": "a.acilis",
+     "p10_diff_ge_1s": 17.5,
+     "median_diff_ge_1s": 17.63,
+     "pieces_all": 10,
+     "min_diff_all": 17.47,
+     "n_below_15_all": 0,
+     "speech_lufs_median": -14.99,
+     "bed_st_under_speech_median": -32.66,
+     "st3_windows_ge90pct_speech": 141,
+     "st3_min_diff": 12.49,
+     "st3_median_diff": 17.47,
+     "st3_n_below_15": 9,
+     "st3_pct_below_15": 6.4,
+     "st3_worst_at_s": 12.0,
+     "st3_worst_pieces": [
+      "a.acilis"
+     ],
+     "below_15_pieces": [],
+     "pass_ge_1s": true
+    },
+    "Derinleşme": {
+     "pieces_ge_1s": 38,
+     "min_diff_ge_1s": 17.08,
+     "worst_piece": "c1.gecis.on#1",
+     "p10_diff_ge_1s": 17.32,
+     "median_diff_ge_1s": 17.73,
+     "pieces_all": 62,
+     "min_diff_all": 13.69,
+     "n_below_15_all": 7,
+     "speech_lufs_median": -16.49,
+     "bed_st_under_speech_median": -34.23,
+     "st3_windows_ge90pct_speech": 77,
+     "st3_min_diff": 14.57,
+     "st3_median_diff": 17.29,
+     "st3_n_below_15": 4,
+     "st3_pct_below_15": 5.2,
+     "st3_worst_at_s": 109.4,
+     "st3_worst_pieces": [
+      "n1.sec#2"
+     ],
+     "below_15_pieces": [
+      [
+       "c1.s09",
+       0.8,
+       14.12
+      ],
+      [
+       "c1.s19",
+       0.81,
+       14.47
+      ],
+      [
+       "c1.l09",
+       0.83,
+       13.69
+      ],
+      [
+       "c1.l12",
+       0.91,
+       14.08
+      ],
+      [
+       "c1.l19",
+       0.82,
+       14.6
+      ],
+      [
+       "c1.f02",
+       0.71,
+       14.74
+      ],
+      [
+       "c1.f20",
+       0.89,
+       14.88
+      ]
+     ],
+     "pass_ge_1s": true
+    },
+    "Derin": {
+     "pieces_ge_1s": 34,
+     "min_diff_ge_1s": 16.75,
+     "worst_piece": "c2.kal",
+     "p10_diff_ge_1s": 17.37,
+     "median_diff_ge_1s": 17.99,
+     "pieces_all": 43,
+     "min_diff_all": 14.39,
+     "n_below_15_all": 1,
+     "speech_lufs_median": -17.99,
+     "bed_st_under_speech_median": -36.0,
+     "st3_windows_ge90pct_speech": 235,
+     "st3_min_diff": 15.26,
+     "st3_median_diff": 17.49,
+     "st3_n_below_15": 0,
+     "st3_pct_below_15": 0.0,
+     "st3_worst_at_s": 520.4,
+     "st3_worst_pieces": [
+      "c2.kal"
+     ],
+     "below_15_pieces": [
+      [
+       "c2.n10",
+       0.61,
+       14.39
+      ]
+     ],
+     "pass_ge_1s": true
+    },
+    "Kapanış": {
+     "pieces_ge_1s": 14,
+     "min_diff_ge_1s": 17.1,
+     "worst_piece": "k.sesler",
+     "p10_diff_ge_1s": 17.24,
+     "median_diff_ge_1s": 17.77,
+     "pieces_all": 14,
+     "min_diff_all": 17.1,
+     "n_below_15_all": 0,
+     "speech_lufs_median": -14.99,
+     "bed_st_under_speech_median": -32.76,
+     "st3_windows_ge90pct_speech": 160,
+     "st3_min_diff": 14.68,
+     "st3_median_diff": 17.78,
+     "st3_n_below_15": 1,
+     "st3_pct_below_15": 0.6,
+     "st3_worst_at_s": 859.3,
+     "st3_worst_pieces": [
+      "k.otur"
+     ],
+     "below_15_pieces": [],
+     "pass_ge_1s": true
+    }
+   },
+   "loudness_rise": {
+    "bed_stem": {
+     "stem": "yatak (müzik + doğa + oda + tını)",
+     "max_rise_db_per_s": 6.63,
+     "at_s": 755.3,
+     "max_rise_in_speech_free_s": 6.63,
+     "at_speech_free_s": 755.3,
+     "n_1s_steps_over_1db": 62,
+     "top5": [
+      [
+       755.3,
+       6.63
+      ],
+      [
+       755.2,
+       6.51
+      ],
+      [
+       755.1,
+       6.38
+      ],
+      [
+       755.0,
+       6.2
+      ],
+      [
+       754.9,
+       5.98
+      ]
+     ]
+    },
+    "music_stem": {
+     "stem": "yalnız müzik",
+     "max_rise_db_per_s": 4.75,
+     "at_s": 1.5,
+     "max_rise_in_speech_free_s": 4.75,
+     "at_speech_free_s": 1.5,
+     "n_1s_steps_over_1db": 50,
+     "top5": [
+      [
+       1.5,
+       4.75
+      ],
+      [
+       1.6,
+       4.57
+      ],
+      [
+       1.7,
+       4.17
+      ],
+      [
+       1.8,
+       4.08
+      ],
+      [
+       1.9,
+       4.06
+      ]
+     ]
+    },
+    "bed_stem_without_tone": {
+     "stem": "yatak, tınısız",
+     "max_rise_db_per_s": 2.96,
+     "at_s": 1.5,
+     "max_rise_in_speech_free_s": 2.96,
+     "at_speech_free_s": 1.5,
+     "n_1s_steps_over_1db": 48,
+     "top5": [
+      [
+       1.5,
+       2.96
+      ],
+      [
+       1.6,
+       2.89
+      ],
+      [
+       1.7,
+       2.76
+      ],
+      [
+       2.5,
+       2.72
+      ],
+      [
+       1.8,
+       2.71
+      ]
+     ]
+    },
+    "full_mix_speech_free": {
+     "stem": "tam karışım",
+     "max_rise_db_per_s": 19.35,
+     "at_s": 2.0,
+     "max_rise_in_speech_free_s": 6.63,
+     "at_speech_free_s": 755.3,
+     "n_1s_steps_over_1db": 2034,
+     "top5": [
+      [
+       2.0,
+       19.35
+      ],
+      [
+       891.0,
+       19.23
+      ],
+      [
+       2.1,
+       19.17
+      ],
+      [
+       891.1,
+       19.15
+      ],
+      [
+       890.9,
+       19.12
+      ]
+     ]
+    },
+    "tone_times_s": [
+     756.802
+    ]
+   },
+   "windows_in_plan": 0,
+   "texture_changes": [
+    {
+     "what": "yatak geçişi",
+     "t0": 102.164,
+     "t1": 110.164,
+     "speech_cover": 0.87
+    },
+    {
+     "what": "yatak geçişi",
+     "t0": 337.477,
+     "t1": 345.477,
+     "speech_cover": 0.77
+    },
+    {
+     "what": "yatak geçişi",
+     "t0": 559.892,
+     "t1": 567.892,
+     "speech_cover": 0.55
+    },
+    {
+     "what": "yatak geçişi",
+     "t0": 758.802,
+     "t1": 766.802,
+     "speech_cover": 0.51
+    },
+    {
+     "what": "imge katmanı girişi",
+     "t0": 579.216,
+     "t1": 587.216,
+     "speech_cover": 0.41
+    },
+    {
+     "what": "imge katmanı çıkışı",
+     "t0": 692.505,
+     "t1": 700.505,
+     "speech_cover": 0.64
+    }
+   ],
+   "clicks_float_mix": {
+    "edit_point": 0,
+    "speech_content": 81,
+    "bed_content": 2,
+    "mix_only": 0
+   },
+   "clicks_stems": {
+    "voice_only": 466,
+    "bed_only": 3
+   },
+   "clicks_list": {
+    "float_bed_content": [
+     [
+      134.014,
+      null,
+      -53.2,
+      -240.0,
+      -53.2
+     ],
+     [
+      321.357,
+      null,
+      -53.0,
+      -240.0,
+      -53.0
+     ]
+    ],
+    "float_mix_only": [],
+    "float_edit_point": [],
+    "mp3_bed_content": [],
+    "mp3_mix_only": [],
+    "mp3_edit_point": [],
+    "item": "[t_s, konuşma parçası, karışım HF dB, konuşma izi HF dB, yatak izi HF dB]"
+   },
+   "clicks_mp3": {
+    "edit_point": 0,
+    "speech_content": 70,
+    "bed_content": 0,
+    "mix_only": 0
+   },
+   "digital_silence_mp3": {
+    "longest_run_s": 0.0264,
+    "at_s": 900.023,
+    "runs_over_100ms": 0,
+    "threshold": "|x| <= 1/32768 on both channels"
+   },
+   "digital_silence_float_mix": {
+    "longest_run_s": 0.0054,
+    "at_s": 899.995,
+    "runs_over_100ms": 0,
+    "threshold": "|x| <= 1/32768 on both channels"
+   },
+   "bed_levels_lufs_target": {
+    "Varış": -33.41,
+    "Derinleşme": -34.91,
+    "Derin": -36.41,
+    "Kapanış": -33.41
+   },
+   "bed_offset_vs_duckedBedLufs_db": {
+    "Varış": 0.0,
+    "Derinleşme": 0.0,
+    "Derin": 0.0,
+    "Kapanış": 0.0
+   },
+   "bed_measured_st3_median_by_phase": {
+    "Varış": {
+     "bg_total": -32.88,
+     "music": -33.34,
+     "nature": -43.68,
+     "music_minus_nature": 10.3
+    },
+    "Derinleşme": {
+     "bg_total": -34.36,
+     "music": -34.77,
+     "nature": -45.61,
+     "music_minus_nature": 10.66
+    },
+    "Derin": {
+     "bg_total": -36.15,
+     "music": -36.62,
+     "nature": -46.9,
+     "music_minus_nature": 10.41
+    },
+    "Kapanış": {
+     "bg_total": -32.87,
+     "music": -33.31,
+     "nature": -43.46,
+     "music_minus_nature": 10.16
+    }
+   },
+   "nature_minus_music_db": -10.0,
+   "md5": "34f19d2bc89513351fe90a1c3e729d53",
+   "speech_over_bed_iterations": [
+    {
+     "iter": 0,
+     "offsets_db": {
+      "Varış": 0.0,
+      "Derinleşme": 0.0,
+      "Derin": 0.0,
+      "Kapanış": 0.0
+     },
+     "min_diff_ge_1s": {
+      "A": {
+       "Varış": 17.47,
+       "Derinleşme": 17.08,
+       "Derin": 16.75,
+       "Kapanış": 17.1
+      },
+      "B": {
+       "Varış": 16.88,
+       "Derinleşme": 16.43,
+       "Derin": 16.58,
+       "Kapanış": 16.47
+      }
+     }
+    }
+   ],
+   "order_check": {
+    "plan_pieces": 129,
+    "timeline_pieces": 129,
+    "same_order_and_text": true,
+    "monotonic": true,
+    "duplicates": 0,
+    "screen_equals_spoken_all": true,
+    "screen_ne_spoken": []
+   },
+   "position_check_mp3": {
+    "pieces": 129,
+    "min_corr": 0.97,
+    "min_corr_piece": "c2.n02",
+    "median_corr": 0.985,
+    "max_abs_offset_ms": 0.05,
+    "n_corr_below_0_9": 0,
+    "order_ok": true
+   },
+   "timeline": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-hak-A.timeline.json"
+  },
+  "ders2-15dk-hak-B": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-hak-B.mp3",
+   "bytes": 12571822,
+   "encoding": {
+    "mode": "ABR 120 kbit/s",
+    "bytes": 12571822,
+    "kbps_avg": 111.7,
+    "tried": [
+     "VBR V2 (mtrh, q=2)",
+     "ABR 120 kbit/s"
+    ]
+   },
+   "sample_rate": 44100,
+   "channels": 2,
+   "duration_s": 900.049,
+   "mp3_decoder_offset_samples": 1105,
+   "duration_float_mix_s": 900.0,
+   "integrated_lufs": -18.1,
+   "integrated_lufs_float_mix": -17.69,
+   "true_peak_dbtp": -1.62,
+   "true_peak_dbtp_float_mix": -2.0,
+   "true_peak_dbtp_before_limiter": -1.09,
+   "tp_limiter": [
+    {
+     "ceiling_dbtp": -2.0,
+     "limiter": {
+      "ceiling_dbtp": -2.0,
+      "max_reduction_db": 0.91,
+      "sec_over_0_5db": 0.252,
+      "sec_over_1db": 0.0,
+      "at_s": 37.464
+     },
+     "tp_float_after_limiter": -2.0,
+     "tp_mp3": -1.62
+    }
+   ],
+   "speech_over_bed": {
+    "Varış": {
+     "pieces_ge_1s": 9,
+     "min_diff_ge_1s": 16.88,
+     "worst_piece": "a.hosgeldin#2",
+     "p10_diff_ge_1s": 16.91,
+     "median_diff_ge_1s": 17.39,
+     "pieces_all": 10,
+     "min_diff_all": 16.88,
+     "n_below_15_all": 0,
+     "speech_lufs_median": -14.99,
+     "bed_st_under_speech_median": -32.46,
+     "st3_windows_ge90pct_speech": 141,
+     "st3_min_diff": 12.86,
+     "st3_median_diff": 17.83,
+     "st3_n_below_15": 9,
+     "st3_pct_below_15": 6.4,
+     "st3_worst_at_s": 12.0,
+     "st3_worst_pieces": [
+      "a.acilis"
+     ],
+     "below_15_pieces": [],
+     "pass_ge_1s": true
+    },
+    "Derinleşme": {
+     "pieces_ge_1s": 38,
+     "min_diff_ge_1s": 16.43,
+     "worst_piece": "c1.l03",
+     "p10_diff_ge_1s": 16.92,
+     "median_diff_ge_1s": 17.63,
+     "pieces_all": 62,
+     "min_diff_all": 13.03,
+     "n_below_15_all": 8,
+     "speech_lufs_median": -16.49,
+     "bed_st_under_speech_median": -34.03,
+     "st3_windows_ge90pct_speech": 77,
+     "st3_min_diff": 15.07,
+     "st3_median_diff": 17.32,
+     "st3_n_below_15": 0,
+     "st3_pct_below_15": 0.0,
+     "st3_worst_at_s": 109.6,
+     "st3_worst_pieces": [
+      "n1.sec#2"
+     ],
+     "below_15_pieces": [
+      [
+       "c1.s08",
+       0.8,
+       14.54
+      ],
+      [
+       "c1.s12",
+       0.91,
+       14.3
+      ],
+      [
+       "c1.s17",
+       0.9,
+       14.68
+      ],
+      [
+       "c1.l09",
+       0.83,
+       13.03
+      ],
+      [
+       "c1.l12",
+       0.91,
+       13.69
+      ],
+      [
+       "c1.l19",
+       0.82,
+       13.98
+      ],
+      [
+       "c1.f02",
+       0.71,
+       14.1
+      ],
+      [
+       "c1.f20",
+       0.89,
+       14.73
+      ]
+     ],
+     "pass_ge_1s": true
+    },
+    "Derin": {
+     "pieces_ge_1s": 34,
+     "min_diff_ge_1s": 16.58,
+     "worst_piece": "n2.hatirla#1",
+     "p10_diff_ge_1s": 16.93,
+     "median_diff_ge_1s": 17.42,
+     "pieces_all": 43,
+     "min_diff_all": 14.1,
+     "n_below_15_all": 1,
+     "speech_lufs_median": -17.99,
+     "bed_st_under_speech_median": -35.42,
+     "st3_windows_ge90pct_speech": 235,
+     "st3_min_diff": 15.18,
+     "st3_median_diff": 17.62,
+     "st3_n_below_15": 0,
+     "st3_pct_below_15": 0.0,
+     "st3_worst_at_s": 722.2,
+     "st3_worst_pieces": [
+      "n2.hatirla#2"
+     ],
+     "below_15_pieces": [
+      [
+       "c2.n10",
+       0.61,
+       14.1
+      ]
+     ],
+     "pass_ge_1s": true
+    },
+    "Kapanış": {
+     "pieces_ge_1s": 14,
+     "min_diff_ge_1s": 16.47,
+     "worst_piece": "k.son",
+     "p10_diff_ge_1s": 16.8,
+     "median_diff_ge_1s": 17.87,
+     "pieces_all": 14,
+     "min_diff_all": 16.47,
+     "n_below_15_all": 0,
+     "speech_lufs_median": -14.99,
+     "bed_st_under_speech_median": -32.86,
+     "st3_windows_ge90pct_speech": 160,
+     "st3_min_diff": 15.26,
+     "st3_median_diff": 17.84,
+     "st3_n_below_15": 0,
+     "st3_pct_below_15": 0.0,
+     "st3_worst_at_s": 827.2,
+     "st3_worst_pieces": [
+      "k.zaman"
+     ],
+     "below_15_pieces": [],
+     "pass_ge_1s": true
+    }
+   },
+   "loudness_rise": {
+    "bed_stem": {
+     "stem": "yatak (müzik + doğa + oda + tını)",
+     "max_rise_db_per_s": 6.82,
+     "at_s": 239.2,
+     "max_rise_in_speech_free_s": 6.0,
+     "at_speech_free_s": 407.1,
+     "n_1s_steps_over_1db": 1235,
+     "top5": [
+      [
+       239.2,
+       6.82
+      ],
+      [
+       23.1,
+       6.8
+      ],
+      [
+       239.1,
+       6.78
+      ],
+      [
+       551.3,
+       6.7
+      ],
+      [
+       239.0,
+       6.69
+      ]
+     ]
+    },
+    "music_stem": {
+     "stem": "yalnız müzik",
+     "max_rise_db_per_s": 11.35,
+     "at_s": 766.5,
+     "max_rise_in_speech_free_s": 10.77,
+     "at_speech_free_s": 862.5,
+     "n_1s_steps_over_1db": 1316,
+     "top5": [
+      [
+       766.5,
+       11.35
+      ],
+      [
+       22.5,
+       11.05
+      ],
+      [
+       862.5,
+       10.77
+      ],
+      [
+       382.5,
+       10.71
+      ],
+      [
+       670.5,
+       10.71
+      ]
+     ]
+    },
+    "bed_stem_without_tone": {
+     "stem": "yatak, tınısız",
+     "max_rise_db_per_s": 6.82,
+     "at_s": 239.2,
+     "max_rise_in_speech_free_s": 6.0,
+     "at_speech_free_s": 407.1,
+     "n_1s_steps_over_1db": 1220,
+     "top5": [
+      [
+       239.2,
+       6.82
+      ],
+      [
+       23.1,
+       6.8
+      ],
+      [
+       239.1,
+       6.78
+      ],
+      [
+       551.3,
+       6.7
+      ],
+      [
+       239.0,
+       6.69
+      ]
+     ]
+    },
+    "full_mix_speech_free": {
+     "stem": "tam karışım",
+     "max_rise_db_per_s": 24.31,
+     "at_s": 551.2,
+     "max_rise_in_speech_free_s": 6.0,
+     "at_speech_free_s": 407.1,
+     "n_1s_steps_over_1db": 2364,
+     "top5": [
+      [
+       551.2,
+       24.31
+      ],
+      [
+       551.4,
+       24.25
+      ],
+      [
+       551.5,
+       24.14
+      ],
+      [
+       551.3,
+       24.11
+      ],
+      [
+       551.1,
+       23.51
+      ]
+     ]
+    },
+    "tone_times_s": [
+     756.802
+    ]
+   },
+   "windows_in_plan": 0,
+   "texture_changes": [
+    {
+     "what": "yatak geçişi",
+     "t0": 102.164,
+     "t1": 110.164,
+     "speech_cover": 0.87
+    },
+    {
+     "what": "yatak geçişi",
+     "t0": 337.477,
+     "t1": 345.477,
+     "speech_cover": 0.77
+    },
+    {
+     "what": "yatak geçişi",
+     "t0": 758.802,
+     "t1": 766.802,
+     "speech_cover": 0.51
+    },
+    {
+     "what": "imge katmanı girişi",
+     "t0": 579.216,
+     "t1": 587.216,
+     "speech_cover": 0.41
+    },
+    {
+     "what": "imge katmanı çıkışı",
+     "t0": 692.505,
+     "t1": 700.505,
+     "speech_cover": 0.64
+    }
+   ],
+   "clicks_float_mix": {
+    "edit_point": 0,
+    "speech_content": 80,
+    "bed_content": 2,
+    "mix_only": 0
+   },
+   "clicks_stems": {
+    "voice_only": 466,
+    "bed_only": 3
+   },
+   "clicks_list": {
+    "float_bed_content": [
+     [
+      134.014,
+      null,
+      -53.2,
+      -240.0,
+      -53.2
+     ],
+     [
+      321.357,
+      null,
+      -53.0,
+      -240.0,
+      -53.0
+     ]
+    ],
+    "float_mix_only": [],
+    "float_edit_point": [],
+    "mp3_bed_content": [],
+    "mp3_mix_only": [],
+    "mp3_edit_point": [],
+    "item": "[t_s, konuşma parçası, karışım HF dB, konuşma izi HF dB, yatak izi HF dB]"
+   },
+   "clicks_mp3": {
+    "edit_point": 0,
+    "speech_content": 76,
+    "bed_content": 0,
+    "mix_only": 0
+   },
+   "digital_silence_mp3": {
+    "longest_run_s": 0.0264,
+    "at_s": 900.023,
+    "runs_over_100ms": 0,
+    "threshold": "|x| <= 1/32768 on both channels"
+   },
+   "digital_silence_float_mix": {
+    "longest_run_s": 0.0054,
+    "at_s": 899.995,
+    "runs_over_100ms": 0,
+    "threshold": "|x| <= 1/32768 on both channels"
+   },
+   "bed_levels_lufs_target": {
+    "Varış": -33.41,
+    "Derinleşme": -34.91,
+    "Derin": -36.41,
+    "Kapanış": -33.41
+   },
+   "bed_offset_vs_duckedBedLufs_db": {
+    "Varış": 0.0,
+    "Derinleşme": 0.0,
+    "Derin": 0.0,
+    "Kapanış": 0.0
+   },
+   "bed_measured_st3_median_by_phase": {
+    "Varış": {
+     "bg_total": -32.96,
+     "music": -33.46,
+     "nature": -43.68,
+     "music_minus_nature": 9.88
+    },
+    "Derinleşme": {
+     "bg_total": -34.43,
+     "music": -34.93,
+     "nature": -45.61,
+     "music_minus_nature": 10.11
+    },
+    "Derin": {
+     "bg_total": -36.08,
+     "music": -36.54,
+     "nature": -46.9,
+     "music_minus_nature": 9.68
+    },
+    "Kapanış": {
+     "bg_total": -33.03,
+     "music": -33.58,
+     "nature": -43.46,
+     "music_minus_nature": 9.18
+    }
+   },
+   "nature_minus_music_db": -10.0,
+   "md5": "28dc0b6f681586882442983bfff8ac06",
+   "speech_over_bed_iterations": [
+    {
+     "iter": 0,
+     "offsets_db": {
+      "Varış": 0.0,
+      "Derinleşme": 0.0,
+      "Derin": 0.0,
+      "Kapanış": 0.0
+     },
+     "min_diff_ge_1s": {
+      "A": {
+       "Varış": 17.47,
+       "Derinleşme": 17.08,
+       "Derin": 16.75,
+       "Kapanış": 17.1
+      },
+      "B": {
+       "Varış": 16.88,
+       "Derinleşme": 16.43,
+       "Derin": 16.58,
+       "Kapanış": 16.47
+      }
+     }
+    }
+   ],
+   "order_check": {
+    "plan_pieces": 129,
+    "timeline_pieces": 129,
+    "same_order_and_text": true,
+    "monotonic": true,
+    "duplicates": 0,
+    "screen_equals_spoken_all": true,
+    "screen_ne_spoken": []
+   },
+   "position_check_mp3": {
+    "pieces": 129,
+    "min_corr": 0.962,
+    "min_corr_piece": "c1.l10",
+    "median_corr": 0.984,
+    "max_abs_offset_ms": 0.05,
+    "n_corr_below_0_9": 0,
+    "order_ok": true
+   },
+   "timeline": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-hak-B.timeline.json"
+  }
+ },
+ "cost": {
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/ledger.jsonl",
+  "rows": 399,
+  "cents_by_kind": {
+   "music": 441.72,
+   "scribe-music": 174.4,
+   "scribe-speech": 81.61,
+   "sfx": 7.51,
+   "speech": 439.22
+  },
+  "speech_bucket_cents": 520.83,
+  "speech_cap_cents": 550.0,
+  "music_bucket_cents": 623.63,
+  "music_cap_cents": 900.0,
+  "total_cents": 1144.46,
+  "total_usd": 11.44,
+  "reconcile_rows": 68,
+  "this_step_paid_calls": 0,
+  "note": "toplam = defterdeki bütün satırların cents_est toplamı (uzlaştırma satırları dahil: müzik tarafında tahmin yerine gerçek fiyat); karışım adımı ücretli çağrı yapmadı"
+ },
+ "selection_flags": {
+  "nes": {
+   "counts": {
+    "kulak": 4,
+    "kesim-kulak": 32,
+    "kulak-sinirlayici": 0,
+    "eklem>2yt": 13,
+    "other": 2
+   },
+   "kulak_units": [
+    {
+     "unit": "a.durus",
+     "piece": null,
+     "reason": "Scribe on all 5 takes (t1,t2 + re-take t4,t5,t6) returns 'Sırt üstü' vs tts 'Sırtüstü' (compound written apart by Scribe; only difference); single re-take used; best-ranked take t4 kept",
+     "in_plan": true
+    },
+    {
+     "unit": "n1.sec",
+     "piece": null,
+     "reason": "all 6 takes (t1-t3 + re-take t4-t6): longest pause is the colon pause after 'önerim şu:' (0.55-0.56 s) not the sentence end, so the SPEC §3 longest-pause cut splits the wrong place (piece 2 would read 11 syll/s = 'Kendime dinlenmeye izin veriyorum.' only). Scribe of t4 matches the tts exactly.",
+     "in_plan": true
+    },
+    {
+     "unit": "n2.hatirla",
+     "piece": null,
+     "reason": "no take passes SPEC 4.3 with the SPEC 3 cut rule: in all 3 original takes and all 3 re-takes the longest pause is after \"şunu:\" (inside sentence 2), so the longest-gap cut splits \"... yeterli. Ya da yine şunu:\" | \"Kendime dinlenmeye izin veriyorum.\" (misalign 0.165-0.186, piece rates ~3.9 vs ~8.0 syll/s). Single re-take used (3 takes). Best of 6 = retake-t2 (Scribe exact match, 16 words).",
+     "in_plan": true
+    },
+    {
+     "unit": "k.yan",
+     "piece": null,
+     "reason": "Scribe wrote \"Sırt üstü\" (2 words) for \"Sırtüstü\" in all 6 takes (3 original + 3 re-take) -> word sequence not identical under SPEC 4.2 normalization. Every other word matched; likely Scribe orthography, not a misreading - owner to confirm by ear. Chosen = best-ranked of all 6 (retake-t1).",
+     "in_plan": true
+    }
+   ],
+   "other_flags": [
+    {
+     "unit": "n1.sec",
+     "piece": null,
+     "reason": "delivered pieces n1.sec#1/#2 are cut at the sentence-end pause (gap 2.699-3.168 s, 0.469 s; boundary_misalign 0.015, rates 5.70/5.49 syll/s) chosen by SPEC §4.3(c) metrics instead of the longest pause (5.473-6.036 s); deviation from SPEC §3 'longest N-1 pauses' made so that screen text = spoken text; orchestrator/owner decides (alternative: reject n1.sec)",
+     "in_plan": true,
+     "flag": "kesim-kural-sapmasi"
+    },
+    {
+     "unit": "n2.hatirla",
+     "piece": null,
+     "reason": "DEVIATION needing owner/orchestrator approval: pieces cut at the sentence-boundary gap 3.791-4.255 s (2nd-longest pause, cut 4.0229 s, misalign 0.023, rates 5.04/5.52) instead of the longest gap 5.318-5.847 s, so that piece text = screen text. If rejected, this unit has no SPEC-conformant pieces.",
+     "in_plan": true,
+     "flag": "kesim-kuraldisi"
+    }
+   ],
+   "kulak_sinirlayici": [],
+   "kesim_kulak_units": [
+    "a.hosgeldin",
+    "br.orta",
+    "c1.cerceve",
+    "c1.gecis.on",
+    "c2.akis",
+    "c2.birak",
+    "c2.dikkat",
+    "c2.durak",
+    "c2.sayac",
+    "c2.x.ritim",
+    "c2.yer",
+    "c4.gunes",
+    "c4.solma",
+    "c4.yol",
+    "car.butun",
+    "car.on1",
+    "car.on2",
+    "car.on3",
+    "car.sag1",
+    "car.sag2",
+    "car.sag3",
+    "car.sag4",
+    "car.sayi",
+    "car.sirt",
+    "car.sol1",
+    "car.sol2",
+    "car.sol3",
+    "car.sol4",
+    "k.hareket",
+    "n1.birak",
+    "n1.sec",
+    "n2.hatirla"
+   ],
+   "eklem_gt_2st_units": [
+    "car.butun",
+    "car.on1",
+    "car.on2",
+    "car.on3",
+    "car.sag1",
+    "car.sag2",
+    "car.sag3",
+    "car.sag4",
+    "car.sirt",
+    "car.sol1",
+    "car.sol2",
+    "car.sol3",
+    "car.sol4"
+   ],
+   "cut_verification": [
+    "(c) metric-only: (a) unavailable - Scribe results expose only plain text (creative_get_flow_run_status 'transcripts'[].text and the content.txt download; checked on a.hosgeldin: 31-byte plain text), no word timestamps; (b) unavailable - ElevenLabs get_more_tools call failed (malformed result: missing resultType) and no creative_create_asset_upload / finalize tool is present in this session, and attach_reference_file needs a public https URL; checks used: piece count == target, per-piece syllable/duration rate band (boundary_misalign <= 0.12), cut at zero crossing near middle of pure silence, 5 ms edge fades",
+    "SPEC 4.3(c) metric-only for every multi-piece unit: (a) unavailable - Scribe returns plain text only (no word timestamps in creative_get_flow_run_status nor in the transcript .txt); (b) unavailable - no local-file upload tool exposed in this session (creative_create_asset_upload/finalize absent; get_more_tools call returned an MCP schema error). Metric checks: piece count = target, audio.py boundary_misalign <= 0.12 (syllable/speech-time band), cut at middle of the chosen silence (nearest zero crossing, 5 ms fades). Every multi-piece unit therefore carries flag kesim-kulak."
+   ]
+  },
+  "hak": {
+   "counts": {
+    "kulak": 3,
+    "kesim-kulak": 32,
+    "kulak-sinirlayici": 40,
+    "eklem>2yt": 13,
+    "other": 0
+   },
+   "kulak_units": [
+    {
+     "unit": "a.durus",
+     "piece": null,
+     "reason": "SPEC §4.2: no take matched Scribe word-for-word after the single re-take; best-ranked take over all 6 takes kept; diffs: t1: Sırt üstü ya da yan yatıp zemine yerleşmen yeterli; t2: Sırt üstü ya da yan yatıp zemine yerleşmen yeterli; t3: Sırt üstü ya da yan yatıp zemine yerleşmen yeterli; t4: Sırt üstü ya da yan yatıp zemine yerleşmen yeterli; t5: Sırt üstü ya da yan yatıp zemine yerleşmen yeterli; t6: Sırt üstü ya da yan yatıp zemine yerleşmen yeterli",
+     "in_plan": true
+    },
+    {
+     "unit": "c2.yer",
+     "piece": null,
+     "reason": "SPEC §4.2: no take matched Scribe word-for-word after the single re-take; best-ranked take over all 6 takes kept; diffs: t1: Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta; t2: Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta; t3: Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta; t4: Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta; t5: Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta; t6: Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta",
+     "in_plan": true
+    },
+    {
+     "unit": "k.yan",
+     "piece": null,
+     "reason": null,
+     "in_plan": true
+    }
+   ],
+   "other_flags": [],
+   "kulak_sinirlayici": [
+    [
+     "a.konfor",
+     null
+    ],
+    [
+     "a.izin",
+     null
+    ],
+    [
+     "n1.sec",
+     null
+    ],
+    [
+     "n1.birak",
+     null
+    ],
+    [
+     "c1.cerceve",
+     null
+    ],
+    [
+     "car.sag1",
+     null
+    ],
+    [
+     "car.sag2",
+     null
+    ],
+    [
+     "car.sag3",
+     null
+    ],
+    [
+     "car.sag4",
+     null
+    ],
+    [
+     "car.sol1",
+     null
+    ],
+    [
+     "car.sol4",
+     null
+    ],
+    [
+     "car.sirt",
+     null
+    ],
+    [
+     "car.on1",
+     null
+    ],
+    [
+     "car.on2",
+     null
+    ],
+    [
+     "car.on3",
+     null
+    ],
+    [
+     "car.butun",
+     null
+    ],
+    [
+     "c2.yer",
+     null
+    ],
+    [
+     "c2.alt",
+     null
+    ],
+    [
+     "c2.akis",
+     "c2.akis#2"
+    ],
+    [
+     "c2.sayac",
+     "c2.sayac#2"
+    ],
+    [
+     "car.sayi",
+     "c2.n08"
+    ],
+    [
+     "car.sayi",
+     "c2.n05"
+    ],
+    [
+     "car.sayi",
+     "c2.n04"
+    ],
+    [
+     "car.sayi",
+     "c2.n01"
+    ],
+    [
+     "c2.birak",
+     "c2.birak#2"
+    ],
+    [
+     "br.k2",
+     "br.k2"
+    ],
+    [
+     "br.orta",
+     "br.orta#1"
+    ],
+    [
+     "br.orta",
+     "br.orta#3"
+    ],
+    [
+     "c4.yol",
+     "c4.yol#2"
+    ],
+    [
+     "c4.don",
+     "c4.don"
+    ],
+    [
+     "n2.hatirla",
+     "n2.hatirla#1"
+    ],
+    [
+     "n2.hatirla",
+     "n2.hatirla#2"
+    ],
+    [
+     "n2.dilek",
+     "n2.dilek"
+    ],
+    [
+     "k.hareket",
+     "k.hareket#1"
+    ],
+    [
+     "k.yandakal",
+     "k.yandakal"
+    ],
+    [
+     "k.otur",
+     "k.otur"
+    ],
+    [
+     "k.bekle",
+     "k.bekle"
+    ],
+    [
+     "c2.durak",
+     "c2.durak#1"
+    ],
+    [
+     "c2.durak",
+     "c2.durak#2"
+    ],
+    [
+     "c2.x.ritim",
+     "c2.x.ritim#1"
+    ]
+   ],
+   "kesim_kulak_units": [
+    "a.hosgeldin",
+    "br.orta",
+    "c1.cerceve",
+    "c1.gecis.on",
+    "c2.akis",
+    "c2.birak",
+    "c2.dikkat",
+    "c2.durak",
+    "c2.sayac",
+    "c2.x.ritim",
+    "c2.yer",
+    "c4.gunes",
+    "c4.solma",
+    "c4.yol",
+    "car.butun",
+    "car.on1",
+    "car.on2",
+    "car.on3",
+    "car.sag1",
+    "car.sag2",
+    "car.sag3",
+    "car.sag4",
+    "car.sayi",
+    "car.sirt",
+    "car.sol1",
+    "car.sol2",
+    "car.sol3",
+    "car.sol4",
+    "k.hareket",
+    "n1.birak",
+    "n1.sec",
+    "n2.hatirla"
+   ],
+   "eklem_gt_2st_units": [
+    "car.butun",
+    "car.on1",
+    "car.on2",
+    "car.on3",
+    "car.sag1",
+    "car.sag2",
+    "car.sag3",
+    "car.sag4",
+    "car.sirt",
+    "car.sol1",
+    "car.sol2",
+    "car.sol3",
+    "car.sol4"
+   ],
+   "cut_verification": [
+    "(c) metric-only. (a) unavailable: Scribe results in this session expose plain text only (creative_get_flow_run_status 'transcripts'[].text; content.txt download checked for a.hosgeldin t1 = 31 bytes plain text, saved at /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-1/scribe/a.hosgeldin.t1.content.txt), no word timestamps. (b) unavailable: ElevenLabs get_more_tools call at 12:28Z failed ('MCP server returned a malformed result ... missing required resultType'); no creative_create_asset_upload/finalize tool is loadable in this session (ToolSearch), and creative_attach_reference_file needs a public https URL. Checks used for (c): piece count == target; per-piece syllable/duration consistency (audio.py boundary_misalign, threshold 0.12 VARSAYIM); cut at zero crossing near the middle of pure silence with 5 ms edges (audio.py cut); margin_ratio (shortest chosen / longest unchosen pause); extra supporting evidence: heuristic syllable-nucleus count per piece (nuclei.py, not a gate)",
+    "audio.py cut (longest N-1 gaps, cut at zero crossing near silence middle, 5 ms edges) + SPEC 4.3(c) metric-only verification: (a) unavailable - Scribe output is plain text only (no word timestamps in creative_get_flow_run_status transcripts nor in the downloaded transcript .txt, checked on c2.akis t2); (b) unavailable - no local-file upload tool in this session (creative_create_asset_upload/finalize not exposed; get_more_tools call returned an MCP schema error). Metric checks: piece count = target, audio.py boundary_misalign <= 0.066 (all units), cut within 10 ms of chosen-silence middle, per-piece rates 2.0-7.3 syll/s (carrier items 2.0-4.6). Every multi-piece unit carries flag kesim-kulak."
+   ]
+  }
+ },
+ "done_criteria": {
+  "ders2-15dk-nes-A": {
+   "duration_900pm1": true,
+   "order_as_plan": true,
+   "every_piece_found_at_its_time_in_mp3": true,
+   "no_missing_or_duplicate_by_construction": true,
+   "full_mix_scribe_alignment": null,
+   "screen_equals_spoken": true,
+   "no_edit_point_clicks_mp3": true,
+   "no_mix_only_clicks_mp3": true,
+   "no_digital_silence_ge_100ms_mp3": true,
+   "speech_over_bed_ge15_pieces_ge_1s": true,
+   "true_peak_le_minus1": true,
+   "integrated_lufs": -17.39,
+   "size_le_14MB": true,
+   "mp3_44k1_stereo": true
+  },
+  "ders2-15dk-nes-B": {
+   "duration_900pm1": true,
+   "order_as_plan": true,
+   "every_piece_found_at_its_time_in_mp3": true,
+   "no_missing_or_duplicate_by_construction": true,
+   "full_mix_scribe_alignment": null,
+   "screen_equals_spoken": true,
+   "no_edit_point_clicks_mp3": true,
+   "no_mix_only_clicks_mp3": true,
+   "no_digital_silence_ge_100ms_mp3": true,
+   "speech_over_bed_ge15_pieces_ge_1s": true,
+   "true_peak_le_minus1": true,
+   "integrated_lufs": -17.81,
+   "size_le_14MB": true,
+   "mp3_44k1_stereo": true
+  },
+  "ders2-15dk-hak-A": {
+   "duration_900pm1": true,
+   "order_as_plan": true,
+   "every_piece_found_at_its_time_in_mp3": true,
+   "no_missing_or_duplicate_by_construction": true,
+   "full_mix_scribe_alignment": null,
+   "screen_equals_spoken": true,
+   "no_edit_point_clicks_mp3": true,
+   "no_mix_only_clicks_mp3": true,
+   "no_digital_silence_ge_100ms_mp3": true,
+   "speech_over_bed_ge15_pieces_ge_1s": true,
+   "true_peak_le_minus1": true,
+   "integrated_lufs": -17.65,
+   "size_le_14MB": true,
+   "mp3_44k1_stereo": true
+  },
+  "ders2-15dk-hak-B": {
+   "duration_900pm1": true,
+   "order_as_plan": true,
+   "every_piece_found_at_its_time_in_mp3": true,
+   "no_missing_or_duplicate_by_construction": true,
+   "full_mix_scribe_alignment": null,
+   "screen_equals_spoken": true,
+   "no_edit_point_clicks_mp3": true,
+   "no_mix_only_clicks_mp3": true,
+   "no_digital_silence_ge_100ms_mp3": true,
+   "speech_over_bed_ge15_pieces_ge_1s": true,
+   "true_peak_le_minus1": true,
+   "integrated_lufs": -18.1,
+   "size_le_14MB": true,
+   "mp3_44k1_stereo": true
+  }
+ },
+ "not_verified": [
+  "SPEC §7 \"tam karışımın Scribe metni plan metniyle hizalanır\": YAPILMADI. (1) Yerel dosya yükleme aracı bu oturumda yok (seçim ajanları da doğruladı: creative_attach_reference_file yalnız herkese açık https URL alır); (2) 4 × 900 sn Scribe ≈ 4 × 90 = 360 sent (gözlenen 0,1 sent/sn) ve konuşma kovasında kalan pay ≈ 29.2 sent (tavan 550) — tavan aşılırdı. Yerine: karışım planın olay listesinden kuruldu; zaman çizelgesinin sırası, metni ve parça sayısı planla birebir karşılaştırıldı (order_check); her parça, birim düzeyinde Scribe ile doğrulanmış çekimden gelir (selection-*.json).",
+  "Kulakla dinleme yapılmadı; bütün ifadeler ölçümdür.",
+  "Parça kesimleri yalnız ölçüyle denetlendi (SPEC §4.3 c; \"kesim-kulak\" bayrakları seçim dosyalarında)."
+ ],
+ "decisions_varsayim": [
+  "Konuşma: mono parça (−18 LUFS klip) iki kanala birim kazançla kondu — uygulama motorunun çalışıyla aynı. Stereo BS.1770 ölçümünde çift mono +3,01 dB sayılır: Varış/Kapanış sözü ≈ −15 LUFS, yatak ≈ −33 LUFS. Konuşma/yatak farkı iki iz aynı (stereo) ölçümle hesaplanır; klip-LUFS (mono) − yatak-LUFS (stereo) okumasıyla fark 3 dB daha azdır (tasarımdaki 15 dB).",
+  "Gerçek tepe: kodlamadan önce stereo bağlı gerçek tepe sınırlayıcı (tavan −2,0 dBTP; MP3 sonrası > −1 dBTP ise −2,5 / −3,0).",
+  "Yatak düzeyi: müzik + doğa toplamı music.duckedBedLufs; müzik = hedef − 0,41 dB, doğa = müzik − 10 dB (SPEC §6 VARSAYIM, PLAN D.4 \"toplam aşmaz\").",
+  "Konuşma/yatak ≥ 15 dB (≥ 1 sn parçalar, parçanın bütünleşik yüksekliği − parça boyunca yatak 3 sn ST en yükseği) tutmayan evrede yatak evrece indirilir; A ve B için ORTAK ofset (kör karşılaştırmada yükseklik eşleşsin).",
+  "Evre düzeyi değişimi: azalan düzey yeni evrenin ilk sözünden önceki sessizlikte (≤ 8 sn), artan düzey ilk sözle başlayıp 8 sn.",
+  "Doku geçişleri (8 sn eşit güç, ilinti dengeli yasa) ipucu klibinin başında; aile içi geçiş (tek dosya yetmezse) blok/parça başında, geçiş penceresinde konuşma payı en yüksek nokta.",
+  "Kapanış yatağının doğal sonu ders sonuna oturtuldu (iki kaynakta aynı kural).",
+  "İmge katmanı yatağın 8 dB altında (bütünleşik LUFS, VARSAYIM); imge boyunca yatak −0,64 dB (toplam evre hedefinde).",
+  "Dönüş tınısı: yerel sentez D5 (common/donus.synth-D5.wav; ElevenLabs sfx tınısı \"kaba\", F5 ve FAIL-soft olduğu için), bütünleşik −30 LUFS (VARSAYIM); returnTone ipucu olan her klipten 2 sn önce (planda yalnız k.donus).",
+  "Yatak EQ (PLAN D.3 son işlem): 150 Hz 2. derece yüksek geçiren + 2449 Hz −3 dB çukur (1,5–4 kHz), iki kaynağa aynı",
+  "Oda sesi: iki 30 sn döngü, −58 dBFS RMS, 2 sn geçiş, 0–900 sn hep; doğa: dört orman döngüsü rastgele sıra + döndürme, 4 sn geçiş; sıra tohumu 20260929, dört karışımda aynı.",
+  "Açılış 3 sn (PLAN D.4), son 5 sn yumuşak kapanış (music.endFadeSec; müzik + doğa).",
+  "Pencere kabarması kodda var (≥ 20 sn duyurulu pencere, +6 dB, 6 sn rampa, sonraki sözden 8 sn önce iner) ama 15 dk planında duyurulu pencere yok → etkin değil.",
+  "k.goz \"chord\" ipucu için ayrı bir akor olayı üretilmedi (SPEC §6 tanımlamıyor; varlık yok).",
+  "MP3: lameenc; önce VBR V2, 14 MB aşılırsa ABR 120 / CBR 112; 16 bit TPDF titreşim."
+ ],
+ "ear_checks": [
+  "nes a.durus: \"kulak\" bayrağı (seçim) — Scribe on all 5 takes (t1,t2 + re-take t4,t5,t6) returns 'Sırt üstü' vs tts 'Sırtüstü' (compound written apart by Scribe; only difference); single re-take used; best-ranked take t4 kept",
+  "nes n1.sec: \"kulak\" bayrağı (seçim) — all 6 takes (t1-t3 + re-take t4-t6): longest pause is the colon pause after 'önerim şu:' (0.55-0.56 s) not the sentence end, so the SPEC §3 longest-pause cut splits the wrong place (piece 2 would read",
+  "nes n2.hatirla: \"kulak\" bayrağı (seçim) — no take passes SPEC 4.3 with the SPEC 3 cut rule: in all 3 original takes and all 3 re-takes the longest pause is after \"şunu:\" (inside sentence 2), so the longest-gap cut splits \"... yeterli. Ya da y",
+  "nes k.yan: \"kulak\" bayrağı (seçim) — Scribe wrote \"Sırt üstü\" (2 words) for \"Sırtüstü\" in all 6 takes (3 original + 3 re-take) -> word sequence not identical under SPEC 4.2 normalization. Every other word matched; likely Scribe orthograp",
+  "nes n1.sec: kesim-kural-sapmasi — delivered pieces n1.sec#1/#2 are cut at the sentence-end pause (gap 2.699-3.168 s, 0.469 s; boundary_misalign 0.015, rates 5.70/5.49 syll/s) chosen by SPEC §4.3",
+  "nes n2.hatirla: kesim-kuraldisi — DEVIATION needing owner/orchestrator approval: pieces cut at the sentence-boundary gap 3.791-4.255 s (2nd-longest pause, cut 4.0229 s, misalign 0.023, rates 5.0",
+  "hak a.durus: \"kulak\" bayrağı (seçim) — SPEC §4.2: no take matched Scribe word-for-word after the single re-take; best-ranked take over all 6 takes kept; diffs: t1: Sırt üstü ya da yan yatıp zemine yerleşmen yeterli; t2: Sırt üstü ya da yan",
+  "hak c2.yer: \"kulak\" bayrağı (seçim) — SPEC §4.2: no take matched Scribe word-for-word after the single re-take; best-ranked take over all 6 takes kept; diffs: t1: Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğü",
+  "hak k.yan: \"kulak\" bayrağı (seçim) — gerekçe seçim dosyasında yok",
+  "Hakan: gerçek tepe sınırlayıcısı > 3 dB kısan parçalar (\"kulak-sinirlayici\", listede)",
+  "Dönüş tınısı seçimi (sentez D5 / ElevenLabs sfx) ve düzeyi",
+  "İmge katmanının düzeyi (−8 dB) ve tınısı; doğa düzeyi (−10 dB); orman-2 yinelenen esinti",
+  "A/B kaynak ayrıntıları (_ab_details.json) — dinlemeden sonra açılır"
+ ]
+}

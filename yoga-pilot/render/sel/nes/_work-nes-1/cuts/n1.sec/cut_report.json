@@ -1,0 +1,101 @@
+{
+ "take": "t4.mp3",
+ "thr_db": -53.35,
+ "sylls": [
+  14,
+  25
+ ],
+ "candidates": [
+  {
+   "gap": [
+    2.699,
+    3.168
+   ],
+   "dur": 0.469,
+   "cut_sec": 2.93,
+   "speech": [
+    2.454,
+    4.55
+   ],
+   "rates": [
+    5.7,
+    5.49
+   ],
+   "misalign": 0.015
+  },
+  {
+   "gap": [
+    0.479,
+    0.678
+   ],
+   "dur": 0.2,
+   "cut_sec": 0.5856,
+   "speech": [
+    0.434,
+    6.565
+   ],
+   "rates": [
+    32.26,
+    3.81
+   ],
+   "misalign": 0.304
+  },
+  {
+   "gap": [
+    5.473,
+    6.036
+   ],
+   "dur": 0.564,
+   "cut_sec": 5.7544,
+   "speech": [
+    4.759,
+    2.24
+   ],
+   "rates": [
+    2.94,
+    11.16
+   ],
+   "misalign": 0.314
+  }
+ ],
+ "chosen": {
+  "gap": [
+   2.699,
+   3.168
+  ],
+  "dur": 0.469,
+  "cut_sec": 2.93,
+  "speech": [
+   2.454,
+   4.55
+  ],
+  "rates": [
+   5.7,
+   5.49
+  ],
+  "misalign": 0.015
+ },
+ "longest_gap": {
+  "gap": [
+   5.473,
+   6.036
+  ],
+  "dur": 0.564,
+  "cut_sec": 5.7544,
+  "speech": [
+   4.759,
+   2.24
+  ],
+  "rates": [
+   2.94,
+   11.16
+  ],
+  "misalign": 0.314
+ },
+ "chosen_is_longest": false,
+ "files": [
+  "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_work-nes-1/cuts/n1.sec/n1.sec#1.wav",
+  "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_work-nes-1/cuts/n1.sec/n1.sec#2.wav"
+ ],
+ "note": "SPEC §3 longest-pause rule would cut at gap [np.float64(5.473), np.float64(6.036)] (dur 0.564); sentence-end gap [np.float64(2.699), np.float64(3.168)] (dur 0.469) chosen by syllable alignment"
+}

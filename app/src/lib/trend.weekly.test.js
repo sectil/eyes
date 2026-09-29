@@ -78,7 +78,7 @@ describe('haftalık yol: metinler (doğal Türkçe, sayaç)', () => {
     expect(m).not.toMatch(/seyrek/)
   })
   it('haftalık plan notu: 22. gün ve 3 test', () => {
-    expect(WEEKLY_PLAN_NOTE).toBe('E testi haftada bir. İlk test alışmadır; sonraki 3 haftalık test başlangıç değerini oluşturur, değerlendirme en erken 22. günde başlar.')
+    expect(WEEKLY_PLAN_NOTE).toBe('E testi haftada bir yapılır. İlk test alışmadır; sonraki 3 haftalık test başlangıç değerini oluşturur, değerlendirme en erken 22. günde başlar.')
   })
 })
 

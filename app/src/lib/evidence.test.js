@@ -23,7 +23,7 @@ describe('kanıt kartı: Gelişim grafiği ve uyarılar', () => {
   it('sınırlar: varsayım, bir gözde ve bir kişide yanlış uyarı, yanlış kırmızı, en erken uyarı günü', () => {
     expect(c.limits).toMatch(/bir varsayımdır/)
     expect(c.limits).toContain('bir gözde %0,7 ile %19,4 arasında')
-    expect(c.limits).toContain('sağ, sol ve iki göz ayrı değerlendirildiği için bir kişide %2,5 ile %48,1 arasında')
+    expect(c.limits).toContain('sağ, sol ve iki göz ayrı değerlendirildiği için bir kişide ise %2,5 ile %48,1 arasında çıktı')
     expect(c.limits).toContain('Yanlış kırmızı uyarı olasılığı bir kişide en çok %4,9')
     expect(c.limits).toContain('ilk uyarı en erken 36. günde')
   })
