@@ -178,18 +178,23 @@ Uygulama sırası (her biri ayrı onay, test, TestFlight): (a) E testi haftada b
 - [~] **(b) İlk açılışta önce ölçüm** (2026-09-29, sahibinin onayıyla): kodda bitti, CİHAZDA DENENMEDİ, TestFlight'a
       girmedi. Sıra: giriş ekranı → İlk Bakış → hesap → güvenlik bilgisi → 4 soru → Seni tanıyalım → deneme (önce: giriş →
       hesap → güvenlik → İlk Bakış → sorular). `lib/setupFlow.js` firstOpenStep (sıra kararı, testli); İlk Bakış'ta
-      ilerleme çubuğu yok (`bar={null}`, hesap ekranında da yok); sonuç biter bitmez `settings.firstLookPending`'e yazılır
-      (hesap ekranında kapatıp açınca korunur), kurulumun ilk ekranından itibaren profilde (iris başlangıcı kırpma
+      ilerleme çubuğu yok (`bar={null}`, hesap ekranında da yok); sonuç, sonuç ekranı açılır açılmaz
+      `settings.firstLookPending`'e yazılır (sonuç ya da hesap ekranında kapatıp açınca korunur; FirstLook onResult), kurulumun ilk ekranından itibaren profilde (iris başlangıcı kırpma
       sayısını okur), kurulum bitince silinir. Güvenlik bilgisinin üst satırı kurulumda "Yola başlamadan önce"
       (Profilim → Sorularım'da eskisi gibi "Başlamadan önce"). Kurulumu bitmiş kişi hiçbir şey görmez; kurulumun
       ortasında güncelleyen önce İlk Bakış'ı, sonra kaldığı yeri görür. Sürüm notu yeni girdide ('2026-09-29-2'; Bug 31).
-      Tarayıcıda iki temada baştan sona denendi (kamerasız sayımla); testler 1414/1414. Açık: Bug 32 (hesap ekranı
-      cümlesi, sahibinin kararı).
+      Tarayıcıda iki temada baştan sona denendi (kamerasız sayımla). Bağımsız doğrulama (1 tur): kritik hata yok; 4 öneri
+      ve 1 not düzeltildi (belge, hesap cümlesi, eski yorumlar, kayıt yazma/silme testleri, sonuç ekranında kaybolma).
+      Bug 32 düzeltildi: hesap ekranı "İzin verirsen profilin hesabına kaydedilir; ölçümlerin telefonunda saklanır."
+      Not (sahibinin planının sonucu): kamera ve İlk Bakış, hesap ekranındaki "Kullanım şartlarını kabul" satırından önce
+      çalışır; görüntü telefondan çıkmaz, yalnız kırpma sayısı telefonda saklanır.
       Cihazda bak:
       - Uygulamayı silip yeniden kur: giriş ekranı → "Başla" → İlk Bakış ("20 saniye · Önce bir şey fark edelim"),
         üstte ilerleme çubuğu yok. "Başla"da kamera izni sorulur; izin verince 20 sn okuma, sonra "X kez kırptın".
-      - "Devam" → "Hoş geldin" (hesap). Burada uygulamayı tamamen kapatıp aç: yine "Hoş geldin", İlk Bakış yeniden
-        istenmez.
+      - Sonuç ekranında ("X kez kırptın") uygulamayı tamamen kapatıp aç: "Hoş geldin" gelir, İlk Bakış yeniden istenmez.
+      - "Devam" → "Hoş geldin" (hesap); altında "İzin verirsen profilin hesabına kaydedilir; ölçümlerin telefonunda
+        saklanır." Burada uygulamayı tamamen kapatıp aç: yine "Hoş geldin", İlk Bakış yeniden istenmez.
+      - Profilim → hesap satırı (hesapsız): "İzin verirsen profilin hesabına kaydedilir".
       - Hesaptan sonra güvenlik bilgisi "Yola başlamadan önce"; "Anladım, devam" → iris soruları (İlk Bakış yeniden gelmez);
         çubuk soruların başında küçük, kesintisiz ilerler.
       - Kurulum bitince Profilim → Sorularım → "İlk 20 sn" satırında aynı kırpma sayısı; iris haritası başlangıcında kırpma.

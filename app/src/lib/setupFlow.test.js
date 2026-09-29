@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { firstOpenStep, pendingLook, withPendingLook } from './setupFlow.js'
+import { firstOpenStep, pendingLook, withPendingLook, afterLook, afterSetup } from './setupFlow.js'
 import { INTRO_VERSION } from './intro.js'
 import { normalizeProfile } from './profile.js'
 
@@ -45,5 +45,25 @@ describe('ilk açılış sırası', () => {
     expect(withPendingLook({ firstLook: own }, { firstLookPending: LOOK }).firstLook).toEqual(own)
     expect(withPendingLook({ flags: [] }, {})).toEqual({ flags: [] })
     expect(normalizeProfile(withPendingLook({}, { firstLookPending: { ...LOOK, method: 'self' } })).firstLook.method).toBe('self')
+  })
+})
+
+// Doğrulama 2026-09-29: kayda yazma ve silme de sınanır (App.jsx bunları store.setSetting ile uygular)
+describe('ilk açılış: kayıt akışı', () => {
+  it('İlk Bakış sonucu yazılır, hesaba geçilir; kurulum bitince bekleyen kayıt silinir ve sıra biter', () => {
+    let s = { ...INTRO }
+    const apply = (upd) => { s = { ...s, ...upd } }
+    expect(firstOpenStep(s)).toBe('look')
+    apply(afterLook(LOOK))
+    expect(s.firstLookPending).toEqual(LOOK)
+    expect(firstOpenStep(JSON.parse(JSON.stringify(s)))).toBe('account') // kapatıp açınca da
+    apply(ACCOUNT)
+    expect(firstOpenStep(s)).toBe('onboarding')
+    const profile = withPendingLook({}, s)
+    expect(profile.firstLook).toEqual(LOOK)
+    apply(afterSetup())
+    apply({ profile, ...SCREENING })
+    expect(s.firstLookPending).toBeNull()
+    expect(firstOpenStep(s)).toBeNull()
   })
 })

@@ -75,8 +75,10 @@ function Timeline({ times, gap }) {
 }
 
 // bar: kurulum ilerleme payı [başlangıç, bitiş] ya da null (çubuk yok: ilk açılışta hesaptan önce, lib/setupFlow.js;
-// üstteki boşluk kalır, yerleşim kaymaz); onDone({ blinks, seconds, method, date })
-export default function FirstLook({ trueDepth = false, bar = [0, 0.2], onDone }) {
+// üstteki boşluk kalır, yerleşim kaymaz); onDone({ blinks, seconds, method, date }): "Devam"a basınca.
+// onResult(aynı nesne): sonuç ekranı açılır açılmaz bir kez (isteğe bağlı; ilk açılışta App.jsx kaydeder: kişi sonuç
+// ekranında uygulamayı kapatsa da 20 sn'lik ölçüm kaybolmaz).
+export default function FirstLook({ trueDepth = false, bar = [0, 0.2], onDone, onResult = null }) {
   const [phase, setPhase] = useState('intro') // intro | look | tap | result
   const [method, setMethod] = useState(null) // 'truedepth' | 'camera' | 'self'
   const [left, setLeft] = useState(LOOK_SEC)
@@ -214,6 +216,14 @@ export default function FirstLook({ trueDepth = false, bar = [0, 0.2], onDone })
     return { gap, reading, quote: quote && quote.words >= 3 ? quote : null, pause: pause?.notable ? pause : null }
   }, [phase, times, method])
 
+  // Sonuç nesnesi bir kez kurulur; onResult ve "Devam" aynı nesneyi verir
+  const look = useRef(null)
+  useEffect(() => {
+    if (phase !== 'result') return
+    look.current = { blinks: count, seconds: LOOK_SEC, method: method ?? 'self', date: new Date().toISOString() }
+    onResult?.(look.current)
+  }, [phase]) // eslint-disable-line react-hooks/exhaustive-deps
+
   if (phase === 'result') {
     const { gap, reading, quote, pause } = res
     return (
@@ -243,7 +253,7 @@ export default function FirstLook({ trueDepth = false, bar = [0, 0.2], onDone })
         <div className="grow" />
         <p className="oq-src">{U.source(reading ? C.textSource : null, !!pause)}</p>
         {DEV && diag && <p className="oq-src" style={{ fontFamily: 'var(--font-mono)' }}>tanı · {diag.fps} kare/sn · taban {diag.base} · doruklar {diag.peaks.join(' ') || '—'}</p>}
-        <button type="button" className="btn" onClick={() => onDone({ blinks: count, seconds: LOOK_SEC, method: method ?? 'self', date: new Date().toISOString() })}>
+        <button type="button" className="btn" onClick={() => onDone(look.current ?? { blinks: count, seconds: LOOK_SEC, method: method ?? 'self', date: new Date().toISOString() })}>
           {U.next} <ArrowRight size={18} aria-hidden="true" className="fl-arrow" />
         </button>
       </main>

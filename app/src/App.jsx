@@ -32,7 +32,7 @@ import { hasConsent, shouldAsk, recordConsent, recordDecline } from './lib/conse
 import { getPrefs, setPrefs } from './lib/prefs.js'
 import IntroFilm from './components/IntroFilm.jsx'
 import { INTRO_VERSION } from './lib/intro.js'
-import { firstOpenStep, withPendingLook } from './lib/setupFlow.js'
+import { firstOpenStep, withPendingLook, afterLook, afterSetup } from './lib/setupFlow.js'
 import { ageBandFromAge } from './lib/profile.js'
 import { ageFromBirthDate, emptyIdentity } from './lib/identity.js'
 import { screeningFromProfile, profileFromScreening, normalizeProfile } from './lib/profile.js'
@@ -585,12 +585,14 @@ export default function App() {
   const markIntro = () => { store.setSetting('intro', { seen: true, version: INTRO_VERSION, date: new Date().toISOString() }); if (!settings.releaseSeen) store.setSetting('releaseSeen', latestRelease()?.id ?? null); refresh() }
   if (screen === 'intro') return <IntroFilm replay onDone={() => go(lastTab)} />
   // İlk açılış sırası (lib/setupFlow.js; karar 2026-09-29 (b) "ilk açılışta önce ölçüm"): giriş → İlk Bakış → hesap →
-  // kurulum. İlk Bakış'ta ilerleme çubuğu yok (hesap ekranında da yok; ilk an form gibi değil). Sonuç biter bitmez
-  // ayrı kayda yazılır: uygulama hesap ekranında kapansa da kaybolmaz.
+  // kurulum. İlk Bakış'ta ilerleme çubuğu yok (hesap ekranında da yok; ilk an form gibi değil). Sonuç, sonuç ekranı açılır
+  // açılmaz ayrı kayda yazılır (yenilemeden: ekran sonuçta kalır); uygulama sonuç ya da hesap ekranında kapansa da
+  // kaybolmaz. "Devam" hesaba geçirir.
+  const applySetup = (upd) => { for (const [k, v] of Object.entries(upd)) store.setSetting(k, v) }
   const first = firstOpenStep(settings)
   if (first === 'intro') return <IntroFilm onDone={markIntro} />
   if (first === 'look') {
-    return <FirstLook trueDepth={native.trueDepth} bar={null} onDone={(look) => { store.setSetting('firstLookPending', look); refresh() }} />
+    return <FirstLook trueDepth={native.trueDepth} bar={null} onResult={(look) => applySetup(afterLook(look))} onDone={(look) => { applySetup(afterLook(look)); refresh() }} />
   }
 
   // --- Hesap → Seni tanıyalım → 7 gün ücretsiz (Build 23b; Artifact "Hesap ve Profil Taslağı") ---
@@ -729,8 +731,9 @@ export default function App() {
   if (screen === 'account') return <AccountStart onDone={finishAccount} onCancel={() => go('profile')} />
   if (first === 'account') return <AccountStart onDone={finishAccount} />
   if (first === 'onboarding') {
-    // İlk açılış (Artifact "Nefona Başlangıç Kartı"; sahibinin 27 Eylül kararı): güvenlik bilgisi → İlk Bakış → iris
-    // haritasının 4 sorusu. Hesaptan hemen sonra, "Seni tanıyalım"dan ve denemeden önce. Güvenlik bilgi ekranıdır; uygulama
+    // İlk açılış kurulumu (lib/setupFlow.js; karar 2026-09-29 (b)): güvenlik bilgisi → iris haritasının 4 sorusu. İlk Bakış
+    // hesaptan önce yapıldı (sonucu yoksa ya da geçersizse burada, güvenlik bilgisinden sonra). Hesaptan sonra, "Seni
+    // tanıyalım"dan ve denemeden önce. Güvenlik bilgi ekranıdır; uygulama
     // hiçbir durumda kilitlenmez (sahibinin kararı: "bilgi olarak çıkmalı, uygulama kullanılabilmeli"). Eski sürümde
     // işaret seçip kilitli kalanlar (screening.referred) da artık geçer.
     // Doğum tarihi ve gözlük daha önce girildiyse (eski sıra) anketin yaş ve gözlük alanlarını önceden doldurur
@@ -739,7 +742,7 @@ export default function App() {
     // bitince ayrı kayıt silinir
     const initial = withPendingLook(settings.profile ?? { ...profileFromScreening(settings.screening), ...(setupAge ? { ageBand: setupAge } : {}), ...(settings.setupCorrection ? { correction: settings.setupCorrection } : {}) }, settings)
     const finishSetup = (p) => {
-      store.setSetting('firstLookPending', null)
+      applySetup(afterSetup())
       saveProfile(p)
     }
     return <Onboarding initial={initial} trueDepth={native.trueDepth} sessions={sessions} domainOf={domainOfSession} onDone={finishSetup} />

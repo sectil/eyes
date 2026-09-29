@@ -15,7 +15,7 @@ export const RELEASES = [
       // Cihazda denenmedi.
       { kind: 'change', text: "Yeni kurulumda önce ölçüm: uygulamayı ilk kez açan kişi giriş ekranından sonra doğrudan İlk Bakış'a geçer, kamera 20 saniyede kaç kez göz kırptığını sayar. Hesap, güvenlik bilgisi ve sorular sonuçtan sonra gelir. Kurulumu bitirmiş olan için hiçbir şey değişmez." },
       // Bug 32 (sahibinin onayı): hesap ekranı eşitlenmeyen ilerlemeyi vaat ediyordu. Profil yalnız izinle gider.
-      { kind: 'fix', text: "Hesap ekranı ve Profilim'deki hesap satırı artık doğru söylüyor: izin verirsen profilin (ad, doğum tarihi, şehir, gözlük) hesabına kaydedilir; ölçümlerin yalnız telefonunda kalır. Önceki metin ilerlemenin yeni telefona taşındığını söylüyordu, taşınmıyordu." },
+      { kind: 'fix', text: "Hesap ekranı ve Profilim'deki hesap satırı artık doğru söylüyor: izin verirsen profilin (ad, doğum tarihi, şehir, gözlük) hesabına kaydedilir; ölçümlerin telefonunda saklanır. Önceki metin ilerlemenin yeni telefona taşındığını söylüyordu, taşınmıyordu." },
       // Karar 2026-09-29 (YAPILACAKLAR "Sonsuz yol ve ilk 5 saniye" (a)): E testi ilk günden haftada bir. Başlangıç
       // kuralı lib/trend.js WEEKLY_MIN_BASELINE_TESTS (3 → 7 test; VARSAYIM, kanıt kartında yazar). Cihazda denenmedi.
       // Son cümle (inceleme 2026-09-29): kural eski ölçümlere de uygulanır; iki göz serisi (hep haftalık) ve seyrek

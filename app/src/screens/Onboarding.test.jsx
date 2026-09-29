@@ -63,3 +63,40 @@ describe('İlk Bakış ilerleme çubuğu', () => {
     expect(renderToStaticMarkup(h(FirstLook, { onDone: () => {} }))).toContain('role="progressbar"')
   })
 })
+
+// Doğrulama 2026-09-29: sonuç, sonuç ekranı açılır açılmaz bildirilir (onResult); "Devam" aynı nesneyi verir
+describe('İlk Bakış: sonuç ekranı açılınca kayıt', () => {
+  it('kamerasız sayım: 20 sn sonra onResult bir kez, sonra "Devam" aynı nesneyle onDone', async () => {
+    vi.useFakeTimers()
+    try {
+      const container = document.createElement('div')
+      const root = createRoot(container)
+      const results = []
+      const dones = []
+      await act(async () => root.render(h(FirstLook, { bar: null, onResult: (l) => results.push(l), onDone: (l) => dones.push(l) })))
+      const buttons = () => container.querySelectorAll((n) => n.nodeName === 'BUTTON')
+      const btn = (text) => buttons().find((x) => x.textContent.includes(text))
+      const fire = (node, type) => {
+        const ev = { type, target: node, bubbles: true, defaultPrevented: false, preventDefault() { this.defaultPrevented = true }, stopPropagation() {}, timeStamp: Date.now(), pointerId: 1, button: 0, isPrimary: true }
+        for (let n = node; n; n = n.parentNode) for (const fn of n.listeners?.[type] ?? []) fn(ev)
+      }
+      await act(async () => btn('Kamerasız').click())
+      const tap = () => container.querySelectorAll((n) => n.nodeName === 'BUTTON' && String(n.getAttribute('class') ?? n.className).includes('fl-tap'))[0]
+      expect(tap()).toBeTruthy()
+      for (let i = 0; i < 4; i++) {
+        await act(async () => fire(tap(), 'pointerdown'))
+        await act(async () => { vi.advanceTimersByTime(1000) })
+      }
+      await act(async () => { vi.advanceTimersByTime(25000) })
+      expect(container.textContent).toContain('kez kırptın')
+      expect(results).toHaveLength(1)
+      expect(results[0]).toMatchObject({ blinks: 4, seconds: 20, method: 'self' })
+      await act(async () => btn('Devam').click())
+      expect(dones).toHaveLength(1)
+      expect(dones[0]).toBe(results[0])
+      await act(async () => root.unmount())
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+})

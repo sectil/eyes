@@ -6,7 +6,8 @@ import { validEmail, normalizeEmail, cleanCode, validCode, sendEmailCode, verify
 import SkyChart from '../components/SkyChart.jsx'
 import '../styles/account.css'
 
-// Hesap (Build 23b; tasarım: Artifact "Nefona Hoş Geldin Ekranı" öneri 2, onaylı 2026-09-27): giriş ekranından sonra.
+// Hesap (Build 23b; tasarım: Artifact "Nefona Hoş Geldin Ekranı" öneri 2, onaylı 2026-09-27): ilk açılışta İlk Bakış'tan
+// sonra (lib/setupFlow.js, karar 2026-09-29 (b)); Profilim'den de açılır.
 // Seçim adımı tam ekran sahne: üstte Pegasus gökyüzü (SkyChart), altta giriş ekranındaki iris ufku gibi kavisli zemin;
 // başlık ve seçenekler kavisin altında tek blok. E-posta ve kod adımları aynı dilde (altın odak köşeli simge).
 // Apple ile giriş yalnız iPhone uygulamasında. E-posta: 6 haneli kod (bağlantı yerine kod: uygulamadan çıkmadan,
@@ -15,8 +16,9 @@ import '../styles/account.css'
 // Google varsa Apple zorunlu (App Store 4.8); Apple zaten var.
 // onDone({ mode, userId?, email?, date }, { givenName? })
 // Hesabın sakladığı (Profilim'deki hesap satırı da aynı gerçeği söyler). Profil (ad, doğum tarihi, şehir, gözlük) yalnız
-// "Profilini hesabına kaydet" izniyle gider (App.jsx syncUp, lib/consent.js profileSync); ölçümler hiç gitmez.
-export const ACCOUNT_KEEPS = 'İzin verirsen profilin hesabına kaydedilir; ölçümlerin yalnız telefonunda kalır.'
+// "Profilini hesabına kaydet" izniyle gider (App.jsx syncUp, lib/consent.js profileSync); ölçümler hesaba gitmez, telefonda
+// saklanır. "Yalnız telefonunda kalır" denmez: Nef açıksa özet sayılar Nef sunucusuna gider (saklanmaz; consent.js coach).
+export const ACCOUNT_KEEPS = 'İzin verirsen profilin hesabına kaydedilir; ölçümlerin telefonunda saklanır.'
 
 export default function AccountStart({ onDone, onCancel = null }) {
   const [step, setStep] = useState('choose') // choose | email | code
