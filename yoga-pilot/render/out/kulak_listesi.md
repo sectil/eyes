@@ -1,5 +1,9 @@
 # Kulak listesi — Ders 2 · 15 dk pilot (v3)
 
+> **Kör karardan (Kapı 2) SONRA verilir.** Bu liste sesleri gerçek adlarıyla ve adlı dosyalarla anıyor; zamanlar sesten
+> sese birkaç saniye kayıyor (ör. a.durus, k.yan). Kör dinleme bitmeden gösterilirse hangi `ses` numarasının kim olduğu
+> anlaşılır. Kör paket (`out/kor/`) bu listeyi içermez; anahtar `out/_kor_anahtar.json` (paket dışı).
+
 Model sesi dinleyemez. Aşağıdakilerin hepsi ölçümle bulundu; karar kulağındır. Zamanlar dakika:saniye, parçanın başladığı saniyedir. A ve B dosyalarında konuşma aynı yerdedir, yalnız müzik farklıdır. Bu yüzden her ses için tek zaman verildi; ikisinde de dinlenebilir.
 
 ## Neslihan — `ders2-15dk-nes-A.mp3` ve `ders2-15dk-nes-B.mp3`
@@ -43,8 +47,49 @@ Toplam: 158 parçadan 29 parça v3'te yeniden işlendi (yumuşak tepe sıkışt�
 
 Toplam: 158 parçadan 141 parça v3'te yeniden işlendi (yumuşak tepe sıkıştırma 132 parçada). Zaman çizelgesinde `v3-yeniden-islendi`, `v3-yumusak-tepe`, `v3-kisa-duzey`, `v3-yerel-kisma` bayraklarıyla işaretli. Öteki çok parçalı birimlerin kesimleri de yalnız ölçüyle denetlendi (`kesim-kulak` bayrağı); sayım ve beden taraması dizilerinde öğe sonları kesik ya da yapışık geliyorsa not al.
 
-## Genel (iki ses, dört dosya)
+## Nefona Hoca — `ders2-15dk-hoc-A.mp3` ve `ders2-15dk-hoc-B.mp3`
+
+Üçüncü ses (PLAN.v3 §F "A" satırı, karar 1–2). Metin units.json "tts" aynen; kör karşılaştırma için pilot metni incelemeden önce okutuldu. İki nokta (`:`) içeren iki birim (n1.sec, n2.hatirla) bu yüzden aynı sorunu taşıyor.
+
+| Zaman | Birim | Neden |
+|---|---|---|
+| 00:37–00:41 | a.durus | Scribe "sırt üstü" yazdı, metinde "sırtüstü". Harfi harfine eşleşmedi; v3.2 istisnasıyla eş sayılıyor, editör onayı bekliyor. "sırtüstü" doğru ve doğal vurguyla mı söyleniyor? |
+| 01:49 (kesim 01:45–01:55) | n1.sec | Kural dışı kesim (v3.1): üç çekimde de en uzun duraklama "önerim şu:" sonrasındaydı (kural kesimi hizasızlık 0,308). Kesim cümle sonundaki duraklamadan yapıldı (hizasızlık 0,000, hızlar 5,39 / 5,55 hece/sn). İkinci parçanın başı doğal mı, ses kesik mi? |
+| 02:52–03:05 | car.sag1 | Scribe "baş parmağı" yazdı, metinde "başparmağı". Harfi harfine eşleşmedi; v3.2 istisnasıyla eş sayılıyor, editör onayı bekliyor. "başparmağı" doğru ve doğal vurguyla mı söyleniyor? |
+| 02:52–05:32 | car.sag1 | Beden taraması dizileri (car.sag1, car.sag2, car.sag3, car.sag4, car.sol1, car.sol2, car.sol3, car.sol4, car.sirt, car.on1, car.on2, car.on3, car.butun): taşıyıcı eklem perde farkı en çok 4,05–11,83 yt (eşik 2 yt; seçimde yumuşak ihlal, eleme değil) ve öğe hızı 3,2–4,7 hece/sn (bant 5,0–6,2 altı). Öğeler tek tek yapıştırılmış gibi mi, perde iniş çıkışı rahatsız ediyor mu, tempo çok mu yavaş? Doğrulayıcı ölçüsü: öğe sonunda perde ≈ 62–78 Hz'e iniyor, sonraki öğe ≈ 100–130 Hz'den başlıyor; F0 yayılımı (f0_sd ortancası) hoc 3,75 / nes 3,38 / hak 2,84; iki perde ölçücü ortancada 103,7 ve 121,4 Hz veriyor (düzensiz ses üretimi belirtisi olabilir). **Öğe sonlarında hırıltılı/çıtırtılı düşüş (gırtlak çıtırtısı) var mı?** |
+| 06:05–06:15 | c2.yer | Scribe "nefeste ise" yazdı, metinde "nefesteyse". Harfi harfine eşleşmedi; v3.2 istisnasıyla eş sayılıyor, editör onayı bekliyor. "nefesteyse" doğru ve doğal vurguyla mı söyleniyor? |
+| 06:30–06:34 | c2.alt | Scribe "ellerinde ise" yazdı, metinde "ellerindeyse". Harfi harfine eşleşmedi; v3.2 istisnasıyla eş sayılıyor, editör onayı bekliyor. "ellerindeyse" doğru ve doğal vurguyla mı söyleniyor? |
+| 07:04–07:10 | c2.sayac | Derin evrede hız 6,49 hece/sn (tavan 5,0, VARSAYIM; raporlanır, eleme değil). Doğrulayıcının parça ölçüsü: #1 6,82 (9 hece / 1,32 sn konuşma), #2 6,28 hece/sn. Bu evre için aceleci mi? |
+| 07:13–08:08 | car.sayi | Sayım dizisinde perde sıçraması (taşıyıcı eklemi > 2 yt): n09→n08 3,29, n03→n02 4,32, n02→n01 −5,61 yt; "iki" ≈ 129 Hz, öteki sayılar ≈ 76–99 Hz. Üç çekimin hepsi aşıyordu. "iki" dizinin dışında mı duyuluyor? |
+| 08:15–08:22 | c2.birak | Derin evrede hız 5,82 hece/sn (tavan 5,0, VARSAYIM; raporlanır, eleme değil). Doğrulayıcının parça ölçüsü: #1 (08:15–08:17, "Sayıları bırakabilirsin.") 7,30 hece/sn (10 hece / 1,37 sn konuşma), hoc'un Derin evredeki en hızlı parçası. Bu evre için aceleci mi? |
+| 09:04 | br.orta | Konuşma izinde 10 kHz üstü ani olay en çok bu parçada (br.orta#1: A 21, B 20 olay; ölçü sınıfı "söz içeriği", kurgu kaynaklı değil). Ünsüz başlangıçları ya da ıslıklı sesler sert, tıslayan ya da çıtırtılı mı? |
+| 10:03 | c4.patika | Parçanın başında veri kenarı basamağı (baş −52,0 dBFS, eşik −60; ölçüyle tık yok). Sözün ilk anında tık ya da kesik başlangıç var mı? |
+| 10:03–10:07 | c4.patika | Derin evrede hız 6,06 hece/sn (tavan 5,0, VARSAYIM; raporlanır, eleme değil; doğrulayıcı ölçüsü 6,11). Bu evre için aceleci mi? |
+| 10:17–10:19 | c4.yol#2 | Derin evrede hız 6,08 hece/sn (doğrulayıcı ölçüsü; tavan 5,0, VARSAYIM). "Kendi hızında yürüyorsun." aceleci mi? |
+| 11:07 | c4.don | Parçanın başında veri kenarı basamağı (baş −46,5 dBFS, eşik −60; ölçüyle tık yok). Sözün ilk anında tık ya da kesik başlangıç var mı? |
+| 11:31–11:34 | c4.solma#2 | Derin evrede hız 5,99 hece/sn (doğrulayıcı ölçüsü; tavan 5,0, VARSAYIM). Aceleci mi? |
+| 11:54 (kesim 11:48–11:58) | n2.hatirla | Kesim kurala uygun ve cümle sınırında (hizasızlık 0,046), ama pay çok dar (1,025): "şunu:" duraklaması cümle sonuna neredeyse eşit. Kesim doğru yerde mi, ikinci parçanın başı doğal mı? |
+| 11:54–11:58 | n2.hatirla#2 | Derin evrede hız 6,13 hece/sn (doğrulayıcı ölçüsü; tavan 5,0, VARSAYIM). Alıntı cümle ("Kendime dinlenmeye izin veriyorum.") aceleci mi? |
+| 12:16 | n2.dilek | Örnek: konuşma/yatak farkının en düşük olduğu parçalardan (n2.dilek, B: 16,42 dB; eşik 15). Söz müziğin içinde net anlaşılıyor mu? |
+| 12:26 | k.anahtar3 | Parçanın başında veri kenarı basamağı (baş −59,1 dBFS, eşik −60; ölçüyle tık yok). Sözün ilk anında tık ya da kesik başlangıç var mı? |
+| 13:30 | k.oda.ayrinti | Parçanın başında veri kenarı basamağı (baş −55,5 dBFS, eşik −60; ölçüyle tık yok). Sözün ilk anında tık ya da kesik başlangıç var mı? |
+| 13:42–13:46 | k.zaman | Scribe cümleyi soru işaretiyle yazdı ("hatırlıyorsun?"); sözcükler birebir. Ezgi bildirme mi, soru mu? |
+| 13:50–13:54 | k.yan | Scribe "sırt üstü" yazdı, metinde "sırtüstü". Harfi harfine eşleşmedi; v3.2 istisnasıyla eş sayılıyor, editör onayı bekliyor. "sırtüstü" doğru ve doğal vurguyla mı söyleniyor? |
+| 14:52 | k.son | Örnek: konuşma/yatak farkının en düşük olduğu parçalardan (k.son, B: 16,27 dB; eşik 15). Söz müziğin içinde net anlaşılıyor mu? |
+
+Toplam: 158 parça, hepsi seçimde v3 kuralıyla işlendi (yeniden işleme gerekmedi; yumuşak tepe sıkıştırma 0, sınırlayıcı > 3 dB 0, kısa parça 27, hepsi LUFS yolunda). Kesimleri yalnız ölçüyle denetlenen 32 birim (`kesim-kulak`): a.hosgeldin, br.orta, c1.cerceve, c1.gecis.on, c2.akis, c2.birak, c2.dikkat, c2.durak, c2.sayac, c2.x.ritim, c2.yer, c4.gunes, c4.solma, c4.yol, car.butun, car.on1, car.on2, car.on3, car.sag1, car.sag2, car.sag3, car.sag4, car.sayi, car.sirt, car.sol1, car.sol2, car.sol3, car.sol4, k.hareket, n1.birak, n1.sec, n2.hatirla. Bunlardan c2.durak ve c2.x.ritim 15 dk planında çalmıyor. Sayım ve beden taraması dizilerinde öğe sonları kesik ya da yapışık geliyorsa not al. Karışımın konuşma izinde 10 kHz üstü ani olay ("söz içeriği") hoc'ta A 357 / B 363; aynı ölçü nes'te 85 / 95, hak'ta 77 / 72. Olaylar 101 parçaya yayılı (en çok br.orta#1, k.yan, a.konfor, a.durus, a.gozler). Kurgu noktası ve yalnız karışım olayı 0. Bu sesin ünsüzleri kulağa sert ya da tıslayan geliyor mu, genel olarak not al.
+
+## Genel (üç ses, altı dosya)
 
 - Dönüş tınısı (k.donus'tan 2 sn önce): tını ve düzey.
 - İmge katmanı (c4.yer → c4.solma) ve doğa katmanı: düzey ve tını; yinelenen esinti.
+- **B müziği yaklaşık 24 sn'de bir soluyor (üç sesin B dosyalarında aynı yatak):** yatak ≈ 20 dB iniyor, ≈ 1,5 sn içinde
+  hızla geri çıkıyor (3 sn ST yükselme en çok 6,82 dB/sn; A yatağında tını dışı en hızlı 0,94 dB/sn). Örnek yerler:
+  00:18–00:30, 03:54–04:06, 09:06–09:18 (toplam ≈ 37 kez, 00:22'den 14:46'ya). Bu rahatsız ediyor mu, konuşmanın altında
+  fark ediliyor mu, müzik 'pompalıyor' gibi mi? Konuşma/yatak eşiği (≥ 15 dB) bu yüzden bozulmuyor; soru yalnız kulağın.
+- **Derin evre hız tavanı (≤ 5,0 hece/sn) VARSAYIM ve üç seste de aşılıyor** (doğrulayıcı ölçüsü; Derin evre parça
+  ortancası, 5,0 üstü parça): hoc 5,21, 24/41; nes 5,25, 25/41; hak 5,65, 31/43. Derin evre üç seste de aceleci mi?
+  Karar plan aşamasında (tavan korunacak mı, gevşetilecek mi).
+- Ağız şapırtısı: konuşma içinde 8 kHz üstü ani olay sayısı hoc-A 267, hak-A 227, nes-A 149 (hepsi çekimin kendi
+  içeriği, kurgu kaynaklı değil). Şapırtı ya da sert patlamalı ünsüz dikkat dağıtıyor mu?
 - A/B kaynak ayrıntıları (`out/_ab_details.json`) dinlemeden sonra açılır.

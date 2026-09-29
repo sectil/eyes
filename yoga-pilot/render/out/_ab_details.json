@@ -2173,6 +2173,1087 @@
      "gain_db": 0.0
     }
    ]
+  },
+  "ders2-15dk-hoc-A": {
+   "source": "el",
+   "placements": [
+    {
+     "role": "Varış açılışı",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-v-aday.keyA.wav",
+     "t0": 0.0,
+     "t1": 113.935,
+     "file_offset_s": 0.0,
+     "gain_db": -8.66,
+     "body_lufs_raw_after_eq": -15.34
+    },
+    {
+     "role": "Varış-Derinleşme ailesi",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-vd-a.wav",
+     "t0": 105.935,
+     "t1": 354.508,
+     "file_offset_s": 0.0,
+     "gain_db": -7.97,
+     "body_lufs_raw_after_eq": -16.03
+    },
+    {
+     "role": "Derin ailesi",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-derin-a.wav",
+     "t0": 346.508,
+     "t1": 579.451,
+     "file_offset_s": 4.5,
+     "gain_db": -10.02,
+     "body_lufs_raw_after_eq": -13.98
+    },
+    {
+     "role": "Derin ailesi",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-derin-b.keyD.wav",
+     "t0": 571.451,
+     "t1": 762.929,
+     "file_offset_s": 17.5,
+     "gain_db": -1.88,
+     "body_lufs_raw_after_eq": -22.12
+    },
+    {
+     "role": "Kapanış",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-kapanis.wav",
+     "t0": 754.929,
+     "t1": 900.0,
+     "file_offset_s": 34.929,
+     "gain_db": -10.42,
+     "body_lufs_raw_after_eq": -13.58
+    }
+   ],
+   "imge": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-imge.wav",
+    "t0": 571.451,
+    "t1": 695.49,
+    "file_offset_s": 0.0,
+    "gain_db": -8.04
+   },
+   "crossfades": [
+    {
+     "t0": 105.935,
+     "t1": 113.935,
+     "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+     "rho_min": -0.119,
+     "rho_max": 0.096,
+     "rho_mean": -0.004
+    },
+    {
+     "t0": 346.508,
+     "t1": 354.508,
+     "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+     "rho_min": -0.382,
+     "rho_max": 0.32,
+     "rho_mean": -0.058
+    },
+    {
+     "t0": 571.451,
+     "t1": 579.451,
+     "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+     "rho_min": -0.045,
+     "rho_max": 0.012,
+     "rho_mean": -0.009
+    },
+    {
+     "t0": 754.929,
+     "t1": 762.929,
+     "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+     "rho_min": -0.295,
+     "rho_max": 0.156,
+     "rho_mean": -0.047
+    }
+   ],
+   "crossfade_placement": [
+    {
+     "what": "Varış → Varış-Derinleşme ailesi",
+     "cue": [
+      "phase:derinlesme",
+      105.935
+     ],
+     "start": 105.935,
+     "speech_cover": 0.87
+    },
+    {
+     "what": "Varış-Derinleşme → Derin",
+     "cue": [
+      "phase:derin",
+      346.508
+     ],
+     "start": 346.508,
+     "speech_cover": 0.77
+    },
+    {
+     "what": "Derin → Kapanış",
+     "cue": [
+      "phase:kapanis",
+      754.929
+     ],
+     "start": 754.929,
+     "speech_cover": 0.54
+    }
+   ],
+   "notes": [
+    "Derin ailesi: aile içi geçiş 571.45 sn (c4.yer; geçiş penceresinde konuşma payı 0.44; uygun aralık 552.4–574.0)"
+   ],
+   "grid_g_s": null,
+   "tone_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/donus.synth-D5.wav",
+   "nature": [
+    {
+     "t0": 0.0,
+     "t1": 34.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 24.623,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 30.0,
+     "t1": 64.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 13.82,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 60.0,
+     "t1": 94.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 22.019,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 90.0,
+     "t1": 124.0,
+     "loop": "orman-1.wav",
+     "rotation_s": 20.739,
+     "gain_db": 24.46
+    },
+    {
+     "t0": 120.0,
+     "t1": 154.0,
+     "loop": "orman-2.wav",
+     "rotation_s": 28.519,
+     "gain_db": 20.74
+    },
+    {
+     "t0": 150.0,
+     "t1": 184.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 22.937,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 180.0,
+     "t1": 214.0,
+     "loop": "orman-1.wav",
+     "rotation_s": 24.141,
+     "gain_db": 24.46
+    },
+    {
+     "t0": 210.0,
+     "t1": 244.0,
+     "loop": "orman-2.wav",
+     "rotation_s": 14.805,
+     "gain_db": 20.74
+    },
+    {
+     "t0": 240.0,
+     "t1": 274.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 27.725,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 270.0,
+     "t1": 304.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 20.105,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 300.0,
+     "t1": 334.0,
+     "loop": "orman-2.wav",
+     "rotation_s": 21.176,
+     "gain_db": 20.74
+    },
+    {
+     "t0": 330.0,
+     "t1": 364.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 21.301,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 360.0,
+     "t1": 394.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 6.295,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 390.0,
+     "t1": 424.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 2.635,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 420.0,
+     "t1": 454.0,
+     "loop": "orman-1.wav",
+     "rotation_s": 23.089,
+     "gain_db": 24.46
+    },
+    {
+     "t0": 450.0,
+     "t1": 484.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 5.955,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 480.0,
+     "t1": 514.0,
+     "loop": "orman-1.wav",
+     "rotation_s": 12.083,
+     "gain_db": 24.46
+    },
+    {
+     "t0": 510.0,
+     "t1": 544.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 14.988,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 540.0,
+     "t1": 574.0,
+     "loop": "orman-2.wav",
+     "rotation_s": 6.909,
+     "gain_db": 20.74
+    },
+    {
+     "t0": 570.0,
+     "t1": 604.0,
+     "loop": "orman-1.wav",
+     "rotation_s": 6.219,
+     "gain_db": 24.46
+    },
+    {
+     "t0": 600.0,
+     "t1": 634.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 25.871,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 630.0,
+     "t1": 664.0,
+     "loop": "orman-2.wav",
+     "rotation_s": 21.709,
+     "gain_db": 20.74
+    },
+    {
+     "t0": 660.0,
+     "t1": 694.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 17.695,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 690.0,
+     "t1": 724.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 14.019,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 720.0,
+     "t1": 754.0,
+     "loop": "orman-1.wav",
+     "rotation_s": 20.579,
+     "gain_db": 24.46
+    },
+    {
+     "t0": 750.0,
+     "t1": 784.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 8.993,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 780.0,
+     "t1": 814.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 2.092,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 810.0,
+     "t1": 844.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 17.815,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 840.0,
+     "t1": 874.0,
+     "loop": "orman-1.wav",
+     "rotation_s": 19.857,
+     "gain_db": 24.46
+    },
+    {
+     "t0": 870.0,
+     "t1": 900.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 24.825,
+     "gain_db": 20.96
+    }
+   ],
+   "room": [
+    {
+     "t0": 0.0,
+     "t1": 32.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 15.857,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 30.0,
+     "t1": 62.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 29.821,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 60.0,
+     "t1": 92.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 23.09,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 90.0,
+     "t1": 122.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 0.675,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 120.0,
+     "t1": 152.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 7.719,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 150.0,
+     "t1": 182.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 26.77,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 180.0,
+     "t1": 212.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 4.319,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 210.0,
+     "t1": 242.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 29.452,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 240.0,
+     "t1": 272.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 3.485,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 270.0,
+     "t1": 302.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 7.935,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 300.0,
+     "t1": 332.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 16.106,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 330.0,
+     "t1": 362.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 9.294,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 360.0,
+     "t1": 392.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 6.26,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 390.0,
+     "t1": 422.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 19.494,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 420.0,
+     "t1": 452.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 28.939,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 450.0,
+     "t1": 482.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 29.062,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 480.0,
+     "t1": 512.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 4.552,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 510.0,
+     "t1": 542.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 6.809,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 540.0,
+     "t1": 572.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 26.328,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 570.0,
+     "t1": 602.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 26.101,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 600.0,
+     "t1": 632.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 28.097,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 630.0,
+     "t1": 662.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 7.108,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 660.0,
+     "t1": 692.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 12.653,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 690.0,
+     "t1": 722.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 5.933,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 720.0,
+     "t1": 752.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 12.557,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 750.0,
+     "t1": 782.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 19.973,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 780.0,
+     "t1": 812.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 6.224,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 810.0,
+     "t1": 842.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 6.338,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 840.0,
+     "t1": 872.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 3.349,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 870.0,
+     "t1": 900.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 3.909,
+     "gain_db": 0.0
+    }
+   ]
+  },
+  "ders2-15dk-hoc-B": {
+   "source": "dalga",
+   "placements": [
+    {
+     "role": "Varış açılışı",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_varis_x.wav",
+     "t0": 0.0,
+     "t1": 113.935,
+     "file_offset_s": 72.0,
+     "gain_db": 0.33,
+     "body_lufs_raw_after_eq": -24.33
+    },
+    {
+     "role": "Varış-Derinleşme ailesi",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd_family.wav",
+     "t0": 105.935,
+     "t1": 354.508,
+     "file_offset_s": 89.935,
+     "gain_db": 0.26,
+     "body_lufs_raw_after_eq": -24.26
+    },
+    {
+     "role": "Derin ailesi",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin_family.wav",
+     "t0": 346.508,
+     "t1": 762.929,
+     "file_offset_s": 42.508,
+     "gain_db": 0.39,
+     "body_lufs_raw_after_eq": -24.39
+    },
+    {
+     "role": "Kapanış",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_kapanis.wav",
+     "t0": 754.929,
+     "t1": 900.0,
+     "file_offset_s": 42.929,
+     "gain_db": 0.31,
+     "body_lufs_raw_after_eq": -24.31
+    }
+   ],
+   "imge": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_imge.wav",
+    "t0": 571.451,
+    "t1": 695.49,
+    "file_offset_s": 19.451,
+    "gain_db": 7.3
+   },
+   "crossfades": [
+    {
+     "t0": 105.935,
+     "t1": 113.935,
+     "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+     "rho_min": 0.919,
+     "rho_max": 0.974,
+     "rho_mean": 0.944
+    },
+    {
+     "t0": 346.508,
+     "t1": 354.508,
+     "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+     "rho_min": 0.925,
+     "rho_max": 0.973,
+     "rho_mean": 0.954
+    },
+    {
+     "t0": 754.929,
+     "t1": 762.929,
+     "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+     "rho_min": 0.955,
+     "rho_max": 0.987,
+     "rho_mean": 0.969
+    }
+   ],
+   "crossfade_placement": [
+    {
+     "what": "Varış → Varış-Derinleşme ailesi",
+     "cue": [
+      "phase:derinlesme",
+      105.935
+     ],
+     "start": 105.935,
+     "speech_cover": 0.87
+    },
+    {
+     "what": "Varış-Derinleşme → Derin",
+     "cue": [
+      "phase:derin",
+      346.508
+     ],
+     "start": 346.508,
+     "speech_cover": 0.77
+    },
+    {
+     "what": "Derin → Kapanış",
+     "cue": [
+      "phase:kapanis",
+      754.929
+     ],
+     "start": 754.929,
+     "speech_cover": 0.54
+    }
+   ],
+   "notes": [
+    "ızgara: ölçü 4 sn, 24 ölçülük armoni döngüsü; küresel kayma g = 72.0 sn (kapanış dosyasının doğal sonu = ders sonu); her dosya o ≡ t + g − 4·bar0 (mod 96 sn) ile yerleşir, geçişler faz eşit (aynı akor); geçiş anı ipucu klibinin başı (konuşma altı), motor notundaki \"en iyi 4,5 (mod 6) ölçüleri\" tercihi yerine"
+   ],
+   "grid_g_s": 72.0,
+   "tone_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/donus.synth-D5.wav",
+   "nature": [
+    {
+     "t0": 0.0,
+     "t1": 34.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 24.623,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 30.0,
+     "t1": 64.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 13.82,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 60.0,
+     "t1": 94.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 22.019,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 90.0,
+     "t1": 124.0,
+     "loop": "orman-1.wav",
+     "rotation_s": 20.739,
+     "gain_db": 24.46
+    },
+    {
+     "t0": 120.0,
+     "t1": 154.0,
+     "loop": "orman-2.wav",
+     "rotation_s": 28.519,
+     "gain_db": 20.74
+    },
+    {
+     "t0": 150.0,
+     "t1": 184.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 22.937,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 180.0,
+     "t1": 214.0,
+     "loop": "orman-1.wav",
+     "rotation_s": 24.141,
+     "gain_db": 24.46
+    },
+    {
+     "t0": 210.0,
+     "t1": 244.0,
+     "loop": "orman-2.wav",
+     "rotation_s": 14.805,
+     "gain_db": 20.74
+    },
+    {
+     "t0": 240.0,
+     "t1": 274.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 27.725,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 270.0,
+     "t1": 304.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 20.105,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 300.0,
+     "t1": 334.0,
+     "loop": "orman-2.wav",
+     "rotation_s": 21.176,
+     "gain_db": 20.74
+    },
+    {
+     "t0": 330.0,
+     "t1": 364.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 21.301,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 360.0,
+     "t1": 394.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 6.295,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 390.0,
+     "t1": 424.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 2.635,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 420.0,
+     "t1": 454.0,
+     "loop": "orman-1.wav",
+     "rotation_s": 23.089,
+     "gain_db": 24.46
+    },
+    {
+     "t0": 450.0,
+     "t1": 484.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 5.955,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 480.0,
+     "t1": 514.0,
+     "loop": "orman-1.wav",
+     "rotation_s": 12.083,
+     "gain_db": 24.46
+    },
+    {
+     "t0": 510.0,
+     "t1": 544.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 14.988,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 540.0,
+     "t1": 574.0,
+     "loop": "orman-2.wav",
+     "rotation_s": 6.909,
+     "gain_db": 20.74
+    },
+    {
+     "t0": 570.0,
+     "t1": 604.0,
+     "loop": "orman-1.wav",
+     "rotation_s": 6.219,
+     "gain_db": 24.46
+    },
+    {
+     "t0": 600.0,
+     "t1": 634.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 25.871,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 630.0,
+     "t1": 664.0,
+     "loop": "orman-2.wav",
+     "rotation_s": 21.709,
+     "gain_db": 20.74
+    },
+    {
+     "t0": 660.0,
+     "t1": 694.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 17.695,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 690.0,
+     "t1": 724.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 14.019,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 720.0,
+     "t1": 754.0,
+     "loop": "orman-1.wav",
+     "rotation_s": 20.579,
+     "gain_db": 24.46
+    },
+    {
+     "t0": 750.0,
+     "t1": 784.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 8.993,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 780.0,
+     "t1": 814.0,
+     "loop": "orman-4.wav",
+     "rotation_s": 2.092,
+     "gain_db": 21.93
+    },
+    {
+     "t0": 810.0,
+     "t1": 844.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 17.815,
+     "gain_db": 20.96
+    },
+    {
+     "t0": 840.0,
+     "t1": 874.0,
+     "loop": "orman-1.wav",
+     "rotation_s": 19.857,
+     "gain_db": 24.46
+    },
+    {
+     "t0": 870.0,
+     "t1": 900.0,
+     "loop": "orman-3.wav",
+     "rotation_s": 24.825,
+     "gain_db": 20.96
+    }
+   ],
+   "room": [
+    {
+     "t0": 0.0,
+     "t1": 32.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 15.857,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 30.0,
+     "t1": 62.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 29.821,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 60.0,
+     "t1": 92.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 23.09,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 90.0,
+     "t1": 122.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 0.675,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 120.0,
+     "t1": 152.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 7.719,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 150.0,
+     "t1": 182.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 26.77,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 180.0,
+     "t1": 212.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 4.319,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 210.0,
+     "t1": 242.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 29.452,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 240.0,
+     "t1": 272.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 3.485,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 270.0,
+     "t1": 302.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 7.935,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 300.0,
+     "t1": 332.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 16.106,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 330.0,
+     "t1": 362.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 9.294,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 360.0,
+     "t1": 392.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 6.26,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 390.0,
+     "t1": 422.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 19.494,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 420.0,
+     "t1": 452.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 28.939,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 450.0,
+     "t1": 482.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 29.062,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 480.0,
+     "t1": 512.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 4.552,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 510.0,
+     "t1": 542.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 6.809,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 540.0,
+     "t1": 572.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 26.328,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 570.0,
+     "t1": 602.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 26.101,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 600.0,
+     "t1": 632.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 28.097,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 630.0,
+     "t1": 662.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 7.108,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 660.0,
+     "t1": 692.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 12.653,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 690.0,
+     "t1": 722.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 5.933,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 720.0,
+     "t1": 752.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 12.557,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 750.0,
+     "t1": 782.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 19.973,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 780.0,
+     "t1": 812.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 6.224,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 810.0,
+     "t1": 842.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 6.338,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 840.0,
+     "t1": 872.0,
+     "loop": "oda-sesi-1.wav",
+     "rotation_s": 3.349,
+     "gain_db": 0.0
+    },
+    {
+     "t0": 870.0,
+     "t1": 900.0,
+     "loop": "oda-sesi-2.wav",
+     "rotation_s": 3.909,
+     "gain_db": 0.0
+    }
+   ]
   }
  }
 }

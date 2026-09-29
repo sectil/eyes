@@ -203,3 +203,99 @@ Gerçek tepe sınırlayıcı (stereo bağlı, tavan −2 dBTP): ders2-15dk-nes-A
 ## Orkestratör notu (v3 sonrası)
 hak-B c1.l10 konum ilintisi 0,948 < 0,95: kayma 0,05 ms, parça yerinde; düşüklük MP3'ün /s/ bandından. Karar: ölçüt
 bundan sonra 4 kHz altına süzülmüş sinyalde hesaplanır (SPEC v3.6). Bu karışım için ölçüt kayma ölçümüyle geçmiş sayılır.
+
+## hoc — Nefona Hoca (üçüncü ses; PLAN.v3 §F "A" satırı, karar 1–2)
+
+Üretim: `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/_hocmix/run_mix_hoc.py` (tools/mix.py değiştirilmeden içe aktarıldı; yamalar: ses kaydı, konum denetimi v3.6, raporun nes/hak bölümünü ezmemesi) · 2026-09-29T22:27:47.082058+00:00. Ses `Sr5w7dIZaRDglJ2cLaJm`, cinsiyet parametresi m, eleven_v4, akış zAYOhRc6cOKeStKp4ijv. Metin units.json "tts" aynen (kör karşılaştırma istisnası: pilot metni incelemeden önce okutuldu). A/B müzik eşlemesi `out/_ab_key.json` ile aynı; doğa/oda sırası tohumu aynı (20260929).
+
+Parçalar: seçim ajanları 158 parçanın hepsini v3 kuralıyla işledi (`sel/hoc/selection-hoc-1.json`, `-2.json`). `sel/hoc/reprocess-v3.json` mix.py girdisi olarak `reprocess_v3` ile kuruldu: 158/158 parça seçim dosyasıyla örnek örnek aynı (değişen 0, yumuşak tepe sıkıştırma 0, sınırlayıcı > 3 dB 0, < 1 sn parça 27, hepsi LUFS yolunda).
+
+**Plan (check_plan):** durum ok, esneme pref→max f=0.0884, toplam 900.0 sn, konuşma 290.892 sn, 110 olay / 127 parça, bloklar N1 C1 C2 N2 C4, duruş [285, 'c2.durak', 'sığmadı']; check_plan GEÇTİ (0 hata). Yoğunluk: 60 sn en çok 119.0 hece, konuşma payı 0.473; Derin 96.501 hece / 0.351; ortalama 81.867 hece/dk; eksik birim: yok.
+
+| Dosya | Süre sn | Boyut MB | Kodlama | Bütünleşik LUFS | Gerçek tepe dBTP (sınırlayıcı öncesi) | Karışım sınırlayıcısı en çok dB | 10 kHz üstü ani olay MP3: kurgu / yalnız karışım / yatak / söz | En uzun dijital sessizlik |
+|---|---|---|---|---|---|---|---|---|
+| ders2-15dk-hoc-A.mp3 | 900.049 | 12.68 | ABR 120 kbit/s (112.7 kbit/s) | -17.4 | -2.87 (-2.44) | 0.0 | 0 / 0 / 0 / 357 | 0.0264 sn |
+| ders2-15dk-hoc-B.mp3 | 900.049 | 12.43 | ABR 120 kbit/s (110.5 kbit/s) | -17.83 | -3.12 (-2.65) | 0.0 | 0 / 0 / 0 / 363 | 0.0264 sn |
+
+Not: "söz içeriği" 10 kHz üstü ani olay sayısı hoc'ta A 357 / B 363, nes'te 85 / 95, hak'ta 77 / 72 (kaynak konuşma izi; kurgu ve yalnız karışım 0). 101 parçaya yayılı, en çok br.orta#1 (21). Ölçüm tık kararı değildir; kulak listesinde.
+
+**Konuşma / yatak** (parçanın BS.1770 kapılı yüksekliği − parça boyunca yatağın 3 sn ST en yükseği; eşik ≥ 15 dB, v3.4: < 1 sn parçalar dahil):
+
+| Dosya | ≥ 1 sn: Varış | Derinleşme | Derin | Kapanış | Bütün parçalar en az dB (< 15 sayısı) | Yatak ofseti (dB) | Yerel yatak kısması |
+|---|---|---|---|---|---|---|---|
+| ders2-15dk-hoc-A | 17.11 / 17.28 / 17.53 GEÇTİ | 16.91 / 17.33 / 17.86 GEÇTİ | 16.56 / 17.01 / 18.03 GEÇTİ | 16.96 / 17.11 / 17.87 GEÇTİ | Var 17.11 (0); Der 16.91 (0); Der 16.56 (0); Kap 16.96 (0) | Var 0.0, Der 0.0, Der 0.0, Kap 0.0 | yok |
+| ders2-15dk-hoc-B | 16.74 / 16.84 / 17.15 GEÇTİ | 16.73 / 16.91 / 17.46 GEÇTİ | 16.42 / 16.79 / 17.35 GEÇTİ | 16.27 / 16.75 / 17.17 GEÇTİ | Var 16.74 (0); Der 16.73 (0); Der 16.42 (0); Kap 16.27 (0) | Var 0.0, Der 0.0, Der 0.0, Kap 0.0 | yok |
+
+- ders2-15dk-hoc-A: 127 parça ölçüldü (24 tanesi < 1 sn; < 1 sn en düşük fark 17.25 dB); eşik altı: yok
+- ders2-15dk-hoc-B: 127 parça ölçüldü (24 tanesi < 1 sn; < 1 sn en düşük fark 16.99 dB); eşik altı: yok
+
+**Konum denetimi (SPEC v3.5 + v3.6):** kod çözülmüş MP3 orta kanalı ve parça 4 kHz altına süzüldü (8. derece Butterworth, sıfır faz), ±50 ms içinde ilinti; eşik 0,95 (VARSAYIM), kayma ≤ 1 ms. Karşılaştırma için süzgeçsiz değer de yazıldı (nes/hak satırlarının pilottaki ölçüsü süzgeçsizdi).
+
+- ders2-15dk-hoc-A: 127 parça; 4 kHz: en düşük ilinti 0.988 (br.orta#2), ortanca 0.994, en büyük kayma 0.05 ms, < 0,95: 0 → GEÇTİ. Süzgeçsiz: en düşük 0.979 (c2.n08), ortanca 0.993, < 0,95: 0.
+- ders2-15dk-hoc-B: 127 parça; 4 kHz: en düşük ilinti 0.985 (c1.s10), ortanca 0.993, en büyük kayma 0.05 ms, < 0,95: 0 → GEÇTİ. Süzgeçsiz: en düşük 0.977 (c2.n08), ortanca 0.992, < 0,95: 0.
+
+**Yükseklik artışı** (3 sn ST, 1 sn adım): ders2-15dk-hoc-A yatak en çok 6.78 dB/sn (751.4 sn), tınısız yatak 2.95 (> 1 dB/sn adım 35), yalnız müzik 4.75 (36); ders2-15dk-hoc-B yatak en çok 6.82 dB/sn (239.2 sn), tınısız yatak 6.82 (> 1 dB/sn adım 1228), yalnız müzik 11.05 (1324)
+
+**Doku değişimleri** (8 sn; pencerede konuşma payı): ders2-15dk-hoc-A: yatak geçişi 105.935–113.935 (0.87); yatak geçişi 346.508–354.508 (0.77); yatak geçişi 571.451–579.451 (0.44); yatak geçişi 754.929–762.929 (0.54); imge katmanı girişi 571.451–579.451 (0.44); imge katmanı çıkışı 687.49–695.49 (0.68) · ders2-15dk-hoc-B: yatak geçişi 105.935–113.935 (0.87); yatak geçişi 346.508–354.508 (0.77); yatak geçişi 754.929–762.929 (0.54); imge katmanı girişi 571.451–579.451 (0.44); imge katmanı çıkışı 687.49–695.49 (0.68)
+
+**Evre başına ölçülen yatak** (3 sn ST ortancası, LUFS, toplam / müzik / doğa): ders2-15dk-hoc-A: Var -32.89 / -33.33 / -43.67; Der -34.4 / -34.78 / -45.56; Der -36.13 / -36.6 / -46.89; Kap -32.88 / -33.32 / -43.46 · ders2-15dk-hoc-B: Var -33.06 / -33.53 / -43.67; Der -34.45 / -34.95 / -45.56; Der -36.07 / -36.52 / -46.89; Kap -33.02 / -33.57 / -43.46
+
+**SPEC §7 + v3 bitti ölçütleri (hoc):**
+
+| Ölçüt | ders2-15dk-hoc-A | ders2-15dk-hoc-B |
+|---|---|---|
+| duration_900pm1 | True | True |
+| order_as_plan | True | True |
+| every_piece_found_at_its_time_in_mp3 | True | True |
+| no_missing_or_duplicate_by_construction | True | True |
+| full_mix_scribe_alignment | None | None |
+| screen_equals_spoken | True | True |
+| no_edit_point_clicks_mp3 | True | True |
+| no_mix_only_clicks_mp3 | True | True |
+| no_digital_silence_ge_100ms_mp3 | True | True |
+| speech_over_bed_ge15_pieces_ge_1s | True | True |
+| speech_over_bed_ge15_all_pieces_v3 | True | True |
+| true_peak_le_minus1 | True | True |
+| integrated_lufs | -17.4 | -17.83 |
+| size_le_14MB | True | True |
+| mp3_44k1_stereo | True | True |
+
+`full_mix_scribe_alignment = None`: yapılmadı (SPEC v3.5; yerine konum denetimi).
+
+Sıra denetimi: ders2-15dk-hoc-A plan 127 / çizelge 127 parça, aynı sıra ve metin True, çift 0, ekran = söylenen True; ders2-15dk-hoc-B plan 127 / çizelge 127 parça, aynı sıra ve metin True, çift 0, ekran = söylenen True
+
+**Seçim bayrakları (hoc):** sayılar {'kulak': 0, 'kesim-kulak': 32, 'kulak-sinirlayici': 0, 'eklem>2yt': 13, 'other': 13, 'kulak-sinirlayici_v2_girdi': 0, 'kulak-sinirlayici_v2_parca': 0}. Kesim yalnız ölçüyle: 32 birim. Taşıyıcı eklem > 2 yt: car.butun, car.on1, car.on2, car.on3, car.sag1, car.sag2, car.sag3, car.sag4, car.sirt, car.sol1, car.sol2, car.sol3, car.sol4.
+- scribe-istisna: a.durus — SPEC v3.2: words equal only with the Scribe spelling exception (editor approval pending): [{"rule": "birleşik", "fused": "sırtüstü", "split": ["sırt", "üstü"], "split_in": "b", "a_pos": 0, "b_pos": 0}]; Scribe: "Sırt üst
+- kesim-kuraldisi: n1.sec — SPEC v3.1: all 3 takes: longest pause is the colon pause after "önerim şu:" (rule cut misalign 0.308/0.318/0.321 in t2/t3/t1). Chosen t2 cut at the sentence-end pause [2.644, 3.158] (dur 0.514 s), cut 2.9104 s, misalign 
+- scribe-istisna: car.sag1 — SPEC v3.2: words equal only with the Scribe spelling exception (editor approval pending): [{"rule": "birleşik", "fused": "başparmağı", "split": ["baş", "parmağı"], "split_in": "b", "a_pos": 2, "b_pos": 2}]; Scribe: "Sağ 
+- scribe-istisna: c2.yer — SPEC v3.2: words equal only with the Scribe spelling exception (editor approval pending): [{"rule": "ek-fiil", "fused": "nefesteyse", "split": ["nefeste", "ise"], "split_in": "b", "a_pos": 1, "b_pos": 1}]; Scribe: "Dikka
+- scribe-istisna: c2.alt — SPEC v3.2: words equal only with the Scribe spelling exception (editor approval pending): [{"rule": "ek-fiil", "fused": "ellerindeyse", "split": ["ellerinde", "ise"], "split_in": "b", "a_pos": 1, "b_pos": 1}]; Scribe: "D
+- kulak-eklem: car.sayi — 
+- kulak-kenar: c4.patika — işlenmiş parçada veri kenarı basamağı: baş -52.0 / son -88.3 dBFS (> -60); detect_clicks=0, ölçüyle tık yok - kulakla doğrula
+- kulak-kenar: c4.don — işlenmiş parçada veri kenarı basamağı: baş -46.5 / son -112.4 dBFS (> -60); detect_clicks=0, ölçüyle tık yok - kulakla doğrula
+- kesim-dar-pay: n2.hatirla — 
+- kulak-kenar: k.anahtar3 — işlenmiş parçada veri kenarı basamağı: baş -59.1 / son -98.1 dBFS (> -60); detect_clicks=0, ölçüyle tık yok - kulakla doğrula
+- kulak-kenar: k.oda.ayrinti — işlenmiş parçada veri kenarı basamağı: baş -55.5 / son -110.1 dBFS (> -60); detect_clicks=0, ölçüyle tık yok - kulakla doğrula
+- kulak-tonlama: k.zaman — 
+- kulak-scribe-istisna: k.yan — 
+
+**Maliyet (hoc, defter):** konuşma 12124.7 kredi + Scribe 1954.9 kredi = 14079.6 kredi; iş akışı sayacı 14079.637 / 20.000 kredi. Karışım ve kör paket adımında ücretli çağrı: 0 (deftere satır yazılmadı).
+
+**Doğrulanmayanlar (hoc):** kulakla dinleme yapılmadı; bütün ifadeler ölçümdür. Kesimler yalnız ölçüyle denetlendi (Scribe sözcük zaman damgası yok, yerel yükleme aracı yok). Scribe v3.2 istisnalarıyla eşleşen 5 birim editör onayı bekliyor. Zamanlı kulak listesi: `out/kulak_listesi.md` "Nefona Hoca" bölümü. Kör paket: `out/kor/` (anahtar paket dışında: `out/_kor_anahtar.json`; düzeltici 1).
+
+## Düzeltici 1 (doğrulama bulgularından sonra)
+
+Ücretli çağrı: 0 (yeniden üretim, yeniden çekim, Scribe yok; deftere satır yazılmadı). İş akışı sayacı değişmedi: 14079.637 / 20.000 kredi. Karışımlar yeniden üretilmedi: bulguların hiçbiri sesi değiştirmeyi gerektirmiyordu. Önceki hâller `out/_onceki_duzeltici1/` içinde.
+
+- **BLOCKER, kör anahtar paketin içindeydi: düzeltildi.** `out/kor/_anahtar.json` silindi. Anahtar artık paketin dışında, `out/_kor_anahtar.json` içinde (içerik aynı; `location_note` alanı eklendi). `_hocmix/kor_paket.py` anahtarı yalnız bu konuma yazıyor. Betik şunları da denetliyor: kör klasörde yalnız `BENI_OKU.md` ile altı MP3 bulunabilir, `BENI_OKU.md` de ses adı ya da anahtar adı geçiremez. Bunlardan biri tutmazsa betik durur. `BENI_OKU.md` içindeki "`_anahtar.json` dosyasını … açma" cümlesi kaldırıldı. Yerine şu yazıldı: anahtar ayrı tutuluyor ve notlar yazılıp sıralama verildikten sonra veriliyor. Paket yeniden kuruldu ve şimdi 7 dosya içeriyor. Altı MP3 bayt bayt aynı kaldı (SHA-256 yeniden ölçüldü, öncekiyle birebir: `out/_onceki_duzeltici1/kor_mp3_sha256_once.txt`). Kör dosyalarda uzun ad dizgisi (Hakan, Neslihan, Nefona, dalga) 0. Üç harfli kısa adların MP3 verisindeki birkaç tesadüfi eşleşmesi rastgele: 12 MB'ta 3 bayt için ≈ 0,76 beklenir ve eşleşmeler dosyanın hangi sese ait olduğuyla ilişkili değil.
+- **NIT, kulak listesi kör testi bozabilir: düzeltildi.** `out/kulak_listesi.md` başına şu uyarı kondu: "Kör karardan (Kapı 2) SONRA verilir". Uyarının nedeni, listenin gerçek adlar içermesi ve zamanlarının sesten sese kayması. Liste pakete konmadı, kör kopyası da yapılmadı.
+- **SHOULD, Derin evre hız tavanı: kulak listesine eklendi.** Doğrulayıcının parça başına ölçüsü (`_verify_hoc1/voice_rows.json`) şu parçaları gösteriyor: c2.birak#1 7,30, c2.sayac#1 6,82, c2.sayac#2 6,28, n2.hatirla#2 6,13, c4.patika 6,11, c4.yol#2 6,08, c4.solma#2 5,99 hece/sn. Bunlar hoc bölümüne eklendi; var olan satırlara parça değerleri yazıldı, eksik olanlar yeni satır oldu. Genel bölüme şu not kondu: **Derin tavanı (≤ 5,0 hece/sn, qa.derinClipRateCeil) VARSAYIMDIR ve üç seste de aşılıyor.** Derin evre parça ortancası ve 5,0 üstü parça sayısı: hoc 5,21 ve 24/41, nes 5,25 ve 25/41, hak 5,65 ve 31/43. Plan aşamasında karar verilmeli.
+- **SHOULD, B yatağı yaklaşık 24 sn'de bir soluyor: kulak listesine eklendi (Genel).** Ölçü: yatak ≈ 20 dB iniyor, ≈ 1,5 sn içinde geri çıkıyor; 3 sn ST yükselme en çok 6,82 dB/sn. Bu, kaynak müziğin kendi davranışı ve üç sesin B dosyasında da var. Konuşma/yatak eşiği bozulmuyor. Yatağa ≤ 1 dB/sn yükselme sınırı konmadı: bu, B müziğinin kaynağını değiştirmek olur ve karar B adımına bırakıldı.
+- **SHOULD, beden taramasında öğe sonu çıtırtısı: kulak listesine eklendi.** Doğrulayıcı ölçüsü şöyle. Öğe sonunda perde ≈ 62–78 Hz'e iniyor, sonraki öğe ≈ 100–130 Hz'den başlıyor. f0_sd ortancası hoc 3,75, nes 3,38, hak 2,84. İki perde ölçücü ortancada 103,7 ve 121,4 Hz veriyor. Bu ölçüler var olan 02:52–05:32 satırına yazıldı ve satıra "öğe sonlarında hırıltılı/çıtırtılı düşüş var mı?" sorusu eklendi.
+- **NIT, ağız şapırtısı: Genel bölüme soru eklendi.** 8 kHz üstü ani olay sayısı: hoc-A 267, hak-A 227, nes-A 149.
+- **NIT, k.donus ölçü tanımı: yazıldı, sayı değişmedi.** Bu raporda ve araçta konuşma/yatak farkı şöyle ölçülüyor: yatağın en yüksek 3 sn ST değeri alınıyor, ama yalnız merkezi parçanın içinde kalan pencereler arasından ("merkez penceresi"). Bu tanımla k.donus farkı A'da 18,55, B'de 17,50 dB. Parçaya değen her 3 sn pencere sayılırsa fark A'da 14,84, B'de 14,24 dB çıkıyor. Nedeni, 752,93 sn'de başlayan 4 sn'lik dönüş tınısı; tını kasıtlı. Öbür 126 parçada iki ölçü de ≥ 15 dB.
+- **NIT, kodlayıcı gecikme payı: işlem yok.** Dosyanın başındaki 20,2 ms ve sonundaki 26,4 ms dijital sıfır, kodlayıcının koyduğu gecikme payı ve dolgu. Üç seste de aynı.
+
+Betikler: `_hocmix/kor_paket.py` (değişti), `_hocmix/kulak_duzeltici1.py` (yeni). `kulak_hoc.py` yeniden çalıştırılırsa hoc bölümü yeniden yazılır; ardından `kulak_duzeltici1.py` de yeniden çalıştırılmalı.
+
+**Doğrulanmayanlar:** kulakla dinleme yapılmadı. Eklenen maddelerin hepsi ölçüme dayanıyor, karar sahibin kulağına kalıyor.
