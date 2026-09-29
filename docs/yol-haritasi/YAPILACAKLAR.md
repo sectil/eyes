@@ -77,7 +77,8 @@ Tasarımın özü:
 Uygulama sırası (her biri ayrı onay, test, TestFlight): (a) E testi haftada bir + başlangıç kuralı, (b) ilk açılışta
 önce ölçüm, (c) ilerleme motoru + nefes ve göz merdivenleri, (d) sessiz ölçüm tercihi, (e) uyku (Sağlık) ve yürüyüş,
 (f) Nef haftalık/aylık, (g) meditasyon ve yoga modülleri.
-- [~] **(a) E testi haftada bir + başlangıç kuralı** (2026-09-29): kodda bitti, CİHAZDA DENENMEDİ, TestFlight'a girmedi.
+- [~] **(a) E testi haftada bir + başlangıç kuralı** (2026-09-29): kodda bitti, TestFlight Build 59'da; cihazda
+      doğrulanıyor (sahibi 29 Eylül: yolda "Haftalık E testi · Bu hafta tamam" görüldü; aşağıdaki liste sürüyor).
       Yapılan: kısa E testi (eski adı "Günlük test", `modules/daily`) Bugün'ün yolundan çıktı (`today()` → null); Ana
       sayfa → Ölçüm'de "Kısa E testi · İsteğe bağlı · sağ + sol göz" olarak kalır. Haftalık E testi 1. gün yolda, sonra
       son tam koşu gününden 7 takvim günü sonra, günün başından itibaren (Bug 24 düzeltildi: `lib/today.js`
