@@ -237,7 +237,7 @@ def test_process_short():
     rows = ['nes-uc parça %d (konuşma %.3f sn), referans rms %.2f dB' % (short[0] + 1, short[2], ref)]
     for micro, want in ((False, ref), (True, ref + 1.0)):
         out = os.path.join(TMP, 'short_%s.wav' % ('micro' if micro else 'norm'))
-        args = ['process', src, '--out', out, '--sex', 'f', '--ref-rms-db', ref] + (['--micro'] if micro else [])
+        args = ['process', src, '--out', out, '--sex', 'f', '--ref-rms-db', ref, '--level-rule', 'v2'] + (['--micro'] if micro else [])
         code, r, o, err = cli(*args)
         assert code == 0, (o, err)
         y, _ = sf.read(out, dtype='float64')
@@ -246,9 +246,9 @@ def test_process_short():
         assert abs(got - want) <= 0.5, (micro, got, want)
         assert ind_tp(y) <= -1.5
         rows.append('micro=%s: süre %.3f sn, konuşma RMS %.2f (hedef %.2f), TP %.2f' % (micro, len(y) / SR, got, want, ind_tp(y)))
-    code, r, o, err = cli('process', src, '--out', os.path.join(TMP, 'short_x.wav'), '--sex', 'f')
+    code, r, o, err = cli('process', src, '--out', os.path.join(TMP, 'short_x.wav'), '--sex', 'f', '--level-rule', 'v2')
     assert code == 3 and 'ref-rms-db' in (r or {}).get('error', ''), (code, o)
-    rows.append('referanssız kısa klip → çıkış 3: %s' % r['error'])
+    rows.append('v2 kuralı, referanssız kısa klip → çıkış 3: %s' % r['error'])
     return rows
 
 
@@ -348,9 +348,9 @@ def test_normtext():
     rows.append('eşit sayılan %d çift geçti; normtext("Sağ elin başparmağı… İŞARET parmağı…") = %s' % (len(cases_eq), r))
     for a, b in (('bilek… ön kol…', 'bilek önkol'), ('on dokuz', '10 8'), ('Sağ elin başparmağı', 'sol elin başparmağı'),
                  ('bir iki üç', 'bir iki')):
-        code, r, o, err = cli('compare', a, b)
+        code, r, o, err = cli('compare', '--strict', a, b)
         assert code == 1 and r['equal'] is False and r['diff'], (a, b, o)
-        rows.append('fark: %r ~ %r → çıkış 1, %s' % (a, b, [(d['op'], d['a'], d['b']) for d in r['diff']]))
+        rows.append('fark (--strict): %r ~ %r → çıkış 1, %s' % (a, b, [(d['op'], d['a'], d['b']) for d in r['diff']]))
     return rows
 
 
@@ -471,8 +471,201 @@ def test_units_pieces():
     return ['68 birim; ön sözlü taşıyıcı: %s; her birimde hece toplamı = units.json syllables' % pre]
 
 
+# ------------------------------------------------------------------------------------------ v3 (PLAN.v3 §F A)
+def test_scribe_exceptions():
+    """v3 Scribe yazım istisnaları: birleşik sözcük ve ek-fiil yazımı eş; bağlaç/soru eki, yanlış uyum, başka ek-fiil
+    ve gerçek sözcük farkı eş DEĞİL; --strict v2 davranışı; kullanılan istisna JSON'da görünür."""
+    rows = []
+    eq = [  # (tts, scribe, kural)
+        ('Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.', 'Sırt üstü ya da yan yatıp zemine yerleşmen yeterli', 'birleşik'),
+        ('Sırtüstü yatıyorsan önce bir yanına dön.', 'Sırt üstü yatıyorsan önce bir yanına dön', 'birleşik'),
+        ('Sol elin başparmağı…', 'Sol elin baş parmağı', 'birleşik'),
+        ('bilek… ön kol…', 'bilek önkol', 'birleşik'),
+        ('Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin.',
+         'Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin', 'ek-fiil'),
+        ('Dikkatin nefeste ise', 'dikkatin nefesteyse', 'ek-fiil'),
+        ('hastaydı', 'hasta idi', 'ek-fiil'), ('kitaptı', 'kitap idi', 'ek-fiil'), ('yorgundu', 'yorgun idi', 'ek-fiil'),
+        ('yorgunmuş', 'yorgun imiş', 'ek-fiil'), ('güzelmiş', 'güzel imiş', 'ek-fiil'), ('evdeysem', 'evde isem', 'ek-fiil'),
+        ('yoldaysa', 'yolda ise', 'ek-fiil'), ('üzgündüm', 'üzgün idim', 'ek-fiil'),
+    ]
+    for a, b, rule in eq:
+        code, r, o, err = cli('compare', a, b)
+        assert code == 0 and r['equal'] is True and r['strict_equal'] is False, (a, b, o)
+        assert [e['rule'] for e in r['exceptions']] == [rule], (a, b, r['exceptions'])
+        code2, r2, o2, _ = cli('compare', '--strict', a, b)
+        assert code2 == 1 and r2['equal'] is False, (a, b, o2)
+    rows.append('eş sayılan %d çift (istisna JSON\'da, --strict ile hepsi çıkış 1)' % len(eq))
+    neq = [
+        ('sen de', 'sende'), ('ya da', 'yada'), ('geldin mi', 'geldinmi'), ('dedi ki', 'dediki'),   # bağlaç/soru eki
+        ('nefesteyse', 'nefeste idi'), ('nefesteydi', 'nefeste ise'),                              # başka ek-fiil
+        ('nefestesa', 'nefeste ise'), ('kitapdı', 'kitap idi'), ('hastaidi', 'hasta idi'),          # uyum / kaynaştırma
+        ('Sırtüstü yatıyorsan', 'Sırt üstü yatıyorken'), ('sırtüstü', 'sırt altı'),                # gerçek fark
+        ('bir iki üç', 'bir iki'), ('on dokuz', '10 8'), ('ön kol', 'önkollar'),
+    ]
+    for a, b in neq:
+        code, r, o, err = cli('compare', a, b)
+        assert code == 1 and r['equal'] is False, (a, b, o)
+    rows.append('eş sayılmayan %d çift → çıkış 1 (%s)' % (len(neq), ', '.join('%s~%s' % p for p in neq[:4])))
+    code, r, o, err = cli('compare', 'Sağ elin başparmağı…', 'sağ elin başparmağı')
+    assert code == 0 and r['strict_equal'] is True and 'exceptions' not in r, o
+    assert audio.copula_fuse('nefeste', 'ise') == 'nefesteyse' and audio.copula_fuse('kitap', 'idi') == 'kitaptı'
+    assert audio.copula_fuse('göz', 'imiş') == 'gözmüş' and audio.copula_fuse('ev', 'de') is None
+    rows.append('birebir eşit metin istisna kullanmaz; copula_fuse örnekleri doğru')
+    return rows
+
+
+def _short_hak_piece():
+    """hiz/hak-duz.mp3'ten < 1 sn konuşmalı bir parça (kesilmiş, işlenmemiş) ve en yüksek tepe/yükseklik oranlısı."""
+    x, sr = audio.load(os.path.join(Y, 'hiz', 'hak-duz.mp3'))
+    info = audio.find_pauses(x, sr, None, 'm')
+    k = len(info['gaps']) + 1
+    cuts, meta, _ = audio.plan_cuts(x, sr, k, info['thr_db'], 'm', info)
+    parts, _ = audio.split_at(x, cuts, sr)
+    best = None
+    for i, pc in enumerate(parts):
+        on, off, *_ = audio.activity(pc, sr, info['thr_db'])
+        if on is None or (off - on) + 0.31 >= 0.95 or (off - on) < 0.15:
+            continue
+        L = ind_lufs(pc) if len(pc) >= 0.45 * SR else None
+        if L is None or not np.isfinite(L):
+            continue
+        plr = ind_tp(pc) - L
+        if best is None or plr > best[3]:
+            best = (i, pc, off - on, plr)
+    assert best is not None, 'hak-duz içinde < 1 sn parça yok'
+    return best
+
+
+def test_short_piece_v3():
+    """Sıkı kısa parça eşiği (PLAN.v3 §E.3): < 1 sn parça v3'te uzun kliplerle aynı ölçüye (−18 LUFS, BS.1770) gelir;
+    v2'nin RMS kuralı aynı parçayı LUFS'te daha alçakta bırakıyordu. Gerçek tepe ≤ −1,5 dBTP (bağımsız ölçüm); kısa
+    parçada sınırlayıcı payı ≤ 3 dB ya da hedef en çok 3 dB inmiş olmalı. Konuşma/yatak farkı mix.speech_over_bed ile:
+    aynı yatakta v3 − v2 farkı, iki parçanın LUFS farkına eşit (±0,2 dB)."""
+    sys.path.insert(0, os.path.join(Y, 'pilot'))
+    import mix
+    i, pc, sp_sec, plr = _short_hak_piece()
+    src = os.path.join(TMP, 'hak_short_src.wav')
+    audio.write_wav(src, pc)
+    ref = -18.02                                # pilotun Hakan Derinleşme referans RMS'i (selection-hak-1.json)
+    outs = {}
+    for rule in ('v2', 'v3'):
+        out = os.path.join(TMP, 'hak_short_%s.wav' % rule)
+        code, r, o, err = cli('process', src, '--out', out, '--sex', 'm', '--ref-rms-db', ref, '--level-rule', rule,
+                              '--peak-mode', 'limiter' if rule == 'v2' else 'auto')
+        assert code == 0, (rule, o, err)
+        y, _ = sf.read(out, dtype='float64')
+        assert len(y) / SR < 1.0, (rule, len(y) / SR)
+        L, tp = ind_lufs(y), ind_tp(y)
+        assert tp <= -1.5, (rule, tp)
+        outs[rule] = (y, L, tp, r)
+    y3, L3, tp3, r3_ = outs['v3']
+    y2, L2, tp2, r2_ = outs['v2']
+    assert r3_['level_mode'] == 'lufs-short' and r2_['level_mode'] == 'rms', (r3_['level_mode'], r2_['level_mode'])
+    cap = r3_.get('short_level_capped')
+    want = cap['to_lufs'] if cap else -18.0
+    assert abs(L3 - want) <= 0.5, (L3, want)
+    assert -21.0 - 1e-6 <= want <= -18.0
+    assert r3_['limiter_max_db'] <= audio.SHORT_LIM_MAX_DB + 1e-6 or (cap and cap['to_lufs'] <= -21.0 + 1e-6), r3_
+    assert L3 >= L2 - 0.2, (L3, L2)              # v3 kısa parçayı hiçbir zaman v2'den alçak bırakmaz (bu parçada)
+    # konuşma/yatak: pembe gürültü yatak −34,5 LUFS (Derinleşme), parça evre kazancı −1,5 dB, 1 sn'den kısa
+    rng = np.random.default_rng(7)
+    n = int(6 * SR)
+    wn = rng.standard_normal((n, 2))
+    f = np.fft.rfftfreq(n, 1 / SR)
+    spec = np.fft.rfft(wn, axis=0) / np.sqrt(np.maximum(f, 20.0))[:, None]
+    bed = np.fft.irfft(spec, n, axis=0)
+    bed *= 10 ** ((-34.5 - pyln.Meter(SR).integrated_loudness(bed)) / 20)
+    res = {}
+    for rule, y in (('v2', y2), ('v3', y3)):
+        v = np.zeros(n)
+        s0 = int(2.5 * SR)
+        v[s0:s0 + len(y)] = y * 10 ** (-1.5 / 20)
+        vpow = 2.0 * mix.kpower(v)
+        sob, rows_ = mix.speech_over_bed(vpow, mix.kpower(bed), [{'piece': 'x', 'phase': 'Derinleşme', 'start': 2.5,
+                                                                  'end': 2.5 + len(y) / SR}])
+        res[rule] = rows_[0]['diff']
+    assert abs((res['v3'] - res['v2']) - (L3 - L2)) <= 0.2, (res, L3, L2)
+    rows = ['hak-duz parça %d: konuşma %.2f sn, tepe/yükseklik %.1f dB' % (i + 1, sp_sec, plr),
+            'v2 (RMS %.2f dB referansına): %.2f LUFS, TP %.2f, sınırlayıcı %.2f dB' % (ref, L2, tp2, r2_['limiter_max_db']),
+            'v3: %.2f LUFS (hedef %.1f%s), TP %.2f, zincir %s, sınırlayıcı %.2f dB, sıkıştırıcı %s dB' % (
+                L3, want, ', sınırlandı' if cap else '', tp3, r3_['peak']['chain'], r3_['limiter_max_db'],
+                r3_['peak'].get('comp_gr_max_db')),
+            'yapay yatak −34,5 LUFS üstünde konuşma/yatak: v2 %.2f dB → v3 %.2f dB' % (res['v2'], res['v3'])]
+    return rows
+
+
+def test_soft_peak_v3():
+    """Klip düzeyinde tepe yönetimi: Hakan okumasında (eski sınırlayıcı > 3 dB) v3 yumuşak tepe sıkıştırmayı seçer;
+    −18 LUFS ±0,5 ve ≤ −1,5 dBTP bağımsız ölçümle korunur, sınırlayıcı payı ve bozulma göstergesi eski zincirden iyi;
+    eski sınırlayıcı ≤ 1 dB kısan klipte (Neslihan) çıktı v2 ile örnek örnek aynı."""
+    rows = []
+    for n in ('hak-duz', 'hak-uc'):
+        p = os.path.join(Y, 'hiz', n + '.mp3')
+        x, sr = audio.load(p)
+        y2, r2 = audio.process_array(x, sr, 'm', peak_mode='limiter')
+        y3, r3_ = audio.process_array(x, sr, 'm', peak_mode='auto')
+        assert r2['limiter_max_db'] > 3.0, (n, r2['limiter_max_db'])
+        assert r3_['peak']['chain'] == 'soft+limiter', (n, r3_['peak'])
+        assert abs(ind_lufs(y3) + 18.0) <= 0.5 and ind_tp(y3) <= -1.5, (n, ind_lufs(y3), ind_tp(y3))
+        c = r3_['peak']['candidates']
+        assert c['soft+limiter']['fast_sdr_db'] > c['limiter']['fast_sdr_db'], c
+        assert r3_['limiter_max_db'] < r2['limiter_max_db'], (r3_['limiter_max_db'], r2['limiter_max_db'])
+        assert r3_['peak']['comp_gr_max_db'] <= audio.SOFT_MAX_GR_DB + 0.05
+        an = audio.analyze_array(y3, SR, 76, 'Varış', 'm')
+        assert an['clicks']['count'] == 0 and not an['clipping']['clipped']
+        rows.append('%s: sınırlayıcı %.2f → %.2f dB (+ sıkıştırıcı %.2f dB), bozulma göstergesi %.1f → %.1f dB, '
+                    'LUFS %.2f, TP %.2f' % (n, r2['limiter_max_db'], r3_['limiter_max_db'], r3_['peak']['comp_gr_max_db'],
+                                           c['limiter']['fast_sdr_db'], c['soft+limiter']['fast_sdr_db'], ind_lufs(y3), ind_tp(y3)))
+    x, sr = audio.load(os.path.join(Y, 'hiz', 'nes-v4.mp3'))
+    ya, ra = audio.process_array(x, sr, 'f', peak_mode='limiter')
+    yb, rb = audio.process_array(x, sr, 'f', peak_mode='auto')
+    assert ra['limiter_max_db'] <= audio.SOFT_TRIGGER_DB and rb['peak']['chain'] == 'limiter'
+    assert len(ya) == len(yb) and float(np.max(np.abs(ya - yb))) == 0.0
+    rows.append('nes-v4: sınırlayıcı %.2f dB ≤ 1 dB → v3 çıktısı v2 ile örnek örnek aynı' % ra['limiter_max_db'])
+    return rows
+
+
+def test_local_duck():
+    """mix.py yerel yatak kısması: derinlik, düz bölge (parça ± 1,5 sn), iniş/çıkış ≤ 1 dB/sn; eşik altı parça kısmadan
+    sonra ≥ 15,5 dB (mix.speech_over_bed ile)."""
+    sys.path.insert(0, os.path.join(Y, 'pilot'))
+    import mix
+    t, g, spans = mix.local_duck_curve({'x': (100.0, 100.8, 2.5)})
+    assert abs(g.min() + 2.5) < 1e-9
+    flat = (t >= 98.5) & (t <= 102.3)
+    assert np.all(np.abs(g[flat] + 2.5) < 1e-9)
+    slope = np.max(np.abs(np.diff(g))) * 100
+    assert slope <= 1.0 + 1e-6, slope
+    assert g[t <= 96.0 - 1e-9].max() == 0.0 and g[t >= 104.8 + 1e-9].max() == 0.0
+    # uçtan uca: tek parça, yatak 14 dB'de kalacak düzeyde
+    rng = np.random.default_rng(3)
+    n = int(10 * SR)
+    bed = rng.standard_normal((n, 2)) * 0.01
+    bed = bed.astype(np.float32)
+    v = np.zeros(n)
+    s0 = int(4.0 * SR)
+    w = word(0.7, 110)
+    v[s0:s0 + len(w)] = w
+    vpow = 2.0 * mix.kpower(v)
+    sp = [{'piece': 'x', 'phase': 'Derin', 'start': 4.0, 'end': 4.0 + len(w) / SR}]
+    d0 = mix.speech_over_bed(vpow, mix.kpower(bed), sp)[1][0]['diff']
+    bed = (bed * 10 ** ((d0 - 14.0) / 20)).astype(np.float32)      # fark tam 14 dB olsun
+    d1 = mix.speech_over_bed(vpow, mix.kpower(bed), sp)[1][0]['diff']
+    assert abs(d1 - 14.0) < 0.05, d1
+    need = mix.LOCAL_DUCK_TO_DB - d1 + 0.02
+    tt, gg, _ = mix.local_duck_curve({'x': (sp[0]['start'], sp[0]['end'], need)})
+    ts = np.arange(n) / SR
+    gains = 10 ** (np.interp(ts, tt, gg) / 20)
+    ducked = (bed * gains[:, None]).astype(np.float32)
+    d2 = mix.speech_over_bed(vpow, mix.kpower(ducked), sp)[1][0]['diff']
+    assert d2 >= mix.LOCAL_DUCK_TO_DB - 0.05, d2
+    return ['eğri: derinlik 2,5 dB, düz 98,5–102,3 sn, en dik %.2f dB/sn (≤ 1)' % slope,
+            'uçtan uca: fark %.2f dB → %.2f dB kısma → %.2f dB (hedef ≥ %.1f)' % (d1, need, d2, mix.LOCAL_DUCK_TO_DB)]
+
+
 TESTS = [test_analyze_real, test_clicks_injected, test_process_real, test_process_short, test_deess,
-         test_cut_synthetic, test_normtext, test_f0, test_rank_real, test_rank_carrier_synthetic, test_units_pieces]
+         test_cut_synthetic, test_normtext, test_f0, test_rank_real, test_rank_carrier_synthetic, test_units_pieces,
+         test_scribe_exceptions, test_short_piece_v3, test_soft_peak_v3, test_local_duck]
 
 
 def main():

@@ -95,3 +95,84 @@ Sahip bitmiş dersi kulağıyla dinleyip karar verecek: iki ses (Neslihan, Hakan
 Süre 900 ± 1 sn; her olay planla aynı sırada; eksik/çift cümle yok (tam karışımın Scribe metni plan metniyle hizalanır);
 ekran metni = söylenen metin; tık yok; dijital sessizlik yok (oda sesi); konuşma/yatak farkı ≥ 15 dB; gerçek tepe
 ≤ −1 dBTP; bütünleşik ≈ −18/−20 LUFS (raporla); `check_plan` sonucu raporda. Kulak kararı gereken her şey listelenir.
+
+## v3 eki (PLAN.v3 §A.3, §E.2, §E.3, §F A adımı; 2026-09-29)
+Bu ek yukarıdaki maddelerin yerini aldığı yerde açıkça söyler; söylemediği yerde yukarısı geçerlidir. Eski sürüm:
+`render/out/_onceki_v2/SPEC.v2.md`.
+
+### v3.1 Kesim kuralı (§3 ve §4.3'e ek)
+- **Metin:** çok cümleli birimde iki nokta üst üste (`:`) kullanılmaz. Seslendirmede iki noktadan sonra uzun bir
+  duraklama geliyor. Bu duraklama cümle sonundakinden uzun olunca "en uzun N−1 duraklama" kuralı birimi yanlış yerden,
+  cümlenin içinden böler.
+- **Kesim:** çok cümleli birimde kesim, cümle sonundaki duraklamadan yapılır. §3'teki "en uzun N−1 duraklama" kuralı
+  yerinde kalır. Seçilen kesimin parçaları hece payıyla hizalanmıyorsa (`boundary_misalign` > 0,12) o çekim yanlış
+  kesilmiş sayılır. Böyle birimlerde cümle sonuna düşen başka bir duraklama kullanılırsa bu **kural dışı kesimdir**:
+  birim "kesim-kuraldisi" bayrağı alır ve kulak listesine girer. Yalnız ölçüyle denetlenen her kesim de kulak listesine
+  girer (§4.3 c).
+- **Pilotta kural dışı kesilen birim: Neslihan `n2.hatirla`** ("Başta seçtiğin niyeti içinden üç kez söylemek yeterli.
+  Ya da yine şunu: "Kendime dinlenmeye izin veriyorum.""). Altı çekimin (3 ilk çekim + 3 yeniden çekim) hepsinde en uzun
+  duraklama, ikinci cümlenin içinde "şunu:" sözünden sonra geliyordu. Kurala göre kesim "… yeterli. Ya da yine şunu:" |
+  "Kendime dinlenmeye izin veriyorum." olurdu: hizasızlık 0,165–0,186, parça hızları ≈ 3,9 ve 8,0 hece/sn, ekrandaki
+  cümle söylenen parçayla uyuşmaz. Seçilen çekimde (retake-t2) kesim, ikinci en uzun duraklamadan, yani cümle sınırından
+  yapıldı: boşluk 3,791–4,255 sn, kesim 4,0229 sn, hizasızlık 0,023, hızlar 5,04 / 5,52 hece/sn. Kuralın verdiği kesim
+  5,318–5,847 sn'deki boşluktaydı. Bu kesim sahibin kulak onayını bekliyor (`render/out/kulak_listesi.md`).
+- Aynı nedenle Neslihan `n1.sec` ("… önerim şu: "Kendime dinlenmeye izin veriyorum."") de kuraldan saptı. Altı çekimin
+  hepsinde en uzun duraklama "önerim şu:" sonrasındaydı (0,55–0,56 sn). Kesim, cümle sonundaki 2,699–3,168 sn
+  boşluğundan yapıldı: hizasızlık 0,015, hızlar 5,70 / 5,49. Kural 5,473–6,036 sn'yi verirdi (hizasızlık 0,314). Bu kesim
+  de kulak onayı bekliyor. Hakan'da iki birim kuralla doğru kesildi, ama pay çok dar: `n1.sec` 1,009, `n2.hatirla` 1,072
+  (en kısa seçilen / en uzun seçilmeyen duraklama). Bunlar da kulak listesinde.
+- Ders 2 metninin bu iki birimi, insan incelemesinde (PLAN.v3 §E.1) iki nokta olmadan yeniden yazılır ve yeniden
+  seslendirilir. Bu adımda metne ve sese dokunulmadı.
+
+### v3.2 Scribe yazım istisnaları (§4.2'ye ek)
+Normalleştirilmiş sözcük dizisi birebir aynı olmalıdır (§4.2). Yalnız iki yazım farkı eş sayılır:
+(1) bitişik birleşik sözcüğün ayrı yazımı ("sırtüstü" = "sırt üstü"; de/da, ki, mi ayrık yazımı istisna değildir);
+(2) ek-fiilin bitişik ya da ayrı yazımı: -(y)sA / ise, -(y)DI / idi, -(y)mIş / imiş; ünlü uyumu, y kaynaştırması ve
+sert ünsüz kuralıyla ("nefesteyse" = "nefeste ise").
+Uygulama `audio.py compare` içindedir (istisnasız eski davranış: `--strict`). Kullanılan istisna sonuçta ayrıca yazılır.
+Liste ve örnekler `render/scribe_istisnalari.md` dosyasındadır. Liste Türkçe editörün onayına gider; onay gelene kadar
+yalnız istisnayla eşleşen klip kulak listesinde kalır.
+
+### v3.3 Kısa parça ve tepe yönetimi (§3 "Seviye" yerine, < 1 sn ve tepe kısmı)
+- **Düzey:** 1 sn'den kısa parça, LUFS ölçülebiliyorsa (≥ 0,4 sn), uzun kliplerle aynı ölçüye ve hedefe getirilir:
+  −18 LUFS, BS.1770 kapılı. Konuşma/yatak denetimi de bu ölçüyü kullanır. Gerekçe: pilotta RMS'le eşitlenen kısa
+  parçalar LUFS'te uzun kliplerin 0–4,6 dB altında kaldı (Hakan'da ortalama −19,7, Neslihan'da −19,1 LUFS). Sabit bir
+  RMS ofseti bunu düzeltemez, çünkü fark parçadan parçaya değişir.
+  `qa.microClipRmsOffsetDb` yeniden ayarlandı: tek heceli mikro parçanın ek ofseti bu ölçekte **0 dB**
+  (`audio.MICRO_OFFSET_V3_DB`). Pilotun "+1 dB RMS" kuralı mikro parçaları zaten ≈ −18,1 LUFS'e (Neslihan) ve
+  ≈ −19,0 LUFS'e (Hakan) koymuştu. Sayımda tek ve iki heceli sayılar aynı yükseklikte duyulsun diye ek ofset konmaz.
+  `pilot/ders2.lesson.json` salt okunurdur ve değiştirilmedi; ders verisine taşınması B adımının işidir.
+  0,4 sn'den kısa parçada eski RMS yolu kalır.
+- **Tepe (klip düzeyinde):** her klipte gerçek tepe ≤ −1,5 dBTP korunur. Eski sınırlayıcı 1 dB'den çok kısacaksa ikinci
+  bir aday denenir: yumuşak dizli tepe sıkıştırma (3:1, 6 dB diz, 10 ms Hann ileriye bakan atak, 0,04 dB/ms bırakma,
+  en çok 6 dB) ve ardından kalan tepe için sınırlayıcı. Bozulma göstergesi (`fast_sdr_db`, perde içi hızlı kazanç
+  kıpırtısı) daha iyi olan aday seçilir. Sınırlayıcı 1 dB ya da daha az kısıyorsa klip v2 ile örnek örnek aynı kalır.
+- **Kısa parça sınırı:** seçilen zincirde sınırlayıcı payı 3 dB'i aşıyorsa kısa parçanın hedefi 0,5 dB adımlarla en çok
+  3 dB iner (en az −21 LUFS). Konuşma/yatak eşiğinin kalan açığı karışımda kapanır (v3.4).
+- Araçlar: `tools/audio.py` `process --level-rule v3|v2 --peak-mode auto|limiter` ve `tools/reprocess_v3.py`
+  (bütün seçilmiş parçalar, çıktı `sel/<ses>/_v3/` ve `sel/<ses>/reprocess-v3.json`). Kaynaklar seçim ajanlarının
+  kesim dosyalarıdır; kaynak eşlemesi v2 ayarlarıyla 316 parçanın 315'inde örnek örnek aynı çıktıyı verdi.
+
+### v3.4 Sıkı konuşma/yatak eşiği (§6 ve §7'ye ek)
+- Konuşma yataktan en az **15 dB** yüksek olmalı. Bu, **1 sn'den kısa parçalar dahil her konuşma parçası** için
+  geçerlidir (PLAN.v3 §E.3). Ölçü §6'daki gibidir: parçanın BS.1770 kapılı yüksekliği (stereo, evre kazancı dahil) eksi
+  parça boyunca yatağın 3 sn ST en yükseği.
+- Evre ofseti (≥ 1 sn parçalar için, evrenin bütün yatağı) eskisi gibi kalır. Bu düzeltmeden sonra eşiğin altında
+  kalan parça için **yerel yatak kısması** uygulanır. Müzik, imge ve doğa katmanları parça ±1,5 sn boyunca düz −d dB
+  kısılır. İki yanda max(1 sn, d / 1 dB/sn) rampa vardır, yani iniş ve çıkış ≤ 1 dB/sn. Hedef ≥ 15,5 dB'dir. Kısma A ve
+  B karışımlarında ortaktır (kör karşılaştırma). Kısmalar `timeline.json` içinde `local-duck` olayı olarak yazılır.
+
+### v3.5 Tam karışımın Scribe denetimi yerine parça konum denetimi (§7'ye ek)
+- Tam karışım Scribe ile yazıya çevrilmez. Yerel dosyayı yükleme aracı yok; üretimde 241 dk × 5,5 kredi/sn ≈ 80 bin
+  kredi tutar ve toplam tavanı aşar (PLAN.v3 §C.3).
+- Yerine: her konuşma parçası, Scribe'dan geçmiş çekimden gelir (§4.2 ve v3.2). Plan ile zaman çizelgesi aynı sırada
+  ve aynı metinle birebir karşılaştırılır. Kodlanmış dosyada her parçanın dalga biçimi ±50 ms içinde aranır:
+  **ilinti ≥ 0,95 (VARSAYIM)** ve **kayma ≤ 1 ms**. AAC'de aynı denetim Mac'te, çözülmüş dosyada yapılır.
+- §7'nin "tam karışımın Scribe metni plan metniyle hizalanır" maddesi bu denetimle değiştirildi. Bitti ölçütlerine
+  `speech_over_bed_ge15_all_pieces_v3` (v3.4) eklendi.
+
+### v3.6 Parça konum denetimi, ilinti (orkestratör kararı, 2026-09-29)
+Denetim parçanın YERİNİ ölçer, tınısını değil. Bu yüzden B adımından başlayarak ilinti, iki sinyal 4 kHz altına
+süzüldükten sonra hesaplanır; eşik 0,95 ve kayma sınırı değişmez. Neden: pilotta hak-B c1.l10'da ilinti 0,948 çıktı,
+kayma 0,05 ms idi (parça yerinde); düşüklük MP3'ün ıslıklı /s/ bandını korumamasından geliyordu. Pilotun dört karışımı
+için bu parça, ölçülen kaymayla yerinde sayılır.

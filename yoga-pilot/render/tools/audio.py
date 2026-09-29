@@ -6,9 +6,11 @@ Yalnız numpy / scipy / soundfile / pyloudnorm (ffmpeg YOK). Hem komut satırı 
 Komutlar (hepsi JSON basar):
   analyze  <dosya> --syll N --phase P --sex f|m
   cut      <dosya> --n K --outdir D [--names a,b,...] [--sylls 3,4,...]      çıkış 2: K parça bulunamadı
-  process  <girdi> --out <wav> --sex f|m [--micro] [--ref-rms-db X]        çıkış 1: çıktı denetimi geçmedi
+  process  <girdi> --out <wav> --sex f|m [--micro] [--ref-rms-db X] [--level-rule v3|v2] [--peak-mode auto|limiter]
+                                                                           çıkış 1: çıktı denetimi geçmedi
   normtext "<metin>"
-  compare  "<a>" "<b>"      (@dosya da olur)                               çıkış 0 yalnız sözcük dizisi aynıysa
+  compare  "<a>" "<b>" [--strict]  (@dosya da olur)   çıkış 0: sözcük dizisi aynı ya da yalnız v3 Scribe yazım
+                                                       istisnalarıyla aynı (JSON'da "exceptions"); --strict: v2
   f0step   <a.wav> <b.wav> [--sex f|m]
   rank     <çekim-klasörü> --unit-json '<birim>' --sex f|m [--match-f0 HZ --match-rate R]
 Hata (okunamayan dosya, eksik argüman): çıkış 3.
@@ -679,6 +681,129 @@ def tp_limit(y, sr, ceiling_db):
     return y * g, g
 
 
+# ------------------------------------------------------------------------------------------------ v3: klip düzeyinde tepe yönetimi
+# PLAN.v3 §E.2 son madde, §F A adımı. Pilotta Hakan'ın 40 parçası tek başına gerçek tepe sınırlayıcısıyla > 3 dB kısıldı
+# (tepe/yükseklik oranı ≈ 21 dB; −18 LUFS'te ≤ −1,5 dBTP için 2–6 dB, kısa tek sözcükte daha çok tepe indirimi gerekir).
+# v3 zinciri, eski sınırlayıcı > SOFT_TRIGGER_DB kısacaksa iki adayı karşılaştırır ve bozulma göstergesi daha iyi olanı alır:
+#   (1) eski zincir: kazanç + gerçek tepe sınırlayıcı (1 dB/ms atak, 0,05 dB/ms bırakma, 2 ms yumuşatma);
+#   (2) yumuşak tepe sıkıştırma + sınırlayıcı: yumuşak dizli (6 dB) 3:1 sıkıştırıcı, 4× üst örneklemeli tepe zarfı,
+#       10 ms Hann ileriye bakan atak (kazanç bir ses perdesi süresinden yavaş değişir: perde içi genlik kıpırtısı azalır),
+#       0,04 dB/ms bırakma; eşik, sınırlayıcıya en çok SOFT_RESIDUAL_DB bırakacak kadar derin, sıkıştırıcı kısması en
+#       çok SOFT_MAX_GR_DB. Kalan ≤ 1 dB'i eski sınırlayıcı alır (güvenlik).
+# Bozulma göstergesi (fast_sdr_db): çıktı ile "girdi × 20 Hz alçak geçirilmiş toplam kazanç" arasındaki farkın enerjisi;
+# hece hızındaki (≤ 20 Hz) düzey değişimini sayma, perde içi hızlı kazanç kıpırtısını (AM bozulması) sayar. Yüksek = temiz.
+# Denenip seçilmeyen: tüm-geçiren faz döndürme (Hakan'da ortanca 0,9 dB kazanç, bazı kliplerde 2 dB kötüleşme) ve tepe
+# kırpma (dalga biçimini keser; ölçülmedi, istenmedi).
+SOFT_RATIO, SOFT_KNEE_DB = 3.0, 6.0              # VARSAYIM (yaygın konuşma sıkıştırıcı ayarı)
+SOFT_ATTACK_S, SOFT_RELEASE_DB_PER_MS = 0.010, 0.04  # VARSAYIM
+SOFT_TRIGGER_DB = 1.0      # eski sınırlayıcı ≤ 1 dB kısıyorsa klip v2 ile birebir aynı kalır
+SOFT_RESIDUAL_DB = 1.0     # yumuşak sıkıştırmadan sonra sınırlayıcıya kalan tepe aşımı (dB)
+SOFT_MAX_GR_DB = 6.0       # yumuşak sıkıştırıcının en çok kısması (hece dinamiği ezilmesin; VARSAYIM)
+# Kısa parça (< 1 sn) düzeyi, v3: LUFS ölçülebiliyorsa (≥ 0,4 sn) uzun kliplerle AYNI ölçü ve hedef (BS.1770 kapılı,
+# −18 LUFS; karışımdaki konuşma/yatak denetimi de bu ölçüyü kullanır). Pilotta RMS'le eşitlenen kısa parçalar LUFS'te
+# uzun kliplerin 0–4,6 dB altında kaldı (Hakan ortalama −19,7, Neslihan −19,1 LUFS); sabit bir RMS ofseti bunu
+# düzeltemez (fark parçadan parçaya 0–4,6 dB). Tek heceli mikro parçanın ek ofseti bu ölçekte 0 dB: pilotun "+1 dB RMS"
+# kuralı mikro parçaları zaten ≈ −18,1 (Neslihan) / −19,0 (Hakan) LUFS'e koymuştu; sayımda ("on… dokuz… sekiz…") tek
+# ve iki heceli sayılar aynı yükseklikte duyulsun diye ek ofset konmaz (qa.microClipRmsOffsetDb yerine; SPEC v3 eki).
+MICRO_OFFSET_V3_DB = 0.0
+SHORT_LUFS_MIN_S = 0.4     # BS.1770 bloğu; daha kısa parçada v2 RMS yolu (referans gerekir)
+# Kısa tek sözcükte (Hakan: sözcük başındaki alçak frekanslı, yüksek tepe/ortalama oranlı ünlü) −18 LUFS'e çıkmak
+# sınırlayıcıya 7–15 dB iş bırakabiliyor. Doğallık için: seçilen zincirde sınırlayıcı payı SHORT_LIM_MAX_DB'i (kulak
+# bayrağı eşiği) aşarsa kısa parçanın hedefi 0,5 dB adımlarla en çok SHORT_MAX_DROP_DB iner; konuşma/yatak eşiğinin
+# kalan açığı karışımda o parçanın altında yerel yatak kısmasıyla kapanır (mix.py LOCAL_DUCK_*). VARSAYIM değerler.
+SHORT_LIM_MAX_DB = 3.0
+SHORT_MAX_DROP_DB = 3.0
+
+
+def tp_envelope(y):
+    """4× üst örneklemeli mutlak tepe (her örnek için), tp_limit ile aynı tanım."""
+    up = np.abs(resample_poly(y, TP_OVERSAMPLE, 1))
+    up = up[:len(y) * TP_OVERSAMPLE].reshape(len(y), TP_OVERSAMPLE).max(axis=1)
+    return np.maximum(up, np.abs(y))
+
+
+def soft_peak_comp(y, sr, thr_db, ratio=SOFT_RATIO, knee_db=SOFT_KNEE_DB, attack_s=SOFT_ATTACK_S,
+                   release_db_per_ms=SOFT_RELEASE_DB_PER_MS):
+    """Yumuşak dizli tepe sıkıştırıcı. Dönüş (y·g, kısma eğrisi dB)."""
+    P = 20.0 * np.log10(np.maximum(tp_envelope(y), 1e-12))
+    s = 1.0 - 1.0 / ratio
+    h = knee_db / 2.0
+    r = np.where(P <= thr_db - h, 0.0, np.where(P >= thr_db + h, s * (P - thr_db), s * (P - thr_db + h) ** 2 / (2 * knee_db)))
+    if r.max() <= 0:
+        return y.copy(), np.zeros_like(y)
+    idx = np.arange(len(r), dtype=np.float64)
+    dr = release_db_per_ms * 1000.0 / sr
+    r = np.maximum.accumulate(r + dr * idx) - dr * idx                       # doğrusal-dB bırakma
+    n = int(attack_s * sr) | 1
+    w = np.hanning(n + 2)[1:-1]
+    w /= w.sum()
+    r = np.convolve(maximum_filter1d(r, n), w, mode='same')                  # ileriye bakan Hann atak (tepede ≥ gereken)
+    r = np.maximum(r, 0.0)
+    return y * 10 ** (-r / 20.0), r
+
+
+def fast_sdr_db(y_out, x_in, total_gain_db):
+    """Bozulma göstergesi: 10·log(|y|² / |y − x·LP20(g)|²); g = toplam kazanç eğrisi (skaler dahil, doğrusal)."""
+    g = 10 ** (np.asarray(total_gain_db, dtype=np.float64) / 20.0)
+    if len(g) < 64:
+        return None
+    gs = sosfiltfilt(butter(2, 20.0, 'lowpass', fs=SR, output='sos'), g)
+    d = y_out - x_in * gs
+    return float(10 * np.log10(np.sum(y_out ** 2) / max(float(np.sum(d ** 2)), 1e-30)))
+
+
+def _level_soft(seg, sr, meas, target):
+    """Yumuşak tepe sıkıştırma + sınırlayıcı ile seviye. Derinlik D (eşik = tavan − D) ikiye bölmeyle: sınırlayıcıya
+    ≤ SOFT_RESIDUAL_DB kalan en sığ D; sıkıştırıcı kısması SOFT_MAX_GR_DB'i aşamaz (aşarsa en derin izinli D).
+    Dönüş (y, toplam kazanç eğrisi dB, bilgi, sınırlayıcı kazanç eğrisi) ya da None (ölçülemezse)."""
+    ceiling = TP_MAX_DBTP - 0.1
+
+    def run(D):
+        cur = meas(seg)
+        if cur is None:
+            return None
+        G = target - cur
+        z = rc = None
+        for _ in range(10):
+            z, rc = soft_peak_comp(seg * 10 ** (G / 20.0), sr, ceiling - D)
+            m = meas(z)
+            if m is None:
+                return None
+            if abs(target - m) <= 0.02:
+                break
+            G += target - m
+        return z, rc, G
+
+    lo, hi = -12.0, 18.0                         # D < 0: eşik tavanın üstünde (sıkıştırıcı az, sınırlayıcı çok iş yapar)
+    ok = None
+    deepest_allowed = None
+    for _ in range(12):
+        D = (lo + hi) / 2
+        res = run(D)
+        if res is None:
+            return None
+        z, rc, G = res
+        if rc.max() > SOFT_MAX_GR_DB:          # çok derin: hece dinamiği ezilir
+            hi = D
+            continue
+        deepest_allowed = (D, z, rc, G) if (deepest_allowed is None or D > deepest_allowed[0]) else deepest_allowed
+        if true_peak_db(z) - ceiling > SOFT_RESIDUAL_DB:
+            lo = D
+        else:
+            hi = D
+            ok = (D, z, rc, G)
+    pick = ok or deepest_allowed
+    if pick is None:
+        return None
+    D, z, rc, G = pick
+    y, g_db2, g_lim = _level(z, sr, meas, target)
+    total = G + g_db2 - rc - 20.0 * np.log10(np.maximum(g_lim, 1e-12))
+    info = {'depth_db': r3(D, 2), 'comp_gr_max_db': r3(float(rc.max()), 2),
+            'comp_sec_over_1db': r3(float(np.sum(rc > 1.0)) / sr, 3),
+            'limiter_max_db': r3(float(-db(g_lim.min())), 2), 'residual_met': ok is not None}
+    return y, total, info, g_lim
+
+
 def _level(seg, sr, meas, target):
     """Hedef seviyeye getirir, gerçek tepe ≤ −1,5 dBTP için sınırlar. Dönüş (y, toplam skaler kazanç dB, sınırlayıcı eğrisi)."""
     ceiling = TP_MAX_DBTP - 0.1
@@ -701,9 +826,12 @@ def _level(seg, sr, meas, target):
     return seg, g_db, g_tot
 
 
-def process_array(x, sr, sex, micro=False, ref_rms_db=None):
+def process_array(x, sr, sex, micro=False, ref_rms_db=None, level_rule='v3', peak_mode='auto'):
     """SPEC §3: kırpma (çıktı ölçeğinde −50 dBFS, 60/250 ms pay, 10 ms uç) → HPF → gerekirse de-ess → seviye
-    (≥ 1 sn: −18 LUFS ±0,5 ve ≤ −1,5 dBTP; < 1 sn: referans konuşma RMS'i, mikro +1 dB). Dönüş (y, rapor).
+    (≥ 1 sn: −18 LUFS ±0,5 ve ≤ −1,5 dBTP). < 1 sn: level_rule='v3' (SPEC v3 eki) → aynı −18 LUFS (BS.1770 kapılı;
+    mikro ek ofseti MICRO_OFFSET_V3_DB), LUFS ölçülemeyen (< 0,4 sn) parçada ve level_rule='v2'de referans konuşma RMS'i
+    (mikro +1 dB). Tepe: peak_mode='auto' → eski sınırlayıcı > SOFT_TRIGGER_DB kısacaksa yumuşak tepe sıkıştırma adayı
+    da denenir, bozulma göstergesi (fast_sdr_db) yüksek olan seçilir; 'limiter' → yalnız v2 sınırlayıcı. Dönüş (y, rapor).
     Kırpma eşiği çıktı ölçeğinde olduğu için uygulanan skaler kazanç bulununca kırpma yeniden yapılır (en çok 3 tur)."""
     rep = {'sex': sex, 'hpf_hz': HPF_HZ[sex], 'in_duration': r3(len(x) / sr)}
     y = hpf(x, sr, sex)
@@ -720,7 +848,13 @@ def process_array(x, sr, sex, micro=False, ref_rms_db=None):
     thr_in, thr_src = silence_threshold_in(y, sr)
     g0 = TRIM_THR_DBFS - thr_in
     first, last = edges(g0)
-    if (last - first) / sr + LEAD_S + TAIL_S < SHORT_CLIP_S and ref_rms_db is not None:
+    short_v3 = level_rule == 'v3' and (last - first) / sr + LEAD_S + TAIL_S < SHORT_CLIP_S
+    L_in = lufs(y[max(0, first - lead):last + tail + 1], sr) if short_v3 else None
+    if short_v3 and L_in is not None:
+        g0 = TARGET_LUFS + (MICRO_OFFSET_V3_DB if micro else 0.0) - L_in
+        first, last = edges(g0)
+        thr_src = 'lufs-hedef'
+    elif (last - first) / sr + LEAD_S + TAIL_S < SHORT_CLIP_S and ref_rms_db is not None:
         r_in = speech_rms_db(y[first:last + 1], sr)
         if r_in is not None:
             g0 = float(ref_rms_db) + (MICRO_OFFSET_DB if micro else 0.0) - r_in
@@ -736,6 +870,9 @@ def process_array(x, sr, sex, micro=False, ref_rms_db=None):
         seg, dinfo = deess(seg, sr, speech_rms_db(seg, sr))
         if dur >= SHORT_CLIP_S:
             mode, target, meas = 'lufs', TARGET_LUFS, (lambda z: lufs(z, sr))
+        elif level_rule == 'v3' and dur >= SHORT_LUFS_MIN_S and lufs(seg, sr) is not None:
+            mode, meas = 'lufs-short', (lambda z: lufs(z, sr))
+            target = TARGET_LUFS + (MICRO_OFFSET_V3_DB if micro else 0.0)
         else:
             if ref_rms_db is None:
                 raise ValueError('klip %.3f sn < 1 sn: --ref-rms-db gerekli' % dur)
@@ -753,19 +890,62 @@ def process_array(x, sr, sex, micro=False, ref_rms_db=None):
         first, last = nf, nl
     rep.update({'trim_thr_source': thr_src, 'trim_passes': passes,
                 'trim_in_sec': [r3(first / sr), r3(last / sr)], 'lead_pad_ms': r3(pad_l / sr * 1000, 1),
-                'tail_pad_ms': r3(pad_r / sr * 1000, 1), 'deess': dinfo, 'level_mode': mode})
+                'tail_pad_ms': r3(pad_r / sr * 1000, 1), 'deess': dinfo, 'level_mode': mode,
+                'level_rule': level_rule})
     if mode == 'rms':
         rep.update({'ref_rms_db': float(ref_rms_db), 'micro': bool(micro)})
+    if mode == 'lufs-short':
+        rep.update({'micro': bool(micro), 'micro_offset_db': MICRO_OFFSET_V3_DB if micro else 0.0})
+    tol = LUFS_TOL if mode != 'rms' else 0.5
+
+    def chain(tgt, out, g_db, g_lim):
+        """Tepe yönetimi (v3): eski zincir sonucu verilir; gerekirse yumuşak aday denenir, iyisi seçilir."""
+        lim = float(-db(g_lim.min()))
+        pk = {'chain': 'limiter', 'trigger_limiter_db': r3(lim, 2), 'peak_mode': peak_mode}
+        if peak_mode == 'auto' and lim > SOFT_TRIGGER_DB:
+            total_old = g_db - 20.0 * np.log10(np.maximum(g_lim, 1e-12))
+            sdr_old = fast_sdr_db(out, seg, total_old)
+            pk['candidates'] = {'limiter': {'fast_sdr_db': r3(sdr_old, 2), 'limiter_max_db': r3(lim, 2)}}
+            soft = _level_soft(seg, sr, meas, tgt)
+            if soft is not None:
+                y2, total2, info2, g_lim2 = soft
+                sdr2 = fast_sdr_db(y2, seg, total2)
+                lv2, tp2 = meas(y2), true_peak_db(y2)
+                ok2 = lv2 is not None and abs(lv2 - tgt) <= tol and tp2 <= TP_MAX_DBTP and not clipping(y2)['clipped']
+                pk['candidates']['soft+limiter'] = dict(info2, fast_sdr_db=r3(sdr2, 2), checks_ok=bool(ok2))
+                if ok2 and sdr2 is not None and sdr_old is not None and sdr2 > sdr_old:
+                    out, g_lim = y2, g_lim2
+                    lim = float(-db(g_lim.min()))
+                    pk.update({'chain': 'soft+limiter', 'comp_gr_max_db': info2['comp_gr_max_db'],
+                               'comp_sec_over_1db': info2['comp_sec_over_1db'], 'depth_db': info2['depth_db'],
+                               'residual_met': info2['residual_met']})
+            pk['fast_sdr_db'] = pk['candidates'].get(pk['chain'], {}).get('fast_sdr_db')
+        return out, g_lim, lim, pk
+
+    out, g_lim, lim_db, peak = chain(target, out, g_db, g_lim)
+    if mode == 'lufs-short' and peak_mode == 'auto' and lim_db > SHORT_LIM_MAX_DB:
+        # Kısa parça: sınırlayıcı payı > 3 dB kalıyorsa hedef 0,5 dB adımlarla en çok SHORT_MAX_DROP_DB iner
+        # (kalan konuşma/yatak açığı karışımda yerel yatak kısmasıyla kapanır; mix.py).
+        t0, t = target, target
+        tries = [[r3(t, 2), r3(lim_db, 2)]]
+        while lim_db > SHORT_LIM_MAX_DB and t - 0.5 >= TARGET_LUFS - SHORT_MAX_DROP_DB - 1e-9:
+            t -= 0.5
+            o, gdb, gl = _level(seg, sr, meas, t)
+            out, g_lim, lim_db, peak = chain(t, o, gdb, gl)
+            tries.append([r3(t, 2), r3(lim_db, 2)])
+        target = t
+        rep['short_level_capped'] = {'from_lufs': t0, 'to_lufs': t, 'tries_target_limiter': tries,
+                                     'rule': 'sınırlayıcı payı ≤ %.1f dB; hedef en çok %.1f dB iner' % (
+                                         SHORT_LIM_MAX_DB, SHORT_MAX_DROP_DB)}
+    rep['peak'] = peak
     final_level = meas(out)
     tp = true_peak_db(out)
-    lim_db = float(-db(g_lim.min()))
     lim_sec = float(np.sum(g_lim < 10 ** (-0.1 / 20))) / sr
     lim_sec1 = float(np.sum(g_lim < 10 ** (-1.0 / 20))) / sr
     rep.update({'out_duration': r3(dur), 'target': target, 'level': r3(final_level, 2),
                 'true_peak_dbtp': r3(tp, 2), 'limiter_max_db': r3(lim_db, 2), 'limiter_sec': r3(lim_sec, 3),
                 'limiter_sec_over_1db': r3(lim_sec1, 3),
                 'rms_db': r3(speech_rms_db(out, sr), 2), 'lufs': r3(lufs(out, sr), 2)})
-    tol = LUFS_TOL if mode == 'lufs' else 0.5
     rep['checks'] = {'level_in_tolerance': bool(final_level is not None and abs(final_level - target) <= tol),
                      'true_peak_ok': bool(tp <= TP_MAX_DBTP), 'no_clipping': not clipping(out)['clipped']}
     rep['pass'] = all(rep['checks'].values())
@@ -807,6 +987,99 @@ def compare_text(a, b):
         if op != 'equal':
             diff.append({'op': op, 'a_pos': i1, 'a': wa[i1:i2], 'b_pos': j1, 'b': wb[j1:j2]})
     return False, diff
+
+
+# ------------------------------------------------------------------------------------------------ v3: Scribe yazım istisnaları
+# PLAN.v3 §A.3 / §E.2. Scribe'ın yazımı ile metnin yazımı arasında YALNIZ şu iki fark eş sayılır (liste Türkçe editörün
+# onayına gider: render/scribe_istisnalari.md). Kullanılan her istisna sonuçta ayrıca raporlanır (sessizce yutulmaz).
+#   1) birleşik: bitişik yazılan birleşik sözcüğün ayrı yazımı (ya da tersi): "sırtüstü" = "sırt üstü". Parçaların
+#      her biri ≥ 2 harf olmalı ve hiçbiri ayrı yazılan bağlaç/soru eki olmamalı (de/da, ki, mi…): "sende" ≠ "sen de",
+#      "yada" ≠ "ya da" (anlam ve vurgu değişir; bunlar istisna değildir).
+#   2) ek-fiil: ek-fiilin bitişik ve ayrı yazımı: -(y)sA = ise, -(y)DI = idi, -(y)mIş = imiş (ünlü uyumu, ünlüyle biten
+#      gövdede y kaynaştırması, sert ünsüzden sonra -tI); kişi eki -m/-n/-k iki yazımda da aynı: "nefesteyse" =
+#      "nefeste ise", "hastaydı" = "hasta idi", "kitaptı" = "kitap idi", "yorgunmuş" = "yorgun imiş", "isem" = "-(y)sAm".
+SCRIBE_CLITICS = frozenset(['de', 'da', 'ki', 'mi', 'mı', 'mu', 'mü', 'ise', 'idi', 'imiş'])
+_BACK, _FRONT = set('aıou'), set('eiöü')
+_VOICELESS = set('çfhkpsşt')
+_COPULA = {'ise': 'sA', 'idi': 'DI', 'imiş': 'mIş'}
+_PERSON = ('', 'm', 'n', 'k')
+
+
+def _last_vowel(w):
+    for ch in reversed(w):
+        if ch in _BACK or ch in _FRONT:
+            return ch
+    return None
+
+
+def copula_fuse(stem, cop):
+    """Ayrı yazılan ek-fiili gövdeye bitişik yazar: ('nefeste', 'ise') → 'nefesteyse'. Tanınmayan ek-fiilde None."""
+    base = None
+    for c in _COPULA:
+        if cop.startswith(c) and cop[len(c):] in _PERSON:
+            base, person = c, cop[len(c):]
+            break
+    if base is None:
+        return None
+    v = _last_vowel(stem)
+    if v is None:
+        return None
+    A = 'a' if v in _BACK else 'e'
+    I = {'a': 'ı', 'ı': 'ı', 'o': 'u', 'u': 'u', 'e': 'i', 'i': 'i', 'ö': 'ü', 'ü': 'ü'}[v]
+    vowel_final = stem[-1] in _BACK or stem[-1] in _FRONT
+    buf = 'y' if vowel_final else ''
+    D = 't' if (not vowel_final and stem[-1] in _VOICELESS) else 'd'
+    suf = _COPULA[base].replace('A', A).replace('I', I).replace('D', D)
+    return stem + buf + suf + person
+
+
+def _scribe_align(wa, wb):
+    """wa ile wb'yi sözcük sözcük hizalar; eşit olmayan yerde yalnız iki istisnayı dener. Dönüş (eşit mi, kullanılanlar)."""
+    i = j = 0
+    used = []
+    while i < len(wa) or j < len(wb):
+        if i < len(wa) and j < len(wb) and wa[i] == wb[j]:
+            i += 1
+            j += 1
+            continue
+        hit = None
+        for (x, y, xi, yj, side) in ((wa, wb, i, j, 'b'), (wb, wa, j, i, 'a')):
+            if xi >= len(x):
+                continue
+            for k in (2, 3):                                   # 1) birleşik: x[xi] = y[yj] + … + y[yj+k−1]
+                parts = y[yj:yj + k]
+                if len(parts) == k and ''.join(parts) == x[xi] and all(len(p) >= 2 for p in parts) \
+                        and not any(p in SCRIBE_CLITICS for p in parts):
+                    hit = ('birleşik', side, x[xi], parts, 1, k)
+                    break
+            if hit:
+                break
+            if yj + 1 < len(y) and copula_fuse(y[yj], y[yj + 1]) == x[xi]:   # 2) ek-fiil
+                hit = ('ek-fiil', side, x[xi], y[yj:yj + 2], 1, 2)
+                break
+        if not hit:
+            return False, used
+        rule, side, fused, parts, nx, ny = hit
+        used.append({'rule': rule, 'fused': fused, 'split': list(parts), 'split_in': side, 'a_pos': i, 'b_pos': j})
+        if side == 'b':          # ayrı yazım b'de
+            i, j = i + nx, j + ny
+        else:
+            i, j = i + ny, j + nx
+    return True, used
+
+
+def scribe_equal(tts, scribe, exceptions=True):
+    """SPEC §4.2 + v3 eki: normalleştirilmiş sözcük dizisi birebir aynı mı; değilse (exceptions=True) yalnız iki yazım
+    istisnasıyla mı eşit. Dönüş {equal, strict_equal, exceptions, diff}."""
+    wa, wb = normtext(tts), normtext(scribe)
+    strict, diff = compare_text(tts, scribe)
+    if strict:
+        return {'equal': True, 'strict_equal': True, 'exceptions': [], 'diff': []}
+    if exceptions:
+        ok, used = _scribe_align(wa, wb)
+        if ok:
+            return {'equal': True, 'strict_equal': False, 'exceptions': used, 'diff': diff}
+    return {'equal': False, 'strict_equal': False, 'exceptions': [], 'diff': diff}
 
 
 def syllables(text):
@@ -1055,11 +1328,14 @@ def main(argv=None):
     p.add_argument('--sex', choices=['f', 'm'], required=True)
     p.add_argument('--micro', action='store_true')
     p.add_argument('--ref-rms-db', type=float)
+    p.add_argument('--level-rule', choices=['v3', 'v2'], default='v3', help='< 1 sn parça düzeyi (SPEC v3 eki)')
+    p.add_argument('--peak-mode', choices=['auto', 'limiter'], default='auto', help='v3 tepe yönetimi ya da v2 sınırlayıcı')
     p = sp.add_parser('normtext')
     p.add_argument('text')
     p = sp.add_parser('compare')
     p.add_argument('a')
     p.add_argument('b')
+    p.add_argument('--strict', action='store_true', help='v2: Scribe yazım istisnaları olmadan')
     p = sp.add_parser('f0step')
     p.add_argument('a')
     p.add_argument('b')
@@ -1112,7 +1388,7 @@ def main(argv=None):
             return 0
         if a.cmd == 'process':
             x, sr = load(a.inp)
-            y, rep = process_array(x, sr, a.sex, a.micro, a.ref_rms_db)
+            y, rep = process_array(x, sr, a.sex, a.micro, a.ref_rms_db, a.level_rule, a.peak_mode)
             write_wav(a.out, y, sr)
             chk = sf.info(a.out)
             rep.update({'in': os.path.abspath(a.inp), 'out': os.path.abspath(a.out),
@@ -1123,12 +1399,18 @@ def main(argv=None):
             _dump(normtext(_arg_text(a.text)))
             return 0
         if a.cmd == 'compare':
-            eq, diff = compare_text(_arg_text(a.a), _arg_text(a.b))
-            if eq:
-                _dump({'equal': True, 'words': len(normtext(_arg_text(a.a)))})
+            ta, tb = _arg_text(a.a), _arg_text(a.b)
+            res = scribe_equal(ta, tb, exceptions=not a.strict)
+            if res['equal']:
+                out = {'equal': True, 'words': len(normtext(ta)), 'strict_equal': res['strict_equal']}
+                if res['exceptions']:
+                    out.update({'exceptions': res['exceptions'], 'a': normtext(ta), 'b': normtext(tb),
+                                'note': 'yalnız SPEC v3 eki Scribe yazım istisnalarıyla eşit (Türkçe editör onayı)'})
+                _dump(out)
                 return 0
-            _dump({'equal': False, 'a': normtext(_arg_text(a.a)), 'b': normtext(_arg_text(a.b)), 'diff': diff})
-            for d in diff:
+            _dump({'equal': False, 'a': normtext(ta), 'b': normtext(tb), 'diff': res['diff'],
+                   'exceptions_tried': not a.strict})
+            for d in res['diff']:
                 print('%s @a%d/b%d: -%s +%s' % (d['op'], d['a_pos'], d['b_pos'], ' '.join(d['a']), ' '.join(d['b'])))
             return 1
         if a.cmd == 'f0step':

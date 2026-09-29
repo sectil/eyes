@@ -90,8 +90,21 @@ def r(v, n=2):
 
 
 # ================================================================================================ seçimler
+PIECES_RULE = 'v3'          # 'v3': sel/<ses>/reprocess-v3.json parçaları (PLAN.v3 §F A); 'v2': seçimdeki parçalar
+
+
+def load_reprocess(v):
+    p = '%s/sel/%s/reprocess-v3.json' % (R, v)
+    if PIECES_RULE != 'v3':
+        return None
+    if not os.path.exists(p):
+        raise SystemExit('v3 parça dosyası yok: %s (önce tools/reprocess_v3.py)' % p)
+    return json.load(open(p, encoding='utf-8'))
+
+
 def load_selection(v):
     units, meta, sflags = {}, [], []
+    rp = load_reprocess(v)
     for part in (1, 2):
         p = '%s/sel/%s/selection-%s-%d.json' % (R, v, v, part)
         s = json.load(open(p, encoding='utf-8'))
@@ -121,14 +134,29 @@ def load_selection(v):
                 fl2.append(f)
         flags[uid] = fl2
         for p in e['pieces']:
-            info = sf.info(p['file'])
+            f = p['file']
+            v3 = None
+            if rp is not None:
+                v3 = rp['pieces'][p['piece_id']]
+                if v3['v2_file'] != p['file'] or v3['unit'] != uid:
+                    raise SystemExit('reprocess-v3 eşlemesi tutmuyor: %s' % p['piece_id'])
+                f = v3['file']
+            info = sf.info(f)
             if info.samplerate != SR or info.channels != 1:
-                raise SystemExit('parça biçimi beklenmedik: %s (%d Hz, %d kanal)' % (p['file'], info.samplerate, info.channels))
-            d = {'piece_id': p['piece_id'], 'unit': uid, 'text': p.get('text'), 'file': p['file'],
-                 'frames': info.frames, 'dur': info.frames / SR}
+                raise SystemExit('parça biçimi beklenmedik: %s (%d Hz, %d kanal)' % (f, info.samplerate, info.channels))
+            d = {'piece_id': p['piece_id'], 'unit': uid, 'text': p.get('text'), 'file': f,
+                 'frames': info.frames, 'dur': info.frames / SR, 'v2_file': p['file'],
+                 'v3': ({'changed': v3['changed'], 'chain': v3['v3']['peak']['chain'],
+                         'level_mode': v3['v3']['level_mode'], 'lufs': v3['v3']['lufs'],
+                         'v2_lufs': v3['v2']['lufs'], 'limiter_max_db': v3['v3']['limiter_max_db'],
+                         'v2_limiter_max_db': v3['v2']['limiter_max_db'],
+                         'comp_gr_max_db': v3['v3']['peak'].get('comp_gr_max_db'),
+                         'short_level_capped': v3['v3'].get('short_level_capped')} if v3 else None)}
             pieces[p['piece_id']] = d
             unit_pieces[uid].append(d)
-    return {'units': units, 'pieces': pieces, 'unit_pieces': unit_pieces, 'flags': flags, 'meta': meta}
+    return {'units': units, 'pieces': pieces, 'unit_pieces': unit_pieces, 'flags': flags, 'meta': meta,
+            'reprocess': ({'file': '%s/sel/%s/reprocess-v3.json' % (R, v), 'summary': rp['summary'],
+                           'constants': rp['constants']} if rp else None)}
 
 
 def clip_pieces(sel, c):
@@ -363,7 +391,8 @@ def voice_track(plan, sel):
             speech.append({'piece': pc['piece_id'], 'unit': pc['unit'], 'clip': c['id'], 'block': ev['block'],
                            'phase': c['phase'], 'start': s0 / SR, 'end': (s0 + len(x)) / SR, 'sub_index': k,
                            'n_subs': len(ps), 'plan_text': sub['text'], 'spoken_text': pc['text'],
-                           'voice_gain_db': float(gdb[0]), 'file': pc['file'], 'cue': c.get('cue') or {}})
+                           'voice_gain_db': float(gdb[0]), 'file': pc['file'], 'cue': c.get('cue') or {},
+                           'v3': pc.get('v3')})
     return v, speech, {'points_t': pts_t, 'points_db': pts_g, 'ramps': ramps}
 
 
@@ -753,6 +782,35 @@ def speech_over_bed(v_pow, bg_pow, speech):
     return res, rows
 
 
+LOCAL_DUCK_TRIGGER_DB = SOB_MIN      # yalnız eşik altı parça (1 sn'den kısalar dahil; PLAN.v3 §E.3)
+LOCAL_DUCK_TO_DB = SOB_MIN + 0.5     # VARSAYIM: kısmadan sonra en az 15,5 dB (0,5 dB pay)
+LOCAL_DUCK_ST_HALF_S = 1.5           # 3 sn ST penceresinin yarısı: parçayı kapsayan her pencere kısılmış yatak görür
+LOCAL_DUCK_RAMP_MIN_S = 1.0          # VARSAYIM
+LOCAL_DUCK_RATE_DB_S = 1.0           # iniş ve çıkış ≤ 1 dB/sn (qa.windowLoudnessRiseMaxDbPerSec ile aynı sınır)
+
+
+def local_duck_curve(needs):
+    """Yerel yatak kısması (dB, 100 Hz): her parça için [başlangıç − 1,5, bitiş + 1,5] sn düz −d dB, iki yanda
+    max(1 sn, d / 1 dB/sn) doğrusal-dB rampa; üst üste binenlerde en derini. needs: {parça: (başlangıç, bitiş, d)}."""
+    fs = 100
+    t = np.arange(T * fs + 1) / fs
+    g = np.zeros(len(t))
+    spans = []
+    for pid, (a, b, d) in sorted(needs.items(), key=lambda kv: kv[1][0]):
+        p0, p1 = a - LOCAL_DUCK_ST_HALF_S, b + LOCAL_DUCK_ST_HALF_S
+        rr = max(LOCAL_DUCK_RAMP_MIN_S, d / LOCAL_DUCK_RATE_DB_S)
+        g = np.minimum(g, np.interp(t, [p0 - rr, p0, p1, p1 + rr], [0.0, -d, -d, 0.0], left=0.0, right=0.0))
+        spans.append({'piece': pid, 'depth_db': r(d, 2), 'flat': [r(p0, 2), r(p1, 2)], 't0': r(p0 - rr, 2),
+                      't1': r(p1 + rr, 2), 'ramp_s': r(rr, 2)})
+    return t, g, spans
+
+
+def apply_gain_curve(x, t_env, g_db):
+    ts = np.arange(len(x), dtype=np.float64) / SR
+    g = 10 ** (np.interp(ts, t_env, g_db) / 20)
+    return (x * g[:, None].astype(np.float32)).astype(np.float32)
+
+
 def phase_spans_from_speech(speech):
     first = {}
     for s in speech:
@@ -938,6 +996,25 @@ def encode_mp3(x, path):
 
 
 # ================================================================================================ ana akış
+def v3_flags(s, duck_spans):
+    """Zaman çizelgesi bayrakları (v3): yeniden işlenen, yumuşak tepe, kısa düzey, sınırlayıcı > 3 dB, yerel kısma."""
+    out = set()
+    x = s.get('v3') or {}
+    if x.get('changed'):
+        out.add('v3-yeniden-islendi')
+    if x.get('chain') == 'soft+limiter':
+        out.add('v3-yumusak-tepe')
+    if x.get('level_mode') == 'lufs-short':
+        out.add('v3-kisa-duzey')
+    if x.get('short_level_capped'):
+        out.add('v3-kisa-duzey-sinirli')
+    if (x.get('limiter_max_db') or 0) > audio.LIM_FLAG_DB:
+        out.add('kulak-sinirlayici')
+    if any(d['piece'] == s['piece'] for d in duck_spans):
+        out.add('v3-yerel-kisma')
+    return out
+
+
 def ab_key():
     p = OUT + '/_ab_key.json'
     if os.path.exists(p):
@@ -1099,6 +1176,38 @@ def main(argv=None):
             log('konuşma/yatak ofsetleri', v, {k: round(x, 2) for k, x in off.items()})
         else:
             log('UYARI: konuşma/yatak 6 turda tutmadı')
+        # v3: yerel yatak kısması — 1 sn'den kısalar dahil her parça ≥ 15 dB (PLAN.v3 §E.3); A ve B'ye ORTAK
+        needs, duck_iters, duck_spans = {}, [], []
+        t_d = g_d = None
+        for lab in ('A', 'B'):
+            stems[lab]['music0'], stems[lab]['nat0'] = stems[lab]['music'], stems[lab]['nat']
+        for it in range(5):
+            add = {}
+            for lab in ('A', 'B'):
+                for sp_, row in zip(speech, stems[lab]['rows']):
+                    if row['diff'] is not None and row['diff'] < LOCAL_DUCK_TRIGGER_DB - 1e-9 or \
+                            (sp_['piece'] in needs and row['diff'] is not None and row['diff'] < LOCAL_DUCK_TO_DB - 0.05):
+                        add[sp_['piece']] = max(add.get(sp_['piece'], 0.0), LOCAL_DUCK_TO_DB - row['diff'] + 0.02)
+            duck_iters.append({'iter': it, 'needs_db': {k: r(x[2], 2) for k, x in needs.items()},
+                               'below': {k: r(x, 2) for k, x in add.items()}})
+            if not add:
+                break
+            for pid, d in add.items():
+                sp_ = next(x for x in speech if x['piece'] == pid)
+                prev = needs.get(pid, (0, 0, 0.0))[2]
+                needs[pid] = (sp_['start'], sp_['end'], prev + d)
+            t_d, g_d, duck_spans = local_duck_curve(needs)
+            for lab in ('A', 'B'):
+                S = stems[lab]
+                S['music'] = apply_gain_curve(S['music0'], t_d, g_d)
+                S['nat'] = apply_gain_curve(S['nat0'], t_d, g_d)
+                S['bg'] = S['music'] + S['nat'] + room + tone
+                S['sob'], S['rows'] = speech_over_bed(v_pow, kpower(S['bg']), speech)
+            log('yerel yatak kısması', v, {k: round(x[2], 2) for k, x in needs.items()})
+        else:
+            log('UYARI: yerel kısma 5 turda tutmadı')
+        for lab in ('A', 'B'):
+            del stems[lab]['music0'], stems[lab]['nat0']
         for lab in ('A', 'B'):
             S = stems[lab]
             mix0 = S['bg'] + voice[:, None] * np.float32(STEREO_SPEECH_GAIN)
@@ -1187,6 +1296,15 @@ def main(argv=None):
                                                             'nature': r(np.median(nst[mm]), 2),
                                                             'music_minus_nature': r(np.median(mst[mm] - nst[mm]), 2)}
             m['speech_over_bed_iterations'] = iters
+            m['local_duck'] = {'rule': 'eşik altı (< %.1f dB) her parça için yatak (müzik + imge + doğa) parça ±%.1f sn düz, '
+                                       'rampa max(%.1f sn, d / %.1f dB/sn); hedef ≥ %.1f dB; A ve B ortak' % (
+                                           LOCAL_DUCK_TRIGGER_DB, LOCAL_DUCK_ST_HALF_S, LOCAL_DUCK_RAMP_MIN_S,
+                                           LOCAL_DUCK_RATE_DB_S, LOCAL_DUCK_TO_DB),
+                               'spans': duck_spans, 'iterations': duck_iters}
+            m['speech_over_bed_pieces'] = [{'piece': x['piece'], 'phase': x['phase'], 'start': r(sp_['start'], 3),
+                                            'dur': r(x['dur'], 3), 'speech_lufs': r(x['speech_lufs'], 2),
+                                            'bed_st_max': r(x['bed_st_max'], 2), 'diff': r(x['diff'], 2)}
+                                           for x, sp_ in zip(S['rows'], speech)]
             report['mixes'][name] = m
             # zaman çizelgesi (kör: dosya adları yok)
             arr = S['arr']
@@ -1208,6 +1326,9 @@ def main(argv=None):
                 mus_ev.append({'layer': 'bed', 'event': 'level', **rp})
             for x_ in tone_ev:
                 mus_ev.append({'layer': 'tone', 'event': 'returnTone', **x_})
+            for d_ in duck_spans:
+                mus_ev.append({'layer': 'music+imge+nature', 'event': 'local-duck', 't0': d_['t0'], 't1': d_['t1'],
+                               'depth_db': d_['depth_db'], 'flat': d_['flat'], 'under_piece': d_['piece']})
             mus_ev.append({'layer': 'all', 'event': 'open-fade', 't0': 0.0, 't1': OPEN_FADE})
             mus_ev.append({'layer': 'music+nature', 'event': 'end-fade', 't0': T - END_FADE, 't1': float(T),
                            'cue': 'fade:5s (k.son)'})
@@ -1225,7 +1346,8 @@ def main(argv=None):
                               'voice_gain_db': r(s['voice_gain_db'], 2), 'visual_cue': s['visual_cue'],
                               'visual_state': s['visual_state'],
                               'flags': sorted({f['flag'] for f in flags.get(s['unit'], [])
-                                               if not f.get('piece') or f.get('piece') == s['piece']})}
+                                               if (not f.get('piece') or f.get('piece') == s['piece'])
+                                               and f['flag'] != 'kulak-sinirlayici'} | v3_flags(s, duck_spans))}
                              for i, s in enumerate(speech)],
                   'visual': vis,
                   'music_events': mus_ev,
@@ -1292,8 +1414,17 @@ def selection_flags(v, plan_units):
                 item['flag'] = f['flag']
             out[k].append(item)
     summ = {k: len(x) for k, x in out.items()}
+    v2_lim = [(x['unit'], x['piece']) for x in out['kulak-sinirlayici']]
+    lim = v2_lim
+    rp = sel.get('reprocess')
+    if rp:                                  # v3: sınırlayıcı bayrağı yeniden işlenmiş parçalardan
+        pcs = load_reprocess(v)['pieces']
+        lim = [(d['unit'], pid) for pid, d in pcs.items() if (d['v3']['limiter_max_db'] or 0) > audio.LIM_FLAG_DB]
+        summ['kulak-sinirlayici'] = len(lim)
+        summ['kulak-sinirlayici_v2_girdi'] = len(v2_lim)
+        summ['kulak-sinirlayici_v2_parca'] = sum(1 for d in pcs.values() if (d['v2']['limiter_max_db'] or 0) > audio.LIM_FLAG_DB)
     return {'counts': summ, 'kulak_units': out['kulak'], 'other_flags': out['other'],
-            'kulak_sinirlayici': [(x['unit'], x['piece']) for x in out['kulak-sinirlayici']],
+            'kulak_sinirlayici': lim, 'reprocess_summary': rp['summary'] if rp else None,
             'kesim_kulak_units': sorted({x['unit'] for x in out['kesim-kulak']}),
             'eklem_gt_2st_units': sorted({x['unit'] for x in out['eklem>2yt']}),
             'cut_verification': [m['cut_verification'] for m in sel['meta']]}
@@ -1336,7 +1467,12 @@ def verify_positions(name, lag):
             'median_corr': r(float(np.median([x[1] for x in rows])), 3),
             'max_abs_offset_ms': r(1000 * max(abs(x[2]) for x in rows), 2),
             'n_corr_below_0_9': sum(1 for x in rows if x[1] < 0.9),
-            'order_ok': bool(all(abs(x[2]) <= 0.002 for x in rows))}
+            'order_ok': bool(all(abs(x[2]) <= 0.002 for x in rows)),
+            'v3_ok': bool(all(abs(x[2]) <= POS_MAX_OFFSET_S for x in rows) and worst[1] >= POS_MIN_CORR),
+            'v3_rule': 'SPEC v3.5: ilinti ≥ %.2f (VARSAYIM), kayma ≤ %.0f ms' % (POS_MIN_CORR, POS_MAX_OFFSET_S * 1000)}
+
+
+POS_MIN_CORR, POS_MAX_OFFSET_S = 0.95, 0.001      # SPEC v3.5 / PLAN.v3 §E.3
 
 
 _PF = {}
@@ -1370,7 +1506,7 @@ def build_report(raw=None):
         rep['done_criteria'][name] = {
             'duration_900pm1': bool(abs(m['duration_s'] - T) <= 1.0),
             'order_as_plan': oc['same_order_and_text'] and oc['monotonic'],
-            'every_piece_found_at_its_time_in_mp3': rep['mixes'][name]['position_check_mp3']['order_ok'],
+            'every_piece_found_at_its_time_in_mp3': rep['mixes'][name]['position_check_mp3']['v3_ok'],
             'no_missing_or_duplicate_by_construction': oc['plan_pieces'] == oc['timeline_pieces'] and oc['duplicates'] == 0,
             'full_mix_scribe_alignment': None,
             'screen_equals_spoken': oc['screen_equals_spoken_all'],
@@ -1378,6 +1514,7 @@ def build_report(raw=None):
             'no_mix_only_clicks_mp3': m['clicks_mp3']['mix_only'] == 0,
             'no_digital_silence_ge_100ms_mp3': m['digital_silence_mp3']['runs_over_100ms'] == 0,
             'speech_over_bed_ge15_pieces_ge_1s': all(sob[ph]['pass_ge_1s'] for ph in PHASES),
+            'speech_over_bed_ge15_all_pieces_v3': all(sob[ph]['n_below_15_all'] == 0 for ph in PHASES),
             'true_peak_le_minus1': bool(m['true_peak_dbtp'] <= -1.0),
             'integrated_lufs': m['integrated_lufs'],
             'size_le_14MB': bool(m['bytes'] <= MAX_BYTES),
@@ -1386,8 +1523,10 @@ def build_report(raw=None):
     for v in rep.get('plans', {}):
         pj = json.load(open('%s/plan-%s.json' % (OUT, v), encoding='utf-8'))
         rep['selection_flags'][v] = selection_flags(v, set(pj['units_needed']))
+    rep['v3_changes'] = v3_changes(rep)
     rep['not_verified'] = [
-        'SPEC §7 "tam karışımın Scribe metni plan metniyle hizalanır": YAPILMADI. (1) Yerel dosya yükleme aracı bu '
+        'SPEC §7 "tam karışımın Scribe metni plan metniyle hizalanır": YAPILMADI; SPEC v3.5 ile yerine parça konum denetimi '
+        '(ilinti ≥ 0,95, kayma ≤ 1 ms) kondu. Pilottaki gerekçe: (1) Yerel dosya yükleme aracı bu '
         'oturumda yok (seçim ajanları da doğruladı: creative_attach_reference_file yalnız herkese açık https URL alır); '
         '(2) 4 × 900 sn Scribe ≈ 4 × 90 = 360 sent (gözlenen 0,1 sent/sn) ve konuşma kovasında kalan pay ≈ %.1f sent '
         '(tavan 550) — tavan aşılırdı. Yerine: karışım planın olay listesinden kuruldu; zaman çizelgesinin sırası, metni '
@@ -1395,6 +1534,9 @@ def build_report(raw=None):
         'çekimden gelir (selection-*.json).' % (550.0 - (rep['cost']['speech_bucket_cents'] or 0)),
         'Kulakla dinleme yapılmadı; bütün ifadeler ölçümdür.',
         'Parça kesimleri yalnız ölçüyle denetlendi (SPEC §4.3 c; "kesim-kulak" bayrakları seçim dosyalarında).',
+        'v3 tepe yönetimi ve kısa parça düzeyinin kulağa doğal gelip gelmediği ölçülemez; bozulma göstergesi (fast_sdr_db) '
+        'yalnız perde içi hızlı kazanç kıpırtısını sayar. Yeniden işlenen parçalar kulak listesinde (out/kulak_listesi.md).',
+        'v3 Scribe istisnaları Türkçe editör onayı bekliyor (render/scribe_istisnalari.md).',
     ]
     rep['decisions_varsayim'] = [
         'Konuşma: mono parça (−18 LUFS klip) iki kanala birim kazançla kondu — uygulama motorunun çalışıyla aynı. Stereo BS.1770 '
@@ -1429,7 +1571,10 @@ def build_report(raw=None):
         for x in sf_['other_flags']:
             if x['in_plan']:
                 ear.append('%s %s: %s — %s' % (v, x['unit'], x.get('flag'), (x['reason'] or '')[:160]))
-    ear += ['Hakan: gerçek tepe sınırlayıcısı > 3 dB kısan parçalar ("kulak-sinirlayici", listede)',
+    ear += ['Ayrıntılı, zamanlı kulak listesi: out/kulak_listesi.md (kesimler, Scribe istisnasıyla eşleşen klipler, v3 kısa parça ve '
+            'tepe düzeltmeleri, yerel yatak kısmaları)',
+            'v3: gerçek tepe sınırlayıcısı hâlâ > 3 dB kısan parçalar: ' + '; '.join(
+                '%s %s' % (v, ', '.join(p for _, p in sf_['kulak_sinirlayici']) or 'yok') for v, sf_ in rep['selection_flags'].items()),
             'Dönüş tınısı seçimi (sentez D5 / ElevenLabs sfx) ve düzeyi',
             'İmge katmanının düzeyi (−8 dB) ve tınısı; doğa düzeyi (−10 dB); orman-2 yinelenen esinti',
             'A/B kaynak ayrıntıları (_ab_details.json) — dinlemeden sonra açılır']
@@ -1439,13 +1584,120 @@ def build_report(raw=None):
     return rep
 
 
+def _sob_all(m):
+    s = m['speech_over_bed']
+    return (sum(s[ph]['n_below_15_all'] for ph in PHASES), min(s[ph]['min_diff_all'] for ph in PHASES),
+            min(s[ph]['min_diff_ge_1s'] for ph in PHASES))
+
+
+def v3_changes(rep):
+    """Önceki (v2) raporla karşılaştırma: out/_onceki_v2/report.json."""
+    p = OUT + '/_onceki_v2/report.json'
+    old = json.load(open(p, encoding='utf-8')) if os.path.exists(p) else {'mixes': {}}
+    rows = {}
+    for n, m in rep['mixes'].items():
+        o = old['mixes'].get(n)
+        nb, mn, mn1 = _sob_all(m)
+        row = {'v3': {'below15_all': nb, 'min_diff_all': mn, 'min_diff_ge_1s': mn1,
+                      'below15_pieces': [x for ph in PHASES for x in m['speech_over_bed'][ph]['below_15_pieces']],
+                      'integrated_lufs': m['integrated_lufs'], 'true_peak_dbtp': m['true_peak_dbtp'],
+                      'mix_limiter_max_db': m['tp_limiter'][-1]['limiter']['max_reduction_db'],
+                      'position_min_corr': m['position_check_mp3']['min_corr'],
+                      'position_max_offset_ms': m['position_check_mp3']['max_abs_offset_ms'],
+                      'local_duck': m.get('local_duck', {}).get('spans', []), 'bytes': m['bytes']}}
+        if o:
+            ob, omn, omn1 = _sob_all(o)
+            row['v2'] = {'below15_all': ob, 'min_diff_all': omn, 'min_diff_ge_1s': omn1,
+                         'below15_pieces': [x for ph in PHASES for x in o['speech_over_bed'][ph]['below_15_pieces']],
+                         'integrated_lufs': o['integrated_lufs'], 'true_peak_dbtp': o['true_peak_dbtp'],
+                         'mix_limiter_max_db': o['tp_limiter'][-1]['limiter']['max_reduction_db'],
+                         'position_min_corr': o['position_check_mp3']['min_corr'],
+                         'position_max_offset_ms': o['position_check_mp3']['max_abs_offset_ms'], 'bytes': o['bytes']}
+        rows[n] = row
+    pieces = {}
+    for v in rep.get('plans', {}):
+        rp = load_reprocess(v)
+        if rp:
+            pieces[v] = rp['summary']
+    sc = None
+    scp = OUT + '/scribe_v3_karsilastirma.json'
+    if os.path.exists(scp):
+        d = json.load(open(scp, encoding='utf-8'))
+        sc = {'attempts': d['attempts'], 'strict_equal': d['strict_equal'], 'v3_equal': d['v3_equal'],
+              'units': sorted({'%s %s (%s: %s)' % (x['voice'], x['unit'], x['exceptions'][0]['rule'], x['exceptions'][0]['fused'])
+                               for x in d['newly_equal']})}
+    return {'mixes': rows, 'pieces': pieces, 'scribe': sc, 'previous': p}
+
+
 def write_md(rep):
     L = []
     a = L.append
-    a('# Ders 2 · 15 dk pilot karışımı — ölçüm raporu')
+    a('# Ders 2 · 15 dk pilot karışımı — ölçüm raporu (v3)')
     a('')
-    a('Üretim: `%s` · SPEC §6–§7 · %s' % (rep['tool'], rep['generated_utc']))
+    a('Üretim: `%s` · SPEC §6–§7 + v3 eki · %s' % (rep['tool'], rep['generated_utc']))
     a('')
+    ch = rep.get('v3_changes')
+    if ch:
+        a('## v3: ne değişti (PLAN.v3 §F A adımı; ücretli çağrı yok)')
+        a('')
+        a('Önceki (v2) karışımlar, raporlar ve araçlar: `out/_onceki_v2/`. Dosya adları aynı. A/B eşlemesi değişmedi.')
+        a('')
+        a('| Dosya | Eşik altı parça (< 15 dB, < 1 sn dahil) v2 → v3 | En düşük fark, bütün parçalar (dB) v2 → v3 | '
+          'En düşük fark, ≥ 1 sn (dB) v2 → v3 | LUFS v2 → v3 | Gerçek tepe dBTP v2 → v3 | Karışım sınırlayıcısı en çok dB v2 → v3 | '
+          'Konum denetimi en düşük ilinti v2 → v3 | Yerel yatak kısması |')
+        a('|---|---|---|---|---|---|---|---|---|')
+        for n, x in ch['mixes'].items():
+            o, w = x.get('v2', {}), x['v3']
+            a('| %s | %s → %s | %s → %s | %s → %s | %s → %s | %s → %s | %s → %s | %s → %s | %s |' % (
+                n, o.get('below15_all'), w['below15_all'], o.get('min_diff_all'), w['min_diff_all'], o.get('min_diff_ge_1s'),
+                w['min_diff_ge_1s'], o.get('integrated_lufs'), w['integrated_lufs'], o.get('true_peak_dbtp'), w['true_peak_dbtp'],
+                o.get('mix_limiter_max_db'), w['mix_limiter_max_db'], o.get('position_min_corr'), w['position_min_corr'],
+                '; '.join('%s −%s dB (%s–%s sn)' % (d['piece'], d['depth_db'], d['t0'], d['t1']) for d in w['local_duck']) or 'yok'))
+        a('')
+        for n, x in ch['mixes'].items():
+            if x.get('v2', {}).get('below15_pieces'):
+                a('- %s v2 eşik altı: %s' % (n, ', '.join('%s (%s sn, %s dB)' % tuple(p) for p in x['v2']['below15_pieces'])))
+        a('')
+        a('**Parçalar** (`tools/reprocess_v3.py`, `sel/<ses>/reprocess-v3.json`):')
+        for v, sm in ch['pieces'].items():
+            a('- %s: %d parçadan %d parça değişti (öteki %d parça v2 ile örnek örnek aynı); yumuşak tepe sıkıştırma %d parçada; '
+              '< 1 sn parça %d; kısa parçada hedefi sınırla inen %d (%s); sınırlayıcı > 3 dB: v2 %d parça → v3 %d (%s)' % (
+                  v, sm['pieces'], sm['changed'], sm['pieces'] - sm['changed'], sm['soft_chain'], sm['short_pieces'],
+                  len(sm['short_capped']), ', '.join(sm['short_capped']) or '—', sm['limiter_gt3_v2'], sm['limiter_gt3_v3'],
+                  ', '.join(sm['limiter_gt3_v3_pieces']) or '—'))
+        a('')
+        a('**Neden bu yöntem:** kısa parçaların eşik altında kalmasının nedeni tepe değil düzey ölçüsüydü. Pilot kısa parçaları '
+          'RMS ile eşitlemişti ve bu parçalar LUFS\'te uzun kliplerin 0–4,6 dB altında kalmıştı. v3 kısa parçayı uzun kliplerle '
+          'aynı ölçüye (−18 LUFS, BS.1770) getirir; karışım denetimi de bu ölçüyü kullanır ve bir dizideki sözcükler aynı '
+          'yükseklikte olur. Hakan\'ın sesinde tepe/yükseklik oranı yüksektir (≈ 21 dB). Bu yüzden düzey yükselince tepe '
+          'yönetimi gerekti. Yalnız sınırlayıcı kullanılsaydı sözcük başında hızlı kazanç düşüşleri olurdu. Yerine klip düzeyinde '
+          'yumuşak dizli sıkıştırma kullanıldı: 10 ms atak, kazanç bir perde süresinden yavaş değişir, en çok 6 dB. Kalan tepeyi '
+          '(Hakan\'da ortanca ≈ 1 dB) sınırlayıcı alır. Klip başına bozulma göstergesi daha iyi olan zincir seçildi. Kısa tek sözcükte '
+          'sınırlayıcı payı 3 dB\'i aşacaksa düzey en çok 3 dB indi; kalan açık, yalnız o parçanın çevresinde yatağın '
+          'kısılmasıyla (≤ 1 dB/sn) kapandı. Denenip bırakılan: sabit RMS ofseti (fark parçadan parçaya değişiyor) ve '
+          'tüm-geçiren faz döndürme (Hakan\'da ortanca 0,9 dB, bazı kliplerde kötüleşme). Tepe kırpma kullanılmadı.')
+        a('')
+        if ch.get('scribe'):
+            sc = ch['scribe']
+            a('**Scribe yazım istisnaları** (SPEC v3.2, `render/scribe_istisnalari.md`, onay bekliyor): seçim dosyalarındaki %d '
+              'Scribe denemesinden eski kuralla %d, v3 istisnalarıyla %d deneme eşleşiyor. İstisnayla eş olanlar: %s.' % (
+                  sc['attempts'], sc['strict_equal'], sc['v3_equal'], '; '.join(sc['units'])))
+            a('')
+        fails = [(n, k) for n, dc in rep['done_criteria'].items() for k, v_ in dc.items() if v_ is False]
+        a('**Geçmeyen ölçüt:** ' + ('; '.join('%s `%s`' % f for f in fails) if fails else 'yok') + '.')
+        for n, m in rep['mixes'].items():
+            pc = m['position_check_mp3']
+            if not pc.get('v3_ok', True):
+                a('- %s: konum denetiminde en düşük ilinti %s (%s), SPEC v3.5 VARSAYIM eşiği 0,95. En büyük kayma %s ms '
+                  '(eşik 1 ms), yani parça yerinde. Aynı parça v2\'de 0,962 idi. v3\'te 2 dB alçak (v2\'de komşularından '
+                  '2 dB yüksekti). Parçada ıslıklı /s/ baskın; en iyi hizadan 2 örnek kayınca ilinti 0,47\'ye iniyor. '
+                  'Düşüklüğün kaynağı MP3\'ün gürültü benzeri yüksek frekansı dalga biçimiyle korumaması; yer hatası değil '
+                  '(ölçüm; `_v3work` tanısı). Eşik değiştirilmedi; karar orkestratörün ya da sahibin.' % (
+                      n, pc['min_corr'], pc['min_corr_piece'], pc['max_abs_offset_ms']))
+        a('')
+        a('**SPEC:** "v3 eki" eklendi (kesim kuralı, Scribe istisnaları, kısa parça ve tepe yönetimi, sıkı eşik, parça konum '
+          'denetimi). Eski maddeler yerinde.')
+        a('')
     a('Kör dinleme: A/B eşlemesi `out/_ab_key.json` ve kaynak ayrıntıları `out/_ab_details.json` içinde; bu rapor kaynak adı içermez.')
     a('')
     a('## Plan (ölçülen sürelerle, T = 900 sn, sahne orman)')
@@ -1521,8 +1773,8 @@ def write_md(rep):
             s_[ph]['st3_pct_below_15']) for ph in PHASES)))
     a('')
     a('3 sn ST penceresi cümle içi duraklamayı ve parça kuyruğunu da içerdiğinden söz ST değeri parçanın kendi düzeyinin '
-      '3–5 dB altına inebilir; en az değerler bu pencerelerdir. < 1 sn mikro parçalar (LUFS geçersiz, RMS ile eşitlendi; PLAN D.2) '
-      'içinde 15 dB altı kalanlar:')
+      '3–5 dB altına inebilir; en az değerler bu pencerelerdir. Sıkı eşik (SPEC v3.4, < 1 sn parçalar dahil her parça ≥ 15 dB; '
+      'v3\'te kısa parçalar da LUFS ile eşitlendi) altında kalanlar:')
     for n, m in rep['mixes'].items():
         lst = [x for ph in PHASES for x in m['speech_over_bed'][ph]['below_15_pieces']]
         a('- %s: %s' % (n, ', '.join('%s (%s sn, %s dB)' % tuple(x) for x in lst) if lst else 'yok'))
@@ -1578,7 +1830,8 @@ def write_md(rep):
         for x in f['other_flags']:
             a('  - %s: %s%s — %s' % (x.get('flag'), x['unit'], '' if x['in_plan'] else ' (planda yok)', (x['reason'] or '')[:200]))
         if f['kulak_sinirlayici']:
-            a('  - kulak-sinirlayici (> 3 dB tepe sınırlama): ' + ', '.join('%s%s' % (u, '' if p is None else '/' + p) for u, p in f['kulak_sinirlayici']))
+            a('  - kulak-sinirlayici (%s> 3 dB tepe sınırlama): ' % ('v3 parçaları, ' if f.get('reprocess_summary') else '') +
+              ', '.join('%s%s' % (u, '' if p is None else '/' + p) for u, p in f['kulak_sinirlayici']))
         a('  - kesim-kulak (kesim yalnız ölçüyle denetlendi): %d birim' % len(f['kesim_kulak_units']))
         a('  - eklem > 2 yt (taşıyıcı eklemi): ' + ', '.join(f['eklem_gt_2st_units']))
     a('')

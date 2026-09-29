@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-09-29T14:01:57.543828+00:00",
+ "generated_utc": "2026-09-29T20:31:17.852719+00:00",
  "spec": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/SPEC.md §6-§7",
  "tool": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/tools/mix.py",
  "T": 900,
@@ -7,9 +7,9 @@
   "nes": {
    "status": "ok",
    "mode": "pref→max",
-   "f": 0.1132,
+   "f": 0.1131,
    "total": 900.0,
-   "speech_sec": 286.364,
+   "speech_sec": 286.448,
    "sel": [
     "N1",
     "C1",
@@ -30,7 +30,7 @@
     "density": {
      "syll": 119.0,
      "frac": 0.47,
-     "deep_syll": 96.83,
+     "deep_syll": 96.883,
      "deep_frac": 0.346,
      "dead": [],
      "avg": 81.867
@@ -45,7 +45,7 @@
    "mode": "pref→max",
    "f": 0.0456,
    "total": 900.0,
-   "speech_sec": 278.429,
+   "speech_sec": 278.826,
    "sel": [
     "N1",
     "C1",
@@ -64,7 +64,7 @@
     "pass": true,
     "fails": [],
     "density": {
-     "syll": 125.962,
+     "syll": 125.96,
      "frac": 0.454,
      "deep_syll": 99.0,
      "deep_frac": 0.336,
@@ -85,10 +85,10 @@
  "mixes": {
   "ders2-15dk-nes-A": {
    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-nes-A.mp3",
-   "bytes": 12606318,
+   "bytes": 12607374,
    "encoding": {
     "mode": "ABR 120 kbit/s",
-    "bytes": 12606318,
+    "bytes": 12607374,
     "kbps_avg": 112.1,
     "tried": [
      "VBR V2 (mtrh, q=2)",
@@ -100,11 +100,11 @@
    "duration_s": 900.049,
    "mp3_decoder_offset_samples": 1105,
    "duration_float_mix_s": 900.0,
-   "integrated_lufs": -17.39,
-   "integrated_lufs_float_mix": -16.94,
-   "true_peak_dbtp": -2.76,
-   "true_peak_dbtp_float_mix": -2.22,
-   "true_peak_dbtp_before_limiter": -2.22,
+   "integrated_lufs": -17.33,
+   "integrated_lufs_float_mix": -16.87,
+   "true_peak_dbtp": -2.56,
+   "true_peak_dbtp_float_mix": -2.1,
+   "true_peak_dbtp_before_limiter": -2.1,
    "tp_limiter": [
     {
      "ceiling_dbtp": -2.0,
@@ -114,8 +114,8 @@
       "sec_over_0_5db": 0.0,
       "sec_over_1db": 0.0
      },
-     "tp_float_after_limiter": -2.22,
-     "tp_mp3": -2.76
+     "tp_float_after_limiter": -2.1,
+     "tp_mp3": -2.56
     }
    ],
    "speech_over_bed": {
@@ -123,7 +123,7 @@
      "pieces_ge_1s": 9,
      "min_diff_ge_1s": 17.31,
      "worst_piece": "a.izin",
-     "p10_diff_ge_1s": 17.38,
+     "p10_diff_ge_1s": 17.34,
      "median_diff_ge_1s": 17.49,
      "pieces_all": 10,
      "min_diff_all": 17.31,
@@ -131,8 +131,8 @@
      "speech_lufs_median": -14.99,
      "bed_st_under_speech_median": -32.52,
      "st3_windows_ge90pct_speech": 157,
-     "st3_min_diff": 14.93,
-     "st3_median_diff": 17.73,
+     "st3_min_diff": 14.94,
+     "st3_median_diff": 17.72,
      "st3_n_below_15": 1,
      "st3_pct_below_15": 0.6,
      "st3_worst_at_s": 12.7,
@@ -146,16 +146,16 @@
      "pieces_ge_1s": 47,
      "min_diff_ge_1s": 16.91,
      "worst_piece": "c1.l13",
-     "p10_diff_ge_1s": 17.22,
-     "median_diff_ge_1s": 17.8,
+     "p10_diff_ge_1s": 17.25,
+     "median_diff_ge_1s": 17.82,
      "pieces_all": 62,
-     "min_diff_all": 15.3,
+     "min_diff_all": 16.91,
      "n_below_15_all": 0,
      "speech_lufs_median": -16.49,
-     "bed_st_under_speech_median": -34.32,
-     "st3_windows_ge90pct_speech": 101,
-     "st3_min_diff": 14.75,
-     "st3_median_diff": 17.38,
+     "bed_st_under_speech_median": -34.33,
+     "st3_windows_ge90pct_speech": 98,
+     "st3_min_diff": 14.83,
+     "st3_median_diff": 17.41,
      "st3_n_below_15": 1,
      "st3_pct_below_15": 1.0,
      "st3_worst_at_s": 337.8,
@@ -170,15 +170,15 @@
      "min_diff_ge_1s": 16.6,
      "worst_piece": "c4.don",
      "p10_diff_ge_1s": 17.01,
-     "median_diff_ge_1s": 18.04,
+     "median_diff_ge_1s": 18.07,
      "pieces_all": 41,
-     "min_diff_all": 16.06,
+     "min_diff_all": 16.6,
      "n_below_15_all": 0,
      "speech_lufs_median": -17.99,
-     "bed_st_under_speech_median": -36.1,
-     "st3_windows_ge90pct_speech": 258,
-     "st3_min_diff": 15.51,
-     "st3_median_diff": 17.55,
+     "bed_st_under_speech_median": -36.11,
+     "st3_windows_ge90pct_speech": 259,
+     "st3_min_diff": 15.53,
+     "st3_median_diff": 17.54,
      "st3_n_below_15": 0,
      "st3_pct_below_15": 0.0,
      "st3_worst_at_s": 530.7,
@@ -200,7 +200,7 @@
      "speech_lufs_median": -14.99,
      "bed_st_under_speech_median": -32.83,
      "st3_windows_ge90pct_speech": 171,
-     "st3_min_diff": 15.21,
+     "st3_min_diff": 15.23,
      "st3_median_diff": 17.85,
      "st3_n_below_15": 0,
      "st3_pct_below_15": 0.0,
@@ -215,31 +215,31 @@
    "loudness_rise": {
     "bed_stem": {
      "stem": "yatak (müzik + doğa + oda + tını)",
-     "max_rise_db_per_s": 6.82,
+     "max_rise_db_per_s": 6.78,
      "at_s": 751.5,
-     "max_rise_in_speech_free_s": 6.82,
+     "max_rise_in_speech_free_s": 6.78,
      "at_speech_free_s": 751.5,
      "n_1s_steps_over_1db": 50,
      "top5": [
       [
        751.5,
-       6.82
+       6.78
       ],
       [
        751.4,
-       6.71
+       6.68
       ],
       [
        751.3,
-       6.59
+       6.56
       ],
       [
        751.2,
-       6.42
+       6.4
       ],
       [
        751.1,
-       6.21
+       6.19
       ]
      ]
     },
@@ -305,74 +305,74 @@
     },
     "full_mix_speech_free": {
      "stem": "tam karışım",
-     "max_rise_db_per_s": 18.52,
+     "max_rise_db_per_s": 19.32,
      "at_s": 2.4,
-     "max_rise_in_speech_free_s": 6.82,
+     "max_rise_in_speech_free_s": 6.78,
      "at_speech_free_s": 751.5,
-     "n_1s_steps_over_1db": 2120,
+     "n_1s_steps_over_1db": 2110,
      "top5": [
       [
        2.4,
-       18.52
-      ],
-      [
-       2.3,
-       18.33
+       19.32
       ],
       [
        2.5,
-       18.26
+       19.06
       ],
       [
-       890.8,
-       18.25
+       2.3,
+       18.98
       ],
       [
-       890.7,
-       18.17
+       2.6,
+       18.74
+      ],
+      [
+       2.2,
+       18.71
       ]
      ]
     },
     "tone_times_s": [
-     753.015
+     753.018
     ]
    },
    "windows_in_plan": 0,
    "texture_changes": [
     {
      "what": "yatak geçişi",
-     "t0": 105.238,
-     "t1": 113.238,
+     "t0": 105.254,
+     "t1": 113.254,
      "speech_cover": 0.87
     },
     {
      "what": "yatak geçişi",
-     "t0": 346.565,
-     "t1": 354.565,
+     "t0": 346.575,
+     "t1": 354.575,
      "speech_cover": 0.77
     },
     {
      "what": "yatak geçişi",
-     "t0": 571.102,
-     "t1": 579.102,
+     "t0": 571.108,
+     "t1": 579.108,
      "speech_cover": 0.43
     },
     {
      "what": "yatak geçişi",
-     "t0": 755.015,
-     "t1": 763.015,
+     "t0": 755.018,
+     "t1": 763.018,
      "speech_cover": 0.52
     },
     {
      "what": "imge katmanı girişi",
-     "t0": 571.102,
-     "t1": 579.102,
+     "t0": 571.108,
+     "t1": 579.108,
      "speech_cover": 0.43
     },
     {
      "what": "imge katmanı çıkışı",
-     "t0": 687.13,
-     "t1": 695.13,
+     "t0": 687.134,
+     "t1": 695.134,
      "speech_cover": 0.68
     }
    ],
@@ -383,7 +383,7 @@
     "mix_only": 0
    },
    "clicks_stems": {
-    "voice_only": 368,
+    "voice_only": 375,
     "bed_only": 3
    },
    "clicks_list": {
@@ -419,7 +419,7 @@
    },
    "clicks_mp3": {
     "edit_point": 0,
-    "speech_content": 90,
+    "speech_content": 85,
     "bed_content": 0,
     "mix_only": 0
    },
@@ -458,7 +458,7 @@
      "bg_total": -34.4,
      "music": -34.78,
      "nature": -45.58,
-     "music_minus_nature": 10.57
+     "music_minus_nature": 10.56
     },
     "Derin": {
      "bg_total": -36.14,
@@ -474,7 +474,7 @@
     }
    },
    "nature_minus_music_db": -10.0,
-   "md5": "84a08dee40ddff3cf1e7ad0395f8e3a2",
+   "md5": "f8eb56dab6c727491f298c23ed5d715b",
    "speech_over_bed_iterations": [
     {
      "iter": 0,
@@ -493,11 +493,1167 @@
       },
       "B": {
        "Varış": 16.85,
-       "Derinleşme": 16.73,
+       "Derinleşme": 16.74,
        "Derin": 16.43,
        "Kapanış": 16.27
       }
      }
+    }
+   ],
+   "local_duck": {
+    "rule": "eşik altı (< 15.0 dB) her parça için yatak (müzik + imge + doğa) parça ±1.5 sn düz, rampa max(1.0 sn, d / 1.0 dB/sn); hedef ≥ 15.5 dB; A ve B ortak",
+    "spans": [],
+    "iterations": [
+     {
+      "iter": 0,
+      "needs_db": {},
+      "below": {}
+     }
+    ]
+   },
+   "speech_over_bed_pieces": [
+    {
+     "piece": "a.hosgeldin#1",
+     "phase": "Varış",
+     "start": 4.226,
+     "dur": 0.967,
+     "speech_lufs": -14.42,
+     "bed_st_max": -34.26,
+     "diff": 19.84
+    },
+    {
+     "piece": "a.hosgeldin#2",
+     "phase": "Varış",
+     "start": 6.016,
+     "dur": 1.456,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.23,
+     "diff": 18.24
+    },
+    {
+     "piece": "a.acilis",
+     "phase": "Varış",
+     "start": 9.585,
+     "dur": 4.32,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.39,
+     "diff": 17.4
+    },
+    {
+     "piece": "a.konfor",
+     "phase": "Varış",
+     "start": 19.131,
+     "dur": 6.013,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.16,
+     "diff": 18.17
+    },
+    {
+     "piece": "a.durus",
+     "phase": "Varış",
+     "start": 37.484,
+     "dur": 3.832,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.29,
+     "diff": 18.3
+    },
+    {
+     "piece": "a.gozler",
+     "phase": "Varış",
+     "start": 49.768,
+     "dur": 4.962,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.48,
+     "diff": 17.49
+    },
+    {
+     "piece": "a.karar",
+     "phase": "Varış",
+     "start": 59.07,
+     "dur": 3.034,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.4,
+     "diff": 17.41
+    },
+    {
+     "piece": "a.izin",
+     "phase": "Varış",
+     "start": 69.331,
+     "dur": 5.182,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.3,
+     "diff": 17.31
+    },
+    {
+     "piece": "a.kolay",
+     "phase": "Varış",
+     "start": 80.739,
+     "dur": 4.154,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.56,
+     "diff": 17.58
+    },
+    {
+     "piece": "a.agirlik",
+     "phase": "Varış",
+     "start": 94.12,
+     "dur": 2.682,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.34,
+     "diff": 17.35
+    },
+    {
+     "piece": "n1.sec#1",
+     "phase": "Derinleşme",
+     "start": 105.254,
+     "dur": 2.957,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.96,
+     "diff": 17.47
+    },
+    {
+     "piece": "n1.sec#2",
+     "phase": "Derinleşme",
+     "start": 109.245,
+     "dur": 5.42,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.85,
+     "diff": 17.36
+    },
+    {
+     "piece": "n1.soyle",
+     "phase": "Derinleşme",
+     "start": 125.23,
+     "dur": 3.239,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.37,
+     "diff": 17.88
+    },
+    {
+     "piece": "n1.birak#1",
+     "phase": "Derinleşme",
+     "start": 142.26,
+     "dur": 2.435,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.31,
+     "diff": 17.82
+    },
+    {
+     "piece": "n1.birak#2",
+     "phase": "Derinleşme",
+     "start": 145.729,
+     "dur": 3.065,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.2,
+     "diff": 17.71
+    },
+    {
+     "piece": "c1.cerceve#1",
+     "phase": "Derinleşme",
+     "start": 155.464,
+     "dur": 2.614,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.64,
+     "diff": 17.15
+    },
+    {
+     "piece": "c1.cerceve#2",
+     "phase": "Derinleşme",
+     "start": 159.112,
+     "dur": 2.748,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.17,
+     "diff": 17.68
+    },
+    {
+     "piece": "c1.tekrar",
+     "phase": "Derinleşme",
+     "start": 164.973,
+     "dur": 3.752,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.24,
+     "diff": 17.75
+    },
+    {
+     "piece": "c1.s01",
+     "phase": "Derinleşme",
+     "start": 172.338,
+     "dur": 1.849,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.36,
+     "diff": 17.87
+    },
+    {
+     "piece": "c1.s02",
+     "phase": "Derinleşme",
+     "start": 175.095,
+     "dur": 1.428,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.3,
+     "diff": 17.81
+    },
+    {
+     "piece": "c1.s03",
+     "phase": "Derinleşme",
+     "start": 177.852,
+     "dur": 1.224,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.8,
+     "diff": 18.31
+    },
+    {
+     "piece": "c1.s04",
+     "phase": "Derinleşme",
+     "start": 180.608,
+     "dur": 1.213,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.34,
+     "diff": 18.85
+    },
+    {
+     "piece": "c1.s05",
+     "phase": "Derinleşme",
+     "start": 183.365,
+     "dur": 1.379,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.6,
+     "diff": 18.11
+    },
+    {
+     "piece": "c1.s06",
+     "phase": "Derinleşme",
+     "start": 186.121,
+     "dur": 1.348,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.1,
+     "diff": 18.61
+    },
+    {
+     "piece": "c1.s07",
+     "phase": "Derinleşme",
+     "start": 188.878,
+     "dur": 1.195,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.59,
+     "diff": 19.1
+    },
+    {
+     "piece": "c1.s08",
+     "phase": "Derinleşme",
+     "start": 191.634,
+     "dur": 0.907,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.18,
+     "diff": 18.69
+    },
+    {
+     "piece": "c1.s09",
+     "phase": "Derinleşme",
+     "start": 194.391,
+     "dur": 0.94,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.86,
+     "diff": 18.37
+    },
+    {
+     "piece": "c1.s10",
+     "phase": "Derinleşme",
+     "start": 197.147,
+     "dur": 1.011,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.54,
+     "diff": 19.05
+    },
+    {
+     "piece": "c1.s11",
+     "phase": "Derinleşme",
+     "start": 199.904,
+     "dur": 1.116,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.39,
+     "diff": 18.9
+    },
+    {
+     "piece": "c1.s12",
+     "phase": "Derinleşme",
+     "start": 202.66,
+     "dur": 0.949,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.39,
+     "diff": 18.9
+    },
+    {
+     "piece": "c1.s13",
+     "phase": "Derinleşme",
+     "start": 205.417,
+     "dur": 1.41,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.24,
+     "diff": 18.75
+    },
+    {
+     "piece": "c1.s14",
+     "phase": "Derinleşme",
+     "start": 208.174,
+     "dur": 0.919,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.47,
+     "diff": 18.98
+    },
+    {
+     "piece": "c1.s15",
+     "phase": "Derinleşme",
+     "start": 210.93,
+     "dur": 0.936,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.48,
+     "diff": 18.99
+    },
+    {
+     "piece": "c1.s16",
+     "phase": "Derinleşme",
+     "start": 213.687,
+     "dur": 0.885,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.23,
+     "diff": 18.74
+    },
+    {
+     "piece": "c1.s17",
+     "phase": "Derinleşme",
+     "start": 216.443,
+     "dur": 1.021,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.93,
+     "diff": 18.44
+    },
+    {
+     "piece": "c1.s18",
+     "phase": "Derinleşme",
+     "start": 219.2,
+     "dur": 1.086,
+     "speech_lufs": -16.01,
+     "bed_st_max": -35.01,
+     "diff": 19.0
+    },
+    {
+     "piece": "c1.s19",
+     "phase": "Derinleşme",
+     "start": 221.956,
+     "dur": 0.897,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.94,
+     "diff": 18.45
+    },
+    {
+     "piece": "c1.s20",
+     "phase": "Derinleşme",
+     "start": 224.713,
+     "dur": 1.12,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.72,
+     "diff": 18.23
+    },
+    {
+     "piece": "c1.kacirma",
+     "phase": "Derinleşme",
+     "start": 229.002,
+     "dur": 3.431,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.89,
+     "diff": 18.4
+    },
+    {
+     "piece": "c1.l01",
+     "phase": "Derinleşme",
+     "start": 235.603,
+     "dur": 1.896,
+     "speech_lufs": -16.27,
+     "bed_st_max": -34.25,
+     "diff": 17.97
+    },
+    {
+     "piece": "c1.l02",
+     "phase": "Derinleşme",
+     "start": 238.36,
+     "dur": 1.415,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.23,
+     "diff": 18.74
+    },
+    {
+     "piece": "c1.l03",
+     "phase": "Derinleşme",
+     "start": 241.116,
+     "dur": 1.234,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.24,
+     "diff": 18.75
+    },
+    {
+     "piece": "c1.l04",
+     "phase": "Derinleşme",
+     "start": 243.873,
+     "dur": 1.219,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.06,
+     "diff": 18.57
+    },
+    {
+     "piece": "c1.l05",
+     "phase": "Derinleşme",
+     "start": 246.629,
+     "dur": 1.405,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.99,
+     "diff": 18.5
+    },
+    {
+     "piece": "c1.l06",
+     "phase": "Derinleşme",
+     "start": 249.386,
+     "dur": 1.35,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.47,
+     "diff": 17.98
+    },
+    {
+     "piece": "c1.l07",
+     "phase": "Derinleşme",
+     "start": 252.142,
+     "dur": 1.212,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.55,
+     "diff": 18.06
+    },
+    {
+     "piece": "c1.l08",
+     "phase": "Derinleşme",
+     "start": 254.899,
+     "dur": 0.915,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.07,
+     "diff": 17.58
+    },
+    {
+     "piece": "c1.l09",
+     "phase": "Derinleşme",
+     "start": 257.656,
+     "dur": 0.935,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.02,
+     "diff": 17.53
+    },
+    {
+     "piece": "c1.l10",
+     "phase": "Derinleşme",
+     "start": 260.412,
+     "dur": 1.016,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.3,
+     "diff": 17.81
+    },
+    {
+     "piece": "c1.l11",
+     "phase": "Derinleşme",
+     "start": 263.169,
+     "dur": 1.119,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.97,
+     "diff": 17.48
+    },
+    {
+     "piece": "c1.l12",
+     "phase": "Derinleşme",
+     "start": 265.925,
+     "dur": 0.918,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.66,
+     "diff": 17.17
+    },
+    {
+     "piece": "c1.l13",
+     "phase": "Derinleşme",
+     "start": 268.682,
+     "dur": 1.445,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.4,
+     "diff": 16.91
+    },
+    {
+     "piece": "c1.l14",
+     "phase": "Derinleşme",
+     "start": 271.438,
+     "dur": 0.917,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.44,
+     "diff": 17.95
+    },
+    {
+     "piece": "c1.l15",
+     "phase": "Derinleşme",
+     "start": 274.195,
+     "dur": 0.91,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.42,
+     "diff": 17.93
+    },
+    {
+     "piece": "c1.l16",
+     "phase": "Derinleşme",
+     "start": 276.951,
+     "dur": 0.921,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.73,
+     "diff": 17.24
+    },
+    {
+     "piece": "c1.l17",
+     "phase": "Derinleşme",
+     "start": 279.708,
+     "dur": 1.044,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.69,
+     "diff": 17.2
+    },
+    {
+     "piece": "c1.l18",
+     "phase": "Derinleşme",
+     "start": 282.464,
+     "dur": 1.127,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.06,
+     "diff": 17.57
+    },
+    {
+     "piece": "c1.l19",
+     "phase": "Derinleşme",
+     "start": 285.221,
+     "dur": 0.87,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.72,
+     "diff": 17.24
+    },
+    {
+     "piece": "c1.l20",
+     "phase": "Derinleşme",
+     "start": 287.978,
+     "dur": 1.118,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.13,
+     "diff": 17.64
+    },
+    {
+     "piece": "c1.gecis.arka",
+     "phase": "Derinleşme",
+     "start": 292.265,
+     "dur": 1.752,
+     "speech_lufs": -16.2,
+     "bed_st_max": -34.12,
+     "diff": 17.92
+    },
+    {
+     "piece": "c1.b01",
+     "phase": "Derinleşme",
+     "start": 296.13,
+     "dur": 1.516,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.96,
+     "diff": 17.47
+    },
+    {
+     "piece": "c1.b02",
+     "phase": "Derinleşme",
+     "start": 298.887,
+     "dur": 1.521,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.1,
+     "diff": 17.61
+    },
+    {
+     "piece": "c1.b03",
+     "phase": "Derinleşme",
+     "start": 301.643,
+     "dur": 1.241,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.25,
+     "diff": 17.76
+    },
+    {
+     "piece": "c1.b04",
+     "phase": "Derinleşme",
+     "start": 304.4,
+     "dur": 2.176,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.76,
+     "diff": 17.27
+    },
+    {
+     "piece": "c1.b05",
+     "phase": "Derinleşme",
+     "start": 309.746,
+     "dur": 1.272,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.59,
+     "diff": 17.1
+    },
+    {
+     "piece": "c1.gecis.on#1",
+     "phase": "Derinleşme",
+     "start": 314.187,
+     "dur": 2.18,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.2,
+     "diff": 17.71
+    },
+    {
+     "piece": "c1.gecis.on#2",
+     "phase": "Derinleşme",
+     "start": 317.402,
+     "dur": 2.149,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.53,
+     "diff": 17.04
+    },
+    {
+     "piece": "c1.f02",
+     "phase": "Derinleşme",
+     "start": 321.664,
+     "dur": 0.735,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.34,
+     "diff": 17.85
+    },
+    {
+     "piece": "c1.f07",
+     "phase": "Derinleşme",
+     "start": 324.421,
+     "dur": 1.365,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.38,
+     "diff": 17.89
+    },
+    {
+     "piece": "c1.f20",
+     "phase": "Derinleşme",
+     "start": 327.177,
+     "dur": 1.032,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.91,
+     "diff": 17.42
+    },
+    {
+     "piece": "c1.w07",
+     "phase": "Derinleşme",
+     "start": 329.934,
+     "dur": 2.359,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.0,
+     "diff": 17.51
+    },
+    {
+     "piece": "c1.k1",
+     "phase": "Derinleşme",
+     "start": 335.462,
+     "dur": 3.547,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.96,
+     "diff": 17.47
+    },
+    {
+     "piece": "c2.dikkat#1",
+     "phase": "Derin",
+     "start": 346.575,
+     "dur": 3.41,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.46,
+     "diff": 17.47
+    },
+    {
+     "piece": "c2.dikkat#2",
+     "phase": "Derin",
+     "start": 351.865,
+     "dur": 3.448,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.11,
+     "diff": 18.12
+    },
+    {
+     "piece": "c2.yer#1",
+     "phase": "Derin",
+     "start": 365.765,
+     "dur": 4.524,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.19,
+     "diff": 18.2
+    },
+    {
+     "piece": "c2.yer#2",
+     "phase": "Derin",
+     "start": 372.169,
+     "dur": 3.817,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.27,
+     "diff": 18.28
+    },
+    {
+     "piece": "c2.alt",
+     "phase": "Derin",
+     "start": 390.552,
+     "dur": 3.711,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.03,
+     "diff": 18.04
+    },
+    {
+     "piece": "c2.akis#1",
+     "phase": "Derin",
+     "start": 404.602,
+     "dur": 2.285,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.31,
+     "diff": 18.32
+    },
+    {
+     "piece": "c2.akis#2",
+     "phase": "Derin",
+     "start": 410.0,
+     "dur": 1.703,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.15,
+     "diff": 18.16
+    },
+    {
+     "piece": "c2.sayac#1",
+     "phase": "Derin",
+     "start": 424.382,
+     "dur": 1.572,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.43,
+     "diff": 17.44
+    },
+    {
+     "piece": "c2.sayac#2",
+     "phase": "Derin",
+     "start": 427.833,
+     "dur": 2.364,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.07,
+     "diff": 18.08
+    },
+    {
+     "piece": "c2.n10",
+     "phase": "Derin",
+     "start": 433.31,
+     "dur": 0.66,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.26,
+     "diff": 18.27
+    },
+    {
+     "piece": "c2.n09",
+     "phase": "Derin",
+     "start": 439.344,
+     "dur": 0.947,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.21,
+     "diff": 18.23
+    },
+    {
+     "piece": "c2.n08",
+     "phase": "Derin",
+     "start": 445.378,
+     "dur": 1.105,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.24,
+     "diff": 18.25
+    },
+    {
+     "piece": "c2.n07",
+     "phase": "Derin",
+     "start": 451.412,
+     "dur": 0.852,
+     "speech_lufs": -17.3,
+     "bed_st_max": -36.08,
+     "diff": 18.77
+    },
+    {
+     "piece": "c2.n06",
+     "phase": "Derin",
+     "start": 457.446,
+     "dur": 0.908,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.33,
+     "diff": 18.34
+    },
+    {
+     "piece": "c2.n05",
+     "phase": "Derin",
+     "start": 463.48,
+     "dur": 0.946,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.12,
+     "diff": 18.13
+    },
+    {
+     "piece": "c2.n04",
+     "phase": "Derin",
+     "start": 469.514,
+     "dur": 0.911,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.13,
+     "diff": 18.14
+    },
+    {
+     "piece": "c2.n03",
+     "phase": "Derin",
+     "start": 475.548,
+     "dur": 0.81,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.98,
+     "diff": 17.99
+    },
+    {
+     "piece": "c2.n02",
+     "phase": "Derin",
+     "start": 481.582,
+     "dur": 0.776,
+     "speech_lufs": -17.32,
+     "bed_st_max": -36.11,
+     "diff": 18.78
+    },
+    {
+     "piece": "c2.n01",
+     "phase": "Derin",
+     "start": 487.616,
+     "dur": 0.805,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.32,
+     "diff": 18.33
+    },
+    {
+     "piece": "c2.birak#1",
+     "phase": "Derin",
+     "start": 495.647,
+     "dur": 1.661,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.49,
+     "diff": 17.5
+    },
+    {
+     "piece": "c2.birak#2",
+     "phase": "Derin",
+     "start": 499.188,
+     "dur": 3.502,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.09,
+     "diff": 18.1
+    },
+    {
+     "piece": "c2.kal",
+     "phase": "Derin",
+     "start": 508.916,
+     "dur": 3.24,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.04,
+     "diff": 18.05
+    },
+    {
+     "piece": "br.k2",
+     "phase": "Derin",
+     "start": 528.609,
+     "dur": 3.261,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.93,
+     "diff": 16.94
+    },
+    {
+     "piece": "br.orta#1",
+     "phase": "Derin",
+     "start": 544.097,
+     "dur": 5.265,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.07,
+     "diff": 17.08
+    },
+    {
+     "piece": "br.orta#2",
+     "phase": "Derin",
+     "start": 551.241,
+     "dur": 2.695,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.95,
+     "diff": 16.96
+    },
+    {
+     "piece": "br.orta#3",
+     "phase": "Derin",
+     "start": 555.816,
+     "dur": 2.066,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.0,
+     "diff": 17.01
+    },
+    {
+     "piece": "c4.yer",
+     "phase": "Derin",
+     "start": 571.108,
+     "dur": 3.461,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.7,
+     "diff": 18.71
+    },
+    {
+     "piece": "c4.gelmezse",
+     "phase": "Derin",
+     "start": 586.908,
+     "dur": 4.061,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.42,
+     "diff": 18.43
+    },
+    {
+     "piece": "c4.patika",
+     "phase": "Derin",
+     "start": 603.308,
+     "dur": 3.344,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.59,
+     "diff": 18.6
+    },
+    {
+     "piece": "c4.yol#1",
+     "phase": "Derin",
+     "start": 613.265,
+     "dur": 1.734,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.63,
+     "diff": 18.64
+    },
+    {
+     "piece": "c4.yol#2",
+     "phase": "Derin",
+     "start": 616.878,
+     "dur": 1.758,
+     "speech_lufs": -17.99,
+     "bed_st_max": -37.29,
+     "diff": 19.3
+    },
+    {
+     "piece": "c4.ses",
+     "phase": "Derin",
+     "start": 633.089,
+     "dur": 2.732,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.38,
+     "diff": 17.39
+    },
+    {
+     "piece": "c4.gunes#1",
+     "phase": "Derin",
+     "start": 648.386,
+     "dur": 2.658,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.04,
+     "diff": 17.05
+    },
+    {
+     "piece": "c4.gunes#2",
+     "phase": "Derin",
+     "start": 652.924,
+     "dur": 2.934,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.61,
+     "diff": 17.62
+    },
+    {
+     "piece": "c4.don",
+     "phase": "Derin",
+     "start": 667.423,
+     "dur": 3.485,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.59,
+     "diff": 16.6
+    },
+    {
+     "piece": "c4.solma#1",
+     "phase": "Derin",
+     "start": 687.134,
+     "dur": 2.259,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.56,
+     "diff": 18.57
+    },
+    {
+     "piece": "c4.solma#2",
+     "phase": "Derin",
+     "start": 691.272,
+     "dur": 3.164,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.65,
+     "diff": 17.66
+    },
+    {
+     "piece": "n2.hatirla#1",
+     "phase": "Derin",
+     "start": 708.662,
+     "dur": 4.079,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.31,
+     "diff": 17.32
+    },
+    {
+     "piece": "n2.hatirla#2",
+     "phase": "Derin",
+     "start": 714.62,
+     "dur": 4.266,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.48,
+     "diff": 17.49
+    },
+    {
+     "piece": "n2.dilek",
+     "phase": "Derin",
+     "start": 736.225,
+     "dur": 3.359,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.33,
+     "diff": 18.34
+    },
+    {
+     "piece": "k.anahtar3",
+     "phase": "Derin",
+     "start": 746.923,
+     "dur": 1.755,
+     "speech_lufs": -17.7,
+     "bed_st_max": -36.8,
+     "diff": 19.1
+    },
+    {
+     "piece": "k.donus",
+     "phase": "Kapanış",
+     "start": 755.018,
+     "dur": 1.817,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.85,
+     "diff": 18.86
+    },
+    {
+     "piece": "k.nefes",
+     "phase": "Kapanış",
+     "start": 760.504,
+     "dur": 2.365,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.97,
+     "diff": 17.98
+    },
+    {
+     "piece": "k.sesler",
+     "phase": "Kapanış",
+     "start": 767.208,
+     "dur": 3.683,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.99,
+     "diff": 17.0
+    },
+    {
+     "piece": "k.hareket#1",
+     "phase": "Kapanış",
+     "start": 777.117,
+     "dur": 3.916,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.95,
+     "diff": 16.96
+    },
+    {
+     "piece": "k.hareket#2",
+     "phase": "Kapanış",
+     "start": 782.056,
+     "dur": 4.145,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.82,
+     "diff": 17.84
+    },
+    {
+     "piece": "k.goz",
+     "phase": "Kapanış",
+     "start": 796.54,
+     "dur": 5.288,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.04,
+     "diff": 18.05
+    },
+    {
+     "piece": "k.oda.ayrinti",
+     "phase": "Kapanış",
+     "start": 811.167,
+     "dur": 3.196,
+     "speech_lufs": -14.86,
+     "bed_st_max": -32.48,
+     "diff": 17.62
+    },
+    {
+     "piece": "k.zaman",
+     "phase": "Kapanış",
+     "start": 822.589,
+     "dur": 3.745,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.36,
+     "diff": 17.37
+    },
+    {
+     "piece": "k.yan",
+     "phase": "Kapanış",
+     "start": 831.117,
+     "dur": 3.192,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.6,
+     "diff": 17.61
+    },
+    {
+     "piece": "k.yandakal",
+     "phase": "Kapanış",
+     "start": 840.535,
+     "dur": 2.795,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.96,
+     "diff": 17.97
+    },
+    {
+     "piece": "k.otur",
+     "phase": "Kapanış",
+     "start": 855.669,
+     "dur": 3.646,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.34,
+     "diff": 17.35
+    },
+    {
+     "piece": "k.bekle",
+     "phase": "Kapanış",
+     "start": 867.654,
+     "dur": 3.083,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.83,
+     "diff": 17.84
+    },
+    {
+     "piece": "k.kalk",
+     "phase": "Kapanış",
+     "start": 883.19,
+     "dur": 5.937,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.98,
+     "diff": 17.99
+    },
+    {
+     "piece": "k.son",
+     "phase": "Kapanış",
+     "start": 892.24,
+     "dur": 2.421,
+     "speech_lufs": -14.99,
+     "bed_st_max": -40.47,
+     "diff": 25.48
     }
    ],
    "order_check": {
@@ -511,21 +1667,23 @@
    },
    "position_check_mp3": {
     "pieces": 127,
-    "min_corr": 0.984,
+    "min_corr": 0.983,
     "min_corr_piece": "c2.n08",
     "median_corr": 0.991,
     "max_abs_offset_ms": 0.05,
     "n_corr_below_0_9": 0,
-    "order_ok": true
+    "order_ok": true,
+    "v3_ok": true,
+    "v3_rule": "SPEC v3.5: ilinti ≥ 0.95 (VARSAYIM), kayma ≤ 1 ms"
    },
    "timeline": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-nes-A.timeline.json"
   },
   "ders2-15dk-nes-B": {
    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-nes-B.mp3",
-   "bytes": 12384385,
+   "bytes": 12387514,
    "encoding": {
     "mode": "ABR 120 kbit/s",
-    "bytes": 12384385,
+    "bytes": 12387514,
     "kbps_avg": 110.1,
     "tried": [
      "VBR V2 (mtrh, q=2)",
@@ -537,11 +1695,11 @@
    "duration_s": 900.049,
    "mp3_decoder_offset_samples": 1105,
    "duration_float_mix_s": 900.0,
-   "integrated_lufs": -17.81,
-   "integrated_lufs_float_mix": -17.37,
-   "true_peak_dbtp": -2.97,
-   "true_peak_dbtp_float_mix": -2.51,
-   "true_peak_dbtp_before_limiter": -2.51,
+   "integrated_lufs": -17.74,
+   "integrated_lufs_float_mix": -17.29,
+   "true_peak_dbtp": -3.03,
+   "true_peak_dbtp_float_mix": -2.56,
+   "true_peak_dbtp_before_limiter": -2.56,
    "tp_limiter": [
     {
      "ceiling_dbtp": -2.0,
@@ -551,8 +1709,8 @@
       "sec_over_0_5db": 0.0,
       "sec_over_1db": 0.0
      },
-     "tp_float_after_limiter": -2.51,
-     "tp_mp3": -2.97
+     "tp_float_after_limiter": -2.56,
+     "tp_mp3": -3.03
     }
    ],
    "speech_over_bed": {
@@ -566,9 +1724,9 @@
      "min_diff_all": 16.85,
      "n_below_15_all": 0,
      "speech_lufs_median": -14.99,
-     "bed_st_under_speech_median": -32.28,
+     "bed_st_under_speech_median": -32.26,
      "st3_windows_ge90pct_speech": 157,
-     "st3_min_diff": 15.6,
+     "st3_min_diff": 15.61,
      "st3_median_diff": 18.25,
      "st3_n_below_15": 0,
      "st3_pct_below_15": 0.0,
@@ -581,31 +1739,25 @@
     },
     "Derinleşme": {
      "pieces_ge_1s": 47,
-     "min_diff_ge_1s": 16.73,
+     "min_diff_ge_1s": 16.74,
      "worst_piece": "c1.gecis.on#2",
-     "p10_diff_ge_1s": 16.98,
+     "p10_diff_ge_1s": 16.99,
      "median_diff_ge_1s": 17.5,
      "pieces_all": 62,
-     "min_diff_all": 14.75,
-     "n_below_15_all": 1,
+     "min_diff_all": 16.74,
+     "n_below_15_all": 0,
      "speech_lufs_median": -16.49,
-     "bed_st_under_speech_median": -33.96,
-     "st3_windows_ge90pct_speech": 101,
-     "st3_min_diff": 14.77,
-     "st3_median_diff": 17.24,
+     "bed_st_under_speech_median": -33.97,
+     "st3_windows_ge90pct_speech": 98,
+     "st3_min_diff": 14.86,
+     "st3_median_diff": 17.34,
      "st3_n_below_15": 1,
      "st3_pct_below_15": 1.0,
      "st3_worst_at_s": 337.8,
      "st3_worst_pieces": [
       "c1.k1"
      ],
-     "below_15_pieces": [
-      [
-       "c1.l08",
-       0.91,
-       14.75
-      ]
-     ],
+     "below_15_pieces": [],
      "pass_ge_1s": true
     },
     "Derin": {
@@ -615,13 +1767,13 @@
      "p10_diff_ge_1s": 16.78,
      "median_diff_ge_1s": 17.42,
      "pieces_all": 41,
-     "min_diff_all": 15.93,
+     "min_diff_all": 16.43,
      "n_below_15_all": 0,
      "speech_lufs_median": -17.99,
      "bed_st_under_speech_median": -35.49,
-     "st3_windows_ge90pct_speech": 258,
-     "st3_min_diff": 15.15,
-     "st3_median_diff": 17.77,
+     "st3_windows_ge90pct_speech": 259,
+     "st3_min_diff": 15.17,
+     "st3_median_diff": 17.75,
      "st3_n_below_15": 0,
      "st3_pct_below_15": 0.0,
      "st3_worst_at_s": 738.4,
@@ -661,8 +1813,8 @@
      "max_rise_db_per_s": 6.82,
      "at_s": 239.2,
      "max_rise_in_speech_free_s": 6.28,
-     "at_speech_free_s": 119.3,
-     "n_1s_steps_over_1db": 1242,
+     "at_speech_free_s": 751.5,
+     "n_1s_steps_over_1db": 1241,
      "top5": [
       [
        239.2,
@@ -708,7 +1860,7 @@
       ],
       [
        670.5,
-       10.76
+       10.75
       ],
       [
        382.5,
@@ -748,23 +1900,23 @@
     },
     "full_mix_speech_free": {
      "stem": "tam karışım",
-     "max_rise_db_per_s": 23.94,
+     "max_rise_db_per_s": 23.9,
      "at_s": 527.1,
      "max_rise_in_speech_free_s": 6.28,
-     "at_speech_free_s": 119.3,
-     "n_1s_steps_over_1db": 2501,
+     "at_speech_free_s": 751.5,
+     "n_1s_steps_over_1db": 2492,
      "top5": [
       [
        527.1,
-       23.94
+       23.9
       ],
       [
        527.0,
-       23.46
+       23.4
       ],
       [
        839.1,
-       23.15
+       23.05
       ],
       [
        765.7,
@@ -772,44 +1924,44 @@
       ],
       [
        839.0,
-       22.79
+       22.66
       ]
      ]
     },
     "tone_times_s": [
-     753.015
+     753.018
     ]
    },
    "windows_in_plan": 0,
    "texture_changes": [
     {
      "what": "yatak geçişi",
-     "t0": 105.238,
-     "t1": 113.238,
+     "t0": 105.254,
+     "t1": 113.254,
      "speech_cover": 0.87
     },
     {
      "what": "yatak geçişi",
-     "t0": 346.565,
-     "t1": 354.565,
+     "t0": 346.575,
+     "t1": 354.575,
      "speech_cover": 0.77
     },
     {
      "what": "yatak geçişi",
-     "t0": 755.015,
-     "t1": 763.015,
+     "t0": 755.018,
+     "t1": 763.018,
      "speech_cover": 0.52
     },
     {
      "what": "imge katmanı girişi",
-     "t0": 571.102,
-     "t1": 579.102,
+     "t0": 571.108,
+     "t1": 579.108,
      "speech_cover": 0.43
     },
     {
      "what": "imge katmanı çıkışı",
-     "t0": 687.13,
-     "t1": 695.13,
+     "t0": 687.134,
+     "t1": 695.134,
      "speech_cover": 0.68
     }
    ],
@@ -820,7 +1972,7 @@
     "mix_only": 0
    },
    "clicks_stems": {
-    "voice_only": 368,
+    "voice_only": 375,
     "bed_only": 3
    },
    "clicks_list": {
@@ -856,7 +2008,7 @@
    },
    "clicks_mp3": {
     "edit_point": 0,
-    "speech_content": 89,
+    "speech_content": 95,
     "bed_content": 0,
     "mix_only": 0
    },
@@ -911,7 +2063,7 @@
     }
    },
    "nature_minus_music_db": -10.0,
-   "md5": "364af4cf49b36d00d78683f560749652",
+   "md5": "533417b1566ec40be44cc381877a6f1a",
    "speech_over_bed_iterations": [
     {
      "iter": 0,
@@ -930,11 +2082,1167 @@
       },
       "B": {
        "Varış": 16.85,
-       "Derinleşme": 16.73,
+       "Derinleşme": 16.74,
        "Derin": 16.43,
        "Kapanış": 16.27
       }
      }
+    }
+   ],
+   "local_duck": {
+    "rule": "eşik altı (< 15.0 dB) her parça için yatak (müzik + imge + doğa) parça ±1.5 sn düz, rampa max(1.0 sn, d / 1.0 dB/sn); hedef ≥ 15.5 dB; A ve B ortak",
+    "spans": [],
+    "iterations": [
+     {
+      "iter": 0,
+      "needs_db": {},
+      "below": {}
+     }
+    ]
+   },
+   "speech_over_bed_pieces": [
+    {
+     "piece": "a.hosgeldin#1",
+     "phase": "Varış",
+     "start": 4.226,
+     "dur": 0.967,
+     "speech_lufs": -14.42,
+     "bed_st_max": -32.9,
+     "diff": 18.48
+    },
+    {
+     "piece": "a.hosgeldin#2",
+     "phase": "Varış",
+     "start": 6.016,
+     "dur": 1.456,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.89,
+     "diff": 16.9
+    },
+    {
+     "piece": "a.acilis",
+     "phase": "Varış",
+     "start": 9.585,
+     "dur": 4.32,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.93,
+     "diff": 16.94
+    },
+    {
+     "piece": "a.konfor",
+     "phase": "Varış",
+     "start": 19.131,
+     "dur": 6.013,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.42,
+     "diff": 18.43
+    },
+    {
+     "piece": "a.durus",
+     "phase": "Varış",
+     "start": 37.484,
+     "dur": 3.832,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.59,
+     "diff": 17.6
+    },
+    {
+     "piece": "a.gozler",
+     "phase": "Varış",
+     "start": 49.768,
+     "dur": 4.962,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.13,
+     "diff": 17.14
+    },
+    {
+     "piece": "a.karar",
+     "phase": "Varış",
+     "start": 59.07,
+     "dur": 3.034,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.94,
+     "diff": 16.95
+    },
+    {
+     "piece": "a.izin",
+     "phase": "Varış",
+     "start": 69.331,
+     "dur": 5.182,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.39,
+     "diff": 17.4
+    },
+    {
+     "piece": "a.kolay",
+     "phase": "Varış",
+     "start": 80.739,
+     "dur": 4.154,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.84,
+     "diff": 16.85
+    },
+    {
+     "piece": "a.agirlik",
+     "phase": "Varış",
+     "start": 94.12,
+     "dur": 2.682,
+     "speech_lufs": -14.99,
+     "bed_st_max": -34.22,
+     "diff": 19.23
+    },
+    {
+     "piece": "n1.sec#1",
+     "phase": "Derinleşme",
+     "start": 105.254,
+     "dur": 2.957,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.54,
+     "diff": 17.05
+    },
+    {
+     "piece": "n1.sec#2",
+     "phase": "Derinleşme",
+     "start": 109.245,
+     "dur": 5.42,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.9,
+     "diff": 17.41
+    },
+    {
+     "piece": "n1.soyle",
+     "phase": "Derinleşme",
+     "start": 125.23,
+     "dur": 3.239,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.57,
+     "diff": 17.08
+    },
+    {
+     "piece": "n1.birak#1",
+     "phase": "Derinleşme",
+     "start": 142.26,
+     "dur": 2.435,
+     "speech_lufs": -16.49,
+     "bed_st_max": -36.49,
+     "diff": 20.0
+    },
+    {
+     "piece": "n1.birak#2",
+     "phase": "Derinleşme",
+     "start": 145.729,
+     "dur": 3.065,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.56,
+     "diff": 17.07
+    },
+    {
+     "piece": "c1.cerceve#1",
+     "phase": "Derinleşme",
+     "start": 155.464,
+     "dur": 2.614,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.33,
+     "diff": 16.84
+    },
+    {
+     "piece": "c1.cerceve#2",
+     "phase": "Derinleşme",
+     "start": 159.112,
+     "dur": 2.748,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.53,
+     "diff": 17.04
+    },
+    {
+     "piece": "c1.tekrar",
+     "phase": "Derinleşme",
+     "start": 164.973,
+     "dur": 3.752,
+     "speech_lufs": -16.49,
+     "bed_st_max": -36.95,
+     "diff": 20.46
+    },
+    {
+     "piece": "c1.s01",
+     "phase": "Derinleşme",
+     "start": 172.338,
+     "dur": 1.849,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.94,
+     "diff": 17.45
+    },
+    {
+     "piece": "c1.s02",
+     "phase": "Derinleşme",
+     "start": 175.095,
+     "dur": 1.428,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.5,
+     "diff": 18.01
+    },
+    {
+     "piece": "c1.s03",
+     "phase": "Derinleşme",
+     "start": 177.852,
+     "dur": 1.224,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.53,
+     "diff": 17.04
+    },
+    {
+     "piece": "c1.s04",
+     "phase": "Derinleşme",
+     "start": 180.608,
+     "dur": 1.213,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.71,
+     "diff": 17.22
+    },
+    {
+     "piece": "c1.s05",
+     "phase": "Derinleşme",
+     "start": 183.365,
+     "dur": 1.379,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.01,
+     "diff": 17.52
+    },
+    {
+     "piece": "c1.s06",
+     "phase": "Derinleşme",
+     "start": 186.121,
+     "dur": 1.348,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.8,
+     "diff": 17.31
+    },
+    {
+     "piece": "c1.s07",
+     "phase": "Derinleşme",
+     "start": 188.878,
+     "dur": 1.195,
+     "speech_lufs": -16.49,
+     "bed_st_max": -39.84,
+     "diff": 23.35
+    },
+    {
+     "piece": "c1.s08",
+     "phase": "Derinleşme",
+     "start": 191.634,
+     "dur": 0.907,
+     "speech_lufs": -16.49,
+     "bed_st_max": -37.5,
+     "diff": 21.01
+    },
+    {
+     "piece": "c1.s09",
+     "phase": "Derinleşme",
+     "start": 194.391,
+     "dur": 0.94,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.74,
+     "diff": 17.25
+    },
+    {
+     "piece": "c1.s10",
+     "phase": "Derinleşme",
+     "start": 197.147,
+     "dur": 1.011,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.48,
+     "diff": 16.99
+    },
+    {
+     "piece": "c1.s11",
+     "phase": "Derinleşme",
+     "start": 199.904,
+     "dur": 1.116,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.3,
+     "diff": 17.81
+    },
+    {
+     "piece": "c1.s12",
+     "phase": "Derinleşme",
+     "start": 202.66,
+     "dur": 0.949,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.63,
+     "diff": 17.14
+    },
+    {
+     "piece": "c1.s13",
+     "phase": "Derinleşme",
+     "start": 205.417,
+     "dur": 1.41,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.32,
+     "diff": 17.83
+    },
+    {
+     "piece": "c1.s14",
+     "phase": "Derinleşme",
+     "start": 208.174,
+     "dur": 0.919,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.75,
+     "diff": 18.26
+    },
+    {
+     "piece": "c1.s15",
+     "phase": "Derinleşme",
+     "start": 210.93,
+     "dur": 0.936,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.41,
+     "diff": 17.92
+    },
+    {
+     "piece": "c1.s16",
+     "phase": "Derinleşme",
+     "start": 213.687,
+     "dur": 0.885,
+     "speech_lufs": -16.49,
+     "bed_st_max": -43.5,
+     "diff": 27.01
+    },
+    {
+     "piece": "c1.s17",
+     "phase": "Derinleşme",
+     "start": 216.443,
+     "dur": 1.021,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.59,
+     "diff": 18.1
+    },
+    {
+     "piece": "c1.s18",
+     "phase": "Derinleşme",
+     "start": 219.2,
+     "dur": 1.086,
+     "speech_lufs": -16.01,
+     "bed_st_max": -33.86,
+     "diff": 17.85
+    },
+    {
+     "piece": "c1.s19",
+     "phase": "Derinleşme",
+     "start": 221.956,
+     "dur": 0.897,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.54,
+     "diff": 17.05
+    },
+    {
+     "piece": "c1.s20",
+     "phase": "Derinleşme",
+     "start": 224.713,
+     "dur": 1.12,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.33,
+     "diff": 17.84
+    },
+    {
+     "piece": "c1.kacirma",
+     "phase": "Derinleşme",
+     "start": 229.002,
+     "dur": 3.431,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.93,
+     "diff": 17.44
+    },
+    {
+     "piece": "c1.l01",
+     "phase": "Derinleşme",
+     "start": 235.603,
+     "dur": 1.896,
+     "speech_lufs": -16.27,
+     "bed_st_max": -34.38,
+     "diff": 18.1
+    },
+    {
+     "piece": "c1.l02",
+     "phase": "Derinleşme",
+     "start": 238.36,
+     "dur": 1.415,
+     "speech_lufs": -16.49,
+     "bed_st_max": -42.13,
+     "diff": 25.64
+    },
+    {
+     "piece": "c1.l03",
+     "phase": "Derinleşme",
+     "start": 241.116,
+     "dur": 1.234,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.85,
+     "diff": 17.36
+    },
+    {
+     "piece": "c1.l04",
+     "phase": "Derinleşme",
+     "start": 243.873,
+     "dur": 1.219,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.95,
+     "diff": 18.46
+    },
+    {
+     "piece": "c1.l05",
+     "phase": "Derinleşme",
+     "start": 246.629,
+     "dur": 1.405,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.15,
+     "diff": 17.66
+    },
+    {
+     "piece": "c1.l06",
+     "phase": "Derinleşme",
+     "start": 249.386,
+     "dur": 1.35,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.48,
+     "diff": 16.99
+    },
+    {
+     "piece": "c1.l07",
+     "phase": "Derinleşme",
+     "start": 252.142,
+     "dur": 1.212,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.06,
+     "diff": 17.57
+    },
+    {
+     "piece": "c1.l08",
+     "phase": "Derinleşme",
+     "start": 254.899,
+     "dur": 0.915,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.51,
+     "diff": 17.02
+    },
+    {
+     "piece": "c1.l09",
+     "phase": "Derinleşme",
+     "start": 257.656,
+     "dur": 0.935,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.53,
+     "diff": 17.04
+    },
+    {
+     "piece": "c1.l10",
+     "phase": "Derinleşme",
+     "start": 260.412,
+     "dur": 1.016,
+     "speech_lufs": -16.49,
+     "bed_st_max": -37.72,
+     "diff": 21.23
+    },
+    {
+     "piece": "c1.l11",
+     "phase": "Derinleşme",
+     "start": 263.169,
+     "dur": 1.119,
+     "speech_lufs": -16.49,
+     "bed_st_max": -38.78,
+     "diff": 22.29
+    },
+    {
+     "piece": "c1.l12",
+     "phase": "Derinleşme",
+     "start": 265.925,
+     "dur": 0.918,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.05,
+     "diff": 17.56
+    },
+    {
+     "piece": "c1.l13",
+     "phase": "Derinleşme",
+     "start": 268.682,
+     "dur": 1.445,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.71,
+     "diff": 17.22
+    },
+    {
+     "piece": "c1.l14",
+     "phase": "Derinleşme",
+     "start": 271.438,
+     "dur": 0.917,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.67,
+     "diff": 18.18
+    },
+    {
+     "piece": "c1.l15",
+     "phase": "Derinleşme",
+     "start": 274.195,
+     "dur": 0.91,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.46,
+     "diff": 16.97
+    },
+    {
+     "piece": "c1.l16",
+     "phase": "Derinleşme",
+     "start": 276.951,
+     "dur": 0.921,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.39,
+     "diff": 16.9
+    },
+    {
+     "piece": "c1.l17",
+     "phase": "Derinleşme",
+     "start": 279.708,
+     "dur": 1.044,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.42,
+     "diff": 17.93
+    },
+    {
+     "piece": "c1.l18",
+     "phase": "Derinleşme",
+     "start": 282.464,
+     "dur": 1.127,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.06,
+     "diff": 17.57
+    },
+    {
+     "piece": "c1.l19",
+     "phase": "Derinleşme",
+     "start": 285.221,
+     "dur": 0.87,
+     "speech_lufs": -16.49,
+     "bed_st_max": -40.25,
+     "diff": 23.76
+    },
+    {
+     "piece": "c1.l20",
+     "phase": "Derinleşme",
+     "start": 287.978,
+     "dur": 1.118,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.69,
+     "diff": 19.2
+    },
+    {
+     "piece": "c1.gecis.arka",
+     "phase": "Derinleşme",
+     "start": 292.265,
+     "dur": 1.752,
+     "speech_lufs": -16.2,
+     "bed_st_max": -33.63,
+     "diff": 17.43
+    },
+    {
+     "piece": "c1.b01",
+     "phase": "Derinleşme",
+     "start": 296.13,
+     "dur": 1.516,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.79,
+     "diff": 17.3
+    },
+    {
+     "piece": "c1.b02",
+     "phase": "Derinleşme",
+     "start": 298.887,
+     "dur": 1.521,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.8,
+     "diff": 17.31
+    },
+    {
+     "piece": "c1.b03",
+     "phase": "Derinleşme",
+     "start": 301.643,
+     "dur": 1.241,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.19,
+     "diff": 17.7
+    },
+    {
+     "piece": "c1.b04",
+     "phase": "Derinleşme",
+     "start": 304.4,
+     "dur": 2.176,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.7,
+     "diff": 17.21
+    },
+    {
+     "piece": "c1.b05",
+     "phase": "Derinleşme",
+     "start": 309.746,
+     "dur": 1.272,
+     "speech_lufs": -16.49,
+     "bed_st_max": -41.83,
+     "diff": 25.34
+    },
+    {
+     "piece": "c1.gecis.on#1",
+     "phase": "Derinleşme",
+     "start": 314.187,
+     "dur": 2.18,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.41,
+     "diff": 16.92
+    },
+    {
+     "piece": "c1.gecis.on#2",
+     "phase": "Derinleşme",
+     "start": 317.402,
+     "dur": 2.149,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.23,
+     "diff": 16.74
+    },
+    {
+     "piece": "c1.f02",
+     "phase": "Derinleşme",
+     "start": 321.664,
+     "dur": 0.735,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.5,
+     "diff": 18.01
+    },
+    {
+     "piece": "c1.f07",
+     "phase": "Derinleşme",
+     "start": 324.421,
+     "dur": 1.365,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.99,
+     "diff": 17.5
+    },
+    {
+     "piece": "c1.f20",
+     "phase": "Derinleşme",
+     "start": 327.177,
+     "dur": 1.032,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.32,
+     "diff": 17.83
+    },
+    {
+     "piece": "c1.w07",
+     "phase": "Derinleşme",
+     "start": 329.934,
+     "dur": 2.359,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.36,
+     "diff": 16.87
+    },
+    {
+     "piece": "c1.k1",
+     "phase": "Derinleşme",
+     "start": 335.462,
+     "dur": 3.547,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.82,
+     "diff": 17.33
+    },
+    {
+     "piece": "c2.dikkat#1",
+     "phase": "Derin",
+     "start": 346.575,
+     "dur": 3.41,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.77,
+     "diff": 16.78
+    },
+    {
+     "piece": "c2.dikkat#2",
+     "phase": "Derin",
+     "start": 351.865,
+     "dur": 3.448,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.4,
+     "diff": 17.41
+    },
+    {
+     "piece": "c2.yer#1",
+     "phase": "Derin",
+     "start": 365.765,
+     "dur": 4.524,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.14,
+     "diff": 17.15
+    },
+    {
+     "piece": "c2.yer#2",
+     "phase": "Derin",
+     "start": 372.169,
+     "dur": 3.817,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.43,
+     "diff": 17.44
+    },
+    {
+     "piece": "c2.alt",
+     "phase": "Derin",
+     "start": 390.552,
+     "dur": 3.711,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.0,
+     "diff": 17.01
+    },
+    {
+     "piece": "c2.akis#1",
+     "phase": "Derin",
+     "start": 404.602,
+     "dur": 2.285,
+     "speech_lufs": -17.99,
+     "bed_st_max": -40.34,
+     "diff": 22.35
+    },
+    {
+     "piece": "c2.akis#2",
+     "phase": "Derin",
+     "start": 410.0,
+     "dur": 1.703,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.21,
+     "diff": 17.22
+    },
+    {
+     "piece": "c2.sayac#1",
+     "phase": "Derin",
+     "start": 424.382,
+     "dur": 1.572,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.77,
+     "diff": 16.78
+    },
+    {
+     "piece": "c2.sayac#2",
+     "phase": "Derin",
+     "start": 427.833,
+     "dur": 2.364,
+     "speech_lufs": -17.99,
+     "bed_st_max": -37.17,
+     "diff": 19.18
+    },
+    {
+     "piece": "c2.n10",
+     "phase": "Derin",
+     "start": 433.31,
+     "dur": 0.66,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.63,
+     "diff": 17.64
+    },
+    {
+     "piece": "c2.n09",
+     "phase": "Derin",
+     "start": 439.344,
+     "dur": 0.947,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.09,
+     "diff": 18.1
+    },
+    {
+     "piece": "c2.n08",
+     "phase": "Derin",
+     "start": 445.378,
+     "dur": 1.105,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.25,
+     "diff": 17.26
+    },
+    {
+     "piece": "c2.n07",
+     "phase": "Derin",
+     "start": 451.412,
+     "dur": 0.852,
+     "speech_lufs": -17.3,
+     "bed_st_max": -36.65,
+     "diff": 19.34
+    },
+    {
+     "piece": "c2.n06",
+     "phase": "Derin",
+     "start": 457.446,
+     "dur": 0.908,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.84,
+     "diff": 17.85
+    },
+    {
+     "piece": "c2.n05",
+     "phase": "Derin",
+     "start": 463.48,
+     "dur": 0.946,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.01,
+     "diff": 18.02
+    },
+    {
+     "piece": "c2.n04",
+     "phase": "Derin",
+     "start": 469.514,
+     "dur": 0.911,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.2,
+     "diff": 17.21
+    },
+    {
+     "piece": "c2.n03",
+     "phase": "Derin",
+     "start": 475.548,
+     "dur": 0.81,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.89,
+     "diff": 18.9
+    },
+    {
+     "piece": "c2.n02",
+     "phase": "Derin",
+     "start": 481.582,
+     "dur": 0.776,
+     "speech_lufs": -17.32,
+     "bed_st_max": -35.19,
+     "diff": 17.87
+    },
+    {
+     "piece": "c2.n01",
+     "phase": "Derin",
+     "start": 487.616,
+     "dur": 0.805,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.08,
+     "diff": 18.09
+    },
+    {
+     "piece": "c2.birak#1",
+     "phase": "Derin",
+     "start": 495.647,
+     "dur": 1.661,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.21,
+     "diff": 17.22
+    },
+    {
+     "piece": "c2.birak#2",
+     "phase": "Derin",
+     "start": 499.188,
+     "dur": 3.502,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.99,
+     "diff": 18.0
+    },
+    {
+     "piece": "c2.kal",
+     "phase": "Derin",
+     "start": 508.916,
+     "dur": 3.24,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.99,
+     "diff": 17.0
+    },
+    {
+     "piece": "br.k2",
+     "phase": "Derin",
+     "start": 528.609,
+     "dur": 3.261,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.97,
+     "diff": 16.98
+    },
+    {
+     "piece": "br.orta#1",
+     "phase": "Derin",
+     "start": 544.097,
+     "dur": 5.265,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.1,
+     "diff": 17.11
+    },
+    {
+     "piece": "br.orta#2",
+     "phase": "Derin",
+     "start": 551.241,
+     "dur": 2.695,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.95,
+     "diff": 17.96
+    },
+    {
+     "piece": "br.orta#3",
+     "phase": "Derin",
+     "start": 555.816,
+     "dur": 2.066,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.45,
+     "diff": 17.46
+    },
+    {
+     "piece": "c4.yer",
+     "phase": "Derin",
+     "start": 571.108,
+     "dur": 3.461,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.27,
+     "diff": 18.28
+    },
+    {
+     "piece": "c4.gelmezse",
+     "phase": "Derin",
+     "start": 586.908,
+     "dur": 4.061,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.05,
+     "diff": 18.06
+    },
+    {
+     "piece": "c4.patika",
+     "phase": "Derin",
+     "start": 603.308,
+     "dur": 3.344,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.3,
+     "diff": 17.31
+    },
+    {
+     "piece": "c4.yol#1",
+     "phase": "Derin",
+     "start": 613.265,
+     "dur": 1.734,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.51,
+     "diff": 17.52
+    },
+    {
+     "piece": "c4.yol#2",
+     "phase": "Derin",
+     "start": 616.878,
+     "dur": 1.758,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.75,
+     "diff": 16.76
+    },
+    {
+     "piece": "c4.ses",
+     "phase": "Derin",
+     "start": 633.089,
+     "dur": 2.732,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.49,
+     "diff": 17.5
+    },
+    {
+     "piece": "c4.gunes#1",
+     "phase": "Derin",
+     "start": 648.386,
+     "dur": 2.658,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.85,
+     "diff": 17.86
+    },
+    {
+     "piece": "c4.gunes#2",
+     "phase": "Derin",
+     "start": 652.924,
+     "dur": 2.934,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.15,
+     "diff": 18.16
+    },
+    {
+     "piece": "c4.don",
+     "phase": "Derin",
+     "start": 667.423,
+     "dur": 3.485,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.57,
+     "diff": 18.58
+    },
+    {
+     "piece": "c4.solma#1",
+     "phase": "Derin",
+     "start": 687.134,
+     "dur": 2.259,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.01,
+     "diff": 18.02
+    },
+    {
+     "piece": "c4.solma#2",
+     "phase": "Derin",
+     "start": 691.272,
+     "dur": 3.164,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.54,
+     "diff": 18.55
+    },
+    {
+     "piece": "n2.hatirla#1",
+     "phase": "Derin",
+     "start": 708.662,
+     "dur": 4.079,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.0,
+     "diff": 17.01
+    },
+    {
+     "piece": "n2.hatirla#2",
+     "phase": "Derin",
+     "start": 714.62,
+     "dur": 4.266,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.7,
+     "diff": 16.71
+    },
+    {
+     "piece": "n2.dilek",
+     "phase": "Derin",
+     "start": 736.225,
+     "dur": 3.359,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.42,
+     "diff": 16.43
+    },
+    {
+     "piece": "k.anahtar3",
+     "phase": "Derin",
+     "start": 746.923,
+     "dur": 1.755,
+     "speech_lufs": -17.7,
+     "bed_st_max": -35.68,
+     "diff": 17.98
+    },
+    {
+     "piece": "k.donus",
+     "phase": "Kapanış",
+     "start": 755.018,
+     "dur": 1.817,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.74,
+     "diff": 17.75
+    },
+    {
+     "piece": "k.nefes",
+     "phase": "Kapanış",
+     "start": 760.504,
+     "dur": 2.365,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.5,
+     "diff": 18.51
+    },
+    {
+     "piece": "k.sesler",
+     "phase": "Kapanış",
+     "start": 767.208,
+     "dur": 3.683,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.09,
+     "diff": 17.1
+    },
+    {
+     "piece": "k.hareket#1",
+     "phase": "Kapanış",
+     "start": 777.117,
+     "dur": 3.916,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.93,
+     "diff": 16.94
+    },
+    {
+     "piece": "k.hareket#2",
+     "phase": "Kapanış",
+     "start": 782.056,
+     "dur": 4.145,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.99,
+     "diff": 17.0
+    },
+    {
+     "piece": "k.goz",
+     "phase": "Kapanış",
+     "start": 796.54,
+     "dur": 5.288,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.23,
+     "diff": 17.24
+    },
+    {
+     "piece": "k.oda.ayrinti",
+     "phase": "Kapanış",
+     "start": 811.167,
+     "dur": 3.196,
+     "speech_lufs": -14.86,
+     "bed_st_max": -32.28,
+     "diff": 17.42
+    },
+    {
+     "piece": "k.zaman",
+     "phase": "Kapanış",
+     "start": 822.589,
+     "dur": 3.745,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.19,
+     "diff": 17.2
+    },
+    {
+     "piece": "k.yan",
+     "phase": "Kapanış",
+     "start": 831.117,
+     "dur": 3.192,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.0,
+     "diff": 17.01
+    },
+    {
+     "piece": "k.yandakal",
+     "phase": "Kapanış",
+     "start": 840.535,
+     "dur": 2.795,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.29,
+     "diff": 18.3
+    },
+    {
+     "piece": "k.otur",
+     "phase": "Kapanış",
+     "start": 855.669,
+     "dur": 3.646,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.87,
+     "diff": 17.88
+    },
+    {
+     "piece": "k.bekle",
+     "phase": "Kapanış",
+     "start": 867.654,
+     "dur": 3.083,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.74,
+     "diff": 16.75
+    },
+    {
+     "piece": "k.kalk",
+     "phase": "Kapanış",
+     "start": 883.19,
+     "dur": 5.937,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.92,
+     "diff": 17.93
+    },
+    {
+     "piece": "k.son",
+     "phase": "Kapanış",
+     "start": 892.24,
+     "dur": 2.421,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.26,
+     "diff": 16.27
     }
    ],
    "order_check": {
@@ -948,22 +3256,24 @@
    },
    "position_check_mp3": {
     "pieces": 127,
-    "min_corr": 0.977,
-    "min_corr_piece": "c1.s19",
+    "min_corr": 0.98,
+    "min_corr_piece": "c2.n08",
     "median_corr": 0.99,
     "max_abs_offset_ms": 0.05,
     "n_corr_below_0_9": 0,
-    "order_ok": true
+    "order_ok": true,
+    "v3_ok": true,
+    "v3_rule": "SPEC v3.5: ilinti ≥ 0.95 (VARSAYIM), kayma ≤ 1 ms"
    },
    "timeline": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-nes-B.timeline.json"
   },
   "ders2-15dk-hak-A": {
    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-hak-A.mp3",
-   "bytes": 12800641,
+   "bytes": 12811995,
    "encoding": {
     "mode": "ABR 120 kbit/s",
-    "bytes": 12800641,
-    "kbps_avg": 113.8,
+    "bytes": 12811995,
+    "kbps_avg": 113.9,
     "tried": [
      "VBR V2 (mtrh, q=2)",
      "ABR 120 kbit/s"
@@ -974,23 +3284,23 @@
    "duration_s": 900.049,
    "mp3_decoder_offset_samples": 1105,
    "duration_float_mix_s": 900.0,
-   "integrated_lufs": -17.65,
-   "integrated_lufs_float_mix": -17.2,
-   "true_peak_dbtp": -1.83,
+   "integrated_lufs": -17.51,
+   "integrated_lufs_float_mix": -17.07,
+   "true_peak_dbtp": -1.67,
    "true_peak_dbtp_float_mix": -2.0,
-   "true_peak_dbtp_before_limiter": -1.12,
+   "true_peak_dbtp_before_limiter": -1.17,
    "tp_limiter": [
     {
      "ceiling_dbtp": -2.0,
      "limiter": {
       "ceiling_dbtp": -2.0,
-      "max_reduction_db": 0.88,
-      "sec_over_0_5db": 0.46,
+      "max_reduction_db": 0.83,
+      "sec_over_0_5db": 0.365,
       "sec_over_1db": 0.0,
-      "at_s": 842.623
+      "at_s": 18.776
      },
      "tp_float_after_limiter": -2.0,
-     "tp_mp3": -1.83
+     "tp_mp3": -1.67
     }
    ],
    "speech_over_bed": {
@@ -1006,8 +3316,8 @@
      "speech_lufs_median": -14.99,
      "bed_st_under_speech_median": -32.66,
      "st3_windows_ge90pct_speech": 141,
-     "st3_min_diff": 12.49,
-     "st3_median_diff": 17.47,
+     "st3_min_diff": 12.48,
+     "st3_median_diff": 17.51,
      "st3_n_below_15": 9,
      "st3_pct_below_15": 6.4,
      "st3_worst_at_s": 12.0,
@@ -1021,88 +3331,46 @@
      "pieces_ge_1s": 38,
      "min_diff_ge_1s": 17.08,
      "worst_piece": "c1.gecis.on#1",
-     "p10_diff_ge_1s": 17.32,
-     "median_diff_ge_1s": 17.73,
+     "p10_diff_ge_1s": 17.35,
+     "median_diff_ge_1s": 17.74,
      "pieces_all": 62,
-     "min_diff_all": 13.69,
-     "n_below_15_all": 7,
+     "min_diff_all": 16.13,
+     "n_below_15_all": 0,
      "speech_lufs_median": -16.49,
-     "bed_st_under_speech_median": -34.23,
-     "st3_windows_ge90pct_speech": 77,
-     "st3_min_diff": 14.57,
+     "bed_st_under_speech_median": -34.26,
+     "st3_windows_ge90pct_speech": 78,
+     "st3_min_diff": 14.6,
      "st3_median_diff": 17.29,
      "st3_n_below_15": 4,
-     "st3_pct_below_15": 5.2,
+     "st3_pct_below_15": 5.1,
      "st3_worst_at_s": 109.4,
      "st3_worst_pieces": [
       "n1.sec#2"
      ],
-     "below_15_pieces": [
-      [
-       "c1.s09",
-       0.8,
-       14.12
-      ],
-      [
-       "c1.s19",
-       0.81,
-       14.47
-      ],
-      [
-       "c1.l09",
-       0.83,
-       13.69
-      ],
-      [
-       "c1.l12",
-       0.91,
-       14.08
-      ],
-      [
-       "c1.l19",
-       0.82,
-       14.6
-      ],
-      [
-       "c1.f02",
-       0.71,
-       14.74
-      ],
-      [
-       "c1.f20",
-       0.89,
-       14.88
-      ]
-     ],
+     "below_15_pieces": [],
      "pass_ge_1s": true
     },
     "Derin": {
      "pieces_ge_1s": 34,
      "min_diff_ge_1s": 16.75,
      "worst_piece": "c2.kal",
-     "p10_diff_ge_1s": 17.37,
-     "median_diff_ge_1s": 17.99,
+     "p10_diff_ge_1s": 17.38,
+     "median_diff_ge_1s": 18.0,
      "pieces_all": 43,
-     "min_diff_all": 14.39,
-     "n_below_15_all": 1,
+     "min_diff_all": 15.49,
+     "n_below_15_all": 0,
      "speech_lufs_median": -17.99,
      "bed_st_under_speech_median": -36.0,
      "st3_windows_ge90pct_speech": 235,
-     "st3_min_diff": 15.26,
-     "st3_median_diff": 17.49,
+     "st3_min_diff": 15.23,
+     "st3_median_diff": 17.48,
      "st3_n_below_15": 0,
      "st3_pct_below_15": 0.0,
      "st3_worst_at_s": 520.4,
      "st3_worst_pieces": [
       "c2.kal"
      ],
-     "below_15_pieces": [
-      [
-       "c2.n10",
-       0.61,
-       14.39
-      ]
-     ],
+     "below_15_pieces": [],
      "pass_ge_1s": true
     },
     "Kapanış": {
@@ -1117,10 +3385,10 @@
      "speech_lufs_median": -14.99,
      "bed_st_under_speech_median": -32.76,
      "st3_windows_ge90pct_speech": 160,
-     "st3_min_diff": 14.68,
-     "st3_median_diff": 17.78,
-     "st3_n_below_15": 1,
-     "st3_pct_below_15": 0.6,
+     "st3_min_diff": 15.02,
+     "st3_median_diff": 17.77,
+     "st3_n_below_15": 0,
+     "st3_pct_below_15": 0.0,
      "st3_worst_at_s": 859.3,
      "st3_worst_pieces": [
       "k.otur"
@@ -1132,31 +3400,31 @@
    "loudness_rise": {
     "bed_stem": {
      "stem": "yatak (müzik + doğa + oda + tını)",
-     "max_rise_db_per_s": 6.63,
+     "max_rise_db_per_s": 6.53,
      "at_s": 755.3,
-     "max_rise_in_speech_free_s": 6.63,
+     "max_rise_in_speech_free_s": 6.53,
      "at_speech_free_s": 755.3,
-     "n_1s_steps_over_1db": 62,
+     "n_1s_steps_over_1db": 64,
      "top5": [
       [
        755.3,
-       6.63
+       6.53
       ],
       [
        755.2,
-       6.51
+       6.4
       ],
       [
        755.1,
-       6.38
+       6.27
       ],
       [
        755.0,
-       6.2
+       6.09
       ],
       [
        754.9,
-       5.98
+       5.87
       ]
      ]
     },
@@ -1166,7 +3434,7 @@
      "at_s": 1.5,
      "max_rise_in_speech_free_s": 4.75,
      "at_speech_free_s": 1.5,
-     "n_1s_steps_over_1db": 50,
+     "n_1s_steps_over_1db": 52,
      "top5": [
       [
        1.5,
@@ -1196,7 +3464,7 @@
      "at_s": 1.5,
      "max_rise_in_speech_free_s": 2.96,
      "at_speech_free_s": 1.5,
-     "n_1s_steps_over_1db": 48,
+     "n_1s_steps_over_1db": 50,
      "top5": [
       [
        1.5,
@@ -1222,36 +3490,36 @@
     },
     "full_mix_speech_free": {
      "stem": "tam karışım",
-     "max_rise_db_per_s": 19.35,
-     "at_s": 2.0,
-     "max_rise_in_speech_free_s": 6.63,
+     "max_rise_db_per_s": 19.24,
+     "at_s": 891.0,
+     "max_rise_in_speech_free_s": 6.53,
      "at_speech_free_s": 755.3,
-     "n_1s_steps_over_1db": 2034,
+     "n_1s_steps_over_1db": 2020,
      "top5": [
       [
-       2.0,
-       19.35
-      ],
-      [
        891.0,
-       19.23
-      ],
-      [
-       2.1,
-       19.17
+       19.24
       ],
       [
        891.1,
-       19.15
+       19.16
       ],
       [
        890.9,
        19.12
+      ],
+      [
+       890.8,
+       19.0
+      ],
+      [
+       890.7,
+       18.89
       ]
      ]
     },
     "tone_times_s": [
-     756.802
+     756.801
     ]
    },
    "windows_in_plan": 0,
@@ -1264,43 +3532,43 @@
     },
     {
      "what": "yatak geçişi",
-     "t0": 337.477,
-     "t1": 345.477,
+     "t0": 337.478,
+     "t1": 345.478,
      "speech_cover": 0.77
     },
     {
      "what": "yatak geçişi",
-     "t0": 559.892,
-     "t1": 567.892,
+     "t0": 559.89,
+     "t1": 567.89,
      "speech_cover": 0.55
     },
     {
      "what": "yatak geçişi",
-     "t0": 758.802,
-     "t1": 766.802,
+     "t0": 758.801,
+     "t1": 766.801,
      "speech_cover": 0.51
     },
     {
      "what": "imge katmanı girişi",
-     "t0": 579.216,
-     "t1": 587.216,
+     "t0": 579.214,
+     "t1": 587.214,
      "speech_cover": 0.41
     },
     {
      "what": "imge katmanı çıkışı",
-     "t0": 692.505,
-     "t1": 700.505,
+     "t0": 692.504,
+     "t1": 700.504,
      "speech_cover": 0.64
     }
    ],
    "clicks_float_mix": {
     "edit_point": 0,
-    "speech_content": 81,
+    "speech_content": 80,
     "bed_content": 2,
     "mix_only": 0
    },
    "clicks_stems": {
-    "voice_only": 466,
+    "voice_only": 471,
     "bed_only": 3
    },
    "clicks_list": {
@@ -1329,7 +3597,7 @@
    },
    "clicks_mp3": {
     "edit_point": 0,
-    "speech_content": 70,
+    "speech_content": 77,
     "bed_content": 0,
     "mix_only": 0
    },
@@ -1365,16 +3633,16 @@
      "music_minus_nature": 10.3
     },
     "Derinleşme": {
-     "bg_total": -34.36,
-     "music": -34.77,
-     "nature": -45.61,
+     "bg_total": -34.38,
+     "music": -34.8,
+     "nature": -45.62,
      "music_minus_nature": 10.66
     },
     "Derin": {
      "bg_total": -36.15,
      "music": -36.62,
      "nature": -46.9,
-     "music_minus_nature": 10.41
+     "music_minus_nature": 10.4
     },
     "Kapanış": {
      "bg_total": -32.87,
@@ -1384,7 +3652,7 @@
     }
    },
    "nature_minus_music_db": -10.0,
-   "md5": "34f19d2bc89513351fe90a1c3e729d53",
+   "md5": "dc27305f11fdce4fa01ce6b9b7963f23",
    "speech_over_bed_iterations": [
     {
      "iter": 0,
@@ -1410,6 +3678,1201 @@
      }
     }
    ],
+   "local_duck": {
+    "rule": "eşik altı (< 15.0 dB) her parça için yatak (müzik + imge + doğa) parça ±1.5 sn düz, rampa max(1.0 sn, d / 1.0 dB/sn); hedef ≥ 15.5 dB; A ve B ortak",
+    "spans": [
+     {
+      "piece": "c1.l19",
+      "depth_db": 0.86,
+      "flat": [
+       276.35,
+       280.18
+      ],
+      "t0": 275.35,
+      "t1": 281.18,
+      "ramp_s": 1.0
+     }
+    ],
+    "iterations": [
+     {
+      "iter": 0,
+      "needs_db": {},
+      "below": {
+       "c1.l19": 0.86
+      }
+     },
+     {
+      "iter": 1,
+      "needs_db": {
+       "c1.l19": 0.86
+      },
+      "below": {}
+     }
+    ]
+   },
+   "speech_over_bed_pieces": [
+    {
+     "piece": "a.hosgeldin#1",
+     "phase": "Varış",
+     "start": 4.091,
+     "dur": 0.87,
+     "speech_lufs": -14.99,
+     "bed_st_max": -34.58,
+     "diff": 19.59
+    },
+    {
+     "piece": "a.hosgeldin#2",
+     "phase": "Varış",
+     "start": 5.77,
+     "dur": 1.371,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.21,
+     "diff": 18.22
+    },
+    {
+     "piece": "a.acilis",
+     "phase": "Varış",
+     "start": 9.187,
+     "dur": 4.038,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.46,
+     "diff": 17.47
+    },
+    {
+     "piece": "a.konfor",
+     "phase": "Varış",
+     "start": 18.316,
+     "dur": 5.7,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.04,
+     "diff": 18.05
+    },
+    {
+     "piece": "a.durus",
+     "phase": "Varış",
+     "start": 36.152,
+     "dur": 3.638,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.27,
+     "diff": 18.28
+    },
+    {
+     "piece": "a.gozler",
+     "phase": "Varış",
+     "start": 47.973,
+     "dur": 4.949,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.5,
+     "diff": 17.51
+    },
+    {
+     "piece": "a.karar",
+     "phase": "Varış",
+     "start": 57.059,
+     "dur": 2.902,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.61,
+     "diff": 17.62
+    },
+    {
+     "piece": "a.izin",
+     "phase": "Varış",
+     "start": 67.052,
+     "dur": 5.165,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.55,
+     "diff": 17.56
+    },
+    {
+     "piece": "a.kolay",
+     "phase": "Varış",
+     "start": 78.309,
+     "dur": 3.957,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.69,
+     "diff": 17.7
+    },
+    {
+     "piece": "a.agirlik",
+     "phase": "Varış",
+     "start": 91.357,
+     "dur": 2.624,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.62,
+     "diff": 17.63
+    },
+    {
+     "piece": "n1.sec#1",
+     "phase": "Derinleşme",
+     "start": 102.164,
+     "dur": 2.556,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.19,
+     "diff": 17.7
+    },
+    {
+     "piece": "n1.sec#2",
+     "phase": "Derinleşme",
+     "start": 105.733,
+     "dur": 5.079,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.8,
+     "diff": 17.31
+    },
+    {
+     "piece": "n1.soyle",
+     "phase": "Derinleşme",
+     "start": 121.04,
+     "dur": 3.033,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.19,
+     "diff": 17.7
+    },
+    {
+     "piece": "n1.birak#1",
+     "phase": "Derinleşme",
+     "start": 137.392,
+     "dur": 2.431,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.77,
+     "diff": 18.28
+    },
+    {
+     "piece": "n1.birak#2",
+     "phase": "Derinleşme",
+     "start": 140.837,
+     "dur": 3.008,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.11,
+     "diff": 17.62
+    },
+    {
+     "piece": "c1.cerceve#1",
+     "phase": "Derinleşme",
+     "start": 150.414,
+     "dur": 2.52,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.03,
+     "diff": 17.54
+    },
+    {
+     "piece": "c1.cerceve#2",
+     "phase": "Derinleşme",
+     "start": 153.948,
+     "dur": 2.591,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.76,
+     "diff": 17.27
+    },
+    {
+     "piece": "c1.tekrar",
+     "phase": "Derinleşme",
+     "start": 159.584,
+     "dur": 3.505,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.16,
+     "diff": 17.67
+    },
+    {
+     "piece": "c1.s01",
+     "phase": "Derinleşme",
+     "start": 166.635,
+     "dur": 1.75,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.22,
+     "diff": 17.73
+    },
+    {
+     "piece": "c1.s02",
+     "phase": "Derinleşme",
+     "start": 169.358,
+     "dur": 1.377,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.49,
+     "diff": 18.0
+    },
+    {
+     "piece": "c1.s03",
+     "phase": "Derinleşme",
+     "start": 172.081,
+     "dur": 1.151,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.36,
+     "diff": 17.87
+    },
+    {
+     "piece": "c1.s04",
+     "phase": "Derinleşme",
+     "start": 174.803,
+     "dur": 1.181,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.68,
+     "diff": 18.19
+    },
+    {
+     "piece": "c1.s05",
+     "phase": "Derinleşme",
+     "start": 177.526,
+     "dur": 1.278,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.57,
+     "diff": 19.08
+    },
+    {
+     "piece": "c1.s06",
+     "phase": "Derinleşme",
+     "start": 180.249,
+     "dur": 0.992,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.28,
+     "diff": 18.79
+    },
+    {
+     "piece": "c1.s07",
+     "phase": "Derinleşme",
+     "start": 182.972,
+     "dur": 1.156,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.75,
+     "diff": 18.26
+    },
+    {
+     "piece": "c1.s08",
+     "phase": "Derinleşme",
+     "start": 185.694,
+     "dur": 0.867,
+     "speech_lufs": -16.81,
+     "bed_st_max": -34.87,
+     "diff": 18.06
+    },
+    {
+     "piece": "c1.s09",
+     "phase": "Derinleşme",
+     "start": 188.417,
+     "dur": 0.841,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.18,
+     "diff": 18.69
+    },
+    {
+     "piece": "c1.s10",
+     "phase": "Derinleşme",
+     "start": 191.14,
+     "dur": 0.925,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.23,
+     "diff": 18.74
+    },
+    {
+     "piece": "c1.s11",
+     "phase": "Derinleşme",
+     "start": 193.863,
+     "dur": 0.948,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.26,
+     "diff": 18.77
+    },
+    {
+     "piece": "c1.s12",
+     "phase": "Derinleşme",
+     "start": 196.586,
+     "dur": 0.929,
+     "speech_lufs": -18.49,
+     "bed_st_max": -35.28,
+     "diff": 16.79
+    },
+    {
+     "piece": "c1.s13",
+     "phase": "Derinleşme",
+     "start": 199.308,
+     "dur": 1.374,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.2,
+     "diff": 18.71
+    },
+    {
+     "piece": "c1.s14",
+     "phase": "Derinleşme",
+     "start": 202.031,
+     "dur": 0.859,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.26,
+     "diff": 18.77
+    },
+    {
+     "piece": "c1.s15",
+     "phase": "Derinleşme",
+     "start": 204.754,
+     "dur": 0.946,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.39,
+     "diff": 18.9
+    },
+    {
+     "piece": "c1.s16",
+     "phase": "Derinleşme",
+     "start": 207.477,
+     "dur": 0.874,
+     "speech_lufs": -15.6,
+     "bed_st_max": -35.57,
+     "diff": 19.97
+    },
+    {
+     "piece": "c1.s17",
+     "phase": "Derinleşme",
+     "start": 210.2,
+     "dur": 0.927,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.33,
+     "diff": 18.84
+    },
+    {
+     "piece": "c1.s18",
+     "phase": "Derinleşme",
+     "start": 212.922,
+     "dur": 0.985,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.13,
+     "diff": 18.64
+    },
+    {
+     "piece": "c1.s19",
+     "phase": "Derinleşme",
+     "start": 215.645,
+     "dur": 0.829,
+     "speech_lufs": -16.99,
+     "bed_st_max": -34.82,
+     "diff": 17.83
+    },
+    {
+     "piece": "c1.s20",
+     "phase": "Derinleşme",
+     "start": 218.368,
+     "dur": 1.041,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.97,
+     "diff": 18.48
+    },
+    {
+     "piece": "c1.kacirma",
+     "phase": "Derinleşme",
+     "start": 222.477,
+     "dur": 3.292,
+     "speech_lufs": -16.36,
+     "bed_st_max": -34.62,
+     "diff": 18.26
+    },
+    {
+     "piece": "c1.l01",
+     "phase": "Derinleşme",
+     "start": 228.838,
+     "dur": 1.699,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.01,
+     "diff": 18.52
+    },
+    {
+     "piece": "c1.l02",
+     "phase": "Derinleşme",
+     "start": 231.561,
+     "dur": 1.383,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.76,
+     "diff": 18.27
+    },
+    {
+     "piece": "c1.l03",
+     "phase": "Derinleşme",
+     "start": 234.284,
+     "dur": 1.126,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.26,
+     "diff": 17.77
+    },
+    {
+     "piece": "c1.l04",
+     "phase": "Derinleşme",
+     "start": 237.006,
+     "dur": 1.186,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.01,
+     "diff": 18.52
+    },
+    {
+     "piece": "c1.l05",
+     "phase": "Derinleşme",
+     "start": 239.729,
+     "dur": 1.232,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.25,
+     "diff": 18.76
+    },
+    {
+     "piece": "c1.l06",
+     "phase": "Derinleşme",
+     "start": 242.452,
+     "dur": 1.011,
+     "speech_lufs": -16.49,
+     "bed_st_max": -35.26,
+     "diff": 18.77
+    },
+    {
+     "piece": "c1.l07",
+     "phase": "Derinleşme",
+     "start": 245.175,
+     "dur": 1.185,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.83,
+     "diff": 18.34
+    },
+    {
+     "piece": "c1.l08",
+     "phase": "Derinleşme",
+     "start": 247.898,
+     "dur": 0.871,
+     "speech_lufs": -16.91,
+     "bed_st_max": -34.62,
+     "diff": 17.71
+    },
+    {
+     "piece": "c1.l09",
+     "phase": "Derinleşme",
+     "start": 250.62,
+     "dur": 0.861,
+     "speech_lufs": -16.99,
+     "bed_st_max": -34.2,
+     "diff": 17.21
+    },
+    {
+     "piece": "c1.l10",
+     "phase": "Derinleşme",
+     "start": 253.343,
+     "dur": 0.938,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.83,
+     "diff": 17.34
+    },
+    {
+     "piece": "c1.l11",
+     "phase": "Derinleşme",
+     "start": 256.066,
+     "dur": 0.99,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.1,
+     "diff": 17.61
+    },
+    {
+     "piece": "c1.l12",
+     "phase": "Derinleşme",
+     "start": 258.789,
+     "dur": 0.923,
+     "speech_lufs": -17.49,
+     "bed_st_max": -34.16,
+     "diff": 16.67
+    },
+    {
+     "piece": "c1.l13",
+     "phase": "Derinleşme",
+     "start": 261.512,
+     "dur": 1.327,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.85,
+     "diff": 17.36
+    },
+    {
+     "piece": "c1.l14",
+     "phase": "Derinleşme",
+     "start": 264.234,
+     "dur": 0.848,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.84,
+     "diff": 17.35
+    },
+    {
+     "piece": "c1.l15",
+     "phase": "Derinleşme",
+     "start": 266.957,
+     "dur": 0.927,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.96,
+     "diff": 17.47
+    },
+    {
+     "piece": "c1.l16",
+     "phase": "Derinleşme",
+     "start": 269.68,
+     "dur": 0.846,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.01,
+     "diff": 17.52
+    },
+    {
+     "piece": "c1.l17",
+     "phase": "Derinleşme",
+     "start": 272.403,
+     "dur": 0.98,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.18,
+     "diff": 17.69
+    },
+    {
+     "piece": "c1.l18",
+     "phase": "Derinleşme",
+     "start": 275.126,
+     "dur": 1.023,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.41,
+     "diff": 17.92
+    },
+    {
+     "piece": "c1.l19",
+     "phase": "Derinleşme",
+     "start": 277.848,
+     "dur": 0.835,
+     "speech_lufs": -18.49,
+     "bed_st_max": -34.62,
+     "diff": 16.13
+    },
+    {
+     "piece": "c1.l20",
+     "phase": "Derinleşme",
+     "start": 280.571,
+     "dur": 1.051,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.18,
+     "diff": 17.69
+    },
+    {
+     "piece": "c1.gecis.arka",
+     "phase": "Derinleşme",
+     "start": 284.691,
+     "dur": 1.708,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.0,
+     "diff": 17.51
+    },
+    {
+     "piece": "c1.b01",
+     "phase": "Derinleşme",
+     "start": 288.444,
+     "dur": 1.536,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.97,
+     "diff": 17.48
+    },
+    {
+     "piece": "c1.b02",
+     "phase": "Derinleşme",
+     "start": 291.167,
+     "dur": 1.455,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.06,
+     "diff": 17.57
+    },
+    {
+     "piece": "c1.b03",
+     "phase": "Derinleşme",
+     "start": 293.89,
+     "dur": 1.08,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.05,
+     "diff": 17.56
+    },
+    {
+     "piece": "c1.b04",
+     "phase": "Derinleşme",
+     "start": 296.613,
+     "dur": 2.185,
+     "speech_lufs": -16.24,
+     "bed_st_max": -34.11,
+     "diff": 17.87
+    },
+    {
+     "piece": "c1.b05",
+     "phase": "Derinleşme",
+     "start": 301.866,
+     "dur": 1.189,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.02,
+     "diff": 17.53
+    },
+    {
+     "piece": "c1.gecis.on#1",
+     "phase": "Derinleşme",
+     "start": 306.124,
+     "dur": 2.169,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.57,
+     "diff": 17.08
+    },
+    {
+     "piece": "c1.gecis.on#2",
+     "phase": "Derinleşme",
+     "start": 309.306,
+     "dur": 2.026,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.8,
+     "diff": 17.31
+    },
+    {
+     "piece": "c1.f02",
+     "phase": "Derinleşme",
+     "start": 313.377,
+     "dur": 0.735,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.27,
+     "diff": 17.78
+    },
+    {
+     "piece": "c1.f07",
+     "phase": "Derinleşme",
+     "start": 316.1,
+     "dur": 1.252,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.92,
+     "diff": 17.43
+    },
+    {
+     "piece": "c1.f20",
+     "phase": "Derinleşme",
+     "start": 318.823,
+     "dur": 0.897,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.56,
+     "diff": 17.07
+    },
+    {
+     "piece": "c1.w07",
+     "phase": "Derinleşme",
+     "start": 321.546,
+     "dur": 2.092,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.23,
+     "diff": 17.74
+    },
+    {
+     "piece": "c1.k1",
+     "phase": "Derinleşme",
+     "start": 326.706,
+     "dur": 3.544,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.22,
+     "diff": 17.73
+    },
+    {
+     "piece": "c2.dikkat#1",
+     "phase": "Derin",
+     "start": 337.478,
+     "dur": 3.258,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.47,
+     "diff": 17.48
+    },
+    {
+     "piece": "c2.dikkat#2",
+     "phase": "Derin",
+     "start": 342.569,
+     "dur": 3.343,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.0,
+     "diff": 18.01
+    },
+    {
+     "piece": "c2.yer#1",
+     "phase": "Derin",
+     "start": 356.094,
+     "dur": 4.31,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.29,
+     "diff": 18.3
+    },
+    {
+     "piece": "c2.yer#2",
+     "phase": "Derin",
+     "start": 362.236,
+     "dur": 3.476,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.22,
+     "diff": 18.23
+    },
+    {
+     "piece": "c2.alt",
+     "phase": "Derin",
+     "start": 379.94,
+     "dur": 3.587,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.8,
+     "diff": 17.81
+    },
+    {
+     "piece": "c2.akis#1",
+     "phase": "Derin",
+     "start": 393.664,
+     "dur": 2.145,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.76,
+     "diff": 17.77
+    },
+    {
+     "piece": "c2.akis#2",
+     "phase": "Derin",
+     "start": 398.854,
+     "dur": 1.626,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.06,
+     "diff": 18.07
+    },
+    {
+     "piece": "c2.durak#1",
+     "phase": "Derin",
+     "start": 412.754,
+     "dur": 3.404,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.7,
+     "diff": 17.71
+    },
+    {
+     "piece": "c2.durak#2",
+     "phase": "Derin",
+     "start": 417.99,
+     "dur": 2.265,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.14,
+     "diff": 18.15
+    },
+    {
+     "piece": "c2.sayac#1",
+     "phase": "Derin",
+     "start": 434.483,
+     "dur": 1.546,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.0,
+     "diff": 18.01
+    },
+    {
+     "piece": "c2.sayac#2",
+     "phase": "Derin",
+     "start": 437.861,
+     "dur": 2.486,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.07,
+     "diff": 18.09
+    },
+    {
+     "piece": "c2.n10",
+     "phase": "Derin",
+     "start": 443.392,
+     "dur": 0.623,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.3,
+     "diff": 18.31
+    },
+    {
+     "piece": "c2.n09",
+     "phase": "Derin",
+     "start": 449.406,
+     "dur": 0.924,
+     "speech_lufs": -18.49,
+     "bed_st_max": -36.32,
+     "diff": 17.83
+    },
+    {
+     "piece": "c2.n08",
+     "phase": "Derin",
+     "start": 455.42,
+     "dur": 1.004,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.26,
+     "diff": 18.27
+    },
+    {
+     "piece": "c2.n07",
+     "phase": "Derin",
+     "start": 461.433,
+     "dur": 0.74,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.24,
+     "diff": 18.25
+    },
+    {
+     "piece": "c2.n06",
+     "phase": "Derin",
+     "start": 467.447,
+     "dur": 0.811,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.26,
+     "diff": 18.27
+    },
+    {
+     "piece": "c2.n05",
+     "phase": "Derin",
+     "start": 473.461,
+     "dur": 0.805,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.77,
+     "diff": 17.78
+    },
+    {
+     "piece": "c2.n04",
+     "phase": "Derin",
+     "start": 479.474,
+     "dur": 0.797,
+     "speech_lufs": -20.49,
+     "bed_st_max": -35.98,
+     "diff": 15.49
+    },
+    {
+     "piece": "c2.n03",
+     "phase": "Derin",
+     "start": 485.488,
+     "dur": 0.798,
+     "speech_lufs": -17.43,
+     "bed_st_max": -36.33,
+     "diff": 18.9
+    },
+    {
+     "piece": "c2.n02",
+     "phase": "Derin",
+     "start": 491.502,
+     "dur": 0.754,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.29,
+     "diff": 18.3
+    },
+    {
+     "piece": "c2.n01",
+     "phase": "Derin",
+     "start": 497.515,
+     "dur": 0.713,
+     "speech_lufs": -18.99,
+     "bed_st_max": -35.63,
+     "diff": 16.64
+    },
+    {
+     "piece": "c2.birak#1",
+     "phase": "Derin",
+     "start": 505.319,
+     "dur": 1.633,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.97,
+     "diff": 17.98
+    },
+    {
+     "piece": "c2.birak#2",
+     "phase": "Derin",
+     "start": 508.784,
+     "dur": 3.508,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.75,
+     "diff": 17.76
+    },
+    {
+     "piece": "c2.kal",
+     "phase": "Derin",
+     "start": 518.383,
+     "dur": 3.175,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.74,
+     "diff": 16.75
+    },
+    {
+     "piece": "br.k2",
+     "phase": "Derin",
+     "start": 537.74,
+     "dur": 3.205,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.37,
+     "diff": 17.38
+    },
+    {
+     "piece": "br.orta#1",
+     "phase": "Derin",
+     "start": 553.036,
+     "dur": 5.022,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.36,
+     "diff": 17.37
+    },
+    {
+     "piece": "br.orta#2",
+     "phase": "Derin",
+     "start": 559.89,
+     "dur": 2.484,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.31,
+     "diff": 18.32
+    },
+    {
+     "piece": "br.orta#3",
+     "phase": "Derin",
+     "start": 564.206,
+     "dur": 1.917,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.56,
+     "diff": 18.57
+    },
+    {
+     "piece": "c4.yer",
+     "phase": "Derin",
+     "start": 579.214,
+     "dur": 3.314,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.6,
+     "diff": 18.61
+    },
+    {
+     "piece": "c4.gelmezse",
+     "phase": "Derin",
+     "start": 594.665,
+     "dur": 3.862,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.36,
+     "diff": 18.37
+    },
+    {
+     "piece": "c4.patika",
+     "phase": "Derin",
+     "start": 610.664,
+     "dur": 3.362,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.52,
+     "diff": 18.53
+    },
+    {
+     "piece": "c4.yol#1",
+     "phase": "Derin",
+     "start": 620.572,
+     "dur": 1.661,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.43,
+     "diff": 18.44
+    },
+    {
+     "piece": "c4.yol#2",
+     "phase": "Derin",
+     "start": 624.065,
+     "dur": 1.674,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.22,
+     "diff": 18.23
+    },
+    {
+     "piece": "c4.ses",
+     "phase": "Derin",
+     "start": 639.921,
+     "dur": 2.605,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.4,
+     "diff": 17.41
+    },
+    {
+     "piece": "c4.gunes#1",
+     "phase": "Derin",
+     "start": 654.754,
+     "dur": 2.558,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.92,
+     "diff": 17.93
+    },
+    {
+     "piece": "c4.gunes#2",
+     "phase": "Derin",
+     "start": 659.144,
+     "dur": 2.708,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.38,
+     "diff": 17.39
+    },
+    {
+     "piece": "c4.don",
+     "phase": "Derin",
+     "start": 673.08,
+     "dur": 3.333,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.7,
+     "diff": 17.71
+    },
+    {
+     "piece": "c4.solma#1",
+     "phase": "Derin",
+     "start": 692.504,
+     "dur": 2.129,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.94,
+     "diff": 17.95
+    },
+    {
+     "piece": "c4.solma#2",
+     "phase": "Derin",
+     "start": 696.465,
+     "dur": 3.002,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.71,
+     "diff": 17.72
+    },
+    {
+     "piece": "n2.hatirla#1",
+     "phase": "Derin",
+     "start": 713.557,
+     "dur": 3.929,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.04,
+     "diff": 17.05
+    },
+    {
+     "piece": "n2.hatirla#2",
+     "phase": "Derin",
+     "start": 719.319,
+     "dur": 4.076,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.98,
+     "diff": 17.99
+    },
+    {
+     "piece": "n2.dilek",
+     "phase": "Derin",
+     "start": 740.531,
+     "dur": 3.333,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.53,
+     "diff": 18.54
+    },
+    {
+     "piece": "k.anahtar3",
+     "phase": "Derin",
+     "start": 751.001,
+     "dur": 1.663,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.4,
+     "diff": 18.41
+    },
+    {
+     "piece": "k.donus",
+     "phase": "Kapanış",
+     "start": 758.801,
+     "dur": 1.683,
+     "speech_lufs": -14.99,
+     "bed_st_max": -34.6,
+     "diff": 19.61
+    },
+    {
+     "piece": "k.nefes",
+     "phase": "Kapanış",
+     "start": 764.052,
+     "dur": 2.402,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.3,
+     "diff": 18.31
+    },
+    {
+     "piece": "k.sesler",
+     "phase": "Kapanış",
+     "start": 770.592,
+     "dur": 3.477,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.09,
+     "diff": 17.1
+    },
+    {
+     "piece": "k.hareket#1",
+     "phase": "Kapanış",
+     "start": 780.16,
+     "dur": 3.919,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.69,
+     "diff": 17.7
+    },
+    {
+     "piece": "k.hareket#2",
+     "phase": "Kapanış",
+     "start": 785.088,
+     "dur": 4.012,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.06,
+     "diff": 18.07
+    },
+    {
+     "piece": "k.goz",
+     "phase": "Kapanış",
+     "start": 799.237,
+     "dur": 5.101,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.44,
+     "diff": 17.45
+    },
+    {
+     "piece": "k.oda.ayrinti",
+     "phase": "Kapanış",
+     "start": 813.476,
+     "dur": 3.126,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.67,
+     "diff": 17.68
+    },
+    {
+     "piece": "k.zaman",
+     "phase": "Kapanış",
+     "start": 824.693,
+     "dur": 3.683,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.45,
+     "diff": 17.46
+    },
+    {
+     "piece": "k.yan",
+     "phase": "Kapanış",
+     "start": 832.989,
+     "dur": 3.016,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.82,
+     "diff": 17.84
+    },
+    {
+     "piece": "k.yandakal",
+     "phase": "Kapanış",
+     "start": 842.097,
+     "dur": 2.684,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.94,
+     "diff": 17.95
+    },
+    {
+     "piece": "k.otur",
+     "phase": "Kapanış",
+     "start": 856.918,
+     "dur": 3.54,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.14,
+     "diff": 17.15
+    },
+    {
+     "piece": "k.bekle",
+     "phase": "Kapanış",
+     "start": 868.594,
+     "dur": 2.915,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.65,
+     "diff": 17.67
+    },
+    {
+     "piece": "k.kalk",
+     "phase": "Kapanış",
+     "start": 883.691,
+     "dur": 5.784,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.97,
+     "diff": 17.98
+    },
+    {
+     "piece": "k.son",
+     "phase": "Kapanış",
+     "start": 892.521,
+     "dur": 2.342,
+     "speech_lufs": -14.99,
+     "bed_st_max": -40.85,
+     "diff": 25.86
+    }
+   ],
    "order_check": {
     "plan_pieces": 129,
     "timeline_pieces": 129,
@@ -1421,22 +4884,24 @@
    },
    "position_check_mp3": {
     "pieces": 129,
-    "min_corr": 0.97,
-    "min_corr_piece": "c2.n02",
-    "median_corr": 0.985,
+    "min_corr": 0.963,
+    "min_corr_piece": "c1.l10",
+    "median_corr": 0.986,
     "max_abs_offset_ms": 0.05,
     "n_corr_below_0_9": 0,
-    "order_ok": true
+    "order_ok": true,
+    "v3_ok": true,
+    "v3_rule": "SPEC v3.5: ilinti ≥ 0.95 (VARSAYIM), kayma ≤ 1 ms"
    },
    "timeline": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-hak-A.timeline.json"
   },
   "ders2-15dk-hak-B": {
    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-hak-B.mp3",
-   "bytes": 12571822,
+   "bytes": 12578857,
    "encoding": {
     "mode": "ABR 120 kbit/s",
-    "bytes": 12571822,
-    "kbps_avg": 111.7,
+    "bytes": 12578857,
+    "kbps_avg": 111.8,
     "tried": [
      "VBR V2 (mtrh, q=2)",
      "ABR 120 kbit/s"
@@ -1447,23 +4912,23 @@
    "duration_s": 900.049,
    "mp3_decoder_offset_samples": 1105,
    "duration_float_mix_s": 900.0,
-   "integrated_lufs": -18.1,
-   "integrated_lufs_float_mix": -17.69,
-   "true_peak_dbtp": -1.62,
+   "integrated_lufs": -18.0,
+   "integrated_lufs_float_mix": -17.57,
+   "true_peak_dbtp": -1.77,
    "true_peak_dbtp_float_mix": -2.0,
-   "true_peak_dbtp_before_limiter": -1.09,
+   "true_peak_dbtp_before_limiter": -1.08,
    "tp_limiter": [
     {
      "ceiling_dbtp": -2.0,
      "limiter": {
       "ceiling_dbtp": -2.0,
-      "max_reduction_db": 0.91,
-      "sec_over_0_5db": 0.252,
+      "max_reduction_db": 0.92,
+      "sec_over_0_5db": 0.266,
       "sec_over_1db": 0.0,
-      "at_s": 37.464
+      "at_s": 49.805
      },
      "tp_float_after_limiter": -2.0,
-     "tp_mp3": -1.62
+     "tp_mp3": -1.77
     }
    ],
    "speech_over_bed": {
@@ -1479,8 +4944,8 @@
      "speech_lufs_median": -14.99,
      "bed_st_under_speech_median": -32.46,
      "st3_windows_ge90pct_speech": 141,
-     "st3_min_diff": 12.86,
-     "st3_median_diff": 17.83,
+     "st3_min_diff": 12.85,
+     "st3_median_diff": 17.84,
      "st3_n_below_15": 9,
      "st3_pct_below_15": 6.4,
      "st3_worst_at_s": 12.0,
@@ -1495,92 +4960,45 @@
      "min_diff_ge_1s": 16.43,
      "worst_piece": "c1.l03",
      "p10_diff_ge_1s": 16.92,
-     "median_diff_ge_1s": 17.63,
+     "median_diff_ge_1s": 17.6,
      "pieces_all": 62,
-     "min_diff_all": 13.03,
-     "n_below_15_all": 8,
+     "min_diff_all": 15.34,
+     "n_below_15_all": 0,
      "speech_lufs_median": -16.49,
-     "bed_st_under_speech_median": -34.03,
-     "st3_windows_ge90pct_speech": 77,
-     "st3_min_diff": 15.07,
-     "st3_median_diff": 17.32,
+     "bed_st_under_speech_median": -34.07,
+     "st3_windows_ge90pct_speech": 78,
+     "st3_min_diff": 15.1,
+     "st3_median_diff": 17.33,
      "st3_n_below_15": 0,
      "st3_pct_below_15": 0.0,
      "st3_worst_at_s": 109.6,
      "st3_worst_pieces": [
       "n1.sec#2"
      ],
-     "below_15_pieces": [
-      [
-       "c1.s08",
-       0.8,
-       14.54
-      ],
-      [
-       "c1.s12",
-       0.91,
-       14.3
-      ],
-      [
-       "c1.s17",
-       0.9,
-       14.68
-      ],
-      [
-       "c1.l09",
-       0.83,
-       13.03
-      ],
-      [
-       "c1.l12",
-       0.91,
-       13.69
-      ],
-      [
-       "c1.l19",
-       0.82,
-       13.98
-      ],
-      [
-       "c1.f02",
-       0.71,
-       14.1
-      ],
-      [
-       "c1.f20",
-       0.89,
-       14.73
-      ]
-     ],
+     "below_15_pieces": [],
      "pass_ge_1s": true
     },
     "Derin": {
      "pieces_ge_1s": 34,
      "min_diff_ge_1s": 16.58,
      "worst_piece": "n2.hatirla#1",
-     "p10_diff_ge_1s": 16.93,
+     "p10_diff_ge_1s": 16.91,
      "median_diff_ge_1s": 17.42,
      "pieces_all": 43,
-     "min_diff_all": 14.1,
-     "n_below_15_all": 1,
+     "min_diff_all": 15.85,
+     "n_below_15_all": 0,
      "speech_lufs_median": -17.99,
      "bed_st_under_speech_median": -35.42,
      "st3_windows_ge90pct_speech": 235,
-     "st3_min_diff": 15.18,
-     "st3_median_diff": 17.62,
+     "st3_min_diff": 15.19,
+     "st3_median_diff": 17.6,
      "st3_n_below_15": 0,
      "st3_pct_below_15": 0.0,
      "st3_worst_at_s": 722.2,
      "st3_worst_pieces": [
       "n2.hatirla#2"
      ],
-     "below_15_pieces": [
-      [
-       "c2.n10",
-       0.61,
-       14.1
-      ]
-     ],
+     "below_15_pieces": [],
      "pass_ge_1s": true
     },
     "Kapanış": {
@@ -1588,15 +5006,15 @@
      "min_diff_ge_1s": 16.47,
      "worst_piece": "k.son",
      "p10_diff_ge_1s": 16.8,
-     "median_diff_ge_1s": 17.87,
+     "median_diff_ge_1s": 17.89,
      "pieces_all": 14,
      "min_diff_all": 16.47,
      "n_below_15_all": 0,
      "speech_lufs_median": -14.99,
-     "bed_st_under_speech_median": -32.86,
+     "bed_st_under_speech_median": -32.88,
      "st3_windows_ge90pct_speech": 160,
      "st3_min_diff": 15.26,
-     "st3_median_diff": 17.84,
+     "st3_median_diff": 17.86,
      "st3_n_below_15": 0,
      "st3_pct_below_15": 0.0,
      "st3_worst_at_s": 827.2,
@@ -1644,7 +5062,7 @@
      "at_s": 766.5,
      "max_rise_in_speech_free_s": 10.77,
      "at_speech_free_s": 862.5,
-     "n_1s_steps_over_1db": 1316,
+     "n_1s_steps_over_1db": 1318,
      "top5": [
       [
        766.5,
@@ -1700,36 +5118,36 @@
     },
     "full_mix_speech_free": {
      "stem": "tam karışım",
-     "max_rise_db_per_s": 24.31,
+     "max_rise_db_per_s": 24.35,
      "at_s": 551.2,
      "max_rise_in_speech_free_s": 6.0,
      "at_speech_free_s": 407.1,
-     "n_1s_steps_over_1db": 2364,
+     "n_1s_steps_over_1db": 2356,
      "top5": [
       [
        551.2,
-       24.31
+       24.35
       ],
       [
        551.4,
-       24.25
-      ],
-      [
-       551.5,
-       24.14
+       24.26
       ],
       [
        551.3,
-       24.11
+       24.13
+      ],
+      [
+       551.5,
+       24.12
       ],
       [
        551.1,
-       23.51
+       23.6
       ]
      ]
     },
     "tone_times_s": [
-     756.802
+     756.801
     ]
    },
    "windows_in_plan": 0,
@@ -1742,37 +5160,37 @@
     },
     {
      "what": "yatak geçişi",
-     "t0": 337.477,
-     "t1": 345.477,
+     "t0": 337.478,
+     "t1": 345.478,
      "speech_cover": 0.77
     },
     {
      "what": "yatak geçişi",
-     "t0": 758.802,
-     "t1": 766.802,
+     "t0": 758.801,
+     "t1": 766.801,
      "speech_cover": 0.51
     },
     {
      "what": "imge katmanı girişi",
-     "t0": 579.216,
-     "t1": 587.216,
+     "t0": 579.214,
+     "t1": 587.214,
      "speech_cover": 0.41
     },
     {
      "what": "imge katmanı çıkışı",
-     "t0": 692.505,
-     "t1": 700.505,
+     "t0": 692.504,
+     "t1": 700.504,
      "speech_cover": 0.64
     }
    ],
    "clicks_float_mix": {
     "edit_point": 0,
-    "speech_content": 80,
+    "speech_content": 79,
     "bed_content": 2,
     "mix_only": 0
    },
    "clicks_stems": {
-    "voice_only": 466,
+    "voice_only": 471,
     "bed_only": 3
    },
    "clicks_list": {
@@ -1801,7 +5219,7 @@
    },
    "clicks_mp3": {
     "edit_point": 0,
-    "speech_content": 76,
+    "speech_content": 72,
     "bed_content": 0,
     "mix_only": 0
    },
@@ -1837,9 +5255,9 @@
      "music_minus_nature": 9.88
     },
     "Derinleşme": {
-     "bg_total": -34.43,
-     "music": -34.93,
-     "nature": -45.61,
+     "bg_total": -34.45,
+     "music": -34.96,
+     "nature": -45.62,
      "music_minus_nature": 10.11
     },
     "Derin": {
@@ -1856,7 +5274,7 @@
     }
    },
    "nature_minus_music_db": -10.0,
-   "md5": "28dc0b6f681586882442983bfff8ac06",
+   "md5": "11108b722b8c45f3d982731660a3a530",
    "speech_over_bed_iterations": [
     {
      "iter": 0,
@@ -1882,6 +5300,1201 @@
      }
     }
    ],
+   "local_duck": {
+    "rule": "eşik altı (< 15.0 dB) her parça için yatak (müzik + imge + doğa) parça ±1.5 sn düz, rampa max(1.0 sn, d / 1.0 dB/sn); hedef ≥ 15.5 dB; A ve B ortak",
+    "spans": [
+     {
+      "piece": "c1.l19",
+      "depth_db": 0.86,
+      "flat": [
+       276.35,
+       280.18
+      ],
+      "t0": 275.35,
+      "t1": 281.18,
+      "ramp_s": 1.0
+     }
+    ],
+    "iterations": [
+     {
+      "iter": 0,
+      "needs_db": {},
+      "below": {
+       "c1.l19": 0.86
+      }
+     },
+     {
+      "iter": 1,
+      "needs_db": {
+       "c1.l19": 0.86
+      },
+      "below": {}
+     }
+    ]
+   },
+   "speech_over_bed_pieces": [
+    {
+     "piece": "a.hosgeldin#1",
+     "phase": "Varış",
+     "start": 4.091,
+     "dur": 0.87,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.95,
+     "diff": 17.96
+    },
+    {
+     "piece": "a.hosgeldin#2",
+     "phase": "Varış",
+     "start": 5.77,
+     "dur": 1.371,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.87,
+     "diff": 16.88
+    },
+    {
+     "piece": "a.acilis",
+     "phase": "Varış",
+     "start": 9.187,
+     "dur": 4.038,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.91,
+     "diff": 16.92
+    },
+    {
+     "piece": "a.konfor",
+     "phase": "Varış",
+     "start": 18.316,
+     "dur": 5.7,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.38,
+     "diff": 17.39
+    },
+    {
+     "piece": "a.durus",
+     "phase": "Varış",
+     "start": 36.152,
+     "dur": 3.638,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.57,
+     "diff": 17.58
+    },
+    {
+     "piece": "a.gozler",
+     "phase": "Varış",
+     "start": 47.973,
+     "dur": 4.949,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.11,
+     "diff": 17.12
+    },
+    {
+     "piece": "a.karar",
+     "phase": "Varış",
+     "start": 57.059,
+     "dur": 2.902,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.54,
+     "diff": 17.55
+    },
+    {
+     "piece": "a.izin",
+     "phase": "Varış",
+     "start": 67.052,
+     "dur": 5.165,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.73,
+     "diff": 17.74
+    },
+    {
+     "piece": "a.kolay",
+     "phase": "Varış",
+     "start": 78.309,
+     "dur": 3.957,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.91,
+     "diff": 16.92
+    },
+    {
+     "piece": "a.agirlik",
+     "phase": "Varış",
+     "start": 91.357,
+     "dur": 2.624,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.82,
+     "diff": 18.83
+    },
+    {
+     "piece": "n1.sec#1",
+     "phase": "Derinleşme",
+     "start": 102.164,
+     "dur": 2.556,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.27,
+     "diff": 16.78
+    },
+    {
+     "piece": "n1.sec#2",
+     "phase": "Derinleşme",
+     "start": 105.733,
+     "dur": 5.079,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.53,
+     "diff": 17.04
+    },
+    {
+     "piece": "n1.soyle",
+     "phase": "Derinleşme",
+     "start": 121.04,
+     "dur": 3.033,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.43,
+     "diff": 16.94
+    },
+    {
+     "piece": "n1.birak#1",
+     "phase": "Derinleşme",
+     "start": 137.392,
+     "dur": 2.431,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.53,
+     "diff": 17.04
+    },
+    {
+     "piece": "n1.birak#2",
+     "phase": "Derinleşme",
+     "start": 140.837,
+     "dur": 3.008,
+     "speech_lufs": -16.49,
+     "bed_st_max": -39.08,
+     "diff": 22.59
+    },
+    {
+     "piece": "c1.cerceve#1",
+     "phase": "Derinleşme",
+     "start": 150.414,
+     "dur": 2.52,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.13,
+     "diff": 17.64
+    },
+    {
+     "piece": "c1.cerceve#2",
+     "phase": "Derinleşme",
+     "start": 153.948,
+     "dur": 2.591,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.61,
+     "diff": 17.12
+    },
+    {
+     "piece": "c1.tekrar",
+     "phase": "Derinleşme",
+     "start": 159.584,
+     "dur": 3.505,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.3,
+     "diff": 16.81
+    },
+    {
+     "piece": "c1.s01",
+     "phase": "Derinleşme",
+     "start": 166.635,
+     "dur": 1.75,
+     "speech_lufs": -16.49,
+     "bed_st_max": -37.99,
+     "diff": 21.5
+    },
+    {
+     "piece": "c1.s02",
+     "phase": "Derinleşme",
+     "start": 169.358,
+     "dur": 1.377,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.24,
+     "diff": 17.75
+    },
+    {
+     "piece": "c1.s03",
+     "phase": "Derinleşme",
+     "start": 172.081,
+     "dur": 1.151,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.47,
+     "diff": 17.98
+    },
+    {
+     "piece": "c1.s04",
+     "phase": "Derinleşme",
+     "start": 174.803,
+     "dur": 1.181,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.17,
+     "diff": 17.69
+    },
+    {
+     "piece": "c1.s05",
+     "phase": "Derinleşme",
+     "start": 177.526,
+     "dur": 1.278,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.52,
+     "diff": 17.03
+    },
+    {
+     "piece": "c1.s06",
+     "phase": "Derinleşme",
+     "start": 180.249,
+     "dur": 0.992,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.11,
+     "diff": 17.62
+    },
+    {
+     "piece": "c1.s07",
+     "phase": "Derinleşme",
+     "start": 182.972,
+     "dur": 1.156,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.73,
+     "diff": 17.24
+    },
+    {
+     "piece": "c1.s08",
+     "phase": "Derinleşme",
+     "start": 185.694,
+     "dur": 0.867,
+     "speech_lufs": -16.81,
+     "bed_st_max": -33.78,
+     "diff": 16.98
+    },
+    {
+     "piece": "c1.s09",
+     "phase": "Derinleşme",
+     "start": 188.417,
+     "dur": 0.841,
+     "speech_lufs": -16.49,
+     "bed_st_max": -38.06,
+     "diff": 21.57
+    },
+    {
+     "piece": "c1.s10",
+     "phase": "Derinleşme",
+     "start": 191.14,
+     "dur": 0.925,
+     "speech_lufs": -16.49,
+     "bed_st_max": -39.66,
+     "diff": 23.17
+    },
+    {
+     "piece": "c1.s11",
+     "phase": "Derinleşme",
+     "start": 193.863,
+     "dur": 0.948,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.73,
+     "diff": 17.24
+    },
+    {
+     "piece": "c1.s12",
+     "phase": "Derinleşme",
+     "start": 196.586,
+     "dur": 0.929,
+     "speech_lufs": -18.49,
+     "bed_st_max": -33.83,
+     "diff": 15.34
+    },
+    {
+     "piece": "c1.s13",
+     "phase": "Derinleşme",
+     "start": 199.308,
+     "dur": 1.374,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.11,
+     "diff": 17.62
+    },
+    {
+     "piece": "c1.s14",
+     "phase": "Derinleşme",
+     "start": 202.031,
+     "dur": 0.859,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.6,
+     "diff": 17.11
+    },
+    {
+     "piece": "c1.s15",
+     "phase": "Derinleşme",
+     "start": 204.754,
+     "dur": 0.946,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.69,
+     "diff": 18.2
+    },
+    {
+     "piece": "c1.s16",
+     "phase": "Derinleşme",
+     "start": 207.477,
+     "dur": 0.874,
+     "speech_lufs": -15.6,
+     "bed_st_max": -34.91,
+     "diff": 19.31
+    },
+    {
+     "piece": "c1.s17",
+     "phase": "Derinleşme",
+     "start": 210.2,
+     "dur": 0.927,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.82,
+     "diff": 17.33
+    },
+    {
+     "piece": "c1.s18",
+     "phase": "Derinleşme",
+     "start": 212.922,
+     "dur": 0.985,
+     "speech_lufs": -16.49,
+     "bed_st_max": -40.1,
+     "diff": 23.61
+    },
+    {
+     "piece": "c1.s19",
+     "phase": "Derinleşme",
+     "start": 215.645,
+     "dur": 0.829,
+     "speech_lufs": -16.99,
+     "bed_st_max": -36.84,
+     "diff": 19.85
+    },
+    {
+     "piece": "c1.s20",
+     "phase": "Derinleşme",
+     "start": 218.368,
+     "dur": 1.041,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.38,
+     "diff": 16.89
+    },
+    {
+     "piece": "c1.kacirma",
+     "phase": "Derinleşme",
+     "start": 222.477,
+     "dur": 3.292,
+     "speech_lufs": -16.36,
+     "bed_st_max": -33.52,
+     "diff": 17.16
+    },
+    {
+     "piece": "c1.l01",
+     "phase": "Derinleşme",
+     "start": 228.838,
+     "dur": 1.699,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.92,
+     "diff": 17.43
+    },
+    {
+     "piece": "c1.l02",
+     "phase": "Derinleşme",
+     "start": 231.561,
+     "dur": 1.383,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.21,
+     "diff": 17.72
+    },
+    {
+     "piece": "c1.l03",
+     "phase": "Derinleşme",
+     "start": 234.284,
+     "dur": 1.126,
+     "speech_lufs": -16.49,
+     "bed_st_max": -32.92,
+     "diff": 16.43
+    },
+    {
+     "piece": "c1.l04",
+     "phase": "Derinleşme",
+     "start": 237.006,
+     "dur": 1.186,
+     "speech_lufs": -16.49,
+     "bed_st_max": -39.48,
+     "diff": 22.99
+    },
+    {
+     "piece": "c1.l05",
+     "phase": "Derinleşme",
+     "start": 239.729,
+     "dur": 1.232,
+     "speech_lufs": -16.49,
+     "bed_st_max": -36.07,
+     "diff": 19.58
+    },
+    {
+     "piece": "c1.l06",
+     "phase": "Derinleşme",
+     "start": 242.452,
+     "dur": 1.011,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.73,
+     "diff": 17.24
+    },
+    {
+     "piece": "c1.l07",
+     "phase": "Derinleşme",
+     "start": 245.175,
+     "dur": 1.185,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.17,
+     "diff": 17.68
+    },
+    {
+     "piece": "c1.l08",
+     "phase": "Derinleşme",
+     "start": 247.898,
+     "dur": 0.871,
+     "speech_lufs": -16.91,
+     "bed_st_max": -34.42,
+     "diff": 17.51
+    },
+    {
+     "piece": "c1.l09",
+     "phase": "Derinleşme",
+     "start": 250.62,
+     "dur": 0.861,
+     "speech_lufs": -16.99,
+     "bed_st_max": -33.54,
+     "diff": 16.55
+    },
+    {
+     "piece": "c1.l10",
+     "phase": "Derinleşme",
+     "start": 253.343,
+     "dur": 0.938,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.4,
+     "diff": 16.91
+    },
+    {
+     "piece": "c1.l11",
+     "phase": "Derinleşme",
+     "start": 256.066,
+     "dur": 0.99,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.19,
+     "diff": 17.7
+    },
+    {
+     "piece": "c1.l12",
+     "phase": "Derinleşme",
+     "start": 258.789,
+     "dur": 0.923,
+     "speech_lufs": -17.49,
+     "bed_st_max": -33.77,
+     "diff": 16.28
+    },
+    {
+     "piece": "c1.l13",
+     "phase": "Derinleşme",
+     "start": 261.512,
+     "dur": 1.327,
+     "speech_lufs": -16.49,
+     "bed_st_max": -43.19,
+     "diff": 26.7
+    },
+    {
+     "piece": "c1.l14",
+     "phase": "Derinleşme",
+     "start": 264.234,
+     "dur": 0.848,
+     "speech_lufs": -16.49,
+     "bed_st_max": -36.1,
+     "diff": 19.61
+    },
+    {
+     "piece": "c1.l15",
+     "phase": "Derinleşme",
+     "start": 266.957,
+     "dur": 0.927,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.08,
+     "diff": 17.59
+    },
+    {
+     "piece": "c1.l16",
+     "phase": "Derinleşme",
+     "start": 269.68,
+     "dur": 0.846,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.69,
+     "diff": 17.2
+    },
+    {
+     "piece": "c1.l17",
+     "phase": "Derinleşme",
+     "start": 272.403,
+     "dur": 0.98,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.2,
+     "diff": 17.71
+    },
+    {
+     "piece": "c1.l18",
+     "phase": "Derinleşme",
+     "start": 275.126,
+     "dur": 1.023,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.06,
+     "diff": 17.57
+    },
+    {
+     "piece": "c1.l19",
+     "phase": "Derinleşme",
+     "start": 277.848,
+     "dur": 0.835,
+     "speech_lufs": -18.49,
+     "bed_st_max": -34.0,
+     "diff": 15.51
+    },
+    {
+     "piece": "c1.l20",
+     "phase": "Derinleşme",
+     "start": 280.571,
+     "dur": 1.051,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.54,
+     "diff": 18.05
+    },
+    {
+     "piece": "c1.gecis.arka",
+     "phase": "Derinleşme",
+     "start": 284.691,
+     "dur": 1.708,
+     "speech_lufs": -16.49,
+     "bed_st_max": -38.15,
+     "diff": 21.66
+    },
+    {
+     "piece": "c1.b01",
+     "phase": "Derinleşme",
+     "start": 288.444,
+     "dur": 1.536,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.21,
+     "diff": 17.72
+    },
+    {
+     "piece": "c1.b02",
+     "phase": "Derinleşme",
+     "start": 291.167,
+     "dur": 1.455,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.56,
+     "diff": 18.07
+    },
+    {
+     "piece": "c1.b03",
+     "phase": "Derinleşme",
+     "start": 293.89,
+     "dur": 1.08,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.47,
+     "diff": 16.98
+    },
+    {
+     "piece": "c1.b04",
+     "phase": "Derinleşme",
+     "start": 296.613,
+     "dur": 2.185,
+     "speech_lufs": -16.24,
+     "bed_st_max": -33.45,
+     "diff": 17.21
+    },
+    {
+     "piece": "c1.b05",
+     "phase": "Derinleşme",
+     "start": 301.866,
+     "dur": 1.189,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.18,
+     "diff": 17.69
+    },
+    {
+     "piece": "c1.gecis.on#1",
+     "phase": "Derinleşme",
+     "start": 306.124,
+     "dur": 2.169,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.69,
+     "diff": 17.2
+    },
+    {
+     "piece": "c1.gecis.on#2",
+     "phase": "Derinleşme",
+     "start": 309.306,
+     "dur": 2.026,
+     "speech_lufs": -16.49,
+     "bed_st_max": -40.35,
+     "diff": 23.86
+    },
+    {
+     "piece": "c1.f02",
+     "phase": "Derinleşme",
+     "start": 313.377,
+     "dur": 0.735,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.53,
+     "diff": 17.04
+    },
+    {
+     "piece": "c1.f07",
+     "phase": "Derinleşme",
+     "start": 316.1,
+     "dur": 1.252,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.82,
+     "diff": 17.33
+    },
+    {
+     "piece": "c1.f20",
+     "phase": "Derinleşme",
+     "start": 318.823,
+     "dur": 0.897,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.42,
+     "diff": 16.93
+    },
+    {
+     "piece": "c1.w07",
+     "phase": "Derinleşme",
+     "start": 321.546,
+     "dur": 2.092,
+     "speech_lufs": -16.49,
+     "bed_st_max": -34.48,
+     "diff": 17.99
+    },
+    {
+     "piece": "c1.k1",
+     "phase": "Derinleşme",
+     "start": 326.706,
+     "dur": 3.544,
+     "speech_lufs": -16.49,
+     "bed_st_max": -33.43,
+     "diff": 16.94
+    },
+    {
+     "piece": "c2.dikkat#1",
+     "phase": "Derin",
+     "start": 337.478,
+     "dur": 3.258,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.29,
+     "diff": 17.3
+    },
+    {
+     "piece": "c2.dikkat#2",
+     "phase": "Derin",
+     "start": 342.569,
+     "dur": 3.343,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.01,
+     "diff": 17.02
+    },
+    {
+     "piece": "c2.yer#1",
+     "phase": "Derin",
+     "start": 356.094,
+     "dur": 4.31,
+     "speech_lufs": -17.99,
+     "bed_st_max": -38.3,
+     "diff": 20.31
+    },
+    {
+     "piece": "c2.yer#2",
+     "phase": "Derin",
+     "start": 362.236,
+     "dur": 3.476,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.38,
+     "diff": 17.4
+    },
+    {
+     "piece": "c2.alt",
+     "phase": "Derin",
+     "start": 379.94,
+     "dur": 3.587,
+     "speech_lufs": -17.99,
+     "bed_st_max": -37.79,
+     "diff": 19.8
+    },
+    {
+     "piece": "c2.akis#1",
+     "phase": "Derin",
+     "start": 393.664,
+     "dur": 2.145,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.09,
+     "diff": 17.1
+    },
+    {
+     "piece": "c2.akis#2",
+     "phase": "Derin",
+     "start": 398.854,
+     "dur": 1.626,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.72,
+     "diff": 17.73
+    },
+    {
+     "piece": "c2.durak#1",
+     "phase": "Derin",
+     "start": 412.754,
+     "dur": 3.404,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.98,
+     "diff": 16.99
+    },
+    {
+     "piece": "c2.durak#2",
+     "phase": "Derin",
+     "start": 417.99,
+     "dur": 2.265,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.77,
+     "diff": 17.78
+    },
+    {
+     "piece": "c2.sayac#1",
+     "phase": "Derin",
+     "start": 434.483,
+     "dur": 1.546,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.2,
+     "diff": 17.21
+    },
+    {
+     "piece": "c2.sayac#2",
+     "phase": "Derin",
+     "start": 437.861,
+     "dur": 2.486,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.75,
+     "diff": 17.76
+    },
+    {
+     "piece": "c2.n10",
+     "phase": "Derin",
+     "start": 443.392,
+     "dur": 0.623,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.01,
+     "diff": 18.02
+    },
+    {
+     "piece": "c2.n09",
+     "phase": "Derin",
+     "start": 449.406,
+     "dur": 0.924,
+     "speech_lufs": -18.49,
+     "bed_st_max": -35.42,
+     "diff": 16.93
+    },
+    {
+     "piece": "c2.n08",
+     "phase": "Derin",
+     "start": 455.42,
+     "dur": 1.004,
+     "speech_lufs": -17.99,
+     "bed_st_max": -39.39,
+     "diff": 21.4
+    },
+    {
+     "piece": "c2.n07",
+     "phase": "Derin",
+     "start": 461.433,
+     "dur": 0.74,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.2,
+     "diff": 17.21
+    },
+    {
+     "piece": "c2.n06",
+     "phase": "Derin",
+     "start": 467.447,
+     "dur": 0.811,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.06,
+     "diff": 18.07
+    },
+    {
+     "piece": "c2.n05",
+     "phase": "Derin",
+     "start": 473.461,
+     "dur": 0.805,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.44,
+     "diff": 17.45
+    },
+    {
+     "piece": "c2.n04",
+     "phase": "Derin",
+     "start": 479.474,
+     "dur": 0.797,
+     "speech_lufs": -20.49,
+     "bed_st_max": -38.95,
+     "diff": 18.46
+    },
+    {
+     "piece": "c2.n03",
+     "phase": "Derin",
+     "start": 485.488,
+     "dur": 0.798,
+     "speech_lufs": -17.43,
+     "bed_st_max": -35.3,
+     "diff": 17.87
+    },
+    {
+     "piece": "c2.n02",
+     "phase": "Derin",
+     "start": 491.502,
+     "dur": 0.754,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.5,
+     "diff": 18.51
+    },
+    {
+     "piece": "c2.n01",
+     "phase": "Derin",
+     "start": 497.515,
+     "dur": 0.713,
+     "speech_lufs": -18.99,
+     "bed_st_max": -34.84,
+     "diff": 15.85
+    },
+    {
+     "piece": "c2.birak#1",
+     "phase": "Derin",
+     "start": 505.319,
+     "dur": 1.633,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.89,
+     "diff": 16.9
+    },
+    {
+     "piece": "c2.birak#2",
+     "phase": "Derin",
+     "start": 508.784,
+     "dur": 3.508,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.01,
+     "diff": 17.02
+    },
+    {
+     "piece": "c2.kal",
+     "phase": "Derin",
+     "start": 518.383,
+     "dur": 3.175,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.09,
+     "diff": 17.1
+    },
+    {
+     "piece": "br.k2",
+     "phase": "Derin",
+     "start": 537.74,
+     "dur": 3.205,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.29,
+     "diff": 17.3
+    },
+    {
+     "piece": "br.orta#1",
+     "phase": "Derin",
+     "start": 553.036,
+     "dur": 5.022,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.41,
+     "diff": 17.42
+    },
+    {
+     "piece": "br.orta#2",
+     "phase": "Derin",
+     "start": 559.89,
+     "dur": 2.484,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.94,
+     "diff": 16.95
+    },
+    {
+     "piece": "br.orta#3",
+     "phase": "Derin",
+     "start": 564.206,
+     "dur": 1.917,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.24,
+     "diff": 17.25
+    },
+    {
+     "piece": "c4.yer",
+     "phase": "Derin",
+     "start": 579.214,
+     "dur": 3.314,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.4,
+     "diff": 17.41
+    },
+    {
+     "piece": "c4.gelmezse",
+     "phase": "Derin",
+     "start": 594.665,
+     "dur": 3.862,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.91,
+     "diff": 17.92
+    },
+    {
+     "piece": "c4.patika",
+     "phase": "Derin",
+     "start": 610.664,
+     "dur": 3.362,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.95,
+     "diff": 17.96
+    },
+    {
+     "piece": "c4.yol#1",
+     "phase": "Derin",
+     "start": 620.572,
+     "dur": 1.661,
+     "speech_lufs": -17.99,
+     "bed_st_max": -40.13,
+     "diff": 22.15
+    },
+    {
+     "piece": "c4.yol#2",
+     "phase": "Derin",
+     "start": 624.065,
+     "dur": 1.674,
+     "speech_lufs": -17.99,
+     "bed_st_max": -36.37,
+     "diff": 18.38
+    },
+    {
+     "piece": "c4.ses",
+     "phase": "Derin",
+     "start": 639.921,
+     "dur": 2.605,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.05,
+     "diff": 17.06
+    },
+    {
+     "piece": "c4.gunes#1",
+     "phase": "Derin",
+     "start": 654.754,
+     "dur": 2.558,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.93,
+     "diff": 17.94
+    },
+    {
+     "piece": "c4.gunes#2",
+     "phase": "Derin",
+     "start": 659.144,
+     "dur": 2.708,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.59,
+     "diff": 17.6
+    },
+    {
+     "piece": "c4.don",
+     "phase": "Derin",
+     "start": 673.08,
+     "dur": 3.333,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.56,
+     "diff": 17.57
+    },
+    {
+     "piece": "c4.solma#1",
+     "phase": "Derin",
+     "start": 692.504,
+     "dur": 2.129,
+     "speech_lufs": -17.99,
+     "bed_st_max": -39.79,
+     "diff": 21.8
+    },
+    {
+     "piece": "c4.solma#2",
+     "phase": "Derin",
+     "start": 696.465,
+     "dur": 3.002,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.8,
+     "diff": 16.81
+    },
+    {
+     "piece": "n2.hatirla#1",
+     "phase": "Derin",
+     "start": 713.557,
+     "dur": 3.929,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.57,
+     "diff": 16.58
+    },
+    {
+     "piece": "n2.hatirla#2",
+     "phase": "Derin",
+     "start": 719.319,
+     "dur": 4.076,
+     "speech_lufs": -17.99,
+     "bed_st_max": -34.78,
+     "diff": 16.79
+    },
+    {
+     "piece": "n2.dilek",
+     "phase": "Derin",
+     "start": 740.531,
+     "dur": 3.333,
+     "speech_lufs": -17.99,
+     "bed_st_max": -38.75,
+     "diff": 20.76
+    },
+    {
+     "piece": "k.anahtar3",
+     "phase": "Derin",
+     "start": 751.001,
+     "dur": 1.663,
+     "speech_lufs": -17.99,
+     "bed_st_max": -35.74,
+     "diff": 17.75
+    },
+    {
+     "piece": "k.donus",
+     "phase": "Kapanış",
+     "start": 758.801,
+     "dur": 1.683,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.84,
+     "diff": 17.85
+    },
+    {
+     "piece": "k.nefes",
+     "phase": "Kapanış",
+     "start": 764.052,
+     "dur": 2.402,
+     "speech_lufs": -14.99,
+     "bed_st_max": -36.77,
+     "diff": 21.78
+    },
+    {
+     "piece": "k.sesler",
+     "phase": "Kapanış",
+     "start": 770.592,
+     "dur": 3.477,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.8,
+     "diff": 16.81
+    },
+    {
+     "piece": "k.hareket#1",
+     "phase": "Kapanış",
+     "start": 780.16,
+     "dur": 3.919,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.12,
+     "diff": 18.13
+    },
+    {
+     "piece": "k.hareket#2",
+     "phase": "Kapanış",
+     "start": 785.088,
+     "dur": 4.012,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.0,
+     "diff": 17.01
+    },
+    {
+     "piece": "k.goz",
+     "phase": "Kapanış",
+     "start": 799.237,
+     "dur": 5.101,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.92,
+     "diff": 17.93
+    },
+    {
+     "piece": "k.oda.ayrinti",
+     "phase": "Kapanış",
+     "start": 813.476,
+     "dur": 3.126,
+     "speech_lufs": -14.99,
+     "bed_st_max": -35.54,
+     "diff": 20.55
+    },
+    {
+     "piece": "k.zaman",
+     "phase": "Kapanış",
+     "start": 824.693,
+     "dur": 3.683,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.2,
+     "diff": 17.21
+    },
+    {
+     "piece": "k.yan",
+     "phase": "Kapanış",
+     "start": 832.989,
+     "dur": 3.016,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.3,
+     "diff": 17.31
+    },
+    {
+     "piece": "k.yandakal",
+     "phase": "Kapanış",
+     "start": 842.097,
+     "dur": 2.684,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.34,
+     "diff": 18.35
+    },
+    {
+     "piece": "k.otur",
+     "phase": "Kapanış",
+     "start": 856.918,
+     "dur": 3.54,
+     "speech_lufs": -14.99,
+     "bed_st_max": -32.91,
+     "diff": 17.92
+    },
+    {
+     "piece": "k.bekle",
+     "phase": "Kapanış",
+     "start": 868.594,
+     "dur": 2.915,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.78,
+     "diff": 16.79
+    },
+    {
+     "piece": "k.kalk",
+     "phase": "Kapanış",
+     "start": 883.691,
+     "dur": 5.784,
+     "speech_lufs": -14.99,
+     "bed_st_max": -33.56,
+     "diff": 18.57
+    },
+    {
+     "piece": "k.son",
+     "phase": "Kapanış",
+     "start": 892.521,
+     "dur": 2.342,
+     "speech_lufs": -14.99,
+     "bed_st_max": -31.46,
+     "diff": 16.47
+    }
+   ],
    "order_check": {
     "plan_pieces": 129,
     "timeline_pieces": 129,
@@ -1893,25 +6506,28 @@
    },
    "position_check_mp3": {
     "pieces": 129,
-    "min_corr": 0.962,
+    "min_corr": 0.948,
     "min_corr_piece": "c1.l10",
-    "median_corr": 0.984,
+    "median_corr": 0.985,
     "max_abs_offset_ms": 0.05,
     "n_corr_below_0_9": 0,
-    "order_ok": true
+    "order_ok": true,
+    "v3_ok": false,
+    "v3_rule": "SPEC v3.5: ilinti ≥ 0.95 (VARSAYIM), kayma ≤ 1 ms"
    },
    "timeline": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-hak-B.timeline.json"
   }
  },
  "cost": {
   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/ledger.jsonl",
-  "rows": 399,
+  "rows": 400,
   "cents_by_kind": {
    "music": 441.72,
    "scribe-music": 174.4,
    "scribe-speech": 81.61,
    "sfx": 7.51,
-   "speech": 439.22
+   "speech": 439.22,
+   "voice-design": 0.0
   },
   "speech_bucket_cents": 520.83,
   "speech_cap_cents": 550.0,
@@ -1930,7 +6546,9 @@
     "kesim-kulak": 32,
     "kulak-sinirlayici": 0,
     "eklem>2yt": 13,
-    "other": 2
+    "other": 2,
+    "kulak-sinirlayici_v2_girdi": 0,
+    "kulak-sinirlayici_v2_parca": 0
    },
    "kulak_units": [
     {
@@ -1975,6 +6593,17 @@
     }
    ],
    "kulak_sinirlayici": [],
+   "reprocess_summary": {
+    "pieces": 158,
+    "changed": 29,
+    "soft_chain": 2,
+    "short_pieces": 28,
+    "short_capped": [],
+    "limiter_gt3_v2": 0,
+    "limiter_gt3_v3": 0,
+    "limiter_gt3_v3_pieces": [],
+    "failed_checks": []
+   },
    "kesim_kulak_units": [
     "a.hosgeldin",
     "br.orta",
@@ -2033,9 +6662,11 @@
    "counts": {
     "kulak": 3,
     "kesim-kulak": 32,
-    "kulak-sinirlayici": 40,
+    "kulak-sinirlayici": 2,
     "eklem>2yt": 13,
-    "other": 0
+    "other": 0,
+    "kulak-sinirlayici_v2_girdi": 40,
+    "kulak-sinirlayici_v2_parca": 56
    },
    "kulak_units": [
     {
@@ -2060,166 +6691,39 @@
    "other_flags": [],
    "kulak_sinirlayici": [
     [
-     "a.konfor",
-     null
-    ],
-    [
-     "a.izin",
-     null
-    ],
-    [
-     "n1.sec",
-     null
-    ],
-    [
-     "n1.birak",
-     null
-    ],
-    [
-     "c1.cerceve",
-     null
-    ],
-    [
-     "car.sag1",
-     null
-    ],
-    [
-     "car.sag2",
-     null
-    ],
-    [
-     "car.sag3",
-     null
-    ],
-    [
-     "car.sag4",
-     null
-    ],
-    [
-     "car.sol1",
-     null
-    ],
-    [
      "car.sol4",
-     null
-    ],
-    [
-     "car.sirt",
-     null
-    ],
-    [
-     "car.on1",
-     null
-    ],
-    [
-     "car.on2",
-     null
+     "c1.l20"
     ],
     [
      "car.on3",
-     null
-    ],
-    [
-     "car.butun",
-     null
-    ],
-    [
-     "c2.yer",
-     null
-    ],
-    [
-     "c2.alt",
-     null
-    ],
-    [
-     "c2.akis",
-     "c2.akis#2"
-    ],
-    [
-     "c2.sayac",
-     "c2.sayac#2"
-    ],
-    [
-     "car.sayi",
-     "c2.n08"
-    ],
-    [
-     "car.sayi",
-     "c2.n05"
-    ],
-    [
-     "car.sayi",
-     "c2.n04"
-    ],
-    [
-     "car.sayi",
-     "c2.n01"
-    ],
-    [
-     "c2.birak",
-     "c2.birak#2"
-    ],
-    [
-     "br.k2",
-     "br.k2"
-    ],
-    [
-     "br.orta",
-     "br.orta#1"
-    ],
-    [
-     "br.orta",
-     "br.orta#3"
-    ],
-    [
-     "c4.yol",
-     "c4.yol#2"
-    ],
-    [
-     "c4.don",
-     "c4.don"
-    ],
-    [
-     "n2.hatirla",
-     "n2.hatirla#1"
-    ],
-    [
-     "n2.hatirla",
-     "n2.hatirla#2"
-    ],
-    [
-     "n2.dilek",
-     "n2.dilek"
-    ],
-    [
-     "k.hareket",
-     "k.hareket#1"
-    ],
-    [
-     "k.yandakal",
-     "k.yandakal"
-    ],
-    [
-     "k.otur",
-     "k.otur"
-    ],
-    [
-     "k.bekle",
-     "k.bekle"
-    ],
-    [
-     "c2.durak",
-     "c2.durak#1"
-    ],
-    [
-     "c2.durak",
-     "c2.durak#2"
-    ],
-    [
-     "c2.x.ritim",
-     "c2.x.ritim#1"
+     "c1.f15"
     ]
    ],
+   "reprocess_summary": {
+    "pieces": 158,
+    "changed": 141,
+    "soft_chain": 132,
+    "short_pieces": 37,
+    "short_capped": [
+     "c1.l08",
+     "c1.l09",
+     "c1.l12",
+     "c1.l19",
+     "c1.s08",
+     "c1.s12",
+     "c1.s19",
+     "c2.n01",
+     "c2.n04",
+     "c2.n09"
+    ],
+    "limiter_gt3_v2": 56,
+    "limiter_gt3_v3": 2,
+    "limiter_gt3_v3_pieces": [
+     "c1.f15",
+     "c1.l20"
+    ],
+    "failed_checks": []
+   },
    "kesim_kulak_units": [
     "a.hosgeldin",
     "br.orta",
@@ -2287,8 +6791,9 @@
    "no_mix_only_clicks_mp3": true,
    "no_digital_silence_ge_100ms_mp3": true,
    "speech_over_bed_ge15_pieces_ge_1s": true,
+   "speech_over_bed_ge15_all_pieces_v3": true,
    "true_peak_le_minus1": true,
-   "integrated_lufs": -17.39,
+   "integrated_lufs": -17.33,
    "size_le_14MB": true,
    "mp3_44k1_stereo": true
   },
@@ -2303,8 +6808,9 @@
    "no_mix_only_clicks_mp3": true,
    "no_digital_silence_ge_100ms_mp3": true,
    "speech_over_bed_ge15_pieces_ge_1s": true,
+   "speech_over_bed_ge15_all_pieces_v3": true,
    "true_peak_le_minus1": true,
-   "integrated_lufs": -17.81,
+   "integrated_lufs": -17.74,
    "size_le_14MB": true,
    "mp3_44k1_stereo": true
   },
@@ -2319,15 +6825,16 @@
    "no_mix_only_clicks_mp3": true,
    "no_digital_silence_ge_100ms_mp3": true,
    "speech_over_bed_ge15_pieces_ge_1s": true,
+   "speech_over_bed_ge15_all_pieces_v3": true,
    "true_peak_le_minus1": true,
-   "integrated_lufs": -17.65,
+   "integrated_lufs": -17.51,
    "size_le_14MB": true,
    "mp3_44k1_stereo": true
   },
   "ders2-15dk-hak-B": {
    "duration_900pm1": true,
    "order_as_plan": true,
-   "every_piece_found_at_its_time_in_mp3": true,
+   "every_piece_found_at_its_time_in_mp3": false,
    "no_missing_or_duplicate_by_construction": true,
    "full_mix_scribe_alignment": null,
    "screen_equals_spoken": true,
@@ -2335,16 +6842,301 @@
    "no_mix_only_clicks_mp3": true,
    "no_digital_silence_ge_100ms_mp3": true,
    "speech_over_bed_ge15_pieces_ge_1s": true,
+   "speech_over_bed_ge15_all_pieces_v3": true,
    "true_peak_le_minus1": true,
-   "integrated_lufs": -18.1,
+   "integrated_lufs": -18.0,
    "size_le_14MB": true,
    "mp3_44k1_stereo": true
   }
  },
+ "v3_changes": {
+  "mixes": {
+   "ders2-15dk-nes-A": {
+    "v3": {
+     "below15_all": 0,
+     "min_diff_all": 16.6,
+     "min_diff_ge_1s": 16.6,
+     "below15_pieces": [],
+     "integrated_lufs": -17.33,
+     "true_peak_dbtp": -2.56,
+     "mix_limiter_max_db": 0.0,
+     "position_min_corr": 0.983,
+     "position_max_offset_ms": 0.05,
+     "local_duck": [],
+     "bytes": 12607374
+    },
+    "v2": {
+     "below15_all": 0,
+     "min_diff_all": 15.3,
+     "min_diff_ge_1s": 16.6,
+     "below15_pieces": [],
+     "integrated_lufs": -17.39,
+     "true_peak_dbtp": -2.76,
+     "mix_limiter_max_db": 0.0,
+     "position_min_corr": 0.984,
+     "position_max_offset_ms": 0.05,
+     "bytes": 12606318
+    }
+   },
+   "ders2-15dk-nes-B": {
+    "v3": {
+     "below15_all": 0,
+     "min_diff_all": 16.27,
+     "min_diff_ge_1s": 16.27,
+     "below15_pieces": [],
+     "integrated_lufs": -17.74,
+     "true_peak_dbtp": -3.03,
+     "mix_limiter_max_db": 0.0,
+     "position_min_corr": 0.98,
+     "position_max_offset_ms": 0.05,
+     "local_duck": [],
+     "bytes": 12387514
+    },
+    "v2": {
+     "below15_all": 1,
+     "min_diff_all": 14.75,
+     "min_diff_ge_1s": 16.27,
+     "below15_pieces": [
+      [
+       "c1.l08",
+       0.91,
+       14.75
+      ]
+     ],
+     "integrated_lufs": -17.81,
+     "true_peak_dbtp": -2.97,
+     "mix_limiter_max_db": 0.0,
+     "position_min_corr": 0.977,
+     "position_max_offset_ms": 0.05,
+     "bytes": 12384385
+    }
+   },
+   "ders2-15dk-hak-A": {
+    "v3": {
+     "below15_all": 0,
+     "min_diff_all": 15.49,
+     "min_diff_ge_1s": 16.75,
+     "below15_pieces": [],
+     "integrated_lufs": -17.51,
+     "true_peak_dbtp": -1.67,
+     "mix_limiter_max_db": 0.83,
+     "position_min_corr": 0.963,
+     "position_max_offset_ms": 0.05,
+     "local_duck": [
+      {
+       "piece": "c1.l19",
+       "depth_db": 0.86,
+       "flat": [
+        276.35,
+        280.18
+       ],
+       "t0": 275.35,
+       "t1": 281.18,
+       "ramp_s": 1.0
+      }
+     ],
+     "bytes": 12811995
+    },
+    "v2": {
+     "below15_all": 8,
+     "min_diff_all": 13.69,
+     "min_diff_ge_1s": 16.75,
+     "below15_pieces": [
+      [
+       "c1.s09",
+       0.8,
+       14.12
+      ],
+      [
+       "c1.s19",
+       0.81,
+       14.47
+      ],
+      [
+       "c1.l09",
+       0.83,
+       13.69
+      ],
+      [
+       "c1.l12",
+       0.91,
+       14.08
+      ],
+      [
+       "c1.l19",
+       0.82,
+       14.6
+      ],
+      [
+       "c1.f02",
+       0.71,
+       14.74
+      ],
+      [
+       "c1.f20",
+       0.89,
+       14.88
+      ],
+      [
+       "c2.n10",
+       0.61,
+       14.39
+      ]
+     ],
+     "integrated_lufs": -17.65,
+     "true_peak_dbtp": -1.83,
+     "mix_limiter_max_db": 0.88,
+     "position_min_corr": 0.97,
+     "position_max_offset_ms": 0.05,
+     "bytes": 12800641
+    }
+   },
+   "ders2-15dk-hak-B": {
+    "v3": {
+     "below15_all": 0,
+     "min_diff_all": 15.34,
+     "min_diff_ge_1s": 16.43,
+     "below15_pieces": [],
+     "integrated_lufs": -18.0,
+     "true_peak_dbtp": -1.77,
+     "mix_limiter_max_db": 0.92,
+     "position_min_corr": 0.948,
+     "position_max_offset_ms": 0.05,
+     "local_duck": [
+      {
+       "piece": "c1.l19",
+       "depth_db": 0.86,
+       "flat": [
+        276.35,
+        280.18
+       ],
+       "t0": 275.35,
+       "t1": 281.18,
+       "ramp_s": 1.0
+      }
+     ],
+     "bytes": 12578857
+    },
+    "v2": {
+     "below15_all": 9,
+     "min_diff_all": 13.03,
+     "min_diff_ge_1s": 16.43,
+     "below15_pieces": [
+      [
+       "c1.s08",
+       0.8,
+       14.54
+      ],
+      [
+       "c1.s12",
+       0.91,
+       14.3
+      ],
+      [
+       "c1.s17",
+       0.9,
+       14.68
+      ],
+      [
+       "c1.l09",
+       0.83,
+       13.03
+      ],
+      [
+       "c1.l12",
+       0.91,
+       13.69
+      ],
+      [
+       "c1.l19",
+       0.82,
+       13.98
+      ],
+      [
+       "c1.f02",
+       0.71,
+       14.1
+      ],
+      [
+       "c1.f20",
+       0.89,
+       14.73
+      ],
+      [
+       "c2.n10",
+       0.61,
+       14.1
+      ]
+     ],
+     "integrated_lufs": -18.1,
+     "true_peak_dbtp": -1.62,
+     "mix_limiter_max_db": 0.91,
+     "position_min_corr": 0.962,
+     "position_max_offset_ms": 0.05,
+     "bytes": 12571822
+    }
+   }
+  },
+  "pieces": {
+   "nes": {
+    "pieces": 158,
+    "changed": 29,
+    "soft_chain": 2,
+    "short_pieces": 28,
+    "short_capped": [],
+    "limiter_gt3_v2": 0,
+    "limiter_gt3_v3": 0,
+    "limiter_gt3_v3_pieces": [],
+    "failed_checks": []
+   },
+   "hak": {
+    "pieces": 158,
+    "changed": 141,
+    "soft_chain": 132,
+    "short_pieces": 37,
+    "short_capped": [
+     "c1.l08",
+     "c1.l09",
+     "c1.l12",
+     "c1.l19",
+     "c1.s08",
+     "c1.s12",
+     "c1.s19",
+     "c2.n01",
+     "c2.n04",
+     "c2.n09"
+    ],
+    "limiter_gt3_v2": 56,
+    "limiter_gt3_v3": 2,
+    "limiter_gt3_v3_pieces": [
+     "c1.f15",
+     "c1.l20"
+    ],
+    "failed_checks": []
+   }
+  },
+  "scribe": {
+   "attempts": 166,
+   "strict_equal": 134,
+   "v3_equal": 166,
+   "units": [
+    "hak a.durus (birleşik: sırtüstü)",
+    "hak c2.yer (ek-fiil: nefesteyse)",
+    "hak car.sol1 (birleşik: başparmağı)",
+    "hak k.yan (birleşik: sırtüstü)",
+    "nes a.durus (birleşik: sırtüstü)",
+    "nes c2.yer (ek-fiil: nefesteyse)",
+    "nes k.yan (birleşik: sırtüstü)"
+   ]
+  },
+  "previous": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/_onceki_v2/report.json"
+ },
  "not_verified": [
-  "SPEC §7 \"tam karışımın Scribe metni plan metniyle hizalanır\": YAPILMADI. (1) Yerel dosya yükleme aracı bu oturumda yok (seçim ajanları da doğruladı: creative_attach_reference_file yalnız herkese açık https URL alır); (2) 4 × 900 sn Scribe ≈ 4 × 90 = 360 sent (gözlenen 0,1 sent/sn) ve konuşma kovasında kalan pay ≈ 29.2 sent (tavan 550) — tavan aşılırdı. Yerine: karışım planın olay listesinden kuruldu; zaman çizelgesinin sırası, metni ve parça sayısı planla birebir karşılaştırıldı (order_check); her parça, birim düzeyinde Scribe ile doğrulanmış çekimden gelir (selection-*.json).",
+  "SPEC §7 \"tam karışımın Scribe metni plan metniyle hizalanır\": YAPILMADI; SPEC v3.5 ile yerine parça konum denetimi (ilinti ≥ 0,95, kayma ≤ 1 ms) kondu. Pilottaki gerekçe: (1) Yerel dosya yükleme aracı bu oturumda yok (seçim ajanları da doğruladı: creative_attach_reference_file yalnız herkese açık https URL alır); (2) 4 × 900 sn Scribe ≈ 4 × 90 = 360 sent (gözlenen 0,1 sent/sn) ve konuşma kovasında kalan pay ≈ 29.2 sent (tavan 550) — tavan aşılırdı. Yerine: karışım planın olay listesinden kuruldu; zaman çizelgesinin sırası, metni ve parça sayısı planla birebir karşılaştırıldı (order_check); her parça, birim düzeyinde Scribe ile doğrulanmış çekimden gelir (selection-*.json).",
   "Kulakla dinleme yapılmadı; bütün ifadeler ölçümdür.",
-  "Parça kesimleri yalnız ölçüyle denetlendi (SPEC §4.3 c; \"kesim-kulak\" bayrakları seçim dosyalarında)."
+  "Parça kesimleri yalnız ölçüyle denetlendi (SPEC §4.3 c; \"kesim-kulak\" bayrakları seçim dosyalarında).",
+  "v3 tepe yönetimi ve kısa parça düzeyinin kulağa doğal gelip gelmediği ölçülemez; bozulma göstergesi (fast_sdr_db) yalnız perde içi hızlı kazanç kıpırtısını sayar. Yeniden işlenen parçalar kulak listesinde (out/kulak_listesi.md).",
+  "v3 Scribe istisnaları Türkçe editör onayı bekliyor (render/scribe_istisnalari.md)."
  ],
  "decisions_varsayim": [
   "Konuşma: mono parça (−18 LUFS klip) iki kanala birim kazançla kondu — uygulama motorunun çalışıyla aynı. Stereo BS.1770 ölçümünde çift mono +3,01 dB sayılır: Varış/Kapanış sözü ≈ −15 LUFS, yatak ≈ −33 LUFS. Konuşma/yatak farkı iki iz aynı (stereo) ölçümle hesaplanır; klip-LUFS (mono) − yatak-LUFS (stereo) okumasıyla fark 3 dB daha azdır (tasarımdaki 15 dB).",
@@ -2373,7 +7165,8 @@
   "hak a.durus: \"kulak\" bayrağı (seçim) — SPEC §4.2: no take matched Scribe word-for-word after the single re-take; best-ranked take over all 6 takes kept; diffs: t1: Sırt üstü ya da yan yatıp zemine yerleşmen yeterli; t2: Sırt üstü ya da yan",
   "hak c2.yer: \"kulak\" bayrağı (seçim) — SPEC §4.2: no take matched Scribe word-for-word after the single re-take; best-ranked take over all 6 takes kept; diffs: t1: Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğü",
   "hak k.yan: \"kulak\" bayrağı (seçim) — gerekçe seçim dosyasında yok",
-  "Hakan: gerçek tepe sınırlayıcısı > 3 dB kısan parçalar (\"kulak-sinirlayici\", listede)",
+  "Ayrıntılı, zamanlı kulak listesi: out/kulak_listesi.md (kesimler, Scribe istisnasıyla eşleşen klipler, v3 kısa parça ve tepe düzeltmeleri, yerel yatak kısmaları)",
+  "v3: gerçek tepe sınırlayıcısı hâlâ > 3 dB kısan parçalar: nes yok; hak c1.l20, c1.f15",
   "Dönüş tınısı seçimi (sentez D5 / ElevenLabs sfx) ve düzeyi",
   "İmge katmanının düzeyi (−8 dB) ve tınısı; doğa düzeyi (−10 dB); orman-2 yinelenen esinti",
   "A/B kaynak ayrıntıları (_ab_details.json) — dinlemeden sonra açılır"

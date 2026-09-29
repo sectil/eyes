@@ -19,7 +19,7 @@
      "role": "Varış açılışı",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-v-aday.keyA.wav",
      "t0": 0.0,
-     "t1": 113.238,
+     "t1": 113.254,
      "file_offset_s": 0.0,
      "gain_db": -8.65,
      "body_lufs_raw_after_eq": -15.35
@@ -27,8 +27,8 @@
     {
      "role": "Varış-Derinleşme ailesi",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-vd-a.wav",
-     "t0": 105.238,
-     "t1": 354.565,
+     "t0": 105.254,
+     "t1": 354.575,
      "file_offset_s": 0.0,
      "gain_db": -7.97,
      "body_lufs_raw_after_eq": -16.03
@@ -36,8 +36,8 @@
     {
      "role": "Derin ailesi",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-derin-a.wav",
-     "t0": 346.565,
-     "t1": 579.102,
+     "t0": 346.575,
+     "t1": 579.108,
      "file_offset_s": 4.5,
      "gain_db": -10.02,
      "body_lufs_raw_after_eq": -13.98
@@ -45,8 +45,8 @@
     {
      "role": "Derin ailesi",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-derin-b.keyD.wav",
-     "t0": 571.102,
-     "t1": 763.015,
+     "t0": 571.108,
+     "t1": 763.018,
      "file_offset_s": 17.5,
      "gain_db": -1.88,
      "body_lufs_raw_after_eq": -22.12
@@ -54,52 +54,52 @@
     {
      "role": "Kapanış",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-kapanis.wav",
-     "t0": 755.015,
+     "t0": 755.018,
      "t1": 900.0,
-     "file_offset_s": 35.015,
+     "file_offset_s": 35.018,
      "gain_db": -10.42,
      "body_lufs_raw_after_eq": -13.58
     }
    ],
    "imge": {
     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-imge.wav",
-    "t0": 571.102,
-    "t1": 695.13,
+    "t0": 571.108,
+    "t1": 695.134,
     "file_offset_s": 0.0,
     "gain_db": -8.04
    },
    "crossfades": [
     {
-     "t0": 105.238,
-     "t1": 113.238,
+     "t0": 105.254,
+     "t1": 113.254,
      "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
-     "rho_min": -0.067,
-     "rho_max": 0.13,
-     "rho_mean": 0.031
+     "rho_min": -0.12,
+     "rho_max": 0.064,
+     "rho_mean": -0.019
     },
     {
-     "t0": 346.565,
-     "t1": 354.565,
+     "t0": 346.575,
+     "t1": 354.575,
      "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
-     "rho_min": -0.458,
-     "rho_max": 0.161,
-     "rho_mean": -0.091
+     "rho_min": -0.207,
+     "rho_max": 0.258,
+     "rho_mean": 0.04
     },
     {
-     "t0": 571.102,
-     "t1": 579.102,
+     "t0": 571.108,
+     "t1": 579.108,
      "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
-     "rho_min": -0.026,
-     "rho_max": 0.058,
-     "rho_mean": 0.01
+     "rho_min": -0.094,
+     "rho_max": 0.024,
+     "rho_mean": -0.009
     },
     {
-     "t0": 755.015,
-     "t1": 763.015,
+     "t0": 755.018,
+     "t1": 763.018,
      "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
-     "rho_min": -0.049,
-     "rho_max": 0.403,
-     "rho_mean": 0.129
+     "rho_min": -0.08,
+     "rho_max": 0.283,
+     "rho_mean": 0.103
     }
    ],
    "crossfade_placement": [
@@ -107,32 +107,32 @@
      "what": "Varış → Varış-Derinleşme ailesi",
      "cue": [
       "phase:derinlesme",
-      105.238
+      105.254
      ],
-     "start": 105.238,
+     "start": 105.254,
      "speech_cover": 0.87
     },
     {
      "what": "Varış-Derinleşme → Derin",
      "cue": [
       "phase:derin",
-      346.565
+      346.575
      ],
-     "start": 346.565,
+     "start": 346.575,
      "speech_cover": 0.77
     },
     {
      "what": "Derin → Kapanış",
      "cue": [
       "phase:kapanis",
-      755.015
+      755.018
      ],
-     "start": 755.015,
+     "start": 755.018,
      "speech_cover": 0.52
     }
    ],
    "notes": [
-    "Derin ailesi: aile içi geçiş 571.10 sn (c4.yer; geçiş penceresinde konuşma payı 0.43; uygun aralık 552.5–574.1)"
+    "Derin ailesi: aile içi geçiş 571.11 sn (c4.yer; geçiş penceresinde konuşma payı 0.43; uygun aralık 552.5–574.1)"
    ],
    "grid_g_s": null,
    "tone_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/donus.synth-D5.wav",
@@ -568,7 +568,7 @@
      "role": "Varış açılışı",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_varis_x.wav",
      "t0": 0.0,
-     "t1": 113.238,
+     "t1": 113.254,
      "file_offset_s": 72.0,
      "gain_db": 0.34,
      "body_lufs_raw_after_eq": -24.34
@@ -576,58 +576,58 @@
     {
      "role": "Varış-Derinleşme ailesi",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd_family.wav",
-     "t0": 105.238,
-     "t1": 354.565,
-     "file_offset_s": 89.238,
+     "t0": 105.254,
+     "t1": 354.575,
+     "file_offset_s": 89.254,
      "gain_db": 0.26,
      "body_lufs_raw_after_eq": -24.26
     },
     {
      "role": "Derin ailesi",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin_family.wav",
-     "t0": 346.565,
-     "t1": 763.015,
-     "file_offset_s": 42.565,
+     "t0": 346.575,
+     "t1": 763.018,
+     "file_offset_s": 42.575,
      "gain_db": 0.38,
      "body_lufs_raw_after_eq": -24.38
     },
     {
      "role": "Kapanış",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_kapanis.wav",
-     "t0": 755.015,
+     "t0": 755.018,
      "t1": 900.0,
-     "file_offset_s": 43.015,
+     "file_offset_s": 43.018,
      "gain_db": 0.31,
      "body_lufs_raw_after_eq": -24.31
     }
    ],
    "imge": {
     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_imge.wav",
-    "t0": 571.102,
-    "t1": 695.13,
-    "file_offset_s": 19.102,
-    "gain_db": 7.21
+    "t0": 571.108,
+    "t1": 695.134,
+    "file_offset_s": 19.108,
+    "gain_db": 7.22
    },
    "crossfades": [
     {
-     "t0": 105.238,
-     "t1": 113.238,
+     "t0": 105.254,
+     "t1": 113.254,
      "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
-     "rho_min": 0.922,
-     "rho_max": 0.972,
+     "rho_min": 0.923,
+     "rho_max": 0.973,
      "rho_mean": 0.947
     },
     {
-     "t0": 346.565,
-     "t1": 354.565,
+     "t0": 346.575,
+     "t1": 354.575,
      "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
-     "rho_min": 0.927,
-     "rho_max": 0.973,
+     "rho_min": 0.929,
+     "rho_max": 0.974,
      "rho_mean": 0.954
     },
     {
-     "t0": 755.015,
-     "t1": 763.015,
+     "t0": 755.018,
+     "t1": 763.018,
      "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
      "rho_min": 0.953,
      "rho_max": 0.986,
@@ -639,27 +639,27 @@
      "what": "Varış → Varış-Derinleşme ailesi",
      "cue": [
       "phase:derinlesme",
-      105.238
+      105.254
      ],
-     "start": 105.238,
+     "start": 105.254,
      "speech_cover": 0.87
     },
     {
      "what": "Varış-Derinleşme → Derin",
      "cue": [
       "phase:derin",
-      346.565
+      346.575
      ],
-     "start": 346.565,
+     "start": 346.575,
      "speech_cover": 0.77
     },
     {
      "what": "Derin → Kapanış",
      "cue": [
       "phase:kapanis",
-      755.015
+      755.018
      ],
-     "start": 755.015,
+     "start": 755.018,
      "speech_cover": 0.52
     }
    ],
@@ -1109,7 +1109,7 @@
      "role": "Varış-Derinleşme ailesi",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-vd-a.wav",
      "t0": 102.164,
-     "t1": 345.477,
+     "t1": 345.478,
      "file_offset_s": 0.0,
      "gain_db": -7.96,
      "body_lufs_raw_after_eq": -16.04
@@ -1117,8 +1117,8 @@
     {
      "role": "Derin ailesi",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-derin-a.wav",
-     "t0": 337.477,
-     "t1": 567.892,
+     "t0": 337.478,
+     "t1": 567.89,
      "file_offset_s": 4.5,
      "gain_db": -10.02,
      "body_lufs_raw_after_eq": -13.98
@@ -1126,8 +1126,8 @@
     {
      "role": "Derin ailesi",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-derin-b.keyD.wav",
-     "t0": 559.892,
-     "t1": 766.802,
+     "t0": 559.89,
+     "t1": 766.801,
      "file_offset_s": 17.5,
      "gain_db": -1.83,
      "body_lufs_raw_after_eq": -22.17
@@ -1135,17 +1135,17 @@
     {
      "role": "Kapanış",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-kapanis.wav",
-     "t0": 758.802,
+     "t0": 758.801,
      "t1": 900.0,
-     "file_offset_s": 38.802,
+     "file_offset_s": 38.801,
      "gain_db": -10.4,
      "body_lufs_raw_after_eq": -13.6
     }
    ],
    "imge": {
     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-imge.wav",
-    "t0": 579.216,
-    "t1": 700.505,
+    "t0": 579.214,
+    "t1": 700.504,
     "file_offset_s": 0.0,
     "gain_db": -8.1
    },
@@ -1154,33 +1154,33 @@
      "t0": 102.164,
      "t1": 110.164,
      "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
-     "rho_min": -0.109,
-     "rho_max": 0.098,
+     "rho_min": -0.115,
+     "rho_max": 0.093,
      "rho_mean": -0.022
     },
     {
-     "t0": 337.477,
-     "t1": 345.477,
+     "t0": 337.478,
+     "t1": 345.478,
      "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
-     "rho_min": -0.169,
-     "rho_max": 0.311,
-     "rho_mean": 0.081
+     "rho_min": -0.277,
+     "rho_max": 0.199,
+     "rho_mean": -0.052
     },
     {
-     "t0": 559.892,
-     "t1": 567.892,
+     "t0": 559.89,
+     "t1": 567.89,
      "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
-     "rho_min": -0.083,
-     "rho_max": 0.089,
-     "rho_mean": 0.009
+     "rho_min": -0.059,
+     "rho_max": 0.061,
+     "rho_mean": 0.001
     },
     {
-     "t0": 758.802,
-     "t1": 766.802,
+     "t0": 758.801,
+     "t1": 766.801,
      "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
-     "rho_min": -0.076,
-     "rho_max": 0.271,
-     "rho_mean": 0.05
+     "rho_min": -0.134,
+     "rho_max": 0.255,
+     "rho_mean": 0.048
     }
    ],
    "crossfade_placement": [
@@ -1197,18 +1197,18 @@
      "what": "Varış-Derinleşme → Derin",
      "cue": [
       "phase:derin",
-      337.477
+      337.478
      ],
-     "start": 337.477,
+     "start": 337.478,
      "speech_cover": 0.77
     },
     {
      "what": "Derin → Kapanış",
      "cue": [
       "phase:kapanis",
-      758.802
+      758.801
      ],
-     "start": 758.802,
+     "start": 758.801,
      "speech_cover": 0.51
     }
    ],
@@ -1658,7 +1658,7 @@
      "role": "Varış-Derinleşme ailesi",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd_family.wav",
      "t0": 102.164,
-     "t1": 345.477,
+     "t1": 345.478,
      "file_offset_s": 86.164,
      "gain_db": 0.27,
      "body_lufs_raw_after_eq": -24.27
@@ -1666,27 +1666,27 @@
     {
      "role": "Derin ailesi",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin_family.wav",
-     "t0": 337.477,
-     "t1": 766.802,
-     "file_offset_s": 33.477,
+     "t0": 337.478,
+     "t1": 766.801,
+     "file_offset_s": 33.478,
      "gain_db": 0.36,
      "body_lufs_raw_after_eq": -24.36
     },
     {
      "role": "Kapanış",
      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_kapanis.wav",
-     "t0": 758.802,
+     "t0": 758.801,
      "t1": 900.0,
-     "file_offset_s": 46.802,
+     "file_offset_s": 46.801,
      "gain_db": 0.27,
      "body_lufs_raw_after_eq": -24.27
     }
    ],
    "imge": {
     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_imge.wav",
-    "t0": 579.216,
-    "t1": 700.505,
-    "file_offset_s": 3.216,
+    "t0": 579.214,
+    "t1": 700.504,
+    "file_offset_s": 3.214,
     "gain_db": 7.47
    },
    "crossfades": [
@@ -1699,16 +1699,16 @@
      "rho_mean": 0.949
     },
     {
-     "t0": 337.477,
-     "t1": 345.477,
+     "t0": 337.478,
+     "t1": 345.478,
      "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
      "rho_min": 0.9,
      "rho_max": 0.974,
      "rho_mean": 0.949
     },
     {
-     "t0": 758.802,
-     "t1": 766.802,
+     "t0": 758.801,
+     "t1": 766.801,
      "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
      "rho_min": 0.146,
      "rho_max": 0.987,
@@ -1729,18 +1729,18 @@
      "what": "Varış-Derinleşme → Derin",
      "cue": [
       "phase:derin",
-      337.477
+      337.478
      ],
-     "start": 337.477,
+     "start": 337.478,
      "speech_cover": 0.77
     },
     {
      "what": "Derin → Kapanış",
      "cue": [
       "phase:kapanis",
-      758.802
+      758.801
      ],
-     "start": 758.802,
+     "start": 758.801,
      "speech_cover": 0.51
     }
    ],
