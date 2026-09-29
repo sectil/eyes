@@ -46,6 +46,38 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
 9. [ ] **Ölçüm ilkesi açıkları:** her modül istatistik kaydeder ve Gelişim'de görünür (ANA_BELGE §4). Taramada
    bulunan eksikler aşağıda "Ölçüm ilkesi" bölümünde.
 
+## Sonsuz yol ve ilk 5 saniye (sahibi, 2026-09-29) — kararlar verildi, uygulama onay bekliyor
+Sahibi: "döngü 28 değil, sonsuz… nefes 1. gün 1 dk, 2. gün 1, 3. gün 2… kırpma, sonra sağ-sol, sonra üçü birlikte,
+sonra yukarı-aşağı… bütün modüller bilgi biriktirir, esas beyin merkez, Nef sözcümüz… şu anki sistemi asla bozmuyoruz…
+5 saniyemiz var, insanları şaşırtalım." Tasarım belgeleri (çalışma notu, depoda değil): YOL.ilerleme / YOL.moduller /
+YOL.nef; 20 konsept 3 yargıçla puanlandı.
+Kararlar (2026-09-29):
+1. **E testi ilk günden haftada bir** (günlük E testi yoldan çıkar; modül listede isteğe bağlı kalır). Sonucu, açıkça:
+   bugünkü başlangıç kuralı (8. günden sonra en az 7 test) haftalık testte ≈ 8 haftaya uzar; haftalık test göz başına
+   28 harfle daha kesin olduğu için başlangıç kuralı haftalık seriye göre yeniden kurulacak (PubMed dayanağıyla; o
+   zamana kadar Gelişim "başlangıç oluşuyor" der).
+2. **İlk açılışta önce ölçüm:** hesap ekranı yerine doğrudan İlk Bakış (kırpma sayımı); hesap ve sorular sonra.
+   27 Eylül'deki kurulum sırası (güvenlik → İlk Bakış → 4 soru) bu kararla değişir; güvenlik bilgisi ölçümden sonra.
+3. **Sessiz ölçüm (tercih):** günün ilk açılışında 5 sn canlı mesafe ("34 cm"), kamera kendiliğinden kapanır, yeşil
+   nokta görünür. Kapalı başlar; İlk Bakış'tan sonra bir kez, tek cümleyle sorulur; tek dokunuşla kapanır.
+   Her açılışta değil (rahatsızlık, pil, App Store'da kamera gerekçesi).
+4. **Uyku, Sağlık'tan okunur** (ayrı açık rıza; HealthKit uyku türleri; Nef'e gitmez, rıza metnindeki söz korunur).
+Tasarımın özü:
+- Seviye saklanmaz, kayıtlardan türetilir (modülün yapıldığı gün sayısı; bugün sayılmaz). Atlanan gün ceza değil,
+  sıfırlama yok; "sonra yaparım" durağı günün sonuna kayar. Yol ≈ 15 dk, hafif gün ≈ 7 dk; 90. günden sonra haftalık
+  odak modülü. Kilometre taşları yerinde: 5. gün rapor, 14. gün iyi oluş, 28. gün iris.
+- Merdivenler: nefes 1-1-2-2-3…5 dk; göz kırpma → sağ-sol → üçü birlikte → yukarı-aşağı → uzağa bakış → yakın-uzak →
+  daire → 14. günde tam set → tekrar/süre çeşitlemesi; meditasyon 3-3-4-4-5 dk; yürüyüş 2 dk; oyunlar açılma günüyle.
+- Yeni modüller: yürüyüş, uyku, tepki hızı (dikkat; tanı değil), meditasyon, yoga (pilot sesi üretiliyor).
+- Nef: merkez hesaplar, Nef söyler; günlük + haftalık + aylık; sağlık verisi gitmez.
+- Mevcut sistem bozulmaz: her şey isteğe bağlı manifest alanı ve `ctx.progression` ile eklenir.
+- Eleştirinin 4 tutarlılık engeli uygulamada çözülecek: tek ilerleme sözleşmesi, gün sayımı bugünü saymaz, sağlık
+  verisi Nef'e gitmez, meditasyon zamanlaması tek.
+- 5 saniye, site: en yüksek puan "Bu cümleyi okurken kaç kez göz kırptın?" (şaşırtma 8,3/10) — sahibin onayına.
+Uygulama sırası (her biri ayrı onay, test, TestFlight): (a) E testi haftada bir + başlangıç kuralı, (b) ilk açılışta
+önce ölçüm, (c) ilerleme motoru + nefes ve göz merdivenleri, (d) sessiz ölçüm tercihi, (e) uyku (Sağlık) ve yürüyüş,
+(f) Nef haftalık/aylık, (g) meditasyon ve yoga modülleri.
+
 ## Fikir: Nefona alarmı (sahibinden, 2026-09-28) — plan henüz mükemmel değil
 Sahibinin fikri: ekranda Nefes/Dalga görürken "alarm kur"; uygulamanın kendi alarmı, Dalga sesleriyle; "10 uygulama
 yerine tek uygulama". Değerlendirme: amaca bağlı alarm (uyanış = Dalga + sabah nefesi; akşam pratiği) mantıklı ve
