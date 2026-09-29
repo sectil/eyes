@@ -44,3 +44,30 @@
 - Kamera görüntüsü telefondan çıkmaz. Nef yalnız açık rızayla; özet sayılar gider.
 - Mükemmel olmayan hiçbir şey "bitti" değildir; cihazda doğrulanmamış iş `[~]`.
 - Kod değişikliği ancak sahibinin onayından sonra; bu iş bir PLAN ve TASARIM üretir.
+
+## Sahibin 2026-09-29 akşam istekleri (kelimesi kelimesine özet) ve iş sırası
+> "yolda kullanılan her modül gelişim tarafından takip edilir ve kişi gelişimi verilerle değerlendirilir... ilk 4
+> saniyede etkilemek gerekiyor 5 sn kuralı önemli... yolda nefes, e test hafta bir gelişim takip edilir, nefes, göz
+> egzersizleri, dikkat, farkındalık, okuma, yılan oyunu ve aklıma gelmeyen bir çok modül var... bu yol sonsuz devam
+> eder... yolda örneğin ilk gün göz hareketi, 2. gün göz + yana bak. nefes egzersizi ilk önce 1 dakika yapılır sonraki
+> gün 2, 3 gibi gider veya farklı nefes egzersizleri olur 4 2 4 4 gibi, yüzlerce kombine olur... ilk zamanlarda 5 sn
+> etkileme kuralı önemli, kullanıcılar devamlı olması lazım... şu anki modelleri bozmayacaksın ama örneğin nefes ilk
+> seferinde 5 dakika değil 1 dakika olur... arada nefes bölümü gibi aralar olmalı... Nef'in gidişatla ilgili yorumları
+> olabilir... günün nasıl geçti bölümünde PubMed bilgilerini de kullanarak o günle ilgili bilgiler almak, basit sorular
+> değil; şu an sorulan 'kaç saat ekrana baktın', biz zaten ekran süresini görebiliyoruz neden soruyoruz... günün nasıl
+> geçti emoji olabilir veya puanlama, ama tasarım iyi olmalı... hava durumu alınmalı, bugün yağmurlu mu bilgilendirilmeli,
+> konum tespit edilmeli, en iyi en doğru kaynaktan veri almalı, belki JEV AI bunu yapabilir... ayın durumunu göster,
+> bununla ilgili makaleler varsa göster (PubMed)... günün nasıl geçiyor ekranında ay durumu, hava durumu, yağmur durumu
+> gözükecek; yağmur varsa 'bugün yağmur bekleniyor' bildirimi gönderilebilir... biz üst akıl olmalıyız, mükemmel bir plan
+> yazmalısın... mükemmel değilse bana gönderme."
+>
+> "en önemlisi ilk önce yoga modülünü devreye alacağız, sonra sonsuz yol araştırması olacak; çünkü sonsuz yolun içinde
+> yoga bölümleri de parça parça yer alacak... unutmaman gereken: her modül gelişime katkı sağlar... senin için mükemmel
+> olmayanı bana önerme."
+
+**İş sırası (bağlayıcı):** 1) Yoga modülü: birleşik plan → sahibin onayı → üretim ve modül → cihaz. 2) Sonra sonsuz yol
+üst akıl planı (merdivenler, her modülün Gelişim'e bağlanması, Nef gidişat yorumları, "günün nasıl geçti" yeniden
+tasarımı, hava/yağmur/ay/konum ve bildirim, 5 sn kuralı). Not (kod, 2026-09-29): uygulama ekran süresini okumuyor
+(Screen Time API kullanılmıyor; `profileQuestions.js` akşam sorusu "Bugün kaç saat ekrana baktın?"); Apple'ın bunu
+uygulamalara sayı olarak verip vermediği sonsuz yol araştırmasında Apple belgelerinden doğrulanacak. Durdurulan
+araştırma iş akışı: wf_ad0a5157-83f (tamamlanan ajanlar önbellekten sürdürülebilir).
