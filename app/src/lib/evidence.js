@@ -5,10 +5,10 @@ export const EVIDENCE = [
   {
     id: 'acuity',
     title: '"E hangi yönde" testi',
-    claim: 'Yakın görme keskinliğinizi evde ölçer ve zaman içinde takip eder.',
+    claim: 'Yakın görme keskinliğini evde ölçer ve zaman içinde takip eder.',
     level: 'Orta',
     basis:
-      'Akıllı telefon görme testleri klinik tablolarla karşılaştırılmış ve uyumlu bulunmuştur. Harf boyutu, ekranınızın kart ile kalibrasyonu sayesinde doğru ölçekte çizilir.',
+      'Akıllı telefon görme testleri klinik tablolarla karşılaştırılmış ve uyumlu bulunmuştur. Harf boyutu, ekranının kart ile kalibrasyonu sayesinde doğru ölçekte çizilir.',
     limits:
       'Klinikte, gözetim altında tablet ve telefonla yapılan yakın görme testi tekrarlandığında, iki sonuç arasındaki fark çoğunlukla ±0,2 logMAR (2 satır) içinde kalıyor; evde bu fark daha büyük olabilir. Bu yüzden tek teste değil, son 7 günün ortancasına (sıralanınca ortadaki değer) bakıyoruz. Bu ortanca başlangıç ortancasından en az 0,10 ayrılır ve son 3 testin her biri de aynı yönde en az 0,10 farklıysa bunu değişim olarak işaretliyoruz. Bu test göz muayenesinin yerini tutmaz.',
     sources: [
@@ -27,7 +27,7 @@ export const EVIDENCE = [
     basis:
       'İlk 7 gün alışma dönemi; başlangıç değeri 8. günden itibaren en az 7 testten (en erken 21. güne kadar). Uyarı için tek kötü sonuç yetmez; ardışık sonuçlar gerekir. Tek teste dayalı ev takip sistemlerinde yanlış alarm oranı çok yüksek bulunmuştur.',
     limits: 'Kurallar yayımlanmış ev takip sistemlerinden uyarlanmıştır; bu uygulama için ayrıca doğrulanmamıştır.',
-    sources: ['Ev takibi ve tekrarlanabilirlik derlemesi: docs/arastirma/ajan-raporlari/13_gunluk_takip.md'],
+    sources: ['Faes ve ark. 2021, akıllı telefonla ev takibinde yanlış alarmlar ve öngörü değeri (PMID 33414531)'],
   },
   {
     id: 'reading',
@@ -56,12 +56,12 @@ export const EVIDENCE = [
   {
     id: 'brain',
     title: 'Görme ve beyin sağlığı',
-    claim: 'Görmenizi düzenli kontrol ettirmenizi öneririz.',
+    claim: 'Görmeni düzenli kontrol ettirmeni öneririz.',
     level: 'Gözlemsel',
     basis:
       'Tedavi edilmemiş görme kaybı, bilişsel gerileme ve demans ile ilişkili bulunmuştur. Bu ilişki gözlemsel çalışmalardan gelir.',
     limits:
-      'Bu uygulamadaki test veya egzersizlerin beyin sağlığını iyileştirdiği ya da demansı önlediği gösterilmemiştir ve böyle bir iddiamız yoktur.',
+      'Bu uygulamadaki test ya da egzersizlerin beyin sağlığını iyileştirdiği ya da demansı önlediği gösterilmemiştir ve böyle bir iddiamız yoktur.',
     sources: [
       'Shang ve ark. 2021, 14 kohortun meta-analizi, RR 1,47 — kanıt kalitesi düşük (PMID 33422559)',
       'Livingston ve ark. 2024, Lancet Demans Komisyonu raporu (PMID 39096926)',
@@ -95,11 +95,11 @@ export const EVIDENCE = [
 
 // Açıkça yapmadığımız iddialar (bkz. SENTEZ §5, §13)
 export const NOT_CLAIMED = [
-  'Göz egzersizleri okuma gözlüğünü bıraktırır veya numaranızı düşürür — kanıt yok; yaşa bağlı yakın görme kaybı büyük ölçüde göz merceğinin sertleşmesinden kaynaklanır.',
+  'Göz egzersizleri okuma gözlüğünü bıraktırır ya da numaranı düşürür — kanıt yok; yaşa bağlı yakın görme kaybı büyük ölçüde göz merceğinin sertleşmesinden kaynaklanır.',
   'Göz kaslarını güçlendirir — odaklanma kası yaşla gücünü korur; sorun kasta değildir.',
-  'Miyopiyi önler veya tedavi eder.',
+  'Miyopiyi önler ya da tedavi eder.',
   'Beyin sağlığını geliştirir, demansı önler.',
-  'Teşhis koyar veya göz muayenesinin yerini tutar.',
+  'Teşhis koyar ya da göz muayenesinin yerini tutar.',
 ]
 
 export const NOT_CLAIMED_SOURCES = [

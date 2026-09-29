@@ -359,6 +359,20 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
 - [ ] DSA: "trader değilim" seçildiyse AB ülkeleri kaldırılacak; tüzel kişi posta kodu (48000) kontrol
 - [ ] Sandbox test hesabı örnek e-postayla açıldı (ornek.kisi+nefona1@gmail.com): gerçek adresle yenilenmeli
 
+## nefona.com sitesi (2026-09-29, sahibi: "önce yerelde yazıp aktaralım; alan adını Vercel'den alırız")
+Karar: canlıya çıkmadan `site/` klasöründe geliştirilir; sahibi Mac'te `npm run dev` ile açar, Windows'tan Tailscale
+üzerinden (http://100.126.28.77:4300) bakar. Alan adı (nefona.com, Vercel'de boşta, 11,25 USD/yıl) ve Vercel projesi
+yayın gününe kadar alınmaz. Sayfalar: ana, nasıl çalışır, modüller, bilim (27 kaynak, DOI+PMID), gizlilik/KVKK, koşullar,
+destek/SSS, yenilikler. Kaynakça, kanıt kartları, sürüm notları, modül listesi, belirtiler ve 7 alan uygulamadan üretilir
+(`site/scripts/data.mjs`); üst çubuk ve alt bilgi tek yerde (`site/scripts/pages.mjs`, kaynak `site/pages/`).
+- [~] İlk sürüm yazıldı; bağımsız inceleme (5 engel, 19 gerekli, 19 küçük) uygulandı; iki temada 320/390/820/1280'de
+      ölçüldü (taşma yok, yazı tipleri yüklü, hata yok); atlama bağlantısı, Escape ile menü, tek turluk iris canlandırması
+      (Hareketi Azalt'ta sabit), OG görseli (`site/public/og.png`, Chromium ile üretildi). Sahibi Tailscale üzerinden bakacak.
+- [ ] Yayından önce: gizlilik ve koşullar metinleri hukukçu incelemesi + veri sorumlusu unvanı/adresi; destek e-postası
+      (alan adı ile birlikte Resend/SMTP: Supabase e-posta girişi de buna bağlı); App Store bağlantısı.
+- [ ] Yayın: Vercel projesi "nefona" (kök `site/`, build `npm run build`, çıktı `dist`), alan adı satın alma ve bağlama.
+- [ ] Sonra: İngilizce sürüm; sayfa içi arama için ön-üretim (SEO: içerik bugün istemcide basılıyor).
+
 ## Açık hatalar
 - [x] Apple ile giriş TestFlight'ta "UNIMPLEMENTED" (Bug 11): kendi eklentimiz AppleSignInPlugin.swift (b4dc6f3); cihazda
       çalıştı (kullanıcı, 2026-09-28). Çıkmaz: npm eklentisini uygulama hedefinden import etmek (derlenmiyor).

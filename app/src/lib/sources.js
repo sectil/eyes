@@ -62,7 +62,7 @@ export const SOURCES = {
     title: 'Daytime light exposure is a strong predictor of seasonal variation in sleep and circadian timing of university students.',
     titleTr: 'Gündüz ışığı, üniversite öğrencilerinde uyku ve iç saatteki mevsimsel değişimin güçlü bir belirleyicisi.',
     journal: 'J Pineal Res', cite: '74(2):e12843', doi: '10.1111/jpi.12843', pmid: '36404490',
-    design: 'observational', n: '500’den fazla öğrenci',
+    design: 'observational', n: "500'den fazla öğrenci",
   },
   deprato2025: {
     authors: ['Deprato A', 'Haldar P', 'Navarro JF', 'Harding BN'], year: 2025,
@@ -76,7 +76,7 @@ export const SOURCES = {
     title: 'A synthesis of health benefits of natural sounds and their distribution in national parks.',
     titleTr: 'Doğa seslerinin sağlığa yararlarının bir sentezi ve milli parklardaki dağılımları.',
     journal: 'Proc Natl Acad Sci U S A', cite: '118(14)', doi: '10.1073/pnas.2013097118', pmid: '33753555',
-    design: 'meta', n: '36 yayın; 18’i meta-analizde',
+    design: 'meta', n: "36 yayın; 18'i meta-analizde",
   },
   fan2024: {
     authors: ['Fan L', 'Baharum MR'], year: 2024,

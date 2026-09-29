@@ -110,6 +110,7 @@ ve özgüven veriyor mu, yoksa sıkıyor mu? Ücretli kullanıcı en ufak hatada
 | `docs/supabase/KURULUM.md` | Hesap altyapısı (Supabase) |
 | `docs/iphone_ekran_tablosu.md` | iPhone modelleri ve fiziksel ekran ölçüleri |
 | `app/src/lib/releases.js` | Kullanıcıya görünen sürüm notları (Bilgi → Yenilikler) |
+| `site/` | nefona.com tanıtım sitesi (statik; kaynakça, sürüm notları ve modül listesi uygulamadan üretilir: `site/scripts/data.mjs`) |
 
 ---
 
