@@ -1,15 +1,14 @@
 # Nefona Yoga · İlk yayın ve yola entegrasyon planı (sürüm 3)
 
-Tarih: 2026-09-29. Durum: **PLAN, sahibin onayına**. Depoda hiçbir dosya değişmedi, git yazma komutu çalışmadı, ücretli
-ElevenLabs çağrısı yapılmadı. Bu belge `yoga-pilot/PLAN.v2.md`'yi (on dersin tasarımı, metin kılavuzu, ses kuralları) ve
+Tarih: 2026-09-29. Durum: **PLAN, sahibin onayına**. Uygulama koduna dokunulmadı, ücretli ElevenLabs çağrısı yapılmadı.
+Bu belge ve çalışma notları `yoga-pilot/v3/` klasöründedir. Bu belge `yoga-pilot/PLAN.v2.md`'yi (on dersin tasarımı, metin kılavuzu, ses kuralları) ve
 yol tasarım belgelerini tekrar etmez; onlara atıf yapar. Yalnız **ilk yayını (Yoga v1)** ve **yola entegrasyonu** kesin
 kararlarla anlatır.
 
 **Dayandığı çalışma notları** (bu klasörde; her biri kendi kaynaklarını satır satır verir): `sure.md` (süreler ve 3/5/15
 blokları), `yol.md` (yoldaki yer, 30 günlük benzetim), `uretim.md` (teslim biçimi, boyut, kredi), `modul.md` (ekranlar,
 kayıt, Gelişim, Nef, güvenlik). Notlar arasındaki çelişkiler §2.0'da tek tek seçildi. İki inceleme turundaki düzeltmeler
-(sonda "İnceleme izi") notlara işlenmedi; bir not bu belgeyle çelişirse bu belge geçerlidir. Onaydan sonra bu belge ve
-dört not `yoga-pilot/` altına taşınır.
+(sonda "İnceleme izi") notlara işlenmedi; bir not bu belgeyle çelişirse bu belge geçerlidir.
 
 **Bu belgede ayrıca doğrulananlar:** harcama defteri satır satır yeniden toplandı (`render/ledger.jsonl`, 399 satır);
 Ders 2'nin 20 dakikası için gereken ek birimler pilot planlayıcısıyla, kredi ve boyut bu planın kapsamıyla yeniden
@@ -89,8 +88,8 @@ görürsün (karar 6). Kapı 5–7: kalan dokuz ders üçer üçer gelir (1-3-5,
 geçer, sonra seslendirilip ölçülür; her partide her dersin bütün sürelerini TestFlight'ta dinlersin. Yol durağını
 cihazda ilk kez Kapı 5'te görürsün, çünkü yolun kısa günleri 3 dakikalık dersler ister ve bunlar ilk kez Parti 1'le
 (Ders 1 ve 5) gelir. Kapı 8: on dersin hepsi onaylanınca ve yol durağı cihazda çalışınca modül yayına girer. Plan
-onayından yayına ≈ 7–12 hafta sürer (tahmin; senin dinleme sürelerin ve inceleyicilerin bulunması bu süreye dahil değil;
-indirme altyapısı gerekirse ≈ 1–2 hafta daha). İkinci aşama (30 dakika ve "istediğin dakika") Kapı 9–11'dir ve ilk
+onayından yayına ≈ 7–12 hafta sürer (tahmin; senin dinleme sürelerin bu süreye dahil değil; inceleyici bulunamayan
+rolde yedek uygulanır, takvim inceleyici aramayı beklemez; indirme altyapısı gerekirse ≈ 1–2 hafta daha). İkinci aşama (30 dakika ve "istediğin dakika") Kapı 9–11'dir ve ilk
 yayından sonra ≈ 7–11 hafta sürer (kaba tahmin).
 
 **Maliyet ve boyut (tahmin).** Tek ses ve ElevenLabs müziğiyle konuşma ve müzik ≈ 370–530 bin kredi tutar
@@ -111,8 +110,12 @@ aşılır. Bu yüzden gerçek indirme boyutu kodek testinden hemen sonra, son bo
    yaşta, İstanbul Türkçesiyle konuşan bir meditasyon hocası". Önizlemede okunacak örnek cümle, Ders 2'nin açılış
    cümlesidir. Maliyeti ≈ 14–15 bin kredi artı önizlemelerin henüz bilinmeyen fiyatıdır.
 2. **İnsan inceleyiciler.** İnceleyiciler şunlar olmalı: Türkçe editör, usta hoca, Ders 4 ve 7 için klinik psikolog ve en
-   az beş kişilik bir dinleme paneli (biri 65 yaş üstü). Öneri: adlarını sen belirle. Türkçe editörün, usta hocanın ve
-   (Ders 4 ile 7'de) klinik psikoloğun onayı olmadan hiçbir metin seslendirilmez. Dinleme paneli metni değil,
+   az beş kişilik bir dinleme paneli (biri 65 yaş üstü). Öneri: bulabildiğin kişilerin adlarını sen belirle; kimseyi
+   bulamadığın rolde yedek uygulanır ve yoga o rolü beklemez. Yedekler: Türkçe editör ve usta hoca yerine metni
+   birbirinden bağımsız iki model incelemesi okur (Ders 2'nin pilot metni böyle dört turdan geçti); son kulak kararı
+   senindir (Kapı 5–7). Klinik psikolog yoksa karar 5.3'teki yedek kural uygulanır. Dinleme paneli yoksa kodek testini
+   ve anlaşılırlığı sen kör dinlersin; mümkünse 65 yaş üstü biri de dinler. Yedek, insan onayının yerini tam tutmaz;
+   bu yüzden öneri önce insandır. Adı verilen inceleyicinin onayı olmadan metin seslendirilmez. Dinleme paneli metni değil,
    seslendirilmiş dosyaları dinler (§E.4). Tek istisna kör karşılaştırmadır: Ders 2'nin pilot metni, incelemeden önce
    üçüncü sesle de okutulur (Neslihan ve Hakan'da olduğu gibi). Bu kayıtlardan yayına yalnız incelemede değişmeyen
    birimler girer; değişenler yeniden seslendirilir.
@@ -162,6 +165,12 @@ aşılır. Bu yüzden gerçek indirme boyutu kodek testinden hemen sonra, son bo
    dayanır: kodek testinden sonra, seçilen bit hızında ve son toplam sürede yer tutucu ses dosyalarıyla bir TestFlight
    derlemesi yapılır ve App Store Connect'in bildirdiği indirme boyutu okunur (C adımı). Kapı 1'de onayını istediğim
    bu yöntemdir; eşik aşılırsa iki yoldan hangisinin seçileceğine Kapı 4'te, ölçülen boyutla karar verirsin.
+7. **Sonsuz yol planı ne zaman başlasın?** İş sıran "önce yoga, sonra sonsuz yol". Gerekçen, yoganın yoldaki yerinin
+   önce belli olmasıydı; bu plan onaylanınca o yer belli olur (§B). Yoga ise ≈ 7–12 hafta sürer ve bu sürenin büyük
+   kısmı dinlemeyi ve incelemeyi bekler. Öneri: bu plan onaylanınca sonsuz yol planının araştırması başlasın ve yoga
+   üretimiyle birlikte yürüsün; plan hazır olunca onayına gelir. Sonsuz yolun kodu yine yoga yayınından sonra yazılır,
+   çünkü iki iş aynı dosyalara dokunur (ör. `lib/today.js`). Yoganın hiçbir adımı sonsuz yolu beklemez. Öbür seçenek:
+   sonsuz yol planı, yoga yayına girene kadar bekler.
 
 ---
 
@@ -914,7 +923,7 @@ gereken testler, mevcut sistemin bozulmadığının kanıtıdır.
 
 ### E. Kalite kapıları
 
-#### E.1 Metin (seslendirmeden önce, üç insan onayı)
+#### E.1 Metin (seslendirmeden önce, üç onay: insan ya da karar 2'deki yedek)
 
 - **Model ilk denetimi** (makineyle denetlenen kurallar): yasak sözcük ve iddia listesi (PLAN.v2 §C.6); herhangi bir 60 sn'de
   ≤ 150 hece ve ≤ %60 konuşma (timing.py:72-73); "-(y)abil-" ≤ 3 / 60 sn, 3 dk Kapanış'ta en çok bir (§A.2 kural 6);
@@ -929,6 +938,10 @@ gereken testler, mevcut sistemin bozulmadığının kanıtıdır.
 - **Ders 2 metni de bu üç onaydan geçer;** pilot, insan editör onayı beklenirken seslendirildi (PLAN.v2 §C.8 başlığı).
   A aşamasında üçüncü ses de aynı metni okur (karar 2'deki tek istisna: kör karşılaştırma). İncelemede değişen birimler
   hangi ses seçilirse seçilsin yeniden seslendirilir (düzeltme payından).
+- **İnceleyici bulunamazsa (karar 2):** Türkçe editör ve usta hoca yerine birbirinden bağımsız iki model incelemesi
+  aynı ölçütlerle okur; son kulak kararı sahibindir. Psikolog yerine karar 5.3'ün yedek kuralı uygulanır. Dinleme
+  paneli yerine sahibi kör dinler (§E.4). Bir role sonradan insan bulunursa o rol, sıradaki partiden başlayarak insana
+  geçer.
 
 #### E.2 Ses (her klip)
 
@@ -976,7 +989,9 @@ Panel (PLAN.v2 G10): en az beş kişi; en az biri 65 yaş üstü, biri yeni baş
    65 yaş üstü üye her dersin en az bir dosyasını dinler. İşaretler: "aceleci", "boş", "tekrar eden müzik",
    "anlaşılmayan sözcük".
 
-Model sesi dinleyemez; kulak kararı gereken her şey insanla verilir.
+Model sesi dinleyemez; kulak kararı gereken her şey insanla verilir. **Panel kurulamazsa (karar 2):** kodek testini ve
+anlaşılırlığı sahibi kör dinler; mümkünse 65 yaş üstü biri de dinler. Madde 3'teki dinleme, sahibinin Kapı 5–7'deki
+dinlemesiyle yapılmış sayılır.
 
 #### E.5 Cihaz listesi (iPhone; her madde HATA_GUNLUGU'na)
 
@@ -1010,8 +1025,8 @@ Kusur görülürse sormadan düzeltilir, ölçülür ve yeniden sunulur (yoga-pi
 
 #### E.7 "Bitti" tanımı
 
-Bir ders ancak şu dört koşulla `[x]` olur: (1) metni üç insan incelemesinden geçmiş; (2) her klibi Scribe ile eşleşmiş,
-her dosyası §E.3'ten geçmiş ve panelde en az bir kez baştan sona dinlenmiş; (3) cihazda kilitli ekranda bütün süreleri,
+Bir ders ancak şu dört koşulla `[x]` olur: (1) metni üç incelemeden geçmiş (insan ya da karar 2'deki yedek); (2) her klibi Scribe ile eşleşmiş,
+her dosyası §E.3'ten geçmiş ve panelde (panel yoksa sahibince, §E.4) en az bir kez baştan sona dinlenmiş; (3) cihazda kilitli ekranda bütün süreleri,
 varsayılan sürüm dahil, kesintisiz çalmış; (4) sahibi bütün sürelerini dinleyip onaylamış.
 
 Modül ancak şu iki koşulla yayına girer: (5) on dersin hepsi `[x]`; (6) yol durağı cihazda çalışmış (§E.5'teki yol
@@ -1024,7 +1039,7 @@ kapısında (Kapı 11) geri gelir. Cihazda doğrulanmamış iş `[~]`'dir.
 
 | Adım | İş | Çıktı | Onay | Kredi | Süre (VARSAYIM) |
 |---|---|---|---|---|---|
-| **Kapı 1** | Bu plan ve altı karar | Onay | Sahip | 0 | — |
+| **Kapı 1** | Bu plan ve yedi karar | Onay | Sahip | 0 | — |
 | A | Pilotun kapatılması (sahibe gitmez): Hakan'ın 40 parçası klip düzeyinde tepe yönetimiyle yeniden karıştırılır, mikro kliplerin RMS ofseti ayarlanır; Scribe'ın birleşik sözcük ve ek-fiil yazımı istisnaları; kesim kuralı SPEC'e yazılır; kulak listesi. Tasarlanan ses: tarifle tasarım, önizlemelerden biri kaydedilir, Ders 2'nin 15 dk birimleri incelemeden önce seslendirilir (karar 2'deki istisna), iki kör karışım | Ölçülmüş 6 (ya da 4) kör karışım ve rapor | — | ≈ 14–15 bin + önizleme | 2–4 gün |
 | **Kapı 2** | Kör dinleme | Ses ve müzik kaynağı seçildi (PLAN.v2 G9 kapanır) | Sahip | 0 | sahibin zamanı |
 | B | Kalıp: SPEC v3 (ses, model, çekim sayısı, yükseklik, kodek, dosya adları, `timeline.json` şeması, qa eşikleri, Scribe kuralları ve tam karışım denetimi yerine parça konum denetimi, 3 dk biçimi). Ders 2 metninin insan incelemesi; 5 dk kısa biçimleri ve 20 dk birimleri seçilen sesle; 5/15/20 karışımları; kodek testi (panel); tasarım Artifact'ı. Parti 1'in metni yazılıp inceleyicilere gider | Ders 2'nin üç dosyası ve raporu; Artifact | — | ≈ 3–5 bin konuşma (Ders 2 eki 2,9–3,4 bin, yardımcı klipler ≈ 1 bin) + ≤ ≈ 6 bin 20 dk müziği (+ düzeltme) | 1–2 hafta |
@@ -1036,15 +1051,15 @@ kapısında (Kapı 11) geri gelir. Cihazda doğrulanmamış iş `[~]`'dir.
 | **Kapı 7** | Parti 3: Ders 6, 9, 10 | aynı | Sahip | ≈ 122–178 bin (payla ≈ 130–190) | 1–2 hafta |
 | **Kapı 8** | Yayın: on dersin cihaz listesi; yol durağı cihazda çalıştı; Vercel dağıtımında yoga dosyası yok; web sürümünde yoga görünmüyor; sürüm notu (yeni kimlik), ENVANTER_VE_PLAN.md satırı, YAPILACAKLAR (g) maddesi | App Store derlemesi | Sahip | 0 | ≈ 1 hafta |
 | *İkinci aşama* | | | | | |
-| **Kapı 9** | 16–30 dk metni: her dersin 30 dk iskeletine göre yazılır, üç insan incelemesinden geçer; kaydırıcı ve çalışma anındaki karışım motorunun tasarımı (motor, onaylı ilk yayın dosyalarıyla örtüşmelidir, §A.4) | Onaylı metin ve motor tasarımı | Sahip | 0 | 3–4 hafta (VARSAYIM) |
+| **Kapı 9** | 16–30 dk metni: her dersin 30 dk iskeletine göre yazılır, üç incelemeden geçer (karar 2); kaydırıcı ve çalışma anındaki karışım motorunun tasarımı (motor, onaylı ilk yayın dosyalarıyla örtüşmelidir, §A.4) | Onaylı metin ve motor tasarımı | Sahip | 0 | 3–4 hafta (VARSAYIM) |
 | **Kapı 10** | Motorun kodu (iOS yerel, "istediğin dakika" seçimi); 16–30 dk birimlerinin seslendirmesi ve müziği, üç parti | Motor + on dersin 30 dk'ya kadar bütün birimleri | Sahip | ≈ 285–355 bin (kaba, VARSAYIM; tavanı ayrıca sorulur) | 3–6 hafta (VARSAYIM) |
 | **Kapı 11** | 30 dk kilitli ekran cihaz testi, her derste 5 ve 30 dk (PLAN.v2'nin "bitti" koşulu) ve rastgele üç ara süre; sahibin dinlemesi | App Store derlemesi | Sahip | 0 | ≈ 1 hafta |
 
 **Takvim:** plan onayından yayına ≈ 7–12 hafta (VARSAYIM). Hesap: A 2–4 gün, B 1–2 hafta, C 1,5–2,5 hafta, üç parti
 1–2'şer hafta, Kapı 8 ≈ 1 hafta; toplam ≈ 6,8–12,1 hafta. Partiler sıralıdır, çünkü kalan dokuz dersin seslendirmesi
 Kapı 4'ün kalıp kilidinden önce başlamaz; metin incelemesi bir önceki partinin seslendirilmesiyle üst üste yürür. Bu
-süreye senin Kapı 2–8'deki dinleme sürelerin ve henüz olmayan inceleyicilerin bulunması dahil değildir. En büyük
-belirsizlik inceleyicilerin hızıdır; tahmin, bir partinin metninin ≈ bir haftada dönmesine dayanır. Kapı 4'te ölçülen
+süreye senin Kapı 2–8'deki dinleme sürelerin dahil değildir. İnceleyici bulunamayan rolde yedek uygulanır (karar 2);
+takvim inceleyici aramayı beklemez. En büyük belirsizlik inceleyicilerin hızıdır; tahmin, bir partinin metninin ≈ bir haftada dönmesine dayanır. Kapı 4'te ölçülen
 indirme boyutu eşiği aşar ve indirme altyapısı seçilirse ≈ 1–2 hafta daha eklenir (kaba tahmin, VARSAYIM; iş, `uretim.md`
 §5'teki gizlilik kurallarıyla planlanır ve partilerle üst üste yürüyebilir). İkinci aşama ilk
 yayından sonra başlar ve ≈ 7–11 hafta sürer (Kapı 9 ile motor tasarımı üst üste yürür; kaba tahmin, VARSAYIM).
@@ -1053,7 +1068,8 @@ yayından sonra başlar ve ≈ 7–11 hafta sürer (Kapı 9 ile motor tasarımı
 çalışınca yayına girer. Modülü önce Ana sayfada yayımlayıp yol durağını sonra açan bir yedek plan yoktur.
 
 **(c) ile ilişki:** yoga, (c)'nin koşulu da değildir, bağımlısı da. (c), senin iş sırandaki yerinde, yoga yayınından
-sonra sonsuz yol planıyla gelir; geldiğinde yoga durağı aynı kalır (§B.5).
+sonra sonsuz yol planıyla gelir; geldiğinde yoga durağı aynı kalır (§B.5). Sonsuz yol planının araştırmasının ne zaman
+başlayacağı karar 7'dedir.
 
 **PLAN.v2 §G'nin durumu:** G1 → (b), PLAN.v2'nin kendi önerisiyle ("pilotta (a), 10 ders tamamlanırken (b)"; ilk yayın
 on dersin tamamlandığı yayındır; §D.5). G2 → hepsi pakette (§C.2, karar 6). G3 → oynatıcı hep karanlık, kütüphane
@@ -1074,7 +1090,8 @@ listesinde olmayanlar bu önerilerle uygulanır; itiraz edilirse değişir.
   (iki seste `a.durus`, `k.yan`; Hakan'da `c2.yer`) Scribe ile harfi harfine eşleşmedi, farkları yazım farkı
   (report.md:94, :105, :115-125, :151). Pilot bu planın mikro parça eşiğini de geçmiyor; Neslihan'ın iki kesimi kulak
   onayı bekliyor (§1, "Elde olan").
-- **İnsan inceleyici henüz yok** (PLAN.v2 G10). Pilot metni, insan editör onayı beklerken seslendirildi.
+- **İnsan inceleyici henüz yok** (PLAN.v2 G10). Pilot metni, insan editör onayı beklerken seslendirildi. Bulunamayan
+  rol için yedek karar 2'dedir; yedek, insan onayının yerini tam tutmaz.
 - **Cihazda hiçbir şey denenmedi.** Swift bu ortamda derlenmiyor; AAC burada üretilemiyor; kilitli ekranda 15–20 dk
   çalma, rota değişimi, medya hizmetlerinin sıfırlanması, AVAudioPlayer'ın konuma oturma kesinliği ve Bluetooth
   gecikmesi doğrulanmadı.
@@ -1255,3 +1272,17 @@ ek sayısı yine beş.
   (30 günde 22, 90 günde 70 yoga günü).
 - `lib/today.test.js`'teki birebir durak listeleri (:38, :52, :68, :77) test ortamında yoga durak üretmediği için
   değişmez; yoga testleri `isIOSApp`'i taklit eder (§B.5).
+
+### Sahibe gönderilmeden önce son okuma (2026-09-29, orkestratör)
+
+Benzetimler ve hesaplar yeniden koşuldu, sonuçlar belgedekiyle aynı çıktı: `v3fix2/sim_bugun_v4.mjs 10 30 - --gorev`
+(ilk 14 gün §1'deki liste; ortalama 17,9 dk; 20 dk hiç aşılmadı; yoga yüzünden düşen durak 0), aynı betik 19.00 ve
+90 günle (76 yoga günü, 10 tam ders), 3 dk göz bütçesiyle (24 yoga günü, ortalama 14,9) ve Hızlı Bakış oynayan
+kullanıcıyla (72 yoga günü); `v3fix2/esdeger_v4.mjs` (20.000 bağlam, fark 0); `v3calc/kredi.py` (≈ 369–527 ve
+≈ 405–575 bin; 20 dk müziğiyle ≈ 581 bin).
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| O1 | İnceleyici bulunamazsa ne olacağı yazılı değildi; her metin insan onayını beklediği için yoga süresiz bekleyebilirdi. Takvim de "inceleyicilerin bulunması dahil değil" diyordu | Karar 2'ye rol rol yedek eklendi (iki bağımsız model incelemesi ve sahibin kulağı; psikolog yerine karar 5.3; panel yerine sahibin kör dinlemesi). §E.1, §E.4, §E.7 (1) ve (2), §F Kapı 9 ve takvim, §G buna göre yazıldı |
+| O2 | Yoga ≈ 7–12 hafta sürüyor; sahibin iş sırasına göre sonsuz yol planı bu süre boyunca bekliyordu. Sahibin sıra gerekçesi (yoganın yoldaki yerinin önce belli olması) bu planın onayıyla karşılanıyor | Yeni karar 7 (öneri: araştırma yoga üretimiyle birlikte yürür, kod yoga yayınından sonra); §F "(c) ile ilişki" ve Kapı 1 "yedi karar" |
+| O3 | Belge başı, dosyaların depoya "onaydan sonra taşınacağını" söylüyordu; dosyalar kaybolmasın diye önceden `yoga-pilot/v3/` altına alındı | Belge başı düzeltildi |
