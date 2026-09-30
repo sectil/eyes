@@ -17,14 +17,18 @@
 2. Ses kaynaklarını geri yükle: `render/_kalici/README.md` (müzik A yatakları, ortak katmanlar, Nefona Hoca parçaları).
 3. ElevenLabs araçlarının bu oturumda göründüğünü denetle (ToolSearch "+ElevenLabs creative"). Yoksa sahibe söyle.
 
-## Sıradaki iş (PLAN.v3 §F, B adımının ses kısmı)
-1. `b/ders2/units-v3.json` birimlerini Nefona Hoca ile üret, seç (SPEC.v3), Scribe ile doğrula.
-2. 20 dk için ek müzik: ≈ 600 sn ElevenLabs Music (Derin evresi ve imge katmanı yetmiyor; C3 zıtlık dokusu yok).
-   Tahmin ≈ 12,6 bin kredi (plan ≤ 6 bin diyordu; fark toplam tavandaki paydan düşer). Deftere önce yaz.
-3. Ders 2'nin 5, 15 ve 20 dk karışımları; SPEC.v3 ölçütleri; kulak listesi.
-4. Kodek testi: `b/mac/kodek_testi.sh` sahibin Mac'inde (afconvert); sahip kör dinler (AAC 64 mı 96 mı).
-5. Tasarım Artifact'i (ekranlar + Ders 2'nin üç sürümü tarayıcıda) → **Kapı 3** sahibe.
-6. Kapı 3'ten sonra C adımı (kod). Uygulama çalışırken ElevenLabs'e çağrı yapmaz; bütün sesler pakette.
+## Sıradaki iş: İLK BÖLÜMÜN SESLERİ (sahip, 2026-09-30; SAHIP_ISTEKLERI madde 9–10)
+İlk bölüm = Ders 1, 2, 3, 5. Uygulama kodu (C adımı) BAŞKA bir oturumda yazılıyor: bu oturum `app/` klasörüne
+DOKUNMAZ; yalnız `yoga-pilot/` altına yazar ve her partiden sonra kaydeder (git pull --rebase, sonra push).
+1. Ders 2: `b/ders2/units-v3.json` birimlerini Nefona Hoca ile üret, seç (SPEC.v3), Scribe ile doğrula; 20 dk için
+   ≈ 600 sn ek müzik A (≈ 12,6 bin kredi). 5, 15 ve 20 dk karışımları + timeline.json; kulak listesi.
+2. Ders 1, 3, 5: `b/ders{1,3,5}/*.lesson.json` birimlerini üret, seç, doğrula; müzik A ailesiyle karışımlar:
+   Ders 1 ve 5'te 3, 5, 15 dk; Ders 3'te 5 ve 15 dk (+ uyku sonu müzik kuyruğu). Her dersin kendi müzik teması
+   (PLAN.v2 §A.2.1) için ElevenLabs Music; deftere önce yaz; tavan parti başına 195 bin.
+3. Çıktı adları: `render/out/ilk-bolum/ders<N>-<dk>.mp3` ve `.timeline.json` (Ders 2 15 dk bugünkü
+   `render/out/ders2-15dk-hoc-A.mp3` ile aynı yapı). Uygulamaya kopyalama kod oturumunun işi.
+4. Her ders bittiğinde sahibe dosyaları gönder (kulak onayı) ve kulak listesini ekle.
+5. Kodek testi: `b/mac/kodek_testi.sh` sahibin Mac'inde; sonuç gelene kadar dosyalar MP3.
 
 ## Plan belgelerine işlenmesi bekleyen notlar (düzeltici raporundan)
 PLAN.v2 §B.5, §A.2.2 (23:30), §E.6 #5; PLAN.v3 §D.3 ve Ders 3'ün 45 sn pencere kuralı: ayrıntı `b/INCELEME.md`.
