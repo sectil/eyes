@@ -17,3 +17,16 @@ seçeneği C'de yok; en yakın ilçe listenin başında önerilmeli.
 
 Yeni metin adayları (sahip onayına): "Hangi ilçedesin?", "İlçe ara", "Yalnız İzmir", "Konumuna en yakın ilçe merkezi
 bu.", "Konum" (sayfa başlığı).
+
+## Tur 2 (2026-10-01)
+
+| Ekran | Etkilenen |
+|---|---|
+| G · "Gaziemir'de misin?" (ölü boşluk azaldı, neden satırı, uzun ilçe adı) | **4/5 · geçti** (`G-tur2/`) |
+| R · weather rızası, uygulamanın mevcut rıza sayfası düzeninde | 0/5 |
+
+R iki turda geçmedi (1/5, 0/5); aynı yol üçüncü kez denenmez. Beşinin ortak şikâyeti: onay kutusu ve "İzin ver" ilk
+ekranın altında; dört gri bilgi kutusu "sözleşme" gibi; pasif düğme soluk. Bu, mevcut rıza düzeninin (Sağlık rızası da
+böyle) sorunu. Sahibe soru: katmanlı rıza (kısa özet + kutu + düğme ilk ekranda, dört bölüm açılır ayrıntı; metin harfi
+harfine aynı). Metin notu: "90 günlük günlük hava özeti" tekrarı → "son 90 günün günlük hava özeti" önerisi (onaylı metin
+değişikliği, sahip onayı ister). G değerlendirici notu: ekranın üst üçte biri hâlâ boş gradyan (NIT).
