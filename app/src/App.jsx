@@ -52,8 +52,8 @@ import { RELEASES, unseenReleases, latestRelease } from './lib/releases.js'
 import ProfileSetup from './screens/ProfileSetup.jsx'
 import { signedIn, pullProfile, pushProfile, mergeProfile, signOut, deleteAccount, friendlyError } from './lib/account.js'
 import DistanceHud from './screens/DistanceHud.jsx'
-import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics, haptic, shareTextFile, healthAvailable, requestHealthAccess, readHealth, walkGuardLog, setWalkGuards, lessonJournalClear } from './lib/native.js'
-import { reconcileLessonJournal } from './modules/yoga/journal.js'
+import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics, haptic, shareTextFile, healthAvailable, requestHealthAccess, readHealth, walkGuardLog, setWalkGuards } from './lib/native.js'
+import { reconcileLessonJournal, resetLessonData } from './modules/yoga/journal.js'
 import { summarizeHealth } from './lib/health.js'
 import { fileStamp } from './lib/exportData.js'
 import { resolveAutoCalibration, estimateCalibration } from './lib/screenScale.js'
@@ -1065,8 +1065,9 @@ export default function App() {
           cancelOwn()
           cancelAlarm()
           walkGuardLog().catch(() => {})
-          // Yoga: yerel oynatıcının ders kaydı (UserDefaults) localStorage'da değil; o da silinir (modul.md §6.4)
-          lessonJournalClear().catch(() => {})
+          // Yoga (modul.md §6.4): süren ders durur ve bellekteki oturumu unutulur (silmeden önceki önce puanı ders bitince
+          // yeniden yazılmasın); yerel oynatıcının ders kaydı (UserDefaults) localStorage'da değil, o da silinir
+          resetLessonData().catch(() => {})
           for (const k of registry.resetKeys()) {
             try {
               localStorage.removeItem(k)

@@ -3,8 +3,9 @@
 import { describe, it, expect, vi } from 'vitest'
 import {
   makeYogaRecord, isCompleted, afterPatch, recordWriter, rating, isYoga, isYogaDone, minutesOf, dayCount,
-  MIN_SAVE_SEC, COMPLETE_SHARE,
+  MIN_SAVE_SEC, COMPLETE_SHARE, recordFromJournal, journalEndedAt,
 } from './yogaRecord.js'
+import { LESSONS } from './yogaLessons.js'
 
 const base = { lesson: 2, planned: 900, startedAt: '2026-10-01T09:00:00.000Z', endedAt: '2026-10-01T09:15:00.000Z' }
 
@@ -40,6 +41,27 @@ describe('kayıt kurma', () => {
     expect(r).toMatchObject({ before: null, after: null, delta: null, musicTail: 10, seconds: 900, completed: true })
     expect('scene' in r).toBe(false)
     expect('musicTail' in makeYogaRecord({ ...base, seconds: 100 })).toBe(false)
+  })
+  it('Uykuya Geçiş, kuyruk bilinmiyorsa: kuyruk dosyası yoksa 0 (modul.md §6.1: 0 | 5 | 10 | 20; null değil), varsa null', () => {
+    // Bulgu (inceleme): yerel kayıttan yazılan uyku dersi kaydında musicTail null oluyordu; JS yolunda aynı ders 0 yazıyor
+    expect(LESSONS[3].musicTailFile).toBeNull()
+    expect(makeYogaRecord({ lesson: 3, planned: 900, seconds: 600 }).musicTail).toBe(0)
+    const j = { file: LESSONS[3].versions[15].file, prelude: false, finished: true, listened: 880, maxTime: 900, startedAt: 1790000000, updatedAt: 1790000900 }
+    expect(recordFromJournal(j).musicTail).toBe(0)
+    const saved = LESSONS[3].musicTailFile
+    try {
+      LESSONS[3].musicTailFile = 'yoga/ders3-kuyruk.mp3'
+      expect(makeYogaRecord({ lesson: 3, planned: 900, seconds: 600 }).musicTail).toBeNull()
+      expect(makeYogaRecord({ lesson: 3, planned: 900, seconds: 600, musicTail: 20 }).musicTail).toBe(20)
+    } finally {
+      LESSONS[3].musicTailFile = saved
+    }
+  })
+  it('yerel kaydın bitiş anı: endedAt, yoksa duraklatma anı, yoksa son güncelleme', () => {
+    expect(journalEndedAt({ endedAt: 100, pausedAt: 50, updatedAt: 200 }).getTime()).toBe(100000)
+    expect(journalEndedAt({ pausedAt: 50, updatedAt: 200 }).getTime()).toBe(50000)
+    expect(journalEndedAt({ updatedAt: 200 }).getTime()).toBe(200000)
+    expect(journalEndedAt({})).toBeNull()
   })
   it('şema alanları (modul.md §6.1)', () => {
     const r = makeYogaRecord({ ...base, seconds: 874, reachedClosing: true, voice: 'hoc', bg: 'music', scene: 'orman', planVersion: 'p', contentHash: 'h', hard: 'much' })

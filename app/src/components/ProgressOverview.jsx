@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { fmtSteps } from '../lib/health.js'
 import { ChevronRight, TriangleAlert, OctagonAlert, ArrowLeft } from 'lucide-react'
-import { domainSummary, DOMAIN_LABEL, effectWeeks } from '../lib/progress.js'
+import { domainSummary, DOMAIN_LABEL, effectWeeks, FEEL_ONLY_MODULES, feelOnlyText } from '../lib/progress.js'
 import { growthMap, calendarDays, WINDOW_DAYS } from '../lib/dataHub.js'
 import { dayKey } from '../lib/calendar.js'
 import { loadHubHabits, hubHabitsKey } from '../lib/alarmLog.js'
@@ -34,15 +34,13 @@ const signed = (v, d = 1) => (Number.isFinite(v) ? `${v > 0 ? '+' : v < 0 ? '−
 
 // Yoga (modul.md §7; PLAN.v3 §D.5): ders öncesi → sonrası puanı ve ertesi sabahın uyku puanı "nasıl hissettin"
 // gidişatıdır, etki kanıtı değil. Etiket iyileşme ya da kötüleşme demez, puanın yönünü söyler ("odak gelişti" denmez);
-// ton yine iyi yön/kötü yön.
-const FEEL_ONLY = new Set(['yoga'])
+// ton yine iyi yön/kötü yön. Metin tek yerden (lib/progress.js feelOnlyText): PDF raporu da aynısını yazar.
+const FEEL_ONLY = FEEL_ONLY_MODULES
 
 // Etiket: metin + ton. Metrik (better/worse/noise/unsure/first), etki (sig), göz (alert/phase)
 export function metricStatus(c) {
-  if (FEEL_ONLY.has(c?.module) && (c.status === 'better' || c.status === 'worse')) {
-    const rose = (c.status === 'better') === (c.better !== 'down')
-    return { text: rose ? 'belirgin artış' : 'belirgin düşüş', tone: c.status === 'better' ? 'ok' : 'warn' }
-  }
+  const feel = feelOnlyText(c)
+  if (feel) return { text: feel, tone: c.status === 'better' ? 'ok' : 'warn' }
   switch (c?.status) {
     case 'better': return { text: 'iyileşiyor', tone: 'ok' }
     case 'worse': return { text: 'geriliyor', tone: 'warn' }

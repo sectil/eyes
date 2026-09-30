@@ -70,7 +70,9 @@ export function makeYogaRecord({
     contentHash,
   }
   if (scene) rec.scene = scene
-  if (L.daypart === 'night') rec.musicTail = Number.isFinite(musicTail) ? musicTail : null
+  // Uyku dersi: çalan müzik kuyruğu (dk; modul.md §6.1: 0 | 5 | 10 | 20). Kuyruk dosyası yoksa kuyruk çalamaz: 0 (yerel
+  // kayıttan ya da yeniden bağlanan dersten yazılan kayıt da JS yolundaki gibi 0 yazar). Dosya varken bilinmiyorsa null.
+  if (L.daypart === 'night') rec.musicTail = Number.isFinite(musicTail) ? musicTail : L.musicTailFile ? null : 0
   return rec
 }
 
@@ -118,10 +120,11 @@ export function recordWriter(store) {
 
 // ---- Yerel kayıt (AlarmPlugin LessonPlayer journal; lib/native.js lessonJournal) ----
 // Uygulama ders sırasında kapanırsa ya da ekran dersin sonunu görmezse kayıt yerel kayıttan yazılır (modul.md §4, §6.4;
-// PLAN.v3 §D.3). Yerel kayıt: { id?, file, title, state, finished, prelude, startedAt, updatedAt, endedAt?, listened, time,
-// maxTime, duration }; zamanlar Unix saniyesi. Kaydın tarihi dersin gerçek bitiş anıdır (endedAt, yoksa updatedAt).
+// PLAN.v3 §D.3). Yerel kayıt: { id?, file, title, state, finished, prelude, startedAt, updatedAt, endedAt?, pausedAt?,
+// listened, time, maxTime, duration }; zamanlar Unix saniyesi. Kaydın tarihi dinlemenin gerçekten bittiği andır: endedAt
+// (duraklatılmış ders kapanınca duraklatma anı), yoksa duraklatılmış dersin duraklatma anı, yoksa updatedAt.
 const unixDate = (sec) => (Number.isFinite(sec) && sec > 0 ? new Date(sec * 1000) : null)
-export const journalEndedAt = (j) => unixDate(j?.endedAt) ?? unixDate(j?.updatedAt)
+export const journalEndedAt = (j) => unixDate(j?.endedAt) ?? unixDate(j?.pausedAt) ?? unixDate(j?.updatedAt)
 
 // Yerel kayıttan ders kaydı ya da null (tanınmayan dosya, 30 sn altı, giriş dosyası çalarken kapanmış). closeAt: çizelgeden
 // kapanışın başı (bilinmiyorsa null: kapanışa ancak dosya sonuna kadar çaldıysa ulaşılmış sayılır). musicTail: uyku

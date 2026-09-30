@@ -65,9 +65,12 @@ export default {
     describe(s, { seconds } = {}) {
       const L = LESSONS[s?.lesson]
       const rated = Number.isFinite(s?.before) && Number.isFinite(s?.after) ? `${L?.measure ?? 'puan'} ${s.before}→${s.after}` : null
+      // "yarıda kaldı" yalnız kapanışa ulaşmamış derste: "Kapanışa geç" ile erken bitirilen ders ekranda "Ders bitti"
+      // olarak kapanır; geçmişte, CSV'de ve PDF'te ona "yarıda kaldı" denmez (tamamlanma sayısına yine girmez)
+      const halfway = !s?.completed && !s?.reachedClosing
       return {
         title: `Yoga · ${L?.title ?? ''}`.trim(),
-        detail: join([rated, s?.completed ? null : 'yarıda kaldı', durationPart(seconds, false)]),
+        detail: join([rated, halfway ? 'yarıda kaldı' : null, durationPart(seconds, false)]),
       }
     },
     // Rekor kutusu "Yoga · pratik yapılan gün" (modul.md §7) bu bölümde yok: sessions.best tanımlamak lib/stats.js

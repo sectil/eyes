@@ -1,6 +1,7 @@
 // Yoga ekran metinleri: sağlık iddiası yok, güvenlik metinleri modul.md §2.2, §2.7, §2.8 ve §10.3'teki biçimde.
 import { describe, it, expect } from 'vitest'
 import { YT, capFirst, listTr } from './text.js'
+import { LESSONS } from '../../lib/yogaLessons.js'
 
 const strings = (o) => (typeof o === 'string' ? [o] : Array.isArray(o) ? o.flatMap(strings) : o && typeof o === 'object' ? Object.values(o).flatMap(strings) : [])
 
@@ -39,6 +40,13 @@ describe('yoga metinleri', () => {
   it('akşam satırı dersin adını söyler; tek saat eşiği', () => {
     expect(YT.detail.evening).toBe('Uyumadan önce dinliyorsan Uykuya Geçiş daha uygun olabilir.')
     expect(YT.detail.added(15, 'imgeleme')).toBe('15 dakikada imgeleme eklendi')
+  })
+  it('Ders 4 bitiş satırının öznesi var (PLAN.v3 §B.2 kural 11)', () => {
+    expect(YT.done.lesson4).toBe('Zor anlar sık sık geliyorsa bir uzmanla konuşmak iyi olur. Acil durumda 112.')
+  })
+  it('uyku dersinin durdurma ekranı uyandırmaz: dersin onaylı gece satırı aynen, "Gözlerini aç" yok (§10.1, §10.2)', () => {
+    expect(LESSONS[3].opening).toContain(YT.stopped.night)
+    expect(YT.stopped.night).not.toMatch(/Gözlerini aç|etrafına bak/)
   })
   it('Türkçe büyük harf', () => {
     expect(capFirst('işlem')).toBe('İşlem')

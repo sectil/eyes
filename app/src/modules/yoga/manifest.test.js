@@ -55,7 +55,12 @@ describe('sözleşme', () => {
   it('oturum geçmişi satırı; rekor kutusu yok (lib/stats.js summary().bests değişmez)', () => {
     expect(yoga.sessions.describe(rec(), { seconds: 874 })).toMatchObject({ title: 'Yoga · Derin Dinlenme' })
     expect(yoga.sessions.describe(rec(), { seconds: 874 }).detail).toMatch(/^beden gerginliği 6→3 · /)
-    expect(yoga.sessions.describe(rec({ completed: false, before: null }), { seconds: 120 }).detail).toMatch(/^yarıda kaldı · /)
+    expect(yoga.sessions.describe(rec({ completed: false, reachedClosing: false, before: null }), { seconds: 120 }).detail).toMatch(/^yarıda kaldı · /)
+    // "Kapanışa geç" ile erken bitirilen ders (kapanışa ulaştı, %60'ı doldurmadı): ekranda "Ders bitti"; geçmişte
+    // "yarıda kaldı" denmez, tamamlanan sayısına da girmez
+    const quick = rec({ completed: false, reachedClosing: true, quickClose: true, before: null, seconds: 330 })
+    expect(yoga.sessions.describe(quick, { seconds: 330 }).detail).not.toContain('yarıda kaldı')
+    expect(yoga.stats([quick], NOW)[1].value).toMatch(/^0\sders$/)
     expect(yoga.sessions.best).toBeUndefined()
     expect(yoga.sessions.bestLabel).toBeUndefined()
   })

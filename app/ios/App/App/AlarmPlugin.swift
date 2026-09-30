@@ -546,16 +546,18 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
 ///   giriş dosyası dinlenen süreye sayılmaz (status.prelude).
 /// - tail { file, seconds, fade }: uyku dersinde dosya bitince müzik kuyruğu: döngü, 2 sn'de açılır, son `fade` sn'de
 ///   kısılır, sonra tamamen durur; uyandırma yok; dinlenen süreye sayılmaz.
-/// - Gözlemciler: kesinti (arama, Siri: duraklar; iOS "sürdür" derse klip başından sürer), rota (kulaklık ya da AirPods
-///   çıkınca hemen duraklar; müzik kuyruğunda müzik biter), medya hizmetlerinin sıfırlanması (oynatıcı aynı konumdan
-///   yeniden kurulur ve duraklatılmış kalır: Apple, kişi başlatmadan çalmanın yeniden başlatılmamasını söyler).
+/// - Gözlemciler: kesinti (arama, Siri: duraklar; iOS "sürdür" derse klip başından sürer; müzik kuyruğunda müzik
+///   biter), rota (kulaklık ya da AirPods çıkınca hemen duraklar; müzik kuyruğunda müzik biter), medya hizmetlerinin
+///   sıfırlanması (oynatıcı aynı konumdan yeniden kurulur ve duraklatılmış kalır: Apple, kişi başlatmadan çalmanın
+///   yeniden başlatılmamasını söyler). Okuma testi kayda başlarken çalan ders hemen duraklar (yieldToRecording).
 /// - Now Playing: ders adı, bölüm adı (sections: [{ at, name }]), geçen ve toplam süre. Uzaktan komut yalnız oynat,
-///   duraklat ve oynat/duraklat (kulaklık düğmesi).
+///   duraklat ve oynat/duraklat (kulaklık düğmesi); öteki komutlar ders süresince kapatılır (isEnabled = false).
+/// - Duraklatılmış ders kapanınca (X, uyku sesi) bitiş anı duraklatma anıdır (pausedAt): kayıt dinlenen güne yazılır.
 /// - Dinlenen saniye UserDefaults'a da yazılır (journalKey; çalarken 2 sn'de bir, her durum değişiminde): uygulama
 ///   arka planda kapanırsa JS açılışta lessonJournal() ile kaydı uzlaştırır; "Tüm verileri sil" lessonJournalClear().
-/// status() → { state, playing, time, duration?, route, listened, file?, reason?, prelude?, ended?, tailLeft? }
+/// status() → { state, playing, time, duration?, route, listened, file?, reason?, pausedAt?, prelude?, ended?, tailLeft? }
 ///   state: idle | playing | paused | stopping | tail | finished; reason (duraklatılmışken): user | remote |
-///   interruption | route | reset | stalled | error.
+///   interruption | route | reset | stalled | error | recording; pausedAt (duraklatılmışken): duraklatma anı, Unix sn.
 /// Bu ortamda derlenmedi ve cihazda denenmedi. VARSAYIM: AVAudioPlayer'ın konuma oturma kesinliği; arka planda çalan
 /// uygulamada ana kuyruk zamanlayıcısının sürmesi; uzaktan komutun ana iş parçacığında gelmesi (gelmezse ana kuyruğa aktarılır).
 final class LessonPlayer {
@@ -597,6 +599,7 @@ final class LessonPlayer {
     private var listened: Double = 0 // gerçekten çalan süre (sn); duraklama, giriş ve müzik kuyruğu hariç
     private var startedAt = Date()
     private var endedAt: Date?
+    private var pausedAt: Date? // duraklatma anı (dinlemenin bittiği an): duraklatılmış ders kapanınca bitiş anı bu olur
     private var lastTick = Date()
     private var lastSave = Date.distantPast
     private var sectionName: String?
@@ -610,6 +613,7 @@ final class LessonPlayer {
     private var timer: DispatchSourceTimer?
     private var observers: [NSObjectProtocol] = []
     private var remoteTargets: [(MPRemoteCommand, Any)] = []
+    private var disabledCommands: [(MPRemoteCommand, Bool)] = [] // ders süresince kapatılan komutlar ve eski değerleri
 
     private init() {}
 
@@ -739,6 +743,7 @@ final class LessonPlayer {
         listened = 0
         startedAt = Date()
         endedAt = nil
+        pausedAt = nil
         lastTick = Date()
         lastSave = .distantPast
         sectionName = section(at: lastTime)
@@ -759,6 +764,7 @@ final class LessonPlayer {
         }
         state = .paused
         reason = r
+        pausedAt = Date()
         updateNowPlaying()
         save(force: true)
     }
@@ -789,6 +795,7 @@ final class LessonPlayer {
         p.setVolume(1, fadeDuration: Self.fadeSeconds)
         state = .playing
         reason = nil
+        pausedAt = nil
         lastTime = p.currentTime
         lastTick = Date()
         sectionName = section(at: lastTime)
@@ -857,7 +864,8 @@ final class LessonPlayer {
             reason = nil
         case .paused:
             if let p = main { lastTime = p.currentTime }
-            endedAt = Date()
+            // Dinleme duraklatınca bitti: saatler sonra kapatılsa da (X, uyku sesi) kayıt dinlenen güne yazılır
+            endedAt = pausedAt ?? Date()
             closeSession(finished: false)
         case .playing, .tail:
             outgoing?.setVolume(0, fadeDuration: Self.crossSeconds) // geçiş sürüyorsa o da söner; kapanışta durur
@@ -878,10 +886,36 @@ final class LessonPlayer {
         }
     }
 
+    /// SpeechPlugin.start (okuma testi) için, kayıt oturumu açılmadan önce: çalan ders hemen duraklar (kesintideki gibi;
+    /// ders sesi mikrofona girmesin ve kayıt oturumunda hoparlörden çalmasın), müzik kuyruğu biter, sönmekte olan ders
+    /// kapanır. Duraklatılmış ders olduğu gibi kalır. Ana kuyrukta çalışır (SpeechPlugin köprü kuyruğundan çağırır).
+    static func yieldToRecording() {
+        if Thread.isMainThread {
+            shared.yieldToRecordingOnMain()
+        } else {
+            DispatchQueue.main.sync { shared.yieldToRecordingOnMain() }
+        }
+    }
+
+    private func yieldToRecordingOnMain() {
+        if ranOut { fileEnded() } // dosya zaten bitmişti (tik görmeden): önce bitiş olarak işlenir
+        switch state {
+        case .playing:
+            halt(reason: "recording")
+        case .tail:
+            closeSession(finished: true)
+        case .stopping:
+            closeSession(finished: false)
+        default:
+            break
+        }
+    }
+
     /// sleepStart için: ders sesi çalıyor mu (ders ya da müzik kuyruğu)? Duraklatılmış ders sessizdir ve kişi uyku sesini
-    /// kendisi istemiştir: ders kapatılır (bitiş anı ve dinlenen süre yerel kayda yazılır; JS kaydı oynatıcıya dönünce ya
-    /// da açılışta yazar) ve uyku sesine yer açılır. Öğleden kalma duraklatılmış bir ders gece uyku sesini engellemez;
-    /// "Önce çalan dersi durdur." yalnız gerçekten çalan derste görünür. X ile sönmekte olan ders beklemeden kapanır.
+    /// kendisi istemiştir: ders kapatılır (bitiş anı olarak duraklatma anı ve dinlenen süre yerel kayda yazılır; JS kaydı
+    /// oynatıcıya dönünce ya da açılışta yazar) ve uyku sesine yer açılır. Öğleden kalma duraklatılmış bir ders gece uyku
+    /// sesini engellemez; "Önce çalan dersi durdur." yalnız gerçekten çalan derste görünür. X ile sönmekte olan ders
+    /// beklemeden kapanır.
     func holdsAudio() -> Bool {
         switch state {
         case .stopping:
@@ -921,6 +955,7 @@ final class LessonPlayer {
         ]
         if let f = file, state != .idle { out["file"] = f }
         if let r = reason, state == .paused { out["reason"] = r }
+        if let p = pausedAt, state == .paused { out["pausedAt"] = p.timeIntervalSince1970 }
         switch state {
         case .idle:
             out["time"] = 0
@@ -984,8 +1019,9 @@ final class LessonPlayer {
         outgoingStopAt = nil
     }
 
-    /// Hemen duraklat (rota, kesinti, sistem durdurdu): sönme yok.
+    /// Hemen duraklat (rota, kesinti, sistem durdurdu, kayıt başlıyor): sönme yok.
     private func halt(reason r: String) {
+        if state != .paused || pausedAt == nil { pausedAt = Date() }
         finishCrossfade()
         pauseAt = nil
         if let p = main {
@@ -1166,6 +1202,10 @@ final class LessonPlayer {
                 }
             case .stopping:
                 closeSession(finished: false)
+            case .tail:
+                // Müzik kuyruğu: sistem sesi susturdu. Kuyruk "tamamen durur" (modul.md §4): kapanır; kilit ekranında
+                // çalıyormuş gibi görünen bir Now Playing ya da açık kalan oturum bırakılmaz. Ders zaten bitmişti.
+                closeSession(finished: true)
             default:
                 break
             }
@@ -1176,9 +1216,6 @@ final class LessonPlayer {
         guard AVAudioSession.InterruptionOptions(rawValue: optRaw).contains(.shouldResume) else { return }
         if state == .paused && reason == "interruption" {
             try? resume(at: nil)
-        } else if state == .tail, let tp = tailPlayer, let end = tailEndAt, Date() < end {
-            try? AVAudioSession.sharedInstance().setActive(true)
-            _ = tp.play()
         }
     }
 
@@ -1213,6 +1250,7 @@ final class LessonPlayer {
             outgoingStopAt = nil
             pauseAt = nil
             main = nil
+            if state == .playing || pausedAt == nil { pausedAt = Date() }
             _ = try? AppAudioSession.shared.beginLesson()
             if let u = url, let p = try? Self.makePlayer(u) {
                 p.currentTime = Self.clamp(lastTime, p.duration)
@@ -1242,11 +1280,22 @@ final class LessonPlayer {
         let pauseToken = c.pauseCommand.addTarget { [weak self] _ in self?.remote(play: false) ?? .noActionableNowPlayingItem }
         let toggleToken = c.togglePlayPauseCommand.addTarget { [weak self] _ in self?.remote(play: nil) ?? .noActionableNowPlayingItem }
         remoteTargets = [(c.playCommand, playToken), (c.pauseCommand, pauseToken), (c.togglePlayPauseCommand, toggleToken)]
+        // Kilit ekranında yalnız oynat/duraklat (modul.md §2.6: başka düğme eklenmez). Apple (MPRemoteCommand): istenmeyen
+        // komut açıkça kapatılmazsa (isEnabled varsayılanı true) sistem onun arayüzünü gösterebilir. Ders bitince
+        // removeRemote eski değerlere döndürür.
+        let unwanted: [MPRemoteCommand] = [
+            c.nextTrackCommand, c.previousTrackCommand, c.skipForwardCommand, c.skipBackwardCommand,
+            c.seekForwardCommand, c.seekBackwardCommand, c.changePlaybackPositionCommand,
+        ]
+        disabledCommands = unwanted.map { ($0, $0.isEnabled) }
+        for command in unwanted { command.isEnabled = false }
     }
 
     private func removeRemote() {
         for (command, target) in remoteTargets { command.removeTarget(target) }
         remoteTargets = []
+        for (command, was) in disabledCommands { command.isEnabled = was }
+        disabledCommands = []
     }
 
     /// Kilit ekranı, Denetim Merkezi, kulaklık düğmesi. play nil: oynat/duraklat. Müzik kuyruğunda duraklat = sustur.
@@ -1339,6 +1388,7 @@ final class LessonPlayer {
         ]
         if let id { j["id"] = id }
         if let e = endedAt { j["endedAt"] = e.timeIntervalSince1970 }
+        if let p = pausedAt, state == .paused { j["pausedAt"] = p.timeIntervalSince1970 }
         UserDefaults.standard.set(j, forKey: Self.journalKey)
     }
 }

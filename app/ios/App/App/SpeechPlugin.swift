@@ -61,6 +61,9 @@ public class SpeechPlugin: CAPPlugin, CAPBridgedPlugin {
         }
         self.recognizer = recognizer
         do {
+            // Çalan yoga dersi kayda girmesin ve kayıt oturumunda hoparlörden çalmasın: ders kesintideki gibi hemen
+            // duraklar ("Sürdür" ile klibin başından sürer), müzik kuyruğu biter (AlarmPlugin.swift LessonPlayer).
+            LessonPlayer.yieldToRecording()
             // Kayıt süresince Feedback.setAudioMode tercihi uygulanmaz; stopInternal → endRecording geri döner.
             AppAudioSession.shared.beginRecording()
             let session = AVAudioSession.sharedInstance()

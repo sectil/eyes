@@ -94,11 +94,13 @@ export function seekTarget(tl, sections = [], t) {
   const sec = sections.find((s) => Math.abs(t - s.at) <= snap)
   return sec ? sec.at : seekPoint(tl, nearestClipStart(tl, t))
 }
-// Sarma kapanışı kısaltamaz (modul.md §10.1 "kesilmeyen kapanış"; PLAN.v3 §D.3): kapanıştan önceden kapanışın içine
-// sarılırsa hedef kapanışın başıdır ("Kapanışa geç" ile aynı nokta). Geri sarma ve kapanışın içinde sarma serbest.
+// Sarma kapanışı kısaltamaz (modul.md §10.1 "kesilmeyen kapanış"; PLAN.v3 §D.3, §D.6): kapanıştan önceden kapanışın
+// içine sarılırsa hedef kapanışın başıdır ("Kapanışa geç" ile aynı nokta). Kapanışın içinden ileri sarılamaz: hedef
+// bulunduğu yerdir (iki sarmayla dışa dönüş atlanamaz). Geri sarma serbest.
 export function guardClosing(target, from, closeAt) {
-  if (!Number.isFinite(closeAt) || !(from < closeAt) || !(target > closeAt)) return target
-  return closeAt
+  if (!Number.isFinite(closeAt) || !(target > closeAt)) return target
+  if (!(from >= closeAt)) return closeAt
+  return target > from ? from : target
 }
 export function sectionAt(sections = [], t) {
   let cur = sections[0]?.id ?? null

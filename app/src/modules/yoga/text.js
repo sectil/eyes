@@ -78,6 +78,8 @@ export const YT = {
   // Durdurma ekranı (modul.md §2.7)
   stopped: {
     text: 'Gözlerini aç, etrafına bak, acele etme. Uzanıyorsan önce yana dön, sonra otur.',
+    // Uyku dersinde (Ders 3) uyandırma yok (§10.1, §10.2): dersin onaylı gece satırı aynen (yogaLessons.js Ders 3 açılışı)
+    night: 'Gece kalkman gerekirse önce yana dön, otur, sonra kalk.',
     voiceReturn: 'Sesli dönüşü dinle',
     ok: 'Tamam',
   },
@@ -106,7 +108,9 @@ export const YT = {
     why: 'Bu dersi neden böyle kurduk',
     next: 'Sıradaki',
     eyesOpen: 'Gözlerin açık kalabilir.',
-    lesson4: 'Sık tekrarlarsa bir uzmanla konuşmak iyi olur. Acil durumda 112.',
+    // PLAN.v3 §B.2 kural 11 (modul.md §2.9'daki "Sık tekrarlarsa…" öznesizdi; tek başına görününce neyin tekrarladığı
+    // anlaşılmıyordu). Son biçim Türkçe editörün ve klinik psikoloğun onayıyla.
+    lesson4: 'Zor anlar sık sık geliyorsa bir uzmanla konuşmak iyi olur. Acil durumda 112.',
     ok: 'Tamam',
   },
 }

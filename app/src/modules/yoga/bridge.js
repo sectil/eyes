@@ -2,7 +2,8 @@
 // Sözleşme: lessonStart({ file, at, title, id?, journal?, sections?, resume?, next?, tail? }), lessonPause(),
 // lessonResume({ at }), lessonSeek({ at }), lessonCrossTo({ file, at }) (2 sn'lik geçiş), lessonStop(),
 // lessonMeta({ file, sections, resume }), lessonStatus() → { time, duration, playing, route, state?, reason?,
-// listened?, file?, prelude? }, lessonJournal() / lessonJournalClear() (yerel kayıt; uzlaştırma: journal.js).
+// listened?, file?, prelude?, pausedAt? (duraklatma anı, Unix sn) }, lessonJournal() / lessonJournalClear() (yerel
+// kayıt; uzlaştırma: journal.js).
 // state alanı yoksa (eski derleme) oynatıcı eski tahmine döner (YogaPlayer.applyStatus).
 // Köprü bu derlemede yoksa (eski iOS derlemesi) çağrı UNAVAILABLE ile reddedilir; ekran "Ses açılamadı" der. Web'de
 // yoga hiç görünmez (manifest home / today).
@@ -49,6 +50,7 @@ export const lesson = {
       listened: Number.isFinite(s?.listened) ? s.listened : null,
       file: str(s?.file),
       prelude: s?.prelude === true,
+      pausedAt: Number.isFinite(s?.pausedAt) && s.pausedAt > 0 ? s.pausedAt : null, // yalnız duraklatılmışken
     }
   },
   // Yerel kayıt ya da null (web, eski derleme, kayıt yok). lib/native.js hata atmaz.
