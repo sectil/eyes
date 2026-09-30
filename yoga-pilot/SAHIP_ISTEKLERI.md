@@ -86,3 +86,14 @@ Sonraki aşamaya (metin + ses + tasarım iş akışı) bu dosya olduğu gibi ver
 18. "şuanda düzgün oalrak alalım ben fark etmedim.. eğer sorun olursa  sonra düzeltme isterim. tamam diyorum" (2026-09-30,
     Ders 1 dosyalarından sonra) → Ders 1 kabul edildi; ilk bölümün dört dersinin sesleri sahip kulağından geçti. Sonradan
     fark edilen sorun düzeltme olarak ele alınır.
+
+## Sahibin 2026-09-30 kararları (5 saniye kapısının 3. turundan sonra, soru kartı)
+19. Güvenlik kartı: "İlk girişte bir kez" → kart yogaya ilk girişte bir kez çıkar (modul.md §2.2 ve bugünkü kod;
+    PLAN.v3 §D.2'deki "ayrıntıdan sonra" sırası bununla değişti). Ders ayrıntısında yalnız "İstediğin an
+    bitirebilirsin." kalır, kart oradan her zaman açılır; derse özel tek uyarı kalır: Uykuya Geçiş'te "Bu dersten hemen
+    sonra araç kullanma." Gerekçe: kapıda ders ayrıntısı 1/5, güvenlik kartı 1/5 (aynı uyarıların tekrarı;
+    `C_5SN_SONUCLARI.md`).
+20. Zorlanma sorusu: "Puanla aynı ekranda, net" → soru ayrı ekran olmaktan çıkar, sonra puanının altına tek satır olarak
+    iner; metni netleşir (ör. "Ders sırasında seni rahatsız eden bir şey oldu mu?"). Yeni metin iki bağımsız dil
+    incelemesinden ve güvenlik okumasından geçer; cevapların anlamı (Hayır · Biraz · Çok · Atla ve "Çok"un sonucu,
+    modul.md §2.8, güvenlik §11.F) değişmez. Gerekçe: kapıda 0/5.
