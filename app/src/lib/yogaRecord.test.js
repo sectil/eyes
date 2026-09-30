@@ -43,16 +43,17 @@ describe('kayıt kurma', () => {
     expect('musicTail' in makeYogaRecord({ ...base, seconds: 100 })).toBe(false)
   })
   it('Uykuya Geçiş, kuyruk bilinmiyorsa: kuyruk dosyası yoksa 0 (modul.md §6.1: 0 | 5 | 10 | 20; null değil), varsa null', () => {
-    // Bulgu (inceleme): yerel kayıttan yazılan uyku dersi kaydında musicTail null oluyordu; JS yolunda aynı ders 0 yazıyor
-    expect(LESSONS[3].musicTailFile).toBeNull()
-    expect(makeYogaRecord({ lesson: 3, planned: 900, seconds: 600 }).musicTail).toBe(0)
+    // Bulgu (inceleme): yerel kayıttan yazılan uyku dersi kaydında musicTail null oluyordu; JS yolunda aynı ders 0 yazıyor.
+    // İlk bölümle kuyruk dosyası pakete girdi (yoga/ders3-kuyruk.mp3): bugün "bilinmiyor" null; dosyasız hâl aşağıda.
+    expect(LESSONS[3].musicTailFile).toBe('yoga/ders3-kuyruk.mp3')
+    expect(makeYogaRecord({ lesson: 3, planned: 900, seconds: 600 }).musicTail).toBeNull()
+    expect(makeYogaRecord({ lesson: 3, planned: 900, seconds: 600, musicTail: 20 }).musicTail).toBe(20)
     const j = { file: LESSONS[3].versions[15].file, prelude: false, finished: true, listened: 880, maxTime: 900, startedAt: 1790000000, updatedAt: 1790000900 }
-    expect(recordFromJournal(j).musicTail).toBe(0)
     const saved = LESSONS[3].musicTailFile
     try {
-      LESSONS[3].musicTailFile = 'yoga/ders3-kuyruk.mp3'
-      expect(makeYogaRecord({ lesson: 3, planned: 900, seconds: 600 }).musicTail).toBeNull()
-      expect(makeYogaRecord({ lesson: 3, planned: 900, seconds: 600, musicTail: 20 }).musicTail).toBe(20)
+      LESSONS[3].musicTailFile = null
+      expect(makeYogaRecord({ lesson: 3, planned: 900, seconds: 600 }).musicTail).toBe(0)
+      expect(recordFromJournal(j).musicTail).toBe(0)
     } finally {
       LESSONS[3].musicTailFile = saved
     }

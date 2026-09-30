@@ -1,106 +1,21 @@
 {
- "schema": "nefona.yoga.timeline/2",
+ "file": "ders2-15dk-hoc-A.mp3",
  "lesson": "ders2-derin-dinlenme",
- "lessonNo": 2,
  "title": "Derin Dinlenme (Yoga Nidra)",
  "minutes": 15,
  "T": 900,
- "file": "ders2-15.mp3",
- "appFile": "yoga-d02-15dk.m4a",
- "audio": {
-  "sha256": "c875dcef4885db9538f58fe348c2992d50342696b5003cc0fad9074d675efc77",
-  "codec": "mp3",
-  "bitrateKbps": 120,
-  "encoding": "ABR 120 kbit/s (lameenc, q=2)",
-  "sampleRate": 44100,
-  "channels": 2,
-  "durationSec": 900.0,
-  "decoderOffsetSamples": 576,
-  "note": "tarayıcı önizlemesi (SPEC.v3 §10); uygulama dosyası AAC-LC m4a Mac'te WAV ana kopyadan kodlanır (§14)"
- },
- "voice": {
-  "id": "hoc",
-  "name": "Nefona Hoca",
-  "voice_id": "Sr5w7dIZaRDglJ2cLaJm"
- },
- "music": {
-  "source": "A",
-  "family": "A/Re",
-  "scene": "orman"
- },
+ "voice": "hoc",
+ "voice_name": "Nefona Hoca",
+ "music": "A",
+ "scene": "orman",
+ "sample_rate": 44100,
+ "channels": 2,
  "plan": {
+  "file": "plan-hoc.json",
   "status": "ok",
   "mode": "pref→max",
-  "f": 0.0825,
-  "checkPlanPass": true,
-  "sel": [
-   "N1",
-   "C1",
-   "C2",
-   "N2",
-   "C4"
-  ],
-  "planner": "pilot/timing.py",
-  "plannerSha256": "58f6c4054c611aeb4d8cbf37083d2e3c836f1440d4d4042edea92854e078f3b9",
-  "lessonSha256": "1b17a89d54d4ef70a246dd371f9ffd328f0233fc92db2fb5d39214f76284209c",
-  "slackMinSec": 120.8
+  "check_plan_pass": true
  },
- "blocks": [
-  {
-   "id": "A",
-   "title": "Varış (tek kapak; isteğe bağlılar süreyle eklenir)",
-   "start": 4.165,
-   "end": 97.457
-  },
-  {
-   "id": "N1",
-   "title": "Niyet, başta (ekranda: sankalpa)",
-   "start": 105.787,
-   "end": 148.995
-  },
-  {
-   "id": "C1",
-   "title": "Beden dolaşımı (sağ → sol → arka → ön → bütün)",
-   "start": 155.618,
-   "end": 338.644
-  },
-  {
-   "id": "C2",
-   "title": "Nefes farkındalığı ve geri sayma",
-   "start": 346.057,
-   "end": 511.723
-  },
-  {
-   "id": "BR.K2",
-   "title": "Köprü: anahtar cümle (2. geçiş), nefes bloğunun hemen ardından (C3 ya da C4 varsa)",
-   "start": 528.053,
-   "end": 531.475
-  },
-  {
-   "id": "BR.orta",
-   "title": "Köprü: çıkış kapısı ve dayanak, imgelemeden hemen önce (C4 olan her sürüm)",
-   "start": 543.64,
-   "end": 557.607
-  },
-  {
-   "id": "C4",
-   "title": "İmgeleme: kıyı ya da orman (tek imge yayı) + sessiz pencere",
-   "start": 570.772,
-   "end": 694.35
-  },
-  {
-   "id": "N2",
-   "title": "Niyet, sonda",
-   "start": 708.515,
-   "end": 739.794
-  },
-  {
-   "id": "K",
-   "title": "Kapanış (tek kapak; isteğe bağlılar süreyle eklenir)",
-   "start": 747.041,
-   "end": 894.752
-  }
- ],
  "speech": [
   {
    "i": 0,
@@ -109,20 +24,8 @@
    "unit": "a.hosgeldin",
    "block": "A",
    "phase": "Varış",
-   "start": 4.165,
-   "end": 5.126,
-   "screenText": "Hoş geldin.",
-   "spokenText": "Hoş geldin.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 4.165,
-   "visualCue": {
-    "visual": "phase:varis"
-   },
-   "visualState": {
-    "phase": "varis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 4.1768,
+   "end": 5.1375,
    "screen_text": "Hoş geldin.",
    "spoken_text": "Hoş geldin.",
    "screen_equals_spoken": true,
@@ -147,18 +50,8 @@
    "unit": "a.hosgeldin",
    "block": "A",
    "phase": "Varış",
-   "start": 5.942,
-   "end": 7.481,
-   "screenText": "Bu dakikalar senin.",
-   "spokenText": "Bu dakikalar senin.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 4.165,
-   "visualCue": null,
-   "visualState": {
-    "phase": "varis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 5.9552,
+   "end": 7.4941,
    "screen_text": "Bu dakikalar senin.",
    "spoken_text": "Bu dakikalar senin.",
    "screen_equals_spoken": true,
@@ -180,18 +73,8 @@
    "unit": "a.acilis",
    "block": "A",
    "phase": "Varış",
-   "start": 9.564,
-   "end": 14.047,
-   "screenText": "Bir şey başarman gerekmiyor; yalnızca dinlenmek var.",
-   "spokenText": "Bir şey başarman gerekmiyor; yalnızca dinlenmek var.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 9.564,
-   "visualCue": null,
-   "visualState": {
-    "phase": "varis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 9.5825,
+   "end": 14.0655,
    "screen_text": "Bir şey başarman gerekmiyor; yalnızca dinlenmek var.",
    "spoken_text": "Bir şey başarman gerekmiyor; yalnızca dinlenmek var.",
    "screen_equals_spoken": true,
@@ -211,18 +94,8 @@
    "unit": "a.konfor",
    "block": "A",
    "phase": "Varış",
-   "start": 19.212,
-   "end": 25.303,
-   "screenText": "Uzanmadan önce üstüne ince bir örtü, dizlerinin altına bir yastık alman iyi olur.",
-   "spokenText": "Uzanmadan önce üstüne ince bir örtü, dizlerinin altına bir yastık alman iyi olur.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 19.212,
-   "visualCue": null,
-   "visualState": {
-    "phase": "varis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 19.2422,
+   "end": 25.3335,
    "screen_text": "Uzanmadan önce üstüne ince bir örtü, dizlerinin altına bir yastık alman iyi olur.",
    "spoken_text": "Uzanmadan önce üstüne ince bir örtü, dizlerinin altına bir yastık alman iyi olur.",
    "screen_equals_spoken": true,
@@ -242,18 +115,8 @@
    "unit": "a.durus",
    "block": "A",
    "phase": "Varış",
-   "start": 37.551,
-   "end": 41.53,
-   "screenText": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
-   "spokenText": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 37.551,
-   "visualCue": null,
-   "visualState": {
-    "phase": "varis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 37.5986,
+   "end": 41.578,
    "screen_text": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
    "spoken_text": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
    "screen_equals_spoken": true,
@@ -275,18 +138,8 @@
    "unit": "a.gozler",
    "block": "A",
    "phase": "Varış",
-   "start": 49.86,
-   "end": 55.128,
-   "screenText": "Gözlerini kapatmak ya da açık tutmak sana kalmış; bakışın serbest.",
-   "spokenText": "Gözlerini kapatmak ya da açık tutmak sana kalmış; bakışın serbest.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 49.86,
-   "visualCue": null,
-   "visualState": {
-    "phase": "varis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 49.9316,
+   "end": 55.1999,
    "screen_text": "Gözlerini kapatmak ya da açık tutmak sana kalmış; bakışın serbest.",
    "spoken_text": "Gözlerini kapatmak ya da açık tutmak sana kalmış; bakışın serbest.",
    "screen_equals_spoken": true,
@@ -306,18 +159,8 @@
    "unit": "a.karar",
    "block": "A",
    "phase": "Varış",
-   "start": 59.376,
-   "end": 62.585,
-   "screenText": "Ne kadar gevşeyeceğine sen karar veriyorsun.",
-   "spokenText": "Ne kadar gevşeyeceğine sen karar veriyorsun.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 59.376,
-   "visualCue": null,
-   "visualState": {
-    "phase": "varis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 59.4651,
+   "end": 62.6735,
    "screen_text": "Ne kadar gevşeyeceğine sen karar veriyorsun.",
    "spoken_text": "Ne kadar gevşeyeceğine sen karar veriyorsun.",
    "screen_equals_spoken": true,
@@ -337,18 +180,8 @@
    "unit": "a.izin",
    "block": "A",
    "phase": "Varış",
-   "start": 69.75,
-   "end": 74.949,
-   "screenText": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
-   "spokenText": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 69.75,
-   "visualCue": null,
-   "visualState": {
-    "phase": "varis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 69.8503,
+   "end": 75.0494,
    "screen_text": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
    "spoken_text": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
    "screen_equals_spoken": true,
@@ -368,18 +201,8 @@
    "unit": "a.kolay",
    "block": "A",
    "phase": "Varış",
-   "start": 81.114,
-   "end": 85.409,
-   "screenText": "Gevşemek her zaman kolay olmaz; bunda yanlış bir şey yok.",
-   "spokenText": "Gevşemek her zaman kolay olmaz; bunda yanlış bir şey yok.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 81.114,
-   "visualCue": null,
-   "visualState": {
-    "phase": "varis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 81.2261,
+   "end": 85.5214,
    "screen_text": "Gevşemek her zaman kolay olmaz; bunda yanlış bir şey yok.",
    "spoken_text": "Gevşemek her zaman kolay olmaz; bunda yanlış bir şey yok.",
    "screen_equals_spoken": true,
@@ -399,18 +222,8 @@
    "unit": "a.agirlik",
    "block": "A",
    "phase": "Varış",
-   "start": 94.574,
-   "end": 97.457,
-   "screenText": "Zemin seni baştan ayağa taşıyor.",
-   "spokenText": "Zemin seni baştan ayağa taşıyor.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 94.574,
-   "visualCue": null,
-   "visualState": {
-    "phase": "varis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 94.6982,
+   "end": 97.5812,
    "screen_text": "Zemin seni baştan ayağa taşıyor.",
    "spoken_text": "Zemin seni baştan ayağa taşıyor.",
    "screen_equals_spoken": true,
@@ -430,20 +243,8 @@
    "unit": "n1.sec",
    "block": "N1",
    "phase": "Derinleşme",
-   "start": 105.787,
-   "end": 108.764,
-   "screenText": "Bugün kendine kısa bir niyet seçiyorsun.",
-   "spokenText": "Bugün kendine kısa bir niyet seçiyorsun.",
-   "voiceGainDb": -1.5,
-   "resumeAt": 105.787,
-   "visualCue": {
-    "visual": "phase:derinlesme"
-   },
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 105.9348,
+   "end": 108.7977,
    "screen_text": "Bugün kendine kısa bir niyet seçiyorsun.",
    "spoken_text": "Bugün kendine kısa bir niyet seçiyorsun.",
    "screen_equals_spoken": true,
@@ -457,7 +258,8 @@
     "dawn": false
    },
    "flags": [
-    "kesim-kulak"
+    "kesim-kulak",
+    "kesim-kuraldisi"
    ]
   },
   {
@@ -467,20 +269,10 @@
    "unit": "n1.sec",
    "block": "N1",
    "phase": "Derinleşme",
-   "start": 109.788,
-   "end": 115.121,
-   "screenText": "Aklına bir şey gelmezse niyetin \"Kendime dinlenmeye izin veriyorum\" olsun.",
-   "spokenText": "Aklına bir şey gelmezse niyetin \"Kendime dinlenmeye izin veriyorum\" olsun.",
-   "voiceGainDb": -1.5,
-   "resumeAt": 105.787,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
-   "screen_text": "Aklına bir şey gelmezse niyetin \"Kendime dinlenmeye izin veriyorum\" olsun.",
-   "spoken_text": "Aklına bir şey gelmezse niyetin \"Kendime dinlenmeye izin veriyorum\" olsun.",
+   "start": 109.8243,
+   "end": 115.2527,
+   "screen_text": "Aklına bir şey gelmezse önerim şu: \"Kendime dinlenmeye izin veriyorum.\"",
+   "spoken_text": "Aklına bir şey gelmezse önerim şu: \"Kendime dinlenmeye izin veriyorum.\"",
    "screen_equals_spoken": true,
    "voice_gain_db": -1.5,
    "visual_cue": null,
@@ -490,7 +282,8 @@
     "dawn": false
    },
    "flags": [
-    "kesim-kulak"
+    "kesim-kulak",
+    "kesim-kuraldisi"
    ]
   },
   {
@@ -500,18 +293,8 @@
    "unit": "n1.soyle",
    "block": "N1",
    "phase": "Derinleşme",
-   "start": 125.533,
-   "end": 128.768,
-   "screenText": "Niyetini içinden üç kez söylemek yeterli.",
-   "spokenText": "Niyetini içinden üç kez söylemek yeterli.",
-   "voiceGainDb": -1.5,
-   "resumeAt": 125.533,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 125.6946,
+   "end": 128.9288,
    "screen_text": "Niyetini içinden üç kez söylemek yeterli.",
    "spoken_text": "Niyetini içinden üç kez söylemek yeterli.",
    "screen_equals_spoken": true,
@@ -531,18 +314,8 @@
    "unit": "n1.birak",
    "block": "N1",
    "phase": "Derinleşme",
-   "start": 142.345,
-   "end": 144.894,
-   "screenText": "Dersin sonunda niyetini hatırlatacağım.",
-   "spokenText": "Dersin sonunda niyetini hatırlatacağım.",
-   "voiceGainDb": -1.5,
-   "resumeAt": 142.345,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 142.5475,
+   "end": 145.0966,
    "screen_text": "Dersin sonunda niyetini hatırlatacağım.",
    "spoken_text": "Dersin sonunda niyetini hatırlatacağım.",
    "screen_equals_spoken": true,
@@ -564,18 +337,8 @@
    "unit": "n1.birak",
    "block": "N1",
    "phase": "Derinleşme",
-   "start": 145.919,
-   "end": 148.995,
-   "screenText": "O zamana kadar onu aklında tutman gerekmiyor.",
-   "spokenText": "O zamana kadar onu aklında tutman gerekmiyor.",
-   "voiceGainDb": -1.5,
-   "resumeAt": 142.345,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 146.1232,
+   "end": 149.1986,
    "screen_text": "O zamana kadar onu aklında tutman gerekmiyor.",
    "spoken_text": "O zamana kadar onu aklında tutman gerekmiyor.",
    "screen_equals_spoken": true,
@@ -597,18 +360,8 @@
    "unit": "c1.cerceve",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 155.618,
-   "end": 158.313,
-   "screenText": "Adını andığım her yeri fark ediyorsun.",
-   "spokenText": "Adını andığım her yeri fark ediyorsun.",
-   "voiceGainDb": -1.5,
-   "resumeAt": 155.618,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 155.8312,
+   "end": 158.5259,
    "screen_text": "Adını andığım her yeri fark ediyorsun.",
    "spoken_text": "Adını andığım her yeri fark ediyorsun.",
    "screen_equals_spoken": true,
@@ -630,18 +383,8 @@
    "unit": "c1.cerceve",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 159.338,
-   "end": 162.14,
-   "screenText": "Rahatsız eden bir bölge olursa atla.",
-   "spokenText": "Rahatsız eden bir bölge olursa atla.",
-   "voiceGainDb": -1.5,
-   "resumeAt": 155.618,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 159.5524,
+   "end": 162.3544,
    "screen_text": "Rahatsız eden bir bölge olursa atla.",
    "spoken_text": "Rahatsız eden bir bölge olursa atla.",
    "screen_equals_spoken": true,
@@ -663,18 +406,8 @@
    "unit": "c1.tekrar",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 165.222,
-   "end": 169.016,
-   "screenText": "Hissetmesen de her adı içinden tekrarlayabilirsin.",
-   "spokenText": "Hissetmesen de her adı içinden tekrarlayabilirsin.",
-   "voiceGainDb": -1.5,
-   "resumeAt": 165.222,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 165.4428,
+   "end": 169.236,
    "screen_text": "Hissetmesen de her adı içinden tekrarlayabilirsin.",
    "spoken_text": "Hissetmesen de her adı içinden tekrarlayabilirsin.",
    "screen_equals_spoken": true,
@@ -694,18 +427,8 @@
    "unit": "car.sag1",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 172.598,
-   "end": 174.461,
-   "screenText": "Sağ elin başparmağı…",
-   "spokenText": "Sağ elin başparmağı…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 172.598,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 172.8244,
+   "end": 174.6875,
    "screen_text": "Sağ elin başparmağı…",
    "spoken_text": "Sağ elin başparmağı…",
    "screen_equals_spoken": true,
@@ -729,18 +452,8 @@
    "unit": "car.sag1",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 175.339,
-   "end": 176.748,
-   "screenText": "işaret parmağı…",
-   "spokenText": "işaret parmağı…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 175.339,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 175.5686,
+   "end": 176.9776,
    "screen_text": "işaret parmağı…",
    "spoken_text": "işaret parmağı…",
    "screen_equals_spoken": true,
@@ -764,18 +477,8 @@
    "unit": "car.sag1",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 178.081,
-   "end": 179.363,
-   "screenText": "orta parmak…",
-   "spokenText": "orta parmak…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 178.081,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 178.3127,
+   "end": 179.5949,
    "screen_text": "orta parmak…",
    "spoken_text": "orta parmak…",
    "screen_equals_spoken": true,
@@ -799,18 +502,8 @@
    "unit": "car.sag1",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 180.822,
-   "end": 182.075,
-   "screenText": "yüzük parmağı…",
-   "spokenText": "yüzük parmağı…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 180.822,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 181.0569,
+   "end": 182.3098,
    "screen_text": "yüzük parmağı…",
    "spoken_text": "yüzük parmağı…",
    "screen_equals_spoken": true,
@@ -834,18 +527,8 @@
    "unit": "car.sag1",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 183.563,
-   "end": 184.93,
-   "screenText": "serçe parmak…",
-   "spokenText": "serçe parmak…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 183.563,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 183.8011,
+   "end": 185.1684,
    "screen_text": "serçe parmak…",
    "spoken_text": "serçe parmak…",
    "screen_equals_spoken": true,
@@ -869,18 +552,8 @@
    "unit": "car.sag2",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 186.304,
-   "end": 187.486,
-   "screenText": "avuç içi…",
-   "spokenText": "avuç içi…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 186.304,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 186.5453,
+   "end": 187.7267,
    "screen_text": "avuç içi…",
    "spoken_text": "avuç içi…",
    "screen_equals_spoken": true,
@@ -903,18 +576,8 @@
    "unit": "car.sag2",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 189.046,
-   "end": 190.206,
-   "screenText": "elin sırtı…",
-   "spokenText": "elin sırtı…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 189.046,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 189.2895,
+   "end": 190.4495,
    "screen_text": "elin sırtı…",
    "spoken_text": "elin sırtı…",
    "screen_equals_spoken": true,
@@ -937,18 +600,8 @@
    "unit": "car.sag2",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 191.787,
-   "end": 192.725,
-   "screenText": "bilek…",
-   "spokenText": "bilek…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 191.787,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 192.0337,
+   "end": 192.9717,
    "screen_text": "bilek…",
    "spoken_text": "bilek…",
    "screen_equals_spoken": true,
@@ -972,18 +625,8 @@
    "unit": "car.sag2",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 194.528,
-   "end": 195.421,
-   "screenText": "ön kol…",
-   "spokenText": "ön kol…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 194.528,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 194.7779,
+   "end": 195.6704,
    "screen_text": "ön kol…",
    "spoken_text": "ön kol…",
    "screen_equals_spoken": true,
@@ -1007,18 +650,8 @@
    "unit": "car.sag2",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 197.269,
-   "end": 198.29,
-   "screenText": "dirsek…",
-   "spokenText": "dirsek…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 197.269,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 197.5221,
+   "end": 198.5429,
    "screen_text": "dirsek…",
    "spoken_text": "dirsek…",
    "screen_equals_spoken": true,
@@ -1041,18 +674,8 @@
    "unit": "car.sag3",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 200.011,
-   "end": 201.047,
-   "screenText": "üst kol…",
-   "spokenText": "üst kol…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 200.011,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 200.2663,
+   "end": 201.3023,
    "screen_text": "üst kol…",
    "spoken_text": "üst kol…",
    "screen_equals_spoken": true,
@@ -1075,18 +698,8 @@
    "unit": "car.sag3",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 202.752,
-   "end": 203.719,
-   "screenText": "omuz…",
-   "spokenText": "omuz…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 202.752,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 203.0105,
+   "end": 203.9771,
    "screen_text": "omuz…",
    "spoken_text": "omuz…",
    "screen_equals_spoken": true,
@@ -1110,18 +723,8 @@
    "unit": "car.sag3",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 205.493,
-   "end": 206.932,
-   "screenText": "belin sağ yanı…",
-   "spokenText": "belin sağ yanı…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 205.493,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 205.7547,
+   "end": 207.1931,
    "screen_text": "belin sağ yanı…",
    "spoken_text": "belin sağ yanı…",
    "screen_equals_spoken": true,
@@ -1144,18 +747,8 @@
    "unit": "car.sag3",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 208.235,
-   "end": 209.138,
-   "screenText": "kalça…",
-   "spokenText": "kalça…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 208.235,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 208.4989,
+   "end": 209.4023,
    "screen_text": "kalça…",
    "spoken_text": "kalça…",
    "screen_equals_spoken": true,
@@ -1179,18 +772,8 @@
    "unit": "car.sag4",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 210.976,
-   "end": 211.973,
-   "screenText": "uyluk…",
-   "spokenText": "uyluk…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 210.976,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 211.2431,
+   "end": 212.2398,
    "screen_text": "uyluk…",
    "spoken_text": "uyluk…",
    "screen_equals_spoken": true,
@@ -1214,18 +797,8 @@
    "unit": "car.sag4",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 213.717,
-   "end": 214.629,
-   "screenText": "diz…",
-   "spokenText": "diz…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 213.717,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 213.9873,
+   "end": 214.899,
    "screen_text": "diz…",
    "spoken_text": "diz…",
    "screen_equals_spoken": true,
@@ -1249,18 +822,8 @@
    "unit": "car.sag4",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 216.458,
-   "end": 217.498,
-   "screenText": "baldır…",
-   "spokenText": "baldır…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 216.458,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 216.7315,
+   "end": 217.7711,
    "screen_text": "baldır…",
    "spoken_text": "baldır…",
    "screen_equals_spoken": true,
@@ -1283,18 +846,8 @@
    "unit": "car.sag4",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 219.2,
-   "end": 220.299,
-   "screenText": "ayak bileği…",
-   "spokenText": "ayak bileği…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 219.2,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 219.4756,
+   "end": 220.5752,
    "screen_text": "ayak bileği…",
    "spoken_text": "ayak bileği…",
    "screen_equals_spoken": true,
@@ -1317,18 +870,8 @@
    "unit": "car.sag4",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 221.941,
-   "end": 222.858,
-   "screenText": "topuk…",
-   "spokenText": "topuk…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 221.941,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 222.2198,
+   "end": 223.1372,
    "screen_text": "topuk…",
    "spoken_text": "topuk…",
    "screen_equals_spoken": true,
@@ -1352,18 +895,8 @@
    "unit": "car.sag4",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 224.682,
-   "end": 225.765,
-   "screenText": "ayak tabanı…",
-   "spokenText": "ayak tabanı…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 224.682,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 224.964,
+   "end": 226.047,
    "screen_text": "ayak tabanı…",
    "spoken_text": "ayak tabanı…",
    "screen_equals_spoken": true,
@@ -1386,18 +919,8 @@
    "unit": "c1.kacirma",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 228.889,
-   "end": 232.266,
-   "screenText": "Bir adı kaçırırsan bir sonrakiyle devam edersin.",
-   "spokenText": "Bir adı kaçırırsan bir sonrakiyle devam edersin.",
-   "voiceGainDb": -1.5,
-   "resumeAt": 228.889,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 229.1795,
+   "end": 232.5566,
    "screen_text": "Bir adı kaçırırsan bir sonrakiyle devam edersin.",
    "spoken_text": "Bir adı kaçırırsan bir sonrakiyle devam edersin.",
    "screen_equals_spoken": true,
@@ -1417,18 +940,8 @@
    "unit": "car.sol1",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 235.39,
-   "end": 237.204,
-   "screenText": "Sol elin başparmağı…",
-   "spokenText": "Sol elin başparmağı…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 235.39,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 235.6892,
+   "end": 237.5038,
    "screen_text": "Sol elin başparmağı…",
    "spoken_text": "Sol elin başparmağı…",
    "screen_equals_spoken": true,
@@ -1451,18 +964,8 @@
    "unit": "car.sol1",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 238.131,
-   "end": 239.516,
-   "screenText": "işaret parmağı…",
-   "spokenText": "işaret parmağı…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 238.131,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 238.4334,
+   "end": 239.8184,
    "screen_text": "işaret parmağı…",
    "spoken_text": "işaret parmağı…",
    "screen_equals_spoken": true,
@@ -1485,18 +988,8 @@
    "unit": "car.sol1",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 240.872,
-   "end": 242.151,
-   "screenText": "orta parmak…",
-   "spokenText": "orta parmak…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 240.872,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 241.1776,
+   "end": 242.456,
    "screen_text": "orta parmak…",
    "spoken_text": "orta parmak…",
    "screen_equals_spoken": true,
@@ -1519,18 +1012,8 @@
    "unit": "car.sol1",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 243.613,
-   "end": 244.862,
-   "screenText": "yüzük parmağı…",
-   "spokenText": "yüzük parmağı…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 243.613,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 243.9218,
+   "end": 245.17,
    "screen_text": "yüzük parmağı…",
    "spoken_text": "yüzük parmağı…",
    "screen_equals_spoken": true,
@@ -1553,18 +1036,8 @@
    "unit": "car.sol1",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 246.355,
-   "end": 247.706,
-   "screenText": "serçe parmak…",
-   "spokenText": "serçe parmak…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 246.355,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 246.666,
+   "end": 248.0176,
    "screen_text": "serçe parmak…",
    "spoken_text": "serçe parmak…",
    "screen_equals_spoken": true,
@@ -1587,18 +1060,8 @@
    "unit": "car.sol2",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 249.096,
-   "end": 250.274,
-   "screenText": "avuç içi…",
-   "spokenText": "avuç içi…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 249.096,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 249.4102,
+   "end": 250.5883,
    "screen_text": "avuç içi…",
    "spoken_text": "avuç içi…",
    "screen_equals_spoken": true,
@@ -1621,18 +1084,8 @@
    "unit": "car.sol2",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 251.837,
-   "end": 253.055,
-   "screenText": "elin sırtı…",
-   "spokenText": "elin sırtı…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 251.837,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 252.1544,
+   "end": 253.3718,
    "screen_text": "elin sırtı…",
    "spoken_text": "elin sırtı…",
    "screen_equals_spoken": true,
@@ -1655,18 +1108,8 @@
    "unit": "car.sol2",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 254.579,
-   "end": 255.492,
-   "screenText": "bilek…",
-   "spokenText": "bilek…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 254.579,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 254.8985,
+   "end": 255.8116,
    "screen_text": "bilek…",
    "spoken_text": "bilek…",
    "screen_equals_spoken": true,
@@ -1690,18 +1133,8 @@
    "unit": "car.sol2",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 257.32,
-   "end": 258.215,
-   "screenText": "ön kol…",
-   "spokenText": "ön kol…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 257.32,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 257.6427,
+   "end": 258.5375,
    "screen_text": "ön kol…",
    "spoken_text": "ön kol…",
    "screen_equals_spoken": true,
@@ -1725,18 +1158,8 @@
    "unit": "car.sol2",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 260.061,
-   "end": 261.077,
-   "screenText": "dirsek…",
-   "spokenText": "dirsek…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 260.061,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 260.3869,
+   "end": 261.4024,
    "screen_text": "dirsek…",
    "spoken_text": "dirsek…",
    "screen_equals_spoken": true,
@@ -1759,18 +1182,8 @@
    "unit": "car.sol3",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 262.802,
-   "end": 263.86,
-   "screenText": "üst kol…",
-   "spokenText": "üst kol…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 262.802,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 263.1311,
+   "end": 264.1884,
    "screen_text": "üst kol…",
    "spoken_text": "üst kol…",
    "screen_equals_spoken": true,
@@ -1793,18 +1206,8 @@
    "unit": "car.sol3",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 265.544,
-   "end": 266.496,
-   "screenText": "omuz…",
-   "spokenText": "omuz…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 265.544,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 265.8753,
+   "end": 266.8277,
    "screen_text": "omuz…",
    "spoken_text": "omuz…",
    "screen_equals_spoken": true,
@@ -1828,18 +1231,8 @@
    "unit": "car.sol3",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 268.285,
-   "end": 269.721,
-   "screenText": "belin sol yanı…",
-   "spokenText": "belin sol yanı…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 268.285,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 268.6195,
+   "end": 270.0554,
    "screen_text": "belin sol yanı…",
    "spoken_text": "belin sol yanı…",
    "screen_equals_spoken": true,
@@ -1862,18 +1255,8 @@
    "unit": "car.sol3",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 271.026,
-   "end": 271.905,
-   "screenText": "kalça…",
-   "spokenText": "kalça…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 271.026,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 271.3637,
+   "end": 272.2425,
    "screen_text": "kalça…",
    "spoken_text": "kalça…",
    "screen_equals_spoken": true,
@@ -1897,18 +1280,8 @@
    "unit": "car.sol4",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 273.767,
-   "end": 274.776,
-   "screenText": "uyluk…",
-   "spokenText": "uyluk…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 273.767,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 274.1079,
+   "end": 275.1169,
    "screen_text": "uyluk…",
    "spoken_text": "uyluk…",
    "screen_equals_spoken": true,
@@ -1931,18 +1304,8 @@
    "unit": "car.sol4",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 276.509,
-   "end": 277.411,
-   "screenText": "diz…",
-   "spokenText": "diz…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 276.509,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 276.8521,
+   "end": 277.7541,
    "screen_text": "diz…",
    "spoken_text": "diz…",
    "screen_equals_spoken": true,
@@ -1966,18 +1329,8 @@
    "unit": "car.sol4",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 279.25,
-   "end": 280.294,
-   "screenText": "baldır…",
-   "spokenText": "baldır…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 279.25,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 279.5963,
+   "end": 280.64,
    "screen_text": "baldır…",
    "spoken_text": "baldır…",
    "screen_equals_spoken": true,
@@ -2000,18 +1353,8 @@
    "unit": "car.sol4",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 281.991,
-   "end": 283.134,
-   "screenText": "ayak bileği…",
-   "spokenText": "ayak bileği…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 281.991,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 282.3405,
+   "end": 283.4832,
    "screen_text": "ayak bileği…",
    "spoken_text": "ayak bileği…",
    "screen_equals_spoken": true,
@@ -2034,18 +1377,8 @@
    "unit": "car.sol4",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 284.732,
-   "end": 285.661,
-   "screenText": "topuk…",
-   "spokenText": "topuk…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 284.732,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 285.0847,
+   "end": 286.0129,
    "screen_text": "topuk…",
    "spoken_text": "topuk…",
    "screen_equals_spoken": true,
@@ -2069,18 +1402,8 @@
    "unit": "car.sol4",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 287.474,
-   "end": 288.57,
-   "screenText": "ayak tabanı…",
-   "spokenText": "ayak tabanı…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 287.474,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 287.8289,
+   "end": 288.9249,
    "screen_text": "ayak tabanı…",
    "spoken_text": "ayak tabanı…",
    "screen_equals_spoken": true,
@@ -2103,18 +1426,8 @@
    "unit": "c1.gecis.arka",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 291.694,
-   "end": 293.541,
-   "screenText": "Bedenin arka tarafı.",
-   "spokenText": "Bedenin arka tarafı.",
-   "voiceGainDb": -1.5,
-   "resumeAt": 291.694,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 292.0575,
+   "end": 293.9047,
    "screen_text": "Bedenin arka tarafı.",
    "spoken_text": "Bedenin arka tarafı.",
    "screen_equals_spoken": true,
@@ -2134,18 +1447,8 @@
    "unit": "car.sirt",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 295.623,
-   "end": 297.188,
-   "screenText": "Sağ kürek kemiği…",
-   "spokenText": "Sağ kürek kemiği…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 295.623,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 295.9931,
+   "end": 297.5579,
    "screen_text": "Sağ kürek kemiği…",
    "spoken_text": "Sağ kürek kemiği…",
    "screen_equals_spoken": true,
@@ -2168,18 +1471,8 @@
    "unit": "car.sirt",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 298.365,
-   "end": 299.888,
-   "screenText": "sol kürek kemiği…",
-   "spokenText": "sol kürek kemiği…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 298.365,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 298.7373,
+   "end": 300.2606,
    "screen_text": "sol kürek kemiği…",
    "spoken_text": "sol kürek kemiği…",
    "screen_equals_spoken": true,
@@ -2202,18 +1495,8 @@
    "unit": "car.sirt",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 301.106,
-   "end": 302.336,
-   "screenText": "bel boşluğu…",
-   "spokenText": "bel boşluğu…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 301.106,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 301.4815,
+   "end": 302.7117,
    "screen_text": "bel boşluğu…",
    "spoken_text": "bel boşluğu…",
    "screen_equals_spoken": true,
@@ -2236,18 +1519,8 @@
    "unit": "car.sirt",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 303.847,
-   "end": 306.065,
-   "screenText": "omurga, boydan boya…",
-   "spokenText": "omurga, boydan boya…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 303.847,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 304.2256,
+   "end": 306.4439,
    "screen_text": "omurga, boydan boya…",
    "spoken_text": "omurga, boydan boya…",
    "screen_equals_spoken": true,
@@ -2270,18 +1543,8 @@
    "unit": "car.sirt",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 309.189,
-   "end": 310.621,
-   "screenText": "bütün sırt.",
-   "spokenText": "bütün sırt.",
-   "voiceGainDb": -1.5,
-   "resumeAt": 309.189,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 309.5765,
+   "end": 311.008,
    "screen_text": "bütün sırt.",
    "spoken_text": "bütün sırt.",
    "screen_equals_spoken": true,
@@ -2304,18 +1567,8 @@
    "unit": "c1.gecis.on",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 313.744,
-   "end": 316.101,
-   "screenText": "Yüzün ve bedenin ön tarafı.",
-   "spokenText": "Yüzün ve bedenin ön tarafı.",
-   "voiceGainDb": -1.5,
-   "resumeAt": 313.744,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 314.1406,
+   "end": 316.4971,
    "screen_text": "Yüzün ve bedenin ön tarafı.",
    "spoken_text": "Yüzün ve bedenin ön tarafı.",
    "screen_equals_spoken": true,
@@ -2337,18 +1590,8 @@
    "unit": "c1.gecis.on",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 317.126,
-   "end": 319.214,
-   "screenText": "İstemediğin yeri yine atla.",
-   "spokenText": "İstemediğin yeri yine atla.",
-   "voiceGainDb": -1.5,
-   "resumeAt": 313.744,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 317.5236,
+   "end": 319.6114,
    "screen_text": "İstemediğin yeri yine atla.",
    "spoken_text": "İstemediğin yeri yine atla.",
    "screen_equals_spoken": true,
@@ -2370,18 +1613,8 @@
    "unit": "car.on1",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 321.296,
-   "end": 321.994,
-   "screenText": "alın…",
-   "spokenText": "alın…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 321.296,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 321.6998,
+   "end": 322.3975,
    "screen_text": "alın…",
    "spoken_text": "alın…",
    "screen_equals_spoken": true,
@@ -2405,18 +1638,8 @@
    "unit": "car.on2",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 324.037,
-   "end": 325.406,
-   "screenText": "göz kapakları…",
-   "spokenText": "göz kapakları…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 324.037,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 324.444,
+   "end": 325.8122,
    "screen_text": "göz kapakları…",
    "spoken_text": "göz kapakları…",
    "screen_equals_spoken": true,
@@ -2439,18 +1662,8 @@
    "unit": "car.on3",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 326.779,
-   "end": 327.816,
-   "screenText": "göğüs…",
-   "spokenText": "göğüs…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 326.779,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 327.1882,
+   "end": 328.2254,
    "screen_text": "göğüs…",
    "spoken_text": "göğüs…",
    "screen_equals_spoken": true,
@@ -2473,18 +1686,8 @@
    "unit": "car.butun",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 329.52,
-   "end": 331.801,
-   "screenText": "baştan ayağa bütün beden…",
-   "spokenText": "baştan ayağa bütün beden…",
-   "voiceGainDb": -1.5,
-   "resumeAt": 329.52,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 329.9324,
+   "end": 332.2136,
    "screen_text": "baştan ayağa bütün beden…",
    "spoken_text": "baştan ayağa bütün beden…",
    "screen_equals_spoken": true,
@@ -2507,18 +1710,8 @@
    "unit": "c1.k1",
    "block": "C1",
    "phase": "Derinleşme",
-   "start": 334.925,
-   "end": 338.644,
-   "screenText": "Bedenin dinlenebilir; sen uyanık kalıyorsun.",
-   "spokenText": "Bedenin dinlenebilir; sen uyanık kalıyorsun.",
-   "voiceGainDb": -1.5,
-   "resumeAt": 334.925,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derinlesme",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 335.3462,
+   "end": 339.0657,
    "screen_text": "Bedenin dinlenebilir; sen uyanık kalıyorsun.",
    "spoken_text": "Bedenin dinlenebilir; sen uyanık kalıyorsun.",
    "screen_equals_spoken": true,
@@ -2538,20 +1731,8 @@
    "unit": "c2.dikkat",
    "block": "C2",
    "phase": "Derin",
-   "start": 346.057,
-   "end": 349.406,
-   "screenText": "Şimdi nefesini değiştirmeden izlemek yeterli.",
-   "spokenText": "Şimdi nefesini değiştirmeden izlemek yeterli.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 346.057,
-   "visualCue": {
-    "visual": "phase:derin"
-   },
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 346.5076,
+   "end": 349.8569,
    "screen_text": "Şimdi nefesini değiştirmeden izlemek yeterli.",
    "spoken_text": "Şimdi nefesini değiştirmeden izlemek yeterli.",
    "screen_equals_spoken": true,
@@ -2575,18 +1756,8 @@
    "unit": "c2.dikkat",
    "block": "C2",
    "phase": "Derin",
-   "start": 351.264,
-   "end": 354.778,
-   "screenText": "Ellerini hissetmek ya da gözlerini açmak da olur.",
-   "spokenText": "Ellerini hissetmek ya da gözlerini açmak da olur.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 346.057,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 351.7188,
+   "end": 355.233,
    "screen_text": "Ellerini hissetmek ya da gözlerini açmak da olur.",
    "spoken_text": "Ellerini hissetmek ya da gözlerini açmak da olur.",
    "screen_equals_spoken": true,
@@ -2608,18 +1779,8 @@
    "unit": "c2.yer",
    "block": "C2",
    "phase": "Derin",
-   "start": 365.108,
-   "end": 369.673,
-   "screenText": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin.",
-   "spokenText": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 365.108,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 365.5865,
+   "end": 370.1512,
    "screen_text": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin.",
    "spoken_text": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin.",
    "screen_equals_spoken": true,
@@ -2642,18 +1803,8 @@
    "unit": "c2.yer",
    "block": "C2",
    "phase": "Derin",
-   "start": 371.531,
-   "end": 375.366,
-   "screenText": "Burun, göğüs, karın ya da başka bir nokta.",
-   "spokenText": "Burun, göğüs, karın ya da başka bir nokta.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 365.108,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 372.0131,
+   "end": 375.8486,
    "screen_text": "Burun, göğüs, karın ya da başka bir nokta.",
    "spoken_text": "Burun, göğüs, karın ya da başka bir nokta.",
    "screen_equals_spoken": true,
@@ -2676,18 +1827,8 @@
    "unit": "c2.alt",
    "block": "C2",
    "phase": "Derin",
-   "start": 389.779,
-   "end": 393.658,
-   "screenText": "Dikkatin ellerindeyse avuçlarını hissedebilirsin.",
-   "spokenText": "Dikkatin ellerindeyse avuçlarını hissedebilirsin.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 389.779,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 390.2905,
+   "end": 394.1692,
    "screen_text": "Dikkatin ellerindeyse avuçlarını hissedebilirsin.",
    "spoken_text": "Dikkatin ellerindeyse avuçlarını hissedebilirsin.",
    "screen_equals_spoken": true,
@@ -2709,18 +1850,8 @@
    "unit": "c2.akis",
    "block": "C2",
    "phase": "Derin",
-   "start": 403.905,
-   "end": 406.34,
-   "screenText": "Nefes kendiliğinden geliyor.",
-   "spokenText": "Nefes kendiliğinden geliyor.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 403.905,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 404.4344,
+   "end": 406.8694,
    "screen_text": "Nefes kendiliğinden geliyor.",
    "spoken_text": "Nefes kendiliğinden geliyor.",
    "screen_equals_spoken": true,
@@ -2742,18 +1873,8 @@
    "unit": "c2.akis",
    "block": "C2",
    "phase": "Derin",
-   "start": 409.423,
-   "end": 411.222,
-   "screenText": "Kendiliğinden gidiyor.",
-   "spokenText": "Kendiliğinden gidiyor.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 403.905,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 409.9578,
+   "end": 411.7569,
    "screen_text": "Kendiliğinden gidiyor.",
    "spoken_text": "Kendiliğinden gidiyor.",
    "screen_equals_spoken": true,
@@ -2775,18 +1896,8 @@
    "unit": "c2.sayac",
    "block": "C2",
    "phase": "Derin",
-   "start": 423.717,
-   "end": 425.347,
-   "screenText": "Geriye doğru sayacağım.",
-   "spokenText": "Geriye doğru sayacağım.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 423.717,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 424.2873,
+   "end": 425.9171,
    "screen_text": "Geriye doğru sayacağım.",
    "spoken_text": "Geriye doğru sayacağım.",
    "screen_equals_spoken": true,
@@ -2808,18 +1919,8 @@
    "unit": "c2.sayac",
    "block": "C2",
    "phase": "Derin",
-   "start": 427.205,
-   "end": 429.587,
-   "screenText": "Nefes sayılara uymak zorunda değil.",
-   "spokenText": "Nefes sayılara uymak zorunda değil.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 423.717,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 427.7789,
+   "end": 430.1611,
    "screen_text": "Nefes sayılara uymak zorunda değil.",
    "spoken_text": "Nefes sayılara uymak zorunda değil.",
    "screen_equals_spoken": true,
@@ -2841,23 +1942,8 @@
    "unit": "car.sayi",
    "block": "C2",
    "phase": "Derin",
-   "start": 432.669,
-   "end": 433.356,
-   "screenText": "on…",
-   "spokenText": "on…",
-   "voiceGainDb": -3.0,
-   "resumeAt": 432.669,
-   "visualCue": {
-    "visual": "pulse",
-    "breath": {
-     "count": 10
-    }
-   },
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 433.2494,
+   "end": 433.9359,
    "screen_text": "on…",
    "spoken_text": "on…",
    "screen_equals_spoken": true,
@@ -2875,7 +1961,8 @@
    },
    "flags": [
     "kesim-kulak",
-    "kulak-eklem"
+    "kulak-eklem",
+    "v3-kisa-duzey"
    ]
   },
   {
@@ -2885,23 +1972,8 @@
    "unit": "car.sayi",
    "block": "C2",
    "phase": "Derin",
-   "start": 438.694,
-   "end": 439.69,
-   "screenText": "dokuz…",
-   "spokenText": "dokuz…",
-   "voiceGainDb": -3.0,
-   "resumeAt": 438.694,
-   "visualCue": {
-    "visual": "pulse",
-    "breath": {
-     "count": 9
-    }
-   },
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 439.276,
+   "end": 440.2715,
    "screen_text": "dokuz…",
    "spoken_text": "dokuz…",
    "screen_equals_spoken": true,
@@ -2919,7 +1991,8 @@
    },
    "flags": [
     "kesim-kulak",
-    "kulak-eklem"
+    "kulak-eklem",
+    "v3-kisa-duzey"
    ]
   },
   {
@@ -2929,23 +2002,8 @@
    "unit": "car.sayi",
    "block": "C2",
    "phase": "Derin",
-   "start": 444.719,
-   "end": 445.771,
-   "screenText": "sekiz…",
-   "spokenText": "sekiz…",
-   "voiceGainDb": -3.0,
-   "resumeAt": 444.719,
-   "visualCue": {
-    "visual": "pulse",
-    "breath": {
-     "count": 8
-    }
-   },
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 445.3025,
+   "end": 446.3546,
    "screen_text": "sekiz…",
    "spoken_text": "sekiz…",
    "screen_equals_spoken": true,
@@ -2973,23 +2031,8 @@
    "unit": "car.sayi",
    "block": "C2",
    "phase": "Derin",
-   "start": 450.744,
-   "end": 451.521,
-   "screenText": "yedi…",
-   "spokenText": "yedi…",
-   "voiceGainDb": -3.0,
-   "resumeAt": 450.744,
-   "visualCue": {
-    "visual": "pulse",
-    "breath": {
-     "count": 7
-    }
-   },
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 451.329,
+   "end": 452.1067,
    "screen_text": "yedi…",
    "spoken_text": "yedi…",
    "screen_equals_spoken": true,
@@ -3007,7 +2050,8 @@
    },
    "flags": [
     "kesim-kulak",
-    "kulak-eklem"
+    "kulak-eklem",
+    "v3-kisa-duzey"
    ]
   },
   {
@@ -3017,23 +2061,8 @@
    "unit": "car.sayi",
    "block": "C2",
    "phase": "Derin",
-   "start": 456.768,
-   "end": 457.64,
-   "screenText": "altı…",
-   "spokenText": "altı…",
-   "voiceGainDb": -3.0,
-   "resumeAt": 456.768,
-   "visualCue": {
-    "visual": "pulse",
-    "breath": {
-     "count": 6
-    }
-   },
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 457.3555,
+   "end": 458.2271,
    "screen_text": "altı…",
    "spoken_text": "altı…",
    "screen_equals_spoken": true,
@@ -3051,7 +2080,8 @@
    },
    "flags": [
     "kesim-kulak",
-    "kulak-eklem"
+    "kulak-eklem",
+    "v3-kisa-duzey"
    ]
   },
   {
@@ -3061,23 +2091,8 @@
    "unit": "car.sayi",
    "block": "C2",
    "phase": "Derin",
-   "start": 462.793,
-   "end": 463.771,
-   "screenText": "beş…",
-   "spokenText": "beş…",
-   "voiceGainDb": -3.0,
-   "resumeAt": 462.793,
-   "visualCue": {
-    "visual": "pulse",
-    "breath": {
-     "count": 5
-    }
-   },
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 463.382,
+   "end": 464.3603,
    "screen_text": "beş…",
    "spoken_text": "beş…",
    "screen_equals_spoken": true,
@@ -3095,7 +2110,8 @@
    },
    "flags": [
     "kesim-kulak",
-    "kulak-eklem"
+    "kulak-eklem",
+    "v3-kisa-duzey"
    ]
   },
   {
@@ -3105,23 +2121,8 @@
    "unit": "car.sayi",
    "block": "C2",
    "phase": "Derin",
-   "start": 468.818,
-   "end": 469.745,
-   "screenText": "dört…",
-   "spokenText": "dört…",
-   "voiceGainDb": -3.0,
-   "resumeAt": 468.818,
-   "visualCue": {
-    "visual": "pulse",
-    "breath": {
-     "count": 4
-    }
-   },
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 469.4085,
+   "end": 470.3355,
    "screen_text": "dört…",
    "spoken_text": "dört…",
    "screen_equals_spoken": true,
@@ -3139,7 +2140,8 @@
    },
    "flags": [
     "kesim-kulak",
-    "kulak-eklem"
+    "kulak-eklem",
+    "v3-kisa-duzey"
    ]
   },
   {
@@ -3149,23 +2151,8 @@
    "unit": "car.sayi",
    "block": "C2",
    "phase": "Derin",
-   "start": 474.843,
-   "end": 475.672,
-   "screenText": "üç…",
-   "spokenText": "üç…",
-   "voiceGainDb": -3.0,
-   "resumeAt": 474.843,
-   "visualCue": {
-    "visual": "pulse",
-    "breath": {
-     "count": 3
-    }
-   },
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 475.4351,
+   "end": 476.2643,
    "screen_text": "üç…",
    "spoken_text": "üç…",
    "screen_equals_spoken": true,
@@ -3183,7 +2170,8 @@
    },
    "flags": [
     "kesim-kulak",
-    "kulak-eklem"
+    "kulak-eklem",
+    "v3-kisa-duzey"
    ]
   },
   {
@@ -3193,23 +2181,8 @@
    "unit": "car.sayi",
    "block": "C2",
    "phase": "Derin",
-   "start": 480.868,
-   "end": 481.684,
-   "screenText": "iki…",
-   "spokenText": "iki…",
-   "voiceGainDb": -3.0,
-   "resumeAt": 480.868,
-   "visualCue": {
-    "visual": "pulse",
-    "breath": {
-     "count": 2
-    }
-   },
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 481.4616,
+   "end": 482.2783,
    "screen_text": "iki…",
    "spoken_text": "iki…",
    "screen_equals_spoken": true,
@@ -3227,7 +2200,8 @@
    },
    "flags": [
     "kesim-kulak",
-    "kulak-eklem"
+    "kulak-eklem",
+    "v3-kisa-duzey"
    ]
   },
   {
@@ -3237,23 +2211,8 @@
    "unit": "car.sayi",
    "block": "C2",
    "phase": "Derin",
-   "start": 486.892,
-   "end": 487.765,
-   "screenText": "bir.",
-   "spokenText": "bir.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 486.892,
-   "visualCue": {
-    "visual": "pulse",
-    "breath": {
-     "count": 1
-    }
-   },
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 487.4881,
+   "end": 488.3611,
    "screen_text": "bir.",
    "spoken_text": "bir.",
    "screen_equals_spoken": true,
@@ -3271,7 +2230,8 @@
    },
    "flags": [
     "kesim-kulak",
-    "kulak-eklem"
+    "kulak-eklem",
+    "v3-kisa-duzey"
    ]
   },
   {
@@ -3281,18 +2241,8 @@
    "unit": "c2.birak",
    "block": "C2",
    "phase": "Derin",
-   "start": 494.93,
-   "end": 496.606,
-   "screenText": "Sayıları bırakabilirsin.",
-   "spokenText": "Sayıları bırakabilirsin.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 494.93,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 495.5379,
+   "end": 497.2134,
    "screen_text": "Sayıları bırakabilirsin.",
    "spoken_text": "Sayıları bırakabilirsin.",
    "screen_equals_spoken": true,
@@ -3314,18 +2264,8 @@
    "unit": "c2.birak",
    "block": "C2",
    "phase": "Derin",
-   "start": 498.464,
-   "end": 502.043,
-   "screenText": "Zihnin arada başka yerlere kaydıysa o da olur.",
-   "spokenText": "Zihnin arada başka yerlere kaydıysa o da olur.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 494.93,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 499.0753,
+   "end": 502.6546,
    "screen_text": "Zihnin arada başka yerlere kaydıysa o da olur.",
    "spoken_text": "Zihnin arada başka yerlere kaydıysa o da olur.",
    "screen_equals_spoken": true,
@@ -3347,18 +2287,8 @@
    "unit": "c2.kal",
    "block": "C2",
    "phase": "Derin",
-   "start": 508.208,
-   "end": 511.723,
-   "screenText": "Bir süre hiçbir şey yapmadan dinlenmek var.",
-   "spokenText": "Bir süre hiçbir şey yapmadan dinlenmek var.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 508.208,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 508.8314,
+   "end": 512.3461,
    "screen_text": "Bir süre hiçbir şey yapmadan dinlenmek var.",
    "spoken_text": "Bir süre hiçbir şey yapmadan dinlenmek var.",
    "screen_equals_spoken": true,
@@ -3378,18 +2308,8 @@
    "unit": "br.k2",
    "block": "BR.K2",
    "phase": "Derin",
-   "start": 528.053,
-   "end": 531.475,
-   "screenText": "Bedenin dinlenebilir; sen uyanıksın.",
-   "spokenText": "Bedenin dinlenebilir; sen uyanıksın.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 528.053,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 528.6996,
+   "end": 532.1215,
    "screen_text": "Bedenin dinlenebilir; sen uyanıksın.",
    "spoken_text": "Bedenin dinlenebilir; sen uyanıksın.",
    "screen_equals_spoken": true,
@@ -3409,18 +2329,8 @@
    "unit": "br.orta",
    "block": "BR.orta",
    "phase": "Derin",
-   "start": 543.64,
-   "end": 549.144,
-   "screenText": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde.",
-   "spokenText": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 543.64,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 544.2983,
+   "end": 549.8022,
    "screen_text": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde.",
    "spoken_text": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde.",
    "screen_equals_spoken": true,
@@ -3442,18 +2352,8 @@
    "unit": "br.orta",
    "block": "BR.orta",
    "phase": "Derin",
-   "start": 551.001,
-   "end": 553.649,
-   "screenText": "Gözlerin açıksa bakışın serbest.",
-   "spokenText": "Gözlerin açıksa bakışın serbest.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 543.64,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 551.6641,
+   "end": 554.3114,
    "screen_text": "Gözlerin açıksa bakışın serbest.",
    "spoken_text": "Gözlerin açıksa bakışın serbest.",
    "screen_equals_spoken": true,
@@ -3475,18 +2375,8 @@
    "unit": "br.orta",
    "block": "BR.orta",
    "phase": "Derin",
-   "start": 555.507,
-   "end": 557.607,
-   "screenText": "Zemin seni hep taşıyor.",
-   "spokenText": "Zemin seni hep taşıyor.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 543.64,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 556.1733,
+   "end": 558.274,
    "screen_text": "Zemin seni hep taşıyor.",
    "spoken_text": "Zemin seni hep taşıyor.",
    "screen_equals_spoken": true,
@@ -3508,20 +2398,8 @@
    "unit": "c4.yer",
    "block": "C4",
    "phase": "Derin",
-   "start": 570.772,
-   "end": 574.28,
-   "screenText": "Zihninde sana iyi gelen bir orman belirebilir.",
-   "spokenText": "Zihninde sana iyi gelen bir orman belirebilir.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 570.772,
-   "visualCue": {
-    "visual": "image:on"
-   },
-   "visualState": {
-    "phase": "derin",
-    "image": "on",
-    "dawn": false
-   },
+   "start": 571.4508,
+   "end": 574.9583,
    "screen_text": "Zihninde sana iyi gelen bir orman belirebilir.",
    "spoken_text": "Zihninde sana iyi gelen bir orman belirebilir.",
    "screen_equals_spoken": true,
@@ -3543,18 +2421,8 @@
    "unit": "c4.gelmezse",
    "block": "C4",
    "phase": "Derin",
-   "start": 586.528,
-   "end": 590.619,
-   "screenText": "Bir görüntü gelmese de olur, gözlerin açık kalsa da.",
-   "spokenText": "Bir görüntü gelmese de olur, gözlerin açık kalsa da.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 586.528,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "on",
-    "dawn": false
-   },
+   "start": 587.2235,
+   "end": 591.3149,
    "screen_text": "Bir görüntü gelmese de olur, gözlerin açık kalsa da.",
    "spoken_text": "Bir görüntü gelmese de olur, gözlerin açık kalsa da.",
    "screen_equals_spoken": true,
@@ -3574,18 +2442,8 @@
    "unit": "c4.patika",
    "block": "C4",
    "phase": "Derin",
-   "start": 602.867,
-   "end": 606.303,
-   "screenText": "Kendini yumuşak bir patikanın başında bulabilirsin.",
-   "spokenText": "Kendini yumuşak bir patikanın başında bulabilirsin.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 602.867,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "on",
-    "dawn": false
-   },
+   "start": 603.58,
+   "end": 607.0167,
    "screen_text": "Kendini yumuşak bir patikanın başında bulabilirsin.",
    "spoken_text": "Kendini yumuşak bir patikanın başında bulabilirsin.",
    "screen_equals_spoken": true,
@@ -3596,7 +2454,9 @@
     "image": "on",
     "dawn": false
    },
-   "flags": []
+   "flags": [
+    "kulak-kenar"
+   ]
   },
   {
    "i": 101,
@@ -3605,18 +2465,8 @@
    "unit": "c4.yol",
    "block": "C4",
    "phase": "Derin",
-   "start": 612.886,
-   "end": 614.695,
-   "screenText": "Yol önünde açılıyor.",
-   "spokenText": "Yol önünde açılıyor.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 612.886,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "on",
-    "dawn": false
-   },
+   "start": 613.6051,
+   "end": 615.4139,
    "screen_text": "Yol önünde açılıyor.",
    "spoken_text": "Yol önünde açılıyor.",
    "screen_equals_spoken": true,
@@ -3638,18 +2488,8 @@
    "unit": "c4.yol",
    "block": "C4",
    "phase": "Derin",
-   "start": 616.552,
-   "end": 618.349,
-   "screenText": "Kendi hızında yürüyorsun.",
-   "spokenText": "Kendi hızında yürüyorsun.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 612.886,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "on",
-    "dawn": false
-   },
+   "start": 617.2757,
+   "end": 619.072,
    "screen_text": "Kendi hızında yürüyorsun.",
    "spoken_text": "Kendi hızında yürüyorsun.",
    "screen_equals_spoken": true,
@@ -3666,25 +2506,15 @@
   },
   {
    "i": 103,
-   "piece": "c4.ses.orman",
+   "piece": "c4.ses",
    "clip": "c4.ses",
-   "unit": "c4.ses.orman",
+   "unit": "c4.ses",
    "block": "C4",
    "phase": "Derin",
-   "start": 632.679,
-   "end": 635.844,
-   "screenText": "Uzaktan yaprak hışırtısı gelip gidiyor.",
-   "spokenText": "Uzaktan yaprak hışırtısı gelip gidiyor.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 632.679,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "on",
-    "dawn": false
-   },
-   "screen_text": "Uzaktan yaprak hışırtısı gelip gidiyor.",
-   "spoken_text": "Uzaktan yaprak hışırtısı gelip gidiyor.",
+   "start": 633.4256,
+   "end": 636.1936,
+   "screen_text": "Uzaktan gelip giden yaprak hışırtısı.",
+   "spoken_text": "Uzaktan gelip giden yaprak hışırtısı.",
    "screen_equals_spoken": true,
    "voice_gain_db": -3.0,
    "visual_cue": null,
@@ -3702,18 +2532,8 @@
    "unit": "c4.gunes",
    "block": "C4",
    "phase": "Derin",
-   "start": 648.256,
-   "end": 650.985,
-   "screenText": "Açık, aydınlık bir yere varıyorsun.",
-   "spokenText": "Açık, aydınlık bir yere varıyorsun.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 648.256,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "on",
-    "dawn": false
-   },
+   "start": 648.6355,
+   "end": 651.3646,
    "screen_text": "Açık, aydınlık bir yere varıyorsun.",
    "spoken_text": "Açık, aydınlık bir yere varıyorsun.",
    "screen_equals_spoken": true,
@@ -3735,18 +2555,8 @@
    "unit": "c4.gunes",
    "block": "C4",
    "phase": "Derin",
-   "start": 652.843,
-   "end": 655.884,
-   "screenText": "Güneş tenini tatlı tatlı ısıtıyor.",
-   "spokenText": "Güneş tenini tatlı tatlı ısıtıyor.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 648.256,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "on",
-    "dawn": false
-   },
+   "start": 653.2264,
+   "end": 656.2677,
    "screen_text": "Güneş tenini tatlı tatlı ısıtıyor.",
    "spoken_text": "Güneş tenini tatlı tatlı ısıtıyor.",
    "screen_equals_spoken": true,
@@ -3768,18 +2578,8 @@
    "unit": "c4.don",
    "block": "C4",
    "phase": "Derin",
-   "start": 667.297,
-   "end": 670.9,
-   "screenText": "Aynı patikadan, acele etmeden geri dönüyorsun.",
-   "spokenText": "Aynı patikadan, acele etmeden geri dönüyorsun.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 667.297,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "on",
-    "dawn": false
-   },
+   "start": 667.7096,
+   "end": 671.3128,
    "screen_text": "Aynı patikadan, acele etmeden geri dönüyorsun.",
    "spoken_text": "Aynı patikadan, acele etmeden geri dönüyorsun.",
    "screen_equals_spoken": true,
@@ -3790,7 +2590,9 @@
     "image": "on",
     "dawn": false
    },
-   "flags": []
+   "flags": [
+    "kulak-kenar"
+   ]
   },
   {
    "i": 107,
@@ -3799,20 +2601,8 @@
    "unit": "c4.solma",
    "block": "C4",
    "phase": "Derin",
-   "start": 687.065,
-   "end": 689.336,
-   "screenText": "Görüntü usulca siliniyor.",
-   "spokenText": "Görüntü usulca siliniyor.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 687.065,
-   "visualCue": {
-    "visual": "image:off"
-   },
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 687.4896,
+   "end": 689.7604,
    "screen_text": "Görüntü usulca siliniyor.",
    "spoken_text": "Görüntü usulca siliniyor.",
    "screen_equals_spoken": true,
@@ -3836,18 +2626,8 @@
    "unit": "c4.solma",
    "block": "C4",
    "phase": "Derin",
-   "start": 691.194,
-   "end": 694.35,
-   "screenText": "Seni taşıyan zemini yeniden hissedebilirsin.",
-   "spokenText": "Seni taşıyan zemini yeniden hissedebilirsin.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 687.065,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 691.6223,
+   "end": 694.7783,
    "screen_text": "Seni taşıyan zemini yeniden hissedebilirsin.",
    "spoken_text": "Seni taşıyan zemini yeniden hissedebilirsin.",
    "screen_equals_spoken": true,
@@ -3869,18 +2649,8 @@
    "unit": "n2.hatirla",
    "block": "N2",
    "phase": "Derin",
-   "start": 708.515,
-   "end": 712.59,
-   "screenText": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli.",
-   "spokenText": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 708.515,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 708.955,
+   "end": 712.9876,
    "screen_text": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli.",
    "spoken_text": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli.",
    "screen_equals_spoken": true,
@@ -3892,7 +2662,7 @@
     "dawn": false
    },
    "flags": [
-    "derin>5",
+    "kesim-dar-pay",
     "kesim-kulak"
    ]
   },
@@ -3903,20 +2673,10 @@
    "unit": "n2.hatirla",
    "block": "N2",
    "phase": "Derin",
-   "start": 714.448,
-   "end": 719.115,
-   "screenText": "Hatırlamazsan \"Kendime dinlenmeye izin veriyorum\" demen de olur.",
-   "spokenText": "Hatırlamazsan \"Kendime dinlenmeye izin veriyorum\" demen de olur.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 708.515,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
-   "screen_text": "Hatırlamazsan \"Kendime dinlenmeye izin veriyorum\" demen de olur.",
-   "spoken_text": "Hatırlamazsan \"Kendime dinlenmeye izin veriyorum\" demen de olur.",
+   "start": 714.8495,
+   "end": 718.8682,
+   "screen_text": "Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
+   "spoken_text": "Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
    "screen_equals_spoken": true,
    "voice_gain_db": -3.0,
    "visual_cue": null,
@@ -3926,7 +2686,7 @@
     "dawn": false
    },
    "flags": [
-    "derin>5",
+    "kesim-dar-pay",
     "kesim-kulak"
    ]
   },
@@ -3937,18 +2697,8 @@
    "unit": "n2.dilek",
    "block": "N2",
    "phase": "Derin",
-   "start": 736.363,
-   "end": 739.794,
-   "screenText": "Niyetini dersten sonra da taşımak sana kalmış.",
-   "spokenText": "Niyetini dersten sonra da taşımak sana kalmış.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 736.363,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 736.1333,
+   "end": 739.5641,
    "screen_text": "Niyetini dersten sonra da taşımak sana kalmış.",
    "spoken_text": "Niyetini dersten sonra da taşımak sana kalmış.",
    "screen_equals_spoken": true,
@@ -3968,18 +2718,8 @@
    "unit": "k.anahtar3",
    "block": "K",
    "phase": "Derin",
-   "start": 747.041,
-   "end": 748.876,
-   "screenText": "Uyanık bir dinlenme bu.",
-   "spokenText": "Uyanık bir dinlenme bu.",
-   "voiceGainDb": -3.0,
-   "resumeAt": 747.041,
-   "visualCue": null,
-   "visualState": {
-    "phase": "derin",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 746.8293,
+   "end": 748.6642,
    "screen_text": "Uyanık bir dinlenme bu.",
    "spoken_text": "Uyanık bir dinlenme bu.",
    "screen_equals_spoken": true,
@@ -3990,7 +2730,9 @@
     "image": "off",
     "dawn": false
    },
-   "flags": []
+   "flags": [
+    "kulak-kenar"
+   ]
   },
   {
    "i": 113,
@@ -3999,20 +2741,8 @@
    "unit": "k.donus",
    "block": "K",
    "phase": "Kapanış",
-   "start": 755.124,
-   "end": 756.926,
-   "screenText": "Artık dönüş zamanı.",
-   "spokenText": "Artık dönüş zamanı.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 755.124,
-   "visualCue": {
-    "visual": "dawn"
-   },
-   "visualState": {
-    "phase": "kapanis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 754.9294,
+   "end": 756.7314,
    "screen_text": "Artık dönüş zamanı.",
    "spoken_text": "Artık dönüş zamanı.",
    "screen_equals_spoken": true,
@@ -4034,18 +2764,8 @@
    "unit": "k.nefes",
    "block": "K",
    "phase": "Kapanış",
-   "start": 760.55,
-   "end": 763.049,
-   "screenText": "Nefesin kendi ritmini bulabilir.",
-   "spokenText": "Nefesin kendi ritmini bulabilir.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 760.55,
-   "visualCue": null,
-   "visualState": {
-    "phase": "kapanis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 760.364,
+   "end": 762.8634,
    "screen_text": "Nefesin kendi ritmini bulabilir.",
    "spoken_text": "Nefesin kendi ritmini bulabilir.",
    "screen_equals_spoken": true,
@@ -4065,18 +2785,8 @@
    "unit": "k.sesler",
    "block": "K",
    "phase": "Kapanış",
-   "start": 767.297,
-   "end": 771.163,
-   "screenText": "Yakındaki ve uzaktaki sesler yeniden duyuluyor.",
-   "spokenText": "Yakındaki ve uzaktaki sesler yeniden duyuluyor.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 767.297,
-   "visualCue": null,
-   "visualState": {
-    "phase": "kapanis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 767.1285,
+   "end": 770.995,
    "screen_text": "Yakındaki ve uzaktaki sesler yeniden duyuluyor.",
    "spoken_text": "Yakındaki ve uzaktaki sesler yeniden duyuluyor.",
    "screen_equals_spoken": true,
@@ -4096,18 +2806,8 @@
    "unit": "k.hareket",
    "block": "K",
    "phase": "Kapanış",
-   "start": 777.328,
-   "end": 781.28,
-   "screenText": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin.",
-   "spokenText": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 777.328,
-   "visualCue": null,
-   "visualState": {
-    "phase": "kapanis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 777.1718,
+   "end": 781.1239,
    "screen_text": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin.",
    "spoken_text": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin.",
    "screen_equals_spoken": true,
@@ -4129,18 +2829,8 @@
    "unit": "k.hareket",
    "block": "K",
    "phase": "Kapanış",
-   "start": 782.297,
-   "end": 786.361,
-   "screenText": "Bir yerin ağrırsa ya da başın dönerse hareketi bırak.",
-   "spokenText": "Bir yerin ağrırsa ya da başın dönerse hareketi bırak.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 777.328,
-   "visualCue": null,
-   "visualState": {
-    "phase": "kapanis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 782.1416,
+   "end": 786.2058,
    "screen_text": "Bir yerin ağrırsa ya da başın dönerse hareketi bırak.",
    "spoken_text": "Bir yerin ağrırsa ya da başın dönerse hareketi bırak.",
    "screen_equals_spoken": true,
@@ -4162,18 +2852,8 @@
    "unit": "k.goz",
    "block": "K",
    "phase": "Kapanış",
-   "start": 796.609,
-   "end": 801.737,
-   "screenText": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin.",
-   "spokenText": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 796.609,
-   "visualCue": null,
-   "visualState": {
-    "phase": "kapanis",
-    "image": "off",
-    "dawn": false
-   },
+   "start": 796.471,
+   "end": 801.5998,
    "screen_text": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin.",
    "spoken_text": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin.",
    "screen_equals_spoken": true,
@@ -4193,18 +2873,8 @@
    "unit": "k.oda.ayrinti",
    "block": "K",
    "phase": "Kapanış",
-   "start": 810.985,
-   "end": 814.356,
-   "screenText": "Bir renk, bir biçim, bir doku.",
-   "spokenText": "Bir renk, bir biçim, bir doku.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 810.985,
-   "visualCue": null,
-   "visualState": {
-    "phase": "kapanis",
-    "image": "off",
-    "dawn": true
-   },
+   "start": 810.8649,
+   "end": 814.236,
    "screen_text": "Bir renk, bir biçim, bir doku.",
    "spoken_text": "Bir renk, bir biçim, bir doku.",
    "screen_equals_spoken": true,
@@ -4215,7 +2885,9 @@
     "image": "off",
     "dawn": true
    },
-   "flags": []
+   "flags": [
+    "kulak-kenar"
+   ]
   },
   {
    "i": 120,
@@ -4224,18 +2896,8 @@
    "unit": "k.zaman",
    "block": "K",
    "phase": "Kapanış",
-   "start": 822.521,
-   "end": 826.336,
-   "screenText": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun.",
-   "spokenText": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 822.521,
-   "visualCue": null,
-   "visualState": {
-    "phase": "kapanis",
-    "image": "off",
-    "dawn": true
-   },
+   "start": 822.4128,
+   "end": 826.2281,
    "screen_text": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun.",
    "spoken_text": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun.",
    "screen_equals_spoken": true,
@@ -4257,18 +2919,8 @@
    "unit": "k.yan",
    "block": "K",
    "phase": "Kapanış",
-   "start": 831.043,
-   "end": 834.337,
-   "screenText": "Sırtüstü yatıyorsan önce bir yanına dön.",
-   "spokenText": "Sırtüstü yatıyorsan önce bir yanına dön.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 831.043,
-   "visualCue": null,
-   "visualState": {
-    "phase": "kapanis",
-    "image": "off",
-    "dawn": true
-   },
+   "start": 830.9491,
+   "end": 834.2428,
    "screen_text": "Sırtüstü yatıyorsan önce bir yanına dön.",
    "spoken_text": "Sırtüstü yatıyorsan önce bir yanına dön.",
    "screen_equals_spoken": true,
@@ -4290,18 +2942,8 @@
    "unit": "k.yandakal",
    "block": "K",
    "phase": "Kapanış",
-   "start": 840.502,
-   "end": 843.271,
-   "screenText": "Bir süre yan yatarak dinlenmek de olur.",
-   "spokenText": "Bir süre yan yatarak dinlenmek de olur.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 840.502,
-   "visualCue": null,
-   "visualState": {
-    "phase": "kapanis",
-    "image": "off",
-    "dawn": true
-   },
+   "start": 840.4196,
+   "end": 843.1894,
    "screen_text": "Bir süre yan yatarak dinlenmek de olur.",
    "spoken_text": "Bir süre yan yatarak dinlenmek de olur.",
    "screen_equals_spoken": true,
@@ -4321,18 +2963,8 @@
    "unit": "k.otur",
    "block": "K",
    "phase": "Kapanış",
-   "start": 855.519,
-   "end": 859.222,
-   "screenText": "Ellerinden destek alarak yavaşça doğrulup otur.",
-   "spokenText": "Ellerinden destek alarak yavaşça doğrulup otur.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 855.519,
-   "visualCue": null,
-   "visualState": {
-    "phase": "kapanis",
-    "image": "off",
-    "dawn": true
-   },
+   "start": 855.4545,
+   "end": 859.1576,
    "screen_text": "Ellerinden destek alarak yavaşça doğrulup otur.",
    "spoken_text": "Ellerinden destek alarak yavaşça doğrulup otur.",
    "screen_equals_spoken": true,
@@ -4352,18 +2984,8 @@
    "unit": "k.bekle",
    "block": "K",
    "phase": "Kapanış",
-   "start": 867.47,
-   "end": 870.589,
-   "screenText": "Kalkmadan önce birkaç nefes böyle kal.",
-   "spokenText": "Kalkmadan önce birkaç nefes böyle kal.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 867.47,
-   "visualCue": null,
-   "visualState": {
-    "phase": "kapanis",
-    "image": "off",
-    "dawn": true
-   },
+   "start": 867.4227,
+   "end": 870.5426,
    "screen_text": "Kalkmadan önce birkaç nefes böyle kal.",
    "spoken_text": "Kalkmadan önce birkaç nefes böyle kal.",
    "screen_equals_spoken": true,
@@ -4383,18 +3005,8 @@
    "unit": "k.kalk",
    "block": "K",
    "phase": "Kapanış",
-   "start": 882.92,
-   "end": 889.14,
-   "screenText": "Sonra acele etmeden kalkabilirsin; başın dönerse yeniden otur ve bekle.",
-   "spokenText": "Sonra acele etmeden kalkabilirsin; başın dönerse yeniden otur ve bekle.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 882.92,
-   "visualCue": null,
-   "visualState": {
-    "phase": "kapanis",
-    "image": "off",
-    "dawn": true
-   },
+   "start": 882.8962,
+   "end": 889.1162,
    "screen_text": "Sonra acele etmeden kalkabilirsin; başın dönerse yeniden otur ve bekle.",
    "spoken_text": "Sonra acele etmeden kalkabilirsin; başın dönerse yeniden otur ve bekle.",
    "screen_equals_spoken": true,
@@ -4414,20 +3026,8 @@
    "unit": "k.son",
    "block": "K",
    "phase": "Kapanış",
-   "start": 892.222,
-   "end": 894.752,
-   "screenText": "Buradasın ve uyanıksın.",
-   "spokenText": "Buradasın ve uyanıksın.",
-   "voiceGainDb": 0.0,
-   "resumeAt": 892.222,
-   "visualCue": {
-    "visual": "end"
-   },
-   "visualState": {
-    "phase": "kapanis",
-    "image": "off",
-    "dawn": true
-   },
+   "start": 892.2046,
+   "end": 894.7349,
    "screen_text": "Buradasın ve uyanıksın.",
    "spoken_text": "Buradasın ve uyanıksın.",
    "screen_equals_spoken": true,
@@ -4443,37 +3043,24 @@
    "flags": []
   }
  ],
- "closing": {
-  "jumpTo": 757.426,
-  "returnToneAt": null,
-  "firstWordAt": 760.55
- },
- "release": {
-  "C4": {
-   "activeFrom": 570.772,
-   "activeUntil": 687.065,
-   "prefixFile": "yoga-d02-birak-imge.m4a"
-  }
- },
- "windows": [],
  "visual": [
   {
-   "t": 4.165,
+   "t": 4.177,
    "cue": "phase:varis",
    "clip": "a.hosgeldin"
   },
   {
-   "t": 105.787,
+   "t": 105.935,
    "cue": "phase:derinlesme",
    "clip": "n1.sec"
   },
   {
-   "t": 346.057,
+   "t": 346.508,
    "cue": "phase:derin",
    "clip": "c2.dikkat"
   },
   {
-   "t": 432.669,
+   "t": 433.249,
    "cue": "pulse",
    "clip": "c2.n10",
    "breath": {
@@ -4481,7 +3068,7 @@
    }
   },
   {
-   "t": 438.694,
+   "t": 439.276,
    "cue": "pulse",
    "clip": "c2.n09",
    "breath": {
@@ -4489,7 +3076,7 @@
    }
   },
   {
-   "t": 444.719,
+   "t": 445.302,
    "cue": "pulse",
    "clip": "c2.n08",
    "breath": {
@@ -4497,7 +3084,7 @@
    }
   },
   {
-   "t": 450.744,
+   "t": 451.329,
    "cue": "pulse",
    "clip": "c2.n07",
    "breath": {
@@ -4505,7 +3092,7 @@
    }
   },
   {
-   "t": 456.768,
+   "t": 457.356,
    "cue": "pulse",
    "clip": "c2.n06",
    "breath": {
@@ -4513,7 +3100,7 @@
    }
   },
   {
-   "t": 462.793,
+   "t": 463.382,
    "cue": "pulse",
    "clip": "c2.n05",
    "breath": {
@@ -4521,7 +3108,7 @@
    }
   },
   {
-   "t": 468.818,
+   "t": 469.409,
    "cue": "pulse",
    "clip": "c2.n04",
    "breath": {
@@ -4529,7 +3116,7 @@
    }
   },
   {
-   "t": 474.843,
+   "t": 475.435,
    "cue": "pulse",
    "clip": "c2.n03",
    "breath": {
@@ -4537,7 +3124,7 @@
    }
   },
   {
-   "t": 480.868,
+   "t": 481.462,
    "cue": "pulse",
    "clip": "c2.n02",
    "breath": {
@@ -4545,7 +3132,7 @@
    }
   },
   {
-   "t": 486.892,
+   "t": 487.488,
    "cue": "pulse",
    "clip": "c2.n01",
    "breath": {
@@ -4553,17 +3140,17 @@
    }
   },
   {
-   "t": 570.772,
+   "t": 571.451,
    "cue": "image:on",
    "clip": "c4.yer"
   },
   {
-   "t": 687.065,
+   "t": 687.49,
    "cue": "image:off",
    "clip": "c4.solma"
   },
   {
-   "t": 755.124,
+   "t": 754.929,
    "cue": "dawn",
    "clip": "k.donus"
   },
@@ -4574,22 +3161,17 @@
    "span_s": 90.0
   },
   {
-   "t": 892.222,
+   "t": 892.205,
    "cue": "end",
    "clip": "k.son"
   }
  ],
- "dawn": {
-  "start": 810.0,
-  "spanSec": 90.0,
-  "rule": "max(k.donus.start, end - 90)"
- },
  "music_events": [
   {
    "layer": "bed",
    "label": "yatak/Varış-1",
    "t0": 0.0,
-   "t1": 113.787
+   "t1": 113.935
   },
   {
    "layer": "all",
@@ -4599,101 +3181,117 @@
   },
   {
    "layer": "bed",
+   "event": "level",
+   "from": "Varış",
+   "to": "Derinleşme",
+   "t0": 97.935,
+   "t1": 105.935,
+   "db_from": -33.41,
+   "db_to": -34.91,
+   "db_per_s": 0.188
+  },
+  {
+   "layer": "bed",
    "label": "yatak/Varış-Derinleşme-1",
-   "t0": 105.787,
-   "t1": 354.057
+   "t0": 105.935,
+   "t1": 354.508
   },
   {
    "layer": "bed",
    "event": "crossfade",
-   "t0": 105.787,
-   "t1": 113.787,
+   "t0": 105.935,
+   "t1": 113.935,
    "law": "equal-power"
   },
   {
    "layer": "bed",
+   "event": "level",
+   "from": "Derinleşme",
+   "to": "Derin",
+   "t0": 339.066,
+   "t1": 346.508,
+   "db_from": -34.91,
+   "db_to": -36.41,
+   "db_per_s": 0.202
+  },
+  {
+   "layer": "bed",
    "label": "yatak/Derin-1",
-   "t0": 346.057,
-   "t1": 559.001
+   "t0": 346.508,
+   "t1": 579.451
   },
   {
    "layer": "bed",
    "event": "crossfade",
-   "t0": 346.057,
-   "t1": 354.057,
+   "t0": 346.508,
+   "t1": 354.508,
    "law": "equal-power"
   },
   {
    "layer": "bed",
    "label": "yatak/Derin-2",
-   "t0": 551.001,
-   "t1": 722.448
+   "t0": 571.451,
+   "t1": 762.929
   },
   {
    "layer": "bed",
    "event": "crossfade",
-   "t0": 551.001,
-   "t1": 559.001,
+   "t0": 571.451,
+   "t1": 579.451,
    "law": "equal-power"
-  },
-  {
-   "layer": "imge",
-   "label": "imge-1",
-   "t0": 570.772,
-   "t1": 695.065
   },
   {
    "layer": "imge",
    "event": "fade-in",
-   "t0": 570.772,
-   "t1": 578.772
+   "t0": 571.451,
+   "t1": 579.451,
+   "cue": "layer:imge (c4.yer)"
   },
   {
    "layer": "imge",
    "event": "fade-out",
-   "t0": 687.065,
-   "t1": 695.065
-  },
-  {
-   "layer": "bed",
-   "label": "yatak/Derin-3",
-   "t0": 714.448,
-   "t1": 763.124
-  },
-  {
-   "layer": "bed",
-   "event": "crossfade",
-   "t0": 714.448,
-   "t1": 722.448,
-   "law": "equal-power"
+   "t0": 687.49,
+   "t1": 695.49,
+   "cue": "layer:imge-off (c4.solma)"
   },
   {
    "layer": "tone",
    "event": "returnTone",
-   "t": 753.124,
+   "t": 752.929,
    "before_clip": "k.donus",
    "lufs_integrated": -30.0,
-   "dur_s": 4.0,
-   "sound": "donus.synth-D5.wav"
+   "dur_s": 4.0
   },
   {
    "layer": "bed",
    "label": "yatak/Kapanış-1",
-   "t0": 755.124,
+   "t0": 754.929,
    "t1": 900.0
   },
   {
    "layer": "bed",
    "event": "crossfade",
-   "t0": 755.124,
-   "t1": 763.124,
+   "t0": 754.929,
+   "t1": 762.929,
    "law": "equal-power"
+  },
+  {
+   "layer": "bed",
+   "event": "level",
+   "from": "Derin",
+   "to": "Kapanış",
+   "t0": 754.929,
+   "t1": 762.929,
+   "db_from": -36.41,
+   "db_to": -33.41,
+   "db_per_s": 0.375
   },
   {
    "layer": "music+nature",
    "event": "end-fade",
    "t0": 895.0,
-   "t1": 900.0
+   "t1": 900.0,
+   "cue": "fade:5s (k.son)"
   }
  ],
  "nature_events": [
@@ -5031,30 +3629,35 @@
   }
  ],
  "levels": {
-  "speechClipLufs": -18.0,
-  "masterTrimDb": 0.0,
-  "musicTargetLufsByPhase": {
+  "music_target_lufs_by_phase": {
    "Varış": -33.41,
    "Derinleşme": -34.91,
    "Derin": -36.41,
    "Kapanış": -33.41
   },
-  "natureBelowMusicDb": 10.0,
-  "imgeBelowBedDb": 8.0,
-  "roomToneDbfsRms": -58.0,
-  "voicePhaseGainDb": {
+  "music_plus_nature_target_lufs_by_phase": {
+   "Varış": -33.0,
+   "Derinleşme": -34.5,
+   "Derin": -36.0,
+   "Kapanış": -33.0
+  },
+  "nature_below_music_db": 10.0,
+  "imge_below_bed_db": 8.0,
+  "room_tone_dbfs_rms": -58.0,
+  "speech_clip_lufs": -18.0,
+  "voice_phase_gain_db": {
    "Varış": 0.0,
    "Derinleşme": -1.5,
    "Derin": -3.0,
    "Kapanış": 0.0
   },
-  "voiceGainRamps": [
+  "voice_gain_ramps": [
    {
     "from": "a.agirlik",
     "to": "n1.sec",
-    "t0": 97.457,
-    "t1": 105.787,
-    "sec": 8.33,
+    "t0": 97.581,
+    "t1": 105.935,
+    "sec": 8.354,
     "db_from": 0.0,
     "db_to": -1.5,
     "ge_4s": true
@@ -5062,9 +3665,9 @@
    {
     "from": "c1.k1",
     "to": "c2.dikkat",
-    "t0": 338.644,
-    "t1": 346.057,
-    "sec": 7.413,
+    "t0": 339.066,
+    "t1": 346.508,
+    "sec": 7.442,
     "db_from": -1.5,
     "db_to": -3.0,
     "ge_4s": true
@@ -5072,17 +3675,14 @@
    {
     "from": "k.anahtar3",
     "to": "k.donus",
-    "t0": 748.876,
-    "t1": 755.124,
-    "sec": 6.248,
+    "t0": 748.664,
+    "t1": 754.929,
+    "sec": 6.265,
     "db_from": -3.0,
     "db_to": 0.0,
     "ge_4s": true
    }
   ]
  },
- "qa": {
-  "pass": true,
-  "report": "_rapor/d02-15dk.json"
- }
+ "windows": []
 }

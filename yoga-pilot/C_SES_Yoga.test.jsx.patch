@@ -1,0 +1,100 @@
+diff --git a/app/src/modules/yoga/Yoga.test.jsx b/app/src/modules/yoga/Yoga.test.jsx
+index c681978..ba787b4 100644
+--- a/app/src/modules/yoga/Yoga.test.jsx
++++ b/app/src/modules/yoga/Yoga.test.jsx
+@@ -1,7 +1,7 @@
+ // Yoga ekran akışı (modul.md §2; PLAN.v3 §D.2–D.4): web'de yok; iPhone'da güvenlik kartı → kütüphane → ayrıntı → (ses
+ // denetimi: yalnız dosyası varken) → önce puanı → oynatıcı → sonra puanı → zorlanma → bitiş; X → durdurma ekranı. Yerel
+ // köprü taklit edilir (lib/native.js lesson*); çizelge public/yoga'dan okunur.
+-import { describe, it, expect, vi, beforeEach } from 'vitest'
++import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+ import '../../test/fakeDom.js'
+ import { createElement as h, act } from 'react'
+ import { readFileSync } from 'node:fs'
+@@ -53,6 +53,18 @@ const { YT } = await import('./text.js')
+ const { SAFETY_ORDER, SAFETY_LEAD } = await import('./Yoga.jsx')
+ const { resetLessonData } = await import('./journal.js')
+ const { dayKey } = await import('../../lib/calendar.js')
++// Bu dosyanın akışları tek ders (Ders 2 · 15 dk) yayımlıyken yazıldı. İlk bölüm yayımlandıktan sonra (2026-09-30: dört
++// ders, on bir süre; lib/yogaLessons.js) aynı akışlar aynı veriyle sınansın diye öteki süreler test süresince
++// yayımlanmamış sayılır. Çok dersli kütüphane ve süre seçimi: Yoga.data.test.jsx, lib/yogaLessons.test.js.
++const { LESSONS: LESSONS_ALL } = await import('../../lib/yogaLessons.js')
++let pubSaved = null
++beforeEach(() => {
++  pubSaved = Object.fromEntries(Object.entries(LESSONS_ALL).map(([n, L]) => [n, structuredClone(L.versions)]))
++  for (const L of Object.values(LESSONS_ALL)) for (const [m, v] of Object.entries(L.versions)) if (!(L.n === 2 && m === '15')) delete v.published
++})
++afterEach(() => {
++  for (const [n, v] of Object.entries(pubSaved ?? {})) LESSONS_ALL[n].versions = v
++})
+ const wait = (ms) => new Promise((r) => setTimeout(r, ms))
+ const tick = () => act(async () => wait(320)) // bir konum okuması (250 ms)
+ 
+@@ -392,7 +404,7 @@ describe('ders: baştan sona', () => {
+     expect(meta.sections.map((x) => x.name)).toEqual(['Karşılama', 'Niyet (sankalpa)', 'Beden dolaşımı', 'Nefes ve geri sayma', 'İmgeleme', 'Niyete dönüş', 'Kapanış'])
+     expect(meta.resume.length).toBeGreaterThan(50)
+     // cümlenin içindeyken "Kapanışa geç": cümle bitene kadar bekler
+-    eng.time = 710 // n2.hatirla (708.96–712.99)
++    eng.time = 710 // n2.hatirla#1 (708.515–712.59)
+     await tick()
+     await r.tap('Kapanışa geç')
+     expect(eng.calls.some((c) => c[0] === 'cross')).toBe(false)
+@@ -401,7 +413,7 @@ describe('ders: baştan sona', () => {
+     await tick()
+     const cross = eng.calls.find((c) => c[0] === 'cross')
+     expect(cross[1].file).toBe('yoga/ders2-15.mp3')
+-    expect(cross[1].at).toBeCloseTo(750.929, 3)
++    expect(cross[1].at).toBeCloseTo(757.426, 3) // closing.jumpTo (ilk bölüm dosyası; eskisi 750,929)
+     // dosya biter: kayıt hemen yazılır, puan sonra eklenir
+     currentLesson().listened = 820
+     eng.time = 900
+@@ -411,7 +423,7 @@ describe('ders: baştan sona', () => {
+     const rec = r.store.addSession.mock.calls[0][0]
+     expect(rec.seconds).toBeGreaterThanOrEqual(820)
+     expect(rec.seconds).toBeLessThanOrEqual(822) // son okumada geçen süre (duvar saatiyle sınırlı)
+-    expect(rec).toMatchObject({ type: 'yoga', lesson: 2, planned: 900, reachedClosing: true, completed: true, quickClose: true, before: 6, after: null, voice: 'hoc', bg: 'music', scene: 'orman', posture: 'lie', contentHash: '726417faa1760e11' })
++    expect(rec).toMatchObject({ type: 'yoga', lesson: 2, planned: 900, reachedClosing: true, completed: true, quickClose: true, before: 6, after: null, voice: 'hoc', bg: 'music', scene: 'orman', posture: 'lie', contentHash: 'c875dcef4885db95' })
+     expect(r.p.onRefresh).toHaveBeenCalled()
+     expect(eng.calls.map((c) => c[0])).toContain('stop')
+     expect(eng.calls.at(-1)).toEqual(['journalClear']) // kayıt yazıldı: yerel kayıt silinir (iki kez yazılmaz)
+@@ -461,19 +473,19 @@ describe('ders: baştan sona', () => {
+     await tick()
+     await r.tap('Sürdür')
+     expect(eng.calls.at(-1)[0]).toBe('resume')
+-    expect(eng.calls.at(-1)[1].at).toBeCloseTo(4.1768 - 1.2, 3) // klibin ilk parçasının başı (geçiş payıyla)
++    expect(eng.calls.at(-1)[1].at).toBeCloseTo(4.165 - 1.2, 3) // klibin ilk parçasının başı (geçiş payıyla)
+     eng.time = 600 // imge penceresi, sessizlik
+     await tick()
+     await r.tap('Kapanışa geç')
+     await tick()
+     const first = eng.calls.filter((c) => c[0] === 'cross')
+     expect(first).toHaveLength(1)
+-    expect(first[0][1].at).toBeCloseTo(687.49 - 1.2, 2) // c4.solma: "Görüntü usulca siliniyor."
++    expect(first[0][1].at).toBeCloseTo(687.065 - 1.2, 2) // c4.solma: "Görüntü usulca siliniyor."
+     eng.time = 696
+     await tick()
+     const both = eng.calls.filter((c) => c[0] === 'cross')
+     expect(both).toHaveLength(2)
+-    expect(both[1][1].at).toBeCloseTo(750.929, 3)
++    expect(both[1][1].at).toBeCloseTo(757.426, 3)
+     await r.unmount()
+     clearCurrentLesson()
+   })
+@@ -656,7 +668,7 @@ describe('ders: baştan sona', () => {
+     eng.time = 400
+     await tick()
+     const s = currentLesson()
+-    expect(s.closeAt).toBeCloseTo(750.929, 3)
++    expect(s.closeAt).toBeCloseTo(757.426, 3)
+     const drag = async (v) => {
+       const input = r.container.querySelectorAll((n) => n.nodeName === 'INPUT')[0]
+       const props = input[Object.keys(input).find((k) => k.startsWith('__reactProps'))]
+@@ -841,7 +853,7 @@ describe('konum okuma (applyStatus)', () => {
+     const tl = await loadTimeline('yoga/ders2-15.timeline.json')
+     const sections = sectionsOfTimeline(tl)
+     const closeAt = closingAt(tl)
+-    expect(closeAt).toBeCloseTo(750.929, 3)
++    expect(closeAt).toBeCloseTo(757.426, 3)
+     const s = { tl, lastPos: 400, closeAt }
+     expect(seekTarget(tl, sections, 880)).toBeGreaterThan(closeAt) // korumasız hedef k.kalk'a iner
+     expect(seekGoal(s, sections, 880)).toBeCloseTo(closeAt, 6)

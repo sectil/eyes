@@ -194,6 +194,9 @@ describe('"Sonra yaparım"', () => {
 
 describe('uyku dersi: müzik kuyruğu', () => {
   it('kuyruk dosyası yokken seçici yok, kuyruk istenmez, kayıtta 0; dosya varken seçici ve lessonStart tail; uyku sonunda "Durdur" dokununca', async () => {
+    // İlk bölümle kuyruk dosyası pakette (yogaLessons.js musicTailFile); dosyasız hâl burada geçici olarak kurulur
+    expect(saved.tail).toBe('yoga/ders3-kuyruk.mp3')
+    LESSONS[3].musicTailFile = null
     const r = await mount()
     await r.tapWhere((n) => n.textContent.includes('Uykuya Geçiş'))
     expect(r.text()).toContain('Bu dersten hemen sonra araç kullanma.')
