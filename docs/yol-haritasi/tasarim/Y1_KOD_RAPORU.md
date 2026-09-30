@@ -196,3 +196,21 @@ Ek notlar: S0 kararı D8 `lib/today.js:431`'i değişecek dosya sayıyor; balonc
 `lib/today.js` değişmedi. Site görselleri ve metni, uygulamanın Y1 sürümüyle aynı gün yayınlanmalı; `site/dist`
 yayın sırasında derlenir. Ç17 yıldızı ve 320 pt düzeltmesi yalnız ilerlemeyle kurulan yolda çizilir; üretimde yol her
 zaman böyledir.
+
+## 8. §7'deki altı notun kararı (2026-09-30)
+
+Sahip onayı devretti: "Senin için onayda; mükemmelse onay, değilse onaylama, tekrar gözden geçir." Her not plana ve koda
+karşı okundu.
+
+1. **Onay.** 230 bileşim doğru seçim: "Kutu" adı ve kanıtı kutu olmayan kalıba verilmez. Plan §1 ve §A.4 düzeltmesi:
+   "629 bileşim zarfta; ailesinin adına uyan 230'u seçilir".
+2. **Onay.** Eski kullanıcının yolunda açılan yer iki testle sabit; §G.6 izinli farklar listesine §7-2'deki cümleyle girer.
+3. **Onay, plan metni düzeltilerek.** 2. günün 5 dk'ya çıkması S0 kararı 8'i bozmaz: 1. bölüm uzarsa göz bütçesi
+   (5 dk) dolar; bütçe kuralı "aynen" korunur ve bant 5 dk yazar. D8 cümlesine eklenir: "1. bölüm uzar da göz bütçesi
+   dolarsa mola 5 dakikadır; bant bunu yazar."
+4. **Onay.** Plan tablosu koda göre düzeltilir: 3 dk bütçe 12,5 / 12,8 dk, en uzun 15 dk; Daire ile Yukarı–aşağı gün aşırı.
+5. **Onay.** `steps` hareket sayısı olarak kalır; adım kimlikleri `stepIds` (veride yalnız yeni alan). Plan §A.8-4, §A.10.
+6. **Onay.** "Normal set" Ana sayfadaki setin adıyla aynı, yeni sözcük değil; yol Nefes durağı basamağı açar; 90. gün
+   sonrası odak haftası Y2'ye; kısa E testi `pathDay`'e sayılmaz (plan: "yola ait kayıt").
+
+§6'daki üç cümle ve NIT #23 metin kapısında (iki bağımsız inceleme: B1a metin iş akışı); §5'teki 14 madde cihaz işi.
