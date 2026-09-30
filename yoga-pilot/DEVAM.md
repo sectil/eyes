@@ -53,18 +53,21 @@ PLAN.v2 §B.5, §A.2.2 (23:30), §E.6 #5; PLAN.v3 §D.3 ve Ders 3'ün 45 sn penc
 - **MP3 süre başlığı:** `lameenc` Xing başlığı yazmıyordu; oynatıcılar süreyi ilk çerçeveden tahmin ediyordu
   (`ders2-15.mp3` başlıkta 1058 sn). `mixib.add_xing` başa Xing çerçevesi ekliyor; bütün dosyalar (Ders 2 dahil) yeniden
   üretildi, ses çerçeveleri bayt bayt aynı.
-- **Ders 1 bekliyor (sahip kararı):** 68/68 birim seçildi (2'si `kulak` bayrağıyla: `c3.ad` Scribe "Brahmari" yazıyor,
-  `car.c1d` tek heceli "Al…"), ama plan `D1-kilit`ten kalıyor: nefes kilitli sayılar (1,00 sn periyot, 0,3 sn taban →
-  parça ≤ 0,70 sn) ve "ver…" ipuçları (1,20 sn, 0,6 sn taban → ≤ 0,60 sn) Nefona Hoca'da 0,72–0,96 sn; 27 parça sınırı
-  0,02–0,33 sn aşıyor (`ders1.script.md` risk 1 bunu önceden yazmıştı). Seçenekler sahibe soruldu.
+- **Ders 1 bitti** (3, 5, 15 dk): `ders1-{3,5,15}.mp3` + `.timeline.json`, `kulak-ders1.md`; §12.1 ölçütlerinin hepsi
+  geçti. 68/68 birim (2'si `kulak` bayrağıyla: `c3.ad` Scribe "Brahmari" yazıyor, `car.c1d` tek heceli "Al…"). Nefes
+  kilidi (sahip kararı, SAHIP_ISTEKLERI 15–16): kilitli 87 parçanın sessiz başı ve sonu atıldı (`kilit_kirp_ib.py`),
+  periyodu 1,2 sn olan 8 "ver…" klibinin `gapFloor` değeri 0,6 → 0,5 sn. Üç noktasız yeniden seslendirme denendi,
+  çözmediği için kullanılmadı. Müzik: `d1-varis`, `d1-kapanis` (+1 yarım ses), sentez bordun (alışta kabarır; 15 dk'da
+  yükseliş sınırlayıcısı en çok 1,48 dB kısıyor).
 - **Yeni araçlar ve değişiklikler:** `kuyruk_ib.py`, `kalici_ib.py` (seçilmiş parçalar → `_kalici/sel/hoc/dNN/*.flac`),
   `synth_ib.py` (Ders 5 tonu + çan, Ders 1 bordunu). `mixib.py`: yavaş yatak yükseliş sınırlayıcısı (`bed_rise_limit`;
-  Ders 3'te konuşma/yatak döngüsünde, Ders 5'te yerel kısmadan sonra), yağmur damlası kaynak doğrulaması
+  Ders 3'te konuşma/yatak döngüsünde, Ders 1 ve 5'te yerel kısmadan sonra), yağmur damlası kaynak doğrulaması
   (`nature_at_edit`), Ders 5 için çanı da kapsayan yerel kısma (`duck_tone`), Xing başlığı. `sel_ib.py`: işlemeden sonra
   tık veren çekimde sıradakine geçer; `--kulak` (SPEC.v3 §6.3 son adım).
 - **Kredi:** API kotası (131 bin) bir kez doldu; sahip kredi ekledi (186 bin). v4 çekimleri ÜCRETLİ (durum yanıtındaki
   0 kredi yanıltıcı): hesap 133.485 kullanılmış gösterirken defter 132.745 (konuşma ≈ 48 bin). Aradaki ≈ 740 kredinin
   kaynağı bulunamadı. Bu parti ≈ 118,4 bin (tavan 195 bin).
 - **5 saniye kuralı** (bağlayıcı, `docs/yol-haritasi/tasarim/SAHIP_ISTEKLERI.md`): ses için bu ortamda dinleyebilen
-  değerlendirici yok; dosyalar sahibe gönderilmedi, nasıl uygulanacağı soruldu.
+  değerlendirici yok; sahip kararı (SAHIP_ISTEKLERI 15): dosyalar "5 sn sınaması yapılmadı" notuyla sahibe gider, ilk
+  5 saniyeyi sahip değerlendirir. Ders 2, 3, 5 gönderildi, sahip sorun bildirmedi (madde 17); Ders 1 ayrıca gönderildi.
 - Açık: SPEC §10 yardımcı dosyaları (ilk ders girişi, bırakma ön klipleri, durdurma dönüşü) kurulmadı.

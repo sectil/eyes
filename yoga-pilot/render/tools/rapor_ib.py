@@ -120,9 +120,10 @@ for m in mins:
         n += 1
         P('%d. **%d dk yatak zarfı sınıra yakın**: en büyük 1 sn artış %.2f dB/sn (%.1f. sn; eşik 1,0).' % (
             n, m, lr['max_rise_db_per_s'], lr['at_s']))
-    if r['plan']['slack_min_s'] < 17:
+    floor_s = 10 if m == 3 else 15      # boş pay tabanı (VARSAYIM, ders1.script.md: 3 dk 10 sn, 5 dk ve üstü 15 sn)
+    if r['plan']['slack_min_s'] < floor_s + 2:
         n += 1
-        P('%d. **%d dk boş pay sınıra yakın**: %.2f sn (taban 15).' % (n, m, r['plan']['slack_min_s']))
+        P('%d. **%d dk boş pay sınıra yakın**: %.2f sn (taban %d).' % (n, m, r['plan']['slack_min_s'], floor_s))
     for note in r['music']['notes']:
         if 'konuşma payı 0.4' in note or 'konuşma payı 0.3' in note:
             n += 1

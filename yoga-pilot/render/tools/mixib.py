@@ -79,7 +79,7 @@ def d01_config():
         'no': 1, 'id': 'd01', 'lesson_path': Y + '/b/ders1/ders1.lesson.json', 'planner': ('ders1', 'timing_d1'),
         'corner': (4.68, 'hi'), 'scene': None, 'release': [3, 5, 15],
         'selections': [R + '/sel/hoc/d01/selection-d01.json'],
-        'arrange': 'd01',
+        'arrange': 'd01', 'bed_rise_limit': 0.9, 'bed_rise_limit_after_duck': True,
         'music': {'varis': [{'file': MUS + '/el/d1-varis.wav', 'usable': (16.5, 162.0)}],
                   'kapanis': [{'file': MUS + '/el/d1-kapanis.keyD.wav', 'usable': (8.5, 152.0)}],
                   'family': 'Re'},
