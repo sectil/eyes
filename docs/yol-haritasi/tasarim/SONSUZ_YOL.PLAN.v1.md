@@ -1,5 +1,7 @@
 # Sonsuz yol · Üst akıl planı (sürüm 1)
 
+> **Durum (2026-10-01):** Y1 kodda (Build 67), metin kapısı ve notlar kapandı, cihaz listesi sahipte; Y2–Y6 başlamadı; Y5 B2'ye taşındı. Güncel pano: `docs/yol-haritasi/YAPILACAKLAR.md` → "DURUM PANOSU".
+
 Tarih: 2026-09-29 (tur 1 ve tur 2 düzeltmeleriyle). Durum: **ONAYLANDI (sahibi, 2026-09-30: "sonsuz plana da başla"; altı karar öneriyle; hukukçu adı yok → yedek).** Uygulama koduna dokunulmadı, ücretli çağrı
 yapılmadı. Belge ve notlar `docs/yol-haritasi/tasarim/arastirma-v1/` klasöründedir. Sonsuz yolun kodu, onaylı yoga planının karar 7'si gereği yoga
 yayınından sonra yazılır; bu belge yalnız planı verir.

@@ -46,6 +46,43 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
 9. [ ] **Ölçüm ilkesi açıkları:** her modül istatistik kaydeder ve Gelişim'de görünür (ANA_BELGE §4). Taramada
    bulunan eksikler aşağıda "Ölçüm ilkesi" bölümünde.
 
+## DURUM PANOSU · kaldığımız yer (2026-10-01)
+
+İşaretler: `[x]` yalnız cihazda doğrulandı ya da belge/karar işi bitti · `[~]` kodda bitti, cihaz ya da sahip bekliyor ·
+`[ ]` başlamadı. Ayrıntı aşağıdaki bölümlerde.
+
+**Sonsuz yol** (`tasarim/SONSUZ_YOL.PLAN.v1.md`)
+- [~] (a) E testi haftada bir: kod bitti, cihaz listesi sürüyor.
+- [~] (b) İlk açılışta önce ölçüm: kod bitti, cihazda denenmedi.
+- [~] **Y1 = (c) ilerleme motoru, nefes ve göz merdivenleri:** kod Build 67'de; metin kapısı ve 6 not kapandı
+      (`tasarim/Y1_KOD_RAPORU.md` §8–§9); Bug 35 düzeldi; tarayıcı sınamasında KALDI yok. 5 sn kapısı açık (3 turda
+      yalnız "Bugünün ritmi" geçti). **Sıradaki: sahibin telefonda 10 maddesi** (§9).
+- [ ] Y2 Gelişim "Yolun" bölümü: B2'den sonra; Gelişim merkezi oturumunun devri bekleniyor.
+- [ ] Y3 günün ilk açılışı: yeni Ana sayfa tasarımına bağlı.
+- [ ] Y4 "Günün nasıl geçti".  · Y5 (hava) → B2'ye taşındı.  · [ ] Y6 Nef dönem yorumları.
+- [ ] (d) sessiz ölçüm, (e) uyku ve yürüyüş (yürüyüş = B3), (f) Nef haftalık/aylık. (g) yoga: 3 ders Build 67'de, kalan 6
+      ders ücretli üretim bekliyor.
+- [ ] §3.K nefona.com güncellemesi: en sonda, modüller cihazda görülünce.
+
+**Bildirimler, hava, yürüyüş** (`tasarim/bildirim-hava-yuruyus/`)
+- [x] B0: gece düzeltmeleri, eşdeğerlik tabanı, rıza metinleri, hukukçu soruları.
+- [~] **B1a "Bana hatırlat":** arka plan kodu bitti (`f73bea2`, `6eef4cd`, `d2fa5e8`): 7 modül PubMed kaynaklı, 53 cümle
+      sahip onaylı, planlayıcı, gece kuralları, dokunma yönlendirmesi; kapalıyken eşdeğerlik 0 fark. **Arayüz kapalı**
+      (sahip kararıyla durdu): bitiş satırı 0/5, uygulamadaki saat sayfası 2/5, Bildirimler 1/5 (`5sn-b1a-yeni.md`).
+      Gece sessizliği 4/5 geçti ama Bildirimler'den açıldığı için o da görünmüyor. Yeniden açmak için 2 karar: Bildirimler
+      yalnız kurulu hatırlatmaları mı listelesin (+ "Hatırlatma ekle"); veri yokken öneri saati modül başına farklı mı.
+- [ ] B1b Nef cümle bankası: ücretli; maliyet ve istem önce sahibe.
+- [~] **B2 hava:** tasarım kapısı geçti (il/ilçe 4/5, "…'de misin?" 4/5, katmanlı rıza anlaşılırlık 5/5); teklif kartı
+      Ana sayfaya bağlandı. Kod turu 1 bitti (`80c8e28`, `SKY_UI` kapalı; SkyPlugin.swift hedefte değil). Sahip
+      WeatherKit'i açtı, konum izni metnini onayladı. **Sıradaki: Mac'te `sky-check.sh` sonucu** → SkyPlugin hedefe,
+      entitlement ve Info.plist → cihaz → `SKY_UI` açılır. Sonra hava satırı ve hava sayfası (Ana sayfa tasarımına bağlı),
+      sabah havası katman 1–2.
+- [ ] B3 yürüyüş eşliği. · [ ] B3+ Canlı Etkinlik.
+
+**Sahipte bekleyenler:** (1) `sky-check.sh` çıktısı; (2) Build 67'de Y1'in 10 maddesi; (3) B2'nin 5 yeni cümlesi
+("Hangi ilçedesin?", "İlçe ara", "Yalnız İzmir", "Konumuna en yakın ilçe merkezi bu.", "Konum") ve rızada "Nerede
+durur?"un başa alınması; (4) B1a arayüzü için 2 karar.
+
 ## Sonsuz yol ve ilk 5 saniye (sahibi, 2026-09-29) — kararlar verildi, uygulama onay bekliyor
 Sahibi: "döngü 28 değil, sonsuz… nefes 1. gün 1 dk, 2. gün 1, 3. gün 2… kırpma, sonra sağ-sol, sonra üçü birlikte,
 sonra yukarı-aşağı… bütün modüller bilgi biriktirir, esas beyin merkez, Nef sözcümüz… şu anki sistemi asla bozmuyoruz…
@@ -175,6 +212,8 @@ Uygulama sırası (her biri ayrı onay, test, TestFlight): (a) E testi haftada b
         güncellemeyle haftalık yola geçer; Gelişim notu "Başlangıç değerin N testle hesaplandı" (kısa testler de
         sayılır), takip 22. günden beri.
 
+- [~] **(c) ilerleme motoru, nefes ve göz merdivenleri = Y1** (2026-09-30): kod Build 67'de; ayrıntı ve cihaz listesi
+      `tasarim/Y1_KOD_RAPORU.md` §5, §8, §9; durum DURUM PANOSU'nda.
 - [~] **(b) İlk açılışta önce ölçüm** (2026-09-29, sahibinin onayıyla): kodda bitti, CİHAZDA DENENMEDİ, TestFlight'a
       girmedi. Sıra: giriş ekranı → İlk Bakış → hesap → güvenlik bilgisi → 4 soru → Seni tanıyalım → deneme (önce: giriş →
       hesap → güvenlik → İlk Bakış → sorular). `lib/setupFlow.js` firstOpenStep (sıra kararı, testli); İlk Bakış'ta
@@ -500,13 +539,13 @@ Zaman" hukukçuyu bekler; hava için Apple'a soru gönderilmez.
 - [~] B1a çekirdeği (ekransız, 2026-09-30): kaynaklar (13; tam metin gereken 4'ü girmedi), `remind` sözleşmesi,
       `moduleRemind.js`, `notifyAll.js`, `notifyApply` kimlik kümeleri, eşdeğerlik 20.000 bağlam × 2 katman 0 fark.
       App.jsx'e bağlı değil; açık: `notifyTap.test.js` + App'te `actionId`, birleştirme metni, ek saat sessizlik uyarısı.
-- [ ] B1a · `sources.js` kayıtları ve kanıt kapısı (11 kaynak ve koşullular; PubMed esummary, `kaynak-dogrulama.md`) →
+- [~] B1a (kod bitti, arayüz kapalı; bkz. DURUM PANOSU) · `sources.js` kayıtları ve kanıt kapısı (11 kaynak ve koşullular; PubMed esummary, `kaynak-dogrulama.md`) →
       `remind` sözleşmesi → eşdeğerlik düzeneği (iki katman, 20.000 bağlam) → `moduleRemind.js` → `notifyAll.js` →
       `notifyApply` (`actionId`, açılışta temizlik) → `RemindField`/`RemindSheet` → modüllere tek satır → Profil →
       Bildirimler (gece sessizliği sayfası dâhil) → bilim kartı → elle yazılmış cümleler (sahip onaylı) → sürüm notu.
       Tasarım kapısında yeni: gece sessizliği sayfası, birleşik bildirim, Ana sayfa teklif yuvası.
 - [ ] B1b · Nef cümle bankası (`app/scripts/nef-bank/`; maliyet ve istem önce sahibe; kör değerlendirme; metin onayı).
-- [ ] B2 · hava: `SkyPlugin` + `sky.js` + il/ilçe tablosu (GeoNames ADM2) → `SkyLine` + hava sayfası → `weather` rızası ve
+- [~] B2 (tasarım geçti, kod turu 1 bitti, SKY_UI kapalı; bkz. DURUM PANOSU) · hava: `SkyPlugin` + `sky.js` + il/ilçe tablosu (GeoNames ADM2) → `SkyLine` + hava sayfası → `weather` rızası ve
       gizlilik sayfası → sabah havası (katman 1) → AlarmKit `stopIntent` (katman 2) → arka plan yenilemesi (cihaz
       ölçümünden sonra karar). Ana sayfa işi Ana sayfa tasarımı onaylandıktan sonra.
 - [ ] B3 · yürüyüş eşliği: `WalkPlugin` → `walk` modülü, ekran, kayıt, veri merkezi → sesli koç (ses parçaları ücretli,

@@ -1,5 +1,7 @@
 # DEVİR · Bildirimler, hava ve yürüyüş eşliği (ana oturuma)
 
+> **Durum (2026-10-01):** B0 bitti; B1a kodu bitti, arayüzü kapalı; B2 tasarımı geçti, kod turu 1 bitti (SKY_UI kapalı); B1b ve B3 başlamadı. Güncel pano: `docs/yol-haritasi/YAPILACAKLAR.md` → "DURUM PANOSU".
+
 Tarih: 2026-09-30. Plan: `PLAN.v1.md` (**onaylandı**). Tasarım: `tasarim.html`
 (https://claude.ai/artifact/8hZrrTGoMxnmqZuxTfjX1V). Sahibin sözleri: `SAHIP_ISTEKLERI.md`. Dayanaklar: `arastirma/`.
 **Tek kaynak `PLAN.v1.md`'dir** (tur 2 düzeltmeli); bu belge özetler ve sıralar. Çelişki görürsen plan geçerlidir;
