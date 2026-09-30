@@ -513,6 +513,42 @@ body.w320 .vc-circle { width: 170px; height: 170px; }
 .cc.on { border-color: var(--a-accent); background: var(--a-accent-soft); }
 .cc.on .radio { box-shadow: inset 0 0 0 7px var(--a-accent); }
 
+
+/* ---- tur 4 ---- */
+.wk-n.t b { color: #fff; }
+.t-light .wk-n.t b { color: #0b1219; }
+.splits { display: grid; gap: 8px; padding: 12px 14px; border-radius: 16px; background: rgba(127,140,150,0.14); }
+.sp-h { display: flex; justify-content: space-between; font-size: 0.82rem; }
+.sp-h span { opacity: .7; }
+.sp-row { position: relative; display: grid; grid-template-columns: 48px 1fr; align-items: center; gap: 8px; font-size: 0.86rem; padding: 6px 0; }
+.sp-row b { font: 700 1rem/1 var(--f-mono); position: relative; z-index: 1; }
+.sp-row span { opacity: .75; position: relative; z-index: 1; }
+.sp-row i { position: absolute; left: 56px; right: 0; top: 50%; height: 6px; margin-top: 8px; border-radius: 3px; background: rgba(127,140,150,0.25); }
+.sp-row i::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: var(--w); border-radius: 3px; background: #19c2d1; }
+.t-light .sp-row i::after { background: #0b7480; }
+.sp-row.now b { color: #19c2d1; }
+.t-light .sp-row.now b { color: #0b7480; }
+.walk .wk-health { border-top: 0; padding-top: 0; text-align: center; }
+body.w320 .splits .sp-row:first-of-type { display: none; }
+.sci2 { padding: 16px; display: grid; gap: 12px; border-radius: 22px; background: var(--a-surface); border: 1px solid var(--a-border); box-shadow: var(--a-shadow); }
+.sci2-big { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 14px; align-items: center; }
+.sci2-big b { font: 800 2.8rem/0.9 var(--f-display); color: var(--a-ok); letter-spacing: -0.02em; }
+.sci2-big p { font: 600 1rem/1.35 var(--f-body); }
+.sci-src2 { display: inline-flex; align-items: center; gap: 6px; font: 600 0.9rem/1 var(--f-body); color: var(--a-accent); }
+.sci-src2 .ico { width: 15px; height: 15px; }
+.dt-art { position: relative; height: 150px; border-radius: 24px; background: linear-gradient(160deg, var(--a-accent-soft), rgba(47,107,234,0.10)); overflow: hidden; }
+.dt-art span:not(.me) { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--a-iris-1); opacity: .55; }
+.dt-art .p1 { left: 12%; top: 72%; } .dt-art .p2 { left: 27%; top: 60%; opacity: .65 !important; } .dt-art .p3 { left: 42%; top: 52%; opacity: .75 !important; } .dt-art .p4 { left: 57%; top: 44%; opacity: .85 !important; } .dt-art .p5 { left: 70%; top: 37%; opacity: .95 !important; }
+.dt-art .me { position: absolute; left: 78%; top: 18%; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: linear-gradient(150deg, var(--a-iris-1), var(--a-iris-2)); box-shadow: 0 0 0 10px rgba(17,169,184,0.18), 0 0 0 22px rgba(17,169,184,0.08); }
+.t-dark .dt-art .me { color: #041017; }
+.dt-art .me .ico { width: 24px; height: 24px; }
+.dt-list { display: grid; gap: 12px; }
+.dt-list > div { display: grid; grid-template-columns: 36px minmax(0,1fr); gap: 12px; align-items: center; }
+.dt-list .ri { width: 36px; height: 36px; border-radius: 12px; display: grid; place-items: center; background: var(--a-accent-soft); color: var(--a-accent); }
+.dt-list .ri .ico { width: 18px; height: 18px; }
+.dt-list p { font-size: 0.98rem; line-height: 1.35; }
+body.w320 .dt-art { height: 90px; }
+
 @media (max-width: 860px) {
   .hero-in { grid-template-columns: 1fr; }
   .hero-scenes { overflow-x: auto; padding-bottom: 6px; }
@@ -562,7 +598,7 @@ body.w320 .vc-circle { width: 170px; height: 170px; }
         <a class="btn-pg primary" href="#kararlar">Senden 3 karar</a>
         <a class="btn-pg ghost" href="#hatirlat">Ekranlara bak</a>
       </div>
-      <div class="hero-facts"><span><b>12</b> ekran</span><span>açık ve koyu tema</span><span>büyük ve küçük iPhone</span></div>
+      <div class="hero-facts"><span><b>14</b> ekran</span><span>açık ve koyu tema</span><span>büyük ve küçük iPhone</span></div>
     </div>
     <div class="hero-scenes" aria-label="Kilit ekranında iki Nef bildirimi">
       <div class="phone t-dark lock" style="--pw:300px;--ph:560px">
@@ -661,6 +697,7 @@ body.w320 .vc-circle { width: 170px; height: 170px; }
   </div>
   <div class="strip" data-screens="walk"></div>
   <div class="strip" data-screens="coach"></div>
+  <div class="strip" data-screens="detect"></div>
 </section>
 
 <!-- ================= 5. BİLİM ================= -->
@@ -922,18 +959,23 @@ body.w320 .vc-circle { width: 170px; height: 170px; }
     <div class="scr">
       <div class="wk-top"><span>Yürüyüş · Nef seninle</span><span class="gps"><i></i>Ölçülüyor</span></div>
       <div class="wk-n t"><b>00:18:42</b><span>Süre</span></div>
-      <div class="wk-n p"><b>9'40"</b><span>Şu anki tempo · dk/km</span></div>
+      <div class="wk-n p"><b>9'40"</b><span>Şu anki tempo · 1 km'de dakika</span></div>
       <div class="wk-sm">
         <div class="wk-n"><b>1,94</b><span>km</span></div>
         <div class="wk-n"><b>2.316</b><span>Adım · bu yürüyüş</span></div>
       </div>
       <div class="cue"><svg class="ico"><use href="#i-voice"/></svg><span>Son 250 metre: kilometrede 9 dakika 40 saniye.</span></div>
-      <div class="wk-health">Bugün toplam 7.482 adım · Apple Sağlık</div>
+      <div class="splits">
+        <div class="sp-h"><b>Kilometreler</b><span>2. km: 940 / 1000 m</span></div>
+        <div class="sp-row"><span>1. km</span><b>9'50"</b><i style="--w:86%"></i></div>
+        <div class="sp-row now"><span>2. km</span><b>9'35"</b><i style="--w:94%"></i></div>
+      </div>
       <div class="wk-btns">
         <span class="rb-l"><span class="rb"><svg class="ico"><use href="#i-pause"/></svg></span>Duraklat</span>
         <span class="rb-l"><span class="rb voice"><svg class="ico"><use href="#i-voice"/></svg></span>Koç · 250 m</span>
         <span class="rb-l"><span class="rb stop"><svg class="ico"><use href="#i-stop"/></svg></span>Bitir</span>
       </div>
+      <div class="wk-health">Bugün toplam 7.482 adım · Apple Sağlık</div>
     </div>
   </div>
 </template>
@@ -963,18 +1005,54 @@ body.w320 .vc-circle { width: 170px; height: 170px; }
       <span class="back"><svg class="ico"><use href="#i-back"/></svg>Ana sayfa</span>
       <div class="nefcard"><span class="nefdot"></span><div><small>Nef · 15.00</small><p>Hava 25 derece, yağmur akşam. Şimdi 10 dakikalık bir tur tam zamanında.</p></div></div>
       <div class="btn-a">Yürüyüşe başla</div>
-      <div class="card-a sci">
-        <span class="sci-h">Bilim ne diyor?</span>
-        <p class="sci-f">Bir denemede yürüyüş önerisi, sonraki 30 dakikada atılan adımı artırdı.</p>
+      <div class="sci2">
+        <span class="sci-h">Neden şimdi?</span>
+        <div class="sci2-big"><b>%24</b><p>Bir denemede yürüyüş önerisinden sonraki 30 dakikada atılan adım bu kadar arttı.</p></div>
         <div class="sci-meta"><span>44 kişi</span><span>6 hafta</span><span>Deneme</span></div>
-        <p class="sci-lim">Etki haftalar içinde azaldı.</p>
-        <div class="sci-links"><span><svg class="ico" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-link"/></svg> Klasnja ve ark., 2019 · PubMed</span></div>
+        <p class="sci-lim">Etki haftalar geçtikçe azaldı.</p>
+        <span class="sci-src2"><svg class="ico"><use href="#i-link"/></svg>Kaynağı aç · Klasnja ve ark., 2019</span>
       </div>
     </div>
   </div>
 </template>
 
 
+
+<template id="tpl-detect">
+  <div class="phone lock">
+    <div class="sb"><span></span><i>●●● <s></s></i></div>
+    <div class="lk-date">Perşembe 1 Ekim</div>
+    <div class="lk-time">19:05</div>
+    <div class="lk-list">
+      <div class="nt">
+        <span class="nt-ico" aria-hidden="true"></span>
+        <div class="nt-top"><span>Nefona</span><span>şimdi</span></div>
+        <div class="nt-t">Yürüyüşünü geç fark ettim</div>
+        <div class="nt-b">25 dakika yürüdün, ben ancak şimdi gördüm. Yürürken hemen fark etmemi ister misin?</div>
+      </div>
+      <div class="nt-acts"><span>Evet, fark et</span><span>Şimdi değil</span></div>
+    </div>
+    <div class="lk-foot"><span></span><span></span></div>
+  </div>
+</template>
+
+<template id="tpl-detect-sheet">
+  <div class="phone">
+    <div class="sb"><span>19:05</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <div class="dt-art" aria-hidden="true"><span class="p1"></span><span class="p2"></span><span class="p3"></span><span class="p4"></span><span class="p5"></span><span class="me"><svg class="ico"><use href="#i-foot"/></svg></span></div>
+      <div class="h1-a" style="font-size:1.55rem">Yürürken seni fark edeyim mi?</div>
+      <div class="dt-list">
+        <div><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><p>Yürümeye başlayınca <b>5–10 dakika içinde</b> sorarım.</p></div>
+        <div><span class="ri"><svg class="ico"><use href="#i-eye"/></svg></span><p>Konumun <b>telefondan çıkmaz</b>, saklanmaz. Yalnız yer değiştirdiğini anlarım.</p></div>
+        <div><span class="ri"><svg class="ico"><use href="#i-bell"/></svg></span><p>İstediğin an <b>Bildirimler</b>'den kapatırsın.</p></div>
+      </div>
+      <div class="btn-a">Aç</div>
+      <p class="fine" style="text-align:center">iPhone sana konum için "Her Zaman" iznini soracak.</p>
+      <div class="btn-a plain">Şimdi değil</div>
+    </div>
+  </div>
+</template>
 
 <script>
 (function () {
@@ -990,6 +1068,8 @@ body.w320 .vc-circle { width: 170px; height: 170px; }
     wx: [['tpl-wx', 'Hava sayfası', 'Saat saat sıcaklık ve yağmur olasılığı, Nef\'in yorumu, sabah havası anahtarı, atıf.']],
     walk: [['tpl-lockwalk', 'Yürüyüş sorusu', 'Kilit ekranında. Dokununca yürüyüş ekranı açılır, son 15 dakika yürüyüşe eklenir.'],
            ['tpl-walk', 'Yürüyüş ekranı', 'Dört büyük sayı. Anons anında aynı cümle ekranda. Kilitliyken ölçüm sürer.']],
+    detect: [['tpl-detect', 'Fark et teklifi', 'Nef bir yürüyüşü geç fark ettiyse, bir kez ve seyrek sorar. İki kez hayır denirse bir daha sormaz.'],
+             ['tpl-detect-sheet', 'Açıklama sayfası', 'Ne yapacağı, konumun telefondan çıkmadığı, nasıl kapatılacağı. Aç deyince iPhone Her Zaman iznini sorar.']],
     coach: [['tpl-coach', 'Sesli koç', 'Tek soru: ne sıklıkla. Her seçenekte koçun söyleyeceği cümle; ses ve Dinle aynı satırda.']],
     sci: [['tpl-sci', 'Bilim kartı', 'Bildirime dokununca: Nef\'in cümlesi, eylem, tek bulgu, sınırı ve PubMed bağlantısı.']]
   };
