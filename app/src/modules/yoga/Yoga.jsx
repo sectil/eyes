@@ -700,7 +700,7 @@ function Library({ visible, onBack, onOpen }) {
     { id: 'three', label: YT.filters.three, ok: (n) => publishedMinutes(n).includes(3) },
   ].filter((f) => {
     const hits = visible.filter(f.ok).length
-    return hits > 0 && hits < visible.length // yalnız listeyi gerçekten daraltan süzgeç
+    return hits > 0 && hits < visible.length // yalnız listeyi gerçekten daraltan süzgeç; tek süzgeç kalırsa satır hiç çizilmez (5 sn: "tek hap filtre mi etiket mi")
   })
   const active = filters.find((f) => f.id === filter)
   const list = active ? visible.filter(active.ok) : visible
@@ -731,7 +731,7 @@ function Library({ visible, onBack, onOpen }) {
         <button type="button" className="btn-icon" onClick={onBack} aria-label={YT.back}><ChevronLeft size={20} aria-hidden="true" /></button>
       </div>
       <h1 className="yg-h yg-h-lg">{YT.libraryTitle}</h1>
-      {filters.length > 0 && (
+      {filters.length > 1 && (
         <div className="yg-chips" role="radiogroup" aria-label={YT.libraryTitle}>
           {filters.map((f) => (
             <button key={f.id} type="button" role="radio" className="yg-chip" aria-checked={filter === f.id} onClick={() => setFilter(filter === f.id ? null : f.id)}>{f.label}</button>
