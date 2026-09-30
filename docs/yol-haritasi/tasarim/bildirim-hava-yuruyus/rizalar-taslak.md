@@ -71,3 +71,10 @@ için. Veriler telefondan çıkmaz."*
 - `weather` "Ne kadar kalır?": "90 günlük günlük hava özeti" → "son 90 günün günlük hava özeti".
 - Rıza sayfası katmanlı: ilk ekranda kısa özet, onay kutusu ve düğme; dört bölüm dokununca açılır; metin harfi harfine aynı (hukukçuya bu düzen de sorulur).
 - (2026-10-01) `weather` "Ne kadar kalır?" silme cümlesi: "il ve ilçe adı, önbellek ve hava özeti silinir" (sahip onayı); kod da bunu yapar.
+
+## iOS konum izni metni (sahip onayı 2026-10-01)
+
+`NSLocationWhenInUseUsageDescription`: "Bulunduğun yerin havasını göstermek için yaklaşık konumunu kullanırım. Konum
+yuvarlanarak Apple'ın hava servisine gider; telefonda yalnız il ve ilçe adı kalır." Info.plist'e hava açılırken girer
+(SKY_UI ile birlikte); hukukçu adı gelene kadar App Store derlemesinde konum izni yok (DEVIR §7 onaylı yedek).
+WeatherKit: Apple Developer'da App ID için Capabilities ve App Services işaretlendi (sahip, 2026-10-01).

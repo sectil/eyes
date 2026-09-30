@@ -1,6 +1,8 @@
 // HEDEFTE DEĞİL (2026-10-01): bu dosya Xcode hedefine eklenmedi ve MainViewController kaydı yok; bu ortamda derlenemedi.
 // Açmak için: Xcode'da App hedefine ekle, MainViewController'a registerPluginInstance(SkyPlugin()) yaz, WeatherKit
 // yeteneğini ve entitlement'ı ekle, derle, DOĞRULA notlarını kapat; sonra App.jsx SKY_UI = true.
+// Info.plist NSLocationWhenInUseUsageDescription (sahip onaylı, rizalar-taslak.md): "Bulunduğun yerin havasını göstermek
+// için yaklaşık konumunu kullanırım. Konum yuvarlanarak Apple'ın hava servisine gider; telefonda yalnız il ve ilçe adı kalır."
 import Foundation
 import CoreLocation
 import Capacitor
