@@ -29,13 +29,16 @@ body { margin: 0; font-family: -apple-system, 'Onest Local', system-ui, sans-ser
   <div class="stack" id="s"></div>
 </div>
 <script>
-// ?v=a|b|c|m|gizli : bildirim metni çeşitleri (örnek veri: 5 gün, en dolu yay nefes)
+// ?v=a|b|c|m|gizli|h|m2 : bildirim metni çeşitleri (örnek veri: 5 gün, en dolu yay nefes)
 const V = {
   a: ['Kubben geçen hafta 5 gün ışıdı', 'En parlak yayın nefes oldu. Yeni haftanın ilk ışığı bugün.'],
   b: ['Geçen hafta 5 gün buradaydın', 'Nefes yayın o 5 günün hepsinde yandı. Kubbene bak, haftan orada.'],
   c: ['Haftan hazır', 'Geçen hafta 5 gün çalıştın; en dolu yayın nefes.'],
   m: ['İlk ayın tamam', 'Kubben 28 günün 24\'ünde ışıdı. Hareket yayın ilk kez tamamlandı.'],
   gizli: ['Haftan hazır', 'Kubbene bakmak için dokun.'],
+  // kapı 5 sonrası: a'nın sıcaklığı + b'nin açıklığı (haftalık); m'de alan adı açık (aylık)
+  h: ['Geçen hafta 5 gün çalıştın', 'Nefes yayın 5 günün hepsinde ışıdı. Yeni hafta bugün başlıyor.'],
+  m2: ['İlk ayın tamam', 'Hareket yayın 28 günün hepsinde ışıdı; ilk kez tamamlandı.'],
 }
 const v = new URLSearchParams(location.search).get('v') || 'a'
 const [t, b] = V[v]
