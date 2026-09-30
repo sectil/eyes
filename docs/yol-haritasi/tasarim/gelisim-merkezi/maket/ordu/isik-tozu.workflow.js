@@ -13,7 +13,7 @@ export const meta = {
 const R = '/home/user/eyes/docs/yol-haritasi/tasarim/gelisim-merkezi/maket/ordu'
 const D = `${R}/parcacik`
 const BRIEF = `${R}/BRIEF.md`
-const SHOT = `node ${R}/shot.mjs`
+const SHOT = `NODE_PATH=/opt/node22/lib/node_modules node ${R}/shot.mjs`
 const TECH = 'Işık tozu: Three.js r128 (cdnjs) Points; yordamsal SDF baştan örneklenmiş binlerce ışık noktası, toplamalı karışım, siluet parlar; beş bölge ayrı ışık bulutsuları; gözler halka yapılı iris parçacıkları ve kişinin hızıyla kırpar; yürürken hareket bölgesinden adım temposuyla ışık akar.'
 
 const CRIT = { type: 'object', properties: {

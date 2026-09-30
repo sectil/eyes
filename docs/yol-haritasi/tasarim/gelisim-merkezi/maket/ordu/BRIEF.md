@@ -73,7 +73,7 @@ Gözler bu hızla kırpar.
 
 ## Araçlar
 - Ekran görüntüsü:
-  `node /home/user/eyes/docs/yol-haritasi/tasarim/gelisim-merkezi/maket/ordu/shot.mjs <html mutlak yol> <çıktı klasörü> [hizli]`
+  `NODE_PATH=/opt/node22/lib/node_modules node /home/user/eyes/docs/yol-haritasi/tasarim/gelisim-merkezi/maket/ordu/shot.mjs <html mutlak yol> <çıktı klasörü> [hizli]`
   Tam kip 12 görüntü üretir (3 durum × 2 tema × 390/320), yaklaşık 4 dakika sürer. `hizli` kipi yalnız 390 genişliği
   çeker (6 görüntü); ara turlarda bunu, son turda tam kipi kullan. Bash'e `timeout: 600000` ver.
   Hatalar `errors.txt` dosyasına yazılır. Görüntüleri Read ile açıp **gerçekten bak**.
