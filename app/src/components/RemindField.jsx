@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import { Bell, ChevronRight } from 'lucide-react'
+import { Bell } from 'lucide-react'
 import { normalizeModuleReminders, pickAutoTime } from '../lib/moduleRemind.js'
 import RemindSheet from './RemindSheet.jsx'
 import { dot, listTimes, shownTimes } from './remindUi.js'
 import '../styles/remind.css'
 
 // "Bana hatırlat" satırı (PLAN.v1 §3.A.2; tasarım.html "Nefes tamam" ekranı): bitiş özetinin altında, "Ana sayfaya
-// dön"ün üstünde. Solda zil (yumuşak vurgu zemini), "Bana hatırlat" ve alt yazı, sağda Nef'in önerdiği saat soluk ve ok.
+// dön"ün üstünde. Solda zil, "Bana hatırlat" ve sağında Nef'in önerdiği saat (vurgu rengi, kalın; 320'de açıklama 2
+// satırda kalsın diye başlık satırında), altında açıklama. Tasarımdaki gibi ok yok; kart zeminden kenarla ayrılır.
 // Dokununca saat sayfası (RemindSheet). Kurulunca "Hatırlatman açık · Her gün 09.15 · saati Nef seçti".
 // Yol içinde açılan modülde çıkmaz (§A.2 "Birim yoldur"): inPath true → null.
 // Props (App ctx.remindField(route) bunları doldurur; K3):
@@ -31,17 +32,18 @@ export default function RemindField({ moduleId, remind, settings = {}, busy = []
   return (
     <>
       <button type="button" className={`rf-row${on ? ' on' : ''}${done ? ' done' : ''}`} onClick={() => setOpen(true)} aria-haspopup="dialog">
-        <span className="rf-ico" aria-hidden="true"><Bell size={20} /></span>
+        <span className="rf-ico" aria-hidden="true"><Bell size={22} /></span>
         {on ? (
           <span className="rf-text"><strong>{onText}</strong></span>
         ) : (
           <span className="rf-text">
-            <strong>Bana hatırlat</strong>
+            <span className="rf-head">
+              <strong>Bana hatırlat</strong>
+              {hint && <span className="rf-hint">{dot(hint)}</span>}
+            </span>
             <span className="rf-sub">Her gün, senin için uygun saatte. Saati Nef de seçebilir.</span>
           </span>
         )}
-        {hint && <span className="rf-hint">{dot(hint)}</span>}
-        <ChevronRight size={18} className="rf-go" aria-hidden="true" />
       </button>
       {open && (
         <RemindSheet

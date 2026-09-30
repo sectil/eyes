@@ -36,3 +36,21 @@ karşılıksız, ekranın alt yarısı boş. Plana göre bu dokunuş Ana sayfay�
 üstüdür ve Ana sayfa yeniden tasarlanıyor. Karar: birleşik bildirimin açtığı yer Ana sayfa tasarımına ("teklif yuvası"
 ile birlikte) bağlanır; kilit ekranı bildirimi iOS'un kendi kartıdır, Nefona'nın değiştirebileceği yalnız metindir
 (metin kapısında BR1–BR3).
+
+## Uygulamadaki hâl (kodlanmış ekranlar, 2026-09-30/10-01)
+
+| Ekran | Tur 1 | Tur 2 (yerleşim düzeltmesi) |
+|---|---|---|
+| "Bana hatırlat" satırı (bitiş ekranında) | 0/5 | 1/5 |
+| Saat sayfası | 3/5 | 1/5 |
+| Bildirimler | 1/5 | 2/5 |
+| Gece sessizliği | **4/5 · geçti** | — |
+
+Tur 2'nin ortak şikâyetleri yerleşim değil, içerik ve etkileşim kararı: satırda açık/kapalı durumu yok ("öneri mi,
+kurulu mu?"; altındaki "Kaydet" neyi kaydediyor); "Sen karar ver"de konuşanın kim olduğu belli değil (değerlendiricilerin
+önerisi "Nef seçsin" — onaylı metin değişikliği, sahip onayı ister); saat sayfası 16.30 derken Bildirimler "Nef seçti
+11.15" diyor (tutarsızlık, doğrulanacak); bütün satırlarda aynı zil simgesi; bitiş ekranının ilk cümlesi "Tedavi
+değildir…" kutlamayı söndürüyor (mevcut güvenlik metni; ayrı konu); vardiyalı çalışan için gündüz sessizliği yok (plan sınırı).
+
+**Karar:** iki tur geçmedi; aynı yöntem üçüncü kez denenmez. Arayüz `App.jsx` `REMIND_UI = false` ile kapatıldı (satır ve
+Bildirimler girişi görünmez; kimse modül hatırlatması kuramaz; plan bugünkü gibi). Yöntem değişikliği sahibe sunuldu.

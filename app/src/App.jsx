@@ -159,6 +159,11 @@ function useEyeClock(kind) {
 }
 
 
+// "Bana hatırlat" satırı ve Profil → Bildirimler girişi (B1a): uygulamadaki hâli 5 sn kapısından iki turda geçmedi
+// (2026-09-30: satır 1/5, saat sayfası 1/5, Bildirimler 2/5; docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/
+// 5sn-b1a-yeni.md). Geçene kadar kapalı: kimse modül hatırlatması kuramaz, plan bugünkü gibi kalır (eşdeğerlik).
+const REMIND_UI = false
+
 export default function App() {
   const [data, setData] = useState(store.get())
   const [screen, setScreen] = useState('home')
@@ -808,6 +813,7 @@ export default function App() {
   // saat sayfasını kendisi açar). remind'i olmayan modülde null. Yol içinde açılan modülde modül inPath: true verir.
   // VARSAYIM: yalnız iPhone uygulamasında (web'de bildirim yok; Bilgi'deki Hatırlatmalar satırı gibi).
   const remindField = (route, { inPath = false } = {}) => {
+    if (!REMIND_UI) return null
     const m = registry.forRoute(route) ?? registry.get(route)
     const entry = m ? remindEntryOf(m.id) : null
     if (!entry || !isIOSApp()) return null
@@ -1012,7 +1018,7 @@ export default function App() {
         onCoachLife={setCoachLife}
         alarm={alarmSt.platform === 'web' ? null : alarmProfile()}
         // Profil → Bildirimler özeti (PLAN.v1 §A.5, alarm özetinin kalıbı): Alarm bölümünden sonra; yalnız iPhone'da
-        notify={isIOSApp() ? { on: normalizeReminders(settings.reminders).optIn === 'yes', onOpen: () => go('notifications') } : null}
+        notify={REMIND_UI && isIOSApp() ? { on: normalizeReminders(settings.reminders).optIn === 'yes', onOpen: () => go('notifications') } : null}
         onAccount={() => go('account')}
         onSignOut={async () => { try { await signOut() } catch { /* çevrimdışı: yerel oturum yine kapanır */ } toGuest() }}
         onDeleteAccount={async () => {
