@@ -3,7 +3,7 @@
  "lesson": "d05",
  "minutes": 3,
  "T": 180,
- "generated_utc": "2026-09-30T08:36:47.425392+00:00",
+ "generated_utc": "2026-09-30T09:29:36.172288+00:00",
  "tool": "render/tools/mixib.py (mix.py fonksiyonları)",
  "file": "ders5-3.mp3",
  "bytes": 2453450,
@@ -318,7 +318,12 @@
    }
   ]
  },
- "bed_rise_limit": null,
+ "bed_rise_limit": {
+  "applied": false,
+  "max_rise_iter": [
+   0.636
+  ]
+ },
  "loudness_rise": {
   "criterion": "yatak zarfı: tınısız ve imge katmanısız yatak, açılış kararmasından sonra, konuşma altı dahil bütün dosyada ≤ 1 dB/sn (imge katmanının nota başlangıçları SPEC.v3 §7.2 ile ayrı sınırlanır; aşağıda imge dahil değer ayrıca)",
   "bed_envelope_no_tone_no_imge": {

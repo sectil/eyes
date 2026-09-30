@@ -106,7 +106,7 @@ def d05_config():
         'corner': (4.68, 'hi'), 'scene': None, 'release': [3, 5, 15],
         'selections': [R + '/sel/hoc/d05/selection-d05.json'],
         'arrange': 'd05',
-        'duck_tone': True, 'bed_rise_limit': 0.9, 'music': {'family': 'Sol (yerel sentez)'},
+        'duck_tone': True, 'bed_rise_limit': 0.9, 'bed_rise_limit_after_duck': True, 'music': {'family': 'Sol (yerel sentez)'},
         'nature': None, 'tone': 'bell', 'lufs_target': -18.0, 'end_fade': 5.0,
         # VARSAYIM: pencerede yatak −6 dB; iniş 6 sn, çıkış 10 sn (6 dB / 6 sn tam 1 dB/sn sınırında), çıkış çandan önce biter
         'withdraw': {'db': -6.0, 'down': 6.0, 'up': 10.0, 'bell_lead': 2.0},
@@ -449,13 +449,16 @@ def rise_limit_gain(x, lim, t_min, iters=8, shift=1.5):
     y = x
     hist = []
     c0 = t_min + 1.5
-    for _ in range(iters):
+    best = None                                  # (ölçülen en büyük artış, o ölçümün kazancı): yalnız ölçülmüş kazanç döner
+    for it in range(iters + 1):
         tc, st = M.st_curve(M.kpower(y), 3.0, 0.1)
         d = st[10:] - st[:-10]
         ok = np.isfinite(d) & (st[:-10] > -80) & (tc[:-10] >= c0)
         mx = float(np.max(d[ok]))
         hist.append(r(mx, 3))
-        if mx <= lim + 0.02:
+        if best is None or mx < best[0]:
+            best = (mx, None if gsum is None else gsum.copy())
+        if mx <= lim + 0.02 or it == iters:
             break
         tgt = st.copy()
         step = lim * 0.1
@@ -466,6 +469,7 @@ def rise_limit_gain(x, lim, t_min, iters=8, shift=1.5):
         gsum = add if gsum is None else gsum + add
         g = 10 ** (np.interp(np.arange(N) / SR, tc + shift, gsum, left=0.0, right=gsum[-1]) / 20)
         y = x * g.astype(np.float32)[:, None]
+    gsum = best[1]
     if gsum is None:
         return np.ones(N, dtype=np.float32), {'applied': False, 'max_rise_iter': hist}
     g = (10 ** (np.interp(np.arange(N) / SR, tc + shift, gsum, left=0.0, right=gsum[-1]) / 20)).astype(np.float32)
@@ -475,7 +479,7 @@ def rise_limit_gain(x, lim, t_min, iters=8, shift=1.5):
         dd = np.diff(np.concatenate([[0], red.astype(np.int8), [0]]))
         for a, b in zip(np.where(dd == 1)[0], np.where(dd == -1)[0]):
             spans.append([r(tc[a] + shift, 1), r(tc[b - 1] + shift, 1), r(float(gsum[a:b].min()), 2)])
-    return g, {'applied': True, 'limit_db_per_s': lim, 'shift_s': shift, 'max_rise_iter': hist,
+    return g, {'applied': True, 'limit_db_per_s': lim, 'shift_s': shift, 'max_rise_iter': hist, 'chosen_max_rise': r(best[0], 3),
                'max_reduction_db': r(float(gsum.min()), 2), 'spans_s_db': spans}
 
 
@@ -977,7 +981,7 @@ def run(les, minutes, plan_only=False):
         music = M.apply_env(bed, tt, env_b)
         nat = M.apply_env(nature_raw, tt, env_n) if cfg.get('nature') else np.zeros_like(music)
         rl_info = None
-        if cfg.get('bed_rise_limit'):
+        if cfg.get('bed_rise_limit') and not cfg.get('bed_rise_limit_after_duck'):
             g_rl, rl_info = rise_limit_gain(music + nat + room, cfg['bed_rise_limit'], M.OPEN_FADE + 3.0)
             music *= g_rl[:, None]
             nat *= g_rl[:, None]
@@ -1023,6 +1027,17 @@ def run(les, minutes, plan_only=False):
         sob, rows = M.speech_over_bed(v_pow, M.kpower(bg), speech)
         log('yerel yatak kısması', {k: round(x[2], 2) for k, x in needs.items()})
     del music0, nat0, tone0
+    if cfg.get('bed_rise_limit') and cfg.get('bed_rise_limit_after_duck'):
+        # VARSAYIM (Ders 5): yükseliş sınırlayıcısı yerel kısmadan SONRA, son yatakta (ölçütün ölçtüğü izde) çalışır:
+        # kapanışta ton genişlemesi, evre düzeyi yükselişi ve k.donus kısmasının geri açılışı üst üste biniyor.
+        # Yatak yalnız kısılır; konuşma/yatak yeniden ölçülür.
+        g_rl, rl_info = rise_limit_gain(music + nat + room, cfg['bed_rise_limit'], M.OPEN_FADE + 3.0, iters=12)
+        music *= g_rl[:, None]
+        nat *= g_rl[:, None]
+        room = room * g_rl[:, None]      # ölçülen iz ile uygulanan iz aynı olsun (oda sesi de aynı kazançla)
+        del g_rl
+        bg = music + nat + room + tone
+        sob, rows = M.speech_over_bed(v_pow, M.kpower(bg), speech)
     # --- karışım, sınırlayıcı, kodlama
     mix_raw = bg + voice[:, None] * np.float32(M.STEREO_SPEECH_GAIN)
     no = cfg['no']

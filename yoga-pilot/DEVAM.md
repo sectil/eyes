@@ -43,4 +43,28 @@ PLAN.v2 §B.5, §A.2.2 (23:30), §E.6 #5; PLAN.v3 §D.3 ve Ders 3'ün 45 sn penc
 - **Ders 2 bitti** (5, 15, 20 dk): `render/out/ilk-bolum/ders2-{5,15,20}.mp3` + `.timeline.json`, `kulak-ders2.md`;
   §12.1 ölçütlerinin hepsi geçti. 28 birim seslendirildi, hepsi Scribe'la birebir. Ek müzik: `el-derin-c` (düzey
   dengelenmiş), `el-imge-b`, `el-zitlik-b` (ilk zıtlık denemesi reddedildi). Ayrıntı `kulak-ders2.md`.
-- Ders 1, 3, 5 birim listeleri: `b/ders{1,3,5}/units-ib.json` (`b/work/make_units_ib.py`). Seslendirme sırada.
+- Ders 1, 3, 5 birim listeleri: `b/ders{1,3,5}/units-ib.json` (`b/work/make_units_ib.py`); hepsi seslendirildi.
+- **Ders 3 ve Ders 5 bitti** (Ders 3: 5, 15 dk + müzik kuyruğu; Ders 5: 3, 5, 15 dk): `render/out/ilk-bolum/`
+  `ders3-{5,15}.mp3`, `ders3-kuyruk.mp3`, `ders5-{3,5,15}.mp3` + `.timeline.json`; `kulak-ders3.md`, `kulak-ders5.md`.
+  §12.1 ölçütlerinin hepsi geçti (ayrıntı `_rapor/`). Seçimler: Ders 3 67/67, Ders 5 68/68 birim Scribe'la harf harf.
+- **Müzik kuyruğu** tek dosya: uygulama sözleşmesi taban dalında (`app/ios/App/App/AlarmPlugin.swift:547`, `:1074`;
+  `app/src/lib/yogaLessons.js:186` `musicTailFile: null`): dosya sonsuz döngüyle çalar, 2 sn açılır, son 180 sn kısılır.
+  Dosyada kararma yok, döngü 600 sn, dikiş eşit güçle (`render/tools/kuyruk_ib.py`). `musicTailFile`'ı kod oturumu doldurur.
+- **MP3 süre başlığı:** `lameenc` Xing başlığı yazmıyordu; oynatıcılar süreyi ilk çerçeveden tahmin ediyordu
+  (`ders2-15.mp3` başlıkta 1058 sn). `mixib.add_xing` başa Xing çerçevesi ekliyor; bütün dosyalar (Ders 2 dahil) yeniden
+  üretildi, ses çerçeveleri bayt bayt aynı.
+- **Ders 1 bekliyor (sahip kararı):** 68/68 birim seçildi (2'si `kulak` bayrağıyla: `c3.ad` Scribe "Brahmari" yazıyor,
+  `car.c1d` tek heceli "Al…"), ama plan `D1-kilit`ten kalıyor: nefes kilitli sayılar (1,00 sn periyot, 0,3 sn taban →
+  parça ≤ 0,70 sn) ve "ver…" ipuçları (1,20 sn, 0,6 sn taban → ≤ 0,60 sn) Nefona Hoca'da 0,72–0,96 sn; 27 parça sınırı
+  0,02–0,33 sn aşıyor (`ders1.script.md` risk 1 bunu önceden yazmıştı). Seçenekler sahibe soruldu.
+- **Yeni araçlar ve değişiklikler:** `kuyruk_ib.py`, `kalici_ib.py` (seçilmiş parçalar → `_kalici/sel/hoc/dNN/*.flac`),
+  `synth_ib.py` (Ders 5 tonu + çan, Ders 1 bordunu). `mixib.py`: yavaş yatak yükseliş sınırlayıcısı (`bed_rise_limit`;
+  Ders 3'te konuşma/yatak döngüsünde, Ders 5'te yerel kısmadan sonra), yağmur damlası kaynak doğrulaması
+  (`nature_at_edit`), Ders 5 için çanı da kapsayan yerel kısma (`duck_tone`), Xing başlığı. `sel_ib.py`: işlemeden sonra
+  tık veren çekimde sıradakine geçer; `--kulak` (SPEC.v3 §6.3 son adım).
+- **Kredi:** API kotası (131 bin) bir kez doldu; sahip kredi ekledi (186 bin). v4 çekimleri ÜCRETLİ (durum yanıtındaki
+  0 kredi yanıltıcı): hesap 133.485 kullanılmış gösterirken defter 132.745 (konuşma ≈ 48 bin). Aradaki ≈ 740 kredinin
+  kaynağı bulunamadı. Bu parti ≈ 118,4 bin (tavan 195 bin).
+- **5 saniye kuralı** (bağlayıcı, `docs/yol-haritasi/tasarim/SAHIP_ISTEKLERI.md`): ses için bu ortamda dinleyebilen
+  değerlendirici yok; dosyalar sahibe gönderilmedi, nasıl uygulanacağı soruldu.
+- Açık: SPEC §10 yardımcı dosyaları (ilk ders girişi, bırakma ön klipleri, durdurma dönüşü) kurulmadı.
