@@ -1,6 +1,6 @@
 # Gelişim merkezi · Plan (sürüm 1)
 
-Tarih: 2026-09-30. Durum: **ONAY BEKLİYOR.** Uygulama koduna dokunulmadı; ücretli çağrı yapılmadı. Dal:
+Tarih: 2026-09-30. Durum: **TASARIM KAPIDAN GEÇMEDİ; sahibin iki kararı bekleniyor (§2.1).** Veri, bildirim ve kod bölümleri tasarımdan bağımsızdır. Uygulama koduna dokunulmadı; ücretli çağrı yapılmadı. Dal:
 `claude/gelisim-merkezi-plan`. Kod, onaydan sonra ana oturumda (`claude/cool-pasteur-j5yupf`) yazılır.
 
 **Girdiler:** sahibin isteği (`SAHIP_ISTEKLERI.md` bu klasörde), `DENETIM.md` (bugünkü veri yolu, 4 kritik, 12 önemli
@@ -12,10 +12,10 @@ sayfası: `tasarim.html` (Artifact). Maket: `maket/maket.html`. Kapı notları: 
 
 ## 1. Tek sayfada
 
-**Ne değişir.** Gelişim sekmesinin başı, verinin hepsinin toplandığı tek bir canlı resim olur: **ışık katmanlarından
-bir baş.** Tabanda iki göz, üstünde baş biçiminde dört ışık yayı: Dikkat, Nefes, Ruh hâli, Hareket. Gözler Göz alanının
-kendisidir. Her yay, o alanda başladığından beri (en çok son 28 günde) kaç günün kaçında çalıştığını gösterir ve tepesinde
-"Nefes 26/28" yazar. Gözler kişinin İlk Bakış'ta ölçülen kendi kırpma hızıyla kırpar. Kişi yürürken Hareket yayı turuncu
+**Ne değişir.** Gelişim sekmesinin başı, verinin hepsinin toplandığı tek bir canlı resim olur: **ışık kubbesi.** Tabanda
+uygulamanın simgesindeki iris (Göz alanı), üstünde baş biçiminde dört ışık yayı: Dikkat, Nefes, Ruh hâli, Hareket
+(görünüm sahibin kararına bağlı, soru 1). Her yay, o alanda başladığından beri (en çok son 28 günde) kaç günün kaçında çalıştığını gösterir ve tepesinde
+"Nefes 26/28" yazar. İrisin göz bebeği kişinin İlk Bakış'ta ölçülen kendi kırpma hızıyla kırpar. Kişi yürürken Hareket yayı turuncu
 yanar ve üstünde adım temposunda bir ışık akar. Altında Nef'in tek cümlesi ve beş satır durur. Bir alana dokununca o
 alanın ayrıntısı açılır: düzen, basamak, ölçü, değişim.
 
@@ -50,8 +50,8 @@ katmanların kendisidir. Beş değerlendiricinin kapı sonuçları §2'de.
 genişletir** (G1 + G2), gelişim bildirimi B1'in üstüne G3 olarak Y2 ile aynı sürümde gelir, canlı yürüyüş B3'ün içinde
 G4 olarak gelir. Y2'nin tahmini ≈ 5 iş günüydü; bu plan ≈ 9–11 iş günüdür (VARSAYIM; §10).
 
-**Senden istenen kararlar (önerimle; §12).** (1) Beş alan ve adları. (2) Haftalık gelişim bildirimi. (3) Gözlerin
-kamerayla canlı bakması.
+**Senden istenen kararlar (önerimle; §12).** (1) Başın görünümü: gerçek baş ve iki göz mü, tek irisli ışık kubbesi mi.
+(2) İlk günlerde ne görünsün. (3) Beş alan, haftalık bildirim ve kamera (üçü öneriyle birlikte).
 
 ---
 
@@ -74,11 +74,34 @@ tepesinde "Nefes 8/9"; dolan yay koyu hapla işaretlenir; gözler iris halkası 
 ince iç çizgi kalktı; yürürken hap "Hareket 28/28 · şu an" olur; 320'de baş küçülür, Nef cümlesi ilk görünümde kalır;
 "Değişim yok" hapı başarı renginden ayrıldı (nötr); açıklama satırı büyüdü ve koyulaştı.
 
-**Kapı tur 2:** (§2.1'e sonuç yazılır; geçmezse bu plan sahibe gönderilmez.)
+**Kapı tur 2:** 1. gün 1/5, 9. gün 3/5, 30. gün 3/5, yürüyüş 4/5 → geçmedi. Yeni şikâyet: tabandaki iki göz,
+yaylarla birlikte yüz gibi okunuyor ("baykuş", "robot", "maskot"); 1. günde 1/1 dolu yaylar "bedava ödül"; 30. günde
+"/28" başlıktaki "30. gün" ile çelişiyor; simetrik dolum kıyaslanmıyor. Aynı yöntemle iki tur dolduğu için yöntem değişti.
 
-### 2.1 Tur 2 sonucu
+**Yöntem 2** (yeni yerleşim, iki çeşit yan yana): yay gösterge gibi soldan sağa dolar (yarısı = tepe); başlıktaki gün
+kalktı, açıklama pencereyi söyler; iki göz yerine **g1** tabanda tek iris (Göz alanı, halkası oranla dolar), **g0** göz
+yok (Göz en içteki yay). Beş yeni değerlendirici; notlar `kapi/5sn-yontem2.md`.
 
-(doldurulacak)
+### 2.1 Sonuç ve dürüst değerlendirme
+
+| Ekran | g1 (tek iris) | g0 (gözsüz) |
+|---|---|---|
+| 1. gün | 2/5 ✘ | 0/5 ✘ |
+| 9. gün | 2/5 açık evet (+2 "kısmen") ✘ | 3/5 ✘ |
+| 30. gün | **4/5 ✔** | 3/5 ✘ |
+| Yürüyüş | **5/5 ✔** | 4/5 ✔ |
+| "Her gün açarım" | **4/5** | 1/5 |
+
+- **Geçen:** tek irisli ışık kubbesi olgun kullanıcıda (30. gün) ve canlı anda (yürüyüş) kapıyı geçiyor; beşten dördü bu
+  çeşidi her gün açmak istiyor. Gözsüz çeşit "Wi-Fi simgesi, kimliksiz" diye elendi: göz, bu ekranın kimliği.
+- **Geçmeyen:** ilk günler. 1. günde yay ya boş görünüyor (tur 1: "henüz bir şey yok") ya dolu (tur 2 ve yöntem 2:
+  "hak edilmemiş ödül"). Bu, ilerleme gösteren her resmin ilk gün sorunudur; ana sayfa yeniden tasarımında da aynı şey
+  görüldü. 9. günde iris halkasının oranı ince çizgide okunmuyor.
+- **Sahip rolündeki değerlendirici** her turda "baş, kafatası, beyin yok; isteğime uzak" dedi; öteki dört rol ise baş ve
+  göz çifti eklendikçe "ürkütücü", "maskot" dedi. Sahibin gerçek isteği ile beş kişilik kapı arasında bir çatışma var;
+  bunu ben çözemem, sahip karar verir (§12 soru 1 ve 2).
+
+Bu yüzden tasarım "mükemmel" diye gönderilmez. Sahibe yalnız iki karar sorusu gider; cevaba göre bir tur daha yapılır.
 
 ### 2.2 Ekranın düzeni (ilk görünüm, 390 pt)
 
@@ -363,13 +386,14 @@ plandan).
 
 ## 12. Senden istenen kararlar (en çok 3, önerimle)
 
-1. **Beş alan: Göz, Dikkat, Nefes, Ruh hâli, Hareket.** Apple Sağlık verisi Hareket'in içinde; içerideki yedi alan ve
-   iris haritası aynen kalır. Öbür seçenek: "Hareket" yerine "Beden" (mola ve su da orada durduğu için daha doğru, ama
-   senin sözün "hareket" ve 5 saniyede daha açık). **Öneri: bu beş ad.**
-2. **Haftalık gelişim bildirimi:** Pazartesi, senin en sık açtığın saatte, varsayılan kapalı, 7. günden sonra bir kez
-   teklif; aylık özet 29., 57., 85. gün. Öbür seçenek: her akşam kısa özet (daha sık, bildirim yorgunluğu riski).
-   **Öneri: haftalık + aylık.**
-3. **Gözler kamerayla canlı bakmasın.** Gelişim açılınca kamera açılmaz; gözler senin ölçülmüş kırpma hızınla kırpar.
-   Öbür seçenek: "Bana bak" düğmesiyle kamera birkaç saniye açılır, gözler senin kırpmanla kırpar (bir "vay" anı, ama
-   istatistik ekranında kamera açılması hem kapıda ürkütücü okunan "bana bakan göz" hissini geri getirir hem de pil ve
-   izin metni ister). **Öneri: kamera yok.**
+1. **Başın görünümü.** (a) **Tek irisli ışık kubbesi:** tabanda uygulamanın simgesindeki iris (Göz alanı), üstünde baş
+   biçiminde dört ışık yayı. 30. gün 4/5 ve yürüyüş 5/5 ile geçti; beş kişiden dördü her gün bunu açmak istiyor. Senin
+   "baş, beyin, iki göz" fikrin burada ima edilir, çizilmez. (b) **Gerçek baş ve iki göz:** senin tarifine en yakın;
+   kapıda beş kişiden dördü "ürkütücü", "uzaylı", "maskot" dedi ve iki turda da geçmedi. **Öneri: (a).**
+2. **İlk günler (1.–7. gün).** Yay ya boş görünüyor ("henüz bir şey yok") ya dolu ("hak edilmemiş ödül"); iki hâl de
+   geçmedi. (a) **İlk hafta ayrı bir hâl:** iris büyük ortada durur, yaylar kişi o alanı ilk kez yaptığı gün birer birer
+   belirir ("Nefes bugün açıldı"); 8. günden sonra bugünkü kubbe. Bir tasarım turu daha ister (≈ 1 saat), sonuç sana
+   ancak geçerse gelir. (b) 1. gün "1/1" dolu kalsın. **Öneri: (a).**
+3. **Üç küçük karar, öneriyle birlikte:** beş alan (Göz, Dikkat, Nefes, Ruh hâli, Hareket; Apple Sağlık Hareket'te);
+   haftalık gelişim bildirimi (Pazartesi, varsayılan kapalı, aylık özet 29., 57., 85. gün); Gelişim açılınca kamera
+   açılmaz (gözler ölçülmüş kırpma hızınla canlanır). **Öneri: üçü de evet.**
