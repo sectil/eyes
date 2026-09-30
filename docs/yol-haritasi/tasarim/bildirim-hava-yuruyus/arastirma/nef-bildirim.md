@@ -730,13 +730,13 @@ metindir**: içindeki her sayı (44 kişi, 6 hafta, %24) kaynağın kaydındaki 
 | Yapılır | Yapılmaz |
 |---|---|
 | "Bir denemede …", "Bir çalışmada …", "… birleştiren bir analizde …" | "Bilim kanıtladı", "kanıtlanmış", "bilimsel olarak" |
-| fiil bulgunun kendisi: "arttı", "azaldı", "ilişkiliydi", "fark çok küçüktü", "kayboldu" | "iyileştirir", "korur", "önler", "tedavi eder", "gözlerini güçlendirir" |
+| fiil bulgunun kendisi: "arttı", "azaldı", "ilişkiliydi", "etkisi küçüktü", "sürmedi" | "iyileştirir", "korur", "önler", "tedavi eder", "gözlerini güçlendirir" |
 | tasarım ve kişi sayısı: "44 kişi, 6 hafta", "12 denemelik analiz", "kontrolsüz" | tek çalışmayı genel gerçek gibi sunmak ("Yürüyüş stresi azaltır.") |
-| sınır: "etki haftalar içinde azaldı", "yanlılık riski orta", "sağlık sonucu değişmedi" | yalnız lehte bulguyu seçip sınırı saklamak |
+| sınır: "etki haftalar içinde azaldı", "yanlılık riski orta", "1 hafta sonra sürmedi" | yalnız lehte bulguyu seçip sınırı saklamak |
 | kişiye söz: yok (bulgu başkalarındadır) | "Senin de gözlerin rahatlayacak" (bulguyu kişiye vaat etmek) |
 
 İkna ve teşvik dürüst bulgudan gelir: özellikle **davranışın kendisine** dair bulgular ("bırakınca 2 haftada kayboldu",
-"başlıca neden unutmaktı", "öneri sonraki 30 dakikada adımı artırdı") hem ikna edicidir hem sağlık sonucu vaat etmez.
+"az su içmenin başlıca nedeni unutmaktı", "öneri sonraki 30 dakikada adımı artırdı") hem ikna edicidir hem sağlık sonucu vaat etmez.
 Ölüm, hastalık riski ve kan şekeri gibi sağlık sonucu bildiren bulgular (`paluch2022`, `paluch2022cvd`, `dunstan2012`)
 bildirimde kullanılmaz (korkutma ve iddia sınırı); uygulama içindeki kartta sınır cümlesiyle kalabilir.
 `yamashita2021`'in Türkçe başlığındaki "iyileştiren" sözcüğü `FORBIDDEN`'a takılır; bilim satırı bu yüzden "ilişkiliydi"
@@ -770,56 +770,56 @@ bu dosyalarda yazılı olandır; yazılı olmayan "kaynak bekliyor" diye işaret
 
 | # | Başlık | Nef cümlesi | Bilim satırı | Kaynak | B/N/S |
 |---|---|---|---|---|---|
-| G1 | Kırpma zamanı | Ekrandan başını kaldır; 20 saniyelik kırpma seti hazır. | Bir çalışmada kırpma egzersizini bırakanların başlıca nedeni unutmaktı. | Kim 2020, PMID 32409236; 41 kişi, 4 hafta, kontrolsüz (`YOL.nef.md` §14); %24 takipten çıktı, başlıca sorun "unutmak" (`docs/` altındaki araştırma notu; kaynak kartına geçerken yeniden doğrulanır) | 13/55/71 |
-| G2 | Kırpma · 2. tur | Sabahki turu yaptın; öğleden sonrası da hazır. | Bir denemede en iyi sonuç günde 3 kez 15 tekrarla alındı. | Wolffsohn 2025, PMID 40467388; RKÇ; kişi sayısı **kaynak bekliyor** | 15/46/57 |
-| G3 | Göz egzersizi | Bugünkü set 1 dakika. Kaldığın yerden sürdürebilirsin. | Bir denemede egzersiz bırakılınca kazanım 2 haftada kayboldu. | Wolffsohn 2025, PMID 40467388 (`evidence.js` blink sınırı: "etki yaklaşık 2 haftada kayboldu"); kişi sayısı **kaynak bekliyor** | 13/54/61 |
+| G1 | Kırpma zamanı | Ekrandan başını kaldır; 20 saniyelik kırpma seti hazır. | 41 kişilik kontrolsüz bir çalışmada eksik kırpma oranı 4 haftada %54'ten %34'e indi. | Kim 2020, PMID 32409236; 54 başladı, 41 bitirdi, 4 hafta, kontrolsüz. "Bırakma nedeni unutmak" özette yok, kullanılmaz (`pubmed-bilim-satirlari.md`) | 13/55/84 |
+| G2 | Kırpma · 2. tur | Sabahki turu yaptın; öğleden sonrası da hazır. | 98 kişilik bir denemede en uygun düzen günde 3 kez 15 tekrar çıktı. | Wolffsohn 2025, PMID 40467388; RKÇ, 98 kişi | 15/46/67 |
+| G3 | Göz egzersizi | Bugünkü set 1 dakika. Kaldığın yerden sürdürebilirsin. | 28 kişilik bir denemede egzersiz bırakılınca ölçümler 2 haftada çoğunlukla başa döndü. | Wolffsohn 2025, PMID 40467388; 28 kişi | 13/54/86 |
 
 **Yürüyüş**
 
 | # | Başlık | Nef cümlesi | Bilim satırı | Kaynak | B/N/S |
 |---|---|---|---|---|---|
 | Y1 | Kısa bir yürüyüş | Hava 21 derece, ılık. İstersen şimdi 5 dakikalık bir tur. | Bir denemede yürüyüş önerisi sonraki 30 dakikada adımı artırdı; 44 kişi, 6 hafta. | Klasnja 2019, PMID 30192907; MRT; %24 artış, etki haftalar içinde azaldı (BILDIRIM_PLANI:153) | 16/57/81 |
-| Y2 | Bugünkü yürüyüş | Yürürken bir kez başını kaldırıp gökyüzüne bak. | 60 yaşlıyla bir denemede çevreye hayranlıkla bakarak yürüyenler daha çok olumlu duygu bildirdi. | Sturm 2020, PMID 32955293; RKÇ, 60 yaşlı yetişkin (`sources.js`); süre **kaynak bekliyor** | 15/47/95 |
-| Y3 | Yağmur 15.00'te | Yürüyüşünü 15.00'ten önceye alabilirsin. | Araştırmalarda kötü hava, hareketin önündeki engellerden biri çıktı. | Tucker ve Gilliland 2007, PMID 17920646 (plan §E.4); tasarım ve kişi sayısı **kaynak bekliyor** | 15/40/68 |
+| Y2 | Bugünkü yürüyüş | Yürürken bir kez başını kaldırıp gökyüzüne bak. | 60 yaşlıyla 8 haftalık bir denemede hayranlık yürüyüşü yapanlar daha çok olumlu duygu bildirdi. | Sturm 2020, PMID 32955293; RKÇ, 60 yaşlı yetişkin, 8 hafta | 15/47/95 |
+| Y3 | Yağmur 15.00'te | Yürüyüşünü 15.00'ten önceye alabilirsin. | 37 çalışmalık bir derlemede kötü ya da aşırı hava, hareketin önünde bir engel olarak görüldü. | Tucker ve Gilliland 2007, PMID 17920646; sistematik derleme, 37 çalışma | 15/40/93 |
 
 **Nefes (dolunay dahil)**
 
 | # | Başlık | Nef cümlesi | Bilim satırı | Kaynak | B/N/S |
 |---|---|---|---|---|---|
-| N1 | Nefes · 4. basamak | Bugün 3 dakika. Omuzlarını bırak, gerisini birlikte sayarız. | 12 denemelik bir analizde yavaş nefes, algılanan streste küçük–orta azalmayla ilişkiliydi. | Fincham 2023, PMID 36624160; 12 RKÇ, g = −0,35, yanlılık riski orta (plan) | 18/60/90 |
+| N1 | Nefes · 4. basamak | Bugün 3 dakika. Omuzlarını bırak, gerisini birlikte sayarız. | 12 denemede (785 kişi) nefes çalışması, algılanan streste küçük–orta azalmayla ilişkiliydi. | Fincham 2023, PMID 36624160; 12 RKÇ, 785 kişi, g = −0,35, yanlılık riski orta; kapsam genel nefes çalışması, yalnız yavaş nefes değil | 18/60/91 |
 | N2 | Bu gece dolunay | Aya bakarak 3 dakika yavaş nefes: bu akşamın küçük töreni. | 223 çalışmalık bir incelemede kalp atışı değişkenliği yavaş nefes sırasında arttı. | Laborde 2022, PMID 35623448 (`yogaLessons.js:43` onaylı cümlenin kısaltması) | 15/58/82 |
-| N3 | Bu gece dolunay | Dolunay gecesi için 3 dakikalık nefes hazır; ışığı kısıp başla. | Ayın uykuya etkisi tartışmalı: bazı çalışmalar küçük fark buldu, büyük çalışmalar bulmadı. | Cajochen 2013 (23891110), Haba-Rubio 2015 (26498230), Chaput 2016 (27047907), Smith 2017 (27928860), Casiraghi 2021 (33571126); plan §E.5 | 15/63/90 |
+| N3 | Bu gece dolunay | Dolunay gecesi için 3 dakikalık nefes hazır; ışığı kısıp başla. | Ayın uykuya etkisi tartışmalı: 5812 çocukta ~5 dk fark bulundu, 2125 yetişkinde bulunmadı. | Cajochen 2013 (23891110), Haba-Rubio 2015 (26498230), Chaput 2016 (27047907), Smith 2017 (27928860), Casiraghi 2021 (33571126); plan §E.5 | 15/63/90 |
 
 **Yoga**
 
 | # | Başlık | Nef cümlesi | Bilim satırı | Kaynak | B/N/S |
 |---|---|---|---|---|---|
 | O1 | Yoga dersi hazır | Bugünkü ders hazır; mat şart değil, bir sandalye de olur. | 223 çalışmalık bir incelemede kalp atışı değişkenliği yavaş nefes sırasında arttı. | Laborde 2022, PMID 35623448 (nefes temelli ders için; derste sandalye seçeneği olup olmadığına bakmadım) | 16/57/82 |
-| O2 | Kısa yoga nidra | 11 dakikalık sürüm de hazır; bugün kısası da olur. | 11 ve 30 dakikalık yoga nidrayı karşılaştıran bir çalışmada fark çok küçüktü. | Moszeik 2025, PMID 40373021 (`yogaLessons.js:85, :89`); "alandaki çalışmaların çoğunun kalitesi düşük" kartta | 15/50/77 |
-| O3 | Yoga | 3 dakikalık kısa sürüm de bir ders sayılır. | Gerçek kullanımı inceleyen bir çalışmada seanslar çoğunlukla kısaydı. | Radin 2025, PMID 39808431 (`yogaLessons.js:27, :56` "gerçek kullanım kısa"); tasarım ve kişi sayısı **kaynak bekliyor** | 4/43/69 |
+| O2 | Kısa yoga nidra | 11 dakikalık sürüm de hazır; bugün kısası da olur. | 362 kişilik 2 aylık bir denemede 11 dakikalık yoga nidranın bekleme grubuna göre etkisi küçüktü. | Moszeik 2025, PMID 40373021; 4 kollu RKÇ, 362 kişi, d = 0,08–0,16. "Alanın kalitesi düşük" cümlesi bu özette yok; kaynağı bulunmadan kartta kullanılmaz | 15/50/96 |
+| O3 | Yoga | 3 dakikalık kısa sürüm de bir ders sayılır. | 362 kişilik denemede 11 dakikalık kısa yoga nidra da bekleme grubundan ayrıştı; etki küçüktü. | Moszeik 2025, PMID 40373021. Radin 2025 yoga değil meditasyon RKÇ'si (1458 çalışan); yoga bildiriminde kullanılmaz, `yogaLessons.js:27, :56` atfı ana oturumda gözden geçirilir | 4/43/93 |
 
 **Mola**
 
 | # | Başlık | Nef cümlesi | Bilim satırı | Kaynak | B/N/S |
 |---|---|---|---|---|---|
-| L1 | Mola zamanı | Bir dakika kalk, pencereden uzağa bak. | 29 kişilik bir çalışmada 20-20-20 molasının etkisi, hatırlatma bitince 1–2 haftada kayboldu. | Talens-Estarelles 2022, PMID 35963776; öncesi–sonrası, 29 ekran kullanıcısı (`sources.js`) | 11/38/92 |
-| L2 | Kalk, biraz gerin | Bir saat oldu; bir dakikalık ara yeter. | 56 ofis çalışanıyla 12 haftalık bir çalışmada telefondan gelen mola hatırlatması oturmayı azalttı. | Morris 2020, PMID 33322678; yarı-randomize (`sources.js`, BILDIRIM_PLANI) | 17/39/98 |
-| L3 | Kısa ara | Omuzlarını bırak, uzağa bak; sonra devam edersin. | 51 veri girişi çalışanıyla bir saha çalışmasında ek kısa molalar denendi. | Galinsky 2007, PMID 17514726; bulgu cümlesi **kaynak bekliyor** (depoda yalnız "düşük-orta" düzeyi yazıyor) | 8/49/73 |
+| L1 | Mola zamanı | Bir dakika kalk, pencereden uzağa bak. | 29 kişilik bir çalışmada 20-20-20 hatırlatmasıyla gelen azalma, bırakıldıktan 1 hafta sonra sürmedi. | Talens-Estarelles 2022, PMID 35963776; öncesi–sonrası, 29 ekran kullanıcısı (`sources.js`) | 11/38/100 |
+| L2 | Kalk, biraz gerin | Bir saat oldu; bir dakikalık ara yeter. | 56 ofis çalışanıyla 12 haftalık çalışmada saatlik telefon hatırlatmasıyla iş başında oturma azaldı. | Morris 2020, PMID 33322678; yarı-randomize; yalnız saatlik hatırlatma kolu anlamlı | 17/39/99 |
+| L3 | Kısa ara | Omuzlarını bırak, uzağa bak; sonra devam edersin. | 51 veri girişçisiyle bir saha çalışmasında ek kısa molalarla rahatsızlık ve göz yorgunluğu azaldı. | Galinsky 2007, PMID 17514726 | 8/49/98 |
 
 **Su**
 
 | # | Başlık | Nef cümlesi | Bilim satırı | Kaynak | B/N/S |
 |---|---|---|---|---|---|
-| U1 | Birkaç yudum | Suyun yanında mı? Birkaç yudum yeter. | Bir denemede hatırlatma ve kayıtla su içme biraz arttı; sağlık sonucu değişmedi. | Stout 2022, PMID 35283036 (BILDIRIM_PLANI:165); kişi sayısı **kaynak bekliyor** | 12/37/80 |
-| U2 | Günün son suyu | Bugünkü son su hatırlatması bu. | Bir çalışmada sıvıyı artıranlarda gece tuvalete kalkma arttı; bu yüzden 18.00'den sonra sormuyoruz. | Desai 2026, PMID 41864748 (BILDIRIM_PLANI:178); kişi sayısı **kaynak bekliyor** | 14/31/99 |
+| U1 | Birkaç yudum | Suyun yanında mı? Birkaç yudum yeter. | 85 kişilik bir denemede az su içmenin başlıca nedeni unutmaktı (%60). | Stout 2022, PMID 35283036; RKÇ, 85 kişi, böbrek taşı hastaları; ölçüt idrar hacmi | 12/37/69 |
+| U2 | Günün son suyu | Bugünkü son su hatırlatması bu. | 1658 kişilik bir denemede su programındakiler 6. ve 12. ayda gece daha sık tuvalete kalktı. | Desai 2026, PMID 41864748; 1658 kişi. "18.00'den sonra sormuyoruz" bulgu değil kuraldır, bilim kartında durur | 14/31/91 |
 | U3 | Su | İstersen şimdi birkaç yudum iç. | **kaynak bekliyor** (su ile göz konforu ya da odak arasında depoda PMID'li kaynak yok) | — | 2/31/— |
 
 **Hava**
 
 | # | Başlık | Nef cümlesi | Bilim satırı | Kaynak | B/N/S |
 |---|---|---|---|---|---|
-| H1 | Yağmur 21.00'de | 21.00–22.00 arası yağmur bekleniyor; yürüyüşü öncesine alabilirsin. | Bir çalışmada yağışlı günlerde yürüyüş azaldı. | Klimek 2022, PMID 35151273 (plan §E.4); kişi sayısı ve örneklem **kaynak bekliyor** | 15/67/46 |
-| H2 | Bugün yağmur bekleniyor | 14.00–17.00 arası yağmur var; çantana şemsiye koy. | Bir çalışmada havanın ruh hâline ortalama etkisi küçüktü ve kişiden kişiye değişti. | Denissen 2008, PMID 18837616 (plan §E.4); kişi sayısı **kaynak bekliyor** | 23/50/83 |
+| H1 | Yağmur 21.00'de | 21.00–22.00 arası yağmur bekleniyor; yürüyüşü öncesine alabilirsin. | 65 yaş üstü kişilerle bir izlem çalışmasında yağış arttıkça günlük yürüme süresi azaldı. | Klimek 2022, PMID 35151273; izlem çalışması, ≥ 65 yaş; kişi sayısı özette yok, **kaynak bekliyor** (tam metin) | 15/67/88 |
+| H2 | Bugün yağmur bekleniyor | 14.00–17.00 arası yağmur var; çantana şemsiye koy. | 1233 kişilik günlük çalışmasında havanın ruh hâline ortalama etkisi küçüktü; kişiden kişiye değişti. | Denissen 2008, PMID 18837616; 1233 kişi | 23/50/100 |
 | H3 | Gökyüzü açık | Bugün gökyüzü açık; 2 dakika ufka bakmak için güzel bir gün. | 30 genç yetişkinle bir çalışmada doğa görüntülerine bakmak olumlu ruh hâliyle ilişkiliydi. | Yamashita 2021, PMID 34065588; çapraz, 30 genç yetişkin (`sources.js`); sınır: görüntü, gerçek gökyüzü değil (kartta) | 12/60/90 |
 
 Notlar: (1) H2'deki "var" plan §E.6'daki akşam kurulmuş metin kalıbından; sabah kurulmuşsa "bekleniyor" yazılır.

@@ -552,6 +552,8 @@ body.w320 .splits .sp-row:first-of-type { display: none; }
 .dt-list p { font-size: 0.98rem; line-height: 1.35; }
 body.w320 .dt-art { height: 90px; }
 
+
+
 @media (max-width: 860px) {
   .hero-in { grid-template-columns: 1fr; }
   .hero-scenes { overflow-x: auto; padding-bottom: 6px; }
@@ -1029,10 +1031,10 @@ body.w320 .dt-art { height: 90px; }
       <div class="nt">
         <span class="nt-ico" aria-hidden="true"></span>
         <div class="nt-top"><span>Nefona</span><span>şimdi</span></div>
-        <div class="nt-t">Yürüyüşlerine eşlik edebilirim</div>
-        <div class="nt-b">Bugünkü yürüyüşünü Apple Sağlık'ta gördüm. İzin verirsen bir dahakine yürürken yanında olurum.</div>
+        <div class="nt-t">Yürürken temponu sesli söyleyeyim mi?</div>
+        <div class="nt-b">Yürümeye başlayınca 250 metrede bir temponu söylerim. Konum izniyle çalışır; konumun telefondan çıkmaz.</div>
       </div>
-      <div class="nt-acts"><span>Nasıl olur, göster</span><span>Şimdi değil</span></div>
+      <div class="nt-acts"><span>İzin ver</span><span>Şimdi değil</span></div>
     </div>
     <div class="lk-foot"><span></span><span></span></div>
   </div>
@@ -1056,6 +1058,7 @@ body.w320 .dt-art { height: 90px; }
   </div>
 </template>
 
+
 <script>
 (function () {
   // Her bölümde gösterilecek ekranlar: [şablon, başlık, not]
@@ -1070,8 +1073,8 @@ body.w320 .dt-art { height: 90px; }
     wx: [['tpl-wx', 'Hava sayfası', 'Saat saat sıcaklık ve yağmur olasılığı, Nef\'in yorumu, sabah havası anahtarı, atıf.']],
     walk: [['tpl-lockwalk', 'Yürüyüş sorusu', 'Kilit ekranında. Dokununca yürüyüş ekranı açılır, son 15 dakika yürüyüşe eklenir.'],
            ['tpl-walk', 'Yürüyüş ekranı', 'Dört büyük sayı. Anons anında aynı cümle ekranda. Kilitliyken ölçüm sürer.']],
-    detect: [['tpl-detect', 'Fark et teklifi', 'Nef bugünkü yürüyüşü Apple Sağlık\'ta görünce, seyrek ve kaynağını söyleyerek sorar. İki kez hayır denirse bir daha sormaz.'],
-             ['tpl-detect-sheet', 'Açıklama sayfası', 'Ne yapacağı, konumun telefondan çıkmadığı, nasıl kapatılacağı. Aç deyince iPhone Her Zaman iznini sorar.']],
+    detect: [['tpl-detect', 'Fark et teklifi', 'Kaçırılan bir yürüyüşten sonra, seyrek. Ne kazanacağını, hangi izni istediğini ve konumun telefonda kaldığını tek bakışta söyler. İzin ver doğrudan iPhone iznini açar; iki kez hayır denirse bir daha sormaz.'],
+             ['tpl-detect-sheet', 'Açıklama sayfası', 'Bildirimin gövdesine dokununca açılır; iPhone izni daha önce sorulduysa Ayarlar yolunu gösterir.']],
     coach: [['tpl-coach', 'Sesli koç', 'Tek soru: ne sıklıkla. Her seçenekte koçun söyleyeceği cümle; ses ve Dinle aynı satırda.']],
     sci: [['tpl-sci', 'Bilim kartı', 'Bildirime dokununca: Nef\'in cümlesi, eylem, tek bulgu, sınırı ve PubMed bağlantısı.']]
   };

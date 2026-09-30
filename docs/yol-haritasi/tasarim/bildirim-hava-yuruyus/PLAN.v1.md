@@ -298,12 +298,12 @@ kalır; `moduleReminders` onlar için yalnız `mode`'u tutar.
   kişi kartı açtıysa o satır 30 gün dinlenir (VARSAYIM). Metin çeşitliliği tek başına açılmayı artırmadı (Bell 2023);
   döndürmenin amacı tekrar yorgunluğunu önlemektir.
 - **Örnek satırlar (düzeltilmiş):**
-  - Nefes: *"12 denemelik bir analizde nefes çalışmaları, algılanan streste küçük–orta azalmayla ilişkiliydi."* Kart: 785
-    yetişkin, yanlılık riski orta (Fincham 2023, PMID 36624160).
+  - Nefes: *"12 denemede (785 kişi) nefes çalışması, algılanan streste küçük–orta azalmayla ilişkiliydi."* Kart:
+    yanlılık riski orta (Fincham 2023, PMID 36624160).
   - Yürüyüş: *"Bir denemede yürüyüş önerisi sonraki 30 dakikada adımı artırdı; 44 kişi, 6 hafta."* Kart: etki haftalar
     içinde azaldı (Klasnja 2019, PMID 30192907, DOI 10.1093/abm/kay067).
-  - Mola: *"56 ofis çalışanıyla yarı-randomize bir çalışmada saatlik hatırlatma iş saatinde oturmayı azalttı."* (Morris
-    2020, PMID 33322678.)
+  - Mola: *"56 ofis çalışanıyla 12 haftalık çalışmada saatlik telefon hatırlatmasıyla iş başında oturma azaldı."*
+    Kart: yarı-randomize, yalnız saatlik kol anlamlı (Morris 2020, PMID 33322678).
   - Dolunay: bilim satırı nefesin kendi bulgusudur (Laborde 2022, PMID 35623448); ay → uyku → nefes zinciri kurulmaz, ayın
     uykuya etkisi tartışmalıdır (onaylı plan §3.E.5).
 - **Kanıt kapısı:** bilim kartı taşıyan her kaynak `lib/sources.js`'te `pmid` ve `doi` ile kayıtlı olmalı ve yayından önce
@@ -312,6 +312,14 @@ kalır; `moduleReminders` onlar için yalnız `mode`'u tutar.
   kaynağı. `YOL.nef.md` §14 Kim 2020 ve Wolffsohn 2025'in `sources.js`'te olduğunu söylüyor; yok, yalnız `evidence.js`'te
   metin olarak geçiyorlar. Kişi sayısı "kaynak bekliyor" olan satır (`nef-bildirim.md` §10.5) sayı doğrulanmadan yayına
   girmez.
+- **PubMed denetimi (tur 2, `arastirma/pubmed-bilim-satirlari.md`):** 23 PMID'in özeti açıldı; 21 satırın 5'i doğru,
+  16'sı düzeltildi ve `nef-bildirim.md` §10.5'e işlendi. Özetle çelişen yedi satır: Kim 2020 (bırakma nedeni özette yok),
+  Fincham (yavaş nefes değil nefes çalışması), ay (5812 çocukta ~5 dk fark bulundu), Moszeik, Radin 2025 (yoga değil
+  meditasyon; yoga satırından çıkarıldı), Talens-Estarelles (1–2 değil 1 hafta), Stout (sağlık sonucu ölçülmemiş).
+  Kalan açıklar: U3 (su ↔ göz) için kaynak yok, satır bankaya girmez; Klimek 2022, Balban 2023, Cajochen 2013 ve
+  Casiraghi 2021 kişi sayısı tam metinden alınır; Moszeik kartındaki "alanın kalitesi düşük" cümlesi kaynağı bulunana
+  kadar kullanılmaz; `yogaLessons.js:27, :56`'daki Radin atfı ana oturumda gözden geçirilir (bu oturum `app/`'e dokunmaz).
+  Bilim kartındaki Klasnja %24 (59 adım, p = 0,02, 44 kişi, 6 hafta) özetle doğrulandı.
 - **Dayanak ve sınır:** kişiye uyarlanmış mesajın etkisi küçük ama tutarlı (Noar 2007, r = 0,074; Hao 2023, g = 0,16);
   en iyisi sürekli güncellenen veriyle uyarlama (Krebs 2010). Dil modeliyle yalnız üslubu uyarlamak davranışa ek katkı
   yapmadı (Schlicht 2026, RKÇ); dil modelleri sağlık içeriğinde yanlış üretebiliyor (Zaleski 2024). Bu yüzden sayılar ve
@@ -397,12 +405,17 @@ seninle", ilk anons 3 saniye içinde: *"Birlikte yürüyoruz. 1,1 kilometredesin
 3. **Nef yürürken sorar (karar 2):** "Her Zaman" izniyle ≥ 500 m yer değişiminde uygulama uyanır, hareket etkinliğine
    bakar (araba ve bisiklet ayrılır), son 15 dakikanın verisiyle sorar. Konum saklanmaz, yalnız uyandırır.
 4. **Anahtar kapalıyken izni o an ister (sahibin kararı, WhatsApp'ın anlık konumdaki gibi):** Nef saatlik uyanışta bir
-   yürüyüşü geç fark ettiyse ya da kaçırdıysa bildirim gönderir: *"Yürüyüşünü 20 dakika geç fark ettim. Yürürken hemen
-   fark etmemi ister misin?"* Dokununca kısa açıklama sayfası (ne için, konum telefondan çıkmaz, istediğin an kapatılır)
-   ve [Aç] → iOS'un "Her Zaman" izin penceresi; iOS bu pencereyi yalnız bir kez gösterdiği için daha önce sorulduysa
-   [Ayarlar'da aç] (Ayarlar → Nefona → Konum → Her Zaman). Aynı teklif bir yürüyüşün sonunda özet ekranında da çıkabilir.
+   yürüyüşü geç fark ettiyse ya da kaçırdıysa bildirim gönderir. Metin 5 saniye sınamasında 5/5 aldı (`5sn-tur5.md`):
+   başlık *"Yürürken temponu sesli söyleyeyim mi?"* · gövde *"Yürümeye başlayınca 250 metrede bir temponu söylerim. Konum
+   izniyle çalışır; konumun telefondan çıkmaz."* · eylemler **[İzin ver]** / **[Şimdi değil]**. Kurallar: "gördüm",
+   "izledim" gibi gözetim sözcüğü yok; kazanç somut (tempo); hangi izin olduğu adıyla yazılır; kişinin ayarladığı aralık
+   (250 m / 500 m / 1 km) metne girer. [İzin ver] uygulamayı açar ve doğrudan iOS'un "Her Zaman" penceresini gösterir;
+   iOS bu pencereyi yalnız bir kez gösterdiği için daha önce sorulduysa açıklama sayfası [Ayarlar'da aç] ile açılır
+   (Ayarlar → Nefona → Konum → Her Zaman). Gövdeye dokunmak da açıklama sayfasını açar (ne için, konum telefondan
+   çıkmaz, istediğin an kapatılır). Bu teklif izin isteğidir, sağlık önerisi değildir: görünür bilim satırı ve bilim
+   kartı taşımaz (VARSAYIM; sahibin "her bildirim PubMed'e dayansın" kuralına tek istisna, sahibe soruldu). Aynı teklif bir yürüyüşün sonunda özet ekranında da çıkabilir.
    Sınır: 14 günde en çok bir kez, toplam en çok üç kez; "Hayır" iki kez denirse bir daha sorulmaz; gece kuralı geçerli
-   (VARSAYIM). Bu bildirim ve açıklama sayfası B3'ün tasarım kapısında çizilir ve 5 saniye sınamasından geçer.
+   (VARSAYIM). Açıklama sayfası B3'ün tasarım kapısında yeniden sınanır.
 - **Soru:** başlık *"Yürüyüşe mi çıktın?"* · gövde *"Son 15 dakikada 1,1 km yürüdün. Hava 23 derece, yürüyüş için güzel.
   Eşlik edeyim mi?"* (86 karakter). Hava yoksa ya da bayatsa hava cümlesi düşer. Dokununca yürüyüş ekranı açılır ve son 15
   dakika yürüyüşe eklenir. Bildirimde iki eylem düğmesi vardır (basılı tutunca): **[Eşlik et]** (uygulamayı açar) ve
@@ -706,3 +719,7 @@ doğru makaleye gidiyor (`elestiri-dogruluk.md`).
   (`5sn-tur3-yonler.md`): üç yön, beş yeni değerlendirici; Yeniden giriş A (4/5), Sesli koç C (5/5). Sahibin kararı
   işlendi: her modülde günde en çok 3 saat; koç aralığı 250 m / 500 m / 1 km, her kilometrede ayrıca süre.
 - 2026-09-30: sahip üç kararı onayladı; karar 2'ye "kapalıyken bildirimle açmayı iste" eklendi (§3.C.1 madde 4). `DEVIR.md` yazıldı.
+- Sahibin "mükemmel mi" sorusundan sonra ("başla"): 5 saniye tur 4 (`5sn-tur4.md`): Yeniden giriş 5, Yürüyüş ekranı 4,
+  Sesli koç 4, Açıklama sayfası 5, Bilim kartı 4; fark et teklifi iki kez kaldı (1/5, 2/5). Yöntem değişti (`5sn-tur5.md`):
+  üç yön, beş değerlendirici A'yı seçti (3/5); A inceltildi ve beş yeni değerlendiriciyle 5/5 geçti. PubMed denetimi
+  (`arastirma/pubmed-bilim-satirlari.md`): 16 bilim satırı düzeltildi (§3.A "PubMed denetimi").

@@ -18,3 +18,7 @@ bir bakışta okunmuyor (iki kişi). 13'te "yağmur akşam" bozuk; büyük %24 k
 04'te alt yarı boş (iki kişi).
 
 **Karar:** 11 yeniden yazılır ve tek başına yeniden sınanır; öbür notlar düzeltilir.
+
+## 11 · ikinci deneme (yeniden yazılmış: "Yürüyüşlerine eşlik edebilirim · Bugünkü yürüyüşünü Apple Sağlık'ta gördüm…")
+Sahip e, öğretmen e, yazılımcı h ("gördüm" gizlilik alarmı), hemşire h ("gördüm" izlenme; "yanında olurum" belirsiz),
+tasarımcı h ("Nasıl olur, göster" belirsiz, kazanç söylenmiyor). **2/5, kaldı (ikinci kez).** Yöntem değişir: üç yön.
