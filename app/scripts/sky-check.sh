@@ -33,7 +33,12 @@ import sys, re
 pbx, mvc = sys.argv[1], sys.argv[2]
 s = open(pbx, encoding='utf-8').read()
 if 'SkyPlugin.swift' not in s:
-    BF, FR = 'A1B2C3D4E5F60718293A4B5C', 'B1C2D3E4F5061728394A5B6C'
+    import uuid
+    def fresh():
+        while True:
+            u = uuid.uuid4().hex[:24].upper()
+            if u not in s: return u
+    BF, FR = fresh(), fresh()
     lines = s.split('\n')
     out = []
     for ln in lines:
