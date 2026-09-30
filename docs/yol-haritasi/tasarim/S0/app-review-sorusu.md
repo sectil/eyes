@@ -1,5 +1,10 @@
-> **Nasıl gönderilir:** App Store Connect'te Contact Us → App Review'u seç, uygulama olarak Nefona'yı seç, aşağıdaki iki çizgi arasındaki İngilizce metni olduğu gibi yapıştır ve [Your name] yerine adını yaz.
-> Cevap gelince bana ilet; cevap gelene kadar Ana sayfa başlığında yalnız ay görünür, hava yalnız tam atıflı "Hava ve ay" kartında durur (plan §1, satır 194–196).
+> **Durum (2026-09-30): gönderilmedi, şimdilik gönderilmeyecek.** Önceki nottaki "App Store Connect → Contact Us → App Review"
+> yolu yoktur (doğrulanmadan yazılmıştı). Apple'ın App Review sayfasına (https://developer.apple.com/distribute/app-review/)
+> göre iki yol var: (1) App Review ile 30 dakikalık görüntülü görüşme, kılavuza uyum soruları için
+> (https://developer.apple.com/events/view/upcoming-events?search=Review); (2) iletişim formu
+> (https://developer.apple.com/contact/request/app-review/support/), Apple bunu reddedilen ya da kaldırılan uygulamalar
+> için tarif ediyor. Plan yedeği sormadan kurala uyar: başlıkta yalnız ay, hava yalnız tam atıflı "Hava ve ay" kartında,
+> bildirimde "Source: Apple Weather". Hava başlıkta istenirse Y5'ten önce görüşmede aşağıdaki metin kullanılır.
 
 ---
 
