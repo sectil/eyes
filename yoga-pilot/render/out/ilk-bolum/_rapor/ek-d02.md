@@ -29,5 +29,11 @@
 - Yardımcı birimler (`g.ilk`, `k.hizli.imge`, `k.hizli.his`, `d.goz`, `d.kalk`, `d.bekle`) seslendirildi ve seçildi; SPEC.v3
   §10'daki yardımcı dosyalar (ilk ders girişi, bırakma ön klipleri, durdurma dönüşü) bu teslimde **kurulmadı**.
 - Kodek testi (`b/mac/kodek_testi.sh`) sahibin Mac'inde bekliyor; o zamana kadar dosyalar MP3.
-- `eleven_v4` seslendirmesinde ElevenLabs durum yanıtı her çekim için 0 kredi gösterdi; hesap bakiyesi buradan doğrulanmadı.
-  Defter TTS için temkinli tahmini (0,99989 kredi/karakter/çekim) tutuyor.
+- `eleven_v4` seslendirmesinde ElevenLabs durum yanıtı her çekim için 0 kredi gösterdi, ama çekimler **ücretliymiş**:
+  hesabın API sayfası 133.485 kredi kullanılmış gösterdi (sahibin ekran görüntüsü, 2026-09-30), defterin toplam sayacı
+  aynı anda 132.910 idi ve bunun ≈ 48 bini konuşma. Konuşma ücretsiz olsaydı hesap ≈ 85 bin gösterirdi. Defter TTS için
+  0,99989 kredi/karakter/çekim tahminini tutuyor; durum yanıtındaki fiyat alanına güvenilmez.
+- **MP3 süre başlığı (sonradan düzeltildi):** ilk kodlamada Xing başlığı yoktu; oynatıcılar süreyi ilk çerçevenin bit
+  hızından tahmin ediyordu (15 dk dosya başlıkta 1058 sn, 20 dk dosya 1369 sn görünüyordu). Kodlayıcıya Xing çerçevesi
+  (çerçeve sayısı, bayt sayısı, arama tablosu) eklendi ve üç dosya yeniden üretildi; ses çerçeveleri aynı (çözümde yalnız
+  çözücünün 529 örneklik gecikmesi kalktı, fark 0).

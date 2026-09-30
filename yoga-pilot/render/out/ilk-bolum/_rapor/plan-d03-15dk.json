@@ -1,0 +1,1118 @@
+{
+ "lesson": "d03",
+ "T": 900,
+ "status": "ok",
+ "mode": "pref→max",
+ "f": 0.4543,
+ "total": 900.0,
+ "speech_sec": 224.118,
+ "sel": [
+  "C1",
+  "C2",
+  "C3",
+  "C4"
+ ],
+ "stop": null,
+ "notes": [],
+ "check_plan": {
+  "fails": [],
+  "pass": true,
+  "density": {
+   "syll": 123.0,
+   "frac": 0.431,
+   "deep_syll": 79.804,
+   "deep_frac": 0.292,
+   "dead": [],
+   "avg": 65.867
+  }
+ },
+ "slack_min_s": 219.27,
+ "missing_clips": [],
+ "events": [
+  {
+   "clip": "a.acilis",
+   "block": "A",
+   "phase": "Varış",
+   "start": 4.9085,
+   "end": 9.0592,
+   "gapAfter": 5.3628,
+   "subs": [
+    {
+     "start": 4.9085,
+     "end": 9.0592,
+     "text": "Günün sesleri geride kalıyor; yatağına yerleşiyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "a.durus",
+   "block": "A",
+   "phase": "Varış",
+   "start": 14.422,
+   "end": 18.5188,
+   "gapAfter": 7.3628,
+   "subs": [
+    {
+     "start": 14.422,
+     "end": 18.5188,
+     "text": "Sırtüstü ya da yan, hangisi rahatsa öyle yatıyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "a.ortu",
+   "block": "A",
+   "phase": "Varış",
+   "start": 25.8815,
+   "end": 29.727,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 25.8815,
+     "end": 29.727,
+     "text": "Üşüyorsan örtünü omuzlarına kadar çekmen iyi olur."
+    }
+   ]
+  },
+  {
+   "clip": "a.gozler",
+   "block": "A",
+   "phase": "Varış",
+   "start": 38.0897,
+   "end": 42.2444,
+   "gapAfter": 4.9085,
+   "subs": [
+    {
+     "start": 38.0897,
+     "end": 42.2444,
+     "text": "Gözlerini kapatmak ya da açık tutmak sana kalmış."
+    }
+   ]
+  },
+  {
+   "clip": "a.izin",
+   "block": "A",
+   "phase": "Varış",
+   "start": 47.1529,
+   "end": 52.5069,
+   "gapAfter": 5.9085,
+   "subs": [
+    {
+     "start": 47.1529,
+     "end": 52.5069,
+     "text": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin."
+    }
+   ]
+  },
+  {
+   "clip": "a.kolay",
+   "block": "A",
+   "phase": "Varış",
+   "start": 58.4154,
+   "end": 62.6763,
+   "gapAfter": 6.3628,
+   "subs": [
+    {
+     "start": 58.4154,
+     "end": 62.6763,
+     "text": "Uyumaya çalışman gerekmiyor; uzanıp dinlenmek yeter."
+    }
+   ]
+  },
+  {
+   "clip": "a.karar",
+   "block": "A",
+   "phase": "Varış",
+   "start": 69.0391,
+   "end": 72.8833,
+   "gapAfter": 5.3628,
+   "subs": [
+    {
+     "start": 69.0391,
+     "end": 72.8833,
+     "text": "Ne kadar gevşeyeceğine her an sen karar veriyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "a.isler",
+   "block": "A",
+   "phase": "Varış",
+   "start": 78.246,
+   "end": 81.4725,
+   "gapAfter": 6.3628,
+   "subs": [
+    {
+     "start": 78.246,
+     "end": 81.4725,
+     "text": "Yarına kalan işler sabaha kadar bekler."
+    }
+   ]
+  },
+  {
+   "clip": "c1.fark",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 87.8353,
+   "end": 91.1102,
+   "gapAfter": 11.817,
+   "subs": [
+    {
+     "start": 87.8353,
+     "end": 91.1102,
+     "text": "Önce nefesini olduğu gibi fark ediyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c1.yer",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 102.9273,
+   "end": 107.3985,
+   "gapAfter": 11.817,
+   "subs": [
+    {
+     "start": 102.9273,
+     "end": 107.3985,
+     "text": "Nefes en çok nerede belirginse dikkatin orada kalsın."
+    }
+   ]
+  },
+  {
+   "clip": "c1.veris",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 119.2155,
+   "end": 122.8063,
+   "gapAfter": 13.817,
+   "subs": [
+    {
+     "start": 119.2155,
+     "end": 122.8063,
+     "text": "Alışı zorlamadan verişi biraz uzatmak yeterli."
+    }
+   ]
+  },
+  {
+   "clip": "c1.zorlanirsan",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 136.6233,
+   "end": 139.9873,
+   "gapAfter": 6.3628,
+   "subs": [
+    {
+     "start": 136.6233,
+     "end": 139.9873,
+     "text": "Uzun veriş zor gelirse kendi ritmine dön."
+    }
+   ]
+  },
+  {
+   "clip": "c1.gun",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 146.35,
+   "end": 149.9483,
+   "gapAfter": 11.817,
+   "subs": [
+    {
+     "start": 146.35,
+     "end": 149.9483,
+     "text": "Her veriş, günü biraz daha geride bırakıyor."
+    }
+   ]
+  },
+  {
+   "clip": "c1.dudak",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 161.7653,
+   "end": 166.7714,
+   "gapAfter": 11.817,
+   "subs": [
+    {
+     "start": 161.7653,
+     "end": 166.7714,
+     "text": "Verişte nefes burnundan ya da hafif aralık dudaklarından çıkabilir."
+    }
+   ]
+  },
+  {
+   "clip": "c1.birkac",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 178.5884,
+   "end": 182.039,
+   "gapAfter": 18.9085,
+   "subs": [
+    {
+     "start": 178.5884,
+     "end": 182.039,
+     "text": "Birkaç nefes boyunca bu ritmi sürdürüyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c1.k1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 200.9475,
+   "end": 203.9044,
+   "gapAfter": 9.817,
+   "subs": [
+    {
+     "start": 200.9475,
+     "end": 203.9044,
+     "text": "Bugün bitti; artık dinlenebilirsin."
+    }
+   ]
+  },
+  {
+   "clip": "c2.cerceve",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 213.7214,
+   "end": 220.8921,
+   "gapAfter": 4.9085,
+   "subs": [
+    {
+     "start": 213.7214,
+     "end": 217.1596,
+     "text": "Ayaklarından başına doğru bedeninde dolaşacağız."
+    },
+    {
+     "start": 218.2959,
+     "end": 220.8921,
+     "text": "Rahatsız eden bir yer olursa atla."
+    }
+   ]
+  },
+  {
+   "clip": "c2.ayak",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 225.8006,
+   "end": 229.3432,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 225.8006,
+     "end": 229.3432,
+     "text": "Önce ayaklarının ağırlığını yatağa veriyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c2.topuk",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 237.706,
+   "end": 241.1603,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 237.706,
+     "end": 241.1603,
+     "text": "Ayaklarının yatağa değdiği yerleri fark ediyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c2.bacak",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 249.5231,
+   "end": 251.8748,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 249.5231,
+     "end": 251.8748,
+     "text": "Bacakların da yatağa yaslanıyor."
+    }
+   ]
+  },
+  {
+   "clip": "c2.uyluk",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 260.2376,
+   "end": 263.0595,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 260.2376,
+     "end": 263.0595,
+     "text": "Uylukların ağır ve sıcak olabilir."
+    }
+   ]
+  },
+  {
+   "clip": "c2.bel",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 271.4223,
+   "end": 274.1953,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 271.4223,
+     "end": 274.1953,
+     "text": "Gövden bütün ağırlığıyla yatakta."
+    }
+   ]
+  },
+  {
+   "clip": "c2.omurga",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 282.558,
+   "end": 285.2255,
+   "gapAfter": 9.3628,
+   "subs": [
+    {
+     "start": 282.558,
+     "end": 285.2255,
+     "text": "Omurgan boydan boya uzanıyor."
+    }
+   ]
+  },
+  {
+   "clip": "c2.el",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 294.5883,
+   "end": 297.0911,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 294.5883,
+     "end": 297.0911,
+     "text": "Ellerin olduğu yerde dinleniyor."
+    }
+   ]
+  },
+  {
+   "clip": "c2.kol",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 305.4539,
+   "end": 308.4983,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 305.4539,
+     "end": 308.4983,
+     "text": "Kollarının ağırlığını da yatağa veriyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c2.omuz",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 316.8611,
+   "end": 319.4051,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 316.8611,
+     "end": 319.4051,
+     "text": "Omuzların yatağa doğru inebilir."
+    }
+   ]
+  },
+  {
+   "clip": "c2.boyun",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 327.7679,
+   "end": 330.064,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 327.7679,
+     "end": 330.064,
+     "text": "Boynun yastığa yaslanıyor."
+    }
+   ]
+  },
+  {
+   "clip": "c2.yuz",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 338.4267,
+   "end": 342.1895,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 338.4267,
+     "end": 342.1895,
+     "text": "Alnın gevşek, gözlerinin çevresi yumuşak."
+    }
+   ]
+  },
+  {
+   "clip": "c2.cene",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 350.5523,
+   "end": 353.904,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 350.5523,
+     "end": 353.904,
+     "text": "Çenen serbest, dişlerin hafif aralık."
+    }
+   ]
+  },
+  {
+   "clip": "c2.bas",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 362.2668,
+   "end": 365.4178,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 362.2668,
+     "end": 365.4178,
+     "text": "Başının ağırlığını yastığa bırakıyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c2.sicak",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 373.7806,
+   "end": 377.8115,
+   "gapAfter": 9.3628,
+   "subs": [
+    {
+     "start": 373.7806,
+     "end": 377.8115,
+     "text": "Ellerinde ve ayaklarında hafif bir sıcaklık olabilir."
+    }
+   ]
+  },
+  {
+   "clip": "c2.gelmezse",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 387.1743,
+   "end": 390.8866,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 387.1743,
+     "end": 390.8866,
+     "text": "Ağırlık her yerde aynı olmayabilir; bu da olur."
+    }
+   ]
+  },
+  {
+   "clip": "c2.butun",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 399.2494,
+   "end": 402.6237,
+   "gapAfter": 9.817,
+   "subs": [
+    {
+     "start": 399.2494,
+     "end": 402.6237,
+     "text": "Baştan ayağa bütün bedenin yatağın üstünde."
+    }
+   ]
+  },
+  {
+   "clip": "c4.giris",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 412.4407,
+   "end": 419.092,
+   "gapAfter": 6.9085,
+   "subs": [
+    {
+     "start": 412.4407,
+     "end": 414.3094,
+     "text": "Bire kadar geri sayacağım."
+    },
+    {
+     "start": 416.4273,
+     "end": 419.092,
+     "text": "Her sayıda nefesini bırakıyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c4.uymaz",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 426.0005,
+   "end": 430.3046,
+   "gapAfter": 11.3628,
+   "subs": [
+    {
+     "start": 426.0005,
+     "end": 430.3046,
+     "text": "Nefesin sayılara uymasa ya da sayıyı kaçırsan da olur."
+    }
+   ]
+  },
+  {
+   "clip": "c4.n10",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 441.6674,
+   "end": 442.3551,
+   "gapAfter": 7.494,
+   "subs": [
+    {
+     "start": 441.6674,
+     "end": 442.3551,
+     "text": "on…"
+    }
+   ]
+  },
+  {
+   "clip": "c4.n09",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 449.8491,
+   "end": 450.8475,
+   "gapAfter": 7.1833,
+   "subs": [
+    {
+     "start": 449.8491,
+     "end": 450.8475,
+     "text": "dokuz…"
+    }
+   ]
+  },
+  {
+   "clip": "c4.n08",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 458.0308,
+   "end": 459.1219,
+   "gapAfter": 7.0906,
+   "subs": [
+    {
+     "start": 458.0308,
+     "end": 459.1219,
+     "text": "sekiz…"
+    }
+   ]
+  },
+  {
+   "clip": "c4.n07",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 466.2125,
+   "end": 467.0887,
+   "gapAfter": 7.3055,
+   "subs": [
+    {
+     "start": 466.2125,
+     "end": 467.0887,
+     "text": "yedi…"
+    }
+   ]
+  },
+  {
+   "clip": "c4.n06",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 474.3942,
+   "end": 475.3193,
+   "gapAfter": 7.2566,
+   "subs": [
+    {
+     "start": 474.3942,
+     "end": 475.3193,
+     "text": "altı…"
+    }
+   ]
+  },
+  {
+   "clip": "c4.n05",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 482.5759,
+   "end": 483.5533,
+   "gapAfter": 7.2043,
+   "subs": [
+    {
+     "start": 482.5759,
+     "end": 483.5533,
+     "text": "beş…"
+    }
+   ]
+  },
+  {
+   "clip": "c4.n04",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 490.7576,
+   "end": 491.709,
+   "gapAfter": 7.2303,
+   "subs": [
+    {
+     "start": 490.7576,
+     "end": 491.709,
+     "text": "dört…"
+    }
+   ]
+  },
+  {
+   "clip": "c4.n03",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 498.9393,
+   "end": 499.7876,
+   "gapAfter": 7.3334,
+   "subs": [
+    {
+     "start": 498.9393,
+     "end": 499.7876,
+     "text": "üç…"
+    }
+   ]
+  },
+  {
+   "clip": "c4.n02",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 507.121,
+   "end": 507.9508,
+   "gapAfter": 7.3519,
+   "subs": [
+    {
+     "start": 507.121,
+     "end": 507.9508,
+     "text": "iki…"
+    }
+   ]
+  },
+  {
+   "clip": "c4.n01",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 515.3027,
+   "end": 516.1338,
+   "gapAfter": 9.3628,
+   "subs": [
+    {
+     "start": 515.3027,
+     "end": 516.1338,
+     "text": "bir."
+    }
+   ]
+  },
+  {
+   "clip": "c4.bitti",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 525.4966,
+   "end": 531.5753,
+   "gapAfter": 9.3628,
+   "subs": [
+    {
+     "start": 525.4966,
+     "end": 527.4536,
+     "text": "Sayılar burada bitiyor."
+    },
+    {
+     "start": 529.5716,
+     "end": 531.5753,
+     "text": "Kaçını duyduğun önemli değil."
+    }
+   ]
+  },
+  {
+   "clip": "c4.k2",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 540.9381,
+   "end": 543.5131,
+   "gapAfter": 13.3628,
+   "subs": [
+    {
+     "start": 540.9381,
+     "end": 543.5131,
+     "text": "Bugün bitti; dinlenebilirsin."
+    }
+   ]
+  },
+  {
+   "clip": "c3.sahne",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 556.8758,
+   "end": 560.1282,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 556.8758,
+     "end": 560.1282,
+     "text": "Zihninde yağmurlu bir akşam belirebilir."
+    }
+   ]
+  },
+  {
+   "clip": "c3.gelmezse",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 568.491,
+   "end": 572.8577,
+   "gapAfter": 11.817,
+   "subs": [
+    {
+     "start": 568.491,
+     "end": 572.8577,
+     "text": "Görüntü belirmese de, gözlerin açık kalsa da sorun değil."
+    }
+   ]
+  },
+  {
+   "clip": "c3.yer",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 584.6747,
+   "end": 591.7137,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 584.6747,
+     "end": 586.8487,
+     "text": "Belki sıcak bir odadasın."
+    },
+    {
+     "start": 588.9666,
+     "end": 591.7137,
+     "text": "Belki üstü kapalı bir verandadasın."
+    }
+   ]
+  },
+  {
+   "clip": "c3.su",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 600.0764,
+   "end": 604.827,
+   "gapAfter": 11.817,
+   "subs": [
+    {
+     "start": 600.0764,
+     "end": 604.827,
+     "text": "Yağmur sesi sana iyi gelmezse onu çok uzakta düşünmen de olur."
+    }
+   ]
+  },
+  {
+   "clip": "c3.yagmur",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 616.644,
+   "end": 619.8365,
+   "gapAfter": 11.817,
+   "subs": [
+    {
+     "start": 616.644,
+     "end": 619.8365,
+     "text": "Yağmur çatıya usul usul vuruyor."
+    }
+   ]
+  },
+  {
+   "clip": "c3.damla",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 631.6535,
+   "end": 634.312,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 631.6535,
+     "end": 634.312,
+     "text": "Oluktan tek tük damlalar düşüyor."
+    }
+   ]
+  },
+  {
+   "clip": "c3.toprak",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 642.6748,
+   "end": 645.3744,
+   "gapAfter": 13.817,
+   "subs": [
+    {
+     "start": 642.6748,
+     "end": 645.3744,
+     "text": "Havada ıslak toprağın kokusu var."
+    }
+   ]
+  },
+  {
+   "clip": "c3.cam",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 659.1914,
+   "end": 663.6735,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 659.1914,
+     "end": 663.6735,
+     "text": "Yakındaki camdan yağmur damlaları ağır ağır süzülüyor."
+    }
+   ]
+  },
+  {
+   "clip": "c3.ortu",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 672.0362,
+   "end": 675.142,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 672.0362,
+     "end": 675.142,
+     "text": "Üstünde kalın, yumuşak bir örtü var."
+    }
+   ]
+  },
+  {
+   "clip": "c3.agirlik",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 683.5047,
+   "end": 686.6789,
+   "gapAfter": 13.817,
+   "subs": [
+    {
+     "start": 683.5047,
+     "end": 686.6789,
+     "text": "Örtünün tatlı ağırlığı seni sarıyor."
+    }
+   ]
+  },
+  {
+   "clip": "c3.sicaklik",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 700.4959,
+   "end": 703.4185,
+   "gapAfter": 9.3628,
+   "subs": [
+    {
+     "start": 700.4959,
+     "end": 703.4185,
+     "text": "Altında kendi sıcaklığın birikiyor."
+    }
+   ]
+  },
+  {
+   "clip": "c3.parmak",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 712.7812,
+   "end": 715.9091,
+   "gapAfter": 9.3628,
+   "subs": [
+    {
+     "start": 712.7812,
+     "end": 715.9091,
+     "text": "Parmak uçların örtünün dokusunu buluyor."
+    }
+   ]
+  },
+  {
+   "clip": "c3.yastik",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 725.2719,
+   "end": 728.3904,
+   "gapAfter": 13.817,
+   "subs": [
+    {
+     "start": 725.2719,
+     "end": 728.3904,
+     "text": "Yastığın kumaşı serin ve yumuşak."
+    }
+   ]
+  },
+  {
+   "clip": "c3.lamba",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 742.2074,
+   "end": 746.1987,
+   "gapAfter": 11.817,
+   "subs": [
+    {
+     "start": 742.2074,
+     "end": 746.1987,
+     "text": "Köşede bir lamba sarı, sıcak bir ışık veriyor."
+    }
+   ]
+  },
+  {
+   "clip": "c3.ses2",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 758.0158,
+   "end": 761.2426,
+   "gapAfter": 8.3628,
+   "subs": [
+    {
+     "start": 758.0158,
+     "end": 761.2426,
+     "text": "Yağmurun sesi hiç değişmeden sürüyor."
+    }
+   ]
+  },
+  {
+   "clip": "c3.uzak",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 769.6053,
+   "end": 773.6672,
+   "gapAfter": 13.817,
+   "subs": [
+    {
+     "start": 769.6053,
+     "end": 773.6672,
+     "text": "Yukarıda yağmurun, yakında kendi nefesinin sesi var."
+    }
+   ]
+  },
+  {
+   "clip": "c3.kisilir",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 787.4842,
+   "end": 790.7179,
+   "gapAfter": 10.817,
+   "subs": [
+    {
+     "start": 787.4842,
+     "end": 790.7179,
+     "text": "Lambanın ışığı yavaş yavaş kısılıyor."
+    }
+   ]
+  },
+  {
+   "clip": "c3.aydinlik",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 801.5349,
+   "end": 805.2057,
+   "gapAfter": 14.817,
+   "subs": [
+    {
+     "start": 801.5349,
+     "end": 805.2057,
+     "text": "Çevrende loş, yumuşak bir aydınlık kalıyor."
+    }
+   ]
+  },
+  {
+   "clip": "c3.kal",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 820.0227,
+   "end": 823.4623,
+   "gapAfter": 10.3628,
+   "subs": [
+    {
+     "start": 820.0227,
+     "end": 823.4623,
+     "text": "Yağmuru dinlemekten başka yapacak bir şey yok."
+    }
+   ]
+  },
+  {
+   "clip": "k.anahtar3",
+   "block": "K",
+   "phase": "Derin",
+   "start": 833.8251,
+   "end": 835.3109,
+   "gapAfter": 8.9085,
+   "subs": [
+    {
+     "start": 833.8251,
+     "end": 835.3109,
+     "text": "Bugün bitti."
+    }
+   ]
+  },
+  {
+   "clip": "k.nefes",
+   "block": "K",
+   "phase": "Derin",
+   "start": 844.2194,
+   "end": 847.1524,
+   "gapAfter": 12.3628,
+   "subs": [
+    {
+     "start": 844.2194,
+     "end": 847.1524,
+     "text": "Nefes kendi ritminde gelip gidiyor."
+    }
+   ]
+  },
+  {
+   "clip": "k.izin",
+   "block": "K",
+   "phase": "Derin",
+   "start": 859.5152,
+   "end": 864.2545,
+   "gapAfter": 13.3628,
+   "subs": [
+    {
+     "start": 859.5152,
+     "end": 864.2545,
+     "text": "Uykuya dalarsan bu da güzel; sesim yavaşça kısılacak."
+    }
+   ]
+  },
+  {
+   "clip": "k.uyanik",
+   "block": "K",
+   "phase": "Derin",
+   "start": 877.6172,
+   "end": 881.492,
+   "gapAfter": 10.3628,
+   "subs": [
+    {
+     "start": 877.6172,
+     "end": 881.492,
+     "text": "Uyanık kalırsan da olur; uzanıp dinlenmek yeter."
+    }
+   ]
+  },
+  {
+   "clip": "k.son",
+   "block": "K",
+   "phase": "Derin",
+   "start": 891.8548,
+   "end": 893.0915,
+   "gapAfter": 6.9085,
+   "subs": [
+    {
+     "start": 891.8548,
+     "end": 893.0915,
+     "text": "Gece senin."
+    }
+   ]
+  }
+ ]
+}

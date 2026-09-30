@@ -3,16 +3,16 @@
  "lesson": "d02",
  "minutes": 15,
  "T": 900,
- "generated_utc": "2026-09-30T06:50:17.092453+00:00",
+ "generated_utc": "2026-09-30T08:54:20.354594+00:00",
  "tool": "render/tools/mixib.py (mix.py fonksiyonları)",
  "file": "ders2-15.mp3",
- "bytes": 12684370,
+ "bytes": 12684787,
  "encoding": {
   "mode": "ABR 120 kbit/s (lameenc, q=2)",
-  "bytes": 12684370,
-  "kbps_avg": 112.7
+  "bytes": 12684787,
+  "kbps_avg": 112.8
  },
- "mp3_decoder_offset_samples": 1105,
+ "mp3_decoder_offset_samples": 576,
  "duration_decoded_s": 900.024,
  "integrated_lufs": -17.39,
  "integrated_lufs_float": -16.94,
@@ -81,17 +81,21 @@
   "edit_point": 0,
   "speech_content": 558,
   "bed_content": 2,
-  "mix_only": 0
+  "mix_only": 0,
+  "nature_at_edit": 0
  },
  "clicks_mp3": {
   "edit_point": 0,
   "speech_content": 327,
   "bed_content": 0,
-  "mix_only": 0
+  "mix_only": 0,
+  "nature_at_edit": 0
  },
  "clicks_list": {
   "float_edit_point": [],
   "mp3_edit_point": [],
+  "float_nature_at_edit": [],
+  "mp3_nature_at_edit": [],
   "mp3_mix_only": [],
   "mp3_bed_content": []
  },
@@ -221,6 +225,7 @@
    }
   ]
  },
+ "bed_rise_limit": null,
  "loudness_rise": {
   "criterion": "yatak zarfı: tınısız ve imge katmanısız yatak, açılış kararmasından sonra, konuşma altı dahil bütün dosyada ≤ 1 dB/sn (imge katmanının nota başlangıçları SPEC.v3 §7.2 ile ayrı sınırlanır; aşağıda imge dahil değer ayrıca)",
   "bed_envelope_no_tone_no_imge": {
@@ -482,7 +487,8 @@
    "t": 753.124,
    "before_clip": "k.donus",
    "lufs_integrated": -30.0,
-   "dur_s": 4.0
+   "dur_s": 4.0,
+   "sound": "donus.synth-D5.wav"
   }
  ],
  "windows": [],

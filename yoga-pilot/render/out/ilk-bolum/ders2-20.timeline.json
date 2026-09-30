@@ -8,14 +8,14 @@
  "file": "ders2-20.mp3",
  "appFile": "yoga-d02-20dk.m4a",
  "audio": {
-  "sha256": "3761e79250a5e162bc16afb79999f5297281a1d22256f82dee784571e68a88d5",
+  "sha256": "7d64336d1c5ffdeae5ace1254cd753ea0efe7c655d3c4e32216fa6310c2b6a1d",
   "codec": "mp3",
   "bitrateKbps": 96,
   "encoding": "ABR 96 kbit/s (lameenc, q=2)",
   "sampleRate": 44100,
   "channels": 2,
   "durationSec": 1200.0,
-  "decoderOffsetSamples": 1105,
+  "decoderOffsetSamples": 576,
   "note": "tarayıcı önizlemesi (SPEC.v3 §10); uygulama dosyası AAC-LC m4a Mac'te WAV ana kopyadan kodlanır (§14)"
  },
  "voice": {
@@ -5968,9 +5968,9 @@
   }
  ],
  "closing": {
-  "jumpTo": 1051.619,
-  "returnToneAt": 1055.181,
-  "firstWordAt": 1057.181
+  "jumpTo": 1059.483,
+  "returnToneAt": null,
+  "firstWordAt": 1062.514
  },
  "release": {
   "C4": {
@@ -6276,7 +6276,8 @@
    "t": 958.5,
    "before_clip": "c4.donus1",
    "lufs_integrated": -30.0,
-   "dur_s": 4.0
+   "dur_s": 4.0,
+   "sound": "donus.synth-D5.wav"
   },
   {
    "layer": "imge",
@@ -6290,7 +6291,8 @@
    "t": 1055.181,
    "before_clip": "k.donus",
    "lufs_integrated": -30.0,
-   "dur_s": 4.0
+   "dur_s": 4.0,
+   "sound": "donus.synth-D5.wav"
   },
   {
    "layer": "bed",

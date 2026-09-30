@@ -25,7 +25,7 @@ Dosyalar tarayıcı önizlemesidir (MP3, SPEC.v3 §10). Uygulama dosyası (AAC-L
 | Ölçüm | 5 dk | 15 dk | 20 dk |
 |---|---|---|---|
 | Dosya | `ders2-5.mp3` | `ders2-15.mp3` | `ders2-20.mp3` |
-| Bayt | 4.232.353 | 12.684.370 | 13.676.614 |
+| Bayt | 4.232.770 | 12.684.787 | 13.677.031 |
 | Kodlama | ABR 120 kbit/s (lameenc, q=2) | ABR 120 kbit/s (lameenc, q=2) | ABR 96 kbit/s (lameenc, q=2) |
 | Süre (çözülmüş, sn) | 300.017 | 900.024 | 1200.014 |
 | Bütünleşik (LUFS) | -17.30 (hedef -18) | -17.39 (hedef -18) | -18.01 (hedef -18) |
@@ -42,7 +42,7 @@ Konuşma içeriği tıkı: 10 kHz üstü ani olayın enerjisi seçilmiş konuşm
 
 ## Bu partide seslendirilen birimler (28)
 
-Her birim 3 çekim; nesnel sıralamanın ilk çekimi Scribe ile harf harf karşılaştırıldı. Hepsi birebir eşleşti: evet.
+Her birim 3 çekim; nesnel sıralamadaki ilk çekimden başlayarak Scribe ile harf harf karşılaştırıldı, tutan ilk çekim seçildi (SPEC.v3 §6.3). Hepsi birebir eşleşti: evet.
 
 | Birim | Çekim | Scribe | Bayraklar |
 |---|---|---|---|
@@ -120,5 +120,11 @@ Sahibin dinlerken özellikle bakacağı yerler. Hiçbiri ölçütten kalmadı; h
 - Yardımcı birimler (`g.ilk`, `k.hizli.imge`, `k.hizli.his`, `d.goz`, `d.kalk`, `d.bekle`) seslendirildi ve seçildi; SPEC.v3
   §10'daki yardımcı dosyalar (ilk ders girişi, bırakma ön klipleri, durdurma dönüşü) bu teslimde **kurulmadı**.
 - Kodek testi (`b/mac/kodek_testi.sh`) sahibin Mac'inde bekliyor; o zamana kadar dosyalar MP3.
-- `eleven_v4` seslendirmesinde ElevenLabs durum yanıtı her çekim için 0 kredi gösterdi; hesap bakiyesi buradan doğrulanmadı.
-  Defter TTS için temkinli tahmini (0,99989 kredi/karakter/çekim) tutuyor.
+- `eleven_v4` seslendirmesinde ElevenLabs durum yanıtı her çekim için 0 kredi gösterdi, ama çekimler **ücretliymiş**:
+  hesabın API sayfası 133.485 kredi kullanılmış gösterdi (sahibin ekran görüntüsü, 2026-09-30), defterin toplam sayacı
+  aynı anda 132.910 idi ve bunun ≈ 48 bini konuşma. Konuşma ücretsiz olsaydı hesap ≈ 85 bin gösterirdi. Defter TTS için
+  0,99989 kredi/karakter/çekim tahminini tutuyor; durum yanıtındaki fiyat alanına güvenilmez.
+- **MP3 süre başlığı (sonradan düzeltildi):** ilk kodlamada Xing başlığı yoktu; oynatıcılar süreyi ilk çerçevenin bit
+  hızından tahmin ediyordu (15 dk dosya başlıkta 1058 sn, 20 dk dosya 1369 sn görünüyordu). Kodlayıcıya Xing çerçevesi
+  (çerçeve sayısı, bayt sayısı, arama tablosu) eklendi ve üç dosya yeniden üretildi; ses çerçeveleri aynı (çözümde yalnız
+  çözücünün 529 örneklik gecikmesi kalktı, fark 0).

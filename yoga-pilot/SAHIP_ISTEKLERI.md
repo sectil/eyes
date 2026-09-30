@@ -68,8 +68,9 @@ Sonraki aşamaya (metin + ses + tasarım iş akışı) bu dosya olduğu gibi ver
     Try v4 bu şekilde bir kampanya var herhalde onu kullnablirsin. açıkcası ne işe yaradoğını bilmiyorum işimizeyarıyorsa
     bunu kullanlım."
     → Durum: seslendirme zaten `eleven_v4` ile (SPEC.v3 §2). v4 çekimlerinde ElevenLabs durum yanıtı fiyatı 0 kredi
-      gösteriyor; ama hesabın API kotası (131.000) doldu ve defterin toplam sayacı (konuşmayı ücretli sayar) o sırada
-      ≈ 130,8 bin idi. Kampanyanın API çağrılarımıza uygulanıp uygulanmadığı doğrulanmadı (hesabın kullanım dökümünde
-      görünür). Müzik ve Scribe ücretli. Akış değişmedi.
+      gösteriyor, ama çekimler ücretli: hesabın API sayfası 133.485 kredi kullanılmış gösterdi (madde 14), defter aynı anda
+      132.910 idi ve bunun ≈ 48 bini konuşma. Kampanya bu API çağrılarına uygulanmadı. Akış değişmedi.
 13. "kreidmiz kalmadı 😞 ne kadarkredi lazım kalan işler için" → kalan ücretli işler ≈ 2,6 bin kredi hesaplandı (Scribe
     164, müzik vokal denetimi 2.145, SPEC.v3 §6.3 yeniden çekimleri 253). "kredi ekledim." → iş sürdü.
+14. "kredimiz yeterli mi" (ekran görüntüsü: ElevenAPI 133.485 / 186.000 kredi) → evet: kalan ≈ 52,5 bin; Ders 2, 3, 5
+    için ücretli iş kalmadı; Ders 1'in sayım kilidi çözümü sahibin seçimine göre 0 ile ≈ 5 bin arası.

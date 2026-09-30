@@ -45,23 +45,28 @@ def r(x, n=3):
 
 
 def lesson_end_level():
-    """15 dk dersin son konuşmasından 1 sn sonra başlayıp kapanış kararmasından 0,5 sn önce biten yatağın bütünleşik
-    yüksekliği (ana WAV'dan; o aralıkta konuşma ve tını yok)."""
+    """Dersin son yatağının bütünleşik yüksekliği (ana WAV'dan, konuşmasız anlardan): son klibin (k.son) başından önceki
+    2 sn ([başlangıç − 2,3; başlangıç − 0,3]; uyku kademesi rampası burada biter, en çok ≈ 0,15 dB sapma) ve varsa son
+    klipten sonra kapanış kararmasına kadarki aralık (≥ 0,5 sn ise). 5 dk'da son klipten sonra aralık yok."""
     out = {}
     for m in (15, 5):
         tl = json.load(open('%s/ders3-%d.timeline.json' % (OUTD, m), encoding='utf-8'))
         T = tl['T']
-        a = max(s['end'] for s in tl['speech']) + 1.0
-        b = T - M.END_FADE - 0.5
+        last = max(tl['speech'], key=lambda s_: s_['start'])
+        prev_end = max([s_['end'] for s_ in tl['speech'] if s_['end'] <= last['start']] or [0.0])
+        spans = [(max(prev_end + 0.3, last['start'] - 2.3), last['start'] - 0.3)]
+        a, b = last['end'] + 0.3, T - M.END_FADE - 0.2
+        if b - a >= 0.5:
+            spans.append((a, b))
         x, sr = sf.read('%s/_master/d03-%02ddk-hoc-A.wav' % (OUTD, m), dtype='float64', always_2d=True)
-        seg = x[int(a * SR):int(b * SR)]
-        out[m] = {'from_s': r(a, 2), 'to_s': r(b, 2), 'lufs': r(M.integrated(seg), 2)}
+        seg = np.concatenate([x[int(a_ * SR):int(b_ * SR)] for a_, b_ in spans])
+        out[m] = {'spans_s': [[r(a_, 2), r(b_, 2)] for a_, b_ in spans], 'lufs': r(M.integrated(seg), 2)}
     return out
 
 
 def build(target, cfg):
     Tl = LOOP_S
-    T = int(Tl + X.XF + 1)                      # üretim uzunluğu: döngü + dikiş payı
+    T = int(Tl + X.XF + M.OPEN_FADE + 1.0 + 2)  # üretim uzunluğu: baş payı (s0) + döngü + dikiş payı + 2 sn
     mus = json.load(open(cfg['extra_music'], encoding='utf-8'))
     seq = [mus['uyku'][0]] + list(mus['derin'])
     pls = []
@@ -89,9 +94,8 @@ def build(target, cfg):
     finally:
         M.T = oldT
     nat *= np.float32(10 ** ((-M.NATURE_BELOW_DB + (cfg.get('nature_image_boost_db') or 0.0)) / 20))
-    # render_stream baştaki parçaya açılış kararması koyar: dikiş payı başın üstüne bineceği için ilk 3 sn'yi değil,
-    # payı [Tl, Tl + XF) kullanıyoruz; başın kararmasını ortadan kaldırmak için döngü Tl + XF'ten değil, OPEN_FADE'den sonra
-    # başlar: y = üretim[s0 : s0 + Tl], dikiş = üretim[s0 + Tl : s0 + Tl + XF] başın üstüne
+    # döngü üretimin s0 = OPEN_FADE + 1 sn'sinden başlar (dersteki açılış bölgesinden uzak; yükseliş sınırlayıcısı da
+    # buradan sonra çalışır): y = üretim[s0 : s0 + Tl]; dikiş payı üretim[s0 + Tl : s0 + Tl + XF] başın üstüne biner
     s0 = int(round((M.OPEN_FADE + 1.0) * SR))
     bed = music + nat
     g_rl, rl = X.rise_limit_gain(bed + room, 0.9, M.OPEN_FADE + 3.0)
@@ -119,7 +123,7 @@ def build(target, cfg):
 
 
 def main():
-    cfg = X.CONFIGS['d03']
+    cfg = X.CONFIGS['d03']()
     lv = lesson_end_level()
     target = lv[15]['lufs']
     os.makedirs(OUTD + '/_rapor', exist_ok=True)
@@ -149,6 +153,22 @@ def main():
     z = np.zeros(len(two_f))
     cl_f = M.detect_clicks_mix(two_f, ed2, [], M.hf_frames(z)[0], M.hf_frames(two_f)[0])
     cl_m = M.detect_clicks_mix(two_m, ed2, [], M.hf_frames(z)[0], M.hf_frames(two_f)[0])
+    # yağmur damlası kaynak doğrulaması (mixib.nature_source_hit; derstekiyle aynı VARSAYIM): döngü geçişine düşen olay
+    # o anda çalan yağmur dosyasının karşılık gelen konumunda da varsa kaynak içeriğidir
+    src_ev = X.nature_source_events(cfg['nature'])
+    off = info['loop_window_in_render_s'][0]
+    for cl in (cl_f, cl_m):
+        keep, moved = [], []
+        for c in cl['edit_point']:
+            tl_ = c[0] % Tl
+            cands = [tl_ + off] + ([tl_ + off + Tl] if tl_ < X.XF else [])
+            hits = [X.nature_source_hit(t_, info['nature_events'], src_ev) for t_ in cands]
+            if any(h[0] for h in hits):
+                moved.append(c + [next(h[1] for h in hits if h[0])])
+            else:
+                keep.append(c)
+        cl['edit_point'] = keep
+        cl['nature_at_edit'] = moved
     seam = [c for c in cl_f['edit_point'] + cl_f['mix_only'] + cl_m['edit_point'] + cl_m['mix_only'] if abs(c[0] - Tl) <= 0.05]
     ds = M.digital_silence(two_m)
     j = int(Tl * SR)
@@ -173,7 +193,8 @@ def main():
            'target_lufs_from_lesson_end': lv, 'integrated_lufs': r(integ, 2), 'true_peak_dbtp_mp3': r(tp_dec, 2),
            'tp_limiter': lim_tries, 'loudness_rise_two_loops': rise,
            'clicks_float_two_loops': {k: len(v) for k, v in cl_f.items()}, 'clicks_mp3_two_loops': {k: len(v) for k, v in cl_m.items()},
-           'clicks_list': {'float': cl_f['edit_point'] + cl_f['mix_only'], 'mp3': cl_m['edit_point'] + cl_m['mix_only']},
+           'clicks_list': {'float': cl_f['edit_point'] + cl_f['mix_only'], 'mp3': cl_m['edit_point'] + cl_m['mix_only'],
+                           'float_nature_at_edit': cl_f['nature_at_edit'], 'mp3_nature_at_edit': cl_m['nature_at_edit']},
            'seam': {'sample_jump': r(jump, 6), 'p99_9_neighbour_diff': r(typ, 6), 'clicks_at_seam': seam},
            'digital_silence_two_loops': ds, 'build': info, 'criteria': crit, 'pass': all(crit.values())}
     json.dump(rep, open('%s/_rapor/d03-kuyruk.json' % OUTD, 'w', encoding='utf-8'), ensure_ascii=False, indent=1, default=str)

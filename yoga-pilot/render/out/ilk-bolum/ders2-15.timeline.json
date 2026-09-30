@@ -8,14 +8,14 @@
  "file": "ders2-15.mp3",
  "appFile": "yoga-d02-15dk.m4a",
  "audio": {
-  "sha256": "6030b5bcd1dc3219729e5aa5b888cd476c58b5af797cc30657877b898a3736c0",
+  "sha256": "c875dcef4885db9538f58fe348c2992d50342696b5003cc0fad9074d675efc77",
   "codec": "mp3",
   "bitrateKbps": 120,
   "encoding": "ABR 120 kbit/s (lameenc, q=2)",
   "sampleRate": 44100,
   "channels": 2,
   "durationSec": 900.0,
-  "decoderOffsetSamples": 1105,
+  "decoderOffsetSamples": 576,
   "note": "tarayıcı önizlemesi (SPEC.v3 §10); uygulama dosyası AAC-LC m4a Mac'te WAV ana kopyadan kodlanır (§14)"
  },
  "voice": {
@@ -4444,9 +4444,9 @@
   }
  ],
  "closing": {
-  "jumpTo": 749.376,
-  "returnToneAt": 753.124,
-  "firstWordAt": 755.124
+  "jumpTo": 757.426,
+  "returnToneAt": null,
+  "firstWordAt": 760.55
  },
  "release": {
   "C4": {
@@ -4673,7 +4673,8 @@
    "t": 753.124,
    "before_clip": "k.donus",
    "lufs_integrated": -30.0,
-   "dur_s": 4.0
+   "dur_s": 4.0,
+   "sound": "donus.synth-D5.wav"
   },
   {
    "layer": "bed",

@@ -106,7 +106,7 @@ def d05_config():
         'corner': (4.68, 'hi'), 'scene': None, 'release': [3, 5, 15],
         'selections': [R + '/sel/hoc/d05/selection-d05.json'],
         'arrange': 'd05',
-        'duck_tone': True, 'music': {'family': 'Sol (yerel sentez)'},
+        'duck_tone': True, 'bed_rise_limit': 0.9, 'music': {'family': 'Sol (yerel sentez)'},
         'nature': None, 'tone': 'bell', 'lufs_target': -18.0, 'end_fade': 5.0,
         # VARSAYIM: pencerede yatak −6 dB; iniş 6 sn, çıkış 10 sn (6 dB / 6 sn tam 1 dB/sn sınırında), çıkış çandan önce biter
         'withdraw': {'db': -6.0, 'down': 6.0, 'up': 10.0, 'bell_lead': 2.0},
@@ -740,6 +740,73 @@ def visual_timeline(L, T, plan, speech):
 
 
 # ================================================================================================ kodlama ve konum denetimi
+def nature_source_events(files):
+    """Doğa döngü dosyalarındaki 10 kHz üstü ani olayların kare indisleri (mix.click_events ölçütü, 2 ms kare)."""
+    out = {}
+    for f_ in files:
+        xs, _sr = sf.read(f_, dtype='float64', always_2d=True)
+        hs, fs_ = M.hf_frames(xs)
+        out[os.path.basename(f_)] = (np.array(M.click_events(hs, fs_)), len(xs) / SR)
+    return out
+
+
+def nature_source_hit(t_, nature_ev, src_ev):
+    """t_ anında en yüksek kazançla çalan doğa döngüsünün kaynak konumunun ±5 ms'inde kaynakta olay var mı."""
+    nxf = M.NATURE_XF
+    fr = int(round(0.002 * SR))
+    best, bw = None, -1.0
+    for e_ in nature_ev:
+        if e_['t0'] - 1e-6 <= t_ <= e_['t1'] + 1e-6:
+            u_in = (t_ - e_['t0']) / nxf if e_ is not nature_ev[0] else 1.0
+            u_out = (e_['t1'] - t_) / nxf
+            w_ = min(1.0, max(0.0, u_in), max(0.0, u_out))
+            if w_ > bw:
+                best, bw = e_, w_
+    if best is None:
+        return False, None
+    evs_, Lf = src_ev[best['loop']]
+    pos = (best['rotation_s'] + (t_ - best['t0'])) % Lf
+    k_ = pos / (fr / SR)
+    hit = bool(len(evs_) and np.min(np.abs(evs_ - k_)) <= 2.5)
+    return hit, {'loop': best['loop'], 'src_pos_s': r(pos, 3), 'weight': r(bw, 2)}
+
+
+def add_xing(data):
+    """lameenc akış kipinde Xing/Info başlığı yazmıyor: ABR dosyada çözücüler süreyi ilk çerçevenin bit hızından tahmin
+    ediyor (ders2-15.mp3 başlıkta 1058 sn gösterdi, ders5-15.mp3'ü libsndfile 888,86 sn'de bıraktı; gerçek 900 sn).
+    Ses çerçevelerine dokunmadan başa tek bir Xing çerçevesi eklenir: çerçeve sayısı, bayt sayısı, 100 noktalı arama
+    tablosu (TOC). MPEG-1 Layer III, 44,1 kHz; Xing çerçevesi 128 kbit/sn (417 bayt), korumasız. Zaten varsa dokunulmaz."""
+    import struct
+    BR = [0, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320]
+    offs = []
+    i = 0
+    first_h = None
+    while i + 4 <= len(data):
+        h = struct.unpack('>I', data[i:i + 4])[0]
+        if (h >> 21) & 0x7ff != 0x7ff or (h >> 19) & 3 != 3 or (h >> 17) & 3 != 1:
+            raise SystemExit('MP3 çerçeve eşlemesi bozuk (bayt %d)' % i)
+        br = BR[(h >> 12) & 0xf]
+        if (h >> 10) & 3 != 0 or br == 0:
+            raise SystemExit('beklenmeyen çerçeve (bayt %d)' % i)
+        if first_h is None:
+            first_h = h
+            side = 17 if (h >> 6) & 3 == 3 else 32
+            if data[i + 4 + side:i + 8 + side] in (b'Xing', b'Info'):
+                return data
+        offs.append(i)
+        i += 144000 * br // 44100 + ((h >> 9) & 1)
+    if i != len(data):
+        raise SystemExit('MP3 sonu çerçeve sınırında değil')
+    n = len(offs)
+    side = 17 if (first_h >> 6) & 3 == 3 else 32
+    hdr = (first_h & ~((0xf << 12) | (1 << 9) | (1 << 16))) | (9 << 12) | (1 << 16)   # 128 kbit/sn, dolgu yok, CRC yok
+    size = 144000 * 128 // 44100
+    total = len(data) + size
+    toc = bytes(min(255, int(256.0 * (size + offs[min(n - 1, int(k * n / 100))]) / total)) for k in range(100))
+    body = struct.pack('>I', hdr) + bytes(side) + b'Xing' + struct.pack('>III', 0x0F, n, total) + toc + struct.pack('>I', 0)
+    return body + bytes(size - len(body)) + data
+
+
 def encode_mp3(x, path, kbps, T):
     import lameenc
     rng = np.random.default_rng(M.SEED)
@@ -757,6 +824,7 @@ def encode_mp3(x, path, kbps, T):
     for s in range(0, len(pcm), step):
         data += enc.encode(pcm[s:s + step].tobytes())
     data += enc.flush()
+    data = add_xing(bytes(data))
     if len(data) > MAX_BYTES:
         raise SystemExit('MP3 %d bayt > %d' % (len(data), MAX_BYTES))
     with open(path, 'wb') as f:
@@ -1010,34 +1078,15 @@ def run(les, minutes, plan_only=False):
     clicks_mp3 = M.detect_clicks_mix(dec[lag:lag + T * SR], edits, speech, v_hf, b_hf)
     # VARSAYIM (Ders 3 yağmuru): kurgu noktasına ±10 ms düşen 10 kHz üstü olayın enerjisi doğa izinden geliyorsa (doğa
     # izinin 10 kHz üstü düzeyi karışımınkinin en çok 3 dB altında) olay doğa kaynağında aranır: o anda en yüksek kazançla
-    # çalan döngü dosyasında karşılık gelen konumun ±4 ms'inde aynı ölçütle (click_events) bir olay varsa olay kaynağın
+    # çalan döngü dosyasında karşılık gelen konumun ±5 ms'inde aynı ölçütle (click_events) bir olay varsa olay kaynağın
     # kendi içeriğidir (damla), kurgu tıkı değildir; 'nature_at_edit' listesine ayrı yazılır. Kaynakta yoksa kurgu tıkı kalır.
     if cfg.get('nature'):
         n_hf, _ = M.hf_frames(nat)
         fr = int(round(0.002 * SR))
-        src_ev = {}
-        for f_ in cfg['nature']:
-            xs, _sr = sf.read(f_, dtype='float64', always_2d=True)
-            hs, fs_ = M.hf_frames(xs)
-            src_ev[os.path.basename(f_)] = (np.array(M.click_events(hs, fs_)), len(xs) / SR)
-        nxf = M.NATURE_XF
+        src_ev = nature_source_events(cfg['nature'])
 
         def nat_source_has(t_):
-            best, bw = None, -1.0
-            for e_ in nature_ev:
-                if e_['t0'] - 1e-6 <= t_ <= e_['t1'] + 1e-6:
-                    u_in = (t_ - e_['t0']) / nxf if e_ is not nature_ev[0] else 1.0
-                    u_out = (e_['t1'] - t_) / nxf
-                    w_ = min(1.0, max(0.0, u_in), max(0.0, u_out))
-                    if w_ > bw:
-                        best, bw = e_, w_
-            if best is None:
-                return False, None
-            evs_, Lf = src_ev[best['loop']]
-            pos = (best['rotation_s'] + (t_ - best['t0'])) % Lf
-            k_ = pos / (fr / SR)
-            hit = bool(len(evs_) and np.min(np.abs(evs_ - k_)) <= 2.5)
-            return hit, {'loop': best['loop'], 'src_pos_s': r(pos, 3), 'weight': r(bw, 2)}
+            return nature_source_hit(t_, nature_ev, src_ev)
 
         for cl in (clicks_pre, clicks_mp3):
             keep, moved = [], []
