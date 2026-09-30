@@ -493,7 +493,8 @@ Zaman" hukukçuyu bekler; hava için Apple'a soru gönderilmez.
 - [x] B0 · gece düzeltmeleri (Bug 33 `0daf495`, Bug 34 `57a7734`); eşdeğerlik tabanı donduruldu
       (`app/test/fixtures/bildirim-taban/`, kayıt `57a7734`); hukukçu soruları eklendi (`tasarim/S0/hukukcu-sorulari.md`
       Soru 4–7); plan belgeleri bu dala alındı.
-- [ ] B0 · v2 bildirim sisteminin cihaz listesi (§0b "Cihazda" maddesi) sahiple geçilir: Build 60 kurulunca.
+- [x] B0 · v2 bildirim sisteminin cihaz listesi: sahip bilerek atladı (2026-09-30: "bildirimler geliyordu sanırım,
+      bildirim koduna başla"). §0b "Cihazda" maddesi açık kalır; B1 cihaz listesiyle birlikte bakılır.
 - [x] B0 · rıza metinleri (`bildirim-hava-yuruyus/rizalar-taslak.md`: `weather`, `walk`, `walkDetect`) sahip onayladı
       (2026-09-30); hukukçu onayı ayrıca beklenir.
 - [ ] B1a · `sources.js` kayıtları ve kanıt kapısı (11 kaynak ve koşullular; PubMed esummary, `kaynak-dogrulama.md`) →
