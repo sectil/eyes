@@ -182,3 +182,9 @@ Kaynak: `klasnja2019`.
 3. Yolun kaynağı: `singh2024` için `moduleRemind.js:42` `PATH_REMIND.science` doldurulmalı. Kod değişmeden bağ kurulmaz.
 4. `moszeik2025` bilim satırı: etkinin hangi ölçüde küçük olduğu yazılmalı, iyi oluş mu kortizol mü. Sahip kaynaktan doldurana dek yoga görünür satır taşımaz.
 5. Metin kapısı dışında kalan yasak kökler: kart `titleTr`'de `kim2020` "tedavi edici", `yamashita2021` "iyileştiren"; `moszeik2025.duration` "ideal"; `breath.js:108` "hipertansif, tansiyon, nitrik oksidi artırır", `:95` "Göz içi basıncı". Hepsi ekranda görünüyor. Sıradaki kapıya alınsın mı?
+
+## Değişiklik (sahip onayı 2026-09-30, "önerini uygula")
+
+- Saat sayfasındaki seçici: "Sen karar ver" yerine **"Nef seçsin"** (5 sn kapısı tur 2: "sen kim?"). Karşı seçenek
+  "Saatleri ben seçeyim" aynı kalır.
+- "Bana hatırlat" satırı açık/kapalı anahtarı taşır (kurulu mu, öneri mi belli olsun).
