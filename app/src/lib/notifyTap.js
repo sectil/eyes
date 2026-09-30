@@ -9,7 +9,7 @@
 // | 7800–7859 | remind / remindMerged     | modül ya da Ana sayfa (birleşik), üstte bilim kartı      |
 // | 7860–7867 | nudge                     | bugünkü deney yönlendirmesi + markTapped (günü dokunulmuş sayar) |
 // | 7700–7701 | weather                   | hava sayfası (WEATHER_ROUTE); açılamıyorsa Ana sayfa     |
-// VARSAYIM: hava sayfası (screens/Sky.jsx) henüz yok; rota adı 'sky' ayrıldı, routeOk onu tanıyana dek Ana sayfa açılır.
+// Hava sayfası screens/Sky.jsx (rota 'sky'); App routeOk onu yalnız SKY_UI açıkken tanır, kapalıyken Ana sayfa açılır.
 // 7710–7719 yürüyüş sorusu / fark et teklifi: ekranları B3'te; bu turda yönlendirme yok (VARSAYIM).
 //
 // actionId: yalnız dokunma (notifyApply 'tap'ı actionId'siz iletir) yönlendirir. Bildirim eylemleri (walkLater,

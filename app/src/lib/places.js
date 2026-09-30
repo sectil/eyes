@@ -1,7 +1,9 @@
 // İl ve ilçe (B2 hava; PLAN.v1 §3.B.1, §5.5 madde 8). Tablo lib/places.data.js (GeoNames ADM1/ADM2, CC BY 4.0).
-//   - Yaklaşık konumdan yalnız il bulunur ("İzmir" + "yaklaşık" etiketi); ilçe listeden seçilir.
-//   - Kesin konum izni varsa en yakın ilçe merkezi TELEFONDA bulunur ve sorulur ("Gaziemir'de misin?"); ters coğrafi
-//     kodlama yok (koordinat ikinci kez Apple'a gitmez).
+//   - Sahip kararı (SAHIP_ISTEKLERI.md "Hava: il ve ilçe konumdan kendiliğinden", 2026-10-01; §3.B.1'in "ilçe listeden"
+//     kuralını değiştirir): konum izni varsa (yaklaşık ya da kesin) il ve EN YAKIN ilçe merkezi TELEFONDA tablodan
+//     kendiliğinden seçilir (placeFromLocation); kişi bir şey girmez, "…'de misin?" sorulmaz. Liste (SkyPlace) yalnız
+//     izin yokken ya da hava sayfasındaki "Değiştir"den açılır. Ters coğrafi kodlama yok (koordinat ikinci kez Apple'a
+//     gitmez). suggestFromLocation ve confirmQuestion eski akıştan kalır (SkyConfirm; rota kullanılmaz).
 //   - Kişinin koordinatı saklanmaz. Saklanan yalnız il ve ilçe adı, ayrı anahtarda: gozolcum:sky-place. Profildeki
 //     şehir alanına (settings.profile / identity) YAZILMAZ; profil eşitlemesiyle Supabase'e gitmesin.
 //   - Hava isteği ve sabah bildirimi için kullanılan nokta tablodaki kamusal noktadır (ilçe merkezi ya da ilin merkezi).
@@ -39,6 +41,13 @@ export function suggestFromLocation(pos, accuracy = 'reduced', places = PLACES) 
   if (!n) return null
   if (accuracy === 'full') return { il: n.il, ilce: n.ilce, approx: false, confirm: true }
   return { il: n.il, ilce: null, approx: true, confirm: false }
+}
+
+// Kendiliğinden yer (sahip kararı): yaklaşık ve kesin konumda aynı; il + en yakın ilçe merkezi. Koordinat dönmez.
+// accuracy yalnız uyum için alınır; yaklaşık konumda da ilçe seçilir. Döner: { il, ilce, approx: false } | null
+export function placeFromLocation(pos, _accuracy = 'reduced', places = PLACES) {
+  const n = nearestPlace(pos, places)
+  return n ? { il: n.il, ilce: n.ilce, approx: false } : null
 }
 
 const coll = new Intl.Collator('tr')

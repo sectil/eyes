@@ -9,8 +9,10 @@ import '../styles/sky.css'
 // Değerlendirici notu: "Yalnız İzmir" (ilçesiz devam) listenin başında. En yakın ilçe önerisi yalnız kesin konumda (G);
 // yaklaşık konumda ilçe önerilmez (PLAN.v1 §3.B.1).
 // Aday metinler (5sn-b2.md; sahip onayı bekliyor): "Hangi ilçedesin?", "İlçe ara", "Yalnız İzmir", "Konum".
-//   il: string|null (yaklaşık konumdan ya da önceki seçimden) · approx: boolean · onPick({ il, ilce|null, approx }) · onBack
-export default function SkyPlace({ il: il0 = null, approx: approx0 = false, onPick, onBack }) {
+// Sahip kararı (2026-10-01): il ve ilçe konumdan kendiliğinden seçilir; bu liste yalnız konum izni yokken ya da hava
+// sayfasındaki "Değiştir"den açılır (backLabel 'Hava': geri hava sayfasına).
+//   il: string|null (önceki seçimden) · approx: boolean · onPick({ il, ilce|null, approx }) · onBack · backLabel
+export default function SkyPlace({ il: il0 = null, approx: approx0 = false, onPick, onBack, backLabel = 'Ana sayfa' }) {
   const [il, setIl] = useState(il0)
   const [approx, setApprox] = useState(Boolean(il0) && approx0)
   const [q, setQ] = useState('')
@@ -19,7 +21,7 @@ export default function SkyPlace({ il: il0 = null, approx: approx0 = false, onPi
   const pickIl = (name) => { setIl(name); setApprox(false); setQ('') }
   return (
     <main className="sky-page sky-k" aria-label="Konum">
-      <button type="button" className="sky-back" onClick={onBack}><ChevronLeft size={20} aria-hidden="true" />Ana sayfa</button>
+      <button type="button" className="sky-back" onClick={onBack}><ChevronLeft size={20} aria-hidden="true" />{backLabel}</button>
       <div className="sky-says">
         <span className="sky-nef" aria-hidden="true" />
         <p className="sky-bubble">

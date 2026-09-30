@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { nearestPlace, suggestFromLocation, ilceList, searchIlce, placePoint, placeLabel, savePlace, loadPlace, clearPlace, normalizePlace, SKY_PLACE_KEY, confirmQuestion, locative, accusative } from './places.js'
+import { nearestPlace, suggestFromLocation, placeFromLocation, ilceList, searchIlce, placePoint, placeLabel, savePlace, loadPlace, clearPlace, normalizePlace, SKY_PLACE_KEY, confirmQuestion, locative, accusative } from './places.js'
 import { PLACES, ILLER } from './places.data.js'
 
 function mem(init = {}) {
@@ -44,6 +44,28 @@ describe('onay yalnız kesin konumda', () => {
     const s = suggestFromLocation({ lat: 38.32, lon: 27.16 }, 'full', SAMPLE)
     expect(s).toEqual({ il: 'İzmir', ilce: 'Gaziemir', approx: false, confirm: true })
     expect(s).not.toHaveProperty('lat')
+  })
+})
+
+describe('kendiliğinden yer (sahip kararı 2026-10-01): yaklaşık konumda da en yakın ilçe', () => {
+  it('yaklaşık konum il ve en yakın ilçe merkezini seçer; onay yok, koordinat yok', () => {
+    const p = placeFromLocation({ lat: 38.32, lon: 27.16 }, 'reduced', SAMPLE)
+    expect(p).toEqual({ il: 'İzmir', ilce: 'Gaziemir', approx: false })
+    expect(p).not.toHaveProperty('lat')
+    expect(p).not.toHaveProperty('confirm')
+  })
+  it('kesin ve varsayılan aynı sonucu verir', () => {
+    expect(placeFromLocation({ lat: 38.35, lon: 27.25 }, 'full', SAMPLE)).toEqual({ il: 'İzmir', ilce: 'Buca', approx: false })
+    expect(placeFromLocation({ lat: 38.35, lon: 27.25 }, undefined, SAMPLE).ilce).toBe('Buca')
+  })
+  it('gerçek tablo: yuvarlanmış yaklaşık nokta da ilçe verir ve kaydedilir', () => {
+    const p = placeFromLocation({ lat: 38.31, lon: 27.15 }, 'reduced')
+    expect(p).toEqual({ il: 'İzmir', ilce: 'Gaziemir', approx: false })
+    expect(normalizePlace(p)).toEqual(p)
+  })
+  it('bozuk konum → null (liste açılır)', () => {
+    expect(placeFromLocation(null, 'reduced', SAMPLE)).toBeNull()
+    expect(placeFromLocation({ lat: 999, lon: 1 }, 'full', SAMPLE)).toBeNull()
   })
 })
 

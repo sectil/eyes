@@ -1,3 +1,5 @@
+// KULLANILMIYOR (sahip kararı 2026-10-01: il ve ilçe konumdan kendiliğinden; "…'de misin?" adımı akıştan çıktı).
+// Dosya ve testleri kalır; App.jsx'te rota yok.
 import { MapPin, LocateFixed, Lock } from 'lucide-react'
 import { confirmQuestion, placeLabel } from '../lib/places.js'
 import '../styles/sky.css'

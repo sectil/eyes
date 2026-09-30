@@ -54,7 +54,8 @@ export async function skyAvailable(plugin = SkyPlugin, native = isIOSApp()) {
 
 // iOS konum izni ("Kullanırken"; yaklaşık varsayılan). Rıza sayfasından SONRA çağrılır.
 // precise: true yalnız "kişi kesin konumu kendisi açtıysa kullan" demektir (Swift kesinlik istemez; Info.plist
-// NSLocationDefaultAccuracyReduced); accuracy 'full' dönerse G yolu ("…'de misin?") açılır.
+// NSLocationDefaultAccuracyReduced). Yaklaşık ya da kesin, il ve en yakın ilçe kendiliğinden seçilir (places.js
+// placeFromLocation; sahip kararı 2026-10-01); G yolu ("…'de misin?") akıştan çıktı.
 // Döner: { status: 'granted'|'denied'|'unavailable', accuracy: 'full'|'reduced'|null, pos: { lat, lon } yuvarlanmış|null }
 export async function requestLocation(plugin = SkyPlugin, native = isIOSApp()) {
   if (!native) return { status: 'unavailable', accuracy: null, pos: null }
@@ -97,6 +98,11 @@ export async function fetchWeather(point, { plugin = SkyPlugin, online = true, n
   } catch {
     return { ok: false, reason: 'error' }
   }
+}
+
+// Yer değişince eski yerin tahmini kullanılmaz (önbellekte yer yok): App "Değiştir" sonrası siler.
+export function clearCache(storage = ls()) {
+  try { storage?.removeItem(SKY_CACHE_KEY) } catch { /* yoksay */ }
 }
 
 export const ageHours = (cache, now = new Date()) => (cache ? (now - new Date(cache.at)) / H : Infinity)

@@ -45,3 +45,12 @@ Beşi de ne istendiğini, verinin yurt dışındaki Apple hava servisine gittiğ
 diyeceğini doğru yazdı (67 yaşında, teknolojiye alışkın olmayan değerlendirici dahil). Kodda giderilecek notlar: 320'de
 "Nerede durur?" satırı solma efektinin altında kalıyor — yurt dışı bilgisi ilk ekranda tam görünmeli (sıra ya da
 sabit alan); "Önce kutuyu işaretle" daha büyük ve koyu; "Ne işe yarar?" satırında açılır ok eksik.
+
+## Hava sayfası · uygulamadaki hâl (2026-10-01) · yağmurlu gün 0/5 → 3/5, kuru gün 0/5 → 0/5 · GEÇMEDİ
+
+Tasarım 07 (5/5) koda aktarıldı; il ve en yakın ilçe konumdan kendiliğinden (sahip kararı), "…'de misin?" adımı kalktı.
+Uygulamadaki hâl iki turda 4/5'e ulaşmadı. Başlıca nedenler: kuru günde Nef'in cümlesi yok (onaylı metin yok, yer
+tutucu `sky.nef.yagmurYok`) ve sayfa "sıradan hava parçası"na dönüyor; saatlik şerit kenarda kesik ("taşma hatası
+gibi"); yağmurlu günde gökyüzü sözcüğü yok (`sky.gok`); 320'de başlık bloğu dağılıyor. Kod depoda ve yalnız TestFlight
+test derlemesinde Bilgi → "Hava (deneme)" altında: amaç WeatherKit verisinin cihazda gelip gelmediğini sahibin görmesi.
+Tasarım işi kapanmadı; eksik cümleler sahip onayına gidecek.
