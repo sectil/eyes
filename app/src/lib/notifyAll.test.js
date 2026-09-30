@@ -1,4 +1,4 @@
-// planAll (PLAN.v1 §3.A.4, §5.3, §5.5 madde 1–2). Sabah havası ve yürüyüş sorusu bu turda yok (B2/B3).
+// planAll (PLAN.v1 §3.A.4, §5.3, §5.5 madde 1–2). Sabah havası (B2 katman 1) rastgele taramada da açık; yürüyüş sorusu yok (B3).
 import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest'
 
 const native = vi.hoisted(() => ({ isIOSApp: () => false, setWalkGuards: vi.fn(async () => {}) }))
@@ -28,6 +28,10 @@ afterAll(() => {
 const isNew = (n) => n.id >= 7800 && n.id <= 7867
 const isModule = (n) => n.id >= 7800 && n.id <= 7859
 const isExtra = (n) => n.id >= 7860 && n.id <= 7867
+const isWeather = (n) => n.id >= 7700 && n.id <= 7701
+// Alarma bağlı hava 30 dk kuralından ve gece sessizliğinden muaf (§A.4); alarmsız hava öteki yeni kaynaklar gibi
+const isFreeWeather = (n) => isWeather(n) && !n.extra?.alarm && !n.keepPending
+const isAlarmWeather = (n) => isWeather(n) && !isFreeWeather(n)
 const minOf = (d) => d.getHours() * 60 + d.getMinutes()
 const OWN = [[7400, 7499], [7500, 7509], [7700, 7701], [7800, 7859], [7860, 7867]]
 const pick3 = (n) => ({ id: n.id, title: n.title, body: n.body, at: n.at.getTime() })
@@ -37,11 +41,12 @@ let cases = null
 function all() {
   if (cases) return cases
   const rnd = mulberry32(2)
+  const wrnd = mulberry32(3)
   cases = []
   for (let i = 0; i < N; i++) {
     const ctx = makeContext(rnd)
     if (ctx.reminders) ctx.reminders.optIn = 'yes'
-    const input = makeFeatureInput(rnd, ctx)
+    const input = makeFeatureInput(rnd, ctx, wrnd)
     cases.push({ input, out: planAll(input), base: planNotifications(ctx) })
   }
   return cases
@@ -53,16 +58,19 @@ describe('planAll: 20.000 rastgele açık ayar', { timeout: 60000 }, () => {
     expect(c.filter(({ out }) => out.notifications.some(isModule)).length).toBeGreaterThan(N / 4)
     expect(c.filter(({ out }) => out.notifications.some(isExtra)).length).toBeGreaterThan(N / 20)
     expect(c.filter(({ out }) => out.notifications.some((n) => n.extra?.kind === 'remindMerged')).length).toBeGreaterThan(0)
+    expect(c.filter(({ out }) => out.notifications.some(isFreeWeather)).length).toBeGreaterThan(N / 20)
+    expect(c.filter(({ out }) => out.notifications.some(isAlarmWeather)).length).toBeGreaterThan(N / 50)
+    expect(c.filter(({ out }) => out.notifications.some((n) => isWeather(n) && n.extra.shifted)).length).toBeGreaterThan(0)
   })
 
-  it(`yeni bildirimlerden hiçbiri başka bir bildirime ${MIN_APART_MIN} dk'dan yakın değil (alarm listede yok)`, () => {
+  it(`yeni bildirimlerden hiçbiri başka bir bildirime ${MIN_APART_MIN} dk'dan yakın değil (alarm ve alarma bağlı hava dışında)`, () => {
     let bad = null
     let pairs = 0
     for (const { out } of all()) {
       const list = out.notifications
-      for (const a of list.filter(isNew)) {
+      for (const a of list.filter((n) => isNew(n) || isFreeWeather(n))) {
         for (const b of list) {
-          if (a === b) continue
+          if (a === b || isAlarmWeather(b)) continue
           pairs++
           if (!bad && Math.abs(a.at - b.at) < MIN_APART_MIN * 60000) bad = [a, b]
         }
@@ -85,7 +93,8 @@ describe('planAll: 20.000 rastgele açık ayar', { timeout: 60000 }, () => {
       for (let i = 0; i < list.length; i++) {
         for (let j = i + 1; j < list.length && list[j].at - list[i].at < MIN_APART_MIN * 60000; j++) {
           const [a, b] = [list[i], list[j]]
-          if (isNew(a) || isNew(b) || !inBase.has(key(a)) || !inBase.has(key(b))) bad ??= [a, b]
+          if (isAlarmWeather(a) || isAlarmWeather(b)) continue // alarma bağlı hava istisnası (§A.4)
+          if (isNew(a) || isNew(b) || isWeather(a) || isWeather(b) || !inBase.has(key(a)) || !inBase.has(key(b))) bad ??= [a, b]
         }
       }
     }
@@ -94,7 +103,7 @@ describe('planAll: 20.000 rastgele açık ayar', { timeout: 60000 }, () => {
 
   it('74xx ve 75xx: title, body, id, at değişmez; hepsi yerinde (kırpılmaz); günlük tabandaki gibi', () => {
     for (const { out, base } of all()) {
-      expect(out.notifications.filter((n) => !isNew(n)).map(pick3)).toEqual(base.notifications.map(pick3))
+      expect(out.notifications.filter((n) => !isNew(n) && !isWeather(n)).map(pick3)).toEqual(base.notifications.map(pick3))
       expect(out.log).toEqual(base.log)
       expect(out.walkGuards.slice(0, base.walkGuards.length)).toEqual(base.walkGuards)
     }
@@ -131,6 +140,13 @@ describe('planAll: 20.000 rastgele açık ayar', { timeout: 60000 }, () => {
 
   it('yeni kaynaklardan hiçbiri gece sessizliğinde ya da 01.00–05.00’te değil; alarm varsa yatmadan önceki 60 dk’da değil', () => {
     for (const { input, out } of all()) {
+      for (const n of out.notifications.filter(isWeather)) {
+        const m = minOf(n.at)
+        expect(m >= 60 && m < 300).toBe(false)
+        if (isFreeWeather(n)) expect(inNight(n.at.getTime(), input.quiet)).toBe(false)
+      }
+      expect(out.notifications.filter(isWeather).length).toBeLessThanOrEqual(2)
+      if (!input.morningWeather) expect(out.notifications.some(isWeather)).toBe(false)
       for (const n of out.notifications.filter(isModule)) {
         expect(inNight(n.at.getTime(), input.quiet)).toBe(false)
         if (input.alarm) {
@@ -321,5 +337,85 @@ describe('planAll: kurallar', () => {
     expect(p.notifications.length).toBeLessThanOrEqual(MAX_PENDING)
     expect(p.notifications.filter((n) => !isNew(n))).toEqual(planNotifications(i).notifications)
     expect(p.horizon).toBeGreaterThanOrEqual(1)
+  })
+})
+
+// Sabah havası (lib/weatherNotify.js, 1. katman; PLAN.v1 §2 "Sabah havası", §3.B.4). Metin sahip onaylı şablonlardan
+// gelir; burada metinsiz plan sınanır (notifyApply metinsizi kurmaz).
+describe('planAll: sabah havası', () => {
+  const HOUR = 3600000
+  const wxCache = (fetched = new Date(2026, 8, 30, 6, 50)) => {
+    const d0 = new Date(2026, 8, 30)
+    const hours = Array.from({ length: 48 }, (_, h) => ({ at: d0.getTime() + h * HOUR, tempC: 18, precipChance: 0 }))
+    return { at: fetched.toISOString(), data: { fetchedAt: fetched.getTime(), hours, days: [{ date: dayKey(d0), highC: 24 }, { date: dayKey(new Date(2026, 9, 1)), highC: 22 }] } }
+  }
+  const WX = { cache: wxCache(), place: { il: 'İzmir', ilce: 'Gaziemir' }, localRefresh: null }
+  const ALARM = (hour, minute) => ({ on: true, hour, minute, days: [0, 1, 2, 3, 4, 5, 6], at: null })
+  const weatherOf = (p) => p.notifications.filter((n) => n.id >= 7700 && n.id <= 7701)
+  const at = (h, m) => new Date(2026, 8, 30, h, m).getTime()
+
+  it('kapalıyken (varsayılan) plan bugünkü gibi; veri verilmemişse de', () => {
+    const i = base({ weather: WX })
+    expect(planAll(i)).toEqual(planNotifications(i))
+    expect(planAll({ ...i, morningWeather: { on: false } })).toEqual(planNotifications(i))
+    expect(planAll(base({ morningWeather: true }))).toEqual(planNotifications(base()))
+  })
+
+  it('açıkken yalnız sabah havası: 7700, extra { kind: weather, date }, günde tek; deney planı değişmez', () => {
+    const i = base({ morningWeather: true, weather: WX })
+    const p = planAll(i)
+    const w = weatherOf(p)
+    expect(w.map((n) => n.id)).toEqual([7700])
+    expect(w[0].extra).toMatchObject({ kind: 'weather', date: dayKey(NOW), alarm: false })
+    expect(w[0].at.getTime()).toBe(at(8, 0))
+    expect(p.notifications.filter((n) => n.id < 7700)).toEqual(planNotifications(i).notifications)
+  })
+
+  it('alarma bağlı hava 30 dk kuralından ve gece sessizliğinden muaf; alarmsız hava ikisine de uyar', () => {
+    // Alarma bağlı: 07.50 alarm + 10 dk = 08.00; 08.15'teki elle seçilmiş hatırlatma yine kurulur (istisna çifti)
+    const a = planAll(base({ morningWeather: true, weather: WX, alarm: ALARM(7, 50), quiet: { from: '23:00', to: '10:00' }, moduleReminders: { dalga: man(['08:15']) } }))
+    expect(weatherOf(a).map((n) => n.at.getTime())).toEqual([at(8, 0)])
+    const a2 = planAll(base({ morningWeather: true, weather: WX, alarm: ALARM(7, 50), moduleReminders: { dalga: man(['08:15']) } }))
+    expect(weatherOf(a2).map((n) => n.at.getTime())).toEqual([at(8, 0)])
+    expect(a2.notifications.some((n) => n.id >= 7800 && n.id <= 7859 && n.at.getTime() === at(8, 15))).toBe(true)
+    // Alarmsız 08.00: sessizlik 10.00'a dek sürerse (60 dk kaydırma yetmez) kurulmaz
+    const q = planAll(base({ morningWeather: true, weather: WX, quiet: { from: '23:00', to: '10:00' } }))
+    expect(weatherOf(q)).toEqual([])
+    expect(q.skipped).toContainEqual({ module: 'weather', date: dayKey(NOW), time: null, reason: 'night' })
+    // Alarmsız 08.00 önce yerini alır; 08.10'daki elle seçilmiş hatırlatma 30 dk kuralıyla düşer
+    const g = planAll(base({ morningWeather: true, weather: WX, moduleReminders: { dalga: man(['08:10']) } }))
+    const gw = weatherOf(g)
+    expect(gw).toHaveLength(1)
+    const mods = g.notifications.filter((n) => n.id >= 7800 && n.id <= 7859 && n.at.getTime() < at(12, 0))
+    for (const m of mods) expect(Math.abs(m.at - gw[0].at)).toBeGreaterThanOrEqual(MIN_APART_MIN * 60000)
+  })
+
+  it('alarmsız hava sessizlik bitince 15 dk adımla kayar (extra.shifted); saat ve kimlik değişmez', () => {
+    // VARSAYIM (sahibe soruldu): en çok 60 dk kayar. 08.00 sessizlikte (08.30'a dek) → 08.30
+    const p = planAll(base({ morningWeather: true, weather: WX, quiet: { from: '23:00', to: '08:30' } }))
+    const w = weatherOf(p)
+    expect(w).toHaveLength(1)
+    expect(w[0]).toMatchObject({ id: 7700, extra: { kind: 'weather', alarm: false, shifted: true } })
+    expect(w[0].at.getTime()).toBe(at(8, 30))
+    // Kaymayan hava shifted taşımaz
+    expect(weatherOf(planAll(base({ morningWeather: true, weather: WX })))[0].extra.shifted).toBeUndefined()
+  })
+
+  it('sabah havası 01.00–05.00\'e düşerse kurulmaz (alarma bağlı olsa da)', () => {
+    const now = new Date(2026, 8, 30, 0, 30)
+    const p = planAll(base({ now, morningWeather: { on: true, delayMin: 30 }, weather: { ...WX, cache: wxCache(new Date(2026, 8, 30, 0, 20)) }, alarm: ALARM(4, 0) }))
+    for (const n of weatherOf(p)) {
+      const m = minOf(n.at)
+      expect(m >= 60 && m < 300).toBe(false)
+    }
+    expect(p.skipped).toContainEqual({ module: 'weather', date: dayKey(now), time: null, reason: 'night' })
+  })
+
+  it('"yerelde yenilendi" günü 7700 keepPending ile planda kalır (metinsiz)', () => {
+    const p = planAll(base({ morningWeather: true, weather: { ...WX, localRefresh: { date: dayKey(NOW), at: at(8, 20) } } }))
+    const w = weatherOf(p)
+    expect(w).toHaveLength(1)
+    expect(w[0]).toMatchObject({ id: 7700, keepPending: true })
+    expect(w[0].title).toBeUndefined()
   })
 })

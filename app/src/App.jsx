@@ -10,6 +10,7 @@ import { applyPlan, cancelOwn, onNotifyTap, notifyPermission, askNotifyPermissio
 // Tek planlayıcı (PLAN.v1 §5.5): planNotifications (dokunulmaz) + modül hatırlatmaları + ek saatler; yeni özellik
 // kapalıyken çıktısı planNotifications'ınkiyle aynı (notifyAll.equiv.test.js)
 import { planAll, saveSlots } from './lib/notifyAll.js'
+import { morningOn } from './lib/weatherNotify.js'
 import { normalizeModuleReminders } from './lib/moduleRemind.js'
 import { createTapHandler } from './lib/notifyTap.js'
 import { resetAllData } from './lib/notifyReset.js'
@@ -83,7 +84,7 @@ import { hasGazeModel } from './lib/gazeCalib.js'
 import SkyConsent from './screens/SkyConsent.jsx'
 import SkyPlace from './screens/SkyPlace.jsx'
 import SkyConfirm from './screens/SkyConfirm.jsx'
-import { requestLocation, enforceWeatherConsent, SKY_KEYS } from './lib/sky.js'
+import { requestLocation, enforceWeatherConsent, SKY_KEYS, loadCache } from './lib/sky.js'
 import { suggestFromLocation, savePlace, loadPlace } from './lib/places.js'
 
 const TAB_SCREENS = ['home', 'progress', 'calendar', 'info']
@@ -577,6 +578,10 @@ export default function App() {
     // Yeni özellik kapalıyken (moduleReminders boş) planAll planNotifications'ın çıktısını aynen döndürür (§5.4)
     const mr = normalizeModuleReminders(st.settings.moduleReminders)
     const hasMr = Object.keys(mr).length > 0
+    // Sabah havası (lib/weatherNotify.js, 1. katman): SKY_UI, settings.morningWeather (varsayılan kapalı) ve weather
+    // rızası birlikteyse. Onaylı şablon yok: bildirim metinsiz çıkar, notifyApply kurmaz. "Yerelde yenilendi" (2. katman,
+    // SkyPlugin.takeLocalRefresh) gelene dek localRefresh null. Kapalıyken plan bugünkü gibi (notifyAll.equiv).
+    const wxOn = SKY_UI && morningOn(st.settings.morningWeather) && hasConsent(st.settings.consents, 'weather')
     const plan = planAll({
       now,
       reminders: r,
@@ -589,7 +594,9 @@ export default function App() {
       log,
       moduleReminders: st.settings.moduleReminders,
       modules: hasMr ? remindModules(st.sessions) : [],
-      alarm: hasMr ? loadAlarm() : null,
+      alarm: hasMr || wxOn ? loadAlarm() : null,
+      morningWeather: wxOn ? st.settings.morningWeather : null,
+      weather: wxOn ? { cache: loadCache(), place: loadPlace(), localRefresh: null } : null,
       // Gece sessizliği: settings.quiet ({ from, to }; screens/QuietHours.jsx)
       quiet: st.settings.quiet ?? null,
       texts: true,

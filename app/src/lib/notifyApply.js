@@ -64,8 +64,11 @@ function wantedFrom(plan, nowMs) {
     if (!isOwnId(n?.id) || out.has(n.id) || !(atMs > nowMs)) continue
     // VARSAYIM: metni bağlanmamış (yalnız textKey taşıyan) bildirim kurulmaz. Onaylı cümleleri planAll({ texts: true })
     // bağlar (lib/remindTexts.js); metni çözülmüş bildirim title/body taşıdığı için bu kuraldan geçer.
-    if (n.textKey != null && n.title == null && n.body == null) continue
-    out.set(n.id, { ...n, atMs, title: String(n.title ?? ''), body: String(n.body ?? '') })
+    // İstisna: metinsiz "yerelde yenilendi" hava bildirimi (weatherNotify keepPending) yalnız bekleyeni tutmak için
+    // istenir; bekleyen yoksa kurulmaz (keepOnly).
+    const textless = n.textKey != null && n.title == null && n.body == null
+    if (textless && !keepsLocal(n)) continue
+    out.set(n.id, { ...n, atMs, title: String(n.title ?? ''), body: String(n.body ?? ''), ...(textless ? { keepOnly: true } : {}) })
   }
   return out
 }
@@ -140,7 +143,7 @@ export function createApplier(loadLN) {
       }
       // Önce iptal: iOS en çok 64 bekleyen bildirim tutar.
       if (cancel.length) await LN.cancel({ notifications: cancel })
-      const add = [...wanted.values()].filter((w) => !kept.has(w.id))
+      const add = [...wanted.values()].filter((w) => !kept.has(w.id) && !w.keepOnly)
       const grouped = plan?.grouped === true && [...wanted.keys()].some(isNewId)
       if (add.length) await LN.schedule({ notifications: add.map((w) => toLN(w, grouped)) })
       if (grouped && tidy) {

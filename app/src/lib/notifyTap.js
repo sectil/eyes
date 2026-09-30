@@ -8,18 +8,23 @@
 // | 7600–7607 | alarm                     | uyanma işareti                                           |
 // | 7800–7859 | remind / remindMerged     | modül ya da Ana sayfa (birleşik), üstte bilim kartı      |
 // | 7860–7867 | nudge                     | bugünkü deney yönlendirmesi + markTapped (günü dokunulmuş sayar) |
-// 7700–7701 hava, 7710–7719 yürüyüş sorusu / fark et teklifi: ekranları B2/B3'te; bu turda yönlendirme yok (VARSAYIM).
+// | 7700–7701 | weather                   | hava sayfası (WEATHER_ROUTE); açılamıyorsa Ana sayfa     |
+// VARSAYIM: hava sayfası (screens/Sky.jsx) henüz yok; rota adı 'sky' ayrıldı, routeOk onu tanıyana dek Ana sayfa açılır.
+// 7710–7719 yürüyüş sorusu / fark et teklifi: ekranları B3'te; bu turda yönlendirme yok (VARSAYIM).
 //
 // actionId: yalnız dokunma (notifyApply 'tap'ı actionId'siz iletir) yönlendirir. Bildirim eylemleri (walkLater,
 // detectNo, sciOpen …) bu turda hiçbir yöne götürmez (VARSAYIM: eylemlerin ekranları B2/B3 ile gelir).
 import { REST_NOTIFY_ID, TRIAL_NOTIFY_ID } from './restNotify.js'
 import { NUDGE_TYPES } from './reminders.js'
 import { sourceOf } from './sources.js'
+import { WEATHER_IDS } from './weatherNotify.js'
 
 // Deney türünün dokununca açılan ekranı (App.jsx'ten taşındı; değer aynı)
 export const TAP_ROUTE = Object.freeze({ mola: 'mola', walk: 'home', breath: 'breath-1', water: 'water', study: 'home' })
 export const REMIND_IDS = Object.freeze([7800, 7859])
 export const EXTRA_IDS = Object.freeze([7860, 7867])
+export { WEATHER_IDS } // tek tanım weatherNotify.js'te
+export const WEATHER_ROUTE = 'sky'
 
 const inRange = ([a, b], id) => Number.isInteger(id) && id >= a && id <= b
 const scienceOf = (evidence) => (typeof evidence === 'string' && sourceOf(evidence) ? evidence : null)
@@ -27,7 +32,7 @@ const scienceOf = (evidence) => (typeof evidence === 'string' && sourceOf(eviden
 // ev: { id, extra, actionId? } → eylem | null
 //   { kind: 'rest' } · { kind: 'trial', route } · { kind: 'focus', route } · { kind: 'alarm' }
 //   { kind: 'nudge', route, mark: { date, type } | null }
-//   { kind: 'remind', route, science: sources.js anahtarı | null }
+//   { kind: 'remind', route, science: sources.js anahtarı | null } · { kind: 'weather', route, date }
 // routeOk(route): uygulamanın açabildiği ekran mı (App: registry.forRoute ya da 'home'); değilse Ana sayfa.
 export function tapAction(ev, { routeOk = () => true } = {}) {
   if (!ev || typeof ev !== 'object') return null
@@ -42,6 +47,9 @@ export function tapAction(ev, { routeOk = () => true } = {}) {
     // 74xx ve ek saatler (7860–7867) aynı yol: ek saate dokunmak o günü dokunulmuş sayar (§5.5 madde 1)
     const mark = NUDGE_TYPES.includes(extra.type) && extra.date ? { date: extra.date, type: extra.type } : null
     return { kind: 'nudge', route: TAP_ROUTE[extra.type] ?? 'home', mark }
+  }
+  if (extra?.kind === 'weather' && inRange(WEATHER_IDS, id)) {
+    return { kind: 'weather', route: routeOk(WEATHER_ROUTE) ? WEATHER_ROUTE : 'home', date: typeof extra.date === 'string' ? extra.date : null }
   }
   if ((extra?.kind === 'remind' || extra?.kind === 'remindMerged') && inRange(REMIND_IDS, id)) {
     // Birleşik bildirim bugünkü Ana sayfayı açar (özel ekran yok); tekil hatırlatma modülün remind.route'unu

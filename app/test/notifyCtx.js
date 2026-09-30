@@ -83,8 +83,29 @@ export const MODULES = [
   { id: 'walk', remind: { legacy: 'walk', maxTimes: 3, science: ['s10'] }, doneToday: false },
 ]
 
-// Yeni özellik AÇIK rastgele ayar: modül hatırlatmaları, legacy ek saatleri, gece sessizliği, alarm
-export function makeFeatureInput(rnd, ctx) {
+// Sabah havası girdisi (weatherNotify.planMorningWeather): önbellek now'dan 0–20 saat önce çekilmiş (18 saat sınırının
+// iki yanı), bugün + yarın saatlik satırlar, rastgele yağmur saatleri; ayar alarm/alarmsız/"alarmsız günde gönderme".
+export function makeWeatherInput(rnd, now) {
+  const pick = (list) => list[Math.floor(rnd() * list.length)]
+  const H = 3600000
+  const d0 = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const fetched = new Date(now.getTime() - Math.floor(rnd() * 20 * 60) * 60000)
+  const rainAt = rnd() < 0.4 ? Math.floor(rnd() * 48) : -1
+  const hours = Array.from({ length: 48 }, (_, h) => {
+    const at = new Date(d0.getFullYear(), d0.getMonth(), d0.getDate() + Math.floor(h / 24), h % 24).getTime()
+    return { at, tempC: Math.round(-5 + rnd() * 40), precipChance: rainAt >= 0 && h >= rainAt && h < rainAt + 3 ? 0.8 : 0.1 }
+  })
+  const days = [0, 1].map((off) => {
+    const d = new Date(d0.getFullYear(), d0.getMonth(), d0.getDate() + off)
+    return { date: `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`, highC: Math.round(-5 + rnd() * 45) }
+  })
+  const morningWeather = { on: true, delayMin: pick([10, 20, 30]), time: pick(['07:00', '08:00', '08:30', '09:00', '10:00']), noAlarm: rnd() < 0.2 ? 'skip' : 'send' }
+  return { morningWeather, weather: { cache: { at: fetched.toISOString(), data: { fetchedAt: fetched.getTime(), hours, days } }, place: { il: 'İzmir', ilce: 'Gaziemir' }, localRefresh: null } }
+}
+
+// Yeni özellik AÇIK rastgele ayar: modül hatırlatmaları, legacy ek saatleri, gece sessizliği, alarm. wrnd verilirse
+// (ayrı üreteç: rnd dizisi ve öteki bağlamlar değişmesin) bağlamların ≈ %60'ında sabah havası da açık.
+export function makeFeatureInput(rnd, ctx, wrnd = null) {
   const pick = (list) => list[Math.floor(rnd() * list.length)]
   const chance = (p) => rnd() < p
   const time = () => hhmm(Math.floor(rnd() * 96) * 15)
@@ -99,5 +120,6 @@ export function makeFeatureInput(rnd, ctx) {
   const modules = MODULES.map((m) => ({ ...m, doneToday: chance(0.1) }))
   const alarm = chance(0.4) ? { on: true, hour: 4 + Math.floor(rnd() * 6), minute: pick([0, 15, 30, 45]), days: chance(0.7) ? [1, 2, 3, 4, 5] : [], at: new Date(ctx.now.getTime() + 8 * 3600000).toISOString() } : null
   const quiet = chance(0.5) ? null : { from: pick(['22:00', '22:30', '23:00', '23:30', '00:00']), to: pick(['06:00', '07:00', '08:30', '10:00']) }
-  return { ...ctx, modules, moduleReminders, alarm, quiet }
+  const wx = wrnd && wrnd() < 0.6 ? makeWeatherInput(wrnd, ctx.now) : {}
+  return { ...ctx, modules, moduleReminders, alarm, quiet, ...wx }
 }

@@ -3,13 +3,15 @@
 //
 //   planNotifications (lib/notifyPlan.js, dokunulmaz; 74xx deney + çalışma günleri, 75xx çalışma oturumu)
 //   + planModuleReminders (lib/moduleRemind.js; 78xx modül hatırlatmaları, 7860–7867 legacy ek saatleri)
-//   + sabah havası 7700–7701 (B2) ve yürüyüş sorusunun yasak dilimleri 7710–7719 (B3): bu turda YOK, yalnız kimlikler
+//   + sabah havası 7700–7701 (lib/weatherNotify.js; B2 1. katman) · yürüyüş sorusunun yasak dilimleri 7710–7719 (B3): YOK
 //
 // Kurallar:
-//   - Yeni özellik kapalıyken (moduleReminders boş) çıktı planNotifications'ın çıktısıdır, bayt bayt (eşdeğerlik §5.4).
+//   - Yeni özellik kapalıyken (moduleReminders boş, sabah havası kapalı) çıktı planNotifications'ın çıktısıdır, bayt bayt (eşdeğerlik §5.4).
 //   - 74xx ve 75xx hiçbir zaman birleşmez, kaymaz, metni/kimliği/saati değişmez, tavana sayılmaz, kırpılmaz.
 //   - İki bildirim arasında en az 30 dk (planlayıcı güvencesi; kurulumda 60 dk ayar anında aranır). Alarm bu listede
-//     değil (AlarmKit), alarma bağlı sabah havası B2'de istisna olacak.
+//     değil (AlarmKit); alarma bağlı sabah havası istisnadır (30 dk'ya ve gece sessizliğine uymaz, 01.00–05.00'e uyar).
+//     Alarmsız günün sabah havası gece sessizliğine ve 30 dk'ya uyar; çakışırsa 15 dk adımla en çok 60 dk ileri kayar
+//     (VARSAYIM), yer yoksa o gün kurulmaz. Sabah havası modül hatırlatmalarından önce yer alır.
 //   - Yalnız elle seçilmiş iki modül hatırlatması 30 dk içine düşerse tek bildirimde birleşir; "Sen karar ver" saati
 //     boş dilime kayar; öteki çakışan yeni bildirim düşer.
 //   - Oturum sürerken modül hatırlatması ve ek saat yok. Günde en çok 6 modül bildirimi; fazlası birleşir.
@@ -24,6 +26,7 @@ import { NUDGE_TYPES, MIN_GAP_MIN, normalizeReminders, toMinutes } from './remin
 import { dayKey } from './habitLog.js'
 import { nextRing, SLEEP_TARGET_H } from './alarm.js'
 import { resolvePlanTexts } from './remindTexts.js'
+import { planMorningWeather, morningOn } from './weatherNotify.js'
 
 export const MIN_APART_MIN = 30 // planlayıcıda iki bildirim arası en az (VARSAYIM, §A.4)
 export const DAY_CAP = 6 // modül hatırlatmalarından günde en çok (VARSAYIM, §A.4)
@@ -135,7 +138,9 @@ export function loadSlots(storage) {
 //   horizon: modül hatırlatmalarının kurulduğu gün sayısı
 export function planAll(input = {}) {
   const base = planNotifications(input)
-  if (!newFeaturesOn(input)) return base
+  // Sabah havası: settings.morningWeather açık ve hava verisi (weather: { cache, place }) verilmişse
+  const weatherOn = morningOn(input.morningWeather) && isObj(input.weather)
+  if (!newFeaturesOn(input) && !weatherOn) return base
 
   const { now = new Date(), modules = [], moduleReminders, reminders, study = null, sessions = [], health = null, focus = null, alarm = null, quiet = null } = input
   const nowMs = new Date(now).getTime()
@@ -145,6 +150,9 @@ export function planAll(input = {}) {
   const blocks = sleepBlocks(alarm, baseDay, MR_HORIZON_DAYS)
   const inBed = (ms) => blocks.some(([a, b]) => ms >= a && ms < b)
   const fixedNudgeMs = base.notifications.filter((n) => isFixedNudge(n.id)).map((n) => n.at.getTime())
+  const wx = weatherOn
+    ? planMorningWeather({ now, morning: input.morningWeather, alarm, cache: input.weather.cache ?? null, place: input.weather.place ?? null, log: base.log, localRefresh: input.weather.localRefresh ?? null, templates: input.weather.templates ?? null })
+    : { notifications: [], skipped: [] }
   const remindOf = (id) => (id === PATH_ID ? (modules.find((m) => m?.id === PATH_ID)?.remind ?? PATH_REMIND) : modules.find((m) => m?.id === id)?.remind)
 
   let result = null
@@ -159,7 +167,7 @@ export function planAll(input = {}) {
     result.count--
   }
 
-  const notifications = [...base.notifications, ...result.extras.map((e) => e.n), ...result.modules.map(toNotification)]
+  const notifications = [...base.notifications, ...result.extras.map((e) => e.n), ...result.weather, ...result.modules.map(toNotification)]
   notifications.sort((a, b) => a.at - b.at || a.id - b.id)
   const plan = {
     notifications,
@@ -180,7 +188,7 @@ export function planAll(input = {}) {
 
   function arrange(horizon) {
     const mr = planModuleReminders({ now, modules, moduleReminders, reminders, study, sessions, fixed: base.notifications, log: base.log, health, horizon })
-    const skipped = [...mr.skipped]
+    const skipped = [...mr.skipped, ...wx.skipped.map((s) => ({ module: 'weather', date: s.date, time: null, reason: s.reason }))]
     const skip = (n, reason) => skipped.push({ module: n.module ?? n.type, date: n.extra?.date ?? null, time: null, reason })
     // Kabul edilenler: { ms, kind: 'base'|'extra'|'module', manual, ... }
     const taken = base.notifications.map((n) => ({ ms: n.at.getTime(), kind: 'base' }))
@@ -195,6 +203,30 @@ export function planAll(input = {}) {
       const e = { ms, kind: 'extra', n }
       taken.push(e)
       extras.push(e)
+    }
+
+    // 1b) Sabah havası (günde tek). Alarma bağlı olan istisna: 30 dk'ya ve gece sessizliğine bakılmaz, başkalarını da
+    // itmez (taken'a girmez). Alarmsız günün havası sessizliğe ve 30 dk'ya uyar; çakışırsa en çok 60 dk ileri kayar.
+    // VARSAYIM (planda yok, sahip kararı bekliyor): 15 dk adım, en çok 60 dk. Sonuç: sessizliği 09.00'dan geç biten
+    // kişiye alarmsız günde sabah havası gelmez (skipped 'night').
+    const weather = []
+    for (const n of wx.notifications) {
+      if (n.extra.alarm || n.keepPending) {
+        weather.push(n)
+        continue
+      }
+      const ms0 = n.at.getTime()
+      let placed = null
+      for (let s = 0; s <= 60 && placed == null; s += 15) {
+        const t = ms0 + s * MIN
+        if (!inNight(t, quiet) && !near(t).length) placed = t
+      }
+      if (placed == null) {
+        skipped.push({ module: 'weather', date: n.extra.date, time: null, reason: inNight(ms0, quiet) ? 'night' : 'gap' })
+        continue
+      }
+      taken.push({ ms: placed, kind: 'weather' })
+      weather.push(placed === ms0 ? n : { ...n, at: new Date(placed), extra: { ...n.extra, shifted: true } })
     }
 
     // 2) Modül hatırlatmaları: önce elle seçilenler, sonra "Sen karar ver" (kayabilen) saatleri
@@ -241,7 +273,7 @@ export function planAll(input = {}) {
       kept.push(...list.slice(0, DAY_CAP))
     }
     kept.sort((a, b) => a.ms - b.ms || a.n.id - b.n.id)
-    return { horizon, mr, extras, modules: kept, skipped, count: base.notifications.length + extras.length + kept.length }
+    return { horizon, mr, extras, weather, modules: kept, skipped, count: base.notifications.length + extras.length + weather.length + kept.length }
 
     function add(n, ms) {
       const g = { ms, kind: 'module', manual: !n.extra.auto, n, modules: [n.module], date: dayKey(new Date(ms)) }

@@ -14,11 +14,13 @@ import { planAll } from './notifyAll.js'
 import { createApplier } from './notifyApply.js'
 import { planNotifications as basePlan } from '../../test/fixtures/bildirim-taban/notifyPlan.js'
 import { createApplier as baseApplier } from '../../test/fixtures/bildirim-taban/notifyApply.js'
-import { mulberry32, makeContext, MODULES } from '../../test/notifyCtx.js'
+import { mulberry32, makeContext, makeWeatherInput, MODULES } from '../../test/notifyCtx.js'
 
 const N = 20000
 // "Kapalı" moduleReminders biçimleri (§5.4: boş); modül listesi ve öteki yeni girdiler dolu olsa da çıktı değişmez
 const OFF_MR = [undefined, null, {}, 'bozuk', { breath: { on: false, times: [] } }, { yoga: { on: false, mode: 'manual', times: ['10:00'] } }]
+// "Kapalı" sabah havası biçimleri (§5.4): ayar yok/kapalı/bozuk; hava verisi (önbellek, yer) verilmiş olsa da çıktı değişmez
+const OFF_MW = [undefined, false, null, { on: false }, { on: 'evet', delayMin: 20 }, 'açık', { delayMin: 10, time: '08:00' }]
 
 const tz = process.env.TZ
 beforeAll(() => {
@@ -31,16 +33,19 @@ afterAll(() => {
 
 function contexts() {
   const rnd = mulberry32(1)
+  const wrnd = mulberry32(4) // hava girdisi ayrı üreteçten: rnd dizisi (ve bağlamlar) eskisi gibi kalır
   const out = []
   for (let i = 0; i < N; i++) {
     const ctx = makeContext(rnd)
     const off = OFF_MR[Math.floor(rnd() * OFF_MR.length)]
+    const mw = OFF_MW[Math.floor(wrnd() * OFF_MW.length)]
+    const wx = wrnd() < 0.7 ? { weather: makeWeatherInput(wrnd, ctx.now).weather } : {}
     const extra = {
       modules: rnd() < 0.7 ? MODULES : [],
       alarm: rnd() < 0.3 ? { on: true, hour: 6, minute: 30, days: [], at: new Date(ctx.now.getTime() + 36e6).toISOString() } : null,
       quiet: rnd() < 0.3 ? { from: '22:00', to: '09:00' } : null,
     }
-    out.push({ ctx, all: { ...ctx, ...extra, ...(off === undefined ? {} : { moduleReminders: off }) }, rnd: rnd() })
+    out.push({ ctx, all: { ...ctx, ...extra, ...wx, ...(off === undefined ? {} : { moduleReminders: off }), ...(mw === undefined ? {} : { morningWeather: mw }) }, rnd: rnd() })
   }
   return out
 }
@@ -48,7 +53,8 @@ function contexts() {
 const show = (v) => JSON.stringify(v, null, 1)?.slice(0, 1500)
 
 describe('eşdeğerlik (i): planAll ≡ taban planNotifications (yeni özellik kapalı)', () => {
-  it(`${N} tohumlu bağlamda derin eşit; 0 fark`, () => {
+  // Kendi süre sınırı: 20.000 bağlam öteki test dosyalarıyla birlikte koşunca 5 sn'yi aşabiliyor (inceleme bulgusu)
+  it(`${N} tohumlu bağlamda derin eşit; 0 fark`, { timeout: 120000 }, () => {
     let diffs = 0
     let first = null
     let withNotes = 0
@@ -118,7 +124,7 @@ function pendingFor(plan, r) {
 }
 
 describe('eşdeğerlik (ii): notifyApply çağrı dizisi ≡ taban notifyApply (yeni özellik kapalı)', () => {
-  it(`${N} bağlamda aynı çağrı dizisi (açılış temizliği isteğiyle bile); 0 fark`, async () => {
+  it(`${N} bağlamda aynı çağrı dizisi (açılış temizliği isteğiyle bile); 0 fark`, { timeout: 120000 }, async () => {
     vi.useFakeTimers()
     let diffs = 0
     let first = null

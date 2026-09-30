@@ -122,8 +122,7 @@ describe('tapAction: dokunma sözlüğü', () => {
     expect(next.find((e) => e.type === 'mola').tapped).toBeFalsy()
   })
 
-  it('7700 hava, 7712 yürüyüş sorusu, 7716 fark et: bu turda yönlendirme yok (B2/B3)', () => {
-    expect(tapAction({ id: 7700, extra: { kind: 'weather', date: DATE } })).toBeNull()
+  it('7712 yürüyüş sorusu, 7716 fark et: bu turda yönlendirme yok (B3); 7700 hava B2\'de yönlendirir (aşağıda)', () => {
     expect(tapAction({ id: 7712, extra: { kind: 'walkAsk', since: 1 } })).toBeNull()
     expect(tapAction({ id: 7716, extra: { kind: 'walkOffer' } })).toBeNull()
   })
@@ -268,5 +267,15 @@ describe('resetAllData', () => {
     expect(store.get().settings.calibration).toEqual(autoCal)
     expect(TRIAL_KEYS).toEqual(['trialOffer', 'trialReminder', 'trialNoteSeen', 'firstReportSeen'])
     expect(NOTIFY_RESET_KEYS).toEqual([NOTIFY_SLOTS_KEY])
+  })
+})
+
+describe('tapAction: sabah havası 7700–7701', () => {
+  it('hava sayfası rotası; açılamıyorsa Ana sayfa (VARSAYIM: screens/Sky.jsx henüz yok)', () => {
+    const ev = { id: 7700, extra: { kind: 'weather', date: '2026-09-30' } }
+    expect(tapAction(ev, { routeOk: () => true })).toEqual({ kind: 'weather', route: 'sky', date: '2026-09-30' })
+    expect(tapAction({ ...ev, id: 7701 }, { routeOk: (r) => r === 'home' })).toEqual({ kind: 'weather', route: 'home', date: '2026-09-30' })
+    expect(tapAction({ ...ev, id: 7702 })).toBeNull()
+    expect(tapAction({ ...ev, actionId: 'sciOpen' })).toBeNull()
   })
 })
