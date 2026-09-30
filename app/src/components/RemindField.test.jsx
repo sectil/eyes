@@ -50,13 +50,13 @@ describe('RemindField', () => {
     expect(v.text()).toContain('Hatırlatman açık · Her gün 16.30 · saati Nef seçti')
   })
 
-  it('optIn null iken "Sen karar ver" → modül açılır, optIn yes, mola kapanır', async () => {
+  it('optIn null iken "Nef seçsin" → modül açılır, optIn yes, mola kapanır', async () => {
     let got = null
     const v = await mount(h(RemindField, { moduleId: 'blink', remind: BLINK, settings: { reminders: rem() }, now: NOW, onChange: (n) => { got = n } }))
     // satıra dokun (satır düğmesinin metni birleşik)
     const row = document.body.querySelectorAll((n) => n.nodeName === 'BUTTON' && n.textContent.startsWith('Bana hatırlat'))[0]
     await act(async () => row.click())
-    expect(v.text()).toContain('Sen karar ver')
+    expect(v.text()).toContain('Nef seçsin')
     expect(v.text()).toContain('Önerilen')
     expect(v.text()).toContain('Henüz saatini bilmiyorum. 16.30\'la başlayalım; beş kez yaptıktan sonra senin saatine göre ayarlarım.')
     await v.tap('Hatırlatmayı aç')

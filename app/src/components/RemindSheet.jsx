@@ -5,11 +5,13 @@ import { pickAutoTime, capOf, windowOf, fromMinutes } from '../lib/moduleRemind.
 import { NAMES } from '../lib/remindTexts.js'
 import { TYPE_LABEL } from '../lib/reminders.js'
 import { applyRemind, checkTimes, dot, locTime } from './remindUi.js'
+import { IrisMark } from './ui.jsx'
 import '../styles/remind.css'
 
-// "Bana hatırlat" saat sayfası (PLAN.v1 §3.A.2; tasarım.html "Nefesi ne zaman hatırlatayım?" ve "Göz egzersizleri
-// tamam" ekranları). Alttan açılır. Üstte "Sen karar ver" (Önerilen; pickAutoTime), altında "Saatleri ben seçeyim"
-// (en çok remind.maxTimes, varsayılan 3). Kurulumda 60 dk kuralı remindTimeError ile canlı denetlenir; hata varken
+// "Bana hatırlat" saat sayfası (PLAN.v1 §3.A.2; tasarım b1a-son/ekranlar.html S, 5 sn kapısı son tur 5/5). Alttan
+// açılır. Başlık satırında ad ve kapat; seçici "Nef seçsin" (Önerilen; pickAutoTime; sahip onaylı metin, metin-B1a-onay.md)
+// | "Saatleri ben seçeyim" (en çok remind.maxTimes, varsayılan 3). "Nef seçsin"de Nef'in TEK işareti (IrisMark) ve
+// kuyruklu balon: Önerilen etiketi, büyük saat, neden cümlesi; ana düğme balonun altında. Kurulumda 60 dk kuralı remindTimeError ile canlı denetlenir; hata varken
 // Kaydet kapalı. Ayar yazmaz: onSave({ moduleReminders, reminders|null }) (components/remindUi.js applyRemind).
 //   moduleId, remind: registry.reminders() kaydı ya da manifest remind · moduleReminders: settings.moduleReminders
 //   reminders: settings.reminders (ilk açılışta optIn 'yes', varsayılanı açık mola kapanır; §A.2)
@@ -27,7 +29,7 @@ const TITLES = {
 }
 const titleOf = (id) => TITLES[id] ?? NAMES[id] ?? TYPE_LABEL[id] ?? ''
 
-// "Sen karar ver" nedeni. Veri yokken ve saat 16.30 iken plan cümlesi aynen; veriyle kurulan cümle modül adının
+// "Nef seçsin" nedeni. Veri yokken ve saat 16.30 iken plan cümlesi aynen; veriyle kurulan cümle modül adının
 // hâlini istiyor (plan örneği yalnız nefes). YER TUTUCU (dönüşte listelendi): remindSheet.reason.default (16.30 dışı
 // varsayılan saat) ve remindSheet.reason.data.<modül> (kayıtlardan). Onaylı cümle gelene kadar neden satırı çıkmaz
 // (null); büyük saat yine görünür.
@@ -81,19 +83,26 @@ export default function RemindSheet({
     <div className="rs-back" role="presentation" onClick={(e) => e.target === e.currentTarget && onClose?.()}>
       <div className="rs-sheet" role="dialog" aria-modal="true" aria-labelledby="rs-title">
         <span className="rs-grab" aria-hidden="true" />
-        <button type="button" className="rs-x" aria-label="Kapat" onClick={() => onClose?.()}><X size={20} /></button>
-        <h2 id="rs-title" className="rs-title">{titleOf(moduleId)}</h2>
+        <div className="rs-top">
+          <h2 id="rs-title" className="rs-title">{titleOf(moduleId)}</h2>
+          <button type="button" className="rs-x" aria-label="Kapat" onClick={() => onClose?.()}><X size={20} /></button>
+        </div>
 
         <div className="rs-seg" role="tablist">
-          <button type="button" role="tab" aria-selected={mode === 'auto'} className={mode === 'auto' ? 'on' : ''} onClick={() => setMode('auto')}>Sen karar ver</button>
+          <button type="button" role="tab" aria-selected={mode === 'auto'} className={mode === 'auto' ? 'on' : ''} onClick={() => setMode('auto')}>Nef seçsin</button>
           <button type="button" role="tab" aria-selected={mode === 'manual'} className={mode === 'manual' ? 'on' : ''} onClick={() => setMode('manual')}>Saatleri ben seçeyim</button>
         </div>
 
         {mode === 'auto' ? (
           <div className="rs-auto">
-            <span className="rs-tag">Önerilen</span>
-            <strong className="rs-big">{pick.times.map(dot).join(' · ') || '—'}</strong>
-            {reasonOf(moduleId, pick) && <p className="rs-why">{reasonOf(moduleId, pick)}</p>}
+            <div className="rs-nef">
+              <IrisMark size={40} />
+              <div className="rs-bub">
+                <span className="rs-tag">Önerilen</span>
+                <strong className="rs-big">{pick.times.map(dot).join(' · ') || '—'}</strong>
+                {reasonOf(moduleId, pick) && <p className="rs-why">{reasonOf(moduleId, pick)}</p>}
+              </div>
+            </div>
             {pick.times.length === 2 ? (
               <div className="rs-btns">
                 <button type="button" className="btn" onClick={() => save(pick.times, 'auto')}>İkisinde</button>

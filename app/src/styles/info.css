@@ -76,3 +76,12 @@
 .pref-result.good { color: var(--ok); }
 .pref-result.bad { color: var(--warn); }
 @keyframes pref-fade { from { opacity: 0; transform: translateY(2px); } to { opacity: 1; transform: none; } }
+
+/* Bildirimler satırındaki anahtar 320'de küçülür (tasarım b1a-son/ekranlar.html N: 46 × 28); ekran remind.css'te */
+@media (max-width: 360px) {
+  .nt-sw .pref-switch { width: 46px; height: 28px; }
+  .nt-sw .pref-knob { width: 24px; height: 24px; }
+  .nt-sw[aria-checked='true'] .pref-knob { transform: translateX(18px); }
+  .nt-sw:active .pref-knob { width: 28px; }
+  .nt-sw[aria-checked='true']:active .pref-knob { transform: translateX(14px); }
+}
