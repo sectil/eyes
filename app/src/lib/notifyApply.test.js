@@ -253,12 +253,13 @@ describe('cancelOwn', () => {
     const r = await createApplier(async () => ({ LN: f.LN })).cancelOwn()
     expect(r).toEqual({ ok: true })
     const ids = f.LN.cancel.mock.calls[0][0].notifications.map((n) => n.id)
-    expect(ids).toHaveLength(110)
+    // 7400–7499, 7500–7509, 7700–7701, 7800–7867 (uzlaştırılan) + 7710–7719 (yalnız iptal); PLAN.v1 §5.5 madde 2
+    expect(ids).toHaveLength(190)
     expect(ids).toContain(7400)
     expect(ids).toContain(7499)
     expect(ids).toContain(7509)
-    expect(ids).not.toContain(7301)
-    expect(ids).not.toContain(7302)
+    for (const id of [7700, 7701, 7710, 7719, 7800, 7859, 7860, 7867]) expect(ids).toContain(id)
+    for (const id of [7301, 7302, 7510, 7600, 7607, 7702, 7709, 7720, 7799, 7868]) expect(ids).not.toContain(id)
     expect([...f.store.keys()]).toEqual([7301, 7302])
     expect(f.LN.cancelAll).not.toHaveBeenCalled()
     expect(native.setWalkGuards).toHaveBeenLastCalledWith([])
@@ -331,5 +332,115 @@ describe('modül örneği (web)', () => {
     expect(typeof (await onNotifyTap(() => {}))).toBe('function')
     expect(await notifyPermission()).toBe('unsupported')
     expect(await askNotifyPermission()).toBe(false)
+  })
+})
+
+describe('yeni özellik (PLAN.v1 §5.5 madde 2–3)', () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+    vi.setSystemTime(NOW)
+    native.setWalkGuards.mockClear()
+  })
+  afterEach(() => vi.useRealTimers())
+  const other = (id) => ({ id, title: 'x', body: 'y', schedule: { at: inMin(300) } })
+  const withDelivered = (f, ids) => {
+    f.LN.getDeliveredNotifications = vi.fn(async () => ({ notifications: ids.map((id) => ({ id, title: 't', body: 'b' })) }))
+    f.LN.removeDeliveredNotifications = vi.fn(async () => {})
+    return f
+  }
+
+  // Metni bağlanmış bir modül hatırlatması (B1a'da metinler bağlanınca planAll'ın üreteceği biçim)
+  const remindN = (id, at) => ({ id, at, type: 'remind', title: 't', body: 'b', extra: { kind: 'remind', module: 'blink' }, level: 'active' })
+  // Metni henüz bağlanmamış: yalnız textKey (bu turda planAll'ın ürettiği biçim)
+  const keyOnly = (id, at) => ({ id, at, type: 'remind', textKey: 'remind.blink', extra: { kind: 'remind', module: 'blink' }, level: 'active' })
+
+  it('grouped planda threadIdentifier nefona ve relevanceScore; kapalıyken ikisi de yok', async () => {
+    const f = fakeLN()
+    const ap = createApplier(async () => ({ LN: f.LN }))
+    await run(ap, { ...plan([nudge(7400, inMin(120)), focusN(1, inMin(60)), remindN(7801, inMin(200))]), grouped: true })
+    const sent = f.LN.schedule.mock.calls[0][0].notifications
+    expect(sent.map((n) => n.id).sort()).toEqual([7400, 7500, 7801])
+    expect(new Set(sent.map((n) => n.threadIdentifier))).toEqual(new Set(['nefona']))
+    sent.forEach((n) => expect(n.relevanceScore).toBeGreaterThan(0))
+    const g = fakeLN()
+    await run(createApplier(async () => ({ LN: g.LN })), plan([nudge(7400, inMin(120))]))
+    expect(g.LN.schedule.mock.calls[0][0].notifications[0]).not.toHaveProperty('threadIdentifier')
+    expect(g.LN.schedule.mock.calls[0][0].notifications[0]).not.toHaveProperty('relevanceScore')
+  })
+
+  it('grouped ama kurulacak yeni bildirim yoksa (yalnız textKey) gruplama yok: 74xx bugünkü biçimde, açılışta temizlik yok', async () => {
+    const f = withDelivered(fakeLN(), [7500, 7805])
+    const ap = createApplier(async () => ({ LN: f.LN }))
+    const p = ap.applyPlan({ ...plan([nudge(7400, inMin(120)), keyOnly(7801, inMin(200)), { ...keyOnly(7861, inMin(300)), extra: { kind: 'nudge', type: 'walk', slot: 1 } }]), grouped: true }, { tidy: true })
+    await vi.advanceTimersByTimeAsync(400)
+    expect(await p).toMatchObject({ ok: true, scheduled: 1 })
+    const [sent] = f.LN.schedule.mock.calls[0][0].notifications
+    expect(sent.id).toBe(7400)
+    expect(sent).not.toHaveProperty('threadIdentifier')
+    expect(sent).not.toHaveProperty('relevanceScore')
+    expect(f.LN.getDeliveredNotifications).not.toHaveBeenCalled()
+    expect(f.LN.removeDeliveredNotifications).not.toHaveBeenCalled()
+  })
+
+  // Plan o kimliği hiç istemiyorsa (hava kapalı, modül hatırlatması kapalı) bekleyen iptal edilir; 7712 Swift'indir.
+  it('yeni aralıklar uzlaştırılır; 7710–7719 (Swift) uzlaştırılmaz; metni bağlanmamış bildirim kurulmaz', async () => {
+    const f = fakeLN({ pending: [other(7712), other(7805), other(7862), other(7700), other(7600)] })
+    const r = await run(createApplier(async () => ({ LN: f.LN })), plan([keyOnly(7801, inMin(120))]))
+    expect(r).toMatchObject({ ok: true, scheduled: 0, cancelled: 3 })
+    expect([...f.store.keys()].sort()).toEqual([7600, 7712])
+  })
+
+  it('yerelde yenilenmiş 7700 ve bekleyen 7712 reconcile\'dan sonra yerinde (§5.3); 7712 cancelOwn\'da iptal', async () => {
+    const yerel = { id: 7700, title: 'Hava', body: 'Swift yeniledi: yağmur var', schedule: { at: inMin(90) } }
+    const f = fakeLN({ pending: [yerel, other(7712)] })
+    const ap = createApplier(async () => ({ LN: f.LN }))
+    const hava = { id: 7700, at: inMin(90), type: 'weather', title: 'Hava', body: 'JS metni', extra: { kind: 'weather' }, level: 'active' }
+    const r = await run(ap, { ...plan([{ ...hava, keepPending: true }]), grouped: true })
+    expect(r).toMatchObject({ ok: true, scheduled: 0, cancelled: 0, kept: 1 })
+    expect(f.store.get(7700).body).toBe('Swift yeniledi: yağmur var')
+    expect(f.store.has(7712)).toBe(true)
+    // İşaret yoksa bugünkü kural: metin farklıysa yeniden kurulur
+    const g = fakeLN({ pending: [yerel] })
+    const r2 = await run(createApplier(async () => ({ LN: g.LN })), plan([hava]))
+    expect(r2).toMatchObject({ ok: true, scheduled: 1, cancelled: 1 })
+    expect(g.store.get(7700).body).toBe('JS metni')
+    // keepPending yalnız 7700–7701'de geçerli
+    const h = fakeLN({ pending: [{ ...yerel, id: 7801 }] })
+    const r3 = await run(createApplier(async () => ({ LN: h.LN })), plan([{ ...remindN(7801, inMin(90)), keepPending: true }]))
+    expect(r3).toMatchObject({ scheduled: 1, cancelled: 1 })
+    await ap.cancelOwn()
+    expect(f.store.has(7712)).toBe(false)
+    expect(f.store.has(7700)).toBe(false)
+  })
+
+  it('açılışta (tidy) teslim edilmişler kaldırılır, deney bildirimleri (74xx, 7860–7867) ve 7301/7302/7600 kalır; kapalıyken hiç bakılmaz', async () => {
+    const f = withDelivered(fakeLN(), [7301, 7403, 7500, 7600, 7700, 7712, 7805, 7860, 7861, 7867])
+    const acik = () => ({ ...plan([nudge(7400, inMin(120)), remindN(7801, inMin(200))]), grouped: true })
+    await run(createApplier(async () => ({ LN: f.LN })), acik()).then(() => {})
+    expect(f.LN.getDeliveredNotifications).not.toHaveBeenCalled() // açılış değil
+    const ap = createApplier(async () => ({ LN: f.LN }))
+    const p = ap.applyPlan(acik(), { tidy: true })
+    await vi.advanceTimersByTimeAsync(400)
+    await p
+    // Ek saate dokunmak markTapped'i çalıştırır (§5.5 madde 1): teslim edilmiş ek saat, 74xx gibi Bildirim Merkezi'nde kalır
+    expect(f.LN.removeDeliveredNotifications.mock.calls[0][0].notifications.map((n) => n.id)).toEqual([7500, 7700, 7712, 7805])
+    const g = withDelivered(fakeLN(), [7500])
+    const q = createApplier(async () => ({ LN: g.LN })).applyPlan(plan([nudge(7400, inMin(120))]), { tidy: true })
+    await vi.advanceTimersByTimeAsync(400)
+    await q
+    expect(g.LN.getDeliveredNotifications).not.toHaveBeenCalled()
+    expect(g.LN.removeDeliveredNotifications).not.toHaveBeenCalled()
+  })
+
+  it('bindTap actionId geçirir: tap bugünkü biçimde, eylem { id, extra, actionId }, dismiss iletilmez', async () => {
+    const f = fakeLN()
+    const ap = createApplier(async () => ({ LN: f.LN }))
+    const cb = vi.fn()
+    await ap.onNotifyTap(cb)
+    const extra = { kind: 'walkAsk', since: 'x' }
+    f.tap({ actionId: 'tap', notification: { id: 7712, extra } })
+    f.tap({ actionId: 'walkGo', notification: { id: '7712', extra } })
+    f.tap({ actionId: 'dismiss', notification: { id: 7712, extra } })
+    expect(cb.mock.calls.map((c) => c[0])).toEqual([{ id: 7712, extra }, { id: 7712, extra, actionId: 'walkGo' }])
   })
 })

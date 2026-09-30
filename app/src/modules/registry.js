@@ -58,13 +58,108 @@
 //     best?(sessions) → number,         rekor (0 = yok)
 //     bestLabel?: 'Yılan rekoru',
 //   }
+//   remind?: {                          "Bana hatırlat" ve Profil → Bildirimler (bildirim planı: docs/yol-haritasi/tasarim/
+//                                       bildirim-hava-yuruyus/PLAN.v1.md §A.1). Yoksa modülde kart çıkmaz.
+//     route?: string,                   dokununca açılacak ekran: routes'tan biri. Yoksa kartın gösterildiği ekran.
+//     legacy?: 'mola'|'walk'|'breath'|'water',
+//                                       hatırlatması bildirim deneyindeki mevcut tür (lib/reminders.js): ilk saat
+//                                       settings.reminders.types[legacy]'de kalır; pencere 09.00–21.00 (su ≤ 18.00).
+//     window?: 'move' | 'calm',         legacy yoksa: 'move' 09.00–21.00, 'calm' 08.00–22.00. Yoksa 'move'.
+//     defaultTime?: 'HH:MM',            "Sen karar ver" için veri yokken saat; kendi penceresinde
+//     maxTimes?: 1 | 2 | 3,             elle seçilebilecek en çok saat (varsayılan 3)
+//     doneToday?(sessions, now) → bool  bugün yapıldıysa o günün kalan hatırlatması kurulmaz. Yoksa
+//                                       progression.match ?? sessions.match tutan bugünkü kayıt.
+//     science: ['sourceKey', …],        bilim kartı havuzu (lib/sources.js anahtarları, pmid ve doi taşır; en az 1)
+//   }
+//                                       remind'deki hata yalnız remind'i düşürür, modülü değil (remindProblems).
 // }
+
+import { SOURCES } from '../lib/sources.js'
+import { NUDGE_TYPES, WINDOW, WATER_LAST, toMinutes } from '../lib/reminders.js'
+import { isSameDay } from '../lib/today.js'
+import { REMIND_WINDOWS } from '../lib/moduleRemind.js'
 
 export const RINGS = ['eye', 'attention', 'life']
 export const KINDS = ['measure', 'exercise', 'practice']
 export const SECTIONS = ['measure', 'exercise', 'practice']
 export const DOMAINS = ['eye', 'calm', 'self', 'awareness', 'focus', 'wellbeing', 'body']
 const KEY_RE = /^[a-z][a-z0-9-]*$/
+const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k)
+// "Bana hatırlat" (PLAN.v1 §A.1, §A.4): legacy türler deneyin kendi penceresinde (lib/reminders.js WINDOW, su WATER_LAST);
+// yeni kaynaklarda 'move' (kalk, göz hareketi, oyun) ve 'calm' (nefes dışı sakin pratikler). Uçlar dâhil (timeError gibi).
+export const REMIND_LEGACY = [...NUDGE_TYPES]
+// Pencereler tek kaynaktan (lib/moduleRemind.js; planlayıcı da onu kullanır)
+export { REMIND_WINDOWS }
+// Modülün kendi ekranları dışında route olarak kabul edilen uygulama ekranları: PLAN.v1 §A.1 tablosu routine için
+// "route `routine-…` yerine yol (`home`) açılır" diyor. VARSAYIM: bu turda yalnız 'home'.
+export const REMIND_APP_ROUTES = ['home']
+export const REMIND_MAX_TIMES = 3
+
+// remind → { from, to } ('HH:MM'). Legacy türün penceresi deneyinkidir.
+export function remindWindow(r) {
+  if (r?.legacy) return { from: WINDOW.from, to: r.legacy === 'water' ? WATER_LAST : WINDOW.to }
+  return REMIND_WINDOWS[r?.window ?? 'move'] ?? null
+}
+
+// remind doğrulaması. Hatalar ayrı döner: createRegistry bunlarla modülü değil yalnız remind'i düşürür.
+export function validateRemind(m, sources = SOURCES) {
+  const errors = []
+  if (!m || typeof m !== 'object' || m.remind == null) return errors
+  const need = (ok, msg) => ok || errors.push(`${m.id ?? '?'}: remind: ${msg}`)
+  const r = m.remind
+  need(typeof r === 'object' && !Array.isArray(r), 'nesne olmalı')
+  if (typeof r !== 'object' || Array.isArray(r)) return errors
+  const routes = Array.isArray(m.routes) ? m.routes : [m.id]
+  if (r.route != null) {
+    const ok = typeof r.route === 'string' && (routes.includes(r.route) || REMIND_APP_ROUTES.includes(r.route))
+    need(ok, `route modülün ekranlarından biri olmalı: ${[...routes, ...REMIND_APP_ROUTES].join(', ')}`)
+  }
+  if (r.legacy != null) need(REMIND_LEGACY.includes(r.legacy), `legacy şunlardan biri olmalı: ${REMIND_LEGACY.join(', ')}`)
+  if (r.window != null) {
+    need(own(REMIND_WINDOWS, r.window), "window 'move' ya da 'calm' olmalı")
+    // VARSAYIM: plan window'u "legacy yoksa" diye tanımlıyor; ikisi birlikte yazılırsa hangisinin geçerli olduğu
+    // belirsiz kalmasın diye reddedilir (legacy türün penceresi lib/reminders.js'ten gelir).
+    need(r.legacy == null, 'legacy türde window yazılmaz (pencere deneyinkidir)')
+  }
+  if (r.defaultTime != null) {
+    const t = toMinutes(r.defaultTime)
+    const w = remindWindow(r)
+    need(t != null && w != null && t >= toMinutes(w.from) && t <= toMinutes(w.to), `defaultTime 'HH:MM' ve penceresinde olmalı (${w ? `${w.from}–${w.to}` : '?'})`)
+  }
+  if (r.maxTimes != null) need([1, 2, 3].includes(r.maxTimes), `maxTimes 1, 2 ya da ${REMIND_MAX_TIMES} olmalı`)
+  if (r.doneToday != null) need(typeof r.doneToday === 'function', 'doneToday fonksiyon olmalı')
+  need(Array.isArray(r.science) && r.science.length > 0, 'science en az bir kaynak anahtarı olmalı (lib/sources.js)')
+  for (const key of Array.isArray(r.science) ? r.science : []) {
+    const src = typeof key === 'string' && own(sources, key) ? sources[key] : null
+    need(Boolean(src?.pmid && src?.doi), `science: '${key}' lib/sources.js'te pmid ve doi ile yok`)
+    // Koşullu kaynak (sources.js `only`: 'meditation' | 'moon') bildirim bilim kartı havuzuna girmez. VARSAYIM: bu turda
+    // hiçbir modül "meditasyon içeriği" sayılmıyor (yoga dâhil; kaynak-dogrulama.md radin2025 satırı), ay kaynakları
+    // yalnız hava sayfasının "ay evresi" satırı içindir. Meditasyon modülü gelince izin manifestte açılır (sonraki iş).
+    if (src?.only != null) need(false, `science: '${key}' koşullu kaynak (yalnız ${src.only}); remind havuzunda kullanılmaz`)
+  }
+  return errors
+}
+
+// Geçerli remind → reminders() kaydı (varsayılanlar dolu). doneToday yoksa: progression.match ?? sessions.match tutan
+// bugünkü kayıt. VARSAYIM: ikisi de yoksa hiçbir gün "yapıldı" sayılmaz.
+function remindEntry(m) {
+  const r = m.remind
+  const match = m.progression?.match ?? m.sessions?.match ?? null
+  const doneToday = r.doneToday ?? ((sessions, now = new Date()) => Boolean(match) && (sessions ?? []).some((s) => match(s) && isSameDay(s, now)))
+  const w = remindWindow(r)
+  return {
+    module: m.id,
+    route: r.route ?? null,
+    legacy: r.legacy ?? null,
+    window: r.legacy ? null : r.window ?? 'move',
+    from: w.from,
+    to: w.to,
+    defaultTime: r.defaultTime ?? null,
+    maxTimes: r.maxTimes ?? REMIND_MAX_TIMES,
+    doneToday,
+    science: [...r.science],
+  }
+}
 
 function validateProgress(p, need) {
   need(p && typeof p === 'object', 'progress yok (her modül Gelişim\'e ne kattığını söylemeli)')
@@ -91,7 +186,12 @@ function validateProgress(p, need) {
   }
 }
 
+// Tam doğrulama: temel kurallar ve remind. createRegistry ikisini ayrı kullanır (remind hatası modülü düşürmez).
 export function validateManifest(m) {
+  return [...validateBase(m), ...validateRemind(m)]
+}
+
+function validateBase(m) {
   const errors = []
   const need = (ok, msg) => ok || errors.push(`${m?.id ?? '?'}: ${msg}`)
   need(m && typeof m === 'object', 'manifest nesne değil')
@@ -131,8 +231,10 @@ export function createRegistry(manifests) {
   const seenIds = new Set()
   const byRoute = new Map()
   const problems = []
+  const remindProblems = []
+  const remindOk = new Set()
   for (const m of manifests) {
-    const errs = validateManifest(m)
+    const errs = validateBase(m)
     if (!errs.length && seenIds.has(m.id)) errs.push(`${m.id}: aynı id iki kez`)
     const routes = m?.routes ?? [m?.id]
     for (const r of routes) if (!errs.length && byRoute.has(r)) errs.push(`${m.id}: '${r}' ekranı başka modülde de var`)
@@ -143,6 +245,10 @@ export function createRegistry(manifests) {
     seenIds.add(m.id)
     list.push(m)
     for (const r of routes) byRoute.set(r, m)
+    // remind'deki hata yalnız remind'i düşürür: modül listede kalır, reminders()'da görünmez
+    const remindErrs = validateRemind(m)
+    if (remindErrs.length) remindProblems.push(...remindErrs)
+    else if (m.remind != null) remindOk.add(m.id)
   }
   const order = (m) => m.home?.order ?? 999
   const live = list.filter((m) => !m.retired)
@@ -151,6 +257,7 @@ export function createRegistry(manifests) {
     live, // emekli olmayanlar: listeler, yol, koç
 
     problems,
+    remindProblems,
     get: (id) => list.find((m) => m.id === id) ?? null,
     forRoute: (route) => byRoute.get(route) ?? null,
     forSession: (s) => (s ? list.find((m) => m.sessions?.match(s)) ?? null : null),
@@ -164,6 +271,9 @@ export function createRegistry(manifests) {
     // Gelişim 2.0: tüm modüllerin (emekliler dahil: eski kayıtlar okunur) önce→sonra etkileri ve metrikleri
     effects: () => list.flatMap((m) => (m.progress.effects ?? []).map((e) => ({ ...e, module: m.id, domain: e.domain ?? m.progress.domain }))),
     metrics: () => list.flatMap((m) => (m.progress.metrics ?? []).map((x) => ({ ...x, module: m.id, domain: x.domain ?? m.progress.domain }))),
+    // "Bana hatırlat": geçerli remind'i olan canlı modüller, kayıt sırasıyla (PLAN.v1 §A.1). VARSAYIM: emekli modül
+    // hatırlatılmaz (Bugün ve Ana sayfada da görünmez).
+    reminders: () => live.filter((m) => remindOk.has(m.id)).map(remindEntry),
   }
 }
 

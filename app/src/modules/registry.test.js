@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { registry, createRegistry, validateManifest, DOMAINS } from './registry.js'
+import { registry, createRegistry, validateManifest, validateRemind, remindWindow, DOMAINS, REMIND_WINDOWS } from './registry.js'
+import { REMIND_WINDOWS as PLAN_WINDOWS } from '../lib/moduleRemind.js'
 import { VIEWS } from './views.js'
 
 describe('modül soketi: gerçek modüller', () => {
@@ -122,5 +123,126 @@ describe('modül soketi: tak / çıkar', () => {
     expect(r.get('kopya')).toBeNull()
     expect(r.forRoute('snake')?.id).toBe('snake')
     expect(validateManifest({ ...yeni, sessions: { ...yeni.sessions, bestLabel: undefined } })).not.toEqual([])
+  })
+})
+
+// "Bana hatırlat" yeteneği (docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/PLAN.v1.md §A.1, §5.3)
+describe('modül soketi: remind', () => {
+  const temel = {
+    id: 'hatirla',
+    routes: ['hatirla', 'hatirla-1'],
+    title: 'Hatırla',
+    label: 'Hatırla',
+    ring: 'life',
+    kind: 'practice',
+    progress: { domain: 'calm' },
+    sessions: { match: (s) => s.type === 'hatirla', countsTowardGoal: true, describe: () => ({ title: 'Hatırla', detail: '' }) },
+  }
+  const ile = (remind, extra = {}) => ({ ...temel, ...extra, remind })
+  const hatasi = (remind, extra) => validateRemind(ile(remind, extra)).join(' ')
+
+  it('bugünkü gerçek modüllerde remind yok; reminders() boş, sorun yok', () => {
+    expect(registry.modules.filter((m) => m.remind != null)).toEqual([])
+    expect(registry.reminders()).toEqual([])
+    expect(registry.remindProblems).toEqual([])
+  })
+  it('geçerli remind: varsayılanlar dolar, pencere türden gelir', () => {
+    const r = createRegistry([...registry.modules, ile({ science: ['kim2020'] })])
+    expect(r.problems).toEqual([])
+    expect(r.remindProblems).toEqual([])
+    const [x] = r.reminders()
+    expect(x).toMatchObject({ module: 'hatirla', route: null, legacy: null, window: 'move', from: '09:00', to: '21:00', defaultTime: null, maxTimes: 3, science: ['kim2020'] })
+    expect(typeof x.doneToday).toBe('function')
+    expect(remindWindow({ window: 'calm' })).toEqual({ from: '08:00', to: '22:00' })
+    expect(remindWindow({ legacy: 'breath' })).toEqual({ from: '09:00', to: '21:00' })
+    expect(remindWindow({ legacy: 'water' })).toEqual({ from: '09:00', to: '18:00' })
+    const calm = createRegistry([ile({ route: 'hatirla-1', window: 'calm', defaultTime: '08:00', maxTimes: 2, science: ['fincham2023', 'laborde2022'] })]).reminders()[0]
+    expect(calm).toMatchObject({ route: 'hatirla-1', window: 'calm', from: '08:00', to: '22:00', defaultTime: '08:00', maxTimes: 2 })
+    const legacy = createRegistry([ile({ legacy: 'water', defaultTime: '18:00', science: ['stout2022'] })]).reminders()[0]
+    expect(legacy).toMatchObject({ legacy: 'water', window: null, from: '09:00', to: '18:00' })
+  })
+  it('doneToday yoksa progression.match ?? sessions.match tutan bugünkü kayıt', () => {
+    const now = new Date(2026, 8, 30, 15, 0)
+    const bugun = { type: 'hatirla', date: new Date(2026, 8, 30, 10, 0).toISOString(), seconds: 30 }
+    const dun = { type: 'hatirla', date: new Date(2026, 8, 29, 10, 0).toISOString(), seconds: 90 }
+    const [a] = createRegistry([ile({ science: ['kim2020'] })]).reminders()
+    expect(a.doneToday([bugun], now)).toBe(true)
+    expect(a.doneToday([dun], now)).toBe(false)
+    expect(a.doneToday([], now)).toBe(false)
+    const [b] = createRegistry([ile({ science: ['kim2020'] }, { progression: { match: (s) => s.type === 'hatirla' && s.seconds >= 60 } })]).reminders()
+    expect(b.doneToday([bugun], now)).toBe(false) // progression.match önce gelir
+    const kendi = () => true
+    expect(createRegistry([ile({ science: ['kim2020'], doneToday: kendi })]).reminders()[0].doneToday).toBe(kendi)
+  })
+  it('doğrulama kuralları', () => {
+    expect(hatasi({ science: ['kim2020'] })).toBe('')
+    expect(hatasi('evet')).toMatch(/remind: nesne/)
+    expect(hatasi([])).toMatch(/remind: nesne/)
+    expect(hatasi({ route: 'baska', science: ['kim2020'] })).toMatch(/route/)
+    expect(hatasi({ route: 'hatirla', science: ['kim2020'] }, { routes: undefined })).toBe('') // routes yoksa [id]
+    expect(hatasi({ legacy: 'yoga', science: ['kim2020'] })).toMatch(/legacy/)
+    expect(hatasi({ window: 'gece', science: ['kim2020'] })).toMatch(/window/)
+    expect(hatasi({ legacy: 'breath', window: 'calm', science: ['kim2020'] })).toMatch(/legacy türde window/)
+    expect(hatasi({ defaultTime: '9:00', science: ['kim2020'] })).toMatch(/defaultTime/)
+    expect(hatasi({ defaultTime: '08:30', science: ['kim2020'] })).toMatch(/defaultTime.*09:00–21:00/) // move 09.00'da başlar
+    expect(hatasi({ window: 'calm', defaultTime: '08:30', science: ['kim2020'] })).toBe('')
+    expect(hatasi({ window: 'calm', defaultTime: '22:01', science: ['kim2020'] })).toMatch(/defaultTime/)
+    expect(hatasi({ legacy: 'water', defaultTime: '19:00', science: ['stout2022'] })).toMatch(/defaultTime.*09:00–18:00/)
+    for (const maxTimes of [0, 4, 1.5, '2']) expect(hatasi({ maxTimes, science: ['kim2020'] }), String(maxTimes)).toMatch(/maxTimes/)
+    for (const maxTimes of [1, 2, 3]) expect(hatasi({ maxTimes, science: ['kim2020'] })).toBe('')
+    expect(hatasi({ doneToday: true, science: ['kim2020'] })).toMatch(/doneToday/)
+    expect(hatasi({})).toMatch(/science en az bir/)
+    expect(hatasi({ science: [] })).toMatch(/science en az bir/)
+    expect(hatasi({ science: ['yok2099'] })).toMatch(/'yok2099'/)
+    expect(hatasi({ science: ['toString'] })).toMatch(/'toString'/) // prototipten gelen ad kaynak sayılmaz
+    // pmid ya da doi taşımayan kaynak geçmez
+    expect(validateRemind(ile({ science: ['x'] }), { x: { pmid: '1' } }).join(' ')).toMatch(/'x'/)
+    expect(validateRemind(ile({ science: ['x'] }), { x: { pmid: '1', doi: '10.1/x' } })).toEqual([])
+    // validateManifest remind hatasını da söyler; remind yoksa hiçbir şey eklemez
+    expect(validateManifest(ile({ science: [] })).join(' ')).toMatch(/remind: science/)
+    expect(validateManifest(temel)).toEqual([])
+  })
+  it('science anahtarı eksik modül yine registry.live\'da; reminders()\'da yok, hata remindProblems\'ta', () => {
+    const eksik = ile({ window: 'calm', science: ['balban2023'] }) // tam metin gerekli: sources.js'e girmedi
+    const r = createRegistry([...registry.modules, eksik])
+    expect(r.problems).toEqual([])
+    expect(r.get('hatirla')).toBe(eksik)
+    expect(r.live.map((m) => m.id)).toContain('hatirla')
+    expect(r.forRoute('hatirla-1')?.id).toBe('hatirla')
+    expect(r.reminders().map((x) => x.module)).not.toContain('hatirla')
+    expect(r.remindProblems.join(' ')).toMatch(/hatirla: remind: science: 'balban2023'/)
+  })
+  it('temel kuralı bozuk modül yine reddedilir; remind onu kurtarmaz', () => {
+    const { progress, ...eksik } = temel
+    expect(progress).toBeTruthy()
+    const r = createRegistry([{ ...eksik, remind: { science: ['kim2020'] } }])
+    expect(r.problems.join(' ')).toMatch(/progress yok/)
+    expect(r.reminders()).toEqual([])
+    expect(r.remindProblems).toEqual([])
+  })
+  it("route: routine gibi yol açan modül için 'home' de geçer (PLAN.v1 §A.1 tablosu); başka uygulama ekranı geçmez", () => {
+    expect(hatasi({ route: 'home', science: ['kim2020'] })).toBe('')
+    expect(hatasi({ route: 'home', science: ['kim2020'] }, { routes: ['routine-a', 'routine-b'] })).toBe('')
+    expect(hatasi({ route: 'profile', science: ['kim2020'] })).toMatch(/route.*home/)
+    const [x] = createRegistry([ile({ route: 'home', science: ['kim2020'] })]).reminders()
+    expect(x.route).toBe('home')
+  })
+  it('koşullu kaynak (only) remind havuzuna girmez; remind düşer, modül kalır', () => {
+    for (const key of ['radin2025', 'habarubio2015', 'chaput2016', 'smith2017']) {
+      expect(hatasi({ window: 'calm', science: ['fincham2023', key] }), key).toMatch(new RegExp(`'${key}' koşullu`))
+    }
+    const r = createRegistry([ile({ window: 'calm', science: ['radin2025'] })])
+    expect(r.get('hatirla')).toBeTruthy()
+    expect(r.reminders()).toEqual([])
+    expect(r.remindProblems.join(' ')).toMatch(/yalnız meditation/)
+  })
+  it('pencereler tek kaynaktan: registry ile planlayıcı aynı nesneyi kullanır', () => {
+    expect(REMIND_WINDOWS).toBe(PLAN_WINDOWS)
+    expect(remindWindow({ window: 'move' })).toBe(PLAN_WINDOWS.move)
+  })
+  it('emekli modül hatırlatılmaz', () => {
+    const r = createRegistry([ile({ science: ['kim2020'] }, { retired: true })])
+    expect(r.get('hatirla')).toBeTruthy()
+    expect(r.reminders()).toEqual([])
   })
 })

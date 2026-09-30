@@ -497,6 +497,9 @@ Zaman" hukukçuyu bekler; hava için Apple'a soru gönderilmez.
       bildirim koduna başla"). §0b "Cihazda" maddesi açık kalır; B1 cihaz listesiyle birlikte bakılır.
 - [x] B0 · rıza metinleri (`bildirim-hava-yuruyus/rizalar-taslak.md`: `weather`, `walk`, `walkDetect`) sahip onayladı
       (2026-09-30); hukukçu onayı ayrıca beklenir.
+- [~] B1a çekirdeği (ekransız, 2026-09-30): kaynaklar (13; tam metin gereken 4'ü girmedi), `remind` sözleşmesi,
+      `moduleRemind.js`, `notifyAll.js`, `notifyApply` kimlik kümeleri, eşdeğerlik 20.000 bağlam × 2 katman 0 fark.
+      App.jsx'e bağlı değil; açık: `notifyTap.test.js` + App'te `actionId`, birleştirme metni, ek saat sessizlik uyarısı.
 - [ ] B1a · `sources.js` kayıtları ve kanıt kapısı (11 kaynak ve koşullular; PubMed esummary, `kaynak-dogrulama.md`) →
       `remind` sözleşmesi → eşdeğerlik düzeneği (iki katman, 20.000 bağlam) → `moduleRemind.js` → `notifyAll.js` →
       `notifyApply` (`actionId`, açılışta temizlik) → `RemindField`/`RemindSheet` → modüllere tek satır → Profil →

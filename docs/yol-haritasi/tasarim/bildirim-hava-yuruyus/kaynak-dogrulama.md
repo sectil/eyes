@@ -52,7 +52,7 @@ uyuşmuyor.
 
 Mevcut `sources.js` `year` alanında ilk yayın (e-yayın) yılını kullanıyor (ör. `talens2022`: 46(2), basım 2023;
 `sturm2020`: 22(5), basım 2022). Plan §A "kartta basım yılı; farklıysa ikisi birden" diyor ama alan adı vermiyor. Bu
-yüzden `sources-ek.js`'te `year` mevcut kurala uyar (e-yayın yılı) ve basım yılı farklıysa kayıt üstünde yorum olarak
+yüzden `sources-ek.taslak.js`'te (kodda `app/src/lib/sources.js`) `year` mevcut kurala uyar (e-yayın yılı) ve basım yılı farklıysa kayıt üstünde yorum olarak
 yazıldı: kim2020 (2021), wolffsohn2025 (2025, aynı), laborde2022 (2022, aynı), stout2022 (2022, aynı),
 tucker2007 (2007, aynı), habarubio2015 (2015, aynı), smith2017 (e-yayın 2016, basım 2017; anahtar plandaki gibi basım
 yılıyla bırakıldı, `year: 2016`). Alan adı (ör. `yearPrint`)
@@ -60,10 +60,31 @@ kod oturumunda kararlaştırılır.
 
 Kaynak: PubMed (NCBI). DOI bağlantıları: https://doi.org/ + tablodaki DOI.
 
-## 4. `sources-ek.js` notu
+## 4. `sources-ek.taslak.js` notu (kayıtlar `app/src/lib/sources.js`'e girdi)
 
 13 kayıt: 9 girer + radin2025 + habarubio2015, chaput2016, smith2017 (koşullu). Tam metin gerekli dört kaynak
 (balban2023, klimek2022, cajochen2013, casiraghi2021) eklenmedi. `titleTr` makale başlığının çevirisidir, bildirim
 metni değildir; yine de iki çeviride yasak listesine takılan kök var: kim2020 "tedavi edici" (özgün: "Therapeutic"),
 desai2026 "önlenmesi" (özgün: "Prevention"). Kartta `titleTr` gösteriliyorsa dil incelemesi karar versin. Node ile
 modül olarak yüklendi, sözdizimi hatası yok.
+
+## 5. Kod turu eki (2026-09-30): süre ve çalışma türü
+
+İnceleme, `sources.js`'teki `duration` değerlerinden beşinin yukarıdaki tabloda yazmadığını buldu. PubMed özetleri
+(esummary/efetch) yeniden açıldı; hepsi özette var, değerler değişmedi:
+
+| anahtar | `duration` | özetten alıntı |
+|---|---|---|
+| wolffsohn2025 | 2 hafta egzersiz + bıraktıktan 2 hafta sonra ölçüm | "before and after 2 weeks of blinking exercises, as well as 2 weeks after completing the blinking exercise routine" |
+| stout2022 | 6 ve 12 hafta | "They then repeated a 24 hr U and survey at 6 and 12 weeks, respectively." |
+| desai2026 | Ortanca 738 gün izlem | "At a median follow-up of 738 days (IQR 711-778)" |
+| radin2025 | 8 hafta, günde 10 dk; 4. ayda izlem | "complete 10 minutes of meditation per day for 8 weeks" · "baseline, 8-week, and 4-month measures" |
+| chaput2016 | 7 gün ivmeölçer | "monitored over seven consecutive days using a waist-worn accelerometer" |
+
+wolffsohn2025 `design: 'rct'`: özet "Participants were randomised between a squeeze and blink compared to blink only
+regimen, 2 to 4 repeats per day and 5 to 25 repetitions each time" diyor; PubMed yayın türü "Randomized Controlled
+Trial". Karşılaştırma düzenler arasıdır (egzersizsiz kontrol grubu yok); kart bunu `limit`'te söylemeli mi, dil
+incelemesi karar versin.
+
+Koşullu kaynaklar `sources.js`'te `only` alanı taşır (`radin2025: 'meditation'`, ay kaynakları `'moon'`);
+`modules/registry.js` bunları modül `remind.science` havuzunda reddeder.
