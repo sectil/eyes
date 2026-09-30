@@ -3,7 +3,8 @@
 import { describe, it, expect } from 'vitest'
 import { createElement as h } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
-import FirstReport, { eyeWhen } from './FirstReport.jsx'
+import FirstReport, { eyeWhen, changeOf } from './FirstReport.jsx'
+import { makeYogaRecord } from '../lib/yogaRecord.js'
 import { WEEKLY_PLAN_NOTE } from '../lib/trend.js'
 
 const text = (html) => html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ')
@@ -23,5 +24,20 @@ describe('İlk rapor · göz', () => {
     expect(eyeWhen({ phase: 'tracking', baselineMode: 'weekly' })).toBe(false)
     expect(eyeWhen({ phase: 'baseline', baselineMode: 'daily' })).toBe(false)
     expect(eyeWhen({ phase: 'baseline', baselineMode: 'weekly' })).toBe(true)
+  })
+})
+
+describe('İlk rapor · uygulamalardan sonra', () => {
+  it('fiil değişimin işaretinden, güven aralığı değerle aynı yönde (düşük daha iyi ölçüde de)', () => {
+    expect(changeOf({ better: 'down', gain: 3, lo: 2.1, hi: 3.9 })).toEqual({ value: -3, lo: -3.9, hi: -2.1, verb: 'azaldı' })
+    expect(changeOf({ better: 'down', gain: -2, lo: -3.1, hi: -0.9 })).toEqual({ value: 2, lo: 0.9, hi: 3.1, verb: 'arttı' })
+    expect(changeOf({ better: 'up', gain: 2, lo: 1, hi: 3 })).toEqual({ value: 2, lo: 1, hi: 3, verb: 'arttı' })
+    expect(changeOf({ better: 'up', gain: 0, lo: null, hi: null })).toMatchObject({ value: 0, lo: null, verb: 'değişmedi' })
+  })
+  it('yoga Ders 1: gerginlik arttıysa "arttı: +…" ve aralık artı yönde', () => {
+    const recs = [[4, 6], [3, 6], [4, 7], [5, 7]].map(([b, a], i) => ({ id: `y${i}`, ...makeYogaRecord({ lesson: 1, planned: 300, seconds: 300, reachedClosing: true, before: b, after: a, endedAt: new Date(Date.now() - (i + 1) * 3600000) }) }))
+    const t = text(renderToStaticMarkup(h(FirstReport, { tests: [], sessions: recs, start: ago(4), onClose: () => {}, onProgress: () => {} })))
+    expect(t).toMatch(/Yoga · Nefesin Ritmi sonrası gerginlik ortalama arttı: \+2,5 \(4 oturum, %95 GA \d,\d – \d,\d\)/)
+    expect(t).not.toContain('azaldı')
   })
 })

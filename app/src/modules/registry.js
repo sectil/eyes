@@ -45,6 +45,10 @@
 //   sessions?: {                        kayıtların Gelişim'e nasıl gireceği
 //     match(s) → bool,
 //     countsTowardGoal: bool,           false: haftalık hedef/seriye sayılmaz (oyun)
+//     domainOf?(s) → alan,              isteğe bağlı: kaydın kendi alanı (ör. yoga: her ders kendi alanında; PLAN.v3
+//                                       §D.5). Yoksa, DOMAINS dışında bir şey dönerse ya da hata verirse progress.domain.
+//                                       Kaydın alanını yalnız lib/dataHub.js domainOfSession söyler (28 günlük şerit,
+//                                       alan özetleri, CSV süre satırı).
 //     describe(s, { seconds }) → { title, detail, score?, best?, control? },
 //     best?(sessions) → number,         rekor (0 = yok)
 //     bestLabel?: 'Yılan rekoru',
@@ -109,6 +113,7 @@ export function validateManifest(m) {
     need(typeof m.sessions.match === 'function', 'sessions.match fonksiyon olmalı')
     need(typeof m.sessions.describe === 'function', 'sessions.describe fonksiyon olmalı')
     need(typeof m.sessions.countsTowardGoal === 'boolean', 'sessions.countsTowardGoal true/false olmalı')
+    if (m.sessions.domainOf != null) need(typeof m.sessions.domainOf === 'function', 'sessions.domainOf fonksiyon olmalı')
     if (m.sessions.best != null) need(typeof m.sessions.best === 'function' && typeof m.sessions.bestLabel === 'string', 'best için bestLabel gerekli')
   }
   return errors

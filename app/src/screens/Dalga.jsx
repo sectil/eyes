@@ -53,6 +53,8 @@ function Rate({ value, onChange, label }) {
 }
 
 const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`
+// Uyku sesi başladı mı; başlamadıysa neden: 'blocked' (dokun, başlat) ya da 'lesson' (yoga dersi çalıyor; lib/dalgaSleep.js)
+const sleepStateOf = (ok, p) => (ok ? 'playing' : p.phase === 'blocked' || p.phase === 'lesson' ? p.phase : 'idle')
 
 // onSave(kayıt): sonra-puanı verilince; onExit(): çıkış
 // sleepPreset (alarm kartındaki "Uyku sesi"; lib/alarm.js sleepMinutes): { minutes, auto, alarmLabel, alarmAt } → doğrudan
@@ -77,7 +79,7 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
   const [record, setRecord] = useState(null)
   const [error, setError] = useState(null)
   const [diag, setDiag] = useState({ state: 'none', rate: 0, level: 0 })
-  const [sleepState, setSleepState] = useState(session ? 'preparing' : 'idle') // idle | preparing | playing | blocked | done
+  const [sleepState, setSleepState] = useState(session ? 'preparing' : 'idle') // idle | preparing | playing | blocked | lesson | done
   const [sleepReady, setSleepReady] = useState(false) // alarm kartından: müzik önceden hazır mı
   const [lateGo, setLateGo] = useState(false) // alarma 1 saatten az: "Yine de çal" dendi
   const [showCtl, setShowCtl] = useState(false)
@@ -204,7 +206,7 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
     p.listen({ onTick: ({ left: l }) => setLeft(l), onEnd: () => endSleep(false) })
     keepAwake(true)
     let alive = true
-    session.run.then((ok) => alive && setSleepState(ok ? 'playing' : p.phase === 'blocked' ? 'blocked' : 'idle'))
+    session.run.then((ok) => alive && setSleepState(sleepStateOf(ok, p)))
     return () => {
       alive = false
     }
@@ -228,7 +230,7 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
       })
       setPhase('sleep')
       const ok = await run
-      setSleepState(ok ? 'playing' : p.phase === 'blocked' ? 'blocked' : 'idle')
+      setSleepState(sleepStateOf(ok, p))
     } catch {
       p.stop()
       keepAwake(false)

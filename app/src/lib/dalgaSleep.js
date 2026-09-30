@@ -75,6 +75,11 @@ export function createSleepPlayer() {
 
 // Yerel oynatıcı: döngü, kısılma ve durma iOS'ta (kilitli ekranda JS zamanlayıcısına bağlı değil). JS yalnız ekran
 // sayacını ve bitişi izler. Dokunuş gerekmez.
+// Yoga dersi çalarken iOS "LESSON" koduyla reddeder (AlarmPlugin.sleepStart; PLAN.v3 §D.3): evre 'blocked' değil
+// 'lesson' olur; ekran "Önce çalan dersi durdur." der, "dokun, başlat" (resume) yeniden denemez. Çalan ders
+// kendiliğinden durdurulmaz; duraklatılmış (sessiz) ders yerelde kapatılır ve uyku sesi başlar. Öteki retler bugünkü
+// gibi 'blocked'.
+export const SLEEP_LESSON_CODE = 'LESSON'
 export function createNativeSleepPlayer(plugin = Alarm) {
   let phase = 'idle', timer = 0, endAt = 0, startedAt = 0, secs = 0, cb = {}
   const diag = { files: 'iOS oynatıcı · döngü', played: null, native: true, info: null, err: null }
@@ -100,6 +105,7 @@ export function createNativeSleepPlayer(plugin = Alarm) {
     }, 500)
   }
   async function begin() {
+    let lesson = false
     try {
       diag.info = await plugin.sleepStart({ seconds: secs, fade: fadeSeconds(secs) })
       diag.played = true
@@ -107,13 +113,14 @@ export function createNativeSleepPlayer(plugin = Alarm) {
     } catch (e) {
       diag.played = false
       diag.err = `${e?.code ?? 'Hata'}: ${e?.message ?? e}`.slice(0, 120)
+      lesson = e?.code === SLEEP_LESSON_CODE
     }
     if (phase === 'stopped') {
       plugin.sleepStop().catch(() => {})
       return false
     }
     if (!diag.played) {
-      phase = 'blocked'
+      phase = lesson ? 'lesson' : 'blocked'
       return false
     }
     run()

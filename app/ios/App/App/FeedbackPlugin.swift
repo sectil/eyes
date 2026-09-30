@@ -236,6 +236,9 @@ public class FeedbackPlugin: CAPPlugin, CAPBridgedPlugin {
 /// - SpeechPlugin kayda başlarken beginRecording(), dururken endRecording() çağırır; kayıt bitince
 ///   oturum bırakılır (müzik gibi diğer uygulamalar devam edebilsin) ve kayıtlı tercihe dönülür.
 /// setAudioMode hiç çağrılmadıysa kayıttan sonra yalnızca oturum bırakılır (eski davranış).
+/// Uyku sesi (beginSleep/endSleep) ve yoga dersi (beginLesson/endLesson; AlarmPlugin.swift LessonPlayer) ayrı
+/// bayraklarla oturumu tutar: biri açıkken tercih uygulanmaz, oturum .playback'te kalır; oturum ancak ikisi de
+/// kapanınca bırakılır (PLAN.v3 §D.3: önce biten oynatıcı öbürünün oturumunu bırakmasın).
 /// VARSAYIM: WKWebView'in sesi (Web Audio, speechSynthesis) uygulamanın AVAudioSession kategorisine
 /// uyar; Capacitor uygulamalarında "sessiz tuşunda ses" için yaygın yöntem budur, cihazda doğrulanmalı.
 final class AppAudioSession {
@@ -245,6 +248,7 @@ final class AppAudioSession {
     private var preferredPlayback: Bool?
     private var recording = false
     private var sleepActive = false // uyku sesi çalarken tercih uygulanmaz (AlarmPlugin.sleepStart)
+    private var lessonActive = false // yoga dersi açıkken de (çalıyor, duraklatılmış ya da müzik kuyruğu; LessonPlayer)
 
     private init() {}
 
@@ -252,7 +256,7 @@ final class AppAudioSession {
         lock.lock()
         defer { lock.unlock() }
         preferredPlayback = playback
-        if recording || sleepActive { return } // kayıt / uyku sesi bitince uygulanır
+        if recording || sleepActive || lessonActive { return } // kayıt / uyku sesi / ders bitince uygulanır
         try applyPreferredLocked()
     }
 
@@ -272,8 +276,8 @@ final class AppAudioSession {
         let session = AVAudioSession.sharedInstance()
         // Kayıt, karışmayan (.playAndRecord) oturumla diğer sesleri kesmişti; onlara devam etmelerini bildir.
         try? session.setActive(false, options: .notifyOthersOnDeactivation)
-        if sleepActive {
-            // Uyku sesi sürüyor: tercihe değil, uyku oturumuna dön
+        if sleepActive || lessonActive {
+            // Uyku sesi ya da ders sürüyor: tercihe değil, oynatma oturumuna dön
             try? session.setCategory(.playback, mode: .default, options: [])
             try? session.setActive(true)
             return
@@ -295,11 +299,38 @@ final class AppAudioSession {
     }
 
     /// Uyku sesi bitince: oturumu bırak (kesilen başka uygulamanın sesi devam etsin), sonra tercihe dön.
+    /// Ders açıksa oturum .playback'te kalır; ders bitince endLesson bırakır.
     func endSleep() {
         lock.lock()
         defer { lock.unlock() }
         guard sleepActive else { return }
         sleepActive = false
+        if lessonActive { return }
+        let session = AVAudioSession.sharedInstance()
+        try? session.setActive(false, options: .notifyOthersOnDeactivation)
+        try? applyPreferredLocked()
+    }
+
+    /// Yoga dersi başlarken ve sürdürülürken (kesintiden sonra oturumu yeniden etkinleştirir): beginSleep ile aynı
+    /// oturum (.playback, karışmaz: kilitli ekranda çalar, Now Playing'de görünür). Kayıt sürüyorsa false.
+    func beginLesson() throws -> Bool {
+        lock.lock()
+        defer { lock.unlock() }
+        if recording { return false }
+        lessonActive = true
+        let session = AVAudioSession.sharedInstance()
+        try session.setCategory(.playback, mode: .default, options: [])
+        try session.setActive(true)
+        return true
+    }
+
+    /// Ders bitince ya da durunca: uyku sesi yoksa oturumu bırak ve tercihe dön (endSleep ile aynı).
+    func endLesson() {
+        lock.lock()
+        defer { lock.unlock() }
+        guard lessonActive else { return }
+        lessonActive = false
+        if sleepActive { return }
         let session = AVAudioSession.sharedInstance()
         try? session.setActive(false, options: .notifyOthersOnDeactivation)
         try? applyPreferredLocked()

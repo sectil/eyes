@@ -10,6 +10,7 @@ import { formatLogMAR, formatEquivalents, roundLogMAR } from './optotype.js'
 import { EYE_LABEL } from './vaSeries.js'
 import { DOMAIN_LABEL, WHO5_TYPE, acuteEffects, metricCards, practiceCard, who5Card } from './progress.js'
 import { ageFromBirthDate } from './identity.js'
+import { domainOfSession } from './dataHub.js'
 
 const isVa = (t) => t?.type === 'va-daily' || t?.type === 'va-weekly'
 // 'va-daily': kısa test (eski adı günlük test; 2026-09-29'dan beri isteğe bağlı). Eski kayıtlar da aynı testtir.
@@ -64,12 +65,28 @@ export function csvRows({ tests = [], sessions = [], metrics = registry.metrics(
       rows.push({ date: s.date, module: 'WHO-5 iyi oluş', domain: 'wellbeing', measure: 'WHO-5', value: s.score, unit: '/100', note: Number.isFinite(s.raw) ? `ham ${s.raw}/25` : '' })
     }
   }
-  // Her kayıt (test, egzersiz, oyun) süresiyle: ölçümü olmayan modüller de dosyada görünür
+  // Her kayıt (test, egzersiz, oyun) süresiyle: ölçümü olmayan modüller de dosyada görünür. Alan kaydın kendisinden,
+  // domainOfSession'dan (lib/dataHub.js; tek kaynak): aynı kayıt Gelişim'in 28 günlük şeridinde ve burada aynı alanda
+  // (yoga: dersin alanı; PLAN.v3 §D.5). domainOf tanımlamayan modülde sonuç modülün alanıdır, yani bugünkü satırın aynısı.
+  const recOf = sessionsByActivity(sessions)
   for (const a of activitiesFrom(tests, sessions)) {
-    const domain = a.kind === 'test' ? 'eye' : (registry.get(a.module) ?? registry.forSession({ type: a.type }))?.progress.domain ?? ''
+    const rec = a.kind === 'test' ? null : recOf.get(a.id)
+    const domain = a.kind === 'test' ? 'eye' : (rec ? domainOfSession(rec) : (registry.get(a.module) ?? registry.forSession({ type: a.type }))?.progress.domain) ?? ''
     rows.push({ date: a.date, module: a.title, domain, measure: 'süre', value: a.seconds, unit: 'sn', note: [a.estimated ? 'tahmini süre' : null, a.detail].filter(Boolean).join(' · ') })
   }
   return rows.sort(byDate)
+}
+
+// Etkinlik kimliği (lib/stats.js activitiesFrom: `s:${kayıt.id ?? sıra}`) → kayıt. Aynı kimlik iki kez geçerse eşleme
+// yapılmaz (null); o satırın alanı modülden okunur (eski yol).
+function sessionsByActivity(sessions = []) {
+  const out = new Map()
+  sessions.forEach((s, i) => {
+    if (s == null || typeof s !== 'object') return
+    const k = `s:${s.id ?? i}`
+    out.set(k, out.has(k) ? null : s)
+  })
+  return out
 }
 
 export const CSV_FORMAT = { sep: ';', decimal: ',' }
@@ -265,8 +282,14 @@ export function reportHtml(m) {
   const metricRows = m.metrics
     .map((c) => `<tr><td>${esc(c.label)}</td><td>${esc(DOMAIN_LABEL[c.domain] ?? '')}</td><td class="n">${c.n}</td><td class="n">${c.method === 'halves' ? 'ort. ' : ''}${esc(num(c.first, c.unit === '/5' ? 1 : 0))} → ${esc(num(c.last, c.unit === '/5' ? 1 : 0))} ${esc(c.unit)}</td><td>${esc(STATUS_TEXT[c.status] ?? '')}</td></tr>`)
     .join('')
+  // Değişim sütunu puanın kendi değişimi (sonra − önce); güven aralığı da aynı yönde. e.gain, lo, hi iyileşme yönündedir:
+  // "düşük daha iyi" ölçüde (Yön, yoga Ders 1–2) işaret çevrilir; önceden değer çevrilip aralık çevrilmiyordu (−3,0 (2,1 – 3,9))
   const effectRows = m.effects
-    .map((e) => `<tr><td>${esc(e.label)}</td><td>${esc(e.measure)} (/${e.max})</td><td class="n">${e.n}</td><td class="n">${esc(num(e.before))} → ${esc(num(e.after))}</td><td class="n">${esc(signed(e.better === 'down' ? -e.gain : e.gain))}${e.n >= 3 && e.lo != null ? ` (${esc(num(e.lo))} – ${esc(num(e.hi))})` : ''}</td><td>${e.sig ? 'belirgin' : 'belirsiz'}</td></tr>`)
+    .map((e) => {
+      const k = e.better === 'down' ? -1 : 1
+      const ci = e.n >= 3 && e.lo != null ? ` (${esc(num(Math.min(k * e.lo, k * e.hi)))} – ${esc(num(Math.max(k * e.lo, k * e.hi)))})` : ''
+      return `<tr><td>${esc(e.label)}</td><td>${esc(e.measure)} (/${e.max})</td><td class="n">${e.n}</td><td class="n">${esc(num(e.before))} → ${esc(num(e.after))}</td><td class="n">${esc(signed(k * e.gain))}${ci}</td><td>${e.sig ? 'belirgin' : 'belirsiz'}</td></tr>`
+    })
     .join('')
   const w = m.who5
   return `<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nefona · Kişisel takip özeti</title><style>${CSS}</style></head><body>
@@ -297,7 +320,7 @@ ${w.n ? `<section class="block"><h2>İyi oluş · WHO-5 (0–100, son iki hafta)
 ${metricRows ? `<section class="block"><h2>Diğer ölçümler</h2><table><thead><tr><th>Ölçüm</th><th>Alan</th><th class="n">n</th><th class="n">ilk → son</th><th>Değerlendirme</th></tr></thead><tbody>${metricRows}</tbody></table>
 <p class="small">"ort.": 6 ve üstü ölçümde ilk yarının ve son yarının ortalaması; fark %95 güven aralığıyla sınanır (sıfırı içermiyorsa değişim var). Yayımlanmış eşik varsa o kullanılır.</p></section>` : ''}
 
-${effectRows ? `<section class="block"><h2>Uygulama öncesi → sonrası (kişinin kendi puanı)</h2><table><thead><tr><th>Uygulama</th><th>Ölçü</th><th class="n">oturum</th><th class="n">ortalama önce → sonra</th><th class="n">iyileşme (%95 GA)</th><th></th></tr></thead><tbody>${effectRows}</tbody></table>
+${effectRows ? `<section class="block"><h2>Uygulama öncesi → sonrası (kişinin kendi puanı)</h2><table><thead><tr><th>Uygulama</th><th>Ölçü</th><th class="n">oturum</th><th class="n">ortalama önce → sonra</th><th class="n">değişim (%95 GA)</th><th></th></tr></thead><tbody>${effectRows}</tbody></table>
 <p class="small">Kontrol grubu yok: beklenti ve yalnızca mola vermenin etkisi ayrılamaz. "Belirgin": en az 3 oturum ve güven aralığı sıfırı içermiyor.</p></section>` : ''}
 
 <section class="block"><h2>Yöntem ve sınırlar</h2>

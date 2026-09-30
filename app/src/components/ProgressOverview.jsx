@@ -32,8 +32,17 @@ const SOURCES_OF = { eye: ['faes2021', 'rosser2003', 'lim2010', 'joseph2023', 'k
 const num = (v, d = 1) => (Number.isFinite(v) ? decimalTr(v, d) : '–')
 const signed = (v, d = 1) => (Number.isFinite(v) ? `${v > 0 ? '+' : v < 0 ? '−' : ''}${decimalTr(Math.abs(v), d)}` : '–')
 
+// Yoga (modul.md §7; PLAN.v3 §D.5): ders öncesi → sonrası puanı ve ertesi sabahın uyku puanı "nasıl hissettin"
+// gidişatıdır, etki kanıtı değil. Etiket iyileşme ya da kötüleşme demez, puanın yönünü söyler ("odak gelişti" denmez);
+// ton yine iyi yön/kötü yön.
+const FEEL_ONLY = new Set(['yoga'])
+
 // Etiket: metin + ton. Metrik (better/worse/noise/unsure/first), etki (sig), göz (alert/phase)
 export function metricStatus(c) {
+  if (FEEL_ONLY.has(c?.module) && (c.status === 'better' || c.status === 'worse')) {
+    const rose = (c.status === 'better') === (c.better !== 'down')
+    return { text: rose ? 'belirgin artış' : 'belirgin düşüş', tone: c.status === 'better' ? 'ok' : 'warn' }
+  }
   switch (c?.status) {
     case 'better': return { text: 'iyileşiyor', tone: 'ok' }
     case 'worse': return { text: 'geriliyor', tone: 'warn' }
@@ -45,7 +54,14 @@ export function metricStatus(c) {
     default: return { text: '', tone: 'muted' }
   }
 }
-export const effectStatus = (e) => (e.sig ? (e.gain > 0 ? { text: 'belirgin iyileşme', tone: 'ok' } : { text: 'belirgin kötüleşme', tone: 'warn' }) : { text: 'henüz belirsiz', tone: 'muted' })
+export const effectStatus = (e) => {
+  if (!e.sig) return { text: 'henüz belirsiz', tone: 'muted' }
+  if (FEEL_ONLY.has(e.module)) {
+    const rose = e.better === 'down' ? e.gain < 0 : e.gain > 0
+    return { text: rose ? 'belirgin artış' : 'belirgin düşüş', tone: e.gain > 0 ? 'ok' : 'warn' }
+  }
+  return e.gain > 0 ? { text: 'belirgin iyileşme', tone: 'ok' } : { text: 'belirgin kötüleşme', tone: 'warn' }
+}
 const PHASE = { familiarization: 'alışma dönemi', baseline: 'başlangıç oluşuyor', empty: 'henüz ölçüm yok' }
 export function eyeStatus(e) {
   if (e.alert === 'red') return { text: 'doktora git', tone: 'danger' }
@@ -154,7 +170,9 @@ function tileOf(d) {
   const m = [...d.metrics].sort((a, b) => b.n - a.n)[0]
   const e = [...d.effects].sort((a, b) => b.n - a.n)[0]
   if (m && (!e || m.n >= e.n)) return { value: num(m.last, m.unit === '/5' ? 1 : 0), unit: m.unit, sub: m.label, status: metricStatus(m) }
-  if (e) return { value: signed(e.gain), unit: e.measure, sub: `${e.label} sonrası`, status: effectStatus(e) }
+  // Değer puanın kendi değişimi (sonra − önce): "düşük daha iyi" ölçüde azalma eksi yazılır (FirstReport.jsx ile aynı);
+  // e.gain orada iyileşme yönündedir ve azalan gerginliği "+" gösteriyordu
+  if (e) return { value: signed(e.better === 'down' ? -e.gain : e.gain), unit: e.measure, sub: `${e.label} sonrası`, status: effectStatus(e) }
   return null
 }
 

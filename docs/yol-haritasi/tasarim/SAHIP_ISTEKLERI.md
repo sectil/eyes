@@ -78,3 +78,19 @@ araştırma iş akışı: wf_ad0a5157-83f (tamamlanan ajanlar önbellekten sürd
 ekranı, (c) açılış logosu kalkar, (d) sıfır ve kırık seri gizlenir; 6 Nef paketi v2 ve rıza v2). Hukukçu adı verilmedi →
 plandaki yedek. Kod, onaylı yoga kararı 7 gereği yoga yayınından sonra; şimdi S0 (ekran tasarımları, App Review sorusu
 metni, hukukçu soruları) başlar.
+
+## Bağlayıcı kural: gönderimde 5 saniye (sahip, 2026-09-30, kelimesi kelimesine)
+> "untumaman gerekne 5 saniye kuralı. 5 saniyede göndereceğin çalışmaya kişi etkilenir mi? hayırsa mükemmle değilse bana
+> gönderemeden tekrar çalış"
+
+Uygulama: sahibe giden her iş (tasarım sayfası, ses, TestFlight ekranları, belge) göndermeden önce **5 saniye
+sınamasından** geçer. Bağımsız değerlendiriciler (birbirini görmeyen, en az 3) işin yalnız ilk 5 saniyede görünen
+kısmını (telefonda ilk ekran; seste ilk 5 saniye) görür: "Ne anladın? Etkilendin mi (evet/hayır)? Neden?". Çoğunluk
+"evet" demezse iş gönderilmez; ilk izlenim yeniden tasarlanır ve sınama tekrarlanır. Aynı ölçüt ürünün kendisine de
+uygulanır: uygulamanın her ekranının ilk 5 saniyesi.
+
+## Sahibin 2026-09-30 kararı: sonsuz yol kodu erkene alındı
+"önerin uygulansın evet" → Sonsuz yolun kodu yoga YAYININI değil, yoga KODUNUN depoya girmesini bekler (yoga planı
+karar 7 ve sonsuz yol planı karar 1'deki "yoga yayınından sonra" koşulu bu şekilde değişti; gerekçe: çakışma yalnız
+dosyalarda, seslerde değil). Sıra: yoga C adımı kodu kaydedilir → Y1 (merdivenler, nefes 1→2→3 dk) başlar. Her iş sahibe
+gitmeden 5 saniye sınamasından geçer.

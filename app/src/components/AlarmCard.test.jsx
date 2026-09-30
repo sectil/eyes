@@ -1,5 +1,5 @@
 // Alarm kartı ve kurulum sayfası akışı: dokunuşlar günlüğe doğru yazılıyor mu (analiz verisi), kart doğru duruma geçiyor mu.
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach, onTestFinished } from 'vitest'
 import '../test/fakeDom.js'
 import { createElement as h, act } from 'react'
 
@@ -281,6 +281,11 @@ describe('kurulum sayfası', () => {
     expect(loadAlarmLog()).toEqual([])
   })
   it('"Kur ve uyku sesini başlat": müzik aynı dokunuşta, alarm kurulmadan ÖNCE başlar; sonra uyku ekranı; "Yalnız kur" müziği başlatmaz', async () => {
+    // AlarmSetup dokunuş anındaki süreyi gerçek saatten hesaplar (AlarmSetup.jsx:110): saat EVE'ye sabitlenir, yoksa test
+    // 06:30–07:00 arasında (07:00 alarmına 30 dk'dan az kala) kırılıyordu. Beklenti değişmedi.
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(EVE)
+    onTestFinished(() => vi.useRealTimers())
     const onDone = vi.fn()
     const order = []
     audioPlay.impl = () => { order.push('play'); return Promise.resolve() }

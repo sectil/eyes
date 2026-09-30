@@ -59,10 +59,17 @@ Sonraki aşamaya (metin + ses + tasarım iş akışı) bu dosya olduğu gibi ver
     kısa günlerde Ders 1 ve 5 (3 dk), ≈ 8 günde bir Ders 2 (5 dk), Ders 3 yalnız akşam önerisi; kod bu oturumda (C adımı),
     sesler yeni oturumda; önce TestFlight, sonra App Store; kural: "her ders kendi denetimlerinden geçince eklenir"
     (PLAN.v3 "kısmi yayın yoktur" kuralının yerine).
+11. "önerini onaylıyorum" (2026-09-30) → C adımındaki üç hata düzeltmesi kalıyor: 5. gün raporunda fiil gerçek değişimden
+    seçilir (artan gerginlik "azaldı" yazılmaz), PDF'te güven aralığı değerle aynı yönde, Gelişim kutucuğunda "düşük daha
+    iyi" ölçüde puanın gerçek değişimi (0b076ba).
 
-## Sahibin 2026-09-30 üçüncü mesajı (kelimesi kelimesine, ilk bölüm seslendirmesi sırasında)
-11. "eğer kaliteyi ve akışı bozmadan devam ettirelebiliyorsa Eleven v4 launch special 199,3 B credits free (13d 0h left)
+## Sahibin 2026-09-30 mesajları (kelimesi kelimesine, ilk bölüm seslendirmesi sırasında)
+12. "eğer kaliteyi ve akışı bozmadan devam ettirelebiliyorsa Eleven v4 launch special 199,3 B credits free (13d 0h left)
     Try v4 bu şekilde bir kampanya var herhalde onu kullnablirsin. açıkcası ne işe yaradoğını bilmiyorum işimizeyarıyorsa
     bunu kullanlım."
-    → Durum: seslendirme zaten `eleven_v4` ile (SPEC.v3 §2). Bu oturumdaki v4 çekimlerinde ElevenLabs durum yanıtı fiyatı
-      0 kredi gösterdi (kampanyayla tutarlı; hesap bakiyesi buradan doğrulanmadı). Müzik ve Scribe ücretli. Akış değişmedi.
+    → Durum: seslendirme zaten `eleven_v4` ile (SPEC.v3 §2). v4 çekimlerinde ElevenLabs durum yanıtı fiyatı 0 kredi
+      gösteriyor; ama hesabın API kotası (131.000) doldu ve defterin toplam sayacı (konuşmayı ücretli sayar) o sırada
+      ≈ 130,8 bin idi. Kampanyanın API çağrılarımıza uygulanıp uygulanmadığı doğrulanmadı (hesabın kullanım dökümünde
+      görünür). Müzik ve Scribe ücretli. Akış değişmedi.
+13. "kreidmiz kalmadı 😞 ne kadarkredi lazım kalan işler için" → kalan ücretli işler ≈ 2,6 bin kredi hesaplandı (Scribe
+    164, müzik vokal denetimi 2.145, SPEC.v3 §6.3 yeniden çekimleri 253). "kredi ekledim." → iş sürdü.

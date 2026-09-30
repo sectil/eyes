@@ -13,6 +13,21 @@ import '../styles/progress2.css'
 const num = (v, d = 1) => (Number.isFinite(v) ? decimalTr(v, d) : '–')
 const signed = (v, d = 1) => (Number.isFinite(v) ? `${v > 0 ? '+' : v < 0 ? '−' : ''}${decimalTr(Math.abs(v), d)}` : '–')
 
+// Etkinin puandaki kendi değişimi (sonra − önce) ve güven aralığı aynı yönde; fiil değişimin işaretinden. e.gain, lo, hi
+// iyileşme yönündedir: "düşük daha iyi" ölçüde (Yön, yoga Ders 1–2) çevrilir (exportData.reportHtml ile aynı). Önceden
+// fiil better'dan seçiliyordu ve aralık çevrilmiyordu: artan gerginlik "azaldı: +2,0 (%95 GA −3,1 – −0,9)" yazıyordu.
+export function changeOf(e) {
+  const k = e?.better === 'down' ? -1 : 1
+  const value = Number.isFinite(e?.gain) ? k * e.gain : null
+  const ci = Number.isFinite(e?.lo) && Number.isFinite(e?.hi)
+  return {
+    value,
+    lo: ci ? Math.min(k * e.lo, k * e.hi) : null,
+    hi: ci ? Math.max(k * e.lo, k * e.hi) : null,
+    verb: value > 0 ? 'arttı' : value < 0 ? 'azaldı' : 'değişmedi',
+  }
+}
+
 // Haftalık planın takvim cümlesi: henüz test yoksa ya da haftalık yolda alışma/başlangıç dönemindeyse
 export const eyeWhen = (eye) => eye?.phase === 'empty' || ((eye?.phase === 'familiarization' || eye?.phase === 'baseline') && eye?.baselineMode === 'weekly')
 
@@ -40,11 +55,14 @@ export default function FirstReport({ tests = [], sessions = [], start, onClose,
       <section className="card p2-card">
         <span className="eyebrow">Uygulamalardan sonra</span>
         {effects.length ? (
-          effects.map((e) => (
-            <p key={e.key} className="p2-msg">
-              <b>{e.label}</b> sonrası {e.measure} ortalama {e.better === 'down' ? 'azaldı' : 'arttı'}: {signed(e.better === 'down' ? -e.gain : e.gain)} ({e.n} oturum{e.n >= 3 && e.lo != null ? `, %95 GA ${num(e.lo)} – ${num(e.hi)}` : ''}) <span className={`p2-pill ${effectStatus(e).tone}`}>{effectStatus(e).text}</span>
-            </p>
-          ))
+          effects.map((e) => {
+            const c = changeOf(e)
+            return (
+              <p key={e.key} className="p2-msg">
+                <b>{e.label}</b> sonrası {e.measure} ortalama {c.verb}: {signed(c.value)} ({e.n} oturum{e.n >= 3 && c.lo != null ? `, %95 GA ${num(c.lo)} – ${num(c.hi)}` : ''}) <span className={`p2-pill ${effectStatus(e).tone}`}>{effectStatus(e).text}</span>
+              </p>
+            )
+          })
         ) : (
           <p className="p2-msg">Henüz öncesi–sonrası puanı yok. Nefes, Gökyüzü molası ya da Dalga'dan birini yap; önce ve sonra nasıl hissettiğini sorarız.</p>
         )}

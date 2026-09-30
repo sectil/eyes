@@ -201,6 +201,9 @@ function collect(modules, c) {
         warn: Boolean(it.warn),
         doneSub: typeof it.doneSub === 'string' ? it.doneSub : null,
         hideMinutes: Boolean(it.hideMinutes),
+        later: Boolean(it.later),
+        stage: it.stage ?? null,
+        yields: Boolean(it.yields),
         homeOrder: m.home?.order ?? 999,
       })
     }
@@ -288,13 +291,19 @@ export function buildPath(modules = [], ctx = {}) {
   }
   // R7: yol üst sınırı aşarsa Yılan / Hızlı Bakış → Bugünün görevi → Daire düşer
   const all = () => [...sec1, ...(rest ? [rest] : []), ...sec2, ...finale]
-  while (minSum(all()) > PATH.capMin && dropOne([sec2, finale, sec1])) {
+  // R7b: "yields" durak (Yoga) yol toplamına ancak geri kalan kurulduktan sonra girer; sığmazsa o gün yolda olmaz
+  // (tamamlanmış olsa da). Böylece hiçbir durağı düşürmez, yolu 20 dk'nın üstüne çıkarmaz.
+  const noYield = () => all().filter((s) => !s.yields)
+  while (minSum(noYield()) > PATH.capMin && dropOne([sec2, finale, sec1])) {
     // düşürmeye devam
   }
-  // R5: açık uçlu durak bölümünün son göz durağı
+  if (minSum(all()) > PATH.capMin) for (const list of [sec1, sec2, finale]) for (const s of list.filter((x) => x.yields)) list.splice(list.indexOf(s), 1)
+  // R5: açık uçlu durak bölümünün son göz durağı; ardından yalnız göz bütçesiz durak (Yoga) gelebilir
   for (const sec of [sec1, sec2]) {
     const k = sec.findIndex((s) => s.openEnded)
-    if (k >= 0 && k < sec.length - 1) sec.push(...sec.splice(k, 1))
+    if (k < 0) continue
+    const [o] = sec.splice(k, 1)
+    sec.splice(sec.findLastIndex((s) => s.budget) + 1, 0, o)
   }
   separateMeasures(sec1)
   separateMeasures(sec2)
@@ -319,11 +328,11 @@ export function buildPath(modules = [], ctx = {}) {
     s.lockLeftMs = s.locked ? lockLeftMs : null
   }
   // Sıradaki: yol sırasındaki ilk tamamlanmamış durak; o kilitliyse ilk tamamlanmamış molaya uygun durak (R8)
-  let next = stops.find((s) => !s.done && !s.finale) ?? stops.find((s) => !s.done) ?? null
+  let next = stops.find((s) => !s.done && !s.finale && !s.later) ?? stops.find((s) => !s.done && !s.later) ?? stops.find((s) => !s.done) ?? null
   if (next?.locked) next = stops.find((s) => !s.done && !s.budget) ?? next
   const doneCount = stops.filter((s) => s.done).length
   // VARSAYIM (yol planı §5.2): Bugünün görevi akşam raporu; açık kalsa da yol tamam sayılır
-  const core = stops.filter((s) => !s.finale)
+  const core = stops.filter((s) => !s.finale && !s.later)
   const allDone = stops.length > 0 && core.every((s) => s.done) && (core.length > 0 || stops.every((s) => s.done))
 
   // Önceden görülen kilit: kullanılan bütçeden başlayıp Nefes'e kadar göz dakikaları toplanır; bütçeyi

@@ -4,6 +4,7 @@ import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
 import { getTodayInsight } from '../lib/coach.js'
 import { coachAllowed } from '../lib/consent.js'
 import { weeklyStatus } from '../lib/today.js'
+import { isIOSApp } from '../lib/native.js'
 import CoachConsent from './CoachConsent.jsx'
 import '../styles/coach.css'
 
@@ -23,14 +24,17 @@ const ACTIONS = [
   [/^nefes/i, 'breath'],
   [/^çember/i, 'track'],
   [/^yılan/i, 'snake'],
+  [/^yoga/i, 'yoga'], // Yoga kütüphanesi (modul.md §8); yalnız iPhone uygulamasında düğme olur (actionTarget)
 ]
 export const screenFor = (action) => ACTIONS.find(([re]) => re.test(action ?? ''))?.[1] ?? null
 // Düğmenin açacağı ekran: haftalık test yalnız zamanı gelince açılır (lib/today.js weeklyStatus). Zamanı gelmemişken
 // (ör. çevrimiçi Nef hafta ortasında "Haftalık test" dediyse) eylem düğme olmaz, düz yazı kalır: tam haftalık testi
-// hafta ortasında açıp haftalık düzeni kaydırmasın.
-export function actionTarget(action, tests = [], now = new Date()) {
+// hafta ortasında açıp haftalık düzeni kaydırmasın. Yoga ilk yayında yalnız iPhone uygulamasında (PLAN.v3 §D.7): web'de
+// "Yoga" önerisi düğme olmaz.
+export function actionTarget(action, tests = [], now = new Date(), ios = isIOSApp()) {
   const target = screenFor(action)
   if (target === 'weekly' && !weeklyStatus(tests, now).due) return null
+  if (target === 'yoga' && !ios) return null
   return target
 }
 
