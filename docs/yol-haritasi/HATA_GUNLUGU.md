@@ -803,3 +803,19 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   geldin alt yazısı için ağır). Kurallar: ekran cümlesi önerilmeden önce koşuluyla birlikte koddan doğrulanır; hoş
   geldin alt yazısı yalnız yönlendirir, vaat ve açıklama taşımaz (ayrıntı izin ekranında ve gizlilik sayfasında).
   Eski sürüm notu ("profilin yeni telefonda da seninle") geçmiş kaydı olarak kaldı. Test: releases.test.js "Bug 32".
+
+## Bug 33: Gece 01.00–04.00 "kalk" bildirimleri (2026-09-30, sahibi: "gece saat 1'den 4'e kadar kalk bildirimleri geldi … saat 21'den sonra kalk mantıksız")
+## Durum: DÜZELTİLDİ (kod + test); cihazda görülecek
+- Kaynak: Mola ekranının sonundaki (ve Hatırlatmalar'daki) "Çalışma oturumu" 1, 2 ya da 4 saat için saat başı mola
+  bildirimi kuruyordu ("Bir saat oldu. Kalk, uzağa bak …", `lib/notifyPlan.js` TEXTS.focus). Öteki hatırlatmaların
+  09:00–21:00 penceresi (`reminders.WINDOW`) bu bildirimlere uygulanmıyordu; bildirimler `timeSensitive` kurulduğu için
+  Uyku ve Rahatsız Etme kiplerini de aşıyordu. Gece yarısı başlatılan 4 saatlik oturum 01.00, 02.00, 03.00 ve 04.00'te
+  bildirim gönderir. Kodda gece "kalk" diyebilen başka bildirim yolu yok (denetlenenler: `notifyPlan` öteki türleri
+  pencerede; `restNotify` "Mola bitti" ve deneme hatırlatması; `alarmNative`; Swift WalkGuard yalnız iptal eder).
+  VARSAYIM: sahibin gördüğü bildirimler bu yoldan geldi (bildirim metni sorulmadı).
+- Düzeltme: mola anları yalnız pencerede kurulur (`lib/focus.js` `inBreakWindow`, `breakTimes`; `notifyPlan` bunları
+  kullanır). Pencereye hiç mola sığmıyorsa oturum başlamaz (`focusFits`, `startFocus`) ve Mola ekranı oturum önermez;
+  Hatırlatmalar'da "Mola hatırlatmaları 09:00–21:00 arasında gelir; oturumu bu saatlerde başlatabilirsin." yazar.
+  Süren oturumun pencerede molası kalmadıysa sıradaki mola gösterilmez. Testler: `focus.test.js` ve
+  `notifyPlan.test.js` "Bug 33" (üç saat diliminde de geçti).
+- Genel kural (yeni bildirim planına, ayrı oturumda): gece hiçbir hareket bildirimi yok; her bildirim PubMed dayanaklı.

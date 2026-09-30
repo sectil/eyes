@@ -128,6 +128,19 @@ describe('planNotifications: atlama nedenleri', () => {
     const four = plan({ now, focus: { ...focus, hours: 4 } })
     expect(four.notifications.filter((n) => n.type === 'focus').map((n) => n.id)).toEqual([7500, 7501, 7502, 7503])
   })
+  it('Bug 33: çalışma oturumunun gece saatleri kurulmaz (yalnız 09:00–21:00)', () => {
+    // Gece yarısı başlatılmış 4 saatlik oturum: 01.00–04.00 "kalk" bildirimi yok
+    const night = plan({ now: new Date(2026, 8, 27, 0, 5), focus: { startedAt: new Date(2026, 8, 27, 0, 0).toISOString(), hours: 4 } })
+    expect(night.notifications.filter((n) => n.type === 'focus')).toEqual([])
+    // Akşam 20.00'de 4 saat: yalnız 21.00 (uç dahil); 22.00–24.00 kurulmaz
+    const eve = plan({ now: new Date(2026, 8, 27, 20, 0), focus: { startedAt: new Date(2026, 8, 27, 20, 0).toISOString(), hours: 4 } })
+    const f = eve.notifications.filter((n) => n.type === 'focus')
+    expect(f.map((n) => n.at.getTime())).toEqual([new Date(2026, 8, 27, 21, 0).getTime()])
+    expect(f.map((n) => [n.id, n.extra.k])).toEqual([[7500, 1]])
+    // Sabah 07.30'da 4 saat: 08.30 kurulmaz; 09.30, 10.30, 11.30 kimlikleriyle (k = 2..4)
+    const morn = plan({ now: new Date(2026, 8, 27, 7, 30), focus: { startedAt: new Date(2026, 8, 27, 7, 30).toISOString(), hours: 4 } })
+    expect(morn.notifications.filter((n) => n.type === 'focus').map((n) => [n.id, n.extra.k])).toEqual([[7501, 2], [7502, 3], [7503, 4]])
+  })
   it("bugün yapıldıysa (yalnız gün 0) 'doneBefore': mola/su habit, nefes ≥ 60 sn", () => {
     const now = new Date(2026, 8, 27, 10, 0)
     const habits = [

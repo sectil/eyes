@@ -8,7 +8,7 @@
 // burada saat kaydırılmaz.
 import { NUDGE_TYPES, TYPE_INDEX, WINDOW, WATER_LAST, normalizeReminders, toMinutes } from './reminders.js'
 import { dayKey, keyDay, habitsOn } from './habitLog.js'
-import { FOCUS_HOURS } from './focus.js'
+import { FOCUS_HOURS, breakTimes } from './focus.js'
 import { BREATH_DONE_SEC } from './notifyLog.js'
 import { isBreath } from './breath.js'
 import { WEEKDAYS, mondayIndex } from './calendar.js'
@@ -196,10 +196,11 @@ export function planNotifications({ now = new Date(), reminders, study = null, h
     }
   }
 
-  // Çalışma oturumu: k. saatte (k = 1..hours) mola; İş/Rahatsız Etme modunda da gelsin diye timeSensitive
+  // Çalışma oturumu: k. saatte (k = 1..hours) mola; İş/Rahatsız Etme modunda da gelsin diye timeSensitive. Yalnız
+  // gündüz penceresindeki saatler kurulur (Bug 33: gece 01.00–04.00 "kalk" bildirimi; focus.breakTimes).
   if (span) {
-    for (let k = 1; k <= span.hours; k++) {
-      const t = span.start + k * HOUR
+    for (const t of breakTimes(span.start, span.hours)) {
+      const k = Math.round((t - span.start) / HOUR)
       if (t <= nowMs) continue
       notifications.push({ id: FOCUS_ID + k - 1, at: new Date(t), type: 'focus', ...textFor('focus', dayKey(t), k - 1), extra: { kind: 'focus', k }, level: 'timeSensitive' })
     }

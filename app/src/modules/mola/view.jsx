@@ -3,7 +3,7 @@ import { PersonStanding, Footprints, MountainSnow, Eye, Check, SkipForward, Hous
 import { Citation } from '../../components/Sources.jsx'
 import { sourceOf } from '../../lib/sources.js'
 import { addHabit, loadHabits, habitsOn, dayKey } from '../../lib/habitLog.js'
-import { loadFocus, startFocus, FOCUS_HOURS } from '../../lib/focus.js'
+import { loadFocus, startFocus, focusFits, FOCUS_HOURS } from '../../lib/focus.js'
 import { cue } from '../../lib/cue.js'
 import '../../styles/sources.css'
 import './mola.css'
@@ -105,12 +105,12 @@ function Mola({ block = null, onSkip, onSaved, onHome, onReminders }) {
           <p className="mo-text">Kaydedildi. Hazır olduğunda devam edebilirsin.</p>
         </div>
         <div className="mo-foot">
-          {focus ? (
+          {focus?.nextBreakAt ? (
             <div className="card tone-accent mo-focus" aria-live="polite">
               <strong>{started ? 'Çalışma oturumu başladı' : 'Çalışma oturumu sürüyor'}</strong>
               <span className="small">Sıradaki mola {hhmm(focus.nextBreakAt)}</span>
             </div>
-          ) : block === 'off' ? (
+          ) : !focusFits() ? null /* Bug 33: gündüz penceresine mola sığmıyor (gece); oturum önerilmez */ : block === 'off' ? (
             <section className="card mo-focus" aria-label="Çalışma oturumu">
               <strong>Çalışmaya dönüyorsan: Çalışma oturumu</strong>
               <span className="muted small">Saatte bir mola bildirimi gelir. Bunun için önce hatırlatmaları aç.</span>

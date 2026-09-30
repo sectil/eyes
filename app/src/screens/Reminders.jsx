@@ -2,8 +2,8 @@ import { useEffect, useId, useRef, useState } from 'react'
 import { Bell, BellOff, Eye, Footprints, Wind, GlassWater, CalendarDays, Clock, ChevronRight, Info, Timer } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
 import PrefToggle from '../components/PrefToggle.jsx'
-import { NUDGE_TYPES, TYPE_LABEL, normalizeReminders, timeError, behaviorCount } from '../lib/reminders.js'
-import { FOCUS_HOURS } from '../lib/focus.js'
+import { NUDGE_TYPES, TYPE_LABEL, WINDOW, normalizeReminders, timeError, behaviorCount } from '../lib/reminders.js'
+import { FOCUS_HOURS, breakTimes, focusFits } from '../lib/focus.js'
 import { WEEKDAYS } from '../lib/calendar.js'
 import '../styles/reminders.css'
 
@@ -38,14 +38,15 @@ function studyLabel(study) {
 }
 
 // Süren oturumun bitişi ve sıradaki mola anı. Sıradaki mola her saat yeniden hesaplanır (App'in verdiği
-// nextBreakAt açılış anına göre; ekran açık kaldıkça eskir). Bitmişse null.
+// nextBreakAt açılış anına göre; ekran açık kaldıkça eskir). Bitmişse ya da gündüz penceresinde mola kalmadıysa
+// (Bug 33) null.
 function focusTimes(focus, now) {
   const start = Date.parse(focus?.startedAt)
   if (!Number.isFinite(start) || !FOCUS_HOURS.includes(focus.hours)) return null
   const end = start + focus.hours * HOUR
   if (now >= end) return null
-  const k = Math.min(focus.hours, Math.max(1, Math.floor((now - start) / HOUR) + 1))
-  return { end, nextBreak: start + k * HOUR }
+  const nextBreak = breakTimes(start, focus.hours).find((t) => t > now)
+  return nextBreak == null ? null : { end, nextBreak }
 }
 
 // İzin durumu: yalnız bir şey yapılması gerekiyorsa görünür (izin verilmişse satır yok)
@@ -127,6 +128,13 @@ function FocusCard({ focus, permission = null, onStart, onStop }) {
       return (
         <div className="card">
           <p className="small rem-focus-lead">Saatte bir mola hatırlatması gelir. Bildirimler açılınca başlatabilirsin.</p>
+        </div>
+      )
+    }
+    if (!focusFits(now)) {
+      return (
+        <div className="card">
+          <p className="small rem-focus-lead">{`Mola hatırlatmaları ${WINDOW.from}–${WINDOW.to} arasında gelir; oturumu bu saatlerde başlatabilirsin.`}</p>
         </div>
       )
     }
