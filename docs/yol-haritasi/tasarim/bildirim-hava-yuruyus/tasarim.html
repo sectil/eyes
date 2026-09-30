@@ -712,7 +712,7 @@ body.w320 .dt-art { height: 90px; }
   <div class="sec-head">
     <span class="sec-num">2 · Profil → Bildirimler</span>
     <h2>Günün bildirimleri tek çizgide, hiçbiri üst üste değil</h2>
-    <p class="sec-lead">Üstte bugünün çizelgesi: her bildirim bir nokta, gece bölümü sessiz. Altında her hatırlatma tek satır ve tek anahtar. Aynı yarım saate düşen iki hatırlatma tek bildirimde birleşir.</p>
+    <p class="sec-lead">Üstte Nef sıradaki bildirimi söyler. Altında hatırlatmaların ve Nef'in haberleri: her biri tek satır, saat ve tek anahtar. En altta gece sessizliği. Bildirimler arasında kurulumda en az bir saat aranır; deney hatırlatmaları hiçbir zaman birleşmez.</p>
   </div>
   <div class="strip" data-screens="notif"></div>
 </section>
@@ -889,33 +889,6 @@ body.w320 .dt-art { height: 90px; }
     <div class="scr">
       <span class="back"><svg class="ico"><use href="#i-back"/></svg>Profilim</span>
       <div class="h1-a">Bildirimler</div>
-      <div class="card-a tl">
-        <div class="tl-h"><b>Bugünün düzeni</b><span>Hiçbiri üst üste değil</span></div>
-        <div class="tl-chips"><span class="w">06.10 Hava</span><span>09.15 Nefes</span><span>10.00 Göz</span><span>12.30 Mola</span><span>13.30 Göz</span><span>18.00 Göz</span></div>
-        <div class="tl-next"><span class="nefdot"></span><p>Sıradaki: <b>10.00 Göz egzersizi</b>.</p></div>
-      </div>
-      <div class="grp">
-        <div class="grp-h">Modüllerin</div>
-        <div class="card-a rows">
-          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-wave"/></svg></span><div><b>Nefes</b><span class="mono">09.15 · <em>Nef seçti</em></span></div><span class="tg on"></span></div>
-          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-eye"/></svg></span><div><b>Göz egzersizleri</b><span class="mono">10.00 · 13.30 · 18.00</span></div><span class="tg on"></span></div>
-          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-stand"/></svg></span><div><b>Mola</b><span class="mono">12.30</span></div><span class="tg on"></span></div>
-          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-rain"/></svg></span><div><b>Sabah havası</b><span>Alarmından 10 dk sonra</span></div><span class="tg on"></span></div>
-          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><div><b>Yürüyüş eşliği</b><span>Yürürken sorar</span></div><span class="tg on"></span></div>
-          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><div><b>Yürürken beni fark et</b><span>Kapalı · konum telefonda kalır</span></div><span class="tg"></span></div>
-        </div>
-      </div>
-      <div class="card-a rows"><div class="row-a"><span class="ri"><svg class="ico"><use href="#i-moon"/></svg></span><div><b>Gece sessizliği</b><span class="mono">23.00–07.00 · değiştir</span></div><svg class="ico chev"><use href="#i-chev"/></svg></div></div>
-    </div>
-  </div>
-</template>
-
-<template id="tpl-notif-a">
-  <div class="phone">
-    <div class="sb"><span>09:40</span><i>●●● <s></s></i></div>
-    <div class="scr">
-      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Profilim</span>
-      <div class="h1-a">Bildirimler</div>
       <div class="tl-next"><span class="nefdot"></span><p>Sıradaki: <b>10.00 Göz egzersizi</b>. Hiçbiri üst üste gelmez.</p></div>
       <div class="grp">
         <div class="grp-h">Hatırlatmaların</div>
@@ -931,48 +904,6 @@ body.w320 .dt-art { height: 90px; }
           <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-rain"/></svg></span><div><b>Sabah havası</b><span>Alarmından 10 dk sonra</span></div><span class="tg on"></span></div>
           <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><div><b>Yürüyüş eşliği</b><span>Yürüdüğünde sorar</span></div><span class="tg on"></span></div>
         </div>
-      </div>
-      <div class="card-a rows"><div class="row-a"><span class="ri"><svg class="ico"><use href="#i-moon"/></svg></span><div><b>Gece sessizliği</b><span>23.00–07.00</span></div><svg class="ico chev"><use href="#i-chev"/></svg></div></div>
-    </div>
-  </div>
-</template>
-
-<template id="tpl-notif-b">
-  <div class="phone">
-    <div class="sb"><span>09:40</span><i>●●● <s></s></i></div>
-    <div class="scr">
-      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Profilim</span>
-      <div class="h1-a">Bildirimler</div>
-      <div class="card-a nb-today">
-        <div class="nb-h"><b>Bugün sırada</b><span>Hiçbiri üst üste gelmez</span></div>
-        <div class="nb-row next"><b>10.00</b><span>Göz egzersizi</span></div>
-        <div class="nb-row"><b>12.30</b><span>Mola</span></div>
-        <div class="nb-row"><b>13.30</b><span>Göz egzersizi</span></div>
-        <div class="nb-row"><b>18.00</b><span>Göz egzersizi</span></div>
-      </div>
-      <div class="card-a rows big">
-        <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-bell"/></svg></span><div><b>Hatırlatmalarım</b><span>Nefes, göz egzersizleri, mola</span></div><svg class="ico chev"><use href="#i-chev"/></svg></div>
-        <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-rain"/></svg></span><div><b>Nef'in haberleri</b><span>Sabah havası, yürüyüş eşliği</span></div><svg class="ico chev"><use href="#i-chev"/></svg></div>
-        <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-moon"/></svg></span><div><b>Gece sessizliği</b><span>23.00–07.00</span></div><svg class="ico chev"><use href="#i-chev"/></svg></div>
-      </div>
-    </div>
-  </div>
-</template>
-
-<template id="tpl-notif-c">
-  <div class="phone">
-    <div class="sb"><span>09:40</span><i>●●● <s></s></i></div>
-    <div class="scr">
-      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Profilim</span>
-      <div class="h1-a">Bildirimler</div>
-      <p class="nc-lead">Hiçbiri üst üste gelmez. Birine dokun, saatini değiştir.</p>
-      <div class="nc-grid">
-        <div class="nc on"><span class="ri"><svg class="ico"><use href="#i-wave"/></svg></span><b>Nefes</b><strong>09.15</strong></div>
-        <div class="nc on"><span class="ri"><svg class="ico"><use href="#i-eye"/></svg></span><b>Göz</b><strong>3 kez</strong></div>
-        <div class="nc on"><span class="ri"><svg class="ico"><use href="#i-stand"/></svg></span><b>Mola</b><strong>12.30</strong></div>
-        <div class="nc on"><span class="ri"><svg class="ico"><use href="#i-rain"/></svg></span><b>Sabah havası</b><strong>06.10</strong></div>
-        <div class="nc on"><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><b>Yürüyüş</b><strong>Açık</strong></div>
-        <div class="nc add"><span class="ri"><svg class="ico"><use href="#i-bell"/></svg></span><b>Ekle</b><strong>+</strong></div>
       </div>
       <div class="card-a rows"><div class="row-a"><span class="ri"><svg class="ico"><use href="#i-moon"/></svg></span><div><b>Gece sessizliği</b><span>23.00–07.00</span></div><svg class="ico chev"><use href="#i-chev"/></svg></div></div>
     </div>
@@ -1166,7 +1097,7 @@ body.w320 .dt-art { height: 90px; }
     sheet: [['tpl-sheet-auto', 'Saat · Sen karar ver', 'Nef saati kişinin kendi kayıtlarından seçer ve nedenini söyler. Veri yoksa başlangıç saati verir.'],
             ['tpl-sheet-manual', 'Saat · Ben seçeyim', 'Günde en çok 3 saat. Çakışma anında söylenir; iki bildirim hiçbir zaman aynı anda gelmez.']],
     reenter: [['tpl-reenter', 'Yeniden giriş', 'Üstte hatırlatma hapı (dokununca saat sayfası), Nef\'in kişisel cümlesi, bugünkü nefes ve Başla.']],
-    notif: [['tpl-notif', 'Profil → Bildirimler', 'Günün çizelgesi, hatırlatmalar, Nef\'in haberleri. Satıra dokununca saat sayfası.']],
+    notif: [['tpl-notif', 'Profil → Bildirimler', 'Üstte sıradaki bildirim; altında hatırlatmaların ve Nef\'in haberleri, her biri tek anahtarla; gece sessizliği. Satıra dokununca saat sayfası. (5 saniye: üç yön arasından 5/5.)']],
     home: [['tpl-home', 'Ana sayfa · hava satırı', 'Adımların üstünde tek kart: il, ilçe, sıcaklık, yağmur saati; sağda Apple Weather ve Veri kaynakları bağlantısı (Apple kuralı). 320 pt\'de il adı düşer, ilçe kısalmaz.']],
     wx: [['tpl-wx', 'Hava sayfası', 'Saat saat sıcaklık ve yağmur olasılığı, Nef\'in yorumu, sabah havası anahtarı, atıf.']],
     walk: [['tpl-lockwalk', 'Yürüyüş sorusu', 'Kilit ekranında. Dokununca yürüyüş ekranı açılır, son 15 dakika yürüyüşe eklenir.'],

@@ -283,13 +283,12 @@ kalır; `moduleReminders[tür]` yalnız `mode` ile 2. ve 3. saati (`times`) tuta
 - **Yer:** Profilim'de Alarm bölümünden sonra (`screens/ProfileHome.jsx`); veriyi App, alarm özetinin kalıbıyla hazırlar.
   Bugünkü Hatırlatmalar ekranı (`screens/Reminders.jsx`) deney türlerinin ve çalışma oturumunun ayrıntı ekranı olarak
   kalır; tek değişikliği dönüş yerinin parametreye bağlanması.
-- **Üstte günün düzeni:** 06–24 arası tek çizgi; her bildirim bir nokta; gece bölümü taralı. Başlık: *"Bugünün düzeni ·
-  Hiçbiri üst üste değil"*; altında Nef: *"Sıradaki: 12.30 Mola. Aralarında en az yarım saat var."* (Tur 1: "Bugün 7
-  bildirim" sayısı bildirimden bıkmış kişiyi korkuttu; saat çipleri çizgiyi tekrar ediyordu.) 60 dakikadan yakın iki nokta
-  sayılı tek noktada birleşir (her genişlikte).
-- **Liste:** telefonun kurabildiği her bildirim kaynağı bir kez görünür. "Modüllerin" (yol, her "Bana hatırlat", deney
-  türleri de kendi modülüyle; saat, "Nef seçti" ya da "senin saatin", anahtar), "Nef'in haberleri" (Sabah havası, Yürüyüş
-  eşliği, Yürürken beni fark et), "Değiştirilemeyenler" (Alarm → Profil'deki Alarm; deneme raporu; gri, nedeniyle),
+- **Üstte:** Nef'in tek satırı: *"Sıradaki: 10.00 Göz egzersizi. Hiçbiri üst üste gelmez."* Zaman çizgisi ve saat
+  çipleri kullanılmaz (5 saniye tur 6–7: iki kez kaldı; tur 8'de üç yön arasından bu düzen 5/5 ile seçildi, `5sn-tur8.md`).
+- **Liste:** telefonun kurabildiği her bildirim kaynağı bir kez görünür. "Hatırlatmaların" (yol, her "Bana hatırlat",
+  deney türleri de kendi modülüyle; saat düz yazıyla, "Her gün 09.15 · Nef seçti" ya da "10.00, 13.30 ve 18.00", anahtar),
+  "Nef'in haberleri" (Sabah havası, Yürüyüş eşliği; "Yürürken beni fark et" ayrı satır değildir, Yürüyüş eşliği'nin
+  ayrıntı sayfasındadır, çünkü iki satır karıştırıldı), ilk bakışın altında: "Değiştirilemeyenler" (Alarm → Profil'deki Alarm; deneme raporu; gri, nedeniyle),
   "Gece sessizliği" (saatler; sessizliğe düşen deney saati uyarısı), "Kilit ekranında sayı gösterme" (kapsamı: yürüyüş
   sorusundaki mesafe ve sabah havasındaki yer adı). "Yürürken beni fark et" satırının altında iOS'un "arka planda konum
   kullandı" uyarısına karşılık tek cümle: *"Yürüdüğünü fark etmek için; konumun telefonda kalır."* Satıra dokununca saat sayfası açılır; kapatılan satır
@@ -761,7 +760,7 @@ kişi sayısı doğrulanmamış satır yayına girmez.
 | Ekran | Durumlar |
 |---|---|
 | Kart ve saat sayfası | veri yok, veri var, iki saat önerisi, çakışma uyarısı, pencere dışı, izin yok, izin reddedildi, legacy tür, kurulu hap, izin sonradan kapatılmış hap, yol kartı |
-| Bildirimler | ana anahtar kapalı, hiç hatırlatma yok (1. gün), bir hatırlatma, on hatırlatma, gece sessizliği değişmiş, 320 pt'de birleşen noktalar |
+| Bildirimler | ana anahtar kapalı, hiç hatırlatma yok (1. gün), bir hatırlatma, on hatırlatma, gece sessizliği değişmiş, sessizliğe düşen deney saati, 320 pt |
 | Ana sayfa hava satırı | teklif, önbellek yok, önbellek eski, yağmurlu, yağmursuz, en uzun ilçe adı, en büyük yazı, iOS 15 |
 | Hava sayfası | dört veri durumu, sabah havası açık ve kapalı |
 | Yürüyüş ekranı | `walk` rızası yok, Hareket izni yok, konum yok, kesin konum yok, duraklatıldı, kilit ekranı, bitiş özeti ("Sağlık güncelleniyor" dâhil), yarım kalan yürüyüş |
@@ -903,3 +902,18 @@ doğru makaleye gidiyor (`elestiri-dogruluk.md`).
   Sesli koç 4, Açıklama sayfası 5, Bilim kartı 4; fark et teklifi iki kez kaldı (1/5, 2/5). Yöntem değişti (`5sn-tur5.md`):
   üç yön, beş değerlendirici A'yı seçti (3/5); A inceltildi ve beş yeni değerlendiriciyle 5/5 geçti. PubMed denetimi
   (`arastirma/pubmed-bilim-satirlari.md`): 16 bilim satırı düzeltildi (§3.A "PubMed denetimi").
+- Tur 2 (2026-09-30, sahibin "başla"sından sonra): iki bağımsız eleştiri, `elestiri-tur2-dogruluk.md` (7 yüksek, 15 orta,
+  12 düşük) ve `elestiri-tur2-eksiklik.md` (≈ 45 bulgu). İşlenenler: gece saatleri tek tabloda (varsayılan 23–07, sabah
+  havası istisnası, 01–05 mutlak, ayar yalnız yeni kaynaklara); kurulumda 60, planlamada 30 dk; deney bildirimi asla
+  birleşmez; legacy ek saatleri (kimlik, zar, `notify-slots`, "son 2 saat", WalkGuard); `optIn` ve varsayılan mola;
+  Swift'in bildirimleri için ayrı iptal kümesi; bildirim kategorileri ve `actionId`; `remind` hatasının modülü
+  düşürmemesi; eşdeğerlik düzeneği (taban, üreteç, iki katman); B1a/B1b; sabah havası 2. katmanında yer, biçim ve
+  eklenti çağrıları; ses parçaları (ek almayan cümleler, ≈ 66, mevcut ses paketi düzeni, ses seçimi Profilim'de); veri
+  merkezine `loadHubHabits` yoluyla giriş; `walk` + `health` rızası; üç rıza taslağı (`rizalar-taslak.md`); fark et
+  teklifinde kime, ne zaman, rıza sayfası (HIG yasal rıza istisnası), izin durum makinesi; App Store derleme bayrağı;
+  App Review notu taslağı; bilerek değişen dört test; durum çizelgesi ve cihaz listesi eklemeleri; örnek metin ve
+  karakter düzeltmeleri; Türkçe düzeltmeler. **Sahibe soruldu:** B3'ün "Kullanırken" konumla hukukçudan önce çıkması.
+  Fark et izin teklifinin bilim kartı istisnası VARSAYIM olarak sahibe bildirildi.
+- 5 saniye tur 6–8 (`5sn-tur6.md`, `5sn-tur8.md`): değişen yedi ekranın dördü ilk seferde geçti (sabah havası 5,
+  yürüyüş ekranı 5, sesli koç 5, fark et bildirimi 4); saat sayfası ve rıza sayfası düzeltilip 4/5 ile geçti;
+  Bildirimler iki kez kaldı, yöntem değişti, üç yön arasından seçilen düzen 5/5.
