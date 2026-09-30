@@ -309,3 +309,221 @@ ve tek cümle gerekçe yaz: (1) doğal Türkçe (çeviri kokusu, anlatım bozukl
 Yargıç için model seçimi: üretici Google ailesiyse yargıç başka aileden (örn. `anthropic/claude-haiku-4.5` ya da
 `mistralai/mistral-small-2603`). Gerekçe: aynı ailenin kendi kalıbını beğenme eğilimi (VARSAYIM; bakmadım).
 
+### 2.5 Örnekler: girdi → çıktı (elle yazıldı; başlık ≤ 30, gövde ≤ 110 karakter; uzunluklar doldurulmuş hâliyle sayıldı)
+
+Girdi, kural motorunun telefonda kurduğu veri nesnesidir; bankadaki yer tutuculu cümle bu veriyle doldurulur. Rakamlar
+yalnız girdiden gelir. Karakter sayıları Python `len` ile sayıldı.
+
+**Hava (yağmur) — kurulma saati A8'e göre sabah ya da önceki akşam**
+
+| # | Girdi (telefonda) | Başlık | Gövde | B/G |
+|---|---|---|---|---|
+| W1 | rain 21.00–22.00, %70, walkHabit 19.00 (before), planned morning | Yağmur 21.00'de | Bugün 21.00–22.00 arası yağmur bekleniyor. Yürüyüşü 21.00'den önce bitirirsen şemsiyeye gerek kalmayabilir. | 15/107 |
+| W2 | rain 14.00–17.00, %80, walkHabit none | Bugün yağmur bekleniyor | 14.00–17.00 arası yağmur bekleniyor. Çıkarken şemsiyeyi çantana koymayı unutma. | 23/79 |
+| W3 | rain 09.00–20.00 (allday), %90 | Gün boyu yağmur | 09.00–20.00 arası yağmur bekleniyor. Yürüyüş bugün içeride de olur: koridor turu da adımdır. | 15/92 |
+| W4 | rain 16.00–18.00, planned evening (dün 21.10'da kuruldu) | Bugün yağmur bekleniyor | Dün akşamki tahmine göre 16.00–18.00 arası yağmur var. Dönüş için şemsiyeni kapının yanına bırak. | 23/97 |
+| W5 | rain 11.00–12.00 (short), %60 | Kısa bir yağmur | Bugün 11.00–12.00 arası kısa bir yağmur bekleniyor. Öğle yürüyüşünü 12.00'den sonraya alabilirsin. | 15/98 |
+| W6 | rain 18.00–20.00, tMin 9 (soğuk) | Yağmur ve 9 derece | Bugün 18.00–20.00 arası yağmur ve 9 derece bekleniyor. Akşama şemsiye ve kalın bir kat iyi gider. | 18/97 |
+| W7 | rain 19.00–21.00, walkHabit 18.00 (before) | Yağmur 19.00'da | Bugün 19.00–21.00 arası yağmur bekleniyor. Her zamanki 18.00 yürüyüşün yağmurdan önceye denk geliyor. | 15/101 |
+| W8 | rain 17.00–19.00, walkHabit 18.00 (at) | Yağmur yürüyüş saatinde | Bugün 17.00–19.00 arası yağmur bekleniyor, yürüyüş saatine denk geliyor. İstersen 17.00'den önce çık. | 23/101 |
+| W9 | rain 15.00–16.00, %50 (borderline) | Yağmur olasılığı %50 | Bugün 15.00–16.00 arası yağmur olasılığı %50. Yazı tura gibi; küçük bir şemsiye çantada yer tutmaz. | 20/99 |
+| W10 | rain 13.00–23.00 (long), Gökyüzü modülü açık | Uzun bir yağmur | Bugün 13.00–23.00 arası yağmur bekleniyor. Yağmuru pencereden izlemek de bir Gökyüzü molası olur. | 15/97 |
+
+Notlar: W1 ve W7'de "yürüyüş saati" kişinin sağlık verisinden telefonda türetilir; kilit ekranında adım sayısı değil
+yalnız bir saat görünür (§5.3). W2'de ilk cümle "Bugün" ile başlamaz çünkü başlıkta var (tekrar süzgeci). W9'daki
+"yazı tura" yalnız olasılık tam %50 iken seçilebilen hücrededir. W10 plan §E.7'deki bağlam satırıyla ("Yağmur varsa
+yürüyüşünü içeride de yapabilirsin.") aynı çizgide; "Gökyüzü molası" yalnız modül açıksa seçilir.
+
+**Yürüyüş algılama — başlık sabit "Yürüyüşe mi çıktın?" (19 karakter)**
+
+| # | Girdi (telefonda) | Gövde | G |
+|---|---|---|---|
+| D1 | hissedilen 23, walk.good (sahibin örneği) | Hava 23 derece, ılık ve yürüyüş için güzel. Sana eşlik edelim mi? | 65 |
+| D2 | 12, serin | Hava 12 derece, serin. Tempoyu ilk dakikalarda sen belirle. Sana eşlik edelim mi? | 81 |
+| D3 | 28, sıcak | Hava 28 derece, sıcak. Gölgeli yolu seçebilirsin, suyun yanında olsun. Eşlik edelim mi? | 87 |
+| D4 | 16, serin, rain 19.00 (≤ 2 sa) | Hava 16 derece, serin; 19.00'da yağmur bekleniyor. Kısa bir tur için tam zamanı. Eşlik edelim mi? | 97 |
+| D5 | 20, ılık, sunset 19.12 (≤ 1 sa) | Hava 20 derece, ılık. Güneş 19.12'de batıyor; dönüş aydınlıkta kalsın. Eşlik edelim mi? | 87 |
+| D6 | hava yok ya da bayat (walk.noWeather) | Sana eşlik edelim mi? Dokunursan sesli yürüyüş başlar, yürüyüşün kaydına düşer. | 79 |
+| D7 | 8, soğuk | Hava 8 derece, soğuk. Eldivenin yanındaysa tam yürüyüş havası. Eşlik edelim mi? | 79 |
+| D8 | 22, ılık, dün de yürüdü (sayı yok) | Hava 22 derece, ılık. Dünkü yürüyüşün gibi bir gün. Bugün de eşlik edelim mi? | 77 |
+| D9 | 16, serin, rüzgâr ≥ 30 km/sa | Hava 16 derece, serin ve rüzgârlı. Dönüşü rüzgârı arkana alarak planla. Eşlik edelim mi? | 88 |
+| D10 | 19, yağmur 17.00'de dindi (afterRain) | Yağmur 17.00'de dindi, hava 19 derece. Islak zeminde adımlarını kısa tut. Eşlik edelim mi? | 90 |
+
+Not: D10'daki "adımlarını kısa tut" bir güvenlik ipucudur, sağlık iddiası değildir; yine de sahibin onay listesinde ayrıca
+işaretlenmeli (VARSAYIM: kabul edilebilir). D8 kişinin dünkü yürüyüşünü sayı vermeden anar.
+
+**Modül hatırlatmaları — kişinin seçtiği saatte**
+
+| # | Girdi (telefonda) | Başlık | Gövde | B/G |
+|---|---|---|---|---|
+| M1 | breath, stage 4, 3 dk | Nefes · 4. basamak | Bugün nefes 3 dakika. Omuzlarını bırak, gerisini birlikte sayarız. | 18/66 |
+| M2 | blink, 20 sn set | Kırpma zamanı | Başını ekrandan kaldır; 20 saniyelik kırpma seti hazır. Dokun, birlikte yapalım. | 13/80 |
+| M3 | gapDays 5, breath stage aynı, 2 dk | Kaldığın yerden | 5 gün ara verdin; basamağın aynı. Bugün nefes 2 dakika, hazırsan başlayalım. | 15/76 |
+| M4 | weekly due, tahmini 3 dk | Haftalık E testi günü | Bugün haftalık E testinin günü. Aydınlık bir yer seç; yaklaşık 3 dakika sürer. | 21/78 |
+| M5 | snake, dün rekor 38 | Yılan seni bekliyor | Dün 38 puanla rekorunu yeniledin. Bugün yalnız keyfine bir tur? | 19/63 |
+| M6 | who5 due (5 soru, ≈ 1 dk) | İyi oluş soruları | 5 soru, yaklaşık 1 dakika. Hazırsan bugün sorulara birlikte bakalım. | 17/68 |
+| M7 | gokyuzu, hava önbelleği "açık" | Gökyüzü molası | Dışarıda gökyüzü açık. 2 dakika ufka bak; önce ve sonra nasıl hissettiğini yaz. | 14/79 |
+| M8 | unlocked: routine "Daire", 1 dk | Bugün yeni: Daire | Göz egzersizlerine daire hareketi eklendi. İlk tur 1 dakika; dokun, gösterelim. | 17/79 |
+| M9 | iris recheckDue (28. gün) | 28. gün | İris haritan bugün başlangıcınla yan yana geliyor. Bakmak 1 dakika sürer. | 7/73 |
+| M10 | track, streakDays 3 | Çemberler | 3 gündür Çemberler'desin. Bugünkü tur da hazır; seçim senin. | 9/60 |
+
+Not: onaylı plan metinlerinde sayılar kimi yerde yazıyla ("Beş gün ara verdin", §C.4). Bildirimde sayıyı rakamla yazmak
+öneridir (VARSAYIM): denetimde rakam eşleşmesi kolaylaşır, kilit ekranında hızlı okunur. Sahibin kararı gerekir (§8).
+M7'de hava bilgisi başka bir modülün bildirimine girer; hava telefonda kaldığı için gizlilik açısından sorun yoktur.
+M4 ve M9 plan §F.4'teki kilometre taşlarıyla aynı olayı anlatır; aynı gün hem bildirim hem Ana sayfa satırı çıkarsa
+cümle aynı olmalı (tek kaynak: aynı banka öğesi).
+
+---
+
+## 3. Metin kuralları
+
+### 3.1 Uzunluk ve görünürlük
+
+- Apple İnsan Arayüzü Kılavuzu bildirim başlığı ve gövdesi için karakter sayısı vermiyor (bu oturumda bakılan belgelerde
+  yok; **VARSAYIM**). Yaygın gözlem: kilit ekranında başlık 1 satır (390 pt genişlikte varsayılan yazı boyutunda ≈ 30–35
+  karakter), gövde kapalı banner ya da yığında 2 satır (≈ 80–90 karakter), açılınca 4 satıra kadar (VARSAYIM). Büyük
+  Dinamik Yazı boyutunda satır başına karakter düşer.
+- Kural: başlık ≤ 30, gövde ≤ 110; **olgu (saat, sıcaklık) ilk 60 karakterde**, Nef notu sonra. Kesilirse kaybolan Nef notu
+  olur, olgu değil.
+- WeatherKit atıfı ("Kaynak: Apple Weather") bildirime konacaksa (plan §E.6, App Review cevabına bağlı) gövdenin sonuna
+  gelir ve sınıra sayılır; o zaman Nef notu ≤ 85 karakter (VARSAYIM).
+- Başlık ile gövde aynı bilgiyi iki kez söylemez ("Bugün yağmur bekleniyor" başlığında gövde "Bugün" ile başlamaz).
+- iOS'un `subtitle` alanı (UNNotificationContent) var; Capacitor Local Notifications'ın bunu geçirip geçirmediğine
+  bakmadım. "Nef" imzasını başlığa eklemek yer yer; imza gerekmez, çünkü uygulama adı zaten üstte görünür.
+
+### 3.2 Türkçe ses uyumu: saat ekleri
+
+Ek, saatin **okunuşuna** göre gelir: son sözcüğün son ünlüsü (a, ı, o, u → a; e, i, ö, ü → e) ve son sesin sertliği
+(ç, f, h, k, p, s, ş, t → t-). Dakika 00 ise saat okunur ("21.00" = yirmi bir), değilse dakika okunur ("19.12" = on iki,
+"17.30" = otuz). Yönelmede ünlüyle biten sözcükte kaynaştırma y'si gelir ("12.00'ye"). Kesme işareti ve nokta TDK
+yazımıdır ("21.00'de"). Aralık kısa tireyle ("21.00–22.00 arası"; plan metinleriyle aynı).
+
+| Saat (okunuş) | Bulunma | Ayrılma | Yönelme |
+|---|---|---|---|
+| 00.00 (sıfır) | 00.00'da | 00.00'dan | 00.00'a |
+| 01.00 bir · 11.00 on bir · 21.00 yirmi bir | 'de | 'den | 'e |
+| 02.00 iki · 12.00 on iki · 22.00 yirmi iki | 'de | 'den | 'ye |
+| 03.00 üç · 13.00 on üç · 23.00 yirmi üç | 'te | 'ten | 'e |
+| 04.00 dört · 14.00 on dört | 'te | 'ten | 'e |
+| 05.00 beş · 15.00 on beş | 'te | 'ten | 'e |
+| 06.00 altı · 16.00 on altı | 'da | 'dan | 'ya |
+| 07.00 yedi · 17.00 on yedi | 'de | 'den | 'ye |
+| 08.00 sekiz · 18.00 on sekiz | 'de | 'den | 'e |
+| 09.00 dokuz · 19.00 on dokuz | 'da | 'dan | 'a |
+| 10.00 on | 'da | 'dan | 'a |
+| 20.00 yirmi | 'de | 'den | 'ye |
+| Dakika: 05 beş, 15 on beş, 25/35/45/55 … beş | 'te | 'ten | 'e |
+| 10 on, 30 otuz | 'da | 'dan | 'a |
+| 20 yirmi, 50 elli | 'de | 'den | 'ye |
+| 40 kırk | 'ta | 'tan | 'a |
+| 12 on iki (19.12) | 'de | 'den | 'ye |
+
+Bu tablo kodda 60 dakikalık tam bir okunuş işlevine dönüşür (sayı → okunuş → ek); birim testi tablodaki her satırı ve
+0–59 dakikayı dener. Sıcaklıkta ek gerekmez ("23 derece"); eksi değer "eksi 3 derece" yazılır ("-3 derece" değil; ekran
+okuyucu için). Yüzde: "%70" (TDK), ek gerekirse "%70'lik".
+
+### 3.3 Sıcaklık sözcükleri (hissedilen sıcaklığa göre; eşikler VARSAYIM)
+
+| Hissedilen (°C) | Sözcük | İzinli nesne notu |
+|---|---|---|
+| ≤ 4 | soğuk | eldiven, atkı, kalın kat |
+| 5–11 | soğuk | kalın kat |
+| 12–17 | serin | ince kat |
+| 18–24 | ılık | — |
+| 25–29 | sıcak | gölge, su |
+| ≥ 30 | çok sıcak | gölge, su; "serin saatleri seç" (korkutma yok) |
+
+"Yürüyüş için güzel" ancak `walk.good` hücresinde: önümüzdeki 2 saatte yağmur yok, hissedilen 12–27, rüzgâr < 30 km/sa
+(VARSAYIM). Sahibin örneğindeki "23 derece, ılık ve yürüyüş için güzel" bu tabloyla tutarlı. Eşikler sahada ayarlanır;
+Türkiye'nin iklim farkı (Erzurum ile Antalya) için kişinin son 30 günlük ortalamasına göre kaydırma ilk sürümde yapılmaz.
+
+### 3.4 "Zeki cümle" türleri
+
+| Tür | Tanım | Örnek | Koşul |
+|---|---|---|---|
+| Nesne | yanına alınacak eşya | "Çıkarken şemsiyeyi çantana koymayı unutma." | hava hücresi o nesneye izin veriyor |
+| Zaman | önce/sonra planı (eğer–o zaman) | "Yürüyüşü 21.00'den önce bitirirsen…" | ilgili saat verisi var |
+| Bağ | kişinin kendi alışkanlığı ya da başka modül | "Her zamanki 18.00 yürüyüşün…", "Gökyüzü molası olur." | veri telefonda; modül açık |
+| Çerçeve | engeli seçeneğe çevirme | "Yürüyüş bugün içeride de olur." | plan §E.4 (kötü hava engeldir) |
+| Seçim | kararı kişiye bırakma | "Seçim senin.", "İstersen…" | her türde en az bir aday |
+| Hafif mizah | dozlu | "Yazı tura gibi." | bankanın ≤ %20'si (VARSAYIM); aynı kişiye haftada ≤ 1 |
+
+### 3.5 Yasak kalıplar (bildirim süzgeci; `FORBIDDEN` v2'nin üstüne)
+
+| Sınıf | Kalıp örnekleri | Neden |
+|---|---|---|
+| Sağlık iddiası | iyileştir, tedavi, korur, önler, bağışıklık, D vitamini, göz sağlığı, stres atar, kanıtlanmış, bilimsel olarak | sağlık iddiası yok kuralı (`coachCore.js` `FORBIDDEN`, `YOL.nef.md` §7.1) |
+| Korkutma | tehlike, kaza, hastalan, çarp(ar), donarsın, yanarsın | Tannenbaum 2015 alanı (korku mesajı yerine öz-yeterlik), ürün kuralı |
+| Suçlama / ceza | yine, hâlâ, kaçırdın, seri bozuldu, tembel, geride kaldın | `YOL.nef.md` §5.6, İ4 |
+| Zorlama | -malısın/-melisin, zorundasın, mutlaka, sakın, hemen | alan: özerklik destekleyen dil ve tepkisellik (dayanak ayrı ajanda) |
+| Kesin hava dili | yağacak, yağıyor olacak, kesin | tahmin belirsizdir; plan §E.1 |
+| Sağlık verisi | adım, kalori, nabız, kilo + sayı | kilit ekranı gizliliği (`notifyPlan.js:46-47` yorumu) |
+| Görme sonucu | görme, logMAR, kötüleş, doktor | bildirimde asla; sabit satırlar yalnız uygulama içinde (`YOL.nef.md` §7.2) |
+| Biçim | emoji, `!`, BÜYÜK HARF vurgu, "Nef diyor ki" | emoji: ekran okuyucu her birini okur, tonu dağıtır (VARSAYIM ürün kuralı); ünlem: mevcut metinlerde yok (`notifyPlan.js:49-89`) |
+
+### 3.6 Her bildirim türünün PubMed dayanağı: hangi alan bağlanır
+
+Dayanak listesi ayrı ajandadır; burada yalnız alan ve repoda zaten geçen anahtarlar yazılıdır. Banka öğesi `evidence`
+alanında bir ya da iki `lib/sources.js` anahtarı taşır; kanıt bildirim gövdesinde değil, dokununca açılan kartta görünür.
+
+| Bildirim | Bağlanacak alan | Repoda zaten geçen künye (bu oturumda yeniden doğrulanmadı) |
+|---|---|---|
+| Yağmur haberi | kötü hava fiziksel etkinliğin önünde engel; eğer–o zaman planı (uygulama niyeti) | Tucker ve Gilliland 2007, Klimek 2022 (plan §E.4); Silva 2018 (BILDIRIM_PLANI) |
+| Yağmur haberindeki nesne notu | ileriye dönük bellek ve hatırlatıcı ipucu | — (ayrı ajan arar) |
+| Yürüyüş algılama | tam zamanında uyarlanabilir müdahale (JITAI), bağlama uygun etkinlik önerisi, alıcılık | Klasnja 2019 (`sources.js` `klasnja2019`) |
+| Yürüyüş algılamadaki hava cümlesi | hava ve yürüyüş | yukarıdaki hava alanı |
+| "Eşlik edelim mi?" | sesli rehberlik ya da koçlukla yürüyüş | — (ayrı ajan arar; bulunamazsa "VARSAYIM" diye işaretlenir) |
+| Modül hatırlatması | bildirim etkisi (açılma arttı, davranış sınırlı); öz-yeterlik dili; gerçek veriyle kişiselleştirme; + modülün kendi kanıtı | Bell 2023 (`bell2023`), Klasnja 2019, Tannenbaum 2015, Trinquart 2023; blink için Kim 2020 ve Wolffsohn 2025 (`YOL.nef.md` §14) |
+| Bütün türler (dil) | özerklik destekleyen dil, seçim bırakma | — (ayrı ajan) |
+
+Dürüst sınır: "Nef tonu" ile yazılmış bildirimin düz bildirimden daha etkili olduğunu gösteren bir kaynak bu belgede
+yok. Bell 2023'te çok sayıda metin tek metinle aynı sonucu verdi. Nef dili bir ürün kararıdır; etkisi §7.3'teki saha
+ölçümüyle görülür.
+
+---
+
+## 4. Maliyet
+
+### 4.1 Fiyatlar (OpenRouter `/api/v1/models`, anahtarsız GET, 2026-09-30; USD / 1M token)
+
+| Model | Giriş | Çıkış | Not |
+|---|---|---|---|
+| `google/gemini-3.1-flash-lite` (bugünkü varsayılan, `api/coach.js:10`) | 0,25 | 1,50 | önbellekten giriş 0,025; `:batch` sürümü 0,125 / 0,75; `response_format`, `temperature` destekli |
+| `google/gemini-2.5-flash-lite` (JEV_GOZ_KOCU yedeği) | 0,10 | 0,40 | `:batch` 0,05 / 0,20 |
+| `openai/gpt-5-nano` | 0,05 | 0,40 | desteklenen parametrelerde `temperature` yok; akıl yürütme modeli, gizli token çıkışa yazılır (miktarı bakmadım) |
+| `mistralai/mistral-small-2603` | 0,15 | 0,60 | `temperature`, `response_format` destekli; yargıç adayı |
+| `qwen/qwen3.7-flash` | 0,03 | 0,13 | 32.000 token üstü girişte fiyat artar; Türkçe kalitesine bakmadım |
+| `anthropic/claude-haiku-4.5` (yargıç önerisi) | 1,00 | 5,00 | başka aile |
+
+Türkçe kalite karşılaştırması bu belgede yapılmadı (ücretli çağrı yasak). Seçim §7'deki sınavla yapılır.
+
+### 4.2 Varsayımlar
+
+- **VARSAYIM:** Türkçede ≈ 3 karakter/token. Bugünkü `SYSTEM_PROMPT` 3.952 karakter (ölçüldü) → ≈ 1.100–1.300 token.
+- Canlı yöntem (B), bildirim başına bir çağrı: giriş 1.300, çıkış 60 token; kişi başı günde 3 bildirim (hava 1, yürüyüş 1,
+  modül 1); ayda 30 gün. İkinci biçim: günde bir çağrıda bütün günün metinleri (giriş 1.500, çıkış 250).
+- Banka yöntemi (C): 3 tür × ≈ 40 hücre × 20 aday = 2.400 aday; 120 çağrı (her biri 20 aday: giriş 1.600, çıkış 1.400);
+  yargıç 120 çağrı (giriş 2.500, çıkış 600).
+
+### 4.3 Hesap (USD)
+
+| Yöntem / model | Kişi başı ay | 1.000 kişi / ay | 10.000 kişi / ay |
+|---|---|---|---|
+| B1 · bildirim başına çağrı · gemini-3.1-flash-lite | 0,0374 | 37,35 | 373,50 |
+| B1 · gemini-2.5-flash-lite | 0,0139 | 13,86 | 138,60 |
+| B1 · mistral-small-2603 | 0,0208 | 20,79 | 207,90 |
+| B1 · gpt-5-nano (gizli akıl yürütme hariç) | 0,0080 | 8,01 | 80,10 |
+| B1 · qwen3.7-flash | 0,0042 | 4,21 | 42,12 |
+| B2 · günde tek çağrı · gemini-3.1-flash-lite | 0,0225 | 22,50 | 225,00 |
+| B2 · gemini-2.5-flash-lite | 0,0075 | 7,50 | 75,00 |
+| B1 · gemini-3.1-flash-lite, istem önbellekte (çağrı ≈ 0,000168; önbelleğin tutacağı VARSAYIM) | ≈ 0,0151 | ≈ 15 | ≈ 151 |
+| **C · banka (üretim gemini-3.1-flash-lite + yargıç haiku-4.5), sürüm başına tek sefer** | — | **≈ 0,96 toplam** | **≈ 0,96 toplam** |
+
+Banka hesabı: üretim 120 × (1.600 × 0,25 + 1.400 × 1,50) / 10⁶ ≈ 0,30; yargıç 120 × (2.500 × 1,00 + 600 × 5,00) / 10⁶ ≈
+0,66. Yılda 10 sürüm bile < 10 USD. Üretimde daha güçlü (daha pahalı) bir model kullanmak da bütçeyi değiştirmez; bu
+yüzden banka yönteminde "ucuz model" kısıtı yalnız alışkanlıktır, kalite için daha iyi model seçilebilir.
+
+Karşılaştırma: canlı yöntemin maliyeti küçük ama kişi sayısıyla doğrusal artar, rıza isteyen bir akış, sunucu yükü ve
+hata dalları getirir; üstelik hava içeren kısmı hiç üretemez. Banka yönteminin maliyeti sabittir ve çalışma anında
+sıfırdır.
+
