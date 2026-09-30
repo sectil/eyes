@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import {
   Info, Sun, Moon, ChevronLeft, ChevronRight, ChevronDown, ExternalLink, ArrowRight, BookOpen, DoorOpen, Car,
-  Stethoscope, ArrowUpFromLine, Volume1, VolumeX, LifeBuoy, Wind, Eye, Check, Clock3, Armchair, Plus,
+  Stethoscope, ArrowUpFromLine, Volume1, VolumeX, LifeBuoy, Check, Clock3, Armchair, Plus,
 } from 'lucide-react'
 import { isIOSApp, haptic } from '../../lib/native.js'
 import {
@@ -24,8 +24,9 @@ import { Scene, HorizonScale, LessonPath, SectionStrip, useTimeline, PrepIcon, p
 import { sectionAt } from './timeline.js'
 import './yoga.css'
 
-// Yoga ve Meditasyon (modul.md §2; PLAN.v3 §D.2): kütüphane → ders ayrıntısı → (ilk kez: güvenlik kartı ve ses
-// denetimi) → önce puanı → oynatıcı → sonra puanı ve zorlanma sorusu → bitiş. X: durdurma ekranı → zorlanma sorusu.
+// Yoga ve Meditasyon (modul.md §2): (ilk girişte bir kez: güvenlik kartı) → kütüphane → ders ayrıntısı → (ilk derste:
+// ses denetimi) → önce puanı → oynatıcı → sonra puanı, altında zorlanma satırı → bitiş. X: durdurma ekranı → zorlanma
+// satırı. Sahip kararları 19–20 (SAHIP_ISTEKLERI.md; C_5SN_RAPORU.md "Sahip kararları 19–20").
 // Görünüm: 5 saniye yeniden tasarımı (yoga-pilot/C_5SN_RAPORU.md): her ekran beş değerlendiricinin çoğunluğunun seçtiği
 // yönde (A · B · C maketleri), önerdikleri aşılarla. Oynatıcı hep karanlık; öteki ekranlar iki temada (sonra puanı ve
 // zorlanma sorusu dahil: modul.md §2, G3).
@@ -75,16 +76,21 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
   const startLesson = fromPath != null && visible.includes(fromPath) ? fromPath : null
   const running = currentLesson()
   const [n, setN] = useState(() => running?.lesson ?? startLesson)
-  // Güvenlik kartı modülün girişinde değil, ilk derste "Başla"ya dokununca (PLAN.v3 §D.2 akışı: "ders ayrıntısı → (ilk
-  // kez: güvenlik kartı ve 10 sn'lik ses denetimi) → önce puanı"). Yoga'ya ilk dokunuşta ders görünür; kart dersi
-  // başlatan dokunuşla bir kez gelir ve ders ondan önce başlamaz (kapı turu 1: C_5SN_RAPORU.md §12).
-  const [screen, setScreen] = useState(() => (running ? 'play' : startLesson ? 'detail' : 'library'))
-  const [safetyBack, setSafetyBack] = useState('detail')
-  const [safetyGo, setSafetyGo] = useState(false) // kart "Başla"dan açıldı: "Anladım" dersi başlatma zincirini sürdürür
+  // Güvenlik kartı yogaya İLK GİRİŞTE bir kez (sahip kararı 19, "İlk girişte bir kez"; modul.md §2.2): kütüphaneden de
+  // yoldan (yoga-<ders>) da girilse ilk ekran karttır. "Anladım" girilen yere (kütüphane ya da ayrıntı) geçer; ilk girişte
+  // "Geri" Ana sayfaya döner ve kart bir sonraki girişte yeniden çıkar. Kart onaylanmadan ders başlamaz. Kapı turu 1'de
+  // kart ilk "Başla"ya taşınmıştı (C_5SN_RAPORU.md §12); sahip girişi seçti, ayrıntıdaki uyarılar bu yüzden kalktı.
+  const [screen, setScreen] = useState(() => (running ? 'play' : !opts.safetySeen ? 'safety' : startLesson ? 'detail' : 'library'))
+  const [safetyBack, setSafetyBack] = useState(() => (startLesson ? 'detail' : 'library'))
+  const [safetyEntry, setSafetyEntry] = useState(() => !running && !opts.safetySeen) // ilk giriş kartı: Geri Ana sayfaya
+  const [safetyGo, setSafetyGo] = useState(false) // kart "Başla"dan açıldı (yedek yol): "Anladım" başlatma zincirini sürdürür
   const [minutes, setMinutes] = useState(() => (startLesson ? pickMinutes(startLesson, pathMinutes ?? opts.minutesByLesson[startLesson]) : null))
   const [prevMinutes, setPrevMinutes] = useState(null)
   const [before, setBefore] = useState(null)
   const [after, setAfter] = useState(null)
+  // Sonra puanı soruldu mu: null (ölçek bekliyor) · 'rated' ("Devam") · 'skipped' ("Atla"). Soruldukça zorlanma satırı
+  // ölçeğin altına iner (sahip kararı 20); aynı ekran, ayrı zorlanma ekranı yok.
+  const [rateStep, setRateStep] = useState(null)
   const [hard, setHard] = useState(null)
   const [end, setEnd] = useState(null) // { rec, stopped, lesson, minutes, section }
   const [sound, setSound] = useState(null) // ses denetimi cevabı (ekranda)
@@ -119,6 +125,7 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
     setEnd(null)
     setBefore(null)
     setAfter(null)
+    setRateStep(null)
     setHard(null)
     if (fromPath != null) onExit?.()
     else setScreen('library')
@@ -143,9 +150,11 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
   }
   function pressStart() {
     haptic('tick')
-    // İlk derste önce güvenlik kartı; "Anladım" aynı zinciri sürdürür (ses ve ders yine bir dokunuşun içinde başlar)
+    // Yedek: kart ilk girişte görülür; bir yoldan görülmeden "Başla"ya ulaşılırsa da ders ondan önce başlamaz. "Anladım"
+    // aynı zinciri sürdürür (ses ve ders yine bir dokunuşun içinde başlar).
     if (!opts.safetySeen) {
       setSafetyBack('detail')
+      setSafetyEntry(false) // buradan açılan kartta Geri ayrıntıya
       setSafetyGo(true)
       return setScreen('safety')
     }
@@ -212,6 +221,7 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
     setBefore(s.before)
     setEnd({ rec, stopped, lesson: s.lesson, minutes: s.minutes, section: stopped ? section : Ls.sectionLabels.K ?? section })
     setAfter(null)
+    setRateStep(null)
     setHard(null)
     if (stopped) setScreen('stopped')
     else if (Ls.daypart === 'night') setScreen('sleep-end')
@@ -219,9 +229,13 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
     else setScreen(hasRating(s.lesson) ? 'after' : 'hard')
   }
 
+  // Zorlanma satırı (modul.md §2.8, §11.F; sahip kararı 20): "Hayır" ve "Biraz" yazılır ve akış sürer; "Çok" yazılır,
+  // metni görünür, "Devam" ile sürer; "Atla" hiçbir cevap yazmaz (önce "Çok" seçildiyse o da silinir) ve akış sürer.
+  // Cevapların kayıttaki anlamı değişmedi (hard: no · some · much; yok = atlandı).
   function answerHard(h) {
+    const was = hard
     setHard(h)
-    if (end?.rec && h) {
+    if (end?.rec && (h || was)) {
       writerRef.current?.patch(afterPatch(end.rec, { hard: h }))
       onRefresh?.()
     }
@@ -231,6 +245,20 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
   function nextAfterHard() {
     if (end?.stopped) exitFlow()
     else setScreen('done')
+  }
+  // Sonra puanı: "Devam" puanı yazar, "Atla" yazmaz; ikisinde de ekran değişmez, zorlanma satırı ölçeğin altına iner
+  function settleAfter(rated) {
+    if (rated) {
+      writerRef.current?.patch(afterPatch(end?.rec, { after }))
+      if (end?.rec) onRefresh?.() // Gelişim'deki önce → sonra etkisi hemen güncel
+    } else setAfter(null) // atlandı: bitişte seçilip yazılmamış bir puan görünmesin
+    setRateStep(rated ? 'rated' : 'skipped')
+  }
+  // "Çok" metni, dersin nasıl bittiğine ve daha kısa yayımlanmış süre olup olmadığına göre (modul.md §2.8, §10.3-c)
+  const muchNote = () => {
+    const shorter = end ? shorterOf(end.lesson, end.minutes) != null : true
+    if (end?.stopped) return shorter ? YT.hard.muchStopped : YT.hard.muchStoppedNoShorter
+    return shorter ? YT.hard.muchFinished : YT.hard.muchFinishedNoShorter
   }
 
   const flashSafe = profileSignals(profile).flashSafe
@@ -243,13 +271,19 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
         L={Ls}
         onOk={() => {
           if (!opts.safetySeen) update({ safetySeen: true })
+          setSafetyEntry(false)
           if (safetyGo) {
             setSafetyGo(false)
             startChain() // "Başla"dan gelindi: ses denetimi ya da önce puanı (bu dokunuşun içinde)
           } else setScreen(safetyBack)
         }}
-        // Geri: ayrıntıya; dersi başlatmadan dönülürse kart bir sonraki "Başla"da yeniden çıkar
-        onBack={() => { setSafetyGo(false); setScreen(safetyBack) }}
+        // Geri: ilk giriş kartında Ana sayfaya (kart onaylanmadı: bir sonraki girişte yeniden çıkar); ayrıntıdan
+        // açıldıysa ayrıntıya
+        onBack={() => {
+          setSafetyGo(false)
+          if (safetyEntry) return onExit?.()
+          setScreen(safetyBack)
+        }}
       />
     )
   }
@@ -280,9 +314,10 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
         onMinutes={chooseMinutes}
         onMusicTail={(m) => update({ musicTail: m })}
         onBack={() => (fromPath != null ? onExit?.() : setScreen('library'))}
-        // Kartı yeniden açan satır yalnız kart görüldükten sonra (modul.md §2.2 "yeniden açılır"): ilk derste kart zaten
-        // "Başla"yla gelir; ayrıntıda üçüncü bir güvenlik öğesi olmasın (kapı turu 2: "aynı bilgi iki kez", "üç kez")
-        onSafety={opts.safetySeen ? () => { setSafetyBack('detail'); setSafetyGo(false); setScreen('safety') } : null}
+        // Yoldan açılan derste kütüphane kapağı görülmedi: dersin sözü ayrıntıda yazılır (kapaktan gelinince tekrar olmasın)
+        intro={fromPath != null}
+        // "Başlamadan önce" kartı ayrıntıdan her zaman açılır (sahip kararı 19; modul.md §2.2 "yeniden açılır")
+        onSafety={() => { setSafetyBack('detail'); setSafetyGo(false); setSafetyEntry(false); setScreen('safety') }}
         onEvening={() => openLesson(3)}
         onStart={pressStart}
         // "Sonra yaparım" (PLAN.v3 §B.2-9): yalnız yoldan açılan derste; durak bugün sonraya bırakılır, Ana sayfaya dönülür
@@ -316,9 +351,12 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
     // "Aynı soru, şimdi dersten sonra."; oynatıcının karanlığından temaya yavaşça açılır (Hareketi Azalt'ta hemen).
     // Önceki puan yalnız seçimden sonra: ölçekte içi boş halka ve altında tek satır (OZET.md §10; çıpalama yok).
     // "Devam" seçimle görünür; yeri baştan ayrılmıştır (ölçek kaymaz); "Atla" hep yazı.
+    // Sonra puanında "Devam" ya da "Atla"dan sonra ekran değişmez: ölçek yerinde kalır (verilen puan sönük, artık
+    // değişmez) ve zorlanma sorusu "Devam · Atla"nın yerine, ölçeğin altına tek satır olarak iner (sahip kararı 20).
     const showWas = !isBefore && Number.isFinite(before)
+    const asked = !isBefore && rateStep != null
     return (
-      <main className={`screen yg yg-rating ${isBefore ? 'is-before fade-in' : 'is-after yg-dawn-in'}`} style={tone(L)}>
+      <main className={`screen yg yg-rating ${isBefore ? 'is-before fade-in' : 'is-after yg-dawn-in'}${asked ? ' is-asked' : ''}${asked && hard === 'much' ? ' is-much' : ''}`} style={tone(L)}>
         {isBefore
           ? <div className="yg-top"><button type="button" className="btn-icon" onClick={() => setScreen('detail')} aria-label={YT.back}><ChevronLeft size={20} aria-hidden="true" /></button></div>
           : <div className="yg-hero yg-rate-hero"><LessonScene L={L} mood="dawn" /></div>}
@@ -339,27 +377,25 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
           ends={L.ends ?? []}
           was={showWas ? before : null}
           sky={isBefore && L.form === 'horizon'}
+          disabled={asked}
         />
         {showWas && (
           <p className="yg-was-line" aria-live="polite">{val != null ? <>{YT.rate.was} <b>{before}</b></> : null}</p>
         )}
         <div className="grow yg-grow-bot" />
-        <div className="yg-go">
-          <button
-            type="button"
-            className={`btn${val == null ? ' yg-wait' : ''}`}
-            disabled={val == null}
-            onClick={() => {
-              if (isBefore) begin(before)
-              else {
-                writerRef.current?.patch(afterPatch(end?.rec, { after }))
-                if (end?.rec) onRefresh?.() // Gelişim'deki önce → sonra etkisi hemen güncel
-                setScreen('hard')
-              }
-            }}
-          >{YT.rate.next}</button>
-          <button type="button" className="yg-skip" onClick={() => (isBefore ? begin(null) : setScreen('hard'))}>{YT.rate.skip}</button>
-        </div>
+        {asked ? (
+          <HardRow value={hard} note={muchNote()} onAnswer={answerHard} onNext={nextAfterHard} arrive />
+        ) : (
+          <div className="yg-go">
+            <button
+              type="button"
+              className={`btn${val == null ? ' yg-wait' : ''}`}
+              disabled={val == null}
+              onClick={() => (isBefore ? begin(before) : settleAfter(true))}
+            >{YT.rate.next}</button>
+            <button type="button" className="yg-skip" onClick={() => (isBefore ? begin(null) : settleAfter(false))}>{YT.rate.skip}</button>
+          </div>
+        )}
       </main>
     )
   }
@@ -385,38 +421,17 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
   }
 
   if (screen === 'hard') {
-    const much = hard === 'much'
-    const shorter = end ? shorterOf(end.lesson, end.minutes) != null : true
+    // Yalnız zorlanma sorusunun sorulduğu durum: ders 30 sn'yi geçti ve X → "Tamam" ile bitti (modul.md §2.7), ya da
+    // puan sorusu olmayan bir gündüz dersi bitti. Sonra puanının altındaki satırın aynısı (sahip kararı 20); ayrı büyük
+    // bir soru ekranı değil. Temada (modul.md §2); durdurma ekranının karanlığından gelindiyse temaya yavaşça açılır.
+    // Üstte dersin yeri ekranın boşluğunu doldurur (durdurduysa kıyı: kapanışa ulaşılmadı; bitirdiyse şafak ve dersin
+    // yolu), satır başparmağa yakın (kapı turu 3: "adım çizgisiyle soru arasında kocaman bir boşluk").
     const stopped = Boolean(end?.stopped)
-    // Temada (modul.md §2: oynatıcı dışındaki her ekran iki temada). Durdurma ekranının karanlığından gelindiyse temaya
-    // yavaşça açılır; sonra puanından gelindiyse zaten temada.
-    // Kapı turu 2 (beş değerlendiricinin beşi: "tasarım dilinden düşmüş, yarım kalmış taslak form"): sonra puanıyla aynı
-    // dil. Üstte dersin yeri (bitirdiyse şafak; durdurduysa kıyı: kapanışa ulaşılmadı), bitirdiyse dersin yolu (✓ Önce ·
-    // ✓ ders · ● Sonra: sonra puanıyla aynı adım, modul.md §2.8), soru ve üç iri, eşit seçenek başparmağa yakın.
     return (
-      <main className={`screen yg yg-hard${much ? ' is-much' : ''} ${stopped ? 'yg-dawn-in' : 'fade-in'}`} style={L ? tone(L) : undefined}>
+      <main className={`screen yg yg-hard${hard === 'much' ? ' is-much' : ''} ${stopped ? 'yg-dawn-in' : 'fade-in'}`} style={L ? tone(L) : undefined}>
         {L && <div className="yg-hero yg-rate-hero"><LessonScene L={L} mood={stopped ? 'shore' : 'dawn'} /></div>}
         {L && !stopped && <LessonPath title={L.title} after labels={YT.rate} />}
-        <div className="grow yg-grow-top" />
-        <h1 className="yg-h">{YT.hard.question}</h1>
-        <div className="yg-opts" role="radiogroup" aria-label={YT.hard.question}>
-          {YT.hard.options.map((o) => (
-            <button key={o.id} type="button" role="radio" className="yg-opt" aria-checked={hard === o.id} onClick={() => answerHard(o.id)}>{o.label}</button>
-          ))}
-        </div>
-        {much && (
-          <p className="yg-note" role="status">
-            {end?.stopped
-              ? (shorter ? YT.hard.muchStopped : YT.hard.muchStoppedNoShorter)
-              : (shorter ? YT.hard.muchFinished : YT.hard.muchFinishedNoShorter)}
-          </p>
-        )}
-        <div className="grow yg-grow-bot" />
-        <div className="yg-go">
-          {much
-            ? <button type="button" className="btn" onClick={nextAfterHard}>{YT.hard.next}</button>
-            : <button type="button" className="yg-skip" onClick={nextAfterHard}>{YT.hard.skip}</button>}
-        </div>
+        <HardRow value={hard} note={muchNote()} onAnswer={answerHard} onNext={nextAfterHard} solo />
       </main>
     )
   }
@@ -447,10 +462,89 @@ function LessonScene({ L, mood = 'far', className = '' }) {
   )
 }
 
-// Uzanarak yapılan dersin kalkış satırı (açılış satırlarının üçüncüsü; onaylı metin aynen)
+// Uzanarak yapılan dersin kalkış satırı (açılış satırlarının üçüncüsü; onaylı metin aynen). Ayrıntıdan kalktı (sahip
+// kararı 19); bitişte çerçeveli notta ve güvenlik kartının "Yavaşça kalk." maddesinde duruyor.
 const riseLine = (L) => (L.posture === 'lie' ? L.opening.find((t) => t !== OPENING_PERMISSION && !t.startsWith(OPENING_VEHICLE)) ?? null : null)
+// Derse özel araç satırı: ortak araç satırının ardına eklenen cümle, aynen (yalnız Uykuya Geçiş: "Bu dersten hemen sonra
+// araç kullanma."). Ortak araç satırı ayrıntıdan kalktı; kartın "Araç kullanırken açma." maddesi aynı şeyi söylüyor.
+export const vehicleExtra = (L) => L.opening.find((t) => t.startsWith(OPENING_VEHICLE) && t.length > OPENING_VEHICLE.length)?.slice(OPENING_VEHICLE.length).trim() || null
 
-// Güvenlik kartı (modul.md §2.2). Kapı turu 2 (beş değerlendiricinin beşi: "ayarlar menüsü / kullanım koşulları gibi",
+// Alt şeridin üstündeki ince çizgi: içerik şeridin altına kayıyorsa (küçük ekran, açılan madde) görünür; sığıyorsa yok.
+// Açılış kayması da sayfa boyuna sayılır: kayma bitince de bakılır (check'i onAnimationEnd'e ver).
+function useStickyOver() {
+  const [over, setOver] = useState(false)
+  const check = useCallback(() => {
+    const d = globalThis.document?.documentElement
+    if (!d || !globalThis.innerHeight) return
+    setOver(globalThis.scrollY + globalThis.innerHeight < d.scrollHeight - 2)
+  }, [])
+  useEffect(() => {
+    check()
+    globalThis.addEventListener?.('scroll', check, { passive: true })
+    globalThis.addEventListener?.('resize', check)
+    // Yazı tipi yüklenince, madde açılınca ya da metin boyu değişince sayfa boyu değişir; olay gelmez: gözlemci bakar
+    const ro = typeof globalThis.ResizeObserver === 'function' ? new globalThis.ResizeObserver(check) : null
+    if (ro && globalThis.document?.body) ro.observe(globalThis.document.body)
+    return () => {
+      globalThis.removeEventListener?.('scroll', check)
+      globalThis.removeEventListener?.('resize', check)
+      ro?.disconnect()
+    }
+  }, [check])
+  return [over, check]
+}
+
+// Öğeyi görünüme getirir (Hareketi Azalt'ta kaymadan); jsdom ve eski WebView'da yöntem yoksa hiçbir şey yapmaz
+const reduceMotion = () => { try { return Boolean(globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) } catch { return false } }
+const bringIntoView = (el, block = 'nearest') => { try { el?.scrollIntoView?.({ block, behavior: reduceMotion() ? 'auto' : 'smooth' }) } catch { /* yok */ } }
+
+// Zorlanma satırı (sahip kararı 20; modul.md §2.8, §11.F). Sonra puanının altında (ve yalnız zorlanma sorusunun sorulduğu
+// durumda tek başına) aynı satır: onaylı soru ("Derste kendini kötü hissettin mi?"), üç eşit hap seçenek (Hayır · Biraz ·
+// Çok) ve hep görünen "Atla". Güvenlik okumasının yerleşim notları: ölçeğin altındaki "Aynı soru, şimdi dersten sonra."
+// satırından boşluk ve ince bir ayraçla ayrılır, seçenek biçimi ölçekten farklıdır (ufuk çizgisindeki duraklar değil,
+// haplar); "Çok" metni açıkça okunur boyutta, kendi kutusunda, "Devam" hemen altında (çıkış engellenmez). Ekrana inince
+// VoiceOver odağı soruya gelir; "Çok" seçilince metin ve "Devam" görünüme kayar (Hareketi Azalt'ta kaymadan).
+// solo: yalnız bu soru (başlık h1); yoksa sonra puanının altında (h2). arrive: satır ekrana şimdi indi (odak ve kayma).
+function HardRow({ value, note, onAnswer, onNext, solo = false, arrive = false }) {
+  const T = YT.hard
+  const id = useId()
+  const qRef = useRef(null)
+  const goRef = useRef(null)
+  const much = value === 'much'
+  useEffect(() => {
+    if (!arrive) return
+    try { qRef.current?.focus?.({ preventScroll: true }) } catch { /* odak yoksa */ }
+    bringIntoView(qRef.current?.parentNode, 'nearest')
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (much) bringIntoView(goRef.current, 'end')
+  }, [much])
+  const Q = solo ? 'h1' : 'h2'
+  return (
+    <>
+      <section className={`yg-hardrow${solo ? ' solo' : ''}`} aria-labelledby={`${id}-q`}>
+        <Q id={`${id}-q`} ref={qRef} tabIndex={-1} className="yg-hardrow-q">{T.question}</Q>
+        <div className="yg-hardrow-line">
+          <div className="yg-hard-opts" role="radiogroup" aria-label={T.question}>
+            {T.options.map((o) => (
+              <button key={o.id} type="button" role="radio" className="yg-hard-o" aria-checked={value === o.id} onClick={() => onAnswer(o.id)}>{o.label}</button>
+            ))}
+          </div>
+          <button type="button" className="yg-skip yg-hardrow-skip" onClick={() => onAnswer(null)}>{T.skip}</button>
+        </div>
+        {much && <p className="yg-note yg-much" role="status"><LifeBuoy size={18} aria-hidden="true" /><span>{note}</span></p>}
+      </section>
+      {much && (
+        <div className="yg-go" ref={goRef}>
+          <button type="button" className="btn" onClick={onNext}>{T.next}</button>
+        </div>
+      )}
+    </>
+  )
+}
+
+// Güvenlik kartı (modul.md §2.2): yogaya ilk girişte bir kez; ayrıntıdaki "Başlamadan önce ›" satırıyla her zaman yeniden
+// (sahip kararı 19). Kapı turu 2 (beş değerlendiricinin beşi: "ayarlar menüsü / kullanım koşulları gibi",
 // "her satırdaki aşağı ok gizli yazı var mı diye tedirgin ediyor", "112 ile 'Sesi kısık tut' aynı seviyede"): beş eşit
 // akordeon satırı yerine ayrıntıdaki hazırlık karolarıyla aynı dilde karolar. İlk madde ("İstediğin an dersi
 // bitirebilirsin.") geniş, dersin renginde bir davet karosu; öteki dördü iki sütunda kısa karolar; sağlık maddesi en sonda
@@ -483,7 +577,9 @@ function SafetyItem({ i, wide = false, open = false, onToggle }) {
 
 export function SafetyCard({ L = null, onOk, onBack }) {
   const T = YT.safety
-  const [over, setOver] = useState(false)
+  // Liste ekrana sığmıyorsa (küçük ekran ya da açılan madde) alt şeridin üstünde ince bir çizgi: metin şeridin altına
+  // kayar, kesik görünmez
+  const [over, check] = useStickyOver()
   const [open, setOpen] = useState(() => new Set())
   const toggle = (i, on) => setOpen((s) => {
     const n = new Set(s)
@@ -491,26 +587,6 @@ export function SafetyCard({ L = null, onOk, onBack }) {
     else n.delete(i)
     return n
   })
-  // Liste ekrana sığmıyorsa (küçük ekran ya da açılan madde) alt şeridin üstünde ince bir çizgi: metin şeridin altına
-  // kayar, kesik görünmez. Açılış kayması da sayfa boyuna sayılır: kayma bitince de bakılır (onAnimationEnd).
-  const check = () => {
-    const d = globalThis.document?.documentElement
-    if (!d || !globalThis.innerHeight) return
-    setOver(globalThis.scrollY + globalThis.innerHeight < d.scrollHeight - 2)
-  }
-  useEffect(() => {
-    check()
-    globalThis.addEventListener?.('scroll', check, { passive: true })
-    globalThis.addEventListener?.('resize', check)
-    // Yazı tipi yüklenince, madde açılınca ya da metin boyu değişince sayfa boyu değişir; olay gelmez: gözlemci bakar
-    const ro = typeof globalThis.ResizeObserver === 'function' ? new globalThis.ResizeObserver(check) : null
-    if (ro && globalThis.document?.body) ro.observe(globalThis.document.body)
-    return () => {
-      globalThis.removeEventListener?.('scroll', check)
-      globalThis.removeEventListener?.('resize', check)
-      ro?.disconnect()
-    }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <main className="screen fade-in yg yg-safety" style={L ? tone(L) : undefined} onAnimationEnd={check}>
       {/* Üstte ayrıntıdaki aynı yer, kısa (kartın ayrı bir "kullanım koşulları" sayfası gibi değil, dersin kapısında
@@ -597,10 +673,11 @@ function DayIcon({ daypart, shown = false, rest = '' }) {
 // Dersin iki pratik bilgisi iri, simgeli iki etikette: süre ve duruş (kapı turu 2: "en işe yarar bilgi resmin altında
 // küçük, ince bir satırda kalmış"). Gündüz ya da gece yalnız VoiceOver'da okunur: "Gündüz" yazılıyken iki değerlendirici
 // "gece yapamaz mıyım?" diye okudu; tek derste ayırt edici değil ve dersin yeri güneşiyle zaten gündüz. VoiceOver ve metin
-// "Gündüz · 15 dk · Uzanarak" okur. minutes yoksa (süre çiplerle seçiliyorsa) yalnız duruş.
-function Facts({ L, minutes = null }) {
+// "Gündüz · 15 dk · Uzanarak" okur. minutes yoksa (süre çiplerle seçiliyorsa) yalnız duruş. plain: ayrıntıda çerçevesiz,
+// sakin tek satır (kapı turu 3: ayrıntının üstü "kapağın aynısı: aynı başlık, aynı iki çip").
+function Facts({ L, minutes = null, plain = false }) {
   return (
-    <span className="yg-facts">
+    <span className={`yg-facts${plain ? ' plain' : ''}`}>
       <span className="yg-sr">{L.daypart === 'night' ? YT.detail.night : YT.detail.day} · </span>
       {minutes ? <><span className="yg-fact"><Clock3 size={16} aria-hidden="true" />{minutes}</span><span className="yg-sr"> · </span></> : null}
       <span className="yg-fact">{L.posture === 'lie' ? <PrepIcon kind="mat" size={17} /> : <Armchair size={16} aria-hidden="true" />}{POSTURE_LABEL[L.posture]}</span>
@@ -608,7 +685,7 @@ function Facts({ L, minutes = null }) {
   )
 }
 
-// Kütüphane: Yoga'ya ilk dokunuşta görünen ekran (güvenlik kartı ilk "Başla"da). Birden çok ders varken liste: dersin
+// Kütüphane: Yoga'nın giriş ekranı (ilk girişte güvenlik kartından sonra). Birden çok ders varken liste: dersin
 // karanlık imgeli kartları (değişmedi). Yayımlı tek ders varken liste değil, dersin KAPAĞI (kapı turu 2, beş
 // değerlendiricinin beşi: "kütüphane diye açılan yerde tek kart: boş raf, 'başka ders yok mu?'", "resim ekranın yarısını
 // yiyor ama bilgi vermiyor", "açık temada güneş kayboluyor", "başlık bağırıyor"): dersin yeri kenardan kenara bütün ekranın
@@ -698,8 +775,10 @@ function Library({ visible, onBack, onOpen }) {
 // 3 dakikada dersin genel etki cümlesi yazılmaz: kart yalnız Radin 2025'in kullanım bulgusunu ve "Üç dakikalık sürümün
 // etkisini doğrudan sınayan bir çalışma bulamadık." cümlesini yazar (PLAN.v3 §A.2 kural 12; sure.md §10)
 // Kapalı başlıkta kitap simgesi, kaynak sayısı sönük ve açılır ok: "(19)" bir liste olduğunu söylesin, dokunulabilir görünsün.
-function Sources({ L, minutes, title = YT.detail.sources, className = '' }) {
-  const lines = minutes === 3 ? [THREE_MIN_LINE] : [L.evidenceLine, L.evidenceByMinutes?.[minutes] ?? null].filter(Boolean)
+// withLines: kanıt cümleleri açılır kartın içinde (bitiş); ayrıntıda cümleler kartın üstünde açıkta (Basis), içeride yalnız liste.
+const evidenceOf = (L, minutes) => (minutes === 3 ? [THREE_MIN_LINE] : [L.evidenceLine, L.evidenceByMinutes?.[minutes] ?? null].filter(Boolean))
+function Sources({ L, minutes, title = YT.detail.sources, className = '', withLines = true }) {
+  const lines = withLines ? evidenceOf(L, minutes) : []
   return (
     <details className={`yg-src ${className}`.trim()}>
       <summary>
@@ -721,26 +800,38 @@ function Sources({ L, minutes, title = YT.detail.sources, className = '' }) {
   )
 }
 
-// Açılış satırının simgesi: izin ve araç satırları her derste aynı (güvenlik kartıyla aynı simge); üçüncü satır derse göre
-function openingIcon(t, L) {
-  if (t === OPENING_PERMISSION) return DoorOpen
-  if (t.startsWith(OPENING_VEHICLE)) return Car
-  if (L.posture === 'lie') return ArrowUpFromLine
-  return L.form === 'point' ? Eye : Wind
+// "Neye dayanıyor" (ayrıntı): dersin kanıt cümlesi kartın üstünde açıkta, kaynak listesi altında açılır (sahip kararı 19
+// ve kapı turu 3: ayrıntıda uyarılar yerine dersin içeriği öne). Metin aynen; yalnız cümlenin kendi başındaki "Neye
+// dayanıyor:" kalın (etiket gibi okunsun). 3 dakikada yalnız Radin 2025 satırı (PLAN.v3 §A.2 kural 12).
+const BASIS_LEAD = 'Neye dayanıyor:'
+function Basis({ L, minutes }) {
+  return (
+    <section className="yg-basis">
+      {evidenceOf(L, minutes).map((t) => (
+        <p key={t} className="yg-basis-t">{t.startsWith(BASIS_LEAD) ? <><b>{BASIS_LEAD}</b>{t.slice(BASIS_LEAD.length)}</> : t}</p>
+      ))}
+      <Sources L={L} minutes={minutes} withLines={false} />
+    </section>
+  )
 }
 
-// Ders ayrıntısı (yön B; kapı turu 2'de yeniden dizildi). Kapı turu 2'nin notları (beşin dördü etkilenmedi): "ilk izlenim
-// ilaç prospektüsü: uyarı bloğu 'Başla'dan önce ve ondan iri", "üstteki görsel ince bir şeride kırpılmış, güneş düğmelerin
-// arasında, alt kenarda ek yeri", "'Başlamadan önce' düğmesi aynı bilgiyi ikinci kez veriyor", "'Nefona Hoca' kim?".
-// Yeni dizilim (metinler aynı): üstte kenardan kenara dersin yeri, daha uzun ve alt kenarı zemine eriyerek (güneş yarı
-// doğmuş, yalnız Geri'nin yanında: düğmelerin arasına sıkışmaz); dersin tam adı, sözü ve süre · duruş etiketleri; izin
-// satırı ("İstediğin an gözlerini açabilir…") "Başla"nın hemen üstünde bir davet olarak (dördüncü değerlendirici: "kişiye
-// alan tanıyan, saygılı dil"); "Başla"; hemen altında öteki açılış satırları (araç, kalkış) küçük ve sakin, kutusuz;
-// kartı yeniden açan "Başlamadan önce" satırı yalnız kart görüldükten sonra; hazırlık karoları; bölümler; Kaynaklar.
-// Dersin sesinin adı ("Nefona Hoca") ayrıntıda yazılmaz: ilk yayında ses seçimi yok (PLAN.v3 §D.2) ve iki değerlendirici
-// adı "gerçek bir hoca mı?" diye okudu. Tek süre yayımlıyken süre bir seçim değildir: çip yerine etikette yazar.
-function Detail({ L, minutes, prevMinutes, opts, onMinutes, onMusicTail, onBack, onSafety = null, onEvening, onStart, onLater = null }) {
+// Ders ayrıntısı. Sahip kararı 19 ve kapı turu 3 (ayrıntı 1/5: "üst yarı kapağın neredeyse aynısı", "'Derse git'e bastım,
+// ilerlemiş gibi hissetmiyorum", "Başla'nın çevresinde üç uyarı cümlesi, bir sonraki ekranda aynen tekrar"):
+// - Üst kısım sıkıştı: dersin yeri kısa bir şerit (güneş yarı doğmuş: kapaktaki ufuktan bir adım ileri), ad daha küçük,
+//   süre ve duruş çerçevesiz tek satır. Dersin sözü yalnız yoldan açılınca (kapak görülmedi; intro).
+// - Dersin içeriği öne: süre seçimi (birden çok süre yayımlıysa), bölümler (şerit ve adlar), "Neye dayanıyor" (açıkta),
+//   hazırlık (uzanarak yapılan derslerde).
+// - Açılış uyarıları kalktı; yalnız onaylı izin cümlesi kalır ("İstediğin an gözlerini açabilir, kıpırdayabilir ya da
+//   dersi bitirebilirsin."), "Başla"nın hemen üstünde. Derse özel tek uyarı: Uykuya Geçiş'te "Bu dersten hemen sonra araç
+//   kullanma." (açılış satırından aynen). Ortak araç satırı ve kalkış satırı kartta ("Araç kullanırken açma.", "Yavaşça
+//   kalk."); kalkış satırı bitişte de çerçeveli notta.
+// - "Başlamadan önce ›" kartı her zaman açar (içeriğin sonunda).
+// - İzin cümlesi ve "Başla" alt şeritte: içerik uzasa da (320 px, Uykuya Geçiş'in uzun kanıt cümlesi) hep görünür,
+//   başparmağa yakın. Yoldan açılınca "Sonra yaparım" şeritte, "Başla"nın altında yazı düğmesi.
+// Dersin sesinin adı ("Nefona Hoca") yazılmaz (kapı turu 2). Tek süre yayımlıyken süre bir seçim değildir: satırda yazar.
+function Detail({ L, minutes, prevMinutes, opts, intro = false, onMinutes, onMusicTail, onBack, onSafety, onEvening, onStart, onLater = null }) {
   const [sleepOn, setSleepOn] = useState(false)
+  const [over, check] = useStickyOver()
   useEffect(() => {
     let alive = true
     sleepSoundPlaying().then((on) => alive && setSleepOn(on))
@@ -756,11 +847,10 @@ function Detail({ L, minutes, prevMinutes, opts, onMinutes, onMusicTail, onBack,
   const night = L.daypart === 'night'
   const evening = !night && isNightHour(new Date()) && publishedMinutes(3).length > 0 // Uykuya Geçiş yayımlanmışsa
   const prep = L.posture === 'lie' && L.preparation?.length > 0
-  // Açılış satırları (modul.md §2.4-12, aynen): izin satırı "Başla"nın üstünde, öteki satırlar hemen altında
-  const invite = L.opening.find((t) => t === OPENING_PERMISSION) ?? null
-  const notes = L.opening.filter((t) => t !== invite)
+  const invite = L.opening.includes(OPENING_PERMISSION) ? OPENING_PERMISSION : null
+  const vehicle = vehicleExtra(L)
   return (
-    <main className="screen fade-in yg yg-detail" style={tone(L)}>
+    <main className={`screen fade-in yg yg-detail${night ? ' is-night' : ''}`} style={tone(L)} onAnimationEnd={check}>
       <div className="yg-hero yg-detail-hero">
         <LessonScene L={L} mood="shore" />
         <div className="yg-top">
@@ -768,63 +858,35 @@ function Detail({ L, minutes, prevMinutes, opts, onMinutes, onMusicTail, onBack,
         </div>
       </div>
 
-      <div className="yg-head">
+      <header className="yg-head">
         <h1 className="yg-h">{L.fullTitle}</h1>
-        <p className="yg-p">{L.tagline}</p>
-        <p className="yg-head-facts"><Facts L={L} minutes={!choose && minutes != null ? `${minutes}${NBSP}dk` : null} /></p>
-      </div>
+        {intro && <p className="yg-p">{L.tagline}</p>}
+        <p className="yg-head-facts"><Facts L={L} minutes={!choose && minutes != null ? `${minutes}${NBSP}dk` : null} plain /></p>
+      </header>
 
+      {/* Son kapı düzeltmesi: ders süresi etiketli ("Süre") ve büyük hap; müzik kuyruğu ayrı biçimde (küçük bölmeli seçici) */}
       {choose && (
-        <div className="yg-chips" role="radiogroup" aria-label={YT.detail.minutes}>
-          {mins.map((m) => (
-            <button key={m} type="button" role="radio" className="yg-chip" aria-checked={m === minutes} onClick={() => onMinutes(m)}>{m}{NBSP}dk</button>
-          ))}
+        <div className="yg-field yg-len">
+          {night && L.musicTailFile && <span className="yg-lbl" aria-hidden="true">{YT.detail.minutes}</span>}
+          <div className="yg-chips" role="radiogroup" aria-label={YT.detail.minutes}>
+            {mins.map((m) => (
+              <button key={m} type="button" role="radio" className="yg-chip" aria-checked={m === minutes} onClick={() => onMinutes(m)}>{m}{NBSP}dk</button>
+            ))}
+          </div>
         </div>
       )}
+      {evening && <button type="button" className="link-btn yg-evening" onClick={onEvening}>{YT.detail.evening}</button>}
 
       {/* Müzik kuyruğu seçicisi yalnız kuyruk dosyası varken: seçenek, çalan davranışla aynı olsun */}
       {night && L.musicTailFile && (
-        <div className="yg-field">
+        <div className="yg-field yg-tail">
           <span className="yg-lbl">{YT.detail.musicTail}</span>
-          <div className="yg-chips" role="radiogroup" aria-label={YT.detail.musicTail}>
+          <div className="yg-chips yg-segctl" role="radiogroup" aria-label={YT.detail.musicTail}>
             {MUSIC_TAIL.map((m) => (
               <button key={m} type="button" role="radio" className="yg-chip" aria-checked={opts.musicTail === m} onClick={() => onMusicTail(m)}>{m === 0 ? YT.detail.musicTailOff : `${m}${NBSP}dk`}</button>
             ))}
           </div>
         </div>
-      )}
-
-      {/* "Başla"nın hemen üstünde: izin satırı (davet) ve varsa çalan uyku sesinin duracağı (PLAN.v3 §D.3) */}
-      {invite && <p className="yg-invite"><DoorOpen size={20} aria-hidden="true" /><span>{invite}</span></p>}
-      {sleepOn && <p className="yg-invite yg-invite-2"><VolumeX size={18} aria-hidden="true" /><span>{YT.detail.sleepStops}</span></p>}
-      {evening && <button type="button" className="link-btn yg-evening" onClick={onEvening}>{YT.detail.evening}</button>}
-      <button type="button" className="btn yg-start" disabled={minutes == null} onClick={onStart}>{YT.detail.start}</button>
-      {onLater && <button type="button" className="btn btn-ghost yg-later" onClick={onLater}>{YT.detail.later}</button>}
-      {/* Öteki açılış satırları (araç; kalkış ya da derse göre) "Başla"nın hemen altında: kutusuz, küçük ama okunur */}
-      {notes.length > 0 && (
-        <ul className="yg-open">
-          {notes.map((t) => {
-            const Icon = openingIcon(t, L)
-            return <li key={t}><Icon size={16} aria-hidden="true" /><span>{t}</span></li>
-          })}
-        </ul>
-      )}
-      {/* Güvenlik kartını yeniden açar (modul.md §2.2); yalnız kart bir kez görüldükten sonra */}
-      {onSafety && (
-        <button type="button" className="yg-safe-link" onClick={onSafety}>
-          <Info size={17} aria-hidden="true" /><span>{YT.safety.open}</span><ChevronRight className="chev" size={17} aria-hidden="true" />
-        </button>
-      )}
-
-      {prep && (
-        <section className="yg-prep" aria-label={YT.detail.preparation}>
-          <span className="yg-lbl" aria-hidden="true">{YT.detail.preparation}</span>
-          <ul className="yg-tiles">
-            {L.preparation.map((t) => (
-              <li key={t}><PrepIcon kind={prepKind(t)} /><span>{glueLast(t)}</span></li>
-            ))}
-          </ul>
-        </section>
       )}
 
       {/* Dersin biçimi: bölümler süreleriyle orantılı (şerit) ve adları sırasıyla */}
@@ -844,7 +906,35 @@ function Detail({ L, minutes, prevMinutes, opts, onMinutes, onMusicTail, onBack,
           {added.length > 0 && <p className="yg-p small" role="status">{YT.detail.added(minutes, listTr(added.map((s) => s.label.toLocaleLowerCase('tr-TR'))))}</p>}
         </section>
       )}
-      <Sources L={L} minutes={minutes} className="yg-card-src" />
+
+      {prep && (
+        <section className="yg-prep" aria-label={YT.detail.preparation}>
+          <span className="yg-lbl" aria-hidden="true">{YT.detail.preparation}</span>
+          <ul className="yg-tiles">
+            {L.preparation.map((t) => (
+              <li key={t}><PrepIcon kind={prepKind(t)} /><span>{glueLast(t)}</span></li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* Son kapı düzeltmesi: "Neye dayanıyor" hazırlıktan sonra, sakin bir not olarak (metin aynen, açıkta; kart değil) */}
+      <Basis L={L} minutes={minutes} />
+
+      {/* Güvenlik kartını her zaman yeniden açar (sahip kararı 19; modul.md §2.2) */}
+      <button type="button" className="yg-safe-link" onClick={onSafety}>
+        <Info size={17} aria-hidden="true" /><span>{YT.safety.open}</span><ChevronRight className="chev" size={17} aria-hidden="true" />
+      </button>
+
+      <div className="grow" />
+      {/* Alt şerit: izin cümlesi (davet), derse özel tek uyarı, varsa çalan uyku sesinin duracağı (PLAN.v3 §D.3) ve "Başla" */}
+      <div className={`yg-sticky yg-detail-go${over ? ' over' : ''}`}>
+        {invite && <p className="yg-invite"><DoorOpen size={20} aria-hidden="true" /><span>{invite}</span></p>}
+        {vehicle && <p className="yg-invite yg-invite-2 yg-vehicle"><Car size={18} aria-hidden="true" /><span>{vehicle}</span></p>}
+        {sleepOn && <p className="yg-invite yg-invite-2"><VolumeX size={18} aria-hidden="true" /><span>{YT.detail.sleepStops}</span></p>}
+        <button type="button" className="btn yg-start" disabled={minutes == null} onClick={onStart}>{YT.detail.start}</button>
+        {onLater && <button type="button" className="yg-skip yg-later" onClick={onLater}>{YT.detail.later}</button>}
+      </div>
     </main>
   )
 }

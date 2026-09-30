@@ -1,7 +1,7 @@
 // Ders verisi denetimi (yoga-pilot/v3/modul.md §16-G; PLAN.v3 §D.1): yalnız yayımlanmış süreler görünür; yayımlanmış her
 // dosya paketin içinde, çizelgesiyle tutarlı ve ekrandaki cümle söylenen cümle; açılış ve güvenlik satırları her derste.
 import { describe, it, expect } from 'vitest'
-import { readFileSync, existsSync } from 'node:fs'
+import { readFileSync, existsSync, readdirSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import { join } from 'node:path'
@@ -36,23 +36,44 @@ describe('ilk bölüm: dersler ve alanlar', () => {
 })
 
 describe('yayın: yalnız hazır olan görünür', () => {
-  it('bugün yalnız Ders 2 · 15 dk yayımlanmış; öteki süre ve dersler görünmez, yolda aday değil', () => {
+  // İlk bölüm (SAHIP_ISTEKLERI.md madde 10, 17, 18): dört dersin on bir süresi yayımlandı (2026-09-30). Önceden yalnız
+  // Ders 2 · 15 dk yayımlıydı; bu testin o günkü beklentisi yayınla değişti.
+  it('ilk bölüm: Ders 1, 2, 3, 5\'in bütün süreleri yayımlanmış; kütüphane sırası, gece Uykuya Geçiş en üstte', () => {
     const pub = Object.entries(LESSONS).flatMap(([n, L]) => Object.entries(L.versions).filter(([, v]) => v.published === true).map(([m]) => `${n}-${m}`))
-    expect(pub).toEqual(['2-15'])
-    expect(publishedMinutes(2)).toEqual([15])
-    expect(publishedMinutes(1)).toEqual([])
-    expect(isPublished(2, 5)).toBe(false)
-    expect(LESSON_MIN).toEqual({ 2: 15 })
-    expect(PUBLISHED_MINUTES).toEqual({ 2: [15] })
-    expect(visibleLessons(at(10))).toEqual([2])
-    expect(visibleLessons(at(22))).toEqual([2])
+    expect(pub).toEqual(['1-3', '1-5', '1-15', '2-5', '2-15', '2-20', '3-5', '3-15', '5-3', '5-5', '5-15'])
+    for (const L of Object.values(LESSONS)) expect(publishedMinutes(L.n)).toEqual(L.minutes)
+    expect(LESSON_MIN).toEqual({ 1: 3, 2: 5, 3: 5, 5: 3 })
+    expect(PUBLISHED_MINUTES).toEqual({ 1: [3, 5, 15], 2: [5, 15, 20], 3: [5, 15], 5: [3, 5, 15] })
+    expect(visibleLessons(at(10))).toEqual([1, 2, 5, 3])
+    expect(visibleLessons(at(22))).toEqual([3, 1, 2, 5])
+  })
+  it('açılış süresi: istenen yayımlanmışsa o, yoksa dersin varsayılanı', () => {
+    expect(pickMinutes(2)).toBe(20) // Ders 2'nin varsayılanı 20 dk
+    expect(pickMinutes(2, 5)).toBe(5)
+    expect(pickMinutes(2, 3)).toBe(20) // Ders 2'de 3 dk yok (PLAN.v3 karar 4)
+    expect(pickMinutes(1)).toBe(5)
+    expect(pickMinutes(1, 3)).toBe(3)
+    expect(pickMinutes(3)).toBe(15)
+    expect(pickMinutes(5, 15)).toBe(15)
   })
   it('published bayrağı olmayan süre seçilemez: açılış süresi hep yayımlanmış bir süre', () => {
-    expect(pickMinutes(2)).toBe(15) // varsayılan 20 yayımlanmadı → en yakın yayımlanmış
-    expect(pickMinutes(2, 5)).toBe(15)
-    expect(pickMinutes(2, 15)).toBe(15)
-    expect(pickMinutes(1, 3)).toBeNull()
-    expect(sectionsOf(1, 3)).toEqual([])
+    const saved = structuredClone({ 1: LESSONS[1].versions, 2: LESSONS[2].versions })
+    try {
+      delete LESSONS[2].versions[20].published
+      delete LESSONS[2].versions[5].published
+      for (const m of [3, 5, 15]) delete LESSONS[1].versions[m].published
+      expect(pickMinutes(2)).toBe(15) // varsayılan 20 yayımlanmadı → en yakın yayımlanmış
+      expect(pickMinutes(2, 5)).toBe(15)
+      expect(pickMinutes(2, 15)).toBe(15)
+      expect(pickMinutes(1, 3)).toBeNull()
+      expect(publishedMinutes(1)).toEqual([])
+      expect(visibleLessons(at(10))).toEqual([2, 5, 3])
+      expect(isPublished(2, 5)).toBe(false)
+    } finally {
+      LESSONS[1].versions = saved[1]
+      LESSONS[2].versions = saved[2]
+    }
+    expect(isPublished(2, 5)).toBe(true)
   })
   it('Uykuya Geçiş yayımlanınca 20.00–04.59 arasında en üstte, gündüz en sonda (kütüphane sırası PLAN.v2 §A.3)', () => {
     const fake = {
@@ -109,8 +130,64 @@ describe('yayımlanmış her dosya', () => {
     expect(sectionsOf(2, 15).map((s) => s.label).join(' · ')).toBe('Karşılama · Niyet (sankalpa) · Beden dolaşımı · Nefes ve geri sayma · İmgeleme · Niyete dönüş · Kapanış')
     expect(addedSections(2, 15, 15)).toEqual([])
     expect(addedSections(2, null, 15)).toEqual([])
+    expect(addedSections(2, 15, 20).map((s) => s.id)).toEqual(['C3']) // 20 dk'da zıtlıklar
+    expect(addedSections(2, 5, 15).map((s) => s.id)).toEqual(['C4'])
+    expect(addedSections(1, 3, 15).map((s) => s.id)).toEqual(['C2', 'C3'])
+    expect(addedSections(3, 5, 15).map((s) => s.id)).toEqual(['C4'])
+    expect(addedSections(5, 5, 15).map((s) => s.id)).toEqual(['C2', 'C3'])
+  })
+  // Onaylı ilk bölüm dosyaları (render/out/ilk-bolum) birebir; timeline/2 çizelgesinin kendi özeti ve dosya adı
+  it('çizelge aynı dosyayı anlatır (timeline/2: file, audio.sha256, minutes); mutlak yol yok', () => {
+    for (const [L, m, v] of published) {
+      const tl = JSON.parse(readFileSync(join(PUBLIC, v.timeline), 'utf8'))
+      expect(tl.schema).toBe('nefona.yoga.timeline/2')
+      expect(`yoga/${tl.file}`).toBe(v.file)
+      expect(tl.lessonNo).toBe(L.n)
+      expect(tl.minutes).toBe(m)
+      expect(tl.audio.sha256.slice(0, 16)).toBe(v.contentHash)
+      expect(tl.voice.id).toBe(v.voice)
+      expect(tl.music.scene ?? undefined).toBe(v.scene)
+      expect(readFileSync(join(PUBLIC, v.timeline), 'utf8')).not.toMatch(/"\/(tmp|home|Users|root)\//)
+    }
+  })
+  it('gerçek süre: MP3 çerçeve sayısından (MPEG-1 Layer III, 1152 örnek) hedef süre ± 0,1 sn (kodlayıcı dolgusu)', () => {
+    for (const [, , v] of published) {
+      const sec = mp3Seconds(readFileSync(join(PUBLIC, v.file)))
+      expect(sec, v.file).toBeGreaterThanOrEqual(v.seconds)
+      expect(sec - v.seconds, v.file).toBeLessThan(0.1)
+    }
+  })
+  it('Uykuya Geçiş müzik kuyruğu pakette: 10 dk (20 dk seçilirse döngülenir)', () => {
+    expect(LESSONS[3].musicTailFile).toBe('yoga/ders3-kuyruk.mp3')
+    const sec = mp3Seconds(readFileSync(join(PUBLIC, LESSONS[3].musicTailFile)))
+    expect(sec).toBeGreaterThanOrEqual(600)
+    expect(sec).toBeLessThan(600.1)
+    for (const L of Object.values(LESSONS)) if (L.n !== 3) expect(L.musicTailFile ?? null).toBeNull()
+  })
+  it('public/yoga\'da yalnız yayımlanmış dosyalar ve kuyruk (artık dosya pakete girmez)', () => {
+    const want = new Set([...published.flatMap(([, , v]) => [v.file, v.timeline]), LESSONS[3].musicTailFile].map((p) => p.replace(/^yoga\//, '')))
+    expect(new Set(readdirSync(join(PUBLIC, 'yoga')))).toEqual(want)
   })
 })
+
+// MPEG-1 Layer III çerçevelerini sayar (ID3 başlığı atlanır): süre = çerçeve × 1152 / örnekleme hızı
+function mp3Seconds(buf) {
+  const RATES = [44100, 48000, 32000]
+  const KBPS = [0, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320]
+  let i = buf.subarray(0, 3).toString('latin1') === 'ID3' ? 10 + ((buf[6] << 21) | (buf[7] << 14) | (buf[8] << 7) | buf[9]) : 0
+  let frames = 0
+  let rate = null
+  while (i + 4 <= buf.length) {
+    const b1 = buf[i + 1]
+    const b2 = buf[i + 2]
+    const ok = buf[i] === 0xff && (b1 & 0xfe) === 0xfa && (b2 >> 4) !== 0 && (b2 >> 4) !== 15 && ((b2 >> 2) & 3) !== 3
+    if (!ok) { i += 1; continue }
+    rate = RATES[(b2 >> 2) & 3]
+    frames += 1
+    i += Math.floor((144 * KBPS[b2 >> 4] * 1000) / rate) + ((b2 >> 1) & 1)
+  }
+  return rate ? (frames * 1152) / rate : 0
+}
 
 describe('güvenlik satırları ve kanıt dili (modul.md §2.4-12, §10, §16-G)', () => {
   const allText = (o) => (typeof o === 'string' ? [o] : Array.isArray(o) ? o.flatMap(allText) : o && typeof o === 'object' ? Object.values(o).flatMap(allText) : [])

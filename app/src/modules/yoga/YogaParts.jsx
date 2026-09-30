@@ -83,16 +83,19 @@ export function LessonPath({ title, after = false, labels }) {
 // sonra içi boş halka olarak (çıpalama yok, OZET.md §10). sky: önce puanında ölçeğin üstündeki gök (güneş doğmamış).
 // Çizgi ve dokunma alanı kenardan kenara (ekranın 20 px'lik kenar boşluğuna taşar: GX, yoga.css .yg-hz --gx); duraklar
 // içeride: ilk ve son durağın merkezi kenar boşluğunun 22 px içinde.
+// disabled: puan verildi ya da atlandı (sonra puanında zorlanma satırı indi; sahip kararı 20): ölçek yerinde ve sönük
+// kalır, dokunuş ve klavye bir şey değiştirmez (VoiceOver "sönük" okur); verilen puan başparmakta görünmeye devam eder.
 const GX = 20
 const at = (v) => (v - 1) / (RATE_MAX - 1)
 const posOf = (v) => `calc(${GX + 22}px + (100% - ${2 * GX + 44}px) * ${at(v)})`
 const clampV = (v) => Math.min(RATE_MAX, Math.max(1, v))
-export function HorizonScale({ value = null, onChange, label, ends = [], was = null, sky = false }) {
+export function HorizonScale({ value = null, onChange, label, ends = [], was = null, sky = false, disabled = false }) {
   const trackRef = useRef(null)
   const drag = useRef(null)
   const last = useRef(value)
   last.current = value
   const set = (v) => {
+    if (disabled) return
     const x = clampV(v)
     if (x === last.current) return
     last.current = x
@@ -154,13 +157,14 @@ export function HorizonScale({ value = null, onChange, label, ends = [], was = n
   const has = value != null
   const endText = (v) => (v === 1 ? ends[0] : v === RATE_MAX ? ends[1] : null)
   return (
-    <div className={`yg-hz${has ? ' has' : ''}`}>
+    <div className={`yg-hz${has ? ' has' : ''}${disabled ? ' off' : ''}`}>
       <div className="yg-hz-ends" aria-hidden="true"><span>{ends[0]}</span><span>{ends[1]}</span></div>
       <div
         ref={trackRef}
         className="yg-hz-track"
         role="slider"
-        tabIndex={0}
+        tabIndex={disabled ? -1 : 0}
+        aria-disabled={disabled || undefined}
         aria-label={label}
         aria-valuemin={1}
         aria-valuemax={RATE_MAX}

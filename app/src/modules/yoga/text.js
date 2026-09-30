@@ -17,7 +17,8 @@ export const YT = {
   // gelirse ad yeniden sahip ve editör onayına.
   voices: { hoc: 'Nefona Hoca' },
 
-  // Güvenlik kartı (modul.md §2.2): bir kez; ders ayrıntısındaki (i) ile yeniden
+  // Güvenlik kartı (modul.md §2.2): yogaya ilk girişte bir kez; ders ayrıntısındaki "Başlamadan önce ›" ile her zaman
+  // yeniden (sahip kararı 19)
   safety: {
     title: 'Başlamadan önce',
     items: [
@@ -31,7 +32,7 @@ export const YT = {
     footer: 'Nefona tedavi değildir. Uzun süredir çok zorlanıyorsan bir uzmanla konuşmak en güçlü adım. Acil durumda',
     emergency: '112',
     ok: 'Anladım',
-    open: 'Başlamadan önce', // ayrıntıda kartı yeniden açan satırın yazılı adı (kartın başlığıyla aynı söz; kart görüldükten sonra)
+    open: 'Başlamadan önce', // ayrıntıda kartı yeniden açan satırın yazılı adı (kartın başlığıyla aynı söz)
   },
 
   // Ses denetimi (PLAN.v3 §D.2): ilk derste "Başla"dan önce 10 sn. Dosya yokken adım hiç görünmez (Yoga.jsx
@@ -100,9 +101,13 @@ export const YT = {
     ok: 'Tamam',
   },
 
-  // Zorlanma sorusu (modul.md §2.8; güvenlik §11.F; §10.3-c iki biçim)
+  // Zorlanma sorusu (modul.md §2.8; güvenlik §11.F; §10.3-c iki biçim). Sahip kararı 20 (SAHIP_ISTEKLERI.md): ayrı ekran
+  // değil, sonra puanının altında tek satır; soru netleşti. Yeni soru iki bağımsız dil incelemesinden ve güvenlik
+  // okumasından geçti (üçü de aynı adayı seçti; C_5SN_RAPORU.md "Sahip kararları 19–20"). Eski soru: "Ders sırasında
+  // zorlandın mı?" (değerlendiriciler: "belirsiz", "başarısızlık kokuyor"). Seçenekler, "Atla", "Devam" ve "Çok"un dört
+  // metni değişmedi; cevapların kayıttaki anlamı da (no · some · much).
   hard: {
-    question: 'Ders sırasında zorlandın mı?',
+    question: 'Derste kendini kötü hissettin mi?',
     options: [
       { id: 'no', label: 'Hayır' },
       { id: 'some', label: 'Biraz' },

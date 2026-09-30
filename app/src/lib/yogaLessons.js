@@ -7,6 +7,13 @@
 // yolda aday olmaz. Ses dosyası geldikçe yalnız bu dosyadaki veri değişir: `published`, `file`, `timeline`,
 // `contentHash`, `sections` (dosyanın zaman çizelgesindeki blok sırası; yogaLessons.test.js dosyayla karşılaştırır).
 // Dosyalar app/public/yoga/ altındadır ve web dağıtımına girmez (.vercelignore).
+//
+// İlk bölüm (2026-09-30): dört dersin on bir süresi yayımlandı. Kaynak yoga-pilot/render/out/ilk-bolum/dersN-DK.{mp3,
+// timeline.json} (render/tools/mixib.py; nefona.yoga.timeline/2; _rapor/d0N-DKdk.json hepsi pass). Sahip onayı:
+// SAHIP_ISTEKLERI.md madde 10 (ilk bölüm), 17 (Ders 2, 3, 5 sesleri), 18 (Ders 1 sesleri). Ses Nefona Hoca (hoc), müzik
+// A (ElevenLabs Music; madde 8). MP3 bilinçli bir ara karar: AAC kodek testi sonrası (SPEC.v3 §14) dosyalar değişir,
+// contentHash ile birlikte. planVersion: ders verisinin sürümü (b/dersN/*.lesson*.json "version") / ses-müzik.
+// seconds dosyanın hedef süresidir (çizelgenin T'si); çözülmüş MP3 kodlayıcı dolgusu kadar (≈ 0,04 sn) uzundur.
 import { NBSP } from './format.js'
 
 // Kütüphane sırası (PLAN.v2 §A.3; modul.md §2.3): numarasız bir başlangıç yolu, dersler serbest. Ders 3 (Uykuya Geçiş)
@@ -76,9 +83,9 @@ export const LESSONS = {
     ],
     sectionLabels: { A: 'Karşılama', C1: 'Uzun veriş', C2: 'İç çekiş', C3: 'Vızıltılı nefes', K: 'Kapanış' },
     versions: {
-      3: { file: 'yoga/ders1-3.mp3', timeline: 'yoga/ders1-3.timeline.json', seconds: 180 },
-      5: { file: 'yoga/ders1-5.mp3', timeline: 'yoga/ders1-5.timeline.json', seconds: 300 },
-      15: { file: 'yoga/ders1-15.mp3', timeline: 'yoga/ders1-15.timeline.json', seconds: 900 },
+      3: { published: true, file: 'yoga/ders1-3.mp3', timeline: 'yoga/ders1-3.timeline.json', seconds: 180, contentHash: '08a93d0a56b9a1c8', planVersion: 'B-parti1-taslak-2/hoc-A', voice: 'hoc', bg: 'music', sections: ['A', 'C1', 'K'] },
+      5: { published: true, file: 'yoga/ders1-5.mp3', timeline: 'yoga/ders1-5.timeline.json', seconds: 300, contentHash: '98234d291b894f66', planVersion: 'B-parti1-taslak-2/hoc-A', voice: 'hoc', bg: 'music', sections: ['A', 'C1', 'K'] },
+      15: { published: true, file: 'yoga/ders1-15.mp3', timeline: 'yoga/ders1-15.timeline.json', seconds: 900, contentHash: 'c5db519ffc854ef0', planVersion: 'B-parti1-taslak-2/hoc-A', voice: 'hoc', bg: 'music', sections: ['A', 'C1', 'C2', 'C3', 'K'] },
     },
   },
   2: {
@@ -127,22 +134,25 @@ export const LESSONS = {
     // BR.* köprü blokları şeritte ayrı bölüm değildir (öndeki bölüme sayılır). N1'in ekran adı ders verisinden
     // (b/ders2/ders2.lesson.v3.json blocks.N1.screenLabel); ötekiler öneridir, Türkçe editör onayına.
     sectionLabels: { A: 'Karşılama', N1: 'Niyet (sankalpa)', C1: 'Beden dolaşımı', C2: 'Nefes ve geri sayma', C3: 'Zıtlıklar', C4: 'İmgeleme', C5: 'Sessiz dinlenme', N2: 'Niyete dönüş', K: 'Kapanış' },
+    // 15 dk: onaylı ilk bölüm dosyası (c875dcef…) Kapı 2'nin A adımı karışımının (726417fa…) yerine geçti (B adımı metin
+    // düzeltmeleri; acik-isler-denetimi Y-02). Dosya adı aynı kaldı: eski karışımı yeni dosyadan ayıran bir düzenek yok;
+    // güncellemeden önce yarım kalmış dersin yerel kaydı (journal) dosya adıyla eşleşir (yogaRecord.js lessonByFile) ve
+    // yeni contentHash'le yazılır.
     versions: {
-      5: { file: 'yoga/ders2-5.mp3', timeline: 'yoga/ders2-5.timeline.json', seconds: 300 },
-      // Nefona Hoca + müzik A (SAHIP_ISTEKLERI.md madde 8); kaynak: yoga-pilot/render/out/ders2-15dk-hoc-A.{mp3,timeline.json}
+      5: { published: true, file: 'yoga/ders2-5.mp3', timeline: 'yoga/ders2-5.timeline.json', seconds: 300, contentHash: 'ccf41e3801bb23a9', planVersion: 'b-v3.1/hoc-A', voice: 'hoc', bg: 'music', scene: 'orman', sections: ['A', 'N1', 'C1', 'C2', 'N2', 'K'] },
       15: {
         published: true,
         file: 'yoga/ders2-15.mp3',
         timeline: 'yoga/ders2-15.timeline.json',
         seconds: 900,
-        contentHash: '726417faa1760e11', // mp3'ün SHA-256'sının ilk 16 hanesi
+        contentHash: 'c875dcef4885db95', // mp3'ün SHA-256'sının ilk 16 hanesi
         planVersion: 'b-v3.1/hoc-A',
         voice: 'hoc',
         bg: 'music',
         scene: 'orman',
         sections: ['A', 'N1', 'C1', 'C2', 'C4', 'N2', 'K'],
       },
-      20: { file: 'yoga/ders2-20.mp3', timeline: 'yoga/ders2-20.timeline.json', seconds: 1200 },
+      20: { published: true, file: 'yoga/ders2-20.mp3', timeline: 'yoga/ders2-20.timeline.json', seconds: 1200, contentHash: '7d64336d1c5ffdea', planVersion: 'b-v3.1/hoc-A', voice: 'hoc', bg: 'music', scene: 'orman', sections: ['A', 'N1', 'C1', 'C2', 'C3', 'C4', 'N2', 'K'] },
     },
   },
   3: {
@@ -183,10 +193,12 @@ export const LESSONS = {
       src('34260686', 'Tran 2021 · ayağa kalkınca kan basıncı düşüşü', '10.1093/ageing/afab090'),
     ],
     sectionLabels: { A: 'Karşılama', C1: 'Yavaş veriş', C2: 'Bedenin ağırlaşması', C4: 'Geri sayma', C3: 'İmgeleme', K: 'Uyku izni' },
-    musicTailFile: null, // müzik kuyruğu dosyası henüz üretilmedi (ör. 'yoga/ders3-kuyruk.mp3')
+    // "Ders bitince müzik" kuyruğu: 10 dk'lık dosya (render/out/ilk-bolum/ders3-kuyruk.mp3); 20 dk seçilirse yerel
+    // oynatıcı döngüler (SPEC.v3 §10 "döngü")
+    musicTailFile: 'yoga/ders3-kuyruk.mp3',
     versions: {
-      5: { file: 'yoga/ders3-5.mp3', timeline: 'yoga/ders3-5.timeline.json', seconds: 300 },
-      15: { file: 'yoga/ders3-15.mp3', timeline: 'yoga/ders3-15.timeline.json', seconds: 900 },
+      5: { published: true, file: 'yoga/ders3-5.mp3', timeline: 'yoga/ders3-5.timeline.json', seconds: 300, contentHash: '76ab8a403478696c', planVersion: 'B-parti1-metin-2/hoc-A', voice: 'hoc', bg: 'music', sections: ['A', 'C1', 'C2', 'C3', 'K'] },
+      15: { published: true, file: 'yoga/ders3-15.mp3', timeline: 'yoga/ders3-15.timeline.json', seconds: 900, contentHash: 'fea337327a711018', planVersion: 'B-parti1-metin-2/hoc-A', voice: 'hoc', bg: 'music', sections: ['A', 'C1', 'C2', 'C4', 'C3', 'K'] },
     },
   },
   5: {
@@ -226,9 +238,9 @@ export const LESSONS = {
     ],
     sectionLabels: { A: 'Karşılama', C1: 'Nefes çapası', C2: 'Nefes sayma', C3: 'Sessiz odak', K: 'Kapanış' },
     versions: {
-      3: { file: 'yoga/ders5-3.mp3', timeline: 'yoga/ders5-3.timeline.json', seconds: 180 },
-      5: { file: 'yoga/ders5-5.mp3', timeline: 'yoga/ders5-5.timeline.json', seconds: 300 },
-      15: { file: 'yoga/ders5-15.mp3', timeline: 'yoga/ders5-15.timeline.json', seconds: 900 },
+      3: { published: true, file: 'yoga/ders5-3.mp3', timeline: 'yoga/ders5-3.timeline.json', seconds: 180, contentHash: 'a72587e780826447', planVersion: 'B-parti1-taslak-2/hoc-A', voice: 'hoc', bg: 'music', sections: ['A', 'C1', 'K'] },
+      5: { published: true, file: 'yoga/ders5-5.mp3', timeline: 'yoga/ders5-5.timeline.json', seconds: 300, contentHash: '21c25353e2f59dfc', planVersion: 'B-parti1-taslak-2/hoc-A', voice: 'hoc', bg: 'music', sections: ['A', 'C1', 'K'] },
+      15: { published: true, file: 'yoga/ders5-15.mp3', timeline: 'yoga/ders5-15.timeline.json', seconds: 900, contentHash: '06b1ed2d716e5566', planVersion: 'B-parti1-taslak-2/hoc-A', voice: 'hoc', bg: 'music', sections: ['A', 'C1', 'C2', 'C3', 'K'] },
     },
   },
 }

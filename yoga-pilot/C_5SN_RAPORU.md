@@ -674,3 +674,200 @@ değişmedi).
 - Yedek (değişiklikten önceki hâl): `scratchpad/yoga-kapi2/once/`.
 - Deneme çekimleri: `scratchpad/yoga-kapi2/deneme1/`, `deneme2/`, `deneme3/`.
 - Yoga dışında hiçbir dosyaya dokunulmadı; git kullanılmadı.
+
+## 14. Sahip kararları 19–20 (2026-09-30, 14:10)
+
+Kararlar `SAHIP_ISTEKLERI.md` 19 ve 20'de. Yalnız beş dosya değişti: `Yoga.jsx`, `YogaParts.jsx`, `text.js`, `yoga.css`,
+`Yoga.test.jsx`. Git kullanılmadı.
+
+### 14.1 Karar 19: güvenlik kartı ilk girişte, ayrıntıda tek izin cümlesi
+
+**Doğrulama: "bugünkü davranış" değildi.** Kapı turu 1'den beri (§12.2-1) kart, ilk derste "Başla"ya dokununca
+çıkıyordu. `SAHIP_ISTEKLERI.md` 19'daki "bugünkü kod" notu ve `C_5SN_SONUCLARI.md`'deki "gerçek akış 1 → 4 (güvenlik,
+ilk girişte)" satırı bu yüzden koddan farklıydı. Kod sahibin seçimine göre değişti:
+- Kart yogaya ilk girişte bir kez çıkar. Kütüphaneden de yoldan da (`yoga-2`) girilse ilk ekran karttır.
+- "Anladım" girilen yere geçer: kütüphaneye ya da ayrıntıya.
+- İlk girişte "Geri" Ana sayfaya döner; kart onaylanmadığı için bir sonraki girişte yeniden çıkar.
+- Kart onaylanmadan ders başlamaz. Yedek olarak "Başla"da da denetlenir.
+
+**Ayrıntıdaki uyarılar:**
+- Yalnız onaylı izin cümlesi kaldı, "Başla"nın hemen üstünde: "İstediğin an gözlerini açabilir, kıpırdayabilir ya da
+  dersi bitirebilirsin." (`OPENING_PERMISSION`, aynen).
+- "Başlamadan önce ›" artık her zaman görünür. Eskiden yalnız kart görüldükten sonra çıkıyordu.
+- Derse özel tek uyarı Uykuya Geçiş'te: "Bu dersten hemen sonra araç kullanma."
+  - Cümle Ders 3'ün açılış satırından türetilir (`vehicleExtra`): ortak araç cümlesinin ardındaki cümle, aynen.
+  - Ders 3 bu ağaçta yayımlı değil. Test, veriyi geçici olarak yayımlayıp sınıyor.
+
+**Ayrıntıdan kalkan satırlar kaybolmadı:**
+- Ortak araç satırı: kartta "Araç kullanırken açma." maddesi var (gövdesi: araç, makine, su).
+- Kalkış satırı "Uzanarak yaptığın derslerden sonra önce yana dön, otur, sonra kalk.":
+  - kartın "Yavaşça kalk." maddesinin gövdesinde harfi harfine zaten var, karta ekleme gerekmedi;
+  - bitiş ekranının çerçeveli notunda da duruyor (değişmedi);
+  - Ders 2 kapanışında seste de var: "Uzanıyorsan önce yana dön, sonra otur."
+- Ders 3'ün gece kalkış satırı "Gece kalkman gerekirse önce yana dön, otur, sonra kalk.":
+  - durdurma ekranının gece metninde aynen duruyor (`YT.stopped.night`);
+  - kartta "Yavaşça kalk." maddesi var;
+  - Ders 3 kapanışında seste: "Kalkacaksan önce yana dön, otur ve bekle; başın dönerse biraz daha otur."
+- İki ders satırı karar gereği ayrıntıda yok. Bu dersler yayımlanınca etkilenir:
+  - Ders 1 "Başın dönerse ya da ellerin karıncalanırsa normal nefesine dön.": derste her sürümde söyleniyor (`c1.guven`).
+  - Ders 5 "Gözlerin yorulursa kapatman ya da kırpman yeterli.": derste söylenmiyor. Yakın söz var: "Gözlerini kapatmak
+    ya da açık tutmak sana kalmış…". Ekranda da artık yok (§14.4).
+
+**Üst kısım kapağı tekrar etmiyor** (kapı turu 3'te beş değerlendiricinin beşi de "üst yarı kapağın neredeyse aynısı"
+dedi; etkilenen tek değerlendirici de bunu en zayıf yer saydı):
+- Sahne kısa bir şerit: 390×844'te 182 px (eskiden 292), 320×640'ta 108 px (eskiden 152). Güneş yarı doğmuş; kapaktaki
+  ufuktan bir adım ileri.
+- Ad daha küçük: 390'da ≈ 25 px (eskiden 30), kısa ekranda 1,3rem (eskiden 1,45rem).
+- Süre ve duruş çerçevesiz tek satırda: "15 dk · Uzanarak". Kapaktaki iki çip tekrarlanmıyor.
+- Dersin sözü yalnız yoldan açılınca yazılır, çünkü o zaman kapak görülmemiştir. Kütüphaneden gelince tekrar yok.
+
+**Dersin içeriği öne alındı**, sırasıyla:
+- süre çipleri (birden çok süre yayımlıysa);
+- Bölümler: şerit ve adlar;
+- "Neye dayanıyor":
+  - kanıt cümlesi açıkta; eskiden kapalı Kaynaklar kartının içindeydi;
+  - metin aynen, yalnız cümlenin kendi başındaki "Neye dayanıyor:" kalın;
+  - kaynak listesi aynı kartta açılır;
+- Hazırlık;
+- "Başlamadan önce ›".
+
+**Alt şerit:** İzin cümlesi ve "Başla" alt şeritte duruyor; güvenlik kartındaki "Anladım" şeridiyle aynı kalıp. İçerik
+uzasa da ikisi hep görünür (320 px, Uykuya Geçiş'in uzun kanıt cümlesi). Yoldan açılınca "Sonra yaparım" da şeritte,
+"Başla"nın altında yazı düğmesi olarak duruyor.
+
+### 14.2 Karar 20: zorlanma sorusu sonra puanının altında tek satır
+
+- **Soru:** "Derste kendini kötü hissettin mi?" (onaylı metin). `text.js`'te yalnız `hard.question` değişti. Aynı
+  kalanlar: seçenekler, "Atla", "Devam", "Çok"un dört metni ve kayıttaki kimlikler (`no`, `some`, `much`).
+- **Yer:** Sonra puanında "Devam"dan (puan yazılır) ya da "Atla"dan (yazılmaz) sonra ekran değişmez.
+  - Ölçek yerinde kalır ama sönükleşir; puan artık değiştirilemez. VoiceOver ölçeği "sönük" okur.
+  - "Devam · Atla"nın yerine zorlanma satırı iner. Ayrı zorlanma ekranı yok.
+- **Satır:** güvenlik okumasının iki yerleşim notuna uyar.
+  - Ölçekten ince bir ayraç ve boşlukla ayrılır.
+  - Soru 1,02rem Onest'le tek satır. Çekimde 320 px'te 256/280 px ölçüldü.
+  - Seçenekler ölçeğin duraklarından farklı: üç hap. Yanında "Atla" yazı düğmesi, hep görünür. Dokunma alanı 46 px.
+- **Davranış** (cevapların anlamı aynı):
+  - "Hayır" ve "Biraz" yazılır, bitiş ekranına geçilir.
+  - "Çok" yazılır; metni kendi kutusunda, 1rem boyunda çıkar. Metin iki biçimden biridir; dersin daha kısa süresi yoksa
+    kısa biçim. "Devam" hemen altında durur ve sayfa kendiliğinden metne ve "Devam"a kayar (Hareketi Azalt'ta kaymadan).
+  - "Atla" hiçbir şey yazmaz. "Çok"tan sonra basılırsa "Çok" da silinir (`hard: null`).
+  - "Çok"un sonucu değişmedi: bitişte aynı dersin en kısa süresi ve "Gözlerin açık kalabilir."
+- **Durdurma yolu** (X → "Tamam", ders 30 sn'yi geçtiyse; modul.md §2.7):
+  - Yalnız bu satır çıkar, aynı bileşenle. Tek soru olduğu için başlık `h1` ve ayraç yok.
+  - Üstte dersin yeri (kıyı) boşluğu doldurur, satır başparmağa yakın durur. Kapı turu 3'teki "adım çizgisiyle soru
+    arasında kocaman bir boşluk" notu böyle karşılandı.
+  - 320 px'te soru 1,06rem, tek satır (265/280 px).
+- **Küçük hata düzeltildi:** Kişi sonra puanında bir sayı seçip "Atla"ya basarsa, yazılmayan sayı bitişte "6 → 4" diye
+  görünüyordu. Artık görünmez.
+- **Kalan zayıflık** (güvenlik okuması): "Hayır" bir "sorun yok" kanıtı değildir. Kod bu cevabı yalnız kaydeder; hiçbir
+  yerde onu güvence gibi kullanmaz.
+
+### 14.3 Testler, derleme, çekim
+
+- **Testler:** `npx vitest run` → 141 dosya, **1906 test, hepsi geçti.**
+  - Başlangıçtaki koşuda başka iş akışının Home testlerinde 4 kırmızı vardı; son koşuda yok.
+  - Yoga: 7 dosya, 103 test (önce 100).
+- **`Yoga.test.jsx`'te değişen beklentiler ve gerekçeleri:**
+  - Kartın yeri artık ilk giriş (karar 19). Üç test yeniden yazıldı: ilk giriş, yoldan ilk giriş, kart karoları. İlk giriş
+    kartında "Geri" Ana sayfaya döner.
+  - Ayrıntı (karar 19 ve kapı turu 3): tek uyarı izin cümlesi; araç ve kalkış satırı yok; "Neye dayanıyor" açıkta ve bir
+    kez; içerik sırası; alt şerit; "Başlamadan önce" her zaman; ayrıntıdan açılan kartta "Geri" ayrıntıya döner.
+  - Zorlanma (karar 20): yeni soru metni ve aynı ekranda inen satır. Ana akış, tema testi ve durdurma yolu buna göre.
+  - Yeni üç test:
+    - kalkış ve araç satırlarının kartta kaldığı ve Ders 3 satırının türetilmesi;
+    - Uykuya Geçiş ayrıntısı (veri test süresince yayımlı);
+    - satırda "Biraz", "Atla" ve "Çok → Atla"nın kayda ne yazdığı.
+  - `Yoga.data.test.jsx`'e dokunulmadı, değişmeden geçiyor. Akış buna göre kuruldu: "Atla" puanı geçer, satır iner,
+    "Hayır" bitişe götürür.
+- **Derleme:** `vite build` geçti. Çıktı `scratchpad/yoga-kapi3/build/` altında, depoya yazılmadı. Tek uyarı önceden de
+  olan 500 kB uyarısı.
+- **Çekim:** `cek.sh` → 44 PNG, Kod `f520d40d3d757fe4` (son kodla aynı).
+  - Yoga ekranlarının hiçbirinde yatay taşma, görünüm dışı öğe, kırpılmış metin ya da üst üste binme yok.
+  - Konsolda hata yok.
+  - Kayıt dört birleşimde de doğru: ders 2, 900/900 sn, 7 → 4, "Hayır".
+- **Düzenek** (depo dışı, `scratchpad/yoga-5sn/duzenek/cek.mjs`; yedeği `scratchpad/yoga-kapi3/cek.mjs.once`):
+  - yeni akış: kart ilk girişte, 7c aynı ekranda;
+  - gerçek sıra 4 → 2 → 3 → 5 → 6b → 6 → 7 → 7b → 7c → 8;
+  - alt şeridin (`.yg-sticky`) altından kayan içerikle binişme sayılmıyor. Bu tasarım gereği; sekme çubuğu için de öyle.
+- **Kapı turu 3'ün çekimleri:** `shots/`'ta üzerine yazıldılar. Aynı kodla yeniden üretildi (Kod `2c71469e7267d3cd`,
+  doğrulandı): `scratchpad/yoga-kapi3/tur3/shots/`.
+- **Ek anlar:** `scratchpad/yoga-kapi3/ek/` (`ek.sh`), 20 an.
+  - Anlar: ayrıntının aşağısı, sonra puanında "Çok", durdurma yolunda satır ve "Çok", yoldan ilk giriş.
+  - Hepsinde yatay taşma, görünüm dışı öğe ve 44 px altı dokunma alanı yok.
+  - "Çok" 320×640'ta: sayfa kayar, "Devam" ekranın altında (586–640).
+- **Kendi bakışım** (390 ve 320, açık ve koyu):
+  - Kart kapının önünde, kapak ondan sonra temiz açılıyor.
+  - Ayrıntı:
+    - kısa şerit, ad ve "15 dk · Uzanarak" var;
+    - göz Bölümler'e ve "Neye dayanıyor"a iniyor, altta izin cümlesi ve "Başla";
+    - kapak ile ayrıntı artık bir bakışta iki ayrı ekran.
+  - 7c: soru küçük ve tek satır, ölçek sönük, üç hap ve "Atla".
+  - Durdurma yolu: sahne ekranı dolduruyor, satır altta.
+  - **Bu bakış bir 5 saniye sınaması değildir.**
+- **Cihazda doğrulanmadı `[~]`:**
+  - VoiceOver odağının inen satırda soruya gelmesi;
+  - iOS WebKit'te alt şerit (`position: sticky`);
+  - `scrollIntoView` davranışı.
+
+### 14.4 Onay bekleyenler
+
+- **Belgeler** (kod aşamasının dışında, dokunulmadı). Sahip kararları 19–20'ye bağlanarak güncellenmeli:
+  - modul.md §2.4-12 ve §10.1: açılış satırları ve "araç uyarısı her ders ekranında";
+  - modul.md §2.8: soru metni ve yerleşim;
+  - PLAN.v3 §D.2: kartın yeri;
+  - PLAN.v3 §D.6: açılış satırları;
+  - dossier-guvenlik §11.F: soru metni.
+  - modul.md §2.2 zaten "ilk girişte" diyor.
+- **Klinik:**
+  - Ders 5'in "Gözlerin yorulursa kapatman ya da kırpman yeterli." satırı ayrıntıdan kalktı ve derste söylenmiyor. Ders 5
+    yayımlanmadan önce bakılmalı.
+  - "Çok"tan sonra "Atla" cevabı siliyor. İstenirse "Çok" korunabilir; küçük bir değişiklik.
+- **Türkçe editör:** Yeni metin yok. Yerleşim kararları:
+  - "Neye dayanıyor:" kalın;
+  - izin cümlesi alt şeritte;
+  - dersin sözü yalnız yoldan açılınca.
+- **5 saniye kapısı:** Değişen ekranlar yeniden sınanmadı: 3 (ayrıntı), 4 (yeni yeri) ve 7c (aynı ekranda satır). Gerçek
+  sırayla gösterilmeli: 4 → 2 → 3 → 5 → 6b → 6 → 7 → 7b → 7c → 8.
+
+### 14.5 Değişen dosyalar
+
+- `app/src/modules/yoga/`:
+  - `Yoga.jsx`: kartın yeri ve ilk giriş "Geri"si; ayrıntı (kısa üst kısım, içerik, "Neye dayanıyor", alt şerit, derse
+    özel araç cümlesi); zorlanma satırı (`HardRow`) ve sonra puanının ikinci adımı; durdurma yolu; alt şerit çizgisi için
+    ortak `useStickyOver` (kart ve ayrıntı);
+  - `YogaParts.jsx`: `HorizonScale`'e `disabled`;
+  - `text.js`: `hard.question` ve yorumlar;
+  - `yoga.css`: ayrıntı, "Neye dayanıyor", alt şerit, zorlanma satırı, durdurma yolu, kısa ve dar ekran; eski zorlanma
+    ekranının ve açılış satırlarının CSS'i silindi;
+  - `Yoga.test.jsx`: §14.3.
+- Yedek (değişiklikten önceki hâl): `scratchpad/yoga-kapi3/once/`.
+- Dokunulmayanlar: `timeline.js`, `YogaPlayer.jsx`, `BreathForm.jsx`, `lib/yogaLessons.js`, `Yoga.data.test.jsx` ve yoga
+  dışındaki bütün dosyalar. Git kullanılmadı.
+
+### 14.6 Son kapı düzeltmesi (2026-09-30, 14:52–15:01 UTC)
+
+Etkilenmeyenler: 3 (2/5), 3c (1/5), 7c-kötü (1/2), 7c-zorlanma (0/3). Kök nedenler ve düzeltmeler (yalnız sunuş; onaylı
+metin ve güvenlik içeriği aynen, yeni söz yok):
+- **3 · ayrıntı:** Kanıt cümlesi kartlı ve bölümlerin hemen altındaydı, ilk ekranın en büyük bloğu oluyordu. Artık
+  hazırlıktan sonra geliyor ve kart değil, sakin bir not: küçük, sönük yazı, "Neye dayanıyor:" kalın. Hâlâ açıkta ve
+  aynen. Üst görsel daha geniş: 844'te 150–212 px, kısa ekranda 112 px.
+- **3c · Uykuya Geçiş:** Ders süresi sırası ile müzik sırası birbirinin aynısıydı. Ders süresinin üstüne onaylı "Süre"
+  etiketi geldi ve büyük hap olarak kaldı. "Ders bitince müzik" artık küçük bölmeli bir seçici. Gece göğünün açık
+  temadaki geçişi %90'dan sonra kısa bir kenar: çamurlu gri bant yok. Kanıt notu artık alt şeridin arkasında değil,
+  kaydırınca okunuyor.
+- **7c · zorlanma satırı:** Ayraç altındaki form satırı yerine kendi kartı var: dersin renginde üst kenar, büyük başlık.
+  Böylece ölçekten ayrılıyor ve "Çok" ile ölçeğin "çok"u karışmıyor. "Atla"nın altı çizili; dokunulabilir olduğu belli.
+- Testler: `Yoga.test.jsx` sıra beklentisi güncellendi (bölümler → hazırlık → "Neye dayanıyor" → "Başlamadan önce").
+  Yoga testleri 236/236 geçti. Bütün takım 143 dosya / 2051 test geçti, derleme de sorunsuz.
+- Çekim: `scratchpad/yoga-son/shots/` aynı adlarla (48 PNG, 15:00). Varsayılan çıktı da yenilendi:
+  `scratchpad/yoga-5sn/shots/`.
+- Dosyalar: `Yoga.jsx` (Detail: `is-night`, `yg-len`, `yg-tail`/`yg-segctl`, Basis yeri), `yoga.css` (dosya sonunda
+  tek blok), `Yoga.test.jsx` (tek sıra satırı). Git kullanılmadı.
+- **Kalan (bu dosyalarla çözülmez):**
+  - Ders 2'de ilk açılışta 20 dk seçili geliyor. `defaultMinutes` `lib/yogaLessons.js`'te; 3 değerlendirici "uzun"
+    dedi, sahip kararı gerekiyor.
+  - "3'te 20, oynatıcıda 15": düzenek bilerek 15'i seçiyor (sahte oynatıcı yalnız ders2-15'i tanıyor). Uygulama hatası
+    değil.
+  - Zorlanma sorusunun metni (sahip kararı 20) ve ölçeğin "çok" ucu değişmedi. Bir değerlendiricinin önerdiği yumuşak
+    soru editör ve güvenlik onayına gider.
+  - Değişen ekranlar (3, 3c, 7c) 5 saniye kapısında yeniden sınanmadı.

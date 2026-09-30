@@ -1,14 +1,17 @@
-// Zaman çizelgesi işlevleri gerçek Ders 2 · 15 dk dosyasıyla (public/yoga/ders2-15.timeline.json; modul.md §16-A4).
+// Zaman çizelgesi işlevleri pilot biçimindeki Ders 2 · 15 dk çizelgesiyle (modul.md §16-A4). Bu dosya 2026-09-30'a dek
+// public/yoga/ders2-15.timeline.json idi (A adımı karışımı); onaylı ilk bölüm dosyası (nefona.yoga.timeline/2) yerine
+// geçince eski biçimin okunmaya devam ettiği burada sınanır (testdata/ders2-15.v1.timeline.json; yalnız mutlak geçici
+// yollar dosya adına indirildi). Yeni biçimin on bir çizelgesi: timeline.v2.test.js.
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import {
   speechAt, captionAt, clipStartAt, resumePoint, seekPoint, nearestClipStart, sectionsOfTimeline, sectionAt, closingAt,
   imageWindows, jumpPlan, visualAt, loadTimeline, durationOf, LEAD_SEC, seekTarget, guardClosing, welcomeCaption, sectionSpans,
-  loadTimelineCached, cachedTimeline, captionBefore,
+  loadTimelineCached, cachedTimeline, captionBefore, isV2, releaseWindows, silenceWindows, breathCycles, emberAt,
 } from './timeline.js'
 
-const tl = JSON.parse(readFileSync(fileURLToPath(new URL('../../../public/yoga/ders2-15.timeline.json', import.meta.url)), 'utf8'))
+const tl = JSON.parse(readFileSync(fileURLToPath(new URL('./testdata/ders2-15.v1.timeline.json', import.meta.url)), 'utf8'))
 const piece = (name) => tl.speech.find((s) => s.piece === name)
 
 describe('altyazı ve klipler', () => {
@@ -203,5 +206,29 @@ describe('karşılama cümlesi ve bölüm süreleri', () => {
     expect(cachedTimeline('cache-test.json')).toBe(tl)
     expect(await loadTimelineCached('yok.json', async () => ({ ok: false }))).toBeNull()
     expect(cachedTimeline('yok.json')).toBeNull()
+  })
+})
+
+// Eski biçim bozulmadı: closing / release / windows / ring alanları yokken önceki yollar işler
+describe('pilot biçimi (timeline/2 alanları yok)', () => {
+  it('şema yok; kapanış tınıdan, bırakma image:on/off ipuçlarından; pencere ve halka yok; kor closingAt\'te', () => {
+    expect(isV2(tl)).toBe(false)
+    expect(tl.closing).toBeUndefined()
+    expect(releaseWindows(tl)).toEqual(imageWindows(tl))
+    expect(silenceWindows(tl)).toEqual([])
+    expect(breathCycles(tl)).toEqual([])
+    expect(emberAt(tl)).toBe(closingAt(tl))
+    for (let t = 0; t <= 900; t += 7) expect(visualAt(tl, t).breath).toBe(0)
+  })
+  it('yalın timeline/2 kaydı: closing.jumpTo okunur; cümlenin içine düşen değer cümlenin sonrasına kayar', () => {
+    const sp = [{ clip: 'a', block: 'A', start: 1, end: 3, screenText: 'Bir.', spokenText: 'Bir.' }, { clip: 'k', block: 'K', start: 10, end: 12, screenText: 'İki.', spokenText: 'Bir.' }]
+    const mini = { schema: 'nefona.yoga.timeline/2', T: 20, speech: sp, closing: { jumpTo: 6 } }
+    expect(isV2(mini)).toBe(true)
+    expect(closingAt(mini)).toBe(6)
+    expect(closingAt({ ...mini, closing: { jumpTo: 11 } })).toBeCloseTo(12.2, 6)
+    expect(closingAt({ ...mini, closing: { jumpTo: 50 } })).toBe(20)
+    // yalnız camelCase alanlar: altyazı screenText; ekrandaki ≠ söylenen olan cümle yazılmaz
+    expect(captionAt(mini, 2)).toBe('Bir.')
+    expect(captionAt(mini, 11)).toBeNull()
   })
 })

@@ -9,6 +9,7 @@ const { registry, validateManifest } = await import('../registry.js')
 const { sanitizeModules } = await import('../../lib/coachCore.js')
 const { buildPath } = await import('../../lib/today.js')
 const { dayKey } = await import('../../lib/calendar.js')
+const { LESSONS, isPublished } = await import('../../lib/yogaLessons.js')
 
 const NOW = new Date(2026, 9, 10, 10, 0)
 const ago = (d, h = 9) => new Date(2026, 9, 10 - d, h, 0).toISOString()
@@ -102,12 +103,30 @@ describe('iPhone uygulaması', () => {
     expect(ids.indexOf('yoga')).toBe(ids.indexOf('breath') + 1)
     expect(ids.indexOf('dalga')).toBe(ids.indexOf('yoga') + 1)
   })
-  it('yalnız Ders 2 · 15 dk yayımlıyken kısa ve tam günlerde durak yok (3 ve 5 dk\'lık ders yok)', () => {
+  // İlk bölüm yayımlandı (2026-09-30; lib/yogaLessons.js): kısa günlerde Ders 1 ve 5 (3 dk). Önceki beklenti ("yalnız
+  // Ders 2 · 15 dk yayımlıyken durak yok") yayınla değişti; o kısmi yayın hâli aşağıda geçici veriyle korunur.
+  it('ilk bölüm yayımlı: kısa günde Ders 1 · 3 dk durağı, süresi yayımlanmış', () => {
     flags.ios = true
     for (let d = 0; d < 14; d++) {
       const now = new Date(2026, 9, 10 + d, 10, 0)
-      expect(yoga.today({ tests: [], sessions: history, now }), `gün ${d}`).toBeNull()
+      const stop = yoga.today({ tests: [], sessions: history, now })
+      expect(stop, `gün ${d}`).toMatchObject({ title: 'Yoga', sub: 'Nefesin Ritmi', minutes: 3, route: 'yoga-1', done: false, stage: { lesson: 1, minutes: 3, full: false } })
+      expect(isPublished(stop.stage.lesson, stop.minutes)).toBe(true)
     }
+  })
+  it('yalnız Ders 2 · 15 dk yayımlıyken kısa ve tam günlerde durak yok (3 ve 5 dk\'lık ders yok)', () => {
+    flags.ios = true
+    const saved = Object.fromEntries(Object.entries(LESSONS).map(([n, L]) => [n, structuredClone(L.versions)]))
+    try {
+      for (const L of Object.values(LESSONS)) for (const [m, v] of Object.entries(L.versions)) if (!(L.n === 2 && m === '15')) delete v.published
+      for (let d = 0; d < 14; d++) {
+        const now = new Date(2026, 9, 10 + d, 10, 0)
+        expect(yoga.today({ tests: [], sessions: history, now }), `gün ${d}`).toBeNull()
+      }
+    } finally {
+      for (const [n, v] of Object.entries(saved)) LESSONS[n].versions = v
+    }
+    expect(isPublished(1, 3)).toBe(true)
   })
   it('bugün kütüphaneden tamamlanan ders yolda "tamam" görünür; "Sonra yaparım" yalnız bugün', () => {
     flags.ios = true

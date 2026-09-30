@@ -1,7 +1,8 @@
-// Yoga ekran akışı (modul.md §2; PLAN.v3 §D.2–D.4): web'de yok; iPhone'da güvenlik kartı → kütüphane → ayrıntı → (ses
-// denetimi: yalnız dosyası varken) → önce puanı → oynatıcı → sonra puanı → zorlanma → bitiş; X → durdurma ekranı. Yerel
-// köprü taklit edilir (lib/native.js lesson*); çizelge public/yoga'dan okunur.
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+// Yoga ekran akışı (modul.md §2; PLAN.v3 §D.2–D.4; sahip kararları 19–20): web'de yok; iPhone'da (ilk girişte bir kez)
+// güvenlik kartı → kütüphane → ayrıntı → (ses denetimi: yalnız dosyası varken) → önce puanı → oynatıcı → sonra puanı ve
+// altına inen zorlanma satırı → bitiş; X → durdurma ekranı → (30 sn'yi geçtiyse) yalnız zorlanma satırı. Yerel köprü
+// taklit edilir (lib/native.js lesson*); çizelge public/yoga'dan okunur.
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import '../../test/fakeDom.js'
 import { createElement as h, act } from 'react'
 import { readFileSync } from 'node:fs'
@@ -50,9 +51,21 @@ const { currentLesson, clearCurrentLesson } = await import('./session.js')
 const { applyStatus, seekGoal } = await import('./YogaPlayer.jsx')
 const { loadTimeline, closingAt, sectionsOfTimeline, seekTarget, resumeSpans, resumePoint } = await import('./timeline.js')
 const { YT } = await import('./text.js')
-const { SAFETY_ORDER, SAFETY_LEAD } = await import('./Yoga.jsx')
+const { SAFETY_ORDER, SAFETY_LEAD, vehicleExtra } = await import('./Yoga.jsx')
+const { LESSONS, OPENING_VEHICLE } = await import('../../lib/yogaLessons.js')
 const { resetLessonData } = await import('./journal.js')
 const { dayKey } = await import('../../lib/calendar.js')
+// Bu dosyanın akışları tek ders (Ders 2 · 15 dk) yayımlıyken yazıldı. İlk bölüm yayımlandıktan sonra (2026-09-30: dört
+// ders, on bir süre; lib/yogaLessons.js) aynı akışlar aynı veriyle sınansın diye öteki süreler test süresince
+// yayımlanmamış sayılır. Çok dersli kütüphane ve süre seçimi: Yoga.data.test.jsx, lib/yogaLessons.test.js.
+let pubSaved = null
+beforeEach(() => {
+  pubSaved = Object.fromEntries(Object.entries(LESSONS).map(([n, L]) => [n, structuredClone(L.versions)]))
+  for (const L of Object.values(LESSONS)) for (const [m, v] of Object.entries(L.versions)) if (!(L.n === 2 && m === '15')) delete v.published
+})
+afterEach(() => {
+  for (const [n, v] of Object.entries(pubSaved ?? {})) LESSONS[n].versions = v
+})
 const wait = (ms) => new Promise((r) => setTimeout(r, ms))
 const tick = () => act(async () => wait(320)) // bir konum okuması (250 ms)
 
@@ -111,100 +124,147 @@ describe('web', () => {
 })
 
 describe('ilk giriş, kütüphane ve ayrıntı', () => {
-  // Güvenlik kartının yeri PLAN.v3 §D.2'nin akışı: "ders ayrıntısı → (ilk kez: güvenlik kartı ve 10 sn'lik ses denetimi) →
-  // önce puanı". Eskiden Yoga'ya ilk dokunuşta, kütüphaneden önce çıkıyordu (modul.md §2.2); kapı turu 1'de beş
-  // değerlendiricinin üçü "Yoga'ya ilk dokunuşta ilk gördüğüm şey bir uyarı" dedi (C_5SN_RAPORU.md §12). Kart yine bir kez,
-  // metni aynen ve ders ondan önce başlamaz.
-  it('ilk dokunuşta kütüphane; güvenlik kartı ilk "Başla"da bir kez, metni aynen; ders kart onaylanmadan başlamaz; "Anladım" önce puanına geçer', async () => {
+  // Sahip kararı 19 ("İlk girişte bir kez"; SAHIP_ISTEKLERI.md; modul.md §2.2): güvenlik kartı yogaya ilk girişte bir kez
+  // çıkar; kütüphaneden de yoldan da girilse ilk ekran karttır. Kapı turu 1'de kart ilk "Başla"ya taşınmıştı
+  // (C_5SN_RAPORU.md §12); bu testler o davranışı sınıyordu ve sahibin kararıyla eski yerine döndü. Kart yine bir kez,
+  // metni aynen; kart onaylanmadan ders başlamaz; ilk girişte "Geri" Ana sayfaya döner ve kart bir sonraki girişte çıkar.
+  it('ilk girişte güvenlik kartı bir kez, metni aynen; "Anladım" kütüphaneye; ayrıntıdan "Başla" doğrudan önce puanına', async () => {
     const r = await mount()
-    expect(r.text()).toContain('Yoga ve Meditasyon')
-    expect(r.text()).not.toContain(YT.safety.items[0].h)
-    expect(r.text()).toContain('Derin Dinlenme')
-    for (const hidden of ['Nefesin Ritmi', 'Tek Nokta', 'Uykuya Geçiş']) expect(r.text()).not.toContain(hidden)
-    expect(r.radios()).toEqual([]) // tek dersle süzgeç çipi anlamsız
-    await r.tapWhere((n) => n.textContent.includes('Derin Dinlenme'))
-    expect(r.text()).toContain('Derin Dinlenme (Yoga Nidra)') // ayrıntı, kart yok
-    expect(r.text()).not.toContain(YT.safety.items[0].h)
-    // Kartı yeniden açan satır ilk derste yok: kart "Başla"yla zaten gelir (kapı turu 2: "aynı bilgi iki kez")
-    expect(r.btn('Başlamadan önce')).toBeUndefined()
-    await r.tap('Başla')
     const t = r.text()
     expect(r.container.querySelectorAll((n) => n.nodeName === 'H1')[0].textContent).toBe('Başlamadan önce')
     for (const it of YT.safety.items) expect(t).toContain(`${it.h} ${it.p}`)
     expect(t).toContain('İstediğin an dersi bitirebilirsin. Gözlerini açabilir, kıpırdayabilir, nefesini kendi hâline bırakabilirsin.')
     expect(t).toContain('Araç kullanırken açma. Bu dersler uyku getirebilir.')
     expect(t).toContain('Nefona tedavi değildir. Uzun süredir çok zorlanıyorsan bir uzmanla konuşmak en güçlü adım. Acil durumda 112.')
-    expect(eng.calls.some(([c]) => c === 'start')).toBe(false) // ders kart onaylanmadan başlamaz
+    expect(t).not.toContain(YT.library.open) // kütüphane henüz yok
+    expect(eng.calls.some(([c]) => c === 'start')).toBe(false)
     expect(optsNow().safetySeen).toBeUndefined()
     await r.tap('Anladım')
     expect(optsNow().safetySeen).toBe(true)
-    expect(optsNow().soundCheck).toBe('nofile') // "Başla" zinciri sürdü (ses denetimi dosyası yok)
+    expect(r.text()).toContain('Yoga ve Meditasyon')
+    expect(r.text()).toContain('Derin Dinlenme')
+    for (const hidden of ['Nefesin Ritmi', 'Tek Nokta', 'Uykuya Geçiş']) expect(r.text()).not.toContain(hidden)
+    expect(r.radios()).toEqual([]) // tek dersle süzgeç çipi anlamsız
+    await r.tapWhere((n) => n.textContent.includes('Derin Dinlenme'))
+    expect(r.text()).toContain('Derin Dinlenme (Yoga Nidra)') // ayrıntı
+    expect(r.btn('Başlamadan önce')).toBeTruthy() // kart ayrıntıdan her zaman açılır
+    await r.tap('Başla')
+    expect(r.text()).not.toContain(YT.safety.items[0].h) // kart bir kez: "Başla"da yeniden çıkmaz
+    expect(optsNow().soundCheck).toBe('nofile') // "Başla" zinciri (ses denetimi dosyası yok)
     expect(r.text()).toContain('Bedenin şu an ne kadar gergin?')
     await r.unmount()
     const again = await mount()
-    await again.tapWhere((n) => n.textContent.includes('Derin Dinlenme'))
+    expect(again.text()).not.toContain(YT.safety.items[0].h) // ikinci girişte kart yok
+    expect(again.text()).toContain('Yoga ve Meditasyon')
+    await again.unmount()
+  })
+  it('yoldan açılan ders (yoga-2), ilk giriş: önce kart; "Geri" Ana sayfaya ve kart sonraki girişte yeniden; "Anladım" ayrıntıya (dersin sözüyle)', async () => {
+    const r = await mount({ route: 'yoga-2' })
+    expect(r.text()).toContain(YT.safety.items[1].h)
+    expect(r.text()).not.toContain('Derin Dinlenme (Yoga Nidra)')
+    await r.tap('Geri')
+    expect(r.p.onExit).toHaveBeenCalledTimes(1) // Ana sayfaya
+    expect(optsNow().safetySeen).toBeUndefined()
+    expect(eng.calls.some(([c]) => c === 'start')).toBe(false)
+    await r.unmount()
+    const again = await mount({ route: 'yoga-2' })
+    expect(again.text()).toContain(YT.safety.items[1].h) // onaylanmadı: yeniden
+    await again.tap('Anladım')
+    expect(again.text()).toContain('Derin Dinlenme (Yoga Nidra)')
+    // Kapak görülmedi: dersin sözü ayrıntıda yazılır (kütüphaneden gelinince yazılmaz: kapıda "kapağın aynısı")
+    expect(again.text()).toContain('Uyanıkken derin bir dinlenmeye davet.')
     await again.tap('Başla')
-    expect(again.text()).not.toContain(YT.safety.items[0].h) // bir kez
     expect(again.text()).toContain('Bedenin şu an ne kadar gergin?')
     await again.unmount()
   })
-  it('yoldan açılan ders (yoga-2): ilk kez de önce ayrıntı, kart "Başla"da; kartta Geri ayrıntıya döner ve kart sonraki "Başla"da yeniden çıkar', async () => {
-    const r = await mount({ route: 'yoga-2' })
-    expect(r.text()).toContain('Derin Dinlenme (Yoga Nidra)')
-    await r.tap('Başla')
-    expect(r.text()).toContain(YT.safety.items[1].h)
-    await r.tap('Geri')
-    expect(r.p.onExit).not.toHaveBeenCalled()
-    expect(r.text()).toContain('Derin Dinlenme (Yoga Nidra)')
-    expect(optsNow().safetySeen).toBeUndefined()
-    await r.tap('Başla')
-    expect(r.text()).toContain(YT.safety.items[1].h)
-    await r.tap('Anladım')
-    expect(r.text()).toContain('Bedenin şu an ne kadar gergin?')
-    await r.unmount()
-  })
-  it('ders ayrıntısı: ad ve söz, yalnız yayımlanmış süre, bölüm şeridi, hazırlık, kaynaklar, açılış satırları, Başla', async () => {
+  // Sahip kararı 19 ve kapı turu 3 (ayrıntı 1/5: "üst yarı kapağın neredeyse aynısı", "Başla'nın çevresinde üç uyarı
+  // cümlesi, bir sonraki ekranda aynen tekrar"): ayrıntıda açılış uyarıları kalktı; yalnız onaylı izin cümlesi "Başla"nın
+  // hemen üstünde kalır ve "Başlamadan önce" kartı her zaman açılır. Kapaktan gelinince dersin sözü yazılmaz. Dersin
+  // içeriği öne: bölümler, "Neye dayanıyor" (açıkta; kaynak listesi açılır), hazırlık. Eskiden: araç ve kalkış satırları
+  // "Başla"nın hemen altında (yg-open), kanıt cümlesi yalnız kapalı Kaynaklar kartının içinde.
+  it('ders ayrıntısı: ad, süre ve duruş, bölümler, "Neye dayanıyor" açıkta, hazırlık; uyarılardan yalnız izin cümlesi; "Başlamadan önce" hep; Başla', async () => {
     seen()
     const r = await mount()
     await r.tapWhere((n) => n.textContent.includes('Derin Dinlenme'))
     const t = r.text()
     expect(t).toContain('Derin Dinlenme (Yoga Nidra)')
-    expect(t).toContain('Uyanıkken derin bir dinlenmeye davet.')
-    // Tek süre yayımlıyken süre bir seçim değildir: tek seçenekli seçici yerine başlığın üstünde yazar (5 saniye turu 1:
-    // "tek seçenekli 15 dk kutusu seçilebilir bir şeymiş gibi görünüyor"). Birden çok süre varken çipler durur
-    // (Yoga.data.test.jsx, Ders 1'in 3 ve 5 dakikası).
+    expect(t).not.toContain('Uyanıkken derin bir dinlenmeye davet.') // kapakta yazıyordu: tekrar yok
+    // Tek süre yayımlıyken süre bir seçim değildir: seçici yerine başlığın altında yazar. Birden çok süre varken çipler
+    // durur (Yoga.data.test.jsx, Ders 1'in 3 ve 5 dakikası).
     expect(r.radios()).toEqual([])
     expect(t).toContain('15 dk · Uzanarak')
+    expect(r.cls(/\byg-facts\b/)[0].getAttribute('class')).toContain('plain') // kapaktaki iki çip değil, sakin satır
     expect(t).toContain('Karşılama · Niyet (sankalpa) · Beden dolaşımı · Nefes ve geri sayma · İmgeleme · Niyete dönüş · Kapanış')
-    // Hazırlık üç karoda (5 saniye yeniden tasarımı, yön B): metin aynen; yalnız son iki sözcük bölünmez boşlukla birlikte
-    // kırılır ("İnce / bir örtü"). Eskiden tek satırda " · " ile.
+    // Hazırlık üç karoda: metin aynen; yalnız son iki sözcük bölünmez boşlukla birlikte kırılır ("İnce / bir örtü")
     const flat = t.replace(/\u00a0/g, ' ')
     for (const it of ['İnce bir örtü', 'Dizlerinin altı için bir yastık', 'Uzanabileceğin rahat bir yüzey']) expect(flat).toContain(it)
-    // Dersin sesinin adı ayrıntıda yok (kapı turu 2: iki değerlendirici "'Nefona Hoca' gerçek bir hoca mı?"; ilk yayında
-    // ses seçimi de yok, PLAN.v3 §D.2)
+    // Dersin sesinin adı ayrıntıda yok (kapı turu 2)
     expect(t).not.toContain('Nefona Hoca')
+    // "Neye dayanıyor": kanıt cümlesi aynen ve açıkta (kapalı kartın dışında); kaynak listesi açılır kartta
+    const basis = r.cls(/\byg-basis-t\b/)
+    expect(basis.map((n) => n.textContent)).toEqual([LESSONS[2].evidenceLine])
+    for (let x = basis[0]; x; x = x.parentNode) expect(x.nodeName).not.toBe('DETAILS')
     expect(t).toContain('Kaynaklar (19)')
-    expect(t).toContain('Neye dayanıyor: 11 ve 30 dakikalık yoga nidrayı')
-    expect(t).toContain('İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.')
-    expect(t).toContain('Bu dersi yalnızca araç ya da makine kullanmadığın ve suda olmadığın bir sırada dinle.')
-    expect(t).toContain('Uzanarak yaptığın derslerden sonra önce yana dön, otur, sonra kalk.')
-    // Açılış satırlarının yeri (kapı turu 2): izin satırı "Başla"nın hemen üstünde, araç ve kalkış satırları hemen altında
-    const order = r.container.querySelectorAll((n) => n.nodeName === 'BUTTON' || /\byg-(invite|open)\b/.test(n.getAttribute?.('class') ?? ''))
-      .map((n) => (n.nodeName === 'BUTTON' ? n.textContent.trim() : n.getAttribute('class')))
+    expect(t.split(LESSONS[2].evidenceLine)).toHaveLength(2) // bir kez (açılır kartın içinde yinelenmez)
+    // Uyarılar: yalnız onaylı izin cümlesi, "Başla"nın hemen üstünde. Ortak araç satırı ve kalkış satırı ayrıntıda yok
+    // (kartta "Araç kullanırken açma." ve "Yavaşça kalk."; kalkış satırı bitişte de)
+    expect(r.cls(/\byg-invite\b/).map((n) => n.textContent)).toEqual(['İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.'])
+    expect(t).not.toContain(OPENING_VEHICLE)
+    expect(t).not.toContain('Uzanarak yaptığın derslerden sonra önce yana dön, otur, sonra kalk.')
+    expect(r.cls(/\byg-open\b/)).toHaveLength(0)
+    const order = r.container.querySelectorAll((n) => n.nodeName === 'BUTTON' || /\byg-(invite|shape|basis|prep)\b/.test(n.getAttribute?.('class') ?? ''))
+      .map((n) => (n.nodeName === 'BUTTON' ? n.textContent.trim() : n.getAttribute('class').split(' ')[0]))
     expect(order.indexOf('yg-invite')).toBe(order.indexOf('Başla') - 1)
-    expect(order.indexOf('yg-open')).toBe(order.indexOf('Başla') + 1)
-    expect(r.cls(/\byg-invite\b/)[0].textContent).toBe('İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.')
+    // Dersin içeriği "Başla"dan önce, sırasıyla: bölümler, hazırlık, "Neye dayanıyor", "Başlamadan önce" (son kapı düzeltmesi)
+    const at = (k) => order.indexOf(k)
+    expect([at('yg-shape'), at('yg-prep'), at('yg-basis'), at('Başlamadan önce'), at('Başla')].every((v, i, a) => v >= 0 && (i === 0 || v > a[i - 1]))).toBe(true)
+    // İzin cümlesi ve "Başla" alt şeritte (içerik uzasa da görünür)
+    const go = r.cls(/\byg-detail-go\b/)[0]
+    expect(go.getAttribute('class')).toContain('yg-sticky')
+    expect(go.textContent).toBe('İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.Başla')
     expect(t).not.toContain('Ders bitince müzik') // uyku dersi değil
     expect(t).not.toContain('Uyumadan önce dinliyorsan') // Uykuya Geçiş yayımlanmadı
     expect(t).not.toContain('Çalan uyku sesi duracak.')
-    expect(r.btn('Başla')).toBeTruthy()
-    // Güvenlik kartını yeniden açan satır (kart görüldükten sonra); adı yazılı (kapı turu 1)
+    // Güvenlik kartı ayrıntıdan her zaman açılır; adı yazılı; "Anladım" ayrıntıya döner
     expect(r.btn('Başlamadan önce').textContent.trim()).toBe('Başlamadan önce')
     await r.tap('Başlamadan önce')
     expect(r.text()).toContain('Sesi kısık tut.')
     await r.tap('Anladım')
     expect(r.text()).toContain('Derin Dinlenme (Yoga Nidra)')
+    await r.tap('Başlamadan önce')
+    await r.tap('Geri') // ayrıntıdan açılan kartta Geri ayrıntıya (Ana sayfaya değil)
+    expect(r.p.onExit).not.toHaveBeenCalled()
+    expect(r.text()).toContain('Derin Dinlenme (Yoga Nidra)')
     await r.unmount()
+  })
+  it('kalkış ve araç satırları kaybolmadı: kartta ("Yavaşça kalk.", "Araç kullanırken açma."); derse özel tek uyarı Uykuya Geçiş\'te aynen', () => {
+    expect(YT.safety.items[3].h).toBe('Yavaşça kalk.')
+    expect(YT.safety.items[3].p).toContain('Uzanarak yaptığın derslerden sonra önce yana dön, otur, sonra kalk.')
+    expect(LESSONS[2].opening).toContain('Uzanarak yaptığın derslerden sonra önce yana dön, otur, sonra kalk.')
+    expect(YT.safety.items[1].h).toBe('Araç kullanırken açma.')
+    // Ayrıntıdaki tek derse özel uyarı: açılış satırından aynen, yalnız Uykuya Geçiş'te
+    expect(vehicleExtra(LESSONS[3])).toBe('Bu dersten hemen sonra araç kullanma.')
+    expect(LESSONS[3].opening[1]).toBe(`${OPENING_VEHICLE} Bu dersten hemen sonra araç kullanma.`)
+    for (const k of [1, 2, 5]) expect(vehicleExtra(LESSONS[k])).toBeNull()
+  })
+  it('Uykuya Geçiş ayrıntısı (yayımlanınca): izin cümlesi ve yalnız "Bu dersten hemen sonra araç kullanma."; gece kalkış satırı yok', async () => {
+    seen()
+    const saved = structuredClone(LESSONS[3].versions)
+    try {
+      Object.assign(LESSONS[3].versions[15], { published: true })
+      const r = await mount({ route: 'yoga-3' })
+      const t = r.text()
+      expect(t).toContain('Uykuya Geçiş')
+      // Yoldan açıldı: "Sonra yaparım" şeritte, "Başla"nın altında
+      const go = r.cls(/\byg-detail-go\b/)[0]
+      expect(go.textContent).toBe('İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.Bu dersten hemen sonra araç kullanma.BaşlaSonra yaparım')
+      expect(t).not.toContain(OPENING_VEHICLE)
+      // Gece kalkış satırı ayrıntıdan kalktı: durdurma ekranının gece satırında aynen (YT.stopped.night), kartta "Yavaşça kalk."
+      expect(t).not.toContain('Gece kalkman gerekirse')
+      await r.unmount()
+    } finally {
+      LESSONS[3].versions = saved
+    }
   })
   it('uyku sesi çalıyorsa "Başla"nın üstünde "Çalan uyku sesi duracak."', async () => {
     seen()
@@ -219,15 +279,14 @@ describe('ilk giriş, kütüphane ve ayrıntı', () => {
 // İlk görünüm (5 saniye yeniden tasarımı, yoga-pilot/C_5SN_RAPORU.md): metin aynı, sunuş değişti. Sınanan: güvenlik
 // kartında beş madde açılır satırda, ana cümleleri görünür, gövdeleri aynen DOM'da; sağlık maddesi "tedavi değildir · 112"
 // notuyla aynı kartta; tek ders varken kütüphane kartı dersin vitrinidir (tam ad, söz, "Gündüz · 15 dk · Uzanarak",
-// "Derse git"; bölüm listesi yalnız ayrıntıda, kapı turu 1); güvenlik kartı ilk "Başla"da (PLAN.v3 §D.2); önce ve
+// "Derse git"; bölüm listesi yalnız ayrıntıda, kapı turu 1); güvenlik kartı ilk girişte (sahip kararı 19); önce ve
 // sonra puanı TEMADA (eskiden sonra puanı ve zorlanma sorusu temadan bağımsız karanlıktı: modul.md §2 "Oynatıcı bunun
 // istisnasıdır" ve görev kuralı "öteki yoga ekranları iki temada" ile çelişiyordu, OZET.md §9); 1–10 tek ayarlanabilir
 // ölçek; sonra puanında önceki puan yalnız seçimden sonra (OZET.md §10; eskiden seçeneklerin arasında "6 Önce").
 describe('ilk görünüm', () => {
   const inNight = (n) => { for (let x = n; x; x = x.parentNode) if (/\byg-night\b/.test(x.className ?? '')) return true; return false }
   it('güvenlik kartı: beş madde metni aynen; önce dersle ilgili dört madde, sonra sağlık maddesi ve hemen altında 112 notu', async () => {
-    const r = await mount({ route: 'yoga-2' })
-    await r.tap('Başla') // ilk derste kart "Başla"yla gelir
+    const r = await mount({ route: 'yoga-2' }) // ilk giriş: kart ilk ekran
     const items = r.container.querySelectorAll((n) => n.nodeName === 'LI')
     expect(items.map((li) => li.textContent)).toEqual(SAFETY_ORDER.map((i) => `${YT.safety.items[i].h} ${YT.safety.items[i].p}`))
     expect([...SAFETY_ORDER].sort()).toEqual([0, 1, 2, 3, 4]) // her madde bir kez
@@ -238,9 +297,7 @@ describe('ilk görünüm', () => {
     await r.unmount()
   })
   it('güvenlik kartı: her madde açılır karo; ana cümle özette (hep görünür), gövde aynı karonun içinde; ilk madde geniş; 112 notu sağlık maddesinin hemen ardından; Geri', async () => {
-    const r = await mount()
-    await r.tapWhere((n) => n.textContent.includes('Derin Dinlenme'))
-    await r.tap('Başla')
+    const r = await mount() // ilk giriş: kart ilk ekran
     const det = r.container.querySelectorAll((n) => n.nodeName === 'DETAILS' && /yg-acc-i/.test(n.getAttribute('class') ?? ''))
     expect(det).toHaveLength(5)
     for (const d of det) {
@@ -261,9 +318,8 @@ describe('ilk görünüm', () => {
     const foot = r.cls(/\byg-safe-foot\b/)[0]
     expect(grid.parentNode.childNodes.indexOf(foot)).toBe(grid.parentNode.childNodes.indexOf(grid) + 1)
     expect(foot.textContent).toBe('Nefona tedavi değildir. Uzun süredir çok zorlanıyorsan bir uzmanla konuşmak en güçlü adım. Acil durumda 112.')
-    await r.tap('Geri') // Geri: ayrıntıya (kart "Başla"dan açıldı); ders başlamaz, kart bir sonraki "Başla"da yeniden çıkar
-    expect(r.p.onExit).not.toHaveBeenCalled()
-    expect(r.text()).toContain('Derin Dinlenme (Yoga Nidra)')
+    await r.tap('Geri') // ilk giriş kartında Geri Ana sayfaya; ders başlamaz, kart bir sonraki girişte yeniden çıkar
+    expect(r.p.onExit).toHaveBeenCalledTimes(1)
     expect(eng.calls.some(([c]) => c === 'start')).toBe(false)
     expect(optsNow().safetySeen).toBeUndefined()
     await r.unmount()
@@ -320,11 +376,22 @@ describe('ilk görünüm', () => {
     await r.rate(4)
     expect(line.textContent).toBe('Dersten önce: 6')
     expect(r.cls(/yg-hz-was/)).toHaveLength(1) // ölçekte önceki puanın yeri, yalnız şimdi
+    expect(r.text()).not.toContain(YT.hard.question) // zorlanma satırı puan sorusu cevaplanınca (ya da atlanınca) iner
     await r.tap('Atla')
-    expect(r.text()).toContain('Ders sırasında zorlandın mı?')
+    // Sahip kararı 20: ayrı zorlanma ekranı yok. Aynı ekran (sonra puanı, temada), ölçek yerinde; satır "Devam · Atla"nın
+    // yerinde. Eskiden: "Atla" → ayrı zorlanma ekranı (kendi sahnesi, iri başlık, üç iri seçenek).
+    expect(main().getAttribute('class')).toContain('is-after')
+    expect(main().getAttribute('class')).toContain('is-asked')
     expect(inNight(main())).toBe(false)
+    expect(r.text()).toContain('Bedenin şu an ne kadar gergin?')
+    expect(r.slider().getAttribute('aria-disabled')).toBe('true') // puan atlandı: ölçek sönük, değişmez
+    expect(r.slider().hasAttribute('aria-valuenow')).toBe(false) // atlanan puan (4 seçiliydi) yazılmadı, görünmez
+    expect(r.btn('Devam')).toBeUndefined()
+    const q = r.cls(/\byg-hardrow-q\b/)[0]
+    expect([q.nodeName, q.textContent]).toEqual(['H2', 'Derste kendini kötü hissettin mi?'])
     await r.tap('Atla')
     expect(r.text()).toContain('Ders bitti')
+    expect(r.text()).not.toContain('Beden gerginliği 6 → 4') // atlanan puan bitişte de yok
     await r.unmount()
   })
   it('önce puanı atlandıysa sonra puanında önceki puan satırı hiç yok', async () => {
@@ -366,7 +433,7 @@ describe('ilk görünüm', () => {
 })
 
 describe('ders: baştan sona', () => {
-  it('ses denetimi dosyası yok: adım görünmez → önce puanı → oynatıcı → Kapanışa geç → bitiş → sonra puanı → "Çok" → bitiş ekranı', async () => {
+  it('ses denetimi dosyası yok: adım görünmez → önce puanı → oynatıcı → Kapanışa geç → bitiş → sonra puanı, altında zorlanma satırı → "Çok" → bitiş ekranı', async () => {
     mem.set('gozolcum:yoga-opts', JSON.stringify({ safetySeen: true }))
     const r = await mount()
     await r.tapWhere((n) => n.textContent.includes('Derin Dinlenme'))
@@ -392,7 +459,7 @@ describe('ders: baştan sona', () => {
     expect(meta.sections.map((x) => x.name)).toEqual(['Karşılama', 'Niyet (sankalpa)', 'Beden dolaşımı', 'Nefes ve geri sayma', 'İmgeleme', 'Niyete dönüş', 'Kapanış'])
     expect(meta.resume.length).toBeGreaterThan(50)
     // cümlenin içindeyken "Kapanışa geç": cümle bitene kadar bekler
-    eng.time = 710 // n2.hatirla (708.96–712.99)
+    eng.time = 710 // n2.hatirla#1 (708.515–712.59)
     await tick()
     await r.tap('Kapanışa geç')
     expect(eng.calls.some((c) => c[0] === 'cross')).toBe(false)
@@ -401,7 +468,7 @@ describe('ders: baştan sona', () => {
     await tick()
     const cross = eng.calls.find((c) => c[0] === 'cross')
     expect(cross[1].file).toBe('yoga/ders2-15.mp3')
-    expect(cross[1].at).toBeCloseTo(750.929, 3)
+    expect(cross[1].at).toBeCloseTo(751.124, 3) // k.donus tınısı (753,124) − 2; closing.jumpTo 757,426 tınıyı atlardı (B1); eskisi 750,929
     // dosya biter: kayıt hemen yazılır, puan sonra eklenir
     currentLesson().listened = 820
     eng.time = 900
@@ -411,7 +478,7 @@ describe('ders: baştan sona', () => {
     const rec = r.store.addSession.mock.calls[0][0]
     expect(rec.seconds).toBeGreaterThanOrEqual(820)
     expect(rec.seconds).toBeLessThanOrEqual(822) // son okumada geçen süre (duvar saatiyle sınırlı)
-    expect(rec).toMatchObject({ type: 'yoga', lesson: 2, planned: 900, reachedClosing: true, completed: true, quickClose: true, before: 6, after: null, voice: 'hoc', bg: 'music', scene: 'orman', posture: 'lie', contentHash: '726417faa1760e11' })
+    expect(rec).toMatchObject({ type: 'yoga', lesson: 2, planned: 900, reachedClosing: true, completed: true, quickClose: true, before: 6, after: null, voice: 'hoc', bg: 'music', scene: 'orman', posture: 'lie', contentHash: 'c875dcef4885db95' })
     expect(r.p.onRefresh).toHaveBeenCalled()
     expect(eng.calls.map((c) => c[0])).toContain('stop')
     expect(eng.calls.at(-1)).toEqual(['journalClear']) // kayıt yazıldı: yerel kayıt silinir (iki kez yazılmaz)
@@ -423,14 +490,32 @@ describe('ders: baştan sona', () => {
     await r.tap('Devam')
     expect(r.store.updateSession).toHaveBeenCalledWith('r1', { after: 3, delta: -3 })
     expect(r.p.onRefresh).toHaveBeenCalledTimes(2) // sonra puanı eklenince Gelişim yenilenir
-    // zorlanma: "Çok" → bitirene göre metin. Ders 2'nin 15 dk'dan kısa yayımlanmış süresi yok: "daha kısa bir süre
-    // seçebilir" denmez (yerine getirilemeyecek öneri)
-    expect(r.text()).toContain('Ders sırasında zorlandın mı?')
+    // Zorlanma satırı aynı ekranda, ölçeğin altına iner (sahip kararı 20): ölçek yerinde (verilen puan başparmakta,
+    // sönük), "Aynı soru, şimdi dersten sonra." satırından ayraçla ayrı; seçenekler haplar (ölçeğin durakları değil);
+    // "Atla" hep görünür; "Çok" seçilmeden "Devam" yok. Eskiden: "Devam" → ayrı zorlanma ekranı.
+    const main = r.container.querySelectorAll((n) => n.nodeName === 'MAIN')[0]
+    expect(main.getAttribute('class')).toContain('is-after')
+    expect(r.slider().getAttribute('aria-valuenow')).toBe('3')
+    expect(r.slider().getAttribute('aria-disabled')).toBe('true')
+    const row = r.cls(/\byg-hardrow\b/)[0]
+    const kids = main.childNodes
+    expect(kids.indexOf(row)).toBeGreaterThan(kids.indexOf(r.cls(/\byg-hz\b/)[0]))
+    expect(row.getAttribute('aria-labelledby')).toBe(r.cls(/\byg-hardrow-q\b/)[0].getAttribute('id'))
+    const group = r.container.querySelectorAll((n) => n.getAttribute('role') === 'radiogroup')[0]
+    expect(group.getAttribute('aria-label')).toBe('Derste kendini kötü hissettin mi?')
+    expect(group.childNodes.map((b) => [b.textContent, b.getAttribute('class')])).toEqual([['Hayır', 'yg-hard-o'], ['Biraz', 'yg-hard-o'], ['Çok', 'yg-hard-o']])
+    expect(r.btn('Atla')).toBeTruthy()
+    expect(r.btn('Devam')).toBeUndefined()
+    // "Çok" → bitirene göre metin. Ders 2'nin 15 dk'dan kısa yayımlanmış süresi yok: "daha kısa bir süre seçebilir"
+    // denmez (yerine getirilemeyecek öneri). Metin kendi kutusunda, "Devam" hemen altında; "Atla" yine görünür.
     await r.tap('Çok')
     expect(r.store.updateSession).toHaveBeenCalledWith('r1', { hard: 'much' })
-    expect(r.text()).toContain(YT.hard.muchFinishedNoShorter)
+    expect(r.cls(/\byg-much\b/)[0].textContent).toBe(YT.hard.muchFinishedNoShorter)
+    expect(r.cls(/\byg-much\b/)[0].getAttribute('role')).toBe('status')
     expect(r.text()).not.toContain('daha kısa bir süre')
     expect(r.text()).not.toContain('durman doğruydu')
+    expect(r.btn('Atla')).toBeTruthy()
+    expect(main.getAttribute('class')).toContain('is-much')
     await r.tap('Devam')
     const t = r.text()
     expect(t).toContain('Ders bitti')
@@ -461,24 +546,24 @@ describe('ders: baştan sona', () => {
     await tick()
     await r.tap('Sürdür')
     expect(eng.calls.at(-1)[0]).toBe('resume')
-    expect(eng.calls.at(-1)[1].at).toBeCloseTo(4.1768 - 1.2, 3) // klibin ilk parçasının başı (geçiş payıyla)
+    expect(eng.calls.at(-1)[1].at).toBeCloseTo(4.165 - 1.2, 3) // klibin ilk parçasının başı (geçiş payıyla)
     eng.time = 600 // imge penceresi, sessizlik
     await tick()
     await r.tap('Kapanışa geç')
     await tick()
     const first = eng.calls.filter((c) => c[0] === 'cross')
     expect(first).toHaveLength(1)
-    expect(first[0][1].at).toBeCloseTo(687.49 - 1.2, 2) // c4.solma: "Görüntü usulca siliniyor."
+    expect(first[0][1].at).toBeCloseTo(687.065 - 1.2, 2) // c4.solma: "Görüntü usulca siliniyor."
     eng.time = 696
     await tick()
     const both = eng.calls.filter((c) => c[0] === 'cross')
     expect(both).toHaveLength(2)
-    expect(both[1][1].at).toBeCloseTo(750.929, 3)
+    expect(both[1][1].at).toBeCloseTo(751.124, 3)
     await r.unmount()
     clearCurrentLesson()
   })
 
-  it('X: onaysız durur; durdurma ekranı; "Tamam" → yalnız zorlanma sorusu; "Çok" durdurana göre; yoldan açıldıysa Ana sayfaya', async () => {
+  it('X: onaysız durur; durdurma ekranı; "Tamam" → yalnız zorlanma satırı (aynı satır, tek başına); "Çok" durdurana göre; yoldan açıldıysa Ana sayfaya', async () => {
     seen()
     const r = await mount({ route: 'yoga-2' })
     expect(r.text()).toContain('Derin Dinlenme (Yoga Nidra)') // yoldan: doğrudan ayrıntı
@@ -495,13 +580,59 @@ describe('ders: baştan sona', () => {
     const rec = r.store.addSession.mock.calls[0][0]
     expect(rec).toMatchObject({ seconds: 45, reachedClosing: false, completed: false, before: null })
     await r.tap('Tamam')
-    expect(r.text()).toContain('Ders sırasında zorlandın mı?')
+    // modul.md §2.7: yalnız zorlanma sorusu. Sonra puanının altındaki satırın aynısı (sahip kararı 20); tek soru olduğu
+    // için başlık h1. Eskiden: iri başlıklı ayrı ekran, üç iri seçenek.
+    const q = r.cls(/\byg-hardrow-q\b/)[0]
+    expect([q.nodeName, q.textContent]).toEqual(['H1', 'Derste kendini kötü hissettin mi?'])
+    expect(r.cls(/\byg-hardrow\b/)[0].getAttribute('class')).toContain('solo')
     expect(r.text()).not.toContain('Bedenin şu an ne kadar gergin?') // sonra puanı sorulmaz
+    expect(r.slider()).toBeUndefined()
+    expect(r.btn('Atla')).toBeTruthy()
     await r.tap('Çok')
-    expect(r.text()).toContain(YT.hard.muchStoppedNoShorter) // durdurana göre; daha kısa süre yok
+    expect(r.store.updateSession).toHaveBeenCalledWith('r1', { hard: 'much' })
+    expect(r.cls(/\byg-much\b/)[0].textContent).toBe(YT.hard.muchStoppedNoShorter) // durdurana göre; daha kısa süre yok
     await r.tap('Devam')
     expect(r.p.onExit).toHaveBeenCalled()
     await r.unmount()
+  })
+
+  it('zorlanma satırı: "Hayır" ve "Biraz" yazılır ve akış sürer; "Atla" yazmaz; "Çok"tan sonra "Atla" cevabı siler (kayıttaki anlam aynı)', async () => {
+    const finish = async (r) => {
+      await r.tap('Başla')
+      await r.tap('Atla') // önce puanı
+      await tick()
+      currentLesson().listened = 820
+      eng.time = 900
+      eng.playing = false
+      await tick()
+      await r.tap('Atla') // sonra puanı: satır iner
+    }
+    seen()
+    const a = await mount({ route: 'yoga-2' })
+    await finish(a)
+    await a.tap('Biraz')
+    expect(a.store.updateSession).toHaveBeenCalledWith('r1', { hard: 'some' })
+    expect(a.text()).toContain('Ders bitti')
+    await a.unmount()
+    clearCurrentLesson()
+    Object.assign(eng, { time: 0, playing: false, calls: [] })
+    const b = await mount({ route: 'yoga-2' })
+    await finish(b)
+    await b.tap('Atla')
+    expect(b.store.updateSession).not.toHaveBeenCalled() // cevap yok: kayda hiçbir şey yazılmaz
+    expect(b.text()).toContain('Ders bitti')
+    await b.unmount()
+    clearCurrentLesson()
+    Object.assign(eng, { time: 0, playing: false, calls: [] })
+    const c = await mount({ route: 'yoga-2' })
+    await finish(c)
+    await c.tap('Çok')
+    expect(c.store.updateSession).toHaveBeenLastCalledWith('r1', { hard: 'much' })
+    await c.tap('Atla')
+    expect(c.store.updateSession).toHaveBeenLastCalledWith('r1', { hard: null }) // atlandı: "Çok" silinir
+    expect(c.text()).toContain('Ders bitti')
+    expect(c.text()).not.toContain(YT.done.eyesOpen)
+    await c.unmount()
   })
 
   it('30 sn altında X: kayıt yok, zorlanma sorusu yok, kütüphaneye döner', async () => {
@@ -656,7 +787,7 @@ describe('ders: baştan sona', () => {
     eng.time = 400
     await tick()
     const s = currentLesson()
-    expect(s.closeAt).toBeCloseTo(750.929, 3)
+    expect(s.closeAt).toBeCloseTo(751.124, 3)
     const drag = async (v) => {
       const input = r.container.querySelectorAll((n) => n.nodeName === 'INPUT')[0]
       const props = input[Object.keys(input).find((k) => k.startsWith('__reactProps'))]
@@ -841,7 +972,7 @@ describe('konum okuma (applyStatus)', () => {
     const tl = await loadTimeline('yoga/ders2-15.timeline.json')
     const sections = sectionsOfTimeline(tl)
     const closeAt = closingAt(tl)
-    expect(closeAt).toBeCloseTo(750.929, 3)
+    expect(closeAt).toBeCloseTo(751.124, 3)
     const s = { tl, lastPos: 400, closeAt }
     expect(seekTarget(tl, sections, 880)).toBeGreaterThan(closeAt) // korumasız hedef k.kalk'a iner
     expect(seekGoal(s, sections, 880)).toBeCloseTo(closeAt, 6)
