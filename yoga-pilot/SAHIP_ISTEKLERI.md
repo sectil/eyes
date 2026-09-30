@@ -55,3 +55,7 @@ Sonraki aşamaya (metin + ses + tasarım iş akışı) bu dosya olduğu gibi ver
    → Okunuşu: PLAN.v3'teki "kısmi yayın yoktur" kuralı değişiyor; hazır dersler önce modüle ve yola girer, kalan dersler
      arka planda üretilir, yazılan metinler saklanır. VARSAYIM: "indirim" = diğer dersleri üretmek; "canlı" = önce
      TestFlight (uygulama App Store'da henüz "Prepare for Submission"). "İlk bölüm" planı sahibin onayına sunuldu.
+10. "onay" (2026-09-30) → "İlk bölüm" planı onaylandı: Ders 1, 2, 3, 5 ilk bölüm; yalnız hazır dersler görünür; yolda
+    kısa günlerde Ders 1 ve 5 (3 dk), ≈ 8 günde bir Ders 2 (5 dk), Ders 3 yalnız akşam önerisi; kod bu oturumda (C adımı),
+    sesler yeni oturumda; önce TestFlight, sonra App Store; kural: "her ders kendi denetimlerinden geçince eklenir"
+    (PLAN.v3 "kısmi yayın yoktur" kuralının yerine).
