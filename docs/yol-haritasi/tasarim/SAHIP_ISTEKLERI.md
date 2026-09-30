@@ -88,3 +88,9 @@ sınamasından** geçer. Bağımsız değerlendiriciler (birbirini görmeyen, en
 kısmını (telefonda ilk ekran; seste ilk 5 saniye) görür: "Ne anladın? Etkilendin mi (evet/hayır)? Neden?". Çoğunluk
 "evet" demezse iş gönderilmez; ilk izlenim yeniden tasarlanır ve sınama tekrarlanır. Aynı ölçüt ürünün kendisine de
 uygulanır: uygulamanın her ekranının ilk 5 saniyesi.
+
+## Sahibin 2026-09-30 kararı: sonsuz yol kodu erkene alındı
+"önerin uygulansın evet" → Sonsuz yolun kodu yoga YAYININI değil, yoga KODUNUN depoya girmesini bekler (yoga planı
+karar 7 ve sonsuz yol planı karar 1'deki "yoga yayınından sonra" koşulu bu şekilde değişti; gerekçe: çakışma yalnız
+dosyalarda, seslerde değil). Sıra: yoga C adımı kodu kaydedilir → Y1 (merdivenler, nefes 1→2→3 dk) başlar. Her iş sahibe
+gitmeden 5 saniye sınamasından geçer.
