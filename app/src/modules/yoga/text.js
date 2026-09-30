@@ -9,6 +9,12 @@ export const YT = {
   webOnly: 'Yoga dersleri iPhone uygulamasında.', // PLAN.v3 §D.7
   back: 'Geri',
   filters: { day: 'Gündüz', night: 'Gece', three: '3 dakikalık' },
+  // YENİ METİN (5 saniye yeniden tasarımı, C_5SN_RAPORU.md; Türkçe editör onayına): kütüphane kartının yazılı eylemi.
+  // "Başla" değil: bu dokunuş dersi başlatmaz, ayrıntıyı açar ("Başla" ayrıntıdadır, ses orada başlar).
+  library: { open: 'Derse git' },
+  // YENİ ETİKET (sahip ve editör onayına): dersin sesinin adı; zaman çizelgesindeki voice_name ile aynı (ders2-15
+  // "Nefona Hoca"). Ses bir kişi gibi sunulmaz: yanında yüz ya da fotoğraf yok, yalnız ses dalgası simgesi.
+  voices: { hoc: 'Nefona Hoca' },
 
   // Güvenlik kartı (modul.md §2.2): bir kez; ders ayrıntısındaki (i) ile yeniden
   safety: {
@@ -58,7 +64,16 @@ export const YT = {
   },
 
   // Önce / sonra puanı (modul.md §2.5, §2.8): aynı soru, 1–10, "Atla"
-  rate: { before: 'Önce', after: 'Sonra', next: 'Devam', skip: 'Atla' },
+  rate: {
+    before: 'Önce',
+    after: 'Sonra',
+    next: 'Devam',
+    skip: 'Atla',
+    // YENİ METİNLER (5 saniye yeniden tasarımı; Türkçe editör onayına, sağlık iddiası yok):
+    why: 'Ders bitince aynı soruyu yeniden soracağız.', // önce puanı: neden soruluyor
+    again: 'Aynı soru, şimdi dersten sonra.', // sonra puanı: soru bilerek yineleniyor
+    was: 'Dersten önce:', // sonra puanında yalnız seçimden sonra, ardından önceki puan (OZET.md §10)
+  },
 
   // Oynatıcı (modul.md §2.6; §4)
   player: {

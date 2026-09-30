@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  Info, Sun, Moon, ChevronLeft, ChevronRight, ChevronDown, ExternalLink, ArrowRight, BookOpen, ListOrdered, Bed, DoorOpen, Car,
-  Stethoscope, ArrowUpFromLine, Volume1, VolumeX, LifeBuoy, Wind, Eye,
+  Info, Sun, Moon, ChevronLeft, ChevronRight, ChevronDown, ExternalLink, ArrowRight, BookOpen, DoorOpen, Car,
+  Stethoscope, ArrowUpFromLine, Volume1, VolumeX, LifeBuoy, Wind, Eye, Check, AudioLines,
 } from 'lucide-react'
 import { isIOSApp, haptic } from '../../lib/native.js'
 import {
   LESSONS, visibleLessons, publishedMinutes, pickMinutes, versionOf, sectionsOf, addedSections, minutesLabel,
   isNightHour, isPublished, POSTURE_LABEL, MUSIC_TAIL, THREE_MIN_LINE, SOURCES_FOOTER, OPENING_PERMISSION, OPENING_VEHICLE,
 } from '../../lib/yogaLessons.js'
-import { afterPatch, recordWriter, hasRating, isYoga, RATE_MAX } from '../../lib/yogaRecord.js'
+import { afterPatch, recordWriter, hasRating, isYoga } from '../../lib/yogaRecord.js'
 import { profileSignals } from '../../lib/profile.js'
 import { NBSP } from '../../lib/format.js'
 import { markLater } from '../../lib/pathLater.js'
@@ -20,11 +20,15 @@ import { currentLesson, setCurrentLesson, clearCurrentLesson, newLessonSession, 
 import { sessionRecord, liveLesson } from './journal.js'
 import YogaPlayer from './YogaPlayer.jsx'
 import LessonArt from './LessonArt.jsx'
+import { Scene, HorizonScale, LessonPath, DiveList, SectionStrip, useTimeline, PrepIcon, prepKind, glueLast } from './YogaParts.jsx'
 import { sectionAt } from './timeline.js'
 import './yoga.css'
 
 // Yoga ve Meditasyon (modul.md §2; PLAN.v3 §D.2): kütüphane → ders ayrıntısı → (ilk kez: güvenlik kartı ve ses
 // denetimi) → önce puanı → oynatıcı → sonra puanı ve zorlanma sorusu → bitiş. X: durdurma ekranı → zorlanma sorusu.
+// Görünüm: 5 saniye yeniden tasarımı (yoga-pilot/C_5SN_RAPORU.md): her ekran beş değerlendiricinin çoğunluğunun seçtiği
+// yönde (A · B · C maketleri), önerdikleri aşılarla. Oynatıcı hep karanlık; öteki ekranlar iki temada (sonra puanı ve
+// zorlanma sorusu dahil: modul.md §2, G3).
 // Yalnız yayımlanmış süreler ve en az bir süresi yayımlanmış dersler görünür (lib/yogaLessons.js).
 // Web'de (isIOSApp() yanlış) yoga yoktur; rotaya doğrudan gelinirse tek satır (PLAN.v3 §D.7).
 
@@ -225,6 +229,8 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
       <SafetyCard
         L={Ls}
         onOk={() => { if (!opts.safetySeen) update({ safetySeen: true }); setScreen(safetyBack) }}
+        // Geri: (i) ile açıldıysa ayrıntıya; ilk girişte Ana sayfaya (kart bir sonraki girişte yeniden çıkar)
+        onBack={() => (opts.safetySeen ? setScreen(safetyBack) : onExit?.())}
       />
     )
   }
@@ -283,29 +289,40 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
   if (screen === 'before' || screen === 'after') {
     const isBefore = screen === 'before'
     const val = isBefore ? before : after
-    // Önce: ufuk dinlenirken, uygulamanın temasında. Sonra: oynatıcının karanlığında kalır ve yavaşça belirir (gözünü yeni
-    // açana ani ışık yok); imge şafak (ışık yükselmiş), önceki puan ölçekte işaretli. Aynı soru iki ekranda (modul.md
-    // §2.8 "aynen yeniden sorulur"); ekranlar bir bakışta ayrılır.
-    const body = (
-      <>
-        <div className="yg-top">
-          {isBefore && <button type="button" className="btn-icon" onClick={() => setScreen('detail')} aria-label={YT.back}><ChevronLeft size={20} aria-hidden="true" /></button>}
-        </div>
-        <LessonArt form={L.form} color={L.color.dark} mood={isBefore ? 'rest' : 'dawn'} className="yg-rate-art" />
-        <div className="grow" />
+    // Aynı soru iki ekranda (modul.md §2.8 "aynen yeniden sorulur"), ölçek iki ekranda birebir aynı (ölçümün geçerliği);
+    // ekranlar bir bakışta ayrılır. Önce (yön A + B'nin göğü): ölçek ufkun kendisi, üstünde güneşi henüz doğmamış gök;
+    // dersin yolu "Önce · ders · Sonra" ve neden sorulduğu. Sonra (yön B): üstte güneşi doğmuş sıcak şafak, yol tamam,
+    // "Aynı soru, şimdi dersten sonra."; oynatıcının karanlığından temaya yavaşça açılır (Hareketi Azalt'ta hemen).
+    // Önceki puan yalnız seçimden sonra: ölçekte içi boş halka ve altında tek satır (OZET.md §10; çıpalama yok).
+    // "Devam" seçimle görünür; yeri baştan ayrılmıştır (ölçek kaymaz); "Atla" hep yazı.
+    const showWas = !isBefore && Number.isFinite(before)
+    return (
+      <main className={`screen yg yg-rating ${isBefore ? 'is-before fade-in' : 'is-after yg-dawn-in'}`} style={tone(L)}>
+        {isBefore
+          ? <div className="yg-top"><button type="button" className="btn-icon" onClick={() => setScreen('detail')} aria-label={YT.back}><ChevronLeft size={20} aria-hidden="true" /></button></div>
+          : <div className="yg-hero yg-rate-hero"><LessonScene L={L} mood="dawn" /></div>}
+        <div className="grow yg-grow-top" />
+        <LessonPath title={L.title} after={!isBefore} labels={YT.rate} />
         <div className="yg-q">
-          <span className="yg-ey"><b>{isBefore ? YT.rate.before : YT.rate.after}</b> · {L.title}</span>
           <h1 className="yg-h">{L.question}</h1>
+          <p className="yg-why">{isBefore ? YT.rate.why : YT.rate.again}</p>
         </div>
-        <div className="yg-scale">
-          <span className="yg-end">{L.ends?.[0]}</span>
-          <Rate value={val} onChange={isBefore ? setBefore : setAfter} label={L.measure} was={isBefore ? null : before} />
-          <span className="yg-end hi">{L.ends?.[1]}</span>
-        </div>
+        <HorizonScale
+          value={val}
+          onChange={isBefore ? setBefore : setAfter}
+          label={L.measure}
+          ends={L.ends ?? []}
+          was={showWas ? before : null}
+          sky={isBefore && L.form === 'horizon'}
+        />
+        {showWas && (
+          <p className="yg-was-line" aria-live="polite">{val != null ? <>{YT.rate.was} <b>{before}</b></> : null}</p>
+        )}
+        <div className="grow" />
         <div className="yg-go">
           <button
             type="button"
-            className="btn"
+            className={`btn${val == null ? ' yg-wait' : ''}`}
             disabled={val == null}
             onClick={() => {
               if (isBefore) begin(before)
@@ -316,18 +333,15 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
               }
             }}
           >{YT.rate.next}</button>
-          {/* "Atla" yalnız yazı: pasif "Devam" ile karışmasın, belirgin tek düğme "Devam" olsun */}
           <button type="button" className="yg-skip" onClick={() => (isBefore ? begin(null) : setScreen('hard'))}>{YT.rate.skip}</button>
         </div>
-      </>
+      </main>
     )
-    if (isBefore) return <main className="screen fade-in yg yg-rating is-before" style={tone(L)}>{body}</main>
-    return <Night L={L} className="yg-rating is-after" slow>{body}</Night>
   }
 
   if (screen === 'stopped') {
     // Uyku dersinde uyandırma yok (modul.md §10.1, §10.2): uyandıran dönüş metni ve sesli dönüş yerine dersin kendi
-    // gece satırı; sesli dönüş düğmesi çıkmaz
+    // gece satırı; sesli dönüş düğmesi çıkmaz. Durdurma ekranı oynatıcının parçası: karanlık kalır.
     const nightStop = LESSONS[end?.lesson ?? n]?.daypart === 'night'
     return (
       <main className="yg-dark yg-stop" aria-live="polite">
@@ -348,9 +362,10 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
   if (screen === 'hard') {
     const much = hard === 'much'
     const shorter = end ? shorterOf(end.lesson, end.minutes) != null : true
-    // Karanlıkta kalır (sonra puanı ya da durdurma ekranından gelinir; ikisi de karanlık)
+    // Temada (modul.md §2: oynatıcı dışındaki her ekran iki temada). Durdurma ekranının karanlığından gelindiyse temaya
+    // yavaşça açılır; sonra puanından gelindiyse zaten temada.
     return (
-      <Night L={L} className="yg-hard">
+      <main className={`screen yg yg-hard ${end?.stopped ? 'yg-dawn-in' : 'fade-in'}`} style={L ? tone(L) : undefined}>
         <div className="yg-top" />
         <h1 className="yg-h">{YT.hard.question}</h1>
         <div className="yg-chips" role="radiogroup" aria-label={YT.hard.question}>
@@ -371,7 +386,7 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
             ? <button type="button" className="btn" onClick={nextAfterHard}>{YT.hard.next}</button>
             : <button type="button" className="yg-skip" onClick={nextAfterHard}>{YT.hard.skip}</button>}
         </div>
-      </Night>
+      </main>
     )
   }
 
@@ -391,52 +406,55 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
 
 // ---- Ekran parçaları ----
 
-// Dersten hemen sonraki ekranlar (sonra puanı, zorlanma): temadan bağımsız karanlık (oynatıcının zemini). Dış katman
-// zemini hemen boyar; iç ekran belirirken açık tema arkadan görünmez.
-function Night({ L, className = '', slow = false, children }) {
+// Dersin yeri: ufuk dersinde (Ders 2) iki temalı sahne (YogaParts Scene: gök, güneş, deniz); öteki formlarda dersin
+// imgesi karanlık bir pencerede (LessonArt). mood: far · shore · dawn · done
+function LessonScene({ L, mood = 'far', className = '' }) {
+  if (L.form === 'horizon') return <Scene mood={mood} className={className} />
   return (
-    <main className="yg-night-wrap">
-      <div className={`screen yg yg-night ${slow ? 'yg-slow-in' : 'fade-in'} ${className}`.trim()} style={L ? tone(L) : undefined}>{children}</div>
-    </main>
+    <span className={`yg-scene yg-scene-art ${className}`.trim()} aria-hidden="true">
+      <LessonArt form={L.form} color={L.color.dark} mood={mood === 'dawn' || mood === 'done' ? 'dawn' : 'rest'} />
+    </span>
   )
 }
 
-// 1–10: ızgara iki satır, yuvarlak düğmeler (320 px'te de 44 px'ten büyük); renk yoğunluğu 1'den 10'a artar, uç sözleri
-// 1'in üstünde ve 10'un altında durur (ikinci satırın başı "hiç" sanılmasın). was: sonra puanında önceki puan (kesik
-// halka ve altında "Önce"; VoiceOver "7 Önce" okur)
-function Rate({ value, onChange, label, was = null }) {
-  return (
-    <div className="yg-rate" role="radiogroup" aria-label={label}>
-      {Array.from({ length: RATE_MAX }, (_, k) => k + 1).map((v) => (
-        <button
-          key={v}
-          type="button"
-          role="radio"
-          aria-checked={value === v}
-          className={v === was ? 'was' : undefined}
-          style={{ '--k': `${Math.round(3 + ((v - 1) * 22) / (RATE_MAX - 1))}%` }}
-          onClick={() => { onChange(v); haptic('tick') }}
-        >
-          {v}{v === was && <span className="yg-was"> {YT.rate.before}</span>}
-        </button>
-      ))}
-    </div>
-  )
-}
+// Uzanarak yapılan dersin kalkış satırı (açılış satırlarının üçüncüsü; onaylı metin aynen)
+const riseLine = (L) => (L.posture === 'lie' ? L.opening.find((t) => t !== OPENING_PERMISSION && !t.startsWith(OPENING_VEHICLE)) ?? null : null)
 
-// Güvenlik kartı (modul.md §2.2): beş madde simge + başlık + açıklama olarak (metin aynen); göz önce beş başlığı tarar.
-// Sıra (5 saniye turu 2: "rahatlamak için gelmişken ilk okuduğum epilepsi ve 112"): önce dersin kendisiyle ilgili dört
-// madde (bitirebilirsin, araç, yavaşça kalk, ses), sonra sağlık maddesi ve hemen altında "tedavi değildir · 112" notu;
-// sağlıkla ilgili her şey bir arada. Metin text.js'te değişmedi, yalnız gösterim sırası. Simgeler maddeye bağlı; ders
-// ayrıntısındaki açılış satırları aynı simgeleri taşır: kapı, araç, "kalk". Renk: dersin rengi (turkuaz değil).
+// Güvenlik kartı (modul.md §2.2; yön A + B ve değerlendiricilerin aşıları). İlk bakışta beş ana cümle: dersle ilgili dört
+// madde tek kartta, sağlık maddesi "tedavi değildir · 112" notuyla ayrı kartta (değerlendiriciler 1, 3, 5: acil numarası
+// sahipsiz kalmıyor). Gövdeler açılır satırda (details/summary; VoiceOver açık ya da kapalı olduğunu okur): hiçbir madde
+// gizlenmez, ana cümle hep görünür, gövde aynen (5 saniye turu 1–3: "metin duvarı"). Başlığın altında kartın en insani
+// cümlesi, ilk maddenin gövdesinden aynen (2. değerlendirici). Geri düğmesi var; "Anladım" alt şeritte hep görünür.
+// Renk: dersin rengi (turkuaz değil). Metin text.js'te değişmedi; yalnız sunuş ve sıra.
 const SAFETY_ICONS = [DoorOpen, Car, Stethoscope, ArrowUpFromLine, Volume1]
 export const SAFETY_ORDER = [0, 1, 3, 4, 2]
+const SAFETY_HEALTH = 2 // sağlık maddesi (ayrı kartta, notla birlikte)
+// İlk maddenin gövdesinin son cümlesi, aynen ("Dersi yarıda bırakmak da pratiğin bir parçası."): metinden türetilir
+export const SAFETY_LEAD = YT.safety.items[0].p.match(/[^.;]+\.$/)?.[0]?.trim() ?? ''
 
-export function SafetyCard({ L = null, onOk }) {
+function SafetyItem({ i }) {
+  const it = YT.safety.items[i]
+  const Icon = SAFETY_ICONS[i] ?? Info
+  return (
+    <li>
+      <details className="yg-acc-i">
+        <summary>
+          <span className="yg-ic" aria-hidden="true"><Icon size={18} /></span>
+          <b>{it.h}</b>
+          <ChevronDown className="yg-acc-chev" size={18} aria-hidden="true" />
+        </summary>
+        {' '}
+        <p>{it.p}</p>
+      </details>
+    </li>
+  )
+}
+
+export function SafetyCard({ L = null, onOk, onBack }) {
   const T = YT.safety
   const [over, setOver] = useState(false)
-  // Liste ekrana sığmıyorsa (küçük ekran) alt şeridin üstünde ince bir çizgi: metin şeridin altına kayar, kesik görünmez.
-  // Açılış kayması (fade-in, translateY) da sayfa boyuna sayılır: kayma bitince de bakılır (onAnimationEnd).
+  // Liste ekrana sığmıyorsa (küçük ekran ya da açılan madde) alt şeridin üstünde ince bir çizgi: metin şeridin altına
+  // kayar, kesik görünmez. Açılış kayması da sayfa boyuna sayılır: kayma bitince de bakılır (onAnimationEnd).
   const check = () => {
     const d = globalThis.document?.documentElement
     if (!d || !globalThis.innerHeight) return
@@ -446,7 +464,7 @@ export function SafetyCard({ L = null, onOk }) {
     check()
     globalThis.addEventListener?.('scroll', check, { passive: true })
     globalThis.addEventListener?.('resize', check)
-    // Yazı tipi yüklenince ya da metin boyu değişince sayfa boyu değişir; olay gelmez: gözlemci bakar
+    // Yazı tipi yüklenince, madde açılınca ya da metin boyu değişince sayfa boyu değişir; olay gelmez: gözlemci bakar
     const ro = typeof globalThis.ResizeObserver === 'function' ? new globalThis.ResizeObserver(check) : null
     if (ro && globalThis.document?.body) ro.observe(globalThis.document.body)
     return () => {
@@ -455,24 +473,28 @@ export function SafetyCard({ L = null, onOk }) {
       ro?.disconnect()
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  const brand = 'Nefona'
+  const foot = T.footer.startsWith(brand) ? <><b className="yg-brand">{brand}</b>{T.footer.slice(brand.length)}</> : T.footer
   return (
     <main className="screen fade-in yg yg-safety" style={L ? tone(L) : undefined} onAnimationEnd={check}>
-      <h1 className="yg-h yg-h-lg">{T.title}</h1>
-      <ul className="yg-list-i">
-        {SAFETY_ORDER.map((i) => {
-          const it = T.items[i]
-          const Icon = SAFETY_ICONS[i] ?? Info
-          return (
-            <li key={it.h}>
-              <span className="yg-ic" aria-hidden="true"><Icon size={16} /></span>
-              <p className="yg-p"><b>{it.h}</b> {it.p}</p>
-            </li>
-          )
-        })}
+      <div className="yg-top">
+        <button type="button" className="btn-icon" onClick={onBack} aria-label={YT.back}><ChevronLeft size={20} aria-hidden="true" /></button>
+      </div>
+      <header className="yg-safe-head">
+        <h1 className="yg-h yg-h-lg">{T.title}</h1>
+        <p className="yg-safe-lead">{SAFETY_LEAD}</p>
+      </header>
+      <ul className="yg-acc">
+        {SAFETY_ORDER.filter((i) => i !== SAFETY_HEALTH).map((i) => <SafetyItem key={i} i={i} />)}
       </ul>
-      <p className="note yg-safe-foot"><LifeBuoy size={16} aria-hidden="true" /><span>{T.footer} <b>{T.emergency}</b>.</span></p>
+      <section className="yg-acc yg-acc-health">
+        <ul>
+          <SafetyItem i={SAFETY_HEALTH} />
+        </ul>
+        <p className="yg-safe-foot"><LifeBuoy size={18} aria-hidden="true" /><span>{foot} <b>{T.emergency}</b>.</span></p>
+      </section>
       <div className="grow" />
-      {/* "Anladım" alt şeritte: liste uzun olsa da (320 px) hep görünür */}
+      {/* "Anladım" alt şeritte: liste uzun olsa da (320 px, açılan madde) hep görünür */}
       <div className={`yg-sticky${over ? ' over' : ''}`}>
         <button type="button" className="btn" onClick={onOk}>{T.ok}</button>
       </div>
@@ -533,6 +555,10 @@ function DayIcon({ daypart }) {
   )
 }
 
+// Kütüphane. Yayımlı tek ders varken (yön B + değerlendiricilerin aşıları) kart dersi tanıtır: dersin yeri çerçeveli bir
+// pencerede (açık temada beyaz kartın içinde, 2. değerlendirici; güneş ufukta, 1. ve 3. değerlendirici), süre ve duruş,
+// tam ad, söz, derine inip geri çıkan bölüm yolu ve yazılı eylem "Derse git". Kartın tamamı tek düğme. Birden çok
+// derste kartlar dersin karanlık imgesiyle (değişmedi).
 function Library({ visible, minutesOf, onBack, onOpen }) {
   const [filter, setFilter] = useState(null)
   const filters = [
@@ -546,9 +572,6 @@ function Library({ visible, minutesOf, onBack, onOpen }) {
   const active = filters.find((f) => f.id === filter)
   const list = active ? visible.filter(active.ok) : visible
   const solo = list.length === 1
-  // Kart: dersin imgesi (oynatıcıda göreceği form) + ad, söz, süre ve duruş. Yayımlı tek ders varken kart dersi tanıtır:
-  // tam adı (ör. "Derin Dinlenme (Yoga Nidra)": "Yoga" başlığının altında uzanarak dinlenmenin ne olduğu anlaşılsın) ve
-  // bu derste sırasıyla neler olduğu (seçili sürenin bölümleri; ayrıntıdaki bölüm şeridiyle aynı adlar).
   return (
     <main className="screen fade-in yg yg-lib" style={list[0] ? tone(LESSONS[list[0]]) : undefined}>
       <div className="yg-top">
@@ -565,20 +588,34 @@ function Library({ visible, minutesOf, onBack, onOpen }) {
       <div className={`yg-list${solo ? ' solo' : ''}`}>
         {list.map((k) => {
           const Lk = LESSONS[k]
-          const flow = solo ? sectionsOf(k, minutesOf?.(k) ?? null) : []
+          const meta = <span className="yg-card-m"><DayIcon daypart={Lk.daypart} /> {minutesLabel(publishedMinutes(k))} · {POSTURE_LABEL[Lk.posture]}</span>
+          if (solo) {
+            const flow = sectionsOf(k, minutesOf?.(k) ?? null)
+            return (
+              <button key={k} type="button" className="yg-card yg-feature" style={tone(Lk)} onClick={() => onOpen(k)}>
+                <span className="yg-window"><LessonScene L={Lk} mood="far" /></span>
+                <span className="yg-feature-body">
+                  {meta}
+                  <span className="yg-card-t">{Lk.fullTitle}</span>
+                  <span className="yg-card-s">{Lk.tagline}</span>
+                  {flow.length > 0 && (
+                    <span className="yg-flow">
+                      <span className="yg-flow-l">{YT.detail.sections}</span>
+                      <DiveList sections={flow} />
+                    </span>
+                  )}
+                  <span className="yg-card-go">{YT.library.open}<ArrowRight size={20} aria-hidden="true" /></span>
+                </span>
+              </button>
+            )
+          }
           return (
             <button key={k} type="button" className="yg-card yg-poster" style={tone(Lk)} onClick={() => onOpen(k)}>
               <LessonArt form={Lk.form} color={Lk.color.dark} className="yg-poster-art" />
               <span className="yg-poster-body">
-                <span className="yg-card-t">{solo ? Lk.fullTitle : Lk.title}</span>
+                <span className="yg-card-t">{Lk.title}</span>
                 <span className="yg-card-s">{Lk.tagline}</span>
-                <span className="yg-card-m"><DayIcon daypart={Lk.daypart} /> {minutesLabel(publishedMinutes(k))} · {POSTURE_LABEL[Lk.posture]}</span>
-                {flow.length > 0 && (
-                  <span className="yg-flow">
-                    <span className="yg-flow-l">{YT.detail.sections}</span>
-                    <span className="yg-flow-list">{flow.map((x) => <span key={x.id}>{x.label}</span>)}</span>
-                  </span>
-                )}
+                {meta}
               </span>
               <span className="yg-go-dot" aria-hidden="true"><ArrowRight size={20} /></span>
             </button>
@@ -623,10 +660,13 @@ function openingIcon(t, L) {
   return L.form === 'point' ? Eye : Wind
 }
 
-// Ders ayrıntısı. İlk bakışta (320 px'te de): dersin imgesi, adı, sözü, süresi ve duruşu; hazırlık; "Başla"nın hemen
-// üstünde açılış satırları (modul.md §2.4-12), simgeli ve sakin; "Başla". Bölümler ve kaynaklar düğmenin altında tek
-// kartta (hazırlık ve açılış izni dersin sesinde de söyleniyor: ders2-15 0:19 ve 1:10). Tek süre yayımlıyken süre bir
-// seçim değildir: çip yerine başlığın üstünde yazar (tek seçenekli seçici seçilebilir bir şey gibi görünüyordu).
+// Ders ayrıntısı (yön B, beş değerlendiricinin de seçimi; aşılar). Üstte kenardan kenara dersin yeri (kıyıya varış;
+// ayrıntıda daha kısa, 3. değerlendirici: "Başla" yukarı); süre, duruş ve dersin sesi; ad ve söz; hazırlık üç eşit karoda
+// simgeyle (örtü, yastık, yüzey); "Başla"nın hemen üstünde açılış satırları tek sakin kartta (izin satırı davet gibi,
+// ötekiler ikincil ama okunur; modul.md §2.4-12); "Başla"; hemen altında dersin 15 dakikalık biçimi: süreyle orantılı
+// bölüm şeridi ve adları (yön C, değerlendiriciler 1, 2, 4, 5); sonra Kaynaklar. Kısa ekranda (≤ 700 px) hazırlık
+// "Başla"nın altına iner (yoga.css; hazırlık dersin sesinde de söyleniyor, ders2-15 0:19). Tek süre yayımlıyken süre bir
+// seçim değildir: çip yerine üst satırda yazar.
 function Detail({ L, minutes, prevMinutes, opts, onMinutes, onMusicTail, onBack, onSafety, onEvening, onStart, onLater = null }) {
   const [sleepOn, setSleepOn] = useState(false)
   useEffect(() => {
@@ -636,27 +676,33 @@ function Detail({ L, minutes, prevMinutes, opts, onMinutes, onMusicTail, onBack,
   }, [])
   const mins = publishedMinutes(L.n)
   const choose = mins.length > 1
+  const v = versionOf(L.n, minutes)
+  const tl = useTimeline(v?.timeline ?? null)
   const sections = sectionsOf(L.n, minutes)
   const added = addedSections(L.n, prevMinutes, minutes)
   const addedIds = new Set(added.map((s) => s.id))
   const night = L.daypart === 'night'
   const evening = !night && isNightHour(new Date()) && publishedMinutes(3).length > 0 // Uykuya Geçiş yayımlanmışsa
   const prep = L.posture === 'lie' && L.preparation?.length > 0
+  const voice = YT.voices[v?.voice] ?? null
   return (
     <main className="screen fade-in yg yg-detail" style={tone(L)}>
-      <div className="yg-top">
-        <button type="button" className="btn-icon" onClick={onBack} aria-label={YT.back}><ChevronLeft size={20} aria-hidden="true" /></button>
-        <button type="button" className="btn-icon" onClick={onSafety} aria-label={YT.safety.open}><Info size={20} aria-hidden="true" /></button>
+      <div className="yg-hero yg-detail-hero">
+        <LessonScene L={L} mood="shore" />
+        <div className="yg-top">
+          <button type="button" className="btn-icon" onClick={onBack} aria-label={YT.back}><ChevronLeft size={20} aria-hidden="true" /></button>
+          <button type="button" className="btn-icon" onClick={onSafety} aria-label={YT.safety.open}><Info size={20} aria-hidden="true" /></button>
+        </div>
       </div>
 
-      <section className="yg-poster yg-hero">
-        <LessonArt form={L.form} color={L.color.dark} className="yg-poster-art" />
-        <div className="yg-poster-body">
-          <span className="yg-ey"><DayIcon daypart={L.daypart} /> {!choose && minutes != null ? `${minutes}${NBSP}dk · ` : ''}{POSTURE_LABEL[L.posture]}</span>
-          <h1 className="yg-h">{L.fullTitle}</h1>
-          <p className="yg-p">{L.tagline}</p>
-        </div>
-      </section>
+      <div className="yg-head">
+        <span className="yg-ey yg-meta">
+          <span className="yg-meta-a"><DayIcon daypart={L.daypart} /> {!choose && minutes != null ? `${minutes}${NBSP}dk · ` : ''}{POSTURE_LABEL[L.posture]}</span>
+          {voice && <span className="yg-meta-v"><span className="yg-meta-sep" aria-hidden="true">·</span><AudioLines size={15} aria-hidden="true" />{voice}</span>}
+        </span>
+        <h1 className="yg-h">{L.fullTitle}</h1>
+        <p className="yg-p">{L.tagline}</p>
+      </div>
 
       {choose && (
         <div className="yg-chips" role="radiogroup" aria-label={YT.detail.minutes}>
@@ -679,70 +725,54 @@ function Detail({ L, minutes, prevMinutes, opts, onMinutes, onMusicTail, onBack,
       )}
 
       {prep && (
-        <section className="yg-prep">
-          <Bed className="yg-item-ic" size={18} aria-hidden="true" />
-          <div className="yg-item-b">
-            <span className="yg-lbl">{YT.detail.preparation}</span>
-            <p>{L.preparation.join(' · ')}</p>
-          </div>
+        <section className="yg-prep" aria-label={YT.detail.preparation}>
+          <span className="yg-lbl" aria-hidden="true">{YT.detail.preparation}</span>
+          <ul className="yg-tiles">
+            {L.preparation.map((t) => (
+              <li key={t}><PrepIcon kind={prepKind(t)} /><span>{glueLast(t)}</span></li>
+            ))}
+          </ul>
         </section>
       )}
 
       <ul className="yg-open">
         {L.opening.map((t) => {
           const Icon = openingIcon(t, L)
-          return <li key={t}><Icon size={16} aria-hidden="true" /><span>{t}</span></li>
+          return <li key={t} className={t === OPENING_PERMISSION ? 'lead' : undefined}><Icon size={18} aria-hidden="true" /><span>{t}</span></li>
         })}
-        {sleepOn && <li><VolumeX size={16} aria-hidden="true" /><span>{YT.detail.sleepStops}</span></li>}
+        {sleepOn && <li><VolumeX size={18} aria-hidden="true" /><span>{YT.detail.sleepStops}</span></li>}
       </ul>
       {evening && <button type="button" className="link-btn yg-evening" onClick={onEvening}>{YT.detail.evening}</button>}
-      <button type="button" className="btn" disabled={minutes == null} onClick={onStart}>{YT.detail.start}</button>
-      {onLater && <button type="button" className="btn btn-ghost" onClick={onLater}>{YT.detail.later}</button>}
+      <button type="button" className="btn yg-start" disabled={minutes == null} onClick={onStart}>{YT.detail.start}</button>
+      {onLater && <button type="button" className="btn btn-ghost yg-later" onClick={onLater}>{YT.detail.later}</button>}
 
-      {/* Merak edene: dersin bölümleri ve kaynakları (düğmenin altında; ilk bakışta ne, neden ve "Başla" görünsün) */}
-      <div className="yg-group">
-        {sections.length > 0 && (
-          <div className="yg-item">
-            <ListOrdered className="yg-item-ic" size={18} aria-hidden="true" />
-            <div className="yg-item-b">
-              <span className="yg-lbl">{YT.detail.sections}</span>
-              {/* Ad bölünmez; ayraç önceki adın sonunda kalır (satır "·" ile başlamaz) */}
-              <p className="yg-sections" role="group" aria-label={YT.detail.sections}>
-                {sections.map((s, i) => (
-                  <span key={s.id}>
-                    <span className="yg-sec"><span className={addedIds.has(s.id) ? 'yg-add' : undefined}>{s.label}</span>{i < sections.length - 1 ? <span className="yg-sep">{' ·'}</span> : null}</span>
-                    {i < sections.length - 1 ? ' ' : null}
-                  </span>
-                ))}
-              </p>
-              {added.length > 0 && <p className="yg-p small" role="status">{YT.detail.added(minutes, listTr(added.map((s) => s.label.toLocaleLowerCase('tr-TR'))))}</p>}
-            </div>
-          </div>
-        )}
-        <Sources L={L} minutes={minutes} className="yg-item" />
-      </div>
+      {/* Dersin biçimi: bölümler süreleriyle orantılı (şerit) ve adları sırasıyla */}
+      {sections.length > 0 && (
+        <section className="yg-shape">
+          <span className="yg-lbl">{YT.detail.sections}</span>
+          <SectionStrip sections={sections} tl={tl} />
+          {/* Ad bölünmez; ayraç önceki adın sonunda kalır (satır "·" ile başlamaz) */}
+          <p className="yg-sections" role="group" aria-label={YT.detail.sections}>
+            {sections.map((s, i) => (
+              <span key={s.id}>
+                <span className="yg-sec"><span className={addedIds.has(s.id) ? 'yg-add' : undefined}>{s.label}</span>{i < sections.length - 1 ? <span className="yg-sep">{' ·'}</span> : null}</span>
+                {i < sections.length - 1 ? ' ' : null}
+              </span>
+            ))}
+          </p>
+          {added.length > 0 && <p className="yg-p small" role="status">{YT.detail.added(minutes, listTr(added.map((s) => s.label.toLocaleLowerCase('tr-TR'))))}</p>}
+        </section>
+      )}
+      <Sources L={L} minutes={minutes} className="yg-card-src" />
     </main>
   )
 }
 
-// Önce → sonra, 1–10 çizgisinde: iki puan ve aralarındaki yol (yalnız görsel; sayılar üstteki satırda yazılı).
-// "Önce" çizginin üstünde, "Sonra" altında: iki puan yan yana ya da aynıyken de etiketler çakışmaz.
-function DeltaTrack({ before, after }) {
-  const at = (v) => (v - 1) / (RATE_MAX - 1)
-  const pos = (v) => `calc(22px + (100% - 44px) * ${at(v)})`
-  const lo = Math.min(before, after)
-  const hi = Math.max(before, after)
-  return (
-    <div className="yg-track" aria-hidden="true">
-      <span className="yg-track-line" />
-      {Array.from({ length: RATE_MAX }, (_, i) => <i key={i} className="yg-tick" style={{ left: pos(i + 1) }} />)}
-      <span className="yg-track-seg" style={{ left: pos(lo), width: `calc((100% - 44px) * ${at(hi) - at(lo)})` }} />
-      <span className="yg-mark was" style={{ left: pos(before) }}><em>{YT.rate.before}</em></span>
-      <span className="yg-mark now" style={{ left: pos(after) }}><em>{YT.rate.after}</em></span>
-    </div>
-  )
-}
-
+// Bitiş (yön A, beş değerlendiricinin de seçimi; aşılar). Üstte sıcak şafak (akıştaki ilk sıcak renk, kutlama sözü yok);
+// "Ders bitti"; tek kayıt kartında dinlenen dakika, dolu bölüm şeridi ve ulaşılan bölüm (✓ Kapanış; 2. değerlendirici),
+// altında önce → sonra: iki sayı kartın iki ucunda, aralarında uzun ok, "Sonra" dersin renginde (değerlendiriciler 1, 3,
+// 5). Uzanarak yapılan derste onaylı kalkış satırı çerçeveli bir notta (4. değerlendirici). Puanlar "nasıl hissettin"
+// gidişatıdır, etki kanıtı değildir (PLAN.v3 §D.5): "işe yaradı" gibi bir söz yok.
 function Done({ L, end, before, after, hard, onOpen, onOk }) {
   const rec = end?.rec
   const mins = rec ? Math.max(1, Math.round(rec.seconds / 60)) : null
@@ -757,28 +787,44 @@ function Done({ L, end, before, after, hard, onOpen, onOk }) {
   const nextLesson = much ? (shorter ? L.n : null) : vis.length > 1 ? vis[(i + 1) % vis.length] : null
   const nextMinutes = shorter ? shortest : null
   const rated = Number.isFinite(before) && Number.isFinite(after) && L.measure
-  // Bitiş: dersin imgesi şafakta (oynatıcıdaki gündüz kapanışı gibi); kişinin kendi puanları öne çıkar, kutlama sözü yok
-  // (puanlar "nasıl hissettin" gidişatıdır, etki kanıtı değildir; PLAN.v3 §D.5)
+  const secs = sectionsOf(L.n, end?.minutes)
+  const tl = useTimeline(versionOf(L.n, end?.minutes)?.timeline ?? null)
+  const rise = riseLine(L)
+  const measure = rated ? capFirst(L.measure) : null
   return (
     <main className="screen fade-in yg yg-done" style={tone(L)}>
-      <div className="yg-top" />
-      <section className="yg-poster yg-hero">
-        <LessonArt form={L.form} color={L.color.dark} mood="dawn" className="yg-poster-art" />
-        <div className="yg-poster-body">
-          <span className="yg-ey">{L.title}</span>
-          <h1 className="yg-h">{YT.done.title}</h1>
-          {mins != null && <p className="yg-p">{mins}{NBSP}dk{end?.section ? ` · ${end.section}` : ''}</p>}
-        </div>
-      </section>
-      {rated && (
-        <section className="yg-result">
-          <p className="yg-delta">
-            <span className="yg-delta-l">{capFirst(L.measure)}</span>{' '}
-            <span className="yg-delta-n"><b>{before}</b>{' '}<span className="yg-arrow">→</span>{' '}<b>{after}</b></span>
-          </p>
-          <DeltaTrack before={before} after={after} />
+      <div className="yg-hero yg-done-hero"><LessonScene L={L} mood="done" /></div>
+      <div className="yg-head">
+        <span className="yg-ey">{L.title}</span>
+        <h1 className="yg-h yg-h-xl">{YT.done.title}</h1>
+      </div>
+      {(mins != null || rated) && (
+        <section className="yg-record">
+          {mins != null && (
+            <div className="yg-rec-top">
+              <p className="yg-rec-row">
+                <span className="yg-rec-min">{mins}{NBSP}dk</span>
+                {end?.section ? <><span className="yg-sr"> · </span><span className="yg-rec-end"><Check size={16} strokeWidth={2.6} aria-hidden="true" />{end.section}</span></> : null}
+              </p>
+              {secs.length > 0 && <SectionStrip sections={secs} tl={tl} full />}
+            </div>
+          )}
+          {rated && (
+            <div className="yg-result">
+              <p className="yg-sr">{measure} {before} → {after}</p>
+              <div className="yg-res" aria-hidden="true">
+                <span className="yg-res-l">{measure}</span>
+                <span className="yg-res-pair">
+                  <span className="yg-res-v was"><b>{before}</b><small>{YT.rate.before}</small></span>
+                  <span className="yg-res-arrow"><i /><ChevronRight size={22} strokeWidth={2.4} /></span>
+                  <span className="yg-res-v now"><b>{after}</b><small>{YT.rate.after}</small></span>
+                </span>
+              </div>
+            </div>
+          )}
         </section>
       )}
+      {rise && <p className="yg-rise"><ArrowUpFromLine size={18} aria-hidden="true" /><span>{rise}</span></p>}
       {L.n === 4 && <p className="yg-p">{YT.done.lesson4}</p>}
       <Sources L={L} minutes={end?.minutes} title={YT.done.why} className="yg-card-src" />
       {nextLesson != null && LESSONS[nextLesson] && (

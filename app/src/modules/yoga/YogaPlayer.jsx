@@ -1,16 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
-import { X, Play, Pause, Captions } from 'lucide-react'
+import { X, Play, Pause, Captions, Sunrise, Moon } from 'lucide-react'
 import BreathForm from './BreathForm.jsx'
 import { lesson as bridge, hopeless } from './bridge.js'
 import { YT } from './text.js'
 import { reachedClosing } from './session.js'
 import {
-  durationOf, speechAt, captionAt, closingAt, sectionsOfTimeline, sectionAt, jumpPlan, seekTarget, resumePoint, visualAt,
-  loadTimeline, resumeSpans, guardClosing,
+  durationOf, speechAt, captionAt, welcomeCaption, closingAt, sectionsOfTimeline, sectionAt, jumpPlan, seekTarget, resumePoint,
+  visualAt, loadTimelineCached, resumeSpans, guardClosing,
 } from './timeline.js'
 
 // Ders oynatıcısı (modul.md §2.6, §4; PLAN.v3 §D.3). Hep karanlık (tema dışı, G3). Konum motordan okunur
 // (lessonStatus().time); ekran açıkken saniyede dört kez. Ekran açık tutulmaz (Wake Lock yok): ders kilitte sürer.
+// Yerleşim (5 saniye yeniden tasarımı, yön A ve aşılar): ortada ufuk; altta, ortada bölümün adı ince çizgiler arasında
+// ve hemen altında altyazı ("her adı" cümlesinin bağlamı bölümün adı); altyazı kapalıyken de dersin karşılama cümlesi
+// yazılır (ilk 5 saniye boş kalmasın); bölüm şeridinde kapanışın yeri gün doğumu işaretiyle ("Kapanışa geç" düğmesi aynı
+// simgeyi taşır: nereye götürdüğü görünür); kalan süre şeridin altında küçük; altta tek büyük Duraklat; Altyazı üst
+// sağda, sakin. Denetimler 5 sn sonra kaybolur (bölüm adı ve altyazı kalır).
 // Oturum nesnesi (s) modül düzeyindedir (session.js): ekran kapanıp açılsa da dinlenen süre ve konum kaybolmaz.
 //
 // s alanları: lesson, version{ file, timeline, seconds }, title, planned, listened, lastPos, lastWall, maxPos, playing,
@@ -158,7 +163,7 @@ export default function YogaPlayer({ s, lesson: L, flashSafe = null, captions = 
     let alive = true
     const sendMeta = () => bridge.meta({ file: s.version.file, ...metaOf(s.tl, L.sectionLabels) }).catch(() => {})
     if (!s.tl) {
-      loadTimeline(s.version.timeline).then((tl) => {
+      loadTimelineCached(s.version.timeline).then((tl) => {
         if (!alive || !tl) return
         s.tl = tl
         s.closeAt = closingAt(tl)
@@ -235,7 +240,11 @@ export default function YogaPlayer({ s, lesson: L, flashSafe = null, captions = 
   const reduceMotion = reduceMotionNow()
   const v = visualAt(s.tl, s.lastPos, { reduceMotion, flashSafe, night })
   const still = reduceMotion || flashSafe !== true // form ölçeklenmez, biçimi değişmez (modul.md §3)
-  const caption = captions && s.tl ? captionAt(s.tl, s.lastPos) : null
+  const caption = s.tl ? (captions ? captionAt(s.tl, s.lastPos) : welcomeCaption(s.tl, s.lastPos)) : null
+  const secName = cur ? L.sectionLabels[cur] ?? null : null
+  // Kapanışın şeritteki yeri (gün doğumu işareti): kapanış bölümünün başı, yoksa "Kapanışa geç" noktası
+  const kAt = sections.find((x) => x.id === 'K')?.at ?? s.closeAt
+  const kPct = Number.isFinite(kAt) && dur > 0 ? Math.min(100, Math.max(0, (kAt / dur) * 100)) : null
 
   function togglePause() {
     poke()
@@ -287,14 +296,17 @@ export default function YogaPlayer({ s, lesson: L, flashSafe = null, captions = 
   const onFocusOut = (e) => { if (!e.currentTarget.contains?.(e.relatedTarget)) focusIn.current = false }
 
   const style = { '--yg-c': L.color.dark }
+  const KIcon = night ? Moon : Sunrise
   return (
     <main className={`yg-play${showCtl || paused ? ' ctl' : ''}`} style={style} aria-label={`Yoga · ${L.title}`} onClick={poke}>
       <BreathForm form={L.form} color={L.color.dark} v={v} night={night} still={still} />
-      <div className="yg-hud">
+      <div className="yg-hud" onFocus={onFocusIn} onBlur={onFocusOut}>
         <button type="button" className="yg-x" onClick={(e) => { e.stopPropagation(); stop() }} aria-label={YT.player.stop}><X size={20} aria-hidden="true" /></button>
-        <span className="yg-ey"><b>{L.title}</b>{cur && L.sectionLabels[cur] ? <span>{L.sectionLabels[cur]}</span> : null}</span>
-        {/* Kalan süre: altında "kaldı" (saat mi, geçen süre mi diye okunmasın) */}
-        <span className="yg-t" aria-label={`${fmt(dur - pos)} ${YT.player.left}`}>{fmt(dur - pos)}<small aria-hidden="true">{YT.player.left}</small></span>
+        <span className="yg-ey"><b>{L.title}</b></span>
+        {/* Altyazı: üst sağda, sakin (altta yalnız Duraklat kalsın); denetimlerle birlikte kaybolur, odaklanınca döner */}
+        <button type="button" className={`yg-cc${captions ? ' on' : ''}`} aria-pressed={captions} onClick={(e) => { e.stopPropagation(); poke(); onCaptions?.(!captions) }}>
+          <Captions size={18} aria-hidden="true" /> {YT.player.captions}
+        </button>
       </div>
       {s.error && (
         <div className="yg-err" role="alert">
@@ -304,7 +316,11 @@ export default function YogaPlayer({ s, lesson: L, flashSafe = null, captions = 
         </div>
       )}
       <div className="yg-bot">
-        {caption && <p className="yg-cap" aria-live="off">{caption}</p>}
+        {/* Şu an: bölümün adı (altyazının bağlamı) ve söylenen cümle; denetimler kaybolsa da kalır */}
+        <div className="yg-now">
+          {secName && <p className="yg-sec-name"><span>{secName}</span></p>}
+          <p className="yg-cap" aria-live="off">{caption}</p>
+        </div>
         {/* Gizleme yalnız görsel (saydamlık): VoiceOver denetimleri her an okur ve odaklayınca geri gelirler */}
         <div className="yg-ctl" onFocus={onFocusIn} onBlur={onFocusOut}>
           {sections.length > 0 && (
@@ -321,6 +337,7 @@ export default function YogaPlayer({ s, lesson: L, flashSafe = null, captions = 
                   )
                 })}
               </div>
+              {kPct != null && <span className="yg-kmark" style={{ left: `${kPct}%` }} aria-hidden="true"><KIcon size={14} /></span>}
               <input
                 className="yg-range"
                 type="range"
@@ -341,16 +358,17 @@ export default function YogaPlayer({ s, lesson: L, flashSafe = null, captions = 
               />
             </div>
           )}
-          <div className="yg-row">
-            <button type="button" className={`yg-cc${captions ? ' on' : ''}`} aria-pressed={captions} onClick={(e) => { e.stopPropagation(); poke(); onCaptions?.(!captions) }}>
-              <Captions size={18} aria-hidden="true" /> {YT.player.captions}
-            </button>
-            <button type="button" className="yg-pp" onClick={(e) => { e.stopPropagation(); togglePause() }} aria-label={paused ? YT.player.resume : YT.player.pause}>
-              {paused ? <Play size={26} aria-hidden="true" /> : <Pause size={26} aria-hidden="true" />}
-            </button>
+          <div className="yg-meta-row">
+            {/* Kalan süre: altında değil yanında "kaldı" (saat mi, geçen süre mi diye okunmasın); küçük ve sakin */}
+            <span className="yg-t" aria-label={`${fmt(dur - pos)} ${YT.player.left}`}>{fmt(dur - pos)} <small aria-hidden="true">{YT.player.left}</small></span>
             {s.closeAt != null && !inClosing && !s.pendingClose ? (
-              <button type="button" className="yg-close" onClick={(e) => { e.stopPropagation(); toClosing() }}>{night ? YT.player.toSleep : YT.player.toClosing}</button>
+              <button type="button" className="yg-close" onClick={(e) => { e.stopPropagation(); toClosing() }}><KIcon size={16} aria-hidden="true" />{night ? YT.player.toSleep : YT.player.toClosing}</button>
             ) : <span className="yg-close-sp" aria-hidden="true" />}
+          </div>
+          <div className="yg-row">
+            <button type="button" className="yg-pp" onClick={(e) => { e.stopPropagation(); togglePause() }} aria-label={paused ? YT.player.resume : YT.player.pause}>
+              {paused ? <Play size={28} fill="currentColor" aria-hidden="true" /> : <Pause size={28} fill="currentColor" aria-hidden="true" />}
+            </button>
           </div>
         </div>
       </div>

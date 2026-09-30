@@ -24,6 +24,24 @@ export function captionAt(tl, t, linger = 0.8) {
   return typeof s.screen_text === 'string' && s.screen_text ? s.screen_text : null
 }
 
+// Karşılama cümlesi: altyazı kapalıyken de dersin ilk klibi (Ders 2: "Hoş geldin." · "Bu dakikalar senin.") yazılır;
+// sonrası yalnız altyazı açıkken (5 saniye turu, oynatıcının ilk 5 saniyesi: "yalnız 'Karşılama' var, çalışıyor mu?").
+// Ekrandaki cümle yine söylenen cümledir (captionAt).
+export function welcomeCaption(tl, t) {
+  const first = speech(tl)[0]
+  if (!first) return null
+  const cur = speech(tl).find((x) => t >= x.start && t < x.end + 0.8)
+  return cur && cur.clip === first.clip ? captionAt(tl, t) : null
+}
+
+// Bölümlerin süreleri (sn): bölüm şeridi süreyle orantılı çizilir (ayrıntı ve bitiş). Çizelge yoksa null.
+export function sectionSpans(tl) {
+  const T = durationOf(tl)
+  const secs = sectionsOfTimeline(tl)
+  if (!T || !secs.length) return null
+  return Object.fromEntries(secs.map((s, i) => [s.id, Math.max(1, (secs[i + 1]?.at ?? T) - s.at)]))
+}
+
 // Klibin (bir klip birden çok parçaya bölünebilir: a.hosgeldin#1, #2) ilk parçasının başı
 function clipFirstStart(tl, clip) {
   return speech(tl).find((s) => s.clip === clip)?.start ?? null
@@ -230,4 +248,16 @@ export async function loadTimeline(path, fetcher = globalThis.fetch) {
   } catch {
     return null
   }
+}
+
+// Aynı dosya bir kez okunur (ayrıntının bölüm şeridi, oynatıcı, bitişin dolu şeridi). Okunamayan dosya önbelleğe
+// girmez (sonra yeniden denenir).
+const TL_CACHE = new Map()
+export const cachedTimeline = (path) => TL_CACHE.get(path) ?? null
+export async function loadTimelineCached(path, fetcher = globalThis.fetch) {
+  if (!path) return null
+  if (TL_CACHE.has(path)) return TL_CACHE.get(path)
+  const tl = await loadTimeline(path, fetcher)
+  if (tl) TL_CACHE.set(path, tl)
+  return tl
 }
