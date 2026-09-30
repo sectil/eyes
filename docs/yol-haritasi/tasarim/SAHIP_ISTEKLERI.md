@@ -100,7 +100,8 @@ gitmeden 5 saniye sınamasından geçer.
 > yoga, sonsuzluk, alarm, hava durumu vs gibi. Ama bunları modüller bittikten sonra görerek düzeltmen gerekiyor"
 
 Uygulama: site güncellemesi planın son aşamasıdır. Bir özellik siteye ancak bitip cihazda görüldükten sonra, bitmiş
-hâlinin gerçek ekranlarıyla girer; planda olup yapılmamış olan (ör. hava, Y5) girmez. Plan bölümü taslağı hazırlanıyor.
+hâlinin gerçek ekranlarıyla girer; planda olup yapılmamış olan (ör. hava, Y5) girmez. Plan: `SONSUZ_YOL.PLAN.v1.md`
+§3.K; §3.I'da "Site" satırı ve S8 kapısı; `YAPILACAKLAR.md` site bölümünde madde.
 
 ## Sahibin 2026-09-30 kararları: ana sayfa ve sürüm notu
 - **Ana sayfa şimdi yeniden tasarlanır, TestFlight beklemez.** Y1'in ekranları üç turda 5 saniye kapısını geçemedi

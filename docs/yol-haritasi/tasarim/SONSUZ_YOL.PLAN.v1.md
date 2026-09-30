@@ -1259,6 +1259,7 @@ cihazda doğrulanmayan ya da eksiği olan iş `[~]`'dir ve tamamlanmış sayılm
 | Y4 | Günün nasıl geçti, "Günün" sayfası, ay, kanıt kartları | TestFlight | **S5:** akşam akışı ve kart metinleri | ≈ 5 iş günü |
 | Y5 | Hava, konum, yağmur bildirimi (Mac ve cihaz) | TestFlight, gizlilik sayfası, etiket | **S6:** izin, bildirim, atıf cihazda | 7–8 iş günü |
 | Y6 | Nef haftalık, aylık, olay satırı; rıza v2 | TestFlight, sunucu yayını | **S7:** 30 soruluk Nef sınavı ve cihaz | 6–8 iş günü |
+| Site | nefona.com: ilk yayından önce yanlış ve erken cümleler, gizlilik ve yayın hazırlığı; her modülün site parçası (modül cihazda bitince); en sonda tek gözden geçirme (§3.K) | Site yayını | **S8:** 5 saniye kapısı ve yabancı testi; sahibin canlı sitede bakışı | hazırlık ≈ 1–2, modül başına ≈ 0,5–1, son gözden geçirme ≈ 2 iş günü |
 | sonra | (d) sessiz ölçüm; (e) uyku, yürüyüş, tepki, gökyüzü molası | kendi planları (`YOL.moduller.md`) | kendi kapıları | — |
 
 Kod ≈ 35–40 iş günü; cihaz denemeleriyle ≈ 8–11 hafta; senin onay sürelerin buna dâhil değildir. Aşamalar sıralıdır, çünkü Y3
@@ -1301,6 +1302,150 @@ karşılaştırmasında 10 + 10 gün; hava önbelleği 60 dk; konum en çok saat
 saati ve 06.30–09.00 sınırı; 18 saat bayatlık; kişi başı günlük 8 istek; `sky-log` 90 gün; il merkezlerinin kaynağı;
 evre adlarının sınırları; ΔT ≈ 69 sn; 64 bildirim sınırı; WeatherKit istek başına çağrı sayısı ve kişi başına günde ortalama 3 istek; RevenueCat panel
 metrikleri; aşama süreleri ve takvim.
+
+### K. nefona.com güncellemesi (son aşama)
+
+Eklendi: 2026-09-30, sahibin isteğiyle (`SAHIP_ISTEKLERI.md`, "nefona.com güncellemesi"). K.7'deki üç soru sahibin kararını
+bekliyor. Dayanak: `site/`, `app/src`, `ACIK_ISLER.md` (`653a716`); taslak iki bağımsız eleştiriden (eksiklik, doğruluk) geçti.
+
+#### K.1 İstek ve amaç
+
+Sahibin sözü (kelimesi kelimesine):
+
+> Bence yaptığını yeni işleri de en son plan eklemesliain Nefona.com sitesini güncellemelisin yeni özellikler ekledik
+> yoga,  sonsuzluk , alarm , hava durumu vs gibi. Ama bunları modüller bittikten sonra görerek düzeltmen gerekiyor
+
+**Amaç:** site uygulamanın bugün yaptığını anlatır; ne eksik ne fazla. Her cümlesi bir kayda dayanır: kodda `dosya:satır`,
+PubMed kaydında PMID ve DOI ya da cihaz kaydı.
+
+**Bugünkü durum (2026-09-30):**
+- **Site yayında değil.** Yalnız yerelde (`npm run dev`, sahip Tailscale üzerinden bakıyor); Vercel projesi yok, alan adı
+  alınmadı (30 Eylül'de boştaydı, 11,25 USD/yıl). Modül listesi, kaynakça, kanıt kartları ve Yenilikler uygulamadan
+  üretilir (`site/scripts/data.mjs` → `site/src/data.json`).
+- **Yoga `[~]`:** uygulamada yalnız Ders 2 · 15 dk yayımlı (`lib/yogaLessons.js:134`); ilk bölümün dört dersinin sesi sahip
+  onaylı ama uygulamada değil; cihazda denenmedi. Site sayfalarında yoga yok, ama `data.mjs` manifestleri süzmeden aldığı
+  için bir sonraki site derlemesi açıklamasız bir "Yoga" satırı ekler (`site/src/main.js` `MOD_DESC`'te yoga yok).
+- **Sonsuz yol Y1 `[~]`:** kod bitti (`e71abe6`); ekranlar 5 saniye kapısını geçmedi (`Y1_5SN_SONUCLARI.md`), ana sayfa
+  yeniden tasarlanıyor. Site Y1'in önünde: `site/pages/index.html:93-94` Y1 yolunu şimdiden anlatıyor.
+- **Alarm `[~]`:** Build 59'da. Seçilen sesin çaldığı Build 59'dan önceki bir derlemede görüldü; `AlarmPlugin.swift` sonra
+  1024 satır büyüdü ve derlenmedi, bir sonraki derlemede yeniden bakılır.
+- **Hava `[ ]`:** kodu yok (plan Y5).
+
+#### K.2 Tetik
+
+- **Yeni bir özellik siteye ancak şu koşullarla girer:** TestFlight derlemesinde çalışır; cihaz listesi biter ve sahip
+  cihazda baktıktan sonra `[x]` olur; App Store yayınından sonra ayrıca yayımlanan App Store sürümünde de vardır.
+- **Planda olup yapılmamış iş girmez:** hava (Y5), Y2–Y6'nın yapılmamış kısımları, kalan altı yoga dersi, (d), (e).
+  "Yakında" satırı yazılmaz; Apple 2.3.1(a) uygulamanın sunmadığı içeriğin "App Store içinde ya da dışında" tanıtılmasını
+  yasaklar (`arastirma-v1/apple/guidelines.html`).
+- **Sıra:** her modül ya da aşama cihazda bitince yalnız onun site parçası yapılır. En sonda, Y6 cihazda bitince bütün site
+  bir kez baştan gözden geçirilir (K.4).
+- **İstisna 1, beklemez:** bugünkü uygulamayı yanlış ya da erken anlatan cümleler ilk yayından önce düzelir (K.3 ilk satır).
+- **İstisna 2, beklemez:** gizlilik sayfası, koşullar ve App Store gizlilik etiketi özelliğin `[x]`'ini beklemez; özelliği
+  taşıyan derleme App Review'a girmeden önce yayında olur (Apple 2.3 ve 5.1.1(i)). Özelliğin anlatısı `[x]`'i bekler;
+  App Store Connect'te "elle yayımla" seçilir ve sitenin özellik parçası aynı saatte açılır.
+- **Bugün sitede anlatılan ama `[x]` olmayan işler** (haftalık E testi, veri merkezi, iris ve Gelişim, parlaklık) için
+  karar sahibin (K.7 soru 3).
+
+#### K.3 Fark tablosu
+
+| Özellik | Bugünkü site | Eklenecek ya da değişecek | Ne zaman |
+|---|---|---|---|
+| **Bugünkü site ve uygulama** | Aşağıdaki yanlış ya da erken cümleler | **Ana sayfa:** 20-20-20 bölümü "işe yaradı" ve "Nefona bu kuralı uygular" diyor (`index.html:58-59`); uygulamanın kendi kanıt notu tersini söylüyor (`components/RestBreak.jsx:10-13`, Johnson ve Rosenfield 2022) → bulgu diliyle, sınırıyla. "Sabah alarmı gün ışığına göre tasarlandı" (`:65`) kodda karşılıksız → çıkar. "Bir dakikalık nefesle gün başlar" (`:86`; sabah nefesi isteğe bağlı), "gözünü ışıkla yormaz" (`:98`, kaynaksız), "15 dakikalık yol" (`:2`, `:9`, `:81`) düzelir. Y1 (`:93-94`) ve (b) "önce ölçüm" (`nasil-calisir.html:15-16`) cümleleri kendi kapılarına kadar geri tutulur. **Yenilikler:** "sessiz modda da çalar" (28 Eylül) ve parlaklık (29 Eylül) cihazda doğrulanmadı; `2026-09-29-2` TestFlight'ta değil (K.4 adım 5). **Modüller ve Nasıl çalışır:** emekli "Nefes sayma" çıkar (`nasil-calisir.html:31` dahil); Gökyüzü molası 2 dk; giriş yolları (`nasil-calisir.html:16`: Google `[~]`, e-posta SMTP'siz çalışmıyor). **Sesler:** "önceden kaydedilmiş kadın ya da erkek sesi" ve "bestelendi" üretim yoluna göre (ElevenLabs; `lib/voicePack.js:1`, `lib/alarmSounds.js:4`); "ses için ağa çıkmaz" → "sesli yönlendirme için" (okuma testi konuşma tanıması kullanır). **Gizlilik (hukukçuyla):** mikrofon ve konuşma tanıma; "Tüm verileri sil"den sonra kalanlar; rıza cümlesi; hareket izni (rıza v2); RevenueCat; üçüncü taraflar (Apple konuşma tanıma, Google girişi, Nef'in model sağlayıcısı, SMTP); sitenin kendi verisi (tema `localStorage`'da, barındırma erişim kaydı); Nef satırına yoga sayıları. **Koşullar ve destek:** alarmın iOS 26 koşulu, en düşük iOS sürümü (15), dilin Türkçe olduğu. **Uygulama tarafı:** `Info.plist:12` "alarm sessiz modda da çalar" cihazda doğrulanmadı → alarm cihaz listesine | İlk yayından önce |
+| **Yoga** | Sayfalarda yok | **Modüller:** açıklama; ad ekrandakiyle aynı ("Yoga" mı "Yoga ve Meditasyon" mu, tek ad seçilir); yalnız yayımlı dersler ve süreler. **Nasıl çalışır:** pratikler. **Bilim:** yayımlı dersin "Neye dayanıyor" satırı ve kaynakları PMID ve DOI'siyle, dersin sınır cümlesiyle ("alandaki çalışmaların çoğunun kalitesi düşük", `yogaLessons.js:105`); Sharpe 2023 (PMID 36731199) Ders 3 yayımlanınca. **Gizlilik:** yoga kayıtları, Nef'e giden dört sayı. **Koşullar:** güvenlik kartındaki uyarılar (`modules/yoga/text.js`). **Ses örneği:** kısa kesit, altında sesteki cümlenin aynısı (dersler abonelik arkasında; `public/yoga` Vercel'e gitmez) | Yayımlı dersler TestFlight'ta ve cihazda `[x]` olunca (yoga Kapı 4–5); her yeni ders kendi gününde |
+| **Sonsuz yol Y1** | Yol görseli ve "Yol ilk gün 8 dakikadır ve her gün bir adım büyür." (`index.html:94`) | **Ana sayfa:** "Bir gün" ve "28 gün" bölümleri; 28. gün bir kilometre taşıdır, yol sonra da sürer. **Nasıl çalışır:** merdivenler, "2 dk daha", "Sonra yaparım", "Bugünün ritmi" (ekrandaki ad); sayı gerekirse "yüzlerce ritim" (230 bileşim). Görseller yeniden tasarlanan ana sayfa cihaza girince çekilir; Build 60'ın ara ana sayfasından çekilmez | Y1 S2 kapısı ve yeni ana sayfa cihazda `[x]` |
+| **Alarm** | Sabah ve gece görselleri, modül açıklaması, kanıt kartı | Sabah akışının isteğe bağlı olduğu; kartın 12 kaynağı PMID ve DOI'siyle kaynakçaya (bugün `lib/evidence.js:97-110`'da düz metin); alarm günlüğü ve sabah cevabı gizliliğe. "Sessiz modda da çalar" cihazda doğrulanmadan yazılmaz | Alarm cihaz listesi bitince (yeni derlemede yeniden bakılarak); yoga sabah sorusu yogayla |
+| **Y2 · Gelişim v2** | "En az 0,10 logMAR, doğrulanmış değişim" | Yeni ölçü kuralı ve "Yolun" bölümü; Gelişim görseli yeniden | Y2 S3 kapısı |
+| **Y3 · sitenin ilk ekranı** | "Gözün değişiyor. Sen de gör." | Karar 5b: "Bu cümleyi okurken kaç kez göz kırptın?" (S0 kararları 21, Ç11, Ç12, Ç15); OG görseli yeniden üretilir | Y3 S4 kapısı |
+| **Y4 · ay ve "Günün nasıl geçti"** | Yok | Akşamın tek dokunuşu; kartların kaynakları; ruh hâli verisinin telefonda kaldığı | Y4 S5 kapısı |
+| **Y5 · hava, konum, yağmur** | Yok (kodu da yok) | Anlatı ve Apple Weather atfı; gizlilikte yaklaşık konum ve hava rızası; App Store etiketine "Yaklaşık konum"; "en doğru kaynak" yazılmaz | Gizlilik ve etiket App Review'dan önce (İstisna 2); anlatı Y5 S6 kapısında |
+| **Y6 · Nef dönemleri, rıza v2** | Nef satırı rıza 1'i anlatıyor | Nef kartı; gizlilikte rıza v2 | Y6 S7 kapısı |
+| **(b) ilk açılışta önce ölçüm** | `nasil-calisir.html:15-16` şimdiden anlatıyor | Geri tutulur, sonra aynı cümle | (b) cihazda `[x]` |
+| **Kalan yoga dersleri, (d), (e)** | Yok | Kendi aşamaları bitince birer parça | Kendi kapıları |
+
+#### K.4 Adımlar
+
+**Bir kez, ilk parçadan önce:**
+- **Veri hattı:** site TestFlight'a giden kayıttan derlenir, çalışma ağacından değil (Vercel'in Git bağlantısı yerine
+  belirli bir kayıttan yayın ya da ayrı yayın dalı). `data.mjs` emekli modülleri (`retired`) ve yayımlanmamış dersleri
+  süzer. Kaynaklar bugün üç yerde (`lib/sources.js`, `lib/evidence.js`, `lib/yogaLessons.js`); hat üçünü de okur, zamanla
+  `sources.js`'te toplanır (ACIK_ISLER A9).
+- **Ekran düzeneği:** site görsellerinin düzeneği depoda değil (karalama alanında `shotwt/app/_harness/`, yerelde
+  `app/_harness/y1path.*`); depoya alınır. Y1'in düzeneği (`tasarim/Y1_5sn_duzenek/`) site görünümlerini de çekecek
+  biçimde genişletilir. Web'de çekilemeyen yerel ekranlar (AlarmKit kilit ekranı, yoganın yerel oynatıcısı, WeatherKit)
+  sahibin iPhone'undan ya da Mac'te Simülatör'den alınır. OG görselinin üreticisi ve WebP dönüştürücü depoya girer.
+  Ölçüler tek tablo: telefon 390 × 844 ve 320 × 568, tablet 820, masaüstü 1280.
+
+**Her parça için sırayla:**
+1. **Ekran görüntüleri:** bitmiş modülden, TestFlight'a giden kayıttan; açık ve koyu, 390 ve 320 pt. Sahibin cihazındaki
+   ekranla karşılaştırılır, fark varsa cihaz esastır. Alt metin görselle birlikte yeniden yazılır; örnek veriyle
+   çekildiği yazar.
+2. **Metin:** uygulamadaki cümlenin aynısı; iddiasız, bulgu diliyle. Ses örneğinin altındaki yazı sesteki cümlenin
+   aynısıdır. Her cümle §3.H metin kapısından geçer.
+3. **Bilim:** her kaynak PubMed'de yeniden açılır; PMID, DOI, çalışmanın türü, kişi sayısı ve sınırı yazılır. Yalnız
+   yayımlı içeriğin kaynakları görünür; kaynak ve kart sayıları veriden basılır.
+4. **Gizlilik:** gizlilik sayfası = App Store gizlilik etiketi = rıza metni = "Tüm verileri sil" kapsamı; hukukçu onaylar,
+   hukukçu yoksa §1'deki yedek. Kamera görüntüsünün telefondan çıkmadığı cümlesi her sürümde doğru kalır.
+5. **Yenilikler:** uygulamanın sürüm notundan madde çıkarılmaz (Bug 31 kuralı; Apple 2.3.12 yeni özelliklerin "What's New"da
+   yazılmasını ister). Süzme sitede yapılır: site yalnız cihazda `[x]` olan maddeleri basar; sayfadaki "uygulamadaki
+   listenin aynısı" cümlesi buna göre değişir. 28 Eylül maddeleri yeni girdiye taşındığında sitede iki kez görünmez.
+6. **Mağaza uyumu:** App Store açıklaması, alt başlık, "Bu sürümdeki yenilikler" ve mağaza ekran görüntüleri site ile aynı
+   gün güncellenir (Apple 2.3, 2.3.3, 2.3.7). Depodaki tek mağaza belgesi eski (`app/docs/APP_STORE_KURULUM.md`: "Eyelume",
+   iki ürün); ilk gönderimden önce yenilenir.
+7. **5 saniye kapısı:** beş bağımsız değerlendirici (birbirini ve ürünü görmemiş); değişen bölüm ve sitenin ilk ekranı,
+   iki temada, telefon ve masaüstü ölçülerinde. Çoğunluk "etkilendim" demezse sahibe gitmez. Ayrıca yabancı testi (beş
+   soru, `YAPILACAKLAR.md` site bölümü).
+8. **Sahibe onaya:** iki temada, iki genişlikte; 5 saniye sonuçlarıyla.
+9. **Yayın** (ilk kez): alan adı → gizlilik sayfası yayında → adres uygulamaya verilir (`VITE_PRIVACY_URL`; bugün boş, bu
+   yüzden ödeme ekranında, hesap ekranında ve rıza kartında gizlilik bağlantısı hiç çizilmiyor) → gönderilecek derleme.
+   App Store Connect'te gizlilik, destek (zorunlu) ve pazarlama adresleri. `destek@nefona.com` iki iştir: gelen posta
+   (MX ya da yönlendirme) ve giden posta (Resend alan adı doğrulaması; Supabase e-posta girişi buna bağlı). Kullanım
+   koşulları: Apple'ın standart sözleşmesi mi Nefona'nın koşulları mı (hukukçu). "Taslak" etiketleri, veri sorumlusunun
+   unvanı ve adresi, `www` yönlendirmesi, Türkçe 404 sayfası, `robots.txt`, `sitemap.xml`, geri alma yolu; "yakında App
+   Store'da" yerine rozet ve bağlantı. Yayından sonra canlı adreste 390 ve 320 pt'de son bakış.
+
+**En sonda, bir kez:** Y6 cihazda bitince sitenin sekiz sayfası baştan okunur; her cümle bir kayda bağlanır, bağlanamayan
+çıkar. İki temada, 320, 390, 820 ve 1280 genişlikte taşma, kırık bağlantı ve kullanılmayan görsel kalmaz (bugün
+`acuity-*` ve `sleep-*` hiçbir sayfada yok). Ardından adım 7–9.
+
+#### K.5 "Bitti" tanımı
+
+Site bölümü ancak hepsi doğruysa `[x]` olur:
+- Sitedeki her özellik yayındaki derlemede var ve cihazda `[x]`.
+- Her ekran görüntüsü o derlemeden; açık ve koyu, 390 ve 320 pt; alt metni görselle aynı.
+- Her bilimsel cümle PMID ve DOI'si olan bir kaynağa bağlı. Sözcük taraması (tedavi, iyileştirir, önler, korur, uyutur,
+  kanıtlanmış, garanti, teşhis) olumlu ve kaynaksız kullanımda 0 bulur; olumsuzlanan uyarılar ("Tanı koymaz, tedavi
+  etmez"), "Yapmadığımız iddialar" listesi ve kaynaklı kanıt kartları ayrı sayılır.
+- Gizlilik sayfası, App Store etiketi, rıza metni ve uygulama arasında fark yok.
+- Site ile mağaza sayfası aynı şeyi anlatıyor.
+- Erişilebilirlik: klavyeyle kullanılabilir; iki temada kontrast ölçülüp kayda geçti; %200 yakınlaştırmada taşma yok; ses
+  düğmelerinin adları hangi sesin çalacağını söylüyor; ses kendiliğinden çalmıyor, yazısı görünür; Hareketi Azalt
+  korunuyor.
+- 5 saniye kapısında çoğunluk "etkilendim" dedi; yabancı testinde beş sorunun beşi cevaplandı.
+- Sahip canlı sitede baktı ve onayladı.
+
+#### K.6 Yapılmayacaklar
+
+- **Sağlık iddiası yok;** kaynaksız mekanizma yazılmaz.
+- **Olmayan özellik gösterilmez:** yayımlanmamış ders ya da süre ("10 ders"); Y2–Y6'nın yapılmamış işleri ve hava;
+  "yakında"; cihazda doğrulanmamış cümle ("sessiz modda da çalar", parlaklık denetimi); "yeni duraklar zamanla açılır" gibi
+  ucu açık vaat (yol 9. günde tamamlanır, sonrası çeşitlemedir).
+- **"Sonsuz" ürün adı olarak kullanılmaz:** uygulamanın arayüzünde geçmiyor; sınırsız içerik vaadi gibi okunur.
+- **Sahte görüntü yok:** maket, çizim ya da başka sürümün görüntüsü gerçek ekran diye konmaz.
+- **Fiyat ve karşılaştırma yok:** App Store'dan önce fiyat yazılmaz; "en doğru kaynak" gibi karşılaştırma yapılmaz.
+- **Sitede kamera, ölçüm, izleme ya da analiz kitaplığı yok;** eklenirse gizlilik sayfası değişir, bu ayrı karardır.
+- **İngilizce site İngilizce uygulamadan önce açılmaz** (sunulmayan dili tanıtır).
+
+#### K.7 Sahibe sorular
+
+1. **Site ilk kez ne zaman yayına çıksın?** App Store gönderimi bir gizlilik adresi ister ve bu adres derlemeye gömülür.
+   **Öneri:** ilk App Store derlemesinden önce, yalnız doğrulanmış içerikle (gizlilik, koşullar, destek dâhil). Sonra her
+   modül bitince kendi parçası eklenir.
+2. **Alan adı ne zaman alınsın?** Bugünkü kural "yayın gününe kadar alınmaz" (`YAPILACAKLAR.md` site bölümü). Gizlilik
+   adresi, destek e-postası, Google izin ekranı ve Resend doğrulaması ona bağlı; 30 Eylül'de boştaydı.
+   **Öneri:** şimdi alınsın; başkası alabilir.
+3. **Bugün sitede anlatılan ama cihazda `[x]` olmayan işler ilk yayında kalsın mı?** (Haftalık E testi, veri merkezi,
+   iris ve Gelişim, parlaklık.) **Öneri:** yalnız cihazda doğrulananlar kalsın; ötekiler doğrulanınca geri döner.
 
 ---
 

@@ -4,7 +4,7 @@ Her oturumun başında önce `docs/ANA_BELGE.md` (amaç, kurallar, belge haritas
 işaretlenir, yeni iş buraya eklenir. Hatalar `HATA_GUNLUGU.md`'ye yazılır.
 Kural: her özellik PubMed kaynaklı bilimsel dayanakla gelir (uygulamadaki kaynaklar listesine
 makalesi ve DOI'siyle girer); sağlık iddiası yok; KVKK açık rıza her veri amacı için ayrı.
-Son güncelleme: 2026-09-29.
+Son güncelleme: 2026-09-30.
 İşaretler (sahibinin kuralı, 2026-09-28): `[x]` = cihazda doğrulandı ve mükemmel; `[~]` = kodda bitti ama cihazda
 doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. Mükemmel olmayan hiçbir iş `[x]` olmaz.
 
@@ -537,6 +537,14 @@ destek/SSS, yenilikler. Kaynakça, kanıt kartları, sürüm notları, modül li
       (alan adı ile birlikte Resend/SMTP: Supabase e-posta girişi de buna bağlı); App Store bağlantısı.
 - [ ] Yayın: Vercel projesi "nefona" (kök `site/`, build `npm run build`, çıktı `dist`), alan adı satın alma ve bağlama.
 - [ ] Sonra: İngilizce sürüm; sayfa içi arama için ön-üretim (SEO: içerik bugün istemcide basılıyor).
+- [ ] **Yeni özellikleri siteye işle** (sahibi, 2026-09-30: "Nefona.com sitesini güncellemelisin … Ama bunları
+      modüller bittikten sonra görerek düzeltmen gerekiyor"). Plan: `tasarim/SONSUZ_YOL.PLAN.v1.md` §3.K (§3.I "Site"
+      satırı, S8 kapısı). Kural: bir özellik siteye ancak TestFlight'ta çalışıp cihazda `[x]` olduktan sonra girer; her
+      modül bitince o modülün parçası, en sonda bütün site bir kez. Hava kodda yok (Y5); o güne kadar sitede de yok.
+      Beklemeyenler (ilk yayından önce): 20-20-20 "işe yaradı" cümlesi, erken Y1 ve (b) cümleleri, Yenilikler'deki
+      doğrulanmamış maddeler, emekli "Nefes sayma", ses cümleleri, gizlilikteki açıklar; gizlilik ve etiket özelliği
+      taşıyan derleme App Review'a girmeden yayında olur. Sahibe üç soru: ilk yayın zamanı, alan adı, `[~]` işlerin
+      ilk yayında kalıp kalmayacağı (§3.K.7).
 
 ## Açık hatalar
 - [x] Apple ile giriş TestFlight'ta "UNIMPLEMENTED" (Bug 11): kendi eklentimiz AppleSignInPlugin.swift (b4dc6f3); cihazda
