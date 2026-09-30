@@ -6,38 +6,12 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
-    // Build 60'tan sonraki TestFlight (Bug 31: Build 60'ın girdisine madde eklenmez)
+    // Build 63'ten sonraki TestFlight. Bug 31 (yeniden, 2026-09-30): Build 63 '2026-09-29-2' girdisini içeriyordu;
+    // sonradan o girdiye eklenen maddeler (Bug 33–34, Build 60 işleri, 28 Eylül'den taşınanlar) onu görmüş kişiye
+    // gösterilmeyecekti. Hepsi buraya taşındı; '2026-09-29-2' Build 63'teki hâline döndü.
     id: '2026-09-30-1',
-    title: '1 Ekim güncellemesi',
-    items: [
-      // Sonsuz yol denetimi (2026-09-30): breathMix haftalık kuralları kayıt sayıyordu, gün değil. Cihazda denenmedi.
-      { kind: 'fix', text: "Yoldaki nefeste aynı gün birden çok kez kaydettiğin nefes, haftalık çeşitlilik kuralında birkaç gün gibi sayılıyordu; o kalıp hafta boyunca hiç gelmeyebiliyordu. Artık her gün bir kez sayılır." },
-    ],
-  },
-  {
-    // Build 59'dan sonraki TestFlight. Bug 31: Build 59'da 29 Eylül girdisine eklenen beş madde (haftalık E testi, Nef,
-    // "Son 3 test", Bug 24, okuma testi) Build 58'de o girdiyi görmüş kişiye gösterilmedi; buraya taşındı.
-    id: '2026-09-29-2',
     title: '30 Eylül güncellemesi',
     items: [
-      // Karar 2026-09-29 (YAPILACAKLAR "Sonsuz yol ve ilk 5 saniye" (b)): ilk açılışta önce ölçüm (lib/setupFlow.js).
-      // Cihazda denenmedi.
-      { kind: 'change', text: "Yeni kurulumda önce ölçüm: uygulamayı ilk kez açan kişi, giriş ekranından sonra doğrudan İlk Bakış'a geçer; 20 saniye boyunca kamera göz kırpmalarını sayar. Hesap, güvenlik bilgisi ve sorular sonuçtan sonra gelir. Kurulumunu bitirdiysen senin için hiçbir şey değişmez." },
-      // Bug 32 (sahibinin onayı): hesap ekranı eşitlenmeyen ilerlemeyi vaat ediyordu. Profil yalnız izinle gider.
-      { kind: 'fix', text: "Hesap ekranında \"Hoş geldin\" başlığının altında artık \"Giriş yap ya da hesap oluştur.\" yazıyor. Önceki yazı, ilerlemenin yeni telefona taşındığını söylüyordu; oysa ölçümlerin hesaba gitmez, telefonunda saklanır." },
-      // Karar 2026-09-29 (YAPILACAKLAR "Sonsuz yol ve ilk 5 saniye" (a)): E testi ilk günden haftada bir. Başlangıç
-      // kuralı lib/trend.js WEEKLY_MIN_BASELINE_TESTS (3 → 7 test; VARSAYIM, kanıt kartında yazar). Cihazda denenmedi.
-      // Son cümle (inceleme 2026-09-29): kural eski ölçümlere de uygulanır; iki göz serisi (hep haftalık) ve seyrek
-      // test edilmiş sağ/sol seriler yeni test olmadan takibe geçebilir, uyarı gösterebilir. Her gün test edilmiş (8.–21.
-      // günlerde 7 test) sağ/sol serilerde başlangıç ve uyarı değişmez.
-      { kind: 'change', text: "E testi artık haftada bir yapılıyor: haftalık E testi (sağ, sol, iki göz) ilk gün yola eklenir, sonra her hafta gelir; öteki günlerde yolda E testi olmaz. İstersen kısa E testini (eski adıyla Günlük test; sağ ve sol göz) Ana sayfadaki Ölçüm listesinden yapabilirsin. Eski günlük test kayıtların geçmişte ve CSV dosyasında \"Kısa görme testi\" adıyla görünür. Gelişim'de ilk test alışma sayılır; başlangıç değerin 3 haftalık testle, en erken 22. günde hazır olur ve yeni testlerle 7 teste kadar güçlenir. Bu kural eski ölçümlerine de uygulanır: özellikle iki göz serisinde, yeni test yapmasan da değerlendirme hemen başlayabilir, bir uyarı da görebilirsin." },
-      { kind: 'change', text: "Nef artık günlük test önermez: haftalık testin zamanı gelince onu hatırlatır. Görme uyarısında \"birkaç gün daha ölç\" denmez; sarıda sonraki testlere bakılır, kırmızıda yalnız göz doktoruna başvurman söylenir." },
-      { kind: 'fix', text: "Gelişim'de son testten bir hafta geçince \"Son 7 gün\" kutusu boş kalıyordu. Artık son 7 günde 3 test yoksa kutuda \"Son 3 test\" yazar ve son 3 testin ortancası görünür; başlangıçla karşılaştırılan değer budur." },
-      // Bug 24 (HATA_GUNLUGU): isDue saatle sayıyordu; haftalık E testi artık takvim günüyle (lib/today.js isDueWeekly)
-      { kind: 'fix', text: "Haftalık E testi son testin saatini bekliyordu: uygulamayı her gün aynı saatte açan kişiye test 8 günde bir geliyor, akşam da \"tamam\" görünen yola yeniden ekleniyordu. Artık son testten 7 gün sonra, o günün başından itibaren yolda." },
-      // Karar 2026-09-29 (sahibi): okuma testi haftalık E testinden ayrılır, takvim günüyle gelir (lib/today.js
-      // readingStatus; bir günlük kayma VARSAYIM). Cihazda denenmedi.
-      { kind: 'change', text: "Okuma testi artık haftalık E testiyle aynı güne düşmez; o gün yerine ertesi gün yola eklenir. E testini yapmasan da okuma testi en çok bir gün bekler. Sonra haftada bir gelir: son okuma testinden 7 gün sonra, o günün başından itibaren yoldadır." },
       // Bug 33 (HATA_GUNLUGU): çalışma oturumunun mola bildirimleri gece de geliyordu (timeSensitive). Cihazda denenmedi.
       { kind: 'fix', text: "Çalışma oturumu gece de saat başı \"Kalk, uzağa bak\" bildirimi gönderebiliyordu; bu bildirimler Uyku ve Rahatsız Etme kiplerini de aşıyordu. Artık mola bildirimleri yalnız 09.00–21.00 arasında gelir; bu saatlere hiç mola sığmıyorsa oturum önerilmez." },
       // Bug 34 (HATA_GUNLUGU): 7302 gündüze alındı; oturum sonuyla aynı dakikadaki hatırlatma kurulmaz. Cihazda denenmedi.
@@ -79,6 +53,34 @@ export const RELEASES = [
       { kind: 'new', text: "Alan ayrıntısında 28 günlük düzen şeridi, hangi modülden kaç kayıt geldiği ve başlangıç soruların görünür." },
       { kind: 'new', text: "İyi oluş: 14 günde bir 5 kısa soru (WHO-5, resmî Türkçe metin). Puan 0–100; 10 puan ve üstü değişim anlamlı sayılır. Tanı değildir, yalnız kendinle karşılaştırılır." },
       { kind: 'new', text: "Ana sayfada küçük harita: kaç alanda kaydın olduğunu ve hangisinin iyileştiğini gösterir; en az ilgilendiğin alan için tek bir öneri sunar (vakti geldiyse İyi oluş soruları)." },
+      // Sonsuz yol denetimi (2026-09-30): breathMix haftalık kuralları kayıt sayıyordu, gün değil. Cihazda denenmedi.
+      { kind: 'fix', text: "Yoldaki nefeste aynı gün birden çok kez kaydettiğin nefes, haftalık çeşitlilik kuralında birkaç gün gibi sayılıyordu; o kalıp hafta boyunca hiç gelmeyebiliyordu. Artık her gün bir kez sayılır." },
+    ],
+  },
+  {
+    // Build 59'dan sonraki TestFlight. Bug 31: Build 59'da 29 Eylül girdisine eklenen beş madde (haftalık E testi, Nef,
+    // "Son 3 test", Bug 24, okuma testi) Build 58'de o girdiyi görmüş kişiye gösterilmedi; buraya taşındı.
+    id: '2026-09-29-2',
+    title: '29 Eylül, ikinci güncelleme',
+    items: [
+      // Karar 2026-09-29 (YAPILACAKLAR "Sonsuz yol ve ilk 5 saniye" (b)): ilk açılışta önce ölçüm (lib/setupFlow.js).
+      // Cihazda denenmedi.
+      { kind: 'change', text: "Yeni kurulumda önce ölçüm: uygulamayı ilk kez açan kişi, giriş ekranından sonra doğrudan İlk Bakış'a geçer; 20 saniye boyunca kamera göz kırpmalarını sayar. Hesap, güvenlik bilgisi ve sorular sonuçtan sonra gelir. Kurulumunu bitirdiysen senin için hiçbir şey değişmez." },
+      // Bug 32 (sahibinin onayı): hesap ekranı eşitlenmeyen ilerlemeyi vaat ediyordu. Profil yalnız izinle gider.
+      { kind: 'fix', text: "Hesap ekranında \"Hoş geldin\" başlığının altında artık \"Giriş yap ya da hesap oluştur.\" yazıyor. Önceki yazı, ilerlemenin yeni telefona taşındığını söylüyordu; oysa ölçümlerin hesaba gitmez, telefonunda saklanır." },
+      // Karar 2026-09-29 (YAPILACAKLAR "Sonsuz yol ve ilk 5 saniye" (a)): E testi ilk günden haftada bir. Başlangıç
+      // kuralı lib/trend.js WEEKLY_MIN_BASELINE_TESTS (3 → 7 test; VARSAYIM, kanıt kartında yazar). Cihazda denenmedi.
+      // Son cümle (inceleme 2026-09-29): kural eski ölçümlere de uygulanır; iki göz serisi (hep haftalık) ve seyrek
+      // test edilmiş sağ/sol seriler yeni test olmadan takibe geçebilir, uyarı gösterebilir. Her gün test edilmiş (8.–21.
+      // günlerde 7 test) sağ/sol serilerde başlangıç ve uyarı değişmez.
+      { kind: 'change', text: "E testi artık haftada bir yapılıyor: haftalık E testi (sağ, sol, iki göz) ilk gün yola eklenir, sonra her hafta gelir; öteki günlerde yolda E testi olmaz. İstersen kısa E testini (eski adıyla Günlük test; sağ ve sol göz) Ana sayfadaki Ölçüm listesinden yapabilirsin. Eski günlük test kayıtların geçmişte ve CSV dosyasında \"Kısa görme testi\" adıyla görünür. Gelişim'de ilk test alışma sayılır; başlangıç değerin 3 haftalık testle, en erken 22. günde hazır olur ve yeni testlerle 7 teste kadar güçlenir. Bu kural eski ölçümlerine de uygulanır: özellikle iki göz serisinde, yeni test yapmasan da değerlendirme hemen başlayabilir, bir uyarı da görebilirsin." },
+      { kind: 'change', text: "Nef artık günlük test önermez: haftalık testin zamanı gelince onu hatırlatır. Görme uyarısında \"birkaç gün daha ölç\" denmez; sarıda sonraki testlere bakılır, kırmızıda yalnız göz doktoruna başvurman söylenir." },
+      { kind: 'fix', text: "Gelişim'de son testten bir hafta geçince \"Son 7 gün\" kutusu boş kalıyordu. Artık son 7 günde 3 test yoksa kutuda \"Son 3 test\" yazar ve son 3 testin ortancası görünür; başlangıçla karşılaştırılan değer budur." },
+      // Bug 24 (HATA_GUNLUGU): isDue saatle sayıyordu; haftalık E testi artık takvim günüyle (lib/today.js isDueWeekly)
+      { kind: 'fix', text: "Haftalık E testi son testin saatini bekliyordu: uygulamayı her gün aynı saatte açan kişiye test 8 günde bir geliyor, akşam da \"tamam\" görünen yola yeniden ekleniyordu. Artık son testten 7 gün sonra, o günün başından itibaren yolda." },
+      // Karar 2026-09-29 (sahibi): okuma testi haftalık E testinden ayrılır, takvim günüyle gelir (lib/today.js
+      // readingStatus; bir günlük kayma VARSAYIM). Cihazda denenmedi.
+      { kind: 'change', text: "Okuma testi artık haftalık E testiyle aynı güne düşmez; o gün yerine ertesi gün yola eklenir. E testini yapmasan da okuma testi en çok bir gün bekler. Sonra haftada bir gelir: son okuma testinden 7 gün sonra, o günün başından itibaren yoldadır." },
     ],
   },
   {

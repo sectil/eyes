@@ -41,6 +41,7 @@ describe('sürüm notları', () => {
   // İkinci inceleme: V-S3 (cihazda doğrulanmamış davranış), V-N4 ("Kalan" kartı yalnız haftalıkta), V-N5 (çift "ve", ses açıksa)
   const items29 = () => RELEASES.find((r) => r.id === '2026-09-29').items.map((i) => i.text)
   const items292 = () => RELEASES.find((r) => r.id === '2026-09-29-2').items.map((i) => i.text)
+  const items301 = () => RELEASES.find((r) => r.id === '2026-09-30-1').items.map((i) => i.text)
   // Bug 31: Build 59'da 29 Eylül girdisine eklenen maddeler Build 58'de o girdiyi görmüş kişiye gösterilmedi. Yeni
   // girdiye taşındı; 29 Eylül'ü görmüş kişi yeni girdiyi görür.
   it('Bug 31: 29 Eylül\'ü görmüş kişi ikinci güncellemeyi görür; taşınan maddeler 29 Eylül\'de yok; (b) maddesi var', () => {
@@ -58,10 +59,21 @@ describe('sürüm notları', () => {
   it('28 Eylül maddeleri 30 Eylül girdisinde; eski girdide yok', () => {
     const r28 = RELEASES.find((r) => r.id === '2026-09-28').items.map((i) => i.text)
     for (const start of ['Uyku ekranı yenilendi', 'Yeni uygulama simgesi', 'Açılışta bir an başka bir logo', 'İyi oluş: 14 günde bir', 'Kurulu alarm Ana sayfanın üstünde']) {
-      expect(items292().some((t) => t.startsWith(start)), start).toBe(true)
+      expect(items301().some((t) => t.startsWith(start)), start).toBe(true)
       expect(r28.some((t) => t.startsWith(start)), start).toBe(false)
     }
     expect(unseenReleases('2026-09-28').map((r) => r.id)).toEqual(['2026-09-30-1', '2026-09-29-2', '2026-09-29'])
+  })
+  // Bug 31 (yeniden, 2026-09-30): Build 63 '2026-09-29-2' girdisini 7 maddeyle içeriyordu. Sonradan eklenenler o girdiyi
+  // görmüş kişiye çıkmayacaktı; hepsi 30 Eylül girdisinde, 29 Eylül ikinci güncelleme Build 63'teki hâlinde.
+  it("Bug 31: Build 63'ten sonra eklenen maddeler yeni girdide; '2026-09-29-2' Build 63'teki gibi", () => {
+    const r292 = RELEASES.find((r) => r.id === '2026-09-29-2')
+    expect(r292.title).toBe('29 Eylül, ikinci güncelleme')
+    expect(r292.items).toHaveLength(7)
+    for (const start of ['Çalışma oturumu gece de', 'Denemenin 5. gün hatırlatması', 'Yoga ve Meditasyon:', 'Yoldaki nefeste aynı gün']) {
+      expect(items301().some((t) => t.startsWith(start)), start).toBe(true)
+      expect(items292().some((t) => t.startsWith(start)), start).toBe(false)
+    }
   })
   // Bug 32: hesap yalnız izinle profili (ad, doğum tarihi, şehir, gözlük) eşitler; ölçümler telefonda kalır
   it('Bug 32: hesap ekranı ve Profilim satırı eşitlenmeyen ilerlemeyi vaat etmez', () => {

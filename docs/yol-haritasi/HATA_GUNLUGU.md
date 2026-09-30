@@ -839,3 +839,13 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   aynı gün 3 kayıtta 0/300.
 - Düzeltme: üç kural ayrı günleri sayar (`daysWith`). Test: `breathMix.test.js` "haftalık kurallar gün sayar, kayıt
   değil" (iki test düzeltmeden önce kırmızı, sonra yeşil). 400 günlük benzetimde başka kural ihlali çıkmadı.
+
+## Bug 36: Bug 31 tekrarı: TestFlight'a gitmiş '2026-09-29-2' girdisine madde eklendi (2026-09-30)
+## Durum: DÜZELTİLDİ (kod + test)
+- Build 63 (`ecdee4f`) '2026-09-29-2' girdisini 7 maddeyle içeriyordu. Sonra bu girdiye Bug 33–34, Build 60 işleri ve
+  28 Eylül'den taşınan maddeler (33 madde) eklendi; girdiyi Build 63'te görmüş kişiye hiçbiri çıkmayacaktı.
+  Neden: girdinin TestFlight'a gidip gitmediği sahibin Mac'indeki son derlemenin commit'inden denetlenmedi.
+- Düzeltme: 33 madde ve Bug 35 yeni '2026-09-30-1' ("30 Eylül güncellemesi") girdisinde; '2026-09-29-2' Build 63'teki
+  hâline döndü. Test: `releases.test.js` "Bug 31: Build 63'ten sonra eklenen maddeler yeni girdide".
+- Kural: sürüm notuna madde eklemeden önce en yeni girdinin id'si son TestFlight derlemesinin commit'inde var mı diye
+  bakılır (`git show <commit>:app/src/lib/releases.js`); varsa yeni id açılır.
