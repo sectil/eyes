@@ -512,9 +512,11 @@ Zaman" hukukçuyu bekler; hava için Apple'a soru gönderilmez.
 - [ ] DEVIR §8 bulguları (bu işin dışında, ana liste): (2) "Çalışma günleri" saati pencereye bakmıyor — sahip kararı:
       kişinin seçimi, dokunulmaz; 7302 ve (3) oturum sonu çakışması düzeldi (Bug 34). (4) AlarmKit ertelemesi geri sayım
       sunumu kullanıyor, widget uzantısı yok: alarmın çalmama riski (Apple). (5) Kim 2020 ve Wolffsohn 2025
-      `sources.js`'te yok (yalnız `evidence.js`). (6) SONSUZ_YOL.PLAN §E.6–E.7 satır atıfları kaymış. (7) `yogaLessons.js`
-      Radin 2025 atfı: çalışma yoga değil meditasyon RKÇ'si, bulgu özette yok — düzeltilecek. (8) `Info.plist`
-      `NSHealthUpdateUsageDescription` duruyor, Nefona Sağlık'a yazmıyor.
+      `sources.js`'te yok (yalnız `evidence.js`); PubMed künyeleri doğru, B1a'da `sources.js`'e girer
+      (`bildirim-hava-yuruyus/kaynak-dogrulama.md`). (6) SONSUZ_YOL.PLAN §E.6–E.7 satır atıfları kaymış. (7) `yogaLessons.js`
+      `THREE_MIN_LINE`: %69,7 özette yok, tam metinde; paydası 8. haftaya kalan 580 kişi, satır bunu söylemiyor
+      (`bildirim-hava-yuruyus/uc-bulgu.md` §1) — düzeltme cümlesi sahip onayında. [x] (8) `NSHealthUpdateUsageDescription`
+      KALIR: HealthKit yetkisi açıkken App Store Connect istiyor (`182d8aa`); metin "yalnızca okur", kodla uyumlu.
 
 ### 1. Hareket: Apple Sağlık (HealthKit) — kod bitti, CİHAZDA DENENMEDİ
 - [ ] Telefonda: izin sayfaları (bizim + iOS), adım satırı, Beden kartı; Swift derlemesi Mac'te (burada derlenemiyor)
