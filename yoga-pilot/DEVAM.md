@@ -69,5 +69,5 @@ PLAN.v2 §B.5, §A.2.2 (23:30), §E.6 #5; PLAN.v3 §D.3 ve Ders 3'ün 45 sn penc
   kaynağı bulunamadı. Bu parti ≈ 118,4 bin (tavan 195 bin).
 - **5 saniye kuralı** (bağlayıcı, `docs/yol-haritasi/tasarim/SAHIP_ISTEKLERI.md`): ses için bu ortamda dinleyebilen
   değerlendirici yok; sahip kararı (SAHIP_ISTEKLERI 15): dosyalar "5 sn sınaması yapılmadı" notuyla sahibe gider, ilk
-  5 saniyeyi sahip değerlendirir. Ders 2, 3, 5 gönderildi, sahip sorun bildirmedi (madde 17); Ders 1 ayrıca gönderildi.
+  5 saniyeyi sahip değerlendirir. Ders 2, 3, 5 (madde 17) ve Ders 1 (madde 18) sahip kulağından geçti: dört ders kabul.
 - Açık: SPEC §10 yardımcı dosyaları (ilk ders girişi, bırakma ön klipleri, durdurma dönüşü) kurulmadı.

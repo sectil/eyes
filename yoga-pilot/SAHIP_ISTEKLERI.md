@@ -83,3 +83,6 @@ Sonraki aşamaya (metin + ses + tasarım iş akışı) bu dosya olduğu gibi ver
     `b/ders1/ders1.lesson.json`'da periyodu 1,2 sn olan 8 "ver…" klibinin `gapFloor` değeri 0,6 → 0,5 sn.
 17. "Sesler iyi gibi ben bir sorun görmedim gibi" (2026-09-30, Ders 2, 3, 5 dosyalarını dinledikten sonra) → sahibin kulak
     değerlendirmesi: sorun bildirilmedi. Ders 1 dosyaları ayrıca gönderilecek.
+18. "şuanda düzgün oalrak alalım ben fark etmedim.. eğer sorun olursa  sonra düzeltme isterim. tamam diyorum" (2026-09-30,
+    Ders 1 dosyalarından sonra) → Ders 1 kabul edildi; ilk bölümün dört dersinin sesleri sahip kulağından geçti. Sonradan
+    fark edilen sorun düzeltme olarak ele alınır.
