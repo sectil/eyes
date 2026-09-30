@@ -184,3 +184,39 @@
 .br-listen { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); color: var(--ink); font: inherit; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
 .br-listen:disabled { opacity: 0.4; }
 .br-diag { display: block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; color: var(--ink-3); overflow-wrap: anywhere; }
+
+/* ---- 5 saniye turu (Y1): günün kalıbında kanıt cümlesi Başla'nın altında, küçük ---- */
+.br-hero .br-hero-ev { font-size: 0.76rem; line-height: 1.45; color: var(--ink-3); }
+
+/* ---- Yoldan açılan seansın bitişi (5 saniye turu): bitiş işareti, puan, asıl eylem Kaydet, altta ikincil seçenekler ---- */
+.br-res { min-height: 100dvh; }
+.br-done { flex: 1; display: grid; justify-items: center; align-content: center; gap: 4px; text-align: center; padding: 8px 0 12px; }
+.br-done h1 { font-size: 1.9rem; letter-spacing: -0.02em; }
+.br-done p { color: var(--ink-2); }
+.br-done-mk { width: 132px; height: 132px; overflow: visible; margin-bottom: 8px; }
+.br-done-mk .tk { fill: none; stroke: var(--surface-3); stroke-width: 7; }
+.br-done-mk .rg { fill: none; stroke: url(#br-done-ring); stroke-width: 7; stroke-linecap: round; stroke-dasharray: 1 1; transform: rotate(-90deg); transform-origin: 60px 60px; }
+.br-done-mk .orb { fill: url(#br-done-orb); filter: drop-shadow(0 14px 22px color-mix(in srgb, var(--iris-2) 38%, transparent)); }
+.br-done-mk:not(.ok) .orb { opacity: 0.55; }
+.br-done-mk .ck { fill: none; stroke: #fff; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 1; }
+.br-done-mk .rp { fill: none; stroke: var(--iris-1); stroke-width: 2; opacity: 0; transform-origin: 60px 60px; }
+/* Kısa ve erken biter (≈ 0,7 sn); halkalar bir kez yayılır, başta ve sonda görünmez */
+@media (prefers-reduced-motion: no-preference) {
+  .br-done-mk .rg { animation: br-draw 0.6s cubic-bezier(0.3, 0.7, 0.2, 1) both; }
+  .br-done-mk .orb { animation: br-orb 0.45s cubic-bezier(0.3, 1.4, 0.5, 1) both; transform-origin: 60px 60px; }
+  .br-done-mk .ck { animation: br-draw 0.3s ease-out 0.35s both; }
+  .br-done-mk.ok .rp { animation: br-ripple 1.5s ease-out 0.55s both; }
+  .br-done-mk.ok .rp.r2 { animation-delay: 0.95s; }
+}
+@keyframes br-draw { from { stroke-dashoffset: 1; } }
+@keyframes br-orb { from { transform: scale(0.8); opacity: 0; } }
+@keyframes br-ripple { 0% { transform: scale(0.92); opacity: 0; } 12% { opacity: 0.5; } 100% { transform: scale(1.6); opacity: 0; } }
+@media (max-height: 700px) { .br-done-mk { width: 100px; height: 100px; margin-bottom: 4px; } .br-done h1 { font-size: 1.6rem; } }
+.br-res .btn:disabled { opacity: 1; background: var(--surface-2); color: var(--ink-3); box-shadow: none; border-color: var(--border); }
+.br-res-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.br-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--ink-2); font: 600 0.9rem var(--font-body); cursor: pointer; }
+.br-chip.ghost { background: none; border-color: transparent; color: var(--ink-3); }
+.br-chip[aria-pressed='true'] { background: var(--warn-bg); border-color: transparent; color: var(--warn); }
+.br-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Puan bekleniyor: kart vurgu çizgisiyle (Kaydet puandan sonra açılır) */
+.br-res .br-calmcard.need { border-color: color-mix(in srgb, var(--accent-graphic) 55%, transparent); box-shadow: 0 0 0 4px var(--accent-soft); }

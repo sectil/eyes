@@ -188,3 +188,27 @@
 @keyframes tp-nudge-in { from { opacity: 0; transform: translate(-50%, -4px); } to { opacity: 1; transform: translate(-50%, 0); } }
 @keyframes tp-shake { 0%, 100% { transform: translateX(-50%); } 20%, 60% { transform: translateX(calc(-50% - 5px)); } 40%, 80% { transform: translateX(calc(-50% + 5px)); } }
 @media (prefers-reduced-motion: reduce) { .tp-nudge, .tp-go.nudge { animation: none; } }
+
+/* ---- 5 saniye turu (Y1 ilk görünüm; yalnız ilerlemeyle kurulan yol, .tp-y1) ----
+   Tek ilerleme göstergesi Ana sayfanın üstündeki günün diyaframıdır: şerit ve bölümün göz payı kapsülleri çizilmez.
+   Etiketler gövde yazısıyla (daktilo harfi yalnız sayılarda); "Yeni" dolu hap; asıl eylem "Başla" dolu düğme. */
+.tp-y1 .tp-ribbon { display: none; }
+.tp-y1 .tp-sl { flex-direction: row; align-items: baseline; gap: 8px; font: 700 12.5px/1.25 var(--font-body); letter-spacing: 0; text-transform: none; }
+.tp-y1 .tp-sl .m { display: none; }
+.tp-y1 .tp-sl .g2 { font-weight: 500; }
+.tp-y1 .tp-btag { font: 700 12.5px/1 var(--font-body); letter-spacing: 0; text-transform: none; }
+.tp-y1 .tp-lb .tag { font: 600 11.5px/15px var(--font-body); letter-spacing: 0; text-transform: none; }
+.tp-y1 .new.nw, .tp-y1 .tp-lb .tag.new {
+  display: inline-block; padding: 2px 8px; border-radius: 999px; background: var(--accent-grad); color: var(--accent-ink);
+  font: 700 11px/15px var(--font-body); letter-spacing: 0.01em; vertical-align: 1px;
+}
+.tp-y1 .tp-lb .tag.new { margin-bottom: 3px; }
+.tp-y1 .new.nw { margin-inline-start: 6px; }
+.tp-y1 .tp-jb .w .new.nw { vertical-align: 2px; }
+.tp-y1 .tp-st.later .badge.lk { display: none; } /* sıradaki durağı bekleyen durak kilitli değil; sıra dokununca söylenir */
+.tp-y1 .tp-jb { cursor: pointer; }
+.tp-y1 .tp-jb .l2 { color: var(--ink); }
+.tp-y1 .tp-go {
+  pointer-events: auto; cursor: pointer; font: 700 14px/1 var(--font-body); color: var(--accent-ink);
+  background: var(--accent-grad); border: 0; padding: 9px 20px; box-shadow: var(--accent-glow);
+}

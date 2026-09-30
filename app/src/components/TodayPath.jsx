@@ -15,7 +15,11 @@ import '../styles/todaypath.css'
 // newKeys: bugün ilk kez gelen durak ya da basamak (lib/progression.js newStopKeys): etikette "Yeni" (S0 taslağı b).
 // restMin: molanın süresi (lib/progression.js pathRestMinutes; yoksa Nefes durağının süresi): bant ve baloncuk bunu yazar.
 // staged: yol ilerleme bağlamıyla kuruldu (Ana sayfa). Yalnız o zaman S0 düzeltmeleri çizilir (Ç17 yıldızı, 320 pt'de
-// baloncuk ve bölüm etiketi kabın içinde); verilmezse çizim Y1 öncesiyle birebir aynıdır.
+// baloncuk ve bölüm etiketi kabın içinde) ve 5 saniye turunun düzeltmeleri (Y1 ilk görünüm): açılışta kendiliğinden
+// kaydırma yalnız az önce biten durak varken (ilk görünüm Ana sayfanın üstü: selam, günün sayıları, "Güne başla"),
+// "Yeni" dolu hap ve sıradaki durakta baloncukta, "Başla" dolu düğme, baloncuk ve "Başla" dokunulur, günün şeridi
+// ve bölümün göz payı kapsülleri yok (günün diyaframı aynı bilgiyi verir), sıradaki durağı beklerken kilit rozeti yok,
+// etiketler gövde yazısıyla. Verilmezse çizim Y1 öncesiyle birebir aynıdır.
 
 const W = 300 // yol koordinatı (px); ortalanır
 const STEP = 116
@@ -271,6 +275,8 @@ const STARS = [[26, 16, 0.8], [64, 6, 0.5], [104, 24, 0.7], [168, 10, 0.6], [206
 // İlk yıldız "Mola · N dk" etiketinin altında (S0 kararı Ç17: etiketin üstüne düşüyordu); ilerlemeyle kurulan yolda
 const STARS_Y1 = [[26, 44, 0.8], ...STARS.slice(1)]
 const NB = '\u00a0'
+// Baloncukta tireden bölünmesin (320 pt'de "Sağ–" / "sol"): tirenin ardına görünmez sözcük birleştirici
+const WJ = '\u2060'
 const px = (x) => `calc(50% + ${x - W / 2}px)`
 
 // Uygulama açıkken son görülen tamamlanmış duraklar (Ana sayfaya dönüşte "az önce bitti" anı için)
@@ -332,11 +338,13 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
     }
   }
 
-  // Açılışta sıradaki durak ekranda değilse ona kaydır (ekranın ortasına)
+  // Açılışta sıradaki durak ekranda değilse ona kaydır (ekranın ortasına). İlerlemeyle kurulan yolda yalnız az önce bir
+  // durak bittiyse (Ana sayfaya dönüş, altın halka anı); öteki açılışlarda ilk görünüm Ana sayfanın üstüdür.
   const nowRef = useRef(null)
   useEffect(() => {
     const el = nowRef.current
     if (!el || typeof window === 'undefined') return
+    if (staged && !fresh.length) return
     const r = el.getBoundingClientRect()
     const bottomSafe = window.innerHeight - 110 // sekme çubuğu
     if (r.top >= 80 && r.bottom <= bottomSafe) return
@@ -345,6 +353,10 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
   }, [])
 
   const subOf = (s, st) => stopSub(s, st, { leftMs: eye?.leftMs ?? 0 })
+  // Ölçüm ve mola etiketindeki "Yeni": ilerlemeyle kurulan yolda ayrı dolu hap, yoksa bugünkü gibi " · Yeni"
+  const newTag = staged ? <span className="new nw">Yeni</span> : <span className="new"> · Yeni</span>
+  // Sıradaki durağa dokunuş (baloncuk ve "Başla"; yalnız ilerlemeyle kurulan yolda, erişilebilir düğme durağın kendisi)
+  const goNext = staged && plan.next && nextIdx >= 0 ? () => tap(stops[nextIdx], states[nextIdx]) : undefined
   const sections = [1, 2].map((b, i) => ({ b, y: i === 0 ? 0 : L.label2, ...plan.blocks[i] })).filter((x) => x.y != null && stops.some((s) => s.block === x.b && !s.finale))
   const chipAt = plan.forcedRestBefore ? stops.findIndex((s) => s.key === plan.forcedRestBefore) : -1
 
@@ -419,8 +431,8 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
               {isFresh && !reducedMotion() && <span className="tp-gring" style={{ left: px(x), top: y }} aria-hidden="true"><i /><i /><i /><i /></span>}
               {showLabel && (
                 <span className={`tp-lb ${side}`} style={{ left: px(labelX), top: y }} aria-hidden="true">
-                  {form === 'me' && <span className="tag">Ölçüm{isNew(s) && <span className="new"> · Yeni</span>}</span>}
-                  {form === 'rest' && <span className="tag">Mola{isNew(s) && <span className="new"> · Yeni</span>}</span>}
+                  {form === 'me' && <span className="tag">Ölçüm{isNew(s) && newTag}</span>}
+                  {form === 'rest' && <span className="tag">Mola{isNew(s) && newTag}</span>}
                   {form !== 'me' && form !== 'rest' && isNew(s) && <span className="tag new">Yeni</span>}
                   <span className="t">{form === 'rest' ? `${s.title} · ${s.minutes ?? 5} dk` : s.title}</span>
                   <small className={st === 'locked' ? 'lk' : subLine.warn ? 'warn' : ''}>
@@ -430,7 +442,7 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
                 </span>
               )}
               {st === 'now' && (
-                <span key={nudge?.t ?? 0} className={`tp-go${nudge ? ' nudge' : ''}`} style={{ left: px(x), top: y + r[1] + 8 }} aria-hidden="true">Başla</span>
+                <span key={nudge?.t ?? 0} className={`tp-go${nudge ? ' nudge' : ''}`} style={{ left: px(x), top: y + r[1] + 8 }} aria-hidden="true" onClick={goNext}>Başla</span>
               )}
               {nudge?.key === s.key && plan.next && (
                 <span className="tp-nudge" style={{ left: px(x), top: y + r[1] + 8 }} role="status">
@@ -471,14 +483,14 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
           // 300 px'lik koordinattan dar kapta (320 pt ekran) baloncuk kabın içinde kalır (S0 taslağı b); ≥ 300 px'te aynı
           const fit = !staged ? { left: px(left) } : side === 'right' ? { left: px(left), maxWidth: `calc(50% + ${W / 2 - left}px)` } : { left: `max(0px, ${px(left)})`, maxWidth: `calc(50% + ${edge - W / 2}px)` }
           return (
-            <div className="tp-jb" data-side={side} style={{ ...fit, width, top: y }} aria-live="polite">
+            <div className="tp-jb" data-side={side} style={{ ...fit, width, top: y }} aria-live="polite" onClick={s === plan.next ? goNext : undefined}>
               <span className="tp-jev"><IrisMark size={32} /></span>
               <div className="tp-jb-b">
-                <b className={`w${gold ? ' gold' : ''}`}>{jev.word}</b>
+                <b className={`w${gold ? ' gold' : ''}`}>{jev.word}{staged && s === plan.next && isNew(s) && <span className="new nw" aria-hidden="true">Yeni</span>}</b>
                 {/* Sıradaki durak yarım kalan ölçümse ("Kalan: …") satır uyarı renginde ve "!" ile (E0) */}
                 <span className={`l2${s.warn && !s.done ? ' warn' : ''}`}>
                   {s.warn && !s.done && <b className="wi" aria-hidden="true">!</b>}
-                  {jev.line}
+                  {staged ? jev.line.replace(/–/g, `–${WJ}`) : jev.line}
                 </span>
               </div>
             </div>

@@ -99,6 +99,20 @@ describe('göz molası önerisi 5 dk\'lık nefes açar (yolun basamağı değil)
     expect(eye.begun).toEqual([]) // kullanılan 1 + 2. bölüm 1 dk ≤ 5: mola nefes kadar
     await act(async () => root.unmount())
   })
+  it('büyük düğme yolun sıradaki Nefes durağıysa ("Yola devam et · Nefes · 1 dk") breath-rest açar, breath-5 değil', async () => {
+    const opened = []
+    eye.st = { locked: false, due: null, used: MIN, budgetMs: 5 * MIN, leftMs: 4 * MIN }
+    const now = Date.now()
+    const tests = ['R', 'L', 'OU'].map((e, i) => ({ type: 'va-weekly', eye: e, date: new Date(now - (10 - i) * MIN).toISOString() }))
+    const sessions = [{ type: 'game', game: 'track', date: new Date(now - 3 * MIN).toISOString() }]
+    const { container, root } = await mount({ tests, sessions, eyeBudget: eye.st, onStart: (r) => opened.push(r) })
+    const go = byText(container, 'Yola devam et')
+    expect(go?.textContent).toContain('Nefes · 1 dk')
+    await act(async () => go.click())
+    expect(opened).toEqual(['breath-rest'])
+    expect(eye.begun).toEqual([]) // yolun kuralı: 1. gün mola nefes kadar
+    await act(async () => root.unmount())
+  })
   it('breath-5 ekranı her zaman 5 dk, basamaksız (stage yok, günün ritmi yok); breath-rest yolun basamağıyla', () => {
     const ctx = { tests: [], sessions: [], settings, native: {}, store: {}, back: () => {}, refresh: () => {}, go: () => {} }
     const five = breathView.render(ctx, SUGGEST_BREATH)

@@ -28,6 +28,33 @@ function Level({ level, short = false }) {
   return <span className={`br-ev ${level}${short ? ' sm' : ''}`}><i aria-hidden="true" />{short ? LEVEL_SHORT[level] : LEVELS[level]}</span>
 }
 
+// Bitiş işareti (yoldan açılan seans, 5 saniye turu): nefes küresi ve seansın halkası. Tamamlanınca halka kapanır ve
+// kürede onay çizilir; erken bitince halka yapılan kadar dolar, onay yok. Hareketi Azalt açıkken çizim durağandır.
+function DoneMark({ frac = 1, complete = true }) {
+  const f = Math.max(0, Math.min(1, frac))
+  return (
+    <svg className={`br-done-mk${complete ? ' ok' : ''}`} viewBox="0 0 120 120" aria-hidden="true">
+      <defs>
+        <linearGradient id="br-done-ring" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="var(--iris-1)" />
+          <stop offset="1" stopColor="var(--iris-2)" />
+        </linearGradient>
+        <radialGradient id="br-done-orb" cx=".38" cy=".34" r=".75">
+          <stop offset="0" stopColor="#8fe9f0" />
+          <stop offset=".45" stopColor="var(--iris-1)" />
+          <stop offset="1" stopColor="var(--iris-2)" />
+        </radialGradient>
+      </defs>
+      <circle className="rp r1" cx="60" cy="60" r="44" />
+      <circle className="rp r2" cx="60" cy="60" r="44" />
+      <circle className="tk" cx="60" cy="60" r="54" />
+      <circle className="rg" cx="60" cy="60" r="54" pathLength="1" style={{ strokeDashoffset: 1 - f }} />
+      <circle className="orb" cx="60" cy="60" r="40" />
+      {complete && <path className="ck" d="M43 61.5l11.5 11.5L78 49" pathLength="1" />}
+    </svg>
+  )
+}
+
 // Basit anahtar satırı (ayrıntı ekranı): etiket + anahtar; trailing: anahtarın solunda ek düğme
 function SwitchRow({ label, sub, checked, onChange, trailing = null }) {
   return (
@@ -463,13 +490,15 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
         </div>
         <section className="br-hero" aria-label={def.title}>
           <div className="h1"><b>{def.title}</b><Level level={def.level} /></div>
-          {mix ? <><p><b>Bugünün ritmi: {mix.label}</b></p><p>{def.evidence}</p></> : <p>{def.blurb}</p>}
+          {/* Günün kalıbı (yoldan, 5 saniye turu): ritim, dalga ve Başla önce; kanıt cümlesi Başla'nın altında küçük */}
+          {mix ? <p className="br-today"><b>Bugünün ritmi: {mix.label}</b></p> : <p>{def.blurb}</p>}
           <BreathWave phases={plan.phases} repeat={plan.phases.length > 3 ? 1 : 2} width={300} height={58} />
           <div className="meta"><span><b>{fmtNum(plan.bpm)}</b>/dk nefes</span><span><b>{opts.durationSec / 60}</b> dk</span><span><b>{plan.cycles}</b> döngü</span></div>
           <div className="row2">
             <button type="button" className="btn" onClick={begin}><Play size={18} aria-hidden="true" /> Başla</button>
             <button type="button" className="btn btn-ghost br-adj" onClick={() => open('detail')} aria-label={`${def.title} ayarları`}><SlidersHorizontal size={20} /></button>
           </div>
+          {mix && <p className="br-hero-ev">{def.evidence}</p>}
         </section>
         {askCalm && (
           <button type="button" className="br-quick" onClick={beginQuick}>
@@ -507,9 +536,47 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
     const complete = partSec >= plan.totalSec - 1
     const secsDone = Math.round(carried.current) + partSec
     const canMore = Boolean(moreSec) && more == null && !quick && complete && !strained && opts.durationSec === presetSec
+    const subtitle = `${plan.title} · ${Math.round(secsDone / 60)} dk · ${Math.round(secsDone / plan.cycleSec)} döngü`
+    const restart = () => { setCalmAfter(null); setCalmBefore(null); setStrained(false); setQuick(false); setMore(null); carried.current = 0; setScreen('pick') }
+    // Yoldan açılan seans (ilerleme bağlamı, extra): bitiş anı (5 saniye turu). Metinler ve düğmeler aynı; sıra ve vurgu:
+    // bitiş işareti ekranın üst boşluğunun ortasında; puan ve eylemler başparmağın altında: sakinlik puanı, asıl eylem
+    // Kaydet, sonra "2 dk daha", en altta Zorlandım ve Yeniden. Yoksa bugünkü gibi.
+    if (extra) {
+      return (
+        <main className="screen fade-in br br-res">
+          <header className="br-done">
+            <DoneMark frac={complete ? 1 : secsDone / Math.max(1, carried.current + plan.totalSec)} complete={complete} />
+            <span className="eyebrow">Nefes</span>
+            <h1>{complete ? 'Tamamlandı' : 'Erken bitti'}</h1>
+            <p>{subtitle}</p>
+          </header>
+          {ask && calmBefore != null && (
+            <div className={`br-calmcard${calmAfter == null ? ' need' : ''}`}>
+              <b>Şimdi ne kadar sakinsin?</b>
+              <div className="br-calm5" role="group" aria-label="1 gergin, 5 çok sakin">
+                {CALM_SCALE.map((v) => (
+                  <button key={v} type="button" aria-pressed={calmAfter === v} onClick={() => setCalmAfter(v)}>{v}</button>
+                ))}
+              </div>
+              <div className="br-ends"><span>1 · gergin</span><span>5 · çok sakin</span></div>
+            </div>
+          )}
+          {calmBefore != null && calmAfter != null && <p className="muted small">Önce {calmBefore}, sonra {calmAfter}. Bu senin puanın; bir iddia değil, kendi çizgin.</p>}
+          <button className="btn" onClick={save} disabled={ask && calmBefore != null && calmAfter == null}><Check size={18} aria-hidden="true" /> Kaydet</button>
+          {canMore && <button type="button" className="btn btn-ghost" onClick={continueMore}><Plus size={18} aria-hidden="true" /> 2 dk daha</button>}
+          <div className="br-res-row">
+            <button type="button" className="br-chip" aria-pressed={strained} onClick={() => setStrained((v) => !v)}>
+              {strained ? <Check size={16} aria-hidden="true" /> : null} Zorlandım{strained ? ' · kaydedildi' : ''}
+            </button>
+            <button type="button" className="br-chip ghost" onClick={restart}><RotateCcw size={16} aria-hidden="true" /> Yeniden</button>
+          </div>
+          {strained && <p className="muted small">Bir sonraki seansta süreyi ya da tutmaları kısalt. Baş dönmesi olduysa bugün tekrar etme.</p>}
+        </main>
+      )
+    }
     return (
       <main className="screen fade-in br">
-        <PageHeader eyebrow="Nefes" title={complete ? 'Tamamlandı' : 'Erken bitti'} subtitle={`${plan.title} · ${Math.round(secsDone / 60)} dk · ${Math.round(secsDone / plan.cycleSec)} döngü`} />
+        <PageHeader eyebrow="Nefes" title={complete ? 'Tamamlandı' : 'Erken bitti'} subtitle={subtitle} />
         {canMore && <button type="button" className="btn btn-ghost" onClick={continueMore}><Plus size={18} aria-hidden="true" /> 2 dk daha</button>}
         {ask && calmBefore != null && (
           <div className="br-calmcard">
@@ -528,7 +595,7 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
         </button>
         {strained && <p className="muted small">Bir sonraki seansta süreyi ya da tutmaları kısalt. Baş dönmesi olduysa bugün tekrar etme.</p>}
         <button className="btn" onClick={save} disabled={ask && calmBefore != null && calmAfter == null}><Check size={18} aria-hidden="true" /> Kaydet</button>
-        <button className="btn btn-ghost" onClick={() => { setCalmAfter(null); setCalmBefore(null); setStrained(false); setQuick(false); setMore(null); carried.current = 0; setScreen('pick') }}><RotateCcw size={18} aria-hidden="true" /> Yeniden</button>
+        <button className="btn btn-ghost" onClick={restart}><RotateCcw size={18} aria-hidden="true" /> Yeniden</button>
       </main>
     )
   }

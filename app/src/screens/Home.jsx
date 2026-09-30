@@ -206,8 +206,10 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   // durağı değildir. Her zaman 5 dk'lık nefes açılır ('breath-5', modules/breath/view.jsx) ve mola bugünkü kuralla
   // başlar (ilerleme bağlamı olmadan: yeni kullanıcının yol istisnası bu öneriye uygulanmaz). Onaylı yoga planı §B.2
   // kural 10: "5 dakikalık nefes Ana sayfada kalır".
-  const startSuggest = (route) => {
-    if (route !== 'breath-rest') return startStop(route)
+  // Büyük düğme yolun sıradaki durağıysa (kind 'path'; sıradaki Nefes durağı da 'breath-rest' taşır) durak kendi
+  // basamağıyla açılır: düğmenin yazdığı süre ("Nefes · 3 dk") açılan seansın süresidir.
+  const startSuggest = (route, kind = null) => {
+    if (route !== 'breath-rest' || kind === 'path') return startStop(route)
     const why = restDecision(eyeStatus(), plan, null)
     if (why) beginRest(why)
     onStart(SUGGEST_BREATH)
@@ -216,7 +218,10 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   const totalDays = activeDays([...tests, ...sessions]).size
   const weekActive = activeDays([...tests, ...exercise])
   const weekDots = weekDayKeys(now).map((k, i) => (weekActive.has(k) ? 'd' : i === mondayIndex(now) ? 't' : ''))
+  const showFacts = streak > 0 || week.done > 0 || totalDays > 0
   const sug = homeSuggestion({ plan, eye: eyeBudget, walk: walkNudge({ recentSteps: health?.recentSteps, hasData: health?.hasData, hour: now.getHours() }) })
+  // Büyük düğme yolun sıradaki durağını açıyorsa ve durak bugün yeniyse "Yeni" (yoldaki rozetle aynı kural)
+  const goNew = sug.primary.kind === 'path' && Boolean(plan.next) && newKeys.includes(plan.next.key)
   // Oyunla aynı kural (SnakeGame loadSnakeOpts): TrueDepth varsa ve kayıtlı seçim 'touch'
   // değilse gözle açılır. VARSAYIM: trueDepth prop'u verilmemişse mesafe yöntemine göre tahmin edilir.
   const hasTrueDepth = trueDepth ?? settings.distance?.method === 'truedepth'
@@ -275,24 +280,29 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           {plan.total > 0 && (
             <>
               <div className="hh-big"><b>{plan.doneCount}</b><small>/ {plan.total}</small></div>
-              <span className="hh-lbl">{plan.allDone ? 'durak · bugün tamam' : `durak · ≈${plan.minutesLeft} dk kaldı`}</span>
+              <span className="hh-lbl">{plan.allDone ? 'durak · bugün tamam' : <>durak · <b>≈{plan.minutesLeft} dk</b> kaldı</>}</span>
             </>
           )}
-          <div className="hh-facts">
-            <div className="hh-fact"><Flame size={14} aria-hidden="true" className="f1" /><b>{streak}</b>gün seri</div>
-            <div className="hh-fact">
-              <CalendarDays size={14} aria-hidden="true" className="f2" /><b>{week.met ? `${week.done}✓` : `${week.done}/${week.target}`}</b>hafta
-              <span className="hh-wk" aria-hidden="true">{weekDots.map((c, i) => <i key={i} className={c} />)}</span>
+          {/* Sıfır satırı yok (5 saniye turu; karar 5d'nin yönü): sayısı 0 olan satır çizilmez, hiçbiri kalmazsa sütun yok */}
+          {(showFacts || health || alarmStatus) && (
+            <div className="hh-facts">
+              {streak > 0 && <div className="hh-fact"><Flame size={14} aria-hidden="true" className="f1" /><b>{streak}</b>gün seri</div>}
+              {week.done > 0 && (
+                <div className="hh-fact">
+                  <CalendarDays size={14} aria-hidden="true" className="f2" /><b>{week.met ? `${week.done}✓` : `${week.done}/${week.target}`}</b>hafta
+                  <span className="hh-wk" aria-hidden="true">{weekDots.map((c, i) => <i key={i} className={c} />)}</span>
+                </div>
+              )}
+              {health && (
+                <div className="hh-fact">
+                  <Footprints size={14} aria-hidden="true" className="f4" />
+                  {health.hasData ? <><b>{fmtSteps(health.today?.steps)}</b>adım bugün</> : <><b>—</b>adım · veri yok</>}
+                </div>
+              )}
+              {totalDays > 0 && <div className="hh-fact"><CircleDot size={14} aria-hidden="true" className="f3" /><b>{totalDays}</b>gün seninle</div>}
+              {alarmStatus && <AlarmLine status={alarmStatus} onStart={onStart} now={now} />}
             </div>
-            {health && (
-              <div className="hh-fact">
-                <Footprints size={14} aria-hidden="true" className="f4" />
-                {health.hasData ? <><b>{fmtSteps(health.today?.steps)}</b>adım bugün</> : <><b>—</b>adım · veri yok</>}
-              </div>
-            )}
-            <div className="hh-fact"><CircleDot size={14} aria-hidden="true" className="f3" /><b>{totalDays}</b>gün seninle</div>
-            {alarmStatus && <AlarmLine status={alarmStatus} onStart={onStart} now={now} />}
-          </div>
+          )}
         </div>
       </section>
 
@@ -301,8 +311,8 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           <span className="hh-nef-eye" aria-hidden="true" />
           <p>{sug.primary.line}{sug.primary.sub && <span>Nef · {sug.primary.sub}</span>}</p>
         </div>
-        <button type="button" className="hh-go" onClick={() => startSuggest(sug.primary.route)}>
-          <span className="t"><small>{sug.primary.eyebrow}</small><b>{sug.primary.title}</b></span>
+        <button type="button" className="hh-go" onClick={() => startSuggest(sug.primary.route, sug.primary.kind)}>
+          <span className="t"><small>{sug.primary.eyebrow}{goNew && <i className="hh-new">Yeni</i>}</small><b>{sug.primary.title}</b></span>
           <span className="ar"><Play size={20} aria-hidden="true" fill="currentColor" /></span>
         </button>
         {sug.alts.length > 0 && (
@@ -317,7 +327,6 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
         )}
       </section>
 
-      <HomeMap tests={tests} sessions={sessions} profile={settings?.profile ?? null} onStart={onStart} />
 
       {slot === 'remind' && <ReminderAsk time={rem.types.mola.time} onAnswer={answerReminders} />}
       {slot === 'perm' && (
@@ -421,6 +430,9 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
 
       {/* Alarm kartı yolun altında (Artifact v4); Profil → Alarm'dan ya da ⋯ menüsünden kaldırılır */}
       {alarmStatus && !sheetOpen && <AlarmCard status={alarmStatus} sessions={sessions} test={alarmTest} onStart={onStart} now={now} />}
+
+      {/* Gelişim haritası yolun altında (5 saniye turu): ilk görünüm bugünün işini söyler, alan dengesi sonra gelir */}
+      <HomeMap tests={tests} sessions={sessions} profile={settings?.profile ?? null} onStart={onStart} />
 
       {!(slot === 'remind' && coachIntro) && <CoachCard tests={tests} sessions={sessions} profile={settings.profile} weeklyTarget={week.target} consents={settings.consents} onCoach={onCoach} onStart={onStart} />}
 
