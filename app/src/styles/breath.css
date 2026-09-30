@@ -187,7 +187,7 @@
 
 /* ---- 5 saniye turu 2 (Y1, yoldan açılan Nefes): günün kalıbı kartında ritmin süreleri yazılı, kanıt cümlesi kanıt
    rozetinin arkasında (dokununca açılır); program şeridinin 28 noktası ve ikinci "Başla" ilk görünümde yok ---- */
-.br-why summary { list-style: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.br-hero .br-why > summary { list-style: none; cursor: pointer; color: var(--ink); -webkit-tap-highlight-color: transparent; }
 .br-why summary::-webkit-details-marker { display: none; }
 .br-why summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
 .br-why-lv { display: inline-flex; align-items: center; gap: 4px; color: var(--ink-3); }
@@ -210,7 +210,7 @@
 .br-done { display: grid; justify-items: center; align-content: center; gap: 4px; text-align: center; padding: 8px 0 6px; }
 .br-done h1 { font-size: 1.9rem; letter-spacing: -0.02em; }
 .br-done p { color: var(--ink-2); }
-.br-done-mk { width: 132px; height: 132px; overflow: visible; margin-bottom: 8px; }
+.br-done-mk { width: 112px; height: 112px; overflow: visible; margin-bottom: 8px; } /* turu 2: 132 → 112, zincir öne çıksın */
 .br-done-mk .tk { fill: none; stroke: var(--surface-3); stroke-width: 7; }
 .br-done-mk .rg { fill: none; stroke: url(#br-done-ring); stroke-width: 7; stroke-linecap: round; stroke-dasharray: 1 1; transform: rotate(-90deg); transform-origin: 60px 60px; }
 .br-done-mk .orb { fill: url(#br-done-orb); filter: drop-shadow(0 14px 22px color-mix(in srgb, var(--iris-2) 38%, transparent)); }

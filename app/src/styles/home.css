@@ -119,7 +119,8 @@
   .aperture circle, .iris-mark-lid { animation: none; }
 }
 
-/* ---- Ana sayfa başı (tasarım: Artifact "Nefona Bugün ve Profil"): avatar, günün diyaframı, Nef önerisi ---- */
+/* ---- Ana sayfa başı (tasarım: Artifact "Nefona Bugün ve Profil"): avatar, günün diyaframı, Nef önerisi ----
+   (5 saniye turu 2'den beri Ana sayfa günün diyaframını (DayDial, .hh-day, .dd) çizmiyor; bugün kartı aşağıda) */
 .home-head { align-items: flex-start; }
 .home-head h1 { line-height: 1.05; }
 .hh-name { font-style: normal; color: transparent; background: linear-gradient(100deg, var(--accent), var(--iris-2)); -webkit-background-clip: text; background-clip: text; }
@@ -262,8 +263,7 @@
 }
 .hh-sum { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; padding: 0 2px; }
 .hh-min { font: 700 2.1rem/1 var(--font-display); letter-spacing: -0.03em; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
-.hh-min small { font: 600 1rem/1 var(--font-body); letter-spacing: 0; color: var(--ink-2); }
-.hh-min.done { font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.015em; white-space: normal; }
+.hh-min small { font: 650 1.1rem/1 var(--font-body); letter-spacing: 0; color: var(--ink-2); }
 .hh-cnt { font: 600 0.95rem/1.2 var(--font-body); color: var(--ink-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .hh-today .hh-go { margin-top: 2px; }
 .hh-go .t .s { display: block; margin-top: 1px; font: 500 0.82rem/1.3 var(--font-body); color: color-mix(in srgb, var(--accent-ink) 82%, transparent); }
@@ -272,7 +272,8 @@
   .hh-min { font-size: 1.8rem; }
   .hh-today { padding: 16px 14px 14px; }
   .hh-facts.hh-chips { gap: 6px; }
-  .hh-chips .hh-fact { gap: 5px; padding: 5px 10px 5px 8px; font-size: 0.78rem; }
+  .hh-chips .hh-fact { gap: 5px; padding: 5px 9px; font-size: 0.78rem; }
+  .hh-chips .hh-fact:not(.lens):not(.al-fact) > svg { display: none; } /* 320 pt'de iki hap tek satıra sığsın; seri alevi kalır */
   .hh-chips .hh-fact b { font-size: 0.8rem; }
 }
 

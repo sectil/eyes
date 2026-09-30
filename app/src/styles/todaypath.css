@@ -190,7 +190,7 @@
 @media (prefers-reduced-motion: reduce) { .tp-nudge, .tp-go.nudge { animation: none; } }
 
 /* ---- 5 saniye turu (Y1 ilk görünüm; yalnız ilerlemeyle kurulan yol, .tp-y1) ----
-   Tek ilerleme göstergesi Ana sayfanın üstündeki günün diyaframıdır: şerit ve bölümün göz payı kapsülleri çizilmez.
+   Tek ilerleme göstergesi Ana sayfanın üstündeki bugün kartıdır (günün zinciri, DayChain): şerit ve bölümün göz payı çizilmez.
    Etiketler gövde yazısıyla (daktilo harfi yalnız sayılarda); "Yeni" dolu hap; asıl eylem "Başla" dolu düğme. */
 .tp-y1 .tp-ribbon { display: none; }
 .tp-y1 .tp-sl { flex-direction: row; align-items: baseline; gap: 8px; font: 700 12.5px/1.25 var(--font-body); letter-spacing: 0; text-transform: none; }

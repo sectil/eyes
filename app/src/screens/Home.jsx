@@ -302,13 +302,16 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
       <section className="hh-today" aria-label="Bugün">
         {plan.total > 0 && (
           <>
+            {/* Yol bitince büyük yazı "10/10 durak"; "Bugünkü yol tamam." Nef satırında (tekrar olmasın) */}
             <div className="hh-sum">
               {plan.allDone ? (
-                <b className="hh-min done">Bugünkü yol tamam</b>
+                <b className="hh-min">{plan.total}/{plan.total}<small> durak</small></b>
               ) : (
-                <b className="hh-min">≈{plan.minutesLeft} dk{plan.doneCount > 0 && <small> kaldı</small>}</b>
+                <>
+                  <b className="hh-min">≈{plan.minutesLeft}<small> dk{plan.doneCount > 0 && ' kaldı'}</small></b>
+                  <span className="hh-cnt">{plan.doneCount > 0 ? `${plan.doneCount}/${plan.total}` : plan.total} durak</span>
+                </>
               )}
-              <span className="hh-cnt">{plan.doneCount > 0 ? `${plan.doneCount}/${plan.total}` : plan.total} durak</span>
             </div>
             <DayChain plan={plan} icons={stopIcons} />
           </>

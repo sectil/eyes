@@ -18,7 +18,7 @@ import '../styles/todaypath.css'
 // baloncuk ve bölüm etiketi kabın içinde) ve 5 saniye turunun düzeltmeleri (Y1 ilk görünüm): açılışta kendiliğinden
 // kaydırma yalnız az önce biten durak varken (ilk görünüm Ana sayfanın üstü: selam, günün sayıları, "Güne başla"),
 // "Yeni" dolu hap ve sıradaki durakta baloncukta, "Başla" dolu düğme, baloncuk ve "Başla" dokunulur, günün şeridi
-// ve bölümün göz payı kapsülleri yok (günün diyaframı aynı bilgiyi verir), sıradaki durağı beklerken kilit rozeti yok,
+// ve bölümün göz payı yok (Ana sayfanın bugün kartı ve günün zinciri aynı bilgiyi verir), sıradaki durağı beklerken kilit rozeti yok,
 // etiketler gövde yazısıyla. Verilmezse çizim Y1 öncesiyle birebir aynıdır.
 // lead: Ana sayfanın büyük düğmesi yolun sıradaki durağını açıyor (5 saniye turu 2). İlerlemeyle kurulan yolda, az önce
 // biten durak yokken sıradaki durakta Nef baloncuğu ve "Başla" çizilmez (ilk görünümde aynı çağrı üç kez yazıyordu);
