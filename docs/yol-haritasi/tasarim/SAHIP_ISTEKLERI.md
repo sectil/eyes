@@ -122,3 +122,9 @@ hâlinin gerçek ekranlarıyla girer; planda olup yapılmamış olan (ör. hava,
 - İlk cümle **bugüne dönük**: Nef bugünün işini söyler (örnek, sahibin seçtiği: "Bugünkü yolun 8 dakika, ilk durağın
   Sağ–sol bakış."). Dünün sayıları Gelişim'de kalır.
 - Tek sayı: **"Bu hafta N/3 gün"**. "N gün seri" ve "N gün seninle" ilk görünümden çıkar.
+
+## Hava: il ve ilçe konumdan kendiliğinden (2026-10-01)
+Sahip: "il ilçeyi otomatik konumumdan bulması lazım, kullanıcı girmesine gerek yok." Karar: konum izni verildiyse il ve
+en yakın ilçe merkezi telefondaki tablodan (ters coğrafi kodlama yok, sunucuya gitmez) kendiliğinden seçilir; ekranda
+"Değiştir" bağlantısı kalır. Liste yalnız izin yokken ya da kişi değiştirmek isterse açılır. "…'de misin?" onayı adımı
+kalkar. Plan §3.B.1'in "ilçe listeden" kuralını değiştirir.
