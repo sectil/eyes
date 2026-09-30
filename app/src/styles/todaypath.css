@@ -212,3 +212,6 @@
   pointer-events: auto; cursor: pointer; font: 700 14px/1 var(--font-body); color: var(--accent-ink);
   background: var(--accent-grad); border: 0; padding: 9px 20px; box-shadow: var(--accent-glow);
 }
+/* 5 saniye turu 2: bölümün "≈ N dk göz" payı yazılmaz (Ana sayfanın bugün kartı toplam süreyi söyler; üç ayrı dakika
+   sayısı birbirini tutmuyor gibi okunuyordu). Bölümün adı kalır. */
+.tp-y1 .tp-sl .g2 { display: none; }

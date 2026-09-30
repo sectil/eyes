@@ -20,6 +20,9 @@ import '../styles/todaypath.css'
 // "Yeni" dolu hap ve sıradaki durakta baloncukta, "Başla" dolu düğme, baloncuk ve "Başla" dokunulur, günün şeridi
 // ve bölümün göz payı kapsülleri yok (günün diyaframı aynı bilgiyi verir), sıradaki durağı beklerken kilit rozeti yok,
 // etiketler gövde yazısıyla. Verilmezse çizim Y1 öncesiyle birebir aynıdır.
+// lead: Ana sayfanın büyük düğmesi yolun sıradaki durağını açıyor (5 saniye turu 2). İlerlemeyle kurulan yolda, az önce
+// biten durak yokken sıradaki durakta Nef baloncuğu ve "Başla" çizilmez (ilk görünümde aynı çağrı üç kez yazıyordu);
+// durak kendi etiketiyle görünür, dokununca açılır. "Yeni" rozeti büyük düğmede olduğu için bu etikette yok.
 
 const W = 300 // yol koordinatı (px); ortalanır
 const STEP = 116
@@ -27,7 +30,8 @@ export const A_CLOSED = 1.5
 const A_NOW = 20
 export const A_DONE = 38
 
-const GLYPH = {
+// Durak çizimleri (Ana sayfanın günün zinciri de kullanır: components/DayChain.jsx)
+export const GLYPH = {
   arrows: <><path d="M3 12h18" /><path d="M7 8l-4 4 4 4" /><path d="M17 8l4 4-4 4" /></>,
   // Yukarı–aşağı (göz merdiveninin `dikey` grubu, SONSUZ_YOL.PLAN.v1 §3.A.6): Sağ–sol oklarının dikeyi
   updown: <><path d="M12 3v18" /><path d="M8 7l4-4 4 4" /><path d="M8 17l4 4 4-4" /></>,
@@ -282,7 +286,7 @@ const px = (x) => `calc(50% + ${x - W / 2}px)`
 // Uygulama açıkken son görülen tamamlanmış duraklar (Ana sayfaya dönüşte "az önce bitti" anı için)
 let seenDone = null
 
-export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onStart, week = '', newKeys = [], restMin = null, staged = false }) {
+export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onStart, week = '', newKeys = [], restMin = null, staged = false, lead = false }) {
   const { stops } = plan
   const isNew = (s) => Array.isArray(newKeys) && newKeys.includes(s.key)
   const doneKeys = stops.filter((s) => s.done).map((s) => `${day}:${s.key}`)
@@ -317,6 +321,8 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
   const pathRest = Boolean(eye?.locked && eye.reason === 'path')
   const nextIdx = plan.next ? stops.indexOf(plan.next) : -1
   const jIdx = plan.allDone || nextIdx < 0 ? stops.length - 1 : nextIdx
+  // Büyük düğme sıradaki durağı zaten söylüyor: baloncuk ve "Başla" yok (yalnız ilerlemeyle kurulan yol, "az önce bitti" anı değil)
+  const quiet = staged && lead && !fresh.length && !plan.allDone && nextIdx >= 0 && jIdx === nextIdx
   const states = stops.map((s, i) => {
     if (s.done) return 'done'
     if (s.restSlot && pathRest) return 'running'
@@ -414,7 +420,8 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
           const labelX = side === 'left' ? x - r[0] - 8 : side === 'rest' ? x + r[0] + 12 : x + r[0] + 8
           const subLine = subOf(s, st)
           const sub = subLine.text
-          const showLabel = i !== jIdx
+          const showLabel = i !== jIdx || quiet
+          const tagNew = isNew(s) && !(quiet && i === nextIdx)
           return (
             <div key={s.key}>
               <button
@@ -431,9 +438,9 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
               {isFresh && !reducedMotion() && <span className="tp-gring" style={{ left: px(x), top: y }} aria-hidden="true"><i /><i /><i /><i /></span>}
               {showLabel && (
                 <span className={`tp-lb ${side}`} style={{ left: px(labelX), top: y }} aria-hidden="true">
-                  {form === 'me' && <span className="tag">Ölçüm{isNew(s) && newTag}</span>}
-                  {form === 'rest' && <span className="tag">Mola{isNew(s) && newTag}</span>}
-                  {form !== 'me' && form !== 'rest' && isNew(s) && <span className="tag new">Yeni</span>}
+                  {form === 'me' && <span className="tag">Ölçüm{tagNew && newTag}</span>}
+                  {form === 'rest' && <span className="tag">Mola{tagNew && newTag}</span>}
+                  {form !== 'me' && form !== 'rest' && tagNew && <span className="tag new">Yeni</span>}
                   <span className="t">{form === 'rest' ? `${s.title} · ${s.minutes ?? 5} dk` : s.title}</span>
                   <small className={st === 'locked' ? 'lk' : subLine.warn ? 'warn' : ''}>
                     {subLine.warn && <b className="wi">!</b>}
@@ -441,7 +448,7 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
                   </small>
                 </span>
               )}
-              {st === 'now' && (
+              {st === 'now' && !quiet && (
                 <span key={nudge?.t ?? 0} className={`tp-go${nudge ? ' nudge' : ''}`} style={{ left: px(x), top: y + r[1] + 8 }} aria-hidden="true" onClick={goNext}>Başla</span>
               )}
               {nudge?.key === s.key && plan.next && (
@@ -464,7 +471,7 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
             </span>
           )
         })()}
-        {jIdx >= 0 && (() => {
+        {jIdx >= 0 && !quiet && (() => {
           const s = stops[jIdx]
           const [x, y] = L.pos[jIdx]
           const r = radius(formOf(s), states[jIdx])

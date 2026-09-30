@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { X, Play, Pause, Check, RotateCcw, ShieldAlert, HeartPulse, Car, Info, ChevronRight, ChevronLeft, SkipBack, SkipForward, Settings2, Volume2, VolumeX, SlidersHorizontal, Zap, Plus } from 'lucide-react'
+import { X, Play, Pause, Check, RotateCcw, ShieldAlert, HeartPulse, Car, Info, ChevronRight, ChevronLeft, ChevronDown, SkipBack, SkipForward, Settings2, Volume2, VolumeX, SlidersHorizontal, Zap, Plus } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
 import BreathWave from '../components/BreathWave.jsx'
 import BreathVisual from '../components/BreathVisual.jsx'
+import DayChain from '../components/DayChain.jsx'
 import { haptic } from '../lib/native.js'
 import { speak, unlockAudio } from '../lib/cue.js'
 import { playBreathSound, unlockBreathSfx, releaseBreathSfx, breathContext } from '../lib/breathSfx.js'
@@ -21,6 +22,13 @@ const KIND_ROW = { in: 'Al', in2: 'Ek alış', hold: 'Tut', out: 'Ver', hold2: '
 const fmtSec = (v) => (Number.isInteger(v) ? `${v}` : v.toFixed(1).replace('.', ','))
 const fmtNum = (v) => fmtSec(+v) // Türkçe ondalık virgül (7,5)
 const LEVEL_SHORT = { strong: 'güçlü', moderate: 'orta', limited: 'sınırlı' }
+// "Bugünün ritmi"nin süreleri kalıpların alt satırıyla aynı biçimde ("5 sn al · 5 sn ver · dakikada 6 nefes"; lib/breath.js
+// PATTERNS[*].sub): "5 · 5"teki sayıların saniye olduğu kartta yazsın (5 saniye turu 2)
+const KIND_WORD = { in: 'al', in2: 'ek alış', hold: 'tut', out: 'ver', hold2: 'bekle' }
+export function rhythmLine(secs, bpm) {
+  const parts = KIND_ORDER.filter((k) => secs[k] > 0).map((k) => `${fmtSec(secs[k])} sn ${KIND_WORD[k]}`)
+  return [...parts, `dakikada ${fmtNum(bpm)} nefes`].join(' · ')
+}
 
 // Kanıt düzeyi rozeti (Artifact "Nefona Nefes"): güçlü · orta · sınırlı; renk tek başına anlam taşımaz, yazı hep yanında
 function Level({ level, short = false }) {
@@ -118,6 +126,8 @@ export function autoMix(pathMix, saved, { sessions = [], now = new Date(), seen 
 // moreSec: yoldaki 3 dk tamamlanınca "2 dk daha": aynı kalıpla sürer ve seansı program gününün 5 dk'sına tamamlar;
 // tek kayıt yazılır (saniyeler toplanır). "Zorlandım" işaretlendiyse düğme yok.
 // extra: yoldan açılan seansın kaydına eklenecek alanlar ({ stage }); üretilen kalıp kullanıldıysa kayda mix de yazılır.
+// day: yoldan açılan seansta bugünün yolu (lib/today.js buildPath; modules/breath/view.jsx). Bitişte günün zinciri
+// bu durakla birlikte çizilir ("Bugünün yolu · 4/10 durak"). Yoksa zincir yok.
 // askCalm false: başta ve sonda sakinlik puanı sorulmaz (hatırlatmadan açılan 1 dk nefes; kayıt calmBefore/After null).
 // minSec: seans en az bu kadar sürer (hatırlatmadan açılan 1 dk nefes; planAtLeast).
 // Tasarım: Artifact "Nefona Nefes" (onaylı) — seçim (ritmi çizili kalıplar, kanıt düzeyi), ayrıntı, başlarken sakinlik
@@ -126,7 +136,7 @@ export function autoMix(pathMix, saved, { sessions = [], now = new Date(), seen 
 const DEV_BUILD = import.meta.env.VITE_APP_BUILD === 'dev'
 const diagText = (st) => `tanı: liste ${st.index} · çözülen ${st.decoded} · hata ${st.failed}${st.path ? ` · yol ${st.path}` : ''}${st.error ? ` · ${st.error}` : ''}`
 
-export default function Breath({ sessions = [], presetSec = null, askCalm = true, minSec = null, pathMix = null, moreSec = null, extra = null, onBack, onFinish }) {
+export default function Breath({ sessions = [], presetSec = null, askCalm = true, minSec = null, pathMix = null, moreSec = null, extra = null, day = null, onBack, onFinish }) {
   const prior = sessions.filter(isBreath).length
   // Yoldaki "Bugünün ritmi": ilk çizimde bir kez karar verilir (kişi kalıbı değiştirince kalkar)
   const [mix, setMix] = useState(() => autoMix(pathMix, loadBreathOpts(), { sessions, seen: safetySeen() }))
@@ -476,8 +486,16 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
 
   if (screen === 'pick') {
     const others = PATTERN_ORDER.filter((id) => id !== 'custom' && id !== opts.pattern)
+    // "1 dakikada sakinleş": yoldan açılınca kalıpların altında (ilk görünümde ikinci bir "Başla" olmasın; 5 saniye turu 2)
+    const quickCard = askCalm && (
+      <button type="button" className="br-quick" onClick={beginQuick}>
+        <Zap size={20} aria-hidden="true" />
+        <span><b>1 dakikada sakinleş</b><small>{PATTERNS[QUICK.pattern].title}, tek dakika</small></span>
+        <em>Başla →</em>
+      </button>
+    )
     return (
-      <main className="screen fade-in br">
+      <main className={`screen fade-in br${extra ? ' br-path' : ''}`}>
         <div className="br-top">
           <button type="button" className="btn-icon" onClick={onBack} aria-label="Geri"><ChevronLeft size={20} /></button>
           <button type="button" className="btn-icon" onClick={() => open('info')} aria-label="Kalıplar ve kanıt"><Info size={20} /></button>
@@ -489,24 +507,25 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
           <span><b>{program.target} günlük program</b> · {program.days > 0 ? `${program.days}. gün` : 'başla'}{program.todaySec > 0 ? ` · bugün ${Math.round(program.todaySec / 60)} dk` : ''}</span>
         </div>
         <section className="br-hero" aria-label={def.title}>
-          <div className="h1"><b>{def.title}</b><Level level={def.level} /></div>
-          {/* Günün kalıbı (yoldan, 5 saniye turu): ritim, dalga ve Başla önce; kanıt cümlesi Başla'nın altında küçük */}
-          {mix ? <p className="br-today"><b>Bugünün ritmi: {mix.label}</b></p> : <p>{def.blurb}</p>}
+          {/* Günün kalıbı (yoldan, 5 saniye turu 2): ritim ve süreleri, dalga, Başla. Kanıt cümlesi kanıt rozetinin
+              arkasında: rozete (ya da başlığa) dokununca açılır; ilk görünümde makale cümlesi yok. */}
+          {mix ? (
+            <details className="br-why">
+              <summary className="h1"><b>{def.title}</b><span className="br-why-lv"><Level level={def.level} /><ChevronDown size={16} aria-hidden="true" /></span></summary>
+              <p>{def.evidence}</p>
+            </details>
+          ) : (
+            <div className="h1"><b>{def.title}</b><Level level={def.level} /></div>
+          )}
+          {mix ? <p className="br-today"><b>Bugünün ritmi: {mix.label}</b><span>{rhythmLine(secs, plan.bpm)}</span></p> : <p>{def.blurb}</p>}
           <BreathWave phases={plan.phases} repeat={plan.phases.length > 3 ? 1 : 2} width={300} height={58} />
-          <div className="meta"><span><b>{fmtNum(plan.bpm)}</b>/dk nefes</span><span><b>{opts.durationSec / 60}</b> dk</span><span><b>{plan.cycles}</b> döngü</span></div>
+          <div className="meta">{!mix && <span><b>{fmtNum(plan.bpm)}</b>/dk nefes</span>}<span><b>{opts.durationSec / 60}</b> dk</span><span><b>{plan.cycles}</b> döngü</span></div>
           <div className="row2">
             <button type="button" className="btn" onClick={begin}><Play size={18} aria-hidden="true" /> Başla</button>
             <button type="button" className="btn btn-ghost br-adj" onClick={() => open('detail')} aria-label={`${def.title} ayarları`}><SlidersHorizontal size={20} /></button>
           </div>
-          {mix && <p className="br-hero-ev">{def.evidence}</p>}
         </section>
-        {askCalm && (
-          <button type="button" className="br-quick" onClick={beginQuick}>
-            <Zap size={20} aria-hidden="true" />
-            <span><b>1 dakikada sakinleş</b><small>{PATTERNS[QUICK.pattern].title}, tek dakika</small></span>
-            <em>Başla →</em>
-          </button>
-        )}
+        {!extra && quickCard}
         <div className="br-sec"><span>Diğer kalıplar</span><button type="button" onClick={() => open('info')}>Hepsinin kanıtı →</button></div>
         <div className="br-grid">
           {others.map((id) => {
@@ -521,6 +540,7 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
             )
           })}
         </div>
+        {extra && quickCard}
         <button type="button" className="br-cust" onClick={() => { pick('custom'); open('detail') }}>
           <SlidersHorizontal size={20} aria-hidden="true" />
           <span><b>Özel kalıp</b><small>Al, tut, ver, bekle sürelerini kendin kur</small></span>
@@ -538,10 +558,13 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
     const canMore = Boolean(moreSec) && more == null && !quick && complete && !strained && opts.durationSec === presetSec
     const subtitle = `${plan.title} · ${Math.round(secsDone / 60)} dk · ${Math.round(secsDone / plan.cycleSec)} döngü`
     const restart = () => { setCalmAfter(null); setCalmBefore(null); setStrained(false); setQuick(false); setMore(null); carried.current = 0; setScreen('pick') }
-    // Yoldan açılan seans (ilerleme bağlamı, extra): bitiş anı (5 saniye turu). Metinler ve düğmeler aynı; sıra ve vurgu:
-    // bitiş işareti ekranın üst boşluğunun ortasında; puan ve eylemler başparmağın altında: sakinlik puanı, asıl eylem
-    // Kaydet, sonra "2 dk daha", en altta Zorlandım ve Yeniden. Yoksa bugünkü gibi.
+    // Yoldan açılan seans (ilerleme bağlamı, extra): bitiş anı (5 saniye turu 1–2). Metinler ve düğmeler aynı; sıra ve
+    // vurgu: bitiş işareti, altında günün zinciri (bu durak da bitti: "Bugünün yolu · 4/10 durak"), sakinlik puanı, asıl
+    // eylem Kaydet ile yanında "2 dk daha", en altta Zorlandım ve Yeniden. İçerik ekranın ortasında toplu (boşluk yok).
+    // Kaydet puan seçilene dek vurgu renginde soluk (gri "bozuk" gibi okunuyordu). Yoksa bugünkü gibi.
     if (extra) {
+      const restKeys = complete && day ? day.stops.filter((s) => s.restSlot && !s.done).map((s) => s.key) : []
+      const dayDone = day ? day.stops.filter((s) => s.done || restKeys.includes(s.key)).length : 0
       return (
         <main className="screen fade-in br br-res">
           <header className="br-done">
@@ -550,6 +573,12 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
             <h1>{complete ? 'Tamamlandı' : 'Erken bitti'}</h1>
             <p>{subtitle}</p>
           </header>
+          {restKeys.length > 0 && (
+            <div className="br-dc">
+              <DayChain plan={day} doneKeys={restKeys} />
+              <span>Bugünün yolu · <b>{dayDone}/{day.total}</b> durak</span>
+            </div>
+          )}
           {ask && calmBefore != null && (
             <div className={`br-calmcard${calmAfter == null ? ' need' : ''}`}>
               <b>Şimdi ne kadar sakinsin?</b>
@@ -562,8 +591,10 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
             </div>
           )}
           {calmBefore != null && calmAfter != null && <p className="muted small">Önce {calmBefore}, sonra {calmAfter}. Bu senin puanın; bir iddia değil, kendi çizgin.</p>}
-          <button className="btn" onClick={save} disabled={ask && calmBefore != null && calmAfter == null}><Check size={18} aria-hidden="true" /> Kaydet</button>
-          {canMore && <button type="button" className="btn btn-ghost" onClick={continueMore}><Plus size={18} aria-hidden="true" /> 2 dk daha</button>}
+          <div className="br-res-act">
+            <button className="btn" onClick={save} disabled={ask && calmBefore != null && calmAfter == null}><Check size={18} aria-hidden="true" /> Kaydet</button>
+            {canMore && <button type="button" className="btn btn-ghost" onClick={continueMore}><Plus size={18} aria-hidden="true" /> 2 dk daha</button>}
+          </div>
           <div className="br-res-row">
             <button type="button" className="br-chip" aria-pressed={strained} onClick={() => setStrained((v) => !v)}>
               {strained ? <Check size={16} aria-hidden="true" /> : null} Zorlandım{strained ? ' · kaydedildi' : ''}

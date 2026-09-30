@@ -3,6 +3,9 @@ import Breath from '../../screens/Breath.jsx'
 import { programProgress, loadBreathOpts, safetySeen, PATTERNS, PROGRAM_DAY_SEC } from '../../lib/breath.js'
 import { BREATH_DONE_SEC } from '../../lib/notifyLog.js'
 import { pathCtx } from '../pathContext.js'
+import { registry } from '../registry.js'
+import { buildPath } from '../../lib/today.js'
+import { loadLater } from '../../lib/pathLater.js'
 import breath, { breathPathStage, breathMixFor } from './manifest.js'
 
 // 'breath-1' (nefes hatırlatması): 1 dk, sakinlik puanı sorulmaz. Süre VARSAYIM (plan §2; Schwerdtfeger 2025'te 1 dk denendi).
@@ -18,6 +21,21 @@ const MORE_SEC = PROGRAM_DAY_SEC - 180
 // önce gelir (screens/Breath.jsx). Kayda stage ve (üretilen kalıp kullanıldıysa) mix yazılır. Yolun Nefes durağı bugün
 // tamamsa (≥ 60 sn nefes) seans yolun durağı değildir ve bugünkü gibi 5 dk açılır.
 // Ana sayfadaki göz molası önerisi ayrı rotadır ('breath-5'; screens/Home.jsx): her zaman 5 dk, basamaksız.
+// day: bugünün yolu (bitiş ekranındaki günün zinciri için; Ana sayfadaki gibi "Sonra yaparım" kaydıyla, göz bütçesi ve
+// abonelik kilidi olmadan: zincir yalnız durakları ve bitenleri gösterir). Kurulamazsa null (zincir çizilmez).
+let dayMemo = null
+function dayPlan(c) {
+  try {
+    const key = `${dayKeyOf(c.now)}|${c.sessions.length}|${c.tests.length}`
+    if (dayMemo && dayMemo.tests === c.tests && dayMemo.sessions === c.sessions && dayMemo.key === key) return dayMemo.value
+    const value = buildPath(registry.live, { ...c, later: loadLater(c.now), gate: { firstTestOnly: false } })
+    dayMemo = { tests: c.tests, sessions: c.sessions, key, value }
+    return value
+  } catch {
+    return null
+  }
+}
+const dayKeyOf = (d) => `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`
 export function breathPath(ctx = {}, now = new Date()) {
   const c = pathCtx(ctx, now)
   if (!c.progression) return null
@@ -25,7 +43,7 @@ export function breathPath(ctx = {}, now = new Date()) {
     const p = breathPathStage(c)
     if (!p || breath.today(c)?.done) return null
     const mix = p.tier === 'A' ? null : breathMixFor(c, p, { seen: safetySeen() })
-    return { presetSec: p.minutes * 60, minSec: p.minutes * 60, moreSec: p.more ? MORE_SEC : null, mix, extra: { stage: p.stage.id ?? p.stage.index } }
+    return { presetSec: p.minutes * 60, minSec: p.minutes * 60, moreSec: p.more ? MORE_SEC : null, mix, extra: { stage: p.stage.id ?? p.stage.index }, day: dayPlan(c) }
   } catch {
     return null // bozuk bağlam: bugünkü 5 dk
   }
@@ -53,6 +71,7 @@ export default {
         pathMix={path?.mix ?? null}
         moreSec={path?.moreSec ?? null}
         extra={path?.extra ?? null}
+        day={path?.day ?? null}
         onBack={ctx.back}
         onFinish={(s) => { ctx.store.addSession(s); ctx.refresh(); ctx.go('home') }}
       />

@@ -6,7 +6,7 @@ import { profileFromScreening } from '../lib/profile.js'
 import { DAILY_GOAL_MIN, formatMin, todaySeconds } from '../lib/routines.js'
 import { Sparkline } from '../components/ui.jsx'
 import { trendMessage } from '../lib/trend.js'
-import { activeDays, weekProgress, weekDayKeys, mondayIndex, dayKey } from '../lib/calendar.js'
+import { activeDays, weekProgress, dayKey } from '../lib/calendar.js'
 import { snellen20 } from '../lib/optotype.js'
 import { activitiesFrom, countedActivities, summary, isExerciseSession } from '../lib/stats.js'
 import { buildPath } from '../lib/today.js'
@@ -18,7 +18,7 @@ import '../styles/restlock.css'
 import { REASON_TEXT, fmtLeft } from '../lib/eyeBudget.js'
 import CoachCard from '../components/CoachCard.jsx'
 import TodayPath from '../components/TodayPath.jsx'
-import DayDial from '../components/DayDial.jsx'
+import DayChain from '../components/DayChain.jsx'
 import { Avatar } from './ProfileHome.jsx'
 import { homeSuggestion } from '../lib/homeSuggest.js'
 import HomeMap from '../components/HomeMap.jsx'
@@ -214,12 +214,16 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
     if (why) beginRest(why)
     onStart(SUGGEST_BREATH)
   }
-  // Ana sayfa başı: toplam gün (oyunlar dahil her kayıt), haftanın günleri (bugün çerçeveli), Nef önerisi
+  // Ana sayfa başı: toplam gün (oyunlar dahil her kayıt), bu haftanın çalışma günü, Nef önerisi
   const totalDays = activeDays([...tests, ...sessions]).size
-  const weekActive = activeDays([...tests, ...exercise])
-  const weekDots = weekDayKeys(now).map((k, i) => (weekActive.has(k) ? 'd' : i === mondayIndex(now) ? 't' : ''))
-  const showFacts = streak > 0 || week.done > 0 || totalDays > 0
-  const sug = homeSuggestion({ plan, eye: eyeBudget, walk: walkNudge({ recentSteps: health?.recentSteps, hasData: health?.hasData, hour: now.getHours() }) })
+  const weekLine = week.met ? `Bu hafta ${week.done} gün · hedef tamam` : `Bu hafta ${week.done}/${week.target} gün`
+  const showStreak = streak >= 3
+  const showWith = totalDays > 0 && !(showStreak && totalDays === streak)
+  const walk = walkNudge({ recentSteps: health?.recentSteps, hasData: health?.hasData, hour: now.getHours() })
+  const sug = homeSuggestion({ plan, eye: eyeBudget, walk })
+  // Nef satırı büyük düğmenin tekrarı mı ("Güne X ile başla." / "Kaldığın yerden devam: X."): öyleyse çizilmez
+  const nefRepeats = sug.primary.kind === 'path' && !walk
+  const stopIcons = Object.fromEntries(plan.stops.map((s) => [s.id, viewFor(s.id)?.icon]))
   // Büyük düğme yolun sıradaki durağını açıyorsa ve durak bugün yeniyse "Yeni" (yoldaki rozetle aynı kural)
   const goNew = sug.primary.kind === 'path' && Boolean(plan.next) && newKeys.includes(plan.next.key)
   // Oyunla aynı kural (SnakeGame loadSnakeOpts): TrueDepth varsa ve kayıtlı seçim 'touch'
@@ -273,60 +277,67 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
       {/* Yoga sabah sorusu: Ana sayfanın üstünde tek kart, yalnız iPhone uygulamasında; rıza sayfası açıkken yok */}
       {YogaMorningCard && isIOSApp() && !sheetOpen && <YogaMorningCard sessions={sessions} now={now} alarmStatus={alarmStatus} onSaved={onYogaMorning} onStart={onStart} />}
 
-      {/* Günün diyaframı + sayılar (tasarım: Artifact "Nefona Bugün ve Profil") */}
-      <section className="hh-day" aria-label="Bugün">
-        {plan.total > 0 && <DayDial plan={plan} />}
-        <div className="hh-num">
-          {plan.total > 0 && (
-            <>
-              <div className="hh-big"><b>{plan.doneCount}</b><small>/ {plan.total}</small></div>
-              <span className="hh-lbl">{plan.allDone ? 'durak · bugün tamam' : <>durak · <b>≈{plan.minutesLeft} dk</b> kaldı</>}</span>
-            </>
-          )}
-          {/* Sıfır satırı yok (5 saniye turu; karar 5d'nin yönü): sayısı 0 olan satır çizilmez, hiçbiri kalmazsa sütun yok */}
-          {(showFacts || health || alarmStatus) && (
-            <div className="hh-facts">
-              {streak > 0 && <div className="hh-fact"><Flame size={14} aria-hidden="true" className="f1" /><b>{streak}</b>gün seri</div>}
-              {week.done > 0 && (
-                <div className="hh-fact">
-                  <CalendarDays size={14} aria-hidden="true" className="f2" /><b>{week.met ? `${week.done}✓` : `${week.done}/${week.target}`}</b>hafta
-                  <span className="hh-wk" aria-hidden="true">{weekDots.map((c, i) => <i key={i} className={c} />)}</span>
-                </div>
-              )}
-              {health && (
-                <div className="hh-fact">
-                  <Footprints size={14} aria-hidden="true" className="f4" />
-                  {health.hasData ? <><b>{fmtSteps(health.today?.steps)}</b>adım bugün</> : <><b>—</b>adım · veri yok</>}
-                </div>
-              )}
-              {totalDays > 0 && <div className="hh-fact"><CircleDot size={14} aria-hidden="true" className="f3" /><b>{totalDays}</b>gün seninle</div>}
-              {alarmStatus && <AlarmLine status={alarmStatus} onStart={onStart} now={now} />}
+      {/* Kişinin sayıları (5 saniye turu 2): selamın altında tek satır hap; seri mercek renginde (ödül). Sıfır ve kırık seri
+          yok, aynı sayı iki kez yok (karar 5d'nin kuralı): seri 3 gün ve üstündeyse görünür, değilse "N gün seninle";
+          "gün seninle" seriyle aynı sayıysa yazılmaz. Hafta, yolun altındaki satırla aynı cümle ("Bu hafta 2/3 gün"). */}
+      {(showStreak || week.done > 0 || showWith || health || alarmStatus) && (
+        <div className="hh-facts hh-chips">
+          {showStreak && <div className="hh-fact lens"><Flame size={14} aria-hidden="true" className="f1" /><b>{streak}</b>gün seri</div>}
+          {week.done > 0 && <div className="hh-fact"><CalendarDays size={14} aria-hidden="true" className="f2" />{weekLine}</div>}
+          {showWith && <div className="hh-fact"><CircleDot size={14} aria-hidden="true" className="f3" /><b>{totalDays}</b>gün seninle</div>}
+          {health && (
+            <div className="hh-fact">
+              <Footprints size={14} aria-hidden="true" className="f4" />
+              {health.hasData ? <><b>{fmtSteps(health.today?.steps)}</b>adım bugün</> : <><b>—</b>adım · veri yok</>}
             </div>
           )}
+          {alarmStatus && <AlarmLine status={alarmStatus} onStart={onStart} now={now} />}
         </div>
-      </section>
+      )}
 
-      <section className="hh-now" aria-label="Şimdi">
-        <div className="hh-nef">
-          <span className="hh-nef-eye" aria-hidden="true" />
-          <p>{sug.primary.line}{sug.primary.sub && <span>Nef · {sug.primary.sub}</span>}</p>
-        </div>
-        <button type="button" className="hh-go" onClick={() => startSuggest(sug.primary.route, sug.primary.kind)}>
-          <span className="t"><small>{sug.primary.eyebrow}{goNew && <i className="hh-new">Yeni</i>}</small><b>{sug.primary.title}</b></span>
-          <span className="ar"><Play size={20} aria-hidden="true" fill="currentColor" /></span>
-        </button>
-        {sug.alts.length > 0 && (
-          <div className={`hh-alt n${sug.alts.length}`}>
-            {sug.alts.map((a) => (
-              <button type="button" key={a.kind} onClick={() => startSuggest(a.route)}>
-                <span className={`ic ${a.kind}`}>{a.kind === 'breath' ? <Moon size={18} aria-hidden="true" fill="currentColor" /> : <Waves size={18} aria-hidden="true" />}</span>
-                <span className="tx"><b>{a.title}</b><small>{a.sub}</small></span>
-              </button>
-            ))}
+      {/* Bugün kartı (5 saniye turu 2): ilk 4 saniyede ne kadar sürer ("≈ 8 dk · 4 durak"), ne yapacağım (günün zinciri:
+          her durak kendi çiziminde) ve ilk adım (büyük düğme). Sıfır yok: gün başında "4 durak", sonra "1/4 durak".
+          Nef satırı yalnız düğmeden başka bir şey söylüyorsa (göz molası, yürüme, gün tamam); sıradaki durağı söyleyen satır
+          düğmenin tekrarıdır, onun yerine durağın alt satırı düğmede ("3 bölüm · sağ, sol, iki göz"). */}
+      <section className="hh-today" aria-label="Bugün">
+        {plan.total > 0 && (
+          <>
+            <div className="hh-sum">
+              {plan.allDone ? (
+                <b className="hh-min done">Bugünkü yol tamam</b>
+              ) : (
+                <b className="hh-min">≈{plan.minutesLeft} dk{plan.doneCount > 0 && <small> kaldı</small>}</b>
+              )}
+              <span className="hh-cnt">{plan.doneCount > 0 ? `${plan.doneCount}/${plan.total}` : plan.total} durak</span>
+            </div>
+            <DayChain plan={plan} icons={stopIcons} />
+          </>
+        )}
+        {!nefRepeats && (
+          <div className="hh-nef">
+            <span className="hh-nef-eye" aria-hidden="true" />
+            <p>{sug.primary.line}{sug.primary.sub && <span>Nef · {sug.primary.sub}</span>}</p>
           </div>
         )}
+        <button type="button" className="hh-go" onClick={() => startSuggest(sug.primary.route, sug.primary.kind)}>
+          <span className="t">
+            <small>{sug.primary.eyebrow}{goNew && <i className="hh-new">Yeni</i>}</small>
+            <b>{sug.primary.title}</b>
+            {nefRepeats && plan.next?.sub && <span className="s">{plan.next.sub}</span>}
+          </span>
+          <span className="ar"><Play size={20} aria-hidden="true" fill="currentColor" /></span>
+        </button>
       </section>
-
+      {sug.alts.length > 0 && (
+        <div className={`hh-alt n${sug.alts.length}`}>
+          {sug.alts.map((a) => (
+            <button type="button" key={a.kind} onClick={() => startSuggest(a.route)}>
+              <span className={`ic ${a.kind}`}>{a.kind === 'breath' ? <Moon size={18} aria-hidden="true" fill="currentColor" /> : <Waves size={18} aria-hidden="true" />}</span>
+              <span className="tx"><b>{a.title}</b><small>{a.sub}</small></span>
+            </button>
+          ))}
+        </div>
+      )}
 
       {slot === 'remind' && <ReminderAsk time={rem.types.mola.time} onAnswer={answerReminders} />}
       {slot === 'perm' && (
@@ -417,12 +428,13 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           plan={plan}
           eye={eyeBudget}
           day={dayNumber(now)}
-          icons={Object.fromEntries(plan.stops.map((s) => [s.id, viewFor(s.id)?.icon]))}
+          icons={stopIcons}
           onStart={startStop}
           newKeys={newKeys}
           restMin={restMin}
           staged={Boolean(progression)}
-          week={week.met ? `Bu hafta ${week.done} gün · hedef tamam` : `Bu hafta ${week.done}/${week.target} gün`}
+          lead={sug.primary.kind === 'path'}
+          week={weekLine}
         />
       ) : (
         <p className="muted small">Aşağıdan istediğin çalışmayı seç.</p>

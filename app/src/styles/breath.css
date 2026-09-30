@@ -185,12 +185,29 @@
 .br-listen:disabled { opacity: 0.4; }
 .br-diag { display: block; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; color: var(--ink-3); overflow-wrap: anywhere; }
 
-/* ---- 5 saniye turu (Y1): günün kalıbında kanıt cümlesi Başla'nın altında, küçük ---- */
-.br-hero .br-hero-ev { font-size: 0.76rem; line-height: 1.45; color: var(--ink-3); }
+/* ---- 5 saniye turu 2 (Y1, yoldan açılan Nefes): günün kalıbı kartında ritmin süreleri yazılı, kanıt cümlesi kanıt
+   rozetinin arkasında (dokununca açılır); program şeridinin 28 noktası ve ikinci "Başla" ilk görünümde yok ---- */
+.br-why summary { list-style: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.br-why summary::-webkit-details-marker { display: none; }
+.br-why summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
+.br-why-lv { display: inline-flex; align-items: center; gap: 4px; color: var(--ink-3); }
+.br-why[open] .br-why-lv svg { transform: rotate(180deg); }
+.br-hero .br-why > p { margin-top: 10px; padding: 10px 12px; border-radius: 12px; background: var(--surface-2); font-size: 0.8rem; line-height: 1.45; color: var(--ink-2); }
+.br-today { display: grid; gap: 3px; }
+.br-hero .br-today b { font: 650 1rem/1.3 var(--font-body); color: var(--ink); }
+.br-hero .br-today span { font-size: 0.84rem; color: var(--ink-2); }
+.br-path .br-prog .d { display: none; }
+/* Etiketler gövde yazısıyla (daktilo harfi "hata çıktısı" gibi okunuyordu); ritim ve puan rakamları mono kalır */
+.br-ev { font: 650 0.72rem/1 var(--font-body); letter-spacing: 0.01em; text-transform: none; }
+.br-ev.sm { font-size: 0.7rem; letter-spacing: 0; }
+.br-sec span { font: 650 0.84rem/1 var(--font-body); letter-spacing: 0; text-transform: none; color: var(--ink-2); }
+.br-hero .meta { font: 500 0.8rem var(--font-body); }
+.br-quick em { font: 650 0.8rem var(--font-body); }
+.br-ends { font: 500 0.8rem/1.25 var(--font-body); color: var(--ink-2); }
 
 /* ---- Yoldan açılan seansın bitişi (5 saniye turu): bitiş işareti, puan, asıl eylem Kaydet, altta ikincil seçenekler ---- */
-.br-res { min-height: 100dvh; }
-.br-done { flex: 1; display: grid; justify-items: center; align-content: center; gap: 4px; text-align: center; padding: 8px 0 12px; }
+.br-res { min-height: 100dvh; justify-content: center; }
+.br-done { display: grid; justify-items: center; align-content: center; gap: 4px; text-align: center; padding: 8px 0 6px; }
 .br-done h1 { font-size: 1.9rem; letter-spacing: -0.02em; }
 .br-done p { color: var(--ink-2); }
 .br-done-mk { width: 132px; height: 132px; overflow: visible; margin-bottom: 8px; }
@@ -212,7 +229,14 @@
 @keyframes br-orb { from { transform: scale(0.8); opacity: 0; } }
 @keyframes br-ripple { 0% { transform: scale(0.92); opacity: 0; } 12% { opacity: 0.5; } 100% { transform: scale(1.6); opacity: 0; } }
 @media (max-height: 700px) { .br-done-mk { width: 100px; height: 100px; margin-bottom: 4px; } .br-done h1 { font-size: 1.6rem; } }
-.br-res .btn:disabled { opacity: 1; background: var(--surface-2); color: var(--ink-3); box-shadow: none; border-color: var(--border); }
+.br-res .btn:disabled { opacity: 1; background: var(--accent-soft); color: var(--accent); box-shadow: none; border-color: transparent; }
+/* Günün zinciri: bu durak da bitti (components/DayChain.jsx) */
+.br-dc { display: grid; gap: 8px; padding: 12px 14px 12px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); --dc-ring: var(--surface); }
+.br-dc > span { font: 500 0.86rem/1.3 var(--font-body); color: var(--ink-2); text-align: center; }
+.br-dc b { color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.br-res-act { display: flex; gap: 10px; }
+.br-res-act .btn { flex: 1; min-width: 0; }
+.br-res-act .btn-ghost { flex: none; width: auto; padding-inline: 16px; }
 .br-res-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
 .br-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--ink-2); font: 600 0.9rem var(--font-body); cursor: pointer; }
 .br-chip.ghost { background: none; border-color: transparent; color: var(--ink-3); }

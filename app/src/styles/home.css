@@ -238,3 +238,66 @@
 .hh-new { font: 700 0.68rem/1 var(--font-body); font-style: normal; letter-spacing: 0.02em; text-transform: none; padding: 3px 8px; border-radius: 999px; background: var(--accent-ink); color: var(--accent); }
 .hh-facts:empty { display: none; } /* alarm satırı çizilmeyince (web) boş sütunun çizgisi kalmasın */
 .hh-go .t b { text-wrap: balance; } /* 320 pt'de "· 5 dk" satır başında tek kalmasın */
+
+/* ---- 5 saniye turu 2 (Y1 ilk görünüm): sayılar hap satırında, "Bugün" kartı (süre, günün zinciri, büyük düğme) ----
+   Günün diyaframı ve "0 / N" büyük sayısı kalktı: en büyük yazı bugünün süresi, en belirgin şey ilk adımın düğmesi.
+   Yalnız tokenlar; iki tema tokenlardan gelir. */
+.hh-facts.hh-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; border: 0; margin-top: -4px; }
+.hh-chips .hh-fact {
+  gap: 6px; padding: 6px 12px 6px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border);
+  font: 600 0.82rem/1.2 var(--font-body); color: var(--ink-2);
+}
+.hh-chips .hh-fact b { font: 700 0.84rem/1 var(--font-body); min-width: 0; color: var(--ink); }
+/* Seri bir ödül: mercek rengi yalnız burada (tasarım sistemi: mercek sarısı yalnız ödül ve seri) */
+.hh-chips .hh-fact.lens { background: var(--lens-soft); border-color: color-mix(in srgb, var(--lens) 42%, transparent); color: var(--lens-text); }
+.hh-chips .hh-fact.lens b { color: var(--lens-text); }
+.hh-chips .hh-fact.al-fact { width: auto; margin: 0; min-height: 0; padding: 6px 10px; border: 1px solid var(--border); background: var(--surface); border-radius: 999px; }
+.hh-chips .hh-fact.al-fact .al-fact-ar { margin-left: 0; }
+
+.hh-today {
+  position: relative; display: grid; gap: 14px; padding: 18px 16px 16px; border-radius: 26px; overflow: hidden;
+  background: radial-gradient(130% 100% at 0% 0%, color-mix(in srgb, var(--iris-1) 13%, var(--surface)) 0%, var(--surface) 58%);
+  border: 1px solid var(--border); box-shadow: var(--shadow-lg);
+  --dc-ring: var(--surface);
+}
+.hh-sum { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; padding: 0 2px; }
+.hh-min { font: 700 2.1rem/1 var(--font-display); letter-spacing: -0.03em; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.hh-min small { font: 600 1rem/1 var(--font-body); letter-spacing: 0; color: var(--ink-2); }
+.hh-min.done { font-size: 1.3rem; line-height: 1.15; letter-spacing: -0.015em; white-space: normal; }
+.hh-cnt { font: 600 0.95rem/1.2 var(--font-body); color: var(--ink-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.hh-today .hh-go { margin-top: 2px; }
+.hh-go .t .s { display: block; margin-top: 1px; font: 500 0.82rem/1.3 var(--font-body); color: color-mix(in srgb, var(--accent-ink) 82%, transparent); }
+.hh-alt button { padding: 10px 12px; }
+@media (max-width: 360px) {
+  .hh-min { font-size: 1.8rem; }
+  .hh-today { padding: 16px 14px 14px; }
+  .hh-facts.hh-chips { gap: 6px; }
+  .hh-chips .hh-fact { gap: 5px; padding: 5px 10px 5px 8px; font-size: 0.78rem; }
+  .hh-chips .hh-fact b { font-size: 0.8rem; }
+}
+
+/* Günün zinciri (components/DayChain.jsx): duraklar eşit aralıkla, arkada yol çizgisi; bitenlere kadar çizgi dolu */
+.dc { position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); align-items: center; height: 36px; }
+.dc::before, .dc::after { content: ''; position: absolute; top: 50%; height: 3px; margin-top: -1.5px; left: calc(50% / var(--n)); border-radius: 2px; }
+.dc::before { right: calc(50% / var(--n)); background: var(--surface-3); }
+.dc::after { width: calc((100% - 100% / var(--n)) * var(--p)); background: var(--accent-grad); }
+.dc-s { position: relative; z-index: 1; display: grid; place-items: center; min-width: 0; }
+.dc-d {
+  width: min(26px, calc(100% - 3px)); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+  background: color-mix(in srgb, var(--ink) 7%, var(--surface)); color: var(--ink-3); box-shadow: 0 0 0 3px var(--dc-ring, var(--surface));
+}
+.dc-d svg { width: 62%; height: 62%; display: block; }
+.dc-s.me .dc-d { border-radius: 50% / 40%; }
+.dc-s.rest .dc-d { color: var(--accent); background: var(--accent-soft); }
+.dc-s.fi .dc-d { box-shadow: 0 0 0 3px var(--dc-ring, var(--surface)), inset 0 0 0 2px var(--lens); color: var(--lens-text); }
+.dc-s.locked .dc-d { opacity: 0.55; }
+.dc-s.done .dc-d { background: var(--accent-grad); color: var(--accent-ink); }
+.dc-s.now { z-index: 2; }
+.dc-s.now .dc-d {
+  width: min(32px, calc(100% + 5px)); background: var(--surface); color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-graphic), 0 0 0 5px var(--accent-soft);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dc-s.now .dc-d { animation: dc-now 2.4s ease-in-out infinite; }
+  @keyframes dc-now { 50% { box-shadow: 0 0 0 2px var(--accent-graphic), 0 0 0 8px color-mix(in srgb, var(--accent-soft) 40%, transparent); } }
+}
