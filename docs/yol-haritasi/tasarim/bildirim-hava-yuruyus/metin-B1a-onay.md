@@ -1,4 +1,12 @@
-# Metin kapısı · sahibin onaylayacağı son liste
+# Metin kapısı · sahibin onayladığı liste
+
+**ONAYLANDI (sahip, 2026-09-30: "Onaylıyorum, önerileri uygula").** Karar gereken 5 madde önerilerle kapandı:
+1. Ek saatler §2'deki yeni cümleleri kullanır (B).
+2. Kaynağı olmayan 8 modül (snake, track, tek-bakis, quick-look, fark-ettin, notice, dalga, yon) kanıt kapısından kaynak
+   bulunana kadar `remind` almaz; `bell2023` geçici bağı kullanılmaz. routine yalnız `talens2022` ile.
+3. Yol hatırlatması `singh2024`'e bağlanır (`PATH_REMIND.science`).
+4. `moszeik2025` bilim satırı kaynağın özetinden yazılır, metin kapısından geçer.
+5. `breath.js`'teki "tansiyon" ve "göz içi basıncı" geçen iki kanıt cümlesi ayrı metin incelemesine alınır.
 
 Tarih: 2026-09-30. Taslak iki incelemeye göre düzeltildi. İki incelemenin reddettiği cümle listede yok. Sayılar: başlık/gövde karakteri, Python `len`; birleşikte `{A}` ve `{B}` 14 karakterle sayıldı.
 
