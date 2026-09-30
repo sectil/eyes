@@ -81,3 +81,5 @@ Sonraki aşamaya (metin + ses + tasarım iş akışı) bu dosya olduğu gibi ver
 16. Seçim (2026-09-30, ikinci soru kartı): "Sessizliği at + 'ver…' tabanı 0,5 sn" → Ders 1'in nefes kilitli 87 parçasında
     sessiz baş ve son atıldı (tepenin 40 dB altı; 20 ms baş payı, 40 ms kararma; `render/tools/kilit_kirp_ib.py`);
     `b/ders1/ders1.lesson.json`'da periyodu 1,2 sn olan 8 "ver…" klibinin `gapFloor` değeri 0,6 → 0,5 sn.
+17. "Sesler iyi gibi ben bir sorun görmedim gibi" (2026-09-30, Ders 2, 3, 5 dosyalarını dinledikten sonra) → sahibin kulak
+    değerlendirmesi: sorun bildirilmedi. Ders 1 dosyaları ayrıca gönderilecek.
