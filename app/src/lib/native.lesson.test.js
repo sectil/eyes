@@ -162,9 +162,53 @@ describe('yerel kaynakla sözleşme (Swift burada derlenemez; metin denetimi)', 
       'static let journalKey = "nefona.lesson.journal"', 'subdirectory: "public/yoga"']) {
       expect(alarm).toContain(s)
     }
-    // uzaktan komut yalnız oynat / duraklat: atlama, sarma komutu yok
-    for (const s of ['nextTrackCommand', 'previousTrackCommand', 'skipForwardCommand', 'skipBackwardCommand', 'changePlaybackPositionCommand']) {
-      expect(alarm).not.toContain(s)
+    // uzaktan komut yalnız oynat / duraklat: atlama, sarma komutuna hedef yok; ders süresince açıkça kapatılır (Apple:
+    // kapatılmayan komutun arayüzü görünebilir) ve ders bitince eski değerine döner (modul.md §2.6)
+    const install = alarm.slice(alarm.indexOf('private func installRemote()'), alarm.indexOf('private func removeRemote()'))
+    const remove = alarm.slice(alarm.indexOf('private func removeRemote()'), alarm.indexOf('private func remote(play: Bool?)'))
+    for (const s of ['nextTrackCommand', 'previousTrackCommand', 'skipForwardCommand', 'skipBackwardCommand', 'seekForwardCommand', 'seekBackwardCommand', 'changePlaybackPositionCommand']) {
+      expect(alarm).not.toContain(`${s}.addTarget`)
+      expect(install).toContain(`c.${s}`)
     }
+    expect(install).toContain('for command in unwanted { command.isEnabled = false }')
+    expect(remove).toContain('for (command, was) in disabledCommands { command.isEnabled = was }')
+  })
+
+  it('ders çalarken ses kaydı biterse oturum kapatılmaz (çalan oynatıcı durmasın); kayıt başlarken çalan ders duraklar', () => {
+    const end = feedback.slice(feedback.indexOf('func endRecording()'), feedback.indexOf('func beginSleep()'))
+    const keep = end.indexOf('if sleepActive || lessonActive {')
+    expect(keep).toBeGreaterThan(0)
+    expect(keep).toBeLessThan(end.indexOf('setActive(false'))
+    expect(end.slice(keep, end.indexOf('return', keep))).not.toContain('setActive(false')
+    const speech = swift('SpeechPlugin.swift')
+    const start = speech.slice(speech.indexOf('@objc func start'), speech.indexOf('@objc func stop'))
+    const yieldAt = start.indexOf('LessonPlayer.yieldToRecording()')
+    expect(yieldAt).toBeGreaterThan(0)
+    expect(yieldAt).toBeLessThan(start.indexOf('AppAudioSession.shared.beginRecording()'))
+    expect(yieldAt).toBeLessThan(start.indexOf('.playAndRecord'))
+    const y = alarm.slice(alarm.indexOf('private func yieldToRecordingOnMain()'), alarm.indexOf('func holdsAudio()'))
+    expect(y).toContain('case .playing:\n            halt(reason: "recording")')
+    expect(y).toContain('case .tail:\n            closeSession(finished: true)')
+    expect(alarm).toContain('DispatchQueue.main.sync { shared.yieldToRecordingOnMain() }')
+  })
+
+  it('duraklatılmış ders kapanınca bitiş anı duraklatma anı (kayıt dinlenen güne); durum ve yerel kayıt pausedAt taşır', () => {
+    const stop = alarm.slice(alarm.indexOf('    func stop() {'), alarm.indexOf('static func yieldToRecording()'))
+    expect(stop).toContain('endedAt = pausedAt ?? Date()')
+    const pause = alarm.slice(alarm.indexOf('func pause(reason r: String)'), alarm.indexOf('func resume(at: Double?)'))
+    expect(pause).toContain('pausedAt = Date()')
+    const resume = alarm.slice(alarm.indexOf('func resume(at: Double?)'), alarm.indexOf('func seek(to at: Double)'))
+    expect(resume).toContain('pausedAt = nil')
+    const halt = alarm.slice(alarm.indexOf('private func halt(reason r: String)'), alarm.indexOf('private func onTick()'))
+    expect(halt).toContain('if state != .paused || pausedAt == nil { pausedAt = Date() }')
+    expect(alarm).toContain('if let p = pausedAt, state == .paused { out["pausedAt"] = p.timeIntervalSince1970 }')
+    expect(alarm).toContain('if let p = pausedAt, state == .paused { j["pausedAt"] = p.timeIntervalSince1970 }')
+  })
+
+  it('müzik kuyruğunda kesinti: kuyruk kapanır (çalıyormuş gibi görünen Now Playing ve açık oturum kalmaz)', () => {
+    const intr = alarm.slice(alarm.indexOf('private func interrupted('), alarm.indexOf('private func routeChanged('))
+    expect(intr).toContain('case .tail:')
+    expect(intr.slice(intr.indexOf('case .tail:'), intr.indexOf('default:'))).toContain('closeSession(finished: true)')
+    expect(intr).not.toContain('tp.play()')
   })
 })

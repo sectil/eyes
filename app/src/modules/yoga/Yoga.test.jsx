@@ -21,7 +21,7 @@ globalThis.fetch = async (p) => {
 }
 
 const flags = vi.hoisted(() => ({ ios: true }))
-const eng = vi.hoisted(() => ({ time: 0, playing: false, sleep: false, calls: [], state: null, journal: null, startError: null }))
+const eng = vi.hoisted(() => ({ time: 0, playing: false, sleep: false, calls: [], state: null, journal: null, startError: null, pausedAt: null }))
 vi.mock('../../lib/native.js', async (orig) => ({
   ...(await orig()),
   isIOSApp: () => flags.ios,
@@ -37,7 +37,7 @@ vi.mock('../../lib/native.js', async (orig) => ({
   lessonSeek: async (a) => { eng.calls.push(['seek', a]); eng.time = a.at },
   lessonCrossTo: async (a) => { eng.calls.push(['cross', a]); eng.time = a.at },
   lessonStop: async () => { eng.calls.push(['stop']); eng.playing = false },
-  lessonStatus: async () => ({ time: eng.time, duration: 900, playing: eng.playing, route: 'Speaker', ...(eng.state ? { state: eng.state, file: 'yoga/ders2-15.mp3' } : {}) }),
+  lessonStatus: async () => ({ time: eng.time, duration: 900, playing: eng.playing, route: 'Speaker', ...(eng.state ? { state: eng.state, file: 'yoga/ders2-15.mp3' } : {}), ...(eng.state === 'paused' && eng.pausedAt ? { pausedAt: eng.pausedAt } : {}) }),
   lessonMeta: async (a) => { eng.calls.push(['meta', a]) },
   lessonJournal: async () => eng.journal,
   lessonJournalClear: async () => { eng.calls.push(['journalClear']); eng.journal = null; return true },
@@ -50,6 +50,9 @@ const { currentLesson, clearCurrentLesson } = await import('./session.js')
 const { applyStatus, seekGoal } = await import('./YogaPlayer.jsx')
 const { loadTimeline, closingAt, sectionsOfTimeline, seekTarget, resumeSpans, resumePoint } = await import('./timeline.js')
 const { YT } = await import('./text.js')
+const { SAFETY_ORDER } = await import('./Yoga.jsx')
+const { resetLessonData } = await import('./journal.js')
+const { dayKey } = await import('../../lib/calendar.js')
 const wait = (ms) => new Promise((r) => setTimeout(r, ms))
 const tick = () => act(async () => wait(320)) // bir konum okuması (250 ms)
 
@@ -72,7 +75,7 @@ async function mount(props = {}) {
     await act(async () => b.click())
   }
   const radios = () => all((n) => n.getAttribute('role') === 'radio').map((n) => n.textContent.trim())
-  return { p, store, btn, tap, tapWhere, radios, text: () => container.textContent, unmount: () => act(async () => root.unmount()) }
+  return { p, store, container, btn, tap, tapWhere, radios, text: () => container.textContent, unmount: () => act(async () => root.unmount()) }
 }
 const optsNow = () => JSON.parse(mem.get('gozolcum:yoga-opts') ?? '{}')
 const seen = () => mem.set('gozolcum:yoga-opts', JSON.stringify({ safetySeen: true, soundCheck: 'nofile' }))
@@ -80,7 +83,7 @@ const seen = () => mem.set('gozolcum:yoga-opts', JSON.stringify({ safetySeen: tr
 beforeEach(() => {
   mem.clear()
   flags.ios = true
-  Object.assign(eng, { time: 0, playing: false, sleep: false, calls: [], state: null, journal: null, startError: null })
+  Object.assign(eng, { time: 0, playing: false, sleep: false, calls: [], state: null, journal: null, startError: null, pausedAt: null })
   clearCurrentLesson()
 })
 
@@ -123,7 +126,11 @@ describe('ilk giriş, kütüphane ve ayrıntı', () => {
     const t = r.text()
     expect(t).toContain('Derin Dinlenme (Yoga Nidra)')
     expect(t).toContain('Uyanıkken derin bir dinlenmeye davet.')
-    expect(r.radios()).toEqual(['15 dk'])
+    // Tek süre yayımlıyken süre bir seçim değildir: tek seçenekli seçici yerine başlığın üstünde yazar (5 saniye turu 1:
+    // "tek seçenekli 15 dk kutusu seçilebilir bir şeymiş gibi görünüyor"). Birden çok süre varken çipler durur
+    // (Yoga.data.test.jsx, Ders 1'in 3 ve 5 dakikası).
+    expect(r.radios()).toEqual([])
+    expect(t).toContain('15 dk · Uzanarak')
     expect(t).toContain('Karşılama · Niyet (sankalpa) · Beden dolaşımı · Nefes ve geri sayma · İmgeleme · Niyete dönüş · Kapanış')
     expect(t).toContain('İnce bir örtü · Dizlerinin altı için bir yastık · Uzanabileceğin rahat bir yüzey')
     expect(t).toContain('Kaynaklar (19)')
@@ -147,6 +154,61 @@ describe('ilk giriş, kütüphane ve ayrıntı', () => {
     const r = await mount({ route: 'yoga-2' })
     await act(async () => wait(20))
     expect(r.text()).toContain('Çalan uyku sesi duracak.')
+    await r.unmount()
+  })
+})
+
+// İlk görünüm (5 saniye turu 2): metin aynı, sıra ve vurgu değişti. Sınanan: güvenlik kartında sağlık maddesi "tedavi
+// değildir · 112" notunun hemen üstünde; tek ders varken kütüphane kartı dersi tanıtır (tam ad, bölümler sırasıyla);
+// sonra puanında önceki puan işaretli; dersten hemen sonraki ekranlar temadan bağımsız karanlık (yg-night).
+describe('ilk görünüm', () => {
+  const inNight = (n) => { for (let x = n; x; x = x.parentNode) if (/\byg-night\b/.test(x.className ?? '')) return true; return false }
+  it('güvenlik kartı: beş madde metni aynen; önce dersle ilgili dört madde, sonra sağlık maddesi ve hemen altında 112 notu', async () => {
+    const r = await mount()
+    const items = r.container.querySelectorAll((n) => n.nodeName === 'LI')
+    expect(items.map((li) => li.textContent)).toEqual(SAFETY_ORDER.map((i) => `${YT.safety.items[i].h} ${YT.safety.items[i].p}`))
+    expect([...SAFETY_ORDER].sort()).toEqual([0, 1, 2, 3, 4]) // her madde bir kez
+    expect(items.at(-1).textContent.startsWith('Bir sağlık durumun varsa önce danış.')).toBe(true)
+    const t = r.text()
+    expect(t.indexOf('terapistine sor.')).toBeLessThan(t.indexOf('Nefona tedavi değildir.'))
+    expect(t.indexOf('Acil durumda 112.')).toBeLessThan(t.indexOf('Anladım'))
+    await r.unmount()
+  })
+  it('tek ders yayımlıyken kütüphane kartı: tam ad, söz, süre ve duruş, bu sürenin bölümleri sırasıyla; tek düğme', async () => {
+    seen()
+    const r = await mount()
+    const cards = r.container.querySelectorAll((n) => n.nodeName === 'BUTTON' && n.textContent.includes('Derin Dinlenme'))
+    expect(cards).toHaveLength(1)
+    const c = cards[0].textContent
+    expect(c).toContain('Derin Dinlenme (Yoga Nidra)')
+    expect(c).toContain('Uyanıkken derin bir dinlenmeye davet.')
+    expect(c).toContain('15\u00a0dk · Uzanarak')
+    expect(c).toContain('BölümlerKarşılamaNiyet (sankalpa)Beden dolaşımıNefes ve geri saymaİmgelemeNiyete dönüşKapanış')
+    await r.unmount()
+  })
+  it('sonra puanı ve zorlanma sorusu karanlıkta; önce puanı temada; sonra puanında önceki puan "Önce" ile işaretli', async () => {
+    seen()
+    const r = await mount({ route: 'yoga-2' })
+    await r.tap('Başla')
+    const head = () => r.container.querySelectorAll((n) => n.nodeName === 'H1')[0]
+    expect(inNight(head())).toBe(false)
+    expect(r.radios()).toEqual(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
+    await r.tap('6')
+    await r.tap('Devam')
+    await tick()
+    currentLesson().listened = 820
+    eng.time = 900
+    eng.playing = false
+    await tick()
+    expect(r.text()).toContain('Sonra · Derin Dinlenme')
+    expect(inNight(head())).toBe(true)
+    expect(r.radios()).toEqual(['1', '2', '3', '4', '5', '6 Önce', '7', '8', '9', '10'])
+    await r.tap('Atla')
+    expect(r.text()).toContain('Ders sırasında zorlandın mı?')
+    expect(inNight(head())).toBe(true)
+    await r.tap('Atla')
+    expect(r.text()).toContain('Ders bitti')
+    expect(inNight(head())).toBe(false)
     await r.unmount()
   })
 })
@@ -379,6 +441,117 @@ describe('ders: baştan sona', () => {
     await r2.unmount()
   })
 
+  it('gün sınırı: gece duraklatılan ders ertesi sabah X ile kapanınca kayıt duraklatma anına (dinlenen güne) yazılır', async () => {
+    // Bulgu (inceleme): kaydın tarihi X'e basılan an oluyordu; o gün hiç dinlenmediği hâlde haftalık hedefe, seriye,
+    // Nef'in gün sayısına ve 28 günlük şeride 30 Eylül giriyordu
+    vi.useFakeTimers({ toFake: ['Date'] })
+    try {
+      vi.setSystemTime(new Date(2026, 8, 29, 23, 40))
+      seen()
+      const r = await mount({ route: 'yoga-2' })
+      await r.tap('Başla')
+      await r.tap('Atla')
+      await tick()
+      await tick()
+      eng.time = 600
+      currentLesson().listened = 600
+      await tick()
+      vi.setSystemTime(new Date(2026, 8, 29, 23, 50))
+      await r.tap('Duraklat')
+      await tick()
+      vi.setSystemTime(new Date(2026, 8, 30, 8, 0)) // uygulama bellekte kaldı; sabah Yoga açık, X
+      await tick()
+      await r.tap('Dersi bitir')
+      const rec = r.store.addSession.mock.calls[0][0]
+      expect(rec.date).toBe(new Date(2026, 8, 29, 23, 50).toISOString())
+      expect(dayKey(rec.date)).toBe('2026-09-29')
+      await r.unmount()
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+
+  it('kilit ekranından duraklatılan ders: duraklatma anı yerel oynatıcıdan (ekran saatler sonra açılsa da)', async () => {
+    seen()
+    const r = await mount({ route: 'yoga-2' })
+    await r.tap('Başla')
+    await r.tap('Atla')
+    eng.state = 'playing'
+    await tick()
+    eng.time = 500
+    currentLesson().listened = 500
+    await tick()
+    const pausedAt = Date.UTC(2026, 8, 29, 20, 50, 0) / 1000
+    eng.state = 'paused'
+    eng.playing = false
+    eng.pausedAt = pausedAt
+    await tick()
+    await r.tap('Dersi bitir')
+    expect(r.store.addSession.mock.calls[0][0].date).toBe(new Date(pausedAt * 1000).toISOString())
+    await r.unmount()
+  })
+
+  it('kapanış iki sarmayla atlanamaz: sona sarma kapanışın başına iner, kapanışın içinden ikinci ileri sarma yerinde kalır', async () => {
+    // Bulgu (inceleme): 895'e iki sürükleme 750,9 → 891'e iniyordu; dışa dönüş ("önce bir yanına dön", "yavaşça doğrulup
+    // otur") atlanıyordu (PLAN.v3 §D.6; modul.md §10.1)
+    seen()
+    const r = await mount({ route: 'yoga-2' })
+    await r.tap('Başla')
+    await r.tap('Atla')
+    await tick()
+    await tick()
+    eng.time = 400
+    await tick()
+    const s = currentLesson()
+    expect(s.closeAt).toBeCloseTo(750.929, 3)
+    const drag = async (v) => {
+      const input = r.container.querySelectorAll((n) => n.nodeName === 'INPUT')[0]
+      const props = input[Object.keys(input).find((k) => k.startsWith('__reactProps'))]
+      await act(async () => props.onChange({ target: { value: String(v) } }))
+      await act(async () => wait(450)) // bırakınca 400 ms sonra sarılır
+    }
+    await drag(895)
+    const seeks = () => eng.calls.filter((c) => c[0] === 'seek' || c[0] === 'cross' || c[0] === 'resume')
+    expect(seeks()).toHaveLength(1)
+    expect(seeks()[0][1].at).toBeCloseTo(s.closeAt, 6)
+    await tick()
+    await drag(895)
+    expect(seeks()).toHaveLength(1) // ikinci ileri sarma: yerel oynatıcıya hiçbir çağrı yok
+    expect(s.lastPos).toBeCloseTo(s.closeAt, 6)
+    await drag(300) // geri sarma serbest
+    expect(seeks()).toHaveLength(2)
+    expect(seeks()[1][1].at).toBeLessThan(310)
+    await r.tap('Dersi bitir')
+    await r.unmount()
+  })
+
+  it('"Tüm verileri sil": süren ders durur, bellekteki oturum unutulur; ders sonra bitince silinen önce puanı yazılmaz', async () => {
+    // Bulgu (iki inceleme): silmeden sonra Yoga açılıp ders bitince önce puanı 7 olan kayıt boş depoya yazılıyordu
+    seen()
+    const r = await mount({ route: 'yoga-2' })
+    await r.tap('Başla')
+    await r.tap('7')
+    await r.tap('Devam')
+    eng.state = 'playing'
+    await tick()
+    eng.time = 400
+    currentLesson().listened = 400
+    await tick()
+    await r.unmount() // kişi Bilgi sekmesine geçti, ders sürüyor
+    eng.calls = []
+    await resetLessonData() // App.jsx onReset
+    expect(eng.calls).toEqual([['stop'], ['journalClear']])
+    expect(currentLesson()).toBeNull()
+    eng.state = 'idle'
+    const again = await mount({ route: 'yoga', store: r.store })
+    await act(async () => wait(30))
+    expect(again.btn('Dersi bitir')).toBeUndefined() // oynatıcıya dönmez: kütüphane
+    expect(again.text()).toContain('Yoga ve Meditasyon')
+    await tick()
+    expect(r.store.addSession).not.toHaveBeenCalled()
+    await again.unmount()
+  })
+
   it('denetimler 5 sn sonra yalnız görsel olarak gizlenir: VoiceOver için aria-hidden yok', async () => {
     seen()
     const r = await mount({ route: 'yoga-2' })
@@ -479,7 +652,10 @@ describe('konum okuma (applyStatus)', () => {
     expect(seekTarget(tl, sections, 880)).toBeGreaterThan(closeAt) // korumasız hedef k.kalk'a iner
     expect(seekGoal(s, sections, 880)).toBeCloseTo(closeAt, 6)
     expect(seekGoal(s, sections, 300)).toBe(seekTarget(tl, sections, 300)) // geri sarma serbest
-    expect(seekGoal({ ...s, lastPos: 800 }, sections, 880)).toBe(seekTarget(tl, sections, 880)) // kapanışın içinde serbest
+    // kapanışın içinden ileri sarılamaz (iki sarmayla dışa dönüş atlanamaz); geri sarma serbest
+    expect(seekGoal({ ...s, lastPos: 800 }, sections, 880)).toBe(800)
+    expect(seekGoal({ ...s, lastPos: closeAt }, sections, 895)).toBe(closeAt)
+    expect(seekGoal({ ...s, lastPos: 800 }, sections, 300)).toBe(seekTarget(tl, sections, 300))
   })
   it('yerel sürdürme aralıkları resumePoint ile aynı noktayı verir', async () => {
     const tl = await loadTimeline('yoga/ders2-15.timeline.json')
@@ -488,6 +664,20 @@ describe('konum okuma (applyStatus)', () => {
       const hit = spans.find((x) => t >= x.from && t < x.to)
       expect(hit ? hit.at : t).toBeCloseTo(resumePoint(tl, t), 6)
     }
+  })
+  it('duraklatma anı: yerel oynatıcının pausedAt\'i, yoksa duraklamanın ilk görüldüğü an; çalınca ve bitince silinir', () => {
+    const s = S()
+    applyStatus(s, { time: 300, duration: 900, playing: false, state: 'paused', reason: 'remote', pausedAt: 1000 }, 5000000)
+    expect(s.pausedAt).toBe(1000000)
+    applyStatus(s, { time: 300, duration: 900, playing: true, state: 'playing' }, 5000250)
+    expect(s.pausedAt).toBeNull()
+    const old = S() // state göndermeyen eski derleme: ilk görülen an, sonra değişmez
+    applyStatus(old, { time: 100.2, duration: 900, playing: false }, 250)
+    applyStatus(old, { time: 100.2, duration: 900, playing: false }, 90000)
+    expect(old.pausedAt).toBe(250)
+    const done = S({ pausedAt: 10 })
+    applyStatus(done, { time: 900, duration: 900, playing: false, state: 'finished' }, 500)
+    expect(done.pausedAt).toBeNull()
   })
   it('kulaklık çıkınca (motor durdu, kişi durdurmadı): dış duraklama, bitiş değil', () => {
     const s = S()

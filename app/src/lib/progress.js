@@ -149,6 +149,16 @@ export function metricTrend(points = [], { better = 'up', meaningful = null } = 
   return { ...base, first: w.first, last: w.last, delta: w.diff, lo: w.lo, hi: w.hi, method: 'halves', status }
 }
 
+// Yoga (modul.md §7; PLAN.v3 §D.5): ölçüleri "nasıl hissettin" gidişatıdır, etki kanıtı değil. Metin iyileşme ya da
+// kötüleşme demez, puanın yönünü söyler. Gelişim (ProgressOverview.metricStatus), 5. gün raporu ve PDF (exportData) aynı
+// metni buradan alır. Dönüş: 'belirgin artış' | 'belirgin düşüş' | null (bu modüllerden değil ya da belirgin değil).
+export const FEEL_ONLY_MODULES = new Set(['yoga'])
+export function feelOnlyText(c) {
+  if (!FEEL_ONLY_MODULES.has(c?.module) || (c.status !== 'better' && c.status !== 'worse')) return null
+  const rose = (c.status === 'better') === (c.better !== 'down')
+  return rose ? 'belirgin artış' : 'belirgin düşüş'
+}
+
 export function metricCards({ tests = [], sessions = [], metrics = registry.metrics() } = {}) {
   return metrics
     .map((m) => ({ key: m.key, module: m.module, domain: m.domain, label: m.label, unit: m.unit, better: m.better, source: m.source ?? null, ...metricTrend(m.series({ tests, sessions }), m) }))

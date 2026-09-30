@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import {
   speechAt, captionAt, clipStartAt, resumePoint, seekPoint, nearestClipStart, sectionsOfTimeline, sectionAt, closingAt,
-  imageWindows, jumpPlan, visualAt, loadTimeline, durationOf, LEAD_SEC, seekTarget,
+  imageWindows, jumpPlan, visualAt, loadTimeline, durationOf, LEAD_SEC, seekTarget, guardClosing,
 } from './timeline.js'
 
 const tl = JSON.parse(readFileSync(fileURLToPath(new URL('../../../public/yoga/ders2-15.timeline.json', import.meta.url)), 'utf8'))
@@ -69,6 +69,17 @@ describe('bölümler ve kapanış', () => {
     expect(c).toBeLessThan(piece('k.donus').start)
     expect(speechAt(tl, c)).toBeNull()
     expect(closingAt({ speech: [] })).toBeNull()
+  })
+  it('kapanış kısalmaz: dışından içine sarma kapanışın başına; içinden ileri sarma yerinde kalır; geri sarma serbest', () => {
+    const c = closingAt(tl)
+    expect(guardClosing(895, 400, c)).toBe(c) // kapanıştan önceden sona: kapanışın başı
+    expect(guardClosing(300, 400, c)).toBe(300) // kapanıştan önce geri
+    // Bulgu (inceleme): iki sarmayla dışa dönüş atlanıyordu (895 → 750,9 → 891). Kapanışın içinden ileri sarma yok
+    expect(guardClosing(891, c, c)).toBe(c)
+    expect(guardClosing(891, 800, c)).toBe(800)
+    expect(guardClosing(780, 800, c)).toBe(780) // kapanışın içinde geri
+    expect(guardClosing(500, 800, c)).toBe(500) // kapanıştan geri çıkış
+    expect(guardClosing(895, 400, null)).toBe(895) // çizelgede kapanış yok
   })
   it('imge penceresi ve bırakma klibi (c4.solma)', () => {
     const w = imageWindows(tl)

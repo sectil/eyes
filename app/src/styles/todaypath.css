@@ -59,6 +59,7 @@
 
 /* Bölüm etiketi + göz payı ölçeği */
 .tp-sl { position: absolute; left: calc(50% - 150px); display: flex; flex-direction: column; gap: 3px; font: 500 10.5px/1.2 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); pointer-events: none; }
+.tp-y1 .tp-sl { left: max(0px, calc(50% - 150px)); } /* 320 pt'de kabın içinde başlar (S0 b; ilerlemeyle kurulan yol) */
 .tp-sl .l1 { display: flex; align-items: center; gap: 8px; }
 .tp-sl .m { display: inline-flex; gap: 2px; }
 .tp-sl .m i { width: 8px; height: 5px; border-radius: 2px; background: var(--tp-panel-3); }
@@ -141,6 +142,7 @@
 .tp-lb small.warn, .tp-jb-b .l2.warn { color: var(--warn); font-weight: 650; }
 .tp-lb small .wi, .tp-jb-b .l2 .wi { margin-right: 4px; font-weight: 800; }
 .tp-lb .tag { display: block; font: 500 9.5px/12px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.tp-lb .tag.new, .tp-lb .tag .new { color: var(--accent); } /* "Yeni": bugün ilk kez gelen durak ya da basamak (SONSUZ_YOL §1, S0 b) */
 .tp-lb.left { transform: translate(-100%, -50%); text-align: right; }
 .tp-lb.right { transform: translateY(-50%); }
 .tp-lb.rest { transform: translateY(-50%); white-space: normal; width: 128px; }

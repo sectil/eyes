@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { X, Play, Pause, Check, RotateCcw, ShieldAlert, HeartPulse, Car, Info, ChevronRight, ChevronLeft, SkipBack, SkipForward, Settings2, Volume2, VolumeX, SlidersHorizontal, Zap } from 'lucide-react'
+import { X, Play, Pause, Check, RotateCcw, ShieldAlert, HeartPulse, Car, Info, ChevronRight, ChevronLeft, SkipBack, SkipForward, Settings2, Volume2, VolumeX, SlidersHorizontal, Zap, Plus } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
 import BreathWave from '../components/BreathWave.jsx'
 import BreathVisual from '../components/BreathVisual.jsx'
@@ -12,7 +12,9 @@ import {
   PATTERNS, PATTERN_ORDER, PHASE, KIND_ORDER, LIMITS, STEP_SEC, DURATIONS_SEC, CALM_SCALE, SAFETY_ROWS, PREP_SEC,
   VISUALS, SOUNDS, SOUND_SLOTS, LEVELS, QUICK, phaseText,
   makePlan, resolveSecs, phaseAt, phaseStartSec, makeRecord, programProgress, loadBreathOpts, saveBreathOpts, safetySeen, markSafetySeen, isBreath,
+  DEFAULT_PATTERN, PROGRAM_DAY_SEC,
 } from '../lib/breath.js'
+import { breathSafety } from '../lib/breathMix.js'
 import '../styles/breath.css'
 
 const KIND_ROW = { in: 'Al', in2: 'Ek alış', hold: 'Tut', out: 'Ver', hold2: 'Bekle' }
@@ -55,6 +57,14 @@ function SafetyRows() {
   )
 }
 
+// Ayrıntıdaki "nasıl yapılır" satırları. Günün kalıbında süreler kalıbın kendi sürelerinden farklıdır: süre söyleyen
+// satırlar (ve kutunun "hepsi aynı süre" satırı) yazılmaz; süreleri adım kutuları gösterir. Boş kalırsa (Sakin ritim)
+// ekran listeyi hiç çizmez.
+export function howLines(def, mix = null) {
+  if (!mix) return def.how
+  return def.how.filter((t) => !/\d|aynı süre/.test(t))
+}
+
 // Seans planı, en az minSec sürecek biçimde. makePlan döngü sayısını yuvarlar: düzenlenmiş kalıpta 1 dk 56–57 sn
 // kalabiliyor (ör. 4-4-6 → 4×14 = 56) ve hatırlatmadan açılan nefes "yapıldı" eşiğine (lib/notifyLog.js
 // BREATH_DONE_SEC) hiç ulaşmıyordu. Kısa kalırsa döngü sayısı yukarı yuvarlanır.
@@ -64,8 +74,23 @@ export function planAtLeast(args, minSec = null) {
   return makePlan({ ...args, durationSec: plan.cycleSec * Math.ceil(minSec / plan.cycleSec) })
 }
 
-// presetSec: Bugünün yolundaki Nefes durağı 5 dk ile açar (kayıtlı süre tercihi değişmez; kullanıcı süreyi
-// kendisi değiştirirse o kaydedilir).
+// Yoldaki "Bugünün ritmi" (SONSUZ_YOL.PLAN.v1 §3.A.4, §3.A.5; lib/breathMix.js breathOfDay) bu seansta kullanılır mı:
+// kişinin kendi kalıbı (kaydedilmiş kalıp Sakin ritim değil ya da süreleri düzenlenmiş) her zaman önce gelir; tutmalı ya
+// da beklemeli kalıbın ön koşulu güvenlik kartının görülmesi ve son 7 günde "Zorlandım" olmamasıdır. Uymazsa null.
+export function autoMix(pathMix, saved, { sessions = [], now = new Date(), seen = false } = {}) {
+  if (!pathMix || !PATTERNS[pathMix.family] || pathMix.family === 'custom') return null
+  if (saved && (saved.pattern !== DEFAULT_PATTERN || saved.edits != null)) return null
+  if ((pathMix.hold > 0 || pathMix.pause > 0) && !breathSafety(sessions, now, { seen }).holdOk) return null
+  return pathMix
+}
+
+// presetSec: Bugünün yolundaki Nefes durağı durağın süresiyle açar (ilerleme yokken 5 dk, varken 1, 2 ya da 3 dk;
+// kayıtlı süre tercihi değişmez; kullanıcı süreyi kendisi değiştirirse o kaydedilir).
+// pathMix: yoldaki "Bugünün ritmi" (autoMix'ten geçerse seansın kalıbı olur; kişi kalıbı ya da süreleri değiştirirse
+// kalkar ve kişinin seçimi kaydedilir; yalnız süre, görsel ya da ses değişirse kayıtlı kalıp tercihi değişmez).
+// moreSec: yoldaki 3 dk tamamlanınca "2 dk daha": aynı kalıpla sürer ve seansı program gününün 5 dk'sına tamamlar;
+// tek kayıt yazılır (saniyeler toplanır). "Zorlandım" işaretlendiyse düğme yok.
+// extra: yoldan açılan seansın kaydına eklenecek alanlar ({ stage }); üretilen kalıp kullanıldıysa kayda mix de yazılır.
 // askCalm false: başta ve sonda sakinlik puanı sorulmaz (hatırlatmadan açılan 1 dk nefes; kayıt calmBefore/After null).
 // minSec: seans en az bu kadar sürer (hatırlatmadan açılan 1 dk nefes; planAtLeast).
 // Tasarım: Artifact "Nefona Nefes" (onaylı) — seçim (ritmi çizili kalıplar, kanıt düzeyi), ayrıntı, başlarken sakinlik
@@ -74,9 +99,14 @@ export function planAtLeast(args, minSec = null) {
 const DEV_BUILD = import.meta.env.VITE_APP_BUILD === 'dev'
 const diagText = (st) => `tanı: liste ${st.index} · çözülen ${st.decoded} · hata ${st.failed}${st.path ? ` · yol ${st.path}` : ''}${st.error ? ` · ${st.error}` : ''}`
 
-export default function Breath({ sessions = [], presetSec = null, askCalm = true, minSec = null, onBack, onFinish }) {
+export default function Breath({ sessions = [], presetSec = null, askCalm = true, minSec = null, pathMix = null, moreSec = null, extra = null, onBack, onFinish }) {
   const prior = sessions.filter(isBreath).length
-  const [opts, setOpts] = useState(() => (presetSec ? { ...loadBreathOpts(), durationSec: presetSec } : loadBreathOpts()))
+  // Yoldaki "Bugünün ritmi": ilk çizimde bir kez karar verilir (kişi kalıbı değiştirince kalkar)
+  const [mix, setMix] = useState(() => autoMix(pathMix, loadBreathOpts(), { sessions, seen: safetySeen() }))
+  const [opts, setOpts] = useState(() => {
+    const base = presetSec ? { ...loadBreathOpts(), durationSec: presetSec } : loadBreathOpts()
+    return mix ? { ...base, pattern: mix.family, edits: mix.edits ?? null } : base
+  })
   const [screen, setScreen] = useState(() => (safetySeen() ? 'pick' : 'safety')) // safety | pick | detail | sound | info | run | result
   const [back, setBack] = useState('pick') // bilgi/ses ekranından dönülecek yer
   const [sheet, setSheet] = useState(false) // başlarken sakinlik sayfası
@@ -84,6 +114,9 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
   const [calmBefore, setCalmBefore] = useState(null)
   const [calmAfter, setCalmAfter] = useState(null)
   const [strained, setStrained] = useState(false)
+  // "2 dk daha": ikinci bölümün en kısa süresi (sn; program günü 5 dk olsun) ya da null. carried: önceki bölümün saniyesi.
+  const [more, setMore] = useState(null)
+  const carried = useRef(0)
   const ask = askCalm && !quick
   // Seslendirme: hangi seste dosya var (public/voice/index.json); seçilen sesi önceden çöz
   const [voiceAvail, setVoiceAvail] = useState(null)
@@ -104,8 +137,8 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
   useEffect(() => () => releaseBreathSfx(0), [])
   const planArgs = quick
     ? { pattern: QUICK.pattern, durationSec: QUICK.durationSec, priorSessions: prior, edits: null }
-    : { pattern: opts.pattern, durationSec: opts.durationSec, priorSessions: prior, edits: opts.edits }
-  const plan = planAtLeast(planArgs, minSec)
+    : { pattern: opts.pattern, durationSec: more != null ? moreSec : opts.durationSec, priorSessions: prior, edits: opts.edits }
+  const plan = planAtLeast(planArgs, more != null ? more : minSec)
   const { secs } = resolveSecs({ pattern: opts.pattern, edits: opts.edits, priorSessions: prior })
   const def = PATTERNS[opts.pattern]
   const program = programProgress(sessions)
@@ -121,8 +154,12 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
 
   const update = (patch) => {
     const next = { ...opts, ...patch }
+    const ownPattern = 'pattern' in patch || 'edits' in patch
     setOpts(next)
-    saveBreathOpts(presetSec && !('durationSec' in patch) ? { ...next, durationSec: loadBreathOpts().durationSec } : next)
+    if (mix && ownPattern) setMix(null) // kişi kalıbı seçti: artık onun seçimi
+    let toSave = presetSec && !('durationSec' in patch) ? { ...next, durationSec: loadBreathOpts().durationSec } : next
+    if (mix && !ownPattern) toSave = { ...toSave, pattern: loadBreathOpts().pattern, edits: loadBreathOpts().edits } // günün kalıbı tercih olmaz
+    saveBreathOpts(toSave)
   }
   const stepSec = (kind, dir) => {
     const cur = secs[kind]
@@ -237,8 +274,26 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
   function stopEarly() {
     setScreen('result')
   }
+  // "2 dk daha": aynı kalıpla, hazırlık sayımı olmadan sürer; iki bölüm tek kayıttır
+  function continueMore() {
+    const done = carried.current + Math.min(elapsedRef.current, plan.totalSec)
+    carried.current = done
+    unlockAudio()
+    unlockBreathSfx()
+    setMore(Math.max(0, PROGRAM_DAY_SEC - done))
+    setPaused(false)
+    lastKey.current = -1
+    elapsedRef.current = 0
+    t0.current = performance.now()
+    setLive(null)
+    setPrep(0)
+    setScreen('run')
+  }
   function save() {
-    onFinish(makeRecord({ plan, seconds: Math.min(elapsedRef.current, plan.totalSec), calmBefore, calmAfter, strained, completed: elapsedRef.current >= plan.totalSec - 1 }))
+    const rec = makeRecord({ plan, seconds: carried.current + Math.min(elapsedRef.current, plan.totalSec), calmBefore, calmAfter, strained, completed: elapsedRef.current >= plan.totalSec - 1 })
+    // Yoldan açılan seans: basamak (stage) ve üretilen kalıp (mix; önceki günlerin kalıbı yinelenmesin, lib/breathMix.js)
+    const path = extra && !quick ? { ...extra, ...(mix ? { mix: { family: mix.family, inhale: mix.inhale, hold: mix.hold, exhale: mix.exhale, pause: mix.pause } } : {}) } : null
+    onFinish(path ? { ...rec, ...path } : rec)
   }
 
   if (screen === 'safety') {
@@ -332,7 +387,7 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
     const sideLegend = plan.phases.some((p) => p.side)
     return (
       <main className="screen fade-in br">
-        <PageHeader onBack={() => setScreen('pick')} eyebrow={opts.edits ? 'Kalıp · düzenlendi' : 'Kalıp'} title={def.title} />
+        <PageHeader onBack={() => setScreen('pick')} eyebrow={opts.edits && !mix ? 'Kalıp · düzenlendi' : 'Kalıp'} title={def.title} />
         <div className="br-detwave">
           <BreathWave phases={plan.phases} width={300} height={86} labels className="big" />
           {sideLegend && <div className="br-ends"><span className="l">● sol burun</span><span className="r">● sağ burun</span></div>}
@@ -354,7 +409,8 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
             )
           })}
         </div>
-        <ol className="br-how">{def.how.map((t) => <li key={t}>{t}</li>)}</ol>
+        {/* Günün kalıbında süre söyleyen satırlar düşer; hiç satır kalmazsa (Sakin ritim) liste çizilmez, süreleri adım kutuları gösterir */}
+        {howLines(def, mix).length > 0 && <ol className="br-how">{howLines(def, mix).map((t) => <li key={t}>{t}</li>)}</ol>}
         {def.level && (
           <div className="br-evid">
             <Level level={def.level} />
@@ -407,7 +463,7 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
         </div>
         <section className="br-hero" aria-label={def.title}>
           <div className="h1"><b>{def.title}</b><Level level={def.level} /></div>
-          <p>{def.blurb}</p>
+          {mix ? <><p><b>Bugünün ritmi: {mix.label}</b></p><p>{def.evidence}</p></> : <p>{def.blurb}</p>}
           <BreathWave phases={plan.phases} repeat={plan.phases.length > 3 ? 1 : 2} width={300} height={58} />
           <div className="meta"><span><b>{fmtNum(plan.bpm)}</b>/dk nefes</span><span><b>{opts.durationSec / 60}</b> dk</span><span><b>{plan.cycles}</b> döngü</span></div>
           <div className="row2">
@@ -447,10 +503,14 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
   }
 
   if (screen === 'result') {
-    const secsDone = Math.round(Math.min(elapsedRef.current, plan.totalSec))
+    const partSec = Math.round(Math.min(elapsedRef.current, plan.totalSec))
+    const complete = partSec >= plan.totalSec - 1
+    const secsDone = Math.round(carried.current) + partSec
+    const canMore = Boolean(moreSec) && more == null && !quick && complete && !strained && opts.durationSec === presetSec
     return (
       <main className="screen fade-in br">
-        <PageHeader eyebrow="Nefes" title={secsDone >= plan.totalSec - 1 ? 'Tamamlandı' : 'Erken bitti'} subtitle={`${plan.title} · ${Math.round(secsDone / 60)} dk · ${Math.round(secsDone / plan.cycleSec)} döngü`} />
+        <PageHeader eyebrow="Nefes" title={complete ? 'Tamamlandı' : 'Erken bitti'} subtitle={`${plan.title} · ${Math.round(secsDone / 60)} dk · ${Math.round(secsDone / plan.cycleSec)} döngü`} />
+        {canMore && <button type="button" className="btn btn-ghost" onClick={continueMore}><Plus size={18} aria-hidden="true" /> 2 dk daha</button>}
         {ask && calmBefore != null && (
           <div className="br-calmcard">
             <b>Şimdi ne kadar sakinsin?</b>
@@ -468,7 +528,7 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
         </button>
         {strained && <p className="muted small">Bir sonraki seansta süreyi ya da tutmaları kısalt. Baş dönmesi olduysa bugün tekrar etme.</p>}
         <button className="btn" onClick={save} disabled={ask && calmBefore != null && calmAfter == null}><Check size={18} aria-hidden="true" /> Kaydet</button>
-        <button className="btn btn-ghost" onClick={() => { setCalmAfter(null); setCalmBefore(null); setStrained(false); setQuick(false); setScreen('pick') }}><RotateCcw size={18} aria-hidden="true" /> Yeniden</button>
+        <button className="btn btn-ghost" onClick={() => { setCalmAfter(null); setCalmBefore(null); setStrained(false); setQuick(false); setMore(null); carried.current = 0; setScreen('pick') }}><RotateCcw size={18} aria-hidden="true" /> Yeniden</button>
       </main>
     )
   }

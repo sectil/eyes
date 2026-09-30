@@ -8,7 +8,7 @@ import { activitiesFrom, decimalTr } from './stats.js'
 import { analyzeTrend, trendMessage, seriesNotes, droppedNotes, YELLOW_DELTA, RED_DELTA, BAND_MIN_MM, BAND_MAX_MM } from './trend.js'
 import { formatLogMAR, formatEquivalents, roundLogMAR } from './optotype.js'
 import { EYE_LABEL } from './vaSeries.js'
-import { DOMAIN_LABEL, WHO5_TYPE, acuteEffects, metricCards, practiceCard, who5Card } from './progress.js'
+import { DOMAIN_LABEL, WHO5_TYPE, acuteEffects, metricCards, practiceCard, who5Card, feelOnlyText } from './progress.js'
 import { ageFromBirthDate } from './identity.js'
 import { domainOfSession } from './dataHub.js'
 
@@ -140,7 +140,12 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '
 const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }) : '–')
 const fmtShort = (iso) => new Date(iso).toLocaleDateString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric' })
 const num = (v, d = 1) => (Number.isFinite(v) ? decimalTr(v, d) : '–')
-const signed = (v, d = 1) => (Number.isFinite(v) ? `${v > 0 ? '+' : v < 0 ? '−' : ''}${decimalTr(Math.abs(v), d)}` : '–')
+// İşaret yazılan (yuvarlanmış) değerden: −0,02 → "0,0" ("−0,0" değil)
+const signed = (v, d = 1) => {
+  if (!Number.isFinite(v)) return '–'
+  const r = +v.toFixed(d)
+  return `${r > 0 ? '+' : r < 0 ? '−' : ''}${decimalTr(Math.abs(v), d)}`
+}
 // logMAR → ondalık görme keskinliği (10^−logMAR); standart dönüşüm, yorum değil. H8: logMAR önce 2 haneye yuvarlanır,
 // ondalık bu değerden türetilir (uygulamadaki E7 ile aynı: 0,004 → "0,00" ve "1,00", "0,99" değil).
 const decimalVa = (lm) => formatEquivalents(lm)?.decimal ?? '–'
@@ -279,8 +284,9 @@ export function reportHtml(m) {
   const eyeSection = m.eyes.length
     ? m.eyes.map(eyeBlock).join('')
     : '<p class="small">Henüz görme testi yok.</p>'
+  // Yoga ölçüsü "nasıl hissettin" gidişatı: Gelişim'deki metinle aynı ("belirgin artış/düşüş"; "iyileşiyor" değil)
   const metricRows = m.metrics
-    .map((c) => `<tr><td>${esc(c.label)}</td><td>${esc(DOMAIN_LABEL[c.domain] ?? '')}</td><td class="n">${c.n}</td><td class="n">${c.method === 'halves' ? 'ort. ' : ''}${esc(num(c.first, c.unit === '/5' ? 1 : 0))} → ${esc(num(c.last, c.unit === '/5' ? 1 : 0))} ${esc(c.unit)}</td><td>${esc(STATUS_TEXT[c.status] ?? '')}</td></tr>`)
+    .map((c) => `<tr><td>${esc(c.label)}</td><td>${esc(DOMAIN_LABEL[c.domain] ?? '')}</td><td class="n">${c.n}</td><td class="n">${c.method === 'halves' ? 'ort. ' : ''}${esc(num(c.first, c.unit === '/5' ? 1 : 0))} → ${esc(num(c.last, c.unit === '/5' ? 1 : 0))} ${esc(c.unit)}</td><td>${esc(feelOnlyText(c) ?? STATUS_TEXT[c.status] ?? '')}</td></tr>`)
     .join('')
   // Değişim sütunu puanın kendi değişimi (sonra − önce); güven aralığı da aynı yönde. e.gain, lo, hi iyileşme yönündedir:
   // "düşük daha iyi" ölçüde (Yön, yoga Ders 1–2) işaret çevrilir; önceden değer çevrilip aralık çevrilmiyordu (−3,0 (2,1 – 3,9))

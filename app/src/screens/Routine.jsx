@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { X, ChevronLeft, ArrowRight, ArrowLeft, ArrowUp, ArrowDown, RotateCw, RotateCcw, Mountain, EyeClosed, Eye, Wind, Clock, ScanFace, SkipForward, Check, Play, Volume2 } from 'lucide-react'
-import { EXERCISES, DAILY_GOAL_MIN, formatMin, setDurationSec } from '../lib/routines.js'
+import { DAILY_GOAL_MIN, formatMin, setDurationSec, exerciseSteps } from '../lib/routines.js'
 import { unlockAudio } from '../lib/cue.js'
 import { cuePhrase, sayPhrase, preloadPhrases } from '../lib/voiceCue.js'
 import { unlockBreathSfx, releaseBreathSfx } from '../lib/breathSfx.js'
@@ -102,8 +102,20 @@ const freshVoice = () => ({
   wrongSince: null, // bakış adımında yanlış yöne bakış başlangıcı
 })
 
+// Kayıt: { type: 'routine', setId, seconds, steps } (steps: hareket sayısı). Basamaklı yol grubunda ayrıca stage, variant
+// ve stepIds (adım kimlikleri) olur (§3.A.8-4; §3.A.10 "veride yalnız yeni alanlar eklenir": steps sayı olarak kalır).
+// İlerleme sayacı Dstage stage'i okur; eski kayıtlar bu alanlar olmadan okunur.
+export function routineRecord(set, steps, seconds) {
+  const rec = { type: 'routine', setId: set.id, seconds, steps: steps.length }
+  if (set.stage == null) return rec
+  return { ...rec, stage: set.stage, stepIds: steps.map((s) => s.id), variant: set.variant ?? null }
+}
+
+// set: SETS'ten bir set ya da yol grubu. Sonsuz yolda (SONSUZ_YOL.PLAN.v1 §3.A.6, §3.A.8-4) yol grubu basamağıyla gelir:
+// set.steps bugünün adımları, set.patch çeşitleme yaması (EXERCISES'in üstüne), set.stage basamak kimliği, set.variant
+// çeşitleme kimliği. stage varsa kayda stage, stepIds (adım kimlikleri) ve variant yazılır; yoksa kayıt bugünkü gibidir.
 export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = false }) {
-  const steps = set.steps.map((id) => ({ id, ...EXERCISES[id] }))
+  const steps = exerciseSteps(set)
   const [started, setStarted] = useState(false)
   const [idx, setIdx] = useState(0)
   const [tick, setTick] = useState(0) // adım başından beri geçen saniye (görsel ritim için)
@@ -412,7 +424,7 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
   const save = () => {
     if (saved.current) return
     saved.current = true
-    onFinish({ type: 'routine', setId: set.id, seconds: spent.current, steps: steps.length })
+    onFinish(routineRecord(set, steps, spent.current))
   }
   // Yol grubu (lib/routines.js PATH_GROUPS): kısa bitiş, kayıt ve yola dönüş. VARSAYIM: 1,2 sn sonra kendiliğinden.
   useEffect(() => {

@@ -29,6 +29,11 @@
 //                                       Bugünün yolu durakları (lib/today.js buildPath dizer). Durak:
 //                                       { title, minutes, done, route?, key?, sub?, slot?, order?, eyeMin?,
 //                                         glyph?, openEnded?, exclusive?, dropRank? } — alanlar today.js'te
+//   progression?: { match(s) → bool, ladder?, unlock?: { pathDay } }
+//                                       İlerleme motoru (lib/progression.js; SONSUZ_YOL.PLAN.v1 §3.G.1): hangi kayıt
+//                                       "yapıldı" sayılır (yoksa sessions.match), isteğe bağlı kendi merdiveni
+//                                       (lib/ladders.js biçiminde) ve açılma eşiği. today(ctx) içinde ctx.progression
+//                                       yoksa modül bugünkü çıktısını verir.
 //   coach?(sessions, now) → { anahtar: sayı | kısa dize }   Nef'e giden 7 günlük özet (en çok 6 alan;
 //                                       lib/coachCore.js sanitizeSignals süzer). Yalnızca özet sayılar.
 //   stats?(sessions, now) → [{ label, value, sub? }]   Gelişim → Pratikler satırları (en çok 3)
@@ -101,6 +106,7 @@ export function validateManifest(m) {
   if (m.home != null) need(SECTIONS.includes(m.home.section) && Number.isFinite(m.home.order), 'home.section/order geçersiz')
   if (m.gates?.eyeBudget != null) need(m.gates.eyeBudget === 'eye' || m.gates.eyeBudget === 'test', "gates.eyeBudget 'eye' ya da 'test' olmalı")
   if (m.today != null) need(typeof m.today === 'function', 'today fonksiyon olmalı')
+  if (m.progression != null) need(typeof m.progression === 'object' && typeof m.progression.match === 'function', 'progression.match fonksiyon olmalı')
   if (m.retired != null) need(typeof m.retired === 'boolean', 'retired true/false olmalı')
   if (m.ask != null) {
     const list = (v) => v == null || (Array.isArray(v) && v.every((x) => typeof x === 'string'))

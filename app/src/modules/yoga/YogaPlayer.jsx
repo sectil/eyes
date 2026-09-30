@@ -15,7 +15,8 @@ import {
 //
 // s alanları: lesson, version{ file, timeline, seconds }, title, planned, listened, lastPos, lastWall, maxPos, playing,
 // userPaused, extPaused, pendingClose, quickClose, steps, until, jumped, started, error, tl, closeAt, sections,
-// ended (okuma durdu: bitti ya da X), finished (dosya sonuna kadar çaldı), prelude (giriş dosyası çalıyor), runId.
+// ended (okuma durdu: bitti ya da X), finished (dosya sonuna kadar çaldı), prelude (giriş dosyası çalıyor), runId,
+// pausedAt (duraklatma anı, ms; çalarken ya da bitince null: kaydın tarihi dinlemenin bittiği an olsun, journal.js).
 export const POLL_MS = 250
 export const CONTROLS_MS = 5000
 const fmt = (sec) => {
@@ -23,6 +24,13 @@ const fmt = (sec) => {
   return `${Math.floor(x / 60)}:${String(x % 60).padStart(2, '0')}`
 }
 const reduceMotionNow = () => Boolean(globalThis.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches)
+
+// Duraklatma anı: yerel oynatıcı söylüyorsa onunki (kilit ekranından duraklatılıp ekran saatler sonra açıldıysa da
+// doğru), yoksa duraklamanın ilk görüldüğü an. Çalarken ve bitince null.
+function notePause(s, st, nowMs, ended = false) {
+  if (ended || s.playing || !s.started) s.pausedAt = null
+  else s.pausedAt = Number.isFinite(st.pausedAt) ? st.pausedAt * 1000 : s.pausedAt ?? nowMs
+}
 
 // Motor durumunu oturuma işler. Dönüş: 'ended' (dosya sonuna kadar çaldı) | 'stopped' (yerel oturum başka yerden
 // kapandı: ör. uyku sesi duraklatılmış dersi kapattı) | null. Saf değil (s'yi günceller) ama zamanlayıcıdan bağımsız
@@ -47,6 +55,7 @@ export function applyStatus(s, st, nowMs = Date.now()) {
     s.lastWall = nowMs
     s.playing = st.playing
     s.extPaused = !st.playing && !s.userPaused && s.started
+    notePause(s, st, nowMs)
     return null
   }
   if (s.prelude) {
@@ -77,6 +86,7 @@ export function applyStatus(s, st, nowMs = Date.now()) {
   s.playing = st.playing && !ended
   if (state === 'playing' && st.playing) s.userPaused = false // kilit ekranından ya da kulaklıktan sürdürüldü
   s.extPaused = !ended && !st.playing && !s.userPaused && s.started
+  notePause(s, st, nowMs, ended)
   if (ended) {
     s.ended = true
     s.finished = true // dosya sonuna kadar çaldı (X ile durdurma değil)
@@ -87,7 +97,8 @@ export function applyStatus(s, st, nowMs = Date.now()) {
 
 export { reachedClosing }
 
-// Sarma hedefi: en yakın klip başı ya da bölüm başı; kapanıştan önceden kapanışın içine sarılırsa kapanışın başı
+// Sarma hedefi: en yakın klip başı ya da bölüm başı; kapanıştan önceden kapanışın içine sarılırsa kapanışın başı,
+// kapanışın içinden ileri sarılırsa bulunduğu yer (kapanış kısalmaz)
 export function seekGoal(s, sections, t) {
   return guardClosing(seekTarget(s.tl, sections, t), s.lastPos, s.closeAt)
 }
@@ -108,7 +119,10 @@ export function runSteps(s, steps, { first = 'cross' } = {}) {
   const paused = s.userPaused || s.extPaused
   s.userPaused = false
   s.extPaused = false
-  if (paused) return bridge.resume({ at: step.at })
+  if (paused) {
+    s.pausedAt = null
+    return bridge.resume({ at: step.at })
+  }
   if (first === 'seek') return bridge.seek({ at: step.at })
   return bridge.crossTo({ file: s.version.file, at: step.at })
 }
@@ -228,10 +242,12 @@ export default function YogaPlayer({ s, lesson: L, flashSafe = null, captions = 
     if (paused) {
       s.userPaused = false
       s.extPaused = false
+      s.pausedAt = null
       s.jumped = true
       bridge.resume({ at: s.tl ? resumePoint(s.tl, s.lastPos) : s.lastPos }).catch(() => {})
     } else {
       s.userPaused = true
+      s.pausedAt = Date.now() // dinleme burada biter (X saatler sonra basılsa da kayıt bu güne yazılır)
       bridge.pause().catch(() => {})
     }
     rerender()
@@ -246,6 +262,10 @@ export default function YogaPlayer({ s, lesson: L, flashSafe = null, captions = 
   function seekTo(t) {
     if (!s.tl) return
     const target = seekGoal(s, sections, t)
+    if (target === s.lastPos) { // kapanışın içinde ileri sarma yok (guardClosing): ders yerinde sürer
+      rerender()
+      return
+    }
     runSteps(s, jumpPlan(s.tl, s.lastPos, target), { first: 'seek' }).catch(() => {})
     s.lastPos = target
     rerender()
@@ -273,7 +293,8 @@ export default function YogaPlayer({ s, lesson: L, flashSafe = null, captions = 
       <div className="yg-hud">
         <button type="button" className="yg-x" onClick={(e) => { e.stopPropagation(); stop() }} aria-label={YT.player.stop}><X size={20} aria-hidden="true" /></button>
         <span className="yg-ey"><b>{L.title}</b>{cur && L.sectionLabels[cur] ? <span>{L.sectionLabels[cur]}</span> : null}</span>
-        <span className="yg-t" aria-label={`${fmt(dur - pos)} ${YT.player.left}`}>{fmt(dur - pos)}</span>
+        {/* Kalan süre: altında "kaldı" (saat mi, geçen süre mi diye okunmasın) */}
+        <span className="yg-t" aria-label={`${fmt(dur - pos)} ${YT.player.left}`}>{fmt(dur - pos)}<small aria-hidden="true">{YT.player.left}</small></span>
       </div>
       {s.error && (
         <div className="yg-err" role="alert">

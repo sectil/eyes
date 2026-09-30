@@ -118,6 +118,65 @@ describe('"Çok" cevabı, daha kısa süre varken', () => {
   })
 })
 
+describe('"Çok" cevabı, dersin daha kısa süresi yokken', () => {
+  it('en kısa süre (3 dk) bitti → bitişte öneri kartı yok: başka bir ders ya da aynı süre önerilmez (modul.md §2.8)', async () => {
+    // Bulgu (inceleme): kütüphanede birden çok ders varken sıradaki (daha uzun) ders, altında "Gözlerin açık kalabilir."
+    // satırıyla öneriliyordu
+    const r = await mount()
+    await r.tapWhere((n) => n.textContent.includes('Nefesin Ritmi'))
+    await r.tapWhere((n) => n.getAttribute('role') === 'radio' && n.textContent.startsWith('3'))
+    await r.tap('Başla')
+    await r.tap('Atla') // önce puanı
+    await tick()
+    eng.duration = 180
+    currentLesson().listened = 175
+    eng.time = 180
+    eng.playing = false
+    await tick()
+    await r.tap('Atla') // sonra puanı
+    await r.tap('Çok')
+    expect(r.text()).toContain(YT.hard.muchFinishedNoShorter)
+    await r.tap('Devam')
+    expect(r.text()).toContain(YT.done.title)
+    expect(r.text()).not.toContain(YT.done.next)
+    expect(r.text()).not.toContain(YT.done.eyesOpen)
+    await r.unmount()
+  })
+  it('öteki cevaplarda kütüphane sırasındaki sonraki ders önerilir (değişmedi)', async () => {
+    const r = await mount()
+    await r.tapWhere((n) => n.textContent.includes('Nefesin Ritmi'))
+    await r.tapWhere((n) => n.getAttribute('role') === 'radio' && n.textContent.startsWith('3'))
+    await r.tap('Başla')
+    await r.tap('Atla')
+    await tick()
+    eng.duration = 180
+    currentLesson().listened = 175
+    eng.time = 180
+    eng.playing = false
+    await tick()
+    await r.tap('Atla')
+    await r.tap('Hayır')
+    expect(r.text()).toContain(YT.done.next)
+    expect(r.text()).not.toContain(YT.done.eyesOpen)
+    await r.unmount()
+  })
+})
+
+describe('uyku dersi: durdurma ekranı', () => {
+  it('X → uyandıran dönüş metni yerine dersin gece satırı (modul.md §10.1, §10.2)', async () => {
+    const r = await mount()
+    await r.tapWhere((n) => n.textContent.includes('Uykuya Geçiş'))
+    await r.tap('Başla')
+    await tick()
+    currentLesson().listened = 120
+    await r.tap('Dersi bitir')
+    expect(r.text()).toContain(YT.stopped.night)
+    expect(r.text()).not.toContain('Gözlerini aç')
+    await r.tap('Tamam')
+    await r.unmount()
+  })
+})
+
 describe('"Sonra yaparım"', () => {
   it('yalnız yoldan açılan derste: bugünün kaydına yoga yazılır, Ana sayfaya dönülür', async () => {
     const lib = await mount()

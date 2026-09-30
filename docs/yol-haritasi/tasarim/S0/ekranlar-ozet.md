@@ -959,6 +959,10 @@ Kaynak: karar 5b (:173-174), §3.F.2 (:1028-1037).
 
 ## Bölüm 3 · Planda çelişen ya da eksik yerler (sahibin bakması gerekenler)
 
+> **30 Eylül 2026:** Bu 25 madde ve çizim soruları (Ç1–Ç18) karara bağlandı ve `ekranlar.html`'ye işlendi; kararlar ve
+> gerekçeleri `sorular-kararlar.md`'de, plana işlenecek düzeltmeler `plan-duzeltmeleri.md`'de. Yalnız 19. madde (yoga sabah
+> kartının yeri) sahibin kararıdır. Aşağıdaki maddeler ilk hâliyle bırakıldı.
+
 1. **Tarih satırının biçimi:** plan "Salı, 29 Eylül" (:966), kod "29 Eylül Salı" (`Home.jsx:218`). Öneri: kodun biçimi.
 2. **Ay simgesinin yeri:** "önünde" belirsiz (:966-967). Öneri: evre adının önünde.
 3. **Dolunay günü:** şeritte evre adı "dolunay" mı (§3.E.3 :900-901), yoksa "Bu gece dolunay" mı (§3.F.5 :1091-1092)? Öneri:

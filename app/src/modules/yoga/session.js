@@ -4,8 +4,8 @@
 //
 // Oturum alanları (YogaPlayer.jsx başındaki not): lesson, minutes, version{ file, timeline, seconds }, title, planned,
 // before, startedAt, runId (yerel kaydın kimliği: lessonStart id), listened, lastPos, lastWall, maxPos, playing,
-// userPaused, extPaused, pendingClose, quickClose, steps, until, jumped, started, error, tl, closeAt, sections, ended,
-// finished, prelude, musicTail, writer.
+// userPaused, extPaused, pausedAt (duraklatma anı, ms; çalarken null), pendingClose, quickClose, steps, until, jumped,
+// started, error, tl, closeAt, sections, ended, finished, prelude, musicTail, writer.
 let cur = null
 
 export const currentLesson = () => cur
@@ -15,6 +15,15 @@ export function setCurrentLesson(s) {
 }
 export function clearCurrentLesson(s = null) {
   if (!s || s === cur) cur = null
+}
+// "Tüm verileri sil" (modul.md §6.4): bellekteki ders unutulur. Oturum bitmiş sayılır ve yazıcısı düşer; oynatıcı ya da
+// uzlaştırma ona sonradan erişse de silmeden önceki kayıt (önce puanı, başlangıç anı) boş depoya yazılamaz.
+export function forgetLesson() {
+  if (cur) {
+    cur.ended = true
+    cur.writer = null
+  }
+  cur = null
 }
 
 // Yerel kaydın kimliği (lessonStart id): uzlaştırma bu kimlikle JS'in kendi dersini tanır
@@ -26,7 +35,7 @@ export function newLessonSession({
 }) {
   return {
     lesson, minutes, version, planned: version?.seconds ?? 0, title, before, startedAt, runId,
-    listened, lastPos, lastWall: Date.now(), maxPos: lastPos, playing, userPaused: false, extPaused: false,
+    listened, lastPos, lastWall: Date.now(), maxPos: lastPos, playing, userPaused: false, extPaused: false, pausedAt: null,
     pendingClose: false, quickClose: false, steps: [], until: null, jumped: true, started, error: null,
     tl: null, closeAt: null, sections: null, ended: false, finished: false, prelude: false, musicTail, writer,
   }

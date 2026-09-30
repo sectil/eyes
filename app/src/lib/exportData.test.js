@@ -62,6 +62,25 @@ describe('Doktor raporu', () => {
     expect(html).toContain('<td class="n">+2,0 (1,0 – 3,0)</td>')
     expect(html).toContain('<td class="n">+1,0</td><td>belirsiz</td>') // 3 oturumdan az: aralık yok
   })
+  it('yoga ölçüsü PDF\'te de Gelişim\'deki gibi "belirgin artış/düşüş" ("iyileşiyor/geriliyor" değil); öteki ölçüler aynı', () => {
+    // Bulgu (inceleme): Gelişim ve 5. gün raporu "belirgin artış" yazarken PDF aynı veriye "iyileşiyor" diyordu (modul.md §7)
+    const m = reportModel({ tests: [], sessions: [] })
+    const yogaRow = (status) => ({ key: 'yoga-uyku-dalma', module: 'yoga', domain: 'wellbeing', label: 'Uykuya dalma kolaylığı (ertesi sabah)', unit: 'puan', better: 'up', n: 8, first: 5, last: 7, method: 'halves', status })
+    const other = { key: 'x', module: 'breath', domain: 'calm', label: 'Başka ölçü', unit: 'puan', better: 'up', n: 8, first: 5, last: 7, method: 'halves', status: 'better' }
+    const html = reportHtml({ ...m, metrics: [yogaRow('better'), other] })
+    expect(html).toContain('ertesi sabah)</td><td>İyi oluş</td><td class="n">8</td><td class="n">ort. 5 → 7 puan</td><td>belirgin artış</td>')
+    expect(html).toContain('Başka ölçü</td><td>Sakinlik</td><td class="n">8</td><td class="n">ort. 5 → 7 puan</td><td>iyileşiyor</td>')
+    const worse = reportHtml({ ...m, metrics: [yogaRow('worse')] })
+    expect(worse).toContain('<td>belirgin düşüş</td>')
+    expect(worse).not.toContain('geriliyor')
+    expect(reportHtml({ ...m, metrics: [yogaRow('noise')] })).toContain('<td>doğal oynama</td>')
+  })
+  it('değişim sütununda sıfıra yuvarlanan değer işaretsiz: "−0,0" yazılmaz', () => {
+    const m = reportModel({ tests: [], sessions: [] })
+    const html = reportHtml({ ...m, effects: [{ label: 'Nefes', measure: 'sakinlik', max: 10, n: 2, before: 5, after: 5, gain: -0.02, lo: null, hi: null, sig: false }] })
+    expect(html).toContain('<td class="n">0,0</td><td>belirsiz</td>')
+    expect(html).not.toContain('−0,0')
+  })
   it('model: gözler, aralık, yaş, son testler en yeniden eskiye', () => {
     const m = reportModel({ tests, sessions: [], identity: { name: ' Ayşe ', birthDate: '1980-10-01' }, now: new Date(2026, 8, 26) })
     expect(m.name).toBe('Ayşe')

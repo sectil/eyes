@@ -274,14 +274,16 @@ final class AppAudioSession {
         guard recording else { return }
         recording = false
         let session = AVAudioSession.sharedInstance()
-        // Kayıt, karışmayan (.playAndRecord) oturumla diğer sesleri kesmişti; onlara devam etmelerini bildir.
-        try? session.setActive(false, options: .notifyOthersOnDeactivation)
         if sleepActive || lessonActive {
-            // Uyku sesi ya da ders sürüyor: tercihe değil, oynatma oturumuna dön
+            // Uyku sesi ya da ders oturumu açık: oturum bırakılmaz, tercihe değil oynatma oturumuna dönülür. Apple
+            // (AVAudioSession.setActive): çalan ses nesneleri varken oturumu kapatmak onları durdurur; etkin oturumda
+            // kategori değişimi hemen uygulanır ve çalan oynatıcı durmaz.
             try? session.setCategory(.playback, mode: .default, options: [])
             try? session.setActive(true)
             return
         }
+        // Kayıt, karışmayan (.playAndRecord) oturumla diğer sesleri kesmişti; onlara devam etmelerini bildir.
+        try? session.setActive(false, options: .notifyOthersOnDeactivation)
         try? applyPreferredLocked()
     }
 

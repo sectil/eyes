@@ -443,10 +443,11 @@ export const Alarm = registerPlugin('Alarm')
 //   tail: { file, seconds, fade } (uyku dersinde dosya bitince müzik kuyruğu; son `fade` sn'de kısılıp tamamen durur).
 // - lessonMeta({ file?, sections?, resume? }): çizelge sonradan yüklenince aynı bilgiler.
 // - lessonStatus() ayrıca: state (idle | playing | paused | stopping | tail | finished), reason (duraklatılmışken:
-//   user | remote | interruption | route | reset | stalled | error), listened (gerçekten çalan sn), file, prelude, ended,
-//   tailLeft.
+//   user | remote | interruption | route | reset | stalled | error | recording), pausedAt (duraklatılmışken: duraklatma
+//   anı, Unix sn), listened (gerçekten çalan sn), file, prelude, ended, tailLeft.
 // - lessonJournal() → yerel kayıt ya da null: { id?, file, title, state, finished, prelude, startedAt, updatedAt,
-//   endedAt?, listened, time, maxTime, duration } (zamanlar Unix saniyesi); lessonJournalClear() ("Tüm verileri sil").
+//   endedAt?, pausedAt?, listened, time, maxTime, duration } (zamanlar Unix saniyesi); lessonJournalClear() ("Tüm
+//   verileri sil").
 const lessonError = (message, code) => Object.assign(new Error(message), { code })
 const finiteOr = (x, d) => (typeof x === 'number' && Number.isFinite(x) ? x : d)
 const lessonFile = (f) => (typeof f === 'string' ? f.replace(/^\.?\//, '') : undefined)

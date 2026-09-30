@@ -1,5 +1,9 @@
+import { useId } from 'react'
+
 // Nefes formu (modul.md §3; PLAN.v2 §E.2): her derste tek, yumuşak kenarlı ışık formu; derse özgü biçim.
 // 1 genişleyen halka · 2 ince yatay ufuk çizgisi · 3 sönen kor · 5 tek ışık noktası.
+// Ufuk (Ders 2) ekranı boydan boya geçer, uçları söner (kesik bir "düz hat" gibi okunmasın); ışık ufkun üstünde
+// yükselir, altında sönük yansır. Kütüphane ve ayrıntıdaki ders imgesiyle aynı sahne (LessonArt.jsx).
 // Durum visualAt'ten gelir (motorun konumu). Yanıp sönme yok: değişimler CSS geçişiyle birkaç saniyeye yayılır.
 // Hareketi Azalt ya da nöbet cevabı "Hayır" değilse (still) form ölçeklenmez (scale 1) ve biçimi de değişmez (ufkun
 // halesi, noktanın halesi sabit): imge ve evre yalnız opaklıkla, çok yavaş (3 sn) gösterilir; ani geçiş yok.
@@ -33,6 +37,45 @@ export function maxAlpha(color, cap, bg = PLAYER_BG) {
   return lo
 }
 
+// Ufuk (viewBox 400×200, ufuk y=100). Hepsi dersin renginde: en parlak yer ufuk çizgisinin kendisi (tavan grubun
+// opaklığıyla korunur; beyaza açılan bir ışık yok). ry: gökteki ışığın yüksekliği (imgede artar; still iken sabit).
+// sky / sea: gökteki ışığın ve yansımanın opaklığı (≤ 1: en parlak nokta yine çizgi, tavan aşılmaz). 5 saniye turu 2
+// ("ortadaki ışık o kadar soluk ki bir şey yüklenmemiş sanıyorum"): ışık, tavanın altında kalarak daha geniş ve görünür.
+function HorizonShape({ color, sky, sea, ry }) {
+  const id = `ygf${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`
+  return (
+    <>
+      <defs>
+        <radialGradient id={`${id}g`}>
+          <stop offset="0" stopColor={color} stopOpacity="0.9" />
+          <stop offset="0.45" stopColor={color} stopOpacity="0.42" />
+          <stop offset="1" stopColor={color} stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id={`${id}l`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="400" y2="0">
+          <stop offset="0" stopColor={color} stopOpacity="0" />
+          <stop offset="0.28" stopColor={color} stopOpacity="0.85" />
+          <stop offset="0.5" stopColor={color} stopOpacity="1" />
+          <stop offset="0.72" stopColor={color} stopOpacity="0.85" />
+          <stop offset="1" stopColor={color} stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id={`${id}r`}>
+          <stop offset="0" stopColor={color} stopOpacity="0" />
+          <stop offset="0.5" stopColor={color} stopOpacity="1" />
+          <stop offset="1" stopColor={color} stopOpacity="0" />
+        </linearGradient>
+        <clipPath id={`${id}s`}><rect x="-200" y="-200" width="800" height="300" /></clipPath>
+        <clipPath id={`${id}w`}><rect x="-200" y="100" width="800" height="300" /></clipPath>
+      </defs>
+      <ellipse cx="200" cy="100" rx="200" ry={ry} fill={`url(#${id}g)`} opacity={sky} clipPath={`url(#${id}s)`} className="yg-fade yg-ry" />
+      <ellipse cx="200" cy="100" rx="170" ry="30" fill={`url(#${id}g)`} opacity={sea} clipPath={`url(#${id}w)`} className="yg-fade" />
+      <line x1="0" y1="100" x2="400" y2="100" stroke={`url(#${id}l)`} strokeWidth="2" />
+      <rect x="132" y="111" width="136" height="1.4" rx="0.7" fill={`url(#${id}r)`} opacity="0.3" />
+      <rect x="164" y="122" width="72" height="1.2" rx="0.6" fill={`url(#${id}r)`} opacity="0.18" />
+      <rect x="186" y="133" width="28" height="1" rx="0.5" fill={`url(#${id}r)`} opacity="0.1" />
+    </>
+  )
+}
+
 function Shape({ form, color, v, still = false }) {
   const glow = v.image ? 0.5 : 0.28
   if (form === 'ring') {
@@ -43,14 +86,7 @@ function Shape({ form, color, v, still = false }) {
       </>
     )
   }
-  if (form === 'horizon') {
-    return (
-      <>
-        <ellipse cx="100" cy="100" rx="84" ry={still ? 12 : v.image ? 16 : 9} fill={color} opacity={glow * 0.35} className="yg-soft yg-ry" />
-        <line x1="22" y1="100" x2="178" y2="100" stroke={color} strokeWidth="2" strokeLinecap="round" />
-      </>
-    )
-  }
+  if (form === 'horizon') return <HorizonShape color={color} sky={v.image ? 1 : 0.82} sea={v.image ? 0.55 : 0.42} ry={still ? 80 : v.image ? 92 : 70} />
   if (form === 'ember') {
     return (
       <>
@@ -73,11 +109,12 @@ export default function BreathForm({ form = 'ring', color = '#7EB2DD', v, night 
   const state = v ?? { luminance: 0.8, scale: 1, image: false, phase: 'varis' }
   const cap = maxAlpha(night ? '#E3A857' : color, night ? LUM_CAP.night : LUM_CAP.day)
   const tint = night && state.ember ? '#E3A857' : color
+  const wide = form === 'horizon' // ufuk ekranı boydan boya geçer
   return (
-    <svg className="yg-form" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+    <svg className={wide ? 'yg-form yg-form-wide' : 'yg-form'} viewBox={wide ? '0 0 400 200' : '0 0 200 200'} aria-hidden="true" focusable="false">
       <g
         className="yg-form-g"
-        style={{ opacity: +(state.luminance * cap).toFixed(4), transform: `scale(${state.scale})`, transformOrigin: '100px 100px' }}
+        style={{ opacity: +(state.luminance * cap).toFixed(4), transform: `scale(${state.scale})`, transformOrigin: wide ? '200px 100px' : '100px 100px' }}
       >
         <Shape form={form} color={tint} v={state} still={still} />
       </g>
