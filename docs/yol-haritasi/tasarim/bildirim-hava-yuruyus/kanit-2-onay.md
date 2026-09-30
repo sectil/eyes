@@ -1,5 +1,7 @@
 # Kanıt kapısı 2 · sahibin onayına (2026-09-30)
 
+**ONAYLANDI (sahip, 2026-09-30: "onaylıyorum").**
+
 PubMed özetleri iki ajan ve iki bağımsız inceleyiciyle açıldı (`kanit-2-kaynaklar.md`, `kanit-2-metinler.md`). Kural:
 kişi sayısı özette olmayan kaynak girmez (Balban ve Klimek'e uygulanan kural).
 
