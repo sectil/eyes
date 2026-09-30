@@ -62,3 +62,27 @@ Sonraki aşamaya (metin + ses + tasarım iş akışı) bu dosya olduğu gibi ver
 11. "önerini onaylıyorum" (2026-09-30) → C adımındaki üç hata düzeltmesi kalıyor: 5. gün raporunda fiil gerçek değişimden
     seçilir (artan gerginlik "azaldı" yazılmaz), PDF'te güven aralığı değerle aynı yönde, Gelişim kutucuğunda "düşük daha
     iyi" ölçüde puanın gerçek değişimi (0b076ba).
+
+## Sahibin 2026-09-30 mesajları (kelimesi kelimesine, ilk bölüm seslendirmesi sırasında)
+12. "eğer kaliteyi ve akışı bozmadan devam ettirelebiliyorsa Eleven v4 launch special 199,3 B credits free (13d 0h left)
+    Try v4 bu şekilde bir kampanya var herhalde onu kullnablirsin. açıkcası ne işe yaradoğını bilmiyorum işimizeyarıyorsa
+    bunu kullanlım."
+    → Durum: seslendirme zaten `eleven_v4` ile (SPEC.v3 §2). v4 çekimlerinde ElevenLabs durum yanıtı fiyatı 0 kredi
+      gösteriyor, ama çekimler ücretli: hesabın API sayfası 133.485 kredi kullanılmış gösterdi (madde 14), defter aynı anda
+      132.910 idi ve bunun ≈ 48 bini konuşma. Kampanya bu API çağrılarına uygulanmadı. Akış değişmedi.
+13. "kreidmiz kalmadı 😞 ne kadarkredi lazım kalan işler için" → kalan ücretli işler ≈ 2,6 bin kredi hesaplandı (Scribe
+    164, müzik vokal denetimi 2.145, SPEC.v3 §6.3 yeniden çekimleri 253). "kredi ekledim." → iş sürdü.
+14. "kredimiz yeterli mi" (ekran görüntüsü: ElevenAPI 133.485 / 186.000 kredi) → evet: kalan ≈ 52,5 bin; Ders 2, 3, 5
+    için ücretli iş kalmadı; Ders 1'in sayım kilidi çözümü sahibin seçimine göre 0 ile ≈ 5 bin arası.
+15. Seçimler (2026-09-30, soru kartı): Ders 1 için "Üç noktasız yeniden seslendir"; 5 saniye kuralı için "Bana gönder,
+    ben dinlerim" → Ders 2, 3, 5 dosyaları "5 sn sınaması yapılmadı" notuyla sahibe gönderildi; ilk 5 saniyeyi sahip
+    değerlendirir. Üç noktasız deneme (car.say1, ≈ 300 kredi) sorunu çözmedi: konuşma yalnız 0,03–0,1 sn kısaldı; fazlalık
+    parçaların sonundaki ≈ 0,25 sn sessizlikti (ilk soruda bu ölçülmeden yanlış anlatılmıştı).
+16. Seçim (2026-09-30, ikinci soru kartı): "Sessizliği at + 'ver…' tabanı 0,5 sn" → Ders 1'in nefes kilitli 87 parçasında
+    sessiz baş ve son atıldı (tepenin 40 dB altı; 20 ms baş payı, 40 ms kararma; `render/tools/kilit_kirp_ib.py`);
+    `b/ders1/ders1.lesson.json`'da periyodu 1,2 sn olan 8 "ver…" klibinin `gapFloor` değeri 0,6 → 0,5 sn.
+17. "Sesler iyi gibi ben bir sorun görmedim gibi" (2026-09-30, Ders 2, 3, 5 dosyalarını dinledikten sonra) → sahibin kulak
+    değerlendirmesi: sorun bildirilmedi. Ders 1 dosyaları ayrıca gönderilecek.
+18. "şuanda düzgün oalrak alalım ben fark etmedim.. eğer sorun olursa  sonra düzeltme isterim. tamam diyorum" (2026-09-30,
+    Ders 1 dosyalarından sonra) → Ders 1 kabul edildi; ilk bölümün dört dersinin sesleri sahip kulağından geçti. Sonradan
+    fark edilen sorun düzeltme olarak ele alınır.

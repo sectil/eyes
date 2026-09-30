@@ -1,0 +1,50 @@
+{
+ "file": "el-zitlik-b.wav",
+ "src_sr": 44100,
+ "src_channels": 2,
+ "duration_s": 120.0,
+ "lufs_i": -32.35,
+ "true_peak_dbtp": -18.88,
+ "sample_peak_dbfs": -18.9,
+ "clipped_samples": 0,
+ "dc": [
+  -1.5e-05,
+  -1.5e-05
+ ],
+ "lr_corr": -0.059,
+ "lead_silence_ms": 534.6,
+ "tail_silence_ms": 2592.0,
+ "flatness": {
+  "st_lufs_p5": -34.22,
+  "st_lufs_p50": -32.52,
+  "st_lufs_p95": -30.07,
+  "spread_p5_p95_lu": 4.14,
+  "st_std_lu": 1.32,
+  "range_full_lu": 37.05,
+  "max_rise_10s_lu": 11.54,
+  "crescendo_10s_spans": 1,
+  "verdict": "PASS"
+ },
+ "onsets": {
+  "pulse_clarity": 0.051,
+  "percussive_share": 0.02,
+  "events_per_min": 239.0,
+  "strong_onsets_per_min": 0.0,
+  "flux_mean_db": 0.8516,
+  "flux_median_db": 0.8396,
+  "flux_p99_db": 1.598,
+  "flux_max_db": 2.078,
+  "flux_max_at_s": 89.89
+ },
+ "clicks_hf": {
+  "count": 0,
+  "first": []
+ },
+ "spectrum": {
+  "centroid_hz": 661.2,
+  "share_lt300": 0.184,
+  "share_500_4k": 0.606,
+  "share_1k5_4k": 0.0451,
+  "share_gt8k": 0.0
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "node_id": "0CHDlTqlYahgv96u3vYx",
+ "session_ids": [
+  "UDYjRwIGbbxNjnkZJPU6",
+  "byWM4ZCuIitfStYquHTt",
+  "KalCDYydGkRiYj9gaR3D"
+ ],
+ "requested_at": "2026-09-30T07:09:29.511Z",
+ "tts": "Ellerinde ve ayaklarında hafif bir sıcaklık olabilir.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "UDYjRwIGbbxNjnkZJPU6",
+   "generation_id": "7DWX5D0AAyFkRjksgVlK",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/UDYjRwIGbbxNjnkZJPU6/7DWX5D0AAyFkRjksgVlK/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070935Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=376a11a3e04d2e6ad38a2db8fdb2dbca2c4de5087645dbb866013e48f9a33705e5cef2db877980e5b9c37a36f53bb1ddf33a3321c49b3713fa9b9d4b151b798612d51e8374b982a38687cebd8039b2c445c2589e7f4adb97ae64f6569b10e21401db11d34de75895aeba43ec89a222a6ee18b1acfa9e1c1a67553e942177d32bafcbac9387aba17db8dbdba2843ceec0d02c590115b2b89c13ece011e8e43fdb4e36da38f3d86a5522d5ef192de5dbbb3696cde4206d237905fff687edb71c3de5ee149e58ecb998489e55bf646a61431527c765838d92c75c4d2107773b210be3f08a0f1a45dd38ad1ec866f7ad50e3ab264841c75eeabd6b4422884e12c43f",
+   "duration_secs": 3.76,
+   "prompt": "Ellerinde ve ayaklarında hafif bir sıcaklık olabilir.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "byWM4ZCuIitfStYquHTt",
+   "generation_id": "WC4OOHaoCESCnSuP7hHG",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/byWM4ZCuIitfStYquHTt/WC4OOHaoCESCnSuP7hHG/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070936Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=51dd837aeccbdd5fd06237b398db15e8254e19bc4b378c24eb88d19498cfec95208b0cc459726c72d037ef27b590c71bfd8bd69ccd1750977540988f42cb606f2f472e7a792617dba26b5c2009b488964303b99956cad3f97eaa9b694a85f92d58fc1c0d3a4cc53a8006795992fd90e50cf4823155ed7fbf99b49d7d61cf010adb27cb3c5e1bbca1e2aba378649ca2342fad3c10357b96e2671133b9a236f3d52a468ac01b910aa853ad5ec6847667824bd8c6acf0f6defd9aafce13eb12544258ac3a5c0273569d32ee70879cc23bf5f0a444b1b340ac7fbff00ab0c562fdc9eba32566fa5c5578f82a62d655c9753249a87e38dd0355674a01b840d5032d0f",
+   "duration_secs": 3.84,
+   "prompt": "Ellerinde ve ayaklarında hafif bir sıcaklık olabilir.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "KalCDYydGkRiYj9gaR3D",
+   "generation_id": "0hehxcBpuZbOAKYQzRsE",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/KalCDYydGkRiYj9gaR3D/0hehxcBpuZbOAKYQzRsE/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070936Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=9fb4a75ab584c6b8273f74a0b2dc33941f6545cf21402e409b532c53b3ce05766c02beb76d6d728c1b901249889761088400186039e2073ddcad658f364e9d92cb2d9f7581e8e6e2856d495c6f19527a59fafa1b2fe38e5f798d7a0dac1ad9eb209dcd6d5033eb27eb7cf727655edf2085f6d74d67b0a860cf78cf3a507336ca5b40fdfdcd7b75b27b70a782759840f91aff584b32b5a87ef94a124425ad1514e16448db7631773956ac2d50ae503334155ea625710ee6dd49b815a0aa597d0434656fa1a7646885f977e1a119b836c9a01d402b4bcefaa71c490429872d1479779846296fd8db99a559b3cce88f3c965976459d1f1120d90580246218ee7620",
+   "duration_secs": 3.84,
+   "prompt": "Ellerinde ve ayaklarında hafif bir sıcaklık olabilir.",
+   "kind": "audio"
+  }
+ ]
+}

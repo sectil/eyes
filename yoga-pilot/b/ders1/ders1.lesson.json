@@ -2282,7 +2282,7 @@
       "pref": 1.2,
       "max": 1.2
      },
-     "gapFloor": 0.6,
+     "gapFloor": 0.5,
      "carrier": {
       "id": "car.c1a",
       "index": 3
@@ -2414,7 +2414,7 @@
       "pref": 1.2,
       "max": 1.2
      },
-     "gapFloor": 0.6,
+     "gapFloor": 0.5,
      "carrier": {
       "id": "car.c1a",
       "index": 5
@@ -2550,7 +2550,7 @@
       "pref": 1.2,
       "max": 1.2
      },
-     "gapFloor": 0.6,
+     "gapFloor": 0.5,
      "carrier": {
       "id": "car.c1a",
       "index": 7
@@ -2777,7 +2777,7 @@
       "pref": 1.2,
       "max": 1.2
      },
-     "gapFloor": 0.6,
+     "gapFloor": 0.5,
      "carrier": {
       "id": "car.c1b",
       "index": 3
@@ -3014,7 +3014,7 @@
       "pref": 1.2,
       "max": 1.2
      },
-     "gapFloor": 0.6,
+     "gapFloor": 0.5,
      "carrier": {
       "id": "car.c1b",
       "index": 7
@@ -3151,7 +3151,7 @@
       "pref": 1.2,
       "max": 1.2
      },
-     "gapFloor": 0.6,
+     "gapFloor": 0.5,
      "carrier": {
       "id": "car.c1c",
       "index": 1
@@ -3289,7 +3289,7 @@
       "pref": 1.2,
       "max": 1.2
      },
-     "gapFloor": 0.6,
+     "gapFloor": 0.5,
      "carrier": {
       "id": "car.c1c",
       "index": 3
@@ -4230,7 +4230,7 @@
       "pref": 1.2,
       "max": 1.2
      },
-     "gapFloor": 0.6,
+     "gapFloor": 0.5,
      "carrier": {
       "id": "car.c2a",
       "index": 8

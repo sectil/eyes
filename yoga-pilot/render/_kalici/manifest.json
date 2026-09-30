@@ -1573,5 +1573,3092 @@
   "ch": 1,
   "max_abs_err": 5.960464477539063e-08,
   "peak": 0.5499712228775024
+ },
+ {
+  "src": "sel/hoc/d02/a.gozler.kisa/a.gozler.kisa.wav",
+  "dst": "sel/hoc/d02/a.gozler.kisa/a.gozler.kisa.flac",
+  "sr": 44100,
+  "frames": 149311,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6121177077293396
+ },
+ {
+  "src": "sel/hoc/d02/a.kolay.kisa/a.kolay.kisa.wav",
+  "dst": "sel/hoc/d02/a.kolay.kisa/a.kolay.kisa.flac",
+  "sr": 44100,
+  "frames": 122006,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6151939630508423
+ },
+ {
+  "src": "sel/hoc/d02/c3.agir/c3.agir#1.wav",
+  "dst": "sel/hoc/d02/c3.agir/c3.agir#1.flac",
+  "sr": 44100,
+  "frames": 94978,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.47855034470558167
+ },
+ {
+  "src": "sel/hoc/d02/c3.agir/c3.agir#2.wav",
+  "dst": "sel/hoc/d02/c3.agir/c3.agir#2.flac",
+  "sr": 44100,
+  "frames": 147610,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5499350428581238
+ },
+ {
+  "src": "sel/hoc/d02/c3.birak/c3.birak#1.wav",
+  "dst": "sel/hoc/d02/c3.birak/c3.birak#1.flac",
+  "sr": 44100,
+  "frames": 81806,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4680156111717224
+ },
+ {
+  "src": "sel/hoc/d02/c3.birak/c3.birak#2.wav",
+  "dst": "sel/hoc/d02/c3.birak/c3.birak#2.flac",
+  "sr": 44100,
+  "frames": 84604,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5289596319198608
+ },
+ {
+  "src": "sel/hoc/d02/c3.gelmezse/c3.gelmezse#1.wav",
+  "dst": "sel/hoc/d02/c3.gelmezse/c3.gelmezse#1.flac",
+  "sr": 44100,
+  "frames": 96883,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5692799091339111
+ },
+ {
+  "src": "sel/hoc/d02/c3.gelmezse/c3.gelmezse#2.wav",
+  "dst": "sel/hoc/d02/c3.gelmezse/c3.gelmezse#2.flac",
+  "sr": 44100,
+  "frames": 87162,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.45026564598083496
+ },
+ {
+  "src": "sel/hoc/d02/c3.hafif/c3.hafif.wav",
+  "dst": "sel/hoc/d02/c3.hafif/c3.hafif.flac",
+  "sr": 44100,
+  "frames": 107268,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.554343044757843
+ },
+ {
+  "src": "sel/hoc/d02/c4.acele/c4.acele.wav",
+  "dst": "sel/hoc/d02/c4.acele/c4.acele.flac",
+  "sr": 44100,
+  "frames": 101908,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.517306923866272
+ },
+ {
+  "src": "sel/hoc/d02/c4.adim/c4.adim.wav",
+  "dst": "sel/hoc/d02/c4.adim/c4.adim.flac",
+  "sr": 44100,
+  "frames": 150944,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5628252029418945
+ },
+ {
+  "src": "sel/hoc/d02/c4.donus1/c4.donus1#1.wav",
+  "dst": "sel/hoc/d02/c4.donus1/c4.donus1#1.flac",
+  "sr": 44100,
+  "frames": 65245,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.47943350672721863
+ },
+ {
+  "src": "sel/hoc/d02/c4.donus1/c4.donus1#2.wav",
+  "dst": "sel/hoc/d02/c4.donus1/c4.donus1#2.flac",
+  "sr": 44100,
+  "frames": 106308,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.613098680973053
+ },
+ {
+  "src": "sel/hoc/d02/c4.geride/c4.geride.wav",
+  "dst": "sel/hoc/d02/c4.geride/c4.geride.flac",
+  "sr": 44100,
+  "frames": 161847,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5716391205787659
+ },
+ {
+  "src": "sel/hoc/d02/c4.koku/c4.koku.wav",
+  "dst": "sel/hoc/d02/c4.koku/c4.koku.flac",
+  "sr": 44100,
+  "frames": 121433,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.587340235710144
+ },
+ {
+  "src": "sel/hoc/d02/c4.pencere/c4.pencere#1.wav",
+  "dst": "sel/hoc/d02/c4.pencere/c4.pencere#1.flac",
+  "sr": 44100,
+  "frames": 81703,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5677114725112915
+ },
+ {
+  "src": "sel/hoc/d02/c4.pencere/c4.pencere#2.wav",
+  "dst": "sel/hoc/d02/c4.pencere/c4.pencere#2.flac",
+  "sr": 44100,
+  "frames": 99741,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5462947487831116
+ },
+ {
+  "src": "sel/hoc/d02/c4.pencere/c4.pencere#3.wav",
+  "dst": "sel/hoc/d02/c4.pencere/c4.pencere#3.flac",
+  "sr": 44100,
+  "frames": 74174,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.63713538646698
+ },
+ {
+  "src": "sel/hoc/d02/c4.ses.kiyi/c4.ses.kiyi.wav",
+  "dst": "sel/hoc/d02/c4.ses.kiyi/c4.ses.kiyi.flac",
+  "sr": 44100,
+  "frames": 136893,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5676227807998657
+ },
+ {
+  "src": "sel/hoc/d02/c4.ses.orman/c4.ses.orman.wav",
+  "dst": "sel/hoc/d02/c4.ses.orman/c4.ses.orman.flac",
+  "sr": 44100,
+  "frames": 139570,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6744158864021301
+ },
+ {
+  "src": "sel/hoc/d02/c4.x.istemiyor/c4.x.istemiyor.wav",
+  "dst": "sel/hoc/d02/c4.x.istemiyor/c4.x.istemiyor.flac",
+  "sr": 44100,
+  "frames": 117577,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4667928218841553
+ },
+ {
+  "src": "sel/hoc/d02/c4.yerles/c4.yerles.wav",
+  "dst": "sel/hoc/d02/c4.yerles/c4.yerles.flac",
+  "sr": 44100,
+  "frames": 137238,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.560331404209137
+ },
+ {
+  "src": "sel/hoc/d02/car.agir/c3.a1.wav",
+  "dst": "sel/hoc/d02/car.agir/c3.a1.flac",
+  "sr": 44100,
+  "frames": 67814,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.3958841562271118
+ },
+ {
+  "src": "sel/hoc/d02/car.agir/c3.a2.wav",
+  "dst": "sel/hoc/d02/car.agir/c3.a2.flac",
+  "sr": 44100,
+  "frames": 73237,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5781980156898499
+ },
+ {
+  "src": "sel/hoc/d02/car.agir/c3.a2b.wav",
+  "dst": "sel/hoc/d02/car.agir/c3.a2b.flac",
+  "sr": 44100,
+  "frames": 62365,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6443401575088501
+ },
+ {
+  "src": "sel/hoc/d02/car.agir/c3.a2c.wav",
+  "dst": "sel/hoc/d02/car.agir/c3.a2c.flac",
+  "sr": 44100,
+  "frames": 69308,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5302165746688843
+ },
+ {
+  "src": "sel/hoc/d02/car.agir/c3.a3.wav",
+  "dst": "sel/hoc/d02/car.agir/c3.a3.flac",
+  "sr": 44100,
+  "frames": 88830,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5445734858512878
+ },
+ {
+  "src": "sel/hoc/d02/car.hafif/c3.h1.wav",
+  "dst": "sel/hoc/d02/car.hafif/c3.h1.flac",
+  "sr": 44100,
+  "frames": 65657,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.528404176235199
+ },
+ {
+  "src": "sel/hoc/d02/car.hafif/c3.h2.wav",
+  "dst": "sel/hoc/d02/car.hafif/c3.h2.flac",
+  "sr": 44100,
+  "frames": 70195,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5816212892532349
+ },
+ {
+  "src": "sel/hoc/d02/car.hafif/c3.h2b.wav",
+  "dst": "sel/hoc/d02/car.hafif/c3.h2b.flac",
+  "sr": 44100,
+  "frames": 68137,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6569287180900574
+ },
+ {
+  "src": "sel/hoc/d02/car.hafif/c3.h2c.wav",
+  "dst": "sel/hoc/d02/car.hafif/c3.h2c.flac",
+  "sr": 44100,
+  "frames": 66506,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5430583357810974
+ },
+ {
+  "src": "sel/hoc/d02/car.hafif/c3.h3.wav",
+  "dst": "sel/hoc/d02/car.hafif/c3.h3.flac",
+  "sr": 44100,
+  "frames": 90734,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6885992288589478
+ },
+ {
+  "src": "sel/hoc/d02/d.bekle/d.bekle.wav",
+  "dst": "sel/hoc/d02/d.bekle/d.bekle.flac",
+  "sr": 44100,
+  "frames": 205521,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5531691312789917
+ },
+ {
+  "src": "sel/hoc/d02/d.goz/d.goz.wav",
+  "dst": "sel/hoc/d02/d.goz/d.goz.flac",
+  "sr": 44100,
+  "frames": 161601,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6465075612068176
+ },
+ {
+  "src": "sel/hoc/d02/d.kalk/d.kalk.wav",
+  "dst": "sel/hoc/d02/d.kalk/d.kalk.flac",
+  "sr": 44100,
+  "frames": 169367,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5095062255859375
+ },
+ {
+  "src": "sel/hoc/d02/g.ilk/g.ilk.wav",
+  "dst": "sel/hoc/d02/g.ilk/g.ilk.flac",
+  "sr": 44100,
+  "frames": 303855,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5492126941680908
+ },
+ {
+  "src": "sel/hoc/d02/k.hizli.his/k.hizli.his#1.wav",
+  "dst": "sel/hoc/d02/k.hizli.his/k.hizli.his#1.flac",
+  "sr": 44100,
+  "frames": 87983,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4915122389793396
+ },
+ {
+  "src": "sel/hoc/d02/k.hizli.his/k.hizli.his#2.wav",
+  "dst": "sel/hoc/d02/k.hizli.his/k.hizli.his#2.flac",
+  "sr": 44100,
+  "frames": 82980,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5138950347900391
+ },
+ {
+  "src": "sel/hoc/d02/k.hizli.imge/k.hizli.imge#1.wav",
+  "dst": "sel/hoc/d02/k.hizli.imge/k.hizli.imge#1.flac",
+  "sr": 44100,
+  "frames": 101746,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6806681752204895
+ },
+ {
+  "src": "sel/hoc/d02/k.hizli.imge/k.hizli.imge#2.wav",
+  "dst": "sel/hoc/d02/k.hizli.imge/k.hizli.imge#2.flac",
+  "sr": 44100,
+  "frames": 78093,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.49515023827552795
+ },
+ {
+  "src": "sel/hoc/d02/n1.sec/n1.sec#1.wav",
+  "dst": "sel/hoc/d02/n1.sec/n1.sec#1.flac",
+  "sr": 44100,
+  "frames": 131258,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5019592642784119
+ },
+ {
+  "src": "sel/hoc/d02/n1.sec/n1.sec#2.wav",
+  "dst": "sel/hoc/d02/n1.sec/n1.sec#2.flac",
+  "sr": 44100,
+  "frames": 235155,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4585804343223572
+ },
+ {
+  "src": "sel/hoc/d02/n1.soyle.kisa/n1.soyle.kisa.wav",
+  "dst": "sel/hoc/d02/n1.soyle.kisa/n1.soyle.kisa.flac",
+  "sr": 44100,
+  "frames": 114979,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5101270079612732
+ },
+ {
+  "src": "sel/hoc/d02/n2.hatirla.kisa/n2.hatirla.kisa.wav",
+  "dst": "sel/hoc/d02/n2.hatirla.kisa/n2.hatirla.kisa.flac",
+  "sr": 44100,
+  "frames": 149280,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5209808945655823
+ },
+ {
+  "src": "sel/hoc/d02/n2.hatirla/n2.hatirla#1.wav",
+  "dst": "sel/hoc/d02/n2.hatirla/n2.hatirla#1.flac",
+  "sr": 44100,
+  "frames": 179720,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5578092932701111
+ },
+ {
+  "src": "sel/hoc/d02/n2.hatirla/n2.hatirla#2.wav",
+  "dst": "sel/hoc/d02/n2.hatirla/n2.hatirla#2.flac",
+  "sr": 44100,
+  "frames": 205832,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6057767868041992
+ },
+ {
+  "src": "sel/hoc/d01/a.acilis/a.acilis.wav",
+  "dst": "sel/hoc/d01/a.acilis/a.acilis.flac",
+  "sr": 44100,
+  "frames": 173598,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4987584948539734
+ },
+ {
+  "src": "sel/hoc/d01/a.durus.kisa/a.durus.kisa.wav",
+  "dst": "sel/hoc/d01/a.durus.kisa/a.durus.kisa.flac",
+  "sr": 44100,
+  "frames": 298884,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5215480923652649
+ },
+ {
+  "src": "sel/hoc/d01/a.durus/a.durus.wav",
+  "dst": "sel/hoc/d01/a.durus/a.durus.flac",
+  "sr": 44100,
+  "frames": 242323,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.7275405526161194
+ },
+ {
+  "src": "sel/hoc/d01/a.eller/a.eller.wav",
+  "dst": "sel/hoc/d01/a.eller/a.eller.flac",
+  "sr": 44100,
+  "frames": 155978,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.44614529609680176
+ },
+ {
+  "src": "sel/hoc/d01/a.gozler/a.gozler.wav",
+  "dst": "sel/hoc/d01/a.gozler/a.gozler.flac",
+  "sr": 44100,
+  "frames": 299804,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6212804317474365
+ },
+ {
+  "src": "sel/hoc/d01/a.izin/a.izin.wav",
+  "dst": "sel/hoc/d01/a.izin/a.izin.flac",
+  "sr": 44100,
+  "frames": 231366,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6308112144470215
+ },
+ {
+  "src": "sel/hoc/d01/a.karar/a.karar.wav",
+  "dst": "sel/hoc/d01/a.karar/a.karar.flac",
+  "sr": 44100,
+  "frames": 192375,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6596990823745728
+ },
+ {
+  "src": "sel/hoc/d01/a.kolay/a.kolay.wav",
+  "dst": "sel/hoc/d01/a.kolay/a.kolay.flac",
+  "sr": 44100,
+  "frames": 197838,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6618301868438721
+ },
+ {
+  "src": "sel/hoc/d01/a.omuz/a.omuz.wav",
+  "dst": "sel/hoc/d01/a.omuz/a.omuz.flac",
+  "sr": 44100,
+  "frames": 159492,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5545804500579834
+ },
+ {
+  "src": "sel/hoc/d01/c1.anahtar1/c1.anahtar1.wav",
+  "dst": "sel/hoc/d01/c1.anahtar1/c1.anahtar1.flac",
+  "sr": 44100,
+  "frames": 180980,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5006674528121948
+ },
+ {
+  "src": "sel/hoc/d01/c1.burun/c1.burun.wav",
+  "dst": "sel/hoc/d01/c1.burun/c1.burun.flac",
+  "sr": 44100,
+  "frames": 193655,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5511138439178467
+ },
+ {
+  "src": "sel/hoc/d01/c1.d10.s/c1.d10.s.wav",
+  "dst": "sel/hoc/d01/c1.d10.s/c1.d10.s.flac",
+  "sr": 44100,
+  "frames": 58212,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.484064519405365
+ },
+ {
+  "src": "sel/hoc/d01/c1.d2.s/c1.d2.s.wav",
+  "dst": "sel/hoc/d01/c1.d2.s/c1.d2.s.flac",
+  "sr": 44100,
+  "frames": 115101,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5287671685218811
+ },
+ {
+  "src": "sel/hoc/d01/c1.d3.s/c1.d3.s.wav",
+  "dst": "sel/hoc/d01/c1.d3.s/c1.d3.s.flac",
+  "sr": 44100,
+  "frames": 139356,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5605599284172058
+ },
+ {
+  "src": "sel/hoc/d01/c1.d4.s/c1.d4.s.wav",
+  "dst": "sel/hoc/d01/c1.d4.s/c1.d4.s.flac",
+  "sr": 44100,
+  "frames": 79380,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4849034547805786
+ },
+ {
+  "src": "sel/hoc/d01/c1.d6.s/c1.d6.s.wav",
+  "dst": "sel/hoc/d01/c1.d6.s/c1.d6.s.flac",
+  "sr": 44100,
+  "frames": 145971,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5924102067947388
+ },
+ {
+  "src": "sel/hoc/d01/c1.d8.s/c1.d8.s.wav",
+  "dst": "sel/hoc/d01/c1.d8.s/c1.d8.s.flac",
+  "sr": 44100,
+  "frames": 113778,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5394940376281738
+ },
+ {
+  "src": "sel/hoc/d01/c1.d9.s/c1.d9.s.wav",
+  "dst": "sel/hoc/d01/c1.d9.s/c1.d9.s.flac",
+  "sr": 44100,
+  "frames": 119070,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5391896963119507
+ },
+ {
+  "src": "sel/hoc/d01/c1.guven/c1.guven.wav",
+  "dst": "sel/hoc/d01/c1.guven/c1.guven.flac",
+  "sr": 44100,
+  "frames": 226808,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5080544948577881
+ },
+ {
+  "src": "sel/hoc/d01/c1.izle/c1.izle.wav",
+  "dst": "sel/hoc/d01/c1.izle/c1.izle.flac",
+  "sr": 44100,
+  "frames": 207880,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.555884838104248
+ },
+ {
+  "src": "sel/hoc/d01/c1.ritim.kisa/c1.ritim.kisa.wav",
+  "dst": "sel/hoc/d01/c1.ritim.kisa/c1.ritim.kisa.flac",
+  "sr": 44100,
+  "frames": 213946,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6313841938972473
+ },
+ {
+  "src": "sel/hoc/d01/c1.ritim/c1.ritim#1.wav",
+  "dst": "sel/hoc/d01/c1.ritim/c1.ritim#1.flac",
+  "sr": 44100,
+  "frames": 228154,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6778283715248108
+ },
+ {
+  "src": "sel/hoc/d01/c1.ritim/c1.ritim#2.wav",
+  "dst": "sel/hoc/d01/c1.ritim/c1.ritim#2.flac",
+  "sr": 44100,
+  "frames": 81277,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5298967957496643
+ },
+ {
+  "src": "sel/hoc/d01/c1.ses/c1.ses.wav",
+  "dst": "sel/hoc/d01/c1.ses/c1.ses.flac",
+  "sr": 44100,
+  "frames": 177266,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5835822224617004
+ },
+ {
+  "src": "sel/hoc/d01/c1.uzunluk/c1.uzunluk#1.wav",
+  "dst": "sel/hoc/d01/c1.uzunluk/c1.uzunluk#1.flac",
+  "sr": 44100,
+  "frames": 106285,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5896279811859131
+ },
+ {
+  "src": "sel/hoc/d01/c1.uzunluk/c1.uzunluk#2.wav",
+  "dst": "sel/hoc/d01/c1.uzunluk/c1.uzunluk#2.flac",
+  "sr": 44100,
+  "frames": 144663,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.48021912574768066
+ },
+ {
+  "src": "sel/hoc/d01/c2.ad/c2.ad.wav",
+  "dst": "sel/hoc/d01/c2.ad/c2.ad.flac",
+  "sr": 44100,
+  "frames": 98767,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5867337584495544
+ },
+ {
+  "src": "sel/hoc/d01/c2.anahtar2/c2.anahtar2.wav",
+  "dst": "sel/hoc/d01/c2.anahtar2/c2.anahtar2.flac",
+  "sr": 44100,
+  "frames": 114295,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5924164056777954
+ },
+ {
+  "src": "sel/hoc/d01/c2.d3.s/c2.d3.s.wav",
+  "dst": "sel/hoc/d01/c2.d3.s/c2.d3.s.flac",
+  "sr": 44100,
+  "frames": 110250,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5707626342773438
+ },
+ {
+  "src": "sel/hoc/d01/c2.dogal/c2.dogal.wav",
+  "dst": "sel/hoc/d01/c2.dogal/c2.dogal.flac",
+  "sr": 44100,
+  "frames": 254217,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6031761765480042
+ },
+ {
+  "src": "sel/hoc/d01/c2.guven/c2.guven.wav",
+  "dst": "sel/hoc/d01/c2.guven/c2.guven.flac",
+  "sr": 44100,
+  "frames": 211324,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.515876054763794
+ },
+ {
+  "src": "sel/hoc/d01/c2.nasil/c2.nasil#1.wav",
+  "dst": "sel/hoc/d01/c2.nasil/c2.nasil#1.flac",
+  "sr": 44100,
+  "frames": 257460,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5440287590026855
+ },
+ {
+  "src": "sel/hoc/d01/c2.nasil/c2.nasil#2.wav",
+  "dst": "sel/hoc/d01/c2.nasil/c2.nasil#2.flac",
+  "sr": 44100,
+  "frames": 235342,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5830904841423035
+ },
+ {
+  "src": "sel/hoc/d01/c2.tur2/c2.tur2.wav",
+  "dst": "sel/hoc/d01/c2.tur2/c2.tur2.flac",
+  "sr": 44100,
+  "frames": 167285,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5373267531394958
+ },
+ {
+  "src": "sel/hoc/d01/c3.ad/c3.ad.wav",
+  "dst": "sel/hoc/d01/c3.ad/c3.ad.flac",
+  "sr": 44100,
+  "frames": 212549,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6222241520881653
+ },
+ {
+  "src": "sel/hoc/d01/c3.agiz/c3.agiz.wav",
+  "dst": "sel/hoc/d01/c3.agiz/c3.agiz.flac",
+  "sr": 44100,
+  "frames": 197518,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.45556315779685974
+ },
+ {
+  "src": "sel/hoc/d01/c3.anahtar3/c3.anahtar3.wav",
+  "dst": "sel/hoc/d01/c3.anahtar3/c3.anahtar3.flac",
+  "sr": 44100,
+  "frames": 63571,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6682568192481995
+ },
+ {
+  "src": "sel/hoc/d01/c3.dogal/c3.dogal.wav",
+  "dst": "sel/hoc/d01/c3.dogal/c3.dogal.flac",
+  "sr": 44100,
+  "frames": 199025,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4897219240665436
+ },
+ {
+  "src": "sel/hoc/d01/c3.el/c3.el.wav",
+  "dst": "sel/hoc/d01/c3.el/c3.el.flac",
+  "sr": 44100,
+  "frames": 197174,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5379729270935059
+ },
+ {
+  "src": "sel/hoc/d01/c3.eller/c3.eller.wav",
+  "dst": "sel/hoc/d01/c3.eller/c3.eller.flac",
+  "sr": 44100,
+  "frames": 193925,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4784621000289917
+ },
+ {
+  "src": "sel/hoc/d01/c3.kisa/c3.kisa.wav",
+  "dst": "sel/hoc/d01/c3.kisa/c3.kisa.flac",
+  "sr": 44100,
+  "frames": 185412,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6771448850631714
+ },
+ {
+  "src": "sel/hoc/d01/c3.nasil/c3.nasil.wav",
+  "dst": "sel/hoc/d01/c3.nasil/c3.nasil.flac",
+  "sr": 44100,
+  "frames": 275297,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5726554989814758
+ },
+ {
+  "src": "sel/hoc/d01/c3.sessiz/c3.sessiz.wav",
+  "dst": "sel/hoc/d01/c3.sessiz/c3.sessiz.flac",
+  "sr": 44100,
+  "frames": 182452,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5044477581977844
+ },
+ {
+  "src": "sel/hoc/d01/c3.sessizlik/c3.sessizlik#1.wav",
+  "dst": "sel/hoc/d01/c3.sessizlik/c3.sessizlik#1.flac",
+  "sr": 44100,
+  "frames": 52750,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5676489472389221
+ },
+ {
+  "src": "sel/hoc/d01/c3.sessizlik/c3.sessizlik#2.wav",
+  "dst": "sel/hoc/d01/c3.sessizlik/c3.sessizlik#2.flac",
+  "sr": 44100,
+  "frames": 132005,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5765135884284973
+ },
+ {
+  "src": "sel/hoc/d01/c3.titresim/c3.titresim.wav",
+  "dst": "sel/hoc/d01/c3.titresim/c3.titresim.flac",
+  "sr": 44100,
+  "frames": 223181,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.571227490901947
+ },
+ {
+  "src": "sel/hoc/d01/car.c1a/c1.d1.al.wav",
+  "dst": "sel/hoc/d01/car.c1a/c1.d1.al.flac",
+  "sr": 44100,
+  "frames": 26019,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.45058417320251465
+ },
+ {
+  "src": "sel/hoc/d01/car.c1a/c1.d1.ver.wav",
+  "dst": "sel/hoc/d01/car.c1a/c1.d1.ver.flac",
+  "sr": 44100,
+  "frames": 27342,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6997666358947754
+ },
+ {
+  "src": "sel/hoc/d01/car.c1a/c1.d2.al.wav",
+  "dst": "sel/hoc/d01/car.c1a/c1.d2.al.flac",
+  "sr": 44100,
+  "frames": 29106,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5184788703918457
+ },
+ {
+  "src": "sel/hoc/d01/car.c1a/c1.d2.ver.wav",
+  "dst": "sel/hoc/d01/car.c1a/c1.d2.ver.flac",
+  "sr": 44100,
+  "frames": 28224,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.49577173590660095
+ },
+ {
+  "src": "sel/hoc/d01/car.c1a/c1.d3.al.wav",
+  "dst": "sel/hoc/d01/car.c1a/c1.d3.al.flac",
+  "sr": 44100,
+  "frames": 26460,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4378090798854828
+ },
+ {
+  "src": "sel/hoc/d01/car.c1a/c1.d3.ver.wav",
+  "dst": "sel/hoc/d01/car.c1a/c1.d3.ver.flac",
+  "sr": 44100,
+  "frames": 27783,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6135064363479614
+ },
+ {
+  "src": "sel/hoc/d01/car.c1a/c1.d4.al.wav",
+  "dst": "sel/hoc/d01/car.c1a/c1.d4.al.flac",
+  "sr": 44100,
+  "frames": 27783,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4877927303314209
+ },
+ {
+  "src": "sel/hoc/d01/car.c1a/c1.d4.ver.wav",
+  "dst": "sel/hoc/d01/car.c1a/c1.d4.ver.flac",
+  "sr": 44100,
+  "frames": 28224,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5430118441581726
+ },
+ {
+  "src": "sel/hoc/d01/car.c1b/c1.d5.al.wav",
+  "dst": "sel/hoc/d01/car.c1b/c1.d5.al.flac",
+  "sr": 44100,
+  "frames": 21609,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5351251363754272
+ },
+ {
+  "src": "sel/hoc/d01/car.c1b/c1.d5.ver.wav",
+  "dst": "sel/hoc/d01/car.c1b/c1.d5.ver.flac",
+  "sr": 44100,
+  "frames": 28224,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.691815197467804
+ },
+ {
+  "src": "sel/hoc/d01/car.c1b/c1.d6.al.wav",
+  "dst": "sel/hoc/d01/car.c1b/c1.d6.al.flac",
+  "sr": 44100,
+  "frames": 23373,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6449718475341797
+ },
+ {
+  "src": "sel/hoc/d01/car.c1b/c1.d6.ver.wav",
+  "dst": "sel/hoc/d01/car.c1b/c1.d6.ver.flac",
+  "sr": 44100,
+  "frames": 27783,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6195169687271118
+ },
+ {
+  "src": "sel/hoc/d01/car.c1b/c1.d7.al.wav",
+  "dst": "sel/hoc/d01/car.c1b/c1.d7.al.flac",
+  "sr": 44100,
+  "frames": 23814,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.451614648103714
+ },
+ {
+  "src": "sel/hoc/d01/car.c1b/c1.d7.ver.wav",
+  "dst": "sel/hoc/d01/car.c1b/c1.d7.ver.flac",
+  "sr": 44100,
+  "frames": 28224,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6327299475669861
+ },
+ {
+  "src": "sel/hoc/d01/car.c1b/c1.d8.al.wav",
+  "dst": "sel/hoc/d01/car.c1b/c1.d8.al.flac",
+  "sr": 44100,
+  "frames": 23814,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.46166104078292847
+ },
+ {
+  "src": "sel/hoc/d01/car.c1b/c1.d8.ver.wav",
+  "dst": "sel/hoc/d01/car.c1b/c1.d8.ver.flac",
+  "sr": 44100,
+  "frames": 28224,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6564658284187317
+ },
+ {
+  "src": "sel/hoc/d01/car.c1c/c1.d10.al.wav",
+  "dst": "sel/hoc/d01/car.c1c/c1.d10.al.flac",
+  "sr": 44100,
+  "frames": 26019,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5198890566825867
+ },
+ {
+  "src": "sel/hoc/d01/car.c1c/c1.d10.ver.wav",
+  "dst": "sel/hoc/d01/car.c1c/c1.d10.ver.flac",
+  "sr": 44100,
+  "frames": 28665,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4702930152416229
+ },
+ {
+  "src": "sel/hoc/d01/car.c1c/c1.d11.al.wav",
+  "dst": "sel/hoc/d01/car.c1c/c1.d11.al.flac",
+  "sr": 44100,
+  "frames": 31311,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.44837620854377747
+ },
+ {
+  "src": "sel/hoc/d01/car.c1c/c1.d12.al.wav",
+  "dst": "sel/hoc/d01/car.c1c/c1.d12.al.flac",
+  "sr": 44100,
+  "frames": 30429,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4188068211078644
+ },
+ {
+  "src": "sel/hoc/d01/car.c1c/c1.d13.al.wav",
+  "dst": "sel/hoc/d01/car.c1c/c1.d13.al.flac",
+  "sr": 44100,
+  "frames": 26460,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.41263025999069214
+ },
+ {
+  "src": "sel/hoc/d01/car.c1c/c1.d14.al.wav",
+  "dst": "sel/hoc/d01/car.c1c/c1.d14.al.flac",
+  "sr": 44100,
+  "frames": 23373,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5701771378517151
+ },
+ {
+  "src": "sel/hoc/d01/car.c1c/c1.d15.al.wav",
+  "dst": "sel/hoc/d01/car.c1c/c1.d15.al.flac",
+  "sr": 44100,
+  "frames": 21168,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.8055993318557739
+ },
+ {
+  "src": "sel/hoc/d01/car.c1c/c1.d9.al.wav",
+  "dst": "sel/hoc/d01/car.c1c/c1.d9.al.flac",
+  "sr": 44100,
+  "frames": 26019,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6306027770042419
+ },
+ {
+  "src": "sel/hoc/d01/car.c1c/c1.d9.ver.wav",
+  "dst": "sel/hoc/d01/car.c1c/c1.d9.ver.flac",
+  "sr": 44100,
+  "frames": 29988,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.7349454164505005
+ },
+ {
+  "src": "sel/hoc/d01/car.c1d/c1.d16.al.wav",
+  "dst": "sel/hoc/d01/car.c1d/c1.d16.al.flac",
+  "sr": 44100,
+  "frames": 20727,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5529361367225647
+ },
+ {
+  "src": "sel/hoc/d01/car.c2a/c2.d1.al.wav",
+  "dst": "sel/hoc/d01/car.c2a/c2.d1.al.flac",
+  "sr": 44100,
+  "frames": 25137,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5217350721359253
+ },
+ {
+  "src": "sel/hoc/d01/car.c2a/c2.d1.ek.wav",
+  "dst": "sel/hoc/d01/car.c2a/c2.d1.ek.flac",
+  "sr": 44100,
+  "frames": 33516,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4782598912715912
+ },
+ {
+  "src": "sel/hoc/d01/car.c2a/c2.d1.ver.wav",
+  "dst": "sel/hoc/d01/car.c2a/c2.d1.ver.flac",
+  "sr": 44100,
+  "frames": 44982,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4202772378921509
+ },
+ {
+  "src": "sel/hoc/d01/car.c2a/c2.d2.al.wav",
+  "dst": "sel/hoc/d01/car.c2a/c2.d2.al.flac",
+  "sr": 44100,
+  "frames": 22050,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.508636474609375
+ },
+ {
+  "src": "sel/hoc/d01/car.c2a/c2.d2.ek.wav",
+  "dst": "sel/hoc/d01/car.c2a/c2.d2.ek.flac",
+  "sr": 44100,
+  "frames": 34398,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.520735502243042
+ },
+ {
+  "src": "sel/hoc/d01/car.c2a/c2.d2.ver.wav",
+  "dst": "sel/hoc/d01/car.c2a/c2.d2.ver.flac",
+  "sr": 44100,
+  "frames": 27783,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.607002317905426
+ },
+ {
+  "src": "sel/hoc/d01/car.c2a/c2.d3.al.wav",
+  "dst": "sel/hoc/d01/car.c2a/c2.d3.al.flac",
+  "sr": 44100,
+  "frames": 22050,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5478169322013855
+ },
+ {
+  "src": "sel/hoc/d01/car.c2a/c2.d3.ek.wav",
+  "dst": "sel/hoc/d01/car.c2a/c2.d3.ek.flac",
+  "sr": 44100,
+  "frames": 33957,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5126515030860901
+ },
+ {
+  "src": "sel/hoc/d01/car.c2a/c2.d3.ver.wav",
+  "dst": "sel/hoc/d01/car.c2a/c2.d3.ver.flac",
+  "sr": 44100,
+  "frames": 27342,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6590683460235596
+ },
+ {
+  "src": "sel/hoc/d01/car.c2b/c2.d4.al.wav",
+  "dst": "sel/hoc/d01/car.c2b/c2.d4.al.flac",
+  "sr": 44100,
+  "frames": 22932,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5885124802589417
+ },
+ {
+  "src": "sel/hoc/d01/car.c2b/c2.d4.ek.wav",
+  "dst": "sel/hoc/d01/car.c2b/c2.d4.ek.flac",
+  "sr": 44100,
+  "frames": 35280,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5613261461257935
+ },
+ {
+  "src": "sel/hoc/d01/car.c2b/c2.d4.ver.wav",
+  "dst": "sel/hoc/d01/car.c2b/c2.d4.ver.flac",
+  "sr": 44100,
+  "frames": 28224,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6571370959281921
+ },
+ {
+  "src": "sel/hoc/d01/car.c2b/c2.d5.al.wav",
+  "dst": "sel/hoc/d01/car.c2b/c2.d5.al.flac",
+  "sr": 44100,
+  "frames": 20727,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5268133282661438
+ },
+ {
+  "src": "sel/hoc/d01/car.c2b/c2.d5.ek.wav",
+  "dst": "sel/hoc/d01/car.c2b/c2.d5.ek.flac",
+  "sr": 44100,
+  "frames": 35280,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5440617799758911
+ },
+ {
+  "src": "sel/hoc/d01/car.c2b/c2.d5.ver.wav",
+  "dst": "sel/hoc/d01/car.c2b/c2.d5.ver.flac",
+  "sr": 44100,
+  "frames": 29106,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6471222639083862
+ },
+ {
+  "src": "sel/hoc/d01/car.c2b/c2.d6.al.wav",
+  "dst": "sel/hoc/d01/car.c2b/c2.d6.al.flac",
+  "sr": 44100,
+  "frames": 22050,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5580970644950867
+ },
+ {
+  "src": "sel/hoc/d01/car.c2b/c2.d6.ek.wav",
+  "dst": "sel/hoc/d01/car.c2b/c2.d6.ek.flac",
+  "sr": 44100,
+  "frames": 40572,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5347583293914795
+ },
+ {
+  "src": "sel/hoc/d01/car.c2b/c2.d6.ver.wav",
+  "dst": "sel/hoc/d01/car.c2b/c2.d6.ver.flac",
+  "sr": 44100,
+  "frames": 28665,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.7222132682800293
+ },
+ {
+  "src": "sel/hoc/d01/car.c2c/c2.d7.al.wav",
+  "dst": "sel/hoc/d01/car.c2c/c2.d7.al.flac",
+  "sr": 44100,
+  "frames": 25137,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5776627659797668
+ },
+ {
+  "src": "sel/hoc/d01/car.c2c/c2.d8.al.wav",
+  "dst": "sel/hoc/d01/car.c2c/c2.d8.al.flac",
+  "sr": 44100,
+  "frames": 25137,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5097036957740784
+ },
+ {
+  "src": "sel/hoc/d01/car.c2c/c2.d9.al.wav",
+  "dst": "sel/hoc/d01/car.c2c/c2.d9.al.flac",
+  "sr": 44100,
+  "frames": 26901,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.44442957639694214
+ },
+ {
+  "src": "sel/hoc/d01/car.c3a/c3.d1.al.wav",
+  "dst": "sel/hoc/d01/car.c3a/c3.d1.al.flac",
+  "sr": 44100,
+  "frames": 25578,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5477591753005981
+ },
+ {
+  "src": "sel/hoc/d01/car.c3a/c3.d1.ver.wav",
+  "dst": "sel/hoc/d01/car.c3a/c3.d1.ver.flac",
+  "sr": 44100,
+  "frames": 57330,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4941866397857666
+ },
+ {
+  "src": "sel/hoc/d01/car.c3a/c3.d2.al.wav",
+  "dst": "sel/hoc/d01/car.c3a/c3.d2.al.flac",
+  "sr": 44100,
+  "frames": 23373,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5331403017044067
+ },
+ {
+  "src": "sel/hoc/d01/car.c3a/c3.d2.ver.wav",
+  "dst": "sel/hoc/d01/car.c3a/c3.d2.ver.flac",
+  "sr": 44100,
+  "frames": 58212,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5040844082832336
+ },
+ {
+  "src": "sel/hoc/d01/car.c3a/c3.d3.al.wav",
+  "dst": "sel/hoc/d01/car.c3a/c3.d3.al.flac",
+  "sr": 44100,
+  "frames": 24255,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.461472749710083
+ },
+ {
+  "src": "sel/hoc/d01/car.c3a/c3.d3.ver.wav",
+  "dst": "sel/hoc/d01/car.c3a/c3.d3.ver.flac",
+  "sr": 44100,
+  "frames": 27783,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6010461449623108
+ },
+ {
+  "src": "sel/hoc/d01/car.c3a/c3.d4.al.wav",
+  "dst": "sel/hoc/d01/car.c3a/c3.d4.al.flac",
+  "sr": 44100,
+  "frames": 20727,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5105001926422119
+ },
+ {
+  "src": "sel/hoc/d01/car.c3a/c3.d5.al.wav",
+  "dst": "sel/hoc/d01/car.c3a/c3.d5.al.flac",
+  "sr": 44100,
+  "frames": 22050,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4696780741214752
+ },
+ {
+  "src": "sel/hoc/d01/car.c3a/c3.d6.al.wav",
+  "dst": "sel/hoc/d01/car.c3a/c3.d6.al.flac",
+  "sr": 44100,
+  "frames": 20727,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4812130033969879
+ },
+ {
+  "src": "sel/hoc/d01/car.c3b/c3.d7.al.wav",
+  "dst": "sel/hoc/d01/car.c3b/c3.d7.al.flac",
+  "sr": 44100,
+  "frames": 28665,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.47801828384399414
+ },
+ {
+  "src": "sel/hoc/d01/car.c3b/c3.d8.al.wav",
+  "dst": "sel/hoc/d01/car.c3b/c3.d8.al.flac",
+  "sr": 44100,
+  "frames": 24255,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.49478480219841003
+ },
+ {
+  "src": "sel/hoc/d01/car.c3b/c3.d9.al.wav",
+  "dst": "sel/hoc/d01/car.c3b/c3.d9.al.flac",
+  "sr": 44100,
+  "frames": 26901,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4240071475505829
+ },
+ {
+  "src": "sel/hoc/d01/car.say1/c1.s1.01.wav",
+  "dst": "sel/hoc/d01/car.say1/c1.s1.01.flac",
+  "sr": 44100,
+  "frames": 20286,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5389342904090881
+ },
+ {
+  "src": "sel/hoc/d01/car.say1/c1.s1.02.wav",
+  "dst": "sel/hoc/d01/car.say1/c1.s1.02.flac",
+  "sr": 44100,
+  "frames": 26460,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5675532221794128
+ },
+ {
+  "src": "sel/hoc/d01/car.say1/c1.s1.03.wav",
+  "dst": "sel/hoc/d01/car.say1/c1.s1.03.flac",
+  "sr": 44100,
+  "frames": 26019,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.7084242105484009
+ },
+ {
+  "src": "sel/hoc/d01/car.say1/c1.s1.04.wav",
+  "dst": "sel/hoc/d01/car.say1/c1.s1.04.flac",
+  "sr": 44100,
+  "frames": 24696,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.7609636187553406
+ },
+ {
+  "src": "sel/hoc/d01/car.say1/c1.s1.05.wav",
+  "dst": "sel/hoc/d01/car.say1/c1.s1.05.flac",
+  "sr": 44100,
+  "frames": 25578,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5638201236724854
+ },
+ {
+  "src": "sel/hoc/d01/car.say1/c1.s1.06.wav",
+  "dst": "sel/hoc/d01/car.say1/c1.s1.06.flac",
+  "sr": 44100,
+  "frames": 26460,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6441510319709778
+ },
+ {
+  "src": "sel/hoc/d01/car.say1/c1.s1.07.wav",
+  "dst": "sel/hoc/d01/car.say1/c1.s1.07.flac",
+  "sr": 44100,
+  "frames": 25578,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.630073070526123
+ },
+ {
+  "src": "sel/hoc/d01/car.say1/c1.s1.08.wav",
+  "dst": "sel/hoc/d01/car.say1/c1.s1.08.flac",
+  "sr": 44100,
+  "frames": 24255,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.8147844672203064
+ },
+ {
+  "src": "sel/hoc/d01/car.say1/c1.s1.09.wav",
+  "dst": "sel/hoc/d01/car.say1/c1.s1.09.flac",
+  "sr": 44100,
+  "frames": 31311,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5576341152191162
+ },
+ {
+  "src": "sel/hoc/d01/car.say1/c1.s1.10.wav",
+  "dst": "sel/hoc/d01/car.say1/c1.s1.10.flac",
+  "sr": 44100,
+  "frames": 24696,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5778943300247192
+ },
+ {
+  "src": "sel/hoc/d01/car.say2/c1.s2.01.wav",
+  "dst": "sel/hoc/d01/car.say2/c1.s2.01.flac",
+  "sr": 44100,
+  "frames": 23373,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5276270508766174
+ },
+ {
+  "src": "sel/hoc/d01/car.say2/c1.s2.02.wav",
+  "dst": "sel/hoc/d01/car.say2/c1.s2.02.flac",
+  "sr": 44100,
+  "frames": 26460,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5926334261894226
+ },
+ {
+  "src": "sel/hoc/d01/car.say2/c1.s2.03.wav",
+  "dst": "sel/hoc/d01/car.say2/c1.s2.03.flac",
+  "sr": 44100,
+  "frames": 25578,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.7359340190887451
+ },
+ {
+  "src": "sel/hoc/d01/car.say2/c1.s2.04.wav",
+  "dst": "sel/hoc/d01/car.say2/c1.s2.04.flac",
+  "sr": 44100,
+  "frames": 26019,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.8332163691520691
+ },
+ {
+  "src": "sel/hoc/d01/car.say2/c1.s2.05.wav",
+  "dst": "sel/hoc/d01/car.say2/c1.s2.05.flac",
+  "sr": 44100,
+  "frames": 26901,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5664204359054565
+ },
+ {
+  "src": "sel/hoc/d01/car.say2/c1.s2.06.wav",
+  "dst": "sel/hoc/d01/car.say2/c1.s2.06.flac",
+  "sr": 44100,
+  "frames": 26460,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6364399194717407
+ },
+ {
+  "src": "sel/hoc/d01/car.say2/c1.s2.07.wav",
+  "dst": "sel/hoc/d01/car.say2/c1.s2.07.flac",
+  "sr": 44100,
+  "frames": 25137,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6967014074325562
+ },
+ {
+  "src": "sel/hoc/d01/car.say2/c1.s2.08.wav",
+  "dst": "sel/hoc/d01/car.say2/c1.s2.08.flac",
+  "sr": 44100,
+  "frames": 25137,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.8144687414169312
+ },
+ {
+  "src": "sel/hoc/d01/car.say2/c1.s2.09.wav",
+  "dst": "sel/hoc/d01/car.say2/c1.s2.09.flac",
+  "sr": 44100,
+  "frames": 30429,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5778986811637878
+ },
+ {
+  "src": "sel/hoc/d01/car.say2/c1.s2.10.wav",
+  "dst": "sel/hoc/d01/car.say2/c1.s2.10.flac",
+  "sr": 44100,
+  "frames": 25137,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.66605544090271
+ },
+ {
+  "src": "sel/hoc/d01/d.bekle/d.bekle.wav",
+  "dst": "sel/hoc/d01/d.bekle/d.bekle.flac",
+  "sr": 44100,
+  "frames": 204470,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5761491656303406
+ },
+ {
+  "src": "sel/hoc/d01/d.goz/d.goz.wav",
+  "dst": "sel/hoc/d01/d.goz/d.goz.flac",
+  "sr": 44100,
+  "frames": 165449,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.7175781726837158
+ },
+ {
+  "src": "sel/hoc/d01/d.kalk/d.kalk.wav",
+  "dst": "sel/hoc/d01/d.kalk/d.kalk.flac",
+  "sr": 44100,
+  "frames": 166391,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5182125568389893
+ },
+ {
+  "src": "sel/hoc/d01/i.ilk/i.ilk.wav",
+  "dst": "sel/hoc/d01/i.ilk/i.ilk.flac",
+  "sr": 44100,
+  "frames": 303758,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5702029466629028
+ },
+ {
+  "src": "sel/hoc/d01/k.donus/k.donus.wav",
+  "dst": "sel/hoc/d01/k.donus/k.donus.flac",
+  "sr": 44100,
+  "frames": 80036,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6734808683395386
+ },
+ {
+  "src": "sel/hoc/d01/k.goz.kisa/k.goz.kisa.wav",
+  "dst": "sel/hoc/d01/k.goz.kisa/k.goz.kisa.flac",
+  "sr": 44100,
+  "frames": 164811,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6702669262886047
+ },
+ {
+  "src": "sel/hoc/d01/k.goz/k.goz.wav",
+  "dst": "sel/hoc/d01/k.goz/k.goz.flac",
+  "sr": 44100,
+  "frames": 278715,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6601479053497314
+ },
+ {
+  "src": "sel/hoc/d01/k.gun/k.gun.wav",
+  "dst": "sel/hoc/d01/k.gun/k.gun.flac",
+  "sr": 44100,
+  "frames": 190639,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4895626902580261
+ },
+ {
+  "src": "sel/hoc/d01/k.hareket/k.hareket.wav",
+  "dst": "sel/hoc/d01/k.hareket/k.hareket.flac",
+  "sr": 44100,
+  "frames": 287369,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6278761625289917
+ },
+ {
+  "src": "sel/hoc/d01/k.nefes/k.nefes.wav",
+  "dst": "sel/hoc/d01/k.nefes/k.nefes.flac",
+  "sr": 44100,
+  "frames": 107291,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6335359811782837
+ },
+ {
+  "src": "sel/hoc/d01/k.oda/k.oda.wav",
+  "dst": "sel/hoc/d01/k.oda/k.oda.flac",
+  "sr": 44100,
+  "frames": 227043,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.503212034702301
+ },
+ {
+  "src": "sel/hoc/d01/k.say/k.say.wav",
+  "dst": "sel/hoc/d01/k.say/k.say.flac",
+  "sr": 44100,
+  "frames": 180669,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6197252869606018
+ },
+ {
+  "src": "sel/hoc/d01/k.sesler/k.sesler.wav",
+  "dst": "sel/hoc/d01/k.sesler/k.sesler.flac",
+  "sr": 44100,
+  "frames": 119898,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.45429420471191406
+ },
+ {
+  "src": "sel/hoc/d01/k.son/k.son.wav",
+  "dst": "sel/hoc/d01/k.son/k.son.flac",
+  "sr": 44100,
+  "frames": 141764,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.549777090549469
+ },
+ {
+  "src": "sel/hoc/d01/k.zaman/k.zaman.wav",
+  "dst": "sel/hoc/d01/k.zaman/k.zaman.flac",
+  "sr": 44100,
+  "frames": 165543,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5551900267601013
+ },
+ {
+  "src": "sel/hoc/d03/a.acilis/a.acilis.wav",
+  "dst": "sel/hoc/d03/a.acilis/a.acilis.flac",
+  "sr": 44100,
+  "frames": 183046,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6590936183929443
+ },
+ {
+  "src": "sel/hoc/d03/a.durus/a.durus.wav",
+  "dst": "sel/hoc/d03/a.durus/a.durus.flac",
+  "sr": 44100,
+  "frames": 180669,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6167565584182739
+ },
+ {
+  "src": "sel/hoc/d03/a.gozler/a.gozler.wav",
+  "dst": "sel/hoc/d03/a.gozler/a.gozler.flac",
+  "sr": 44100,
+  "frames": 183220,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6385521292686462
+ },
+ {
+  "src": "sel/hoc/d03/a.isler/a.isler.wav",
+  "dst": "sel/hoc/d03/a.isler/a.isler.flac",
+  "sr": 44100,
+  "frames": 142287,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5041761994361877
+ },
+ {
+  "src": "sel/hoc/d03/a.izin/a.izin.wav",
+  "dst": "sel/hoc/d03/a.izin/a.izin.flac",
+  "sr": 44100,
+  "frames": 236112,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.574743390083313
+ },
+ {
+  "src": "sel/hoc/d03/a.karar/a.karar.wav",
+  "dst": "sel/hoc/d03/a.karar/a.karar.flac",
+  "sr": 44100,
+  "frames": 169529,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5651527047157288
+ },
+ {
+  "src": "sel/hoc/d03/a.kolay/a.kolay.wav",
+  "dst": "sel/hoc/d03/a.kolay/a.kolay.flac",
+  "sr": 44100,
+  "frames": 187907,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5539803504943848
+ },
+ {
+  "src": "sel/hoc/d03/a.ortu/a.ortu.wav",
+  "dst": "sel/hoc/d03/a.ortu/a.ortu.flac",
+  "sr": 44100,
+  "frames": 169583,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.569011390209198
+ },
+ {
+  "src": "sel/hoc/d03/c1.birkac/c1.birkac.wav",
+  "dst": "sel/hoc/d03/c1.birkac/c1.birkac.flac",
+  "sr": 44100,
+  "frames": 152171,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6041250228881836
+ },
+ {
+  "src": "sel/hoc/d03/c1.dudak/c1.dudak.wav",
+  "dst": "sel/hoc/d03/c1.dudak/c1.dudak.flac",
+  "sr": 44100,
+  "frames": 220771,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6232588291168213
+ },
+ {
+  "src": "sel/hoc/d03/c1.fark/c1.fark.wav",
+  "dst": "sel/hoc/d03/c1.fark/c1.fark.flac",
+  "sr": 44100,
+  "frames": 144426,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4432141184806824
+ },
+ {
+  "src": "sel/hoc/d03/c1.gun/c1.gun.wav",
+  "dst": "sel/hoc/d03/c1.gun/c1.gun.flac",
+  "sr": 44100,
+  "frames": 158682,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.7395467758178711
+ },
+ {
+  "src": "sel/hoc/d03/c1.k1/c1.k1.wav",
+  "dst": "sel/hoc/d03/c1.k1/c1.k1.flac",
+  "sr": 44100,
+  "frames": 130396,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5610982775688171
+ },
+ {
+  "src": "sel/hoc/d03/c1.veris/c1.veris.wav",
+  "dst": "sel/hoc/d03/c1.veris/c1.veris.flac",
+  "sr": 44100,
+  "frames": 158354,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5516866445541382
+ },
+ {
+  "src": "sel/hoc/d03/c1.yer/c1.yer.wav",
+  "dst": "sel/hoc/d03/c1.yer/c1.yer.flac",
+  "sr": 44100,
+  "frames": 197182,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6409948468208313
+ },
+ {
+  "src": "sel/hoc/d03/c1.zorlanirsan/c1.zorlanirsan.wav",
+  "dst": "sel/hoc/d03/c1.zorlanirsan/c1.zorlanirsan.flac",
+  "sr": 44100,
+  "frames": 148350,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5748252868652344
+ },
+ {
+  "src": "sel/hoc/d03/c2.ayak/c2.ayak.wav",
+  "dst": "sel/hoc/d03/c2.ayak/c2.ayak.flac",
+  "sr": 44100,
+  "frames": 156231,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.49198639392852783
+ },
+ {
+  "src": "sel/hoc/d03/c2.bacak/c2.bacak.wav",
+  "dst": "sel/hoc/d03/c2.bacak/c2.bacak.flac",
+  "sr": 44100,
+  "frames": 103713,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4629260003566742
+ },
+ {
+  "src": "sel/hoc/d03/c2.bas/c2.bas.wav",
+  "dst": "sel/hoc/d03/c2.bas/c2.bas.flac",
+  "sr": 44100,
+  "frames": 138963,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.49673834443092346
+ },
+ {
+  "src": "sel/hoc/d03/c2.bel/c2.bel.wav",
+  "dst": "sel/hoc/d03/c2.bel/c2.bel.flac",
+  "sr": 44100,
+  "frames": 122290,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5006614923477173
+ },
+ {
+  "src": "sel/hoc/d03/c2.boyun/c2.boyun.wav",
+  "dst": "sel/hoc/d03/c2.boyun/c2.boyun.flac",
+  "sr": 44100,
+  "frames": 101258,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4223395586013794
+ },
+ {
+  "src": "sel/hoc/d03/c2.butun/c2.butun.wav",
+  "dst": "sel/hoc/d03/c2.butun/c2.butun.flac",
+  "sr": 44100,
+  "frames": 148807,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.813650369644165
+ },
+ {
+  "src": "sel/hoc/d03/c2.cene/c2.cene.wav",
+  "dst": "sel/hoc/d03/c2.cene/c2.cene.flac",
+  "sr": 44100,
+  "frames": 147810,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6822124719619751
+ },
+ {
+  "src": "sel/hoc/d03/c2.cerceve/c2.cerceve#1.wav",
+  "dst": "sel/hoc/d03/c2.cerceve/c2.cerceve#1.flac",
+  "sr": 44100,
+  "frames": 151625,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.47155025601387024
+ },
+ {
+  "src": "sel/hoc/d03/c2.cerceve/c2.cerceve#2.wav",
+  "dst": "sel/hoc/d03/c2.cerceve/c2.cerceve#2.flac",
+  "sr": 44100,
+  "frames": 114493,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4586102068424225
+ },
+ {
+  "src": "sel/hoc/d03/c2.el/c2.el.wav",
+  "dst": "sel/hoc/d03/c2.el/c2.el.flac",
+  "sr": 44100,
+  "frames": 110376,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4141251742839813
+ },
+ {
+  "src": "sel/hoc/d03/c2.gelmezse/c2.gelmezse.wav",
+  "dst": "sel/hoc/d03/c2.gelmezse/c2.gelmezse.flac",
+  "sr": 44100,
+  "frames": 163714,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.47123634815216064
+ },
+ {
+  "src": "sel/hoc/d03/c2.kol/c2.kol.wav",
+  "dst": "sel/hoc/d03/c2.kol/c2.kol.flac",
+  "sr": 44100,
+  "frames": 134260,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.3845326006412506
+ },
+ {
+  "src": "sel/hoc/d03/c2.omurga/c2.omurga.wav",
+  "dst": "sel/hoc/d03/c2.omurga/c2.omurga.flac",
+  "sr": 44100,
+  "frames": 117635,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.43042850494384766
+ },
+ {
+  "src": "sel/hoc/d03/c2.omuz/c2.omuz.wav",
+  "dst": "sel/hoc/d03/c2.omuz/c2.omuz.flac",
+  "sr": 44100,
+  "frames": 112191,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5334652662277222
+ },
+ {
+  "src": "sel/hoc/d03/c2.sicak/c2.sicak.wav",
+  "dst": "sel/hoc/d03/c2.sicak/c2.sicak.flac",
+  "sr": 44100,
+  "frames": 177764,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4639361798763275
+ },
+ {
+  "src": "sel/hoc/d03/c2.topuk/c2.topuk.wav",
+  "dst": "sel/hoc/d03/c2.topuk/c2.topuk.flac",
+  "sr": 44100,
+  "frames": 152335,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.49673986434936523
+ },
+ {
+  "src": "sel/hoc/d03/c2.uyluk/c2.uyluk.wav",
+  "dst": "sel/hoc/d03/c2.uyluk/c2.uyluk.flac",
+  "sr": 44100,
+  "frames": 124445,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4642486572265625
+ },
+ {
+  "src": "sel/hoc/d03/c2.yuz/c2.yuz.wav",
+  "dst": "sel/hoc/d03/c2.yuz/c2.yuz.flac",
+  "sr": 44100,
+  "frames": 165940,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5174658298492432
+ },
+ {
+  "src": "sel/hoc/d03/c3.agirlik/c3.agirlik.wav",
+  "dst": "sel/hoc/d03/c3.agirlik/c3.agirlik.flac",
+  "sr": 44100,
+  "frames": 139980,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5033226609230042
+ },
+ {
+  "src": "sel/hoc/d03/c3.aydinlik/c3.aydinlik.wav",
+  "dst": "sel/hoc/d03/c3.aydinlik/c3.aydinlik.flac",
+  "sr": 44100,
+  "frames": 161881,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.7636042237281799
+ },
+ {
+  "src": "sel/hoc/d03/c3.cam/c3.cam.wav",
+  "dst": "sel/hoc/d03/c3.cam/c3.cam.flac",
+  "sr": 44100,
+  "frames": 197660,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5750612616539001
+ },
+ {
+  "src": "sel/hoc/d03/c3.damla/c3.damla.wav",
+  "dst": "sel/hoc/d03/c3.damla/c3.damla.flac",
+  "sr": 44100,
+  "frames": 117241,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5856184363365173
+ },
+ {
+  "src": "sel/hoc/d03/c3.gelmezse/c3.gelmezse.wav",
+  "dst": "sel/hoc/d03/c3.gelmezse/c3.gelmezse.flac",
+  "sr": 44100,
+  "frames": 192570,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6880228519439697
+ },
+ {
+  "src": "sel/hoc/d03/c3.kal/c3.kal.wav",
+  "dst": "sel/hoc/d03/c3.kal/c3.kal.flac",
+  "sr": 44100,
+  "frames": 151689,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4889451563358307
+ },
+ {
+  "src": "sel/hoc/d03/c3.kisilir.kisa/c3.kisilir.kisa.wav",
+  "dst": "sel/hoc/d03/c3.kisilir.kisa/c3.kisilir.kisa.flac",
+  "sr": 44100,
+  "frames": 186485,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.572012186050415
+ },
+ {
+  "src": "sel/hoc/d03/c3.kisilir/c3.kisilir.wav",
+  "dst": "sel/hoc/d03/c3.kisilir/c3.kisilir.flac",
+  "sr": 44100,
+  "frames": 142605,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4880650043487549
+ },
+ {
+  "src": "sel/hoc/d03/c3.lamba/c3.lamba.wav",
+  "dst": "sel/hoc/d03/c3.lamba/c3.lamba.flac",
+  "sr": 44100,
+  "frames": 176017,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5997340679168701
+ },
+ {
+  "src": "sel/hoc/d03/c3.ortu/c3.ortu.wav",
+  "dst": "sel/hoc/d03/c3.ortu/c3.ortu.flac",
+  "sr": 44100,
+  "frames": 136963,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6369203925132751
+ },
+ {
+  "src": "sel/hoc/d03/c3.parmak/c3.parmak.wav",
+  "dst": "sel/hoc/d03/c3.parmak/c3.parmak.flac",
+  "sr": 44100,
+  "frames": 137942,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.43451735377311707
+ },
+ {
+  "src": "sel/hoc/d03/c3.sahne/c3.sahne.wav",
+  "dst": "sel/hoc/d03/c3.sahne/c3.sahne.flac",
+  "sr": 44100,
+  "frames": 143431,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.49970853328704834
+ },
+ {
+  "src": "sel/hoc/d03/c3.ses2/c3.ses2.wav",
+  "dst": "sel/hoc/d03/c3.ses2/c3.ses2.flac",
+  "sr": 44100,
+  "frames": 142302,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6669079661369324
+ },
+ {
+  "src": "sel/hoc/d03/c3.sicaklik/c3.sicaklik.wav",
+  "dst": "sel/hoc/d03/c3.sicaklik/c3.sicaklik.flac",
+  "sr": 44100,
+  "frames": 128884,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6165294647216797
+ },
+ {
+  "src": "sel/hoc/d03/c3.su/c3.su.wav",
+  "dst": "sel/hoc/d03/c3.su/c3.su.flac",
+  "sr": 44100,
+  "frames": 209500,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6154837012290955
+ },
+ {
+  "src": "sel/hoc/d03/c3.toprak/c3.toprak.wav",
+  "dst": "sel/hoc/d03/c3.toprak/c3.toprak.flac",
+  "sr": 44100,
+  "frames": 119051,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.707381546497345
+ },
+ {
+  "src": "sel/hoc/d03/c3.uzak/c3.uzak.wav",
+  "dst": "sel/hoc/d03/c3.uzak/c3.uzak.flac",
+  "sr": 44100,
+  "frames": 179128,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5140547156333923
+ },
+ {
+  "src": "sel/hoc/d03/c3.yagmur/c3.yagmur.wav",
+  "dst": "sel/hoc/d03/c3.yagmur/c3.yagmur.flac",
+  "sr": 44100,
+  "frames": 140789,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6554516553878784
+ },
+ {
+  "src": "sel/hoc/d03/c3.yastik/c3.yastik.wav",
+  "dst": "sel/hoc/d03/c3.yastik/c3.yastik.flac",
+  "sr": 44100,
+  "frames": 137526,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6236375570297241
+ },
+ {
+  "src": "sel/hoc/d03/c3.yer/c3.yer#1.wav",
+  "dst": "sel/hoc/d03/c3.yer/c3.yer#1.flac",
+  "sr": 44100,
+  "frames": 95872,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.7561948299407959
+ },
+ {
+  "src": "sel/hoc/d03/c3.yer/c3.yer#2.wav",
+  "dst": "sel/hoc/d03/c3.yer/c3.yer#2.flac",
+  "sr": 44100,
+  "frames": 121144,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4945492744445801
+ },
+ {
+  "src": "sel/hoc/d03/c4.bitti/c4.bitti#1.wav",
+  "dst": "sel/hoc/d03/c4.bitti/c4.bitti#1.flac",
+  "sr": 44100,
+  "frames": 86306,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6236515641212463
+ },
+ {
+  "src": "sel/hoc/d03/c4.bitti/c4.bitti#2.wav",
+  "dst": "sel/hoc/d03/c4.bitti/c4.bitti#2.flac",
+  "sr": 44100,
+  "frames": 88365,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.46158355474472046
+ },
+ {
+  "src": "sel/hoc/d03/c4.giris/c4.giris#1.wav",
+  "dst": "sel/hoc/d03/c4.giris/c4.giris#1.flac",
+  "sr": 44100,
+  "frames": 82407,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5554351210594177
+ },
+ {
+  "src": "sel/hoc/d03/c4.giris/c4.giris#2.wav",
+  "dst": "sel/hoc/d03/c4.giris/c4.giris#2.flac",
+  "sr": 44100,
+  "frames": 117510,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.558470606803894
+ },
+ {
+  "src": "sel/hoc/d03/c4.k2/c4.k2.wav",
+  "dst": "sel/hoc/d03/c4.k2/c4.k2.flac",
+  "sr": 44100,
+  "frames": 113557,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5175544023513794
+ },
+ {
+  "src": "sel/hoc/d03/c4.uymaz/c4.uymaz.wav",
+  "dst": "sel/hoc/d03/c4.uymaz/c4.uymaz.flac",
+  "sr": 44100,
+  "frames": 189813,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6705573201179504
+ },
+ {
+  "src": "sel/hoc/d03/car.sayi3/c4.n01.wav",
+  "dst": "sel/hoc/d03/car.sayi3/c4.n01.flac",
+  "sr": 44100,
+  "frames": 36651,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.8018233180046082
+ },
+ {
+  "src": "sel/hoc/d03/car.sayi3/c4.n02.wav",
+  "dst": "sel/hoc/d03/car.sayi3/c4.n02.flac",
+  "sr": 44100,
+  "frames": 36596,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5710213780403137
+ },
+ {
+  "src": "sel/hoc/d03/car.sayi3/c4.n03.wav",
+  "dst": "sel/hoc/d03/car.sayi3/c4.n03.flac",
+  "sr": 44100,
+  "frames": 37410,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.7431046962738037
+ },
+ {
+  "src": "sel/hoc/d03/car.sayi3/c4.n04.wav",
+  "dst": "sel/hoc/d03/car.sayi3/c4.n04.flac",
+  "sr": 44100,
+  "frames": 41957,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6066166758537292
+ },
+ {
+  "src": "sel/hoc/d03/car.sayi3/c4.n05.wav",
+  "dst": "sel/hoc/d03/car.sayi3/c4.n05.flac",
+  "sr": 44100,
+  "frames": 43103,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5756311416625977
+ },
+ {
+  "src": "sel/hoc/d03/car.sayi3/c4.n06.wav",
+  "dst": "sel/hoc/d03/car.sayi3/c4.n06.flac",
+  "sr": 44100,
+  "frames": 40799,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5753309726715088
+ },
+ {
+  "src": "sel/hoc/d03/car.sayi3/c4.n07.wav",
+  "dst": "sel/hoc/d03/car.sayi3/c4.n07.flac",
+  "sr": 44100,
+  "frames": 38641,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6491107940673828
+ },
+ {
+  "src": "sel/hoc/d03/car.sayi3/c4.n08.wav",
+  "dst": "sel/hoc/d03/car.sayi3/c4.n08.flac",
+  "sr": 44100,
+  "frames": 48116,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6888527870178223
+ },
+ {
+  "src": "sel/hoc/d03/car.sayi3/c4.n09.wav",
+  "dst": "sel/hoc/d03/car.sayi3/c4.n09.flac",
+  "sr": 44100,
+  "frames": 44031,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5810374021530151
+ },
+ {
+  "src": "sel/hoc/d03/car.sayi3/c4.n10.wav",
+  "dst": "sel/hoc/d03/car.sayi3/c4.n10.flac",
+  "sr": 44100,
+  "frames": 30329,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.691634476184845
+ },
+ {
+  "src": "sel/hoc/d03/d.goz/d.goz.wav",
+  "dst": "sel/hoc/d03/d.goz/d.goz.flac",
+  "sr": 44100,
+  "frames": 179833,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6186876893043518
+ },
+ {
+  "src": "sel/hoc/d03/d.kalk/d.kalk.wav",
+  "dst": "sel/hoc/d03/d.kalk/d.kalk.flac",
+  "sr": 44100,
+  "frames": 294831,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6813068985939026
+ },
+ {
+  "src": "sel/hoc/d03/d.yer/d.yer.wav",
+  "dst": "sel/hoc/d03/d.yer/d.yer.flac",
+  "sr": 44100,
+  "frames": 138164,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5819864273071289
+ },
+ {
+  "src": "sel/hoc/d03/g.ilk.uyku/g.ilk.uyku.wav",
+  "dst": "sel/hoc/d03/g.ilk.uyku/g.ilk.uyku.flac",
+  "sr": 44100,
+  "frames": 208450,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5143388509750366
+ },
+ {
+  "src": "sel/hoc/d03/k.anahtar3/k.anahtar3.wav",
+  "dst": "sel/hoc/d03/k.anahtar3/k.anahtar3.flac",
+  "sr": 44100,
+  "frames": 65523,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6758986115455627
+ },
+ {
+  "src": "sel/hoc/d03/k.izin/k.izin.wav",
+  "dst": "sel/hoc/d03/k.izin/k.izin.flac",
+  "sr": 44100,
+  "frames": 209004,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.550334632396698
+ },
+ {
+  "src": "sel/hoc/d03/k.nefes/k.nefes.wav",
+  "dst": "sel/hoc/d03/k.nefes/k.nefes.flac",
+  "sr": 44100,
+  "frames": 129345,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.67460036277771
+ },
+ {
+  "src": "sel/hoc/d03/k.son/k.son.wav",
+  "dst": "sel/hoc/d03/k.son/k.son.flac",
+  "sr": 44100,
+  "frames": 54538,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6037942171096802
+ },
+ {
+  "src": "sel/hoc/d03/k.uyanik/k.uyanik.wav",
+  "dst": "sel/hoc/d03/k.uyanik/k.uyanik.flac",
+  "sr": 44100,
+  "frames": 170879,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6115808486938477
+ },
+ {
+  "src": "sel/hoc/d05/a.acilis/a.acilis.wav",
+  "dst": "sel/hoc/d05/a.acilis/a.acilis.flac",
+  "sr": 44100,
+  "frames": 242654,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5650023818016052
+ },
+ {
+  "src": "sel/hoc/d05/a.dagink/a.dagink.wav",
+  "dst": "sel/hoc/d05/a.dagink/a.dagink.flac",
+  "sr": 44100,
+  "frames": 258529,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6036170125007629
+ },
+ {
+  "src": "sel/hoc/d05/a.durus.kisa/a.durus.kisa#1.wav",
+  "dst": "sel/hoc/d05/a.durus.kisa/a.durus.kisa#1.flac",
+  "sr": 44100,
+  "frames": 123630,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6048484444618225
+ },
+ {
+  "src": "sel/hoc/d05/a.durus.kisa/a.durus.kisa#2.wav",
+  "dst": "sel/hoc/d05/a.durus.kisa/a.durus.kisa#2.flac",
+  "sr": 44100,
+  "frames": 139391,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.603704035282135
+ },
+ {
+  "src": "sel/hoc/d05/a.durus/a.durus.wav",
+  "dst": "sel/hoc/d05/a.durus/a.durus.flac",
+  "sr": 44100,
+  "frames": 205686,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6002963781356812
+ },
+ {
+  "src": "sel/hoc/d05/a.gozler/a.gozler.wav",
+  "dst": "sel/hoc/d05/a.gozler/a.gozler.flac",
+  "sr": 44100,
+  "frames": 309009,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6911084651947021
+ },
+ {
+  "src": "sel/hoc/d05/a.izin/a.izin.wav",
+  "dst": "sel/hoc/d05/a.izin/a.izin.flac",
+  "sr": 44100,
+  "frames": 231635,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6038808226585388
+ },
+ {
+  "src": "sel/hoc/d05/a.karar/a.karar.wav",
+  "dst": "sel/hoc/d05/a.karar/a.karar.flac",
+  "sr": 44100,
+  "frames": 161632,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6107760667800903
+ },
+ {
+  "src": "sel/hoc/d05/a.normal/a.normal.wav",
+  "dst": "sel/hoc/d05/a.normal/a.normal.flac",
+  "sr": 44100,
+  "frames": 202067,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5639911890029907
+ },
+ {
+  "src": "sel/hoc/d05/a.omuz/a.omuz.wav",
+  "dst": "sel/hoc/d05/a.omuz/a.omuz.flac",
+  "sr": 44100,
+  "frames": 209515,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6413175463676453
+ },
+ {
+  "src": "sel/hoc/d05/c1.anahtar1/c1.anahtar1.wav",
+  "dst": "sel/hoc/d05/c1.anahtar1/c1.anahtar1.flac",
+  "sr": 44100,
+  "frames": 132473,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6906406283378601
+ },
+ {
+  "src": "sel/hoc/d05/c1.aralik1/c1.aralik1.wav",
+  "dst": "sel/hoc/d05/c1.aralik1/c1.aralik1.flac",
+  "sr": 44100,
+  "frames": 158113,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6371349096298218
+ },
+ {
+  "src": "sel/hoc/d05/c1.aralik2/c1.aralik2.wav",
+  "dst": "sel/hoc/d05/c1.aralik2/c1.aralik2.flac",
+  "sr": 44100,
+  "frames": 195936,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6667870879173279
+ },
+ {
+  "src": "sel/hoc/d05/c1.aralik3/c1.aralik3.wav",
+  "dst": "sel/hoc/d05/c1.aralik3/c1.aralik3.flac",
+  "sr": 44100,
+  "frames": 142116,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5417270660400391
+ },
+ {
+  "src": "sel/hoc/d05/c1.donus/c1.donus.wav",
+  "dst": "sel/hoc/d05/c1.donus/c1.donus.flac",
+  "sr": 44100,
+  "frames": 209486,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5521479249000549
+ },
+ {
+  "src": "sel/hoc/d05/c1.dusunce/c1.dusunce.wav",
+  "dst": "sel/hoc/d05/c1.dusunce/c1.dusunce.flac",
+  "sr": 44100,
+  "frames": 268481,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5375575423240662
+ },
+ {
+  "src": "sel/hoc/d05/c1.duzeltme/c1.duzeltme.wav",
+  "dst": "sel/hoc/d05/c1.duzeltme/c1.duzeltme.flac",
+  "sr": 44100,
+  "frames": 199944,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5902978181838989
+ },
+ {
+  "src": "sel/hoc/d05/c1.getir/c1.getir.wav",
+  "dst": "sel/hoc/d05/c1.getir/c1.getir.flac",
+  "sr": 44100,
+  "frames": 206998,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6226310133934021
+ },
+ {
+  "src": "sel/hoc/d05/c1.his/c1.his#1.wav",
+  "dst": "sel/hoc/d05/c1.his/c1.his#1.flac",
+  "sr": 44100,
+  "frames": 228906,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5418972969055176
+ },
+ {
+  "src": "sel/hoc/d05/c1.his/c1.his#2.wav",
+  "dst": "sel/hoc/d05/c1.his/c1.his#2.flac",
+  "sr": 44100,
+  "frames": 231281,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6731129884719849
+ },
+ {
+  "src": "sel/hoc/d05/c1.izle/c1.izle.wav",
+  "dst": "sel/hoc/d05/c1.izle/c1.izle.flac",
+  "sr": 44100,
+  "frames": 212085,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5149453282356262
+ },
+ {
+  "src": "sel/hoc/d05/c1.kac/c1.kac.wav",
+  "dst": "sel/hoc/d05/c1.kac/c1.kac.flac",
+  "sr": 44100,
+  "frames": 218156,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5988069176673889
+ },
+ {
+  "src": "sel/hoc/d05/c1.kayma.kisa/c1.kayma.kisa.wav",
+  "dst": "sel/hoc/d05/c1.kayma.kisa/c1.kayma.kisa.flac",
+  "sr": 44100,
+  "frames": 151261,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6630783081054688
+ },
+ {
+  "src": "sel/hoc/d05/c1.kayma/c1.kayma.wav",
+  "dst": "sel/hoc/d05/c1.kayma/c1.kayma.flac",
+  "sr": 44100,
+  "frames": 235783,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5010607242584229
+ },
+ {
+  "src": "sel/hoc/d05/c1.nerede/c1.nerede.wav",
+  "dst": "sel/hoc/d05/c1.nerede/c1.nerede.flac",
+  "sr": 44100,
+  "frames": 195435,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6420585513114929
+ },
+ {
+  "src": "sel/hoc/d05/c1.nokta/c1.nokta.wav",
+  "dst": "sel/hoc/d05/c1.nokta/c1.nokta.flac",
+  "sr": 44100,
+  "frames": 193478,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.556833028793335
+ },
+ {
+  "src": "sel/hoc/d05/c1.yer/c1.yer.wav",
+  "dst": "sel/hoc/d05/c1.yer/c1.yer.flac",
+  "sr": 44100,
+  "frames": 261197,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5484992265701294
+ },
+ {
+  "src": "sel/hoc/d05/c2.anahtar2/c2.anahtar2.wav",
+  "dst": "sel/hoc/d05/c2.anahtar2/c2.anahtar2.flac",
+  "sr": 44100,
+  "frames": 92846,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6337218284606934
+ },
+ {
+  "src": "sel/hoc/d05/c2.bas/c2.bas.wav",
+  "dst": "sel/hoc/d05/c2.bas/c2.bas.flac",
+  "sr": 44100,
+  "frames": 232629,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.663199245929718
+ },
+ {
+  "src": "sel/hoc/d05/c2.dusunce/c2.dusunce.wav",
+  "dst": "sel/hoc/d05/c2.dusunce/c2.dusunce.flac",
+  "sr": 44100,
+  "frames": 202691,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.45496052503585815
+ },
+ {
+  "src": "sel/hoc/d05/c2.giris/c2.giris.wav",
+  "dst": "sel/hoc/d05/c2.giris/c2.giris.flac",
+  "sr": 44100,
+  "frames": 169862,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6044589877128601
+ },
+ {
+  "src": "sel/hoc/d05/c2.hangi/c2.hangi.wav",
+  "dst": "sel/hoc/d05/c2.hangi/c2.hangi.flac",
+  "sr": 44100,
+  "frames": 157837,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4905809164047241
+ },
+ {
+  "src": "sel/hoc/d05/c2.nasil/c2.nasil.wav",
+  "dst": "sel/hoc/d05/c2.nasil/c2.nasil.flac",
+  "sr": 44100,
+  "frames": 268158,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.7861023545265198
+ },
+ {
+  "src": "sel/hoc/d05/c2.onbir/c2.onbir.wav",
+  "dst": "sel/hoc/d05/c2.onbir/c2.onbir.flac",
+  "sr": 44100,
+  "frames": 230167,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4895315170288086
+ },
+ {
+  "src": "sel/hoc/d05/c2.say1/c2.say1.wav",
+  "dst": "sel/hoc/d05/c2.say1/c2.say1.flac",
+  "sr": 44100,
+  "frames": 117643,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5921000838279724
+ },
+ {
+  "src": "sel/hoc/d05/c2.seyrek/c2.seyrek.wav",
+  "dst": "sel/hoc/d05/c2.seyrek/c2.seyrek.flac",
+  "sr": 44100,
+  "frames": 278996,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5833752751350403
+ },
+ {
+  "src": "sel/hoc/d05/c2.veris/c2.veris.wav",
+  "dst": "sel/hoc/d05/c2.veris/c2.veris.flac",
+  "sr": 44100,
+  "frames": 229522,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.49376529455184937
+ },
+ {
+  "src": "sel/hoc/d05/c2.veris2/c2.veris2.wav",
+  "dst": "sel/hoc/d05/c2.veris2/c2.veris2.flac",
+  "sr": 44100,
+  "frames": 168030,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6192339658737183
+ },
+ {
+  "src": "sel/hoc/d05/c2.yonetme/c2.yonetme.wav",
+  "dst": "sel/hoc/d05/c2.yonetme/c2.yonetme.flac",
+  "sr": 44100,
+  "frames": 232608,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.575872004032135
+ },
+ {
+  "src": "sel/hoc/d05/c3.ad/c3.ad.wav",
+  "dst": "sel/hoc/d05/c3.ad/c3.ad.flac",
+  "sr": 44100,
+  "frames": 190697,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.46737685799598694
+ },
+ {
+  "src": "sel/hoc/d05/c3.anahtar3/c3.anahtar3.wav",
+  "dst": "sel/hoc/d05/c3.anahtar3/c3.anahtar3.flac",
+  "sr": 44100,
+  "frames": 51372,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.3977857530117035
+ },
+ {
+  "src": "sel/hoc/d05/c3.can/c3.can#1.wav",
+  "dst": "sel/hoc/d05/c3.can/c3.can#1.flac",
+  "sr": 44100,
+  "frames": 138534,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6488274335861206
+ },
+ {
+  "src": "sel/hoc/d05/c3.can/c3.can#2.wav",
+  "dst": "sel/hoc/d05/c3.can/c3.can#2.flac",
+  "sr": 44100,
+  "frames": 125166,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5619841814041138
+ },
+ {
+  "src": "sel/hoc/d05/c3.d15/c3.d15.wav",
+  "dst": "sel/hoc/d05/c3.d15/c3.d15.flac",
+  "sr": 44100,
+  "frames": 94280,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.47305458784103394
+ },
+ {
+  "src": "sel/hoc/d05/c3.d18/c3.d18.wav",
+  "dst": "sel/hoc/d05/c3.d18/c3.d18.flac",
+  "sr": 44100,
+  "frames": 89439,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5578309297561646
+ },
+ {
+  "src": "sel/hoc/d05/c3.d30/c3.d30#1.wav",
+  "dst": "sel/hoc/d05/c3.d30/c3.d30#1.flac",
+  "sr": 44100,
+  "frames": 41350,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5227088928222656
+ },
+ {
+  "src": "sel/hoc/d05/c3.d30/c3.d30#2.wav",
+  "dst": "sel/hoc/d05/c3.d30/c3.d30#2.flac",
+  "sr": 44100,
+  "frames": 180311,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5624508857727051
+ },
+ {
+  "src": "sel/hoc/d05/c3.d45/c3.d45#1.wav",
+  "dst": "sel/hoc/d05/c3.d45/c3.d45#1.flac",
+  "sr": 44100,
+  "frames": 41678,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5119578242301941
+ },
+ {
+  "src": "sel/hoc/d05/c3.d45/c3.d45#2.wav",
+  "dst": "sel/hoc/d05/c3.d45/c3.d45#2.flac",
+  "sr": 44100,
+  "frames": 130216,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.49307379126548767
+ },
+ {
+  "src": "sel/hoc/d05/c3.kaydiysa/c3.kaydiysa.wav",
+  "dst": "sel/hoc/d05/c3.kaydiysa/c3.kaydiysa.flac",
+  "sr": 44100,
+  "frames": 158000,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6899798512458801
+ },
+ {
+  "src": "sel/hoc/d05/c3.kisa/c3.kisa.wav",
+  "dst": "sel/hoc/d05/c3.kisa/c3.kisa.flac",
+  "sr": 44100,
+  "frames": 119943,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5627713203430176
+ },
+ {
+  "src": "sel/hoc/d05/c3.kisa2/c3.kisa2.wav",
+  "dst": "sel/hoc/d05/c3.kisa2/c3.kisa2.flac",
+  "sr": 44100,
+  "frames": 105504,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5981932878494263
+ },
+ {
+  "src": "sel/hoc/d05/c3.parlak/c3.parlak.wav",
+  "dst": "sel/hoc/d05/c3.parlak/c3.parlak.flac",
+  "sr": 44100,
+  "frames": 147737,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6453834772109985
+ },
+ {
+  "src": "sel/hoc/d05/c3.w30/c3.w30#1.wav",
+  "dst": "sel/hoc/d05/c3.w30/c3.w30#1.flac",
+  "sr": 44100,
+  "frames": 142521,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5040115714073181
+ },
+ {
+  "src": "sel/hoc/d05/c3.w30/c3.w30#2.wav",
+  "dst": "sel/hoc/d05/c3.w30/c3.w30#2.flac",
+  "sr": 44100,
+  "frames": 113920,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.45917096734046936
+ },
+ {
+  "src": "sel/hoc/d05/c3.w30/c3.w30#3.wav",
+  "dst": "sel/hoc/d05/c3.w30/c3.w30#3.flac",
+  "sr": 44100,
+  "frames": 76707,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5829516649246216
+ },
+ {
+  "src": "sel/hoc/d05/c3.w45/c3.w45#1.wav",
+  "dst": "sel/hoc/d05/c3.w45/c3.w45#1.flac",
+  "sr": 44100,
+  "frames": 124935,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5617905855178833
+ },
+ {
+  "src": "sel/hoc/d05/c3.w45/c3.w45#2.wav",
+  "dst": "sel/hoc/d05/c3.w45/c3.w45#2.flac",
+  "sr": 44100,
+  "frames": 123028,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5264642834663391
+ },
+ {
+  "src": "sel/hoc/d05/c3.w45/c3.w45#3.wav",
+  "dst": "sel/hoc/d05/c3.w45/c3.w45#3.flac",
+  "sr": 44100,
+  "frames": 82571,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5389285683631897
+ },
+ {
+  "src": "sel/hoc/d05/d.bekle/d.bekle.wav",
+  "dst": "sel/hoc/d05/d.bekle/d.bekle.flac",
+  "sr": 44100,
+  "frames": 206191,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5971891283988953
+ },
+ {
+  "src": "sel/hoc/d05/d.goz/d.goz.wav",
+  "dst": "sel/hoc/d05/d.goz/d.goz.flac",
+  "sr": 44100,
+  "frames": 161106,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.656568706035614
+ },
+ {
+  "src": "sel/hoc/d05/d.kalk/d.kalk.wav",
+  "dst": "sel/hoc/d05/d.kalk/d.kalk.flac",
+  "sr": 44100,
+  "frames": 164364,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5859230756759644
+ },
+ {
+  "src": "sel/hoc/d05/i.ilk/i.ilk.wav",
+  "dst": "sel/hoc/d05/i.ilk/i.ilk.flac",
+  "sr": 44100,
+  "frames": 299639,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.503535807132721
+ },
+ {
+  "src": "sel/hoc/d05/k.avuc1/k.avuc1.wav",
+  "dst": "sel/hoc/d05/k.avuc1/k.avuc1.flac",
+  "sr": 44100,
+  "frames": 201287,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5569364428520203
+ },
+ {
+  "src": "sel/hoc/d05/k.avuc2/k.avuc2.wav",
+  "dst": "sel/hoc/d05/k.avuc2/k.avuc2.flac",
+  "sr": 44100,
+  "frames": 289252,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5607741475105286
+ },
+ {
+  "src": "sel/hoc/d05/k.avuc3/k.avuc3.wav",
+  "dst": "sel/hoc/d05/k.avuc3/k.avuc3.flac",
+  "sr": 44100,
+  "frames": 195686,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5463089346885681
+ },
+ {
+  "src": "sel/hoc/d05/k.avuc4/k.avuc4.wav",
+  "dst": "sel/hoc/d05/k.avuc4/k.avuc4.flac",
+  "sr": 44100,
+  "frames": 162195,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.4872739315032959
+ },
+ {
+  "src": "sel/hoc/d05/k.avuc5/k.avuc5.wav",
+  "dst": "sel/hoc/d05/k.avuc5/k.avuc5.flac",
+  "sr": 44100,
+  "frames": 107381,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5729691386222839
+ },
+ {
+  "src": "sel/hoc/d05/k.donus/k.donus.wav",
+  "dst": "sel/hoc/d05/k.donus/k.donus.flac",
+  "sr": 44100,
+  "frames": 80123,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6887910962104797
+ },
+ {
+  "src": "sel/hoc/d05/k.goz.kisa/k.goz.kisa.wav",
+  "dst": "sel/hoc/d05/k.goz.kisa/k.goz.kisa.flac",
+  "sr": 44100,
+  "frames": 154924,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.7282799482345581
+ },
+ {
+  "src": "sel/hoc/d05/k.goz/k.goz.wav",
+  "dst": "sel/hoc/d05/k.goz/k.goz.flac",
+  "sr": 44100,
+  "frames": 221621,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5910061597824097
+ },
+ {
+  "src": "sel/hoc/d05/k.gun/k.gun.wav",
+  "dst": "sel/hoc/d05/k.gun/k.gun.flac",
+  "sr": 44100,
+  "frames": 247946,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.6593212485313416
+ },
+ {
+  "src": "sel/hoc/d05/k.hareket/k.hareket.wav",
+  "dst": "sel/hoc/d05/k.hareket/k.hareket.flac",
+  "sr": 44100,
+  "frames": 283578,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5961540341377258
+ },
+ {
+  "src": "sel/hoc/d05/k.nefes/k.nefes.wav",
+  "dst": "sel/hoc/d05/k.nefes/k.nefes.flac",
+  "sr": 44100,
+  "frames": 228488,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5534118413925171
+ },
+ {
+  "src": "sel/hoc/d05/k.oda/k.oda.wav",
+  "dst": "sel/hoc/d05/k.oda/k.oda.flac",
+  "sr": 44100,
+  "frames": 222505,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.573157012462616
+ },
+ {
+  "src": "sel/hoc/d05/k.sesler/k.sesler.wav",
+  "dst": "sel/hoc/d05/k.sesler/k.sesler.flac",
+  "sr": 44100,
+  "frames": 133435,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.5471641421318054
+ },
+ {
+  "src": "sel/hoc/d05/k.son/k.son.wav",
+  "dst": "sel/hoc/d05/k.son/k.son.flac",
+  "sr": 44100,
+  "frames": 105545,
+  "ch": 1,
+  "max_abs_err": 5.960464477539063e-08,
+  "peak": 0.45301640033721924
  }
 ]

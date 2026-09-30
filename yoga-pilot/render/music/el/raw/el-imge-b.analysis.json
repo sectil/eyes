@@ -1,0 +1,72 @@
+{
+ "file": "el-imge-b.wav",
+ "src_sr": 44100,
+ "src_channels": 2,
+ "duration_s": 180.0,
+ "lufs_i": -20.82,
+ "true_peak_dbtp": -1.73,
+ "sample_peak_dbfs": -1.74,
+ "clipped_samples": 0,
+ "dc": [
+  -1e-05,
+  -7e-06
+ ],
+ "lr_corr": 0.443,
+ "lead_silence_ms": 513.4,
+ "tail_silence_ms": 1638.8,
+ "onsets": {
+  "pulse_clarity": 0.059,
+  "percussive_share": 0.053,
+  "events_per_min": 110.67,
+  "strong_onsets_per_min": 7.0,
+  "flux_mean_db": 0.5479,
+  "flux_median_db": 0.5113,
+  "flux_p99_db": 1.215,
+  "flux_max_db": 9.769,
+  "flux_max_at_s": 120.5
+ },
+ "clicks_hf": {
+  "count": 11,
+  "first": [
+   [
+    8.547,
+    13.2
+   ],
+   [
+    8.547,
+    20.7
+   ],
+   [
+    48.52,
+    14.0
+   ],
+   [
+    80.525,
+    14.8
+   ],
+   [
+    80.525,
+    19.1
+   ],
+   [
+    104.518,
+    15.9
+   ],
+   [
+    104.52,
+    13.9
+   ],
+   [
+    104.522,
+    17.0
+   ]
+  ]
+ },
+ "spectrum": {
+  "centroid_hz": 274.2,
+  "share_lt300": 0.7,
+  "share_500_4k": 0.075,
+  "share_1k5_4k": 0.0001,
+  "share_gt8k": 0.0
+ }
+}
