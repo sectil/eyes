@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gelişim bildirimi maketi</title>
+<style>
+@font-face { font-family: 'Onest Local'; src: url('../../../../../app/node_modules/@fontsource-variable/onest/files/onest-latin-ext-wght-normal.woff2') format('woff2'); font-weight: 100 900; unicode-range: U+0100-02AF; }
+@font-face { font-family: 'Onest Local'; src: url('../../../../../app/node_modules/@fontsource-variable/onest/files/onest-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; unicode-range: U+0000-00FF, U+0131, U+2000-206F; }
+/* Kilit ekranı: sistem yazısı yerine yakın bir yedek (maket); bildirim metni asıl sınanan şey. */
+:root { --bg1: #1d2b3a; --bg2: #0b1219; --card: rgba(245,248,250,.78); --ink: #0b1219; --ink-2: #33414d; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, 'Onest Local', system-ui, sans-serif; background: #888; }
+.lock { width: 390px; height: 844px; background: radial-gradient(420px 520px at 30% 20%, #3a5a78 0%, var(--bg1) 45%, var(--bg2) 100%); position: relative; overflow: hidden; color: #fff; }
+.date { text-align: center; padding-top: 70px; font-size: 20px; font-weight: 500; opacity: .9; }
+.time { text-align: center; font-size: 92px; font-weight: 600; letter-spacing: -2px; margin-top: -4px; }
+.stack { position: absolute; left: 10px; right: 10px; bottom: 150px; display: flex; flex-direction: column; gap: 8px; }
+.n { background: var(--card); backdrop-filter: blur(20px); border-radius: 22px; padding: 12px 14px; color: var(--ink); display: grid; grid-template-columns: 38px 1fr; gap: 0 10px; }
+.n .ic { width: 38px; height: 38px; border-radius: 9px; grid-row: 1 / span 3; background: radial-gradient(circle at 50% 50%, #081018 0 22%, transparent 23%), conic-gradient(from 20deg, #11a9b8, #2f6bea, #11a9b8); }
+.n .h { display: flex; justify-content: space-between; font-size: 15px; font-weight: 600; }
+.n .h small { font-weight: 400; color: var(--ink-2); font-size: 13px; }
+.n .b { font-size: 15px; line-height: 1.3; color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="lock">
+  <div class="date" id="d">Pazartesi 6 Ekim</div>
+  <div class="time">09:30</div>
+  <div class="stack" id="s"></div>
+</div>
+<script>
+// ?v=a|b|c|m|gizli : bildirim metni çeşitleri (örnek veri: 5 gün, en dolu yay nefes)
+const V = {
+  a: ['Kubben geçen hafta 5 gün ışıdı', 'En parlak yayın nefes oldu. Yeni haftanın ilk ışığı bugün.'],
+  b: ['Geçen hafta 5 gün buradaydın', 'Nefes yayın o 5 günün hepsinde yandı. Kubbene bak, haftan orada.'],
+  c: ['Haftan hazır', 'Geçen hafta 5 gün çalıştın; en dolu yayın nefes.'],
+  m: ['İlk ayın tamam', 'Kubben 28 günün 24\'ünde ışıdı. Hareket yayın ilk kez tamamlandı.'],
+  gizli: ['Haftan hazır', 'Kubbene bakmak için dokun.'],
+}
+const v = new URLSearchParams(location.search).get('v') || 'a'
+const [t, b] = V[v]
+document.getElementById('s').innerHTML = `<div class="n"><span class="ic"></span><span class="h">NEFONA<small>şimdi</small></span><b style="font-size:15px">${t}</b><span class="b">${b}</span></div>`
+</script>
+</body>
+</html>

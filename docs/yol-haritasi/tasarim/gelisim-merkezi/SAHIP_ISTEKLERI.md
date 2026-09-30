@@ -18,3 +18,9 @@ Plan §12'deki üç önerinin hepsi kabul edildi:
 2. İlk günler: ilk hafta ayrı bir görünüm; bir tasarım turu daha yapılır, sahibe ancak 5 saniye kapısından geçerse gider.
 3. Beş alan (Göz, Dikkat, Nefes, Ruh hâli, Hareket; Apple Sağlık Hareket'te); haftalık gelişim bildirimi (Pazartesi,
    varsayılan kapalı, aylık özet 29., 57., 85. gün); Gelişim açılınca kamera açılmaz.
+
+## Sahibin 2026-09-30 akşam sözü (kelimesi kelimesine)
+> 5 saniye kuralına uygun değil bazı maddler.. ettkilemek lazım evet kubbe olsun ama 5n önemli..  kararlrın tamam ama tekrar tekrar düşn  benim kararlarımı bir kabullenir olarak dşüneme doğru ve iyisi mükemmel ne ise o olmalı
+
+Okunuşu: kubbe kalır; ama her ekran 5 saniyede etkilemeli. Sahibin kararları sorgusuz kabul edilecek şey değildir;
+doğru, en iyi ve mükemmel olan neyse o yapılır, gerekirse sahibin kararına karşı gerekçeli öneri getirilir.
