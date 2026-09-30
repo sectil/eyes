@@ -117,3 +117,8 @@ hâlinin gerçek ekranlarıyla girer; planda olup yapılmamış olan (ör. hava,
 - **İlk yayın:** "İlk App Store'dan önce" → site ilk App Store derlemesinden önce, yalnız doğrulanmış içerikle çıkar.
 - **Alan adı:** "Yayın günü" → bugünkü kural sürer; alan adı sitenin ilk yayın günü alınır.
 - **Bugün sitede anlatılan `[~]` işler** (haftalık E testi, veri merkezi, iris ve Gelişim, parlaklık): "Hepsi kalsın".
+
+## Ana sayfa iki karar (2026-10-01)
+- İlk cümle **bugüne dönük**: Nef bugünün işini söyler (örnek, sahibin seçtiği: "Bugünkü yolun 8 dakika, ilk durağın
+  Sağ–sol bakış."). Dünün sayıları Gelişim'de kalır.
+- Tek sayı: **"Bu hafta N/3 gün"**. "N gün seri" ve "N gün seninle" ilk görünümden çıkar.
