@@ -47,3 +47,11 @@ Sonraki aşamaya (metin + ses + tasarım iş akışı) bu dosya olduğu gibi ver
    bırakmıştı), **müzik A = ElevenLabs Music**. Gerekçe: B (Dalga motoru) yatağında ≈ 24 sn'de bir ≈ 20 dB iniş ve 6,8 dB/sn
    geri çıkış ölçüldü (SPEC §6 sınırı ≤ 1 dB/sn); A'da ölçülmüş kusur yok. Kör anahtar açıldı: ses1 Hakan, ses2 Neslihan,
    ses3 Nefona Hoca; A ElevenLabs, B Dalga (render/out/_kor_anahtar.json). Sıradaki: B adımı (PLAN.v3 §F).
+
+## Sahibin 2026-09-30 ikinci mesajı (kelimesi kelimesine)
+9. "elevenlab bağlantısı var olması lazım..  10 dersten oluşuyor biliyorsun hangi derler şuanda hazırsa modlüe
+   ekleyelebilem ve yolda gösterleim...  sonra arka planda diğer dersleri indirim yorumlıarzu şuna kadar ayzılan dersleri
+   vs sakla... ilk önce ilk bölümü canlıya alalım"
+   → Okunuşu: PLAN.v3'teki "kısmi yayın yoktur" kuralı değişiyor; hazır dersler önce modüle ve yola girer, kalan dersler
+     arka planda üretilir, yazılan metinler saklanır. VARSAYIM: "indirim" = diğer dersleri üretmek; "canlı" = önce
+     TestFlight (uygulama App Store'da henüz "Prepare for Submission"). "İlk bölüm" planı sahibin onayına sunuldu.
