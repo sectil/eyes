@@ -1,6 +1,6 @@
 # Gelişim merkezi · Plan (sürüm 1)
 
-Tarih: 2026-09-30. Durum: **Sahibin üç kararı alındı (2026-09-30, §12); ilk hafta görünümü 5 saniye kapısında (§2.4).** Uygulama koduna dokunulmadı; ücretli çağrı yapılmadı. Dal:
+Tarih: 2026-09-30. Durum: **Sahibin üç kararı alındı (§12). 30. gün ve yürüyüş kapıdan geçti; ilk günler (1.–9. gün) geçmedi ve sahibe soruldu (§2.4).** Uygulama koduna dokunulmadı; ücretli çağrı yapılmadı. Dal:
 `claude/gelisim-merkezi-plan`. Kod, onaydan sonra ana oturumda (`claude/cool-pasteur-j5yupf`) yazılır.
 
 **Girdiler:** sahibin isteği (`SAHIP_ISTEKLERI.md` bu klasörde), `DENETIM.md` (bugünkü veri yolu, 4 kritik, 12 önemli
@@ -24,7 +24,7 @@ alanın ayrıntısı açılır: düzen, basamak, ölçü, değişim.
 **Arkadaki asıl iş (görünmeyen ama en önemli).** Bugün Gelişim'in satırı, alan ayrıntısı, 5. gün raporu, PDF/CSV, Ana
 sayfa ve Nef aynı kayıttan farklı sonuç çıkarabiliyor (DENETIM K1, K2). Plan, veri merkezine tek bir çıkış ekler
 (`growthCenter`); bütün yüzeyler yalnız onu okur. Onaylı ölçü kuralı v2 (karar 2) burada uygulanır. Denetimin kritik ve
-önemli bulgularının hepsi aynı işte kapanır.
+önemli bulgularının hepsi burada ya da adı konmuş bir işte kapanır (§13 tablo).
 
 **İsteğin nasıl karşılandığı**
 
@@ -37,7 +37,7 @@ sayfa ve Nef aynı kayıttan farklı sonuç çıkarabiliyor (DENETIM K1, K2). Pl
 | "Göz, nefes, durum, hareket, sağlık takip edilir" | Beş alan: Göz, Dikkat, Nefes, Ruh hâli, Hareket. Apple Sağlık adımları Hareket'e girer (soru 1) |
 | "Veriler kullanıcıya basit sunulur" | Ekranın başında tek resim, tek cümle, yayda "8/9" gibi tek sayı; ayrıntı dokununca |
 | "İsterse bildirim; Bildirimler bölümünde öteki bildirimler gibi" | "Haftalık gelişim" bildirimi: Pazartesi, varsayılan kapalı, Bildirimler → Nef'in haberleri (§6) |
-| "Sonsuz yoldaki modellerden düzgün veri gelmesi, işlenmesi" | Denetimin 4 kritik, 12 önemli bulgusu bu işte kapanır; tek hesap testle kilitlenir (§8) |
+| "Sonsuz yoldaki modellerden düzgün veri gelmesi, işlenmesi" | Denetimin 4 kritik ve 12 önemli bulgusunun her biri bir işe bağlandı: çoğu G1'de, Nef'e ait iki bulgu onaylı Y6'da, görme serisi hatası G1'in ilk adımında (§13) |
 | "5 saniye kuralı; mükemmel değilse gönderme" | Kapı sonucu §2'de, sayılarıyla |
 
 **Dürüst not: fikrin kendisi 5 saniye kapısından nasıl geçti.** Üç yön denendi: (A) önden bir baş, alnın içinde ışıklı
@@ -105,6 +105,25 @@ yok (Göz en içteki yay). Beş yeni değerlendirici; notlar `kapi/5sn-yontem2.m
 
 Bu yüzden tasarım "mükemmel" diye gönderilmez. Sahibe yalnız iki karar sorusu gider; cevaba göre bir tur daha yapılır.
 
+### 2.4 İlk hafta turları (sahibin 2. kararından sonra)
+
+İki tur, her biri beş yeni değerlendirici; notlar `kapi/5sn-ilkhafta-tur1.md`, `kapi/5sn-ilkhafta-tur2.md`.
+
+| Ekran | Tur 1: payda 7, açılan iz renkli | Tur 2: büyüyen kubbe, iz yok, payda hep 28 |
+|---|---|---|
+| 1. gün | 0/5 | 0/5 |
+| 3. gün | ≈3/5 ("az" evetler) | 0/5 |
+| 9. gün | 0/5 (7'den 28'e geçiş "geriledim" diye okundu) | 0/5 (4 "kısmen") |
+| 30. gün | 5/5 | 5/5 |
+| Yürüyüş | 5/5 | 5/5 |
+
+**Dürüst sonuç.** Beş ayrı yaklaşım denendi (boş iz, 1/1 dolu, oran, payda 7, büyüyen kubbe). 30. gün ve canlı yürüyüş
+her turda geçiyor; ilk günler hiçbirinde geçmiyor. Değerlendiricilerin ortak sözü şu: ilk günlerde bir ilerleme resmi ya
+boş, ya hak edilmemiş, ya da birbirinin aynı görünüyor. Bu, ilerlemeyi gösteren her resmin doğasında var; ana sayfa
+yeniden tasarımında da aynı şey görüldü. Ayrıca iki kalıcı not: dış yay büyük olduğu için aynı gün sayısı dış yayda daha
+uzun görünüyor (yanlış okuma) ve kubbe tek renkte "Wi-Fi simgesi" gibi okunabiliyor. Aynı yöntemle iki tur dolduğu için
+iş durdu; karar sahibindir (§12 soru 4).
+
 ### 2.2 Ekranın düzeni (ilk görünüm, 390 pt)
 
 1. Başlık "Gelişim" ve sağda evre: "İlk haftan · 3. gün", "İlk ayın · 9. gün" ya da "Son 28 gün".
@@ -171,8 +190,8 @@ kurulum, 28. gün, testler) aynen kalır. Ekranda beş alan gösterilir:
 |---|---|---|
 | Göz | eye | E testi, kısa görme testi, okuma testi, göz egzersizleri, göz kırp, İlk Bakış |
 | Dikkat | focus + awareness | Hızlı Bakış, Tek Bakışta, Çemberler, Yılan, Fark Ettin mi?, Bugünün görevi, nefes sayma, yoga Ders 5 |
-| Nefes | calm | nefes, Dalga (sakin), Gökyüzü, yoga Ders 1 |
-| Ruh hâli | wellbeing + self | WHO-5, alarmla uyanış, Dalga (güç, motive), Yön, yoga Ders 3, Y4'te "Günün nasıl geçti" |
+| Nefes | calm | nefes, Dalga (günleri; bütün Dalga oturumları bugün `calm` sayılıyor), Gökyüzü, yoga Ders 1 |
+| Ruh hâli | wellbeing + self | WHO-5, alarmla uyanış, Yön, yoga Ders 3, Y4'te "Günün nasıl geçti"; Dalga'nın güç ve motive etkileri (günü değil, yalnız etkisi) |
 | Hareket | body | mola, su, yoga Ders 2, Apple Sağlık adımı (§3.4), B3'te yürüyüş eşliği |
 
 Bir gün, alanın içerideki alanlarından herhangi birinde kayıt varsa o alanda "çalışılmış gün" sayılır. Kurulumdaki ve
@@ -183,8 +202,9 @@ Bir gün, alanın içerideki alanlarından herhangi birinde kayıt varsa o aland
 - Metrik: ölçü kuralı v2 (`metricStatusV2` → `verdict`); günlük ortanca (K4), sabit başlangıç, son 3 gün, haftalık bakış,
   iki hafta sürme (K3). Göz kuralı `trend.js`'te değişmez.
 - Etki: yalnız son 28 gün ve ≥ 3 oturum (Ö-3); ortalamaya dönüş notu önce → sonra kartında.
-- Alan: göz uyarısı ya da WHO-5 "worse" her şeyin önünde; öteki durumlarda "better" ve "worse" birlikteyse
-  `mixed` (satırda "karışık"), yay rengi değişmez. `FEEL_ONLY_MODULES` (yoga) hükme girmez (Ö-1).
+- Alan: göz uyarısı ya da WHO-5 `down` her şeyin önünde; öteki durumlarda "better" ve "worse" birlikteyse
+  hüküm `null`, yanında `mixed: true` (satırda "karışık"); onaylı §3.G.4'teki `null (karışık)` ile aynı. `HomeMap` ve
+  `IrisMap` yalnız `null` görür, değişmez. `FEEL_ONLY_MODULES` (yoga) hükme girmez (Ö-1).
 - Ekrandaki beş alanın hükmü: içerideki alanların hükümlerinden aynı kuralla (biri `worse`, öteki `better` ise `mixed`).
 
 ### 3.4 Apple Sağlık adımları
@@ -257,8 +277,8 @@ Gelişim'in altında bir kez: "Her pazartesi haftanı tek cümleyle yazayım mı
 daha sorulmaz (Bildirimler'den açılır).
 
 **Ne zaman:** Pazartesi (ölçü kuralı v2'nin bakış günü ve haftalık Nef ile aynı), kişinin uygulamayı en sık açtığı saat
-(B1'deki "Sen karar ver" motoru), `calm` penceresi 08.00–22.00, gece sessizliği ve "iki bildirim arası ≥ 60 dk" kuralı
-(`planAll`). Geçen takvim haftasında hiç kayıt yoksa gönderilmez (suçlama yok). Aylık: 29., 57., 85. gün (onaylı Nef
+varsayılan 09.30, kişi Bildirimler'den değiştirir; `calm` penceresi 08.00–22.00, gece sessizliği ve onaylı
+planlayıcının aralık kuralı (`planAll`: planlayıcıda ≥ 30 dk). Geçen takvim haftasında hiç kayıt yoksa gönderilmez (suçlama yok). Aylık: 29., 57., 85. gün (onaylı Nef
 dönemleriyle aynı gün), aynı satırdan.
 
 **Kimlik:** 7870 (haftalık), 7871 (aylık); `notifyApply` uzlaştırılan aralığa (`OWN`) eklenir. JS'in bekleyen bütçesi
@@ -272,7 +292,7 @@ dönemleriyle aynı gün), aynı satırdan.
 Bildirimde "gerisinde", göz uyarısı ve sağlık yorumu yoktur; uyarılar yalnız uygulamada (onaylı §3.C.3).
 
 **Bilim kartı** (dokununca; görünür bilim satırı günde bir bildirimde, onaylı karar 3):
-- Harkin 2016, *Psychological Bulletin*, meta-analiz, 138 çalışma, 19.951 kişi: ilerlemeyi izlemeyi artıran
+- Harkin 2016 (e-yayın 2015), *Psychological Bulletin*, meta-analiz, 138 çalışma, 19.951 kişi: ilerlemeyi izlemeyi artıran
   müdahaleler hedefe ulaşmayı artırdı (d = 0,40); ilerleme kaydedildiğinde ve başkasına bildirildiğinde etki daha
   büyüktü. Sınır: çok farklı davranışlar ve hedefler; bir sağlık sonucunu göstermez. PMID 26479070, DOI
   10.1037/bul0000025.
@@ -280,7 +300,7 @@ Bildirimde "gerisinde", göz uyarısı ve sağlık yorumu yoktur; uyarılar yaln
   müdahalelerinde kendini izleme, çalışmalar arası farkın en büyük payını (%13) açıkladı; kontrol teorisinden bir başka
   teknikle birleşince etki büyüdü (0,42'ye karşı 0,26). Sınır: heterojenlik yüksek (I² %69); beslenme ve hareket dışına
   genellenmez. PMID 19916637, DOI 10.1037/a0016136.
-İkisi de bu oturumda PubMed'de açılıp okundu. Kart "yararlıdır" demez; "izlemek, hedefe ulaşmayla ilişkili bulundu" der.
+İkisi de bu oturumda PubMed'de açılıp okundu. Kart bulguyu çalışmanın kendi sözcükleriyle ve sınırıyla verir; Nefona için "yararlıdır" ya da sağlık sonucu yazmaz.
 
 ---
 
@@ -315,7 +335,7 @@ Her aşamada `app/src/lib/releases.js`'e sürüm notu; hatalar `HATA_GUNLUGU.md`
 
 ### 8.2 Bilinçli olarak değişen test beklentileri
 
-- `lib/dataHub.test.js`: "better + worse → down" yerine `mixed` (onaylı §3.G.4 ile aynı satır); `records` gün sayar.
+- `lib/dataHub.test.js`: "better + worse → down" yerine `null` ve `mixed: true` (onaylı §3.G.4 ile aynı satır); `records` gün sayar.
 - `modules/coachStats.test.js`: `span7` ortanca (onaylı).
 - Gelişim satırı metnini sabitleyen testler (`ProgressOverview.eye.test.jsx`, `.yoga.test.jsx`, `FirstReport.test.jsx`):
   göz satırı `current` ve "son 3 test"; yoga hükme girmez; WHO-5 ikinci ölçüm. Listelenmeyen bir beklenti değişmek
@@ -330,9 +350,13 @@ Her aşamada `app/src/lib/releases.js`'e sürüm notu; hatalar `HATA_GUNLUGU.md`
 
 - **Tohumlu düzenek** (`mulberry32(1)`, 20.000 rastgele depo: 0–400 gün, her modülden kayıt, aynı gün çok tur,
   alışkanlık, WHO-5, sağlık, ara): eski ve yeni kodda `growthMap`'in `days`, `strip`, `sinceStart`, `frac` alanları
-  **0 farkla** aynı; fark yalnız izinli listede (hüküm metni ve `verdict`, K1–K4, Ö-1, Ö-3, Ö-5, Ö-8).
+  **0 farkla** aynı; fark yalnız izinli listede: hüküm metni ve `verdict` (K1–K4, Ö-1, Ö-3, Ö-8); görme testinin gün
+  olarak sayılması (Ö-5: `records`, kaynak satırı); Apple Sağlık'ta kendi ortancasını geçen günün Beden `days` ve `strip`'ine
+  girmesi (Ö-9). Taban, G1'den önceki `dataHub.js`, `progress.js`, `stats.js` ve `exportData.js`'in `test/fixtures/gelisim-taban/` altına
+  kopyasıdır (onaylı bildirim planının dondurma kalıbı).
 - **Tek hesap testi:** aynı depodan Gelişim satırı, ayrıntı, 5. gün raporu, PDF, CSV, Ana sayfa, bildirim metni ve Nef
-  paketi aynı `verdict`'i ve göz değerini verir (denetimin B betiği bu testin çekirdeğidir).
+  paketi aynı `verdict`'i ve göz değerini verir. Nef paketi bu teste Y6'da girer (bugünkü paket göz dışında hüküm
+  taşımıyor; yeni alan rıza v2 ister) (denetimin B betiği bu testin çekirdeğidir).
 - **Denetim betikleri** (A 12 durum, B 4 durum, C) teste çevrilir; her bulgu bir test olur.
 
 ---
@@ -396,3 +420,33 @@ plandan).
    kapısından geçerse gider (§2.4).
 3. **Beş alan** (Göz, Dikkat, Nefes, Ruh hâli, Hareket; Apple Sağlık Hareket'te); **haftalık gelişim bildirimi**
    (Pazartesi, varsayılan kapalı, aylık özet 29., 57., 85. gün); **Gelişim açılınca kamera açılmaz.**
+
+4. **İlk günler (açık soru, 2026-09-30).** Işık kubbesi 30. günde ve yürürken 5/5 ile geçiyor; 1.–9. gün beş ayrı
+   yaklaşımda geçmedi (§2.4). (a) **İlk 9 gün Gelişim'in başında kubbe yerine "bugün ne biriktirdin" görünümü:** o gün
+   yapılan işler, her biri kendi alanının renginde ve sayısıyla; kubbe 10. günde ilk kez açılır ("Kubben hazır"). Bu bir
+   tasarım turu daha ister; sana ancak geçerse gelir. (b) Kubbe ilk günden kalsın; ilk günlerin 5 saniye kapısını
+   geçmediğini bilerek kabul et; kullanıcı ilk günlerde zaten Ana sayfada ve yolda. **Öneri: (a).**
+
+## 13. Eleştirilerden sonra düzeltmeler (doğruluk 21, eksiklik 36 bulgu)
+
+Eleştiriler: `elestiri/dogruluk.md`, `elestiri/eksiklik.md` (bu klasörde). Kritik ve önemli bulguların karşılığı:
+
+| Bulgu | Düzeltme |
+|---|---|
+| "Bütün bulgular bu işte kapanır" yanlıştı | Denetim bulgularının iş tablosu: K1–K4, Ö-1, Ö-3…Ö-10 → G1/G2. Ö-2 ve Ö-12 (Nef) → onaylı Y6 (paket v2 ve rıza v2 ister). **Ö-11 (kamerasız tek E testi kırmızı uyarıyı siliyor) → G1'in ilk adımı**; `trend.js`'te yalnız seri seçimi değişir, göz kuralı (alışma, başlangıç, son 3, eşikler) değişmez; ayrıca ayrı iş olarak da önerildi, hangisi önce gelirse. Kü-12 (bakış kalibrasyonu silinmiyor) → aynı ayrı iş |
+| K2 ve `verdict` okuyan dosyalar izinli listede yoktu | G1/G2 listesine eklenir: `screens/Home.jsx` (göz kartı `current7 ?? last` → `eye.current`), `screens/Who5.jsx` (`metricStatus` → `verdict`), `App.jsx` (`growthCenter` girdisi `health`, dokunma yolu `growth`). `lib/coach.js` G1'de yalnız okunur, değişmez (Y6) |
+| Adım eşiği hesaplanamıyordu | `health.dailyTotals` en çok 60 günü veriyor; kişisel ortanca eldeki son 60 günün (en az 7 adımlı gün) ortancasıdır; 7 günden az veride adım günü Hareket'e sayılmaz, yalnız satırda görünür. Adım depoya yazılmaz, her açılışta yeniden okunur (VARSAYIM; cihazda doğrulanır) |
+| `mixed` onaylı planla çelişiyordu | `null` + `mixed: true` (§3.3) |
+| Dalga eşlemesi yanlıştı | Dalga günleri Nefes'te, yalnız etkileri Ruh hâli'nde (§3.2) |
+| Eşdeğerlikte "0 fark" ile Ö-5, Ö-9 çelişiyordu | İzinli listeye eklendi; taban dondurma yolu yazıldı (§8.4) |
+| Tek hesap testinde Nef | Y6'ya ertelendi (§8.4) |
+| §8.2'de onaylı listenin dışında dört test beklentisi | Bu planın onayı bu dört beklentinin değişmesini de kapsar; öteki her beklenti değişikliğinde iş durur |
+| Bildirim bütçesi (≤ 58) en kötü durumda dolu | Öncelik: deney bildirimleri > modül hatırlatmaları > aylık gelişim > haftalık gelişim; yer yoksa aylık önce düşer, haftalık bir sonraki açılışta yeniden kurulur. Aylık ile haftalık aynı güne düşerse yalnız aylık gider. Metin kurulum anında `growthCenter`'dan üretilir |
+| "Sen karar ver" yanlış anılmıştı; ≥ 60 dk | Saat varsayılan 09.30, kişi değiştirir; aralık onaylı planlayıcının kuralı (§6) |
+| Harkin yılı, kart dili | "2016 (e-yayın 2015)"; kart bulguyu kendi sözcükleriyle verir (§6) |
+| Evre kenarları | Evre ilk kayıttan geçen takvim gününe (`sinceStart`) göre, cihazın yerel gece yarısında değişir; ara vermek evreyi değiştirmez. Kaydı olmayan eski kurulumda ilk kayıt günü başlangıçtır. "Uzun ara" tek eşik: 3 gün ve üstü (onaylı §3.C.4'teki 3–13 gün satırı) |
+| Nef cümlesinin önceliği onaylı §3.F.4 ile çelişiyordu | Gelişim'deki cümle onaylı §3.F.4 sırasını izler; bu plan yalnız "canlı yürüyüş" satırını ekler (B3 ile) |
+| "Bugün gösterildi" işareti | `App.jsx` "Tüm verileri sil" akışına eklenir (modül `storageKeys` değil) |
+| Kapı eşiği | Bu işte görev emriyle 5'te 4 uygulandı (`IS_AKISI_KURALLARI.md` 5'te 3 der); turlar yöntem değişince yeniden sayıldı ve her yöntemde en çok iki tur yapıldı |
+| Kilit ekranında sayı | "Kilit ekranında sayı gösterme" açıksa gelişim bildirimi sayısız metne döner; bu, onaylı anahtarın kapsamını genişletir, B1 kodunda anahtarın açıklama satırına eklenir |
+| Cihaz listesi | Eklenenler: saat dilimi değişimi, 9 → 10. gün ve 28 → 29. gün geçişi, Apple Sağlık izninin geri çekilmesi, "Tüm verileri sil" sonrası, büyük yazı (Dinamik Yazı) |
