@@ -235,3 +235,210 @@ Dürüst yedek (öneri):
 - Bitiş: "Apple Sağlık'a göre bu yürüyüş: 1.268 adım · bugün toplam 7.412 adım." Sağlık'tan okunamadıysa: "Sağlık verisi telefon
   açılınca güncellenecek."
 - "Apple'la birebir aynı" sözü yalnız **bitiş/uzlaştırılmış** sayı için verilebilir; canlı sayı için verilmemeli.
+
+---
+
+## 3. Mesafe ve hız (tempo)
+
+### 3.1 `CMPedometer` alanları
+
+| Alan | iOS | Birim (Apple) | Not |
+|---|---|---|---|
+| `numberOfSteps` | 8.0 | adım | `coremotion/cmpedometerdata/numberofsteps` |
+| `distance` | 8.0 | "estimated distance (in meters)"; cihaz desteklemezse `nil` | `coremotion/cmpedometerdata/distance` |
+| `currentPace` | 9.0 | "seconds per meter"; tarihsel sorguda ve "not yet available" iken `nil` | `coremotion/cmpedometerdata/currentpace` |
+| `currentCadence` | 9.0 | "steps per second" | `coremotion/cmpedometerdata/currentcadence` |
+| `averageActivePace` | 10.0 | "seconds per meter"; "averages the user's pace only during periods of activity and it omits all periods of inactivity" | `coremotion/cmpedometerdata/averageactivepace` |
+| `isPaceAvailable()` | 9.0 | "This capability is not supported on all devices." | `coremotion/cmpedometer/ispaceavailable()` |
+
+- Güncelleme aralığı: belgede sayı yok; yalnız "starts calling your handler block regularly" ve verinin başlangıçtan bu yana
+  **birikimli** olduğu yazıyor — `coremotion/cmpedometer/startupdates(from:withhandler:)`. Sıklık için bakmadım / belgede yok.
+- Tempo dönüşümü: `dk/km = currentPace × 1000 / 60`. Örnek: 0,58 s/m → 580 s/km → "1 km 9 dk 40 sn".
+- 250 m tetikleyicisi: her güncellemede `distance` bir önceki 250 m katını geçti mi diye bakılır. Pedometre güncellemesi seyrekse
+  anons birkaç metre geç çalar; kabul edilebilir (VARSAYIM).
+- Anons içeriği için öneri: son 250 m'nin **kendi temposu** = (bu dilimin süresi) / 0,25 km — `currentPace` anlık ve oynak
+  olabilir; dilim ortalaması hem daha kararlı hem ekranda aynen gösterilebilir. Toplam ortalama için `averageActivePace`.
+- **GPS'siz doğruluk:** Apple belgesi yalnız "estimated" diyor, yüzde vermiyor (belgede yok). VARSAYIM: adım uzunluğu tahmini
+  kişiye ve yokuşa göre %5–15 sapabilir; kısa yürüyüşte 250 m işaretleri gerçek 220–280 m'ye denk gelebilir. Ekranda "yaklaşık"
+  demek dürüst olur.
+
+### 3.2 CoreLocation ile (GPS)
+
+- `activityType = .fitness`: "positioning during dedicated fitness sessions, such as walking workouts … This activity might cause the
+  system to pause location updates when the user doesn't move … When activityType is fitness, the system disables indoor positioning."
+  — `corelocation/clactivitytype/fitness`.
+- Otomatik duraklama: "For apps that have in-use authorization, a pause to location updates **ends access to location changes until the
+  app launches again**" → yürüyüş boyunca `pausesLocationUpdatesAutomatically = false` önerilir — `corelocation/cllocationmanager/pauseslocationupdatesautomatically`.
+- Arka plan: `UIBackgroundModes` içinde `location` + `allowsBackgroundLocationUpdates = true`; "When the value of this property is true
+  and you start location updates while the app is in the foreground, Core Location configures the system to keep the app running …
+  and arranges to show the background location indicator (blue bar or pill) if needed. Updates continue even if the app subsequently
+  enters the background." Anahtar olmadan `true` yapmak "a fatal error that terminates the app".
+  — `corelocation/cllocationmanager/allowsbackgroundlocationupdates` (iOS 9+).
+- iOS 17+: `CLBackgroundActivitySession` "allows a **when-in-use** authorized app to receive location updates or monitoring events"
+  — `corelocation/clbackgroundactivitysession-3mzv3`; `CLLocationUpdate.liveUpdates(_:)` iOS 17+, yapılandırmada `.fitness` var
+  — `corelocation/cllocationupdate/liveupdates(_:)`, `corelocation/cllocationupdate/liveconfiguration`. `CLServiceSession` iOS 18+
+  — `corelocation/clservicesession-2ddhd`. Rehber: oturumu ön planda başlat; uygulama sonlanırsa açılışta yeniden kur
+  — `corelocation/handling-location-updates-in-the-background`.
+- İzin düzeyi: "If you enable background location updates, an app with When in Use authorization **continues to run in the background
+  when location services are active** … If the system terminates the app or the app isn't running, the system doesn't launch an app with
+  When in Use authorization" — `corelocation/requesting-authorization-to-use-location-services`.
+  → **Yürüyüşü uygulamada başlatıyorsak "When In Use" yeter**; "Always" yalnız §1.4'teki kapalıyken algı için gerekir.
+- Mavi gösterge: When In Use uygulaması arka planda konum kullanınca sistem durum çubuğunu değiştirir
+  — `corelocation/cllocationmanager/showsbackgroundlocationindicator`. Kullanıcı bunu görür; bu şeffaflık iyi.
+- Kilit ekranı: yukarıdaki "keep the app running" ifadesi gereği ölçüm kilitte de sürer (kilit, arka plan sayılır).
+  VARSAYIM: kilitte `CMPedometer` de çalışır çünkü uygulama askıya alınmamıştır ("Upon returning to foreground or background execution,
+  the pedometer object begins updates again" — `coremotion/cmpedometer/startupdates(from:withhandler:)`). Cihazda denenmeli.
+- iOS 15–16 cihazlar için yol: klasik `CLLocationManager` + `allowsBackgroundLocationUpdates` + When In Use. iOS 17+ için
+  `CLBackgroundActivitySession` + `liveUpdates(.fitness)` eklenebilir. İkisi aynı `location` arka plan kipini ister.
+
+### 3.3 Pil (Apple enerji rehberi)
+
+Kaynak: Energy Efficiency Guide for iOS Apps, "Location Best Practices" (arşiv belgesi, JSON uç noktasında yok; HTML kopyası
+`arastirma/apple/archive__EnergyGuide-iOS__LocationBestPractices.html`).
+- "Requesting higher accuracy than you need causes Core Location to power up additional hardware and waste power … Unless your app
+  really needs to know the user's position within a few meters, don't set the accuracy level to best or nearest ten meters."
+- "By default, standard location updates on iOS devices run with an accuracy level of best. Change these settings to match your app's
+  requirements."
+- Önemli değişiklik hizmeti "run continuously, around the clock, until you stop them, and can actually result in higher energy use";
+  "Region and visit monitoring are sufficient for most use cases and should always be considered before significant-change".
+- Güncel belge de aynısını söylüyor: "To reduce your app's impact on battery life, assign a value to this property that's appropriate"
+  — `corelocation/cllocationmanager/desiredaccuracy`.
+
+Öneri: yürüyüşte `desiredAccuracy = kCLLocationAccuracyNearestTenMeters` değil `kCLLocationAccuracyBest` de değil; VARSAYIM:
+250 m anonsu için ~10–20 m yeterli → `NearestTenMeters` makul üst sınır; `distanceFilter` ~10 m. Yürüyüş bitince konumu hemen durdur.
+Pil etkisinin sayısal değerini belgede görmedim (belgede yok).
+
+### 3.4 Karar: pedometre mi, GPS mi?
+
+- **Pedometre yalnız** (izin: Hareket ve Fitness): kolay, GPS izni yok, pil hafif; ama **uygulamayı arka planda uyanık tutmaz**
+  (§1.2). Kilit ekranına geçince uygulama askıya alınır ve 250 m anonsu durur — meğerki başka bir arka plan kipi (ses, §4.5) uygulamayı
+  çalışır tutsun.
+- **Konum + pedometre**: konum oturumu uygulamayı kilitte meşru biçimde uyanık tutar (Apple'ın saydığı kullanım: "Track the precise
+  path taken during a hike or fitness workout" — `corelocation/handling-location-updates-in-the-background`); mesafe GPS'ten, adım
+  pedometreden. Açık havada daha doğru mesafe. Bedeli: konum izni + `location` arka plan kipi + mavi gösterge.
+- Öneri: **Konum (When In Use) + pedometre** birincil; kişi konum iznini vermezse "yalnız pedometre, ekran açıkken" yedeği.
+
+### 3.5 İzin metinleri ve App Review
+
+- Gerekli yeni anahtarlar: `NSMotionUsageDescription` (CoreMotion; yoksa çöker — `coremotion/cmpedometer`),
+  `NSLocationWhenInUseUsageDescription` ("required if your iOS app uses APIs that access the user's location information while the app is
+  in use" — `bundleresources/information-property-list/nslocationwheninuseusagedescription`), Always istenecekse ek olarak
+  `NSLocationAlwaysAndWhenInUseUsageDescription` (`corelocation/requesting-authorization-to-use-location-services`).
+- İzin isteme zamanı: "make authorization requests only when someone engages a part of your app that requires that data"
+  — aynı sayfa. → "Yürüyüşe başla"ya ilk dokunuşta sor, açılışta değil.
+- App Review Yönergeleri (kopya: `arastirma/apple/app-store-review-guidelines.html`):
+  - 2.5.4: "Multitasking apps may only use background services for their intended purposes: VoIP, audio playback, location, task
+    completion, local notifications, etc."
+  - 5.1.5: "Use Location Services in your app only when it is directly relevant to the features and services provided by the app …
+    If your app uses Location Services, be sure to explain the purpose in your app".
+- Taslak metinler (sade Türkçe, "telefondan çıkmaz" sözüyle tutarlı):
+  - Hareket: "Nefona, yürüyüşte adımını ve hızını telefonun hareket sensöründen ölçer. Veriler telefonundan çıkmaz."
+  - Konum (kullanımda): "Yürüyüş sırasında kaç metre yürüdüğünü ve 1 km'yi kaç dakikada yürüdüğünü ölçmek için konumun kullanılır.
+    Yalnız sen yürüyüşü başlattığında, bitirene dek. Konumun kaydedilmez, telefonundan çıkmaz."
+  - (İsteğe bağlı) Her zaman: "Evden çıkınca 'Yürüyüşe mi çıktın?' diye sorabilmemiz için. İstediğin an Ayarlar'dan kapatabilirsin."
+- Risk: Always izni ve `location` kipi incelemede gerekçe ister; yürüyüş ekranı ve mavi gösterge açık bir fitness amacı gösterdiği
+  için When In Use + oturum düşük risk (VARSAYIM). Ev çevresi bölgesi için Always daha yüksek risk.
+
+---
+
+## 4. Sesli koç
+
+### 4.1 `AVSpeechSynthesizer` ve Türkçe ses
+
+- `AVSpeechSynthesisVoice(language:)` "Retrieves a voice for the BCP 47 code … if the code is valid; otherwise, nil"
+  — `avfaudio/avspeechsynthesisvoice/init(language:)`; cihazdaki sesler `speechVoices()` — `avfaudio/avspeechsynthesisvoice/speechvoices()`.
+- Kalite düzeyleri: `default`, `enhanced` ("you must download to use", iOS 9+), `premium` ("you must download to use", iOS 16+)
+  — `avfaudio/avspeechsynthesisvoicequality`, `.../enhanced`, `.../premium`.
+- `usesApplicationAudioSession = false` ise "the system creates a separate audio session to automatically manage speech, interruptions,
+  and mixing and ducking" (iOS 13+) — `avfaudio/avspeechsynthesizer/usesapplicationaudiosession`.
+- Hangi dillerin (tr-TR dahil) ve hangi kalitede geldiği Apple belgesinde **listelenmiyor** (bakmadım / belgede yok).
+  Depodaki kanıt: `src/lib/cue.js` ElevenLabs dosyası yoksa `speechSynthesis` ile `tr-TR` konuşuyor ve önce `getVoices()` içinde
+  `tr` sesi var mı diye bakıyor — yani ekip cihazda Türkçe sistem sesi bulunduğunu varsaymış. VARSAYIM: iOS'ta varsayılan kalite
+  Türkçe ses hazır gelir; enhanced/premium kişi indirirse olur. Kalite ElevenLabs sesinden belirgin düşük (VARSAYIM, dinleyerek
+  karar verilmeli).
+- Sonuç: sentez yalnız **yedek** olmalı (dosya eksik / çözülemedi). Sahibin kuralı ("ekrandaki cümle = sesteki cümle" ve sesler
+  ElevenLabs Neslihan / Hakan) sentezle ses kimliğini bozar.
+
+### 4.2 Ses oturumu: kilit ekranında, müziğin üstüne
+
+- `.voicePrompt` modu: "your app plays audio using text-to-speech … An example … is a turn-by-turn navigation app that plays short
+  prompts to the user. Typically, apps of the same type also configure their sessions to use the duckOthers and
+  interruptSpokenAudioAndMixWithOthers options." (iOS 12+) — `avfaudio/avaudiosession/mode-swift.struct/voiceprompt`.
+- `.duckOthers`: "reduces the volume of other audio sessions … If your app provides occasional spoken audio, such as in a turn-by-turn
+  navigation app **or an exercise app**, you should also set the interruptSpokenAudioAndMixWithOthers option. Ducking begins when you
+  activate your app's audio session and ends when you deactivate the session … **Set this option on a temporary basis only. Don't use it
+  to duck the audio of other apps for more than a few seconds.**" — `avfaudio/avaudiosession/categoryoptions-swift.struct/duckothers`.
+- `.interruptSpokenAudioAndMixWithOthers`: müziği kısar, podcast/sesli kitabı (`spokenAudio` modundakileri) duraklatır; "Set this option if
+  your app's audio is occasional and spoken, such as … an exercise app"; bitince `setActive(false, options: .notifyOthersOnDeactivation)`
+  — `avfaudio/avaudiosession/categoryoptions-swift.struct/interruptspokenaudioandmixwithothers`.
+- `.spokenAudio` modu podcast gibi **sürekli** konuşma içindir; bize uymaz — `avfaudio/avaudiosession/mode-swift.struct/spokenaudio`.
+- `.playback` kategorisi sessiz tuşunda susturulmaz; arka planda çalmak için `audio` kipi gerekir — `avfoundation/configuring-your-app-for-media-playback`.
+
+Öneri (yerel, Swift): Her anonsta
+`setCategory(.playback, mode: .voicePrompt, options: [.duckOthers, .interruptSpokenAudioAndMixWithOthers])` → `setActive(true)` →
+parçaları çal → bitince `setActive(false, options: .notifyOthersOnDeactivation)`. Anonslar arasında oturum **kapalı** kalır (duck
+"birkaç saniyeden uzun" sürmesin). Bu, bugünkü `AppAudioSession` (FeedbackPlugin.swift) durum makinesine yeni bir "walkPrompt" durumu
+olarak eklenmeli; yoksa uyku sesi / ders / kayıt ile yarışır (bugün her biri `.playback`'i kendine göre kuruyor).
+Kesinti (telefon araması) ve rota değişimi (kulaklık çıktı) için `LessonPlayer`'daki bildirim dinleyicileri örnek alınabilir.
+
+Risk: Oturum kapalıyken ve konum kipi yoksa uygulama arka planda askıya alınır → sonraki anons hiç çalmaz. Uyanıklığı **konum
+oturumu** sağlamalı (§3.2), ses değil.
+
+### 4.3 Önceden üretilmiş parça birleştirme
+
+Mevcut düzen: `src/lib/voicePack.js` — cümleler `public/voice/{dil}/{ses}/{anahtar}.mp3`, `female`/`male`, her birinde 53 dosya;
+çalarken baştaki/sondaki sessizlik kırpılıyor (WebAudio, WebView içinde). Yürüyüşte arka planda WebView'e güvenilmez
+(VARSAYIM: iOS arka plandaki WKWebView işini kısıtlar; belgesini okumadım) → anonslar **yerel** çalınmalı (AVAudioPlayer / AVAudioEngine;
+dosyalar pakette zaten var).
+
+Türkçe'de ek uyumu sorununu yaşamamak için sayı sona **ek almadan** gelmeli. Öneri kalıp (ekran ve ses aynı):
+- "**Kilometre başına dokuz dakika kırk saniye.**" (ekranda: "Kilometre başına 9 dakika 40 saniye")
+- Mesafe (isteğe bağlı, anonsun başında): "**İki kilometre iki yüz elli metre.**"
+
+Parça sayısı (ses başına):
+
+| Parça | Aralık | Dosya |
+|---|---|---|
+| "Kilometre başına" | — | 1 |
+| "N dakika" (sayı + "dakika" birlikte, doğal vurgu için) | 3–30 | 28 |
+| "N saniye" — 5 sn'ye yuvarlanmış | 5, 10 … 55 (0 ise söylenmez) | 11 |
+| (alternatif) 10 sn'ye yuvarlanmış | 10 … 50 | 5 |
+| "N kilometre" | 1–15 | 15 |
+| "iki yüz elli / beş yüz / yedi yüz elli metre" | — | 3 |
+| Başlangıç, bitiş, "koç kapalı", "hız ölçülemedi" gibi sabit cümleler | — | ~6 |
+| **Toplam** | | **~64** (×2 ses ≈ 128) |
+
+- Yuvarlama önerisi: **5 saniye**. Gerekçe: pedometre/GPS tempo tahmini zaten ± birkaç saniye/km oynar (VARSAYIM, §3.1);
+  5 sn hem doğruluğu abartmaz hem 10 sn'den daha "koç gibi" duyulur. 30 dk/km üstü ya da 3 dk/km altı → sabit cümle
+  ("Çok yavaş ilerliyorsun, istersen dinlen." / sayı söylenmez).
+- 60 saniyeye yuvarlanma: 9:58 → "10 dakika" (saniye 0 → söylenmez).
+- Ekler: "dakika"/"saniye"/"kilometre" sayıdan sonra ek almadığı için birleştirme dilbilgisi olarak güvenli.
+- Risk: parçalar ayrı üretildiği için tonlama dikişi duyulabilir (VARSAYIM). Azaltmak için: her parçayı aynı ses ayarıyla, cümle
+  içindeki yerine uygun noktalamayla üret (ör. "dokuz dakika," virgüllü, "kırk saniye." noktalı); araya ~80–120 ms sessizlik; seviye
+  eşitleme (voicePack zaten yapıyor). Parçalar arka arkaya `AVAudioEngine` / `AVAudioPlayerNode.scheduleFile` ya da `AVQueuePlayer`
+  ile boşluksuz sıralanabilir (bu API'lerin belge sayfalarını bu turda okumadım).
+- Alternatif: 28 × 12 = 336 tam cümle dosyası (ses başına) — dikiş yok ama üretim/paket boyutu 5 kat. Önce parça yöntemi dinlenmeli.
+
+### 4.4 Sentez ile karşılaştırma
+
+| | ElevenLabs parçaları | `AVSpeechSynthesizer` tr-TR |
+|---|---|---|
+| Ses kimliği (Neslihan/Hakan) | Aynı | Farklı (sistem sesi) |
+| "Ekran = ses" | Kalıp sabit, sağlanır | Sağlanır (aynı metin okunur) |
+| Dinamik sayı | Parça sınırında | Sınırsız |
+| Kalite | Yüksek, dikiş riski | VARSAYIM: belirgin düşük |
+| Çevrimdışı | Evet (pakette) | Evet (varsayılan ses cihazda — VARSAYIM) |
+| Paket boyutu | ~130 küçük dosya | 0 |
+
+Öneri: parçalar birincil, sentez yalnız eksik parça / bilinmeyen dil yedeği (bugünkü `cue.js` davranışıyla aynı).
+
+### 4.5 `audio` arka plan kipi uygulamayı uyanık tutar mı? App Review?
+
+- Apple: `audio` kipi "The app plays audible content in the background" — `xcode/configuring-background-execution-modes`; `.playback` +
+  kip ile "your app's audio continues when people switch to another app or lock their iOS device" — `avfoundation/configuring-your-app-for-media-playback`.
+- Aynı sayfa: "Use background execution modes sparingly … If an alternative to executing in the background exists, use the alternative."
+- App Review 2.5.4: arka plan hizmetleri "only … for their intended purposes".
+- Sonuç: `audio` kipi, **ses çalarken** uygulamayı çalışır tutar. Anonslar arasında (250 m ≈ 2,5–3 dk) ses yoksa uygulama askıya alınır
+  (VARSAYIM: belgede "sessizken askıya alınır" cümlesini okumadım, ama kip tanımı "plays audible content" ile sınırlı). Uyanık kalmak için
+  sessiz ses döngüsü çalmak **bu kipin amacı dışı** kullanım olur → 2.5.4 ret riski yüksek. Doğru yol: yürüyüş süresince **`location` kipi +
+  konum oturumu** (Apple'ın açıkça saydığı kullanım: fitness rotası), anonslar için mevcut `audio` kipi.

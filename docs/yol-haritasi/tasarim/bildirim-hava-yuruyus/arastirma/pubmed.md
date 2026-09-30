@@ -76,3 +76,25 @@ Zaten depoda: Ishak 2026 (kesitsel, 402 öğrenci; gece bildirimi anlamlı yorda
 - Gece bildirimine karşı en güçlü dayanak hâlâ **gözlemsel**: yatakta telefon kullanımı ve gece telefonla uyanma, kötü uyku ve yorgunlukla ilişkili (Carter 2016, Van den Bulck 2007, Exelmans 2016, Brosnan 2024). Gece bildiriminin tek başına uykuyu bozduğunu gösteren RKÇ bulunamadı. "Gece bildirim yok" kuralı: kanıt yönü tutarlı ama nedensel değil; kural **nezaket + ihtiyat** olarak kalır.
 - "Saat 21'den sonra kalk bildirimi yok": akşam hafif hareketin uykuya zarar verdiğine dair kanıt yok (Stutz 2019, Frimpong 2021; zarar yalnız yatmaya ≤1 saat kala şiddetli egzersizde). Bu yüzden 21:00 sınırının gerekçesi **uyku zararı değil**, oturma molası kanıtının iş saatlerinde toplanmış olması (bkz. D) ve akşam bildiriminin telefonu yatağa taşıması. 21:00 sayısı **VARSAYIM**.
 - Sesli (Nef sesi) bildirim gece asla çalmaz; iOS Uyku/Odak modu aşılmaz (Critical Alert istenmez).
+
+---
+
+## D. Oturmayı bölme ("kalk") bildirimleri ve günün saati
+
+Zaten depoda: Leppe-Zamora 2025 (bilgisayar hatırlatması MA, 18 RKÇ, 1.164 masa başı çalışan), Shrestha 2018 (Cochrane), Stephenson 2017, Morris 2020, Chandrasekaran 2025, Zhang 2025 (65+ yaşta anlamsız).
+"Stand Up Kids" adıyla PubMed kaydı bulunamadı.
+
+| Kaynak | PMID | DOI | Tür | n | Bulgu | Sınır |
+|---|---|---|---|---|---|---|
+| Murtagh 2020, Cochrane | 32678471 | 10.1002/14651858.CD012554.pub2 | Cochrane SD + MA (RKÇ, küme-RKÇ) | 13 çalışma, 1.770 kişi (18–59 yaş), **iş yeri dışında** | İş dışı müdahaleler (cihaz, eğitim, danışmanlık, **hatırlatma** dahil) kısa vadede cihazla ölçülen oturma süresinde muhtemelen az ya da hiç fark yaratmadı: −8,4 dk/gün (%95 GA −27,1 ile 10,4; orta kesinlik). Oturma kesintileri tanım farkı yüzünden birleştirilemedi. | Hiçbir çalışma tüm alanlarda düşük yanlılık riskli değil; yalnız yüksek gelirli ülkeler. |
+| Evans 2012, Am J Prev Med | 22898122 | 10.1016/j.amepre.2012.05.010 | Değerlendirici-kör RKÇ, 5 iş günü | 28 ofis çalışanı (14+14) | 30 dakikada bir "kalk" hatırlatan yazılım + eğitim, yalnız eğitime göre 30 dk'dan uzun oturma sayısını (−%6,8) ve süresini (−%15,5) azalttı; toplam oturma süresi anlamlı değişmedi (−%4,4; p=0,084). | Çok küçük; 5 gün; iş saati. |
+| Swartz 2014, Prev Chronic Dis | 24784909 | 10.5888/pcd11.130318 | RKÇ, 2 kol (kalk / kalk + 100 adım) | 60 ofis çalışanı | Saatlik hatırlatma: ortalama oturma süresi %16–19, 60 dk'dan uzun oturma sayısı %36–54 azaldı (grup içi). Yalnız "100 adım yürü" kolunda iş günü adımı %35 arttı. Gruplar arası fark anlamlı değil. | Kontrol grubu yok (iki aktif kol); 3 gün; iş saati. |
+| Compernolle 2021, JMIR Mhealth Uhealth | 33970109 | 10.2196/26387 | Müdahale çalışması, 3 hafta (kontrolsüz) | 26 yaşlı yetişkin (ort. 64,4 yaş), 2.628 titreşim | 30 dk kesintisiz oturmada titreşim: 1, 3, 5 dk içinde kalkma oranı %14,4, %21,7, %30,4. Öğlen 12–15 arası verilen titreşimde kalkma, sabah 6–9'a göre daha olasıydı (5 dk'da OR 1,78). Titreşimlerin çoğu, özellikle sabah olanlar, kalkmaya yol açmadı. | Küçük; kontrolsüz; akşam saatleri ayrıca raporlanmamış. |
+| Zhao 2023, Med Sci Sports Exerc | 37494828 | 10.1249/MSS.0000000000003266 | Kohort, ivmeölçer 1 hafta | 12.241 yetişkin (ABD, Hispanik/Latin) | Hareketsizlik gün içinde U biçimli: öğlen en hareketli, akşama doğru oturma artıyor; sabah erken, akşam ve hafta sonu en hareketsiz dilimler, en az kesinti. | Tanımlayıcı; müdahale değil; tek etnik grup. |
+| Yerrakalva 2017, Int J Epidemiol | 29025094 | 10.1093/ije/dyx123 | Kohort (EPIC-Norfolk), ivmeölçer 7 gün | 3.705 kişi (≥60 yaş) | Uyanık her saatin %50'sinden fazlası oturarak; akşam %83'e çıkıyor ve akşam kesinti sayısı en düşük. | Tanımlayıcı; yaşlı; müdahale değil. |
+
+**Bizim için sonuç**
+- Hatırlatmanın oturmayı bölmeye etkisi **iş yerinde, iş saatinde, kısa sürede** gösterildi (Evans 2012, Swartz 2014, Leppe-Zamora 2025). Toplam oturma süresine etkisi küçük ya da belirsiz; iş dışı müdahalelerde neredeyse sıfır (Murtagh 2020).
+- Akşam: en çok oturulan ve en az kalkılan dilim (Zhao 2023, Yerrakalva 2017). Yani akşam "fırsat" var gibi görünüyor, ama **akşam verilen kalk bildiriminin işe yaradığını gösteren çalışma bulunamadı**. Compernolle 2021'de yanıt öğlen en iyiydi.
+- Sahibin "21'den sonra kalk mantıksız" kuralı kanıtla çelişmiyor: akşam için etki kanıtı yok, gece için uyku ihtiyatı var (bkz. C). Varsayılan kalk penceresi: kullanıcının iş/odak saatleri; akşam penceresi kullanıcı açarsa. Pencere sınırları (ör. 09:00–21:00) **VARSAYIM**.
+- Metin önerisi: "kalk" yerine "kalk ve birkaç adım yürü" adım sayısını artırdı (Swartz 2014, grup içi) — küçük kanıt.
