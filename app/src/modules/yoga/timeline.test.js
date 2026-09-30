@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 import {
   speechAt, captionAt, clipStartAt, resumePoint, seekPoint, nearestClipStart, sectionsOfTimeline, sectionAt, closingAt,
   imageWindows, jumpPlan, visualAt, loadTimeline, durationOf, LEAD_SEC, seekTarget, guardClosing, welcomeCaption, sectionSpans,
-  loadTimelineCached, cachedTimeline,
+  loadTimelineCached, cachedTimeline, captionBefore,
 } from './timeline.js'
 
 const tl = JSON.parse(readFileSync(fileURLToPath(new URL('../../../public/yoga/ders2-15.timeline.json', import.meta.url)), 'utf8'))
@@ -167,6 +167,26 @@ describe('karşılama cümlesi ve bölüm süreleri', () => {
     const next = tl.speech.find((x) => x.clip !== a1.clip)
     expect(welcomeCaption(tl, (next.start + next.end) / 2)).toBeNull() // sonrası yalnız altyazı açıkken
     expect(welcomeCaption(null, 5)).toBeNull()
+  })
+  // Kapı turu 2: "'Hissetmesen de her adı…' tek başına okununca 'hangi ad?'": altyazı açıkken önceki cümle sönük yazılır
+  it('önceki cümle: yalnız aynı bölümde ve kısa aralıkta; ekrandaki her cümle söylenmiş bir cümle', () => {
+    const tekrar = piece('c1.tekrar')
+    expect(captionBefore(tl, (tekrar.start + tekrar.end) / 2)).toBe('Rahatsız eden bir bölge olursa atla.')
+    const a1 = piece('a.hosgeldin#1')
+    expect(captionBefore(tl, (a1.start + a1.end) / 2)).toBeNull() // ilk cümlenin öncesi yok
+    const firstC1 = tl.speech.find((x) => x.block === 'C1')
+    expect(captionBefore(tl, (firstC1.start + firstC1.end) / 2)).toBeNull() // bölüm değişti: önceki bölümün cümlesi yazılmaz
+    for (let i = 1; i < tl.speech.length; i++) {
+      const cur = tl.speech[i]
+      const got = captionBefore(tl, (cur.start + cur.end) / 2)
+      if (got == null) continue
+      const prev = tl.speech[i - 1]
+      expect(got).toBe(prev.screen_text)
+      expect(prev.block).toBe(cur.block)
+      expect(cur.start - prev.end).toBeLessThanOrEqual(8)
+    }
+    expect(captionBefore(tl, 1)).toBeNull() // sessizlik
+    expect(captionBefore(null, 5)).toBeNull()
   })
   it('bölüm süreleri: her bölüm bir sonrakinin başına kadar; toplam dersin süresi', () => {
     const spans = sectionSpans(tl)

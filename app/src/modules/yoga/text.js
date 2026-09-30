@@ -12,8 +12,9 @@ export const YT = {
   // YENİ METİN (5 saniye yeniden tasarımı, C_5SN_RAPORU.md; Türkçe editör onayına): kütüphane kartının yazılı eylemi.
   // "Başla" değil: bu dokunuş dersi başlatmaz, ayrıntıyı açar ("Başla" ayrıntıdadır, ses orada başlar).
   library: { open: 'Derse git' },
-  // YENİ ETİKET (sahip ve editör onayına): dersin sesinin adı; zaman çizelgesindeki voice_name ile aynı (ders2-15
-  // "Nefona Hoca"). Ses bir kişi gibi sunulmaz: yanında yüz ya da fotoğraf yok, yalnız ses dalgası simgesi.
+  // Dersin sesinin adı; zaman çizelgesindeki voice_name ile aynı (ders2-15 "Nefona Hoca"). Kapı turu 2'den beri ekranda
+  // YOK: ilk yayında ses seçimi yok (PLAN.v3 §D.2) ve iki değerlendirici adı "gerçek bir hoca mı?" diye okudu. Ses seçimi
+  // gelirse ad yeniden sahip ve editör onayına.
   voices: { hoc: 'Nefona Hoca' },
 
   // Güvenlik kartı (modul.md §2.2): bir kez; ders ayrıntısındaki (i) ile yeniden
@@ -30,7 +31,7 @@ export const YT = {
     footer: 'Nefona tedavi değildir. Uzun süredir çok zorlanıyorsan bir uzmanla konuşmak en güçlü adım. Acil durumda',
     emergency: '112',
     ok: 'Anladım',
-    open: 'Başlamadan önce', // ayrıntıdaki (i) düğmesinin yazılı adı (kartın başlığıyla aynı söz)
+    open: 'Başlamadan önce', // ayrıntıda kartı yeniden açan satırın yazılı adı (kartın başlığıyla aynı söz; kart görüldükten sonra)
   },
 
   // Ses denetimi (PLAN.v3 §D.2): ilk derste "Başla"dan önce 10 sn. Dosya yokken adım hiç görünmez (Yoga.jsx

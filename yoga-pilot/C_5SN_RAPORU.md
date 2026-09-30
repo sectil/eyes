@@ -485,3 +485,192 @@ Yapılanlar (metin değişmedi; yeni metin yok):
 - Yedek (değişiklikten önceki hâl): `scratchpad/yoga-kapi1/once/`.
 - Deneme çekimleri: `scratchpad/yoga-kapi1/deneme1/` (penceredeki sahne boş çıkmıştı, düzeltildi) ve `deneme2/`.
 - Yoga dışında hiçbir dosyaya dokunulmadı; git kullanılmadı.
+
+## 13. Kapı turu 2: kök neden ve düzeltme (2026-09-30, 13:15)
+
+Kapı turu 2'de beş değerlendiricinin üçü altı ekranda etkilenmedi: 2 kütüphane (2/5), 3 ayrıntı (1/5), 4 güvenlik (2/5),
+6b oynatıcının ilk 5 saniyesi (2/5), 6 oynatıcı 3. dakika (2/5), 7c zorlanma (0/5). Geçen ekranlara (1, 5, 7, 7b, 8) bu
+turda dokunulmadı; yeni çekimleri 12:25 çekimleriyle bayt bayt aynı (sha1 eşit).
+
+### 13.1 Kök neden
+
+Notlar tek tek kusur gibi görünüyordu, ama iki ortak nedene dayanıyordu:
+
+1. **Ekranın biçimi içeriğine ve anına uymuyordu.**
+   - Kütüphane bir katalog gibi kurulmuştu, ama içinde tek ders vardı. Değerlendiriciler "boş raf", "başka ders yok
+     mu?", "yarım kalmış liste" dedi (beşin dördü). Ekranın yarısını kaplayan resim bilgi taşımıyordu. Açık temada beyaz
+     güneş, beyaz ışığın içinde kayboluyordu.
+   - Güvenlik kartı beş eşit akordeon satırıydı ve her satırda aşağı ok vardı. Bu, ayarlar menüsü ya da kullanım
+     koşulları kalıbı (beşin beşi).
+   - Oynatıcının zemini düz #050A12'ydi. Nefes formu parlaklık tavanında (bağıl %15) kalınca ekranın üçte ikisi boş
+     görünüyordu: "donmuş mu", "yüklenmemiş" (6b'de üç, 6'da üç değerlendirici). Sesin çaldığını gösteren hiçbir
+     işaret yoktu. Denetimlerin ağırlığı da tersti: çerçeveli "Kapanışa geç" duraklat kadar belirgindi (6b'de beşin
+     dördü), duraklat ise karanlıkta göz alan beyaz bir diskti.
+   - Zorlanma sorusu yeniden tasarımın dışında kalmıştı; yalnız temaya alınmıştı. Sahne yoktu, adım şeridi yoktu,
+     sol üstte üç küçük hap vardı: "taslak form" (beşin beşi).
+2. **İlk derste güvenlik bilgisi üç kez, art arda geliyordu.** Ayrıntıda sağ üstte "Başlamadan önce" düğmesi, "Başla"nın
+   hemen üstünde "Başla"dan iri bir uyarı kartı ("ilaç prospektüsü"), sonra "Başla"ya dokununca aynı maddelerle güvenlik
+   kartı. Ayrıntıda etkilenmeyen dört değerlendiricinin dördü de uyarı bloğunu yazdı. Güvenlik kartında beşin dördü
+   tekrarı yazdı; kartta etkilenen iki değerlendirici de tekrarı "en zayıf yan" saydı.
+   Ayrıntının üstündeki ince sahne şeridi de bundandı: güneş, Geri ile "Başlamadan önce" düğmesinin arasına
+   sıkışmıştı.
+
+### 13.2 Ekran ekran yapılanlar (metinler aynı; yeni metin yok)
+
+**2 · "Yoga ve Meditasyon": liste değil, dersin kapağı** (yalnız tek ders yayımlıyken; birden çok derste liste
+değişmedi).
+- Dersin yeri, kenardan kenara bütün ekranın zemini: aynı kıyı, güneş ufukta. Yazılar altta, sahnenin zemine eridiği
+  yerde:
+  - dersin tam adı iri;
+  - söz;
+  - iki simgeli etiket: "15 dk", "Uzanarak";
+  - "Derse git".
+- Ekranın adı ("Yoga ve Meditasyon", h1) Geri'nin yanında ve küçük. Değerlendirici notu: "fısıldaması gereken yerde
+  bağırıyor".
+- Açık temada gök belirgin bir sabah mavisi, ufukta krem bir ışık. Güneş beyaz ve keskin kenarlı, denizde ışık yolu var.
+  Bulut şeritleri kalktı: bulanık bir çizim hatası gibi okunuyordu.
+- "Gündüz" yazısı kalktı; yalnız VoiceOver okur: "Gündüz · 15 dk · Uzanarak". İki değerlendirici bunu "gece yapamaz
+  mıyım?" diye okumuştu. Tek derste ayırt edici değil ve sahnedeki güneş zaten gündüzü gösteriyor.
+
+**3 · Ayrıntı yeniden dizildi.**
+- Üstteki sahne daha uzun: 390×844'te 292 px, eskiden 203 px. Alt kenarı zemine eriyor (maske), ek yeri yok. Güneş
+  yarı doğmuş ve yalnız Geri'nin yanında.
+- Sırasıyla:
+  - tam ad, söz, "15 dk" · "Uzanarak" etiketleri;
+  - izin satırı, "Başla"nın hemen üstünde bir davet olarak: "İstediğin an gözlerini açabilir, kıpırdayabilir ya da
+    dersi bitirebilirsin." Kutusuz, ink, kapı simgesiyle. Bir değerlendirici bu cümleyi "saygılı, alan tanıyan dil"
+    diye övdü;
+  - "Başla";
+  - hemen altında öteki iki açılış satırı (araç, kalkış): küçük (14 px), kutusuz, okunur;
+  - "Başlamadan önce ›" satırı: kartı yeniden açar, **yalnız kart bir kez görüldükten sonra** çıkar. İlk derste kart
+    zaten "Başla"yla gelir;
+  - hazırlık karoları, bölümler, Kaynaklar.
+- Sağ üstteki "Başlamadan önce" düğmesi kalktı.
+- "Nefona Hoca" ayrıntıda yazılmıyor. İlk yayında ses seçimi yok (PLAN.v3 §D.2) ve iki değerlendirici "gerçek bir hoca
+  mı?" diye sordu. Metin `text.js`'te kaldı, ekranda değil.
+- "Başla" 390×844'te y ≈ 508–560'ta: ilk görünümün ortası. 320×640'ta da ilk görünümde.
+
+**4 · Güvenlik kartı: karolar ve üstte dersin yeri.**
+- Beş eşit akordeon satırı yerine, ayrıntıdaki hazırlık karolarıyla aynı dilde karolar:
+  - ilk madde ("İstediğin an dersi bitirebilirsin.") geniş, dersin renginde bir davet karosu;
+  - öteki dördü iki sütunda. Sıra aynı: araç, kalk, ses, sağlık;
+  - "Nefona tedavi değildir … Acil durumda **112**." notu karoların hemen altında, tek başına. Bir madde gibi
+    okunmuyor ("112 ile 'Sesi kısık tut' aynı seviyede" notu). Sağlık maddesinin hemen ardında.
+- Açılır işareti, her satırdaki aşağı ok yerine sönük küçük bir artı. Açılan karo tam genişliğe yayılır, gövde aynen
+  altında. Hiçbir madde gizlenmedi; ana cümleler hep görünür.
+- Üstte ayrıntıdaki aynı yer, kısa: kart ayrı bir "koşullar sayfası" gibi değil, dersin kapısında açılıyor. Kısa ekranda
+  yalnız Geri.
+- "Nefona" artık başlık yazı tipinde değil: satırın ritmini bozuyordu.
+- Kısa ekranda (≤ 700 px) başlığın altındaki satır yine gizli. Aynı cümle ilk maddenin gövdesinde duruyor. 320×640'ta
+  beş karo, 112 notu ve "Anladım" ilk görünümde.
+
+**6b ve 6 · Oynatıcı: dersin yerinin gecesi.** Parlaklık tavanı, nefes formu ve motor değişmedi.
+- Zemin: ufka (y %44, formun çizgisi) doğru açılan lacivert gök, altında deniz. En açık yerin bağıl ışıklılığı ≈ 0,01;
+  formun tavanının çok altında.
+- Gökte on iki sönük, küçük ve hareketsiz yıldız. Kapanışın şafağında 3 sn'de sönerler (`visualAt` dawn).
+- Altyazı kapalıyken dersin karşılama cümlesi ("Hoş geldin.") gökte, ufkun üstünde bir selam olarak yazılır. Altyazı
+  yerinde değil: "Altyazı düğmesi sönükken metin ekranda duruyor" notu. Ekrandaki cümle söylenen cümle.
+- **Ses işareti:** bölümün adının önünde dört ince çubuk. Çalarken farklı boylarda, duraklatılınca yere iner.
+  - Denetimler kaybolsa da kalır ("donmuş mu?" notu).
+  - Kıpırtı yalnız Hareketi Azalt kapalı ve nöbet cevabı "Hayır"ken; yavaş (1,3–2,1 sn), yanıp sönme yok. Öteki
+    durumlarda hareketsiz, boyları yine "çalıyor" der.
+- Altyazı açıkken bir önceki cümle sönük yazılır: yalnız aynı bölümde ve ara ≤ 8 sn ise (`timeline.captionBefore`).
+  3. dakikada: "Rahatsız eden bir bölge olursa atla." / "Hissetmesen de her adı içinden tekrarlayabilirsin."
+  Değerlendiricilerin beşi de "her adı hangi ad?" diye sormuştu.
+- Altyazı düğmesi: kapalıyken çizili simge ve sönük yazı, açıkken dersin renginde dolu zemin.
+- Şeritteki açıklamasız gün doğumu simgesi kalktı. Kapanışın bölümü şeritte sıcak renkte (şafak). "Kapanışa geç"
+  çerçevesiz, sönük bir yazı düğmesi; simgesi aynı sıcak renkte, dokunma alanı 44 px.
+- Duraklat, beyaz dolu disk yerine yarı saydam bir halka (72 px). Konum noktası 18 px'ten 13 px'e indi: ilk bölümün
+  kısa parçasını örtmesin.
+
+**7c · Zorlanma sorusu: sonra puanıyla aynı dil.**
+- Üstte dersin yeri: bitirdiyse şafak, durdurduysa kıyı (kapanışa ulaşılmadı). Bitirdiyse dersin yolu: ✓ Önce · ✓
+  Derin Dinlenme · ● Sonra. Sonra puanındaki adım bu; modul.md §2.8 ikisini aynı adım sayıyor.
+- Soru iri. Üç eşit, iri seçenek tek sırada (64 px; kısa ekranda 56 px); altta "Atla".
+- "Çok" metni ve "Devam" 320×640'ta da sığıyor. Yer yalnız kısa ekranda kısalıyor.
+
+### 13.3 Alınmayanlar
+
+- **Ayrıntıdaki açılış satırlarıyla güvenlik kartındaki maddelerin ilk derste art arda gelmesi** tamamen giderilemedi.
+  - İkisi de planın zorunlu öğesi: açılış satırları "her ders ekranında" (PLAN.v3 §D.6), kart ilk derste ayrıntıdan
+    sonra (§D.2).
+  - Tekrarın ağırlığı azaltıldı: ayrıntıda araç ve kalkış satırları küçük ve "Başla"nın altında; kartı yeniden açan
+    düğme ilk derste yok; kart ayrı bir sayfa gibi değil.
+  - Bu, ekran 4 için kalan en büyük risk. Kesin çözüm bir plan kararı ister, ör. ilk derste açılış satırlarının yerini
+    kartın alması; sahibe sorulmalı (§13.5).
+- **"Kapanışa geç"i ilk bölümde gizlemek** alınmadı. Denetim modul.md §2.6'da hep var (kapanıştayken yok) ve ilk ders
+  giriş cümlesi düğmeyi adıyla anıyor (PLAN.v3 §D.3). Yalnız görsel ağırlığı düştü.
+- **Oynatıcıda gerçek ses dalgası.** Yerel oynatıcı ses düzeyi vermiyor (`lessonStatus`: time, duration, playing,
+  route). İşaret yalnız "çalıyor / duraklatıldı" durumunu gösterir, ses düzeyini taklit etmez.
+- **Başlık yazı tipi** (Unbounded) değişmedi: uygulamanın başlık yazı tipi. Kapakta ekranın adı küçültüldü.
+- **"Neden soruluyor?" satırı (7c).** Yeni metin gerektirir; eklenmedi.
+
+### 13.4 Sonuç
+
+- **Testler:** `npx vitest run` → 138 dosya, **1877 test, hepsi geçti**. Yoga: 7 dosya, 100 test (önce 99).
+  - Yeni bir test (`timeline.test.js`): önceki cümle yalnız aynı bölümde ve kısa arada; ekrandaki her cümle söylenmiş
+    bir cümle.
+  - Beklentisi değişen dört test (`Yoga.test.jsx`):
+    - ilk derste ayrıntıda "Başlamadan önce" yok;
+    - ayrıntıda "Nefona Hoca" yok; izin satırı "Başla"nın hemen üstünde, öteki satırlar hemen altında;
+    - kart karolarda: ilk madde geniş, sağlık maddesi son, 112 notu karoların hemen ardında (eskiden `.yg-acc-health`);
+    - oynatıcıda karşılama cümlesi gökte (`.yg-greet`), önceki cümle, ses işareti (çalıyor / duraklatıldı) ve
+      kapanışın bölümü (`.yg-seg.k`; eskiden `.yg-kmark`).
+  - Güvenlik metinleri harfi harfine ve sırası değişmeden sınanıyor.
+- **Derleme:** `vite build` geçti. Çıktı `scratchpad/yoga-kapi2/build/` altında, depoya yazılmadı. Tek uyarı, önceden
+  de olan 500 kB uyarısı.
+- **Çekim:** `bash scratchpad/yoga-5sn/duzenek/cek.sh`, varsayılan klasöre 44 PNG. Kod satırı: `2c71469e7267d3cd`.
+  - Yoga ekranlarının hiçbirinde yatay taşma, görünüm dışı öğe, kırpılmış metin, üst üste binme ya da alt kenarda
+    kesilen öğe yok. Konsolda hata yok.
+  - Kayıt dört birleşimde de doğru: ders 2, 900/900 sn, 7 → 4, "Hayır".
+  - Açık temada koyu çıkan tek ekran oynatıcı (plan gereği).
+  - 12:25 çekimleri: `scratchpad/yoga-kapi2/shots-12-25/`.
+- **Ek anlar** (`scratchpad/yoga-kapi2/ek/`, `ek.sh`): dönüş ziyaretinde ayrıntı ve "Başlamadan önce" satırı, kartta
+  açılan karolar, zorlanma "Çok" (390 ve 320, iki tema), duraklatılmış oynatıcı, Hareketi Azalt, durdurmadan gelen
+  zorlanma. Hepsinde yatay taşma 0.
+  - "Çok" 320×640'ta sayfaya sığıyor (640/640).
+  - Hareketi Azalt'ta ses işaretinin, selamın ve ışık kaymasının animasyonu yok.
+- **Kendi bakışım** (390 ve 320, açık ve koyu; gerçek sırayla):
+  - 2 artık bir kapak;
+  - 3'te göz sırayla sahneye, ada, davete ve "Başla"ya gidiyor;
+  - 4 bir form değil, dersin kapısında kısa bir not;
+  - oynatıcı gece gökyüzü, selam ve canlı işaretle "çalışıyor" diyor;
+  - 7c, 7'nin devamı.
+  - **Bu bakış bir 5 saniye sınaması değildir.** Değerlendiricilere gerçek sırayla gösterilmeli: 2 → 3 → 4 → 5 → 6b →
+    6 → 7 → 7b → 7c → 8.
+- Cihazda doğrulanmadı `[~]`: iOS WebKit'te `mask-image` (-webkit- önekiyle), `backdrop-filter`, 3× ekranda yıldızların
+  görünümü, ses işaretinin VoiceOver'da okunmaması (`aria-hidden`).
+
+### 13.5 Onay bekleyenler
+
+- **Klinik:**
+  - Araç satırı artık "Başla"nın hemen altında; modul.md §2.4-12 "hemen üstünde" diyor. İlk derste kart araç maddesini
+    "Başla"dan sonra, ders başlamadan gösteriyor. Sonraki derslerde satır "Başla"nın altında, ilk görünümde.
+  - Güvenlik kartında sağlık maddesinin gövdesi yine kapalı; §6'daki soru açık duruyor.
+- **Sahip:**
+  - Tek ders yayımlıyken "Yoga ve Meditasyon" ekranı liste değil, dersin kapağı. İkinci ders yayımlanınca liste
+    kendiliğinden döner.
+  - İlk dersteki tekrar (§13.3) için plan kararı gerekiyor.
+  - "Nefona Hoca" adı ekrandan kalktı.
+- **Türkçe editör:** Yeni metin yok. Yerleşim kararları:
+  - izin satırı "Başla"nın üstünde, araç ve kalkış satırları altında;
+  - karşılama cümlesi altyazı kapalıyken gökte;
+  - altyazı açıkken önceki cümle sönük;
+  - "Gündüz" yalnız VoiceOver'da.
+
+### 13.6 Değişen dosyalar
+
+- `app/src/modules/yoga/`:
+  - `Yoga.jsx`: kapak (`Library`, `Facts`); ayrıntının dizilimi ve kartı yeniden açan satır (yalnız kart görüldükten
+    sonra); güvenlik kartı karoları ve sahnesi; zorlanma ekranı;
+  - `YogaPlayer.jsx`: gök, selam, ses işareti, önceki cümle, altyazı düğmesinin iki hâli, kapanışın bölümü; motor,
+    konum, kayıt ve güvenlik mantığı değişmedi;
+  - `timeline.js`: `captionBefore`;
+  - `yoga.css`: kapak, gündüz sahnesinin renkleri (kapak, ayrıntı, kart, durdurmadan gelen zorlanma), ayrıntı, karolar,
+    zorlanma, oynatıcı, kısa ve dar ekran, Hareketi Azalt;
+  - `text.js`: yalnız iki yorum;
+  - `Yoga.test.jsx`, `timeline.test.js`: §13.4.
+- Düzenek (depo dışı): `cek.mjs`'te yalnız 2 ve 7c'nin açıklaması. Yedeği: `scratchpad/yoga-kapi2/cek.mjs.once`.
+- Yedek (değişiklikten önceki hâl): `scratchpad/yoga-kapi2/once/`.
+- Deneme çekimleri: `scratchpad/yoga-kapi2/deneme1/`, `deneme2/`, `deneme3/`.
+- Yoga dışında hiçbir dosyaya dokunulmadı; git kullanılmadı.

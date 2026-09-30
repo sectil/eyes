@@ -1,21 +1,32 @@
 import { useEffect, useRef, useState } from 'react'
-import { X, Play, Pause, Captions, Sunrise, Moon } from 'lucide-react'
+import { X, Play, Pause, Captions, CaptionsOff, Sunrise, Moon } from 'lucide-react'
 import BreathForm from './BreathForm.jsx'
 import { lesson as bridge, hopeless } from './bridge.js'
 import { YT } from './text.js'
 import { reachedClosing } from './session.js'
 import {
-  durationOf, speechAt, captionAt, welcomeCaption, closingAt, sectionsOfTimeline, sectionAt, jumpPlan, seekTarget, resumePoint,
-  visualAt, loadTimelineCached, resumeSpans, guardClosing,
+  durationOf, speechAt, captionAt, captionBefore, welcomeCaption, closingAt, sectionsOfTimeline, sectionAt, jumpPlan, seekTarget,
+  resumePoint, visualAt, loadTimelineCached, resumeSpans, guardClosing,
 } from './timeline.js'
 
 // Ders oynatıcısı (modul.md §2.6, §4; PLAN.v3 §D.3). Hep karanlık (tema dışı, G3). Konum motordan okunur
 // (lessonStatus().time); ekran açıkken saniyede dört kez. Ekran açık tutulmaz (Wake Lock yok): ders kilitte sürer.
-// Yerleşim (5 saniye yeniden tasarımı, yön A ve aşılar): ortada ufuk; altta, ortada bölümün adı ince çizgiler arasında
-// ve hemen altında altyazı ("her adı" cümlesinin bağlamı bölümün adı); altyazı kapalıyken de dersin karşılama cümlesi
-// yazılır (ilk 5 saniye boş kalmasın); bölüm şeridinde kapanışın yeri gün doğumu işaretiyle ("Kapanışa geç" düğmesi aynı
-// simgeyi taşır: nereye götürdüğü görünür); kalan süre şeridin altında küçük; altta tek büyük Duraklat; Altyazı üst
-// sağda, sakin. Denetimler 5 sn sonra kaybolur (bölüm adı ve altyazı kalır).
+// Yerleşim (5 saniye yeniden tasarımı; kapı turu 2'de yeniden). Kapı turu 2'nin notları (6b ve 6'da beşin üçü
+// etkilenmedi): "ekranın üçte ikisi düz siyah, donmuş ya da yüklenmemiş sanılır", "sesin çaldığını gösteren hiçbir canlı
+// işaret yok", "'Kapanışa geç' çerçeveli ve duraklat kadar belirgin: daha 5. saniyede 'atla' daveti", "şeridin üstündeki
+// küçük simge ne?", "Altyazı açık mı kapalı mı belli değil", "'her adı' hangi ad?", "beyaz duraklat diski karanlıkta göz
+// alıyor". Yeni yerleşim:
+// - Zemin dersin yerinin gecesi (aynı kıyı): ufka doğru açılan lacivert gök, birkaç sönük ve hareketsiz yıldız (kapanışın
+//   şafağında söner), ufkun altında deniz. Parlaklık tavanı değişmedi (yıldızlar ve gök formun tavanının çok altında).
+// - Üstte X, dersin adı ve Altyazı (üst sağda: kapalıyken çizili simge ve sönük, açıkken dolu zemin).
+// - Altta bölümün adının önünde küçük bir ses işareti: çalarken dört çubuk farklı boylarda, duraklatılınca yere iner;
+//   denetimler kaybolsa da kalır. Hareketi Azalt'ta ve nöbet cevabı "Hayır" değilken hareketsiz.
+// - Altyazı kapalıyken dersin karşılama cümlesi gökte, ufkun üstünde bir selam olarak yazılır (altyazı değil; ekrandaki
+//   cümle söylenen cümle). Altyazı açıkken altta bölümün adı, bir önceki cümle sönük ve o anki cümle (aynı bölümde, kısa
+//   araysa: "her adı" bir önceki "bölge"yle okunur).
+// - Şeritte kapanışın bölümü sıcak renkte (şafak); "Kapanışa geç" aynı renkte simgeyle, çerçevesiz ve sönük bir yazı
+//   düğmesi (44 px): duraklat kadar belirgin değil. Duraklat karanlıkta göz almayan, yarı saydam bir halka.
+// Denetimler 5 sn sonra kaybolur (bölüm adı ve altyazı kalır).
 // Oturum nesnesi (s) modül düzeyindedir (session.js): ekran kapanıp açılsa da dinlenen süre ve konum kaybolmaz.
 //
 // s alanları: lesson, version{ file, timeline, seconds }, title, planned, listened, lastPos, lastWall, maxPos, playing,
@@ -240,11 +251,12 @@ export default function YogaPlayer({ s, lesson: L, flashSafe = null, captions = 
   const reduceMotion = reduceMotionNow()
   const v = visualAt(s.tl, s.lastPos, { reduceMotion, flashSafe, night })
   const still = reduceMotion || flashSafe !== true // form ölçeklenmez, biçimi değişmez (modul.md §3)
-  const caption = s.tl ? (captions ? captionAt(s.tl, s.lastPos) : welcomeCaption(s.tl, s.lastPos)) : null
+  const caption = s.tl && captions ? captionAt(s.tl, s.lastPos) : null
+  const prevCaption = caption ? captionBefore(s.tl, s.lastPos) : null
+  const greet = s.tl && !captions ? welcomeCaption(s.tl, s.lastPos) : null // altyazı kapalıyken karşılama cümlesi
   const secName = cur ? L.sectionLabels[cur] ?? null : null
-  // Kapanışın şeritteki yeri (gün doğumu işareti): kapanış bölümünün başı, yoksa "Kapanışa geç" noktası
-  const kAt = sections.find((x) => x.id === 'K')?.at ?? s.closeAt
-  const kPct = Number.isFinite(kAt) && dur > 0 ? Math.min(100, Math.max(0, (kAt / dur) * 100)) : null
+  // Ses çalıyor: başladı, çalıyor, duraklatılmadı, hata yok (işaret yalnız doğruyken)
+  const live = Boolean(s.started && s.playing && !paused && !s.error && !s.ended)
 
   function togglePause() {
     poke()
@@ -295,17 +307,21 @@ export default function YogaPlayer({ s, lesson: L, flashSafe = null, captions = 
   const onFocusIn = () => { focusIn.current = true; poke() }
   const onFocusOut = (e) => { if (!e.currentTarget.contains?.(e.relatedTarget)) focusIn.current = false }
 
-  const style = { '--yg-c': L.color.dark }
+  // Gökteki yıldızlar kapanışın şafağında söner (visualAt dawn; ani değişim yok, CSS 3 sn)
+  const style = { '--yg-c': L.color.dark, '--stars': v.dawn || v.end || v.ember ? 0 : 1 }
   const KIcon = night ? Moon : Sunrise
+  const moving = live && !reduceMotion && flashSafe === true // ses işareti yalnız izin varken kıpırdar
   return (
-    <main className={`yg-play${showCtl || paused ? ' ctl' : ''}`} style={style} aria-label={`Yoga · ${L.title}`} onClick={poke}>
+    <main className={`yg-play${showCtl || paused ? ' ctl' : ''}${night ? ' is-night' : ''}`} style={style} aria-label={`Yoga · ${L.title}`} onClick={poke}>
+      <span className="yg-sky" aria-hidden="true" />
       <BreathForm form={L.form} color={L.color.dark} v={v} night={night} still={still} />
+      {greet && <p className="yg-greet">{greet}</p>}
       <div className="yg-hud" onFocus={onFocusIn} onBlur={onFocusOut}>
         <button type="button" className="yg-x" onClick={(e) => { e.stopPropagation(); stop() }} aria-label={YT.player.stop}><X size={20} aria-hidden="true" /></button>
         <span className="yg-ey"><b>{L.title}</b></span>
-        {/* Altyazı: üst sağda, sakin (altta yalnız Duraklat kalsın); denetimlerle birlikte kaybolur, odaklanınca döner */}
+        {/* Altyazı: üst sağda; kapalıyken çizili simge ve sönük, açıkken dolu zemin (açık mı kapalı mı bir bakışta) */}
         <button type="button" className={`yg-cc${captions ? ' on' : ''}`} aria-pressed={captions} onClick={(e) => { e.stopPropagation(); poke(); onCaptions?.(!captions) }}>
-          <Captions size={18} aria-hidden="true" /> {YT.player.captions}
+          {captions ? <Captions size={18} aria-hidden="true" /> : <CaptionsOff size={18} aria-hidden="true" />} {YT.player.captions}
         </button>
       </div>
       {s.error && (
@@ -316,9 +332,17 @@ export default function YogaPlayer({ s, lesson: L, flashSafe = null, captions = 
         </div>
       )}
       <div className="yg-bot">
-        {/* Şu an: bölümün adı (altyazının bağlamı) ve söylenen cümle; denetimler kaybolsa da kalır */}
-        <div className="yg-now">
-          {secName && <p className="yg-sec-name"><span>{secName}</span></p>}
+        {/* Şu an: bölümün adı (altyazının bağlamı), altyazı açıkken bir önceki cümle (sönük) ve söylenen cümle; denetimler
+            kaybolsa da kalır */}
+        <div className={`yg-now${captions ? ' has-cap' : ''}`}>
+          {/* Bölümün adının önünde ses işareti: denetimler kaybolsa da kalır (ekran donmuş görünmesin) */}
+          {secName && (
+            <p className="yg-sec-name">
+              <span className={`yg-live${live ? ' on' : ''}${moving ? ' move' : ''}`} aria-hidden="true"><i /><i /><i /><i /></span>
+              <span>{secName}</span>
+            </p>
+          )}
+          {captions && <p className="yg-cap-prev" aria-hidden="true">{prevCaption}</p>}
           <p className="yg-cap" aria-live="off">{caption}</p>
         </div>
         {/* Gizleme yalnız görsel (saydamlık): VoiceOver denetimleri her an okur ve odaklayınca geri gelirler */}
@@ -330,14 +354,14 @@ export default function YogaPlayer({ s, lesson: L, flashSafe = null, captions = 
                 {sections.map((sec, i) => {
                   const end = sections[i + 1]?.at ?? dur
                   const fill = Math.min(1, Math.max(0, (pos - sec.at) / Math.max(1, end - sec.at)))
+                  // Kapanışın bölümü sıcak renkte (şafak; "Kapanışa geç" aynı renkte simgeyle): nereye götürdüğü görünür
                   return (
-                    <span key={sec.id} className={`yg-seg${sec.id === cur ? ' on' : ''}`} style={{ flexGrow: Math.max(1, end - sec.at) }}>
+                    <span key={sec.id} className={`yg-seg${sec.id === cur ? ' on' : ''}${sec.id === 'K' ? ' k' : ''}`} style={{ flexGrow: Math.max(1, end - sec.at) }}>
                       <i style={{ width: `${Math.round(fill * 100)}%` }} />
                     </span>
                   )
                 })}
               </div>
-              {kPct != null && <span className="yg-kmark" style={{ left: `${kPct}%` }} aria-hidden="true"><KIcon size={14} /></span>}
               <input
                 className="yg-range"
                 type="range"

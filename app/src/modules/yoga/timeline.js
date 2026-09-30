@@ -24,6 +24,19 @@ export function captionAt(tl, t, linger = 0.8) {
   return typeof s.screen_text === 'string' && s.screen_text ? s.screen_text : null
 }
 
+// Altyazı açıkken o anki cümlenin bir öncekisi (sönük yazılır; kapı turu 2: "'Hissetmesen de her adı…' tek başına
+// okununca 'hangi ad?'"): yalnız aynı bölümde (blok) ve araları kısaysa (≤ gap sn). Ekrandaki her cümle söylenmiş bir
+// cümledir (screen_equals_spoken). Yoksa null.
+export function captionBefore(tl, t, gap = 8, linger = 0.8) {
+  const sp = speech(tl)
+  const i = sp.findIndex((x) => t >= x.start && t < x.end + linger)
+  if (i < 1) return null
+  const cur = sp[i]
+  const prev = sp[i - 1]
+  if (!prev || prev.block !== cur.block || cur.start - prev.end > gap || prev.screen_equals_spoken === false) return null
+  return typeof prev.screen_text === 'string' && prev.screen_text ? prev.screen_text : null
+}
+
 // Karşılama cümlesi: altyazı kapalıyken de dersin ilk klibi (Ders 2: "Hoş geldin." · "Bu dakikalar senin.") yazılır;
 // sonrası yalnız altyazı açıkken (5 saniye turu, oynatıcının ilk 5 saniyesi: "yalnız 'Karşılama' var, çalışıyor mu?").
 // Ekrandaki cümle yine söylenen cümledir (captionAt).
