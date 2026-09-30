@@ -11,6 +11,7 @@ import { coachAllowed } from '../lib/consent.js'
 import { haptic, initFeedback, testHaptic } from '../lib/native.js'
 import WarningSigns from '../components/WarningSigns.jsx'
 import { setupText } from '../lib/setupText.js'
+import { buildInfo, versionLine } from '../lib/buildInfo.js'
 import '../styles/info.css'
 
 const SAFETY = setupText().safety
@@ -173,6 +174,7 @@ function FeedbackSettings({ iosApp }) {
 }
 
 export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp = false, trueDepth = false, calibration = null, consents = null, onCoach }) {
+  const build = buildInfo()
   const [confirm, setConfirm] = useState(false)
 
   const Row = ({ Icon, label, sub, onClick, danger }) => (
@@ -226,7 +228,7 @@ export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp 
             onClick={() => onGo('recalibrate-distance')}
           />
           {trueDepth && <Row Icon={Crosshair} label="Göz takibi" sub="Kalibre et ve canlı dene" onClick={() => onGo('gaze-test')} />}
-          <Row Icon={Sparkles} label="Yenilikler" sub="Her güncellemede neler eklendi, neler düzeldi" onClick={() => onGo('whatsnew')} />
+          <Row Icon={Sparkles} label="Yenilikler" sub={versionLine(build)} onClick={() => onGo('whatsnew')} />
         </div>
       </section>
 
@@ -250,7 +252,7 @@ export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp 
       </section>
 
       <p className="muted small" style={{ textAlign: 'center' }}>
-        Sürüm {import.meta.env.VITE_APP_BUILD ? `1.0 (${import.meta.env.VITE_APP_BUILD})` : 'web'}
+        Sürüm {build.version}{build.date ? ` · ${build.date}` : ''}{build.sha ? ` · ${build.sha}` : ''}
         {iosApp && calibration?.method === 'auto' && ` · ekran: ${calibration.deviceName}${calibration.estimated ? ' (tahmini)' : ''}`}
       </p>
       <section className="card info-warn" aria-labelledby="info-warn-h">

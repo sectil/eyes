@@ -11,6 +11,8 @@ export const RELEASES = [
     id: '2026-09-30-2',
     title: '30 Eylül, ikinci güncelleme',
     items: [
+      // Sahibin isteği 2026-09-30: hangi derlemenin kurulu olduğu görünsün (lib/buildInfo.js)
+      { kind: 'new', text: "Bilgi → Yenilikler satırında artık kurulu sürüm ve derlendiği gün yazar; en alttaki sürüm satırında da aynısı durur." },
       // Y1 NIT #23 (metin kapısı 2026-09-30). Cihazda denenmedi.
       { kind: 'change', text: "Nefeste \"Bugünün ritmi\" açıkken kanıt ayrıntısının altında artık şu da yazar: bulgular bu nefes türüyle yapılan çalışmalardan gelir, bugünkü süreler o çalışmalarda kullanılan sürelerden farklı olabilir." },
     ],
