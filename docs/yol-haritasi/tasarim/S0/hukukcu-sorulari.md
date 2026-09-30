@@ -216,6 +216,29 @@ Not: A seçilirse akış ilk kullanımda bir rıza sayfası gösterir; plandaki 
 
 ---
 
+## Soru 4–7 · Bildirimler, hava ve yürüyüş eşliği (2026-09-30; `bildirim-hava-yuruyus/PLAN.v1.md` §4)
+
+Bağlam: Nefona her modülde "Bana hatırlat" (saati kişi seçer ya da kişinin kendi kullanım saatlerinden seçilir), hava
+satırı ve sabah hava bildirimi, yürüyüş eşliği (adım, tempo, mesafe; sesli koç) ekliyor. Yürüyüşün konumu ve hareket
+verisi telefondan çıkmaz, saklanmaz. Hava için Apple'a (WeatherKit, yurt dışı) yuvarlanmış koordinat ya da seçilen
+ilçenin tablodaki merkezi gider. Rıza taslakları: `bildirim-hava-yuruyus/rizalar-taslak.md` (`weather`, `walk`,
+`walkDetect`).
+
+4. **`walk` rızasının kapsamı.** Adım ve tempo sağlık verisi sayılır (KVKK m. 6). Yürüyüş ekranı, sesli koç, uygulama
+   kapalıyken son 15 dakikanın adımına bakıp "Yürüyüşe mi çıktın?" diye sormak ve kaçan bir yürüyüşten sonra "Yürürken
+   beni fark et"i önermek tek bir `walk` rızasıyla kapsanabilir mi, yoksa ayrı rızalar mı gerekir?
+5. **"Her Zaman" konumun "yer değişti" sinyali olarak kullanılması** (`walkDetect`, isteğe bağlı, varsayılan kapalı).
+   Konum saklanmaz ve telefondan çıkmaz; yalnız ≥ 500 m yer değişiminde uygulamayı uyandırır. Ayrı açık rıza ve metni
+   yeterli mi? App Store'a çıkmadan önce ek bir şart var mı?
+6. **Kullanım saati analizi.** "Sen karar ver" seçilince hatırlatma saati, kişinin kendi kayıtlarının saatlerinden
+   telefonda hesaplanır; hiçbir yere gitmez. Bu, ayrı bir rıza gerektirir mi, yoksa bildirim ayarının kendisi yeter mi?
+7. **Soru 1'in güncellenmesi.** (a) İlçe adı yeni bir veridir (profile yazılmaz, telefonda durur). (b) Sabah havasının
+   2. ve 3. katmanı uygulama arka plandayken WeatherKit'e istek yapar; giden şey kişinin konumu değil, seçilen yerin
+   tablodaki kamusal noktasıdır. Soru 1'deki aktarım değerlendirmesi bu iki noktayla değişir mi?
+
+Cevap gelmezse (onaylı yedek, sahibin 2026-09-30 kararıyla): B3 "Kullanırken" konumla çıkar; "Her Zaman" (`walkDetect`)
+App Store'a gitmez (derleme bayrağı kapalı, Info.plist'te metni yok); hava konumsuz da kullanılabilir (il/ilçe seçimi).
+
 ## Cevap gelmezse (plandaki yedek)
 
 Hukukçunun adı Y4 aşamasının cihaz kapısına (S5) kadar gelmezse plan şu yedeği uygular: Y5 (hava) konum izni olmadan,

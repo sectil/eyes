@@ -481,6 +481,40 @@ Sahibinin istekleri (2026-09-28, deneme sonrası):
 - Kanıtla EKLENMEYECEKLER: "çok oturdun" uyarısı, "su içtin mi / nefes yaptın mı" soruları, nabız/HRV tetikli bildirim,
   "bugün 4 saat oldu" mesajı; nabız/HRV yalnızca Gelişim'de, yorumsuz
 
+### 0c. Bildirimler, hava, yürüyüş eşliği (plan ONAYLANDI 2026-09-30; `tasarim/bildirim-hava-yuruyus/PLAN.v1.md`, DEVIR.md)
+Sıra: B0 → B1a → B1b → B2 → Y2–Y4 → B3 → Y6; her parça ayrı TestFlight ve cihaz kapısı. B1a Build 60'tan sonra başlar.
+Kurallar (sahibi): `notifyPlan.js`, `reminders.js`, `restNotify.js`'e dokunulmaz; yalnız DEVIR §5'teki dört test bilerek
+değişir (başkası gerekirse dur, sor); eşdeğerlik 0 fark olmadan B1 bitmez; anahtar yalnız ortam değişkeninden; ücretli
+çağrı ve rıza metinleri sahibin onayıyla; planda "tasarım kapısında çizilecek" her yeni ekran 5 saniye kapısından
+(beş değerlendirici, en az 4/5); `[x]` yalnız cihazda (sonuçlar `cihaz-B1.md`, `cihaz-B2.md`, `cihaz-B3.md`).
+Sahip kararları: modül başına günde en çok 3 saat; sesli koç 250 m / 500 m / 1 km (kişi seçer); "Yürürken beni fark et"
+varsayılan kapalı, kapalıyken Nef teklif eder; Nef'in dili cümle bankasından; B3 "Kullanırken" konumla çıkar, "Her
+Zaman" hukukçuyu bekler; hava için Apple'a soru gönderilmez.
+- [x] B0 · gece düzeltmeleri (Bug 33 `0daf495`, Bug 34 `57a7734`); eşdeğerlik tabanı donduruldu
+      (`app/test/fixtures/bildirim-taban/`, kayıt `57a7734`); hukukçu soruları eklendi (`tasarim/S0/hukukcu-sorulari.md`
+      Soru 4–7); plan belgeleri bu dala alındı.
+- [ ] B0 · v2 bildirim sisteminin cihaz listesi (§0b "Cihazda" maddesi) sahiple geçilir: Build 60 kurulunca.
+- [ ] B0 · rıza taslakları (`bildirim-hava-yuruyus/rizalar-taslak.md`: `weather`, `walk`, `walkDetect`) sahibin onayına.
+- [ ] B1a · `sources.js` kayıtları ve kanıt kapısı (11 kaynak ve koşullular; PubMed esummary, `kaynak-dogrulama.md`) →
+      `remind` sözleşmesi → eşdeğerlik düzeneği (iki katman, 20.000 bağlam) → `moduleRemind.js` → `notifyAll.js` →
+      `notifyApply` (`actionId`, açılışta temizlik) → `RemindField`/`RemindSheet` → modüllere tek satır → Profil →
+      Bildirimler (gece sessizliği sayfası dâhil) → bilim kartı → elle yazılmış cümleler (sahip onaylı) → sürüm notu.
+      Tasarım kapısında yeni: gece sessizliği sayfası, birleşik bildirim, Ana sayfa teklif yuvası.
+- [ ] B1b · Nef cümle bankası (`app/scripts/nef-bank/`; maliyet ve istem önce sahibe; kör değerlendirme; metin onayı).
+- [ ] B2 · hava: `SkyPlugin` + `sky.js` + il/ilçe tablosu (GeoNames ADM2) → `SkyLine` + hava sayfası → `weather` rızası ve
+      gizlilik sayfası → sabah havası (katman 1) → AlarmKit `stopIntent` (katman 2) → arka plan yenilemesi (cihaz
+      ölçümünden sonra karar). Ana sayfa işi Ana sayfa tasarımı onaylandıktan sonra.
+- [ ] B3 · yürüyüş eşliği: `WalkPlugin` → `walk` modülü, ekran, kayıt, veri merkezi → sesli koç (ses parçaları ücretli,
+      sahibin onayıyla) → yürüyüş sorusu → `walkDetect` ve "fark et" teklifi (hukukçu cevabıyla App Store'a; bayrak
+      `NEFONA_WALK_DETECT`).
+- [ ] B3+ · Canlı Etkinlik (Widget Extension), isteğe bağlı.
+- [ ] DEVIR §8 bulguları (bu işin dışında, ana liste): (2) "Çalışma günleri" saati pencereye bakmıyor — sahip kararı:
+      kişinin seçimi, dokunulmaz; 7302 ve (3) oturum sonu çakışması düzeldi (Bug 34). (4) AlarmKit ertelemesi geri sayım
+      sunumu kullanıyor, widget uzantısı yok: alarmın çalmama riski (Apple). (5) Kim 2020 ve Wolffsohn 2025
+      `sources.js`'te yok (yalnız `evidence.js`). (6) SONSUZ_YOL.PLAN §E.6–E.7 satır atıfları kaymış. (7) `yogaLessons.js`
+      Radin 2025 atfı: çalışma yoga değil meditasyon RKÇ'si, bulgu özette yok — düzeltilecek. (8) `Info.plist`
+      `NSHealthUpdateUsageDescription` duruyor, Nefona Sağlık'a yazmıyor.
+
 ### 1. Hareket: Apple Sağlık (HealthKit) — kod bitti, CİHAZDA DENENMEDİ
 - [ ] Telefonda: izin sayfaları (bizim + iOS), adım satırı, Beden kartı; Swift derlemesi Mac'te (burada derlenemiyor)
 - [ ] Uyku süresi (Gelişim yer tutucusunda vardı) — ayrı karar
