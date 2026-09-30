@@ -8,7 +8,42 @@ her yerel kod önerisi Mac'te Xcode ile derlenip gerçek cihazda denenmeli.
 
 ## Sonuçlar
 
-(Belgenin sonunda doldurulacak.)
+1. **Uygulama kapalıyken "yürüyüşe çıktın"ı anında algılamanın izin verilen yolu yok (Always konum hariç).** CoreMotion etkinliği ve
+   pedometre uygulamayı uyandırmaz ("updates are not delivered while your app is suspended" — `coremotion/cmmotionactivitymanager/startactivityupdates(to:withhandler:)`).
+   Kapalı uygulamayı yalnız HealthKit arka plan teslimi ve (Always izniyle) konum bölge/ziyaret/önemli değişiklik uyandırır.
+2. **HealthKit stepCount uyanışı iOS'ta en sık saatte bir** ("on iOS, stepCount samples have an hourly maximum frequency" —
+   `healthkit/hkhealthstore/enablebackgrounddelivery(for:frequency:withcompletion:)`). Gerçekçi gecikme 0–60+ dk; kısa yürüyüşler
+   çoğunlukla bittikten sonra fark edilir.
+3. **Apple Watch'un otomatik egzersiz algısını üçüncü taraf iPhone uygulamasına veren bir API bulamadım** (`healthkit/workouts-and-activity-rings`).
+   Dürüst yedek: planlı yürüyüş bildirimi + "Yürüyüşe başla" düğmesi; saatlik uyanışta hâlâ yürüyorsa yumuşak "Yürüyüşte misin?" sorusu.
+   Soru olarak sorulmalı, "Yürüyüşe çıktın" diye iddia edilmemeli.
+4. **"Apple Sağlık'la birebir" sayı yalnız HealthKit istatistik sorgusundan gelir:** istatistik sorguları "automatically merge the data
+   from all of your data sources" (`healthkit/hkstatistics`). Ham örnek toplamı ya da `CMPedometer` + taban toplamı çift sayabilir
+   (iPhone + Watch). Kaynak önceliği kuralı belgede yazmıyor.
+5. **Canlı ekran pedometreden, kesin sayı bitişte Sağlık'tan:** Canlı "bu yürüyüş" adımı `CMPedometer`'dan (yalnız telefon). Günlük
+   toplam `HKStatisticsCollectionQuery.statisticsUpdateHandler` ile canlı okunur. Kilitli telefonda Sağlık okunamayabilir. Bitişte
+   `başlangıç→bitiş` Sağlık toplamı kayda yazılır. Ekranda "Apple Sağlık'a göre" sözü yalnız bu sayı için verilmeli.
+6. **Tempo için pedometre yeterli ama tek başına yetmez:** `currentPace` / `averageActivePace` "seconds per meter" veriyor (iOS 9/10),
+   `distance` "estimated" metre. Yalnız pedometre kullanılırsa kilit ekranında uygulama askıya alınır ve anonslar durur.
+   **When In Use konum + `location` arka plan kipi + `allowsBackgroundLocationUpdates`** kilitte ölçümü ve uyanıklığı sağlar.
+   iOS 17+ için `CLBackgroundActivitySession` var. Always izni gerekmez ("an app with When in Use authorization continues to run in the
+   background when location services are active" — `corelocation/requesting-authorization-to-use-location-services`).
+7. **Sesli koç için uygun oturum:** `.playback` + `.voicePrompt` + `.duckOthers` + `.interruptSpokenAudioAndMixWithOthers`. Her anonstan
+   sonra oturum `notifyOthersOnDeactivation` ile bırakılır. Apple "exercise app" örneğini bu seçenekler için açıkça veriyor ve duck'ın
+   "birkaç saniyeden uzun" sürmemesini istiyor. Bugünkü `AppAudioSession` durum makinesine yeni bir yürüyüş durumu eklenmeli.
+   `audio` kipiyle sessiz ses çalıp uygulamayı uyanık tutmak App Review 2.5.4'e aykırı; bunu konum oturumu yapmalı.
+8. **ElevenLabs parça birleştirme mümkün ve küçük:** Kalıp "Kilometre başına N dakika M saniye." şeklinde, sayılar ek almıyor. Saniyeler 5 sn'ye
+   yuvarlanıyor. Ses başına ~64 dosya gerekir (1 + 28 dakika + 11 saniye + 15 km + 3 metre + ~6 sabit cümle), iki ses için ≈ 128. Dikiş kalitesi
+   dinlenerek doğrulanmalı. `AVSpeechSynthesizer` tr-TR yalnız yedek olur: Apple dil listesini belgede vermiyor ve ses kimliği farklı.
+   Anonslar arka planda WebView'den değil, yerel Swift'ten çalınmalı.
+9. **Canlı Etkinlik için yeni bir Widget Extension hedefi gerekir:** Depoda yok. `LiveActivityIntent` yalnız AlarmKit alarm düğmesi için
+   kullanılıyor. ActivityKit iOS 16.1+ ile çalışır. Canlı Etkinlik en çok 8 saat sürer, verisi 4 KB'ı geçemez, ağa ve konuma erişemez. Uygulama arka planda
+   güncelleyebilir. Yerel güncelleme sıklığı için belgede bir sınır bulamadım.
+10. **Yeni gereksinimler:** `NSMotionUsageDescription`, `NSLocationWhenInUseUsageDescription`, `UIBackgroundModes += location`,
+    `NSSupportsLiveActivities` ve widget hedefi (isteğe bağlı). İsteğe bağlı "evden çıkınca sor" özelliği için Always açıklaması da eklenmeli. Çekirdek
+    iOS 15'te çalışır. iPhone'da bağımsız `HKWorkoutSession`/`HKLiveWorkoutBuilder` iOS 26+ ister ve Sağlık'a yazmayı gerektirir, bu da
+    bugünkü "Sağlık'a yazmaz" sözünü bozar. Bu yol sahibin kararına bırakılmalı. Swift bu ortamda derlenemez; tümü Mac'te derlenip gerçek
+    cihazda denenmeli.
 
 ---
 
@@ -442,3 +477,117 @@ Parça sayısı (ses başına):
   (VARSAYIM: belgede "sessizken askıya alınır" cümlesini okumadım, ama kip tanımı "plays audible content" ile sınırlı). Uyanık kalmak için
   sessiz ses döngüsü çalmak **bu kipin amacı dışı** kullanım olur → 2.5.4 ret riski yüksek. Doğru yol: yürüyüş süresince **`location` kipi +
   konum oturumu** (Apple'ın açıkça saydığı kullanım: fitness rotası), anonslar için mevcut `audio` kipi.
+
+---
+
+## 5. Canlı Etkinlik / Dinamik Ada (kilit ekranında süre-tempo-adım)
+
+### 5.1 Apple ne diyor
+
+- ActivityKit iOS **16.1**+ — `activitykit`. Uygulama alt sınırı 15 → her çağrı `#available(iOS 16.1, *)` ile korunmalı; iOS 15'te
+  Canlı Etkinlik yok (yedek: kilit ekranında yalnız sesli koç + "Şimdi Oynatılıyor" benzeri bilgi YOK — bkz. §5.3).
+- Arayüz **widget uzantısında** (WidgetKit + SwiftUI) yazılır: "To offer Live Activities, add code to your existing widget extension or
+  create a new widget extension if your app doesn't already include one." Info.plist'e `NSSupportsLiveActivities = YES`;
+  `ActivityAttributes` + `ContentState` tanımlanır; kilit ekranı + kompakt + minimal + genişletilmiş sunumların **hepsi** zorunlu
+  ("you must support all presentations") — `activitykit/displaying-live-data-with-live-activities`.
+- Sınırlar (aynı sayfa): en çok **8 saat** etkin (+4 saat kilit ekranında kalır); statik + dinamik veri toplam **4 KB**; Canlı Etkinlik
+  "can't access the network or receive location updates" (veriyi uygulama verir); yükseklik 160 pt üstü kırpılabilir.
+- Başlatma: "In general, your app needs to be in the foreground to start a Live Activity … However, you can start a Live Activity while
+  your app is in the background by using an app intent that conforms to LiveActivityIntent." — aynı sayfa ve
+  `activitykit/activity/request(attributes:content:pushtype:)` (iOS 16.2).
+- Güncelleme: "Use this function to update the Live Activity while your app is in the foreground or while it's in the background"
+  — `activitykit/activity/update(_:)` (iOS 16.2).
+- Sık güncelleme anahtarı `NSSupportsLiveActivitiesFrequentUpdates` yalnız **uzaktan push** güncellemeleri içindir
+  — `bundleresources/information-property-list/nssupportsliveactivitiesfrequentupdates`. Yerel (uygulama içi) `update` için sayısal
+  sıklık sınırını okuduğum sayfalarda **bulamadım** (belgede yok / bakmadım).
+
+### 5.2 Bizim için sonuç
+
+- Depoda widget uzantısı **yok** (`project.pbxproj`'da tek hedef, `com.apple.product-type.application`). `AlarmPlugin.swift` sonundaki
+  `OpenNefonaIntent: LiveActivityIntent` yalnız AlarmKit alarm düğmesi (iOS 26, `#if canImport(AlarmKit)`); ActivityKit / Canlı Etkinlik
+  arayüzü yok. → **Yeni bir Widget Extension hedefi** (Xcode'da, Mac'te), `NSSupportsLiveActivities`, paylaşılan `WalkAttributes` tipi
+  (uygulama + uzantı iki hedefte de derlenmeli) gerekir.
+- Önerilen içerik (4 KB'ın çok altında): statik: başlangıç zamanı, ses açık/kapalı; dinamik: mesafe (m), adım, son dilim temposu
+  (s/km), ortalama tempo, durum (yürüyor / duraklatıldı).
+- Süre sayacı: VARSAYIM: SwiftUI `Text(timerInterval:)` / tarih tabanlı sayaç görünümü uygulama güncellemesi olmadan saniyeyi
+  kendisi ilerletir; ilgili SwiftUI sayfasını bu turda okumadım. Böylece `update` yalnız 250 m'de bir (ya da ~15–30 sn'de bir) yapılır.
+- Güncellemeyi **konum oturumu sayesinde uyanık olan uygulama** yapar (§3.2). Canlı Etkinlik tek başına uygulamayı uyanık tutmaz
+  (belgede böyle bir ifade yok; "can't … receive location updates").
+- Kilitli ekranda HealthKit okunamayabilir (§2.1) → Canlı Etkinlikteki adım **pedometreden** gelmeli; "Sağlık'la birebir" sayı bitişte.
+- iOS 26'da `HKWorkoutSession` + Canlı Etkinlik + App Intents ile kilit ekranından duraklat/bitir Apple'ın kendi örneği
+  (`healthkit/building-a-workout-app-for-iphone-and-ipad`); ama bu yol Sağlık'a **yazma** (antrenman kaydı) demek (§2.3).
+
+### 5.3 iOS 15 / Canlı Etkinlik kapalıysa
+
+- `MPNowPlayingInfoCenter` ile kilit ekranı "Şimdi Oynatılıyor" kartına tempo yazmak (LessonPlayer bunu ders için yapıyor) — VARSAYIM:
+  müzik çalmayan bir uygulamanın "Şimdi Oynatılıyor"u durum göstergesi olarak kullanması 2.5.4 ruhuna aykırı görülebilir; önerilmez.
+- Dürüst yedek: kilit ekranında görsel yok, yalnız sesli anons; ekran açılınca yürüyüş ekranı güncel.
+
+---
+
+## 6. Özet: en güvenilir mimari
+
+### 6.1 Akış
+
+1. **Tetik (uygulama kapalı):**
+   - a) Planlı yürüyüş bildirimi (bugün var) — metni "Yürüyüş vakti. Hava 23° — eşlik edelim mi?" gibi; dokununca yürüyüş ekranı.
+   - b) HealthKit stepCount saatlik uyanışında (bugün var, WalkGuard) + CoreMotion geçmişi "şu an walking/high" ise → "Yürüyüşte misin?
+     Kalan yolda eşlik edelim mi?" (gecikmeli; §1.3). Yeni: `NSMotionUsageDescription`.
+   - c) (İsteğe bağlı, varsayılan kapalı) Always konum + ev çevresi bölge çıkışı → "Yürüyüşe mi çıktın?" (§1.4).
+   - Hava durumu cümlesi: bu araştırmanın kapsamı dışında; hava için konum ya da kayıtlı şehir gerekir — bakmadım.
+2. **Başlatma (ön plan):** Kişi bildirime ya da "Yürüyüşe başla"ya dokunur → uygulama ön planda: konum izni (ilk sefer, When In Use),
+   hareket izni (ilk sefer), `CLLocationManager` (`.fitness`, `allowsBackgroundLocationUpdates = true`,
+   `pausesLocationUpdatesAutomatically = false`) ya da iOS 17+ `CLBackgroundActivitySession` + `liveUpdates(.fitness)`;
+   `CMPedometer.startUpdates(from:)`; HealthKit taban `H0`; iOS 16.1+ ise Canlı Etkinlik `request`.
+3. **Sürdürme (arka plan/kilit):** Konum oturumu uygulamayı uyanık tutar (mavi gösterge görünür). Yerel Swift katmanı her 250 m'de:
+   dilim temposunu hesaplar → ses parçalarını çalar (`.playback` + `.voicePrompt` + `.duckOthers` + `.interruptSpokenAudioAndMixWithOthers`,
+   sonra oturumu bırakır) → Canlı Etkinliği günceller. WebView'e (JS) güvenilmez; mantık yerelde, JS ön planda yalnız gösterir.
+4. **Bitiş:** Kişi bitirir (ya da uzun durgunluk: `CMPedometerEvent.pause` + hareket yok → "Yürüyüşü bitirelim mi?"). Konum/pedometre
+   durur, Canlı Etkinlik biter, HealthKit'ten `başlangıç→bitiş` adımı okunur ve kayda o yazılır ("Apple Sağlık'a göre").
+
+### 6.2 Gereken yeni anahtarlar / yetkiler / izin pencereleri
+
+| Ne | Nerede | Neden | Zorunlu mu |
+|---|---|---|---|
+| `NSMotionUsageDescription` | Info.plist | CMPedometer, CMMotionActivityManager (yoksa çöker) | Evet |
+| `NSLocationWhenInUseUsageDescription` | Info.plist | Yürüyüş mesafesi/temposu, arka planda sürdürme | Evet (GPS yolu) |
+| `UIBackgroundModes` += `location` | Info.plist | Kilitte ölçüm + uyanık kalma | Evet (GPS yolu) |
+| `NSLocationAlwaysAndWhenInUseUsageDescription` | Info.plist | Yalnız "evden çıkınca sor" | Hayır (isteğe bağlı özellik) |
+| `NSSupportsLiveActivities = YES` | Info.plist | Canlı Etkinlik | Canlı Etkinlik istenirse |
+| Widget Extension hedefi | Xcode projesi (Mac) | Canlı Etkinlik arayüzü | Canlı Etkinlik istenirse |
+| HealthKit okuma türleri | `HealthPlugin.readTypes` | Değişmez (adım/mesafe zaten var) | — |
+| HealthKit **yazma** (`workoutType`) | izin + `NSHealthUpdateUsageDescription` metni | Yalnız iOS 26 `HKWorkoutSession` yolu seçilirse | Hayır; "Sağlık'a yazmaz" sözünü bozar |
+| `audio` kipi | Info.plist (var) | Anons çalma | Var |
+| `healthkit.background-delivery` | entitlements (var) | Saatlik uyanış | Var |
+
+İzin pencereleri (kişi sırayla görür, hepsi "Yürüyüşe başla"ya ilk dokunuşta, açılışta değil): Hareket ve Fitness → Konum (Uygulamayı
+Kullanırken) → (bildirim zaten var) → iOS 16.1+'da Canlı Etkinlik için ayrı pencere yok (VARSAYIM: Ayarlar'dan kapatılabilir;
+`ActivityAuthorizationError.denied` bunu gösterir — `activitykit/activity/request(attributes:content:pushtype:)`).
+
+### 6.3 iOS sürüm haritası (alt sınır 15.0)
+
+| Parça | En düşük iOS | Kaynak |
+|---|---|---|
+| CMPedometer adım/mesafe | 8.0 | `coremotion/cmpedometer` |
+| currentPace / currentCadence | 9.0 | `coremotion/cmpedometerdata/currentpace` |
+| averageActivePace, pedometre olayları | 10.0 | `coremotion/cmpedometerdata/averageactivepace` |
+| CMMotionActivityManager | 7.0 | `coremotion/cmmotionactivitymanager` |
+| allowsBackgroundLocationUpdates | 9.0 | `corelocation/cllocationmanager/allowsbackgroundlocationupdates` |
+| `.voicePrompt` modu | 12.0 | `avfaudio/avaudiosession/mode-swift.struct/voiceprompt` |
+| ActivityKit | 16.1 (request/update 16.2) | `activitykit` |
+| CLBackgroundActivitySession, CLLocationUpdate.liveUpdates | 17.0 | `corelocation/clbackgroundactivitysession-3mzv3` |
+| CLServiceSession | 18.0 | `corelocation/clservicesession-2ddhd` |
+| iPhone'da bağımsız HKWorkoutSession / HKLiveWorkoutBuilder | 26.0 | `healthkit/hkworkoutsession/init(healthstore:configuration:)` |
+
+→ Çekirdek (pedometre + klasik konum + ses) iOS 15'te çalışır. Canlı Etkinlik 16.1+, yeni konum oturumu 17+ bonus.
+
+### 6.4 Açık riskler ve cihazda doğrulanacaklar
+
+- Swift bu bulut ortamında **derlenemez**; her şey Mac'te Xcode ile derlenmeli, **gerçek cihazda** denenmeli (HealthKit arka plan
+  sorguları simülatörde çalışmaz — `healthkit/hkobserverquery`).
+- Ölçülecekler: HealthKit saatlik uyanışın gerçek aralığı; kilitte pedometrenin sürdüğü; 250 m anonsunun gecikmesi; parça
+  birleştirmenin dikiş kalitesi; `dailyTotals` (`.strictStartDate`) ile Sağlık uygulaması sayısının karşılaştırması; müzik
+  (Apple Music/Spotify) ve podcast çalarken duck/duraklatma davranışı; telefon görüşmesi kesintisi.
+- `AppAudioSession`'a yürüyüş durumunun eklenmesi (uyku sesi / ders / kayıt ile çakışma).
+- App Review: `location` kipi gerekçesi (yürüyüş ekranı ve mavi gösterge görünür olmalı); Always istenirse ek gerekçe; sessiz ses
+  döngüsüyle uyanık tutma **yapılmamalı** (2.5.4).

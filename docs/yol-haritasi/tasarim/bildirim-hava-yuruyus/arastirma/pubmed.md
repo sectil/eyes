@@ -98,3 +98,75 @@ Zaten depoda: Leppe-Zamora 2025 (bilgisayar hatırlatması MA, 18 RKÇ, 1.164 ma
 - Akşam: en çok oturulan ve en az kalkılan dilim (Zhao 2023, Yerrakalva 2017). Yani akşam "fırsat" var gibi görünüyor, ama **akşam verilen kalk bildiriminin işe yaradığını gösteren çalışma bulunamadı**. Compernolle 2021'de yanıt öğlen en iyiydi.
 - Sahibin "21'den sonra kalk mantıksız" kuralı kanıtla çelişmiyor: akşam için etki kanıtı yok, gece için uyku ihtiyatı var (bkz. C). Varsayılan kalk penceresi: kullanıcının iş/odak saatleri; akşam penceresi kullanıcı açarsa. Pencere sınırları (ör. 09:00–21:00) **VARSAYIM**.
 - Metin önerisi: "kalk" yerine "kalk ve birkaç adım yürü" adım sayısını artırdı (Swartz 2014, grup içi) — küçük kanıt.
+
+---
+
+## E. Yürüyüş: hız, tempo (dk/km), kadans (adım/dk), geri bildirim
+
+Zaten depoda: Fuller 2020 (adım ölçer doğruluğu), NeCamp 2020, Klasnja 2019.
+
+| Kaynak | PMID | DOI | Tür | n | Bulgu | Sınır |
+|---|---|---|---|---|---|---|
+| Tudor-Locke 2019, Int J Behav Nutr Phys Act | 30654810 | 10.1186/s12966-019-0769-6 | Laboratuvar, kesitsel (koşu bandı + kalorimetre) | 76 sağlıklı yetişkin (21–40 yaş) | Mutlak orta şiddet (3 MET) için pratik eşik **100 adım/dk** (pozitif öngörü değeri %91,4), şiddetli (6 MET) için 130 adım/dk. | Genç, sağlıklı; koşu bandı; bireysel sapma var. |
+| McAvoy 2021, Int J Behav Nutr Phys Act | 33568188 | 10.1186/s12966-021-01096-w | Laboratuvar, kesitsel | 157 yetişkin (21–60 yaş) | **Kişiye göreli** orta şiddet (ör. %64 maks. nabız, Borg ≥12) için eşik yaşa göre değişiyor: 21–30 yaş ≥120, 31–40 ≥120, 41–50 ≥115, 51–60 ≥105 adım/dk. | Koşu bandı; nabız formülü tahmini (220−yaş). |
+| McAvoy 2023, Int J Behav Nutr Phys Act | 38031156 | 10.1186/s12966-023-01543-w | Laboratuvar, kesitsel | 97 kişi (61–85 yaş) | Göreli orta şiddet için en iyi pratik eşik ≥105 adım/dk; mutlak orta şiddet için daha önce ≥100 adım/dk bildirilmiş. | Görece sağlıklı yaşlılar. |
+| Tudor-Locke 2020, J Phys Act Health | 31698336 | 10.1123/jpah.2018-0439 | RKÇ, 3 kol, 12 hafta | 120 menopoz sonrası hareketsiz kadın (tamamlayan 115) | Günde 10.000 adım hedefi alan grup ile buna ek "30 dk ≥100 adım/dk" mesajı alan grup benzer arttı (5.173→9.602 ve 5.061→10.508 adım/gün; etkin dakika 30,2 ve 38,8). Şiddet mesajı ek fark yaratmadı. | Tek cinsiyet; klinik sonuç çoğunlukla değişmedi. |
+| Studenski 2011, JAMA | 21205966 | 10.1001/jama.2010.1923 | 9 kohortun bireysel veri havuzu | 34.485 kişi (≥65 yaş), 6–21 yıl izlem | Olağan yürüme hızındaki her 0,1 m/sn artış daha uzun sağkalımla ilişkili (HR 0,88; %95 GA 0,87–0,90). | Gözlemsel; yaşlılar; hız **ölçülen** olağan hız, hızlanma önerisi değil. |
+| Liu 2016, Gait Posture | 27004653 | 10.1016/j.gaitpost.2015.12.008 | SD + MA (prospektif kohortlar) | 9 çalışma, 12.901 kişi (≥65 yaş) | En yavaş ile en hızlı olağan yürüyüş grubu karşılaştırıldığında tüm nedenlere bağlı ölüm RR 1,89; kadınlarda anlamsız (RR 1,45; 0,95–2,20). | Gözlemsel; ters nedensellik olası. |
+| Celis-Morales 2019, Med Sci Sports Exerc | 30303933 | 10.1249/MSS.0000000000001795 | Kohort (UK Biobank) | 318.185 kişi (40–69 yaş), ort. 5 yıl | Öz-bildirilen "hızlı" yürüyüş, "yavaş" yürüyüşe göre daha düşük tüm nedenli ölüm riskiyle ilişkili (erkek HR 0,79, kadın 0,73), toplam yürüme süresinden bağımsız. | Öz-bildirim tempo; gözlemsel; hızlı yürüyenler zaten daha sağlıklı olabilir. |
+| Ferguson 2022, Lancet Digit Health | 35868813 | 10.1016/S2589-7500(22)00111-X | Şemsiye derleme | 39 SD/MA, 163.992 kişi | Etkinlik izleyicileri fiziksel aktiviteyi artırdı (SMD 0,3–0,6; yaklaşık günde +1.800 adım, +40 dk yürüyüş). | Derlemelerin derlemesi; birincil çalışmalarda heterojenlik. |
+| Bravata 2007, JAMA | 18029834 | 10.1001/jama.298.19.2296 | SD + MA | 26 çalışma (8 RKÇ), 2.767 kişi | Adımsayar kullananlar RKÇ'lerde kontrole göre günde 2.491 adım daha fazla attı; **adım hedefi** olması önemli yordayıcıydı. | Ort. 18 hafta; %85 kadın; uzun dönem belirsiz. |
+| Romeo 2019, J Med Internet Res | 30888321 | 10.2196/12053 | SD + MA (RKÇ, nesnel ölçüm) | 9 RKÇ, 1.740 kişi (6'sı MA'da) | Akıllı telefon uygulamaları adımı anlamlı artırmadı: +477 adım/gün (%95 GA −230 ile 1.183). 3 aydan kısa ve yalnız fiziksel aktiviteyi hedefleyen uygulamalar daha etkiliydi. | Az çalışma. |
+
+**Bizim için sonuç**
+- **Dakika/km tempo** ile şiddet arasında doğrudan PubMed eşiği bulunamadı; bilimsel eşik **adım/dk (kadans)** üzerinden: ~100 adım/dk ≈ orta şiddet (Tudor-Locke 2019); kişiye göreli eşik yaşla 105–120 (McAvoy 2021, 2023). Öneri: sesli koç dk/km'yi söyler (sahibin isteği), ekranda kadans da gösterilir; "orta tempodasın" gibi yorum **kadansa** dayanır. dk/km→şiddet çevirisi boy/adım uzunluğuna bağlı olduğundan **VARSAYIM**.
+- Hızlı yürüyüş ile sağlık sonuçları arasındaki ilişkiler gözlemsel (Studenski 2011, Liu 2016, Celis-Morales 2019). Nef "hızlı yürümek ömrü uzatır" **demez**; en fazla "hızlı yürüyüş daha iyi sağlık göstergeleriyle ilişkili bulundu" der.
+- Şiddet mesajı eklemek adım hedefine ek fayda getirmedi (Tudor-Locke 2020); yani tempo koçu "hızlan" baskısı yapmamalı, bilgi vermeli.
+- Takip + hedef işe yarıyor (Ferguson 2022, Bravata 2007); tek başına uygulama etkisi belirsiz (Romeo 2019). Yürüyüş ekranı bir **hedef** (ör. bugünkü dakika/adım) ile birlikte sunulmalı.
+- Gerçek zamanlı hız/tempo geri bildiriminin sağlıklı yetişkinde yürüyüş miktarını artırdığını gösteren RKÇ bulunamadı (bkz. Bulunamayanlar).
+
+---
+
+## F. Sesli koçluk, işitsel geri bildirim, müzik temposu
+
+| Kaynak | PMID | DOI | Tür | n | Bulgu | Sınır |
+|---|---|---|---|---|---|---|
+| Terry 2020, Psychol Bull | 31804098 | 10.1037/bul0000216 | Çok düzeyli MA | 139 çalışma, 3.599 kişi, 598 etki büyüklüğü | Egzersizde müzik: duygu durumu g=0,48, fiziksel performans g=0,31, algılanan zorlanma g=0,22 (daha az); nabızda fark yok. Hızlı tempo daha etkili. | Çoğu kısa laboratuvar denemesi; müzik, sesli koç değil. |
+| Perry 2019, J Phys Act Health | 31509799 | 10.1123/jpah.2019-0097 | Deneysel (katılımcı içi) | 20 genç yetişkin | Müzik temposuna adım uydurma hatası ~%5,3; 100 vuruş/dk müzikte katılımcıların %90'ı ≥3 MET'e ulaştı. | Küçük; genç; kısa. |
+| Faulkner 2021, Int J Environ Res Public Health | 34360151 | 10.3390/ijerph18157855 | RKÇ, 9 ay | 37 kilolu yetişkin (17+20) | Tempo ayarlı müzikle yürüyen grupta alışkın kadans 110'dan ~122 adım/dk'ya çıktı ve müziksiz de sürdü; kontrolde değişmedi. | Küçük; davranış desteği programı da vardı. |
+| Roberts 2021, Gait Posture | 34284333 | 10.1016/j.gaitpost.2021.04.008 | Deneysel | Özette verilmemiş (genç ve yaşlı) | Müziği sevmek yürüyüş hızını etkilemedi; ritim algısı, talimat ve yaş daha etkiliydi; yaşlılar "ritme uy" denince yavaşladı. | Laboratuvar. |
+| Van Hooren 2024, Eur J Sport Sci | 39466026 | 10.1002/ejsc.12044 | Randomize çapraz deneme | 24 sağlıklı gönüllü | Standart sözlü cesaretlendirme, koşu bandı testinde VO2 zirvesini artırdı (+2,1 mL/kg/dk); tükenme süresi değişmedi. | Maksimal test; günlük yürüyüş değil. |
+| Singh 2023, NPJ Digit Med | 37353578 | 10.1038/s41746-023-00856-1 | SD + MA | 19 çalışma (n 25–958) | Sohbet botları fiziksel aktiviteyi (SMD 0,28), adımı (SMD 0,28) artırdı. Meyve-sebzede metin tabanlı ve yapay zekâlı botlar **sesli** botlardan daha etkiliydi. | Çalışmaların %74'ü düşük kalite. |
+| Glavas 2024, JMIR Aging | 39270212 | 10.2196/53064 | Fizibilite RKÇ, 12 hafta | 50 kişi (50–75 yaş, obez, tip 2 diyabet) | Sesli asistanla (Alexa) verilen ev egzersizine uyum %85; kontrole göre oturma süresi günde 67 dk azaldı. | Küçük; hastalık grubu; sağlık profesyoneli destekli. |
+| Simmons 2020, Inj Prev | 32015086 | 10.1136/injuryprev-2019-043426 | SD + MA | 33 çalışma (14 deneysel MA'da) | Telefonla konuşma ve mesajlaşma yaya çarpma ve kıl payı kurtulma oranını artırdı; mesajlaşma en zararlısı. | Çalışma kalitesi sınırlı; çoğu sanal ortam. |
+| Schwebel 2012, Accid Anal Prev | 22269509 | 10.1016/j.aap.2011.07.011 | RKÇ (sanal yaya ortamı) | 138 üniversite öğrencisi | Müzik dinleyen ya da mesajlaşan grupta sanal araç çarpması daha sık; tüm dikkat dağınık gruplar yola daha az baktı. | Sanal ortam; öğrenci. |
+| Lichenstein 2012, Inj Prev | 22248915 | 10.1136/injuryprev-2011-040161 | Retrospektif vaka serisi | 116 olay (ABD, 2004–2011) | Kulaklıklı yaya ölüm/yaralanma vakalarının %55'inde tren; %29'unda kazadan önce uyarı sesi verilmiş. | Haber taraması; payda yok, risk hesaplanamaz. |
+
+**Bizim için sonuç**
+- 250 m'de dk/km söyleyen sesli koçun yürüyüş miktarına etkisini doğrudan sınayan RKÇ **bulunamadı**. Dolaylı kanıt: sözlü cesaretlendirme maksimal performansı az artırıyor (Van Hooren 2024), müzik temposu kadansı yönlendirebiliyor (Perry 2019, Faulkner 2021), sohbet botları küçük etki (Singh 2023). Sesli koç **deneyim özelliği** olarak sunulur, etki iddiası yazılmaz.
+- Güvenlik: kulaklıkla/sesle dikkat dağılması yaya riskini artırıyor (Schwebel 2012, Simmons 2020). Kurallar: anons kısa (tek cümle, ör. "1 km, tempo 10:40"), trafikte sorgu/soru sormaz, ekrana bakmayı gerektirmez; anons sıklığı ayarlanabilir (250 m / 500 m / 1 km / kapalı). 250 m sayısı **VARSAYIM**.
+- Müzik ile birlikte kullanım: iOS ses odağı (ducking) ile müziği kısıp anons yapmak; ritim/metronom özelliği ileride kadans hedefi için düşünülebilir (Perry 2019), ilk sürümde gerek yok.
+
+---
+
+## G. Hava ve fiziksel etkinlik; "ideal yürüyüş sıcaklığı"; hava bilgisinin davranışa etkisi
+
+Zaten depoda (hava-ay.md): Tucker ve Gilliland 2007 (SD, 37 çalışma), Klimek 2022 (65+, yağış hareketi azaltıyor), Denissen 2008, Klimstra 2011 (hava–ruh hâli küçük, kişiye göre değişken).
+
+| Kaynak | PMID | DOI | Tür | n | Bulgu | Sınır |
+|---|---|---|---|---|---|---|
+| Chan 2006, Int J Behav Nutr Phys Act | 16893452 | 10.1186/1479-5868-3-21 | Boylamsal (adımsayar + meteoroloji), Kanada | 202 kişi (177 kadın), 8.125 gün | Sıcaklık, yağmur, kar ve rüzgâr günlük adımı etkiledi; etkiler **ılımlı** (~%1–20); günde ~10.000 adım atan biri için havaya bağlı fark 2.000 adıma ulaşabilir. | Fazla kilolu, müdahale grubundaki gönüllüler. |
+| Togo 2005, Int J Biometeorol | 16044348 | 10.1007/s00484-005-0277-z | Boylamsal, 450 gün, Japonya | 41 yaşlı (ort. 71 yaş) | Adım, yağış arttıkça üstel azaldı (r²=0,19). Yağışsız günlerde adım −2 ile 17 °C arasında sıcaklıkla arttı, **17–29 °C** arasında azaldı. Güneşlenme, rüzgâr, nem etkisi küçük (r² ≤ 0,03). | Küçük; tek şehir; yaşlı. |
+| Ho 2022, Int J Behav Nutr Phys Act | 35701809 | 10.1186/s12966-022-01285-1 | Toplu zaman serisi (akıllı telefon adımı), 5 Çin şehri, 1 yıl | Anonim toplu veri (kişi sayısı özette yok) | Soğuk/ılıman iklimli şehirlerde (Pekin, Şanghay, Chongqing) adım **16–19,3 °C** arasında en yüksek; sıcakta 800–1.500 adım/gün azalma. Subtropik şehirlerde (Shenzhen, Hong Kong) sıcakta düşüş anlamsız. Kadın ve yaşlılarda en uygun sıcaklık daha düşük. | Ekolojik (kişi düzeyi değil); tek ülke. |
+| Yamanaka 2026, Ann Geriatr Med Res | 42544386 | 10.4235/agmr.26.0065 | Kohort, ivmeölçer 7 gün, Japonya | 769 kişi (≥65 yaş), 4.344 kişi-gün | Oturma U biçimli, en düşük ~20,8 °C; hafif ve orta-şiddetli etkinlik ters U, tepe ~20,7 ve ~21,1 °C. ~22 °C üstünde uyku süresi azalma eğiliminde. | Kesitsel-gün düzeyi; yaşlı; tek bölge. |
+| Woldamanuel 2024, Int J Environ Res Public Health | 38673292 | 10.3390/ijerph21040379 | İkincil analiz, 2 yıl, İsveç | Prediyabet/tip 2 diyabetli müdahale katılımcıları (n özette yok) | Hava ile günlük adım arasında **ilişki bulunmadı**; hava değişkenleri varyansın ~%10'unu, bireysel etmenler ~%38'ini açıkladı. | Öz-bildirilen adım; motivasyonu yüksek müdahale grubu. |
+| Zheng 2021, Health Place | 33714181 | 10.1016/j.healthplace.2021.102546 | SD + MA | 26 çalışma (çocuk-ergen) | Daha yüksek sıcaklık daha çok orta-şiddetli etkinlikle; düşük sıcaklık ve yoğun yağış daha uzun oturmayla ilişkili. | Çocuk-ergen; etki büyüklükleri özette yok. |
+| Wagner 2019, J Sport Health Sci | 30719382 | 10.1016/j.jshs.2016.07.007 | Kesitsel ulusal anket (ABD) | 502 yetişkin | Olumsuz hava yüzünden yazın %51,8, kışın %43,9'u egzersizi erteliyor. Yağmuru başlıca engel sayanlar, sıcağı sayanlara göre 3,33 kat daha olası kapalı alanda, 3,49 kat daha olası erteleyerek egzersiz yapıyor. | Öz-bildirim; niyet/tercih, ölçülmüş davranış değil. |
+| Bernard 2021, Sports Med | 33689139 | 10.1007/s40279-021-01439-4 | SD (anlatısal) | 74 makale | Hava kirliliği, aşırı sıcaklık ve doğal afetlerin fiziksel aktiviteye tutarlı olumsuz etkisi; kronik hastalık, yüksek BKİ ve yaşlılarda daha belirgin. | Meta-analiz yok. |
+| Toloo 2013, Int J Public Health | 23564031 | 10.1007/s00038-013-0465-2 | SD | 15 makale | Sıcak uyarı sistemlerinden sonra 6 çalışmada ölüm azaldı; ama 8 çalışmada **uyarının varlığı tek başına davranış değiştirmedi**; uyarıya uymayı en çok "kendime/başkasına tehdit algısı" belirledi. | Eski, az ve karışık tasarımlı çalışmalar. |
+
+**Bizim için sonuç**
+- Hava etkisi gerçek ama **ılımlı ve kişiden kişiye değişken** (Chan 2006; Woldamanuel 2024'te bireysel etmenler havadan 4 kat fazla açıklıyor). Yağış en tutarlı engel (Togo 2005, Wagner 2019; ayrıca Tucker ve Gilliland 2007, Klimek 2022).
+- **"İdeal yürüyüş sıcaklığı" diye evrensel bir bulgu YOK.** Üç gözlemsel çalışmada adımın tepe yaptığı aralık yaklaşık 16–21 °C (Togo 2005 ~17; Ho 2022 16–19,3; Yamanaka 2026 ~21); aralık iklime, yaşa ve cinsiyete göre değişiyor. Nef "yürüyüş için ideal sıcaklık" **demez**; "yürüyüş için güzel bir hava" gibi öznel ifade + yağmur/sıcak uyarısı yeterli. Eşikler (ör. ≥30 °C "gölgede/erken saatte yürü") **VARSAYIM**.
+- Hava bilgisinin davranışı değiştirdiğine dair kanıt zayıf (Toloo 2013: yalnızca uyarının varlığı davranışı çoğunlukla değiştirmedi). Sabah hava bildirimi bu yüzden **plan önerisi** biçiminde kurulur ("yağmur 15:00'te başlıyor; yürüyüşü öğleden önce yapmak ister misin?"), bilgi dökümü değil. Bu çerçeve eğer–o zaman planı kanıtına dayanır (bkz. A), hava bildiriminin kendi etkisi test edilmedi.
+- Aşırı sıcakta yaşlı ve kronik hastalığı olanlar daha çok etkileniyor (Bernard 2021, Ho 2022); sıcak uyarısı metni tıbbi öneri vermeden "serin saatleri" önerir.
