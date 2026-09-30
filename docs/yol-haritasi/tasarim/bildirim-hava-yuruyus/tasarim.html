@@ -1,0 +1,871 @@
+<title>Nef Bildirimleri</title>
+<meta name="description" content="Nefona: Bana hatırlat, Bildirimler, Ana sayfada hava ve yürüyüş eşliği; tasarım v1, iki tema, 390 ve 320 pt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Düzen: koyu bir "gece–sabah" sahnesi üstünde telefonlar; sayfa kendi tokenlarıyla, telefonlar uygulamanın tokenlarıyla
+   (app/src/styles.css) açık ve koyu olarak ayrı çizilir. */
+:root {
+  --pg-bg: #eef2f4;
+  --pg-surface: #ffffff;
+  --pg-ink: #0d1720;
+  --pg-ink-2: #3a4955;
+  --pg-ink-3: #66737e;
+  --pg-line: #d8e0e6;
+  --pg-accent: #0b7480;
+  --pg-accent-2: #2458cc;
+  --pg-warm: #9a5b06;
+  --pg-hero: linear-gradient(160deg, #0b1a28 0%, #10283a 55%, #1c3550 100%);
+  --pg-hero-ink: #eef3f6;
+  --f-display: 'Unbounded', 'Avenir Next', system-ui, sans-serif;
+  --f-body: 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+  --pw: 390px;
+  --ph: 844px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pg-bg: #070c12; --pg-surface: #0f171f; --pg-ink: #eef3f6; --pg-ink-2: #b9c4cd; --pg-ink-3: #8b98a5;
+    --pg-line: rgba(255,255,255,0.09); --pg-accent: #19c2d1; --pg-accent-2: #3e7bfa; --pg-warm: #ffb13b;
+    --pg-hero: linear-gradient(160deg, #04080d 0%, #0a1826 60%, #132a40 100%); --pg-hero-ink: #eef3f6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --pg-bg: #070c12; --pg-surface: #0f171f; --pg-ink: #eef3f6; --pg-ink-2: #b9c4cd; --pg-ink-3: #8b98a5;
+  --pg-line: rgba(255,255,255,0.09); --pg-accent: #19c2d1; --pg-accent-2: #3e7bfa; --pg-warm: #ffb13b;
+  --pg-hero: linear-gradient(160deg, #04080d 0%, #0a1826 60%, #132a40 100%); --pg-hero-ink: #eef3f6;
+  color-scheme: dark;
+}
+body.w320 { --pw: 320px; --ph: 568px; }
+
+* { box-sizing: border-box; }
+body { background: var(--pg-bg); color: var(--pg-ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; margin: 0; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-inline: 20px; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; }
+p { margin: 0; }
+a { color: var(--pg-accent); }
+:focus-visible { outline: 2px solid var(--pg-accent); outline-offset: 3px; }
+
+/* ---------- Açılış sahnesi (5 saniye) ---------- */
+.hero { background: var(--pg-hero); color: var(--pg-hero-ink); padding-block: 28px 36px; }
+.hero-in { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: center; }
+.hero-eyebrow { font: 600 0.72rem/1 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; color: #7fd6df; }
+.hero h1 { font-size: clamp(1.9rem, 4.6vw, 3.3rem); font-weight: 700; line-height: 1.06; letter-spacing: -0.02em; margin-top: 14px; }
+.hero h1 em { font-style: normal; color: #ffc05a; }
+.hero-lead { margin-top: 16px; max-width: 34rem; color: #b9c9d6; font-size: 1.02rem; }
+.hero-scenes { display: flex; gap: 18px; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.btn-pg { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 999px; font: 600 0.95rem/1 var(--f-body); text-decoration: none; }
+.btn-pg.primary { background: #ffc05a; color: #1a1204; }
+.btn-pg.ghost { color: #eef3f6; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.35); }
+.hero-facts { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 20px; font: 500 0.8rem/1.3 var(--f-mono); color: #9fb3c3; }
+.hero-facts b { color: #eef3f6; font-weight: 600; }
+
+/* ---------- Denetim çubuğu ---------- */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--pg-bg) 92%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--pg-line); }
+.bar-in { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; padding-block: 10px; }
+.bar-lbl { font: 600 0.7rem/1 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--pg-ink-3); }
+.seg { display: inline-flex; background: var(--pg-surface); border: 1px solid var(--pg-line); border-radius: 999px; padding: 3px; }
+.seg button { border: 0; background: none; color: var(--pg-ink-2); font: 600 0.85rem/1 var(--f-body); padding: 8px 14px; border-radius: 999px; cursor: pointer; min-height: 34px; }
+.seg button[aria-pressed="true"] { background: var(--pg-ink); color: var(--pg-bg); }
+.bar-nav { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-left: auto; }
+.bar-nav a { font: 500 0.85rem/1 var(--f-body); color: var(--pg-ink-2); text-decoration: none; padding: 6px 0; }
+.bar-nav a:hover { color: var(--pg-accent); }
+
+/* ---------- Bölümler ---------- */
+.sec { padding-block: 44px 10px; }
+.sec-head { display: grid; gap: 8px; max-width: 46rem; }
+.sec-num { font: 600 0.72rem/1 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--pg-accent); }
+.sec h2 { font-size: clamp(1.35rem, 2.6vw, 1.9rem); font-weight: 700; letter-spacing: -0.015em; }
+.sec-lead { color: var(--pg-ink-2); max-width: 44rem; }
+.strip { display: flex; gap: 22px; overflow-x: auto; padding-block: 22px 18px; scroll-snap-type: x proximity; }
+.cell { display: grid; gap: 10px; flex: none; scroll-snap-align: start; width: var(--pw); }
+.cap { font: 600 0.72rem/1.3 var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--pg-ink-3); }
+.cap b { color: var(--pg-ink); }
+.note { font-size: 0.86rem; color: var(--pg-ink-2); line-height: 1.45; }
+body.only-light .cell.dk, body.only-dark .cell.lt { display: none; }
+
+.decide { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 16px; margin-top: 20px; }
+.q { background: var(--pg-surface); border: 1px solid var(--pg-line); border-radius: 18px; padding: 18px; display: grid; gap: 10px; align-content: start; }
+.q-n { font: 700 0.8rem/1 var(--f-mono); color: var(--pg-warm); letter-spacing: 0.08em; }
+.q h3 { font-size: 1.05rem; font-weight: 600; line-height: 1.3; }
+.q p { color: var(--pg-ink-2); font-size: 0.92rem; }
+.q .rec { color: var(--pg-ink); }
+.q .rec b { color: var(--pg-accent); }
+.limits { margin-top: 18px; display: grid; gap: 8px; max-width: 52rem; color: var(--pg-ink-2); font-size: 0.92rem; }
+.limits li { margin-left: 1.1em; }
+footer { padding-block: 40px 60px; color: var(--pg-ink-3); font-size: 0.82rem; }
+
+/* =========================================================
+   TELEFON: uygulamanın kendi tokenları (app/src/styles.css)
+   ========================================================= */
+.t-light {
+  --a-bg: #f3f6f8; --a-surface: #ffffff; --a-surface-2: #e9eef2; --a-surface-3: #dde4ea; --a-border: #e1e7ec;
+  --a-ink: #0b1219; --a-ink-2: #33414d; --a-ink-3: #5b6976; --a-accent: #0b7480; --a-accent-ink: #ffffff;
+  --a-accent-soft: rgba(17,169,184,0.12); --a-iris-1: #11a9b8; --a-iris-2: #2f6bea; --a-lens: #f5a623;
+  --a-lens-text: #9a5b06; --a-lens-soft: rgba(245,166,35,0.16); --a-ok: #13704b; --a-ok-bg: rgba(31,169,116,0.13);
+  --a-warn: #9a3412; --a-rain: #2f6bea; --a-shadow: 0 1px 2px rgba(11,18,25,0.04), 0 8px 24px rgba(11,18,25,0.06);
+  --a-sheet-dim: rgba(11,18,25,0.38); --a-frame: #1a2128;
+}
+.t-dark {
+  --a-bg: #070c12; --a-surface: #0f171f; --a-surface-2: #141e28; --a-surface-3: #1c2834; --a-border: rgba(255,255,255,0.08);
+  --a-ink: #eef3f6; --a-ink-2: #b9c4cd; --a-ink-3: #8b98a5; --a-accent: #19c2d1; --a-accent-ink: #041017;
+  --a-accent-soft: rgba(25,194,209,0.14); --a-iris-1: #19c2d1; --a-iris-2: #3e7bfa; --a-lens: #ffb13b;
+  --a-lens-text: #ffb13b; --a-lens-soft: rgba(255,177,59,0.15); --a-ok: #35d39a; --a-ok-bg: rgba(53,211,154,0.12);
+  --a-warn: #ff9a7d; --a-rain: #6f9bff; --a-shadow: none; --a-sheet-dim: rgba(0,0,0,0.55); --a-frame: #2a323b;
+}
+.phone { position: relative; width: var(--pw); height: var(--ph); border-radius: 46px; overflow: hidden; background: var(--a-bg); color: var(--a-ink);
+  box-shadow: 0 0 0 9px var(--a-frame), 0 0 0 10px rgba(127,140,150,0.35), 0 30px 60px -30px rgba(0,0,0,0.5); margin: 10px; font-family: var(--f-body); font-size: 15px; line-height: 1.4; }
+body.w320 .phone { border-radius: 30px; }
+.cell { width: calc(var(--pw) + 20px); }
+.sb { display: flex; justify-content: space-between; align-items: center; padding: 14px 28px 0; height: 46px; font: 600 0.92rem/1 var(--f-body); color: var(--a-ink); }
+body.w320 .sb { padding: 8px 18px 0; height: 30px; font-size: 0.8rem; }
+.sb i { display: inline-flex; gap: 5px; align-items: center; }
+.sb i s { display: inline-block; width: 18px; height: 9px; border-radius: 3px; box-shadow: inset 0 0 0 1.5px currentColor; position: relative; text-decoration: none; }
+.sb i s::after { content: ''; position: absolute; inset: 2px 5px 2px 2px; background: currentColor; border-radius: 1px; }
+.scr { padding: 10px 20px 20px; display: grid; gap: 14px; align-content: start; }
+body.w320 .scr { padding: 6px 14px 16px; gap: 11px; }
+.eyebrow-a { font: 500 0.7rem/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--a-ink-3); }
+.h1-a { font: 700 1.55rem/1.1 var(--f-display); letter-spacing: -0.01em; }
+body.w320 .h1-a { font-size: 1.3rem; }
+.nm { font-style: normal; color: transparent; background: linear-gradient(100deg, var(--a-accent), var(--a-iris-2)); -webkit-background-clip: text; background-clip: text; }
+.card-a { background: var(--a-surface); border: 1px solid var(--a-border); border-radius: 22px; box-shadow: var(--a-shadow); }
+.btn-a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 54px; border-radius: 16px; border: 0; font: 600 1rem/1 var(--f-body);
+  background: linear-gradient(90deg, var(--a-accent), var(--a-iris-2)); color: #fff; }
+.t-dark .btn-a { color: var(--a-accent-ink); background: linear-gradient(90deg, #19c2d1, #3e7bfa); }
+.btn-a.plain { background: var(--a-surface-2); color: var(--a-ink); }
+.back { display: inline-flex; align-items: center; gap: 4px; font: 600 0.95rem/1 var(--f-body); color: var(--a-accent); }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.ico { width: 18px; height: 18px; flex: none; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.nefdot { width: 30px; height: 30px; flex: none; border-radius: 50%; position: relative;
+  background: radial-gradient(circle at 50% 50%, #041017 0 26%, transparent 27%), conic-gradient(from 200deg, var(--a-iris-1), var(--a-iris-2), var(--a-iris-1)); }
+.nefdot::after { content: ''; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #fff; left: 55%; top: 34%; }
+
+/* Kilit ekranı */
+.lock { background: radial-gradient(120% 70% at 50% 0%, #2b4a6b 0%, #14263a 55%, #0a1420 100%); color: #fff; }
+.t-light .lock { background: radial-gradient(120% 70% at 50% 0%, #9cc3dd 0%, #6f9dc0 50%, #4b7aa3 100%); }
+.lock .sb { color: #fff; }
+.lk-date { text-align: center; font: 600 1.05rem/1 var(--f-body); opacity: 0.92; margin-top: 18px; }
+.lk-time { text-align: center; font: 700 5.4rem/1 var(--f-display); letter-spacing: -0.03em; margin-top: 6px; }
+body.w320 .lk-time { font-size: 4.2rem; }
+body.w320 .lk-date { margin-top: 8px; font-size: 0.95rem; }
+.lk-list { position: absolute; left: 12px; right: 12px; bottom: 96px; display: grid; gap: 8px; }
+body.w320 .lk-list { bottom: 64px; left: 8px; right: 8px; }
+.nt { border-radius: 22px; padding: 12px 14px 13px; background: rgba(255,255,255,0.72); color: #0b1219; backdrop-filter: blur(20px); display: grid; grid-template-columns: 38px minmax(0,1fr); gap: 4px 11px; }
+.t-dark .nt { background: rgba(28,34,42,0.78); color: #f1f5f8; }
+.nt-ico { grid-row: 1 / span 3; width: 38px; height: 38px; border-radius: 10px; background: radial-gradient(circle at 50% 50%, #041017 0 22%, transparent 23%), conic-gradient(from 200deg, #11a9b8, #2f6bea, #11a9b8); position: relative; }
+.nt-ico::after { content: ''; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #fff; left: 56%; top: 34%; }
+.nt-top { display: flex; justify-content: space-between; font: 600 0.72rem/1.2 var(--f-body); text-transform: uppercase; letter-spacing: 0.03em; opacity: 0.62; }
+.nt-t { font: 700 0.98rem/1.25 var(--f-body); }
+.nt-b { font: 400 0.92rem/1.33 var(--f-body); }
+.nt-sci { grid-column: 2; font: 400 0.8rem/1.3 var(--f-body); opacity: 0.66; margin-top: 3px; }
+body.w320 .nt-b { font-size: 0.85rem; }
+body.w320 .nt-sci { display: none; }
+.lk-foot { position: absolute; bottom: 26px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 44px; }
+.lk-foot span { width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,0.18); }
+body.w320 .lk-foot { bottom: 14px; }
+
+/* Bitiş ve Bana hatırlat */
+.done-ring { width: 120px; height: 120px; border-radius: 50%; margin: 6px auto 0; display: grid; place-items: center;
+  background: radial-gradient(circle, var(--a-bg) 0 58%, transparent 59%), conic-gradient(var(--a-iris-1), var(--a-iris-2), var(--a-iris-1)); }
+body.w320 .done-ring { width: 84px; height: 84px; }
+.done-ring svg { width: 40px; height: 40px; stroke: var(--a-accent); stroke-width: 2.6; fill: none; }
+.done-t { text-align: center; font: 700 1.35rem/1.15 var(--f-display); }
+.done-s { text-align: center; color: var(--a-ink-3); font-size: 0.9rem; margin-top: -6px; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stat { padding: 12px 14px; border-radius: 16px; background: var(--a-surface-2); }
+.stat b { display: block; font: 700 1.25rem/1 var(--f-display); }
+.stat span { font-size: 0.78rem; color: var(--a-ink-3); }
+.remind { display: grid; grid-template-columns: 46px minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 14px 14px 14px 12px; border-radius: 20px;
+  background: linear-gradient(135deg, var(--a-accent-soft), rgba(47,107,234,0.10)); border: 1px solid var(--a-border); }
+.bell { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: var(--a-surface); color: var(--a-accent); box-shadow: var(--a-shadow); }
+.bell .ico { width: 22px; height: 22px; }
+.remind b { display: block; font: 700 1.02rem/1.2 var(--f-body); }
+.remind span { display: block; font-size: 0.84rem; color: var(--a-ink-2); margin-top: 2px; line-height: 1.3; }
+.remind .go { color: var(--a-accent); }
+.remind.on { background: var(--a-surface); }
+.remind.on .bell { background: var(--a-accent); color: var(--a-accent-ink); }
+.pill-on { display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 999px; background: var(--a-ok-bg); color: var(--a-ok); font: 600 0.8rem/1 var(--f-body); justify-self: start; }
+.pill-on i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+/* Alttan açılan sayfa */
+.dim { position: absolute; inset: 0; background: var(--a-sheet-dim); }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--a-surface); border-radius: 28px 28px 0 0; padding: 10px 18px 26px; display: grid; gap: 12px; }
+body.w320 .sheet { padding: 8px 12px 16px; gap: 9px; }
+.grab { width: 38px; height: 5px; border-radius: 3px; background: var(--a-surface-3); justify-self: center; }
+.sh-t { font: 700 1.2rem/1.2 var(--f-display); }
+body.w320 .sh-t { font-size: 1.02rem; }
+.opt { border-radius: 18px; padding: 14px; border: 1.5px solid var(--a-border); display: grid; gap: 8px; }
+body.w320 .opt { padding: 10px 12px; gap: 6px; }
+.opt.sel { border-color: var(--a-accent); background: var(--a-accent-soft); }
+.opt-h { display: flex; align-items: center; gap: 10px; font: 700 1rem/1.2 var(--f-body); }
+.radio { width: 22px; height: 22px; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--a-ink-3); flex: none; }
+.opt.sel .radio { box-shadow: inset 0 0 0 7px var(--a-accent); }
+.opt-h small { margin-left: auto; font: 600 0.7rem/1 var(--f-mono); color: var(--a-accent); text-transform: uppercase; letter-spacing: 0.06em; }
+.big-time { font: 800 2.4rem/1 var(--f-display); letter-spacing: -0.02em; }
+body.w320 .big-time { font-size: 1.9rem; }
+.why { display: flex; gap: 10px; align-items: flex-start; font-size: 0.88rem; color: var(--a-ink-2); line-height: 1.35; }
+.why .nefdot { width: 24px; height: 24px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.tchip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 12px; border-radius: 12px; background: var(--a-surface-2); font: 700 1.05rem/1 var(--f-mono); }
+.tchip.add { font: 600 0.9rem/1 var(--f-body); color: var(--a-accent); background: none; box-shadow: inset 0 0 0 1.5px var(--a-accent); }
+.tchip.warn { box-shadow: inset 0 0 0 1.5px var(--a-lens); }
+.clash { display: grid; gap: 8px; padding: 10px 12px; border-radius: 14px; background: var(--a-lens-soft); color: var(--a-ink); font-size: 0.86rem; line-height: 1.35; }
+.clash b { color: var(--a-lens-text); }
+.clash .row { display: flex; gap: 8px; flex-wrap: wrap; }
+.mini { padding: 8px 12px; border-radius: 10px; font: 600 0.84rem/1 var(--f-body); background: var(--a-surface); color: var(--a-ink); }
+.mini.p { background: var(--a-accent); color: var(--a-accent-ink); }
+.fine { font-size: 0.78rem; color: var(--a-ink-3); line-height: 1.35; }
+body.w320 .hide320 { display: none; }
+
+/* Bildirimler (Profil) */
+.tl { padding: 14px 14px 12px; display: grid; gap: 10px; }
+.tl-h { display: flex; justify-content: space-between; align-items: baseline; }
+.tl-h b { font: 700 0.95rem/1.2 var(--f-body); }
+.tl-h span { font-size: 0.78rem; color: var(--a-ok); font-weight: 600; }
+.tl-bar { position: relative; height: 54px; }
+.tl-line { position: absolute; left: 0; right: 0; top: 26px; height: 4px; border-radius: 2px; background: var(--a-surface-3); }
+.tl-night { position: absolute; top: 18px; height: 20px; border-radius: 6px; background: repeating-linear-gradient(135deg, var(--a-surface-2) 0 5px, var(--a-surface-3) 5px 10px); }
+.tl-dot { position: absolute; top: 14px; width: 28px; height: 28px; margin-left: -14px; border-radius: 50%; display: grid; place-items: center; background: var(--a-surface); box-shadow: 0 0 0 2px var(--a-accent); color: var(--a-accent); }
+.tl-dot .ico { width: 14px; height: 14px; }
+.tl-dot.w { box-shadow: 0 0 0 2px var(--a-lens); color: var(--a-lens-text); }
+.tl-ax { display: flex; justify-content: space-between; font: 500 0.66rem/1 var(--f-mono); color: var(--a-ink-3); }
+.grp { display: grid; }
+.grp-h { font: 600 0.7rem/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--a-ink-3); padding: 4px 4px 8px; }
+.rows { overflow: hidden; }
+.row-a { display: grid; grid-template-columns: 32px minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 11px 14px; border-bottom: 1px solid var(--a-border); }
+.row-a:last-child { border-bottom: 0; }
+body.w320 .row-a { padding: 9px 10px; gap: 9px; }
+.row-a .ri { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--a-accent-soft); color: var(--a-accent); }
+.row-a .ri .ico { width: 17px; height: 17px; }
+.row-a b { display: block; font: 600 0.95rem/1.2 var(--f-body); }
+.row-a span { display: block; font-size: 0.8rem; color: var(--a-ink-3); margin-top: 2px; }
+.row-a span em { font-style: normal; color: var(--a-accent); font-weight: 600; }
+.tg { width: 46px; height: 28px; border-radius: 14px; background: var(--a-surface-3); position: relative; flex: none; }
+.tg::after { content: ''; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.25); }
+.tg.on { background: #34c759; }
+.tg.on::after { left: 21px; }
+.chev { color: var(--a-ink-3); }
+
+/* Ana sayfa */
+.hh { display: flex; justify-content: space-between; align-items: flex-start; }
+.av { width: 46px; height: 46px; border-radius: 50%; padding: 2px; background: conic-gradient(from 200deg, var(--a-iris-1), var(--a-iris-2), var(--a-iris-1)); }
+.av i { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: var(--a-surface-2); border: 2px solid var(--a-bg); font: 700 1rem/1 var(--f-display); font-style: normal; color: var(--a-ink-2); }
+.sky { display: grid; grid-template-columns: 34px minmax(0,1fr) auto; gap: 10px; align-items: center; padding: 10px 12px 10px 10px; border-radius: 18px; background: var(--a-surface); border: 1px solid var(--a-border); }
+.sky-ic { width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; background: rgba(47,107,234,0.12); color: var(--a-rain); }
+.sky-ic .ico { width: 20px; height: 20px; }
+.sky-tx { min-width: 0; font: 500 0.95rem/1.25 var(--f-body); color: var(--a-ink-2); white-space: nowrap; overflow: hidden; }
+.sky-tx b { color: var(--a-ink); font-weight: 700; }
+.sky-tx .deg { font: 700 1.05rem/1 var(--f-display); color: var(--a-ink); }
+.sky-tx .rain { color: var(--a-rain); font-weight: 600; }
+.sky-mark { display: grid; justify-items: end; gap: 2px; font: 600 0.6rem/1 var(--f-body); color: var(--a-ink-3); white-space: nowrap; }
+body.w320 .sky .rainp { display: none; }
+.facts { display: grid; gap: 8px; padding-top: 12px; border-top: 1px solid var(--a-border); }
+.fact { display: flex; align-items: center; gap: 8px; font: 500 0.84rem/1.2 var(--f-body); color: var(--a-ink-2); }
+.fact b { font: 600 0.84rem/1 var(--f-mono); color: var(--a-ink); min-width: 30px; }
+.fact .ico { width: 15px; height: 15px; }
+.today { padding: 16px; display: grid; gap: 12px; }
+.today-h { display: flex; justify-content: space-between; align-items: baseline; }
+.today-h b { font: 700 1.1rem/1 var(--f-display); }
+.today-h span { font: 500 0.78rem/1 var(--f-mono); color: var(--a-ink-3); }
+.chain { display: flex; gap: 6px; }
+.chain i { flex: 1; height: 6px; border-radius: 3px; background: var(--a-surface-3); }
+.chain i.d { background: var(--a-iris-1); }
+.nefline { display: flex; gap: 10px; align-items: flex-start; font: 500 0.95rem/1.35 var(--f-body); }
+
+/* Hava sayfası */
+.wx-top { display: flex; justify-content: space-between; align-items: flex-end; }
+.wx-deg { font: 800 4.6rem/0.9 var(--f-display); letter-spacing: -0.04em; }
+body.w320 .wx-deg { font-size: 3.4rem; }
+.wx-sub { font-size: 0.88rem; color: var(--a-ink-2); text-align: right; }
+.nefcard { padding: 14px; display: grid; grid-template-columns: 30px minmax(0,1fr); gap: 10px; background: linear-gradient(135deg, var(--a-accent-soft), rgba(47,107,234,0.08)); border-radius: 20px; border: 1px solid var(--a-border); }
+.nefcard p { font: 500 0.95rem/1.4 var(--f-body); }
+.nefcard small { display: block; font: 600 0.66rem/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--a-accent); margin-bottom: 5px; }
+.hours { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; padding: 12px 10px; }
+.hr { display: grid; justify-items: center; gap: 5px; font: 500 0.66rem/1 var(--f-mono); color: var(--a-ink-3); }
+.hr b { font: 600 0.8rem/1 var(--f-mono); color: var(--a-ink); }
+.hr .pb { width: 10px; height: 34px; border-radius: 5px; background: var(--a-surface-2); position: relative; overflow: hidden; }
+.hr .pb i { position: absolute; left: 0; right: 0; bottom: 0; background: var(--a-rain); border-radius: 5px; }
+.hr.now b { color: var(--a-accent); }
+.minmax { display: flex; gap: 10px; }
+.minmax div { flex: 1; padding: 10px 12px; border-radius: 14px; background: var(--a-surface-2); font-size: 0.78rem; color: var(--a-ink-3); }
+.minmax b { display: block; font: 700 1.05rem/1.1 var(--f-display); color: var(--a-ink); }
+.attr { display: flex; justify-content: space-between; font-size: 0.76rem; color: var(--a-ink-3); }
+.attr a { color: var(--a-accent); text-decoration: none; font-weight: 600; }
+
+/* Yürüyüş ekranı */
+.walk { background: #000; color: #fff; }
+.t-light .walk { background: #f6f8f9; color: #0b1219; }
+.walk .sb { color: inherit; }
+.wk-top { display: flex; justify-content: space-between; align-items: center; font: 600 0.84rem/1 var(--f-body); }
+.wk-top .gps { display: inline-flex; gap: 6px; align-items: center; color: #35d39a; }
+.t-light .walk .gps { color: #13704b; }
+.wk-top .gps i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.wk-n { display: grid; gap: 2px; }
+.wk-n b { font: 700 3.3rem/0.95 var(--f-display); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.wk-n.t b { color: #ffd60a; }
+.t-light .wk-n.t b { color: #b07d00; }
+.wk-n.p b { color: #19c2d1; font-size: 4.1rem; }
+.t-light .wk-n.p b { color: #0b7480; }
+.wk-n span { font: 600 0.7rem/1 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.6; }
+body.w320 .wk-n b { font-size: 2.3rem; }
+body.w320 .wk-n.p b { font-size: 2.9rem; }
+.wk-sm { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.wk-sm .wk-n b { font-size: 2rem; }
+body.w320 .wk-sm .wk-n b { font-size: 1.5rem; }
+.wk-health { font-size: 0.82rem; opacity: 0.7; border-top: 1px solid rgba(127,140,150,0.3); padding-top: 10px; }
+.cue { display: grid; grid-template-columns: 30px minmax(0,1fr); gap: 10px; align-items: center; padding: 12px; border-radius: 16px; background: rgba(25,194,209,0.14); color: inherit; font: 500 0.92rem/1.3 var(--f-body); }
+.cue .ico { width: 22px; height: 22px; color: #19c2d1; }
+.t-light .cue .ico { color: #0b7480; }
+.wk-btns { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 0; }
+.rb { width: 66px; height: 66px; border-radius: 50%; display: grid; place-items: center; background: rgba(127,140,150,0.22); }
+.rb.stop { background: #ff453a; color: #fff; }
+.rb.voice { background: rgba(25,194,209,0.22); color: #19c2d1; }
+.t-light .rb.voice { color: #0b7480; }
+.rb .ico { width: 26px; height: 26px; }
+.rb-l { display: grid; justify-items: center; gap: 6px; font: 600 0.7rem/1 var(--f-body); opacity: 0.85; }
+body.w320 .rb { width: 52px; height: 52px; }
+
+/* Sesli koç ayarı */
+.segA { display: grid; grid-template-columns: repeat(3,1fr); background: var(--a-surface-2); border-radius: 12px; padding: 3px; }
+.segA span { text-align: center; padding: 9px 0; border-radius: 10px; font: 600 0.88rem/1 var(--f-body); color: var(--a-ink-2); }
+.segA span.on { background: var(--a-surface); color: var(--a-ink); box-shadow: var(--a-shadow); }
+.checks { display: grid; gap: 0; }
+.ck { display: flex; align-items: center; gap: 10px; padding: 10px 2px; border-bottom: 1px solid var(--a-border); font-size: 0.92rem; }
+.ck:last-child { border-bottom: 0; }
+.box { width: 22px; height: 22px; border-radius: 7px; box-shadow: inset 0 0 0 2px var(--a-ink-3); display: grid; place-items: center; }
+.box.on { background: var(--a-accent); box-shadow: none; color: var(--a-accent-ink); }
+.box .ico { width: 14px; height: 14px; stroke-width: 3; }
+.ck small { margin-left: auto; color: var(--a-ink-3); font-size: 0.76rem; }
+.sample { display: flex; align-items: center; gap: 10px; padding: 11px 12px; border-radius: 14px; background: var(--a-accent-soft); font-size: 0.88rem; }
+.play { width: 34px; height: 34px; border-radius: 50%; background: var(--a-accent); color: var(--a-accent-ink); display: grid; place-items: center; flex: none; }
+.play .ico { width: 14px; height: 14px; fill: currentColor; }
+
+/* Bilim kartı */
+.sci { padding: 16px; display: grid; gap: 10px; }
+.sci-h { font: 600 0.68rem/1 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--a-lens-text); }
+.sci-f { font: 600 1.05rem/1.35 var(--f-body); }
+.sci-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+.sci-meta span { padding: 5px 9px; border-radius: 8px; background: var(--a-surface-2); font: 600 0.72rem/1 var(--f-mono); color: var(--a-ink-2); }
+.sci-lim { font-size: 0.84rem; color: var(--a-ink-2); line-height: 1.4; }
+.sci-src { font-size: 0.82rem; color: var(--a-ink-3); line-height: 1.4; }
+.sci-links { display: flex; gap: 14px; font: 600 0.86rem/1 var(--f-body); color: var(--a-accent); }
+
+@media (max-width: 860px) {
+  .hero-in { grid-template-columns: 1fr; }
+  .hero-scenes { overflow-x: auto; }
+  .bar-nav { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero .nt { animation: drop 0.7s cubic-bezier(.2,.8,.2,1) both; }
+  .hero .phone:nth-child(2) .nt { animation-delay: 0.25s; }
+  @keyframes drop { from { transform: translateY(-14px); opacity: 0.35; } to { transform: none; opacity: 1; } }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-rain" viewBox="0 0 24 24"><path d="M4 14.9A7 7 0 1 1 15.7 8h1.8a4.5 4.5 0 0 1 2.5 8.2"/><path d="M16 14v6"/><path d="M8 14v6"/><path d="M12 16v6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></symbol>
+  <symbol id="i-wind" viewBox="0 0 24 24"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-foot" viewBox="0 0 24 24"><path d="M4 16v-2.4C4 11.5 3 10.5 3 8c0-2.7 1.5-6 4.5-6C9.4 2 10 3.8 10 5.5c0 3.1-2 5.7-2 8.7V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.4c0-2.1 1-3.1 1-5.6 0-2.7-1.5-6-4.5-6C14.6 6 14 7.8 14 9.5c0 3.1 2 5.7 2 8.7V20a2 2 0 1 0 4 0Z"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3.3.4 1.6 1.2 2.8 2.5 2.8Z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-wave" viewBox="0 0 24 24"><path d="M2 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/><path d="M2 17c2-3 4-3 6 0s4 3 6 0 4-3 6 0" opacity=".45"/></symbol>
+  <symbol id="i-yoga" viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2"/><path d="M12 7v6M5 10l7 3 7-3M8 21l4-8 4 8"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7Z"/></symbol>
+  <symbol id="i-stand" viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M12 6v8M8 10h8M9 22l3-8 3 8"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+  <symbol id="i-voice" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+</svg>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <div class="hero-eyebrow">Nefona · Bildirimler, hava, yürüyüş · tasarım 1</div>
+      <h1>Nef doğru anda yazar:<br><em>sabah havanı, akşam yürüyüşünü</em> bilir.</h1>
+      <p class="hero-lead">Alarm çaldıktan 10 dakika sonra günün yağmur saati. Yürürken tek soru ve Apple Watch gibi bir ekran. Her modülün sonunda tek dokunuşluk "Bana hatırlat". Hiçbir bildirim üst üste gelmez, gece hiçbiri gelmez.</p>
+      <div class="hero-cta">
+        <a class="btn-pg primary" href="#kararlar">Senden 3 karar</a>
+        <a class="btn-pg ghost" href="#hatirlat">Ekranlara bak</a>
+      </div>
+      <div class="hero-facts"><span><b>12</b> ekran</span><span><b>2</b> tema</span><span><b>390 · 320</b> pt</span><span>Gece <b>22.00–08.00</b> sessiz</span></div>
+    </div>
+    <div class="hero-scenes" aria-label="Kilit ekranında iki Nef bildirimi">
+      <div class="phone t-dark lock" style="--pw:300px;--ph:560px">
+        <div class="sb"><span></span><i>●●● <s></s></i></div>
+        <div class="lk-date">Perşembe 1 Ekim</div>
+        <div class="lk-time">06:10</div>
+        <div class="lk-list">
+          <div class="nt">
+            <span class="nt-ico" aria-hidden="true"></span>
+            <div class="nt-top"><span>Nefona</span><span>şimdi</span></div>
+            <div class="nt-t">Yağmur 21.00'de</div>
+            <div class="nt-b">Bugün 21.00–22.00 arası yağmur bekleniyor. Yürüyüşü 21.00'den önce bitirirsen şemsiyeye gerek kalmayabilir.</div>
+            <div class="nt-sci">Apple Weather</div>
+          </div>
+        </div>
+        <div class="lk-foot"><span></span><span></span></div>
+      </div>
+      <div class="phone t-dark lock" style="--pw:300px;--ph:560px">
+        <div class="sb"><span></span><i>●●● <s></s></i></div>
+        <div class="lk-date">Perşembe 1 Ekim</div>
+        <div class="lk-time">18:32</div>
+        <div class="lk-list">
+          <div class="nt">
+            <span class="nt-ico" aria-hidden="true"></span>
+            <div class="nt-top"><span>Nefona</span><span>şimdi</span></div>
+            <div class="nt-t">Yürüyüşe mi çıktın?</div>
+            <div class="nt-b">Son 15 dakikada 1,1 km yürüdün. Hava 23 derece, yürüyüş için güzel. Eşlik edeyim mi?</div>
+          </div>
+        </div>
+        <div class="lk-foot"><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="bar" aria-label="Görünüm">
+  <div class="wrap bar-in">
+    <span class="bar-lbl">Tema</span>
+    <div class="seg" role="group" aria-label="Tema">
+      <button id="th-both" type="button" aria-pressed="true">İkisi</button>
+      <button id="th-light" type="button" aria-pressed="false">Açık</button>
+      <button id="th-dark" type="button" aria-pressed="false">Koyu</button>
+    </div>
+    <span class="bar-lbl">Genişlik</span>
+    <div class="seg" role="group" aria-label="Ekran genişliği">
+      <button id="w-390" type="button" aria-pressed="true">390 pt</button>
+      <button id="w-320" type="button" aria-pressed="false">320 pt</button>
+    </div>
+    <div class="bar-nav">
+      <a href="#hatirlat">Bana hatırlat</a><a href="#bildirimler">Bildirimler</a><a href="#hava">Hava</a><a href="#yuruyus">Yürüyüş</a><a href="#bilim">Bilim kartı</a><a href="#kararlar">Kararlar</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ================= 1. BANA HATIRLAT ================= -->
+<section class="sec" id="hatirlat">
+  <div class="sec-head">
+    <span class="sec-num">1 · Her modülde</span>
+    <h2>Bitirdin, bir dokunuşla yarını kur</h2>
+    <p class="sec-lead">Modül bittiğinde altta tek kart. Saati Nef seçer ya da sen seçersin; günde en çok 3 saat. Yeniden girdiğinde hatırlatmanın açık olduğunu üstte görürsün. Yolun içinde her durakta değil, yol bitince tek kart çıkar.</p>
+  </div>
+  <div class="strip" data-screens="done"></div>
+  <div class="strip" data-screens="sheet"></div>
+  <div class="strip" data-screens="reenter"></div>
+</section>
+
+<!-- ================= 2. BİLDİRİMLER ================= -->
+<section class="sec" id="bildirimler">
+  <div class="sec-head">
+    <span class="sec-num">2 · Profil → Bildirimler</span>
+    <h2>Günün bildirimleri tek çizgide, hiçbiri üst üste değil</h2>
+    <p class="sec-lead">Üstte bugünün çizelgesi: her bildirim bir nokta, gece bölümü sessiz. Altında her hatırlatma tek satır ve tek anahtar. Aynı yarım saate düşen iki hatırlatma tek bildirimde birleşir.</p>
+  </div>
+  <div class="strip" data-screens="notif"></div>
+</section>
+
+<!-- ================= 3. HAVA ================= -->
+<section class="sec" id="hava">
+  <div class="sec-head">
+    <span class="sec-num">3 · Hava</span>
+    <h2>Adımlarının üstünde ilçen ve havası</h2>
+    <p class="sec-lead">Ana sayfada tek satır. Dokununca saat saat tahmin ve Nef'in o güne özel yorumu. İstersen her sabah alarmından 10 dakika sonra aynı yorum bildirim olarak gelir; tahmin eskiyse bildirim bunu açıkça söyler.</p>
+  </div>
+  <div class="strip" data-screens="home"></div>
+  <div class="strip" data-screens="wx"></div>
+</section>
+
+<!-- ================= 4. YÜRÜYÜŞ ================= -->
+<section class="sec" id="yuruyus">
+  <div class="sec-head">
+    <span class="sec-num">4 · Yürüyüş eşliği</span>
+    <h2>Yürüdüğünü fark eder, yanında yürür</h2>
+    <p class="sec-lead">Bildirime dokununca Apple Watch'taki gibi dört büyük sayı: süre, şu anki tempo, mesafe, adım. Sesli koç 250 metrede bir tempoyu söyler; aynı cümle ekranda yazar. Bitince adım Apple Sağlık'taki sayıyla kaydedilir.</p>
+  </div>
+  <div class="strip" data-screens="walk"></div>
+  <div class="strip" data-screens="coach"></div>
+</section>
+
+<!-- ================= 5. BİLİM ================= -->
+<section class="sec" id="bilim">
+  <div class="sec-head">
+    <span class="sec-num">5 · Her bildirimin altında</span>
+    <h2>Nef'in cümlesi ve arkasındaki çalışma</h2>
+    <p class="sec-lead">Bildirime dokununca açılan ekranın üstünde bilim kartı: tek bulgu, kişi sayısı, sınırı ve makalenin PubMed bağlantısı. Sağlık vaadi yok; yalnız bulgu.</p>
+  </div>
+  <div class="strip" data-screens="sci"></div>
+</section>
+
+<!-- ================= 6. KARARLAR ================= -->
+<section class="sec" id="kararlar">
+  <div class="sec-head">
+    <span class="sec-num">6 · Senden</span>
+    <h2>Üç karar, her birinde önerim</h2>
+  </div>
+  <div class="decide">
+    <article class="q">
+      <span class="q-n">KARAR 1 · SIRA</span>
+      <h3>Bu iş sonsuz yolun hangi aşamasına girsin?</h3>
+      <p class="rec"><b>Önerim:</b> yoga ve Build 60'tan sonra önce bildirimler ve "Bana hatırlat", sonra hava (onaylı plandaki hava aşamasının yerine, öne alınarak), sonra sonsuz yolun Y2–Y4'ü, sonra yürüyüş eşliği.</p>
+      <p>Gerekçe: bildirim çekirdeği gece "kalk" sorununu kalıcı kapatır ve her modüle aynı anda değer katar. Yürüyüş en büyük parça: Swift, dışarıda cihaz denemesi ve yeni ses kayıtları ister. Öbür seçenek: yürüyüşü havanın hemen arkasına almak; yürüyüş yaklaşık 3 hafta öne gelir, Y2–Y4 o kadar kayar.</p>
+    </article>
+    <article class="q">
+      <span class="q-n">KARAR 2 · YÜRÜRKEN FARK ETME</span>
+      <h3>"Her Zaman" konum izni istensin mi?</h3>
+      <p class="rec"><b>Önerim:</b> ayrı anahtar, "Yürürken beni fark et", varsayılan kapalı. Açan kişiye Nef yürüyüşün 5–10. dakikasında sorar.</p>
+      <p>Apple, uygulama kapalıyken yürüyüşü anında görmeye yalnız "Her Zaman" konum izniyle izin veriyor (500 m yer değişimi, en sık 5 dakikada bir). İzin yoksa Nef Apple Sağlık'ın saatlik uyanışında sorar ve kısa yürüyüşlerin çoğu kaçar. Konum telefondan çıkmaz. Bedeli: bazı kişilerde güvensizlik ve App Review'da gerekçe.</p>
+    </article>
+    <article class="q">
+      <span class="q-n">KARAR 3 · NEF'İN DİLİ</span>
+      <h3>Bildirim cümleleri nasıl üretilsin?</h3>
+      <p class="rec"><b>Önerim:</b> cümle bankası. Güçlü bir model senin onayından geçen yüzlerce cümleyi bir kez üretir; telefon her bildirimde o güne uyanı seçip sayıları kendisi yazar. Banka başına yaklaşık 1 USD, yeni rıza yok, ağsız çalışır, uydurma sayı olamaz.</p>
+      <p>Öbür seçenek her bildirimde canlı model: 10.000 kişide ayda yaklaşık 374 USD, ayrı açık rıza, hukukçu onayı; hava ve konum yine gönderilemez. Bu kararın içinde: görünür bilim satırı günde bir bildirimde olsun (önerim), her bildirimin bilim kartı dokununca yine açılır.</p>
+    </article>
+  </div>
+  <ul class="limits">
+    <li><b>Dürüst sınır:</b> alarmdan sonraki taze hava yalnız iOS 26'da ve alarmı elle durduran kişide denenebilir; diğerlerinde bildirim son açılıştaki tahmini, yaşını söyleyerek verir.</li>
+    <li><b>Dürüst sınır:</b> yürürken ekrandaki canlı adım telefonun sayımıdır; Apple Watch da takılıysa birkaç dakika farklı görünebilir. Bitişte Apple Sağlık'taki sayı okunur ve kayda o yazılır.</li>
+    <li>Cihazda hiçbir şey denenmedi. Ekranlardaki bütün sayı ve saatler örnektir.</li>
+  </ul>
+</section>
+
+</main>
+<footer class="wrap">Tasarım 1 · 30 Eylül 2026 · Plan: docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/PLAN.v1.md · Telefonların renk ve yazı tipleri uygulamanın kendi tokenlarından.</footer>
+
+<template id="tpl-done">
+  <div class="phone">
+    <div class="sb"><span>09:22</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <div class="done-ring"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <div class="done-t">Nefes tamam</div>
+      <div class="done-s">Sakin ritim · 3 dakika</div>
+      <div class="stats"><div class="stat"><b class="mono">2 → 4</b><span>sakinlik, 1–5</span></div><div class="stat"><b class="mono">18</b><span>döngü</span></div></div>
+      <div class="remind">
+        <span class="bell"><svg class="ico"><use href="#i-bell"/></svg></span>
+        <div><b>Bana hatırlat</b><span>Her gün, senin için uygun saatte. Saati Nef de seçebilir.</span></div>
+        <svg class="ico go"><use href="#i-chev"/></svg>
+      </div>
+      <div class="btn-a plain">Ana sayfaya dön</div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-path">
+  <div class="phone">
+    <div class="sb"><span>08:52</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <span class="eyebrow-a">1 Ekim Perşembe</span>
+      <div class="card-a today">
+        <div class="today-h"><b>Bugünün yolu</b><span class="mono">4/4 durak</span></div>
+        <div class="chain"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i></div>
+        <div class="nefline"><span class="nefdot"></span><p>Yolun bugün tamam. 14 dakika sürdü.</p></div>
+      </div>
+      <div class="remind">
+        <span class="bell"><svg class="ico"><use href="#i-bell"/></svg></span>
+        <div><b>Yolunu her gün hatırlatayım mı?</b><span>Genelde 08.30'da başlıyorsun. Yolun her durağı için ayrı değil, tek hatırlatma.</span></div>
+        <svg class="ico go"><use href="#i-chev"/></svg>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-sheet-auto">
+  <div class="phone">
+    <div class="sb"><span>09:22</span><i>●●● <s></s></i></div>
+    <div class="scr" style="opacity:.5"><div class="done-ring"></div><div class="done-t">Nefes tamam</div></div>
+    <div class="dim"></div>
+    <div class="sheet">
+      <span class="grab"></span>
+      <div class="sh-t">Nefesi ne zaman hatırlatayım?</div>
+      <div class="opt sel">
+        <div class="opt-h"><span class="radio"></span>Sen karar ver<small>Önerilen</small></div>
+        <div class="big-time mono">09.15</div>
+        <div class="why"><span class="nefdot"></span><p>Nefesi genelde 09.30 ile 10.00 arasında yapıyorsun. Biraz önce hatırlatayım; bir hafta sonra yeniden bakarım.</p></div>
+      </div>
+      <div class="opt">
+        <div class="opt-h"><span class="radio"></span>Saatleri ben seçeyim</div>
+        <div class="fine">Günde en çok 3 saat.</div>
+      </div>
+      <p class="fine hide320">Bazı günler bilerek göndermiyoruz; hatırlatmanın işine yarayıp yaramadığını görmen için.</p>
+      <div class="btn-a">Hatırlatmayı aç</div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-sheet-manual">
+  <div class="phone">
+    <div class="sb"><span>18:40</span><i>●●● <s></s></i></div>
+    <div class="scr" style="opacity:.5"><div class="done-ring"></div><div class="done-t">Göz egzersizleri tamam</div></div>
+    <div class="dim"></div>
+    <div class="sheet">
+      <span class="grab"></span>
+      <div class="sh-t">Göz egzersizini ne zaman hatırlatayım?</div>
+      <div class="opt">
+        <div class="opt-h"><span class="radio"></span>Sen karar ver</div>
+      </div>
+      <div class="opt sel">
+        <div class="opt-h"><span class="radio"></span>Saatleri ben seçeyim</div>
+        <div class="chips"><span class="tchip">10.00</span><span class="tchip warn">12.30</span><span class="tchip">18.00</span></div>
+        <div class="clash"><p><b>12.30'da Mola hatırlatman var.</b> İkisi aynı anda gelmesin; 13.00'e ne dersin?</p><div class="row"><span class="mini p">13.00'ü seç</span><span class="mini">Tek bildirimde birleştir</span></div></div>
+      </div>
+      <p class="fine">Gece 22.00–08.00 arası bildirim göndermiyoruz.</p>
+      <div class="btn-a">Kaydet</div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-reenter">
+  <div class="phone">
+    <div class="sb"><span>09:16</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Ana sayfa</span>
+      <span class="pill-on"><i></i>Hatırlatma açık · her gün 09.15 · Nef seçti</span>
+      <span class="eyebrow-a">Nefes · 4. basamak</span>
+      <div class="h1-a">Sakin ritim</div>
+      <p style="color:var(--a-ink-2)">4 saniye al, 6 saniye ver. Bugün 3 dakika.</p>
+      <div class="done-ring" style="width:170px;height:170px;background:radial-gradient(circle, var(--a-bg) 0 60%, transparent 61%), conic-gradient(var(--a-iris-1), var(--a-iris-2), var(--a-iris-1));"></div>
+      <div class="btn-a">Başla</div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-notif">
+  <div class="phone">
+    <div class="sb"><span>09:40</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Profilim</span>
+      <div class="h1-a">Bildirimler</div>
+      <div class="card-a tl">
+        <div class="tl-h"><b>Bugün 7 bildirim</b><span>Hiçbiri üst üste değil</span></div>
+        <div class="tl-bar">
+          <div class="tl-line"></div>
+          <div class="tl-night" style="left:0;width:11%"></div>
+          <div class="tl-night" style="left:89%;width:11%"></div>
+          <span class="tl-dot w" style="left:6%" title="06.10 sabah havası"><svg class="ico"><use href="#i-rain"/></svg></span>
+          <span class="tl-dot" style="left:22%"><svg class="ico"><use href="#i-wave"/></svg></span>
+          <span class="tl-dot" style="left:31%"><svg class="ico"><use href="#i-drop"/></svg></span>
+          <span class="tl-dot" style="left:42%"><svg class="ico"><use href="#i-stand"/></svg></span>
+          <span class="tl-dot" style="left:56%"><svg class="ico"><use href="#i-foot"/></svg></span>
+          <span class="tl-dot" style="left:70%"><svg class="ico"><use href="#i-eye"/></svg></span>
+          <span class="tl-dot" style="left:81%"><svg class="ico"><use href="#i-eye"/></svg></span>
+        </div>
+        <div class="tl-ax"><span>06</span><span>09</span><span>12</span><span>15</span><span>18</span><span>21</span><span>24</span></div>
+        <div class="fine"><svg class="ico" style="width:12px;height:12px;vertical-align:-2px"><use href="#i-moon"/></svg> 22.00–08.00 gece sessiz · alarmın ve ona bağlı sabah havası hariç</div>
+      </div>
+      <div class="grp">
+        <div class="grp-h">Modüllerin</div>
+        <div class="card-a rows">
+          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-wave"/></svg></span><div><b>Nefes</b><span class="mono">09.15 · <em>Nef seçti</em></span></div><span class="tg on"></span></div>
+          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-eye"/></svg></span><div><b>Göz egzersizleri</b><span class="mono">18.00 ve 20.00 · senin saatin</span></div><span class="tg on"></span></div>
+          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-yoga"/></svg></span><div><b>Yoga</b><span class="mono">21.30 · kapalı</span></div><span class="tg"></span></div>
+        </div>
+      </div>
+      <div class="grp">
+        <div class="grp-h">Nef'in haberleri</div>
+        <div class="card-a rows">
+          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-rain"/></svg></span><div><b>Sabah havası</b><span>Alarmından 10 dk sonra</span></div><span class="tg on"></span></div>
+          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><div><b>Yürüyüş eşliği</b><span>Yürürken sorar · sesli koç 250 m</span></div><span class="tg on"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-home">
+  <div class="phone">
+    <div class="sb"><span>07:48</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <div class="hh">
+        <div><span class="eyebrow-a">1 Ekim Perşembe</span><div class="h1-a" style="margin-top:6px">Günaydın,<br><em class="nm">Selin</em></div></div>
+        <span class="av"><i>S</i></span>
+      </div>
+      <div class="sky">
+        <span class="sky-ic"><svg class="ico"><use href="#i-rain"/></svg></span>
+        <div class="sky-tx"><b>Gaziemir</b> · <span class="deg">23°</span><span class="rainp"> · <span class="rain">21.00'de yağmur</span></span></div>
+        <span class="sky-mark">Apple Weather<svg class="ico chev" style="width:14px;height:14px"><use href="#i-chev"/></svg></span>
+      </div>
+      <div class="facts">
+        <div class="fact"><svg class="ico" style="color:var(--a-lens-text)"><use href="#i-flame"/></svg><b>6</b>gün seri</div>
+        <div class="fact"><svg class="ico" style="color:var(--a-iris-1)"><use href="#i-cal"/></svg>Bu hafta 3/4 gün</div>
+        <div class="fact"><svg class="ico" style="color:var(--a-ok)"><use href="#i-foot"/></svg><b>4.215</b>adım bugün</div>
+      </div>
+      <div class="card-a today">
+        <div class="today-h"><b>Bugün</b><span class="mono">≈ 15 dk · 1/5 durak</span></div>
+        <div class="chain"><i class="d"></i><i></i><i></i><i></i><i></i></div>
+        <div class="btn-a">Yola devam et · Nefes 3 dk</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-wx">
+  <div class="phone">
+    <div class="sb"><span>12:41</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Ana sayfa</span>
+      <div class="wx-top">
+        <div><span class="eyebrow-a">Gaziemir, İzmir</span><div class="wx-deg">23°</div></div>
+        <div class="wx-sub">Hissedilen 24°<br>Parçalı bulutlu<br><span class="mono" style="font-size:.74rem;color:var(--a-ink-3)">12.40'ta alındı</span></div>
+      </div>
+      <div class="nefcard"><span class="nefdot"></span><div><small>Nef</small><p>21.00–22.00 arası yağmur bekleniyor. Akşam yürüyüşünü 20.30'dan önce bitirirsen şemsiyeye gerek kalmayabilir.</p></div></div>
+      <div class="card-a hours">
+        <div class="hr now"><span>Şimdi</span><b>23°</b><span class="pb"><i style="height:0%"></i></span><span>—</span></div>
+        <div class="hr"><span>15</span><b>25°</b><span class="pb"><i style="height:5%"></i></span><span>5%</span></div>
+        <div class="hr"><span>17</span><b>24°</b><span class="pb"><i style="height:10%"></i></span><span>10%</span></div>
+        <div class="hr"><span>19</span><b>21°</b><span class="pb"><i style="height:30%"></i></span><span>30%</span></div>
+        <div class="hr"><span>20</span><b>20°</b><span class="pb"><i style="height:45%"></i></span><span>45%</span></div>
+        <div class="hr"><span>21</span><b>19°</b><span class="pb"><i style="height:70%"></i></span><span>70%</span></div>
+        <div class="hr"><span>22</span><b>18°</b><span class="pb"><i style="height:60%"></i></span><span>60%</span></div>
+        <div class="hr"><span>23</span><b>18°</b><span class="pb"><i style="height:20%"></i></span><span>20%</span></div>
+      </div>
+      <div class="minmax"><div><b>26°</b>en yüksek</div><div><b>17°</b>en düşük</div><div class="hide320"><b><svg class="ico" style="width:15px;height:15px;vertical-align:-2px"><use href="#i-moon"/></svg></b>küçülen şişkin ay</div></div>
+      <div class="card-a rows"><div class="row-a"><span class="ri"><svg class="ico"><use href="#i-bell"/></svg></span><div><b>Sabah havası</b><span>Alarmından 10 dk sonra, Nef'in yorumuyla</span></div><span class="tg on"></span></div></div>
+      <div class="attr"><span>Apple Weather</span><a href="#hava">Veri kaynakları</a></div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-lockwalk">
+  <div class="phone lock">
+    <div class="sb"><span></span><i>●●● <s></s></i></div>
+    <div class="lk-date">Perşembe 1 Ekim</div>
+    <div class="lk-time">18:32</div>
+    <div class="lk-list">
+      <div class="nt">
+        <span class="nt-ico" aria-hidden="true"></span>
+        <div class="nt-top"><span>Nefona</span><span>şimdi</span></div>
+        <div class="nt-t">Yürüyüşe mi çıktın?</div>
+        <div class="nt-b">Son 15 dakikada 1,1 km yürüdün. Hava 23 derece, yürüyüş için güzel. Eşlik edeyim mi?</div>
+      </div>
+    </div>
+    <div class="lk-foot"><span></span><span></span></div>
+  </div>
+</template>
+
+<template id="tpl-walk">
+  <div class="phone walk">
+    <div class="sb"><span>18:51</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <div class="wk-top"><span>Yürüyüş · Nef seninle</span><span class="gps"><i></i>Ölçülüyor</span></div>
+      <div class="wk-n t"><b>00:18:42</b><span>Süre</span></div>
+      <div class="wk-n p"><b>9'40"</b><span>Şu anki tempo · dk/km</span></div>
+      <div class="wk-sm">
+        <div class="wk-n"><b>1,94</b><span>km</span></div>
+        <div class="wk-n"><b>2.316</b><span>Adım · bu yürüyüş</span></div>
+      </div>
+      <div class="cue"><svg class="ico"><use href="#i-voice"/></svg><span>1,75 kilometre. Kilometre başına 9 dakika 40 saniye.</span></div>
+      <div class="wk-health">Bugün toplam 7.482 adım · Apple Sağlık</div>
+      <div class="wk-btns">
+        <span class="rb-l"><span class="rb"><svg class="ico"><use href="#i-pause"/></svg></span>Duraklat</span>
+        <span class="rb-l"><span class="rb voice"><svg class="ico"><use href="#i-voice"/></svg></span>Koç · 250 m</span>
+        <span class="rb-l"><span class="rb stop"><svg class="ico"><use href="#i-stop"/></svg></span>Bitir</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-coach">
+  <div class="phone">
+    <div class="sb"><span>18:52</span><i>●●● <s></s></i></div>
+    <div class="scr" style="opacity:.4"><div class="wk-n p"><b class="mono">9'40"</b></div></div>
+    <div class="dim"></div>
+    <div class="sheet">
+      <span class="grab"></span>
+      <div style="display:flex;justify-content:space-between;align-items:center"><div class="sh-t">Sesli koç</div><span class="tg on"></span></div>
+      <div><div class="fine" style="margin-bottom:6px">Ne sıklıkla</div><div class="segA"><span class="on">250 m</span><span>500 m</span><span>1 km</span></div></div>
+      <div class="checks">
+        <div class="ck"><span class="box on"><svg class="ico"><use href="#i-check"/></svg></span>Tempo<small>her zaman</small></div>
+        <div class="ck"><span class="box on"><svg class="ico"><use href="#i-check"/></svg></span>Mesafe</div>
+        <div class="ck"><span class="box"></span>Süre</div>
+      </div>
+      <div class="sample"><span class="play"><svg class="ico"><use href="#i-play"/></svg></span><span>"Kilometre başına 9 dakika 40 saniye." · Neslihan</span></div>
+      <p class="fine">Kulaklık takıyorsan çevreni duyabileceğin bir ses düzeyi seç. Ses Profilim → Seslendirme'den değişir.</p>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-sci">
+  <div class="phone">
+    <div class="sb"><span>15:02</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Ana sayfa</span>
+      <div class="nefcard"><span class="nefdot"></span><div><small>Nef · 15.00</small><p>Hava 21 derece, ılık. İstersen şimdi 5 dakikalık bir tur.</p></div></div>
+      <div class="btn-a">Yürüyüşe başla</div>
+      <div class="card-a sci">
+        <span class="sci-h">Bilim ne diyor?</span>
+        <p class="sci-f">Bir denemede yürüyüş önerisi sonraki 30 dakikada adımı artırdı; 44 kişi, 6 hafta.</p>
+        <div class="sci-meta"><span>Mikro-randomize deneme</span><span>44 kişi</span><span>6 hafta</span></div>
+        <p class="sci-lim">Sınır: etki haftalar içinde azaldı. Kısa süreli adım ölçüldü; sağlık sonucu ölçülmedi.</p>
+        <p class="sci-src">Klasnja P. ve ark. Efficacy of Contextually Tailored Suggestions for Physical Activity: A Micro-randomized Optimization Trial of HeartSteps. Ann Behav Med, 2019.</p>
+        <div class="sci-links"><span><svg class="ico" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-link"/></svg> PubMed · 30192907</span><span>DOI</span></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+(function () {
+  // Her bölümde gösterilecek ekranlar: [şablon, başlık, not]
+  var S = {
+    done: [['tpl-done', 'Modül bitişi', 'Kapalıyken: tek dokunuşluk kart. Bitiş ekranının altında, "Ana sayfaya dön"ün üstünde.'],
+           ['tpl-path', 'Yol bitince', 'Yolun içinde durak durak kart çıkmaz; yol bitince tek "yolunu hatırlatayım mı".']],
+    sheet: [['tpl-sheet-auto', 'Saat · Sen karar ver', 'Nef saati kişinin kendi kayıtlarından seçer ve nedenini söyler. Veri yoksa başlangıç saati verir.'],
+            ['tpl-sheet-manual', 'Saat · Ben seçeyim', 'Günde en çok 3 saat. Çakışma anında söylenir; iki bildirim hiçbir zaman aynı anda gelmez.']],
+    reenter: [['tpl-reenter', 'Yeniden giriş', 'Modüle yeniden girince üstte yeşil hap. Dokununca saat sayfası açılır.']],
+    notif: [['tpl-notif', 'Profil → Bildirimler', 'Günün çizelgesi, hatırlatmalar, Nef\'in haberleri. Satıra dokununca saat sayfası.']],
+    home: [['tpl-home', 'Ana sayfa · hava satırı', 'Adımların üstünde tek satır. Dokununca hava sayfası. Önbellekte hava yoksa satır görünmez.']],
+    wx: [['tpl-wx', 'Hava sayfası', 'Saat saat sıcaklık ve yağmur olasılığı, Nef\'in yorumu, sabah havası anahtarı, atıf.']],
+    walk: [['tpl-lockwalk', 'Yürüyüş sorusu', 'Kilit ekranında. Dokununca yürüyüş ekranı açılır, son 15 dakika yürüyüşe eklenir.'],
+           ['tpl-walk', 'Yürüyüş ekranı', 'Dört büyük sayı. Anons anında aynı cümle ekranda. Kilitliyken ölçüm sürer.']],
+    coach: [['tpl-coach', 'Sesli koç', 'Açık/kapalı, 250 m · 500 m · 1 km, ne söylesin. Ses Profilim\'deki ses.']],
+    sci: [['tpl-sci', 'Bilim kartı', 'Bildirime dokununca: Nef\'in cümlesi, eylem, tek bulgu, sınırı ve PubMed bağlantısı.']]
+  };
+  document.querySelectorAll('.strip').forEach(function (strip) {
+    (S[strip.dataset.screens] || []).forEach(function (s) {
+      ['t-light', 't-dark'].forEach(function (th) {
+        var cell = document.createElement('figure');
+        cell.className = 'cell ' + (th === 't-light' ? 'lt' : 'dk');
+        cell.style.margin = '0';
+        var frag = document.getElementById(s[0]).content.cloneNode(true);
+        var ph = frag.querySelector('.phone');
+        ph.classList.add(th);
+        cell.appendChild(frag);
+        var cap = document.createElement('figcaption');
+        cap.innerHTML = '<div class="cap"><b>' + s[1] + '</b> · ' + (th === 't-light' ? 'açık' : 'koyu') + '</div><p class="note">' + s[2] + '</p>';
+        cell.appendChild(cap);
+        strip.appendChild(cell);
+      });
+    });
+  });
+  function press(ids, on) { ids.forEach(function (id) { document.getElementById(id).setAttribute('aria-pressed', String(id === on)); }); }
+  var th = ['th-both', 'th-light', 'th-dark'];
+  th.forEach(function (id) {
+    document.getElementById(id).addEventListener('click', function () {
+      press(th, id);
+      document.body.classList.toggle('only-light', id === 'th-light');
+      document.body.classList.toggle('only-dark', id === 'th-dark');
+    });
+  });
+  var w = ['w-390', 'w-320'];
+  w.forEach(function (id) {
+    document.getElementById(id).addEventListener('click', function () {
+      press(w, id);
+      document.body.classList.toggle('w320', id === 'w-320');
+    });
+  });
+})();
+</script>
