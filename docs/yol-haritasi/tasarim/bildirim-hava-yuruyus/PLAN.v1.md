@@ -175,9 +175,12 @@ kalır; `moduleReminders` onlar için yalnız `mode`'u tutar.
 - **Kart, bitiş ekranında:** özetin altında Nef'in tek cümlesi (*"Dünden bir puan daha sakin bitirdin."*), altında kart;
   kartın sağında Nef'in önerdiği saat ("09.15"). Yol bitince kutlama kartı (durakların simgeleri, "Yolun bugün tamam",
   "4 durak · 14 dakika · 6. gün üst üste"), Nef'in cümlesi ve tek hatırlatma kartı.
-- **Kurulunca:** kart onay titreşimiyle yeşil bir karta döner: **"Hatırlatman açık · Her gün 09.15 · saati Nef seçti"**.
-  Aynı kart modülün giriş ekranında en üstte durur; altında modülün kendi önizlemesi (nefeste halka ve "4 sn al · 6 sn
-  ver", bugünkü süre, dünkü sonuç). Hap her açılışta izin durumunu okur; izin sonradan kapatıldıysa *"Hatırlatma
+- **Kurulunca:** kart onay titreşimiyle **"Hatırlatman açık · Her gün 09.15 · saati Nef seçti"** olur. Modüle yeniden
+  girilince hatırlatma üstte küçük bir hapta durur ("09.15 · açık"; dokununca saat sayfası); ekranın başrolü modülün
+  kendisidir: Nef'in kişisel cümlesi (*"Tam zamanında. Dün bitirirken kendini 4/5 sakin işaretledin."*), nefeste bugünkü
+  süreyi gösteren küre ("3 dk · Sakin ritim"), "4 saniye al, 6 saniye ver" ve Başla. (5 saniye tur 1 ve 2'de yeşil
+  kartın egzersizden çok dikkat çektiği görüldü; tur 3'te üç yön arasından seçildi, `5sn-tur3-yonler.md`.) Hafta noktaları
+  kullanılmaz: kaçan gün suçluluk hissi verdi. Hap her açılışta izin durumunu okur; izin sonradan kapatıldıysa *"Hatırlatma
   kurulu ama bildirimler kapalı · Ayarları aç"* der.
 - **Ana sayfada teklifler:** günde en çok bir teklif (bildirim izni → hava → yürüyüş eşliği sırasıyla); reddedilen
   teklif 30 gün sorulmaz (VARSAYIM).
@@ -438,11 +441,12 @@ seninle", ilk anons 3 saniye içinde: *"Birlikte yürüyoruz. 1,1 kilometredesin
 
 #### C.3 Sesli koç
 
-- **Ayar ekranı** (yürüyüş ekranındaki düğmeden ve Bildirimler → Yürüyüş eşliği'nden): en üstte dinlenebilir örnek
-  (oynat düğmesi, ses dalgası, *"Son 250 metre: kilometrede 9 dakika 40 saniye."*, "Neslihan'ın sesiyle"); altında
-  açık/kapalı; "Ne sıklıkla": 250 m (varsayılan), 500 m, 1 km; "Mesafeyi de söyle"; "Kulaklık yokken hoparlörden"
-  (varsayılan kapalı). Ses Profilim → Seslendirme'deki ses (Neslihan ya da Hakan). (Tur 1: ayar listesi "kişiliksiz"
-  bulundu; önce sesin kendisi gösterilir.)
+- **Ayar ekranı** (yürüyüş ekranındaki düğmeden ve Bildirimler → Yürüyüş eşliği'nden): başlık tek soru, **"Ne sıklıkla
+  konuşayım?"**; sağ üstte "Açık" anahtarı; üç büyük seçenek ve altlarında koçun söyleyeceği cümle: "Her 250 metrede"
+  (varsayılan), "Her 500 metrede", "Her kilometrede"; altında *"Her tam kilometrede ayrıca o kilometrenin süresini
+  söylerim."*; "Ses": Neslihan · Hakan · Dinle (seçim Profilim → Seslendirme'deki ayarı değiştirir). "Kulaklık yokken
+  hoparlörden" (varsayılan kapalı) ekranın altında. (Tur 1 ve 2'de ayar listesi "sıradan" bulundu; tur 3'te üç yön
+  arasından 5/5 ile seçildi.)
 - **Anonslar:** kişinin seçtiği aralıkta (250 m, 500 m ya da 1 km) *"Son 250 metre: kilometrede 9 dakika 40 saniye."*
   (son aralığın ortalama temposu; saniye 10'a yuvarlanır); aralık ne olursa olsun her tam kilometrede ayrıca *"1.
   kilometre 9 dakika 50 saniyede."* (5'e yuvarlanır; aralık 1 km seçildiyse yalnız bu cümle söylenir). Aynı cümle ekranda
@@ -691,4 +695,7 @@ doğru makaleye gidiyor (`elestiri-dogruluk.md`).
 - 5 saniye tur 1 (`5sn-tur1.md`): 13 ekranın 10'u geçti; Yeniden giriş, Ana sayfa hava ve Sesli koç kaldı. Üçü yeniden
   tasarlandı; sınırdakiler ve ortak zayıflıklar düzeltildi; sabah bildiriminin başlığı sahibin örneğine göre yer ve
   sıcaklıkla başlar; yürüyüş bildirimine eylem düğmeleri ve 800 m eşiği eklendi.
-- Sırada: 5 saniye tur 2, sahibin onayı.
+- 5 saniye tur 2 (`5sn-tur2.md`): 13 ekranın 11'i geçti; Yeniden giriş ve Sesli koç ikinci kez kaldı. Yöntem değişti
+  (`5sn-tur3-yonler.md`): üç yön, beş yeni değerlendirici; Yeniden giriş A (4/5), Sesli koç C (5/5). Sahibin kararı
+  işlendi: her modülde günde en çok 3 saat; koç aralığı 250 m / 500 m / 1 km, her kilometrede ayrıca süre.
+- Sırada: sahibin onayı.

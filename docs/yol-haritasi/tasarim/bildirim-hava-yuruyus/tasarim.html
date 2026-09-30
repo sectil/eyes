@@ -232,6 +232,7 @@ body.w320 .hide320 { display: none; }
 .tl-night { position: absolute; top: 5px; height: 20px; border-radius: 6px; background: repeating-linear-gradient(135deg, var(--a-surface-2) 0 5px, var(--a-surface-3) 5px 10px); }
 .tl-dot { position: absolute; top: 9px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--a-accent); box-shadow: 0 0 0 3px var(--a-surface); }
 .tl-dot.w { background: var(--a-lens); }
+.tl-dot.n { width: 22px; height: 22px; margin-left: -11px; top: 4px; display: grid; place-items: center; font: 700 0.72rem/1 var(--f-mono); color: var(--a-accent-ink); }
 .tl-list { display: flex; flex-wrap: wrap; gap: 6px; }
 .tl-list span { display: inline-flex; align-items: center; gap: 5px; padding: 5px 8px; border-radius: 9px; background: var(--a-surface-2); font: 500 0.74rem/1 var(--f-body); color: var(--a-ink-2); }
 .tl-list span b { font: 600 0.74rem/1 var(--f-mono); color: var(--a-ink); }
@@ -505,6 +506,7 @@ body.w320 .vc-circle { width: 170px; height: 170px; }
 .cb-voices .play-s { padding: 8px 14px; color: var(--a-accent); }
 .cb-voices .play-s .ico { width: 14px; height: 14px; fill: currentColor; }
 .cc-list { display: grid; gap: 10px; }
+.tg-l { display: inline-flex; align-items: center; gap: 8px; font: 600 0.9rem/1 var(--f-body); color: var(--a-ink-2); }
 .cc { display: grid; grid-template-columns: 24px minmax(0,1fr); gap: 12px; align-items: start; padding: 16px; border-radius: 18px; background: var(--a-surface); border: 1.5px solid var(--a-border); }
 .cc b { display: block; font: 700 1.1rem/1.2 var(--f-body); }
 .cc span:not(.radio) { display: block; font-size: 0.9rem; color: var(--a-ink-2); margin-top: 4px; }
@@ -698,7 +700,7 @@ body.w320 .vc-circle { width: 170px; height: 170px; }
     </article>
   </div>
   <ul class="limits">
-    <li><b>Dürüst sınır:</b> alarmdan sonraki taze hava yalnız iOS 26'da ve alarmı elle durduran kişide denenebilir; diğerlerinde bildirim son açılıştaki tahmini, yaşını söyleyerek verir.</li>
+    <li><b>Dürüst sınır:</b> alarmdan sonraki taze hava yalnız iOS 26'da ve alarmı elle durduran kişide mümkün; diğerlerinde bildirim son açılıştaki tahmini, yaşını söyleyerek verir.</li>
     <li><b>Dürüst sınır:</b> yürürken ekrandaki canlı adım telefonun sayımıdır; Apple Watch da takılıysa birkaç dakika farklı görünebilir. Bitişte Apple Sağlık'taki sayı okunur ve kayda o yazılır.</li>
     <li>Cihazda hiçbir şey denenmedi. Ekranlardaki bütün sayı ve saatler örnektir.</li>
   </ul>
@@ -795,18 +797,10 @@ body.w320 .vc-circle { width: 170px; height: 170px; }
   <div class="phone">
     <div class="sb"><span>09:16</span><i>●●● <s></s></i></div>
     <div class="scr">
-      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Ana sayfa</span>
-      <div class="on-card">
-        <span class="bell"><svg class="ico"><use href="#i-bell"/></svg></span>
-        <div><b>Hatırlatman açık</b><span>Her gün <b class="mono">09.15</b> · saati Nef seçti</span></div>
-        <span class="chev-s"><svg class="ico"><use href="#i-chev"/></svg></span>
-      </div>
-      <div><span class="eyebrow-a">Nefes · 4. basamak</span><div class="h1-a" style="margin-top:6px">Sakin ritim</div></div>
-      <div class="breathe">
-        <div class="br-ring"><div class="br-in"><b>4</b><span>nefes al</span></div></div>
-        <div class="br-legend"><span><i></i>4 sn al</span><span><i class="o"></i>6 sn ver</span></div>
-      </div>
-      <div class="stats"><div class="stat"><b class="mono">3 dk</b><span>bugün</span></div><div class="stat"><b class="mono">2 → 4</b><span>dünkü sakinlik</span></div></div>
+      <div class="va-top"><span class="back"><svg class="ico"><use href="#i-back"/></svg>Ana sayfa</span><span class="pill-soft"><svg class="ico"><use href="#i-bell"/></svg>09.15 · açık</span></div>
+      <div class="va-nef"><span class="nefdot"></span><p>Tam zamanında. Dün bitirirken kendini <b>4/5 sakin</b> işaretledin.</p></div>
+      <div class="orb"><div class="orb-in"><b>3 dk</b><span>Sakin ritim</span></div></div>
+      <div class="va-meta"><b>4 saniye al, 6 saniye ver</b><span>Nefes · 4. basamak</span></div>
       <div class="btn-a">Başla</div>
     </div>
   </div>
@@ -824,11 +818,11 @@ body.w320 .vc-circle { width: 170px; height: 170px; }
           <div class="tl-line"></div>
           <div class="tl-night" style="left:0;width:11%"></div>
           <div class="tl-night" style="left:89%;width:11%"></div>
-          <span class="tl-dot w" style="left:1%"></span><span class="tl-dot" style="left:17.6%"></span><span class="tl-dot" style="left:22.2%"></span><span class="tl-dot" style="left:36.1%"></span><span class="tl-dot" style="left:38.9%"></span><span class="tl-dot" style="left:66.7%"></span>
+          <span class="tl-dot w" style="left:1%"></span><span class="tl-dot n" style="left:19.9%">2</span><span class="tl-dot n" style="left:37.5%">2</span><span class="tl-dot" style="left:66.7%"></span>
         </div>
         <div class="tl-ax"><span>06</span><span>09</span><span>12</span><span>15</span><span>18</span><span>21</span><span>24</span></div>
         <div class="tl-next"><span class="nefdot"></span><p>Sıradaki: <b>10.00 Göz egzersizi</b>. Aralarında en az yarım saat var.</p></div>
-        <p class="fine">Taralı saatler gece sessizliği. Turuncu nokta alarmına bağlı sabah havası.</p>
+        <p class="fine">Taralı saatler gece sessizliği. Turuncu nokta alarmına bağlı sabah havası. Sayılı nokta: yarım saat arayla gelen iki bildirim.</p>
       </div>
       <div class="grp">
         <div class="grp-h">Modüllerin</div>
@@ -948,19 +942,16 @@ body.w320 .vc-circle { width: 170px; height: 170px; }
   <div class="phone">
     <div class="sb"><span>18:52</span><i>●●● <s></s></i></div>
     <div class="scr">
-      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Yürüyüş</span>
-      <div class="h1-a">Sesli koç</div>
-      <div class="coach-hero">
-        <div class="ch-top"><span class="play big"><svg class="ico"><use href="#i-play"/></svg></span><div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-        <p class="ch-say">"Son 250 metre: kilometrede 9 dakika 40 saniye."</p>
-        <span class="ch-voice">Neslihan'ın sesiyle · her kilometrede ayrıca o kilometrenin süresi</span>
+      <div class="va-top"><span class="back"><svg class="ico"><use href="#i-back"/></svg>Yürüyüş</span><span class="tg-l">Açık <span class="tg on"></span></span></div>
+      <div class="h1-a" style="font-size:1.6rem">Ne sıklıkla konuşayım?</div>
+      <div class="cc-list">
+        <div class="cc on"><span class="radio"></span><div><b>Her 250 metrede</b><span>"Son 250 metre: kilometrede 9 dakika 40 saniye."</span></div></div>
+        <div class="cc"><span class="radio"></span><div><b>Her 500 metrede</b><span>"Son 500 metre: kilometrede 9 dakika 40 saniye."</span></div></div>
+        <div class="cc"><span class="radio"></span><div><b>Her kilometrede</b><span>"1. kilometre 9 dakika 50 saniyede."</span></div></div>
       </div>
-      <div class="card-a rows"><div class="row-a"><span class="ri"><svg class="ico"><use href="#i-voice"/></svg></span><div><b>Sesli koç</b><span>Kulaklıkta konuşur</span></div><span class="tg on"></span></div></div>
-      <div><div class="lbl-a">Ne sıklıkla</div><div class="segA big"><span class="on">250 m</span><span>500 m</span><span>1 km</span></div></div>
-      <div class="card-a rows">
-        <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><div><b>Mesafeyi de söyle</b></div><span class="tg on"></span></div>
-        <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-voice"/></svg></span><div><b>Kulaklık yokken hoparlörden</b></div><span class="tg"></span></div>
-      </div>
+      <p class="fine" style="font-size:.88rem">Her tam kilometrede ayrıca o kilometrenin süresini söylerim.</p>
+      <div class="lbl-a">Ses</div>
+      <div class="cb-voices"><span class="on"><i>N</i>Neslihan</span><span><i>H</i>Hakan</span><span class="play-s"><svg class="ico"><use href="#i-play"/></svg>Dinle</span></div>
     </div>
   </div>
 </template>
@@ -984,97 +975,6 @@ body.w320 .vc-circle { width: 170px; height: 170px; }
 </template>
 
 
-<template id="tpl-reenter-a">
-  <div class="phone">
-    <div class="sb"><span>09:16</span><i>●●● <s></s></i></div>
-    <div class="scr">
-      <div class="va-top"><span class="back"><svg class="ico"><use href="#i-back"/></svg>Ana sayfa</span><span class="pill-soft"><svg class="ico"><use href="#i-bell"/></svg>09.15 · açık</span></div>
-      <div class="va-nef"><span class="nefdot"></span><p>Tam zamanında. Dün bu saatte sakinliğin <b>2'den 4'e</b> çıktı.</p></div>
-      <div class="orb"><div class="orb-in"><b>Nefes al</b><span>4 saniye</span></div></div>
-      <div class="va-meta"><b>Sakin ritim</b><span>4 sn al · 6 sn ver · 3 dakika</span></div>
-      <div class="btn-a">Başla</div>
-    </div>
-  </div>
-</template>
-<template id="tpl-reenter-b">
-  <div class="phone">
-    <div class="sb"><span>09:16</span><i>●●● <s></s></i></div>
-    <div class="scr">
-      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Ana sayfa</span>
-      <div class="vb-hero">
-        <span class="eyebrow-a" style="color:rgba(255,255,255,.8)">Bugünün nefesi</span>
-        <div class="vb-t">Sakin ritim</div>
-        <div class="vb-big">3<small> dk</small></div>
-        <div class="vb-sub">4 saniye al · 6 saniye ver</div>
-      </div>
-      <div class="vb-week"><div class="vb-wh"><b>Bu hafta</b><span>5 gün nefes</span></div><div class="vb-dots"><i class="d"></i><i class="d"></i><i class="d"></i><i></i><i class="d"></i><i class="d"></i><i class="t"></i></div><div class="vb-days"><span>Pt</span><span>Sa</span><span>Ça</span><span>Pe</span><span>Cu</span><span>Ct</span><span>Pz</span></div></div>
-      <div class="vb-rem"><svg class="ico"><use href="#i-check"/></svg><span>Her gün 09.15'te hatırlatıyorum</span><a>Değiştir</a></div>
-      <div class="btn-a">Başla</div>
-    </div>
-  </div>
-</template>
-<template id="tpl-reenter-c">
-  <div class="phone">
-    <div class="sb"><span>09:16</span><i>●●● <s></s></i></div>
-    <div class="scr vc">
-      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Ana sayfa</span>
-      <div class="vc-head"><div class="h1-a" style="font-size:2rem">Nefes</div><p>Sakin ritim · 3 dakika</p></div>
-      <div class="vc-circle"><span>Hazır olduğunda<br>başla</span></div>
-      <p class="vc-hint">Dört saniye burnundan al, altı saniye ağzından ver.</p>
-      <div class="btn-a">Başla</div>
-      <div class="vc-foot"><svg class="ico"><use href="#i-bell"/></svg>Hatırlatma her gün 09.15 · <a>Değiştir</a></div>
-    </div>
-  </div>
-</template>
-<template id="tpl-coach-a">
-  <div class="phone">
-    <div class="sb"><span>18:52</span><i>●●● <s></s></i></div>
-    <div class="scr">
-      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Yürüyüş</span>
-      <div class="h1-a">Sesli koç</div>
-      <div class="ca-prev walkmini">
-        <div class="wk-n p"><b>9'40"</b><span>Şu anki tempo · dk/km</span></div>
-        <div class="ca-bubble"><svg class="ico"><use href="#i-voice"/></svg><span>"Son 250 metre: kilometrede 9 dakika 40 saniye."</span></div>
-        <span class="ca-play"><svg class="ico"><use href="#i-play"/></svg> Dinle · Neslihan</span>
-      </div>
-      <div><div class="lbl-a">Ne sıklıkla söylesin?</div><div class="segA big hi"><span class="on">250 m</span><span>500 m</span><span>1 km</span></div></div>
-      <p class="fine" style="font-size:.86rem">Her tam kilometrede ayrıca o kilometrenin süresini söyler.</p>
-      <div class="card-a rows"><div class="row-a"><span class="ri"><svg class="ico"><use href="#i-voice"/></svg></span><div><b>Sesli koç açık</b><span>Kulaklıkta konuşur</span></div><span class="tg on"></span></div></div>
-    </div>
-  </div>
-</template>
-<template id="tpl-coach-b">
-  <div class="phone">
-    <div class="sb"><span>18:52</span><i>●●● <s></s></i></div>
-    <div class="scr">
-      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Yürüyüş</span>
-      <div class="cb-head"><div class="cb-ear"><svg class="ico"><use href="#i-voice"/></svg></div><div><div class="h1-a" style="font-size:1.35rem">Nef kulağında</div><p>Yürürken temponu sesli söyler.</p></div></div>
-      <div class="cb-cards">
-        <div class="cb-c on"><b>250 m</b><span>sık</span><em>"Son 250 metre: kilometrede 9 dakika 40 saniye."</em></div>
-        <div class="cb-c"><b>500 m</b><span>orta</span><em>"Son 500 metre: kilometrede 9 dakika 50 saniye."</em></div>
-        <div class="cb-c"><b>1 km</b><span>az</span><em>"1. kilometre 9 dakika 50 saniyede."</em></div>
-      </div>
-      <div class="lbl-a">Kimin sesiyle</div>
-      <div class="cb-voices"><span class="on"><i>N</i>Neslihan</span><span><i>H</i>Hakan</span></div>
-    </div>
-  </div>
-</template>
-<template id="tpl-coach-c">
-  <div class="phone">
-    <div class="sb"><span>18:52</span><i>●●● <s></s></i></div>
-    <div class="scr">
-      <div class="va-top"><span class="back"><svg class="ico"><use href="#i-back"/></svg>Yürüyüş</span><span class="tg on"></span></div>
-      <div class="h1-a" style="font-size:1.6rem">Ne sıklıkla konuşayım?</div>
-      <div class="cc-list">
-        <div class="cc on"><span class="radio"></span><div><b>Her 250 metrede</b><span>"Son 250 metre: kilometrede 9 dakika 40 saniye."</span></div></div>
-        <div class="cc"><span class="radio"></span><div><b>Her 500 metrede</b><span>Daha seyrek, aynı cümle.</span></div></div>
-        <div class="cc"><span class="radio"></span><div><b>Her kilometrede</b><span>"1. kilometre 9 dakika 50 saniyede."</span></div></div>
-      </div>
-      <div class="lbl-a">Ses</div>
-      <div class="cb-voices"><span class="on"><i>N</i>Neslihan</span><span><i>H</i>Hakan</span><span class="play-s"><svg class="ico"><use href="#i-play"/></svg>Dinle</span></div>
-    </div>
-  </div>
-</template>
 
 <script>
 (function () {
@@ -1084,13 +984,13 @@ body.w320 .vc-circle { width: 170px; height: 170px; }
            ['tpl-path', 'Yol bitince', 'Yolun içinde durak durak kart çıkmaz; yol bitince tek "yolunu hatırlatayım mı".']],
     sheet: [['tpl-sheet-auto', 'Saat · Sen karar ver', 'Nef saati kişinin kendi kayıtlarından seçer ve nedenini söyler. Veri yoksa başlangıç saati verir.'],
             ['tpl-sheet-manual', 'Saat · Ben seçeyim', 'Günde en çok 3 saat. Çakışma anında söylenir; iki bildirim hiçbir zaman aynı anda gelmez.']],
-    reenter: [['tpl-reenter', 'Yeniden giriş', 'Modüle yeniden girince üstte yeşil hap. Dokununca saat sayfası açılır.']],
+    reenter: [['tpl-reenter', 'Yeniden giriş', 'Üstte hatırlatma hapı (dokununca saat sayfası), Nef\'in kişisel cümlesi, bugünkü nefes ve Başla.']],
     notif: [['tpl-notif', 'Profil → Bildirimler', 'Günün çizelgesi, hatırlatmalar, Nef\'in haberleri. Satıra dokununca saat sayfası.']],
     home: [['tpl-home', 'Ana sayfa · hava satırı', 'Adımların üstünde tek satır: il, ilçe, sıcaklık, yağmur saati; sağda Apple Weather ve Veri kaynakları bağlantısı (Apple kuralı). 320 pt\'de il adı düşer, ilçe kısalmaz.']],
     wx: [['tpl-wx', 'Hava sayfası', 'Saat saat sıcaklık ve yağmur olasılığı, Nef\'in yorumu, sabah havası anahtarı, atıf.']],
     walk: [['tpl-lockwalk', 'Yürüyüş sorusu', 'Kilit ekranında. Dokununca yürüyüş ekranı açılır, son 15 dakika yürüyüşe eklenir.'],
            ['tpl-walk', 'Yürüyüş ekranı', 'Dört büyük sayı. Anons anında aynı cümle ekranda. Kilitliyken ölçüm sürer.']],
-    coach: [['tpl-coach', 'Sesli koç', 'Açık/kapalı, 250 m · 500 m · 1 km, ne söylesin. Ses Profilim\'deki ses.']],
+    coach: [['tpl-coach', 'Sesli koç', 'Tek soru: ne sıklıkla. Her seçenekte koçun söyleyeceği cümle; ses ve Dinle aynı satırda.']],
     sci: [['tpl-sci', 'Bilim kartı', 'Bildirime dokununca: Nef\'in cümlesi, eylem, tek bulgu, sınırı ve PubMed bağlantısı.']]
   };
   document.querySelectorAll('.strip').forEach(function (strip) {
