@@ -6,6 +6,10 @@
 	<string>$(CAPACITOR_DEBUG)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>tr</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Bulunduğun yerin havasını göstermek için yaklaşık konumunu kullanırım. Konum yuvarlanarak Apple'ın hava servisine gider; telefonda yalnız il ve ilçe adı kalır.</string>
+	<key>NSLocationDefaultAccuracyReduced</key>
+	<true/>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Nefona Apple Sağlık'a hiçbir veri yazmaz. Adımını, yürüme mesafeni ve egzersiz dakikanı yalnızca okur; veriler telefonundan çıkmaz.</string>
 	<key>NSAlarmKitUsageDescription</key>

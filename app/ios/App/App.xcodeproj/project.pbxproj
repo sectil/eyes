@@ -29,6 +29,7 @@
 		67E978CCF58A0DFFFAF0F364 /* FeedbackPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B32F900FAA3897A19868E63 /* FeedbackPlugin.swift */; };
 		9D1FAA7CA32ECBEE8AAE8BD0 /* ExportPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB402C931E107EA218D82AD5 /* ExportPlugin.swift */; };
 		5C6566AA870CE6FE1C539465 /* HealthPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879122AB7626D8043358C87E /* HealthPlugin.swift */; };
+		694DAF62D9FB4751AED38B8A /* SkyPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E41B5C17B0048A3AEACB494 /* SkyPlugin.swift */; };
 		D95049F54BD71CB2B5B1D198 /* AuthSessionPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F9A858278129AD93FFE2F5 /* AuthSessionPlugin.swift */; };
 		8B9C0D1E2F3A4B5C6D7E8F90 /* AlarmPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8B9C0D1E2F3A4B5C6D7E8F /* AlarmPlugin.swift */; };
 		A7E1C0D2F3B4A5968778695A /* AppleSignInPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F2D1E3A4C5B6A798897A6B /* AppleSignInPlugin.swift */; };
@@ -58,6 +59,7 @@
 		1B32F900FAA3897A19868E63 /* FeedbackPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackPlugin.swift; sourceTree = "<group>"; };
 		AB402C931E107EA218D82AD5 /* ExportPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPlugin.swift; sourceTree = "<group>"; };
 		879122AB7626D8043358C87E /* HealthPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPlugin.swift; sourceTree = "<group>"; };
+		9E41B5C17B0048A3AEACB494 /* SkyPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyPlugin.swift; sourceTree = "<group>"; };
 		78F9A858278129AD93FFE2F5 /* AuthSessionPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSessionPlugin.swift; sourceTree = "<group>"; };
 		7A8B9C0D1E2F3A4B5C6D7E8F /* AlarmPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmPlugin.swift; sourceTree = "<group>"; };
 		B8F2D1E3A4C5B6A798897A6B /* AppleSignInPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInPlugin.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				1B32F900FAA3897A19868E63 /* FeedbackPlugin.swift */,
 				AB402C931E107EA218D82AD5 /* ExportPlugin.swift */,
 				879122AB7626D8043358C87E /* HealthPlugin.swift */,
+				9E41B5C17B0048A3AEACB494 /* SkyPlugin.swift */,
 				78F9A858278129AD93FFE2F5 /* AuthSessionPlugin.swift */,
 				B8F2D1E3A4C5B6A798897A6B /* AppleSignInPlugin.swift */,
 				7A8B9C0D1E2F3A4B5C6D7E8F /* AlarmPlugin.swift */,
@@ -221,6 +224,7 @@
 				67E978CCF58A0DFFFAF0F364 /* FeedbackPlugin.swift in Sources */,
 				9D1FAA7CA32ECBEE8AAE8BD0 /* ExportPlugin.swift in Sources */,
 				5C6566AA870CE6FE1C539465 /* HealthPlugin.swift in Sources */,
+				694DAF62D9FB4751AED38B8A /* SkyPlugin.swift in Sources */,
 				D95049F54BD71CB2B5B1D198 /* AuthSessionPlugin.swift in Sources */,
 				A7E1C0D2F3B4A5968778695A /* AppleSignInPlugin.swift in Sources */,
 				8B9C0D1E2F3A4B5C6D7E8F90 /* AlarmPlugin.swift in Sources */,
@@ -379,6 +383,8 @@
 					AlarmKit,
 					"-weak_framework",
 					AppIntents,
+					"-weak_framework",
+					WeatherKit,
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sectil.eyelume;
@@ -409,6 +415,8 @@
 					AlarmKit,
 					"-weak_framework",
 					AppIntents,
+					"-weak_framework",
+					WeatherKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sectil.eyelume;
 				PRODUCT_NAME = "$(TARGET_NAME)";

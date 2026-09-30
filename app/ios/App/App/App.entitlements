@@ -14,5 +14,7 @@
 	<true/>
 	<key>com.apple.developer.usernotifications.time-sensitive</key>
 	<true/>
+	<key>com.apple.developer.weatherkit</key>
+	<true/>
 </dict>
 </plist>

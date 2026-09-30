@@ -181,7 +181,11 @@ const NOTIFY_PAGE = false // uygulamadaki hâl 5 sn kapısında 1/5 (5sn-b1a-yen
 // Bayrakla birlikte Mac'te eklenecekler (kapalıyken derlemeye girmesinler diye yoklar; SkyPlugin.swift başlığı):
 // App.entitlements com.apple.developer.weatherkit; Info.plist NSLocationWhenInUseUsageDescription (onaylı metin, hukukçu
 // adı gelmeden App Store'a gitmez) ve NSLocationDefaultAccuracyReduced.
-const SKY_UI = false
+// 2026-10-01: SkyPlugin hedefte, entitlement ve Info.plist eklendi. Cihaz denemesi için arayüz geliştirici derlemesinde
+// (scripts/device-run.sh, VITE_APP_BUILD=dev) ve TestFlight'ın test kilidi açık derlemesinde (scripts/testflight.sh,
+// VITE_TEST_UNLOCK=1; sahibin isteği) açık; giriş Bilgi → "Hava (deneme)". App Store derlemesinde (TEST_UNLOCK=0) kapalı;
+// Ana sayfa teklif kartı gelince giriş oraya taşınır.
+const SKY_UI = import.meta.env?.VITE_APP_BUILD === 'dev' || import.meta.env?.VITE_TEST_UNLOCK === '1'
 
 export default function App() {
   const [data, setData] = useState(store.get())
@@ -1278,6 +1282,7 @@ export default function App() {
     content = (
       <Info
         onGo={(s) => (s === 'schedule' ? openSchedule('info') : go(s))}
+        onSkyTry={SKY_UI ? () => startSky('locate') : null}
         iosApp={isIOSApp()}
         trueDepth={native.trueDepth}
         calibration={settings.calibration}

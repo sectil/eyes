@@ -27,6 +27,7 @@ class MainViewController: CAPBridgeViewController {
         bridge?.registerPluginInstance(FeedbackPlugin())
         bridge?.registerPluginInstance(ExportPlugin())
         bridge?.registerPluginInstance(HealthPlugin())
+        bridge?.registerPluginInstance(SkyPlugin())
         bridge?.registerPluginInstance(AuthSessionPlugin())
         // Apple ile giriş: uygulamanın kendi eklentisi (npm eklentisi TestFlight'ta "not implemented" verdi,
         // `import SignInWithApple` uygulama hedefinde derlenmedi — AppleSignInPlugin.swift)

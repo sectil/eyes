@@ -173,7 +173,7 @@ function FeedbackSettings({ iosApp }) {
   )
 }
 
-export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp = false, trueDepth = false, calibration = null, consents = null, onCoach }) {
+export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp = false, trueDepth = false, calibration = null, consents = null, onCoach, onSkyTry = null }) {
   const build = buildInfo()
   const [confirm, setConfirm] = useState(false)
 
@@ -229,6 +229,8 @@ export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp 
           />
           {trueDepth && <Row Icon={Crosshair} label="Göz takibi" sub="Kalibre et ve canlı dene" onClick={() => onGo('gaze-test')} />}
           <Row Icon={Sparkles} label="Yenilikler" sub={versionLine(build)} onClick={() => onGo('whatsnew')} />
+          {/* Yalnız geliştirici derlemesinde (App.jsx SKY_UI): B2 hava akışının cihaz denemesi; kullanıcıya görünmez */}
+          {onSkyTry && <Row Icon={Sparkles} label="Hava (deneme)" sub="Geliştirici derlemesi" onClick={onSkyTry} />}
         </div>
       </section>
 

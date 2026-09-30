@@ -74,8 +74,9 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
 - [ ] B1b Nef cümle bankası: ücretli; maliyet ve istem önce sahibe.
 - [~] **B2 hava:** tasarım kapısı geçti (il/ilçe 4/5, "…'de misin?" 4/5, katmanlı rıza anlaşılırlık 5/5); teklif kartı
       Ana sayfaya bağlandı. Kod turu 1 bitti (`80c8e28`, `SKY_UI` kapalı; SkyPlugin.swift hedefte değil). Sahip
-      WeatherKit'i açtı, konum izni metnini onayladı. **Sıradaki: Mac'te `sky-check.sh` sonucu** → SkyPlugin hedefe,
-      entitlement ve Info.plist → cihaz → `SKY_UI` açılır. Sonra hava satırı ve hava sayfası (Ana sayfa tasarımına bağlı),
+      WeatherKit'i açtı, konum izni metnini onayladı; SkyPlugin Mac'te hatasız derlendi ve hedefe eklendi (entitlement,
+      Info.plist). **Sıradaki: TestFlight/geliştirici derlemesinde Bilgi → "Hava (deneme)" ile cihaz denemesi**
+      (App Store derlemesinde kapalı). Sonra hava satırı ve hava sayfası (Ana sayfa tasarımına bağlı),
       sabah havası katman 1–2.
 - [ ] B3 yürüyüş eşliği. · [ ] B3+ Canlı Etkinlik.
 
