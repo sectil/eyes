@@ -244,6 +244,7 @@
    Günün diyaframı ve "0 / N" büyük sayısı kalktı: en büyük yazı bugünün süresi, en belirgin şey ilk adımın düğmesi.
    Yalnız tokenlar; iki tema tokenlardan gelir. */
 .hh-facts.hh-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; border: 0; margin-top: -4px; }
+.hh-facts.hh-chips:empty { display: none; } /* alarm satırı çizilmeyince (web) boş hap satırı yer kaplamasın */
 .hh-chips .hh-fact {
   gap: 6px; padding: 6px 12px 6px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border);
   font: 600 0.82rem/1.2 var(--font-body); color: var(--ink-2);
