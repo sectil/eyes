@@ -6,6 +6,16 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Build 64'ten sonraki TestFlight (Bug 36 kuralı). VARSAYIM: Build 64 '2026-09-30-1'i içeriyor (sahip komutu dba1054'ten
+    // sonra çalıştırdı; derlemenin commit'i görülmedi). Yanlışsa bu madde '2026-09-30-1'e taşınır.
+    id: '2026-09-30-2',
+    title: '30 Eylül, ikinci güncelleme',
+    items: [
+      // Y1 NIT #23 (metin kapısı 2026-09-30). Cihazda denenmedi.
+      { kind: 'change', text: "Nefeste \"Bugünün ritmi\" açıkken kanıt ayrıntısının altında artık şu da yazar: bulgular bu nefes türüyle yapılan çalışmalardan gelir, bugünkü süreler o çalışmalarda kullanılan sürelerden farklı olabilir." },
+    ],
+  },
+  {
     // Build 63'ten sonraki TestFlight. Bug 31 (yeniden, 2026-09-30): Build 63 '2026-09-29-2' girdisini içeriyordu;
     // sonradan o girdiye eklenen maddeler (Bug 33–34, Build 60 işleri, 28 Eylül'den taşınanlar) onu görmüş kişiye
     // gösterilmeyecekti. Hepsi buraya taşındı; '2026-09-29-2' Build 63'teki hâline döndü.

@@ -15,7 +15,7 @@ import {
   makePlan, resolveSecs, phaseAt, phaseStartSec, makeRecord, programProgress, loadBreathOpts, saveBreathOpts, safetySeen, markSafetySeen, isBreath,
   DEFAULT_PATTERN, PROGRAM_DAY_SEC,
 } from '../lib/breath.js'
-import { breathSafety } from '../lib/breathMix.js'
+import { breathSafety, MIX_EVIDENCE_LIMIT } from '../lib/breathMix.js'
 import '../styles/breath.css'
 
 const KIND_ROW = { in: 'Al', in2: 'Ek alış', hold: 'Tut', out: 'Ver', hold2: 'Bekle' }
@@ -513,6 +513,8 @@ export default function Breath({ sessions = [], presetSec = null, askCalm = true
             <details className="br-why">
               <summary className="h1"><b>{def.title}</b><span className="br-why-lv"><Level level={def.level} /><ChevronDown size={16} aria-hidden="true" /></span></summary>
               <p>{def.evidence}</p>
+              {/* Sınır cümlesi (Y1 NIT #23; metin kapısı 2026-09-30): kanıt ailenin temel kalıbından, bugünün süreleri çeşitleme */}
+              <p>{MIX_EVIDENCE_LIMIT}</p>
             </details>
           ) : (
             <div className="h1"><b>{def.title}</b><Level level={def.level} /></div>

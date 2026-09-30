@@ -37,6 +37,9 @@ export const ENVELOPE = {
   holdStep: 1, // tutma ve bekleme
   rate: { B: [5, 7.5], C: [5, 7.5], D: [4, 7.5] }, // nefes/dk
 }
+// "Bugünün ritmi" açıkken kanıt ayrıntısının altındaki sınır cümlesi (Y1 NIT #23; metin kapısı 2026-09-30: olgu denetimi
+// ve iki bağımsız dil incelemesi, sahibin devrettiği onay). Kanıt ailenin temel kalıbından; günün süreleri zarftan seçilir.
+export const MIX_EVIDENCE_LIMIT = 'Bulgular bu nefes türüyle yapılan çalışmalardan geliyor. Bugünkü süreler o çalışmalarda kullanılan sürelerden farklı olabilir.'
 export const WEEK_RULES = { familyMax: 3, holdDaysMax: 2, pauseDaysMax: 1 } // 7 günlük pencerede (bugün dahil)
 
 // Katmanın aileleri (kodda var olan kalıplar, lib/breath.js PATTERNS)

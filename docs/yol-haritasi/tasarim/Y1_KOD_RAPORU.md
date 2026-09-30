@@ -214,3 +214,21 @@ karşı okundu.
    sonrası odak haftası Y2'ye; kısa E testi `pathDay`'e sayılmaz (plan: "yola ait kayıt").
 
 §6'daki üç cümle ve NIT #23 metin kapısında (iki bağımsız inceleme: B1a metin iş akışı); §5'teki 14 madde cihaz işi.
+
+## 9. Metin kapısı ve tarayıcı sınaması (2026-09-30)
+
+**Metin (onaylandı; olgu denetimi + iki bağımsız dil incelemesi, sahibin devrettiği onay):**
+- Baloncuk: "Sırada mola: 3 dk nefes, 2 dk dinlenme" (S0 kararı 8'in metni, değişmedi).
+- Site görsel metni: "Bu, E testi olmayan bir günün yolu. Isınma ile Uzağa bakış tamam, sırada Çemberler. Sonra
+  Yakın–uzak gelir ve birinci bölüm biter. İkinci bölümden önce 5 dakikalık bir mola gelir, ilk 3 dakikası nefesle geçer."
+- Site figcaption: "Yol ilk gün 8 dakika sürer, sen yaptıkça uzar. Göz hareketleri, uzağa bakış ve bakışla oynanan bir
+  oyun iki bölüme dağılır. Bölümlerin arasında 5 dakikalık bir mola gelir. Tam yol en çok 18 dakika sürer. E testi
+  haftada bir gün yola eklenir." Başlık "~15 dk" → "8–18 dk" (5 dk bütçede 30 günde en kısa 8, en uzun 18).
+- Sınır cümlesi (NIT #23, `lib/breathMix.js` `MIX_EVIDENCE_LIMIT`): "Bulgular bu nefes türüyle yapılan çalışmalardan
+  geliyor. Bugünkü süreler o çalışmalarda kullanılan sürelerden farklı olabilir."
+- Olgu denetiminin düzelttikleri: mola yolun sonunda değil bölümlerin arasında; "yakın–uzak odak" ekranda yok; "her gün bir
+  adım büyür" yanlıştı (basamaklar yapılan gün sayısına bağlı); "yaklaşık 15 dk" 3 dk bütçede yanlış.
+
+**Tarayıcı sınaması (Y1 düzeneğinin kopyası, 390 açık tema):** KALDI yok. GEÇTİ: 1 (1., 2., 4., 9. gün), 2, 6, 11; 8'in
+sakin seçeneği; 9'un ilk durumu. SINANAMADI (düzenek): 7, 10, 12, 14, 8'in birincil önerisi, 9'un üç durumu. CİHAZDA: 3, 4,
+5, 13. Cihaz listesi bu 4 madde ile sınanamayan 6 maddeden oluşur.
