@@ -193,3 +193,29 @@ Zaten depoda: Atluri 2026 (mesaja yalnız isim eklemek etkisiz), Trinquart 2023,
 - Uyarlamanın etkisi **küçük ama tutarlı** (Noar 2007 r=0,074; Hao 2023 g=0,16); en çok **davranış verisine dayalı, güncellenen** uyarlama işe yarıyor (Krebs 2010). Nef mesajı kişinin gerçek verisini kullanır ("dün 3 mola", "bu hafta 2 yürüyüş"); yalnızca üslup/isim uyarlaması davranışa ek katkı göstermedi (Schlicht 2026; depodaki Atluri 2026).
 - LLM mesajları okunur ve uygun bulunuyor (Norton 2026), ama sağlık içeriğinde yanlış ve eksik üretebiliyor (Zaleski 2024 %9 yanlış; Menz 2024; Ramaswamy 2026). Kurallar: (1) bildirim metni, **onaylı şablon + veri alanı** ile üretilir; LLM yalnız şablon içinden seçer/üslup verir, sağlık iddiası üretmez. (2) Sağlık iddiası, tanı, belirti yorumu, "hekime git/gitme" yok. (3) Sayılar (sıcaklık, tempo, adım) LLM'den değil veriden gelir. (4) Üretilen metin yasaklı ifade listesine karşı denetlenir.
 - Nef **sesi**: sesli sohbet botlarının metin tabanlılardan daha etkili olduğuna dair kanıt yok; bir alt analizde tersi (Singh 2023, bkz. F). Ses deneyim özelliği.
+
+---
+
+## I. Adım, mesafe ve yürüme hızı ölçümünün doğruluğu (iPhone, Apple Watch, GPS)
+
+Zaten depoda: Fuller 2020 (SD, 158 yayın; laboratuvarda adım sayımı çoğu markada kabul edilebilir).
+
+| Kaynak | PMID | DOI | Tür | n | Bulgu | Sınır |
+|---|---|---|---|---|---|---|
+| Lambe 2026, NPJ Digit Med | 41513748 | 10.1038/s41746-025-02238-1 | Yaşayan SD + MA | 82 çalışma, 430.052 kişi, 14 ölçüt | Apple Watch'ta adım ve uyku doğruluğu **orta**; enerji harcaması hatası tutarsız ve sıklıkla büyük; doğruluk koşula ve kişiye göre değişiyor. | Adım için sayısal sapma özette yok. |
+| Choe 2025, Physiol Meas | 40199339 | 10.1088/1361-6579/adca82 | SD + MA (Bland-Altman) | 56 çalışma (51 adım etki büyüklüğü) | Apple Watch adımda ortalama −1,83 adım/dk sapma (uyum sınırı −9,08 ile 5,41); bazı alt gruplarda hata %10'u aştı. Enerji harcamasında tüm alt gruplar %10'u aştı. | Heterojen koşullar. |
+| Veerabhadrappa 2018, J Gen Intern Med | 29633143 | 10.1007/s11606-018-4332-y | Doğrulama (mektup), koşu bandı + video | Özette verilmemiş | Farklı hızlarda Apple Watch adımı video sayımıyla neredeyse aynı (toplam hata %0,034; uyum r=0,96). | Laboratuvar; küçük; mektup. |
+| Duncan 2018, J Sports Sci | 29179653 | 10.1080/02640414.2017.1409855 | Laboratuvar + serbest yaşam doğrulama | Özette verilmemiş | Koşu bandında (5, 7,5, 10 km/sa) iPhone adımı el sayımından <±%5 saptı; serbest yaşamda ivmeölçere göre %21,5 (günde 1.340 adım) sapma — telefon her zaman taşınmadığı için. | n özette yok. |
+| Amagasa 2019, JMIR Mhealth Uhealth | 30626569 | 10.2196/10418 | Kesitsel doğrulama, 7 gün serbest yaşam | 54 yetişkin (ort. 31 yaş) | iPhone, bele takılan adımsayara göre günde %12 (1.277 adım) az saydı; korelasyon 0,78. Telefonu "nadiren taşıyanlarda" eksik sayım günde ~3.036, "hemen hep taşıyanlarda" ~929 adım. | Genç, küçük; kolaylık örneklemi. |
+| Höchsmann 2018, Scand J Med Sci Sports | 29460319 | 10.1111/sms.13074 | Laboratuvar + parkur, video ölçüt | 20 kişi (18–25 ve 45–70 yaş) | iPhone SE pantolon cebi, omuz çantası ve sırt çantasında ≥3,2 km/sa yürüyüşte ve serbest parkurda küçük hata (MAPE < %3); **telefonun konumu doğruluğu etkilemedi**. | Küçük; tek telefon modeli; elde taşıma test edilmemiş. |
+| Höchsmann 2020, Physiol Meas | 31851949 | 10.1088/1361-6579/ab635f | Serbest yaşam, 3 gün, ayak bileği ölçütü | 30 sağlıklı yetişkin | Serbest yaşamda iPhone (cep) dahil tüm cihazlar adımı ölçüte göre **%20'den fazla** az saydı; kısa ve aralıklı yürüme dönemlerinde hata büyük. | Ölçüt (StepWatch) de bir cihaz; küçük. |
+| Werner 2023, Sci Rep | 37005465 | 10.1038/s41598-023-32550-3 | Doğrulama + test-tekrar test | 27 çocuk, 28 yetişkin, 28 yaşlı | Apple Sağlık uygulamasının (iPhone) **yürüme hızı** ölçümü tüm yaş gruplarında ataletsel sensör sistemiyle iyi uyumlu; adım uzunluğu yetişkin ve yaşlıda iyi, çocukta zayıf. | 6 dk yürüme testi; tek ortam. |
+| Gilgen-Ammann 2020, JMIR Mhealth Uhealth | 32396865 | 10.2196/17118 | Cihaz doğrulama | 8 spor saati (Apple dahil), 3×12 ölçüm | GNSS mesafeleri ortalama %3,2–6,1 mutlak hata; genelde **eksik** ölçüm (%9'a kadar); kent ve ormanda daha kötü, pistte daha iyi. | Saatler, telefon değil; model eski olabilir. |
+| Benson 2015, J Sports Sci | 25555093 | 10.1080/02640414.2014.994659 | Doğrulama, 400 m pist | 40 yetişkin | iPhone GPS uygulaması 2,4 km'lik mesafeyi ve ortalama hızı az ölçtü; denemeler arası fark ≤%3. | Eski iPhone ve uygulama; pist (açık alan). |
+
+**Bizim için sonuç**
+- Kısa, sürekli yürüyüşte iPhone ve Apple Watch adımı iyi sayıyor (Höchsmann 2018, Duncan 2018 laboratuvar, Veerabhadrappa 2018); **cep, çanta, sırt çantası farkı bulunmadı** (Höchsmann 2018). Elde taşıma (telefonu elde sallamadan tutmak) için PubMed'de doğrulama bulunamadı.
+- Gün toplamında telefon adımı **eksik** sayar (%12–22; Amagasa 2019, Duncan 2018, Höchsmann 2020) çünkü telefon her zaman üzerimizde değil. Nef "bugün az yürüdün" yorumunu yaparken bunu bilmeli: telefon adımı düşükse ve saat verisi yoksa yargı değil soru ("telefon yanında mıydı?"). Eşik **VARSAYIM**.
+- Yürüyüş algılama bildirimi için: kısa aralıklı yürümede hata büyük (Höchsmann 2020) → bildirim ancak **sürekli** birkaç dakikalık yürüyüşten sonra gelir; süre eşiği (ör. 5 dk) **VARSAYIM**.
+- 250 m'de tempo: GPS mesafesi kent içinde %3–9 eksik olabilir (Gilgen-Ammann 2020, Benson 2015). 250 m'lik bölümde 10–20 m hata tempoyu ±%4–8 oynatır → anons "yaklaşık" dilinde, saniye hassasiyeti vermeden ("tempo yaklaşık 11 dakika/km"); ilk 250 m anonsu atlanabilir (GPS oturma süresi). Bu sayılar **VARSAYIM**. iPhone yürüme hızı (Apple Sağlık) yetişkin ve yaşlıda geçerli (Werner 2023) — ekranda gösterilebilir.
+- Enerji harcaması (kalori) gösterilmez ya da "tahmini" diye işaretlenir (Choe 2025, Lambe 2026: hata sıklıkla büyük).

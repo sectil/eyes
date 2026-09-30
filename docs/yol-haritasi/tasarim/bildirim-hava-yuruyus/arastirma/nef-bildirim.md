@@ -527,3 +527,159 @@ Karşılaştırma: canlı yöntemin maliyeti küçük ama kişi sayısıyla doğ
 hata dalları getirir; üstelik hava içeren kısmı hiç üretemez. Banka yönteminin maliyeti sabittir ve çalışma anında
 sıfırdır.
 
+---
+
+## 5. Gizlilik ve rıza
+
+### 5.1 Hangi yaklaşımda sunucuya ne gider
+
+| Yaklaşım | Çalışma anında sunucuya giden | Modelin gördüğü | Yapım anında giden |
+|---|---|---|---|
+| A · el yazımı şablon | hiçbir şey | — | — |
+| B · canlı model | kişinin sinyalleri (düzen, basamak, modül özetleri; `coach` paketine benzer); hava, konum, sağlık **gidemez** | aynı | — |
+| C · banka (öneri) | hiçbir şey | — | yalnız soyut etiketler ve istem (geliştirici makinesinden; kişisel veri yok) |
+
+Banka uygulamayla birlikte gelir. İleride sunucudan indirilen bir banka dosyası düşünülürse bu istek de kişisel veri
+taşımaz (yalnız IP; statik dosya); yine de ilk sürümde gömülü kalması önerilir, çünkü her banka sürümü metin kapısından
+(plan §H) geçmeli.
+
+### 5.2 Mevcut `coach` rızası bu amacı kapsar mı
+
+`lib/consent.js` `CONSENTS.coach` (sürüm 1):
+
+- Neden: "Nef'in sana günlük tek bir içgörü ve öneri yazması (tıbbi tavsiye değildir)".
+- Ne: son 7 günün özetleri (düzen, görme ortancası ve farkı, okuma hızı, oyun puanları, günün saati).
+- Nerede: yurt dışı, Vercel ve OpenRouter.
+
+Bildirim metni üretmek **başka bir amaçtır** (günlük tek içgörü değil; gün içinde birden çok, kilit ekranına düşen
+metin). `YOL.nef.md` §7.4'teki v2 taslağı da ("günlük bir öneri, haftalık ve aylık bir değerlendirme") bildirimleri
+anmıyor. KVKK'da açık rıza belirli bir konuya ilişkin olmalıdır (her amaç için ayrı); repodaki düzen de bunu uyguluyor
+("Her amaç ayrı izin", `consent.js:2`). Bu yüzden:
+
+- **C (öneri):** yeni rıza **gerekmez**. Nef dili telefonda, veri telefondan çıkmadan kurulur; `YOL.nef.md` §8.3'teki
+  "rızasız kural tabanlı Nef" önerisinin aynısıdır.
+- **B seçilirse:** ayrı anahtar `coachNotify` (ya da `coach` sürümünde ayrı bir kutu), kendi dört satırıyla: Ne (düzen ve
+  basamak özetleri; hava, konum, sağlık verisi gitmez), Neden (bildirimlerindeki cümlelerin sana göre yazılması), Nerede
+  (Vercel ve OpenRouter, yurt dışı), Ne kadar (sunucu içeriği kaydetmez; kapatınca gönderim durur). Hukukçu onayı
+  gerekir (repo notu: "Bu metinler hukukçu onayından geçmedi", `consent.js:6`).
+
+### 5.3 Öteki rızalarla sınırlar
+
+| Veri | Rıza | Bildirimde kullanım | Not |
+|---|---|---|---|
+| Hava, yaklaşık konum, il adı | `weather` v1 (plan §E.2) | yağmur haberi, yürüyüş algılamadaki hava cümlesi, M7 | "Neden" satırı "istenirse yağmur bildirimi" diyor; hava cümlesinin yürüyüş algılama bildiriminde kullanılması bu satıra eklenmeli (VARSAYIM; hukukçu) |
+| Adım, yürüyüş saati alışkanlığı | `health` v2 | W1, W7, W8 (saat), D8 (dün yürüdü) | v2 "Neden": "yürüyüş hatırlatması … bu telefonda" — yürüyüş algılama ve eşlik teklifi yeni bir amaçsa `health` v3 gerekir (ayrı ajanın konusu; hukukçu) |
+| Hareket algılama (hangi sensör olursa) | iOS izni + gerekirse ayrı rıza | D1–D10 | ayrı ajan |
+| Kilit ekranı | — | sağlık sayısı ve görme sonucu asla; saat ve sıcaklık serbest | kişi iOS'ta "Önizlemeleri göster"i kapatabilir |
+
+---
+
+## 6. Çevrimdışı yedek, denetim ve ses
+
+### 6.1 Yedek sırası (çalışma anında; hepsi telefonda)
+
+1. En özel hücre (örn. `rain.evening × walkHabit.before × planned.morning`).
+2. Daha genel hücre (`rain.evening`).
+3. Türün genel hücresi (`rain.any`: yalnız olgu cümlesi, Nef notu yok ya da nesne notu).
+4. Bugünkü sabit metinler (`notifyPlan.js` `TEXTS`) ve plan §E.6'daki düz yağmur metni.
+
+Model çalışma anında hiç çağrılmadığı için "model cevap vermezse" dalı yoktur. B seçilirse: zaman aşımı, 4xx/5xx, süzgeç
+reddi ya da `coachNotify` rızası yoksa aynı sıra kullanılır; plan kurulurken cevap yoksa bildirim bekletilmez.
+
+Çalışma anı bekçisi (ucuz, her doldurmada): açık kalmış `{` yok; başlık ≤ 30, gövde ≤ 110; doldurulmuş metindeki her
+rakam dizisi veri nesnesinde var; `dayWord` bildirimin çalacağı güne göre doğru. Biri tutmazsa bir üst yedeğe düşülür ve
+telefondaki hata sayacı artar (sunucuya gitmez).
+
+### 6.2 Yapım anı denetimi (derlemede, test olarak)
+
+- `nefBank.test.js`: her öğe şemaya uyar; yer tutucusuz metinde rakam ve sayı sözcüğü yok; yasak kalıp yok; yer tutucular
+  hücrenin izin listesinde; hava sözcükleri hücrenin sözlüğünde; en uzun doldurmayla sınırlar tutuyor; `evidence` anahtarı
+  `sources.js`'te var; aynı hücrede iki öğe birebir aynı değil.
+- `FORBIDDEN` listesi tek yerde tutulur (`coachCore.js`) ve hem koç kartı hem banka için kullanılır (tek kaynak ilkesi).
+
+### 6.3 Ses: "ekrandaki cümle = sesteki cümle"
+
+- Bildirim sesli değildir. Ama "Eşlik edelim mi?"ye dokununca açılan yürüyüş koçu sesli konuşur ve sesleri ElevenLabs
+  ile önceden üretilmiş dosyalardır (`lib/voicePack.js:1-3`: uygulama ağa çıkmaz). Dinamik ya da yer tutuculu bir cümle
+  seslendirilemez.
+- Tasarım: bankada `voice: true` işaretli ayrı bir alt küme (`walkVoice`) olur. Bu öğeler **rakamsız ve yer tutucusuzdur**
+  ("Hava ılık, yürüyüş için güzel." / "Yağmur yaklaşıyor; kısa bir tur iyi olur."). Seslendirme betiği yalnız bu öğeleri
+  üretir; ekranda aynı metin altyazı olarak yazar. Sayı (23 derece) cümlenin içinde değil, yanında ayrı bir etiket olarak
+  görünür; böylece ekranda yazan **cümle** ile söylenen cümle birebir aynı kalır.
+- Bildirim ile ilk ses cümlesi aynı hücreden seçilir (`walk.good` → sesli `walk.good` öğesi). Bildirim "Hava 23 derece,
+  ılık…" der, ses "Hava ılık, yürüyüş için güzel." der; ikisi çelişmez, çünkü ikisi de aynı `tempWord`'den gelir.
+- Sayıyı seslendirmek istenirse tek güvenli yol kapalı kümedir: "eksi on"dan "kırk beş"e 56 sıcaklık parçası ayrı
+  üretilir ve birleştirilir. Tonlama kopukluğu riski vardır (VARSAYIM); ilk sürümde önerilmez.
+- Test: her `voice: true` öğenin metni `public/voice/index.json`'daki metinle birebir aynı; bu öğelerde rakam ve `{` yok.
+
+---
+
+## 7. Değerlendirme
+
+### 7.1 Otomatik sınav: 50 senaryo (vitest; her derlemede)
+
+Sabit veriyle (sabit "şimdi", sabit WeatherKit örnekleri) kural motoru + banka + doldurma uçtan uca çalıştırılır.
+
+| Grup | Sayı | Senaryolar |
+|---|---|---|
+| Yağmur | 15 | her saat bölümü; 00.00 ve 23.00 sınırları; gece yarısını aşan yağmur (23.00–01.00); tam %50; akşam kurulup sabah çalan ("Dün akşamki tahmine göre", `dayWord` = bugün); 18 saatten eski tahmin → bildirim yok (plan §E.6); yağmur yok → bildirim yok; kısa/uzun/gün boyu; yürüyüş saati önce/denk/sonra/yok |
+| Yürüyüş algılama | 15 | sıcaklık sınırları 4/5, 11/12, 17/18, 24/25, 29/30; eksi derece; 2 saatte yağmur; güneş batıyor; rüzgâr; yağmur dindi; hava yok; hava bayat; iOS 15 (hava yok) |
+| Modül | 15 | her canlı modül; basamak; 5 gün ara; 14+ gün ara (yumuşak); yeni açılan; rekor; haftalık test günü; iyi oluş günü; 28. gün; görmede kırmızı uyarı varken (bildirimde görme sözü yok) |
+| Kenar | 5 | en uzun modül adı + en uzun değerler (uzunluk); eksik yer tutucu değeri → yedeğe düşme; bankadan öğe silinmiş; bildirim ana anahtarı kapalı; aynı gün aynı öğe ikinci kez seçilmiyor |
+
+Her senaryoda denetlenen:
+
+| # | Denetim | Nasıl |
+|---|---|---|
+| S1 | sayı eşleşmesi | metindeki her `\d+([.,]\d+)?` dizisi veri nesnesindeki bir değerin biçimlenmiş hâline eşit |
+| S2 | saat biçimi ve eki | `\b([01]\d|2[0-3])\.[0-5]\d('(de|da|te|ta|den|dan|ten|tan|e|a|ye|ya))?` ve ek §3.2 tablosuyla aynı |
+| S3 | uzunluk | başlık ≤ 30, gövde ≤ 110 |
+| S4 | yasak kalıp | §3.5 listesi + `FORBIDDEN` |
+| S5 | hava sözlüğü tutarlılığı | yağmur yoksa "yağmur/şemsiye" yok; `walk.good` değilse "güzel" yok; `noWeather`'da sıcaklık yok |
+| S6 | gün doğruluğu | `dayWord` bildirimin çalacağı güne göre |
+| S7 | tekrar | aynı tür için 14 gün içinde aynı öğe yok (VARSAYIM süre); başlık ile gövde başı aynı değil |
+| S8 | ses = ekran | `voice: true` öğeler index.json ile birebir; rakam ve yer tutucu yok |
+| S9 | kilit ekranı gizliliği | adım, kalori, nabız, görme sözcükleri yok |
+| S10 | kanıt bağı | her öğenin `evidence` anahtarı `sources.js`'te var |
+
+Geçme koşulu: 50/50 senaryo, S1–S10 hatasız. Bu, JEV_GOZ_KOCU'daki "uydurma %0" kapısının bildirim karşılığıdır.
+
+### 7.2 İnsan değerlendirmesi (banka sürümü başına)
+
+- Okurlar: sahip + iki ana dili Türkçe okur (biri 50 yaş üstü; hedef kitlede yaşlı kullanıcı var, BILDIRIM_PLANI "65 yaş
+  üstü ayrı raporlanır"). Plan §H'deki "iki bağımsız model incelemesi (TDK yazımı, anlatım bozukluğu)" bunun önünde durur.
+- Yöntem: her okura 60 doldurulmuş bildirim, veri nesnesiyle yan yana, karışık sırada; yarısı Nef bankasından, yarısı bugünkü
+  düz metinlerden (kör). Beş ölçüt 1–5: doğallık, incelik ("işime yarar bir şey söyledi mi"), ton (baskısız, sıcak),
+  doğruluk (veriyle çelişiyor mu), bıkkınlık ("her gün görsem sıkar mı"). Ayrıca evet/hayır: "yanıltıcı mı?"
+- Kabul (VARSAYIM eşikler): "yanıltıcı" 0; doğruluk her öğede 5; doğallık ve ton ortancası ≥ 4; incelikte Nef bankası düz
+  metinden yüksek (ortanca farkı ≥ 1). Düşük puanlı öğe bankadan çıkar.
+
+### 7.3 Saha ölçümü (yayından sonra, telefonda)
+
+- Mevcut deney düzeni (`notifyPlan.js` zarı, `notifyLog.js`) gönder/sessiz karşılaştırması yapıyor. Nef metni ile düz metni
+  karşılaştırmak ikinci bir kol ister; iki kolu birden açmak örneklemi böler (VARSAYIM: 1.000 kişinin altında anlamlı sonuç
+  beklenmez). Öneri: önce yalnız Nef metnine geçip bildirimden sonraki 30 dakikada tamamlanan eylemi (Klasnja 2019 ölçüsü,
+  BILDIRIM_PLANI:205) önceki dönemle karşılaştırmak; açılma tek başına başarı sayılmaz (Bell 2023).
+- Bıkkınlık belirtisi: art arda 3 yok sayma kuralı aynen (BILDIRIM_PLANI:182).
+
+---
+
+## 8. Sahibin kararı gereken sorular
+
+1. Mimari C (kural motoru + model üretimli, denetlenmiş, gömülü banka) — onay? Canlı model bildirimlerde kullanılmaz.
+2. Bildirimde sayılar rakamla mı ("5 gün ara verdin") yazıyla mı ("Beş gün")? Önerim: rakam.
+3. Sıcaklık sözcüğü gerçek sıcaklığa mı, hissedilen sıcaklığa mı göre? Önerim: hissedilen; eşikler §3.3.
+4. Hafif mizah bankada kalsın mı (≤ %20, haftada ≤ 1)?
+5. Yürüyüş algılama bildiriminde hava cümlesi `weather` rızasının "Neden" satırına eklensin mi (hukukçu)?
+6. Banka üretiminde daha güçlü bir model kullanılsın mı (maliyet farkı birkaç dolar)? Önerim: evet; yargıç başka aileden.
+7. Sesli yürüyüş koçunda sayı hiç söylenmesin (ekranda ayrı etiket) — onay?
+
+## 9. VARSAYIM listesi
+
+Token/karakter oranı; kilit ekranı satır sayıları; sıcaklık, rüzgâr, saat bölümü, yağmur süresi eşikleri; `walk.good`
+tanımı; hava önbelleğinin yürüyüş metni için geçerlilik süresi (6 sa); hücre ve banka boyutu; mizah oranı; 14 günlük
+tekrar yasağı; insan değerlendirmesi eşikleri; yargıcın başka aileden seçilmesinin gerekçesi; sayı sesi birleştirmede
+tonlama riski; atıflı bildirimde Nef notunun 85 karakter sınırı; D10'daki güvenlik ipucunun kabul edilebilirliği.
+Bakılmayanlar: Capacitor Local Notifications'ın `subtitle` desteği; WeatherKit'in Türkiye için güneş batışı alanı;
+gpt-5-nano'nun gizli akıl yürütme token miktarı; modellerin Türkçe kalitesi (ücretli çağrı yapılmadı); OpenRouter
+`:batch` sürümlerinin nasıl çalıştığı.
