@@ -25,6 +25,10 @@ export default {
   gates: {},
   storageKeys: [DALGA_OPTS_KEY],
   home: { section: 'practice', order: 35 },
+  // "Bana hatırlat" (bildirim PLAN.v1 §A.1 modül tablosu: kendi rotası, `calm`; uyku kipi hatırlatılmaz: hatırlatma
+  // yalnız 'dalga' ekranını açar). Metin lib/remindTexts.js DA; kaynak dewitte2019 (kanıt kapısı 2, kanit-2-onay.md).
+  // Günlük yola girmez: kart her bitişte (inPath yok). VARSAYIM: plan tablosunda defaultTime yok (FALLBACK_TIME).
+  remind: { route: 'dalga', window: 'calm', science: ['dewitte2019'] },
   sessions: {
     match: (s) => s?.type === SESSION_TYPE,
     countsTowardGoal: true,

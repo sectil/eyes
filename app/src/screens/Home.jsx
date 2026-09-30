@@ -195,12 +195,13 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   // çalışması varsa. Saatlik/günlük sınır dolmuşsa o mola başlar (5 dk yetmez). Karar lib/progression.js
   // restDecision'da: yeni kullanıcının ilk günlerinde (1. bölümün göz payı dolmamışken) mola ancak kalan göz
   // çalışması bütçeyi aşacaksa başlar (§3.A.8-6); öteki her durumda bugünkü kural.
-  const startStop = (route) => {
+  // fromPath: yolun durağı açılıyor (App ctx.fromPath; yol içinde "Bana hatırlat" kartı çıkmaz, bildirim PLAN.v1 §A.2)
+  const startStop = (route, fromPath = true) => {
     if (route === 'breath-rest') {
       const why = restDecision(eyeStatus(), plan, progression)
       if (why) beginRest(why)
     }
-    onStart(route)
+    onStart(route, { fromPath })
   }
   // Göz molası önerisi ("Nefes · 5 dk", sakin seçenek "5 dk mola"; lib/homeSuggest.js 'breath-rest' verir): yolun
   // durağı değildir. Her zaman 5 dk'lık nefes açılır ('breath-5', modules/breath/view.jsx) ve mola bugünkü kuralla
@@ -209,7 +210,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   // Büyük düğme yolun sıradaki durağıysa (kind 'path'; sıradaki Nefes durağı da 'breath-rest' taşır) durak kendi
   // basamağıyla açılır: düğmenin yazdığı süre ("Nefes · 3 dk") açılan seansın süresidir.
   const startSuggest = (route, kind = null) => {
-    if (route !== 'breath-rest' || kind === 'path') return startStop(route)
+    if (route !== 'breath-rest' || kind === 'path') return startStop(route, kind === 'path')
     const why = restDecision(eyeStatus(), plan, null)
     if (why) beginRest(why)
     onStart(SUGGEST_BREATH)

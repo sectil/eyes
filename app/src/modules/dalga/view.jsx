@@ -13,6 +13,7 @@ export default {
       sessions={ctx.sessions}
       onSave={(s) => { ctx.store.addSession(s); ctx.refresh() }}
       onExit={() => ctx.go('home')}
+      remindField={ctx.remindField?.('dalga') ?? null}
     />
   ),
 }

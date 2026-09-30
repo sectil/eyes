@@ -173,6 +173,10 @@ export default function App() {
   // Yerinde profil sorusu (lib/profileQuestions.js; modül manifest ask.before / ask.after): { ids, then, back } | null
   const [askFor, setAskFor] = useState(null)
   const entryTests = useRef(0) // ekrana girerken test sayısı (ask.after: bu ekranda yeni test kaydedildi mi)
+  // Bugünün yolundan açılan rota (Home startStop → go(route, { fromPath: true })). Durağı modülün kendi rotasını açan
+  // modüllerde (tek-bakis, quick-look) yol içi ayrımı rotadan çıkmaz; ctx.fromPath ile görünüm inPath verir (bildirim
+  // PLAN.v1 §A.2 "Birim yoldur"). Araya giren soru, göz izi ya da mola ekranı aynı rotaya döndüğü için işaret korunur.
+  const pathRoute = useRef(null)
   // Bildirim planı: yeniden kurma tetiği (kayıt dışı olaylar: oturum, dokunuş, öne gelme) ve bildirim izni
   const [planTick, setPlanTick] = useState(0)
   const replan = () => setPlanTick((t) => t + 1)
@@ -229,7 +233,9 @@ export default function App() {
     const st = store.get().settings
     return normalizeProfile(st.profile ?? profileFromScreening(st.screening))
   }
-  const go = (s, { noAsk = false } = {}) => {
+  const go = (s, { noAsk = false, fromPath = false } = {}) => {
+    if (fromPath) pathRoute.current = s
+    else if (s !== pathRoute.current) pathRoute.current = null
     // Test bitti, ekrandan çıkılıyor: modülün "sonra sor" sorusu (ör. okuma sonrası yakın zorluk) bir kez
     const after = registry.forRoute(screen)?.ask?.after
     if (!noAsk && after && s !== screen && store.get().tests.length > entryTests.current) {
@@ -1151,7 +1157,7 @@ export default function App() {
   const view = mod && viewFor(mod.id)
   if (view) {
     // refresh: kayıt (mola/su habit-log, nefes oturumu) ya da çalışma oturumu değişti → bildirim planı da yenilenir
-    const ctx = { native: { ...native, trueDepth: camOk }, settings, tests, sessions, exercise, common, go, back, refresh: () => { refresh(); replan() }, store, saveTests, focusBlock, remindField }
+    const ctx = { native: { ...native, trueDepth: camOk }, settings, tests, sessions, exercise, common, go, back, refresh: () => { refresh(); replan() }, store, saveTests, focusBlock, remindField, fromPath: pathRoute.current === screen }
     return (
       <>
         {view.render(ctx, screen)}

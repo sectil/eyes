@@ -24,7 +24,7 @@ import '../styles/quicklook.css'
 
 const deg2px = (deg, pxPerMm, mm) => Math.tan((deg * Math.PI) / 180) * mm * pxPerMm
 
-export default function QuickLook({ sessions = [], settings, calibration, trueDepth = false, onExit, onFinish }) {
+export default function QuickLook({ sessions = [], settings, calibration, trueDepth = false, onExit, onFinish, remindField = null }) {
   const sig = profileSignals(settings?.profile)
   const [phase, setPhase] = useState(() => (sig.flashSafe === false ? 'blocked' : !howtoSeen('quick-look') ? 'howto' : 'intro'))
   const [stage, setStage] = useState('fix') // fix | show | ask-center | ask-pos | feedback
@@ -252,6 +252,8 @@ export default function QuickLook({ sessions = [], settings, calibration, trueDe
           <span className="muted small">Araştırmalardaki doz: haftalara yayılmış yaklaşık 10 saat, haftada 3–4 seans. Günde birkaç dakikalık düşük dozun etkisi bilinmiyor.</span>
           {result.eccDeg != null && <span className="muted small">Kenar uzaklığı {result.eccDeg}° · {Math.round((result.distanceMm ?? PARAMS.distanceMm) / 10)} cm · yalnızca kendi önceki sonuçlarınla karşılaştır</span>}
         </section>
+        {/* "Bana hatırlat" (bildirim PLAN.v1 §A.2): App ctx.remindField(route, { inPath }) verir; yoldan açılan turda (view.jsx) null */}
+        {remindField}
         <button type="button" className="btn" onClick={start}><RotateCcw size={18} aria-hidden="true" /> Bir tur daha</button>
         <button type="button" className="btn btn-ghost" onClick={onExit}>Bitir</button>
       </main>

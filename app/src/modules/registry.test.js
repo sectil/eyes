@@ -142,9 +142,11 @@ describe('modül soketi: remind', () => {
   const hatasi = (remind, extra) => validateRemind(ile(remind, extra)).join(' ')
 
   // B1a ikinci tur (sahip kararı 2026-09-30, metin-B1a-onay.md): yalnız kaynağı doğrulanmış dört modül remind alır
-  it('gerçek modüllerde remind yalnız routine, blink, yoga, gokyuzu; sorun yok', () => {
-    expect(registry.modules.filter((m) => m.remind != null).map((m) => m.id).sort()).toEqual(['blink', 'gokyuzu', 'routine', 'yoga'])
-    expect(registry.reminders().map((x) => x.module).sort()).toEqual(['blink', 'gokyuzu', 'routine', 'yoga'])
+  // Kanıt kapısı 2 (bildirim-hava-yuruyus/kanit-2-onay.md): tek-bakis, quick-look, dalga eklendi
+  it('gerçek modüllerde remind yalnız blink, dalga, gokyuzu, quick-look, routine, tek-bakis, yoga; sorun yok', () => {
+    const seven = ['blink', 'dalga', 'gokyuzu', 'quick-look', 'routine', 'tek-bakis', 'yoga']
+    expect(registry.modules.filter((m) => m.remind != null).map((m) => m.id).sort()).toEqual(seven)
+    expect(registry.reminders().map((x) => x.module).sort()).toEqual(seven)
     expect(registry.remindProblems).toEqual([])
   })
   it('geçerli remind: varsayılanlar dolar, pencere türden gelir', () => {
@@ -260,11 +262,12 @@ describe('modül soketi: remind (B1a manifestleri)', () => {
     expect(r.gokyuzu).toMatchObject({ route: 'gokyuzu', window: 'calm', science: ['yamashita2021', 'talens2022'] })
     expect(registry.remindProblems).toEqual([])
   })
-  it('kaynağı olmayan modüller bu turda remind almaz; yoga radin2025 taşımaz', () => {
-    for (const id of ['snake', 'track', 'tek-bakis', 'quick-look', 'fark-ettin', 'notice', 'dalga', 'yon']) {
+  // Kanıt kapısı 2 (sahip onayı 2026-09-30, kanit-2-onay.md): tek-bakis, quick-look, dalga kaynağıyla girdi
+  it('kaynağı olmayan modüller remind almaz; yoga radin2025 taşımaz', () => {
+    for (const id of ['snake', 'track', 'fark-ettin', 'notice', 'yon']) {
       expect(byId(id)?.remind, id).toBeUndefined()
     }
-    expect(registry.reminders().map((x) => x.module).sort()).toEqual(['blink', 'gokyuzu', 'routine', 'yoga'])
+    expect(registry.reminders().map((x) => x.module).sort()).toEqual(['blink', 'dalga', 'gokyuzu', 'quick-look', 'routine', 'tek-bakis', 'yoga'])
     expect(byId('yoga').remind.science).not.toContain('radin2025')
   })
 })

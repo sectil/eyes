@@ -27,6 +27,10 @@ export default {
   gates: { eyeBudget: 'eye' },
   ask: { before: ['seizure'] }, // flaşlı görevden hemen önce (lib/profileQuestions.js)
   home: { section: 'practice', order: 5 },
+  // "Bana hatırlat" (bildirim PLAN.v1 §A.1 modül tablosu: kendi rotası, `move`; metin lib/remindTexts.js HB). Kaynak
+  // ball2002 (kanıt kapısı 2, kanit-2-onay.md). Yoldan açılınca kart çıkmaz (view.jsx). VARSAYIM: plan tablosunda
+  // defaultTime yok; veri yokken lib/moduleRemind.js FALLBACK_TIME.
+  remind: { route: 'quick-look', window: 'move', science: ['ball2002'] },
   sessions: {
     match: (s) => s.type === SESSION_TYPE,
     countsTowardGoal: true,

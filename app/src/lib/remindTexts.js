@@ -21,6 +21,8 @@ export const MERGED_KEY = 'remind.merged'
 // Her cümlenin kaynağı onay dosyasındaki "Kaynak:" satırından. null: cümleye uyan kaynak yok (geçici bell2023 bağı
 // kullanılmaz, sahip kararı 2); bildirim modülün kendi science havuzundaki kaynağı taşır. remind.path: singh2024
 // (karar 3). Birleşik: ilk modülün evidence'ı (kendi anahtarı yok).
+// Tek Bakışta chung2004, Hızlı Bakış ball2002, Dalga dewitte2019: kanıt kapısı 2 (bildirim-hava-yuruyus/kanit-2-onay.md,
+// sahip onayı 2026-09-30); görünür bilim satırı yalnız kartta (SCI_LINES metin-B1a-onay.md §3 listesiyle sınırlı).
 export const TEXTS = Object.freeze({
   'remind.path': [
     { id: 'YL1', title: 'Bugünün yolu hazır', body: 'Birkaç dakikan varsa yola başlayabilirsin. Duraklar sırayla açılır.', source: 'singh2024' },
@@ -48,14 +50,14 @@ export const TEXTS = Object.freeze({
     { id: 'CE3', title: 'Çemberler', body: 'Gözle izleme pratiği hazır. Seçim senin: şimdi ya da sonra.', source: null },
   ],
   'remind.tek-bakis': [
-    { id: 'TB1', title: 'Tek Bakışta', body: 'Harfler kısa süre görünür. Tek bakışta kaç tanesini tanırsın?', source: null },
-    { id: 'TB2', title: 'Kısa bir bakış turu', body: 'Tek Bakışta hazır. Birkaç dakikan varsa dokun, başla.', source: null },
-    { id: 'TB3', title: 'Tek Bakışta hazır', body: 'Bakışını ortada tut, harfleri tanı. İstersen şimdi bir tur.', source: null },
+    { id: 'TB1', title: 'Tek Bakışta', body: 'Harfler kısa süre görünür. Tek bakışta kaç tanesini tanırsın?', source: 'chung2004' },
+    { id: 'TB2', title: 'Kısa bir bakış turu', body: 'Tek Bakışta hazır. Birkaç dakikan varsa dokun, başla.', source: 'chung2004' },
+    { id: 'TB3', title: 'Tek Bakışta hazır', body: 'Bakışını ortada tut, harfleri tanı. İstersen şimdi bir tur.', source: 'chung2004' },
   ],
   'remind.quick-look': [
-    { id: 'HB1', title: 'Hızlı Bakış', body: 'Kısa bir dikkat turu hazır. Dokun, tur başlasın.', source: null },
-    { id: 'HB2', title: 'Bir dikkat turu', body: 'Hızlı Bakış hazır. Birkaç dakikan olduğunda dokunman yeter.', source: null },
-    { id: 'HB3', title: 'Hızlı Bakış hazır', body: 'Ortada bir araç, kenarda bir yıldız belirir. İkisini de yakala.', source: null },
+    { id: 'HB1', title: 'Hızlı Bakış', body: 'Kısa bir dikkat turu hazır. Dokun, tur başlasın.', source: 'ball2002' },
+    { id: 'HB2', title: 'Bir dikkat turu', body: 'Hızlı Bakış hazır. Birkaç dakikan olduğunda dokunman yeter.', source: 'ball2002' },
+    { id: 'HB3', title: 'Hızlı Bakış hazır', body: 'Ortada bir araç, kenarda bir yıldız belirir. İkisini de yakala.', source: 'ball2002' },
   ],
   'remind.fark-ettin': [
     { id: 'FE1', title: 'Cadde oyunu', body: 'Ekrandaki caddede bir görev, sonra birkaç soru. Hazırsan dokun.', source: null },
@@ -73,9 +75,9 @@ export const TEXTS = Object.freeze({
     { id: 'YG3', title: 'Yoga', body: 'Sesli bir ders ister misin? Süresini sen seçersin.', source: 'moszeik2025' },
   ],
   'remind.dalga': [
-    { id: 'DA1', title: 'Dalga', body: 'Birkaç dakikalık bir ses arası. Sakin, Güç ya da Motivasyon: seçim senin.', source: null },
-    { id: 'DA2', title: 'Kısa bir ses arası', body: 'Kulaklığın yakındaysa tak. Dalga hazır, birkaç dakika yeter.', source: null },
-    { id: 'DA3', title: 'Dalga hazır', body: 'Birkaç dakika dinlemek ister misin? Dokun, ses başlasın.', source: null },
+    { id: 'DA1', title: 'Dalga', body: 'Birkaç dakikalık bir ses arası. Sakin, Güç ya da Motivasyon: seçim senin.', source: 'dewitte2019' },
+    { id: 'DA2', title: 'Kısa bir ses arası', body: 'Kulaklığın yakındaysa tak. Dalga hazır, birkaç dakika yeter.', source: 'dewitte2019' },
+    { id: 'DA3', title: 'Dalga hazır', body: 'Birkaç dakika dinlemek ister misin? Dokun, ses başlasın.', source: 'dewitte2019' },
   ],
   'remind.gokyuzu': [
     { id: 'GY1', title: 'Gökyüzü molası', body: 'Ekrandan başını kaldır, 2 dakika gökyüzüne bak.', source: 'yamashita2021' },

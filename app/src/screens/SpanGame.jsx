@@ -56,7 +56,7 @@ function Profile({ profile }) {
 }
 
 // onSave(kayıt): tur bitince (kart görülmeden de kayıt düşer); onExit(): çıkış
-export default function SpanGame({ sessions = [], settings, calibration, onSave, onExit }) {
+export default function SpanGame({ sessions = [], settings, calibration, onSave, onExit, remindField = null }) {
   const blocked = profileSignals(settings?.profile).flashSafe === false
   const [phase, setPhase] = useState(blocked ? 'blocked' : 'intro') // blocked | intro | run | result | fact
   const [round, setRound] = useState(null)
@@ -243,6 +243,8 @@ export default function SpanGame({ sessions = [], settings, calibration, onSave,
           )}
         </section>
         <div className="grow" />
+        {/* "Bana hatırlat" (bildirim PLAN.v1 §A.2): App ctx.remindField(route, { inPath }) verir; yoldan açılan turda (view.jsx) null */}
+        {remindField}
         <button className={`btn${factChoice ? '' : ' btn-ghost'}`} onClick={onExit}>Bitti</button>
       </main>
     )

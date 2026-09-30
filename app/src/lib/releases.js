@@ -12,7 +12,7 @@ export const RELEASES = [
     title: '30 Eylül, ikinci güncelleme',
     items: [
       // B1a (bildirim planı, sahip onaylı metinler 2026-09-30). Cihazda denenmedi.
-      { kind: 'new', text: "Bana hatırlat: göz egzersizi, göz kırpma, yoga ve gökyüzü molası bitince günde en çok 3 saat için hatırlatma kurabilirsin. Saati sen seçersin; istersen Nef senin kayıtlarına bakarak seçer. Hepsi Profil → Bildirimler'de bir arada." },
+      { kind: 'new', text: "Bana hatırlat: göz egzersizi, göz kırpma, Tek Bakışta, Hızlı Bakış, yoga, Dalga ve gökyüzü molası bitince günde en çok 3 saat için hatırlatma kurabilirsin. Saati sen seçersin; istersen Nef senin kayıtlarına bakarak seçer. Hepsi Profil → Bildirimler'de bir arada." },
       { kind: 'new', text: "Gece sessizliği: 23.00–07.00 arasında yeni hatırlatmalar gelmez; saatleri Bildirimler'den değiştirebilirsin. Alarm her zamanki gibi çalar." },
       // Sahibin isteği 2026-09-30: hangi derlemenin kurulu olduğu görünsün (lib/buildInfo.js)
       { kind: 'new', text: "Bilgi → Yenilikler satırında artık kurulu sürüm ve derlendiği gün yazar; en alttaki sürüm satırında da aynısı durur." },

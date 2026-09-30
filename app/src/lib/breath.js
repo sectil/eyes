@@ -92,7 +92,7 @@ export const PATTERNS = {
     level: 'limited',
     blurb: 'Bir burun deliğinden al, diğerinden ver; her iki nefeste taraf değişir.',
     how: ['Sağ elinin başparmağı sağ burun deliğinde, yüzük parmağı solda dursun.', 'Sağı kapat, soldan al; solu kapat, sağdan ver. Sonra sağdan al, soldan ver.', 'Ekran hangi taraftan alıp vereceğini gösterir; burnun tıkalıysa bu kalıbı atla.'],
-    evidence: 'Kaygı azaldı, ama sessiz dinlenmede de azaldı (Telles 2026, n=45). Göz içi basıncını artırmadı (Kulkarni 2022, n=164).',
+    evidence: '15 dakikalık burun nefesinde kaygı puanı düştü, sessiz oturmada da düştü (Gandharva 2026, n=45). Sağlıklı kişilerde dönüşümlü burun nefesinde göz içi basıncı değişmedi (Kulkarni 2022, n=164).',
     // VARSAYIM: süreler; gelenekte tutma da var, burada yok (tutma isteğe bağlı)
     secs: { in: 4, in2: 0, hold: 0, out: 6, hold2: 0 },
     sides: ['L', 'R', 'R', 'L'],
@@ -105,7 +105,7 @@ export const PATTERNS = {
     level: 'limited',
     blurb: 'Burundan al, ağzın kapalı "mmm" diye mırıldanarak ver; titreşimi hisset.',
     how: ['Burnundan al.', 'Ağzın kapalı, "mmm" diye mırıldanarak ver; titreşimi hisset.', 'Sesin başkasını rahatsız etmeyeceği bir yerde yap.'],
-    evidence: '5 dk vızıltılı nefes, yavaş nefese göre toparlanmada kalp ritmi değişkenliğini daha çok artırdı; tansiyon farkı yok (Ghati 2020, n=70, hipertansif). Mırıldanmak burundaki nitrik oksidi artırır (Maniscalco 2003).',
+    evidence: '5 dakikalık vızıltılı nefeste yavaş nefese göre tansiyon farkı yok (Ghati 2020, n=70, hipertansif).',
     // VARSAYIM: süreler (Ghati 2020 süre vermez)
     secs: { in: 4, in2: 0, hold: 0, out: 7, hold2: 0 },
     hum: true,

@@ -354,9 +354,39 @@ export const SOURCES = {
     titleTr: 'Çevrim içi yoga nidra meditasyonunun öznel iyi oluş ve gün içi tükürük kortizolü üzerindeki etkileri: randomize kontrollü çalışma.',
     journal: 'Stress Health', cite: '41(3):e70049', doi: '10.1002/smi.70049', pmid: '40373021',
     design: 'rct', n: '362 kişi, 4 kol (101 + 80 + 74 + 107)',
-    finding: '362 kişilik 2 aylık bir denemede 11 dakikalık yoga nidranın bekleme grubuna göre etkisi küçüktü.',
+    finding: '362 kişilik 2 aylık denemede 11 dakikalık yoga nidranın bekleme grubuna göre anket farkı küçüktü.',
     duration: '2 ay, ideal olarak her gün',
     limit: 'Etkiler küçük (d = 0,08–0,16).',
+  },
+  // Kanıt kapısı 2 (docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/kanit-2-onay.md, sahip onayı 2026-09-30; künye
+  // kanit-2-kaynaklar.md, PubMed). finding onaylı bilim satırı, limit onaylı "Sınırlar" cümlesinin ilgili kısmı.
+  chung2004: {
+    authors: ['Chung STL', 'Legge GE', 'Cheung SH'], year: 2004,
+    title: 'Letter-recognition and reading speed in peripheral vision benefit from perceptual learning.',
+    titleTr: 'Çevresel görüşte harf tanıma, okuma hızı ve algısal öğrenme.',
+    journal: 'Vision Res', cite: '44(7):695-709', doi: '10.1016/j.visres.2003.09.028', pmid: '14751554',
+    design: 'rct', n: '18 gören gönüllü, 3 grup',
+    finding: '18 kişilik küçük bir denemede 4 günlük harf alıştırması, yan görüşte harf tanımayı artırdı.',
+    limit: 'Alıştırma gözün kenarında yapıldı, okumaya etkisi gösterilmedi.',
+  },
+  ball2002: {
+    authors: ['Ball K', 'Berch DB', 'Helmers KF', 'Jobe JB'], year: 2002,
+    title: 'Effects of cognitive training interventions with older adults: a randomized controlled trial.',
+    titleTr: 'Yaşlı yetişkinlerde bilişsel alıştırma programlarının etkileri: randomize kontrollü çalışma.',
+    journal: 'JAMA', cite: '288(18):2271-81', doi: '10.1001/jama.288.18.2271', pmid: '12425704',
+    design: 'rct', n: '2832 kişi (65–94 yaş), 4 kol; hız kolu 712 kişi',
+    finding: '2832 yaşlı yetişkinle yapılan 4 kollu denemede hız alıştırması, çalışılan beceriyi iyileştirdi.',
+    limit: 'Hız kolu 712 kişi, günlük yaşama etkisi görülmedi.',
+  },
+  // basım 2020 (14(2)), e-yayın 2019-07-15; PubMed türü Systematic Review, özet: iki meta-analiz
+  dewitte2019: {
+    authors: ['de Witte M', 'Spruit A', 'van Hooren S', 'Moonen X'], year: 2019,
+    title: 'Effects of music interventions on stress-related outcomes: a systematic review and two meta-analyses.',
+    titleTr: 'Müzik uygulamalarının stresle ilgili ölçümlere etkileri: sistematik derleme ve iki meta-analiz.',
+    journal: 'Health Psychol Rev', cite: '14(2):294-324', doi: '10.1080/17437199.2019.1627897', pmid: '31167611',
+    design: 'meta', n: '104 randomize çalışma, 9617 kişi',
+    finding: '104 denemede, 9617 kişide müzik, bedensel ve hissedilen stres ölçülerinde azalmayla ilişkiliydi.',
+    limit: "Dalga'nın kendi sesleri sınanmadı, müzik terapisi de kapsamda.",
   },
 
   // KOŞULLU: yalnız meditasyon içeriğinde; yoga bildiriminde kullanılmaz.

@@ -61,7 +61,7 @@ const sleepStateOf = (ok, p) => (ok ? 'playing' : p.phase === 'blocked' || p.pha
 // uyku hazırlığı; minutes 0 ise alarma 1 saatten az kalmıştır, çalmaz. onSleepEnd({ planned, seconds, early, auto }):
 // uyku sesi bitince (alarm günlüğüne; kısa da olsa). sleepPreset.session: alarm kurulumundaki "Kur" dokunuşunda
 // başlamış müzik (lib/sleepSession.js); ekran doğrudan uyku ekranı olarak açılır ve ona bağlanır.
-export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = null, onSleepEnd }) {
+export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = null, onSleepEnd, remindField = null }) {
   const [opts, setOpts] = useState(() => loadDalgaOpts())
   const session = sleepPreset?.session ?? null
   const [phase, setPhase] = useState(session ? 'sleep' : sleepPreset ? 'sleep-ready' : 'pick') // pick | before | value | play | after | result | sleep-ready | sleep
@@ -502,6 +502,8 @@ export default function Dalga({ sessions = [], onSave, onExit, sleepPreset = nul
         )}
         <p className="dg-src">Kendi gidişatın için. Tedavi değildir; bir sağlık sorununu iyileştirdiği iddiası yok.</p>
         <div className="grow" />
+        {/* "Bana hatırlat" (bildirim PLAN.v1 §A.2): App ctx.remindField(route, { inPath }) verir; Dalga'nın Bugünün yolunda durağı yok; uyku kipinin sabah ekranında yok (plan: uyku kipi hatırlatılmaz) */}
+        {remindField}
         <button className="btn" onClick={onExit}>Bitti</button>
         <button className="btn btn-ghost" onClick={again}>Yeniden dinle</button>
       </main>
