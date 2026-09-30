@@ -54,3 +54,19 @@ değildir…" kutlamayı söndürüyor (mevcut güvenlik metni; ayrı konu); var
 
 **Karar:** iki tur geçmedi; aynı yöntem üçüncü kez denenmez. Arayüz `App.jsx` `REMIND_UI = false` ile kapatıldı (satır ve
 Bildirimler girişi görünmez; kimse modül hatırlatması kuramaz; plan bugünkü gibi). Yöntem değişikliği sahibe sunuldu.
+
+## Yeni yöntem (sahip onayı "önerini uygula": anahtar, "Nef seçsin", modül simgeleri; üç yön) · 2026-10-01
+
+Tutarsızlık denetimi: 16.30 / 11.15 farkı çekim düzeneğinin iki ekrana farklı tohum vermesinden; kodda hata yok. Not:
+saat sayfası kayıtlı saati değil öneriyi gösterir; Bildirimler'den açılınca iki saat farklı görünebilir (tasarım konusu).
+
+| Ekran | Seçilen yön | Etkilenen |
+|---|---|---|
+| F · bitiş ekranı + "Bana hatırlat" (anahtarlı) | B (kart yoğun) | 3/5 |
+| S · saat sayfası ("Nef seçsin") | C (Nef öne çıkar) | 3/5 |
+| N · Bildirimler (modül simgeleri) | C | 1/5 |
+
+Kural: tasarım aşamasında bir ekran 3/5'in altında kaldığı için koda aktarılmadı. Ortak şikâyetler: F'de amber onay
+işareti, turkuaz kart ve gradyanlı Kaydet düğmesi çatışıyor (onay işareti ve düğme bitiş ekranının mevcut öğeleri);
+S'de Nef simgesi iki kez; "Önerilen" soluk; N'de her satırdaki Nef rozeti ve kapalı satırdaki gri nokta gürültü,
+liste "sıradan ayar listesi", Gece sessizliği ikincil. Karar sahibe soruldu.
