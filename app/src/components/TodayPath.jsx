@@ -32,6 +32,8 @@ const GLYPH = {
   span: <><rect x="2.5" y="9" width="4" height="6" rx="1" /><rect x="17.5" y="9" width="4" height="6" rx="1" /><circle cx="12" cy="12" r="2.2" fill="currentColor" /></>,
   spark: <path d="M12 3.5v4.5M12 16v4.5M3.5 12H8M16 12h4.5M6.3 6.3l2.4 2.4M15.3 15.3l2.4 2.4M17.7 6.3l-2.4 2.4M8.7 15.3l-2.4 2.4" />,
   moon: <path d="M15 4a8 8 0 1 0 5 13.6A6.4 6.4 0 0 1 15 4z" fill="currentColor" stroke="none" />,
+  // Yoga (PLAN.v3 §B.5, yol.md §5.4): üç yapraklı nilüfer ve su çizgisi
+  lotus: <><path d="M12 4.5C14.2 7 14.2 12.4 12 15.5C9.8 12.4 9.8 7 12 4.5Z" /><path d="M12 15.5C8.5 15.5 5 13.3 4 9.8C7.4 9.8 10.4 12 12 15.5" /><path d="M12 15.5C15.5 15.5 19 13.3 20 9.8C16.6 9.8 13.6 12 12 15.5" /><path d="M6 19.5h12" /></>,
 }
 const Svg = ({ children, className }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{children}</svg>
@@ -45,6 +47,7 @@ const SCENE = {
   flash: <path className="sc-f" d="M55 26L37 54H50L45 76L64 46H51Z" />,
   street: <><rect className="sc-c" x="26" y="36" width="16" height="30" rx="2" /><rect className="sc-c" x="46" y="28" width="14" height="38" rx="2" /><circle className="sc-d" cx="70" cy="52" r="5" /><path className="sc-l" d="M20 68H80" /></>,
   span: <><rect className="sc-c" x="22" y="43" width="11" height="15" rx="2" /><rect className="sc-c" x="67" y="43" width="11" height="15" rx="2" /><circle className="sc-d" cx="50" cy="50" r="5" /></>,
+  lotus: <><path className="sc-c" d="M50 28C59 38 59 55 50 65C41 55 41 38 50 28Z" /><path className="sc-c" d="M50 65C37 65 26 57 24 44C37 44 46 53 50 65Z" /><path className="sc-c" d="M50 65C63 65 74 57 76 44C63 44 54 53 50 65Z" /><path className="sc-l" d="M28 73H72" /></>,
 }
 
 // Diyafram: 6 kanat. a = altıgen açıklığın iç yarıçapı (0..46; 100 birimlik kutu)
@@ -196,6 +199,8 @@ function StopInner({ stop, form, state, icon: Icon, fromA }) {
 
 // Durağın alt satırı: { text, warn }. Yarım kalan ölçüm (warn) uyarı renginde ve "!" ile (E0 "Kalan: Sol göz, İki
 // göz"). Süresi ölçülmemiş durakta (hideMinutes) süre yazılmaz. Bitince doneSub ("✓ Bu hafta tamam") ya da "tamam".
+// Alt satırı olan, açık uçlu olmayan durak "alt satır · dk" yazar (yol.md §5.4): Haftalık E testi ve Yoga
+// ("Nefesin Ritmi · 3 dk").
 export function stopSub(s, st, { leftMs = 0 } = {}) {
   if (st === 'done') return { text: s.doneSub ?? 'tamam', warn: false }
   if (st === 'locked') return { text: `mola ${fmtLeft(s.lockLeftMs ?? 0)}`, warn: false }
@@ -203,9 +208,12 @@ export function stopSub(s, st, { leftMs = 0 } = {}) {
   const min = s.minutes && !s.hideMinutes ? `${s.minutes} dk` : ''
   const warn = Boolean(s.warn)
   if (s.openEnded && s.sub) return { text: s.sub, warn }
-  if (s.kind === 'measure' && s.sub) return { text: min ? `${s.sub} · ${min}` : s.sub, warn }
+  if (s.sub) return { text: min ? `${s.sub} · ${min}` : s.sub, warn }
   return { text: min, warn }
 }
+// Erişilebilirlik etiketinde alt satır: ölçüm, mola, final ve açık uçlu olmayan, alt satırı olan durak (bugün yalnız
+// Yoga): "Yoga, pratik, Nefesin Ritmi, 3 dakika, sırada". Ölçümün etiketi değişmez (yarım kalınca kalan gözler).
+const ariaSub = (s) => (s.sub && !s.openEnded && !s.restSlot && !s.finale && s.kind !== 'measure' ? `, ${s.sub}` : '')
 
 // Yerleşim: bölüm 1 sağa bükülen yay, mola bandı, bölüm 2 sola bükülen yay
 function layout(stops) {
@@ -383,7 +391,7 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
                 style={{ left: px(x), top: y, ...(s.restSlot ? { '--p': restP } : {}) }}
                 onClick={() => tap(s, st)}
                 aria-disabled={st === 'later' ? 'true' : undefined}
-                aria-label={`${s.title}, ${KIND_TR[form]}${s.minutes && !s.hideMinutes ? `, ${s.minutes} dakika` : ''}${subLine.warn ? `, ${sub}` : ''}, ${STATE_TR[st]}${st === 'locked' ? ` (${sub})` : ''}${st === 'later' && plan.next ? `. Önce ${plan.next.title}` : ''}`}
+                aria-label={`${s.title}, ${KIND_TR[form]}${ariaSub(s)}${s.minutes && !s.hideMinutes ? `, ${s.minutes} dakika` : ''}${subLine.warn ? `, ${sub}` : ''}, ${STATE_TR[st]}${st === 'locked' ? ` (${sub})` : ''}${st === 'later' && plan.next ? `. Önce ${plan.next.title}` : ''}`}
               >
                 <StopInner stop={{ ...s, runLeft: st === 'running' ? fmtLeft(eye.leftMs) : '' }} form={form} state={st} icon={icons[s.id]} fromA={isFresh ? A_NOW : null} />
               </button>

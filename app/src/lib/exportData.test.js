@@ -48,6 +48,20 @@ describe('CSV', () => {
 
 describe('Doktor raporu', () => {
   const tests = Array.from({ length: 24 }, (_, i) => va(i, 'R', 0.2 + (i % 3) * 0.02))
+  it('önce → sonra tablosu: değişim sütunu puanın kendi değişimi (sonra − önce), güven aralığı aynı yönde', () => {
+    // Bilerek değişen davranış (yoga işiyle birlikte, 2026-09-30): "düşük daha iyi" etkide (Yön · Dışarıdan bak,
+    // rahatsızlık) değer ve aralık birlikte çevrilir; sütun başlığı "değişim (%95 GA)". Önceden aralık çevrilmiyordu.
+    const m = reportModel({ tests: [], sessions: [] })
+    const html = reportHtml({ ...m, effects: [
+      { label: 'Yön · Dışarıdan bak', measure: 'rahatsızlık', max: 10, n: 4, before: 7, after: 4, gain: 3, lo: 2.1, hi: 3.9, better: 'down', sig: true },
+      { label: 'Nefes', measure: 'sakinlik', max: 10, n: 4, before: 4, after: 6, gain: 2, lo: 1, hi: 3, better: 'up', sig: true },
+      { label: 'Dalga', measure: 'dinlenmişlik', max: 10, n: 2, before: 4, after: 5, gain: 1, lo: null, hi: null, sig: false },
+    ] })
+    expect(html).toContain('<th class="n">değişim (%95 GA)</th>')
+    expect(html).toContain('<td class="n">−3,0 (−3,9 – −2,1)</td>')
+    expect(html).toContain('<td class="n">+2,0 (1,0 – 3,0)</td>')
+    expect(html).toContain('<td class="n">+1,0</td><td>belirsiz</td>') // 3 oturumdan az: aralık yok
+  })
   it('model: gözler, aralık, yaş, son testler en yeniden eskiye', () => {
     const m = reportModel({ tests, sessions: [], identity: { name: ' Ayşe ', birthDate: '1980-10-01' }, now: new Date(2026, 8, 26) })
     expect(m.name).toBe('Ayşe')

@@ -31,6 +31,15 @@ import { normalizeReminders, TYPE_LABEL } from '../lib/reminders.js'
 import { coachAllowed } from '../lib/consent.js'
 import { getPrefs } from '../lib/prefs.js'
 import { greeting } from '../lib/greeting.js'
+import { isIOSApp } from '../lib/native.js'
+import { loadLater } from '../lib/pathLater.js'
+
+// Yoga ilk yayında yalnız iPhone uygulamasında (PLAN.v3 §D.7): web'de Pratikler listelerinde yoga kutucuğu yok
+export const onHome = (m, ios = isIOSApp()) => m?.id !== 'yoga' || ios
+const homeSection = (section) => registry.inSection(section).filter((m) => onHome(m))
+// Yoga sabah kartı (modul.md §9; veri merkezi işinin bileşeni). Dosya yoksa kart yok: import.meta.glob boş döner, derleme
+// kırılmaz. Kart ne zaman soracağına kendisi karar verir (gece başlanmış Uykuya Geçiş, 04.00–11.59, alarm sorusu önce).
+const YogaMorningCard = Object.values(import.meta.glob('../components/YogaMorningCard.jsx', { eager: true }))[0]?.default ?? null
 
 
 // Görme trendi → kısa, insan dilinde durum (trend.js aşamaları)
@@ -75,7 +84,7 @@ function LockTag({ left }) {
 }
 
 function ModuleRows({ section, ctx, onStart }) {
-  const rows = registry.inSection(section).flatMap((m) => moduleEntries(m, ctx))
+  const rows = homeSection(section).flatMap((m) => moduleEntries(m, ctx))
   return (
     <div className="mod-rows">
       {rows.map(({ key, route, title, sub, badge, color, Icon, locked }) => (
@@ -143,7 +152,8 @@ function FocusStrip({ focus, now, block = null, onStop }) {
 // alarmStatus ({ platform, auth }; App) + alarmTest (14.00 eşiği): "Bugünün yolu"nun altındaki alarm kartı (AlarmCard).
 // İlk ekran kalabalıklaşmasın: kart yuvası tek (izin kartı → deneme şeridi → seyreltme sorusu), rıza sayfası açıkken boş.
 // healthSheetKind: 'health' ya da eski metne izin vermiş kişiye 'healthUpdate' (lib/consent.js; cevap yine onHealthConsent).
-export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, healthSheetKind = 'health', onCoach, onStart, onAsk, onSaveProfile, reminderAsk = false, onReminders, focus = null, focusBlock = null, onStopFocus, trialNote = null, onTrialNote, thinAsk = null, onThin, alarmStatus = null, alarmTest = false }) {
+// onYogaMorning: yoga sabah kartı cevabı kayda yazılınca (App kayıtları yeniler).
+export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, healthSheetKind = 'health', onCoach, onStart, onAsk, onSaveProfile, reminderAsk = false, onReminders, focus = null, focusBlock = null, onStopFocus, trialNote = null, onTrialNote, thinAsk = null, onThin, alarmStatus = null, alarmTest = false, onYogaMorning }) {
   const [permNote, setPermNote] = useState(false) // "Evet" dendi ama izin kapalı: ayar yolu (bir kez, bu ekranda)
   const now = new Date()
   // Oyun oturumları (type 'game') ve WHO-5 egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
@@ -158,8 +168,9 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   const shown = r.current7 ?? ou.at(-1)?.logMAR ?? null
   const tw = trendWords(r)
   const todaySec = todaySeconds(exercise)
-  // Bugünün yolu (lib/today.js): göz bütçesi ve abonelik durumu yolu biçimlendirir (bölümler, kilit, ilk test)
-  const plan = buildPath(registry.live, { tests, sessions, now, profile: settings.profile, eye: eyeBudget, gate: { firstTestOnly: tests.length === 0 && !premium } })
+  // Bugünün yolu (lib/today.js): göz bütçesi ve abonelik durumu yolu biçimlendirir (bölümler, kilit, ilk test).
+  // later: bugün "Sonra yaparım" denen duraklar (lib/pathLater.js; gün değişince geçersiz)
+  const plan = buildPath(registry.live, { tests, sessions, now, profile: settings.profile, eye: eyeBudget, gate: { firstTestOnly: tests.length === 0 && !premium }, later: loadLater(now) })
   // Yoldaki Nefes durağı 5 dk göz molasını başlatır (yol planı A): kilit yoksa ve son moladan beri ≥ 1 dk göz
   // çalışması varsa. Saatlik/günlük sınır dolmuşsa o mola başlar (5 dk yetmez).
   const startStop = (route) => {
@@ -221,6 +232,9 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
       </header>
 
       {focus && onStopFocus && <FocusStrip focus={focus} now={now} block={focusBlock} onStop={onStopFocus} />}
+
+      {/* Yoga sabah sorusu: Ana sayfanın üstünde tek kart, yalnız iPhone uygulamasında; rıza sayfası açıkken yok */}
+      {YogaMorningCard && isIOSApp() && !sheetOpen && <YogaMorningCard sessions={sessions} now={now} alarmStatus={alarmStatus} onSaved={onYogaMorning} onStart={onStart} />}
 
       {/* Günün diyaframı + sayılar (tasarım: Artifact "Nefona Bugün ve Profil") */}
       <section className="hh-day" aria-label="Bugün">
@@ -417,7 +431,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
         <button className="link-btn" onClick={() => onStart('awareness')}>Farkındalık <ChevronRight size={15} aria-hidden="true" /></button>
       </div>
       <div className="prax">
-        {registry.inSection('practice').map((m) => {
+        {homeSection('practice').map((m) => {
           const v = viewFor(m.id)
           if (!v) return null
           const Icon = v.icon

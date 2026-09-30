@@ -11,7 +11,8 @@
 //                           (lib/alarmLog.js alarmHabits) aynı yoldan İyi oluş alanına; okuyan: loadHubHabits
 //
 // Yeni modül kuralı: kaydı sessions'a (ya da tests'e) yazar ve manifestinde progress.domain + sessions.match tanımlar;
-// böylece merkez onu hangi alana koyacağını bilir. dataHub.test.js canlı her modülün merkeze ulaştığını denetler.
+// böylece merkez onu hangi alana koyacağını bilir. Kayıt başına alan isteyen modül (ör. yoga: her ders kendi alanında)
+// isteğe bağlı sessions.domainOf(s) verir. dataHub.test.js canlı her modülün merkeze ulaştığını denetler.
 import { domainSummary, DOMAIN_LABEL } from './progress.js'
 import { registry, DOMAINS } from '../modules/registry.js'
 import { normalizeProfile } from './profile.js'
@@ -32,9 +33,22 @@ export const ANSWER_FIELDS = [
 const HABIT_DOMAIN = { mola: 'body', water: 'body', alarm: 'wellbeing' }
 const HABIT_LABEL = { mola: 'Mola', water: 'Su', alarm: 'Alarm' }
 
-// Kaydın alanı: modülün bildirdiği (sessions.match) ya da görme/okuma testi → Göz
+// Kaydın alanı (tek kaynak): alan özetleri, 28 günlük şerit ve kaynak sayımı, iris hücreleri (App) ve CSV'nin süre
+// satırı (lib/exportData.js) buradan okur. Kaydı tanıyan modül (sessions.match) kayıt başına alan verebilir
+// (sessions.domainOf; PLAN.v3 §D.5); vermezse, DOMAINS dışında bir şey dönerse ya da hata verirse modülün tek alanı
+// (progress.domain). Kaydı tanıyan modül yoksa null. Görme/okuma testleri ayrıca Göz'e (TEST_DOMAIN).
 export function domainOfSession(s) {
-  return registry.forSession(s)?.progress?.domain ?? null
+  const m = registry.forSession(s)
+  if (!m) return null
+  if (typeof m.sessions?.domainOf === 'function') {
+    try {
+      const d = m.sessions.domainOf(s)
+      if (DOMAINS.includes(d)) return d
+    } catch {
+      // bozuk domainOf kaydı düşürmez: modülün alanı
+    }
+  }
+  return m.progress?.domain ?? null
 }
 const TEST_DOMAIN = 'eye'
 
@@ -169,8 +183,12 @@ export function growthMap({ tests = [], sessions = [], profile = null, habits = 
     const x = new Date(date).getTime()
     return Number.isFinite(x) && keySet.has(dayAt(x))
   }
-  // oturum → modül eşlemesi bir kez (alan döngüsünde 7 kez değil)
-  const winSessions = sessions.filter((s) => ok(s) && inWin(s.date)).map((s) => registry.forSession(s)).filter(Boolean)
+  // oturum → (modül, kaydın alanı) eşlemesi bir kez (alan döngüsünde 7 kez değil). Alan domainOfSession'dan: şeridin
+  // günleriyle (domainDays) aynı kaynak; kayıt başına alan veren modül (yoga) her kaydıyla kendi alanında sayılır.
+  const winSessions = sessions
+    .filter((s) => ok(s) && inWin(s.date))
+    .map((s) => ({ m: registry.forSession(s), d: domainOfSession(s) }))
+    .filter((x) => x.m && x.d)
   const domains = {}
   for (const d of DOMAINS) {
     const strip = keys.map((k) => all[d].has(k))
@@ -178,7 +196,7 @@ export function growthMap({ tests = [], sessions = [], profile = null, habits = 
     // Kaynaklar: penceredeki kayıtlar modül (ya da test/alışkanlık) başına
     const src = new Map()
     const bump = (key, label) => src.set(key, { label, n: (src.get(key)?.n ?? 0) + 1 })
-    for (const m of winSessions) if (m.progress?.domain === d) bump(m.id, m.title)
+    for (const x of winSessions) if (x.d === d) bump(x.m.id, x.m.title)
     if (d === TEST_DOMAIN) for (const x of tests) if (ok(x) && inWin(x.date)) bump(`test:${x.type}`, TEST_LABEL[x.type] ?? 'Görme testi')
     for (const x of habits) if (HABIT_DOMAIN[x?.type] === d && inWin(x.at)) bump(`habit:${x.type}`, HABIT_LABEL[x.type])
     domains[d] = {

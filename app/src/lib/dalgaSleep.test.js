@@ -117,6 +117,31 @@ describe('uyku oynatıcı: iPhone yerel oynatıcı (Bug 22)', () => {
     expect(p.phase).toBe('loop')
     p.stop()
   })
+  it('yoga dersi açıkken iOS "LESSON" ile reddederse ayrı evre (lesson): "dokun, başlat" yeniden denemez (PLAN.v3 §D.3)', async () => {
+    const { createNativeSleepPlayer, SLEEP_LESSON_CODE } = await import('./dalgaSleep.js')
+    expect(SLEEP_LESSON_CODE).toBe('LESSON')
+    const err = Object.assign(new Error('Ders çalıyor'), { code: 'LESSON' })
+    const plugin = fake({ sleepStart: vi.fn().mockRejectedValue(err) })
+    const p = createNativeSleepPlayer(plugin)
+    expect(await p.start({ totalSec: 600 })).toBe(false)
+    expect(p.phase).toBe('lesson')
+    expect(p.diag).toMatchObject({ played: false, err: 'LESSON: Ders çalıyor' })
+    expect(await p.resume()).toBe(false) // 'blocked' değil: yeniden deneme yok
+    expect(plugin.sleepStart).toHaveBeenCalledTimes(1)
+    expect(p.elapsed()).toBe(0)
+    p.stop()
+    expect(p.phase).toBe('stopped')
+  })
+  it('ders yokken bugünkü retler (ses kaydı BUSY, çalınamadı PLAY) eskisi gibi blocked', async () => {
+    const { createNativeSleepPlayer } = await import('./dalgaSleep.js')
+    for (const code of ['BUSY', 'PLAY', undefined]) {
+      const err = Object.assign(new Error('x'), code ? { code } : {})
+      const p = createNativeSleepPlayer(fake({ sleepStart: vi.fn().mockRejectedValue(err) }))
+      expect(await p.start({ totalSec: 60 })).toBe(false)
+      expect(p.phase).toBe('blocked')
+      p.stop()
+    }
+  })
   it('başlarken durdurulursa iOS\'taki ses de durdurulur', async () => {
     const { createNativeSleepPlayer } = await import('./dalgaSleep.js')
     const plugin = fake()

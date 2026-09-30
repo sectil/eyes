@@ -17,9 +17,12 @@ export const DESIGNS = {
   prepost: 'Öncesi–sonrası çalışma (kontrol grubu yok)',
   observational: 'Gözlemsel çalışma',
   case: 'Olgu raporu',
+  // Çalışma değil, uygulayıcılar için ilkeler öneren makale (ör. Luu 2024: travmaya duyarlı yoga nidranın 10 bileşeni;
+  // yoga-pilot/v3/modul.md §16)
+  expert: 'Uzman önerisi',
 }
 // Kanıtın gücü için kaba sıra (yüksek = daha güçlü). Kullanıcıya "ne kadar güvenilir?" diye gösterilir.
-export const DESIGN_RANK = { meta: 4, review: 3, rct: 3, mrt: 3, crossover: 3, cohort: 2, experiment: 2, field: 2, quasi: 2, validation: 1, prepost: 1, observational: 1, case: 0 }
+export const DESIGN_RANK = { meta: 4, review: 3, rct: 3, mrt: 3, crossover: 3, cohort: 2, experiment: 2, field: 2, quasi: 2, validation: 1, prepost: 1, observational: 1, case: 0, expert: 0 }
 
 export const SOURCES = {
   ulrich1984: {
@@ -240,6 +243,14 @@ export const SOURCES = {
     titleTr: 'Yaşam tarzı önerilerinde bazen az çoktur: Birden çok davranış alanında değişimi hedefleyen müdahalelerin etkinliğine dair kuramsal varsayımların meta-analizi.',
     journal: 'Psychol Bull', cite: '141(2):474-509', doi: '10.1037/a0038295', pmid: '25528345',
     design: 'meta', n: '150 araştırma raporu',
+  },
+  // Yoga dersleri (lib/yogaLessons.js Kaynaklar kartı): açılıştaki "dersi bitirebilirsin" izni ve dışa dönüş
+  luu2024: {
+    authors: ['Luu K'], year: 2024,
+    title: 'Key Components of Trauma-Informed Yoga Nidra.',
+    titleTr: 'Travmaya duyarlı yoga nidranın temel bileşenleri.',
+    journal: 'Int J Yoga Therap', cite: '34(2024)', doi: '10.17761/2024-D-24-00021', pmid: '39690521',
+    design: 'expert', n: '10 bileşen; katılımcı yok',
   },
 }
 

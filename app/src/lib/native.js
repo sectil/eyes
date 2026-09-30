@@ -429,3 +429,98 @@ export const AppleSignIn = registerPlugin('AppleSignIn')
 
 // Nefona alarmı (ios/App/App/AlarmPlugin.swift; AlarmKit, iOS 26+). lib/alarm.js dışında çağrılmaz.
 export const Alarm = registerPlugin('Alarm')
+
+// --- Yoga ders oynatıcısı (ios/App/App/AlarmPlugin.swift: LessonPlayer; PLAN.v3 §D.3) ---
+// Yalnız iPhone uygulamasında. Web'de her çağrı UNAVAILABLE ile reddedilir (yoga web'de görünmez); eski iOS derlemesinde
+// metot yoksa Capacitor UNIMPLEMENTED ile reddeder. Yerel ret kodları: MISSING (dosya pakette yok), BUSY (ses kaydı
+// sürüyor), PLAY (çalınamadı), IDLE (çalan ders yok), ARGS. Dosya adları public/ altına görelidir ("yoga/ders2-15.mp3").
+// Sözleşme (modules/yoga/bridge.js): lessonStart({ file, at, title }), lessonPause(), lessonResume({ at }),
+// lessonSeek({ at }), lessonCrossTo({ file, at }), lessonStop(), lessonStatus() → { time, duration, playing, route, … }.
+// İsteğe bağlı ekler (yerel oynatıcı JS uyurken, kilitli ekranda da doğru davransın diye):
+// - lessonStart'ta id (kayıt kimliği, yerel kayda yazılır), journal: false (yerel kayıt tutma; ör. sesli dönüş),
+//   sections: [{ at, name }] (kilit ekranında bölüm adı), resume: [{ from, to, at }] (kilit ekranından ya da kesintiden
+//   sürdürünce klip başı), next: { file, at } (bu dosya bitmeden 2 sn önce geçilecek dosya: ilk ders girişi, açılış izni),
+//   tail: { file, seconds, fade } (uyku dersinde dosya bitince müzik kuyruğu; son `fade` sn'de kısılıp tamamen durur).
+// - lessonMeta({ file?, sections?, resume? }): çizelge sonradan yüklenince aynı bilgiler.
+// - lessonStatus() ayrıca: state (idle | playing | paused | stopping | tail | finished), reason (duraklatılmışken:
+//   user | remote | interruption | route | reset | stalled | error), listened (gerçekten çalan sn), file, prelude, ended,
+//   tailLeft.
+// - lessonJournal() → yerel kayıt ya da null: { id?, file, title, state, finished, prelude, startedAt, updatedAt,
+//   endedAt?, listened, time, maxTime, duration } (zamanlar Unix saniyesi); lessonJournalClear() ("Tüm verileri sil").
+const lessonError = (message, code) => Object.assign(new Error(message), { code })
+const finiteOr = (x, d) => (typeof x === 'number' && Number.isFinite(x) ? x : d)
+const lessonFile = (f) => (typeof f === 'string' ? f.replace(/^\.?\//, '') : undefined)
+const defined = (o) => Object.fromEntries(Object.entries(o).filter(([, v]) => v !== undefined))
+const lessonSections = (list) => {
+  if (!Array.isArray(list)) return undefined
+  const out = list
+    .filter((s) => Number.isFinite(s?.at) && typeof s?.name === 'string' && s.name)
+    .map((s) => ({ at: s.at, name: s.name }))
+  return out.length ? out : undefined
+}
+const lessonSpans = (list) => {
+  if (!Array.isArray(list)) return undefined
+  const out = list
+    .filter((s) => Number.isFinite(s?.from) && Number.isFinite(s?.to) && Number.isFinite(s?.at) && s.to > s.from)
+    .map((s) => ({ from: s.from, to: s.to, at: s.at }))
+  return out.length ? out : undefined
+}
+
+function lessonCall(method, opts) {
+  if (!isIOSApp()) return Promise.reject(lessonError('Ders oynatıcısı yalnız iPhone uygulamasında', 'UNAVAILABLE'))
+  try {
+    return Promise.resolve(opts === undefined ? Alarm[method]() : Alarm[method](opts))
+  } catch (e) {
+    return Promise.reject(e?.code ? e : lessonError(`Ders oynatıcısı bu derlemede yok (${method})`, 'UNIMPLEMENTED'))
+  }
+}
+
+export function lessonStart({ file, at = 0, title, id, journal, sections, resume, next, tail } = {}) {
+  return lessonCall('lessonStart', defined({
+    file: lessonFile(file),
+    at: finiteOr(at, 0),
+    title: typeof title === 'string' ? title : undefined,
+    id: typeof id === 'string' || typeof id === 'number' ? String(id) : undefined,
+    journal: typeof journal === 'boolean' ? journal : undefined,
+    sections: lessonSections(sections),
+    resume: lessonSpans(resume),
+    next: next?.file ? { file: lessonFile(next.file), at: finiteOr(next.at, 0) } : undefined,
+    tail: tail?.file && finiteOr(tail.seconds, 0) >= 1
+      ? defined({ file: lessonFile(tail.file), seconds: tail.seconds, fade: finiteOr(tail.fade, undefined) })
+      : undefined,
+  }))
+}
+export const lessonPause = () => lessonCall('lessonPause')
+// at verilmezse yerel oynatıcı klip başını resume aralıklarından bulur (yoksa kaldığı yer)
+export const lessonResume = ({ at } = {}) => lessonCall('lessonResume', defined({ at: finiteOr(at, undefined) }))
+export const lessonSeek = ({ at } = {}) => lessonCall('lessonSeek', defined({ at: finiteOr(at, undefined) }))
+// file verilmezse çalan dosyada başka yere 2 sn'lik geçiş
+export const lessonCrossTo = ({ file, at } = {}) =>
+  lessonCall('lessonCrossTo', defined({ file: lessonFile(file), at: finiteOr(at, undefined) }))
+export const lessonStop = () => lessonCall('lessonStop')
+export const lessonStatus = () => lessonCall('lessonStatus')
+export const lessonMeta = ({ file, sections, resume } = {}) =>
+  lessonCall('lessonMeta', defined({ file: lessonFile(file), sections: lessonSections(sections), resume: lessonSpans(resume) }))
+
+// Yerel kayıt (uygulama arka planda kapandıysa açılışta uzlaştırmak için). Web / hata / kayıt yok → null.
+export async function lessonJournal() {
+  if (!isIOSApp()) return null
+  try {
+    const r = await Alarm.lessonJournal()
+    const j = r?.journal
+    return j && typeof j === 'object' && typeof j.file === 'string' ? j : null
+  } catch {
+    return null
+  }
+}
+
+// "Tüm verileri sil" (modul.md §6.4): yerel kayıt localStorage'da değil. Döner: silindi mi (web / eski derleme → false).
+export async function lessonJournalClear() {
+  if (!isIOSApp()) return false
+  try {
+    await Alarm.lessonJournalClear()
+    return true
+  } catch {
+    return false
+  }
+}

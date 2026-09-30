@@ -52,7 +52,8 @@ import { RELEASES, unseenReleases, latestRelease } from './lib/releases.js'
 import ProfileSetup from './screens/ProfileSetup.jsx'
 import { signedIn, pullProfile, pushProfile, mergeProfile, signOut, deleteAccount, friendlyError } from './lib/account.js'
 import DistanceHud from './screens/DistanceHud.jsx'
-import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics, haptic, shareTextFile, healthAvailable, requestHealthAccess, readHealth, walkGuardLog, setWalkGuards } from './lib/native.js'
+import { isIOSApp, getDeviceModel, getScreenInfo, trueDepthSupported, initFeedback, installTapHaptics, haptic, shareTextFile, healthAvailable, requestHealthAccess, readHealth, walkGuardLog, setWalkGuards, lessonJournalClear } from './lib/native.js'
+import { reconcileLessonJournal } from './modules/yoga/journal.js'
 import { summarizeHealth } from './lib/health.js'
 import { fileStamp } from './lib/exportData.js'
 import { resolveAutoCalibration, estimateCalibration } from './lib/screenScale.js'
@@ -345,6 +346,21 @@ export default function App() {
       check()
       setPlanTick((t) => t + 1)
     }
+    document.addEventListener('visibilitychange', onVis)
+    return () => document.removeEventListener('visibilitychange', onVis)
+  }, [])
+
+  // Yoga: yerel ders kaydının uzlaştırması (modules/yoga/journal.js; modul.md §4, §6.4). Uygulama ders sırasında
+  // kapandıysa ya da ders Yoga ekranı dışındayken bittiyse kayıt yerel kayıttan yazılır; tarih dersin bitiş anıdır.
+  // Açılışta ve uygulama öne gelince; yalnız iPhone uygulamasında (web'de yoga yok).
+  useEffect(() => {
+    if (!isIOSApp()) return undefined
+    const run = () => {
+      const yogaOnScreen = registry.forRoute(screenRef.current)?.id === 'yoga'
+      reconcileLessonJournal(store, { yogaOnScreen }).then((rec) => { if (rec) setData(store.get()) }).catch(() => {})
+    }
+    run()
+    const onVis = () => document.visibilityState === 'visible' && run()
     document.addEventListener('visibilitychange', onVis)
     return () => document.removeEventListener('visibilitychange', onVis)
   }, [])
@@ -1049,6 +1065,8 @@ export default function App() {
           cancelOwn()
           cancelAlarm()
           walkGuardLog().catch(() => {})
+          // Yoga: yerel oynatıcının ders kaydı (UserDefaults) localStorage'da değil; o da silinir (modul.md §6.4)
+          lessonJournalClear().catch(() => {})
           for (const k of registry.resetKeys()) {
             try {
               localStorage.removeItem(k)
@@ -1086,6 +1104,7 @@ export default function App() {
         onThin={answerThin}
         alarmStatus={alarmSt}
         alarmTest={Boolean(access.testUnlock)}
+        onYogaMorning={refresh}
       />
     )
   }

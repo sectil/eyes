@@ -2,6 +2,8 @@
 // localStorage erişilemezse (gizli sekme, engelli site verisi) bellekte çalışır.
 
 const KEY = 'gozolcum:v1'
+// updateSession'ın değiştirmediği alanlar
+const FIXED = ['id', 'date', 'type']
 
 const EMPTY = () => ({
   version: 1,
@@ -87,6 +89,18 @@ export function createStore(backend = defaultBackend()) {
     addSession(session) {
       const rec = { id: id(), date: new Date().toISOString(), ...session }
       state = { ...state, sessions: [...state.sessions, rec] }
+      write()
+      return rec
+    },
+    // Var olan kaydı birleştirerek günceller (ör. yoga: ders kaydı ses bittiği anda yazılır, sonra puanı ve ertesi
+    // sabahın cevabı sonra eklenir; PLAN.v3 §D.4). id, date ve type değişmez. Kimlik yoksa ya da yama nesne değilse null.
+    updateSession(sid, patch) {
+      if (sid == null || !patch || typeof patch !== 'object' || Array.isArray(patch)) return null
+      const i = state.sessions.findIndex((s) => s != null && s.id === sid)
+      if (i < 0) return null
+      const rest = Object.fromEntries(Object.entries(patch).filter(([k]) => !FIXED.includes(k)))
+      const rec = { ...state.sessions[i], ...rest }
+      state = { ...state, sessions: state.sessions.map((s, k) => (k === i ? rec : s)) }
       write()
       return rec
     },

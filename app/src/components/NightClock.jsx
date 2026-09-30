@@ -3,14 +3,17 @@
 // alarm. Dokununca 5 sn "Bitir" (çağıran showEnd'i yönetir; odaktayken onEndFocus/onEndBlur ile süre durur). Müzik
 // bitince (state 'done') müzik göstergesi kaybolur, saat ve alarm kalır. drift: [x, y] nokta, dakikada bir kayar
 // (lib/nightClock.js nextDrift). Ekranda başka yazı yok; VoiceOver için gizli durum satırı ve açık yazılmış süreler.
+// state 'lesson': yoga dersi çaldığı için uyku sesi başlamadı (lib/dalgaSleep.js; PLAN.v3 §D.3): "Önce çalan dersi
+// durdur." yazar, "dokun, başlat" düğmesi çıkmaz (her dokunuş yine reddedilirdi).
 // Tema dışı: hep karanlık.
 import { useEffect, useState } from 'react'
 import { untilShort, spoken } from '../lib/nightClock.js'
 import '../styles/dalga.css'
 
 export const END_ARM_MS = 400 // "Bitir" çıktıktan sonra bu süre dokunuş sayılmaz: aynı yere çift dokunuş müziği bitirmesin
+export const LESSON_TEXT = 'Önce çalan dersi durdur.'
 
-const STATUS = { preparing: 'Müzik hazırlanıyor', playing: 'Müzik çalıyor', blocked: 'Ses başlamadı', done: 'Müzik bitti' }
+const STATUS = { preparing: 'Müzik hazırlanıyor', playing: 'Müzik çalıyor', blocked: 'Ses başlamadı', lesson: 'Ses başlamadı', done: 'Müzik bitti' }
 
 export default function NightClock({ now, left, total, state, alarmLabel, alarmAt, drift = [0, 0], showEnd, onTap, onEnd, onEndFocus, onEndBlur, onKick }) {
   const hh = String(now.getHours()).padStart(2, '0'), mm = String(now.getMinutes()).padStart(2, '0')
@@ -33,6 +36,8 @@ export default function NightClock({ now, left, total, state, alarmLabel, alarmA
         <div className="dg-nc-meta">
           {state === 'blocked' ? (
             <button className="dg-sleep-kick" onClick={(e) => { e.stopPropagation(); onKick?.() }}>Ses başlamadı · dokun, başlat</button>
+          ) : state === 'lesson' ? (
+            <span className="dg-nc-sub">{LESSON_TEXT}</span>
           ) : state === 'preparing' ? (
             <span className="dg-nc-sub">Müzik hazırlanıyor…</span>
           ) : state === 'playing' ? (

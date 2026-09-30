@@ -3,9 +3,10 @@
 // sayaçlar kayıtlardan türetilir (readingStatus'un hiç yapılmamış okuma testinde yaptığı gibi, lib/today.js:141-142).
 // Ders verisi (adlar ve yayımlanmış süreler) parametre olarak gelir: lib/yogaLessons.js { LESSONS, publishedMinutes }.
 // Yalnız yayımlanmış süreler aday olur ("her ders kendi denetimlerinden geçince görünür"; SAHIP_ISTEKLERI.md madde 10).
-// Kayıt yardımcıları (ders kaydı, sabah sorusu, kaldığın yer) bu dosyada değil, lib/yogaRecord.js'tedir.
+// Kayıt yardımcıları (ders kaydı, tamamlanma, sabah sorusu, kaldığın yer) bu dosyada değil, lib/yogaRecord.js'tedir.
 import { dayKey } from './calendar.js'
 import { runDayOf, lastComplete, calendarDaysBetween, weeklyStatus, readingStatus } from './today.js'
+import { isYogaDone } from './yogaRecord.js' // tamamlanma ölçütü tek yerde (modul.md §6.1)
 
 // Kütüphane sırası (PLAN.v2 §A.3). Uykuya Geçiş (3) sırada yoktur; akşam ders ekranında öneri satırı olur (§B.2-6).
 export const PATH_SEQ = [1, 2, 5, 7, 4, 6, 8, 9, 10]
@@ -23,8 +24,6 @@ export const PATH_YOGA = {
 }
 const FULL_SEC = PATH_YOGA.fullMin * 60
 
-// Tamamlanmış ders (modul.md §6.1: kapanışa ulaşıldı ve planlananın en az %60'ı dinlendi; kaydı yazan hesaplar)
-export const isYogaDone = (s) => s?.type === 'yoga' && s.completed === true
 // Planlanan süre 5 dk ya da daha uzunsa (5, 15, 20) tam ders sayılır (§B.2-3)
 const isFull = (s) => Number(s?.planned) >= FULL_SEC
 
@@ -73,9 +72,13 @@ const measureDay = (tests, sessions, now) => {
   return weeklyStatus(tests, now).state !== 'idle' || r === 'due' || r === 'done'
 }
 
-// publishedMinutes: (ders) → yayımlanmış süreler (dk) ya da { [ders]: [dk, …] }
+// Yayımlanmış süreler üç biçimde gelebilir:
+//   publishedMinutes (ders → [dk, …]; lib/yogaLessons.js) ya da { [ders]: [dk, …] } (PUBLISHED_MINUTES): o süre
+//     yayımlanmışsa aday — tercih edilen biçim
+//   { [ders]: en kısa yayımlanmış dk } (LESSON_MIN; PLAN.v3 §B.5 taslağı): en kısa sürüm o günün süresine sığıyorsa aday
 const minutesFn = (published) => (typeof published === 'function' ? published : (l) => published?.[l])
-const has = (list, m) => Array.isArray(list) && list.includes(m)
+const fits = (v, m) => (Array.isArray(v) ? v.includes(m) : Number.isFinite(v) && v <= m)
+const anyPublished = (v) => (Array.isArray(v) ? v.length > 0 : Number.isFinite(v))
 
 // null | { lesson, minutes: 3|5, full, soft, night, done }
 //  - kaydı olan gün < 2, E testi günü (bugün ders yapılmış olsa da) ya da o güne uygun yayımlanmış ders yok → null
@@ -92,8 +95,7 @@ export function pathYoga({ tests = [], sessions = [], now = new Date() } = {}, p
   if (weeklyDayToday(tests, sessions, now)) return null
   const hour = new Date(now).getHours()
   const nightHour = hour >= PATH_YOGA.nightFrom || hour < PATH_YOGA.nightTo
-  const sleepList = pub(PATH_YOGA.sleepLesson)
-  const night = nightHour && Array.isArray(sleepList) && sleepList.length > 0
+  const night = nightHour && anyPublished(pub(PATH_YOGA.sleepLesson))
   const today = dayKey(now)
   const mine = sessions.filter((s) => isYogaDone(s) && Number.isInteger(s.lesson) && runDayOf(s) === today).at(-1)
   if (mine) {
@@ -109,7 +111,7 @@ export function pathYoga({ tests = [], sessions = [], now = new Date() } = {}, p
     return !w || (hour >= w[0] && hour < w[1])
   }
   const pick = (minutes, full) =>
-    PATH_SEQ.filter((l) => has(pub(l), minutes) && timeOk(l)).sort(
+    PATH_SEQ.filter((l) => fits(pub(l), minutes) && timeOk(l)).sort(
       (a, b) => n(a) - n(b) || (full ? nFull(a) - nFull(b) : 0) || PATH_SEQ.indexOf(a) - PATH_SEQ.indexOf(b),
     )[0]
   let full = wantFull
@@ -140,6 +142,9 @@ export function yogaPathStop(ctx = {}, { LESSONS = {}, publishedMinutes } = {}) 
     order: PATH_YOGA.order,
     glyph: 'lotus',
     done: p.done,
+    // Bitmiş durakta süre yazılmaz (kart "tamam", VoiceOver süresiz): minutes yol payıdır (3 ya da 5), dinlenen süre
+    // değil; Ana sayfadan yapılan 15 dk'lık ders "5 dakika" diye okunmasın
+    ...(p.done ? { hideMinutes: true } : {}),
     yields: true,
     later,
     stage: { lesson: p.lesson, minutes: p.minutes, full: p.full, soft: p.soft, night: p.night },

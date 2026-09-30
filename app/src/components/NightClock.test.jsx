@@ -56,6 +56,20 @@ describe('NightClock (gece saati, tasarım A)', () => {
     expect(r.props.onKick).toHaveBeenCalledTimes(1)
     expect(r.props.onTap).not.toHaveBeenCalled()
   })
+  it('yoga dersi çalıyorsa (lesson): "Önce çalan dersi durdur." yazar, "dokun, başlat" düğmesi yok (PLAN.v3 §D.3)', async () => {
+    const { LESSON_TEXT } = await import('./NightClock.jsx')
+    expect(LESSON_TEXT).toBe('Önce çalan dersi durdur.')
+    const r = await mount({ state: 'lesson' })
+    expect(r.visible()).toBe('2352Önce çalan dersi durdur.Alarm 06:29·6 sa 37 dk')
+    expect(r.button('Ses başlamadı · dokun, başlat')).toBeUndefined()
+    expect(r.cls('dg-sleep-kick')).toHaveLength(0)
+    expect(r.cls('dg-nc-line')).toHaveLength(0)
+    expect(r.sr()).toEqual(['Dokununca Bitir düğmesi çıkar.', 'Ses başlamadı', 'Alarm 06:29, 6 saat 37 dakika sonra'])
+    // ekrana dokunmak yine "Bitir"i çıkarır; yeniden deneme çağrılmaz
+    await act(async () => r.cls('dg-nc-clock')[0].click())
+    expect(r.props.onTap).toHaveBeenCalledTimes(1)
+    expect(r.props.onKick).not.toHaveBeenCalled()
+  })
   it('ekrana dokunmak onTap; "Bitir" çıktıktan hemen sonraki dokunuş sayılmaz (çift dokunuş müziği bitirmesin)', async () => {
     const r = await mount({})
     await act(async () => r.cls('dg-nc-clock')[0].click())

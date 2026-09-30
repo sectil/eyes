@@ -5,7 +5,7 @@ import { VIEWS } from './views.js'
 describe('modül soketi: gerçek modüller', () => {
   it('hepsi geçerli, sorun yok', () => {
     expect(registry.problems).toEqual([])
-    expect(registry.modules.map((m) => m.id).sort()).toEqual(['alarm', 'awareness', 'blink', 'breath', 'breath-count', 'daily', 'dalga', 'fark-ettin', 'gokyuzu', 'mola', 'notice', 'quick-look', 'reading', 'routine', 'snake', 'tek-bakis', 'track', 'water', 'weekly', 'who5', 'yon'])
+    expect(registry.modules.map((m) => m.id).sort()).toEqual(['alarm', 'awareness', 'blink', 'breath', 'breath-count', 'daily', 'dalga', 'fark-ettin', 'gokyuzu', 'mola', 'notice', 'quick-look', 'reading', 'routine', 'snake', 'tek-bakis', 'track', 'water', 'weekly', 'who5', 'yoga', 'yon'])
   })
   it('her modülün ekranı (view) var ve ekranı çiziyor', () => {
     for (const m of registry.modules) {
@@ -99,6 +99,7 @@ describe('modül soketi: tak / çıkar', () => {
       notice: { type: 'notice', date: '2026-01-01', count: 2 },
       'breath-count': { type: 'breath-count', date: '2026-01-01', accuracy: 90 },
       yon: { type: 'yon', tool: 'ayna', date: '2026-01-01', score: 3.4 },
+      yoga: { type: 'yoga', lesson: 3, date: '2026-01-01', sleepEase: 7 }, // Uykuya Geçiş: ertesi sabahın sorusu (modul.md §9)
     }
     for (const x of registry.metrics()) {
       const s = metSample[x.module]

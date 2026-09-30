@@ -54,6 +54,41 @@ describe('storage', () => {
     expect(s.get().settings.reminder.time).toBe('20:00')
   })
 
+  it('updateSession: var olan kaydı birleştirir; id, date, type değişmez; bilinmeyen kimlik null; yazma kalıcı', () => {
+    const b = fakeBackend()
+    const s = createStore(b)
+    const a = s.addSession({ type: 'yoga', lesson: 2, seconds: 874, before: 6, after: null })
+    const other = s.addSession({ type: 'breath', seconds: 60 })
+    const up = s.updateSession(a.id, { after: 3, delta: -3, hard: 'no', id: 'x', date: '2020-01-01T00:00:00.000Z', type: 'game' })
+    expect(up).toEqual({ ...a, after: 3, delta: -3, hard: 'no' })
+    expect(s.get().sessions).toEqual([up, other])
+    // ikinci yama öncekini korur
+    expect(s.updateSession(a.id, { sleepEase: 7 })).toMatchObject({ after: 3, hard: 'no', sleepEase: 7, id: a.id, date: a.date, type: 'yoga' })
+    // aynı backend ile yeniden açılınca güncel kayıt
+    const again = createStore(b).get().sessions
+    expect(again).toHaveLength(2)
+    expect(again[0]).toMatchObject({ id: a.id, after: 3, delta: -3, sleepEase: 7 })
+    expect(again[1]).toEqual(other)
+    // bilinmeyen kimlik, eksik kimlik, nesne olmayan yama → null; depo değişmez
+    const before = s.get()
+    expect(s.updateSession('yok', { after: 1 })).toBeNull()
+    expect(s.updateSession(null, { after: 1 })).toBeNull()
+    expect(s.updateSession(a.id, null)).toBeNull()
+    expect(s.updateSession(a.id, [1])).toBeNull()
+    expect(s.get()).toBe(before)
+  })
+
+  it('updateSession yazma hatasında çökertmez; bellekte günceller', () => {
+    const b = fakeBackend()
+    const s = createStore(b)
+    const a = s.addSession({ type: 'yoga', lesson: 3, seconds: 600 })
+    b.setItem = () => {
+      throw new Error('QuotaExceeded')
+    }
+    expect(s.updateSession(a.id, { sleepEase: 8 })).toMatchObject({ sleepEase: 8 })
+    expect(s.get().sessions[0].sleepEase).toBe(8)
+  })
+
   it('clearAll her şeyi siler', () => {
     const b = fakeBackend()
     const s = createStore(b)
