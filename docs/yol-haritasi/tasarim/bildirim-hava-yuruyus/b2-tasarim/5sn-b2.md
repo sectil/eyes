@@ -30,3 +30,11 @@ ekranın altında; dört gri bilgi kutusu "sözleşme" gibi; pasif düğme soluk
 böyle) sorunu. Sahibe soru: katmanlı rıza (kısa özet + kutu + düğme ilk ekranda, dört bölüm açılır ayrıntı; metin harfi
 harfine aynı). Metin notu: "90 günlük günlük hava özeti" tekrarı → "son 90 günün günlük hava özeti" önerisi (onaylı metin
 değişikliği, sahip onayı ister). G değerlendirici notu: ekranın üst üçte biri hâlâ boş gradyan (NIT).
+
+## Tur 3 · katmanlı rıza (sahip kararı) · 1/5
+
+Üç turda geçmedi (1/5, 0/5, 1/5); yeniden denenmez. Şikâyetler: pasif "İzin ver" bozuk görünüyor ve neden basılamadığı
+yazmıyor; dört kapalı başlık cevabı saklıyor (gizliliğe dikkat eden kişi cevabı ilk ekranda istiyor); sayfada faydanın
+örneği yok; "resmî form" hissi. Gizlilik değerlendiricisinin içerik bulgusu: "Ne kadar kalır?" izin kapanınca yalnız
+"il adı ve önbellek silinir" diyor; ilçe adı ve son 90 günün hava özeti için bir şey söylemiyor. Sahibe iki soru:
+rıza sayfaları için ölçüt (etkilenme yerine anlaşılırlık) ve silme cümlesinin kapsamı.
