@@ -19,3 +19,20 @@ zaman çizelgesi, lejant ve taralı "01–05 sabit" alanı 5 saniyede çözülm�
 **Karar:** İki tur geçmedi; aynı yöntem üçüncü kez denenmez. Yöntem değişti: içerik çelişkileri çözülmüş sabit metin
 (zaman çizelgesi yok; birleşik bildirimde iki hatırlatma aynı saatte, düğme yok; bilim kartı eylemlerin altında, en çok
 3 satır; uyarı bilgi renginde ve listeye mola eklenir) ve her ekran için üç ayrı yön; değerlendiriciler en iyisini seçer.
+
+## Tur 3 · yöntem değişti: sabit metin, üç yön (A sakin, B iOS Ayarlar, C Nefona gece dili)
+
+| Ekran | Seçilen yön | Seçen | Etkilenen |
+|---|---|---|---|
+| Gece sessizliği (G, G2) | C | 5/5 | **4/5 · geçti** |
+| Birleşik bildirim (B1 kilit, B2 açılan ekran) | A | 5/5 | 1/5 · kaldı |
+
+**Gece sessizliği C geçti.** Kodda giderilecek notlar: uyarı notu turkuaz değil saatlerin kehribar ailesinde; "01.00–05.00
+arası her gece sessiz" satırı büyür ve koyulaşır; G2'de pasif "+" nedenini söyler ("en geç 10.00"). Tasarım:
+`gece-sessizligi-C/`.
+
+**Birleşik bildirim üç kez geçmedi; yeniden denenmez.** Şikâyetlerin hepsi açılan ekrana (B2) ait: başlık yok, soru
+karşılıksız, ekranın alt yarısı boş. Plana göre bu dokunuş Ana sayfayı açar (§5.5 madde 4); B2 aslında Ana sayfanın
+üstüdür ve Ana sayfa yeniden tasarlanıyor. Karar: birleşik bildirimin açtığı yer Ana sayfa tasarımına ("teklif yuvası"
+ile birlikte) bağlanır; kilit ekranı bildirimi iOS'un kendi kartıdır, Nefona'nın değiştirebileceği yalnız metindir
+(metin kapısında BR1–BR3).
