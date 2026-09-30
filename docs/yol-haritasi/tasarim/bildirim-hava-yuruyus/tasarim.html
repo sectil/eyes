@@ -554,6 +554,41 @@ body.w320 .dt-art { height: 90px; }
 
 
 
+
+.dt-ck { display: grid; grid-template-columns: 24px minmax(0,1fr); gap: 10px; align-items: start; padding: 12px; border-radius: 14px; background: var(--a-surface-2, rgba(127,140,150,0.12)); }
+.dt-ck .box { width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--a-ink-3); margin-top: 1px; }
+.dt-ck p { margin: 0; font-size: 0.88rem; line-height: 1.4; }
+.btn-a.off { opacity: .45; }
+.dt-hint { margin: -4px 0 0; text-align: center; font-size: 0.84rem; color: var(--a-ink-2, var(--a-ink-3)); }
+.dt-skip { text-align: center; font-size: 0.86rem; color: var(--a-ink-3); }
+
+
+.tl-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.tl-chips span { padding: 7px 10px; border-radius: 10px; background: var(--a-accent-soft); color: var(--a-ink); font: 600 0.84rem/1 var(--f-body); }
+.tl-chips span.w { background: var(--a-lens-soft); }
+
+
+.rows.big .row-a { padding: 14px 14px; }
+.rows.big .row-a b { font-size: 1.05rem; }
+.rows.big .row-a span { font-size: 0.88rem; }
+.nb-today { padding: 16px; display: grid; gap: 4px; }
+.nb-h { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+.nb-h b { font: 700 1.05rem/1.2 var(--f-body); }
+.nb-h span { font-size: 0.8rem; color: var(--a-accent); font-weight: 600; }
+.nb-row { display: grid; grid-template-columns: 64px 1fr; align-items: center; padding: 10px 0; border-top: 1px solid var(--a-border); }
+.nb-row b { font: 700 1.15rem/1 var(--f-mono); }
+.nb-row span { font-size: 1rem; }
+.nb-row.next b, .nb-row.next span { color: var(--a-accent); }
+.nc-lead { font-size: 0.95rem; color: var(--a-ink-2, var(--a-ink-3)); margin: 0; }
+.nc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.nc { display: grid; gap: 6px; padding: 14px; border-radius: 18px; background: var(--a-surface); border: 1px solid var(--a-border); }
+.nc b { font: 600 0.95rem/1.2 var(--f-body); }
+.nc strong { font: 700 1.5rem/1 var(--f-display); }
+.nc .ri { width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; background: var(--a-accent-soft); color: var(--a-accent); }
+.nc .ri .ico { width: 16px; height: 16px; }
+.nc.on { border-color: var(--a-accent); }
+.nc.add { border-style: dashed; }
+
 @media (max-width: 860px) {
   .hero-in { grid-template-columns: 1fr; }
   .hero-scenes { overflow-x: auto; padding-bottom: 6px; }
@@ -600,7 +635,7 @@ body.w320 .dt-art { height: 90px; }
       <h1>Nef doğru anda yazar:<br><em>sabah havanı, akşam yürüyüşünü</em> bilir.</h1>
       <p class="hero-lead">Alarmdan 10 dakika sonra günün havası. Yürürken tek soru. Her modülün sonunda "Bana hatırlat". Gece, alarmın dışında bildirim gelmez.</p>
       <div class="hero-cta">
-        <a class="btn-pg primary" href="#kararlar">Senden 3 karar</a>
+        <a class="btn-pg primary" href="#kararlar">Onaylanan 3 karar</a>
         <a class="btn-pg ghost" href="#hatirlat">Ekranlara bak</a>
       </div>
       <div class="hero-facts"><span><b>14</b> ekran</span><span>açık ve koyu tema</span><span>büyük ve küçük iPhone</span></div>
@@ -614,8 +649,8 @@ body.w320 .dt-art { height: 90px; }
           <div class="nt">
             <span class="nt-ico" aria-hidden="true"></span>
             <div class="nt-top"><span>Nefona</span><span>şimdi</span></div>
-            <div class="nt-t">Gaziemir 17°, akşam yağmur</div>
-            <div class="nt-b">En çok 26°. 21.00–22.00 arası yağmur bekleniyor; yürüyüşü 20.30'dan önce bitirirsen şemsiyeye gerek kalmaz.</div>
+            <div class="nt-t">Gaziemir 17° · en çok 26°</div>
+            <div class="nt-b">21.00–22.00 arası yağmur bekleniyor; yürüyüş 20.30'da biterse şemsiye gerekmeyebilir.</div>
             <div class="nt-sci">Kaynak: Apple Weather</div>
           </div>
         </div>
@@ -630,7 +665,7 @@ body.w320 .dt-art { height: 90px; }
             <span class="nt-ico" aria-hidden="true"></span>
             <div class="nt-top"><span>Nefona</span><span>şimdi</span></div>
             <div class="nt-t">Yürüyüşe mi çıktın?</div>
-            <div class="nt-b">Son 15 dakikada 1,1 km yürüdün. Hava 23 derece, yürüyüş için güzel. Eşlik edeyim mi?</div>
+            <div class="nt-b">Son 15 dakikada 1,3 km yürüdün. Hava 23 derece, yürüyüş için güzel. Eşlik edeyim mi?</div>
           </div>
         </div>
         <div class="lk-foot"><span></span><span></span></div>
@@ -664,7 +699,7 @@ body.w320 .dt-art { height: 90px; }
 <section class="sec" id="hatirlat">
   <div class="sec-head">
     <span class="sec-num">1 · Her modülde</span>
-    <h2>Bitirdin, bir dokunuşla yarını kur</h2>
+    <h2>Bitirdin; yarınki hatırlatmanı bir dokunuşla kur</h2>
     <p class="sec-lead">Modül bittiğinde altta tek kart. Saati Nef seçer ya da sen seçersin; günde en çok 3 saat. Yeniden girdiğinde hatırlatmanın açık olduğunu üstte görürsün. Yolun içinde her durakta değil, yol bitince tek kart çıkar.</p>
   </div>
   <div class="strip" data-screens="done"></div>
@@ -687,7 +722,7 @@ body.w320 .dt-art { height: 90px; }
   <div class="sec-head">
     <span class="sec-num">3 · Hava</span>
     <h2>Adımlarının üstünde ilçen ve havası</h2>
-    <p class="sec-lead">Ana sayfada tek satır. Dokununca saat saat tahmin ve Nef'in o güne özel yorumu. İstersen her sabah alarmından 10 dakika sonra aynı yorum bildirim olarak gelir; tahmin eskiyse bildirim bunu açıkça söyler.</p>
+    <p class="sec-lead">Ana sayfada adımların üstünde tek kart. Dokununca saat saat tahmin ve Nef'in o güne özel yorumu. İstersen her sabah alarmından 10 dakika sonra aynı yorum bildirim olarak gelir; tahmin eskiyse bildirim bunu açıkça söyler.</p>
   </div>
   <div class="strip" data-screens="home"></div>
   <div class="strip" data-screens="wx"></div>
@@ -718,32 +753,32 @@ body.w320 .dt-art { height: 90px; }
 <!-- ================= 6. KARARLAR ================= -->
 <section class="sec" id="kararlar">
   <div class="sec-head">
-    <span class="sec-num">6 · Senden</span>
-    <h2>Üç karar, her birinde önerim</h2>
+    <span class="sec-num">6 · Onaylandı (30 Eylül)</span>
+    <h2>Onaylanan üç karar</h2>
   </div>
   <div class="decide">
     <article class="q">
       <span class="q-n">KARAR 1 · SIRA</span>
       <h3>Bu iş sonsuz yolun hangi aşamasına girsin?</h3>
       <p class="rec"><b>Önerim:</b> yoga ve Build 60'tan sonra önce bildirimler ve "Bana hatırlat", sonra hava (onaylı plandaki hava aşamasının yerine, öne alınarak), sonra sonsuz yolun Y2–Y4'ü, sonra yürüyüş eşliği.</p>
-      <p>Gerekçe: bildirim çekirdeği gece "kalk" sorununu kalıcı kapatır ve her modüle aynı anda değer katar. Yürüyüş en büyük parça: Swift, dışarıda cihaz denemesi ve yeni ses kayıtları ister. Öbür seçenek: yürüyüşü havanın hemen arkasına almak; yürüyüş yaklaşık 3 hafta öne gelir, Y2–Y4 o kadar kayar.</p>
+      <p>Gerekçe: gece "kalk" sorununu ana oturum şimdi düzeltiyor; bildirim çekirdeği yeni gelecek her bildirimin de geceye düşmemesini tek yerde sağlar ve her modüle aynı anda değer katar. Yürüyüş en büyük parça: Swift, dışarıda cihaz denemesi ve yeni ses kayıtları ister. Öbür seçenek: yürüyüşü havanın hemen arkasına almak; yürüyüş yaklaşık 3 hafta öne gelir, Y2–Y4 o kadar kayar.</p>
     </article>
     <article class="q">
       <span class="q-n">KARAR 2 · YÜRÜRKEN FARK ETME</span>
       <h3>"Her Zaman" konum izni istensin mi?</h3>
-      <p class="rec"><b>Önerim:</b> ayrı anahtar, "Yürürken beni fark et", varsayılan kapalı. Açan kişiye Nef yürüyüşün 5–10. dakikasında sorar.</p>
-      <p>Apple, uygulama kapalıyken yürüyüşü anında görmeye yalnız "Her Zaman" konum izniyle izin veriyor (500 m yer değişimi, en sık 5 dakikada bir). İzin yoksa Nef Apple Sağlık'ın saatlik uyanışında sorar ve kısa yürüyüşlerin çoğu kaçar. Konum telefondan çıkmaz. Bedeli: bazı kişilerde güvensizlik ve App Review'da gerekçe.</p>
+      <p class="rec"><b>Önerim:</b> ayrı anahtar, "Yürürken beni fark et", varsayılan kapalı. Açan kişiye Nef yürüyüşün 5–10. dakikasında sorar. Kapalıyken Nef, kaçırdığı bir yürüyüşten sonra açmayı bildirimle önerir (senin eklemen).</p>
+      <p>Apple, uygulama kapalıyken yürüyüşü anında görmeye yalnız "Her Zaman" konum izniyle izin veriyor (500 m yer değişimi, en sık 5 dakikada bir). İzin yoksa Nef Apple Sağlık'ın saatlik uyanışında sorar ve kısa yürüyüşlerin çoğu kaçar. Konum telefondan çıkmaz. Bedeli: kimi kişi güvensizlik duyabilir; App Review gerekçe ister.</p>
     </article>
     <article class="q">
       <span class="q-n">KARAR 3 · NEF'İN DİLİ</span>
       <h3>Bildirim cümleleri nasıl üretilsin?</h3>
-      <p class="rec"><b>Önerim:</b> cümle bankası. Güçlü bir model senin onayından geçen yüzlerce cümleyi bir kez üretir; telefon her bildirimde o güne uyanı seçip sayıları kendisi yazar. Banka başına yaklaşık 1 USD, yeni rıza yok, ağsız çalışır, uydurma sayı olamaz.</p>
+      <p class="rec"><b>Önerim:</b> cümle bankası. Güçlü bir model yüzlerce cümle üretir; senin onayından geçenler uygulamaya girer; telefon her bildirimde o güne uyanı seçip sayıları kendisi yazar. Banka başına yaklaşık 1 USD, yeni rıza yok, ağsız çalışır; model sayı yazamaz, sayıları telefondaki kod yazar.</p>
       <p>Öbür seçenek her bildirimde canlı model: 10.000 kişide ayda yaklaşık 374 USD, ayrı açık rıza, hukukçu onayı; hava ve konum yine gönderilemez. Bu kararın içinde: görünür bilim satırı günde bir bildirimde olsun (önerim), her bildirimin bilim kartı dokununca yine açılır.</p>
     </article>
   </div>
   <ul class="limits">
     <li><b>Dürüst sınır:</b> alarmdan sonraki taze hava yalnız iOS 26'da ve alarmı elle durduran kişide mümkün; diğerlerinde bildirim son açılıştaki tahmini, yaşını söyleyerek verir.</li>
-    <li><b>Dürüst sınır:</b> yürürken ekrandaki canlı adım telefonun sayımıdır; Apple Watch da takılıysa birkaç dakika farklı görünebilir. Bitişte Apple Sağlık'taki sayı okunur ve kayda o yazılır.</li>
+    <li><b>Dürüst sınır:</b> yürürken ekrandaki canlı adım telefonun sayımıdır; Apple Watch da takılıysa ekrandaki adım Sağlık'taki sayıdan bir süre farklı görünebilir. Bitişte Apple Sağlık'taki sayı okunur ve kayda o yazılır.</li>
     <li>Cihazda hiçbir şey denenmedi. Ekranlardaki bütün sayı ve saatler örnektir.</li>
   </ul>
 </section>
@@ -762,7 +797,7 @@ body.w320 .dt-art { height: 90px; }
       <div class="nefline small"><span class="nefdot"></span><p>Dünden bir puan daha sakin bitirdin. Yarın 3 dakika, yeni kalıp.</p></div>
       <div class="remind big">
         <span class="bell"><svg class="ico"><use href="#i-bell"/></svg></span>
-        <div><b>Bana hatırlat</b><span>Yarın da bu saatlerde, tek dokunuşla.</span></div>
+        <div><b>Bana hatırlat</b><span>Her gün, senin için uygun saatte. Saati Nef de seçebilir.</span></div>
         <span class="rtime mono">09.15</span>
       </div>
       <div class="btn-a plain">Ana sayfaya dön</div>
@@ -782,8 +817,8 @@ body.w320 .dt-art { height: 90px; }
       <div class="nefline small"><span class="nefdot"></span><p>Sağ–sol bakışı ilk kez tam yaptın. Yarın yakın–uzak ekleniyor.</p></div>
       <div class="remind big">
         <span class="bell"><svg class="ico"><use href="#i-bell"/></svg></span>
-        <div><b>Yolunu her gün hatırlatayım mı?</b><span>Genelde 08.30'da başlıyorsun. Durak durak değil, tek hatırlatma.</span></div>
-        <span class="rtime mono">08.15</span>
+        <div><b>Yolunu her gün hatırlatayım mı?</b><span>Genelde 09.30'da başlıyorsun. Durak durak değil, tek hatırlatma.</span></div>
+        <span class="rtime mono">09.15</span>
       </div>
       <div class="btn-a plain">Ana sayfaya dön</div>
     </div>
@@ -827,7 +862,7 @@ body.w320 .dt-art { height: 90px; }
       <div class="opt sel">
         <div class="opt-h"><span class="radio"></span>Saatleri ben seçeyim</div>
         <div class="chips"><span class="tchip">10.00</span><span class="tchip warn">12.30</span><span class="tchip">18.00</span></div>
-        <div class="clash"><p><b>12.30'da Mola hatırlatman var.</b> Aynı anda iki bildirim gelmesin diye 13.00'ü öneriyorum.</p><span class="mini p">13.00'e al</span></div>
+        <div class="clash"><p><b>12.30'da Mola var.</b> Bir saat sonra olsun mu?</p><span class="mini p">13.30 yap</span></div>
       </div>
       <p class="fine">09.00–21.00 arasında, günde en çok 3 saat.</p>
       <div class="btn-a">Kaydet</div>
@@ -856,27 +891,90 @@ body.w320 .dt-art { height: 90px; }
       <div class="h1-a">Bildirimler</div>
       <div class="card-a tl">
         <div class="tl-h"><b>Bugünün düzeni</b><span>Hiçbiri üst üste değil</span></div>
-        <div class="tl-bar">
-          <div class="tl-line"></div>
-          <div class="tl-night" style="left:0;width:11%"></div>
-          <div class="tl-night" style="left:89%;width:11%"></div>
-          <span class="tl-dot w" style="left:1%"></span><span class="tl-dot n" style="left:19.9%">2</span><span class="tl-dot n" style="left:37.5%">2</span><span class="tl-dot" style="left:66.7%"></span>
-        </div>
-        <div class="tl-ax"><span>06</span><span>09</span><span>12</span><span>15</span><span>18</span><span>21</span><span>24</span></div>
-        <div class="tl-next"><span class="nefdot"></span><p>Sıradaki: <b>10.00 Göz egzersizi</b>. Aralarında en az yarım saat var.</p></div>
-        <p class="fine">Taralı saatler gece sessizliği. Turuncu nokta alarmına bağlı sabah havası. Sayılı nokta: yarım saat arayla gelen iki bildirim.</p>
+        <div class="tl-chips"><span class="w">06.10 Hava</span><span>09.15 Nefes</span><span>10.00 Göz</span><span>12.30 Mola</span><span>13.30 Göz</span><span>18.00 Göz</span></div>
+        <div class="tl-next"><span class="nefdot"></span><p>Sıradaki: <b>10.00 Göz egzersizi</b>.</p></div>
       </div>
       <div class="grp">
         <div class="grp-h">Modüllerin</div>
         <div class="card-a rows">
           <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-wave"/></svg></span><div><b>Nefes</b><span class="mono">09.15 · <em>Nef seçti</em></span></div><span class="tg on"></span></div>
-          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-eye"/></svg></span><div><b>Göz egzersizleri</b><span class="mono">10.00 · 13.00 · 18.00</span></div><span class="tg on"></span></div>
+          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-eye"/></svg></span><div><b>Göz egzersizleri</b><span class="mono">10.00 · 13.30 · 18.00</span></div><span class="tg on"></span></div>
           <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-stand"/></svg></span><div><b>Mola</b><span class="mono">12.30</span></div><span class="tg on"></span></div>
           <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-rain"/></svg></span><div><b>Sabah havası</b><span>Alarmından 10 dk sonra</span></div><span class="tg on"></span></div>
           <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><div><b>Yürüyüş eşliği</b><span>Yürürken sorar</span></div><span class="tg on"></span></div>
+          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><div><b>Yürürken beni fark et</b><span>Kapalı · konum telefonda kalır</span></div><span class="tg"></span></div>
         </div>
       </div>
-      <div class="card-a rows"><div class="row-a"><span class="ri"><svg class="ico"><use href="#i-moon"/></svg></span><div><b>Gece sessizliği</b><span class="mono">22.00–08.00 · değiştir</span></div><svg class="ico chev"><use href="#i-chev"/></svg></div></div>
+      <div class="card-a rows"><div class="row-a"><span class="ri"><svg class="ico"><use href="#i-moon"/></svg></span><div><b>Gece sessizliği</b><span class="mono">23.00–07.00 · değiştir</span></div><svg class="ico chev"><use href="#i-chev"/></svg></div></div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-notif-a">
+  <div class="phone">
+    <div class="sb"><span>09:40</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Profilim</span>
+      <div class="h1-a">Bildirimler</div>
+      <div class="tl-next"><span class="nefdot"></span><p>Sıradaki: <b>10.00 Göz egzersizi</b>. Hiçbiri üst üste gelmez.</p></div>
+      <div class="grp">
+        <div class="grp-h">Hatırlatmaların</div>
+        <div class="card-a rows big">
+          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-wave"/></svg></span><div><b>Nefes</b><span>Her gün 09.15 · <em>Nef seçti</em></span></div><span class="tg on"></span></div>
+          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-eye"/></svg></span><div><b>Göz egzersizleri</b><span>10.00, 13.30 ve 18.00</span></div><span class="tg on"></span></div>
+          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-stand"/></svg></span><div><b>Mola</b><span>Her gün 12.30</span></div><span class="tg on"></span></div>
+        </div>
+      </div>
+      <div class="grp">
+        <div class="grp-h">Nef'in haberleri</div>
+        <div class="card-a rows big">
+          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-rain"/></svg></span><div><b>Sabah havası</b><span>Alarmından 10 dk sonra</span></div><span class="tg on"></span></div>
+          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><div><b>Yürüyüş eşliği</b><span>Yürüdüğünde sorar</span></div><span class="tg on"></span></div>
+        </div>
+      </div>
+      <div class="card-a rows"><div class="row-a"><span class="ri"><svg class="ico"><use href="#i-moon"/></svg></span><div><b>Gece sessizliği</b><span>23.00–07.00</span></div><svg class="ico chev"><use href="#i-chev"/></svg></div></div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-notif-b">
+  <div class="phone">
+    <div class="sb"><span>09:40</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Profilim</span>
+      <div class="h1-a">Bildirimler</div>
+      <div class="card-a nb-today">
+        <div class="nb-h"><b>Bugün sırada</b><span>Hiçbiri üst üste gelmez</span></div>
+        <div class="nb-row next"><b>10.00</b><span>Göz egzersizi</span></div>
+        <div class="nb-row"><b>12.30</b><span>Mola</span></div>
+        <div class="nb-row"><b>13.30</b><span>Göz egzersizi</span></div>
+        <div class="nb-row"><b>18.00</b><span>Göz egzersizi</span></div>
+      </div>
+      <div class="card-a rows big">
+        <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-bell"/></svg></span><div><b>Hatırlatmalarım</b><span>Nefes, göz egzersizleri, mola</span></div><svg class="ico chev"><use href="#i-chev"/></svg></div>
+        <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-rain"/></svg></span><div><b>Nef'in haberleri</b><span>Sabah havası, yürüyüş eşliği</span></div><svg class="ico chev"><use href="#i-chev"/></svg></div>
+        <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-moon"/></svg></span><div><b>Gece sessizliği</b><span>23.00–07.00</span></div><svg class="ico chev"><use href="#i-chev"/></svg></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-notif-c">
+  <div class="phone">
+    <div class="sb"><span>09:40</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Profilim</span>
+      <div class="h1-a">Bildirimler</div>
+      <p class="nc-lead">Hiçbiri üst üste gelmez. Birine dokun, saatini değiştir.</p>
+      <div class="nc-grid">
+        <div class="nc on"><span class="ri"><svg class="ico"><use href="#i-wave"/></svg></span><b>Nefes</b><strong>09.15</strong></div>
+        <div class="nc on"><span class="ri"><svg class="ico"><use href="#i-eye"/></svg></span><b>Göz</b><strong>3 kez</strong></div>
+        <div class="nc on"><span class="ri"><svg class="ico"><use href="#i-stand"/></svg></span><b>Mola</b><strong>12.30</strong></div>
+        <div class="nc on"><span class="ri"><svg class="ico"><use href="#i-rain"/></svg></span><b>Sabah havası</b><strong>06.10</strong></div>
+        <div class="nc on"><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><b>Yürüyüş</b><strong>Açık</strong></div>
+        <div class="nc add"><span class="ri"><svg class="ico"><use href="#i-bell"/></svg></span><b>Ekle</b><strong>+</strong></div>
+      </div>
+      <div class="card-a rows"><div class="row-a"><span class="ri"><svg class="ico"><use href="#i-moon"/></svg></span><div><b>Gece sessizliği</b><span>23.00–07.00</span></div><svg class="ico chev"><use href="#i-chev"/></svg></div></div>
     </div>
   </div>
 </template>
@@ -919,10 +1017,10 @@ body.w320 .dt-art { height: 90px; }
     <div class="scr">
       <span class="back"><svg class="ico"><use href="#i-back"/></svg>Ana sayfa</span>
       <div class="wx-top">
-        <div><span class="eyebrow-a">Gaziemir, İzmir</span><div class="wx-deg">23°</div></div>
+        <div><span class="eyebrow-a">İzmir Gaziemir</span><div class="wx-deg">23°</div></div>
         <div class="wx-sub">Hissedilen 24°<br>Parçalı bulutlu<br><span class="mono" style="font-size:.74rem;color:var(--a-ink-3)">12.40'ta alındı</span></div>
       </div>
-      <div class="nefcard"><span class="nefdot"></span><div><small>Nef</small><p>21.00–22.00 arası yağmur bekleniyor. Akşam yürüyüşünü 20.30'dan önce bitirirsen şemsiyeye gerek kalmaz.</p></div></div>
+      <div class="nefcard"><span class="nefdot"></span><div><small>Nef</small><p>21.00–22.00 arası yağmur bekleniyor. Akşam yürüyüşün 20.30'da biterse şemsiye gerekmeyebilir.</p></div></div>
       <div class="card-a hours">
         <div class="hr now"><span>Şimdi</span><b>23°</b><span class="pb"><i style="height:0%"></i></span><span>—</span></div>
         <div class="hr"><span>15</span><b>25°</b><span class="pb"><i style="height:5%"></i></span><span>5%</span></div>
@@ -950,7 +1048,7 @@ body.w320 .dt-art { height: 90px; }
         <span class="nt-ico" aria-hidden="true"></span>
         <div class="nt-top"><span>Nefona</span><span>şimdi</span></div>
         <div class="nt-t">Yürüyüşe mi çıktın?</div>
-        <div class="nt-b">Son 15 dakikada 1,1 km yürüdün. Hava 23 derece, yürüyüş için güzel. Eşlik edeyim mi?</div>
+        <div class="nt-b">Son 15 dakikada 1,3 km yürüdün. Hava 23 derece, yürüyüş için güzel. Eşlik edeyim mi?</div>
       </div>
       <div class="nt-acts"><span>Eşlik et</span><span>Şimdi değil</span></div>
     </div>
@@ -963,17 +1061,17 @@ body.w320 .dt-art { height: 90px; }
     <div class="sb"><span>18:51</span><i>●●● <s></s></i></div>
     <div class="scr">
       <div class="wk-top"><span>Yürüyüş · Nef seninle</span><span class="gps"><i></i>Ölçülüyor</span></div>
-      <div class="wk-n t"><b>00:18:42</b><span>Süre</span></div>
+      <div class="wk-n t"><b>00:33:40</b><span>Süre</span></div>
       <div class="wk-n p"><b>9:40<small>/km</small></b><span>Şu anki tempo · 1 km'de 9 dk 40 sn</span></div>
       <div class="wk-sm">
-        <div class="wk-n"><b>1,94</b><span>km</span></div>
-        <div class="wk-n"><b>2.316</b><span>Adım · bu yürüyüş</span></div>
+        <div class="wk-n"><b>3,23</b><span>km</span></div>
+        <div class="wk-n"><b>4.486</b><span>Adım · bu yürüyüş</span></div>
       </div>
       <div class="cue"><svg class="ico"><use href="#i-voice"/></svg><span>Son 250 metre: kilometrede 9 dakika 40 saniye.</span></div>
       <div class="splits">
-        <div class="sp-h"><b>Kilometreler</b><span>2. km: 940 / 1000 m</span></div>
-        <div class="sp-row"><span>1. km</span><b>9:50</b><i style="--w:86%"></i></div>
-        <div class="sp-row now"><span>2. km</span><b>9:35</b><i style="--w:94%"></i></div>
+        <div class="sp-h"><b>Kilometreler</b><span>4. km: 230 / 1000 m</span></div>
+        <div class="sp-row"><span>2. km</span><b>10:14</b><i style="--w:84%"></i></div>
+        <div class="sp-row now"><span>3. km</span><b>9:40</b><i style="--w:94%"></i></div>
       </div>
       <div class="wk-btns">
         <span class="rb-l"><span class="rb"><svg class="ico"><use href="#i-pause"/></svg></span>Duraklat</span>
@@ -994,11 +1092,11 @@ body.w320 .dt-art { height: 90px; }
       <div class="cc-list">
         <div class="cc on"><span class="radio"></span><div><b>Her 250 metrede</b><span>3 km yürüyüşte 12 kez. "Son 250 metre: kilometrede 9 dakika 40 saniye."</span></div></div>
         <div class="cc"><span class="radio"></span><div><b>Her 500 metrede</b><span>3 km yürüyüşte 6 kez. "Son 500 metre: …"</span></div></div>
-        <div class="cc"><span class="radio"></span><div><b>Her kilometrede</b><span>3 km yürüyüşte 3 kez. "1. kilometre 9 dakika 50 saniyede."</span></div></div>
+        <div class="cc"><span class="radio"></span><div><b>Her kilometrede</b><span>3 km yürüyüşte 3 kez. "2. kilometre: 10 dakika 15 saniye."</span></div></div>
       </div>
-      <p class="fine" style="font-size:.88rem">Her tam kilometrede ayrıca o kilometrenin süresini söylerim.</p>
-      <div class="lbl-a">Ses</div>
-      <div class="cb-voices"><span class="on"><i>N</i>Neslihan</span><span><i>H</i>Hakan</span><span class="play-s"><svg class="ico"><use href="#i-play"/></svg>Dinle</span></div>
+      <p class="fine" style="font-size:.88rem">Tam kilometrelerde o kilometrenin süresini söylerim.</p>
+      <div class="cb-voices"><span class="on"><i>N</i>Ses: Neslihan</span><span class="play-s"><svg class="ico"><use href="#i-play"/></svg>Dinle</span></div>
+      <p class="fine" style="font-size:.8rem">Sesi Profilim → Seslendirme'den değiştirirsin.</p>
     </div>
   </div>
 </template>
@@ -1008,7 +1106,7 @@ body.w320 .dt-art { height: 90px; }
     <div class="sb"><span>15:02</span><i>●●● <s></s></i></div>
     <div class="scr">
       <span class="back"><svg class="ico"><use href="#i-back"/></svg>Ana sayfa</span>
-      <div class="nefcard"><span class="nefdot"></span><div><small>Nef · 15.00</small><p>Hava 25 derece, yağmur akşama bekleniyor. Şimdi 10 dakikalık bir tur tam zamanında.</p></div></div>
+      <div class="nefcard"><span class="nefdot"></span><div><small>Nef · 15.00</small><p>Hava 25 derece; yağmur akşam bekleniyor. Şimdi 10 dakikalık bir tur için uygun bir an.</p></div></div>
       <div class="btn-a">Yürüyüşe başla</div>
       <div class="sci2">
         <span class="sci-h">Neden şimdi?</span>
@@ -1031,8 +1129,8 @@ body.w320 .dt-art { height: 90px; }
       <div class="nt">
         <span class="nt-ico" aria-hidden="true"></span>
         <div class="nt-top"><span>Nefona</span><span>şimdi</span></div>
-        <div class="nt-t">Yürürken temponu sesli söyleyeyim mi?</div>
-        <div class="nt-b">Yürümeye başlayınca 250 metrede bir temponu söylerim. Konum izniyle çalışır; konumun telefondan çıkmaz.</div>
+        <div class="nt-t">Temponu sesli söyleyeyim mi?</div>
+        <div class="nt-b">Yürüyüşe çıkınca sorarım; istersen 250 metrede bir temponu söylerim. Konum izni ister, konum telefonda kalır.</div>
       </div>
       <div class="nt-acts"><span>İzin ver</span><span>Şimdi değil</span></div>
     </div>
@@ -1045,15 +1143,15 @@ body.w320 .dt-art { height: 90px; }
     <div class="sb"><span>19:05</span><i>●●● <s></s></i></div>
     <div class="scr">
       <div class="dt-art" aria-hidden="true"><span class="p1"></span><span class="p2"></span><span class="p3"></span><span class="p4"></span><span class="p5"></span><span class="me"><svg class="ico"><use href="#i-foot"/></svg></span></div>
-      <div class="h1-a" style="font-size:1.55rem">Yürürken seni fark edeyim mi?</div>
+      <div class="h1-a" style="font-size:1.5rem">Yürüyüşe çıktığını fark edeyim mi?</div>
       <div class="dt-list">
-        <div><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><p>Yürümeye başlayınca <b>5–10 dakika içinde</b> sorarım.</p></div>
-        <div><span class="ri"><svg class="ico"><use href="#i-eye"/></svg></span><p>Konumun <b>telefondan çıkmaz</b>, saklanmaz. Yalnız yer değiştirdiğini anlarım.</p></div>
-        <div><span class="ri"><svg class="ico"><use href="#i-bell"/></svg></span><p>İstediğin an <b>Bildirimler</b>'den kapatırsın.</p></div>
+        <div><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><p>Yürümeye başlayınca <b>sorarım</b>; istersen temponu söylerim.</p></div>
+        <div><span class="ri"><svg class="ico"><use href="#i-eye"/></svg></span><p>Bunun için iPhone <b>"Her Zaman"</b> konum iznini sorar. Konumun <b>kaydedilmez</b>, telefondan çıkmaz.</p></div>
       </div>
-      <div class="btn-a">Aç</div>
-      <div class="dt-note"><svg class="ico"><use href="#i-eye"/></svg><p>iPhone sana konum için <b>"Her Zaman"</b> iznini soracak. Konum yalnız yürümeye başladığını anlamak için kullanılır.</p></div>
-      <div class="btn-a plain">Şimdi değil</div>
+      <div class="dt-ck"><span class="box" aria-hidden="true"></span><p>Bu amaçla konumumun telefonumda kullanılmasına açık rıza veriyorum.</p></div>
+      <div class="btn-a off">Devam</div>
+      <p class="dt-hint">Kutuyu işaretleyince Devam açılır. Bildirimler'den istediğin an kapatırsın.</p>
+      <div class="dt-skip">Vazgeç</div>
     </div>
   </div>
 </template>
@@ -1069,13 +1167,13 @@ body.w320 .dt-art { height: 90px; }
             ['tpl-sheet-manual', 'Saat · Ben seçeyim', 'Günde en çok 3 saat. Çakışma anında söylenir; iki bildirim hiçbir zaman aynı anda gelmez.']],
     reenter: [['tpl-reenter', 'Yeniden giriş', 'Üstte hatırlatma hapı (dokununca saat sayfası), Nef\'in kişisel cümlesi, bugünkü nefes ve Başla.']],
     notif: [['tpl-notif', 'Profil → Bildirimler', 'Günün çizelgesi, hatırlatmalar, Nef\'in haberleri. Satıra dokununca saat sayfası.']],
-    home: [['tpl-home', 'Ana sayfa · hava satırı', 'Adımların üstünde tek satır: il, ilçe, sıcaklık, yağmur saati; sağda Apple Weather ve Veri kaynakları bağlantısı (Apple kuralı). 320 pt\'de il adı düşer, ilçe kısalmaz.']],
+    home: [['tpl-home', 'Ana sayfa · hava satırı', 'Adımların üstünde tek kart: il, ilçe, sıcaklık, yağmur saati; sağda Apple Weather ve Veri kaynakları bağlantısı (Apple kuralı). 320 pt\'de il adı düşer, ilçe kısalmaz.']],
     wx: [['tpl-wx', 'Hava sayfası', 'Saat saat sıcaklık ve yağmur olasılığı, Nef\'in yorumu, sabah havası anahtarı, atıf.']],
     walk: [['tpl-lockwalk', 'Yürüyüş sorusu', 'Kilit ekranında. Dokununca yürüyüş ekranı açılır, son 15 dakika yürüyüşe eklenir.'],
            ['tpl-walk', 'Yürüyüş ekranı', 'Dört büyük sayı. Anons anında aynı cümle ekranda. Kilitliyken ölçüm sürer.']],
-    detect: [['tpl-detect', 'Fark et teklifi', 'Kaçırılan bir yürüyüşten sonra, seyrek. Ne kazanacağını, hangi izni istediğini ve konumun telefonda kaldığını tek bakışta söyler. İzin ver doğrudan iPhone iznini açar; iki kez hayır denirse bir daha sormaz.'],
-             ['tpl-detect-sheet', 'Açıklama sayfası', 'Bildirimin gövdesine dokununca açılır; iPhone izni daha önce sorulduysa Ayarlar yolunu gösterir.']],
-    coach: [['tpl-coach', 'Sesli koç', 'Tek soru: ne sıklıkla. Her seçenekte koçun söyleyeceği cümle; ses ve Dinle aynı satırda.']],
+    detect: [['tpl-detect', 'Fark et teklifi', 'Yalnız yürüyüş eşliğini açmış kişiye, kaçırılan bir yürüyüşten sonra, seyrek. Ne kazanacağını, hangi izni istediğini ve konumun telefonda kaldığını tek bakışta söyler. İki kez hayır denirse bir daha sormaz.'],
+             ['tpl-detect-sheet', 'Rıza sayfası', 'İzin ver deyince açılır. KVKK açık rızası iPhone izninden önce: işaretsiz kutu, tek düğme Devam (Apple HIG), altta Vazgeç. iPhone izni daha önce sorulduysa Devam Ayarlar yolunu gösterir.']],
+    coach: [['tpl-coach', 'Sesli koç', 'Tek soru: ne sıklıkla. Her seçenekte koçun söyleyeceği cümle. Ses Profilim\'de bir kez seçilir; burada yalnız Dinle.']],
     sci: [['tpl-sci', 'Bilim kartı', 'Bildirime dokununca: Nef\'in cümlesi, eylem, tek bulgu, sınırı ve PubMed bağlantısı.']]
   };
   document.querySelectorAll('.strip').forEach(function (strip) {
