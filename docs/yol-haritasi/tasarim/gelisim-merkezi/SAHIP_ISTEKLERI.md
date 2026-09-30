@@ -11,3 +11,10 @@
 5. Sonsuz yoldaki modüllerden düzgün veri gelmesi ve işlenmesi önemli; veriler kullanıcıya basit sunulmalı.
 6. Kullanıcı isterse gelişimiyle ilgili bildirim gönderilir; Bildirimler bölümünde öteki bildirimler gibi durur.
 7. Tasarım da kararlar da mükemmel olmalı; 5 saniye kuralı; mükemmel değilse sahibe gönderilmez.
+
+## Sahibin kararları (2026-09-30, kelimesi kelimesine: "tamamdır. evet diytoum")
+Plan §12'deki üç önerinin hepsi kabul edildi:
+1. Görünüm: tek irisli ışık kubbesi (tabanda iris = Göz alanı, üstünde dört ışık yayı). Gerçek baş ve iki göz yok.
+2. İlk günler: ilk hafta ayrı bir görünüm; bir tasarım turu daha yapılır, sahibe ancak 5 saniye kapısından geçerse gider.
+3. Beş alan (Göz, Dikkat, Nefes, Ruh hâli, Hareket; Apple Sağlık Hareket'te); haftalık gelişim bildirimi (Pazartesi,
+   varsayılan kapalı, aylık özet 29., 57., 85. gün); Gelişim açılınca kamera açılmaz.

@@ -1,6 +1,6 @@
 # Gelişim merkezi · Plan (sürüm 1)
 
-Tarih: 2026-09-30. Durum: **TASARIM KAPIDAN GEÇMEDİ; sahibin iki kararı bekleniyor (§2.1).** Veri, bildirim ve kod bölümleri tasarımdan bağımsızdır. Uygulama koduna dokunulmadı; ücretli çağrı yapılmadı. Dal:
+Tarih: 2026-09-30. Durum: **Sahibin üç kararı alındı (2026-09-30, §12); ilk hafta görünümü 5 saniye kapısında (§2.4).** Uygulama koduna dokunulmadı; ücretli çağrı yapılmadı. Dal:
 `claude/gelisim-merkezi-plan`. Kod, onaydan sonra ana oturumda (`claude/cool-pasteur-j5yupf`) yazılır.
 
 **Girdiler:** sahibin isteği (`SAHIP_ISTEKLERI.md` bu klasörde), `DENETIM.md` (bugünkü veri yolu, 4 kritik, 12 önemli
@@ -14,8 +14,10 @@ sayfası: `tasarim.html` (Artifact). Maket: `maket/maket.html`. Kapı notları: 
 
 **Ne değişir.** Gelişim sekmesinin başı, verinin hepsinin toplandığı tek bir canlı resim olur: **ışık kubbesi.** Tabanda
 uygulamanın simgesindeki iris (Göz alanı), üstünde baş biçiminde dört ışık yayı: Dikkat, Nefes, Ruh hâli, Hareket
-(görünüm sahibin kararına bağlı, soru 1). Her yay, o alanda başladığından beri (en çok son 28 günde) kaç günün kaçında çalıştığını gösterir ve tepesinde
-"Nefes 26/28" yazar. İrisin göz bebeği kişinin İlk Bakış'ta ölçülen kendi kırpma hızıyla kırpar. Kişi yürürken Hareket yayı turuncu
+(sahibin kararı). Her yay, o alanda kaç günün kaçında çalışıldığını soldan sağa, bir gösterge gibi doldurur ve tepesinde
+"Nefes 26/28" yazar. Üç evre vardır: **ilk hafta** (1.–7. gün; payda 7, iris büyük, henüz açılmayan alanın izi gri
+noktalı, açılanınki renkli), **ilk ay** (8.–28. gün; payda 28) ve sonrası **son 28 gün**. Başlıkta evre yazar
+("İlk haftan · 3. gün"). İrisin göz bebeği kişinin İlk Bakış'ta ölçülen kendi kırpma hızıyla kırpar. Kişi yürürken Hareket yayı turuncu
 yanar ve üstünde adım temposunda bir ışık akar. Altında Nef'in tek cümlesi ve beş satır durur. Bir alana dokununca o
 alanın ayrıntısı açılır: düzen, basamak, ölçü, değişim.
 
@@ -30,7 +32,7 @@ sayfa ve Nef aynı kayıttan farklı sonuç çıkarabiliyor (DENETIM K1, K2). Pl
 |---|---|
 | "Gelişim merkezi bizim beynimiz; bütün bilgiler burada yoğruluyor" | Tek çıkış `growthCenter`: her modül, test, alışkanlık, WHO-5, Apple Sağlık adımı, İlk Bakış ve yürüyüş buradan geçer; Gelişim, raporlar, Ana sayfa, bildirim ve Nef yalnız buradan okur (§3) |
 | "Canlı bir insan gibi; gözler; beyin kısmı; burundan yukarısı bir kafatası" | Işık katmanlarından baş: gözler tabanda, beş alan baş biçiminde katmanlar. Dürüst not aşağıda |
-| "Gözler olmalı, kamera tespit edebiliyor" | Göz halkası E testi, okuma testi, göz egzersizleri ve kamerayla ölçülen İlk Bakış'tan dolar; gözler senin ölçülen kırpma hızınla kırpar. Kamera bu ekranda açılmaz (soru 3) |
+| "Gözler olmalı, kamera tespit edebiliyor" | Göz halkası E testi, okuma testi, göz egzersizleri ve kamerayla ölçülen İlk Bakış'tan dolar; irisin göz bebeği senin ölçülen kırpma hızınla kırpar. Kamera bu ekranda açılmaz (karar 3) |
 | "Yürürken hareket canlı görünür" | Yürüyüş eşliği açıkken (B3) Hareket yayı turuncu yanar, adım temposunda ışık akar; Nef satırı "Şu an yürüyorsun. 14 dakikada 1,2 km, 1.690 adım." der (§5) |
 | "Göz, nefes, durum, hareket, sağlık takip edilir" | Beş alan: Göz, Dikkat, Nefes, Ruh hâli, Hareket. Apple Sağlık adımları Hareket'e girer (soru 1) |
 | "Veriler kullanıcıya basit sunulur" | Ekranın başında tek resim, tek cümle, yayda "8/9" gibi tek sayı; ayrıntı dokununca |
@@ -50,8 +52,8 @@ katmanların kendisidir. Beş değerlendiricinin kapı sonuçları §2'de.
 genişletir** (G1 + G2), gelişim bildirimi B1'in üstüne G3 olarak Y2 ile aynı sürümde gelir, canlı yürüyüş B3'ün içinde
 G4 olarak gelir. Y2'nin tahmini ≈ 5 iş günüydü; bu plan ≈ 9–11 iş günüdür (VARSAYIM; §10).
 
-**Senden istenen kararlar (önerimle; §12).** (1) Başın görünümü: gerçek baş ve iki göz mü, tek irisli ışık kubbesi mi.
-(2) İlk günlerde ne görünsün. (3) Beş alan, haftalık bildirim ve kamera (üçü öneriyle birlikte).
+**Sahibin kararları (2026-09-30, §12):** tek irisli ışık kubbesi; ilk hafta ayrı görünüm; beş alan, haftalık bildirim,
+kamera yok. Üçü de öneriyle aynı.
 
 ---
 
@@ -105,10 +107,12 @@ Bu yüzden tasarım "mükemmel" diye gönderilmez. Sahibe yalnız iki karar soru
 
 ### 2.2 Ekranın düzeni (ilk görünüm, 390 pt)
 
-1. Başlık "Gelişim" ve sağda "30. gün".
-2. Baş: dört yay (içten dışa Dikkat, Nefes, Ruh hâli, Hareket; her birinin tepesinde ad ve "26/28"), tabanda iki göz
-   halkası ve altında "Göz 24/28". Yay ya da hap dokunulur; o alanın ayrıntısı açılır.
-3. Açıklama satırı: "Her yay bir alan: başladığından beri kaç günün kaçında çalıştığın."
+1. Başlık "Gelişim" ve sağda evre: "İlk haftan · 3. gün", "İlk ayın · 9. gün" ya da "Son 28 gün".
+2. Işık kubbesi: dört yay (içten dışa Dikkat, Nefes, Ruh hâli, Hareket; her birinin tepesinde ad ve "26/28"), tabanda
+   iris ve altında "Göz 24/28"; irisin halkası Göz alanının oranıyla dolar. Yay, hap ya da iris dokunulur; o alanın
+   ayrıntısı açılır.
+3. Açıklama satırı evreye göre: "İlk haftan: her yay, 7 günün kaçında o alanda çalıştığın." / "İlk ayın: her yay, 28
+   günün kaçında…" / "Her yay bir alan: son 28 günün kaçında çalıştığın."
 4. Nef'in tek cümlesi (telefonda kural şablonundan üretilir; §4.4).
 5. Beş satır (alan, tek satır açıklama, durum hapı). Satırın hapı ile yayın hükmü aynı kaynaktan gelir (K1).
 6. Kaydırınca: "Yolun · 30. gün" (onaylı Y2 bölümü), düzen (takvim), Pratikler, hatırlatma deneyi, Doktoruma göster.
@@ -138,7 +142,7 @@ yürüyüş canlı, Hareketi Azalt, VoiceOver.
 ```
 growthCenter({ tests, sessions, profile, habits, health, walk, now }) → {
   sinceStart,                      // kaçıncı gün (ilk kayıttan; bugünkü growthMap.sinceStart)
-  win,                             // min(28, sinceStart): yayın paydası
+  phase, win,                      // 'week' (1–7. gün, win 7) | 'month' (8–28, win 28) | 'rolling' (son 28 gün)
   areas: {                         // beş alan (ekranda); içeride yedi alan korunur (§3.2)
     goz | dikkat | nefes | ruh | hareket: {
       days, frac, today,           // pencerede çalışılan gün sayısı, oran, bugün var mı
@@ -207,8 +211,8 @@ yalnız satırda ve ayrıntıda görünür; telefondan çıkmaz, Nef'e gitmez (b
 ### 4.1 Gelişim başı (§2.2)
 
 `components/GrowthHead.jsx` (yeni): tuval (canvas) çizimi; veri yalnız `growthCenter`'dan. Dokunma alanları her yay
-ve hap için en az 44 pt. VoiceOver: her yay bir düğme ("Nefes: başladığından beri 9 günün 8'inde"), gözler "Göz: 9
-günün 8'inde; son ölçüm alışma döneminde".
+ve hap için en az 44 pt. VoiceOver: her yay bir düğme ("Nefes: ilk ayının 28 gününün 8'inde"), iris "Göz: 28 günün 8'inde; son ölçüm
+alışma döneminde".
 
 ### 4.2 Alan ayrıntısı (onaylı §3.B.6 dört katman)
 
@@ -234,7 +238,7 @@ ve rıza v2 ile bu paketi okur; bu planda Nef paketine yeni alan eklenmez.
 | Öğe | Kaynak | Ne zaman | Hareketi Azalt açıkken |
 |---|---|---|---|
 | Açılışta yayların dolması (900 ms, bir kez) | `growthCenter.areas[].frac` | günün ilk açılışında | yok; yaylar dolu çizilir |
-| Gözlerin kırpması | `profile.firstLook.blinks/seconds` (20 sn'de 3 → ≈ 6,7 sn'de bir) | ekran açıkken | yok |
+| İrisin göz bebeğinin kırpması | `profile.firstLook.blinks/seconds` (20 sn'de 3 → ≈ 6,7 sn'de bir) | ekran açıkken | yok |
 | Bugün çalışılan alanın yayında ince parıltı | `areas[].today` | ekran açıkken, 2 sn | yok; hapın yanında nokta |
 | Yürüyüşte turuncu yay ve akan ışık (adım temposu) | B3 `WalkPlugin` oturumu (`cadence`) | yalnız yürüyüş eşliği sürerken | ışık akmaz; hap "şu an" |
 | Adım sayısı | Apple Sağlık (bugünkü okuma) | ekran açılınca ve öne gelince | aynı |
@@ -384,16 +388,11 @@ plandan).
 
 ---
 
-## 12. Senden istenen kararlar (en çok 3, önerimle)
+## 12. Sahibin kararları (2026-09-30: "tamamdır. evet diytoum")
 
-1. **Başın görünümü.** (a) **Tek irisli ışık kubbesi:** tabanda uygulamanın simgesindeki iris (Göz alanı), üstünde baş
-   biçiminde dört ışık yayı. 30. gün 4/5 ve yürüyüş 5/5 ile geçti; beş kişiden dördü her gün bunu açmak istiyor. Senin
-   "baş, beyin, iki göz" fikrin burada ima edilir, çizilmez. (b) **Gerçek baş ve iki göz:** senin tarifine en yakın;
-   kapıda beş kişiden dördü "ürkütücü", "uzaylı", "maskot" dedi ve iki turda da geçmedi. **Öneri: (a).**
-2. **İlk günler (1.–7. gün).** Yay ya boş görünüyor ("henüz bir şey yok") ya dolu ("hak edilmemiş ödül"); iki hâl de
-   geçmedi. (a) **İlk hafta ayrı bir hâl:** iris büyük ortada durur, yaylar kişi o alanı ilk kez yaptığı gün birer birer
-   belirir ("Nefes bugün açıldı"); 8. günden sonra bugünkü kubbe. Bir tasarım turu daha ister (≈ 1 saat), sonuç sana
-   ancak geçerse gelir. (b) 1. gün "1/1" dolu kalsın. **Öneri: (a).**
-3. **Üç küçük karar, öneriyle birlikte:** beş alan (Göz, Dikkat, Nefes, Ruh hâli, Hareket; Apple Sağlık Hareket'te);
-   haftalık gelişim bildirimi (Pazartesi, varsayılan kapalı, aylık özet 29., 57., 85. gün); Gelişim açılınca kamera
-   açılmaz (gözler ölçülmüş kırpma hızınla canlanır). **Öneri: üçü de evet.**
+Üç önerinin üçü de kabul edildi:
+1. **Görünüm:** tek irisli ışık kubbesi. Gerçek baş ve iki göz çizilmez.
+2. **İlk günler:** ilk hafta ayrı görünüm (payda 7, iris büyük, alanlar açıldıkça izleri renklenir); sahibe ancak 5 saniye
+   kapısından geçerse gider (§2.4).
+3. **Beş alan** (Göz, Dikkat, Nefes, Ruh hâli, Hareket; Apple Sağlık Hareket'te); **haftalık gelişim bildirimi**
+   (Pazartesi, varsayılan kapalı, aylık özet 29., 57., 85. gün); **Gelişim açılınca kamera açılmaz.**
