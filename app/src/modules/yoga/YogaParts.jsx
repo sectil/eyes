@@ -8,7 +8,7 @@ import { cachedTimeline, loadTimelineCached, sectionSpans } from './timeline.js'
 // dersin rengiyle (--yg-c / --yg-cl) çizilir; iki temada (yoga.css). Oynatıcı bu parçaları kullanmaz (hep karanlık).
 
 // ---- Yer: aynı kıyı, günün başka bir anı (yön B "ders bir yer") ----
-// mood: far (kütüphane: uzaktan, güneş ufukta) · shore (ayrıntı: kıyıya varış, güneş yarı doğmuş) · before (önce
+// mood: far (kütüphane: uzaktan, güneş ufukta; vitrin penceresinde büyük) · shore (ayrıntı: kıyıya varış, güneş yarı doğmuş) · before (önce
 // puanı: güneş henüz doğmamış, yalnız ufuktaki ışık) · dawn (sonra puanı: güneş doğmuş, sıcak) · done (bitiş: sıcak
 // şafak, ışık yükselmiş). Yalnız süs (aria-hidden); renkler ve boylar CSS'te (yoga.css .yg-scene). Işık yanıp sönmez;
 // tek hareket ışığın çok yavaş opaklık kayması, Hareketi Azalt'ta yok.
@@ -50,51 +50,6 @@ export function SectionStrip({ sections = [], tl = null, full = false, className
   return (
     <span className={`yg-bar${full ? ' full' : ''} ${className}`.trim()} aria-hidden="true">
       {sections.map((s) => <i key={s.id} style={{ flexGrow: spans?.[s.id] ?? 1 }} />)}
-    </span>
-  )
-}
-
-// ---- Derine inip geri çıkan bölüm yolu (yön B; kütüphane kartı) ----
-// Noktalar derse dalışı çizer: ilk ve son bölüm yüzeyde (dolu nokta), ortadakiler derinde. Derinlik bölümün sırasından
-// (yarım sinüs): her derste aynı biçim, zaman çizelgesi beklenmez. Adlar noktaya yaslanır (4. değerlendirici: "adlar
-// eğriden kopmuş"); nokta ile harf arasında boşluk kalır (5. değerlendirici). Eğri SVG'de; noktalar CSS'te.
-const DIVE_X0 = 6 // px: yüzeydeki noktanın merkezi
-const DIVE_DX = 40 // px: en derindeki noktanın kayması
-export const diveDepth = (i, n) => (n < 3 || i === 0 || i === n - 1 ? 0 : Math.sin((Math.PI * i) / (n - 1)))
-function divePath(n) {
-  const pts = Array.from({ length: n }, (_, i) => [DIVE_X0 + diveDepth(i, n) * DIVE_DX, i + 0.5])
-  let d = `M${pts[0][0]},${pts[0][1]}`
-  for (let i = 0; i < pts.length - 1; i++) {
-    const p0 = pts[i - 1] ?? pts[i]
-    const p1 = pts[i]
-    const p2 = pts[i + 1]
-    const p3 = pts[i + 2] ?? p2
-    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6]
-    const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6]
-    d += ` C${c1[0].toFixed(2)},${c1[1].toFixed(3)} ${c2[0].toFixed(2)},${c2[1].toFixed(3)} ${p2[0].toFixed(2)},${p2[1].toFixed(3)}`
-  }
-  return d
-}
-export function DiveList({ sections = [] }) {
-  const n = sections.length
-  if (!n) return null
-  const W = DIVE_X0 * 2 + DIVE_DX
-  return (
-    <span className="yg-dive">
-      {n > 1 && (
-        <svg className="yg-dive-arc" viewBox={`0 0 ${W} ${n}`} preserveAspectRatio="none" aria-hidden="true" focusable="false">
-          <path d={divePath(n)} fill="none" vectorEffect="non-scaling-stroke" />
-        </svg>
-      )}
-      {sections.map((x, i) => {
-        const d = diveDepth(i, n)
-        const edge = i === 0 || i === n - 1
-        return (
-          <span key={x.id} className={`yg-dive-i${edge ? ' edge' : ''}${d > 0.85 ? ' deep' : ''}`} style={{ '--x': `${(DIVE_X0 + d * DIVE_DX).toFixed(1)}px` }}>
-            {x.label}
-          </span>
-        )
-      })}
     </span>
   )
 }

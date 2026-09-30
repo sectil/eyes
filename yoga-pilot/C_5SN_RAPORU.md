@@ -360,3 +360,128 @@ Uygulama dışında; yeni yerleşim için zorunlu olanlar ve üç ek an:
   - Açılır satırların okunuşu.
   - `color-mix` ve `text-wrap` görünümü iOS Safari'de. `color-mix` modülde zaten kullanılıyordu.
 - Zorlanma sorusu ve durdurma ekranı 5 saniye sınamasının dışındaydı; görünümleri yalnız temaya uyarlandı.
+
+## 12. Kapı turu 1: kök neden ve düzeltme (2026-09-30, 12:25)
+
+Kapı turu 1'de beş değerlendiricinin üçü beş ekranda etkilenmedi: 2 kütüphane, 3 ayrıntı, 4 güvenlik, 5 önce puanı,
+7 sonra puanı. Notlar iki ayrı nedene dayanıyordu.
+
+### 12.1 Kök neden 1: değerlendiriciler eski çekimlere baktı
+
+- **Kanıt.** Notların anlattığı öğeler §1–§11'deki kodda yok, `scratchpad/yoga-5sn/shots/`'taki 10:01 çekimlerinde var:
+  - 2×5 dizilmiş ölçek ("PIN ekranı", "hiç sol üstte, çok sağ altta");
+  - pasif gri "Devam" bloğu;
+  - kütüphanede yazısız, beyaz halkalı yuvarlak ok düğmesi;
+  - gövdeleri açık, yaklaşık 130 kelimelik güvenlik kartı;
+  - temadan bağımsız karanlık sonra puanı ve kesik çizgili "7 · Önce" halkası.
+- **Nasıl oldu.** Uygulama turu yeni çekimi `CIKTI` ile `yoga-uygula/shots/`'a yazdı. `cek.sh`'in varsayılan klasörü
+  (`yoga-5sn/shots/`) 10:01'de kaldı ve kapı onu gösterdi.
+- **Düzeltme:**
+  - Varsayılan klasör yeniden çekildi: 44 PNG, 12:25.
+  - Eski 33 dosya ve eski elle notlar yedeklendi: `scratchpad/yoga-kapi1/shots-10-01/`.
+  - `cek.mjs` artık INDEX.md'nin başına bir **Kod** satırı yazıyor. Satırda yoga modülünün sha256'sı (testler hariç
+    14 dosya) ve en yeni dosyanın saati var. Aynı bilgi `son-calisma.json`'daki her birleşimde de `code` alanında.
+    - Bu çekimin kodu: `f084ba278e06e59f`.
+    - Denetim: `cd app/src/modules/yoga && cat $(ls | grep -E '\.(jsx?|css)$' | grep -v '\.test\.' | sort) | sha256sum`.
+  - Kod bu değerden sonra değiştiyse görüntüler eskidir; değerlendiriciye gösterilmemeli.
+  - INDEX.md'deki eski elle notlar (önceki tasarımın kusurları) kaldırıldı, yerine kısa bir güncel not kondu.
+
+### 12.2 Kök neden 2: akış aynı içeriği art arda gösteriyordu
+
+Notların bir kısmı şimdiki kodda da geçerliydi. Hepsinin ortak nedeni, ekranların işini birbirine yüklemesiydi:
+- (a) Güvenlik kartı Yoga'ya ilk dokunuşta, dersin hiçbir şeyi görünmeden çıkıyordu. Değerlendirici 1, 2 ve 5: "ilk
+  gördüğüm şey bir uyarı", "en çok burada çıkıp giderim".
+- (b) İki ekran sonra ayrıntıdaki açılış satırları kartın maddelerini yineliyordu (beş değerlendiricinin dördü).
+- (c) Kütüphane kartında 7 maddelik bölüm listesi vardı: kart ayrıntının kopyası gibi okunuyordu ve bölümler üç kez
+  görünüyordu (üç değerlendirici).
+- (d) Ayrıntıdaki (i) düğmesinin adı yazmıyordu (bir değerlendirici).
+- (e) "15 dk · Uzanarak"ın yanındaki güneş simgesi bir şey anlatmıyordu (bir değerlendirici).
+- (f) Önce puanında ekranın üstü boştu (iki değerlendirici).
+
+Yapılanlar (metin değişmedi; yeni metin yok):
+1. **Güvenlik kartı ilk derste "Başla"ya dokununca çıkıyor** (PLAN.v3 §D.2'nin akışı: "ders ayrıntısı → (ilk kez:
+   güvenlik kartı ve 10 sn'lik ses denetimi) → önce puanı").
+   - Yoga'ya ilk dokunuşta kütüphane açılır. Kart bir kez çıkar ve ders ondan önce başlamaz.
+   - "Anladım" aynı dokunuş zincirini sürdürür: ses denetimi (dosyası varsa) ya da önce puanı. Puanı olmayan derste ses
+     bu dokunuşta başlar.
+   - Kartta "Geri" ayrıntıya döner. Kart onaylanmadıysa bir sonraki "Başla"da yeniden çıkar.
+   - Yoldan açılan ders (`yoga-2`) de aynı: önce ayrıntı, kart "Başla"da.
+   - Böylece (a) ve (b) birlikte çözüldü: açılış satırları artık kartın tekrarı değil, önünde duruyor. Satırlar
+     ayrıntıda aynen ve "Başla"nın hemen üstünde (modul.md §2.4-12; §10.1 "her ders ekranında").
+2. **Kütüphane kartı dersin vitrini.**
+   - Bölüm listesi kalktı; bölümler yalnız ayrıntıda (şerit ve adlar).
+   - Dersin yeri büyük pencerede ve ekranı dolduruyor: güneş ve ışık büyüdü. Kartın altı artık boş kalmıyor.
+   - Üst satır "☀ Gündüz · 15 dk · Uzanarak". "Gündüz" süzgeç çipinin ve simgenin VoiceOver adının aynısı; yeni söz değil.
+   - Kullanılmayan `DiveList` ve CSS'i silindi.
+3. **Ayrıntıdaki (i) artık "ⓘ Başlamadan önce".** Ad kartın başlığı; eskiden yalnız VoiceOver adıydı. Düğme 44 px.
+   - Ayrıntının üst satırında "Gündüz" yazılmadı. Yazılınca 320 px'te ses adı "·" ile başlayan ikinci satıra düşüyordu.
+     Ad VoiceOver'da okunuyor; simgenin anlamı kütüphane kartında yazılı.
+4. **Önce puanında dersin yolu ve soru üstte, gök ortada, ufuk ölçeği altta.**
+   - Göz önce soruyu okur; ölçek başparmağa yakın kalır.
+   - Yolun çizgileri açık gökte görünür oldu.
+   - Sonra puanı değişmedi.
+
+### 12.3 Alınmayanlar
+
+- **"Tek kart, raf hissi yok", "Yoga ve Meditasyon geniş bir vaat" (üç değerlendirici).** Yayımlı ders tek.
+  - Yayımlanmamış dersleri "yakında" diye göstermek PLAN.v3 §D.1'e aykırı: bir ders ancak §E.7'deki dört koşulu geçince
+    görünür.
+  - Kart artık yarım bir liste değil, tek dersin vitrini. Sahip sorusu §6'da duruyor.
+- **Başlık yazı tipi "çok geniş ve ağır" (bir değerlendirici).** Unbounded, uygulamanın başlık yazı tipi (styles.css
+  `h1`); değişmedi.
+- **"Sayıyı seçince Devam'a da basmak gerekiyor" (bir değerlendirici).** Değişmedi: sürgüde dokunuş seçimi
+  değiştirebilir, ders sesi de iOS'ta bu dokunuşta başlar.
+- **Önce puanında "Devam"ın yeri.** Seçimden önce boş kalıyor. Yeri baştan ayrılmış; seçim yapılınca ölçek kaymasın diye.
+
+### 12.4 Sonuç
+
+- **Testler:** `npx vitest run` → 138 dosya, **1871 test, hepsi geçti** (önce 1870).
+  - Yeni bir test: yoldan açılan derste kart "Başla"da çıkıyor, "Geri" ayrıntıya dönüyor, kart yeniden çıkıyor.
+  - Beklentisi değişen dört test:
+    - güvenlik kartının yeri (girişte değil, ilk "Başla"da; ders kart onaylanmadan başlamıyor; "Anladım" önce puanına
+      geçiyor);
+    - kart testleri artık ayrıntıdan "Başla" ile açılıyor;
+    - ilk kartta "Geri" Ana sayfaya değil, ayrıntıya dönüyor;
+    - kütüphane kartında bölüm listesi yok, "Gündüz · 15 dk · Uzanarak" var.
+  - Ayrıntı testine bir beklenti eklendi: "Başlamadan önce" düğmesinin adı yazılı.
+  - Güvenlik metinleri harfi harfine ve sırası değişmeden sınanıyor.
+- **Derleme:** `vite build` geçti. Çıktı scratchpad'e alındı, depoya yazılmadı. Tek uyarı, önceden de olan 500 kB uyarısı.
+- **Çekim:** `bash scratchpad/yoga-5sn/duzenek/cek.sh` ile varsayılan klasöre, 44 PNG.
+  - Yoga ekranlarının hiçbirinde yatay taşma, görünüm dışı öğe, kırpılmış metin, üst üste binme ya da alt kenarda
+    kesilen öğe yok. Konsolda hata yok.
+  - Kayıt dört birleşimde de doğru: ders 2, 900/900 sn, 7 → 4, "Hayır".
+  - Açık temada koyu çıkan tek ekran oynatıcı (plan gereği).
+- **Kendi bakışım** (390 ve 320, açık ve koyu):
+  - Yoga'nın ilk ekranı artık dersin kendisi: büyük, sakin bir kıyı ve tek eylem.
+  - Ayrıntıda neyin ne işe yaradığı yazılı. Kart dersi başlatan dokunuşta ve bir kez geliyor.
+  - Önce puanında soru ilk bakışta okunuyor, ölçek ufukta.
+  - **Bu bakış bir 5 saniye sınaması değildir.** Değerlendiriciye gerçek sırayla gösterilmeli: 2 → 3 → 4 → 5 → 6b → 6 →
+    7 → 7b → 7c → 8. Bu sıra §11'deki "4 → 2 → 3 …" sırasının yerini alır.
+
+### 12.5 Onay bekleyenler
+
+- **Sahip: güvenlik kartının yeri.**
+  - Kod artık PLAN.v3 §D.2'ye uyuyor; modul.md §2.2 ise "yoga bölümüne ilk girişte" diyor. modul.md buna göre
+    düzeltilmeli.
+  - Sahip girişte istiyorsa geri dönüş küçük: `Yoga.jsx`'te ilk ekran durumu ve `pressStart`'taki koşul.
+  - Nefes modülü (`screens/Breath.jsx`) kartı girişte gösteriyor; iki modül bu konuda farklı davranıyor.
+- **Klinik:** Kart artık ilk dersin başlatılmasından hemen önce çıkıyor ve ders onsuz başlamıyor. Dersi hiç başlatmayan
+  kişi kartı görmüyor. Kartın içeriği ve kapalı gövdeler (§6) aynı.
+- **Türkçe editör:** Yeni metin yok. Yerleşim değişiklikleri:
+  - "Başlamadan önce" ayrıntıda düğmenin yazılı adı oldu;
+  - "Gündüz" kütüphane kartında yazılı.
+
+### 12.6 Değişen dosyalar
+
+- `app/src/modules/yoga/`:
+  - `Yoga.jsx`: kartın yeri ve "Başla" zinciri, vitrin kartı, "Başlamadan önce" düğmesi, `DayIcon`'un yazılı adı, önce
+    puanının dizilimi;
+  - `YogaParts.jsx`: `DiveList` silindi;
+  - `yoga.css`: vitrin, düğme, önce puanı; bölüm yolu CSS'i silindi;
+  - `text.js`: yalnız yorum;
+  - `Yoga.test.jsx`: §12.4.
+- Düzenek (depo dışı): `scratchpad/yoga-5sn/duzenek/cek.mjs`. Yeni akış (kart "Başla"dan sonra), Kod satırı, gerçek akış
+  sırası; `son-calisma.json` dizi biçiminde kaldı.
+- Yedek (değişiklikten önceki hâl): `scratchpad/yoga-kapi1/once/`.
+- Deneme çekimleri: `scratchpad/yoga-kapi1/deneme1/` (penceredeki sahne boş çıkmıştı, düzeltildi) ve `deneme2/`.
+- Yoga dışında hiçbir dosyaya dokunulmadı; git kullanılmadı.

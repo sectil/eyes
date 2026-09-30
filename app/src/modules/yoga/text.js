@@ -30,7 +30,7 @@ export const YT = {
     footer: 'Nefona tedavi değildir. Uzun süredir çok zorlanıyorsan bir uzmanla konuşmak en güçlü adım. Acil durumda',
     emergency: '112',
     ok: 'Anladım',
-    open: 'Başlamadan önce', // (i) düğmesinin erişilebilirlik adı
+    open: 'Başlamadan önce', // ayrıntıdaki (i) düğmesinin yazılı adı (kartın başlığıyla aynı söz)
   },
 
   // Ses denetimi (PLAN.v3 §D.2): ilk derste "Başla"dan önce 10 sn. Dosya yokken adım hiç görünmez (Yoga.jsx

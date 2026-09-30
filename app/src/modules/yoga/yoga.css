@@ -213,35 +213,25 @@
   background: var(--yg-c, #7eb2dd); color: #06090d;
 }
 .yg-card.yg-poster:active, .yg-card.yg-feature:active { filter: brightness(1.04); }
-/* Yayımlı tek ders (yön B + aşılar): beyaz kartın içinde çerçeveli pencere (açık temada koyu blok yok, görsel kartın
-   odağı; 2. değerlendirici), güneşi ufukta sabah göğü; altında süre ve duruş, tam ad, söz, bölüm yolu ve yazılı eylem. */
+/* Yayımlı tek ders: dersin vitrini, ekranı doldurur (kapı turu 1: "tek kart, altı boş, yarım kalmış vitrin"). Beyaz kartın
+   içinde çerçeveli pencere (açık temada koyu blok yok; 2. değerlendirici), güneşi ufukta sabah göğü; pencere kalan
+   yüksekliği alır. Altında gündüz, süre ve duruş, tam ad, söz ve yazılı eylem. Bölüm listesi yalnız ayrıntıda. */
+.yg-list.solo { flex: 1; }
 .yg-card.yg-feature {
-  flex-direction: column; align-items: stretch; gap: 0; padding: 10px; min-height: 0; border-radius: 26px;
+  flex: 1; flex-direction: column; align-items: stretch; gap: 0; padding: 10px; min-height: 0; border-radius: 26px;
   background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-lg); color: var(--ink);
 }
-.yg-window { display: block; height: clamp(118px, calc(30dvh - 72px), 196px); border-radius: 18px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--yg-c, #7eb2dd) 34%, var(--border)); } /* 844: 181 · 640: 120 */
-.yg-window > .yg-scene { width: 100%; height: 100%; --scene-end: color-mix(in srgb, var(--sea) 50%, var(--surface)); }
-.yg-feature-body { display: flex; flex-direction: column; gap: 6px; padding: 14px 8px 6px; min-width: 0; }
+.yg-window { position: relative; display: block; flex: 1 1 auto; min-height: 150px; border-radius: 18px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--yg-c, #7eb2dd) 34%, var(--border)); }
+.yg-window > .yg-scene { position: absolute; inset: 0; --scene-end: color-mix(in srgb, var(--sea) 50%, var(--surface)); }
+/* Büyük pencerede güneş ve ışık da büyür (ufuk göğün %66'sında) */
+.yg-window > .yg-scene.is-far { --hy: 66%; --gh: 58%; --sun-d: 46px; --sun-y: 2px; }
+.yg-feature-body { display: flex; flex-direction: column; gap: 6px; padding: 16px 8px 6px; min-width: 0; }
 .yg-feature .yg-card-m { font-size: 0.92rem; font-weight: 650; color: var(--yg-cl, var(--accent)); }
 .yg-feature .yg-card-m svg { color: var(--yg-tint); }
 .yg-feature .yg-card-t { font-size: 1.55rem; line-height: 1.16; }
 .yg-feature .yg-card-s { font-size: 0.98rem; color: var(--ink-2); line-height: 1.45; }
-.yg-flow { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--border); }
-.yg-flow-l { font-size: 0.8rem; font-weight: 650; letter-spacing: 0.01em; color: var(--ink-3); }
-/* Derine inip geri çıkan yol (DiveList): eğri SVG'de, noktalar satırda; ad noktaya yaslı, arada 12 px */
-.yg-dive { position: relative; display: flex; flex-direction: column; --row: 27px; }
-.yg-dive-arc { position: absolute; left: 0; top: 0; width: 52px; height: 100%; overflow: visible; pointer-events: none; }
-.yg-dive-arc path { stroke: color-mix(in srgb, var(--yg-tint) 55%, transparent); stroke-width: 1.6; }
-.yg-dive-i { position: relative; display: block; height: var(--row); line-height: var(--row); padding-left: calc(var(--x) + 17px); font-size: 0.94rem; color: var(--ink-2); white-space: nowrap; }
-.yg-dive-i::before {
-  content: ''; position: absolute; left: var(--x); top: 50%; width: 10px; height: 10px; box-sizing: border-box; transform: translate(-50%, -50%);
-  border-radius: 50%; background: var(--surface); border: 1.6px solid var(--yg-tint);
-}
-.yg-dive-i.edge::before { background: var(--yg-tint); }
-.yg-dive-i.deep { color: var(--ink); }
-.yg-dive-i.deep::before { width: 12px; height: 12px; background: color-mix(in srgb, var(--yg-c, #7eb2dd) 40%, var(--surface)); }
 .yg-card-go {
-  display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; margin-top: 14px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; margin-top: 16px; border-radius: 16px;
   background: var(--yg-btn); color: var(--yg-btn-ink); font: 650 1rem var(--font-body); letter-spacing: -0.01em;
   box-shadow: 0 12px 26px -16px color-mix(in srgb, var(--yg-btn) 85%, transparent);
 }
@@ -265,6 +255,10 @@
 .yg-detail-hero .yg-scene { --hy: 84%; }
 .yg-hero .yg-top { position: relative; z-index: 1; }
 .yg-hero .btn-icon { background: color-mix(in srgb, var(--surface) 78%, transparent); border-color: color-mix(in srgb, var(--border) 60%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+/* "ⓘ Başlamadan önce": güvenlik kartını yeniden açar; adı yazılı (yalnız simge ne işe yaradığını söylemiyordu) */
+.yg-hero .btn-icon.yg-pill { width: auto; gap: 8px; padding: 0 14px 0 12px; font: 600 0.92rem/1.2 var(--font-body); color: var(--ink); white-space: nowrap; }
+.yg-pill svg { flex: none; color: var(--yg-tint); }
+.yg-pill:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .yg-head { display: flex; flex-direction: column; gap: 6px; }
 .yg-detail .yg-head .yg-h { font-size: clamp(1.45rem, 7.2vw, 1.8rem); line-height: 1.14; }
 /* Üst satır sayfa zemininde: yazı ink-2 (ders rengi yazı yalnız beyaz kartta), simgeler ders renginde */
@@ -319,9 +313,14 @@
 /* ---------- Önce ve sonra puanı ---------- */
 .yg-rating { gap: 12px; }
 .yg-rating > .yg-grow-top { flex: 2; }
-.yg-rating.is-before > .yg-grow-bot { flex: 0.5; } /* önce: soru ve ölçek başparmağa yakın, üstte gök */
+/* Önce: üstte dersin yolu ve soru (göz önce soruyu okur), arada gök, altta ufuk-ölçek (başparmağa yakın) */
+.yg-rating.is-before > .yg-grow-top { flex: 0 0 4px; }
+.yg-rating.is-before > .yg-grow-mid { flex: 1.6; min-height: 24px; }
+.yg-rating.is-before > .yg-grow-bot { flex: 0.5; }
 .yg-rate-hero { height: calc(env(safe-area-inset-top) + clamp(104px, 24dvh, 190px)); } /* 844: 237 · 640: 174 */
 .yg-rating.is-after > .yg-grow-top { flex: 0.5; }
+.yg-rating.is-before > .yg-path { margin-top: 10px; } /* adım göstergesi üstte: ekranın üstü boş kalmaz (kapı turu 1) */
+.yg-rating.is-before .yg-path li + li::before { background: color-mix(in srgb, var(--yg-tint) 26%, var(--surface-3)); }
 .yg-q { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
 .yg-rating .yg-h { font-size: clamp(1.6rem, 7.6vw, 2rem); font-weight: 650; line-height: 1.14; letter-spacing: -0.015em; }
 .yg-why { margin: 0; font-size: 1.02rem; line-height: 1.45; color: var(--ink-2); }
@@ -475,12 +474,10 @@
   .yg-card.yg-poster .yg-poster-art { height: 104px; }
   .yg-lib { gap: 10px; }
   .yg-card.yg-feature { padding: 8px; }
-  .yg-window { height: 86px; }
-  .yg-feature-body { gap: 4px; padding-top: 10px; }
+  .yg-window { min-height: 120px; }
+  .yg-feature-body { gap: 4px; padding-top: 12px; }
   .yg-feature .yg-card-t { font-size: 1.26rem; }
-  .yg-flow { margin-top: 6px; padding-top: 8px; gap: 2px; }
-  .yg-dive { --row: 21px; }
-  .yg-card-go { margin-top: 8px; min-height: 48px; }
+  .yg-card-go { margin-top: 12px; min-height: 48px; }
   /* Ayrıntı: "Başla" ilk görünümde. Hazırlık "Başla"nın altına iner (dersin sesinde de söyleniyor, 0:19); "Sonra
      yaparım" hemen "Başla"nın altında kalır. Açılış satırları yine "Başla"nın hemen üstünde. */
   .yg-detail { gap: 10px; }

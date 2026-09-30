@@ -20,7 +20,7 @@ import { currentLesson, setCurrentLesson, clearCurrentLesson, newLessonSession, 
 import { sessionRecord, liveLesson } from './journal.js'
 import YogaPlayer from './YogaPlayer.jsx'
 import LessonArt from './LessonArt.jsx'
-import { Scene, HorizonScale, LessonPath, DiveList, SectionStrip, useTimeline, PrepIcon, prepKind, glueLast } from './YogaParts.jsx'
+import { Scene, HorizonScale, LessonPath, SectionStrip, useTimeline, PrepIcon, prepKind, glueLast } from './YogaParts.jsx'
 import { sectionAt } from './timeline.js'
 import './yoga.css'
 
@@ -75,8 +75,12 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
   const startLesson = fromPath != null && visible.includes(fromPath) ? fromPath : null
   const running = currentLesson()
   const [n, setN] = useState(() => running?.lesson ?? startLesson)
-  const [screen, setScreen] = useState(() => (running ? 'play' : !opts.safetySeen ? 'safety' : startLesson ? 'detail' : 'library'))
-  const [safetyBack, setSafetyBack] = useState(() => (startLesson ? 'detail' : 'library'))
+  // Güvenlik kartı modülün girişinde değil, ilk derste "Başla"ya dokununca (PLAN.v3 §D.2 akışı: "ders ayrıntısı → (ilk
+  // kez: güvenlik kartı ve 10 sn'lik ses denetimi) → önce puanı"). Yoga'ya ilk dokunuşta ders görünür; kart dersi
+  // başlatan dokunuşla bir kez gelir ve ders ondan önce başlamaz (kapı turu 1: C_5SN_RAPORU.md §12).
+  const [screen, setScreen] = useState(() => (running ? 'play' : startLesson ? 'detail' : 'library'))
+  const [safetyBack, setSafetyBack] = useState('detail')
+  const [safetyGo, setSafetyGo] = useState(false) // kart "Başla"dan açıldı: "Anladım" dersi başlatma zincirini sürdürür
   const [minutes, setMinutes] = useState(() => (startLesson ? pickMinutes(startLesson, pathMinutes ?? opts.minutesByLesson[startLesson]) : null))
   const [prevMinutes, setPrevMinutes] = useState(null)
   const [before, setBefore] = useState(null)
@@ -139,6 +143,15 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
   }
   function pressStart() {
     haptic('tick')
+    // İlk derste önce güvenlik kartı; "Anladım" aynı zinciri sürdürür (ses ve ders yine bir dokunuşun içinde başlar)
+    if (!opts.safetySeen) {
+      setSafetyBack('detail')
+      setSafetyGo(true)
+      return setScreen('safety')
+    }
+    startChain()
+  }
+  function startChain() {
     if (needSound) {
       playSoundCheck() // iOS sesi yalnız dokunuşun içinde açar
       return setScreen('sound')
@@ -223,14 +236,20 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
   const flashSafe = profileSignals(profile).flashSafe
 
   if (screen === 'safety') {
-    // Kartın rengi: (i) ile ayrıntıdan açıldıysa o dersin, ilk girişte kütüphanede ilk görünecek dersin (renk tutarlı kalsın)
-    const Ls = LESSONS[safetyBack === 'detail' && n != null ? n : visible[0]] ?? null
+    // Kartın rengi: açıldığı dersin (ayrıntıdan gelinir: "Başla" ya da "Başlamadan önce" düğmesi)
+    const Ls = LESSONS[n ?? visible[0]] ?? null
     return (
       <SafetyCard
         L={Ls}
-        onOk={() => { if (!opts.safetySeen) update({ safetySeen: true }); setScreen(safetyBack) }}
-        // Geri: (i) ile açıldıysa ayrıntıya; ilk girişte Ana sayfaya (kart bir sonraki girişte yeniden çıkar)
-        onBack={() => (opts.safetySeen ? setScreen(safetyBack) : onExit?.())}
+        onOk={() => {
+          if (!opts.safetySeen) update({ safetySeen: true })
+          if (safetyGo) {
+            setSafetyGo(false)
+            startChain() // "Başla"dan gelindi: ses denetimi ya da önce puanı (bu dokunuşun içinde)
+          } else setScreen(safetyBack)
+        }}
+        // Geri: ayrıntıya; dersi başlatmadan dönülürse kart bir sonraki "Başla"da yeniden çıkar
+        onBack={() => { setSafetyGo(false); setScreen(safetyBack) }}
       />
     )
   }
@@ -261,7 +280,7 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
         onMinutes={chooseMinutes}
         onMusicTail={(m) => update({ musicTail: m })}
         onBack={() => (fromPath != null ? onExit?.() : setScreen('library'))}
-        onSafety={() => { setSafetyBack('detail'); setScreen('safety') }}
+        onSafety={() => { setSafetyBack('detail'); setSafetyGo(false); setScreen('safety') }}
         onEvening={() => openLesson(3)}
         onStart={pressStart}
         // "Sonra yaparım" (PLAN.v3 §B.2-9): yalnız yoldan açılan derste; durak bugün sonraya bırakılır, Ana sayfaya dönülür
@@ -301,12 +320,16 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
         {isBefore
           ? <div className="yg-top"><button type="button" className="btn-icon" onClick={() => setScreen('detail')} aria-label={YT.back}><ChevronLeft size={20} aria-hidden="true" /></button></div>
           : <div className="yg-hero yg-rate-hero"><LessonScene L={L} mood="dawn" /></div>}
+        {/* Önce: dersin yolu en üstte, adım göstergesi gibi (kapı turu 1: "ekranın üst %40'ı boş"); gök arada kalır */}
+        {isBefore && <LessonPath title={L.title} labels={YT.rate} />}
         <div className="grow yg-grow-top" />
-        <LessonPath title={L.title} after={!isBefore} labels={YT.rate} />
+        {!isBefore && <LessonPath title={L.title} after labels={YT.rate} />}
         <div className="yg-q">
           <h1 className="yg-h">{L.question}</h1>
           <p className="yg-why">{isBefore ? YT.rate.why : YT.rate.again}</p>
         </div>
+        {/* Önce: soru üstte okunur, gök soru ile ufuk (ölçek) arasında; ölçek başparmağa yakın */}
+        {isBefore && <div className="grow yg-grow-mid" />}
         <HorizonScale
           value={val}
           onChange={isBefore ? setBefore : setAfter}
@@ -397,7 +420,6 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
   return (
     <Library
       visible={visible}
-      minutesOf={(k) => pickMinutes(k, opts.minutesByLesson[k])}
       onBack={onExit}
       onOpen={(k) => openLesson(k)}
     />
@@ -544,22 +566,26 @@ function SleepEnd({ onStop }) {
   )
 }
 
-// Gündüz ya da gece: simge ve VoiceOver için görünmez ad (renk ya da simge tek başına bilgi taşımaz)
-function DayIcon({ daypart }) {
+// Gündüz ya da gece: simge ve adı (renk ya da simge tek başına bilgi taşımaz). shown: ad yazılı ("☀ Gündüz"; kapı turu
+// 1: "güneş simgesi ilk bakışta hiçbir şey anlatmıyor"); yoksa yalnız VoiceOver için. Ad süzgeç çipleriyle aynı söz.
+// rest: adın ardından aynı satırda yazılan ("· 15 dk · Uzanarak"; ad yazılıysa onunla tek parça, araya fazla boşluk girmez)
+function DayIcon({ daypart, shown = false, rest = '' }) {
   const night = daypart === 'night'
+  const name = night ? YT.detail.night : YT.detail.day
   return (
     <>
       {night ? <Moon size={14} aria-hidden="true" /> : <Sun size={14} aria-hidden="true" />}
-      <span className="yg-sr">{night ? YT.detail.night : YT.detail.day}</span>
+      {shown ? <span>{name}{rest ? ` · ${rest}` : ''}</span> : <><span className="yg-sr">{name}</span><span>{rest}</span></>}
     </>
   )
 }
 
-// Kütüphane. Yayımlı tek ders varken (yön B + değerlendiricilerin aşıları) kart dersi tanıtır: dersin yeri çerçeveli bir
-// pencerede (açık temada beyaz kartın içinde, 2. değerlendirici; güneş ufukta, 1. ve 3. değerlendirici), süre ve duruş,
-// tam ad, söz, derine inip geri çıkan bölüm yolu ve yazılı eylem "Derse git". Kartın tamamı tek düğme. Birden çok
-// derste kartlar dersin karanlık imgesiyle (değişmedi).
-function Library({ visible, minutesOf, onBack, onOpen }) {
+// Kütüphane: Yoga'ya ilk dokunuşta görünen ekran (güvenlik kartı artık ilk "Başla"da). Yayımlı tek ders varken kart
+// dersin vitrinidir ve ekranı doldurur: dersin yeri büyük, çerçeveli bir pencerede (güneş ufukta), altında gündüz, süre ve
+// duruş, tam ad, söz ve yazılı eylem "Derse git". Bölüm listesi yalnız ayrıntıda (kapı turu 1: kütüphane kartı "ayrıntı
+// sayfasının kopyası", bölümler üç kez görünüyordu). Kartın tamamı tek düğme. Birden çok derste kartlar dersin karanlık
+// imgesiyle (değişmedi).
+function Library({ visible, onBack, onOpen }) {
   const [filter, setFilter] = useState(null)
   const filters = [
     { id: 'day', label: YT.filters.day, ok: (n) => LESSONS[n].daypart === 'day' },
@@ -588,9 +614,8 @@ function Library({ visible, minutesOf, onBack, onOpen }) {
       <div className={`yg-list${solo ? ' solo' : ''}`}>
         {list.map((k) => {
           const Lk = LESSONS[k]
-          const meta = <span className="yg-card-m"><DayIcon daypart={Lk.daypart} /> {minutesLabel(publishedMinutes(k))} · {POSTURE_LABEL[Lk.posture]}</span>
+          const meta = <span className="yg-card-m"><DayIcon daypart={Lk.daypart} shown={solo} rest={`${minutesLabel(publishedMinutes(k))} · ${POSTURE_LABEL[Lk.posture]}`} /></span>
           if (solo) {
-            const flow = sectionsOf(k, minutesOf?.(k) ?? null)
             return (
               <button key={k} type="button" className="yg-card yg-feature" style={tone(Lk)} onClick={() => onOpen(k)}>
                 <span className="yg-window"><LessonScene L={Lk} mood="far" /></span>
@@ -598,12 +623,6 @@ function Library({ visible, minutesOf, onBack, onOpen }) {
                   {meta}
                   <span className="yg-card-t">{Lk.fullTitle}</span>
                   <span className="yg-card-s">{Lk.tagline}</span>
-                  {flow.length > 0 && (
-                    <span className="yg-flow">
-                      <span className="yg-flow-l">{YT.detail.sections}</span>
-                      <DiveList sections={flow} />
-                    </span>
-                  )}
                   <span className="yg-card-go">{YT.library.open}<ArrowRight size={20} aria-hidden="true" /></span>
                 </span>
               </button>
@@ -691,13 +710,16 @@ function Detail({ L, minutes, prevMinutes, opts, onMinutes, onMusicTail, onBack,
         <LessonScene L={L} mood="shore" />
         <div className="yg-top">
           <button type="button" className="btn-icon" onClick={onBack} aria-label={YT.back}><ChevronLeft size={20} aria-hidden="true" /></button>
-          <button type="button" className="btn-icon" onClick={onSafety} aria-label={YT.safety.open}><Info size={20} aria-hidden="true" /></button>
+          {/* Güvenlik kartını yeniden açan (i): adı yazılı (kapı turu 1: "sağ üstteki (i)'nin ne işe yaradığı belli değil") */}
+          <button type="button" className="btn-icon yg-pill" onClick={onSafety}><Info size={18} aria-hidden="true" /><span>{YT.safety.open}</span></button>
         </div>
       </div>
 
       <div className="yg-head">
         <span className="yg-ey yg-meta">
-          <span className="yg-meta-a"><DayIcon daypart={L.daypart} /> {!choose && minutes != null ? `${minutes}${NBSP}dk · ` : ''}{POSTURE_LABEL[L.posture]}</span>
+          {/* Ayrıntıda gündüz adı yalnız VoiceOver için: yazılınca 320 px'te ses adı "·" ile başlayan ikinci satıra düşüyordu;
+              simgenin anlamı kütüphane kartında yazılı ("☀ Gündüz") */}
+          <span className="yg-meta-a"><DayIcon daypart={L.daypart} rest={`${!choose && minutes != null ? `${minutes}${NBSP}dk · ` : ''}${POSTURE_LABEL[L.posture]}`} /></span>
           {voice && <span className="yg-meta-v"><span className="yg-meta-sep" aria-hidden="true">·</span><AudioLines size={15} aria-hidden="true" />{voice}</span>}
         </span>
         <h1 className="yg-h">{L.fullTitle}</h1>

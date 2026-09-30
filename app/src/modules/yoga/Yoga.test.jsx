@@ -111,24 +111,55 @@ describe('web', () => {
 })
 
 describe('ilk giriş, kütüphane ve ayrıntı', () => {
-  it('güvenlik kartı bir kez, metni aynen (modul.md §2.2); kütüphanede yalnız yayımlanmış ders', async () => {
+  // Güvenlik kartının yeri PLAN.v3 §D.2'nin akışı: "ders ayrıntısı → (ilk kez: güvenlik kartı ve 10 sn'lik ses denetimi) →
+  // önce puanı". Eskiden Yoga'ya ilk dokunuşta, kütüphaneden önce çıkıyordu (modul.md §2.2); kapı turu 1'de beş
+  // değerlendiricinin üçü "Yoga'ya ilk dokunuşta ilk gördüğüm şey bir uyarı" dedi (C_5SN_RAPORU.md §12). Kart yine bir kez,
+  // metni aynen ve ders ondan önce başlamaz.
+  it('ilk dokunuşta kütüphane; güvenlik kartı ilk "Başla"da bir kez, metni aynen; ders kart onaylanmadan başlamaz; "Anladım" önce puanına geçer', async () => {
     const r = await mount()
+    expect(r.text()).toContain('Yoga ve Meditasyon')
+    expect(r.text()).not.toContain(YT.safety.items[0].h)
+    expect(r.text()).toContain('Derin Dinlenme')
+    for (const hidden of ['Nefesin Ritmi', 'Tek Nokta', 'Uykuya Geçiş']) expect(r.text()).not.toContain(hidden)
+    expect(r.radios()).toEqual([]) // tek dersle süzgeç çipi anlamsız
+    await r.tapWhere((n) => n.textContent.includes('Derin Dinlenme'))
+    expect(r.text()).toContain('Derin Dinlenme (Yoga Nidra)') // ayrıntı, kart yok
+    expect(r.text()).not.toContain(YT.safety.items[0].h)
+    await r.tap('Başla')
     const t = r.text()
-    expect(t).toContain('Başlamadan önce')
+    expect(r.container.querySelectorAll((n) => n.nodeName === 'H1')[0].textContent).toBe('Başlamadan önce')
     for (const it of YT.safety.items) expect(t).toContain(`${it.h} ${it.p}`)
     expect(t).toContain('İstediğin an dersi bitirebilirsin. Gözlerini açabilir, kıpırdayabilir, nefesini kendi hâline bırakabilirsin.')
     expect(t).toContain('Araç kullanırken açma. Bu dersler uyku getirebilir.')
     expect(t).toContain('Nefona tedavi değildir. Uzun süredir çok zorlanıyorsan bir uzmanla konuşmak en güçlü adım. Acil durumda 112.')
+    expect(eng.calls.some(([c]) => c === 'start')).toBe(false) // ders kart onaylanmadan başlamaz
+    expect(optsNow().safetySeen).toBeUndefined()
     await r.tap('Anladım')
     expect(optsNow().safetySeen).toBe(true)
-    expect(r.text()).toContain('Yoga ve Meditasyon')
-    expect(r.text()).toContain('Derin Dinlenme')
-    for (const hidden of ['Nefesin Ritmi', 'Tek Nokta', 'Uykuya Geçiş']) expect(r.text()).not.toContain(hidden)
-    expect(r.radios()).toEqual([]) // tek dersle süzgeç çipi anlamsız
+    expect(optsNow().soundCheck).toBe('nofile') // "Başla" zinciri sürdü (ses denetimi dosyası yok)
+    expect(r.text()).toContain('Bedenin şu an ne kadar gergin?')
     await r.unmount()
     const again = await mount()
-    expect(again.text()).not.toContain('Başlamadan önce')
+    await again.tapWhere((n) => n.textContent.includes('Derin Dinlenme'))
+    await again.tap('Başla')
+    expect(again.text()).not.toContain(YT.safety.items[0].h) // bir kez
+    expect(again.text()).toContain('Bedenin şu an ne kadar gergin?')
     await again.unmount()
+  })
+  it('yoldan açılan ders (yoga-2): ilk kez de önce ayrıntı, kart "Başla"da; kartta Geri ayrıntıya döner ve kart sonraki "Başla"da yeniden çıkar', async () => {
+    const r = await mount({ route: 'yoga-2' })
+    expect(r.text()).toContain('Derin Dinlenme (Yoga Nidra)')
+    await r.tap('Başla')
+    expect(r.text()).toContain(YT.safety.items[1].h)
+    await r.tap('Geri')
+    expect(r.p.onExit).not.toHaveBeenCalled()
+    expect(r.text()).toContain('Derin Dinlenme (Yoga Nidra)')
+    expect(optsNow().safetySeen).toBeUndefined()
+    await r.tap('Başla')
+    expect(r.text()).toContain(YT.safety.items[1].h)
+    await r.tap('Anladım')
+    expect(r.text()).toContain('Bedenin şu an ne kadar gergin?')
+    await r.unmount()
   })
   it('ders ayrıntısı: ad ve söz, yalnız yayımlanmış süre, bölüm şeridi, hazırlık, kaynaklar, açılış satırları, Başla', async () => {
     seen()
@@ -157,7 +188,9 @@ describe('ilk giriş, kütüphane ve ayrıntı', () => {
     expect(t).not.toContain('Uyumadan önce dinliyorsan') // Uykuya Geçiş yayımlanmadı
     expect(t).not.toContain('Çalan uyku sesi duracak.')
     expect(r.btn('Başla')).toBeTruthy()
-    await r.tap('Başlamadan önce') // (i): güvenlik kartı yeniden
+    // (i): güvenlik kartı yeniden; adı yazılı (kapı turu 1: "sağ üstteki (i)'nin ne işe yaradığı belli değil")
+    expect(r.btn('Başlamadan önce').textContent.trim()).toBe('Başlamadan önce')
+    await r.tap('Başlamadan önce')
     expect(r.text()).toContain('Sesi kısık tut.')
     await r.tap('Anladım')
     expect(r.text()).toContain('Derin Dinlenme (Yoga Nidra)')
@@ -175,14 +208,16 @@ describe('ilk giriş, kütüphane ve ayrıntı', () => {
 
 // İlk görünüm (5 saniye yeniden tasarımı, yoga-pilot/C_5SN_RAPORU.md): metin aynı, sunuş değişti. Sınanan: güvenlik
 // kartında beş madde açılır satırda, ana cümleleri görünür, gövdeleri aynen DOM'da; sağlık maddesi "tedavi değildir · 112"
-// notuyla aynı kartta; tek ders varken kütüphane kartı dersi tanıtır (tam ad, bölümler sırasıyla, "Derse git"); önce ve
+// notuyla aynı kartta; tek ders varken kütüphane kartı dersin vitrinidir (tam ad, söz, "Gündüz · 15 dk · Uzanarak",
+// "Derse git"; bölüm listesi yalnız ayrıntıda, kapı turu 1); güvenlik kartı ilk "Başla"da (PLAN.v3 §D.2); önce ve
 // sonra puanı TEMADA (eskiden sonra puanı ve zorlanma sorusu temadan bağımsız karanlıktı: modul.md §2 "Oynatıcı bunun
 // istisnasıdır" ve görev kuralı "öteki yoga ekranları iki temada" ile çelişiyordu, OZET.md §9); 1–10 tek ayarlanabilir
 // ölçek; sonra puanında önceki puan yalnız seçimden sonra (OZET.md §10; eskiden seçeneklerin arasında "6 Önce").
 describe('ilk görünüm', () => {
   const inNight = (n) => { for (let x = n; x; x = x.parentNode) if (/\byg-night\b/.test(x.className ?? '')) return true; return false }
   it('güvenlik kartı: beş madde metni aynen; önce dersle ilgili dört madde, sonra sağlık maddesi ve hemen altında 112 notu', async () => {
-    const r = await mount()
+    const r = await mount({ route: 'yoga-2' })
+    await r.tap('Başla') // ilk derste kart "Başla"yla gelir
     const items = r.container.querySelectorAll((n) => n.nodeName === 'LI')
     expect(items.map((li) => li.textContent)).toEqual(SAFETY_ORDER.map((i) => `${YT.safety.items[i].h} ${YT.safety.items[i].p}`))
     expect([...SAFETY_ORDER].sort()).toEqual([0, 1, 2, 3, 4]) // her madde bir kez
@@ -194,6 +229,8 @@ describe('ilk görünüm', () => {
   })
   it('güvenlik kartı: her madde açılır satır; ana cümle özette (hep görünür), gövde aynı satırın içinde; sağlık maddesi ve 112 notu aynı kartta; Geri', async () => {
     const r = await mount()
+    await r.tapWhere((n) => n.textContent.includes('Derin Dinlenme'))
+    await r.tap('Başla')
     const det = r.container.querySelectorAll((n) => n.nodeName === 'DETAILS' && /yg-acc-i/.test(n.getAttribute('class') ?? ''))
     expect(det).toHaveLength(5)
     for (const d of det) {
@@ -207,12 +244,14 @@ describe('ilk görünüm', () => {
     const health = r.cls(/yg-acc-health/)[0]
     expect(health.textContent).toContain('Bir sağlık durumun varsa önce danış.')
     expect(health.textContent).toContain('Nefona tedavi değildir.')
-    await r.tap('Geri') // ilk girişte Geri: Ana sayfaya; kart bir sonraki girişte yeniden çıkar
-    expect(r.p.onExit).toHaveBeenCalled()
+    await r.tap('Geri') // Geri: ayrıntıya (kart "Başla"dan açıldı); ders başlamaz, kart bir sonraki "Başla"da yeniden çıkar
+    expect(r.p.onExit).not.toHaveBeenCalled()
+    expect(r.text()).toContain('Derin Dinlenme (Yoga Nidra)')
+    expect(eng.calls.some(([c]) => c === 'start')).toBe(false)
     expect(optsNow().safetySeen).toBeUndefined()
     await r.unmount()
   })
-  it('tek ders yayımlıyken kütüphane kartı: tam ad, söz, süre ve duruş, bu sürenin bölümleri sırasıyla; tek düğme', async () => {
+  it('tek ders yayımlıyken kütüphane kartı dersin vitrini: tam ad, söz, gündüz, süre ve duruş, yazılı eylem; bölüm listesi yok; tek düğme', async () => {
     seen()
     const r = await mount()
     const cards = r.container.querySelectorAll((n) => n.nodeName === 'BUTTON' && n.textContent.includes('Derin Dinlenme'))
@@ -220,8 +259,10 @@ describe('ilk görünüm', () => {
     const c = cards[0].textContent
     expect(c).toContain('Derin Dinlenme (Yoga Nidra)')
     expect(c).toContain('Uyanıkken derin bir dinlenmeye davet.')
-    expect(c).toContain('15\u00a0dk · Uzanarak')
-    expect(c).toContain('BölümlerKarşılamaNiyet (sankalpa)Beden dolaşımıNefes ve geri saymaİmgelemeNiyete dönüşKapanış')
+    expect(c).toContain('Gündüz · 15\u00a0dk · Uzanarak') // güneş simgesinin adı yazılı (kapı turu 1)
+    // Bölüm listesi yalnız ayrıntıda (kapı turu 1: kütüphane kartı "ayrıntı sayfasının kopyası", bölümler üç kez görünüyordu)
+    expect(c).not.toContain(YT.detail.sections)
+    expect(c).not.toContain('Niyet (sankalpa)')
     expect(c).toContain(YT.library.open) // yazılı eylem ("Derse git"; yeni metin)
     expect(c).not.toMatch(/\d+ ders\b/) // "1 ders" sayısı yok (üç değerlendirici: "boş raf hissi")
     await r.unmount()
