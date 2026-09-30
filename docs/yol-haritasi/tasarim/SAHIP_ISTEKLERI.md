@@ -94,3 +94,20 @@ uygulanır: uygulamanın her ekranının ilk 5 saniyesi.
 karar 7 ve sonsuz yol planı karar 1'deki "yoga yayınından sonra" koşulu bu şekilde değişti; gerekçe: çakışma yalnız
 dosyalarda, seslerde değil). Sıra: yoga C adımı kodu kaydedilir → Y1 (merdivenler, nefes 1→2→3 dk) başlar. Her iş sahibe
 gitmeden 5 saniye sınamasından geçer.
+
+## Sahibin 2026-09-30 isteği: nefona.com güncellemesi (son aşama)
+> "Bence yaptığını yeni işleri de en son plan eklemesliain Nefona.com sitesini güncellemelisin yeni özellikler ekledik
+> yoga, sonsuzluk, alarm, hava durumu vs gibi. Ama bunları modüller bittikten sonra görerek düzeltmen gerekiyor"
+
+Uygulama: site güncellemesi planın son aşamasıdır. Bir özellik siteye ancak bitip cihazda görüldükten sonra, bitmiş
+hâlinin gerçek ekranlarıyla girer; planda olup yapılmamış olan (ör. hava, Y5) girmez. Plan bölümü taslağı hazırlanıyor.
+
+## Sahibin 2026-09-30 kararları: ana sayfa ve sürüm notu
+- **Ana sayfa şimdi yeniden tasarlanır, TestFlight beklemez.** Y1'in ekranları üç turda 5 saniye kapısını geçemedi
+  (`Y1_5SN_SONUCLARI.md`; ana sayfanın ilk görünümü Y1'den önce de geçmiyordu). Seçenek aynen: "Şimdi, TestFlight
+  beklemesin — ana sayfa yeniden tasarlanır; yoga hazır olunca TestFlight ana sayfanın bugünkü hâliyle çıkar." Yöntem
+  değişti (aynı yöntem üç kez başarısız oldu): yoga ekranlarındaki gibi üç ayrı tasarım yönü, beş bağımsız
+  değerlendirici. Bu, planın Y3 §3.F (ilk 5 saniye) işinin ana sayfa kısmını öne alır.
+- **28 Eylül sürüm notu maddeleri gösterilir.** Simge, açılış ekranı, WHO-5, alarm ve uyku ekranı maddeleri o günün zaten
+  gönderilmiş girdisine sonradan eklendiği için Yenilikler penceresinde çıkmadı (Bug 31 kalıbı). Seçenek aynen: "Evet,
+  göster" → bir sonraki TestFlight girdisine taşınır.
