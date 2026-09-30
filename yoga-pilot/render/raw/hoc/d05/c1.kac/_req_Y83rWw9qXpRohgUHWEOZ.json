@@ -1,0 +1,28 @@
+{
+ "node_id": "Y83rWw9qXpRohgUHWEOZ",
+ "session_ids": [
+  "cKLNM0lZZvIqLZYgLTNV",
+  "WDwdSXUXOHVmw8faaVIr"
+ ],
+ "requested_at": "2026-09-30T06:57:25.792Z",
+ "tts": "Dikkatinin kaç kez dağıldığı hiç önemli değil; her dönüş değerli.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "cKLNM0lZZvIqLZYgLTNV",
+   "generation_id": "4R4WTpdRYjtuAycgwn7J",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/cKLNM0lZZvIqLZYgLTNV/4R4WTpdRYjtuAycgwn7J/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065834Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=16975b5c5572f98ef0f35d4be64332bb29323fa77ef25d59c74f0402d592fa7c5923d960d07b49d9d390ed00ebf7891a9c47b6c2311720b446b885f8d4afd311c85891af5c581eb1ecf54e93fe33ac669710156741aafbc915b98f9e4c7388e10362c6190beb1209d052938d957b3116e1f73f07a913c8c4123fa0b9fa103d0a700e18c2e6396c270312eb46c0cd2fc16bb38cc08ead5797afbd2d2497fba026e8fd0a1cf3f5644d0653efea84cbe8c941dab8ef230e7de4a1b5d4bf7f1449d3618b62e63ced4c69869d561910964b009c750bca158a814614cb32e0cb96b989ed4a8670542071e5d162883e744c6ad7c40d5b088f7668fc2c7f77542621eaec",
+   "duration_secs": 4.88,
+   "prompt": "Dikkatinin kaç kez dağıldığı hiç önemli değil; her dönüş değerli.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "WDwdSXUXOHVmw8faaVIr",
+   "generation_id": "mV9BsPMgfUdvwwVN4SVI",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/WDwdSXUXOHVmw8faaVIr/mV9BsPMgfUdvwwVN4SVI/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065851Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=8143b8beb8ded18fea668dac7a917dd64bd8819206290310b13b7a2f3da5219721687c1aaae995dda5118ee1fc6ee87f17c1c27acdc3bd56271d8d17bf72b26cc4836f147ffd8d343ea0b1d0786c8f73cbb173ebb3634c10e2323ea9c38b64a722f8050e75ebc957cb72f353c03f5ed0f84925d72ca1cc08946723deb0e424e39db725121eb38f211ef45ea04b912713a6d47b06558c6aba79711b88969b2d2f15e5140460a040fe2ffaa4c2ea6d2139b5ee7099cc66970450a36cd218eeafcd87e36f6631aa283f5a70f428e22984b6fd28759ab4466f6ecffb41b15a307e2f4a91ba8cf4d22bff9a94daff2358c06899057ae86a9ef828a3654e93d20846f9",
+   "duration_secs": 4.96,
+   "prompt": "Dikkatinin kaç kez dağıldığı hiç önemli değil; her dönüş değerli.",
+   "kind": "audio"
+  }
+ ]
+}

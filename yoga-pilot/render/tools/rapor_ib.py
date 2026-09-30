@@ -73,13 +73,15 @@ P('')
 sel = json.load(open('%s/sel/hoc/%s/selection-%s.json' % (R, les, les), encoding='utf-8'))
 P('## Bu partide seslendirilen birimler (%d)' % len(sel['units']))
 P('')
-P('Her birim 3 çekim; nesnel sıralamanın ilk çekimi Scribe ile harf harf karşılaştırıldı. Hepsi birebir eşleşti: '
+P('Her birim 3 çekim; nesnel sıralamadaki ilk çekimden başlayarak Scribe ile harf harf karşılaştırıldı, tutan ilk çekim '
+  'seçildi (SPEC.v3 §6.3). Hepsi birebir eşleşti: '
   + ('evet' if all(u['compare'] == 'equal' for u in sel['units'].values()) else 'hayır (istisnalar aşağıda)') + '.')
 P('')
 P('| Birim | Çekim | Scribe | Bayraklar |')
 P('|---|---|---|---|')
 for uid, u in sel['units'].items():
-    P('| `%s` | %s | %s | %s |' % (uid, u['chosen_take'].replace('.mp3', ''), 'birebir' if u['compare'] == 'equal' else 'istisnayla',
+    P('| `%s` | %s | %s | %s |' % (uid, u['chosen_take'].replace('.mp3', ''), {'equal': 'birebir', 'kulak': '**tutmadı (kulak)**'}.get(
+        u['compare'], 'istisnayla'),
                                 ', '.join(sorted({f['flag'] for f in u['flags']})) or '—'))
 P('')
 P('## Kulak listesi')
@@ -92,11 +94,17 @@ fl_desc = {'kesim-kulak': 'çok cümleli birim cümle sonlarından kesildi; kesi
            'eklem>2yt': 'taşıyıcı ekleminde F0 basamağı > 2 yarım ton',
            'kesim-dar-pay': 'kesim payı dar (en kısa seçilen / en uzun seçilmeyen duraklama ≤ 1,1)',
            'scribe-istisna': 'Scribe yalnız yazım istisnasıyla eşleşti',
-           'kulak-sinirlayici': 'parça işlemesinde sınırlayıcı 3 dB\'den çok kıstı'}
+           'kulak-sinirlayici': 'parça işlemesinde sınırlayıcı 3 dB\'den çok kıstı',
+           'kulak': 'SPEC.v3 §6.3 son adım: yeniden çekim dahil hiçbir çekim Scribe ile harf harf tutmadı; sıralamada ilk çekim '
+                    'seçildi, söyleyiş kulakla doğrulanmalı',
+           'isleme-sonrasi-elendi': 'sıralamada önceki çekim işlemeden sonra tık/kırpılma verdi, sıradaki çekim alındı'}
 by = {}
 for uid, u in sel['units'].items():
     for f in u['flags']:
         by.setdefault(f['flag'], []).append(uid + (' (%s)' % f['piece'] if f.get('piece') else ''))
+    for rj in u.get('rejected_after_processing') or []:
+        by.setdefault('isleme-sonrasi-elendi', []).append('%s (%s: %s, %s sn)' % (
+            uid, rj['take'], rj['status'], ','.join('%.2f' % t_ for t_ in ((rj.get('clicks') or {}).get('times') or []))))
 for k, lst in by.items():
     n += 1
     P('%d. **%s**: %s: %s.' % (n, k, fl_desc.get(k, k), ', '.join('`%s`' % x for x in lst)))

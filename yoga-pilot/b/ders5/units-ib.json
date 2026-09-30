@@ -10,11 +10,11 @@
  },
  "kaynak": "b/ders5/ders5.lesson.json + timing_d5.py (köşeler ['hoc', 'hoc-lo', 'nes'] × dakikalar [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])",
  "ozet": {
-  "birim": 76,
-  "karakter": 4308,
-  "hece": 1557,
+  "birim": 68,
+  "karakter": 3810,
+  "hece": 1376,
   "tasiyici": 0,
-  "kredi_tahmini_tts_3_cekim": 12922.6
+  "kredi_tahmini_tts_3_cekim": 11428.7
  },
  "units": [
   {
@@ -31,78 +31,6 @@
    "phase": "Varış",
    "syllables": 26,
    "chars": 74,
-   "minutes": [
-    3
-   ],
-   "belowSec": 240
-  },
-  {
-   "id": "a.izin.kisa",
-   "clip": "a.izin",
-   "kind": "clip",
-   "form": "kisa",
-   "tts": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
-   "screen": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
-   "sentences": [
-    "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin."
-   ],
-   "phase": "Varış",
-   "syllables": 29,
-   "chars": 75,
-   "minutes": [
-    3
-   ],
-   "belowSec": 240
-  },
-  {
-   "id": "a.acilis.kisa",
-   "clip": "a.acilis",
-   "kind": "clip",
-   "form": "kisa",
-   "tts": "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.",
-   "screen": "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.",
-   "sentences": [
-    "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun."
-   ],
-   "phase": "Varış",
-   "syllables": 25,
-   "chars": 71,
-   "minutes": [
-    3
-   ],
-   "belowSec": 240
-  },
-  {
-   "id": "c1.yer.kisa",
-   "clip": "c1.yer",
-   "kind": "clip",
-   "form": "kisa",
-   "tts": "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?",
-   "screen": "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?",
-   "sentences": [
-    "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?"
-   ],
-   "phase": "Derinleşme",
-   "syllables": 23,
-   "chars": 69,
-   "minutes": [
-    3
-   ],
-   "belowSec": 240
-  },
-  {
-   "id": "c1.izle.kisa",
-   "clip": "c1.izle",
-   "kind": "clip",
-   "form": "kisa",
-   "tts": "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.",
-   "screen": "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.",
-   "sentences": [
-    "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun."
-   ],
-   "phase": "Derinleşme",
-   "syllables": 23,
-   "chars": 62,
    "minutes": [
     3
    ],
@@ -156,42 +84,6 @@
    ]
   },
   {
-   "id": "c1.aralik1.kisa",
-   "clip": "c1.aralik1",
-   "kind": "clip",
-   "form": "kisa",
-   "tts": "Birkaç soluk boyunca ışığı orada tutuyorsun.",
-   "screen": "Birkaç soluk boyunca ışığı orada tutuyorsun.",
-   "sentences": [
-    "Birkaç soluk boyunca ışığı orada tutuyorsun."
-   ],
-   "phase": "Derinleşme",
-   "syllables": 17,
-   "chars": 44,
-   "minutes": [
-    3
-   ],
-   "belowSec": 240
-  },
-  {
-   "id": "c1.anahtar1.kisa",
-   "clip": "c1.anahtar1",
-   "kind": "clip",
-   "form": "kisa",
-   "tts": "Fark ettiğin an, zaten geri döndün.",
-   "screen": "Fark ettiğin an, zaten geri döndün.",
-   "sentences": [
-    "Fark ettiğin an, zaten geri döndün."
-   ],
-   "phase": "Derinleşme",
-   "syllables": 11,
-   "chars": 35,
-   "minutes": [
-    3
-   ],
-   "belowSec": 240
-  },
-  {
    "id": "k.donus",
    "clip": "k.donus",
    "kind": "clip",
@@ -219,42 +111,6 @@
     14,
     15
    ]
-  },
-  {
-   "id": "k.nefes.kisa",
-   "clip": "k.nefes",
-   "kind": "clip",
-   "form": "kisa",
-   "tts": "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.",
-   "screen": "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.",
-   "sentences": [
-    "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor."
-   ],
-   "phase": "Kapanış",
-   "syllables": 22,
-   "chars": 58,
-   "minutes": [
-    3
-   ],
-   "belowSec": 240
-  },
-  {
-   "id": "k.hareket.kisa",
-   "clip": "k.hareket",
-   "kind": "clip",
-   "form": "kisa",
-   "tts": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
-   "screen": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
-   "sentences": [
-    "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak."
-   ],
-   "phase": "Kapanış",
-   "syllables": 31,
-   "chars": 84,
-   "minutes": [
-    3
-   ],
-   "belowSec": 240
   },
   {
    "id": "k.goz.kisa",
@@ -1747,5 +1603,19 @@
    "chars": 92,
    "minutes": []
   }
- ]
+ ],
+ "kisa_ayni_metin": {
+  "cikarilan": [
+   "a.izin.kisa",
+   "a.acilis.kisa",
+   "c1.yer.kisa",
+   "c1.izle.kisa",
+   "c1.aralik1.kisa",
+   "c1.anahtar1.kisa",
+   "k.nefes.kisa",
+   "k.hareket.kisa"
+  ],
+  "tam_adina_alinan": [],
+  "not": "kısa biçimin metni tam biçimle aynı; karıştırıcı tam birimi kullanır, yalnız boşluk değişir (Ders 2 c2.akis kalıbı)"
+ }
 }

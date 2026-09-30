@@ -100,11 +100,12 @@ def cmd_ledger(a):
         retake = None
         if '--retake' in a:
             retake = a[a.index('--retake') + 1]
-        cr = ch * TAKES * KR_CHAR_TAKE
+        takes = int(a[a.index('--takes') + 1]) if '--takes' in a else TAKES
+        cr = ch * takes * KR_CHAR_TAKE
         rec = {'ts': now(), 'who': WHO, 'kind': 'speech', 'lesson': ders,
-               'what': 'speech tts eleven_v4 hoc %s/%s x%d%s' % (ders, unit, TAKES, (' RETAKE (SPEC.v3 §6.3): ' + retake) if retake else ''),
+               'what': 'speech tts eleven_v4 hoc %s/%s x%d%s' % (ders, unit, takes, (' RETAKE/TAMAMLAMA: ' + retake) if retake else ''),
                'voice': 'hoc', 'voice_id': VOICE, 'unit': unit + ('#retake' if retake else ''), 'flow_id': fl,
-               'chars': ch, 'takes': TAKES, 'chars_billed': ch * TAKES, 'credits_est': round(cr, 3),
+               'chars': ch, 'takes': takes, 'chars_billed': ch * takes, 'credits_est': round(cr, 3),
                'cents_est': round(cr * CENTS_PER_CREDIT, 4),
                'estimate_source': 'estimate_only n1.sec x3 = 344,97 kredi / 345 karakter (2026-09-30)'}
     elif kind == 'scribe':

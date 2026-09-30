@@ -18,9 +18,10 @@ import sys
 R = '/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render'
 PROJ = '/root/.claude/projects/-home-user-eyes'
 TAG = re.compile(r'\[ib (d\d\d)/([^\]\s]+)\]')
-TAGS = re.compile(r'\[ibs (d\d\d)/([^\]\s]+)/(t\d+)\]')
+TAGS = re.compile(r"\[ibs (d\d\d)/([^\]\s]+)/([tm]\d+)\]")
 TAGM = re.compile(r'\[ibm (d\d\d)/([^\]\s]+)\]')
 LEGACY_D02 = re.compile(r'Ders 2 \(ilk bölüm\): (\S+) birimi')
+ASSET = re.compile(r'content_asset/([A-Za-z0-9]+)/')
 SESS = re.compile(r'content_generation/([A-Za-z0-9]+)/([A-Za-z0-9]+)/')
 
 
@@ -168,6 +169,13 @@ def cmd_scribe():
     uses, results = scan()
     out = []
     stt = {}
+    # boş metinli sonuçta (müzik vokal denetimi) indirme adresi yok: eşleme ekli dosyanın asset kimliğiyle yapılır
+    asset_of_node = {}
+    for k, (name, inp, ts, pos) in uses.items():
+        if name == 'creative_attach_reference_file' and k in results:
+            d = parse(results[k])
+            if d and d.get('node_id'):
+                asset_of_node[d['node_id']] = d.get('asset_id')
     for k, (name, inp, ts, pos) in uses.items():
         if name == 'creative_transcribe_audio' and k in results and not inp.get('estimate_only'):
             m = TAGS.search(inp.get('context', ''))
@@ -175,9 +183,11 @@ def cmd_scribe():
             if m and d:
                 stt[k] = {'lesson': m.group(1), 'unit': m.group(2), 'take': m.group(3), 'node_id': d.get('node_id'),
                           'session_ids': d.get('session_ids') or ([d['session_id']] if d.get('session_id') else []),
+                          'asset_id': asset_of_node.get((lambda c: c[0] if isinstance(c, list) and c else c)(inp.get('connect_from'))),
                           'pos': pos}
     # durum sonuçlarındaki metinler
     texts = {}
+    by_asset = {}
     order = sorted(((uses[k][3], k) for k in results), key=lambda x: x[0])
     for _, k in order:
         if uses[k][0] != 'creative_get_flow_run_status':
@@ -194,11 +204,16 @@ def cmd_scribe():
             t['session_id'] = sid
             t['actual_credits'] = price.get(t.get('generation_id'))
             texts[sid] = t
+            ma = ASSET.search((t.get('source') or {}).get('url', ''))
+            if ma:
+                by_asset[ma.group(1)] = t
     for k, s in sorted(stt.items(), key=lambda x: x[1]['pos']):
         t = None
         for sid in s['session_ids']:
             if sid in texts:
                 t = texts[sid]
+        if t is None and s.get('asset_id') in by_asset:
+            t = by_asset[s['asset_id']]
         s = dict(s)
         s.pop('pos')
         s['result'] = t

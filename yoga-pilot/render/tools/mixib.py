@@ -12,10 +12,12 @@ Kullanım:  python3 mixib.py <dNN> <dakika> [--plan-only]
 """
 import datetime
 import hashlib
+import importlib
 import json
 import math
 import os
 import random
+import re
 import sys
 
 import numpy as np
@@ -27,6 +29,8 @@ R = Y + '/render'
 sys.path.insert(0, R + '/tools')
 import mix as M  # noqa: E402
 import audio  # noqa: E402
+sys.path.insert(0, R + '/music/synth')
+import synth_ib as SY  # noqa: E402
 
 SR = M.SR
 OUTD = R + '/out/ilk-bolum'
@@ -70,7 +74,66 @@ def d02_config():
     }
 
 
-CONFIGS = {'d02': d02_config}
+def d01_config():
+    return {
+        'no': 1, 'id': 'd01', 'lesson_path': Y + '/b/ders1/ders1.lesson.json', 'planner': ('ders1', 'timing_d1'),
+        'corner': (4.68, 'hi'), 'scene': None, 'release': [3, 5, 15],
+        'selections': [R + '/sel/hoc/d01/selection-d01.json'],
+        'arrange': 'd01',
+        'music': {'varis': [{'file': MUS + '/el/d1-varis.wav', 'usable': (16.5, 162.0)}],
+                  'kapanis': [{'file': MUS + '/el/d1-kapanis.keyD.wav', 'usable': (8.5, 152.0)}],
+                  'family': 'Re'},
+        'drone': {'bright': 0.45, 'amp_db': 0.4, 'seed': 1},
+        'nature': None, 'tone': MUS + '/common/donus.synth-D5.wav', 'lufs_target': -18.0, 'end_fade': 5.0,
+    }
+
+
+def d03_config():
+    return {
+        'no': 3, 'id': 'd03', 'lesson_path': Y + '/b/ders3/ders3.lesson.json', 'planner': ('ders3', 'timing_d3'),
+        'corner': (4.68, 'hi'), 'scene': None, 'release': [5, 15],
+        'selections': [R + '/sel/hoc/d03/selection-d03.json'],
+        'arrange': 'd03',
+        'bed_rise_limit': 0.9, 'music': {}, 'extra_music': R + '/music/el/ib_d03.json', 'family': 'La♭',
+        'nature': [MUS + '/el/yagmur-%d.wav' % i for i in (1, 2, 3, 4)], 'nature_image_boost_db': 1.5,
+        'tone': None, 'lufs_target': -20.0, 'end_fade': 5.0,
+    }
+
+
+def d05_config():
+    return {
+        'no': 5, 'id': 'd05', 'lesson_path': Y + '/b/ders5/ders5.lesson.json', 'planner': ('ders5', 'timing_d5'),
+        'corner': (4.68, 'hi'), 'scene': None, 'release': [3, 5, 15],
+        'selections': [R + '/sel/hoc/d05/selection-d05.json'],
+        'arrange': 'd05',
+        'duck_tone': True, 'music': {'family': 'Sol (yerel sentez)'},
+        'nature': None, 'tone': 'bell', 'lufs_target': -18.0, 'end_fade': 5.0,
+        # VARSAYIM: pencerede yatak −6 dB; iniş 6 sn, çıkış 10 sn (6 dB / 6 sn tam 1 dB/sn sınırında), çıkış çandan önce biter
+        'withdraw': {'db': -6.0, 'down': 6.0, 'up': 10.0, 'bell_lead': 2.0},
+    }
+
+
+CONFIGS = {'d01': d01_config, 'd02': d02_config, 'd03': d03_config, 'd05': d05_config}
+
+
+def lesson_ctx(cfg):
+    """Dersin planlayıcı bağlamı: (L, LP, check(p), rate, prof). Ders 1/3/5 kendi sarmalayıcısıyla (b/dersN/timing_dN.py:
+    patch, [planner_view], check); sarmalayıcı pilot timing modülünü paylaşır (aynı sys.modules['timing'])."""
+    tm = M.timing
+    if cfg.get('planner'):
+        d = Y + '/b/' + cfg['planner'][0]
+        if d not in sys.path:
+            sys.path.insert(0, d)
+        W = importlib.import_module(cfg['planner'][1])
+        if W.T is not tm:
+            raise SystemExit('sarmalayıcı başka timing modülü yükledi')
+        L = W.load()
+        W.patch(L)
+        LP = W.planner_view(L) if hasattr(W, 'planner_view') else L
+        tm.DUR_SCALE = 1.0
+        return L, LP, (lambda p: W.check(L, p)), cfg['corner'][0], cfg['corner'][1]
+    L = tm.with_scene(tm.load(cfg['lesson_path']), cfg['scene']) if cfg['scene'] else tm.load(cfg['lesson_path'])
+    return L, L, (lambda p: tm.check_plan(L, p)), 5.6, 'hi'
 
 
 # ================================================================================================ parça kütüphanesi
@@ -126,7 +189,7 @@ def resolve(lib, c, scene):
     cands = []
     if c.get('shortForm'):
         cands.append(c['id'] + '.kisa')
-    cands += [c['id'] + '.' + scene, c['id']]
+    cands += ([c['id'] + '.' + scene] if scene else []) + [c['id']]
     for uid in cands:
         u = lib['units'].get(uid)
         if not u:
@@ -138,24 +201,25 @@ def resolve(lib, c, scene):
 
 
 # ================================================================================================ plan
-def measured_plan(cfg, L, T, lib):
+def measured_plan(cfg, ctx, T, lib):
+    L, LP, check, rate, prof = ctx
     tm = M.timing
     orig = tm.sub_durs
     missing = []
 
-    def sd(c, rate, prof):
+    def sd(c, rate_, prof_):
         ps = resolve(lib, c, cfg['scene'])
         if ps is None:
             if c['id'] not in missing:
                 missing.append(c['id'])
-            return orig(c, rate, prof)
+            return orig(c, rate_, prof_)
         return [p['dur'] for p in ps]
 
     tm.sub_durs = sd
     tm._SUB_CACHE.clear()
     try:
-        p = tm.plan(L, T, 5.6, 'hi')
-        fails, dens, runs = tm.check_plan(L, p)
+        p = tm.plan(LP, T, rate, prof)
+        fails, dens, runs = check(p)
     finally:
         tm.sub_durs = orig
     miss_ev = sorted({ev['clip']['id'] for ev in p['events'] if ev['clip']['id'] in missing})
@@ -163,22 +227,33 @@ def measured_plan(cfg, L, T, lib):
 
 
 # ================================================================================================ konuşma izi
+def clip_gain_fn(L):
+    """Klibin ses kazancı (dB): evre kazancı; Ders 3'te uyku izninden sonraki kademeler (voicePhaseGainDb.sleepSteps)."""
+    PG = {k: float(x) for k, x in L['voicePhaseGainDb'].items() if isinstance(x, (int, float))}
+    steps = {k: float(x) for k, x in (L['voicePhaseGainDb'].get('sleepSteps') or {}).items() if isinstance(x, (int, float))}
+
+    def g(c):
+        return steps.get(c['id'], PG[c['phase']])
+    return g
+
+
 def voice_track(cfg, L, T, plan, lib):
     N = T * SR
     v = np.zeros(N, dtype=np.float32)
-    PG = {k: float(x) for k, x in L['voicePhaseGainDb'].items() if isinstance(x, (int, float))}
     evs = plan['events']
-    pts_t, pts_g = [0.0], [PG[evs[0]['clip']['phase']]]
+    gain_of = clip_gain_fn(L)
+    pts_t, pts_g = [0.0], [gain_of(evs[0]['clip'])]
     ramps = []
     for i, ev in enumerate(evs):
-        g = PG[ev['clip']['phase']]
-        if i and g != PG[evs[i - 1]['clip']['phase']]:
+        g = gain_of(ev['clip'])
+        g0 = gain_of(evs[i - 1]['clip']) if i else g
+        if i and g != g0:
             a = evs[i - 1]['subs'][-1]['end']
             b = ev['subs'][0]['start']
             pts_t += [a, b]
-            pts_g += [PG[evs[i - 1]['clip']['phase']], g]
+            pts_g += [g0, g]
             ramps.append({'from': evs[i - 1]['clip']['id'], 'to': ev['clip']['id'], 't0': r(a, 3), 't1': r(b, 3),
-                          'sec': r(b - a, 3), 'db_from': PG[evs[i - 1]['clip']['phase']], 'db_to': g,
+                          'sec': r(b - a, 3), 'db_from': g0, 'db_to': g,
                           'ge_4s': bool(b - a >= M.timing.GAIN_RAMP_SEC - 1e-6)})
     pts_t.append(float(T))
     pts_g.append(pts_g[-1])
@@ -361,6 +436,49 @@ def render_chain(pls, eq, T, rel_db=0.0, fade_in=None, fade_out=None):
     return y, segs, xfi
 
 
+def rise_limit_gain(x, lim, t_min, iters=8, shift=1.5):
+    """VARSAYIM (Ders 3): pilot yatak EQ'su (bed_eq) kaynağın tınısını değiştirdiği için ham kaynakta yapılan yavaş
+    dengeleme karışımdaki yatağa birebir geçmiyor. Yatak (müzik + doğa + oda) 3 sn ST yüksekliğinin 1 sn'deki artışı
+    lim dB/sn'yi aşarsa yalnız artış kısılır: ST eğrisi (pencere merkezi > t_min + 1,5 sn; açılış kararmasına
+    dokunulmaz) ileriye doğru en çok lim dB/sn yükselecek biçimde sınırlanır, fark kazanç olarak pencerenin ön kenarına
+    (merkez + shift sn) uygulanır (≤ 0 dB; düşüşlere ve düzeye dokunulmaz); ölçü yinelenerek yakınsatılır.
+    Dönüş: (örnek başına kazanç, bilgi)."""
+    N = len(x)
+    gsum = None
+    tc = None
+    y = x
+    hist = []
+    c0 = t_min + 1.5
+    for _ in range(iters):
+        tc, st = M.st_curve(M.kpower(y), 3.0, 0.1)
+        d = st[10:] - st[:-10]
+        ok = np.isfinite(d) & (st[:-10] > -80) & (tc[:-10] >= c0)
+        mx = float(np.max(d[ok]))
+        hist.append(r(mx, 3))
+        if mx <= lim + 0.02:
+            break
+        tgt = st.copy()
+        step = lim * 0.1
+        for i in range(1, len(tgt)):
+            if tc[i] > c0 and tgt[i] > tgt[i - 1] + step:
+                tgt[i] = tgt[i - 1] + step
+        add = np.minimum(tgt - st, 0.0)
+        gsum = add if gsum is None else gsum + add
+        g = 10 ** (np.interp(np.arange(N) / SR, tc + shift, gsum, left=0.0, right=gsum[-1]) / 20)
+        y = x * g.astype(np.float32)[:, None]
+    if gsum is None:
+        return np.ones(N, dtype=np.float32), {'applied': False, 'max_rise_iter': hist}
+    g = (10 ** (np.interp(np.arange(N) / SR, tc + shift, gsum, left=0.0, right=gsum[-1]) / 20)).astype(np.float32)
+    red = gsum < -0.05
+    spans = []
+    if red.any():
+        dd = np.diff(np.concatenate([[0], red.astype(np.int8), [0]]))
+        for a, b in zip(np.where(dd == 1)[0], np.where(dd == -1)[0]):
+            spans.append([r(tc[a] + shift, 1), r(tc[b - 1] + shift, 1), r(float(gsum[a:b].min()), 2)])
+    return g, {'applied': True, 'limit_db_per_s': lim, 'shift_s': shift, 'max_rise_iter': hist,
+               'max_reduction_db': r(float(gsum.min()), 2), 'spans_s_db': spans}
+
+
 def rise_after_open(pw, speech, t_min):
     """mix.rise_rates ile aynı ölçü (3 sn ST, 0,1 sn adım, 1 sn'deki artış), açılış kararması (0–3 sn) ve onu kapsayan
     ST pencereleri dışlanarak: pencere başı ≥ t_min. Dönüş tınısı ayrı izde olduğu için tınısız yatakta ölçülür."""
@@ -380,15 +498,223 @@ def rise_after_open(pw, speech, t_min):
             'n_1s_steps_over_1db': int(np.sum(d[ok] > 1.0)), 'top5': [[r(tm[i], 1), r(d[i], 2)] for i in top]}
 
 
+# ================================================================================================ ders 1 / 3 / 5 düzenleri
+TMP = R + '/out/ilk-bolum/_tmp'
+
+
+def cue_find(plan, prefix):
+    """Müzik ipucu belirteci prefix ile başlayan olayların (başlangıç, klip) listesi (belirteçler ';' ile ayrılır)."""
+    out = []
+    for ev in plan['events']:
+        mu = (ev['clip'].get('cue') or {}).get('music') or ''
+        for tok in [x.strip() for x in mu.split(';') if x.strip()]:
+            if tok.startswith(prefix):
+                out.append((ev['start'], ev['clip']['id'], tok))
+    return out
+
+
+def block_starts(plan):
+    b = {}
+    for ev in plan['events']:
+        b.setdefault(ev['block'], ev['start'])
+    return b
+
+
+def array_src(arr, name):
+    os.makedirs(TMP, exist_ok=True)
+    f = '%s/%s.wav' % (TMP, name)
+    sf.write(f, arr, SR, subtype='FLOAT')
+    return {'file': f, 'usable': (0.0, len(arr) / SR), 'synth': name}
+
+
+def arrange_d01(cfg, plan, speech, T, L):
+    """Ders 1: Varış pad'i (ElevenLabs, Re) → nefes bordunu (yerel sentez, nefes döngüsüne kilitli) → Kapanış pad'i."""
+    bs = block_starts(plan)
+    t_c1 = bs['C1']
+    t_k = bs['K']
+    notes = []
+    cyc = L['breathCycles']
+    grid = []
+    order = [b for b in ('C1', 'C2', 'C3') if b in bs]
+    for i, b in enumerate(order):
+        a0 = (t_c1 - XF) if i == 0 else bs[b]
+        a1 = bs[order[i + 1]] if i + 1 < len(order) else t_k + XF
+        P = float(cyc[b]['periodSec'])
+        ins = float(cyc[b]['in']) + float(cyc[b].get('topUp') or 0.0)
+        al = [ev['start'] for ev in plan['events'] if ev['block'] == b and (ev['clip'].get('tags') or {}).get('role') == 'al']
+        anc = al[0] if al else bs[b]
+        grid.append((a0, a1, anc, P, ins))
+        notes.append('bordun %s: periyot %.3f sn, alış %.2f sn, çapa %.3f sn (%s)' % (b, P, ins, anc, 'ilk "Al…"' if al else 'blok başı'))
+    d = cfg['drone']
+    arr, info = SY.drone_d01(T, grid, t_c1 - 1.0, t_k + XF + 1.0, seed=d['seed'], bright=d['bright'], amp_db=d['amp_db'])
+    src = array_src(arr, 'd01-%02d-bordun' % (T // 60))
+    V = cfg['music']['varis'][0]
+    K = cfg['music']['kapanis'][0]
+    o_v = max(0.0, V['usable'][0] - M.OPEN_FADE)
+    if o_v + t_c1 + XF > min(flen(V['file']), V['usable'][1] + XF):
+        raise SystemExit('Varış pad\'i kısa')
+    lenK = flen(K['file'])
+    o_k = t_k - (T - lenK)
+    if o_k < 0:
+        raise SystemExit('Kapanış pad\'i kısa')
+    pl = [{'src': V, 't0': 0.0, 't1': t_c1 + XF, 'off': o_v, 'role': 'Varış açılışı'},
+          {'src': src, 't0': t_c1, 't1': t_k + XF, 'off': t_c1, 'role': 'Bordun'},
+          {'src': K, 't0': t_k, 't1': float(T), 'off': o_k, 'role': 'Kapanış'}]
+    return {'placements': pl, 'imge': None, 'zitlik': None, 'notes': notes, 'synth': {'bordun': info},
+            'xfades': [{'what': 'Varış → bordun', 'start': r(t_c1, 3), 'speech_cover': r(M.speech_cover(speech, t_c1, t_c1 + XF), 2)},
+                       {'what': 'bordun → Kapanış', 'start': r(t_k, 3), 'speech_cover': r(M.speech_cover(speech, t_k, t_k + XF), 2)}],
+            'times': {'img_on': None, 'img_off': None}}
+
+
+def arrange_d05(cfg, plan, speech, T, L):
+    """Ders 5: Sol'de tek, kesintisiz sentez ton; evre dokuları kısmi seslerin ≥ 10 sn'lik geçişleriyle (tek yerleşim)."""
+    bs = block_starts(plan)
+    ch = cue_find(plan, 'chord')
+    cues = {'c1': bs.get('C1'), 'c2': bs.get('C2'), 'derin': bs.get('C3'), 'kapanis': bs.get('K'),
+            'chord': ch[0][0] if ch else None}
+    arr, info = SY.tone_bed_d05(T, cues)
+    src = array_src(arr, 'd05-%02d-ton' % (T // 60))
+    pl = [{'src': src, 't0': 0.0, 't1': float(T), 'off': 0.0, 'role': 'Ton'}]
+    return {'placements': pl, 'imge': None, 'zitlik': None, 'notes': ['ton ipuçları: %s' % {k: (r(v, 2) if v else None) for k, v in cues.items()}],
+            'synth': {'ton': {k: v for k, v in info.items()}}, 'xfades': [], 'times': {'img_on': None, 'img_off': None}}
+
+
+def arrange_d03(cfg, plan, speech, T, L):
+    """Ders 3: La♭ ailesi: Varış → çekirdek (C1–C2) → Derin (C4, C3) → uyku (yalnız pad); imge katmanı (keçe piyano)
+    c3.sahne'den uykuya kadar; yağmur doğa katmanı baştan sona."""
+    mus = cfg['music']
+    pb = phase_first(plan)
+    bs = block_starts(plan)
+    blocks = sorted(set(bs.values()))
+    notes = []
+    t_n1 = pb['Derinleşme'][0]
+    t_d = pb['Derin'][0]
+    t_u = bs['K']
+    O = mus['varis'][0]
+    o_v = max(0.0, O['usable'][0] - M.OPEN_FADE)
+    if o_v + t_n1 + XF > min(flen(O['file']), O['usable'][1] + XF):
+        raise SystemExit('Varış pad\'i kısa')
+    pl = [{'src': O, 't0': 0.0, 't1': t_n1 + XF, 'off': o_v, 'role': 'Varış açılışı'}]
+    pl += chain(mus['cekirdek'], t_n1, t_d + XF, 'Varış-Derinleşme ailesi', speech, blocks, notes)
+    pl += chain(mus['derin'], t_d, t_u + XF, 'Derin ailesi', speech, blocks, notes)
+    U = mus['uyku'][0]
+    o_u = max(0.0, U['usable'][0] - XF)
+    if o_u + (T - t_u) > flen(U['file']) + 1e-6:
+        raise SystemExit('uyku pad\'i kısa')
+    pl.append({'src': U, 't0': t_u, 't1': float(T), 'off': o_u, 'role': 'Uyku'})
+    im = cue_find(plan, 'layer:imge')
+    imge = None
+    if im:
+        t_on = im[0][0]
+        imge = chain(mus['imge'], t_on, t_u + XF, 'İmge katmanı', speech, blocks, notes, first_off=0.0)
+    return {'placements': pl, 'imge': imge, 'zitlik': None, 'notes': notes, 'synth': None,
+            'xfades': [{'what': 'Varış → çekirdek', 'start': r(t_n1, 3), 'speech_cover': r(M.speech_cover(speech, t_n1, t_n1 + XF), 2)},
+                       {'what': 'çekirdek → Derin', 'start': r(t_d, 3), 'speech_cover': r(M.speech_cover(speech, t_d, t_d + XF), 2)},
+                       {'what': 'Derin → uyku', 'start': r(t_u, 3), 'speech_cover': r(M.speech_cover(speech, t_u, t_u + XF), 2)}],
+            'times': {'img_on': imge[0]['t0'] if imge else None, 'img_off': (imge[-1]['t1'] - XF) if imge else None}}
+
+
+def level_env(plan, T, levels, img_on, img_off, windows, what, extra=None, boost=None):
+    """Evre hedefi (LUFS) zarfı, 100 Hz; mix.level_envelope ile aynı kurallar, derste bulunan evrelerle:
+    alçalan düzey yeni evrenin ilk sözünden önceki sessizlikte (en çok 8 sn), yükselen ilk sözle başlayıp 8 sn'de biter.
+    'bed': imge katmanı açıkken toplam hedefte kalsın diye −c dB. windows: (w0, w1, sonraki, tür, param);
+    tür 'swell' (+dB, pilot) ya da 'withdraw' (−dB, Ders 5). extra: (t, dB) noktaları (uyku kademeleri);
+    boost: (t0, t1, dB) doğa katmanı imge eşlemesi."""
+    fs = 100
+    t = np.arange(T * fs + 1) / fs
+    evs = plan['events']
+    order, first = [], {}
+    for i, ev in enumerate(evs):
+        ph = ev['clip']['phase']
+        if ph not in first and ph in levels:
+            first[ph] = i
+            order.append(ph)
+    env = np.full(len(t), levels[order[0]])
+    ramps = []
+    for a_ph, b_ph in zip(order, order[1:]):
+        i = first[b_ph]
+        tb = evs[i]['start']
+        prev_end = evs[i - 1]['subs'][-1]['end']
+        la, lb = levels[a_ph], levels[b_ph]
+        if lb < la:
+            d = min(XF, tb - prev_end)
+            r0, r1 = tb - d, tb
+        else:
+            r0, r1 = tb, tb + XF
+        env[t >= r1] = lb
+        mr = (t >= r0) & (t < r1)
+        env[mr] = la + (lb - la) * (t[mr] - r0) / (r1 - r0)
+        ramps.append({'from': a_ph, 'to': b_ph, 't0': r(r0, 3), 't1': r(r1, 3), 'db_from': r(la, 2), 'db_to': r(lb, 2),
+                      'db_per_s': r(abs(lb - la) / (r1 - r0), 3)})
+    if what == 'bed' and img_on is not None and img_on < T:
+        c = 10 * math.log10(1 + 10 ** (-M.IMGE_BELOW_DB / 10))
+        m = (t >= img_on) & (t <= img_off + XF)
+        u = np.clip(np.minimum((t - img_on) / XF, (img_off + XF - t) / XF), 0, 1)
+        env[m] -= c * u[m]
+    for (w0, w1, nxt, kind, prm) in windows:
+        if kind == 'swell':
+            up0, up1 = w0, w0 + prm['rampUpSec']
+            dn1 = nxt - prm['downLeadSec']
+            dn0 = dn1 - prm['rampDownSec']
+            env += np.interp(t, [up0, up1, dn0, dn1], [0, prm['db'], prm['db'], 0], left=0, right=0)
+        else:
+            end = nxt - prm['bell_lead']
+            down, up, dbw = prm['down'], prm['up'], prm['db']
+            span = end - w0
+            if span < down + up:
+                k = span / (down + up)
+                down, up, dbw = down * k, up * k, dbw * k
+            env += np.interp(t, [w0, w0 + down, end - up, end], [0, dbw, dbw, 0], left=0, right=0)
+    if extra:
+        et = [0.0] + [x[0] for x in extra] + [float(T)]
+        ed = [0.0] + [x[1] for x in extra] + [extra[-1][1] if extra else 0.0]
+        env += np.interp(t, et, ed)
+    if boost:
+        b0, b1, db = boost
+        env += np.interp(t, [b0, b0 + XF, b1 - XF, b1], [0, db, db, 0], left=0, right=0)
+    return t, env, ramps
+
+
+def bed_extra_points(plan, L):
+    """Uyku kademeleri (sleepSteps): yatak konuşmayla aynı ölçüde iner; rampa ilgili klipten önceki sessizlikte."""
+    PG = {k: float(x) for k, x in L['voicePhaseGainDb'].items() if isinstance(x, (int, float))}
+    gain_of = clip_gain_fn(L)
+    evs = plan['events']
+    pts = []
+    prev = 0.0
+    for i, ev in enumerate(evs):
+        e = gain_of(ev['clip']) - PG[ev['clip']['phase']]
+        if i and abs(e - prev) > 1e-9:
+            a = evs[i - 1]['subs'][-1]['end']
+            b = ev['subs'][0]['start']
+            pts += [(a, prev), (b, e)]
+        prev = e
+    return pts
+
+
 # ================================================================================================ görsel ve zaman çizelgesi
+def closing_event(L, plan):
+    """Kapanışa geç hedefi: dersin hızlı kapanış dizisinin planda bulunan ilk klibi (Ders 1, 2, 5 k.donus; Ders 3 k.anahtar3)."""
+    ids = [c['id'] for c in ((L.get('extras') or {}).get('quickClosing') or {}).get('clips', [])] or ['k.donus']
+    for cid in ids:
+        for ev in plan['events']:
+            if ev['clip']['id'] == cid:
+                return ev
+    return next(ev for ev in plan['events'] if ev['block'] in ('K',))
+
+
 def visual_timeline(L, T, plan, speech):
     vis = []
     state = {'phase': None, 'image': 'off', 'dawn': False}
-    don = next(ev for ev in plan['events'] if ev['clip']['id'] == 'k.donus')
-    dz = L['visual']['dawn']
-    span = dz['spanSec'][1] if isinstance(dz.get('spanSec'), list) else dz.get('spanSec', 90)
-    dawn_start = max(don['start'], T - float(span))
-    vis.append({'t': r(dawn_start, 3), 'cue': 'dawn:start', 'rule': dz.get('startRule'), 'span_s': r(T - dawn_start, 2)})
+    don = closing_event(L, plan)
+    dz = L['visual'].get('dawn')
+    if dz:
+        span = dz.get('spanSecBelow240') if (T < 240 and dz.get('spanSecBelow240')) else dz.get('spanSec', [60, 90])
+        span = span[1] if isinstance(span, list) else span
+        dawn_start = max(don['start'], T - float(span))
+        vis.append({'t': r(dawn_start, 3), 'cue': 'dawn:start', 'rule': dz.get('startRule'), 'span_s': r(T - dawn_start, 2)})
+    else:
+        dawn_start = float(T) + 1.0
     for ev in plan['events']:
         cv = (ev['clip'].get('cue') or {})
         if cv.get('visual'):
@@ -479,7 +805,8 @@ def run(les, minutes, plan_only=False):
     os.makedirs(OUTD, exist_ok=True)
     os.makedirs(MASTER, exist_ok=True)
     os.makedirs(REP, exist_ok=True)
-    L = M.timing.with_scene(M.timing.load(cfg['lesson_path']), cfg['scene']) if cfg['scene'] else M.timing.load(cfg['lesson_path'])
+    ctx = lesson_ctx(cfg)
+    L = ctx[0]
     lib = load_library(cfg)
     extra = cfg.get('extra_music')
     if extra and os.path.exists(extra):
@@ -489,7 +816,7 @@ def run(les, minutes, plan_only=False):
             cfg['music'][role] = cfg['music'].get(role, []) + [{'file': x['file'], 'usable': tuple(x['usable'])} for x in lst]
     tag = '%s-%02ddk' % (les, minutes)
     log('plan', tag)
-    p, fails, dens, runs, miss = measured_plan(cfg, L, T, lib)
+    p, fails, dens, runs, miss = measured_plan(cfg, ctx, T, lib)
     slack = T - (p['speech'] + p['gaps']['min'])     # timing.slack5 kalıbı: min sessizliklerle boş pay
     pj = {'lesson': les, 'T': T, 'status': p['status'], 'mode': p['mode'], 'f': r(p['f'], 4), 'total': r(p['total'], 4),
           'speech_sec': r(p['speech'], 3), 'sel': p['sel'], 'stop': list(p['stop']) if p['stop'] else None,
@@ -527,25 +854,37 @@ def run(les, minutes, plan_only=False):
     tone = np.zeros_like(room)
     tone_ev = []
     if cfg.get('tone'):
-        tx, _ = sf.read(cfg['tone'], dtype='float64', always_2d=True)
+        if cfg['tone'] == 'bell':
+            tx = SY.bell().astype(np.float64)
+            tname = 'çan (yerel sentez, Sol5)'
+        else:
+            tx, _ = sf.read(cfg['tone'], dtype='float64', always_2d=True)
+            tname = os.path.basename(cfg['tone'])
         if tx.shape[1] == 1:
             tx = np.repeat(tx, 2, axis=1)
         tg = M.TONE_LUFS - M.integrated(tx)
-        for tok, lst in cue_times(p).items():
-            if tok.startswith('returnTone:'):
-                off = float(tok.split(':')[1].rstrip('s'))
-                for (ts, cid) in lst:
-                    s0 = int(round((ts + off) * SR))
-                    tone[s0:s0 + len(tx)] += (tx * 10 ** (tg / 20)).astype(np.float32)
-                    tone_ev.append({'t': r(ts + off, 3), 'before_clip': cid, 'lufs_integrated': M.TONE_LUFS,
-                                    'dur_s': r(len(tx) / SR, 2)})
+        for (ts, cid, tok) in cue_find(p, 'returnTone:'):
+            mm = re.match(r'returnTone:\s*([-+]?\d+(?:[.,]\d+)?)\s*s', tok)
+            off = float(mm.group(1).replace(',', '.'))
+            s0 = int(round((ts + off) * SR))
+            n_ = min(len(tx), T * SR - s0)
+            tone[s0:s0 + n_] += (tx[:n_] * 10 ** (tg / 20)).astype(np.float32)
+            tone_ev.append({'t': r(ts + off, 3), 'before_clip': cid, 'lufs_integrated': M.TONE_LUFS,
+                            'dur_s': r(len(tx) / SR, 2), 'sound': tname})
     windows = []
     for i, ev in enumerate(p['events']):
-        if ev['clip'].get('window') and ev['gap'] >= M.SWELL_MIN:
-            windows.append((ev['end'], ev['end'] + ev['gap'], p['events'][i + 1]['start']))
+        if i + 1 >= len(p['events']):
+            continue
+        nxt = p['events'][i + 1]['start']
+        mu = (ev['clip'].get('cue') or {}).get('music') or ''
+        if cfg.get('withdraw') and 'window:withdraw' in mu:
+            windows.append((ev['end'], ev['end'] + ev['gap'], nxt, 'withdraw', cfg['withdraw']))
+        elif not cfg.get('withdraw') and ev['clip'].get('window') and ev['gap'] >= M.SWELL_MIN:
+            windows.append((ev['end'], ev['end'] + ev['gap'], nxt, 'swell', dict(M.SWELL, db=M.SWELL_DB)))
     v_pow = 2.0 * M.STEREO_SPEECH_GAIN ** 2 * M.kpower(voice)
     # --- müzik
-    arr = arrange(cfg, p, speech, T)
+    AR = {'d01': arrange_d01, 'd03': arrange_d03, 'd05': arrange_d05}
+    arr = AR[cfg['arrange']](cfg, p, speech, T, L) if cfg.get('arrange') else arrange(cfg, p, speech, T)
     bed, segs, xfi = render_chain(arr['placements'], True, T)
     zinfo = arr['zitlik']
     if arr['imge']:
@@ -559,13 +898,23 @@ def run(les, minutes, plan_only=False):
     iters = []
     img_on = arr['times']['img_on'] if arr['imge'] else T + 100.0
     img_off = arr['times']['img_off'] if arr['imge'] else T + 100.0
+    extra = bed_extra_points(p, L) or None
+    boost = (img_on, float(T), cfg['nature_image_boost_db']) if (cfg.get('nature_image_boost_db') and arr['imge']) else None
     for it in range(6):
         levels = {ph: base[ph] + off[ph] for ph in PH}
-        tt, env_b, ramps_b = M.level_envelope(p, arr['times'], levels, img_on, img_off, windows, 'bed')
-        _, env_i, _ = M.level_envelope(p, arr['times'], levels, 0, -1, windows, 'imge')
-        _, env_n, _ = M.level_envelope(p, arr['times'], {ph: levels[ph] - M.NATURE_BELOW_DB for ph in PH}, 0, -1, windows, 'nature')
-        music = M.apply_env(bed, tt, env_b) + M.apply_env(im, tt, env_i)
+        tt, env_b, ramps_b = level_env(p, T, levels, img_on, img_off, windows, 'bed', extra)
+        _, env_i, _ = level_env(p, T, levels, None, None, windows, 'imge', extra)
+        _, env_n, _ = level_env(p, T, {ph: levels[ph] - M.NATURE_BELOW_DB for ph in PH}, None, None, windows, 'nature',
+                                extra, boost)
+        music = M.apply_env(bed, tt, env_b)
         nat = M.apply_env(nature_raw, tt, env_n) if cfg.get('nature') else np.zeros_like(music)
+        rl_info = None
+        if cfg.get('bed_rise_limit'):
+            g_rl, rl_info = rise_limit_gain(music + nat + room, cfg['bed_rise_limit'], M.OPEN_FADE + 3.0)
+            music *= g_rl[:, None]
+            nat *= g_rl[:, None]
+            del g_rl
+        music = music + M.apply_env(im, tt, env_i)
         bg = music + nat + room + tone
         sob, rows = M.speech_over_bed(v_pow, M.kpower(bg), speech)
         need = {}
@@ -583,6 +932,7 @@ def run(les, minutes, plan_only=False):
     # yerel yatak kısması
     needs, duck_iters, duck_spans = {}, [], []
     music0, nat0 = music, nat
+    tone0 = tone      # VARSAYIM (Ders 5, duck_tone): çanın kuyruğu konuşmanın altına uzanırsa yerel kısma çanı da kapsar
     for it in range(5):
         add = {}
         for sp_, row in zip(speech, rows):
@@ -599,10 +949,12 @@ def run(les, minutes, plan_only=False):
         t_d, g_d, duck_spans = M.local_duck_curve(needs)
         music = M.apply_gain_curve(music0, t_d, g_d)
         nat = M.apply_gain_curve(nat0, t_d, g_d)
+        if cfg.get('duck_tone'):
+            tone = M.apply_gain_curve(tone0, t_d, g_d)
         bg = music + nat + room + tone
         sob, rows = M.speech_over_bed(v_pow, M.kpower(bg), speech)
         log('yerel yatak kısması', {k: round(x[2], 2) for k, x in needs.items()})
-    del music0, nat0
+    del music0, nat0, tone0
     # --- karışım, sınırlayıcı, kodlama
     mix_raw = bg + voice[:, None] * np.float32(M.STEREO_SPEECH_GAIN)
     no = cfg['no']
@@ -656,6 +1008,49 @@ def run(les, minutes, plan_only=False):
     clicks_pre = M.detect_clicks_mix(mix, edits, speech, v_hf, b_hf)
     lag = M.mp3_lag(dec, mix)
     clicks_mp3 = M.detect_clicks_mix(dec[lag:lag + T * SR], edits, speech, v_hf, b_hf)
+    # VARSAYIM (Ders 3 yağmuru): kurgu noktasına ±10 ms düşen 10 kHz üstü olayın enerjisi doğa izinden geliyorsa (doğa
+    # izinin 10 kHz üstü düzeyi karışımınkinin en çok 3 dB altında) olay doğa kaynağında aranır: o anda en yüksek kazançla
+    # çalan döngü dosyasında karşılık gelen konumun ±4 ms'inde aynı ölçütle (click_events) bir olay varsa olay kaynağın
+    # kendi içeriğidir (damla), kurgu tıkı değildir; 'nature_at_edit' listesine ayrı yazılır. Kaynakta yoksa kurgu tıkı kalır.
+    if cfg.get('nature'):
+        n_hf, _ = M.hf_frames(nat)
+        fr = int(round(0.002 * SR))
+        src_ev = {}
+        for f_ in cfg['nature']:
+            xs, _sr = sf.read(f_, dtype='float64', always_2d=True)
+            hs, fs_ = M.hf_frames(xs)
+            src_ev[os.path.basename(f_)] = (np.array(M.click_events(hs, fs_)), len(xs) / SR)
+        nxf = M.NATURE_XF
+
+        def nat_source_has(t_):
+            best, bw = None, -1.0
+            for e_ in nature_ev:
+                if e_['t0'] - 1e-6 <= t_ <= e_['t1'] + 1e-6:
+                    u_in = (t_ - e_['t0']) / nxf if e_ is not nature_ev[0] else 1.0
+                    u_out = (e_['t1'] - t_) / nxf
+                    w_ = min(1.0, max(0.0, u_in), max(0.0, u_out))
+                    if w_ > bw:
+                        best, bw = e_, w_
+            if best is None:
+                return False, None
+            evs_, Lf = src_ev[best['loop']]
+            pos = (best['rotation_s'] + (t_ - best['t0'])) % Lf
+            k_ = pos / (fr / SR)
+            hit = bool(len(evs_) and np.min(np.abs(evs_ - k_)) <= 2.5)
+            return hit, {'loop': best['loop'], 'src_pos_s': r(pos, 3), 'weight': r(bw, 2)}
+
+        for cl in (clicks_pre, clicks_mp3):
+            keep, moved = [], []
+            for it_ in cl['edit_point']:
+                i_ = int(it_[0] * SR / fr)
+                if i_ < len(n_hf) and n_hf[i_] >= it_[2] - 3.0:
+                    hit, where = nat_source_has(it_[0])
+                    if hit:
+                        moved.append(it_ + [r(float(n_hf[i_]), 1), where])
+                        continue
+                keep.append(it_)
+            cl['edit_point'] = keep
+            cl['nature_at_edit'] = moved
     pos = verify_positions(speech, dec, lag)
     bgp = M.kpower(bg)
     dur_dec = (len(dec) - lag) / dsr
@@ -665,6 +1060,13 @@ def run(les, minutes, plan_only=False):
     if duck_spans:
         im_env = M.apply_gain_curve(im_env, t_d, g_d)
     rise_ex = rise_after_open(M.kpower(bg - tone - im_env), speech, M.OPEN_FADE + 3.0)
+    if os.environ.get('MIXIB_DUMP'):          # hata ayıklama: yatak bileşenleri (müzik − imge, doğa, oda)
+        dd = os.environ['MIXIB_DUMP']
+        np.save(dd + '/music_noim.npy', (music - im_env).astype(np.float32))
+        np.save(dd + '/nat.npy', nat.astype(np.float32))
+        np.save(dd + '/room.npy', room.astype(np.float32))
+        np.save(dd + '/env_b.npy', np.stack([tt, env_b]))
+        json.dump({'extra': extra, 'ramps_b': ramps_b, 'duck': duck_spans}, open(dd + '/env.json', 'w'), default=str)
     rise_im = rise_after_open(M.kpower(bg - tone), speech, M.OPEN_FADE + 3.0)
     rise_all = M.rise_rates(bgp, speech, 'yatak (müzik + doğa + oda + tını)')
     screen_eq = all(audio.compare_text(s['plan_text'], s['spoken_text'])[0] for s in speech)
@@ -697,9 +1099,11 @@ def run(les, minutes, plan_only=False):
            'position_check': pos, 'clicks_float': {k: len(x) for k, x in clicks_pre.items()},
            'clicks_mp3': {k: len(x) for k, x in clicks_mp3.items()},
            'clicks_list': {'float_edit_point': clicks_pre['edit_point'], 'mp3_edit_point': clicks_mp3['edit_point'],
+                           'float_nature_at_edit': clicks_pre.get('nature_at_edit', []),
+                           'mp3_nature_at_edit': clicks_mp3.get('nature_at_edit', []),
                            'mp3_mix_only': clicks_mp3['mix_only'], 'mp3_bed_content': clicks_mp3['bed_content']},
            'digital_silence_mp3': ds, 'speech_over_bed': sob, 'speech_over_bed_iterations': iters,
-           'local_duck': {'spans': duck_spans, 'iterations': duck_iters}, 'loudness_rise': {'criterion': 'yatak zarfı: tınısız ve imge katmanısız yatak, açılış kararmasından sonra, konuşma altı dahil '
+           'local_duck': {'spans': duck_spans, 'iterations': duck_iters}, 'bed_rise_limit': rl_info, 'loudness_rise': {'criterion': 'yatak zarfı: tınısız ve imge katmanısız yatak, açılış kararmasından sonra, konuşma altı dahil '
                                           'bütün dosyada ≤ 1 dB/sn (imge katmanının nota başlangıçları SPEC.v3 §7.2 ile ayrı '
                                           'sınırlanır; aşağıda imge dahil değer ayrıca)',
                              'bed_envelope_no_tone_no_imge': rise_ex, 'bed_without_tone_with_imge_after_open_fade': rise_im, 'bed_without_tone': rise, 'bed_all': rise_all},
@@ -710,7 +1114,7 @@ def run(les, minutes, plan_only=False):
                      'imge': [{'file': os.path.basename(p_['src']['file']), 't0': r(p_['t0'], 3), 't1': r(p_['t1'], 3),
                                'off': r(p_['off'], 3)} for p_ in (arr['imge'] or [])],
                      'zitlik': zinfo, 'crossfades': xfi + ixfi, 'notes': arr['notes'], 'levels': {ph: r(base[ph] + off[ph], 2) for ph in PH}},
-           'tone_events': tone_ev, 'windows': [{'t0': r(a_, 3), 't1': r(b_, 3)} for a_, b_, _ in windows],
+           'tone_events': tone_ev, 'windows': [{'t0': r(w[0], 3), 't1': r(w[1], 3), 'kind': w[3]} for w in windows],
            'criteria': crit, 'pass': ok, 'master_wav': os.path.relpath(master, R)}
     json.dump(rep, open('%s/%s.json' % (REP, tag), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     # --- zaman çizelgesi (nefona.yoga.timeline/2 + pilot alanları)
@@ -731,14 +1135,14 @@ def timeline(cfg, L, T, minutes, p, pj, speech, vis, dawn_start, arr, zinfo, seg
             blocks.append({'id': ev['block'], 'title': bt, 'start': r(ev['start'], 3), 'end': r(ev['end'], 3)})
         else:
             blocks[-1]['end'] = r(ev['end'], 3)
-    don = next(ev for ev in p['events'] if ev['clip']['id'] == 'k.donus')
+    don = closing_event(L, p)
     k_i = p['events'].index(don)
     prev_end = p['events'][k_i - 1]['subs'][-1]['end'] if k_i else 0.0
-    tone_at = next((x['t'] for x in tone_ev if x['before_clip'] == 'k.donus'), None)
+    tone_at = next((x['t'] for x in tone_ev if x['before_clip'] == don['clip']['id']), None)
     jump = max(prev_end + 0.5, (tone_at if tone_at is not None else don['start']) - 6.0)
     release = {}
     ct = cue_times(p)
-    if arr['imge']:
+    if arr['imge'] and 'layer:imge-off' in ct:
         release['C4'] = {'activeFrom': r(ct['layer:imge'][0][0], 3), 'activeUntil': r(ct['layer:imge-off'][0][0], 3),
                          'prefixFile': 'yoga-d%02d-birak-imge.m4a' % cfg['no']}
     if zinfo:
@@ -746,7 +1150,8 @@ def timeline(cfg, L, T, minutes, p, pj, speech, vis, dawn_start, arr, zinfo, seg
                          'activeUntil': r(next(ev['start'] for ev in p['events'] if ev['clip']['id'] == 'c3.birak'), 3),
                          'prefixFile': 'yoga-d%02d-birak-zitlik.m4a' % cfg['no']}
     gen = {'Varış açılışı': 'yatak/Varış', 'Varış-Derinleşme ailesi': 'yatak/Varış-Derinleşme', 'Derin ailesi': 'yatak/Derin',
-           'Kapanış': 'yatak/Kapanış', 'Zıtlık dokusu': 'yatak/Zıtlık'}
+           'Kapanış': 'yatak/Kapanış', 'Zıtlık dokusu': 'yatak/Zıtlık', 'Bordun': 'yatak/Bordun', 'Ton': 'yatak/Ton',
+           'Uyku': 'yatak/Uyku'}
     mus_ev, cnt = [], {}
     for p_ in arr['placements']:
         cnt[p_['role']] = cnt.get(p_['role'], 0) + 1
@@ -767,10 +1172,13 @@ def timeline(cfg, L, T, minutes, p, pj, speech, vis, dawn_start, arr, zinfo, seg
     for d_ in duck_spans:
         mus_ev.append({'layer': 'music+imge+nature', 'event': 'local-duck', 't0': d_['t0'], 't1': d_['t1'],
                        'db': -d_['depth_db'], 'flat': d_['flat'], 'piece': d_['piece']})
-    for (a_, b_, n_) in windows:
-        mus_ev.append({'layer': 'bed', 'event': 'window-swell', 't0': r(a_, 3), 't1': r(n_, 3), 'db': M.SWELL_DB,
-                       'rampUpSec': M.SWELL['rampUpSec'], 'rampDownSec': M.SWELL['rampDownSec'],
-                       'downLeadSec': M.SWELL['downLeadSec']})
+    for (a_, b_, n_, kind, prm) in windows:
+        if kind == 'swell':
+            mus_ev.append({'layer': 'bed', 'event': 'window-swell', 't0': r(a_, 3), 't1': r(n_, 3), 'db': prm['db'],
+                           'rampUpSec': prm['rampUpSec'], 'rampDownSec': prm['rampDownSec'], 'downLeadSec': prm['downLeadSec']})
+        else:
+            mus_ev.append({'layer': 'music', 'event': 'window-withdraw', 't0': r(a_, 3), 't1': r(n_ - prm['bell_lead'], 3),
+                           'db': prm['db'], 'rampDownSec': prm['down'], 'rampUpSec': prm['up']})
     mus_ev.append({'layer': 'all', 'event': 'open-fade', 't0': 0.0, 't1': M.OPEN_FADE})
     mus_ev.append({'layer': 'music+nature', 'event': 'end-fade', 't0': T - M.END_FADE, 't1': float(T)})
     mus_ev.sort(key=lambda x: x.get('t0', x.get('t', 0)))
@@ -796,7 +1204,7 @@ def timeline(cfg, L, T, minutes, p, pj, speech, vis, dawn_start, arr, zinfo, seg
     tm = M.timing
     lesson_sha = hashlib.sha256(open(cfg['lesson_path'], 'rb').read()).hexdigest()
     planner_sha = hashlib.sha256(open(tm.__file__, 'rb').read()).hexdigest()
-    dz = L['visual']['dawn']
+    dz = L['visual'].get('dawn')
     return {
         'schema': 'nefona.yoga.timeline/2', 'lesson': L['id'], 'lessonNo': cfg['no'], 'title': L.get('title'),
         'minutes': minutes, 'T': T, 'file': os.path.basename(mp3),
@@ -813,7 +1221,7 @@ def timeline(cfg, L, T, minutes, p, pj, speech, vis, dawn_start, arr, zinfo, seg
         'closing': {'jumpTo': r(jump, 3), 'returnToneAt': r(tone_at, 3) if tone_at is not None else None,
                     'firstWordAt': r(don['start'], 3)},
         'release': release, 'windows': win_list, 'visual': vis,
-        'dawn': {'start': r(dawn_start, 3), 'spanSec': r(T - dawn_start, 2), 'rule': dz.get('startRule')},
+        'dawn': ({'start': r(dawn_start, 3), 'spanSec': r(T - dawn_start, 2), 'rule': dz.get('startRule')} if dz else None),
         'music_events': mus_ev,
         'nature_events': [{'t0': e_['t0'], 't1': e_['t1'], 'label': e_['loop'].replace('.wav', ''), 'rotation_s': e_['rotation_s']}
                           for e_ in nature_ev],

@@ -1,0 +1,19 @@
+{
+ "node_id": "A1zWxhPF1zDSFoB0bN3O",
+ "session_ids": [
+  "CI244tb5c2aAXMfnCL0G"
+ ],
+ "requested_at": "2026-09-30T06:57:26.000Z",
+ "tts": "Belki sıcak bir odadasın. Belki üstü kapalı bir verandadasın.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "CI244tb5c2aAXMfnCL0G",
+   "generation_id": "GHr5FxqbKqWFyc4EEjvH",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/CI244tb5c2aAXMfnCL0G/GHr5FxqbKqWFyc4EEjvH/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065730Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=9f272ad2d1b782c3a97c0b804ed51b8ce1e2d7ac09200dc4204468e69b886aaa589077ddbe4964098c2ba10e2196f65ba70881644b38bdf30dde10e67556ba80d52bf808c3c7ac3d92a365502cd1b1a510c9f7074642a3e82e8f7d9219c9cece96fb603076710283f53ead4635c101762762ed4d2794aaebc61869052044dee9f8c2c722943b6d71a120bffca5feae51c11352f4f9680d9864b396b5304df6a3ef268f69422548c1c5230f96d9799da6546c89e7aa8e0bbe9929f6c31a3f145081bc9faca2f5b872c00ff37a7c28c36e1e5aa3d95fc90629ba86c6d581d93c58b6b0d29d38621a1333cc6e87c860edfab663dc9d8f37683bf7dd1a53a611fa7f",
+   "duration_secs": 4.96,
+   "prompt": "Belki sıcak bir odadasın. Belki üstü kapalı bir verandadasın.",
+   "kind": "audio"
+  }
+ ]
+}

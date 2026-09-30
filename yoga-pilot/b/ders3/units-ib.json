@@ -1628,5 +1628,10 @@
    "chars": 63,
    "minutes": []
   }
- ]
+ ],
+ "kisa_ayni_metin": {
+  "cikarilan": [],
+  "tam_adina_alinan": [],
+  "not": "kısa biçimin metni tam biçimle aynı; karıştırıcı tam birimi kullanır, yalnız boşluk değişir (Ders 2 c2.akis kalıbı)"
+ }
 }

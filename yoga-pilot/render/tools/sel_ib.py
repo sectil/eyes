@@ -109,7 +109,7 @@ def piece_names(u):
     return ps, ['%s#%d' % (u['id'], i + 1) for i in range(len(ps))]
 
 
-def finalize_unit(les, u, rank, scribe, prev_choice=None):
+def finalize_unit(les, u, rank, scribe, prev_choice=None, kulak=False):
     """Sıradaki çekimlerden Scribe'la eşleşen ilkini seçer, keser, işler. Dönüş: (kayıt, eksik_scribe_çekimi)."""
     w = work(les)
     rawd = '%s/raw/hoc/%s/%s' % (R, les, u['id'])
@@ -130,6 +130,11 @@ def finalize_unit(les, u, rank, scribe, prev_choice=None):
         if res['equal']:
             chosen = (x, att)
             break
+    kulak_used = False
+    if chosen is None and kulak and attempts:
+        # SPEC.v3 §6.3 son adım: yeniden çekimden sonra da tutmazsa en iyi (sıralamada ilk) çekim 'kulak' bayrağıyla
+        chosen = (rank['ranking'][0], attempts[0])
+        kulak_used = True
     if chosen is None:
         return {'unit': u['id'], 'status': 'scribe-tutmadi', 'attempts': attempts}, None, attempts
     x, att = chosen
@@ -155,6 +160,9 @@ def finalize_unit(les, u, rank, scribe, prev_choice=None):
     else:
         cut = None
         files = [src['file']]
+    if kulak_used:
+        flags.append({'flag': 'kulak', 'reason': 'SPEC.v3 §6.3: %d çekimin (yeniden çekim dahil) hiçbiri Scribe ile harf harf '
+                                                 'tutmadı; Scribe metinleri: %s' % (len(attempts), sorted({a_['scribe_text'] for a_ in attempts}))})
     if att['exceptions']:
         flags.append({'flag': 'scribe-istisna', 'reason': 'SPEC.v3 §6.2 yazım istisnası: %s' % att['exceptions']})
     outd = '%s/sel/hoc/%s/%s' % (R, les, u['id'])
@@ -200,12 +208,12 @@ def finalize_unit(les, u, rank, scribe, prev_choice=None):
            'rank_position': (rank['ranking'].index(x) + 1), 'n_takes': len(byf), 'score': x['score'],
            'soft_violations': x['soft_violations'], 'metrics': x.get('metrics'),
            'excluded_takes': rank.get('excluded'), 'scribe_attempts': attempts, 'scribe_text': att['scribe_text'],
-           'compare': 'equal' if att['strict_equal'] else 'equal-with-exception', 'cut': cut, 'joins': joins,
+           'compare': 'kulak' if kulak_used else ('equal' if att['strict_equal'] else 'equal-with-exception'), 'cut': cut, 'joins': joins,
            'flags': flags, 'pieces': pieces}
     return rec, None, attempts
 
 
-def cmd_finalize(les, upath, scribe_json, only=None):
+def cmd_finalize(les, upath, scribe_json, only=None, kulak=False):
     U, _ = units_of(upath)
     w = work(les)
     scribe = scribe_texts(scribe_json)
@@ -220,7 +228,21 @@ def cmd_finalize(les, upath, scribe_json, only=None):
         if uid in sel['units'] and not only:
             continue
         rank = json.load(open('%s/rank/%s.json' % (w, uid)))
-        rec, missing_take, att = finalize_unit(les, u, rank, scribe)
+        # SPEC.v3 §6.3 "sıradaki çekim denenir": işlemeden sonra tık/kırpılma çıkan çekim de elenir, sıradakine geçilir
+        after = []
+        while True:
+            rec, missing_take, att = finalize_unit(les, u, rank, scribe, kulak=kulak)
+            if rec is None or rec['status'] not in ('tik', 'kirpilma'):
+                break
+            bad_take = rec['attempts'][-1]['take']
+            after.append({'take': bad_take, 'status': rec['status'], 'piece': rec.get('piece'),
+                          'clicks': (rec.get('measure') or {}).get('clicks'),
+                          'clipping': (rec.get('measure') or {}).get('clipping')})
+            rank = dict(rank, ranking=[x for x in rank['ranking'] if x['take'] != bad_take + '.mp3'])
+        if rec is not None and after:
+            rec['rejected_after_processing'] = after
+            if rec['status'] == 'ok':
+                rec['rank_position'] += len(after)
         if rec is None:
             need.append((uid, missing_take))
             continue
@@ -250,6 +272,7 @@ if __name__ == '__main__':
     elif c == 'scribe-list':
         cmd_scribe_list(sys.argv[2], sys.argv[3], int(sys.argv[4]) if len(sys.argv) > 4 else 1)
     elif c == 'finalize':
-        cmd_finalize(sys.argv[2], sys.argv[3], sys.argv[4], set(sys.argv[5:]) or None)
+        kul = '--kulak' in sys.argv
+        cmd_finalize(sys.argv[2], sys.argv[3], sys.argv[4], set(a for a in sys.argv[5:] if a != '--kulak') or None, kul)
     else:
         raise SystemExit(__doc__)

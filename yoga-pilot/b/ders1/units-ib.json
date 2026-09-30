@@ -10,11 +10,11 @@
  },
  "kaynak": "b/ders1/ders1.lesson.json + timing_d1.py (köşeler ['hoc', 'hoc-lo', 'nes'] × dakikalar [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])",
  "ozet": {
-  "birim": 69,
-  "karakter": 3543,
-  "hece": 1226,
+  "birim": 68,
+  "karakter": 3480,
+  "hece": 1204,
   "tasiyici": 11,
-  "kredi_tahmini_tts_3_cekim": 10627.8
+  "kredi_tahmini_tts_3_cekim": 10438.9
  },
  "units": [
   {
@@ -92,24 +92,6 @@
     14,
     15
    ]
-  },
-  {
-   "id": "c1.izle.kisa",
-   "clip": "c1.izle",
-   "kind": "clip",
-   "form": "kisa",
-   "tts": "Birkaç nefes boyunca hiçbir şeyi değiştirmeden izlemen yeterli.",
-   "screen": "Birkaç nefes boyunca hiçbir şeyi değiştirmeden izlemen yeterli.",
-   "sentences": [
-    "Birkaç nefes boyunca hiçbir şeyi değiştirmeden izlemen yeterli."
-   ],
-   "phase": "Derinleşme",
-   "syllables": 22,
-   "chars": 63,
-   "minutes": [
-    3
-   ],
-   "belowSec": 240
   },
   {
    "id": "c1.guven",
@@ -1881,5 +1863,12 @@
    "chars": 92,
    "minutes": []
   }
- ]
+ ],
+ "kisa_ayni_metin": {
+  "cikarilan": [
+   "c1.izle.kisa"
+  ],
+  "tam_adina_alinan": [],
+  "not": "kısa biçimin metni tam biçimle aynı; karıştırıcı tam birimi kullanır, yalnız boşluk değişir (Ders 2 c2.akis kalıbı)"
+ }
 }

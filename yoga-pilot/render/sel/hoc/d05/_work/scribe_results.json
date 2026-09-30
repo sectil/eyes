@@ -1,0 +1,1894 @@
+[
+ {
+  "lesson": "d05",
+  "unit": "c2.onbir",
+  "take": "t4",
+  "node_id": "fXmDYEYX3GoZAIuMGqXc",
+  "session_ids": [
+   "y9p5eYCuIwZjaQ1zthXZ"
+  ],
+  "asset_id": "dIUdXYGDkaB76gSfuXin",
+  "result": {
+   "generation_id": "FhrXTIjg4bSPB8XWZGdL",
+   "text": "On bire, on ikiye vardıysan bu da olur. Sayı yine birden başlıyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9953252077102661,
+   "spoken_duration_secs": 4.88,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/dIUdXYGDkaB76gSfuXin/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T080619Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=441e4fd94a34ead290abf607a43359ad17d4f6bd29634fc1848dbace9af77fcac713a48269fe2318aecbcde46d03e3597aee67cf633610a7a0f68f4a67b9705b99fcca05cac51069fc681ad6b72826d005869f8b6e23d083ff2a1886aad7e50b5fadaaae533e2156cf493a9cc14880e58e34b5a144dc764c9a34844d6a1fbd8fb1d40bd7f4adf3e4b574316e00cbb149d0accfec9dbdb835a33c6baf25e3c1781f2a42e29088e0fb59a0cb0c297921c4aff073dae3820a06fac2b89e98c15254c1fecd97e87775959c73abac2692f5172497deb5574c19d5a2941395771e3db2393377f8f0d34be741d1c1be75c88b2b1cac12cb54822ed931d3cce6181751b7"
+   },
+   "session_id": "y9p5eYCuIwZjaQ1zthXZ",
+   "actual_credits": 27.72
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.onbir",
+  "take": "t5",
+  "node_id": "W1KMjv2JcyjhGVS059vm",
+  "session_ids": [
+   "5RufAszHUKXV5vPEEHuX"
+  ],
+  "asset_id": "cixRjgZsqHUcMwawUDsN",
+  "result": {
+   "generation_id": "TwqmK77eRQZSvaz3GT8A",
+   "text": "On bire, on ikiye vardıysan bu da olur. Sayı yine birden başlıyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9953252077102661,
+   "spoken_duration_secs": 4.72,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/cixRjgZsqHUcMwawUDsN/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T080619Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=5582a6aee7c674da838098c036777ec9789ffb93c5dcdebe1fd6204fb2f5785c05a18ab3e85b69ba111fbd2b0245b1a535c76817019abe55a9088541998c32769256ec711e37075389ed851433333c2a1e308b068203d5995f834b8ce1ba54c04a69bcf4409ce7041e1f487e64ba1d3dcb275ced4f99be1bb3c2d2154e19f71dd80c835320f437aa8323a6a5a55c0f5b6aa38f4f8aeedcb98497725abf4be67d544440e4e6d24e53b724049b2bc6143a336823e4f9411baba5a65605d234aa630ff6213eca10ac711d73982066c4d3080cf8a4dcb767dbd5e75c2b6375860ba9ccd8265b603d0ee4412f0dbead1be085413549db19a70e44c1c9cf3f5823c40e"
+   },
+   "session_id": "5RufAszHUKXV5vPEEHuX",
+   "actual_credits": 26.84
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.onbir",
+  "take": "t6",
+  "node_id": "sAboKF8DtDqUK1nKlYAG",
+  "session_ids": [
+   "DUSFKYYNmXj42nN1GydQ"
+  ],
+  "asset_id": "UX0KIvIhJi5xnO2RUDfg",
+  "result": {
+   "generation_id": "JQj7qFU3BTt8pSMNWAQ0",
+   "text": "11'e, 12'ye vardıysan bu da olur. Sayı yine birden başlıyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9964538812637329,
+   "spoken_duration_secs": 4.94,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/UX0KIvIhJi5xnO2RUDfg/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T080619Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=a76f879bdca0fa0c2ef24c1650ee97bef1d026932cea2ab89e8ecfe5261c8dd87c64a771458f51fff6efb8844e8756b080017c5f1052b7b2c88f26c80d1d358d908304e731d7e7bf5cea565123c73281b653fa3cbf345973c5bfac7adf3fa7400dd6c2a125d92a752ee848ff464b12534787aa10772139b027749d5aee2c838a2e613651c87cbab86a8f23345fdd8fff91c140e08be18a81afc74e8f059e38fea346f0d356d651360f4c2b073db7b1b33aa5558d0256df106ebc912e72a88df907b17120cdd9eacd6e9fbdafe36180a4b4f3d6813b2d0b86dbd8852467c9c4c87ca36e605cc242834d399d3114924645705c7fa745367a7afe59ad3bd2b4e765"
+   },
+   "session_id": "DUSFKYYNmXj42nN1GydQ",
+   "actual_credits": 28.16
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.onbir",
+  "take": "t3",
+  "node_id": "T7w42Y1atAayK26oyuB0",
+  "session_ids": [
+   "o6OdGAhmxmxcu9dvDZaA"
+  ],
+  "asset_id": "hF0PIqAVw96ohwYV7u7Q",
+  "result": {
+   "generation_id": "WmAanbVAtGunePl4YYTd",
+   "text": "11'e, 12'ye vardıysan bu da olur. Sayı yine birden başlıyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9964538812637329,
+   "spoken_duration_secs": 4.86,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/hF0PIqAVw96ohwYV7u7Q/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T080313Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=98a5e7e6e29daf5c9ae195175ad77b2424cb749ff159dfc4eb9863df44d672257784b227ee3d367ddf9e601675d64a72738e718eba9ed42b5617d80d1172a8e27c1dc03aedc1aefc6319926c693c83c6c013c64253ea18cba34e691ffb7ef7e29ff10034e8689a8028cc99ef731df0b1ec5199a5524af88e16af9935d95fe1cde8c948e9f704ad2d7ce07aa87909d6a2fff84cca1a7b7233f4fb1d718183f6a005e779c30d9a7a9ef06cc6a872132d142f5614d52b5809fbfb0169675049ebebb36e14cc6bf0f062d453ebca56fb089d0a4260e1e7f8d9b6914988afbb26bf1b513f19df4970b7d61e10a8a911ce40ea37d9d39e2c6769293e00a1d2230a2efe"
+   },
+   "session_id": "o6OdGAhmxmxcu9dvDZaA",
+   "actual_credits": 27.72
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.onbir",
+  "take": "t2",
+  "node_id": "XOAbeBkXVcatVai6YWRK",
+  "session_ids": [
+   "7U3ygKMwBYmf5HhHkRe1"
+  ],
+  "asset_id": "K0B9QOZYV6st6Js9U3Vg",
+  "result": {
+   "generation_id": "uSn3faslvtWl3vIO6xmd",
+   "text": "11'e, 12'ye vardıysan bu da olur. Sayı yine birden başlıyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9964538812637329,
+   "spoken_duration_secs": 4.88,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/K0B9QOZYV6st6Js9U3Vg/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T080313Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=960e597614d301a84ab557d78d5834cc2586313851b478e4a765e2bc4c82a444986d5fcde1c278af22c1380cde765540c955e42c0a2e5d89aca07707e471f60f2002ec5530f476082c724aceb08567277b18adf5eac7bf234f4f6614db301a6dd0b595111b7e306f1de313ad5a295848eecab573fa37ce42455583a3de95004a9c20ec4af61f7fe3abc5793c2fefedfa4386700faf9163c731b44e749b310979bf05a766de0c581f5677a796a522b0c652263a9e15600bf6181f736493ff9b2c50361df633e735c6e1f03bc7bb83e21c185a59ca18436173756730a6b44ebdc054067b7613c2ba5e0ededd07e87e5fb2f8c51aa8eb1ca51ecd174abb91b2fcb2"
+   },
+   "session_id": "7U3ygKMwBYmf5HhHkRe1",
+   "actual_credits": 27.72
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.anahtar1",
+  "take": "t2",
+  "node_id": "3CrSUei1DoooxspMOQ6o",
+  "session_ids": [
+   "2eZ9Si5gdeur7RXEi0yT"
+  ],
+  "asset_id": "nIGUDxHvPujp9K5Okv8F",
+  "result": {
+   "generation_id": "fb6min6pCO1CygBgeNb2",
+   "text": "Fark ettiğin an zaten geri döndün",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9964723587036133,
+   "spoken_duration_secs": 2.7,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/nIGUDxHvPujp9K5Okv8F/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T080313Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=ae1b5082bbfc0508397e2122f05ccda4de60adb389229fa0bef9d3c02c7bbea8e9b06ea2f51bb2191b1564a6776b433007c0aadb08b88b4088639626ef9a7aefa4d28930b3b7f1355aaed86aeca7354cfe72856536757e4a7109070e70cb27f8008209aadc9d21cae4d7f3dfaab3501b776f5bf9ee6e1c59162dfba80d79be337993b19aa4fef64ba5aaee5be7138919dd1ea552b8a8c326d0872bec7717f2489940d1f43e929e891508b2ead7939e663b9dd8a40bf24b4a4a939682364c9491c51dac5916ec8040da058c39d79aa7cfabc5910220965971ca38777053fb7d47e3ed4261c0febbefaab094d0529082a1694b79fd773e0b28de39db0937cc2b2b"
+   },
+   "session_id": "2eZ9Si5gdeur7RXEi0yT",
+   "actual_credits": 15.839999999999998
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.anahtar1",
+  "take": "t1",
+  "node_id": "SxRNsUnb0lAJOGo5WPd6",
+  "session_ids": [
+   "PWWPxwhnFkXbvOwp1pbg"
+  ],
+  "asset_id": "iGqSg8uUFTqhW9pI7YBK",
+  "result": {
+   "generation_id": "lc8mZ58wjgu378EON4K4",
+   "text": "Fark ettiğin an zaten geri döndün",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9964723587036133,
+   "spoken_duration_secs": 2.64,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/iGqSg8uUFTqhW9pI7YBK/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T080313Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=564bc4c6a63e15848d8d8bd219a964b89f9094eb1abe877133ea4c0ed022a543f78bcf2416f7aac107140693906fe0426dba8aff80b77973725d9c966ff5666eb345910c29c18e892a5135e3d9aeae885f1ad2822b8039bb48649a92eec847a835ce1e12be0e2b5b9c7c05932775c55e761a96ef4836c1ae9b775cb13d308d6567cb26db5f02a947b6ab654a33eee21f807fe2b6cfdb34d684ad8435a1725a1099553bd454e7e572505cecf289a9025d28e5cb656191fe42a3e783dabdf995fa7d3d09e02be196d5978e6b4e503f974d9d7fc8188216ba36f46355126fcaa39f0703ed714632363687d9909bb1347fcc8320cd0ec217c246b7b825f64c58654c"
+   },
+   "session_id": "PWWPxwhnFkXbvOwp1pbg",
+   "actual_credits": 15.839999999999998
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "a.durus.kisa",
+  "take": "t1",
+  "node_id": "RT9VjbYQSwreIGboMoMH",
+  "session_ids": [
+   "h2VvzTZiZzLcoamI3RUt"
+  ],
+  "asset_id": "xxkk4NzX1vVzmlAHCm4T",
+  "result": {
+   "generation_id": "lL4Mmi99BTUTadG8NXGf",
+   "text": "Sırtın dik olsun ama gerilmesin. Gözlerini kapatıp kapatmamak sana kalmış.",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9654858708381653,
+   "spoken_duration_secs": 5.84,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/xxkk4NzX1vVzmlAHCm4T/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=04745e8e3710dae05ea27a3eecd957ad09f64d45443dda0e5a12efa747c551f3d5d17e9fbb70a3a41c4e72b0d00652ac7b2501bcb4fd0e62196dbd234e974ec3cb3de792e9609e2d4a2b987c4df8f31981d78e1d8e6b1b6ed24e81fd0147107ceb19ccb484c94fda5a6aafa63432cb13eff439e01ff245fcb591bd07b455c4557bf5c2bdd834fa06bb08eadb321200407c916954c0c6666fd951f9abeba238e3994fea6d2b856b83976cce50fbbe44a3ef775ce68bca3bc783242d3b4f554a37e367da70f9ecbcf2352934f533507d4c6a083e3a6664ed0b2176c0f2a9a378111018984aaf5dfafb9069b8ef15dbc96ecbbd21937345778548b85bb4f11a8f24"
+   },
+   "session_id": "h2VvzTZiZzLcoamI3RUt",
+   "actual_credits": 33.44
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.kayma.kisa",
+  "take": "t3",
+  "node_id": "A14yBDaH0uUOpkNo20Ih",
+  "session_ids": [
+   "qXhDaFUOxMnrXxMGPRPQ"
+  ],
+  "asset_id": "2u5bxSxhjTPZHT4iwXGl",
+  "result": {
+   "generation_id": "mB43x66FCZlLGBEiJmVN",
+   "text": "Dikkatin birazdan kayacak. Bu çok olağan",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9969245791435242,
+   "spoken_duration_secs": 3.18,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/2u5bxSxhjTPZHT4iwXGl/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=7501b099d2db90bf3d541e4c847d1e0f7516a39d144c3ccbe16148acd873a885a2bc2137f51ffe9d5a91c77fae3a0e9876250fbf27cc50ab97fc7dbc11bdec279978b50a4cd91cc20197db6f478af738b1d64845bc351ee068937ba71386a45ca8f81c955fc35e36802439d23178c0becbcad6dfc7a052340e43ff5acc0b3e1e0faf0a6882941aa981eabfc06d89b015b4e1c268946551bf6e1c749917b6f84a96f733a5333288b4d8dc8ff45c6e78912d9380ad740228665e317dac887c09b1961c7f9d253c1c3cef57d8d03556fa95f210cd247de947af78e39249b9ca240df7181ef6374704886a84ba174fce2ac695c5454e1f1d30f9a254ea4846aa0c45"
+   },
+   "session_id": "qXhDaFUOxMnrXxMGPRPQ",
+   "actual_credits": 18.48
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.donus",
+  "take": "t3",
+  "node_id": "F8l2qqcINYinAp2rF27d",
+  "session_ids": [
+   "3CbWfMHTdCRr6Wc6FMme"
+  ],
+  "asset_id": "1EtFGKowt2uX8AaQuH03",
+  "result": {
+   "generation_id": "u5JyKw1EdKlT4mlD583D",
+   "text": "Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9984723329544067,
+   "spoken_duration_secs": 4.44,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/1EtFGKowt2uX8AaQuH03/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=3a19a2c363ba46332b67d16b2d5b6005002867d200427deb97796b03bef3cd0d9a9efa080a4f1bd90c95b5a8c8d3ea19a46c82ffff20fa5d917ba8e99566b53e95421c13161e1d73d624272521b875b592bcea5e769e091c310f808f5250070da2e9ed5354355b1a55eef26e88c740f1eb4349014a060e4d476954e95cb10271aac1d2344aacc667063f35cf65b9a7e8ae1da304cf5bda5c4e2be3b9f99af77c97bc45ec4b070fd0f066bd290f9dc9120736ad70395cc55f869d779d500c700f987d622587a4bc95b69ef4f0e5034755493656a1ee97682ab36de253db98028c4a967593cd7ac7da832aecf8f2baddbdcca68b540756fedf832be38d0a0e45e4"
+   },
+   "session_id": "3CbWfMHTdCRr6Wc6FMme",
+   "actual_credits": 25.52
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "k.donus",
+  "take": "t3",
+  "node_id": "DNh3Dh9phdjb33GO63K0",
+  "session_ids": [
+   "IM3ca8h5H6yNAQALiSfU"
+  ],
+  "asset_id": "P3x0s4Fa0jN4QnKWzVk0",
+  "result": {
+   "generation_id": "BlIVhsvJhjmO8ohoSAnJ",
+   "text": "Artık dönüş zamanı",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.981116533279419,
+   "spoken_duration_secs": 1.48,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/P3x0s4Fa0jN4QnKWzVk0/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=73ffecd83531fec4fd9eb690b9c9d7b4458f1eefb773bdbfb3c11fe4a6a33c03623e42b1526b8c7cd159c3b0eee1b00ca36c03e68b8783bf52477a5c42a25d38727123e9cddbfb512415cd80af05222c91b224a49d38c7b92f37b931f2e81afa9b9f044b918a15c45b35b794a73fcb0002740a03a40c37ce3abb1b164613e1e3065c1a4cbaff010cb53f0d138cf3879153265f4ea21d0387913ae5e81e652e9a4544db337d27f868b1fa5fcb93f36f1a844d12abedc0fe0212f5369cd40032617449f3783b70afc26f377348210464290e1e34e6fc43ee79518aeffdf5d8382a24240f4890dbdbd06a319ba78a6308ab66dae9ef5f4e270b56c81edc9a468922"
+   },
+   "session_id": "IM3ca8h5H6yNAQALiSfU",
+   "actual_credits": 9.24
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "k.goz.kisa",
+  "take": "t1",
+  "node_id": "brlb32TFqZ4skXsuAIBd",
+  "session_ids": [
+   "7i6wTqwDAo2tHRAOYMgh"
+  ],
+  "asset_id": "EqR8bYPfMJgYVbsZOZQU",
+  "result": {
+   "generation_id": "p62BngxjQyCH1w9Hsrw5",
+   "text": "Gözlerin kapalıysa açıp çevrene bakıyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.994331419467926,
+   "spoken_duration_secs": 3.2,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/EqR8bYPfMJgYVbsZOZQU/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=b6ef66de4ac08f27ca5e47bb0bc9a45f01e8d3869071e6d1b7d7217b3b190ff5d1211d629acfc51e559b0ef81a076ab4a6af732775d27410c008795c2622e07273d347a7db8a31d5b39db88d5c9c73222ed46ccff63842203ad7ba022a8172c1d363fa272207872243dacaa084169aece159f660ad7f71d6beb58f94725a779c90d3f5dafb2a81dc6d64afa0e61918b03f7b7b5e0d5779816793f025076bba3aac0e6d76d00bab1f4b61a8309953528903de11256a8d1a57b51db2c18724ec5e8c9873b30b2ed195613572d3d66a188495d077aa2bce811cc5392bb5916dca918d5c2e3182d714e38124f7aacc23ed80e7a9e802233868f112258592c4ca83e9"
+   },
+   "session_id": "7i6wTqwDAo2tHRAOYMgh",
+   "actual_credits": 18.919999999999998
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "k.son",
+  "take": "t2",
+  "node_id": "L67v38OnobH2pDI3JSdc",
+  "session_ids": [
+   "3m2WEuA49pMWEaACFA9f"
+  ],
+  "asset_id": "gYZW3Lkft2KGUcUfDjQ8",
+  "result": {
+   "generation_id": "nbuEQcKtI2DDiJtdSazc",
+   "text": "El feneri yine senin elinde",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.5798822641372681,
+   "spoken_duration_secs": 2.12,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/gYZW3Lkft2KGUcUfDjQ8/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=a05016af313fa0401cd00eb738b64302acbb2f7007cc0f2513aecf6d4278878fa139e9e1a627616069a2dd5147287c0601aca584bebca720ef60ac4d2996328efd8b659fd360ca4b04ce2878102208ee1091cddc861175a8e91d4ac374d8968a5b7a3437165b14ce6a21637f7675abb95662ebbe9f089f3f9fba5743ce3154508fd96302f0d462755dd6dc9851cd99746249cf72989cb6b071f8cdbe9069c6e509995bfa598ab75b24a49e439d042894867651dcab70a53139d93181a56f64790b05b1a42d757d1f550128ce334dfd63b376394f594f5d0340f068c4b473cc68397b6c45115ab1dffa04ba23a56018dcf7577335d762041cdd5e653842ced76e"
+   },
+   "session_id": "3m2WEuA49pMWEaACFA9f",
+   "actual_credits": 12.76
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "a.durus",
+  "take": "t3",
+  "node_id": "iZR1624A9WynDQVdV4xR",
+  "session_ids": [
+   "OMLoLcoidew3AeSIJmQg"
+  ],
+  "asset_id": "6ZtDpwJaFFkX7XmShEhB",
+  "result": {
+   "generation_id": "l0VT97UCuTusdAzuGAGY",
+   "text": "Sırtın dik olsun ama gerilmesin. Rahatça oturman yeterli",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9490402936935425,
+   "spoken_duration_secs": 4.38,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/6ZtDpwJaFFkX7XmShEhB/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=280f3e8d6077bc4b7cb3b09696874ca8ccd2898a97dfa18a8dbf995c5b7ee1e429db7478829aaad74407b8976e21dd46802750fcf54f4815bb3e0457ab90466c7213b0cfa524f66779149e6ef57d80fba3b82dd9789a6cfc1a89987ea27b904fe167eb71f3539ef84a1fb42ca76f4c699e435c6e98ad48ce9afb6e25c5d5292b56e5049d60efd9d2a72062a7c4a0ba7684014f8e8720e02a321854544884745aa55eeb198115a80ded9821c6510f6849805dcd8b00a059a3563c9b4b2ecfdf6f2a42beb52d6842370c5c2871e5173299818e30eeb1084a6e2fdbd62cd3d2c7141f6ad0e6a17c4810a0242c1dfcb0dba01c823262d29e1cd1a199780430f082a8"
+   },
+   "session_id": "OMLoLcoidew3AeSIJmQg",
+   "actual_credits": 25.08
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "a.gozler",
+  "take": "t3",
+  "node_id": "eyV3ZL6Z6uRaG9zqa6Wz",
+  "session_ids": [
+   "cfr2FWIsKL6sCZDubjLI"
+  ],
+  "asset_id": "D8OxYcoRT3EsALH5gpw0",
+  "result": {
+   "generation_id": "itfFhmbnrOBiDU1a2Rvv",
+   "text": "Gözlerini kapatmak ya da açık tutmak sana kalmış. Gözlerin açıksa bakışın yere insin.",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9714521169662476,
+   "spoken_duration_secs": 6.72,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/D8OxYcoRT3EsALH5gpw0/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=c0c0ffc00edb64a68eb1320cb163c9ccb99eb5043dc037c0e2d016cc341f909769b8c1d06cb7674d9c171ffcae42bd4a2fa3c60d1ee7a074c35ac592688fc1e24ba3c3f9526f4a2ff43365a20bdf504bfbd22b355e15d9e8fb68598940b33971bffbdaf8d5ef204f3b3e2f75342ef3efbd520e6193abfc78de462bda286d11d055ad7ecb27e132d9ec6d8ff7da34f03cb46d697add6725dc553ac5e70e24f12d28f311e2197330321bf04a0092eabaefd9d921bf7076a6c4ba83c5c337aacd019c4c0287938eb9cad4e911bc5ef4fb6d8091376c5690d9446b53d9263156e0c3bfff821355c3a98c92db49d71e92992f40d4c8f7d513b0c0f79d51c25e60dc10"
+   },
+   "session_id": "cfr2FWIsKL6sCZDubjLI",
+   "actual_credits": 37.839999999999996
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "a.izin",
+  "take": "t1",
+  "node_id": "XceyCRisLBiKgY1s5ixz",
+  "session_ids": [
+   "KwLer62o0XRzwJqYVpt1"
+  ],
+  "asset_id": "jTiT6LQRqiVDeGeBPhU4",
+  "result": {
+   "generation_id": "lVmTUZuFdpvWNBiJaJvC",
+   "text": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9918071031570435,
+   "spoken_duration_secs": 4.94,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/jTiT6LQRqiVDeGeBPhU4/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6f6d12a2ad8100d1313657d6c17a93f8655ced1198e46b1aca65e65a3e49303ea857368d447bddd56412bc10791a532d1cede51dc4f7089f5c2039a98cc7fa7125e8ea85b46520855bcba0f9bb4a9cf0fef45ec1efd216dd9fcc2cb5af5b05451248917055d884e67bc6c8cabbd26aff138e0879b6bdb17f83e9d7a310b17fafcc1117f33357570dccb21b5c82f87d68fc92ecdc72721ea0b9f824e6ac2875d93e769ac47f5c16860a1b7e418285a661532671ece429909c6e360fc51f75f4599ec3fb10510faebfe6bae76e1356e5949c9ade7a4166421d238ff60deda2b8add41a5782c91d2f9cd14e850bc34bec98d73f41588d7b018430087257b26fafdd"
+   },
+   "session_id": "KwLer62o0XRzwJqYVpt1",
+   "actual_credits": 28.16
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "a.acilis",
+  "take": "t2",
+  "node_id": "weWWHVAS94jKZ4ARfgTx",
+  "session_ids": [
+   "fHtxWMVTHptKq5lwVEuK"
+  ],
+  "asset_id": "uSLaoFNPAw1AI1YPjJHF",
+  "result": {
+   "generation_id": "pFJXTEEukGrkhiO6srPf",
+   "text": "Dikkatin bir el feneri gibi ışığını şimdi tek bir noktaya topluyorsun.",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9913938045501709,
+   "spoken_duration_secs": 5.26,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/uSLaoFNPAw1AI1YPjJHF/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=ae74b011202c7f7311fdcc8e260a3573cda5bb4f3f8835322cb09fc0229756b26f2b26d9212d2561382e6d93e94902c13d8b66ea9a8fe6eb9257b4136e52249c340e90aadff3292ef366d4ace4de86296b2c4f044cf3062f1c1fe34e31b7af781f337e7704020b464e8f2f2de437d0029b5b04bc2dc0073617207d5102f81b16eca23bc764e68d3747ee2dda8bee8d96b52ff323642e31b5989f782464c1799a285abf3e7c4b544645a10c46aad14f320b9696cb5ecc6c6b81c2d5f9a11b6f080aa37f649ad7bf70c627bff682df8993ba09442e58f64344db041cb61ff987ed35447157ff07c6e328c65d0eabb928a0e56d29b2a775082f78d3e6d4a8a51659"
+   },
+   "session_id": "fHtxWMVTHptKq5lwVEuK",
+   "actual_credits": 29.92
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.yer",
+  "take": "t3",
+  "node_id": "Qx6Pqm6MkIn5SKpcMFy6",
+  "session_ids": [
+   "d1xecFVkC0F8VYLpF1sy"
+  ],
+  "asset_id": "c1s8fkDroUMToVJgHWg4",
+  "result": {
+   "generation_id": "0r2TVdsGSrEAdodsS5YV",
+   "text": "Nefesi en çok burnunda mı, göğsünde mi yoksa karnında mı duyuyorsun?",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9980581402778625,
+   "spoken_duration_secs": 5.62,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/c1s8fkDroUMToVJgHWg4/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=14614ed21f99bf4c8f00157d5583c509ea061b86a056f7b93efeee7adef214ca481133c3da418f438aaadb5cc378e38ed434cb8d143bc065a830f9c020e842217d6306b72a4511d3beab8daf0e8ee742ddccbf8bff1f68041bcfe56ac9b2af6fea60539310a28d1320d089e68d640a72c85c22cee7ce003203e90590ce9f7cd413586be5345660f17ef35437c71904c6419d12cbfbcfe090a346d2beb8d141b611f90cbac95077da7a919fed835a9f2b559ec4c102cd3872b86d87f951ec55ecaeaf0605652511671e23855f5661414ab72bf5fda741d26c1f8513805cc0cfc0000b36ee7e618b927d623242c97f50ebcfd62061eabedd5dd6feafff6aadd76b"
+   },
+   "session_id": "d1xecFVkC0F8VYLpF1sy",
+   "actual_credits": 31.679999999999996
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.nokta",
+  "take": "t3",
+  "node_id": "pr2HFGCQMmst0qkk1GzA",
+  "session_ids": [
+   "Tbn1k01r96CAhDTgDXMQ"
+  ],
+  "asset_id": "pr1X6hrSvSR0K3EShhJc",
+  "result": {
+   "generation_id": "L8CK0PdiebMgSHpYEHh4",
+   "text": "Hangisi olursa olsun, ışığın bugün o noktaya düşüyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9574878811836243,
+   "spoken_duration_secs": 4.08,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/pr1X6hrSvSR0K3EShhJc/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=d449093c94f9011c0582d2e4790a9713c4e225fb18566e6948fadd23b821bd26f0af38a92362b2c793732a35054ebe68199f8920a6407f2bd6b41ec9e1bbea0efd902fd347d0363b8bc0f8a96f127ce995c8985864360e8b0396e56bd71dfdc262a79b468d25bb647e5c84eab0bc1f0ae2aae26e08635c83b37c111e49113be04ab642591a9d19c1b559ee0a032f54f41cf0e27e1db8748504f35050cc40b5bd5ba8f59d1526d3c4069405358ace6135947c67feea8d303dada708723e85ff2a67c5c4eb5ed9cc06c8f0c26114f0dee03e50d37b776b904594fb53d09157a961a19e43f9b0f92d607f903599fcc0499688b5b18785e700abafbc01a2f904c654"
+   },
+   "session_id": "Tbn1k01r96CAhDTgDXMQ",
+   "actual_credits": 23.32
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.izle",
+  "take": "t1",
+  "node_id": "j92933u5ZaiuzCxjr7JO",
+  "session_ids": [
+   "vutwaAny722PQh9wLZsV"
+  ],
+  "asset_id": "sFNr8ZXpBNnEu17Vr7bM",
+  "result": {
+   "generation_id": "ZqoaD4xrWCpa1nS7SLgT",
+   "text": "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9762046337127686,
+   "spoken_duration_secs": 4.5,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/sFNr8ZXpBNnEu17Vr7bM/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6e430cfec04454c054b0dc0b05eae4dee306ddc67885972339e6cb964753cb5b6719365ebc3ab676f66f557edd303f8f4676ca124351e21c894636d0a2997b49b7ca280019100772805b6622cd9d0be91929150fd5e32063d9cd72aa14d4704968c5134ccd6b09168f3bd834e67e6eda3669bde58f15e164c4f5077c9b8a9d042a5a730edb9dee7cafd87c36de3992d5312d6bdc6f59aaf5930e6891d88cb11485d592dea4b4e52f9c83f144ff5b84db8e82b9d3d00845680428d7aaab25b5dd4379d75a0fc01283f5c03a4b104a05ef0e04c35e335820ddd8c1ccc5ba0a6d92e16706e8c3b495353e9932bef9b33332ad79953a34b596362bcf7ce81af8f03f"
+   },
+   "session_id": "vutwaAny722PQh9wLZsV",
+   "actual_credits": 25.959999999999997
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.kayma",
+  "take": "t1",
+  "node_id": "G1ztv4dYbWxUTjgD72iK",
+  "session_ids": [
+   "UNnInGhFcsizJrVH6nYM"
+  ],
+  "asset_id": "JX1H7Jsk4tTvdsvOpd2v",
+  "result": {
+   "generation_id": "f5EcBHOL2R3aeWEECwNz",
+   "text": "Birazdan dikkatin bir düşünceye ya da bir sese kayacak. Bu çok olağan",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9979285597801208,
+   "spoken_duration_secs": 5.1,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/JX1H7Jsk4tTvdsvOpd2v/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=57cebf0cfab53fe369fc3dc0c79f396e0b6c6df1e2124ab8aa6087f5b6f5217861f3704e48d0edf46a5fa349c89413f69eb4f2d4ececab9dd3d62c6c4a7de5b82808efa347b5075f63903844f8592b6e4f387cc1e911881ba1627ed69092a411fa62f209314b825b9cf81efd369b80db1d95b2d290f5ffdcf7f6c19d15fbba965121caf85c831a63b262501f2325ec88503bd094f940b5ed5d9012d594b5da1f8f27d087d17a653a91bd8044ace2b79736ac97527d00bf69f363dbc06ce3093b91081bc00c7b5833e31fed973403febf3ec2c7319b2af0d37790e4f2871b201de6594d1036a3a95cb9a190bf85da9e27b3c8dd684aa04f8cd12e61fabea606c5"
+   },
+   "session_id": "UNnInGhFcsizJrVH6nYM",
+   "actual_credits": 29.040000000000003
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.aralik1",
+  "take": "t1",
+  "node_id": "LYY6LYGEFATQoszZEB4S",
+  "session_ids": [
+   "g3tBihpQ9UuV2PF3J75x"
+  ],
+  "asset_id": "DgEohDnizb6ovXtKrERk",
+  "result": {
+   "generation_id": "MiPIqdwnK2WhYXAcbfOl",
+   "text": "Birkaç soluk boyunca ışığı orada tutuyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9957137703895569,
+   "spoken_duration_secs": 3.3,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/DgEohDnizb6ovXtKrERk/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=60ac2bc5d5cc20b10878688baf5f592600a1906190f5e96249e24855ce0e3159817346bbce076b1adf815391d26f2dbcd158f77be6393cc2fc1b466320599827e68697ba1faf9fe33fc88068fe56ed8b339f7b371098b48c8a465e875ced56d7663c3515e67319c0d7cc5e68f4d5f3005db52857b30f969bd4f70219810322114ed0b0b0645049341c3b96cddacfc9ec193e6c7af9533f7fe9ef0c53b6d94c34e9eeafc9d45a7ac148e2d19768dc91329bae2670e412f44a7b60c400fca346f667329690bbbba1f192543ac3dfaa985455a4f49181f6c56262ecec859e125e5951d2f06ef14739b63d84cecc1c73601fe8f14d40896553b97cd7cc202b3c3c9d"
+   },
+   "session_id": "g3tBihpQ9UuV2PF3J75x",
+   "actual_credits": 19.36
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.nerede",
+  "take": "t1",
+  "node_id": "tM1wM1egqtilIJRM3qqe",
+  "session_ids": [
+   "XIojQPnHQohlYF6j1yj4"
+  ],
+  "asset_id": "1i73ZPr4z3IEXP8z8aTP",
+  "result": {
+   "generation_id": "oMRFARjoM9U1i57Ylmay",
+   "text": "Işık hâlâ nefeste mi yoksa başka bir yere mi kaydı?",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9948859810829163,
+   "spoken_duration_secs": 4.14,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/1i73ZPr4z3IEXP8z8aTP/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=4593a87c59e640d5ec38e7d9b7449cd0f8e36c9dc67a803184efafb29f52a1716c7a2d1946357f9ef7b205e314441be70d313f57889bb69e6e28602a17774a139713c3847e54c86fefb08c6b7007029c6cc470110cf545dad2c1f94593d14cda60a9788983ed2b4241751b8f9885027d280ef8bc05ee07f8a1170257a59dca2195d6ee0106c7d16d8852780601e5921888cb4cb05eb3eb89026a4a91866d7e086e9e9946f179366a8dd1007eb7f364bbac01d0d096fd904105c11675bbdcac99b459e80480c78418bbdf38b474a6d0714adac0962e9ca2594d17ed6a6da799bde1bbf98ae90eb2259d89b9f8553f52056233682e56f56464f3ff6a2a7aa1478f"
+   },
+   "session_id": "XIojQPnHQohlYF6j1yj4",
+   "actual_credits": 23.76
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.getir",
+  "take": "t2",
+  "node_id": "c0KNzGOCmdzcSS4ZrdpB",
+  "session_ids": [
+   "1IRn28GxMtqSFFPvH8UF"
+  ],
+  "asset_id": "YYZmkLeh7GUxzco29LR8",
+  "result": {
+   "generation_id": "1jPjmKdbS6IoPszt8WJI",
+   "text": "Kaydıysa bir sonraki alışta onu yeniden noktaya getiriyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9950205683708191,
+   "spoken_duration_secs": 4.36,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/YYZmkLeh7GUxzco29LR8/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=20fe6503bf6b0fcf56fd8882a0ea3a7ae1c0604538df0b67d705cbd73c7c5b558cec1d9fc44d1e319cdc8b5e6fe5e2741e7fb44eb3add7a0416c601eb791b5bf95316153860b00acbd0d8854ce3815037dfd529752e3e499007c687c915698159e186695e2a01b8f4dfe65d418cf04d7758ec97b6ea5ec69e09f33ff6b987196c8d429a97fb6fa2e528a493381c029648a701d8dfdc89eff5b3dbd029fc9b42a9eaf5a8e71b12de6d20013978d9f5d800e356ca86bb87fdc1bdd28e84265871c777aff96785049abdec83511dc88b65f83dc3f5322ce76d1a92b9305d8521cd4a4a10d42f663f14015759658d7a6da08752b71e9782b8a2b2d836939b893418a"
+   },
+   "session_id": "1IRn28GxMtqSFFPvH8UF",
+   "actual_credits": 25.08
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.anahtar1",
+  "take": "t3",
+  "node_id": "AaAvyD2bKDzqQYNTSZvi",
+  "session_ids": [
+   "CzEKcufSKIJrNx9Oulhg"
+  ],
+  "asset_id": "JHbIWUBYhmmIvwKJXlrk",
+  "result": {
+   "generation_id": "ZZbGwiV3o21fcHjqoAuf",
+   "text": "Fark ettiğin an zaten geri döndün",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9964723587036133,
+   "spoken_duration_secs": 2.74,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/JHbIWUBYhmmIvwKJXlrk/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6cd27811ffbfc99a1c59d60d02ea58e748d509225fe18835414518c985f44382e32917447e726a81638869f399afc007aa6ed4eaa8d255185cbceaad6933194edc53c939b1f27863cdbbd653d1c03c27b18f4ec82abb9e37005ed23a2c2edf89116811d84aa410cb6581321bb8783b242a01bbe7b6891a615b794d1e6dba1b1577b81da3dfe22aed659c8499e115e51ad1ae7895e1b12a55f639aa3eaf6570a37d8b7c4f29515a963889673aba5e784e488c8a2c58ed867d1bfad8546c7540cad0c5b907c77ac2189aad9e95692609261b6c452c722a1cbd4900138e89e35a6f91dc670a204abfe1301a23c15ca8ba6bbaec6961155756f6d5a544e187901802"
+   },
+   "session_id": "CzEKcufSKIJrNx9Oulhg",
+   "actual_credits": 15.839999999999998
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "k.nefes",
+  "take": "t1",
+  "node_id": "Ejb8F4gQgybwnLzc6saz",
+  "session_ids": [
+   "EeC5lqA34ytEsmsvwpy9"
+  ],
+  "asset_id": "ABMmcDBmSAUELGbxDsF3",
+  "result": {
+   "generation_id": "3KBLNEDWD9CxFn2mQYhu",
+   "text": "Işığı yeniden genişletiyorsun. Nefes kendi halinde akıyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9953054189682007,
+   "spoken_duration_secs": 4.86,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/ABMmcDBmSAUELGbxDsF3/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=1a6351b7123ae16f1efa798797b6f7303d71ef3006384ede2e42173e626a0563ad126f8b3fe7504f257ac20a42d16fb1b735b1c54af7d3abf4375db9f5976ed7e72d75497bc459d986320728c48ae7b3f8bc9f9f5ad42b00279af6968e29ee87af39c32a7e10d0875461994497b596ace95315e2aa8fbb52003ec69e4c5835ea517e464a36d4db1e116c7af08925b29efacbeaef5acbeba298d5711d5ac914826cf171703b718be3293f69ad1f20208b58518fc4f82bc54251919fddcde06cd848a4bbdaa6a58b2c7f9826b2db80f62f2613e6d102f6ff1184eeccae419181c7ffdf95a0f1b2740fd8ba63f924267f930969c9e69225291e9e834228382bfe1d"
+   },
+   "session_id": "EeC5lqA34ytEsmsvwpy9",
+   "actual_credits": 27.72
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "k.sesler",
+  "take": "t1",
+  "node_id": "i3IwoM7GiQwnspUMhOog",
+  "session_ids": [
+   "pYYR6QCACOWT3bbHyDQn"
+  ],
+  "asset_id": "hdZo8gBldxn083unGaSG",
+  "result": {
+   "generation_id": "PDkZrSgvZQudwoKZBtKs",
+   "text": "Odadaki sesler de ışığın içine giriyor.",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9969216585159302,
+   "spoken_duration_secs": 2.7,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/hdZo8gBldxn083unGaSG/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073534Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=3450dccc35effd8f7ec1755ef0eb038975257f9773e1b9e991575d5dabb81c80b0d43f57858065e06b7f0bad7e761799a33f34eba235bcc7a76bb7c60d77a4e9370a98608554269c52640793fb3272d17bb5c042a5505738e50b290cbb55ddd084da6e36d10c4d5c4074297790bc1a65197884e1fa620b8e724d60ddcccc3e0a1ea8005a978fa8fc1d4d44f080697d9a72f1b577cabd45c7834d50f6e97f68390e9e3562a681be4a0b688bece21e30f71c588fb533f6f4e34a9cbba91dc96ba77fbc3caa0ef5f2e96bdc9ea1b059ed34f8459d7bf96d8fc01c1134a3f7ac191810495661cb7a4c9d4bce551d7ce795a027255434867fd37caf9aa0592b4652f0"
+   },
+   "session_id": "pYYR6QCACOWT3bbHyDQn",
+   "actual_credits": 15.839999999999998
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "k.hareket",
+  "take": "t1",
+  "node_id": "u1xbPhHHop8IA0lnWPE3",
+  "session_ids": [
+   "JBSfiyvRlBuJC9QQ97wg"
+  ],
+  "asset_id": "6PyPHtw69m2gO7RRIcrU",
+  "result": {
+   "generation_id": "T2VOeMswreVNpMri1zXY",
+   "text": "Parmaklarını oynatıp zorlamadan gerinebilirsin. Ağrı ya da baş dönmesi olursa bırak",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9791982173919678,
+   "spoken_duration_secs": 6.12,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/6PyPHtw69m2gO7RRIcrU/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=1212f5fb30a2163116d9a41ef0a226c5d6b3b29ae1ddd01b573842d33d1e89acc4d076811bf8a19ac5a8f62389218fd6906c7a139059ee5ca965a09602cded6817a1f4f77e870657c4d9f8fc65914afbadc71b33b20a62aa9d0e262b3239e582f7456b7f72dd1afc3ab22895605dfe727f6ef38cc59d1b310fc30004b89a07fdf36d82b6093d3f43ca8c9572bff738c6d3c4471010d7692f4ac6b6041f3dc56b2cb13338485fc087ca9a5280769ae781dc85bddd4018508819357106ca5ee55bc4ec0c3fb8b0f029c96b3b1acc82c7ddcc441294aadfdf3af0d2ca2d1f9134a4dceda76f8c321fdf28c3228167851d68a77ce9e5e93d425a7d53c5818d4be78e"
+   },
+   "session_id": "JBSfiyvRlBuJC9QQ97wg",
+   "actual_credits": 34.76
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "k.goz",
+  "take": "t3",
+  "node_id": "PWYfGSZjS2J5oJkJcLT9",
+  "session_ids": [
+   "MNAUsUV3nJPH0szgCEDZ"
+  ],
+  "asset_id": "9250I1UbuD8SiqsIn9e0",
+  "result": {
+   "generation_id": "SWlLjK2DfYt0fQQNO4Mk",
+   "text": "Gözlerin kapalıysa onları acele etmeden açıp çevrene bakıyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9975857138633728,
+   "spoken_duration_secs": 4.7,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/9250I1UbuD8SiqsIn9e0/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=84d105554cfa59af1e8e8a25e2cc6111c4828d1a72cef4e14c9fc66a5d642140b36948a466c4efdad94cce3418eb9cd3f76f6e22ca9b9a21b27a393d562a1a22007b0e44a92defe5d5789686f22f9a690b263974ebbf6180f396eafaadccf1400fde2750898e0bda02f70ad0b484ac075995eee1d6aeba18796ec2290cb14deacd1bd95c592d59f626a88f4f9a3e65e4e1d4b743b7ef692cdfe2eeb3edf788c7b3882d1cf63eaaa2eb077b682f773584926d318e3cd493082324fd2520a2e5938daed359f88eb815a39d4758e7ee818bbb52fcca58f6eae40d802a753e8eca777773340c1c9070f5108d015bac9a15d5d04968b1c1b22984d5b73909368733f1"
+   },
+   "session_id": "MNAUsUV3nJPH0szgCEDZ",
+   "actual_credits": 26.84
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.his",
+  "take": "t1",
+  "node_id": "ryA20PmbPbpCFeb4vYWI",
+  "session_ids": [
+   "gT47LJ7qNhUsUFt1GAMm"
+  ],
+  "asset_id": "TwPXCHfq2RC3NazctxMq",
+  "result": {
+   "generation_id": "L21K5fV0OUSV6k3nn0jx",
+   "text": "Nokta burnundaysa alışta serin, verişte ılık bir hava geçiyor. Göğsünde ya da karnındaysa orası alışla yükselip verişle iniyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9974374771118164,
+   "spoken_duration_secs": 10.3,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/TwPXCHfq2RC3NazctxMq/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=3bd8ae815398836d490cd1d05ae24161234814ff40bc636b2a94ada48ae181e99c57bacfa764e0ded85f8ce18303683725fe695e8b03d4c1702ac92f098f6c663adb30ee519bfde0db44fceafdbedc0482d685298b4ad87915776979f556120129be476764149f2eec457952dab958e9ad56ea3de620dfbb5d7cb1a134b26bee7bd6faa75ffa63e63bf01cf32e76432ed38fca2a9fc66fbc90324fc15b755241e24a96bf1587098fe8442040e893a5a322ed382a10e0d9fe8aae34d4102798a21752c1fc84c3f23cb72ac8b769b343448977abe202205060cb20ad04f281cb69067621a51f13c8fdf3f6add703508f9f505b3be9664714af6253cd2de6f68c5b"
+   },
+   "session_id": "gT47LJ7qNhUsUFt1GAMm",
+   "actual_credits": 57.64
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.duzeltme",
+  "take": "t1",
+  "node_id": "ymM5d7BT950OeoBotu8L",
+  "session_ids": [
+   "ab5kLiY6nE5zjZE8cce3"
+  ],
+  "asset_id": "eOaLyJaibVIJe0x3fymX",
+  "result": {
+   "generation_id": "nxfiMWbdO4PrU645UkRF",
+   "text": "Nefesini düzeltmeye çalışmıyorsun. O kendi hızında geliyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9956650137901306,
+   "spoken_duration_secs": 4.2,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/eOaLyJaibVIJe0x3fymX/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6c9e5691bacc0179ea02368c24bf653730ec287b63bcb602d1eb55d6c7d764ae6e51a37a9bb44c636b040270e5dc1742185d85e24508a3fb5f5947ca7eae3390dc1aff2173ed6c357c9b75c7857a8aab1e79a89ac437d2b2e13a9e59597e740872b6298914de075f80dee8f6df34580cf9f7a2e7bd6446a768f86adec4f2cfc2d71743b2e78899cac930d77e78107684066947d63c611a16f44b6cb4b2f788944be8cd842f5fc00922b1121eaa5c78e90350a80e8ff7b0d0cb6f5effb533034cf77337f1808c259676836b35babd8744cd034dce9b1370df5e200d74371e3251c3a57b08bf5dd82ea3d00d1847f483d64ab42c1ffc6cfc6d1d2489ef6d0f545c"
+   },
+   "session_id": "ab5kLiY6nE5zjZE8cce3",
+   "actual_credits": 24.200000000000003
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "k.oda",
+  "take": "t3",
+  "node_id": "S4EGV5RURo2bYT9NPKlC",
+  "session_ids": [
+   "4z4t501Rs8ajd3ILRJ7a"
+  ],
+  "asset_id": "ST3X5j8QWNLHRuGtjLP5",
+  "result": {
+   "generation_id": "akOYkGRmXTXvLUp9jAK7",
+   "text": "Bakışın odada bir renkte ya da bir nesnede bir an duruyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9948184490203857,
+   "spoken_duration_secs": 4.7,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/ST3X5j8QWNLHRuGtjLP5/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=09d182aed96312ad87da2969b95e1a75c3efeeee4fd87f3ff0740123468b63356d518202e5b2246209c70fbdabc25be0f74252b201c6dd9e8649f5507fb76a55e5bab601cf81c8631e59dd44f213c599db0b3ee44bf969bd7e30647788d763d09f0c8ac9429aa3886efb0794c523bfb3a4aaa89821f226780ed2513f46a862cdae4af8c512f42fb17a512dd860bb29c5f47a028f797085beb01f606d0415c4f51764387f18dcd15a2b368237a89686690ca0f741aa9b13731f28e494ae730a9d1cd275c77fcb96c81fff7a6746685b2102fe42854496d8cc70fd5b36645812fa59c2d076bc257061feac463f73608129fac4b6299544a87cde68b2a0d490f4f2"
+   },
+   "session_id": "4z4t501Rs8ajd3ILRJ7a",
+   "actual_credits": 26.84
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "a.dagink",
+  "take": "t3",
+  "node_id": "bJKn0vWKp40dXFvGQGwJ",
+  "session_ids": [
+   "MF2ehuMSe7iwthhAN7xG"
+  ],
+  "asset_id": "xBVqiEls4qB8RCnR9Rrv",
+  "result": {
+   "generation_id": "UnEBzhsJlq5qs1WqksYD",
+   "text": "Önce ışık geniş ve dağınık. Seslere ve düşüncelere aynı anda vuruyor.",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9834453463554382,
+   "spoken_duration_secs": 5.54,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/xBVqiEls4qB8RCnR9Rrv/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=0479f4fd52e7cd2f410d7b3f7431766898e9dbd855a9fba6b8cb022ebca6724aba7f1723d19057945617944c117786c320b2129da9611360ba6e1c9cec970d905354abad350f02c05a7be0f200ddaa69196817a4d26fe1d838846a363357c8ec986ec5e5fc85b24d08dd017df82a1651f31b9402606a61581e58891186c4f5846c754d3a76236f0a40460fdf4e76e00503f2e7e8ac4e563c6c08f11b6d289fa7474c6266deeb5fd23114298cceb6662a2980c7c0cef9cbc782fe5a98f26611ae2f2e620de5d15cb9a07b33ab8b42ed03faae5e125e2bf9060d8de4d743e1879f8b1b738c0869f41d254cae02a66f93b631a3ed18fc5a39010b4e1d7f857b2e4e"
+   },
+   "session_id": "MF2ehuMSe7iwthhAN7xG",
+   "actual_credits": 31.24
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "a.normal",
+  "take": "t3",
+  "node_id": "vgAm7ARIprKlUsYjZ7GU",
+  "session_ids": [
+   "eaQEV88NrKd4tnzda77l"
+  ],
+  "asset_id": "uuaTzNWluFUEnL0pJipp",
+  "result": {
+   "generation_id": "EymF5tO3MIz20DKBlGnG",
+   "text": "Dikkatin birçok kez dağılacak. Bu da pratiğin bir parçası",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9920891523361206,
+   "spoken_duration_secs": 4.24,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/uuaTzNWluFUEnL0pJipp/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=c2474019b06b89217057a683694c65e872dba6c57d4c28444d95272ef676c3c4ad7608044da7350bb66991cb07dcd283398cc91b7d8960fed19cbf86d48182a73113363a4f2d78faf4aa97503eac8a2caafc145048eea95a6943e5b186974cb2eb282ac6f54c78d627ebf77b5a81acaee51f8ecc3f64312d8d0841402fadc9b8db9c83a2dd7ef6f1f755ff009f221c0263e50b01bf8d510e430e6078e076d7850e889c723aea5e9678daca51b098c02cf77cf0c2f0bd1d95e4f300faf088c5db95cec4614c06fcffe0c892d02d4b7b8ceab75bef23a1c05108411b5a1edb2824c44df0c3acd1d2de4e7fe10a0eafec9b5a404c20248aee716ad88ba842b4db9e"
+   },
+   "session_id": "eaQEV88NrKd4tnzda77l",
+   "actual_credits": 24.64
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.aralik2",
+  "take": "t1",
+  "node_id": "KyzOsseBnR9TMpQ7oCos",
+  "session_ids": [
+   "tsKZznH0LcWDeXta91vf"
+  ],
+  "asset_id": "UoTGhiSxdNnQKmn101yp",
+  "result": {
+   "generation_id": "whJvbh0I67EzlJV4oZCd",
+   "text": "Işık yine noktada. Birkaç nefes daha orada kalıyor.",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9840845465660095,
+   "spoken_duration_secs": 4.14,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/UoTGhiSxdNnQKmn101yp/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=a01586fd715eb52a0d017996040ba021f793ff8e9d5bb09af5323de34023883e0b70e347d7f07da2cd446d873b5fcc0c7f261ea481478c69dd3339aef2185066b4c3038a26b502679a33e8ca773c879aa4683d4a6bfd4702a930ea6e19551569e1e31b4ef1ece2d304abb7558b202670be8afb7fe4b44bd0adc8cd729588229ae67d029f11affafa6fa05da88c773a8cdac0e054ab60bf77514e8c6fe474b8de2b247d6b091752f25a17a5b1f833a085bca9a2b36e8340a4a77ecd2a01f596a9bcaf0eb9ab7a04508c095079310377a212d709bb3db0ed727757250f6cdd8949834a1a5c2a5d987b1d79209ef17ff9e5cfe05fdbd3042d80a373104cdb652c09"
+   },
+   "session_id": "tsKZznH0LcWDeXta91vf",
+   "actual_credits": 23.76
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.dusunce",
+  "take": "t3",
+  "node_id": "0AinrWgk6y0xNHG6xCTi",
+  "session_ids": [
+   "g7DFBpgzAk3W8qwZL35y"
+  ],
+  "asset_id": "NxKSHnhq7ZUgQef3r8se",
+  "result": {
+   "generation_id": "K7UsubLzwAA25z3UF9YM",
+   "text": "Bir düşünce gelirse onu itmen gerekmiyor. Işığı usulca geri çeviriyorsun.",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9958688616752625,
+   "spoken_duration_secs": 5.78,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/NxKSHnhq7ZUgQef3r8se/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=2ef05ef505e1fcd461428d123e8669a806d83c45de9c2d499510727fc91a975e73487875cfd7ba908729017393f476278e291b9e587caab5773ffdbbf640b36731823df13b63c3aba8041253eb84d0d76c8233844d7051bd437c935eb042790a61919817087bd059886942d0fccf1fa845c3582eb9ce607783dea11284c374d0d978b08f349b55c155206639fe76d68e70ad05885be0de4edb44c0245a834ea8f9f99d47814dd6dc69b671c754af7086c7e3fe4e834ce8486841677095aa6ee57f5a452511288820946083b6c990b2f592bf21af159814f952db94f2b16feb131db93e4e96a32bddd0def9ba724ff1aa8f95479dcefdf4f2b8e74c1bc1554254"
+   },
+   "session_id": "g7DFBpgzAk3W8qwZL35y",
+   "actual_credits": 33.00000000000001
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.kac",
+  "take": "t2",
+  "node_id": "R2ZYkldZot3rXeCp1ZjW",
+  "session_ids": [
+   "9HbXQ4WdWI0kqxhQTsNz"
+  ],
+  "asset_id": "TsLThbVRLUwIL5Xs5u2a",
+  "result": {
+   "generation_id": "5t6OVQOAIrmiDB3gzCep",
+   "text": "Dikkatinin kaç kez dağıldığı hiç önemli değil. Her dönüş değerli",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9918615221977234,
+   "spoken_duration_secs": 4.68,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/TsLThbVRLUwIL5Xs5u2a/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=d14277b6f3c7f154e1b6bfa1e5533c4a3173cd406da44bf017db854784b3025d32cf5f8cd96a7ab733bc26969d872d75b21a20187001d9dd5671586f520dddbfc22bd597cbb258e8374dcb597c6e87e30a914167ea09a3d40ed9f749c45b54daa2ccf0ff53a98e488465bb04a154e2d77e7161828cd048d057c4b785bcd86b56e24ec3ddd101a94997f5e2fb533540b08c7118b982420ffe890a2de1c87239196812478ad5d6c27233f88b9795da0c833e98015bb65d38f4b2ed7ea5bb0f7792ad6e4da09184bb144b7f3d12c3f86f60e717e8e028721a4065b50c0cb8fca3b69e648ad8fb72988b52f75644fcea989882b14af2b99f2fdb9aca35865f059eaf"
+   },
+   "session_id": "9HbXQ4WdWI0kqxhQTsNz",
+   "actual_credits": 26.84
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "a.omuz",
+  "take": "t2",
+  "node_id": "weYSDm9MvlXMWRmkKnQE",
+  "session_ids": [
+   "VMJibR05JkgaLYjwgvow"
+  ],
+  "asset_id": "ynV8V0ruXDu87Vb2CJDh",
+  "result": {
+   "generation_id": "EqnvkMfse9CNmfOwaPP1",
+   "text": "Omuzlarını kulaklarından uzaklaştırıp çeneni gevşek bırakıyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9960458278656006,
+   "spoken_duration_secs": 4.5,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/ynV8V0ruXDu87Vb2CJDh/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=462a0759ca9e38b8a769c9fec9f9bd9d2caf826b8dcb5eef8b7e86db561b656f6b9949211fb943d266627afb5d3a9a6dd93d47524ace116680a310b62729d9fc621fb0e4504ed581396c5a14f4409019b4201f3cad35e97ee27776ab6b93403f4a0ebc02c945c75a9a9ac76a6788d183a08afb2da17239a2906b6d55f2681c0119c59562b941e4c0b11fc71ccfc9383c7f1f959e1c06878df278a264ccadc0422704be9fc2379518d9158cca21d6c92008326fc14e6bbb55a10634b77c06ac693ee20d292712456edf832f18b1202d7e69e6abf1ebe06747416203220d091ffbfbe2189ccabcb6b4156b7413d38e857b3eff61b8de8ffa0ac034708ff200f4d5"
+   },
+   "session_id": "VMJibR05JkgaLYjwgvow",
+   "actual_credits": 25.52
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.aralik3",
+  "take": "t3",
+  "node_id": "XfwTtzY303i3NP7gTLyP",
+  "session_ids": [
+   "nJaOGqPoUAMXVKggXb2q"
+  ],
+  "asset_id": "9jnLfp6gS5LUnydpICBB",
+  "result": {
+   "generation_id": "cICFMFNjj79YvwN9n3V5",
+   "text": "Şu an ışığın gideceği başka bir yer yok",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9997534155845642,
+   "spoken_duration_secs": 2.86,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/9jnLfp6gS5LUnydpICBB/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=c9e0b3dacc92c74b973df589d982eb82053b61a215248fec2d3674570cc0f2238a96e4a495fbd45309d15f9a53b992854d9ddef69d82211e05ac462119d8326f71fb57df981675c3518b408350e2f6df444ffe423bf6945617720db8fa55aadf71efa4d5df04ef21cd2bee8757970bc7abe57e35c58a1bd4328df4c85e0103e3cf9d67333548f66a2163a32eaed23d91e3fa4a42fd90d4bcbf4fd58e6ab7789fdc85b635b6ebac1e218e2712a560601c59cf3905a032b6cbf4e1235b2e4899f02569ad6a0719ac11c1992e41b132e130173654ff69d56ed69bbad5f5d489b5b88171fcdce662b7ffb42f82ae80f64b3017ed3f38100690a6e5ac8bd7e6140a98"
+   },
+   "session_id": "nJaOGqPoUAMXVKggXb2q",
+   "actual_credits": 16.72
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.giris",
+  "take": "t1",
+  "node_id": "CXdCXavhe4YgPlAdRvmC",
+  "session_ids": [
+   "cJvi5iViPnrE6G01AHrE"
+  ],
+  "asset_id": "ICLwiIAmSTv2RKoGlsBo",
+  "result": {
+   "generation_id": "OfCxJM00EroDEb1jMpfH",
+   "text": "Sıradaki bölümde nefeslerini içinden sayıyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9976376295089722,
+   "spoken_duration_secs": 3.52,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/ICLwiIAmSTv2RKoGlsBo/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=4a9052734ca5fd2dd19931ad625a355772ffa336e03afa7d1439538fd4e1cbef6966658d103c51873ef9d813caa21ac4539acf3dc454598822c0b41ceb407a95b738edf74ecae636f0c1c6e805ebd885dc7fd6fc3d614b9ccb752b47864afd0b6962f50832900a12f5c727767f674a81201ba5c6fd7e61f65e86bdc524d3f67e5a1a4010ac38cb1fa6858bc95c615d48e8ae8c6c5242dcd5b3cf2c12845af424cdf0c4c980ecf58ff572028e9e037f10a30008459ded94a15f0a9416bb6d7c5c683e2204af6d9dad0d7ff56d225a17e277abf608a7cf909d1b1bd6396218569f0d40da82d9cbaa04ac26e64dc66e91a6122bad9941ac166b35b74e2a3300e007"
+   },
+   "session_id": "cJvi5iViPnrE6G01AHrE",
+   "actual_credits": 20.240000000000002
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.nasil",
+  "take": "t2",
+  "node_id": "ihTB0agazdUSKpMBPKuq",
+  "session_ids": [
+   "MbkCtsjd2oRBvbYrlkhV"
+  ],
+  "asset_id": "tAhRlgQx8CZyO52Sbh9L",
+  "result": {
+   "generation_id": "m7gWlnUdMkHTWnP3h6vm",
+   "text": "Alışta bir, verişte iki, sonra üç, dört diye ona kadar gidiyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9940019845962524,
+   "spoken_duration_secs": 5.84,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/tAhRlgQx8CZyO52Sbh9L/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=1ff630b22cf3b3af1bdf192889e9e7c6fed00145ad77368498b954fc9e6ca62b8c0229198b966465e9c2a7ca738c79e44f6e4022bae5e5cc4123213597c3ee28eaf6af8737182abeaa3957f29ee2c51d20488370ba0651bceed4855951b5c352bfa548e5a5188e08d966658432433747b8d334c07cc33c483cb111bfb8f3cc8cbbd66af7614135c4ed4b842f608daccde6460bcfd35810574e43bf64329e2ddd1ec02557287c2f199c93dbcb7cdda771201474a7259c7e0e10a929c02fb332512c65c12ea5392593b0d2b611f028ca3d0a2160ae5479709472eb528f4ed8b68efa183ced3f0ece585e6b9cf711617891fd07bc0598d070dd393b7deab46e4c1b"
+   },
+   "session_id": "MbkCtsjd2oRBvbYrlkhV",
+   "actual_credits": 33.00000000000001
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.bas",
+  "take": "t1",
+  "node_id": "SbaOrpmWnNCY7frLASmn",
+  "session_ids": [
+   "vkG18pqarQqVqEYX2X0W"
+  ],
+  "asset_id": "1hu7P0Mee6O8hvRRWs3P",
+  "result": {
+   "generation_id": "tAk4iYiOihnZoDmQj5qB",
+   "text": "On olunca yeniden birden başlıyorsun. Sayıyı kaybedersen de öyle",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9909939765930176,
+   "spoken_duration_secs": 4.86,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/1hu7P0Mee6O8hvRRWs3P/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=5a77e4a2884841b4a45446ccadf70429ec1aaeb5d9a1242fb6f6ab22b1ca93a7052c8765d2c9564d24bf9bfa445c7eccb78c04cd5debb04491c2882ca191f36e34e2b0d86b100d810273dfd4c68c71194ebf7cd0bc17bbe3da0a1d93ec927dc7db85d3592a316a4f2804a192d19cd7894d79559367b64b2fbfa18782dff5c1405f82da4303691b6f893f577974fbefc6956711e50b5b51cd96109e2caae7af7f9d32aaa4f148088430839e8d083271fcb20f85dacb420d181c8f0c7e6150f7812adf465f2910700a5300c8dad426ae4de2129e792d2b3fca639f51390d451310ac2c9daabbf1bde4310de32c4a6ca7f2fe9819e9f2945101f9dc25e45a5f6dfe"
+   },
+   "session_id": "vkG18pqarQqVqEYX2X0W",
+   "actual_credits": 27.72
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.say1",
+  "take": "t1",
+  "node_id": "T0zF7s7Vpa435SxYiw3T",
+  "session_ids": [
+   "pcORiyzUnawVXxPTZgdl"
+  ],
+  "asset_id": "EZcETKOU7vPonc7el8Nk",
+  "result": {
+   "generation_id": "EUIy1HawAeWXKtlfRTHE",
+   "text": "Sayıyı bir süre sen sürdürüyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.999462366104126,
+   "spoken_duration_secs": 2.32,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/EZcETKOU7vPonc7el8Nk/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=2ec17db8960157044153a7a7910a6b114ba1d091e3ebf6158ef94f031e99bdc92dd6699ac1a313239fed0e0519157e87193e8a4971cd835f0e83b98f00cf9317330244ad7529644baedd87c7e2978fbd459d2557999df62b6deb190a689889e83c26be11a6c1849edcdb615966367890ac36458308d08d08e4fdda1ca5bc286617f2834e4ce39a64a31935e551121cd4449ab2977b64bb9fdff3b5dc12369bec43d4da390a12e1cb12f9d060977d496c6f04d58dba47633ae1921aa6d5650a7f4189f01b04c366e6b95db20e4ddd50ef83c5b273f8985239e0e77a323c0a290f222f3d0f4e1db4d1d7363d2abc8e93b542f26abde840287dbbbd793b53220feb"
+   },
+   "session_id": "pcORiyzUnawVXxPTZgdl",
+   "actual_credits": 13.639999999999999
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.hangi",
+  "take": "t1",
+  "node_id": "H57xT9O1YQGxRPBzY4Ly",
+  "session_ids": [
+   "Eplry7EhHL724uhQWg3R"
+  ],
+  "asset_id": "OGNcy9Wrre9Frrb0nETE",
+  "result": {
+   "generation_id": "uBGTRxacM6Yk38Uv4Zza",
+   "text": "Hangi sayıda olursan ol oradan devam ediyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9878789186477661,
+   "spoken_duration_secs": 3.32,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/OGNcy9Wrre9Frrb0nETE/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=1541e59b91d02da88135759014ea808228c00ce32267d64b71d8f483f4af675aa575f67d91714f54771b1f2c19956ff0cc6abce5a184def53ee0692f06f8b911ba32b702fefdec825e1cce3ace739e5c8bc2c40dca8db46e427b053f2177e7aab21b9a5390ea58bc99ddde09d60c2fccb55e24b0c66a21abe9794fe2e3f5f9e62f60fb7180560c44aeb7c3d2f980483008cffe1e77caa57f666bd3eb5b583ff2639453d770c02c8b004998a9f9a645be1f7b3ef91c1a86f9f1bc4a9f097c3ed566fd2ddd1a4245209a2940466d4b8b8e47ba6007a0aaedcb1929795504a0b0c23bcae579df4b583e63ada9364731ffab114d3afc77dfbb4dcf5d54252fdb1018"
+   },
+   "session_id": "Eplry7EhHL724uhQWg3R",
+   "actual_credits": 19.36
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.anahtar2",
+  "take": "t1",
+  "node_id": "LdIb6sBLqmb46k8r1aZz",
+  "session_ids": [
+   "2CoKICygh157XqMt6XtD"
+  ],
+  "asset_id": "Fv6KdxasPLjgLEIiumE8",
+  "result": {
+   "generation_id": "qZUk96tMLsWcj4Mtntqf",
+   "text": "Fark ettin, döndün",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.978274405002594,
+   "spoken_duration_secs": 1.8,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/Fv6KdxasPLjgLEIiumE8/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=d44d6cb7fc93093d9bcfea2946f3a9098726a9758bbdfd9d794f9a93aebbfa4542fedc94138e722d2c407912d421b5162da835aab6ce3421fc094708715d9fdecc68449a74d914c56602c8952d08519c4b5a663aaef6395fd618516b99b853906ee4396a7671ee7f423d3c480d61acef0a7b6de85cab53a0c2e174a26beb77bbcd35a79e08e09f46e155b49e076a0443d8274062d210b77685752a6e4534510f1f53c9a03b7380d312ce9e99948674e847d50cab3103b43a592ff4a162fd521e8ae22c3fee2de99d77aaaae95091bd71cb45f8248590cb80b66125ec04845ece1fc716c269006b2c443a431150c0b0db40fb9abbe257c719ee05f3033398004f"
+   },
+   "session_id": "2CoKICygh157XqMt6XtD",
+   "actual_credits": 11
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.onbir",
+  "take": "t1",
+  "node_id": "HRHldlgVVqlSci79hqIA",
+  "session_ids": [
+   "Sozl71XM59hdtffFHce8"
+  ],
+  "asset_id": "WWtwPdY0p0WNHxYA69dI",
+  "result": {
+   "generation_id": "tU42lKU5O5gyOOy9htPA",
+   "text": "11'e, 12'ye vardıysan bu da olur. Sayı yine birden başlıyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9964538812637329,
+   "spoken_duration_secs": 4.7,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/WWtwPdY0p0WNHxYA69dI/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=b95490ab6202f05648f9c9cd2b14c253a452d43d65cd9bf2eadc49547d89046f3b7f300832d9e6e2430a6bd26a5fac6dba433cf1574dceb7a9518f4e1e8581034c63d29428f80abcd82dc2412a4596849e4d47d604aec063a7cbcabff89362e41711264046ff6b4e44870f1abfec508ba6c2a48cac870a53fb57cc20e2d1d36e8319cced23f8e365d4981d2abe890c493706db3f2072065442fd99d613e78f2d86122a543eeb5f52b77fd6ec450d84404b90cf1309eb4f6637b072f6c4b35348e0a38674c1d8919946269a547fabb8931cad92c5fd3a4aaeaf72982058a28336dd0c0f823e03e170b78acbff1e0c1b7ae096f12f214116a702ba130ea4994a9d"
+   },
+   "session_id": "Sozl71XM59hdtffFHce8",
+   "actual_credits": 26.84
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.dusunce",
+  "take": "t2",
+  "node_id": "Wzo1g8A3V44HU9QLKkh1",
+  "session_ids": [
+   "ZIJoxwf70WKtWVF4wxU0"
+  ],
+  "asset_id": "1nJHieggWFRBo6iZBf62",
+  "result": {
+   "generation_id": "r34Np1nGhp4FbqqsT7Wz",
+   "text": "Sayıların arasına bir düşünce girerse bunu fark etmen yeter",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9986185431480408,
+   "spoken_duration_secs": 4.2,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/1nJHieggWFRBo6iZBf62/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073541Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=65d5cd155a7fb4759e6384997ffe9552b249b312df7c12613a292e7fde567c37321cee5ca596f5c9104139406cbb15b3c3ffd92b2195096dc0656dceac4e266de20004481a09a77692a2b5bc5b4049eaf3e855721d4b9a99bf8eacbbaa2a1a8f0bf35fd5a585fda52cb6b0b0de900b1801369f3aa85d5e9c9a55d097ba7e870c9fb36b425f85f034e61f00e15eaa7083551639507e974dd0e734eb1ef4334fbc4ea20c19e1e1d6ae986599c19dd03a9fa1ec04f40ceae686cc9571afacabd42d8908e88fa62c0608623a8550d18136667ec1277adfedbebef96ab87c74a3c99883314d9b7886fbf14cb7b3c8ceebad5837f39a95a5626c80e8af70ff1d74121d"
+   },
+   "session_id": "ZIJoxwf70WKtWVF4wxU0",
+   "actual_credits": 24.200000000000003
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "a.karar",
+  "take": "t2",
+  "node_id": "SO1ONGCauoe1sNd4Gyw4",
+  "session_ids": [
+   "803x7fOiyIJUGTMuHCTo"
+  ],
+  "asset_id": "2Z2f2AnPLZMUwku3RgTS",
+  "result": {
+   "generation_id": "rccyV7Y5udMVZRmQYQoM",
+   "text": "Işığı ne kadar sıkı tutacağına sen karar veriyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.996880054473877,
+   "spoken_duration_secs": 3.38,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/2Z2f2AnPLZMUwku3RgTS/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6051122778281cccf5a21d1bdfaefb2beaf5261b01bb1899d7e2f348879f008e634d753ca2790947bb8942a1742188104ebfe0a8e0496582ea346c7007aadee059d3a7a4dda98290eee603eaf098ba5d92712b19a950d1c90036db3b6350c936729f1d82c77a44edb18c849f86119ec82f131dd45818f7cc05f40b8829567bff871ebfe15cdc7c9fe9f1bd350c942395f5f4095f7c340c1378f45e0aa5db8104e8cf1ebe583606ad3526f2d3d6918b5b436b191ab40365ae76b5f86a9c9ef114e8ca13700a2af2a0cd31afe9230c76e662c484d2dbd70046401efeb3455293dbe5ab38391e934e4db628e1c450a49529ad59de222a6d630dcb02ff323a91186b"
+   },
+   "session_id": "803x7fOiyIJUGTMuHCTo",
+   "actual_credits": 19.8
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.yonetme",
+  "take": "t2",
+  "node_id": "UBbmdCjDtQDU3W1R71QL",
+  "session_ids": [
+   "V26zzSEHqfkVkqwiLVNW"
+  ],
+  "asset_id": "7kCfyM4UBOQHtAsBqAba",
+  "result": {
+   "generation_id": "A49o53HvoKBJdQXdZUCC",
+   "text": "Sayı nefesi yönetmiyor. Nefes geliyor, sayı onu izliyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9996325969696045,
+   "spoken_duration_secs": 4.94,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/7kCfyM4UBOQHtAsBqAba/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=130249caabf7ccc18c415bcf7e0a9b945f2d9e664f501bfe48c19ece002e75b5b2db45336361e490a4b4edb3c9c5c5bc53b6983620cf7e54503c755b95148ae73538c4253e73f3bd59c0e65d5d418af6318abcdd162c7c073d835abe826331259a51004760677cc1735657a0cd82fce4a5a249ff024de437ce67933ffed61f86fcfc98ec29fbf52bb569f3e20f073a1a0f368b002a9669891c6e56ef2710beef446f32cef7cc042d8724ff28fa3f6a6ad8206f763642fd14314772f1a693a227dd3276591a90239c671e6dc6ab5f980a270c258d88f5f54a9a75fd92348f3f49f2618d75c3f5e5de65108c346f6a3db256fb6073496e5e2998c6ca74983c873c"
+   },
+   "session_id": "V26zzSEHqfkVkqwiLVNW",
+   "actual_credits": 28.16
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.veris",
+  "take": "t3",
+  "node_id": "DGOXDNZNy08wEXAuCjq5",
+  "session_ids": [
+   "Uh7odw3yEifenwO2JcfR"
+  ],
+  "asset_id": "8tcNMQGQWko8P9LZ2WHj",
+  "result": {
+   "generation_id": "g07HXvpKQAovKCdZntVk",
+   "text": "Bu kez yalnız verişleri sayıyorsun. Her verişe bir sayı düşüyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9973256587982178,
+   "spoken_duration_secs": 4.88,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/8tcNMQGQWko8P9LZ2WHj/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=853865dfc476599e8d0a4d29d5100d2c8aee1b137d457dcef09369c068cad613b47a9cc62dd7e8b752ae3c5b0954b24adc46e8b19da631c62a8c209eba23c84b4ad49f9ba432414da563665db915fe743a802c157f521829c21c722d562a17668601961d2c07c3e81b8176327b35ec3e0b9d12223c05aa8d42724f1bb182fbbc22684e9f1ca849a65a592621454f23a332cd51dd06608d9ce8018f1d3580532a10acd3b56cdd6d32dbfc6897b17be517db9adebef285956168f91b0f08958bd8ebd8573929791090f9f639ba9ead456663a69dea5f944090cc8cdde75e8e500aa54c691e04a2fbe99ffda67c8c8ac265546c8c5ffd3263716730ee3051fc78e9"
+   },
+   "session_id": "Uh7odw3yEifenwO2JcfR",
+   "actual_credits": 28.16
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.veris2",
+  "take": "t3",
+  "node_id": "Th4dWYOTlrfobBucLDIj",
+  "session_ids": [
+   "M3ynnev75sEks5n1ZOK4"
+  ],
+  "asset_id": "5QkicaHktc6nkx8SmWbO",
+  "result": {
+   "generation_id": "XmHbV258jcX1mUsQOR1h",
+   "text": "Alış sessiz geçiyor, sayı verişle geliyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9994512796401978,
+   "spoken_duration_secs": 3.5,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/5QkicaHktc6nkx8SmWbO/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=5bdd5e664b3a1262b835775fdb206256f66f22714a9a53cecb13cc51da04806d654e8599e96e2fdbe26b463d181219aa1199265a1a21eec469bf19c2fcd29ab952936dab094db9cd6beedced78fd385f6d492c9e627b594ef364871d9c9dc826c5e21e7286b266e70545cfd0f6f4731f1932ee7b8833499cb8f0df2b1f7ba2d8ddc69b915555bee2ec3738b2e5ca089624cd90e25d00a29e88db0cbbd8165d2b3bb8cacdd3e7a909564733e226d0a38a30c5162db00fcf40b4b89524238a671d447c7a3bd4b2daf4a06ea552a3f63f7beca32a07aa3462c046ac990a716e4ed196e6d54ccfd9ff31ecae6d2f0151449e612091481d837bcfde406989b57b8bd8"
+   },
+   "session_id": "M3ynnev75sEks5n1ZOK4",
+   "actual_credits": 20.240000000000002
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "k.gun",
+  "take": "t1",
+  "node_id": "Z8oGIjaTGw4qdha5f36Z",
+  "session_ids": [
+   "QW31IytL2dNLG0Z3N1oe"
+  ],
+  "asset_id": "xwKqurOACHdKwxXavYKU",
+  "result": {
+   "generation_id": "mlJFGrtxaxpirtsW3rph",
+   "text": "Gün içinde dikkatinin dağıldığını fark ettiğinde tek bir nefese dönmek yeter.",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9955546855926514,
+   "spoken_duration_secs": 5.26,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/xwKqurOACHdKwxXavYKU/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=0016198822b37066269df410734e0d0c00eb43ce31479391ede1bec2281604fec436d638b6a5d49fc2d3c1ee32a4f2db989939b6c6aa50a777b1afd8abcf35ff558a4756b585e992b1af605bd99cba4323f2e137732b48c8dc4e5aeb523829bbcbc19df2612fbf23d24f9e1dcbcdbf12cd5c7ff41ce6fbf25870675496e5d3484dc7127cf6d0276f157184e6646fb9598ab7b06215bfce38f2d06a852b9c868ef9739de34ef86045f40e5d3d431e4388efc391bfe91e1b1c763b84221fac7f10b583bfe173fdfa8bf8f4b2e4a28d8460f01176c157900ffc66117b1de8ee4b8c46f891f18837673e8e1b9dc0282b96d5c049fbc9b9ed7fca67ca28e111f42f5a"
+   },
+   "session_id": "QW31IytL2dNLG0Z3N1oe",
+   "actual_credits": 29.92
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.seyrek",
+  "take": "t1",
+  "node_id": "RlXBsElAiAXyIb4jroO6",
+  "session_ids": [
+   "59HnN9yLyiNpw2GPkNEp"
+  ],
+  "asset_id": "zTsMiIaxnRocN8QNFXei",
+  "result": {
+   "generation_id": "w5kFLvlpELQx9HqLbUf9",
+   "text": "Sayılar seyrekleşiyor. Aralarında nefes var. Bir de ışığın noktası",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9624283909797668,
+   "spoken_duration_secs": 6.02,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/zTsMiIaxnRocN8QNFXei/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=530df6b5dce404d7757be31b3acc266f3e80ef4c8dac37315d322b9f6e278650cf122f2bcc1651b2b5beae4232fc9746dd74f66782d590486c2b1b17f31560e505cdf5b93102fb39da283bd1b9a10b6a466475fcac1d02665a7599c4a2f6e6d8ad0f7cca880915f8eb9fc6533f59955f52613d6d1a0a34a472b136f75848c47f56efbf825ef2c5babc1823cb6af491748294910cc42ed5189d651881bd62724a6ab2e9f4fd04f3b3ad8fce2278d345d391d0c08cf9722302f23d17d0717c80e1472c6a1f5edc39c1685de5de5ab98616c8c3769316951f702b962143555f7adafb69fc145adac68bd06624e615dd05b51147434f484b91ba0740791d1c8f181f"
+   },
+   "session_id": "59HnN9yLyiNpw2GPkNEp",
+   "actual_credits": 33.88
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c3.ad",
+  "take": "t2",
+  "node_id": "7KsdO6TsvkxseWPof18x",
+  "session_ids": [
+   "izM7NIbTtBi3c5QI2Isd"
+  ],
+  "asset_id": "HXelwKJZFaQso6bf1nD7",
+  "result": {
+   "generation_id": "eOF1NXxD2IRk0oFp3Ufv",
+   "text": "Bundan sonra yalnızca nokta ve nefes var",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.8312776684761047,
+   "spoken_duration_secs": 4,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/HXelwKJZFaQso6bf1nD7/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=4fe274052f36121de8d726c0f19520552cb2fe71714fa337fc33efc6d94dc2ce580d7f240f44a48a82c38a67bce13cbb3fcfde02a65774e13cb302891b221cfe867e2a745c0b170844292f5ef40e2c4bb53c7f8de49b23545c3a7928966785c79a1ea3918f9f470d5b7c50da90f450657b102c78360e1dabfd446bee3d818a157ea40837be05fdac9ab1a6dfb3a9df1b967a0953daf20b56e5be13a5f9e0cc8db95f99b4a8a4a726d451b946dec5265036cd0d89ced92ed15495fa2a86b5136d5fc4a4733cc0ef6ba365f2a52f0fd0864824ed4f95933c959f386b21cf2e97663cd7987e6f7f7c771f7f603e25abdf9f821e4779bec36cfd37442c6dc4bb62cd"
+   },
+   "session_id": "izM7NIbTtBi3c5QI2Isd",
+   "actual_credits": 22.88
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c3.can",
+  "take": "t2",
+  "node_id": "LVS0FtPVIrkbnz6lIupy",
+  "session_ids": [
+   "YH2bz87J8CiSa4JyBYnv"
+  ],
+  "asset_id": "44dP6YEKXF10dfLNT0CR",
+  "result": {
+   "generation_id": "ZhAKsRyh4njWLVOgQzCN",
+   "text": "Her sessizliğin sonunda bir çan çalacak. Çanı duyunca ışık noktaya dönüyor.",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9950042366981506,
+   "spoken_duration_secs": 5.96,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/44dP6YEKXF10dfLNT0CR/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=3106a6e7562b4036404ba803303fa39d8d368ea632d1572cb74e8f8dc99ab36a96d12b273dc044121c7e5348744bef8cab6a1c71b661a193bbeb07f396aaff58103b9f906a55684e0e1b01eef6c993bcc84016f01704a2786c9fe02579824915a9889dcaf88bb0d51cbcce01fd0db3c7d789aae34f5838aafe20bbbded8bfd5a2ec51f7e8a6077764ee5c6e1bfdc792544b348898fd68fe1ef0dc6df39ef9812d46887ce7b7202ffdfff0e517e9b2353c013ecec1b0627e40efeeb016c7857ebd3563f05ca6960e8ce8ef5f604468716aa13e3327c7064904d68a56638a21b4a2354b707e2ce8d73962eff2ebdc38be06fb53d300be4a018b33af536c3947937"
+   },
+   "session_id": "YH2bz87J8CiSa4JyBYnv",
+   "actual_credits": 33.44
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c3.kisa",
+  "take": "t2",
+  "node_id": "KFOlwiOu4cRL1UxyZSvF",
+  "session_ids": [
+   "8wNnUGcMRJTpBnWvdJnM"
+  ],
+  "asset_id": "CHisFAMYDkJfo33h3tKo",
+  "result": {
+   "generation_id": "1ai3FtbyQEFiONe87IYL",
+   "text": "Önce kısa bir sessizlik geliyor",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9991541504859924,
+   "spoken_duration_secs": 2.38,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/CHisFAMYDkJfo33h3tKo/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=262b1598e2d5aec69776e266e0e159b036704d3d2d42f313c49f50a560a333a12fbcde13d545835d8cf5f06c0e3cd8f7db0445a86c6c228ba6ae5e9aaacce5c0559d46ec2dae820991179995dbfe78821816be655b79410c6a6a597d46278ffd37098d8ab2d0af00b0f2792768a69ef87b04197951c5480ff44c4e860a66e826e50b460c359119cd43ee0fe7959dda8a2c54aa1bcd7a0aee0c9ee46369443e484a0b4051ba63e4b09bb5e2b8faebe722a3d639b3c2341f4d69c0cff5841cc78c7659072a44fc3d35d09aabf2158eeaf09cc4b5fc4ac07c224d6c583aeef1533284541d92ffcf433516133635a7c11a7bc96a2e92b75700fd5cf1815752fa6875"
+   },
+   "session_id": "8wNnUGcMRJTpBnWvdJnM",
+   "actual_credits": 14.08
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c3.d15",
+  "take": "t2",
+  "node_id": "PwPUjGNwOqQJHlmlNCOy",
+  "session_ids": [
+   "IgyXlGunAjPGPRExkdol"
+  ],
+  "asset_id": "zztdB38urzfDc2HnqskF",
+  "result": {
+   "generation_id": "EoPSdQaWJhWYCyOFARAA",
+   "text": "Işığın hâlâ noktada mı?",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9510752558708191,
+   "spoken_duration_secs": 1.82,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/zztdB38urzfDc2HnqskF/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=a0bdcebb11a5c235a121b647cad1c9773296bdc9dc9645f675f6734d5ba66cb106b5d0db3f907c14c9544be8fb42802381cbd2e46dd8319249524bc6f192b037be5c33b55ec2bc254f7dd46ae521aa26a5785d174396fb7e79d0f61d808d3216ac045f1ce2fb96acc5742711c3f1b95f67be784d4e211cf4caa4632b229dfb625cefff54437380c5e001cf7de4262dc353b39008f5821124f5f2af3212e907140758f69cb41a44bc20a9d48fabe5a5cb82bc6de9ba1fd32161903e3d61897d897abd8be7aa17a155ac06e92bd9725ca5140fd76465e980ca2939d124949861b7cfe95c09d8f5d08783c4791141a9dd524fb4079ea8fbcc9cab157536c60e3af6"
+   },
+   "session_id": "IgyXlGunAjPGPRExkdol",
+   "actual_credits": 11
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c3.w30",
+  "take": "t2",
+  "node_id": "JrYOHqulC6gfmEvXBCh0",
+  "session_ids": [
+   "8qlYIzlaBjyauxhNWmVb"
+  ],
+  "asset_id": "XmdWj7J8BeToMrtdctyf",
+  "result": {
+   "generation_id": "gbYKm4EUUANELNyHLumR",
+   "text": "Şimdi biraz daha uzun bir sessizlik geliyor. Zorlanırsan gözlerini açman yeterli. Çanla yine seslenirim",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9966138005256653,
+   "spoken_duration_secs": 7.56,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/XmdWj7J8BeToMrtdctyf/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=51e3d7e48dd3ff902829a422ff7512d9c715f6fac45a7b39f1d0fb21718fa7421a8cb566ad12fc3b3101c3ff4df0f18c6893493d26d655b5a5b0178be6676a067e5b5172c1c87bd603b8e5d9a5ea811ee9785777cf9c4a956f3a4835c78c540dbdc3021ac45cf1632ce0320c6545622d542ebbba103d45bef9adcab4a9e5498e599a422f6136669442f1fe9e37afabcc51343ee67a06eb01f5309e6b96be10229e29151a76de43b29721fe451897568d7e2faff7ddc70772e982c5894fdb98d195bbad46e40c8d49254baa6983c39211eee131c43ac4a3ab5b6b8bdd97ea85d65a6c8d5165b5da17970e2addb713229f34a6a950f53035c892c6cd8c4af1ccaf"
+   },
+   "session_id": "8qlYIzlaBjyauxhNWmVb",
+   "actual_credits": 42.68
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c3.d30",
+  "take": "t1",
+  "node_id": "7NCRGLKFnxXUoyeKRJ8v",
+  "session_ids": [
+   "sFaqxayzmUWiT37ZXy2Q"
+  ],
+  "asset_id": "lBnjuBPLm5hae7mJuX45",
+  "result": {
+   "generation_id": "50So9cofwHycY6eq4GJG",
+   "text": "Buradayım. Işık kaydıysa onu usulca noktaya çağırıyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9897693991661072,
+   "spoken_duration_secs": 5,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/lBnjuBPLm5hae7mJuX45/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=2de349db593204a65f1a32f9af077c05315aebb60a8991b72f9c72f1ec60c5592df4c5f2256b9d308cd05f2da7d6d8a7708688df632444748fa46b21ce2a9bdeee42f2621c8090d939da14d7875d6b1135635f7ea324406f3262b8d3e92fd60b24a544764678e92d6a92473ae4d2b9279151921ab035c326fe071cdae1fc5b548a4b1e82046d91889f6a8a3f1b627d8a2e2d7325cbfc7d6548aac2ef5431a392508a76cab6ac3c1f0677eff74413e1f2abfd856b1d2cb923d5dc6dd30b06c7154a1073d1e4e02dfdeec2ba06bb33346cf15816ff197508ee0df2fe8a49fa4887f3401d4bea4e179bb39fe230d7e344ffe4c4931ca4c559d5bc7210ab056db47c"
+   },
+   "session_id": "sFaqxayzmUWiT37ZXy2Q",
+   "actual_credits": 28.6
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c3.anahtar3",
+  "take": "t2",
+  "node_id": "WkxHyHHlFsRK8Yh2019y",
+  "session_ids": [
+   "UtCi3RsGy9zYTNgWcOf7"
+  ],
+  "asset_id": "UULmWdmeIBVm7ERbQKXv",
+  "result": {
+   "generation_id": "ZFxYS9snewdQz89v5wAU",
+   "text": "Yine döndün",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9485487341880798,
+   "spoken_duration_secs": 0.82,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/UULmWdmeIBVm7ERbQKXv/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=c358308e565dffd011c1ea201ed1ccf8dc939ecc39d606d8a7ef81c5fa64f24e5218cf55f0d12e38d609072a9f5a6fcc3aa7b0230d5df7ed6827f114e58ae7e6631e02e9bff679bd6dc2ef20536727d5f28452b3b7186b71d15e315b3b3f617b67875ba00e86d5f0af1d9626500124432d708eda5b0018fcccc4e7ca7793d5b508f14281a7645b831700b1e70e32a55d48ad1c5f6cfadd953bb2cfaad4541f880f8c6d947370cfc2a609cac62492bba5096f211e8ca04b7dc6366345b9805c5b7355191e4e4d0ec5c028e72a8feb9559b5673416ea31efb578f66a75dca95fd3fe397fd9754e5d40eec4f4edcce20f6c7ad90a0a47983c8f411b52109ab1b33e"
+   },
+   "session_id": "UtCi3RsGy9zYTNgWcOf7",
+   "actual_credits": 5.72
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c3.parlak",
+  "take": "t1",
+  "node_id": "TPYdvId3nY8n3O6ZYmmk",
+  "session_ids": [
+   "YAL5VDd8YFlXHVQ1eQhf"
+  ],
+  "asset_id": "ZNigVFb7eyEwjL6e8rEU",
+  "result": {
+   "generation_id": "jkgmiaukNhxyrVMheUUV",
+   "text": "Işık artık küçük ve parlak bir nokta.",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9821215271949768,
+   "spoken_duration_secs": 3.06,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/ZNigVFb7eyEwjL6e8rEU/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=5de1f359510d040242f9439aaa5bf2efb23331ec88212d2d95028feb10edcfe5b676617eecc607de38a7116637a1033dfa89dba501decede6860f2b70119cd046dd955fa6e769e3d44a9cb4c53d4efc9a46da5b39f14cc0f9988fbe77853312736ea46096da282986b045ff6ffc318eaf7db217016d86e2d726ede6d9de40741e38c4da4a223519dcfb78c6dd8de9c062aad1bbe56a2eb1a87924c70004017f666b1843b4c9a90e5ce8c1238678c14ecc2104062344c50c767d060273db3f403f13cd6ba49cc89181d77be474c05c876cf5a47b16473ac02613c0be79297917c45a2630cda6d036cdb8c1c55f3a12542b896342ba4d8087bc9c6245fe095ca6f"
+   },
+   "session_id": "YAL5VDd8YFlXHVQ1eQhf",
+   "actual_credits": 18.04
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c3.kaydiysa",
+  "take": "t3",
+  "node_id": "qtZvQTORUcu43UOj187V",
+  "session_ids": [
+   "feh1d8t4bVuhHZRyHJnk"
+  ],
+  "asset_id": "GwL0OnnLeejSE8fVce7m",
+  "result": {
+   "generation_id": "dsOhEfOt2bzaaKZD7Egw",
+   "text": "Değilse bir sonraki nefeste geri getiriyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9997996687889099,
+   "spoken_duration_secs": 3.28,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/GwL0OnnLeejSE8fVce7m/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=1f97d4c51f1c7875d968cedb524a372d9c39235b1c80b0b8652466db591ecff4b534d1e842e3edb82d3f5b5f015297c3daa8677622a588277d479cd365e3c1d8045a49d023bfe91acb7d9ed9f888e77df989da49c59938a11aac300b1ddf110b5efa4cbd7e665e331589a0cdef5725f0c48bcc277ddb485b5fd173278c46bb0a6679a00a7a0efdd221d48c8a1848176561f058e10462f2675c82860bba6e46c5507755dc39b2cac37b96b274e9f0a67974f7515eb75cede31bcf4df191638e722f031606ac60fc213c18daf316ea06f303e5242b308c6110a64f6aaf219f3b2c47a09082e6d4b8068549c0c26b3fa51f4d165cd79c37a3c920f2d2aee3af3c6d"
+   },
+   "session_id": "feh1d8t4bVuhHZRyHJnk",
+   "actual_credits": 19.36
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c3.kisa2",
+  "take": "t1",
+  "node_id": "6ndKbrvdvo5GLAm3TlNA",
+  "session_ids": [
+   "J4SQOerglgnUMtTWBI9b"
+  ],
+  "asset_id": "hRMKiENDduHvL11d5c2Q",
+  "result": {
+   "generation_id": "9n04vYct0CNnxO33K9fY",
+   "text": "Kısa bir sessizlik daha geliyor.",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9997579455375671,
+   "spoken_duration_secs": 2.06,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/hRMKiENDduHvL11d5c2Q/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=965ce529ea7282df0adc70e2a834c1713efc05894c6b8f6f7dd965522f385038b9ebde96414dde7ef20ed3a214ef8e5851273e33860b2d56724f99ab745d272238e1a42d5782fb9cc747d0d77165cb231e6914d97a6a27afb94aad51d47cd75116b30a955c6e4ed0727c99110b8c555b72b781d73add7f61458b3797d06a7b0d272b732713721fdc8b5494fe5bcf574b4c70051e7457ad4e01a12b8595f6d5282d8e2b2abfc3acabd40f92b4b47bf234902420c3b7bd606a61a63bae097311d7973cc95d5105c42da8d69f90c72f36b3e1f5f19e95fa4a2a85e16f4ae24a41564b70afc0a71bc1e47fc0228689fb1b89005ef61fe5514b7161fbf783981bef36"
+   },
+   "session_id": "J4SQOerglgnUMtTWBI9b",
+   "actual_credits": 12.76
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c3.d18",
+  "take": "t2",
+  "node_id": "U8uthKmN5orQkhj0q81Y",
+  "session_ids": [
+   "5srQdecp4w06ZERIcaiv"
+  ],
+  "asset_id": "5HUcXlokIbofRqWiEO8o",
+  "result": {
+   "generation_id": "4swOdhLxqyO4AMJ9d10B",
+   "text": "Işık yine nefeste",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.7230228781700134,
+   "spoken_duration_secs": 1.66,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/5HUcXlokIbofRqWiEO8o/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=d5f7a1d11113d7fc78a8217805d43a88195f0995bd42c31571c3c940f5f3f483fa8404d62158ef7a1ea25c3233827b05461628bfd9693b9d16ed45c11f0f9fe9d264174924aa5065f75f491d0e988623826088685db4a3512d494d4884f2e8a2c1e2156ab6359687757b8247204a70ea59c38b3d481b6e3b6f56af76b93810a7a9648e227b51c08489f0dde1ad5d93421b29eda2693fe2149eb39b7af76dd9df3e248c6fcdbe6f2522c1dc3c225e40234ce7ffb6dec63cf76920f8df2accd78b246e1aac5c4834cc98ed434c67ec0d32d99ba21315ce492bbb3bbbb1a88b4b9f9c6dcf9369e60270313b5eea69e32a6b03e5d298e7e55c9acbaec86e47630f94"
+   },
+   "session_id": "5srQdecp4w06ZERIcaiv",
+   "actual_credits": 10.56
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c3.w45",
+  "take": "t1",
+  "node_id": "8uOeQo8e5nXOAKeC1YpK",
+  "session_ids": [
+   "eUUd0XCMd2MhTmFuHqol"
+  ],
+  "asset_id": "RxYACG3Rw3xVV7ya9ogW",
+  "result": {
+   "generation_id": "mtG5xsCIjVDXHfnVZJIe",
+   "text": "Bu kez sessizlik biraz daha uzun. Zorlanırsan ellerini hissetmen de olur. Çanla yine seslenirim",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9595397710800171,
+   "spoken_duration_secs": 7.78,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/RxYACG3Rw3xVV7ya9ogW/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6a896fdbee1833a1a8916cd29148f4f5d6115f0e31f74a7f488bdf7eecd1eb24eebbff20ec3a11ce205f2a4ae62a68a2310c384fd0e3d0bfb625262407381f0986950b9d0dd0d4a18326ec28400ceaf655e2ec173320b438cd7b560a40091c5a0045118c94ce5272050831fbb45f6d2e1f1f6c40ab638d8d62d71da2fbde0b9de02d1d624c9e514ec256a0a39f25792296a647f6eb3bd7add43e76a3d9a521c625798494d06b97baf7b79a3adcc05fe53daa51f523ce231cfea34a4fb51b6fe817a9bda69ec92f83ff1356adbc54f46959b60fcf80163346fb856ba9d37937803b920fb4e44a26fa0c90a38586d9c1a5f7ba2cc4161a151efb54e9b1e2d9a0ad"
+   },
+   "session_id": "eUUd0XCMd2MhTmFuHqol",
+   "actual_credits": 44
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c3.d45",
+  "take": "t2",
+  "node_id": "Tisd4yKI2sWemhTCLIgX",
+  "session_ids": [
+   "vTx8kj8ZHCBg2ibMwPlh"
+  ],
+  "asset_id": "5hScWn14FQql8AfjvS57",
+  "result": {
+   "generation_id": "bpiOEeUwzw91OmB4a6yT",
+   "text": "Buradayım. Işığın nerede olduğunu fark etmen yeter",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.99800044298172,
+   "spoken_duration_secs": 3.84,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/5hScWn14FQql8AfjvS57/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=dc706f7fe78267281bb9ad45c1e5462b304cee41f23b17d36362677d9fe1875fe1794cf9c5e8762ce8afb582e4bcc1648d71196e237e24c1c8c22cf0839af8d890a1b93b8ae3636779509f543d63b1aa7653662c8de3c254ec0c29c18009089714470959b1241339bf7b449e92af412f5acd4e89681f9465a80274cb97250b6a49a8d549d86705798c980e30ba930bbebb0eb55368287563314b656a87997af6e9ca2103ea9ea6e6319eaa6787a82598ba2bfa9497132333978583c99f46196a9468388a48875a8f449dba1abef500cd44cd6625ff985f8fdbc2d38240dd4a70ed30527eaeb4a87f08bcbedbb56abcb06894376f7f75f2eb60252789ba99a2df"
+   },
+   "session_id": "vTx8kj8ZHCBg2ibMwPlh",
+   "actual_credits": 22.44
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "k.avuc1",
+  "take": "t2",
+  "node_id": "Z4VqTiYU35RSWBiKEk8E",
+  "session_ids": [
+   "BOld7LAugIyrKXyd0MpF"
+  ],
+  "asset_id": "D5DFaGswPM0JUdRLuJQN",
+  "result": {
+   "generation_id": "wifWwyBbtSXOnxbhkh1K",
+   "text": "Gözlerin kapalıysa avuçlarını birbirine sürtüp ısıtabilirsin",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9900821447372437,
+   "spoken_duration_secs": 4.28,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/D5DFaGswPM0JUdRLuJQN/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073546Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=12cead61bfef6870bc4920388ae581b7d98b568efafa043666be6fbe5d70819af246d24f561e6d96d6e9d30d66046ae1997278bac053336ec15c4896fde9827f8bfdc7969b9d314f4b2eb9eef7380be484a26a68cb81518a48e8d3943779640ce0ea75794a74edd12ad748acfb5d7e0cc6c59046778f84b42e87d33ffee60c72e0e98a0404a2e0d158d99dd4fe22aea05e56aa9392be0bbf02e7b5e7b9e5f1d7f3e2538c2fa83accd6ef9c4e889ecb181053dcc0244aa677cec753e453da6b7a59656eb5f46863b0134e075c80bccf49f57605609ab40779a21d82700f22e8efaf25f7d95d8a63deeebfb346d6307decce341bd5ac4c30ec1328aba51538fbdc"
+   },
+   "session_id": "BOld7LAugIyrKXyd0MpF",
+   "actual_credits": 24.64
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "k.avuc2",
+  "take": "t3",
+  "node_id": "dRM3shrCICoxarN9uefH",
+  "session_ids": [
+   "lfJU6PKPaIDUCCshClAd"
+  ],
+  "asset_id": "kLinIktUWFZSsd7em71n",
+  "result": {
+   "generation_id": "ddoMWnI9vRPfIVDk78Ps",
+   "text": "Avuçların gözlerine değmeyecek. Kenarları alnına ve elmacık kemiklerine yaslanacak",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9970736503601074,
+   "spoken_duration_secs": 6.4,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/kLinIktUWFZSsd7em71n/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073548Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=b6ab7401d4d78797d99e31d8cb85be557e5efb9de7f094eca0e1ae8d024c235ae1b0ca14d0ab17a8f76f72995837cad9324d53d3d6d048bb725e2dd718233815697de2084420adc455b4b4a1cbd82adfd2fe59ac1e0cd107050c9792ded28733b220bc66a6a6b0ce4ef8ff7e4372b62054dd4f6342277ef4688937542f042d6a5e378d33f7aacc3998c528a3cdbde4916daa7ef59f7df58a0161f184cb24b8c6ad329340bf8d9e426d5251f88ef5b05f5c081051a89e61e4d557a4b803e2ed92277f92dec0575c9fdd7f76107fa4f1ede0ac42e7c3de9fa9683779314283196da78096f4f0bafeaa2ba373ca7d868048a9dc0cc6fb7d7b8e7d7ae492fb8ccee6"
+   },
+   "session_id": "lfJU6PKPaIDUCCshClAd",
+   "actual_credits": 36.08
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "k.avuc3",
+  "take": "t3",
+  "node_id": "Ofk9loSxsWq5rP5aDwBy",
+  "session_ids": [
+   "VERumNBy11MW1qjlLAc8"
+  ],
+  "asset_id": "JJhxLd8d2mDkrx1WQsmW",
+  "result": {
+   "generation_id": "ovJ8YvaDzLc7cnMqMaxl",
+   "text": "Şimdi onları bastırmadan gözlerinin üstüne getiriyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9890115261077881,
+   "spoken_duration_secs": 4.14,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/JJhxLd8d2mDkrx1WQsmW/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073548Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=65df0735bc4fffd26849ff6e7260c782dbe1582b778a549663c71d5986d419f35af5a8aac8071fb81a75c26eb3351cad83eed610fd45e67d1fb63640348098be578eb70f18539277969ebbdadf211c1d63565af98840c6523d320ad57e96f0a687eb63f0e4cfde8197f2b5ee3e1044608b914e5c092438881a59feba799613a2b41f2fde99af138924c0a273bb178227e01ed29392bd3533f40dc2ffcf44608c5c2bee27a9cc5bceae1a1d2ac18e061cd51eb1dcc34c1f1adb9b4c75e4f64fb501d58c1a6ff6b3f0d612e9161eab56b53ec53035baf37d1ebb65391335b5d624273a1600221fe506050569c707af70a396f236c2f9d7a7f6282505063cd3ec6b"
+   },
+   "session_id": "VERumNBy11MW1qjlLAc8",
+   "actual_credits": 23.76
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "k.avuc4",
+  "take": "t1",
+  "node_id": "Pi1qGTRkBL8iSKB9rPTI",
+  "session_ids": [
+   "IdxZzZAWTU4VdgexpeD1"
+  ],
+  "asset_id": "5Eq7lzfrzGxxBNqOL0O1",
+  "result": {
+   "generation_id": "vO0KMLmTGNOZvPLtjYSW",
+   "text": "Bu sıcaklığı birkaç nefes boyunca hissediyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9976449608802795,
+   "spoken_duration_secs": 3.36,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/5Eq7lzfrzGxxBNqOL0O1/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073548Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=08c89ee36ea4381a2cee378e544660a92e7e7f68da06866b5b8464c5dd4b59b9c0a459529822894f1bb80a1d5011b1d6b54660a7a5e6b6250289903a5f15662bb169329ca424024874fa5200b2d9d810286c4b0a320baed948008faba713fdaee93a00e4d0a1f02ae2972fbad087e1d02f952831ecd9bec3ea49547741c3ee0c6fbe4136c2e68c346730c9c27882e78a0d25dc26216ede1d8ba6c304c511f4654642361d92f276e95c91b044cc721ef7f427eac89f571c05594f031c31661a2b8d43033e2f6764e17ae70f58611c4b93415ac7527720a77d632f8ad0e4de14ba63ae9885fdfc15d4efa84ac9d32d3c73361b4acdbf056e1ae70061888eb98c38"
+   },
+   "session_id": "IdxZzZAWTU4VdgexpeD1",
+   "actual_credits": 19.36
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "k.avuc5",
+  "take": "t3",
+  "node_id": "rzcREtEDg0cawsNsZm0k",
+  "session_ids": [
+   "XWHZ13Sxr9ew8w6aknw2"
+  ],
+  "asset_id": "y4DuF5eD3hJVCLVpB87Z",
+  "result": {
+   "generation_id": "ZhpMWAPfpbnEbZhcCaeU",
+   "text": "Ellerini dizlerine indiriyorsun",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9789698123931885,
+   "spoken_duration_secs": 2.12,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/y4DuF5eD3hJVCLVpB87Z/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073548Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=b39237e2d44b2d93a0a07b247d8316bb7120ea3c8144b73ea47d556941a9e36196d4feffac55919459c6d06197ad34b9f6c35b9732224341d6d7616b21627121158ec0d2ef88dbf2369ba63b5a51fff8143a505c79c9e3ce7780ef7a8149cc784f5c617128bbbae12a67c1663260ab9dc15b19433bea65040c59719b611c6f397fd3fe1b463a6972511ba1e2e7070b3c68bdaea413c592a4bea8aa35ea9a47d466cfeb65ae7c291d7fe185ee80ef8868839703cdcdde9b40d8bb3f0f97fed968dfed451d54d787125f0590fe826dde7251e56c8a57f43dbdb19ea332d5c78368874604413b98d41b2f522da521ab6ba9856f3acb05f868adca85322475338757"
+   },
+   "session_id": "XWHZ13Sxr9ew8w6aknw2",
+   "actual_credits": 12.76
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "d.goz",
+  "take": "t2",
+  "node_id": "2evMvu0JwEGDWZDpeig0",
+  "session_ids": [
+   "VKKV0Qs7ClxJjQAB9LiP"
+  ],
+  "asset_id": "Ftd2FyRfiVOyno88GmtX",
+  "result": {
+   "generation_id": "wO8toPWE4pHNPmDApeKx",
+   "text": "Gözlerini aç, etrafına bak. Acele etme",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9552280902862549,
+   "spoken_duration_secs": 3.36,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/Ftd2FyRfiVOyno88GmtX/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073548Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=7dfca2935ba851f3357291cd7f4a63b180002a9094c045f6333421ccfeafccd99c82446bcaab2cf5c56ac1b40b66ae9226930cdb1f697d45ee110c0b738dfae42527d37bfbb3761b9d4405d3dc722770f5c2a981183364462ddf2ab7170e330b0811f80f9011b43bb2fdd9ea7f8e0cf3a60249d934f6ecd4952281bf0366b1ba8e468bf0e075e7333580b8ecdd0a809734a3793d0e5ae9496ec7ab8176264f8e9800c6fdb9546a9287286d50545db0249be77b6f9aec3bc00bc259f4f9dbbb61431b6a501fe819392f9ccccdd2083eb13798dfaa43c5207fbb793111bccaee494f528b1c3d2b0441b6c2aba12fb6693bc8a841acdcd3295c85b5bd48c5cab4a2"
+   },
+   "session_id": "VKKV0Qs7ClxJjQAB9LiP",
+   "actual_credits": 19.8
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "d.kalk",
+  "take": "t3",
+  "node_id": "oLfJifFDizIVRlwcOXRo",
+  "session_ids": [
+   "gK0F84LnFAdJlL9M67gp"
+  ],
+  "asset_id": "0ovJNr8IY2cucO0JwIGh",
+  "result": {
+   "generation_id": "AOtpM7FTx33ClWa8CMox",
+   "text": "Uzanıyorsan önce yana dön, sonra otur",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9982916712760925,
+   "spoken_duration_secs": 3.42,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/0ovJNr8IY2cucO0JwIGh/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073548Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=c0c39b70c757ecce08340992b777559b6fad5fd8878cd762b66bd492ff9c296243e7c4627b8a84a43d229e60e32223ab33b0a70fdfab65560ce6548848c2673b0acb2a9fa733444f2fa09d33cd6cf473b590b20e7ab4eadba14757e695368468a9dff44555155c3c16f3f9d32c7c71aa8181ca3c812a1c129de1c83a12864f4dc1ef000c684f6bcfd03fd63dbc4cb3a975018c2cb8e1475399f0dd78eee786245e2fafe1f9fa22236b3da936c4b5de79b9d445e0c4d549fbbd214f39ea141a7a2f5e9b35ce19f032933666a4066dffbcf5baf45ce90139ee9d94ceda84072f8fa70a95500afce2ac757d4ffdee64d9c1b15988bc3907feff05b97dfcff7c2cef"
+   },
+   "session_id": "gK0F84LnFAdJlL9M67gp",
+   "actual_credits": 20.240000000000002
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "d.bekle",
+  "take": "t3",
+  "node_id": "JG6V3AIRt2YfkK9mjvtX",
+  "session_ids": [
+   "mlBYDsuma0xRqcSo53nS"
+  ],
+  "asset_id": "iIHugTxLL6J2LdXUbJH6",
+  "result": {
+   "generation_id": "Y0mpnZZ5S60IxA789Xi2",
+   "text": "Birkaç nefes böyle kal. Başın dönerse biraz daha bekle",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9956675171852112,
+   "spoken_duration_secs": 4.38,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/iIHugTxLL6J2LdXUbJH6/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073548Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6bb48ec678d853ba62d5db39cb6aeb9c546c1465001cacb0a592f0a02df8b6b6ae517bfba4ab7833322b1a74cd3d302a3592e1a5418ae730df8bb14d557dd8b384ef61a609bd618a06c5bf7c7a9ae4c166b72c06d87b1d8d516a0eb64d925b6ce72a4278949fe07182edf44cd6c4b341ca8e1ffb7717b2d48d371ff57fe82f701c08e23a9130f2b8291d05d7c1b34b70d7d6edbd48f1c750296d9bb9dbe58ed092a74affc8045f9bc3935e38f95cb656553a977917222e13b46b7a234b93a30422001d93f33f1df83a535313ea26bf5bda48c68c324f73f805e50814defdd40b6ce966c109a92983f4b12427de9725dbb05e497083661afdfcdbe9781ef9da43"
+   },
+   "session_id": "mlBYDsuma0xRqcSo53nS",
+   "actual_credits": 25.08
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "i.ilk",
+  "take": "t2",
+  "node_id": "wjUmRzGDPA8T0wCUAWFp",
+  "session_ids": [
+   "0Ni29jbuKFu2Adona3lk"
+  ],
+  "asset_id": "dOz0OwSnKbaxcFsslOHP",
+  "result": {
+   "generation_id": "ulVzxnXMZXa0Hu4z1Crg",
+   "text": "Bugün yalnızca tanışıyoruz. Zorlanırsan ekrandaki \"kapanışa geç\" düğmesine dokunman yeterli.",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9944379329681396,
+   "spoken_duration_secs": 6.58,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/dOz0OwSnKbaxcFsslOHP/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T073548Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=427fabf9a7b5294d91a7d9795f68ed1b537780438a249247f02170dc4d4c73bd4fb99bd7ea0af6e3f1d237882437d76ba3af9f6899e95949aaedbb7e263747ecfba717f53b4d9c41fd1ee3a87f0d2135e183815dadf04813214e6c424fbf8cf6e975b8d807c066ebfcf2c1db080db818f0353d6f9005fe9ada7cbe5442191cd69e7594522ad3b33ae5ebb467c6ee91198fc86cf5ffb1878fb33e542d58bda8e3d044982a05136ff1dc8d3b985e5025ff2fc093abc2669afd50c2a86b1d244452b9ab0fa3997ccc7e399fe3386206286be6b02ff4491bbc6d77ca464bd0f22d5382fd074f66dad21a31bb6179574013a054ab48e79a4d03ab5ceef4cd5116368a"
+   },
+   "session_id": "0Ni29jbuKFu2Adona3lk",
+   "actual_credits": 36.96
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.onbir",
+  "take": "t3",
+  "node_id": "aX4P7tGci7mvRr5fxsOM",
+  "session_ids": [
+   "4S8ReFpuaPKavvVSa2py"
+  ],
+  "asset_id": "NKQoJbZ3cO610DWBk3rS",
+  "result": null
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.onbir",
+  "take": "t2",
+  "node_id": "GKiuviRguIbmoPCouJnz",
+  "session_ids": [
+   "aUHGNVcHstjoZ8atb245"
+  ],
+  "asset_id": "mUyu44GwkWws76QFwivf",
+  "result": null
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.anahtar1",
+  "take": "t2",
+  "node_id": "uNaL0epeaOtewlrAg8cM",
+  "session_ids": [
+   "A4waI23h1yygSv5wXgIr"
+  ],
+  "asset_id": "fHhlVRjebDu2TOIkswiG",
+  "result": null
+ },
+ {
+  "lesson": "d05",
+  "unit": "c1.anahtar1",
+  "take": "t1",
+  "node_id": "0ckCvC49z9ZuHW5raKZ1",
+  "session_ids": [
+   "FTuwxgzePYiobW5iFzDR"
+  ],
+  "asset_id": "v51EOqe92p84BDiJVZU3",
+  "result": null
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.bas",
+  "take": "t3",
+  "node_id": "s0GvReM0lJCNEf2lOcPt",
+  "session_ids": [
+   "sTH65IWGSnaL8b8pqMAe"
+  ],
+  "asset_id": "0jrDrG4z4I02lCW7alKC",
+  "result": {
+   "generation_id": "3aETmU3gY7gqYXwy3QqV",
+   "text": "On olunca yeniden birden başlıyorsun. Sayıyı kaybedersen de öyle",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9909939765930176,
+   "spoken_duration_secs": 4.98,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/0jrDrG4z4I02lCW7alKC/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T075055Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=68f194c6a464298a9faa6e573acbf8ce5372564a1e52c8e99176a0bb6f9bcf440095bf4085147df2d71ee547dbabcdeb4bfa31c6ea01618ed84081c21ed8b06d14bf083290783180f9a781e31b38651a7cfb24263de2631e89b9d9d5968db65e512cc59a39a43de3ec517995d06354cc8bc1d419d23e7d9a6dc9185e18c377f5f8ab87d57c778e0b8cdbb58cc83c25b0ca3b9734c1678da9c2c92c40ab61e240fadab5dc5b3d8665e0fc96dd76e3f15ad7cdda469f76c7a829250a6d60e20b9ff707fd66c45580c089dddb0020af4af2bf902b2ee6979a126d156d67bfa9a1e33efca47ec70e3bbbca25922ccf39b82bc21c6d47c0a848132def126d289aaefb"
+   },
+   "session_id": "sTH65IWGSnaL8b8pqMAe",
+   "actual_credits": 28.6
+  }
+ },
+ {
+  "lesson": "d05",
+  "unit": "c2.bas",
+  "take": "t2",
+  "node_id": "7YtFxvZtQkL4b3vobnx0",
+  "session_ids": [
+   "zKuN4YvSodnfhWoHbboN"
+  ],
+  "asset_id": "KlCzNkqoETMoTmMwqdiI",
+  "result": {
+   "generation_id": "UkBS1mCulMnPPWkVdpYC",
+   "text": "On olunca yeniden birden başlıyorsun. Sayıyı kaybedersen de öyle",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "tur",
+   "language_probability": 0.9909939765930176,
+   "spoken_duration_secs": 4.78,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/KlCzNkqoETMoTmMwqdiI/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T075055Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=52d6c08449707f300a9473669f0f0ca23a97ec063e63289ef3ee32d3fd321baee9512649789105c0ff5ce5ef634194ccb29809eef35587bb687980ad225bd47464e93a1dac9780d31c700bd68765dc936873c5e519d43268819d3d5caa605d83ebeaea9482e9441c58e0145ba15903483ac44d7abaf8296432e10d20c241f3c2551d51569c84fec821fc3b21d5f783abaef129b6d949338f00986d054d4ccb60a07860bb882197fea15b2e9be7f54f75fed6277096f58fb6623f51f3dce23396ded792db159b490e6f3325c9eec8d2bb3ba7985bb9a5de352c6bd63db701c4d2396b463721f55bc0ba74baf73493435f8093c02db3b92338df29aa034731849a"
+   },
+   "session_id": "zKuN4YvSodnfhWoHbboN",
+   "actual_credits": 27.72
+  }
+ }
+]
