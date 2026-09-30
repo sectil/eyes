@@ -57,6 +57,7 @@ a { color: var(--pg-accent); }
 .hero-lead { margin-top: 16px; max-width: 34rem; color: #b9c9d6; font-size: 1.02rem; }
 .hero-scenes { display: flex; gap: 18px; }
 .hero-scenes .phone { flex: none; }
+.hero-scenes .lk-time { font-size: 4.1rem; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 .btn-pg { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 999px; font: 600 0.95rem/1 var(--f-body); text-decoration: none; }
 .btn-pg.primary { background: #ffc05a; color: #1a1204; }
@@ -146,15 +147,15 @@ body.w320 .h1-a { font-size: 1.3rem; }
 
 /* Kilit ekranı */
 .lock { background: radial-gradient(120% 70% at 50% 0%, #2b4a6b 0%, #14263a 55%, #0a1420 100%); color: #fff; }
-.lock.t-light { background: radial-gradient(120% 70% at 50% 0%, #9cc3dd 0%, #6f9dc0 50%, #4b7aa3 100%); }
+.lock.t-light { background: radial-gradient(120% 70% at 50% 0%, #6d93b4 0%, #3f6a91 50%, #27496b 100%); }
 .lock .sb { color: #fff; }
 .lk-date { text-align: center; font: 600 1.05rem/1 var(--f-body); opacity: 0.92; margin-top: 18px; }
-.lk-time { text-align: center; font: 700 5.4rem/1 var(--f-display); letter-spacing: -0.03em; margin-top: 6px; }
+.lk-time { text-align: center; font: 700 4.9rem/1 var(--f-display); letter-spacing: -0.03em; margin-top: 6px; }
 body.w320 .lk-time { font-size: 4.2rem; }
 body.w320 .lk-date { margin-top: 8px; font-size: 0.95rem; }
 .lk-list { position: absolute; left: 12px; right: 12px; bottom: 96px; display: grid; gap: 8px; }
 body.w320 .lk-list { bottom: 64px; left: 8px; right: 8px; }
-.nt { border-radius: 22px; padding: 12px 14px 13px; background: rgba(255,255,255,0.72); color: #0b1219; backdrop-filter: blur(20px); display: grid; grid-template-columns: 38px minmax(0,1fr); gap: 4px 11px; }
+.nt { border-radius: 22px; padding: 12px 14px 13px; background: rgba(255,255,255,0.9); color: #0b1219; backdrop-filter: blur(20px); display: grid; grid-template-columns: 38px minmax(0,1fr); gap: 4px 11px; }
 .t-dark .nt { background: rgba(28,34,42,0.78); color: #f1f5f8; }
 .nt-ico { grid-row: 1 / span 3; width: 38px; height: 38px; border-radius: 10px; background: radial-gradient(circle at 50% 50%, #041017 0 22%, transparent 23%), conic-gradient(from 200deg, #11a9b8, #2f6bea, #11a9b8); position: relative; }
 .nt-ico::after { content: ''; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #fff; left: 56%; top: 34%; }
@@ -315,7 +316,7 @@ body.w320 .wx-deg { font-size: 3.4rem; }
 .wk-n { display: grid; gap: 2px; }
 .wk-n b { font: 700 3.3rem/0.95 var(--f-display); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
 .wk-n.t b { color: #ffd60a; }
-.t-light .wk-n.t b { color: #b07d00; }
+.t-light .wk-n.t b { color: #0b1219; }
 .wk-n.p b { color: #19c2d1; font-size: 4.1rem; }
 .t-light .wk-n.p b { color: #0b7480; }
 .wk-n span { font: 600 0.7rem/1 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.6; }
@@ -362,6 +363,81 @@ body.w320 .rb { width: 52px; height: 52px; }
 .sci-src { font-size: 0.82rem; color: var(--a-ink-3); line-height: 1.4; }
 .sci-links { display: flex; gap: 14px; font: 600 0.86rem/1 var(--f-body); color: var(--a-accent); }
 
+
+/* ---- tur 2 ---- */
+.nefline.small { font-size: 0.9rem; color: var(--a-ink-2); }
+.nefline.small .nefdot { width: 24px; height: 24px; }
+.remind.big { padding: 16px 14px 16px 12px; }
+.remind .rtime { font: 700 1.15rem/1 var(--f-mono); color: var(--a-accent); padding: 8px 10px; border-radius: 12px; background: var(--a-surface); }
+.cele { display: grid; gap: 10px; justify-items: center; padding: 18px 12px 16px; border-radius: 24px; background: radial-gradient(120% 90% at 50% 0%, var(--a-accent-soft), transparent 70%), var(--a-surface); border: 1px solid var(--a-border); }
+.cele-stops { display: flex; gap: 10px; }
+.cele-stops span { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--a-iris-1), var(--a-iris-2)); box-shadow: 0 6px 16px -8px var(--a-iris-2); }
+.t-dark .cele-stops span { color: #041017; }
+.cele-stops .ico { width: 20px; height: 20px; }
+body.w320 .cele-stops span { width: 38px; height: 38px; }
+.why-link { color: var(--a-accent); text-decoration: underline; text-underline-offset: 2px; }
+.clash { background: var(--a-accent-soft); }
+.clash b { color: var(--a-ink); }
+.clash .mini.p { justify-self: start; padding: 10px 14px; font-size: 0.9rem; }
+.tchip.warn { box-shadow: inset 0 0 0 2px var(--a-accent); color: var(--a-accent); }
+.on-card { display: grid; grid-template-columns: 46px minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 14px; border-radius: 20px; background: var(--a-ok-bg); border: 1px solid var(--a-border); }
+.on-card .bell { background: var(--a-ok); color: #fff; box-shadow: none; }
+.t-dark .on-card .bell { color: #041017; }
+.on-card > div > b { display: block; font: 700 1.05rem/1.2 var(--f-body); }
+.on-card > div > span { display: block; font-size: 0.9rem; color: var(--a-ink-2); margin-top: 3px; }
+.on-card .chev-s { color: var(--a-ink-3); }
+.breathe { display: grid; justify-items: center; gap: 12px; }
+.br-ring { width: 180px; height: 180px; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle, var(--a-accent-soft) 0 55%, transparent 56%), conic-gradient(var(--a-iris-1) 0 40%, var(--a-surface-3) 40% 100%); }
+body.w320 .br-ring { width: 130px; height: 130px; }
+.br-in { width: 78%; height: 78%; border-radius: 50%; background: var(--a-bg); display: grid; place-items: center; align-content: center; gap: 4px; }
+.br-in b { font: 800 2.6rem/1 var(--f-display); color: var(--a-accent); }
+.br-in span { font: 600 0.85rem/1 var(--f-body); color: var(--a-ink-2); }
+.br-legend { display: flex; gap: 16px; font: 600 0.85rem/1 var(--f-body); color: var(--a-ink-2); }
+.br-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--a-iris-1); margin-right: 6px; vertical-align: -1px; }
+.br-legend i.o { background: var(--a-surface-3); }
+.tl-next { display: flex; gap: 10px; align-items: center; font-size: 0.92rem; color: var(--a-ink-2); }
+.tl-next .nefdot { width: 24px; height: 24px; }
+.tl-next b { color: var(--a-ink); }
+.tl-dot { width: 14px; height: 14px; margin-left: -7px; top: 8px; }
+.wxc { padding: 14px; border-radius: 22px; background: linear-gradient(160deg, rgba(47,107,234,0.12), rgba(17,169,184,0.06)), var(--a-surface); border: 1px solid var(--a-border); display: grid; gap: 10px; }
+.wxc-top { display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 12px; align-items: center; }
+.wxc-deg { font: 800 2.6rem/0.9 var(--f-display); letter-spacing: -0.03em; }
+body.w320 .wxc-deg { font-size: 2.1rem; }
+.wxc-tx { min-width: 0; display: grid; gap: 4px; }
+.wxc-tx b { font: 700 1rem/1.15 var(--f-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wxc-tx .il { color: var(--a-ink-2); font-weight: 600; }
+body.w320 .wxc-tx .il { display: none; }
+.wxc-tx .rain { font: 600 0.88rem/1.25 var(--f-body); color: var(--a-rain); }
+.wxc-ic { width: 28px; height: 28px; color: var(--a-rain); }
+.wxc-bars { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; align-items: end; height: 34px; }
+.wxc-bars i { display: block; border-radius: 3px; background: var(--a-surface-3); min-height: 3px; }
+.wxc-bars i.r { background: var(--a-rain); }
+.wxc-ax { display: flex; justify-content: space-between; font: 500 0.68rem/1 var(--f-mono); color: var(--a-ink-3); }
+.wxc-attr { display: flex; justify-content: space-between; font: 600 0.72rem/1 var(--f-body); color: var(--a-ink-3); }
+.wxc-attr a { color: var(--a-accent); text-decoration: underline; text-underline-offset: 2px; }
+.fact span b { font: 600 0.9rem/1 var(--f-mono); color: var(--a-ink); min-width: 0; }
+.fact { font-size: 0.9rem; }
+.coach-hero { padding: 16px; border-radius: 22px; background: linear-gradient(150deg, var(--a-accent-soft), rgba(47,107,234,0.10)); border: 1px solid var(--a-border); display: grid; gap: 10px; }
+.ch-top { display: flex; align-items: center; gap: 12px; }
+.play.big { width: 48px; height: 48px; }
+.play.big .ico { width: 18px; height: 18px; }
+.wave { flex: 1; display: flex; align-items: center; gap: 4px; height: 40px; }
+.wave i { flex: 1; border-radius: 3px; background: var(--a-accent); opacity: .75; }
+.wave i:nth-child(1){height:30%}.wave i:nth-child(2){height:60%}.wave i:nth-child(3){height:85%}.wave i:nth-child(4){height:50%}.wave i:nth-child(5){height:95%}.wave i:nth-child(6){height:40%}.wave i:nth-child(7){height:70%}.wave i:nth-child(8){height:100%}.wave i:nth-child(9){height:55%}.wave i:nth-child(10){height:80%}.wave i:nth-child(11){height:35%}.wave i:nth-child(12){height:65%}.wave i:nth-child(13){height:45%}.wave i:nth-child(14){height:25%}
+.ch-say { font: 600 1.12rem/1.35 var(--f-body); }
+.ch-voice { font-size: 0.82rem; color: var(--a-ink-2); }
+.lbl-a { font: 600 0.72rem/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--a-ink-3); margin-bottom: 8px; }
+.segA.big span { padding: 13px 0; font-size: 1rem; }
+.nt-acts { display: grid; border-radius: 16px; overflow: hidden; background: rgba(255,255,255,0.78); backdrop-filter: blur(20px); }
+.t-dark .nt-acts { background: rgba(28,34,42,0.82); }
+.nt-acts span { padding: 12px 16px; font: 500 0.98rem/1 var(--f-body); color: #0a84ff; border-bottom: 1px solid rgba(127,140,150,0.25); }
+.nt-acts span:last-child { border-bottom: 0; color: inherit; opacity: 0.85; }
+.t-light .nt-acts span:last-child { color: #0b1219; }
+.hr span, .hr b { font-size: 0.78rem; }
+.hr b { font-size: 0.9rem; }
+.sci-f { font-size: 1.15rem; }
+.sci-meta span { font-size: 0.8rem; padding: 6px 10px; }
+
 @media (max-width: 860px) {
   .hero-in { grid-template-columns: 1fr; }
   .hero-scenes { overflow-x: auto; padding-bottom: 6px; }
@@ -405,12 +481,12 @@ body.w320 .rb { width: 52px; height: 52px; }
     <div>
       <div class="hero-eyebrow">Nefona · Bildirimler, hava, yürüyüş · tasarım 1</div>
       <h1>Nef doğru anda yazar:<br><em>sabah havanı, akşam yürüyüşünü</em> bilir.</h1>
-      <p class="hero-lead">Alarm çaldıktan 10 dakika sonra günün yağmur saati. Yürürken tek soru ve Apple Watch gibi bir ekran. Her modülün sonunda tek dokunuşluk "Bana hatırlat". Hiçbir bildirim üst üste gelmez, gece hiçbiri gelmez.</p>
+      <p class="hero-lead">Alarmdan 10 dakika sonra günün havası. Yürürken tek soru. Her modülün sonunda "Bana hatırlat". Gece hiçbir bildirim gelmez.</p>
       <div class="hero-cta">
         <a class="btn-pg primary" href="#kararlar">Senden 3 karar</a>
         <a class="btn-pg ghost" href="#hatirlat">Ekranlara bak</a>
       </div>
-      <div class="hero-facts"><span><b>12</b> ekran</span><span><b>2</b> tema</span><span><b>390 · 320</b> pt</span><span>Gece <b>22.00–08.00</b> sessiz</span></div>
+      <div class="hero-facts"><span><b>12</b> ekran</span><span>açık ve koyu tema</span><span>büyük ve küçük iPhone</span></div>
     </div>
     <div class="hero-scenes" aria-label="Kilit ekranında iki Nef bildirimi">
       <div class="phone t-dark lock" style="--pw:300px;--ph:560px">
@@ -421,8 +497,8 @@ body.w320 .rb { width: 52px; height: 52px; }
           <div class="nt">
             <span class="nt-ico" aria-hidden="true"></span>
             <div class="nt-top"><span>Nefona</span><span>şimdi</span></div>
-            <div class="nt-t">Yağmur 21.00'de</div>
-            <div class="nt-b">Bugün 21.00–22.00 arası yağmur bekleniyor. Yürüyüşü 21.00'den önce bitirirsen şemsiyeye gerek kalmayabilir.</div>
+            <div class="nt-t">Gaziemir 17°, akşam yağmur</div>
+            <div class="nt-b">En çok 26°. 21.00–22.00 arası yağmur bekleniyor; yürüyüşü 20.30'dan önce bitirirsen şemsiyeye gerek kalmaz.</div>
             <div class="nt-sci">Kaynak: Apple Weather</div>
           </div>
         </div>
@@ -564,11 +640,12 @@ body.w320 .rb { width: 52px; height: 52px; }
       <div class="done-ring"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>
       <div class="done-t">Nefes tamam</div>
       <div class="done-s">Sakin ritim · 3 dakika</div>
-      <div class="stats"><div class="stat"><b class="mono">2 → 4</b><span>sakinlik, 1–5</span></div><div class="stat"><b class="mono">18</b><span>döngü</span></div></div>
-      <div class="remind">
+      <div class="stats"><div class="stat"><b class="mono">2 → 4</b><span>sakinlik, önce → sonra</span></div><div class="stat"><b class="mono">18</b><span>döngü</span></div></div>
+      <div class="nefline small"><span class="nefdot"></span><p>Dünden bir puan daha sakin bitirdin. Yarın 3 dakika, yeni kalıp.</p></div>
+      <div class="remind big">
         <span class="bell"><svg class="ico"><use href="#i-bell"/></svg></span>
-        <div><b>Bana hatırlat</b><span>Her gün, senin için uygun saatte. Saati Nef de seçebilir.</span></div>
-        <svg class="ico go"><use href="#i-chev"/></svg>
+        <div><b>Bana hatırlat</b><span>Yarın da bu saatlerde, tek dokunuşla.</span></div>
+        <span class="rtime mono">09.15</span>
       </div>
       <div class="btn-a plain">Ana sayfaya dön</div>
     </div>
@@ -579,17 +656,18 @@ body.w320 .rb { width: 52px; height: 52px; }
   <div class="phone">
     <div class="sb"><span>08:52</span><i>●●● <s></s></i></div>
     <div class="scr">
-      <span class="eyebrow-a">1 Ekim Perşembe</span>
-      <div class="card-a today">
-        <div class="today-h"><b>Bugünün yolu</b><span class="mono">4/4 durak</span></div>
-        <div class="chain"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i></div>
-        <div class="nefline"><span class="nefdot"></span><p>Yolun bugün tamam. 14 dakika sürdü.</p></div>
+      <div class="cele">
+        <div class="cele-stops"><span><svg class="ico"><use href="#i-eye"/></svg></span><span><svg class="ico"><use href="#i-wave"/></svg></span><span><svg class="ico"><use href="#i-eye"/></svg></span><span><svg class="ico"><use href="#i-yoga"/></svg></span></div>
+        <div class="done-t">Yolun bugün tamam</div>
+        <div class="done-s">4 durak · 14 dakika · 6. gün üst üste</div>
       </div>
-      <div class="remind">
+      <div class="nefline small"><span class="nefdot"></span><p>Sağ–sol bakışı ilk kez tam yaptın. Yarın yakın–uzak ekleniyor.</p></div>
+      <div class="remind big">
         <span class="bell"><svg class="ico"><use href="#i-bell"/></svg></span>
-        <div><b>Yolunu her gün hatırlatayım mı?</b><span>Genelde 08.30'da başlıyorsun. Yolun her durağı için ayrı değil, tek hatırlatma.</span></div>
-        <svg class="ico go"><use href="#i-chev"/></svg>
+        <div><b>Yolunu her gün hatırlatayım mı?</b><span>Genelde 08.30'da başlıyorsun. Durak durak değil, tek hatırlatma.</span></div>
+        <span class="rtime mono">08.15</span>
       </div>
+      <div class="btn-a plain">Ana sayfaya dön</div>
     </div>
   </div>
 </template>
@@ -609,9 +687,9 @@ body.w320 .rb { width: 52px; height: 52px; }
       </div>
       <div class="opt">
         <div class="opt-h"><span class="radio"></span>Saatleri ben seçeyim</div>
-        <div class="fine">Günde en çok 3 saat.</div>
+        <div class="fine">Su, nefes, göz: günde en çok 3 saat.</div>
       </div>
-      <p class="fine hide320">Bu hatırlatma günde bir kez. Bazı günler bilerek göndermiyoruz; hatırlatmanın işine yarayıp yaramadığını Gelişim'de görmen için.</p>
+      <p class="fine">Günde en çok 3 saat seçebilirsin. <a class="why-link">Bazı günler neden gelmez?</a></p>
       <div class="btn-a">Hatırlatmayı aç</div>
     </div>
   </div>
@@ -631,9 +709,9 @@ body.w320 .rb { width: 52px; height: 52px; }
       <div class="opt sel">
         <div class="opt-h"><span class="radio"></span>Saatleri ben seçeyim</div>
         <div class="chips"><span class="tchip">10.00</span><span class="tchip warn">12.30</span><span class="tchip">18.00</span></div>
-        <div class="clash"><p><b>12.30'da Mola hatırlatman var.</b> İkisi aynı anda gelmesin; 13.00'e ne dersin?</p><div class="row"><span class="mini p">13.00'ü seç</span><span class="mini">Tek bildirimde birleştir</span></div></div>
+        <div class="clash"><p><b>12.30'da Mola hatırlatman var.</b> Aynı anda iki bildirim gelmesin diye 13.00'ü öneriyorum.</p><span class="mini p">13.00'e al</span></div>
       </div>
-      <p class="fine">Göz egzersizi hatırlatması 09.00–21.00 arasında gelir.</p>
+      <p class="fine">09.00–21.00 arasında, günde en çok 3 saat.</p>
       <div class="btn-a">Kaydet</div>
     </div>
   </div>
@@ -644,11 +722,17 @@ body.w320 .rb { width: 52px; height: 52px; }
     <div class="sb"><span>09:16</span><i>●●● <s></s></i></div>
     <div class="scr">
       <span class="back"><svg class="ico"><use href="#i-back"/></svg>Ana sayfa</span>
-      <span class="pill-on"><i></i>Hatırlatma açık · her gün 09.15 · Nef seçti</span>
-      <span class="eyebrow-a">Nefes · 4. basamak</span>
-      <div class="h1-a">Sakin ritim</div>
-      <p style="color:var(--a-ink-2)">4 saniye al, 6 saniye ver. Bugün 3 dakika.</p>
-      <div class="done-ring" style="width:170px;height:170px;background:radial-gradient(circle, var(--a-bg) 0 60%, transparent 61%), conic-gradient(var(--a-iris-1), var(--a-iris-2), var(--a-iris-1));"></div>
+      <div class="on-card">
+        <span class="bell"><svg class="ico"><use href="#i-bell"/></svg></span>
+        <div><b>Hatırlatman açık</b><span>Her gün <b class="mono">09.15</b> · saati Nef seçti</span></div>
+        <span class="chev-s"><svg class="ico"><use href="#i-chev"/></svg></span>
+      </div>
+      <div><span class="eyebrow-a">Nefes · 4. basamak</span><div class="h1-a" style="margin-top:6px">Sakin ritim</div></div>
+      <div class="breathe">
+        <div class="br-ring"><div class="br-in"><b>4</b><span>nefes al</span></div></div>
+        <div class="br-legend"><span><i></i>4 sn al</span><span><i class="o"></i>6 sn ver</span></div>
+      </div>
+      <div class="stats"><div class="stat"><b class="mono">3 dk</b><span>bugün</span></div><div class="stat"><b class="mono">2 → 4</b><span>dünkü sakinlik</span></div></div>
       <div class="btn-a">Başla</div>
     </div>
   </div>
@@ -661,38 +745,26 @@ body.w320 .rb { width: 52px; height: 52px; }
       <span class="back"><svg class="ico"><use href="#i-back"/></svg>Profilim</span>
       <div class="h1-a">Bildirimler</div>
       <div class="card-a tl">
-        <div class="tl-h"><b>Bugün 7 bildirim</b><span>Hiçbiri üst üste değil</span></div>
+        <div class="tl-h"><b>Bugünün düzeni</b><span>Hiçbiri üst üste değil</span></div>
         <div class="tl-bar">
           <div class="tl-line"></div>
           <div class="tl-night" style="left:0;width:11%"></div>
           <div class="tl-night" style="left:89%;width:11%"></div>
-          <span class="tl-dot w" style="left:6%" title="06.10 sabah havası"></span>
-          <span class="tl-dot" style="left:22%"></span>
-          <span class="tl-dot" style="left:31%"></span>
-          <span class="tl-dot" style="left:42%"></span>
-          <span class="tl-dot" style="left:56%"></span>
-          <span class="tl-dot" style="left:70%"></span>
-          <span class="tl-dot" style="left:81%"></span>
+          <span class="tl-dot w" style="left:6%"></span><span class="tl-dot" style="left:22%"></span><span class="tl-dot" style="left:31%"></span><span class="tl-dot" style="left:42%"></span><span class="tl-dot" style="left:56%"></span><span class="tl-dot" style="left:70%"></span><span class="tl-dot" style="left:81%"></span>
         </div>
         <div class="tl-ax"><span>06</span><span>09</span><span>12</span><span>15</span><span>18</span><span>21</span><span>24</span></div>
-        <div class="tl-list"><span><i class="w"></i><b>06.10</b>hava</span><span><i></i><b>09.15</b>nefes</span><span><i></i><b>11.00</b>su</span><span><i></i><b>12.30</b>mola</span><span><i></i><b>15.00</b>yürüyüş</span><span><i></i><b>18.00</b>göz</span><span><i></i><b>20.00</b>göz</span></div>
-        <div class="fine"><svg class="ico" style="width:12px;height:12px;vertical-align:-2px"><use href="#i-moon"/></svg> 22.00–08.00 gece sessiz · alarmın ve ona bağlı sabah havası hariç</div>
+        <div class="tl-next"><span class="nefdot"></span><p>Sıradaki: <b>12.30 Mola</b>. Aralarında en az yarım saat var.</p></div>
       </div>
       <div class="grp">
         <div class="grp-h">Modüllerin</div>
         <div class="card-a rows">
           <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-wave"/></svg></span><div><b>Nefes</b><span class="mono">09.15 · <em>Nef seçti</em></span></div><span class="tg on"></span></div>
-          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-eye"/></svg></span><div><b>Göz egzersizleri</b><span class="mono">18.00 ve 20.00 · senin saatin</span></div><span class="tg on"></span></div>
-          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-yoga"/></svg></span><div><b>Yoga</b><span class="mono">21.30 · kapalı</span></div><span class="tg"></span></div>
-        </div>
-      </div>
-      <div class="grp">
-        <div class="grp-h">Nef'in haberleri</div>
-        <div class="card-a rows">
+          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-eye"/></svg></span><div><b>Göz egzersizleri</b><span class="mono">18.00 ve 20.00</span></div><span class="tg on"></span></div>
           <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-rain"/></svg></span><div><b>Sabah havası</b><span>Alarmından 10 dk sonra</span></div><span class="tg on"></span></div>
-          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><div><b>Yürüyüş eşliği</b><span>Yürürken sorar · sesli koç 250 m</span></div><span class="tg on"></span></div>
+          <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><div><b>Yürüyüş eşliği</b><span>Yürürken sorar</span></div><span class="tg on"></span></div>
         </div>
       </div>
+      <div class="card-a rows"><div class="row-a"><span class="ri"><svg class="ico"><use href="#i-moon"/></svg></span><div><b>Gece sessizliği</b><span class="mono">22.00–08.00 · değiştir</span></div><svg class="ico chev"><use href="#i-chev"/></svg></div></div>
     </div>
   </div>
 </template>
@@ -705,15 +777,20 @@ body.w320 .rb { width: 52px; height: 52px; }
         <div><span class="eyebrow-a">1 Ekim Perşembe</span><div class="h1-a" style="margin-top:6px">Günaydın,<br><em class="nm">Selin</em></div></div>
         <span class="av"><i>S</i></span>
       </div>
-      <div class="sky">
-        <span class="sky-ic"><svg class="ico"><use href="#i-rain"/></svg></span>
-        <div class="sky-tx"><span><span class="il">İzmir </span><b>Gaziemir</b> · <span class="deg">23°</span></span><span class="rain">21.00'de yağmur bekleniyor</span></div>
-        <span class="sky-mark"><span>Apple Weather</span><a>Veri kaynakları</a></span>
+      <div class="wxc">
+        <div class="wxc-top">
+          <div class="wxc-deg">23°</div>
+          <div class="wxc-tx"><b><span class="il">İzmir </span>Gaziemir</b><span class="rain">21.00–22.00 yağmur bekleniyor</span></div>
+          <svg class="ico wxc-ic"><use href="#i-rain"/></svg>
+        </div>
+        <div class="wxc-bars" aria-hidden="true"><i style="height:10%"></i><i style="height:8%"></i><i style="height:6%"></i><i style="height:8%"></i><i style="height:10%"></i><i style="height:14%"></i><i style="height:18%"></i><i style="height:30%"></i><i style="height:45%"></i><i class="r" style="height:70%"></i><i class="r" style="height:60%"></i><i style="height:20%"></i></div>
+        <div class="wxc-ax"><span>şimdi</span><span>13</span><span>17</span><span>21</span><span>23</span></div>
+        <div class="wxc-attr"><span>Apple Weather</span><a>Veri kaynakları</a></div>
       </div>
       <div class="facts">
-        <div class="fact"><svg class="ico" style="color:var(--a-lens-text)"><use href="#i-flame"/></svg><b>6</b>gün seri</div>
-        <div class="fact"><svg class="ico" style="color:var(--a-iris-1)"><use href="#i-cal"/></svg>Bu hafta 3/4 gün</div>
-        <div class="fact"><svg class="ico" style="color:var(--a-ok)"><use href="#i-foot"/></svg><b>4.215</b>adım bugün</div>
+        <div class="fact"><svg class="ico" style="color:var(--a-lens-text)"><use href="#i-flame"/></svg><span><b>6</b> gün seri</span></div>
+        <div class="fact"><svg class="ico" style="color:var(--a-iris-1)"><use href="#i-cal"/></svg><span>Bu hafta 3/4 gün</span></div>
+        <div class="fact"><svg class="ico" style="color:var(--a-ok)"><use href="#i-foot"/></svg><span><b>4.215</b> adım bugün</span></div>
       </div>
       <div class="card-a today">
         <div class="today-h"><b>Bugün</b><span class="mono">≈ 15 dk · 1/5 durak</span></div>
@@ -733,7 +810,7 @@ body.w320 .rb { width: 52px; height: 52px; }
         <div><span class="eyebrow-a">Gaziemir, İzmir</span><div class="wx-deg">23°</div></div>
         <div class="wx-sub">Hissedilen 24°<br>Parçalı bulutlu<br><span class="mono" style="font-size:.74rem;color:var(--a-ink-3)">12.40'ta alındı</span></div>
       </div>
-      <div class="nefcard"><span class="nefdot"></span><div><small>Nef</small><p>21.00–22.00 arası yağmur bekleniyor. Akşam yürüyüşünü 20.30'dan önce bitirirsen şemsiyeye gerek kalmayabilir.</p></div></div>
+      <div class="nefcard"><span class="nefdot"></span><div><small>Nef</small><p>21.00–22.00 arası yağmur bekleniyor. Akşam yürüyüşünü 20.30'dan önce bitirirsen şemsiyeye gerek kalmaz.</p></div></div>
       <div class="card-a hours">
         <div class="hr now"><span>Şimdi</span><b>23°</b><span class="pb"><i style="height:0%"></i></span><span>—</span></div>
         <div class="hr"><span>15</span><b>25°</b><span class="pb"><i style="height:5%"></i></span><span>5%</span></div>
@@ -744,7 +821,7 @@ body.w320 .rb { width: 52px; height: 52px; }
         <div class="hr"><span>22</span><b>18°</b><span class="pb"><i style="height:60%"></i></span><span>60%</span></div>
         <div class="hr"><span>23</span><b>18°</b><span class="pb"><i style="height:20%"></i></span><span>20%</span></div>
       </div>
-      <div class="minmax"><div><b>26°</b>en yüksek</div><div><b>17°</b>en düşük</div><div class="hide320"><b><svg class="ico" style="width:15px;height:15px;vertical-align:-2px"><use href="#i-moon"/></svg></b>küçülen şişkin ay</div></div>
+      <div class="minmax"><div><b>26°</b>en yüksek</div><div><b>17°</b>en düşük</div><div class="hide320"><b>19.12</b>gün batımı</div></div>
       <div class="card-a rows"><div class="row-a"><span class="ri"><svg class="ico"><use href="#i-bell"/></svg></span><div><b>Sabah havası</b><span>Alarmından 10 dk sonra, Nef'in yorumuyla</span></div><span class="tg on"></span></div></div>
       <div class="attr"><span>Apple Weather</span><a href="#hava">Veri kaynakları</a></div>
     </div>
@@ -763,6 +840,7 @@ body.w320 .rb { width: 52px; height: 52px; }
         <div class="nt-t">Yürüyüşe mi çıktın?</div>
         <div class="nt-b">Son 15 dakikada 1,1 km yürüdün. Hava 23 derece, yürüyüş için güzel. Eşlik edeyim mi?</div>
       </div>
+      <div class="nt-acts"><span>Eşlik et</span><span>Şimdi değil</span></div>
     </div>
     <div class="lk-foot"><span></span><span></span></div>
   </div>
@@ -793,19 +871,20 @@ body.w320 .rb { width: 52px; height: 52px; }
 <template id="tpl-coach">
   <div class="phone">
     <div class="sb"><span>18:52</span><i>●●● <s></s></i></div>
-    <div class="scr" style="opacity:.4"><div class="wk-n p"><b class="mono">9'40"</b></div></div>
-    <div class="dim"></div>
-    <div class="sheet">
-      <span class="grab"></span>
-      <div style="display:flex;justify-content:space-between;align-items:center"><div class="sh-t">Sesli koç</div><span class="tg on"></span></div>
-      <div><div class="fine" style="margin-bottom:6px">Ne sıklıkla</div><div class="segA"><span class="on">250 m</span><span>500 m</span><span>1 km</span></div></div>
-      <div class="checks">
-        <div class="ck"><span class="box on"><svg class="ico"><use href="#i-check"/></svg></span>Tempo<small>her zaman</small></div>
-        <div class="ck"><span class="box on"><svg class="ico"><use href="#i-check"/></svg></span>Mesafe</div>
-        <div class="ck"><span class="box"></span>Hoparlörden de söyle<small>kulaklık yokken</small></div>
+    <div class="scr">
+      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Yürüyüş</span>
+      <div class="h1-a">Sesli koç</div>
+      <div class="coach-hero">
+        <div class="ch-top"><span class="play big"><svg class="ico"><use href="#i-play"/></svg></span><div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <p class="ch-say">"Son 250 metre: kilometrede 9 dakika 40 saniye."</p>
+        <span class="ch-voice">Neslihan'ın sesiyle · her kilometrede ayrıca o kilometrenin süresi</span>
       </div>
-      <div class="sample"><span class="play"><svg class="ico"><use href="#i-play"/></svg></span><span>"Son 250 metre: kilometrede 9 dakika 40 saniye." · Neslihan</span></div>
-      <p class="fine">Kulaklık takıyorsan çevreni duyabileceğin bir ses düzeyi seç. Ses Profilim → Seslendirme'den değişir.</p>
+      <div class="card-a rows"><div class="row-a"><span class="ri"><svg class="ico"><use href="#i-voice"/></svg></span><div><b>Sesli koç</b><span>Kulaklıkta konuşur</span></div><span class="tg on"></span></div></div>
+      <div><div class="lbl-a">Ne sıklıkla</div><div class="segA big"><span class="on">250 m</span><span>500 m</span><span>1 km</span></div></div>
+      <div class="card-a rows">
+        <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-foot"/></svg></span><div><b>Mesafeyi de söyle</b></div><span class="tg on"></span></div>
+        <div class="row-a"><span class="ri"><svg class="ico"><use href="#i-voice"/></svg></span><div><b>Kulaklık yokken hoparlörden</b></div><span class="tg"></span></div>
+      </div>
     </div>
   </div>
 </template>
@@ -815,15 +894,14 @@ body.w320 .rb { width: 52px; height: 52px; }
     <div class="sb"><span>15:02</span><i>●●● <s></s></i></div>
     <div class="scr">
       <span class="back"><svg class="ico"><use href="#i-back"/></svg>Ana sayfa</span>
-      <div class="nefcard"><span class="nefdot"></span><div><small>Nef · 15.00</small><p>Hava 21 derece, ılık. İstersen şimdi 5 dakikalık bir tur.</p></div></div>
+      <div class="nefcard"><span class="nefdot"></span><div><small>Nef · 15.00</small><p>Hava 25 derece, yağmur akşam. Şimdi 10 dakikalık bir tur tam zamanında.</p></div></div>
       <div class="btn-a">Yürüyüşe başla</div>
       <div class="card-a sci">
         <span class="sci-h">Bilim ne diyor?</span>
-        <p class="sci-f">Bir denemede yürüyüş önerisi sonraki 30 dakikada adımı artırdı; 44 kişi, 6 hafta.</p>
-        <div class="sci-meta"><span>Mikro-randomize deneme</span><span>44 kişi</span><span>6 hafta</span></div>
-        <p class="sci-lim">Sınır: etki haftalar içinde azaldı. Ölçülen yalnız önerinin ardından 30 dakikadaki adımdı.</p>
-        <p class="sci-src">Klasnja P. ve ark. Efficacy of Contextually Tailored Suggestions for Physical Activity: A Micro-randomized Optimization Trial of HeartSteps. Ann Behav Med, 2019.</p>
-        <div class="sci-links"><span><svg class="ico" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-link"/></svg> PubMed · 30192907</span><span>DOI</span></div>
+        <p class="sci-f">Bir denemede yürüyüş önerisi, sonraki 30 dakikada atılan adımı artırdı.</p>
+        <div class="sci-meta"><span>44 kişi</span><span>6 hafta</span><span>Deneme</span></div>
+        <p class="sci-lim">Etki haftalar içinde azaldı.</p>
+        <div class="sci-links"><span><svg class="ico" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-link"/></svg> Klasnja ve ark., 2019 · PubMed</span></div>
       </div>
     </div>
   </div>

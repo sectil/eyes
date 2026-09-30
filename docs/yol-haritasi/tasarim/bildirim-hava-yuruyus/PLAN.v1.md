@@ -11,8 +11,8 @@ Tasarım: `tasarim.html`. Dayanaklar `arastirma/` altında: `kod-haritasi.md`, `
 ## 1. Tek sayfada
 
 **Kişi ne görür**
-1. **Sabah, kilit ekranında (alarm 06.00):** 06.10'da Nef: *"Yağmur 21.00'de · Bugün 21.00–22.00 arası yağmur bekleniyor.
-   Yürüyüşü 21.00'den önce bitirirsen şemsiyeye gerek kalmayabilir."*
+1. **Sabah, kilit ekranında (alarm 06.00):** 06.10'da Nef: *"Gaziemir 17°, akşam yağmur · En çok 26°. 21.00–22.00 arası
+   yağmur bekleniyor; yürüyüşü 20.30'dan önce bitirirsen şemsiyeye gerek kalmaz."*
 2. **Ana sayfada, adımların üstünde:** *"İzmir Gaziemir · 23° · 21.00'de yağmur"*. Dokununca saat saat tahmin ve Nef'in
    yorumu.
 3. **Yürürken:** *"Yürüyüşe mi çıktın? · Son 15 dakikada 1,1 km yürüdün. Hava 23 derece, yürüyüş için güzel. Eşlik edeyim
@@ -48,7 +48,7 @@ hiçbir bildirim gelmez; 21.00'den sonra "kalk" gelmez. Her bildirimin arkasınd
 
 | Karar | İtiraz edersen |
 |---|---|
-| Nefes, mola, su ve yürüyüş hatırlatması günde **bir** saat kalır; başka modüllerde en çok üç saat. Neden: bu dört tür bildirim deneyinde; bugünkü kod ve senin 27 Eylül "ölçelim" kararın gün başına tek bildirim sayıyor | Deney kapanır ya da yeniden tasarlanır; bu dört türde de üç saat açılır |
+| **Senin kararın (30 Eylül):** her modülde, nefes, mola, su ve yürüyüş dâhil, günde en çok **üç** saat seçilir. Bildirim deneyi gün düzeyinde sürer: bir türün sessiz gününde o türün bütün saatleri sessiz kalır; günlük türün o gün kaç saat kurulduğunu da yazar | — |
 | Deneyin bildirim göndermediği günde yürüyüş sorusu da gelmez (yalnız yürüyüş hatırlatmasını açmış kişide) | Soru her gün gelir; yürüyüş deneyinin sonucu bulanıklaşır |
 | Yürüyüş sorusu kilit ekranında mesafeyi gösterir (senin cümlen); onaylı "kilit ekranı nötr" kuralının istisnası. Bildirimler'de "Kilit ekranında sayı gösterme" anahtarı var | Kilit ekranında yalnız "Yürüyüşe mi çıktın?" görünür, ayrıntı kilit açılınca |
 | Sesli koç sayıları söyler ve aynı cümle ekranda yazar; tempo son 250 metrenin ortalamasıdır | Anons "yaklaşık 9 buçuk dakika" gibi söyler |
@@ -81,7 +81,7 @@ ve alarmı elle durduran kişide mümkündür, ötekilerde bildirim tahminin ya�
 | "Yeni izin yalnız 'Uygulamayı Kullanırken'; arka planda konum yok" | §1 gizlilik, §3.E.2 | Hava için aynen. Yürüyüş sırasında konum arka plan kipiyle sürer (kişi başlattığı yürüyüşte, mavi göstergeyle); "Her Zaman" yalnız karar 2 | Kilit ekranında 250 m anonsu başka yolla olmaz |
 | Push reddedildi (konum sunucuya giderdi) | §3.E.6 | Aynen; push yok | — |
 | "Nef hava verisi üretmez; cümle sabit şablondan" | §3.E.1 | Aynen: bankadaki cümle üslubu verir, sayı ve saat WeatherKit'ten ve telefondaki koddan | Dil modeli ölçüm kaynağı olamaz |
-| Deney türlerinde günde en çok 1 bildirim; sessiz günler | `BILDIRIM_PLANI.md` §3, §6; sahip kararı 3 (2026-09-27) | Aynen (Verdiğim kararlar, satır 1–2) | Ölçüm bozulmasın |
+| Deney türlerinde günde en çok 1 bildirim (VARSAYIM); sessiz günler | `BILDIRIM_PLANI.md` §3, §6; sahip kararı 3 (2026-09-27) | Günde en çok 3 saat; sessiz gün aynen, gün düzeyinde (bütün saatler birlikte sessiz); karşılaştırma gün düzeyinde kalır, günlükte saat sayısı durur | Sahip, 30 Eylül (`SAHIP_ISTEKLERI.md` madde 6). "Günde 1" onaylı karar değil VARSAYIM'dı |
 | Bildirim penceresi 09.00–21.00 | `BILDIRIM_PLANI.md` §3 | Deney türlerinde aynen; yeni kaynaklarda §3.A.4'teki pencereler | Sahip: gece "kalk" yok, 21'den sonra "kalk" yok |
 | Çalışma oturumu molası `timeSensitive` | `BILDIRIM_PLANI.md` §5 | Değişmez. Yeni bildirimlerin hepsi `active` | Apple HIG: Time Sensitive yalnız "happening now or will happen within an hour" |
 | Kilit ekranı nötr, adım bilgisi yok | `BILDIRIM_PLANI.md` §7 | Yürüyüş sorusunda istisna, anahtarla (Verdiğim kararlar) | Sahibin cümlesi |
@@ -116,13 +116,14 @@ değişmeden hatırlatma kazanır.
 //                                       Planı lib/moduleRemind.js kurar. Yoksa modülde kart çıkmaz.
 //     route?: string,                   dokununca açılacak ekran: routes'tan biri. Yoksa kartın gösterildiği ekran.
 //     legacy?: 'mola'|'walk'|'breath'|'water',
-//                                       hatırlatması bildirim deneyindeki mevcut tür (lib/reminders.js): ayar
-//                                       settings.reminders.types[legacy]'ye yazılır; tek saat, 09.00–21.00, zar ve
-//                                       sessiz gün, "bugün yaptıysan gönderme" aynen işler.
+//                                       hatırlatması bildirim deneyindeki mevcut tür (lib/reminders.js): ilk saat
+//                                       settings.reminders.types[legacy]'ye, ek saatler moduleReminders'a yazılır;
+//                                       09.00–21.00 (su ≤ 18.00); zar gün başına bir kez atılır ve o türün bütün
+//                                       saatlerine uygulanır; "bugün yaptıysan gönderme" aynen işler.
 //     window?: 'move' | 'calm',         legacy yoksa: 'move' 09.00–21.00 (kalk, göz hareketi, oyun), 'calm' 08.00–22.00
 //                                       (nefes dışı sakin pratikler: yoga, dalga, gökyüzü, Yön). Yoksa 'move'.
 //     defaultTime?: 'HH:MM',            "Sen karar ver" için veri yokken saat; kendi penceresinde
-//     maxTimes?: 1 | 2 | 3,             elle seçilebilecek en çok saat (legacy'de her zaman 1; varsayılan 3)
+//     maxTimes?: 1 | 2 | 3,             elle seçilebilecek en çok saat (varsayılan 3)
 //     doneToday?(sessions, now) → bool  bugün yapıldıysa o günün kalan hatırlatması kurulmaz. Yoksa
 //                                       progression.match ?? sessions.match tutan bugünkü kayıt.
 //     science: ['sourceKey', …],        bilim kartı havuzu (lib/sources.js anahtarları, en az 1; §A.6)
@@ -130,7 +131,7 @@ değişmeden hatırlatma kazanır.
 ```
 
 `validateManifest` bugün bilinmeyen alanı reddetmez. Yeni kurallar: `remind` nesnedir; `route` `routes`'ta olur;
-`legacy` dört türden biridir ve varsa `maxTimes` 1'dir; `defaultTime` penceresindedir; `doneToday` işlevdir;
+`legacy` dört türden biridir; `defaultTime` penceresindedir; `doneToday` işlevdir;
 `science`'taki her anahtar `sources.js`'te `pmid` ve `doi` taşır. `createRegistry` bir `reminders()` erişicisi kazanır.
 
 | Modül | `remind` |
@@ -162,16 +163,21 @@ kalır; `moduleReminders` onlar için yalnız `mode`'u tutar.
     başlayalım; beş kez yaptıktan sonra senin saatine göre ayarlarım."* Kişi günde iki ayrı saatte yapıyorsa iki saat
     önerir: *"Göz egzersizini genelde 10.00'da ve 18.00'de yapıyorsun. İkisinde de hatırlatayım mı?"* [İkisinde]
     [Yalnız sabah].
-  - **Saatleri ben seçeyim:** büyük saat seçici, "Bir saat daha" (en çok 3; legacy'de 1).
-  - **Çakışma anında söylenir:** *"12.30'da Mola hatırlatman var. İkisi aynı anda gelmesin; 13.00'e ne dersin?"*
-    [13.00'ü seç] [Tek bildirimde birleştir].
-  - Pencere cümlesi türüne göre: *"Göz egzersizi hatırlatması 09.00–21.00 arasında gelir."* Legacy türde bugünkü cümle
-    (`screens/Reminders.jsx`): *"Bazı günler bilerek göndermiyoruz; hatırlatmanın işine yarayıp yaramadığını Gelişim'de
-    görmen için."* ve *"Bu hatırlatma günde bir kez."*
+  - **Saatleri ben seçeyim:** büyük saat seçici, "Bir saat daha" (en çok 3; her modülde, deney türleri dâhil).
+  - **Çakışma anında söylenir:** *"12.30'da Mola hatırlatman var. Aynı anda iki bildirim gelmesin diye 13.00'ü
+    öneriyorum."* [13.00'e al]. Kişi yine de 12.30'da ısrar ederse ikisi tek bildirimde birleşir (§A.4).
+  - Pencere cümlesi türüne göre: *"09.00–21.00 arasında, günde en çok 3 saat."* Deney türünde ayrıca: *"Bazı günler
+    neden gelmez?"*; bağlantıya dokununca bugünkü cümle açılır (`screens/Reminders.jsx`):
+    *"Bazı günler bilerek göndermiyoruz; hatırlatmanın işine yarayıp yaramadığını Gelişim'de görmen için."* (5 saniye tur
+    1: cümle ilk bakışta "deney faresi" hissi verdi; bilgi kaybolmadan bir dokunuş arkasına alındı.)
   - Bildirim izni yoksa önce bizim tek cümlemiz (*"Hatırlatmayı sana bildirimle göndereceğim; bir sonraki pencerede izin
     istenecek."*), sonra iOS penceresi. Reddedildiyse bugünkü metin: *"Bildirimler kapalı: Ayarlar > Nefona > Bildirimler."*
-- **Kurulunca:** kart küçülüp hapa döner, onay titreşimi verir: **"Hatırlatma açık · her gün 09.15 · Nef seçti"**. Aynı
-  hap modülün giriş ekranında üstte görünür. Hap her açılışta izin durumunu okur; izin sonradan kapatıldıysa *"Hatırlatma
+- **Kart, bitiş ekranında:** özetin altında Nef'in tek cümlesi (*"Dünden bir puan daha sakin bitirdin."*), altında kart;
+  kartın sağında Nef'in önerdiği saat ("09.15"). Yol bitince kutlama kartı (durakların simgeleri, "Yolun bugün tamam",
+  "4 durak · 14 dakika · 6. gün üst üste"), Nef'in cümlesi ve tek hatırlatma kartı.
+- **Kurulunca:** kart onay titreşimiyle yeşil bir karta döner: **"Hatırlatman açık · Her gün 09.15 · saati Nef seçti"**.
+  Aynı kart modülün giriş ekranında en üstte durur; altında modülün kendi önizlemesi (nefeste halka ve "4 sn al · 6 sn
+  ver", bugünkü süre, dünkü sonuç). Hap her açılışta izin durumunu okur; izin sonradan kapatıldıysa *"Hatırlatma
   kurulu ama bildirimler kapalı · Ayarları aç"* der.
 - **Ana sayfada teklifler:** günde en çok bir teklif (bildirim izni → hava → yürüyüş eşliği sırasıyla); reddedilen
   teklif 30 gün sorulmaz (VARSAYIM).
@@ -216,7 +222,7 @@ kalır; `moduleReminders` onlar için yalnız `mode`'u tutar.
 |---|---|
 | Hareket isteyen hatırlatmalar (`move`, legacy mola ve yürüyüş) | 09.00–21.00 |
 | Sakin pratikler (`calm`) | 08.00–22.00 |
-| Legacy nefes ve su | Bugünkü kural: 09.00–21.00; su en geç 18.00 |
+| Deney türleri (nefes, mola, su, yürüyüş) | Bugünkü kural: 09.00–21.00; su en geç 18.00 |
 | Yürüyüş sorusu (kişi o an yürüyor) | 07.00–23.00; kişiyi harekete çağırmaz, yürüyene eşlik önerir |
 | Sabah havası | Alarma bağlıysa alarmdan sonra; alarmsız günde en erken 08.00 |
 | Hiçbir bildirim | 23.00–07.00 (alarm dışında) |
@@ -244,9 +250,10 @@ kalır; `moduleReminders` onlar için yalnız `mode`'u tutar.
 - **Yer:** Profilim'de Alarm bölümünden sonra (`screens/ProfileHome.jsx`); veriyi App, alarm özetinin kalıbıyla hazırlar.
   Bugünkü Hatırlatmalar ekranı (`screens/Reminders.jsx`) deney türlerinin ve çalışma oturumunun ayrıntı ekranı olarak
   kalır; tek değişikliği dönüş yerinin parametreye bağlanması.
-- **Üstte günün çizelgesi:** 06–24 arası tek çizgi; her bildirim bir nokta; gece bölümü taralı, altında *"22.00–08.00
-  gece sessiz · alarmın ve ona bağlı sabah havası hariç"*. Başlık: *"Bugün 7 bildirim · hiçbiri üst üste değil"*. 60
-  dakikadan yakın iki nokta dar ekranda tek noktada birleşir ve üstünde sayı yazar.
+- **Üstte günün düzeni:** 06–24 arası tek çizgi; her bildirim bir nokta; gece bölümü taralı. Başlık: *"Bugünün düzeni ·
+  Hiçbiri üst üste değil"*; altında Nef: *"Sıradaki: 12.30 Mola. Aralarında en az yarım saat var."* (Tur 1: "Bugün 7
+  bildirim" sayısı bildirimden bıkmış kişiyi korkuttu; saat çipleri çizgiyi tekrar ediyordu.) Dar ekranda 60 dakikadan
+  yakın iki nokta tek noktada birleşir.
 - **Liste:** telefonun kurabildiği her bildirim kaynağı bir kez görünür. "Modüllerin" (yol, her "Bana hatırlat", deney
   türleri de kendi modülüyle; saat, "Nef seçti" ya da "senin saatin", anahtar), "Nef'in haberleri" (Sabah havası, Yürüyüş
   eşliği, Yürürken beni fark et), "Değiştirilemeyenler" (Alarm → Profil'deki Alarm; deneme raporu; gri, nedeniyle),
@@ -325,10 +332,11 @@ kalır; `moduleReminders` onlar için yalnız `mode`'u tutar.
 
 #### B.2 Ana sayfa satırı
 
-- Adım bilgisinin hemen üstünde tek kart: solda duruma göre çizilen hava simgesi; üst satırda **"İzmir Gaziemir · 23°"**,
-  altında **"21.00'de yağmur bekleniyor"** (yağmur yoksa "En çok 26°, açık"); sağda iki küçük satır: "Apple Weather" ve
-  **"Veri kaynakları"** bağlantısı (`legalPageURL`). Kartın geri kalanına dokununca hava sayfası açılır. 320 pt'de il adı
-  düşer; ilçe adı kısalmaz; en uzun ilçe adıyla (Mustafakemalpaşa) ve en büyük yazı boyutuyla denenir.
+- Adım bilgisinin hemen üstünde tek kart: solda büyük **"23°"**, yanında **"İzmir Gaziemir"** ve altında **"21.00–22.00
+  yağmur bekleniyor"** (yağmur yoksa "En çok 26°, gökyüzü açık"), sağda hava simgesi; altında önümüzdeki 12 saatin yağmur
+  olasılığı ince çubuklarla (yağmurlu saatler vurgulu); en altta "Apple Weather" ve **"Veri kaynakları"** bağlantısı
+  (`legalPageURL`). Kartın geri kalanına dokununca hava sayfası açılır. 320 pt'de il adı düşer; ilçe adı kısalmaz; en uzun
+  ilçe adıyla (Mustafakemalpaşa) ve en büyük yazı boyutuyla denenir. (Tur 1: tek satırlık hâli "sıradan" bulundu.)
 - Önbellekte hava yoksa satır görünmez (Ana sayfa ağ beklemez). Konum hiç seçilmemişse satırın yerinde günün ilk
   dokunuşundan sonra bir kez teklif çıkar (S0 karar 11'in metinleri); "Hayır" kalıcıdır.
 - Bileşen `components/SkyLine.jsx`; Ana sayfaya tek satırla takılır ve yerinden bağımsızdır (Ana sayfa yeniden
@@ -387,7 +395,9 @@ seninle", ilk anons 3 saniye içinde: *"Birlikte yürüyoruz. 1,1 kilometredesin
    bakar (araba ve bisiklet ayrılır), son 15 dakikanın verisiyle sorar. Konum saklanmaz, yalnız uyandırır.
 - **Soru:** başlık *"Yürüyüşe mi çıktın?"* · gövde *"Son 15 dakikada 1,1 km yürüdün. Hava 23 derece, yürüyüş için güzel.
   Eşlik edeyim mi?"* (86 karakter). Hava yoksa ya da bayatsa hava cümlesi düşer. Dokununca yürüyüş ekranı açılır ve son 15
-  dakika yürüyüşe eklenir. Günde en çok 2 soru, iki soru arası en az 3 saat; iki kez "Şimdi değil" denirse o gün bir daha
+  dakika yürüyüşe eklenir. Bildirimde iki eylem düğmesi vardır (basılı tutunca): **[Eşlik et]** (uygulamayı açar) ve
+  **[Şimdi değil]**. Soru yalnız son 15 dakikada en az 800 m kesintisiz yürüyüş varsa sorulur (koridorda gidip gelmek
+  sayılmasın; VARSAYIM). Günde en çok 2 soru, iki soru arası en az 3 saat; iki kez "Şimdi değil" denirse o gün bir daha
   sorulmaz; pencere 07.00–23.00 (VARSAYIM).
 - Apple Watch'un otomatik egzersiz algısını üçüncü taraf iPhone uygulamasına açan bir API bulunamadı (`apple-yuruyus.md`
   Sonuç 3); bildirim bu yüzden soru biçimindedir. Watch'ta süren bir antrenmanı görmek Sağlık'tan antrenman okuma izni
@@ -428,11 +438,14 @@ seninle", ilk anons 3 saniye içinde: *"Birlikte yürüyoruz. 1,1 kilometredesin
 
 #### C.3 Sesli koç
 
-- **Ayar** (yürüyüş ekranındaki düğmeden ve Bildirimler → Yürüyüş eşliği'nden): açık/kapalı; aralık 250 m (varsayılan),
-  500 m, 1 km; ne söylensin: tempo (her zaman), mesafe; "Hoparlörden de söyle" (varsayılan kapalı). Ses Profilim →
-  Seslendirme'deki ses (Neslihan ya da Hakan).
-- **Anonslar:** her aralıkta *"Son 250 metre: kilometrede 9 dakika 40 saniye."* (son aralığın ortalama temposu; saniye
-  10'a yuvarlanır); her tam kilometrede *"1. kilometre 9 dakika 50 saniyede."* (5'e yuvarlanır). Aynı cümle ekranda
+- **Ayar ekranı** (yürüyüş ekranındaki düğmeden ve Bildirimler → Yürüyüş eşliği'nden): en üstte dinlenebilir örnek
+  (oynat düğmesi, ses dalgası, *"Son 250 metre: kilometrede 9 dakika 40 saniye."*, "Neslihan'ın sesiyle"); altında
+  açık/kapalı; "Ne sıklıkla": 250 m (varsayılan), 500 m, 1 km; "Mesafeyi de söyle"; "Kulaklık yokken hoparlörden"
+  (varsayılan kapalı). Ses Profilim → Seslendirme'deki ses (Neslihan ya da Hakan). (Tur 1: ayar listesi "kişiliksiz"
+  bulundu; önce sesin kendisi gösterilir.)
+- **Anonslar:** kişinin seçtiği aralıkta (250 m, 500 m ya da 1 km) *"Son 250 metre: kilometrede 9 dakika 40 saniye."*
+  (son aralığın ortalama temposu; saniye 10'a yuvarlanır); aralık ne olursa olsun her tam kilometrede ayrıca *"1.
+  kilometre 9 dakika 50 saniyede."* (5'e yuvarlanır; aralık 1 km seçildiyse yalnız bu cümle söylenir). Aynı cümle ekranda
   altyazı. Bu kalıpta sayılar ek almadığı için parça birleştirmek güvenlidir. Parçalar: 28 dakika (3–30), 12 saniye
   (0–55), 15 kilometre sırası, ≈ 10 sabit cümle → ses başına ≈ 65, iki ses için ≈ 130 kısa kayıt. Birleşme yerinde
   tonlama dikişi duyulabilir; dinlenerek onaylanır. 250 m'lik bölümde tempo ±%4–8 oynayabilir (`pubmed.md` I); bilgi
@@ -512,7 +525,7 @@ başlaması, yürüyüş sorusu kontrolü); `FeedbackPlugin.swift` (`AppAudioSes
 ### 5.3 Testler
 
 - **Yeni:** `moduleRemind.test.js` (otomatik saat: 15 dk dilim, farklı gün sayımı, 5 gün eşiği, gece kayıtları dışarıda,
-  pencere, 60 dk uzaklık, ikinci saat kuralı, legacy'de tek saat ve onaylı saat değişimi, yol hatırlatmasının tek
+  pencere, 60 dk uzaklık, ikinci saat kuralı, deney türünde çok saatin aynı zarı paylaşması ve onaylı saat değişimi, yol hatırlatmasının tek
   bildirim kurması, yaz saati geçiş günü ve İstanbul → Berlin), `notifyAll.test.js` (20.000 rastgele ayarda alarm ve alarma
   bağlı hava dışında hiçbir iki bildirim 30 dk'dan yakın değil; birleştirme metni; her pencere; 23.00–07.00'de alarm
   dışında bildirim yok; oturum sürerken modül hatırlatması yok; toplam bekleyen ≤ 60 ve deney planı kırpılmaz; kimlikler
@@ -675,4 +688,7 @@ doğru makaleye gidiyor (`elestiri-dogruluk.md`).
   mu" ölçütü, kaynak cümlelerinin düzeltilmesi (Stecher, Fincham, Morrison, Evans, Morris, Werner, Gilgen-Ammann, Togo),
   karakter sınırları, 30/60 dk ayrımı, Türkçe düzeltmeler. İşlenmeyen: Watch'ta süren antrenmanı görmek (yeni Sağlık izni
   ister; sınır olarak yazıldı).
-- Sırada: tasarımın 5 saniye kapısı, sahibin onayı.
+- 5 saniye tur 1 (`5sn-tur1.md`): 13 ekranın 10'u geçti; Yeniden giriş, Ana sayfa hava ve Sesli koç kaldı. Üçü yeniden
+  tasarlandı; sınırdakiler ve ortak zayıflıklar düzeltildi; sabah bildiriminin başlığı sahibin örneğine göre yer ve
+  sıcaklıkla başlar; yürüyüş bildirimine eylem düğmeleri ve 800 m eşiği eklendi.
+- Sırada: 5 saniye tur 2, sahibin onayı.
