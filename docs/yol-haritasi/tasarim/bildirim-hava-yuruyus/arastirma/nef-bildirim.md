@@ -50,10 +50,12 @@ oturumda PubMed'de yeniden açılmadı.
 8. **Ses:** bildirim sesli değil; yürüyüş koçunun sesi ElevenLabs ile önceden üretilmiş parçalardır. Bu yüzden sesli
    koç cümleleri bankanın ayrı, **rakamsız ve yer tutucusuz** bir alt kümesidir; ekranda o parçanın metni birebir
    yazar, sayı (23 derece) cümlenin içinde değil yanında ayrı bir etiket olarak durur. Dinamik cümle seslendirilmez.
-9. **Her bildirim bir kanıt anahtarına bağlanır:** banka öğesi `evidence: 'bell2023'` gibi `lib/sources.js`
-   anahtarları taşır; kanıt bildirim gövdesine sığmaz, dokununca açılan kartta görünür. Hava → "hava ve fiziksel etkinlik"
-   + "eğer–o zaman planı"; yürüyüş algılama → "tam zamanında uyarlanabilir müdahale (JITAI) ve alıcılık"; modül → modülün
-   kendi kanıtı + "bildirim etkisi" + "öz-yeterlik dili".
+9. **Her bildirim bir kanıt anahtarına bağlanır, günde biri görünür bilim satırı taşır (§10):** gövde iki satırdır,
+   Nef cümlesi (≤ 70) + tek bulgu satırı (≤ 100; "Bir denemede …; 44 kişi, 6 hafta."); makale adı, PMID ve DOI bağlantısı
+   dokununca açılan kartta (bildirimde bağlantı tıklanamaz). Bulgu dili zorunlu, "kanıtlandı/iyileştirir" yok; ay yalnız
+   takvim anı ve davettir, ay → uyku → nefes zinciri kurulmaz. Aynı bilim satırı 7 gün içinde tekrarlanmaz. Göz egzersizi,
+   yürüyüş, nefes, yoga, mola, su ve hava için 3'er örnek yalnız depoda PMID'i olan kaynaklarla yazıldı; eksikler "kaynak
+   bekliyor". Bulgu: Kim 2020 ve Wolffsohn 2025 `sources.js`'te kayıtlı değil (`YOL.nef.md` §14 "zaten var" diyor).
 10. **Sınav:** 50 senaryoluk otomatik sınav (sayı eşleşmesi, saat eki, uzunluk, yasak kalıp, hava sözlüğü tutarlılığı,
     "bugün/yarın" doğruluğu, ses = ekran) her derlemede çalışır; banka için ayrıca iki bağımsız model incelemesi ve üç
     kişilik kör insan değerlendirmesi (sahip + iki ana dili Türkçe okur, biri 50 yaş üstü). Geçme koşulu: sayı ve olgu
@@ -384,7 +386,7 @@ cümle aynı olmalı (tek kaynak: aynı banka öğesi).
   karakter), gövde kapalı banner ya da yığında 2 satır (≈ 80–90 karakter), açılınca 4 satıra kadar (VARSAYIM). Büyük
   Dinamik Yazı boyutunda satır başına karakter düşer.
 - Kural: başlık ≤ 30, gövde ≤ 110; **olgu (saat, sıcaklık) ilk 60 karakterde**, Nef notu sonra. Kesilirse kaybolan Nef notu
-  olur, olgu değil.
+  olur, olgu değil. Bilim satırı taşıyan bildirimde gövde iki satırdır ve ≤ 160 karakterdir (§10.1).
 - WeatherKit atıfı ("Kaynak: Apple Weather") bildirime konacaksa (plan §E.6, App Review cevabına bağlı) gövdenin sonuna
   gelir ve sınıra sayılır; o zaman Nef notu ≤ 85 karakter (VARSAYIM).
 - Başlık ile gövde aynı bilgiyi iki kez söylemez ("Bugün yağmur bekleniyor" başlığında gövde "Bugün" ile başlamaz).
@@ -464,7 +466,8 @@ Türkiye'nin iklim farkı (Erzurum ile Antalya) için kişinin son 30 günlük o
 ### 3.6 Her bildirim türünün PubMed dayanağı: hangi alan bağlanır
 
 Dayanak listesi ayrı ajandadır; burada yalnız alan ve repoda zaten geçen anahtarlar yazılıdır. Banka öğesi `evidence`
-alanında bir ya da iki `lib/sources.js` anahtarı taşır; kanıt bildirim gövdesinde değil, dokununca açılan kartta görünür.
+alanında bir ya da iki `lib/sources.js` anahtarı taşır; künye dokununca açılan kartta görünür, gövdede ise günde en çok bir
+bildirim tek satırlık bir bulgu taşır (§10).
 
 | Bildirim | Bağlanacak alan | Repoda zaten geçen künye (bu oturumda yeniden doğrulanmadı) |
 |---|---|---|
@@ -683,3 +686,183 @@ tonlama riski; atıflı bildirimde Nef notunun 85 karakter sınırı; D10'daki g
 Bakılmayanlar: Capacitor Local Notifications'ın `subtitle` desteği; WeatherKit'in Türkiye için güneş batışı alanı;
 gpt-5-nano'nun gizli akıl yürütme token miktarı; modellerin Türkçe kalitesi (ücretli çağrı yapılmadı); OpenRouter
 `:batch` sürümlerinin nasıl çalıştığı.
+
+---
+
+## 10. Bildirim + bilim satırı (sahibin ek isteği, 2026-09-30)
+
+İstek: "Hatırlatma mesajında ne yazacağı önemli, çok zeki bir AI gibi olmalı (Nef). Göz egzersizi yapacak, altında PubMed
+bilimsel bir yazı yazabiliriz, ikna edelim, teşvik edelim, makale linki vs. Yürüyüş yapacak, nefes egzersizi örneğin
+dolunayda."
+
+### 10.1 İki katman
+
+| Katman | Ne | Nereden | Sınır |
+|---|---|---|---|
+| Başlık | olay ya da modül ("Kırpma zamanı", "Bu gece dolunay") | banka | ≤ 30 |
+| 1. satır · Nef cümlesi | bağlamlı: gün, saat, hava, ay evresi, kişinin kendi kaydı (basamak, dünkü tur, her zamanki saat) | kural motoru + banka + yer tutucu (§1–§2) | ≤ 70 |
+| 2. satır · bilim satırı | tek bulgu, bulgu diliyle, mümkünse tasarım ya da kişi sayısıyla: "Bir denemede …; 44 kişi, 6 hafta." | `lib/sources.js` / `lib/evidence.js` kaydından, önceden yazılmış ve onaylanmış cümle | ≤ 100 |
+| Dokununca açılan kart | makale adı (Türkçe ve özgün), yazarlar, yıl, dergi, tasarım, kişi sayısı, **sınır cümlesi**, PMID, DOI bağlantısı | `sources.js` alanları (`titleTr`, `authors`, `design`, `n`, `pmid`, `doi`; `doiUrl`) | sınırsız; sınır cümlesi zorunlu (plan §H) |
+
+Gövde iki satırdır (Nef cümlesi + satır sonu + bilim satırı), toplam ≤ 160 karakter (VARSAYIM). Kapalı görünümde yalnız
+ilk satır okunur; bu yüzden bildirimin işe yarar kısmı (ne, ne zaman) Nef cümlesindedir, bilim satırı açılınca görünen
+destektir. Zamanı dar bildirimler (yağmur, yürüyüş algılama) bilim satırını her zaman taşımaz (§10.6).
+
+Bilim satırı da model tarafından değil elle (ya da yapım anında üretilip onaylanarak) yazılır ve **kaynağa bağlı sabit
+metindir**: içindeki her sayı (44 kişi, 6 hafta, %24) kaynağın kaydındaki değerle birebir aynı olmalıdır (sınav S11,
+§10.7). Yer tutucu almaz; kişiye göre değişmez.
+
+### 10.2 Bağlantı ve kilit ekranı
+
+- Bildirim gövdesindeki bağlantı tıklanamaz; iOS bildirimi düz metindir (VARSAYIM: zengin bağlantı yalnız bildirim içerik
+  uzantısıyla mümkün; bu uygulamada yok, bakmadım). Bu yüzden bildirimde URL yazılmaz (yer yer, okunmaz).
+- Dokununca uygulama açılır ve ilgili kanıt kartına gider (derin bağlantı: bildirim `extra` alanında `evidence: 'klasnja2019'`).
+  Kartta "Makaleyi aç" düğmesi `https://doi.org/<doi>` açar; yanında "PubMed" düğmesi
+  `https://pubmed.ncbi.nlm.nih.gov/<pmid>/`.
+- İsteğe bağlı: bildirim eylem düğmesi "Kaynağı gör" (iOS bildirim eylemleri; Capacitor Local Notifications'ta eylem türü
+  kaydının bu uygulamada kullanılıp kullanılmadığına bakmadım).
+- Kilit ekranında görünen karakter: Apple belgesinde sayı yok (VARSAYIM): başlık 1 satır ≈ 30–35 karakter; gövde kapalı
+  görünümde 2 satır ≈ 80–90 karakter; uzun basınca ya da bildirim merkezinde açılınca 4 satıra kadar ≈ 150–180 karakter.
+  Büyük yazı boyutunda daha az. Sonuç: Nef cümlesi tek başına anlamlı olmalı; bilim satırı kesilebilir.
+
+### 10.3 Sağlık iddiası yasağı: bilim satırının dili
+
+| Yapılır | Yapılmaz |
+|---|---|
+| "Bir denemede …", "Bir çalışmada …", "… birleştiren bir analizde …" | "Bilim kanıtladı", "kanıtlanmış", "bilimsel olarak" |
+| fiil bulgunun kendisi: "arttı", "azaldı", "ilişkiliydi", "fark çok küçüktü", "kayboldu" | "iyileştirir", "korur", "önler", "tedavi eder", "gözlerini güçlendirir" |
+| tasarım ve kişi sayısı: "44 kişi, 6 hafta", "12 denemelik analiz", "kontrolsüz" | tek çalışmayı genel gerçek gibi sunmak ("Yürüyüş stresi azaltır.") |
+| sınır: "etki haftalar içinde azaldı", "yanlılık riski orta", "sağlık sonucu değişmedi" | yalnız lehte bulguyu seçip sınırı saklamak |
+| kişiye söz: yok (bulgu başkalarındadır) | "Senin de gözlerin rahatlayacak" (bulguyu kişiye vaat etmek) |
+
+İkna ve teşvik dürüst bulgudan gelir: özellikle **davranışın kendisine** dair bulgular ("bırakınca 2 haftada kayboldu",
+"başlıca neden unutmaktı", "öneri sonraki 30 dakikada adımı artırdı") hem ikna edicidir hem sağlık sonucu vaat etmez.
+Ölüm, hastalık riski ve kan şekeri gibi sağlık sonucu bildiren bulgular (`paluch2022`, `paluch2022cvd`, `dunstan2012`)
+bildirimde kullanılmaz (korkutma ve iddia sınırı); uygulama içindeki kartta sınır cümlesiyle kalabilir.
+`yamashita2021`'in Türkçe başlığındaki "iyileştiren" sözcüğü `FORBIDDEN`'a takılır; bilim satırı bu yüzden "ilişkiliydi"
+diye yazıldı (aşağıda H3).
+
+### 10.4 Ay ve dolunay: iddia kurmadan nefes hatırlatması
+
+Onaylı plan §E.5: ayın uykuya etkisi tartışmalı (Cajochen 2013 ve Casiraghi 2021 lehte; Haba-Rubio 2015 ve Smith 2017 etki
+bulmadı; Chaput 2016 ≈ 5 dk). Kural: dolunay yalnız **takvim anı ve bir davet** olarak kullanılır; ay → uyku → nefes
+zinciri kurulmaz.
+
+| Durum | Metin |
+|---|---|
+| Yapılmaz | "Dolunayda uykun bozulabilir; nefes egzersiziyle rahat uyu." (ay-uyku iddiası + nefes-uyku iddiası) |
+| Yapılmaz | "Ay enerjini etkiliyor, nefesle dengele." (dayanaksız) |
+| Yapılır (A) | Başlık "Bu gece dolunay" · "Aya bakarak 3 dakika yavaş nefes: bu akşamın küçük töreni." · bilim satırı nefesin kendi bulgusu (Laborde 2022) |
+| Yapılır (B) | Başlık "Bu gece dolunay" · "Dolunay gecesi için 3 dakikalık nefes hazır; ışığı kısıp başla." · bilim satırı ayın tartışmalı olduğu (plan §E.5 kartının kısaltması): "Ayın uykuya etkisi tartışmalı: bazı çalışmalar küçük fark buldu, büyük çalışmalar bulmadı." |
+
+"Dolunay" sözcüğü yalnız `lib/moon.js` o takvim gününü dolunay diye verdiğinde yazılır (plan §E.3: "yeniay" ve "dolunay"
+yalnız o takvim gününde). Ay hesabı ağ ve konum istemez; bu bildirim herkes için kurulabilir. Saat: akşam, kişinin sessiz
+saatlerinden önce (BILDIRIM_PLANI: yatmadan önceki 60 dakikada bildirim yok).
+
+### 10.5 Örnekler: her tür için 3 (Nef cümlesi + bilim satırı)
+
+Yalnız depoda PMID'i olan kaynaklar kullanıldı (`app/src/lib/sources.js`, `app/src/lib/evidence.js`,
+`app/src/lib/yogaLessons.js`, `docs/yol-haritasi/BILDIRIM_PLANI.md`, onaylı plan Kaynaklar). Bulgu cümlesindeki her ayrıntı
+bu dosyalarda yazılı olandır; yazılı olmayan "kaynak bekliyor" diye işaretlidir. Uzunluklar Python `len` ile sayıldı
+(B = başlık, N = Nef cümlesi, S = bilim satırı).
+
+**Göz egzersizi (kırpma)**
+
+| # | Başlık | Nef cümlesi | Bilim satırı | Kaynak | B/N/S |
+|---|---|---|---|---|---|
+| G1 | Kırpma zamanı | Ekrandan başını kaldır; 20 saniyelik kırpma seti hazır. | Bir çalışmada kırpma egzersizini bırakanların başlıca nedeni unutmaktı. | Kim 2020, PMID 32409236; 41 kişi, 4 hafta, kontrolsüz (`YOL.nef.md` §14); %24 takipten çıktı, başlıca sorun "unutmak" (`docs/` altındaki araştırma notu; kaynak kartına geçerken yeniden doğrulanır) | 13/55/71 |
+| G2 | Kırpma · 2. tur | Sabahki turu yaptın; öğleden sonrası da hazır. | Bir denemede en iyi sonuç günde 3 kez 15 tekrarla alındı. | Wolffsohn 2025, PMID 40467388; RKÇ; kişi sayısı **kaynak bekliyor** | 15/46/57 |
+| G3 | Göz egzersizi | Bugünkü set 1 dakika. Kaldığın yerden sürdürebilirsin. | Bir denemede egzersiz bırakılınca kazanım 2 haftada kayboldu. | Wolffsohn 2025, PMID 40467388 (`evidence.js` blink sınırı: "etki yaklaşık 2 haftada kayboldu"); kişi sayısı **kaynak bekliyor** | 13/54/61 |
+
+**Yürüyüş**
+
+| # | Başlık | Nef cümlesi | Bilim satırı | Kaynak | B/N/S |
+|---|---|---|---|---|---|
+| Y1 | Kısa bir yürüyüş | Hava 21 derece, ılık. İstersen şimdi 5 dakikalık bir tur. | Bir denemede yürüyüş önerisi sonraki 30 dakikada adımı artırdı; 44 kişi, 6 hafta. | Klasnja 2019, PMID 30192907; MRT; %24 artış, etki haftalar içinde azaldı (BILDIRIM_PLANI:153) | 16/57/81 |
+| Y2 | Bugünkü yürüyüş | Yürürken bir kez başını kaldırıp gökyüzüne bak. | 60 yaşlıyla bir denemede çevreye hayranlıkla bakarak yürüyenler daha çok olumlu duygu bildirdi. | Sturm 2020, PMID 32955293; RKÇ, 60 yaşlı yetişkin (`sources.js`); süre **kaynak bekliyor** | 15/47/95 |
+| Y3 | Yağmur 15.00'te | Yürüyüşünü 15.00'ten önceye alabilirsin. | Araştırmalarda kötü hava, hareketin önündeki engellerden biri çıktı. | Tucker ve Gilliland 2007, PMID 17920646 (plan §E.4); tasarım ve kişi sayısı **kaynak bekliyor** | 15/40/68 |
+
+**Nefes (dolunay dahil)**
+
+| # | Başlık | Nef cümlesi | Bilim satırı | Kaynak | B/N/S |
+|---|---|---|---|---|---|
+| N1 | Nefes · 4. basamak | Bugün 3 dakika. Omuzlarını bırak, gerisini birlikte sayarız. | 12 denemelik bir analizde yavaş nefes, algılanan streste küçük–orta azalmayla ilişkiliydi. | Fincham 2023, PMID 36624160; 12 RKÇ, g = −0,35, yanlılık riski orta (plan) | 18/60/90 |
+| N2 | Bu gece dolunay | Aya bakarak 3 dakika yavaş nefes: bu akşamın küçük töreni. | 223 çalışmalık bir incelemede kalp atışı değişkenliği yavaş nefes sırasında arttı. | Laborde 2022, PMID 35623448 (`yogaLessons.js:43` onaylı cümlenin kısaltması) | 15/58/82 |
+| N3 | Bu gece dolunay | Dolunay gecesi için 3 dakikalık nefes hazır; ışığı kısıp başla. | Ayın uykuya etkisi tartışmalı: bazı çalışmalar küçük fark buldu, büyük çalışmalar bulmadı. | Cajochen 2013 (23891110), Haba-Rubio 2015 (26498230), Chaput 2016 (27047907), Smith 2017 (27928860), Casiraghi 2021 (33571126); plan §E.5 | 15/63/90 |
+
+**Yoga**
+
+| # | Başlık | Nef cümlesi | Bilim satırı | Kaynak | B/N/S |
+|---|---|---|---|---|---|
+| O1 | Yoga dersi hazır | Bugünkü ders hazır; mat şart değil, bir sandalye de olur. | 223 çalışmalık bir incelemede kalp atışı değişkenliği yavaş nefes sırasında arttı. | Laborde 2022, PMID 35623448 (nefes temelli ders için; derste sandalye seçeneği olup olmadığına bakmadım) | 16/57/82 |
+| O2 | Kısa yoga nidra | 11 dakikalık sürüm de hazır; bugün kısası da olur. | 11 ve 30 dakikalık yoga nidrayı karşılaştıran bir çalışmada fark çok küçüktü. | Moszeik 2025, PMID 40373021 (`yogaLessons.js:85, :89`); "alandaki çalışmaların çoğunun kalitesi düşük" kartta | 15/50/77 |
+| O3 | Yoga | 3 dakikalık kısa sürüm de bir ders sayılır. | Gerçek kullanımı inceleyen bir çalışmada seanslar çoğunlukla kısaydı. | Radin 2025, PMID 39808431 (`yogaLessons.js:27, :56` "gerçek kullanım kısa"); tasarım ve kişi sayısı **kaynak bekliyor** | 4/43/69 |
+
+**Mola**
+
+| # | Başlık | Nef cümlesi | Bilim satırı | Kaynak | B/N/S |
+|---|---|---|---|---|---|
+| L1 | Mola zamanı | Bir dakika kalk, pencereden uzağa bak. | 29 kişilik bir çalışmada 20-20-20 molasının etkisi, hatırlatma bitince 1–2 haftada kayboldu. | Talens-Estarelles 2022, PMID 35963776; öncesi–sonrası, 29 ekran kullanıcısı (`sources.js`) | 11/38/92 |
+| L2 | Kalk, biraz gerin | Bir saat oldu; bir dakikalık ara yeter. | 56 ofis çalışanıyla 12 haftalık bir çalışmada telefondan gelen mola hatırlatması oturmayı azalttı. | Morris 2020, PMID 33322678; yarı-randomize (`sources.js`, BILDIRIM_PLANI) | 17/39/98 |
+| L3 | Kısa ara | Omuzlarını bırak, uzağa bak; sonra devam edersin. | 51 veri girişi çalışanıyla bir saha çalışmasında ek kısa molalar denendi. | Galinsky 2007, PMID 17514726; bulgu cümlesi **kaynak bekliyor** (depoda yalnız "düşük-orta" düzeyi yazıyor) | 8/49/73 |
+
+**Su**
+
+| # | Başlık | Nef cümlesi | Bilim satırı | Kaynak | B/N/S |
+|---|---|---|---|---|---|
+| U1 | Birkaç yudum | Suyun yanında mı? Birkaç yudum yeter. | Bir denemede hatırlatma ve kayıtla su içme biraz arttı; sağlık sonucu değişmedi. | Stout 2022, PMID 35283036 (BILDIRIM_PLANI:165); kişi sayısı **kaynak bekliyor** | 12/37/80 |
+| U2 | Günün son suyu | Bugünkü son su hatırlatması bu. | Bir çalışmada sıvıyı artıranlarda gece tuvalete kalkma arttı; bu yüzden 18.00'den sonra sormuyoruz. | Desai 2026, PMID 41864748 (BILDIRIM_PLANI:178); kişi sayısı **kaynak bekliyor** | 14/31/99 |
+| U3 | Su | İstersen şimdi birkaç yudum iç. | **kaynak bekliyor** (su ile göz konforu ya da odak arasında depoda PMID'li kaynak yok) | — | 2/31/— |
+
+**Hava**
+
+| # | Başlık | Nef cümlesi | Bilim satırı | Kaynak | B/N/S |
+|---|---|---|---|---|---|
+| H1 | Yağmur 21.00'de | 21.00–22.00 arası yağmur bekleniyor; yürüyüşü öncesine alabilirsin. | Bir çalışmada yağışlı günlerde yürüyüş azaldı. | Klimek 2022, PMID 35151273 (plan §E.4); kişi sayısı ve örneklem **kaynak bekliyor** | 15/67/46 |
+| H2 | Bugün yağmur bekleniyor | 14.00–17.00 arası yağmur var; çantana şemsiye koy. | Bir çalışmada havanın ruh hâline ortalama etkisi küçüktü ve kişiden kişiye değişti. | Denissen 2008, PMID 18837616 (plan §E.4); kişi sayısı **kaynak bekliyor** | 23/50/83 |
+| H3 | Gökyüzü açık | Bugün gökyüzü açık; 2 dakika ufka bakmak için güzel bir gün. | 30 genç yetişkinle bir çalışmada doğa görüntülerine bakmak olumlu ruh hâliyle ilişkiliydi. | Yamashita 2021, PMID 34065588; çapraz, 30 genç yetişkin (`sources.js`); sınır: görüntü, gerçek gökyüzü değil (kartta) | 12/60/90 |
+
+Notlar: (1) H2'deki "var" plan §E.6'daki akşam kurulmuş metin kalıbından; sabah kurulmuşsa "bekleniyor" yazılır.
+(2) `YOL.nef.md` §14 Kim 2020 ve Wolffsohn 2025 için "`lib/sources.js`'te zaten var" diyor; bugünkü `sources.js`'te bu
+anahtarlar **yok** (yalnız `evidence.js`'te metin olarak geçiyorlar). Bilim satırının dokununca açılacak kartı için
+`sources.js`'e şu kayıtlar eklenmeli: `kim2020`, `wolffsohn2025`, `fincham2023`, `laborde2022`, `balban2023`,
+`tucker2007`, `klimek2022`, `denissen2008`, `stout2022`, `desai2026`, `moszeik2025`, `radin2025`, ay kaynakları
+(`cajochen2013`, `habarubio2015`, `chaput2016`, `smith2017`, `casiraghi2021`). Kayıt eklenmeden o bilim satırı yayına
+girmez (plan §H kanıt kapısı: kart yayından önce PubMed'de yeniden açılır). (3) Balban 2023 (PMID 36630953) depoda
+yalnız yöntemiyle (günde 5 dk, 28 gün, uzaktan RKÇ) geçiyor; bulgu cümlesi **kaynak bekliyor**, bu yüzden örneklerde
+kullanılmadı.
+
+### 10.6 Döndürme kuralı (aynı bilim satırı her gün tekrarlanmasın)
+
+1. Her modülün ve bildirim türünün bir **bilim havuzu** vardır (yukarıdaki satırlar; en az 1, hedef ≥ 3).
+2. **Günde en çok bir** bildirim bilim satırı taşır (VARSAYIM). Öncelik: o gün kişinin seçtiği modül hatırlatması >
+   yürüyüş > mola > su > hava. Öteki bildirimler yalnız Nef cümlesiyle gider; `evidence` anahtarı yine taşınır (dokununca
+   kart açılır).
+3. Aynı bilim satırı aynı kişiye **7 gün** içinde ikinci kez gösterilmez; havuz 1 satırlıksa o modülde en çok 7 günde
+   bir bilim satırı çıkar (VARSAYIM süreler).
+4. Havuz içinde sıra: ilk gösterimde tasarımı en güçlü kaynak (`DESIGN_RANK`, `sources.js:25`: meta 4 > rct/mrt 3 > …),
+   sonra `dice(seed, tarih, tür)` ile döner (`notifyPlan.js` `textFor` kalıbı); art arda aynı satır yok.
+5. İlk 14 gün (VARSAYIM) her modülün ilk bildirimi o modülün en güçlü bilim satırını taşır ("neden bu pratik" sorusu
+   ilk günlerde sorulur); sonra kural 2–4.
+6. Bildirimden sonra kişi kartı açtıysa (`evidence` dokunuşu telefonda sayılır) o satır 30 gün dinlenir (VARSAYIM):
+   okunmuş bulguyu tekrar etmek yerine yenisi gelir.
+7. Kayıt: telefonda `gozolcum:sci-log` `{ date, type, sourceKey }` (90 gün); sunucuya gitmez.
+8. Bell 2023'e göre metin çeşitliliği tek başına açılmayı artırmadı; bu yüzden döndürmenin amacı etkiyi artırmak değil
+   **tekrar yorgunluğunu önlemektir** (dürüst sınır).
+
+### 10.7 Sınava eklenenler (§7.1'e)
+
+| # | Denetim |
+|---|---|
+| S11 | Bilim satırındaki her sayı (kişi, hafta, yüzde, çalışma sayısı) bağlı kaynağın kaydında (`n`, bulgu notu) birebir var |
+| S12 | Bilim satırı bulgu dilinde: "kanıtla", "iyileştir", "korur", "önler", "bilimsel olarak" yok; kişiye vaat ("senin de") yok |
+| S13 | Bilim satırı taşıyan bildirimin `evidence` anahtarı `sources.js`'te `pmid` ve `doi` alanlarıyla var; kart sınır cümlesi taşıyor |
+| S14 | Dolunay: "dolunay" yalnız `moon.js` o günü dolunay verdiğinde; aynı bildirimde "uyku" sözcüğü yalnız §10.4 (B) satırında |
+| S15 | Döndürme: 30 günlük benzetimde günde ≤ 1 bilim satırı; aynı satır 7 gün içinde tekrar yok |
+| S16 | Gövde ≤ 160, Nef cümlesi ≤ 70, bilim satırı ≤ 100; Nef cümlesi tek başına anlamlı (bilim satırına atıf yapmaz) |
+
+### 10.8 Sahibin kararı gereken sorular (bilim satırı)
+
+8. Bilim satırı günde en çok bir bildirimde mi görünsün (öneri), yoksa her hatırlatmada mı?
+9. Bilim satırında ölüm ve hastalık riski gibi sağlık sonucu bildiren bulgular hiç kullanılmasın (öneri) — onay?
+10. Dolunay bildirimi: (A) nefesin kendi bulgusu mu, (B) "ayın etkisi tartışmalı" satırı mı, yoksa ikisi dönüşümlü mü?
