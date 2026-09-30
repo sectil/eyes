@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  
+  <title>Energy Efficiency Guide for iOS Apps: Reduce Location Accuracy and Duration</title>
+  <link rel="stylesheet" type="text/css" href="../../../../Resources/1282/CSS/style-1.6.3.css" />
+  <link rel="stylesheet" type="text/css" href="../../../../Resources/1282/CSS/feedback-1.6.3.css" />
+  <meta charset='utf-8'> 
+<meta id="j-version" name="j-version" content="" />
+<meta id="build" name="build" content="c1e4c7a89af8f899a21cfa81fc33ba42" />
+<meta id="document-version" name="document-version" content="2.5.0" />
+<meta id="book-assignments" name="book-assignments" content="{Type/Guide}, {Topic/Performance}" />
+<meta scheme="apple_ref" id="identifier" name="identifier" content="//apple_ref/doc/uid/TP40015243" />
+<meta id="chapterId" name="chapterId" content="TP40015243-CH24">
+<meta id="book-title" name="book-title" content="Energy Efficiency Guide for iOS Apps" />
+<meta id="book-resource-type" name="book-resource-type" content="Guide" />
+<meta id="book-root" name="book-root" content="./" />
+<meta id="book-json" name="book-json" content="book.json">
+<meta id="date" name="date" content="2016-09-13" />
+<meta id="description" name="description" content="Provides guidelines and recommendations for developing energy efficient iOS apps that help users achieve great battery life." />
+<meta id="IndexTitle" name="IndexTitle" content="" />
+<meta id="resources-uri" name="resources-uri" content="../../../../Resources/1282">
+<link id="book-index-page" rel="Start" title="" type="text/html" href="./index.html">
+<!-- , next_chapter: next_chapter, previous_chapter: previous_chapter -->
+<link id="next-page" rel="Next" type="text/html" href="">
+<link id="previous-page" rel="Prev" type="text/html" href="">
+<meta id="devcenter" name="devcenter" content="<!-- DEVCENTER_NAME -->" />
+<meta id="devcenter-url" name="devcenter-url" content="<!-- DEVCENTER_URL -->" />
+<meta id="reflib" name="reflib" content="<!-- REFLIB_NAME -->" />
+
+<meta id="xcode-display" name="xcode-display" content="render" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta id="platforms" name="platforms" content="iOS,watchOS">
+</head>
+
+  <body id="conceptual_flow_with_tasks" class="jazz">
+    
+    <header id="ios_header" class="hideOnPrint hideInXcode">
+  <div class="content-wrapper">
+    <p class="header-text">
+    	<a href="../../../../navigation/">Documentation Archive
+ 		</a>
+ </p>
+    <p id="wwdr"><img id="apple_logo" src="../../../../Resources/1282/Images/apple2.png" height="14px" width="12px" aria-hidden="true" /><a href="https://developer.apple.com">Developer</a></p>
+  </div>
+</header>
+
+    <section id="valence">
+  <div class="content-wrapper">
+    <p id="hierarchial_navigation">
+      <span id="book_title">Energy Efficiency Guide for iOS Apps</span>
+    </p>
+    <form id="search" class="hideInXcode" method="get" action="/search/index.php" accept-charset="utf-8" autocomplete="off">
+  <input type="search" id="ssi_SearchField" placeholder="Search Documentation Archive" name="q" autocomplete="off" tabindex="2" />
+</form>
+
+      
+   
+   
+
+
+
+    <img id="shortstack" src="../../../../Resources/1282/Images/shortstack_2x.png"/>
+  </div>
+</section>
+    <div class="content-wrapper">
+      <nav id="navigator" class="book-parts hideInXcode" role="navigation">
+    <ul class="nav-parts">
+        <li data-id="//apple_ref/doc/uid/TP40015243-CH2-SW1"
+            class="part-name">
+            <a href="index.html#//apple_ref/doc/uid/TP40015243-CH3-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH3-SW1">Energy Essentials</a>
+          <ul class="nav-chapters">
+              <li class="nav-chapter">
+              	<a href="index.html#//apple_ref/doc/uid/TP40015243-CH3-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH3-SW1">Energy Efficiency and the User Experience</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="FundamentalConcepts.html#//apple_ref/doc/uid/TP40015243-CH4-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH4-SW1">Fundamental Concepts</a>
+              </li>
+          </ul>
+        </li>
+        <li data-id="//apple_ref/doc/uid/TP40015243-CH9-SW1"
+            class="part-name">
+            <a href="WorkLessInTheBackground.html#//apple_ref/doc/uid/TP40015243-CH22-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH22-SW1">Reduce and Prioritize Work</a>
+          <ul class="nav-chapters">
+              <li class="nav-chapter">
+              	<a href="WorkLessInTheBackground.html#//apple_ref/doc/uid/TP40015243-CH22-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH22-SW1">Work Less in the Background</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="PrioritizeWorkWithQoS.html#//apple_ref/doc/uid/TP40015243-CH39-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH39-SW1">Prioritize Work with Quality of Service Classes</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="MinimizeTimerUse.html#//apple_ref/doc/uid/TP40015243-CH41-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH41-SW1">Minimize Timer Use</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="MinimizeIO.html#//apple_ref/doc/uid/TP40015243-CH42-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH42-SW1">Minimize I/O</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="LowPowerMode.html#//apple_ref/doc/uid/TP40015243-CH31-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH31-SW1">React to Low Power Mode on iPhones</a>
+              </li>
+          </ul>
+        </li>
+        <li data-id="//apple_ref/doc/uid/TP40015243-CH7-SW1"
+            class="part-name">
+            <a href="EnergyandNetworking.html#//apple_ref/doc/uid/TP40015243-CH16-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH16-SW1">Minimize and Defer Networking</a>
+          <ul class="nav-chapters">
+              <li class="nav-chapter">
+              	<a href="EnergyandNetworking.html#//apple_ref/doc/uid/TP40015243-CH16-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH16-SW1">Energy and Networking</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="MinimizeNetworking.html#//apple_ref/doc/uid/TP40015243-CH17-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH17-SW1">Minimize Networking</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="DeferNetworking.html#//apple_ref/doc/uid/TP40015243-CH18-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH18-SW1">Defer Networking</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="OptimizeVoIP.html#//apple_ref/doc/uid/TP40015243-CH30-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH30-SW1">Voice Over IP (VoIP) Best Practices</a>
+              </li>
+          </ul>
+        </li>
+        <li data-id="//apple_ref/doc/uid/TP40015243-CH8-SW1"
+            class="part-name">
+            <a href="AvoidExtraneousGraphicsAndAnimations.html#//apple_ref/doc/uid/TP40015243-CH19-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH19-SW1">Use Graphics, Animations, and Video Efficiently</a>
+          <ul class="nav-chapters">
+              <li class="nav-chapter">
+              	<a href="AvoidExtraneousGraphicsAndAnimations.html#//apple_ref/doc/uid/TP40015243-CH19-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH19-SW1">Avoid Extraneous Graphics and Animations</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="HideControlsInFullScreenVideo.html#//apple_ref/doc/uid/TP40015243-CH20-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH20-SW1">Restrict UI When Playing Full-Screen Video</a>
+              </li>
+          </ul>
+        </li>
+        <li data-id="//apple_ref/doc/uid/TP40015243-CH10-SW1"
+            class="part-name nav-part-active open-part">
+            <a href="#//apple_ref/doc/uid/TP40015243-CH24-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH24-SW1">Optimize Location and Motion</a>
+          <ul class="nav-chapters">
+              <li class="nav-chapter nav-current-chapter">
+              	<a href="#//apple_ref/doc/uid/TP40015243-CH24-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH24-SW1">Reduce Location Accuracy and Duration</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="MotionBestPractices.html#//apple_ref/doc/uid/TP40015243-CH38-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH38-SW1">Reduce the Frequency of Motion Updates</a>
+              </li>
+          </ul>
+        </li>
+        <li data-id="//apple_ref/doc/uid/TP40015243-CH11-SW1"
+            class="part-name">
+            <a href="NotificationBestPractices.html#//apple_ref/doc/uid/TP40015243-CH26-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH26-SW1">Optimize Notifications</a>
+          <ul class="nav-chapters">
+              <li class="nav-chapter">
+              	<a href="NotificationBestPractices.html#//apple_ref/doc/uid/TP40015243-CH26-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH26-SW1">Notification Best Practices</a>
+              </li>
+          </ul>
+        </li>
+        <li data-id="//apple_ref/doc/uid/TP40015243-CH35-SW1"
+            class="part-name">
+            <a href="BluetoothBestPractices.html#//apple_ref/doc/uid/TP40015243-CH28-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH28-SW1">Minimize Peripheral Interaction</a>
+          <ul class="nav-chapters">
+              <li class="nav-chapter">
+              	<a href="BluetoothBestPractices.html#//apple_ref/doc/uid/TP40015243-CH28-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH28-SW1">Bluetooth Best Practices</a>
+              </li>
+          </ul>
+        </li>
+        <li data-id="//apple_ref/doc/uid/TP40015243-CH43-SW1"
+            class="part-name">
+            <a href="AppleWatchExtensionBestPractices.html#//apple_ref/doc/uid/TP40015243-CH36-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH36-SW1">Apple Watch and Energy</a>
+          <ul class="nav-chapters">
+              <li class="nav-chapter">
+              	<a href="AppleWatchExtensionBestPractices.html#//apple_ref/doc/uid/TP40015243-CH36-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH36-SW1">Apple Watch Best Practices</a>
+              </li>
+          </ul>
+        </li>
+        <li data-id="//apple_ref/doc/uid/TP40015243-CH14-SW1"
+            class="part-name">
+            <a href="SignsofEnergyLeaks.html#//apple_ref/doc/uid/TP40015243-CH32-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH32-SW1">Monitor Energy Use</a>
+          <ul class="nav-chapters">
+              <li class="nav-chapter">
+              	<a href="SignsofEnergyLeaks.html#//apple_ref/doc/uid/TP40015243-CH32-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH32-SW1">Observe Signs of Energy Leaks</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="MonitorEnergyWithXcode.html#//apple_ref/doc/uid/TP40015243-CH34-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH34-SW1">Measure Energy Impact with Xcode</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="MonitorEnergyWithInstruments.html#//apple_ref/doc/uid/TP40015243-CH33-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH33-SW1">Measure Energy Impact with Instruments</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="TestPerformance.html#//apple_ref/doc/uid/TP40015243-CH40-SW2" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH40-SW2">Test Performance</a>
+              </li>
+          </ul>
+        </li>
+        <li data-id="//apple_ref/doc/uid/TP40015243-CH5-SW1"
+            class="part-name">
+            <a href="RelatedDocuments.html#//apple_ref/doc/uid/TP40015243-CH15-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH15-SW1">Related Resources</a>
+          <ul class="nav-chapters">
+              <li class="nav-chapter">
+              	<a href="RelatedDocuments.html#//apple_ref/doc/uid/TP40015243-CH15-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH15-SW1">Related Documents</a>
+              </li>
+              <li class="nav-chapter">
+              	<a href="WWDCVideos.html#//apple_ref/doc/uid/TP40015243-CH6-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH6-SW1">WWDC Videos</a>
+              </li>
+          </ul>
+        </li>
+        <li data-id="revision-history"
+            class="part-name">
+          <a href="RevisionHistory.html#//apple_ref/doc/uid/TP40015243-CH99-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH99-SW1">Revision History</a>
+          <ul class="nav-chapters">
+            <li class="nav-chapter">
+              <a href="RevisionHistory.html#//apple_ref/doc/uid/TP40015243-CH99-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH99-SW1">Document Revision History</a>
+            </li>
+          </ul>
+        </li>
+    </ul>
+</nav>
+
+      <menu id="bashful" type="toolbar">
+  <div class="shield"></div>
+  <menuitem id="jump_to" class="menu-bar-item closed">
+  <span>On This Page</span>
+  <div class="chevron">
+    <div class="chevy chevron-left"></div>
+    <div class="chevy chevron-right"></div>
+  </div>
+  <menu type="list" class="details">
+      <ul class="list-bullet">
+          <li class="item">
+            <a href="#//apple_ref/doc/uid/TP40015243-CH24-SW9">Request Quick Location Updates</a>
+          </li>
+          <li class="item">
+            <a href="#//apple_ref/doc/uid/TP40015243-CH24-SW3">Stop Location Services When You Aren’t Using Them</a>
+          </li>
+          <li class="item">
+            <a href="#//apple_ref/doc/uid/TP40015243-CH24-SW5">Reduce Accuracy of Standard Location Updates Whenever Possible</a>
+          </li>
+          <li class="item">
+            <a href="#//apple_ref/doc/uid/TP40015243-CH24-SW6">Stop Location Updates if Accuracy Doesn’t Match Expectations</a>
+          </li>
+          <li class="item">
+            <a href="#//apple_ref/doc/uid/TP40015243-CH24-SW7">Auto-Pause and Specify an Activity Type When Receiving Location Updates in the Background</a>
+          </li>
+          <li class="item">
+            <a href="#//apple_ref/doc/uid/TP40015243-CH24-SW8">Defer Location Updates When Running in the Background</a>
+          </li>
+          <li class="item">
+            <a href="#//apple_ref/doc/uid/TP40015243-CH24-SW13">Restrict Location Updates to Specific Regions or Locations</a>
+          </li>
+          <li class="item">
+            <a href="#//apple_ref/doc/uid/TP40015243-CH24-SW4">Register for Significant-Change Location Updates Only as a Last Resort</a>
+          </li>
+      </ul>
+  </menu>
+</menuitem>
+
+</menu>
+<div class="pixel-line"></div>
+<div class="rubber-band-gap"></div>
+<article class="chapter">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24"></a><a name="//apple_ref/doc/uid/TP40015243-CH24-SW1"></a>
+      <a name="//apple_ref/doc/uid/TP40015243-CH10"></a><a name="//apple_ref/doc/uid/TP40015243-CH10-SW1"></a>
+
+  <h2 class='chapter-name'>Reduce Location Accuracy and Duration</h2>
+
+
+  
+  	<section class="section">
+  		<p class="para">
+  Using location-based information in your app is a great way to keep the user connected to the surrounding world. However, improper or unnecessary use of location can prevent the device from sleeping, keep location hardware powered up, drain the user’s battery, and create a poor user experience. Follow best practices to optimize use of location services for energy efficiency.
+</p>
+<div class="note">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW2"></a>
+  <aside class="aside">
+    <p class="aside-title">Note
+    </p>
+    	<p class="para">For detailed information about using location services, see <em class="u-book"><a href="../../../UserExperience/Conceptual/LocationAwarenessPG/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009497" data-renderer-version="1" target="_self">Location and Maps Programming Guide</a></em>.
+    	</p>
+    
+  </aside>
+</div>
+
+		</section> 
+
+
+  <section class="section">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW9"></a>
+  <h3 class="section-name" tabindex="0">Request Quick Location Updates</h3>
+  <p class="para">
+  If your app just needs a quick fix on the user’s location, it’s best to call the <code class="code-voice">requestLocation</code> method of the location manager object, as shown in <span class="x-name-no-link">Listing 14-1</span>. Doing so automatically stops location services once the request has been fulfilled, letting location hardware power down if not being used elsewhere. Location updates requested in this manner are delivered by a callback to the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate/1423615-locationmanager" class="urlLink">locationManager:didUpdateLocations:</a></code> delegate method, which you must implement in your app.
+</p><section class="code-listing">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW11"></a>
+    <span class="caption"><strong class="caption-number">Listing 14-1</strong>Efficiently requesting a single location update</span>
+  <div class="code-sample">
+      <div class="Objective-C">
+          <p class="aside-title">Objective-C</p>
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">viewDidLoad</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Create a location manager object</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CLLocationManager</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Set the delegate</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">getQuickLocationUpdate</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Request location authorization</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">requestWhenInUseAuthorization</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Request a location update</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">requestLocation</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Note: requestLocation may timeout and produce an error if authorization has not yet been granted by the user</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">locationManager:</span><span class="p">(</span><span class="n">CLLocationManager</span> <span class="o">*</span><span class="p">)</span><span class="n">manager</span>
+</code></li>
+            <li><code class="code-voice">    <span class="nl">didUpdateLocations:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="n">locations</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Process the received location update</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+        </ol>
+      </div>
+      <div class="Swift">
+          <p class="aside-title">Swift</p>
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="kt">override</span> <span class="kt">func</span> <span class="vc">viewDidLoad</span>() {</code></li>
+            <li><code class="code-voice">    <span class="c">// Create a location manager object</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span> = <span class="vc">CLLocationManager</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Set the delegate</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">delegate</span> = <span class="kt">self</span></code></li>
+            <li><code class="code-voice">}</code></li>
+            <li><code class="code-voice"> </code></li>
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">getQuickLocationUpdate</span>() {</code></li>
+            <li><code class="code-voice">    <span class="c">// Request location authorization</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">requestWhenInUseAuthorization</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Request a location update</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">requestLocation</span>()</code></li>
+            <li><code class="code-voice">    <span class="c">// Note: requestLocation may timeout and produce an error if authorization has not yet been granted by the user</span></code></li>
+            <li><code class="code-voice">}</code></li>
+            <li><code class="code-voice"> </code></li>
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">locationManager</span>(<span class="vc">manager</span>: <span class="n"><!-- a href="" -->CLLocationManager<!-- /a --></span>, <span class="vc">didUpdateLocations</span> <span class="vc">locations</span>: [<span class="n"><!-- a href="" -->CLLocation<!-- /a --></span>]) {</code></li>
+            <li><code class="code-voice">    <span class="c">// Process the received location update</span></code></li>
+            <li><code class="code-voice">}</code></li>
+        </ol>
+      </div>
+  </div>
+</section><div class="note">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW14"></a>
+  <aside class="aside">
+    <p class="aside-title">Note
+    </p>
+    	<p class="para"><code class="code-voice">requestLocation</code> is available in iOS 9 and later.
+    	</p>
+    
+  </aside>
+</div>
+  
+</section>
+<section class="section">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW3"></a>
+  <h3 class="section-name" tabindex="0">Stop Location Services When You Aren’t Using Them</h3>
+  <p class="para">
+  With the exception of navigation apps that offer turn-by-turn directions, most apps don’t need location services to be on all the time. Turn location services on only when they’re needed. Then, leave them on just long enough to get a location fix and turn them off again. Unless the user is in a moving vehicle, the current location shouldn’t change frequently enough to be an issue. You can always start location services again later if you need another update.
+</p><p class="para">
+  To stop standard location updates, call the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanager/1423695-stopupdatinglocation" class="urlLink">stopUpdatingLocation</a></code> method of the location manager object. See <span class="x-name-no-link">Listing 14-2</span>.
+</p><section class="code-listing">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW12"></a>
+    <span class="caption"><strong class="caption-number">Listing 14-2</strong>Stopping location updates when no longer needed</span>
+  <div class="code-sample">
+      <div class="Objective-C">
+          <p class="aside-title">Objective-C</p>
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">getLocationUpdate</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Create a location manager object</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CLLocationManager</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Set the delegate</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Request location authorization</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">requestWhenInUseAuthorization</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Start location updates</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">startUpdatingLocation</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">locationManager:</span><span class="p">(</span><span class="n">CLLocationManager</span> <span class="o">*</span><span class="p">)</span><span class="n">manager</span>
+</code></li>
+            <li><code class="code-voice">    <span class="nl">didUpdateLocations:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="n">locations</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Get a fix on the user&#39;s location</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">...</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Stop location updates</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">stopUpdatingLocation</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+        </ol>
+      </div>
+      <div class="Swift">
+          <p class="aside-title">Swift</p>
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">getLocationUpdate</span>() {</code></li>
+            <li><code class="code-voice">    <span class="c">// Create a location manager object</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span> = <span class="vc">CLLocationManager</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Set the delegate</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">delegate</span> = <span class="kt">self</span></code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Request location authorization</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">requestWhenInUseAuthorization</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Start location updates</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">startUpdatingLocation</span>()</code></li>
+            <li><code class="code-voice">}</code></li>
+            <li><code class="code-voice"> </code></li>
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">locationManager</span>(<span class="vc">manager</span>: <span class="n"><!-- a href="" -->CLLocationManager<!-- /a --></span>, <span class="vc">didUpdateLocations</span> <span class="vc">locations</span>: [<span class="n"><!-- a href="" -->CLLocation<!-- /a --></span>]) {</code></li>
+            <li><code class="code-voice">    <span class="c">// Get a fix on the user&#39;s location</span></code></li>
+            <li><code class="code-voice">    ...</code></li>
+            <li><code class="code-voice">        </code></li>
+            <li><code class="code-voice">        <span class="c">// Stop location updates</span></code></li>
+            <li><code class="code-voice">        <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">stopUpdatingLocation</span>()</code></li>
+            <li><code class="code-voice">}</code></li>
+        </ol>
+      </div>
+  </div>
+</section>
+  
+</section>
+<section class="section">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW5"></a>
+  <h3 class="section-name" tabindex="0">Reduce Accuracy of Standard Location Updates Whenever Possible</h3>
+  <p class="para">
+  Standard location updates let you specify a degree of accuracy ranging from a few meters to a few kilometers by setting the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanager/1423836-desiredaccuracy" class="urlLink">desiredAccuracy</a></code> property of the location manager object, as shown in <span class="x-name-no-link">Listing 14-3</span>. Requesting higher accuracy than you need causes Core Location to power up additional hardware and waste power for unnecessary precision. Unless your app <em>really</em> needs to know the user’s position within a few meters, don’t set the accuracy level to best (<code class="code-voice">kCLLocationAccuracyBest</code>) or nearest ten meters (<code class="code-voice">kCLLocationAccuracyNearestTenMeters</code>). Also, be aware that Core Location typically provides more accurate data than you have requested. For example, when specifying an accuracy level of three kilometers (<code class="code-voice">kCLLocationAccuracyThreeKilometers</code>), you may receive accuracy within a hundred meters or so.
+</p><div class="important clear">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-DontLinkElementID_5"></a>
+  <aside class="aside">
+    <p class="aside-title">Important
+    </p>
+    <p class="para">By default, standard location updates on iOS devices run with an accuracy level of best. Change these settings to match your app’s requirements. Otherwise, your app will unnecessarily waste energy.
+    </p>
+    
+  </aside>
+</div><section class="code-listing">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW15"></a>
+    <span class="caption"><strong class="caption-number">Listing 14-3</strong>Specifying accuracy for location updates</span>
+  <div class="code-sample">
+      <div class="Objective-C">
+          <p class="aside-title">Objective-C</p>
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">getLocationUpdate</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Create a location manager object</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CLLocationManager</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Set the delegate</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Request location authorization</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">requestWhenInUseAuthorization</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Set an accuracy level. The higher, the better for energy.</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">desiredAccuracy</span> <span class="o">=</span> <span class="n">kCLLocationAccuracyThreeKilometers</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Start location updates</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">startUpdatingLocation</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+        </ol>
+      </div>
+      <div class="Swift">
+          <p class="aside-title">Swift</p>
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">getLocationUpdate</span>() {</code></li>
+            <li><code class="code-voice">    <span class="c">// Create a location manager object</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span> = <span class="vc">CLLocationManager</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Set the delegate</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">delegate</span> = <span class="kt">self</span></code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Request location authorization</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">requestWhenInUseAuthorization</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Set an accuracy level. The higher, the better for energy.</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">desiredAccuracy</span> = <span class="vc">kCLLocationAccuracyThreeKilometers</span></code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Start location updates</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">startUpdatingLocation</span>()</code></li>
+            <li><code class="code-voice">}</code></li>
+        </ol>
+      </div>
+  </div>
+</section>
+  
+</section>
+<section class="section">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW6"></a>
+  <h3 class="section-name" tabindex="0">Stop Location Updates if Accuracy Doesn’t Match Expectations</h3>
+  <p class="para">
+  If your app isn’t receiving updates with the expected level of accuracy, your app should examine the updates it is receiving and determine whether accuracy is improving or staying about the same over time. If accuracy isn’t improving, it’s possible that the desired level of accuracy simply isn’t available at the moment. In this case, stop location updates and try again later so your app doesn’t continuously cause location hardware to draw power.
+</p>
+  
+</section>
+<section class="section">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW7"></a>
+  <h3 class="section-name" tabindex="0">Auto-Pause and Specify an Activity Type When Receiving Location Updates in the Background</h3>
+  <p class="para">
+  If your iOS app must continue monitoring location while it’s in the background, enable background mode in the Xcode Project &gt; Capabilities pane. Select the checkbox for Location updates, as shown in <span class="x-name-no-link">Figure 14-1</span>.
+</p><figure class="figure">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW10"></a>
+  <span class="caption"><strong class="caption-number">Figure 14-1</strong>Enabling background location updates in an app</span>
+  <img src="Art/xcode_project_capabilities_backgroundmodes_locationupdates_2x.png" alt="image: ../Art/xcode_project_capabilities_backgroundmodes_locationupdates_2x.png" width="500" height="351" />
+</figure><p class="para">
+  In iOS 9 and later, regardless of deployment target, you must also set the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanager/1620568-allowsbackgroundlocationupdates" class="urlLink">allowsBackgroundLocationUpdates</a></code> property of the location manager object to <code class="k-constant-name code-voice Objective-C">YES</code><code class="k-constant-name code-voice Swift">true</code> in order to receive background location updates. By default, this property is <code class="k-constant-name code-voice Objective-C">NO</code><code class="k-constant-name code-voice Swift">false</code>, and it should remain this way until a time when your app actively requires background location updates.
+</p><p class="para">
+  Make sure the location manager object’s <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanager/1620553-pauseslocationupdatesautomatical" class="urlLink">pausesLocationUpdatesAutomatically</a></code> property is set to <code class="k-constant-name code-voice Objective-C">YES</code><code class="k-constant-name code-voice Swift">true</code> to help conserve power.
+</p><p class="para">
+  Set the <code class="code-voice">activityType</code> property to let Core Location know what type of location activity your app is performing at a given time—for example, if your app is performing fitness tracking or automotive navigation. See <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/clactivitytype" class="urlLink">CLActivityType</a></code> for a list of activity types.
+</p><p class="para">
+  Specifying these settings helps the location manager determine the most appropriate time to perform location updates. For example, background location updates may be auto-paused if the system determines that the user isn’t moving.
+</p><p class="para">
+  See <span class="x-name-no-link">Listing 14-4</span>.
+</p><div class="important clear">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-DontLinkElementID_6"></a>
+  <aside class="aside">
+    <p class="aside-title">Important
+    </p>
+    <p class="para">Don’t forget to call the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanager/1423695-stopupdatinglocation" class="urlLink">stopUpdatingLocation</a></code> method of the location manager object when location updates are no longer needed—even if you’ve enabled auto-pause.
+    </p>
+    
+  </aside>
+</div><section class="code-listing">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW17"></a>
+    <span class="caption"><strong class="caption-number">Listing 14-4</strong>Enabling auto-pause and classifying activity type for background location updates</span>
+  <div class="code-sample">
+      <div class="Objective-C">
+          <p class="aside-title">Objective-C</p>
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">startBackgroundLocationUpdates</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Create a location manager object</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CLLocationManager</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Set the delegate</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Request location authorization</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">requestWhenInUseAuthorization</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Set an accuracy level. The higher, the better for energy.</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">desiredAccuracy</span> <span class="o">=</span> <span class="n">kCLLocationAccuracyThreeKilometers</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Enable automatic pausing</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">pausesLocationUpdatesAutomatically</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Specify the type of activity your app is currently performing</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">activityType</span> <span class="o">=</span> <span class="n">CLActivityTypeFitness</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Enable background location updates</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">allowsBackgroundLocationUpdates</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Start location updates</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">startUpdatingLocation</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">locationManager:</span><span class="p">(</span><span class="n">CLLocationManager</span> <span class="o">*</span><span class="p">)</span><span class="n">manager</span>
+</code></li>
+            <li><code class="code-voice">    <span class="nl">didUpdateLocations:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="n">locations</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Perform location-based activity</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">...</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Stop location updates when they aren&#39;t needed anymore</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">stopUpdatingLocation</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Disable background location updates when they aren&#39;t needed anymore</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">allowsBackgroundLocationUpdates</span> <span class="o">=</span> <span class="n">NO</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+        </ol>
+      </div>
+      <div class="Swift">
+          <p class="aside-title">Swift</p>
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">startBackgroundLocationUpdates</span>() {</code></li>
+            <li><code class="code-voice">    <span class="c">// Create a location manager object</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span> = <span class="vc">CLLocationManager</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Set the delegate</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">delegate</span> = <span class="kt">self</span></code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Request location authorization</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">requestWhenInUseAuthorization</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Set an accuracy level. The higher, the better for energy.</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">desiredAccuracy</span> = <span class="vc">kCLLocationAccuracyThreeKilometers</span></code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Enable automatic pausing</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">pausesLocationUpdatesAutomatically</span> = <span class="kt">true</span></code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Specify the type of activity your app is currently performing</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">activityType</span> = <span class="vc">CLActivityTypeFitness</span></code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Enable background location updates</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">allowsBackgroundLocationUpdates</span> = <span class="kt">true</span></code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Start location updates</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">startUpdatingLocation</span>()</code></li>
+            <li><code class="code-voice">}</code></li>
+            <li><code class="code-voice"> </code></li>
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">locationManager</span>(<span class="vc">manager</span>: <span class="n"><!-- a href="" -->CLLocationManager<!-- /a --></span>, <span class="vc">didUpdateLocations</span> <span class="vc">locations</span>: [<span class="n"><!-- a href="" -->CLLocation<!-- /a --></span>]) {</code></li>
+            <li><code class="code-voice">    <span class="c">// Perform location-based activity</span></code></li>
+            <li><code class="code-voice">    ...</code></li>
+            <li><code class="code-voice">        </code></li>
+            <li><code class="code-voice">        <span class="c">// Stop location updates when they aren&#39;t needed anymore</span></code></li>
+            <li><code class="code-voice">        <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">stopUpdatingLocation</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Disable background location updates when they aren&#39;t needed anymore</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">allowsBackgroundLocationUpdates</span> = <span class="kt">false</span></code></li>
+            <li><code class="code-voice">}</code></li>
+        </ol>
+      </div>
+  </div>
+</section>
+  
+</section>
+<section class="section">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW8"></a>
+  <h3 class="section-name" tabindex="0">Defer Location Updates When Running in the Background</h3>
+  <p class="para">
+  On supported devices with GPS hardware, you can let the location manager defer the delivery of location updates when your app is in the background. For example, a fitness app that tracks the user’s location on a hiking trail can defer updates until the user has moved a certain distance or a certain period of time has elapsed. Then, it can process the updates all at once. You can use <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanager/1423830-deferredlocationupdatesavailable" class="urlLink">deferredLocationUpdatesAvailable</a></code> to determine if a device supports deferred location updates.
+</p><p class="para">
+  To defer updates, call the location manager object’s <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanager/1620547-allowdeferredlocationupdatesunti" class="urlLink">allowDeferredLocationUpdatesUntilTraveled:timeout:</a></code> method and pass it a distance and time that may elapse before the next location update is received. This method is typically called in the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate/1423615-locationmanager" class="urlLink">locationManager:didUpdateLocations:</a></code> delegate method in order to defer again, if appropriate, when a deferred location update is received.
+</p><p class="para">
+  When a deferred location update is received, the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate/1423537-locationmanager" class="urlLink">locationManager:didFinishDeferredUpdatesWithError:</a></code> delegate method is also called, and your app can use this as an opportunity to adjust behavior accordingly—such as increasing or decreasing the deferral distance and time—for the next update. See <span class="x-name-no-link">Listing 14-5</span>.
+</p><section class="code-listing">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW18"></a>
+    <span class="caption"><strong class="caption-number">Listing 14-5</strong>Deferring background location updates based on distance and time</span>
+  <div class="code-sample">
+      <div class="Objective-C">
+          <p class="aside-title">Objective-C</p>
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">startHikeLocationUpdates</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Create a location manager object</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CLLocationManager</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Set the delegate</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Request location authorization</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">requestWhenInUseAuthorization</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Specify the type of activity your app is currently performing</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">activityType</span> <span class="o">=</span> <span class="n">CLActivityTypeFitness</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Start location updates</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">startUpdatingLocation</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">locationManager:</span><span class="p">(</span><span class="n">CLLocationManager</span> <span class="o">*</span><span class="p">)</span><span class="n">manager</span>
+</code></li>
+            <li><code class="code-voice">    <span class="nl">didUpdateLocations:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="n">locations</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Add the new locations to the hike</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">hike</span> <span class="nl">addLocations:</span><span class="n">locations</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Defer updates until the user hikes a certain distance or a period of time has passed</span>
+</code></li>
+            <li><code class="code-voice">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">self</span><span class="p">.</span><span class="n">deferringUpdates</span><span class="p">)</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">    <span class="n">CLLocationDistance</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">hike</span><span class="p">.</span><span class="n">goal</span> <span class="o">-</span> <span class="n">self</span><span class="p">.</span><span class="n">hike</span><span class="p">.</span><span class="n">distance</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice">    <span class="n">NSTimeInterval</span> <span class="n">time</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">nextUpdate</span> <span class="n">timeIntervalSinceNow</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice">    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="nl">allowDeferredLocationUpdatesUntilTraveled:</span><span class="n">distance</span> <span class="nl">timeout:</span><span class="n">time</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice">    <span class="n">self</span><span class="p">.</span><span class="n">deferringUpdates</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">}</span> <span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">locationManager:</span><span class="p">(</span><span class="n">CLLocationManager</span> <span class="o">*</span><span class="p">)</span><span class="n">manager</span>
+</code></li>
+            <li><code class="code-voice">    <span class="nl">didFinishDeferredUpdatesWithError:</span><span class="p">(</span><span class="n">NSError</span> <span class="o">*</span><span class="p">)</span><span class="n">error</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Stop deferring updates</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">deferringUpdates</span> <span class="o">=</span> <span class="n">NO</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Adjust for the next goal</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+        </ol>
+      </div>
+      <div class="Swift">
+          <p class="aside-title">Swift</p>
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">startHikeLocationUpdates</span>() {</code></li>
+            <li><code class="code-voice">    <span class="c">// Create a location manager object</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span> = <span class="vc">CLLocationManager</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Set the delegate</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">delegate</span> = <span class="kt">self</span></code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Request location authorization</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">requestWhenInUseAuthorization</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Specify the type of activity your app is currently performing</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">activityType</span> = <span class="vc">CLActivityTypeFitness</span></code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Start location updates</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">startUpdatingLocation</span>()</code></li>
+            <li><code class="code-voice">}</code></li>
+            <li><code class="code-voice"> </code></li>
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">locationManager</span>(<span class="vc">manager</span>: <span class="n"><!-- a href="" -->CLLocationManager<!-- /a --></span>, <span class="vc">didUpdateLocations</span> <span class="vc">locations</span>: [<span class="n"><!-- a href="" -->CLLocation<!-- /a --></span>]) {</code></li>
+            <li><code class="code-voice">    <span class="c">// Add the new locations to the hike</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">hike</span>.<span class="vc">addLocations</span>(<span class="vc">locations</span>)</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Defer updates until the user hikes a certain distance or a period of time has passed</span></code></li>
+            <li><code class="code-voice">    <span class="kt">if</span> (!<span class="vc">deferringUpdates</span>) {</code></li>
+            <li><code class="code-voice">        <span class="vc">distance</span>: <span class="vc">CLLocationDistance</span> = <span class="vc">hike</span>.<span class="vc">goal</span> - <span class="vc">hike</span>.<span class="vc">distance</span></code></li>
+            <li><code class="code-voice">        <span class="vc">time</span>: <span class="vc">NSTimeInterval</span> = <span class="vc">nextUpdate</span>.<span class="vc">timeIntervalSinceNow</span>()</code></li>
+            <li><code class="code-voice">        <span class="vc">locationManager</span>.<span class="vc">allowDeferredLocationUpdatesUntilTraveled</span>(<span class="vc">distance</span>, <span class="vc">timeout</span>:<span class="vc">time</span>)</code></li>
+            <li><code class="code-voice">        <span class="vc">deferringUpdates</span> = <span class="kt">true</span>;</code></li>
+            <li><code class="code-voice">    } }</code></li>
+            <li><code class="code-voice"> </code></li>
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">locationManager</span>(<span class="vc">manager</span>: <span class="n"><!-- a href="" -->CLLocationManager<!-- /a --></span>, <span class="vc">didFinishDeferredUpdatesWithError</span> <span class="vc">error</span>: <span class="n"><!-- a href="" -->NSError<!-- /a --></span>!) {</code></li>
+            <li><code class="code-voice">    <span class="c">// Stop deferring updates</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">deferringUpdates</span> = <span class="kt">false</span></code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Adjust for the next goal</span></code></li>
+            <li><code class="code-voice">}</code></li>
+        </ol>
+      </div>
+  </div>
+</section>
+  
+</section>
+<section class="section">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW13"></a>
+  <h3 class="section-name" tabindex="0">Restrict Location Updates to Specific Regions or Locations</h3>
+  <p class="para">
+  Some apps don’t need to receive continuous location updates, and just need to know when the user is within a certain distance of a location. For example, a grocery app may display new coupons whenever the user nears the store. There are several Core Location APIs that can keep your app informed.
+</p><div class="note">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW19"></a>
+  <aside class="aside">
+    <p class="aside-title">Note
+    </p>
+    	<p class="para">The monitoring techniques described below provide entry and exit notifications only. To determine the user’s actual location when a notification is received, you must call the <code class="code-voice">requestLocation:</code> or <code class="code-voice">startUpdatingLocation:</code> method of the location manager object. These monitoring techniques also require an authorization status of <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/clauthorizationstatus/kclauthorizationstatusauthorizedalways" class="urlLink">kCLAuthorizationStatusAuthorizedAlways</a></code>.
+    	</p>
+    
+  </aside>
+</div>
+  <section class="section">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW20"></a>
+  <h3 class="section-name" tabindex="0">Region and Beacon Monitoring</h3>
+  <p class="para">
+  Core Location provides two methods for detecting a user’s entry to and exit from specific regions.
+</p><ul class="list-bullet">
+  <li class="item"><p class="para">
+  Geographical region monitoring provides entry and exit notifications for a specified location on the Earth.
+</p>
+</li><li class="item"><p class="para">
+  Beacon monitoring provides entry and exit notifications when the user is within range of low-powered Bluetooth devices that are advertising iBeacon information.
+</p>
+</li>
+</ul><p class="para">
+  For detailed information on using these techniques, see <a href="../../../UserExperience/Conceptual/LocationAwarenessPG/RegionMonitoring/RegionMonitoring.html#//apple_ref/doc/uid/TP40009497-CH9" data-renderer-version="1" target="_self">Region Monitoring and iBeacon</a> in <em class="u-book"><a href="../../../UserExperience/Conceptual/LocationAwarenessPG/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009497" data-renderer-version="1" target="_self">Location and Maps Programming Guide</a></em>.
+</p>
+  
+</section>
+<section class="section">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW21"></a>
+  <h3 class="section-name" tabindex="0">Visit Monitoring</h3>
+  <p class="para">
+  Visit monitoring allows an app to receive entry and exit notifications for specific locations the user visits frequently or for long periods of time such as home, work, or a favorite coffee shop.
+</p><p class="para">
+  To begin monitoring for visits, assign a delegate to the location manager object and call its <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanager/1618692-startmonitoringvisits" class="urlLink">startMonitoringVisits</a></code> method. Note that calling this method enables <em>all</em> visit updates in your app, not just ones for the current delegate. When enabled, visit events are delivered to the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate/1621529-locationmanager" class="urlLink">locationManager:didVisit:</a></code> method of the delegate. If your app isn’t running when a visit event is delivered, your app is relaunched automatically. When visit location updates are no longer required, call <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanager/1618693-stopmonitoringvisits" class="urlLink">stopMonitoringVisits</a></code>, as shown in <span class="x-name-no-link">Listing 14-6</span>.
+</p><section class="code-listing">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW22"></a>
+    <span class="caption"><strong class="caption-number">Listing 14-6</strong>Using visit monitoring to receive updates tied to a specific location</span>
+  <div class="code-sample">
+      <div class="Objective-C">
+          <p class="aside-title">Objective-C</p>
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">startVisitMonitoring</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Create a location manager object</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CLLocationManager</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Set the delegate</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Request location authorization</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">requestAlwaysAuthorization</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Start monitoring for visits</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">startMonitoringVisits</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">stopVisitMonitoring</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">stopMonitoringVisits</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">locationManager:</span><span class="p">(</span><span class="n">CLLocationManager</span> <span class="o">*</span><span class="p">)</span><span class="n">manager</span> <span class="nl">didVisit:</span><span class="p">(</span><span class="n">CLVisit</span> <span class="o">*</span><span class="p">)</span><span class="n">visit</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">    <span class="c1">// Perform location-based activity</span>
+</code></li>
+            <li><code class="code-voice">    <span class="p">...</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+        </ol>
+      </div>
+      <div class="Swift">
+          <p class="aside-title">Swift</p>
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">startVisitMonitoring</span>() {</code></li>
+            <li><code class="code-voice">    <span class="c">// Create a location manager object</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span> = <span class="vc">CLLocationManager</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Set the delegate</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">delegate</span> = <span class="kt">self</span></code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Request location authorization</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">requestAlwaysAuthorization</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Start monitoring for visits</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">startMonitoringVisits</span>()</code></li>
+            <li><code class="code-voice">}</code></li>
+            <li><code class="code-voice"> </code></li>
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">stopVisitMonitoring</span>() {</code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">stopMonitoringVisits</span>()</code></li>
+            <li><code class="code-voice">}</code></li>
+            <li><code class="code-voice"> </code></li>
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">locationManager</span>(<span class="vc">manager</span>: <span class="n"><!-- a href="" -->CLLocationManager<!-- /a --></span>, <span class="vc">didVisit</span> <span class="vc">visit</span>: <span class="n"><!-- a href="" -->CLVisit<!-- /a --></span>!) {</code></li>
+            <li><code class="code-voice">    <span class="c">// Perform location-based activity</span></code></li>
+            <li><code class="code-voice">    ...</code></li>
+            <li><code class="code-voice">}</code></li>
+        </ol>
+      </div>
+  </div>
+</section>
+  
+</section>
+
+</section>
+<section class="section">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW4"></a>
+  <h3 class="section-name" tabindex="0">Register for Significant-Change Location Updates Only as a Last Resort</h3>
+  <p class="para">
+  If GPS-level accuracy isn’t critical for your app, you don’t need continuous tracking, and region or visit monitoring isn’t more appropriate for your app, you can use the significant-change location service instead of the standard one.
+</p><div class="important clear">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-DontLinkElementID_7"></a>
+  <aside class="aside">
+    <p class="aside-title">Important
+    </p>
+    <p class="para">Region and visit monitoring are sufficient for most use cases and should always be considered before significant-change location updates. Significant-change location updates run continuously, around the clock, until you stop them, and can actually result in higher energy use if not employed effectively.
+    </p>
+    
+  </aside>
+</div><p class="para">
+  To start significant-change location updates, call the <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanager/1423531-startmonitoringsignificantlocati" class="urlLink">startMonitoringSignificantLocationChanges</a></code> method of the location manager object. When you’re done, call <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/cllocationmanager/1423679-stopmonitoringsignificantlocatio" class="urlLink">stopMonitoringSignificantLocationChanges</a></code>, as shown in <span class="x-name-no-link">Listing 14-7</span>.
+</p><div class="note">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW23"></a>
+  <aside class="aside">
+    <p class="aside-title">Note
+    </p>
+    	<p class="para">Significant-change location updates require an authorization status of <code class="code-voice u-api"><a href="https://developer.apple.com/documentation/corelocation/clauthorizationstatus/kclauthorizationstatusauthorizedalways" class="urlLink">kCLAuthorizationStatusAuthorizedAlways</a></code>.
+    	</p>
+    
+  </aside>
+</div><section class="code-listing">
+  <a name="//apple_ref/doc/uid/TP40015243-CH24-SW16"></a>
+    <span class="caption"><strong class="caption-number">Listing 14-7</strong>Requesting significant-change location updates</span>
+  <div class="code-sample">
+      <div class="Objective-C">
+          <p class="aside-title">Objective-C</p>
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">startSignificantChangeLocationUpdates</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Create a location manager object</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="o">=</span> <span class="p">[[</span><span class="n">CLLocationManager</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Set the delegate</span>
+</code></li>
+            <li><code class="code-voice">  <span class="n">self</span><span class="p">.</span><span class="n">locationManager</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Request location authorization</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">requestAlwaysAuthorization</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Start significant-change location updates</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">startMonitoringSignificantLocationChanges</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice"><span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">locationManager:</span><span class="p">(</span><span class="n">CLLocationManager</span> <span class="o">*</span><span class="p">)</span><span class="n">manager</span> <span class="nl">didUpdateLocations:</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="p">)</span><span class="n">locations</span> <span class="p">{</span>
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Perform location-based activity</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">...</span>
+</code></li>
+            <li><code class="code-voice"> 
+</code></li>
+            <li><code class="code-voice">  <span class="c1">// Stop significant-change location updates when they aren&#39;t needed anymore</span>
+</code></li>
+            <li><code class="code-voice">  <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">locationManager</span> <span class="n">stopMonitoringSignificantLocationChanges</span><span class="p">];</span>
+</code></li>
+            <li><code class="code-voice"><span class="p">}</span>
+</code></li>
+        </ol>
+      </div>
+      <div class="Swift">
+          <p class="aside-title">Swift</p>
+        <ol class="code-lines">
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">startSignificantChangeLocationUpdates</span>() {</code></li>
+            <li><code class="code-voice">    <span class="c">// Create a location manager object</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span> = <span class="vc">CLLocationManager</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Set the delegate</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">delegate</span> = <span class="kt">self</span></code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Request location authorization</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">requestAlwaysAuthorization</span>()</code></li>
+            <li><code class="code-voice">    </code></li>
+            <li><code class="code-voice">    <span class="c">// Start significant-change location updates</span></code></li>
+            <li><code class="code-voice">    <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">startMonitoringSignificantLocationChanges</span>()</code></li>
+            <li><code class="code-voice">}</code></li>
+            <li><code class="code-voice"> </code></li>
+            <li><code class="code-voice"><span class="kt">func</span> <span class="vc">locationManager</span>(<span class="vc">manager</span>: <span class="n"><!-- a href="" -->CLLocationManager<!-- /a --></span>, <span class="vc">didFinishDeferredUpdatesWithError</span> <span class="vc">error</span>: <span class="n"><!-- a href="" -->NSError<!-- /a --></span>!) {</code></li>
+            <li><code class="code-voice">    <span class="c">// Perform location-based activity</span></code></li>
+            <li><code class="code-voice">    ...</code></li>
+            <li><code class="code-voice">        </code></li>
+            <li><code class="code-voice">        <span class="c">// Stop significant-change location updates when they aren&#39;t needed anymore</span></code></li>
+            <li><code class="code-voice">        <span class="kt">self</span>.<span class="vc">locationManager</span>.<span class="vc">stopMonitoringSignificantLocationChanges</span>()</code></li>
+            <li><code class="code-voice">}</code></li>
+        </ol>
+      </div>
+  </div>
+</section>
+  
+</section>
+
+  	
+ 	<section id="next_previous" class="">
+    		<p class="previous-link"><a href="HideControlsInFullScreenVideo.html#//apple_ref/doc/uid/TP40015243-CH20-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH20-SW1">Restrict UI When Playing Full-Screen Video</a></p>
+  			<p class="next-link"><a href="MotionBestPractices.html#//apple_ref/doc/uid/TP40015243-CH38-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH38-SW1">Reduce the Frequency of Motion Updates</a></p>
+
+    <p class="copyright">Copyright &#x00a9; 2018 Apple Inc. All rights reserved. 
+  <a class="link" href="http://www.apple.com/legal/terms/site.html" target="_blank" rel="external">Terms of Use</a> | 
+  <a class="link" href="http://www.apple.com/privacy/" target="_blank" rel="external">Privacy Policy</a> | 
+  <a href="RevisionHistory.html#//apple_ref/doc/uid/TP40015243-CH99-SW1" data-renderer-version="2" data-id="//apple_ref/doc/uid/TP40015243-CH99-SW1">Updated: 2016-09-13</a>
+</p>
+  </section>
+</article>
+
+    </div>
+    <div id='big_button'></div>
+    <footer id="footer">
+  <script src="../../../../Resources/1282/JavaScript/devpubs-1.6.3.js" type="text/javascript" charset="utf-8"></script>
+  <div id="_omniture_top">
+<!-- SiteCatalyst code version: H.8. Copyright 1997-2006 Omniture, Inc. -->
+<script type="text/javascript">
+/* RSID: */
+var s_account="awdappledeveloper"
+</script>
+
+<script type="text/javascript" src="https://developer.apple.com/assets/metrics/scripts/analytics.js"></script>
+<script type="text/javascript">
+s.channel="www.documentationarchive.developer"
+
+/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+var s_code=s.t();if(s_code)document.write(s_code)</script>
+<!-- End SiteCatalyst code version: H.8. -->
+</div>
+
+</footer>
+
+    
+  </body>
+    <div id="blackout">
+    <div id="preload"></div>
+</div>
+<div id="modal" aria-hidden="true">
+    <div id="closebox" tabindex="0" aria-label="Close feedback form" role="button"></div>
+    <div id="sending" class="hidden">
+        <h2 tabindex="0">Sending feedback&hellip;</h2>
+        <div id="sending_img"></div>
+    </div>
+    <div id="error" class="hidden">
+        <h2 tabindex="0">We&rsquo;re sorry, an error has occurred.</h2>
+        <p>Please try submitting your feedback later.</p>
+        <div id="error_icon"></div>
+    </div>
+    <div id="success" class="hidden">
+        <h2 tabindex="0">Thank you for providing feedback!</h2>
+        <p>Your input helps improve our developer documentation.</p>
+        <div id="thank_you_icon"></div>
+    </div>
+    
+    <form id="feedback" action="#" method="post">
+        <div class="left-leaf">
+            <h2 id="helpful_title" data-asterisk="a1" tabindex="0">How helpful is this document?</h2>     
+            <sup id="a1" class="asterisk" aria-hidden="true">*</sup>
+
+            <div id="star_group" role="radiogroup" aria-required="true">
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="1" /> 
+                    Very helpful
+                </label>
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="2" /> 
+                    Somewhat helpful
+                </label>
+                <label>
+                    <input class="radio" type="radio" name="helped" value="3" /> 
+                    Not helpful
+                </label>
+            </div>
+        </div>
+        <div class="right-leaf">
+            <h2>How can we improve this document?</h2>
+            <div id="improve" class="checkboxes">
+                <label>
+                    <input type="checkbox" name="typo" /> 
+                    Fix typos or links
+                </label>
+                <label>
+                    <input type="checkbox" name="infoIncorrect" /> 
+                    Fix incorrect information
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_examples" /> 
+                    Add or update code samples
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_art" /> 
+                    Add or update illustrations
+                </label>
+                <label>
+                    <input type="checkbox" name="missingInfo" /> 
+                    Add information about...
+                </label>
+            </div>
+        </div>
+
+        <textarea id="comment" name="problem" cols="70" rows="8" placeholder="Please tell us more about your experience with this document" data-asterisk="a2" required></textarea>
+        <sup id="a2" class="asterisk" aria-hidden="true">*</sup>
+
+        <p class="fineprint">
+            <em aria-hidden="true"><span>*</span> Required information</em>
+        </p> 
+
+        <input id="submit" type="button" value="Send" />
+
+        <section id="legal">
+            <p>
+                To submit a product bug or enhancement request, please visit the 
+                <a href="https://developer.apple.com/bugreporter/" target="_blank">Bug Reporter</a> 
+                page.
+            </p>
+            <p>
+                Please read <a href="http://www.apple.com/legal/policies/ideas.html" target="_blank">Apple's Unsolicited Idea Submission Policy</a> 
+                before you send us your feedback.
+            </p> 
+        </section>
+    </form>
+</div>
+
+</div>
+</html>

@@ -54,3 +54,25 @@ Zaten depoda: Head 2013 (SMS etkisi zamanla azalır), Bell 2023 (yeni mesaj etki
 - Aynı anda birden çok bildirim yerine **tek bildirimde birleştirme**: doğrudan RKÇ bulunamadı (bkz. Bulunamayanlar); kesinti maliyeti laboratuvarda gösterildi (Stothart 2015). Birleştirme kuralı gerekçesi: kesinti sayısını azaltmak — **VARSAYIM**.
 - Susturma/kaldırma oranı için PubMed'de sayı bulunamadı; ürün içinde ölçülmeli (susturma, "sonra" ve izin geri alma oranı).
 - Sesli (Nef sesi) bildirim, sessiz bildirime göre daha fazla kesinti demektir; ses varsayılan olarak **iOS ses ayarına** bırakılır, zorlanmaz.
+
+---
+
+## C. Gece bildirimleri, yatak odasında telefon, akşam hareketi ve uyku
+
+Zaten depoda: Ishak 2026 (kesitsel, 402 öğrenci; gece bildirimi anlamlı yordayıcı değil, p=0,068).
+
+| Kaynak | PMID | DOI | Tür | n | Bulgu | Sınır |
+|---|---|---|---|---|---|---|
+| Carter 2016, JAMA Pediatr | 27802500 | 10.1001/jamapediatrics.2016.2341 | SD + MA | 20 kesitsel çalışma, 125.198 çocuk (ort. yaş 14,5) | Yatarken taşınabilir cihaz kullanımı yetersiz uyku süresiyle (OR 2,17), kötü uyku kalitesiyle (OR 1,46) ve gündüz aşırı uykululukla (OR 2,72) ilişkili. Cihaza **yalnız erişimi olup kullanmayanlarda** da yetersiz uyku OR 1,79. | Hepsi kesitsel; çocuk-ergen; I² %50–90. |
+| Van den Bulck 2007, Sleep | 17910394 | 10.1093/sleep/30.9.1220 | Prospektif kohort, 1 yıl | 1.656 ergen | Işık söndükten sonra telefonu haftada birden çok kullananlarda 1 yıl sonra "çok yorgun" olma olasılığı 5,1 kat (%95 GA 2,5–10,4); 00:00–03:00 arası kullanımda 3,9 kat. | Öz-bildirim; ergen; eski (SMS dönemi). |
+| Thomée 2011, BMC Public Health | 21281471 | 10.1186/1471-2458-11-66 | Prospektif kohort, 1 yıl | 4.156 genç yetişkin (20–24 yaş) | "Gece telefonla uyandırılma" değişkeni ruh sağlığı sonuçlarıyla kesitsel olarak ilişkili; ileriye dönük analizde yüksek telefon kullanımı erkeklerde uyku bozukluğuyla ilişkili. | Öz-bildirim; gece uyandırılmanın tek başına ileriye dönük etkisi özette ayrıca verilmemiş. |
+| Exelmans 2016, Soc Sci Med | 26688552 | 10.1016/j.socscimed.2015.11.037 | Kesitsel anket | 844 yetişkin (18–94 yaş) | 10 kişiden 6'sı telefonu yatak odasına götürüyor. Işık söndükten sonra mesaj/arama, PSQI'de daha uzun uykuya dalma, daha düşük uyku verimi ve daha fazla uyku bölünmesiyle ilişkili. | Kesitsel, öz-bildirim. |
+| Brautsch 2023, Sleep Med Rev | 36638702 | 10.1016/j.smrv.2022.101742 | SD (anlatısal), gözlemsel çalışmalar | 42 orta-yüksek kaliteli çalışma (16–25 yaş) | Telefonun gece kullanımı daha geç yatma ve gündüz yorgunluğu ile ilişkili; çoğu çalışma gece kullanımını kötü uyku ile ilişkilendirdi. | Nedensellik yönü belirsiz; meta-analiz yok. |
+| Brosnan 2024, JAMA Pediatr | 39226046 | 10.1001/jamapediatrics.2024.2914 | Tekrarlı ölçümlü kohort, kamera + ivmeölçer | 79 genç (11–14 yaş), 4 gece | Yatmadan önceki 2 saatteki ekran süresi o geceki uyku süresiyle çoğunlukla ilişkisizdi; ama **yatakta** her 10 dk ek ekran, uykuyu 3 dk kısalttı; etkileşimli kullanım uykuya dalmayı geciktirdi. | Küçük örneklem; genç; nesnel ölçüm güçlü yanı. |
+| Stutz 2019, Sports Med | 30374942 | 10.1007/s40279-018-1015-0 | SD + MA | 23 çalışma (sağlıklı yetişkin, tek seans) | Akşam egzersizi uykuyu genel olarak bozmadı (derin uyku +1,3 yüzde puan). Yalnız yatmadan **≤1 saat önce biten şiddetli** egzersizden sonra uykuya dalma ve uyku verimi bozulabilir. | Tek seans; laboratuvar; hafif kalkma molası ayrı incelenmemiş. |
+| Frimpong 2021, Sleep Med Rev | 34416428 | 10.1016/j.smrv.2021.101535 | SD + MA | 15 çalışma, 194 kişi | Yatmadan 0,5–4 saat önce biten yüksek şiddetli egzersiz REM'i %2,34 azalttı, başka uyku ölçüsünü değiştirmedi; 2–4 saat önce yapılan uykuyu bozmadı. | İyi uyuyan genç-orta yaşlı; küçük örneklemler. |
+
+**Bizim için sonuç**
+- Gece bildirimine karşı en güçlü dayanak hâlâ **gözlemsel**: yatakta telefon kullanımı ve gece telefonla uyanma, kötü uyku ve yorgunlukla ilişkili (Carter 2016, Van den Bulck 2007, Exelmans 2016, Brosnan 2024). Gece bildiriminin tek başına uykuyu bozduğunu gösteren RKÇ bulunamadı. "Gece bildirim yok" kuralı: kanıt yönü tutarlı ama nedensel değil; kural **nezaket + ihtiyat** olarak kalır.
+- "Saat 21'den sonra kalk bildirimi yok": akşam hafif hareketin uykuya zarar verdiğine dair kanıt yok (Stutz 2019, Frimpong 2021; zarar yalnız yatmaya ≤1 saat kala şiddetli egzersizde). Bu yüzden 21:00 sınırının gerekçesi **uyku zararı değil**, oturma molası kanıtının iş saatlerinde toplanmış olması (bkz. D) ve akşam bildiriminin telefonu yatağa taşıması. 21:00 sayısı **VARSAYIM**.
+- Sesli (Nef sesi) bildirim gece asla çalmaz; iOS Uyku/Odak modu aşılmaz (Critical Alert istenmez).
