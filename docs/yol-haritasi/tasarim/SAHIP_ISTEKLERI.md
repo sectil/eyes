@@ -71,3 +71,10 @@ tasarımı, hava/yağmur/ay/konum ve bildirim, 5 sn kuralı). Not (kod, 2026-09-
 (Screen Time API kullanılmıyor; `profileQuestions.js` akşam sorusu "Bugün kaç saat ekrana baktın?"); Apple'ın bunu
 uygulamalara sayı olarak verip vermediği sonsuz yol araştırmasında Apple belgelerinden doğrulanacak. Durdurulan
 araştırma iş akışı: wf_ad0a5157-83f (tamamlanan ajanlar önbellekten sürdürülebilir).
+
+## Sahibin 2026-09-30 kararı
+"sonsuz plana da başla" → SONSUZ_YOL.PLAN.v1 onaylandı; altı karar öneriyle (1 sıra S0 → Y1 … Y6, (f) (d)/(e)'nin önüne;
+2 ölçü kuralı v2; 3 çizilmiş beş yüz; 4 isteyene yaklaşık konum, istemeyene şehir; 5 (a) giriş alt yazısı, (b) site ilk
+ekranı, (c) açılış logosu kalkar, (d) sıfır ve kırık seri gizlenir; 6 Nef paketi v2 ve rıza v2). Hukukçu adı verilmedi →
+plandaki yedek. Kod, onaylı yoga kararı 7 gereği yoga yayınından sonra; şimdi S0 (ekran tasarımları, App Review sorusu
+metni, hukukçu soruları) başlar.

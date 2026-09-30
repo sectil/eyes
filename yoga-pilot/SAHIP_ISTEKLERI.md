@@ -40,3 +40,10 @@ Sonraki aşamaya (metin + ses + tasarım iş akışı) bu dosya olduğu gibi ver
    (4) 3 dk yalnız yedi derste, Ders 2'ye 20 dk, 38/43 sn istisnaları, 3 dk'da 45 sn şafak; (5) yoga durağı ilk yayında,
    (c)'den bağımsız, her gün bir dersin kısa sürümü, Ders 4 ve 7 yolda psikolog yedeğiyle; (6) hepsi pakette, boyut
    Kapı 4'te ölçümle; (7) sonsuz yol araştırması şimdi başlar, yoga üretimiyle birlikte yürür; kodu yoga yayınından sonra.
+
+## Sahibin 2026-09-30 mesajı
+8. "Yoga tamamdır ekleyebilirsin, sonsuz plana da başla" → Kapı 2 kapandı. Sahip sıralama vermedi; orkestratörün seçimi
+   (VARSAYIM, sahip itiraz ederse değişir): **ses3 = Nefona Hoca** (Sr5w7dIZaRDglJ2cLaJm; sahip 29 Eylül'de ses seçimini
+   bırakmıştı), **müzik A = ElevenLabs Music**. Gerekçe: B (Dalga motoru) yatağında ≈ 24 sn'de bir ≈ 20 dB iniş ve 6,8 dB/sn
+   geri çıkış ölçüldü (SPEC §6 sınırı ≤ 1 dB/sn); A'da ölçülmüş kusur yok. Kör anahtar açıldı: ses1 Hakan, ses2 Neslihan,
+   ses3 Nefona Hoca; A ElevenLabs, B Dalga (render/out/_kor_anahtar.json). Sıradaki: B adımı (PLAN.v3 §F).
