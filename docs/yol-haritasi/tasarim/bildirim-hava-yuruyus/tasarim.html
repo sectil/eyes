@@ -52,10 +52,11 @@ a { color: var(--pg-accent); }
 .hero { background: var(--pg-hero); color: var(--pg-hero-ink); padding-block: 28px 36px; }
 .hero-in { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: center; }
 .hero-eyebrow { font: 600 0.72rem/1 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; color: #7fd6df; }
-.hero h1 { font-size: clamp(1.9rem, 4.6vw, 3.3rem); font-weight: 700; line-height: 1.06; letter-spacing: -0.02em; margin-top: 14px; }
+.hero h1 { font-size: clamp(1.7rem, 3.6vw, 2.7rem); font-weight: 700; line-height: 1.06; letter-spacing: -0.02em; margin-top: 14px; }
 .hero h1 em { font-style: normal; color: #ffc05a; }
 .hero-lead { margin-top: 16px; max-width: 34rem; color: #b9c9d6; font-size: 1.02rem; }
 .hero-scenes { display: flex; gap: 18px; }
+.hero-scenes .phone { flex: none; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 .btn-pg { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 999px; font: 600 0.95rem/1 var(--f-body); text-decoration: none; }
 .btn-pg.primary { background: #ffc05a; color: #1a1204; }
@@ -145,7 +146,7 @@ body.w320 .h1-a { font-size: 1.3rem; }
 
 /* Kilit ekranı */
 .lock { background: radial-gradient(120% 70% at 50% 0%, #2b4a6b 0%, #14263a 55%, #0a1420 100%); color: #fff; }
-.t-light .lock { background: radial-gradient(120% 70% at 50% 0%, #9cc3dd 0%, #6f9dc0 50%, #4b7aa3 100%); }
+.lock.t-light { background: radial-gradient(120% 70% at 50% 0%, #9cc3dd 0%, #6f9dc0 50%, #4b7aa3 100%); }
 .lock .sb { color: #fff; }
 .lk-date { text-align: center; font: 600 1.05rem/1 var(--f-body); opacity: 0.92; margin-top: 18px; }
 .lk-time { text-align: center; font: 700 5.4rem/1 var(--f-display); letter-spacing: -0.03em; margin-top: 6px; }
@@ -182,8 +183,8 @@ body.w320 .done-ring { width: 84px; height: 84px; }
   background: linear-gradient(135deg, var(--a-accent-soft), rgba(47,107,234,0.10)); border: 1px solid var(--a-border); }
 .bell { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: var(--a-surface); color: var(--a-accent); box-shadow: var(--a-shadow); }
 .bell .ico { width: 22px; height: 22px; }
-.remind b { display: block; font: 700 1.02rem/1.2 var(--f-body); }
-.remind span { display: block; font-size: 0.84rem; color: var(--a-ink-2); margin-top: 2px; line-height: 1.3; }
+.remind > div b { display: block; font: 700 1.02rem/1.2 var(--f-body); }
+.remind > div span { display: block; font-size: 0.84rem; color: var(--a-ink-2); margin-top: 2px; line-height: 1.3; }
 .remind .go { color: var(--a-accent); }
 .remind.on { background: var(--a-surface); }
 .remind.on .bell { background: var(--a-accent); color: var(--a-accent-ink); }
@@ -225,12 +226,16 @@ body.w320 .hide320 { display: none; }
 .tl-h { display: flex; justify-content: space-between; align-items: baseline; }
 .tl-h b { font: 700 0.95rem/1.2 var(--f-body); }
 .tl-h span { font-size: 0.78rem; color: var(--a-ok); font-weight: 600; }
-.tl-bar { position: relative; height: 54px; }
-.tl-line { position: absolute; left: 0; right: 0; top: 26px; height: 4px; border-radius: 2px; background: var(--a-surface-3); }
-.tl-night { position: absolute; top: 18px; height: 20px; border-radius: 6px; background: repeating-linear-gradient(135deg, var(--a-surface-2) 0 5px, var(--a-surface-3) 5px 10px); }
-.tl-dot { position: absolute; top: 14px; width: 28px; height: 28px; margin-left: -14px; border-radius: 50%; display: grid; place-items: center; background: var(--a-surface); box-shadow: 0 0 0 2px var(--a-accent); color: var(--a-accent); }
-.tl-dot .ico { width: 14px; height: 14px; }
-.tl-dot.w { box-shadow: 0 0 0 2px var(--a-lens); color: var(--a-lens-text); }
+.tl-bar { position: relative; height: 30px; }
+.tl-line { position: absolute; left: 0; right: 0; top: 13px; height: 4px; border-radius: 2px; background: var(--a-surface-3); }
+.tl-night { position: absolute; top: 5px; height: 20px; border-radius: 6px; background: repeating-linear-gradient(135deg, var(--a-surface-2) 0 5px, var(--a-surface-3) 5px 10px); }
+.tl-dot { position: absolute; top: 9px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--a-accent); box-shadow: 0 0 0 3px var(--a-surface); }
+.tl-dot.w { background: var(--a-lens); }
+.tl-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.tl-list span { display: inline-flex; align-items: center; gap: 5px; padding: 5px 8px; border-radius: 9px; background: var(--a-surface-2); font: 500 0.74rem/1 var(--f-body); color: var(--a-ink-2); }
+.tl-list span b { font: 600 0.74rem/1 var(--f-mono); color: var(--a-ink); }
+.tl-list span i { width: 7px; height: 7px; border-radius: 50%; background: var(--a-accent); }
+.tl-list span i.w { background: var(--a-lens); }
 .tl-ax { display: flex; justify-content: space-between; font: 500 0.66rem/1 var(--f-mono); color: var(--a-ink-3); }
 .grp { display: grid; }
 .grp-h { font: 600 0.7rem/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--a-ink-3); padding: 4px 4px 8px; }
@@ -256,12 +261,16 @@ body.w320 .row-a { padding: 9px 10px; gap: 9px; }
 .sky { display: grid; grid-template-columns: 34px minmax(0,1fr) auto; gap: 10px; align-items: center; padding: 10px 12px 10px 10px; border-radius: 18px; background: var(--a-surface); border: 1px solid var(--a-border); }
 .sky-ic { width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; background: rgba(47,107,234,0.12); color: var(--a-rain); }
 .sky-ic .ico { width: 20px; height: 20px; }
-.sky-tx { min-width: 0; font: 500 0.95rem/1.25 var(--f-body); color: var(--a-ink-2); white-space: nowrap; overflow: hidden; }
+.sky-tx { min-width: 0; display: grid; gap: 3px; font: 500 0.95rem/1.2 var(--f-body); color: var(--a-ink-2); }
+.sky-tx > span:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sky-tx b { color: var(--a-ink); font-weight: 700; }
 .sky-tx .deg { font: 700 1.05rem/1 var(--f-display); color: var(--a-ink); }
-.sky-tx .rain { color: var(--a-rain); font-weight: 600; }
-.sky-mark { display: grid; justify-items: end; gap: 2px; font: 600 0.6rem/1 var(--f-body); color: var(--a-ink-3); white-space: nowrap; }
-body.w320 .sky .rainp { display: none; }
+.sky-tx .rain { color: var(--a-rain); font-weight: 600; font-size: 0.86rem; }
+.sky-mark { display: grid; justify-items: end; gap: 4px; font: 600 0.62rem/1 var(--f-body); color: var(--a-ink-3); white-space: nowrap; }
+.sky-mark a { color: var(--a-accent); text-decoration: underline; text-underline-offset: 2px; }
+.sky-tx .il { color: var(--a-ink-2); font-weight: 600; }
+body.w320 .sky .il { display: none; }
+
 .facts { display: grid; gap: 8px; padding-top: 12px; border-top: 1px solid var(--a-border); }
 .fact { display: flex; align-items: center; gap: 8px; font: 500 0.84rem/1.2 var(--f-body); color: var(--a-ink-2); }
 .fact b { font: 600 0.84rem/1 var(--f-mono); color: var(--a-ink); min-width: 30px; }
@@ -297,11 +306,11 @@ body.w320 .wx-deg { font-size: 3.4rem; }
 
 /* Yürüyüş ekranı */
 .walk { background: #000; color: #fff; }
-.t-light .walk { background: #f6f8f9; color: #0b1219; }
+.walk.t-light { background: #f6f8f9; color: #0b1219; }
 .walk .sb { color: inherit; }
 .wk-top { display: flex; justify-content: space-between; align-items: center; font: 600 0.84rem/1 var(--f-body); }
 .wk-top .gps { display: inline-flex; gap: 6px; align-items: center; color: #35d39a; }
-.t-light .walk .gps { color: #13704b; }
+.walk.t-light .gps { color: #13704b; }
 .wk-top .gps i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 .wk-n { display: grid; gap: 2px; }
 .wk-n b { font: 700 3.3rem/0.95 var(--f-display); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
@@ -355,7 +364,9 @@ body.w320 .rb { width: 52px; height: 52px; }
 
 @media (max-width: 860px) {
   .hero-in { grid-template-columns: 1fr; }
-  .hero-scenes { overflow-x: auto; }
+  .hero-scenes { overflow-x: auto; padding-bottom: 6px; }
+  .hero-scenes .phone { --pw: 268px !important; --ph: 500px !important; }
+  .hero-scenes .lk-time { font-size: 4.2rem; }
   .bar-nav { display: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -389,7 +400,7 @@ body.w320 .rb { width: 52px; height: 52px; }
   <symbol id="i-link" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
 </svg>
 
-<header class="hero">
+<header class="hero" lang="tr">
   <div class="wrap hero-in">
     <div>
       <div class="hero-eyebrow">Nefona · Bildirimler, hava, yürüyüş · tasarım 1</div>
@@ -412,7 +423,7 @@ body.w320 .rb { width: 52px; height: 52px; }
             <div class="nt-top"><span>Nefona</span><span>şimdi</span></div>
             <div class="nt-t">Yağmur 21.00'de</div>
             <div class="nt-b">Bugün 21.00–22.00 arası yağmur bekleniyor. Yürüyüşü 21.00'den önce bitirirsen şemsiyeye gerek kalmayabilir.</div>
-            <div class="nt-sci">Apple Weather</div>
+            <div class="nt-sci">Kaynak: Apple Weather</div>
           </div>
         </div>
         <div class="lk-foot"><span></span><span></span></div>
@@ -435,7 +446,7 @@ body.w320 .rb { width: 52px; height: 52px; }
   </div>
 </header>
 
-<nav class="bar" aria-label="Görünüm">
+<nav class="bar" aria-label="Görünüm" lang="tr">
   <div class="wrap bar-in">
     <span class="bar-lbl">Tema</span>
     <div class="seg" role="group" aria-label="Tema">
@@ -454,7 +465,7 @@ body.w320 .rb { width: 52px; height: 52px; }
   </div>
 </nav>
 
-<main class="wrap">
+<main class="wrap" lang="tr">
 
 <!-- ================= 1. BANA HATIRLAT ================= -->
 <section class="sec" id="hatirlat">
@@ -494,7 +505,7 @@ body.w320 .rb { width: 52px; height: 52px; }
   <div class="sec-head">
     <span class="sec-num">4 · Yürüyüş eşliği</span>
     <h2>Yürüdüğünü fark eder, yanında yürür</h2>
-    <p class="sec-lead">Bildirime dokununca Apple Watch'taki gibi dört büyük sayı: süre, şu anki tempo, mesafe, adım. Sesli koç 250 metrede bir tempoyu söyler; aynı cümle ekranda yazar. Bitince adım Apple Sağlık'taki sayıyla kaydedilir.</p>
+    <p class="sec-lead">Bildirime dokununca Apple Watch'taki gibi dört büyük sayı: süre, şu anki tempo, mesafe, adım. Sesli koç 250 metrede bir son 250 metrenin temposunu, her kilometrede o kilometrenin süresini söyler; aynı cümle ekranda yazar. Bitince adım Apple Sağlık'taki sayıyla kaydedilir.</p>
   </div>
   <div class="strip" data-screens="walk"></div>
   <div class="strip" data-screens="coach"></div>
@@ -544,7 +555,7 @@ body.w320 .rb { width: 52px; height: 52px; }
 </section>
 
 </main>
-<footer class="wrap">Tasarım 1 · 30 Eylül 2026 · Plan: docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/PLAN.v1.md · Telefonların renk ve yazı tipleri uygulamanın kendi tokenlarından.</footer>
+<footer class="wrap" lang="tr">Tasarım 1 · 30 Eylül 2026 · Plan: docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/PLAN.v1.md · Telefonların renk ve yazı tipleri uygulamanın kendi tokenlarından.</footer>
 
 <template id="tpl-done">
   <div class="phone">
@@ -594,13 +605,13 @@ body.w320 .rb { width: 52px; height: 52px; }
       <div class="opt sel">
         <div class="opt-h"><span class="radio"></span>Sen karar ver<small>Önerilen</small></div>
         <div class="big-time mono">09.15</div>
-        <div class="why"><span class="nefdot"></span><p>Nefesi genelde 09.30 ile 10.00 arasında yapıyorsun. Biraz önce hatırlatayım; bir hafta sonra yeniden bakarım.</p></div>
+        <div class="why"><span class="nefdot"></span><p>Nefesi genelde 09.30 ile 10.00 arasında yapıyorsun. 09.15'te hatırlatayım; iki hafta sonra yeniden bakarım.</p></div>
       </div>
       <div class="opt">
         <div class="opt-h"><span class="radio"></span>Saatleri ben seçeyim</div>
         <div class="fine">Günde en çok 3 saat.</div>
       </div>
-      <p class="fine hide320">Bazı günler bilerek göndermiyoruz; hatırlatmanın işine yarayıp yaramadığını görmen için.</p>
+      <p class="fine hide320">Bu hatırlatma günde bir kez. Bazı günler bilerek göndermiyoruz; hatırlatmanın işine yarayıp yaramadığını Gelişim'de görmen için.</p>
       <div class="btn-a">Hatırlatmayı aç</div>
     </div>
   </div>
@@ -622,7 +633,7 @@ body.w320 .rb { width: 52px; height: 52px; }
         <div class="chips"><span class="tchip">10.00</span><span class="tchip warn">12.30</span><span class="tchip">18.00</span></div>
         <div class="clash"><p><b>12.30'da Mola hatırlatman var.</b> İkisi aynı anda gelmesin; 13.00'e ne dersin?</p><div class="row"><span class="mini p">13.00'ü seç</span><span class="mini">Tek bildirimde birleştir</span></div></div>
       </div>
-      <p class="fine">Gece 22.00–08.00 arası bildirim göndermiyoruz.</p>
+      <p class="fine">Göz egzersizi hatırlatması 09.00–21.00 arasında gelir.</p>
       <div class="btn-a">Kaydet</div>
     </div>
   </div>
@@ -655,15 +666,16 @@ body.w320 .rb { width: 52px; height: 52px; }
           <div class="tl-line"></div>
           <div class="tl-night" style="left:0;width:11%"></div>
           <div class="tl-night" style="left:89%;width:11%"></div>
-          <span class="tl-dot w" style="left:6%" title="06.10 sabah havası"><svg class="ico"><use href="#i-rain"/></svg></span>
-          <span class="tl-dot" style="left:22%"><svg class="ico"><use href="#i-wave"/></svg></span>
-          <span class="tl-dot" style="left:31%"><svg class="ico"><use href="#i-drop"/></svg></span>
-          <span class="tl-dot" style="left:42%"><svg class="ico"><use href="#i-stand"/></svg></span>
-          <span class="tl-dot" style="left:56%"><svg class="ico"><use href="#i-foot"/></svg></span>
-          <span class="tl-dot" style="left:70%"><svg class="ico"><use href="#i-eye"/></svg></span>
-          <span class="tl-dot" style="left:81%"><svg class="ico"><use href="#i-eye"/></svg></span>
+          <span class="tl-dot w" style="left:6%" title="06.10 sabah havası"></span>
+          <span class="tl-dot" style="left:22%"></span>
+          <span class="tl-dot" style="left:31%"></span>
+          <span class="tl-dot" style="left:42%"></span>
+          <span class="tl-dot" style="left:56%"></span>
+          <span class="tl-dot" style="left:70%"></span>
+          <span class="tl-dot" style="left:81%"></span>
         </div>
         <div class="tl-ax"><span>06</span><span>09</span><span>12</span><span>15</span><span>18</span><span>21</span><span>24</span></div>
+        <div class="tl-list"><span><i class="w"></i><b>06.10</b>hava</span><span><i></i><b>09.15</b>nefes</span><span><i></i><b>11.00</b>su</span><span><i></i><b>12.30</b>mola</span><span><i></i><b>15.00</b>yürüyüş</span><span><i></i><b>18.00</b>göz</span><span><i></i><b>20.00</b>göz</span></div>
         <div class="fine"><svg class="ico" style="width:12px;height:12px;vertical-align:-2px"><use href="#i-moon"/></svg> 22.00–08.00 gece sessiz · alarmın ve ona bağlı sabah havası hariç</div>
       </div>
       <div class="grp">
@@ -695,8 +707,8 @@ body.w320 .rb { width: 52px; height: 52px; }
       </div>
       <div class="sky">
         <span class="sky-ic"><svg class="ico"><use href="#i-rain"/></svg></span>
-        <div class="sky-tx"><b>Gaziemir</b> · <span class="deg">23°</span><span class="rainp"> · <span class="rain">21.00'de yağmur</span></span></div>
-        <span class="sky-mark">Apple Weather<svg class="ico chev" style="width:14px;height:14px"><use href="#i-chev"/></svg></span>
+        <div class="sky-tx"><span><span class="il">İzmir </span><b>Gaziemir</b> · <span class="deg">23°</span></span><span class="rain">21.00'de yağmur bekleniyor</span></div>
+        <span class="sky-mark"><span>Apple Weather</span><a>Veri kaynakları</a></span>
       </div>
       <div class="facts">
         <div class="fact"><svg class="ico" style="color:var(--a-lens-text)"><use href="#i-flame"/></svg><b>6</b>gün seri</div>
@@ -767,7 +779,7 @@ body.w320 .rb { width: 52px; height: 52px; }
         <div class="wk-n"><b>1,94</b><span>km</span></div>
         <div class="wk-n"><b>2.316</b><span>Adım · bu yürüyüş</span></div>
       </div>
-      <div class="cue"><svg class="ico"><use href="#i-voice"/></svg><span>1,75 kilometre. Kilometre başına 9 dakika 40 saniye.</span></div>
+      <div class="cue"><svg class="ico"><use href="#i-voice"/></svg><span>Son 250 metre: kilometrede 9 dakika 40 saniye.</span></div>
       <div class="wk-health">Bugün toplam 7.482 adım · Apple Sağlık</div>
       <div class="wk-btns">
         <span class="rb-l"><span class="rb"><svg class="ico"><use href="#i-pause"/></svg></span>Duraklat</span>
@@ -790,9 +802,9 @@ body.w320 .rb { width: 52px; height: 52px; }
       <div class="checks">
         <div class="ck"><span class="box on"><svg class="ico"><use href="#i-check"/></svg></span>Tempo<small>her zaman</small></div>
         <div class="ck"><span class="box on"><svg class="ico"><use href="#i-check"/></svg></span>Mesafe</div>
-        <div class="ck"><span class="box"></span>Süre</div>
+        <div class="ck"><span class="box"></span>Hoparlörden de söyle<small>kulaklık yokken</small></div>
       </div>
-      <div class="sample"><span class="play"><svg class="ico"><use href="#i-play"/></svg></span><span>"Kilometre başına 9 dakika 40 saniye." · Neslihan</span></div>
+      <div class="sample"><span class="play"><svg class="ico"><use href="#i-play"/></svg></span><span>"Son 250 metre: kilometrede 9 dakika 40 saniye." · Neslihan</span></div>
       <p class="fine">Kulaklık takıyorsan çevreni duyabileceğin bir ses düzeyi seç. Ses Profilim → Seslendirme'den değişir.</p>
     </div>
   </div>
@@ -809,7 +821,7 @@ body.w320 .rb { width: 52px; height: 52px; }
         <span class="sci-h">Bilim ne diyor?</span>
         <p class="sci-f">Bir denemede yürüyüş önerisi sonraki 30 dakikada adımı artırdı; 44 kişi, 6 hafta.</p>
         <div class="sci-meta"><span>Mikro-randomize deneme</span><span>44 kişi</span><span>6 hafta</span></div>
-        <p class="sci-lim">Sınır: etki haftalar içinde azaldı. Kısa süreli adım ölçüldü; sağlık sonucu ölçülmedi.</p>
+        <p class="sci-lim">Sınır: etki haftalar içinde azaldı. Ölçülen yalnız önerinin ardından 30 dakikadaki adımdı.</p>
         <p class="sci-src">Klasnja P. ve ark. Efficacy of Contextually Tailored Suggestions for Physical Activity: A Micro-randomized Optimization Trial of HeartSteps. Ann Behav Med, 2019.</p>
         <div class="sci-links"><span><svg class="ico" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-link"/></svg> PubMed · 30192907</span><span>DOI</span></div>
       </div>
@@ -827,7 +839,7 @@ body.w320 .rb { width: 52px; height: 52px; }
             ['tpl-sheet-manual', 'Saat · Ben seçeyim', 'Günde en çok 3 saat. Çakışma anında söylenir; iki bildirim hiçbir zaman aynı anda gelmez.']],
     reenter: [['tpl-reenter', 'Yeniden giriş', 'Modüle yeniden girince üstte yeşil hap. Dokununca saat sayfası açılır.']],
     notif: [['tpl-notif', 'Profil → Bildirimler', 'Günün çizelgesi, hatırlatmalar, Nef\'in haberleri. Satıra dokununca saat sayfası.']],
-    home: [['tpl-home', 'Ana sayfa · hava satırı', 'Adımların üstünde tek satır. Dokununca hava sayfası. Önbellekte hava yoksa satır görünmez.']],
+    home: [['tpl-home', 'Ana sayfa · hava satırı', 'Adımların üstünde tek satır: il, ilçe, sıcaklık, yağmur saati; sağda Apple Weather ve Veri kaynakları bağlantısı (Apple kuralı). 320 pt\'de il adı düşer, ilçe kısalmaz.']],
     wx: [['tpl-wx', 'Hava sayfası', 'Saat saat sıcaklık ve yağmur olasılığı, Nef\'in yorumu, sabah havası anahtarı, atıf.']],
     walk: [['tpl-lockwalk', 'Yürüyüş sorusu', 'Kilit ekranında. Dokununca yürüyüş ekranı açılır, son 15 dakika yürüyüşe eklenir.'],
            ['tpl-walk', 'Yürüyüş ekranı', 'Dört büyük sayı. Anons anında aynı cümle ekranda. Kilitliyken ölçüm sürer.']],
