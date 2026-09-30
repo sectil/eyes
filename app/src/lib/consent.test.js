@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import { hasConsent, shouldAsk, recordConsent, recordDecline, consentOf, coachAllowed, CONSENT_VERSION, CONSENT_VERSIONS, CONSENTS } from './consent.js'
 
 describe('açık rıza kayıtları', () => {
@@ -71,7 +73,7 @@ describe('rıza başına sürüm', () => {
   // Bildirim sistemi v2'den önce kaydedilmiş izinler: hepsi tek sürüm (1)
   const v1 = ['profileSync', 'health', 'coach', 'coachLife'].reduce((c, k) => recordConsent(c, k, true, now, 1), null)
   it('sürümler anahtar başına; eski tek sürüm geri uyum için 1 kalır', () => {
-    expect(CONSENT_VERSIONS).toEqual({ profileSync: 1, health: 2, coach: 1, coachLife: 1 })
+    expect(CONSENT_VERSIONS).toEqual({ profileSync: 1, health: 2, coach: 1, coachLife: 1, weather: 1 })
     expect(CONSENT_VERSION).toBe(1)
   })
   it('health v1 izni artık yetmez: izin yok sayılır ve yeniden sorulur', () => {
@@ -132,5 +134,34 @@ describe('rıza başına sürüm', () => {
     expect(why).toMatch(/göz çalışmalarınla yan yana/)
     expect(why).toMatch(/adımın düşük olduğu günlerde yürüyüş hatırlatması/)
     expect(why).toMatch(/işine yarayıp yaramadığını bu telefonda sana göstermek/)
+  })
+})
+
+// B2 hava rızası: rizalar-taslak.md `weather` bölümü harfi harfine (sahip onayı 2026-09-30; 2026-10-01 değişiklikleri)
+describe('weather rızası (B2)', () => {
+  const md = readFileSync(fileURLToPath(new URL('../../../docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/rizalar-taslak.md', import.meta.url)), 'utf8')
+  const section = md.split('## `weather`')[1].split('\n## ')[0].replace(/\n {2}/g, ' ')
+  const field = (name) => section.match(new RegExp(`- \\*\\*${name.replace('?', '\\?')}:?\\*\\*:? (.*)`))[1].trim()
+  const w = CONSENTS.weather
+  it('dört başlık: Ne kaydedilir / Ne işe yarar / Nerede durur / Ne kadar kalır', () => {
+    expect(w.facts.map((f) => f[0])).toEqual(['Ne kaydedilir?', 'Ne işe yarar?', 'Nerede durur?', 'Ne kadar kalır?'])
+  })
+  it('başlık, giriş, dört satır ve kutu onaylı metinle harfi harfine aynı', () => {
+    expect(w.title).toBe(field('Başlık'))
+    expect(w.lead).toBe(field('Giriş'))
+    for (const [k, v] of w.facts) expect(v).toBe(field(k))
+    expect(w.check).toBe(field('Kutu'))
+  })
+  it('yurt dışı ve silme kapsamı açıkça yazılı', () => {
+    expect(w.facts[2][1]).toMatch(/yurt dışı/)
+    expect(w.check).toMatch(/yurt dışındaki Apple hava servisine/)
+    expect(w.facts[3][1]).toMatch(/son 90 günün günlük hava özeti/)
+    expect(w.facts[3][1]).toMatch(/il ve ilçe adı, önbellek ve hava özeti silinir/)
+  })
+  it('sürüm 1; verilmemiş rıza yok sayılır', () => {
+    const now = new Date('2026-10-01T09:00:00Z')
+    expect(recordConsent(null, 'weather', true, now).weather.version).toBe(1)
+    expect(hasConsent(null, 'weather')).toBe(false)
+    expect(shouldAsk(null, 'weather')).toBe(true)
   })
 })

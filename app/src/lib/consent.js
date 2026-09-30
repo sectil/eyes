@@ -10,7 +10,8 @@ export const CONSENT_VERSION = 1 // geri uyum: CONSENT_VERSIONS'ta olmayan anaht
 // health 2: "Neden" satırına yürüyüş hatırlatması ve hatırlatmanın işe yarayıp yaramadığını gösterme eklendi.
 // health v1 izni ("yan yana göstermek") okumaya ve göstermeye yeter (App hasConsent(…, 'health', 1)); yürüyüş
 // hatırlatması ve onun ölçümü v2 ister.
-export const CONSENT_VERSIONS = { profileSync: 1, health: 2, coach: 1, coachLife: 1 }
+// weather 1: B2 hava (rizalar-taslak.md, sahip onayı 2026-09-30 ve 2026-10-01 değişiklikleri; harfi harfine).
+export const CONSENT_VERSIONS = { profileSync: 1, health: 2, coach: 1, coachLife: 1, weather: 1 }
 
 const versionOf = (key) => CONSENT_VERSIONS[key] ?? CONSENT_VERSION
 
@@ -78,6 +79,21 @@ export const CONSENTS = {
       ['Ne kadar', 'Sunucumuz içeriği kaydetmez. İznini geri çektiğin an gönderim durur'],
     ],
     check: 'Profil cevaplarımın özetinin (uyku puanı, günlük ekran süresi, gece telefona bakma sıklığı, stres puanı; sağlığa ilişkin veri) de aynı amaçla yurt dışına aktarılmasına açık rıza veriyorum.',
+  },
+// Hava (B2; docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/rizalar-taslak.md `weather`, harfi harfine). Katmanlı rıza
+// sayfasında (screens/SkyConsent.jsx) her satırın ilk cümlesi hep görünür, kalanı dokununca açılır; metin aynıdır.
+// "Ne kadar kalır?"daki silme cümlesi kodda da uygulanır: lib/sky.js enforceWeatherConsent (açılışta).
+// Rıza sayfası her zaman iOS konum izin penceresinden önce gelir (PLAN.v1 §5.5 madde 10).
+  weather: {
+    title: 'Bulunduğun yerin havasını da göstereyim mi?',
+    lead: 'İstersen Ana sayfada hava ve yağmur saatini gösteririm. İzin vermesen de her şey açık kalır; il ve ilçeyi listeden de seçebilirsin.',
+    facts: [
+      ['Ne kaydedilir?', 'Yaklaşık konumun ya da seçtiğin il ve ilçenin merkezi. Telefonda yalnız il ve ilçe adı kalır. Konumunun kendisi saklanmaz.'],
+      ['Ne işe yarar?', 'Hava, yağmur olasılığı ve istersen alarmdan sonra gelen sabah havası bildirimi.'],
+      ['Nerede durur?', "Hava bilgisi için konum yuvarlanarak Apple'ın hava servisine (yurt dışı) gider. Sabah bildirimi yenilenirken yalnız seçtiğin yerin merkezi gider. Sunucumuza ve Nef'e gitmez."],
+      ['Ne kadar kalır?', 'Telefonda il ve ilçe adı, hava önbelleği ve son 90 günün günlük hava özeti. İzin kapanınca ilk açılışta il ve ilçe adı, önbellek ve hava özeti silinir.'],
+    ],
+    check: 'Hava bilgisi için yaklaşık konumumun ya da seçtiğim yerin merkezinin yurt dışındaki Apple hava servisine gönderilmesine açık rıza veriyorum.',
   },
 }
 

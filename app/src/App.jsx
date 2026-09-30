@@ -80,6 +80,11 @@ import { loadAlarm, loadAlarmLog, addAlarmEvent } from './lib/alarmLog.js'
 import { wakeSignal, morningCard, nextRing, daysLabel, hhmm, minOfDay, latency } from './lib/alarm.js'
 import { soundById } from './lib/alarmSounds.js'
 import { hasGazeModel } from './lib/gazeCalib.js'
+import SkyConsent from './screens/SkyConsent.jsx'
+import SkyPlace from './screens/SkyPlace.jsx'
+import SkyConfirm from './screens/SkyConfirm.jsx'
+import { requestLocation, enforceWeatherConsent, SKY_KEYS } from './lib/sky.js'
+import { suggestFromLocation, savePlace, loadPlace } from './lib/places.js'
 
 const TAB_SCREENS = ['home', 'progress', 'calendar', 'info']
 
@@ -159,10 +164,24 @@ function useEyeClock(kind) {
 }
 
 
-// "Bana hatırlat" satırı ve Profil → Bildirimler girişi (B1a): uygulamadaki hâli 5 sn kapısından iki turda geçmedi
-// (2026-09-30: satır 1/5, saat sayfası 1/5, Bildirimler 2/5; docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/
-// 5sn-b1a-yeni.md). Geçene kadar kapalı: kimse modül hatırlatması kuramaz, plan bugünkü gibi kalır (eşdeğerlik).
-const REMIND_UI = false
+// "Bana hatırlat" (B1a) iki bayrakla (5 sn kapısı son tur, 2026-10-01; docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/
+// 5sn-b1a-yeni.md "Son tur", tasarım b1a-son/):
+//   REMIND_ROW: modül bitiş ekranlarındaki "Bana hatırlat" satırı (components/RemindField.jsx). Son turda 0/5; sahip
+//     kararıyla KAPALI kalır (ctx.remindField null). Bitiş ekranlarının renk ve düzen sorunu ayrı iş.
+//   NOTIFY_PAGE: Profil → Bildirimler girişi ve oradan açılan saat sayfası (screens/Notifications.jsx 4/5,
+//     components/RemindSheet.jsx 5/5 geçti). AÇIK: modül hatırlatması yalnız Bildirimler'den kurulur. Hiçbir modül
+//     hatırlatması açık değilken plan bugünkü gibi kalır (eşdeğerlik: lib/notifyAll.equiv.test.js).
+const REMIND_ROW = false
+const NOTIFY_PAGE = false // uygulamadaki hâl 5 sn kapısında 1/5 (5sn-b1a-yeni.md son bölüm); sahip kararı: durdu
+// B2 hava (PLAN.v1 §3.B; tasarım b2-tasarim/: R-katmanli, K-C, G-tur2). SKY_UI: bütün B2 arayüzü (rıza, il/ilçe, onay
+// rotaları) bu bayrağın arkasında; SkyPlugin.swift Mac'te derlenip cihazda doğrulanana kadar KAPALI. Akış: rıza
+// (weather) → iOS konum izni ("Kullanırken", yaklaşık varsayılan) → yaklaşık: K (il bulundu, ilçe listeden) · kesin: G
+// ("…'de misin?") · izin yok ya da "İl ve ilçe seç": K (il listesi). İlçe profile yazılmaz (lib/places.js).
+// Giriş noktası (Ana sayfa teklif kartı T) Ana sayfa tasarımına bağlı; bayrak açılınca startSky ona bağlanır.
+// Bayrakla birlikte Mac'te eklenecekler (kapalıyken derlemeye girmesinler diye yoklar; SkyPlugin.swift başlığı):
+// App.entitlements com.apple.developer.weatherkit; Info.plist NSLocationWhenInUseUsageDescription (onaylı metin, hukukçu
+// adı gelmeden App Store'a gitmez) ve NSLocationDefaultAccuracyReduced.
+const SKY_UI = false
 
 export default function App() {
   const [data, setData] = useState(store.get())
@@ -189,6 +208,8 @@ export default function App() {
   const [healthSheet, setHealthSheet] = useState(false) // Hatırlatmalar'da yürüyüş açılırken Sağlık rızası sayfası
   const [scheduleBack, setScheduleBack] = useState('calendar') // Çalışma günleri'nden dönülecek ekran
   const [trialNote, setTrialNote] = useState(null) // { daysLeft } — izni olmayana deneme şeridi
+  // B2 hava akışı (SKY_UI): { mode: 'locate'|'list', il, approx, suggest } | null
+  const [skyFlow, setSkyFlow] = useState(null)
   // Tek bildirim dokunma dağıtıcısı (lib/notifyApply.js onNotifyTap). Uygulama kapalıyken yapılan dokunuş yalnız
   // İLK bağlanan dinleyiciye gider: her şeyden önce, bir kez bağlanır (restNotify'ın eski iki dinleyicisi kalktı).
   // 7301 mola bitti → Ana sayfa · 7302 deneme → İlk rapor · hatırlatma → günlükte "dokunuldu" + türün ekranı ·
@@ -530,6 +551,9 @@ export default function App() {
     if (p.coach && !hasConsent(settings.consents, 'coach')) setPrefs({ coach: false, coachLife: false, coachHidden: false })
     else if (p.coachLife && !hasConsent(settings.consents, 'coachLife')) setPrefs({ coachLife: false })
   }, [settings.consents])
+  // weather rızası yoksa (geri çekildi / hiç verilmedi) il ve ilçe adı, hava önbelleği ve hava özeti silinir
+  // (rıza metni "Ne kadar kalır?"; lib/sky.js). Bayraktan bağımsız: yalnız hava anahtarlarını siler.
+  useEffect(() => { enforceWeatherConsent(settings.consents) }, [settings.consents])
   // --- Bildirim planı (sözleşme §6): girdiler → planNotifications → günlük → izin 'granted' ise applyPlan (tek sıra,
   // 400 ms birleştirme; son plan kazanır). Tetikler: açılış, öne gelme, sağlık okuması, her kayıt (data), hatırlatma
   // ayarı (data), oturum başla/bitir ve dokunuş (planTick), izin değişimi.
@@ -709,6 +733,34 @@ export default function App() {
     setConsent('health', granted)
   }
   const healthSheetKind = healthShow ? 'healthUpdate' : 'health'
+  // B2 hava akışı (SKY_UI). mode: 'locate' ([Konumumu kullan]) | 'list' ([İl ve ilçe seç]). Rıza her zaman iOS izin
+  // penceresinden önce; rıza verilmişse doğrudan izne/listeye geçilir.
+  const skyAfterConsent = async (mode) => {
+    const prev = loadPlace()
+    if (mode !== 'locate') { setSkyFlow({ mode, il: prev?.il ?? null, approx: false, suggest: null }); go('sky-place'); return }
+    const loc = await requestLocation()
+    const s = loc.status === 'granted' ? suggestFromLocation(loc.pos, loc.accuracy) : null // koordinat burada kalır, saklanmaz
+    if (s?.confirm) { setSkyFlow({ mode, il: s.il, approx: false, suggest: { il: s.il, ilce: s.ilce } }); go('sky-confirm'); return }
+    setSkyFlow({ mode, il: s?.il ?? null, approx: Boolean(s?.approx), suggest: null })
+    go('sky-place')
+  }
+  // Giriş: Ana sayfa teklif kartı (T) bayrak açılınca bunu çağırır
+  const startSky = (mode = 'locate') => {
+    if (!SKY_UI) return
+    if (hasConsent(store.get().settings.consents, 'weather')) { skyAfterConsent(mode); return }
+    setSkyFlow({ mode, il: null, approx: false, suggest: null })
+    go('sky-consent')
+  }
+  const answerSky = (granted) => {
+    setConsent('weather', granted)
+    if (!granted) { setSkyFlow(null); go('home'); return }
+    skyAfterConsent(skyFlow?.mode ?? 'locate')
+  }
+  const finishSky = (place) => {
+    savePlace(place) // yalnız gozolcum:sky-place; profil alanına yazılmaz
+    setSkyFlow(null)
+    go('home')
+  }
   // Nef açık rızası: iki amaç iki ayrı kayıt (settings.consents) + cihaz tercihi (prefs). Kapatmak ikisini de geri çeker.
   const setCoach = ({ on, life = false }) => {
     let c = recordConsent(store.get().settings.consents, 'coach', on)
@@ -813,7 +865,7 @@ export default function App() {
   // saat sayfasını kendisi açar). remind'i olmayan modülde null. Yol içinde açılan modülde modül inPath: true verir.
   // VARSAYIM: yalnız iPhone uygulamasında (web'de bildirim yok; Bilgi'deki Hatırlatmalar satırı gibi).
   const remindField = (route, { inPath = false } = {}) => {
-    if (!REMIND_UI) return null
+    if (!REMIND_ROW) return null
     const m = registry.forRoute(route) ?? registry.get(route)
     const entry = m ? remindEntryOf(m.id) : null
     if (!entry || !isIOSApp()) return null
@@ -1018,7 +1070,7 @@ export default function App() {
         onCoachLife={setCoachLife}
         alarm={alarmSt.platform === 'web' ? null : alarmProfile()}
         // Profil → Bildirimler özeti (PLAN.v1 §A.5, alarm özetinin kalıbı): Alarm bölümünden sonra; yalnız iPhone'da
-        notify={REMIND_UI && isIOSApp() ? { on: normalizeReminders(settings.reminders).optIn === 'yes', onOpen: () => go('notifications') } : null}
+        notify={NOTIFY_PAGE && isIOSApp() ? { on: normalizeReminders(settings.reminders).optIn === 'yes', onOpen: () => go('notifications') } : null}
         onAccount={() => go('account')}
         onSignOut={async () => { try { await signOut() } catch { /* çevrimdışı: yerel oturum yine kapanır */ } toGuest() }}
         onDeleteAccount={async () => {
@@ -1032,6 +1084,15 @@ export default function App() {
         }}
       />
     )
+  }
+  // B2 hava akışı (SKY_UI kapalıyken bu rotalara hiçbir yoldan gidilmez)
+  if (SKY_UI && skyFlow && (screen === 'sky-consent' || screen === 'sky-place' || screen === 'sky-confirm')) {
+    if (screen === 'sky-consent') return <SkyConsent onAnswer={answerSky} />
+    if (screen === 'sky-confirm' && skyFlow.suggest) {
+      return <SkyConfirm place={skyFlow.suggest} onYes={() => finishSky(skyFlow.suggest)}
+        onOther={() => { setSkyFlow({ ...skyFlow, il: skyFlow.suggest.il, approx: false }); go('sky-place') }} />
+    }
+    return <SkyPlace il={skyFlow.il} approx={skyFlow.approx} onPick={finishSky} onBack={() => { setSkyFlow(null); go('home') }} />
   }
   // Profil → Bildirimler ve Gece sessizliği (PLAN.v1 §A.5; screens/Notifications.jsx, screens/QuietHours.jsx)
   if (screen === 'notifications') {
@@ -1232,7 +1293,8 @@ export default function App() {
           // Bildirimler: kendi aralığımız (74xx/75xx, 7700–7701, 78xx, 7860–7867) ve yalnız-iptal 7710–7719 iptal;
           // native yürüyüş koruması boşalır (cancelOwn); gozolcum:notify-slots silinir. Deneme hatırlatması (7302)
           // kalır. (lib/notifyReset.js resetAllData; sıra bugünküyle aynı: önce kayıt)
-          resetAllData({ store, cancel: cancelOwn, autoCal })
+          // B2 hava: il ve ilçe adı, önbellek, günlük özet (SKY_KEYS) aynı çağrıda silinir (sky.test.js resetAll)
+          resetAllData({ store, cancel: cancelOwn, autoCal, keys: SKY_KEYS })
           // Modüllerin cihazdaki rekorları ve seçenekleri de silinir (manifest storageKeys);
           // ses/titreşim tercihleri ve tema cihaz ayarı sayılır ve korunur.
           resetBudget(); resetAllHowto()
