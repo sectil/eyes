@@ -27,3 +27,8 @@ yapıyorsanırırm en kalitlei işi daha zamanda yapamalrını sağla"
 
 Kaliteden kısılmayan: 5 saniye kapısı, bağımsız inceleme, tam test takımı ve derleme (sonda). Kısılan: tekrar eden tam
 test koşuları, turlarda düzenek onarımı, ikiden fazla düzeltme turu, uzun raporlar, beklemede duran paralel iş akışları.
+
+## Rıza sayfaları için 5 saniye ölçütü (sahip kararı 2026-10-01)
+
+Rıza (açık rıza, izin) sayfalarında değerlendiriciye "etkilendin mi?" sorulmaz. Soru: "5 saniyede ne istendiğini, verinin
+nereye gittiğini ve nasıl hayır diyeceğini anladın mı?" Beş kişinin en az dördü anlamalı. Metin harfi harfine kalır.

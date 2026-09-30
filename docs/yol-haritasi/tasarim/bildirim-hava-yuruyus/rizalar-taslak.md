@@ -25,7 +25,7 @@ Kurallar:
 - **Nerede durur?** Hava bilgisi için konum yuvarlanarak Apple'ın hava servisine (yurt dışı) gider. Sabah bildirimi
   yenilenirken yalnız seçtiğin yerin merkezi gider. Sunucumuza ve Nef'e gitmez.
 - **Ne kadar kalır?** Telefonda il ve ilçe adı, hava önbelleği ve son 90 günün günlük hava özeti. İzin kapanınca ilk
-  açılışta il adı ve önbellek silinir.
+  açılışta il ve ilçe adı, önbellek ve hava özeti silinir.
 - **Kutu:** Hava bilgisi için yaklaşık konumumun ya da seçtiğim yerin merkezinin yurt dışındaki Apple hava servisine
   gönderilmesine açık rıza veriyorum.
 
@@ -70,3 +70,4 @@ için. Veriler telefondan çıkmaz."*
 ## Değişiklik (sahip onayı 2026-10-01)
 - `weather` "Ne kadar kalır?": "90 günlük günlük hava özeti" → "son 90 günün günlük hava özeti".
 - Rıza sayfası katmanlı: ilk ekranda kısa özet, onay kutusu ve düğme; dört bölüm dokununca açılır; metin harfi harfine aynı (hukukçuya bu düzen de sorulur).
+- (2026-10-01) `weather` "Ne kadar kalır?" silme cümlesi: "il ve ilçe adı, önbellek ve hava özeti silinir" (sahip onayı); kod da bunu yapar.
