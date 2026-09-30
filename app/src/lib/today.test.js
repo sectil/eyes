@@ -2,6 +2,14 @@ import { describe, it, expect } from 'vitest'
 import { buildPath, todayPlan, jevLine, isDue, isDueWeekly, isSameDay, PATH, canOpen, eyeDay, lastComplete, weeklyStatus, skipEyesToday, runDayOf, readingStatus, WEEKLY_SUB, WEEKLY_DONE } from './today.js'
 import { registry } from '../modules/registry.js'
 import { dayKey } from './calendar.js'
+import { progressionCtx, newStopKeys, restDecision, pathRestMinutes } from './progression.js'
+import { yogaPathStop } from './yoga.js'
+import { isBreath } from './breath.js'
+import { isStreet } from './street.js'
+import { isSpan } from './span.js'
+import { isNotice } from './notice.js'
+import { profileSignals } from './profile.js'
+import { withinDays } from './today.js'
 
 const MIN = 60000
 const NOW = new Date('2026-09-25T10:00:00')
@@ -438,4 +446,395 @@ describe('okuma testi: haftalık E testinden ayrı gün, takvim günüyle', () =
     expect(k).toContain('weekly')
     expect(k).toContain('reading')
   })
+})
+
+// =============================================================================================================
+// Sonsuz yol Y1 (SONSUZ_YOL.PLAN.v1 §3.A.9, §3.G.6). ctx.progression Ana sayfadaki gibi lib/progression.js
+// progressionCtx ile, kayıtlardan kurulur. Yoga iPhone'daki gibi (lib/yoga.js yogaPathStop; bütün dersler yayımlı).
+const Y1_TITLES = { 1: 'Nefesin Ritmi', 2: 'Derin Dinlenme', 3: 'Uykuya Geçiş', 4: 'Zor Anlar İçin', 5: 'Tek Nokta', 6: 'Sabah Niyeti', 7: 'Kendine Şefkat', 8: 'Sağlam Yer', 9: 'Kendini Tanımak', 10: 'Gelecekteki Sen' }
+const Y1_PUB = { 1: [3, 5, 15], 2: [5, 15], 3: [5, 15], 4: [3, 5, 15], 5: [3, 5, 15], 6: [3, 5, 15], 7: [5, 15], 8: [3, 5, 15], 9: [3, 5, 15], 10: [3, 5, 15] }
+const Y1_DATA = { LESSONS: Object.fromEntries(Object.entries(Y1_TITLES).map(([k, title]) => [k, { title }])), publishedMinutes: (id) => Y1_PUB[id] ?? [] }
+const Y1_YOGA = { id: 'yoga', title: 'Yoga', label: 'yoga', kind: 'practice', ring: 'life', gates: {}, routes: ['yoga'], home: { section: 'practice', order: 33 }, sessions: { match: (s) => s?.type === 'yoga' }, today: (ctx) => yogaPathStop(ctx, Y1_DATA) }
+const Y1_LIVE = registry.live.filter((m) => m.id !== 'yoga')
+const Y1_ALL = [...Y1_LIVE, Y1_YOGA]
+const y1Total = (p) => p.stops.reduce((a, s) => a + (s.minutes ?? 0), 0)
+const y1NoYoga = (p) => JSON.stringify(p.stops.filter((s) => s.id !== 'yoga').map((s) => [s.key, s.block, s.minutes, s.done, s.locked, s.title]))
+
+// Yolu kuran kişinin bıraktığı kayıt; basamaklı duraklarda Y1'in yazdığı stage alanıyla (Dstage)
+function y1Record(s, now, tests, sessions) {
+  const date = new Date(now.getTime() + MIN).toISOString()
+  const runDay = dayKey(now)
+  const stage = s.stage?.id ?? undefined
+  if (s.id === 'weekly') for (const eye of ['R', 'L', 'OU']) tests.push({ type: 'va-weekly', eye, date, runDay })
+  else if (s.id === 'reading') tests.push({ type: 'reading', date, runDay })
+  else if (s.id === 'routine') sessions.push({ type: 'routine', setId: s.key.split(':')[1], seconds: 60, date, ...(stage ? { stage } : {}) })
+  else if (s.id === 'snake' || s.id === 'track') sessions.push({ type: 'game', game: s.id, date })
+  else if (s.id === 'breath') sessions.push({ type: 'breath', seconds: (s.minutes ?? 5) * 60, date, ...(stage ? { stage } : {}) })
+  else if (s.id === 'fark-ettin') sessions.push({ type: 'street', noticed: 2, asked: 3, date, seconds: 60 })
+  else if (s.id === 'tek-bakis') sessions.push({ type: 'span', span: 8, date, seconds: 60 })
+  else if (s.id === 'notice') sessions.push({ type: 'notice', count: 2, date, seconds: 60 })
+  else if (s.id === 'yoga') sessions.push({ type: 'yoga', lesson: s.stage.lesson, planned: s.minutes * 60, seconds: s.minutes * 60, reachedClosing: true, completed: true, date })
+  else sessions.push({ type: s.id, date, seconds: 60 })
+}
+// Her gün (hour) açıp yolu sırayla bitiren yeni kullanıcı; skip: açılmayan günler
+function y1Simulate(days, { hour = 10, skip = [] } = {}) {
+  const tests = []
+  const sessions = []
+  const out = []
+  for (let n = 1; n <= days; n++) {
+    if (skip.includes(n)) continue
+    const now = new Date(2026, 9, n, hour)
+    const base = { tests: [...tests], sessions: [...sessions], now }
+    const progression = progressionCtx({ ...base, modules: Y1_ALL })
+    const ctx = { ...base, progression }
+    const withY = buildPath(Y1_ALL, ctx)
+    const noY = buildPath(Y1_LIVE, ctx)
+    out.push({ n, ctx, withY, noY, yoga: withY.stops.find((s) => s.id === 'yoga') ?? null, fresh: newStopKeys(ctx, withY.stops) })
+    for (const s of withY.stops) y1Record(s, now, tests, sessions)
+  }
+  return out
+}
+
+describe('Sonsuz yol · ilerleme açık, yeni kullanıcı (§3.A.9: her gün 10.00, her durak, 5 dk göz bütçesi)', () => {
+  const rows = y1Simulate(45)
+  const day = (n, list = rows) => list.find((r) => r.n === n)
+  const stopOf = (p, key) => p.stops.find((s) => s.key === key)
+  it('1. gün (8 dk): Haftalık E testi, Çemberler, Nefes 1 dk, Göz kırpma; "Yeni" rozeti yok', () => {
+    const r = day(1)
+    expect(keys(r.withY)).toEqual(['weekly', 'track', 'breath', 'routine:kirpma'])
+    expect(r.withY.stops.map((s) => s.block)).toEqual([1, 1, 0, 2])
+    expect(stopOf(r.withY, 'breath').minutes).toBe(1)
+    expect(y1Total(r.withY)).toBe(8)
+    expect(r.yoga).toBeNull()
+    expect(r.fresh).toEqual([])
+  })
+  it('2. gün (11 dk): Sağ–sol, Nefes 2 dk, okuma testi, Yılan ve Bugünün görevi gelir; yenileri rozetli', () => {
+    const r = day(2)
+    expect(keys(r.withY)).toEqual(['routine:isinma', 'track', 'breath', 'reading', 'routine:kirpma', 'snake', 'notice'])
+    expect(stopOf(r.withY, 'routine:isinma').title).toBe('Sağ–sol')
+    expect(stopOf(r.withY, 'breath').minutes).toBe(2)
+    expect(y1Total(r.withY)).toBe(11)
+    expect(r.fresh).toEqual(['routine:isinma', 'breath', 'reading', 'snake', 'notice'])
+  })
+  it('3. gün: "üçü birlikte" (Isınma), Nefes 3 dk, yoga', () => {
+    const r = day(3)
+    expect(stopOf(r.withY, 'routine:isinma').title).toBe('Isınma')
+    expect(stopOf(r.withY, 'breath').minutes).toBe(3)
+    expect(r.yoga).toMatchObject({ minutes: 3 })
+    expect(y1Total(r.withY)).toBe(12)
+    expect(r.fresh).toEqual(['routine:isinma', 'breath', 'yoga'])
+  })
+  it('4. gün (13 dk): Yukarı–aşağı 2. bölümde; yoga son durak, Bugünün görevi\'nden önce', () => {
+    const r = day(4)
+    expect(keys(r.withY)).toEqual(['routine:isinma', 'track', 'breath', 'routine:dikey', 'routine:kirpma', 'snake', 'yoga', 'notice'])
+    expect(stopOf(r.withY, 'routine:dikey')).toMatchObject({ title: 'Yukarı–aşağı', block: 2, minutes: 1 })
+    expect(y1Total(r.withY)).toBe(13)
+    expect(r.fresh).toEqual(['routine:dikey'])
+  })
+  it('5.–7. gün: Uzağa bakış (5.), Fark Ettin mi? (6., Yılan düşer), Yakın–uzak (7.)', () => {
+    expect(day(5).fresh).toEqual(['routine:uzak'])
+    expect(keys(day(6).withY)).toContain('fark-ettin')
+    expect(keys(day(6).withY)).not.toContain('snake')
+    expect(day(6).fresh).toEqual(['fark-ettin'])
+    expect(day(7).fresh).toEqual(['routine:yakinuzak'])
+    expect([5, 6, 7].map((n) => y1Total(day(n).withY))).toEqual([14, 14, 15])
+  })
+  it('8. gün (17 dk): Haftalık E testi ve Tek Bakışta; nefeste "günün ritmi"; Yılan düşer, yoga yok (E testi günü)', () => {
+    const r = day(8)
+    expect(keys(r.withY)).toEqual(['routine:isinma', 'weekly', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:dikey', 'routine:kirpma', 'tek-bakis', 'notice'])
+    expect(y1Total(r.withY)).toBe(17)
+    expect(r.yoga).toBeNull()
+    expect(stopOf(r.withY, 'breath').stage).toMatchObject({ tier: 'B', minutes: 3 })
+    expect(r.fresh).toEqual(['breath', 'tek-bakis'])
+  })
+  it('9. gün (18 dk): Daire (Yukarı–aşağı ile gün aşırı), okuma testi, yoga; bugünkü beş gruplu yapıya ulaşıldı', () => {
+    const r = day(9)
+    expect(keys(r.noY)).toEqual(['routine:isinma', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'reading', 'routine:kirpma', 'tek-bakis', 'notice'])
+    expect(r.yoga).toMatchObject({ minutes: 3, block: 2 })
+    expect(y1Total(r.withY)).toBe(18)
+    expect(r.fresh).toEqual(['routine:daire'])
+    // 10.–45. gün: Daire ve Yukarı–aşağı gün aşırı (günde biri, art arda aynısı yok)
+    const donus = rows.filter((x) => x.n >= 9).map((x) => keys(x.withY).filter((k) => k === 'routine:daire' || k === 'routine:dikey'))
+    for (const d of donus) expect(d).toHaveLength(1)
+    for (let i = 1; i < donus.length; i++) expect(donus[i][0], `gün ${i + 9}`).not.toBe(donus[i - 1][0])
+  })
+  it('ilk 30 gün: ortalama 15,3, en kısa 8, en uzun 18; 20 dk\'yı aşan gün yok; yoga 24 günde; ilk 90 gün en çok 18', () => {
+    const t30 = rows.slice(0, 30).map((r) => y1Total(r.withY))
+    expect(Math.min(...t30)).toBe(8)
+    expect(Math.max(...t30)).toBe(18)
+    expect((t30.reduce((a, b) => a + b, 0) / 30).toFixed(1)).toBe('15.3')
+    expect(rows.slice(0, 30).filter((r) => r.yoga).length).toBe(24)
+    for (const r of rows) expect(y1Total(r.withY), `gün ${r.n}`).toBeLessThanOrEqual(PATH.capMin)
+  })
+  it('yoga dışındaki duraklar yogalı ve yogasız yolda birebir aynı (45 gün; 19.00; uzun dönüş)', () => {
+    for (const list of [rows, y1Simulate(45, { hour: 19 }), y1Simulate(40, { skip: Array.from({ length: 16 }, (_, i) => 13 + i) })]) {
+      for (const r of list) expect(y1NoYoga(r.withY), `gün ${r.n}`).toBe(y1NoYoga(r.noY))
+    }
+  })
+  it('29. gün uzun dönüş (13.–28. gün açılmadı): yumuşak gün, E testi ve okuma birlikte; Yılan ve yoga düşer; ertesi gün 15 dk', () => {
+    const gap = y1Simulate(40, { skip: Array.from({ length: 16 }, (_, i) => 13 + i) })
+    const r = day(29, gap)
+    expect(keys(r.withY)).toEqual(expect.arrayContaining(['weekly', 'reading', 'notice']))
+    expect(keys(r.withY)).not.toContain('snake')
+    expect(r.yoga).toBeNull()
+    expect(stopOf(r.withY, 'breath')).toMatchObject({ minutes: 2, stage: { soft: true } }) // bir basamak aşağı
+    expect(keys(r.withY)).toContain('routine:dikey') // göz: K6 (yumuşak), Daire yok
+    expect(keys(r.withY)).not.toContain('routine:daire')
+    expect(y1Total(r.withY)).toBeLessThanOrEqual(PATH.capMin)
+    expect(r.fresh).toEqual([]) // yumuşak günde yeni basamak yok
+    const next = day(30, gap)
+    expect(stopOf(next.withY, 'breath')).toMatchObject({ minutes: 3, stage: { soft: false } })
+    expect(y1Total(next.withY)).toBe(15)
+    // sayı sıfırlanmaz: basamak kaldığı yerden
+    expect(next.ctx.progression.mod.routine.D).toBe(13)
+  })
+  it('ara kilidi: 1. ve 2. gün 1–2 dk nefesten sonra mola başlamaz; 7. günden (1. bölüm 4 dk göz) bugünkü kural', () => {
+    const st = (used) => ({ locked: false, due: null, used, budgetMs: 5 * MIN, leftMs: 5 * MIN - used })
+    expect(restDecision(st(MIN), day(1).withY, day(1).ctx.progression)).toBeNull()
+    expect(restDecision(st(2 * MIN), day(2).withY, day(2).ctx.progression)).toBeNull()
+    expect(restDecision(st(4 * MIN), day(7).withY, day(7).ctx.progression)).toBe('path')
+    expect(restDecision(st(4 * MIN), day(9).withY, day(9).ctx.progression)).toBe('path')
+  })
+  it('ara kilidi gerçekçi kullanılan sürelerde (1. bölüm 1,6–2,6 dk): 3. günden her zaman 5 dk mola, bant ve baloncuk 5 dk; 2. gün §3.A.8-6', () => {
+    const st = (u) => ({ locked: false, due: null, used: u * MIN, budgetMs: 5 * MIN, leftMs: (5 - u) * MIN })
+    const done1 = (r) => {
+      const stops = r.withY.stops.map((s) => (s.block === 1 ? { ...s, done: true } : s))
+      const blocks = r.withY.blocks.map((b, i) => (i === 0 ? { ...b, eyeDone: b.eyeMin } : b))
+      return { ...r.withY, stops, blocks }
+    }
+    for (const u of [1.6, 1.8, 2.0, 2.2, 2.4, 2.6]) {
+      for (const n of [3, 4, 5]) {
+        expect(restDecision(st(u), day(n).withY, day(n).ctx.progression), `gün ${n}, ${u} dk`).toBe('path')
+        expect(pathRestMinutes(st(u), done1(day(n)), day(n).ctx.progression), `gün ${n}, ${u} dk`).toBe(5)
+      }
+      // 2. gün (2 dk nefes, 2. bölümde 3 dk göz): kullanılan + 3 > 5 ise mola
+      expect(restDecision(st(u), day(2).withY, day(2).ctx.progression), `gün 2, ${u} dk`).toBe(u > 2 ? 'path' : null)
+      expect(pathRestMinutes(st(u), done1(day(2)), day(2).ctx.progression), `gün 2, ${u} dk`).toBe(u > 2 ? 5 : 2)
+    }
+    // 3. gün sabah (hiç göz çalışması yok) bant 5 dk: 1. bölümün 2 dk'sı eklenir
+    expect(pathRestMinutes(st(0), day(3).withY, day(3).ctx.progression)).toBe(5)
+    expect(pathRestMinutes(st(0), day(1).withY, day(1).ctx.progression)).toBe(1)
+  })
+})
+
+// ---------------------------------------------------------------------------------------------------------------
+// Kalıcı eşdeğerlik (§3.G.6). HEAD'deki (Y1 öncesi, e19d81f) manifestlerin today() gövdeleri, değiştirilmeden:
+// ilerleme kapalıyken yol bunlarla birebir aynıdır; ilerleme açıkken eski kullanıcıda fark yalnız izinli listededir.
+const Y0_GROUPS = [['isinma', 'Isınma', 'arrows', { slot: 'warmup', order: 10 }], ['uzak', 'Uzağa bakış', 'far', { slot: 'body', order: 30 }], ['yakinuzak', 'Yakın–uzak', 'nearfar', { slot: 'body', order: 50 }], ['daire', 'Daire', 'circle', { slot: 'body', order: 70, dropRank: 3 }], ['kirpma', 'Göz kırpma', 'lid', { slot: 'body', order: 90 }]]
+const y0Days = (list, now) => new Set(withinDays(list, now).map((s) => new Date(s.date).toDateString())).size
+const Y0 = {
+  breath: ({ sessions, now }) => ({ title: 'Nefes', sub: 'Gözlerin dinlenirken nefes al.', minutes: 5, route: 'breath-rest', slot: 'rest', glyph: 'moon', done: sessions.some((s) => isBreath(s) && s.seconds >= 60 && isSameDay(s, now)) }),
+  routine: ({ sessions, now }) => {
+    const ids = new Set(sessions.filter((s) => s.type === 'routine' && isSameDay(s, now)).map((s) => s.setId))
+    return Y0_GROUPS.map(([id, title, glyph, place]) => ({ key: id, title, minutes: 1, glyph, route: `routine-${id}`, done: ids.has(id), ...place }))
+  },
+  snake: ({ sessions, now }) => ({ title: 'Yılan', sub: '1 tur', minutes: 2, slot: 'open', glyph: 'snake', openEnded: true, game: true, dropRank: 1, done: sessions.some((s) => s.type === 'game' && s.game === 'snake' && isSameDay(s, now)) }),
+  notice: ({ sessions, now }) => (sessions.some(isNotice) ? { title: 'Bugünün görevi', minutes: 1, slot: 'finale', glyph: 'spark', dropRank: 2, done: sessions.some((s) => s.type === 'notice' && isSameDay(s, now)) } : null),
+  'fark-ettin': ({ sessions, now }) => {
+    const done = sessions.some((s) => isStreet(s) && isSameDay(s, now))
+    const days = y0Days(sessions.filter(isStreet), now)
+    return !done && days >= 3 ? null : { title: 'Fark Ettin mi?', minutes: 2, slot: 'body', order: 65, glyph: 'street', dropRank: 1.6, rotate: 'week3', weekDays: days, done }
+  },
+  'tek-bakis': ({ sessions, now, profile }) => {
+    if (profile && profileSignals(profile).flashSafe === false) return null
+    const done = sessions.some((s) => isSpan(s) && isSameDay(s, now))
+    const days = y0Days(sessions.filter(isSpan), now)
+    return !done && days >= 3 ? null : { title: 'Tek Bakışta', minutes: 2, slot: 'body', order: 95, glyph: 'span', dropRank: 1.5, rotate: 'week3', weekDays: days, done }
+  },
+}
+const Y0_MODS = Y1_ALL.map((m) => (Y0[m.id] ? { ...m, today: Y0[m.id] } : m))
+// HEAD screens/Home.jsx: yoldaki Nefes durağı molayı ne zaman başlatır
+const y0Rest = (st) => (!st.locked && (st.due || st.used >= PATH.restMinUsed * MIN) ? (st.due && st.due !== 'budget' ? st.due : 'path') : null)
+const y1Whole = (p) => JSON.stringify({ s: p.stops, n: p.next?.key ?? null, a: p.allDone, m: p.minutesLeft, b: p.blocks, r: p.restIndex, f: p.forcedRestBefore })
+
+function y1Rng(seed) {
+  let x = seed
+  const rnd = () => ((x = (x * 1103515245 + 12345) % 2147483648) / 2147483648)
+  return { rnd, pick: (a) => a[Math.floor(rnd() * a.length)] }
+}
+
+describe('Kalıcı eşdeğerlik: ilerleme kapalı (ctx.progression yok) → Y1 öncesi yolla 0 fark', () => {
+  it('rastgele 3000 bağlam: durakların bütün alanları, bölümler, sıradaki, allDone, minutesLeft, mola ve kilit; ara kilidi; Bugünün görevi', () => {
+    const { rnd, pick } = y1Rng(4242)
+    const DAYMS = 86400000
+    for (let i = 0; i < 3000; i++) {
+      const now = new Date(2026, 8, 1 + Math.floor(rnd() * 60), Math.floor(rnd() * 24))
+      const ago = (d) => new Date(now.getTime() - d * DAYMS - Math.floor(rnd() * 3) * 3600000).toISOString()
+      const tests = []
+      const sessions = []
+      for (let j = Math.floor(rnd() * 8); j > 0; j--) {
+        const d = Math.floor(rnd() * 16)
+        const t = pick(['va-weekly', 'va-weekly', 'reading', 'va-daily'])
+        if (t === 'reading') tests.push({ type: t, date: ago(d) })
+        else for (const eye of (t === 'va-weekly' ? ['R', 'L', 'OU'] : ['R', 'L']).filter(() => rnd() < 0.85)) tests.push({ type: t, eye, date: ago(d) })
+      }
+      for (let j = Math.floor(rnd() * 25); j > 0; j--) {
+        const date = ago(Math.floor(rnd() * 9))
+        const k = pick(['routine', 'game-snake', 'game-track', 'breath', 'span', 'street', 'quick-look', 'notice', 'yoga'])
+        if (k === 'routine') sessions.push({ type: 'routine', setId: pick(['isinma', 'uzak', 'yakinuzak', 'daire', 'dikey', 'kirpma', 'normal']), date })
+        else if (k.startsWith('game')) sessions.push({ type: 'game', game: k.slice(5), date })
+        else if (k === 'breath') sessions.push({ type: 'breath', seconds: pick([30, 60, 180, 300]), date, ...(rnd() < 0.1 ? { strained: true } : {}) })
+        else if (k === 'span') sessions.push({ type: 'span', span: 8, date, seconds: 60 })
+        else if (k === 'street') sessions.push({ type: 'street', noticed: 2, asked: 3, date, seconds: 60 })
+        else if (k === 'yoga') sessions.push({ type: 'yoga', lesson: pick([1, 2, 5, 6, 8, 9]), planned: pick([3, 5, 15]) * 60, date, completed: rnd() < 0.8, reachedClosing: true })
+        else sessions.push({ type: k, date, seconds: 60, count: 2 })
+      }
+      sessions.sort((a, b) => a.date.localeCompare(b.date))
+      tests.sort((a, b) => a.date.localeCompare(b.date))
+      const eye = rnd() < 0.5 ? undefined : { locked: rnd() < 0.2, due: rnd() < 0.3 ? pick(['budget', 'hourly', 'daily']) : null, used: Math.floor(rnd() * 7) * MIN, budgetMs: pick([5, 3]) * MIN, leftMs: 2 * MIN }
+      const ctx = { tests, sessions, now, eye, profile: rnd() < 0.2 ? { seizure: pick(['yes', 'no', 'unsure']) } : undefined, gate: { firstTestOnly: rnd() < 0.1 }, later: rnd() < 0.2 ? { day: dayKey(now), later: ['yoga'] } : null }
+      const a = buildPath(Y0_MODS, ctx)
+      const b = buildPath(Y1_ALL, ctx)
+      expect(y1Whole(b), `bağlam ${i}`).toBe(y1Whole(a))
+      const st = eye ?? { locked: false, due: null, used: Math.floor(rnd() * 7) * MIN, budgetMs: 5 * MIN }
+      expect(restDecision(st, b, undefined)).toBe(y0Rest(st))
+      expect(JSON.stringify(registry.get('notice').today(ctx))).toBe(JSON.stringify(Y0.notice(ctx)))
+    }
+  }, 60000)
+})
+
+describe('Kalıcı eşdeğerlik: ilerleme açık, eski kullanıcı → fark yalnız izinli listede', () => {
+  // İzinli liste (§3.G.6): nefesin yol payı (5 → 3 dk; dün "Zorlandım" ise 2) ve kalıbı (stage), Daire ile Yukarı–aşağı'nın
+  // gün aşırı dönüşümü, göz çeşitlemeleri (stage; tam set günü), Bugünün görevi'nin yola girmesi, "Yeni" rozeti.
+  // Öteki modüllerin today() çıktısı birebir aynı; yol motoru (lib/today.js) değişmediği için bölüm, sıra ve düşme kuralı
+  // aynıdır. HEAD'deki hiçbir durak kaybolmaz; nefesin kısalması 20 dk sınırında yer açtığı için HEAD'de sınırdan
+  // düşen bir durak ya da yoga artık yolda olabilir.
+  const DONUS = ['routine:daire', 'routine:dikey']
+  const canon = (k) => (DONUS.includes(k) ? 'routine:DONUS' : k)
+  function oldUser(rnd, pick) {
+    const now = new Date(2026, 8, 1 + Math.floor(rnd() * 60), Math.floor(rnd() * 24), Math.floor(rnd() * 60))
+    const H = 85 + Math.floor(rnd() * 40)
+    const S = Math.floor(rnd() * 61)
+    const last = 1 + Math.floor(rnd() * 13)
+    const days = []
+    for (let k = H; k >= last; k--) if (k === last || rnd() < 0.95) days.push(k)
+    const off = Math.floor(rnd() * 7)
+    const tried = rnd() < 0.7
+    const tests = []
+    const sessions = []
+    days.forEach((k, idx) => {
+      const date = new Date(now.getTime() - k * 86400000 + (Math.floor(rnd() * 10) - 5) * 3600000)
+      const iso = (m) => new Date(date.getTime() + m * MIN).toISOString()
+      const staged = days.length - idx <= S
+      const st = (v) => (staged ? { stage: v } : {})
+      for (const g of ['isinma', 'uzak', 'yakinuzak', staged && rnd() < 0.5 ? 'dikey' : 'daire', 'kirpma']) if (rnd() < 0.92) sessions.push({ type: 'routine', setId: g, seconds: 40, date: iso(1), ...st('K7') })
+      if (rnd() < 0.92) sessions.push({ type: 'breath', seconds: pick([300, 300, 180, 60]), date: iso(2), ...st('N3'), ...(rnd() < 0.02 ? { strained: true } : {}) })
+      if (rnd() < 0.85) sessions.push({ type: 'game', game: 'track', date: iso(3) })
+      if (rnd() < 0.6) sessions.push({ type: 'game', game: 'snake', date: iso(4) })
+      if (tried && rnd() < 0.6) sessions.push({ type: 'notice', count: 2, date: iso(5), seconds: 60 })
+      if (rnd() < 0.4) sessions.push({ type: 'span', span: 8, date: iso(6), seconds: 60 })
+      if (rnd() < 0.4) sessions.push({ type: 'street', noticed: 2, asked: 3, date: iso(7), seconds: 60 })
+      if (rnd() < 0.5) sessions.push({ type: 'yoga', lesson: pick([1, 2, 5, 6, 8, 9]), planned: pick([3, 3, 5]) * 60, date: iso(8), completed: true, reachedClosing: true })
+      if ((k + off) % 7 === 0) for (const [j, eye] of ['R', 'L', 'OU'].entries()) tests.push({ type: 'va-weekly', eye, date: iso(9 + j), runDay: dayKey(date) })
+      if ((k + off) % 7 === 6) tests.push({ type: 'reading', date: iso(12), runDay: dayKey(date) })
+    })
+    for (const g of ['isinma', 'uzak', 'daire', 'dikey', 'kirpma']) if (rnd() < 0.2) sessions.push({ type: 'routine', setId: g, seconds: 40, date: new Date(now.getTime() - 60000).toISOString(), stage: 'K7' })
+    if (rnd() < 0.2) sessions.push({ type: 'breath', seconds: 180, date: new Date(now.getTime() - 60000).toISOString(), stage: 'N3' })
+    sessions.sort((a, b) => a.date.localeCompare(b.date))
+    tests.sort((a, b) => a.date.localeCompare(b.date))
+    const eye = rnd() < 0.5 ? undefined : { locked: rnd() < 0.2, due: rnd() < 0.3 ? pick(['budget', 'hourly', 'daily']) : null, used: Math.floor(rnd() * 7) * MIN, budgetMs: pick([5, 3]) * MIN, leftMs: 2 * MIN }
+    return { tests, sessions, now, eye, profile: rnd() < 0.2 ? { seizure: pick(['yes', 'no', 'unsure']) } : undefined, later: rnd() < 0.2 ? { day: dayKey(now), later: ['yoga'] } : null }
+  }
+  it('rastgele 120 uzun geçmişli kullanıcı (routine ve breath D ≥ 60, Dstage 0–60, son 13 günde yapılmış)', () => {
+    const { rnd, pick } = y1Rng(777)
+    let dikey = 0
+    let notice = 0
+    for (let i = 0; i < 120; i++) {
+      const ctx = oldUser(rnd, pick)
+      const progression = progressionCtx({ tests: ctx.tests, sessions: ctx.sessions, now: ctx.now, modules: Y1_ALL, later: ctx.later })
+      expect(progression.mod.routine.D).toBeGreaterThanOrEqual(60)
+      expect(progression.mod.breath.D).toBeGreaterThanOrEqual(60)
+      const cb = { ...ctx, progression }
+      // (a) manifest katmanı
+      for (const m of Y1_ALL) {
+        const a = Y0[m.id] ? Y0[m.id](ctx) : m.today?.(ctx) ?? null
+        const b = m.today?.(cb) ?? null
+        if (m.id === 'breath') {
+          expect(b.minutes).toBeLessThanOrEqual(3)
+          const { minutes, stage, sub, ...rb } = b
+          const { minutes: _m, sub: _s, ...ra } = a
+          expect(rb, `bağlam ${i} breath`).toEqual(ra)
+        } else if (m.id === 'routine') {
+          const strip = (list) => list.filter((g) => !['daire', 'dikey', 'kirpma', 'normal'].includes(g.key) || !b.some((x) => x.key === 'normal')).map(({ stage, weekDays, rotate, ...g }) => (['daire', 'dikey'].includes(g.key) ? { key: 'DONUS' } : g))
+          const sb = strip(b)
+          expect(sb.filter((g) => g.key !== 'DONUS'), `bağlam ${i} routine`).toEqual(strip(a).filter((g) => g.key !== 'DONUS'))
+          if (b.some((g) => g.key === 'dikey')) dikey++
+        } else if (m.id === 'notice') {
+          if (a) expect(b, `bağlam ${i} notice`).toEqual(a)
+          else if (b) notice++
+        } else expect(JSON.stringify(b), `bağlam ${i} ${m.id}`).toBe(JSON.stringify(a))
+      }
+      // (b) yol katmanı: HEAD'deki durak kaybolmaz, ortak durakların sırası ve bölümü aynı
+      const pa = buildPath(Y0_MODS, ctx)
+      const pb = buildPath(Y1_ALL, cb)
+      const full = pb.stops.some((s) => s.key === 'routine:normal')
+      const ka = pa.stops.map((s) => canon(s.key)).filter((k) => !(full && (k === 'routine:DONUS' || k === 'routine:kirpma')))
+      const kb = pb.stops.map((s) => canon(s.key)).filter((k) => k !== 'routine:normal')
+      const back = kb.filter((k) => !ka.includes(k) && k !== 'notice')
+      const lost = ka.filter((k) => !kb.includes(k) && !(k === 'yoga' && back.length))
+      expect(lost, `bağlam ${i}`).toEqual([])
+      const common = (list, other) => list.filter((s) => other.includes(canon(s.key))).map((s) => [canon(s.key), s.block])
+      expect(common(pb.stops, ka), `bağlam ${i}`).toEqual(common(pa.stops.filter((s) => !(full && ['routine:daire', 'routine:kirpma'].includes(s.key))), kb))
+      expect(restDecision(ctx.eye ?? { locked: false, due: null, used: 2 * MIN, budgetMs: 5 * MIN }, pb, progression)).toBe(y0Rest(ctx.eye ?? { locked: false, due: null, used: 2 * MIN, budgetMs: 5 * MIN }))
+    }
+    expect(dikey).toBeGreaterThan(0)
+    expect(notice).toBeGreaterThan(0)
+  }, 60000)
+  // §3.G.6 izinli listesine eklenen iki fark (Y1 kod raporu; sahibe tek cümle): (1) nefes 5 → 3 dk kısaldığı için yol
+  // 20 dk sınırında yer açar: HEAD'in sınırdan düşürdüğü durak (çoğu Daire ya da Yukarı–aşağı, Fark Ettin mi?, yoga) yolda
+  // kalır; yoga (R7b) ancak geri gelen durak ya da yola giren Bugünün görevi yüzünden sığmadığında yer verir.
+  // (2) 14+ gün sonra dönen eski kullanıcı o gün yumuşak gün görür (§3.A.8-1: bir basamak aşağı, nefes 2 dk).
+  const total = (p) => p.stops.reduce((a, x) => a + (x.minutes ?? 0), 0)
+  it('fark (1): geri gelen durak HEAD\'de 20 dk sınırından düşmüştü; yoga yalnız sığmadığında yer verir; yol 20 dk\'yı aşmaz', () => {
+    const { rnd, pick } = y1Rng(9191)
+    let back = 0
+    let yogaGave = 0
+    for (let i = 0; i < 150; i++) {
+      const ctx = oldUser(rnd, pick)
+      const progression = progressionCtx({ tests: ctx.tests, sessions: ctx.sessions, now: ctx.now, modules: Y1_ALL, later: ctx.later })
+      const pa = buildPath(Y0_MODS, ctx)
+      const pb = buildPath(Y1_ALL, { ...ctx, progression })
+      const full = pb.stops.some((x) => x.key === 'routine:normal')
+      const ka = pa.stops.map((x) => canon(x.key)).filter((k) => !(full && (k === 'routine:DONUS' || k === 'routine:kirpma')))
+      // bugün yapılmış durak hiç düşmez (lib/today.js dropOne); HEAD'de olmayan Yukarı–aşağı bugün yapıldıysa dönüşümün işidir
+      const returned = pb.stops.filter((x) => !ka.includes(canon(x.key)) && x.id !== 'notice' && x.key !== 'routine:normal' && !x.done)
+      for (const x of returned) {
+        expect(total(pa) + x.minutes, `bağlam ${i} ${x.key}`).toBeGreaterThan(PATH.capMin) // HEAD'de yer yoktu
+        back++
+      }
+      const yA = pa.stops.find((x) => x.id === 'yoga')
+      if (yA && !pb.stops.some((x) => x.id === 'yoga')) {
+        const noticeIn = pb.stops.some((x) => x.id === 'notice') && !pa.stops.some((x) => x.id === 'notice')
+        expect(returned.length > 0 || noticeIn, `bağlam ${i}`).toBe(true)
+        expect(total(pb) + yA.minutes, `bağlam ${i}`).toBeGreaterThan(PATH.capMin) // R7b: sığmadı
+        yogaGave++
+      }
+      expect(total(pb)).toBeLessThanOrEqual(PATH.capMin)
+    }
+    expect(back).toBeGreaterThan(0)
+    // yoganın yer verdiği bağlam seyrektir (20.000 bağlamlık düzenekte ≈ %0,3); burada sayılır, kural yukarıda sınanır
+    expect(yogaGave).toBeLessThan(150)
+  }, 60000)
+  it('fark (2): 14–40 gün sonra dönen eski kullanıcı: yumuşak gün (nefes 2 dk, göz K6, çeşitleme bir aşağı, rozet yok); HEAD\'deki durak kaybolmaz', () => {
+    const { rnd, pick } = y1Rng(4545)
+    for (let i = 0; i < 80; i++) {
+      const base = oldUser(rnd, pick)
+      const gap = 14 + Math.floor(rnd() * 27)
+      const ctx = { ...base, now: new Date(base.now.getTime() + gap * 86400000), later: null }
+      ctx.sessions = ctx.sessions.filter((x) => new Date(x.date) < base.now)
+      const progression = progressionCtx({ tests: ctx.tests, sessions: ctx.sessions, now: ctx.now, modules: Y1_ALL })
+      expect(progression.mod.breath.G).toBeGreaterThanOrEqual(14)
+      const pb = buildPath(Y1_ALL, { ...ctx, progression })
+      const br = pb.stops.find((x) => x.id === 'breath')
+      expect(br, `bağlam ${i}`).toMatchObject({ minutes: 2, stage: { soft: true, id: 'N2' } })
+      for (const x of pb.stops.filter((y) => y.id === 'routine')) expect(x.stage, `bağlam ${i}`).toMatchObject({ soft: true, id: 'K6' })
+      expect(pb.stops.some((x) => x.key === 'routine:daire')).toBe(false) // K6: Daire yok, Yukarı–aşağı var
+      expect(newStopKeys({ progression }, pb.stops)).toEqual(expect.not.arrayContaining(['breath', 'routine:dikey']))
+      const pa = buildPath(Y0_MODS, ctx)
+      const kb = pb.stops.map((x) => canon(x.key))
+      const lost = pa.stops.map((x) => canon(x.key)).filter((k) => !kb.includes(k) && k !== 'yoga')
+      expect(lost, `bağlam ${i}`).toEqual([])
+      expect(total(pb)).toBeLessThanOrEqual(PATH.capMin)
+    }
+  }, 60000)
 })

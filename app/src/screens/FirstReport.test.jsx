@@ -34,6 +34,18 @@ describe('İlk rapor · uygulamalardan sonra', () => {
     expect(changeOf({ better: 'up', gain: 2, lo: 1, hi: 3 })).toEqual({ value: 2, lo: 1, hi: 3, verb: 'arttı' })
     expect(changeOf({ better: 'up', gain: 0, lo: null, hi: null })).toMatchObject({ value: 0, lo: null, verb: 'değişmedi' })
   })
+  it('fiil ekrana basılan (bir haneye yuvarlanmış) değerden: "azaldı: −0,0" ya da "arttı: +0,0" çıkmaz', () => {
+    expect(changeOf({ better: 'up', gain: -0.02 })).toMatchObject({ value: 0, verb: 'değişmedi' })
+    expect(changeOf({ better: 'down', gain: -0.04 })).toMatchObject({ value: 0, verb: 'değişmedi' })
+    expect(Object.is(changeOf({ better: 'up', gain: -0.02 }).value, -0)).toBe(false)
+    expect(changeOf({ better: 'up', gain: 0.06 })).toMatchObject({ value: 0.1, verb: 'arttı' })
+    expect(changeOf({ better: 'down', gain: 0.26 })).toMatchObject({ value: -0.3, verb: 'azaldı' })
+    // ekranda: "değişmedi: 0,0", işaretsiz
+    const recs = [[5, 5], [5, 5], [5, 5]].map(([b, a], i) => ({ id: `z${i}`, ...makeYogaRecord({ lesson: 1, planned: 300, seconds: 300, reachedClosing: true, before: b, after: a, endedAt: new Date(Date.now() - (i + 1) * 3600000) }) }))
+    const t = text(renderToStaticMarkup(h(FirstReport, { tests: [], sessions: recs, start: ago(4), onClose: () => {}, onProgress: () => {} })))
+    expect(t).toMatch(/ortalama değişmedi: 0,0 \(/)
+    expect(t).not.toMatch(/[−+]0,0/)
+  })
   it('yoga Ders 1: gerginlik arttıysa "arttı: +…" ve aralık artı yönde', () => {
     const recs = [[4, 6], [3, 6], [4, 7], [5, 7]].map(([b, a], i) => ({ id: `y${i}`, ...makeYogaRecord({ lesson: 1, planned: 300, seconds: 300, reachedClosing: true, before: b, after: a, endedAt: new Date(Date.now() - (i + 1) * 3600000) }) }))
     const t = text(renderToStaticMarkup(h(FirstReport, { tests: [], sessions: recs, start: ago(4), onClose: () => {}, onProgress: () => {} })))

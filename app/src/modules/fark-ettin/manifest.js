@@ -2,6 +2,7 @@
 // İddia sınırı: gerçek hayatta daha çok fark ettirdiği gösterilmedi; puan kişi-içi gidişat içindir.
 import { SESSION_TYPE, isStreet } from '../../lib/street.js'
 import { withinDays, isSameDay } from '../../lib/today.js'
+import { unlocked } from '../../lib/progression.js'
 import { NBSP, join, durationPart } from '../../lib/format.js'
 
 const dayKey = (s) => new Date(s.date).toDateString()
@@ -37,7 +38,10 @@ export default {
   },
   // Bugünün yolu: Nefes'in hemen ardından (kısa farkındalık çalışması fark etmeyi artırdı: Schofield 2015);
   // son 7 günde 3 günden az yapıldıysa. Tek Bakışta ile dönüşümlü (aynı gün biri; lib/today.js rotate).
-  today({ sessions, now }) {
+  // İlerleme açıkken (ctx.progression) yola kayıtlı altıncı günden gelir (lib/ladders.js UNLOCK; SONSUZ_YOL §3.A.7).
+  today(ctx) {
+    const { sessions, now } = ctx
+    if (!unlocked(ctx, 'fark-ettin')) return null
     const done = sessions.some((s) => isStreet(s) && isSameDay(s, now))
     const days = new Set(withinDays(sessions.filter(isStreet), now).map(dayKey)).size
     if (!done && days >= WEEKLY_DAYS) return null

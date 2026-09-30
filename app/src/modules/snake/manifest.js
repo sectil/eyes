@@ -2,6 +2,7 @@
 import { BEST_KEY, OPTS_KEY, bestFromSessions } from '../../lib/snake.js'
 import { NBSP, finite, join, durationPart, CONTROL_LABEL } from '../../lib/format.js'
 import { withinDays, isSameDay } from '../../lib/today.js'
+import { unlocked } from '../../lib/progression.js'
 const isSnake = (s) => s.type === 'game' && s.game === 'snake'
 
 export default {
@@ -33,7 +34,10 @@ export default {
   },
   // Bugünün yolu: 2. bölümün son göz durağı, bonus (yol uzarsa ilk düşen; Hızlı Bakış günü yok).
   // VARSAYIM: bir tur ≈ 2 dk; oyunda tur sınırı yok, "1 tur" yalnızca öneri.
-  today({ sessions, now }) {
+  // İlerleme açıkken (ctx.progression) yola kayıtlı ikinci günden gelir (lib/ladders.js UNLOCK; SONSUZ_YOL §3.A.7).
+  today(ctx) {
+    const { sessions, now } = ctx
+    if (!unlocked(ctx, 'snake')) return null
     return { title: 'Yılan', sub: '1 tur', minutes: 2, slot: 'open', glyph: 'snake', openEnded: true, game: true, dropRank: 1, done: sessions.some((s) => isSnake(s) && isSameDay(s, now)) }
   },
   coach(sessions, now) {

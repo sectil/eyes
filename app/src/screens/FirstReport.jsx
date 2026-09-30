@@ -11,14 +11,20 @@ import '../styles/progress2.css'
 // Göz ve WHO-5 için dürüst durum: E testi haftada bir (karar 2026-09-29); ilk test alışma, başlangıç sonraki 3 haftalık
 // testle (en erken 22. gün; lib/trend.js). Her gün test eden eski kullanıcıda 8–21. günlerde. WHO-5 14 günde bir.
 const num = (v, d = 1) => (Number.isFinite(v) ? decimalTr(v, d) : '–')
-const signed = (v, d = 1) => (Number.isFinite(v) ? `${v > 0 ? '+' : v < 0 ? '−' : ''}${decimalTr(Math.abs(v), d)}` : '–')
+// İşaret yazılan (yuvarlanmış) değerden: −0,02 → "0,0" ("−0,0" değil)
+const signed = (v, d = 1) => {
+  if (!Number.isFinite(v)) return '–'
+  const r = +v.toFixed(d)
+  return `${r > 0 ? '+' : r < 0 ? '−' : ''}${decimalTr(Math.abs(v), d)}`
+}
 
 // Etkinin puandaki kendi değişimi (sonra − önce) ve güven aralığı aynı yönde; fiil değişimin işaretinden. e.gain, lo, hi
 // iyileşme yönündedir: "düşük daha iyi" ölçüde (Yön, yoga Ders 1–2) çevrilir (exportData.reportHtml ile aynı). Önceden
 // fiil better'dan seçiliyordu ve aralık çevrilmiyordu: artan gerginlik "azaldı: +2,0 (%95 GA −3,1 – −0,9)" yazıyordu.
+// Değer ekrandaki gibi bir haneye yuvarlanır ve fiil ondan seçilir: küçük değişim "azaldı: −0,0" değil "değişmedi: 0,0".
 export function changeOf(e) {
   const k = e?.better === 'down' ? -1 : 1
-  const value = Number.isFinite(e?.gain) ? k * e.gain : null
+  const value = Number.isFinite(e?.gain) ? Number((k * e.gain).toFixed(1)) || 0 : null
   const ci = Number.isFinite(e?.lo) && Number.isFinite(e?.hi)
   return {
     value,

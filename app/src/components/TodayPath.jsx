@@ -12,6 +12,10 @@ import '../styles/todaypath.css'
 //   ardında sahne, mola = su ve ay (Nefes), final = altın kenar (fark etme). Nef tek kelimeyle yol gösterir.
 // Her bölüm bir kanat yayı: 1. bölüm sağa ")", 2. bölüm sola "(" bükülür; arada su bandı.
 // plan: lib/today.js buildPath sonucu; eye: App eyeStatus(); day: lib/notice.js dayNumber(now).
+// newKeys: bugün ilk kez gelen durak ya da basamak (lib/progression.js newStopKeys): etikette "Yeni" (S0 taslağı b).
+// restMin: molanın süresi (lib/progression.js pathRestMinutes; yoksa Nefes durağının süresi): bant ve baloncuk bunu yazar.
+// staged: yol ilerleme bağlamıyla kuruldu (Ana sayfa). Yalnız o zaman S0 düzeltmeleri çizilir (Ç17 yıldızı, 320 pt'de
+// baloncuk ve bölüm etiketi kabın içinde); verilmezse çizim Y1 öncesiyle birebir aynıdır.
 
 const W = 300 // yol koordinatı (px); ortalanır
 const STEP = 116
@@ -21,6 +25,8 @@ export const A_DONE = 38
 
 const GLYPH = {
   arrows: <><path d="M3 12h18" /><path d="M7 8l-4 4 4 4" /><path d="M17 8l4 4-4 4" /></>,
+  // Yukarı–aşağı (göz merdiveninin `dikey` grubu, SONSUZ_YOL.PLAN.v1 §3.A.6): Sağ–sol oklarının dikeyi
+  updown: <><path d="M12 3v18" /><path d="M8 7l4-4 4 4" /><path d="M8 17l4 4 4-4" /></>,
   far: <><path d="M2.5 19l6-8.5 3.8 5 2.7-3.2 6.5 6.7z" /><circle cx="17" cy="6" r="2" /></>,
   nearfar: <><circle cx="7" cy="12" r="4" /><circle cx="19" cy="12" r="1.8" /><path d="M12.2 12h3.6" strokeDasharray="1.2 2.2" /></>,
   circle: <><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3" /><path d="M18 3.2v4h-4" /></>,
@@ -262,13 +268,17 @@ function crescent(y0, y1, mirror) {
   return `M${X(42)} ${yA}C${X(190)} ${yA - 14 * k} ${X(276)} ${mid - 136 * k} ${X(276)} ${mid}C${X(276)} ${mid + 136 * k} ${X(190)} ${yB + 14 * k} ${X(42)} ${yB}C${X(150)} ${yB - 28 * k} ${X(176)} ${mid + 114 * k} ${X(176)} ${mid}C${X(176)} ${mid - 114 * k} ${X(150)} ${yA + 28 * k} ${X(42)} ${yA}Z`
 }
 const STARS = [[26, 16, 0.8], [64, 6, 0.5], [104, 24, 0.7], [168, 10, 0.6], [206, 22, 0.8], [244, 6, 0.5], [282, 20, 0.7], [146, 2, 0.4]]
+// İlk yıldız "Mola · N dk" etiketinin altında (S0 kararı Ç17: etiketin üstüne düşüyordu); ilerlemeyle kurulan yolda
+const STARS_Y1 = [[26, 44, 0.8], ...STARS.slice(1)]
+const NB = '\u00a0'
 const px = (x) => `calc(50% + ${x - W / 2}px)`
 
 // Uygulama açıkken son görülen tamamlanmış duraklar (Ana sayfaya dönüşte "az önce bitti" anı için)
 let seenDone = null
 
-export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onStart, week = '' }) {
+export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onStart, week = '', newKeys = [], restMin = null, staged = false }) {
   const { stops } = plan
+  const isNew = (s) => Array.isArray(newKeys) && newKeys.includes(s.key)
   const doneKeys = stops.filter((s) => s.done).map((s) => `${day}:${s.key}`)
   const [fresh] = useState(() => (seenDone ? doneKeys.filter((k) => !seenDone.has(k)).map((k) => k.slice(String(day).length + 1)) : []))
   const [gold, setGold] = useState(fresh.length > 0)
@@ -309,7 +319,18 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
   })
   const restI = stops.findIndex((s) => s.restSlot)
   const restP = restI < 0 ? 0 : states[restI] === 'done' ? 1 : states[restI] === 'running' ? 1 - eye.leftMs / LIMITS.restMs : 0
-  const jev = jevLine(plan, { day, fmt: fmtLeft, eye, restLeftMs: pathRest && restI >= 0 && !stops[restI].done ? eye.leftMs : null, gold })
+  let jev = jevLine(plan, { day, fmt: fmtLeft, eye, restLeftMs: pathRest && restI >= 0 && !stops[restI].done ? eye.leftMs : null, gold })
+  // Sıradaki mola ise (lib/today.js jevLine "Sırada Nefes · N dk mola" satırı) baloncuk molanın süresini yazar (S0 kararı
+  // 8): mola nefes kadarsa (1. gün 1, 2. gün 2 dk) "Sırada Nefes · 1 dk mola"; mola nefesten uzunsa (3. günden 5 dk)
+  // "Sırada mola: 3 dk nefes, 2 dk dinlenme". Öteki satırlar ("İlk durak: Nefes · 3 dk" …) durağın kendi süresini yazar.
+  if (restMin != null && plan.next?.restSlot && plan.doneCount > 0) {
+    const nx = plan.next
+    const restLine = (m) => `Sırada ${nx.title}${NB}·${NB}${m}${NB}dk mola`
+    if (jev.line === restLine(nx.minutes ?? 5)) {
+      const b = Number.isFinite(nx.minutes) ? nx.minutes : restMin
+      jev = { ...jev, line: restMin > b ? `Sırada mola: ${b}${NB}dk nefes, ${restMin - b}${NB}dk dinlenme` : restLine(restMin) }
+    }
+  }
 
   // Açılışta sıradaki durak ekranda değilse ona kaydır (ekranın ortasına)
   const nowRef = useRef(null)
@@ -328,13 +349,13 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
   const chipAt = plan.forcedRestBefore ? stops.findIndex((s) => s.key === plan.forcedRestBefore) : -1
 
   return (
-    <section className="tp" aria-label="Bugünün yolu">
+    <section className={staged ? 'tp tp-y1' : 'tp'} aria-label="Bugünün yolu">
       <Ribbon stops={stops} states={states} />
       <div className="tp-pv" style={{ height: L.height }}>
         {L.band && (
           <div className="tp-band" style={{ top: L.band.top, height: L.band.height }} aria-hidden="true">
-            <span className="tp-btag">Mola · {stops[restI].minutes ?? 5} dk</span>
-            {STARS.map(([x, y, o], i) => <span key={i} className="tp-star" style={{ left: px(x), top: y, opacity: o }} />)}
+            <span className="tp-btag">Mola · {restMin ?? stops[restI].minutes ?? 5} dk</span>
+            {(staged ? STARS_Y1 : STARS).map(([x, y, o], i) => <span key={i} className="tp-star" style={{ left: px(x), top: y, opacity: o }} />)}
             {[1.4, 2.6, 3.8].map((k, i) => (
               <span key={i} className={`tp-rp r${i + 1}${(states[restI] === 'now' || states[restI] === 'running') && !reducedMotion() ? ' live' : ''}`} style={{ left: px(124), top: 106, '--k': k, '--o': [0.5, 0.3, 0.14][i] }} />
             ))}
@@ -391,15 +412,16 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
                 style={{ left: px(x), top: y, ...(s.restSlot ? { '--p': restP } : {}) }}
                 onClick={() => tap(s, st)}
                 aria-disabled={st === 'later' ? 'true' : undefined}
-                aria-label={`${s.title}, ${KIND_TR[form]}${ariaSub(s)}${s.minutes && !s.hideMinutes ? `, ${s.minutes} dakika` : ''}${subLine.warn ? `, ${sub}` : ''}, ${STATE_TR[st]}${st === 'locked' ? ` (${sub})` : ''}${st === 'later' && plan.next ? `. Önce ${plan.next.title}` : ''}`}
+                aria-label={`${s.title}${isNew(s) ? ', yeni' : ''}, ${KIND_TR[form]}${ariaSub(s)}${s.minutes && !s.hideMinutes ? `, ${s.minutes} dakika` : ''}${subLine.warn ? `, ${sub}` : ''}, ${STATE_TR[st]}${st === 'locked' ? ` (${sub})` : ''}${st === 'later' && plan.next ? `. Önce ${plan.next.title}` : ''}`}
               >
                 <StopInner stop={{ ...s, runLeft: st === 'running' ? fmtLeft(eye.leftMs) : '' }} form={form} state={st} icon={icons[s.id]} fromA={isFresh ? A_NOW : null} />
               </button>
               {isFresh && !reducedMotion() && <span className="tp-gring" style={{ left: px(x), top: y }} aria-hidden="true"><i /><i /><i /><i /></span>}
               {showLabel && (
                 <span className={`tp-lb ${side}`} style={{ left: px(labelX), top: y }} aria-hidden="true">
-                  {form === 'me' && <span className="tag">Ölçüm</span>}
-                  {form === 'rest' && <span className="tag">Mola</span>}
+                  {form === 'me' && <span className="tag">Ölçüm{isNew(s) && <span className="new"> · Yeni</span>}</span>}
+                  {form === 'rest' && <span className="tag">Mola{isNew(s) && <span className="new"> · Yeni</span>}</span>}
+                  {form !== 'me' && form !== 'rest' && isNew(s) && <span className="tag new">Yeni</span>}
                   <span className="t">{form === 'rest' ? `${s.title} · ${s.minutes ?? 5} dk` : s.title}</span>
                   <small className={st === 'locked' ? 'lk' : subLine.warn ? 'warn' : ''}>
                     {subLine.warn && <b className="wi">!</b>}
@@ -437,16 +459,19 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
           const side = x > W / 2 ? 'left' : 'right'
           let left
           let width
+          let edge = 0
           if (side === 'right') {
             left = x + r[0] + 10
             width = Math.min(172, W - left)
           } else {
-            const edge = x - r[0] - 10
+            edge = x - r[0] - 10
             width = Math.min(172, edge)
             left = edge - width
           }
+          // 300 px'lik koordinattan dar kapta (320 pt ekran) baloncuk kabın içinde kalır (S0 taslağı b); ≥ 300 px'te aynı
+          const fit = !staged ? { left: px(left) } : side === 'right' ? { left: px(left), maxWidth: `calc(50% + ${W / 2 - left}px)` } : { left: `max(0px, ${px(left)})`, maxWidth: `calc(50% + ${edge - W / 2}px)` }
           return (
-            <div className="tp-jb" data-side={side} style={{ left: px(left), width, top: y }} aria-live="polite">
+            <div className="tp-jb" data-side={side} style={{ ...fit, width, top: y }} aria-live="polite">
               <span className="tp-jev"><IrisMark size={32} /></span>
               <div className="tp-jb-b">
                 <b className={`w${gold ? ' gold' : ''}`}>{jev.word}</b>

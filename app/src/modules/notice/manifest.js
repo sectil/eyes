@@ -1,6 +1,7 @@
 // Günlük fark etme görevi (lib/notice.js). Dikkat halkası; kilitsiz (ekrana bakma değil, dış dünya).
 import { SESSION_TYPE, isNotice, weekDays, COUNTS, promptFor } from '../../lib/notice.js'
 import { doneToday, withinDays } from '../../lib/today.js'
+import { unlocked } from '../../lib/progression.js'
 import { mean } from '../../lib/format.js'
 
 export default {
@@ -26,9 +27,12 @@ export default {
     countsTowardGoal: false, // 1 dk'lık kayıt; haftalık hedefi şişirmesin
     describe: (s) => ({ title: 'Fark etme görevi', detail: `${COUNTS[s.count] ?? '0'} fark edildi` }),
   },
-  // Plana: bir kez yapıldıysa, her gün (VARSAYIM: zorlama yok; önce kullanıcı dener)
-  today({ sessions, now }) {
-    if (!sessions.some(isNotice)) return null
+  // Plana: bir kez yapıldıysa, her gün (VARSAYIM: zorlama yok; önce kullanıcı dener). İlerleme açıkken
+  // (ctx.progression) kayıt şartı kalkar: yola kayıtlı ikinci günden herkesin yolunda (lib/ladders.js UNLOCK;
+  // SONSUZ_YOL §3.A.7, §2.2 merdiven 3). İlerleme yokken bugünkü kural aynen.
+  today(ctx) {
+    const { sessions, now } = ctx
+    if (ctx.progression ? !unlocked(ctx, 'notice') : !sessions.some(isNotice)) return null
     return { title: 'Bugünün görevi', minutes: 1, slot: 'finale', glyph: 'spark', dropRank: 2, done: doneToday(sessions, SESSION_TYPE, now) }
   },
   coach(sessions, now) {

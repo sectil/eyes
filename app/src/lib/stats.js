@@ -2,6 +2,7 @@
 // Saf fonksiyonlar. Tarihler yerel saatle günlere bölünür (calendar.js dayKey).
 import { dayKey, startOfWeek } from './calendar.js'
 import { findRoutine, setDurationSec } from './routines.js'
+import { LADDERS } from './ladders.js'
 import { NBSP, finite, join, formatDuration, durationPart } from './format.js'
 import { registry } from '../modules/registry.js'
 import { isReadingV2, cpsText } from './reading.js'
@@ -98,6 +99,8 @@ function sessionActivity(s, ts, idx) {
     const set = findRoutine(s.setId) // set ya da yol grubu
     const est = own == null && set ? setDurationSec(set) : null
     const seconds = own ?? est ?? 0
+    // Basamaklı yol grubu yoldaki adıyla (SONSUZ_YOL.PLAN.v1 §3.A.6: 2. gün isinma "Sağ–sol"); stage'siz kayıt bugünkü gibi
+    const staged = s.stage != null ? LADDERS.routine.steps.find((st) => st.id === s.stage)?.groups?.find((g) => g.key === s.setId)?.title ?? null : null
     return {
       ...base,
       kind: 'exercise',
@@ -105,7 +108,7 @@ function sessionActivity(s, ts, idx) {
       title: 'Egzersiz seti',
       seconds,
       estimated: est != null,
-      detail: join([set ? (set.group ? set.title : `${set.title} set`) : null, durationPart(seconds, est != null)]),
+      detail: join([set ? (set.group ? staged ?? set.title : `${set.title} set`) : null, durationPart(seconds, est != null)]),
     }
   }
   if (s.type === 'blink') {

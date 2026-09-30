@@ -3,6 +3,7 @@
 // aktarımı ve görmeyi iyileştirdiği gösterilmedi. Harfler kısa süre göründüğü için ilk turdan önce epilepsi sorusu.
 import { SESSION_TYPE, isSpan } from '../../lib/span.js'
 import { withinDays, isSameDay } from '../../lib/today.js'
+import { unlocked } from '../../lib/progression.js'
 import { profileSignals } from '../../lib/profile.js'
 import { NBSP, join, durationPart } from '../../lib/format.js'
 
@@ -38,8 +39,11 @@ export default {
       }
     },
   },
-  // Bugünün yolu: son 7 günde 3 günden az yapıldıysa 2. bölümde 2 dk'lık durak; yol uzarsa Yılan'dan sonra düşer
-  today({ sessions, now, profile }) {
+  // Bugünün yolu: son 7 günde 3 günden az yapıldıysa 2. bölümde 2 dk'lık durak; yol uzarsa Yılan'dan sonra düşer.
+  // İlerleme açıkken (ctx.progression) yola kayıtlı sekizinci günden gelir (lib/ladders.js UNLOCK; SONSUZ_YOL §3.A.7).
+  today(ctx) {
+    const { sessions, now, profile } = ctx
+    if (!unlocked(ctx, 'tek-bakis')) return null
     if (profile && profileSignals(profile).flashSafe === false) return null
     const done = sessions.some((s) => isSpan(s) && isSameDay(s, now))
     const days = new Set(withinDays(sessions.filter(isSpan), now).map(dayKey)).size

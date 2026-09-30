@@ -4,13 +4,41 @@ import { SESSION_TYPE, PATTERNS, BREATH_OPTS_KEY, BREATH_SAFETY_KEY, PROGRAM_DAY
 import { isSameDay } from '../../lib/today.js'
 import { NBSP, join, durationPart, mean } from '../../lib/format.js'
 import { withinDays } from '../../lib/today.js'
+import { stageOf } from '../../lib/progression.js'
+import { breathOfDay, breathSafety, mixHistory, pathBreathMinutes } from '../../lib/breathMix.js'
 const calmDelta = (s) => (Number.isFinite(s.calmBefore) && Number.isFinite(s.calmAfter) ? s.calmAfter - s.calmBefore : null)
 const minutesOf = (list) => Math.round(list.reduce((m, s) => m + (Number.isFinite(s.seconds) ? s.seconds : 0), 0) / 60)
+// "Yapıldı": en az 60 sn nefes (yol durağının tamam kuralıyla aynı; VARSAYIM)
+const breathDone = (s) => isBreath(s) && s.seconds >= 60
+
+// Sonsuz yol (SONSUZ_YOL.PLAN.v1 §3.A.4, §3.A.5): yoldaki nefesin bugünkü basamağı. ctx.progression yoksa null (yolda
+// bugünkü 5 dk). Süre basamağı D ile (1 → 2 → 3 dk), kalıp katmanı Dvar ile (lib/ladders.js); dün "Zorlandım" denmişse
+// bugün bir basamak kısa (lib/breathMix.js pathBreathMinutes). Yolda en çok 3 dk; mola yine 5 dk. more: yoldaki 3 dk
+// bitince "2 dk daha" düğmesi (program günü 5 dk ister, lib/breath.js programProgress); kısaltılmış günde yok.
+export function breathPathStage(ctx = {}) {
+  const stage = stageOf(ctx, 'breath')
+  if (!stage) return null
+  const safety = breathSafety(ctx.sessions ?? [], ctx.now ?? new Date())
+  const minutes = pathBreathMinutes(stage, safety)
+  return { stage, minutes, tier: stage.variant?.tier ?? 'A', stepDown: Boolean(safety.stepDown) && minutes < stage.minutes, more: minutes === 3 }
+}
+
+// Günün kalıbı (lib/breathMix.js breathOfDay): tohum günün kendisi, geçmiş kayıtlardaki `mix` alanı, tutmanın ön koşulu
+// güvenlik kartının görülmesi ve son 7 günde "Zorlandım" olmaması (§3.A.5). İlk haftada (A katmanı) Sakin ritim.
+export function breathMixFor(ctx = {}, pathStage = breathPathStage(ctx), { seen = false } = {}) {
+  if (!pathStage) return null
+  const now = ctx.now ?? new Date()
+  const sessions = ctx.sessions ?? []
+  return breathOfDay(pathStage.stage, { seedDay: ctx.progression?.seedDay ?? '', history: mixHistory(sessions, now), safety: breathSafety(sessions, now, { seen }) })
+}
 
 export default {
   id: 'breath',
-  // 'breath-1': nefes hatırlatmasından açılan 1 dk nefes (sakinlik puanı sorulmaz; kayıt aynı biçimde)
-  routes: ['breath', 'breath-rest', 'breath-1'],
+  // 'breath-1': nefes hatırlatmasından açılan 1 dk nefes (sakinlik puanı sorulmaz; kayıt aynı biçimde).
+  // 'breath-5': Ana sayfadaki göz molası önerisi ("Nefes · 5 dk", "5 dk mola"; lib/homeSuggest.js): her zaman 5 dk, yolun
+  // basamağı değil (onaylı yoga planı §B.2 kural 10: 5 dakikalık nefes Ana sayfada kalır). 'breath-rest' yalnız yolun
+  // Nefes durağıdır.
+  routes: ['breath', 'breath-rest', 'breath-1', 'breath-5'],
   title: 'Nefes',
   label: 'nefes pratiği',
   ring: 'life',
@@ -34,6 +62,8 @@ export default {
       }
     },
   },
+  // İlerleme (SONSUZ_YOL.PLAN.v1 §3.G.1): en az 60 sn'lik nefes kaydı o günü "yapıldı" sayar. Merdiven lib/ladders.js.
+  progression: { match: breathDone },
   coach(sessions, now) {
     const week = withinDays(sessions.filter(isBreath), now)
     const d = mean(week.map(calmDelta))
@@ -48,12 +78,20 @@ export default {
       { label: 'Sakinlik değişimi', value: d == null ? '—' : `${d > 0 ? '+' : ''}${d.toFixed(1)}`, sub: d == null ? null : 'seans başı, 1–5' },
     ]
   },
-  // Bugünün yolunda iki bölüm arasındaki mola durağı (yol planı §3.2): her gün, 5 dk. Yoldan açılınca
-  // 'breath-rest' ekranı 5 dk ile başlar ve Ana sayfa 5 dk göz molasını başlatır (Home.jsx).
+  // Bugünün yolunda iki bölüm arasındaki mola durağı (yol planı §3.2). Yoldan açılınca 'breath-rest' ekranı durağın
+  // süresiyle başlar ve Ana sayfa 5 dk göz molasını başlatır (Home.jsx).
+  //  - ctx.progression yok: her gün 5 dk (bugünkü kural, değişmez).
+  //  - ctx.progression var: 1. gün 1, 2. gün 2, 3. günden 3 dk (SONSUZ_YOL.PLAN.v1 §3.A.4; onaylı yoga planı karar 5.1:
+  //    yolda en çok 3 dk). Durağın `stage` alanı: { id, index, soft, minutes, tier, stepDown }.
   // VARSAYIM: bugün en az 60 sn nefes kaydı varsa tamam. Eski kural (yalnızca başlamış ya da uyku/stres
   // sinyali olan kullanıcı) kullanıcı isteğiyle kalktı: nefes yolda her gün var.
-  today({ sessions, now }) {
-    const done = sessions.some((s) => isBreath(s) && s.seconds >= 60 && isSameDay(s, now))
-    return { title: 'Nefes', sub: 'Gözlerin dinlenirken nefes al.', minutes: PROGRAM_DAY_SEC / 60, route: 'breath-rest', slot: 'rest', glyph: 'moon', done }
+  today(ctx = {}) {
+    const { sessions = [], now = new Date() } = ctx
+    const done = sessions.some((s) => breathDone(s) && isSameDay(s, now))
+    const stop = { title: 'Nefes', sub: 'Gözlerin dinlenirken nefes al.', minutes: PROGRAM_DAY_SEC / 60, route: 'breath-rest', slot: 'rest', glyph: 'moon', done }
+    const p = ctx.progression ? breathPathStage(ctx) : null
+    if (!p) return stop
+    const st = p.stage
+    return { ...stop, minutes: p.minutes, stage: { id: st.id ?? null, index: st.index, soft: Boolean(st.soft), minutes: p.minutes, tier: p.tier, stepDown: p.stepDown } }
   },
 }

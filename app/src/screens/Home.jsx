@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { pickSeries, EYE_LABEL } from '../lib/vaSeries.js'
 import { ChevronRight, TriangleAlert, Timer, Trophy, Check, Play, Flame, Lock, Eye, CalendarDays, CircleDot, Moon, Waves, Footprints, Bell, BellOff, GlassWater } from 'lucide-react'
 import { pendingCard, snooze, skip } from '../lib/profileQuestions.js'
@@ -6,12 +6,13 @@ import { profileFromScreening } from '../lib/profile.js'
 import { DAILY_GOAL_MIN, formatMin, todaySeconds } from '../lib/routines.js'
 import { Sparkline } from '../components/ui.jsx'
 import { trendMessage } from '../lib/trend.js'
-import { activeDays, weekProgress, weekDayKeys, mondayIndex } from '../lib/calendar.js'
+import { activeDays, weekProgress, weekDayKeys, mondayIndex, dayKey } from '../lib/calendar.js'
 import { snellen20 } from '../lib/optotype.js'
 import { activitiesFrom, countedActivities, summary, isExerciseSession } from '../lib/stats.js'
-import { buildPath, PATH } from '../lib/today.js'
+import { buildPath } from '../lib/today.js'
+import { progressionCtx, restDecision, newStopKeys, pathRestMinutes } from '../lib/progression.js'
 import { dayNumber } from '../lib/notice.js'
-import { eyeStatus, beginRest } from '../lib/eyeBudgetStore.js'
+import { eyeStatus, beginRest, restHistory } from '../lib/eyeBudgetStore.js'
 import '../styles/home.css'
 import '../styles/restlock.css'
 import { REASON_TEXT, fmtLeft } from '../lib/eyeBudget.js'
@@ -36,6 +37,8 @@ import { loadLater } from '../lib/pathLater.js'
 
 // Yoga ilk yayında yalnız iPhone uygulamasında (PLAN.v3 §D.7): web'de Pratikler listelerinde yoga kutucuğu yok
 export const onHome = (m, ios = isIOSApp()) => m?.id !== 'yoga' || ios
+// Ana sayfadaki göz molası önerisinin açtığı 5 dk'lık nefes (modules/breath/manifest.js routes)
+export const SUGGEST_BREATH = 'breath-5'
 const homeSection = (section) => registry.inSection(section).filter((m) => onHome(m))
 // Yoga sabah kartı (modul.md §9; veri merkezi işinin bileşeni). Dosya yoksa kart yok: import.meta.glob boş döner, derleme
 // kırılmaz. Kart ne zaman soracağına kendisi karar verir (gece başlanmış Uykuya Geçiş, 04.00–11.59, alarm sorusu önce).
@@ -170,15 +173,44 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   const todaySec = todaySeconds(exercise)
   // Bugünün yolu (lib/today.js): göz bütçesi ve abonelik durumu yolu biçimlendirir (bölümler, kilit, ilk test).
   // later: bugün "Sonra yaparım" denen duraklar (lib/pathLater.js; gün değişince geçersiz)
-  const plan = buildPath(registry.live, { tests, sessions, now, profile: settings.profile, eye: eyeBudget, gate: { firstTestOnly: tests.length === 0 && !premium }, later: loadLater(now) })
+  const later = loadLater(now)
+  // İlerleme bağlamı (lib/progression.js; SONSUZ_YOL.PLAN.v1 §3.A.2): sayaçlar kayıtlardan, bugünden önceki günlerle;
+  // yalnız burada, kayıtlar ya da gün değişince bir kez hesaplanır. Merdivenler ve açılma eşikleri bunu okur.
+  const today = dayKey(now)
+  const laterKeys = later?.later?.join(',') ?? ''
+  const progression = useMemo(
+    () => progressionCtx({ tests, sessions, now, modules: registry.live, later }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [tests, sessions, today, laterKeys],
+  )
+  const pathCtx = { tests, sessions, now, profile: settings.profile, eye: eyeBudget, gate: { firstTestOnly: tests.length === 0 && !premium }, later, progression }
+  const plan = buildPath(registry.live, pathCtx)
+  // Yolda bugün ilk kez gelen durak ya da basamak: "Yeni" rozeti (§1; 1. günde yok)
+  const newKeys = newStopKeys(pathCtx, plan.stops)
+  // Mola bandı ve baloncuğun süresi (lib/progression.js pathRestMinutes): yolun molası bugün başladıysa (sürerken ve
+  // bittikten sonra) 5 dk
+  const restStarted = restHistory().some((r) => r?.reason === 'path' && Number.isFinite(r.start) && dayKey(new Date(r.start)) === today)
+  const restMin = pathRestMinutes(eyeBudget, plan, progression, { restStarted })
   // Yoldaki Nefes durağı 5 dk göz molasını başlatır (yol planı A): kilit yoksa ve son moladan beri ≥ 1 dk göz
-  // çalışması varsa. Saatlik/günlük sınır dolmuşsa o mola başlar (5 dk yetmez).
+  // çalışması varsa. Saatlik/günlük sınır dolmuşsa o mola başlar (5 dk yetmez). Karar lib/progression.js
+  // restDecision'da: yeni kullanıcının ilk günlerinde (1. bölümün göz payı dolmamışken) mola ancak kalan göz
+  // çalışması bütçeyi aşacaksa başlar (§3.A.8-6); öteki her durumda bugünkü kural.
   const startStop = (route) => {
     if (route === 'breath-rest') {
-      const st = eyeStatus()
-      if (!st.locked && (st.due || st.used >= PATH.restMinUsed * 60000)) beginRest(st.due && st.due !== 'budget' ? st.due : 'path')
+      const why = restDecision(eyeStatus(), plan, progression)
+      if (why) beginRest(why)
     }
     onStart(route)
+  }
+  // Göz molası önerisi ("Nefes · 5 dk", sakin seçenek "5 dk mola"; lib/homeSuggest.js 'breath-rest' verir): yolun
+  // durağı değildir. Her zaman 5 dk'lık nefes açılır ('breath-5', modules/breath/view.jsx) ve mola bugünkü kuralla
+  // başlar (ilerleme bağlamı olmadan: yeni kullanıcının yol istisnası bu öneriye uygulanmaz). Onaylı yoga planı §B.2
+  // kural 10: "5 dakikalık nefes Ana sayfada kalır".
+  const startSuggest = (route) => {
+    if (route !== 'breath-rest') return startStop(route)
+    const why = restDecision(eyeStatus(), plan, null)
+    if (why) beginRest(why)
+    onStart(SUGGEST_BREATH)
   }
   // Ana sayfa başı: toplam gün (oyunlar dahil her kayıt), haftanın günleri (bugün çerçeveli), Nef önerisi
   const totalDays = activeDays([...tests, ...sessions]).size
@@ -269,14 +301,14 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           <span className="hh-nef-eye" aria-hidden="true" />
           <p>{sug.primary.line}{sug.primary.sub && <span>Nef · {sug.primary.sub}</span>}</p>
         </div>
-        <button type="button" className="hh-go" onClick={() => startStop(sug.primary.route)}>
+        <button type="button" className="hh-go" onClick={() => startSuggest(sug.primary.route)}>
           <span className="t"><small>{sug.primary.eyebrow}</small><b>{sug.primary.title}</b></span>
           <span className="ar"><Play size={20} aria-hidden="true" fill="currentColor" /></span>
         </button>
         {sug.alts.length > 0 && (
           <div className={`hh-alt n${sug.alts.length}`}>
             {sug.alts.map((a) => (
-              <button type="button" key={a.kind} onClick={() => startStop(a.route)}>
+              <button type="button" key={a.kind} onClick={() => startSuggest(a.route)}>
                 <span className={`ic ${a.kind}`}>{a.kind === 'breath' ? <Moon size={18} aria-hidden="true" fill="currentColor" /> : <Waves size={18} aria-hidden="true" />}</span>
                 <span className="tx"><b>{a.title}</b><small>{a.sub}</small></span>
               </button>
@@ -378,6 +410,9 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           day={dayNumber(now)}
           icons={Object.fromEntries(plan.stops.map((s) => [s.id, viewFor(s.id)?.icon]))}
           onStart={startStop}
+          newKeys={newKeys}
+          restMin={restMin}
+          staged={Boolean(progression)}
           week={week.met ? `Bu hafta ${week.done} gün · hedef tamam` : `Bu hafta ${week.done}/${week.target} gün`}
         />
       ) : (

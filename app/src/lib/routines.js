@@ -68,23 +68,34 @@ export const SETS = [
 // durak; tamamlanınca { type: 'routine', setId: <grup id> } kaydı düşer. Adımlar yalnızca EXERCISES'ten.
 // VARSAYIM: yolda "1 dk" gösterilir (30–38 sn içerik + açılış/bitiş); TrueDepth adımları yüzü bekler.
 // glyph: yol durağındaki çizim (components/TodayPath.jsx).
+// Sonsuz yol (SONSUZ_YOL.PLAN.v1 §3.A.6): tek yeni grup Yukarı–aşağı (`dikey`). Yalnız ilerleme merdiveniyle
+// (lib/ladders.js K4'ten) yola girer; ladderOnly: ctx.progression yokken yol bugünkü beş grubu verir
+// (modules/routine/manifest.js). Kimliği kayıtta (setId) ve Gelişim'de ötekiler gibi okunur.
 export const PATH_GROUPS = [
   { id: 'isinma', title: 'Isınma', glyph: 'arrows', steps: ['blink', 'lookRight', 'lookLeft'] },
   { id: 'uzak', title: 'Uzağa bakış', glyph: 'far', steps: ['farLook', 'rest'] },
   { id: 'yakinuzak', title: 'Yakın–uzak', glyph: 'nearfar', steps: ['nearFar', 'farLook'] },
   { id: 'daire', title: 'Daire', glyph: 'circle', steps: ['circleCw', 'circleCcw', 'rest'] },
   { id: 'kirpma', title: 'Göz kırpma', glyph: 'lid', steps: ['blink', 'rest'] },
+  { id: 'dikey', title: 'Yukarı–aşağı', glyph: 'updown', steps: ['lookUp', 'lookDown', 'rest'], ladderOnly: true },
 ].map((g) => ({ ...g, group: true }))
 
 // setId → set ya da yol grubu (Gelişim, rota)
 export const findRoutine = (id) => SETS.find((s) => s.id === id) ?? PATH_GROUPS.find((g) => g.id === id) ?? null
 
+// Bir setin ya da yol grubunun adımları, çeşitleme yamasıyla (§3.A.6 V1–V3): [{ id, ...EXERCISES[id], ...yama }].
+// set.patch: { [adım]: alanlar } (yalnız bu grubun yaması; lib/ladders.js). EXERCISES değişmez, üstüne yazılır.
+export function exerciseSteps(set) {
+  return (set?.steps ?? []).map((id) => ({ id, ...EXERCISES[id], ...(set?.patch?.[id] ?? {}) }))
+}
+
 // Günlük antrenman süresi hedefi (dakika). VARSAYIM: rakip uygulamalardaki
 // 1–3 dk setlere göre seçildi; bilimsel bir doz değildir.
 export const DAILY_GOAL_MIN = 3
 
+// Süre (sn): adım sürelerinin toplamı; çeşitleme yaması varsa yamalı süre (yamasız setlerde bugünkü değer)
 export function setDurationSec(set) {
-  return set.steps.reduce((a, id) => a + EXERCISES[id].seconds, 0)
+  return set.steps.reduce((a, id) => a + (Number.isFinite(set.patch?.[id]?.seconds) ? set.patch[id].seconds : EXERCISES[id].seconds), 0)
 }
 
 export function formatMin(sec) {

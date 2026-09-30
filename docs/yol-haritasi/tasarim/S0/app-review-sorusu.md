@@ -4,7 +4,7 @@
 > (https://developer.apple.com/events/view/upcoming-events?search=Review); (2) iletişim formu
 > (https://developer.apple.com/contact/request/app-review/support/), Apple bunu reddedilen ya da kaldırılan uygulamalar
 > için tarif ediyor. Plan yedeği sormadan kurala uyar: başlıkta yalnız ay, hava yalnız tam atıflı "Hava ve ay" kartında,
-> bildirimde "Source: Apple Weather". Hava başlıkta istenirse Y5'ten önce görüşmede aşağıdaki metin kullanılır.
+> bildirimde "Kaynak: Apple Weather" satırı (aşağıdaki İngilizce mektupta çevirisi "Source: Apple Weather"). Hava başlıkta istenirse Y5'ten önce görüşmede aşağıdaki metin kullanılır.
 
 ---
 
