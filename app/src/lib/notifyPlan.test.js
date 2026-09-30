@@ -128,6 +128,13 @@ describe('planNotifications: atlama nedenleri', () => {
     const four = plan({ now, focus: { ...focus, hours: 4 } })
     expect(four.notifications.filter((n) => n.type === 'focus').map((n) => n.id)).toEqual([7500, 7501, 7502, 7503])
   })
+  it('oturumun son molasıyla aynı dakikadaki hatırlatma kurulmaz (bitiş anı dahil; DEVIR §8.3)', () => {
+    // 10.30'da 2 saatlik oturum: son mola 12.30'da, mola hatırlatması da 12.30'da
+    const focus = { startedAt: new Date(2026, 8, 27, 10, 30).toISOString(), hours: 2 }
+    const p = plan({ now: new Date(2026, 8, 27, 10, 35), focus })
+    expect(logOf(p, 'mola', TODAY)).toMatchObject({ eligible: false, skipReason: 'focus' })
+    expect(p.notifications.filter((n) => n.at.getTime() === new Date(2026, 8, 27, 12, 30).getTime()).map((n) => n.type)).toEqual(['focus'])
+  })
   it('Bug 33: çalışma oturumunun gece saatleri kurulmaz (yalnız 09:00–21:00)', () => {
     // Gece yarısı başlatılmış 4 saatlik oturum: 01.00–04.00 "kalk" bildirimi yok
     const night = plan({ now: new Date(2026, 8, 27, 0, 5), focus: { startedAt: new Date(2026, 8, 27, 0, 0).toISOString(), hours: 4 } })

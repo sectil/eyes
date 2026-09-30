@@ -129,7 +129,8 @@ export function planNotifications({ now = new Date(), reminders, study = null, h
   const base = new Date(nowMs)
   const todayKey = dayKey(base)
   const span = focusSpan(focus)
-  const inFocus = (t) => span != null && t >= span.start && t < span.end
+  // Bitiş anı dahil: oturumun son molası bitiş anında gelir; aynı dakikadaki hatırlatma üst üste binmesin (DEVIR §8.3)
+  const inFocus = (t) => span != null && t >= span.start && t <= span.end
   const from = toMinutes(WINDOW.from)
   const to = toMinutes(WINDOW.to)
   const waterLast = toMinutes(WATER_LAST)

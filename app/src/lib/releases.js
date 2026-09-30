@@ -31,6 +31,8 @@ export const RELEASES = [
       { kind: 'change', text: "Okuma testi artık haftalık E testiyle aynı güne düşmez; o gün yerine ertesi gün yola eklenir. E testini yapmasan da okuma testi en çok bir gün bekler. Sonra haftada bir gelir: son okuma testinden 7 gün sonra, o günün başından itibaren yoldadır." },
       // Bug 33 (HATA_GUNLUGU): çalışma oturumunun mola bildirimleri gece de geliyordu (timeSensitive). Cihazda denenmedi.
       { kind: 'fix', text: "Çalışma oturumu gece de saat başı \"Kalk, uzağa bak\" bildirimi gönderebiliyordu; bu bildirimler Uyku ve Rahatsız Etme kiplerini de aşıyordu. Artık mola bildirimleri yalnız 09.00–21.00 arasında gelir; bu saatlere hiç mola sığmıyorsa oturum önerilmez." },
+      // Bug 34 (HATA_GUNLUGU): 7302 gündüze alındı; oturum sonuyla aynı dakikadaki hatırlatma kurulmaz. Cihazda denenmedi.
+      { kind: 'fix', text: "Denemenin 5. gün hatırlatması, deneme gece başladıysa gece geliyordu; artık o gün 10.00 ile 20.00 arasında gelir. Çalışma oturumunun son molasıyla aynı dakikaya düşen hatırlatma artık gelmez." },
     ],
   },
   {

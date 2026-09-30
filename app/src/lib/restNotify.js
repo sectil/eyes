@@ -111,8 +111,21 @@ export async function cancelRestEnd() {
 // "Tüm verileri sil" bunu iptal ETMEZ: Apple denemesi yerel veriyle birlikte bitmez, ücretlendirme öncesi uyarı kalır.
 export const TRIAL_NOTIFY_ID = 7302
 export const TRIAL_REMIND_DAYS = 5
-export async function scheduleTrialReminder(startMs = Date.now()) {
+
+// 5. günün anı, gündüze alınmış (DEVIR §8.2: gece 23.40'ta başlayan deneme 5 gün sonra 23.40'ta çalıyordu). Yerel
+// saatle 09.00'dan önceyse aynı gün 10.00, 21.00'den sonraysa aynı gün 20.00; gün değişmez, "2 gün sonra" doğru kalır.
+export function trialRemindAt(startMs) {
   const at = startMs + TRIAL_REMIND_DAYS * 86400000
+  if (!Number.isFinite(at)) return NaN
+  const d = new Date(at)
+  const m = d.getHours() * 60 + d.getMinutes()
+  if (m < 9 * 60) return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 10, 0, 0, 0).getTime()
+  if (m > 21 * 60) return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 20, 0, 0, 0).getTime()
+  return at
+}
+
+export async function scheduleTrialReminder(startMs = Date.now()) {
+  const at = trialRemindAt(startMs)
   if (!Number.isFinite(at) || at <= Date.now()) return false
   const pl = await plugin()
   if (!pl) return false

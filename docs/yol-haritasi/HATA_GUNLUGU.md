@@ -819,3 +819,12 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   Süren oturumun pencerede molası kalmadıysa sıradaki mola gösterilmez. Testler: `focus.test.js` ve
   `notifyPlan.test.js` "Bug 33" (üç saat diliminde de geçti).
 - Genel kural (yeni bildirim planına, ayrı oturumda): gece hiçbir hareket bildirimi yok; her bildirim PubMed dayanaklı.
+
+## Bug 34: Deneme hatırlatması gece, oturum sonu hatırlatmayla üst üste (2026-09-30, bildirim planı DEVIR §8.2–8.3)
+## Durum: DÜZELTİLDİ (kod + test; sahibin onayı "senin önerilerini uygulayalım"); cihazda görülecek
+- 7302 ("İlk 5 günün raporu hazır") denemenin başladığı saatin 5 gün sonrasına kuruluyordu: 23.40'ta başlayan deneme
+  23.40'ta çalıyordu. Artık yerel saatle 09.00'dan önceyse aynı gün 10.00, 21.00'den sonraysa aynı gün 20.00
+  (`restNotify.trialRemindAt`); gün değişmez. Test: `restNotify.test.js`.
+- Çalışma oturumunun son molası bitiş anında gelir; `inFocus` bitiş anını dışarıda bıraktığı için aynı dakikadaki
+  hatırlatma da kuruluyordu. Artık bitiş anı dahil (`notifyPlan.js`). Test: `notifyPlan.test.js`.
+- Bilerek dokunulmayan: "Çalışma günleri" saati kişinin kendi seçimi, pencereye bakmaz (sahip kararı).
