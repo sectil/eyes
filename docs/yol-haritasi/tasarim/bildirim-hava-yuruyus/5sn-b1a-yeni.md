@@ -70,3 +70,16 @@ Kural: tasarım aşamasında bir ekran 3/5'in altında kaldığı için koda akt
 işareti, turkuaz kart ve gradyanlı Kaydet düğmesi çatışıyor (onay işareti ve düğme bitiş ekranının mevcut öğeleri);
 S'de Nef simgesi iki kez; "Önerilen" soluk; N'de her satırdaki Nef rozeti ve kapalı satırdaki gri nokta gürültü,
 liste "sıradan ayar listesi", Gece sessizliği ikincil. Karar sahibe soruldu.
+
+## Son tur (sahip seçimi "Son bir tur") · birleşik tasarım
+
+| Ekran | Etkilenen |
+|---|---|
+| S · saat sayfası ("Nef seçsin", tek Nef simgesi, balon) | **5/5 · geçti** |
+| N · Bildirimler (rozetsiz satırlar, gece sessizliği üstte) | **4/5 · geçti** |
+| F · egzersiz bitiş ekranı + "Bana hatırlat" satırı | 0/5 |
+
+F'nin şikâyetleri çoğunlukla bitiş ekranının MEVCUT öğelerine ait: amber onay rozeti ile turkuaz→mavi gradyanlı "Kaydet"
+çatışması, uzun ve soluk uyarı paragrafı, "15 tekrar" tekrarı, anahtar ile "Kaydet" iki onay adımı gibi. Karar: bitiş
+ekranındaki satır kapalı kalır (sahip: "4/5 çıkmazsa durdur"); geçen S ve N koda aktarılır, "Bana hatırlat" Profil →
+Bildirimler'den kurulur. Bitiş ekranlarının renk ve düzen sorunu ayrı iş (bütün modüllerin bitiş ekranı). Tasarım: `b1a-son/`.
