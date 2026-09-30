@@ -1077,7 +1077,7 @@
       }
      },
      "measure": {
-      "duration": 0.649,
+      "duration": 0.46,
       "speech_sec": 0.334,
       "articulation": 2.99,
       "f0_mean_hz": 88.4,
@@ -1097,6 +1097,17 @@
        "times": [],
        "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.6494,
+      "new_dur": 0.46,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1494,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -1163,7 +1174,7 @@
       }
      },
      "measure": {
-      "duration": 0.832,
+      "duration": 0.6,
       "speech_sec": 0.524,
       "articulation": 3.82,
       "f0_mean_hz": 112.9,
@@ -1183,6 +1194,17 @@
        "times": [],
        "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8323,
+      "new_dur": 0.6,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1923,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -1249,7 +1271,7 @@
       }
      },
      "measure": {
-      "duration": 0.838,
+      "duration": 0.59,
       "speech_sec": 0.529,
       "articulation": 1.89,
       "f0_mean_hz": 98.5,
@@ -1269,6 +1291,17 @@
        "times": [],
        "mode": "codec: fc 15159 Hz; A: bant ≥ 15659 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8379,
+      "new_dur": 0.59,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2079,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -1335,7 +1368,7 @@
       }
      },
      "measure": {
-      "duration": 0.813,
+      "duration": 0.56,
       "speech_sec": 0.504,
       "articulation": 1.98,
       "f0_mean_hz": 82.3,
@@ -1355,6 +1388,17 @@
        "times": [],
        "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8134,
+      "new_dur": 0.56,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2134,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -1421,7 +1465,7 @@
       }
      },
      "measure": {
-      "duration": 0.836,
+      "duration": 0.58,
       "speech_sec": 0.524,
       "articulation": 1.91,
       "f0_mean_hz": 98.3,
@@ -1441,6 +1485,17 @@
        "times": [],
        "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8361,
+      "new_dur": 0.58,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2161,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -1507,7 +1562,7 @@
       }
      },
      "measure": {
-      "duration": 0.851,
+      "duration": 0.6,
       "speech_sec": 0.544,
       "articulation": 3.68,
       "f0_mean_hz": 113.3,
@@ -1527,6 +1582,17 @@
        "times": [],
        "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8511,
+      "new_dur": 0.6,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2111,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -1593,7 +1659,7 @@
       }
      },
      "measure": {
-      "duration": 0.84,
+      "duration": 0.58,
       "speech_sec": 0.524,
       "articulation": 1.91,
       "f0_mean_hz": 100.3,
@@ -1613,6 +1679,17 @@
        "times": [],
        "mode": "codec: fc 15181 Hz; A: bant ≥ 15681 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8404,
+      "new_dur": 0.58,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2204,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -1679,7 +1756,7 @@
       }
      },
      "measure": {
-      "duration": 0.806,
+      "duration": 0.55,
       "speech_sec": 0.494,
       "articulation": 2.02,
       "f0_mean_hz": 81.6,
@@ -1699,6 +1776,17 @@
        "times": [],
        "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8061,
+      "new_dur": 0.55,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2161,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -1765,7 +1853,7 @@
       }
      },
      "measure": {
-      "duration": 0.957,
+      "duration": 0.71,
       "speech_sec": 0.649,
       "articulation": 1.54,
       "f0_mean_hz": 105.1,
@@ -1785,6 +1873,17 @@
        "times": [],
        "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.9571,
+      "new_dur": 0.71,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2071,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -1851,7 +1950,7 @@
       }
      },
      "measure": {
-      "duration": 0.813,
+      "duration": 0.56,
       "speech_sec": 0.504,
       "articulation": 3.97,
       "f0_mean_hz": 95.6,
@@ -1871,6 +1970,17 @@
        "times": [],
        "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8128,
+      "new_dur": 0.56,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2128,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     }
    ]
@@ -2220,7 +2330,7 @@
       }
      },
      "measure": {
-      "duration": 0.773,
+      "duration": 0.59,
       "speech_sec": 0.464,
       "articulation": 2.16,
       "f0_mean_hz": 139.6,
@@ -2240,6 +2350,17 @@
        "times": [],
        "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7729,
+      "new_dur": 0.59,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1429,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 3.2,
+      "fits": true
      }
     },
     {
@@ -2306,7 +2427,7 @@
       }
      },
      "measure": {
-      "duration": 0.875,
+      "duration": 0.62,
       "speech_sec": 0.569,
       "articulation": 1.76,
       "f0_mean_hz": 80.7,
@@ -2326,6 +2447,17 @@
        "times": [],
        "mode": "codec: fc 15504 Hz; A: bant ≥ 16004 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.875,
+      "new_dur": 0.62,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.215,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 5.4,
+      "fits": true
      }
     },
     {
@@ -2396,7 +2528,7 @@
       }
      },
      "measure": {
-      "duration": 0.899,
+      "duration": 0.66,
       "speech_sec": 0.554,
       "articulation": 1.81,
       "f0_mean_hz": 102.4,
@@ -2416,6 +2548,17 @@
        "times": [],
        "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8986,
+      "new_dur": 0.66,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1986,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 3.2,
+      "fits": true
      }
     },
     {
@@ -2482,7 +2625,7 @@
       }
      },
      "measure": {
-      "duration": 0.888,
+      "duration": 0.64,
       "speech_sec": 0.579,
       "articulation": 1.73,
       "f0_mean_hz": 113.8,
@@ -2502,6 +2645,17 @@
        "times": [],
        "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8882,
+      "new_dur": 0.64,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2082,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -2568,7 +2722,7 @@
       }
      },
      "measure": {
-      "duration": 0.827,
+      "duration": 0.6,
       "speech_sec": 0.504,
       "articulation": 1.98,
       "f0_mean_hz": 139.6,
@@ -2588,6 +2742,17 @@
        "times": [],
        "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.827,
+      "new_dur": 0.6,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.187,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 3.2,
+      "fits": true
      }
     },
     {
@@ -2654,7 +2819,7 @@
       }
      },
      "measure": {
-      "duration": 0.888,
+      "duration": 0.63,
       "speech_sec": 0.569,
       "articulation": 1.76,
       "f0_mean_hz": 83.1,
@@ -2674,6 +2839,17 @@
        "times": [],
        "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8876,
+      "new_dur": 0.63,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2176,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -2744,7 +2920,7 @@
       }
      },
      "measure": {
-      "duration": 0.864,
+      "duration": 0.63,
       "speech_sec": 0.544,
       "articulation": 1.84,
       "f0_mean_hz": 100.6,
@@ -2764,6 +2940,17 @@
        "times": [],
        "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8638,
+      "new_dur": 0.63,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1938,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 3.2,
+      "fits": true
      }
     },
     {
@@ -2830,7 +3017,7 @@
       }
      },
      "measure": {
-      "duration": 0.894,
+      "duration": 0.64,
       "speech_sec": 0.584,
       "articulation": 1.71,
       "f0_mean_hz": 100.3,
@@ -2850,6 +3037,17 @@
        "times": [],
        "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8945,
+      "new_dur": 0.64,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2145,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     }
    ]
@@ -2968,7 +3166,7 @@
       }
      },
      "measure": {
-      "duration": 2.863,
+      "duration": 2.61,
       "speech_sec": 2.554,
       "articulation": 4.31,
       "f0_mean_hz": 143.9,
@@ -2988,6 +3186,17 @@
        "times": [],
        "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 2.8632,
+      "new_dur": 2.61,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2132,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 4.2,
+      "fits": true
      }
     }
    ]
@@ -3104,7 +3313,7 @@
       }
      },
      "measure": {
-      "duration": 3.415,
+      "duration": 3.16,
       "speech_sec": 2.888,
       "articulation": 5.19,
       "f0_mean_hz": 131.2,
@@ -3124,6 +3333,17 @@
        "times": [],
        "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 3.415,
+      "new_dur": 3.16,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.215,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 4.2,
+      "fits": true
      }
     }
    ]
@@ -3466,7 +3686,7 @@
       }
      },
      "measure": {
-      "duration": 0.74,
+      "duration": 0.49,
       "speech_sec": 0.414,
       "articulation": 2.41,
       "f0_mean_hz": 133.2,
@@ -3486,6 +3706,17 @@
        "times": [],
        "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7403,
+      "new_dur": 0.49,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2103,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 3.2,
+      "fits": true
      }
     },
     {
@@ -3552,7 +3783,7 @@
       }
      },
      "measure": {
-      "duration": 0.896,
+      "duration": 0.64,
       "speech_sec": 0.584,
       "articulation": 1.71,
       "f0_mean_hz": 83.7,
@@ -3572,6 +3803,17 @@
        "times": [],
        "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8962,
+      "new_dur": 0.64,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2162,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 5.4,
+      "fits": true
      }
     },
     {
@@ -3638,7 +3880,7 @@
       }
      },
      "measure": {
-      "duration": 0.776,
+      "duration": 0.53,
       "speech_sec": 0.464,
       "articulation": 2.16,
       "f0_mean_hz": 121.3,
@@ -3658,6 +3900,17 @@
        "times": [],
        "mode": "codec: fc 14836 Hz; A: bant ≥ 15336 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7756,
+      "new_dur": 0.53,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2056,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 3.2,
+      "fits": true
      }
     },
     {
@@ -3724,7 +3977,7 @@
       }
      },
      "measure": {
-      "duration": 0.888,
+      "duration": 0.63,
       "speech_sec": 0.579,
       "articulation": 1.73,
       "f0_mean_hz": 85.8,
@@ -3744,6 +3997,17 @@
        "times": [],
        "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.888,
+      "new_dur": 0.63,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.218,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -3810,7 +4074,7 @@
       }
      },
      "measure": {
-      "duration": 0.755,
+      "duration": 0.54,
       "speech_sec": 0.434,
       "articulation": 2.3,
       "f0_mean_hz": 131.3,
@@ -3830,6 +4094,17 @@
        "times": [],
        "mode": "codec: fc 15224 Hz; A: bant ≥ 15724 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7554,
+      "new_dur": 0.54,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1754,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 3.2,
+      "fits": true
      }
     },
     {
@@ -3896,7 +4171,7 @@
       }
      },
      "measure": {
-      "duration": 0.874,
+      "duration": 0.64,
       "speech_sec": 0.564,
       "articulation": 1.77,
       "f0_mean_hz": 85.3,
@@ -3916,6 +4191,17 @@
        "times": [],
        "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8743,
+      "new_dur": 0.64,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1943,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 5.4,
+      "fits": true
      }
     },
     {
@@ -3982,7 +4268,7 @@
       }
      },
      "measure": {
-      "duration": 0.764,
+      "duration": 0.54,
       "speech_sec": 0.454,
       "articulation": 2.2,
       "f0_mean_hz": 122.4,
@@ -4002,6 +4288,17 @@
        "times": [],
        "mode": "codec: fc 15073 Hz; A: bant ≥ 15573 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7644,
+      "new_dur": 0.54,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1844,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 3.2,
+      "fits": true
      }
     },
     {
@@ -4068,7 +4365,7 @@
       }
      },
      "measure": {
-      "duration": 0.894,
+      "duration": 0.64,
       "speech_sec": 0.584,
       "articulation": 1.71,
       "f0_mean_hz": 82.8,
@@ -4088,6 +4385,17 @@
        "times": [],
        "mode": "codec: fc 15095 Hz; A: bant ≥ 15595 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8941,
+      "new_dur": 0.64,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2141,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     }
    ]
@@ -4206,7 +4514,7 @@
       }
      },
      "measure": {
-      "duration": 3.57,
+      "duration": 3.31,
       "speech_sec": 2.694,
       "articulation": 4.83,
       "f0_mean_hz": 117.6,
@@ -4226,6 +4534,17 @@
        "times": [],
        "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 3.57,
+      "new_dur": 3.31,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.22,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 14.2,
+      "fits": true
      }
     }
    ]
@@ -6130,7 +6449,7 @@
       }
      },
      "measure": {
-      "duration": 0.722,
+      "duration": 0.53,
       "speech_sec": 0.389,
       "articulation": 2.57,
       "f0_mean_hz": 131.6,
@@ -6150,6 +6469,17 @@
        "times": [],
        "mode": "codec: fc 15267 Hz; A: bant ≥ 15767 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7218,
+      "new_dur": 0.53,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1518,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -6216,7 +6546,7 @@
       }
      },
      "measure": {
-      "duration": 0.848,
+      "duration": 0.6,
       "speech_sec": 0.539,
       "articulation": 3.71,
       "f0_mean_hz": 110.3,
@@ -6236,6 +6566,17 @@
        "times": [],
        "mode": "codec: fc 15267 Hz; A: bant ≥ 15767 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8481,
+      "new_dur": 0.6,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2081,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -6302,7 +6643,7 @@
       }
      },
      "measure": {
-      "duration": 0.835,
+      "duration": 0.58,
       "speech_sec": 0.499,
       "articulation": 2.0,
       "f0_mean_hz": 97.7,
@@ -6322,6 +6663,17 @@
        "times": [],
        "mode": "codec: fc 15181 Hz; A: bant ≥ 15681 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8345,
+      "new_dur": 0.58,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2145,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -6388,7 +6740,7 @@
       }
      },
      "measure": {
-      "duration": 0.839,
+      "duration": 0.59,
       "speech_sec": 0.529,
       "articulation": 1.89,
       "f0_mean_hz": 81.9,
@@ -6408,6 +6760,17 @@
        "times": [],
        "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8391,
+      "new_dur": 0.59,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2091,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -6474,7 +6837,7 @@
       }
      },
      "measure": {
-      "duration": 0.859,
+      "duration": 0.61,
       "speech_sec": 0.549,
       "articulation": 1.82,
       "f0_mean_hz": 112.0,
@@ -6494,6 +6857,17 @@
        "times": [],
        "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8591,
+      "new_dur": 0.61,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2091,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -6560,7 +6934,7 @@
       }
      },
      "measure": {
-      "duration": 0.855,
+      "duration": 0.6,
       "speech_sec": 0.544,
       "articulation": 3.68,
       "f0_mean_hz": 117.8,
@@ -6580,6 +6954,17 @@
        "times": [],
        "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8552,
+      "new_dur": 0.6,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2152,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -6646,7 +7031,7 @@
       }
      },
      "measure": {
-      "duration": 0.827,
+      "duration": 0.57,
       "speech_sec": 0.514,
       "articulation": 1.95,
       "f0_mean_hz": 97.0,
@@ -6666,6 +7051,17 @@
        "times": [],
        "mode": "codec: fc 15181 Hz; A: bant ≥ 15681 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8271,
+      "new_dur": 0.57,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2171,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -6732,7 +7128,7 @@
       }
      },
      "measure": {
-      "duration": 0.823,
+      "duration": 0.57,
       "speech_sec": 0.514,
       "articulation": 1.95,
       "f0_mean_hz": 81.7,
@@ -6752,6 +7148,17 @@
        "times": [],
        "mode": "codec: fc 15224 Hz; A: bant ≥ 15724 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8229,
+      "new_dur": 0.57,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2129,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -6818,7 +7225,7 @@
       }
      },
      "measure": {
-      "duration": 0.94,
+      "duration": 0.69,
       "speech_sec": 0.624,
       "articulation": 1.6,
       "f0_mean_hz": 109.5,
@@ -6838,6 +7245,17 @@
        "times": [],
        "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.9397,
+      "new_dur": 0.69,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2097,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -6904,7 +7322,7 @@
       }
      },
      "measure": {
-      "duration": 0.821,
+      "duration": 0.57,
       "speech_sec": 0.509,
       "articulation": 3.93,
       "f0_mean_hz": 85.6,
@@ -6924,6 +7342,17 @@
        "times": [],
        "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8214,
+      "new_dur": 0.57,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2114,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     }
    ]
@@ -7870,7 +8299,7 @@
       }
      },
      "measure": {
-      "duration": 2.052,
+      "duration": 1.8,
       "speech_sec": 1.746,
       "articulation": 5.15,
       "f0_mean_hz": 128.9,
@@ -7890,6 +8319,17 @@
        "times": [],
        "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 2.0523,
+      "new_dur": 1.8,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2123,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 4.2,
+      "fits": true
      }
     }
    ]
@@ -8282,7 +8722,7 @@
       }
      },
      "measure": {
-      "duration": 2.796,
+      "duration": 2.58,
       "speech_sec": 2.489,
       "articulation": 4.02,
       "f0_mean_hz": 134.9,
@@ -8302,6 +8742,17 @@
        "times": [],
        "mode": "codec: fc 15224 Hz; A: bant ≥ 15724 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 2.7955,
+      "new_dur": 2.58,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1755,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 4.2,
+      "fits": true
      }
     }
    ]
@@ -8420,7 +8871,7 @@
       }
      },
      "measure": {
-      "duration": 2.953,
+      "duration": 2.7,
       "speech_sec": 2.644,
       "articulation": 4.54,
       "f0_mean_hz": 118.9,
@@ -8440,6 +8891,17 @@
        "times": [],
        "mode": "codec: fc 15202 Hz; A: bant ≥ 15702 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 2.9532,
+      "new_dur": 2.7,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2132,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 4.2,
+      "fits": true
      }
     }
    ]
@@ -9637,7 +10099,7 @@
       }
      },
      "measure": {
-      "duration": 0.74,
+      "duration": 0.57,
       "speech_sec": 0.354,
       "articulation": 2.82,
       "f0_mean_hz": 87.5,
@@ -9657,6 +10119,17 @@
        "times": [],
        "mode": "codec: fc 15504 Hz; A: bant ≥ 16004 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7405,
+      "new_dur": 0.57,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1305,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 1.9,
+      "fits": true
      }
     },
     {
@@ -9721,7 +10194,7 @@
       }
      },
      "measure": {
-      "duration": 1.015,
+      "duration": 0.76,
       "speech_sec": 0.708,
       "articulation": 5.65,
       "f0_mean_hz": 104.0,
@@ -9741,6 +10214,17 @@
        "times": [],
        "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 1.0154,
+      "new_dur": 0.76,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2154,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 1.2,
+      "fits": true
      }
     },
     {
@@ -9805,7 +10289,7 @@
       }
      },
      "measure": {
-      "duration": 1.263,
+      "duration": 1.02,
       "speech_sec": 0.953,
       "articulation": 4.2,
       "f0_mean_hz": 100.7,
@@ -9825,6 +10309,17 @@
        "times": [],
        "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 1.2627,
+      "new_dur": 1.02,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2027,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 5.4,
+      "fits": true
      }
     },
     {
@@ -9891,7 +10386,7 @@
       }
      },
      "measure": {
-      "duration": 0.72,
+      "duration": 0.5,
       "speech_sec": 0.354,
       "articulation": 2.82,
       "f0_mean_hz": 85.7,
@@ -9911,6 +10406,17 @@
        "times": [],
        "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7203,
+      "new_dur": 0.5,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1803,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 1.9,
+      "fits": true
      }
     },
     {
@@ -9975,7 +10481,7 @@
       }
      },
      "measure": {
-      "duration": 1.028,
+      "duration": 0.78,
       "speech_sec": 0.723,
       "articulation": 5.53,
       "f0_mean_hz": 93.3,
@@ -9995,6 +10501,17 @@
        "times": [],
        "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 1.0278,
+      "new_dur": 0.78,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2078,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 1.2,
+      "fits": true
      }
     },
     {
@@ -10061,7 +10578,7 @@
       }
      },
      "measure": {
-      "duration": 0.886,
+      "duration": 0.63,
       "speech_sec": 0.569,
       "articulation": 1.76,
       "f0_mean_hz": 88.3,
@@ -10081,6 +10598,17 @@
        "times": [],
        "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8855,
+      "new_dur": 0.63,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2155,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 5.4,
+      "fits": true
      }
     },
     {
@@ -10147,7 +10675,7 @@
       }
      },
      "measure": {
-      "duration": 0.721,
+      "duration": 0.5,
       "speech_sec": 0.354,
       "articulation": 2.82,
       "f0_mean_hz": 86.4,
@@ -10167,6 +10695,17 @@
        "times": [],
        "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7213,
+      "new_dur": 0.5,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1813,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 1.9,
+      "fits": true
      }
     },
     {
@@ -10231,7 +10770,7 @@
       }
      },
      "measure": {
-      "duration": 1.017,
+      "duration": 0.77,
       "speech_sec": 0.713,
       "articulation": 5.61,
       "f0_mean_hz": 102.9,
@@ -10251,6 +10790,17 @@
        "times": [],
        "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 1.0165,
+      "new_dur": 0.77,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2065,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 1.2,
+      "fits": true
      }
     },
     {
@@ -10317,7 +10867,7 @@
       }
      },
      "measure": {
-      "duration": 0.88,
+      "duration": 0.62,
       "speech_sec": 0.569,
       "articulation": 1.76,
       "f0_mean_hz": 86.1,
@@ -10337,6 +10887,17 @@
        "times": [],
        "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8802,
+      "new_dur": 0.62,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2202,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     }
    ]
@@ -10731,7 +11292,7 @@
       }
      },
      "measure": {
-      "duration": 2.747,
+      "duration": 2.5,
       "speech_sec": 2.285,
       "articulation": 4.38,
       "f0_mean_hz": 115.6,
@@ -10751,6 +11312,17 @@
        "times": [],
        "mode": "codec: fc 15202 Hz; A: bant ≥ 15702 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 2.7474,
+      "new_dur": 2.5,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2074,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 4.2,
+      "fits": true
      }
     }
    ]
@@ -11118,7 +11690,7 @@
       }
      },
      "measure": {
-      "duration": 0.725,
+      "duration": 0.52,
       "speech_sec": 0.409,
       "articulation": 2.44,
       "f0_mean_hz": 86.1,
@@ -11138,6 +11710,17 @@
        "times": [],
        "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7253,
+      "new_dur": 0.52,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1653,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 1.9,
+      "fits": true
      }
     },
     {
@@ -11206,7 +11789,7 @@
       }
      },
      "measure": {
-      "duration": 1.047,
+      "duration": 0.8,
       "speech_sec": 0.738,
       "articulation": 5.42,
       "f0_mean_hz": 97.5,
@@ -11226,6 +11809,17 @@
        "times": [],
        "mode": "codec: fc 15525 Hz; A: bant ≥ 16025 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 1.0473,
+      "new_dur": 0.8,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2073,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 1.2,
+      "fits": true
      }
     },
     {
@@ -11292,7 +11886,7 @@
       }
      },
      "measure": {
-      "duration": 0.899,
+      "duration": 0.64,
       "speech_sec": 0.589,
       "articulation": 1.7,
       "f0_mean_hz": 80.8,
@@ -11312,6 +11906,17 @@
        "times": [],
        "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.899,
+      "new_dur": 0.64,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.219,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 5.4,
+      "fits": true
      }
     },
     {
@@ -11378,7 +11983,7 @@
       }
      },
      "measure": {
-      "duration": 0.724,
+      "duration": 0.47,
       "speech_sec": 0.409,
       "articulation": 2.44,
       "f0_mean_hz": 87.1,
@@ -11398,6 +12003,17 @@
        "times": [],
        "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7236,
+      "new_dur": 0.47,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2136,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 1.9,
+      "fits": true
      }
     },
     {
@@ -11462,7 +12078,7 @@
       }
      },
      "measure": {
-      "duration": 1.05,
+      "duration": 0.8,
       "speech_sec": 0.743,
       "articulation": 5.38,
       "f0_mean_hz": 103.3,
@@ -11482,6 +12098,17 @@
        "times": [],
        "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 1.05,
+      "new_dur": 0.8,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.21,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 1.2,
+      "fits": true
      }
     },
     {
@@ -11548,7 +12175,7 @@
       }
      },
      "measure": {
-      "duration": 0.913,
+      "duration": 0.66,
       "speech_sec": 0.604,
       "articulation": 1.66,
       "f0_mean_hz": 80.9,
@@ -11568,6 +12195,17 @@
        "times": [],
        "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.9127,
+      "new_dur": 0.66,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2127,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 5.4,
+      "fits": true
      }
     },
     {
@@ -11634,7 +12272,7 @@
       }
      },
      "measure": {
-      "duration": 0.749,
+      "duration": 0.5,
       "speech_sec": 0.419,
       "articulation": 2.39,
       "f0_mean_hz": 89.2,
@@ -11654,6 +12292,17 @@
        "times": [],
        "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7488,
+      "new_dur": 0.5,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2088,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 1.9,
+      "fits": true
      }
     },
     {
@@ -11722,7 +12371,7 @@
       }
      },
      "measure": {
-      "duration": 1.169,
+      "duration": 0.92,
       "speech_sec": 0.863,
       "articulation": 4.63,
       "f0_mean_hz": 105.3,
@@ -11742,6 +12391,17 @@
        "times": [],
        "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 1.1687,
+      "new_dur": 0.92,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2087,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 1.2,
+      "fits": true
      }
     },
     {
@@ -11808,7 +12468,7 @@
       }
      },
      "measure": {
-      "duration": 0.908,
+      "duration": 0.65,
       "speech_sec": 0.599,
       "articulation": 1.67,
       "f0_mean_hz": 81.5,
@@ -11828,6 +12488,17 @@
        "times": [],
        "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.9081,
+      "new_dur": 0.65,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2181,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 5.4,
+      "fits": true
      }
     }
    ]
@@ -12178,7 +12849,7 @@
       }
      },
      "measure": {
-      "duration": 0.824,
+      "duration": 0.57,
       "speech_sec": 0.479,
       "articulation": 2.09,
       "f0_mean_hz": 93.1,
@@ -12198,6 +12869,17 @@
        "times": [],
        "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8243,
+      "new_dur": 0.57,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2143,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 9.2,
+      "fits": true
      }
     },
     {
@@ -12264,7 +12946,7 @@
       }
      },
      "measure": {
-      "duration": 0.791,
+      "duration": 0.57,
       "speech_sec": 0.474,
       "articulation": 2.11,
       "f0_mean_hz": 88.0,
@@ -12284,6 +12966,17 @@
        "times": [],
        "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7912,
+      "new_dur": 0.57,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1812,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 9.2,
+      "fits": true
      }
     },
     {
@@ -12350,7 +13043,7 @@
       }
      },
      "measure": {
-      "duration": 0.837,
+      "duration": 0.61,
       "speech_sec": 0.524,
       "articulation": 1.91,
       "f0_mean_hz": 107.3,
@@ -12370,6 +13063,17 @@
        "times": [],
        "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8371,
+      "new_dur": 0.61,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1871,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 9.2,
+      "fits": true
      }
     }
    ]
@@ -12628,7 +13332,7 @@
       }
      },
      "measure": {
-      "duration": 1.567,
+      "duration": 1.32,
       "speech_sec": 1.262,
       "articulation": 4.75,
       "f0_mean_hz": 114.1,
@@ -12648,6 +13352,17 @@
        "times": [],
        "mode": "codec: fc 15569 Hz; A: bant ≥ 16069 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 1.5672,
+      "new_dur": 1.32,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2072,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 14.2,
+      "fits": true
      }
     }
    ]
@@ -13566,7 +14281,7 @@
       }
      },
      "measure": {
-      "duration": 0.828,
+      "duration": 0.58,
       "speech_sec": 0.454,
       "articulation": 2.2,
       "f0_mean_hz": 130.5,
@@ -13586,6 +14301,17 @@
        "times": [],
        "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.828,
+      "new_dur": 0.58,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.208,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 3.2,
+      "fits": true
      }
     },
     {
@@ -13654,7 +14380,7 @@
       }
      },
      "measure": {
-      "duration": 1.541,
+      "duration": 1.3,
       "speech_sec": 1.247,
       "articulation": 4.01,
       "f0_mean_hz": 91.3,
@@ -13674,6 +14400,17 @@
        "times": [],
        "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 1.5414,
+      "new_dur": 1.3,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2014,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 8.2,
+      "fits": true
      }
     },
     {
@@ -13740,7 +14477,7 @@
       }
      },
      "measure": {
-      "duration": 0.709,
+      "duration": 0.53,
       "speech_sec": 0.379,
       "articulation": 2.64,
       "f0_mean_hz": 81.4,
@@ -13760,6 +14497,17 @@
        "times": [],
        "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7087,
+      "new_dur": 0.53,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1387,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 3.2,
+      "fits": true
      }
     },
     {
@@ -13824,7 +14572,7 @@
       }
      },
      "measure": {
-      "duration": 1.572,
+      "duration": 1.32,
       "speech_sec": 1.267,
       "articulation": 3.95,
       "f0_mean_hz": 99.7,
@@ -13844,6 +14592,17 @@
        "times": [],
        "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 1.5724,
+      "new_dur": 1.32,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2124,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 8.2,
+      "fits": true
      }
     },
     {
@@ -13910,7 +14669,7 @@
       }
      },
      "measure": {
-      "duration": 0.795,
+      "duration": 0.55,
       "speech_sec": 0.474,
       "articulation": 2.11,
       "f0_mean_hz": 119.6,
@@ -13930,6 +14689,17 @@
        "times": [],
        "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7952,
+      "new_dur": 0.55,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2052,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 3.2,
+      "fits": true
      }
     },
     {
@@ -13996,7 +14766,7 @@
       }
      },
      "measure": {
-      "duration": 0.884,
+      "duration": 0.63,
       "speech_sec": 0.574,
       "articulation": 1.74,
       "f0_mean_hz": 88.6,
@@ -14016,6 +14786,17 @@
        "times": [],
        "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8844,
+      "new_dur": 0.63,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2144,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 8.2,
+      "fits": true
      }
     },
     {
@@ -14082,7 +14863,7 @@
       }
      },
      "measure": {
-      "duration": 0.707,
+      "duration": 0.47,
       "speech_sec": 0.374,
       "articulation": 2.67,
       "f0_mean_hz": 83.1,
@@ -14102,6 +14883,17 @@
        "times": [],
        "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7074,
+      "new_dur": 0.47,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1974,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 12.2,
+      "fits": true
      }
     },
     {
@@ -14168,7 +14960,7 @@
       }
      },
      "measure": {
-      "duration": 0.715,
+      "duration": 0.5,
       "speech_sec": 0.404,
       "articulation": 2.47,
       "f0_mean_hz": 85.9,
@@ -14188,6 +14980,17 @@
        "times": [],
        "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7146,
+      "new_dur": 0.5,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1746,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 12.2,
+      "fits": true
      }
     },
     {
@@ -14254,7 +15057,7 @@
       }
      },
      "measure": {
-      "duration": 0.67,
+      "duration": 0.47,
       "speech_sec": 0.359,
       "articulation": 2.78,
       "f0_mean_hz": 96.3,
@@ -14274,6 +15077,17 @@
        "times": [],
        "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.6702,
+      "new_dur": 0.47,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1602,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 12.2,
+      "fits": true
      }
     }
    ]
@@ -15585,7 +16399,7 @@
       }
      },
      "measure": {
-      "duration": 0.814,
+      "duration": 0.65,
       "speech_sec": 0.529,
       "articulation": 1.89,
       "f0_mean_hz": 93.2,
@@ -15605,6 +16419,17 @@
        "times": [],
        "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8136,
+      "new_dur": 0.65,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1236,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 12.2,
+      "fits": true
      }
     },
     {
@@ -15671,7 +16496,7 @@
       }
      },
      "measure": {
-      "duration": 0.794,
+      "duration": 0.55,
       "speech_sec": 0.474,
       "articulation": 2.11,
       "f0_mean_hz": 87.7,
@@ -15691,6 +16516,17 @@
        "times": [],
        "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7942,
+      "new_dur": 0.55,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2042,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 12.2,
+      "fits": true
      }
     },
     {
@@ -15757,7 +16593,7 @@
       }
      },
      "measure": {
-      "duration": 0.853,
+      "duration": 0.61,
       "speech_sec": 0.524,
       "articulation": 1.91,
       "f0_mean_hz": 94.1,
@@ -15777,6 +16613,17 @@
        "times": [],
        "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8531,
+      "new_dur": 0.61,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2031,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 12.2,
+      "fits": true
      }
     }
    ]
@@ -16714,7 +17561,7 @@
       }
      },
      "measure": {
-      "duration": 0.761,
+      "duration": 0.59,
       "speech_sec": 0.454,
       "articulation": 2.2,
       "f0_mean_hz": 139.3,
@@ -16734,6 +17581,17 @@
        "times": [],
        "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7607,
+      "new_dur": 0.59,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1307,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 3.2,
+      "fits": true
      }
     },
     {
@@ -16800,7 +17658,7 @@
       }
      },
      "measure": {
-      "duration": 0.933,
+      "duration": 0.68,
       "speech_sec": 0.624,
       "articulation": 1.6,
       "f0_mean_hz": 79.5,
@@ -16820,6 +17678,17 @@
        "times": [],
        "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.9334,
+      "new_dur": 0.68,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2134,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -16886,7 +17755,7 @@
       }
      },
      "measure": {
-      "duration": 0.797,
+      "duration": 0.59,
       "speech_sec": 0.484,
       "articulation": 2.07,
       "f0_mean_hz": 113.3,
@@ -16906,6 +17775,17 @@
        "times": [],
        "mode": "codec: fc 15569 Hz; A: bant ≥ 16069 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7971,
+      "new_dur": 0.59,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.1671,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 3.2,
+      "fits": true
      }
     },
     {
@@ -16972,7 +17852,7 @@
       }
      },
      "measure": {
-      "duration": 0.897,
+      "duration": 0.65,
       "speech_sec": 0.589,
       "articulation": 1.7,
       "f0_mean_hz": 121.4,
@@ -16992,6 +17872,17 @@
        "times": [],
        "mode": "codec: fc 15224 Hz; A: bant ≥ 15724 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8967,
+      "new_dur": 0.65,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2067,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 0.7,
+      "fits": true
      }
     },
     {
@@ -17058,7 +17949,7 @@
       }
      },
      "measure": {
-      "duration": 0.954,
+      "duration": 0.71,
       "speech_sec": 0.644,
       "articulation": 1.55,
       "f0_mean_hz": 134.3,
@@ -17078,6 +17969,17 @@
        "times": [],
        "mode": "codec: fc 15138 Hz; A: bant ≥ 15638 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.9538,
+      "new_dur": 0.71,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2038,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 9.2,
+      "fits": true
      }
     },
     {
@@ -17144,7 +18046,7 @@
       }
      },
      "measure": {
-      "duration": 0.825,
+      "duration": 0.69,
       "speech_sec": 0.514,
       "articulation": 1.95,
       "f0_mean_hz": 110.0,
@@ -17164,6 +18066,17 @@
        "times": [],
        "mode": "codec: fc 14966 Hz; A: bant ≥ 15466 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8254,
+      "new_dur": 0.69,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.0954,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 9.2,
+      "fits": true
      }
     },
     {
@@ -17234,7 +18147,7 @@
       }
      },
      "measure": {
-      "duration": 0.85,
+      "duration": 0.6,
       "speech_sec": 0.534,
       "articulation": 1.87,
       "f0_mean_hz": 99.6,
@@ -17254,6 +18167,17 @@
        "times": [],
        "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.8503,
+      "new_dur": 0.6,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2103,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 9.2,
+      "fits": true
      }
     },
     {
@@ -17324,7 +18248,7 @@
       }
      },
      "measure": {
-      "duration": 0.781,
+      "duration": 0.53,
       "speech_sec": 0.469,
       "articulation": 2.13,
       "f0_mean_hz": 88.1,
@@ -17344,6 +18268,17 @@
        "times": [],
        "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7808,
+      "new_dur": 0.53,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2108,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 9.2,
+      "fits": true
      }
     },
     {
@@ -17410,7 +18345,7 @@
       }
      },
      "measure": {
-      "duration": 0.608,
+      "duration": 0.48,
       "speech_sec": 0.419,
       "articulation": 2.39,
       "f0_mean_hz": 82.1,
@@ -17430,6 +18365,17 @@
        "times": [],
        "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.6081,
+      "new_dur": 0.48,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.0881,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 9.2,
+      "fits": true
      }
     }
    ]
@@ -18284,7 +19230,7 @@
       }
      },
      "measure": {
-      "duration": 0.711,
+      "duration": 0.47,
       "speech_sec": 0.404,
       "articulation": 2.47,
       "f0_mean_hz": 91.8,
@@ -18304,6 +19250,17 @@
        "times": [],
        "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
       }
+     },
+     "kilit_kirpma": {
+      "orig_dur": 0.7108,
+      "new_dur": 0.47,
+      "cut_head_s": 0.04,
+      "cut_tail_s": 0.2008,
+      "thr_db_rel_peak": -40.0,
+      "head_margin_s": 0.02,
+      "tail_fade_s": 0.04,
+      "limit_s": 9.2,
+      "fits": true
      }
     }
    ]

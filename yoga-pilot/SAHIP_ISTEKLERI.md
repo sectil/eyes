@@ -74,3 +74,10 @@ Sonraki aşamaya (metin + ses + tasarım iş akışı) bu dosya olduğu gibi ver
     164, müzik vokal denetimi 2.145, SPEC.v3 §6.3 yeniden çekimleri 253). "kredi ekledim." → iş sürdü.
 14. "kredimiz yeterli mi" (ekran görüntüsü: ElevenAPI 133.485 / 186.000 kredi) → evet: kalan ≈ 52,5 bin; Ders 2, 3, 5
     için ücretli iş kalmadı; Ders 1'in sayım kilidi çözümü sahibin seçimine göre 0 ile ≈ 5 bin arası.
+15. Seçimler (2026-09-30, soru kartı): Ders 1 için "Üç noktasız yeniden seslendir"; 5 saniye kuralı için "Bana gönder,
+    ben dinlerim" → Ders 2, 3, 5 dosyaları "5 sn sınaması yapılmadı" notuyla sahibe gönderildi; ilk 5 saniyeyi sahip
+    değerlendirir. Üç noktasız deneme (car.say1, ≈ 300 kredi) sorunu çözmedi: konuşma yalnız 0,03–0,1 sn kısaldı; fazlalık
+    parçaların sonundaki ≈ 0,25 sn sessizlikti (ilk soruda bu ölçülmeden yanlış anlatılmıştı).
+16. Seçim (2026-09-30, ikinci soru kartı): "Sessizliği at + 'ver…' tabanı 0,5 sn" → Ders 1'in nefes kilitli 87 parçasında
+    sessiz baş ve son atıldı (tepenin 40 dB altı; 20 ms baş payı, 40 ms kararma; `render/tools/kilit_kirp_ib.py`);
+    `b/ders1/ders1.lesson.json`'da periyodu 1,2 sn olan 8 "ver…" klibinin `gapFloor` değeri 0,6 → 0,5 sn.
