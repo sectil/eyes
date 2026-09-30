@@ -15,6 +15,11 @@ function pathMinutesFor(ctx, route) {
   }
 }
 
+// Yoldan mı açıldı (bildirim PLAN.v1 §A.2 "Birim yoldur": yolun içinde açılan modülde "Bana hatırlat" kartı çıkmaz).
+// VARSAYIM: 'yoga-<ders>' yalnız Bugünün yolundan açılır (lib/yoga.js yogaPathStop); kütüphane 'yoga' rotasıdır ve dersi
+// kendi içinde açar.
+export const inPathRoute = (route) => /^yoga-\d+$/.test(route ?? '')
+
 export default {
   icon: Flower2,
   render: (ctx, route) => (
@@ -27,6 +32,7 @@ export default {
       onRefresh={ctx.refresh}
       onExit={() => ctx.go('home')}
       pathMinutes={pathMinutesFor(ctx, route)}
+      remindField={ctx.remindField?.(route, { inPath: inPathRoute(route) }) ?? null}
     />
   ),
 }

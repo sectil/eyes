@@ -141,16 +141,17 @@ describe('modül soketi: remind', () => {
   const ile = (remind, extra = {}) => ({ ...temel, ...extra, remind })
   const hatasi = (remind, extra) => validateRemind(ile(remind, extra)).join(' ')
 
-  it('bugünkü gerçek modüllerde remind yok; reminders() boş, sorun yok', () => {
-    expect(registry.modules.filter((m) => m.remind != null)).toEqual([])
-    expect(registry.reminders()).toEqual([])
+  // B1a ikinci tur (sahip kararı 2026-09-30, metin-B1a-onay.md): yalnız kaynağı doğrulanmış dört modül remind alır
+  it('gerçek modüllerde remind yalnız routine, blink, yoga, gokyuzu; sorun yok', () => {
+    expect(registry.modules.filter((m) => m.remind != null).map((m) => m.id).sort()).toEqual(['blink', 'gokyuzu', 'routine', 'yoga'])
+    expect(registry.reminders().map((x) => x.module).sort()).toEqual(['blink', 'gokyuzu', 'routine', 'yoga'])
     expect(registry.remindProblems).toEqual([])
   })
   it('geçerli remind: varsayılanlar dolar, pencere türden gelir', () => {
     const r = createRegistry([...registry.modules, ile({ science: ['kim2020'] })])
     expect(r.problems).toEqual([])
     expect(r.remindProblems).toEqual([])
-    const [x] = r.reminders()
+    const x = r.reminders().find((y) => y.module === 'hatirla')
     expect(x).toMatchObject({ module: 'hatirla', route: null, legacy: null, window: 'move', from: '09:00', to: '21:00', defaultTime: null, maxTimes: 3, science: ['kim2020'] })
     expect(typeof x.doneToday).toBe('function')
     expect(remindWindow({ window: 'calm' })).toEqual({ from: '08:00', to: '22:00' })
@@ -244,5 +245,26 @@ describe('modül soketi: remind', () => {
     const r = createRegistry([ile({ science: ['kim2020'] }, { retired: true })])
     expect(r.get('hatirla')).toBeTruthy()
     expect(r.reminders()).toEqual([])
+  })
+})
+
+// Bildirim B1a (PLAN.v1 §A.1 modül tablosu; sahip kararları metin-B1a-onay.md): remind yalnız routine, blink, yoga, gokyuzu
+describe('modül soketi: remind (B1a manifestleri)', () => {
+  const byId = (id) => registry.modules.find((m) => m.id === id)
+  it('dört modülün remind\'i geçerli ve reminders()\'da', () => {
+    for (const id of ['routine', 'blink', 'yoga', 'gokyuzu']) expect(validateRemind(byId(id)), id).toEqual([])
+    const r = Object.fromEntries(registry.reminders().map((x) => [x.module, x]))
+    expect(r.routine).toMatchObject({ route: 'home', window: 'move', from: '09:00', to: '21:00', science: ['talens2022'] })
+    expect(r.blink).toMatchObject({ route: 'blink', window: 'move', science: ['kim2020', 'wolffsohn2025'] })
+    expect(r.yoga).toMatchObject({ route: 'yoga', window: 'calm', from: '08:00', to: '22:00', science: ['moszeik2025', 'luu2024'] })
+    expect(r.gokyuzu).toMatchObject({ route: 'gokyuzu', window: 'calm', science: ['yamashita2021', 'talens2022'] })
+    expect(registry.remindProblems).toEqual([])
+  })
+  it('kaynağı olmayan modüller bu turda remind almaz; yoga radin2025 taşımaz', () => {
+    for (const id of ['snake', 'track', 'tek-bakis', 'quick-look', 'fark-ettin', 'notice', 'dalga', 'yon']) {
+      expect(byId(id)?.remind, id).toBeUndefined()
+    }
+    expect(registry.reminders().map((x) => x.module).sort()).toEqual(['blink', 'gokyuzu', 'routine', 'yoga'])
+    expect(byId('yoga').remind.science).not.toContain('radin2025')
   })
 })

@@ -62,7 +62,8 @@ function wantedFrom(plan, nowMs) {
   for (const n of Array.isArray(plan?.notifications) ? plan.notifications : []) {
     const atMs = toMs(n?.at)
     if (!isOwnId(n?.id) || out.has(n.id) || !(atMs > nowMs)) continue
-    // VARSAYIM: metni henüz bağlanmamış (yalnız textKey taşıyan) bildirim kurulmaz; cümleler B1a'da sahip onayıyla
+    // VARSAYIM: metni bağlanmamış (yalnız textKey taşıyan) bildirim kurulmaz. Onaylı cümleleri planAll({ texts: true })
+    // bağlar (lib/remindTexts.js); metni çözülmüş bildirim title/body taşıdığı için bu kuraldan geçer.
     if (n.textKey != null && n.title == null && n.body == null) continue
     out.set(n.id, { ...n, atMs, title: String(n.title ?? ''), body: String(n.body ?? '') })
   }

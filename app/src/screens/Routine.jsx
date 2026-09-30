@@ -114,7 +114,7 @@ export function routineRecord(set, steps, seconds) {
 // set: SETS'ten bir set ya da yol grubu. Sonsuz yolda (SONSUZ_YOL.PLAN.v1 §3.A.6, §3.A.8-4) yol grubu basamağıyla gelir:
 // set.steps bugünün adımları, set.patch çeşitleme yaması (EXERCISES'in üstüne), set.stage basamak kimliği, set.variant
 // çeşitleme kimliği. stage varsa kayda stage, stepIds (adım kimlikleri) ve variant yazılır; yoksa kayıt bugünkü gibidir.
-export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = false }) {
+export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = false, remindField = null }) {
   const steps = exerciseSteps(set)
   const [started, setStarted] = useState(false)
   const [idx, setIdx] = useState(0)
@@ -510,6 +510,8 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
           </div>
           <p className="ex-honest">Bakış ve daire hareketleri rahatlama içindir; görmeyi iyileştirdikleri gösterilmedi. Görmendeki değişimi "E hangi yönde" testiyle ölçüyoruz.</p>
         </div>
+        {/* "Bana hatırlat" (bildirim PLAN.v1 §A.2): App ctx.remindField(route, { inPath }) verir; yol grubunda (view.jsx inPathRoute) null */}
+        {remindField}
         <div className="ex-foot">
           <button type="button" className="ex-btn" onClick={save}><Check aria-hidden="true" /> Kaydet</button>
         </div>

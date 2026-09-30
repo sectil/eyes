@@ -69,7 +69,7 @@ function WebOnly({ onExit }) {
 const shorterOf = (n, minutes) => publishedMinutes(n).find((m) => m < minutes) ?? null
 
 // pathMinutes: yoldan açılınca yolun süresi (manifest.today stage.minutes); onExit: Ana sayfaya
-function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefresh, onExit, pathMinutes = null }) {
+function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefresh, onExit, pathMinutes = null, remindField = null }) {
   const [opts, setOpts] = useState(() => loadYogaOpts())
   const fromPath = lessonFromRoute(route)
   const visible = visibleLessons(new Date())
@@ -437,7 +437,7 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
   }
 
   if (screen === 'done' && L) {
-    return <Done L={L} end={end} before={before} after={after} hard={hard} onOpen={openLesson} onOk={exitFlow} />
+    return <Done L={L} end={end} before={before} after={after} hard={hard} onOpen={openLesson} onOk={exitFlow} remindField={remindField} />
   }
 
   return (
@@ -944,7 +944,7 @@ function Detail({ L, minutes, prevMinutes, opts, intro = false, onMinutes, onMus
 // altında önce → sonra: iki sayı kartın iki ucunda, aralarında uzun ok, "Sonra" dersin renginde (değerlendiriciler 1, 3,
 // 5). Uzanarak yapılan derste onaylı kalkış satırı çerçeveli bir notta (4. değerlendirici). Puanlar "nasıl hissettin"
 // gidişatıdır, etki kanıtı değildir (PLAN.v3 §D.5): "işe yaradı" gibi bir söz yok.
-function Done({ L, end, before, after, hard, onOpen, onOk }) {
+function Done({ L, end, before, after, hard, onOpen, onOk, remindField = null }) {
   const rec = end?.rec
   const mins = rec ? Math.max(1, Math.round(rec.seconds / 60)) : null
   // "Çok" (modul.md §2.8, §2.9): öneri yalnız aynı dersin en kısa süresidir ve altında "Gözlerin açık kalabilir."; bu
@@ -1010,6 +1010,8 @@ function Done({ L, end, before, after, hard, onOpen, onOk }) {
         </button>
       )}
       <div className="grow" />
+      {/* "Bana hatırlat" (bildirim PLAN.v1 §A.2): App ctx.remindField(route, { inPath }) verir; yoldan açılan derste (view.jsx inPathRoute) null */}
+      {remindField}
       <button type="button" className="btn" onClick={onOk}>{YT.done.ok}</button>
     </main>
   )

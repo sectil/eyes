@@ -1,0 +1,96 @@
+/* ============================================================
+   "Bana hatırlat" satırı ve saat sayfası (components/RemindField.jsx, RemindSheet.jsx), Profil → Bildirimler
+   (screens/Notifications.jsx) ve Gece sessizliği (screens/QuietHours.jsx). Yalnız tema tokenları; kehribar ailesi
+   (gece sessizliği saatleri ve uyarısı, tasarım C notu 1) burada tanımlı, koyu temada ayrı değer.
+   ============================================================ */
+:root { --qh-amber: #9a5b00; --qh-amber-bg: rgba(214, 140, 20, 0.13); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --qh-amber: #f2b64a; --qh-amber-bg: rgba(242, 182, 74, 0.14); } }
+:root[data-theme="dark"] { --qh-amber: #f2b64a; --qh-amber-bg: rgba(242, 182, 74, 0.14); }
+
+/* ---------- Satır ---------- */
+.rf-row {
+  display: flex; align-items: center; gap: 12px; width: 100%; min-height: 64px; padding: 12px 14px;
+  border: 0; border-radius: var(--radius-sm); background: var(--surface-2); color: var(--ink); text-align: left; cursor: pointer;
+}
+.rf-ico { flex: none; display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); }
+.rf-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.rf-text strong { font-size: 1.02rem; }
+.rf-sub { font-size: 0.9rem; color: var(--ink-2); }
+.rf-hint { flex: none; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.rf-go { flex: none; color: var(--ink-3); }
+
+/* ---------- Saat sayfası ---------- */
+.rs-back { position: fixed; inset: 0; z-index: 60; display: flex; align-items: flex-end; background: rgba(0, 0, 0, 0.4); }
+.rs-sheet {
+  position: relative; width: 100%; max-height: 92vh; overflow: auto; display: flex; flex-direction: column; gap: 14px;
+  padding: 10px 16px calc(20px + env(safe-area-inset-bottom)); border-radius: 22px 22px 0 0; background: var(--surface); color: var(--ink);
+}
+.rs-grab { align-self: center; width: 40px; height: 5px; border-radius: 3px; background: var(--border); }
+.rs-x { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border: 0; background: none; color: var(--ink-3); }
+.rs-title { margin: 6px 44px 0 0; font-size: 1.25rem; }
+.rs-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 12px; background: var(--surface-2); }
+.rs-seg button { min-height: 44px; border: 0; border-radius: 9px; background: none; color: var(--ink-2); font-weight: 600; }
+.rs-seg button.on { background: var(--surface); color: var(--ink); }
+.rs-auto, .rs-manual { display: flex; flex-direction: column; gap: 10px; }
+.rs-tag { align-self: flex-start; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.8rem; font-weight: 600; }
+.rs-big { font-size: 2.4rem; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.rs-why, .rs-win, .rs-note { margin: 0; color: var(--ink-2); font-size: 0.95rem; }
+.rs-win.bad { color: var(--warn); }
+.rs-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.rs-row { display: flex; flex-direction: column; gap: 6px; }
+.rs-time { display: flex; align-items: center; gap: 8px; }
+.input.rs-input { flex: 1; min-height: 54px; font-size: 1.35rem; font-weight: 600; font-variant-numeric: tabular-nums; -webkit-appearance: none; appearance: none; }
+.rs-del { width: 44px; height: 44px; border: 0; background: none; color: var(--ink-3); }
+.rs-clash { padding: 10px 12px; border-radius: var(--radius-sm); background: var(--surface-2); }
+.rs-clash p { margin: 0 0 6px; }
+.rs-link { align-self: flex-start; border: 0; background: none; padding: 8px 0; color: var(--accent); font-weight: 600; }
+
+/* ---------- Bildirimler ---------- */
+.nt-next { margin: 0 0 12px; font-size: 1rem; }
+.nt-off { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; color: var(--ink-2); font-weight: 600; }
+.nt-scr.off .list { opacity: 0.5; }
+.nt-grp-h, .qh-grp-h { margin: 18px 4px 8px; font-size: 0.85rem; font-weight: 600; color: var(--ink-3); }
+.nt-edit { width: 44px; height: 44px; border: 0; background: none; color: var(--ink-3); }
+.nt-lrow { display: flex; align-items: center; gap: 12px; width: 100%; border: 0; background: none; color: var(--ink); text-align: left; }
+.nt-l { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.nt-s { font-size: 0.9rem; color: var(--ink-2); }
+.nt-extra, .nt-warn { margin: 0 16px 12px; font-size: 0.9rem; color: var(--ink-2); }
+.nt-warn { color: var(--qh-amber); }
+.nt-quiet { margin-top: 18px; }
+
+/* ---------- Gece sessizliği ---------- */
+/* Tasarım C (gece-sessizligi-C/ekranlar.html .clocks): Başlar ve Biter tek kartta, arada çizgi; büyük display saat,
+   yuvarlak +/−. 320'de saat ve aralık küçülür, aralık ve "en geç" satırı bölünmez. */
+.qh-clocks { border-radius: 26px; border: 1px solid var(--border); padding: 6px 18px;
+  background: radial-gradient(90% 80% at 50% 0%, var(--qh-amber-bg) 0%, transparent 70%), var(--surface); }
+.qh-ck { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 16px 0; }
+.qh-ck + .qh-ck { border-top: 1px solid var(--border); }
+.qh-l { font-size: 0.9rem; font-weight: 600; line-height: 1; color: var(--ink-2); }
+.qh-v { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 2px; margin-top: 8px; }
+.qh-v b { font: 600 3.2rem/1 var(--font-display); letter-spacing: -0.03em; color: var(--qh-amber); font-variant-numeric: tabular-nums; }
+.qh-v small { font-size: 0.8rem; font-weight: 500; color: var(--ink-3); white-space: nowrap; }
+.qh-stp { display: grid; gap: 8px; }
+.qh-stp button { width: 40px; height: 40px; border: 0; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  background: var(--qh-amber-bg); color: var(--ink); }
+.qh-stp button:disabled { opacity: 0.35; }
+.qh-why { display: block; margin-top: 4px; font-size: 0.8rem; color: var(--ink-3); white-space: nowrap; }
+@media (max-width: 360px) {
+  .qh-clocks { padding: 4px 14px; border-radius: 22px; }
+  .qh-ck { padding: 12px 0; gap: 10px; }
+  .qh-v b { font-size: 2.55rem; }
+  .qh-v small { font-size: 0.76rem; }
+  .qh-stp button { width: 36px; height: 36px; }
+}
+/* Not 2: değişmeyen satır büyük ve koyu */
+.qh-core { display: flex; align-items: center; gap: 10px; margin: 16px 0 0; font-size: 1.05rem; font-weight: 600; color: var(--ink); }
+/* Not 1: uyarı kehribar ailesinde */
+.qh-info { display: flex; gap: 10px; margin-top: 14px; padding: 12px 14px; border-radius: var(--radius-sm); background: var(--qh-amber-bg); color: var(--qh-amber); }
+.qh-info p { margin: 0 0 6px; color: var(--ink); }
+.qh-link { border: 0; background: none; padding: 0; color: var(--qh-amber); font-weight: 600; }
+.qh-core svg, .qh-info > svg { flex: none; } /* 320'de ay ve bilgi simgesi küçülmesin */
+.qh-ls { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+.qh-lr { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 10px 14px; }
+.qh-lr + .qh-lr { border-top: 1px solid var(--border); }
+.qh-ri { flex: none; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--surface-2); color: var(--ink-2); }
+.qh-lr b { flex: 1; font-weight: 500; }
+.qh-lr em { font-style: normal; color: var(--qh-amber); font-variant-numeric: tabular-nums; }

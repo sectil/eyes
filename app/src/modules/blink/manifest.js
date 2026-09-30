@@ -15,4 +15,7 @@ export default {
   },
   gates: {}, // göz kırpma dinlendirici; bütçeye sayılmaz, molada açık
   home: { section: 'exercise', order: 90 },
+  // "Bana hatırlat" (bildirim PLAN.v1 §A.1 modül tablosu; metin lib/remindTexts.js, sahip onaylı metin-B1a-onay.md).
+  // Kendi rotası, hareket penceresi (09.00–21.00). VARSAYIM: defaultTime yok (FALLBACK_TIME).
+  remind: { route: 'blink', window: 'move', science: ['kim2020', 'wolffsohn2025'] },
 }

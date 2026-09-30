@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Camera, Check, ChevronRight, Eye, ListChecks, LogOut, Trash2, UserRound, ShieldCheck, Footprints, Volume2, AlarmClock, Moon, LayoutDashboard } from 'lucide-react'
+import { Camera, Check, ChevronRight, Eye, ListChecks, LogOut, Trash2, UserRound, ShieldCheck, Footprints, Volume2, AlarmClock, Moon, LayoutDashboard, Bell, BellOff } from 'lucide-react'
 import '../styles/info.css'
 import { PageHeader } from '../components/ui.jsx'
 import { emptyIdentity, normalizeIdentity, validBirthDate, ageFromBirthDate, isAdult, initialFor, AVATAR_HUES, AVATAR_PX, NAME_MAX } from '../lib/identity.js'
@@ -44,7 +44,7 @@ export async function shrinkImage(file, px = AVATAR_PX) {
   }
 }
 
-export default function ProfileHome({ identity, profile, account = null, onSave, onQuestions, onIntro, onBack, onAccount, onSignOut, onDeleteAccount, loadMembership = getMembership, syncConsent = false, onConsent, healthAvail = false, healthConsent = false, onHealthConsent, consents = null, onCoach, onCoachLife, alarm = null }) {
+export default function ProfileHome({ identity, profile, account = null, onSave, onQuestions, onIntro, onBack, onAccount, onSignOut, onDeleteAccount, loadMembership = getMembership, syncConsent = false, onConsent, healthAvail = false, healthConsent = false, onHealthConsent, consents = null, onCoach, onCoachLife, alarm = null, notify = null }) {
   const [id, setId] = useState(() => normalizeIdentity(identity ?? emptyIdentity()))
   const [correction, setCorrection] = useState(profile?.correction ?? null)
   const [err, setErr] = useState('')
@@ -174,6 +174,7 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
       </div>
 
       {alarm && <AlarmPref alarm={alarm} />}
+      {notify && <NotifyPref notify={notify} />}
 
       <VoicePref />
 
@@ -310,6 +311,29 @@ function MembershipCard({ m }) {
             : <>{plan && <b>{plan} · </b>}<b>{fmtDate(m.expires)}</b>'de biter; yenilenmeyecek.</>}
       </p>
       <a className="link" href={manage} target="_blank" rel="noreferrer">Aboneliği yönet →</a>
+    </section>
+  )
+}
+
+// Profil → Bildirimler (bildirim PLAN.v1 §A.5): Alarm bölümünden sonra tek satır; dokununca Bildirimler ekranı.
+// notify: App'ten { on, onOpen } (alarm özetinin kalıbı; yalnız iPhone'da gelir). Ana anahtar kapalıysa alt satırda
+// "Bildirimler kapalı" (Notifications ekranındaki onaylı cümle). VARSAYIM: açıkken alt satır yok; onaylı bir özet
+// cümlesi (ör. sıradaki bildirim) metin kapısından geçmedi.
+function NotifyPref({ notify }) {
+  const Icon = notify.on ? Bell : BellOff
+  return (
+    <section className="ph-alarm" aria-labelledby="ph-notify-h">
+      <h2 id="ph-notify-h" className="ph-sec">Bildirimler</h2>
+      <div className="list">
+        <button className="list-row" onClick={notify.onOpen}>
+          <Icon size={20} aria-hidden="true" />
+          <span className="grow stack" style={{ gap: 2 }}>
+            <span style={{ fontWeight: 600 }}>Bildirimler</span>
+            {!notify.on && <span className="muted small">Bildirimler kapalı</span>}
+          </span>
+          <ChevronRight size={18} className="muted" />
+        </button>
+      </div>
     </section>
   )
 }

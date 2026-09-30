@@ -7,11 +7,24 @@ import { recordTime, eyeStatus, beginRest, resetBudget, flushBudget, EXHAUSTED_E
 import { LIMITS as EYE_LIMITS } from './lib/eyeBudget.js'
 import { REST_NOTIFY_ID, TRIAL_NOTIFY_ID, TRIAL_REMIND_DAYS, scheduleTrialReminder } from './lib/restNotify.js'
 import { applyPlan, cancelOwn, onNotifyTap, notifyPermission, askNotifyPermission } from './lib/notifyApply.js'
-import { planNotifications } from './lib/notifyPlan.js'
+// Tek planlayıcı (PLAN.v1 §5.5): planNotifications (dokunulmaz) + modül hatırlatmaları + ek saatler; yeni özellik
+// kapalıyken çıktısı planNotifications'ınkiyle aynı (notifyAll.equiv.test.js)
+import { planAll, saveSlots } from './lib/notifyAll.js'
+import { normalizeModuleReminders } from './lib/moduleRemind.js'
+import { createTapHandler } from './lib/notifyTap.js'
+import { resetAllData } from './lib/notifyReset.js'
+import ScienceCard from './components/ScienceCard.jsx'
+import { NAMES as REMIND_NAMES } from './lib/remindTexts.js'
+import { applyRemind, shownTimes } from './components/remindUi.js'
+// "Bana hatırlat" satırı ve saat sayfası; Profil → Bildirimler ve Gece sessizliği (K2 yazıyor; PLAN.v1 §A.2, §A.5)
+import RemindField from './components/RemindField.jsx'
+import RemindSheet from './components/RemindSheet.jsx'
+import Notifications from './screens/Notifications.jsx'
+import QuietHours from './screens/QuietHours.jsx'
 import { loadLog, saveLog, mergeForPermission, markTapped, getSeed, evaluate, thinCandidate } from './lib/notifyLog.js'
 import { loadHabits, dayKey } from './lib/habitLog.js'
 import { loadFocus, startFocus, stopFocus } from './lib/focus.js'
-import { NUDGE_TYPES, normalizeReminders, enabledTypes } from './lib/reminders.js'
+import { normalizeReminders, enabledTypes, TYPE_LABEL } from './lib/reminders.js'
 import Reminders from './screens/Reminders.jsx'
 import ConsentSheet from './components/ConsentSheet.jsx'
 import FirstReport from './screens/FirstReport.jsx'
@@ -89,7 +102,6 @@ const REST_ROUTE = 'eye-rest'
 
 // --- Bildirim planı v2 (docs/yol-haritasi/BILDIRIM_PLANI.md; sözleşme §6) ---
 // Hatırlatmaya dokununca açılan ekran (yürüyüş ve Çalışma günleri → Ana sayfa); çalışma oturumu → mola
-const TAP_ROUTE = { mola: 'mola', walk: 'home', breath: 'breath-1', water: 'water', study: 'home' }
 const DAY_MS = 86400000
 // "Nefona'yı aç" dokunuşu en çok bu kadar eskiyse sabah ekranına/Ana sayfaya götürür (VARSAYIM)
 const OPEN_NAV_MS = 10 * 60000
@@ -101,9 +113,25 @@ const TRIAL_NOTE_LAST_DAY = 14
 // Sağlık rızası varken açılışta ilk okuma bu kadar beklenir; takılırsa plan sağlıksız kurulur (VARSAYIM: HealthKit'in
 // soğuk açılıştaki 60 günlük sorgusu birkaç yüz ms–birkaç sn)
 const HEALTH_WAIT_MS = 15000
-// "Tüm verileri sil"de korunan ayarlar: abonelik denemesinin zaman çizelgesi (satın alma durumu, kullanıcı verisi değil;
-// Apple denemesi yerel veriyle birlikte bitmez). Deneme hatırlatması (7302) da iptal edilmez.
-const TRIAL_KEYS = ['trialOffer', 'trialReminder', 'trialNoteSeen', 'firstReportSeen']
+// "Tüm verileri sil"de korunan ayarlar (TRIAL_KEYS) lib/notifyReset.js'e taşındı.
+
+// "Bana hatırlat" modülleri (registry.reminders()) → planAll/planModuleReminders girdisi { id, remind, doneToday,
+// records }. records ("Sen karar ver" saatinin ve ek saatteki "son 2 saatte yaptıysan" kuralının kaydı): modülün
+// oturumları (progression.match ?? sessions.match); legacy türde ayrıca habit-log kayıtları (VARSAYIM).
+function remindModules(sessions = []) {
+  const habits = loadHabits()
+  return registry.reminders().map((e) => {
+    const m = registry.get(e.module)
+    const match = m?.progression?.match ?? m?.sessions?.match ?? null
+    const records = [...(match ? sessions.filter((x) => match(x)) : []), ...(e.legacy ? habits.filter((h) => h.type === e.legacy) : [])]
+    return {
+      id: e.module,
+      remind: { route: e.route, legacy: e.legacy, window: e.window, defaultTime: e.defaultTime, maxTimes: e.maxTimes, science: e.science },
+      doneToday: e.doneToday,
+      records,
+    }
+  })
+}
 
 // Göz ekranında ve uygulama görünürken geçen süreyi saniyede bir bütçeye yazar.
 function useEyeClock(kind) {
@@ -155,37 +183,32 @@ export default function App() {
   // Tek bildirim dokunma dağıtıcısı (lib/notifyApply.js onNotifyTap). Uygulama kapalıyken yapılan dokunuş yalnız
   // İLK bağlanan dinleyiciye gider: her şeyden önce, bir kez bağlanır (restNotify'ın eski iki dinleyicisi kalktı).
   // 7301 mola bitti → Ana sayfa · 7302 deneme → İlk rapor · hatırlatma → günlükte "dokunuldu" + türün ekranı ·
-  // çalışma oturumu → mola. go her çizimde değişir; dağıtıcı son halini goRef'ten okur.
+  // çalışma oturumu → mola · modül hatırlatması → modül + bilim kartı. go her çizimde değişir; dağıtıcı son halini
+  // goRef'ten okur.
   const goRef = useRef(null)
+  // Bilim kartı (components/ScienceCard.jsx): { evidence, route } | null; yalnız o ekran açıkken üstte durur
+  const [sciCard, setSciCard] = useState(null)
+  // "Bana hatırlat" saat sayfası (components/RemindSheet.jsx): { module } | null
+  const [remindFor, setRemindFor] = useState(null)
   useEffect(() => {
     let alive = true
     let off = () => {}
-    onNotifyTap(({ id, extra }) => {
-      if (id === REST_NOTIFY_ID) {
+    // Sözlük lib/notifyTap.js'te (PLAN.v1 §5.5 madde 4): 78xx → modül ya da Ana sayfa (birleşik), üstte bilim kartı;
+    // 7860–7867 ek saat → bugünkü deney yönlendirmesi + markTapped. actionId'li eylemler (walkLater …) yönlendirmez.
+    onNotifyTap(createTapHandler({
+      onRest: () => {
         setLockFor(null)
         setScreen('home')
         setBudget(eyeStatus())
-        return
-      }
-      if (id === TRIAL_NOTIFY_ID) {
-        setScreen('first-report')
-        return
-      }
-      if (extra?.kind === 'focus') {
-        goRef.current?.('mola')
-        return
-      }
-      // iOS 26 öncesi alarm bildirimi (7600–7607): dokunuş uyanma işaretidir
-      if (extra?.kind === 'alarm') {
-        wakeCheck.current?.(Date.now())
-        return
-      }
-      if (extra?.kind === 'nudge') {
-        if (NUDGE_TYPES.includes(extra.type) && extra.date) saveLog(markTapped(loadLog(), extra.date, extra.type))
-        setPlanTick((t) => t + 1)
-        goRef.current?.(TAP_ROUTE[extra.type] ?? 'home')
-      }
-    }).then((f) => {
+      },
+      onTrial: () => setScreen('first-report'),
+      onAlarm: () => wakeCheck.current?.(Date.now()),
+      mark: (date, type) => saveLog(markTapped(loadLog(), date, type)),
+      replan: () => setPlanTick((t) => t + 1),
+      go: (route) => goRef.current?.(route),
+      routeOk: (route) => route === 'home' || Boolean(registry.forRoute(route)),
+      showScience: (card) => setSciCard(card),
+    })).then((f) => {
       if (alive) off = f
       else f()
     })
@@ -194,6 +217,11 @@ export default function App() {
       off()
     }
   }, [])
+  // Bilim kartı yalnız dokunuşun açtığı ekranda durur: o ekrana varınca "gösterildi" olur, ekrandan çıkınca kalkar
+  // (yönlendirme bir kapıdan geçerse, ör. göz kalibrasyonu, kart ekrana varınca çıkar).
+  useEffect(() => {
+    setSciCard((c) => (!c ? c : screen === c.route ? (c.shown ? c : { ...c, shown: true }) : c.shown ? null : c))
+  }, [screen, sciCard?.route, sciCard?.evidence])
   const budgetKind = lockFor ? null : budgetKindOf(screen)
   useEyeClock(budgetKind)
   const refresh = () => setData(store.get())
@@ -499,6 +527,7 @@ export default function App() {
   // Sağlık rızası varken ilk okuma bitmeden plan kurulmaz (healthWait). Adım planlayıcıya yalnız v2 rızasıyla gider.
   // Ana anahtar kapalıysa (optIn 'yes' değil) kendi aralığımız bir kez iptal edilir; 7301/7302'ye dokunulmaz.
   const applied = useRef(null) // 'on' | 'off' | null
+  const lastPlan = useRef(null) // Bildirimler'deki "Sıradaki" satırı için son plan
   useEffect(() => {
     if (healthWait) return
     const st = store.get()
@@ -506,7 +535,10 @@ export default function App() {
     const r = normalizeReminders(st.settings.reminders)
     const on = r.optIn === 'yes'
     const log = loadLog()
-    const plan = planNotifications({
+    // Yeni özellik kapalıyken (moduleReminders boş) planAll planNotifications'ın çıktısını aynen döndürür (§5.4)
+    const mr = normalizeModuleReminders(st.settings.moduleReminders)
+    const hasMr = Object.keys(mr).length > 0
+    const plan = planAll({
       now,
       reminders: r,
       study: st.settings.reminder,
@@ -516,7 +548,14 @@ export default function App() {
       focus: loadFocus(now),
       seed: on ? getSeed() : '',
       log,
+      moduleReminders: st.settings.moduleReminders,
+      modules: hasMr ? remindModules(st.sessions) : [],
+      alarm: hasMr ? loadAlarm() : null,
+      // Gece sessizliği: settings.quiet ({ from, to }; screens/QuietHours.jsx)
+      quiet: st.settings.quiet ?? null,
+      texts: true,
     })
+    lastPlan.current = plan
     const nextLog = mergeForPermission(log, plan.log, notifyPerm, dayKey(now), now)
     if (nextLog) saveLog(nextLog)
     if (!on) {
@@ -524,8 +563,18 @@ export default function App() {
       applied.current = 'off'
       return
     }
+    // "Sen karar ver": deney dışı modülde yeni saat kendiliğinden yazılır (moduleRemind.js updates; §A.3). Yazılınca
+    // plan bir kez daha kurulur; ikinci kurulumda autoAt taze olduğu için güncelleme gelmez.
+    if (plan.updates?.length) {
+      const next = { ...(st.settings.moduleReminders ?? {}) }
+      for (const u of plan.updates) next[u.module] = { ...(next[u.module] ?? {}), times: u.times, autoAt: u.autoAt }
+      store.setSetting('moduleReminders', next)
+      refresh()
+    }
     if (notifyPerm !== 'granted') return
     applied.current = 'on'
+    // O günün ek saatleri (gozolcum:notify-slots): yalnız kurulan planınki; Hatırlatmalar salt okunur gösterir
+    if (plan.slots) saveSlots(plan.slots)
     applyPlan(plan)
   }, [planTick, data, health, healthOk, healthWait, notifyPerm])
   // Seyreltme sorusu (Ana sayfa, tür başına bir kez): son 3 hatırlatma gününde ne dokunma ne kayıt. Bildirim izni
@@ -721,6 +770,94 @@ export default function App() {
   // kapalı) | 'perm' (bildirim izni yok) | null. İzne hâlâ bakılıyorsa engel sayılmaz.
   const focusBlock = !isIOSApp() ? 'web' : normalizeReminders(settings.reminders).optIn !== 'yes' ? 'off' : notifyPerm != null && notifyPerm !== 'granted' ? 'perm' : null
 
+  // "Bana hatırlat" (PLAN.v1 §A.1–A.2): settings.moduleReminders[modül] = { on, mode, times, autoAt, setAt } (asla
+  // settings.reminders içine değil). Kaydı bileşen kurar (components/remindUi.js applyRemind: ilk açılışta optIn 'yes',
+  // varsayılanı açık mola kapanır; legacy türde ilk saat settings.reminders'ta); App yalnız yazar. data değişir → plan
+  // yeniden kurulur.
+  const saveRemind = ({ moduleReminders, reminders } = {}) => {
+    if (moduleReminders) store.setSetting('moduleReminders', moduleReminders)
+    if (reminders) store.setSetting('reminders', reminders)
+    refresh()
+  }
+  const remindEntryOf = (id) => registry.reminders().find((e) => e.module === id) ?? null
+  // Başka bildirimlerin saatleri (saat sayfasının 60 dk kuralı ve çakışma cümlesi): açık deney türleri, çalışma günleri
+  // ve öteki modül hatırlatmaları. Etiketler bugünkü adlardan (reminders.js TYPE_LABEL, remindTexts.js NAMES).
+  const remindBusy = (selfId) => {
+    const entry = remindEntryOf(selfId)
+    const r = normalizeReminders(settings.reminders)
+    const out = []
+    for (const [t, c] of Object.entries(r.types)) {
+      if (t === 'study' || !c.on || !c.time || t === entry?.legacy) continue
+      out.push({ time: c.time, label: TYPE_LABEL[t] })
+    }
+    if (r.types.study?.on && settings.reminder?.time) out.push({ time: settings.reminder.time, label: TYPE_LABEL.study })
+    for (const [k, c] of Object.entries(normalizeModuleReminders(settings.moduleReminders))) {
+      if (k === selfId || k === entry?.legacy || !c.on) continue
+      for (const time of c.times) out.push({ time, label: REMIND_NAMES[k] ?? TYPE_LABEL[k] ?? k })
+    }
+    return out
+  }
+  const remindRecords = (id) => remindModules(sessions).find((x) => x.id === id)?.records ?? []
+  // ctx.remindField(route, { inPath }): modülün bitiş bloğundaki "Bana hatırlat" satırı (components/RemindField.jsx;
+  // saat sayfasını kendisi açar). remind'i olmayan modülde null. Yol içinde açılan modülde modül inPath: true verir.
+  // VARSAYIM: yalnız iPhone uygulamasında (web'de bildirim yok; Bilgi'deki Hatırlatmalar satırı gibi).
+  const remindField = (route, { inPath = false } = {}) => {
+    const m = registry.forRoute(route) ?? registry.get(route)
+    const entry = m ? remindEntryOf(m.id) : null
+    if (!entry || !isIOSApp()) return null
+    return (
+      <RemindField
+        moduleId={m.id}
+        remind={entry}
+        settings={{ moduleReminders: settings.moduleReminders, reminders: settings.reminders }}
+        busy={remindBusy(m.id)}
+        records={remindRecords(m.id)}
+        permission={notifyPerm}
+        inPath={inPath}
+        onChange={saveRemind}
+        onAskPermission={askPermission}
+        onWhy={() => go('reminders')}
+      />
+    )
+  }
+  // Bildirimler'den açılan saat sayfası (alttan)
+  const remindSheet = () => {
+    const entry = remindFor ? remindEntryOf(remindFor.module) : null
+    if (!entry) return null
+    return (
+      <RemindSheet
+        moduleId={entry.module}
+        remind={entry}
+        moduleReminders={settings.moduleReminders}
+        reminders={settings.reminders}
+        busy={remindBusy(entry.module)}
+        records={remindRecords(entry.module)}
+        permission={notifyPerm}
+        onSave={(v) => { saveRemind(v); setRemindFor(null) }}
+        onAskPermission={askPermission}
+        onWhy={() => { setRemindFor(null); go('reminders') }}
+        onClose={() => setRemindFor(null)}
+      />
+    )
+  }
+  // Bildirimler'deki anahtar: saat ve kip korunur, yalnız açık/kapalı değişir
+  const toggleRemind = (id, on) => {
+    const entry = remindEntryOf(id)
+    if (!entry) return
+    const cfg = normalizeModuleReminders(settings.moduleReminders)[id]
+    saveRemind(applyRemind({ moduleId: id, remind: entry, moduleReminders: settings.moduleReminders, reminders: settings.reminders, mode: cfg?.mode ?? 'auto', times: shownTimes(id, entry, settings.moduleReminders, settings.reminders), on }))
+  }
+  // "Sıradaki: 10.00 Göz egzersizi" (Bildirimler): son kurulan planın ilk gelecek bildirimi
+  const nextNotify = () => {
+    const n = (lastPlan.current?.notifications ?? []).find((x) => x.at instanceof Date && x.at.getTime() > Date.now())
+    if (!n) return null
+    const key = n.module ?? n.type
+    const time = `${String(n.at.getHours()).padStart(2, '0')}:${String(n.at.getMinutes()).padStart(2, '0')}`
+    const label = n.modules?.length > 1 ? n.modules.map((k) => REMIND_NAMES[k] ?? k).join(', ') : REMIND_NAMES[key] ?? TYPE_LABEL[key] ?? null
+    return label ? { time, label } : null
+  }
+  const sciEl = sciCard && sciCard.route === screen ? <ScienceCard evidence={sciCard.evidence} onClose={() => setSciCard(null)} /> : null
+
   // Tüm kayıt (JSON). iPhone'da <a download> WKWebView'da güvenilir değil (doğrulanmadı) → paylaşım sayfası
   // (ExportPlugin.swift); web'de indirme. Oturum anahtarları ayrı kayıtta (supabase.js storageKey), dosyaya girmez.
   const exportData = () => {
@@ -868,6 +1005,8 @@ export default function App() {
         onCoach={setCoach}
         onCoachLife={setCoachLife}
         alarm={alarmSt.platform === 'web' ? null : alarmProfile()}
+        // Profil → Bildirimler özeti (PLAN.v1 §A.5, alarm özetinin kalıbı): Alarm bölümünden sonra; yalnız iPhone'da
+        notify={isIOSApp() ? { on: normalizeReminders(settings.reminders).optIn === 'yes', onOpen: () => go('notifications') } : null}
         onAccount={() => go('account')}
         onSignOut={async () => { try { await signOut() } catch { /* çevrimdışı: yerel oturum yine kapanır */ } toGuest() }}
         onDeleteAccount={async () => {
@@ -881,6 +1020,30 @@ export default function App() {
         }}
       />
     )
+  }
+  // Profil → Bildirimler ve Gece sessizliği (PLAN.v1 §A.5; screens/Notifications.jsx, screens/QuietHours.jsx)
+  if (screen === 'notifications') {
+    return (
+      <>
+        <Notifications
+          modules={registry.reminders()}
+          moduleReminders={settings.moduleReminders}
+          reminders={settings.reminders}
+          quiet={settings.quiet ?? null}
+          next={nextNotify()}
+          onToggle={toggleRemind}
+          onToggleLegacy={(t, on) => { const r = normalizeReminders(settings.reminders); saveReminders({ ...r, types: { ...r.types, [t]: { ...r.types[t], on } } }) }}
+          onOpen={(id) => setRemindFor({ module: id })}
+          onOpenReminders={() => go('reminders')}
+          onQuiet={() => go('quiet-hours')}
+          onBack={() => go('profile')}
+        />
+        {remindSheet()}
+      </>
+    )
+  }
+  if (screen === 'quiet-hours') {
+    return <QuietHours quiet={settings.quiet ?? null} reminders={settings.reminders} onChange={(q) => { store.setSetting('quiet', q); refresh() }} onOpenReminders={() => go('reminders')} onBack={() => go('notifications')} />
   }
   if (screen === 'profile-questions') {
     return <ProfileQuestions profile={settings.profile ?? profileFromScreening(settings.screening)} trueDepth={native.trueDepth} onSave={saveProfile} onBack={() => go('profile')} />
@@ -988,11 +1151,12 @@ export default function App() {
   const view = mod && viewFor(mod.id)
   if (view) {
     // refresh: kayıt (mola/su habit-log, nefes oturumu) ya da çalışma oturumu değişti → bildirim planı da yenilenir
-    const ctx = { native: { ...native, trueDepth: camOk }, settings, tests, sessions, exercise, common, go, back, refresh: () => { refresh(); replan() }, store, saveTests, focusBlock }
+    const ctx = { native: { ...native, trueDepth: camOk }, settings, tests, sessions, exercise, common, go, back, refresh: () => { refresh(); replan() }, store, saveTests, focusBlock, remindField }
     return (
       <>
         {view.render(ctx, screen)}
         {budgetKind && <EyeBudgetPill st={budget} kind={budgetKind} />}
+        {sciEl}
       </>
     )
   }
@@ -1052,17 +1216,16 @@ export default function App() {
           // iPhone'da ekran ölçüsü cihaz modelinden gelir (kullanıcı verisi değil) ve yalnızca açılışta yazılır.
           // Silinirse testler uygulama yeniden açılana dek ölçeksiz kalır (AcuityTest calibration.pxPerMm → hata).
           const autoCal = isIOSApp() && settings.calibration?.method === 'auto' ? settings.calibration : null
-          const trialKept = TRIAL_KEYS.filter((k) => settings[k] != null).map((k) => [k, settings[k]])
-          store.clearAll()
-          if (autoCal) store.setSetting('calibration', autoCal)
-          for (const [k, v] of trialKept) store.setSetting(k, v)
+          // Kayıt (settings.moduleReminders ve gece sessizliği dâhil) silinir; deneme çizelgesi (TRIAL_KEYS) kalır.
+          // Bildirimler: kendi aralığımız (74xx/75xx, 7700–7701, 78xx, 7860–7867) ve yalnız-iptal 7710–7719 iptal;
+          // native yürüyüş koruması boşalır (cancelOwn); gozolcum:notify-slots silinir. Deneme hatırlatması (7302)
+          // kalır. (lib/notifyReset.js resetAllData; sıra bugünküyle aynı: önce kayıt)
+          resetAllData({ store, cancel: cancelOwn, autoCal })
           // Modüllerin cihazdaki rekorları ve seçenekleri de silinir (manifest storageKeys);
           // ses/titreşim tercihleri ve tema cihaz ayarı sayılır ve korunur.
           resetBudget(); resetAllHowto()
-          // Bildirimler: kendi hatırlatmalarımız (74xx/75xx) iptal; native yürüyüş koruması boşalır (cancelOwn) ve
-          // günlüğü okunup atılır. Deneme hatırlatması (7302) kalır (TRIAL_KEYS). Günlük, tohum, habit-log ve çalışma
-          // oturumu mola modülünün storageKeys listesinden aşağıda silinir.
-          cancelOwn()
+          // Günlüğü okunup atılır. Günlük, tohum, habit-log ve çalışma oturumu mola modülünün storageKeys listesinden
+          // aşağıda silinir.
           cancelAlarm()
           walkGuardLog().catch(() => {})
           // Yoga (modul.md §6.4): süren ders durur ve bellekteki oturumu unutulur (silmeden önceki önce puanı ders bitince
@@ -1075,6 +1238,8 @@ export default function App() {
               // depolama yok: yoksay
             }
           }
+          setSciCard(null)
+          setRemindFor(null)
           refresh()
           go('home')
         }}
@@ -1114,6 +1279,7 @@ export default function App() {
     <>
       <main className="screen has-tabbar fade-in" key={tab}>{content}</main>
       <TabBar active={tab} onChange={go} />
+      {sciEl}
     </>
   )
 }

@@ -23,6 +23,7 @@ import { FOCUS_HOURS } from './focus.js'
 import { NUDGE_TYPES, MIN_GAP_MIN, normalizeReminders, toMinutes } from './reminders.js'
 import { dayKey } from './habitLog.js'
 import { nextRing, SLEEP_TARGET_H } from './alarm.js'
+import { resolvePlanTexts } from './remindTexts.js'
 
 export const MIN_APART_MIN = 30 // planlayıcıda iki bildirim arası en az (VARSAYIM, §A.4)
 export const DAY_CAP = 6 // modül hatırlatmalarından günde en çok (VARSAYIM, §A.4)
@@ -35,7 +36,7 @@ export const QUIET_FROM_RANGE = Object.freeze(['22:00', '24:00'])
 export const QUIET_TO_RANGE = Object.freeze(['06:00', '10:00'])
 export const THREAD_ID = 'nefona'
 export const NOTIFY_SLOTS_KEY = 'gozolcum:notify-slots' // o günün ek saatleri: [{ date, type, times }]
-export const MERGED_TEXT_KEY = 'remind.merged' // yer tutucu: birleşik bildirim metni B1a'da (sahip onayı)
+export const MERGED_TEXT_KEY = 'remind.merged' // birleşik bildirimin metin anahtarı (lib/remindTexts.js BR1–BR3)
 
 const MIN = 60000
 const HOUR = 3600000
@@ -123,6 +124,10 @@ export function loadSlots(storage) {
 // Girdiler: planNotifications'ınkiler (now, reminders, study, habits, sessions, health, focus, seed, log) ve
 //   modules: registry.reminders() + App'in süzdüğü kayıtlar ({ id, remind, doneToday, records? }; moduleRemind.js)
 //   moduleReminders: settings.moduleReminders · alarm: loadAlarm() | null · quiet: { from, to } | null (gece sessizliği)
+//   texts: true → textKey'li yeni bildirimlere onaylı metin bağlanır (lib/remindTexts.js; notifyApply yalnız textKey
+//     taşıyanı kurmadığı için metinsiz plan hiçbir yeni bildirim kurmaz) · names: { [modül]: ad } (birleşik bildirim)
+//   VARSAYIM: texts bu turda isteğe bağlı (varsayılan kapalı): notifyAll.test.js'teki "yalnız textKey: hiçbiri kurulmaz"
+//   beklentisi sahip onayıyla değişene dek. Uygulama planı kurarken texts: true verir.
 // Çıktı: kapalıyken planNotifications'ın çıktısı aynen. Açıkken ayrıca:
 //   grouped: true (notifyApply: threadIdentifier, relevanceScore, açılışta teslim edilmişlerin kaldırılması)
 //   slots: [{ date, type, times }] (ek saatler; notify-slots), updates, proposals (moduleRemind.js),
@@ -156,7 +161,7 @@ export function planAll(input = {}) {
 
   const notifications = [...base.notifications, ...result.extras.map((e) => e.n), ...result.modules.map(toNotification)]
   notifications.sort((a, b) => a.at - b.at || a.id - b.id)
-  return {
+  const plan = {
     notifications,
     log: base.log,
     walkGuards: [...base.walkGuards, ...result.mr.walkGuards.filter((g) => result.extras.some((e) => e.n.id === g.id))],
@@ -167,6 +172,11 @@ export function planAll(input = {}) {
     skipped: result.skipped,
     horizon: result.horizon,
   }
+  if (input.texts !== true) return plan
+  // Cümlenin kaynağı modülün havuzundaysa bildirim o kaynağı taşır (yol: PATH_REMIND.science)
+  const science = Object.fromEntries(modules.filter((m) => m?.id && Array.isArray(m.remind?.science)).map((m) => [m.id, m.remind.science]))
+  if (!science[PATH_ID]) science[PATH_ID] = PATH_REMIND.science
+  return resolvePlanTexts(plan, { names: input.names ?? null, science })
 
   function arrange(horizon) {
     const mr = planModuleReminders({ now, modules, moduleReminders, reminders, study, sessions, fixed: base.notifications, log: base.log, health, horizon })
@@ -257,7 +267,7 @@ export function planAll(input = {}) {
 }
 
 // Kabul edilmiş modül girdisi → bildirim. Birleşik bildirim Ana sayfayı açar, görünür bilim satırı taşımaz, ilk
-// modülün evidence anahtarını taşır (§A.4 (2)). Metin yer tutucu anahtarla (B1a).
+// modülün evidence anahtarını taşır (§A.4 (2)). Metin anahtarla (textKey); cümleyi resolvePlanTexts bağlar.
 function toNotification(g) {
   const { n } = g
   const at = new Date(g.ms)

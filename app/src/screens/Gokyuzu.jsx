@@ -70,7 +70,7 @@ function say(text) {
 }
 
 // onSave(kayıt), onExit()
-export default function Gokyuzu({ sessions = [], onSave, onExit }) {
+export default function Gokyuzu({ sessions = [], onSave, onExit, remindField = null }) {
   const [part] = useState(() => partOfDay(new Date().getHours()))
   const [opts, setOpts] = useState(() => loadOpts())
   const [phase, setPhase] = useState('intro') // intro | run | after | result
@@ -240,6 +240,8 @@ export default function Gokyuzu({ sessions = [], onSave, onExit }) {
       <FactCard f={fact} answerText={ANSWER_TEXT} />
       <SourceList ids={SOURCE_IDS} />
       <div className="grow" />
+      {/* "Bana hatırlat" (bildirim PLAN.v1 §A.2): App ctx.remindField(route) verir; bu modülün Bugünün yolunda durağı yok (manifest today yok) */}
+      {remindField}
       <button className="btn" onClick={onExit}>Bitti</button>
     </main>
   )

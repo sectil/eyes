@@ -18,7 +18,7 @@ const BASELINE_MS = 2000
 const CYCLE_MS = BLINK_CYCLE.reduce((a, s) => a + s.ms, 0)
 const UI_TICK_MS = 100 // ritim şeridi ve halka için görsel güncelleme
 
-export default function BlinkExercise({ onFinish, onBack, trueDepth = false }) {
+export default function BlinkExercise({ onFinish, onBack, trueDepth = false, remindField = null }) {
   const [useCam, setUseCam] = useState(false)
   const [phase, setPhase] = useState('intro') // intro | baseline | run | done
   const [rep, setRep] = useState(0)
@@ -195,6 +195,8 @@ export default function BlinkExercise({ onFinish, onBack, trueDepth = false }) {
             {tracked ? 'Kamera sayımı ışığa ve açıya bağlıdır; yaklaşık bir göstergedir. ' : ''}Tedavi değildir; yakınman sürerse göz doktoruna başvur.
           </p>
         </div>
+        {/* "Bana hatırlat" (bildirim PLAN.v1 §A.2): App ctx.remindField(route) verir; bu modülün Bugünün yolunda durağı yok (manifest today yok) */}
+        {remindField}
         <div className="ex-foot">
           <button type="button" className="ex-btn" onClick={save}><Check aria-hidden="true" /> Kaydet</button>
         </div>

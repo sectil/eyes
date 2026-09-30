@@ -1,7 +1,7 @@
 // Modül hatırlatmaları ("Bana hatırlat") — saf fonksiyonlar (PLAN.v1 §3.A.1–A.4, §5.1, §5.5 madde 1).
 // Planı yalnız hesaplar; kurmaz, ayar yazmaz, kayıt defterine (modules/registry.js) bağlanmaz: modül listesi
 // argüman olarak gelir (registry.reminders() biçimi). Bildirim metni yazılmaz; yer tutucu anahtar (textKey) döner,
-// cümleler B1a'da sahip onayıyla bağlanır.
+// cümleler lib/remindTexts.js'te (sahip onaylı) ve planAll({ texts: true }) bağlar.
 //
 // settings.moduleReminders = {                        (asla settings.reminders içine değil: normalizeReminders
 //   [modül | 'path']: {                                 bilmediği alanı atar)
@@ -38,8 +38,9 @@ export const REMIND_WINDOWS = Object.freeze({
 })
 // VARSAYIM: remind.defaultTime yazılmamışsa veri yokken saat (her iki pencerenin içinde; PLAN §A.2 örneği 16.30)
 export const FALLBACK_TIME = '16:30'
-// Yol hatırlatması: Ana sayfayı açar, hareket penceresi, günde tek bildirim (PLAN §A.2 "Birim yoldur")
-export const PATH_REMIND = Object.freeze({ route: 'home', window: 'move', maxTimes: 1, science: Object.freeze([]) })
+// Yol hatırlatması: Ana sayfayı açar, hareket penceresi, günde tek bildirim (PLAN §A.2 "Birim yoldur"). Kaynak singh2024
+// (metin-B1a-onay.md karar 3, sahip onaylı)
+export const PATH_REMIND = Object.freeze({ route: 'home', window: 'move', maxTimes: 1, science: Object.freeze(['singh2024']) })
 
 const DAY_MS = 86400000
 const isObj = (v) => v != null && typeof v === 'object' && !Array.isArray(v)

@@ -19,6 +19,10 @@ export function routeSet(ctx = {}, route, now = new Date()) {
   }
 }
 
+// Yoldan mı açıldı (bildirim PLAN.v1 §A.2 "Birim yoldur": yolun içinde açılan modülde "Bana hatırlat" kartı çıkmaz).
+// Yol grupları (PATH_GROUPS; routine-<grup>) yalnız Bugünün yolundan açılır; setler (Hafif, Normal, Tam, Derin) bölümlerden.
+export const inPathRoute = (route) => PATH_GROUPS.some((g) => `routine-${g.id}` === route)
+
 export default {
   icon: Dumbbell,
   entries: () =>
@@ -31,6 +35,7 @@ export default {
         set={set}
         todaySec={todaySeconds(ctx.exercise)}
         trueDepth={ctx.native.trueDepth}
+        remindField={ctx.remindField?.(route, { inPath: inPathRoute(route) }) ?? null}
         onBack={ctx.back}
         onFinish={(s) => { ctx.store.addSession(s); ctx.refresh(); ctx.go('home') }}
       />
