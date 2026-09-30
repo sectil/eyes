@@ -1,8 +1,9 @@
-# Rıza metinleri · taslak (sahip onayı bekliyor)
+# Rıza metinleri · ONAYLANDI (sahibi, 2026-09-30: "rıza taslaklarını onaylıyorum.")
 
 Tarih: 2026-09-30. Kalıp `app/src/lib/consent.js`'tir: başlık, giriş, dört satır (Ne kaydedilir? / Ne işe yarar? / Nerede
 durur? / Ne kadar kalır?) ve işaretsiz kutunun cümlesi. Bu metinler hukukçu onayından geçmedi (`consent.js`'teki not
-aynen geçerli). Sahip onaylamadan koda girmez. Sürüm: üçü de 1. `CONSENT_VERSIONS`'a `weather: 1, walk: 1, walkDetect: 1`
+aynen geçerli). Sahip 2026-09-30'da onayladı; metinler bu dosyadaki hâliyle, harfi harfine koda girer (her biri kendi
+parçasında: `weather` B2, `walk` ve `walkDetect` B3). Hukukçu cevabı metni değiştirirse yeni sürüm olur. Sürüm: üçü de 1. `CONSENT_VERSIONS`'a `weather: 1, walk: 1, walkDetect: 1`
 eklenir. `consent.test.js` "bilerek değişen" beklentisidir ve üçünün dört başlığı teste eklenir.
 
 Kurallar:

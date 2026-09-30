@@ -25,3 +25,9 @@ Karar 3: cümle bankası; görünür bilim satırı günde bir, bilim kartı her
 ## Tur 2'den sonra (2026-09-30)
 Soru: B3, "Kullanırken" konum izniyle hukukçudan önce yayına çıksın mı? Cevap (seçenekten): "Evet, konumla çıksın".
 → Karar: B3 konumla çıkar; konum saklanmaz, telefondan çıkmaz; "Her Zaman" hukukçu cevabını bekler.
+
+## Ana oturumda (2026-09-30, kelimesi kelimesine)
+- "senin önerilerini uygulayalım" → B0 beş adım; 7302 ve oturum sonu çakışması tabandan önce düzeltildi (Bug 34,
+  `57a7734`), "Çalışma günleri" saatine dokunulmadı; B1a Build 60'tan sonra.
+- "rıza taslaklarını onaylıyorum." → `rizalar-taslak.md`'deki `weather`, `walk`, `walkDetect` metinleri onaylı; kendi
+  parçalarında harfi harfine koda girer. Hukukçu onayı yine beklenir (`consent.js` notu).

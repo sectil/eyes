@@ -494,7 +494,8 @@ Zaman" hukukçuyu bekler; hava için Apple'a soru gönderilmez.
       (`app/test/fixtures/bildirim-taban/`, kayıt `57a7734`); hukukçu soruları eklendi (`tasarim/S0/hukukcu-sorulari.md`
       Soru 4–7); plan belgeleri bu dala alındı.
 - [ ] B0 · v2 bildirim sisteminin cihaz listesi (§0b "Cihazda" maddesi) sahiple geçilir: Build 60 kurulunca.
-- [ ] B0 · rıza taslakları (`bildirim-hava-yuruyus/rizalar-taslak.md`: `weather`, `walk`, `walkDetect`) sahibin onayına.
+- [x] B0 · rıza metinleri (`bildirim-hava-yuruyus/rizalar-taslak.md`: `weather`, `walk`, `walkDetect`) sahip onayladı
+      (2026-09-30); hukukçu onayı ayrıca beklenir.
 - [ ] B1a · `sources.js` kayıtları ve kanıt kapısı (11 kaynak ve koşullular; PubMed esummary, `kaynak-dogrulama.md`) →
       `remind` sözleşmesi → eşdeğerlik düzeneği (iki katman, 20.000 bağlam) → `moduleRemind.js` → `notifyAll.js` →
       `notifyApply` (`actionId`, açılışta temizlik) → `RemindField`/`RemindSheet` → modüllere tek satır → Profil →
