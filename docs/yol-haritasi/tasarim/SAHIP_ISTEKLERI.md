@@ -112,3 +112,8 @@ hâlinin gerçek ekranlarıyla girer; planda olup yapılmamış olan (ör. hava,
 - **28 Eylül sürüm notu maddeleri gösterilir.** Simge, açılış ekranı, WHO-5, alarm ve uyku ekranı maddeleri o günün zaten
   gönderilmiş girdisine sonradan eklendiği için Yenilikler penceresinde çıkmadı (Bug 31 kalıbı). Seçenek aynen: "Evet,
   göster" → bir sonraki TestFlight girdisine taşınır.
+
+## Sahibin 2026-09-30 kararları: site (§3.K.7)
+- **İlk yayın:** "İlk App Store'dan önce" → site ilk App Store derlemesinden önce, yalnız doğrulanmış içerikle çıkar.
+- **Alan adı:** "Yayın günü" → bugünkü kural sürer; alan adı sitenin ilk yayın günü alınır.
+- **Bugün sitede anlatılan `[~]` işler** (haftalık E testi, veri merkezi, iris ve Gelişim, parlaklık): "Hepsi kalsın".

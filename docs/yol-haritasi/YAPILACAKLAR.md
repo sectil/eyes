@@ -543,8 +543,8 @@ destek/SSS, yenilikler. Kaynakça, kanıt kartları, sürüm notları, modül li
       modül bitince o modülün parçası, en sonda bütün site bir kez. Hava kodda yok (Y5); o güne kadar sitede de yok.
       Beklemeyenler (ilk yayından önce): 20-20-20 "işe yaradı" cümlesi, erken Y1 ve (b) cümleleri, Yenilikler'deki
       doğrulanmamış maddeler, emekli "Nefes sayma", ses cümleleri, gizlilikteki açıklar; gizlilik ve etiket özelliği
-      taşıyan derleme App Review'a girmeden yayında olur. Sahibe üç soru: ilk yayın zamanı, alan adı, `[~]` işlerin
-      ilk yayında kalıp kalmayacağı (§3.K.7).
+      taşıyan derleme App Review'a girmeden yayında olur. Sahip kararları (§3.K.7): site ilk App Store derlemesinden önce
+      yayına çıkar; alan adı yayın günü alınır; bugün anlatılan `[~]` işler ilk yayında kalır.
 
 ## Açık hatalar
 - [x] Apple ile giriş TestFlight'ta "UNIMPLEMENTED" (Bug 11): kendi eklentimiz AppleSignInPlugin.swift (b4dc6f3); cihazda

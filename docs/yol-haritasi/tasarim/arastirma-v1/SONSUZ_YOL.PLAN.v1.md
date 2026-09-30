@@ -1305,8 +1305,8 @@ metrikleri; aşama süreleri ve takvim.
 
 ### K. nefona.com güncellemesi (son aşama)
 
-Eklendi: 2026-09-30, sahibin isteğiyle (`SAHIP_ISTEKLERI.md`, "nefona.com güncellemesi"). K.7'deki üç soru sahibin kararını
-bekliyor. Dayanak: `site/`, `app/src`, `ACIK_ISLER.md` (`653a716`); taslak iki bağımsız eleştiriden (eksiklik, doğruluk) geçti.
+Eklendi: 2026-09-30, sahibin isteğiyle (`SAHIP_ISTEKLERI.md`, "nefona.com güncellemesi"). K.7'deki üç soru aynı gün
+cevaplandı. Dayanak: `site/`, `app/src`, `ACIK_ISLER.md` (`653a716`); taslak iki bağımsız eleştiriden (eksiklik, doğruluk) geçti.
 
 #### K.1 İstek ve amaç
 
@@ -1344,8 +1344,8 @@ PubMed kaydında PMID ve DOI ya da cihaz kaydı.
 - **İstisna 2, beklemez:** gizlilik sayfası, koşullar ve App Store gizlilik etiketi özelliğin `[x]`'ini beklemez; özelliği
   taşıyan derleme App Review'a girmeden önce yayında olur (Apple 2.3 ve 5.1.1(i)). Özelliğin anlatısı `[x]`'i bekler;
   App Store Connect'te "elle yayımla" seçilir ve sitenin özellik parçası aynı saatte açılır.
-- **Bugün sitede anlatılan ama `[x]` olmayan işler** (haftalık E testi, veri merkezi, iris ve Gelişim, parlaklık) için
-  karar sahibin (K.7 soru 3).
+- **Bugün sitede anlatılan ama `[x]` olmayan işler** (haftalık E testi, veri merkezi, iris ve Gelişim, parlaklık) ilk
+  yayında kalır (sahip kararı, K.7 soru 3). Tetik yalnız yeni özelliklere uygulanır.
 
 #### K.3 Fark tablosu
 
@@ -1428,7 +1428,8 @@ Site bölümü ancak hepsi doğruysa `[x]` olur:
 
 - **Sağlık iddiası yok;** kaynaksız mekanizma yazılmaz.
 - **Olmayan özellik gösterilmez:** yayımlanmamış ders ya da süre ("10 ders"); Y2–Y6'nın yapılmamış işleri ve hava;
-  "yakında"; cihazda doğrulanmamış cümle ("sessiz modda da çalar", parlaklık denetimi); "yeni duraklar zamanla açılır" gibi
+  "yakında"; cihazda doğrulanmamış yeni cümle ("sessiz modda da çalar"; bugünkü `[~]` işler K.2'deki sahip kararıyla
+  kalır); "yeni duraklar zamanla açılır" gibi
   ucu açık vaat (yol 9. günde tamamlanır, sonrası çeşitlemedir).
 - **"Sonsuz" ürün adı olarak kullanılmaz:** uygulamanın arayüzünde geçmiyor; sınırsız içerik vaadi gibi okunur.
 - **Sahte görüntü yok:** maket, çizim ya da başka sürümün görüntüsü gerçek ekran diye konmaz.
@@ -1436,16 +1437,17 @@ Site bölümü ancak hepsi doğruysa `[x]` olur:
 - **Sitede kamera, ölçüm, izleme ya da analiz kitaplığı yok;** eklenirse gizlilik sayfası değişir, bu ayrı karardır.
 - **İngilizce site İngilizce uygulamadan önce açılmaz** (sunulmayan dili tanıtır).
 
-#### K.7 Sahibe sorular
+#### K.7 Sahibin kararları (2026-09-30)
 
-1. **Site ilk kez ne zaman yayına çıksın?** App Store gönderimi bir gizlilik adresi ister ve bu adres derlemeye gömülür.
-   **Öneri:** ilk App Store derlemesinden önce, yalnız doğrulanmış içerikle (gizlilik, koşullar, destek dâhil). Sonra her
-   modül bitince kendi parçası eklenir.
-2. **Alan adı ne zaman alınsın?** Bugünkü kural "yayın gününe kadar alınmaz" (`YAPILACAKLAR.md` site bölümü). Gizlilik
-   adresi, destek e-postası, Google izin ekranı ve Resend doğrulaması ona bağlı; 30 Eylül'de boştaydı.
-   **Öneri:** şimdi alınsın; başkası alabilir.
-3. **Bugün sitede anlatılan ama cihazda `[x]` olmayan işler ilk yayında kalsın mı?** (Haftalık E testi, veri merkezi,
-   iris ve Gelişim, parlaklık.) **Öneri:** yalnız cihazda doğrulananlar kalsın; ötekiler doğrulanınca geri döner.
+1. **Site ilk kez ne zaman yayına çıksın?** → **İlk App Store derlemesinden önce**, yalnız doğrulanmış içerikle (gizlilik,
+   koşullar, destek dâhil); sonra her modül bitince kendi parçası eklenir. Gerekçe: App Store gönderimi bir gizlilik adresi
+   ister ve bu adres derlemeye gömülür.
+2. **Alan adı ne zaman alınsın?** → **Yayın günü** (bugünkü kural sürer). Sonuç: alan adı, sitenin ilk yayın günü, yani ilk
+   App Store derlemesinden önce alınır; gizlilik adresi, destek e-postası, Google izin ekranı ve Resend doğrulaması o gün
+   bağlanır.
+3. **Bugün sitede anlatılan ama cihazda `[x]` olmayan işler ilk yayında kalsın mı?** → **Hepsi kalsın** (haftalık E testi,
+   veri merkezi, iris ve Gelişim, parlaklık). K.2'deki tetik yalnız yeni özelliklere uygulanır. Yanlış cümleler (K.3 ilk
+   satır) yine düzelir.
 
 ---
 
