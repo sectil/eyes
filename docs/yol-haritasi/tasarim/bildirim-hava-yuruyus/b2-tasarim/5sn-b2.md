@@ -38,3 +38,10 @@ yazmıyor; dört kapalı başlık cevabı saklıyor (gizliliğe dikkat eden kiş
 örneği yok; "resmî form" hissi. Gizlilik değerlendiricisinin içerik bulgusu: "Ne kadar kalır?" izin kapanınca yalnız
 "il adı ve önbellek silinir" diyor; ilçe adı ve son 90 günün hava özeti için bir şey söylemiyor. Sahibe iki soru:
 rıza sayfaları için ölçüt (etkilenme yerine anlaşılırlık) ve silme cümlesinin kapsamı.
+
+## Tur 4 · anlaşılırlık ölçütü (sahip kararı) · **5/5 anladı · geçti** (`R-katmanli/`)
+
+Beşi de ne istendiğini, verinin yurt dışındaki Apple hava servisine gittiğini ve "Şimdi değil" ile nasıl hayır
+diyeceğini doğru yazdı (67 yaşında, teknolojiye alışkın olmayan değerlendirici dahil). Kodda giderilecek notlar: 320'de
+"Nerede durur?" satırı solma efektinin altında kalıyor — yurt dışı bilgisi ilk ekranda tam görünmeli (sıra ya da
+sabit alan); "Önce kutuyu işaretle" daha büyük ve koyu; "Ne işe yarar?" satırında açılır ok eksik.
