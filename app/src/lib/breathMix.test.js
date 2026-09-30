@@ -236,3 +236,29 @@ describe('yardımcılar', () => {
     expect(pathBreathMinutes(null)).toBe(3)
   })
 })
+
+describe('breathOfDay: haftalık kurallar gün sayar, kayıt değil', () => {
+  // Erken bitirip aynı gün yeniden kaydetmek bir günü birden çok gün gibi saydırmamalı (sonsuz yol denetimi, 2026-09-30)
+  const rec = (d, m) => ({ day: d, family: 'belly', inhale: 4, hold: 0, exhale: 6, pause: 0, ...m })
+  it('aynı gün aynı aileden 3 kayıt, 1 kayıtla aynı seçimi verir', () => {
+    for (let k = 3; k < 63; k++) {
+      const seedDay = day(k)
+      const one = [rec(day(k - 3))]
+      const three = [rec(day(k - 3)), rec(day(k - 3)), rec(day(k - 3))]
+      for (const tier of ['B', 'C', 'D']) {
+        expect(breathOfDay(stage(tier), { seedDay, history: three, safety: { holdOk: true } }))
+          .toEqual(breathOfDay(stage(tier), { seedDay, history: one, safety: { holdOk: true } }))
+      }
+    }
+  })
+  it('aynı gün 2 tutmalı kayıt, 1 tutmalı kayıtla aynı seçimi verir', () => {
+    for (let k = 3; k < 63; k++) {
+      const seedDay = day(k)
+      const h = rec(day(k - 3), { hold: 1 })
+      for (const tier of ['C', 'D']) {
+        expect(breathOfDay(stage(tier), { seedDay, history: [h, { ...h }], safety: { holdOk: true } }))
+          .toEqual(breathOfDay(stage(tier), { seedDay, history: [h], safety: { holdOk: true } }))
+      }
+    }
+  })
+})

@@ -6,6 +6,15 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Build 60'tan sonraki TestFlight (Bug 31: Build 60'ın girdisine madde eklenmez)
+    id: '2026-09-30-1',
+    title: '1 Ekim güncellemesi',
+    items: [
+      // Sonsuz yol denetimi (2026-09-30): breathMix haftalık kuralları kayıt sayıyordu, gün değil. Cihazda denenmedi.
+      { kind: 'fix', text: "Yoldaki nefeste aynı gün birden çok kez kaydettiğin nefes, haftalık çeşitlilik kuralında birkaç gün gibi sayılıyordu; o kalıp hafta boyunca hiç gelmeyebiliyordu. Artık her gün bir kez sayılır." },
+    ],
+  },
+  {
     // Build 59'dan sonraki TestFlight. Bug 31: Build 59'da 29 Eylül girdisine eklenen beş madde (haftalık E testi, Nef,
     // "Son 3 test", Bug 24, okuma testi) Build 58'de o girdiyi görmüş kişiye gösterilmedi; buraya taşındı.
     id: '2026-09-29-2',

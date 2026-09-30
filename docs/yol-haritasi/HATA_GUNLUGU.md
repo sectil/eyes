@@ -828,3 +828,14 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
 - Çalışma oturumunun son molası bitiş anında gelir; `inFocus` bitiş anını dışarıda bıraktığı için aynı dakikadaki
   hatırlatma da kuruluyordu. Artık bitiş anı dahil (`notifyPlan.js`). Test: `notifyPlan.test.js`.
 - Bilerek dokunulmayan: "Çalışma günleri" saati kişinin kendi seçimi, pencereye bakmaz (sahip kararı).
+
+## Bug 35: Yoldaki nefeste haftalık çeşitlilik kuralı kayıt sayıyordu, gün değil (2026-09-30, sonsuz yol denetimi)
+## Durum: DÜZELTİLDİ (kod + test); cihazda görülecek
+- Plan §3.A.4–A.5: bir aile 7 günde en çok 3 gün, tutmalı gün haftada en çok 2, beklemeli en çok 1. `lib/breathMix.js`
+  `breathOfDay` bunları `mixHistory` satırlarıyla sayıyordu; `mixHistory` her seansı ayrı satır yazar. Erken bitirip
+  aynı gün yeniden kaydeden kişide (`screens/Breath.jsx` "Kaydet", yol nefesi gün 60 sn'ye ulaşmadıkça yeniden açılır)
+  aynı gün 3 Karın nefesi kaydı o aileyi, 2 tutmalı kayıt tutmalı günleri hafta boyunca kapatıyordu. Güvenli yönde
+  (sınır gevşemiyordu) ama plana aykırı. Kanıt: denetim benzetimi, 3 gün önce 1 kayıtta Karın 75/300 gün seçildi,
+  aynı gün 3 kayıtta 0/300.
+- Düzeltme: üç kural ayrı günleri sayar (`daysWith`). Test: `breathMix.test.js` "haftalık kurallar gün sayar, kayıt
+  değil" (iki test düzeltmeden önce kırmızı, sonra yeşil). 400 günlük benzetimde başka kural ihlali çıkmadı.

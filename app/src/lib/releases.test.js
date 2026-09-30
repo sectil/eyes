@@ -44,8 +44,9 @@ describe('sürüm notları', () => {
   // Bug 31: Build 59'da 29 Eylül girdisine eklenen maddeler Build 58'de o girdiyi görmüş kişiye gösterilmedi. Yeni
   // girdiye taşındı; 29 Eylül'ü görmüş kişi yeni girdiyi görür.
   it('Bug 31: 29 Eylül\'ü görmüş kişi ikinci güncellemeyi görür; taşınan maddeler 29 Eylül\'de yok; (b) maddesi var', () => {
-    expect(unseenReleases('2026-09-29').map((r) => r.id)).toEqual(['2026-09-29-2'])
-    expect(latestRelease().id).toBe('2026-09-29-2')
+    // Sonraki girdiler (1 Ekim …) listenin başına eklenir; 29 Eylül'ü görmüş kişi 30 Eylül girdisini yine görür
+    expect(unseenReleases('2026-09-29').map((r) => r.id)).toEqual(['2026-09-30-1', '2026-09-29-2'])
+    expect(latestRelease().id).toBe('2026-09-30-1')
     for (const start of ['E testi artık haftada bir yapılıyor:', 'Nef artık', "Gelişim'de son testten", 'Haftalık E testi son testin saatini', 'Okuma testi artık']) {
       expect(items292().some((t) => t.startsWith(start)), start).toBe(true)
       expect(items29().some((t) => t.startsWith(start)), start).toBe(false)
@@ -60,7 +61,7 @@ describe('sürüm notları', () => {
       expect(items292().some((t) => t.startsWith(start)), start).toBe(true)
       expect(r28.some((t) => t.startsWith(start)), start).toBe(false)
     }
-    expect(unseenReleases('2026-09-28').map((r) => r.id)).toEqual(['2026-09-29-2', '2026-09-29'])
+    expect(unseenReleases('2026-09-28').map((r) => r.id)).toEqual(['2026-09-30-1', '2026-09-29-2', '2026-09-29'])
   })
   // Bug 32: hesap yalnız izinle profili (ad, doğum tarihi, şehir, gözlük) eşitler; ölçümler telefonda kalır
   it('Bug 32: hesap ekranı ve Profilim satırı eşitlenmeyen ilerlemeyi vaat etmez', () => {

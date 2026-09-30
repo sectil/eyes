@@ -191,12 +191,14 @@ export function breathOfDay(stage, { seedDay = '', history = [], safety = {} } =
   const h = (salt) => seedHash(`${seedDay}:breath:${salt}`)
 
   // Günün türü: düz, tutmalı ya da (D) beklemeli
-  const holdAllowed = tier !== 'B' && safety?.holdOk === true && !(yday && holdy(yday)) && week.filter(holdy).length < WEEK_RULES.holdDaysMax
-  const pauseAllowed = holdAllowed && tier === 'D' && week.filter((x) => x.pause > 0).length < WEEK_RULES.pauseDaysMax
+  // Kurallar gün sayar: aynı gün kaydedilmiş birden çok seans tek gündür (erken bitirip yeniden kaydetmek haftayı kilitlemez)
+  const daysWith = (ok) => new Set(week.filter(ok).map((x) => x.day)).size
+  const holdAllowed = tier !== 'B' && safety?.holdOk === true && !(yday && holdy(yday)) && daysWith(holdy) < WEEK_RULES.holdDaysMax
+  const pauseAllowed = holdAllowed && tier === 'D' && daysWith((x) => x.pause > 0) < WEEK_RULES.pauseDaysMax
   let kind = 'plain'
   if (holdAllowed && h('kind') % 3 === 0) kind = pauseAllowed && h('pause') % 2 === 0 ? 'pause' : 'hold'
 
-  const famUsed = (f) => week.filter((x) => x.family === f).length
+  const famUsed = (f) => daysWith((x) => x.family === f)
   const pick = (pool, salt) => {
     const fams = TIER_FAMILIES[tier].filter((f) => famUsed(f) < WEEK_RULES.familyMax && pool.some(FITS[f]))
     const start = fams.length ? h(salt) % fams.length : 0
