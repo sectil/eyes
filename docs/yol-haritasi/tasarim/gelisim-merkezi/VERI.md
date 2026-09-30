@@ -9,7 +9,7 @@ değiştirilmedi.
 | Alan | Ölçüm | Kaynak (dosya · alan) | İlk değer ne zaman | Hüküm ne zaman |
 |---|---|---|---|---|
 | Göz | E testi (görme keskinliği, logMAR) | `lib/progress.js eyeCard` · `baseline`, `current`, `delta`, `trend` | ilk testte | `lib/trend.js` evreleri; başlangıçtan sonra |
-| Göz | İlk Bakış: 20 sn'de kırpma sayısı | `lib/dataHub.js ANSWER_FIELDS` · `profile.iris.baseline.blinks`, `recheck.blinks` | 1. gün | yalnız yeniden ölçümde (`recheck`) |
+| Göz | İlk Bakış: 20 sn'de kırpma sayısı | `lib/dataHub.js ANSWER_FIELDS` · `profile.iris.baseline.blinks`, `recheck.blinks` | İlk Bakış yapılınca | yalnız yeniden ölçümde (`recheck`) |
 | Dikkat | Tek Bakışta kavranan harf | `modules/tek-bakis/manifest.js` · `span` | ilk oturum | en az 6 ölçüm (`METRIC_MIN`) |
 | Dikkat | Algı hızı eşiği (ms, düşük iyi) | `modules/quick-look/manifest.js` · `threshold` | ilk oturum | en az 6 ölçüm |
 | Farkındalık | Fark etme isabeti (%) | `modules/fark-ettin/manifest.js` · `noticed/asked` | ilk oturum | en az 6 ölçüm |
