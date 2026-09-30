@@ -91,7 +91,7 @@ ve alarmı elle durduran kişide mümkündür, ötekilerde bildirim tahminin ya�
 | Kilit ekranı nötr, adım bilgisi yok | `BILDIRIM_PLANI.md` §7 | Yürüyüş sorusunda istisna, anahtarla (Verdiğim kararlar) | Sahibin cümlesi |
 | `health` rızası: "Sunucuya ve Nef'e gitmez"; Apple Sağlık yalnız okuma | `lib/consent.js` | Aynen. Yürüyüş kaydı `store.sessions`'a yazılmaz, Nef'e gitmez (§3.C.2) | Nef paketi v2 değişmesin |
 | (e) yürüyüş modülü sonra | §3.I, `YOL.moduller.md` (modül `walk`, "2 dakikalık yürüyüş") | B3'te gelir; modül kimliği `walk`; B3'ün `walk`'ı (e)'deki modülün ilk sürümü, yol durağı (e)'de eklenir | Sahibin isteği |
-| Hukukçu adı gelmeden konum izni App Store'a gitmez | S0 hukukçu yedeği; `S0/hukukcu-sorulari.md` Soru 1 | **Öneri:** B3 "Kullanırken" konumla çıkar (VARSAYIM); **sahibe soruldu**, hayırsa B3 konumsuz çıkar | Konum ve hareket verisi telefondan çıkmıyor; yedeğin gerekçesi yurt dışı aktarım |
+| Hukukçu adı gelmeden konum izni App Store'a gitmez | S0 hukukçu yedeği; `S0/hukukcu-sorulari.md` Soru 1 | B3 "Kullanırken" konumla çıkar (**sahibin kararı, 2026-09-30**); "Her Zaman" hukukçuyu bekler | Konum ve hareket verisi telefondan çıkmıyor; yedeğin gerekçesi yurt dışı aktarım |
 
 **Ana oturuma bildirilecek (bu planın işi değil).** (1) Gece "kalk": çalışma oturumu bildirimleri pencereye bakmıyor
 (`lib/notifyPlan.js`, `planNotifications` içindeki oturum döngüsü; ana oturum düzeltiyor). (2) Aynı yoldan başka gece
@@ -571,8 +571,8 @@ seninle", ilk anons 3 saniye içinde: *"Birlikte yürüyoruz."* (sayı ekranda; 
   taslakları `rizalar-taslak.md`'de; sahip onaylamadan koda girmez.
 - **Hukukçu yedeği:** onaylı yedek "hukukçu adı gelmeden konum izni App Store'a gitmez" diyor. Bu plan B3'ün
   "Kullanırken" konumunu bu kuraldan ayırmayı önerir (konum ve hareket verisi telefondan çıkmıyor, yedeğin gerekçesi olan
-  yurt dışı aktarım yok). **Bu onaylı kararın değişmesidir; sahibe soruldu (§2 son satır).** Sahip hayır derse B3
-  konumsuz çıkar: mesafe adım sayarının tahmininden, bilgi satırı bunu yazar. "Her Zaman" konumu (karar 2) hukukçu
+  yurt dışı aktarım yok). **Bu onaylı kararın değişmesidir; sahip 2026-09-30'da "Evet, konumla çıksın" dedi (§2 son
+  satır).** Hukukçuya yine sorulur. "Her Zaman" konumu (karar 2) hukukçu
   cevabına kadar yayına girmez: App Store derlemesinde `walkDetect` kodu derleme bayrağıyla (`NEFONA_WALK_DETECT`)
   kapalıdır ve `NSLocationAlwaysAndWhenInUseUsageDescription` Info.plist'te yoktur; TestFlight iç derlemesinde açıktır.
 - **Gizlilik sayfası, App Store etiketi, izin metinleri aynı sürümde.** Hava için Apple'a giden yuvarlanmış koordinat
@@ -856,7 +856,7 @@ Capacitor'a ulaşması, "Her Zaman" izni için App Review'un tutumu, hukukçunun
 **VARSAYIM listesi:** bildirimler arası 30 dk (kurulumda 60); pencereler (09–21, 08–22, yürüyüş sorusu sessizlik
 dışı, fark et teklifi 09–21, varsayılan sessizlik 23–07, ayar sınırları 22–24 / 06–10, 01–05 kapalı); yatmadan önce
 60 dk; fark et teklifinde 10 dk ve 800 m, 14 gün, 3 kez, iki "Hayır"; ek saatte "son 2 saatte yapıldıysa"; JS bütçesi 58;
-fark et teklifinin bilim kartı istisnası; B3'ün "Kullanırken" konumla çıkması (sahibe soruldu); günde 6 modül bildirimi; teklif 30
+fark et teklifinin bilim kartı istisnası; B3'ün "Kullanırken" konumla çıkması sahibin kararıdır; günde 6 modül bildirimi; teklif 30
 gün; "Sen karar ver"de 28 gün, 15 dk dilim, 5 gün, 15 dk önce, 60 dk uzaklık, ikinci saat için 2 saat ve 5 gün, 14 günde
 bir yeniden hesap; en çok 3 saat; modül hatırlatmalarında 3 gün ufuk; JS bekleyeni ≤ 58 ve iOS 64 sınırı; sabah
 havası 10/20/30 dk, alarmsız gün 08.00; tahmin yaşı 1 ve 18 sa; AlarmKit niyetinde 8–10 sn; karakter sınırları (30, 70,
@@ -912,7 +912,7 @@ doğru makaleye gidiyor (`elestiri-dogruluk.md`).
   merkezine `loadHubHabits` yoluyla giriş; `walk` + `health` rızası; üç rıza taslağı (`rizalar-taslak.md`); fark et
   teklifinde kime, ne zaman, rıza sayfası (HIG yasal rıza istisnası), izin durum makinesi; App Store derleme bayrağı;
   App Review notu taslağı; bilerek değişen dört test; durum çizelgesi ve cihaz listesi eklemeleri; örnek metin ve
-  karakter düzeltmeleri; Türkçe düzeltmeler. **Sahibe soruldu:** B3'ün "Kullanırken" konumla hukukçudan önce çıkması.
+  karakter düzeltmeleri; Türkçe düzeltmeler. **Sahibin kararı:** B3 "Kullanırken" konumla hukukçudan önce çıkar ("Evet, konumla çıksın").
   Fark et izin teklifinin bilim kartı istisnası VARSAYIM olarak sahibe bildirildi.
 - 5 saniye tur 6–8 (`5sn-tur6.md`, `5sn-tur8.md`): değişen yedi ekranın dördü ilk seferde geçti (sabah havası 5,
   yürüyüş ekranı 5, sesli koç 5, fark et bildirimi 4); saat sayfası ve rıza sayfası düzeltilip 4/5 ile geçti;

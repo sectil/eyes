@@ -118,8 +118,8 @@ kapatınca bir gün boyunca uygulamanın arka planda açılmaması.
 
 ## 7. Açık sorular ve bekleyenler
 
-- **Sahibe soruldu (cevap gelince buraya yazılır):** B3'ün "Kullanırken" konumla hukukçudan önce çıkması (onaylı
-  yedeğin değişmesi; plan §2 son satır). Hayırsa B3 konumsuz çıkar, mesafe adım sayarından.
+- **Sahibin kararı (2026-09-30):** B3 "Kullanırken" konumla hukukçudan önce çıkar ("Evet, konumla çıksın"; onaylı
+  yedeğin değişmesi, plan §2 son satır). "Her Zaman" hukukçuyu bekler.
 - **Hukukçu** (`S0/hukukcu-sorulari.md`'ye eklenecek): `walk` rızasının kapsamı; "Her Zaman" konumun "yer değişti" sinyali
   olarak kullanılması; kullanım saati analizinin rıza gerektirip gerektirmediği; Soru 1'in güncellenmesi (ilçe, arka
   planda WeatherKit isteği). Ad gelmezse onaylı yedek: "Her Zaman"

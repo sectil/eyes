@@ -21,3 +21,7 @@
 → Karar 1: önerilen sıra (Build 60 → B1 → B2 → Y2–Y4 → B3 → Y6). Karar 2: "Yürürken beni fark et" varsayılan kapalı; kapalıyken
 Nef kaçırdığı bir yürüyüşten sonra bildirimle açmayı teklif eder (WhatsApp'ın anlık konumda izni o an istemesi gibi).
 Karar 3: cümle bankası; görünür bilim satırı günde bir, bilim kartı her bildirimde.
+
+## Tur 2'den sonra (2026-09-30)
+Soru: B3, "Kullanırken" konum izniyle hukukçudan önce yayına çıksın mı? Cevap (seçenekten): "Evet, konumla çıksın".
+→ Karar: B3 konumla çıkar; konum saklanmaz, telefondan çıkmaz; "Her Zaman" hukukçu cevabını bekler.
