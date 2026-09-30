@@ -83,3 +83,12 @@ F'nin şikâyetleri çoğunlukla bitiş ekranının MEVCUT öğelerine ait: ambe
 çatışması, uzun ve soluk uyarı paragrafı, "15 tekrar" tekrarı, anahtar ile "Kaydet" iki onay adımı gibi. Karar: bitiş
 ekranındaki satır kapalı kalır (sahip: "4/5 çıkmazsa durdur"); geçen S ve N koda aktarılır, "Bana hatırlat" Profil →
 Bildirimler'den kurulur. Bitiş ekranlarının renk ve düzen sorunu ayrı iş (bütün modüllerin bitiş ekranı). Tasarım: `b1a-son/`.
+
+## Son tur · uygulamadaki hâl (koda aktarım sonrası) · S 2/5, N 1/5 · İŞ DURDU
+
+Tasarımda geçen S (5/5) ve N (4/5) koda aktarıldı; uygulamadan çekilen hâl geçmedi. Başlıca neden bir içerik farkı:
+aktarımda Bildirimler listesine hatırlatma alabilen yedi modülün hepsi eklendi; kurulmamış beşi aynı "Her gün 16.30"
+önerisiyle alt alta duruyor ("yer tutucu gibi", "Hiçbiri üst üste gelmez" sözüyle çelişiyor). Ayrıca seçili sekme
+dolgu yerine kontur (tasarımda dolgu). Sahip kararı ("4/5 çıkmazsa durdur") gereği B1a arayüzü durdu: iki bayrak da
+kapalı (REMIND_ROW, NOTIFY_PAGE); kod ve testler duruyor. Yeniden açmak için gereken karar: Bildirimler yalnız kurulu
+hatırlatmaları mı listelesin (+ "Hatırlatma ekle"), veri yokken öneri saati modül başına farklı mı olsun (plan: 16.30).
