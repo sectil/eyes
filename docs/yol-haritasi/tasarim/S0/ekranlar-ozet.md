@@ -959,7 +959,7 @@ Kaynak: karar 5b (:173-174), §3.F.2 (:1028-1037).
 
 ## Bölüm 3 · Planda çelişen ya da eksik yerler (sahibin bakması gerekenler)
 
-> **30 Eylül 2026:** Bu 25 madde ve çizim soruları (Ç1–Ç18) karara bağlandı ve `ekranlar.html`'ye işlendi; kararlar ve
+> **30 Eylül 2026:** Bu 25 madde ve çizim soruları (Ç1–Ç18; ikinci 5 saniye turunda Ç19–Ç20) karara bağlandı ve `ekranlar.html`'ye işlendi; kararlar ve
 > gerekçeleri `sorular-kararlar.md`'de, plana işlenecek düzeltmeler `plan-duzeltmeleri.md`'de. Yalnız 19. madde (yoga sabah
 > kartının yeri) sahibin kararıdır. Aşağıdaki maddeler ilk hâliyle bırakıldı.
 

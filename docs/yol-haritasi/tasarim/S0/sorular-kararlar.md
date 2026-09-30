@@ -2,8 +2,8 @@
 
 Kapsam: `ekranlar-ozet.md` Bölüm 3'teki 25 madde ve `ekranlar.html`'deki çizim soruları. Çizim soruları ilk turda
 Y1–Y15 diye numaralanmıştı; inceleme turunda plan aşamalarıyla (Y1–Y6) karışmasın diye Ç1–Ç15 oldu (`ekranlar-inceleme.md`
-P19) ve aynı turda Ç16–Ç18 eklendi. Yani Y*n* = Ç*n*. Toplam 43 soru var: 42'si karara bağlandı ve sayfaya işlendi, biri
-sahibin kararıdır.
+P19) ve aynı turda Ç16–Ç18 eklendi; ikinci 5 saniye turunda Ç19–Ç20 eklendi. Yani Y*n* = Ç*n*. Toplam 45 soru var: 44'ü karara
+bağlandı ve sayfaya işlendi, biri sahibin kararıdır.
 
 Ölçüt: onaylı bir kararı değiştiren (onaylı yoga tasarımı, onaylı açılış ya da giriş ekranı gibi), marka ve kimlik seçimi
 ya da parasal veya hukuki sonucu olan soru sahibe gider. Teknik, tutarlılık, dil, düzen ve planın kendi içindeki çelişki
@@ -15,8 +15,8 @@ Sayfa üreteçten yazılır (`/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5
 `app/` altında hiçbir dosyaya dokunulmadı, git kullanılmadı. Kod satır numaraları 30 Eylül 2026 öğleden önceki çalışma ağacındandır; başka bir oturum `app/` altında yoga kodu yazdığı için kayabilir.
 
 Sayfada her bölümün altındaki "Kararlar" listesi bu belgenin kısa hâlidir: yeşil numara karara bağlanmış madde, turuncu
-numara sahibin kararıdır. Sayfanın başındaki not, 43 sorudan 42'sinin karara bağlandığını söyler ve sahibin sorusuna
-götürür.
+numara sahibin kararıdır. Sayfanın açılış sahnesinin altındaki not, 45 sorudan 44'ünün karara bağlandığını söyler ve sahibin
+sorusuna götürür.
 
 ---
 
@@ -32,21 +32,24 @@ ilk ekranın altında kalıyor. Sonsuz yolun ilk 5 saniye dizilimi (§3.F.3) bu 
 **Neden sahibin kararı.** Kartın yeri ve zamanı onaylı yoga tasarımının parçasıdır; ne seçilirse seçilsin onaylı bir
 tasarım değişir.
 
-**Önerim.** Kart aynı yerde kalsın, ama günün ilk dokunuşundan sonra açılsın.
-- Sahibin onayladığı plan Yenilikler ve izin sayfaları için aynı kuralı koyuyor (§2.2 K4: "günün ilk dokunuşundan ya da
-  ilk duraktan sonra"); yoga kartına da aynı kural uygulanır, yeni bir kural icat edilmez.
-- İlk 5 saniye bozulmaz. Duraklar Ana sayfadaki yoldan açıldığı için kişi ilk duraktan sonra Ana sayfaya döner ve soruyu
-  yine o sabah, yoga planının istediği yerde görür. 12.00 sınırı, alarm kartının önceliği ve "Atla" aynı kalır.
-- Bedeli: o sabahlarda, ilk duraktan sonra büyük düğme bir kaydırma aşağıda kalır. İlk dokunuş 12.00'yi geçerse soru o gün
-  hiç görünmez.
+**Önerim.** Kart günün ilk dokunuşundan sonra açılsın ve büyük düğmenin hemen altında dursun (ikinci 5 saniye
+turunda güncellendi: ilk öneride kart ilk duraktan sonra yine başlığın altında açılıyor, "Yola devam et" düğmesini ilk
+ekranın dışına itiyordu; üç değerlendiricinin üçü de "Yola devam et"in ilk ekranda olmadığını yazdı).
+- Sahibin onayladığı plan Yenilikler ve izin sayfaları için aynı zamanlamayı koyuyor (§2.2 K4: "günün ilk dokunuşundan ya
+  da ilk duraktan sonra"); yoga kartına da aynı kural uygulanır, yeni bir kural icat edilmez.
+- İlk 5 saniye bozulmaz: sabahın ilk açılışı (a)'daki gibidir. Duraklar Ana sayfadaki yoldan açıldığı için kişi ilk
+  duraktan sonra Ana sayfaya döner; "Yola devam et" ilk ekrandadır, soru hemen altında görünür. 12.00 sınırı, alarm
+  kartının önceliği ve "Atla" aynı kalır.
+- Bedeli: soru ilk açılışta görünmez; ilk dokunuş 12.00'yi geçerse o gün hiç görünmez. Kartın yeri onaylı yoga
+  tasarımındaki "başlığın hemen altı"ndan büyük düğmenin altına iner.
 
 **Öbür seçenek.** Kart Gelişim haritasının altına, akşam kartının durduğu tek kart yuvasına insin (alarm kartı da yolun
 altındadır). İlk açılışta da vardır ama kaydırmadan görünmez; cevap oranı düşebilir, bu da yoga planının "uykuya dalma
 kolaylığı" ölçüsünü inceltir.
 
 **Sayfadaki yeri.** (a) bölümünün sonunda "Senin kararın · tek soru" bloğu: üç telefon, 16 Ekim Cuma sabahı (bugünkü
-onaylı yer 07.40; önerimde aynı sabahın ilk açılışı 07.40 ve ilk duraktan sonrası 07.44). Sayfanın başındaki "Senden tek
-karar bekleniyor" satırı ve not bu bloğa götürür.
+onaylı yer 07.40; önerimde aynı sabahın ilk açılışı 07.40 ve ilk duraktan sonrası 07.44). Açılış sahnesindeki "1 karar
+bekliyor" düğmesi ve altındaki "Senden tek karar bekleniyor" kutusu bu bloğa götürür.
 
 ---
 
@@ -185,8 +188,11 @@ yedeğindeki "0/3" (Ç7). Gerekçe: karar 5d "Ana sayfada sıfırlar görünmesi
 raporlar kapsam dışıdır. Sayfada: (a) "12 Ekim Pazartesi · hafta satırı gizli" parçası; (b) 1. gün yolu. Plan düzeltmesi:
 D18.
 
-**24 · Seri ≥ 3 iken "N gün seninle".** Karar: kalır. Gerekçe: plandaki "yerine" yalnız 3 günden kısa seri içindir; bugün
-ikisi birlikte görünüyor (`Home.jsx`), mevcut sistem bozulmaz. Sayfada: (a) 7. ve 30. gün telefonları. Plan düzeltmesi: D18.
+**24 · Seri ≥ 3 iken "N gün seninle".** Karar: kalır; yalnız seriyle aynı sayıyken yazılmaz. Gerekçe: plandaki "yerine"
+yalnız 3 günden kısa seri içindir; bugün ikisi birlikte görünüyor (`Home.jsx`), mevcut sistem bozulmaz. İkinci 5 saniye
+turunda üç değerlendirici de her gün uygulamayı açan kişide "6 gün seri" ile "6 gün seninle"yi aynı sayının iki kez
+yazılması diye okudu; iki sayı ayrışınca (bir gün atlanınca) ikisi de görünür. Sayfada: (a) 7. ve 30. gün telefonları ve
+"12 Ekim Pazartesi" parçası. Plan düzeltmesi: D18.
 
 **25 · 320 pt'de beş yüz.** Karar: 320 pt'de yüzlerin arası 4 px, her yüz 45,6 px; kart iç boşluğu (18 px) değişmez.
 "İdare eder" iki satıra iner; etiketler üstten hizalıdır. Gerekçe: 8 px aralıkta yüz 42 px olur ve 44 pt'nin altına düşer;
@@ -194,7 +200,7 @@ iç boşluğu daraltmak kartı öteki kartlardan ayırırdı. Sayfada: (c) 320 p
 
 ---
 
-## Çizim soruları Ç1–Ç18
+## Çizim soruları Ç1–Ç20
 
 **Ç1 (eski Y1) · Tutmalı günde kanıt metni.** Karar: kanıt kutusu ailenin bugünkü metnini gösterir ve tutmalı günde sınır
 cümlesiyle biter: "Yavaş nefes sırasında kalp ritmi değişkenliği tutarlı biçimde artıyor (Laborde 2022; Marchant 2025). Bu
@@ -283,8 +289,10 @@ bitince bugünkü sayaç ("1 / 4") döner. Gerekçe: onaylı karar 5d "Ana sayfa
 "0/9 durak" bu kararla çelişen bir örnektir ve düzeltilir. İlk ekranın en ağır öğesi sıfır olmamalı. Önceki turdaki
 "seçenek" telefonu kaldırıldı; 1., 7. ve 30. gün telefonları bu biçimde. Sayfada: (a). Plan düzeltmesi: D18.
 
-**Ç17 · Bantta ilk yıldız.** Karar: yıldız "Mola · N dk" etiketinin altına iner ([26, 44]); Y1'de uygulamada da.
-Gerekçe: bugünkü kodda da etiketin üstüne düşüyor (`TodayPath.jsx:267`). Sayfada: (b) 7. gün telefonu. Plan düzeltmesi: D23.
+**Ç17 · Bantta ilk yıldız ve bölüm etiketi.** Karar: yıldız "Mola · N dk" etiketinin altına iner ([26, 44]); 2. bölümün
+tek durağı soldaysa (tek duraklı bölüm) bölüm etiketi sağa geçer. Y1'de uygulamada da. Gerekçe: bugünkü kodda yıldız
+etiketin üstüne düşüyor (`TodayPath.jsx:267`); 1. gün yolu etiketin üstünden geçiyor (ikinci 5 saniye turu). Sayfada: (b)
+1. ve 7. gün telefonları. Plan düzeltmesi: D23.
 
 **Ç18 · Gece ekranı kartı ve "günde en çok bir kart".** Karar: kart, yüze dokunulduğu anda o an bilinen tetiklerle seçilir
 (dolunay, sonra yol kartları). Gece ekranı kartı yalnız o akşam başka kart gösterilmediyse ve "Ekran çoktu" 22.00'den sonra
@@ -292,6 +300,16 @@ seçildiyse "Tamam"dan sonra aynı yerde çıkar. Gerekçe: etiket kanıt kartı
 gece ekranı, yol kartları) bu sırayla uygulanamaz, uygulanırsa bir akşamda iki kart görülür. Günde en çok bir kart kuralı
 korunur. Sayfada: (c) 3. telefonun altyazısı ve kararlar. Plan düzeltmesi: D9.
 
+
+**Ç19 · Hafta satırının yazımı.** Karar: Ana sayfanın sayı sütununda hafta satırı "2/3 gün bu hafta" yazılır; hedef tutunca
+"4 gün bu hafta" ve yeşil tik. Gerekçe: ikinci 5 saniye turunda üç değerlendirici de "4✓ hafta"yı "4 hafta" ve 9. gündeki
+"5✓ hafta"yı olanaksız bir sayı diye okudu; "2/3 hafta"yı da "haftanın üçte ikisi" diye. Yolun altındaki bugünkü satır
+("Bu hafta 2/3 gün") aynı dili kullanır. Haftalık hedef kadar nokta (önceki turun önerisi) kalktı. Sayfada: (a), (e) ve
+yoga sorusunun telefonları. Plan düzeltmesi: D18.
+
+**Ç20 · Yolun altındaki hafta satırı ve Nef kartı.** Karar: hemen altındaki Nef kartı haftanın sayısını söylüyorsa ("Bu
+hafta 1/3 gün çalıştın.") yolun altındaki "Bu hafta 1/3 gün" o gün yazılmaz. Gerekçe: üç değerlendirici de aynı sayının alt
+alta iki kez yazıldığını gördü. Sayfada: (h) 6. gün telefonu. Plan düzeltmesi: D18.
 ---
 
 ## Bu turda sormadan düzeltilen öteki yerler
@@ -314,3 +332,5 @@ korunur. Sayfada: (c) 3. telefonun altyazısı ve kararlar. Plan düzeltmesi: D9
   yeniaylar 10 Ekim ve 9 Kasım).
 - 5 saniye sınaması (bağlayıcı kural: birbirini görmeyen en az 3 değerlendirici) bu işte yapılmadı; sayfa sahibe gitmeden
   önce yapılmalıdır.
+- İkinci 5 saniye turu (30 Eylül 2026): değerlendiricilerin notlarına göre sayfanın açılışı ve ekranlar yeniden çizildi;
+  bu belgede 19'un önerisi, 24, Ç17 güncellendi, Ç19 ve Ç20 eklendi. Ayrıntı `ekranlar-inceleme.md`'nin sonunda.

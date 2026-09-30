@@ -85,3 +85,46 @@ Sonuç sütunu: **düzeltildi**, **kısmen** (bir bölümü yapıldı, kalanı y
 - Yolun 320 pt hatasının Y1 cihaz listesine yazılması ve Ç16–Ç18'in ekranlar-ozet.md Bölüm 3'e eklenmesi bu işin dışında kaldı.
 - 320 pt'de sitenin başlığı 1,9rem'de de dört satır; iki düğme sığıyor, ama pay az.
 - Rıza sayfaları sabit boyda ve parçalı çizilmedi; ilk ekranın sonu kesik çizgiyle gösteriliyor.
+
+## İkinci 5 saniye turu (30 Eylül 2026)
+
+Üç bağımsız değerlendirici sayfanın ilk ekranında ve 27 ekranın çoğunda ilk 5 saniyede etkilenmedi. Önce yedek alındı
+(`…/s0-ekran/yedek-tur5/`: `gen.mjs`, `lib.mjs`, `page.css`, `client.js`, `ekranlar.html` ve bu klasörün üç belgesi).
+Onaylı metinler değişmedi; değişiklik düzen, vurgu, boşluk ve görsellikte. İki yazım düzeltmesi karar olarak kaydedildi
+(Ç19, Ç20), madde 24 ve Ç17 genişledi, sahibin sorusundaki (19) önerim güncellendi (`sorular-kararlar.md`, D18, D23).
+
+| Ekran | Değerlendiricinin notu | Yapılan |
+|---|---|---|
+| Sayfanın ilk ekranı | İç dilde başlık ekranın %40'ı; telefon %68, alt kenarı kesik; en çarpıcı görsel (gece ve iris ufku) yok | Açılış bir gece sahnesi oldu: giriş ekranının yıldızları ve iris ufku, "Nefona" ve tek cümle ("Her gün birkaç dakikalık göz ve nefes molası."), 390 × 844'te tam görünen %78'lik 1. gün telefonu; sağ üstte "1 karar bekliyor". S0, tarih ve karar kutusu sahnenin altına, küçük. Genişte üç telefon ve Pegasus |
+| Bütün Ana sayfa ve yol ekranları | Sekme çubuğunun altından yazı ve düğme sızıyor | Sekme çubuğunun zemini %95 opak (öneri) |
+| Koyu tema | Telefon çerçevesi zemine karışıyor | Çerçeve ve kenarı açıldı |
+| 01 · 1. gün Ana sayfa | Altta iki eş kart ve boş kayıt kartı | İlk günün cümlesi iris zeminli; Nefes ve Dalga tek satırlık hap; harita kartı tek satır kadar (kayıt 3 alandan azken); yol altında başlıyor |
+| 05, 06, 08, 09, 19 · sayı sütunu | "6 gün seri" ve "6 gün seninle" aynı sayı; "4✓ hafta" dört hafta, "5✓ hafta" 9. günde olanaksız gibi | "2/3 gün bu hafta", hedef tutunca "4 gün bu hafta" ve yeşil tik (Ç19); "gün seninle" seriyle aynıyken yazılmaz (24); uzun serinin hapı sütunun sağ kenarını aşmıyor |
+| 05 · 7. gün | Kilometre taşı sıradan bej şerit, hizası bozuk | Altın zeminli panel, büyük düğmeyle aynı hizada; altında ilk haftanın yedi günü (altısı dolu, bugün "7" ile parlar) |
+| 06 · 30. gün | Bir ayın ödülü olan iris küçük | Harita kartı büyük, iris halkalı ve parlak |
+| 09 · önerim, ilk duraktan sonra | Soru yine "Yola devam et"i ilk ekrandan itiyor | Önerim güncellendi: kart ilk dokunuştan sonra büyük düğmenin hemen altında açılır; düğme ilk ekranda |
+| 07 · bugünkü yer | Kartta "Uykuya Geçiş", sayfada "yoga sabah sorusu" | Sayfa metni "yoganın Uykuya Geçiş dersinden sonraki sabah sorusu" diyor |
+| 02, 10 · yol | Mola bandı köşeli, kenara değmiyor, rastgele noktalar; 1. günde yol "2. BÖLÜM"e sürtünüyor; altı boş | Bant yuvarlak köşeli havuz, beş yıldız; tek duraklı bölümde etiket sağa geçer (Ç17); kilitli durak simgesi iris renginde; 1. günde yolun altında Nef tanıtım kartı başlıyor |
+| 12 · nefes bitti | Beş seçim, en parlak düğme "2 dk daha", "Kaydet" bozuk gibi | Molanın iki seçeneği eşit çizgili düğme; sakinlik ölçeği yoga sorusuyla aynı kutular, çizimde "4" seçili; tek dolu düğme "Kaydet" |
+| 03, 14 · beş yüz | Hazır simge seti; "Çok kötü" öfkeli; "İdare eder" iki satır | Her yüz iris tonlu diskte, beş disk ince bir ölçek çizgisinde; "Çok kötü" üzgün kaşlı; 390 pt'de etiketler tek satır; yolun şeridinde bitmiş mola noktası iris renginde |
+| 15 · dokununca | Makale künyesi soğuk; cevapla bağ yok | Kartın başı "Akşam · kaydedildi"; kanıt kartında bulgu önde ve büyük, sınır altında, künye dipte küçük; simge yoldaki Nefes durağının simgesi |
+| 16 · etiketler | Standart çip listesi | İki sütun, simgeler diskte |
+| 17, 21 · hava kartı | Kart uzun; grafik neyi ölçüyor belli değil; iç kutular yarışıyor | Grafiğin adı "Yağış olasılığı"; bağlam cümlesi kutusuz; kart sıkı, "Bugün ölçülenler" ilk ekranda başlıyor |
+| 18 · hava sorulmamış | Sayfa yarı boş, kişiye dair bir şey yok | Altında "Bugün ölçülenler" (adım, yol); "İstanbul için göster" dolu düğme |
+| 20 · hava rızası | Kutu işaretli çizilmiş, önceden işaretli gibi | Kutu işaretsiz, "İzin ver" soluk; sayfa içerik kadar yükselir |
+| 22 · kilit ekranı | Düz gradyan, kaba yedek yazı, saat iki kez | Durum çubuğunda saat yok; duvar kâğıdı yumuşak ışıklı; yazı Apple cihazında SF, başka yerde Onest |
+| 23 · Gelişim | Barkod gibi şeritler, "değişim yok" hapı üç kez, Yoga satırı eksik | Kartın başında şeridin anahtarı (son 28 gün, kayıt var/yok); "değişim yok" sakin alt satır; Yoga "yolda · 3 dk" |
+| 24 · modül ayrıntısı | Grafiğin tarih ekseni yok | "28 gün önce … bugün" ekseni |
+| 25 · 6. gün | "Bu hafta 1/3 gün" iki kez; "Ölçümlerin"in altı boş | Nef kartı sayıyı söylediği için yolun altındaki satır yazılmaz (Ç20); ekran kart sekme çubuğunun üstünde bitecek biçimde kaydırıldı |
+| 28, 29 · Nef rızası | Nef'in ne olduğu yok; özü söyleyen cümle yok; liste yarım satırla kesiliyor | Başta "Nef Göz Koçu" etiketi; giriş paragrafının ilk cümlesi kalın; kayan metin dipte soluyor |
+
+**Metni onaylı olduğu için değişmeyenler** (değerlendiricilerin notu yerinde, ama metin planın ya da bugünkü kodun):
+"Görmeyi iyileştirdiği gösterilmedi" (yolun dipnotu), "Değişim, kayıtlar biriktikçe görünür." (harita kartı, doğrulanmış
+değişim yokken), "Kaldığın yerden devam: …" (Nef satırı), "Molanın bitmesine 2 dk var." ve "2 dk daha", yağmur
+bildiriminin gövdesi (§3.E.6; Nefona'ya özgü bir cümle yok), rıza metinleri ve altyapı adları (Vercel, OpenRouter),
+"çevrimdışı öneri" etiketi, "Günün nasıl geçiyor?" sayfasında havanın üstte durması (§3.D.3).
+
+**Doğrulama.** `node gen.mjs` sayfayı yazdı; `ekranlar.html` üretecin çıktısıdır. `<title>` ve `<style>` en üstte, dış
+kaynak yalnız Google Fonts, yeni renkler token. Playwright: 320, 390, 400 ve 1280 px pencerede yatay kaydırma yok; 390 ve
+320 pt telefonda ekrandan taşan metin ve yolda kırpılan öğe yok; sayfa denetimlerinde 44 pt'den küçük öğe yok; konsol
+hatası yok. İki temada, Hareketi Azalt açıkken bakıldı. Görüntüler `…/s0-ekran/tur5/`.

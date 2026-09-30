@@ -115,14 +115,18 @@ Biçim: **Yer** · şimdiki metin → yeni metin · (soru numarası).
   yerinde kalır; soru satırı ve tanıtım paragrafı kalkar. Kısa gerçeklerden "Kamera görüntün telefondan çıkmaz" kalkar (yeni
   satırda aynı söz var). Başlık masaüstünde 2,9rem ve iki satır, 360 pt altında 1,9rem'dir."
 
-**D18 · Ana sayfanın sayıları ve büyük düğme** (22, 23, 24, Ç7, Ç16)
+**D18 · Ana sayfanın sayıları ve büyük düğme** (22, 23, 24, Ç7, Ç16, Ç19, Ç20)
 - §3.F.3 :1051 · ""0/9 durak · ≈ 15 dk"" → ""9 durak · bugün ≈ 15 dk" (ilk duraktan önce; ilk durak bitince "1/9")".
-- §3.F.3 :1051 · "sıfır satırı yok (karar 5d)" → "Ana sayfada değeri sıfır olan hiçbir sayı görünmez: seri, "0/3 hafta",
-  yolun altındaki "Bu hafta 0/3 gün", Nef kartının kural yedeğindeki "0/3" (yerine "Yeni hafta başladı; hedefin 3 gün.");
-  seri 3 gün ve üstündeyken "N gün seninle" de kalır (karar 5d)".
+- §3.F.3 :1051 · "sıfır satırı yok (karar 5d)" → "Ana sayfada değeri sıfır olan hiçbir sayı görünmez: seri, "0/3 gün bu
+  hafta", yolun altındaki "Bu hafta 0/3 gün", Nef kartının kural yedeğindeki "0/3" (yerine "Yeni hafta başladı; hedefin 3
+  gün."); seri 3 gün ve üstündeyken "N gün seninle" de kalır, yalnız seriyle aynı sayıyken yazılmaz (karar 5d)".
+- §3.F.3 :1051 sayılar satırına eklenir: "Hafta satırı "2/3 gün bu hafta" yazılır; hedef tutunca "4 gün bu hafta" ve yeşil
+  tik (bugün "2/3 hafta", "4✓ hafta")."
+- §3.F.3'e eklenir: "Hemen altındaki Nef kartı haftanın sayısını söylüyorsa yolun altındaki "Bu hafta N/3 gün" o gün
+  yazılmaz."
 - §3.F.3 :1050 · sonuna eklenir: "Ölçüm duraklarında (`hideMinutes`) büyük düğme de süre yazmaz ("Haftalık E testi")."
 - §3.G.3 Y3 "Değişen" sütununa: `lib/homeSuggest.js` (`hideMinutes`), `lib/coach.js` (kural yedeğinin sıfır dalı),
-  `screens/Home.jsx` (yolun altındaki hafta satırı).
+  `screens/Home.jsx` (sayı sütununun hafta satırı ve "gün seninle", yolun altındaki hafta satırı).
 
 **D19 · Beş yüz 320 pt'de** (25)
 - §3.D.3 :778 · "dokunma alanı ≥ 44 pt" → "dokunma alanı ≥ 44 pt (320 pt'de yüzlerin arası 4 px)".
@@ -145,4 +149,5 @@ Biçim: **Yer** · şimdiki metin → yeni metin · (soru numarası).
 
 **D23 · Y1 cihaz listesi** (Ç13, Ç17)
 - §3.H :1237-1239 Y1 listesine eklenir: "320 pt'de yolun bölüm etiketleri ve baloncuğu kırpılmıyor (bugün `TodayPath.jsx`
-  300 px'lik koordinatla 10 px kırpıyor); bantta ilk yıldız "Mola · N dk" etiketinin altında (`TodayPath.jsx:267`)".
+  300 px'lik koordinatla 10 px kırpıyor); bantta ilk yıldız "Mola · N dk" etiketinin altında (`TodayPath.jsx:267`); 2.
+  bölümün tek durağı soldaysa bölüm etiketi sağda, yol etiketin üstünden geçmiyor".
