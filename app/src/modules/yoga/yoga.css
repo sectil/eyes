@@ -31,6 +31,7 @@
   --warm-soft: #fff0dc;
   /* Şafak göğü: tepede sabah mavisi, ufukta şeftali (sıcak ışık mavinin üstünde griye dönmesin) */
   --dawn-top: color-mix(in srgb, var(--yg-c, #7eb2dd) 22%, #ffffff); --dawn-hor: #ffdcb8; --dawn-sea: #fbe9d8; --dawn-cloud: #ffffff;
+  --dawn-mid: color-mix(in srgb, var(--warm) 46%, transparent);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .yg {
@@ -45,7 +46,8 @@
     --sun: color-mix(in srgb, var(--yg-c, #7eb2dd) 40%, #ffffff); --sun-halo: color-mix(in srgb, var(--yg-c, #7eb2dd) 45%, transparent);
     --cloud: color-mix(in srgb, var(--yg-c, #7eb2dd) 45%, #1a2a3c); --cloud-o: 0.35;
     --warm: #eaa35c; --warm-soft: #f8d6a8;
-    --dawn-top: #060b14; --dawn-hor: #1d2436; --dawn-sea: #0d1422; --dawn-cloud: #2a3346;
+    --dawn-top: #060b14; --dawn-hor: #1b2336; --dawn-sea: #0d1422; --dawn-cloud: #2a3346;
+    --dawn-mid: color-mix(in srgb, var(--warm) 26%, transparent); /* koyuda ışık ufukta toplanır, gök lacivert kalır */
   }
 }
 :root[data-theme='dark'] .yg {
@@ -60,7 +62,8 @@
   --sun: color-mix(in srgb, var(--yg-c, #7eb2dd) 40%, #ffffff); --sun-halo: color-mix(in srgb, var(--yg-c, #7eb2dd) 45%, transparent);
   --cloud: color-mix(in srgb, var(--yg-c, #7eb2dd) 45%, #1a2a3c); --cloud-o: 0.35;
   --warm: #eaa35c; --warm-soft: #f8d6a8;
-  --dawn-top: #060b14; --dawn-hor: #1d2436; --dawn-sea: #0d1422; --dawn-cloud: #2a3346;
+  --dawn-top: #060b14; --dawn-hor: #1b2336; --dawn-sea: #0d1422; --dawn-cloud: #2a3346;
+    --dawn-mid: color-mix(in srgb, var(--warm) 26%, transparent); /* koyuda ışık ufukta toplanır, gök lacivert kalır */
 }
 /* Zemin: uygulamanın zemini; üstte, ufuktan doğar gibi dersin ışığı. Sabit katman: kaydırınca yerinde kalır. */
 .yg::before {
@@ -136,7 +139,7 @@
 .yg-scene.is-dawn, .yg-scene.is-done {
   --sky-top: var(--dawn-top); --sky-hor: var(--dawn-hor); --sea: var(--dawn-sea); --cloud: var(--dawn-cloud);
   --sun: var(--warm-soft); --sun-halo: color-mix(in srgb, var(--warm) 72%, transparent);
-  --glow-core: var(--warm-soft); --glow-mid: color-mix(in srgb, var(--warm) 46%, transparent); --hz-core: var(--warm);
+  --glow-core: var(--warm-soft); --glow-mid: var(--dawn-mid); --hz-core: var(--warm);
 }
 .yg-scene.is-dawn { --hy: 80%; --gh: 82%; --go: 1; --sun-d: 40px; --sun-y: 13px; }
 .yg-scene.is-done { --hy: 84%; --gh: 96%; --go: 1; --sun-d: 34px; --sun-y: 30px; }
@@ -315,8 +318,8 @@
 
 /* ---------- Önce ve sonra puanı ---------- */
 .yg-rating { gap: 12px; }
-.yg-rating > .yg-grow-top { flex: 1.5; }
-.yg-rating > .grow:last-of-type { flex: 0.7; }
+.yg-rating > .yg-grow-top { flex: 2; }
+.yg-rating.is-before > .yg-grow-bot { flex: 0.5; } /* önce: soru ve ölçek başparmağa yakın, üstte gök */
 .yg-rate-hero { height: calc(env(safe-area-inset-top) + clamp(104px, 24dvh, 190px)); } /* 844: 237 · 640: 174 */
 .yg-rating.is-after > .yg-grow-top { flex: 0.5; }
 .yg-q { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
@@ -487,7 +490,7 @@
   .yg-detail > .yg-prep { order: 2; }
   .yg-detail > .yg-shape, .yg-detail > .yg-src { order: 3; }
   .yg-open li { padding: 9px 0; }
-  .yg-safety { gap: 10px; }
+  .yg-safety { gap: 8px; }
   .yg-safe-head { margin: 0 0 2px; }
   .yg-safe-lead { display: none; } /* ilk maddenin gövdesinde aynen duruyor; kısa ekranda beş başlık ve 112 notu sığsın */
   .yg-acc-i summary b { font-size: 0.95rem; }

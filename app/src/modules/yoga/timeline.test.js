@@ -4,7 +4,8 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import {
   speechAt, captionAt, clipStartAt, resumePoint, seekPoint, nearestClipStart, sectionsOfTimeline, sectionAt, closingAt,
-  imageWindows, jumpPlan, visualAt, loadTimeline, durationOf, LEAD_SEC, seekTarget, guardClosing,
+  imageWindows, jumpPlan, visualAt, loadTimeline, durationOf, LEAD_SEC, seekTarget, guardClosing, welcomeCaption, sectionSpans,
+  loadTimelineCached, cachedTimeline,
 } from './timeline.js'
 
 const tl = JSON.parse(readFileSync(fileURLToPath(new URL('../../../public/yoga/ders2-15.timeline.json', import.meta.url)), 'utf8'))
@@ -152,5 +153,35 @@ describe('çizelge yükleme', () => {
     expect(await loadTimeline('x', async () => ({ ok: false }))).toBeNull()
     expect(await loadTimeline('x', async () => { throw new Error('ağ') })).toBeNull()
     expect(await loadTimeline('x', async () => ({ ok: true, json: async () => ({}) }))).toBeNull()
+  })
+})
+
+// 5 saniye yeniden tasarımı (C_5SN_RAPORU.md): altyazı kapalıyken de karşılama klibi yazılır; bölüm şeridi süreyle orantılı
+describe('karşılama cümlesi ve bölüm süreleri', () => {
+  it('karşılama: yalnız dersin ilk klibi (Ders 2: "Hoş geldin." · "Bu dakikalar senin."), ekrandaki cümle söylenen cümle', () => {
+    const a1 = piece('a.hosgeldin#1')
+    const a2 = piece('a.hosgeldin#2')
+    expect(welcomeCaption(tl, 1)).toBeNull() // ilk sözden önce yazı yok
+    expect(welcomeCaption(tl, (a1.start + a1.end) / 2)).toBe(a1.screen_text)
+    expect(welcomeCaption(tl, (a2.start + a2.end) / 2)).toBe(a2.screen_text)
+    const next = tl.speech.find((x) => x.clip !== a1.clip)
+    expect(welcomeCaption(tl, (next.start + next.end) / 2)).toBeNull() // sonrası yalnız altyazı açıkken
+    expect(welcomeCaption(null, 5)).toBeNull()
+  })
+  it('bölüm süreleri: her bölüm bir sonrakinin başına kadar; toplam dersin süresi', () => {
+    const spans = sectionSpans(tl)
+    expect(Object.keys(spans)).toEqual(sectionsOfTimeline(tl).map((x) => x.id))
+    expect(Object.values(spans).reduce((a, b) => a + b, 0)).toBeCloseTo(durationOf(tl), 6)
+    expect(sectionSpans(null)).toBeNull()
+  })
+  it('çizelge bir kez okunur; okunamayan önbelleğe girmez', async () => {
+    let n = 0
+    const ok = async () => { n += 1; return { ok: true, json: async () => tl } }
+    expect(await loadTimelineCached('cache-test.json', ok)).toBe(tl)
+    expect(await loadTimelineCached('cache-test.json', ok)).toBe(tl)
+    expect(n).toBe(1)
+    expect(cachedTimeline('cache-test.json')).toBe(tl)
+    expect(await loadTimelineCached('yok.json', async () => ({ ok: false }))).toBeNull()
+    expect(cachedTimeline('yok.json')).toBeNull()
   })
 })

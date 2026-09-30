@@ -318,7 +318,7 @@ function YogaFlow({ route = 'yoga', sessions = [], profile = null, store, onRefr
         {showWas && (
           <p className="yg-was-line" aria-live="polite">{val != null ? <>{YT.rate.was} <b>{before}</b></> : null}</p>
         )}
-        <div className="grow" />
+        <div className="grow yg-grow-bot" />
         <div className="yg-go">
           <button
             type="button"
