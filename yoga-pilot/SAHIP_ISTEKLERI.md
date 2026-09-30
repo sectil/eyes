@@ -59,3 +59,6 @@ Sonraki aşamaya (metin + ses + tasarım iş akışı) bu dosya olduğu gibi ver
     kısa günlerde Ders 1 ve 5 (3 dk), ≈ 8 günde bir Ders 2 (5 dk), Ders 3 yalnız akşam önerisi; kod bu oturumda (C adımı),
     sesler yeni oturumda; önce TestFlight, sonra App Store; kural: "her ders kendi denetimlerinden geçince eklenir"
     (PLAN.v3 "kısmi yayın yoktur" kuralının yerine).
+11. "önerini onaylıyorum" (2026-09-30) → C adımındaki üç hata düzeltmesi kalıyor: 5. gün raporunda fiil gerçek değişimden
+    seçilir (artan gerginlik "azaldı" yazılmaz), PDF'te güven aralığı değerle aynı yönde, Gelişim kutucuğunda "düşük daha
+    iyi" ölçüde puanın gerçek değişimi (0b076ba).
