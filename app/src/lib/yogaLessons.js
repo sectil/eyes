@@ -32,7 +32,9 @@ export const MUSIC_TAIL = [0, 5, 10, 20]
 export const MUSIC_TAIL_DEFAULT = 10
 
 // 3 dakika seçiliyken Kaynaklar kartına eklenen satır (modul.md §2.4-11; Radin 2025, PMID 39808431). 3 dk'da etki cümlesi yok.
-export const THREE_MIN_LINE = "Bir çalışmada günde 10 dakika meditasyon yapması istenen çalışanların %69,7'si günde 5 dakikanın altında kaldı (Radin 2025). Üç dakikalık sürümün etkisini doğrudan sınayan bir çalışma ise bulamadık."
+// %69,7 özette yok, tam metinde (PMC): paydası 8. haftaya kalan 580 kişi (404/580). Sahip onayı 2026-09-30
+// (docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/uc-bulgu.md §1).
+export const THREE_MIN_LINE = "Bir çalışmada günde 10 dakika meditasyon yapması istenen çalışanlardan 8. haftaya kalanların %69,7'si günde 5 dakikanın altında kaldı (Radin 2025). Üç dakikalık sürümün etkisini doğrudan sınayan bir çalışma ise bulamadık."
 export const SOURCES_FOOTER = "Kaynak: PubMed (National Library of Medicine). DOI'ler https://doi.org/ önekiyle açılır."
 
 // Ortak açılış satırları (modul.md §2.4-12; pilot 4. tur metni). Dersin kendi `opening` listesi bunlarla başlar.

@@ -53,6 +53,8 @@ export const RELEASES = [
       { kind: 'new', text: "Alan ayrıntısında 28 günlük düzen şeridi, hangi modülden kaç kayıt geldiği ve başlangıç soruların görünür." },
       { kind: 'new', text: "İyi oluş: 14 günde bir 5 kısa soru (WHO-5, resmî Türkçe metin). Puan 0–100; 10 puan ve üstü değişim anlamlı sayılır. Tanı değildir, yalnız kendinle karşılaştırılır." },
       { kind: 'new', text: "Ana sayfada küçük harita: kaç alanda kaydın olduğunu ve hangisinin iyileştiğini gösterir; en az ilgilendiğin alan için tek bir öneri sunar (vakti geldiyse İyi oluş soruları)." },
+      // uc-bulgu.md §1: %69,7'nin paydası 8. haftaya kalan 580 kişi; satır bunu söylemiyordu (sahip onayı 2026-09-30)
+      { kind: 'fix', text: "Yogada 3 dakika seçiliyken Kaynaklar'daki satır düzeltildi: %69,7, çalışmaya katılan herkesin değil, 8. haftaya kalanların oranıdır." },
       // Sonsuz yol denetimi (2026-09-30): breathMix haftalık kuralları kayıt sayıyordu, gün değil. Cihazda denenmedi.
       { kind: 'fix', text: "Yoldaki nefeste aynı gün birden çok kez kaydettiğin nefes, haftalık çeşitlilik kuralında birkaç gün gibi sayılıyordu; o kalıp hafta boyunca hiç gelmeyebiliyordu. Artık her gün bir kez sayılır." },
     ],
