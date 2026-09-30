@@ -1,0 +1,1751 @@
+{
+ "lesson": "ders5",
+ "title": "Tek Nokta",
+ "voice": {
+  "name": "Nefona Hoca",
+  "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+  "sex_param": "m",
+  "model": "eleven_v4",
+  "generations_count": 3
+ },
+ "kaynak": "b/ders5/ders5.lesson.json + timing_d5.py (köşeler ['hoc', 'hoc-lo', 'nes'] × dakikalar [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])",
+ "ozet": {
+  "birim": 76,
+  "karakter": 4308,
+  "hece": 1557,
+  "tasiyici": 0,
+  "kredi_tahmini_tts_3_cekim": 12922.6
+ },
+ "units": [
+  {
+   "id": "a.durus.kisa",
+   "clip": "a.durus",
+   "kind": "clip",
+   "form": "kisa",
+   "tts": "Sırtın dik olsun ama gerilmesin. Gözlerini kapatıp kapatmamak sana kalmış.",
+   "screen": "Sırtın dik olsun ama gerilmesin. Gözlerini kapatıp kapatmamak sana kalmış.",
+   "sentences": [
+    "Sırtın dik olsun ama gerilmesin.",
+    "Gözlerini kapatıp kapatmamak sana kalmış."
+   ],
+   "phase": "Varış",
+   "syllables": 26,
+   "chars": 74,
+   "minutes": [
+    3
+   ],
+   "belowSec": 240
+  },
+  {
+   "id": "a.izin.kisa",
+   "clip": "a.izin",
+   "kind": "clip",
+   "form": "kisa",
+   "tts": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+   "screen": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+   "sentences": [
+    "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin."
+   ],
+   "phase": "Varış",
+   "syllables": 29,
+   "chars": 75,
+   "minutes": [
+    3
+   ],
+   "belowSec": 240
+  },
+  {
+   "id": "a.acilis.kisa",
+   "clip": "a.acilis",
+   "kind": "clip",
+   "form": "kisa",
+   "tts": "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.",
+   "screen": "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.",
+   "sentences": [
+    "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun."
+   ],
+   "phase": "Varış",
+   "syllables": 25,
+   "chars": 71,
+   "minutes": [
+    3
+   ],
+   "belowSec": 240
+  },
+  {
+   "id": "c1.yer.kisa",
+   "clip": "c1.yer",
+   "kind": "clip",
+   "form": "kisa",
+   "tts": "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?",
+   "screen": "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?",
+   "sentences": [
+    "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 23,
+   "chars": 69,
+   "minutes": [
+    3
+   ],
+   "belowSec": 240
+  },
+  {
+   "id": "c1.izle.kisa",
+   "clip": "c1.izle",
+   "kind": "clip",
+   "form": "kisa",
+   "tts": "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.",
+   "screen": "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.",
+   "sentences": [
+    "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 23,
+   "chars": 62,
+   "minutes": [
+    3
+   ],
+   "belowSec": 240
+  },
+  {
+   "id": "c1.kayma.kisa",
+   "clip": "c1.kayma",
+   "kind": "clip",
+   "form": "kisa",
+   "tts": "Dikkatin birazdan kayacak; bu çok olağan.",
+   "screen": "Dikkatin birazdan kayacak; bu çok olağan.",
+   "sentences": [
+    "Dikkatin birazdan kayacak; bu çok olağan."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 14,
+   "chars": 41,
+   "minutes": [
+    3
+   ],
+   "belowSec": 240
+  },
+  {
+   "id": "c1.donus",
+   "clip": "c1.donus",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.",
+   "screen": "Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.",
+   "sentences": [
+    "Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 23,
+   "chars": 59,
+   "minutes": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.aralik1.kisa",
+   "clip": "c1.aralik1",
+   "kind": "clip",
+   "form": "kisa",
+   "tts": "Birkaç soluk boyunca ışığı orada tutuyorsun.",
+   "screen": "Birkaç soluk boyunca ışığı orada tutuyorsun.",
+   "sentences": [
+    "Birkaç soluk boyunca ışığı orada tutuyorsun."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 17,
+   "chars": 44,
+   "minutes": [
+    3
+   ],
+   "belowSec": 240
+  },
+  {
+   "id": "c1.anahtar1.kisa",
+   "clip": "c1.anahtar1",
+   "kind": "clip",
+   "form": "kisa",
+   "tts": "Fark ettiğin an, zaten geri döndün.",
+   "screen": "Fark ettiğin an, zaten geri döndün.",
+   "sentences": [
+    "Fark ettiğin an, zaten geri döndün."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 11,
+   "chars": 35,
+   "minutes": [
+    3
+   ],
+   "belowSec": 240
+  },
+  {
+   "id": "k.donus",
+   "clip": "k.donus",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Artık dönüş zamanı.",
+   "screen": "Artık dönüş zamanı.",
+   "sentences": [
+    "Artık dönüş zamanı."
+   ],
+   "phase": "Kapanış",
+   "syllables": 7,
+   "chars": 19,
+   "minutes": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "k.nefes.kisa",
+   "clip": "k.nefes",
+   "kind": "clip",
+   "form": "kisa",
+   "tts": "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.",
+   "screen": "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.",
+   "sentences": [
+    "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor."
+   ],
+   "phase": "Kapanış",
+   "syllables": 22,
+   "chars": 58,
+   "minutes": [
+    3
+   ],
+   "belowSec": 240
+  },
+  {
+   "id": "k.hareket.kisa",
+   "clip": "k.hareket",
+   "kind": "clip",
+   "form": "kisa",
+   "tts": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
+   "screen": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
+   "sentences": [
+    "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak."
+   ],
+   "phase": "Kapanış",
+   "syllables": 31,
+   "chars": 84,
+   "minutes": [
+    3
+   ],
+   "belowSec": 240
+  },
+  {
+   "id": "k.goz.kisa",
+   "clip": "k.goz",
+   "kind": "clip",
+   "form": "kisa",
+   "tts": "Gözlerin kapalıysa, açıp çevrene bakıyorsun.",
+   "screen": "Gözlerin kapalıysa, açıp çevrene bakıyorsun.",
+   "sentences": [
+    "Gözlerin kapalıysa, açıp çevrene bakıyorsun."
+   ],
+   "phase": "Kapanış",
+   "syllables": 16,
+   "chars": 44,
+   "minutes": [
+    3
+   ],
+   "belowSec": 240
+  },
+  {
+   "id": "k.son",
+   "clip": "k.son",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "El feneri yine senin elinde.",
+   "screen": "El feneri yine senin elinde.",
+   "sentences": [
+    "El feneri yine senin elinde."
+   ],
+   "phase": "Kapanış",
+   "syllables": 11,
+   "chars": 28,
+   "minutes": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "a.durus",
+   "clip": "a.durus",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Sırtın dik olsun ama gerilmesin; rahatça oturman yeterli.",
+   "screen": "Sırtın dik olsun ama gerilmesin; rahatça oturman yeterli.",
+   "sentences": [
+    "Sırtın dik olsun ama gerilmesin; rahatça oturman yeterli."
+   ],
+   "phase": "Varış",
+   "syllables": 20,
+   "chars": 57,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "a.gozler",
+   "clip": "a.gozler",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.",
+   "screen": "Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.",
+   "sentences": [
+    "Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin."
+   ],
+   "phase": "Varış",
+   "syllables": 30,
+   "chars": 85,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "a.izin",
+   "clip": "a.izin",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+   "screen": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+   "sentences": [
+    "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin."
+   ],
+   "phase": "Varış",
+   "syllables": 29,
+   "chars": 75,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "a.acilis",
+   "clip": "a.acilis",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.",
+   "screen": "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.",
+   "sentences": [
+    "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun."
+   ],
+   "phase": "Varış",
+   "syllables": 25,
+   "chars": 71,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.yer",
+   "clip": "c1.yer",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?",
+   "screen": "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?",
+   "sentences": [
+    "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 23,
+   "chars": 69,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.nokta",
+   "clip": "c1.nokta",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Hangisi olursa olsun, ışığın bugün o noktaya düşüyor.",
+   "screen": "Hangisi olursa olsun, ışığın bugün o noktaya düşüyor.",
+   "sentences": [
+    "Hangisi olursa olsun, ışığın bugün o noktaya düşüyor."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 20,
+   "chars": 53,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.izle",
+   "clip": "c1.izle",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.",
+   "screen": "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.",
+   "sentences": [
+    "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 23,
+   "chars": 62,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.kayma",
+   "clip": "c1.kayma",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Birazdan dikkatin bir düşünceye ya da bir sese kayacak; bu çok olağan.",
+   "screen": "Birazdan dikkatin bir düşünceye ya da bir sese kayacak; bu çok olağan.",
+   "sentences": [
+    "Birazdan dikkatin bir düşünceye ya da bir sese kayacak; bu çok olağan."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 24,
+   "chars": 70,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.aralik1",
+   "clip": "c1.aralik1",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Birkaç soluk boyunca ışığı orada tutuyorsun.",
+   "screen": "Birkaç soluk boyunca ışığı orada tutuyorsun.",
+   "sentences": [
+    "Birkaç soluk boyunca ışığı orada tutuyorsun."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 17,
+   "chars": 44,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.nerede",
+   "clip": "c1.nerede",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Işık hâlâ nefeste mi, yoksa başka bir yere mi kaydı?",
+   "screen": "Işık hâlâ nefeste mi, yoksa başka bir yere mi kaydı?",
+   "sentences": [
+    "Işık hâlâ nefeste mi, yoksa başka bir yere mi kaydı?"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 18,
+   "chars": 52,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.getir",
+   "clip": "c1.getir",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Kaydıysa, bir sonraki alışta onu yeniden noktaya getiriyorsun.",
+   "screen": "Kaydıysa, bir sonraki alışta onu yeniden noktaya getiriyorsun.",
+   "sentences": [
+    "Kaydıysa, bir sonraki alışta onu yeniden noktaya getiriyorsun."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 23,
+   "chars": 62,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.anahtar1",
+   "clip": "c1.anahtar1",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Fark ettiğin an, zaten geri döndün.",
+   "screen": "Fark ettiğin an, zaten geri döndün.",
+   "sentences": [
+    "Fark ettiğin an, zaten geri döndün."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 11,
+   "chars": 35,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "k.nefes",
+   "clip": "k.nefes",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.",
+   "screen": "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.",
+   "sentences": [
+    "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor."
+   ],
+   "phase": "Kapanış",
+   "syllables": 22,
+   "chars": 58,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "k.sesler",
+   "clip": "k.sesler",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Odadaki sesler de ışığın içine giriyor.",
+   "screen": "Odadaki sesler de ışığın içine giriyor.",
+   "sentences": [
+    "Odadaki sesler de ışığın içine giriyor."
+   ],
+   "phase": "Kapanış",
+   "syllables": 16,
+   "chars": 39,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "k.hareket",
+   "clip": "k.hareket",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
+   "screen": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
+   "sentences": [
+    "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak."
+   ],
+   "phase": "Kapanış",
+   "syllables": 31,
+   "chars": 84,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "k.goz",
+   "clip": "k.goz",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Gözlerin kapalıysa, onları acele etmeden açıp çevrene bakıyorsun.",
+   "screen": "Gözlerin kapalıysa, onları acele etmeden açıp çevrene bakıyorsun.",
+   "sentences": [
+    "Gözlerin kapalıysa, onları acele etmeden açıp çevrene bakıyorsun."
+   ],
+   "phase": "Kapanış",
+   "syllables": 25,
+   "chars": 65,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.his",
+   "clip": "c1.his",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor. Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.",
+   "screen": "Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor. Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.",
+   "sentences": [
+    "Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor.",
+    "Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 46,
+   "chars": 129,
+   "minutes": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.duzeltme",
+   "clip": "c1.duzeltme",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Nefesini düzeltmeye çalışmıyorsun; o kendi hızında geliyor.",
+   "screen": "Nefesini düzeltmeye çalışmıyorsun; o kendi hızında geliyor.",
+   "sentences": [
+    "Nefesini düzeltmeye çalışmıyorsun; o kendi hızında geliyor."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 22,
+   "chars": 59,
+   "minutes": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "k.oda",
+   "clip": "k.oda",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Bakışın odada bir renkte ya da bir nesnede bir an duruyor.",
+   "screen": "Bakışın odada bir renkte ya da bir nesnede bir an duruyor.",
+   "sentences": [
+    "Bakışın odada bir renkte ya da bir nesnede bir an duruyor."
+   ],
+   "phase": "Kapanış",
+   "syllables": 20,
+   "chars": 58,
+   "minutes": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "a.dagink",
+   "clip": "a.dagink",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Önce ışık geniş ve dağınık; seslere ve düşüncelere aynı anda vuruyor.",
+   "screen": "Önce ışık geniş ve dağınık; seslere ve düşüncelere aynı anda vuruyor.",
+   "sentences": [
+    "Önce ışık geniş ve dağınık; seslere ve düşüncelere aynı anda vuruyor."
+   ],
+   "phase": "Varış",
+   "syllables": 26,
+   "chars": 69,
+   "minutes": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "a.normal",
+   "clip": "a.normal",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Dikkatin birçok kez dağılacak; bu da pratiğin bir parçası.",
+   "screen": "Dikkatin birçok kez dağılacak; bu da pratiğin bir parçası.",
+   "sentences": [
+    "Dikkatin birçok kez dağılacak; bu da pratiğin bir parçası."
+   ],
+   "phase": "Varış",
+   "syllables": 19,
+   "chars": 58,
+   "minutes": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.aralik2",
+   "clip": "c1.aralik2",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Işık yine noktada; birkaç nefes daha orada kalıyor.",
+   "screen": "Işık yine noktada; birkaç nefes daha orada kalıyor.",
+   "sentences": [
+    "Işık yine noktada; birkaç nefes daha orada kalıyor."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 19,
+   "chars": 51,
+   "minutes": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.dusunce",
+   "clip": "c1.dusunce",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Bir düşünce gelirse onu itmen gerekmiyor; ışığı usulca geri çeviriyorsun.",
+   "screen": "Bir düşünce gelirse onu itmen gerekmiyor; ışığı usulca geri çeviriyorsun.",
+   "sentences": [
+    "Bir düşünce gelirse onu itmen gerekmiyor; ışığı usulca geri çeviriyorsun."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 28,
+   "chars": 73,
+   "minutes": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.kac",
+   "clip": "c1.kac",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Dikkatinin kaç kez dağıldığı hiç önemli değil; her dönüş değerli.",
+   "screen": "Dikkatinin kaç kez dağıldığı hiç önemli değil; her dönüş değerli.",
+   "sentences": [
+    "Dikkatinin kaç kez dağıldığı hiç önemli değil; her dönüş değerli."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 22,
+   "chars": 65,
+   "minutes": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "a.omuz",
+   "clip": "a.omuz",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Omuzlarını kulaklarından uzaklaştırıp çeneni gevşek bırakıyorsun.",
+   "screen": "Omuzlarını kulaklarından uzaklaştırıp çeneni gevşek bırakıyorsun.",
+   "sentences": [
+    "Omuzlarını kulaklarından uzaklaştırıp çeneni gevşek bırakıyorsun."
+   ],
+   "phase": "Varış",
+   "syllables": 25,
+   "chars": 65,
+   "minutes": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c1.aralik3",
+   "clip": "c1.aralik3",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Şu an ışığın gideceği başka bir yer yok.",
+   "screen": "Şu an ışığın gideceği başka bir yer yok.",
+   "sentences": [
+    "Şu an ışığın gideceği başka bir yer yok."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 14,
+   "chars": 40,
+   "minutes": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c2.giris",
+   "clip": "c2.giris",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Sıradaki bölümde nefeslerini içinden sayıyorsun.",
+   "screen": "Sıradaki bölümde nefeslerini içinden sayıyorsun.",
+   "sentences": [
+    "Sıradaki bölümde nefeslerini içinden sayıyorsun."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 19,
+   "chars": 48,
+   "minutes": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c2.nasil",
+   "clip": "c2.nasil",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Alışta bir, verişte iki, sonra üç, dört diye ona kadar gidiyorsun.",
+   "screen": "Alışta bir, verişte iki, sonra üç, dört diye ona kadar gidiyorsun.",
+   "sentences": [
+    "Alışta bir, verişte iki, sonra üç, dört diye ona kadar gidiyorsun."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 23,
+   "chars": 66,
+   "minutes": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c2.bas",
+   "clip": "c2.bas",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "On olunca yeniden birden başlıyorsun; sayıyı kaybedersen de öyle.",
+   "screen": "On olunca yeniden birden başlıyorsun; sayıyı kaybedersen de öyle.",
+   "sentences": [
+    "On olunca yeniden birden başlıyorsun; sayıyı kaybedersen de öyle."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 23,
+   "chars": 65,
+   "minutes": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c2.say1",
+   "clip": "c2.say1",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Sayıyı bir süre sen sürdürüyorsun.",
+   "screen": "Sayıyı bir süre sen sürdürüyorsun.",
+   "sentences": [
+    "Sayıyı bir süre sen sürdürüyorsun."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 12,
+   "chars": 34,
+   "minutes": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c2.hangi",
+   "clip": "c2.hangi",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Hangi sayıda olursan ol, oradan devam ediyorsun.",
+   "screen": "Hangi sayıda olursan ol, oradan devam ediyorsun.",
+   "sentences": [
+    "Hangi sayıda olursan ol, oradan devam ediyorsun."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 18,
+   "chars": 48,
+   "minutes": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c2.anahtar2",
+   "clip": "c2.anahtar2",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Fark ettin; döndün.",
+   "screen": "Fark ettin; döndün.",
+   "sentences": [
+    "Fark ettin; döndün."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 5,
+   "chars": 19,
+   "minutes": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c2.onbir",
+   "clip": "c2.onbir",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "On bire, on ikiye vardıysan bu da olur; sayı yine birden başlıyor.",
+   "screen": "On bire, on ikiye vardıysan bu da olur; sayı yine birden başlıyor.",
+   "sentences": [
+    "On bire, on ikiye vardıysan bu da olur; sayı yine birden başlıyor."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 23,
+   "chars": 66,
+   "minutes": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c2.dusunce",
+   "clip": "c2.dusunce",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Sayıların arasına bir düşünce girerse, bunu fark etmen yeter.",
+   "screen": "Sayıların arasına bir düşünce girerse, bunu fark etmen yeter.",
+   "sentences": [
+    "Sayıların arasına bir düşünce girerse, bunu fark etmen yeter."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 22,
+   "chars": 61,
+   "minutes": [
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "a.karar",
+   "clip": "a.karar",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Işığı ne kadar sıkı tutacağına sen karar veriyorsun.",
+   "screen": "Işığı ne kadar sıkı tutacağına sen karar veriyorsun.",
+   "sentences": [
+    "Işığı ne kadar sıkı tutacağına sen karar veriyorsun."
+   ],
+   "phase": "Varış",
+   "syllables": 20,
+   "chars": 52,
+   "minutes": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c2.yonetme",
+   "clip": "c2.yonetme",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Sayı nefesi yönetmiyor; nefes geliyor, sayı onu izliyor.",
+   "screen": "Sayı nefesi yönetmiyor; nefes geliyor, sayı onu izliyor.",
+   "sentences": [
+    "Sayı nefesi yönetmiyor; nefes geliyor, sayı onu izliyor."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 21,
+   "chars": 56,
+   "minutes": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c2.veris",
+   "clip": "c2.veris",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Bu kez yalnız verişleri sayıyorsun; her verişe bir sayı düşüyor.",
+   "screen": "Bu kez yalnız verişleri sayıyorsun; her verişe bir sayı düşüyor.",
+   "sentences": [
+    "Bu kez yalnız verişleri sayıyorsun; her verişe bir sayı düşüyor."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 22,
+   "chars": 64,
+   "minutes": [
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c2.veris2",
+   "clip": "c2.veris2",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Alış sessiz geçiyor, sayı verişle geliyor.",
+   "screen": "Alış sessiz geçiyor, sayı verişle geliyor.",
+   "sentences": [
+    "Alış sessiz geçiyor, sayı verişle geliyor."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 15,
+   "chars": 42,
+   "minutes": [
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "k.gun",
+   "clip": "k.gun",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Gün içinde dikkatinin dağıldığını fark ettiğinde, tek bir nefese dönmek yeter.",
+   "screen": "Gün içinde dikkatinin dağıldığını fark ettiğinde, tek bir nefese dönmek yeter.",
+   "sentences": [
+    "Gün içinde dikkatinin dağıldığını fark ettiğinde, tek bir nefese dönmek yeter."
+   ],
+   "phase": "Kapanış",
+   "syllables": 27,
+   "chars": 78,
+   "minutes": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c2.seyrek",
+   "clip": "c2.seyrek",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Sayılar seyrekleşiyor; aralarında nefes var, bir de ışığın noktası.",
+   "screen": "Sayılar seyrekleşiyor; aralarında nefes var, bir de ışığın noktası.",
+   "sentences": [
+    "Sayılar seyrekleşiyor; aralarında nefes var, bir de ışığın noktası."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 24,
+   "chars": 67,
+   "minutes": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c3.ad",
+   "clip": "c3.ad",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Bundan sonra yalnızca nokta ve nefes var.",
+   "screen": "Bundan sonra yalnızca nokta ve nefes var.",
+   "sentences": [
+    "Bundan sonra yalnızca nokta ve nefes var."
+   ],
+   "phase": "Derin",
+   "syllables": 13,
+   "chars": 41,
+   "minutes": [
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c3.can",
+   "clip": "c3.can",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Her sessizliğin sonunda bir çan çalacak. Çanı duyunca ışık noktaya dönüyor.",
+   "screen": "Her sessizliğin sonunda bir çan çalacak. Çanı duyunca ışık noktaya dönüyor.",
+   "sentences": [
+    "Her sessizliğin sonunda bir çan çalacak.",
+    "Çanı duyunca ışık noktaya dönüyor."
+   ],
+   "phase": "Derin",
+   "syllables": 26,
+   "chars": 75,
+   "minutes": [
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c3.kisa",
+   "clip": "c3.kisa",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Önce kısa bir sessizlik geliyor.",
+   "screen": "Önce kısa bir sessizlik geliyor.",
+   "sentences": [
+    "Önce kısa bir sessizlik geliyor."
+   ],
+   "phase": "Derin",
+   "syllables": 11,
+   "chars": 32,
+   "minutes": [
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c3.d15",
+   "clip": "c3.d15",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Işığın hâlâ noktada mı?",
+   "screen": "Işığın hâlâ noktada mı?",
+   "sentences": [
+    "Işığın hâlâ noktada mı?"
+   ],
+   "phase": "Derin",
+   "syllables": 9,
+   "chars": 23,
+   "minutes": [
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c3.w30",
+   "clip": "c3.w30",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Şimdi biraz daha uzun bir sessizlik geliyor. Zorlanırsan gözlerini açman yeterli. Çanla yine seslenirim.",
+   "screen": "Şimdi biraz daha uzun bir sessizlik geliyor. Zorlanırsan gözlerini açman yeterli. Çanla yine seslenirim.",
+   "sentences": [
+    "Şimdi biraz daha uzun bir sessizlik geliyor.",
+    "Zorlanırsan gözlerini açman yeterli.",
+    "Çanla yine seslenirim."
+   ],
+   "phase": "Derin",
+   "syllables": 36,
+   "chars": 104,
+   "minutes": [
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c3.d30",
+   "clip": "c3.d30",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Buradayım. Işık kaydıysa, onu usulca noktaya çağırıyorsun.",
+   "screen": "Buradayım. Işık kaydıysa, onu usulca noktaya çağırıyorsun.",
+   "sentences": [
+    "Buradayım.",
+    "Işık kaydıysa, onu usulca noktaya çağırıyorsun."
+   ],
+   "phase": "Derin",
+   "syllables": 22,
+   "chars": 58,
+   "minutes": [
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c3.anahtar3",
+   "clip": "c3.anahtar3",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Yine döndün.",
+   "screen": "Yine döndün.",
+   "sentences": [
+    "Yine döndün."
+   ],
+   "phase": "Derin",
+   "syllables": 4,
+   "chars": 12,
+   "minutes": [
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c3.parlak",
+   "clip": "c3.parlak",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Işık artık küçük ve parlak bir nokta.",
+   "screen": "Işık artık küçük ve parlak bir nokta.",
+   "sentences": [
+    "Işık artık küçük ve parlak bir nokta."
+   ],
+   "phase": "Derin",
+   "syllables": 12,
+   "chars": 37,
+   "minutes": [
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c3.kaydiysa",
+   "clip": "c3.kaydiysa",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Değilse, bir sonraki nefeste geri getiriyorsun.",
+   "screen": "Değilse, bir sonraki nefeste geri getiriyorsun.",
+   "sentences": [
+    "Değilse, bir sonraki nefeste geri getiriyorsun."
+   ],
+   "phase": "Derin",
+   "syllables": 17,
+   "chars": 47,
+   "minutes": [
+    12,
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c3.kisa2",
+   "clip": "c3.kisa2",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Kısa bir sessizlik daha geliyor.",
+   "screen": "Kısa bir sessizlik daha geliyor.",
+   "sentences": [
+    "Kısa bir sessizlik daha geliyor."
+   ],
+   "phase": "Derin",
+   "syllables": 11,
+   "chars": 32,
+   "minutes": [
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c3.d18",
+   "clip": "c3.d18",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Işık yine nefeste.",
+   "screen": "Işık yine nefeste.",
+   "sentences": [
+    "Işık yine nefeste."
+   ],
+   "phase": "Derin",
+   "syllables": 7,
+   "chars": 18,
+   "minutes": [
+    13,
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c3.w45",
+   "clip": "c3.w45",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Bu kez sessizlik biraz daha uzun. Zorlanırsan ellerini hissetmen de olur. Çanla yine seslenirim.",
+   "screen": "Bu kez sessizlik biraz daha uzun. Zorlanırsan ellerini hissetmen de olur. Çanla yine seslenirim.",
+   "sentences": [
+    "Bu kez sessizlik biraz daha uzun.",
+    "Zorlanırsan ellerini hissetmen de olur.",
+    "Çanla yine seslenirim."
+   ],
+   "phase": "Derin",
+   "syllables": 33,
+   "chars": 96,
+   "minutes": [
+    14,
+    15
+   ]
+  },
+  {
+   "id": "c3.d45",
+   "clip": "c3.d45",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Buradayım. Işığın nerede olduğunu fark etmen yeter.",
+   "screen": "Buradayım. Işığın nerede olduğunu fark etmen yeter.",
+   "sentences": [
+    "Buradayım.",
+    "Işığın nerede olduğunu fark etmen yeter."
+   ],
+   "phase": "Derin",
+   "syllables": 19,
+   "chars": 51,
+   "minutes": [
+    14,
+    15
+   ]
+  },
+  {
+   "id": "k.avuc1",
+   "clip": "k.avuc1",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Gözlerin kapalıysa, avuçlarını birbirine sürtüp ısıtabilirsin.",
+   "screen": "Gözlerin kapalıysa, avuçlarını birbirine sürtüp ısıtabilirsin.",
+   "sentences": [
+    "Gözlerin kapalıysa, avuçlarını birbirine sürtüp ısıtabilirsin."
+   ],
+   "phase": "Kapanış",
+   "syllables": 24,
+   "chars": 62,
+   "minutes": [
+    15
+   ]
+  },
+  {
+   "id": "k.avuc2",
+   "clip": "k.avuc2",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Avuçların gözlerine değmeyecek; kenarları alnına ve elmacık kemiklerine yaslanacak.",
+   "screen": "Avuçların gözlerine değmeyecek; kenarları alnına ve elmacık kemiklerine yaslanacak.",
+   "sentences": [
+    "Avuçların gözlerine değmeyecek; kenarları alnına ve elmacık kemiklerine yaslanacak."
+   ],
+   "phase": "Kapanış",
+   "syllables": 32,
+   "chars": 83,
+   "minutes": [
+    15
+   ]
+  },
+  {
+   "id": "k.avuc3",
+   "clip": "k.avuc3",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Şimdi onları bastırmadan gözlerinin üstüne getiriyorsun.",
+   "screen": "Şimdi onları bastırmadan gözlerinin üstüne getiriyorsun.",
+   "sentences": [
+    "Şimdi onları bastırmadan gözlerinin üstüne getiriyorsun."
+   ],
+   "phase": "Kapanış",
+   "syllables": 21,
+   "chars": 56,
+   "minutes": [
+    15
+   ]
+  },
+  {
+   "id": "k.avuc4",
+   "clip": "k.avuc4",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Bu sıcaklığı birkaç nefes boyunca hissediyorsun.",
+   "screen": "Bu sıcaklığı birkaç nefes boyunca hissediyorsun.",
+   "sentences": [
+    "Bu sıcaklığı birkaç nefes boyunca hissediyorsun."
+   ],
+   "phase": "Kapanış",
+   "syllables": 17,
+   "chars": 48,
+   "minutes": [
+    15
+   ]
+  },
+  {
+   "id": "k.avuc5",
+   "clip": "k.avuc5",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Ellerini dizlerine indiriyorsun.",
+   "screen": "Ellerini dizlerine indiriyorsun.",
+   "sentences": [
+    "Ellerini dizlerine indiriyorsun."
+   ],
+   "phase": "Kapanış",
+   "syllables": 13,
+   "chars": 32,
+   "minutes": [
+    15
+   ]
+  },
+  {
+   "id": "d.goz",
+   "clip": "d.goz",
+   "kind": "clip",
+   "form": "yardimci:stopReturn",
+   "tts": "Gözlerini aç, etrafına bak, acele etme.",
+   "screen": "Gözlerini aç, etrafına bak, acele etme.",
+   "sentences": [
+    "Gözlerini aç, etrafına bak, acele etme."
+   ],
+   "phase": "Kapanış",
+   "syllables": 15,
+   "chars": 39,
+   "minutes": []
+  },
+  {
+   "id": "d.kalk",
+   "clip": "d.kalk",
+   "kind": "clip",
+   "form": "yardimci:stopReturn",
+   "tts": "Uzanıyorsan önce yana dön, sonra otur.",
+   "screen": "Uzanıyorsan önce yana dön, sonra otur.",
+   "sentences": [
+    "Uzanıyorsan önce yana dön, sonra otur."
+   ],
+   "phase": "Kapanış",
+   "syllables": 14,
+   "chars": 38,
+   "minutes": []
+  },
+  {
+   "id": "d.bekle",
+   "clip": "d.bekle",
+   "kind": "clip",
+   "form": "yardimci:stopReturn",
+   "tts": "Birkaç nefes böyle kal; başın dönerse biraz daha bekle.",
+   "screen": "Birkaç nefes böyle kal; başın dönerse biraz daha bekle.",
+   "sentences": [
+    "Birkaç nefes böyle kal; başın dönerse biraz daha bekle."
+   ],
+   "phase": "Kapanış",
+   "syllables": 18,
+   "chars": 55,
+   "minutes": []
+  },
+  {
+   "id": "i.ilk",
+   "clip": "i.ilk",
+   "kind": "clip",
+   "form": "yardimci:firstEverIntro",
+   "tts": "Bugün yalnızca tanışıyoruz; zorlanırsan ekrandaki \"Kapanışa geç\" düğmesine dokunman yeterli.",
+   "screen": "Bugün yalnızca tanışıyoruz; zorlanırsan ekrandaki \"Kapanışa geç\" düğmesine dokunman yeterli.",
+   "sentences": [
+    "Bugün yalnızca tanışıyoruz; zorlanırsan ekrandaki \"Kapanışa geç\" düğmesine dokunman yeterli."
+   ],
+   "phase": "Varış",
+   "syllables": 33,
+   "chars": 92,
+   "minutes": []
+  }
+ ]
+}

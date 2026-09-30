@@ -32,3 +32,15 @@ DOKUNMAZ; yalnız `yoga-pilot/` altına yazar ve her partiden sonra kaydeder (gi
 
 ## Plan belgelerine işlenmesi bekleyen notlar (düzeltici raporundan)
 PLAN.v2 §B.5, §A.2.2 (23:30), §E.6 #5; PLAN.v3 §D.3 ve Ders 3'ün 45 sn pencere kuralı: ayrıntı `b/INCELEME.md`.
+
+## İlk bölüm ilerlemesi (2026-09-30, ses oturumu; dal `claude/eager-clarke-7547q6`)
+- Çalışma alanı: `Y=<scratchpad>/yoga`; eski yol `/tmp/claude-0/-home-user/f143c393-…/scratchpad/yoga` bu kök'e sembolik bağ
+  (araçlardaki sabit yollar değişmeden çalışsın). `pip install numpy scipy soundfile pyloudnorm lameenc pyflakes`.
+- Yeni araçlar (`render/tools/`): `ib.py` (defter, tavan, indirme), `harvest.py` (imzalı adresleri oturum kaydından okur;
+  elle kopyalama yok; alt ajan kayıtları da taranır), `sel_ib.py` (sıralama, Scribe listesi, seçim/kesim/işleme),
+  `mixib.py` (ders × süre karışımı, timeline/2), `rapor_ib.py` (rapor + kulak listesi). Müzik: `music/el/tools/clash_ib.py`,
+  `level_ib.py`. Ücretli çağrıların context'i etiketli: `[ib dNN/birim]`, `[ibs dNN/birim/tN]`, `[ibm dNN/parça]`.
+- **Ders 2 bitti** (5, 15, 20 dk): `render/out/ilk-bolum/ders2-{5,15,20}.mp3` + `.timeline.json`, `kulak-ders2.md`;
+  §12.1 ölçütlerinin hepsi geçti. 28 birim seslendirildi, hepsi Scribe'la birebir. Ek müzik: `el-derin-c` (düzey
+  dengelenmiş), `el-imge-b`, `el-zitlik-b` (ilk zıtlık denemesi reddedildi). Ayrıntı `kulak-ders2.md`.
+- Ders 1, 3, 5 birim listeleri: `b/ders{1,3,5}/units-ib.json` (`b/work/make_units_ib.py`). Seslendirme sırada.
