@@ -38,14 +38,15 @@ describe('ilk bölüm: dersler ve alanlar', () => {
 describe('yayın: yalnız hazır olan görünür', () => {
   // İlk bölüm (SAHIP_ISTEKLERI.md madde 10, 17, 18): dört dersin on bir süresi yayımlandı (2026-09-30). Önceden yalnız
   // Ders 2 · 15 dk yayımlıydı; bu testin o günkü beklentisi yayınla değişti.
-  it('ilk bölüm: Ders 1, 2, 3, 5\'in bütün süreleri yayımlanmış; kütüphane sırası, gece Uykuya Geçiş en üstte', () => {
+  // Sahip kararı (2026-09-30, Build 60): Uykuya Geçiş ayrıntı ekranı 5 saniye kapısından geçmedi; Ders 3 sonra gelir
+  it('Build 60: Ders 1, 2, 5\'in bütün süreleri yayımlanmış; Uykuya Geçiş (Ders 3) henüz yayında değil', () => {
     const pub = Object.entries(LESSONS).flatMap(([n, L]) => Object.entries(L.versions).filter(([, v]) => v.published === true).map(([m]) => `${n}-${m}`))
-    expect(pub).toEqual(['1-3', '1-5', '1-15', '2-5', '2-15', '2-20', '3-5', '3-15', '5-3', '5-5', '5-15'])
-    for (const L of Object.values(LESSONS)) expect(publishedMinutes(L.n)).toEqual(L.minutes)
-    expect(LESSON_MIN).toEqual({ 1: 3, 2: 5, 3: 5, 5: 3 })
-    expect(PUBLISHED_MINUTES).toEqual({ 1: [3, 5, 15], 2: [5, 15, 20], 3: [5, 15], 5: [3, 5, 15] })
-    expect(visibleLessons(at(10))).toEqual([1, 2, 5, 3])
-    expect(visibleLessons(at(22))).toEqual([3, 1, 2, 5])
+    expect(pub).toEqual(['1-3', '1-5', '1-15', '2-5', '2-15', '2-20', '5-3', '5-5', '5-15'])
+    for (const L of Object.values(LESSONS)) expect(publishedMinutes(L.n)).toEqual(L.n === 3 ? [] : L.minutes)
+    expect(LESSON_MIN).toEqual({ 1: 3, 2: 5, 5: 3 })
+    expect(PUBLISHED_MINUTES).toEqual({ 1: [3, 5, 15], 2: [5, 15, 20], 5: [3, 5, 15] })
+    expect(visibleLessons(at(10))).toEqual([1, 2, 5])
+    expect(visibleLessons(at(22))).toEqual([1, 2, 5])
   })
   it('açılış süresi: istenen yayımlanmışsa o, yoksa dersin varsayılanı', () => {
     expect(pickMinutes(2)).toBe(20) // Ders 2'nin varsayılanı 20 dk
@@ -53,7 +54,7 @@ describe('yayın: yalnız hazır olan görünür', () => {
     expect(pickMinutes(2, 3)).toBe(20) // Ders 2'de 3 dk yok (PLAN.v3 karar 4)
     expect(pickMinutes(1)).toBe(5)
     expect(pickMinutes(1, 3)).toBe(3)
-    expect(pickMinutes(3)).toBe(15)
+    expect(pickMinutes(3)).toBeNull() // Ders 3 yayında değil (Build 60)
     expect(pickMinutes(5, 15)).toBe(15)
   })
   it('published bayrağı olmayan süre seçilemez: açılış süresi hep yayımlanmış bir süre', () => {
@@ -67,7 +68,7 @@ describe('yayın: yalnız hazır olan görünür', () => {
       expect(pickMinutes(2, 15)).toBe(15)
       expect(pickMinutes(1, 3)).toBeNull()
       expect(publishedMinutes(1)).toEqual([])
-      expect(visibleLessons(at(10))).toEqual([2, 5, 3])
+      expect(visibleLessons(at(10))).toEqual([2, 5])
       expect(isPublished(2, 5)).toBe(false)
     } finally {
       LESSONS[1].versions = saved[1]
@@ -159,13 +160,18 @@ describe('yayımlanmış her dosya', () => {
   })
   it('Uykuya Geçiş müzik kuyruğu pakette: 10 dk (20 dk seçilirse döngülenir)', () => {
     expect(LESSONS[3].musicTailFile).toBe('yoga/ders3-kuyruk.mp3')
-    const sec = mp3Seconds(readFileSync(join(PUBLIC, LESSONS[3].musicTailFile)))
+    // Ders 3 yayında değilken kuyruk pakette değil; üretim kopyası ölçülür
+    const inApp = join(PUBLIC, LESSONS[3].musicTailFile)
+    const file = existsSync(inApp) ? inApp : fileURLToPath(new URL('../../../yoga-pilot/render/out/ilk-bolum/ders3-kuyruk.mp3', import.meta.url))
+    const sec = mp3Seconds(readFileSync(file))
     expect(sec).toBeGreaterThanOrEqual(600)
     expect(sec).toBeLessThan(600.1)
     for (const L of Object.values(LESSONS)) if (L.n !== 3) expect(L.musicTailFile ?? null).toBeNull()
   })
   it('public/yoga\'da yalnız yayımlanmış dosyalar ve kuyruk (artık dosya pakete girmez)', () => {
-    const want = new Set([...published.flatMap(([, , v]) => [v.file, v.timeline]), LESSONS[3].musicTailFile].map((p) => p.replace(/^yoga\//, '')))
+    // Müzik kuyruğu yalnız Uykuya Geçiş yayımlıyken pakete girer
+    const tail = publishedMinutes(3).length > 0 ? [LESSONS[3].musicTailFile] : []
+    const want = new Set([...published.flatMap(([, , v]) => [v.file, v.timeline]), ...tail].map((p) => p.replace(/^yoga\//, '')))
     expect(new Set(readdirSync(join(PUBLIC, 'yoga')))).toEqual(want)
   })
 })

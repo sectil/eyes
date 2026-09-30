@@ -4,7 +4,7 @@
 // olduğu için Ders 5 · 15'te 577,45, Ders 2 · 20'de 956,5 sn çıkıyordu; (b) Ders 3 ve 5'in açıklamalı evre adları
 // PHASE_LIGHT'ta ve BreathForm'da yoktu; (c) Ders 1'in ring:in/out ipuçları okunmuyordu.
 import { describe, it, expect } from 'vitest'
-import { readFileSync } from 'node:fs'
+import { readFileSync, existsSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { createElement as h } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
@@ -18,7 +18,9 @@ import { recordFromJournal } from '../../lib/yogaRecord.js'
 import BreathForm from './BreathForm.jsx'
 
 const PUBLIC = fileURLToPath(new URL('../../../public/', import.meta.url))
-const load = (name) => JSON.parse(readFileSync(`${PUBLIC}yoga/${name}.timeline.json`, 'utf8'))
+// Uykuya Geçiş (Ders 3) Build 60'ta yayında değil (sahip kararı 2026-09-30): uygulama kopyası testdata'da durur
+const TESTDATA = fileURLToPath(new URL('./testdata/', import.meta.url))
+const load = (name) => JSON.parse(readFileSync(existsSync(`${PUBLIC}yoga/${name}.timeline.json`) ? `${PUBLIC}yoga/${name}.timeline.json` : `${TESTDATA}${name}.timeline.json`, 'utf8'))
 const NAMES = ['ders1-3', 'ders1-5', 'ders1-15', 'ders2-5', 'ders2-15', 'ders2-20', 'ders3-5', 'ders3-15', 'ders5-3', 'ders5-5', 'ders5-15']
 const ALL = Object.fromEntries(NAMES.map((n) => [n, load(n)]))
 const lessonNo = (n) => Number(n.match(/^ders(\d+)-/)[1])

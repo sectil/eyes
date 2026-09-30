@@ -871,3 +871,24 @@ metin ve güvenlik içeriği aynen, yeni söz yok):
   - Zorlanma sorusunun metni (sahip kararı 20) ve ölçeğin "çok" ucu değişmedi. Bir değerlendiricinin önerdiği yumuşak
     soru editör ve güvenlik onayına gider.
   - Değişen ekranlar (3, 3c, 7c) 5 saniye kapısında yeniden sınanmadı.
+
+## Ders 3 ayrıntısı: ölçülebilir düzeltmeler
+
+Tarih: 2026-09-30, 15:08–15:18 UTC. Tasarım yeniden yorumlanmadı; onaylı metinler ve güvenlik içeriği aynen. Değişen: `app/src/modules/yoga/Yoga.jsx`, `app/src/modules/yoga/yoga.css`. Ölçüm betiği: `scratchpad/yoga-son/olc/olc.mjs` (Playwright, cek.mjs ile aynı bağlam; sonuç `olc/sonra3.json`, önce `olc/once.json`).
+
+1. **Gri bant (açık tema).** Açık temada gece görselinin maskesi kalktı. Görsel artık yuvarlak köşeli (28 px), keskin bir kenarla bitiyor ve ad bu kenarın altında başlıyor. Koyu temada erime olduğu gibi kaldı. Ölçüm, sol ve sağ kenardan 40–60 px içerideki altı sütunun ortancası, görselin alt kenarı −40 px ile +30 px arası:
+   - Önce: 390 açıkta 21'den 239'a 18 ara ton satırı (40–200). 320 açıkta 10 ara ton satırı.
+   - Sonra: 390 açıkta 26'dan doğrudan 240'a (ara ton satırı 0). 320 açıkta 25'ten doğrudan 236'ya (ara ton satırı 0).
+   - Profil iki boyutta da tekdüze artıyor, çukur yok.
+2. **Şeridin arkasında yarım kart.** `useFold` sayfa en üstteyken çalışıyor. Şeridin kutusuyla kesişen ilk `data-fold` bölümünü (bölümler kartı ya da hazırlık karoları) görünüm alanının altına itiyor.
+   - Kesişen kart sayısı önce: 390'da 4, 320'de 4. Sonra: 390'da 0, 320'de 0 (iki temada da).
+   - İtme miktarları: 390'da hazırlık 210 px (koyuda 228 px), 320'de bölümler kartı 269 px (koyuda 287 px).
+   - En alta kaydırınca son satırın alt kenarı şeridin üstünde kalıyor: 390'da 614,5 < 638,5, 320'de 422,1 < 441,7. Alt dolgu şeridin yüksekliği kadar.
+   - Bedeli: kaydırınca itilen bölümün önünde boşluk kalıyor. 320'nin ilk görünümünde bölümler kartı yok, yerinde boş bir alan var.
+3. **Müzik satırı ve seçili bölme.** "Ders bitince müzik" satırı, üstünde 1 px ayraç ve 12 px boşlukla süre seçiminden ayrıldı. Seçili bölmeye dersin renginde 2 px sınır eklendi. Kontrast açık / koyu:
+   - Metin: 18,84 / 16,16 (≥ 4,5).
+   - Sınırın bölme zeminine karşı: 4,00 / 8,42 (≥ 3). Sınırın seçili bölmenin kendi zeminine karşı: 4,92 / 8,61.
+   - Seçili olmayan metin: 8,51 / 9,97.
+4. **Testler ve çekim.** Yoga testleri 236/236. Bütün takım bir kez koşuldu: 140 dosya, 2022 test yeşil. `npm run build` yeşil. `cek.sh` yeniden koşuldu (`CIKTI=yoga-son/shots`, 48 görüntü); 3c dosyaları 14:59–15:00'den 15:16–15:17'ye güncellendi.
+
+Açık not: koyu tema 320'de geçiş bölgesinde tek satırlık bir sıçrama (40) var. Büyük olasılıkla bir yıldız; kapsam dışı.

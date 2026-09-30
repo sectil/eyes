@@ -52,6 +52,16 @@ describe('sürüm notları', () => {
     }
     expect(items292()[0]).toBe("Yeni kurulumda önce ölçüm: uygulamayı ilk kez açan kişi, giriş ekranından sonra doğrudan İlk Bakış'a geçer; 20 saniye boyunca kamera göz kırpmalarını sayar. Hesap, güvenlik bilgisi ve sorular sonuçtan sonra gelir. Kurulumunu bitirdiysen senin için hiçbir şey değişmez.")
   })
+  // Sahip kararı (f810065): 28 Eylül'e sonradan eklenip Yenilikler penceresinde görünmeyen maddeler 30 Eylül girdisine
+  // taşındı; 28 Eylül'ü görmüş kişi onları yeni girdide görür, eski girdide kalmazlar
+  it('28 Eylül maddeleri 30 Eylül girdisinde; eski girdide yok', () => {
+    const r28 = RELEASES.find((r) => r.id === '2026-09-28').items.map((i) => i.text)
+    for (const start of ['Uyku ekranı yenilendi', 'Yeni uygulama simgesi', 'Açılışta bir an başka bir logo', 'İyi oluş: 14 günde bir', 'Kurulu alarm Ana sayfanın üstünde']) {
+      expect(items292().some((t) => t.startsWith(start)), start).toBe(true)
+      expect(r28.some((t) => t.startsWith(start)), start).toBe(false)
+    }
+    expect(unseenReleases('2026-09-28').map((r) => r.id)).toEqual(['2026-09-29-2', '2026-09-29'])
+  })
   // Bug 32: hesap yalnız izinle profili (ad, doğum tarihi, şehir, gözlük) eşitler; ölçümler telefonda kalır
   it('Bug 32: hesap ekranı ve Profilim satırı eşitlenmeyen ilerlemeyi vaat etmez', () => {
     const acc = readFileSync(new URL('../screens/AccountStart.jsx', import.meta.url), 'utf8')

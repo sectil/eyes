@@ -196,9 +196,12 @@ export const LESSONS = {
     // "Ders bitince müzik" kuyruğu: 10 dk'lık dosya (render/out/ilk-bolum/ders3-kuyruk.mp3); 20 dk seçilirse yerel
     // oynatıcı döngüler (SPEC.v3 §10 "döngü")
     musicTailFile: 'yoga/ders3-kuyruk.mp3',
+    // Sahip kararı (2026-09-30, Build 60): Uykuya Geçiş ayrıntı ekranı 5 saniye kapısından geçmediği için yayında değil;
+    // ekran yeni tasarımla kapıdan geçince iki sürüm yeniden published: true olur. Dosyalar pakette değil: ders3-{5,15}.mp3,
+    // çizelgeler ve ders3-kuyruk.mp3 yoga-pilot/render/out/ilk-bolum'dan geri konur (çizelgeler render/tools/app_kopya.py ile).
     versions: {
-      5: { published: true, file: 'yoga/ders3-5.mp3', timeline: 'yoga/ders3-5.timeline.json', seconds: 300, contentHash: '76ab8a403478696c', planVersion: 'B-parti1-metin-2/hoc-A', voice: 'hoc', bg: 'music', sections: ['A', 'C1', 'C2', 'C3', 'K'] },
-      15: { published: true, file: 'yoga/ders3-15.mp3', timeline: 'yoga/ders3-15.timeline.json', seconds: 900, contentHash: 'fea337327a711018', planVersion: 'B-parti1-metin-2/hoc-A', voice: 'hoc', bg: 'music', sections: ['A', 'C1', 'C2', 'C4', 'C3', 'K'] },
+      5: { published: false, file: 'yoga/ders3-5.mp3', timeline: 'yoga/ders3-5.timeline.json', seconds: 300, contentHash: '76ab8a403478696c', planVersion: 'B-parti1-metin-2/hoc-A', voice: 'hoc', bg: 'music', sections: ['A', 'C1', 'C2', 'C3', 'K'] },
+      15: { published: false, file: 'yoga/ders3-15.mp3', timeline: 'yoga/ders3-15.timeline.json', seconds: 900, contentHash: 'fea337327a711018', planVersion: 'B-parti1-metin-2/hoc-A', voice: 'hoc', bg: 'music', sections: ['A', 'C1', 'C2', 'C4', 'C3', 'K'] },
     },
   },
   5: {
