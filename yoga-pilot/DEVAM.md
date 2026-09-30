@@ -8,7 +8,7 @@
   Müzik: **A = ElevenLabs Music**. İnceleyici adı yok: karar 2 yedeği (iki bağımsız model incelemesi + sahibin kulağı).
 - A adımı bitti: Ders 2 15 dk üç sesle, kör paket `render/out/kor/`, anahtar `render/out/_kor_anahtar.json`.
 - B adımının metin kısmı bitti ve iki incelemeden geçti (`b/`): SPEC v3, Ders 2 deltası (`b/ders2/units-v3.json`,
-  28 birim, ≈ 5,3 bin kredi), Parti 1 metinleri `b/ders1`, `b/ders3`, `b/ders5` (henüz seslendirilmedi).
+  28 birim, ≈ 5,3 bin kredi), Parti 1 metinleri `b/ders1`, `b/ders3`, `b/ders5` (seslendirildi: ilk bölüm tamam).
 - Harcanan: A adımı ≈ 14,3 bin kredi (`render/ledger.jsonl`). Tavan: parti 195 bin, toplam 600 bin.
 
 ## Başlarken
@@ -17,7 +17,9 @@
 2. Ses kaynaklarını geri yükle: `render/_kalici/README.md` (müzik A yatakları, ortak katmanlar, Nefona Hoca parçaları).
 3. ElevenLabs araçlarının bu oturumda göründüğünü denetle (ToolSearch "+ElevenLabs creative"). Yoksa sahibe söyle.
 
-## Sıradaki iş: İLK BÖLÜMÜN SESLERİ (sahip, 2026-09-30; SAHIP_ISTEKLERI madde 9–10)
+## İLK BÖLÜMÜN SESLERİ: TAMAMLANDI (2026-09-30; SAHIP_ISTEKLERI madde 9–10, 15–18)
+Durum: 1–4 bitti; dört dersi sahip dinledi ve kabul etti (madde 17–18). 5 (kodek testi) açık: test paketi henüz
+hazırlanmadı. Aşağıdaki liste işin özgün tanımıdır; ayrıntı "İlk bölüm ilerlemesi" bölümünde.
 İlk bölüm = Ders 1, 2, 3, 5. Uygulama kodu (C adımı) BAŞKA bir oturumda yazılıyor: bu oturum `app/` klasörüne
 DOKUNMAZ; yalnız `yoga-pilot/` altına yazar ve her partiden sonra kaydeder (git pull --rebase, sonra push).
 1. Ders 2: `b/ders2/units-v3.json` birimlerini Nefona Hoca ile üret, seç (SPEC.v3), Scribe ile doğrula; 20 dk için
@@ -28,7 +30,8 @@ DOKUNMAZ; yalnız `yoga-pilot/` altına yazar ve her partiden sonra kaydeder (gi
 3. Çıktı adları: `render/out/ilk-bolum/ders<N>-<dk>.mp3` ve `.timeline.json` (Ders 2 15 dk bugünkü
    `render/out/ders2-15dk-hoc-A.mp3` ile aynı yapı). Uygulamaya kopyalama kod oturumunun işi.
 4. Her ders bittiğinde sahibe dosyaları gönder (kulak onayı) ve kulak listesini ekle.
-5. Kodek testi: `b/mac/kodek_testi.sh` sahibin Mac'inde; sonuç gelene kadar dosyalar MP3.
+5. Kodek testi: `b/mac/kodek_testi.sh` sahibin Mac'inde; sonuç gelene kadar dosyalar MP3. **AÇIK:** betik girdi olarak
+   `parca{1,2,3}.wav` + `.mp3` kesitleri istiyor (SPEC.v3 §14.2); bu paket render ortamında henüz hazırlanmadı.
 
 ## Plan belgelerine işlenmesi bekleyen notlar (düzeltici raporundan)
 PLAN.v2 §B.5, §A.2.2 (23:30), §E.6 #5; PLAN.v3 §D.3 ve Ders 3'ün 45 sn pencere kuralı: ayrıntı `b/INCELEME.md`.
@@ -71,3 +74,8 @@ PLAN.v2 §B.5, §A.2.2 (23:30), §E.6 #5; PLAN.v3 §D.3 ve Ders 3'ün 45 sn penc
   değerlendirici yok; sahip kararı (SAHIP_ISTEKLERI 15): dosyalar "5 sn sınaması yapılmadı" notuyla sahibe gider, ilk
   5 saniyeyi sahip değerlendirir. Ders 2, 3, 5 (madde 17) ve Ders 1 (madde 18) sahip kulağından geçti: dört ders kabul.
 - Açık: SPEC §10 yardımcı dosyaları (ilk ders girişi, bırakma ön klipleri, durdurma dönüşü) kurulmadı.
+
+## Sonraki olası işler (sahip seçer)
+- Kodek testi paketi (`b/mac/kodek_testi.sh` girdisi) → sahibin Mac'inde çalışır; sonuca göre uygulama dosyaları (AAC-LC).
+- SPEC §10 yardımcı dosyaları (ilk ders girişi, bırakma ön klipleri, durdurma dönüşü).
+- Dosyaları uygulamaya koymak kod oturumunun işi (`musicTailFile` dahil); bu oturum `app/`'e dokunmaz.
