@@ -1,6 +1,6 @@
 # Bildirimler, hava ve yürüyüş eşliği · Plan (sürüm 1, tur 1 düzeltmeli)
 
-Tarih: 2026-09-30. Durum: **TASLAK, sahibin onayını bekliyor.** Uygulama koduna (`app/`) dokunulmadı, ücretli çağrı
+Tarih: 2026-09-30. Durum: **ONAYLANDI (sahip, 2026-09-30: "1. senin öngördüğün şekilde, 2. kapalı ise bildirim gönderip açmasını istemelisin, WhatsApp anlık konumdaki gibi, 3. mantıklı"; `SAHIP_ISTEKLERI.md`).** Uygulama koduna (`app/`) dokunulmadı, ücretli çağrı
 yapılmadı. Kod onaydan sonra ana oturumda yazılır (`DEVIR.md`). Sahibin sözleri kelimesi kelimesine: `SAHIP_ISTEKLERI.md`.
 Tasarım: `tasarim.html`. Dayanaklar `arastirma/` altında: `kod-haritasi.md`, `apple-hava-bildirim.md`, `apple-yuruyus.md`,
 `pubmed.md`, `nef-bildirim.md`; okunan Apple sayfaları `arastirma/apple/` ve `arastirma/apple-json/`. Eleştiriler:
@@ -396,6 +396,13 @@ seninle", ilk anons 3 saniye içinde: *"Birlikte yürüyoruz. 1,1 kilometredesin
    gün saklanır) ve hareket etkinliğine bakar; kişi şu an yürüyorsa sorar, bitirdiyse sormaz.
 3. **Nef yürürken sorar (karar 2):** "Her Zaman" izniyle ≥ 500 m yer değişiminde uygulama uyanır, hareket etkinliğine
    bakar (araba ve bisiklet ayrılır), son 15 dakikanın verisiyle sorar. Konum saklanmaz, yalnız uyandırır.
+4. **Anahtar kapalıyken izni o an ister (sahibin kararı, WhatsApp'ın anlık konumdaki gibi):** Nef saatlik uyanışta bir
+   yürüyüşü geç fark ettiyse ya da kaçırdıysa bildirim gönderir: *"Yürüyüşünü 20 dakika geç fark ettim. Yürürken hemen
+   fark etmemi ister misin?"* Dokununca kısa açıklama sayfası (ne için, konum telefondan çıkmaz, istediğin an kapatılır)
+   ve [Aç] → iOS'un "Her Zaman" izin penceresi; iOS bu pencereyi yalnız bir kez gösterdiği için daha önce sorulduysa
+   [Ayarlar'da aç] (Ayarlar → Nefona → Konum → Her Zaman). Aynı teklif bir yürüyüşün sonunda özet ekranında da çıkabilir.
+   Sınır: 14 günde en çok bir kez, toplam en çok üç kez; "Hayır" iki kez denirse bir daha sorulmaz; gece kuralı geçerli
+   (VARSAYIM). Bu bildirim ve açıklama sayfası B3'ün tasarım kapısında çizilir ve 5 saniye sınamasından geçer.
 - **Soru:** başlık *"Yürüyüşe mi çıktın?"* · gövde *"Son 15 dakikada 1,1 km yürüdün. Hava 23 derece, yürüyüş için güzel.
   Eşlik edeyim mi?"* (86 karakter). Hava yoksa ya da bayatsa hava cümlesi düşer. Dokununca yürüyüş ekranı açılır ve son 15
   dakika yürüyüşe eklenir. Bildirimde iki eylem düğmesi vardır (basılı tutunca): **[Eşlik et]** (uygulamayı açar) ve
@@ -698,4 +705,4 @@ doğru makaleye gidiyor (`elestiri-dogruluk.md`).
 - 5 saniye tur 2 (`5sn-tur2.md`): 13 ekranın 11'i geçti; Yeniden giriş ve Sesli koç ikinci kez kaldı. Yöntem değişti
   (`5sn-tur3-yonler.md`): üç yön, beş yeni değerlendirici; Yeniden giriş A (4/5), Sesli koç C (5/5). Sahibin kararı
   işlendi: her modülde günde en çok 3 saat; koç aralığı 250 m / 500 m / 1 km, her kilometrede ayrıca süre.
-- Sırada: sahibin onayı.
+- 2026-09-30: sahip üç kararı onayladı; karar 2'ye "kapalıyken bildirimle açmayı iste" eklendi (§3.C.1 madde 4). `DEVIR.md` yazıldı.

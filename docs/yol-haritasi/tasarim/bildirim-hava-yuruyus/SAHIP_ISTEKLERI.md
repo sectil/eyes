@@ -14,3 +14,10 @@
 5. "jef ai sinin en an kulalnımla en üst zekaya sahip olasmnu da araştırmışmıydın veya planladın mı"
 6. "yürürüş kolşu bölüümünde ne 250 ömeteede bir hatırlat dedim ayrıca 1 km de de bir olması lazım neya kulalncıuı seçebilsin mesela 250 meterede bir değilde 500 meerede bir diyebilir... ... ayrıca dediğğin gibi mesela su içme kişi bana birden falza saat seçebilmeli fazla seçenek olabilir dediğin gibi"
    → Karar: sesli koçta aralığı kişi seçer (250 m, 500 m, 1 km); her tam kilometrede ayrıca o kilometrenin süresi söylenir. Nefes, mola, su ve yürüyüş hatırlatmalarında da birden fazla saat seçilebilir (en çok 3); bildirim deneyi gün düzeyinde sürer.
+
+## Onay (2026-09-30, kelimesi kelimesine)
+> 1. senin öngördüğün şekilde .. 2 kapalı ise bildirim gönderip açmasnını istemelisin whatsapp anlık konum gönderediğinde istenildiği gidi.. 3. mantıklı.
+
+→ Karar 1: önerilen sıra (Build 60 → B1 → B2 → Y2–Y4 → B3 → Y6). Karar 2: "Yürürken beni fark et" varsayılan kapalı; kapalıyken
+Nef kaçırdığı bir yürüyüşten sonra bildirimle açmayı teklif eder (WhatsApp'ın anlık konumda izni o an istemesi gibi).
+Karar 3: cümle bankası; görünür bilim satırı günde bir, bilim kartı her bildirimde.
