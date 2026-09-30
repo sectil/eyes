@@ -24,3 +24,21 @@ Plan §12'deki üç önerinin hepsi kabul edildi:
 
 Okunuşu: kubbe kalır; ama her ekran 5 saniyede etkilemeli. Sahibin kararları sorgusuz kabul edilecek şey değildir;
 doğru, en iyi ve mükemmel olan neyse o yapılır, gerekirse sahibin kararına karşı gerekçeli öneri getirilir.
+
+## Sahibin 2026-09-30 gece sözleri (kelimesi kelimesine)
+> Görsel memnun olmadım tam anlatmıyor bana  anlamıyorum gelişmiş özellik değil bana göre basit. Mükemmel değil sana göre mükemmel değil mi
+
+> Ben hayalimdekşnş sana anlattım bunların hiç ilgisi yok saba göre etkileyici mi bunlar sana göre etkileyici ve mükemmel se kabul edeceğim
+
+> düşünce güllı ypacak onaylaaycak bir ajan ordusuzel ama çalışma berbat. yokmu şunu adam akaı
+
+> çok uzun sürüyor normal mi ajanların bu durumu kaliteli bozulsun istmeiyorum ama haftalık kota dolmasına %2 kaldı.. 2 saattir çalışıyor çalışmalıanr boşa gitmeisni istmiyorum sonuçta mkemll  bir iş istiyorum
+
+> önerini ugylayalım.. seni müküemml demen benim için yeterli
+
+Okunuşu:
+- Grafik yönleri (maket/yonler.html) hayalle ilgisiz bulundu. Hayal, burundan yukarısı görünen canlı bir baştır.
+- Ajan ordusu kabul edildi. İlk sürümlerden "ışık tozu" (maket/ordu/parcacik) seçildi; seçim Claude'un önerisidir.
+- Kota için orduyu küçültme kararı verildi: yalnız bu teknik için 6 ajanlık tur (maket/ordu/isik-tozu.workflow.js).
+- Kabul ölçütü: Claude'un "mükemmel" demesi yeterlidir. Bu yüzden "mükemmel" sözü ancak görüntülere bakılıp doğrulandıktan
+  sonra söylenir.

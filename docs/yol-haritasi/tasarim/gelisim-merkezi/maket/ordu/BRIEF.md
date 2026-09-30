@@ -40,7 +40,7 @@ Sahibin son yargısı (önceki denemeler için):
 - Kamera görüntüsü gösterilmez; yalnız ölçülen sayı ve onun davranışı (kırpma hızı) kullanılır.
 
 ## Veri (değiştirme; olduğu gibi kullan)
-`/tmp/claude-0/-home-user-eyes/4f4ab0c6-2099-5a58-ab01-ec36e8981c2f/scratchpad/ordu/veri.js`
+`/home/user/eyes/docs/yol-haritasi/tasarim/gelisim-merkezi/maket/ordu/veri.js`
 Bu dosya `AREAS`, `NAME`, `WORD` ve `DAYS` nesnelerini tanımlar; içeriğini sayfaya **satır içi** kopyala.
 Durumlar: `'30'` (30. gün), `'walk'` (yürürken), `'1'` (1. gün). `DAYS[x].blinks` 20 saniyedeki kırpma sayısıdır.
 Gözler bu hızla kırpar.
@@ -73,10 +73,9 @@ Gözler bu hızla kırpar.
 
 ## Araçlar
 - Ekran görüntüsü:
-  `node /tmp/claude-0/-home-user-eyes/4f4ab0c6-2099-5a58-ab01-ec36e8981c2f/scratchpad/ordu/shot.mjs <html mutlak yol> <çıktı klasörü>`
-  12 görüntü üretir (3 durum × 2 tema × 390/320). Yaklaşık 2–4 dakika sürer; Bash'e `timeout: 600000` ver.
+  `node /home/user/eyes/docs/yol-haritasi/tasarim/gelisim-merkezi/maket/ordu/shot.mjs <html mutlak yol> <çıktı klasörü> [hizli]`
+  Tam kip 12 görüntü üretir (3 durum × 2 tema × 390/320), yaklaşık 4 dakika sürer. `hizli` kipi yalnız 390 genişliği
+  çeker (6 görüntü); ara turlarda bunu, son turda tam kipi kullan. Bash'e `timeout: 600000` ver.
   Hatalar `errors.txt` dosyasına yazılır. Görüntüleri Read ile açıp **gerçekten bak**.
-- Yerel Three.js (yalnız deneme için):
-  `/tmp/claude-0/-home-user-eyes/4f4ab0c6-2099-5a58-ab01-ec36e8981c2f/scratchpad/ordu/vendor/three.min.js`.
-  Nihai dosya cdnjs adresini kullanır; ekran görüntüsü aracı cdnjs'e erişebiliyor.
+- Three.js cdnjs adresinden yüklenir; ekran görüntüsü aracı cdnjs'e erişebiliyor.
 - `app/` altına dokunma. Yalnız sana verilen klasöre yaz.
