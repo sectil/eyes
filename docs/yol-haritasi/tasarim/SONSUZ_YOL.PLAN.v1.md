@@ -854,11 +854,11 @@ rızasıyla `n7` ve `moodStatus` döndürür (karar 6, §C.5). Düşük ruh hâl
 | iOS 15 | çalışmaz (iOS 16 ister) | çalışır | — |
 
 **Seçim WeatherKit'in Swift çerçevesidir.** Ek ücret ve anahtar sorunu yoktur; Apple konumun kimliksiz işlendiğini yazılı
-söylüyor; uygulama zaten yerel eklentiler taşıyor (`MainViewController.swift:25-30`). Uygulamanın alt sınırı iOS 15'tir;
+söylüyor; uygulama zaten yerel eklentiler taşıyor (`MainViewController.swift`, `capacitorDidLoad` içindeki `registerPluginInstance` çağrıları). Uygulamanın alt sınırı iOS 15'tir;
 iOS 15'te hava bölümü gizlenir, ay çalışır. Resmî olmayan MGM kazıma servisleri kullanılmaz.
 
 **Nef hava verisi üretmez.** Dil modelinin ölçüme erişimi yoktur; "bugün yağmur yağacak mı?" sorusuna tahmin değil, olası
-görünen bir metin üretir. Nef'in kuralı da bunu yasaklar ("yeni sayı, yüzde veya tarih UYDURMA", `lib/coachCore.js:70`).
+görünen bir metin üretir. Nef'in kuralı da bunu yasaklar ("yeni sayı, yüzde veya tarih UYDURMA", `lib/coachCore.js` `SYSTEM_PROMPT`, "KESİN KURALLAR").
 Veri WeatherKit'ten gelir, hesap telefonda yapılır, cümle sabit şablondan çıkar.
 
 #### E.2 Konum
@@ -876,7 +876,7 @@ Veri WeatherKit'ten gelir, hesap telefonda yapılır, cümle sabit şablondan ç
   adı ve hava bilgisi kalır. Konumun sunucumuza gitmez."
 - Metin davranışla aynıdır: koordinat telefonda da saklanmaz; önbellekte yalnız hava sonucu ve en yakın il adı, günlük
   kayıtta (`sky-log`) yalnız günün yağış ve sıcaklık özeti durur
-  (§2.1 satır 24). Kişi izni Ayarlar'dan kapatırsa uygulama kapalıyken kod çalışmadığı için (`lib/notifyPlan.js:2-3`)
+  (§2.1 satır 24). Kişi izni Ayarlar'dan kapatırsa uygulama kapalıyken kod çalışmadığı için (`lib/notifyPlan.js` baş yorumu)
   silme hemen olmaz: uygulama izin durumunu ilk açılışta okur, il adını ve hava önbelleğini siler, bekleyen yağmur
   bildirimini iptal eder.
 - Koordinat Swift tarafında 2 ondalığa yuvarlanır. Şehir adı için ters coğrafi kodlama kullanılmaz (koordinatı ayrıca
@@ -928,8 +928,8 @@ Kaynak satırı: Cajochen 2013, Haba-Rubio 2015, Chaput 2016, Smith 2017, Casira
 
 #### E.6 Yağmur bildirimi
 
-- Kısıtlar: uygulama kapalıyken kod çalışmaz, bildirimin saati ve metni kurulduğu anda sabitlenir (`lib/notifyPlan.js:1-3`);
-  arka plan yenilemesinin zamanı garanti değildir ve uygulamada `fetch` kipi yoktur (`Info.plist:56-58`); Türkiye'de
+- Kısıtlar: uygulama kapalıyken kod çalışmaz, bildirimin saati ve metni kurulduğu anda sabitlenir (`lib/notifyPlan.js` baş yorumu);
+  arka plan yenilemesinin zamanı garanti değildir ve uygulamada `fetch` kipi yoktur (`Info.plist` `UIBackgroundModes`: yalnız `audio`); Türkiye'de
   dakikalık yağış yoktur; sunucudan push, konumun sunucuya gitmesini gerektirdiği için reddedildi.
 - Tercih "Yağmur haberi" ayrı ve varsayılan kapalıdır; hava kartı açık kişiye ilk yağmurlu günde bir kez sorulur:
   "Yağmur beklenen sabahlar sana haber vereyim mi?"
@@ -937,35 +937,38 @@ Kaynak satırı: Cajochen 2013, Haba-Rubio 2015, Chaput 2016, Smith 2017, Casira
   yeniden hesaplanır; 18.00'den sonraki açılış yarın sabahı planlar. Bildirimin çalacağı anda tahmin 18 saatten eskiyse
   bildirim kurulmaz.
 - Saat ve eşik §2.2'dedir (A8, A9). Günde en çok bir bildirim gelir; kimlikler **7700 ve 7701**'dir, çünkü 7600–7607
-  alarm yedeğine ayrılmıştır (`lib/alarmNative.js:9-10`); `lib/notifyApply.js:14-17` `OWN_RANGES`'e `[7700, 7701]`
-  eklenir. Düzeyi `active`'dir.
+  alarm yedeğine ayrılmıştır (`lib/alarmNative.js` `FALLBACK_BASE`, `FALLBACK_ONCE`); `lib/notifyApply.js` `OWN_RANGES`'e
+  `[7700, 7701]` eklenir (bugünkü kodda var: sabah havası 7700–7701). Düzeyi `active`'dir.
 - **Tek plan:** uygulayıcı kendi aralığında olup gelen planda bulunmayan her bekleyen bildirimi iptal eder
-  (`lib/notifyApply.js:90-97`); yağmur bildirimi ayrı kurulsaydı bir sonraki planlamada sessizce silinirdi. Bu yüzden
-  `lib/rainNotify.js` yalnız bildirim nesnesini üretir; `App.jsx`'teki plan kurulumu (`App.jsx:478-513`) onu
+  (`lib/notifyApply.js`, `createApplier` içindeki `reconcile`); yağmur bildirimi ayrı kurulsaydı bir sonraki planlamada sessizce silinirdi. Bu yüzden
+  `lib/rainNotify.js` yalnız bildirim nesnesini üretir; `App.jsx`'teki plan kurulumu ("Bildirim planı (sözleşme §6)" yorumlu `useEffect`; bugün tek planlayıcı
+  `lib/notifyAll.js` `planAll`, ardından `applyPlan`) onu
   `planNotifications` çıktısının bildirim listesine ekler ve `applyPlan` tek planı kurar. Deney ve sessiz gün mantığı
   (`lib/notifyPlan.js`) bu kimliklere dokunmaz.
 - **Bildirim deneyiyle ilişki.** Sürmekte olan deney, her hatırlatma türü için günleri zarla "gönder" ve "sessiz" diye
-  ayırır ve o türün bildirimden sonra yapılıp yapılmadığını karşılaştırır (`lib/notifyPlan.js:5-7`, `:16`;
-  `lib/notifyLog.js:162-174`). Yağmur, zardan bağımsızdır; yağmur bildirimi iki kola da aynı olasılıkla düşer, bu yüzden
+  ayırır ve o türün bildirimden sonra yapılıp yapılmadığını karşılaştırır (`lib/notifyPlan.js` baş yorumu ve
+  o günkü `SILENT_RATE`; `lib/notifyLog.js` `evaluate`). Not (2026-10-01): bugünkü kodda sessiz gün deneyi kalktı
+  (`lib/notifyPlan.js` baş yorumu: uygun her gün gönderilir, günlükte `arm` `send`); `SILENT_RATE` yok, bu madde tarihsel. Yağmur, zardan bağımsızdır; yağmur bildirimi iki kola da aynı olasılıkla düşer, bu yüzden
   karşılaştırmayı bir yöne çekmez, yalnız biraz gürültü ekler. Yağmur bildiriminden gelen açılış deney günlüğüne yazılmaz:
-  dokunma kaydı yalnız hatırlatma türleri için tutulur (`App.jsx:183`, `NUDGE_TYPES`) ve yağmurun türü `rain` bu listede
+  dokunma kaydı yalnız hatırlatma türleri için tutulur (`lib/notifyTap.js` `createTapHandler`; `NUDGE_TYPES`,
+  `lib/reminders.js`) ve yağmurun türü `rain` bu listede
   yoktur. Açılış ayrı bir sayaçla (G8'in `rain` kolu) telefonda sayılır. Deneyin sonucu gerektiğinde `sky-log`'daki
   yağmurlu günler ayrılarak da okunabilir. `rainNotify.test.js` iki şeyi sınar: yağmur dokunuşu deney günlüğünü
   değiştirmez ve `evaluate` çıktısı yağmur bildirimli ve bildirimsiz aynı günlükte aynıdır.
-- Bildirimlerin ana anahtarı kapalıyken `cancelOwn` (`App.jsx:505-508`)
-  aralığın tamamını iptal eder; bu yüzden yağmur haberi ana anahtar açıkken çalışır ve anahtar kapalıyken tercih
+- Bildirimlerin ana anahtarı kapalıyken `cancelOwn` (`lib/notifyApply.js`; `App.jsx`'teki bildirim planı
+  `useEffect`'inde `optIn` `yes` değilken çağrılır) aralığın tamamını iptal eder; bu yüzden yağmur haberi ana anahtar açıkken çalışır ve anahtar kapalıyken tercih
   satırında "Bildirimler kapalı" yazar.
 - Metin: başlık "Bugün yağmur bekleniyor"; akşam kurulmuşsa gövde "Dün akşamki tahmine göre 14.00–17.00 arası yağmur
   olasılığı %70." ve sabah kurulmuşsa "14.00–17.00 arası yağmur olasılığı %70."; sonunda "Kaynak: Apple Weather" (App
   Review cevabına bağlı). Dokununca "Hava ve ay" kartı açılır.
-- Alarm sabahı: "Uyanınca" kartı (`lib/alarm.js:309`) bir satır hava gösterir; akşam alarm kartı (`:271`) "Yarın sabah
+- Alarm sabahı: "Uyanınca" kartı (`lib/alarm.js` `morningCard`) bir satır hava gösterir; akşam alarm kartı (`eveningCard`) "Yarın sabah
   yağmur bekleniyor" satırını gösterebilir.
 - Bekleyen yerel bildirim sınırı yaygın olarak 64 bilinir (Apple belgesinde bulunamadı, VARSAYIM); bugünkü en dolu plan
   ≈ 49, yağmurla 51.
 
 #### E.7 Ekran: başlık şeridi ve "Hava ve ay" kartı
 
-- Ana sayfa tarih satırı (`Home.jsx:207`): "Salı, 29 Eylül · küçülen şişkin ay"; önünde evreye göre çizilen ay simgesi
+- Ana sayfa tarih satırı (`screens/Home.jsx`, `home-head` başlığındaki `eyebrow`, `toLocaleDateString`): "Salı, 29 Eylül · küçülen şişkin ay"; önünde evreye göre çizilen ay simgesi
   durur (§E.3). App Review atıf cevabı olumlu gelirse
   "· 18° · öğleden sonra yağmur" eklenir. 320 pt'de şerit ikinci satıra iner. Ağ beklenmez; hava önbellekte yoksa yalnız
   ay görünür.
@@ -1148,8 +1151,8 @@ Yeni bir modül ancak şu altı parçayla "takılmış" sayılır; test her biri
 | Y1 | `lib/progression.js` (`restDecision` dâhil), `lib/ladders.js`, `lib/breathMix.js` ve testleri | `screens/Home.jsx:162` (bağlam), `:165-170` (ara kilidi `restDecision`'a bağlanır); `modules/registry.js:85`; `modules/breath/manifest.js`, `view.jsx:25`; `screens/Breath.jsx` ("2 dk daha", tutma ön koşulu); `lib/routines.js` (`dikey`, çeşitleme yaması); `modules/routine/manifest.js`; `screens/Routine.jsx:415` (`stage`); snake, fark-ettin, tek-bakis manifestleri (`unlocked`); `modules/notice/manifest.js:31` (ilerleme varken kayıt şartı kalkar, yokken aynen); `components/TodayPath.jsx` (rozet); `lib/pathLater.js` (`progressionCtx`); sitenin yol metni ve görselleri (`site/pages/index.html:93-94`, `home-path-*.webp`: nefes 3 dk, büyüyen yol). `lib/yoga.js`'e dokunulmaz (§2.3) |
 | Y2 | — | `lib/progress.js` (`metricStatusV2`; `metricCards` her karta `verdict` ekler, `status` ve `metricTrend` yerinde kalır), `lib/dataHub.js` (`verifiedChange`: `verdict`, karışık, etkiler 28 gün), `lib/exportData.js:117, :139, :266` (`verdict` ve yeni `STATUS_TEXT`), `components/ProgressOverview.jsx:36-48` (`metricStatus` → `verdict`, metin) ve `:463` (Yöntem metni), `screens/FirstReport.jsx:57-59`, `components/HomeMap.jsx:28` (alan yayı üzerinden), `modules/reading/manifest.js` (`reading-cps`), `screens/Progress.jsx` ("Yolun"), `modules/tek-bakis/manifest.js` (`span7` ortanca) |
 | Y3 | `lib/dayOpen.js` ve testi | `lib/homeSuggest.js` (isteğe bağlı `lead`), `screens/Home.jsx:152, 203-204, 236-247, 253-257` (karar 5d), `App.jsx:795-798`, `components/IntroFilm.jsx:45` (alt yazı, karar 5a), `site/pages/index.html:7` ve derlenmiş `site/index.html:34-36` (karar 5b), `LaunchScreen.storyboard` ve `Splash.imageset` (karar 5c), `Info.plist:16` (kamera metnine yalnız İlk Bakış'taki kırpma sayımı), WHO-5 14. gün kartı, `screens/FirstReport.jsx` ilk ekran metni |
-| Y4 | `modules/gunun/`, `lib/dayCards.js`, `lib/moon.js`, "Günün" sayfası ve testleri | `lib/profileQuestions.js:170` (akşam grubu) ve `:228-230` (Sorularım satırları), `screens/Home.jsx:334-344` (kart), `:150-151` ve `:162` (`day-check` süzülür), `lib/stats.js:204` (`isExerciseSession` `day-check`'i dışlar), `lib/evidence.js`, `lib/sources.js`, `Home.jsx:207` (ay, ›), sitenin "Bir günün nasıl geçer" bölümündeki akşam anlatımı |
-| Y5 | `ios/App/App/SkyPlugin.swift`, `lib/sky.js`, il merkezleri tablosu, `components/SkyCard.jsx`, `lib/rainNotify.js` ve testleri | `MainViewController.swift:25-30`, `App.entitlements` (WeatherKit), `Info.plist` (iki konum anahtarı), `lib/consent.js` (`weather` v1), `lib/notifyApply.js:14-17` (`OWN_RANGES`), `App.jsx:478-513` (yağmur bildirimi tek plana eklenir), `screens/Home.jsx` (tek seferlik hava teklifi, §E.7), `screens/AlarmMorning.jsx`, `lib/alarm.js`, `site/gizlilik.html:76`, `site/pages/gizlilik.html:49`, App Store gizlilik etiketi |
+| Y4 | `modules/gunun/`, `lib/dayCards.js`, `lib/moon.js`, "Günün" sayfası ve testleri | `lib/profileQuestions.js:170` (akşam grubu) ve `:228-230` (Sorularım satırları), `screens/Home.jsx:334-344` (kart), `:150-151` ve `:162` (`day-check` süzülür), `lib/stats.js:204` (`isExerciseSession` `day-check`'i dışlar), `lib/evidence.js`, `lib/sources.js`, `Home.jsx` tarih satırı (`home-head` `eyebrow`; ay, ›), sitenin "Bir günün nasıl geçer" bölümündeki akşam anlatımı |
+| Y5 | `ios/App/App/SkyPlugin.swift`, `lib/sky.js`, il merkezleri tablosu, `components/SkyCard.jsx`, `lib/rainNotify.js` ve testleri | `MainViewController.swift` (`capacitorDidLoad`), `App.entitlements` (WeatherKit), `Info.plist` (iki konum anahtarı), `lib/consent.js` (`weather` v1), `lib/notifyApply.js` (`OWN_RANGES`), `App.jsx` bildirim planı `useEffect`'i (yağmur bildirimi tek plana eklenir), `screens/Home.jsx` (tek seferlik hava teklifi, §E.7), `screens/AlarmMorning.jsx`, `lib/alarm.js`, `site/pages/gizlilik.html` ve derlenmiş `site/gizlilik.html` ("Kamera görüntüsü, ses kaydı ve konum sunucuya hiç gitmez" satırı), App Store gizlilik etiketi |
 | Y6 | dönem paketleri (`YOL.nef.md` §11) | `lib/coach.js` (`:24` `screenHours` paketten çıkar; görme sayıları ve okuma hızı çıkar; v2 reddinde v1 alt kümesi), `lib/coachCore.js` (SCHEMA, `MODULE_NOTES`, istem; `:44` modül sınırı 16; `:79` ekran süresi satırı çıkar), `modules/gunun/manifest.js` (`coach()` v2 rızasıyla açılır), `api/coach.js`, `CoachCard`, `lib/consent.js` (coach v2 ve coachLife v2: "ekran süresi" satırı çıkar), breath ve snake `coach()` (boşken `null`), `site/gizlilik.html:59-60` ve `site/pages/gizlilik.html:32-33` (Nef satırları), App Store gizlilik etiketi (ruh hâli ve Nef satırı) |
 
 #### G.4 Bilinçli olarak değişen test beklentileri
