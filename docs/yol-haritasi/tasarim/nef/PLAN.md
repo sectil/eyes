@@ -1,6 +1,6 @@
 # Nef · süper zekâ planı (sürüm 1, 2026-10-01)
 
-Durum: **TASLAK, sahip onayı bekliyor.** Bu oturumda `app/` altında hiçbir dosyaya dokunulmadı. Ücretli çağrı da
+Durum: **ONAYLANDI** (sahip, 2026-10-01, kelimesi kelimesine: "onaylıyorum sen mükemmel diyorsan"). Ayrıntılar §10. Bu oturumda `app/` altında hiçbir dosyaya dokunulmadı. Ücretli çağrı da
 yapılmadı: model, ElevenLabs ve banka üretimi yok. Kod, onaydan sonra ana oturumda yazılır. Dal: `claude/nef-super-zeka`.
 
 **Girdiler**
@@ -627,7 +627,11 @@ kartı olmaz.
 **Çıkan ders:** etkileyen şey kişinin kendi düzeninden bir olgu. Hava, su ya da genel ilerleme kartı tek başına
 etkilemiyor.
 
-## 10. Sahibe sorular
+## 10. Sahibe sorular ve kararlar
+
+**Karar (2026-10-01):** plan onaylandı. VARSAYIM: 1, 2, 3 ve 5. sorularda onay, önerdiğim seçenek için sayıldı. 4. soruda
+öneri yoktu; açık kalır. N4'e kadar gerekmez, "Her Zaman" yolu onaylı plandaki gibi sürer.
+
 
 1. **Bugün kartının günlük model çağrısı kalksın mı?** Öneri: evet. An motoru yerini alır; model haftalık mektuba
    geçer.
