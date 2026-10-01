@@ -14,8 +14,9 @@ iki tur.
 | 9. gün akşam, yol bitmiş | **5/5** | **5/5** |
 | 9. gün, hava satırı | 0/5 | 0/5 (geçersiz) |
 
-Hava senaryosu geçersiz: ekran çekme düzeneği test derlemesi bayrağını (VITE_APP_BUILD=dev / VITE_TEST_UNLOCK=1)
-açmadı, SKY_UI kapalı kaldı; görüntüler 9. günle bayt bayt aynı. Bu bir tasarım hükmü değil, düzenek hatası.
+Hava senaryosu geçersiz: hava satırı bilerek ilk görünümün altına konmuş (Home.jsx, "adımların üstünde"), düzenek
+yalnız ilk görünümü çekiyor; görüntüler 9. günle bayt bayt aynı. Bu bir tasarım hükmü değil, çekim hatası. (İlk
+yazılan "test bayrağı açılmadı" gerekçesi yanlıştı: tanı günlüğü SKY_UI açık, rıza ve yer kayıtlı gösterdi.)
 
 İlk iki gün yine kaldı. İris kalkınca ortak şikâyet: "imza görsel yok, sıradan liste"; 1. günde E testi kartta ve
 yolun ilk durağında iki kez; 2. günde "Bu hafta 1/3 gün" neyi saydığı belli değil, dünkü emeğin karşılığı yok; mola
