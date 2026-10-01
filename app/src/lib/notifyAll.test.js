@@ -114,12 +114,19 @@ describe('planAll: 20.000 rastgele açık ayar', { timeout: 60000 }, () => {
     expect(byChoice).toBeGreaterThan(0) // elle seçilen yakın saat gerçekten kuruluyor (düşmüyor)
   })
 
-  it('74xx ve 75xx: title, body, id, at değişmez; hepsi yerinde (kırpılmaz); günlük tabandaki gibi', () => {
-    for (const { out, base } of all()) {
-      expect(out.notifications.filter((n) => !isNew(n) && !isWeather(n)).map(pick3)).toEqual(base.notifications.map(pick3))
+  // Sahip kararı 2026-10-01: elle seçilmiş hatırlatmayla ±60 sn içinde çakışan oturum molası (75xx) kurulmaz (tek bildirim)
+  it('74xx ve 75xx: title, body, id, at değişmez; hepsi yerinde (kırpılmaz; yalnız elle seçilmiş hatırlatmayla aynı dakikadaki oturum molası kurulmaz); günlük tabandaki gibi', () => {
+    let clashed = 0
+    for (const { input, out, base } of all()) {
+      const mine = out.notifications.filter((n) => (isModule(n) || isExtra(n)) && chosen(input, n)).map((n) => n.at.getTime())
+      const clash = (n) => n.extra?.kind === 'focus' && mine.some((m) => Math.abs(m - n.at.getTime()) <= 60000)
+      const want = base.notifications.filter((n) => !clash(n))
+      clashed += base.notifications.length - want.length
+      expect(out.notifications.filter((n) => !isNew(n) && !isWeather(n)).map(pick3)).toEqual(want.map(pick3))
       expect(out.log).toEqual(base.log)
       expect(out.walkGuards.slice(0, base.walkGuards.length)).toEqual(base.walkGuards)
     }
+    expect(clashed).toBeGreaterThan(0) // çakışma rastgele ayarlarda gerçekten oluşuyor
   })
 
   it(`JS'in bekleyeni ≤ ${MAX_PENDING}; kimlikler yalnız kendi aralıklarımızda (7600–7607'ye dokunmaz), tekrarsız`, () => {
@@ -183,13 +190,20 @@ describe('planAll: 20.000 rastgele açık ayar', { timeout: 60000 }, () => {
     expect(atNight).toBeGreaterThan(0)
   })
 
-  it('oturum sürerken modül hatırlatması ve ek saat yok', () => {
+  // Sahip kararı 2026-10-01: oturum sürerken kişinin kurduğu hatırlatmalar gelir; Nef'in seçtiği saatler gelmez
+  it("oturum sürerken Nef'in modül saati ve ek saati yok; elle seçilmiş modül saati ve ek saat kurulur", () => {
+    let mineIn = 0
     for (const { input, out } of all()) {
       const start = Date.parse(input.focus?.startedAt)
       if (!Number.isFinite(start) || ![1, 2, 4].includes(input.focus.hours)) continue
       const end = start + input.focus.hours * 3600000
-      for (const n of out.notifications.filter(isNew)) expect(n.at >= start && n.at <= end).toBe(false)
+      for (const n of out.notifications.filter(isNew)) {
+        const inside = n.at >= start && n.at <= end
+        if (chosen(input, n)) mineIn += inside ? 1 : 0
+        else expect(inside).toBe(false)
+      }
     }
+    expect(mineIn).toBeGreaterThan(0)
   })
 
   it(`günde en çok ${DAY_CAP} modül bildirimi`, () => {
@@ -334,11 +348,44 @@ describe('planAll: kurallar', () => {
     expect(m.skipped.some((s) => s.reason === 'bed')).toBe(false)
   })
 
-  it('oturum sürerken modül hatırlatması yok', () => {
+  // Sahip kararı 2026-10-01: elle seçilen modül saati oturumda da kurulur; Nef'in seçtiği (auto) saat kurulmaz
+  it("oturum sürerken Nef'in modül saati kurulmaz, elle seçilen kurulur", () => {
     const focus = { startedAt: new Date(2026, 8, 30, 9, 30).toISOString(), hours: 2 }
     const now = new Date(2026, 8, 30, 9, 45)
     const t = planAll(base({ now, focus, moduleReminders: { blink: man(['10:00', '16:00']) } })).notifications.filter((n) => isModule(n) && today(n))
-    expect(t.map((n) => hm(n.at))).toEqual(['16:00'])
+    expect(t.map((n) => hm(n.at))).toEqual(['10:00', '16:00'])
+    const a = planAll(base({ now, focus, moduleReminders: { blink: auto(['10:00', '16:00']) } }))
+    expect(a.notifications.filter((n) => isModule(n) && today(n)).map((n) => hm(n.at))).toEqual(['16:00'])
+    expect(a.skipped.some((s) => s.module === 'blink' && s.date === dayKey(now))).toBe(true) // oturumda ('focus' ya da molalara yakın 'gap')
+  })
+
+  it('elle seçilmiş modül saati oturum molasıyla aynı dakikada: tek bildirim, hatırlatma kalır, mola kurulmaz', () => {
+    // 09.00'da 2 saatlik oturum: molalar 10.00 (7500) ve 11.00 (7501); elle seçilmiş göz kırpma 10.00
+    const focus = { startedAt: new Date(2026, 8, 30, 9, 0).toISOString(), hours: 2 }
+    const now = new Date(2026, 8, 30, 9, 5)
+    const p = planAll(base({ now, focus, moduleReminders: { blink: man(['10:00']) } }))
+    const at10 = p.notifications.filter((n) => n.at.getTime() === new Date(2026, 8, 30, 10, 0).getTime())
+    expect(at10.map((n) => n.extra.kind ?? n.extra.module)).toHaveLength(1)
+    expect(at10[0].extra.module).toBe('blink')
+    expect(p.notifications.filter((n) => n.extra?.kind === 'focus').map((n) => n.id)).toEqual([7501])
+    // Nef'in saati (auto) oturumda kurulmaz; iki mola da kalır
+    const a = planAll(base({ now, focus, moduleReminders: { blink: auto(['10:00']) } }))
+    expect(a.notifications.filter((n) => n.extra?.kind === 'focus').map((n) => n.id)).toEqual([7500, 7501])
+    expect(a.notifications.some((n) => isModule(n) && today(n))).toBe(false)
+  })
+
+  it('elle seçilmiş ek saat oturumda kurulur ve aynı dakikadaki molayı düşürür; Nef\'in ek saati oturumda kurulmaz', () => {
+    // 12.00'de 2 saatlik oturum: molalar 13.00 (7500), 14.00 (7501); nefes 10.00 (7402), ek saatler 13.00 ve 17.00
+    const focus = { startedAt: new Date(2026, 8, 30, 12, 0).toISOString(), hours: 2 }
+    const now = new Date(2026, 8, 30, 9, 0)
+    const mk = (cfg) => planAll(base({ now, focus, reminders: REM({ breath: { on: true, time: '10:00' } }), moduleReminders: { breath: cfg } }))
+    const m = mk(man(['13:00', '17:00']))
+    expect(m.notifications.filter((n) => n.type === 'breath' && today(n)).map((n) => [n.id, hm(n.at)])).toEqual([[7402, '10:00'], [7864, '13:00'], [7865, '17:00']])
+    expect(m.notifications.filter((n) => n.extra?.kind === 'focus').map((n) => n.id)).toEqual([7501])
+    const a = mk(auto(['13:00', '17:00']))
+    expect(a.notifications.filter((n) => n.type === 'breath' && today(n)).map((n) => [n.id, hm(n.at)])).toEqual([[7402, '10:00'], [7865, '17:00']])
+    expect(a.skipped.some((s) => s.module === 'breath' && s.date === dayKey(now))).toBe(true) // oturumda ('focus' ya da molalara yakın 'gap')
+    expect(a.notifications.filter((n) => n.extra?.kind === 'focus').map((n) => n.id)).toEqual([7500, 7501])
   })
 
   it('seçilmeyen günde ne 74xx ne ek saat kurulur; gönderilen günde 74xx + ek saatler', () => {

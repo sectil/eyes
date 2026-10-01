@@ -18,3 +18,11 @@ kısıtı ve sessiz gün deneyi kalktı, türlere gün seçimi geldi. `notifyPla
 'thin' atlamaları ve sessiz gün zarı (`dice`, `SILENT_RATE`) yok; seçilmeyen gün 'day'; uygun gün her zaman 'send'.
 `focus.js` yalnız gece penceresini kendi sabitine (`BREAK_WINDOW`, 09.00–21.00) taşıdı; davranışı aynı. `notifyApply.js`
 değişmedi. İki dosya `src/lib`'deki hâllerinin aynısı (yalnız içe aktarma yolları farklı).
+
+## Yeniden dondurma · 2026-10-01 (çalışma oturumu)
+
+Sahip kararı (2026-10-01): "Çalışma oturumu sürerken, senin kurduğun hatırlatmalar gelsin." `notifyPlan.js` yeni
+kurala göre donduruldu: 74xx ve Çalışma günleri oturum içinde de kurulur ('focus' atlaması oluşmaz); bir hatırlatmayla
+±60 sn içinde (uç dahil, `FOCUS_CLASH_MS`) çakışan oturum molası (75xx) kurulmaz, hatırlatma kalır. `focus.js`'te
+yalnız baş yorumu güncellendi (davranış aynı). `notifyApply.js` değişmedi. İki dosya yine `src/lib`'deki hâllerinin
+aynısı (yalnız içe aktarma yolları farklı).

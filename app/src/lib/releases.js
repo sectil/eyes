@@ -6,6 +6,15 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Build 75'ten sonraki TestFlight ('2026-10-01-3' Build 75'te gitti). Sahip kararı 2026-10-01: "Çalışma oturumu
+    // sürerken, senin kurduğun hatırlatmalar gelsin."
+    id: '2026-10-01-4',
+    title: '1 Ekim, dördüncü güncelleme',
+    items: [
+      { kind: 'change', text: 'Çalışma oturumu sürerken de kurduğun hatırlatmalar seçtiğin saatte gelir; oturumun molasıyla aynı dakikaya denk gelirse tek bildirim gelir.' },
+    ],
+  },
+  {
     // Build 74'ten sonraki TestFlight ('2026-10-01-2' Build 74'te gitti, 11.52). Sahip kararı: "birkaç saniye sonra gelsin".
     id: '2026-10-01-3',
     title: '1 Ekim, üçüncü güncelleme',

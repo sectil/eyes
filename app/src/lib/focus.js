@@ -1,6 +1,7 @@
 // Çalışma oturumu (plan §5): kişi 1, 2 ya da 4 saatlik oturum başlatır; 60 dakikada bir mola bildirimi gelir
-// (Morris 2020, 60 dakikalık kol). Oturum sürerken diğer hatırlatmalar gelmez (notifyPlan.js). Ekrandaki adı
-// "Çalışma oturumu": Türkçe iOS'taki "Odak" özelliğiyle karışmasın.
+// (Morris 2020, 60 dakikalık kol). Oturum sürerken kişinin kurduğu hatırlatmalar da gelir; mola onlardan biriyle aynı
+// dakikaya düşerse kurulmaz (notifyPlan.js, sahip kararı 2026-10-01). Ekrandaki adı "Çalışma oturumu": Türkçe iOS'taki
+// "Odak" özelliğiyle karışmasın.
 //
 //   gozolcum:focus → { startedAt: ISO, hours: 1 | 2 | 4 } | yok
 //

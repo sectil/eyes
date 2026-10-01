@@ -145,12 +145,14 @@ describe('planNotifications: atlama nedenleri', () => {
     expect(p.log.filter((x) => x.type === 'mola').every((e) => e.eligible && e.skipReason === null)).toBe(true)
     expect(p.notifications.filter((n) => n.type === 'mola')).toHaveLength(HORIZON_DAYS)
   })
-  it("çalışma oturumu anı kapsıyorsa 'focus'; oturum bildirimleri 7500+k-1, timeSensitive, günlükte yok", () => {
+  // Sahip kararı 2026-10-01: "Çalışma oturumu sürerken, senin kurduğun hatırlatmalar gelsin" ('focus' atlaması kalktı)
+  it('çalışma oturumu sürerken 74xx kurulur; oturum bildirimleri 7500+k-1, timeSensitive, günlükte yok', () => {
     const now = new Date(2026, 8, 27, 11, 30)
     const focus = { startedAt: new Date(2026, 8, 27, 11, 0).toISOString(), hours: 2 }
     const p = plan({ now, focus })
-    expect(logOf(p, 'mola', TODAY)).toMatchObject({ eligible: false, arm: null, skipReason: 'focus' })
-    expect(logOf(p, 'walk', TODAY).skipReason).not.toBe('focus') // 15:00 oturum bittikten sonra
+    expect(logOf(p, 'mola', TODAY)).toMatchObject({ eligible: true, arm: 'send', skipReason: null })
+    expect(p.notifications.filter((n) => n.type === 'mola' && n.extra.date === TODAY).map((n) => n.at.getTime())).toEqual([new Date(2026, 8, 27, 12, 30).getTime()])
+    expect(logOf(p, 'walk', TODAY).skipReason).toBeNull()
     expect(logOf(p, 'mola', dayKey(addDays(now, 1))).skipReason).toBeNull()
     const f = p.notifications.filter((n) => n.type === 'focus')
     expect(f.map((n) => n.id)).toEqual([7500, 7501])
@@ -161,15 +163,19 @@ describe('planNotifications: atlama nedenleri', () => {
     // Geçmiş saatler kurulmaz; 4 saatlik oturumda 7500–7503
     const later = plan({ now: new Date(2026, 8, 27, 12, 10), focus })
     expect(later.notifications.filter((n) => n.type === 'focus').map((n) => n.id)).toEqual([7501])
+    // 4 saatlik oturumda 7500–7503; 15.00 molası (7503) yürüyüş hatırlatmasıyla aynı dakikada, kurulmaz
     const four = plan({ now, focus: { ...focus, hours: 4 } })
-    expect(four.notifications.filter((n) => n.type === 'focus').map((n) => n.id)).toEqual([7500, 7501, 7502, 7503])
+    expect(four.notifications.filter((n) => n.type === 'focus').map((n) => n.id)).toEqual([7500, 7501, 7502])
+    const noWalk = plan({ now, focus: { ...focus, hours: 4 }, rem: { types: { ...ALL_ON, walk: { on: false, time: '15:00' } } } })
+    expect(noWalk.notifications.filter((n) => n.type === 'focus').map((n) => n.id)).toEqual([7500, 7501, 7502, 7503])
   })
-  it('oturumun son molasıyla aynı dakikadaki hatırlatma kurulmaz (bitiş anı dahil; DEVIR §8.3)', () => {
+  it('oturum molasıyla aynı dakikada tek bildirim: hatırlatma kurulur, o mola kurulmaz (bitiş anı dahil)', () => {
     // 10.30'da 2 saatlik oturum: son mola 12.30'da, mola hatırlatması da 12.30'da
     const focus = { startedAt: new Date(2026, 8, 27, 10, 30).toISOString(), hours: 2 }
     const p = plan({ now: new Date(2026, 8, 27, 10, 35), focus })
-    expect(logOf(p, 'mola', TODAY)).toMatchObject({ eligible: false, skipReason: 'focus' })
-    expect(p.notifications.filter((n) => n.at.getTime() === new Date(2026, 8, 27, 12, 30).getTime()).map((n) => n.type)).toEqual(['focus'])
+    expect(logOf(p, 'mola', TODAY)).toMatchObject({ eligible: true, arm: 'send', skipReason: null })
+    expect(p.notifications.filter((n) => n.at.getTime() === new Date(2026, 8, 27, 12, 30).getTime()).map((n) => n.id)).toEqual([7400])
+    expect(p.notifications.filter((n) => n.type === 'focus').map((n) => n.id)).toEqual([7500]) // 11.30 molası kalır
   })
   it('Bug 33: çalışma oturumunun gece saatleri kurulmaz (yalnız 09:00–21:00)', () => {
     // Gece yarısı başlatılmış 4 saatlik oturum: 01.00–04.00 "kalk" bildirimi yok
@@ -183,6 +189,42 @@ describe('planNotifications: atlama nedenleri', () => {
     // Sabah 07.30'da 4 saat: 08.30 kurulmaz; 09.30, 10.30, 11.30 kimlikleriyle (k = 2..4)
     const morn = plan({ now: new Date(2026, 8, 27, 7, 30), focus: { startedAt: new Date(2026, 8, 27, 7, 30).toISOString(), hours: 4 } })
     expect(morn.notifications.filter((n) => n.type === 'focus').map((n) => [n.id, n.extra.k])).toEqual([[7501, 2], [7502, 3], [7503, 4]])
+  })
+  it('oturum içinde 74xx ve Çalışma günleri kurulur; günlükte focus atlaması oluşmaz', () => {
+    // Pazartesi 2026-09-28 09.00'da 4 saatlik oturum (09.00–13.00): su 11.00, mola 12.30, Çalışma günü 10.15 oturumda
+    const now = new Date(2026, 8, 28, 9, 0)
+    const focus = { startedAt: now.toISOString(), hours: 4 }
+    const study = { days: ['MO'], time: '10:15' }
+    const p = plan({ now, focus, study, rem: { types: { ...ALL_ON, study: { on: true } } } })
+    const key = dayKey(now)
+    const at = (n) => [n.type, n.at.getTime()]
+    const inside = p.notifications.filter((n) => n.extra.kind === 'nudge' && n.extra.date === key && n.at.getTime() <= new Date(2026, 8, 28, 13, 0).getTime())
+    expect(inside.map(at)).toEqual([
+      ['study', new Date(2026, 8, 28, 10, 15).getTime()],
+      ['water', new Date(2026, 8, 28, 11, 0).getTime()],
+      ['mola', new Date(2026, 8, 28, 12, 30).getTime()],
+    ])
+    expect(p.log.some((e) => e.skipReason === 'focus')).toBe(false)
+    // Molalar 10.00, 11.00, 12.00, 13.00; 11.00 su hatırlatmasıyla aynı an: kurulmaz
+    expect(p.notifications.filter((n) => n.type === 'focus').map((n) => [n.id, n.at.getTime()])).toEqual([
+      [7500, new Date(2026, 8, 28, 10, 0).getTime()],
+      [7502, new Date(2026, 8, 28, 12, 0).getTime()],
+      [7503, new Date(2026, 8, 28, 13, 0).getTime()],
+    ])
+  })
+  it('çakışma ±60 sn (uç dahil): yakın mola kurulmaz, 61 sn uzaktaki kurulur; kurulmayan hatırlatma molayı düşürmez', () => {
+    const rem = { types: { ...ALL_ON, walk: { on: false, time: '15:00' }, breath: { on: false, time: '16:30' }, water: { on: false, time: '11:00' } } }
+    const breaks = (startedAt, o = {}) =>
+      plan({ now: new Date(2026, 8, 27, 10, 0), focus: { startedAt: startedAt.toISOString(), hours: 2 }, rem, ...o }).notifications.filter((n) => n.type === 'focus').map((n) => n.id)
+    // Mola hatırlatması 12.30: 12.30.30'daki mola 30 sn, 12.31.00'deki 60 sn uzakta (kurulmaz); 12.31.01'deki kurulur
+    expect(breaks(new Date(2026, 8, 27, 10, 30, 30))).toEqual([7500])
+    expect(breaks(new Date(2026, 8, 27, 10, 31, 0))).toEqual([7500])
+    expect(breaks(new Date(2026, 8, 27, 10, 29, 0))).toEqual([7500])
+    expect(breaks(new Date(2026, 8, 27, 10, 31, 1))).toEqual([7500, 7501])
+    expect(breaks(new Date(2026, 8, 27, 10, 28, 59))).toEqual([7500, 7501])
+    // Seçilmeyen gün (Pazar): hatırlatma kurulmaz, mola kurulur
+    const offDay = { types: { ...rem.types, mola: { on: true, time: '12:30', days: [1, 2, 3, 4, 5, 6] } } }
+    expect(breaks(new Date(2026, 8, 27, 10, 30), { rem: offDay })).toEqual([7500, 7501])
   })
   // Sahip kararı 2026-10-01: "yine de gelsin" — o gün yapılmış olsa da mola, su ve nefes gelir (yürüyüş adım koşulu kalır)
   it('bugün yapılmış olsa da mola, su ve nefes kurulur (doneBefore yok)', () => {

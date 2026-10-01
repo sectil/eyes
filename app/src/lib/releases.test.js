@@ -46,8 +46,8 @@ describe('sürüm notları', () => {
   // girdiye taşındı; 29 Eylül'ü görmüş kişi yeni girdiyi görür.
   it('Bug 31: 29 Eylül\'ü görmüş kişi ikinci güncellemeyi görür; taşınan maddeler 29 Eylül\'de yok; (b) maddesi var', () => {
     // Sonraki girdiler (1 Ekim …) listenin başına eklenir; 29 Eylül'ü görmüş kişi 30 Eylül girdisini yine görür
-    expect(unseenReleases('2026-09-29').map((r) => r.id)).toEqual(['2026-10-01-3', '2026-10-01-2', '2026-10-01-1', '2026-09-30-2', '2026-09-30-1', '2026-09-29-2'])
-    expect(latestRelease().id).toBe('2026-10-01-3')
+    expect(unseenReleases('2026-09-29').map((r) => r.id)).toEqual(['2026-10-01-4', '2026-10-01-3', '2026-10-01-2', '2026-10-01-1', '2026-09-30-2', '2026-09-30-1', '2026-09-29-2'])
+    expect(latestRelease().id).toBe('2026-10-01-4')
     for (const start of ['E testi artık haftada bir yapılıyor:', 'Nef artık', "Gelişim'de son testten", 'Haftalık E testi son testin saatini', 'Okuma testi artık']) {
       expect(items292().some((t) => t.startsWith(start)), start).toBe(true)
       expect(items29().some((t) => t.startsWith(start)), start).toBe(false)
@@ -62,7 +62,7 @@ describe('sürüm notları', () => {
       expect(items301().some((t) => t.startsWith(start)), start).toBe(true)
       expect(r28.some((t) => t.startsWith(start)), start).toBe(false)
     }
-    expect(unseenReleases('2026-09-28').map((r) => r.id)).toEqual(['2026-10-01-3', '2026-10-01-2', '2026-10-01-1', '2026-09-30-2', '2026-09-30-1', '2026-09-29-2', '2026-09-29'])
+    expect(unseenReleases('2026-09-28').map((r) => r.id)).toEqual(['2026-10-01-4', '2026-10-01-3', '2026-10-01-2', '2026-10-01-1', '2026-09-30-2', '2026-09-30-1', '2026-09-29-2', '2026-09-29'])
   })
   // Bug 31 (yeniden, 2026-09-30): Build 63 '2026-09-29-2' girdisini 7 maddeyle içeriyordu. Sonradan eklenenler o girdiyi
   // görmüş kişiye çıkmayacaktı; hepsi 30 Eylül girdisinde, 29 Eylül ikinci güncelleme Build 63'teki hâlinde.
