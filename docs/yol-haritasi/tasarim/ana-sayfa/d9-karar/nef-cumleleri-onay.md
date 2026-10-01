@@ -24,3 +24,11 @@ Bölüm kartları (yarından sonrası)
 13. Ödül: "Sonunda: {ödül}". 1. bölüm: "iris haritan açılır"; 4. bölüm: ✓ "iris haritan başlangıçla yan yana gelir".
 
 Kural: "Yeni" rozeti yalnız kişinin gerçekten ilk kez gördüğü durakta.
+
+## Ek cümleler (SAHİP ONAYLADI, 2026-10-01: "Onaylıyorum"; kapı 5/5)
+Yolun başı (sabah, Nef kartı)
+14. 30. gün: "Bugün 30. gün: yolu bitirince ilk ayın tamam."
+15. Bölümün son günü: "{N}. bölümün son günü: yolu bitirince {ödül}." Ödül yoksa: "{N}. bölümün son günü: yolu bitirince bölüm tamam."
+Yarın kartı (ilk 3 durağın altında)
+16. "ve {N} durak daha"
+Elenenler: "Bugün ilk ayının son günü." (veda gibi), "30. gün. Bir aydır bu yoldasın." (bugünü söylemiyor), "Bugün {N}. bölümün son günü." (kuru), "Bölümün son günü. Bir hafta daha geride kalıyor." (hüzünlü), "+{N} durak" (soğuk), "{N} durak daha var" (yük gibi).
