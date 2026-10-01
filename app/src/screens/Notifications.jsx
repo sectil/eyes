@@ -72,14 +72,14 @@ export default function Notifications({ modules = [], moduleReminders, reminders
       <PageHeader onBack={onBack} eyebrow="Profilim" title="Bildirimler" />
       {!master && <p className="nt-off" role="status"><BellOff size={18} aria-hidden="true" /> Bildirimler kapalı</p>}
       {master && next && (
-        <p className="nt-next"><Bell size={18} aria-hidden="true" /><span>Sıradaki: <b>{`${dot(next.time)} ${next.label}`}</b>. Hiçbiri üst üste gelmez.</span></p>
+        <p className="nt-next"><Bell size={18} aria-hidden="true" /><span>Sıradaki: <b>{`${dot(next.time)} ${next.label}`}</b>.</span></p>
       )}
 
       {/* Gece sessizliği: listenin üstünde, QuietHours .qh-clocks yüzeyi (kehribar saat ailesi), büyük saat aralığı */}
       <button type="button" className="nt-quiet" onClick={() => onQuiet?.()}>
         <span className="nt-q-t"><Moon size={17} aria-hidden="true" />Gece sessizliği</span>
         <span className="nt-q-range">{`${qFrom}–${dot(fromMinutes(q.to))}`}</span>
-        <span className="nt-q-s">Bu saatlerde yeni hatırlatmalar gelmez.</span>
+        <span className="nt-q-s">Bu saatlerde Nef'in seçtiği hatırlatmalar gelmez; senin seçtiğin saatler gelir.</span>
         <ChevronRight size={20} className="nt-chev" aria-hidden="true" />
       </button>
 

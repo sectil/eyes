@@ -62,7 +62,7 @@ export default function QuietHours({ quiet, reminders, moduleReminders = null, o
   }
   return (
     <main className="screen fade-in qh">
-      <PageHeader onBack={onBack} eyebrow="Bildirimler" title="Gece sessizliği" subtitle="Bu saatlerde yeni hatırlatmalar gelmez." />
+      <PageHeader onBack={onBack} eyebrow="Bildirimler" title="Gece sessizliği" subtitle="Bu saatlerde Nef'in seçtiği hatırlatmalar gelmez; senin seçtiğin saatler gelir." />
       <div className="qh-clocks">
         <Stepper label="Başlar" value={q.from} min={F0} max={F1} more="Geç başlat" less="Erken başlat" onSet={(v) => set({ from: v })} />
         <Stepper label="Biter" value={q.to} min={T0} max={T1} more="Geç bitir" less="Erken bitir" onSet={(v) => set({ to: v })} />

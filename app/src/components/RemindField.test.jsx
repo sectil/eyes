@@ -95,6 +95,7 @@ describe('RemindSheet', () => {
     const v = await mount(h(RemindSheet, { moduleId: 'yoga', remind: YOGA, reminders: rem({ optIn: 'yes' }), busy, now: NOW, onSave: (x) => { saved = x } }))
     await v.tap('Saatleri ben seçeyim')
     expect(v.text()).not.toContain('arasında, günde en çok')
+    expect(v.text()).toContain('Günde en çok 3 saat.')
     expect(v.text()).not.toContain('Yarım saat içinde')
     await v.tap('Bir saat daha') // 22.00: Mola 22.15'e 15 dk
     expect(v.text()).toContain('Yarım saat içinde 1 bildirimin daha var')
@@ -227,7 +228,8 @@ describe('Bildirimler', () => {
       modules: [BLINK, YOGA], moduleReminders, reminders: rem({ optIn: 'yes' }), slots, now: NOW,
       next: { time: '10:00', label: 'Göz egzersizi' }, onToggle: (id, on) => { toggled = [id, on] }, onQuiet: () => quietOpened++,
     }))
-    expect(v.text()).toContain('Sıradaki: 10.00 Göz egzersizi. Hiçbiri üst üste gelmez.')
+    expect(v.text()).toContain('Sıradaki: 10.00 Göz egzersizi.')
+    expect(v.text()).not.toContain('Hiçbiri üst üste gelmez')
     expect(v.text()).toContain('Göz kırpma')
     expect(v.text()).toContain('Her gün 09.15 · Nef seçti')
     expect(v.text()).toContain('10.00, 13.30 ve 18.00') // kapatılan satır listede kalır

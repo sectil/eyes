@@ -137,6 +137,8 @@ export default function RemindSheet({
                 {!c.error && <NearNote near={sheetNear(times, i, busy, ownLabel)} />}
               </div>
             ))}
+            {/* Sahip onaylı (2026-10-01): pencere cümlesinin yerine yalnız üst sınır */}
+            <p className="rs-note">{`Günde en çok ${cap} saat.`}</p>
             {times.length < cap && (
               <button type="button" className="btn btn-ghost rs-more" onClick={() => setTimes((ts) => [...ts, fromMinutes(win.to)])}>
                 <Plus size={18} aria-hidden="true" /> Bir saat daha

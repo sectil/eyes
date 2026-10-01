@@ -51,5 +51,6 @@ Değişen testler (hepsi bu kararın sonucu):
   22.00/03.00 elle kurulur; yatma kuralı elle 21.30'a uygulanmaz; sabah havası testinde elle 08.10 kurulur.
 - RemindField.test: pencere cümlesi yok, çakışma engel değil (bilgi satırı, Kaydet açık); gece sessizliği uyarısı
   yalnız saati Nef seçtiyse.
-Açık (sahibe): yeni cümle taslakları — "Günde en çok {N} saat."; Bildirimler'de "Hiçbiri üst üste gelmez." silinsin;
-"Bu saatlerde Nef'in seçtiği hatırlatmalar gelmez; senin seçtiğin saatler gelir."
+Sahip onayladı (2026-10-01, "onaylıyorum"): "Günde en çok {N} saat." (RemindSheet); Bildirimler'de "Hiçbiri üst üste
+gelmez." silindi; Gece sessizliği alt yazısı ve Bildirimler satırı: "Bu saatlerde Nef'in seçtiği hatırlatmalar gelmez;
+senin seçtiğin saatler gelir."
