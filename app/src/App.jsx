@@ -76,7 +76,7 @@ import { viewFor } from './modules/views.js'
 import IPHONE_SCREENS from './lib/iphoneScreens.json'
 import GazeCalibration from './screens/GazeCalibration.jsx'
 import GazeTest from './screens/GazeTest.jsx'
-import { alarmStatus, consumeOpen, cancelAlarm, alarmDiag, ALARM_CHANGED } from './lib/alarmNative.js'
+import { alarmCheck, consumeOpen, cancelAlarm, alarmDiag, ALARM_CHANGED } from './lib/alarmNative.js'
 import { loadAlarm, loadAlarmLog, addAlarmEvent } from './lib/alarmLog.js'
 import { wakeSignal, morningCard, nextRing, daysLabel, hhmm, minOfDay, latency } from './lib/alarm.js'
 import { soundById } from './lib/alarmSounds.js'
@@ -336,7 +336,8 @@ export default function App() {
   const back = () => go(lastTab)
 
   // --- Nefona alarmı (lib/alarm*.js; Artifact "Nefona Alarm" v3) ---
-  // Durum: AlarmKit (iOS 26+) ya da bildirim yedeği ve izni; açılışta ve öne gelince. Aynı anda uyanma işareti:
+  // Durum: AlarmKit (iOS 26+) ya da bildirim yedeği ve izni; açılışta ve öne gelince. AlarmKit'te kayıt açıkken telefonda
+  // alarm yoksa missing: true (Ana sayfa satırı "Alarm telefonda kurulu değil · Yeniden kur"). Aynı anda uyanma işareti:
   // alarmdaki "Nefona'yı aç" (native consumeOpen) ya da çaldıktan sonraki ilk açılış günlüğe yazılır. "Nefona'yı aç"
   // ile açıldıysa "Uyanınca" seçimi varsa sabah ekranı, yoksa Ana sayfa.
   const [alarmSt, setAlarmSt] = useState({ platform: 'web', auth: null })
@@ -354,12 +355,12 @@ export default function App() {
   useEffect(() => {
     if (!isIOSApp()) return undefined
     const check = async () => {
-      setAlarmSt(await alarmStatus())
+      setAlarmSt(await alarmCheck())
       wakeCheck.current?.(await consumeOpen())
     }
     check()
     const onVis = () => document.visibilityState === 'visible' && check()
-    const onChange = () => alarmStatus().then(setAlarmSt).catch(() => {})
+    const onChange = () => alarmCheck().then(setAlarmSt).catch(() => {})
     document.addEventListener('visibilitychange', onVis)
     window.addEventListener(ALARM_CHANGED, onChange)
     return () => {

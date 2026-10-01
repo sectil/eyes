@@ -242,6 +242,24 @@ describe('Ana sayfa alarm satırı ve kartı (v5)', () => {
     expect(r.text()).toContain('alarm yok')
     expect(r.text()).toContain('Alarm kurayım mı?')
   })
+  it('kayıt açık ama telefonda AlarmKit alarmı yok (status.missing): "Alarm telefonda kurulu değil · Yeniden kur" kuruluma götürür', async () => {
+    const alarm = { on: true, hour: 6, minute: 35, days: [1, 2, 3, 4, 5, 6], sound: 'phone', sleep: 'off', wake: 'none', kind: 'alarmkit', setAt: at(2026, 9, 27).toISOString() }
+    mem.set(ALARM_KEY, JSON.stringify(alarm))
+    const onStart = vi.fn()
+    const r = await mount(card({ onStart, status: { platform: 'alarmkit', auth: 'authorized', missing: true } }))
+    expect(r.text()).toBe('Alarm telefonda kurulu değil · Yeniden kur')
+    await r.tap('Alarm telefonda kurulu değil · Yeniden kur')
+    expect(onStart).toHaveBeenCalledWith('alarm')
+    expect(sheetText()).toBe('') // seçenekler sayfası açılmaz
+    // telefonda kuruluysa bugünkü satır
+    expect((await mount(card({ status: { platform: 'alarmkit', auth: 'authorized', missing: false } }))).text()).toBe('06:35alarm · yarın')
+    // eski bildirim hatırlatması kaydı AlarmKit'te aranmaz: bugünkü satır
+    mem.set(ALARM_KEY, JSON.stringify({ ...alarm, kind: 'notify' }))
+    expect((await mount(card({ status: { platform: 'alarmkit', auth: 'authorized', missing: true } }))).text()).toBe('06:35hatırlatma · yarın')
+    // kayıt kapalıysa "— alarm yok"
+    mem.set(ALARM_KEY, JSON.stringify({ ...alarm, on: false }))
+    expect((await mount(card({ now: at(2026, 9, 28, 14, 0), status: { platform: 'alarmkit', auth: 'authorized', missing: true } }))).text()).toBe('—alarm yok')
+  })
   it('Profil\'den kapatılmışsa hiçbiri çizilmez (satır, akşam sorusu)', async () => {
     setPrefs({ alarmCard: false })
     expect((await mount(card())).text()).toBe('')
@@ -322,6 +340,40 @@ describe('kurulum sayfası', () => {
     expect(r.text()).toContain('Yalnız yarın')
     await r.tap('Hayır')
     expect(r.text()).not.toContain('Ne zaman sussun?')
+  })
+  it('gün seçilmemişse kur düğmesi "Yalnız yarın kur" (tek seferlik kurar); ilk çalış bugünse eski yazı kalır', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(EVE)
+    onTestFinished(() => vi.useRealTimers())
+    const web = await mount(h(AlarmSetup, { status: { platform: 'web', auth: null }, now: EVE, onBack: () => {} }))
+    await web.tap('Her gün')
+    await web.tap('Her gün')
+    expect(web.text()).toContain('Yalnız yarın kur')
+    expect(web.text()).not.toContain('Kur · 07:00')
+    await web.tap('Pt')
+    expect(web.text()).toContain('Kur · 07:00')
+    expect(web.text()).not.toContain('Yalnız yarın kur')
+    // uyku sesiyle: "Yalnız kur · 07:00" yerine "Yalnız yarın kur"; dokununca tek seferlik kurulur
+    native.scheduleAlarm.mockClear()
+    native.scheduleAlarm.mockResolvedValueOnce({ ok: true, snooze: false })
+    const onDone = vi.fn()
+    const r = await mount(h(AlarmSetup, { status: { platform: 'alarmkit', auth: 'authorized' }, now: EVE, onDone, onBack: () => {} }))
+    await r.tap('Her gün')
+    await r.tap('Her gün')
+    expect(r.text()).toContain('Kur ve uyku sesini başlat')
+    await r.tap('Yalnız yarın kur')
+    expect(native.scheduleAlarm).toHaveBeenCalledWith(expect.objectContaining({ hour: 7, minute: 0, days: [], at: at(2026, 9, 29, 7, 0).toISOString() }), 'alarmkit')
+    expect(onDone).toHaveBeenCalledWith(undefined)
+    expect(loadAlarmLog().at(-1)).toMatchObject({ type: 'set', days: [], snooze: false })
+    // sabah 05.00'te 07:00 tek seferlik bugün çalar: "yarın" yazılmaz
+    mem.clear()
+    const dawn = at(2026, 9, 29, 5, 0)
+    vi.setSystemTime(dawn)
+    const m = await mount(h(AlarmSetup, { status: { platform: 'web', auth: null }, now: dawn, onBack: () => {} }))
+    await m.tap('Her gün')
+    await m.tap('Her gün')
+    expect(m.text()).not.toContain('Yalnız yarın kur')
+    expect(m.text()).toContain('Kur · 07:00')
   })
   it('"Her gün" yedi günü seçer, yeniden dokununca boşaltır; düzen notu yalnız eksik günlerde', async () => {
     const r = await mount(h(AlarmSetup, { status: { platform: 'web', auth: null }, now: EVE, onBack: () => {} }))

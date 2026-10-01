@@ -65,6 +65,9 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
   // Seçili günler yarını içermiyorsa ilk çalış yazılır ("Kur · 07:00" yarın sanılmasın)
   const first = nextOccurrence({ hour: Math.floor(time / 60), minute: time % 60, days }, now)
   const firstIsTomorrow = first && keyDay(dayKey(first)) - keyDay(dayKey(now)) <= 1
+  // Gün seçilmemiş: tek seferlik; "Kur" düğmesi bunu söyler (sahip onaylı 2026-10-01; alarm-risk.md N1). İlk çalış
+  // bugünse "yarın" yanlış olur: o zaman düğme eski yazısıyla kalır
+  const onceTomorrow = !days.length && first && keyDay(dayKey(first)) - keyDay(dayKey(now)) === 1
   const toggleDay = (x) => setDays((ds) => (ds.includes(x) ? ds.filter((y) => y !== x) : [...ds, x].sort((a, b) => a - b)))
   const pickTime = (t, other = false) => {
     setTime(t)
@@ -275,12 +278,12 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
             {notify ? 'Hatırlat ve uyku sesini başlat' : 'Kur ve uyku sesini başlat'}
           </button>
           <button type="button" className="btn btn-secondary" disabled={busy || !platform} onClick={() => submit(false)}>
-            {notify ? 'Yalnız hatırlat' : `Yalnız kur · ${hhmm(time)}`}
+            {notify ? 'Yalnız hatırlat' : onceTomorrow ? 'Yalnız yarın kur' : `Yalnız kur · ${hhmm(time)}`}
           </button>
         </>
       ) : (
         <button type="button" className="btn" disabled={busy || !platform} onClick={() => submit(false)}>
-          {notify ? `${withSuffix(time, 'loc')} hatırlat` : `Kur · ${hhmm(time)}`}
+          {notify ? `${withSuffix(time, 'loc')} hatırlat` : onceTomorrow ? 'Yalnız yarın kur' : `Kur · ${hhmm(time)}`}
         </button>
       )}
       {live && <button type="button" className="btn btn-ghost" disabled={busy} onClick={remove}>{notify ? 'Hatırlatmayı kaldır' : 'Alarmı kaldır'}</button>}

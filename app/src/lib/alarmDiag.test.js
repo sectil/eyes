@@ -28,4 +28,16 @@ describe('alarmDiag', () => {
     expect(await alarmDiag({ alarm: null, log: [], native: null, pending: null })).toContain('Kayıt: yok')
     expect(await alarmDiag({ alarm: null, log: [], native: null, pending: null })).toContain('AlarmKit: okunamadı')
   })
+
+  it("'set' olaylarında saat ve günler de yazılır (tek seferlik [] ayrılsın); öteki olaylar değişmez", async () => {
+    const log2 = [
+      { type: 'set', at: '2026-09-29T19:00:00.000Z', via: 'setup', hour: 6, minute: 35, days: [1, 2, 3, 4, 5, 6] },
+      { type: 'set', at: '2026-09-30T19:00:00.000Z', hour: 9, minute: 5, days: [] },
+      { type: 'cancel', at: '2026-09-30T20:00:00.000Z', via: 'home' },
+    ]
+    const t = await alarmDiag({ alarm, log: log2, native: null, pending: null })
+    expect(t).toContain('· 2026-09-29T19:00:00.000Z set (setup) 06:35 · günler [1,2,3,4,5,6]')
+    expect(t).toContain('· 2026-09-30T19:00:00.000Z set 09:05 · günler []')
+    expect(t).toContain('· 2026-09-30T20:00:00.000Z cancel (home)\n')
+  })
 })

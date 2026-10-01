@@ -142,6 +142,9 @@
 .hh-fact.al-fact .al-fact-ar { margin-left: auto; color: var(--ink-3); }
 .hh-fact.al-fact.off, .hh-fact.al-fact.off b { color: var(--ink-3); }
 .hh-fact.al-fact.off .f5 { opacity: 0.55; }
+/* Kayıt açık ama telefonda alarm yok: uyarı rengi; dar ekranda satır kırılır (cümle sayı satırlarından uzun) */
+.hh-fact.al-fact.miss { white-space: normal; color: var(--warn); }
+.hh-fact.al-fact.miss .f5 { color: var(--warn); }
 /* Alt sayfa */
 .al-sh-back { position: fixed; inset: 0; z-index: 1000; background: rgba(2, 5, 8, 0.6); display: flex; align-items: flex-end; justify-content: center; }
 .al-sh {

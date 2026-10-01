@@ -13,6 +13,8 @@ import '../styles/alarm.css'
 // Ana sayfa alarm satırı (Artifact "Nefona Alarm" v5): "gün seninle"nin altında, aynı sayı dili.
 // Kurulu: "07:00 alarm · yarın ›"; dokununca alttan seçenekler (düzenle · uyku sesi · kapat). Kurulu değil: sönük
 // "— alarm yok", dokununca kurulum. Profil → Alarm → "Ana sayfada göster" kapalıysa satır da yok.
+// Kayıt açık ama telefonda (AlarmKit) alarm yok (status.missing; lib/alarmNative.js nativeMissing, sahip 2026-10-01):
+// "Alarm telefonda kurulu değil · Yeniden kur", dokununca kurulum (kayıt kendi ayarıyla açılır).
 const UNDO_MS = 5000
 
 export default function AlarmLine({ status, onStart, now = new Date() }) {
@@ -114,6 +116,17 @@ export default function AlarmLine({ status, onStart, now = new Date() }) {
   if (platform === 'web') return null
   // Kart/satır kapatılsa da "Geri al" şeridi 5 sn kalır (gövdede)
   if (!show) return toast || null
+  if (next && status?.missing && alarm.kind === 'alarmkit') {
+    return (
+      <>
+        <button type="button" className="hh-fact al-fact miss" onClick={() => onStart('alarm')}>
+          <AlarmClockOff size={14} aria-hidden="true" className="f5" /><span>Alarm telefonda kurulu değil · Yeniden kur</span>
+          <ChevronRight size={13} aria-hidden="true" className="al-fact-ar" />
+        </button>
+        {toast}
+      </>
+    )
+  }
   if (!next) {
     return (
       <>

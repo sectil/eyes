@@ -5,7 +5,8 @@
 import { Alarm, isIOSApp } from './native.js'
 import { notifyPermission } from './restNotify.js'
 import { soundById } from './alarmSounds.js'
-import { loadAlarm, loadAlarmLog } from './alarmLog.js'
+import { loadAlarm, loadAlarmLog, addAlarmEvent } from './alarmLog.js'
+import { nextRing } from './alarm.js'
 
 export const FALLBACK_BASE = 7600
 export const FALLBACK_ONCE = 7607
@@ -73,7 +74,8 @@ async function scheduleOn(cfg, platform) {
       const r = await Alarm.schedule({ hour: cfg.hour, minute: cfg.minute, weekdays: cfg.days, ...(file ? { sound: file } : {}) })
       // iOS 26'ya güncellemeden önce kurulmuş bildirim yedeği kalmasın (ikisi birden çalmasın)
       await cancelFallback()
-      // snooze: alarmda "Ertele" düğmesi var mı (iOS reddederse "Nefona'yı aç" ile kurulur; AlarmPlugin.swift)
+      // snooze: alarmda "Ertele" düğmesi var mı. Erteleme kaldırıldı (sahip 2026-10-01; AlarmPlugin.swift schedule ve
+      // docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/alarm-risk.md): bugünkü derleme hep false döner
       return { ok: true, snooze: r?.snooze !== false }
     } catch (e) {
       // MISSING: ses dosyası uygulama paketinde yok (AlarmPlugin.swift); yeniden denemek işe yaramaz
@@ -110,6 +112,40 @@ async function cancelFallback() {
   } catch {
     // yoksay
   }
+}
+
+// Kayıt ile telefonu karşılaştırır (alarm-risk.md Adım 1.2; sahip 2026-10-01). Yalnız AlarmKit: kayıt açık, türü
+// 'alarmkit' ve sırada bir çalışı varken (çalmış tek seferlik alarmı iOS siler; o kayıp değildir) Alarm.current()
+// "kurulu değil" derse true. Web ve bildirim yedeği (iOS 15–25) için hep false; okunamazsa false (yanlış uyarı yok).
+// Kayıt, telefona sorulduktan SONRA okunur: kapatma/kurma anındaki ALARM_CHANGED'de kayıt yeni hâliyle karşılaştırılsın.
+// Kayıp günlüğe 'nativeMissing' olarak bir kez yazılır (son kurma/kapatmadan beri yazılmadıysa).
+// current verilebilir (test); verilmezse eklentiden okunur.
+export async function nativeMissing(platform, { now = new Date(), current } = {}) {
+  if (platform !== 'alarmkit') return false
+  let c = current
+  if (c === undefined) {
+    try {
+      c = await Alarm.current()
+    } catch {
+      return false
+    }
+  }
+  if (!c || c.scheduled !== false) return false
+  const alarm = loadAlarm()
+  if (!alarm || alarm.kind !== 'alarmkit' || !nextRing(alarm, now)) return false
+  const log = loadAlarmLog()
+  let seen = false
+  for (let i = log.length - 1; i >= 0 && log[i].type !== 'set' && log[i].type !== 'cancel'; i--) seen ||= log[i].type === 'nativeMissing'
+  if (!seen) {
+    addAlarmEvent('nativeMissing', { hour: alarm.hour, minute: alarm.minute, days: alarm.days, setAt: alarm.setAt, id: c.id ?? null }, now)
+  }
+  return true
+}
+
+// alarmStatus + telefondaki alarm kayıp mı (App açılışta, öne gelince ve ALARM_CHANGED'de; AlarmLine "missing"i okur)
+export async function alarmCheck() {
+  const st = await alarmStatus()
+  return { ...st, missing: await nativeMissing(st.platform) }
 }
 
 // İki yolu da iptal eder (kaldır, "Tüm verileri sil"). Hata yutulur.
@@ -179,7 +215,11 @@ export async function alarmDiag({ alarm = loadAlarm(), log = loadAlarmLog(), nat
     for (const a of list) lines.push(`· ${a.id === n.stored ? '(saklanan) ' : ''}${a.state} · ${a.schedule}`)
   }
   lines.push('Son olaylar:')
-  for (const e of log.slice(-10)) lines.push(`· ${e.at} ${e.type}${e.via ? ` (${e.via})` : ''}`)
+  // 'set': saat ve günler de (tek seferlik mi haftalık mı ayrılsın; alarm-risk.md N1)
+  const setInfo = (e) => (e.type === 'set' && Number.isInteger(e.hour) && Number.isInteger(e.minute)
+    ? ` ${String(e.hour).padStart(2, '0')}:${String(e.minute).padStart(2, '0')} · günler [${Array.isArray(e.days) ? e.days.join(',') : '?'}]`
+    : '')
+  for (const e of log.slice(-10)) lines.push(`· ${e.at} ${e.type}${e.via ? ` (${e.via})` : ''}${setInfo(e)}`)
   // Bekleyen bildirimler (hatırlatma "gelmedi" tanısı, sahip 2026-10-01): izin ve iOS'ta kurulu olanlar
   let p = pending
   if (p === undefined) {
