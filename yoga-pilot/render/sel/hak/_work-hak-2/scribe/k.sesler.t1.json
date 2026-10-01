@@ -1,0 +1,17 @@
+{
+ "unit": "k.sesler",
+ "take": "t1",
+ "asset_id": "jzMXrIwFF55Axn5xTfwn",
+ "asset_size_bytes": 74140,
+ "ref_node": "K3M68nfXZOCzaQPnaoh2",
+ "stt_node": "ZGfaZinFCbXoqPH1UZMc",
+ "session_id": "BPcT5Xmsr02aYouLA8Hi",
+ "generation_id": "cT68Y0R2UNLquJjlSuNV",
+ "actual_credits": 19.36,
+ "actual_cents": 0.352,
+ "spoken_duration_secs": 3.36,
+ "scribe_text": "Yakındaki ve uzaktaki sesler yeniden duyuluyor",
+ "tts": "Yakındaki ve uzaktaki sesler yeniden duyuluyor.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 6\n}"
+}

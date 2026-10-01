@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hava Rızası Katmanlı</title>
+<meta name="description" content="weather rızası, katmanlı düzen R4: bölüm başlıklarının altında ilk cümle, pasif İzin ver altında yönerge; iki tema, 390 ve 320 pt.">
+<link rel="stylesheet" href="file:///home/user/eyes/app/node_modules/@fontsource-variable/onest/index.css">
+<link rel="stylesheet" href="file:///home/user/eyes/app/node_modules/@fontsource-variable/unbounded/index.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Onest:wght@400;500;600;700&display=swap">
+<style>
+/* ============ Sayfa çevresi ============ */
+:root {
+  --pg-bg: #eef2f4; --pg-ink: #0d1720; --pg-ink-2: #3a4955; --pg-ink-3: #5b6976;
+  --f-display: 'Unbounded Variable', 'Unbounded', 'Avenir Next', system-ui, sans-serif;
+  --f-body: 'Onest Variable', 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: var(--f-display); --font-body: var(--f-body);
+  --pw: 390px; --ph: 844px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --pg-bg: #070c12; --pg-ink: #eef3f6; --pg-ink-2: #b9c4cd; --pg-ink-3: #8b98a5; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --pg-bg: #070c12; --pg-ink: #eef3f6; --pg-ink-2: #b9c4cd; --pg-ink-3: #8b98a5; color-scheme: dark; }
+body.w320 { --pw: 320px; --ph: 568px; }
+* { box-sizing: border-box; }
+body { background: var(--pg-bg); color: var(--pg-ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; margin: 0; }
+p { margin: 0; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 28px 20px 60px; }
+@media (max-width: 480px) { .wrap { padding-inline: 16px; } }
+.pg-h { font: 700 1.6rem/1.15 var(--f-display); letter-spacing: -0.015em; margin: 0; }
+.pg-lead { color: var(--pg-ink-2); margin-top: 8px; max-width: 44rem; }
+.sec { margin-top: 34px; }
+.sec > h2 { font: 600 1.1rem/1.2 var(--f-display); margin: 0; }
+.sec .note { color: var(--pg-ink-2); margin-top: 6px; max-width: 46rem; font-size: 0.92rem; }
+.strip { display: flex; flex-wrap: wrap; gap: 22px; padding-top: 16px; overflow-x: auto; }
+.cell { margin: 0; display: grid; gap: 8px; align-content: start; }
+.cap { font: 600 0.8rem/1.3 var(--f-body); color: var(--pg-ink-3); }
+
+/* ============ Telefon: app/src/styles.css tokenları (+ G için Yön C gökyüzü) ============ */
+.t-light {
+  --bg: #f3f6f8; --bg-grad: radial-gradient(900px 520px at 0% -12%, rgba(17,169,184,0.12) 0%, rgba(17,169,184,0) 60%);
+  --surface: #ffffff; --surface-2: #e9eef2; --surface-3: #dde4ea; --border: #e1e7ec;
+  --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --accent: #0b7480; --accent-ink: #ffffff; --accent-soft: rgba(17,169,184,0.12);
+  --accent-grad: linear-gradient(90deg, #0b7480, #2458cc); --accent-glow: 0 8px 22px -10px rgba(36,88,204,0.55);
+  --iris-1: #11a9b8; --iris-2: #2f6bea;
+  --shadow: 0 1px 2px rgba(11,18,25,0.04), 0 8px 24px rgba(11,18,25,0.05);
+  --frame: #1a2128;
+  --sky: radial-gradient(70% 34% at 88% -4%, rgba(255,196,110,0.42) 0%, rgba(255,196,110,0) 70%),
+         linear-gradient(180deg, #bcdcf1 0%, #d6e9f5 26%, #e9f2f7 48%, #f3f6f8 72%);
+  --glass: rgba(255,255,255,0.80); --glass-line: rgba(255,255,255,0.95); --glass-rule: rgba(11,18,25,0.08);
+  --nef-glow: 0 0 0 6px rgba(17,169,184,0.10), 0 10px 30px -6px rgba(47,107,234,0.40);
+}
+.t-dark {
+  --bg: #070c12; --bg-grad: radial-gradient(900px 520px at 0% -12%, rgba(25,194,209,0.12) 0%, rgba(25,194,209,0) 60%);
+  --surface: #0f171f; --surface-2: #141e28; --surface-3: #1c2834; --border: rgba(255,255,255,0.08);
+  --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --accent: #19c2d1; --accent-ink: #041017; --accent-soft: rgba(25,194,209,0.14);
+  --accent-grad: linear-gradient(90deg, #19c2d1, #3e7bfa); --accent-glow: 0 8px 24px -8px rgba(25,194,209,0.55);
+  --iris-1: #19c2d1; --iris-2: #3e7bfa;
+  --shadow: none;
+  --frame: #2a323b;
+  --sky: radial-gradient(70% 30% at 86% -4%, rgba(191,230,255,0.16) 0%, rgba(191,230,255,0) 70%),
+         radial-gradient(130% 62% at 50% -8%, #173656 0%, #0c1a2b 50%, #070c12 100%);
+  --glass: rgba(16,27,39,0.78); --glass-line: rgba(255,255,255,0.10); --glass-rule: rgba(255,255,255,0.08);
+  --nef-glow: 0 0 0 6px rgba(25,194,209,0.10), 0 0 34px rgba(62,123,250,0.45);
+}
+.shot { padding: 11px; }
+.phone { position: relative; width: var(--pw); height: var(--ph); border-radius: 46px; overflow: hidden;
+  background: var(--bg-grad), var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px;
+  box-shadow: 0 0 0 9px var(--frame), 0 0 0 10px rgba(127,140,150,0.35); }
+.phone.sky { background: var(--sky); }
+body.w320 .phone { border-radius: 30px; }
+.sb { display: flex; justify-content: space-between; align-items: center; padding: 14px 28px 0; height: 46px; font: 600 0.92rem/1 var(--f-body); }
+body.w320 .sb { padding: 8px 18px 0; height: 30px; font-size: 0.8rem; }
+.sb i { display: inline-flex; gap: 5px; align-items: center; font-style: normal; letter-spacing: -1px; }
+.sb i s { display: inline-block; width: 18px; height: 9px; border-radius: 3px; box-shadow: inset 0 0 0 1.5px currentColor; position: relative; }
+.sb i s::after { content: ''; position: absolute; inset: 2px 5px 2px 2px; background: currentColor; border-radius: 1px; }
+.home-ind { position: absolute; bottom: 8px; left: 50%; width: 134px; margin-left: -67px; height: 5px; border-radius: 3px; background: var(--ink); opacity: 0.85; }
+body.w320 .home-ind { display: none; }
+.ico { width: 18px; height: 18px; flex: none; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---- app .btn (styles.css 188-200, birebir) ---- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 54px; padding: 14px 18px;
+  font-family: var(--f-body); font-size: 1rem; font-weight: 650; letter-spacing: -0.01em; line-height: normal;
+  border: 1px solid transparent; border-radius: 16px; background: var(--accent-grad); color: var(--accent-ink); box-shadow: var(--accent-glow); }
+.btn[disabled] { opacity: 0.4; }
+.btn-secondary { background: var(--surface); color: var(--ink); border-color: var(--border); box-shadow: var(--shadow); }
+.btn-ghost { background: transparent; color: var(--ink-2); border-color: var(--border); font-weight: 550; box-shadow: none; }
+
+
+/* ============ R4 · Katmanlı rıza sayfası (R3 + sahip kararı) ============
+   R4 farkı: her bölüm başlığının altında o bölümün İLK CÜMLESİ hep görünür (kısaltmasız, aynen);
+   dokununca bölümün kalanı aynı paragrafta devam eder. Kapalı "İzin ver"in altında "Önce kutuyu işaretle".
+   consent.css'in dili (yüzey, köşe, renk, yazı) aynen; değişen yalnız düzen:
+   - dört satır kapalı gelir, dokununca açılır (metin aynı, gizli değil, bir dokunuş uzakta);
+   - kutu + düğmeler sayfanın dibine sabitlenir, üst kısım gerekirse kendi içinde kayar;
+   - "İzin ver" kapalıyken soluk değil, düz ve okunaklı bir yüzeydir; "Şimdi değil" ile aynı boy, aynı yazı. */
+.cs-back { position: absolute; inset: 0; z-index: 10; background: rgba(2, 5, 8, 0.72); display: flex; align-items: flex-end; justify-content: center; padding-top: 58px; }
+.cs-sheet { width: 100%; max-height: 100%; display: flex; flex-direction: column; min-height: 0;
+  background: var(--surface); border-radius: 32px 32px 0 0; border-top: 1px solid var(--border); }
+.cs-body { position: relative; flex: 1 1 auto; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 10px 22px 4px; scrollbar-width: none; }
+.cs-body::-webkit-scrollbar { display: none; }
+.cs-body > * { flex: none; }
+.cs-sheet.more .cs-body { -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(180deg, #000 calc(100% - 28px), transparent); }
+.cs-grab { width: 40px; height: 5px; border-radius: 3px; background: var(--surface-3); justify-self: center; align-self: center; }
+.cs-top { display: grid; gap: 14px; }
+.cs-mark { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; color: var(--accent);
+  background: linear-gradient(140deg, color-mix(in srgb, var(--iris-1) 18%, transparent), color-mix(in srgb, var(--iris-2) 18%, transparent)); }
+.cs-mark .ico { width: 26px; height: 26px; }
+.cs-sheet h2 { margin: 0; font: 700 1.35rem/1.15 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
+.cs-lead { margin: -4px 0 0; color: var(--ink-2); font-size: 0.9rem; line-height: 1.5; }
+
+/* Dört satır: cs-facts'in kutusu (18px köşe, 1px ara çizgi, surface-2), satırlar düğme */
+.cs-facts { margin: 0; display: grid; gap: 1px; border-radius: 18px; overflow: hidden; background: var(--border); }
+.cs-row { background: var(--surface-2); }
+.cs-row:not(.solo) { cursor: pointer; }
+.cs-q { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 46px; padding: 10px 12px 10px 14px; border: 0; background: none;
+  font: 600 0.92rem/1.25 var(--font-body); color: var(--ink); text-align: left; }
+.cs-q > span { flex: 1; white-space: nowrap; }
+.cs-q .ico { width: 18px; height: 18px; color: var(--ink-3); transition: transform 0.2s; }
+.cs-row.open .cs-q .ico { transform: rotate(180deg); color: var(--accent); }
+.cs-q { padding-bottom: 4px; min-height: 0; padding-top: 12px; }
+.cs-a { margin: 0; padding: 0 44px 12px 14px; font-size: 0.88rem; line-height: 1.45; color: var(--ink-2); }
+.cs-a .rest { display: none; }
+.cs-row.open .cs-a .rest { display: inline; }
+.cs-row.solo .cs-a { padding-right: 14px; }
+.cs-row.open { background: color-mix(in srgb, var(--surface-2) 70%, var(--surface)); }
+
+/* Dip: kutu + iki düğme + dip not, hep görünür */
+.cs-act { flex: none; display: grid; gap: 12px; padding: 12px 22px 30px; border-top: 1px solid var(--border); background: var(--surface); }
+.cs-ok { position: relative; display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: 18px; border: 1.5px solid var(--border); }
+.cs-box { width: 24px; height: 24px; flex: none; margin-top: 1px; border-radius: 7px; border: 2px solid var(--ink-3); display: grid; place-items: center; color: var(--accent-ink); }
+.cs-ok > span:last-child { font-weight: 500; font-size: 0.86rem; line-height: 1.4; }
+.cs-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cs-btns { align-items: start; }
+.cs-col { display: grid; gap: 5px; justify-items: center; }
+.cs-hint { font-size: 0.75rem; line-height: 1.2; color: var(--ink-2); white-space: nowrap; }
+.cs-btns .btn { min-height: 52px; padding: 12px 10px; font-weight: 650; white-space: nowrap; }
+/* Kapalı "İzin ver": opaklık yok; düz nötr yüzey, tam kontrastlı yazı (açık tema ≈ 9:1, koyu ≈ 9:1) */
+.cs-btns .btn.is-off { background: var(--surface-3); color: var(--ink-2); box-shadow: none; border-color: transparent; }
+.cs-btns .btn.later { background: transparent; color: var(--ink); border: 1.5px solid color-mix(in srgb, var(--ink-3) 55%, transparent); box-shadow: none; }
+.cs-foot { margin: -2px 0 0; text-align: center; font-size: 0.75rem; color: var(--ink-3); line-height: 1.4; }
+
+/* 320 × 568: aynı düzen, sıkı ölçü */
+body.w320 .cs-back { padding-top: 34px; }
+body.w320 .cs-sheet { border-radius: 24px 24px 0 0; }
+body.w320 .cs-body { gap: 10px; padding: 8px 16px 4px; }
+body.w320 .cs-top { grid-template-columns: 36px minmax(0, 1fr); gap: 10px; align-items: start; }
+body.w320 .cs-mark { width: 36px; height: 36px; border-radius: 11px; margin-top: 1px; }
+body.w320 .cs-mark .ico { width: 20px; height: 20px; }
+body.w320 .cs-sheet h2 { font-size: 1.02rem; line-height: 1.2; }
+body.w320 .cs-lead { margin: -2px 0 0; font-size: 0.82rem; line-height: 1.42; }
+body.w320 .cs-facts { border-radius: 14px; }
+body.w320 .cs-q { min-height: 0; padding: 9px 10px 3px 12px; font-size: 0.86rem; }
+body.w320 .cs-q .ico { width: 16px; height: 16px; }
+body.w320 .cs-a { padding: 0 36px 9px 12px; font-size: 0.82rem; line-height: 1.4; }
+body.w320 .cs-row.solo .cs-a { padding-right: 12px; }
+body.w320 .cs-hint { font-size: 0.7rem; }
+body.w320 .cs-col { gap: 4px; }
+body.w320 .cs-act { gap: 8px; padding: 9px 16px 12px; }
+body.w320 .cs-ok { gap: 10px; padding: 9px 11px; border-radius: 14px; }
+body.w320 .cs-box { width: 22px; height: 22px; border-radius: 6px; }
+body.w320 .cs-ok > span:last-child { font-size: 0.79rem; line-height: 1.36; }
+body.w320 .cs-btns { gap: 8px; }
+body.w320 .cs-btns .btn { min-height: 46px; padding: 10px 8px; font-size: 0.94rem; border-radius: 14px; }
+body.w320 .cs-foot { font-size: 0.68rem; margin: 0; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cloudsun" viewBox="0 0 24 24"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+</svg>
+<main class="wrap">
+  <h1 class="pg-h">Hava rızası · katmanlı (R4)</h1>
+  <p class="pg-lead">İlk ekranda başlık, metnin kendi girişi, dört bölüm başlığı ve her birinin altında o bölümün ilk cümlesi (aynen), kutu ve iki düğme. Dokununca bölümün kalanı aynı paragrafta açılır ("Ne işe yarar?" tek cümle, açılacak kalanı yok); metin rizalar-taslak.md <code>weather</code>, harfi harfine. Kutu ve düğmeler sayfanın dibinde sabit; açılan bölüm yer isterse yalnız üst kısım kayar.</p>
+  <section class="sec"><h2>R-kapali · bölümler kapalı</h2><p class="note">Kutu işaretsiz; "İzin ver" pasif ama okunur, altında "Önce kutuyu işaretle". Sığmazsa yalnız üst kısım kayar; kutu ve düğmeler dipte sabit.</p><div class="strip" data-set="R-kapali"></div></section>
+  <section class="sec"><h2>R-acik · "Ne kadar kalır?" açık</h2><p class="note">Bölümün tamamı: güncel silme cümlesi ("il ve ilçe adı, önbellek ve hava özeti silinir") görünür. 320'de üst kısım kendi içinde kaydırılmış hâli.</p><div class="strip" data-set="R-acik"></div></section>
+</main>
+
+<!-- ConsentSheet.jsx yapısı; dl → düğmeli satırlar. Metin: rizalar-taslak.md `weather`, harfi harfine. -->
+<template id="tpl-R">
+  <div class="phone">
+    <div class="sb"><span>09:42</span><i>●●● <s></s></i></div>
+    <div class="cs-back" role="presentation">
+      <div class="cs-sheet" role="dialog" aria-modal="true" aria-labelledby="cs-title">
+        <div class="cs-body">
+          <span class="cs-grab" aria-hidden="true"></span>
+          <div class="cs-top">
+            <span class="cs-mark" aria-hidden="true"><svg class="ico"><use href="#i-cloudsun"/></svg></span>
+            <h2 id="cs-title">Bulunduğun yerin havasını da göstereyim mi?</h2>
+          </div>
+          <p class="cs-lead">İstersen Ana sayfada hava ve yağmur saatini gösteririm. İzin vermesen de her şey açık kalır; il ve ilçeyi listeden de seçebilirsin.</p>
+          <div class="cs-facts">
+            <div class="cs-row"><button class="cs-q" aria-expanded="false"><span>Ne kaydedilir?</span><svg class="ico"><use href="#i-chev"/></svg></button><p class="cs-a"><span class="first">Yaklaşık konumun ya da seçtiğin il ve ilçenin merkezi.</span><span class="rest"> Telefonda yalnız il ve ilçe adı kalır. Konumunun kendisi saklanmaz.</span></p></div>
+            <div class="cs-row solo"><div class="cs-q"><span>Ne işe yarar?</span></div><p class="cs-a"><span class="first">Hava, yağmur olasılığı ve istersen alarmdan sonra gelen sabah havası bildirimi.</span></p></div>
+            <div class="cs-row"><button class="cs-q" aria-expanded="false"><span>Nerede durur?</span><svg class="ico"><use href="#i-chev"/></svg></button><p class="cs-a"><span class="first">Hava bilgisi için konum yuvarlanarak Apple'ın hava servisine (yurt dışı) gider.</span><span class="rest"> Sabah bildirimi yenilenirken yalnız seçtiğin yerin merkezi gider. Sunucumuza ve Nef'e gitmez.</span></p></div>
+            <div class="cs-row" data-k="kalir"><button class="cs-q" aria-expanded="false"><span>Ne kadar kalır?</span><svg class="ico"><use href="#i-chev"/></svg></button><p class="cs-a"><span class="first">Telefonda il ve ilçe adı, hava önbelleği ve son 90 günün günlük hava özeti.</span><span class="rest"> İzin kapanınca ilk açılışta il ve ilçe adı, önbellek ve hava özeti silinir.</span></p></div>
+          </div>
+        </div>
+        <div class="cs-act">
+          <label class="cs-ok">
+            <span class="cs-box" aria-hidden="true"></span>
+            <span>Hava bilgisi için yaklaşık konumumun ya da seçtiğim yerin merkezinin yurt dışındaki Apple hava servisine gönderilmesine açık rıza veriyorum.</span>
+          </label>
+          <div class="cs-btns">
+            <span class="btn later" role="button">Şimdi değil</span>
+            <span class="cs-col"><span class="btn is-off" role="button" aria-disabled="true" aria-describedby="cs-hint">İzin ver</span><span class="cs-hint" id="cs-hint">Önce kutuyu işaretle</span></span>
+          </div>
+          <p class="cs-foot">İznini Profilim → İzinlerim'den her an geri çekebilirsin.</p>
+        </div>
+      </div>
+    </div>
+    <span class="home-ind"></span>
+  </div>
+</template>
+
+<script>
+(function () {
+  var data = { 'R-kapali': { open: null, cap: 'Bölümler kapalı, kutu işaretsiz' }, 'R-acik': { open: 'kalir', cap: '"Ne kadar kalır?" açık' } };
+  document.querySelectorAll('.strip').forEach(function (strip) {
+    var set = strip.dataset.set, d = data[set];
+    ['acik', 'koyu'].forEach(function (th) {
+      var cell = document.createElement('figure'); cell.className = 'cell';
+      var shot = document.createElement('div'); shot.className = 'shot';
+      shot.dataset.shot = set + '-' + th;
+      shot.style.background = th === 'acik' ? '#eef2f4' : '#070c12';
+      var frag = document.getElementById('tpl-R').content.cloneNode(true);
+      frag.querySelector('.phone').classList.add(th === 'acik' ? 't-light' : 't-dark');
+      if (d.open) { var row = frag.querySelector('[data-k="' + d.open + '"]'); row.classList.add('open'); row.querySelector('.cs-q').setAttribute('aria-expanded', 'true'); }
+      shot.appendChild(frag); cell.appendChild(shot);
+      var cap = document.createElement('figcaption'); cap.className = 'cap';
+      cap.textContent = set + ' · ' + (th === 'acik' ? 'açık' : 'koyu') + ' · ' + d.cap;
+      cell.appendChild(cap); strip.appendChild(cell);
+    });
+  });
+  // Uygulamadaki davranış: dokununca aç/kapa
+  document.addEventListener('click', function (e) {
+    var row = e.target.closest('.cs-row'); if (!row || row.classList.contains('solo')) return;
+    var q = row.querySelector('.cs-q'), on = !row.classList.contains('open');
+    row.classList.toggle('open', on); q.setAttribute('aria-expanded', on ? 'true' : 'false'); window.layout();
+  });
+  // Açık bölüm görünür olsun (üst kısım kendi içinde kayar); taşma varsa dipte solma.
+  window.layout = function () {
+    document.querySelectorAll('.cs-sheet').forEach(function (sh) {
+      var b = sh.querySelector('.cs-body'); b.scrollTop = 0;
+      var open = b.querySelector('.cs-row.open');
+      if (open) { var over = open.offsetTop + open.offsetHeight - b.clientHeight + 6; if (over > 0) b.scrollTop = over; }
+      sh.classList.toggle('more', b.scrollHeight - b.scrollTop - b.clientHeight > 2);
+    });
+  };
+  window.layout();
+})();
+</script>
+</body>
+</html>

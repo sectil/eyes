@@ -1,0 +1,15 @@
+{
+ "unit": "c2.yer",
+ "take": "t6",
+ "asset_id": "IEFJKutXBl8Mn5zS3jdW",
+ "source_node_id": "VrykqRSsmuNwaeCb2enR",
+ "stt_node_id": "PnghZlMghypxj8NflRsg",
+ "session_id": "N5r9wNnGki3zUexpwwUv",
+ "generation_id": "kOx7PlyFi6WwdOwKJBs1",
+ "actual_credits": 45.76,
+ "actual_cents": 0.832,
+ "scribe_text": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta",
+ "spoken_duration_secs": "8.14",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 17\n}"
+}

@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nefona Gece Dili</title>
+<meta name="description" content="Yön C: Gece sessizliği ve birleşik bildirim; koyu zeminde yumuşak ışık, saatler kahraman, tek sıcak vurgu. İki tema, 390 ve 320 pt.">
+<link rel="stylesheet" href="file:///home/user/eyes/app/node_modules/@fontsource-variable/onest/index.css">
+<link rel="stylesheet" href="file:///home/user/eyes/app/node_modules/@fontsource-variable/unbounded/index.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Onest:wght@400;500;600;700&display=swap">
+<style>
+/* Sayfa çevresi */
+:root {
+  --pg-bg: #eef2f4; --pg-ink: #0d1720; --pg-ink-2: #3a4955; --pg-ink-3: #5b6976; --pg-line: #d8e0e6;
+  --f-display: 'Unbounded Variable', 'Unbounded', 'Avenir Next', system-ui, sans-serif;
+  --f-body: 'Onest Variable', 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --pw: 390px; --ph: 844px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --pg-bg: #070c12; --pg-ink: #eef3f6; --pg-ink-2: #b9c4cd; --pg-ink-3: #8b98a5; --pg-line: rgba(255,255,255,0.09); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --pg-bg: #070c12; --pg-ink: #eef3f6; --pg-ink-2: #b9c4cd; --pg-ink-3: #8b98a5; --pg-line: rgba(255,255,255,0.09); color-scheme: dark; }
+body.w320 { --pw: 320px; --ph: 568px; }
+* { box-sizing: border-box; }
+body { background: var(--pg-bg); color: var(--pg-ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; margin: 0; }
+p { margin: 0; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 28px 20px 60px; }
+@media (max-width: 480px) { .wrap { padding-inline: 16px; } }
+.pg-h { font: 700 1.6rem/1.15 var(--f-display); letter-spacing: -0.015em; margin: 0; }
+.pg-lead { color: var(--pg-ink-2); margin-top: 8px; max-width: 42rem; }
+.sec { margin-top: 34px; }
+.sec h2 { font: 600 1.1rem/1.2 var(--f-display); margin: 0; }
+.strip { display: flex; flex-wrap: wrap; gap: 22px; padding-top: 16px; }
+.cell { margin: 0; display: grid; gap: 8px; align-content: start; }
+.cap { font: 600 0.8rem/1.3 var(--f-body); color: var(--pg-ink-3); }
+
+/* ============ Telefon: app/src/styles.css tokenları + Yön C gece katmanı ============ */
+.t-light {
+  --bg: #f3f6f8; --surface: #ffffff; --surface-2: #e9eef2; --surface-3: #dde4ea; --border: #e1e7ec;
+  --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --accent: #0b7480; --accent-soft: rgba(17,169,184,0.12);
+  --lens: #f5a623; --lens-text: #9a5b06; --lens-soft: rgba(245,166,35,0.16); --lens-ink: #2a1600;
+  --shadow: 0 1px 2px rgba(11,18,25,0.04), 0 8px 24px rgba(11,18,25,0.05);
+  --frame: #1a2128;
+  /* Yön C: açık temada gece dilinin karşılığı — alacakaranlık ışığı */
+  --c-ground: radial-gradient(130% 55% at 50% -8%, rgba(245,166,35,0.13) 0%, rgba(245,166,35,0) 62%), #f3f6f8;
+  --c-panel: radial-gradient(90% 80% at 50% 0%, rgba(245,166,35,0.10) 0%, rgba(245,166,35,0) 70%), #ffffff;
+  --c-clock: #9a5b06; --c-glow: none;
+  --c-step: #f1ebe2; --c-step-ink: #6b4a1c;
+}
+.t-dark {
+  --bg: #070c12; --surface: #0f171f; --surface-2: #141e28; --surface-3: #1c2834; --border: rgba(255,255,255,0.08);
+  --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --accent: #19c2d1; --accent-soft: rgba(25,194,209,0.14);
+  --lens: #ffb13b; --lens-text: #ffb13b; --lens-soft: rgba(255,177,59,0.15); --lens-ink: #2a1600;
+  --shadow: none;
+  --frame: #2a323b;
+  /* Yön C: gece göğü zemini, NightScene ile aynı aile */
+  --c-ground: radial-gradient(120% 60% at 50% -6%, #10233a 0%, #081120 48%, #060a12 100%);
+  --c-panel: radial-gradient(90% 90% at 50% 0%, rgba(255,177,59,0.10) 0%, rgba(255,177,59,0) 68%), rgba(15,23,31,0.78);
+  --c-clock: #ffc063; --c-glow: 0 0 28px rgba(255,177,59,0.32);
+  --c-step: rgba(255,255,255,0.07); --c-step-ink: #e8dcc8;
+}
+.shot { padding: 11px; }
+.phone { position: relative; width: var(--pw); min-height: var(--ph); border-radius: 46px; overflow: hidden;
+  background: var(--c-ground); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.4;
+  box-shadow: 0 0 0 9px var(--frame), 0 0 0 10px rgba(127,140,150,0.35); }
+body.w320 .phone { border-radius: 30px; }
+.phone.fix { height: var(--ph); }
+.sb { display: flex; justify-content: space-between; align-items: center; padding: 14px 28px 0; height: 46px; font: 600 0.92rem/1 var(--f-body); }
+body.w320 .sb { padding: 8px 18px 0; height: 30px; font-size: 0.8rem; }
+.sb i { display: inline-flex; gap: 5px; align-items: center; font-style: normal; letter-spacing: -1px; }
+.sb i s { display: inline-block; width: 18px; height: 9px; border-radius: 3px; box-shadow: inset 0 0 0 1.5px currentColor; position: relative; }
+.sb i s::after { content: ''; position: absolute; inset: 2px 5px 2px 2px; background: currentColor; border-radius: 1px; }
+.scr { padding: 10px 20px 28px; display: grid; gap: 16px; align-content: start; }
+body.w320 .scr { padding: 6px 14px 20px; gap: 12px; }
+.ico { width: 18px; height: 18px; flex: none; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.back { display: inline-flex; align-items: center; gap: 4px; font: 600 0.95rem/1 var(--f-body); color: var(--accent); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 22px; box-shadow: var(--shadow); }
+.t-dark .card { background: rgba(15,23,31,0.82); }
+
+/* ---- G: başlık ---- */
+.g-head { display: grid; gap: 8px; }
+.g-t { font: 700 1.55rem/1.1 var(--f-display); letter-spacing: -0.01em; margin: 0; }
+body.w320 .g-t { font-size: 1.3rem; }
+.g-lead { font: 400 1rem/1.4 var(--f-body); color: var(--ink-2); }
+body.w320 .g-lead { font-size: 0.92rem; }
+
+/* ---- G: iki büyük saat ---- */
+.clocks { border-radius: 26px; background: var(--c-panel); border: 1px solid var(--border); box-shadow: var(--shadow); padding: 6px 18px; }
+body.w320 .clocks { padding: 4px 14px; border-radius: 22px; }
+.ck { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 16px 0; }
+.ck + .ck { border-top: 1px solid var(--border); }
+body.w320 .ck { padding: 12px 0; gap: 10px; }
+.ck-l { font: 600 0.9rem/1 var(--f-body); color: var(--ink-2); }
+body.w320 .ck-l { font-size: 0.84rem; }
+.ck-v { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 2px; margin-top: 8px; }
+.ck-v b { font: 600 3.2rem/1 var(--f-display); letter-spacing: -0.03em; color: var(--c-clock); text-shadow: var(--c-glow); font-variant-numeric: tabular-nums; }
+body.w320 .ck-v b { font-size: 2.55rem; }
+.ck-v small { font: 500 0.8rem/1.2 var(--f-body); color: var(--ink-3); white-space: nowrap; }
+body.w320 .ck-v small { font-size: 0.76rem; }
+.stp { display: grid; gap: 8px; }
+.stp span { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--c-step); color: var(--c-step-ink); }
+body.w320 .stp span { width: 36px; height: 36px; }
+.stp .ico { width: 18px; height: 18px; stroke-width: 2.2; }
+.stp span.off { opacity: 0.35; }
+
+/* ---- G: sabit çekirdek satırı ---- */
+.core { display: grid; grid-template-columns: 14px minmax(0,1fr); gap: 7px; align-items: start; padding: 0 2px; font: 400 12.5px/1.4 var(--f-body); letter-spacing: -0.005em; color: var(--ink-2); }
+.core .ico { width: 14px; height: 14px; margin-top: 2px; color: var(--ink-3); }
+
+/* ---- G2: bilgi notu ---- */
+.info { display: grid; grid-template-columns: 20px minmax(0,1fr); gap: 10px; padding: 13px 14px; border-radius: 18px; background: var(--accent-soft); }
+body.w320 .info { padding: 11px 12px; gap: 8px; }
+.info > .ico { width: 18px; height: 18px; margin-top: 1px; color: var(--accent); }
+.info p { font: 500 0.92rem/1.4 var(--f-body); color: var(--ink); }
+body.w320 .info p { font-size: 0.86rem; }
+.info a { display: inline-block; margin-top: 6px; font: 600 0.9rem/1.3 var(--f-body); color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+body.w320 .info a { font-size: 0.85rem; }
+
+/* ---- G: sessizlikte de gelenler ---- */
+.grp-h { font: 600 0.85rem/1.2 var(--f-body); color: var(--ink-2); padding: 0 4px 8px; }
+body.w320 .grp-h { font-size: 0.8rem; }
+.ls { overflow: hidden; }
+.lr { display: grid; grid-template-columns: 32px minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 12px 14px; }
+.lr + .lr { border-top: 1px solid var(--border); }
+body.w320 .lr { grid-template-columns: 28px minmax(0,1fr) auto; gap: 10px; padding: 10px 12px; }
+.lr .ri { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--surface-2); color: var(--ink-2); }
+body.w320 .lr .ri { width: 28px; height: 28px; border-radius: 9px; }
+.lr .ri .ico { width: 16px; height: 16px; }
+.lr b { font: 600 0.95rem/1.25 var(--f-body); }
+body.w320 .lr b { font-size: 0.88rem; }
+.lr em { font: 600 0.95rem/1 var(--f-display); font-style: normal; color: var(--ink-2); letter-spacing: -0.01em; }
+body.w320 .lr em { font-size: 0.86rem; }
+
+/* ---- B1: kilit ekranı ---- */
+.lock.t-dark { background: radial-gradient(90% 40% at 50% 104%, rgba(255,177,59,0.26) 0%, rgba(255,177,59,0) 70%), radial-gradient(120% 60% at 50% -6%, #1a3350 0%, #0b1828 50%, #060a12 100%); color: #fff; }
+.lock.t-light { background: radial-gradient(90% 42% at 50% 104%, rgba(255,196,110,0.55) 0%, rgba(255,196,110,0) 72%), linear-gradient(180deg, #7ea3c4 0%, #a8bfd3 55%, #d9c6a8 100%); color: #fff; }
+.lk-date { text-align: center; font: 600 1.05rem/1 var(--f-body); opacity: 0.92; margin-top: 20px; }
+.lk-time { text-align: center; font: 600 5rem/1 var(--f-display); letter-spacing: -0.04em; margin-top: 6px; }
+.lock.t-dark .lk-time { color: #fff4e4; text-shadow: 0 0 36px rgba(255,177,59,0.28); }
+body.w320 .lk-date { margin-top: 8px; font-size: 0.95rem; }
+body.w320 .lk-time { font-size: 4.1rem; }
+.lk-list { position: absolute; left: 12px; right: 12px; bottom: 104px; }
+body.w320 .lk-list { left: 8px; right: 8px; bottom: 70px; }
+.nt { border-radius: 22px; padding: 12px 14px 14px; display: grid; grid-template-columns: 38px minmax(0,1fr); column-gap: 11px; row-gap: 3px; backdrop-filter: blur(20px); }
+.t-light .nt { background: rgba(255,255,255,0.82); color: #0b1219; }
+.t-dark .nt { background: rgba(38,46,58,0.78); color: #f1f5f8; box-shadow: 0 0 0 1px rgba(255,255,255,0.08); }
+body.w320 .nt { padding: 11px 12px 12px; grid-template-columns: 34px minmax(0,1fr); column-gap: 10px; border-radius: 20px; }
+.nt-ico { grid-row: 1 / span 3; width: 38px; height: 38px; border-radius: 10px; position: relative; background: radial-gradient(circle at 50% 50%, #041017 0 22%, transparent 23%), conic-gradient(from 200deg, #11a9b8, #2f6bea, #11a9b8); }
+body.w320 .nt-ico { width: 34px; height: 34px; border-radius: 9px; }
+.nt-ico::after { content: ''; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #fff; left: 56%; top: 34%; }
+.nt-top { display: flex; justify-content: space-between; gap: 8px; font: 600 0.72rem/1.2 var(--f-body); letter-spacing: 0.04em; opacity: 0.6; }
+.nt-t { font: 700 0.98rem/1.25 var(--f-body); }
+.nt-b { font: 400 0.93rem/1.33 var(--f-body); }
+body.w320 .nt-t { font-size: 0.9rem; }
+body.w320 .nt-b { font-size: 0.86rem; }
+.lk-foot { position: absolute; bottom: 30px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 46px; }
+.lk-foot span { width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,0.18); backdrop-filter: blur(8px); }
+body.w320 .lk-foot { bottom: 16px; padding: 0 34px; }
+body.w320 .lk-foot span { width: 38px; height: 38px; }
+.lk-bar { position: absolute; bottom: 8px; left: 50%; width: 134px; margin-left: -67px; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.8); }
+body.w320 .lk-bar { display: none; }
+
+/* ---- B2: Ana sayfa üstü ---- */
+.rows { display: grid; gap: 10px; }
+body.w320 .rows { gap: 8px; }
+.row { display: grid; grid-template-columns: minmax(0,1fr) auto auto; gap: 14px; align-items: center; padding: 14px 14px 14px 18px; border-radius: 20px; background: var(--c-panel); border: 1px solid var(--border); box-shadow: var(--shadow); }
+body.w320 .row { padding: 11px 11px 11px 14px; gap: 10px; border-radius: 17px; }
+.row b { font: 600 1.05rem/1.2 var(--f-body); }
+body.w320 .row b { font-size: 0.97rem; }
+.row span.d { font: 500 0.9rem/1 var(--f-body); color: var(--ink-3); white-space: nowrap; }
+body.w320 .row span.d { font-size: 0.84rem; }
+.play { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--lens); color: var(--lens-ink); }
+.t-dark .play { box-shadow: 0 0 22px rgba(255,177,59,0.35); }
+body.w320 .play { width: 40px; height: 40px; }
+.play .ico { width: 16px; height: 16px; fill: currentColor; stroke: none; margin-left: 2px; }
+.sci { padding: 12px 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); font: 400 0.8rem/1.45 var(--f-body); color: var(--ink-2); }
+.t-dark .sci { background: rgba(15,23,31,0.82); }
+body.w320 .sci { padding: 10px 11px; font-size: 11.5px; border-radius: 14px; }
+body.w320 .scr.home { padding-inline: 12px; }
+.sci b { font-weight: 600; color: var(--ink); }
+.sci a { font-weight: 600; color: var(--lens-text); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+.rest { display: grid; gap: 10px; margin-top: 6px; opacity: 0.5; }
+.rest i { display: block; height: 96px; border-radius: 22px; background: var(--surface); border: 1px solid var(--border); }
+.rest i + i { height: 64px; }
+body.w320 .rest i { height: 64px; border-radius: 18px; }
+body.w320 .rest i + i { height: 48px; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-alarm" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-cup" viewBox="0 0 24 24"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><path d="M6 2v2M10 2v2M14 2v2"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z"/></symbol>
+</svg>
+
+<main class="wrap">
+  <h1 class="pg-h">Yön C · Nefona gece dili</h1>
+  <p class="pg-lead">Koyu zeminde yumuşak ışık, saatler ekranın kahramanı, tek sıcak vurgu. Açık temada aynı dil alacakaranlık ışığıyla sürer.</p>
+  <section class="sec"><h2>G · Gece sessizliği</h2><div class="strip" data-set="G"></div></section>
+  <section class="sec"><h2>G2 · Mola sessizliğin içinde</h2><div class="strip" data-set="G2"></div></section>
+  <section class="sec"><h2>B1 · Kilit ekranında birleşik bildirim</h2><div class="strip" data-set="B1"></div></section>
+  <section class="sec"><h2>B2 · Dokununca açılan Ana sayfa</h2><div class="strip" data-set="B2"></div></section>
+</main>
+
+<template id="tpl-G">
+  <div class="phone">
+    <div class="sb"><span>22:14</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Bildirimler</span>
+      <div class="g-head">
+        <h1 class="g-t">Gece sessizliği</h1>
+        <p class="g-lead">Bu saatlerde yeni hatırlatmalar gelmez.</p>
+      </div>
+      <div class="clocks">
+        <div class="ck">
+          <div><div class="ck-l">Başlar</div><div class="ck-v"><b>23.00</b><small>22.00–24.00</small></div></div>
+          <div class="stp"><span aria-label="Geç başlat"><svg class="ico"><use href="#i-plus"/></svg></span><span aria-label="Erken başlat"><svg class="ico"><use href="#i-minus"/></svg></span></div>
+        </div>
+        <div class="ck">
+          <div><div class="ck-l">Biter</div><div class="ck-v"><b data-end>07.00</b><small>06.00–10.00</small></div></div>
+          <div class="stp"><span data-plus aria-label="Geç bitir"><svg class="ico"><use href="#i-plus"/></svg></span><span aria-label="Erken bitir"><svg class="ico"><use href="#i-minus"/></svg></span></div>
+        </div>
+      </div>
+      <p class="core"><svg class="ico"><use href="#i-moon"/></svg><span>01.00–05.00 arası her gece sessiz; bu saatler değişmez.</span></p>
+      <div data-info></div>
+      <div>
+        <div class="grp-h">Sessizlikte de gelenler</div>
+        <div class="card ls" data-list>
+          <div class="lr"><span class="ri"><svg class="ico"><use href="#i-alarm"/></svg></span><b>Alarm</b><span></span></div>
+          <div class="lr"><span class="ri"><svg class="ico"><use href="#i-sun"/></svg></span><b>Alarmdan sonraki hava</b><span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-info">
+  <div class="info" role="status">
+    <svg class="ico"><use href="#i-info"/></svg>
+    <div><p>09.30 Mola gece sessizliğinin içinde; saatini değiştir</p><a href="#">Mola saatine git</a></div>
+  </div>
+</template>
+
+<template id="tpl-B1">
+  <div class="phone fix lock">
+    <div class="sb"><span></span><i>●●● <s></s></i></div>
+    <div class="lk-date">Perşembe 1 Ekim</div>
+    <div class="lk-time">14:30</div>
+    <div class="lk-list">
+      <div class="nt">
+        <span class="nt-ico" aria-hidden="true"></span>
+        <div class="nt-top"><span>NEFONA</span><span>şimdi</span></div>
+        <div class="nt-t">Göz kırpma ve gökyüzü molası</div>
+        <div class="nt-b">İkisinin de saati geldi. Hangisiyle başlarsın?</div>
+      </div>
+    </div>
+    <div class="lk-foot"><span></span><span></span></div>
+    <div class="lk-bar"></div>
+  </div>
+</template>
+
+<template id="tpl-B2">
+  <div class="phone fix">
+    <div class="sb"><span>14:31</span><i>●●● <s></s></i></div>
+    <div class="scr home">
+      <div class="rows">
+        <div class="row"><b>Göz kırpma</b><span class="d">2 dk</span><span class="play" aria-label="Göz kırpmayı başlat"><svg class="ico"><use href="#i-play"/></svg></span></div>
+        <div class="row"><b>Gökyüzü molası</b><span class="d">1 dk</span><span class="play" aria-label="Gökyüzü molasını başlat"><svg class="ico"><use href="#i-play"/></svg></span></div>
+      </div>
+      <p class="sci"><b>Neden?</b> 41 kişilik bir çalışmada 4 haftalık kırpma egzersizinden sonra yarım kalan kırpmalar %54'ten %34'e indi. Karşılaştırma grubu yoktu. <a href="#">Kaynağı gör</a></p>
+      <div class="rest" aria-hidden="true"><i></i><i></i></div>
+    </div>
+  </div>
+</template>
+
+<script>
+(function () {
+  var caps = { G: 'Varsayılan 23.00–07.00', G2: 'Biter 10.00; 09.30 Mola içeride', B1: '14.30 · tek bildirim, düğmesiz', B2: 'İki satır önce, bilim kartı altta' };
+  document.querySelectorAll('.strip').forEach(function (strip) {
+    var set = strip.dataset.set;
+    ['acik', 'koyu'].forEach(function (th) {
+      var cell = document.createElement('figure');
+      cell.className = 'cell';
+      var shot = document.createElement('div');
+      shot.className = 'shot';
+      shot.dataset.shot = set + '-' + th;
+      shot.style.background = th === 'acik' ? '#eef2f4' : '#070c12';
+      var frag = document.getElementById('tpl-' + (set === 'G2' ? 'G' : set)).content.cloneNode(true);
+      var ph = frag.querySelector('.phone');
+      ph.classList.add(th === 'acik' ? 't-light' : 't-dark');
+      if (set === 'G2') {
+        ph.querySelector('[data-end]').textContent = '10.00';
+        ph.querySelector('[data-plus]').classList.add('off');
+        ph.querySelector('.sb span').textContent = '22:16';
+        ph.querySelector('[data-info]').replaceWith(document.getElementById('tpl-info').content.cloneNode(true));
+        var r = document.createElement('div');
+        r.className = 'lr';
+        r.innerHTML = '<span class="ri"><svg class="ico"><use href="#i-cup"/></svg></span><b>Mola hatırlatması</b><em>09.30</em>';
+        ph.querySelector('[data-list]').appendChild(r);
+      } else if (set === 'G') {
+        ph.querySelector('[data-info]').remove();
+      }
+      shot.appendChild(frag);
+      cell.appendChild(shot);
+      var cap = document.createElement('figcaption');
+      cap.className = 'cap';
+      cap.textContent = set + ' · ' + (th === 'acik' ? 'açık' : 'koyu') + ' · ' + caps[set];
+      cell.appendChild(cap);
+      strip.appendChild(cell);
+    });
+  });
+})();
+</script>
+</body>
+</html>

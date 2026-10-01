@@ -1,0 +1,987 @@
+{
+ "lesson": "d05",
+ "T": 900,
+ "status": "ok",
+ "mode": "pref→max",
+ "f": 0.1779,
+ "total": 900.0,
+ "speech_sec": 277.745,
+ "sel": [
+  "C1",
+  "C2",
+  "C3"
+ ],
+ "stop": null,
+ "notes": [],
+ "check_plan": {
+  "fails": [],
+  "pass": true,
+  "density": {
+   "syll": 146.0,
+   "frac": 0.507,
+   "deep_syll": 80.0,
+   "deep_frac": 0.309,
+   "dead": [],
+   "avg": 82.667
+  }
+ },
+ "slack_min_s": 124.56,
+ "missing_clips": [],
+ "events": [
+  {
+   "clip": "a.durus",
+   "block": "A",
+   "phase": "Varış",
+   "start": 4.1779,
+   "end": 8.842,
+   "gapAfter": 4.7117,
+   "subs": [
+    {
+     "start": 4.1779,
+     "end": 8.842,
+     "text": "Sırtın dik olsun ama gerilmesin; rahatça oturman yeterli."
+    }
+   ]
+  },
+  {
+   "clip": "a.gozler",
+   "block": "A",
+   "phase": "Varış",
+   "start": 13.5537,
+   "end": 20.5607,
+   "gapAfter": 5.7117,
+   "subs": [
+    {
+     "start": 13.5537,
+     "end": 20.5607,
+     "text": "Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin."
+    }
+   ]
+  },
+  {
+   "clip": "a.izin",
+   "block": "A",
+   "phase": "Varış",
+   "start": 26.2723,
+   "end": 31.5248,
+   "gapAfter": 4.7117,
+   "subs": [
+    {
+     "start": 26.2723,
+     "end": 31.5248,
+     "text": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin."
+    }
+   ]
+  },
+  {
+   "clip": "a.acilis",
+   "block": "A",
+   "phase": "Varış",
+   "start": 36.2365,
+   "end": 41.7388,
+   "gapAfter": 6.7117,
+   "subs": [
+    {
+     "start": 36.2365,
+     "end": 41.7388,
+     "text": "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "a.dagink",
+   "block": "A",
+   "phase": "Varış",
+   "start": 48.4505,
+   "end": 54.3128,
+   "gapAfter": 7.7117,
+   "subs": [
+    {
+     "start": 48.4505,
+     "end": 54.3128,
+     "text": "Önce ışık geniş ve dağınık; seslere ve düşüncelere aynı anda vuruyor."
+    }
+   ]
+  },
+  {
+   "clip": "a.omuz",
+   "block": "A",
+   "phase": "Varış",
+   "start": 62.0245,
+   "end": 66.7754,
+   "gapAfter": 6.7117,
+   "subs": [
+    {
+     "start": 62.0245,
+     "end": 66.7754,
+     "text": "Omuzlarını kulaklarından uzaklaştırıp çeneni gevşek bırakıyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "a.normal",
+   "block": "A",
+   "phase": "Varış",
+   "start": 73.4871,
+   "end": 78.0691,
+   "gapAfter": 5.7117,
+   "subs": [
+    {
+     "start": 73.4871,
+     "end": 78.0691,
+     "text": "Dikkatin birçok kez dağılacak; bu da pratiğin bir parçası."
+    }
+   ]
+  },
+  {
+   "clip": "a.karar",
+   "block": "A",
+   "phase": "Varış",
+   "start": 83.7807,
+   "end": 87.4459,
+   "gapAfter": 5.7117,
+   "subs": [
+    {
+     "start": 83.7807,
+     "end": 87.4459,
+     "text": "Işığı ne kadar sıkı tutacağına sen karar veriyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c1.yer",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 93.1575,
+   "end": 99.0804,
+   "gapAfter": 6.7117,
+   "subs": [
+    {
+     "start": 93.1575,
+     "end": 99.0804,
+     "text": "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?"
+    }
+   ]
+  },
+  {
+   "clip": "c1.nokta",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 105.792,
+   "end": 110.1793,
+   "gapAfter": 4.7117,
+   "subs": [
+    {
+     "start": 105.792,
+     "end": 110.1793,
+     "text": "Hangisi olursa olsun, ışığın bugün o noktaya düşüyor."
+    }
+   ]
+  },
+  {
+   "clip": "c1.izle",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 114.8909,
+   "end": 119.7001,
+   "gapAfter": 16.7117,
+   "subs": [
+    {
+     "start": 114.8909,
+     "end": 119.7001,
+     "text": "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c1.his",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 136.4118,
+   "end": 147.9002,
+   "gapAfter": 11.7117,
+   "subs": [
+    {
+     "start": 136.4118,
+     "end": 141.6024,
+     "text": "Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor."
+    },
+    {
+     "start": 142.6558,
+     "end": 147.9002,
+     "text": "Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor."
+    }
+   ]
+  },
+  {
+   "clip": "c1.duzeltme",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 159.6119,
+   "end": 164.1458,
+   "gapAfter": 8.7117,
+   "subs": [
+    {
+     "start": 159.6119,
+     "end": 164.1458,
+     "text": "Nefesini düzeltmeye çalışmıyorsun; o kendi hızında geliyor."
+    }
+   ]
+  },
+  {
+   "clip": "c1.kayma",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 172.8574,
+   "end": 178.204,
+   "gapAfter": 4.7117,
+   "subs": [
+    {
+     "start": 172.8574,
+     "end": 178.204,
+     "text": "Birazdan dikkatin bir düşünceye ya da bir sese kayacak; bu çok olağan."
+    }
+   ]
+  },
+  {
+   "clip": "c1.donus",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 182.9156,
+   "end": 187.6659,
+   "gapAfter": 5.7117,
+   "subs": [
+    {
+     "start": 182.9156,
+     "end": 187.6659,
+     "text": "Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c1.aralik1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 193.3776,
+   "end": 196.9629,
+   "gapAfter": 16.7117,
+   "subs": [
+    {
+     "start": 193.3776,
+     "end": 196.9629,
+     "text": "Birkaç soluk boyunca ışığı orada tutuyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c1.nerede",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 213.6745,
+   "end": 218.1062,
+   "gapAfter": 5.7117,
+   "subs": [
+    {
+     "start": 213.6745,
+     "end": 218.1062,
+     "text": "Işık hâlâ nefeste mi, yoksa başka bir yere mi kaydı?"
+    }
+   ]
+  },
+  {
+   "clip": "c1.getir",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 223.8178,
+   "end": 228.5117,
+   "gapAfter": 11.7117,
+   "subs": [
+    {
+     "start": 223.8178,
+     "end": 228.5117,
+     "text": "Kaydıysa, bir sonraki alışta onu yeniden noktaya getiriyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c1.aralik2",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 240.2233,
+   "end": 244.6663,
+   "gapAfter": 16.7117,
+   "subs": [
+    {
+     "start": 240.2233,
+     "end": 244.6663,
+     "text": "Işık yine noktada; birkaç nefes daha orada kalıyor."
+    }
+   ]
+  },
+  {
+   "clip": "c1.dusunce",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 261.378,
+   "end": 267.466,
+   "gapAfter": 10.7117,
+   "subs": [
+    {
+     "start": 261.378,
+     "end": 267.466,
+     "text": "Bir düşünce gelirse onu itmen gerekmiyor; ışığı usulca geri çeviriyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c1.kac",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 278.1777,
+   "end": 283.1245,
+   "gapAfter": 8.7117,
+   "subs": [
+    {
+     "start": 278.1777,
+     "end": 283.1245,
+     "text": "Dikkatinin kaç kez dağıldığı hiç önemli değil; her dönüş değerli."
+    }
+   ]
+  },
+  {
+   "clip": "c1.aralik3",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 291.8362,
+   "end": 295.0587,
+   "gapAfter": 16.7117,
+   "subs": [
+    {
+     "start": 291.8362,
+     "end": 295.0587,
+     "text": "Şu an ışığın gideceği başka bir yer yok."
+    }
+   ]
+  },
+  {
+   "clip": "c1.anahtar1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 311.7704,
+   "end": 314.7743,
+   "gapAfter": 14.7117,
+   "subs": [
+    {
+     "start": 311.7704,
+     "end": 314.7743,
+     "text": "Fark ettiğin an, zaten geri döndün."
+    }
+   ]
+  },
+  {
+   "clip": "c2.giris",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 329.486,
+   "end": 333.3377,
+   "gapAfter": 4.7117,
+   "subs": [
+    {
+     "start": 329.486,
+     "end": 333.3377,
+     "text": "Sıradaki bölümde nefeslerini içinden sayıyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c2.nasil",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 338.0494,
+   "end": 344.1301,
+   "gapAfter": 4.7117,
+   "subs": [
+    {
+     "start": 338.0494,
+     "end": 344.1301,
+     "text": "Alışta bir, verişte iki, sonra üç, dört diye ona kadar gidiyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c2.bas",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 348.8417,
+   "end": 354.1168,
+   "gapAfter": 4.7117,
+   "subs": [
+    {
+     "start": 348.8417,
+     "end": 354.1168,
+     "text": "On olunca yeniden birden başlıyorsun; sayıyı kaybedersen de öyle."
+    }
+   ]
+  },
+  {
+   "clip": "c2.say1",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 358.8284,
+   "end": 361.4961,
+   "gapAfter": 18.3558,
+   "subs": [
+    {
+     "start": 358.8284,
+     "end": 361.4961,
+     "text": "Sayıyı bir süre sen sürdürüyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c2.hangi",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 379.8519,
+   "end": 383.431,
+   "gapAfter": 16.7117,
+   "subs": [
+    {
+     "start": 379.8519,
+     "end": 383.431,
+     "text": "Hangi sayıda olursan ol, oradan devam ediyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c2.onbir",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 400.1426,
+   "end": 405.3618,
+   "gapAfter": 14.7117,
+   "subs": [
+    {
+     "start": 400.1426,
+     "end": 405.3618,
+     "text": "On bire, on ikiye vardıysan bu da olur; sayı yine birden başlıyor."
+    }
+   ]
+  },
+  {
+   "clip": "c2.dusunce",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 420.0735,
+   "end": 424.6697,
+   "gapAfter": 16.7117,
+   "subs": [
+    {
+     "start": 420.0735,
+     "end": 424.6697,
+     "text": "Sayıların arasına bir düşünce girerse, bunu fark etmen yeter."
+    }
+   ]
+  },
+  {
+   "clip": "c2.yonetme",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 441.3813,
+   "end": 446.6559,
+   "gapAfter": 14.7117,
+   "subs": [
+    {
+     "start": 441.3813,
+     "end": 446.6559,
+     "text": "Sayı nefesi yönetmiyor; nefes geliyor, sayı onu izliyor."
+    }
+   ]
+  },
+  {
+   "clip": "c2.veris",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 461.3675,
+   "end": 466.5721,
+   "gapAfter": 5.7117,
+   "subs": [
+    {
+     "start": 461.3675,
+     "end": 466.5721,
+     "text": "Bu kez yalnız verişleri sayıyorsun; her verişe bir sayı düşüyor."
+    }
+   ]
+  },
+  {
+   "clip": "c2.veris2",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 472.2838,
+   "end": 476.094,
+   "gapAfter": 18.3558,
+   "subs": [
+    {
+     "start": 472.2838,
+     "end": 476.094,
+     "text": "Alış sessiz geçiyor, sayı verişle geliyor."
+    }
+   ]
+  },
+  {
+   "clip": "c2.seyrek",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 494.4498,
+   "end": 500.7763,
+   "gapAfter": 16.7117,
+   "subs": [
+    {
+     "start": 494.4498,
+     "end": 500.7763,
+     "text": "Sayılar seyrekleşiyor; aralarında nefes var, bir de ışığın noktası."
+    }
+   ]
+  },
+  {
+   "clip": "c2.anahtar2",
+   "block": "C2",
+   "phase": "Derinleşme",
+   "start": 517.4879,
+   "end": 519.5933,
+   "gapAfter": 10.7117,
+   "subs": [
+    {
+     "start": 517.4879,
+     "end": 519.5933,
+     "text": "Fark ettin; döndün."
+    }
+   ]
+  },
+  {
+   "clip": "c3.ad",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 530.3049,
+   "end": 534.6291,
+   "gapAfter": 5.7117,
+   "subs": [
+    {
+     "start": 530.3049,
+     "end": 534.6291,
+     "text": "Bundan sonra yalnızca nokta ve nefes var."
+    }
+   ]
+  },
+  {
+   "clip": "c3.parlak",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 540.3408,
+   "end": 543.6908,
+   "gapAfter": 6.7117,
+   "subs": [
+    {
+     "start": 540.3408,
+     "end": 543.6908,
+     "text": "Işık artık küçük ve parlak bir nokta."
+    }
+   ]
+  },
+  {
+   "clip": "c3.can",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 550.4025,
+   "end": 558.3066,
+   "gapAfter": 4.7117,
+   "subs": [
+    {
+     "start": 550.4025,
+     "end": 553.5439,
+     "text": "Her sessizliğin sonunda bir çan çalacak."
+    },
+    {
+     "start": 555.4684,
+     "end": 558.3066,
+     "text": "Çanı duyunca ışık noktaya dönüyor."
+    }
+   ]
+  },
+  {
+   "clip": "c3.kisa",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 563.0183,
+   "end": 565.7381,
+   "gapAfter": 15.7117,
+   "subs": [
+    {
+     "start": 563.0183,
+     "end": 565.7381,
+     "text": "Önce kısa bir sessizlik geliyor."
+    }
+   ]
+  },
+  {
+   "clip": "c3.d15",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 581.4497,
+   "end": 583.5876,
+   "gapAfter": 6.7117,
+   "subs": [
+    {
+     "start": 581.4497,
+     "end": 583.5876,
+     "text": "Işığın hâlâ noktada mı?"
+    }
+   ]
+  },
+  {
+   "clip": "c3.kaydiysa",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 590.2993,
+   "end": 593.882,
+   "gapAfter": 6.7117,
+   "subs": [
+    {
+     "start": 590.2993,
+     "end": 593.882,
+     "text": "Değilse, bir sonraki nefeste geri getiriyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c3.kisa2",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 600.5937,
+   "end": 602.9861,
+   "gapAfter": 17.5337,
+   "subs": [
+    {
+     "start": 600.5937,
+     "end": 602.9861,
+     "text": "Kısa bir sessizlik daha geliyor."
+    }
+   ]
+  },
+  {
+   "clip": "c3.d18",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 620.5198,
+   "end": 622.5479,
+   "gapAfter": 6.7117,
+   "subs": [
+    {
+     "start": 620.5198,
+     "end": 622.5479,
+     "text": "Işık yine nefeste."
+    }
+   ]
+  },
+  {
+   "clip": "c3.w30",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 629.2596,
+   "end": 640.663,
+   "gapAfter": 31.0675,
+   "subs": [
+    {
+     "start": 629.2596,
+     "end": 632.4914,
+     "text": "Şimdi biraz daha uzun bir sessizlik geliyor."
+    },
+    {
+     "start": 634.4159,
+     "end": 636.9991,
+     "text": "Zorlanırsan gözlerini açman yeterli."
+    },
+    {
+     "start": 638.9237,
+     "end": 640.663,
+     "text": "Çanla yine seslenirim."
+    }
+   ]
+  },
+  {
+   "clip": "c3.d30",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 671.7305,
+   "end": 678.6814,
+   "gapAfter": 6.7117,
+   "subs": [
+    {
+     "start": 671.7305,
+     "end": 672.6682,
+     "text": "Buradayım."
+    },
+    {
+     "start": 674.5927,
+     "end": 678.6814,
+     "text": "Işık kaydıysa, onu usulca noktaya çağırıyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c3.w45",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 685.3931,
+   "end": 696.7372,
+   "gapAfter": 46.2454,
+   "subs": [
+    {
+     "start": 685.3931,
+     "end": 688.2261,
+     "text": "Bu kez sessizlik biraz daha uzun."
+    },
+    {
+     "start": 690.1506,
+     "end": 692.9403,
+     "text": "Zorlanırsan ellerini hissetmen de olur."
+    },
+    {
+     "start": 694.8649,
+     "end": 696.7372,
+     "text": "Çanla yine seslenirim."
+    }
+   ]
+  },
+  {
+   "clip": "c3.d45",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 742.9826,
+   "end": 748.805,
+   "gapAfter": 6.7117,
+   "subs": [
+    {
+     "start": 742.9826,
+     "end": 743.9277,
+     "text": "Buradayım."
+    },
+    {
+     "start": 745.8523,
+     "end": 748.805,
+     "text": "Işığın nerede olduğunu fark etmen yeter."
+    }
+   ]
+  },
+  {
+   "clip": "c3.anahtar3",
+   "block": "C3",
+   "phase": "Derin",
+   "start": 755.5167,
+   "end": 756.6816,
+   "gapAfter": 8.7117,
+   "subs": [
+    {
+     "start": 755.5167,
+     "end": 756.6816,
+     "text": "Yine döndün."
+    }
+   ]
+  },
+  {
+   "clip": "k.donus",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 765.3932,
+   "end": 767.2101,
+   "gapAfter": 3.7669,
+   "subs": [
+    {
+     "start": 765.3932,
+     "end": 767.2101,
+     "text": "Artık dönüş zamanı."
+    }
+   ]
+  },
+  {
+   "clip": "k.nefes",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 770.977,
+   "end": 776.1581,
+   "gapAfter": 4.3558,
+   "subs": [
+    {
+     "start": 770.977,
+     "end": 776.1581,
+     "text": "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor."
+    }
+   ]
+  },
+  {
+   "clip": "k.sesler",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 780.5139,
+   "end": 783.5397,
+   "gapAfter": 5.3558,
+   "subs": [
+    {
+     "start": 780.5139,
+     "end": 783.5397,
+     "text": "Odadaki sesler de ışığın içine giriyor."
+    }
+   ]
+  },
+  {
+   "clip": "k.hareket",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 788.8955,
+   "end": 795.3258,
+   "gapAfter": 7.5337,
+   "subs": [
+    {
+     "start": 788.8955,
+     "end": 795.3258,
+     "text": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak."
+    }
+   ]
+  },
+  {
+   "clip": "k.avuc1",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 802.8596,
+   "end": 807.4239,
+   "gapAfter": 6.3558,
+   "subs": [
+    {
+     "start": 802.8596,
+     "end": 807.4239,
+     "text": "Gözlerin kapalıysa, avuçlarını birbirine sürtüp ısıtabilirsin."
+    }
+   ]
+  },
+  {
+   "clip": "k.avuc2",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 813.7797,
+   "end": 820.3387,
+   "gapAfter": 4.3558,
+   "subs": [
+    {
+     "start": 813.7797,
+     "end": 820.3387,
+     "text": "Avuçların gözlerine değmeyecek; kenarları alnına ve elmacık kemiklerine yaslanacak."
+    }
+   ]
+  },
+  {
+   "clip": "k.avuc3",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 824.6946,
+   "end": 829.1319,
+   "gapAfter": 6.3558,
+   "subs": [
+    {
+     "start": 824.6946,
+     "end": 829.1319,
+     "text": "Şimdi onları bastırmadan gözlerinin üstüne getiriyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "k.avuc4",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 835.4877,
+   "end": 839.1656,
+   "gapAfter": 12.3558,
+   "subs": [
+    {
+     "start": 835.4877,
+     "end": 839.1656,
+     "text": "Bu sıcaklığı birkaç nefes boyunca hissediyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "k.avuc5",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 851.5214,
+   "end": 853.9564,
+   "gapAfter": 3.3558,
+   "subs": [
+    {
+     "start": 851.5214,
+     "end": 853.9564,
+     "text": "Ellerini dizlerine indiriyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "k.goz",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 857.3122,
+   "end": 862.3376,
+   "gapAfter": 7.5337,
+   "subs": [
+    {
+     "start": 857.3122,
+     "end": 862.3376,
+     "text": "Gözlerin kapalıysa, onları acele etmeden açıp çevrene bakıyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "k.oda",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 869.8714,
+   "end": 874.9168,
+   "gapAfter": 6.3558,
+   "subs": [
+    {
+     "start": 869.8714,
+     "end": 874.9168,
+     "text": "Bakışın odada bir renkte ya da bir nesnede bir an duruyor."
+    }
+   ]
+  },
+  {
+   "clip": "k.gun",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 881.2727,
+   "end": 886.895,
+   "gapAfter": 4.3558,
+   "subs": [
+    {
+     "start": 881.2727,
+     "end": 886.895,
+     "text": "Gün içinde dikkatinin dağıldığını fark ettiğinde, tek bir nefese dönmek yeter."
+    }
+   ]
+  },
+  {
+   "clip": "k.son",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 891.2509,
+   "end": 893.6442,
+   "gapAfter": 6.3558,
+   "subs": [
+    {
+     "start": 891.2509,
+     "end": 893.6442,
+     "text": "El feneri yine senin elinde."
+    }
+   ]
+  }
+ ]
+}

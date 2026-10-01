@@ -1,0 +1,72 @@
+{
+ "unit": "n1.birak",
+ "idx": 11,
+ "voice": "hak",
+ "voice_id": "DwjDVVARfPVjBKepXK2c",
+ "model_id": "eleven_v4",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "node_id": "yP2ci9XdCkGuuog1IUEz",
+ "session_ids": [
+  "le4VN24qszyF8W1Fsuy9",
+  "T8RQyvCEBegdmqNL8uqi",
+  "4DzWQs2QxE6LgWdOBkeF"
+ ],
+ "requested_at": "2026-09-29T10:26:22Z",
+ "downloaded_at": "2026-09-29T10:26:48.962617+00:00",
+ "tts": "Dersin sonunda niyetini hatırlatacağım. O zamana kadar onu aklında tutman gerekmiyor.",
+ "generations_count": 3,
+ "takes": [
+  {
+   "take": 1,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/n1.birak/t1.mp3",
+   "generation_id": "DHJc3TQyLzGvonQzvaIx",
+   "session_id": "le4VN24qszyF8W1Fsuy9",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/le4VN24qszyF8W1Fsuy9/DHJc3TQyLzGvonQzvaIx/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T102628Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=24f760dadf48c6ae4f1b74bd4c1784461e72f73f867056a8fd90417f80c84a244b57dce92ebac7170b24920b42cc51db5f3230b0635094cf90726da158a8cd75ce1e2222e0580e3cad64c1e19a7bb42f78b00a18b1710528050e508791248b4b59b0d2f72a9d59fad1de25f76ef4e1572192b43ab2e2780639b0f26255f6450a72752e457d1b7fd414e33cba520c4c8be3f547ff11d38af2085502b1dba76092c49e91fda8d84af2fe63046c0dbf09faf1791d6b34c805b48e5eac5d601549b75c584a3f8aee4cb8fa3f1a3ccdf076d32bd141b27dcd999e00a28413baec267f33fc06571d7fa75d79a38f7a639d5b4b2ca43d363294a00c336e5a334e467fa8",
+   "node_id": "yP2ci9XdCkGuuog1IUEz",
+   "api_duration_secs": 5.6,
+   "ok": true,
+   "duration_secs": 5.6,
+   "info_duration": 5.6,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 107577,
+   "attempts": 1
+  },
+  {
+   "take": 2,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/n1.birak/t2.mp3",
+   "generation_id": "iD6bpgz3ydMIumJMv5w1",
+   "session_id": "T8RQyvCEBegdmqNL8uqi",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/T8RQyvCEBegdmqNL8uqi/iD6bpgz3ydMIumJMv5w1/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T102629Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=4422d04637b5117307f2ca153f2f97ea26860ae2e8c51b9909aa2bbca47185672dde9b8ab37419e198232cbc594d0cddf5b921c3bc47b756533fbb16e3ce77bd1dffdef1fc7214c006eb0668ce04825dc356ef9581abc8e785ce88995ef7378c68b81c6062224c0aa2ab9b6260e5acea3e2166e5f0ace781b419eee3f2bc2ca82f965edfd230063b43cd53c502edb1f29fec62e5fc9417de227d6c3fc92bbb71621270b979ea1e83273f68bbb5566cd618a5aea3c573d10254f2dd0d9e62b6786dc3166f2157bd2017edb87e0791cc6a45de86f6a7bfe738cba723e4e6da2819a5d80af1b2a6c9bfa7732e93d1dd2173016a7eccda38dad895513d68b2f60b9c",
+   "node_id": "yP2ci9XdCkGuuog1IUEz",
+   "api_duration_secs": 5.44,
+   "ok": true,
+   "duration_secs": 5.44,
+   "info_duration": 5.44,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 105069,
+   "attempts": 1
+  },
+  {
+   "take": 3,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/n1.birak/t3.mp3",
+   "generation_id": "k7KZjzevtYPOvPG1wtuQ",
+   "session_id": "4DzWQs2QxE6LgWdOBkeF",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/4DzWQs2QxE6LgWdOBkeF/k7KZjzevtYPOvPG1wtuQ/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T102629Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=4a694f7c73a59efb2f243674194da808dfab09c94a4c46ed87c7c097f19a06f2478426747af7b9829181ac2541ba62c55688e1ea3d878e96e454f288bc9e140e4491433d0c9853910b0efe02c7a2602dcb989545ef50526f2cd7725f22ec33c5eaee18900b22f01b3e45c54410bf4c571cae38ad122678f85593a4ffeeb4fd8cede321028f2313033f354ad9cb2ad93c4ee860865bfa626f65584ba4a0b3376a233fef7ad2107cf6f2d481c5b2d17eb185d02503ff88407c5e00550c92167c317b1187327529b6649b37025ae6903d5448a6abb799e35e2d521af8e14f4fde807359ab94db808c356f605692ca7d414cb816e65960c44e096999eceb94a8d221",
+   "node_id": "yP2ci9XdCkGuuog1IUEz",
+   "api_duration_secs": 5.36,
+   "ok": true,
+   "duration_secs": 5.36,
+   "info_duration": 5.36,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 103815,
+   "attempts": 1
+  }
+ ],
+ "all_ok": true,
+ "n_takes_ok": 3,
+ "failed_generations": [],
+ "who": "hak-1"
+}

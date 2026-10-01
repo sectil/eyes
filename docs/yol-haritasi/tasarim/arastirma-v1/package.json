@@ -1,0 +1,16 @@
+{
+  "name": "yol-v1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "today_v4.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "astronomy-engine": "^2.1.19",
+    "suncalc": "^2.0.2"
+  }
+}

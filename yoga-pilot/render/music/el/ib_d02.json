@@ -1,0 +1,31 @@
+{
+ "derin": [
+  {
+   "file": "/tmp/claude-0/-home-user-eyes/6658f732-6c5e-57bd-bf5f-d2aecdcf684c/scratchpad/yoga/render/music/el/el-derin-c.lev.wav",
+   "usable": [
+    18.0,
+    279.5
+   ]
+  }
+ ],
+ "imge": [
+  {
+   "file": "/tmp/claude-0/-home-user-eyes/6658f732-6c5e-57bd-bf5f-d2aecdcf684c/scratchpad/yoga/render/music/el/el-imge-b.wav",
+   "usable": [
+    2.0,
+    158.0
+   ]
+  }
+ ],
+ "zitlik": [
+  {
+   "file": "/tmp/claude-0/-home-user-eyes/6658f732-6c5e-57bd-bf5f-d2aecdcf684c/scratchpad/yoga/render/music/el/el-zitlik-b.wav",
+   "usable": [
+    6.0,
+    105.0
+   ]
+  }
+ ],
+ "_not": "kullan\u0131labilir aral\u0131k: ba\u015f\u0131 g\u00f6vde ba\u015f\u0131 + 10 sn (pilot kal\u0131b\u0131), sonu g\u00f6vde sonu \u2212 8 sn (ge\u00e7i\u015f pay\u0131 g\u00f6vdede kals\u0131n); g\u00f6vde = 3 sn ST, ortancan\u0131n \u00b13 LU i\u00e7indeki ilk/son pencere",
+ "_not2": "el-derin-c.lev.wav = el-derin-c.wav + yava\u015f d\u00fczey dengeleyici (level_ib.py, k 0,8): 8 sn'lik kabarmalar 1,22 \u2192 \u2264 1 dB/sn"
+}

@@ -1,0 +1,288 @@
+/* ============================================================
+   Yakın E testi — screens/AcuityTest.jsx ve components/RestBreak.jsx (PLAN.md bölüm 4, E1–E10;
+   onaylı tasarım nefona-e-testi.html).
+   - Deneme dışındaki her ekran 100dvh ve kaydırmasız (320×568'e kadar): sütun düzeni; artan yükseklik
+     yalnız esnek çizim alanına (.acu-art) gider.
+   - Deneme alanı (.acu-clinic) her temada #fff zemin, #000 E (K4); üstündeki öğeler açık tema token'larıyla.
+   - Dokunma hedefleri ≥ 44 pt. Kapalı düğme soluklaşmaz: nötr zeminde tam kontrastlı yazı ve "!".
+   ============================================================ */
+
+.acu-root { min-height: 100dvh; }
+.acu-sr {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* ---------- Ortak ekran iskeleti ---------- */
+.acu-scr {
+  position: fixed; inset: 0; z-index: 30;
+  display: flex; flex-direction: column; overflow: hidden;
+  background: var(--bg); color: var(--ink);
+  padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom);
+  font-size: 15px; line-height: 1.35;
+  animation: acu-fade 0.24s ease both;
+}
+@keyframes acu-fade { from { opacity: 0; } to { opacity: 1; } }
+.acu-body {
+  flex: 1; min-height: 0; width: 100%; max-width: 560px; margin: 0 auto;
+  display: flex; flex-direction: column; padding: 0 16px;
+}
+.acu-top { height: 44px; flex: none; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.acu-ib {
+  width: 44px; height: 44px; flex: none; padding: 0; border-radius: 14px;
+  border: 1px solid var(--border); background: var(--surface); color: var(--ink-2);
+  display: grid; place-items: center; font: inherit; font-size: 18px; font-weight: 700; cursor: pointer;
+}
+.acu-ib-sp { width: 44px; height: 44px; flex: none; }
+.acu-prog { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.acu-prog i { width: 22px; height: 5px; border-radius: 3px; background: var(--surface-3); display: block; }
+.acu-prog i.on { background: var(--accent); }
+.acu-prog i.done { background: var(--ok); }
+
+.acu-ttl { flex: none; display: flex; flex-direction: column; gap: 3px; margin-top: 8px; }
+.acu-ttl h1 { margin: 0; font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; }
+.acu-ttl p { font-size: 15px; line-height: 1.35; color: var(--ink-2); }
+.acu-ttl.center { text-align: center; align-items: center; }
+
+/* Esnek çizim alanı: artan yükseklik yalnız buraya gider (çizim en çok 240 pt, ortalanır; düğme altta kalır).
+   En az 72 pt; sayfa hiç kaymaz. */
+.acu-art { flex: 1 1 136px; min-height: 72px; margin: 12px 0; display: grid; place-items: center; position: relative; }
+.acu-art > svg { height: 100%; max-height: min(100%, 240px); width: auto; max-width: 100%; }
+.acu-notice {
+  width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  padding: 14px; display: flex; flex-direction: column; gap: 8px; text-align: center;
+}
+.acu-notice b { font-weight: 600; }
+.acu-notice span { font-size: 13px; color: var(--ink-3); }
+.acu-notice.pulse { background: var(--warn-bg); border-color: transparent; }
+/* Yalnız geliştirici derlemesi (VITE_APP_BUILD=dev): ham kapak / derinlik */
+.acu-raw {
+  position: absolute; left: 0; right: 0; bottom: -4px; display: flex; flex-direction: column; align-items: center;
+  font-family: var(--font-mono); font-size: 10px; line-height: 1.3; color: var(--ink-3); pointer-events: none;
+}
+
+/* ---------- Üç satır (Gözlük · Örtme · Mesafe) ---------- */
+.acu-rows { flex: none; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; }
+.acu-row {
+  position: relative; width: 100%; min-height: 56px; padding: 8px 12px;
+  display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; align-items: center; gap: 10px;
+  background: transparent; border: 0; color: inherit; font: inherit; text-align: left;
+}
+button.acu-row { cursor: pointer; }
+.acu-row + .acu-row { border-top: 1px solid var(--border); }
+.acu-row.flag::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 0 3px 3px 0; background: var(--warn); }
+.acu-row.pulse { background: var(--warn-bg); }
+.acu-ic { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; }
+.acu-ic.ok { background: var(--ok-bg); color: var(--ok); }
+.acu-ic.wait { background: var(--surface-2); color: var(--ink-3); }
+.acu-ic.bad { background: var(--warn-bg); color: var(--warn); }
+.acu-rt { display: flex; flex-direction: column; min-width: 0; }
+.acu-row .k { font-size: 12px; color: var(--ink-3); }
+.acu-row .v { font-size: 15px; font-weight: 600; color: var(--ink); overflow-wrap: anywhere; }
+.acu-row .v.bad { color: var(--warn); }
+.acu-row .tr { font-size: 14px; font-weight: 600; color: var(--accent); white-space: nowrap; }
+.acu-row .tr.mono { font-family: var(--font-mono); font-weight: 500; color: var(--ink-2); }
+.acu-row .ring {
+  width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+  background: conic-gradient(var(--accent) 0 var(--p, 0%), var(--surface-3) var(--p, 0%) 100%);
+}
+.acu-row .ring::after { content: ''; width: 14px; height: 14px; border-radius: 50%; background: var(--surface); }
+.acu-row .tog { width: 44px; height: 26px; border-radius: 13px; background: var(--surface-2); border: 1px solid var(--border); position: relative; flex: none; }
+.acu-row .tog::after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--ink-3); transition: left 0.15s ease; }
+.acu-row .tog.on { background: var(--accent); border-color: transparent; }
+.acu-row .tog.on::after { left: 20px; background: var(--accent-ink); } /* koyu temada beyaz düğme vurgu izinde 2,2:1 kalıyordu */
+
+.acu-note { flex: none; margin-top: 8px; font-size: 13px; line-height: 18px; color: var(--ink-3); text-align: center; }
+
+/* ---------- Ana düğme ---------- */
+.acu-cta {
+  flex: none; width: 100%; min-height: 54px; margin: 12px 0 16px; padding: 0 16px;
+  border-radius: 18px; border: 0; font: inherit; font-size: 16px; font-weight: 700; line-height: 1.2;
+  display: flex; align-items: center; justify-content: center; gap: 8px; text-align: center; cursor: pointer;
+}
+.acu-cta:active { transform: scale(0.98); }
+.acu-cta.go { background: var(--accent-grad); color: var(--accent-ink); }
+.acu-cta.need { background: var(--surface-2); color: var(--ink); border: 1px solid var(--border); }
+.acu-cta.need b { width: 20px; height: 20px; flex: none; border-radius: 50%; background: var(--warn); color: var(--bg); display: grid; place-items: center; font-size: 13px; }
+.acu-cta.hold {
+  background: linear-gradient(90deg, var(--accent-soft) 0 var(--p, 0%), var(--surface-2) var(--p, 0%) 100%);
+  color: var(--ink); border: 1px solid var(--border);
+}
+.acu-cta.ghost { background: transparent; color: var(--ink-2); border: 1px solid var(--border); min-height: 48px; margin: 0 0 12px; }
+.acu-cta:disabled { opacity: 0.5; cursor: default; transform: none; }
+
+/* ---------- E1 · nasıl yapılır ---------- */
+.acu-howto-art { flex: 1 1 200px; max-height: 300px; }
+.acu-howto-art > svg { max-height: min(100%, 240px); }
+.acu-howto .acu-ttl h1 { font-size: 22px; text-wrap: balance; }
+.acu-howto-extra { flex: none; margin-top: 14px; display: flex; justify-content: center; }
+.acu-flex { flex: 1; min-height: 8px; }
+
+/* Canlı cm hapı (E1 kart 1 ve deneme üst çubuğu) */
+.acu-cm {
+  display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-width: 62px;
+  padding: 6px 10px; border-radius: 999px; font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+  background: var(--ok-bg); color: var(--ok); font-variant-numeric: tabular-nums;
+}
+.acu-cm.out { background: var(--lens-soft); color: var(--lens-text); }
+.acu-cm-sp { min-width: 62px; }
+
+/* ---------- E5 / E6 · deneme: beyaz ölçüm alanı, açık token'lar ---------- */
+.acu-clinic {
+  --bg: #ffffff; --surface: #ffffff; --surface-2: #eef2f5; --surface-3: #dde4ea; --border: #e1e7ec;
+  --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --accent: #0b7480; --accent-soft: rgba(17, 169, 184, 0.12);
+  --warn: #9a3412; --warn-bg: rgba(232, 96, 62, 0.12); --ok: #13704b; --ok-bg: rgba(31, 169, 116, 0.13);
+  color-scheme: light;
+  position: fixed; inset: 0; z-index: 30; display: flex; flex-direction: column; overflow: hidden;
+  background: #fff; color: var(--ink);
+  padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom);
+  font-size: 15px; line-height: 1.35;
+  touch-action: none; user-select: none; -webkit-user-select: none;
+  /* Başla: çizim alanı ölçüm alanına genişler (Hareketi Azalt açıksa anında; styles.css) */
+  animation: acu-open 0.3s ease both;
+}
+@keyframes acu-open {
+  from { clip-path: inset(24% 6% 32% 6% round 24px); }
+  to { clip-path: inset(0 0 0 0 round 0); }
+}
+.acu-clinic.fb-ok { background: #f0fdf4; }
+.acu-clinic.fb-no { background: #fff7ed; }
+.acu-clinic .acu-cm.out { background: rgba(245, 166, 35, 0.18); color: #8a4f00; }
+.acu-tbar { height: 44px; flex: none; display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center; gap: 8px; }
+.acu-tbar .mid { min-width: 0; text-align: center; line-height: 1.2; }
+.acu-tbar .mid b { display: block; font-size: 15px; }
+.acu-tbar .mid small { font-size: 12px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.acu-bar { flex: none; height: 4px; margin: 4px 0 6px; border-radius: 2px; background: var(--surface-2); overflow: hidden; }
+.acu-bar i { display: block; height: 100%; border-radius: 2px; background: var(--accent); transition: width 0.2s; }
+.acu-phase { flex: none; height: 16px; font-size: 12px; line-height: 16px; color: var(--ink-3); text-align: center; }
+/* Harf yuvası: üst ve alttaki her öğe sabit yükseklikte → E'nin merkezi hiçbir denemede kaymaz */
+.acu-slot { flex: 1; min-height: 180px; display: grid; place-items: center; position: relative; }
+.acu-letter { display: grid; place-items: center; animation: acu-letter-in 0.14s ease-out both; }
+/* Yalnızca opaklık: harfin boyutu (ölçülen uyaran) animasyonla değişmemeli */
+@keyframes acu-letter-in { from { opacity: 0; } to { opacity: 1; } }
+.acu-guess { flex: none; height: 18px; font-size: 13px; line-height: 18px; color: var(--ink-3); text-align: center; }
+/* Kenar oklarla aynı (2 px --ink-3, beyazda 5,6:1): düğmenin sınırı beyaz alanda seçilir (grafik ≥ 3:1) */
+.acu-cant {
+  flex: none; width: 100%; height: 60px; margin: 8px 0 12px; border-radius: 16px;
+  border: 2px solid var(--ink-3); background: var(--surface-2); color: var(--ink);
+  font: inherit; font-size: 16px; font-weight: 600; cursor: pointer;
+}
+.acu-cant.hidden { visibility: hidden; }
+.acu-arrows { flex: none; display: flex; justify-content: space-between; gap: 8px; margin-bottom: 20px; }
+.acu-arrow {
+  width: min(78px, calc((100vw - 60px) / 4)); height: min(78px, calc((100vw - 60px) / 4)); padding: 0;
+  border-radius: 50%; border: 2px solid var(--ink-3); background: #f4f7f9; color: var(--ink);
+  display: grid; place-items: center; cursor: pointer;
+}
+.acu-arrow:active { background: var(--surface-3); border-color: var(--ink); }
+.acu-arrow:focus-visible, .acu-cant:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.acu-arrows.dim, .acu-cant.dim { opacity: 0.35; }
+
+/* Duraklama kartı: harf yuvasının ortasında */
+.acu-pcard {
+  width: min(100%, 290px); padding: 16px; border-radius: 20px;
+  background: #fff; border: 1px solid var(--border); box-shadow: 0 10px 30px -12px rgba(11, 18, 25, 0.25);
+  display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center;
+}
+.acu-pcard.pulse { box-shadow: 0 0 0 4px rgba(245, 166, 35, 0.35), 0 10px 30px -12px rgba(11, 18, 25, 0.25); }
+.acu-pcard .ic { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: rgba(245, 166, 35, 0.16); color: #8a4f00; }
+.acu-pcard b { font-size: 18px; line-height: 22px; font-weight: 700; color: var(--ink); }
+.acu-pcard > span:not(.ic) { font-size: 13px; color: var(--ink-3); }
+.acu-mini {
+  min-height: 44px; padding: 0 14px; border-radius: 14px; border: 1px solid var(--border);
+  background: var(--surface-2); color: var(--ink); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.acu-pcard .acu-mini { margin-top: 6px; }
+
+/* ---------- E7 · göz sonucu ----------
+   Kısa ekranda sıkışır: en uzun durum (kamerasız + taban notu + 44 pt bağlantı) 320×568'e sığsın diye boşluklar,
+   büyük sayı, eşdeğer kutusu ve düğme aralıkları ekran yüksekliğiyle ölçeklenir: 568 pt'de alt değer, 812 pt ve
+   üstünde onaylı değer (aralık 12, sayı 52, kutu 10, düğme 12/16/12), arada doğrusal. */
+.acu-res {
+  --res-gap: clamp(6px, calc(2.46dvh - 7.97px), 12px);
+  flex: 1; min-height: 0; display: flex; flex-direction: column; gap: var(--res-gap);
+  margin-top: clamp(4px, calc(1.64dvh - 5.31px), 8px);
+}
+.acu-res-title { font-weight: 600; color: var(--ink); }
+.acu-big { display: flex; align-items: baseline; gap: 10px; }
+.acu-big b { font-family: var(--font-display); font-size: clamp(40px, calc(4.92dvh + 12.07px), 52px); font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.acu-big span { font-size: 13px; line-height: 1.25; color: var(--ink-3); }
+.acu-range { margin-top: calc(4px - var(--res-gap)); font-size: 13px; color: var(--ink-2); } /* büyük sayıya 4 pt */
+.acu-eq { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: var(--surface); border: 1px solid var(--border); border-radius: 16px; }
+.acu-eq div { padding: clamp(6px, calc(1.64dvh - 3.31px), 10px) 4px; text-align: center; min-width: 0; }
+.acu-eq div + div { border-left: 1px solid var(--border); }
+.acu-eq b { display: block; font-family: var(--font-mono); font-size: 17px; font-weight: 500; }
+.acu-eq small { font-size: 11px; color: var(--ink-3); }
+.acu-ruler { position: relative; flex: none; height: 34px; }
+.acu-ruler .track { position: absolute; left: 0; right: 0; top: 12px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--ok-bg), var(--surface-2) 60%, var(--warn-bg)); }
+.acu-ruler .mk { position: absolute; top: 6px; width: 3px; height: 18px; margin-left: -1.5px; border-radius: 2px; background: var(--ink); }
+.acu-ruler .lb { position: absolute; top: 22px; transform: translateX(-50%); font-family: var(--font-mono); font-size: 10px; color: var(--ink-3); }
+.acu-facts { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--ink-2); }
+.acu-facts .muted { color: var(--ink-3); }
+/* Dokunma alanı gerçek 44 pt (eksi kenar boşluğu yok: alan üstteki metnin üstüne binmesin) */
+.acu-link {
+  align-self: flex-start; min-height: 44px; padding: 0; margin: 0; display: inline-flex; align-items: center;
+  border: 0; background: none; cursor: pointer; font: inherit; font-size: 14px; font-weight: 600; color: var(--accent);
+}
+.acu-result .acu-cta.go { margin: clamp(8px, calc(1.64dvh - 1.31px), 12px) 0 clamp(8px, calc(3.28dvh - 10.62px), 16px); }
+.acu-result .acu-cta.ghost { margin-bottom: clamp(8px, calc(1.64dvh - 1.31px), 12px); }
+
+/* ---------- E9 · özet ---------- */
+.acu-sum { margin-top: 14px; }
+.acu-sumrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px; min-height: 64px; padding: 8px 14px; }
+.acu-sumrow + .acu-sumrow { border-top: 1px solid var(--border); }
+.acu-sumrow .n { font-weight: 600; }
+.acu-sumrow small { font-family: var(--font-mono); font-size: 12px; color: var(--ink-3); }
+.acu-sumrow b { font-family: var(--font-mono); font-size: 20px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.acu-sum + .acu-facts { margin-top: 14px; }
+
+/* ---------- E8 · mola (components/RestBreak.jsx) ---------- */
+.acu-rest .acu-ttl { margin-top: 16px; }
+.acu-rest .acu-top .acu-prog { font-size: 12px; }
+.acu-ring { flex: 1 1 auto; min-height: 120px; display: grid; place-items: center; }
+.acu-dial { position: relative; width: clamp(120px, 28dvh, 200px); aspect-ratio: 1; }
+.acu-dial svg { display: block; width: 100%; height: 100%; }
+.acu-dial-track { fill: none; stroke: var(--surface-3); }
+.acu-dial-value { fill: none; stroke: var(--accent); stroke-linecap: round; transition: stroke-dashoffset 0.25s linear, stroke 0.3s ease; }
+.acu-dial.done .acu-dial-value { stroke: var(--ok); }
+.acu-dial.waiting { opacity: 0.6; }
+.acu-dial-num { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-display); font-size: 34px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.acu-dial.done .acu-dial-num { color: var(--ok); }
+.acu-rest-status { font-size: 14px; color: var(--ink-2); }
+.acu-rest-status.wait { color: var(--warn); }
+.acu-rest-next { margin-top: 12px; }
+.acu-rest .acu-cta.ghost { margin: 12px 0 16px; }
+
+/* ---------- Alt sayfalar (E3 gözlük, E10 çıkış, "Bu sayı ne anlatıyor?") ---------- */
+.acu-veil {
+  position: fixed; inset: 0; z-index: 60; display: flex; align-items: flex-end; justify-content: center;
+  background: rgba(11, 18, 25, 0.38); animation: acu-fade 0.2s ease both;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .acu-veil { background: rgba(0, 0, 0, 0.6); }
+}
+:root[data-theme='dark'] .acu-veil { background: rgba(0, 0, 0, 0.6); }
+.acu-sheet {
+  width: 100%; max-width: 560px; max-height: 100dvh; overflow-y: auto;
+  padding: 8px 16px calc(16px + env(safe-area-inset-bottom)); border-radius: 24px 24px 0 0;
+  background: var(--surface); color: var(--ink); display: flex; flex-direction: column; gap: 4px;
+  font-size: 15px; line-height: 1.35;
+  animation: acu-sheet-in 0.25s ease both;
+}
+@keyframes acu-sheet-in { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+.acu-grab { flex: none; width: 36px; height: 5px; margin: 0 auto 8px; border-radius: 3px; background: var(--surface-3); }
+.acu-sheet h2 { margin: 0; font-family: var(--font-display); font-size: 18px; font-weight: 600; line-height: 1.3; }
+.acu-sheet-sub { margin-bottom: 8px; font-size: 14px; line-height: 1.45; color: var(--ink-3); }
+.acu-sheet .acu-cta { margin: 6px 0 0; }
+.acu-sheet .acu-cta.ghost { margin: 8px 0 0; }
+.acu-opt {
+  width: 100%; height: 52px; padding: 0; display: flex; align-items: center; justify-content: space-between;
+  border: 0; border-top: 1px solid var(--border); background: none; color: var(--ink);
+  font: inherit; font-size: 16px; text-align: left; cursor: pointer;
+}
+.acu-opt .ck { color: var(--accent); font-weight: 700; }
+.acu-ask { margin: 6px 0; padding: 12px; border-radius: 14px; background: var(--accent-soft); display: flex; flex-direction: column; gap: 10px; }
+.acu-ask p { font-size: 15px; font-weight: 600; }
+.acu-ask .two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.acu-sheet-note { padding-top: 8px; font-size: 14px; font-weight: 600; color: var(--warn); }

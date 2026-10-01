@@ -1,0 +1,114 @@
+{
+ "el/el-vd-a.wav": {
+  "key_best": "A major",
+  "key_best_r": 0.889,
+  "key_2nd": "A minor",
+  "key_2nd_r": 0.698,
+  "eb_major_r": -0.451,
+  "top_pitch_classes": [
+   "A",
+   "E",
+   "D",
+   "B",
+   "C#"
+  ]
+ },
+ "el/el-vd-b.wav": {
+  "key_best": "D major",
+  "key_best_r": 0.856,
+  "key_2nd": "D minor",
+  "key_2nd_r": 0.727,
+  "eb_major_r": -0.325,
+  "top_pitch_classes": [
+   "D",
+   "A",
+   "F#",
+   "E",
+   "C#"
+  ]
+ },
+ "el/el-v-aday.wav": {
+  "key_best": "Ab major",
+  "key_best_r": 0.853,
+  "key_2nd": "C minor",
+  "key_2nd_r": 0.732,
+  "eb_major_r": 0.671,
+  "top_pitch_classes": [
+   "Eb",
+   "Ab",
+   "C",
+   "Bb",
+   "G"
+  ]
+ },
+ "el/el-derin-a.wav": {
+  "key_best": "A major",
+  "key_best_r": 0.821,
+  "key_2nd": "A minor",
+  "key_2nd_r": 0.723,
+  "eb_major_r": -0.348,
+  "top_pitch_classes": [
+   "A",
+   "E",
+   "C#",
+   "B",
+   "D"
+  ]
+ },
+ "el/el-derin-b.wav": {
+  "key_best": "Eb major",
+  "key_best_r": 0.834,
+  "key_2nd": "Ab major",
+  "key_2nd_r": 0.691,
+  "eb_major_r": 0.834,
+  "top_pitch_classes": [
+   "Eb",
+   "Ab",
+   "Bb",
+   "A",
+   "G"
+  ]
+ },
+ "el/el-imge.wav": {
+  "key_best": "D minor",
+  "key_best_r": 0.758,
+  "key_2nd": "D major",
+  "key_2nd_r": 0.741,
+  "eb_major_r": -0.123,
+  "top_pitch_classes": [
+   "D",
+   "A",
+   "Bb",
+   "C#",
+   "Ab"
+  ]
+ },
+ "el/el-kapanis.wav": {
+  "key_best": "D major",
+  "key_best_r": 0.847,
+  "key_2nd": "G major",
+  "key_2nd_r": 0.779,
+  "eb_major_r": -0.171,
+  "top_pitch_classes": [
+   "D",
+   "G",
+   "A",
+   "E",
+   "B"
+  ]
+ },
+ "common/donus.wav": {
+  "key_best": "F minor",
+  "key_best_r": 0.356,
+  "key_2nd": "F major",
+  "key_2nd_r": 0.319,
+  "eb_major_r": -0.151,
+  "top_pitch_classes": [
+   "F",
+   "F#",
+   "E",
+   "G",
+   "D"
+  ]
+ }
+}

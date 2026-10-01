@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fark Ettin mi · maket</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root {
+  --font-display: 'Unbounded', system-ui, sans-serif; --font-body: 'Onest', system-ui, sans-serif; --font-mono: ui-monospace, 'SF Mono', monospace;
+  --bg: #f3f6f8; --surface: #fff; --surface-2: #e9eef2; --border: #e1e7ec; --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --accent: #0b7480; --accent-g: #11a9b8; --accent-grad: linear-gradient(90deg, #0b7480, #2458cc); --accent-ink: #fff;
+  --ok: #13704b; --ok-bg: rgba(31,169,116,.13); --no: #b4431c; --no-bg: rgba(232,96,62,.12); --gold: #9a5b00; --gold-bg: rgba(245,166,35,.16);
+  --glass: rgba(255,255,255,.82); --glass-ink: #0b1219;
+}
+:root[data-theme="dark"] {
+  --bg: #070c12; --surface: #0f171f; --surface-2: #141e28; --border: rgba(255,255,255,.08); --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --accent: #19c2d1; --accent-g: #19c2d1; --accent-grad: linear-gradient(90deg, #19c2d1, #3e7bfa); --accent-ink: #041017;
+  --ok: #35d39a; --ok-bg: rgba(53,211,154,.14); --no: #ff9a7d; --no-bg: rgba(255,122,89,.14); --gold: #ffb13b; --gold-bg: rgba(255,177,59,.14);
+  --glass: rgba(10,16,24,.78); --glass-ink: #eef3f6;
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; background: var(--bg); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+.status { height: 47px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px 0 34px; font-weight: 700; font-size: 16px; position: relative; z-index: 5; }
+.status i { font-style: normal; letter-spacing: 2px; font-size: 13px; }
+.screen { min-height: calc(100vh - 47px); display: flex; flex-direction: column; padding: 0 20px 28px; }
+.top { display: flex; align-items: center; gap: 14px; padding: 6px 0 18px; }
+.x { width: 44px; height: 44px; border-radius: 14px; border: 1px solid var(--border); background: var(--surface); display: grid; place-items: center; color: var(--ink-2); }
+.bar { flex: 1; height: 6px; border-radius: 3px; background: var(--surface-2); overflow: hidden; }
+.bar b { display: block; height: 100%; background: var(--accent-grad); border-radius: 3px; }
+.ey { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: 27px; line-height: 1.12; letter-spacing: -.02em; }
+.btn { height: 58px; border-radius: 18px; border: 0; background: var(--accent-grad); color: var(--accent-ink); font: 700 18px var(--font-body); display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 26px -12px rgba(36,88,204,.6); width: 100%; }
+.sil { position: relative; flex: 1; min-height: 120px; margin: 16px 0; border-radius: 26px; background: radial-gradient(circle at 50% 60%, var(--surface-2), var(--bg) 72%); display: grid; place-items: center; overflow: hidden; }
+.sil svg { height: 86%; max-height: 290px; aspect-ratio: 120 / 185; width: auto; }
+.sil span { position: absolute; bottom: 12px; font-size: 13px; color: var(--ink-3); }
+.memory { position: relative; flex: 1; min-height: 150px; max-height: 300px; border-radius: 0; margin: 18px -20px 18px; overflow: hidden; }
+.memory svg { position: absolute; inset: -30px; width: calc(100% + 60px); height: calc(100% + 60px); filter: blur(16px) saturate(.8); opacity: .55; }
+.memory::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, var(--bg) 0%, transparent 30%, transparent 70%, var(--bg) 100%); }
+.btn.ghost { background: transparent; color: var(--ink-2); box-shadow: none; height: 48px; font-weight: 600; font-size: 16px; }
+.grow { flex: 1; }
+.small { font-size: 13px; color: var(--ink-3); line-height: 1.45; }
+/* görev ekranı */
+.hero { position: relative; height: 300px; margin: 0 -20px; overflow: hidden; }
+.hero svg { position: absolute; inset: 0; }
+.hero::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(180deg, transparent, var(--bg)); }
+.hero .top { position: absolute; left: 20px; right: 20px; top: 0; z-index: 2; }
+.hero .x { background: var(--glass); border-color: transparent; backdrop-filter: blur(8px); }
+.hero .bar { background: rgba(255,255,255,.55); }
+.taskcard { margin-top: -54px; position: relative; z-index: 3; display: flex; align-items: center; gap: 16px; padding: 16px 18px; border-radius: 22px; background: var(--surface); border: 1px solid var(--border); box-shadow: 0 18px 40px -24px rgba(10,20,30,.45); }
+.taskcard .ico { width: 74px; height: 50px; flex: none; }
+.taskcard span { display: block; font-size: 13px; color: var(--ink-3); margin-bottom: 3px; }
+.taskcard b { font-family: var(--font-display); font-size: 21px; letter-spacing: -.02em; font-weight: 700; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+.steps div { padding: 12px 10px 12px; border-radius: 16px; background: var(--surface-2); }
+.steps .n { font-family: var(--font-mono); font-size: 11px; color: var(--accent); letter-spacing: .1em; }
+.steps p { font-weight: 700; font-size: 14px; line-height: 1.25; margin-top: 6px; }
+.steps small { display: block; color: var(--ink-3); font-size: 12px; margin-top: 3px; }
+.nef { display: flex; gap: 12px; align-items: flex-start; margin-top: 18px; }
+.iris { width: 38px; height: 38px; border-radius: 50%; flex: none; background: radial-gradient(circle at 50% 50%, #0b1219 0 28%, transparent 29%), radial-gradient(circle at 50% 50%, #3e7bfa 0 52%, #19c2d1 53% 62%, transparent 63%); box-shadow: 0 0 0 2px var(--accent-g), 0 0 0 5px rgba(25,194,209,.15); position: relative; }
+.iris::after { content: ''; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #fff; left: 21px; top: 12px; }
+.nef p { font-size: 16px; line-height: 1.45; color: var(--ink-2); padding-top: 7px; }
+.nef p b { color: var(--ink); }
+/* yürüyüş */
+.walk { position: fixed; inset: 0; overflow: hidden; background: #BFE0EE; }
+.walk > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hud { position: absolute; left: 14px; right: 14px; top: 54px; display: flex; justify-content: space-between; align-items: center; z-index: 4; }
+.chip { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 18px 0 8px; border-radius: 23px; background: rgba(12,18,26,.82); color: #fff; font-weight: 700; font-size: 16px; backdrop-filter: blur(10px); }
+.chip .dot { width: 32px; height: 32px; border-radius: 50%; background: #fff; display: grid; place-items: center; }
+.ring { width: 52px; height: 52px; position: relative; }
+.ring svg { position: absolute; inset: 0; }
+.ring b { position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font: 700 17px var(--font-body); }
+.walkline { position: absolute; left: 0; right: 0; bottom: 0; height: 7px; background: rgba(255,255,255,.25); z-index: 4; }
+.walkline b { display: block; height: 100%; width: 22%; background: #19C2D1; }
+/* ne değişti */
+.frame { position: relative; margin: 0 -20px; height: min(470px, calc(100vh - 330px)); overflow: hidden; }
+.frame svg { position: absolute; inset: 0; }
+.frame .lid { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,12,18,.92) 0 46%, rgba(7,12,18,0) 50%); }
+.pill { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 3; display: inline-flex; gap: 8px; align-items: center; height: 40px; padding: 0 16px; border-radius: 20px; background: rgba(12,18,26,.82); color: #fff; font-weight: 700; font-size: 15px; white-space: nowrap; }
+.looks { display: flex; gap: 6px; }
+.looks i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.35); }
+.looks i.on { background: #19C2D1; }
+.qhead { padding-top: 18px; }
+.qhead h1 { margin-top: 8px; }
+.qhead p { margin-top: 8px; color: var(--ink-2); font-size: 16px; line-height: 1.45; }
+.found { display: flex; gap: 12px; align-items: center; margin-top: 16px; padding: 14px 16px; border-radius: 18px; background: var(--ok-bg); color: var(--ok); font-weight: 700; font-size: 16px; }
+.found em { display: block; font-style: normal; font-weight: 500; font-size: 14px; color: var(--ink-2); margin-top: 2px; }
+.meter { display: flex; gap: 4px; align-items: flex-end; height: 22px; }
+/* soru */
+.opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
+.opt { height: 64px; border-radius: 18px; background: var(--surface); border: 1.5px solid var(--border); display: flex; align-items: center; gap: 12px; padding: 0 16px; font-weight: 700; font-size: 17px; }
+.opt .sw { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid rgba(0,0,0,.15); flex: none; }
+.yn { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 26px; }
+.yn .opt { justify-content: center; height: 72px; font-size: 18px; }
+.yn .opt.on { border-color: var(--accent); background: var(--accent-g); background: color-mix(in srgb, var(--accent-g) 12%, var(--surface)); }
+/* sonuç */
+.big { display: flex; align-items: baseline; gap: 10px; margin-top: 16px; }
+.big b { font-family: var(--font-display); font-size: 68px; font-weight: 800; letter-spacing: -.05em; line-height: .95; }
+.big span { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--ink-2); }
+.verdict { display: inline-flex; gap: 8px; align-items: center; margin-top: 12px; height: 32px; padding: 0 12px; border-radius: 16px; background: var(--ok-bg); color: var(--ok); font-weight: 700; font-size: 14px; }
+.verdict.start { background: var(--surface-2); color: var(--ink-2); }
+.chart { margin-top: 18px; padding: 16px 16px 10px; border-radius: 22px; background: var(--surface); border: 1px solid var(--border); }
+.chart .lab { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-3); }
+.rows { margin-top: 14px; display: grid; gap: 8px; }
+.row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px; background: var(--surface-2); font-size: 15px; }
+.row i { font-style: normal; font-size: 12px; font-weight: 800; letter-spacing: .04em; padding: 4px 9px; border-radius: 10px; }
+.row i.ok { background: var(--ok-bg); color: var(--ok); } .row i.no { background: var(--no-bg); color: var(--no); } .row i.gs { background: var(--gold-bg); color: var(--gold); }
+.row span { flex: 1; color: var(--ink-2); } .row b { color: var(--ink); }
+/* ana sayfa durak ve nef kartı */
+.homebg { padding: 8px 20px; }
+.nefcard { margin-top: 10px; padding: 18px; border-radius: 24px; background: var(--surface); border: 1px solid var(--border); box-shadow: 0 18px 40px -26px rgba(10,20,30,.4); }
+.nefcard .h { display: flex; gap: 10px; align-items: center; font-weight: 700; font-size: 14px; color: var(--ink-3); }
+.nefcard p { margin-top: 12px; font-size: 18px; line-height: 1.4; font-weight: 600; }
+.nefcard .thumb { margin-top: 14px; height: 104px; border-radius: 16px; overflow: hidden; position: relative; }
+.nefcard .thumb svg { position: absolute; inset: 0; }
+.stop { margin-top: 14px; display: flex; gap: 14px; align-items: center; padding: 12px; border-radius: 20px; background: var(--surface); border: 1px solid var(--border); }
+.stop .th { width: 64px; height: 64px; border-radius: 16px; overflow: hidden; position: relative; flex: none; }
+.stop .th svg { position: absolute; inset: 0; }
+.stop b { display: block; font-size: 17px; }
+.stop span { display: block; font-size: 14px; color: var(--ink-3); margin-top: 3px; }
+.stop .th.ic { display: grid; place-items: center; background: var(--surface-2); font-size: 26px; color: var(--accent); }
+.stop.done { opacity: .62; }
+.stop.now { border: 2px solid var(--accent-g); box-shadow: 0 14px 30px -20px rgba(17,169,184,.7); }
+.stop .ok { margin-left: auto; color: var(--ok); font-weight: 800; font-size: 18px; padding-right: 6px; }
+.stop { margin-top: 10px; }
+.stop .new { margin-left: auto; font-size: 12px; font-weight: 800; color: var(--accent); background: color-mix(in srgb, var(--accent-g) 14%, transparent); padding: 6px 10px; border-radius: 10px; }
+/* sahneler sayfası */
+.sheet { display: grid; gap: 12px; padding-top: 8px; }
+.sc { height: 190px; border-radius: 22px; overflow: hidden; position: relative; }
+.sc svg { position: absolute; inset: 0; }
+.sc span { position: absolute; left: 12px; bottom: 12px; padding: 6px 12px; border-radius: 12px; background: rgba(12,18,26,.8); color: #fff; font-weight: 700; font-size: 14px; }
+@media (max-width: 340px) { .bigsub { display: none; } .chart { padding: 10px 12px 6px; margin-top: 12px; } .chart .lab { font-size: 11px; } .rows { gap: 6px; margin-top: 10px; } .verdict { margin-top: 8px; } .screen { padding-bottom: 16px; } .hero { height: 140px !important; } .steps div { padding: 8px 8px; } .steps small { font-size: 11px; } .small { font-size: 11px; } .btn { height: 52px; } .sil { max-height: 180px; } .opt { font-size: 15px; } .nefcard p { font-size: 16px; } .nefcard .thumb { height: 80px; } .rows .row { padding: 9px 12px; font-size: 13px; } .chart svg { height: 64px; } .big b { font-size: 52px; } .steps p { margin-top: 2px; } .taskcard { margin-top: -44px; padding: 12px 14px; } .taskcard .ico { width: 56px; } .nef { margin-top: 12px; } .nef p { font-size: 14px; } .steps div { padding: 10px 8px; } .memory { min-height: 60px; } h1 { font-size: 23px; } .big b { font-size: 56px; } .hero { height: 170px; }  .steps p { font-size: 13px; } .taskcard b { font-size: 18px; } .opt { font-size: 15px; height: 56px; } }
+</style>
+<script src="scene.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const q = new URLSearchParams(location.search)
+const screen = q.get('s') || 'intro'
+document.documentElement.dataset.theme = q.get('theme') || 'light'
+const F = window.FEM
+const st = F.genStreet(42, 2400)
+const SY = F.Y.side + 30
+const PEOPLE = [
+  { x: 330, y: SY, top: 'mor', skin: F.SKIN[0], hair: 'kahve', dress: true, longHair: true, bag: 'sari' },
+  { x: 470, y: SY + 4, top: 'beyaz', skin: F.SKIN[2], hair: 'siyah', phone: true },
+  { x: 610, y: SY, top: 'yesil', skin: F.SKIN[1], hair: 'gri', hat: 'kirmizi', dir: -1 },
+  { x: 760, y: SY + 6, top: 'turuncu', skin: F.SKIN[3], hair: 'siyah', dress: true, longHair: true, laugh: true },
+  { x: 900, y: SY, top: 'lacivert', skin: F.SKIN[0], hair: 'sari', glasses: true, dir: -1 },
+  { x: 1040, y: SY + 2, top: 'kirmizi', skin: F.SKIN[4], hair: 'siyah' },
+  { x: 120, y: SY + 4, top: 'siyah', skin: F.SKIN[1], hair: 'kizil', dress: true, longHair: true, bag: 'mavi', dir: -1 },
+]
+const MP = [{ x: 330, y: F.Y.side + 150, s: 1.15, top: 'bordo', skin: F.SKIN[1], hair: 'siyah', dress: true, longHair: true, bag: 'yesil' }, { x: 520, y: F.Y.side + 140, s: 1.1, top: 'mavi', skin: F.SKIN[3], hair: 'gri', hat: 'sari', dir: -1 }, { x: 700, y: F.Y.side + 160, s: 1.2, top: 'krem', skin: F.SKIN[0], hair: 'kizil', dress: true, longHair: true }]
+const BIKES = [{ x: 560, color: 'kirmizi' }, { x: 1140, color: 'mavi' }]
+const CATS = [{ x: 410, color: 'turuncu' }]
+const VEND = [{ x: 205, type: 'simit' }]
+const CARS_F = [{ x: 120, color: 'beyaz', dir: -1 }, { x: 520, color: 'mavi', dir: -1 }, { x: 980, color: 'sari', taxi: true, dir: -1 }]
+const CARS_N = [{ x: 300, color: 'mavi' }, { x: 720, color: 'kirmizi' }, { x: 1120, color: 'gri' }]
+const DARK = (q.get('theme') === 'dark')
+const scene = (mode, vx, vw, extra = {}) => F.renderStreet(st, DARK && mode === 'day' ? 'dusk' : mode, { vx, vw, people: PEOPLE, bikes: BIKES, cats: CATS, vendors: VEND, carsFar: CARS_F, carsNear: CARS_N, ...extra })
+const carIco = `<svg class="ico" viewBox="-96 -84 192 100">${F.car({ x: 0, color: 'mavi' }, F.PAL.day, 'x').replace(/translate\([^)]*\)/, 'translate(0 0)')}</svg>`
+const status = (light) => `<div class="status" style="${light ? 'color:#0b1219' : ''}"><span>17:02</span><i>●●● ◆ ▮</i></div>`
+const xBtn = `<button class="x" aria-label="Çık"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`
+
+const S = {}
+// 1. Görev ekranı
+S.intro = () => `${status()}<main class="screen">
+  <div class="hero">${scene('day', 180, 520)}<div class="top">${xBtn}<div class="bar"><b style="width:0"></b></div></div></div>
+  <div class="taskcard">${carIco}<div><span>Görevin</span><b>Mavi arabaları say</b></div></div>
+  <span class="ey" style="margin-top:18px">Fark Ettin mi? · 2 dk · Cadde</span>
+  <div class="steps">
+    <div><span class="n">01</span><p>Caddeden geç</p><small>40 sn</small></div>
+    <div><span class="n">02</span><p>Ne değişti?</p><small>4 sahne</small></div>
+    <div><span class="n">03</span><p>Gözünden kaçan</p><small>2 soru</small></div>
+  </div>
+  <div class="nef"><div class="iris"></div><p>Gözün mavi arabalarda olsun. Sonunda birkaç sorum var.</p></div>
+  <div class="grow" style="min-height:16px"></div>
+  <p class="small" style="margin-bottom:12px">Bu bir fark etme alıştırması. Gerçek hayatta daha çok fark ettirdiği gösterilmedi.</p>
+  <button class="btn">Yürümeye başla</button>
+</main>`
+// 2. Yürüyüş
+S.walk = () => `<div class="walk">${scene('day', 260, 390 * 844 / (innerHeight || 844))}
+  <div class="status" style="color:${DARK ? '#fff' : '#0b1219'}">17:04<i>●●● ◆ ▮</i></div>
+  <div class="hud"><span class="chip"><span class="dot"><svg width="26" height="16" viewBox="-96 -84 192 100">${F.car({ x: 0, color: 'mavi' }, F.PAL.day, 'x').replace(/translate\([^)]*\)/, 'translate(0 0)')}</svg></span>Mavi arabaları say</span>
+  <div class="ring"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="rgba(12,18,26,.82)"/><circle cx="26" cy="26" r="20" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="4"/><circle cx="26" cy="26" r="20" fill="none" stroke="#19C2D1" stroke-width="4" stroke-linecap="round" stroke-dasharray="125.6" stroke-dashoffset="28" transform="rotate(-90 26 26)"/></svg><b>31</b></div></div>
+  <div class="walkline"><b></b></div></div>`
+// 3. Ne değişti? (ikinci görüntü, dokun)
+const VW = 560
+S.change = () => `${status()}<main class="screen">
+  <div class="top">${xBtn}<div class="bar"><b style="width:52%"></b></div></div>
+  <span class="ey">Ne değişti? · 2 / 4</span>
+  <h1 style="margin-top:8px">Bir şey değişti. Nerede?</h1><p style="margin-top:6px;color:var(--ink-2)">Değişen yere dokun.</p>
+  <div class="frame" style="margin-top:16px">${scene('day', 520, VW, { people: PEOPLE.map((p) => p.hat ? { ...p, hat: 'mavi' } : p) })}<div class="pill"><span class="looks"><i class="on"></i><i></i><i></i></span>1. bakış · 14 nesne</div></div>
+  <div class="grow"></div>
+  <button class="btn ghost">Bulamadım, bir daha göster</button>
+</main>`
+S.found = () => `${status()}<main class="screen">
+  <div class="top">${xBtn}<div class="bar"><b style="width:58%"></b></div></div>
+  <span class="ey">Ne değişti? · 2 / 4</span>
+  <h1 style="margin-top:8px">Buldun.</h1>
+  <div class="frame" style="margin-top:16px">${scene('day', 520, VW, { people: PEOPLE.map((p) => p.hat ? { ...p, hat: 'mavi' } : p), mark: { x: 610, y: SY - 136, r: 26 } })}<div class="pill">Şapka kırmızıydı, mavi oldu</div></div>
+  <div class="found"><span>İlk bakışta buldun<em>Sıradaki sahne 16 nesne</em></span></div>
+  <div class="grow"></div>
+  <button class="btn">Sıradaki</button>
+</main>`
+// 4. Gözünden kaçan: önce "fark ettin mi?", sonra seçenek (Kreitz 2020)
+S.ask = () => `${status()}<main class="screen">
+  <div class="top">${xBtn}<div class="bar"><b style="width:82%"></b></div></div>
+  <span class="ey">Gözünden kaçan · 1 / 2</span>
+  <div class="qhead"><h1>Caddede kahkaha atan bir kadın vardı.</h1><p>Onu fark ettin mi?</p></div>
+  <div class="sil"><svg viewBox="-60 -175 120 185">${F.person({ x: 0, y: 0.01, s: 1, top: '#8E97A1', skin: '#AEB5BD', hair: '#6F7881', dress: true, longHair: true, laugh: true }, F.PAL.day)}</svg><span>Cadde · 1 dk önce</span></div>
+  <div class="yn"><div class="opt">Gördüm</div><div class="opt">Görmedim</div></div>
+</main>`
+S.ask2 = () => `${status()}<main class="screen">
+  <div class="top">${xBtn}<div class="bar"><b style="width:86%"></b></div></div>
+  <span class="ey">Gözünden kaçan · 1 / 2</span>
+  <div class="qhead"><h1>Elbisesi ne renkti?</h1><p>Görmediysen de tahmin et.</p></div>
+  <div class="sil"><svg viewBox="-60 -175 120 185">${F.person({ x: 0, y: 0.01, s: 1, top: '#8E97A1', skin: '#AEB5BD', hair: '#6F7881', dress: true, longHair: true, laugh: true }, F.PAL.day)}</svg><span>Cadde · 1 dk önce</span></div>
+  <div class="opts" style="margin-top:0">${['turuncu', 'mor', 'yesil', 'kirmizi'].map((c) => `<div class="opt"><span class="sw" style="background:${F.C[c]}"></span>${{ turuncu: 'Turuncu', mor: 'Mor', yesil: 'Yeşil', kirmizi: 'Kırmızı' }[c]}</div>`).join('')}</div>
+</main>`
+// 5. Sonuç
+const pts = [10, 10, 12, 10, 12, 14, 12, 14, 16, 14, 16]
+function chart() {
+  const W = 320, Hh = 110, max = 20, min = 6
+  const xs = (i) => 12 + i * ((W - 24) / (pts.length - 1)), ys = (v) => Hh - 12 - ((v - min) / (max - min)) * (Hh - 24)
+  const base = 11
+  let o = `<svg viewBox="0 0 ${W} ${Hh}" width="100%" height="${Hh}">`
+  o += `<line x1="8" x2="${W - 8}" y1="${ys(base)}" y2="${ys(base)}" stroke="var(--ink-3)" stroke-dasharray="4 5" stroke-width="1.5"/>`
+  o += `<text x="10" y="${ys(base) + 18}" font-size="12" fill="var(--ink-3)" font-family="Onest">başlangıcın 11</text>`
+  o += `<path d="${pts.map((v, i) => `${i ? 'L' : 'M'}${xs(i)} ${ys(v)}`).join('')}" fill="none" stroke="var(--accent-g)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>`
+  pts.forEach((v, i) => (o += `<circle cx="${xs(i)}" cy="${ys(v)}" r="${i === pts.length - 1 ? 6 : 3.5}" fill="${i === pts.length - 1 ? 'var(--accent-g)' : 'var(--surface)'}" stroke="var(--accent-g)" stroke-width="2.5"/>`))
+  return o + '</svg>'
+}
+S.result = () => `${status()}<main class="screen">
+  <div class="top">${xBtn}<div class="bar"><b style="width:100%"></b></div></div>
+  <span class="ey">Bugünkü turun</span>
+  <div class="big"><b>16</b><span>nesne</span></div>
+  <p class="bigsub" style="margin-top:8px;font-size:17px;color:var(--ink-2);line-height:1.4">Değişikliği 16 nesnelik kalabalık sahnede buldun.</p>
+  <span class="verdict">Başlangıcından iyi</span>
+  <div class="chart">${chart()}<div class="lab"><span>11 tur önce</span><span>bugün 16</span></div></div>
+  <div class="rows">
+    <div class="row"><i class="ok">TAM</i><span>Mavi araba: <b>5</b> geçti, sen de 5 dedin</span></div>
+    <div class="row"><i class="no">KAÇTI</i><span>Kahkaha atan kadının elbisesi: <b>turuncu</b></span></div>
+    <div class="row"><i class="ok">GÖRDÜN</i><span>Şapkalı adamın şapkası: <b>kırmızı</b></span></div>
+  </div>
+  <div class="grow" style="min-height:14px"></div>
+  <button class="btn">Bitti</button>
+</main>`
+// 6. Ana sayfa: Nef kartı (ilk gün) ve yoldaki durak
+S.home = () => `${status()}<main class="screen homebg">
+  <span class="ey" style="margin-top:6px">Bugünün yolu · 6. gün</span>
+  <div class="nefcard"><div class="h"><div class="iris" style="width:28px;height:28px"></div>Nef</div>
+    <p>Yolunda yeni bir durak var: Fark Ettin mi? Bir caddeden geçip neyin değiştiğini bulacaksın.</p>
+    <div class="thumb">${scene('day', 560, 620)}</div></div>
+  <div class="stop done"><div class="th ic">◎</div><div><b>Göz egzersizleri</b><span>Tamam · 4 dk</span></div><span class="ok">✓</span></div>
+  <div class="stop done"><div class="th ic">≈</div><div><b>Nefes</b><span>Tamam · 3 dk</span></div><span class="ok">✓</span></div>
+  <div class="stop now"><div class="th">${scene('day', 560, 200)}</div><div><b>Fark Ettin mi?</b><span>Ne değişti? · 2 dk</span></div><span class="new">Yeni</span></div>
+  <div class="stop"><div class="th ic">∿</div><div><b>Yılan oyunu</b><span>1 dk</span></div></div>
+</main>`
+// 7. Sahneler
+S.scenes = () => `${status()}<main class="screen">
+  <span class="ey" style="margin-top:6px">Sahneler</span><h1 style="margin:8px 0 12px">Her hafta yeni bir yer</h1>
+  <div class="sheet">
+    <div class="sc">${scene('day', 400, 640)}<span>Cadde</span></div>
+    <div class="sc">${F.renderMarket('day', { vx: 260, vw: 640, people: MP })}<span>Pazar yeri</span></div>
+    <div class="sc">${scene('dusk', 400, 640)}<span>Akşam caddesi</span></div>
+  </div>
+</main>`
+document.getElementById('app').innerHTML = (S[screen] || S.intro)()
+</script>
+</body>
+</html>

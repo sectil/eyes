@@ -1,0 +1,37 @@
+{
+ "node_id": "Y80OYRqfyQY3EVnoI6Tw",
+ "session_ids": [
+  "oPXcVnHPhUrLcYu2776C",
+  "6xQz4GmefRaVsQl9l5fh",
+  "JEALGUEVA5jExAHJhC1V"
+ ],
+ "requested_at": "2026-09-30T07:03:28.346Z",
+ "tts": "Yastığın kumaşı serin ve yumuşak.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "oPXcVnHPhUrLcYu2776C",
+   "generation_id": "Oru40PXCnW4bsqcgiq4b",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/oPXcVnHPhUrLcYu2776C/Oru40PXCnW4bsqcgiq4b/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070527Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=5d0a14411259db4dde2a85ef83d6f04c345b6fd0d5fc5df7b9b45b2721bf80d0da0bbfc9911b6ba8b5cd1c1633f4009ae6fe5840b3810287e4607ece59ebc2984ee17a950da23e5eb8670ae0bd33795ebe874c3932568e92e7e9e87602dfbeaddf5d086cf25d1061cb9f24f8cc9005828219b2ffc721699bb48fe1093bb2b74229810d4ae94e374ec9d82633a91a1c03a2156ccf5eb72ba6a9f5b1328f2d0ca38b5e4279c0aa526678550d5a5cf1b622cfdc705764be85cf90ca05a535a7d12329bf15853add35f6cac96a72f23203f24b882752e8f3184cfbe66bc1046cb7c43feb26a1ead57fa6b1fb4861382db3b575ba9101d3cf04d4f744477001222758",
+   "duration_secs": 2.96,
+   "prompt": "Yastığın kumaşı serin ve yumuşak.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "6xQz4GmefRaVsQl9l5fh",
+   "generation_id": "TosjiJvyZZT55dBENRNE",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/6xQz4GmefRaVsQl9l5fh/TosjiJvyZZT55dBENRNE/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070524Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=4be9737c6fcd1cccab9d144949f4006b2b1c98030a37053935e98d8f84a262a8c79ca69c62086cc905832e20114d7233301dacc6c5e994089f450512e679f0868e69015c8ee14e7bad0f700dbd2610ef93f7f673061581076891444979bfd5732f576346a0ff294543d334363d77295b4747bdf95be80a5fe853112513959d67e27b86e2bbd7a854686bb8b6eb583baa8b47c3247bd7aa6ac51ba6f04985f516f491067dc6c52f48f76cec46399a5ea7f24e83ebff4185c9d89ff06126e8d7ea30466e51ebe2ad98af6cc8c5a94f9c3a897a7e7fdc48c3dc43268794128f38fc20345275f06b0d63a09080f8647979b2b4bd97586fe97fc27506aef62281293e",
+   "duration_secs": 2.96,
+   "prompt": "Yastığın kumaşı serin ve yumuşak.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "JEALGUEVA5jExAHJhC1V",
+   "generation_id": "xQmAHLstMXf5l2qYInnN",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/JEALGUEVA5jExAHJhC1V/xQmAHLstMXf5l2qYInnN/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070547Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=d7475b7870f7a3303c6b8b9c139734b2304a72b5ab161840e67842664f58adbdd3274b15b3176a126eb6db965474137786ac2b4b8573b3ff4055283dcca19a7090903b5c06559528347b043a45c1651ec7eed10526bb5e77786b9cc96998e54f63398f068ffe7d720b0e8f53b1f213da05767a1004b9816697206e5a0be083d9559ddb6c76a14bba680852223ae891bd2eb78795eb2e8038e4c42dbeafcf004e233962af9e4a3733d58eb18b34c868bd070ed3ed9c6c7c4bfdde25b6dea923a99484491f40518107119938c29fa2df35dd5aed1e025661cf115fa95211fdb00133da882e3e2edbeda37c7afe57ba0dc323391eac1acdcb3badd64e61ca38576d",
+   "duration_secs": 2.96,
+   "prompt": "Yastığın kumaşı serin ve yumuşak.",
+   "kind": "audio"
+  }
+ ]
+}

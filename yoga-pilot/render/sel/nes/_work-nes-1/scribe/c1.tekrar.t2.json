@@ -1,0 +1,15 @@
+{
+ "unit": "c1.tekrar",
+ "take": "t2",
+ "asset_id": "EjbhWZNPixKQi8ICtYQa",
+ "source_node_id": "57ZRpb6wSWCIABSfym6D",
+ "stt_node_id": "8c5XVAxSpIjFg2TazuhW",
+ "session_id": "P6Q7qq961cypbkFLxmUk",
+ "generation_id": "N2VN3KSJPn3ATtl15frU",
+ "actual_credits": 20.24,
+ "actual_cents": 0.368,
+ "scribe_text": "Hissetmesen de her adı içinden tekrarlayabilirsin",
+ "spoken_duration_secs": "3.48",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 6\n}"
+}

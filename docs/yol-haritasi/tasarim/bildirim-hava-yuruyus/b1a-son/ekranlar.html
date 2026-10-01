@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B1a birleşik tasarım</title>
+<meta name="description" content="Nefona B1a son tur: F (B'den), S (C'den), N (C'den) tek tasarımda; iki tema, 390 ve 320 pt.">
+<link rel="stylesheet" href="file:///home/user/eyes/app/node_modules/@fontsource-variable/onest/index.css">
+<link rel="stylesheet" href="file:///home/user/eyes/app/node_modules/@fontsource-variable/unbounded/index.css">
+<link rel="stylesheet" href="file:///home/user/eyes/app/node_modules/@fontsource-variable/jetbrains-mono/index.css">
+<style>
+:root {
+  --pg-bg: #eef2f4; --pg-ink: #0d1720; --pg-ink-2: #3a4955; --pg-ink-3: #66737e; --pg-line: #d8e0e6;
+  --f-display: 'Unbounded Variable', 'Unbounded', system-ui, sans-serif;
+  --f-body: 'Onest Variable', 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --f-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', monospace;
+  --pw: 390px; --ph: 844px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --pg-bg: #070c12; --pg-ink: #eef3f6; --pg-ink-2: #b9c4cd; --pg-ink-3: #8b98a5; --pg-line: rgba(255,255,255,0.09); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --pg-bg: #070c12; --pg-ink: #eef3f6; --pg-ink-2: #b9c4cd; --pg-ink-3: #8b98a5; --pg-line: rgba(255,255,255,0.09); color-scheme: dark; }
+body.w320 { --pw: 320px; --ph: 568px; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--pg-bg); color: var(--pg-ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; margin: 0; }
+p { margin: 0; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-inline: 20px; }
+@media (max-width: 480px) { .wrap { padding-inline: 16px; } }
+header.wrap { padding-block: 32px 8px; }
+header h1 { font: 700 clamp(1.4rem, 3vw, 2rem)/1.15 var(--f-display); letter-spacing: -0.02em; margin: 0; }
+header p { color: var(--pg-ink-2); margin-top: 10px; max-width: 42rem; }
+.bar { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+.bar button { border: 1px solid var(--pg-line); background: transparent; color: var(--pg-ink); font: 600 0.85rem/1 var(--f-body); padding: 9px 14px; border-radius: 999px; cursor: pointer; min-height: 36px; }
+.bar button[aria-pressed="true"] { background: var(--pg-ink); color: var(--pg-bg); }
+.sec { padding-block: 26px 6px; }
+.sec h2 { font: 600 1.15rem/1.2 var(--f-display); margin: 0; }
+.strip { display: flex; gap: 22px; overflow-x: auto; padding-block: 18px; }
+.cell { display: grid; gap: 8px; flex: none; margin: 0; width: calc(var(--pw) + 22px); align-content: start; }
+.cap { font: 600 0.8rem/1.3 var(--f-body); color: var(--pg-ink-3); }
+.cap b { color: var(--pg-ink); }
+
+/* ============ Telefon: app/src/styles.css + exercise.css + remind.css tokenları (1:1) ============ */
+.t-light { --bg: #f3f6f8; --surface: #ffffff; --surface-2: #e9eef2; --surface-3: #dde4ea; --border: #e1e7ec;
+  --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976; --accent: #0b7480; --accent-ink: #ffffff; --accent-soft: rgba(17,169,184,0.12);
+  --iris-1: #11a9b8; --iris-2: #2f6bea; --frame: #1a2128;
+  --ex-ground: #e9eef2; --ex-ground-hi: #ffffff; --ex-glass-line: rgba(11,18,25,0.09); --ex-gold: #b57300;
+  --ex-btn: linear-gradient(90deg, #0b7480, #2458cc); --ex-btn-ink: #ffffff;
+  --qh-amber: #9a5b00; --qh-amber-bg: rgba(214,140,20,0.13);
+  --scrim: rgba(11,18,25,0.58); --sheet: #ffffff; }
+.t-dark { --bg: #070c12; --surface: #0f171f; --surface-2: #141e28; --surface-3: #1c2834; --border: rgba(255,255,255,0.08);
+  --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5; --accent: #19c2d1; --accent-ink: #041017; --accent-soft: rgba(25,194,209,0.14);
+  --iris-1: #19c2d1; --iris-2: #3e7bfa; --frame: #2a323b;
+  --ex-ground: #070c12; --ex-ground-hi: #0e1a24; --ex-glass-line: rgba(255,255,255,0.1); --ex-gold: #ffb13b;
+  --ex-btn: linear-gradient(90deg, #19c2d1, #3e7bfa); --ex-btn-ink: #041017;
+  --qh-amber: #f2b64a; --qh-amber-bg: rgba(242,182,74,0.14);
+  --scrim: rgba(0,0,0,0.66); --sheet: #111b24; }
+.shot { padding: 11px; }
+.phone { position: relative; width: var(--pw); min-height: var(--ph); border-radius: 46px; overflow: hidden; background: var(--bg); color: var(--ink);
+  box-shadow: 0 0 0 9px var(--frame), 0 0 0 10px rgba(127,140,150,0.35); font-family: var(--f-body); font-size: 15px; line-height: 1.4;
+  display: flex; flex-direction: column; }
+.phone.fix { height: var(--ph); }
+body.w320 .phone { border-radius: 30px; }
+.sb { flex: none; display: flex; justify-content: space-between; align-items: center; padding: 14px 30px 0; height: 48px; font: 600 0.92rem/1 var(--f-body); color: var(--ink); font-variant-numeric: tabular-nums; position: relative; z-index: 3; }
+body.w320 .sb { padding: 8px 20px 0; height: 30px; font-size: 0.8rem; }
+.sb i { display: inline-flex; gap: 5px; align-items: center; font-style: normal; }
+.sb i s { display: inline-block; width: 20px; height: 10px; border-radius: 3px; box-shadow: inset 0 0 0 1.5px currentColor; position: relative; }
+.sb i s::after { content: ''; position: absolute; inset: 2px 6px 2px 2px; background: currentColor; border-radius: 1px; }
+.sb i u { display: inline-flex; gap: 2px; align-items: flex-end; height: 10px; text-decoration: none; }
+.sb i u::before, .sb i u::after, .sb i u b { content: ''; display: block; width: 3px; background: currentColor; border-radius: 1px; }
+.sb i u::before { height: 5px; } .sb i u b { height: 7px; } .sb i u::after { height: 10px; }
+.ico { width: 20px; height: 20px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.nw { white-space: nowrap; }
+
+/* Anahtar: info.css .pref-switch ölçüleri; açıkken uygulamanın vurgu tokenı */
+.sw { position: relative; flex: none; width: 51px; height: 31px; border-radius: 999px; background: color-mix(in srgb, var(--ink-3) 40%, var(--surface-3)); }
+.sw::after { content: ''; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 999px; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.2), 0 0 0 0.5px rgba(0,0,0,0.06); }
+.sw.on { background: var(--accent); }
+.sw.on::after { transform: translateX(20px); }
+body.w320 .sw { width: 46px; height: 28px; }
+body.w320 .sw::after { width: 24px; height: 24px; }
+body.w320 .sw.on::after { transform: translateX(18px); }
+
+/* Nef işareti (components/ui.jsx IrisMark): yalnız S'deki öneri balonunda, bir kez */
+.iris-mark { position: relative; display: inline-block; flex: none; width: 40px; height: 40px; border-radius: 50%; overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, var(--surface-2) 0 58%, var(--surface-3) 100%); box-shadow: 0 0 0 2px var(--sheet), 0 0 0 4px var(--iris-1); }
+.iris-mark i { position: absolute; left: 50%; top: 50%; width: 58%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #041017 0 30%, transparent 31%), conic-gradient(from 20deg, var(--iris-1), var(--iris-2), var(--iris-1), var(--iris-2), var(--iris-1)); }
+.iris-mark i::after { content: ''; position: absolute; width: 20%; height: 20%; top: 20%; left: 56%; border-radius: 50%; background: rgba(255,255,255,0.85); }
+body.w320 .iris-mark { width: 32px; height: 32px; }
+
+/* ============ F · Göz kırpma bitişi (BlinkExercise.jsx phase 'done'; exercise.css öğeleri DEĞİŞMEDİ) ============
+   Satır bitiş ekranının kendi yüzeyini kullanır: .ex-stats kutusuyla aynı zemin, aynı köşe. Kendi rengi yok;
+   vurgu yalnız anahtar ve "saati Nef seçti" (uygulamanın --accent'i = Kaydet gradyanının başlangıç rengi). */
+.ex { flex: 1; display: flex; flex-direction: column; padding: 4px 18px 30px;
+  background: radial-gradient(120% 70% at 50% 42%, var(--ex-ground-hi), var(--ex-ground) 62%); --tile: color-mix(in srgb, var(--ex-ground) 88%, var(--ink) 4%); }
+body.w320 .ex { padding: 2px 14px 16px; }
+/* Ölü boşluk yok: sonuç bloğu dikeyde eşit aralıklarla dağılır, tek büyük boşluk üstte toplanmaz */
+.res { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; text-align: center; gap: 10px; }
+body.w320 .res { gap: 6px; }
+.res-h { display: grid; justify-items: center; gap: 10px; }
+body.w320 .res-h { gap: 6px; }
+.badge { width: 176px; height: 176px; }
+body.w320 .badge { width: 84px; height: 84px; }
+.badge .halo { fill: var(--ex-gold); opacity: 0.14; }
+.badge .disc { fill: var(--ex-gold); }
+.badge .tick { fill: none; stroke: #1a0f00; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
+.step { font: 500 0.72rem/1 var(--f-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
+.step b { color: var(--ex-gold); font-weight: 600; }
+body.w320 .step { font-size: 0.66rem; }
+.ttl { font: 600 1.75rem/1.14 var(--f-display); letter-spacing: -0.02em; }
+body.w320 .ttl { font-size: 1.45rem; }
+.stats { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 1px; width: 100%; border-radius: 16px; overflow: hidden; background: var(--ex-glass-line); }
+.stats div { display: grid; gap: 3px; padding: 13px 6px; background: var(--tile); }
+body.w320 .stats div { padding: 9px 6px; }
+.stats b { font: 600 1.2rem/1.1 var(--f-display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.stats span { font-size: 0.75rem; color: var(--ink-3); white-space: nowrap; }
+body.w320 .stats b { font-size: 1.05rem; }
+body.w320 .stats span { font-size: 0.7rem; }
+.honest { max-width: 330px; font-size: 0.82rem; line-height: 1.45; color: var(--ink-3); }
+body.w320 .honest { font-size: 0.72rem; line-height: 1.4; }
+
+.rf { flex: none; display: grid; grid-template-columns: 44px minmax(0,1fr) auto; column-gap: 12px; row-gap: 10px; align-items: center;
+  margin-top: 16px; padding: 14px 14px 14px 12px; border-radius: 16px; background: var(--tile); box-shadow: inset 0 0 0 1px var(--ex-glass-line); }
+body.w320 .rf { grid-template-columns: 36px minmax(0,1fr) auto; column-gap: 10px; row-gap: 7px; margin-top: 10px; padding: 10px 10px 10px 9px; border-radius: 14px; }
+.rf-ico { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: color-mix(in srgb, var(--ink) 6%, transparent); color: var(--ink-2); }
+.rf.on .rf-ico { color: var(--accent); }
+body.w320 .rf-ico { width: 36px; height: 36px; border-radius: 11px; }
+body.w320 .rf-ico .ico { width: 17px; height: 17px; }
+.rf-t { min-width: 0; display: grid; gap: 4px; }
+.rf-t strong { font: 700 1.02rem/1.2 var(--f-body); white-space: nowrap; }
+body.w320 .rf-t strong { font-size: 0.92rem; }
+.rf-meta { display: flex; align-items: baseline; gap: 8px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rf-meta > * { white-space: nowrap; }
+.rf-lab { font: 600 0.84rem/1.2 var(--f-body); color: var(--ink-2); }
+.rf-time { font: 700 1rem/1.2 var(--f-body); color: var(--ink); }
+.rf-nef { font: 600 0.9rem/1.2 var(--f-body); color: var(--accent); white-space: nowrap; }
+body.w320 .rf-lab { font-size: 0.76rem; }
+body.w320 .rf-time { font-size: 0.9rem; }
+body.w320 .rf-nef { font-size: 0.8rem; }
+.rf-sub { grid-column: 1 / -1; font-size: 0.84rem; line-height: 1.35; color: var(--ink-2); padding-top: 10px; border-top: 1px solid var(--ex-glass-line); }
+body.w320 .rf-sub { font-size: 0.74rem; padding-top: 7px; }
+.save { flex: none; margin-top: 14px; min-height: 54px; border-radius: 16px; display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--ex-btn); color: var(--ex-btn-ink); font: 650 1.03rem/1 var(--f-body); box-shadow: 0 10px 26px -12px rgba(36,88,204,0.6); }
+.save .ico { width: 18px; height: 18px; stroke-width: 2.4; }
+body.w320 .save { min-height: 48px; margin-top: 10px; font-size: 0.95rem; }
+
+/* ============ S · Saat sayfası (components/RemindSheet.jsx) ============ */
+.under { position: absolute; inset: 0; display: flex; flex-direction: column; filter: blur(3px); transform: scale(1.02); }
+.scrim { position: absolute; inset: 0; background: var(--scrim); z-index: 2; }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; background: var(--sheet); border-radius: 30px 30px 0 0; padding: 12px 24px 38px; box-shadow: 0 -12px 40px rgba(0,0,0,0.25); }
+body.w320 .sheet { padding: 8px 16px 18px; border-radius: 22px 22px 0 0; }
+.grab { display: block; width: 38px; height: 5px; border-radius: 3px; background: var(--surface-3); margin: 0 auto; }
+.sh-top { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
+body.w320 .sh-top { margin-top: 8px; }
+.sh-t { font: 600 1.3rem/1.2 var(--f-display); letter-spacing: -0.02em; white-space: nowrap; }
+body.w320 .sh-t { font-size: 1.1rem; }
+.x { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: var(--ink-2); margin-right: -8px; }
+/* Seçici: simge yok. Seçili sekme: yüzey + 2 px vurgu halkası + kalın mürekkep; seçili olmayan soluk, ince */
+.seg { display: flex; gap: 4px; margin-top: 18px; padding: 4px; border-radius: 14px; background: var(--surface-2); }
+body.w320 .seg { margin-top: 10px; }
+.seg > span { flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center; padding: 11px 12px; border-radius: 11px; font: 500 0.92rem/1.2 var(--f-body); color: var(--ink-3); white-space: nowrap; }
+.seg > span.on { background: var(--sheet); color: var(--ink); font-weight: 700; box-shadow: inset 0 0 0 2px var(--accent), 0 1px 3px rgba(0,0,0,0.12); }
+.t-dark .seg > span.on { background: var(--surface-3); }
+body.w320 .seg > span { padding: 9px 8px; font-size: 0.8rem; }
+/* Nef'in tek işareti + kuyruklu balon */
+.nefsay { display: flex; gap: 14px; align-items: flex-start; margin-top: 20px; }
+body.w320 .nefsay { gap: 11px; margin-top: 12px; }
+.nefsay > .iris-mark { margin-top: 4px; }
+.bub { position: relative; flex: 1; min-width: 0; padding: 14px 16px 16px; border-radius: 20px; background: color-mix(in srgb, var(--accent) 11%, var(--sheet)); }
+.t-dark .bub { background: color-mix(in srgb, var(--accent) 14%, var(--sheet)); }
+.bub::before { content: ''; position: absolute; left: -10px; top: 14px; width: 12px; height: 20px; background: inherit; clip-path: polygon(100% 0, 0 50%, 100% 100%); }
+body.w320 .bub { padding: 10px 12px 12px; border-radius: 16px; }
+body.w320 .bub::before { top: 9px; left: -9px; width: 11px; height: 16px; }
+.tag { display: inline-flex; align-items: center; padding: 5px 10px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font: 700 0.76rem/1 var(--f-body); letter-spacing: 0.05em; text-transform: uppercase; }
+body.w320 .tag { font-size: 0.68rem; padding: 4px 8px; }
+.big { display: block; margin-top: 10px; font: 500 3.3rem/1 var(--f-display); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; color: var(--ink); }
+body.w320 .big { font-size: 2.4rem; margin-top: 7px; }
+.why { margin-top: 10px; font: 400 0.95rem/1.5 var(--f-body); color: var(--ink-2); }
+body.w320 .why { margin-top: 6px; font-size: 0.8rem; line-height: 1.4; }
+.cta { margin-top: 22px; min-height: 54px; border-radius: 16px; display: flex; align-items: center; justify-content: center;
+  background: var(--accent); color: var(--accent-ink); font: 650 1.03rem/1 var(--f-body); }
+body.w320 .cta { margin-top: 12px; min-height: 48px; font-size: 0.95rem; }
+
+/* ============ N · Profil → Bildirimler (screens/Notifications.jsx) ============ */
+.scr { flex: 1; display: flex; flex-direction: column; padding: 2px 24px 34px; }
+body.w320 .scr { padding: 0 16px 16px; }
+.back { width: 40px; height: 40px; margin-left: -8px; border-radius: 50%; display: grid; place-items: center; color: var(--ink); }
+.back .ico { width: 22px; height: 22px; }
+body.w320 .back { width: 32px; height: 32px; }
+.eyebrow { margin-top: 6px; font: 500 0.72rem/1 var(--f-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+.title { font: 600 2rem/1.1 var(--f-display); letter-spacing: -0.025em; margin-top: 8px; }
+body.w320 .eyebrow { margin-top: 2px; font-size: 0.64rem; }
+body.w320 .title { font-size: 1.5rem; margin-top: 5px; }
+/* "Sıradaki": vurgulu tek satır */
+.nx { display: flex; align-items: center; gap: 10px; margin-top: 18px; padding: 13px 14px; border-radius: 14px; background: var(--accent-soft);
+  font: 400 0.95rem/1.2 var(--f-body); color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.nx .ico { width: 18px; height: 18px; color: var(--accent); stroke-width: 2; }
+.nx b { font-weight: 700; }
+body.w320 .nx { gap: 8px; margin-top: 10px; padding: 8px 11px; border-radius: 12px; font-size: 0.84rem; }
+body.w320 .nx .ico { width: 15px; height: 15px; }
+/* Gece sessizliği: listenin üstünde, QuietHours .qh-clocks yüzeyi (kehribar saat ailesi), büyük saat aralığı */
+.q { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; column-gap: 10px; margin-top: 16px; padding: 20px 16px 20px 18px; border-radius: 22px;
+  border: 1px solid var(--border); background: radial-gradient(90% 80% at 50% 0%, var(--qh-amber-bg) 0%, transparent 70%), var(--surface); }
+body.w320 .q { margin-top: 10px; padding: 10px 12px 11px 13px; border-radius: 18px; }
+.q-t { display: flex; align-items: center; gap: 7px; font: 600 0.92rem/1.2 var(--f-body); color: var(--ink); white-space: nowrap; }
+.q-t .ico { width: 17px; height: 17px; color: var(--qh-amber); stroke-width: 2; }
+.q-range { display: block; margin-top: 8px; font: 600 2.3rem/1 var(--f-display); letter-spacing: -0.03em; color: var(--qh-amber); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.q-s { margin-top: 8px; font-size: 0.84rem; line-height: 1.35; color: var(--ink-2); }
+.q .chev { grid-column: 2; grid-row: 1 / span 3; color: var(--ink-3); width: 20px; height: 20px; }
+body.w320 .q-t { font-size: 0.82rem; }
+body.w320 .q-t .ico { width: 15px; height: 15px; }
+body.w320 .q-range { margin-top: 5px; font-size: 1.7rem; }
+body.w320 .q-s { margin-top: 5px; font-size: 0.74rem; }
+.grp { margin-top: 28px; font: 600 0.8rem/1 var(--f-body); letter-spacing: 0.02em; color: var(--ink-3); white-space: nowrap; }
+body.w320 .grp { margin-top: 13px; font-size: 0.72rem; }
+.rows { list-style: none; margin: 9px 0 0; padding: 0 14px; border-radius: 18px; background: var(--surface); box-shadow: 0 0 0 1px var(--border); }
+body.w320 .rows { margin-top: 6px; padding: 0 10px; border-radius: 14px; }
+.row { display: flex; align-items: center; gap: 12px; padding-block: 15px; }
+.row + .row { border-top: 1px solid var(--border); }
+body.w320 .row { gap: 9px; padding-block: 7px; }
+.gl { width: 36px; height: 36px; flex: none; border-radius: 11px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.gl .ico { width: 19px; height: 19px; }
+.row:not(.on) .gl { background: var(--surface-2); color: var(--ink-3); }
+body.w320 .gl { width: 30px; height: 30px; border-radius: 9px; }
+body.w320 .gl .ico { width: 16px; height: 16px; }
+.rt { flex: 1; min-width: 0; display: grid; gap: 3px; }
+.rt > b { font: 600 0.98rem/1.2 var(--f-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rt > span { font: 400 0.86rem/1.25 var(--f-body); color: var(--ink-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rt > span b { font-weight: 700; color: var(--ink); }
+.rt > span em { font-style: normal; font-weight: 600; color: var(--accent); }
+/* Kapalı satır: nokta yok, yalnız soluk saat */
+.row:not(.on) .rt > span { color: var(--ink-3); opacity: 0.8; }
+body.w320 .rt > b { font-size: 0.86rem; }
+body.w320 .rt > span { font-size: 0.74rem; }
+/* Sessizlikte de gelenler: kısa özet */
+.al { display: flex; gap: 8px; margin-top: 10px; }
+.al span { flex: 1 1 0; min-width: 0; display: flex; align-items: center; gap: 8px; padding: 13px 12px; border-radius: 14px; background: var(--surface); box-shadow: 0 0 0 1px var(--border); }
+.al .ico { width: 17px; height: 17px; color: var(--ink-2); }
+.al b { font: 600 0.84rem/1.2 var(--f-body); white-space: nowrap; }
+body.w320 .al { gap: 6px; margin-top: 6px; }
+body.w320 .al span { gap: 6px; padding: 7px 8px; border-radius: 11px; }
+body.w320 .al .ico { width: 14px; height: 14px; }
+body.w320 .al b { font-size: 0.7rem; }
+.al span:last-child { flex-grow: 1.7; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- lucide-react 1:1; modül simgeleri modules/<id>/view.jsx icon alanından (Eye, Dumbbell, CloudSun, Flower2) -->
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></symbol>
+  <symbol id="i-alarm" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M6.38 18.7 4 21"/><path d="M17.64 18.67 20 21"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+  <symbol id="m-blink" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="m-routine" viewBox="0 0 24 24"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z"/><path d="m2.5 21.5 1.4-1.4"/><path d="m20.1 3.9 1.4-1.4"/><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z"/><path d="m9.6 14.4 4.8-4.8"/></symbol>
+  <symbol id="m-gokyuzu" viewBox="0 0 24 24"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"/></symbol>
+  <symbol id="m-yoga" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"/><circle cx="12" cy="8" r="2"/><path d="M12 10v12"/><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z"/><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"/></symbol>
+</svg>
+
+<header class="wrap">
+  <h1>B1a · birleşik tasarım</h1>
+  <p>F yön B'den, S ve N yön C'den; son turun şikâyetleri giderildi. Metinler yalnız onaylı listeden ve mevcut bileşen etiketlerinden. Açık ve koyu tema, 390 ve 320 pt.</p>
+  <div class="bar"><button id="w-390" aria-pressed="true">390 pt</button><button id="w-320" aria-pressed="false">320 pt</button></div>
+</header>
+
+<main>
+  <section class="sec wrap"><h2>F · Bitiş, anahtar kapalı</h2><div class="strip" data-screens="F-kapali"></div></section>
+  <section class="sec wrap"><h2>F · Bitiş, anahtar açık</h2><div class="strip" data-screens="F-acik"></div></section>
+  <section class="sec wrap"><h2>S · Saat sayfası</h2><div class="strip" data-screens="S"></div></section>
+  <section class="sec wrap"><h2>N · Profil → Bildirimler</h2><div class="strip" data-screens="N"></div></section>
+</main>
+
+<template id="tpl-F">
+  <div class="sb"><span>16.12</span><i><u><b></b></u><s></s></i></div>
+  <div class="ex">
+    <div class="res">
+      <svg class="badge" viewBox="0 0 180 180" aria-hidden="true"><circle class="halo" cx="90" cy="90" r="70"/><circle class="disc" cx="90" cy="90" r="46"/><path class="tick" d="M70 91 l14 14 l28 -30"/></svg>
+      <div class="res-h"><span class="step">Göz kırpma · <b>15 tekrar</b></span><div class="ttl">Tamamlandı</div></div>
+      <div class="stats"><div><b>15</b><span>tekrar</span></div><div><b>27 / 30</b><span>algılanan kapanma</span></div></div>
+      <p class="honest">Kamera sayımı ışığa ve açıya bağlıdır; yaklaşık bir göstergedir. Tedavi değildir; yakınman sürerse göz doktoruna başvur.</p>
+    </div>
+    <div class="rf" data-rf>
+      <span class="rf-ico"><svg class="ico"><use href="#i-bell"/></svg></span>
+      <span class="rf-t">
+        <strong>Bana hatırlat</strong>
+        <span class="rf-meta" data-off><span class="rf-lab">Önerilen</span><span class="rf-time">16.30</span></span>
+        <span class="rf-meta" data-on hidden><span class="rf-lab">Her gün</span><span class="rf-time">16.30</span></span>
+        <span class="rf-nef" data-on hidden>saati Nef seçti</span>
+      </span>
+      <span class="sw" data-sw></span>
+      <p class="rf-sub" data-off>Her gün, senin için uygun saatte. Saati Nef de seçebilir.</p>
+    </div>
+    <div class="save"><svg class="ico"><use href="#i-check"/></svg>Kaydet</div>
+  </div>
+</template>
+
+<template id="tpl-S">
+  <div class="under" data-under></div>
+  <div class="scrim"></div>
+  <div class="sheet">
+    <span class="grab"></span>
+    <div class="sh-top"><span class="sh-t">Göz kırpma</span><span class="x"><svg class="ico"><use href="#i-x"/></svg></span></div>
+    <div class="seg"><span class="on">Nef seçsin</span><span>Saatleri ben seçeyim</span></div>
+    <div class="nefsay">
+      <span class="iris-mark"><i></i></span>
+      <div class="bub">
+        <span class="tag">Önerilen</span>
+        <strong class="big">16.30</strong>
+        <p class="why">Henüz saatini bilmiyorum. 16.30'la başlayalım; beş kez yaptıktan sonra senin saatine göre ayarlarım.</p>
+      </div>
+    </div>
+    <div class="cta">Hatırlatmayı aç</div>
+  </div>
+</template>
+
+<template id="tpl-N">
+  <div class="sb"><span>16.12</span><i><u><b></b></u><s></s></i></div>
+  <div class="scr">
+    <span class="back"><svg class="ico"><use href="#i-back"/></svg></span>
+    <div class="eyebrow">Profilim</div>
+    <div class="title">Bildirimler</div>
+    <p class="nx"><svg class="ico"><use href="#i-bell"/></svg><span>Sıradaki: <b>16.30 Göz kırpma</b></span></p>
+    <div class="q">
+      <span class="q-t"><svg class="ico"><use href="#i-moon"/></svg>Gece sessizliği</span>
+      <span class="q-range">23.00–07.00</span>
+      <p class="q-s">Bu saatlerde yeni hatırlatmalar gelmez.</p>
+      <svg class="ico chev"><use href="#i-chev"/></svg>
+    </div>
+    <div class="grp">Hatırlatmaların</div>
+    <ul class="rows">
+      <li class="row on"><span class="gl"><svg class="ico"><use href="#m-blink"/></svg></span><span class="rt"><b>Göz kırpma</b><span>Her gün <b>16.30</b> · <em>Nef seçti</em></span></span><span class="sw on"></span></li>
+      <li class="row on"><span class="gl"><svg class="ico"><use href="#m-routine"/></svg></span><span class="rt"><b>Göz egzersizi</b><span>Her gün <b>10.00</b></span></span><span class="sw on"></span></li>
+      <li class="row on"><span class="gl"><svg class="ico"><use href="#m-gokyuzu"/></svg></span><span class="rt"><b>Gökyüzü molası</b><span>Her gün <b>13.30</b> · <em>Nef seçti</em></span></span><span class="sw on"></span></li>
+      <li class="row"><span class="gl"><svg class="ico"><use href="#m-yoga"/></svg></span><span class="rt"><b>Yoga</b><span>Her gün 19.00</span></span><span class="sw"></span></li>
+    </ul>
+    <div class="grp">Sessizlikte de gelenler</div>
+    <div class="al"><span><svg class="ico"><use href="#i-alarm"/></svg><b>Alarm</b></span><span><svg class="ico"><use href="#i-sun"/></svg><b>Alarmdan sonraki hava</b></span></div>
+  </div>
+</template>
+
+<script>
+(function () {
+  var S = {
+    'F-kapali': ['F', 'Satır, istatistik kutusuyla aynı yüzey; kendi rengi yok'],
+    'F-acik': ['F', 'Vurgu yalnız anahtar ve "saati Nef seçti"'],
+    'S': ['S', 'Nef işareti bir kez, balon kuyruğuyla; arkada bitiş ekranı karartılmış'],
+    'N': ['N', 'Gece sessizliği üstte; Nef seçti düz metin; kapalı satır yalnız soluk saat']
+  };
+  function fill(key, phone) {
+    var t = S[key][0];
+    if (t === 'S') {
+      phone.classList.add('fix');
+      phone.appendChild(document.getElementById('tpl-S').content.cloneNode(true));
+      phone.querySelector('[data-under]').appendChild(document.getElementById('tpl-F').content.cloneNode(true));
+      return;
+    }
+    phone.appendChild(document.getElementById('tpl-' + t).content.cloneNode(true));
+    if (t === 'N') phone.classList.add('fix');
+    if (key === 'F-acik') {
+      phone.querySelector('[data-rf]').classList.add('on');
+      phone.querySelectorAll('[data-off]').forEach(function (e) { e.hidden = true; });
+      phone.querySelectorAll('[data-on]').forEach(function (e) { e.hidden = false; });
+      phone.querySelector('[data-sw]').classList.add('on');
+    }
+  }
+  document.querySelectorAll('.strip').forEach(function (strip) {
+    var key = strip.dataset.screens;
+    ['t-light', 't-dark'].forEach(function (th) {
+      var lt = th === 't-light';
+      var cell = document.createElement('figure'); cell.className = 'cell';
+      var shot = document.createElement('div'); shot.className = 'shot';
+      shot.dataset.shot = key + '-' + (lt ? 'acik' : 'koyu');
+      shot.style.background = lt ? '#eef2f4' : '#070c12';
+      var phone = document.createElement('div'); phone.className = 'phone ' + th;
+      fill(key, phone);
+      shot.appendChild(phone); cell.appendChild(shot);
+      var cap = document.createElement('figcaption'); cap.className = 'cap';
+      cap.innerHTML = '<b>' + key + '</b> · ' + (lt ? 'açık' : 'koyu') + ' · ' + S[key][1];
+      cell.appendChild(cap); strip.appendChild(cell);
+    });
+  });
+  var w = ['w-390', 'w-320'];
+  w.forEach(function (id) {
+    document.getElementById(id).addEventListener('click', function () {
+      w.forEach(function (x) { document.getElementById(x).setAttribute('aria-pressed', String(x === id)); });
+      document.body.classList.toggle('w320', id === 'w-320');
+    });
+  });
+})();
+</script>
+</body>
+</html>

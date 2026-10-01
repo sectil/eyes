@@ -1,0 +1,16 @@
+{
+ "unit": "k.kalk",
+ "take": "t2",
+ "ref_node": "1UWnIK4oD0vHzJKgE3SV",
+ "asset_id": "gd2cYsb92xoLMpTw1E0e",
+ "stt_node": "qQldEqAcCYFX3jYiLWf5",
+ "session_id": "vvQwY7G8K9DFDuAkp5GW",
+ "generation_id": "s63a3C3JQWBFqv1NVfqw",
+ "actual_credits": 31.68,
+ "actual_cents": 0.576,
+ "spoken_duration_secs": 5.62,
+ "scribe_text": "Sonra acele etmeden kalkabilirsin. Başın dönerse yeniden otur ve bekle",
+ "tts": "Sonra acele etmeden kalkabilirsin; başın dönerse yeniden otur ve bekle.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 10\n}"
+}

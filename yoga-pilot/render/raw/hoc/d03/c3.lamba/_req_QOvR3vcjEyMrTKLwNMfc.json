@@ -1,0 +1,37 @@
+{
+ "node_id": "QOvR3vcjEyMrTKLwNMfc",
+ "session_ids": [
+  "5EonOrDEha9JPV7zAbNO",
+  "CSRqmAVh1peKnIdm1uvn",
+  "svdMeLyl2beFvVDuaKDW"
+ ],
+ "requested_at": "2026-09-30T06:58:23.164Z",
+ "tts": "Köşede bir lamba sarı, sıcak bir ışık veriyor.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "5EonOrDEha9JPV7zAbNO",
+   "generation_id": "QQh4QsArZ2aQ4FLwRLwV",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/5EonOrDEha9JPV7zAbNO/QQh4QsArZ2aQ4FLwRLwV/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065826Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=282ed312a230f90d7ab555a9b4a071c206f4071f4ac20505de469c913673ff52a5f4b5eefbae52d621ba139e1ffe23323ccd06b80ef96707cc5148c4f96e687a2f76fe4ed71c7413ef26a8ac974c5e3b3e075bf3eab380ebedea5919aa1ed1a9a91d0b70ead4d35eee209b0bac7b0f24ecffb01c49ab88bc14b886813d7c57a761dee0e9d5ac5c99b74c7b618a7dd0f3a4e7e766167b557792630aa01f5bd56c3c281148506774c9079721829467f348e9348146f11b4be5a2dcb4ae8d2bab3a925367876b18b585a912802f7bfaa6f4c22be51df27747781a8ea47e5e55d806ebb09f44a1c1e565d3ee0196695a3280e2da47beb3c801462a9d3278e7127793",
+   "duration_secs": 3.84,
+   "prompt": "Köşede bir lamba sarı, sıcak bir ışık veriyor.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "CSRqmAVh1peKnIdm1uvn",
+   "generation_id": "RFjLIqfugzUj6FhQahDe",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/CSRqmAVh1peKnIdm1uvn/RFjLIqfugzUj6FhQahDe/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065826Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=b6dff296fafe7aa3bd48bf90eb48182461f60b7e40554415b3ceb613681fdac5cd09af82835cee9cc39d887b4fa82a7bf93adab5e8ae4eb7cebf03bc87cdc59115e5f02aca4720a1ac6ee0d924c4cb1e1cbc48a752486b65c88a88d71bcc4619dc2b2ca034c19365130f1751949742df3a21905992758c7234f980e8cd8cdd4fe088bd90fecfb13fdda91e7f5affae8ccbe205f8557de195975b5d4f23504e4f8ab42d5cdce566f3dae8e03720ad70ce47fa4559e1f3298a42711376b8c20d2d03fbc144d9a701c2cf42cc9296bea9e529aadf473051678d45556bbce60a9ae5afbd63d00b666186b0243bdfc74f7770f692c7222c9666e6a3a4109fba55429a",
+   "duration_secs": 3.6,
+   "prompt": "Köşede bir lamba sarı, sıcak bir ışık veriyor.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "svdMeLyl2beFvVDuaKDW",
+   "generation_id": "ChqDZ4YUqF8Qiug7qQlL",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/svdMeLyl2beFvVDuaKDW/ChqDZ4YUqF8Qiug7qQlL/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065849Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=337f44099209eb609f9a9419c21b31713f2bff558c2ded8aba05664aed5b141c2bd3cbf0990f5d27536bd183aa65f3626b5bb4f36e9d32fc831936bdbde5329d364e55e88326f9862551666822a7eba702f538ac82172c3f73d9e490e9affb945e087bc51caa351d4b84cc27d41ac6c537a7d13ee2a2c099c82aab54b141cc98d3f5d9905e486b63475e77ec361a6c2df039983a561003f35a49c58db92f39371f3a34f3fc3d15c42fa7ddba0604ef47a9afdd35135356a5901fd0d32e9756bc817ceefcc00edaef09feccd136687a36e3aba46a33e43e5b248ed96f4645648f56e33a2b0d4d81a8d28ef66a607b38492b2f7b82d3eec87d76f42c9a44f6b8ce",
+   "duration_secs": 3.84,
+   "prompt": "Köşede bir lamba sarı, sıcak bir ışık veriyor.",
+   "kind": "audio"
+  }
+ ]
+}

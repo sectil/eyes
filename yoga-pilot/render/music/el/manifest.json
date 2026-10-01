@@ -1,0 +1,1704 @@
+{
+ "generated_utc": "2026-09-29T11:28:09.284796+00:00",
+ "spec": "render/SPEC.md §5 (ElevenLabs path + shared layers)",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "format": "44.1 kHz stereo float32 WAV (EL music decoded from 48 kHz/192 kbps MP3 with resample_poly; sfx 44.1 kHz/128 kbps MP3)",
+ "thresholds_VARSAYIM": {
+  "no_drums": "pulse clarity < 0.5 and strong onsets <= 10/min (beds) / <= 30/min (imge); calibration: pad 0.0/0, pad+soft kick 70 BPM 0.885/74 per min, sparse notes 0.40/23",
+  "flatness": "body 3 s ST p5-p95 <= 6 LU PASS, 6-9 KULAK, > 9 FAIL; body = first..last 3 s window within 3 LU of the ST median",
+  "click": ">10 kHz 2 ms frame >= 12 dB over +-20 ms median AND within 40 dB of the full-band frame",
+  "seam": "wrap sample step <= interior p99.9 and 100 ms level/HF jump at the wrap <= 95th percentile of 300 interior cuts"
+ },
+ "cost": {
+  "cap_cents": 900,
+  "ledger_logged_estimates_cents": 845.4576,
+  "actual_cents_total": 623.6344,
+  "actual_breakdown_cents": {
+   "music_7": 441.72,
+   "nature_sfx_4x30s": 7.272,
+   "tone_sfx": 0.2424,
+   "scribe_12": 174.4
+  },
+  "ledger_note": "every paid call was logged before running (estimate_only prices); afterwards 21 reconcile lines (kind music/sfx/scribe-music, reconcile:true, cents_est = actual - estimate) bring the music running total in ledger.jsonl to the actual 623.63 cents",
+  "estimate_errors": {
+   "music": "estimate 27.5 cr/s, charged 15.0 cr/s (0.273 c/s)",
+   "sfx": "estimate 11 cr/s, charged 3.33 cr/s",
+   "scribe": "estimate_only said 0.336 cr/s (1.83 c per 300 s) but charged 5.5 cr/s = 0.1 c/s (30 c per 300 s): 16x UNDER-estimated"
+  }
+ },
+ "varis_opening": {
+  "candidates": [
+   "el-vd-a",
+   "el-vd-b",
+   "el-v-aday"
+  ],
+  "window": "0-90 s (Varış <= 1:30)",
+  "metrics_0_90s": {
+   "el-vd-a": {
+    "fade_in_to_within_2lu_s": 4.5,
+    "st_spread_p5_p95_10_90s_lu": 2.1,
+    "st_std_10_90s_lu": 0.65,
+    "st_max_rate_lu_per_s": 1.0,
+    "strong_onsets_0_90s": 0.0,
+    "events_0_90s": 122.0,
+    "pulse_clarity": 0.043,
+    "flux_max_db_over_median": 0.93,
+    "centroid_std_hz": 41.5,
+    "centroid_mean_hz": 240.0,
+    "spectral_change_2s_mean_db": 1.37,
+    "spectral_change_2s_max_db": 2.03,
+    "audible_clicks": 0,
+    "fullband_transients_ge10db": 0
+   },
+   "el-vd-b": {
+    "fade_in_to_within_2lu_s": 6.0,
+    "st_spread_p5_p95_10_90s_lu": 1.56,
+    "st_std_10_90s_lu": 0.43,
+    "st_max_rate_lu_per_s": 1.43,
+    "strong_onsets_0_90s": 4.0,
+    "events_0_90s": 42.0,
+    "pulse_clarity": 0.107,
+    "flux_max_db_over_median": 3.16,
+    "centroid_std_hz": 34.1,
+    "centroid_mean_hz": 169.3,
+    "spectral_change_2s_mean_db": 1.99,
+    "spectral_change_2s_max_db": 6.05,
+    "audible_clicks": 0,
+    "fullband_transients_ge10db": 0
+   },
+   "el-v-aday": {
+    "fade_in_to_within_2lu_s": 5.5,
+    "st_spread_p5_p95_10_90s_lu": 0.9,
+    "st_std_10_90s_lu": 0.31,
+    "st_max_rate_lu_per_s": 0.52,
+    "strong_onsets_0_90s": 0.0,
+    "events_0_90s": 78.0,
+    "pulse_clarity": 0.057,
+    "flux_max_db_over_median": 0.96,
+    "centroid_std_hz": 20.6,
+    "centroid_mean_hz": 221.1,
+    "spectral_change_2s_mean_db": 1.49,
+    "spectral_change_2s_max_db": 2.33,
+    "audible_clicks": 0,
+    "fullband_transients_ge10db": 0
+   },
+   "el-v-aday.keyA": {
+    "st_spread_p5_p95_10_90s_lu": 0.87,
+    "st_std_10_90s_lu": 0.31,
+    "st_max_rate_lu_per_s": 0.46,
+    "strong_onsets_0_90s": 0.0,
+    "centroid_std_hz": 21.9,
+    "spectral_change_2s_max_db": 2.26,
+    "audible_clicks": 0
+   }
+  },
+  "rank_sum_lower_is_smoother": {
+   "el-v-aday": 13.5,
+   "el-vd-a": 16.5,
+   "el-vd-b": 24.0,
+   "metrics_ranked": [
+    "st spread",
+    "st std",
+    "max LU/s",
+    "strong onsets",
+    "flux max",
+    "centroid std",
+    "spectral change mean",
+    "spectral change max",
+    "pulse clarity"
+   ]
+  },
+  "choice": "el-v-aday.keyA.wav",
+  "why": "Smoothest opening: steadiest loudness (10-90 s ST spread 0.9 LU vs 2.1 vd-a / 1.6 vd-b; max change 0.5 LU/s vs 1.0 / 1.4), most stable timbre (centroid std 21 Hz vs 42 / 34), no strong onsets, no clicks, no transients, pulse clarity 0.06. vd-b has events (4 strong onsets, 6 dB spectral jump at ~89 s). The original candidate is in Ab and clashes with the Varış-Derinleşme beds that follow (A/D), so the selected file is its +1 semitone varispeed copy (A major, same bass pedal as vd-a).",
+  "fallback_if_varispeed_rejected": "el-vd-a.wav (2nd smoothest, no events, already A major; clash vs vd-b 0.12)"
+ },
+ "key_finding": {
+  "requested": "E-flat major (music.key, VARSAYIM)",
+  "measured_A440_tuning": "all files tuned to A440 (median deviation -0.7..+2.0 cents)",
+  "per_file": {
+   "el-vd-a.wav": {
+    "key_best": "A major",
+    "r": 0.889,
+    "eb_major_r": -0.451
+   },
+   "el-vd-b.wav": {
+    "key_best": "D major",
+    "r": 0.856,
+    "eb_major_r": -0.325
+   },
+   "el-v-aday.wav": {
+    "key_best": "Ab major",
+    "r": 0.853,
+    "eb_major_r": 0.671
+   },
+   "el-derin-a.wav": {
+    "key_best": "A major",
+    "r": 0.821,
+    "eb_major_r": -0.348
+   },
+   "el-derin-b.wav": {
+    "key_best": "Eb major",
+    "r": 0.834,
+    "eb_major_r": 0.834
+   },
+   "el-imge.wav": {
+    "key_best": "D minor",
+    "r": 0.758,
+    "eb_major_r": -0.123
+   },
+   "el-kapanis.wav": {
+    "key_best": "D major",
+    "r": 0.847,
+    "eb_major_r": -0.171
+   },
+   "donus.wav": {
+    "key_best": "F minor",
+    "r": 0.356,
+    "eb_major_r": -0.151
+   }
+  },
+  "bass_pedal_counts_per_10s": {
+   "el-vd-a.wav": {
+    "A": 28,
+    "E": 2
+   },
+   "el-vd-b.wav": {
+    "D": 30
+   },
+   "el-v-aday.wav": {
+    "Ab": 18
+   },
+   "el-v-aday.keyA.wav": {
+    "A": 17
+   },
+   "el-derin-a.wav": {
+    "A": 24
+   },
+   "el-derin-b.wav": {
+    "Ab": 13,
+    "Eb": 7,
+    "Bb": 3,
+    "C": 1
+   },
+   "el-derin-b.keyD.wav": {
+    "G": 14,
+    "D": 9,
+    "A": 2,
+    "Ab": 1
+   },
+   "el-imge.wav": {
+    "A": 8,
+    "Bb": 4,
+    "F": 3,
+    "B": 2,
+    "G": 1
+   },
+   "el-kapanis.wav": {
+    "G": 14,
+    "D": 3,
+    "B": 1
+   }
+  },
+  "summary": "ElevenLabs ignored the key for 5 of 7 pieces: vd-a A major, vd-b D major, derin-a A major, imge D minor/major, kapanis G/D; v-aday Ab major (IV of Eb), derin-b Eb major. Crossfades between the two groups clash (clash index 0.35-0.42 vs 0.11-0.14 within a group).",
+  "action": "Two local 1-semitone varispeed copies bring the outliers into the A/D majority (el-v-aday.keyA, el-derin-b.keyD); originals kept. Moving the majority to Eb instead would need a tritone shift of vd-a/derin-a (rejected: audible timbre damage). Needs orchestrator decision: the resulting set is A/D-family, not E-flat.",
+  "pair_clash_index": {
+   "el-vd-a|el-vd-b": 0.12,
+   "el-v-aday|el-vd-a": 0.346,
+   "el-v-aday|el-vd-b": 0.364,
+   "el-v-aday|el-v-aday.keyA": 0.305,
+   "el-v-aday.keyA|el-vd-a": 0.14,
+   "el-v-aday.keyA|el-vd-b": 0.18,
+   "el-derin-a|el-vd-a": 0.115,
+   "el-derin-a|el-vd-b": 0.124,
+   "el-derin-a|el-v-aday": 0.357,
+   "el-derin-a|el-v-aday.keyA": 0.114,
+   "el-derin-a|el-derin-b": 0.422,
+   "el-derin-a|el-derin-b.keyD": 0.14,
+   "el-derin-a|el-imge": 0.206,
+   "el-derin-a|el-kapanis": 0.125,
+   "el-derin-b|el-vd-a": 0.399,
+   "el-derin-b|el-vd-b": 0.397,
+   "el-derin-b|el-v-aday": 0.124,
+   "el-derin-b|el-v-aday.keyA": 0.332,
+   "el-derin-b|el-derin-b.keyD": 0.351,
+   "el-derin-b|el-imge": 0.312,
+   "el-derin-b|el-kapanis": 0.35,
+   "el-derin-b.keyD|el-vd-a": 0.13,
+   "el-derin-b.keyD|el-vd-b": 0.139,
+   "el-derin-b.keyD|el-v-aday": 0.334,
+   "el-derin-b.keyD|el-v-aday.keyA": 0.194,
+   "el-derin-b.keyD|el-imge": 0.167,
+   "el-derin-b.keyD|el-kapanis": 0.127,
+   "el-imge|el-vd-a": 0.187,
+   "el-imge|el-vd-b": 0.173,
+   "el-imge|el-v-aday": 0.289,
+   "el-imge|el-v-aday.keyA": 0.222,
+   "el-imge|el-kapanis": 0.164,
+   "el-kapanis|el-vd-a": 0.12,
+   "el-kapanis|el-vd-b": 0.127,
+   "el-kapanis|el-v-aday": 0.329,
+   "el-kapanis|el-v-aday.keyA": 0.177
+  }
+ },
+ "recommended_use": {
+  "varis_opening": "el/el-v-aday.keyA.wav (fallback el/el-vd-a.wav)",
+  "varis_derinlesme_family": [
+   "el/el-vd-a.wav",
+   "el/el-vd-b.wav"
+  ],
+  "derin_family": [
+   "el/el-derin-a.wav",
+   "el/el-derin-b.keyD.wav (fallback: derin-a only; original derin-b clashes)"
+  ],
+  "imge_layer": "el/el-imge.wav",
+  "kapanis": "el/el-kapanis.wav",
+  "nature_orman_loops": [
+   "common/orman-1.wav",
+   "common/orman-2.wav",
+   "common/orman-3.wav",
+   "common/orman-4.wav"
+  ],
+  "return_tone": "DECISION NEEDED: common/donus.wav (EL, rough) or common/donus.synth-D5.wav (synth)",
+  "room_tone": [
+   "common/oda-sesi-1.wav",
+   "common/oda-sesi-2.wav"
+  ],
+  "levels": "files are NOT normalised (raw EL levels: beds -10.9..-16.2 LUFS, loops -44.7..-48.5 LUFS); mixer sets ducked levels per SPEC §6",
+  "enter_after_s": {
+   "vd-a": 3.0,
+   "vd-b": 15.5,
+   "v-aday.keyA": 3.0,
+   "derin-a": 12.5,
+   "derin-b.keyD": 25.5,
+   "kapanis": 4.5,
+   "imge": "fade in from 0"
+  }
+ },
+ "ear_checks": [
+  "el-v-aday.keyA opening (first 90 s) vs el-vd-a",
+  "el-derin-b.keyD and el-v-aday.keyA: varispeed acceptable?",
+  "el-imge felt-piano timbre/distance",
+  "el-kapanis \"gently resolving\"",
+  "orman-2 recurring gust",
+  "orman-4 after declick",
+  "return tone: EL (rough, F5) vs synth D5",
+  "phone speaker: every bed has 73-98 % of energy < 300 Hz (PLAN D.3 speaker target <= 10 %, 500 Hz-4 kHz >= 40 % is not met by any bed; the imge layer is the only one with 58 % in 500 Hz-4 kHz)"
+ ],
+ "items": [
+  {
+   "id": "el-vd-a",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-vd-a.wav",
+   "role": "Varış-Derinleşme bed A (300 s)",
+   "duration_s": 300.0,
+   "lufs": -14.27,
+   "true_peak_dbtp": -3.63,
+   "prompt": "Ambient meditation drone in E-flat major: a warm, soft pad with low strings (cellos and double basses) holding long, gently overlapping chords that change only rarely, quiet and even from the first second to the last. Very slow, pulseless, no drums, no percussion, no vocals, no choir, no crescendo, flat dynamics, sustained.",
+   "model": "eleven_music_v2_5",
+   "params": {
+    "duration_seconds": 300,
+    "instrumental": true,
+    "lyrics_type": "instrumental"
+   },
+   "node_id": "5Dj3lvpLbDgTjMw4Ery3",
+   "flow_id": "zAYOhRc6cOKeStKp4ijv",
+   "checks": {
+    "level": {
+     "lufs_i": -14.27,
+     "true_peak_dbtp": -3.63,
+     "lr_corr": 0.527,
+     "lead_silence_ms": 144.0,
+     "tail_silence_ms": 1006.6
+    },
+    "no_drums_onsets": {
+     "pulse_clarity": 0.025,
+     "strong_onsets_per_min": 0.0,
+     "percussive_share": 0.082,
+     "flux_max_db": 1.548,
+     "flux_median_db": 0.5485
+    },
+    "spectrum": {
+     "centroid_hz": 231.6,
+     "share_lt300": 0.844,
+     "share_500_4k": 0.064,
+     "share_1k5_4k": 0.0012,
+     "share_gt8k": 0.0
+    },
+    "mono_sum_minus_stereo_lu": -1.26,
+    "clicks": {
+     "hf_candidates": 0,
+     "audible_broadband_clicks": [],
+     "fullband_transients_ge10db": []
+    },
+    "flatness_body": {
+     "body_start_s": 3.0,
+     "body_end_s": 286.5,
+     "body_dur_s": 283.5,
+     "fade_in_s": 3.0,
+     "fade_out_s": 13.5,
+     "body_st_median_lufs": -14.3,
+     "body_spread_p5_p95_lu": 2.46,
+     "body_range_lu": 4.59,
+     "body_std_lu": 0.74,
+     "body_max_rate_lu_per_s": 2.05,
+     "body_crescendo_10s_spans": 0
+    },
+    "flatness_whole_file_3s_st": {
+     "spread_p5_p95_lu": 2.6,
+     "st_std_lu": 1.16,
+     "range_full_lu": 40.42,
+     "st_lufs_p50": -14.31,
+     "st_lufs_p95": -13.05
+    },
+    "key": {
+     "key_best": "A major",
+     "key_best_r": 0.889,
+     "key_2nd": "A minor",
+     "key_2nd_r": 0.698,
+     "eb_major_r": -0.451,
+     "top_pitch_classes": [
+      "A",
+      "E",
+      "D",
+      "B",
+      "C#"
+     ]
+    },
+    "scribe": {
+     "generation_id": "OeT0ZLUFBV7cYIoU9tE9",
+     "text": "",
+     "language_probability": 0.1245,
+     "verdict": "PASS (empty transcript: no vocals/speech detected)",
+     "actual_cents": 30
+    }
+   },
+   "usable_steady_region_s": [
+    3.0,
+    286.5
+   ],
+   "verdict": "PASS",
+   "flags": [],
+   "notes": "bass pedal A (A major); runner-up Varış opening",
+   "generation_id": "IZHyzDmZpIu9MCjcX8F7",
+   "price_actual_cents": 81.8
+  },
+  {
+   "id": "el-vd-b",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-vd-b.wav",
+   "role": "Varış-Derinleşme bed B (300 s)",
+   "duration_s": 300.0,
+   "lufs": -13.23,
+   "true_peak_dbtp": -0.55,
+   "prompt": "Ambient meditation drone in E-flat major: a warm, soft pad with low strings (cellos and double basses) holding long, gently overlapping chords that change only rarely, quiet and even from the first second to the last. Very slow, pulseless, no drums, no percussion, no vocals, no choir, no crescendo, flat dynamics, sustained.",
+   "model": "eleven_music_v2_5",
+   "params": {
+    "duration_seconds": 300,
+    "instrumental": true,
+    "lyrics_type": "instrumental"
+   },
+   "node_id": "CsAAaLHUWW6Zuo1mL43k",
+   "flow_id": "zAYOhRc6cOKeStKp4ijv",
+   "checks": {
+    "level": {
+     "lufs_i": -13.23,
+     "true_peak_dbtp": -0.55,
+     "lr_corr": 0.602,
+     "lead_silence_ms": 65.0,
+     "tail_silence_ms": 442.9
+    },
+    "no_drums_onsets": {
+     "pulse_clarity": 0.055,
+     "strong_onsets_per_min": 2.8,
+     "percussive_share": 0.044,
+     "flux_max_db": 3.568,
+     "flux_median_db": 0.4191
+    },
+    "spectrum": {
+     "centroid_hz": 175.4,
+     "share_lt300": 0.857,
+     "share_500_4k": 0.027,
+     "share_1k5_4k": 0.0001,
+     "share_gt8k": 0.0
+    },
+    "mono_sum_minus_stereo_lu": -1.1,
+    "clicks": {
+     "hf_candidates": 4,
+     "audible_broadband_clicks": [],
+     "fullband_transients_ge10db": []
+    },
+    "flatness_body": {
+     "body_start_s": 4.0,
+     "body_end_s": 288.0,
+     "body_dur_s": 284.0,
+     "fade_in_s": 4.0,
+     "fade_out_s": 12.0,
+     "body_st_median_lufs": -13.2,
+     "body_spread_p5_p95_lu": 2.02,
+     "body_range_lu": 4.61,
+     "body_std_lu": 0.59,
+     "body_max_rate_lu_per_s": 1.55,
+     "body_crescendo_10s_spans": 1
+    },
+    "flatness_whole_file_3s_st": {
+     "spread_p5_p95_lu": 2.04,
+     "st_std_lu": 0.79,
+     "range_full_lu": 34.21,
+     "st_lufs_p50": -13.2,
+     "st_lufs_p95": -12.13
+    },
+    "key": {
+     "key_best": "D major",
+     "key_best_r": 0.856,
+     "key_2nd": "D minor",
+     "key_2nd_r": 0.727,
+     "eb_major_r": -0.325,
+     "top_pitch_classes": [
+      "D",
+      "A",
+      "F#",
+      "E",
+      "C#"
+     ]
+    },
+    "scribe": {
+     "generation_id": "3tUDkjWdIiGzLh2Xk9Zh",
+     "text": "",
+     "language_probability": 0.1245,
+     "verdict": "PASS (empty transcript: no vocals/speech detected)",
+     "actual_cents": 30
+    }
+   },
+   "usable_steady_region_s": [
+    15.5,
+    288.0
+   ],
+   "verdict": "PASS",
+   "flags": [
+    "not for the opening: 4 strong onsets and a 6 dB spectral jump in 0-90 s (flux peak +3.2 dB over median at 89 s)"
+   ],
+   "notes": "bass pedal D (D major); darkest Varış-family bed (centroid 175 Hz). In-body monotonic rise 5.5-15.5 s (+2.6 LU, end of intro swell) -> enter after 15.5 s",
+   "generation_id": "sBXmIxsgglvnKVqBuOK2",
+   "price_actual_cents": 81.8
+  },
+  {
+   "id": "el-v-aday",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-v-aday.wav",
+   "role": "Varış opening candidate 180 s, ORIGINAL key (Ab major)",
+   "duration_s": 180.0,
+   "lufs": -14.18,
+   "true_peak_dbtp": -4.08,
+   "prompt": "Ambient meditation drone in E-flat major: a warm, soft pad with low strings (cellos and double basses) holding long, gently overlapping chords that change only rarely, quiet and even from the first second to the last. Very slow, pulseless, no drums, no percussion, no vocals, no choir, no crescendo, flat dynamics, sustained.",
+   "model": "eleven_music_v2_5",
+   "params": {
+    "duration_seconds": 180,
+    "instrumental": true,
+    "lyrics_type": "instrumental"
+   },
+   "node_id": "Ocgf9HewGMmcpgcVqsn1",
+   "flow_id": "zAYOhRc6cOKeStKp4ijv",
+   "checks": {
+    "level": {
+     "lufs_i": -14.18,
+     "true_peak_dbtp": -4.08,
+     "lr_corr": 0.391,
+     "lead_silence_ms": 89.1,
+     "tail_silence_ms": 110.7
+    },
+    "no_drums_onsets": {
+     "pulse_clarity": 0.032,
+     "strong_onsets_per_min": 0.0,
+     "percussive_share": 0.075,
+     "flux_max_db": 1.546,
+     "flux_median_db": 0.5778
+    },
+    "spectrum": {
+     "centroid_hz": 224.4,
+     "share_lt300": 0.733,
+     "share_500_4k": 0.022,
+     "share_1k5_4k": 0.0003,
+     "share_gt8k": 0.0
+    },
+    "mono_sum_minus_stereo_lu": -1.65,
+    "clicks": {
+     "hf_candidates": 0,
+     "audible_broadband_clicks": [],
+     "fullband_transients_ge10db": []
+    },
+    "flatness_body": {
+     "body_start_s": 3.5,
+     "body_end_s": 169.5,
+     "body_dur_s": 166.0,
+     "fade_in_s": 3.5,
+     "fade_out_s": 10.5,
+     "body_st_median_lufs": -13.98,
+     "body_spread_p5_p95_lu": 0.98,
+     "body_range_lu": 3.41,
+     "body_std_lu": 0.41,
+     "body_max_rate_lu_per_s": 1.66,
+     "body_crescendo_10s_spans": 0
+    },
+    "flatness_whole_file_3s_st": {
+     "spread_p5_p95_lu": 0.99,
+     "st_std_lu": 0.57,
+     "range_full_lu": 23.97,
+     "st_lufs_p50": -13.98,
+     "st_lufs_p95": -13.54
+    },
+    "key": {
+     "key_best": "Ab major",
+     "key_best_r": 0.853,
+     "key_2nd": "C minor",
+     "key_2nd_r": 0.732,
+     "eb_major_r": 0.671,
+     "top_pitch_classes": [
+      "Eb",
+      "Ab",
+      "C",
+      "Bb",
+      "G"
+     ]
+    },
+    "scribe": {
+     "generation_id": "YfOvyOi31l0igTpQam5e",
+     "text": "",
+     "language_probability": 0.1245,
+     "verdict": "PASS (empty transcript: no vocals/speech detected)",
+     "actual_cents": 18
+    }
+   },
+   "usable_steady_region_s": [
+    3.5,
+    169.5
+   ],
+   "verdict": "PASS (audio) / KEY CLASH",
+   "flags": [
+    "key Ab: clash index 0.35/0.36 against vd-a/vd-b (compatible pairs 0.12-0.14) -> use el-v-aday.keyA.wav"
+   ],
+   "notes": "bass pedal Ab",
+   "generation_id": "lKHm7iauQLxMYJVz4tfD",
+   "price_actual_cents": 49.08
+  },
+  {
+   "id": "el-v-aday.keyA",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-v-aday.keyA.wav",
+   "role": "Varış OPENING (selected) - key-harmonised copy of el-v-aday (+1 semitone varispeed -> A major)",
+   "duration_s": 169.888,
+   "lufs": -14.14,
+   "true_peak_dbtp": -4.08,
+   "checks": {
+    "level": {
+     "lufs_i": -14.14,
+     "true_peak_dbtp": -4.08,
+     "lr_corr": 0.391,
+     "lead_silence_ms": 84.1,
+     "tail_silence_ms": 104.5
+    },
+    "no_drums_onsets": {
+     "pulse_clarity": 0.022,
+     "strong_onsets_per_min": 0.0,
+     "percussive_share": 0.067,
+     "flux_max_db": 1.462,
+     "flux_median_db": 0.5672
+    },
+    "spectrum": {
+     "centroid_hz": 237.8,
+     "share_lt300": 0.733,
+     "share_500_4k": 0.022,
+     "share_1k5_4k": 0.0003,
+     "share_gt8k": 0.0
+    },
+    "mono_sum_minus_stereo_lu": -1.65,
+    "clicks": {
+     "hf_candidates": 0,
+     "audible_broadband_clicks": [],
+     "fullband_transients_ge10db": []
+    },
+    "flatness_body": {
+     "body_start_s": 3.0,
+     "body_end_s": 160.0,
+     "body_dur_s": 157.0,
+     "fade_in_s": 3.0,
+     "fade_out_s": 9.9,
+     "body_st_median_lufs": -13.94,
+     "body_spread_p5_p95_lu": 0.99,
+     "body_range_lu": 3.23,
+     "body_std_lu": 0.42,
+     "body_max_rate_lu_per_s": 1.71,
+     "body_crescendo_10s_spans": 0
+    },
+    "flatness_whole_file_3s_st": {
+     "spread_p5_p95_lu": 0.98,
+     "st_std_lu": 0.46,
+     "range_full_lu": 21.36,
+     "st_lufs_p50": -13.92,
+     "st_lufs_p95": -13.5
+    },
+    "key": {
+     "key_best": "A major",
+     "key_best_r": 0.854,
+     "eb_major_r": -0.523
+    },
+    "scribe": "inherits el-v-aday (varispeed copy): {\"generation_id\": \"YfOvyOi31l0igTpQam5e\", \"text\": \"\", \"language_probability\": 0.1245, \"verdict\": \"PASS (empty transcript: no vocals/speech detected)\", \"actual_cents\": 18}"
+   },
+   "usable_steady_region_s": [
+    3.0,
+    160.0
+   ],
+   "verdict": "PASS - SELECTED OPENING (conditional on accepting the 1-semitone varispeed; else use el-vd-a)",
+   "flags": [
+    "derived file (local resampling), needs orchestrator OK"
+   ],
+   "notes": "bass pedal A (matches vd-a/derin-a); clash vs vd-a 0.14, vs vd-b 0.18",
+   "derived_from": {
+    "from": "el-v-aday.wav",
+    "semitones": 1,
+    "resample_up_down": [
+     84,
+     89
+    ],
+    "cents_error": 0.099,
+    "duration_s": 169.89
+   },
+   "prompt": "Ambient meditation drone in E-flat major: a warm, soft pad with low strings (cellos and double basses) holding long, gently overlapping chords that change only rarely, quiet and even from the first second to the last. Very slow, pulseless, no drums, no percussion, no vocals, no choir, no crescendo, flat dynamics, sustained.",
+   "generation_id_source": "lKHm7iauQLxMYJVz4tfD"
+  },
+  {
+   "id": "el-derin-a",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-derin-a.wav",
+   "role": "Derin bed A (240 s)",
+   "duration_s": 240.0,
+   "lufs": -10.87,
+   "true_peak_dbtp": -1.17,
+   "prompt": "Ambient meditation drone in E-flat major, darker and lower: a thin, muted, warm pad with low, long-held strings (cellos and double basses) in a low register, very little brightness, chords changing only rarely, the same quiet energy throughout. Very slow, pulseless, no drums, no percussion, no vocals, no choir, no crescendo, flat dynamics, sustained.",
+   "model": "eleven_music_v2_5",
+   "params": {
+    "duration_seconds": 240,
+    "instrumental": true,
+    "lyrics_type": "instrumental"
+   },
+   "node_id": "HEbCx0QT9YJqhVaNCODO",
+   "flow_id": "zAYOhRc6cOKeStKp4ijv",
+   "checks": {
+    "level": {
+     "lufs_i": -10.87,
+     "true_peak_dbtp": -1.17,
+     "lr_corr": 0.972,
+     "lead_silence_ms": 41.0,
+     "tail_silence_ms": 175.5
+    },
+    "no_drums_onsets": {
+     "pulse_clarity": 0.047,
+     "strong_onsets_per_min": 0.25,
+     "percussive_share": 0.018,
+     "flux_max_db": 2.315,
+     "flux_median_db": 0.4578
+    },
+    "spectrum": {
+     "centroid_hz": 191.6,
+     "share_lt300": 0.802,
+     "share_500_4k": 0.017,
+     "share_1k5_4k": 0.0002,
+     "share_gt8k": 0.0
+    },
+    "mono_sum_minus_stereo_lu": -0.06,
+    "clicks": {
+     "hf_candidates": 0,
+     "audible_broadband_clicks": [],
+     "fullband_transients_ge10db": []
+    },
+    "flatness_body": {
+     "body_start_s": 1.0,
+     "body_end_s": 237.5,
+     "body_dur_s": 236.5,
+     "fade_in_s": 1.0,
+     "fade_out_s": 2.5,
+     "body_st_median_lufs": -11.22,
+     "body_spread_p5_p95_lu": 2.27,
+     "body_range_lu": 4.98,
+     "body_std_lu": 0.83,
+     "body_max_rate_lu_per_s": 1.85,
+     "body_crescendo_10s_spans": 1
+    },
+    "flatness_whole_file_3s_st": {
+     "spread_p5_p95_lu": 2.23,
+     "st_std_lu": 0.78,
+     "range_full_lu": 13.18,
+     "st_lufs_p50": -11.22,
+     "st_lufs_p95": -9.16
+    },
+    "key": {
+     "key_best": "A major",
+     "key_best_r": 0.821,
+     "key_2nd": "A minor",
+     "key_2nd_r": 0.723,
+     "eb_major_r": -0.348,
+     "top_pitch_classes": [
+      "A",
+      "E",
+      "C#",
+      "B",
+      "D"
+     ]
+    },
+    "scribe": {
+     "generation_id": "Zp3Tup0INJZ64usGHwqC",
+     "text": "",
+     "language_probability": 0.1245,
+     "verdict": "PASS (empty transcript: no vocals/speech detected)",
+     "actual_cents": 24
+    }
+   },
+   "usable_steady_region_s": [
+    12.5,
+    237.5
+   ],
+   "verdict": "PASS",
+   "flags": [
+    "prompt asked darker/lower: centroid 192 Hz is NOT darker than vd-b (175 Hz); only darker than vd-a (232)"
+   ],
+   "notes": "bass pedal A (A major); flattest body (236.5 s usable). In-body rise 2.5-12.5 s (+2.4 LU) -> enter after 12.5 s",
+   "generation_id": "Ds2k1h9xyQapHD81iN8w",
+   "price_actual_cents": 65.44
+  },
+  {
+   "id": "el-derin-b",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-derin-b.wav",
+   "role": "Derin bed B (240 s), ORIGINAL key (Eb major)",
+   "duration_s": 240.0,
+   "lufs": -16.09,
+   "true_peak_dbtp": -6.58,
+   "prompt": "Ambient meditation drone in E-flat major, darker and lower: a thin, muted, warm pad with low, long-held strings (cellos and double basses) in a low register, very little brightness, chords changing only rarely, the same quiet energy throughout. Very slow, pulseless, no drums, no percussion, no vocals, no choir, no crescendo, flat dynamics, sustained.",
+   "model": "eleven_music_v2_5",
+   "params": {
+    "duration_seconds": 240,
+    "instrumental": true,
+    "lyrics_type": "instrumental"
+   },
+   "node_id": "uyJGYOUSsD5ZlDVGHuCb",
+   "flow_id": "zAYOhRc6cOKeStKp4ijv",
+   "checks": {
+    "level": {
+     "lufs_i": -16.09,
+     "true_peak_dbtp": -6.58,
+     "lr_corr": 0.759,
+     "lead_silence_ms": 127.1,
+     "tail_silence_ms": 1399.9
+    },
+    "no_drums_onsets": {
+     "pulse_clarity": 0.091,
+     "strong_onsets_per_min": 0.0,
+     "percussive_share": 0.035,
+     "flux_max_db": 1.578,
+     "flux_median_db": 0.3585
+    },
+    "spectrum": {
+     "centroid_hz": 113.6,
+     "share_lt300": 0.982,
+     "share_500_4k": 0.001,
+     "share_1k5_4k": 0.0,
+     "share_gt8k": 0.0
+    },
+    "mono_sum_minus_stereo_lu": -0.56,
+    "clicks": {
+     "hf_candidates": 0,
+     "audible_broadband_clicks": [],
+     "fullband_transients_ge10db": []
+    },
+    "flatness_body": {
+     "body_start_s": 12.5,
+     "body_end_s": 207.5,
+     "body_dur_s": 195.0,
+     "fade_in_s": 12.5,
+     "fade_out_s": 32.5,
+     "body_st_median_lufs": -15.89,
+     "body_spread_p5_p95_lu": 1.75,
+     "body_range_lu": 3.96,
+     "body_std_lu": 0.65,
+     "body_max_rate_lu_per_s": 0.9,
+     "body_crescendo_10s_spans": 2
+    },
+    "flatness_whole_file_3s_st": {
+     "spread_p5_p95_lu": 12.35,
+     "st_std_lu": 3.91,
+     "range_full_lu": 46.72,
+     "st_lufs_p50": -15.94,
+     "st_lufs_p95": -15.02
+    },
+    "key": {
+     "key_best": "Eb major",
+     "key_best_r": 0.834,
+     "key_2nd": "Ab major",
+     "key_2nd_r": 0.691,
+     "eb_major_r": 0.834,
+     "top_pitch_classes": [
+      "Eb",
+      "Ab",
+      "Bb",
+      "A",
+      "G"
+     ]
+    },
+    "scribe": {
+     "generation_id": "9qgnaZC7tAXnX95emsyH",
+     "text": "",
+     "language_probability": 0.1245,
+     "verdict": "PASS (empty transcript: no vocals/speech detected)",
+     "actual_cents": 24
+    }
+   },
+   "usable_steady_region_s": [
+    24.5,
+    207.5
+   ],
+   "verdict": "PASS body / KEY CLASH",
+   "flags": [
+    "whole-file 3 s ST spread 12.35 LU = FAIL, caused only by a 12.5 s fade-in and a 32.5 s fade-out; body spread 1.75 LU",
+    "key Eb: clash 0.42 vs derin-a, 0.40 vs vd-b -> use el-derin-b.keyD.wav"
+   ],
+   "notes": "only file actually in the requested E-flat major (bass Ab/Eb/Bb); darkest file (centroid 114 Hz)",
+   "generation_id": "njA07SjQTRWdkfsOTPQ4",
+   "price_actual_cents": 65.44
+  },
+  {
+   "id": "el-derin-b.keyD",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-derin-b.keyD.wav",
+   "role": "Derin bed B (selected) - key-harmonised copy of el-derin-b (-1 semitone varispeed -> D major, 254.3 s)",
+   "duration_s": 254.286,
+   "lufs": -16.22,
+   "true_peak_dbtp": -6.58,
+   "checks": {
+    "level": {
+     "lufs_i": -16.22,
+     "true_peak_dbtp": -6.58,
+     "lr_corr": 0.759,
+     "lead_silence_ms": 134.6,
+     "tail_silence_ms": 1483.2
+    },
+    "no_drums_onsets": {
+     "pulse_clarity": 0.066,
+     "strong_onsets_per_min": 0.0,
+     "percussive_share": 0.036,
+     "flux_max_db": 1.676,
+     "flux_median_db": 0.4524
+    },
+    "spectrum": {
+     "centroid_hz": 107.2,
+     "share_lt300": 0.998,
+     "share_500_4k": 0.0,
+     "share_1k5_4k": 0.0,
+     "share_gt8k": 0.0
+    },
+    "mono_sum_minus_stereo_lu": -0.56,
+    "clicks": {
+     "hf_candidates": 0,
+     "audible_broadband_clicks": [],
+     "fullband_transients_ge10db": []
+    },
+    "flatness_body": {
+     "body_start_s": 13.5,
+     "body_end_s": 220.0,
+     "body_dur_s": 206.5,
+     "fade_in_s": 13.5,
+     "fade_out_s": 34.3,
+     "body_st_median_lufs": -16.01,
+     "body_spread_p5_p95_lu": 1.73,
+     "body_range_lu": 3.93,
+     "body_std_lu": 0.64,
+     "body_max_rate_lu_per_s": 0.87,
+     "body_crescendo_10s_spans": 2
+    },
+    "flatness_whole_file_3s_st": {
+     "spread_p5_p95_lu": 12.46,
+     "st_std_lu": 3.97,
+     "range_full_lu": 45.95,
+     "st_lufs_p50": -16.07,
+     "st_lufs_p95": -15.15
+    },
+    "key": {
+     "key_best": "D major",
+     "key_best_r": 0.841,
+     "eb_major_r": -0.109
+    },
+    "scribe": "inherits el-derin-b (varispeed copy): {\"generation_id\": \"9qgnaZC7tAXnX95emsyH\", \"text\": \"\", \"language_probability\": 0.1245, \"verdict\": \"PASS (empty transcript: no vocals/speech detected)\", \"actual_cents\": 24}"
+   },
+   "usable_steady_region_s": [
+    25.5,
+    220.0
+   ],
+   "verdict": "PASS (conditional on accepting the varispeed)",
+   "flags": [
+    "derived file, needs orchestrator OK",
+    "long intro/outro fades: usable 25.5-220.0 s"
+   ],
+   "notes": "clash vs vd-b 0.14, derin-a 0.14, kapanis 0.13, imge 0.17",
+   "derived_from": {
+    "from": "el-derin-b.wav",
+    "semitones": -1,
+    "resample_up_down": [
+     89,
+     84
+    ],
+    "cents_error": -0.099,
+    "duration_s": 254.29
+   },
+   "prompt": "Ambient meditation drone in E-flat major, darker and lower: a thin, muted, warm pad with low, long-held strings (cellos and double basses) in a low register, very little brightness, chords changing only rarely, the same quiet energy throughout. Very slow, pulseless, no drums, no percussion, no vocals, no choir, no crescendo, flat dynamics, sustained.",
+   "generation_id_source": "njA07SjQTRWdkfsOTPQ4"
+  },
+  {
+   "id": "el-imge",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-imge.wav",
+   "role": "İmge layer: sparse distant felt piano (180 s)",
+   "duration_s": 180.0,
+   "lufs": -24.14,
+   "true_peak_dbtp": -5.4,
+   "prompt": "Solo soft felt piano in E-flat major, sparse and distant: single notes and quiet two-note intervals far away in a large soft reverb, with long gaps of near silence between them, the same sparse calm throughout. Very slow, pulseless, no drums, no percussion, no vocals, no choir, no crescendo, flat dynamics, sustained.",
+   "model": "eleven_music_v2_5",
+   "params": {
+    "duration_seconds": 180,
+    "instrumental": true,
+    "lyrics_type": "instrumental"
+   },
+   "node_id": "BGJ4RBze1tiQwO4EZC01",
+   "flow_id": "zAYOhRc6cOKeStKp4ijv",
+   "checks": {
+    "level": {
+     "lufs_i": -24.14,
+     "true_peak_dbtp": -5.4,
+     "lr_corr": 0.187,
+     "lead_silence_ms": 0.0,
+     "tail_silence_ms": 1138.9
+    },
+    "no_drums_onsets": {
+     "pulse_clarity": 0.055,
+     "strong_onsets_per_min": 12.67,
+     "percussive_share": 0.033,
+     "flux_max_db": 10.597,
+     "flux_median_db": 0.6126
+    },
+    "spectrum": {
+     "centroid_hz": 534.7,
+     "share_lt300": 0.196,
+     "share_500_4k": 0.583,
+     "share_1k5_4k": 0.0006,
+     "share_gt8k": 0.0
+    },
+    "mono_sum_minus_stereo_lu": -2.01,
+    "clicks": {
+     "hf_candidates": 1,
+     "audible_broadband_clicks": [
+      0.0
+     ],
+     "fullband_transients_ge10db": []
+    },
+    "flatness_body": {
+     "body_start_s": 1.5,
+     "body_end_s": 166.0,
+     "body_dur_s": 164.5,
+     "fade_in_s": 1.5,
+     "fade_out_s": 14.0,
+     "body_st_median_lufs": -32.74,
+     "body_spread_p5_p95_lu": 26.42,
+     "body_range_lu": 30.51,
+     "body_std_lu": 8.63,
+     "body_max_rate_lu_per_s": 44.27,
+     "body_crescendo_10s_spans": 0
+    },
+    "flatness_whole_file_3s_st": {
+     "spread_p5_p95_lu": 26.63,
+     "st_std_lu": 8.85,
+     "range_full_lu": 46.02,
+     "st_lufs_p50": -33.26,
+     "st_lufs_p95": -21.34
+    },
+    "key": {
+     "key_best": "D minor",
+     "key_best_r": 0.758,
+     "key_2nd": "D major",
+     "key_2nd_r": 0.741,
+     "eb_major_r": -0.123,
+     "top_pitch_classes": [
+      "D",
+      "A",
+      "Bb",
+      "C#",
+      "Ab"
+     ]
+    },
+    "scribe": {
+     "generation_id": "uMklxuukGydGLfwoQmeQ",
+     "text": "",
+     "language_probability": 0.1245,
+     "verdict": "PASS (empty transcript: no vocals/speech detected)",
+     "actual_cents": 18
+    }
+   },
+   "usable_steady_region_s": [
+    1.5,
+    166.0
+   ],
+   "verdict": "PASS (sparse-layer criteria) / key not Eb",
+   "flags": [
+    "starts with sound at sample 0 (-22 dBFS in first 10 ms): always fade in (mixer crossfade >= 8 s)",
+    "key measured D minor/D major (r 0.76/0.74), not Eb; fits the A/D set (clash 0.17 vs derin-b.keyD, 0.21 vs derin-a)",
+    "felt-piano timbre and distance: ear check"
+   ],
+   "notes": "flatness N/A by design (notes vs gaps: ST p5-p95 26 LU); irregular, not pulsed: pulse clarity 0.055, 12.7 strong onsets/min",
+   "generation_id": "ku2J9yJz5Bs96f2QbxHW",
+   "price_actual_cents": 49.08
+  },
+  {
+   "id": "el-kapanis",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-kapanis.wav",
+   "role": "Kapanış bed (180 s)",
+   "duration_s": 180.0,
+   "lufs": -11.43,
+   "true_peak_dbtp": -1.26,
+   "prompt": "Ambient meditation pad in E-flat major with low strings (cellos and double basses), the same warm palette but slightly brighter and more open, with a soft high-string halo, gently resolving onto a warm, long-held E-flat major chord. Very slow, pulseless, no drums, no percussion, no vocals, no choir, no crescendo, flat dynamics, sustained.",
+   "model": "eleven_music_v2_5",
+   "params": {
+    "duration_seconds": 180,
+    "instrumental": true,
+    "lyrics_type": "instrumental"
+   },
+   "node_id": "DjYpdp8OdRbEUsT6nXrc",
+   "flow_id": "zAYOhRc6cOKeStKp4ijv",
+   "checks": {
+    "level": {
+     "lufs_i": -11.43,
+     "true_peak_dbtp": -1.26,
+     "lr_corr": 0.83,
+     "lead_silence_ms": 241.0,
+     "tail_silence_ms": 476.6
+    },
+    "no_drums_onsets": {
+     "pulse_clarity": 0.059,
+     "strong_onsets_per_min": 0.0,
+     "percussive_share": 0.105,
+     "flux_max_db": 1.769,
+     "flux_median_db": 0.6089
+    },
+    "spectrum": {
+     "centroid_hz": 214.8,
+     "share_lt300": 0.867,
+     "share_500_4k": 0.034,
+     "share_1k5_4k": 0.0011,
+     "share_gt8k": 0.0
+    },
+    "mono_sum_minus_stereo_lu": -0.41,
+    "clicks": {
+     "hf_candidates": 0,
+     "audible_broadband_clicks": [],
+     "fullband_transients_ge10db": []
+    },
+    "flatness_body": {
+     "body_start_s": 4.5,
+     "body_end_s": 170.5,
+     "body_dur_s": 166.0,
+     "fade_in_s": 4.5,
+     "fade_out_s": 9.5,
+     "body_st_median_lufs": -11.4,
+     "body_spread_p5_p95_lu": 1.99,
+     "body_range_lu": 4.67,
+     "body_std_lu": 0.61,
+     "body_max_rate_lu_per_s": 1.86,
+     "body_crescendo_10s_spans": 0
+    },
+    "flatness_whole_file_3s_st": {
+     "spread_p5_p95_lu": 1.98,
+     "st_std_lu": 0.68,
+     "range_full_lu": 36.48,
+     "st_lufs_p50": -11.41,
+     "st_lufs_p95": -10.38
+    },
+    "key": {
+     "key_best": "D major",
+     "key_best_r": 0.847,
+     "key_2nd": "G major",
+     "key_2nd_r": 0.779,
+     "eb_major_r": -0.171,
+     "top_pitch_classes": [
+      "D",
+      "G",
+      "A",
+      "E",
+      "B"
+     ]
+    },
+    "scribe": {
+     "generation_id": "4mYQOQaM5eXuohO8thyO",
+     "text": "",
+     "language_probability": 0.1245,
+     "verdict": "PASS (empty transcript: no vocals/speech detected)",
+     "actual_cents": 18
+    }
+   },
+   "usable_steady_region_s": [
+    4.5,
+    170.5
+   ],
+   "verdict": "PASS",
+   "flags": [
+    "\"slightly brighter\": centroid 215 Hz is brighter than the Derin beds (192/114 Hz) but not than the Varış beds (175-232 Hz)",
+    "\"gently resolving\": ends with a 9.5 s fade; ear check"
+   ],
+   "notes": "bass G, chroma D major/G major; compatible with derin-a (0.13) and derin-b.keyD (0.13)",
+   "generation_id": "I2dUoLC9zqN42MPl3m7t",
+   "price_actual_cents": 49.08
+  },
+  {
+   "id": "orman-1",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/orman-1.wav",
+   "role": "nature loop orman (wind + leaves) #1, 30 s, loop:true",
+   "duration_s": 30.0,
+   "lufs": -48.46,
+   "true_peak_dbtp": -27.04,
+   "prompt": "Gentle distant wind through forest leaves, soft continuous leaf rustle, calm and even, quiet open forest air",
+   "model": "eleven_text_to_sound_v2",
+   "params": {
+    "duration_seconds": 30,
+    "loop": true,
+    "prompt_influence": 0.5
+   },
+   "node_id": "duSbTQ456NFAXpeOZXAc",
+   "flow_id": "zAYOhRc6cOKeStKp4ijv",
+   "checks": {
+    "level": {
+     "lufs_i": -48.46,
+     "true_peak_dbtp": -27.04,
+     "lr_corr": 0.222,
+     "lead_silence_ms": 0.0,
+     "tail_silence_ms": 0.0
+    },
+    "no_drums_onsets": {
+     "pulse_clarity": 0.055,
+     "strong_onsets_per_min": 6.0,
+     "percussive_share": 0.554,
+     "flux_max_db": 3.112,
+     "flux_median_db": 0.954
+    },
+    "spectrum": {
+     "centroid_hz": 6626.9,
+     "share_lt300": 0.022,
+     "share_500_4k": 0.238,
+     "share_1k5_4k": 0.1522,
+     "share_gt8k": 0.3344
+    },
+    "mono_sum_minus_stereo_lu": -2.16,
+    "clicks": {
+     "hf_candidates": 0,
+     "audible_broadband_clicks": [],
+     "fullband_transients_ge10db": []
+    },
+    "flatness_body": {
+     "body_start_s": 0.0,
+     "body_end_s": 27.5,
+     "body_dur_s": 27.5,
+     "fade_in_s": 0.0,
+     "fade_out_s": 2.5,
+     "body_st_median_lufs": -50.08,
+     "body_spread_p5_p95_lu": 4.54,
+     "body_range_lu": 4.86,
+     "body_std_lu": 1.49,
+     "body_max_rate_lu_per_s": 2.28,
+     "body_crescendo_10s_spans": 0
+    },
+    "loop_seam": {
+     "wrap_sample_step": 0.001189,
+     "interior_step_p999": 0.010209,
+     "wrap_level_jump_100ms_db": 1.58,
+     "interior_level_jump_p95_db": 2.05,
+     "wrap_level_jump_percentile": 0.87,
+     "wrap_hf_jump_100ms_db": 1.47,
+     "interior_hf_jump_p95_db": 2.49,
+     "wrap_hf_jump_percentile": 0.773,
+     "verdict": "PASS (seam indistinguishable from interior cuts)"
+    },
+    "flatness_whole_file_3s_st": {
+     "spread_p5_p95_lu": 5.62,
+     "st_std_lu": 1.91,
+     "range_full_lu": 7.18,
+     "st_lufs_p50": -49.91,
+     "st_lufs_p95": -45.82
+    },
+    "scribe": {
+     "generation_id": "FtVqbtjjnKGdhy6DEAlK",
+     "text": "",
+     "language_probability": 0.1245,
+     "verdict": "PASS (empty transcript: no vocals/speech detected)",
+     "actual_cents": 3
+    }
+   },
+   "usable_steady_region_s": [
+    0.0,
+    30.0
+   ],
+   "verdict": "PASS",
+   "flags": [],
+   "notes": "sample-exact 30.000 s, no codec padding (lead/tail 0 ms)",
+   "generation_id": "X8eIKLEZGOwc4I9EwlPr",
+   "price_actual_cents": 1.818
+  },
+  {
+   "id": "orman-2",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/orman-2.wav",
+   "role": "nature loop orman (wind + leaves) #2, 30 s, loop:true",
+   "duration_s": 30.0,
+   "lufs": -44.74,
+   "true_peak_dbtp": -28.91,
+   "prompt": "Gentle distant wind through forest leaves, soft continuous leaf rustle, calm and even, quiet open forest air",
+   "model": "eleven_text_to_sound_v2",
+   "params": {
+    "duration_seconds": 30,
+    "loop": true,
+    "prompt_influence": 0.5
+   },
+   "node_id": "duSbTQ456NFAXpeOZXAc",
+   "flow_id": "zAYOhRc6cOKeStKp4ijv",
+   "checks": {
+    "level": {
+     "lufs_i": -44.74,
+     "true_peak_dbtp": -28.91,
+     "lr_corr": 0.27,
+     "lead_silence_ms": 0.0,
+     "tail_silence_ms": 0.0
+    },
+    "no_drums_onsets": {
+     "pulse_clarity": 0.095,
+     "strong_onsets_per_min": 6.0,
+     "percussive_share": 0.557,
+     "flux_max_db": 2.654,
+     "flux_median_db": 0.9538
+    },
+    "spectrum": {
+     "centroid_hz": 7199.5,
+     "share_lt300": 0.011,
+     "share_500_4k": 0.217,
+     "share_1k5_4k": 0.158,
+     "share_gt8k": 0.38828
+    },
+    "mono_sum_minus_stereo_lu": -2.01,
+    "clicks": {
+     "hf_candidates": 0,
+     "audible_broadband_clicks": [],
+     "fullband_transients_ge10db": []
+    },
+    "flatness_body": {
+     "body_start_s": 0.0,
+     "body_end_s": 30.0,
+     "body_dur_s": 30.0,
+     "fade_in_s": 0.0,
+     "fade_out_s": 0.0,
+     "body_st_median_lufs": -45.61,
+     "body_spread_p5_p95_lu": 11.29,
+     "body_range_lu": 12.52,
+     "body_std_lu": 3.18,
+     "body_max_rate_lu_per_s": 5.85,
+     "body_crescendo_10s_spans": 0
+    },
+    "loop_seam": {
+     "wrap_sample_step": 0.002841,
+     "interior_step_p999": 0.018354,
+     "wrap_level_jump_100ms_db": 0.22,
+     "interior_level_jump_p95_db": 3.98,
+     "wrap_level_jump_percentile": 0.077,
+     "wrap_hf_jump_100ms_db": 0.12,
+     "interior_hf_jump_p95_db": 4.24,
+     "wrap_hf_jump_percentile": 0.067,
+     "verdict": "PASS (seam indistinguishable from interior cuts)"
+    },
+    "flatness_whole_file_3s_st": {
+     "spread_p5_p95_lu": 11.29,
+     "st_std_lu": 3.18,
+     "range_full_lu": 12.52,
+     "st_lufs_p50": -45.61,
+     "st_lufs_p95": -40.76
+    },
+    "scribe": {
+     "generation_id": "2Q2nbQKszn9aoQrT9b9J",
+     "text": "",
+     "language_probability": 0.1245,
+     "verdict": "PASS (empty transcript: no vocals/speech detected)",
+     "actual_cents": 3
+    }
+   },
+   "usable_steady_region_s": [
+    0.0,
+    30.0
+   ],
+   "verdict": "PASS seam / KULAK dynamics",
+   "flags": [
+    "gusty: body ST spread 11.3 LU (13 dB swell/dip inside 30 s, max 5.9 LU/s) - may be noticed as a recurring gust; ear check"
+   ],
+   "notes": "sample-exact 30.000 s, no codec padding (lead/tail 0 ms)",
+   "generation_id": "zkIRNpOBXdGy3cRHPR5P",
+   "price_actual_cents": 1.818
+  },
+  {
+   "id": "orman-3",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/orman-3.wav",
+   "role": "nature loop orman (wind + leaves) #3, 30 s, loop:true",
+   "duration_s": 30.0,
+   "lufs": -44.96,
+   "true_peak_dbtp": -28.36,
+   "prompt": "Gentle distant wind through forest leaves, soft continuous leaf rustle, calm and even, quiet open forest air",
+   "model": "eleven_text_to_sound_v2",
+   "params": {
+    "duration_seconds": 30,
+    "loop": true,
+    "prompt_influence": 0.5
+   },
+   "node_id": "duSbTQ456NFAXpeOZXAc",
+   "flow_id": "zAYOhRc6cOKeStKp4ijv",
+   "checks": {
+    "level": {
+     "lufs_i": -44.96,
+     "true_peak_dbtp": -28.36,
+     "lr_corr": 0.161,
+     "lead_silence_ms": 0.0,
+     "tail_silence_ms": 0.0
+    },
+    "no_drums_onsets": {
+     "pulse_clarity": 0.067,
+     "strong_onsets_per_min": 2.0,
+     "percussive_share": 0.554,
+     "flux_max_db": 2.807,
+     "flux_median_db": 0.9529
+    },
+    "spectrum": {
+     "centroid_hz": 6652.6,
+     "share_lt300": 0.013,
+     "share_500_4k": 0.236,
+     "share_1k5_4k": 0.1861,
+     "share_gt8k": 0.32726
+    },
+    "mono_sum_minus_stereo_lu": -2.39,
+    "clicks": {
+     "hf_candidates": 0,
+     "audible_broadband_clicks": [],
+     "fullband_transients_ge10db": []
+    },
+    "flatness_body": {
+     "body_start_s": 0.0,
+     "body_end_s": 29.0,
+     "body_dur_s": 29.0,
+     "fade_in_s": 0.0,
+     "fade_out_s": 1.0,
+     "body_st_median_lufs": -45.84,
+     "body_spread_p5_p95_lu": 5.18,
+     "body_range_lu": 5.65,
+     "body_std_lu": 1.67,
+     "body_max_rate_lu_per_s": 2.79,
+     "body_crescendo_10s_spans": 0
+    },
+    "loop_seam": {
+     "wrap_sample_step": 0.000462,
+     "interior_step_p999": 0.015968,
+     "wrap_level_jump_100ms_db": 2.51,
+     "interior_level_jump_p95_db": 2.89,
+     "wrap_level_jump_percentile": 0.91,
+     "wrap_hf_jump_100ms_db": 2.98,
+     "interior_hf_jump_p95_db": 3.3,
+     "wrap_hf_jump_percentile": 0.92,
+     "verdict": "PASS (seam indistinguishable from interior cuts)"
+    },
+    "flatness_whole_file_3s_st": {
+     "spread_p5_p95_lu": 5.33,
+     "st_std_lu": 1.78,
+     "range_full_lu": 6.76,
+     "st_lufs_p50": -45.75,
+     "st_lufs_p95": -43.05
+    },
+    "scribe": {
+     "generation_id": "WM7PS2h56EfqdJbVKb6p",
+     "text": "",
+     "language_probability": 0.1245,
+     "verdict": "PASS (empty transcript: no vocals/speech detected)",
+     "actual_cents": 3
+    }
+   },
+   "usable_steady_region_s": [
+    0.0,
+    30.0
+   ],
+   "verdict": "PASS",
+   "flags": [],
+   "notes": "sample-exact 30.000 s, no codec padding (lead/tail 0 ms)",
+   "generation_id": "wdppbH2dd8Je63GD2GLn",
+   "price_actual_cents": 1.818
+  },
+  {
+   "id": "orman-4",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/orman-4.wav",
+   "role": "nature loop orman (wind + leaves) #4, 30 s, loop:true",
+   "duration_s": 30.0,
+   "lufs": -45.93,
+   "true_peak_dbtp": -25.58,
+   "prompt": "Gentle distant wind through forest leaves, soft continuous leaf rustle, calm and even, quiet open forest air",
+   "model": "eleven_text_to_sound_v2",
+   "params": {
+    "duration_seconds": 30,
+    "loop": true,
+    "prompt_influence": 0.5
+   },
+   "node_id": "duSbTQ456NFAXpeOZXAc",
+   "flow_id": "zAYOhRc6cOKeStKp4ijv",
+   "checks": {
+    "level": {
+     "lufs_i": -45.93,
+     "true_peak_dbtp": -25.58,
+     "lr_corr": 0.183,
+     "lead_silence_ms": 0.0,
+     "tail_silence_ms": 0.0
+    },
+    "no_drums_onsets": {
+     "pulse_clarity": 0.058,
+     "strong_onsets_per_min": 10.0,
+     "percussive_share": 0.568,
+     "flux_max_db": 3.238,
+     "flux_median_db": 0.9534
+    },
+    "spectrum": {
+     "centroid_hz": 7320.8,
+     "share_lt300": 0.014,
+     "share_500_4k": 0.171,
+     "share_1k5_4k": 0.1423,
+     "share_gt8k": 0.40724
+    },
+    "mono_sum_minus_stereo_lu": -2.31,
+    "clicks": {
+     "hf_candidates": 0,
+     "audible_broadband_clicks": [],
+     "fullband_transients_ge10db": []
+    },
+    "flatness_body": {
+     "body_start_s": 0.0,
+     "body_end_s": 30.0,
+     "body_dur_s": 30.0,
+     "fade_in_s": 0.0,
+     "fade_out_s": 0.0,
+     "body_st_median_lufs": -46.13,
+     "body_spread_p5_p95_lu": 6.71,
+     "body_range_lu": 7.86,
+     "body_std_lu": 2.08,
+     "body_max_rate_lu_per_s": 4.0,
+     "body_crescendo_10s_spans": 0
+    },
+    "loop_seam": {
+     "wrap_sample_step": 0.000437,
+     "interior_step_p999": 0.015425,
+     "wrap_level_jump_100ms_db": 0.71,
+     "interior_level_jump_p95_db": 3.54,
+     "wrap_level_jump_percentile": 0.333,
+     "wrap_hf_jump_100ms_db": 0.84,
+     "interior_hf_jump_p95_db": 3.82,
+     "wrap_hf_jump_percentile": 0.393,
+     "verdict": "PASS (seam indistinguishable from interior cuts)"
+    },
+    "flatness_whole_file_3s_st": {
+     "spread_p5_p95_lu": 6.71,
+     "st_std_lu": 2.08,
+     "range_full_lu": 7.86,
+     "st_lufs_p50": -46.13,
+     "st_lufs_p95": -43.4
+    },
+    "scribe": {
+     "generation_id": "KOaytNgslxP3bV84oBdg",
+     "text": "",
+     "language_probability": 0.1245,
+     "verdict": "PASS (empty transcript: no vocals/speech detected)",
+     "actual_cents": 3
+    }
+   },
+   "usable_steady_region_s": [
+    0.0,
+    30.0
+   ],
+   "verdict": "PASS after repair",
+   "flags": [
+    "declicked locally: 8 crackle frames (2.98, 11.37, 19.93, 20.16, 23.65 s) cut by <= 12 dB over 87 ms total; original kept at common/raw/orman-4.orig.wav; ear check"
+   ],
+   "notes": "sample-exact 30.000 s, no codec padding (lead/tail 0 ms)",
+   "generation_id": "7QrIKlseMe05SELY6D97",
+   "price_actual_cents": 1.818
+  },
+  {
+   "id": "donus",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/donus.wav",
+   "role": "return tone (ElevenLabs sfx, repaired)",
+   "duration_s": 4.0,
+   "lufs": -22.36,
+   "true_peak_dbtp": -6.7,
+   "prompt": "Single soft warm chime note struck gently with a felt mallet, rounded attack, smooth natural fading tail, calm and quiet",
+   "model": "eleven_text_to_sound_v2",
+   "params": {
+    "duration_seconds": 4,
+    "loop": false,
+    "prompt_influence": 0.5
+   },
+   "node_id": "TjwwHAH79pSuGL9Nvwq5",
+   "flow_id": "zAYOhRc6cOKeStKp4ijv",
+   "checks": {
+    "level": {
+     "lufs_i": -22.36,
+     "true_peak_dbtp": -6.7,
+     "lr_corr": 1.0,
+     "lead_silence_ms": 0.8,
+     "tail_silence_ms": 1638.0
+    },
+    "no_drums_onsets": {
+     "pulse_clarity": 0.222,
+     "strong_onsets_per_min": 15.0,
+     "percussive_share": 0.029,
+     "flux_max_db": 1.888,
+     "flux_median_db": 0.2181
+    },
+    "spectrum": {
+     "centroid_hz": 700.8,
+     "share_lt300": 0.001,
+     "share_500_4k": 0.994,
+     "share_1k5_4k": 0.0002,
+     "share_gt8k": 1e-05
+    },
+    "scribe": {
+     "generation_id": "GwVgCZJ1ROYKKp5il8L7",
+     "text": "",
+     "language_probability": 0.1245,
+     "verdict": "PASS (empty transcript: no vocals/speech detected)",
+     "actual_cents": 0.4
+    }
+   },
+   "verdict": "FAIL (soft) - KULAK",
+   "flags": [
+    "generated tone is rough: 50 Hz amplitude modulation, sidebands 6-11 dB under the 699.5 Hz (F5) carrier, envelope AM depth rms 0.61 (synth alternative 0.004)",
+    "original was anti-phase L/R (corr -0.935, mono sum ~14 dB down) and started at full level on sample 0: repaired to mono (L-R)/2 + 20 ms fade-in + 50 ms fade-out (original: common/raw/donus.orig.wav)",
+    "F5 is not in the A/D bed family (F vs F#)",
+    "decays to -40 dB at ~1.8 s (4 s file)"
+   ],
+   "notes": "no re-take rule exists for sfx, so it was not regenerated; see donus.synth-D5.wav",
+   "generation_id": "ME9KkN1snPvMH6t8XrTA",
+   "price_actual_cents": 0.2424,
+   "processing": {
+    "from": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/raw/donus.orig.wav",
+    "mono": "(L-R)/2",
+    "fade_in_ms": 20,
+    "fade_out_ms": 50,
+    "peak_dbfs_before_L_R": [
+     -2.0,
+     -6.77
+    ],
+    "peak_dbfs_after": -6.7
+   }
+  },
+  {
+   "id": "donus.synth-D5",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/donus.synth-D5.wav",
+   "role": "return tone ALTERNATIVE (locally synthesized, NOT ElevenLabs)",
+   "duration_s": 4.0,
+   "lufs": -15.16,
+   "true_peak_dbtp": -5.99,
+   "checks": {
+    "am_roughness_depth_rms": 0.004,
+    "clicks_hf": 0,
+    "lr_corr": 1.0
+   },
+   "verdict": "PASS (objective) - needs orchestrator decision (SPEC names an sfx tone)",
+   "flags": [
+    "pitch D5 chosen for the EL (A/D) beds; compatibility with the Dalga (B) bed not checked; script takes f0: el/tools/synth_tone.py"
+   ],
+   "notes": "felt-mallet chime model, 20 ms attack, tau 0.8 s, 4.0 s"
+  },
+  {
+   "id": "oda-sesi-1",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/oda-sesi-1.wav",
+   "role": "room-tone floor (synthesized pink noise, 30 s loop)",
+   "duration_s": 30.0,
+   "lufs": null,
+   "rms_dbfs": [
+    -58.0,
+    -58.0
+   ],
+   "checks": {
+    "loop_seam": {
+     "wrap_sample_step": 0.00017,
+     "interior_step_p999": 0.001322,
+     "wrap_level_jump_100ms_db": 0.13,
+     "interior_level_jump_p95_db": 0.78,
+     "wrap_level_jump_percentile": 0.253,
+     "wrap_hf_jump_100ms_db": 0.26,
+     "interior_hf_jump_p95_db": 0.45,
+     "wrap_hf_jump_percentile": 0.693,
+     "verdict": "PASS (seam indistinguishable from interior cuts)"
+    },
+    "clicks": 0,
+    "octave_band_level_rel_125_250_db": {
+     "125": 0.0,
+     "250": -3.0,
+     "500": -6.0,
+     "1k": -9.1,
+     "2k": -12.3,
+     "4k": -17.6,
+     "8k": -28.4
+    },
+    "digital_silence": false
+   },
+   "verdict": "PASS",
+   "flags": [],
+   "notes": "frequency-domain pink noise (random phase, exactly periodic -> sample-exact loop), gentle LP 6 kHz (2nd-order magnitude), HP 25 Hz, independent L/R (corr ~0), seeds 20260929/20260930"
+  },
+  {
+   "id": "oda-sesi-2",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/oda-sesi-2.wav",
+   "role": "room-tone floor (synthesized pink noise, 30 s loop)",
+   "duration_s": 30.0,
+   "lufs": null,
+   "rms_dbfs": [
+    -58.0,
+    -58.0
+   ],
+   "checks": {
+    "loop_seam": {
+     "wrap_sample_step": 0.000333,
+     "interior_step_p999": 0.001318,
+     "wrap_level_jump_100ms_db": 0.85,
+     "interior_level_jump_p95_db": 0.9,
+     "wrap_level_jump_percentile": 0.943,
+     "wrap_hf_jump_100ms_db": 0.48,
+     "interior_hf_jump_p95_db": 0.55,
+     "wrap_hf_jump_percentile": 0.913,
+     "verdict": "PASS (seam indistinguishable from interior cuts)"
+    },
+    "clicks": 0,
+    "octave_band_level_rel_125_250_db": {
+     "125": 0.0,
+     "250": -3.1,
+     "500": -6.1,
+     "1k": -9.1,
+     "2k": -12.4,
+     "4k": -17.7,
+     "8k": -28.5
+    },
+    "digital_silence": false
+   },
+   "verdict": "PASS",
+   "flags": [],
+   "notes": "frequency-domain pink noise (random phase, exactly periodic -> sample-exact loop), gentle LP 6 kHz (2nd-order magnitude), HP 25 Hz, independent L/R (corr ~0), seeds 20260929/20260930"
+  }
+ ],
+ "tools": [
+  "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/tools/ledger_add.py",
+  "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/tools/manalyze.py",
+  "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/tools/mdetail.py",
+  "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/tools/mkey.py",
+  "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/tools/keyharm.py",
+  "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/tools/fixups.py",
+  "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/tools/roomtone.py",
+  "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/tools/synth_tone.py"
+ ],
+ "raw": {
+  "mp3": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/raw/*.mp3, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/raw/*.mp3",
+  "analysis": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/raw/*.json, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/raw/*.json",
+  "originals_of_repaired": [
+   "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/raw/donus.orig.wav",
+   "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/raw/orman-4.orig.wav"
+  ]
+ }
+}

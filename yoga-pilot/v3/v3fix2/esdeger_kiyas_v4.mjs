@@ -1,0 +1,47 @@
+// Eski kural (dropRank 1.8, E testi günü yapılmışsa görünür) ile PLAN.v3 son kuralı (yields, dropRank yok, E testi günü hiç)
+// arasında yoganın yolda olduğu bağlamların farkı: neden?
+import { readdirSync, existsSync } from 'node:fs'
+import * as A from '/home/user/eyes/app/src/lib/today.js'
+import * as OLD from '../v3fix/today_v3.js'
+import * as NEW from './today_v4.js'
+import { yogaModule as yOld } from '../v3fix/yoga_stop.mjs'
+import { yogaModule as yNew } from './yoga_stop_v4.mjs'
+const dir = '/home/user/eyes/app/src/modules'
+const mods = []
+for (const d of readdirSync(dir)) { const f = `${dir}/${d}/manifest.js`; if (!existsSync(f)) continue; try { mods.push((await import(f)).default) } catch {} }
+const live = mods.filter((m) => !m.retired)
+let seed = 12345; const rnd = () => ((seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648)
+const pick = (a) => a[Math.floor(rnd() * a.length)]
+const DAY = 86400000
+let oldY = 0, newY = 0, lostE = 0, lostCapFit = 0, lostCapOver = 0, lostOther = 0, noYogaOver20 = 0
+for (let i = 0; i < 20000; i++) {
+  const now = new Date(Date.UTC(2026, 8, 1) + Math.floor(rnd() * 60) * DAY + Math.floor(rnd() * 24) * 3600000)
+  const ago = (d) => new Date(now.getTime() - d * DAY - Math.floor(rnd() * 3) * 3600000).toISOString()
+  const tests = [], sessions = []
+  const nt = Math.floor(rnd() * 8)
+  for (let j = 0; j < nt; j++) { const d = Math.floor(rnd() * 16); const t = pick(['va-weekly', 'va-weekly', 'reading', 'va-daily']); if (t === 'reading') tests.push({ type: t, date: ago(d) }); else for (const eye of (t === 'va-weekly' ? ['R', 'L', 'OU'] : ['R', 'L']).filter(() => rnd() < 0.85)) tests.push({ type: t, eye, date: ago(d) }) }
+  const ns = Math.floor(rnd() * 25)
+  for (let j = 0; j < ns; j++) { const d = Math.floor(rnd() * 9); const date = ago(d); const k = pick(['routine', 'game-snake', 'game-track', 'breath', 'span', 'street', 'quick-look', 'notice', 'yoga'])
+    if (k === 'routine') sessions.push({ type: 'routine', setId: pick(['isinma', 'uzak', 'yakinuzak', 'daire', 'kirpma']), date })
+    else if (k.startsWith('game')) sessions.push({ type: 'game', game: k.slice(5), date })
+    else if (k === 'breath') sessions.push({ type: 'breath', seconds: pick([30, 60, 300]), date })
+    else if (k === 'span') sessions.push({ type: 'span', span: 8, date, seconds: 60 })
+    else if (k === 'street') sessions.push({ type: 'street', noticed: 2, asked: 3, date, seconds: 60 })
+    else if (k === 'yoga') { const m = pick([3, 5, 15]); sessions.push({ type: 'yoga', lesson: pick([1, 2, 4, 5, 6, 7, 8, 9, 10]), planned: m * 60, pathMin: m > 5 ? 5 : m, date, completed: true }) }
+    else sessions.push({ type: k, date, seconds: 60, count: 2 }) }
+  sessions.sort((a, b) => a.date.localeCompare(b.date)); tests.sort((a, b) => a.date.localeCompare(b.date))
+  const eye = rnd() < 0.5 ? undefined : { locked: rnd() < 0.2, due: rnd() < 0.3 ? 'budget' : null, used: Math.floor(rnd() * 6) * 60000, budgetMs: pick([5, 3]) * 60000, leftMs: 120000 }
+  const ctx = { tests, sessions, now, eye, profile: rnd() < 0.2 ? { seizure: 'yes' } : undefined, gate: { firstTestOnly: rnd() < 0.1 } }
+  const pa = A.buildPath(live, ctx)
+  const po = OLD.buildPath([...live, yOld], ctx), pn = NEW.buildPath([...live, yNew], ctx)
+  const tot = (p) => p.stops.reduce((a, s) => a + (s.minutes ?? 0), 0)
+  if (tot(pa) > 20) noYogaOver20++
+  const ho = po.stops.some((s) => s.id === 'yoga'), hn = pn.stops.some((s) => s.id === 'yoga')
+  if (ho) oldY++; if (hn) newY++
+  if (ho && !hn) {
+    const cand = yNew.today(ctx)
+    if (!cand) lostE++
+    else { const y = po.stops.find((s) => s.id === 'yoga'); if (tot(pa) + (y.minutes ?? 0) > 20) (tot(pa) <= 20 ? lostCapFit++ : lostCapOver++); else lostOther++ }
+  }
+}
+console.log(`bağlam 20000 · yogasız yol 20'yi aşan ${noYogaOver20} · yogalı yol: eski kural ${oldY}, yeni kural ${newY} · yeni kuralda yoganın yolda olmadığı eski bağlamlar: E testi günü (bugün yapılmış) ${lostE}; yogasız yol ≤ 20 ama yoga sığmıyor ${lostCapFit}; yogasız yol zaten > 20 ${lostCapOver}; başka ${lostOther}`)

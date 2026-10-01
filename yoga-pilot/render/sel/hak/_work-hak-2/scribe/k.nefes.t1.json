@@ -1,0 +1,18 @@
+{
+ "unit": "k.nefes",
+ "take": "t1",
+ "asset_id": "8dWYb42GToM2ceskvOZ4",
+ "asset_size_bytes": 53660,
+ "ref_node": "VcglXp3uwbpRIzxeGF9h",
+ "stt_node": "QyCDXtC10Do51VmNb1EM",
+ "session_id": "01L0xM5y4qTdAPjNXvPe",
+ "generation_id": "qHXqb8jb3GZuOJTUwbDW",
+ "actual_credits": 12.32,
+ "actual_cents": 0.224,
+ "spoken_duration_secs": 2.0,
+ "scribe_text": "Nefesin kendi ritmini bulabilir",
+ "tts": "Nefesin kendi ritmini bulabilir.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 4\n}",
+ "language_probability": 0.663
+}

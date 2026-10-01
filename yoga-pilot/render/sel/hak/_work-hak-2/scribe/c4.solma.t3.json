@@ -1,0 +1,17 @@
+{
+ "unit": "c4.solma",
+ "take": "t3",
+ "asset_id": "vv3i2DzfB4ErjqLk9Weo",
+ "asset_size_bytes": 102561,
+ "ref_node": "1cQLqWTHn0jYlucdZq2Y",
+ "stt_node": "B0BW4DO6mAs44TLGfdWh",
+ "session_id": "TMVh9XLjVdpuJWvdjTxq",
+ "generation_id": "rCr8z0AOsKXlOO8QKDCI",
+ "actual_credits": 29.04,
+ "actual_cents": 0.528,
+ "spoken_duration_secs": 5.06,
+ "scribe_text": "Görüntü usulca siliniyor. Seni taşıyan zemini yeniden hissedebilirsin",
+ "tts": "Görüntü usulca siliniyor. Seni taşıyan zemini yeniden hissedebilirsin.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 8\n}"
+}

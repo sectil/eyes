@@ -1,0 +1,16 @@
+{
+ "unit": "n1.birak",
+ "take": "t1",
+ "asset_id": "jiKRiav7WX4eapGAoKIT",
+ "source_node_id": "ephEDhFL1nyBxt0n61IN",
+ "stt_node_id": "nZYiZlbvQvPs2wXQ23cO",
+ "session_id": "8bfSDYMkJJtVBmww1d01",
+ "generation_id": "wKEfrzBXHKyH9ivOY51F",
+ "actual_credits": 30.8,
+ "actual_cents": 0.56,
+ "spoken_duration_secs": 5.42,
+ "scribe_text": "Dersin sonunda niyetini hatırlatacağım. O zamana kadar onu aklında tutman gerekmiyor",
+ "tts": "Dersin sonunda niyetini hatırlatacağım. O zamana kadar onu aklında tutman gerekmiyor.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 11\n}"
+}

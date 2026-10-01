@@ -1,0 +1,693 @@
+{
+ "lesson": "ders2",
+ "scene": "orman",
+ "voice": {
+  "name": "Nefona Hoca",
+  "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+  "sex_param": "m",
+  "model": "eleven_v4",
+  "generations_count": 3
+ },
+ "kaynak_ders_verisi": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders2/ders2.lesson.v3.json",
+ "kural": "tts = screen (ekrandaki cümle = söylenen cümle); çok cümleli birim cümle sonlarından kesilir; taşıyıcı üç nokta duraklarından (SPEC.v3 §5). Metin E.1 incelemesinden (karar 2 yedeği: iki bağımsız model incelemesi) geçmeden seslendirilmez.",
+ "yeni_ses_gerekmeyen": [
+  {
+   "id": "c2.akis (kisa-5dk)",
+   "neden": "kısa biçimin metni tam biçimle aynı; kayıtlı ses kullanılır, yalnız boşluk değişir"
+  },
+  {
+   "id": "a.izin",
+   "neden": "kaldığın yerden açılış izni dosyası kayıtlı birimden kurulur"
+  },
+  {
+   "id": "soundCheck (c1.b01, c1.s16, c2.n03)",
+   "neden": "kayıtlı taşıyıcı parçaları"
+  },
+  {
+   "id": "n1.sec seçenek 2 ve 3",
+   "neden": "metinleri iki noktasız yazıldı (ders verisinde) ama ilk yayında dönüşümlü açılış yok (PLAN.v3 §C.1); seslendirilmez"
+  }
+ ],
+ "ozet": {
+  "birim": 28,
+  "karakter": 1495,
+  "hece": 530,
+  "gruplar": {
+   "metin-degisti": {
+    "birim": 4,
+    "karakter": 311,
+    "hece": 110
+   },
+   "5dk-kisa": {
+    "birim": 4,
+    "karakter": 153,
+    "hece": 54
+   },
+   "20dk": {
+    "birim": 11,
+    "karakter": 608,
+    "hece": 215
+   },
+   "20dk-kose-payi": {
+    "birim": 3,
+    "karakter": 105,
+    "hece": 37
+   },
+   "yardimci": {
+    "birim": 6,
+    "karakter": 318,
+    "hece": 114
+   }
+  },
+  "kredi_tahmini": {
+   "tts_3_cekim": 4485,
+   "scribe_dogrulama": 814,
+   "toplam": 5299,
+   "not": "TTS 0,99989 kredi/karakter/çekim (hoc estimate_only; uzlaştırılmadı); Scribe 5,5 kredi/sn (gerçek), süre model × 1,127, %25 yeniden deneme payı VARSAYIM. Yeniden çekimler ve 20 dk müziği dahil değil."
+  }
+ },
+ "bes_dk_bos_pay": {
+  "hedef_sn": 15.0,
+  "nefona_hoca_birim_kestirim": 17.0,
+  "nefona_hoca_kons_kestirim": 15.3,
+  "onceki_metinle": 9.8,
+  "duzeltme_oncesi": {
+   "birim": 17.9,
+   "kons": 15.9
+  },
+  "not": "PLAN.v3 §A.3 \"≈ 16 hece\" Neslihan içindi (boş pay 11,6). Nefona Hoca %12,7 yavaş okuduğu için yalnız Varış kısaltması yetmedi: n1.sec (2 hece ve iki nokta duraklaması) ve n1.soyle kısa biçimi (4 hece) de kısaldı. Düzeltme turunda n1.sec +3 hece, a.gozler kısa biçimi +2 hece aldı; n2.hatirla kısa biçimi tek cümleye indi ve sessizliği 11,5 sn'ye çıktı (N2 bloğu >= 15 sn). Ayrıntı b/ders2/timing.txt ve b/INCELEME.md."
+ },
+ "inceleme_notlari": [
+  {
+   "id": "c4.ses",
+   "metin": "Uzaktan yaprak hışırtısı gelip gidiyor. / Uzaktan dalgaların sesi gelip gidiyor.",
+   "not": "E.1 (iki model incelemesi, Türkçe editör BLOCKER) kararı: yüklemsiz cümle düzeltildi; iki sahne de bu listede yeniden seslendirilir (c4.ses.orman, c4.ses.kiyi)."
+  },
+  {
+   "id": "k.oda.ayrinti",
+   "metin": "Bir renk, bir biçim, bir doku.",
+   "not": "E.1 kararı (Türkçe editör NIT): liste istisnasına girer, k.goz'un nesnesini açar; değişmedi, yeniden seslendirilmez."
+  },
+  {
+   "id": "c1.gecis.arka, c1.gecis.on (1. cümle)",
+   "metin": "Bedenin arka tarafı. / Yüzün ve bedenin ön tarafı.",
+   "not": "E.1 kararı: beden dolaşımı bölüm başlığı, PLAN.v2 §C.1 liste biçimi (istisna); kabul."
+  },
+  {
+   "id": "H12 payı",
+   "metin": "5 dk: Varış 15.50 / Derinleşme 15.12 / Derin 12.88 hece/cümle",
+   "not": "Varış kısa biçimlerine ya da N1 birimlerine hece eklenir/çıkarılırsa H12 yeniden denetlenir."
+  }
+ ],
+ "units": [
+  {
+   "id": "n1.sec",
+   "clip": "n1.sec",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Bugün kendine kısa bir niyet seçiyorsun. Aklına bir şey gelmezse niyetin \"Kendime dinlenmeye izin veriyorum\" olsun.",
+   "screen": "Bugün kendine kısa bir niyet seçiyorsun. Aklına bir şey gelmezse niyetin \"Kendime dinlenmeye izin veriyorum\" olsun.",
+   "sentences": [
+    "Bugün kendine kısa bir niyet seçiyorsun.",
+    "Aklına bir şey gelmezse niyetin \"Kendime dinlenmeye izin veriyorum\" olsun."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 40,
+   "chars": 115,
+   "neden": "metin-degisti: iki nokta kaldırıldı (SPEC.v3 §4.1, PLAN.v3 §A.3); pilotta kesim kural dışıydı (SPEC v3.1); düzeltme turunda \"olsun\" cümlesi özneli ve bağlı yazıldı (INCELEME.md TE3, TE4/UH5)",
+   "gerekli": [
+    15,
+    20
+   ],
+   "onceki_tts": "Bugün kendine kısa bir niyet seçiyorsun. Aklına bir şey gelmezse önerim şu: \"Kendime dinlenmeye izin veriyorum.\""
+  },
+  {
+   "id": "n2.hatirla",
+   "clip": "n2.hatirla",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Hatırlamazsan \"Kendime dinlenmeye izin veriyorum\" demen de olur.",
+   "screen": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Hatırlamazsan \"Kendime dinlenmeye izin veriyorum\" demen de olur.",
+   "sentences": [
+    "Başta seçtiğin niyeti içinden üç kez söylemek yeterli.",
+    "Hatırlamazsan \"Kendime dinlenmeye izin veriyorum\" demen de olur."
+   ],
+   "phase": "Derin",
+   "syllables": 42,
+   "chars": 119,
+   "neden": "metin-degisti: iki nokta kaldırıldı (SPEC.v3 §4.1, PLAN.v3 §A.3); pilotta kesim kural dışıydı (SPEC v3.1); düzeltme turunda \"olsun\" cümlesi özneli ve bağlı yazıldı (INCELEME.md TE3, TE4/UH5)",
+   "gerekli": [
+    15,
+    20
+   ],
+   "onceki_tts": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\""
+  },
+  {
+   "id": "c4.ses.orman",
+   "clip": "c4.ses",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Uzaktan yaprak hışırtısı gelip gidiyor.",
+   "screen": "Uzaktan yaprak hışırtısı gelip gidiyor.",
+   "sentences": [
+    "Uzaktan yaprak hışırtısı gelip gidiyor."
+   ],
+   "phase": "Derin",
+   "syllables": 14,
+   "chars": 39,
+   "neden": "metin-degisti: yüklemsiz imge cümlesi yüklemli yazıldı (düzeltme turu, INCELEME.md TE2); sahne orman",
+   "gerekli": [
+    15,
+    20
+   ],
+   "sahne": "orman",
+   "onceki_tts": "Uzaktan gelip giden yaprak hışırtısı."
+  },
+  {
+   "id": "c4.ses.kiyi",
+   "clip": "c4.ses",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Uzaktan dalgaların sesi gelip gidiyor.",
+   "screen": "Uzaktan dalgaların sesi gelip gidiyor.",
+   "sentences": [
+    "Uzaktan dalgaların sesi gelip gidiyor."
+   ],
+   "phase": "Derin",
+   "syllables": 14,
+   "chars": 38,
+   "neden": "metin-degisti: yüklemsiz imge cümlesi yüklemli yazıldı (düzeltme turu, INCELEME.md TE2); sahne kiyi",
+   "gerekli": [
+    15,
+    20
+   ],
+   "sahne": "kiyi",
+   "onceki_tts": "Uzaktan gelip giden dalgaların sesi."
+  },
+  {
+   "id": "a.gozler.kisa",
+   "clip": "a.gozler",
+   "kind": "clip",
+   "form": "kisa-5dk",
+   "tts": "Gözlerini kapatıp kapatmamak sana kalmış.",
+   "screen": "Gözlerini kapatıp kapatmamak sana kalmış.",
+   "sentences": [
+    "Gözlerini kapatıp kapatmamak sana kalmış."
+   ],
+   "phase": "Varış",
+   "syllables": 15,
+   "chars": 41,
+   "neden": "5dk-kisa: Varış kısa biçimi (PLAN.v3 §A.3, boş pay >= 15 sn)",
+   "gerekli": [
+    5
+   ],
+   "belowSec": 360,
+   "gapAfter": {
+    "min": 4.0,
+    "pref": 4.0,
+    "max": 7.0
+   },
+   "tam_tts": "Gözlerini kapatmak ya da açık tutmak sana kalmış; bakışın serbest.",
+   "onceki_kisa_tts": null
+  },
+  {
+   "id": "a.kolay.kisa",
+   "clip": "a.kolay",
+   "kind": "clip",
+   "form": "kisa-5dk",
+   "tts": "Gevşemek zor gelirse bu da olur.",
+   "screen": "Gevşemek zor gelirse bu da olur.",
+   "sentences": [
+    "Gevşemek zor gelirse bu da olur."
+   ],
+   "phase": "Varış",
+   "syllables": 11,
+   "chars": 32,
+   "neden": "5dk-kisa: Varış kısa biçimi (PLAN.v3 §A.3, boş pay >= 15 sn)",
+   "gerekli": [
+    5
+   ],
+   "belowSec": 360,
+   "gapAfter": {
+    "min": 3.0,
+    "pref": 9.0,
+    "max": 11.0
+   },
+   "tam_tts": "Gevşemek her zaman kolay olmaz; bunda yanlış bir şey yok.",
+   "onceki_kisa_tts": null
+  },
+  {
+   "id": "n1.soyle.kisa",
+   "clip": "n1.soyle",
+   "kind": "clip",
+   "form": "kisa-5dk",
+   "tts": "İçinden bir kez söylemek yeterli.",
+   "screen": "İçinden bir kez söylemek yeterli.",
+   "sentences": [
+    "İçinden bir kez söylemek yeterli."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 11,
+   "chars": 33,
+   "neden": "5dk-kisa: pilotta okutulmadı; metin 4 hece kısaldı (H12 evre cümle uzunluğu, Varış kısalınca)",
+   "gerekli": [
+    5
+   ],
+   "belowSec": 360,
+   "gapAfter": {
+    "min": 6.0,
+    "pref": 8.0,
+    "max": 10.0
+   },
+   "tam_tts": "Niyetini içinden üç kez söylemek yeterli.",
+   "onceki_kisa_tts": "Niyetini içinden bir kez söylemek yeterli."
+  },
+  {
+   "id": "n2.hatirla.kisa",
+   "clip": "n2.hatirla",
+   "kind": "clip",
+   "form": "kisa-5dk",
+   "tts": "Niyetini içinden bir kez daha söylemek yeterli.",
+   "screen": "Niyetini içinden bir kez daha söylemek yeterli.",
+   "sentences": [
+    "Niyetini içinden bir kez daha söylemek yeterli."
+   ],
+   "phase": "Derin",
+   "syllables": 17,
+   "chars": 47,
+   "neden": "5dk-kisa: pilotta okutulmadı; düzeltme turunda tek cümleye indi (5 dk boş payı ve H12; INCELEME.md TE4/UH5)",
+   "gerekli": [
+    5
+   ],
+   "belowSec": 360,
+   "gapAfter": {
+    "min": 11.5,
+    "pref": 13.0,
+    "max": 15.0
+   },
+   "tam_tts": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Hatırlamazsan \"Kendime dinlenmeye izin veriyorum\" demen de olur.",
+   "onceki_kisa_tts": "Niyetini içinden bir kez daha söylemek yeterli. Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\""
+  },
+  {
+   "id": "car.agir",
+   "clip": null,
+   "kind": "carrier",
+   "form": "tasiyici",
+   "tts": "Kollar ağır… bacaklar ağır… sırt ağır… omuzlar ağır… bütün beden ağır.",
+   "screen": "Kollar ağır… bacaklar ağır… sırt ağır… omuzlar ağır… bütün beden ağır.",
+   "sentences": [
+    "Kollar ağır… bacaklar ağır… sırt ağır… omuzlar ağır… bütün beden ağır."
+   ],
+   "phase": "Derin",
+   "syllables": 23,
+   "chars": 70,
+   "neden": "20dk: C3 zıtlık çiftleri (planlayıcı, Nefona Hoca ölçülmüş süreleri)",
+   "gerekli": [
+    20
+   ],
+   "items": [
+    "c3.a1",
+    "c3.a2",
+    "c3.a2b",
+    "c3.a2c",
+    "c3.a3"
+   ],
+   "itemText": {
+    "c3.a1": "Kollar ağır…",
+    "c3.a2": "bacaklar ağır…",
+    "c3.a2b": "sırt ağır…",
+    "c3.a2c": "omuzlar ağır…",
+    "c3.a3": "bütün beden ağır."
+   },
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa çekim elenir"
+  },
+  {
+   "id": "car.hafif",
+   "clip": null,
+   "kind": "carrier",
+   "form": "tasiyici",
+   "tts": "Kollar hafif… bacaklar hafif… sırt hafif… omuzlar hafif… bütün beden hafif.",
+   "screen": "Kollar hafif… bacaklar hafif… sırt hafif… omuzlar hafif… bütün beden hafif.",
+   "sentences": [
+    "Kollar hafif… bacaklar hafif… sırt hafif… omuzlar hafif… bütün beden hafif."
+   ],
+   "phase": "Derin",
+   "syllables": 23,
+   "chars": 75,
+   "neden": "20dk: C3 zıtlık çiftleri (planlayıcı, Nefona Hoca ölçülmüş süreleri)",
+   "gerekli": [
+    20
+   ],
+   "items": [
+    "c3.h1",
+    "c3.h2",
+    "c3.h2b",
+    "c3.h2c",
+    "c3.h3"
+   ],
+   "itemText": {
+    "c3.h1": "Kollar hafif…",
+    "c3.h2": "bacaklar hafif…",
+    "c3.h2b": "sırt hafif…",
+    "c3.h2c": "omuzlar hafif…",
+    "c3.h3": "bütün beden hafif."
+   },
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa çekim elenir"
+  },
+  {
+   "id": "c3.agir",
+   "clip": "c3.agir",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Önce ağırlıkla başlıyoruz. İstemezsen bu bölümü atlayıp zemini hissedebilirsin.",
+   "screen": "Önce ağırlıkla başlıyoruz. İstemezsen bu bölümü atlayıp zemini hissedebilirsin.",
+   "sentences": [
+    "Önce ağırlıkla başlıyoruz.",
+    "İstemezsen bu bölümü atlayıp zemini hissedebilirsin."
+   ],
+   "phase": "Derin",
+   "syllables": 30,
+   "chars": 79,
+   "neden": "20dk: planlayıcı, Nefona Hoca ölçülmüş süreleriyle 20 dk planında; metin önerisi: pilot metni yüklemsiz başlıktı (\"Önce ağırlık. İstemezsen bu bölümü atlayıp zemini hissedebilirsin.\")",
+   "gerekli": [
+    20
+   ],
+   "onceki_tts": "Önce ağırlık. İstemezsen bu bölümü atlayıp zemini hissedebilirsin."
+  },
+  {
+   "id": "c3.gelmezse",
+   "clip": "c3.gelmezse",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Ağırlığı hissetmesen de olur. Sözcükleri dinlemen yeter.",
+   "screen": "Ağırlığı hissetmesen de olur. Sözcükleri dinlemen yeter.",
+   "sentences": [
+    "Ağırlığı hissetmesen de olur.",
+    "Sözcükleri dinlemen yeter."
+   ],
+   "phase": "Derin",
+   "syllables": 20,
+   "chars": 56,
+   "neden": "20dk: planlayıcı, Nefona Hoca ölçülmüş süreleriyle 20 dk planında",
+   "gerekli": [
+    20
+   ]
+  },
+  {
+   "id": "c3.hafif",
+   "clip": "c3.hafif",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Şimdi hafifliğe geçiyoruz.",
+   "screen": "Şimdi hafifliğe geçiyoruz.",
+   "sentences": [
+    "Şimdi hafifliğe geçiyoruz."
+   ],
+   "phase": "Derin",
+   "syllables": 10,
+   "chars": 26,
+   "neden": "20dk: planlayıcı, Nefona Hoca ölçülmüş süreleriyle 20 dk planında; metin önerisi: pilot metni yüklemsiz başlıktı (\"Şimdi bunun tersi: hafiflik.\")",
+   "gerekli": [
+    20
+   ],
+   "onceki_tts": "Şimdi bunun tersi: hafiflik."
+  },
+  {
+   "id": "c3.birak",
+   "clip": "c3.birak",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Bu hisleri bırakabilirsin. Beden kendi hâlinde.",
+   "screen": "Bu hisleri bırakabilirsin. Beden kendi hâlinde.",
+   "sentences": [
+    "Bu hisleri bırakabilirsin.",
+    "Beden kendi hâlinde."
+   ],
+   "phase": "Derin",
+   "syllables": 17,
+   "chars": 47,
+   "neden": "20dk: planlayıcı, Nefona Hoca ölçülmüş süreleriyle 20 dk planında",
+   "gerekli": [
+    20
+   ]
+  },
+  {
+   "id": "c4.yerles",
+   "clip": "c4.yerles",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Yolun kenarında rahat bir köşe bulabilirsin.",
+   "screen": "Yolun kenarında rahat bir köşe bulabilirsin.",
+   "sentences": [
+    "Yolun kenarında rahat bir köşe bulabilirsin."
+   ],
+   "phase": "Derin",
+   "syllables": 16,
+   "chars": 44,
+   "neden": "20dk: planlayıcı, Nefona Hoca ölçülmüş süreleriyle 20 dk planında",
+   "gerekli": [
+    20
+   ]
+  },
+  {
+   "id": "c4.adim",
+   "clip": "c4.adim",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Her adımda ayak tabanlarını hissedebilirsin.",
+   "screen": "Her adımda ayak tabanlarını hissedebilirsin.",
+   "sentences": [
+    "Her adımda ayak tabanlarını hissedebilirsin."
+   ],
+   "phase": "Derin",
+   "syllables": 17,
+   "chars": 44,
+   "neden": "20dk: planlayıcı, Nefona Hoca ölçülmüş süreleriyle 20 dk planında",
+   "gerekli": [
+    20
+   ]
+  },
+  {
+   "id": "c4.koku",
+   "clip": "c4.koku",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Havada çam ve yosun kokusu var.",
+   "screen": "Havada çam ve yosun kokusu var.",
+   "sentences": [
+    "Havada çam ve yosun kokusu var."
+   ],
+   "phase": "Derin",
+   "syllables": 11,
+   "chars": 31,
+   "neden": "20dk: planlayıcı, Nefona Hoca ölçülmüş süreleriyle 20 dk planında; düzeltme turu: orman metni değişti (Ders 3 c3.toprak ile benzersizlik, INCELEME.md UH4)",
+   "gerekli": [
+    20
+   ],
+   "onceki_tts": "Havada ıslak toprak ve çam kokusu var."
+  },
+  {
+   "id": "c4.pencere",
+   "clip": "c4.pencere",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Bir süre sessiz kalacağım. İstediğin an gözlerini açabilirsin. Sonra yine seslenirim.",
+   "screen": "Bir süre sessiz kalacağım. İstediğin an gözlerini açabilirsin. Sonra yine seslenirim.",
+   "sentences": [
+    "Bir süre sessiz kalacağım.",
+    "İstediğin an gözlerini açabilirsin.",
+    "Sonra yine seslenirim."
+   ],
+   "phase": "Derin",
+   "syllables": 31,
+   "chars": 85,
+   "neden": "20dk: planlayıcı, Nefona Hoca ölçülmüş süreleriyle 20 dk planında",
+   "gerekli": [
+    20
+   ]
+  },
+  {
+   "id": "c4.donus1",
+   "clip": "c4.donus1",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Yeniden seninleyim. Dalıp gittiysen de sorun değil.",
+   "screen": "Yeniden seninleyim. Dalıp gittiysen de sorun değil.",
+   "sentences": [
+    "Yeniden seninleyim.",
+    "Dalıp gittiysen de sorun değil."
+   ],
+   "phase": "Derin",
+   "syllables": 17,
+   "chars": 51,
+   "neden": "20dk: planlayıcı, Nefona Hoca ölçülmüş süreleriyle 20 dk planında",
+   "gerekli": [
+    20
+   ]
+  },
+  {
+   "id": "c4.acele",
+   "clip": "c4.acele",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Hiçbir şeyin acelesi yok.",
+   "screen": "Hiçbir şeyin acelesi yok.",
+   "sentences": [
+    "Hiçbir şeyin acelesi yok."
+   ],
+   "phase": "Derin",
+   "syllables": 9,
+   "chars": 25,
+   "neden": "20dk-kose-payi: Nefona Hoca planında yok; pilotun 5 köşe × 5..20 dk birleşiminde var (PLAN.v3 18 klip). Ölçülen süreler kaydırırsa gerekir",
+   "gerekli": [
+    "20-yedek"
+   ]
+  },
+  {
+   "id": "c4.geride",
+   "clip": "c4.geride",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Sesler ve ışık yavaş yavaş geride kalıyor.",
+   "screen": "Sesler ve ışık yavaş yavaş geride kalıyor.",
+   "sentences": [
+    "Sesler ve ışık yavaş yavaş geride kalıyor."
+   ],
+   "phase": "Derin",
+   "syllables": 15,
+   "chars": 42,
+   "neden": "20dk-kose-payi: Nefona Hoca planında yok; pilotun 5 köşe × 5..20 dk birleşiminde var (PLAN.v3 18 klip). Ölçülen süreler kaydırırsa gerekir",
+   "gerekli": [
+    "20-yedek"
+   ]
+  },
+  {
+   "id": "c4.x.istemiyor",
+   "clip": "c4.x.istemiyor",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Burada kimse senden bir şey istemiyor.",
+   "screen": "Burada kimse senden bir şey istemiyor.",
+   "sentences": [
+    "Burada kimse senden bir şey istemiyor."
+   ],
+   "phase": "Derin",
+   "syllables": 13,
+   "chars": 38,
+   "neden": "20dk-kose-payi: Nefona Hoca planında yok; pilotun 5 köşe × 5..20 dk birleşiminde var (PLAN.v3 18 klip). Ölçülen süreler kaydırırsa gerekir",
+   "gerekli": [
+    "20-yedek"
+   ]
+  },
+  {
+   "id": "g.ilk",
+   "clip": "g.ilk",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Bugün yalnızca tanışıyoruz; zorlanırsan ekrandaki \"Kapanışa geç\" düğmesine dokunman yeterli.",
+   "screen": "Bugün yalnızca tanışıyoruz; zorlanırsan ekrandaki \"Kapanışa geç\" düğmesine dokunman yeterli.",
+   "sentences": [
+    "Bugün yalnızca tanışıyoruz; zorlanırsan ekrandaki \"Kapanışa geç\" düğmesine dokunman yeterli."
+   ],
+   "phase": "Varış",
+   "syllables": 33,
+   "chars": 92,
+   "neden": "yardimci: ilk ders cümlesi (kişinin ilk yoga dersinden önce kısa giriş; PLAN.v3 §D.3); gündüz derslerinde aynı (Ders 1, 2, 5); düzeltme turunda düğme adıyla netleşti (INCELEME.md TE21); Ders 3 ayrı birim g.ilk.uyku",
+   "gerekli": [
+    "yardimci"
+   ]
+  },
+  {
+   "id": "k.hizli.imge",
+   "clip": "k.hizli.imge",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Görüntü usulca siliniyor. Zemin seni taşıyor.",
+   "screen": "Görüntü usulca siliniyor. Zemin seni taşıyor.",
+   "sentences": [
+    "Görüntü usulca siliniyor.",
+    "Zemin seni taşıyor."
+   ],
+   "phase": "Kapanış",
+   "syllables": 17,
+   "chars": 45,
+   "neden": "yardimci: \"Kapanışa geç\" imge açıkken bırakma ön klibi (15 ve 20 dk; C4)",
+   "gerekli": [
+    "yardimci"
+   ]
+  },
+  {
+   "id": "k.hizli.his",
+   "clip": "k.hizli.his",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Bu hisleri bırakmak yeterli. Beden kendi hâlinde.",
+   "screen": "Bu hisleri bırakmak yeterli. Beden kendi hâlinde.",
+   "sentences": [
+    "Bu hisleri bırakmak yeterli.",
+    "Beden kendi hâlinde."
+   ],
+   "phase": "Kapanış",
+   "syllables": 17,
+   "chars": 49,
+   "neden": "yardimci: \"Kapanışa geç\" zıtlık açıkken bırakma ön klibi (20 dk; C3)",
+   "gerekli": [
+    "yardimci"
+   ]
+  },
+  {
+   "id": "d.goz",
+   "clip": "d.goz",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Gözlerini aç, etrafına bak, acele etme.",
+   "screen": "Gözlerini aç, etrafına bak, acele etme.",
+   "sentences": [
+    "Gözlerini aç, etrafına bak, acele etme."
+   ],
+   "phase": "Kapanış",
+   "syllables": 15,
+   "chars": 39,
+   "neden": "yardimci: Durdur sonrası sesli dönüş 1/3 (PLAN.v2 §B.5); her derste aynı",
+   "gerekli": [
+    "yardimci"
+   ]
+  },
+  {
+   "id": "d.kalk",
+   "clip": "d.kalk",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Uzanıyorsan önce yana dön, sonra otur.",
+   "screen": "Uzanıyorsan önce yana dön, sonra otur.",
+   "sentences": [
+    "Uzanıyorsan önce yana dön, sonra otur."
+   ],
+   "phase": "Kapanış",
+   "syllables": 14,
+   "chars": 38,
+   "neden": "yardimci: Durdur sonrası sesli dönüş 2/3",
+   "gerekli": [
+    "yardimci"
+   ]
+  },
+  {
+   "id": "d.bekle",
+   "clip": "d.bekle",
+   "kind": "clip",
+   "form": "tam",
+   "tts": "Birkaç nefes böyle kal; başın dönerse biraz daha bekle.",
+   "screen": "Birkaç nefes böyle kal; başın dönerse biraz daha bekle.",
+   "sentences": [
+    "Birkaç nefes böyle kal; başın dönerse biraz daha bekle."
+   ],
+   "phase": "Kapanış",
+   "syllables": 18,
+   "chars": 55,
+   "neden": "yardimci: Durdur sonrası sesli dönüş 3/3",
+   "gerekli": [
+    "yardimci"
+   ]
+  }
+ ]
+}

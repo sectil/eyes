@@ -1,0 +1,5175 @@
+{
+ "a.acilis": {
+  "duration": 4.038,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 3.791,
+  "active_sec": 3.732,
+  "lead_sec": 0.06,
+  "tail_sec": 0.246,
+  "speech_sec": 3.193,
+  "syll": 16,
+  "articulation": 5.01,
+  "pauses": [
+   [
+    1.746,
+    2.285
+   ]
+  ],
+  "breaths": [],
+  "gaps": [
+   {
+    "start": 1.746,
+    "end": 2.285,
+    "dur": 0.539
+   }
+  ],
+  "pause_total_sec": 0.539,
+  "f0_mean_hz": 131.8,
+  "f0_geo_hz": 128.8,
+  "f0_sd_semitones": 3.73,
+  "f0_voiced_frames": 167,
+  "sibilance_ratio": 0.0309,
+  "sibilance_peak_rel_db": 0.9,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": -5.45e-06,
+  "lufs": -18.0,
+  "rms_db": -18.18,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Varış",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/a.acilis/a.acilis.wav",
+  "_mtime": 1790685859.523679
+ },
+ "c1.tekrar": {
+  "duration": 3.505,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 3.258,
+  "active_sec": 3.198,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 3.198,
+  "syll": 18,
+  "articulation": 5.63,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 112.9,
+  "f0_geo_hz": 111.5,
+  "f0_sd_semitones": 2.59,
+  "f0_voiced_frames": 121,
+  "sibilance_ratio": 0.127,
+  "sibilance_peak_rel_db": 6.4,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": -1.46e-05,
+  "lufs": -18.0,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c1.tekrar/c1.tekrar.wav",
+  "_mtime": 1790685861.115679
+ },
+ "c2.alt": {
+  "duration": 3.587,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 3.347,
+  "active_sec": 3.288,
+  "lead_sec": 0.06,
+  "tail_sec": 0.24,
+  "speech_sec": 3.288,
+  "syll": 19,
+  "articulation": 5.78,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 129.7,
+  "f0_geo_hz": 127.6,
+  "f0_sd_semitones": 3.08,
+  "f0_voiced_frames": 162,
+  "sibilance_ratio": 0.1064,
+  "sibilance_peak_rel_db": 3.8,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": 3.7e-06,
+  "lufs": -18.0,
+  "rms_db": -17.79,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15138 Hz; A: bant ≥ 15638 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "ceil": 5.0,
+   "ok": false,
+   "note": "qa.derinClipRateCeil (VARSAYIM), raporlanır"
+  },
+  "phase": "Derin",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.alt/c2.alt.wav",
+  "_mtime": 1790685862.467679
+ },
+ "a.hosgeldin#1": {
+  "duration": 0.871,
+  "sr": 44100,
+  "thr_db": -51.18,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.624,
+  "active_sec": 0.569,
+  "lead_sec": 0.055,
+  "tail_sec": 0.247,
+  "speech_sec": 0.569,
+  "syll": 3,
+  "articulation": 5.27,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 98.7,
+  "f0_geo_hz": 97.8,
+  "f0_sd_semitones": 2.25,
+  "f0_voiced_frames": 19,
+  "sibilance_ratio": 0.0457,
+  "sibilance_peak_rel_db": -0.7,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -2.93e-05,
+  "lufs": -17.35,
+  "rms_db": -18.18,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 14966 Hz; A: bant ≥ 15466 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Varış",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/a.hosgeldin/a.hosgeldin#1.wav",
+  "_mtime": 1790685864.8557708
+ },
+ "a.hosgeldin#2": {
+  "duration": 1.371,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.122,
+  "active_sec": 1.063,
+  "lead_sec": 0.06,
+  "tail_sec": 0.249,
+  "speech_sec": 1.063,
+  "syll": 7,
+  "articulation": 6.59,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 108.1,
+  "f0_geo_hz": 107.5,
+  "f0_sd_semitones": 1.83,
+  "f0_voiced_frames": 50,
+  "sibilance_ratio": 0.0737,
+  "sibilance_peak_rel_db": 3.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.54
+  },
+  "dc": -2.5e-06,
+  "lufs": -18.0,
+  "rms_db": -18.43,
+  "true_peak_dbtp": -1.54,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15202 Hz; A: bant ≥ 15702 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Varış",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/a.hosgeldin/a.hosgeldin#2.wav",
+  "_mtime": 1790685866.2076793
+ },
+ "a.konfor": {
+  "duration": 5.7,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 5.453,
+  "active_sec": 5.393,
+  "lead_sec": 0.06,
+  "tail_sec": 0.247,
+  "speech_sec": 4.894,
+  "syll": 30,
+  "articulation": 6.13,
+  "pauses": [
+   [
+    1.098,
+    1.292
+   ],
+   [
+    2.749,
+    3.053
+   ]
+  ],
+  "breaths": [],
+  "gaps": [
+   {
+    "start": 1.098,
+    "end": 1.292,
+    "dur": 0.195
+   },
+   {
+    "start": 2.749,
+    "end": 3.053,
+    "dur": 0.304
+   }
+  ],
+  "pause_total_sec": 0.499,
+  "f0_mean_hz": 123.2,
+  "f0_geo_hz": 120.9,
+  "f0_sd_semitones": 3.33,
+  "f0_voiced_frames": 285,
+  "sibilance_ratio": 0.0451,
+  "sibilance_peak_rel_db": 5.2,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.56
+  },
+  "dc": -1.69e-05,
+  "lufs": -18.0,
+  "rms_db": -17.33,
+  "true_peak_dbtp": -1.55,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Varış",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/a.konfor/a.konfor.wav",
+  "_mtime": 1790685868.0636795
+ },
+ "a.gozler": {
+  "duration": 4.949,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 4.699,
+  "active_sec": 4.639,
+  "lead_sec": 0.06,
+  "tail_sec": 0.25,
+  "speech_sec": 4.22,
+  "syll": 22,
+  "articulation": 5.21,
+  "pauses": [
+   [
+    3.283,
+    3.702
+   ]
+  ],
+  "breaths": [],
+  "gaps": [
+   {
+    "start": 3.283,
+    "end": 3.702,
+    "dur": 0.419
+   }
+  ],
+  "pause_total_sec": 0.419,
+  "f0_mean_hz": 134.3,
+  "f0_geo_hz": 131.3,
+  "f0_sd_semitones": 3.68,
+  "f0_voiced_frames": 131,
+  "sibilance_ratio": 0.0568,
+  "sibilance_peak_rel_db": 3.9,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": -9.48e-06,
+  "lufs": -18.0,
+  "rms_db": -17.69,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15138 Hz; A: bant ≥ 15638 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Varış",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/a.gozler/a.gozler.wav",
+  "_mtime": 1790685869.8556795
+ },
+ "a.karar": {
+  "duration": 2.902,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 2.654,
+  "active_sec": 2.594,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 2.594,
+  "syll": 16,
+  "articulation": 6.17,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 113.3,
+  "f0_geo_hz": 111.4,
+  "f0_sd_semitones": 3.08,
+  "f0_voiced_frames": 111,
+  "sibilance_ratio": 0.0351,
+  "sibilance_peak_rel_db": 2.2,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": -6.42e-06,
+  "lufs": -18.0,
+  "rms_db": -19.13,
+  "true_peak_dbtp": -1.6,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15504 Hz; A: bant ≥ 16004 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Varış",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/a.karar/a.karar.wav",
+  "_mtime": 1790685871.2036483
+ },
+ "a.izin": {
+  "duration": 5.165,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 4.919,
+  "active_sec": 4.859,
+  "lead_sec": 0.06,
+  "tail_sec": 0.247,
+  "speech_sec": 4.699,
+  "syll": 29,
+  "articulation": 6.17,
+  "pauses": [
+   [
+    2.085,
+    2.245
+   ]
+  ],
+  "breaths": [],
+  "gaps": [
+   {
+    "start": 2.085,
+    "end": 2.245,
+    "dur": 0.16
+   }
+  ],
+  "pause_total_sec": 0.16,
+  "f0_mean_hz": 121.4,
+  "f0_geo_hz": 119.0,
+  "f0_sd_semitones": 3.4,
+  "f0_voiced_frames": 194,
+  "sibilance_ratio": 0.0444,
+  "sibilance_peak_rel_db": 2.2,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.56
+  },
+  "dc": -7.87e-05,
+  "lufs": -18.0,
+  "rms_db": -17.74,
+  "true_peak_dbtp": -1.55,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15267 Hz; A: bant ≥ 15767 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Varış",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/a.izin/a.izin.wav",
+  "_mtime": 1790685872.9276798
+ },
+ "a.kolay": {
+  "duration": 3.957,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 3.712,
+  "active_sec": 3.652,
+  "lead_sec": 0.06,
+  "tail_sec": 0.246,
+  "speech_sec": 3.263,
+  "syll": 17,
+  "articulation": 5.21,
+  "pauses": [
+   [
+    2.165,
+    2.554
+   ]
+  ],
+  "breaths": [],
+  "gaps": [
+   {
+    "start": 2.165,
+    "end": 2.554,
+    "dur": 0.389
+   }
+  ],
+  "pause_total_sec": 0.389,
+  "f0_mean_hz": 120.0,
+  "f0_geo_hz": 117.9,
+  "f0_sd_semitones": 3.18,
+  "f0_voiced_frames": 164,
+  "sibilance_ratio": 0.0343,
+  "sibilance_peak_rel_db": 2.1,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": 1.84e-05,
+  "lufs": -18.0,
+  "rms_db": -18.58,
+  "true_peak_dbtp": -1.6,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Varış",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/a.kolay/a.kolay.wav",
+  "_mtime": 1790685874.6276798
+ },
+ "a.agirlik": {
+  "duration": 2.624,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 2.38,
+  "active_sec": 2.32,
+  "lead_sec": 0.06,
+  "tail_sec": 0.245,
+  "speech_sec": 2.32,
+  "syll": 12,
+  "articulation": 5.17,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 125.1,
+  "f0_geo_hz": 123.0,
+  "f0_sd_semitones": 3.14,
+  "f0_voiced_frames": 106,
+  "sibilance_ratio": 0.0601,
+  "sibilance_peak_rel_db": 3.2,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.55
+  },
+  "dc": -1.17e-05,
+  "lufs": -18.0,
+  "rms_db": -17.89,
+  "true_peak_dbtp": -1.53,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Varış",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/a.agirlik/a.agirlik.wav",
+  "_mtime": 1790685876.19168
+ },
+ "n1.sec#1": {
+  "duration": 2.556,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 2.31,
+  "active_sec": 2.25,
+  "lead_sec": 0.06,
+  "tail_sec": 0.246,
+  "speech_sec": 2.25,
+  "syll": 14,
+  "articulation": 6.22,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 143.4,
+  "f0_geo_hz": 141.3,
+  "f0_sd_semitones": 3.0,
+  "f0_voiced_frames": 103,
+  "sibilance_ratio": 0.1187,
+  "sibilance_peak_rel_db": 6.6,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": 3.56e-05,
+  "lufs": -18.0,
+  "rms_db": -18.01,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15267 Hz; A: bant ≥ 15767 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/n1.sec/n1.sec#1.wav",
+  "_mtime": 1790685880.2236803
+ },
+ "n1.sec#2": {
+  "duration": 5.079,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 4.879,
+  "active_sec": 4.819,
+  "lead_sec": 0.06,
+  "tail_sec": 0.2,
+  "speech_sec": 4.24,
+  "syll": 25,
+  "articulation": 5.9,
+  "pauses": [
+   [
+    2.16,
+    2.739
+   ]
+  ],
+  "breaths": [],
+  "gaps": [
+   {
+    "start": 2.16,
+    "end": 2.739,
+    "dur": 0.579
+   }
+  ],
+  "pause_total_sec": 0.579,
+  "f0_mean_hz": 134.6,
+  "f0_geo_hz": 131.3,
+  "f0_sd_semitones": 3.91,
+  "f0_voiced_frames": 232,
+  "sibilance_ratio": 0.0855,
+  "sibilance_peak_rel_db": 3.7,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": 2.09e-05,
+  "lufs": -18.0,
+  "rms_db": -18.14,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/n1.sec/n1.sec#2.wav",
+  "_mtime": 1790685882.3596804
+ },
+ "n1.soyle": {
+  "duration": 3.033,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 2.784,
+  "active_sec": 2.724,
+  "lead_sec": 0.06,
+  "tail_sec": 0.249,
+  "speech_sec": 2.724,
+  "syll": 15,
+  "articulation": 5.51,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 129.8,
+  "f0_geo_hz": 126.7,
+  "f0_sd_semitones": 3.78,
+  "f0_voiced_frames": 126,
+  "sibilance_ratio": 0.0648,
+  "sibilance_peak_rel_db": 4.8,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.54
+  },
+  "dc": 1.96e-06,
+  "lufs": -18.0,
+  "rms_db": -18.76,
+  "true_peak_dbtp": -1.53,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/n1.soyle/n1.soyle.wav",
+  "_mtime": 1790685884.0116804
+ },
+ "n1.birak#1": {
+  "duration": 2.431,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 2.295,
+  "active_sec": 2.235,
+  "lead_sec": 0.06,
+  "tail_sec": 0.137,
+  "speech_sec": 2.235,
+  "syll": 15,
+  "articulation": 6.71,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 140.8,
+  "f0_geo_hz": 137.4,
+  "f0_sd_semitones": 3.85,
+  "f0_voiced_frames": 116,
+  "sibilance_ratio": 0.0523,
+  "sibilance_peak_rel_db": 4.3,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": -3.13e-06,
+  "lufs": -18.0,
+  "rms_db": -17.61,
+  "true_peak_dbtp": -1.6,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/n1.birak/n1.birak#1.wav",
+  "_mtime": 1790685887.0319772
+ },
+ "n1.birak#2": {
+  "duration": 3.008,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 2.759,
+  "active_sec": 2.699,
+  "lead_sec": 0.06,
+  "tail_sec": 0.249,
+  "speech_sec": 2.699,
+  "syll": 17,
+  "articulation": 6.3,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 126.2,
+  "f0_geo_hz": 124.8,
+  "f0_sd_semitones": 2.63,
+  "f0_voiced_frames": 118,
+  "sibilance_ratio": 0.0037,
+  "sibilance_peak_rel_db": -9.1,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.55
+  },
+  "dc": 2e-05,
+  "lufs": -18.0,
+  "rms_db": -17.54,
+  "true_peak_dbtp": -1.55,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/n1.birak/n1.birak#2.wav",
+  "_mtime": 1790685888.5636806
+ },
+ "c1.cerceve#1": {
+  "duration": 2.52,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 2.275,
+  "active_sec": 2.215,
+  "lead_sec": 0.06,
+  "tail_sec": 0.245,
+  "speech_sec": 2.215,
+  "syll": 14,
+  "articulation": 6.32,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 121.4,
+  "f0_geo_hz": 119.5,
+  "f0_sd_semitones": 2.99,
+  "f0_voiced_frames": 126,
+  "sibilance_ratio": 0.008,
+  "sibilance_peak_rel_db": -2.2,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.58
+  },
+  "dc": -4.75e-06,
+  "lufs": -18.0,
+  "rms_db": -17.49,
+  "true_peak_dbtp": -1.57,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c1.cerceve/c1.cerceve#1.wav",
+  "_mtime": 1790685891.4956808
+ },
+ "c1.cerceve#2": {
+  "duration": 2.591,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.055,
+  "offset": 2.345,
+  "active_sec": 2.29,
+  "lead_sec": 0.055,
+  "tail_sec": 0.246,
+  "speech_sec": 2.29,
+  "syll": 13,
+  "articulation": 5.68,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 132.3,
+  "f0_geo_hz": 131.1,
+  "f0_sd_semitones": 2.39,
+  "f0_voiced_frames": 116,
+  "sibilance_ratio": 0.0427,
+  "sibilance_peak_rel_db": 5.9,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -6.05e-06,
+  "lufs": -18.0,
+  "rms_db": -17.28,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c1.cerceve/c1.cerceve#2.wav",
+  "_mtime": 1790685892.927681
+ },
+ "c1.s01": {
+  "duration": 1.75,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.522,
+  "active_sec": 1.462,
+  "lead_sec": 0.06,
+  "tail_sec": 0.229,
+  "speech_sec": 1.462,
+  "syll": 7,
+  "articulation": 4.79,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 123.9,
+  "f0_geo_hz": 119.6,
+  "f0_sd_semitones": 4.65,
+  "f0_voiced_frames": 75,
+  "sibilance_ratio": 0.0704,
+  "sibilance_peak_rel_db": 2.3,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": -2.76e-06,
+  "lufs": -18.0,
+  "rms_db": -18.5,
+  "true_peak_dbtp": -1.6,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag1/c1.s01.wav",
+  "_mtime": 1790685895.5480645
+ },
+ "c1.s02": {
+  "duration": 1.377,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.127,
+  "active_sec": 1.068,
+  "lead_sec": 0.06,
+  "tail_sec": 0.25,
+  "speech_sec": 1.068,
+  "syll": 6,
+  "articulation": 5.62,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 105.2,
+  "f0_geo_hz": 103.8,
+  "f0_sd_semitones": 2.81,
+  "f0_voiced_frames": 61,
+  "sibilance_ratio": 0.0303,
+  "sibilance_peak_rel_db": -2.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.74
+  },
+  "dc": -3.03e-09,
+  "lufs": -18.0,
+  "rms_db": -18.35,
+  "true_peak_dbtp": -1.73,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag1/c1.s02.wav",
+  "_mtime": 1790685897.0796812
+ },
+ "c1.s03": {
+  "duration": 1.151,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.903,
+  "active_sec": 0.843,
+  "lead_sec": 0.06,
+  "tail_sec": 0.249,
+  "speech_sec": 0.843,
+  "syll": 4,
+  "articulation": 4.74,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 107.7,
+  "f0_geo_hz": 106.5,
+  "f0_sd_semitones": 2.65,
+  "f0_voiced_frames": 27,
+  "sibilance_ratio": 0.0056,
+  "sibilance_peak_rel_db": -6.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.57
+  },
+  "dc": -6.42e-05,
+  "lufs": -18.0,
+  "rms_db": -16.2,
+  "true_peak_dbtp": -1.55,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag1/c1.s03.wav",
+  "_mtime": 1790685898.6076813
+ },
+ "c1.s04": {
+  "duration": 1.181,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.933,
+  "active_sec": 0.873,
+  "lead_sec": 0.06,
+  "tail_sec": 0.249,
+  "speech_sec": 0.873,
+  "syll": 5,
+  "articulation": 5.73,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 98.3,
+  "f0_geo_hz": 96.8,
+  "f0_sd_semitones": 3.12,
+  "f0_voiced_frames": 52,
+  "sibilance_ratio": 0.0177,
+  "sibilance_peak_rel_db": -3.5,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -6.97e-05,
+  "lufs": -18.0,
+  "rms_db": -17.41,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15267 Hz; A: bant ≥ 15767 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag1/c1.s04.wav",
+  "_mtime": 1790685900.0956814
+ },
+ "c1.s05": {
+  "duration": 1.278,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.033,
+  "active_sec": 0.973,
+  "lead_sec": 0.06,
+  "tail_sec": 0.246,
+  "speech_sec": 0.973,
+  "syll": 4,
+  "articulation": 4.11,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 111.7,
+  "f0_geo_hz": 111.7,
+  "f0_sd_semitones": 0.46,
+  "f0_voiced_frames": 14,
+  "sibilance_ratio": 0.0562,
+  "sibilance_peak_rel_db": -0.6,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.57
+  },
+  "dc": -1.82e-06,
+  "lufs": -18.0,
+  "rms_db": -18.3,
+  "true_peak_dbtp": -1.57,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag1/c1.s05.wav",
+  "_mtime": 1790685901.2676814
+ },
+ "c1.s06": {
+  "duration": 0.992,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.06,
+  "offset": 0.748,
+  "active_sec": 0.688,
+  "lead_sec": 0.06,
+  "tail_sec": 0.244,
+  "speech_sec": 0.688,
+  "syll": 4,
+  "articulation": 5.81,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 125.1,
+  "f0_geo_hz": 123.8,
+  "f0_sd_semitones": 2.5,
+  "f0_voiced_frames": 26,
+  "sibilance_ratio": 0.0568,
+  "sibilance_peak_rel_db": -1.6,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.66
+  },
+  "dc": 2.12e-05,
+  "lufs": -18.04,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag2/c1.s06.wav",
+  "_mtime": 1790685904.6276817
+ },
+ "c1.s07": {
+  "duration": 1.156,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.908,
+  "active_sec": 0.848,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 0.848,
+  "syll": 4,
+  "articulation": 4.72,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 121.0,
+  "f0_geo_hz": 119.8,
+  "f0_sd_semitones": 2.41,
+  "f0_voiced_frames": 34,
+  "sibilance_ratio": 0.1475,
+  "sibilance_peak_rel_db": 3.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.55
+  },
+  "dc": -1.69e-05,
+  "lufs": -18.0,
+  "rms_db": -17.07,
+  "true_peak_dbtp": -1.55,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag2/c1.s07.wav",
+  "_mtime": 1790685905.9796817
+ },
+ "c1.s08": {
+  "duration": 0.801,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.01,
+  "offset": 0.554,
+  "active_sec": 0.544,
+  "lead_sec": 0.01,
+  "tail_sec": 0.247,
+  "speech_sec": 0.544,
+  "syll": 2,
+  "articulation": 3.68,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 99.8,
+  "f0_geo_hz": 99.3,
+  "f0_sd_semitones": 1.78,
+  "f0_voiced_frames": 10,
+  "sibilance_ratio": 0.0107,
+  "sibilance_peak_rel_db": -10.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.58
+  },
+  "dc": 0.00017,
+  "lufs": -20.75,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.57,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15267 Hz; A: bant ≥ 15767 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag2/c1.s08.wav",
+  "_mtime": 1790685907.4919865
+ },
+ "c1.s09": {
+  "duration": 0.805,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.579,
+  "active_sec": 0.524,
+  "lead_sec": 0.055,
+  "tail_sec": 0.226,
+  "speech_sec": 0.524,
+  "syll": 2,
+  "articulation": 3.82,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 118.8,
+  "f0_geo_hz": 118.7,
+  "f0_sd_semitones": 0.88,
+  "f0_voiced_frames": 21,
+  "sibilance_ratio": 0.0015,
+  "sibilance_peak_rel_db": -18.6,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -2.11
+  },
+  "dc": -1.39e-09,
+  "lufs": -22.58,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -2.11,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag2/c1.s09.wav",
+  "_mtime": 1790685909.263682
+ },
+ "c1.s10": {
+  "duration": 0.93,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.683,
+  "active_sec": 0.629,
+  "lead_sec": 0.055,
+  "tail_sec": 0.247,
+  "speech_sec": 0.629,
+  "syll": 2,
+  "articulation": 3.18,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 98.4,
+  "f0_geo_hz": 98.3,
+  "f0_sd_semitones": 0.81,
+  "f0_voiced_frames": 6,
+  "sibilance_ratio": 0.275,
+  "sibilance_peak_rel_db": 5.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": 6.57e-05,
+  "lufs": -16.32,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.57,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag2/c1.s10.wav",
+  "_mtime": 1790685910.8544295
+ },
+ "c1.s11": {
+  "duration": 0.946,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.698,
+  "active_sec": 0.644,
+  "lead_sec": 0.055,
+  "tail_sec": 0.248,
+  "speech_sec": 0.644,
+  "syll": 2,
+  "articulation": 3.11,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 122.1,
+  "f0_geo_hz": 119.5,
+  "f0_sd_semitones": 3.57,
+  "f0_voiced_frames": 15,
+  "sibilance_ratio": 0.0102,
+  "sibilance_peak_rel_db": -9.3,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.54
+  },
+  "dc": -2.17e-05,
+  "lufs": -19.83,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.54,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15181 Hz; A: bant ≥ 15681 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag3/c1.s11.wav",
+  "_mtime": 1790685913.9602354
+ },
+ "c1.s12": {
+  "duration": 0.914,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.669,
+  "active_sec": 0.614,
+  "lead_sec": 0.055,
+  "tail_sec": 0.245,
+  "speech_sec": 0.614,
+  "syll": 2,
+  "articulation": 3.26,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 103.5,
+  "f0_geo_hz": 103.4,
+  "f0_sd_semitones": 0.92,
+  "f0_voiced_frames": 28,
+  "sibilance_ratio": 0.0038,
+  "sibilance_peak_rel_db": -15.2,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -0.0002,
+  "lufs": -21.18,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15224 Hz; A: bant ≥ 15724 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag3/c1.s12.wav",
+  "_mtime": 1790685915.451429
+ },
+ "c1.s13": {
+  "duration": 1.374,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.127,
+  "active_sec": 1.068,
+  "lead_sec": 0.06,
+  "tail_sec": 0.246,
+  "speech_sec": 1.068,
+  "syll": 5,
+  "articulation": 4.68,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 124.0,
+  "f0_geo_hz": 121.1,
+  "f0_sd_semitones": 3.76,
+  "f0_voiced_frames": 52,
+  "sibilance_ratio": 0.1475,
+  "sibilance_peak_rel_db": 4.1,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.98
+  },
+  "dc": -4.07e-11,
+  "lufs": -18.0,
+  "rms_db": -18.09,
+  "true_peak_dbtp": -1.96,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15181 Hz; A: bant ≥ 15681 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag3/c1.s13.wav",
+  "_mtime": 1790685916.9384348
+ },
+ "c1.s14": {
+  "duration": 0.861,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.614,
+  "active_sec": 0.559,
+  "lead_sec": 0.055,
+  "tail_sec": 0.248,
+  "speech_sec": 0.559,
+  "syll": 2,
+  "articulation": 3.58,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 98.5,
+  "f0_geo_hz": 98.4,
+  "f0_sd_semitones": 0.68,
+  "f0_voiced_frames": 17,
+  "sibilance_ratio": 0.0574,
+  "sibilance_peak_rel_db": 1.7,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": -1.4e-05,
+  "lufs": -17.3,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag3/c1.s14.wav",
+  "_mtime": 1790685918.126079
+ },
+ "c1.s15": {
+  "duration": 0.935,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.06,
+  "offset": 0.693,
+  "active_sec": 0.634,
+  "lead_sec": 0.06,
+  "tail_sec": 0.241,
+  "speech_sec": 0.634,
+  "syll": 2,
+  "articulation": 3.16,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 121.1,
+  "f0_geo_hz": 120.0,
+  "f0_sd_semitones": 2.19,
+  "f0_voiced_frames": 30,
+  "sibilance_ratio": 0.0011,
+  "sibilance_peak_rel_db": -19.9,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -2.95
+  },
+  "dc": -1.42e-07,
+  "lufs": -20.25,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -2.94,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag4/c1.s15.wav",
+  "_mtime": 1790685920.9831204
+ },
+ "c1.s16": {
+  "duration": 0.874,
+  "sr": 44100,
+  "thr_db": -50.02,
+  "thr_source": "rms",
+  "onset": 0.06,
+  "offset": 0.629,
+  "active_sec": 0.569,
+  "lead_sec": 0.06,
+  "tail_sec": 0.245,
+  "speech_sec": 0.569,
+  "syll": 1,
+  "articulation": 1.76,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 107.7,
+  "f0_geo_hz": 107.2,
+  "f0_sd_semitones": 1.66,
+  "f0_voiced_frames": 21,
+  "sibilance_ratio": 0.0489,
+  "sibilance_peak_rel_db": -4.5,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.55
+  },
+  "dc": -9.32e-05,
+  "lufs": -18.16,
+  "rms_db": -17.02,
+  "true_peak_dbtp": -1.54,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 14966 Hz; A: bant ≥ 15466 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag4/c1.s16.wav",
+  "_mtime": 1790685922.3273878
+ },
+ "c1.s17": {
+  "duration": 0.9,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.673,
+  "active_sec": 0.619,
+  "lead_sec": 0.055,
+  "tail_sec": 0.227,
+  "speech_sec": 0.619,
+  "syll": 2,
+  "articulation": 3.23,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 102.5,
+  "f0_geo_hz": 102.4,
+  "f0_sd_semitones": 0.38,
+  "f0_voiced_frames": 24,
+  "sibilance_ratio": 0.0081,
+  "sibilance_peak_rel_db": -5.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -5.81e-05,
+  "lufs": -20.65,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.57,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15202 Hz; A: bant ≥ 15702 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag4/c1.s17.wav",
+  "_mtime": 1790685923.7076828
+ },
+ "c1.s18": {
+  "duration": 0.965,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.06,
+  "offset": 0.763,
+  "active_sec": 0.703,
+  "lead_sec": 0.06,
+  "tail_sec": 0.202,
+  "speech_sec": 0.703,
+  "syll": 5,
+  "articulation": 7.11,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 114.3,
+  "f0_geo_hz": 112.7,
+  "f0_sd_semitones": 2.91,
+  "f0_voiced_frames": 26,
+  "sibilance_ratio": 0.0058,
+  "sibilance_peak_rel_db": -11.7,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.56
+  },
+  "dc": -3.2e-05,
+  "lufs": -19.5,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.56,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag4/c1.s18.wav",
+  "_mtime": 1790685925.1108675
+ },
+ "c1.s19": {
+  "duration": 0.806,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.559,
+  "active_sec": 0.504,
+  "lead_sec": 0.055,
+  "tail_sec": 0.247,
+  "speech_sec": 0.504,
+  "syll": 2,
+  "articulation": 3.97,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 110.9,
+  "f0_geo_hz": 110.6,
+  "f0_sd_semitones": 1.4,
+  "f0_voiced_frames": 8,
+  "sibilance_ratio": 0.0044,
+  "sibilance_peak_rel_db": -9.2,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.55
+  },
+  "dc": -8e-06,
+  "lufs": -21.85,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.54,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15224 Hz; A: bant ≥ 15724 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag4/c1.s19.wav",
+  "_mtime": 1790685926.875683
+ },
+ "c1.s20": {
+  "duration": 1.041,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.793,
+  "active_sec": 0.733,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 0.733,
+  "syll": 5,
+  "articulation": 6.82,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 105.4,
+  "f0_geo_hz": 104.3,
+  "f0_sd_semitones": 2.57,
+  "f0_voiced_frames": 26,
+  "sibilance_ratio": 0.0137,
+  "sibilance_peak_rel_db": -2.5,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.57
+  },
+  "dc": -9.75e-05,
+  "lufs": -18.0,
+  "rms_db": -16.63,
+  "true_peak_dbtp": -1.55,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sag4/c1.s20.wav",
+  "_mtime": 1790685928.1561482
+ },
+ "c1.kacirma": {
+  "duration": 3.292,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 3.043,
+  "active_sec": 2.983,
+  "lead_sec": 0.06,
+  "tail_sec": 0.249,
+  "speech_sec": 2.774,
+  "syll": 17,
+  "articulation": 6.13,
+  "pauses": [
+   [
+    1.277,
+    1.487
+   ]
+  ],
+  "breaths": [],
+  "gaps": [
+   {
+    "start": 1.277,
+    "end": 1.487,
+    "dur": 0.21
+   }
+  ],
+  "pause_total_sec": 0.21,
+  "f0_mean_hz": 139.9,
+  "f0_geo_hz": 136.1,
+  "f0_sd_semitones": 4.06,
+  "f0_voiced_frames": 119,
+  "sibilance_ratio": 0.0573,
+  "sibilance_peak_rel_db": 2.7,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.56
+  },
+  "dc": -5.77e-06,
+  "lufs": -18.0,
+  "rms_db": -17.99,
+  "true_peak_dbtp": -1.55,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15116 Hz; A: bant ≥ 15616 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c1.kacirma/c1.kacirma.wav",
+  "_mtime": 1790685929.339683
+ },
+ "c1.l01": {
+  "duration": 1.699,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.452,
+  "active_sec": 1.392,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 1.392,
+  "syll": 7,
+  "articulation": 5.03,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 124.5,
+  "f0_geo_hz": 120.1,
+  "f0_sd_semitones": 4.65,
+  "f0_voiced_frames": 70,
+  "sibilance_ratio": 0.0316,
+  "sibilance_peak_rel_db": 1.3,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.55
+  },
+  "dc": -2.34e-05,
+  "lufs": -18.0,
+  "rms_db": -18.34,
+  "true_peak_dbtp": -1.54,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol1/c1.l01.wav",
+  "_mtime": 1790685932.0276833
+ },
+ "c1.l02": {
+  "duration": 1.383,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.137,
+  "active_sec": 1.078,
+  "lead_sec": 0.06,
+  "tail_sec": 0.246,
+  "speech_sec": 1.078,
+  "syll": 6,
+  "articulation": 5.57,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 105.7,
+  "f0_geo_hz": 104.1,
+  "f0_sd_semitones": 2.98,
+  "f0_voiced_frames": 64,
+  "sibilance_ratio": 0.0394,
+  "sibilance_peak_rel_db": 0.6,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": 2.21e-09,
+  "lufs": -18.0,
+  "rms_db": -18.25,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol1/c1.l02.wav",
+  "_mtime": 1790685933.3795362
+ },
+ "c1.l03": {
+  "duration": 1.126,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.878,
+  "active_sec": 0.818,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 0.818,
+  "syll": 4,
+  "articulation": 4.89,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 117.1,
+  "f0_geo_hz": 116.5,
+  "f0_sd_semitones": 1.82,
+  "f0_voiced_frames": 20,
+  "sibilance_ratio": 0.007,
+  "sibilance_peak_rel_db": -6.6,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.58
+  },
+  "dc": -7.92e-05,
+  "lufs": -18.0,
+  "rms_db": -16.71,
+  "true_peak_dbtp": -1.57,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol1/c1.l03.wav",
+  "_mtime": 1790685935.0305831
+ },
+ "c1.l04": {
+  "duration": 1.186,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.938,
+  "active_sec": 0.878,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 0.878,
+  "syll": 5,
+  "articulation": 5.69,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 100.4,
+  "f0_geo_hz": 99.3,
+  "f0_sd_semitones": 2.56,
+  "f0_voiced_frames": 42,
+  "sibilance_ratio": 0.0155,
+  "sibilance_peak_rel_db": -2.9,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.54
+  },
+  "dc": -4.04e-05,
+  "lufs": -18.0,
+  "rms_db": -17.02,
+  "true_peak_dbtp": -1.54,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol1/c1.l04.wav",
+  "_mtime": 1790685936.2596138
+ },
+ "c1.l05": {
+  "duration": 1.232,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.983,
+  "active_sec": 0.923,
+  "lead_sec": 0.06,
+  "tail_sec": 0.25,
+  "speech_sec": 0.923,
+  "syll": 4,
+  "articulation": 4.33,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 105.8,
+  "f0_geo_hz": 105.0,
+  "f0_sd_semitones": 2.2,
+  "f0_voiced_frames": 15,
+  "sibilance_ratio": 0.0701,
+  "sibilance_peak_rel_db": 2.3,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.56
+  },
+  "dc": -2.09e-06,
+  "lufs": -18.0,
+  "rms_db": -19.03,
+  "true_peak_dbtp": -1.55,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol1/c1.l05.wav",
+  "_mtime": 1790685937.5236835
+ },
+ "c1.l06": {
+  "duration": 1.011,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.763,
+  "active_sec": 0.703,
+  "lead_sec": 0.06,
+  "tail_sec": 0.247,
+  "speech_sec": 0.703,
+  "syll": 4,
+  "articulation": 5.69,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 135.4,
+  "f0_geo_hz": 134.9,
+  "f0_sd_semitones": 1.37,
+  "f0_voiced_frames": 17,
+  "sibilance_ratio": 0.0783,
+  "sibilance_peak_rel_db": 2.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": 6.7e-05,
+  "lufs": -18.0,
+  "rms_db": -18.01,
+  "true_peak_dbtp": -1.6,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol2/c1.l06.wav",
+  "_mtime": 1790685940.8236837
+ },
+ "c1.l07": {
+  "duration": 1.185,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.938,
+  "active_sec": 0.878,
+  "lead_sec": 0.06,
+  "tail_sec": 0.247,
+  "speech_sec": 0.878,
+  "syll": 4,
+  "articulation": 4.56,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 120.9,
+  "f0_geo_hz": 119.9,
+  "f0_sd_semitones": 2.3,
+  "f0_voiced_frames": 34,
+  "sibilance_ratio": 0.1882,
+  "sibilance_peak_rel_db": 6.4,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": -4.87e-05,
+  "lufs": -18.0,
+  "rms_db": -17.88,
+  "true_peak_dbtp": -1.6,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15224 Hz; A: bant ≥ 15724 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol2/c1.l07.wav",
+  "_mtime": 1790685942.4476838
+ },
+ "c1.l08": {
+  "duration": 0.851,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.604,
+  "active_sec": 0.549,
+  "lead_sec": 0.055,
+  "tail_sec": 0.247,
+  "speech_sec": 0.549,
+  "syll": 2,
+  "articulation": 3.64,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 101.9,
+  "f0_geo_hz": 101.5,
+  "f0_sd_semitones": 1.56,
+  "f0_voiced_frames": 11,
+  "sibilance_ratio": 0.012,
+  "sibilance_peak_rel_db": -7.6,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.57
+  },
+  "dc": -9.06e-05,
+  "lufs": -20.68,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.56,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15159 Hz; A: bant ≥ 15659 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol2/c1.l08.wav",
+  "_mtime": 1790685944.147684
+ },
+ "c1.l09": {
+  "duration": 0.826,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.584,
+  "active_sec": 0.529,
+  "lead_sec": 0.055,
+  "tail_sec": 0.242,
+  "speech_sec": 0.529,
+  "syll": 2,
+  "articulation": 3.78,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 119.0,
+  "f0_geo_hz": 118.5,
+  "f0_sd_semitones": 1.65,
+  "f0_voiced_frames": 24,
+  "sibilance_ratio": 0.0026,
+  "sibilance_peak_rel_db": -14.2,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -1.78e-05,
+  "lufs": -22.02,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15009 Hz; A: bant ≥ 15509 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol2/c1.l09.wav",
+  "_mtime": 1790685945.45559
+ },
+ "c1.l10": {
+  "duration": 0.944,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.698,
+  "active_sec": 0.644,
+  "lead_sec": 0.055,
+  "tail_sec": 0.245,
+  "speech_sec": 0.644,
+  "syll": 2,
+  "articulation": 3.11,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 100.3,
+  "f0_geo_hz": 100.1,
+  "f0_sd_semitones": 0.98,
+  "f0_voiced_frames": 10,
+  "sibilance_ratio": 0.3715,
+  "sibilance_peak_rel_db": 6.6,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -5.4e-06,
+  "lufs": -15.96,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15267 Hz; A: bant ≥ 15767 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol2/c1.l10.wav",
+  "_mtime": 1790685946.7716842
+ },
+ "c1.l11": {
+  "duration": 0.957,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.713,
+  "active_sec": 0.659,
+  "lead_sec": 0.055,
+  "tail_sec": 0.243,
+  "speech_sec": 0.659,
+  "syll": 2,
+  "articulation": 3.04,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 113.3,
+  "f0_geo_hz": 110.0,
+  "f0_sd_semitones": 4.15,
+  "f0_voiced_frames": 14,
+  "sibilance_ratio": 0.022,
+  "sibilance_peak_rel_db": -4.9,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -3.53e-05,
+  "lufs": -20.08,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol3/c1.l11.wav",
+  "_mtime": 1790685949.5876844
+ },
+ "c1.l12": {
+  "duration": 0.912,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.664,
+  "active_sec": 0.609,
+  "lead_sec": 0.055,
+  "tail_sec": 0.249,
+  "speech_sec": 0.609,
+  "syll": 2,
+  "articulation": 3.29,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 103.2,
+  "f0_geo_hz": 103.0,
+  "f0_sd_semitones": 1.0,
+  "f0_voiced_frames": 25,
+  "sibilance_ratio": 0.0036,
+  "sibilance_peak_rel_db": -14.8,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.57
+  },
+  "dc": -0.000281,
+  "lufs": -21.6,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.56,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol3/c1.l12.wav",
+  "_mtime": 1790685950.8225846
+ },
+ "c1.l13": {
+  "duration": 1.327,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.078,
+  "active_sec": 1.018,
+  "lead_sec": 0.06,
+  "tail_sec": 0.25,
+  "speech_sec": 1.018,
+  "syll": 5,
+  "articulation": 4.91,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 127.3,
+  "f0_geo_hz": 124.7,
+  "f0_sd_semitones": 3.54,
+  "f0_voiced_frames": 48,
+  "sibilance_ratio": 0.0122,
+  "sibilance_peak_rel_db": -8.5,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -0.000102,
+  "lufs": -18.0,
+  "rms_db": -17.03,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15138 Hz; A: bant ≥ 15638 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol3/c1.l13.wav",
+  "_mtime": 1790685952.2921786
+ },
+ "c1.l14": {
+  "duration": 0.849,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.604,
+  "active_sec": 0.549,
+  "lead_sec": 0.055,
+  "tail_sec": 0.245,
+  "speech_sec": 0.549,
+  "syll": 2,
+  "articulation": 3.64,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 98.2,
+  "f0_geo_hz": 98.1,
+  "f0_sd_semitones": 0.69,
+  "f0_voiced_frames": 18,
+  "sibilance_ratio": 0.0565,
+  "sibilance_peak_rel_db": 1.1,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.56
+  },
+  "dc": -5.45e-05,
+  "lufs": -17.81,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.55,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol3/c1.l14.wav",
+  "_mtime": 1790685953.6198218
+ },
+ "c1.l15": {
+  "duration": 0.915,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.669,
+  "active_sec": 0.614,
+  "lead_sec": 0.055,
+  "tail_sec": 0.247,
+  "speech_sec": 0.614,
+  "syll": 2,
+  "articulation": 3.26,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 117.5,
+  "f0_geo_hz": 117.3,
+  "f0_sd_semitones": 1.11,
+  "f0_voiced_frames": 28,
+  "sibilance_ratio": 0.0006,
+  "sibilance_peak_rel_db": -23.6,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -5.47
+  },
+  "dc": -6.88e-08,
+  "lufs": -20.38,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -5.47,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol4/c1.l15.wav",
+  "_mtime": 1790685956.5036848
+ },
+ "c1.l16": {
+  "duration": 0.849,
+  "sr": 44100,
+  "thr_db": -50.02,
+  "thr_source": "rms",
+  "onset": 0.06,
+  "offset": 0.604,
+  "active_sec": 0.544,
+  "lead_sec": 0.06,
+  "tail_sec": 0.246,
+  "speech_sec": 0.544,
+  "syll": 1,
+  "articulation": 1.84,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 107.6,
+  "f0_geo_hz": 107.3,
+  "f0_sd_semitones": 1.31,
+  "f0_voiced_frames": 18,
+  "sibilance_ratio": 0.0732,
+  "sibilance_peak_rel_db": -4.5,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.55
+  },
+  "dc": 0.000467,
+  "lufs": -18.22,
+  "rms_db": -17.02,
+  "true_peak_dbtp": -1.54,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15116 Hz; A: bant ≥ 15616 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol4/c1.l16.wav",
+  "_mtime": 1790685958.1636848
+ },
+ "c1.l17": {
+  "duration": 0.976,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.728,
+  "active_sec": 0.673,
+  "lead_sec": 0.055,
+  "tail_sec": 0.247,
+  "speech_sec": 0.673,
+  "syll": 2,
+  "articulation": 2.97,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 103.1,
+  "f0_geo_hz": 103.0,
+  "f0_sd_semitones": 0.47,
+  "f0_voiced_frames": 28,
+  "sibilance_ratio": 0.0059,
+  "sibilance_peak_rel_db": -6.4,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.55
+  },
+  "dc": -7.12e-07,
+  "lufs": -19.82,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.54,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15224 Hz; A: bant ≥ 15724 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol4/c1.l17.wav",
+  "_mtime": 1790685959.4699297
+ },
+ "c1.l18": {
+  "duration": 1.023,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.773,
+  "active_sec": 0.713,
+  "lead_sec": 0.06,
+  "tail_sec": 0.25,
+  "speech_sec": 0.713,
+  "syll": 5,
+  "articulation": 7.01,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 109.9,
+  "f0_geo_hz": 108.1,
+  "f0_sd_semitones": 3.15,
+  "f0_voiced_frames": 35,
+  "sibilance_ratio": 0.0036,
+  "sibilance_peak_rel_db": -14.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.57
+  },
+  "dc": -0.000276,
+  "lufs": -18.0,
+  "rms_db": -16.75,
+  "true_peak_dbtp": -1.56,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol4/c1.l18.wav",
+  "_mtime": 1790685960.815685
+ },
+ "c1.l19": {
+  "duration": 0.816,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.569,
+  "active_sec": 0.514,
+  "lead_sec": 0.055,
+  "tail_sec": 0.248,
+  "speech_sec": 0.514,
+  "syll": 2,
+  "articulation": 3.89,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 106.3,
+  "f0_geo_hz": 106.0,
+  "f0_sd_semitones": 1.16,
+  "f0_voiced_frames": 12,
+  "sibilance_ratio": 0.0103,
+  "sibilance_peak_rel_db": -6.1,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.54
+  },
+  "dc": -6.49e-05,
+  "lufs": -20.69,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.54,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15224 Hz; A: bant ≥ 15724 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol4/c1.l19.wav",
+  "_mtime": 1790685962.1596851
+ },
+ "c1.l20": {
+  "duration": 1.051,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.803,
+  "active_sec": 0.743,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 0.743,
+  "syll": 5,
+  "articulation": 6.73,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 107.3,
+  "f0_geo_hz": 106.3,
+  "f0_sd_semitones": 2.34,
+  "f0_voiced_frames": 24,
+  "sibilance_ratio": 0.0288,
+  "sibilance_peak_rel_db": 0.7,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.55
+  },
+  "dc": 0.000878,
+  "lufs": -18.0,
+  "rms_db": -16.81,
+  "true_peak_dbtp": -1.55,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sol4/c1.l20.wav",
+  "_mtime": 1790685963.539625
+ },
+ "c1.gecis.arka": {
+  "duration": 1.708,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.462,
+  "active_sec": 1.402,
+  "lead_sec": 0.06,
+  "tail_sec": 0.246,
+  "speech_sec": 1.402,
+  "syll": 8,
+  "articulation": 5.71,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 124.5,
+  "f0_geo_hz": 122.4,
+  "f0_sd_semitones": 3.13,
+  "f0_voiced_frames": 60,
+  "sibilance_ratio": 0.0064,
+  "sibilance_peak_rel_db": -6.2,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.55
+  },
+  "dc": 1.84e-06,
+  "lufs": -18.0,
+  "rms_db": -17.5,
+  "true_peak_dbtp": -1.54,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 14987 Hz; A: bant ≥ 15487 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c1.gecis.arka/c1.gecis.arka.wav",
+  "_mtime": 1790685964.7756853
+ },
+ "c1.b01": {
+  "duration": 1.536,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.055,
+  "offset": 1.287,
+  "active_sec": 1.232,
+  "lead_sec": 0.055,
+  "tail_sec": 0.249,
+  "speech_sec": 1.232,
+  "syll": 6,
+  "articulation": 4.87,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 126.8,
+  "f0_geo_hz": 123.1,
+  "f0_sd_semitones": 4.2,
+  "f0_voiced_frames": 54,
+  "sibilance_ratio": 0.0822,
+  "sibilance_peak_rel_db": 3.7,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.55
+  },
+  "dc": -1.7e-05,
+  "lufs": -18.0,
+  "rms_db": -17.76,
+  "true_peak_dbtp": -1.55,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sirt/c1.b01.wav",
+  "_mtime": 1790685967.6036382
+ },
+ "c1.b02": {
+  "duration": 1.455,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.207,
+  "active_sec": 1.147,
+  "lead_sec": 0.06,
+  "tail_sec": 0.247,
+  "speech_sec": 1.147,
+  "syll": 6,
+  "articulation": 5.23,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 114.1,
+  "f0_geo_hz": 111.0,
+  "f0_sd_semitones": 4.08,
+  "f0_voiced_frames": 37,
+  "sibilance_ratio": 0.0161,
+  "sibilance_peak_rel_db": -1.9,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.55
+  },
+  "dc": -0.000143,
+  "lufs": -18.0,
+  "rms_db": -17.5,
+  "true_peak_dbtp": -1.54,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 14966 Hz; A: bant ≥ 15466 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sirt/c1.b02.wav",
+  "_mtime": 1790685969.3916855
+ },
+ "c1.b03": {
+  "duration": 1.08,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.833,
+  "active_sec": 0.773,
+  "lead_sec": 0.06,
+  "tail_sec": 0.247,
+  "speech_sec": 0.773,
+  "syll": 4,
+  "articulation": 5.17,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 102.9,
+  "f0_geo_hz": 102.2,
+  "f0_sd_semitones": 2.03,
+  "f0_voiced_frames": 40,
+  "sibilance_ratio": 0.0299,
+  "sibilance_peak_rel_db": -2.6,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -0.000219,
+  "lufs": -18.0,
+  "rms_db": -16.54,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15202 Hz; A: bant ≥ 15702 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sirt/c1.b03.wav",
+  "_mtime": 1790685971.2596855
+ },
+ "c1.b04": {
+  "duration": 2.185,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.936,
+  "active_sec": 1.876,
+  "lead_sec": 0.06,
+  "tail_sec": 0.249,
+  "speech_sec": 1.442,
+  "syll": 7,
+  "articulation": 4.86,
+  "pauses": [
+   [
+    0.644,
+    1.078
+   ]
+  ],
+  "breaths": [],
+  "gaps": [
+   {
+    "start": 0.644,
+    "end": 1.078,
+    "dur": 0.434
+   }
+  ],
+  "pause_total_sec": 0.434,
+  "f0_mean_hz": 117.9,
+  "f0_geo_hz": 116.7,
+  "f0_sd_semitones": 2.44,
+  "f0_voiced_frames": 98,
+  "sibilance_ratio": 0.0022,
+  "sibilance_peak_rel_db": -5.8,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.56
+  },
+  "dc": -3.23e-05,
+  "lufs": -18.0,
+  "rms_db": -15.93,
+  "true_peak_dbtp": -1.56,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15224 Hz; A: bant ≥ 15724 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sirt/c1.b04.wav",
+  "_mtime": 1790685972.8956857
+ },
+ "c1.b05": {
+  "duration": 1.189,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.943,
+  "active_sec": 0.883,
+  "lead_sec": 0.06,
+  "tail_sec": 0.247,
+  "speech_sec": 0.883,
+  "syll": 3,
+  "articulation": 3.4,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 124.9,
+  "f0_geo_hz": 124.3,
+  "f0_sd_semitones": 1.71,
+  "f0_voiced_frames": 18,
+  "sibilance_ratio": 0.1059,
+  "sibilance_peak_rel_db": 2.1,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -3.66
+  },
+  "dc": 7.8e-08,
+  "lufs": -18.0,
+  "rms_db": -19.35,
+  "true_peak_dbtp": -3.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15224 Hz; A: bant ≥ 15724 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sirt/c1.b05.wav",
+  "_mtime": 1790685974.0356858
+ },
+ "c1.gecis.on#1": {
+  "duration": 2.169,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.921,
+  "active_sec": 1.861,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 1.861,
+  "syll": 10,
+  "articulation": 5.37,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 127.7,
+  "f0_geo_hz": 125.0,
+  "f0_sd_semitones": 3.52,
+  "f0_voiced_frames": 97,
+  "sibilance_ratio": 0.0055,
+  "sibilance_peak_rel_db": -8.2,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -5.29e-06,
+  "lufs": -18.0,
+  "rms_db": -17.86,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15052 Hz; A: bant ≥ 15552 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c1.gecis.on/c1.gecis.on#1.wav",
+  "_mtime": 1790685976.9556859
+ },
+ "c1.gecis.on#2": {
+  "duration": 2.026,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.776,
+  "active_sec": 1.716,
+  "lead_sec": 0.06,
+  "tail_sec": 0.25,
+  "speech_sec": 1.716,
+  "syll": 11,
+  "articulation": 6.41,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 117.5,
+  "f0_geo_hz": 115.0,
+  "f0_sd_semitones": 3.62,
+  "f0_voiced_frames": 78,
+  "sibilance_ratio": 0.1147,
+  "sibilance_peak_rel_db": 6.2,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.58
+  },
+  "dc": -1.89e-05,
+  "lufs": -18.0,
+  "rms_db": -18.33,
+  "true_peak_dbtp": -1.57,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15138 Hz; A: bant ≥ 15638 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c1.gecis.on/c1.gecis.on#2.wav",
+  "_mtime": 1790685978.3951755
+ },
+ "c1.f01": {
+  "duration": 1.268,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.023,
+  "active_sec": 0.963,
+  "lead_sec": 0.06,
+  "tail_sec": 0.246,
+  "speech_sec": 0.963,
+  "syll": 5,
+  "articulation": 5.19,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 135.4,
+  "f0_geo_hz": 132.9,
+  "f0_sd_semitones": 3.3,
+  "f0_voiced_frames": 26,
+  "sibilance_ratio": 0.1194,
+  "sibilance_peak_rel_db": 0.8,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": 0.000116,
+  "lufs": -18.0,
+  "rms_db": -17.59,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on1/c1.f01.wav",
+  "_mtime": 1790685981.0791636
+ },
+ "c1.f02": {
+  "duration": 0.713,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.474,
+  "active_sec": 0.419,
+  "lead_sec": 0.055,
+  "tail_sec": 0.239,
+  "speech_sec": 0.419,
+  "syll": 2,
+  "articulation": 4.77,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 110.9,
+  "f0_geo_hz": 109.5,
+  "f0_sd_semitones": 2.77,
+  "f0_voiced_frames": 33,
+  "sibilance_ratio": 0.0014,
+  "sibilance_peak_rel_db": -17.1,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -2.01
+  },
+  "dc": -4.27e-10,
+  "lufs": -21.03,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -2.0,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on1/c1.f02.wav",
+  "_mtime": 1790685982.1722112
+ },
+ "c1.f03": {
+  "duration": 1.202,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.953,
+  "active_sec": 0.893,
+  "lead_sec": 0.06,
+  "tail_sec": 0.25,
+  "speech_sec": 0.893,
+  "syll": 3,
+  "articulation": 3.36,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 130.9,
+  "f0_geo_hz": 129.6,
+  "f0_sd_semitones": 2.44,
+  "f0_voiced_frames": 19,
+  "sibilance_ratio": 0.0652,
+  "sibilance_peak_rel_db": -1.2,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.63
+  },
+  "dc": 3.51e-06,
+  "lufs": -18.0,
+  "rms_db": -17.64,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on1/c1.f03.wav",
+  "_mtime": 1790685983.33025
+ },
+ "c1.f04": {
+  "duration": 1.136,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.888,
+  "active_sec": 0.828,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 0.828,
+  "syll": 3,
+  "articulation": 3.62,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 121.3,
+  "f0_geo_hz": 121.1,
+  "f0_sd_semitones": 1.0,
+  "f0_voiced_frames": 16,
+  "sibilance_ratio": 0.0414,
+  "sibilance_peak_rel_db": -1.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": 2.37e-05,
+  "lufs": -18.0,
+  "rms_db": -18.45,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on1/c1.f04.wav",
+  "_mtime": 1790685984.574476
+ },
+ "c1.f05": {
+  "duration": 1.202,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.953,
+  "active_sec": 0.893,
+  "lead_sec": 0.06,
+  "tail_sec": 0.249,
+  "speech_sec": 0.893,
+  "syll": 2,
+  "articulation": 2.24,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 123.1,
+  "f0_geo_hz": 121.9,
+  "f0_sd_semitones": 2.33,
+  "f0_voiced_frames": 20,
+  "sibilance_ratio": 0.0712,
+  "sibilance_peak_rel_db": 2.9,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.54
+  },
+  "dc": 5.54e-06,
+  "lufs": -18.0,
+  "rms_db": -17.81,
+  "true_peak_dbtp": -1.53,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on1/c1.f05.wav",
+  "_mtime": 1790685986.3876865
+ },
+ "c1.f06": {
+  "duration": 1.132,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.883,
+  "active_sec": 0.823,
+  "lead_sec": 0.06,
+  "tail_sec": 0.249,
+  "speech_sec": 0.823,
+  "syll": 2,
+  "articulation": 2.43,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 113.1,
+  "f0_geo_hz": 113.0,
+  "f0_sd_semitones": 0.91,
+  "f0_voiced_frames": 15,
+  "sibilance_ratio": 0.0174,
+  "sibilance_peak_rel_db": -7.7,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.58
+  },
+  "dc": 6.99e-05,
+  "lufs": -18.0,
+  "rms_db": -17.56,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on1/c1.f06.wav",
+  "_mtime": 1790685987.8756866
+ },
+ "c1.f07": {
+  "duration": 1.252,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.003,
+  "active_sec": 0.943,
+  "lead_sec": 0.06,
+  "tail_sec": 0.25,
+  "speech_sec": 0.943,
+  "syll": 5,
+  "articulation": 5.3,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 110.6,
+  "f0_geo_hz": 108.0,
+  "f0_sd_semitones": 3.78,
+  "f0_voiced_frames": 28,
+  "sibilance_ratio": 0.0196,
+  "sibilance_peak_rel_db": -0.9,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.54
+  },
+  "dc": -4.96e-05,
+  "lufs": -18.0,
+  "rms_db": -16.42,
+  "true_peak_dbtp": -1.53,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on2/c1.f07.wav",
+  "_mtime": 1790685990.3949304
+ },
+ "c1.f08": {
+  "duration": 1.49,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.242,
+  "active_sec": 1.182,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 1.182,
+  "syll": 6,
+  "articulation": 5.07,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 107.3,
+  "f0_geo_hz": 106.7,
+  "f0_sd_semitones": 1.81,
+  "f0_voiced_frames": 58,
+  "sibilance_ratio": 0.0737,
+  "sibilance_peak_rel_db": 1.4,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.53
+  },
+  "dc": -3.09e-05,
+  "lufs": -18.0,
+  "rms_db": -18.66,
+  "true_peak_dbtp": -1.52,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on2/c1.f08.wav",
+  "_mtime": 1790685991.7676868
+ },
+ "c1.f09": {
+  "duration": 1.147,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.898,
+  "active_sec": 0.838,
+  "lead_sec": 0.06,
+  "tail_sec": 0.249,
+  "speech_sec": 0.838,
+  "syll": 3,
+  "articulation": 3.58,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 135.4,
+  "f0_geo_hz": 132.8,
+  "f0_sd_semitones": 3.46,
+  "f0_voiced_frames": 18,
+  "sibilance_ratio": 0.0423,
+  "sibilance_peak_rel_db": 0.8,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.55
+  },
+  "dc": 1.96e-05,
+  "lufs": -18.0,
+  "rms_db": -16.59,
+  "true_peak_dbtp": -1.55,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on2/c1.f09.wav",
+  "_mtime": 1790685993.219687
+ },
+ "c1.f10": {
+  "duration": 1.136,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.888,
+  "active_sec": 0.828,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 0.828,
+  "syll": 3,
+  "articulation": 3.62,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 117.0,
+  "f0_geo_hz": 116.8,
+  "f0_sd_semitones": 1.12,
+  "f0_voiced_frames": 17,
+  "sibilance_ratio": 0.0063,
+  "sibilance_peak_rel_db": -8.3,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.57
+  },
+  "dc": -0.000355,
+  "lufs": -18.0,
+  "rms_db": -16.95,
+  "true_peak_dbtp": -1.57,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on2/c1.f10.wav",
+  "_mtime": 1790685994.915687
+ },
+ "c1.f11": {
+  "duration": 1.178,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.928,
+  "active_sec": 0.868,
+  "lead_sec": 0.06,
+  "tail_sec": 0.25,
+  "speech_sec": 0.868,
+  "syll": 3,
+  "articulation": 3.46,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 112.3,
+  "f0_geo_hz": 109.8,
+  "f0_sd_semitones": 3.63,
+  "f0_voiced_frames": 37,
+  "sibilance_ratio": 0.0377,
+  "sibilance_peak_rel_db": -0.4,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.57
+  },
+  "dc": -2.78e-05,
+  "lufs": -18.0,
+  "rms_db": -17.47,
+  "true_peak_dbtp": -1.56,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15224 Hz; A: bant ≥ 15724 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on2/c1.f11.wav",
+  "_mtime": 1790685996.7643166
+ },
+ "c1.f12": {
+  "duration": 1.079,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.833,
+  "active_sec": 0.773,
+  "lead_sec": 0.06,
+  "tail_sec": 0.246,
+  "speech_sec": 0.773,
+  "syll": 3,
+  "articulation": 3.88,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 110.1,
+  "f0_geo_hz": 108.9,
+  "f0_sd_semitones": 2.52,
+  "f0_voiced_frames": 25,
+  "sibilance_ratio": 0.0036,
+  "sibilance_peak_rel_db": -10.4,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.61
+  },
+  "dc": -3.15e-05,
+  "lufs": -18.0,
+  "rms_db": -17.46,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15224 Hz; A: bant ≥ 15724 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on2/c1.f12.wav",
+  "_mtime": 1790685998.3377755
+ },
+ "c1.f13": {
+  "duration": 1.136,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.888,
+  "active_sec": 0.828,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 0.828,
+  "syll": 4,
+  "articulation": 4.83,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 122.4,
+  "f0_geo_hz": 120.8,
+  "f0_sd_semitones": 2.85,
+  "f0_voiced_frames": 56,
+  "sibilance_ratio": 0.0279,
+  "sibilance_peak_rel_db": 0.9,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -2.64
+  },
+  "dc": -6.35e-09,
+  "lufs": -18.0,
+  "rms_db": -16.49,
+  "true_peak_dbtp": -2.62,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on2/c1.f13.wav",
+  "_mtime": 1790685999.7756872
+ },
+ "c1.f14": {
+  "duration": 1.158,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.913,
+  "active_sec": 0.853,
+  "lead_sec": 0.06,
+  "tail_sec": 0.245,
+  "speech_sec": 0.853,
+  "syll": 3,
+  "articulation": 3.52,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 121.8,
+  "f0_geo_hz": 118.8,
+  "f0_sd_semitones": 3.92,
+  "f0_voiced_frames": 18,
+  "sibilance_ratio": 0.0122,
+  "sibilance_peak_rel_db": -7.8,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": 4.26e-05,
+  "lufs": -18.0,
+  "rms_db": -16.43,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15202 Hz; A: bant ≥ 15702 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on3/c1.f14.wav",
+  "_mtime": 1790686003.3396876
+ },
+ "c1.f15": {
+  "duration": 1.135,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.888,
+  "active_sec": 0.828,
+  "lead_sec": 0.06,
+  "tail_sec": 0.247,
+  "speech_sec": 0.828,
+  "syll": 3,
+  "articulation": 3.62,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 108.9,
+  "f0_geo_hz": 108.4,
+  "f0_sd_semitones": 1.77,
+  "f0_voiced_frames": 17,
+  "sibilance_ratio": 0.0632,
+  "sibilance_peak_rel_db": 5.5,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.53
+  },
+  "dc": 0.000184,
+  "lufs": -18.0,
+  "rms_db": -15.57,
+  "true_peak_dbtp": -1.53,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on3/c1.f15.wav",
+  "_mtime": 1790686005.0075207
+ },
+ "c1.f16": {
+  "duration": 0.761,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.514,
+  "active_sec": 0.459,
+  "lead_sec": 0.055,
+  "tail_sec": 0.247,
+  "speech_sec": 0.459,
+  "syll": 2,
+  "articulation": 4.36,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 104.8,
+  "f0_geo_hz": 104.6,
+  "f0_sd_semitones": 0.88,
+  "f0_voiced_frames": 20,
+  "sibilance_ratio": 0.0748,
+  "sibilance_peak_rel_db": 1.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.56
+  },
+  "dc": 5.85e-05,
+  "lufs": -18.01,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.55,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15267 Hz; A: bant ≥ 15767 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on3/c1.f16.wav",
+  "_mtime": 1790686006.2859795
+ },
+ "c1.f17": {
+  "duration": 0.818,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.055,
+  "offset": 0.569,
+  "active_sec": 0.514,
+  "lead_sec": 0.055,
+  "tail_sec": 0.249,
+  "speech_sec": 0.514,
+  "syll": 2,
+  "articulation": 3.89,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 105.6,
+  "f0_geo_hz": 105.2,
+  "f0_sd_semitones": 1.54,
+  "f0_voiced_frames": 34,
+  "sibilance_ratio": 0.0009,
+  "sibilance_peak_rel_db": -21.1,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -6.35
+  },
+  "dc": 2.03e-08,
+  "lufs": -19.93,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -6.35,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on3/c1.f17.wav",
+  "_mtime": 1790686007.5836878
+ },
+ "c1.f18": {
+  "duration": 1.656,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.407,
+  "active_sec": 1.347,
+  "lead_sec": 0.06,
+  "tail_sec": 0.249,
+  "speech_sec": 1.347,
+  "syll": 7,
+  "articulation": 5.2,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 119.7,
+  "f0_geo_hz": 116.8,
+  "f0_sd_semitones": 3.77,
+  "f0_voiced_frames": 53,
+  "sibilance_ratio": 0.1185,
+  "sibilance_peak_rel_db": 6.3,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.58
+  },
+  "dc": 0.000221,
+  "lufs": -18.0,
+  "rms_db": -18.13,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on3/c1.f18.wav",
+  "_mtime": 1790686008.963781
+ },
+ "c1.f19": {
+  "duration": 1.574,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.332,
+  "active_sec": 1.272,
+  "lead_sec": 0.06,
+  "tail_sec": 0.242,
+  "speech_sec": 1.272,
+  "syll": 7,
+  "articulation": 5.5,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 102.6,
+  "f0_geo_hz": 101.5,
+  "f0_sd_semitones": 2.44,
+  "f0_voiced_frames": 42,
+  "sibilance_ratio": 0.0186,
+  "sibilance_peak_rel_db": -2.8,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.58
+  },
+  "dc": 6.75e-05,
+  "lufs": -18.0,
+  "rms_db": -17.3,
+  "true_peak_dbtp": -1.57,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on3/c1.f19.wav",
+  "_mtime": 1790686010.614877
+ },
+ "c1.f20": {
+  "duration": 0.892,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.06,
+  "offset": 0.649,
+  "active_sec": 0.589,
+  "lead_sec": 0.06,
+  "tail_sec": 0.243,
+  "speech_sec": 0.589,
+  "syll": 2,
+  "articulation": 3.4,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 98.2,
+  "f0_geo_hz": 98.0,
+  "f0_sd_semitones": 1.02,
+  "f0_voiced_frames": 20,
+  "sibilance_ratio": 0.0048,
+  "sibilance_peak_rel_db": -15.1,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -0.000109,
+  "lufs": -20.2,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 14966 Hz; A: bant ≥ 15466 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on3/c1.f20.wav",
+  "_mtime": 1790686011.8194034
+ },
+ "c1.f21": {
+  "duration": 0.717,
+  "sr": 44100,
+  "thr_db": -51.02,
+  "thr_source": "rms",
+  "onset": 0.06,
+  "offset": 0.469,
+  "active_sec": 0.409,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 0.409,
+  "syll": 2,
+  "articulation": 4.89,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 99.1,
+  "f0_geo_hz": 98.6,
+  "f0_sd_semitones": 1.7,
+  "f0_voiced_frames": 19,
+  "sibilance_ratio": 0.0045,
+  "sibilance_peak_rel_db": -8.4,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.58
+  },
+  "dc": -0.00014,
+  "lufs": -19.91,
+  "rms_db": -18.02,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 14923 Hz; A: bant ≥ 15423 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.on3/c1.f21.wav",
+  "_mtime": 1790686013.106295
+ },
+ "c1.w01": {
+  "duration": 1.644,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.397,
+  "active_sec": 1.337,
+  "lead_sec": 0.06,
+  "tail_sec": 0.247,
+  "speech_sec": 1.337,
+  "syll": 5,
+  "articulation": 3.74,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 134.6,
+  "f0_geo_hz": 131.0,
+  "f0_sd_semitones": 4.0,
+  "f0_voiced_frames": 39,
+  "sibilance_ratio": 0.0496,
+  "sibilance_peak_rel_db": 2.4,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.58
+  },
+  "dc": -2e-05,
+  "lufs": -18.0,
+  "rms_db": -18.07,
+  "true_peak_dbtp": -1.57,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.butun/c1.w01.wav",
+  "_mtime": 1790686016.2036884
+ },
+ "c1.w02": {
+  "duration": 1.66,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.412,
+  "active_sec": 1.352,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 1.352,
+  "syll": 5,
+  "articulation": 3.7,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 119.1,
+  "f0_geo_hz": 117.9,
+  "f0_sd_semitones": 2.47,
+  "f0_voiced_frames": 42,
+  "sibilance_ratio": 0.0066,
+  "sibilance_peak_rel_db": -6.8,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.55
+  },
+  "dc": -0.000227,
+  "lufs": -18.0,
+  "rms_db": -17.61,
+  "true_peak_dbtp": -1.55,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.butun/c1.w02.wav",
+  "_mtime": 1790686017.6876884
+ },
+ "c1.w03": {
+  "duration": 1.275,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.028,
+  "active_sec": 0.968,
+  "lead_sec": 0.06,
+  "tail_sec": 0.247,
+  "speech_sec": 0.968,
+  "syll": 5,
+  "articulation": 5.17,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 111.9,
+  "f0_geo_hz": 110.5,
+  "f0_sd_semitones": 2.68,
+  "f0_voiced_frames": 28,
+  "sibilance_ratio": 0.0171,
+  "sibilance_peak_rel_db": -4.1,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.57
+  },
+  "dc": 0.000207,
+  "lufs": -18.0,
+  "rms_db": -17.71,
+  "true_peak_dbtp": -1.56,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.butun/c1.w03.wav",
+  "_mtime": 1790686019.307271
+ },
+ "c1.w04": {
+  "duration": 1.378,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.132,
+  "active_sec": 1.073,
+  "lead_sec": 0.06,
+  "tail_sec": 0.246,
+  "speech_sec": 1.073,
+  "syll": 4,
+  "articulation": 3.73,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 130.1,
+  "f0_geo_hz": 126.7,
+  "f0_sd_semitones": 3.97,
+  "f0_voiced_frames": 38,
+  "sibilance_ratio": 0.0662,
+  "sibilance_peak_rel_db": 0.5,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": 5e-05,
+  "lufs": -18.0,
+  "rms_db": -17.81,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.butun/c1.w04.wav",
+  "_mtime": 1790686020.6472573
+ },
+ "c1.w05": {
+  "duration": 1.392,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.142,
+  "active_sec": 1.083,
+  "lead_sec": 0.06,
+  "tail_sec": 0.25,
+  "speech_sec": 1.083,
+  "syll": 4,
+  "articulation": 3.69,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 118.1,
+  "f0_geo_hz": 117.2,
+  "f0_sd_semitones": 2.14,
+  "f0_voiced_frames": 36,
+  "sibilance_ratio": 0.0041,
+  "sibilance_peak_rel_db": -8.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": 1.37e-05,
+  "lufs": -18.0,
+  "rms_db": -16.87,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15224 Hz; A: bant ≥ 15724 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.butun/c1.w05.wav",
+  "_mtime": 1790686021.9836886
+ },
+ "c1.w06": {
+  "duration": 1.07,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.823,
+  "active_sec": 0.763,
+  "lead_sec": 0.06,
+  "tail_sec": 0.247,
+  "speech_sec": 0.763,
+  "syll": 4,
+  "articulation": 5.24,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 111.8,
+  "f0_geo_hz": 111.0,
+  "f0_sd_semitones": 2.07,
+  "f0_voiced_frames": 17,
+  "sibilance_ratio": 0.0293,
+  "sibilance_peak_rel_db": -1.4,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.57
+  },
+  "dc": 0.000163,
+  "lufs": -18.0,
+  "rms_db": -17.39,
+  "true_peak_dbtp": -1.57,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.butun/c1.w06.wav",
+  "_mtime": 1790686023.2596886
+ },
+ "c1.w07": {
+  "duration": 2.092,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 1.846,
+  "active_sec": 1.786,
+  "lead_sec": 0.06,
+  "tail_sec": 0.246,
+  "speech_sec": 1.621,
+  "syll": 9,
+  "articulation": 5.55,
+  "pauses": [
+   [
+    0.938,
+    1.103
+   ]
+  ],
+  "breaths": [],
+  "gaps": [
+   {
+    "start": 0.938,
+    "end": 1.103,
+    "dur": 0.165
+   }
+  ],
+  "pause_total_sec": 0.165,
+  "f0_mean_hz": 114.1,
+  "f0_geo_hz": 112.1,
+  "f0_sd_semitones": 3.24,
+  "f0_voiced_frames": 93,
+  "sibilance_ratio": 0.0342,
+  "sibilance_peak_rel_db": -0.2,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.56
+  },
+  "dc": 1.47e-05,
+  "lufs": -18.0,
+  "rms_db": -17.38,
+  "true_peak_dbtp": -1.52,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.butun/c1.w07.wav",
+  "_mtime": 1790686024.6796887
+ },
+ "c1.w08": {
+  "duration": 1.08,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.833,
+  "active_sec": 0.773,
+  "lead_sec": 0.06,
+  "tail_sec": 0.247,
+  "speech_sec": 0.773,
+  "syll": 4,
+  "articulation": 5.17,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 100.9,
+  "f0_geo_hz": 100.2,
+  "f0_sd_semitones": 1.93,
+  "f0_voiced_frames": 38,
+  "sibilance_ratio": 0.0046,
+  "sibilance_peak_rel_db": -8.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": 5.83e-07,
+  "lufs": -18.0,
+  "rms_db": -18.51,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15159 Hz; A: bant ≥ 15659 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.butun/c1.w08.wav",
+  "_mtime": 1790686026.0946746
+ },
+ "c1.w09": {
+  "duration": 1.144,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 0.898,
+  "active_sec": 0.838,
+  "lead_sec": 0.06,
+  "tail_sec": 0.246,
+  "speech_sec": 0.838,
+  "syll": 4,
+  "articulation": 4.77,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 97.6,
+  "f0_geo_hz": 96.9,
+  "f0_sd_semitones": 2.13,
+  "f0_voiced_frames": 42,
+  "sibilance_ratio": 0.0078,
+  "sibilance_peak_rel_db": -6.6,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.56
+  },
+  "dc": -0.00014,
+  "lufs": -18.0,
+  "rms_db": -17.82,
+  "true_peak_dbtp": -1.56,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": false,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.butun/c1.w09.wav",
+  "_mtime": 1790686027.6801953
+ },
+ "c1.k1": {
+  "duration": 3.544,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 3.298,
+  "active_sec": 3.238,
+  "lead_sec": 0.06,
+  "tail_sec": 0.247,
+  "speech_sec": 2.854,
+  "syll": 16,
+  "articulation": 5.61,
+  "pauses": [
+   [
+    1.462,
+    1.846
+   ]
+  ],
+  "breaths": [],
+  "gaps": [
+   {
+    "start": 1.462,
+    "end": 1.846,
+    "dur": 0.384
+   }
+  ],
+  "pause_total_sec": 0.384,
+  "f0_mean_hz": 122.5,
+  "f0_geo_hz": 120.0,
+  "f0_sd_semitones": 3.46,
+  "f0_voiced_frames": 143,
+  "sibilance_ratio": 0.0294,
+  "sibilance_peak_rel_db": 2.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -0.00015,
+  "lufs": -18.0,
+  "rms_db": -17.41,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 14966 Hz; A: bant ≥ 15466 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Derinleşme",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c1.k1/c1.k1.wav",
+  "_mtime": 1790686029.8996892
+ },
+ "c2.dikkat#1": {
+  "duration": 3.258,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 3.013,
+  "active_sec": 2.953,
+  "lead_sec": 0.06,
+  "tail_sec": 0.245,
+  "speech_sec": 2.953,
+  "syll": 17,
+  "articulation": 5.76,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 132.3,
+  "f0_geo_hz": 129.6,
+  "f0_sd_semitones": 3.52,
+  "f0_voiced_frames": 137,
+  "sibilance_ratio": 0.0929,
+  "sibilance_peak_rel_db": 5.8,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -3.02e-06,
+  "lufs": -18.0,
+  "rms_db": -18.36,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "ceil": 5.0,
+   "ok": false,
+   "note": "qa.derinClipRateCeil (VARSAYIM), raporlanır"
+  },
+  "phase": "Derin",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.dikkat/c2.dikkat#1.wav",
+  "_mtime": 1790686033.5672076
+ },
+ "c2.dikkat#2": {
+  "duration": 3.343,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 3.093,
+  "active_sec": 3.033,
+  "lead_sec": 0.06,
+  "tail_sec": 0.25,
+  "speech_sec": 3.033,
+  "syll": 18,
+  "articulation": 5.93,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 125.7,
+  "f0_geo_hz": 124.4,
+  "f0_sd_semitones": 2.56,
+  "f0_voiced_frames": 143,
+  "sibilance_ratio": 0.0659,
+  "sibilance_peak_rel_db": 5.0,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.6
+  },
+  "dc": -1.47e-05,
+  "lufs": -18.0,
+  "rms_db": -17.72,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 14987 Hz; A: bant ≥ 15487 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "ceil": 5.0,
+   "ok": false,
+   "note": "qa.derinClipRateCeil (VARSAYIM), raporlanır"
+  },
+  "phase": "Derin",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.dikkat/c2.dikkat#2.wav",
+  "_mtime": 1790686035.1476893
+ },
+ "a.durus": {
+  "duration": 3.638,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 3.392,
+  "active_sec": 3.332,
+  "lead_sec": 0.06,
+  "tail_sec": 0.246,
+  "speech_sec": 3.332,
+  "syll": 17,
+  "articulation": 5.1,
+  "pauses": [],
+  "breaths": [],
+  "gaps": [],
+  "pause_total_sec": 0,
+  "f0_mean_hz": 128.4,
+  "f0_geo_hz": 125.9,
+  "f0_sd_semitones": 3.46,
+  "f0_voiced_frames": 157,
+  "sibilance_ratio": 0.0317,
+  "sibilance_peak_rel_db": 3.9,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": 2.73e-05,
+  "lufs": -18.0,
+  "rms_db": -18.01,
+  "true_peak_dbtp": -1.59,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 14987 Hz; A: bant ≥ 15487 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "band": [
+    5.0,
+    6.2
+   ],
+   "ok": true,
+   "note": "SPEC §4.1c tercih bandı"
+  },
+  "phase": "Varış",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/a.durus/a.durus.wav",
+  "_mtime": 1790686270.2157032
+ },
+ "c2.yer#1": {
+  "duration": 4.31,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 4.061,
+  "active_sec": 4.001,
+  "lead_sec": 0.06,
+  "tail_sec": 0.25,
+  "speech_sec": 3.702,
+  "syll": 22,
+  "articulation": 5.94,
+  "pauses": [
+   [
+    1.442,
+    1.741
+   ]
+  ],
+  "breaths": [],
+  "gaps": [
+   {
+    "start": 1.442,
+    "end": 1.741,
+    "dur": 0.299
+   }
+  ],
+  "pause_total_sec": 0.299,
+  "f0_mean_hz": 137.0,
+  "f0_geo_hz": 133.4,
+  "f0_sd_semitones": 3.95,
+  "f0_voiced_frames": 178,
+  "sibilance_ratio": 0.0863,
+  "sibilance_peak_rel_db": 4.6,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.58
+  },
+  "dc": 3.28e-05,
+  "lufs": -18.0,
+  "rms_db": -17.38,
+  "true_peak_dbtp": -1.57,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15202 Hz; A: bant ≥ 15702 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "ceil": 5.0,
+   "ok": false,
+   "note": "qa.derinClipRateCeil (VARSAYIM), raporlanır"
+  },
+  "phase": "Derin",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.yer/c2.yer#1.wav",
+  "_mtime": 1790686443.0717137
+ },
+ "c2.yer#2": {
+  "duration": 3.476,
+  "sr": 44100,
+  "thr_db": -50.0,
+  "thr_source": "lufs",
+  "onset": 0.06,
+  "offset": 3.228,
+  "active_sec": 3.168,
+  "lead_sec": 0.06,
+  "tail_sec": 0.248,
+  "speech_sec": 3.013,
+  "syll": 13,
+  "articulation": 4.31,
+  "pauses": [
+   [
+    1.916,
+    2.07
+   ]
+  ],
+  "breaths": [],
+  "gaps": [
+   {
+    "start": 1.916,
+    "end": 2.07,
+    "dur": 0.155
+   }
+  ],
+  "pause_total_sec": 0.155,
+  "f0_mean_hz": 109.4,
+  "f0_geo_hz": 107.8,
+  "f0_sd_semitones": 2.92,
+  "f0_voiced_frames": 123,
+  "sibilance_ratio": 0.0233,
+  "sibilance_peak_rel_db": 2.6,
+  "clipping": {
+   "clipped": false,
+   "count": 0,
+   "peak_dbfs": -1.59
+  },
+  "dc": -3.42e-05,
+  "lufs": -18.0,
+  "rms_db": -17.38,
+  "true_peak_dbtp": -1.58,
+  "clicks": {
+   "count": 0,
+   "times": [],
+   "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+  },
+  "rate_rule": {
+   "ceil": 5.0,
+   "ok": true,
+   "note": "qa.derinClipRateCeil (VARSAYIM), raporlanır"
+  },
+  "phase": "Derin",
+  "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.yer/c2.yer#2.wav",
+  "_mtime": 1790686445.0437138
+ }
+}

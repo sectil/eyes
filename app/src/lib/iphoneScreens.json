@@ -1,0 +1,713 @@
+{
+  "iPhone10,1": {
+    "name": "iPhone 8",
+    "ppi": 326,
+    "px": [
+      750,
+      1334
+    ],
+    "diagonalIn": 4.7,
+    "trueDepth": false,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111976 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone10,4": {
+    "name": "iPhone 8",
+    "ppi": 326,
+    "px": [
+      750,
+      1334
+    ],
+    "diagonalIn": 4.7,
+    "trueDepth": false,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111976 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone10,2": {
+    "name": "iPhone 8 Plus",
+    "ppi": 401,
+    "px": [
+      1080,
+      1920
+    ],
+    "diagonalIn": 5.5,
+    "trueDepth": false,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111950 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone10,5": {
+    "name": "iPhone 8 Plus",
+    "ppi": 401,
+    "px": [
+      1080,
+      1920
+    ],
+    "diagonalIn": 5.5,
+    "trueDepth": false,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111950 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone10,3": {
+    "name": "iPhone X",
+    "ppi": 458,
+    "px": [
+      1125,
+      2436
+    ],
+    "diagonalIn": 5.8,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111864 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone10,6": {
+    "name": "iPhone X",
+    "ppi": 458,
+    "px": [
+      1125,
+      2436
+    ],
+    "diagonalIn": 5.8,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111864 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone11,2": {
+    "name": "iPhone XS",
+    "ppi": 458,
+    "px": [
+      1125,
+      2436
+    ],
+    "diagonalIn": 5.8,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111881 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone11,4": {
+    "name": "iPhone XS Max",
+    "ppi": 458,
+    "px": [
+      1242,
+      2688
+    ],
+    "diagonalIn": 6.5,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111880 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone11,6": {
+    "name": "iPhone XS Max",
+    "ppi": 458,
+    "px": [
+      1242,
+      2688
+    ],
+    "diagonalIn": 6.5,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111880 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone11,8": {
+    "name": "iPhone XR",
+    "ppi": 326,
+    "px": [
+      828,
+      1792
+    ],
+    "diagonalIn": 6.1,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111868 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone12,1": {
+    "name": "iPhone 11",
+    "ppi": 326,
+    "px": [
+      828,
+      1792
+    ],
+    "diagonalIn": 6.1,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111865 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone12,3": {
+    "name": "iPhone 11 Pro",
+    "ppi": 458,
+    "px": [
+      1125,
+      2436
+    ],
+    "diagonalIn": 5.8,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111879 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone12,5": {
+    "name": "iPhone 11 Pro Max",
+    "ppi": 458,
+    "px": [
+      1242,
+      2688
+    ],
+    "diagonalIn": 6.5,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111878 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone12,8": {
+    "name": "iPhone SE (2nd generation)",
+    "ppi": 326,
+    "px": [
+      750,
+      1334
+    ],
+    "diagonalIn": 4.7,
+    "trueDepth": false,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111882 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone13,1": {
+    "name": "iPhone 12 mini",
+    "ppi": 476,
+    "px": [
+      1080,
+      2340
+    ],
+    "diagonalIn": 5.4,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111877 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone13,2": {
+    "name": "iPhone 12",
+    "ppi": 460,
+    "px": [
+      1170,
+      2532
+    ],
+    "diagonalIn": 6.1,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111876 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone13,3": {
+    "name": "iPhone 12 Pro",
+    "ppi": 460,
+    "px": [
+      1170,
+      2532
+    ],
+    "diagonalIn": 6.1,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111875 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone13,4": {
+    "name": "iPhone 12 Pro Max",
+    "ppi": 458,
+    "px": [
+      1284,
+      2778
+    ],
+    "diagonalIn": 6.7,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111874 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone14,4": {
+    "name": "iPhone 13 mini",
+    "ppi": 476,
+    "px": [
+      1080,
+      2340
+    ],
+    "diagonalIn": 5.4,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111873 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone14,5": {
+    "name": "iPhone 13",
+    "ppi": 460,
+    "px": [
+      1170,
+      2532
+    ],
+    "diagonalIn": 6.1,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111872 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (Display.Resolution çapraz kontrol)"
+    ]
+  },
+  "iPhone14,2": {
+    "name": "iPhone 13 Pro",
+    "ppi": 460,
+    "px": [
+      1170,
+      2532
+    ],
+    "diagonalIn": 6.1,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111871 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (Display.Resolution çapraz kontrol)"
+    ]
+  },
+  "iPhone14,3": {
+    "name": "iPhone 13 Pro Max",
+    "ppi": 458,
+    "px": [
+      1284,
+      2778
+    ],
+    "diagonalIn": 6.7,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111870 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (Display.Resolution çapraz kontrol)"
+    ]
+  },
+  "iPhone14,6": {
+    "name": "iPhone SE (3rd generation)",
+    "ppi": 326,
+    "px": [
+      750,
+      1334
+    ],
+    "diagonalIn": 4.7,
+    "trueDepth": false,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111866 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (Display.Resolution çapraz kontrol)"
+    ]
+  },
+  "iPhone14,7": {
+    "name": "iPhone 14",
+    "ppi": 460,
+    "px": [
+      1170,
+      2532
+    ],
+    "diagonalIn": 6.1,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111850 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (Display.Resolution çapraz kontrol)"
+    ]
+  },
+  "iPhone14,8": {
+    "name": "iPhone 14 Plus",
+    "ppi": 458,
+    "px": [
+      1284,
+      2778
+    ],
+    "diagonalIn": 6.7,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111854 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (Display.Resolution çapraz kontrol)"
+    ]
+  },
+  "iPhone15,2": {
+    "name": "iPhone 14 Pro",
+    "ppi": 460,
+    "px": [
+      1179,
+      2556
+    ],
+    "diagonalIn": 6.1,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111849 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (Display.Resolution çapraz kontrol)"
+    ]
+  },
+  "iPhone15,3": {
+    "name": "iPhone 14 Pro Max",
+    "ppi": 460,
+    "px": [
+      1290,
+      2796
+    ],
+    "diagonalIn": 6.7,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111846 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (Display.Resolution çapraz kontrol)"
+    ]
+  },
+  "iPhone15,4": {
+    "name": "iPhone 15",
+    "ppi": 460,
+    "px": [
+      1179,
+      2556
+    ],
+    "diagonalIn": 6.1,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111831 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (Display.Resolution çapraz kontrol)"
+    ]
+  },
+  "iPhone15,5": {
+    "name": "iPhone 15 Plus",
+    "ppi": 460,
+    "px": [
+      1290,
+      2796
+    ],
+    "diagonalIn": 6.7,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111830 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (Display.Resolution çapraz kontrol)"
+    ]
+  },
+  "iPhone16,1": {
+    "name": "iPhone 15 Pro",
+    "ppi": 460,
+    "px": [
+      1179,
+      2556
+    ],
+    "diagonalIn": 6.1,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111829 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone16,2": {
+    "name": "iPhone 15 Pro Max",
+    "ppi": 460,
+    "px": [
+      1290,
+      2796
+    ],
+    "diagonalIn": 6.7,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/111828 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone17,3": {
+    "name": "iPhone 16",
+    "ppi": 460,
+    "px": [
+      1179,
+      2556
+    ],
+    "diagonalIn": 6.1,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/121029 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone17,4": {
+    "name": "iPhone 16 Plus",
+    "ppi": 460,
+    "px": [
+      1290,
+      2796
+    ],
+    "diagonalIn": 6.7,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/121030 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone17,1": {
+    "name": "iPhone 16 Pro",
+    "ppi": 460,
+    "px": [
+      1206,
+      2622
+    ],
+    "diagonalIn": 6.3,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/121031 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone17,2": {
+    "name": "iPhone 16 Pro Max",
+    "ppi": 460,
+    "px": [
+      1320,
+      2868
+    ],
+    "diagonalIn": 6.9,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/121032 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone17,5": {
+    "name": "iPhone 16e",
+    "ppi": 460,
+    "px": [
+      1170,
+      2532
+    ],
+    "diagonalIn": 6.1,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/122208 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone18,3": {
+    "name": "iPhone 17",
+    "ppi": 460,
+    "px": [
+      1206,
+      2622
+    ],
+    "diagonalIn": 6.3,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/125089 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone18,1": {
+    "name": "iPhone 17 Pro",
+    "ppi": 460,
+    "px": [
+      1206,
+      2622
+    ],
+    "diagonalIn": 6.3,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/125090 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone18,2": {
+    "name": "iPhone 17 Pro Max",
+    "ppi": 460,
+    "px": [
+      1320,
+      2868
+    ],
+    "diagonalIn": 6.9,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/125091 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone18,4": {
+    "name": "iPhone Air",
+    "ppi": 460,
+    "px": [
+      1260,
+      2736
+    ],
+    "diagonalIn": 6.5,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/125092 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone18,5": {
+    "name": "iPhone 17e",
+    "ppi": 460,
+    "px": [
+      1170,
+      2532
+    ],
+    "diagonalIn": 6.1,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/126470 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)",
+      "GBDeviceInfo GBDeviceInfo_iOS.m @5bd6bf8 (2026-09-16) (identifier, ppi, diyagonal)"
+    ]
+  },
+  "iPhone19,2": {
+    "name": "iPhone 18 Pro",
+    "ppi": 460,
+    "px": [
+      1206,
+      2622
+    ],
+    "diagonalIn": 6.3,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/148590 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)"
+    ]
+  },
+  "iPhone19,3": {
+    "name": "iPhone 18 Pro Max",
+    "ppi": 460,
+    "px": [
+      1320,
+      2868
+    ],
+    "diagonalIn": 6.9,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/148591 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)"
+    ]
+  },
+  "iPhone19,7": {
+    "name": "iPhone 18 Pro Max",
+    "ppi": 460,
+    "px": [
+      1320,
+      2868
+    ],
+    "diagonalIn": 6.9,
+    "trueDepth": true,
+    "sources": [
+      "Apple Tech Specs https://support.apple.com/en-us/148591 (px, ppi, diyagonal)",
+      "DeviceKit Source/Device.swift.gyb @19528aa (2026-09-22) (identifier, ppi, diyagonal, hasFaceID)",
+      "AppleDB deviceFiles/iPhone @605131d (2026-09-24) (identifier→ad)"
+    ]
+  }
+}

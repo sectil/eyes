@@ -1,0 +1,904 @@
+<title>Işıktan Baş</title>
+<style>
+:root{
+  --bg:#f3f6f8; --surface:#fff; --ink:#0b1219; --ink-2:#33414d; --ink-3:#6b7a86; --line:rgba(11,18,25,.09);
+  --iris-1:#11a9b8; --iris-2:#2f6bea; --lens:#f08a00; --lens-ink:#b25f00; --ok:#13704b;
+  --r-goz:#0e97a6; --r-dikkat:#2f5fe0; --r-nefes:#6a4bd6; --r-ruh:#cf3b7c; --r-hareket:#e07b00;
+  --chip:#fff; --chip-on:#fff; --shadow:0 1px 2px rgba(11,18,25,.05),0 6px 18px rgba(11,18,25,.05);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#070c12; --surface:#0f171f; --ink:#eef3f6; --ink-2:#b9c4cd; --ink-3:#7d8b97; --line:rgba(238,243,246,.08);
+    --iris-1:#19c2d1; --iris-2:#3e7bfa; --lens:#ffb13b; --lens-ink:#ffb13b; --ok:#35d39a;
+    --r-goz:#3fd3df; --r-dikkat:#6f9bff; --r-nefes:#a78bff; --r-ruh:#ff80b5; --r-hareket:#ffb13b;
+    --chip:#0d151c; --chip-on:#121d27; --shadow:none;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#070c12; --surface:#0f171f; --ink:#eef3f6; --ink-2:#b9c4cd; --ink-3:#7d8b97; --line:rgba(238,243,246,.08);
+  --iris-1:#19c2d1; --iris-2:#3e7bfa; --lens:#ffb13b; --lens-ink:#ffb13b; --ok:#35d39a;
+  --r-goz:#3fd3df; --r-dikkat:#6f9bff; --r-nefes:#a78bff; --r-ruh:#ff80b5; --r-hareket:#ffb13b;
+  --chip:#0d151c; --chip-on:#121d27; --shadow:none;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:Onest,"SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.app{max-width:390px;margin:0 auto;padding:10px 16px 28px;display:flex;flex-direction:column}
+.seg{display:flex;gap:4px;padding:3px;border-radius:999px;background:var(--line);align-self:center;margin-bottom:10px}
+.seg button{font-size:12.5px;font-weight:500;padding:6px 12px;border-radius:999px;color:var(--ink-2);transition:background .2s,color .2s}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.top{display:flex;align-items:baseline;justify-content:space-between;margin:2px 2px 0}
+h1{font-family:Unbounded,"SF Pro Display",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-weight:600;font-size:24px;letter-spacing:-.01em}
+.day{font-size:13px;font-weight:500;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px}
+.day .pulse{width:7px;height:7px;border-radius:50%;background:var(--lens);display:none}
+.day.live .pulse{display:inline-block;animation:pl 1s ease-in-out infinite}
+@keyframes pl{50%{opacity:.35;transform:scale(.7)}}
+.stage{position:relative;height:clamp(250px,47vh,420px);margin:0 -16px;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:radial-gradient(60% 55% at 48% 50%,color-mix(in srgb,var(--iris-2) 9%,transparent),transparent 70%);mix-blend-mode:screen}
+:root[data-theme="light"] .stage::before{mix-blend-mode:normal}
+.labels{position:absolute;inset:0;pointer-events:none}
+.lb{position:absolute;left:0;top:0;font-size:10.5px;font-weight:500;letter-spacing:.02em;white-space:nowrap;
+  transform:translate(-50%,-50%);transition:opacity .45s;color:var(--c);opacity:0;text-shadow:0 0 6px var(--bg),0 0 2px var(--bg)}
+.lb.on{opacity:1}
+.lb.dim{color:var(--ink-3)} .lb.on.dim{opacity:.6}
+.nef{display:flex;gap:11px;align-items:flex-start;margin:4px 2px 14px;font-size:15.5px;line-height:1.42;font-weight:500;color:var(--ink);min-height:44px}
+.nef .av{flex:none;width:26px;height:26px;border-radius:50%;margin-top:1px;
+  background:radial-gradient(circle at 50% 50%,#070c12 0 27%,var(--iris-1) 30%,var(--iris-2) 70%,transparent 73%);
+  box-shadow:0 0 0 1.5px var(--iris-2) inset}
+.live{color:var(--lens-ink)}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chip{position:relative;text-align:left;background:var(--chip);border-radius:14px;padding:10px 11px 10px;border:1px solid var(--line);
+  box-shadow:var(--shadow);display:flex;flex-direction:column;gap:2px;transition:border-color .25s,background .25s,opacity .25s;min-width:0}
+.chip.wide{grid-column:1/-1}
+.chip .nm{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600}
+.chip .dt{width:8px;height:8px;border-radius:50%;background:var(--c);flex:none;opacity:.35}
+.chip.up .dt,.chip.live .dt{opacity:1;box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 22%,transparent)}
+.chip .v{font-size:13px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip .w{font-size:12px;font-weight:600;color:var(--ink-3)}
+.chip.up .w{color:var(--ok)}
+.chip.live .w{color:var(--lens-ink)}
+.chip[aria-pressed="true"]{border-color:var(--c);background:var(--chip-on)}
+.chips.focus .chip[aria-pressed="false"]{opacity:.55}
+.detail{overflow:hidden;max-height:0;transition:max-height .35s ease,margin .35s;margin-top:0}
+.detail.open{max-height:220px;margin-top:10px}
+.detail .in{border-radius:14px;padding:12px 13px;background:var(--surface);border:1px solid var(--line);font-size:14px;line-height:1.45;color:var(--ink-2)}
+.detail b{color:var(--ink);font-weight:600}
+.foot{margin-top:14px;font-size:11.5px;line-height:1.45;color:var(--ink-3)}
+.fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:var(--ink-3);font-size:13px}
+.nogl .fallback{display:flex}
+@media (min-width:430px){.app{margin-top:12px;border-radius:32px;border:1px solid var(--line);background:var(--bg);padding-top:14px}}
+@media (prefers-reduced-motion: reduce){.day.live .pulse{animation:none}.detail,.chip,.lb,.seg button{transition:none}}
+@media (max-height:600px){.stage{height:clamp(236px,46vh,300px)} .nef{font-size:14.5px;margin-bottom:12px} h1{font-size:21px}}
+</style>
+
+<div class="app" id="app">
+  <div class="seg" role="group" aria-label="Örnek durum">
+    <button data-s="d30" aria-pressed="false">30. gün</button>
+    <button data-s="walk" aria-pressed="false">Yürürken</button>
+    <button data-s="d1" aria-pressed="false">1. gün</button>
+  </div>
+  <div class="top"><h1>Gelişim</h1><span class="day" id="day"><i class="pulse"></i><span></span></span></div>
+  <div class="stage" id="stage" role="img" aria-label="Işıktan bir baş">
+    <canvas id="cv"></canvas>
+    <div class="labels" id="labels"></div>
+    <div class="fallback">Bu cihazda üç boyutlu görünüm açılamadı.</div>
+  </div>
+  <p class="nef"><i class="av" aria-hidden="true"></i><span id="nef"></span></p>
+  <div class="chips" id="chips"></div>
+  <div class="detail" id="detail" aria-live="polite"><div class="in" id="detailIn"></div></div>
+  <p class="foot">Bir bölge yalnız verin başlangıcından iyi olduğunda tam yanar. Gözler, ölçülen kırpma hızınla kırpar. Örnek veri.</p>
+</div>
+
+<script>
+/* ---------------- veri (olduğu gibi) ---------------- */
+const AREAS = ['goz', 'dikkat', 'nefes', 'ruh', 'hareket']
+const NAME = { goz: 'Göz', dikkat: 'Dikkat', nefes: 'Nefes', ruh: 'Ruh hâli', hareket: 'Hareket' }
+const WORD = { start: 'Başlangıç', up: 'Başlangıcından iyi', same: 'Değişim yok', unsure: 'Henüz belli değil', live: 'Şu an' }
+const DAYS = {
+  '30': { label: '30. gün', blinks: 5, nef: 'Üç alanda başlangıcından iyisin: dikkat, nefes ve ruh hâli.', a: {
+    goz: { st: 'same', v: 'E testi 0,20 → 0,20', d: '<b>E testi</b> 6 ölçümde başlangıcınla aynı (küçük değer iyi). İlk Bakış: 20 saniyede 5 kırpma; gözlerin bu hızla kırpıyor.' },
+    dikkat: { st: 'up', v: '4 → 6 harf', d: '<b>Tek Bakışta</b> kavradığın harf 14 ölçümde 4\'ten 6\'ya çıktı.' },
+    nefes: { st: 'up', v: '+1,3 sakinlik', d: '<b>Nefesten sonra</b> sakinlik puanın 24 oturumda ortalama 1,3 yüksek (5 üzerinden).' },
+    ruh: { st: 'up', v: 'İyi oluş 56 → 68', d: '<b>İyi oluş</b> (WHO-5) puanın 56\'dan 68\'e çıktı; 10 puandan büyük fark.' },
+    hareket: { st: 'unsure', v: 'Bugün 7.080 adım', d: '<b>Apple Sağlık:</b> bugün 7.080 adım. Adım geçmişi henüz kaydedilmediği için karşılaştırma yok.' },
+  } },
+  '1': { label: '1. gün', blinks: 3, nef: 'Başlangıcın ölçüldü. Bundan sonraki her ölçüm buna göre yanacak.', a: {
+    goz: { st: 'start', v: '20 sn\'de 3 kırpma', d: '<b>İlk Bakış</b> 20 saniyede 3 kırpma ölçtü; gözlerin bu hızla kırpıyor. E testi de alındı.' },
+    dikkat: { st: 'start', v: '4 harf', d: '<b>Tek Bakışta</b> ilk ölçümün: 4 harf.' },
+    nefes: { st: 'start', v: 'Sakinlik 2 → 4', d: '<b>İlk nefesinde</b> sakinlik puanın 2\'den 4\'e çıktı (5 üzerinden).' },
+    ruh: { st: 'start', v: 'İyi oluş 56', d: '<b>İyi oluş</b> (WHO-5) ilk puanın: 56. Sonraki 14. gün.' },
+    hareket: { st: 'start', v: 'Bugün 3.412 adım', d: '<b>Apple Sağlık:</b> bugün 3.412 adım.' },
+  } },
+}
+DAYS.walk = JSON.parse(JSON.stringify(DAYS['30']))
+Object.assign(DAYS.walk, { label: 'Şu an', nef: '<span class="live">Şu an yürüyorsun:</span> 14 dakikada 1,2 km, 1.690 adım.' })
+DAYS.walk.a.hareket = { st: 'live', v: '1.690 adım · 14 dk', d: '<b>Yürüyüş sürüyor:</b> 1,2 km, 1.690 adım. Hareket bölgesi adım temponla akıyor.' }
+</script>
+<script>
+(function(){
+'use strict';
+const KEY = { d30: '30', walk: 'walk', d1: '1' };
+const qs = new URLSearchParams(location.search);
+const DBG = qs.get('dbg') || '';
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let stKey = 'd30', sel = null;
+
+/* ================= UI ================= */
+const $ = (id) => document.getElementById(id);
+const chipsEl = $('chips'), labelsEl = $('labels');
+AREAS.forEach((k) => {
+  const b = document.createElement('button');
+  b.className = 'chip' + (k === 'hareket' ? ' wide' : '');
+  b.dataset.k = k; b.style.setProperty('--c', `var(--r-${k})`);
+  b.innerHTML = `<span class="nm"><i class="dt"></i>${NAME[k]}</span><span class="v"></span><span class="w"></span>`;
+  b.addEventListener('click', () => select(sel === k ? null : k));
+  chipsEl.appendChild(b);
+  const l = document.createElement('span');
+  l.className = 'lb'; l.dataset.k = k; l.style.setProperty('--c', `var(--r-${k})`); l.textContent = NAME[k];
+  labelsEl.appendChild(l);
+});
+document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => {
+  if (location.hash !== '#' + b.dataset.s) history.replaceState(null, '', '#' + b.dataset.s);
+  setState(b.dataset.s);
+}));
+window.addEventListener('hashchange', () => setState(readHash()));
+function readHash(){ const h = (location.hash || '').replace('#', '').split('&')[0]; return KEY[h] ? h : 'd30'; }
+
+function setState(k){
+  stKey = k; const D = DAYS[KEY[k]];
+  document.querySelectorAll('.seg button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.s === k));
+  const day = $('day'); day.querySelector('span').textContent = D.label; day.classList.toggle('live', k === 'walk');
+  $('nef').innerHTML = D.nef;
+  chipsEl.querySelectorAll('.chip').forEach((c) => {
+    const a = D.a[c.dataset.k];
+    c.className = 'chip ' + a.st + (c.dataset.k === 'hareket' ? ' wide' : '');
+    c.querySelector('.v').textContent = a.v; c.querySelector('.w').textContent = WORD[a.st];
+    c.setAttribute('aria-label', `${NAME[c.dataset.k]}: ${a.v}, ${WORD[a.st]}`);
+  });
+  const lit = AREAS.filter((k2) => ['up', 'live'].includes(D.a[k2].st)).map((k2) => NAME[k2]);
+  $('stage').setAttribute('aria-label', 'Işıktan bir baş. ' + (lit.length ? 'Yanan bölgeler: ' + lit.join(', ') + '.' : 'Bütün bölgeler sakin; başlangıç ölçüldü.') + ` Gözler 20 saniyede ${D.blinks} kez kırpıyor.`);
+  select(sel, true);
+  if (GL) GL.onState();
+}
+function select(k, silent){
+  sel = k; const D = DAYS[KEY[stKey]];
+  chipsEl.classList.toggle('focus', !!k);
+  chipsEl.querySelectorAll('.chip').forEach((c) => c.setAttribute('aria-pressed', c.dataset.k === k));
+  const det = $('detail');
+  if (k) { $('detailIn').innerHTML = D.a[k].d; det.classList.add('open'); }
+  else det.classList.remove('open');
+  if (GL && !silent) GL.onState();
+}
+
+/* ================= SDF: baş ================= */
+const L3 = (x, y, z) => Math.sqrt(x * x + y * y + z * z);
+function el(x, y, z, a, b, c){ const k0 = L3(x / a, y / b, z / c), k1 = L3(x / (a * a), y / (b * b), z / (c * c)); return k1 < 1e-9 ? -Math.min(a, b, c) : k0 * (k0 - 1) / k1; }
+function smin(a, b, k){ const h = Math.max(k - Math.abs(a - b), 0) / k; return Math.min(a, b) - h * h * k * 0.25; }
+function smax(a, b, k){ const h = Math.max(k - Math.abs(a - b), 0) / k; return Math.max(a, b) + h * h * k * 0.25; }
+function cone(x, y, z, ax, ay, az, bx, by, bz, ra, rb){
+  const px = x - ax, py = y - ay, pz = z - az, dx = bx - ax, dy = by - ay, dz = bz - az;
+  const t = Math.max(0, Math.min(1, (px * dx + py * dy + pz * dz) / (dx * dx + dy * dy + dz * dz)));
+  return L3(px - dx * t, py - dy * t, pz - dz * t) - (ra + (rb - ra) * t);
+}
+const EYE = { x: 0.305, y: 0.0, z: 0.64, r: 0.12 };
+function ear(ax, y, z){
+  const px = ax - 0.672, py = y + 0.16, pz = z + 0.16;
+  const c = 0.96, s = 0.28; const qy = c * py - s * pz, qz = s * py + c * pz;
+  let d = el(px - 0.018, qy, qz, 0.04, 0.24, 0.14);
+  d = smax(d, -el(px - 0.056, qy + 0.02, qz + 0.012, 0.044, 0.15, 0.082), 0.025);
+  return d;
+}
+/* burun sırtı: A (kök) → B (uç üstü) doğrusu boyunca, yanları ~30° açıyla geriye inen yuvarlatılmış kama */
+const NA = [0.12, 0.83], NB = [-0.3, 1.085];
+const NDY = NB[0] - NA[0], NDZ = NB[1] - NA[1], NLEN = Math.hypot(NDY, NDZ), NUY = NDY / NLEN, NUZ = NDZ / NLEN;
+const NFY = NUZ, NFZ = -NUY; // öne bakan dik
+function noseWedge(x, y, z){
+  const along = (y - NA[0]) * NUY + (z - NA[1]) * NUZ;
+  const t = Math.max(0, Math.min(NLEN, along));
+  const ry = NA[0] + NUY * t, rz = NA[1] + NUZ * t;
+  const qf = (y - ry) * NFY + (z - rz) * NFZ + 0.012 + 0.02 * (t / NLEN);
+  const u = t / NLEN;
+  let w = smax(x * 0.87 + qf * 0.5, -x * 0.87 + qf * 0.5, 0.04 + 0.025 * u);
+  w = smax(w, -qf - (0.1 + 0.08 * u), 0.05);   // kama derinliği sınırlı: burun yüzden bir sırt olarak çıkar, yanağı doldurmaz
+  return smax(smax(w, -along - 0.02, 0.12), along - NLEN - 0.01, 0.05);
+}
+function sdHead(x, y, z){
+  const ax = Math.abs(x);
+  let d = el(x, y - 0.3, z + 0.1, 0.68, 0.76, 0.9);                         // kafatası
+  d = smin(d, el(x, y - 0.2, z + 0.45, 0.58, 0.58, 0.56), 0.3);             // ense çıkıntısı
+  d = smin(d, el(x, y - 0.34, z - 0.28, 0.56, 0.56, 0.54), 0.22);           // alın
+  d = smin(d, el(x, y + 0.08, z - 0.28, 0.57, 0.3, 0.46), 0.22);             // elmacık hattı
+  d = smin(d, el(x, y + 0.42, z - 0.38, 0.42, 0.33, 0.52), 0.22);           // üst çene
+  d = smin(d, el(x, y + 0.74, z + 0.02, 0.54, 0.52, 0.62), 0.26);           // alt/boyun başı
+  d = smin(d, el(ax - 0.44, y + 0.1, z - 0.47, 0.18, 0.1, 0.19), 0.16);     // elmacık
+  d = smax(d, -el(ax - 0.72, y - 0.25, z - 0.38, 0.1, 0.17, 0.16), 0.14);   // şakak
+  d = smin(d, el(ax - 0.27, y - 0.16, z - 0.725, 0.23, 0.06, 0.1), 0.16);   // kaş kemeri
+  d = smax(d, -el(ax - EYE.x, y - 0.012, z - 0.875, 0.19, 0.12, 0.2), 0.1); // göz çukuru
+  d = smin(d, L3(ax - EYE.x, y - EYE.y, z - EYE.z) - EYE.r, 0.02);          // göz küresi
+  let n = noseWedge(x, y, z);                                               // burun: sırttan tabana genişleyen kama
+  n = smin(n, L3(x, y + 0.335, z - 1.045) - 0.058, 0.06);                   // burun ucu
+  n = smin(n, el(ax - 0.074, y + 0.395, z - 0.945, 0.05, 0.045, 0.06), 0.06); // kanatlar
+  d = smin(d, n, 0.05);
+  d = smin(d, ear(ax, y, z), 0.045);
+  return d;
+}
+
+const sm = (a, b, x) => { const t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+/* saç bölgesi: alında saç çizgisi, şakaktan kulak üstüne, enseye iner */
+function hairLine(x, z){
+  const ax = Math.abs(x);
+  const front = 0.66 - 0.28 * Math.pow(Math.min(1, ax / 0.6), 2);
+  const side = 0.2;
+  const back = side + (-0.14 - side) * sm(-0.32, -0.8, z);
+  return z < -0.32 ? back : side + (front - side) * sm(0.16, 0.46, z);
+}
+function hairAmt(x, y, z){
+  const yl = hairLine(x, z);
+  let m = sm(yl - 0.01, yl + 0.1, y);
+  if (Math.abs(x) > 0.5 && z > -0.42 && z < 0.22) m *= sm(0.2, 0.32, y); // kulak çevresi açık
+  return m;
+}
+
+function cutAt(z){ const t = sm(-0.1, 0.75, z); return -0.74 + (-0.52 + 0.74) * t; }
+
+/* göz yuvası çerçevesi (baş koordinatı) */
+function eyeFrame(side){ // side: -1 yakın(kamera tarafı), +1 uzak
+  const E = [side * EYE.x, EYE.y, EYE.z + EYE.r];
+  let f = [side * 0.13, 0.02, 1]; const fl = L3(...f); f = f.map((v) => v / fl);
+  // ex: göz köşesinden dışa (baş x yönünde, işaretli)
+  let ex = [f[2], 0, -f[0]]; const el2 = L3(...ex); ex = ex.map((v) => v / el2);
+  const ey = [f[1] * ex[2] - f[2] * ex[1], f[2] * ex[0] - f[0] * ex[2], f[0] * ex[1] - f[1] * ex[0]];
+  return { E, f, ex, ey };
+}
+const LID_W = 0.128;
+function lidU(lx){ const u = Math.max(-1, Math.min(1, lx / LID_W)); const sk = u + 0.22 * (1 - u * u); return 0.043 * Math.pow(Math.max(0, 1 - sk * sk), 0.7) + 0.01 * u; }
+function lidL(lx){ const u = Math.max(-1, Math.min(1, lx / LID_W)); const sk = u - 0.12 * (1 - u * u); return -0.034 * Math.pow(Math.max(0, 1 - sk * sk), 0.9) + 0.01 * u; }
+
+/* ================= GL ================= */
+let GL = null;
+function initGL(){
+  if (!window.THREE) throw new Error('three yok');
+  const T = THREE;
+  const cv = $('cv'), stage = $('stage');
+  const renderer = new T.WebGLRenderer({ canvas: cv, antialias: false, alpha: false, powerPreference: 'high-performance' });
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  renderer.setPixelRatio(dpr);
+  const scene = new T.Scene();
+  const cam = new T.PerspectiveCamera(16, 1, 1, 30);
+  const head = new T.Group(); scene.add(head);
+
+  let seed = 7;
+  const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  const gauss = () => { let u = 0, v = 0; while (!u) u = rnd(); v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(6.2831853 * v); };
+
+  /* ---------- kabuk örnekleme ---------- */
+  const frames = [eyeFrame(-1), eyeFrame(1)];
+  function inAperture(x, y, z, pad){
+    for (const F of frames){
+      const dx = x - F.E[0], dy = y - F.E[1], dz = z - F.E[2];
+      if (Math.abs(dx) > 0.2 || Math.abs(dy) > 0.15) continue;
+      const lx = dx * F.ex[0] + dy * F.ex[1] + dz * F.ex[2] * 1; const ly = dx * F.ey[0] + dy * F.ey[1] + dz * F.ey[2];
+      const lz = dx * F.f[0] + dy * F.f[1] + dz * F.f[2];
+      const slx = lx * Math.sign(F.E[0]);
+      if (lz > -0.09 && Math.abs(lx) < LID_W + pad && ly < lidU(slx) + pad && ly > lidL(slx) - pad) return true;
+    }
+    return false;
+  }
+  const t0 = performance.now();
+  const N_SHELL = 40000;
+  const sPos = new Float32Array(N_SHELL * 3), sNor = new Float32Array(N_SHELL * 3), sCur = new Float32Array(N_SHELL), sSeed = new Float32Array(N_SHELL), sHair = new Float32Array(N_SHELL);
+  const YAW = parseFloat(qs.get('yaw')) || 0.5;
+  const camDirLocal = [-Math.sin(YAW), 0.12, Math.cos(YAW)];
+  let ns = 0, tries = 0; const h = 0.012, hc = 0.035, band = 0.035;
+  const HAIRON = qs.get('hair') !== '0';
+  function gradAt(x, y, z){ const gx = sdHead(x + h, y, z) - sdHead(x - h, y, z), gy = sdHead(x, y + h, z) - sdHead(x, y - h, z), gz = sdHead(x, y, z + h) - sdHead(x, y, z - h); const l = L3(gx, gy, gz) || 1; return [gx / l, gy / l, gz / l]; }
+  // kaba ızgara: SDF'yi 0,04 adımla bir kez hesapla; adayların çoğu ucuz ara değerle elenir
+  const GX0 = -0.9, GY0 = -0.9, GZ0 = -1.15, GS = 0.04, NX = 46, NY = 55, NZ = 60;
+  const grid = new Float32Array(NX * NY * NZ);
+  for (let k = 0; k < NZ; k++) for (let j = 0; j < NY; j++) for (let i = 0; i < NX; i++) grid[(k * NY + j) * NX + i] = sdHead(GX0 + i * GS, GY0 + j * GS, GZ0 + k * GS);
+  function gi(x, y, z){
+    const fx = (x - GX0) / GS, fy = (y - GY0) / GS, fz = (z - GZ0) / GS;
+    const i = Math.min(NX - 2, Math.max(0, fx | 0)), j = Math.min(NY - 2, Math.max(0, fy | 0)), k = Math.min(NZ - 2, Math.max(0, fz | 0));
+    const tx = fx - i, ty = fy - j, tz = fz - k, o = (k * NY + j) * NX + i, sy = NX, sz = NX * NY;
+    const c00 = grid[o] + (grid[o + 1] - grid[o]) * tx, c10 = grid[o + sy] + (grid[o + sy + 1] - grid[o + sy]) * tx;
+    const c01 = grid[o + sz] + (grid[o + sz + 1] - grid[o + sz]) * tx, c11 = grid[o + sz + sy] + (grid[o + sz + sy + 1] - grid[o + sz + sy]) * tx;
+    const c0 = c00 + (c10 - c00) * ty, c1 = c01 + (c11 - c01) * ty; return c0 + (c1 - c0) * tz;
+  }
+  while (ns < N_SHELL - 900 && tries < 4e6){
+    tries++;
+    let x = (rnd() * 2 - 1) * 0.86, y = -0.86 + rnd() * 2.08, z = -1.1 + rnd() * 2.26;
+    if (Math.abs(gi(x, y, z)) > band + 0.03) continue;
+    let d = sdHead(x, y, z); if (Math.abs(d) > band) continue;
+    const e = 0.04; const ngx = gi(x + e, y, z) - gi(x - e, y, z), ngy = gi(x, y + e, z) - gi(x, y - e, z), ngz = gi(x, y, z + e) - gi(x, y, z - e);
+    const nl = L3(ngx, ngy, ngz) || 1;
+    const facing = (ngx * camDirLocal[0] + ngy * camDirLocal[1] + ngz * camDirLocal[2]) / nl;
+    const cutY = cutAt(z);
+    if (y < cutY - 0.03) continue;
+    const face = Math.min(1, Math.max(0, (z - 0.3) / 0.35)) * Math.min(1, Math.max(0, (0.62 - y) / 0.3));
+    const hm = HAIRON ? hairAmt(x, y, z) : 0;
+    const earz = Math.abs(x) > 0.6 && y > -0.45 && y < 0.15 && z > -0.4 && z < 0.12 ? 1 : 0;
+    const w = 0.36 * (1 + 2.4 * face + 1.6 * earz) * (1 - 0.55 * hm) * (facing < -0.2 ? 0.3 : 1);
+    if (rnd() > w * 1.25) continue;
+    let g = gradAt(x, y, z); x -= g[0] * d; y -= g[1] * d; z -= g[2] * d; d = sdHead(x, y, z);
+    if (Math.abs(d) > 0.003){ g = gradAt(x, y, z); x -= g[0] * d; y -= g[1] * d; z -= g[2] * d; d = sdHead(x, y, z); }
+    if (Math.abs(d) > 0.005 || y < cutY) continue;
+    if (inAperture(x, y, z, 0.004)) continue;
+    const lap = (sdHead(x + hc, y, z) + sdHead(x - hc, y, z) + sdHead(x, y + hc, z) + sdHead(x, y - hc, z) + sdHead(x, y, z + hc) + sdHead(x, y, z - hc) - 6 * d) / (hc * hc);
+    const wc = 0.72 + 0.5 * Math.min(1, Math.max(0, (lap - 3) / 10)) + 0.2 * Math.min(1, Math.max(0, (-lap - 1) / 6));
+    if (rnd() > wc / 1.42) continue;
+    sPos.set([x, y, z], ns * 3); sNor.set(g, ns * 3); sCur[ns] = lap; sSeed[ns] = rnd(); sHair[ns] = hm; ns++;
+  }
+  /* kaşlar: yüzeye oturan ince ışık şeridi */
+  for (const sd of [-1, 1]){
+    for (let i = 0; i < 420; i++){
+      const t = Math.pow(rnd(), 0.9);
+      const th = 0.016 * (1 - 0.65 * t) + 0.004;
+      let x = sd * (0.1 + 0.37 * t), y = 0.148 + 0.052 * Math.sin(Math.PI * (0.12 + 0.8 * t)) - 0.03 * t + gauss() * th * 0.55;
+      let z = 1.0, dd = 1;
+      for (let it = 0; it < 60 && dd > 0.0008; it++){ dd = sdHead(x, y, z); z -= Math.max(dd, 0.003); }
+      if (ns >= N_SHELL) break;
+      const gx = sdHead(x + h, y, z) - sdHead(x - h, y, z), gy = sdHead(x, y + h, z) - sdHead(x, y - h, z), gz = sdHead(x, y, z + h) - sdHead(x, y, z - h); const gl = L3(gx, gy, gz) || 1;
+      sPos.set([x + gx / gl * 0.004, y + gy / gl * 0.004, z + gz / gl * 0.004], ns * 3); sNor.set([gx / gl, gy / gl, gz / gl], ns * 3); sCur[ns] = 14 + 8 * (1 - t); sSeed[ns] = rnd(); ns++;
+    }
+  }
+  /* saç: kafatasının üstünde yumuşak bir hacim; tutamlar bu hacmin yüzeyinde geriye taranır */
+  const HAIR = qs.get('hair') !== '0';
+  const Hs = { pos: [], nor: [], tan: [], cur: [], seed: [] };
+  function grad(f, x, y, z){ const gx = f(x + h, y, z) - f(x - h, y, z), gy = f(x, y + h, z) - f(x, y - h, z), gz = f(x, y, z + h) - f(x, y, z - h); const l = L3(gx, gy, gz) || 1; return [gx / l, gy / l, gz / l]; }
+  function sdHair(x, y, z){ const m = hairAmt(x, y, z); return sdHead(x, y, z) - (0.01 + 0.075 * sm(0.0, 1.0, y + 0.1) + 0.012) * m; }
+  if (HAIR){
+    const NG = 150; let made = 0, guard = 0;
+    while (made < NG && guard++ < 40000){
+      const i = Math.floor(rnd() * ns); let x = sPos[i * 3], y = sPos[i * 3 + 1], z = sPos[i * 3 + 2];
+      if (hairAmt(x, y, z) < 0.6) continue;
+      made++;
+      let dd = sdHair(x, y, z); let n = grad(sdHair, x, y, z); x -= n[0] * dd; y -= n[1] * dd; z -= n[2] * dd;
+      const L = 0.26 + rnd() * 0.4, st = 0.0085, curl = (rnd() - 0.5) * 0.6;
+      const path = [];
+      let s2 = 0;
+      while (s2 < L){
+        n = grad(sdHair, x, y, z);
+        const back = sm(-0.1, -0.85, z), side = Math.min(1, Math.abs(n[0]) * 1.3);
+        let d = [curl * 0.25 * Math.sign(x || 1) + 0.35 * back * Math.sign(x || 1), (0.2 - 0.6 * side) * (1 - back) - 0.8 * back, -1 * (1 - back) - 0.45 * back];
+        const dn = d[0] * n[0] + d[1] * n[1] + d[2] * n[2]; d = [d[0] - n[0] * dn, d[1] - n[1] * dn, d[2] - n[2] * dn];
+        const dl = L3(...d) || 1; d = d.map((v) => v / dl);
+        x += d[0] * st; y += d[1] * st; z += d[2] * st;
+        dd = sdHair(x, y, z); x -= n[0] * dd; y -= n[1] * dd; z -= n[2] * dd;
+        s2 += st;
+        const m = hairAmt(x, y, z); if (m < 0.05) break;
+        path.push([x, y, z, n, d, s2 / L, m]);
+      }
+      // tutam: rehber telin çevresinde birkaç tel, uca doğru birleşir
+      const K = 5, sd = rnd();
+      for (let k = 0; k < K; k++){
+        const off = (k / (K - 1) - 0.5) * 0.042 + gauss() * 0.004, lift = gauss() * 0.004, start = Math.floor(rnd() * 4);
+        for (let q = start; q < path.length; q++){
+          const [px, py, pz, nn, dd2, u, m] = path[q];
+          const bx = nn[1] * dd2[2] - nn[2] * dd2[1], by = nn[2] * dd2[0] - nn[0] * dd2[2], bz = nn[0] * dd2[1] - nn[1] * dd2[0];
+          const o = off * (1 - 0.75 * u);
+          Hs.pos.push(px + bx * o + nn[0] * lift, py + by * o + nn[1] * lift, pz + bz * o + nn[2] * lift);
+          Hs.nor.push(nn[0], nn[1], nn[2]); Hs.tan.push(dd2[0], dd2[1], dd2[2]);
+          Hs.cur.push(Math.sin(Math.min(1, u) * 3.1416) * Math.min(1, m * 1.4)); Hs.seed.push(sd);
+        }
+      }
+    }
+  }
+  const tShell = performance.now() - t0;
+
+  /* ---------- bölgeler ---------- */
+  // 0 goz (ense/görsel), 1 dikkat (alın arkası), 2 nefes (beyin sapı), 3 ruh (limbik yay), 4 hareket (tepe şeridi)
+  const R = { pos: [], reg: [], seed: [], side: [], kind: [], size: [], w: [] };
+  function rp(reg, x, y, z, kind, size, w){ R.pos.push(x, y, z); R.reg.push(reg); R.seed.push(rnd()); R.side.push(x < 0 ? 0 : 1); R.kind.push(kind); R.size.push(size); R.w.push(w); }
+  const wq = (q) => 0.28 + 0.72 * Math.exp(-q * 0.6);
+  const ANCHOR = [];
+  // Göz: iki lob, ense
+  for (let i = 0; i < 1300; i++){ const s = rnd() < 0.5 ? -1 : 1; const a = gauss(), b = gauss(), c = gauss(); rp(0, s * 0.125 + a * 0.07, 0.3 + b * 0.07, -0.79 + c * 0.04, 0, 1, wq(a * a + b * b + c * c)); }
+  ANCHOR[0] = [0, 0.3, -0.8];
+  // Dikkat: alın arkası, iki lob
+  for (let i = 0; i < 1300; i++){ const s = rnd() < 0.5 ? -1 : 1; const a = gauss(), b = gauss(), c = gauss(); rp(1, s * 0.15 + a * 0.075, 0.5 + b * 0.07, 0.5 + c * 0.04, 0, 1, wq(a * a + b * b + c * c)); }
+  ANCHOR[1] = [0, 0.5, 0.5];
+  // Nefes: beyin sapı sütunu
+  for (let i = 0; i < 1100; i++){ const t = rnd(); const y = -0.08 - t * 0.56; const w = 0.036 + 0.026 * Math.exp(-Math.pow((t - 0.22) / 0.16, 2)); const a = gauss(), c = gauss(); rp(2, a * w, y + gauss() * 0.015, -0.38 - t * 0.09 + c * w * 0.8, 0, 1, wq(a * a + c * c) * (1 - 0.5 * t)); }
+  ANCHOR[2] = [0, -0.24, -0.41];
+  // Ruh hâli: limbik C yayı (iki yarıküre)
+  for (let i = 0; i < 1300; i++){ const s = rnd() < 0.5 ? -1 : 1; const an = -0.12 * Math.PI + rnd() * 1.18 * Math.PI; const a = gauss(), b = gauss(), c = gauss(); rp(3, s * 0.09 + a * 0.02, 0.15 + 0.16 * Math.sin(an) + b * 0.022, -0.1 + 0.25 * Math.cos(an) + c * 0.022, 0, 1, wq(a * a + b * b + c * c)); }
+  ANCHOR[3] = [0, 0.2, -0.1];
+  // Hareket: tepe şeridi
+  const strip = (a) => [0.56 * Math.sin(a), 0.42 + 0.58 * Math.cos(a), -0.1 + 0.14 * (1 - Math.cos(a))];
+  for (let i = 0; i < 1300; i++){ const an = -1.1 + rnd() * 1.95; const p = strip(an); const a = gauss(), b = gauss(); rp(4, p[0] + a * 0.026, p[1] + a * 0.02, p[2] + b * 0.038, 0, 1, wq(a * a + b * b)); }
+  ANCHOR[4] = strip(-0.15);
+  // haleler
+  const HALO = [
+    [0, [[-0.13, 0.3, -0.79], [0.13, 0.3, -0.79], [0, 0.3, -0.8]], 0.5],
+    [1, [[-0.15, 0.5, 0.5], [0.15, 0.5, 0.5], [0, 0.5, 0.52]], 0.5],
+    [2, [[0, -0.16, -0.39], [0, -0.36, -0.42]], 0.36],
+    [3, [[0, 0.31, -0.1], [0, 0.2, 0.12], [0, 0.18, -0.32]], 0.36],
+    [4, [strip(-0.85), strip(-0.3), strip(0.25), strip(0.7)], 0.4],
+  ];
+  for (const [reg, pts, sz] of HALO) for (const p of pts) rp(reg, p[0], p[1], p[2], 1, sz, 1);
+
+  /* ---------- akış yolları (yürürken) ----------
+     Hareket şeridinden başın yanından enseye inen kanallar. Her adımda bir taraf ateşler (sol/sağ ayak sırayla). */
+  const F = { pos: [], s: [], side: [], seed: [] };
+  const bez = (p0, p1, p2, p3, t) => { const u = 1 - t; return [0, 1, 2].map((i) => u * u * u * p0[i] + 3 * u * u * t * p1[i] + 3 * u * t * t * p2[i] + t * t * t * p3[i]); };
+  // görünen (kameraya bakan) yarıda dört şerit; komşu şeritler sırayla ateşler (sol/sağ adım)
+  [-1.02, -0.8, -0.58, -0.36].forEach((a, lane) => {
+    const p0 = strip(a), side = lane % 2, sx = -1;
+    const p1 = [p0[0] * 1.04 + sx * 0.04, 0.32, -0.3 - 0.06 * lane];
+    const p2 = [sx * (0.3 + 0.03 * lane), -0.22, -0.52 - 0.03 * lane];
+    const p3 = [sx * 0.04, -0.9, -0.5];
+    for (let i = 0; i < 700; i++){ const t = Math.pow(rnd(), 0.9); const p = bez(p0, p1, p2, p3, t); const j = 0.006 + 0.008 * t; F.pos.push(p[0] + gauss() * j, p[1] + gauss() * j, p[2] + gauss() * j); F.s.push(t); F.side.push(side); F.seed.push(rnd()); }
+  });
+
+  /* ---------- gözler ---------- */
+  const E = { pos: [], pos2: [], lid: [], col: [], kind: [], size: [], nor: [] };
+  // kind: 0 iris, 1 üst kapak çizgisi, 2 alt kapak, 3 sklera, 4 göz bebeği dolgusu (açık tema), 5 ışık yansıması
+  function addEye(side){
+    const Fm = frames[side < 0 ? 0 : 1];
+    const C = [side * EYE.x, EYE.y, EYE.z];
+    let g = [camDirLocal[0] * 0.55, 0.05, 1]; const gl = L3(...g); g = g.map((v) => v / gl);
+    let u = [g[2], 0, -g[0]]; const ul = L3(...u); u = u.map((v) => v / ul);
+    const v = [g[1] * u[2] - g[2] * u[1], g[2] * u[0] - g[0] * u[2], g[0] * u[1] - g[1] * u[0]];
+    const rr = EYE.r + 0.003;
+    const toLid = (P) => { const dx = P[0] - Fm.E[0], dy = P[1] - Fm.E[1], dz = P[2] - Fm.E[2]; return [(dx * Fm.ex[0] + dy * Fm.ex[1] + dz * Fm.ex[2]) * side, dx * Fm.ey[0] + dy * Fm.ey[1] + dz * Fm.ey[2]]; };
+    const onBall = (ang, phi, rad) => { const s = Math.sin(ang), c = Math.cos(ang); const d = [0, 1, 2].map((i) => g[i] * c + (u[i] * Math.cos(phi) + v[i] * Math.sin(phi)) * s); return [0, 1, 2].map((i) => C[i] + d[i] * (rad || rr)); };
+    const lidPt = (lx, ly, rad) => { const Q = [0, 1, 2].map((k) => Fm.E[k] + Fm.ex[k] * lx * side + Fm.ey[k] * ly); const d = [0, 1, 2].map((k) => Q[k] - C[k]); const l = L3(...d); return [0, 1, 2].map((k) => C[k] + d[k] / l * rad); };
+    const IR = Math.asin(0.05 / EYE.r);
+    const push = (P, kind, col, size, P2) => { const [lx, ly] = toLid(P); E.pos.push(...P); E.pos2.push(...(P2 || P)); E.lid.push(ly, lidU(lx), lidL(lx)); E.col.push(...col); E.kind.push(kind); E.size.push(size); const n = [P[0] - C[0], P[1] - C[1], P[2] - C[2]]; const nl = L3(...n); E.nor.push(n[0] / nl, n[1] / nl, n[2] / nl); };
+    // iris: halkalar + lifler
+    const rings = [[0.37, 56, 0.8], [0.55, 50, 0.45], [0.72, 64, 0.5], [0.97, 110, 0.75]];
+    for (const [rf, n, b] of rings) for (let i = 0; i < n; i++){ const phi = (i / n) * 6.2832 + rnd() * 0.04; const rf2 = rf + gauss() * 0.01; push(onBall(IR * rf2, phi), 0, [rf2, b, 0], 0.95, null); }
+    for (let i = 0; i < 300; i++){ const phi = Math.floor(rnd() * 48) / 48 * 6.2832 + gauss() * 0.02; const rf2 = 0.4 + rnd() * 0.55; push(onBall(IR * rf2, phi), 0, [rf2, 0.5, 0], 0.8, null); }
+    for (let i = 0; i < 80; i++){ const rf2 = Math.sqrt(rnd()) * 0.34; const phi = rnd() * 6.2832; const P = onBall(IR * rf2, phi); push(P, 4, [0, 1, 0], 1.25, null); }
+    push(onBall(IR * 0.24, 2.35, rr + 0.002), 5, [1, 1, 0], 2.0, null);
+    // sklera
+    for (let i = 0; i < 220; i++){ const ang = IR * (1.08 + rnd() * 1.7); const phi = rnd() * 6.2832; push(onBall(ang, phi), 3, [0, 0.35, 0], 0.85, null); }
+    // kapak çizgileri (göz küresine sarılı)
+    for (let i = 0; i < 170; i++){
+      const lx = (rnd() * 2 - 1) * LID_W * 1.02; const up = lidU(lx), lo = lidL(lx); const jt = gauss() * 0.002;
+      const edge = 1 - Math.pow(Math.abs(lx) / LID_W, 4);
+      push(lidPt(lx, up + jt + 0.003, EYE.r + 0.012), 1, [0, 0.1 + 0.42 * edge, 0], 0.9, lidPt(lx, lo + 0.004 + jt, EYE.r + 0.01));
+      if (i % 3 === 0) push(lidPt(lx, lo - 0.002 + jt, EYE.r + 0.008), 2, [0, 0.5, 0], 0.85, null);
+    }
+  }
+  addEye(-1); addEye(1);
+
+  /* ---------- malzemeler ---------- */
+  const common = `
+    uniform float uTime, uPx, uRef, uLight, uGain, uBreath;
+    // burundan yukarısı: yüzün önünde kesim burun tabanının hemen altında, enseye doğru iner
+    float cutAt(float z){ return mix(-0.74, -0.52, smoothstep(-0.1, 0.75, z)); }
+    float cutFade(vec3 p){ float cy = cutAt(p.z); return smoothstep(cy, cy + mix(0.3, 0.14, smoothstep(0.3, 0.8, p.z)), p.y); }
+  `;
+  const fragDot = `
+    varying vec3 vCol; varying float vA; uniform float uLight; varying float vSoft;
+    void main(){
+      vec2 c = gl_PointCoord - 0.5; float d = length(c) * 2.0;
+      float a = mix(smoothstep(1.0, 0.15, d), exp(-d * d * 4.5) * (1.0 - smoothstep(0.85, 1.0, d)), vSoft) * vA;
+      if (a < 0.002) discard;
+      gl_FragColor = vec4(uLight > 0.5 ? (vec3(1.0) - vCol) : vCol, a);
+    }`;
+  const shellMat = new T.ShaderMaterial({
+    uniforms: { uTime: { value: 0 }, uPx: { value: 1 }, uRef: { value: 8 }, uLight: { value: 0 }, uGain: { value: 1 }, uBreath: { value: 0 },
+      uKey: { value: new T.Vector3(0.2, 0.55, 0.81).normalize() }, uColA: { value: new T.Color() }, uColR: { value: new T.Color() }, uDim: { value: 1 } },
+    vertexShader: common + `
+      attribute float aCurv; attribute float aSeed; attribute float aHair;
+      uniform vec3 uKey, uColA, uColR; uniform float uDim;
+      varying vec3 vCol; varying float vA; varying float vSoft;
+      void main(){
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        vec3 n = normalize(normalMatrix * normal);
+        vec3 v = normalize(-mv.xyz);
+        float fc = dot(n, v);
+        float rim = pow(1.0 - clamp(abs(fc), 0.0, 1.0), 3.0);
+        float lam = max(dot(n, uKey), 0.0);
+        float front = smoothstep(-0.25, 0.2, fc);
+        float ridge = smoothstep(5.0, 18.0, aCurv);
+        float fill = max(dot(n, normalize(vec3(0.3, 0.1, 0.95))), 0.0);
+        float rimSide = 0.35 + 0.65 * smoothstep(-0.3, 0.5, n.x + 0.3 * n.y);
+        float key = pow(lam, 1.25);
+        // ışık yüzden gelir; kafatasının arkası karanlığa çözülür
+        float fore = smoothstep(-0.95, 0.55, position.z);
+        float top = smoothstep(0.2, 1.0, position.y) * smoothstep(-0.6, 0.2, position.z);
+        float faceZ = smoothstep(0.4, 0.75, position.z) * smoothstep(0.3, -0.05, position.y) * (1.0 - smoothstep(0.9, 1.0, position.z));
+        float I = 0.04 + 1.0 * key + 0.14 * fill + (0.25 + 0.55 * fore + 0.3 * top) * rim * rimSide * 1.2 * (1.0 - 0.75 * faceZ) + 0.3 * ridge * (0.4 + key) * (1.0 - 0.6 * faceZ);
+        I *= mix(0.08, 1.0, front);
+        I *= mix(0.3, 1.0, fore);
+        float dz = -mv.z;
+        float spark = step(0.997, aSeed) * 0.6;
+        I *= 0.86 + 0.14 * sin(uTime * 1.3 + aSeed * 40.0) + spark * (0.8 + 0.8 * sin(uTime * 2.2 + aSeed * 90.0));
+        vA = I * cutFade(position) * uGain * uDim * 0.46 * (1.0 - 0.8 * aHair);
+        vCol = mix(uColA, uColR, clamp(rim * 1.2 + 0.3 * spark, 0.0, 1.0));
+        vSoft = 0.0;
+        gl_PointSize = uPx * (0.95 + 0.4 * rim + 0.6 * spark) * (uRef / dz);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: fragDot, transparent: true, depthTest: true, depthWrite: false,
+  });
+  const regMat = new T.ShaderMaterial({
+    uniforms: { uTime: { value: 0 }, uPx: { value: 1 }, uRef: { value: 8 }, uLight: { value: 0 }, uGain: { value: 1 }, uBreath: { value: 0 }, uProj: { value: 1 },
+      uInt: { value: [0, 0, 0, 0, 0] }, uHalo: { value: [0, 0, 0, 0, 0] }, uLit: { value: [0, 0, 0, 0, 0] }, uCol: { value: [0, 1, 2, 3, 4].map(() => new T.Color()) }, uNeu: { value: new T.Color() }, uWalk: { value: 0 }, uCad: { value: 2 } },
+    vertexShader: common + `
+      attribute float aReg; attribute float aSeed; attribute float aSide; attribute float aKind; attribute float aSize; attribute float aW;
+      uniform float uInt[5]; uniform float uHalo[5]; uniform float uLit[5]; uniform vec3 uCol[5]; uniform vec3 uNeu; uniform float uProj, uWalk, uCad;
+      varying vec3 vCol; varying float vA; varying float vSoft;
+      void main(){
+        int r = int(aReg + 0.5);
+        float I = uInt[r]; float H = uHalo[r]; float lit = uLit[r];
+        vec3 p = position;
+        float ph = aSeed * 6.2832;
+        p += vec3(sin(uTime * 0.55 + ph), cos(uTime * 0.47 + ph * 1.7), sin(uTime * 0.39 + ph * 2.3)) * 0.012 * (1.0 - aKind);
+        vec4 mv = modelViewMatrix * vec4(p, 1.0);
+        float dz = -mv.z;
+        float beat = 1.0;
+        if (r == 2) beat = 0.85 + 0.15 * uBreath;
+        if (r == 4) { float ph2 = fract((uTime * uCad - aSide) * 0.5); beat = mix(1.0, 0.75 + 1.1 * exp(-ph2 * 7.0), uWalk); }
+        // sönük bölge: rengi soluk, kıpırtısız, küçük noktalı bir takımyıldız; yanınca doygun ve canlı
+        vCol = mix(uNeu, uCol[r], 0.4 + 0.6 * lit);
+        vec3 hot = mix(vec3(1.0), uCol[r], uLight);
+        if (aKind < 0.5) vCol = mix(vCol, hot, lit * 0.55 * aW * aW * aW);
+        if (aKind < 0.5) {
+          float tw = mix(1.0, 0.75 + 0.25 * sin(uTime * 2.1 + ph * 3.0), lit);
+          vA = I * tw * beat * uGain * mix(0.55, 0.8, lit) * mix(0.6 + 0.4 * aW, aW, lit);
+          vSoft = 0.0;
+          gl_PointSize = uPx * (0.85 + 0.45 * lit + 0.4 * I) * (0.8 + 0.6 * aW) * (uRef / dz);
+        } else {
+          vA = H * beat * mix(0.12, 0.26, lit) * uGain;
+          vSoft = 1.0;
+          gl_PointSize = aSize * uProj / dz;
+        }
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: fragDot, transparent: true, depthTest: false, depthWrite: false,
+  });
+  const flowMat = new T.ShaderMaterial({
+    uniforms: { uTime: { value: 0 }, uPx: { value: 1 }, uRef: { value: 8 }, uLight: { value: 0 }, uGain: { value: 1 }, uBreath: { value: 0 }, uWalk: { value: 0 }, uCad: { value: 2 }, uCol: { value: new T.Color() }, uHot: { value: new T.Color() } },
+    vertexShader: common + `
+      attribute float aS; attribute float aSide; attribute float aSeed;
+      uniform float uWalk, uCad; uniform vec3 uCol, uHot;
+      varying vec3 vCol; varying float vA; varying float vSoft;
+      void main(){
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        float dz = -mv.z;
+        // her taraf iki adımda bir ateşler; paket uzun kuyrukla aşağı akar
+        float ph = fract((uTime * uCad - aSide) * 0.5);
+        float head = ph * 1.3 - 0.1;
+        float g = exp(-pow((aS - head) / 0.045, 2.0));
+        float tr = aS < head ? exp(-(head - aS) / 0.22) * 0.7 : 0.0;
+        float far = smoothstep(0.35, -0.35, (modelMatrix * vec4(position, 1.0)).z) ;
+        float I = uWalk * (0.34 + g * 2.0 + tr * 1.2) * cutFade(position) * mix(1.0, 0.4, far);
+        I *= 0.8 + 0.2 * sin(uTime * 7.0 + aSeed * 40.0);
+        vA = I * uGain * 0.62;
+        vCol = mix(uCol, uHot, g * 0.7);
+        vSoft = 0.0;
+        gl_PointSize = uPx * (1.2 + 1.5 * g + 0.4 * tr) * (uRef / dz);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: fragDot, transparent: true, depthTest: false, depthWrite: false,
+  });
+  const eyeMat = new T.ShaderMaterial({
+    uniforms: { uTime: { value: 0 }, uPx: { value: 1 }, uRef: { value: 8 }, uLight: { value: 0 }, uGain: { value: 1 }, uBreath: { value: 0 }, uBlink: { value: 0 },
+      uI1: { value: new T.Color() }, uI2: { value: new T.Color() }, uLid: { value: new T.Color() }, uPup: { value: new T.Color() }, uHi: { value: new T.Color() }, uEyeI: { value: 1 } },
+    vertexShader: common + `
+      attribute vec3 aPos2; attribute vec3 aLid; attribute vec3 aCol; attribute float aKind; attribute float aSize; attribute vec3 aNor;
+      uniform float uBlink, uEyeI; uniform vec3 uI1, uI2, uLid, uPup, uHi;
+      varying vec3 vCol; varying float vA; varying float vSoft;
+      void main(){
+        vec3 p = mix(position, aPos2, aKind > 0.5 && aKind < 1.5 ? uBlink : 0.0);
+        vec4 mv = modelViewMatrix * vec4(p, 1.0);
+        float dz = -mv.z;
+        float up = mix(aLid.y, aLid.z + 0.002, uBlink);
+        float vis = smoothstep(up + 0.003, up - 0.002, aLid.x) * smoothstep(aLid.z - 0.003, aLid.z + 0.002, aLid.x);
+        float k = aKind; float a = 0.0; vec3 col = uLid; float sz = aSize;
+        vec3 nv = normalize(normalMatrix * aNor);
+        float fc = smoothstep(-0.1, 0.35, dot(nv, normalize(-mv.xyz))) * (0.55 + 0.45 * smoothstep(-0.2, 0.2, -position.x));
+        if (k < 0.5) { col = mix(uI1, uI2, smoothstep(0.35, 1.0, aCol.x)); a = (0.22 + 0.38 * aCol.y) * vis * uEyeI; }
+        else if (k < 1.5) { a = 0.95 * aCol.y; }
+        else if (k < 2.5) { a = 0.1 * (1.0 - uBlink * 0.6); }
+        else if (k < 3.5) { a = 0.22 * vis; }
+        else if (k < 4.5) { col = uPup; a = uLight * 0.9 * vis; }
+        else { col = uHi; a = (1.0 - uLight) * 1.0 * vis; sz = aSize; }
+        vA = a * uGain * 0.8 * fc;
+        vCol = col; vSoft = k > 4.5 ? 1.0 : 0.0;
+        gl_PointSize = uPx * sz * 1.25 * (uRef / dz);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: fragDot, transparent: true, depthTest: true, depthWrite: false,
+  });
+
+  function geo(attrs){ const g = new T.BufferGeometry(); for (const [k, [arr, n]] of Object.entries(attrs)) g.setAttribute(k, new T.BufferAttribute(arr instanceof Float32Array ? arr : new Float32Array(arr), n)); return g; }
+  const shellGeo = geo({ position: [sPos.subarray(0, ns * 3), 3], normal: [sNor.subarray(0, ns * 3), 3], aCurv: [sCur.subarray(0, ns), 1], aSeed: [sSeed.subarray(0, ns), 1], aHair: [sHair.subarray(0, ns), 1] });
+  const regGeo = geo({ position: [R.pos, 3], aReg: [R.reg, 1], aSeed: [R.seed, 1], aSide: [R.side, 1], aKind: [R.kind, 1], aSize: [R.size, 1], aW: [R.w, 1] });
+  const flowGeo = geo({ position: [F.pos, 3], aS: [F.s, 1], aSide: [F.side, 1], aSeed: [F.seed, 1] });
+  const eyeGeo = geo({ position: [E.pos, 3], aPos2: [E.pos2, 3], aLid: [E.lid, 3], aCol: [E.col, 3], aKind: [E.kind, 1], aSize: [E.size, 1], aNor: [E.nor, 3] });
+  /* derinlik maskesi: kabuk noktaları içeri itilip yalnız derinliğe yazılır; baş opak bir heykel gibi
+     davranır (arka yüz ve uzak göz burnun arkasında kalır), bölgeler ise içeriden görünmeye devam eder. */
+  const maskMat = new T.ShaderMaterial({
+    uniforms: { uPx: { value: 1 }, uRef: { value: 8 }, uTime: { value: 0 }, uLight: { value: 0 }, uGain: { value: 1 }, uBreath: { value: 0 } },
+    vertexShader: `uniform float uPx, uRef;
+      void main(){ vec4 mv = modelViewMatrix * vec4(position - normal * 0.028, 1.0); gl_PointSize = uPx * 4.6 * (uRef / -mv.z); gl_Position = projectionMatrix * mv; }`,
+    fragmentShader: `void main(){ vec2 c = gl_PointCoord - 0.5; if (dot(c, c) > 0.25) discard; gl_FragColor = vec4(0.0); }`,
+    colorWrite: false, depthWrite: true, depthTest: true, transparent: false,
+  });
+  const hairMat = new T.ShaderMaterial({
+    uniforms: { uTime: { value: 0 }, uPx: { value: 1 }, uRef: { value: 8 }, uLight: { value: 0 }, uGain: { value: 1 }, uBreath: { value: 0 },
+      uKey: shellMat.uniforms.uKey, uColA: { value: new T.Color() }, uColR: { value: new T.Color() } },
+    vertexShader: common + `
+      attribute float aCurv; attribute float aSeed; attribute vec3 aTan;
+      uniform vec3 uKey, uColA, uColR;
+      varying vec3 vCol; varying float vA; varying float vSoft;
+      void main(){
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        vec3 n = normalize(normalMatrix * normal);
+        vec3 t = normalize(normalMatrix * aTan);
+        vec3 v = normalize(-mv.xyz);
+        float fc = dot(n, v);
+        float rim = pow(1.0 - clamp(abs(fc), 0.0, 1.0), 2.2);
+        float key = pow(max(dot(n, uKey), 0.0), 1.1);
+        vec3 top = normalize(vec3(0.25, 0.95, 0.3));
+        vec3 hv = normalize(uKey + v); vec3 hv2 = normalize(top + v);
+        float th = dot(t, hv), th2 = dot(t, hv2);
+        float sheen = pow(sqrt(max(0.0, 1.0 - th * th)), 60.0) + 0.8 * pow(sqrt(max(0.0, 1.0 - th2 * th2)), 40.0);
+        key = max(key, 0.6 * pow(max(dot(n, top), 0.0), 1.5));
+        float fore = smoothstep(-0.95, 0.5, position.z);
+        float I = (0.1 + 0.55 * key + 1.1 * sheen * (0.4 + key) + 0.55 * rim) * mix(0.4, 1.0, fore) * smoothstep(-0.3, 0.15, fc);
+        I *= aCurv * (0.85 + 0.15 * sin(uTime * 0.8 + aSeed * 30.0));
+        vA = I * cutFade(position) * uGain * 0.42;
+        vCol = mix(uColA, uColR, clamp(rim + sheen * 0.6, 0.0, 1.0));
+        vSoft = 0.0;
+        gl_PointSize = uPx * 1.0 * (uRef / -mv.z);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: fragDot, transparent: true, depthTest: true, depthWrite: false,
+  });
+  const hairGeo = geo({ position: [Hs.pos, 3], normal: [Hs.nor, 3], aTan: [Hs.tan, 3], aCurv: [Hs.cur, 1], aSeed: [Hs.seed, 1] });
+  const mats = [shellMat, regMat, flowMat, eyeMat, maskMat, hairMat];
+  const objs = [new T.Points(shellGeo, maskMat), new T.Points(shellGeo, shellMat), new T.Points(hairGeo, hairMat), new T.Points(regGeo, regMat), new T.Points(flowGeo, flowMat), new T.Points(eyeGeo, eyeMat)];
+  objs.forEach((o, i) => { o.frustumCulled = false; o.renderOrder = i; head.add(o); });
+
+  /* ---------- tema ---------- */
+  let light = false;
+  const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  function applyTheme(){
+    light = !matchMedia('(prefers-color-scheme: dark)').matches;
+    const dt = document.documentElement.dataset.theme; if (dt === 'dark') light = false; if (dt === 'light') light = true;
+    renderer.setClearColor(new T.Color(css('--bg')), 1);
+    const add = { blending: T.AdditiveBlending };
+    for (const m of mats){
+      if (m === maskMat) continue;
+      if (light){ m.blending = T.CustomBlending; m.blendEquation = T.ReverseSubtractEquation; m.blendSrc = T.SrcAlphaFactor; m.blendDst = T.OneFactor; }
+      else { m.blending = T.AdditiveBlending; }
+      m.uniforms.uLight.value = light ? 1 : 0; m.needsUpdate = true;
+    }
+    shellMat.uniforms.uColA.value.set(light ? '#3d5566' : '#8fb4c8');
+    shellMat.uniforms.uColR.value.set(light ? '#0f3f52' : '#c9f3f8');
+    hairMat.uniforms.uColA.value.set(light ? '#26343f' : '#9db3c6'); hairMat.uniforms.uColR.value.set(light ? '#0b2a38' : '#d9eef5');
+    shellMat.uniforms.uGain.value = light ? 0.9 : 1.0;
+    regMat.uniforms.uGain.value = light ? 0.75 : 1.0;
+    AREAS.forEach((k, i) => regMat.uniforms.uCol.value[i].set(css('--r-' + k)));
+    regMat.uniforms.uNeu.value.set(light ? '#7d8b97' : '#aebdca');
+    flowMat.uniforms.uCol.value.set(css('--r-hareket')); flowMat.uniforms.uHot.value.set(light ? '#ff9d1f' : '#fff1d6');
+    flowMat.uniforms.uGain.value = light ? 0.6 : 1.0;
+    eyeMat.uniforms.uI1.value.set(css('--iris-1')); eyeMat.uniforms.uI2.value.set(css('--iris-2'));
+    eyeMat.uniforms.uLid.value.set(light ? '#20323f' : '#d7f1f6'); eyeMat.uniforms.uPup.value.set('#05090d'); eyeMat.uniforms.uHi.value.set('#ffffff');
+    draw();
+  }
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
+
+  /* ---------- boyut / kamera ---------- */
+  let W = 1, H = 1;
+  let baseYaw = YAW, basePitch = -0.05;
+  const DBGA = { front: 0, side: Math.PI / 2, back: Math.PI, far: -YAW, qc: YAW }[DBG];
+  if (DBGA !== undefined) baseYaw = DBGA;
+  const CAMD = 8;
+  function resize(){
+    const r = stage.getBoundingClientRect(); W = Math.max(1, r.width); H = Math.max(1, r.height);
+    renderer.setSize(W, H, false);
+    const asp = W / H; cam.aspect = asp;
+    const halfH = (DBG === 'qc' ? 0.55 : DBG ? 1.45 : 1.12) * Math.max(1, 0.8 / asp);
+    cam.fov = 2 * Math.atan(halfH / CAMD) * 180 / Math.PI;
+    const cy = DBG === 'qc' ? 0.02 : DBG ? 0.2 : 0.3;
+    const cx = DBG === 'qc' ? 0.42 : DBG ? 0 : -0.03; cam.position.set(cx, cy + (DBG ? 0 : 1.0), CAMD); cam.lookAt(cx, cy, 0);
+    cam.updateProjectionMatrix();
+    const pxh = H * dpr;
+    const proj = pxh / (2 * Math.tan(cam.fov * Math.PI / 360));
+    for (const m of mats){ m.uniforms.uPx.value = dpr * Math.min(1.25, Math.max(0.9, H / 380)); m.uniforms.uRef.value = CAMD; }
+    regMat.uniforms.uProj.value = proj;
+    draw();
+  }
+  new ResizeObserver(resize).observe(stage);
+
+  /* ---------- durum ---------- */
+  const cur = { int: [0, 0, 0, 0, 0], halo: [0, 0, 0, 0, 0], lit: [0, 0, 0, 0, 0], walk: 0 };
+  let tgt = { int: [0, 0, 0, 0, 0], halo: [0, 0, 0, 0, 0], lit: [0, 0, 0, 0, 0], walk: 0 };
+  let blinkT = 4, cadence = 2;
+  function computeTargets(){
+    const D = DAYS[KEY[stKey]];
+    const t = { int: [], halo: [], lit: [], walk: stKey === 'walk' ? 1 : 0 };
+    AREAS.forEach((k, i) => {
+      const st = D.a[k].st; const lit = st === 'up' || st === 'live';
+      let I = lit ? 1 : 0.9, Hh = lit ? 1 : 0.12;
+      if (sel){ if (sel === k){ if (!lit){ I = 0.85; Hh = 0.14; } } else { I *= 0.16; Hh *= 0.08; } }
+      t.int[i] = I; t.halo[i] = Hh; t.lit[i] = lit ? 1 : (sel === k ? 0.25 : 0);
+    });
+    tgt = t;
+    blinkT = 20 / Math.max(1, D.blinks);
+    const m = /([\d.]+)\s*adım\s*·\s*(\d+)\s*dk/.exec(DAYS.walk.a.hareket.v);
+    if (m){ const steps = parseFloat(m[1].replace(/\./g, '')), mins = parseFloat(m[2]); cadence = steps / (mins * 60); }
+    // etiketler
+    const anyLit = AREAS.some((k2) => ['up', 'live'].includes(D.a[k2].st));
+    labelsEl.querySelectorAll('.lb').forEach((l) => {
+      const k2 = l.dataset.k, st = D.a[k2].st, lit = st === 'up' || st === 'live';
+      const on = sel ? sel === k2 : (lit || !anyLit);
+      l.classList.toggle('on', on); l.classList.toggle('dim', !lit && sel !== k2);
+    });
+  }
+
+  /* ---------- döngü ---------- */
+  let tPrev = performance.now(), time = 0, blinkClock = -4.8, running = true;
+  const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
+  stage.addEventListener('pointermove', (e) => { const r = stage.getBoundingClientRect(); pointer.tx = ((e.clientX - r.left) / r.width - 0.5) * 2; pointer.ty = ((e.clientY - r.top) / r.height - 0.5) * 2; });
+  stage.addEventListener('pointerleave', () => { pointer.tx = 0; pointer.ty = 0; });
+  stage.addEventListener('click', (e) => {
+    const r = stage.getBoundingClientRect(); const mx = e.clientX - r.left, my = e.clientY - r.top;
+    let best = null, bd = 44;
+    AREAS.forEach((k, i) => { const s = proj(ANCHOR[i]); const d = Math.hypot(s[0] - mx, s[1] - my); if (d < bd){ bd = d; best = k; } });
+    select(best && best !== sel ? best : null);
+  });
+  const vtmp = new T.Vector3();
+  function proj(p){ vtmp.set(p[0], p[1], p[2]).applyMatrix4(head.matrixWorld).project(cam); return [(vtmp.x * 0.5 + 0.5) * W, (-vtmp.y * 0.5 + 0.5) * H]; }
+  const LBL_OFF = [[-6, -24], [18, -26], [-30, 18], [0, 0], [-14, -22]];
+  function blinkAt(tb){ // 0 açık, 1 kapalı
+    if (tb < 0 || tb > 0.22) return 0; if (tb < 0.07) return tb / 0.07; if (tb < 0.09) return 1; return 1 - (tb - 0.09) / 0.13;
+  }
+  function frame(now, still){
+    const dt = Math.min(0.5, Math.max(0, (now - tPrev) / 1000)); tPrev = now;
+    time += dt;
+    const k = still ? 1 : 1 - Math.exp(-dt * 4.5);
+    for (let i = 0; i < 5; i++){ cur.int[i] += (tgt.int[i] - cur.int[i]) * k; cur.halo[i] += (tgt.halo[i] - cur.halo[i]) * k; cur.lit[i] += (tgt.lit[i] - cur.lit[i]) * k; }
+    cur.walk += (tgt.walk - cur.walk) * k;
+    pointer.x += (pointer.tx - pointer.x) * Math.min(1, dt * 3); pointer.y += (pointer.ty - pointer.y) * Math.min(1, dt * 3);
+    blinkClock += dt; if (blinkClock > blinkT) blinkClock -= blinkT;
+    const blink = still ? 0 : blinkAt(blinkClock);
+    const breath = Math.sin(time * 6.2832 / 5.2);
+    const sc = 1 + 0.011 * breath;
+    head.scale.set(sc, sc, sc);
+    head.rotation.set(basePitch + 0.02 * Math.sin(time * 0.21) + pointer.y * 0.06, baseYaw + 0.045 * Math.sin(time * 0.17) + pointer.x * 0.14, 0.02, 'YXZ');
+    head.updateMatrixWorld();
+    for (const m of mats){ m.uniforms.uTime.value = time; m.uniforms.uBreath.value = breath; }
+    regMat.uniforms.uInt.value = cur.int.slice(); regMat.uniforms.uHalo.value = cur.halo.slice(); regMat.uniforms.uLit.value = cur.lit.slice();
+    regMat.uniforms.uWalk.value = cur.walk; regMat.uniforms.uCad.value = cadence;
+    flowMat.uniforms.uWalk.value = cur.walk; flowMat.uniforms.uCad.value = cadence;
+    eyeMat.uniforms.uBlink.value = blink;
+    eyeMat.uniforms.uEyeI.value = sel && sel !== 'goz' ? 0.6 : 1;
+    shellMat.uniforms.uDim.value = 1;
+    // kamera: ön/yan/üst hata ayıklama
+    renderer.render(scene, cam);
+    // etiketler
+    const ls = labelsEl.children;
+    for (let i = 0; i < 5; i++){ const s = proj(ANCHOR[i]); const o = LBL_OFF[i]; ls[i].style.transform = `translate(${(s[0] + o[0]).toFixed(1)}px,${(s[1] + o[1]).toFixed(1)}px) translate(-50%,-50%)`; }
+  }
+  function loop(now){ if (running) frame(now, false); requestAnimationFrame(loop); }
+  function draw(){ if (reduce) { tPrev = performance.now(); frame(tPrev, true); } }
+  document.addEventListener('visibilitychange', () => { running = !document.hidden; tPrev = performance.now(); });
+  // ilk kırpma, sayfa oturduktan bir süre sonra; sonra ölçülen hızla sürer
+  window.addEventListener('load', () => { blinkClock = -Math.max(3.5, blinkT * 0.9); });
+
+
+  GL = {
+    onState(){ computeTargets(); if (reduce) { for (let i = 0; i < 5; i++){ cur.int[i] = tgt.int[i]; cur.halo[i] = tgt.halo[i]; cur.lit[i] = tgt.lit[i]; } cur.walk = tgt.walk; time = 1.35; } draw(); },
+    info: { hair: Hs.pos.length / 3, shell: ns, tries, tShell: Math.round(tShell), reg: R.reg.length, eye: E.kind.length, flow: F.s.length },
+  };
+  window.__gl = GL;
+  applyTheme(); resize(); computeTargets();
+  for (let i = 0; i < 5; i++){ cur.int[i] = tgt.int[i]; cur.halo[i] = tgt.halo[i]; cur.lit[i] = tgt.lit[i]; } cur.walk = tgt.walk;
+  if (reduce){ time = 1.35; for (let i = 0; i < 5; i++){ cur.int[i] = tgt.int[i]; cur.halo[i] = tgt.halo[i]; cur.lit[i] = tgt.lit[i]; } cur.walk = tgt.walk; draw(); }
+  else requestAnimationFrame(loop);
+}
+
+setState(readHash());
+
+/* ================= kaynaklar =================
+   Yazı tipleri Google Fonts'tan, three.js cdnjs'ten gelir. İndirmeyi küçük bir Worker yapar:
+   bağlantı koparsa sessizce yeniden dener (1,5 sn'de yanıt yoksa ikinci bir istekle yarıştırır).
+   Sayfanın "load" olayı, baş ilk kez çizilene kadar gizli bir iframe ile bekletilir (en çok 26 sn);
+   böylece önizleme ve ekran görüntüsü hiçbir zaman boş bir sahne yakalamaz.
+   Worker ya da blob betiği açılamazsa (sıkı CSP) olağan <script>/<link> yoluna düşülür. */
+const THREE_URL = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+/* Yazı tipi yalnız sayfada geçen harflerle istenir (Google Fonts "text" alt kümesi): aile başına tek küçük dosya. */
+const GLYPHS = (() => {
+  const all = [document.body.textContent, JSON.stringify(DAYS), JSON.stringify(NAME), JSON.stringify(WORD), '0123456789'].join('').replace(/<[^>]+>/g, '');
+  return [...new Set(all.replace(/\s+/g, ' '))].sort().join('');
+})();
+const FONT_CSS = 'https://fonts.googleapis.com/css2?family=Onest:wght@400..600&family=Unbounded:wght@600&display=swap&text=' + encodeURIComponent(GLYPHS);
+const release = (() => {
+  try {
+    const f = document.createElement('iframe'); f.hidden = true; f.tabIndex = -1; f.title = 'yükleme'; f.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(f);
+    const d = f.contentDocument; d.open();
+    let done = false;
+    const go = () => { if (done) return; done = true; f.onload = () => f.remove(); try { d.close(); } catch (e) { f.remove(); } };
+    setTimeout(go, 26000);
+    return go;
+  } catch (e) { return () => {}; }
+})();
+let threeDone = false, fontsDone = false;
+function settle(){ if (threeDone && fontsDone) requestAnimationFrame(() => requestAnimationFrame(release)); }
+function boot(){
+  if (GL) return;
+  try { initGL(); GL.onState(); } catch (e) { document.getElementById('app').classList.add('nogl'); GL = null; }
+  threeDone = true; settle();
+}
+function plainThree(){
+  if (window.THREE) return boot();
+  const s = document.createElement('script'); s.src = THREE_URL;
+  s.onload = boot; s.onerror = () => { document.getElementById('app').classList.add('nogl'); threeDone = true; settle(); };
+  document.head.appendChild(s);
+}
+function plainFonts(){
+  const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = FONT_CSS;
+  l.onload = l.onerror = () => { fontsDone = true; settle(); };
+  document.head.appendChild(l);
+}
+function worker(){
+  // kademeli yedek istek: yanıt gecikirse 1,2 / 3 / 5,5 / 9 / 13 sn'de yeni bir istek açılır, ilk tamamlanan
+  // kazanır. (Hızlı ağda ilk istek 1,2 sn dolmadan biter; yedekler hiç açılmaz.)
+  const get = (u, as) => new Promise((resolve, reject) => {
+    const at = [0, 1200, 3000, 5500, 9000, 13000];
+    let live = 0, done = false, next = 0;
+    const fire = () => {
+      if (done || next >= at.length) return;
+      next++; live++;
+      fetch(u, { credentials: 'omit' }).then((r) => { if (!r.ok) throw new Error(r.status); return r[as](); })
+        .then((v) => { if (!done) { done = true; resolve(v); } })
+        .catch(() => { live--; if (!done && live === 0) { if (next < at.length) fire(); else reject(new Error('ulaşılamadı: ' + u)); } });
+    };
+    at.forEach((t) => setTimeout(fire, t));
+  });
+  self.onmessage = async (e) => {
+    const { three, css } = e.data;
+    get(three, 'text').then((txt) => postMessage({ t: 'three', txt }), () => postMessage({ t: 'three', txt: null }));
+    try {
+      const text = await get(css, 'text');
+      const faces = text.split('@font-face').slice(1).map((f) => ({
+        fam: (/font-family:\s*'([^']+)'/.exec(f) || [])[1], w: (/font-weight:\s*([\d ]+);/.exec(f) || [])[1],
+        src: (/url\((https:[^)]+)\)/.exec(f) || [])[1], ur: (/unicode-range:\s*([^;]+);/.exec(f) || [])[1],
+      })).filter((f) => f.fam && f.src && f.ur);
+      await Promise.all(faces.map((f) => get(f.src, 'arrayBuffer').then((buf) => postMessage({ t: 'font', fam: f.fam, w: f.w, ur: f.ur, buf }, [buf]))));
+      postMessage({ t: 'fonts', ok: true });
+    } catch (err) { postMessage({ t: 'fonts', ok: false }); }
+  };
+}
+(function load(){
+  let w;
+  try { w = new Worker(URL.createObjectURL(new Blob(['(' + worker.toString() + ')()'], { type: 'text/javascript' }))); }
+  catch (e) { plainThree(); plainFonts(); return; }
+  const faces = [];
+  w.onerror = () => { w.terminate(); if (!threeDone) plainThree(); if (!fontsDone) plainFonts(); };
+  w.onmessage = (e) => {
+    const m = e.data;
+    if (m.t === 'three'){
+      if (!m.txt) return plainThree();
+      const s = document.createElement('script');
+      s.src = URL.createObjectURL(new Blob([m.txt], { type: 'text/javascript' }));
+      s.onload = () => { URL.revokeObjectURL(s.src); boot(); };
+      s.onerror = plainThree;
+      document.head.appendChild(s);
+    } else if (m.t === 'font'){
+      try { const ff = new FontFace(m.fam, m.buf, { weight: m.w.trim(), unicodeRange: m.ur, display: 'swap' }); document.fonts.add(ff); faces.push(ff.load()); } catch (err) {}
+    } else if (m.t === 'fonts'){
+      if (!m.ok) plainFonts();
+      else Promise.allSettled(faces).then(() => { fontsDone = true; settle(); });
+    }
+  };
+  w.postMessage({ three: THREE_URL, css: FONT_CSS });
+})();
+})();
+</script>

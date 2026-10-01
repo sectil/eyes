@@ -1,0 +1,17 @@
+{
+ "unit": "car.sayi",
+ "take": "t1",
+ "asset_id": "CQZRuL3zEPp7ZA9nXmrB",
+ "asset_size_bytes": 186989,
+ "ref_node": "xBURGesPAHDwT7ReK7AE",
+ "stt_node": "bMEFUtOQsakmu7UkmGbP",
+ "session_id": "otubv9dJf38nSLyd6796",
+ "generation_id": "QN64GGffSQ0Exml3GQcv",
+ "actual_credits": 58.08,
+ "actual_cents": 1.056,
+ "spoken_duration_secs": 10.32,
+ "scribe_text": "Sayıyorum. On, dokuz, sekiz, yedi, altı, beş, dört, üç, iki, bir",
+ "tts": "sayıyorum: on… dokuz… sekiz… yedi… altı… beş… dört… üç… iki… bir.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 11\n}"
+}

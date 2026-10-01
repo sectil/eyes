@@ -1,0 +1,15 @@
+{
+ "unit": "a.kolay",
+ "take": "t3",
+ "asset_id": "ZTgDQcIQkPjYNkZRrwGY",
+ "source_node_id": "9E5zulL2shcufj2fb0G5",
+ "stt_node_id": "a3cfFpkwoGJ8BaymBzOA",
+ "session_id": "O6n6oi62iUUpAEp550iP",
+ "generation_id": "SP0OFo0innu69b68YO3N",
+ "actual_credits": 22.0,
+ "actual_cents": 0.4,
+ "scribe_text": "Gevşemek her zaman kolay olmaz. Bunda yanlış bir şey yok",
+ "spoken_duration_secs": "3.76",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 10\n}"
+}

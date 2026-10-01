@@ -1,0 +1,73 @@
+{
+ "unit": "k.zaman",
+ "idx": 58,
+ "voice": "hoc",
+ "voice_name": "Nefona Hoca",
+ "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+ "model_id": "eleven_v4",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "node_id": "aRZrstcCDpKbXHImTg7q",
+ "session_ids": [
+  "a5aJusO6JhO4KqYILH7Z",
+  "2Z7gfKyEIYsbDTw0kW3n",
+  "xI94mYOmaxbZpuA3XBVj"
+ ],
+ "requested_at": "2026-09-29T22:00:16Z",
+ "downloaded_at": "2026-09-29T22:00:42.067323+00:00",
+ "tts": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun.",
+ "generations_count": 3,
+ "takes": [
+  {
+   "take": 1,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/k.zaman/t1.mp3",
+   "session_id": "a5aJusO6JhO4KqYILH7Z",
+   "generation_id": "3f01cJo78FSkZK5Jnqcb",
+   "api_duration_secs": 3.76,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/a5aJusO6JhO4KqYILH7Z/3f01cJo78FSkZK5Jnqcb/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T220020Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=5c378e79ab2b84c47dba3e12fb911a8de21f9234099fb8713d93d4c53540579fcd6e465090c4293a55230faeb00ea35789a804f0d28604489e4f412d907713f03d1fca72994d5755d6060ea0c96ec13b6ced84eb9e94f1003ac4fb0f18bbc9c09094b301d368dbcb71b4c8d0eaaaa7c1cd0074c0175624842e61335f4851723e53c7b99eaf2ee825cd9e102e08a7c18fd90bf1702172ded87b3114d2c297c72bb3f92d1183c793fd36ba0da088ca456027de742f82ea415159b45a707a8cad341f514746897ccfe6f7f197f5db3d302b183a90b7fee3d8d487ba6a3d052a50bbca83e3ededb88c4acabe222e129f68ba15fcf43b814fed2a0fbb3ad60ffff997",
+   "node_id": "aRZrstcCDpKbXHImTg7q",
+   "ok": true,
+   "duration_secs": 3.76,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 77902,
+   "attempts": 1
+  },
+  {
+   "take": 2,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/k.zaman/t2.mp3",
+   "session_id": "2Z7gfKyEIYsbDTw0kW3n",
+   "generation_id": "U5Gw6BNjRESFmqraYaqZ",
+   "api_duration_secs": 3.76,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/2Z7gfKyEIYsbDTw0kW3n/U5Gw6BNjRESFmqraYaqZ/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T220020Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=c1a85937269b65f8a221cac2ca777298d0e261c6bece089d02ee9ac99f18f1f7bb8868e24f5b1754d86820c17be8326dc35fce5b270deae0eae36c13ca827ca807f50804d0513502cbe3c3053a0735965e1aa6c742abb65c8c83e210455ec0b0b7bc6a731adb7ecf5e831cd93c0992a89593a2e50bd0e5d75cfed5daaa9364537a509aa1f227da11c9c8de64136b867658ed047209bd85817bab8cb88a5a99e71faace570eabf6ad30da041d2d5e92706d0c1fcabd2acc45ce8d0e35c91c1ca69a9e934c38678dad1f21ebf7682d723bfbca83f126219b34eebcc701ec777879c54b593f5de7094d0ad8414677b1ea57b0268d93aabf4d6d7211bd53f193cb6c",
+   "node_id": "aRZrstcCDpKbXHImTg7q",
+   "ok": true,
+   "duration_secs": 3.76,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 77902,
+   "attempts": 1
+  },
+  {
+   "take": 3,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/k.zaman/t3.mp3",
+   "session_id": "xI94mYOmaxbZpuA3XBVj",
+   "generation_id": "bNNcEXAmsLziLdgluKmD",
+   "api_duration_secs": 3.68,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/xI94mYOmaxbZpuA3XBVj/bNNcEXAmsLziLdgluKmD/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T220020Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=4591c66e4c94bc870513a5930fdea85c90e1ef9a5c1ab5fe744b3fa003ccfff155c01a09ffd28a2c92a141b73fd26169ebf3cf9dda53f52961bcb9e8001da191bf647d2635fac7266f462a311e0787d59b5c2301cb0f2d75e6f4b9b7bc0c3b755b201db8071fa70f4f3188c42514c5b1c017e9d7481f584cd0bef69a8663fdfa7b1e615edb2bce283cb736c47e083f428bdf735ab44a625cb4ee4e613282d26d08d45d88b4dd2dde74e4fb14662fad2a094fb06437fd53a8b3aff8aa11def09bdd4b8a42371f726f82a3dcf0b1d86d8548d8e0690a904e939f85745cb709e6d18655dd8b35fcd729f38eb6e7f910d8fec333e7d2cf71f2ab30865babb2214b94",
+   "node_id": "aRZrstcCDpKbXHImTg7q",
+   "ok": true,
+   "duration_secs": 3.68,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 76648,
+   "attempts": 1
+  }
+ ],
+ "all_ok": true,
+ "n_takes_ok": 3,
+ "failed_generations": [],
+ "who": "hoc-2",
+ "retake": false,
+ "server_prompt_echo": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun.",
+ "server_prompt_equals_tts": true
+}

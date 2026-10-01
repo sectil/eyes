@@ -1,0 +1,16 @@
+{
+ "unit": "k.goz",
+ "take": "t3",
+ "ref_node": "XDj0V7t8ZccwyEIG0Opl",
+ "asset_id": "RH5IUwgVHBRlwDJH322z",
+ "stt_node": "0QNbYWetWA4Fx9FA2zcQ",
+ "session_id": "3A38o5sVj5X3czCZYfMu",
+ "generation_id": "uaET8YpqIRItcURkNcu8",
+ "actual_credits": 28.16,
+ "actual_cents": 0.512,
+ "spoken_duration_secs": 4.96,
+ "scribe_text": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin",
+ "tts": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 9\n}"
+}

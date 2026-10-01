@@ -1,0 +1,80 @@
+{
+ "el/el-vd-b.wav": [
+  [
+   5.5,
+   15.5,
+   2.59
+  ]
+ ],
+ "el/el-derin-a.wav": [
+  [
+   2.5,
+   12.5,
+   2.37
+  ]
+ ],
+ "el/el-derin-b.wav": [
+  [
+   14.0,
+   24.0,
+   2.73
+  ],
+  [
+   14.5,
+   24.5,
+   2.29
+  ]
+ ],
+ "el/el-derin-b.keyD.wav": [
+  [
+   15.0,
+   25.0,
+   2.59
+  ],
+  [
+   15.5,
+   25.5,
+   2.18
+  ]
+ ],
+ "bass:el/el-vd-a.wav": {
+  "A": 28,
+  "E": 2
+ },
+ "bass:el/el-vd-b.wav": {
+  "D": 30
+ },
+ "bass:el/el-v-aday.wav": {
+  "Ab": 18
+ },
+ "bass:el/el-v-aday.keyA.wav": {
+  "A": 17
+ },
+ "bass:el/el-derin-a.wav": {
+  "A": 24
+ },
+ "bass:el/el-derin-b.wav": {
+  "Ab": 13,
+  "Eb": 7,
+  "Bb": 3,
+  "C": 1
+ },
+ "bass:el/el-derin-b.keyD.wav": {
+  "G": 14,
+  "D": 9,
+  "A": 2,
+  "Ab": 1
+ },
+ "bass:el/el-imge.wav": {
+  "A": 8,
+  "Bb": 4,
+  "F": 3,
+  "B": 2,
+  "G": 1
+ },
+ "bass:el/el-kapanis.wav": {
+  "G": 14,
+  "D": 3,
+  "B": 1
+ }
+}

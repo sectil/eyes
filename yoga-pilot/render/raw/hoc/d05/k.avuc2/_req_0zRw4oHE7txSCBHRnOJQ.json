@@ -1,0 +1,37 @@
+{
+ "node_id": "0zRw4oHE7txSCBHRnOJQ",
+ "session_ids": [
+  "imnlKWtSxdDPOpjpGXVH",
+  "7FG1jmCba5S9UkE4awxm",
+  "Fre7O9dOt0f7rmxIzkuf"
+ ],
+ "requested_at": "2026-09-30T07:04:40.321Z",
+ "tts": "Avuçların gözlerine değmeyecek; kenarları alnına ve elmacık kemiklerine yaslanacak.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "imnlKWtSxdDPOpjpGXVH",
+   "generation_id": "P8P4j4wdPDlaK2VEiH5v",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/imnlKWtSxdDPOpjpGXVH/P8P4j4wdPDlaK2VEiH5v/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070445Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=d32a03c2d613dc3a9770865c19226ccefaa67cd56e3769edbee3d0544cf2303fb3024bd0c98c1a7d88ff48725d0d135f7278c95995aceffe3872393eb987d920582691eb11d7aacdcecb9752b6fa7c948bf349474ae7f02025d0642a59781acedbc8d5f8ab3b23b37b85f6c62ae5dadd8b87d690090381f280231b375eda919f26d04a18ffbdaaafacf8b428e599a1a23297e43b3e8b3b544b3921a7e003e8193d0f005b71047c97cf474510754526a478610d375a2be09922cf4da042ea164da5e092d1888cdf0ee526eb06a2d17260a1a5da2a9b744712d08bf1375cf04fec4a81a2fcd7a6052d3f67db1316f644c161250c14a15bae87e260771dfd789662",
+   "duration_secs": 6.64,
+   "prompt": "Avuçların gözlerine değmeyecek; kenarları alnına ve elmacık kemiklerine yaslanacak.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "7FG1jmCba5S9UkE4awxm",
+   "generation_id": "eYfWmnHSyvjln2t69r7X",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/7FG1jmCba5S9UkE4awxm/eYfWmnHSyvjln2t69r7X/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070445Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=1d224ba305210b5667ef5b07e686232af0058e07c50b0b0dd0656d321a073325a2a38072a7fea1df75ebe688cc4ab8ad81badf28f7888f0112ecda654403a92715bb8aff5aba15f36131b2d2a23f1690c7d9e452ac09e5177acc15df9918b990567ba0960899a3c32bcea997917368032b4b6f3e8bbc8932be7d3eb095e334475bdb6c4b7669602607d740b472aa017ac95c4005f6b8aa7deed273d88edba25567cd28181633e2a60020fd7f939cb3a9598d579d6904484d48491a79ebc80b92123bae011e4a3c457bf46aa03d25311e825467309cf34404ccd98f07c3bd62d0febd17223a43b6380d08483cd9f41547af1a0bc9311778737663810702524bfb",
+   "duration_secs": 6.56,
+   "prompt": "Avuçların gözlerine değmeyecek; kenarları alnına ve elmacık kemiklerine yaslanacak.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "Fre7O9dOt0f7rmxIzkuf",
+   "generation_id": "UGdemycxl91cJ5tGsHBL",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/Fre7O9dOt0f7rmxIzkuf/UGdemycxl91cJ5tGsHBL/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070549Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=74043a96a5fc4da5b79b406f6345c8c4a2b43c21c754fdf3dcaa926ef94c1ba013c88b02e32adf2e8d1476e250479b4f0fb6abf9ea65d298fa94941b2089851e7fd7ba618d7b0e344cb1f32040dabc9e96cd70c5d037da203692130f2cc6c8ece6299e5f232ebb3d9383b8ae2f1ebc5452bd31dab1d574eb92efbbfcb5dcdf9cf75c571a7dd18d01c78d3d7bdb73d8563175c2bf56ec5e30a7ef14b8e96c03ed65c98128af089912e43482d44d7bb8278c877f7523456f3cf62144fa491b062ea4c1933e0bae230f2fba8346785e3a367db009777d0a67bbb43f0e88a17e1fff66a53244aa50faebcce9cd54851b72b46b618172cacb6b8ee2fb1e0f49040120",
+   "duration_secs": 6.56,
+   "prompt": "Avuçların gözlerine değmeyecek; kenarları alnına ve elmacık kemiklerine yaslanacak.",
+   "kind": "audio"
+  }
+ ]
+}

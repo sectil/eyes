@@ -1,0 +1,15 @@
+{
+ "unit": "n1.sec",
+ "take": "t4",
+ "asset_id": "pymX40XdIRXhv4MkOfqo",
+ "source_node_id": "zf1P2KrRqrt3by5JVoCw",
+ "stt_node_id": "b8vid1NFHDbEnuGyZpPh",
+ "session_id": "riEZJSGquPCEOcfbe8xk",
+ "generation_id": "bBLJXRjqRSbb6OPZfrFD",
+ "actual_credits": 46.64,
+ "actual_cents": 0.848,
+ "scribe_text": "Bugün kendine kısa bir niyet seçiyorsun. Aklına bir şey gelmezse önerim şu: Kendime dinlenmeye izin veriyorum.",
+ "spoken_duration_secs": "8.24",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 16\n}"
+}

@@ -1,0 +1,16 @@
+{
+ "unit": "c4.don",
+ "take": "t3",
+ "ref_node": "usKyQ0Ys0jLiI22hk2aX",
+ "asset_id": "Pa2plXOoJYyPKslrcMFl",
+ "stt_node": "nTwcKrW5zWpygJUgio3h",
+ "session_id": "tC4HBz3Tu80k6SMcJcRH",
+ "generation_id": "oPE3mw5je6LnJw1JSNbs",
+ "actual_credits": 18.48,
+ "actual_cents": 0.336,
+ "spoken_duration_secs": 3.18,
+ "scribe_text": "Aynı patikadan acele etmeden geri dönüyorsun",
+ "tts": "Aynı patikadan, acele etmeden geri dönüyorsun.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 6\n}"
+}
