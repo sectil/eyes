@@ -102,6 +102,15 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
       Plan: `tasarim/bildirim-hava-yuruyus/D5-D6-plan.md` (onay bekliyor).
       Gece sessizliği ile ilişkisi planda yazılır.
 
+- [ ] D7 **Devam düğmesi ilk ekranda görünmüyor, kaydırmak gerekiyor** (sahip, 2026-10-01): İlk Bakış sonucu ("20 saniyede
+      2 kez kırptın", `FirstLook.jsx`), "Yola başlamadan önce" (`Safety.jsx`), İris haritan (`IrisPlan.jsx`). Kural (sahip):
+      bütün telefonlarda birincil düğme ilk görünümde. Plan: kurulum ve tek düğmeli bütün ekranlarda düğme alta sabitlenir
+      (güvenli alan payıyla; `Paywall.jsx` `pw-cta` örneği), içerik arkasında kayar; 320×568 (iPhone SE) dahil her ekran
+      çekilip denetlenir.
+- [ ] D8 **Düğmeye basınca hafif, şık bir titreşim** (sahip): her düğmede zaten hafif titreşim var (`installTapHaptics`,
+      Bilgi'de "Titreşim" ayarı). Telefonda hissedilip hissedilmediği doğrulanmadı (yukarıda "Şimdi" madde 5). Sahibe soru:
+      titreşim mi, düğmenin görsel küçük sallanması mı, ikisi mi?
+
 **Sahipte bekleyenler:** (1) `sky-check.sh` çıktısı; (2) Build 67'de Y1'in 10 maddesi; (3) B2'nin 5 yeni cümlesi
 ("Hangi ilçedesin?", "İlçe ara", "Yalnız İzmir", "Konumuna en yakın ilçe merkezi bu.", "Konum") ve rızada "Nerede
 durur?"un başa alınması; (4) B1a arayüzü için 2 karar.

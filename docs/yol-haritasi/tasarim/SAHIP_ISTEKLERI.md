@@ -139,3 +139,8 @@ mükerrer alarm çalmadı gerekmesine rağmen çalmadı." "Bildirimlerde çoğu 
 seçmeli." "Bildirimlerde kullanıcı istediği saate kurar, bunu kısıtlayamazsın. Göz çalışmasındaki hatırlatmada da aynı
 şekilde." Bilgi amaçlı olabilir: "bu saatte 3 bildirimimiz mevcut, bildirimleri göster". Plan: YAPILACAKLAR D1–D6.
 
+## Devam düğmesi ve dokunuş (2026-10-01)
+Sahip: "Tasarımda devam gözükmüyor; bütün telefonlarda devam ilk ekranda gözükmeli, ekranı kaydırmam gerekiyor." (İlk
+Bakış sonucu, "Yola başlamadan önce", iris haritası.) "Butonlara basıldığında hafif bir titreme olsun, şık, mutlu etsin
+karşıdakini." Plan: YAPILACAKLAR D7–D8.
+
