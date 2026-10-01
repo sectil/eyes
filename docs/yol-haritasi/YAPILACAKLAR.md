@@ -126,6 +126,10 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
       gösterilmez. Yöntem: önce tasarım (gerçek koddan çizim, iki tema, 390/320), beş kişilik 5 sn kapısı ≥4/5, geçen
       görsel + kısa plan sahibe; kod onaydan sonra. Altyapı var: merdivenler (`lib/ladders.js`) ve `stageOf` gelecek
       günlerin basamağını hesaplayabilir. Ana sayfa ilk iki gün denemeleri (ilk2) bunun ilk ekranı sayılır.
+      ilk2 sonucu (2026-10-01): "Tek büyük kart" 1. ve 2. günde 4/5 geçti; iris tohumu 3/5, yol önde 1/5, hava satırı
+      0–1/5 kaldı. Sahibe gönderilmedi: "E testi" üç kez, clip-art göz, 320'de yapışık etiketler, yol gizli (D9'a aykırı);
+      ayrıca düzenek kopyalarında yazı tipleri yüklenmemişti (node_modules izni) — düzeltildi. D9 tasarımı bu öğrenmelerle
+      başladı (iş akışı w0r4k0ij6).
 
 - [ ] D10 **Günaydın ekranında hava durumu** (sahip, 2026-10-01): alarm sonrası "Günaydın." ekranında (uyku → sabah)
       bugünün havası. Hava rızası ve yer varsa; cümleler onaylı sabah havası hücrelerinden. Ana sayfa tasarımında da hava
