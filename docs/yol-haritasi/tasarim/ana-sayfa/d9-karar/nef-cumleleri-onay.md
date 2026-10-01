@@ -27,7 +27,7 @@ Kural: "Yeni" rozeti yalnız kişinin gerçekten ilk kez gördüğü durakta.
 
 ## Ek cümleler (SAHİP ONAYLADI, 2026-10-01: "Onaylıyorum"; kapı 5/5)
 Yolun başı (sabah, Nef kartı)
-14. 30. gün: "Bugün 30. gün: yolu bitirince ilk ayın tamam."
+14. 30. gün: "Bugün 30. gün: yolu bitirince ilk ayın tamam." (KULLANILMIYOR: ilk görünümdeki "Bugün 30. gün: ilk ayını tamamlıyorsun." ile tekrar; sahip kararı 2026-10-01 "Nef kartı o gün susar")
 15. Bölümün son günü: "{N}. bölümün son günü: yolu bitirince {ödül}." Ödül yoksa: "{N}. bölümün son günü: yolu bitirince bölüm tamam."
 Yarın kartı (ilk 3 durağın altında)
 16. "ve {N} durak daha"
