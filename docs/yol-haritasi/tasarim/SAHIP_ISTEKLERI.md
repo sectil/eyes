@@ -144,3 +144,10 @@ Sahip: "Tasarımda devam gözükmüyor; bütün telefonlarda devam ilk ekranda g
 Bakış sonucu, "Yola başlamadan önce", iris haritası.) "Butonlara basıldığında hafif bir titreme olsun, şık, mutlu etsin
 karşıdakini." Plan: YAPILACAKLAR D7–D8.
 
+## Sonsuz yol uzun olacak (2026-10-01)
+Sahip: "Sonsuz yol tasarımı çok kısa olmuş, Duolingo'daki gibi olacak, uzun olacak. Seviyeler var, yüzlerce seviye var;
+yolda da yüzlerce aşama var gibi. Aralarda nefes kısmı gibi yoga, Dalga gibi kısımlar olmalı, aşağı doğru. Tasarımda
+5 sn kuralı geçerli, heyecanımı kaybettirme. Etiketçilik, kolay anlaşılır olması önemli. Arada Nef yorumu olabilir;
+yarın için alarm kuruluysa alarm saati olabilir; 'hatırlatma kurmak ister misin' yazıp bildirimlere yönlendirilebilir.
+Asla kendin için mükemmel olmayanı bana sunma; 5 sn kuralını unutma." Plan: YAPILACAKLAR D9.
+

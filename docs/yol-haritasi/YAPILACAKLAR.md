@@ -93,6 +93,9 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
       (`AlarmPlugin.current` JS'te çağrılmıyor); "kurulu" yazısı yalnız uygulamanın kendi kaydından. Neden henüz bilinmiyor.
       Sahip: günler Pazartesi–Cumartesi. Tanı satırı eklendi (test derlemesi, Bilgi → "Alarm (tanı)": kayıt, telefondaki
       AlarmKit alarmları, son olaylar); sahip ekran görüntüsünü gönderince neden bulunur.
+      İpucu (sahibin 09.32 Ana sayfa görüntüsü): üst satır "— alarm yok" diyor; yani uygulamanın KENDİ kaydı da alarmı
+      artık görmüyor (`AlarmLine.jsx`: `nextRing` boş → kayıt kapalı, silinmiş ya da tek seferlik). Tanıdaki "Kayıt" ve
+      "Son olaylar" satırı bunu ayıracak.
 - [ ] D5 **Hatırlatmalarda "Çoğu gün" / "Gün aşırı" kalkar:** alarmdaki gibi gün seçimi (Pzt–Paz), günleri kişi seçer.
       VARSAYIM: "Bazı günler bilerek göndermiyoruz" seyreltmesi de kalkar (kişinin seçtiği gün geçerli) — onaya.
 - [ ] D6 **Saat kısıtı kalkar:** hatırlatmalarda ve göz çalışması hatırlatmasında kişi her saati seçebilir ("Saat
@@ -110,6 +113,14 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
 - [ ] D8 **Düğmeye basınca hafif, şık bir titreşim** (sahip): her düğmede zaten hafif titreşim var (`installTapHaptics`,
       Bilgi'de "Titreşim" ayarı). Sahip: ikisi birden (titreşim + düğmenin yaylı basış hareketi); ŞU AN HİÇ TİTREMİYOR
       (hata). Tanı: Bilgi → "Titreşimi dene" sonucunun ekran görüntüsü (hangi yol çaldı, hata).
+
+- [ ] D9 **Sonsuz yol uzun olacak, Duolingo gibi** (sahip, 2026-10-01): Ana sayfadaki yol çok kısa (bugünün 4 durağı).
+      Aşağı doğru yüzlerce aşama görünür (gelecek günler, kilitli); aralarda nefes, yoga, Dalga gibi duraklar; Nef'in
+      kısa yorumları; yarın için alarm kuruluysa alarm saati durağı; "Hatırlatma kurmak ister misin?" durağı →
+      Hatırlatmalar. Etiketler kolay anlaşılır. 5 sn kuralı geçerli ("heyecanımı kaybettirme"); mükemmel olmayan sahibe
+      gösterilmez. Yöntem: önce tasarım (gerçek koddan çizim, iki tema, 390/320), beş kişilik 5 sn kapısı ≥4/5, geçen
+      görsel + kısa plan sahibe; kod onaydan sonra. Altyapı var: merdivenler (`lib/ladders.js`) ve `stageOf` gelecek
+      günlerin basamağını hesaplayabilir. Ana sayfa ilk iki gün denemeleri (ilk2) bunun ilk ekranı sayılır.
 
 **Sahipte bekleyenler:** (1) `sky-check.sh` çıktısı; (2) Build 67'de Y1'in 10 maddesi; (3) B2'nin 5 yeni cümlesi
 ("Hangi ilçedesin?", "İlçe ara", "Yalnız İzmir", "Konumuna en yakın ilçe merkezi bu.", "Konum") ve rızada "Nerede
