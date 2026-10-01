@@ -389,6 +389,87 @@ export const SOURCES = {
     limit: "Dalga'nın kendi sesleri sınanmadı, müzik terapisi de kapsamda.",
   },
 
+  // Nef sözleşmesi (lib/nef; modül manifesti nef.evidence), 2026-10-01. Künye PubMed'den (araçla doğrulandı); finding ve
+  // limit yalnız özette yazanla. Bilim kartı havuzuna (remind.science) girmez; bilim satırı onayı ayrı iş.
+  // Fark Ettin mi? (simons1999, most2001): fark-ettin-mi/arastirma/KAYNAKLAR.md 1 ve 8 (PubMed ile doğrulanmış)
+  simons1999: {
+    authors: ['Simons DJ', 'Chabris CF'], year: 1999,
+    title: 'Gorillas in our midst: sustained inattentional blindness for dynamic events.',
+    titleTr: 'Aramızdaki goriller: hareketli olaylarda süren dikkatsizlik körlüğü.',
+    journal: 'Perception', cite: '28(9):1059-74', doi: '10.1068/p281059', pmid: '10694957',
+    design: 'experiment',
+    finding: 'Beklenmeyen şeyi fark etmek, ekrandakilere benzerliğine ve görevin zorluğuna bağlıydı.',
+    limit: 'Laboratuvar videosu; kişi sayısı özette yok.',
+  },
+  most2001: {
+    authors: ['Most SB', 'Simons DJ', 'Scholl BJ', 'Jimenez R'], year: 2001,
+    title: 'How not to be seen: the contribution of similarity and selective ignoring to sustained inattentional blindness.',
+    titleTr: 'Görünmemenin yolu: süren dikkatsizlik körlüğünde benzerlik ve seçerek görmezden gelme.',
+    journal: 'Psychol Sci', cite: '12(1):9-17', doi: '10.1111/1467-9280.00303', pmid: '11294235',
+    design: 'experiment', n: '3 deney',
+    finding: "Siyahı ya da beyazı izleyenlerin yaklaşık %30'u 5 saniye görünen kırmızı haçı fark etmedi.",
+    limit: 'Basit şekillerle ekran deneyi; kişi sayısı özette yok.',
+  },
+  // Bugünün görevi (notice): lib/notice.js başındaki dolaylı kanıt
+  schofield2015: {
+    authors: ['Schofield TP', 'Creswell JD', 'Denson TF'], year: 2015,
+    title: 'Brief mindfulness induction reduces inattentional blindness.',
+    titleTr: 'Kısa bir farkındalık çalışması dikkatsizlik körlüğünü azaltır.',
+    journal: 'Conscious Cogn', cite: '37:63-70', doi: '10.1016/j.concog.2015.08.007', pmid: '26320867',
+    design: 'experiment', n: '794 kişi',
+    finding: '794 kişilik deneyde kısa bir farkındalık çalışması beklenmeyen şeyi fark etmeyi artırdı.',
+    limit: 'Tek oturum, bilgisayar görevi; günlük hayata aktarım sınanmadı.',
+  },
+  // Yön: Ayna (raes2011, lib/yon.js), Dışarıdan bak (kross2014, lib/yon.js), Şefkatle ele al (breines2012, lib/yon.js)
+  // e-yayın 2010-06-08, basım 2011 (18(3))
+  raes2011: {
+    authors: ['Raes F', 'Pommier E', 'Neff KD', 'Van Gucht D'], year: 2011,
+    title: 'Construction and factorial validation of a short form of the Self-Compassion Scale.',
+    titleTr: 'Öz-Şefkat Ölçeği kısa formunun geliştirilmesi ve faktör yapısının doğrulanması.',
+    journal: 'Clin Psychol Psychother', cite: '18(3):250-5', doi: '10.1002/cpp.702', pmid: '21584907',
+    design: 'validation', n: 'Üç örneklem (iki Hollandaca, bir İngilizce)',
+    finding: '12 maddelik kısa öz-şefkat ölçeği uzun formla neredeyse aynı sonucu verdi.',
+    limit: "Ayna'daki 6 maddelik Türkçe kısaltma bu çalışmada sınanmadı.",
+  },
+  kross2014: {
+    authors: ['Kross E', 'Bruehlman-Senecal E', 'Park J', 'Burson A'], year: 2014,
+    title: 'Self-talk as a regulatory mechanism: how you do it matters.',
+    titleTr: 'Düzenleyici bir yol olarak kendinle konuşma: nasıl yaptığın önemli.',
+    journal: 'J Pers Soc Psychol', cite: '106(2):304-24', doi: '10.1037/a0035173', pmid: '24467424',
+    design: 'rct', n: '7 çalışma, toplam 585 kişi',
+    finding: "Kendine 'ben' yerine adınla ya da 'sen' diye seslenmek sosyal streste sıkıntıyı azalttı.",
+    limit: 'Laboratuvar görevleri; yazı egzersizi olarak sınanmadı.',
+  },
+  breines2012: {
+    authors: ['Breines JG', 'Chen S'], year: 2012,
+    title: 'Self-compassion increases self-improvement motivation.',
+    titleTr: 'Öz-şefkat kendini geliştirme isteğini artırır.',
+    journal: 'Pers Soc Psychol Bull', cite: '38(9):1133-43', doi: '10.1177/0146167212445599', pmid: '22645164',
+    design: 'experiment', n: '4 deney',
+    finding: 'Başarısızlıktan sonra kendine şefkat gösterenler zor bir sınava daha uzun çalıştı.',
+    limit: 'Kısa laboratuvar deneyleri; kişi sayısı özette yok.',
+  },
+  // Yılan ve Çemberler: telefonda oyun süresi (göz bütçesinin dayanağı; MOLA_KILIDI_VE_YILAN_ANIMASYONU.md §1)
+  chen2025: {
+    authors: ['Chen YL', 'Su BR', 'Wang ST', 'Wang YC'], year: 2025,
+    title: 'Smartphone gaming while walking increases visual fatigue compared with standing.',
+    titleTr: 'Yürürken telefonda oyun oynamak, ayakta durmaya göre görsel yorgunluğu artırır.',
+    journal: 'Sci Rep', cite: '16(1):3616', doi: '10.1038/s41598-025-33670-8', pmid: '41455726',
+    design: 'experiment', n: '30 genç yetişkin',
+    finding: '30 kişide telefonda 30 dakika oyun, 15 dakikaya göre göz yorgunluğunu artırdı.',
+    limit: 'Küçük örneklem; uygulamadaki oyunlar sınanmadı. Yılan için yalnız oyun süresinin kısa tutulmasına dayanaktır; Nef bu kaynakla Yılan\'ın bir yararı olduğunu söylemez (sahip kararı 2026-10-01).',
+  },
+  // Çemberler: gözle izleme (takip göz hareketi) pratikle değişir
+  radecke2023: {
+    authors: ['Radecke JO', 'Sprenger A', 'Stöckler H', 'Espeter L'], year: 2023,
+    title: 'Normative tDCS over V5 and FEF reveals practice-induced modulation of extraretinal smooth pursuit mechanisms, but no specific stimulation effect.',
+    titleTr: 'Takip göz hareketinde pratikle oluşan değişim; uyarımın kendine özgü etkisi yok.',
+    journal: 'Sci Rep', cite: '13(1):21380', doi: '10.1038/s41598-023-48313-z', pmid: '38049419',
+    design: 'experiment', n: '60 sağlıklı kişi',
+    finding: '60 sağlıklı kişide gözle hedef izleme, oturum içinde ve oturumlar arasında pratikle değişti.',
+    limit: 'Asıl soru tDCS uyarımıydı; laboratuvar ölçümü, oyun değil.',
+  },
+
   // KOŞULLU: yalnız meditasyon içeriğinde; yoga bildiriminde kullanılmaz.
   radin2025: {
     authors: ['Radin RM', 'Vacarro J', 'Fromer E', 'Ahmadi SE'], year: 2025,

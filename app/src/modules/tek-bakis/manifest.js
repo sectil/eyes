@@ -73,4 +73,14 @@ export default {
       { label: 'Tur · 7 gün', value: String(week.length), sub: `son süre ${all.at(-1).durationMs}${NBSP}ms` },
     ]
   },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // cells: bu modüle özel onaylı cümle (lib/nef/bank/tr.js FTB-8, only: tek-bakis-span)
+  nef: {
+    name: { tr: { '': 'Tek Bakışta oyunu', ABL: 'Tek Bakışta oyunundan', ACC: 'Tek Bakışta oyununu', LOC: 'Tek Bakışta oyununda', DAT: 'Tek Bakışta oyununa', INS: 'Tek Bakışta oyunuyla' } },
+    metricWords: { tr: { 'tek-bakis-span': { word: 'kavradığın harf sayısı', unit: 'harf' } } },
+    moments: ['metricChange', 'firstTime', 'returnAfterGap'],
+    cells: ['FTB-8'],
+    evidence: ['chung2004'],
+    note: 'Tek Bakışta oyunu: gözü kıpırdatmadan kavranan harf sayısı (görsel menzil).',
+  },
 }

@@ -14,6 +14,7 @@ import { morningOn, normalizeMorning } from './lib/weatherNotify.js'
 import { normalizeModuleReminders } from './lib/moduleRemind.js'
 import { createTapHandler } from './lib/notifyTap.js'
 import { resetAllData } from './lib/notifyReset.js'
+import { NEF_SAID_KEY } from './lib/nef/memory.js'
 import ScienceCard from './components/ScienceCard.jsx'
 import { NAMES as REMIND_NAMES } from './lib/remindTexts.js'
 import { applyRemind, shownTimes, notifyTimes } from './components/remindUi.js'
@@ -1318,8 +1319,9 @@ export default function App() {
           // Bildirimler: kendi aralığımız (74xx/75xx, 7700–7701, 78xx, 7860–7867) ve yalnız-iptal 7710–7719 iptal;
           // native yürüyüş koruması boşalır (cancelOwn); gozolcum:notify-slots silinir. Deneme bildirimleri (7302,
           // 7303) kalır. (lib/notifyReset.js resetAllData; sıra bugünküyle aynı: önce kayıt)
-          // B2 hava: il ve ilçe adı, önbellek, günlük özet (SKY_KEYS) aynı çağrıda silinir (sky.test.js resetAll)
-          resetAllData({ store, cancel: cancelOwn, autoCal, keys: SKY_KEYS })
+          // B2 hava: il ve ilçe adı, önbellek, günlük özet (SKY_KEYS) aynı çağrıda silinir (sky.test.js resetAll). Nef'in
+          // tekrar etmeme hafızası (gozolcum:nef-said; Nef PLAN §4.4) da.
+          resetAllData({ store, cancel: cancelOwn, autoCal, keys: [...SKY_KEYS, NEF_SAID_KEY] })
           // Modüllerin cihazdaki rekorları ve seçenekleri de silinir (manifest storageKeys);
           // ses/titreşim tercihleri ve tema cihaz ayarı sayılır ve korunur.
           resetBudget(); resetAllHowto()

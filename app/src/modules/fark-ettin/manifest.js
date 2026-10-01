@@ -64,4 +64,13 @@ export default {
       { label: 'Seviye', value: String(all.at(-1).level), sub: `son tur görev ${all.at(-1).task === 1 ? 'tam' : all.at(-1).task === 0.5 ? 'yakın' : 'kaçtı'}` },
     ]
   },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // Kanıt: dikkatsizlik körlüğü (fark-ettin-mi/arastirma/KAYNAKLAR.md 1 ve 8, PubMed ile doğrulanmış)
+  nef: {
+    name: { tr: { '': 'Fark Ettin mi? alıştırması', ABL: 'Fark Ettin mi? alıştırmasından', ACC: 'Fark Ettin mi? alıştırmasını', LOC: 'Fark Ettin mi? alıştırmasında', DAT: 'Fark Ettin mi? alıştırmasına', INS: 'Fark Ettin mi? alıştırmasıyla', POSS: 'Fark Ettin mi? alıştırman', 'POSS-ABL': 'Fark Ettin mi? alıştırmandan' } },
+    metricWords: { tr: { 'street-noticed': { word: 'fark etme isabetin', unit: '', percent: true } } },
+    moments: ['metricChange', 'firstTime', 'returnAfterGap'],
+    evidence: ['simons1999', 'most2001'],
+    note: 'Fark Ettin mi? alıştırması: kalabalık caddede görev ve fark etme soruları; fark etme isabeti yüzde.',
+  },
 }

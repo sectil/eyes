@@ -17,8 +17,8 @@
 //   {n}  sayı · {n:söz} "üç" · {n:SIRA} "dördüncü"
 //   {dilim} "akşam" · {dilim:SAYILI} sayıdan sonra ("üç akşam", öğlen için "gün") · {dilim:ÇOĞUL} "akşamları";
 //     {Dilim…} cümle başı
-//   {modül}  türlü ad ve çekimleri (:ABL :ACC :LOC :DAT :INS :POSS :POSS-ABL); kaynak lexicon.names (ileride manifest
-//     `nef.name`). Ad yoksa cümle kurulmaz.
+//   {modül}  türlü ad ve çekimleri (:ABL :ACC :LOC :DAT :INS :POSS :POSS-ABL); kaynak lexicon.names (manifest
+//     `nef.name.tr`, lexicon.js). Ad yoksa cümle kurulmaz.
 //   {ölçü} "sakinlik", {ölçü:POSS} "sakinliğin", {Ölçü} · {önce} {sonra} {önceOrt} {sonraOrt} (:ABL :DAT)
 //   {fark} ortalama fark, en çok bir ondalık · {başlangıç} {şimdi} (:ABL :DAT :GEÇMİŞ) · {metrik} {birim} · {feels}
 import { clockWith, numberWith, numberWords, ordinalWords, possessive2, upperFirst, DAY_PARTS } from './tr.grammar.js'
@@ -219,11 +219,12 @@ const NUMS = { önce: 'before', sonra: 'after', başlangıç: 'start', şimdi: '
 const AVGS = { önceOrt: 'beforeAvg', sonraOrt: 'afterAvg' }
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v)
 
-// Modülün türlü adı ve çekimleri: lexicon.names[effect] ya da lexicon.names[module] → { '': yalın, ABL, ACC, … }.
-// VARSAYIM: ad çekimleri ileride manifest `nef.name`'den gelir (N1 madde 3, sonraki aşama); o zamana dek çağıran verir.
+// Modülün türlü adı ve çekimleri: lexicon.names[effect], lexicon.names[metric] ya da lexicon.names[module] → { '': yalın,
+// ABL, ACC, … } (etkinin ya da ölçümün kendi adı modülünkinden önce; ör. Ayna puanında "Yön alıştırması").
+// Kaynak manifestin `nef.name` alanı (lib/nef/lexicon.js; speak.js lexicon verilmezse oradan okur).
 function nameOf(facts, lexicon, form) {
   const names = lexicon?.names ?? {}
-  const forms = (facts.effect && names[facts.effect]) || (facts.module && names[facts.module]) || null
+  const forms = (facts.effect && names[facts.effect]) || (facts.metric && names[facts.metric]) || (facts.module && names[facts.module]) || null
   const v = forms?.[form || '']
   return typeof v === 'string' && v ? v : null
 }
@@ -239,7 +240,7 @@ function measureOf(facts, lexicon, form) {
   return null
 }
 
-// Ölçüm (metrik) sözcüğü ve birimi: lexicon.metrics[metric] → { word, unit, percent? }
+// Ölçüm (metrik) sözcüğü ve birimi: lexicon.metrics[metric] → { word, unit, percent? } (manifest `nef.metricWords.tr`)
 const metricOf = (facts, lexicon) => lexicon?.metrics?.[facts.metric] ?? null
 
 function value(name, form, facts, lexicon) {

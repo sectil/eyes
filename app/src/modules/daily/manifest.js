@@ -19,4 +19,15 @@ export default {
   today() {
     return null
   },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // VARSAYIM: kanıt Gelişim'in Göz alanı kaynaklarından (components/ProgressOverview.jsx SOURCES_OF.eye). Kayıtları tests
+  // deposunda: Nef oradan okur (records). Yalnız sayısız ilk kayıt ve uzun ara; görme sonucu söylenmez (sahip kararı
+  // 2026-10-01).
+  nef: {
+    name: { tr: { '': 'kısa E testi', ABL: 'kısa E testinden', ACC: 'kısa E testini', LOC: 'kısa E testinde', DAT: 'kısa E testine', INS: 'kısa E testiyle', POSS: 'kısa E testin', 'POSS-ABL': 'kısa E testinden' } },
+    records: { store: 'tests', match: (t) => t?.type === 'va-daily' },
+    moments: ['firstTime', 'returnAfterGap'],
+    evidence: ['han2019', 'rosser2003'],
+    note: 'Kısa E testi (sağ ve sol göz). Görme sonucu Nef anlarına girmez.',
+  },
 }

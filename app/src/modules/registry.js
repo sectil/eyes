@@ -72,6 +72,26 @@
 //     science: ['sourceKey', …],        bilim kartı havuzu (lib/sources.js anahtarları, pmid ve doi taşır; en az 1)
 //   }
 //                                       remind'deki hata yalnız remind'i düşürür, modülü değil (remindProblems).
+//   nef?: {                             Nef'e öğretim (Nef PLAN §4.8; lib/nef). Alanların hepsi isteğe bağlı; her canlı
+//                                       modül için modules/nef.contract.test.js sınar.
+//     name: { tr: { '': yalın, ABL?, ACC?, LOC?, DAT?, INS?, POSS?, 'POSS-ABL'? },
+//             effects?: { effectKey: { tr: {…} } }, metrics?: { metricKey: { tr: {…} } } }
+//                                       türlü ad ve çekimleri, dile göre ("Yılan oyunu", "Yılan oyununda"); yalnız sahip
+//                                       onaylı ad. Biçimler lib/nef/bank/tr.grammar.js nounForms ile tutarlı. effects /
+//                                       metrics: o etkinin ya da ölçümün anında kullanılan ad (yoga: "Nefesin Ritmi yoga
+//                                       dersi"; Yön'ün Ayna puanı: "Yön alıştırması")
+//     records?: { store: 'tests' | 'habits', match(kayıt) → bool }
+//                                       kaydı sessions'ta olmayan modülün kayıt tanıyıcısı (lib/habitLog.js ya da tests
+//                                       deposu): ilk kayıt ve uzun ara anları buradan. sessions.match / progression.match
+//                                       olan modülde gerekmez.
+//     metricWords?: { tr: { metricKey: { word, unit, percent? } } }
+//                                       progress.metrics ölçümünün cümledeki sözcüğü ve birimi ("kavradığın harf sayısı", "harf")
+//     moments?: ['recallEffect' | 'effectPattern' | 'metricChange' | 'firstTime' | 'returnAfterGap', …]
+//                                       modülün kendiliğinden üretebileceği genel an türleri (lib/nef/moments.js MODULE_MOMENTS)
+//     cells?: ['FTB-8', …]              bu modüle özel onaylı cümle kimlikleri (lib/nef/bank/tr.js, only: { metric })
+//     evidence?: ['sourceKey', …]       kanıt havuzu (lib/sources.js anahtarları, pmid ve doi taşır)
+//     note?: 'tek satır'                modülün kendini Nef'e tanıttığı satır (mektup istemi, N2)
+//   }
 // }
 
 import { SOURCES } from '../lib/sources.js'

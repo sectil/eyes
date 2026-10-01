@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { numberWords, ordinalWords, lastSpokenWord, suffixFor, formatNumber, numberWith, formatClock, clockWith, possessive2, upperFirst, DAY_PARTS } from './tr.grammar.js'
+import { numberWords, ordinalWords, lastSpokenWord, suffixFor, formatNumber, numberWith, formatClock, clockWith, possessive2, upperFirst, DAY_PARTS, nounForms } from './tr.grammar.js'
 import { hourTable } from '../../weatherNotify.js'
 import { clockWithSuffix } from '../../sky.js'
 
@@ -134,6 +134,22 @@ describe('iyelik, büyük harf, gün dilimi', () => {
     expect(DAY_PARTS.evening['']).toBe('akşam')
     expect(DAY_PARTS.evening.ÇOĞUL).toBe('akşamları')
     expect(DAY_PARTS.noon.SAYILI).toBe('gün')
+  })
+})
+
+describe('modül adı çekimleri (manifest nef.name)', () => {
+  it('ad tamlaması: n kaynaştırması, vasıtada y, 2. tekil iyelik', () => {
+    expect(nounForms('Dalga ses', { compound: true })).toMatchObject({ '': 'Dalga sesi', ABL: 'Dalga sesinden', ACC: 'Dalga sesini', DAT: 'Dalga sesine', LOC: 'Dalga sesinde' })
+    expect(nounForms('Yılan oyun', { compound: true })).toMatchObject({ '': 'Yılan oyunu', ACC: 'Yılan oyununu', LOC: 'Yılan oyununda', INS: 'Yılan oyunuyla', DAT: 'Yılan oyununa' })
+    expect(nounForms('Gökyüzü mola', { compound: true })).toMatchObject({ '': 'Gökyüzü molası', POSS: 'Gökyüzü molan', 'POSS-ABL': 'Gökyüzü molandan' })
+    expect(nounForms('yoga ders', { compound: true })).toMatchObject({ '': 'yoga dersi', POSS: 'yoga dersin', ABL: 'yoga dersinden' })
+    expect(nounForms('su kayd', { compound: true })).toMatchObject({ '': 'su kaydı', ABL: 'su kaydından', POSS: 'su kaydın' })
+    expect(nounForms('nefes pratiğ', { compound: true })).toMatchObject({ '': 'nefes pratiği', ACC: 'nefes pratiğini', POSS: 'nefes pratiğin' })
+  })
+  it('yalın ad: ek doğrudan', () => {
+    expect(nounForms('alarm')).toMatchObject({ '': 'alarm', ABL: 'alarmdan', ACC: 'alarmı', LOC: 'alarmda', DAT: 'alarma', INS: 'alarmla' })
+    expect(nounForms('1 dakikalık mola')).toMatchObject({ ABL: '1 dakikalık moladan', ACC: '1 dakikalık molayı', DAT: '1 dakikalık molaya', POSS: '1 dakikalık molan' })
+    expect(nounForms('')).toBeNull()
   })
 })
 

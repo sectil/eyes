@@ -160,6 +160,28 @@ export function possessive2(phrase) {
   return [...words, `${w}${h4(w)}n`].join(' ')
 }
 
+// ---------- Modül adı (manifest nef.name.tr; modules/nef.contract.test.js manifestteki biçimleri bununla sınar) ----------
+// Adın biçimleri gövdeden: { '': yalın, ABL, ACC, LOC, DAT, INS, POSS, 'POSS-ABL' }.
+//   compound: ad tamlaması, son sözcük 3. tekil iyelik ekli ("Dalga ses" → "Dalga sesi", "Gökyüzü mola" → "Gökyüzü
+//     molası", "su kayd" → "su kaydı"). Hâl ekinden önce n gelir ("Dalga sesinden", "Yılan oyununa"), vasıta ekinde y
+//     ("Yılan oyunuyla"). POSS 3. tekil iyeliğin yerine 2. tekili koyar ("Gökyüzü molan", "yoga dersin").
+//   compound değilse ek doğrudan ada gelir ("alarmdan", "1 dakikalık molaya", "1 dakikalık molan").
+//   POSS-ABL: 2. tekil iyelik + ayrılma ("Gökyüzü molandan").
+// Gövdedeki ünsüz değişimi (pratik → pratiğ, kayıt → kayd) gövdeyle birlikte verilir; burada kural yok.
+export function nounForms(stem, { compound = false } = {}) {
+  const s = String(stem ?? '').trim()
+  if (!s) return null
+  const base = compound ? `${s}${endsVowel(s) ? 's' : ''}${h4(s)}` : s
+  const kase = (kind) => {
+    if (!compound) return `${base}${suffixFor(base, kind)}`
+    if (kind === 'ACC') return `${base}n${h4(base)}`
+    if (kind === 'INS') return `${base}yl${h2(base)}`
+    return `${base}${{ ABL: `nd${h2(base)}n`, LOC: `nd${h2(base)}`, DAT: `n${h2(base)}` }[kind]}`
+  }
+  const poss = compound ? `${s}${endsVowel(s) ? '' : h4(s)}n` : possessive2(s)
+  return { '': base, ABL: kase('ABL'), ACC: kase('ACC'), LOC: kase('LOC'), DAT: kase('DAT'), INS: kase('INS'), POSS: poss, 'POSS-ABL': `${poss}d${h2(poss)}n` }
+}
+
 // Cümle başı büyük harf (dile göre: "i" → "İ")
 export const upperFirst = (s, lang) => (s ? s[0].toLocaleUpperCase(lang) + s.slice(1) : s)
 

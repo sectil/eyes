@@ -14,6 +14,7 @@ import { domainOfSession, HABIT_DOMAIN, HABIT_LABEL, stepDays } from './dataHub.
 import { growthCenter, AREAS } from './growthCenter.js'
 import { VERDICT_WORD, changeText, signedText, effectChangeText } from './changeText.js'
 import { loadHubHabits } from './alarmLog.js'
+import { loadSaid } from './nef/memory.js'
 
 const isVa = (t) => t?.type === 'va-daily' || t?.type === 'va-weekly'
 // 'va-daily': kısa test (eski adı günlük test; 2026-09-29'dan beri isteğe bağlı). Eski kayıtlar da aynı testtir.
@@ -41,7 +42,9 @@ export const CSV_HEADER = ['tarih', 'modül', 'alan', 'ölçüm', 'değer', 'bir
 // günlük okunur (Doktoruma göster kartı yalnız tests/sessions verir). health (isteğe bağlı, App.jsx biçimi): Apple
 // Sağlık'ta kendi ortancasına ulaşan adımlı günler Beden günü olarak satır olur (gelisim-merkezi PLAN §3.5 madde 5;
 // DENETIM Ö-7, Ö-9). Adım SAYISI dosyaya yazılmaz (plan §3.4: telefonda kalır); yalnız günün kendisi.
-export function csvRows({ tests = [], sessions = [], habits = loadHubHabits(), health = null, metrics = registry.metrics(), effects = registry.effects() } = {}) {
+// said: Nef'in tekrar etmeme hafızası (lib/nef/memory.js gozolcum:nef-said; Nef PLAN §4.4 "dışa aktarım ona da bakar").
+// Verilmezse telefondaki kayıt okunur. Satırda cümlenin metni değil kimliği ve kanalı yazılır.
+export function csvRows({ tests = [], sessions = [], habits = loadHubHabits(), health = null, said = loadSaid(), metrics = registry.metrics(), effects = registry.effects() } = {}) {
   const rows = []
   const titleOf = (id) => registry.get(id)?.title ?? id
   for (const t of tests) {
@@ -91,12 +94,19 @@ export function csvRows({ tests = [], sessions = [], habits = loadHubHabits(), h
     const [y, m, d] = k.split('-').map(Number)
     rows.push({ date: new Date(y, m - 1, d).toISOString(), module: 'Apple Sağlık', domain: 'body', measure: STEP_DAY_MEASURE, value: 1, unit: 'gün', note: 'adım kişinin kendi ortancasına ulaştı; adım sayısı dosyaya yazılmaz' })
   }
+  // Nef'in söylediği (sahip onaylı 2026-10-01: "Nef'in söylediği · FT-7 · kart")
+  for (const r of Array.isArray(said) ? said : []) {
+    if (!validDate(r?.at)) continue
+    rows.push({ date: r.at, module: 'Nef', domain: '', measure: NEF_SAID_MEASURE, value: null, unit: '', note: [r.id ?? r.type, NEF_CHANNEL[r.channel] ?? r.channel].filter(Boolean).join(' · ') })
+  }
   return rows.sort(byDate)
 }
 // Ölçü adları aynı biçimde (ad). "Alarm sabahı": uyanma işareti ya da sabah cevabı olan gün (lib/alarmLog.js alarmHabits);
 // yalnız uyanış değil. Adımlı gün PDF'teki adla aynı ("Hareketli gün" başlangıç sorusunun adıdır, ayrı kavram).
 export const HABIT_MEASURE = { mola: 'mola', water: 'su', alarm: 'alarm sabahı' }
 export const STEP_DAY_MEASURE = 'adımlı gün'
+export const NEF_SAID_MEASURE = "Nef'in söylediği"
+const NEF_CHANNEL = { card: 'kart', notify: 'bildirim' }
 
 // Etkinlik kimliği (lib/stats.js activitiesFrom: `s:${kayıt.id ?? sıra}`) → kayıt. Aynı kimlik iki kez geçerse eşleme
 // yapılmaz (null); o satırın alanı modülden okunur (eski yol).

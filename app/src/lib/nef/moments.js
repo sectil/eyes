@@ -46,6 +46,10 @@ export const APP_GAP_DAYS = 5 // uygulamaya uzun aradan dönüş (§4.5)
 export const MODULE_GAP_DAYS = 14 // modüle uzun aradan dönüş (taslak §5.3)
 export const PATH_WEEK_MIN = 2 // pathDone kart cümlesi: bu hafta en az 2 tam gün (taslak §5.5)
 
+// Bir modülden kendiliğinden çıkan genel an türleri (plan §4.8 tablosu; manifest `nef.moments` bunlardan seçer). drift N3'te;
+// pathDone modülün değil yolun anı.
+export const MODULE_MOMENTS = Object.freeze(['recallEffect', 'effectPattern', 'metricChange', 'firstTime', 'returnAfterGap'])
+
 // Önem (plan §4.2 sırası: yol > hava ile kişisel saat > kişisel olgu > düzen > takvim; VARSAYIM sayılar)
 export const PRIORITY = Object.freeze({
   lowWho5: 100,

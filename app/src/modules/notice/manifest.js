@@ -44,4 +44,13 @@ export default {
     if (!sessions.some(isNotice)) return []
     return [{ label: 'Bu hafta', value: `${weekDays(sessions, now)} / 7 gün`, sub: `bugün: ${promptFor(now).text.toLocaleLowerCase('tr')}` }]
   },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // Kanıt: lib/notice.js başındaki dolaylı kanıt (schofield2015); bu göreve doğrudan kanıt yok
+  nef: {
+    name: { tr: { '': 'fark etme görevi', ABL: 'fark etme görevinden', ACC: 'fark etme görevini', LOC: 'fark etme görevinde', DAT: 'fark etme görevine', INS: 'fark etme göreviyle', POSS: 'fark etme görevin', 'POSS-ABL': 'fark etme görevinden' } },
+    metricWords: { tr: { 'notice-count': { word: 'fark ettiğin şey sayısı', unit: '' } } },
+    moments: ['metricChange', 'firstTime', 'returnAfterGap'],
+    evidence: ['schofield2015'],
+    note: 'Günlük fark etme görevi; fark edilen şey sayısı.',
+  },
 }

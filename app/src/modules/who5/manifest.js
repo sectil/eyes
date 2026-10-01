@@ -15,4 +15,13 @@ export default {
     countsTowardGoal: false,
     describe: (s) => ({ title: 'İyi oluş (WHO-5)', detail: Number.isFinite(s?.score) ? `${s.score} / 100` : '' }),
   },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // Yalnız ilk kayıt (taslak §8); 14 günde bir dolduğu için uzun ara anı yok. VARSAYIM: kanıt Gelişim'in İyi oluş alanı
+  // kaynaklarından (components/ProgressOverview.jsx SOURCES_OF.wellbeing).
+  nef: {
+    name: { tr: { '': 'iyi oluş soruları', ABL: 'iyi oluş sorularından', ACC: 'iyi oluş sorularını', LOC: 'iyi oluş sorularında', DAT: 'iyi oluş sorularına', INS: 'iyi oluş sorularıyla', POSS: 'iyi oluş soruların', 'POSS-ABL': 'iyi oluş sorularından' } },
+    moments: ['firstTime'],
+    evidence: ['topp2015', 'eser2019'],
+    note: 'İyi oluş soruları (WHO-5), 14 günde bir. Düşük puanda Nef yalnız sabit satırı gösterir.',
+  },
 }

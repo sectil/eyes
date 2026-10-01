@@ -51,4 +51,11 @@ export default {
     if (e.n) out.push({ label: 'Kişisel deney', value: e.ready ? `${signed(e.on.mean)} / ${signed(e.off.mean)}` : `${e.n}/6`, sub: e.ready ? 'katman açık / kapalı' : 'oturum' })
     return out
   },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  nef: {
+    name: { tr: { '': 'Dalga sesi', ABL: 'Dalga sesinden', ACC: 'Dalga sesini', LOC: 'Dalga sesinde', DAT: 'Dalga sesine', INS: 'Dalga sesiyle' } },
+    moments: ['recallEffect', 'effectPattern', 'firstTime', 'returnAfterGap'],
+    evidence: ['dewitte2019'],
+    note: 'Dalga sesi: birkaç dakikalık ses (Sakin, Güç, Motivasyon); öncesi ve sonrası sakinlik, kendine güven ya da enerji puanı (0–10).',
+  },
 }

@@ -21,6 +21,7 @@ import { dayKey } from '../calendar.js'
 import { HARD_NIGHT_MIN, TITLE_MAX, BODY_MAX } from '../weatherNotify.js'
 import { EXCLUDED_EFFECTS, EXCLUDED_METRICS } from './moments.js'
 import { sentenceFree, factFree, typeFreeHome, typeResting, notifyCounts, saidWithin, lastSaidAt } from './memory.js'
+import { moduleLexicon } from './lexicon.js'
 
 export const NOTIFY_DAY_MAX = 1
 export const NOTIFY_WEEK_MAX = 4
@@ -91,10 +92,12 @@ const nightAt = (d) => {
 
 // Girdi:
 //   moments   buildMoments çıktısı · rows: memory.loadSaid çıktısı · bank: bank modülü ({ lang, label, cells, render })
-//   lang      istenen dil · now: şimdi · notifyAt: bildirimin çalacağı an (yoksa now) · lexicon: ad ve ölçü sözcükleri
+//   lang      istenen dil · now: şimdi · notifyAt: bildirimin çalacağı an (yoksa now)
+//   lexicon   ad ve ölçüm sözcükleri; verilmezse manifestlerin `nef` alanından (lexicon.js moduleLexicon, o dilde)
 //   pathDone  kişi bugünkü yolunu bitirdi mi (an motorundan bağımsız ikinci koruma) · channels: istenen kanallar
 export function speak({ moments = [], rows = [], bank = null, lang = null, now = new Date(), notifyAt = null, lexicon = null, pathDone = false, channels = ['card', 'notify'] } = {}) {
   if (!bank || !lang || bank.lang !== lang) return []
+  lexicon = lexicon ?? moduleLexicon(lang)
   const list = (Array.isArray(moments) ? moments : []).filter((m) => m && allowed(m)).sort((a, b) => b.priority - a.priority)
   const want = new Set(channels)
   const out = []

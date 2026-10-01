@@ -186,4 +186,12 @@ export default {
       stage: { id: st.id ?? null, index: st.index, soft: Boolean(st.soft), steps: g.steps, patch: g.patch, variant: st.variant?.id ?? null, day: g.day },
     }))
   },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // Kanıt: remind.science ile aynı havuz
+  nef: {
+    name: { tr: { '': 'göz egzersizi', ABL: 'göz egzersizinden', ACC: 'göz egzersizini', LOC: 'göz egzersizinde', DAT: 'göz egzersizine', INS: 'göz egzersiziyle', POSS: 'göz egzersizin', 'POSS-ABL': 'göz egzersizinden' } },
+    moments: ['firstTime', 'returnAfterGap'],
+    evidence: ['talens2022'],
+    note: 'Göz egzersizi setleri ve yolun egzersiz grupları; kayıt yalnız gün olarak okunur.',
+  },
 }

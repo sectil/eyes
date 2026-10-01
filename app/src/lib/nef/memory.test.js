@@ -1,4 +1,7 @@
 import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import { resetAllData } from '../notifyReset.js'
 import {
   NEF_SAID_KEY, SAID_MAX, SAID_DAYS, loadSaid, recordSaid, markOutcome, prune, sentenceFree, factFree, typeFreeHome,
   typeResting, restUntil, notifyCounts, saidWithin, lastSaidAt,
@@ -152,5 +155,18 @@ describe('bildirim sayacı ve tekrar', () => {
     expect(saidWithin(rows, 'rainOnWalk', 7, at('2026-10-02T09:00:00'))).toBe(true)
     expect(saidWithin(rows, 'rainOnWalk', 7, at('2026-10-06T09:00:00'))).toBe(false)
     expect(saidWithin(rows, 'rainOnWalk', 7, at('2026-09-28T20:00:00'))).toBe(false) // bugün sayılmaz
+  })
+})
+
+describe('"Tüm verileri sil"', () => {
+  it('hafıza anahtarı silinir; App.jsx resetAllData çağrısı onu verir', () => {
+    const m = new Map([[NEF_SAID_KEY, '[]'], ['gozolcum:tema', 'koyu']])
+    const storage = { getItem: (k) => m.get(k) ?? null, setItem: (k, v) => m.set(k, v), removeItem: (k) => m.delete(k) }
+    let settings = {}
+    const store = { get: () => ({ settings }), clearAll: () => { settings = {} }, setSetting: (k, v) => { settings[k] = v } }
+    resetAllData({ store, storage, keys: [NEF_SAID_KEY] })
+    expect([...m.keys()]).toEqual(['gozolcum:tema'])
+    const app = readFileSync(fileURLToPath(new URL('../../App.jsx', import.meta.url)), 'utf8')
+    expect(app).toMatch(/resetAllData\(\{[^}]*keys: \[\.\.\.SKY_KEYS, NEF_SAID_KEY\]/)
   })
 })

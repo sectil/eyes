@@ -205,6 +205,18 @@ describe('uyku ve rahatsızlık hariç', () => {
   })
 })
 
+describe('modül adı manifestten', () => {
+  it('sözlük verilmezse ad ve ölçüm sözcüğü manifestin nef alanından gelir', () => {
+    const f = ch(speak({ moments: buildMoments({ now: NOW, firsts: [{ module: 'snake', kind: 'day' }] }), bank: tr, lang: 'tr', now: NOW }), 'card')
+    expect(f.cell).toBe('FT')
+    expect(f.text).toMatch(/Yılan oyun/)
+    const m = buildMoments({ now: NOW, metrics: [{ module: 'tek-bakis', key: 'tek-bakis-span', domain: 'focus', better: 'up', verdict: 'better', start: 4, current: 6 }] })
+    const withManifest = ch(speak({ moments: m, bank: tr, lang: 'tr', now: NOW }), 'card')
+    expect(withManifest).toEqual(ch(say({ moments: m }), 'card'))
+    expect(withManifest.text).toMatch(/Tek Bakışta oyununda kavradığın harf sayısı/)
+  })
+})
+
 describe('genel anlar uçtan uca', () => {
   it('metricChange, firstTime, pathDone kartta onaylı cümleyle', () => {
     const m = buildMoments({ now: NOW, metrics: [{ module: 'tek-bakis', key: 'tek-bakis-span', domain: 'focus', better: 'up', verdict: 'better', start: 4, current: 6 }] })

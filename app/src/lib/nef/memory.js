@@ -4,8 +4,8 @@
 //                          outcome?: 'touched'|'ignored' }]  (en yeni sonda; en çok 400 satır, 180 gün)
 //     type    an türü (moments.js), key olgu anahtarı, id cümle kimliği (bank), channel kanal.
 //     outcome kart ya da bildirim için sonradan işlenir (markOutcome): dokunuldu / yok sayıldı.
-//   Telefonda kalır. "Tüm verileri sil" ve dışa aktarım bağlantısı sonraki aşamada (registry/manifest dışı bir anahtar;
-//   VARSAYIM: exportData.js ve silme listesi o aşamada güncellenir).
+//   Telefonda kalır. "Tüm verileri sil" siler (App.jsx resetAllData keys; modül anahtarı değil). Dışa aktarım (CSV) ona da
+//   bakar (plan §4.4; lib/exportData.js csvRows said): satırda cümle kimliği ve kanal, metin değil.
 //
 // Kurallar (sayılar VARSAYIM, plan §4.4; ilk ay ölçülür):
 //   1. Aynı cümle 21 gün içinde tekrar etmez (kanaldan bağımsız).

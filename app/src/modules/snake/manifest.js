@@ -53,4 +53,12 @@ export default {
       { label: 'Oyun · 7 gün', value: String(week.length), sub: week.length ? `${week.filter((s) => s.control === 'eyes').length}${NBSP}gözle` : null },
     ]
   },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // Kanıt: telefonda oyun süresi ve göz yorgunluğu (chen2025; göz bütçesinin dayanağı). Oyunun bir yararı iddia edilmez.
+  nef: {
+    name: { tr: { '': 'Yılan oyunu', ABL: 'Yılan oyunundan', ACC: 'Yılan oyununu', LOC: 'Yılan oyununda', DAT: 'Yılan oyununa', INS: 'Yılan oyunuyla' } },
+    moments: ['firstTime', 'returnAfterGap'],
+    evidence: ['chen2025'],
+    note: 'Yılan oyunu: gözle ya da dokunarak oynanır; puan ve rekor. Görmeyi ölçmez.',
+  },
 }

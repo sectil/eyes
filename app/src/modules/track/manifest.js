@@ -71,4 +71,12 @@ export default {
     if (arrive != null) rows.push({ label: 'Varış ort. · 7 gün', value: `${arrive}${NBSP}ms`, sub: `${arr.length}${NBSP}tur` })
     return rows
   },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // Kanıt: gözle hedef izleme pratikle değişir (radecke2023); telefonda oyun süresi ve göz yorgunluğu (chen2025).
+  nef: {
+    name: { tr: { '': 'Çemberler oyunu', ABL: 'Çemberler oyunundan', ACC: 'Çemberler oyununu', LOC: 'Çemberler oyununda', DAT: 'Çemberler oyununa', INS: 'Çemberler oyunuyla' } },
+    moments: ['firstTime', 'returnAfterGap'],
+    evidence: ['radecke2023', 'chen2025'],
+    note: 'Çemberler oyunu: gözle izleme; isabet ve rekor. Görmeyi ölçmez.',
+  },
 }

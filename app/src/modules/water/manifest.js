@@ -12,4 +12,13 @@ export default {
   // Gelişim'de bildirim günlüğünden gelir (lib/notifyLog.js evaluate), modül metriği değil.
   progress: { domain: 'body' },
   gates: {},
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // Kayıt alışkanlık günlüğünde (lib/habitLog.js), sessions'ta değil: Nef oradan okur (records; sahip kararı 2026-10-01).
+  nef: {
+    name: { tr: { '': 'su kaydı', ABL: 'su kaydından', ACC: 'su kaydını', LOC: 'su kaydında', DAT: 'su kaydına', INS: 'su kaydıyla', POSS: 'su kaydın', 'POSS-ABL': 'su kaydından' } },
+    records: { store: 'habits', match: (h) => h?.type === 'water' },
+    moments: ['firstTime', 'returnAfterGap'],
+    evidence: ['stout2022'],
+    note: 'Su kaydı (İçtim); litre hedefi yok. Kayıt alışkanlık günlüğünde, oturum değil.',
+  },
 }

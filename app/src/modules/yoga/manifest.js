@@ -29,6 +29,11 @@ const effects = lessonNos
     ...(LESSONS[n].better === 'down' ? { better: 'down' } : {}),
     pick: lessonPick(n),
   }))
+// Nef adı (sahip onaylı 2026-10-01): genel "yoga dersi"; dersin önce → sonra anında "{ders} yoga dersi" ("Nefesin Ritmi
+// yoga dersinden"). Ders adı LESSONS'tan; çekim eki genel adınkiyle aynı.
+const YOGA_NAME_TR = { '': 'yoga dersi', ABL: 'yoga dersinden', ACC: 'yoga dersini', LOC: 'yoga dersinde', DAT: 'yoga dersine', INS: 'yoga dersiyle', POSS: 'yoga dersin', 'POSS-ABL': 'yoga dersinden' }
+const lessonName = (title) => Object.fromEntries(Object.entries(YOGA_NAME_TR).map(([k, v]) => [k, `${title} ${v}`]))
+const effectNames = Object.fromEntries(lessonNos.filter((n) => LESSONS[n].effectKey && LESSONS[n].measure).map((n) => [LESSONS[n].effectKey, { tr: lessonName(LESSONS[n].title) }]))
 
 export default {
   id: 'yoga',
@@ -105,5 +110,14 @@ export default {
     if (!stop || !LESSONS[stop.stage?.lesson]) return null // < 2 kayıtlı gün, E testi günü ya da uygun yayımlanmış ders yok
     if (!stop.done && !isPublished(stop.stage.lesson, stop.minutes)) return null // çalınamayan durak gösterilmez
     return stop
+  },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // Sahip kararı: uyku metriği (yoga-uyku-dalma) Nef'te anılmaz (lib/nef/moments.js EXCLUDED_METRICS); metricWords yok.
+  // Kanıt: remind.science ile aynı havuz (radin2025 yalnız meditasyon içeriği, burada yok).
+  nef: {
+    name: { tr: YOGA_NAME_TR, effects: effectNames },
+    moments: ['recallEffect', 'effectPattern', 'firstTime', 'returnAfterGap'],
+    evidence: ['moszeik2025', 'luu2024'],
+    note: 'Sesli yoga dersleri; derse göre öncesi ve sonrası gerginlik, beden gerginliği ya da odak puanı (0–10). Nef uyku hakkında yorum yapmaz.',
   },
 }

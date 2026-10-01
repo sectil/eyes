@@ -27,4 +27,15 @@ export default {
     if (w.state === 'half') return { ...stop, done: false, remaining: w.remaining, warn: true }
     return { ...stop, done: false }
   },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // VARSAYIM: kanıt Gelişim'in Göz alanı kaynaklarından (components/ProgressOverview.jsx SOURCES_OF.eye). Kayıtları tests
+  // deposunda: Nef oradan okur (records). Yalnız sayısız ilk kayıt ve uzun ara; görme sonucu söylenmez (sahip kararı
+  // 2026-10-01).
+  nef: {
+    name: { tr: { '': 'haftalık E testi', ABL: 'haftalık E testinden', ACC: 'haftalık E testini', LOC: 'haftalık E testinde', DAT: 'haftalık E testine', INS: 'haftalık E testiyle', POSS: 'haftalık E testin', 'POSS-ABL': 'haftalık E testinden' } },
+    records: { store: 'tests', match: (t) => t?.type === 'va-weekly' },
+    moments: ['firstTime', 'returnAfterGap'],
+    evidence: ['han2019', 'rosser2003'],
+    note: 'Haftalık E testi (sağ, sol, iki göz). Görme sonucu Nef anlarına girmez.',
+  },
 }

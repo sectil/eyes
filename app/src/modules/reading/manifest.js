@@ -49,4 +49,15 @@ export default {
     if (s.state === 'done') return { ...stop, done: true }
     return s.state === 'due' ? { ...stop, done: false } : null
   },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // VARSAYIM: kanıt Gelişim'in Göz alanı kaynaklarından yakın görme testi (katibeh2022; components/ProgressOverview.jsx
+  // SOURCES_OF.eye). Kayıtları tests deposunda: Nef oradan okur (records). Yalnız sayısız ilk kayıt ve uzun ara; görme
+  // sonucu söylenmez (sahip kararı 2026-10-01).
+  nef: {
+    name: { tr: { '': 'okuma testi', ABL: 'okuma testinden', ACC: 'okuma testini', LOC: 'okuma testinde', DAT: 'okuma testine', INS: 'okuma testiyle', POSS: 'okuma testin', 'POSS-ABL': 'okuma testinden' } },
+    records: { store: 'tests', match: (t) => t?.type === 'reading' },
+    moments: ['firstTime', 'returnAfterGap'],
+    evidence: ['katibeh2022'],
+    note: 'Okuma testi: rahat okunan en küçük yazı. Görme sonucu Nef anlarına girmez.',
+  },
 }

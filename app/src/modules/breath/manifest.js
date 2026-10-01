@@ -94,4 +94,12 @@ export default {
     const st = p.stage
     return { ...stop, minutes: p.minutes, stage: { id: st.id ?? null, index: st.index, soft: Boolean(st.soft), minutes: p.minutes, tier: p.tier, stepDown: p.stepDown } }
   },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // Kanıt: nefes bildirim metinlerinin kaynakları (lib/remindTexts.js nudge.breath)
+  nef: {
+    name: { tr: { '': 'nefes pratiği', ABL: 'nefes pratiğinden', ACC: 'nefes pratiğini', LOC: 'nefes pratiğinde', DAT: 'nefes pratiğine', INS: 'nefes pratiğiyle', POSS: 'nefes pratiğin', 'POSS-ABL': 'nefes pratiğinden' } },
+    moments: ['recallEffect', 'effectPattern', 'firstTime', 'returnAfterGap'],
+    evidence: ['laborde2022', 'fincham2023'],
+    note: 'Nefes pratiği: yavaş nefes kalıpları; seans öncesi ve sonrası sakinlik puanı (1–5).',
+  },
 }

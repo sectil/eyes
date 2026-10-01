@@ -65,4 +65,13 @@ export default {
       { label: 'Program', value: `${programHours(sessions).toFixed(1)} / ${PROGRAM_HOURS} sa`, sub: `bu hafta ${week.length}` },
     ]
   },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // Algı eşiği aşağı-iyi: onaylı metricChange cümlesi yok (lib/nef/moments.js); ilk ölçüm sayısı firstTime ile.
+  nef: {
+    name: { tr: { '': 'Hızlı Bakış oyunu', ABL: 'Hızlı Bakış oyunundan', ACC: 'Hızlı Bakış oyununu', LOC: 'Hızlı Bakış oyununda', DAT: 'Hızlı Bakış oyununa', INS: 'Hızlı Bakış oyunuyla' } },
+    metricWords: { tr: { 'quick-look-threshold': { word: 'algı eşiğin', unit: 'milisaniye' } } },
+    moments: ['firstTime', 'returnAfterGap'],
+    evidence: ['ball2002'],
+    note: 'Hızlı Bakış oyunu: bölünmüş dikkat alıştırması; algı eşiği milisaniye (düşük daha iyi).',
+  },
 }

@@ -14,4 +14,13 @@ export default {
   progress: { domain: 'wellbeing' },
   gates: {},
   storageKeys: [ALARM_KEY, ALARM_LOG_KEY],
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  // Sahip kararı 2026-10-01: Nef alarmı anmaz (kayıt Nef'in okuduğu yerde değil). Genel an ve kanıt yok;
+  // modules/nef.contract.test.js NEF_SILENT istisnası.
+  nef: {
+    name: { tr: { '': 'alarm', ABL: 'alarmdan', ACC: 'alarmı', LOC: 'alarmda', DAT: 'alarma', INS: 'alarmla' } },
+    moments: [],
+    evidence: [],
+    note: 'Sabah alarmı ve uyku sesi; kayıt alarm günlüğünde. Nef uyku hakkında yorum yapmaz.',
+  },
 }

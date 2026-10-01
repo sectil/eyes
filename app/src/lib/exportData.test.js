@@ -40,6 +40,12 @@ describe('CSV', () => {
     // başka dil için: virgül ve nokta
     expect(toCsv(rows, { sep: ',', decimal: '.' }).split('\r\n')[1]).toBe(`${localStamp(day(0))},"A; ""B""",Göz,'=1+1,-0.123,logMAR,"satır\nsonu"`)
   })
+  it("Nef'in tekrar etmeme hafızası dosyaya girer (Nef PLAN §4.4): kimlik ve kanal, metin değil", () => {
+    const said = [{ at: day(1, 20), date: '2026-09-02', type: 'firstTime', key: 'first:snake', id: 'FT-7', channel: 'card' }, { at: 'yok', id: 'X', channel: 'card' }]
+    const rows = csvRows({ sessions: [], habits: [], said, metrics: [], effects: [] })
+    expect(rows).toEqual([expect.objectContaining({ module: 'Nef', measure: "Nef'in söylediği", note: 'FT-7 · kart' })])
+    expect(toCsv(rows).split('\r\n')[1]).toBe(`${localStamp(day(1, 20))};Nef;;Nef'in söylediği;;;FT-7 · kart`)
+  })
   it('geçersiz tarih ve sayı atlanır', () => {
     const rows = csvRows({ tests: [va(0, 'R', NaN), { ...va(0, 'R', 0.2), date: 'yok' }], sessions: [] })
     expect(rows.filter((r) => r.unit === 'logMAR')).toEqual([])

@@ -37,4 +37,11 @@ export default {
     const h = history(all)
     return [{ label: 'Gökyüzü molası · 7 gün', value: `${week.length}${NBSP}mola`, sub: h.mean != null ? `ortalama değişim ${h.mean >= 0 ? '+' : '−'}${Math.abs(h.mean).toFixed(1).replace('.', ',')}` : `${h.n}/3 puanlı mola` }]
   },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  nef: {
+    name: { tr: { '': 'Gökyüzü molası', ABL: 'Gökyüzü molasından', ACC: 'Gökyüzü molasını', LOC: 'Gökyüzü molasında', DAT: 'Gökyüzü molasına', INS: 'Gökyüzü molasıyla', POSS: 'Gökyüzü molan', 'POSS-ABL': 'Gökyüzü molandan' } },
+    moments: ['recallEffect', 'effectPattern', 'firstTime', 'returnAfterGap'],
+    evidence: ['yamashita2021', 'talens2022'],
+    note: 'Gökyüzü molası: 2 dakika ufka ve gökyüzüne bakma; öncesi ve sonrası dinlenmişlik puanı (0–10).',
+  },
 }
