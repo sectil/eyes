@@ -155,3 +155,8 @@ Asla kendin için mükemmel olmayanı bana sunma; 5 sn kuralını unutma." Plan:
 Sahip: "Günaydın kısmında hava durumu da lazım bence." "Konum kabul ettim ama hangi ildesin diye tekrar sordu. İzmir
 Gaziemir seçtim. Bunun şu anda çalışan ana sayfa tasarımında da gözükmesi lazım, unutma." Plan: D3, D10, D9.
 
+## Hava bildirimi ve yürüyüş (2026-10-01 11.40)
+Sahip: "Nefes bildirimi gelmedi, hava durumu bildirimi ise doğallıktan çok uzak, tıklanıldığında hava durumu sayfasına
+gidiyor. Mesela burada yürüyüş planı varsa hatırlatması yanına yağmur yapacağına dair bir ifade olabilir. 5 sn kuralı,
+mükemmel olduğunu görmeden gönderme, ilk önce sen onayla. Kuralları unutma." Plan: YAPILACAKLAR D11, D12.
+

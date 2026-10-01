@@ -135,6 +135,14 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
       bugünün havası. Hava rızası ve yer varsa; cümleler onaylı sabah havası hücrelerinden. Ana sayfa tasarımında da hava
       görünmeli (D9 ve ilk2 tasarımına girdi).
 
+- [ ] D11 **Hava bildirimi doğal değil; hava hatırlatmalara karışsın** (sahip, 2026-10-01 11.40): sabah havası
+      bildirimi "doğallıktan çok uzak"; dokununca hava sayfasına gitmesi yetmiyor. Örnek istek: yürüyüş planı/hatırlatması
+      varsa yanına yağmur ifadesi ("20.00 yürüyüşün var; 19.00'dan sonra yağmur bekleniyor" gibi). Yöntem: cümle
+      taslakları + 5 sn kapısı (≥4/5) + kendi onayım → sahibe; onaylı cümleler (sabah-havasi-onay.md) yeniden açılır.
+      Hava sayfasında saatlik şerit sağda kesiliyor (açık iş).
+- [ ] D12 **Nefes 11.38'de 11.38'e kuruldu, gelmedi** (sahip): seçilen dakika o an geçmiş sayılır; ayrıca 11.22
+      düzeltmesinin yüklü sürümde olup olmadığı bilinmiyor. Tanıya bekleyen bildirimler ve izin eklendi (2d257ba).
+
 **Sahipte bekleyenler:** (1) `sky-check.sh` çıktısı; (2) Build 67'de Y1'in 10 maddesi; (3) B2'nin 5 yeni cümlesi
 ("Hangi ilçedesin?", "İlçe ara", "Yalnız İzmir", "Konumuna en yakın ilçe merkezi bu.", "Konum") ve rızada "Nerede
 durur?"un başa alınması; (4) B1a arayüzü için 2 karar.
