@@ -4,9 +4,7 @@
 import { pickSeries } from './vaSeries.js'
 import { trendMessage } from './trend.js'
 import { activitiesFrom, countedActivities, summary } from './stats.js'
-import { registry, DOMAINS } from '../modules/registry.js'
-import { dayKey } from './calendar.js'
-import { keyDay } from './habitLog.js'
+import { registry, DOMAINS } from '../../../src/modules/registry.js'
 
 const DAY = 86400000
 const finite = (v) => (Number.isFinite(v) ? v : null)
@@ -35,7 +33,6 @@ export function makeWho5Record(answers, date = new Date()) {
   return { type: WHO5_TYPE, date: new Date(date).toISOString(), answers: [...answers], raw: s.raw, score: s.score, seconds: 0 }
 }
 
-const WHO5_VERDICT = { first: 'start', up: 'better', down: 'worse', noise: 'same' }
 export function who5Card(sessions = [], now = new Date()) {
   const recs = sessions.filter((s) => s?.type === WHO5_TYPE && Number.isFinite(s.score)).sort(byDate)
   const last = recs.at(-1) ?? null
@@ -43,11 +40,10 @@ export function who5Card(sessions = [], now = new Date()) {
   const daysSince = last ? Math.floor((new Date(now) - new Date(last.date)) / DAY) : null
   const due = !last || daysSince >= WHO5_EVERY_DAYS
   const nextInDays = last ? Math.max(0, WHO5_EVERY_DAYS - daysSince) : 0
-  if (!last) return { n: 0, due, nextInDays, status: 'none', verdict: null }
+  if (!last) return { n: 0, due, nextInDays, status: 'none' }
   const delta = recs.length > 1 ? last.score - first.score : null
   const status = delta == null ? 'first' : Math.abs(delta) >= WHO5_MEANINGFUL ? (delta > 0 ? 'up' : 'down') : 'noise'
-  // verdict: ölçü kuralı v2'nin sözcükleriyle (yayımlanmış eşik 10 puan; Ö-6: n > 1 ise ilk değil son puan ve hüküm)
-  return { n: recs.length, last: last.score, first: first.score, delta, status, verdict: WHO5_VERDICT[status], low: last.score < WHO5_LOW, due, nextInDays, daysSince, series: recs.map((r) => ({ date: r.date, score: r.score })) }
+  return { n: recs.length, last: last.score, first: first.score, delta, status, low: last.score < WHO5_LOW, due, nextInDays, daysSince, series: recs.map((r) => ({ date: r.date, score: r.score })) }
 }
 
 // ---------- Ortalama ve %95 güven aralığı (t dağılımı) ----------
@@ -163,136 +159,9 @@ export function feelOnlyText(c) {
   return rose ? 'belirgin artış' : 'belirgin düşüş'
 }
 
-// ---------- Ölçü kuralı v2 (gelisim-merkezi PLAN.v1 §3.3; onaylı SONSUZ_YOL.PLAN.v1 §3.B.3, karar 2) ----------
-// metricTrend (ilk yarı / son yarı) ve status yerinde kalır (eşdeğerlik, eski testler); ekranlar, raporlar ve alan
-// hükmü verdict okur. Göz kuralı trend.js'te aynen kalır.
-//  1. Günlük toplama: aynı takvim gününün (yerel) ölçümleri o günün ortancası olur (K4: aynı günün turları tek değer).
-//  2. Alışma: ilk `familiar` ölçüm günü değerlendirmeye girmez (görev metriklerinde 2, öbürlerinde 1; VARSAYIM).
-//  3. Başlangıç: alışmadan sonraki ilk `baseDays` ölçüm gününün ortancası ve SD'si; bir kez oluşur, değişmez.
-//     SD, metriğin biriminde bir tabanın (`sdFloor`) altına inmez.
-//  4. Bakış haftada bir, Pazartesi (yerel 00.00'da, o güne kadarki ölçüm günleriyle). Şimdi: başlangıçtan sonraki son 3
-//     ölçüm gününün ortancası. Bu 3 gün bakıştan önceki 28 gün içinde değilse bakış 'unclear' olur (eski veri bugünü
-//     anlatmaz; VARSAYIM: plan §3.B.3 "pencere 28").
-//  5. Değişim: şimdi − başlangıç farkı (iyi yön +) c × SD'yi aşar (yayımlanmış eşik varsa `meaningful`'a ulaşır) ve bu
-//     art arda `persist` bakışta sürerse 'better' ya da 'worse' (K3: sabit başlangıç, son haftalar). Bakış ancak bir
-//     önceki bakıştan bu yana YENİ ölçüm günü geldiyse sayılır: yeni ölçüm yoksa önceki bakışın hükmü ve sayacı aynen
-//     kalır (aynı 3 gün art arda Pazartesilerde yeniden sayılıp tek bir şanslı dilimi "iki hafta" yapmasın). Fark ilk
-//     bakışta görülüp henüz doğrulanmadıysa (persist'e ulaşmadı) hüküm 'unclear'dır: "değişim yok" demek yanlış olurdu.
-// verdict: 'start' (başlangıç oluşuyor ya da ilk bakış gelmedi) | 'same' (doğrulanmış değişim yok) | 'better' | 'worse'
-//          | 'unclear' (son 28 günde yeterli ölçüm yok ya da görülen fark doğrulanmayı bekliyor). rule 'none' olan metrik
-//          (değişim kuralı yok, ör. Bugünün görevi) 'start'tan sonra hep 'unclear'dır.
-export const V2 = { familiar: 1, baseDays: 6, currentDays: 3, c: 1.5, persist: 2, windowDays: 28 }
-// Metrik başına parametreler (manifestte progress.metrics[].v2 verilirse o önce gelir). Görev metrikleri: alışma 2 gün.
-// SD tabanları: harf 0,5 ve ms 10 onaylı plandan (§3.B.3, §3.B.6); öbürleri VARSAYIM (birimin yarım/tek basamağı).
-export const V2_PARAMS = {
-  'quick-look-threshold': { familiar: 2, sdFloor: 10 },
-  'tek-bakis-span': { familiar: 2, sdFloor: 0.5 },
-  'street-noticed': { familiar: 2, sdFloor: 5 }, // VARSAYIM; plan "seviye içinde" der, kayıt serisi seviye taşımıyor
-  'breath-count-accuracy': { familiar: 2, sdFloor: 5 },
-  'notice-count': { rule: 'none' }, // §3.B.6: tavanlı ölçek, görev her gün değişiyor → değişim kuralı yok
-}
-const UNIT_SD_FLOOR = { '%': 5, '/5': 0.5, puan: 1, kez: 1, ms: 10, harf: 0.5 }
-
-const median = (a) => {
-  const s = [...a].sort((x, y) => x - y)
-  const m = s.length >> 1
-  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2
-}
-const sampleSd = (a) => {
-  if (a.length < 2) return 0
-  const m = a.reduce((x, y) => x + y, 0) / a.length
-  return Math.sqrt(a.reduce((x, y) => x + (y - m) ** 2, 0) / (a.length - 1))
-}
-const epochDay = (date) => keyDay(dayKey(new Date(date)))
-// 1970-01-01 Perşembe: dönem günü % 7 === 4 Pazartesi
-const nextMonday = (d) => d + ((4 - (((d % 7) + 7) % 7) + 7) % 7)
-
-// Günlük ortanca serisi: [{ day (dönem günü), date (o günün ilk ölçümü), value, n }] eskiden yeniye
-export function dailyMedians(points = []) {
-  const byDay = new Map()
-  for (const p of points) {
-    if (!p || !Number.isFinite(p.value)) continue
-    const t = new Date(p.date).getTime()
-    if (!Number.isFinite(t)) continue
-    const d = epochDay(t)
-    const x = byDay.get(d)
-    if (x) x.values.push(p.value), (x.t = Math.min(x.t, t))
-    else byDay.set(d, { values: [p.value], t })
-  }
-  return [...byDay.entries()]
-    .sort((a, b) => a[0] - b[0])
-    .map(([day, x]) => ({ day, date: new Date(x.t).toISOString(), value: median(x.values), n: x.values.length }))
-}
-
-export function metricStatusV2(points = [], { better = 'up', meaningful = null, now = new Date(), ...opts } = {}) {
-  const p = { ...V2, ...opts }
-  const sign = better === 'down' ? -1 : 1
-  const days = dailyMedians(points)
-  const latest = days.length ? median(days.slice(-p.currentDays).map((x) => x.value)) : null
-  const base = { verdict: 'start', measureDays: days.length, baseline: null, current: null, latest, sd: null, threshold: null, looks: 0 }
-  if (!days.length) return { ...base, verdict: null }
-  const need = p.familiar + p.baseDays
-  if (days.length < need) return base
-  const baseArr = days.slice(p.familiar, need)
-  const baseline = median(baseArr.map((x) => x.value))
-  const sd = Math.max(sampleSd(baseArr.map((x) => x.value)), p.sdFloor ?? 0)
-  const threshold = meaningful ?? p.c * sd
-  const formed = { ...base, baseline, sd, threshold }
-  if (p.rule === 'none') return { ...formed, verdict: 'unclear' }
-  const baseEnd = baseArr.at(-1).day
-  const today = epochDay(now)
-  const post = days.slice(need).filter((x) => x.day < today + 1)
-  // Pazartesi bakışları: ilk bakış başlangıçtan sonra en az 3 ölçüm günü biriken ilk Pazartesi
-  let i = 0
-  let side = null
-  let streak = 0
-  let last = null
-  let looks = 0
-  let current = null
-  let seen = -1 // son sayılan bakışta ölçüm günü sayısı (yeni ölçüm var mı)
-  for (let M = nextMonday(baseEnd + 1); M <= today; M += 7) {
-    while (i < post.length && post[i].day < M) i++
-    if (i < p.currentDays) continue // henüz değerlendirilemez (bakış sayılmaz)
-    const cur = post.slice(i - p.currentDays, i)
-    const stale = cur[0].day < M - p.windowDays
-    // yeni ölçüm günü yok ve veri hâlâ pencerede: önceki bakışın hükmü ve sayacı sürer (aynı günler iki kez sayılmaz)
-    if (!stale && i === seen) continue
-    seen = i
-    looks++
-    if (stale) {
-      last = 'unclear'
-      side = null
-      streak = 0
-      current = null
-      continue
-    }
-    current = median(cur.map((x) => x.value))
-    const diff = sign * (current - baseline)
-    const st = meaningful != null ? (Math.abs(diff) >= meaningful ? (diff > 0 ? 'better' : 'worse') : 'same') : diff > threshold ? 'better' : diff < -threshold ? 'worse' : 'same'
-    streak = st === side ? streak + 1 : 1
-    side = st
-    last = st
-  }
-  if (!looks) return { ...formed, verdict: 'start' }
-  // görülen fark doğrulanmadıysa (persist bakış sürmedi) 'unclear': ne değişim ne "değişim yok" denir
-  const verdict = last === 'better' || last === 'worse' ? (streak >= p.persist ? last : 'unclear') : last
-  return { ...formed, verdict, current, looks }
-}
-
-// Metriğin v2 parametreleri: manifest (m.v2) > V2_PARAMS[key] > birimin SD tabanı
-export function v2Params(m) {
-  return { sdFloor: UNIT_SD_FLOOR[m?.unit] ?? 0, ...(V2_PARAMS[m?.key] ?? {}), ...(m?.v2 ?? {}) }
-}
-
-export function metricCards({ tests = [], sessions = [], metrics = registry.metrics(), now = new Date() } = {}) {
+export function metricCards({ tests = [], sessions = [], metrics = registry.metrics() } = {}) {
   return metrics
-    .map((m) => {
-      const series = m.series({ tests, sessions })
-      const t = metricTrend(series, m)
-      if (!t.n) return t
-      const v = metricStatusV2(series, { better: m.better, meaningful: m.meaningful ?? null, now, ...v2Params(m) })
-      return { key: m.key, module: m.module, domain: m.domain, label: m.label, unit: m.unit, better: m.better, source: m.source ?? null, ...t, verdict: v.verdict, v2: v }
-    })
+    .map((m) => ({ key: m.key, module: m.module, domain: m.domain, label: m.label, unit: m.unit, better: m.better, source: m.source ?? null, ...metricTrend(m.series({ tests, sessions }), m) }))
     .filter((c) => c.n > 0)
 }
 
@@ -328,18 +197,9 @@ export function practiceCard(tests = [], sessions = [], now = new Date()) {
 // ---------- Alanlar: Gelişim kutucukları ----------
 export const DOMAIN_LABEL = { eye: 'Göz', calm: 'Sakinlik', self: 'Kendine yaklaşım', awareness: 'Farkındalık', focus: 'Dikkat', wellbeing: 'İyi oluş', body: 'Beden' }
 // Her alan: o alana sayılan metrik kartları ve anlık etkiler (modüllerden) + özel kaynaklar (göz, WHO-5)
-// Önce → sonra etkileri yalnız son 28 günden (Ö-3; plan §3.B.4): pencerenin başı haritanınkiyle aynı (bugün dâhil 28
-// takvim günü, yerel gece yarısı)
-export const EFFECT_WINDOW_DAYS = 28
-export function effectsSince(now = new Date()) {
-  const d = new Date(now)
-  d.setHours(0, 0, 0, 0)
-  d.setDate(d.getDate() - (EFFECT_WINDOW_DAYS - 1))
-  return d
-}
 export function domainSummary({ tests = [], sessions = [], now = new Date() } = {}) {
-  const metrics = metricCards({ tests, sessions, now })
-  const effects = acuteEffects(sessions, { since: effectsSince(now) })
+  const metrics = metricCards({ tests, sessions })
+  const effects = acuteEffects(sessions)
   const out = Object.fromEntries(DOMAINS.map((d) => [d, { domain: d, label: DOMAIN_LABEL[d], metrics: [], effects: [] }]))
   for (const m of metrics) out[m.domain]?.metrics.push(m)
   for (const e of effects) out[e.domain]?.effects.push(e)
@@ -357,15 +217,14 @@ export function reportDay(start, now = new Date()) {
 }
 export function firstReport({ tests = [], sessions = [], start, now = new Date() }) {
   const since = start ? new Date(start) : null
-  // bozuk kayıt (null, nesne değil) rapora girmez; eskiden 5. gün raporu ekranını düşürüyordu (G1 tek hesap testi)
-  const inWindow = (x) => x != null && typeof x === 'object' && (!since || new Date(x.date) >= since)
+  const inWindow = (x) => !since || new Date(x.date) >= since
   const t = tests.filter(inWindow)
   const s = sessions.filter(inWindow)
   return {
     day: reportDay(start, now),
     practice: practiceCard(t, s, now),
     acute: acuteEffects(s),
-    metrics: metricCards({ tests: t, sessions: s, now }),
+    metrics: metricCards({ tests: t, sessions: s }),
     eye: eyeCard(tests, now),
     who5: who5Card(sessions, now),
   }

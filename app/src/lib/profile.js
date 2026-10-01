@@ -104,7 +104,7 @@ export const emptyProfile = () => ({
   stressNow: null, // 0–4 (STRESS_NOW)
   activityDays: null, // 0–7
   selfCompassion: null, // 0–4 (SELF_AGREE)
-  iris: { baseline: null, recheck: null }, // { date, blinks, stressNow, sleep, activityDays, selfCompassion } (lib/iris.js)
+  iris: { baseline: null, recheck: null }, // { date, blinks, blinkMethod?, stressNow, sleep, activityDays, selfCompassion } (lib/iris.js)
 })
 
 export const LOOK_METHODS = ['truedepth', 'camera', 'self']
@@ -126,6 +126,8 @@ function normalizeSnap(raw) {
   const lim = { blinks: [0, 200], stressNow: [0, STRESS_NOW.length - 1], sleep: [SLEEP_MIN, SLEEP_MAX], activityDays: [0, ACTIVITY_DAYS_MAX], selfCompassion: [0, SELF_AGREE.length - 1] }
   const out = { date: raw.date }
   for (const k of IRIS_KEYS) out[k] = intIn(raw[k], ...lim[k])
+  // Kırpma sayısının yöntemi (lib/iris.js snapshot; DENETIM Kü-9). Yalnız tanınan yöntem; eski kayıtta alan yok.
+  if (LOOK_METHODS.includes(raw.blinkMethod)) out.blinkMethod = raw.blinkMethod
   return out
 }
 function normalizeLook(raw) {

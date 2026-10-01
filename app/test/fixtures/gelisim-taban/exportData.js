@@ -3,17 +3,14 @@
 // uygulama hiçbir sunucuya göndermez. Yön serbest metinleri gibi kişisel yazılar dosyaya girmez.
 // CSV modül kayıt defterinden kurulur (modules/registry.js): yeni modülün metrikleri, önce→sonra puanları ve
 // süreleri kendiliğinden eklenir.
-import { registry } from '../modules/registry.js'
+import { registry } from '../../../src/modules/registry.js'
 import { activitiesFrom, decimalTr } from './stats.js'
 import { analyzeTrend, trendMessage, seriesNotes, droppedNotes, YELLOW_DELTA, RED_DELTA, BAND_MIN_MM, BAND_MAX_MM } from './trend.js'
-import { formatLogMAR, formatEquivalents, roundLogMAR } from './optotype.js'
+import { formatLogMAR, formatEquivalents, roundLogMAR } from '../../../src/lib/optotype.js'
 import { EYE_LABEL } from './vaSeries.js'
-import { DOMAIN_LABEL, WHO5_TYPE, acuteEffects, effectsSince, metricCards, practiceCard, who5Card, feelOnlyText, FEEL_ONLY_MODULES } from './progress.js'
-import { ageFromBirthDate } from './identity.js'
-import { domainOfSession, HABIT_DOMAIN, HABIT_LABEL, stepDays } from './dataHub.js'
-import { growthCenter, AREAS } from './growthCenter.js'
-import { VERDICT_WORD, changeText, signedText, effectChangeText } from './changeText.js'
-import { loadHubHabits } from './alarmLog.js'
+import { DOMAIN_LABEL, WHO5_TYPE, acuteEffects, metricCards, practiceCard, who5Card, feelOnlyText } from './progress.js'
+import { ageFromBirthDate } from '../../../src/lib/identity.js'
+import { domainOfSession } from './dataHub.js'
 
 const isVa = (t) => t?.type === 'va-daily' || t?.type === 'va-weekly'
 // 'va-daily': kısa test (eski adı günlük test; 2026-09-29'dan beri isteğe bağlı). Eski kayıtlar da aynı testtir.
@@ -37,11 +34,7 @@ export const fileStamp = (d = new Date()) => `${d.getFullYear()}-${p2(d.getMonth
 // Başka dil eklenince CSV_FORMAT dile göre seçilir (ör. en: "," ve nokta).
 export const CSV_HEADER = ['tarih', 'modül', 'alan', 'ölçüm', 'değer', 'birim', 'not']
 
-// habits: veri merkezinin alışkanlık günlüğü (mola, su, alarm; lib/alarmLog.js loadHubHabits). Verilmezse telefondaki
-// günlük okunur (Doktoruma göster kartı yalnız tests/sessions verir). health (isteğe bağlı, App.jsx biçimi): Apple
-// Sağlık'ta kendi ortancasına ulaşan adımlı günler Beden günü olarak satır olur (gelisim-merkezi PLAN §3.5 madde 5;
-// DENETIM Ö-7, Ö-9). Adım SAYISI dosyaya yazılmaz (plan §3.4: telefonda kalır); yalnız günün kendisi.
-export function csvRows({ tests = [], sessions = [], habits = loadHubHabits(), health = null, metrics = registry.metrics(), effects = registry.effects() } = {}) {
+export function csvRows({ tests = [], sessions = [], metrics = registry.metrics(), effects = registry.effects() } = {}) {
   const rows = []
   const titleOf = (id) => registry.get(id)?.title ?? id
   for (const t of tests) {
@@ -81,22 +74,8 @@ export function csvRows({ tests = [], sessions = [], habits = loadHubHabits(), h
     const domain = a.kind === 'test' ? 'eye' : (rec ? domainOfSession(rec) : (registry.get(a.module) ?? registry.forSession({ type: a.type }))?.progress.domain) ?? ''
     rows.push({ date: a.date, module: a.title, domain, measure: 'süre', value: a.seconds, unit: 'sn', note: [a.estimated ? 'tahmini süre' : null, a.detail].filter(Boolean).join(' · ') })
   }
-  // Alışkanlık satırları (Ö-7): her kayıt bir satır; alan veri merkezinin eşlemesinden (Gelişim şeridiyle aynı)
-  for (const h of Array.isArray(habits) ? habits : []) {
-    if (!HABIT_DOMAIN[h?.type] || !validDate(h.at)) continue
-    rows.push({ date: h.at, module: HABIT_LABEL[h.type], domain: HABIT_DOMAIN[h.type], measure: HABIT_MEASURE[h.type], value: 1, unit: 'kez', note: '' })
-  }
-  // Adımlı günler (Ö-9): yalnız kendi ortancasına ulaşan gün; saat yok (günün başı, yerel)
-  for (const k of [...stepDays(health).days].sort()) {
-    const [y, m, d] = k.split('-').map(Number)
-    rows.push({ date: new Date(y, m - 1, d).toISOString(), module: 'Apple Sağlık', domain: 'body', measure: STEP_DAY_MEASURE, value: 1, unit: 'gün', note: 'adım kişinin kendi ortancasına ulaştı; adım sayısı dosyaya yazılmaz' })
-  }
   return rows.sort(byDate)
 }
-// Ölçü adları aynı biçimde (ad). "Alarm sabahı": uyanma işareti ya da sabah cevabı olan gün (lib/alarmLog.js alarmHabits);
-// yalnız uyanış değil. Adımlı gün PDF'teki adla aynı ("Hareketli gün" başlangıç sorusunun adıdır, ayrı kavram).
-export const HABIT_MEASURE = { mola: 'mola', water: 'su', alarm: 'alarm sabahı' }
-export const STEP_DAY_MEASURE = 'adımlı gün'
 
 // Etkinlik kimliği (lib/stats.js activitiesFrom: `s:${kayıt.id ?? sıra}`) → kayıt. Aynı kimlik iki kez geçerse eşleme
 // yapılmaz (null); o satırın alanı modülden okunur (eski yol).
@@ -129,11 +108,7 @@ export function toCsv(rows, { sep, decimal } = CSV_FORMAT) {
 const DAY = 86400000
 export const REPORT_TABLE_ROWS = 10
 
-// Hükümler ve sayılar veri merkeziyle aynı hesaptan (gelisim-merkezi PLAN §3.5 madde 1, §8.4 "tek hesap"): metrikler
-// ölçü kuralı v2 hükmüyle (metricCards verdict), etkiler yalnız son 28 gün (Ö-3; effectsSince, haritanın penceresi),
-// alan başına gün sayısı growthCenter'dan (plan §3.5 madde 5). habits verilmezse telefondaki günlük okunur; profile ve
-// health verilmezse yok sayılır (VARSAYIM: Doktoruma göster kartı G2'de bunları da verir).
-export function reportModel({ tests = [], sessions = [], identity = null, profile = null, habits = loadHubHabits(), health = null, now = new Date() } = {}) {
+export function reportModel({ tests = [], sessions = [], identity = null, now = new Date() } = {}) {
   const nowIso = new Date(now).toISOString()
   const va = tests.filter((t) => isVa(t) && Number.isFinite(t.logMAR) && validDate(t.date)).sort(byDate)
   const eyes = ['R', 'L', 'OU']
@@ -156,27 +131,21 @@ export function reportModel({ tests = [], sessions = [], identity = null, profil
     eyes,
     practice: practiceCard(tests, sessions, now),
     who5: who5Card(sessions, now),
-    metrics: metricCards({ tests, sessions, now }),
-    effects: acuteEffects(sessions, { since: effectsSince(now) }),
-    effectsWindow: 'son 28 gün',
-    areas: areaDays(growthCenter({ tests, sessions, profile, habits, health, now })),
+    metrics: metricCards({ tests, sessions }),
+    effects: acuteEffects(sessions),
   }
-}
-
-// Alan başına kaydı olan gün (Gelişim'in beş alanı) ve pencerenin adı (Kü-5). Hekim belgesinde pencere üçüncü kişiyle
-// yazılır ("ilk kayıttan beri" / "son 28 gün"; ekrandaki "başladığından beri" growthCenter windowLabel'da kalır).
-export const reportWindowLabel = (sinceStart) => (sinceStart <= WINDOW_DAYS_PDF ? 'ilk kayıttan beri' : `son ${WINDOW_DAYS_PDF} gün`)
-const WINDOW_DAYS_PDF = 28
-function areaDays(g) {
-  return { windowLabel: reportWindowLabel(g.sinceStart), win: g.win, rows: AREAS.map((k) => ({ key: k, label: g.areas[k].label, days: g.areas[k].days })) }
 }
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
 const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }) : '–')
 const fmtShort = (iso) => new Date(iso).toLocaleDateString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric' })
 const num = (v, d = 1) => (Number.isFinite(v) ? decimalTr(v, d) : '–')
-// İşaret yazılan (yuvarlanmış) değerden: −0,02 → "0,0" ("−0,0" değil). Tek metin işlevi (lib/changeText.js; Kü-4)
-const signed = (v, d = 1) => signedText(v, '', d)
+// İşaret yazılan (yuvarlanmış) değerden: −0,02 → "0,0" ("−0,0" değil)
+const signed = (v, d = 1) => {
+  if (!Number.isFinite(v)) return '–'
+  const r = +v.toFixed(d)
+  return `${r > 0 ? '+' : r < 0 ? '−' : ''}${decimalTr(Math.abs(v), d)}`
+}
 // logMAR → ondalık görme keskinliği (10^−logMAR); standart dönüşüm, yorum değil. H8: logMAR önce 2 haneye yuvarlanır,
 // ondalık bu değerden türetilir (uygulamadaki E7 ile aynı: 0,004 → "0,00" ve "1,00", "0,99" değil).
 const decimalVa = (lm) => formatEquivalents(lm)?.decimal ?? '–'
@@ -190,51 +159,11 @@ function lmChange(current, baseline) {
 }
 const PHASE_TEXT = { familiarization: 'alışma dönemi (ilk 7 gün)', baseline: 'başlangıç oluşuyor', tracking: 'takipte', empty: '–' }
 const STATUS_TEXT = { better: 'iyileşiyor', worse: 'geriliyor', noise: 'doğal oynama', unsure: 'henüz belirsiz', first: 'ilk ölçüm', up: 'anlamlı artış', down: 'anlamlı düşüş' }
-// Ölçü kuralı v2 hükmü (verdict; tek hesap, Gelişim ve merkezle aynı): yalnız Gelişim'in dört sözcüğü (lib/changeText.js
-// VERDICT_WORD; DEVIR §1.8). Doğrulanmış gerileme sözcüksüz yazılır: değerlendirme sütununda farkın kendisi, işaretli
-// ("−2"); Gelişim çipi de gerilemede sözcük yazmaz (lib/growthCenter.js word). AÇIK SORU (sahibe): gerilemenin sözü
-// (onaylı SONSUZ_YOL §3.B.5'teki "başlangıcının gerisinde" hekim belgesinde istisna mı). Yalnız status taşıyan eski
-// girdide STATUS_TEXT.
-export function metricVerdictText(c) {
-  const v = c.verdict ?? null
-  const feel = feelOnlyText(v ? { ...c, status: v } : c)
-  if (feel) return feel
-  if (v === 'worse') return changeText({ from: c.v2?.baseline, to: c.v2?.current, unit: c.unit, better: c.better }).deltaText
-  return (v ? VERDICT_WORD[v] : null) ?? STATUS_TEXT[c.status] ?? ''
-}
-// Ölçümün sayıları tek metin işlevinden (lib/changeText.js; Kü-4, Kü-6: basamak birimden, Gelişim çipiyle aynı biçim:
-// "%60 → %75", "2 → 4/5", "120 → 95 ms"). v2 varsa hükmün dayandığı başlangıç → şimdi; ilk bakıştan önce yalnız başlangıç
-// ("başlangıç 164 ms"); başlangıç kurulmadıysa son ölçüm günlerinin ortancası ("son 46 ms"). Yalnız eski alanları taşıyan
-// girdide ilk/son yarı ortalaması (eski yol).
-export function metricValueText(c) {
-  const v = c.v2
-  if (!v) return `${c.method === 'halves' ? 'ort. ' : ''}${num(c.first, c.unit === '/5' ? 1 : 0)} → ${num(c.last, c.unit === '/5' ? 1 : 0)} ${c.unit}`
-  if (Number.isFinite(v.baseline) && Number.isFinite(v.current)) return changeText({ from: v.baseline, to: v.current, unit: c.unit, better: c.better }).text
-  if (Number.isFinite(v.baseline)) return `başlangıç ${changeText({ to: v.baseline, unit: c.unit }).text}`
-  return Number.isFinite(v.latest) ? `son ${changeText({ to: v.latest, unit: c.unit }).text}` : '–'
-}
-// Etkinin yönü (Ö-8): "belirgin" yanında iyi mi kötü mü; yoga ("nasıl hissettin", FEEL_ONLY) yalnız puanın yönü.
-// Belirgin olmayan etki "belirsiz" kalır: dil incelemesi Gelişim'in sözcüğünü ("henüz belli değil") istedi, ama bu
-// sözcük exportData.test.js'in iki beklentisinde sabit ("<td>belirsiz</td>") ve o test PLAN §8.2 listesinde yok.
-// BLOCKER (sahibe soruldu): beklentinin değişmesine izin gelirse VERDICT_WORD[effectState(e)] yazılır.
-export function effectVerdictText(e) {
-  if (!e.sig) return 'belirsiz'
-  const c = effectChangeText(e)
-  if (FEEL_ONLY_MODULES.has(e.module)) return c.delta > 0 ? 'belirgin artış' : c.delta < 0 ? 'belirgin düşüş' : 'belirgin'
-  return `belirgin, ${c.good ? 'iyi yönde' : 'kötü yönde'}${e.better === 'down' ? ' (düşük daha iyi)' : ''}`
-}
-// Gözün durumu: uyarı (sarı/kırmızı) ve evre aynen; takipteyse Gelişim'in sözcüğü (iyileşme → "başlangıcından iyi",
-// yoksa "değişim yok"; growthCenter eyeState ile aynı). Açıklama cümlesi (trendMessage) altta aynen kalır.
 function eyeStatusText(t) {
   if (t.alert === 'red') return 'KIRMIZI: göz doktoruna başvurmalı'
   if (t.alert === 'yellow') return 'SARI: sonraki testlerle izlenmeli'
   if (t.phase !== 'tracking') return PHASE_TEXT[t.phase]
-  return t.trend === 'improving' ? VERDICT_WORD.better : VERDICT_WORD.same
-}
-// WHO-5 satırı: son puan, ilk ölçümden değişim (işaretli) ve Gelişim'in sözcüğü (who5Card verdict; gerilemede sözcük yok)
-function who5Text(w) {
-  const word = w.verdict === 'better' || w.verdict === 'same' ? ` (${VERDICT_WORD[w.verdict]})` : ''
-  return `${w.delta != null ? `, ilk ölçümden bu yana ${signed(w.delta, 0)}${word}` : ''}`
+  return t.trend === 'improving' ? 'iyileşme' : 'doğrulanmış değişim yok'
 }
 
 // logMAR eğilimi: yukarı = daha iyi (ters eksen), gri bant = başlangıç ±0,10 (değişim eşiği; tek testin oynaması
@@ -357,17 +286,15 @@ export function reportHtml(m) {
     : '<p class="small">Henüz görme testi yok.</p>'
   // Yoga ölçüsü "nasıl hissettin" gidişatı: Gelişim'deki metinle aynı ("belirgin artış/düşüş"; "iyileşiyor" değil)
   const metricRows = m.metrics
-    .map((c) => `<tr><td>${esc(c.label)}</td><td>${esc(DOMAIN_LABEL[c.domain] ?? '')}</td><td class="n">${c.n}</td><td class="n">${esc(metricValueText(c))}</td><td>${esc(metricVerdictText(c))}</td></tr>`)
+    .map((c) => `<tr><td>${esc(c.label)}</td><td>${esc(DOMAIN_LABEL[c.domain] ?? '')}</td><td class="n">${c.n}</td><td class="n">${c.method === 'halves' ? 'ort. ' : ''}${esc(num(c.first, c.unit === '/5' ? 1 : 0))} → ${esc(num(c.last, c.unit === '/5' ? 1 : 0))} ${esc(c.unit)}</td><td>${esc(feelOnlyText(c) ?? STATUS_TEXT[c.status] ?? '')}</td></tr>`)
     .join('')
-  const v2Rows = m.metrics.some((c) => c.v2)
-  const oldRows = m.metrics.some((c) => !c.v2)
   // Değişim sütunu puanın kendi değişimi (sonra − önce); güven aralığı da aynı yönde. e.gain, lo, hi iyileşme yönündedir:
   // "düşük daha iyi" ölçüde (Yön, yoga Ders 1–2) işaret çevrilir; önceden değer çevrilip aralık çevrilmiyordu (−3,0 (2,1 – 3,9))
   const effectRows = m.effects
     .map((e) => {
       const k = e.better === 'down' ? -1 : 1
       const ci = e.n >= 3 && e.lo != null ? ` (${esc(num(Math.min(k * e.lo, k * e.hi)))} – ${esc(num(Math.max(k * e.lo, k * e.hi)))})` : ''
-      return `<tr><td>${esc(e.label)}</td><td>${esc(e.measure)} (/${e.max})</td><td class="n">${e.n}</td><td class="n">${esc(num(e.before))} → ${esc(num(e.after))}</td><td class="n">${esc(signed(k * e.gain))}${ci}</td><td>${esc(effectVerdictText(e))}</td></tr>`
+      return `<tr><td>${esc(e.label)}</td><td>${esc(e.measure)} (/${e.max})</td><td class="n">${e.n}</td><td class="n">${esc(num(e.before))} → ${esc(num(e.after))}</td><td class="n">${esc(signed(k * e.gain))}${ci}</td><td>${e.sig ? 'belirgin' : 'belirsiz'}</td></tr>`
     })
     .join('')
   const w = m.who5
@@ -390,19 +317,17 @@ ${eyeSection}</section>
 </section>
 
 <section class="block"><h2>Düzen</h2>
-<div class="cols"><div><b>${m.practice.activeDays ?? 0}</b><span>aktif gün · ilk kayıttan beri</span></div><div><b>${m.practice.minutes ?? 0}</b><span>dakika uygulama · ilk kayıttan beri</span></div><div><b>${m.practice.streakDays ?? 0}</b><span>gün seri</span></div></div>
-${m.areas ? `<p class="small">Alan başına kaydı olan gün (${esc(m.areas.windowLabel)}): ${m.areas.rows.map((r) => `${esc(r.label)} ${r.days}`).join(' · ')}. Mola, su, alarm sabahı ve Apple Sağlık'ta kişinin kendi ortancasına ulaşan adımlı günler dâhil. Bu beş alan, aşağıdaki tablolarda ve CSV dosyasında geçen alanları şöyle toplar: Göz; Dikkat = Dikkat ve Farkındalık; Nefes = Sakinlik; Ruh hâli = İyi oluş ve Kendine yaklaşım; Hareket = Beden.</p>` : ''}
+<div class="cols"><div><b>${m.practice.activeDays ?? 0}</b><span>aktif gün</span></div><div><b>${m.practice.minutes ?? 0}</b><span>dakika uygulama</span></div><div><b>${m.practice.streakDays ?? 0}</b><span>gün seri</span></div></div>
 </section>
 
-${w.n ? `<section class="block"><h2>İyi oluş · WHO-5 (0–100, son iki hafta)</h2><p>Son puan <b>${w.last}</b>${esc(who5Text(w))}; ${w.n} ölçüm. 10 puan ve üstü değişim anlamlı kabul edilir; 52 altı düşük iyi oluş (tanı değildir).</p>
+${w.n ? `<section class="block"><h2>İyi oluş · WHO-5 (0–100, son iki hafta)</h2><p>Son puan <b>${w.last}</b>${w.delta != null ? `, ilk ölçümden bu yana ${esc(signed(w.delta, 0))} (${esc(STATUS_TEXT[w.status] ?? '')})` : ''}; ${w.n} ölçüm. 10 puan ve üstü değişim anlamlı kabul edilir; 52 altı düşük iyi oluş (tanı değildir).</p>
 <p class="src">Topp CW ve ark. 2015, Psychother Psychosom 84(3):167-176. doi:10.1159/000376585 · Türkçe geçerlilik: Eser E ve ark. 2019, Prim Health Care Res Dev 20:e100. doi:10.1017/S1463423619000343</p></section>` : ''}
 
-${metricRows ? `<section class="block"><h2>Diğer ölçümler</h2><table><thead><tr><th>Ölçüm</th><th>Alan</th><th class="n">n</th><th class="n">${v2Rows ? 'başlangıç → şimdi' : 'ilk → son'}</th><th>Değerlendirme</th></tr></thead><tbody>${metricRows}</tbody></table>
-${v2Rows ? '<p class="small">Aynı günün ölçümleri tek değer sayılır (o günün ortancası); ilk 1–2 ölçüm günü alışmadır. Başlangıç, sonraki 6 ölçüm gününün ortancasıdır ve değişmez. "Şimdi" son 3 ölçüm gününün ortancasıdır. Fark, başlangıç günlerinin standart sapmasının 1,5 katını aşar (yayımlanmış eşik varsa o eşiğe ulaşır) ve haftalık bakışta (Pazartesi) art arda iki hafta sürerse değişim denir; tek güne değil, süren farka bakılır. İki bakış arasında yeni ölçüm yoksa önceki değerlendirme sürer. Fark ilk bakışta görülüp henüz doğrulanmadıysa ya da son 3 ölçüm günü son 28 günde değilse "henüz belli değil" yazılır. Doğrulanmış gerilemede değerlendirme sütununa farkın kendisi işaretli sayı olarak yazılır.</p>' : ''}
-${oldRows ? '<p class="small">"ort.": 6 ve üstü ölçümde ilk yarının ve son yarının ortalaması; fark %95 güven aralığıyla sınanır (sıfırı içermiyorsa değişim var). Yayımlanmış eşik varsa o kullanılır.</p>' : ''}</section>` : ''}
+${metricRows ? `<section class="block"><h2>Diğer ölçümler</h2><table><thead><tr><th>Ölçüm</th><th>Alan</th><th class="n">n</th><th class="n">ilk → son</th><th>Değerlendirme</th></tr></thead><tbody>${metricRows}</tbody></table>
+<p class="small">"ort.": 6 ve üstü ölçümde ilk yarının ve son yarının ortalaması; fark %95 güven aralığıyla sınanır (sıfırı içermiyorsa değişim var). Yayımlanmış eşik varsa o kullanılır.</p></section>` : ''}
 
-${effectRows ? `<section class="block"><h2>Uygulama öncesi → sonrası (kişinin kendi puanı) · ${esc(m.effectsWindow ?? 'tüm kayıtlar')}</h2><table><thead><tr><th>Uygulama</th><th>Ölçü</th><th class="n">oturum</th><th class="n">ortalama önce → sonra</th><th class="n">değişim (%95 GA)</th><th></th></tr></thead><tbody>${effectRows}</tbody></table>
-<p class="small">Kontrol grubu yok: beklenti ve yalnızca mola vermenin etkisi ayrılamaz. Önce puanı uç olan oturumlarda sonraki puanın ortalamaya yaklaşması (ortalamaya dönüş) da farkın bir kısmını açıklayabilir. "Belirgin": en az 3 oturum ve güven aralığı sıfırı içermiyor; yön, puanın iyi sayılan yönüne göre yazılır. Değişim sütunu puanın kendi değişimidir (sonra − önce).</p></section>` : ''}
+${effectRows ? `<section class="block"><h2>Uygulama öncesi → sonrası (kişinin kendi puanı)</h2><table><thead><tr><th>Uygulama</th><th>Ölçü</th><th class="n">oturum</th><th class="n">ortalama önce → sonra</th><th class="n">değişim (%95 GA)</th><th></th></tr></thead><tbody>${effectRows}</tbody></table>
+<p class="small">Kontrol grubu yok: beklenti ve yalnızca mola vermenin etkisi ayrılamaz. "Belirgin": en az 3 oturum ve güven aralığı sıfırı içermiyor.</p></section>` : ''}
 
 <section class="block"><h2>Yöntem ve sınırlar</h2>
 <p class="small">Görme: telefon ekranında dört yöne dönen E harfi; sağ ve sol göz ayrı ayrı (diğeri kapatılarak), haftalık testte ayrıca iki göz birlikte. Harf boyutu uyarlamalı yöntemle (iniş + ZEST, Bayes eşik tahmini) ayarlanır; sonuç logMAR. Hedef mesafe 40 cm; destekleyen iPhone'larda mesafe ön kamerayla (TrueDepth) ölçülür ve harf boyutu ölçülen mesafeye göre hesaplanır. "ondalık" sütunu 10<sup>−logMAR</sup> dönüşümüdür.</p>

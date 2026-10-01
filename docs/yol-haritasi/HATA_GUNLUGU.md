@@ -849,3 +849,25 @@ Hata numaraları: Bug 1–20. "Bug 12" iki kez kullanılmıştı; kalibrasyon ol
   hâline döndü. Test: `releases.test.js` "Bug 31: Build 63'ten sonra eklenen maddeler yeni girdide".
 - Kural: sürüm notuna madde eklemeden önce en yeni girdinin id'si son TestFlight derlemesinin commit'inde var mı diye
   bakılır (`git show <commit>:app/src/lib/releases.js`); varsa yeni id açılır.
+
+## Bug 37: Kamera E testi ortasında durunca tek kamerasız kayıt görme serisini ve sarı/kırmızı uyarıyı siliyordu (2026-10-01, gelişim merkezi DENETIM Ö-11)
+## Durum: DÜZELTİLDİ (kod + test, G1; commit edilmedi); cihazda görülecek
+- `lib/trend.js` seri anahtarını son testten alıyordu. Kamera test ortasında durunca kayıt kamerasız kalır
+  (`camFailedMidTest`, `lib/acuityFlow.js`); bu tek kayıt kameralı seriyi değiştiriyor, uyarı kayboluyor, ekranda
+  "Alışma dönemi" yazıyordu. Güvenlik bulgusu: kırmızı uyarı tek bir kesik testle görünmez oluyordu.
+- Düzeltme: sondaki kesintisiz `camFailedMidTest` kayıtları `CAM_FAILED_SWITCH` (3; VARSAYIM) testten azsa seri anahtarı
+  onlardan önceki son kayıttan alınır; o kayıtlar seriye girmez, "Kamerasız N ölçüm bu seriye girmiyor." notuyla görünür.
+  Yalnız seri seçimi değişti; alışma, başlangıç, son 3 test ve eşikler aynı. Test: `growth.audit.test.js` "Ö-11 (C-T8)",
+  "Ö-11 (C-T8b)", "Ö-11 sınırları"; `lib/trend.test.js` değişmeden yeşil.
+- Eşdeğerlikte 'eye' grubu olarak ayrı sayılır (PLAN §8.4'ün izinli listesinde adı yok; PLAN §13 G1'in ilk adımı diyor).
+  Aynı grupta ikinci bir değişiklik de var: `lib/vaSeries.js` bozuk göz kaydını (tarihsiz ya da logMAR'ı sayı değil) öne
+  çıkan gözü seçerken saymıyor (PDF ve CSV zaten almıyordu). Bu ikincisi planda yok: sahip onayı bekliyor.
+
+## Bug 38: "Tüm verileri sil" kişisel bakış kalibrasyonunu silmiyordu (2026-10-01, gelişim merkezi DENETIM Kü-12)
+## Durum: DÜZELTİLDİ (kod + test, G1; commit edilmedi); cihazda görülecek
+- `lib/gazeCalib.js` kalibrasyonu `GAZE_MODEL_KEY` altında tutar; `clearGazeModel` hiçbir yerden çağrılmıyordu. "Tüm verileri
+  sil" sözü eksik kalıyordu (kişisel veri telefonda kalıyordu).
+- Düzeltme: `lib/notifyReset.js` `DATA_RESET_KEYS` (GAZE_MODEL_KEY) silinir. Kamera yönü tercihi (gaze-flip) cihaz ayarıdır,
+  kalır. Test: `growth.audit.test.js` "Kü-12". Not: bu dosya PLAN §8.1 G1 listesinde yok (PLAN §13 "ayrı iş"); kapsam dışı
+  değişiklik olarak raporlandı.
+

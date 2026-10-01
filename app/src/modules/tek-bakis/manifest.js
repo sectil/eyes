@@ -54,10 +54,15 @@ export default {
     if (!done && days >= WEEKLY_DAYS) return null
     return { title: 'Tek Bakışta', minutes: 2, slot: 'body', order: 95, glyph: 'span', dropRank: 1.5, rotate: 'week3', weekDays: days, done }
   },
+  // span7: son 7 günün turlarının ORTANCASI (onaylı SONSUZ_YOL §3.B.6; gelisim-merkezi PLAN §8.2). En iyi tur (bugün
+  // Math.max) şansla bir kez yüksek çıkan turu Nef'e "seviye" diye taşıyordu; ortanca, ölçü kuralı v2'nin günlük
+  // ortancasıyla aynı ilkedir (DENETIM K4). VARSAYIM: turlar günlere göre ayrı ayrı değil, hepsi birlikte.
   coach(sessions, now) {
     const week = withinDays(sessions.filter(isSpan), now)
     if (!week.length) return null
-    return { span7: Math.max(...week.map((s) => s.span)), rounds7: week.length, first: sessions.find(isSpan).span }
+    const v = week.map((s) => s.span).sort((a, b) => a - b)
+    const m = v.length >> 1
+    return { span7: v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2, rounds7: week.length, first: sessions.find(isSpan).span }
   },
   stats(sessions, now) {
     const all = sessions.filter(isSpan)

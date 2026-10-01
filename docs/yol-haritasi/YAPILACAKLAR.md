@@ -64,6 +64,24 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
       ders ücretli üretim bekliyor.
 - [ ] §3.K nefona.com güncellemesi: en sonda, modüller cihazda görülünce.
 
+**Gelişim merkezi** (`tasarim/gelisim-merkezi/`, DEVIR.md bağlayıcı)
+- [~] **G1 veri** (2026-10-01; commit edilmedi): `growthCenter` (beş alan, `verdict`/`word`/`line`/`value`, Nef şablon
+      anahtarı), ölçü kuralı v2, `changeText`, denetim düzeltmeleri, eşdeğerlik düzeneği (20.000 depo, izinli liste dışında
+      0 fark), tek hesap testi. Cihazda hiçbir şey görülmedi.
+- [ ] **Sahip kararı bekleyen (G1'i kapatmaz sayılır):**
+  - Ö-4: `reading-cps` progress.metrics'e kaydı `modules/registry.test.js` "her metrik kendi örnek oturumuyla" beklentisini
+    değiştirir (§8.2 dışında). (a) beklenti değişsin mi, (b) merkezde ayrı Göz ölçümü mü?
+  - Gerilemenin ekrandaki sözü (dört sözcükte yok): şimdilik sözcüksüz, yalnız sayı (Gelişim çipi, 5. gün, PDF).
+  - PDF etki sütununda "belirsiz" → "henüz belli değil": `exportData.test.js` iki beklentisi (§8.2 dışında).
+  - Doktoruma göster kartı (`components/ExportCard.jsx`) PDF/CSV'ye `profile` ve `health` vermiyor; dosya G1 listesinde yok.
+  - Eşdeğerlikte 'eye' grubu (Ö-11 ve `vaSeries` bozuk göz kaydı) §8.4 listesinde yok.
+  - DEVIR §0 "hepsi G1'de kapanır" ↔ PLAN §13 (Ö-2, Ö-12, Kü-7, Kü-14 → Y6) çelişkisi; Kü-10, Kü-11, Kü-13 sahibe.
+  - G1 sürüm notu (TASLAK, raporda): `releases.test.js` en son girdiyi sabitliyor; eklemek o beklentiyi değiştirir.
+- [ ] G2 ekran (GrowthHead), G2b kendi yüzün (DEVIR §6 soru 1), G3 bildirim (aylık metin sahibe), G4 canlı yürüyüş.
+- [ ] G2'ye kalan veri bağlantıları: ProgressOverview `verdict`/`value` okur (K1), Home göz kartı `eye.current` (K2),
+      `signed` → `changeText` (Kü-4), iris hücreleri merkezden (App, IrisPlan, IrisQuestions; Ö-10 (b)), Profilim "İris
+      haritan" (Ö-10 (a)), Nef cümlesinin metni ve "aynı basamak iki gün üst üste gelmez" kuralı.
+
 **Bildirimler, hava, yürüyüş** (`tasarim/bildirim-hava-yuruyus/`)
 - [x] B0: gece düzeltmeleri, eşdeğerlik tabanı, rıza metinleri, hukukçu soruları.
 - [~] **B1a "Bana hatırlat":** arka plan kodu bitti (`f73bea2`, `6eef4cd`, `d2fa5e8`): 7 modül PubMed kaynaklı, 53 cümle

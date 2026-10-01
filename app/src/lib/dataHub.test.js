@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { hub, domainOfSession, domainsWithData, ANSWER_FIELDS, growthMap, verifiedChange, weakestDomain, calendarDays } from './dataHub.js'
+import { hub, domainOfSession, domainsWithData, ANSWER_FIELDS, growthMap, verifiedChange, changeDetail, weakestDomain, calendarDays } from './dataHub.js'
 import { registry, DOMAINS } from '../modules/registry.js'
 
 // Ölçüm ilkesi (ANA_BELGE.md §1): canlı her modül veri merkezine ulaşır. Merkeze başka yoldan giren modüller açıkça
@@ -94,7 +94,9 @@ describe('veri merkezi: gelişim haritası', () => {
   })
   it('doğrulanmış değişim: gerileme önce gelir; yoksa iyileşme; ikisi de yoksa null', () => {
     expect(verifiedChange({ metrics: [{ status: 'better' }], effects: [] })).toBe('up')
-    expect(verifiedChange({ metrics: [{ status: 'better' }, { status: 'worse' }], effects: [] })).toBe('down')
+    // gelisim-merkezi PLAN §8.2 / onaylı §3.G.4: "better + worse → down" yerine null ve mixed: true (karışık)
+    expect(verifiedChange({ metrics: [{ status: 'better' }, { status: 'worse' }], effects: [] })).toBeNull()
+    expect(changeDetail({ metrics: [{ status: 'better' }, { status: 'worse' }], effects: [] })).toMatchObject({ status: null, mixed: true })
     expect(verifiedChange({ metrics: [{ status: 'noise' }], effects: [{ sig: false, gain: 2 }] })).toBeNull()
     expect(verifiedChange({ metrics: [], effects: [], eye: { alert: 'yellow' } })).toBe('down')
     expect(verifiedChange({ metrics: [], effects: [], who5: { status: 'up' } })).toBe('up')

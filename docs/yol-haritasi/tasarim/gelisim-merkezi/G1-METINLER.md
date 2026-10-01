@@ -1,4 +1,6 @@
-# G1 · kullanıcıya görünen yeni ya da değişen metinler (SAHİP ONAYI BEKLİYOR)
+# G1 · kullanıcıya görünen yeni ya da değişen metinler (SAHİP ONAYLADI, 2026-10-01: "Onaylıyorum")
+
+Takvim noktası 5 sn kapısını iki turda geçemedi; sahip kararı "Noktayı şimdilik çıkar". Sürüm notundan da çıkarıldı.
 
 Kaynak: G1 iş akışı düzeltme adımı. Değişim sözcükleri ANA_OTURUM_ISTEMI §3'e göre yalnız: "başlangıcından iyi", "değişim yok",
 "henüz belli değil", "başlangıç". Gerilemede sözcük yok, işaretli sayı var.
@@ -31,7 +33,6 @@ Kaynak: G1 iş akışı düzeltme adımı. Değişim sözcükleri ANA_OTURUM_IST
 - change: "Doktoruma göster (PDF), CSV ve 5. gün raporu ölçümlerin değişimini aynı kuralla yazar: aynı günün ölçümleri tek değer
   sayılır; fark ancak iki haftalık bakışta sürerse değişim denir."
 - new: "CSV dosyasında mola, su, alarm sabahı ve adımlı günler de satır olur; adım sayısı dosyaya yazılmaz."
-- new: "Takvimde mola ya da su verdiğin günler küçük bir noktayla görünür; haftalık hedefe sayılmaz."
 - fix: "E testi sırasında kamera durunca kamerasız kalan tek ölçüm görme serini ve uyarıyı artık silmez."
 - fix: "\"Tüm verileri sil\" bakış kalibrasyonunu da siler."
 - fix: "5. gün raporunda iyi oluş: ikinci ölçümden sonra son puanın ve ilk ölçümden değişim yazar."

@@ -10,9 +10,7 @@ const SEVERITY = { red: 2, yellow: 1 }
 export const EYE_LABEL = { R: 'Sağ göz', L: 'Sol göz', OU: 'İki göz' }
 const DAY = 86400000
 
-// Geçerli göz kaydı: E testi türü, sayı logMAR ve okunabilir tarih. Bozuk kayıt (tarihi yok ya da logMAR'ı sayı değil)
-// bir gözü öne çıkarmaz; PDF/CSV (lib/exportData.js) de bunları almaz (gelisim-merkezi tek hesap testi; PLAN §3.5 m. 1)
-const isVa = (t) => (t?.type === 'va-daily' || t?.type === 'va-weekly') && Number.isFinite(t.logMAR) && Number.isFinite(new Date(t.date).getTime())
+const isVa = (t) => t?.type === 'va-daily' || t?.type === 'va-weekly'
 
 export function pickSeries(tests = [], now = new Date().toISOString()) {
   const va = tests.filter(isVa)

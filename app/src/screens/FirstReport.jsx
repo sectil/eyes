@@ -1,9 +1,11 @@
 import { useMemo } from 'react'
 import { CalendarCheck, Clock, Flame } from 'lucide-react'
-import { firstReport, DOMAIN_LABEL } from '../lib/progress.js'
-import { metricStatus, effectStatus } from '../components/ProgressOverview.jsx'
+import { firstReport, DOMAIN_LABEL, feelOnlyText } from '../lib/progress.js'
 import { decimalTr } from '../lib/stats.js'
 import { WEEKLY_PLAN_NOTE } from '../lib/trend.js'
+import { changeText, signedText, verdictWord, VERDICT_WORD } from '../lib/changeText.js'
+import { metricValueText, effectVerdictText } from '../lib/exportData.js'
+import { effectState } from '../lib/growthCenter.js'
 import '../styles/progress2.css'
 
 // 5. gün "İlk rapor" (Gelişim 2.0; onaylı): deneme 7 gün, kullanıcı ödeme kararından önce görsün.
@@ -11,11 +13,26 @@ import '../styles/progress2.css'
 // Göz ve WHO-5 için dürüst durum: E testi haftada bir (karar 2026-09-29); ilk test alışma, başlangıç sonraki 3 haftalık
 // testle (en erken 22. gün; lib/trend.js). Her gün test eden eski kullanıcıda 8–21. günlerde. WHO-5 14 günde bir.
 const num = (v, d = 1) => (Number.isFinite(v) ? decimalTr(v, d) : '–')
-// İşaret yazılan (yuvarlanmış) değerden: −0,02 → "0,0" ("−0,0" değil)
-const signed = (v, d = 1) => {
-  if (!Number.isFinite(v)) return '–'
-  const r = +v.toFixed(d)
-  return `${r > 0 ? '+' : r < 0 ? '−' : ''}${decimalTr(Math.abs(v), d)}`
+// İşaret yazılan (yuvarlanmış) değerden: −0,02 → "0,0" ("−0,0" değil). Tek metin işlevi (lib/changeText.js; Kü-4)
+const signed = (v, d = 1) => signedText(v, '', d)
+
+// Ölçümler kartı ve etki hapı merkezle ve PDF'le aynı hükümden (gelisim-merkezi PLAN §3.5 madde 1; DENETIM K1):
+// metrikte ölçü kuralı v2 (verdict) ve Gelişim'in dört sözcüğü; değer tek metin işlevinden, PDF'teki biçimle
+// (lib/exportData.js metricValueText). Doğrulanmış gerilemede hap yok: yalnız sayılar (DEVIR §1.8; sözü sahibe soruldu).
+// Yoga ("nasıl hissettin") yalnız puanın yönü.
+export function metricPill(m) {
+  const feel = feelOnlyText(m?.verdict ? { ...m, status: m.verdict } : m)
+  if (feel) return { text: feel, tone: 'muted' }
+  if (m?.verdict === 'better') return { text: VERDICT_WORD.better, tone: 'ok' }
+  if (m?.verdict === 'same' || m?.verdict === 'unclear' || m?.verdict === 'start') return { text: VERDICT_WORD[m.verdict], tone: 'muted' }
+  return null
+}
+// Etki hapı merkezin durumundan (lib/growthCenter.js effectState): belirgin değilse Gelişim'in sözcüğü (3 oturumdan az
+// "başlangıç", güven aralığı sıfırı içeriyorsa "henüz belli değil"); belirginse PDF'in sütunuyla aynı söz
+// (lib/exportData.js effectVerdictText: "belirgin, iyi yönde", yoga "belirgin artış/düşüş")
+export function effectPill(e) {
+  if (!e?.sig) return { text: VERDICT_WORD[effectState(e)] ?? VERDICT_WORD.unclear, tone: 'muted' }
+  return { text: effectVerdictText(e), tone: e.gain > 0 ? 'ok' : 'warn' }
 }
 
 // Etkinin puandaki kendi değişimi (sonra − önce) ve güven aralığı aynı yönde; fiil değişimin işaretinden. e.gain, lo, hi
@@ -34,6 +51,23 @@ export function changeOf(e) {
   }
 }
 
+// İyi oluş kartı (DENETIM Ö-6): ikinci ölçümden sonra "İlk puanın" denmez; son puan, ilk puandan değişim (tek metin işlevi,
+// lib/changeText.js) ve ölçü kuralının sözcüğü (who5Card verdict; yayımlanmış eşik 10 puan). Eşik cümlesi hükümden
+// önce gelir (hüküm eşiğe göre okunsun). Gerileme için ekranda ayrı bir hüküm sözcüğü yok (gelisim-merkezi DEVIR §1.8;
+// sahibe soruldu): yalnız sayılar ve eşik yazılır.
+export function who5Line(w) {
+  if (!w?.n) return 'İyi oluş ölçeği son iki haftayı sorar; 14 günde bir. İlk ölçümün Gelişim → İyi oluş\'ta.'
+  const next = w.nextInDays > 0 ? ` Sonraki ölçüm ${w.nextInDays} gün sonra.` : ' Yeni ölçümün zamanı geldi.'
+  if (w.n === 1) {
+    return w.nextInDays > 0
+      ? `İlk puanın ${w.last}. İkinci ölçüm ${w.nextInDays} gün sonra; iyi oluş ölçeği son iki haftayı sorduğu için daha sık sorulmaz.`
+      : `İlk puanın ${w.last}.${next}`
+  }
+  const c = changeText({ from: w.first, to: w.last, unit: '/100' })
+  const word = w.verdict === 'better' ? ': puanın başlangıcından iyi' : w.verdict === 'same' ? `: ${verdictWord('same')}` : ''
+  return `Son puanın ${w.last}; ilk ölçümden bu yana ${c.deltaText} (${w.n} ölçüm). 10 puan ve üstü değişim anlamlı sayılır${word}.${next}`
+}
+
 // Haftalık planın takvim cümlesi: henüz test yoksa ya da haftalık yolda alışma/başlangıç dönemindeyse
 export const eyeWhen = (eye) => eye?.phase === 'empty' || ((eye?.phase === 'familiarization' || eye?.phase === 'baseline') && eye?.baselineMode === 'weekly')
 
@@ -50,7 +84,7 @@ export default function FirstReport({ tests = [], sessions = [], start, onClose,
       </header>
 
       <section className="card p2-card">
-        <span className="eyebrow">Düzen</span>
+        <span className="eyebrow">Düzen · başladığından beri</span>
         <div className="p2-kv">
           <div><b><CalendarCheck size={14} aria-hidden="true" /> {p.activeDays}</b><span>aktif gün</span></div>
           <div><b><Clock size={14} aria-hidden="true" /> {p.minutes}</b><span>dakika</span></div>
@@ -63,9 +97,10 @@ export default function FirstReport({ tests = [], sessions = [], start, onClose,
         {effects.length ? (
           effects.map((e) => {
             const c = changeOf(e)
+            const pill = effectPill(e)
             return (
               <p key={e.key} className="p2-msg">
-                <b>{e.label}</b> sonrası {e.measure} ortalama {c.verb}: {signed(c.value)} ({e.n} oturum{e.n >= 3 && c.lo != null ? `, %95 GA ${num(c.lo)} – ${num(c.hi)}` : ''}) <span className={`p2-pill ${effectStatus(e).tone}`}>{effectStatus(e).text}</span>
+                <b>{e.label}</b> sonrası {e.measure} ortalama {c.verb}: {signed(c.value)} ({e.n} oturum{e.n >= 3 && c.lo != null ? `, %95 GA ${num(c.lo)} – ${num(c.hi)}` : ''}) <span className={`p2-pill ${pill.tone}`}>{pill.text}</span>
               </p>
             )
           })
@@ -78,12 +113,15 @@ export default function FirstReport({ tests = [], sessions = [], start, onClose,
       {r.metrics.length > 0 && (
         <section className="card p2-card">
           <span className="eyebrow">Ölçümler</span>
-          {r.metrics.map((m) => (
-            <p key={m.key} className="p2-msg">
-              <b>{m.label}</b> ({DOMAIN_LABEL[m.domain]}): {m.method === 'halves' ? 'ilk yarı ort. ' : ''}{num(m.first, m.unit === '/5' ? 1 : 0)} → {m.method === 'halves' ? 'son yarı ort. ' : ''}{num(m.last, m.unit === '/5' ? 1 : 0)} {m.unit} · {m.n} ölçüm <span className={`p2-pill ${metricStatus(m).tone}`}>{metricStatus(m).text}</span>
-            </p>
-          ))}
-          <p className="muted small">"Henüz belirsiz": değerlendirme için en az 6 ölçüm gerekir.</p>
+          {r.metrics.map((m) => {
+            const pill = metricPill(m)
+            return (
+              <p key={m.key} className="p2-msg">
+                <b>{m.label}</b> ({DOMAIN_LABEL[m.domain]}): {metricValueText(m)} · {m.n} ölçüm{pill && <> <span className={`p2-pill ${pill.tone}`}>{pill.text}</span></>}
+              </p>
+            )
+          })}
+          <p className="muted small">"Başlangıç": ilk ölçüm günlerinden sonra 6 günlük başlangıç oluşuyor; değişim ondan sonraki haftalarda değerlendirilir.</p>
         </section>
       )}
 
@@ -96,11 +134,7 @@ export default function FirstReport({ tests = [], sessions = [], start, onClose,
 
       <section className="card p2-card">
         <span className="eyebrow">İyi oluş</span>
-        <p className="p2-msg">
-          {r.who5.n
-            ? `İlk puanın ${r.who5.last}. İkinci ölçüm ${r.who5.nextInDays} gün sonra; iyi oluş ölçeği son iki haftayı sorduğu için daha sık sorulmaz.`
-            : 'İyi oluş ölçeği son iki haftayı sorar; 14 günde bir. İlk ölçümün Gelişim → İyi oluş\'ta.'}
-        </p>
+        <p className="p2-msg">{who5Line(r.who5)}</p>
       </section>
 
       <button className="btn" onClick={onProgress}>Gelişim'e git</button>

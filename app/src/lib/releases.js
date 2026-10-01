@@ -6,6 +6,18 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Gelişim merkezi G1 (veri): ölçü kuralı v2, denetim düzeltmeleri. Metinler sahip onaylı (2026-10-01, G1-METINLER.md).
+    id: '2026-10-01-8',
+    title: '1 Ekim, sekizinci güncelleme',
+    items: [
+      { kind: 'change', text: 'Doktoruma göster (PDF), CSV ve 5. gün raporu ölçümlerin değişimini aynı kuralla yazar: aynı günün ölçümleri tek değer sayılır; fark ancak iki haftalık bakışta sürerse değişim denir.' },
+      { kind: 'new', text: 'CSV dosyasında mola, su, alarm sabahı ve adımlı günler de satır olur; adım sayısı dosyaya yazılmaz.' },
+      { kind: 'fix', text: 'E testi sırasında kamera durunca kamerasız kalan tek ölçüm görme serini ve uyarıyı artık silmez.' },
+      { kind: 'fix', text: '"Tüm verileri sil" bakış kalibrasyonunu da siler.' },
+      { kind: 'fix', text: '5. gün raporunda iyi oluş: ikinci ölçümden sonra son puanın ve ilk ölçümden değişim yazar.' },
+    ],
+  },
+  {
     // Alarm: erteleme kaldırıldı (sahip kararı 2026-10-01), telefonda kaybolan alarm uyarısı, tek seferlik alarm özeti.
     id: '2026-10-01-7',
     title: '1 Ekim, yedinci güncelleme',

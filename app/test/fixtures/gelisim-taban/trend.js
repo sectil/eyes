@@ -105,41 +105,14 @@ function legacyBand(t) {
 }
 const seriesKey = (t) => ({ era: methodEra(t.algorithm), tracked: isTracked(t), outOfBand: legacyBand(t) })
 
-// Ö-11 (gelisim-merkezi DENETIM §4, PLAN §13): kamera test ORTASINDA durduğu için kamerasız kalan kayıt
-// (camFailedMidTest; lib/acuityFlow.js buildEyeRecord) seriyi tek başına değiştirmez. Eskiden seri anahtarı son testten
-// alındığı için böyle tek bir kayıt kameralı seriyi (ve sarı/kırmızı uyarıyı) siliyor, ekranda "Alışma dönemi"
-// yazıyordu. Kural: sondaki kesintisiz camFailedMidTest kayıtları CAM_FAILED_SWITCH'ten azsa seri anahtarı onlardan
-// önceki son kayıttan alınır; o kayıtlar seriye girmez ve "Kamerasız N ölçüm bu seriye girmiyor." notuyla görünür
-// (droppedNotes). Kişi kamerasız moda gerçekten geçtiyse (kayıtta camFailedMidTest yok) ya da kamera art arda
-// CAM_FAILED_SWITCH testte durduysa bugünkü kural geçerlidir (seri son testten). Yalnız seri SEÇİMİ değişir; alışma,
-// başlangıç, son 3 test ve eşikler aynıdır. Gözlük koşulu ya da ölçüm yöntemi kuşağı değiştiyse, ya da önceki seri boş
-// kalırsa da bugünkü kural.
-// VARSAYIM: eşik 3 test (haftalık yolda yaklaşık üç hafta).
-export const CAM_FAILED_SWITCH = 3
-const camFailed = (t) => t?.camFailedMidTest === true && !isTracked(t)
-
 // droppedBy: seriye girmeyen kayıtların nedeni (ilk tutan neden sayılır): method → distance → band → condition → reset
 export function comparableTests(tests) {
   const sorted = [...tests].filter((t) => Number.isFinite(t.logMAR)).sort((a, b) => a.date.localeCompare(b.date))
-  if (!sorted.length) {
-    return { tests: [], condition: null, resetAt: null, dropped: 0, droppedBy: { method: 0, distance: 0, band: 0, condition: 0, reset: 0 }, distanceTracked: null, methodReset: false }
-  }
-  const last = sorted.at(-1)
-  let tail = 0
-  while (tail < sorted.length && camFailed(sorted[sorted.length - 1 - tail])) tail += 1
-  const owner = tail > 0 && tail < CAM_FAILED_SWITCH && tail < sorted.length ? sorted[sorted.length - 1 - tail] : null
-  if (owner && sameCondition(owner.correction, last.correction) && methodEra(owner.algorithm) === methodEra(last.algorithm)) {
-    const r = seriesFrom(sorted, owner)
-    if (r.tests.length) return r
-  }
-  return seriesFrom(sorted, last)
-}
-
-// Seri, anahtarı ve gözlük koşulu verilen kayıttan (owner) alınarak
-function seriesFrom(sorted, owner) {
   const droppedBy = { method: 0, distance: 0, band: 0, condition: 0, reset: 0 }
-  const condition = owner.correction ?? null
-  const key = seriesKey(owner)
+  if (!sorted.length) return { tests: [], condition: null, resetAt: null, dropped: 0, droppedBy, distanceTracked: null, methodReset: false }
+  const last = sorted.at(-1)
+  const condition = last.correction ?? null
+  const key = seriesKey(last)
   // "Gözlüğüm/numaram değişti" (newBaseline) aynı gözlük koşulundaki her seriyi sıfırlar (mesafe modu ve yöntemden
   // bağımsız: numara kişinin gözlüğüne ait, ölçüm biçimine değil)
   let resetIdx = -1
