@@ -1,0 +1,4032 @@
+{
+ "choice": {
+  "c2.akis": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.akis/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "c2.sayac": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.sayac/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "car.sayi": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/car.sayi/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "c2.birak": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.birak/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "c2.kal": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.kal/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "br.k2": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/br.k2/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "br.orta": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/br.orta/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "c4.yer": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.yer/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "c4.gelmezse": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.gelmezse/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "c4.patika": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.patika/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "c4.yol": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.yol/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "c4.ses": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.ses/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "c4.gunes": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.gunes/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "c4.don": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.don/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "c4.solma": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.solma/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "n2.hatirla": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/n2.hatirla/retake/t2.mp3",
+   "take": "retake-t2",
+   "set": "retake"
+  },
+  "n2.dilek": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/n2.dilek/t2.mp3",
+   "take": "t2",
+   "set": "original",
+   "note": "t1 excluded: start pop (file-start transient) - SPEC 4.1a"
+  },
+  "k.anahtar3": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.anahtar3/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "k.donus": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.donus/t2.mp3",
+   "take": "t2",
+   "set": "original",
+   "note": "t1 excluded: start pop (file-start transient) - SPEC 4.1a"
+  },
+  "k.nefes": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.nefes/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "k.sesler": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.sesler/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "k.hareket": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.hareket/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "k.goz": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.goz/t3.mp3",
+   "take": "t3",
+   "set": "original",
+   "note": "t1 excluded: start pop (file-start transient) - SPEC 4.1a"
+  },
+  "k.oda.ayrinti": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.oda.ayrinti/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "k.zaman": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.zaman/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "k.yan": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.yan/retake/t1.mp3",
+   "take": "retake-t1",
+   "set": "retake"
+  },
+  "k.yandakal": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.yandakal/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "k.otur": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.otur/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "k.bekle": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.bekle/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "k.kalk": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.kalk/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "k.son": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.son/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "c2.durak": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.durak/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "a.x.kipir": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/a.x.kipir/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "c2.x.ritim": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.x.ritim/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  }
+ },
+ "ref_clips": {
+  "Derin": "c2.kal",
+  "Kapanış": "k.sesler",
+  "Varış": "a.x.kipir"
+ },
+ "units": {
+  "c2.kal": {
+   "process": {
+    "c2.kal": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.04,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.57,
+       "applied_gain_db": 2.54
+      }
+     ],
+     "trim_in_sec": [
+      0.023,
+      2.954
+     ],
+     "lead_pad_ms": 36.8,
+     "tail_pad_ms": 163.7,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.59,
+      "band_peak_over_thr_db": -12.52,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.24,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -7.19,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.05,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.kal/t1.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.kal/c2.kal.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.kal/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   }
+  },
+  "k.sesler": {
+   "process": {
+    "k.sesler": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.52,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.12,
+       "applied_gain_db": 3.21
+      }
+     ],
+     "trim_in_sec": [
+      0.031,
+      3.404
+     ],
+     "lead_pad_ms": 28.7,
+     "tail_pad_ms": 134.5,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.27,
+      "band_peak_over_thr_db": -14.33,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.683,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -4.88,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.06,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.sesler/t1.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.sesler/k.sesler.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.sesler/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   }
+  },
+  "a.x.kipir": {
+   "process": {
+    "a.x.kipir": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.92,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.88,
+       "applied_gain_db": 2.99
+      }
+     ],
+     "trim_in_sec": [
+      0.038,
+      3.793
+     ],
+     "lead_pad_ms": 21.9,
+     "tail_pad_ms": 123.3,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.69,
+      "band_peak_over_thr_db": -14.01,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 4.065,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -6.48,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.7,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/a.x.kipir/t1.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/a.x.kipir/a.x.kipir.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/a.x.kipir/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   }
+  },
+  "c2.akis": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.akis/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.akis/t2.mp3",
+    "n": 2,
+    "thr_db": -51.7,
+    "pauses": [
+     [
+      2.01,
+      2.345
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      2.01,
+      2.345
+     ]
+    ],
+    "shortest_chosen_gap": 0.334,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     2.1756
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.akis/s1.wav",
+      "start": 0.0,
+      "end": 2.1756,
+      "dur": 2.176,
+      "speech_sec": 1.981,
+      "syll": 10,
+      "rate": 5.05
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.akis/s2.wav",
+      "start": 2.1756,
+      "end": 3.84,
+      "dur": 1.664,
+      "speech_sec": 1.392,
+      "syll": 8,
+      "rate": 5.75
+     }
+    ],
+    "boundary_misalign": 0.037,
+    "cut_suspect": false
+   },
+   "process": {
+    "c2.akis#1": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 2.176,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -51.32,
+       "applied_gain_db": 1.28
+      }
+     ],
+     "trim_in_sec": [
+      0.037,
+      2.011
+     ],
+     "lead_pad_ms": 23.2,
+     "tail_pad_ms": 85.9,
+     "deess": {
+      "applied": false,
+      "threshold_db": -12.49,
+      "band_peak_over_thr_db": -15.83,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.285,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -7.14,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.21,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.akis/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.akis/c2.akis#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.akis#2": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 1.664,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.7,
+       "applied_gain_db": 2.64
+      }
+     ],
+     "trim_in_sec": [
+      0.165,
+      1.558
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 143.2,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.83,
+      "band_peak_over_thr_db": -16.86,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.703,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -7.74,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.19,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.akis/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.akis/c2.akis#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c2.akis#1",
+    "c2.akis#2"
+   ]
+  },
+  "c2.sayac": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.sayac/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.sayac/t1.mp3",
+    "n": 2,
+    "thr_db": -52.7,
+    "pauses": [
+     [
+      1.282,
+      1.736
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      1.282,
+      1.736
+     ]
+    ],
+    "shortest_chosen_gap": 0.454,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     1.5091
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.sayac/s1.wav",
+      "start": 0.0,
+      "end": 1.5091,
+      "dur": 1.509,
+      "speech_sec": 1.267,
+      "syll": 9,
+      "rate": 7.1
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.sayac/s2.wav",
+      "start": 1.5091,
+      "end": 3.92,
+      "dur": 2.411,
+      "speech_sec": 2.06,
+      "syll": 13,
+      "rate": 6.31
+     }
+    ],
+    "boundary_misalign": 0.036,
+    "cut_suspect": false
+   },
+   "process": {
+    "c2.sayac#1": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 1.509,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.13,
+       "applied_gain_db": 1.99
+      }
+     ],
+     "trim_in_sec": [
+      0.023,
+      1.286
+     ],
+     "lead_pad_ms": 36.8,
+     "tail_pad_ms": 26.4,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.12,
+      "band_peak_over_thr_db": -14.9,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.572,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -6.94,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.13,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.sayac/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.sayac/c2.sayac#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.sayac#2": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 2.411,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.03,
+       "applied_gain_db": 2.8
+      }
+     ],
+     "trim_in_sec": [
+      0.226,
+      2.28
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 119.5,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.15,
+      "band_peak_over_thr_db": -13.77,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.364,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -6.83,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.34,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.sayac/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.sayac/c2.sayac#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c2.sayac#1",
+    "c2.sayac#2"
+   ]
+  },
+  "car.sayi": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/car.sayi/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/car.sayi/t3.mp3",
+    "n": 11,
+    "thr_db": -55.38,
+    "pauses": [
+     [
+      0.688,
+      1.207
+     ],
+     [
+      1.551,
+      1.976
+     ],
+     [
+      2.604,
+      2.903
+     ],
+     [
+      3.692,
+      3.986
+     ],
+     [
+      4.525,
+      4.964
+     ],
+     [
+      5.557,
+      5.902
+     ],
+     [
+      6.53,
+      6.839
+     ],
+     [
+      7.438,
+      7.857
+     ],
+     [
+      8.346,
+      8.73
+     ],
+     [
+      9.189,
+      9.593
+     ]
+    ],
+    "breaths": [],
+    "needed": 11,
+    "found": 11,
+    "gaps_available": 10,
+    "chosen_gaps": [
+     [
+      0.688,
+      1.207
+     ],
+     [
+      1.551,
+      1.976
+     ],
+     [
+      2.604,
+      2.903
+     ],
+     [
+      3.692,
+      3.986
+     ],
+     [
+      4.525,
+      4.964
+     ],
+     [
+      5.557,
+      5.902
+     ],
+     [
+      6.53,
+      6.839
+     ],
+     [
+      7.438,
+      7.857
+     ],
+     [
+      8.346,
+      8.73
+     ],
+     [
+      9.189,
+      9.593
+     ]
+    ],
+    "shortest_chosen_gap": 0.294,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     0.9475,
+     1.7639,
+     2.7561,
+     3.8444,
+     4.7445,
+     5.7315,
+     6.6898,
+     7.6491,
+     8.5388,
+     9.3928
+    ],
+    "pieces": [
+     {
+      "name": "_pre",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/_pre.wav",
+      "start": 0.0,
+      "end": 0.9475,
+      "dur": 0.948,
+      "speech_sec": 0.678,
+      "syll": 4,
+      "rate": 5.9
+     },
+     {
+      "name": "c2.n10",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n10.wav",
+      "start": 0.9475,
+      "end": 1.7639,
+      "dur": 0.816,
+      "speech_sec": 0.354,
+      "syll": 1,
+      "rate": 2.82
+     },
+     {
+      "name": "c2.n09",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n09.wav",
+      "start": 1.7639,
+      "end": 2.7561,
+      "dur": 0.992,
+      "speech_sec": 0.644,
+      "syll": 2,
+      "rate": 3.11
+     },
+     {
+      "name": "c2.n08",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n08.wav",
+      "start": 2.7561,
+      "end": 3.8444,
+      "dur": 1.088,
+      "speech_sec": 0.793,
+      "syll": 2,
+      "rate": 2.52
+     },
+     {
+      "name": "c2.n07",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n07.wav",
+      "start": 3.8444,
+      "end": 4.7445,
+      "dur": 0.9,
+      "speech_sec": 0.549,
+      "syll": 2,
+      "rate": 3.64
+     },
+     {
+      "name": "c2.n06",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n06.wav",
+      "start": 4.7445,
+      "end": 5.7315,
+      "dur": 0.987,
+      "speech_sec": 0.604,
+      "syll": 2,
+      "rate": 3.31
+     },
+     {
+      "name": "c2.n05",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n05.wav",
+      "start": 5.7315,
+      "end": 6.6898,
+      "dur": 0.958,
+      "speech_sec": 0.639,
+      "syll": 1,
+      "rate": 1.57
+     },
+     {
+      "name": "c2.n04",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n04.wav",
+      "start": 6.6898,
+      "end": 7.6491,
+      "dur": 0.959,
+      "speech_sec": 0.609,
+      "syll": 1,
+      "rate": 1.64
+     },
+     {
+      "name": "c2.n03",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n03.wav",
+      "start": 7.6491,
+      "end": 8.5388,
+      "dur": 0.89,
+      "speech_sec": 0.499,
+      "syll": 1,
+      "rate": 2.0
+     },
+     {
+      "name": "c2.n02",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n02.wav",
+      "start": 8.5388,
+      "end": 9.3928,
+      "dur": 0.854,
+      "speech_sec": 0.474,
+      "syll": 2,
+      "rate": 4.22
+     },
+     {
+      "name": "c2.n01",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n01.wav",
+      "start": 9.3928,
+      "end": 10.24,
+      "dur": 0.847,
+      "speech_sec": 0.499,
+      "syll": 1,
+      "rate": 2.0
+     }
+    ],
+    "boundary_misalign": 0.071,
+    "cut_suspect": false
+   },
+   "process": {
+    "c2.n10": {
+     "exit": 0,
+     "micro": true,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 0.816,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.43,
+       "applied_gain_db": 2.43
+      }
+     ],
+     "trim_in_sec": [
+      0.256,
+      0.604
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 37.9,
+     "deess": {
+      "applied": false,
+      "threshold_db": -12.48,
+      "band_peak_over_thr_db": -36.3,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -17.05,
+     "out_duration": 0.658,
+     "target": -16.05,
+     "level": -16.05,
+     "true_peak_dbtp": -6.01,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.05,
+     "lufs": -19.24,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n10.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n10.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n09": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 0.992,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -55.65,
+       "applied_gain_db": 5.65
+      }
+     ],
+     "trim_in_sec": [
+      0.209,
+      0.845
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 102.6,
+     "deess": {
+      "applied": false,
+      "threshold_db": -16.7,
+      "band_peak_over_thr_db": -14.49,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -17.05,
+     "out_duration": 0.946,
+     "target": -17.05,
+     "level": -17.05,
+     "true_peak_dbtp": -3.6,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.05,
+     "lufs": -19.03,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n09.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n09.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n08": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 1.088,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -56.86,
+       "applied_gain_db": 6.67
+      }
+     ],
+     "trim_in_sec": [
+      0.147,
+      0.941
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 103.2,
+     "deess": {
+      "applied": false,
+      "threshold_db": -17.93,
+      "band_peak_over_thr_db": -12.27,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.105,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -2.38,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.26,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n08.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n08.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n07": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 0.9,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.8,
+       "applied_gain_db": 2.8
+      }
+     ],
+     "trim_in_sec": [
+      0.139,
+      0.679
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 28.9,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.85,
+      "band_peak_over_thr_db": -21.99,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -17.05,
+     "out_duration": 0.85,
+     "target": -17.05,
+     "level": -17.05,
+     "true_peak_dbtp": -6.66,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.05,
+     "lufs": -18.79,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n07.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n07.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n06": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 0.987,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.5,
+       "applied_gain_db": 3.5
+      }
+     ],
+     "trim_in_sec": [
+      0.219,
+      0.814
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 77.4,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.55,
+      "band_peak_over_thr_db": -14.3,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -17.05,
+     "out_duration": 0.906,
+     "target": -17.05,
+     "level": -17.05,
+     "true_peak_dbtp": -2.51,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.05,
+     "lufs": -19.92,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n06.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n06.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n05": {
+     "exit": 0,
+     "micro": true,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 0.958,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -56.11,
+       "applied_gain_db": 6.11
+      }
+     ],
+     "trim_in_sec": [
+      0.166,
+      0.803
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 94.5,
+     "deess": {
+      "applied": false,
+      "threshold_db": -16.16,
+      "band_peak_over_thr_db": -14.36,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -17.05,
+     "out_duration": 0.947,
+     "target": -16.05,
+     "level": -16.05,
+     "true_peak_dbtp": -1.55,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.05,
+     "lufs": -17.5,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n05.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n05.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n04": {
+     "exit": 0,
+     "micro": true,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 0.959,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.85,
+       "applied_gain_db": 4.85
+      }
+     ],
+     "trim_in_sec": [
+      0.148,
+      0.752
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 42.4,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.9,
+      "band_peak_over_thr_db": -15.4,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -17.05,
+     "out_duration": 0.914,
+     "target": -16.05,
+     "level": -16.05,
+     "true_peak_dbtp": -3.34,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.05,
+     "lufs": -16.99,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n04.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n04.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n03": {
+     "exit": 0,
+     "micro": true,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 0.89,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -56.83,
+       "applied_gain_db": 6.83
+      }
+     ],
+     "trim_in_sec": [
+      0.205,
+      0.701
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 61.9,
+     "deess": {
+      "applied": false,
+      "threshold_db": -16.88,
+      "band_peak_over_thr_db": -12.7,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -17.05,
+     "out_duration": 0.806,
+     "target": -16.05,
+     "level": -16.05,
+     "true_peak_dbtp": -3.6,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.05,
+     "lufs": -19.92,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n03.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n03.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n02": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 0.854,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.25,
+       "applied_gain_db": 4.25
+      }
+     ],
+     "trim_in_sec": [
+      0.189,
+      0.654
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 50.3,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.3,
+      "band_peak_over_thr_db": -12.94,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -17.05,
+     "out_duration": 0.775,
+     "target": -17.05,
+     "level": -17.05,
+     "true_peak_dbtp": -6.0,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.05,
+     "lufs": -19.44,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n02.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n02.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n01": {
+     "exit": 0,
+     "micro": true,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 0.847,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -55.72,
+       "applied_gain_db": 5.72
+      }
+     ],
+     "trim_in_sec": [
+      0.197,
+      0.693
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 95.6,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.77,
+      "band_peak_over_thr_db": -18.86,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -17.05,
+     "out_duration": 0.806,
+     "target": -16.05,
+     "level": -16.05,
+     "true_peak_dbtp": -3.08,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.05,
+     "lufs": -17.84,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/car.sayi/c2.n01.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n01.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c2.n10",
+    "c2.n09",
+    "c2.n08",
+    "c2.n07",
+    "c2.n06",
+    "c2.n05",
+    "c2.n04",
+    "c2.n03",
+    "c2.n02",
+    "c2.n01"
+   ]
+  },
+  "c2.birak": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.birak/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.birak/t3.mp3",
+    "n": 2,
+    "thr_db": -53.63,
+    "pauses": [
+     [
+      1.372,
+      1.766
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      1.372,
+      1.766
+     ]
+    ],
+    "shortest_chosen_gap": 0.394,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     1.5694
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.birak/s1.wav",
+      "start": 0.0,
+      "end": 1.5694,
+      "dur": 1.569,
+      "speech_sec": 1.357,
+      "syll": 10,
+      "rate": 7.37
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.birak/s2.wav",
+      "start": 1.5694,
+      "end": 5.04,
+      "dur": 3.471,
+      "speech_sec": 3.198,
+      "syll": 17,
+      "rate": 5.32
+     }
+    ],
+    "boundary_misalign": 0.081,
+    "cut_suspect": false
+   },
+   "process": {
+    "c2.birak#1": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 1.569,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.3,
+       "applied_gain_db": 3.18
+      }
+     ],
+     "trim_in_sec": [
+      0.024,
+      1.375
+     ],
+     "lead_pad_ms": 36.1,
+     "tail_pad_ms": 56.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.48,
+      "band_peak_over_thr_db": -11.9,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.661,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -6.0,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.29,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.birak/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.birak/c2.birak#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.birak#2": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.471,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.86,
+       "applied_gain_db": 3.71
+      }
+     ],
+     "trim_in_sec": [
+      0.196,
+      3.388
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 167.4,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.12,
+      "band_peak_over_thr_db": -14.25,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.502,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -4.11,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.41,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.birak/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.birak/c2.birak#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c2.birak#1",
+    "c2.birak#2"
+   ]
+  },
+  "br.k2": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/br.k2/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "process": {
+    "br.k2": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.12,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.36,
+       "applied_gain_db": 2.49
+      }
+     ],
+     "trim_in_sec": [
+      0.023,
+      2.975
+     ],
+     "lead_pad_ms": 36.6,
+     "tail_pad_ms": 104.7,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.49,
+      "band_peak_over_thr_db": -9.82,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.261,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -4.79,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.0,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/br.k2/t1.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/br.k2/br.k2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "br.k2"
+   ]
+  },
+  "br.orta": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/br.orta/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/br.orta/t2.mp3",
+    "n": 3,
+    "thr_db": -54.24,
+    "pauses": [
+     [
+      1.946,
+      2.13
+     ],
+     [
+      4.994,
+      5.483
+     ],
+     [
+      7.862,
+      8.201
+     ]
+    ],
+    "breaths": [],
+    "needed": 3,
+    "found": 4,
+    "gaps_available": 3,
+    "chosen_gaps": [
+     [
+      4.994,
+      5.483
+     ],
+     [
+      7.862,
+      8.201
+     ]
+    ],
+    "shortest_chosen_gap": 0.339,
+    "longest_unchosen_gap": 0.185,
+    "margin_ratio": 1.838,
+    "ok": true,
+    "cuts": [
+     5.2379,
+     8.0319
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/br.orta/s1.wav",
+      "start": 0.0,
+      "end": 5.2379,
+      "dur": 5.238,
+      "speech_sec": 4.779,
+      "syll": 27,
+      "rate": 5.65
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/br.orta/s2.wav",
+      "start": 5.2379,
+      "end": 8.0319,
+      "dur": 2.794,
+      "speech_sec": 2.39,
+      "syll": 11,
+      "rate": 4.6
+     },
+     {
+      "name": "s3",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/br.orta/s3.wav",
+      "start": 8.0319,
+      "end": 10.08,
+      "dur": 2.048,
+      "speech_sec": 1.761,
+      "syll": 8,
+      "rate": 4.54
+     }
+    ],
+    "boundary_misalign": 0.036,
+    "cut_suspect": false
+   },
+   "process": {
+    "br.orta#1": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 5.238,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.6,
+       "applied_gain_db": 3.58
+      }
+     ],
+     "trim_in_sec": [
+      0.04,
+      4.995
+     ],
+     "lead_pad_ms": 20.3,
+     "tail_pad_ms": 6.9,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.4,
+      "band_peak_over_thr_db": -11.99,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 5.265,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -4.36,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.82,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/br.orta/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/br.orta/br.orta#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "br.orta#2": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 2.794,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.99,
+       "applied_gain_db": 5.2
+      }
+     ],
+     "trim_in_sec": [
+      0.244,
+      2.629
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 84.9,
+     "deess": {
+      "applied": false,
+      "threshold_db": -16.0,
+      "band_peak_over_thr_db": -10.84,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.695,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -2.73,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.8,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/br.orta/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/br.orta/br.orta#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "br.orta#3": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 2.048,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -55.29,
+       "applied_gain_db": 5.39
+      }
+     ],
+     "trim_in_sec": [
+      0.165,
+      1.922
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 123.8,
+     "deess": {
+      "applied": false,
+      "threshold_db": -16.15,
+      "band_peak_over_thr_db": -10.54,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.066,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -4.47,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.75,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/br.orta/s3.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/br.orta/br.orta#3.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "br.orta#1",
+    "br.orta#2",
+    "br.orta#3"
+   ]
+  },
+  "c4.yer": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.yer/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "process": {
+    "c4.yer": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.28,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.08,
+       "applied_gain_db": 2.05
+      }
+     ],
+     "trim_in_sec": [
+      0.027,
+      3.178
+     ],
+     "lead_pad_ms": 33.0,
+     "tail_pad_ms": 147.7,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.13,
+      "band_peak_over_thr_db": -11.36,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.461,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -6.05,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.09,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.yer/t1.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.yer/c4.yer.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.yer"
+   ]
+  },
+  "c4.gelmezse": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.gelmezse/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "c4.gelmezse": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.92,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.47,
+       "applied_gain_db": 3.56
+      }
+     ],
+     "trim_in_sec": [
+      0.045,
+      3.796
+     ],
+     "lead_pad_ms": 15.1,
+     "tail_pad_ms": 125.6,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.38,
+      "band_peak_over_thr_db": -12.33,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 4.061,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -5.25,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.82,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.gelmezse/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.gelmezse/c4.gelmezse.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.gelmezse"
+   ]
+  },
+  "c4.patika": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.patika/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "c4.patika": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.2,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.95,
+       "applied_gain_db": 2.88
+      }
+     ],
+     "trim_in_sec": [
+      0.024,
+      3.058
+     ],
+     "lead_pad_ms": 35.8,
+     "tail_pad_ms": 108.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.79,
+      "band_peak_over_thr_db": -7.64,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.344,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -6.34,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.9,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.patika/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.patika/c4.patika.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.patika"
+   ]
+  },
+  "c4.yol": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.yol/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.yol/t3.mp3",
+    "n": 2,
+    "thr_db": -53.4,
+    "pauses": [
+     [
+      1.457,
+      1.811
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      1.457,
+      1.811
+     ]
+    ],
+    "shortest_chosen_gap": 0.354,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     1.6329
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c4.yol/s1.wav",
+      "start": 0.0,
+      "end": 1.6329,
+      "dur": 1.633,
+      "speech_sec": 1.427,
+      "syll": 8,
+      "rate": 5.61
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c4.yol/s2.wav",
+      "start": 1.6329,
+      "end": 3.44,
+      "dur": 1.807,
+      "speech_sec": 1.452,
+      "syll": 9,
+      "rate": 6.2
+     }
+    ],
+    "boundary_misalign": 0.022,
+    "cut_suspect": false
+   },
+   "process": {
+    "c4.yol#1": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 1.633,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.79,
+       "applied_gain_db": 2.72
+      }
+     ],
+     "trim_in_sec": [
+      0.037,
+      1.461
+     ],
+     "lead_pad_ms": 23.4,
+     "tail_pad_ms": 77.7,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.12,
+      "band_peak_over_thr_db": -13.3,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.734,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -5.78,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.4,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c4.yol/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.yol/c4.yol#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c4.yol#2": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 1.807,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.7,
+       "applied_gain_db": 3.63
+      }
+     ],
+     "trim_in_sec": [
+      0.175,
+      1.623
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 66.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.96,
+      "band_peak_over_thr_db": -14.89,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.758,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -5.59,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.32,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c4.yol/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.yol/c4.yol#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.yol#1",
+    "c4.yol#2"
+   ]
+  },
+  "c4.ses": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.ses/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "c4.ses": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 2.64,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.19,
+       "applied_gain_db": 4.23
+      }
+     ],
+     "trim_in_sec": [
+      0.083,
+      2.505
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 114.7,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.85,
+      "band_peak_over_thr_db": -10.96,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.732,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -4.28,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.62,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.ses/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.ses/c4.ses.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.ses"
+   ]
+  },
+  "c4.gunes": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.gunes/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.gunes/t2.mp3",
+    "n": 2,
+    "thr_db": -54.14,
+    "pauses": [
+     [
+      2.395,
+      2.834
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      2.395,
+      2.834
+     ]
+    ],
+    "shortest_chosen_gap": 0.439,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     2.6142
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c4.gunes/s1.wav",
+      "start": 0.0,
+      "end": 2.6142,
+      "dur": 2.614,
+      "speech_sec": 2.355,
+      "syll": 12,
+      "rate": 5.1
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c4.gunes/s2.wav",
+      "start": 2.6142,
+      "end": 5.6,
+      "dur": 2.986,
+      "speech_sec": 2.629,
+      "syll": 13,
+      "rate": 4.94
+     }
+    ],
+    "boundary_misalign": 0.009,
+    "cut_suspect": false
+   },
+   "process": {
+    "c4.gunes#1": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 2.614,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.45,
+       "applied_gain_db": 3.43
+      }
+     ],
+     "trim_in_sec": [
+      0.05,
+      2.398
+     ],
+     "lead_pad_ms": 10.2,
+     "tail_pad_ms": 33.6,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.87,
+      "band_peak_over_thr_db": -9.82,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.658,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -4.45,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.45,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c4.gunes/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.gunes/c4.gunes#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c4.gunes#2": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 2.986,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.94,
+       "applied_gain_db": 4.98
+      }
+     ],
+     "trim_in_sec": [
+      0.219,
+      2.843
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 107.2,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.16,
+      "band_peak_over_thr_db": -11.65,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.934,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -4.31,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.18,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c4.gunes/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.gunes/c4.gunes#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.gunes#1",
+    "c4.gunes#2"
+   ]
+  },
+  "c4.don": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.don/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "c4.don": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.36,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.78,
+       "applied_gain_db": 3.88
+      }
+     ],
+     "trim_in_sec": [
+      0.037,
+      3.212
+     ],
+     "lead_pad_ms": 22.8,
+     "tail_pad_ms": 101.7,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.57,
+      "band_peak_over_thr_db": -14.78,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.485,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -4.56,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.69,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.don/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.don/c4.don.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.don"
+   ]
+  },
+  "c4.solma": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.solma/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.solma/t3.mp3",
+    "n": 2,
+    "thr_db": -53.06,
+    "pauses": [
+     [
+      1.971,
+      2.365
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      1.971,
+      2.365
+     ]
+    ],
+    "shortest_chosen_gap": 0.394,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     2.1692
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c4.solma/s1.wav",
+      "start": 0.0,
+      "end": 2.1692,
+      "dur": 2.169,
+      "speech_sec": 1.956,
+      "syll": 10,
+      "rate": 5.11
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c4.solma/s2.wav",
+      "start": 2.1692,
+      "end": 5.36,
+      "dur": 3.191,
+      "speech_sec": 2.859,
+      "syll": 17,
+      "rate": 5.95
+     }
+    ],
+    "boundary_misalign": 0.027,
+    "cut_suspect": false
+   },
+   "process": {
+    "c4.solma#1": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 2.169,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.95,
+       "applied_gain_db": 4.04
+      }
+     ],
+     "trim_in_sec": [
+      0.023,
+      1.972
+     ],
+     "lead_pad_ms": 37.3,
+     "tail_pad_ms": 52.7,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.84,
+      "band_peak_over_thr_db": -10.84,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.259,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -5.27,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.8,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c4.solma/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.solma/c4.solma#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c4.solma#2": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.191,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.64,
+       "applied_gain_db": 2.42
+      }
+     ],
+     "trim_in_sec": [
+      0.193,
+      3.046
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 105.5,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.9,
+      "band_peak_over_thr_db": -10.53,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.164,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -7.3,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.48,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c4.solma/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.solma/c4.solma#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.solma#1",
+    "c4.solma#2"
+   ]
+  },
+  "n2.hatirla": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/n2.hatirla/retake/t2.mp3",
+    "take": "retake-t2",
+    "set": "retake"
+   }
+  },
+  "n2.dilek": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/n2.dilek/t2.mp3",
+    "take": "t2",
+    "set": "original",
+    "note": "t1 excluded: start pop (file-start transient) - SPEC 4.1a"
+   },
+   "process": {
+    "n2.dilek": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.2,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.16,
+       "applied_gain_db": 4.25
+      }
+     ],
+     "trim_in_sec": [
+      0.036,
+      3.085
+     ],
+     "lead_pad_ms": 23.7,
+     "tail_pad_ms": 134.9,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.42,
+      "band_peak_over_thr_db": -7.7,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.359,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -2.96,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.17,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/n2.dilek/t2.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/n2.dilek/n2.dilek.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "n2.dilek"
+   ]
+  },
+  "k.anahtar3": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.anahtar3/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "process": {
+    "k.anahtar3": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 1.68,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.5,
+       "applied_gain_db": 2.91
+      },
+      {
+       "trim_thr_in_dbfs": -52.91,
+       "applied_gain_db": 2.91
+      }
+     ],
+     "trim_in_sec": [
+      0.085,
+      1.53
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 100.2,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.09,
+      "band_peak_over_thr_db": -22.3,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.755,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -6.11,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.17,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.anahtar3/t2.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.anahtar3/k.anahtar3.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.anahtar3"
+   ]
+  },
+  "k.donus": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.donus/t2.mp3",
+    "take": "t2",
+    "set": "original",
+    "note": "t1 excluded: start pop (file-start transient) - SPEC 4.1a"
+   },
+   "process": {
+    "k.donus": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 1.84,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.3,
+       "applied_gain_db": 3.5
+      }
+     ],
+     "trim_in_sec": [
+      0.038,
+      1.545
+     ],
+     "lead_pad_ms": 21.6,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.88,
+      "band_peak_over_thr_db": -13.37,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.817,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -2.95,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.38,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.donus/t2.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.donus/k.donus.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.donus"
+   ]
+  },
+  "k.nefes": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.nefes/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "process": {
+    "k.nefes": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 2.24,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.22,
+       "applied_gain_db": 3.17
+      }
+     ],
+     "trim_in_sec": [
+      0.033,
+      2.088
+     ],
+     "lead_pad_ms": 26.7,
+     "tail_pad_ms": 97.8,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.13,
+      "band_peak_over_thr_db": -15.67,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.365,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -6.41,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.97,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.nefes/t2.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.nefes/k.nefes.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.nefes"
+   ]
+  },
+  "k.hareket": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.hareket/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.hareket/t1.mp3",
+    "n": 2,
+    "thr_db": -52.89,
+    "pauses": [
+     [
+      3.637,
+      4.106
+     ],
+     [
+      6.884,
+      7.039
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 3,
+    "gaps_available": 2,
+    "chosen_gaps": [
+     [
+      3.637,
+      4.106
+     ]
+    ],
+    "shortest_chosen_gap": 0.469,
+    "longest_unchosen_gap": 0.155,
+    "margin_ratio": 3.032,
+    "ok": true,
+    "cuts": [
+     3.8669
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/k.hareket/s1.wav",
+      "start": 0.0,
+      "end": 3.8669,
+      "dur": 3.867,
+      "speech_sec": 3.612,
+      "syll": 22,
+      "rate": 6.09
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/k.hareket/s2.wav",
+      "start": 3.8669,
+      "end": 8.08,
+      "dur": 4.213,
+      "speech_sec": 3.687,
+      "syll": 19,
+      "rate": 5.15
+     }
+    ],
+    "boundary_misalign": 0.04,
+    "cut_suspect": false
+   },
+   "process": {
+    "k.hareket#1": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.867,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.35,
+       "applied_gain_db": 2.32
+      }
+     ],
+     "trim_in_sec": [
+      0.033,
+      3.64
+     ],
+     "lead_pad_ms": 26.7,
+     "tail_pad_ms": 22.8,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.3,
+      "band_peak_over_thr_db": -13.34,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.916,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -4.02,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.97,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/k.hareket/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.hareket/k.hareket#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "k.hareket#2": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 4.213,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.48,
+       "applied_gain_db": 3.41
+      }
+     ],
+     "trim_in_sec": [
+      0.237,
+      4.072
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 108.6,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.41,
+      "band_peak_over_thr_db": -10.26,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 4.145,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -4.95,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.99,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/k.hareket/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.hareket/k.hareket#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.hareket#1",
+    "k.hareket#2"
+   ]
+  },
+  "k.goz": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.goz/t3.mp3",
+    "take": "t3",
+    "set": "original",
+    "note": "t1 excluded: start pop (file-start transient) - SPEC 4.1a"
+   },
+   "process": {
+    "k.goz": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 5.12,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.06,
+       "applied_gain_db": 4.2
+      }
+     ],
+     "trim_in_sec": [
+      0.03,
+      5.007
+     ],
+     "lead_pad_ms": 30.5,
+     "tail_pad_ms": 137.2,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.14,
+      "band_peak_over_thr_db": -9.36,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 5.288,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -4.46,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.94,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.goz/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.goz/k.goz.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.goz"
+   ]
+  },
+  "k.oda.ayrinti": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.oda.ayrinti/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "k.oda.ayrinti": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.04,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.97,
+       "applied_gain_db": 4.16
+      }
+     ],
+     "trim_in_sec": [
+      0.027,
+      2.912
+     ],
+     "lead_pad_ms": 33.4,
+     "tail_pad_ms": 122.2,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.06,
+      "band_peak_over_thr_db": -15.98,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.196,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -3.82,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -15.9,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.oda.ayrinti/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.oda.ayrinti/k.oda.ayrinti.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.oda.ayrinti"
+   ]
+  },
+  "k.zaman": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.zaman/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "process": {
+    "k.zaman": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.6,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.78,
+       "applied_gain_db": 2.75
+      }
+     ],
+     "trim_in_sec": [
+      0.02,
+      3.455
+     ],
+     "lead_pad_ms": 40.4,
+     "tail_pad_ms": 104.6,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.92,
+      "band_peak_over_thr_db": -13.7,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.745,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -6.81,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.18,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.zaman/t2.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.zaman/k.zaman.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.zaman"
+   ]
+  },
+  "k.yan": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.yan/retake/t1.mp3",
+    "take": "retake-t1",
+    "set": "retake"
+   },
+   "process": {
+    "k.yan": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.12,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.17,
+       "applied_gain_db": 3.16
+      }
+     ],
+     "trim_in_sec": [
+      0.033,
+      2.915
+     ],
+     "lead_pad_ms": 27.1,
+     "tail_pad_ms": 44.9,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.86,
+      "band_peak_over_thr_db": -12.36,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.192,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -6.64,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.7,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.yan/retake/t1.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.yan/k.yan.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.yan"
+   ]
+  },
+  "k.yandakal": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.yandakal/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "process": {
+    "k.yandakal": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 2.64,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.38,
+       "applied_gain_db": 2.54
+      }
+     ],
+     "trim_in_sec": [
+      0.041,
+      2.526
+     ],
+     "lead_pad_ms": 18.9,
+     "tail_pad_ms": 136.3,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.73,
+      "band_peak_over_thr_db": -15.4,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.795,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -6.35,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.2,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.yandakal/t2.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.yandakal/k.yandakal.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.yandakal"
+   ]
+  },
+  "k.otur": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.otur/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "k.otur": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.52,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.75,
+       "applied_gain_db": 3.81
+      }
+     ],
+     "trim_in_sec": [
+      0.083,
+      3.418
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 148.2,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.85,
+      "band_peak_over_thr_db": -11.72,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.646,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -5.16,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.04,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.otur/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.otur/k.otur.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.otur"
+   ]
+  },
+  "k.bekle": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.bekle/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "process": {
+    "k.bekle": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 2.96,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.81,
+       "applied_gain_db": 3.96
+      }
+     ],
+     "trim_in_sec": [
+      0.053,
+      2.826
+     ],
+     "lead_pad_ms": 7.1,
+     "tail_pad_ms": 115.9,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.23,
+      "band_peak_over_thr_db": -12.81,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.083,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -3.85,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.27,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.bekle/t1.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.bekle/k.bekle.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.bekle"
+   ]
+  },
+  "k.kalk": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.kalk/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "process": {
+    "k.kalk": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 5.76,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.01,
+       "applied_gain_db": 4.05
+      }
+     ],
+     "trim_in_sec": [
+      0.024,
+      5.651
+     ],
+     "lead_pad_ms": 35.9,
+     "tail_pad_ms": 141.5,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.76,
+      "band_peak_over_thr_db": -9.19,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 5.937,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -2.52,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.71,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.kalk/t2.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.kalk/k.kalk.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.kalk"
+   ]
+  },
+  "k.son": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.son/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "k.son": {
+     "exit": 0,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 2.32,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.35,
+       "applied_gain_db": 4.3
+      }
+     ],
+     "trim_in_sec": [
+      0.047,
+      2.158
+     ],
+     "lead_pad_ms": 12.8,
+     "tail_pad_ms": 87.8,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.45,
+      "band_peak_over_thr_db": -11.33,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.421,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -5.45,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.15,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.son/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.son/k.son.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.son"
+   ]
+  },
+  "c2.durak": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.durak/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.durak/t2.mp3",
+    "n": 2,
+    "thr_db": -53.28,
+    "pauses": [
+     [
+      3.352,
+      3.811
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      3.352,
+      3.811
+     ]
+    ],
+    "shortest_chosen_gap": 0.459,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     3.5873
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.durak/s1.wav",
+      "start": 0.0,
+      "end": 3.5873,
+      "dur": 3.587,
+      "speech_sec": 3.303,
+      "syll": 18,
+      "rate": 5.45
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.durak/s2.wav",
+      "start": 3.5873,
+      "end": 6.0,
+      "dur": 2.413,
+      "speech_sec": 2.085,
+      "syll": 11,
+      "rate": 5.28
+     }
+    ],
+    "boundary_misalign": 0.0,
+    "cut_suspect": false
+   },
+   "process": {
+    "c2.durak#1": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.587,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.64,
+       "applied_gain_db": 3.64
+      }
+     ],
+     "trim_in_sec": [
+      0.056,
+      3.353
+     ],
+     "lead_pad_ms": 4.0,
+     "tail_pad_ms": 16.1,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.64,
+      "band_peak_over_thr_db": -10.52,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.607,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -5.04,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.01,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.durak/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.durak/c2.durak#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.durak#2": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 2.413,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.91,
+       "applied_gain_db": 2.73
+      }
+     ],
+     "trim_in_sec": [
+      0.22,
+      2.299
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 136.1,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.06,
+      "band_peak_over_thr_db": -15.03,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.389,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -5.81,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.33,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.durak/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.durak/c2.durak#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c2.durak#1",
+    "c2.durak#2"
+   ]
+  },
+  "c2.x.ritim": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.x.ritim/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.x.ritim/t3.mp3",
+    "n": 2,
+    "thr_db": -53.7,
+    "pauses": [
+     [
+      2.065,
+      2.4
+     ],
+     [
+      3.627,
+      3.831
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 3,
+    "gaps_available": 2,
+    "chosen_gaps": [
+     [
+      2.065,
+      2.4
+     ]
+    ],
+    "shortest_chosen_gap": 0.334,
+    "longest_unchosen_gap": 0.205,
+    "margin_ratio": 1.634,
+    "ok": true,
+    "cuts": [
+     2.2323
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.x.ritim/s1.wav",
+      "start": 0.0,
+      "end": 2.2323,
+      "dur": 2.232,
+      "speech_sec": 2.035,
+      "syll": 10,
+      "rate": 4.91
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.x.ritim/s2.wav",
+      "start": 2.2323,
+      "end": 5.68,
+      "dur": 3.448,
+      "speech_sec": 2.948,
+      "syll": 16,
+      "rate": 5.43
+     }
+    ],
+    "boundary_misalign": 0.016,
+    "cut_suspect": false
+   },
+   "process": {
+    "c2.x.ritim#1": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 2.232,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.46,
+       "applied_gain_db": 3.41
+      }
+     ],
+     "trim_in_sec": [
+      0.04,
+      2.068
+     ],
+     "lead_pad_ms": 19.7,
+     "tail_pad_ms": 85.8,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.53,
+      "band_peak_over_thr_db": -13.51,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.338,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -6.62,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.12,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.x.ritim/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.x.ritim/c2.x.ritim#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.x.ritim#2": {
+     "exit": 0,
+     "micro": false,
+     "sex": "f",
+     "hpf_hz": 90.0,
+     "in_duration": 3.448,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.92,
+       "applied_gain_db": 3.94
+      }
+     ],
+     "trim_in_sec": [
+      0.167,
+      3.314
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 116.4,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.77,
+      "band_peak_over_thr_db": -12.5,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.457,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -3.01,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -16.84,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/c2.x.ritim/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.x.ritim/c2.x.ritim#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c2.x.ritim#1",
+    "c2.x.ritim#2"
+   ]
+  }
+ },
+ "ref_rms_db": {
+  "Derin": -17.05,
+  "Kapanış": -17.06,
+  "Varış": -16.7
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "unit": "k.bekle",
+ "take": "t1",
+ "ref_node": "b3WJZzKljAcZJDPHJHja",
+ "asset_id": "G27nRfADCU3vicBdiSbG",
+ "stt_node": "yasenHQlQEZ7XLBPGUQz",
+ "session_id": "1gorh4GxlYUhmeyVHCHf",
+ "generation_id": "C8upTbZMFi5SA6vHkVGt",
+ "actual_credits": 16.28,
+ "actual_cents": 0.296,
+ "spoken_duration_secs": 2.78,
+ "scribe_text": "Kalkmadan önce birkaç nefes böyle kal",
+ "tts": "Kalkmadan önce birkaç nefes böyle kal.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 6\n}"
+}

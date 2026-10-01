@@ -1,0 +1,37 @@
+{
+ "node_id": "aPnfIZyUaST8NI0h4ig4",
+ "session_ids": [
+  "hCeWzgSmhN0EjTgIu0CQ",
+  "O9Pq5MjoonhW9Az2rjad",
+  "bPnlHhya6q2AfsdRO0hg"
+ ],
+ "requested_at": "2026-09-30T06:57:02.719Z",
+ "tts": "Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor. Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "hCeWzgSmhN0EjTgIu0CQ",
+   "generation_id": "k612ikUhRt5rrg4sWBko",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/hCeWzgSmhN0EjTgIu0CQ/k612ikUhRt5rrg4sWBko/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065709Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=c23dd23e4037b1daf333d1fb8adb90ca23621bd004c72d1a948a680722129a4d10f3ee0095457e7866fce502b553338e4eae676e5fd31975e8177dd3aac2516f652661cd149b3b3c48d1566db41d95e7d3e78f148683006380ceabdfc1859bf0f9c6be8263456c74acc9546d97ba22951b01164af98e96962eed7fb8832f9a257754cb7674c0348ee3c37c20d20456da49665388c7f58e4a64fa1ed6165b7a2ffd0a7da50b01c3fa9efcb3760198259e919b0e16b6265c0d794755bcb3317f9443bee5ea3501219297ab295ead5220fd44f1bd4acc0330b9d94bcb693cc3da2d8898d8f32b5a32c45bfb75bb1a72aebed7cf58aecf1681c1ad791ecd6a740754",
+   "duration_secs": 10.48,
+   "prompt": "Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor. Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "O9Pq5MjoonhW9Az2rjad",
+   "generation_id": "gvU2wYNjSkq532YCXT31",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/O9Pq5MjoonhW9Az2rjad/gvU2wYNjSkq532YCXT31/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065710Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=d8ed1df8a0a2c94b20eea5b62d56ff20c4f5b34349714c63bd033c875e9045d813a56a6959f879775cf6faf15f0b5413853051d235d89103c5c250a702dade5e0d3aa653c20d50b1af65e0811d693d0c4387f25f942d95e8919f4c4632377d706ff5c8b0b0363130349d754b8fe9bda91d1561549c09817856969d47a446fa7674a837f386ed8b0ec022c97ed047406d022240072713e2fadf37f1cde4b18d1c21b987d9ef553978a73fb9f787fbc199ec608154c5d5928714ac692c4a3b7ac309af466c38fe63ef8d7bb264c71dfc3215bc3b6fba000a53fe6e26e9a40f6952bc400d78e36157a5c55862d2b2f61946a7f7ae257c5f40a97d875e4e7ce89403",
+   "duration_secs": 10.32,
+   "prompt": "Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor. Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "bPnlHhya6q2AfsdRO0hg",
+   "generation_id": "aoGzFE0nPST3KaYPUlkv",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/bPnlHhya6q2AfsdRO0hg/aoGzFE0nPST3KaYPUlkv/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065708Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=b26bd9b17d57f05c9735b4b9b26043ac0e511c147efaa87703e60366902f1a88a7c8419862a99cf8c7cd126f2b1be07c008a2e8a0f5364a90669638061e8cc197fe20b5bca284ca99d126cc825a1d99422864e3517f03affc86921618fdcd61e47ace56695eb7ef4cca4eed8c02e68e46ac51111f9d27efc053f0f93f142c2fef7269eaec8eb91b8fbcf0eda1ceda1e56ef40c6d290d52e5c3e0d9ddbab0c15d139cae70a51428efaa85bc388e7370bbdd91a3d0fb3914fd338c57421ef3d1c3282989c6224782f18ba801ac330b8e985940ac6e6f62624b086bf87208b1b039eb41c7dc7e2ae65faf5f63d2d787124cd7ff658a348e6f018305451936b755c7",
+   "duration_secs": 10.48,
+   "prompt": "Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor. Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.",
+   "kind": "audio"
+  }
+ ]
+}

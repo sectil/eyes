@@ -1,0 +1,37 @@
+{
+ "node_id": "7RGI6re7p4alU9pexy0e",
+ "session_ids": [
+  "9s7nyj2f4qRR8oTyzEpE",
+  "uJONudURvxdGWiEVU6QP",
+  "btnj51D9p5Te3e2IlunP"
+ ],
+ "requested_at": "2026-09-30T07:07:44.764Z",
+ "tts": "Omurgan boydan boya uzanıyor.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "9s7nyj2f4qRR8oTyzEpE",
+   "generation_id": "XkqMowJ2aVtSWgZkz0Pa",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/9s7nyj2f4qRR8oTyzEpE/XkqMowJ2aVtSWgZkz0Pa/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070748Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=784cccca90bcaa06d182f46444d206aae1b15cce306dea1475f28e98629ee42f35b03df1905904dc9588ea13ddcbbd7293f7faf13ec66daee59731f746169fcaac164d697fb7c03bf068510e7d963bcfaa0b09777871971d92051987fc4fcb568ddefb3d2e50c577271cf7a0424d7cdf365ce5eb1ce14797235110f9b56b6fea51cabfee929b6592285cacb89057e4793755a9e1ad7f9d562fb80c64e0b089cc4cf34014543edc08198f7e43d9db7abb6dcdef6260c515d9b1f3cf0b43c00dffd466c6085e85bbc8db31a1c336d4a0c241f01ef68fe081629808d211271a7190853770a59dd76ce9232d31e48832bbb6634719ac6edebf1ec49ed0a70bc98a3f",
+   "duration_secs": 2.56,
+   "prompt": "Omurgan boydan boya uzanıyor.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "uJONudURvxdGWiEVU6QP",
+   "generation_id": "AhLmPSsHRsE2QuR56Gwu",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/uJONudURvxdGWiEVU6QP/AhLmPSsHRsE2QuR56Gwu/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070748Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=a0b62aa6120ed79617789e7a23bf70fa3e7ae800fc5b4ba715aad816641e400cd16d43a47c5e355119507b656925b571158e9743e22c97774edae5d3c6911b47300f3fbfb0fe5214a1d788235114b38996dc7c62792c4b92e787b60df5f70172651d030b0bcd8f1f38b17c389cf081e8385070654a0e88dafe5575c67ec756fb4ba64b5118835b8aeec7f64e5e6e9e2ec7dbc811acf8895db2dbbcd57041b998dbaad75410824f13cb6d37f2550aaff057ccea0272274fcccee9cc54c704eba2dff4ce7e1f978dac887c5c869c14e2276b04d6044311ae8757a021f26030f185728f656ac8cc7e0686d41cc5838a2702ddc6d9f30449d6ab54a139c4b20603e4",
+   "duration_secs": 2.56,
+   "prompt": "Omurgan boydan boya uzanıyor.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "btnj51D9p5Te3e2IlunP",
+   "generation_id": "saUySikEoVJr8e9wg294",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/btnj51D9p5Te3e2IlunP/saUySikEoVJr8e9wg294/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070830Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=0e422d72b09168501e65bf8b9d981625148d6733d8999445e735cc5c72a18fdfcdc2cf0454c4960c14b03e6323fc07aa1b93927b5013fdc83432a665490249f6cf07288bbcbb22e67387ca5d57aa6e1c946c0dfea548c60b1f1ef356285d8e4ee113849211f341d71fb8d2ff1595dcce23f4172b4ec7c4e7d196b7c66a91585624451510cd0125c212d979752aa08ad4f701b4af765b6667a143e42776c0e1d9deb40e371de5cff06d2f5b1279858a4cb0020a7c51f911fd7ffc9819e20c37e2d3e726a334ef290c18ce998f43d9e0dc13a80cef2c2c00290fb3af117b3e43a195908be24d14bc0277f93e802c7b97bfb7b4bf610a1983af4aa6a1bc365bd50c",
+   "duration_secs": 2.48,
+   "prompt": "Omurgan boydan boya uzanıyor.",
+   "kind": "audio"
+  }
+ ]
+}

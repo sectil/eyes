@@ -1,0 +1,73 @@
+{
+ "unit": "k.hareket",
+ "idx": 55,
+ "voice": "hoc",
+ "voice_name": "Nefona Hoca",
+ "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+ "model_id": "eleven_v4",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "node_id": "q7Xlz02iCrHJh2waKXGL",
+ "session_ids": [
+  "XmNUGs5xNpkefSxBVgWy",
+  "tNAhIFfYCUtPIiJhdLWR",
+  "DHSBWQd9dp4SJppp9SyS"
+ ],
+ "requested_at": "2026-09-29T21:58:19Z",
+ "downloaded_at": "2026-09-29T21:58:47.935243+00:00",
+ "tts": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin. Bir yerin ağrırsa ya da başın dönerse hareketi bırak.",
+ "generations_count": 3,
+ "takes": [
+  {
+   "take": 1,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/k.hareket/t1.mp3",
+   "session_id": "XmNUGs5xNpkefSxBVgWy",
+   "generation_id": "04YV2gyJ7hfmQYflO0Vj",
+   "api_duration_secs": 8.16,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/XmNUGs5xNpkefSxBVgWy/04YV2gyJ7hfmQYflO0Vj/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T215824Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=ae65debcc9a6327f9abe88853f57cc4b4b2d6bb6ef88ed3bcdeb5402f39779abe3064a6ea39b998090e3b7b4d8b4f417d76e42e98dc7012bf318d24f0a9501edc2900a0e6546e0ae64c79eed7d1b41d00839f740d26e1d7671da7977bcb1ba1abb82af02a275f7c424ae6d60a327a05cf7bf1fd6088424fd34171143e9ae59d382cfb14471ba42bbbf7ce90e495590786cf4f5e12ada59dc8a221e907db230ef0457d8cc67f0eaabc04d04f0a8cb379f90af5ff8ae93811a24838771f3c13ebda66006a3cd907e6e122778b60a6f050c0cd0e888fc475f450a3ddabe0c8bb2ea164d4d02edfe2810fc9ef7a4cc418df8a3185157382ad4c70b79d9c2cfbef58b",
+   "node_id": "q7Xlz02iCrHJh2waKXGL",
+   "ok": true,
+   "duration_secs": 8.16,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 148537,
+   "attempts": 1
+  },
+  {
+   "take": 2,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/k.hareket/t2.mp3",
+   "session_id": "tNAhIFfYCUtPIiJhdLWR",
+   "generation_id": "W2VEHMYXhmgl7USnLT9j",
+   "api_duration_secs": 8.32,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/tNAhIFfYCUtPIiJhdLWR/W2VEHMYXhmgl7USnLT9j/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T215824Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=ba0c937dac1026935b9e469b62da233513fe32c653e49913864a375dea864aac14be6dd94fd89afae21d98d9aa3cbdfb38a36aa184a750cbefd54b1d16c67f2cad4707a07f06b0cbe39a0e1e5ef8d8022a14112f5ec81a0b6d7431c3fa070dd8d25d9d7e61da3e0cd0ebe95cb68740a8297a5751ecfda541bb4187415f9a9320821c506c1b88ab560786cda453c0f51823efa86c3e973da467eaa67c7f8f2d43bd8561fae1137182a5cf8af8c6249f5cfa858d992c5cf0567d92ec57def7ef2f0830ca740e9ba981504a9d05b7583a7e81781c5ec8c1270f6d2a7f5c72d6ab1241147f94323c4c75a7cf4b2fb7e1f8e8d652018cdfb53ca1fcac1eb0a14f39dd",
+   "node_id": "q7Xlz02iCrHJh2waKXGL",
+   "ok": true,
+   "duration_secs": 8.32,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 151044,
+   "attempts": 1
+  },
+  {
+   "take": 3,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/k.hareket/t3.mp3",
+   "session_id": "DHSBWQd9dp4SJppp9SyS",
+   "generation_id": "ogpmXOOyhXkl5Xx57DKb",
+   "api_duration_secs": 8.32,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/DHSBWQd9dp4SJppp9SyS/ogpmXOOyhXkl5Xx57DKb/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T215825Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=4f40774bc489fae25685dc9f3b44bca04c710534940a60e176f56de7130e6020df52e7e2526c85f72a8897eb3fd6446df893fc5a9ccccdae2d1ad97ba82c84a6f913491db6c898f5c5c60d580d1ed058e5e46ee180acdbea98886047042b1b57452fa4138fd21c58bdf99e6ada2eeb26cbca8c0ae1858e2179039e83b4e95a239061f4b0e85fc05e64bd0575813d51cc622e578338be97b2431d7de8ecee7808337cb15377c32b30a6cc7ee7d6ab382edce114c2737f252721eea5312d31240f8ca467dbe9e268ff019851ab4a3fd3ef656ebfbd7a3805d08cff022a771f860255aa14a0e20e8ba77d13385acb24660b075c542f4ef2f543722c182a88de6cf2",
+   "node_id": "q7Xlz02iCrHJh2waKXGL",
+   "ok": true,
+   "duration_secs": 8.32,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 151044,
+   "attempts": 1
+  }
+ ],
+ "all_ok": true,
+ "n_takes_ok": 3,
+ "failed_generations": [],
+ "who": "hoc-2",
+ "retake": false,
+ "server_prompt_echo": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin. Bir yerin ağrırsa ya da başın dönerse hareketi bırak.",
+ "server_prompt_equals_tts": true
+}

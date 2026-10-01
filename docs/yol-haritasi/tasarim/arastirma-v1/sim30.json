@@ -1,0 +1,2722 @@
+[
+ {
+  "n": 1,
+  "date": "2026-10-01",
+  "D_total": 0,
+  "stops": [
+   {
+    "key": "weekly",
+    "t": "Haftalık E testi",
+    "sub": "3 bölüm · sağ, sol, iki göz",
+    "m": 5,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 1,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   }
+  ],
+  "total": 8,
+  "rotated": [],
+  "dropped": [],
+  "displaced": []
+ },
+ {
+  "n": 2,
+  "date": "2026-10-02",
+  "D_total": 1,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 2,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "reading",
+    "t": "Okuma",
+    "sub": null,
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "snake",
+    "t": "Yılan",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 11,
+  "rotated": [],
+  "dropped": [],
+  "displaced": []
+ },
+ {
+  "n": 3,
+  "date": "2026-10-03",
+  "D_total": 2,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "snake",
+    "t": "Yılan",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Nefesin Ritmi",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 12,
+  "rotated": [],
+  "dropped": [],
+  "displaced": []
+ },
+ {
+  "n": 4,
+  "date": "2026-10-04",
+  "D_total": 3,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "snake",
+    "t": "Yılan",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Tek Nokta",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 13,
+  "rotated": [],
+  "dropped": [],
+  "displaced": []
+ },
+ {
+  "n": 5,
+  "date": "2026-10-05",
+  "D_total": 4,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "snake",
+    "t": "Yılan",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Zor Anlar İçin",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 14,
+  "rotated": [],
+  "dropped": [],
+  "displaced": []
+ },
+ {
+  "n": 6,
+  "date": "2026-10-06",
+  "D_total": 5,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "fark-ettin",
+    "t": "Fark Ettin mi?",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Sabah Niyeti",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 14,
+  "rotated": [],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 7,
+  "date": "2026-10-07",
+  "D_total": 6,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "fark-ettin",
+    "t": "Fark Ettin mi?",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Sağlam Yer",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 15,
+  "rotated": [],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 8,
+  "date": "2026-10-08",
+  "D_total": 7,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "weekly",
+    "t": "Haftalık E testi",
+    "sub": "3 bölüm · sağ, sol, iki göz",
+    "m": 5,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "tek-bakis",
+    "t": "Tek Bakışta",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 17,
+  "rotated": [
+   "fark-ettin"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 9,
+  "date": "2026-10-09",
+  "D_total": 8,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:daire",
+    "t": "Daire",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "reading",
+    "t": "Okuma",
+    "sub": null,
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "tek-bakis",
+    "t": "Tek Bakışta",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Kendini Tanımak",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 18,
+  "rotated": [
+   "routine:dikey",
+   "fark-ettin"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 10,
+  "date": "2026-10-10",
+  "D_total": 9,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "fark-ettin",
+    "t": "Fark Ettin mi?",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:daire",
+    "t": "Daire",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Derin Dinlenme",
+    "m": 5,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 17,
+  "rotated": [
+   "routine:dikey",
+   "tek-bakis"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 11,
+  "date": "2026-10-11",
+  "D_total": 10,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:daire",
+    "t": "Daire",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "tek-bakis",
+    "t": "Tek Bakışta",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Gelecekteki Sen",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 15,
+  "rotated": [
+   "routine:dikey"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 12,
+  "date": "2026-10-12",
+  "D_total": 11,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:daire",
+    "t": "Daire",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "snake",
+    "t": "Yılan",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Nefesin Ritmi",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 15,
+  "rotated": [
+   "routine:dikey"
+  ],
+  "dropped": [],
+  "displaced": []
+ },
+ {
+  "n": 13,
+  "date": "2026-10-13",
+  "D_total": 12,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "snake",
+    "t": "Yılan",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Tek Nokta",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 15,
+  "rotated": [
+   "routine:daire"
+  ],
+  "dropped": [],
+  "displaced": []
+ },
+ {
+  "n": 14,
+  "date": "2026-10-14",
+  "D_total": 13,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "fark-ettin",
+    "t": "Fark Ettin mi?",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Zor Anlar İçin",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 15,
+  "rotated": [
+   "routine:daire"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 15,
+  "date": "2026-10-15",
+  "D_total": 14,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "weekly",
+    "t": "Haftalık E testi",
+    "sub": "3 bölüm · sağ, sol, iki göz",
+    "m": 5,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "fark-ettin",
+    "t": "Fark Ettin mi?",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 17,
+  "rotated": [
+   "routine:daire"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 16,
+  "date": "2026-10-16",
+  "D_total": 15,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "reading",
+    "t": "Okuma",
+    "sub": null,
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "tek-bakis",
+    "t": "Tek Bakışta",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Sabah Niyeti",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 18,
+  "rotated": [
+   "routine:daire"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 17,
+  "date": "2026-10-17",
+  "D_total": 16,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:daire",
+    "t": "Daire",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "tek-bakis",
+    "t": "Tek Bakışta",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Sağlam Yer",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 15,
+  "rotated": [
+   "routine:dikey"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 18,
+  "date": "2026-10-18",
+  "D_total": 17,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "fark-ettin",
+    "t": "Fark Ettin mi?",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:daire",
+    "t": "Daire",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Kendine Şefkat",
+    "m": 5,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 17,
+  "rotated": [
+   "routine:dikey"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 19,
+  "date": "2026-10-19",
+  "D_total": 18,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:daire",
+    "t": "Daire",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "tek-bakis",
+    "t": "Tek Bakışta",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Kendini Tanımak",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 15,
+  "rotated": [
+   "routine:dikey"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 20,
+  "date": "2026-10-20",
+  "D_total": 19,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:daire",
+    "t": "Daire",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "snake",
+    "t": "Yılan",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Gelecekteki Sen",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 15,
+  "rotated": [
+   "routine:dikey"
+  ],
+  "dropped": [],
+  "displaced": []
+ },
+ {
+  "n": 21,
+  "date": "2026-10-21",
+  "D_total": 20,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "snake",
+    "t": "Yılan",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Nefesin Ritmi",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 15,
+  "rotated": [
+   "routine:daire"
+  ],
+  "dropped": [],
+  "displaced": []
+ },
+ {
+  "n": 22,
+  "date": "2026-10-22",
+  "D_total": 21,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "weekly",
+    "t": "Haftalık E testi",
+    "sub": "3 bölüm · sağ, sol, iki göz",
+    "m": 5,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "fark-ettin",
+    "t": "Fark Ettin mi?",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 17,
+  "rotated": [
+   "routine:daire"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 23,
+  "date": "2026-10-23",
+  "D_total": 22,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "fark-ettin",
+    "t": "Fark Ettin mi?",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "reading",
+    "t": "Okuma",
+    "sub": null,
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Tek Nokta",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 18,
+  "rotated": [
+   "routine:daire"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 24,
+  "date": "2026-10-24",
+  "D_total": 23,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "tek-bakis",
+    "t": "Tek Bakışta",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Zor Anlar İçin",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 15,
+  "rotated": [
+   "routine:daire"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 25,
+  "date": "2026-10-25",
+  "D_total": 24,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:daire",
+    "t": "Daire",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "tek-bakis",
+    "t": "Tek Bakışta",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Sabah Niyeti",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 15,
+  "rotated": [
+   "routine:dikey"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 26,
+  "date": "2026-10-26",
+  "D_total": 25,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "fark-ettin",
+    "t": "Fark Ettin mi?",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:daire",
+    "t": "Daire",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Derin Dinlenme",
+    "m": 5,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 17,
+  "rotated": [
+   "routine:dikey"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 27,
+  "date": "2026-10-27",
+  "D_total": 26,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:daire",
+    "t": "Daire",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "tek-bakis",
+    "t": "Tek Bakışta",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Sağlam Yer",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 15,
+  "rotated": [
+   "routine:dikey"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ },
+ {
+  "n": 28,
+  "date": "2026-10-28",
+  "D_total": 27,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:daire",
+    "t": "Daire",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "snake",
+    "t": "Yılan",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Kendini Tanımak",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 15,
+  "rotated": [
+   "routine:dikey"
+  ],
+  "dropped": [],
+  "displaced": []
+ },
+ {
+  "n": 29,
+  "date": "2026-10-29",
+  "D_total": 28,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "weekly",
+    "t": "Haftalık E testi",
+    "sub": "3 bölüm · sağ, sol, iki göz",
+    "m": 5,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "snake",
+    "t": "Yılan",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 17,
+  "rotated": [
+   "routine:daire"
+  ],
+  "dropped": [],
+  "displaced": []
+ },
+ {
+  "n": 30,
+  "date": "2026-10-30",
+  "D_total": 29,
+  "stops": [
+   {
+    "key": "routine:isinma",
+    "t": "Isınma",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:uzak",
+    "t": "Uzağa bakış",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "track",
+    "t": "Çemberler",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "routine:yakinuzak",
+    "t": "Yakın–uzak",
+    "sub": null,
+    "m": 1,
+    "b": 1,
+    "f": false
+   },
+   {
+    "key": "breath",
+    "t": "Nefes",
+    "sub": null,
+    "m": 3,
+    "b": 0,
+    "f": false
+   },
+   {
+    "key": "fark-ettin",
+    "t": "Fark Ettin mi?",
+    "sub": null,
+    "m": 2,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:dikey",
+    "t": "Yukarı–aşağı",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "reading",
+    "t": "Okuma",
+    "sub": null,
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "routine:kirpma",
+    "t": "Göz kırpma",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "yoga",
+    "t": "Yoga",
+    "sub": "Gelecekteki Sen",
+    "m": 3,
+    "b": 2,
+    "f": false
+   },
+   {
+    "key": "notice",
+    "t": "Bugünün görevi",
+    "sub": null,
+    "m": 1,
+    "b": 2,
+    "f": true
+   }
+  ],
+  "total": 18,
+  "rotated": [
+   "routine:daire"
+  ],
+  "dropped": [
+   "snake"
+  ],
+  "displaced": []
+ }
+]

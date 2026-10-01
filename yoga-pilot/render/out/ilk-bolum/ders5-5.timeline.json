@@ -1,0 +1,1011 @@
+{
+ "schema": "nefona.yoga.timeline/2",
+ "lesson": "ders5-tek-nokta",
+ "lessonNo": 5,
+ "title": "Tek Nokta",
+ "minutes": 5,
+ "T": 300,
+ "file": "ders5-5.mp3",
+ "appFile": "yoga-d05-05dk.m4a",
+ "audio": {
+  "sha256": "21c25353e2f59dfcc8d17ddc3288d1705be5f6a7d4cc7d0047f4b7e76f208111",
+  "codec": "mp3",
+  "bitrateKbps": 120,
+  "encoding": "ABR 120 kbit/s (lameenc, q=2)",
+  "sampleRate": 44100,
+  "channels": 2,
+  "durationSec": 300.0,
+  "decoderOffsetSamples": 576,
+  "note": "tarayıcı önizlemesi (SPEC.v3 §10); uygulama dosyası AAC-LC m4a Mac'te WAV ana kopyadan kodlanır (§14)"
+ },
+ "voice": {
+  "id": "hoc",
+  "name": "Nefona Hoca",
+  "voice_id": "Sr5w7dIZaRDglJ2cLaJm"
+ },
+ "music": {
+  "source": "A",
+  "family": "Sol (yerel sentez)",
+  "scene": null
+ },
+ "plan": {
+  "status": "ok",
+  "mode": "pref→max",
+  "f": 0.1214,
+  "checkPlanPass": true,
+  "sel": [
+   "C1"
+  ],
+  "planner": "pilot/timing.py",
+  "plannerSha256": "58f6c4054c611aeb4d8cbf37083d2e3c836f1440d4d4042edea92854e078f3b9",
+  "lessonSha256": "99f6ab02a8e2713ea826c7fbd2271f2af17b5a2086faa7abac4f5d14fa23f45e",
+  "slackMinSec": 37.01
+ },
+ "blocks": [
+  {
+   "id": "A",
+   "title": "Varış (tek kapak; isteğe bağlılar süreyle eklenir)",
+   "start": 4.121,
+   "end": 41.005
+  },
+  {
+   "id": "C1",
+   "title": "Nefes çapası: dağıl, fark et, dön",
+   "start": 47.491,
+   "end": 216.213
+  },
+  {
+   "id": "K",
+   "title": "Kapanış: dışa dönüş (gündüz, oturarak; isteğe bağlı avuçlama)",
+   "start": 230.699,
+   "end": 293.757
+  }
+ ],
+ "speech": [
+  {
+   "i": 0,
+   "piece": "a.durus",
+   "clip": "a.durus",
+   "unit": "a.durus",
+   "block": "A",
+   "phase": "Varış",
+   "start": 4.121,
+   "end": 8.786,
+   "screenText": "Sırtın dik olsun ama gerilmesin; rahatça oturman yeterli.",
+   "spokenText": "Sırtın dik olsun ama gerilmesin; rahatça oturman yeterli.",
+   "voiceGainDb": 0.0,
+   "resumeAt": 4.121,
+   "visualCue": {
+    "visual": "phase:varis (ışık noktası geniş ve soluk)"
+   },
+   "visualState": {
+    "phase": "varis (ışık noktası geniş ve soluk)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Sırtın dik olsun ama gerilmesin; rahatça oturman yeterli.",
+   "spoken_text": "Sırtın dik olsun ama gerilmesin; rahatça oturman yeterli.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": 0.0,
+   "visual_cue": {
+    "visual": "phase:varis (ışık noktası geniş ve soluk)"
+   },
+   "visual_state": {
+    "phase": "varis (ışık noktası geniş ve soluk)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 1,
+   "piece": "a.gozler",
+   "clip": "a.gozler",
+   "unit": "a.gozler",
+   "block": "A",
+   "phase": "Varış",
+   "start": 13.271,
+   "end": 20.278,
+   "screenText": "Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.",
+   "spokenText": "Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.",
+   "voiceGainDb": 0.0,
+   "resumeAt": 13.271,
+   "visualCue": null,
+   "visualState": {
+    "phase": "varis (ışık noktası geniş ve soluk)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.",
+   "spoken_text": "Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": 0.0,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "varis (ışık noktası geniş ve soluk)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 2,
+   "piece": "a.izin",
+   "clip": "a.izin",
+   "unit": "a.izin",
+   "block": "A",
+   "phase": "Varış",
+   "start": 25.764,
+   "end": 31.017,
+   "screenText": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+   "spokenText": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+   "voiceGainDb": 0.0,
+   "resumeAt": 25.764,
+   "visualCue": null,
+   "visualState": {
+    "phase": "varis (ışık noktası geniş ve soluk)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+   "spoken_text": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": 0.0,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "varis (ışık noktası geniş ve soluk)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 3,
+   "piece": "a.acilis",
+   "clip": "a.acilis",
+   "unit": "a.acilis",
+   "block": "A",
+   "phase": "Varış",
+   "start": 35.502,
+   "end": 41.005,
+   "screenText": "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.",
+   "spokenText": "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.",
+   "voiceGainDb": 0.0,
+   "resumeAt": 35.502,
+   "visualCue": null,
+   "visualState": {
+    "phase": "varis (ışık noktası geniş ve soluk)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.",
+   "spoken_text": "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": 0.0,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "varis (ışık noktası geniş ve soluk)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 4,
+   "piece": "c1.yer",
+   "clip": "c1.yer",
+   "unit": "c1.yer",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 47.491,
+   "end": 53.413,
+   "screenText": "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?",
+   "spokenText": "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?",
+   "voiceGainDb": -1.5,
+   "resumeAt": 47.491,
+   "visualCue": {
+    "visual": "phase:derinlesme (ışık daralmaya başlar)"
+   },
+   "visualState": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?",
+   "spoken_text": "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?",
+   "screen_equals_spoken": true,
+   "voice_gain_db": -1.5,
+   "visual_cue": {
+    "visual": "phase:derinlesme (ışık daralmaya başlar)"
+   },
+   "visual_state": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 5,
+   "piece": "c1.nokta",
+   "clip": "c1.nokta",
+   "unit": "c1.nokta",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 59.899,
+   "end": 64.286,
+   "screenText": "Hangisi olursa olsun, ışığın bugün o noktaya düşüyor.",
+   "spokenText": "Hangisi olursa olsun, ışığın bugün o noktaya düşüyor.",
+   "voiceGainDb": -1.5,
+   "resumeAt": 59.899,
+   "visualCue": null,
+   "visualState": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Hangisi olursa olsun, ışığın bugün o noktaya düşüyor.",
+   "spoken_text": "Hangisi olursa olsun, ışığın bugün o noktaya düşüyor.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": -1.5,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 6,
+   "piece": "c1.izle",
+   "clip": "c1.izle",
+   "unit": "c1.izle",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 68.772,
+   "end": 73.581,
+   "screenText": "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.",
+   "spokenText": "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.",
+   "voiceGainDb": -1.5,
+   "resumeAt": 68.772,
+   "visualCue": null,
+   "visualState": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.",
+   "spoken_text": "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": -1.5,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 7,
+   "piece": "c1.his#1",
+   "clip": "c1.his",
+   "unit": "c1.his",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 90.067,
+   "end": 95.258,
+   "screenText": "Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor.",
+   "spokenText": "Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor.",
+   "voiceGainDb": -1.5,
+   "resumeAt": 90.067,
+   "visualCue": null,
+   "visualState": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor.",
+   "spoken_text": "Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": -1.5,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": [
+    "kesim-kulak"
+   ]
+  },
+  {
+   "i": 8,
+   "piece": "c1.his#2",
+   "clip": "c1.his",
+   "unit": "c1.his",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 96.294,
+   "end": 101.539,
+   "screenText": "Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.",
+   "spokenText": "Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.",
+   "voiceGainDb": -1.5,
+   "resumeAt": 90.067,
+   "visualCue": null,
+   "visualState": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.",
+   "spoken_text": "Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": -1.5,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": [
+    "kesim-kulak"
+   ]
+  },
+  {
+   "i": 9,
+   "piece": "c1.duzeltme",
+   "clip": "c1.duzeltme",
+   "unit": "c1.duzeltme",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 113.025,
+   "end": 117.558,
+   "screenText": "Nefesini düzeltmeye çalışmıyorsun; o kendi hızında geliyor.",
+   "spokenText": "Nefesini düzeltmeye çalışmıyorsun; o kendi hızında geliyor.",
+   "voiceGainDb": -1.5,
+   "resumeAt": 113.025,
+   "visualCue": null,
+   "visualState": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Nefesini düzeltmeye çalışmıyorsun; o kendi hızında geliyor.",
+   "spoken_text": "Nefesini düzeltmeye çalışmıyorsun; o kendi hızında geliyor.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": -1.5,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 10,
+   "piece": "c1.kayma",
+   "clip": "c1.kayma",
+   "unit": "c1.kayma",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 126.044,
+   "end": 131.391,
+   "screenText": "Birazdan dikkatin bir düşünceye ya da bir sese kayacak; bu çok olağan.",
+   "spokenText": "Birazdan dikkatin bir düşünceye ya da bir sese kayacak; bu çok olağan.",
+   "voiceGainDb": -1.5,
+   "resumeAt": 126.044,
+   "visualCue": null,
+   "visualState": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Birazdan dikkatin bir düşünceye ya da bir sese kayacak; bu çok olağan.",
+   "spoken_text": "Birazdan dikkatin bir düşünceye ya da bir sese kayacak; bu çok olağan.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": -1.5,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 11,
+   "piece": "c1.donus",
+   "clip": "c1.donus",
+   "unit": "c1.donus",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 135.877,
+   "end": 140.627,
+   "screenText": "Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.",
+   "spokenText": "Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.",
+   "voiceGainDb": -1.5,
+   "resumeAt": 135.877,
+   "visualCue": null,
+   "visualState": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.",
+   "spoken_text": "Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": -1.5,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 12,
+   "piece": "c1.aralik1",
+   "clip": "c1.aralik1",
+   "unit": "c1.aralik1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 146.113,
+   "end": 149.698,
+   "screenText": "Birkaç soluk boyunca ışığı orada tutuyorsun.",
+   "spokenText": "Birkaç soluk boyunca ışığı orada tutuyorsun.",
+   "voiceGainDb": -1.5,
+   "resumeAt": 146.113,
+   "visualCue": null,
+   "visualState": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Birkaç soluk boyunca ışığı orada tutuyorsun.",
+   "spoken_text": "Birkaç soluk boyunca ışığı orada tutuyorsun.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": -1.5,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 13,
+   "piece": "c1.nerede",
+   "clip": "c1.nerede",
+   "unit": "c1.nerede",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 166.184,
+   "end": 170.615,
+   "screenText": "Işık hâlâ nefeste mi, yoksa başka bir yere mi kaydı?",
+   "spokenText": "Işık hâlâ nefeste mi, yoksa başka bir yere mi kaydı?",
+   "voiceGainDb": -1.5,
+   "resumeAt": 166.184,
+   "visualCue": null,
+   "visualState": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Işık hâlâ nefeste mi, yoksa başka bir yere mi kaydı?",
+   "spoken_text": "Işık hâlâ nefeste mi, yoksa başka bir yere mi kaydı?",
+   "screen_equals_spoken": true,
+   "voice_gain_db": -1.5,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 14,
+   "piece": "c1.getir",
+   "clip": "c1.getir",
+   "unit": "c1.getir",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 176.101,
+   "end": 180.795,
+   "screenText": "Kaydıysa, bir sonraki alışta onu yeniden noktaya getiriyorsun.",
+   "spokenText": "Kaydıysa, bir sonraki alışta onu yeniden noktaya getiriyorsun.",
+   "voiceGainDb": -1.5,
+   "resumeAt": 176.101,
+   "visualCue": null,
+   "visualState": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Kaydıysa, bir sonraki alışta onu yeniden noktaya getiriyorsun.",
+   "spoken_text": "Kaydıysa, bir sonraki alışta onu yeniden noktaya getiriyorsun.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": -1.5,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 15,
+   "piece": "c1.aralik2",
+   "clip": "c1.aralik2",
+   "unit": "c1.aralik2",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 192.281,
+   "end": 196.724,
+   "screenText": "Işık yine noktada; birkaç nefes daha orada kalıyor.",
+   "spokenText": "Işık yine noktada; birkaç nefes daha orada kalıyor.",
+   "voiceGainDb": -1.5,
+   "resumeAt": 192.281,
+   "visualCue": null,
+   "visualState": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Işık yine noktada; birkaç nefes daha orada kalıyor.",
+   "spoken_text": "Işık yine noktada; birkaç nefes daha orada kalıyor.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": -1.5,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 16,
+   "piece": "c1.anahtar1",
+   "clip": "c1.anahtar1",
+   "unit": "c1.anahtar1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 213.21,
+   "end": 216.213,
+   "screenText": "Fark ettiğin an, zaten geri döndün.",
+   "spokenText": "Fark ettiğin an, zaten geri döndün.",
+   "voiceGainDb": -1.5,
+   "resumeAt": 213.21,
+   "visualCue": null,
+   "visualState": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "screen_text": "Fark ettiğin an, zaten geri döndün.",
+   "spoken_text": "Fark ettiğin an, zaten geri döndün.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": -1.5,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "derinlesme (ışık daralmaya başlar)",
+    "image": "off",
+    "dawn": false
+   },
+   "flags": []
+  },
+  {
+   "i": 17,
+   "piece": "k.donus",
+   "clip": "k.donus",
+   "unit": "k.donus",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 230.699,
+   "end": 232.516,
+   "screenText": "Artık dönüş zamanı.",
+   "spokenText": "Artık dönüş zamanı.",
+   "voiceGainDb": 0.0,
+   "resumeAt": 230.699,
+   "visualCue": {
+    "visual": "dawn"
+   },
+   "visualState": {
+    "phase": "kapanis",
+    "image": "off",
+    "dawn": true
+   },
+   "screen_text": "Artık dönüş zamanı.",
+   "spoken_text": "Artık dönüş zamanı.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": 0.0,
+   "visual_cue": {
+    "visual": "dawn"
+   },
+   "visual_state": {
+    "phase": "kapanis",
+    "image": "off",
+    "dawn": true
+   },
+   "flags": [
+    "v3-yerel-kisma"
+   ]
+  },
+  {
+   "i": 18,
+   "piece": "k.nefes",
+   "clip": "k.nefes",
+   "unit": "k.nefes",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 236.198,
+   "end": 241.379,
+   "screenText": "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.",
+   "spokenText": "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.",
+   "voiceGainDb": 0.0,
+   "resumeAt": 236.198,
+   "visualCue": null,
+   "visualState": {
+    "phase": "kapanis",
+    "image": "off",
+    "dawn": true
+   },
+   "screen_text": "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.",
+   "spoken_text": "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": 0.0,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "kapanis",
+    "image": "off",
+    "dawn": true
+   },
+   "flags": []
+  },
+  {
+   "i": 19,
+   "piece": "k.sesler",
+   "clip": "k.sesler",
+   "unit": "k.sesler",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 245.622,
+   "end": 248.648,
+   "screenText": "Odadaki sesler de ışığın içine giriyor.",
+   "spokenText": "Odadaki sesler de ışığın içine giriyor.",
+   "voiceGainDb": 0.0,
+   "resumeAt": 245.622,
+   "visualCue": null,
+   "visualState": {
+    "phase": "kapanis",
+    "image": "off",
+    "dawn": true
+   },
+   "screen_text": "Odadaki sesler de ışığın içine giriyor.",
+   "spoken_text": "Odadaki sesler de ışığın içine giriyor.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": 0.0,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "kapanis",
+    "image": "off",
+    "dawn": true
+   },
+   "flags": []
+  },
+  {
+   "i": 20,
+   "piece": "k.hareket",
+   "clip": "k.hareket",
+   "unit": "k.hareket",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 253.891,
+   "end": 260.321,
+   "screenText": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
+   "spokenText": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
+   "voiceGainDb": 0.0,
+   "resumeAt": 253.891,
+   "visualCue": null,
+   "visualState": {
+    "phase": "kapanis",
+    "image": "off",
+    "dawn": true
+   },
+   "screen_text": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
+   "spoken_text": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": 0.0,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "kapanis",
+    "image": "off",
+    "dawn": true
+   },
+   "flags": []
+  },
+  {
+   "i": 21,
+   "piece": "k.goz",
+   "clip": "k.goz",
+   "unit": "k.goz",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 267.686,
+   "end": 272.711,
+   "screenText": "Gözlerin kapalıysa, onları acele etmeden açıp çevrene bakıyorsun.",
+   "spokenText": "Gözlerin kapalıysa, onları acele etmeden açıp çevrene bakıyorsun.",
+   "voiceGainDb": 0.0,
+   "resumeAt": 267.686,
+   "visualCue": null,
+   "visualState": {
+    "phase": "kapanis",
+    "image": "off",
+    "dawn": true
+   },
+   "screen_text": "Gözlerin kapalıysa, onları acele etmeden açıp çevrene bakıyorsun.",
+   "spoken_text": "Gözlerin kapalıysa, onları acele etmeden açıp çevrene bakıyorsun.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": 0.0,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "kapanis",
+    "image": "off",
+    "dawn": true
+   },
+   "flags": []
+  },
+  {
+   "i": 22,
+   "piece": "k.oda",
+   "clip": "k.oda",
+   "unit": "k.oda",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 280.075,
+   "end": 285.121,
+   "screenText": "Bakışın odada bir renkte ya da bir nesnede bir an duruyor.",
+   "spokenText": "Bakışın odada bir renkte ya da bir nesnede bir an duruyor.",
+   "voiceGainDb": 0.0,
+   "resumeAt": 280.075,
+   "visualCue": null,
+   "visualState": {
+    "phase": "kapanis",
+    "image": "off",
+    "dawn": true
+   },
+   "screen_text": "Bakışın odada bir renkte ya da bir nesnede bir an duruyor.",
+   "spoken_text": "Bakışın odada bir renkte ya da bir nesnede bir an duruyor.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": 0.0,
+   "visual_cue": null,
+   "visual_state": {
+    "phase": "kapanis",
+    "image": "off",
+    "dawn": true
+   },
+   "flags": []
+  },
+  {
+   "i": 23,
+   "piece": "k.son",
+   "clip": "k.son",
+   "unit": "k.son",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 291.364,
+   "end": 293.757,
+   "screenText": "El feneri yine senin elinde.",
+   "spokenText": "El feneri yine senin elinde.",
+   "voiceGainDb": 0.0,
+   "resumeAt": 291.364,
+   "visualCue": {
+    "visual": "end"
+   },
+   "visualState": {
+    "phase": "kapanis",
+    "image": "off",
+    "dawn": true
+   },
+   "screen_text": "El feneri yine senin elinde.",
+   "spoken_text": "El feneri yine senin elinde.",
+   "screen_equals_spoken": true,
+   "voice_gain_db": 0.0,
+   "visual_cue": {
+    "visual": "end"
+   },
+   "visual_state": {
+    "phase": "kapanis",
+    "image": "off",
+    "dawn": true
+   },
+   "flags": []
+  }
+ ],
+ "closing": {
+  "jumpTo": 222.699,
+  "returnToneAt": 228.699,
+  "firstWordAt": 230.699
+ },
+ "release": {},
+ "windows": [],
+ "visual": [
+  {
+   "t": 4.121,
+   "cue": "phase:varis (ışık noktası geniş ve soluk)",
+   "clip": "a.durus"
+  },
+  {
+   "t": 47.491,
+   "cue": "phase:derinlesme (ışık daralmaya başlar)",
+   "clip": "c1.yer"
+  },
+  {
+   "t": 230.699,
+   "cue": "dawn:start",
+   "rule": "max(k.donus.start, end - 90)",
+   "span_s": 69.3
+  },
+  {
+   "t": 230.699,
+   "cue": "dawn",
+   "clip": "k.donus"
+  },
+  {
+   "t": 291.364,
+   "cue": "end",
+   "clip": "k.son"
+  }
+ ],
+ "dawn": {
+  "start": 230.699,
+  "spanSec": 69.3,
+  "rule": "max(k.donus.start, end - 90)"
+ },
+ "music_events": [
+  {
+   "layer": "bed",
+   "label": "yatak/Ton-1",
+   "t0": 0.0,
+   "t1": 300.0
+  },
+  {
+   "layer": "all",
+   "event": "open-fade",
+   "t0": 0.0,
+   "t1": 3.0
+  },
+  {
+   "layer": "music+imge+nature",
+   "event": "local-duck",
+   "t0": 227.36,
+   "t1": 235.86,
+   "db": -1.84,
+   "flat": [
+    229.2,
+    234.02
+   ],
+   "piece": "k.donus"
+  },
+  {
+   "layer": "tone",
+   "event": "returnTone",
+   "t": 228.699,
+   "before_clip": "k.donus",
+   "lufs_integrated": -30.0,
+   "dur_s": 6.0,
+   "sound": "çan (yerel sentez, Sol5)"
+  },
+  {
+   "layer": "music+nature",
+   "event": "end-fade",
+   "t0": 295.0,
+   "t1": 300.0
+  }
+ ],
+ "nature_events": [],
+ "room_tone_events": [
+  {
+   "t0": 0.0,
+   "t1": 32.0,
+   "label": "oda-sesi-2"
+  },
+  {
+   "t0": 30.0,
+   "t1": 62.0,
+   "label": "oda-sesi-1"
+  },
+  {
+   "t0": 60.0,
+   "t1": 92.0,
+   "label": "oda-sesi-2"
+  },
+  {
+   "t0": 90.0,
+   "t1": 122.0,
+   "label": "oda-sesi-1"
+  },
+  {
+   "t0": 120.0,
+   "t1": 152.0,
+   "label": "oda-sesi-2"
+  },
+  {
+   "t0": 150.0,
+   "t1": 182.0,
+   "label": "oda-sesi-1"
+  },
+  {
+   "t0": 180.0,
+   "t1": 212.0,
+   "label": "oda-sesi-2"
+  },
+  {
+   "t0": 210.0,
+   "t1": 242.0,
+   "label": "oda-sesi-1"
+  },
+  {
+   "t0": 240.0,
+   "t1": 272.0,
+   "label": "oda-sesi-2"
+  },
+  {
+   "t0": 270.0,
+   "t1": 300.0,
+   "label": "oda-sesi-1"
+  }
+ ],
+ "levels": {
+  "speechClipLufs": -18.0,
+  "masterTrimDb": -0.76,
+  "musicTargetLufsByPhase": {
+   "Varış": -33.0,
+   "Derinleşme": -34.5,
+   "Derin": -36.0,
+   "Kapanış": -43.52
+  },
+  "natureBelowMusicDb": null,
+  "imgeBelowBedDb": 8.0,
+  "roomToneDbfsRms": -58.0,
+  "voicePhaseGainDb": {
+   "Varış": 0.0,
+   "Derinleşme": -1.5,
+   "Derin": -3.0,
+   "Kapanış": 0.0
+  },
+  "voiceGainRamps": [
+   {
+    "from": "a.acilis",
+    "to": "c1.yer",
+    "t0": 41.005,
+    "t1": 47.491,
+    "sec": 6.486,
+    "db_from": 0.0,
+    "db_to": -1.5,
+    "ge_4s": true
+   },
+   {
+    "from": "c1.anahtar1",
+    "to": "k.donus",
+    "t0": 216.213,
+    "t1": 230.699,
+    "sec": 14.486,
+    "db_from": -1.5,
+    "db_to": 0.0,
+    "ge_4s": true
+   }
+  ]
+ },
+ "qa": {
+  "pass": true,
+  "report": "_rapor/d05-05dk.json"
+ }
+}

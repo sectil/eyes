@@ -1,0 +1,28 @@
+{
+ "node_id": "rUOgHfskFd34R2CGYqdc",
+ "session_ids": [
+  "YV7t2YslNcdtn25YRVE4",
+  "nCfOJ6y5fXeLADYGKfKa"
+ ],
+ "requested_at": "2026-09-30T07:12:22.976Z",
+ "tts": "Omuzlarını kulaklarından uzaklaştırıp çeneni gevşek bırakıyorsun.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "YV7t2YslNcdtn25YRVE4",
+   "generation_id": "TVCWStCX6PYOpJpy8afP",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/YV7t2YslNcdtn25YRVE4/TVCWStCX6PYOpJpy8afP/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T071226Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=9a7366afb33d56c9802f23ebd9e770780a22468ca21a1df81486095f6bac330a5fcfaac45a8a20e5ae599b9c23da8f6eafe9cba5ec24492f207926e9ed533b2aebdffe72301d466f4fae9b007c5c9696d2b73e046b593767d092eea4444817a397578ec9def3266032a0fc4efd8c281915f7ae374c3b46621118ba49ad736ec0959133f7897b110b4df3b972b3427dc801a5c4f751e6ef398bbeb28543990ff433c6f75a767551de01fcbf79dff14af32dba87a7b3b2661987607d06f5746347a24226ddced3eb73cfc8daa3d3ac257e1b30f1fae03768ee8b2f344bcc04bcf243c83108f849218a445897024f630c221bcc85ff9923f85b47901ede49a7fd89",
+   "duration_secs": 4.56,
+   "prompt": "Omuzlarını kulaklarından uzaklaştırıp çeneni gevşek bırakıyorsun.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "nCfOJ6y5fXeLADYGKfKa",
+   "generation_id": "5oDKb36GhuRYA4UbFRW9",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/nCfOJ6y5fXeLADYGKfKa/5oDKb36GhuRYA4UbFRW9/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T071227Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=bf167661b647020e12dd2aa9c809638c02eb76b2abe6ea11be912ecad1f1520c016d5bc8d5434a1214bf8c4f5608e251ce59e31bfdbe91229caeef97f919917fa12f15e855410fd439629547e43a4cae972864b2a0fbbbabc4ff536cb8b07babe686c9d5f4d338f21b8ccb19dad7c028c5f382c4499e0f44047e1bb2656ffcfade0fd7f485857d2e6288a0bb5474d3f6602a6dc1b16738f82ea7297e924da774244137c7e1c3fd31932ea006588415ea475c91925b1726afdf228a2f1b87d1b5263ca09d093a282b3e98e814566845c483c68b6b25a135b2ccfaae8f985a342f668ed23c398c0b3e9047dd10932f227ca7437683b2818c80191c4680ece825a8",
+   "duration_secs": 4.64,
+   "prompt": "Omuzlarını kulaklarından uzaklaştırıp çeneni gevşek bırakıyorsun.",
+   "kind": "audio"
+  }
+ ]
+}

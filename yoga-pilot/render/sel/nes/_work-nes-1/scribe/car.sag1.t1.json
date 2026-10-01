@@ -1,0 +1,15 @@
+{
+ "unit": "car.sag1",
+ "take": "t1",
+ "asset_id": "IbmILZj3IvWbat9p0Hcy",
+ "source_node_id": "OCqNzom8kQMsYcB4OEP8",
+ "stt_node_id": "VTfVYBCbkYAnlDIxVgLv",
+ "session_id": "fxbZzYnZG9q6vm67t3Uc",
+ "generation_id": "mhQfgkoowMGe1bw2q68y",
+ "actual_credits": 40.92,
+ "actual_cents": 0.744,
+ "scribe_text": "Sağ elin başparmağı, işaret parmağı, orta parmak, yüzük parmağı, serçe parmak",
+ "spoken_duration_secs": "7.26",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 11\n}"
+}

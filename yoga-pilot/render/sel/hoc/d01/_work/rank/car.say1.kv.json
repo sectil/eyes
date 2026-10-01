@@ -1,0 +1,38 @@
+{
+ "unit": "car.say1.kv",
+ "phase": "Derinleşme",
+ "sex": "m",
+ "pieces_needed": 10,
+ "takes": [
+  "t1.mp3",
+  "t2.mp3",
+  "t3.mp3"
+ ],
+ "median_active_sec": 6.954,
+ "ranking": [],
+ "excluded": [
+  {
+   "take": "t1.mp3",
+   "reasons": [
+    "kesim tutmuyor: 10 parça gerekli, 4 bulundu"
+   ]
+  },
+  {
+   "take": "t2.mp3",
+   "reasons": [
+    "kesim tutmuyor: 10 parça gerekli, 8 bulundu"
+   ]
+  },
+  {
+   "take": "t3.mp3",
+   "reasons": [
+    "tık 1: [6.3925]",
+    "kesim tutmuyor: 10 parça gerekli, 3 bulundu"
+   ]
+  }
+ ],
+ "order_rule": "SPEC §4.1: zorunlu (a,b) geçenler; önce yumuşak ihlal sayısı (c,f,kesim kuşkusu), sonra ceza toplamı",
+ "weights_note": "VARSAYIM ceza birimleri: hız 0.30 hece/sn, süre %5, F0 yayılımı 0.5 yt, eklem 2.0 yt",
+ "note": "Sıralama yalnız nesneldir; §4.2 Scribe doğrulaması ayrıca yapılmalıdır.",
+ "_rc": 2
+}

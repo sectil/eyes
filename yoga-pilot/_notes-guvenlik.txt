@@ -1,0 +1,93 @@
+NOTLAR (guvenlik dossier) - PubMed dogrulanan (ozet okundu)
+32820538 Farias 2020 Acta Psychiatr Scand 10.1111/acps.13225 SD: 83 calisma, 6703 katilimci (yoga postur haric). 55/83 (%65) en az 1 MAE. Toplam prevalans %8.3 (%95GA 5-12); deneysel %3.7, gozlemsel %33.2. En sik: kaygi (%33, 18 calisma), depresyon (%27, 15), bilissel anomaliler (%25, 14); GI ve intihar davranisi en az (%11, 6). Onceki ruh sagligi sorunu olmayanlarda da gorulebilir.
+36398843 Wieland 2022 Cochrane yoga bel agrisi 10.1002/14651858.CD010671.pub3: yoga vs egzersizsizlik 6-12 ay AE RR 4.76 (43/1000 vs 9/1000; cogu artan bel agrisi, dusuk kesinlik); yoga vs diger egzersiz AE farki yok RR 0.93.
+34516731 Soares 2021 Scand J Pain 10.1515/sjpain-2021-0096: meditasyon bel agrisi MA 8 RKC n=1234; cogu calisma ciddi AE bildirmedi.
+39093008 Steen 2024 Pain Med 10.1093/pm/pnae076: FM mind-body SD 27 calisma; ~1/3 AE raporladi (raporlama eksigi).
+Kod: lib/breath.js:14 HOLD_MAX=7 VARSAYIM; :30 LIMITS; :113-122 box 4-4-4-4 "Tutmalar istege bagli"; :351-354 SAFETY_ROWS (bas donmesi dur / gebelik kalp akciger glokom nobet panik -> nefes tutmali kaliplardan once hekime / arac kullanirken suda ayaktayken yapma). screens/Breath.jsx:80 safety bir kez gosterilir (safetySeen). lib/profileQuestions.js:30-41 epilepsi/isiga duyarli nobet sorusu; lib/profile.js:198 flashSafe. lib/dalgaAudio.js:289 start volume=0.6 varsayilan; :296-297 3 sn ramp.
+35174010 Britton 2021 Clin Psychol Sci 10.1177/2167702621996340 PMC8845498: MBCT 8 hafta 3 varyant n=96, MedEx-I 44 madde bagimsiz degerlendirici. %83 en az 1 MRSE; negatif valansli %58, islevselligi olumsuz etkileyen %37; kalici kotu etki %6-14, asiri uyarilmislik (hyperarousal) ve dissosiyasyon belirtileriyle iliskili. Oranlar diger psikolojik tedavilerle benzer.
+34074221 Goldberg 2021 Psychother Res 10.1080/10503307.2021.1933646 PMC8636531: ABD nufus-tabanli anket; 953 tarama, 470 meditasyon deneyimi, 434 takip. MRAE genel madde %32.3, >=1 ozel madde %50.0; >=1 ay suren %10.4. En sik: kaygi, travmatik yeniden yasama, duygusal hassasiyet. Islevsel bozulma %10.6, >=1 ay %1.2. Cocukluk olumsuzluklari artmis riskle iliskili. MRAE yasayanlar da meditasyon yaptiklarina esit derecede memnun. Oneriler: risk altindakileri belirleme, olasi etkiler hakkinda seffaflik, travma-duyarliligi artirma.
+31071152 Schlosser 2019 PLoS One 10.1371/journal.pone.0216643: 1232 duzenli meditator (>=2 ay), %25.6 (%95GA 23.1-28.0) ozellikle hos olmayan deneyim. Daha olasi: yuksek tekrarlayan olumsuz dusunme, yalniz yapisokumcu (vipassana/icgoru) meditasyon, hayatinda inziva; daha az olasi: kadin, dindar.
+28542181 Lindahl 2017 PLoS One 10.1371/journal.pone.0176239: Bati Budistleri nitel; 59 deneyim 7 alan (bilissel, algisal, duygusal, bedensel, istemsel, benlik duygusu, sosyal); 26 etkileyen faktor kategorisi 4 alan (uygulayici, pratik, iliskiler, saglik davranislari). Siddet gecici-minimalden agir-kaliciya.
+--- RIA (gevsemeye bagli kaygi)
+6341426 Heide & Borkovec 1983 J Consult Clin Psychol 10.1037//0022-006x.51.2.171 OZET YOK (yalniz baslik: paradoksal kaygi artisi). Sayilar dogrulanmadi.
+6365071 Heide & Borkovec 1984 Behav Res Ther 10.1016/0005-7967(84)90027-5 OZET YOK.
+3069875 Braith 1988 J Behav Ther Exp Psychiatry 10.1016/0005-7916(88)90040-7: 30 kronik kaygili, tek seans KAYITLI (taped) progresif gevseme; 5/30 (%17) seansta artan kaygi. Ic denetim odagi, kaygilanma korkusu, kontrolu kaybetme korkusu ile iliskili olabilir.
+3905864 Norton 1985 J Behav Ther Exp Psychiatry 10.1016/0005-7916(85)90065-5: 38 gunun >=%50'si kaygili; 3/18 meditasyon ve 2/20 PMR grubunda gevseme sirasinda kalp hizi artti; Tellegen absorption olcegi degisimi yordadi.
+3148637 Ley 1988 J Behav Ther Exp Psychiatry 10.1016/0005-7916(88)90054-7 (derleme/kuram): kronik hiperventile edenlerde oturup/uzanip gevserken metabolik CO2 uretimi duser, dakika solunum sabit kalirsa hipokapni artar -> panik benzeri duyumlar. Hiperventilasyon yorumu.
+31450137 Kim & Newman 2019 J Affect Disord 10.1016/j.jad.2019.08.045 PMC7288612: YAB n=32, MDB n=34, saglikli 30; olumsuz kontrast duyarliligi YAB'da RIA'yi tam, MDB'de kismen aracilik etti.
+27855541 Newman 2016/2018 Psychother Res 10.1080/10503307.2016.1253891: YAB n=41; RIA'dan bagimsiz herkes iyilesti; daha dusuk tepe RIA (ozellikle tedavinin son ucte birinde) daha iyi sonuc; RIA'ya tam aliskanlik kazananlar en iyi yanit.
+34149986 Luberto 2020 Int J Cogn Ther 10.1007/s41811-020-00086-3: Relaxation Sensitivity Index (RSI), 3 faktor fiziksel/bilissel/sosyal; semptomatik orneklemde daha yuksek; gecmiste gevsemeye korkulu tepki ile iliskili.
+10483629 Khasky & Smith 1999 Percept Mot Skills 10.2466/pms.1999.88.2.409: n=114, 25 dk PMR/yoga germe/imgeleme/kontrol; tum gevseme gruplarinda "uzaklasma (disengagement)" olumsuz duygu ile pozitif iliskili.
+--- Hipnoz
+29485379 Bollinger 2018 Am J Clin Hypn 10.1080/00029157.2017.1315927: ClinicalTrials.gov kayitli hipnoz calismalari; hipnoza atfedilebilir ciddi AE %0, diger AE %0.47; cok calisma AE bildirmemis; hepsi tibbi durum yan etkileri icin (psikiyatrik degil) -> genellenebilirlik sinirli.
+28300508 Howard 2017 Am J Clin Hypn 10.1080/00029157.2016.1203281: istenmeyen etkiler genelde hafif/gecici; "dehipnoz/uyandirma (alerting) basarisizligi" istenmeyen etkilerde onemli rol; kisiyi hipnoz oncesi uyaniklik duzeyine geri dondurmek esit/daha onemli. Howard Alertness Scale. (makale/klinik yorum + 3 vaka)
+27173407 Hauser 2016 Dtsch Arztebl Int 10.3238/arztebl.2016.0289 PMC4873672: meta-analizlerin SD'si (5 MA >=400 hasta); 2 MA'da hipnoz ile kontrol arasinda yan etki/guvenlik farki yok; tibbi islemler ve IBS'de "guvenli" sonucu (yazar dili).
+24901382 Schaefert 2014 Psychosom Med 10.1097/PSY.0000000000000039: IBS 8 RKC n=464; hipnoz grubunda 238 kisiden 1 (%0.4) AE nedeniyle birakti: PANIK ATAK.
+8582780 Lynn 1996 Int J Clin Exp Hypn 10.1080/00207149608416064 OZET YOK (baslik: hipnoz ozel olumsuz etki riski tasir mi?).
+27896907 Zech 2016 Eur J Pain 10.1002/ejp.933: FM rehberli imgeleme/hipnoz MA 7 RKC n=387; hicbir calisma guvenlik raporlamadi.
+--- Psikoz / mani
+17848828 Kuijpers 2007 Psychopathology 10.1159/000108125: vaka + literatur: meditasyon sonrasi akut gecici polimorfik psikoz; diger vakalar ya onceden var olan psikotik bozuklugun nuksu ya da psikiyatrik oykusu olmayanlarda kisa psikotik tepki. "Meditasyon yatkin hastalarda stresor olarak etki edebilir."
+36316997 Goud 2022 Case Rep Psychiatry 10.1155/2022/2661824 PMC9617715: asiri, rehbersiz meditasyon sonrasi sizofreni ile basvuran vaka; "asiri rehbersiz meditasyon yapanlarda ara sira psikoz vakalari bildirilmis".
+28073599 Sherrill 2017 Psychiatry Res 10.1016/j.psychres.2016.12.035 OZET YOK (baslik: yaygin meditasyonla tetiklenen psikotik mani).
+29475163 Prakash 2018 Asian J Psychiatr 10.1016/j.ajp.2018.02.001 OZET YOK (vaka).
+36778606 Charan 2022 Indian J Psychol Med 10.1177/02537176211059457 OZET YOK (vaka serisi + risk faktorleri).
+17974947 Lu & Pierre 2007 Am J Psychiatry 10.1176/appi.ajp.2007.07060960 OZET YOK (Bikram yoga ile iliskili psikotik epizod).
+19545481 Chadwick 2009 Behav Cogn Psychother 10.1017/S1352465809990166: "klinik literatur psikozu olanlarda meditasyona karsi uyarir"; n=22 RKC fizibilite, grup mindfulness + CD ev pratigi; gruplar arasi fark yok; birlesik analizde islevsellik iyilesmesi.
+35048869 Ellett & Chadwick 2021 Br J Psychiatry 10.1192/bjp.2021.98: mindfulness-psikoz arastirmalarinda zarar izleme/raporlama tutarsiz; 8 oneri (icerik ozette yok).
+32349698 Jacobsen 2020 BMC Psychiatry 10.1186/s12888-020-02608-x: yatan hasta psikoz, 1-5 seans MBCI n=50; 3 AE, hicbiri calismayla iliskili degil.
+35049131 Ellett 2022 Psychol Psychother 10.1111/papt.12382: cevrimici mindfulness-psikoz grubu 12 seans; tamamlayanlarda guvenilir kotulesme gosteren yok.
+--- Travma-duyarli
+38064219 Zaccari 2023 JAMA Netw Open 10.1001/jamanetworkopen.2023.44862 PMC10709771: RKC, MST-PTSD kadin gaziler ITT n=131 (TCTSY 72, CPT 59). TCTSY = interosepsiyon ve guclenmeye odakli Hatha, 10 hafta 60 dk grup. Tamamlama TCTSY %65.3 vs CPT %45.8 (p=.03). Her iki grup CAPS-5/PCL-5'te zamanla iyilesti; grup farki yok; esdegerlik.
+33788599 Kelly 2021 J Altern Complement Med 10.1089/acm.2020.0417: ara analiz ITT n=104; beklenmeyen AE yok; TCTSY tamamlama %60.3 vs CPT %34.8.
+33819832 Oosterbroek & Dirk 2021 Complement Ther Clin Pract 10.1016/j.ctcp.2021.101365: nitel n=7 egitmen/psikolog; TC-TSY egitimi: SECIM-TEMELLI yaklasim; DAVET- ve farkindalik-temelli DIL; guven ve uyum. Bazilari terminoloji katiligini sorguladi.
+42370917 Dietrich 2026 Psychol Trauma 10.1037/tra0002215: yerli TCTSY egitim kohortu nitel n=15; ortak cikarim: travmanin etkileri ve "davet edici dilin (invitational language) degeri".
+40748024 Shetty 2026 Adv Mind Body Med (DOI yok, PII ADV1391): TIY guvenlik, guclenme, SECIM, guven insasi vurgular (derleme).
+38289065 Shatrova 2024 Eur J Psychotraumatol 10.1080/20008066.2024.2306747 PMC10829842: TSY 6 hafta n=62 kadin; %23 birakti (cogu ilk seanstan sonra); interosepsiyon/beden duyarliligi kismen aracilik.
+33987076 Joss & Teicher 2021 Curr Treat Options Psychiatry 10.1007/s40501-021-00240-4: cocukluk kotu muamelesi olan yetiskinlerde MBI scoping 17 calisma; fayda olabilir ama "bazi uyarlamalar gerekebilir" (ayrinti ozette yok).
+--- Hiperventilasyon / epilepsi
+37813123 Rana 2023 Neuropediatrics 10.1055/s-0043-1774808 (derleme): HV EEG'de ilk aktivasyon yontemi; epileptiform dikenleri nobetten daha sik aktive eder ama JENERALIZE epilepside hastalarin %50'ye varan kisminda klinik nobet tetikleyebilir; absans nobetli cocuklarda yetiskinlerden daha olasi; fokal epilepside cok daha az.
+32446208 Rozenblat 2020 Seizure 10.1016/j.seizure.2020.03.013: dogru yapilan 3 dk HV cocukluk absans epilepsisinde "hemen hemen tum cocuklarda" absans nobeti tetikler; RKC n=20 CAE: oturarak HV 17/20, sirtustu 13/20 (p=.031).
+34779251 Vasudevan 2021 Clin EEG Neurosci 10.1177/15500594211058266: 579 cocuk; 398 5 dk HV tamamladi; HV nobet tetikledi (ilk 3 dk 2 cocuk, son 2 dk 1 cocuk); son 2 dk AE yok.
+38916885 Nadarajah 2024 J Clin Neurophysiol 10.1097/WNP.0000000000001066: 3273 hasta (830 cocuk, 2443 yetiskin); HV cocuklarda absans verimini artirdi (OR 2.44), yetiskinlerde artirmadi (OR 0.36, ns); guvenli degilse yetiskinde HV'siz kayit.
+39970608 Erdogan 2025 Neurophysiol Clin 10.1016/j.neucli.2025.103060: yetiskin epilepside HV duyarliligi artirmadi (26.7 vs 24.5); >=55 yas ve HV kontrendikasyonu olanlar dislandi; HV en cok absans oykusu ya da HV ile tetiklenen nobet oykusu olanlarda yararli.
+41705827 Denhard 2026 J Clin Neurophysiol 10.1097/WNP.0000000000001244: 659 hasta; hicbir yetiskinde HV ile aktive EA yok.
+--- Yoga AE / zorlu nefes / gebelik
+24146758 Cramer 2013 PLoS One 10.1371/journal.pone.0075515 PMC3797727: vaka SD 35 vaka raporu + 2 seri, 76 vaka; 10 onceden hastalik (glokom, osteopeni). En sik uygulamalar pranayama, hatha, Bikram; en sik anilan: bas durusu, omuz durusu, lotus, ZORLU NEFES (forceful breathing). Kas-iskelet %35.5, sinir sistemi %18.4, goz %11.8; 1 olum. Oneri: yeni baslayanlar bas durusu, lotus ve ZORLU NEFES gibi asiri pratiklerden kacinmali; glokomda ters durus yok.
+31357980 Cramer 2019 BMC Complement Altern Med 10.1186/s12906-019-2612-7: Almanya anket n=1702; %21.4 akut, %10.2 kronik AE; YALNIZ KENDI BASINA (gozetimsiz) calisma akut ve kronik AE riskinde artisla iliskili; 0.60 yaralanma/1000 saat.
+28958637 Cramer 2017 J Sci Med Sport 10.1016/j.jsams.2017.08.026: 9 gozlemsel, 9129 yoga uygulayicisi; ders sirasinda AE %22.7, 12 ay %4.6, ciddi %1.9; cogu hafif/gecici; ciddi akut/kronik hastaligi olanlar yogadan once tibbi danisma.
+26116216 Cramer 2015 Am J Epidemiol 10.1093/aje/kwv071: 94 RKC n=8430 AE raporlayan; yoga olagan bakim/egzersiz ile benzer; psikolojik/egitimsel mudahaleye gore daha fazla ciddi olmayan AE (OR 7.30).
+27152528 Babbar & Shyken 2016 Clin Obstet Gynecol 10.1097/GRF.0000000000000210: gebelikte yoga derlemesi; ilk kez gebelikte yoga yapmanin guvenligi ve fetal tolerans gosterilmis (ozet). Nefes tekniklerine ozgu guvenlik OZETTE YOK.
+24731890 Tragea 2014 Complement Ther Med 10.1016/j.ctim.2014.01.006: RKC n=60 primigravid 2. trimester; gevseme nefesi + PMR 6 hafta gunde 2; algilanan stres -3.23, kontrol duygusu +1.99.
+39031032 Yakit Yesilyurt 2024 Int J Gynaecol Obstet 10.1002/ijgo.15799: RKC n=76 yuksek riskli gebelik; diyafram nefesi (+ motor imgeleme): fetuse olumsuz etki yok, uterus kasilmasi tetiklenmedi.
+ARAMA SONUCU: gebelikte kapalabhati / nefes tutma guvenligini dogrudan test eden calisma PubMed ozetlerinde BULUNAMADI (2 arama) -> ihtiyat ilkesiyle dislama.
+--- HV + nefes tutma / su
+10721339 Edmonds & Walker 1999 Med J Aust 10.5694/j.1326-5377.1999.tb123809.x: Avustralya snorkel olumleri 1987-96 n=60; 12'si hiperventilasyon sonrasi nefes tutma hipoksisi -> bilinc kaybi -> bogulma (hepsi genc erkek). "Nefes tutma suresini uzatmak icin hiperventilasyon tehlikeli, caydirilmali."
+22900874 Lippmann & Pearn 2012 Med J Aust 10.5694/mja11.10988: 140 snorkel olumu; 19'u uzun nefes tutmali dalis sonrasi bogulma; onleme: nefes tutmali dalis oncesi hiperventilasyondan kacinma.
+37060440 Pernett 2023 Eur J Appl Physiol 10.1007/s00421-023-05202-7 PMC10363065: n=18 az deneyimli; 15 sn HV sonrasi apne 133 vs 111 sn; istemsiz solunum hareketi baslangici gecikti (112 vs 89 sn); SpO2 dip 90.6 vs 93.6; seri apnelerde HV ile giderek artan desaturasyon (94.0 -> 86.7) -> bayilma riskini artirabilir. HV bayilma icin buyuk risk faktoru (giris).
+--- Ortostatik
+35841911 Wieling 2022 Lancet Neurol 10.1016/S1474-4422(22)00169-7 PMC10024337: OH ayaga kalkinca asiri KB dususu; asemptomatikken bile olumsuz sonuc riski; 4 alt tip (baslangic OH, gecikmis KB toparlanmasi, klasik, gecikmis); sunum bilissel yavaslama/aciklanamayan dusmelerden presenkop/senkopa; yonetim ilac dusurme + yasam tarzi (ornegin KARSI-BASINC MANEVRALARI).
+32805514 Lei 2020 Auton Neurosci 10.1016/j.autneu.2020.102713: OH orta yas %5-10, >60 yas >%20; olum, dusme, KV olay, senkop riski.
+34260686 Tran 2021 Age Ageing 10.1093/ageing/afab090: >=65 yas baslangic OH (surekli olcum) havuzlanmis %29.0 (22.1-36.9); dusme, kirilganlik, senkop riskiyle iliskili.
+29222399 Stewart 2017 Pediatrics 10.1542/peds.2017-1673: insanlarin ~%40'i hayatinda bayilir, yarisi ergenlikte; ilk bayilma zirvesi 15 yas; baslangic OH genclerde sik ve iyi huylu.
+--- Surus / uyku ataleti
+28958002 Bioulac 2017 Sleep 10.1093/sleep/zsx134 (erratum 29718456 10.1093/sleep/zsy075): SD/MA 17 calisma (10 kesitsel 51520, 6 vaka-kontrol 4904, 1 kohort 13674); direksiyonda uykululuk trafik kazasi OR 2.51 (1.87-3.39), I2=%83.
+21075238 Lovato & Lack 2010 Prog Brain Res 10.1016/B978-0-444-53702-7.00009-9: kisa (5-15 dk) sekerleme hemen fayda; >30 dk sekerleme uyaninca kisa sure UYKU ATALETI kaynakli bozulma, sonra uzun sure iyilesme.
+28366332 Hilditch 2017 Sleep Med 10.1016/j.sleep.2016.12.016: <=30 dk sekerlemelerin uyku ataletinden kacindigi kaniti karisik; gunun saati ve onceki uyku/uyaniklik oykusune bagli.
+34639511 Dutheil 2021 IJERPH 10.3390/ijerph181910212: sekerleme sonrasi uyku ataleti doneminde performans sonuclari celiskili.
+--- Kulaklik / ses
+36379592 Dillard 2022 BMJ Glob Health 10.1136/bmjgh-2022-010501 PMC9723884: 12-34 yas, 33 calisma 19046 kisi; kisisel dinleme cihazindan guvensiz dinleme havuzlanmis %23.81 (18.99-29.42); 0.67-1.35 milyar genc risk altinda; WHO materyalleri.
+36767527 Chen 2023 IJERPH 10.3390/ijerph20032161: WHO 2019'da ITU-T H.870 tavsiyesini yayimladi (ses dozu ve sure onerileri). Sayisal esikler OZETTE YOK -> 80 dB(A)/40 sa gibi degerler DOGRULANMADI.
+31868131 Stone 2019 Trends Hear 10.1177/2331216519889232: cocuk kulakliklarinda "seviye sinirlayici" etiketleri belirsiz; bazilari 85 dB(A) "guvenli dinleme" seviyesinin cok ustune cikabildi (laptop/CD ile).
+33562129 Wang 2021 IJERPH 10.3390/ijerph18041560: kume RKC n=830 universite ogrencisi; saglik egitimi kulaklikla yuksek ses ve KULAKLIKLA UYUMA davranisini azaltti (kulaklikla uyuma = isitme riski davranisi olarak ele alindi).
+26020239 Kim 2015 PLoS One 10.1371/journal.pone.0127578: Kore n=19290; kulaklik kaynakli gurultu maruziyeti tinnitus ile iliskili (AOR artmis).
+--- Ek dogrulananlar
+39690521 Luu 2024 Int J Yoga Therap 10.17761/2024-D-24-00021: YN yeniden travmatize edici yan etkiler olabilir: bunaltici geri donusler (flashback), duygusal sikinti, uzamis dissosiyasyon bildirilmis. 10 bilesen: guvenli ortam; ozerklik, saglikli sinirlar, onay; becerikli farkindalik; UYGUN UZUNLUK VE HAZIRLIK; YETERLI YERLESME VE DISA DONUS; UYKU IZNI; kendi sectigi niyet; esnek bilinc dolasimi ve nefes farkindaligi; bedende zitlik ciftleri; ozenli imgeleme.
+35391975 Creaser 2022 Front Psychol 10.3389/fpsyg.2022.765602: uc grupta da oz-sefkati kendine yoneltmek olumsuz benligi etkinlestirdi ve tehdit tepkisi olusturdu; en yuksek alt-esik TSSB + yuksek hiperuyarilma.
+34306146 Toussaint 2021 eCAM 10.1155/2021/5924040: n=60, 20 dk kayitli ses PMR/derin nefes/imgeleme/kontrol; hepsi gevsemeyi artirdi; DERIN NEFES grubunda aninda fizyolojik uyarilma ARTISI sonra baslangica donus; PMR ve imgeleme dogrusal gevseme.
+24882909 Cordi 2014 Sleep 10.5665/sleep.3778: n=70 saglikli kadin; "daha derin uyu" hipnotik telkini sonrasi 90 dk sekerlemede YDU %81 artti, uyanik sure %67 azaldi; etki DUSUK telkine yatkin kisilerde gorulmedi.
+17716079 Loftus & Davis 2006 Annu Rev Clin Psychol 10.1146/annurev.clinpsy.2.022305.095315: belirli terapotik islemler sahte ani olusturabilir; bireysel yatkinlik.
+21227110 Johnson & Raye 1998 Trends Cogn Sci 10.1016/s1364-6613(98)01152-8: kaynak izleme hipnoz, sosyal talep, motivasyonla bozulabilir; "ani arastiran" mesleklerde sahte ani olusturmamak icin dikkat.
+42258809 Adams 2026 JMIR Mhealth Uhealth 10.2196/79366 PMC13245846: Medito n=668; ilk 30 gunde medyan 16 dk kullanim; 14 gunden sonra <%20 devam; beklenti uyumu kullanimla iliskili; meditasyon uygulamalarinin tanitiminda daha fazla seffaflik gerekli.
+39974253 Ahuja 2025 Cureus 10.7759/cureus.77717: tek kollu n=32 hipertansif; tek 16 dk YN sonrasi SKB -7, DKB -6 mmHg; HRV artti.
+40840566 Ghai & Ghai 2025 Complement Ther Med 10.1016/j.ctim.2025.103231: YN MA 28 calisma; aktif kontrole gore SKB g=-1.65, DKB -1.01, KH -0.73; cogu calismada metodolojik sinirlilik.
+Kod: screens/Yon.jsx:362 "Tedavi degildir... Acil durumda 112". lib/breath.js:2-6 kurallar (4-7-8 ve hizli soluma yok; saglik iddiasi yok). lib/dalgaSleep.js:12 SLEEP_FADE_MAX=180 sn; :15 fadeSeconds; :18 kosinus kisilma. lib/dalgaAudio.js:289 volume=0.6 varsayilan; :296 3 sn yukselme. lib/voicePack.js:104-105 TARGET_PEAK 0.8, gainFor max 4x. repo HEAD c7566a1.

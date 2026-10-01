@@ -1,0 +1,17 @@
+{
+ "unit": "c2.akis",
+ "take": "t2",
+ "asset_id": "ENKfjRI4kvpaz7lm53Eu",
+ "asset_size_bytes": 76648,
+ "ref_node": "7jqTschY3ireUflSZ41c",
+ "stt_node": "q59eglBtDCRdXNkzfxxW",
+ "session_id": "ObG4fqtFyccEUDRHiakV",
+ "generation_id": "0ZpA7euXjnQTtDCfLhDr",
+ "actual_credits": 20.24,
+ "actual_cents": 0.368,
+ "spoken_duration_secs": 3.48,
+ "scribe_text": "Nefes kendiliğinden geliyor, kendiliğinden gidiyor",
+ "tts": "Nefes kendiliğinden geliyor. Kendiliğinden gidiyor.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 5\n}"
+}

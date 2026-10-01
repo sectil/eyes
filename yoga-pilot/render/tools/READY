@@ -1,0 +1,61 @@
+audio.py HAZIR — SPEC §3 + §4.1 yardımcıları. Sınama: python3 test_audio.py → 11/11 geçti (çıktı: test_output.txt)
+T=/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/tools
+Modül: sys.path.insert(0, T); import audio   (analyze_array, plan_cuts, split_at, process_array, normtext,
+       compare_text, f0_step, f0_edge, unit_pieces, evaluate_take, rank_dir, detect_clicks)
+
+KOMUTLAR (hepsi JSON basar; hata = çıkış 3)
+  python3 $T/audio.py analyze <dosya> --syll N --phase <Varış|Derinleşme|Derin|Kapanış> --sex f|m
+      duration, speech_sec, articulation (hece/konuşma sn), pauses [[s,e]] (≥150 ms), breaths, gaps,
+      f0_mean_hz, f0_geo_hz, f0_sd_semitones, sibilance_ratio, sibilance_peak_rel_db, clipping{clipped,count},
+      dc, lufs, rms_db (konuşma RMS; <1 sn klibin --ref-rms-db değeri buradan, işlenmiş referans klipten),
+      true_peak_dbtp, clicks{count,times,mode}, rate_rule (Derin: ≤5,0 tavan; öteki: 5,0–6,2)
+  python3 $T/audio.py cut <dosya> --n K --outdir D [--names a,b,...] [--sylls 3,4,...] [--sex f|m]
+      en uzun K−1 boşluk (nefesli boşluk tek sayılır), zaman sırasıyla; kesim saf sessizliğin ortasına yakın
+      sıfır geçişte, 5 ms uç. Çıkış 2 = K parça yok. JSON: cuts, pieces[{name,file,start,end,dur,speech_sec,rate}],
+      margin_ratio (en kısa seçilen / en uzun seçilmeyen boşluk; ~1 ise kesim belirsiz), boundary_misalign, cut_suspect
+  python3 $T/audio.py process <girdi> --out <wav> --sex f|m [--micro] [--ref-rms-db X]
+      HPF (f 90 / m 70 Hz, 2. derece) → kırpma (çıktı ölçeğinde −50 dBFS, 60/250 ms, 10 ms uç; uygulanan kazançla
+      yinelenir) → de-ess yalnız gerekirse (≤ −4 dB) → ≥1 sn: −18 LUFS ±0,5 ve ≤ −1,5 dBTP (4×); <1 sn: X (+1 dB
+      --micro) konuşma RMS. 44,1 kHz mono FLOAT WAV. Çıkış 1 = denetim geçmedi; <1 sn ve X yok = çıkış 3.
+      Rapor: level, true_peak_dbtp, limiter_max_db, limiter_sec_over_1db, deess{}, flag ("kulak: ..." > 3 dB sınırlama)
+  python3 $T/audio.py normtext "<metin>"
+  python3 $T/audio.py compare "<a>" "<b>"        (@dosya da olur)   çıkış 0 yalnız sözcük dizisi birebir aynıysa,
+      değilse çıkış 1 + sözcük farkı (op, a, b). Kurallar: İ→i, I→ı, küçük harf; noktalama/üç nokta/tırnak/çizgi
+      silinir; kesme işareti silinir ("Ahmet'in"→"ahmetin", PLAN D.6); â î û → a i u (PLAN D.6); 0–10 rakam → sözcük.
+  python3 $T/audio.py f0step <a.wav> <b.wav> [--sex f|m]
+      a'nın konuşma sonu ile b'nin konuşma başı 500 ms (sesli kare < 3 ise 1 sn'ye genişler, widened_to_1s):
+      step_st (işaretli), pass = |step| ≤ 2,0 (qa.carrierJoinF0StepSemitones). Her zaman çıkış 0.
+  python3 $T/audio.py rank <raw/<ses>/<birim>> --unit-json '<units.json birim nesnesi>' --sex f|m [--match-f0 HZ --match-rate R]
+      t*.mp3 üzerinde §4.1: zorunlu (a) kırpılma/tık yok, (b) kesim tutuyor → elenenler "excluded"; kalanlar
+      önce yumuşak ihlal sayısı (c hız bandı / Derin tavanı, f eklem > 2 yt, kesim kuşkusu), sonra ceza toplamı
+      (c + d ortancaya uzaklık + e F0 yayılımı + f eklem). --match-*: §4.4 sol taşıyıcı (sağdakine perde+hız yakınlığı).
+      Çıkış 0 = en az bir geçerli çekim, 2 = hiç yok. --unit-json dosya yolu ya da @dosya da olur.
+
+PARÇA ADLARI (unit_pieces): taşıyıcı = items kimlikleri; car.sayi'de ön söz "_pre" ("sayıyorum:") kesilir ve atılır
+(11 parça); klip = s1..sN (sentences). Parça hecesi = ünlü sayısı (68 birimde toplam = units.json syllables).
+
+AUDIO.PY'DE OLMAYANLAR: Scribe doğrulaması (§4.2/4.3, MCP), evre kazancı (voicePhaseGainDb; mix.py'de rampayla).
+
+VARSAYIMLAR (kodda işaretli; hiz/*.mp3 7 gerçek okumadan ayarlandı):
+  de-ess eşiği = konuşma RMS + 6 dB (hiz'de yalnız hak-v3 +9,7 aşar), 4:1; nefes = ≤450 ms, ≥18 dB alçak, periyodik değil;
+  tık = kodek kesimi (≈15,5 kHz) üstünde ani+geniş bantlı enerji YA DA sessizlik içinde 10 kHz üstü ani enerji;
+  sınırlayıcı atak 1 dB/ms, bırakma 0,05 dB/ms; kesim kuşkusu > 0,12 (hece+1 ağırlıklı); baş/son için ≥ 20 ms enerji.
+
+BİLİNEN SINIRLAR (rapor edilmeli):
+  1) Hakan (hiz v2 okumaları): tepe/yükseklik oranı ≈ 21,3 dB → −18 LUFS'te ≤ −1,5 dBTP için 5,6–6,3 dB tepe
+     sınırlaması gerekiyor (≈1–1,5 sn'de > 1 dB); "kulak" bayrağı alır. Neslihan'da sınırlama yok. v4 Hakan ölçülmedi.
+  2) Tık: kodlamadan önce oluşmuş ve konuşmanın (ıslıklı sesin) içine düşmüş tık görülmez (nes-v3'te konuşma içi
+     0,02 dürtü 0/3, ek yeri 0/1); sessizlikteki ve işlem kaynaklı tıklar bulunur (4/4, 3/3). Gerçek 7 okumada 0 yanlış alarm.
+
+v3 (PLAN.v3 §F A adımı, 2026-09-29; SPEC "v3 eki"):
+  process ... [--level-rule v3|v2] [--peak-mode auto|limiter]   (varsayılan v3 + auto)
+      v3: < 1 sn parça LUFS ölçülebiliyorsa (≥ 0,4 sn) −18 LUFS (mikro ek ofseti 0 dB, MICRO_OFFSET_V3_DB); referans
+      gerekmez. auto: eski sınırlayıcı > 1 dB kısacaksa yumuşak tepe sıkıştırma adayı (3:1, 6 dB diz, 10 ms atak,
+      ≤ 6 dB) + sınırlayıcı; fast_sdr_db iyi olan seçilir (rapor: peak{chain,candidates}). Kısa parçada sınırlayıcı
+      payı > 3 dB ise hedef en çok 3 dB iner (short_level_capped). ≤ 1 dB sınırlanan klip v2 ile örnek örnek aynı.
+  compare "<metin>" "<Scribe>" [--strict]   v3 Scribe yazım istisnaları (birleşik sözcük, ek-fiil); JSON "exceptions".
+      Liste: render/scribe_istisnalari.md (Türkçe editör onayı bekliyor). --strict = v2.
+  reprocess_v3.py   bütün seçilmiş parçaları v3 kuralıyla yeniden işler → sel/<ses>/_v3/, sel/<ses>/reprocess-v3.json
+  mix.py            v3 parçalarını okur (PIECES_RULE='v3'); < 1 sn dahil her parça ≥ 15 dB, gerekirse yerel yatak kısması
+  kulak_listesi.py  out/kulak_listesi.md
+  Sınama: python3 test_audio.py (15 test; çıktı test_output.txt)

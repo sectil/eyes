@@ -1,0 +1,28 @@
+{
+ "node_id": "dKjIy5BfuMyR2i2Xgl74",
+ "session_ids": [
+  "ROOtHoYvE0Cx0L760ixi",
+  "n7clmI8guqREQe6ZBubd"
+ ],
+ "requested_at": "2026-09-30T07:12:13.345Z",
+ "tts": "Belki sıcak bir odadasın. Belki üstü kapalı bir verandadasın.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "ROOtHoYvE0Cx0L760ixi",
+   "generation_id": "cy5sc9oCnD8ZYEnjDjUv",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/ROOtHoYvE0Cx0L760ixi/cy5sc9oCnD8ZYEnjDjUv/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T071217Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=7a77245a03b4125fa9a3fe1bf0764a6cc0377af35c90018436b86c6e9ae7d08fc3360c0e15d22a59f31e04dbdae3c6f938050b61adefed669ee3c83506df07b90a0099d16515c61d96b48a969e6af937a1ad1b617b2daebd84921261107d554dde81afe083bdc5af46eadbac40ecbfb9478a20451aa0c38b2e0d5c63e6cc4686d27700661dc91114aee89503ecc0f6004734a443ccc154c81f30e953cfbc291e93e46ad84177f1f7b2d680da2603e35469f61e1e4b1868d8b6a16cca2454158d7e98eddbc8162e68d0b9b7a0a8a3d424b433b8ab38486f255d7b21a3fbfa79b0940ea3b0578c63f517e976a99df8e062fd4f1ee20540e28ae7964dbe33a27335",
+   "duration_secs": 4.96,
+   "prompt": "Belki sıcak bir odadasın. Belki üstü kapalı bir verandadasın.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "n7clmI8guqREQe6ZBubd",
+   "generation_id": "Scd96hlOZbb3tHQhoMid",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/n7clmI8guqREQe6ZBubd/Scd96hlOZbb3tHQhoMid/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T071217Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=5d3429c4e8f560aeb48c4e1f025006385b072a723d25469c5a3c520ed4c0048a2cb782dfc2bc144254e25d4d2203f5725a68bd007bed72f97e5540e3fbae8bf9ec5d97964ef2c8d598c00a2c48c87fafad7ea50de676af6edc5e854cc225e948962fbbf9fb684cdc4505c4109b74a2db995eaf8a919e0691e829ee09d818c04626afc084edcab455a3720a4c66c918883dc536a8501453990b44666e6949cbfa5bc1ba80c76e134afbd1baee64e1dd48d1a0a28fd9a5c2d872e6001227088eaccd116c237649ceed3f07561f10b5252b466980d78ddb7164f5d67d56881082e5afb3f73ae4a44f1bcc8303f2958b11b00520d85a7efe221396fc3e59c9d09ab2",
+   "duration_secs": 4.96,
+   "prompt": "Belki sıcak bir odadasın. Belki üstü kapalı bir verandadasın.",
+   "kind": "audio"
+  }
+ ]
+}

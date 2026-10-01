@@ -1,0 +1,255 @@
+<title>Işıktan Baş</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;600&display=swap">
+<style>
+/* Yerleşim: üstte gün seçici, ortada tek telefon; telefonun başında ışıktan baş (canvas), altında Nef ve beş alan çipi. Tokenlar uygulamanın styles.css'inden. */
+:root {
+  --font-display: 'Unbounded', 'Avenir Next', system-ui, sans-serif;
+  --font-body: 'Onest', system-ui, -apple-system, sans-serif;
+  --page: #dfe6ec; --bg: #f3f6f8; --surface: #ffffff; --surface-2: #e9eef2; --border: #e1e7ec;
+  --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --iris-1: #11a9b8; --iris-2: #2f6bea; --lens: #f08a00; --lens-text: #8a4600; --ok: #13704b; --ok-bg: rgba(31,169,116,.13);
+  --line: #0b7480; --pupil: #081018;
+  --t-goz: #0e9fb0; --t-dikkat: #5b4fe0; --t-nefes: #1f8fd6; --t-ruh: #b04fc8; --t-hareket: #14936b;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --page: #03060a; --bg: #070c12; --surface: #0f171f; --surface-2: #141e28; --border: rgba(255,255,255,.08);
+  --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --iris-1: #19c2d1; --iris-2: #3e7bfa; --lens: #ffb13b; --lens-text: #ffb13b; --ok: #35d39a; --ok-bg: rgba(53,211,154,.12);
+  --line: #5fe3ee; --pupil: #03070b;
+  --t-goz: #19c2d1; --t-dikkat: #9d93ff; --t-nefes: #5fb4ff; --t-ruh: #dc8cf2; --t-hareket: #3fd6a2; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --page: #03060a; --bg: #070c12; --surface: #0f171f; --surface-2: #141e28; --border: rgba(255,255,255,.08);
+  --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --iris-1: #19c2d1; --iris-2: #3e7bfa; --lens: #ffb13b; --lens-text: #ffb13b; --ok: #35d39a; --ok-bg: rgba(53,211,154,.12);
+  --line: #5fe3ee; --pupil: #03070b;
+  --t-goz: #19c2d1; --t-dikkat: #9d93ff; --t-nefes: #5fb4ff; --t-ruh: #dc8cf2; --t-hareket: #3fd6a2; color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--page); color: var(--ink); font-family: var(--font-body); padding: 18px 16px 36px; -webkit-font-smoothing: antialiased; }
+.top { max-width: 420px; margin: 0 auto 14px; display: grid; gap: 10px; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg button { font: 600 14px var(--font-body); color: var(--ink-2); background: var(--surface); border: 1px solid var(--border); padding: 8px 14px; border-radius: 99px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.seg button:focus-visible, .chip:focus-visible { outline: 2px solid var(--iris-1); outline-offset: 2px; }
+.phone { max-width: 390px; margin: 0 auto; background: var(--bg); border-radius: 34px; border: 1px solid var(--border); overflow: hidden; padding: 22px 0 20px; }
+.head { display: flex; align-items: baseline; justify-content: space-between; padding: 0 20px; }
+.head b { font-family: var(--font-display); font-weight: 600; font-size: 26px; }
+.head span { font-size: 14px; font-weight: 600; color: var(--ink-2); }
+.stage { position: relative; }
+.stage canvas { display: block; width: 100%; touch-action: manipulation; }
+.nef { display: flex; gap: 10px; padding: 4px 20px 0; align-items: flex-start; }
+.nef i { flex: none; width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle, var(--pupil) 0 26%, transparent 27%), conic-gradient(from 20deg, var(--iris-1), var(--iris-2), var(--iris-1)); margin-top: 3px; }
+.nef p { margin: 0; font-size: 17.5px; line-height: 1.38; font-weight: 500; text-wrap: pretty; }
+.nef .live { color: var(--lens-text); }
+.chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(104px, 1fr)); gap: 8px; margin: 14px 16px 0; }
+.chip { text-align: left; font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 9px 11px; cursor: pointer; display: grid; gap: 2px; min-width: 0; }
+.chip[aria-pressed="true"] { border-color: var(--c); box-shadow: 0 0 0 1px var(--c); }
+.chip .n { font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+.chip .n::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--c); flex: none; }
+.chip .v { font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.chip .s { font-size: 12px; font-weight: 700; color: var(--ink-3); }
+.chip .s.up { color: var(--ok); }
+.chip .s.live { color: var(--lens-text); }
+.detail { margin: 12px 16px 0; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 12px 14px; font-size: 14px; color: var(--ink-2); line-height: 1.45; }
+.detail b { color: var(--ink); }
+.note { max-width: 420px; margin: 16px auto 0; font-size: 12.5px; color: var(--ink-3); line-height: 1.5; }
+</style>
+
+<div class="top">
+  <div class="seg" role="group" aria-label="Gün">
+    <button id="g30" data-d="30">30. gün</button>
+    <button id="gw" data-d="walk">Yürürken</button>
+    <button id="g1" data-d="1">1. gün</button>
+  </div>
+</div>
+<div class="phone">
+  <div class="head"><b>Gelişim</b><span id="dl"></span></div>
+  <div class="stage"><canvas id="cv" aria-label="Işıktan baş: gözler ve beş bölgeli beyin"></canvas></div>
+  <div class="nef"><i></i><p id="nf"></p></div>
+  <div class="chips" id="chips"></div>
+  <div class="detail" id="det"></div>
+</div>
+<p class="note">Örnek veri; gerçek kullanıcı verisi değildir. Her değer uygulamada bugün var olan bir ölçümden gelir (VERI.md). Bir bölge ancak kod başlangıca göre iyileşmeyi doğruladığında parlak yanar. Bir alana dokununca o bölge öne çıkar.</p>
+
+<script>
+// ---------- Örnek veri ----------
+// st: start başlangıç · up başlangıcından iyi · same değişim yok · unsure henüz belli değil · live şu an
+const AREAS = ['goz', 'dikkat', 'nefes', 'ruh', 'hareket']
+const NAME = { goz: 'Göz', dikkat: 'Dikkat', nefes: 'Nefes', ruh: 'Ruh hâli', hareket: 'Hareket' }
+const WORD = { start: 'Başlangıç', up: 'Başlangıcından iyi', same: 'Değişim yok', unsure: 'Henüz belli değil', live: 'Şu an' }
+const DAYS = {
+  '30': { label: '30. gün', blinks: 5, nef: 'Üç alanda başlangıcından iyisin: dikkat, nefes ve ruh hâli.', a: {
+    goz: { st: 'same', v: 'E testi 0,20 → 0,20', d: '<b>E testi</b> 6 ölçümde başlangıcınla aynı (küçük değer iyi). İlk Bakış: 20 saniyede 5 kırpma; gözlerin bu hızla kırpıyor.' },
+    dikkat: { st: 'up', v: '4 → 6 harf', d: '<b>Tek Bakışta</b> kavradığın harf 14 ölçümde 4\'ten 6\'ya çıktı.' },
+    nefes: { st: 'up', v: '+1,3 sakinlik', d: '<b>Nefesten sonra</b> sakinlik puanın 24 oturumda ortalama 1,3 yüksek (5 üzerinden).' },
+    ruh: { st: 'up', v: 'İyi oluş 56 → 68', d: '<b>İyi oluş</b> (WHO-5) puanın 56\'dan 68\'e çıktı; 10 puandan büyük fark.' },
+    hareket: { st: 'unsure', v: 'Bugün 7.080 adım', d: '<b>Apple Sağlık:</b> bugün 7.080 adım. Adım geçmişi henüz kaydedilmediği için karşılaştırma yok.' },
+  } },
+  '1': { label: '1. gün', blinks: 3, nef: 'Başlangıcın ölçüldü. Bundan sonraki her ölçüm buna göre yanacak.', a: {
+    goz: { st: 'start', v: '20 sn\'de 3 kırpma', d: '<b>İlk Bakış</b> 20 saniyede 3 kırpma ölçtü; gözlerin bu hızla kırpıyor. E testi de alındı.' },
+    dikkat: { st: 'start', v: '4 harf', d: '<b>Tek Bakışta</b> ilk ölçümün: 4 harf.' },
+    nefes: { st: 'start', v: 'Sakinlik 2 → 4', d: '<b>İlk nefesinde</b> sakinlik puanın 2\'den 4\'e çıktı (5 üzerinden).' },
+    ruh: { st: 'start', v: 'İyi oluş 56', d: '<b>İyi oluş</b> (WHO-5) ilk puanın: 56. Sonraki 14. gün.' },
+    hareket: { st: 'start', v: 'Bugün 3.412 adım', d: '<b>Apple Sağlık:</b> bugün 3.412 adım.' },
+  } },
+}
+DAYS.walk = JSON.parse(JSON.stringify(DAYS['30']))
+Object.assign(DAYS.walk, { label: 'Şu an', nef: '<span class="live">Şu an yürüyorsun:</span> 14 dakikada 1,2 km, 1.690 adım.' })
+DAYS.walk.a.hareket = { st: 'live', v: '1.690 adım · 14 dk', d: '<b>Yürüyüş sürüyor:</b> 1,2 km, 1.690 adım. Hareket bölgesi adım temponla akıyor.' }
+
+let DAY = '30', SEL = null
+try { DAY = localStorage.getItem('bas-gun') || DAY } catch (e) {}
+const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim()
+const hex = (h) => { const n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255] }
+const rgba = (h, a) => { const [r, g, b] = hex(h); return `rgba(${r},${g},${b},${a})` }
+function rnd(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296) }
+
+// ---------- Baş geometrisi (tepe y=0, burun ucu y=1; φ=0 yüz önü) ----------
+function sliceRadius(y, phi) {
+  const a = y < 0.42 ? 0.42 * Math.sqrt(Math.max(0, 1 - (1 - y / 0.42) ** 2)) : 0.42 - 0.1 * ((y - 0.42) / 0.58) ** 1.4
+  const b = y < 0.45 ? 0.52 * Math.sqrt(Math.max(0, 1 - (1 - y / 0.45) ** 2)) : 0.52 - 0.1 * ((y - 0.45) / 0.55)
+  let x = a * Math.sin(phi), z = b * Math.cos(phi)
+  const front = Math.max(0, Math.cos(phi))
+  const g = (u, m, s) => Math.exp(-(((u - m) / s) ** 2))
+  // kaş kemeri, göz çukuru, burun
+  let bump = 0.022 * g(y, 0.53, 0.035) * front ** 3
+  bump -= 0.055 * g(y, 0.615, 0.05) * (g(phi, 0.55, 0.22) + g(phi, -0.55, 0.22))
+  if (y > 0.56) bump += 0.17 * ((y - 0.56) / 0.44) ** 1.2 * g(phi, 0, 0.17 + 0.08 * (y - 0.56))
+  const k = 1 + bump / Math.max(0.05, Math.hypot(x, z))
+  return [x * k, z * k]
+}
+const SLICES = []
+for (let i = 1; i <= 24; i++) {
+  const y = (i / 24) ** 1.05
+  const pts = []
+  for (let j = 0; j <= 96; j++) { const phi = (j / 96) * Math.PI * 2 - Math.PI; const [x, z] = sliceRadius(y, phi); pts.push([x, y, z]) }
+  SLICES.push(pts)
+}
+// Beyin: kafatası içinde nokta bulutu; beş bölge
+const BR = [], R = rnd(11)
+while (BR.length < 620) {
+  const x = (R() * 2 - 1) * 0.33, y = 0.05 + R() * 0.5, z = (R() * 2 - 1) * 0.42
+  const inBrain = (x / 0.33) ** 2 + ((y - 0.27) / 0.22) ** 2 + ((z + 0.02) / 0.41) ** 2 < 1
+  const inStem = Math.hypot(x / 0.07, (z + 0.1) / 0.08) < 1 && y > 0.4 && y < 0.62
+  if (!inBrain && !inStem) continue
+  let r
+  if (inStem || (y > 0.43 && Math.abs(x) < 0.1)) r = 'nefes'
+  else if (Math.hypot(x / 0.13, (y - 0.3) / 0.1, (z + 0.02) / 0.14) < 1) r = 'ruh'
+  else if (z > 0.1) r = 'dikkat'
+  else if (z < -0.16) r = 'goz'
+  else if (y < 0.24) r = 'hareket'
+  else continue
+  BR.push({ p: [x, y, z], r, ph: R() * 6.28, s: 0.6 + R() * 0.9 })
+}
+for (const a of BR) a.nb = BR.filter((b) => b !== a && b.r === a.r).map((b) => [b, (b.p[0] - a.p[0]) ** 2 + (b.p[1] - a.p[1]) ** 2 + (b.p[2] - a.p[2]) ** 2]).sort((u, v) => u[1] - v[1]).slice(0, 2).map((u) => u[0])
+const EYES = [0.55, -0.55].map((phi) => { const y = 0.615; const [x, z] = sliceRadius(y, phi); return [x * 0.97, y, z * 0.97] })
+
+// ---------- Çizim ----------
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d')
+let W, H, dpr, S, cx, cy
+function size() {
+  dpr = Math.min(3, devicePixelRatio || 1); W = cv.clientWidth; H = Math.round(W * 1.02)
+  cv.width = W * dpr; cv.height = H * dpr; cv.style.height = H + 'px'; ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+  S = W * 0.78; cx = W / 2; cy = H * 0.1
+}
+function proj([x, y, z], yaw, pitch, sc) {
+  const X = x * Math.cos(yaw) + z * Math.sin(yaw), Z0 = -x * Math.sin(yaw) + z * Math.cos(yaw)
+  const Y = (y - 0.5) * Math.cos(pitch) - Z0 * Math.sin(pitch), Z = (y - 0.5) * Math.sin(pitch) + Z0 * Math.cos(pitch)
+  const f = 3.2 / (3.2 - Z)
+  return [cx + X * S * f * sc, cy + (Y + 0.5) * S * f * sc, Z]
+}
+function draw(t) {
+  const D = DAYS[DAY], dark = css('--page') === '#03060a'
+  const LINE = css('--line'), I1 = css('--iris-1'), I2 = css('--iris-2'), L = css('--lens')
+  const live = D.a.hareket.st === 'live'
+  const yaw = 0.62 + 0.14 * Math.sin(t * 0.21), pitch = 0.14
+  const breath = 1 + 0.012 * Math.sin(t * (2 * Math.PI / 10)) + (live ? 0.004 * Math.sin(t * 2 * Math.PI * 1.8) : 0)
+  ctx.clearRect(0, 0, W, H)
+  // arka ışık
+  const g0 = ctx.createRadialGradient(cx, H * 0.4, 10, cx, H * 0.4, W * 0.55)
+  g0.addColorStop(0, rgba(I1, dark ? 0.16 : 0.1)); g0.addColorStop(1, rgba(I1, 0)); ctx.fillStyle = g0; ctx.fillRect(0, 0, W, H)
+  // beyin (başın içinde, çizgilerden önce)
+  const TONE = Object.fromEntries(AREAS.map((k) => [k, css('--t-' + k)]))
+  const lvl = (k) => { const st = D.a[k].st; const base = st === 'up' ? 1 : st === 'live' ? 1 : st === 'start' ? 0.62 : 0.34; return SEL && SEL !== k ? base * 0.25 : SEL === k ? 1.1 : base }
+  const P = BR.map((b) => ({ b, q: proj(b.p, yaw, pitch, breath) }))
+  ctx.lineWidth = 0.7
+  for (const { b, q } of P) {
+    const L0 = lvl(b.r); if (L0 < 0.2) continue
+    for (const n of b.nb) { const q2 = proj(n.p, yaw, pitch, breath); ctx.strokeStyle = rgba(TONE[b.r], 0.1 * L0); ctx.beginPath(); ctx.moveTo(q[0], q[1]); ctx.lineTo(q2[0], q2[1]); ctx.stroke() }
+  }
+  for (const { b, q } of P) {
+    const st = D.a[b.r].st, L0 = lvl(b.r)
+    let tw = 0.55 + 0.45 * Math.sin(t * (st === 'up' ? 1.6 : 0.8) + b.ph)
+    let col = TONE[b.r]
+    if (b.r === 'hareket' && live) { const wave = Math.sin(t * 2 * Math.PI * 1.8 - b.p[2] * 14); tw = 0.5 + 0.5 * wave; col = wave > 0.6 ? L : col }
+    const depth = 0.55 + 0.45 * ((q[2] + 0.5) / 1)
+    ctx.fillStyle = rgba(col, Math.min(1, (0.4 + 0.6 * tw) * L0 * depth * 1.25))
+    ctx.beginPath(); ctx.arc(q[0], q[1], b.s * (0.8 + 0.5 * L0) * (S / 300), 0, 7); ctx.fill()
+  }
+  // bölgelerin ışığı (doğrulanmış iyileşme: yumuşak hale)
+  for (const k of AREAS) {
+    const st = D.a[k].st, strong = st === 'up' || st === 'live' || SEL === k; if (SEL && SEL !== k) continue
+    const pts = P.filter((x) => x.b.r === k); if (!pts.length) continue
+    const mx = pts.reduce((s, x) => s + x.q[0], 0) / pts.length, my = pts.reduce((s, x) => s + x.q[1], 0) / pts.length
+    const gg = ctx.createRadialGradient(mx, my, 2, mx, my, S * 0.17)
+    const pulse = 0.75 + 0.25 * Math.sin(t * (st === 'live' ? 11.3 : 1.2))
+    gg.addColorStop(0, rgba(st === 'live' ? L : TONE[k], (dark ? 0.42 : 0.26) * (strong ? pulse : 0.3))); gg.addColorStop(1, rgba(TONE[k], 0))
+    ctx.fillStyle = gg; ctx.beginPath(); ctx.arc(mx, my, S * 0.17, 0, 7); ctx.fill()
+  }
+  // baş: yatay ışık çizgileri (arka yüz soluk, ön yüz parlak)
+  ctx.lineCap = 'round'
+  SLICES.forEach((pts, si) => {
+    const Q = pts.map((p) => proj(p, yaw, pitch, breath))
+    for (let j = 0; j < Q.length - 1; j++) {
+      const z = (Q[j][2] + Q[j + 1][2]) / 2
+      const a = z > 0 ? 0.22 + 0.7 * Math.min(1, z / 0.45) : 0.03 + 0.06 * (1 + z / 0.55)
+      const fade = si > 19 ? 1 - (si - 19) / 6 : 1
+      ctx.strokeStyle = rgba(LINE, Math.max(0, a * fade * (dark ? 0.9 : 0.8))); ctx.lineWidth = z > 0 ? 1 : 0.6
+      ctx.beginPath(); ctx.moveTo(Q[j][0], Q[j][1]); ctx.lineTo(Q[j + 1][0], Q[j + 1][1]); ctx.stroke()
+    }
+  })
+  // gözler: iris; kişinin kendi kırpma hızıyla kırpar
+  const period = 20 / Math.max(1, D.blinks), bt = t % period, open = bt < 0.22 ? Math.abs(Math.cos((bt / 0.22) * Math.PI)) : 1
+  const eyeOn = SEL && SEL !== 'goz' ? 0.35 : 1
+  EYES.forEach((e) => {
+    const [ex, ey, ez] = proj(e, yaw, pitch, breath), r = S * 0.03, face = Math.max(0.28, Math.cos(yaw + (e[0] > 0 ? 0.55 : -0.55)))
+    if (ez < -0.05) return
+    ctx.save(); ctx.globalAlpha = eyeOn
+    const gl = ctx.createRadialGradient(ex, ey, 1, ex, ey, r * 3.2); gl.addColorStop(0, rgba(I1, dark ? 0.35 : 0.22)); gl.addColorStop(1, rgba(I1, 0))
+    ctx.fillStyle = gl; ctx.beginPath(); ctx.arc(ex, ey, r * 3.2, 0, 7); ctx.fill()
+    const lid = new Path2D(); lid.moveTo(ex - r * 2 * face, ey); lid.quadraticCurveTo(ex, ey - r * 1.9 * open, ex + r * 2 * face, ey); lid.quadraticCurveTo(ex, ey + r * 1.4 * open, ex - r * 2 * face, ey); ctx.clip(lid)
+    const ig = ctx.createRadialGradient(ex, ey, r * 0.1, ex, ey, r)
+    ig.addColorStop(0, I2); ig.addColorStop(0.6, I1); ig.addColorStop(1, I2)
+    ctx.fillStyle = ig; ctx.beginPath(); ctx.ellipse(ex, ey, r * face, r, 0, 0, 7); ctx.fill()
+    ctx.lineWidth = 0.6
+    for (let i = 0; i < 30; i++) { const a = i / 30 * 6.283; ctx.strokeStyle = 'rgba(255,255,255,.3)'; ctx.beginPath(); ctx.moveTo(ex + Math.cos(a) * r * 0.4 * face, ey + Math.sin(a) * r * 0.4); ctx.lineTo(ex + Math.cos(a) * r * 0.92 * face, ey + Math.sin(a) * r * 0.92); ctx.stroke() }
+    ctx.fillStyle = css('--pupil'); ctx.beginPath(); ctx.ellipse(ex, ey, r * 0.38 * face, r * 0.38, 0, 0, 7); ctx.fill()
+    ctx.fillStyle = 'rgba(255,255,255,.85)'; ctx.beginPath(); ctx.arc(ex - r * 0.28 * face, ey - r * 0.32, r * 0.12, 0, 7); ctx.fill()
+    ctx.restore()
+    // kapak çizgileri
+    ctx.save(); ctx.globalAlpha = eyeOn; ctx.strokeStyle = rgba(LINE, 0.85); ctx.lineWidth = 1.3
+    ctx.beginPath(); ctx.moveTo(ex - r * 2 * face, ey); ctx.quadraticCurveTo(ex, ey - r * 1.9 * open, ex + r * 2 * face, ey); ctx.stroke()
+    ctx.strokeStyle = rgba(LINE, 0.35); ctx.beginPath(); ctx.moveTo(ex - r * 2 * face, ey); ctx.quadraticCurveTo(ex, ey + r * 1.4 * open, ex + r * 2 * face, ey); ctx.stroke(); ctx.restore()
+  })
+  // burun altı: yumuşak bitiş
+  ctx.save(); ctx.globalCompositeOperation = 'destination-out'
+  const fm = ctx.createLinearGradient(0, H - 40, 0, H); fm.addColorStop(0, 'rgba(0,0,0,0)'); fm.addColorStop(1, 'rgba(0,0,0,1)')
+  ctx.fillStyle = fm; ctx.fillRect(0, H - 40, W, 40); ctx.restore()
+}
+
+// ---------- Metin ve etkileşim ----------
+function render() {
+  const D = DAYS[DAY]
+  document.querySelectorAll('.seg button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.d === DAY)))
+  document.getElementById('dl').textContent = D.label
+  document.getElementById('nf').innerHTML = D.nef
+  document.getElementById('chips').innerHTML = AREAS.map((k) => `<button class="chip" id="c-${k}" data-k="${k}" aria-pressed="${SEL === k}" style="--c: var(--t-${k})"><span class="n">${NAME[k]}</span><span class="v">${D.a[k].v}</span><span class="s ${D.a[k].st}">${WORD[D.a[k].st]}</span></button>`).join('')
+  const det = document.getElementById('det'); det.hidden = !SEL; if (SEL) det.innerHTML = D.a[SEL].d
+  document.querySelectorAll('.chip').forEach((c) => c.addEventListener('click', () => { SEL = SEL === c.dataset.k ? null : c.dataset.k; render() }))
+}
+document.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => { DAY = b.dataset.d; SEL = null; try { localStorage.setItem('bas-gun', DAY) } catch (e) {} render(); if (still) draw(4) }))
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches
+const T0 = performance.now()
+function loop(now) { draw(still ? 4 : (now - T0) / 1000 + 4); if (!still) requestAnimationFrame(loop) }
+size(); render(); requestAnimationFrame(loop)
+addEventListener('resize', () => { size(); if (still) draw(4) })
+</script>

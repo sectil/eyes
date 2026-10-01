@@ -1,0 +1,83 @@
+{
+ "unit": "d.kalk",
+ "phase": "Kapanış",
+ "sex": "m",
+ "pieces_needed": 1,
+ "takes": [
+  "t1.mp3",
+  "t2.mp3",
+  "t3.mp3"
+ ],
+ "median_active_sec": 3.432,
+ "ranking": [
+  {
+   "rank": 1,
+   "take": "t1.mp3",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/d.kalk/t1.mp3",
+   "score": 1.474,
+   "penalties": {
+    "rate": 0.833,
+    "dur": 0.641,
+    "f0sd": 0.0
+   },
+   "soft_violations": [
+    "eklemleme 4.75 bant dışı (5.0–6.2)"
+   ],
+   "reasons": [
+    "süre 3.54 sn, ortancadan %3.2",
+    "F0 yayılımı 4.38 yt"
+   ],
+   "metrics": {
+    "duration": 3.76,
+    "active_sec": 3.542,
+    "speech_sec": 2.948,
+    "articulation": 4.75,
+    "f0_mean_hz": 134.7,
+    "f0_geo_hz": 130.6,
+    "f0_sd_semitones": 4.38,
+    "lufs": -18.3,
+    "rms_db": -16.3,
+    "true_peak_dbtp": -6.02,
+    "sibilance_ratio": 0.005,
+    "pause_total_sec": 0.594
+   },
+   "cut": {
+    "needed": 1,
+    "found": 3,
+    "gaps_available": 2,
+    "cuts_sec": [],
+    "pieces": [
+     {
+      "name": "s1",
+      "keep": true,
+      "start": 0.0,
+      "end": 3.76,
+      "speech_sec": 2.948,
+      "syll": 14,
+      "rate": 4.75
+     }
+    ]
+   },
+   "joins": null,
+   "join_max_st": null
+  }
+ ],
+ "excluded": [
+  {
+   "take": "t2.mp3",
+   "reasons": [
+    "tık 3: [1.0606, 1.0965, 1.1205]"
+   ]
+  },
+  {
+   "take": "t3.mp3",
+   "reasons": [
+    "tık 1: [1.1364]"
+   ]
+  }
+ ],
+ "order_rule": "SPEC §4.1: zorunlu (a,b) geçenler; önce yumuşak ihlal sayısı (c,f,kesim kuşkusu), sonra ceza toplamı",
+ "weights_note": "VARSAYIM ceza birimleri: hız 0.30 hece/sn, süre %5, F0 yayılımı 0.5 yt, eklem 2.0 yt",
+ "note": "Sıralama yalnız nesneldir; §4.2 Scribe doğrulaması ayrıca yapılmalıdır.",
+ "_rc": 0
+}

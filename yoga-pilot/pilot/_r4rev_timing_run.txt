@@ -1,0 +1,11 @@
+  ×1.10: 75/78 vaka geçiyor; kalan denetimler: H3: anahtar cümle geçişleri # sn arayla (1: 5.2 5 hi); T5: içerik doymadan esneme f=# > # (1: 5.2 16 hi); T6: # dk üretim köşesinde (1: 5.6 5 hi); eksik P1 blok: ['C2'] (1: 5.2 5 hi)
+
+== ÖZET ==
+  5.2 hece/sn (zarf): 26/26 dakika GEÇTİ (bütün duraklama profillerinde)
+  5.6 hece/sn (üretim): 26/26 dakika GEÇTİ (bütün duraklama profillerinde)
+  6.6 hece/sn: 26/26 dakika GEÇTİ (bütün duraklama profillerinde)
+  5 dk üretim köşesinde (5.6 hi) boş pay: 17.7 sn (T6 tabanı 15)
+  5 dk zarf köşesinde (5.2 hi) boş pay: 9.6 sn (bilgi; plan bütün öteki denetimlerden geçer)
+  TOPLAM: 78/78 vaka GEÇTİ (ana metin); seçenek takımları GEÇTİ; sahne takımları GEÇTİ; metin denetimi GEÇTİ; hızlı kapanış ön klipleri GEÇTİ
+  Kapsam: bu sayı zamanlama ve metin kurallarıdır; dinleme, söyleyiş ve insan onayı değildir (P-S1).
+rc=0

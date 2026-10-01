@@ -1,0 +1,16 @@
+{
+ "unit": "c4.gelmezse",
+ "take": "t3",
+ "ref_node": "tf1f3rM56wSSzb9bTy5a",
+ "asset_id": "f1SK6ujPrwLT07WD5brB",
+ "stt_node": "d9YJo1gDbPweWtHCLSs6",
+ "session_id": "UifbOvlAZFZ8KJefBO88",
+ "generation_id": "QPx1G2y24rKP3LzQhV0w",
+ "actual_credits": 21.56,
+ "actual_cents": 0.392,
+ "spoken_duration_secs": 3.74,
+ "scribe_text": "Bir görüntü gelmese de olur. Gözlerin açık kalsa da",
+ "tts": "Bir görüntü gelmese de olur, gözlerin açık kalsa da.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 9\n}"
+}

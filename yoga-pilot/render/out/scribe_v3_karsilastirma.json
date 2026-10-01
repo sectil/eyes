@@ -1,0 +1,732 @@
+{
+ "rule": "audio.scribe_equal (SPEC v3 eki: birleşik sözcük ve ek-fiil yazımı); ücretli çağrı yok, selection dosyalarındaki Scribe metinleri",
+ "attempts": 166,
+ "strict_equal": 134,
+ "v3_equal": 166,
+ "newly_equal": [
+  {
+   "voice": "nes",
+   "unit": "a.durus",
+   "take": "t1",
+   "chosen": false,
+   "tts": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
+   "scribe": "Sırt üstü ya da yan yatıp zemine yerleşmen yeterli",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "nes",
+   "unit": "a.durus",
+   "take": "t2",
+   "chosen": false,
+   "tts": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
+   "scribe": "Sırt üstü ya da yan yatıp zemine yerleşmen yeterli",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "nes",
+   "unit": "a.durus",
+   "take": "t4",
+   "chosen": true,
+   "tts": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
+   "scribe": "Sırt üstü ya da yan yatıp zemine yerleşmen yeterli",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "nes",
+   "unit": "a.durus",
+   "take": "t5",
+   "chosen": false,
+   "tts": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
+   "scribe": "Sırt üstü ya da yan yatıp zemine yerleşmen yeterli",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "nes",
+   "unit": "a.durus",
+   "take": "t6",
+   "chosen": false,
+   "tts": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
+   "scribe": "Sırt üstü ya da yan yatıp zemine yerleşmen yeterli",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "nes",
+   "unit": "c2.yer",
+   "take": "t1",
+   "chosen": false,
+   "tts": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta.",
+   "scribe": "Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "ek-fiil",
+     "fused": "nefesteyse",
+     "split": [
+      "nefeste",
+      "ise"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "nes",
+   "unit": "c2.yer",
+   "take": "t2",
+   "chosen": false,
+   "tts": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta.",
+   "scribe": "Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "ek-fiil",
+     "fused": "nefesteyse",
+     "split": [
+      "nefeste",
+      "ise"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "nes",
+   "unit": "c2.yer",
+   "take": "t3",
+   "chosen": false,
+   "tts": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta.",
+   "scribe": "Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "ek-fiil",
+     "fused": "nefesteyse",
+     "split": [
+      "nefeste",
+      "ise"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "nes",
+   "unit": "k.yan",
+   "take": "retake-t1",
+   "chosen": true,
+   "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "scribe": "Sırt üstü yatıyorsan önce bir yanına dön",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "nes",
+   "unit": "k.yan",
+   "take": "retake-t2",
+   "chosen": false,
+   "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "scribe": "Sırt üstü yatıyorsan önce bir yanına dön",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "nes",
+   "unit": "k.yan",
+   "take": "retake-t3",
+   "chosen": false,
+   "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "scribe": "Sırt üstü yatıyorsan önce bir yanına dön",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "nes",
+   "unit": "k.yan",
+   "take": "t1",
+   "chosen": false,
+   "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "scribe": "Sırt üstü yatıyorsan önce bir yanına dön",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "nes",
+   "unit": "k.yan",
+   "take": "t2",
+   "chosen": false,
+   "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "scribe": "Sırt üstü yatıyorsan önce bir yanına dön",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "nes",
+   "unit": "k.yan",
+   "take": "t3",
+   "chosen": false,
+   "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "scribe": "Sırt üstü yatıyorsan önce bir yanına dön",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "a.durus",
+   "take": "t1",
+   "chosen": false,
+   "tts": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
+   "scribe": "Sırt üstü ya da yan yatıp zemine yerleşmen yeterli",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "a.durus",
+   "take": "t2",
+   "chosen": false,
+   "tts": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
+   "scribe": "Sırt üstü ya da yan yatıp zemine yerleşmen yeterli",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "a.durus",
+   "take": "t3",
+   "chosen": false,
+   "tts": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
+   "scribe": "Sırt üstü ya da yan yatıp zemine yerleşmen yeterli",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "a.durus",
+   "take": "t4",
+   "chosen": false,
+   "tts": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
+   "scribe": "Sırt üstü ya da yan yatıp zemine yerleşmen yeterli",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "a.durus",
+   "take": "t5",
+   "chosen": true,
+   "tts": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
+   "scribe": "Sırt üstü ya da yan yatıp zemine yerleşmen yeterli",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "a.durus",
+   "take": "t6",
+   "chosen": false,
+   "tts": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
+   "scribe": "Sırt üstü ya da yan yatıp zemine yerleşmen yeterli",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "car.sol1",
+   "take": "t3",
+   "chosen": false,
+   "tts": "Sol elin başparmağı… işaret parmağı… orta parmak… yüzük parmağı… serçe parmak…",
+   "scribe": "Sol elin baş parmağı, işaret parmağı, orta parmak, yüzük parmağı, serçe parmak",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "başparmağı",
+     "split": [
+      "baş",
+      "parmağı"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "c2.yer",
+   "take": "t1",
+   "chosen": false,
+   "tts": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta.",
+   "scribe": "Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "ek-fiil",
+     "fused": "nefesteyse",
+     "split": [
+      "nefeste",
+      "ise"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "c2.yer",
+   "take": "t2",
+   "chosen": true,
+   "tts": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta.",
+   "scribe": "Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "ek-fiil",
+     "fused": "nefesteyse",
+     "split": [
+      "nefeste",
+      "ise"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "c2.yer",
+   "take": "t3",
+   "chosen": false,
+   "tts": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta.",
+   "scribe": "Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "ek-fiil",
+     "fused": "nefesteyse",
+     "split": [
+      "nefeste",
+      "ise"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "c2.yer",
+   "take": "t4",
+   "chosen": false,
+   "tts": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta.",
+   "scribe": "Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "ek-fiil",
+     "fused": "nefesteyse",
+     "split": [
+      "nefeste",
+      "ise"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "c2.yer",
+   "take": "t5",
+   "chosen": false,
+   "tts": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta.",
+   "scribe": "Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "ek-fiil",
+     "fused": "nefesteyse",
+     "split": [
+      "nefeste",
+      "ise"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "c2.yer",
+   "take": "t6",
+   "chosen": false,
+   "tts": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta.",
+   "scribe": "Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "ek-fiil",
+     "fused": "nefesteyse",
+     "split": [
+      "nefeste",
+      "ise"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "k.yan",
+   "take": "retake-t2",
+   "chosen": false,
+   "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "scribe": "Sırt üstü yatıyorsan önce bir yanına dön",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "k.yan",
+   "take": "retake-t3",
+   "chosen": false,
+   "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "scribe": "Sırt üstü yatıyorsan önce bir yanına dön",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "k.yan",
+   "take": "t1",
+   "chosen": true,
+   "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "scribe": "Sırt üstü yatıyorsan önce bir yanına dön",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "k.yan",
+   "take": "t2",
+   "chosen": false,
+   "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "scribe": "Sırt üstü yatıyorsan önce bir yanına dön",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  },
+  {
+   "voice": "hak",
+   "unit": "k.yan",
+   "take": "t3",
+   "chosen": false,
+   "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "scribe": "Sırt üstü yatıyorsan önce bir yanına dön",
+   "strict_equal": false,
+   "v3_equal": true,
+   "exceptions": [
+    {
+     "rule": "birleşik",
+     "fused": "sırtüstü",
+     "split": [
+      "sırt",
+      "üstü"
+     ]
+    }
+   ],
+   "diff": []
+  }
+ ],
+ "still_not_equal": [],
+ "units_with_any_strict_mismatch": {
+  "nes a.durus": {
+   "attempts": 5,
+   "strict": 0,
+   "v3": 5,
+   "chosen_strict": false,
+   "chosen_v3": true
+  },
+  "nes c2.yer": {
+   "attempts": 4,
+   "strict": 1,
+   "v3": 4,
+   "chosen_strict": true,
+   "chosen_v3": true
+  },
+  "nes k.yan": {
+   "attempts": 6,
+   "strict": 0,
+   "v3": 6,
+   "chosen_strict": false,
+   "chosen_v3": true
+  },
+  "hak a.durus": {
+   "attempts": 6,
+   "strict": 0,
+   "v3": 6,
+   "chosen_strict": false,
+   "chosen_v3": true
+  },
+  "hak car.sol1": {
+   "attempts": 2,
+   "strict": 1,
+   "v3": 2,
+   "chosen_strict": true,
+   "chosen_v3": true
+  },
+  "hak c2.yer": {
+   "attempts": 6,
+   "strict": 0,
+   "v3": 6,
+   "chosen_strict": false,
+   "chosen_v3": true
+  },
+  "hak k.yan": {
+   "attempts": 5,
+   "strict": 0,
+   "v3": 5,
+   "chosen_strict": false,
+   "chosen_v3": true
+  }
+ }
+}

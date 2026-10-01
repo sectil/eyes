@@ -1,0 +1,70 @@
+{
+ "unit": "n2.hatirla",
+ "voice": "nes",
+ "voice_id": "wQ7dVQFxIqwokkwsMqqn",
+ "model_id": "eleven_v4",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "node_id": "kShvGrSwgEBLVD05JxSp",
+ "session_ids": [
+  "CcM7gdMGfoasGouKp3c3",
+  "uZ0B2lHHI7YfH30eQSZi",
+  "k0q7HVjAVbG8YcMpEusP"
+ ],
+ "requested_at": "2026-09-29T12:17:50Z",
+ "downloaded_at": "2026-09-29T12:18:47.084892+00:00",
+ "tts": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
+ "generations_count": 3,
+ "retake": true,
+ "retake_reason": "SPEC 4.2/4.3: all 3 original takes failed the sentence cut (longest pause after the colon \"şunu:\" not at the sentence end; boundary_misalign 0.165-0.172 > 0.12; piece rates ~4.0 vs ~8.0 syll/s)",
+ "who": "nes-2-sel",
+ "takes": [
+  {
+   "take": 1,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/n2.hatirla/retake/t1.mp3",
+   "generation_id": "q34Ttoq3TIGoAGVjFFOr",
+   "session_id": "CcM7gdMGfoasGouKp3c3",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/CcM7gdMGfoasGouKp3c3/q34Ttoq3TIGoAGVjFFOr/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T121759Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=18f15ca0b6eb8c9331663d2a4033499d35bd33382f464ff6ba91e0f70b8b0a4dd712e48b0f6f5cbc7ab28117a2993641887d6f39686c89c55f3b077acb1195f0e1a75cf780f070e8b11957425b376c5d43bca17648be5f406d2b22c240ecfdb0c19cae28f5420f3692a1a83703d996ab242f1a43357cf44665d5c593d18e2e004fbdc7504569a82c25d6b5c6fe51a0e825c6d429bef6463551a2cca6abf192b239a7fa88889886966cae0af9747db83106065f99cb1955282170f795301e1d47eede46ba432ad2d58bf69694fd82d9cfcad229ce7e5748ad7516c521fe7dc78191d08df31f1525efdb67bf27476f07a2ad8e718b7e9dd8b751e59956b1f1106d",
+   "node_id": "kShvGrSwgEBLVD05JxSp",
+   "api_duration_secs": 8.16,
+   "ok": true,
+   "duration_secs": 8.16,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 148537,
+   "server_prompt": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
+   "server_prompt_equals_tts": true
+  },
+  {
+   "take": 2,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/n2.hatirla/retake/t2.mp3",
+   "generation_id": "6ribRV7rdIqob0FLhHZ5",
+   "session_id": "uZ0B2lHHI7YfH30eQSZi",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/uZ0B2lHHI7YfH30eQSZi/6ribRV7rdIqob0FLhHZ5/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T121759Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6f3d63a415c2392b39e2c889023a3caf45f1a01c2da0ebb167512c4ab2538e0ac4a0c4607b42345da2a768822ef32f0f4f59caa0a78f6b9b4eb68d476c360a3f33c455a9480e15c59fb63862ee48cd968f1148f85ecf644ae1ca87a3121503013e288567676f3589ff1d2b9dfb7bd46f3e7a73e9344c3b484c678654e7ce2728496e51bed77bc965356cf5c06deae6c66fced5545e91003849a09ec097dadc43fe9c0509138db84125e13e95d4cbe8ed611134156da28e5169007bfc70a527a398862e879c000da3e048365f369075a0198176cb19c5ed2976e7abfa991142a93311224290941c49e21c8273714a344447332205ccce10e6be492334313a421d",
+   "node_id": "kShvGrSwgEBLVD05JxSp",
+   "api_duration_secs": 8.4,
+   "ok": true,
+   "duration_secs": 8.4,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 152298,
+   "server_prompt": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
+   "server_prompt_equals_tts": true
+  },
+  {
+   "take": 3,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/n2.hatirla/retake/t3.mp3",
+   "generation_id": "CqmuriMBgfhLDhNil8tp",
+   "session_id": "k0q7HVjAVbG8YcMpEusP",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/k0q7HVjAVbG8YcMpEusP/CqmuriMBgfhLDhNil8tp/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T121758Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=4e2487cc47f080de7d471775e36c9cabcfe366ec2148cd26b2e88f7c2625bcfdda4aed41aa50d450497b445045d9331fef5a8903d9504833159f108d074c1a9142c48e13fe845d83da1543529ee885e3e1ba8de55590f416d52ad9b67ac2720fd84bf464d7290e68cb3a4bd926aa090ba0e4f551eb5d637996d0da6339fa400a012f473422a08552d02afce75eff08cd249ecf71b0edc7171aebbceae91feda42fc0b1cd44a6044c67f563b6bb193a3ad1311a7e83c02e8a63719449045f34c33a19982c668d3371eb39591b6d43372fb8c41ca1161841defb07e0070f827f51d380f10ba05dc02f7b480b0c8c3071984a9d5bfaf2d40fb3c6d04e87d3b95703",
+   "node_id": "kShvGrSwgEBLVD05JxSp",
+   "api_duration_secs": 8.24,
+   "ok": true,
+   "duration_secs": 8.24,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 149791,
+   "server_prompt": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
+   "server_prompt_equals_tts": true
+  }
+ ]
+}

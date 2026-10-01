@@ -1,0 +1,23 @@
+{
+  "name": "nefona-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "nefona.com — statik tanıtım sitesi. İçeriğin bir kısmı uygulamadan üretilir (scripts/data.mjs).",
+  "scripts": {
+    "prep": "node scripts/data.mjs && node scripts/pages.mjs",
+    "predev": "npm run prep",
+    "prebuild": "npm run prep",
+    "dev": "vite --host 0.0.0.0 --port 4300 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4300 --strictPort"
+  },
+  "dependencies": {
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@fontsource-variable/onest": "^5.3.1",
+    "@fontsource-variable/unbounded": "^5.3.0"
+  },
+  "devDependencies": {
+    "vite": "^8.3.0"
+  }
+}

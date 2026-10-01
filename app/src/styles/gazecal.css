@@ -1,0 +1,105 @@
+/* ---------- Göz kalibrasyonu ---------- */
+.gazecal-intro h1, .gazecal-result h1 { font-size: 1.6rem; }
+.gazecal-hero, .gazecal-badge {
+  width: 84px; height: 84px; border-radius: 28px; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent-soft); color: var(--accent); align-self: center; margin: 8px 0;
+}
+.gazecal-badge.ok { background: var(--ok-bg); color: var(--ok); border-radius: 50%; }
+.gazecal-badge.warn { background: var(--warn-bg); color: var(--warn); border-radius: 50%; }
+.gazecal-intro, .gazecal-result { gap: 14px; text-align: left; }
+.gazecal-result { align-items: stretch; }
+.gazecal-result h1, .gazecal-result > p { text-align: center; }
+.gazecal-tips { margin: 0; padding-left: 20px; color: var(--ink-2); display: flex; flex-direction: column; gap: 6px; font-size: 0.95rem; }
+
+/* Çalışma ekranı (Artifact "Nefona Göz Kalibrasyonu", onaylı): tek odak iris, kart yok, yazı noktanın yolunu kesmez */
+:root { --cal-ground: #e9eef2; --cal-ground-hi: #ffffff; --cal-gold: #b57300; --cal-glass: rgba(11, 18, 25, 0.05); --cal-glass-line: rgba(11, 18, 25, 0.08); --cal-vig: rgba(214, 96, 52, 0.26); --cal-glow: rgba(17, 169, 184, 0.18); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) { --cal-ground: #070c12; --cal-ground-hi: #0e1a24; --cal-gold: #ffb13b; --cal-glass: rgba(255, 255, 255, 0.06); --cal-glass-line: rgba(255, 255, 255, 0.09); --cal-vig: rgba(255, 122, 89, 0.3); --cal-glow: rgba(25, 194, 209, 0.22); }
+}
+:root[data-theme='dark'] { --cal-ground: #070c12; --cal-ground-hi: #0e1a24; --cal-gold: #ffb13b; --cal-glass: rgba(255, 255, 255, 0.06); --cal-glass-line: rgba(255, 255, 255, 0.09); --cal-vig: rgba(255, 122, 89, 0.3); --cal-glow: rgba(25, 194, 209, 0.22); }
+
+.gazecal-stage {
+  position: fixed; inset: 0; overflow: hidden; touch-action: none; color: var(--ink);
+  background: radial-gradient(120% 70% at 50% 46%, var(--cal-ground-hi), var(--cal-ground) 62%);
+}
+.gazecal-stage::after { content: ''; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 90px 6px transparent; transition: box-shadow 0.4s; }
+.gazecal-stage.noface::after { box-shadow: inset 0 0 90px 6px var(--cal-vig); }
+
+/* Köşe düğmeleri: kapat + ses, aynı boyut; üst hedefte solar */
+.gazecal-ic, .gazecal-stage .gazecal-sound {
+  position: absolute; top: calc(env(safe-area-inset-top) + 12px); z-index: 2; width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center; padding: 0; background: var(--cal-glass); border: 1px solid var(--cal-glass-line); color: var(--ink-2);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: none; transition: opacity 0.35s; cursor: pointer;
+}
+.gazecal-close { left: 18px; }
+.gazecal-stage .gazecal-sound { right: 18px; }
+.gazecal-stage.dim .gazecal-ic, .gazecal-stage.dim .gazecal-sound { opacity: 0.18; }
+.gazecal-stage .gazecal-sound.on { background: var(--cal-glass); border-color: var(--cal-glass-line); box-shadow: none; }
+.gazecal-stage .gazecal-sound .sound-text { display: none; }
+.gazecal-stage .gazecal-sound .sound-knob { position: static; transform: none; width: 100%; height: 100%; background: transparent; box-shadow: none; color: var(--ink-3); }
+.gazecal-stage .gazecal-sound.on .sound-knob { transform: none; color: var(--accent); }
+
+/* Hedef: konum ekran yüzdesi, geçiş 0,45 sn (MOVE_MS) */
+.gazecal-target {
+  position: absolute; width: 52px; height: 52px; margin: -26px 0 0 -26px;
+  transition: left 0.45s cubic-bezier(0.3, 0.7, 0.2, 1), top 0.45s cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+.cal-iris { position: absolute; inset: 0; display: block; }
+.cal-iris canvas { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 50%; transition: filter 0.3s; }
+.cal-iris .cal-ring { position: absolute; inset: -3px; width: 58px; height: 58px; transform: rotate(-90deg); overflow: visible; }
+.cal-iris .trk { fill: none; stroke: color-mix(in srgb, var(--ink) 10%, transparent); stroke-width: 2.4; }
+.cal-iris .arc { fill: none; stroke: var(--cal-gold); stroke-width: 2.8; stroke-linecap: round; transition: stroke-dasharray 0.1s linear; filter: drop-shadow(0 0 3px color-mix(in srgb, var(--cal-gold) 60%, transparent)); }
+.cal-glow { position: absolute; inset: -26px; border-radius: 50%; background: radial-gradient(circle, var(--cal-glow), transparent 62%); transition: background 0.3s; }
+.cal-iris.ok .cal-glow { background: radial-gradient(circle, rgba(255, 177, 59, 0.32), transparent 64%); }
+.cal-ok {
+  position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; transform: translate(-50%, -50%); border-radius: 50%;
+  display: grid; place-items: center; background: #ffb13b; color: #1a0f00;
+  box-shadow: 0 0 0 3px rgba(2, 6, 10, 0.55), 0 0 14px #ffb13b; animation: cal-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.cal-iris.warn .arc { stroke: var(--warn); filter: none; opacity: 0.85; }
+.cal-iris.off canvas { filter: grayscale(1) brightness(0.75); }
+.cal-iris.off .cal-glow { background: none; }
+@keyframes cal-pop { from { transform: translate(-50%, -50%) scale(0.4); } to { transform: translate(-50%, -50%) scale(1); } }
+.gazecal-trail {
+  position: absolute; height: 1.5px; transform-origin: 0 50%; pointer-events: none;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--cal-gold) 70%, transparent));
+  animation: cal-trail 0.6s ease-out forwards;
+}
+@keyframes cal-trail { from { opacity: 1; } to { opacity: 0; } }
+
+/* Yönerge: adım · büyük tek cümle · durum */
+.gazecal-copy { position: absolute; left: 28px; right: 28px; display: grid; justify-items: center; gap: 9px; text-align: center; pointer-events: none; }
+.gazecal-copy.bottom { bottom: calc(env(safe-area-inset-bottom) + 30px); }
+.gazecal-copy.top { top: calc(env(safe-area-inset-top) + 72px); }
+.gazecal-step { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.gazecal-step b { color: var(--cal-gold); font-weight: 600; }
+.gazecal-say { font-family: var(--font-display); font-weight: 600; font-size: 1.42rem; line-height: 1.18; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance; }
+.gazecal-st { display: inline-flex; align-items: center; gap: 7px; font-size: 0.85rem; font-weight: 500; color: var(--ink-2); }
+.gazecal-st::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px var(--ok-bg); }
+.gazecal-st.warn { color: var(--warn); }
+.gazecal-st.warn::before { background: var(--warn); box-shadow: 0 0 0 3px var(--warn-bg); }
+.gazecal-st.gold::before { background: var(--cal-gold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--cal-gold) 22%, transparent); }
+@media (prefers-reduced-motion: reduce) {
+  .gazecal-target, .cal-iris canvas, .cal-glow { transition: none; }
+  .cal-ok, .gazecal-trail { animation: none; }
+  .gazecal-trail { display: none; }
+}
+
+.gazecal-pad {
+  position: relative; width: 220px; height: 220px; border-radius: 50%; align-self: center;
+  background: var(--surface-2); border: 2px solid var(--surface-3); transition: border-color 0.2s;
+}
+.gazecal-pad.on { border-color: var(--ok); }
+.gazecal-cross { position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--surface-3); }
+.gazecal-live {
+  position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%;
+  background: var(--accent-graphic); box-shadow: 0 0 0 6px var(--accent-soft);
+}
+.gazecal-dir { text-align: center; font-weight: 700; font-size: 1.1rem; margin: 0; min-height: 1.5em; }
+
+/* ---------- Göz takibi testi ---------- */
+.gazetest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; font-variant-numeric: tabular-nums; font-size: 0.85rem; }
+.gazetest-grid span:nth-child(odd) { color: var(--ink-3); }
+.gazetest-grid .hl { color: var(--accent); font-weight: 700; }
+
+.gazecal-scores { align-self: center; }

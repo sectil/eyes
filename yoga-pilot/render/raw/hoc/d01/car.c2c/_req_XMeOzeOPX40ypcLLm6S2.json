@@ -1,0 +1,29 @@
+{
+ "node_id": "XMeOzeOPX40ypcLLm6S2",
+ "session_ids": [
+  "8NrSFoAMVK5qTpPQt8W9",
+  "fYSrMvtGATFBGH3EhUKJ",
+  "T8PQ6szwbCoE4KF6kK0V"
+ ],
+ "requested_at": "2026-09-30T07:02:38.774Z",
+ "tts": "Al… al… al…",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "8NrSFoAMVK5qTpPQt8W9",
+   "generation_id": "GhaZedq7hS1Zkko0ORzY",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/8NrSFoAMVK5qTpPQt8W9/GhaZedq7hS1Zkko0ORzY/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070242Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=c9e0ce3a9a97147c9724d1b15e634f2509a99e07f19fe4a6e7c46508b6497b1703104dc38b55a65145fc82bf52dca6a2662dd22ff1f745df49969734f72c57896073b996c7f52c2d78782cff6aea306bfa91989afc8b6818f1e90d16110d54cad1b51cb3e6c0cc17b95522ed97b47056b585025895e1531f67f12f4f7f233d709c558441072a8d6d3d54489a33ffb275511f428ba6e3f81b7d18f3f140fd287fd75a184ada318805d119afb23608ad30411535589e606827a7c04f340fd59155e2a4388d85ef92807364fc32bf9840aeceae44c489e79d3a61a8e2cc03e681d954335a4e4141016eba57cd2886b3abbc6914ea837bce8876204fe165012336e0",
+   "duration_secs": 2.64,
+   "prompt": "Al… al… al…",
+   "kind": "audio"
+  },
+  {
+   "session_id": "fYSrMvtGATFBGH3EhUKJ",
+   "generation_id": "uUIrlLIjVSeBRlyssUDJ",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/fYSrMvtGATFBGH3EhUKJ/uUIrlLIjVSeBRlyssUDJ/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070305Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=757740c483a217cd29b00b2f1e48c9324f26a8b24a15e0511f533b28ec037314f3e349271a9832b85a6fa7bc90164a3df8d4248d6211bae17c26aee6af50cddf12581f73c88a53d6fcabf7565cac1f15069a7d8c3fa88eeb25e26b51c1d9987ac1bd51d5fcbd3fcb45313d57a554a6ce4a5e86842f0717ee574bfc5da51684738be52ec7215bccfc528eb1dc85b594354348bbc9397cf5eb1dda015eefd740494e6e963e95904f75a17fd22e55877517f16e9f9bf05bada719ff2af4f770e36926f0a1ebc99af6319f078f92acdc0f74c43a6411571084cbd0075e793c1c3e29d2458ef0cf1cb867ba4e993831c80441d5b2ee9ca980f01c3a8aa23936d565c1",
+   "duration_secs": 2.72,
+   "prompt": "Al… al… al…",
+   "kind": "audio"
+  }
+ ]
+}
