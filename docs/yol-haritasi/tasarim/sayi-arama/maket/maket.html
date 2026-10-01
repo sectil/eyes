@@ -167,6 +167,83 @@ h1 { font-family: 'Unbounded'; font-weight: 700; font-size: 34px; letter-spacing
   .demo { padding: 10px; }
   .hero { gap: 10px; }
 }
+
+/* tur 2 */
+.ghost { position: relative; border: 1.5px dashed var(--line); border-radius: 16px; padding: 6px 8px 28px; }
+.ghost svg { width: 100%; height: 96px; display: block; }
+.ghost span { position: absolute; left: 0; right: 0; bottom: 10px; text-align: center; font-size: 12.5px; font-weight: 600; color: var(--ink-3); }
+.hero { justify-content: flex-start !important; gap: 16px !important; padding-top: 18px; }
+.demo-fing { position: absolute; right: calc(12.5% / 2); width: 30px; height: 30px; border-radius: 50%; transform: translate(50%, -50%); box-shadow: 0 0 0 2px var(--swipe-line), 0 0 14px var(--swipe-line); background: rgba(255,255,255,0.3); z-index: 3; }
+h1 { font-size: 44px; }
+.intro-t { box-shadow: none; background: transparent; padding: 0; }
+.intro-t .tile { width: 52px; height: 62px; font-size: 32px; border-radius: 14px; }
+.intro-t .tile::before { border-radius: 14px; }
+.demo { padding: 14px 10px; }
+.demo-g { position: relative; }
+.demo .c { font-size: 22px; height: 44px; }
+.demo-cap { position: absolute; left: 50%; width: 50%; height: 38px; margin: 0; }
+.demo-swipe { position: absolute; left: calc(50% + 6px); right: 6px; top: 86px; height: 22px; display: flex; align-items: center; z-index: 3; }
+.demo-swipe::before { content: ''; flex: 1; height: 2px; border-radius: 2px; background: linear-gradient(90deg, transparent, var(--teal)); }
+.demo-swipe .arrow svg { width: 18px; height: 18px; stroke: var(--teal); display: block; }
+.how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.how div { background: var(--surface); border-radius: 16px; box-shadow: var(--shadow); padding: 10px 10px 12px; font-size: 13px; font-weight: 600; color: var(--ink-2); line-height: 1.25; }
+.how b { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--grad); color: var(--btn-ink); font-family: 'Unbounded'; font-size: 11px; margin-bottom: 8px; }
+.tile.lit { background: var(--swipe); color: var(--ink); }
+.tile.lit::before { background: var(--swipe-line); }
+.tile.gold { background: linear-gradient(180deg, var(--gold-1), var(--gold-2)); color: var(--gold-ink); box-shadow: 0 6px 16px -6px var(--gold-glow); }
+.tile.gold::before { display: none; }
+.target.flash { box-shadow: var(--shadow), 0 0 0 2px var(--gold-glow); }
+.finger { width: 34px !important; height: 34px !important; background: rgba(255, 255, 255, 0.35) !important; box-shadow: 0 0 0 2px var(--swipe-line), 0 0 16px var(--swipe-line) !important; }
+:root[data-theme="dark"] .finger { background: rgba(25, 194, 209, 0.25) !important; }
+.sparks { position: relative; z-index: 5; pointer-events: none; }
+.sparks i { position: absolute; width: 14px; height: 14px; }
+.sparks svg { width: 100%; height: 100%; fill: var(--gold-2); filter: drop-shadow(0 0 4px var(--gold-glow)); }
+.sparks .s1 { left: 6%; top: -14px; width: 12px; height: 12px; }
+.sparks .s2 { left: 38%; top: -20px; width: 16px; height: 16px; }
+.sparks .s3 { right: 10%; top: -12px; }
+.sparks .s4 { left: 20%; bottom: -16px; width: 11px; height: 11px; }
+.sparks .s5 { right: 30%; bottom: -18px; width: 15px; height: 15px; }
+.toast.big-t { font-size: 16px; padding: 10px 18px; }
+.prog { background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.ph { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.pc { font-family: 'Unbounded'; font-weight: 600; font-size: 14px; color: var(--ink); white-space: nowrap; }
+.pt { font-size: 14px; line-height: 1.4; color: var(--ink-2); }
+.prog .steps { margin-top: 0; }
+.prog .steps i { flex: 1; height: 7px; }
+.prog .steps { width: 100%; }
+.nefrow { display: flex; gap: 10px; align-items: center; border-top: 1px solid var(--line); padding-top: 10px; margin-top: 2px; }
+.nefrow .orb { width: 28px; height: 28px; }
+.nefrow p { font-size: 14px; line-height: 1.35; }
+.chart { background: transparent; box-shadow: none; padding: 0; border-radius: 0; }
+.chart svg { width: 100%; display: block; overflow: visible; }
+.cl { font-size: 11px; font-weight: 600; fill: var(--ink-3); font-family: 'Onest'; }
+.cl.strong { fill: var(--teal); font-weight: 700; font-size: 12px; }
+.legend { display: flex; gap: 12px; font-size: 11.5px; color: var(--ink-3); font-weight: 600; margin-top: 4px; align-items: center; }
+.legend .r { margin-left: auto; }
+.legend i { display: inline-block; width: 14px; vertical-align: middle; margin-right: 5px; }
+.legend .dash { border-top: 1.5px dashed var(--ink-3); }
+.legend .ln { height: 3px; border-radius: 2px; background: var(--grad); }
+@media (max-width: 340px) {
+  h1 { font-size: 32px; }
+  .lead { display: none; }
+  .intro-t .tile { width: 42px; height: 50px; font-size: 26px; }
+  .demo .c { font-size: 18px; height: 34px; }
+  .demo-cap { height: 28px; }
+  .demo-fing { width: 24px; height: 24px; }
+  .hero { padding-top: 4px; }
+  .demo-swipe { top: 66px; height: 18px; }
+  .how div { font-size: 11.5px; padding: 8px; }
+  .how b { width: 20px; height: 20px; margin-bottom: 6px; }
+  .hero { gap: 11px !important; }
+  .prog { padding: 11px 13px; gap: 6px; }
+  .pt, .nefrow p { font-size: 12.5px; }
+  .pc { font-size: 12.5px; }
+  .vchip { font-size: 12.5px; padding: 6px 10px; }
+  .nefrow { padding-top: 8px; }
+  .nefrow .orb { width: 24px; height: 24px; }
+  .legend { font-size: 10.5px; gap: 8px; }
+  .toast.big-t { font-size: 14px; }
+}
 </style>
 </head>
 <body>
@@ -200,11 +277,12 @@ const grid4 = '<svg viewBox="0 0 16 16" fill="none" stroke-width="1.8" stroke-li
 const swipeI = '<svg viewBox="0 0 16 16" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h11M10 5l3 3-3 3"/></svg>'
 
 const topBar = (title, right = '') => `<div class="top"><div class="back">${chev}</div><div class="t">${title}</div><div class="sp"></div>${right}</div>`
-const tiles = (s) => `<div class="tiles">${[...s].map((d) => `<div class="tile">${d}</div>`).join('')}</div>`
+const tiles = (s, lit = 0, cls = 'lit') => `<div class="tiles">${[...s].map((d, i) => `<div class="tile ${i < lit ? cls : ''}">${d}</div>`).join('')}</div>`
 const dots = (n, newIdx = -1) => `<div class="dots">${[0, 1, 2, 3, 4].map((i) => `<i class="dot ${i < n ? 'on' : ''} ${i === newIdx ? 'new' : ''}"></i>`).join('')}</div>`
-const targetCard = (n, newIdx) => `<div class="target"><div><div class="lab">Aranan</div>${tiles(T)}</div><div class="rings"><div class="n"><b>${n}</b> / 5</div>${dots(n, newIdx)}</div></div>`
+const targetCard = (n, newIdx, lit = 0, cls) => `<div class="target ${cls === 'gold' ? 'flash' : ''}"><div><div class="lab">Aranan</div>${tiles(T, lit, cls)}</div><div class="rings"><div class="n"><b>${n}</b> / 5</div>${dots(n, newIdx)}</div></div>`
+const spark = '<svg viewBox="0 0 20 20"><path d="M10 0c.6 5.6 4.4 9.4 10 10-5.6.6-9.4 4.4-10 10-.6-5.6-4.4-9.4-10-10C5.6 9.4 9.4 5.6 10 0Z"/></svg>'
 
-function board({ gold = [], swipe = null, burst = null, finger = null, toast = null }) {
+function board({ gold = [], swipe = null, burst = null, finger = null }) {
   const fs = narrow ? 19 : 22
   const mark = {}
   for (const [r, c] of gold) for (let i = 0; i < 4; i++) mark[`${r}:${c + i}`] = 'ing'
@@ -214,67 +292,73 @@ function board({ gold = [], swipe = null, burst = null, finger = null, toast = n
   const cells = g.map((row, r) => row.map((d, c) => `<div class="c ${mark[`${r}:${c}`] ?? ''}" style="${at(r, c)};font-size:${fs}px">${d}</div>`).join('')).join('')
   const cap = (r, c, len, cls) => `<div class="cap ${cls}" style="${at(r, c, len)}"></div>`
   let caps = gold.map(([r, c]) => cap(r, c, 4, 'gold')).join('')
-  if (burst) caps += cap(burst[0], burst[1], 4, 'gold burst')
+  if (burst) caps += cap(burst[0], burst[1], 4, 'gold burst') + `<div class="sparks" style="${at(burst[0], burst[1], 4)}"><i class="s1">${spark}</i><i class="s2">${spark}</i><i class="s3">${spark}</i><i class="s4">${spark}</i><i class="s5">${spark}</i></div>`
   if (swipe) caps += cap(swipe[0], swipe[1], swipe[2], 'swipe')
   const f = finger ? `<div class="fing" style="${at(finger[0], finger[1])}"><div class="finger"></div></div>` : ''
-  const t = toast ? `<div class="tst" style="${at(toast[0] - 1, 0, 8)}"><div class="toast">${check}${toast[1]}</div></div>` : ''
-  return `<div class="board"><div class="grid">${caps}${cells}${f}${t}</div></div>`
+  return `<div class="board"><div class="grid">${caps}${cells}${f}</div></div>`
 }
 
 function chart() {
-  const vals = [6.4, 5.9, 5.8, 5.4, 6.0, 5.5, 5.7, 5.2, 4.9, 4.6, 4.7, 4.3, 4.1, 4.2]
-  const W = 320, H = 86, lo = 3.6, hi = 6.8
-  const x = (i) => 8 + i * ((W - 16) / (vals.length - 1))
-  const y = (v) => 8 + (1 - (v - lo) / (hi - lo)) * (H - 16)
+  const vals = [6.4, 5.9, 5.8, 5.4, 6.0, 5.5, 5.7, 5.2, 4.9, 4.6, 4.7, 4.3, 4.2, 4.1]
+  const W = 320, H = narrow ? 70 : 92, lo = 3.6, hi = 6.8
+  const x = (i) => 10 + i * ((W - 52) / (vals.length - 1))
+  const y = (v) => 10 + (1 - (v - lo) / (hi - lo)) * (H - 20)
   const base = 5.6
   const line = vals.map((v, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join(' ')
-  const pts = vals.map((v, i) => `<circle cx="${x(i)}" cy="${y(v)}" r="${i === vals.length - 1 ? 5 : 3}" fill="${i < 2 ? 'var(--ink-3)' : 'var(--teal)'}" ${i < 2 ? 'opacity="0.45"' : ''}/>`).join('')
-  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="var(--teal)"/><stop offset="1" stop-color="var(--blue)"/></linearGradient></defs>
-  <rect x="${x(2)}" y="${y(base) - 6}" width="${x(7) - x(2)}" height="12" rx="6" fill="var(--swipe)"/>
-  <line x1="8" x2="${W - 8}" y1="${y(base)}" y2="${y(base)}" stroke="var(--ink-3)" stroke-dasharray="3 4" stroke-width="1" opacity="0.6"/>
-  <path d="${line}" fill="none" stroke="url(#lg)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${pts}</svg>`
+  const pts = vals.map((v, i) => `<circle cx="${x(i)}" cy="${y(v)}" r="${i === vals.length - 1 ? 5 : 2.8}" fill="${i < 2 ? 'var(--ink-3)' : 'var(--teal)'}" ${i < 2 ? 'opacity="0.45"' : ''}/>`).join('')
+  const lx = x(vals.length - 1), ly = y(vals.at(-1))
+  return `<svg viewBox="0 0 ${W} ${H}" style="height:${H}px"><defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="var(--teal)"/><stop offset="1" stop-color="var(--blue)"/></linearGradient></defs>
+  <line x1="10" x2="${W - 42}" y1="${y(base)}" y2="${y(base)}" stroke="var(--ink-3)" stroke-dasharray="3 4" stroke-width="1.2"/>
+  <text x="${W - 4}" y="${y(base) + 4}" text-anchor="end" class="cl">5,6</text>
+  <path d="${line}" fill="none" stroke="url(#lg)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>${pts}
+  <text x="${W - 4}" y="${ly + 5}" text-anchor="end" class="cl strong">4,1</text></svg>
+  <div class="legend"><span><i class="dash"></i>başlangıcın</span><span><i class="ln"></i>günlük süren</span><span class="r">düşük daha iyi</span></div>`
 }
 
-function field() {
-  let out = ''
-  for (let r = 0; r < 7; r++) { let line = ''; for (let c = 0; c < 14; c++) line += String(Math.floor(rnd() * 10)); if (r === 2) line = line.slice(0, 5) + '<span>7061</span>' + line.slice(9); out += line + '<br>' }
-  return out
-}
+const caps5 = (times) => `<div class="caps">${times.map((t) => t ? `<div class="mc"><span class="pill7">7061</span><em>${t} sn</em></div>` : '<div class="mc miss"><span class="pill7">7061</span><em>bulunmadı</em></div>').join('')}</div>`
+const bigCard = (num, wrong, times) => `<div class="big"><div class="lab">Dizi başına süren · ortanca</div><div class="bigrow"><div class="num">${num}<small>sn</small></div><span class="chip wr">${wrong} yanlış işaret</span></div>${caps5(times)}</div>`
+const nefLine = (html) => `<div class="nefrow"><div class="orb"></div><p>${html}</p></div>`
+
 const S = {
   intro() {
-    const r1 = '3 5 8 2 7 0 6 1'.split(' '), r0 = '9 1 4 7 0 1 6 3'.split(' '), r2 = '6 0 7 1 5 2 9 4'.split(' ')
-    const row = (a, cls = '') => `<div class="row ${cls}">${a.map((d, i) => `<div class="c ${cls === 'hit' && i >= 4 ? 'ing' : ''}">${d}</div>`).join('')}</div>`
+    const rows = (narrow ? ['9 1 4 7 0 1 6 3', '3 5 8 2 7 0 6 1', '6 0 7 1 5 2 9 4'] : ['2 8 0 6 7 1 4 9', '9 1 4 7 0 1 6 3', '3 5 8 2 7 0 6 1', '6 0 7 1 5 2 9 4', '1 7 6 0 3 8 5 2']).map((r) => r.split(' '))
+    const hit = narrow ? 1 : 2
+    const row = (a, hit) => `<div class="row ${hit ? '' : 'dim'}">${a.map((d, i) => `<div class="c ${hit && i >= 4 ? 'ing' : ''}">${d}</div>`).join('')}</div>`
     return `${topBar('', '<span class="pill">2 dk · 5 dizi</span>')}
     <div class="hero">
-      <div class="field">${field()}</div>
       <div><div class="kicker">Dikkat · arama</div><h1>Rakam Avı</h1></div>
-      <div class="target" style="box-shadow:none;background:transparent;padding:0"><div><div class="lab">Bu diziyi bul</div>${tiles(T)}</div></div>
+      <div class="target intro-t"><div><div class="lab">Bu diziyi bul</div>${tiles(T)}</div></div>
       <p class="lead">Izgarada 5 kez saklı. Bulunca parmağını üstünden kaydır.</p>
-      <div class="demo"><div style="position:relative">
-        <div class="cap gold" style="position:absolute;left:50%;width:50%;top:calc(100% / 3 + 3px);height:calc(100% / 3 - 6px)"></div>
-        ${row(r0, 'dim')}${row(r1, 'hit')}${row(r2, 'dim')}</div>
-        <div class="meta"><span class="chip">${swipeI}Soldan sağa, tek satırda</span><span class="chip">${clock}Geri sayım yok</span></div>
+      <div class="demo"><div class="demo-g">
+        <div class="cap gold demo-cap" style="top:${hit * (narrow ? 34 : 44) + 3}px"></div><div class="demo-fing" style="top:${hit * (narrow ? 34 : 44) + (narrow ? 17 : 22)}px"></div>
+        ${rows.map((r, i) => row(r, i === hit)).join('')}</div>
       </div>
+      <div class="how"><div><b>1</b>Diziye bak</div><div><b>2</b>Izgarada ara</div><div><b>3</b>Üstünden kaydır</div></div>
     </div>
     <div class="btn">Başla</div>
-    <p class="fine">Bu bir arama alıştırması. Çalıştığın işte hızlanırsın; günlük hayata geçtiği gösterilmedi.</p>`
+    <p class="fine">Geri sayım yok. Her tur yeni bir ızgara.</p>`
   },
   play() {
-    return `${topBar('Rakam Avı')}${targetCard(2)}
-    ${board({ gold: [[1, 2], [7, 1]], swipe: [5, 4, 3], finger: [5, 7] })}
+    return `${topBar('Rakam Avı')}${targetCard(2, -1, 4, 'lit')}
+    ${board({ gold: [[1, 2], [7, 1]], swipe: [5, 4, 4], finger: [5, 7] })}
     <p class="hint">Kendi hızında ara. Geri sayım yok.</p>`
   },
   found() {
-    return `${topBar('Rakam Avı')}${targetCard(3, 2)}
+    return `${topBar('Rakam Avı')}${targetCard(3, 2, 4, 'gold')}
     ${board({ gold: [[1, 2], [7, 1]], burst: [5, 4] })}
-    <div class="foot"><div class="toast">${check}Buldun · 3 / 5</div></div>`
+    <div class="foot"><div class="toast big-t">${check}Buldun · 4,6 sn</div></div>`
   },
   result1() {
     return `${topBar('Rakam Avı')}
     <div class="res">
-      <div class="big"><div class="lab">Tur bitti · bir diziyi bulma süren</div><div class="bigrow"><div class="num">5,7<small>sn</small></div><span class="chip wr">2 yanlış işaret</span></div><div class="caps"><div class="mc"><span class="pill7">7061</span><em>3,8 sn</em></div><div class="mc"><span class="pill7">7061</span><em>7,9 sn</em></div><div class="mc"><span class="pill7">7061</span><em>5,2 sn</em></div><div class="mc miss"><span class="pill7">7061</span><em>bulunmadı</em></div><div class="mc"><span class="pill7">7061</span><em>6,1 sn</em></div></div></div>
-      <div class="verdict"><span class="vchip start">başlangıç</span><div><p>Başlangıcın 6 ölçüm günü sonra oluşur.</p><div class="steps"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
-      <div class="nef"><div class="orb"></div><p>Bugünün en hızlı dizisi <b>3,8 saniyede</b> geldi.</p></div>
+      ${bigCard('5,7', 2, ['3,8', '7,9', '5,3', null, '6,1'])}
+      <div class="prog">
+        <div class="ph"><span class="vchip start">başlangıç</span><span class="pc">2 / 8 gün</span></div>
+        <p class="pt">Başlangıcın kuruluyor. 8 gün oynayınca kendi başlangıcın belirir; sonra her hafta onunla kıyaslarız.</p>
+        <div class="steps"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        ${narrow ? '' : `<div class="ghost"><svg viewBox="0 0 320 96"><line x1="10" x2="310" y1="48" y2="48" stroke="var(--ink-3)" stroke-dasharray="3 5" opacity="0.5"/><path d="M14 40 L50 52" stroke="var(--teal)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/><circle cx="14" cy="40" r="4" fill="var(--teal)"/><circle cx="50" cy="52" r="4" fill="var(--teal)"/></svg><span>Grafiğin 8. günden sonra burada belirir</span></div>`}
+        ${nefLine('Bugünün en hızlı dizisi <b>3,8 saniyede</b> geldi.')}
+      </div>
       <div class="spacer"></div>
       <div class="rf"><div class="ic">${bell}</div><div><strong>Bana hatırlat</strong><span>Her gün, senin için uygun saatte. Saati Nef de seçebilir.</span></div><div class="tg"></div></div>
       <div class="btn">Tamam</div>
@@ -283,10 +367,13 @@ const S = {
   result2() {
     return `${topBar('Rakam Avı')}
     <div class="res">
-      <div class="big"><div class="lab">Tur bitti · bir diziyi bulma süren</div><div class="bigrow"><div class="num">4,2<small>sn</small></div><span class="chip wr">0 yanlış işaret</span></div><div class="caps"><div class="mc"><span class="pill7">7061</span><em>3,1 sn</em></div><div class="mc"><span class="pill7">7061</span><em>4,6 sn</em></div><div class="mc"><span class="pill7">7061</span><em>4,2 sn</em></div><div class="mc"><span class="pill7">7061</span><em>5,0 sn</em></div><div class="mc"><span class="pill7">7061</span><em>3,6 sn</em></div></div></div>
-      <div class="verdict"><span class="vchip better">başlangıcından iyi</span><p>Başlangıç <b>5,6 sn</b> · şimdi <b>4,2 sn</b></p></div>
-      <div class="chart"><div class="h"><span>Son 14 gün</span><span>düşük daha iyi</span></div>${chart()}</div>
-      <div class="nef"><div class="orb"></div><p>Bu hafta bir diziyi ortalama <b>4,2 saniyede</b> buldun; geçen hafta 4,8 saniyeydi.</p></div>
+      ${bigCard('4,1', 0, ['3,1', '4,6', '4,1', '5,0', '3,6'])}
+      <div class="prog">
+        <div class="ph"><span class="vchip better">başlangıcından iyi</span><span class="pc">5,6 → 4,2 sn</span></div>
+        <p class="pt">Fark iki haftadır sürüyor.</p>
+        <div class="chart">${chart()}</div>
+        ${nefLine('En hızlı dizin bugün geldi: <b>3,1 saniye</b>.')}
+      </div>
       <div class="spacer"></div>
       <div class="btn">Tamam</div>
     </div>`
