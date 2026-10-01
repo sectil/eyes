@@ -256,7 +256,7 @@
     ;(opts.carsFar || []).forEach((k) => (o += car(k, p, 'far')))
     ;(opts.carsNear || []).forEach((k) => (o += car(k, p, 'near')))
     if (opts.mark) o += `<circle cx="${opts.mark.x}" cy="${opts.mark.y}" r="${opts.mark.r}" fill="none" stroke="#19C2D1" stroke-width="6"/><circle cx="${opts.mark.x}" cy="${opts.mark.y}" r="${opts.mark.r + 9}" fill="none" stroke="#fff" stroke-width="2.5" opacity=".9"/>`
-    if (opts.spot) { const t = opts.spot; o += `<mask id="m-spot"><rect x="0" y="0" width="${s.L}" height="${H}" fill="#fff"/><circle cx="${t.x}" cy="${t.y}" r="${t.r}" fill="#000"/></mask><rect x="0" y="0" width="${s.L}" height="${H}" fill="#04080d" opacity=".6" mask="url(#m-spot)"/><circle cx="${t.x}" cy="${t.y}" r="${t.r}" fill="none" stroke="#19C2D1" stroke-width="4"/>` }
+    if (opts.spot) { const t = opts.spot, rx = t.rx || t.r, ry = t.ry || t.r; o += `<mask id="m-spot"><rect x="0" y="0" width="${s.L}" height="${H}" fill="#fff"/><ellipse cx="${t.x}" cy="${t.y}" rx="${rx}" ry="${ry}" fill="#000"/></mask><rect x="0" y="0" width="${s.L}" height="${H}" fill="#04080d" opacity=".55" mask="url(#m-spot)"/><ellipse cx="${t.x}" cy="${t.y}" rx="${rx}" ry="${ry}" fill="none" stroke="#19C2D1" stroke-width="3.5"/>` }
     if (opts.fog) { const t = opts.fog; o += `<filter id="f-fog" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter><ellipse cx="${t.x}" cy="${t.y}" rx="${t.r * 0.8}" ry="${t.r}" fill="${t.c || '#D9DEE2'}" filter="url(#f-fog)"/><text x="${t.x}" y="${t.y + 22}" text-anchor="middle" font-family="Unbounded, Onest, system-ui" font-weight="800" font-size="64" fill="${t.ink || '#5B6976'}">?</text>` }
     return o + '</svg>'
   }

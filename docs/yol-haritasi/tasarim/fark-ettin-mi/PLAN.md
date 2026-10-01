@@ -151,7 +151,7 @@ nef: {
   kreitz2020, simons2024, schofield2015, pandit2022, simons2010, most2001, luck1997, dai2019, simons2016. `FACTS`
   kartları bu anahtarlara bağlanır (DOI ve PMID tek yerden).
 
-## 5. Ekranlar (seçilen yön A: `maket/yonler.html?d=A&s=…`; kapı sonuçları `kapi/`)
+## 5. Ekranlar (seçilen yön A, son hâl: `maket/son.html?s=…&theme=…`; kapı sonuçları `kapi/`)
 
 1. **Görev** (`intro`): üstte sahnenin kendisi (tam genişlik), görev kartı ikonla, tur bölümleri 01–03, Nef satırı,
    iddia sınırı, "Yürümeye başla".
@@ -181,6 +181,7 @@ dönüşü; `prefers-reduced-motion`'da sahne kayar ama kişiler durur. Ses: ilk
 | F4 Gelişim | Metrikler, `v2` parametreleri, `nesne` birimi, sonuç ekranı hükmü | `modules/fark-ettin/manifest.js`; Gelişim dosyaları için §3.2 istekleri (Gelişim sahibiyle) | Gelişim alanı, rapor ve PDF'te "nesne" satırı; eşdeğerlik testi eski metrikte 0 fark |
 | F5 Nef ve kaynak | `nef` alanı, `remind`, `coach()` alanları, `sources.js` kaynakları, `FACTS` bağlama | `modules/fark-ettin/manifest.js`, `lib/sources.js`, `lib/street.js` | Nef sözleşme testi (§4.8 madde 3) bu modülde geçer; her `evidence` anahtarı PMID+DOI taşır |
 | F6 Cihaz | Cihaz denetimi (§10), 5 sn kapısı cihaz görüntüleriyle | — | §10 listesi tamam |
+| F7 Canlı görevler | §9b | §9b | Bildirim testleri; cihazda kilit ekranı görüntüsü |
 
 Her aşama sonunda yalnız ilgili testler; sonda tam takım ve derleme (İş akışı kuralları 4).
 
@@ -211,26 +212,67 @@ Her aşama sonunda yalnız ilgili testler; sonda tam takım ve derleme (İş ak�
 | Işığa duyarlılık | Yanıp sönme yok; tek, yumuşak 0,4 sn kararma. Yine de `seizure` sorusu Tek Bakışta'daki gibi istenirse sahip kararı (§9) |
 | Gelişim ve Nef dosyaları başka oturumda | §3.2 ve §4 bağlantı noktaları istek olarak yazıldı; F4–F5 o oturumlarla sıraya konur |
 
-## 9. Sahibe sorular
+## 9. Kararlar (sahip 2026-10-01: "kararlar senin olsun")
 
-5 saniye kapısı: iki tur, ardından üç yön (A seçildi, 4 kişiden 3'ü), ardından A'nın doğrulaması. Doğrulama geçmedi
-(`kapi/5sn-A-son.md`); kurala göre durup soruyorum. Bulguların çoğu düzeltilebilir hatalar; aşağıdakiler senin kararın.
+1. Soru biçimi: "Caddede kahkaha atan biri var mıydı? Vardı · Yoktu · Emin değilim", ardından renk ya da nesne. Turların
+   üçte birinde sorulan kişi sahnede yoktur (yakalama sorusu); "Vardı" cevabının doğruluğu ölçülebilir.
+2. Ölçü sözcüğü "nesne" (dört kişiden dördü en anlaşılır buldu).
+3. İddia sınırı cümlesi: "Bu bir gözlem alıştırması. Günlük hayatta fark etmeyi artırdığı gösterilmedi." Görev
+   ekranından kalkar, sonuç ekranının altında durur. Bugünkü cümlenin yerini alır.
+4. "Beynin görmüş olabilir" kalkar.
+5. Ses yok (ücretli üretim yok).
+6. Işığa duyarlılık sorusu sorulmaz (yanıp sönme yok).
+7. Ekranlarda A yönü (`maket/son.html`). "Ne değişti?" karesi her genişlikte aynı 4:5 oran.
 
-1. **Soru biçimi.** "Kahkaha atan bir kadın vardı. Fark ettin mi?" iki kişiye yönlendirici geldi. Önerim: "Caddede
-   kahkaha atan biri var mıydı? Vardı · Yoktu · Emin değilim"; bazı turlarda o kişi gerçekten yoktur. "Gördüm"
-   cevabı şişmez, ölçü dürüst olur.
-2. **Ölçü sözcüğü.** "16 nesne": dört kişi en anlaşılır buldu, bir kişi insanlar için soğuk buldu. Önerim: "nesne"
-   kalsın.
-3. **İddia sınırı cümlesi.** Bugünkü "Gerçek hayatta daha çok fark ettirdiği gösterilmedi." iki kişide dil olarak
-   yanlış anlaşıldı, görev ekranında beş kişiden dördü "neden yapayım" dedi. Önerim: cümle "Bu bir gözlem
-   alıştırması. Günlük hayatta fark etmeyi artırdığı gösterilmedi." olsun ve görev ekranından sonuç ekranının altına
-   taşınsın.
-4. **"Beynin görmüş olabilir"** cümlesi kalksın mı? Önerim: evet.
-5. **Ses.** İlk sürümde yok. İstersen ücretli ses üretimi senin onayınla.
-6. **Işığa duyarlılık sorusu.** Ne değişti? geçişi yanıp sönme değil; Tek Bakışta'daki soru burada sorulmasın.
-   Önerim: sorulmasın.
+## 9b. Canlı görevler: Nef gerçek hayatta oynatır (sahip isteği 2026-10-01)
 
-Kararlarından sonra düzeltilmiş A, beş yeni kişiyle tek turda sınanır; geçmeyeni sana göstermem.
+Sahibin sözü: "Farkettin mi Nef oyunu da olsun … bildirimlerini açtı kullanıcı, Nef bildirim gönderecek … pubmed
+bilimsel makalelerdeki gibi canlı evde yolda işte farkettin mi testleri yapacak … eğlenceli ama geliştirecek kişiyi".
+
+**Nasıl çalışır**
+- Kişi modülde "Canlı görevler" anahtarını açar (Profil → Bildirimler'de de). Açmazsa hiç bildirim gelmez.
+- Bildirim modül hatırlatması yolundan gider: `remind: { route: 'fark-ettin-canli', window: 'move', maxTimes: 2,
+  science: ['chabris2011'] }`. Kimlik aralığı modül hatırlatmalarının 7800–7859 aralığıdır; Nef'in kendi bildirim
+  bütçesine (7900–7919, günde 1, haftada 4) sayılmaz. Bütün planlayıcı kuralları geçerli: 01–05 yasak, sessizlik
+  23–07, iki bildirim arası ≥ 30 dk, çalışma oturumunda gelmez.
+- Sıklık: haftada en çok 4 görev (VARSAYIM; Klasnja 2019, PMID 30192907: bildirimin etkisi zamanla azalıyor). Kişi
+  "Sıklık: az · orta" seçebilir; varsayılan az (haftada 2).
+- Metin Nef'in sesidir; görev, saat dilimine ve kişinin yürüyüş saatine göre seçilir (Nef planı §4.1 an motorunun
+  veri kaynakları; yürüyüş saati `moduleRemind`'den).
+
+**Görev türleri (ilk sürüm)**
+
+| Tür | Yer ve saat | Bildirim (taslak) | Uygulamada | Dayanak |
+|---|---|---|---|---|
+| Renk avı | Ev ya da iş, hafta içi 10.30–16.00, hafta sonu 10.00–18.00 | "Bulunduğun yerde 5 kırmızı şey bul. Bir dakikan var." | 60 sn sayaç, "+1 Buldum" | Aranan şey görülür (Most 2005, PMID 15631594) |
+| Say ve sürpriz | Yürüyüş saatinden 15 dk önce; akşam 19.00–20.30 ikinci bildirim | Sabah: "Bugün yürürken sarı kapıları say. Telefona bakma; akşam soracağım." Akşam: "Bugün yolda kaç sarı kapı saydın? Bir de sürpriz sorum var." | Sayı + sürpriz soru (Gördüm · Görmedim · Emin değilim) | Gerçek hayatta dikkatsizlik körlüğü (Chabris 2011, PMID 23145232); telefona bakmamak (Labonte-LeMoyne 2022, PMID 36426775; Jiang 2018, PMID 29604515) |
+| Başını kaldır | İş, hafta içi 11.00–15.30 | "Ekrandan başını kaldır: etrafında daha önce fark etmediğin bir şey bul." | Tek dokunuş "Buldum" + isteğe bağlı tek kelime (telefonda kalır) | Anlık örnekleme (Killingsworth 2010, PMID 21071660) |
+
+Görev bankası: tür başına ≥ 20 hedef (renk, nesne, şekil); aynı hedef 21 gün tekrar etmez (Nef planı §4.4 tekrar
+etmeme hafızası). Sürpriz sorular yola uygun ve tekildir (köpek, bisikletli, şemsiye, kırmızı araba…).
+
+**Güvenlik:** yol görevleri telefona bakmadan yapılır; cevap evde verilir. Araç kullanırken görev yok: metin bunu
+söyler; uygulama sürüşü algılamaz (VARSAYIM: iOS Odak "Araç Kullanma" bildirimleri zaten susturur). Karşıdan
+geçerken saymak istenmez; hedefler kaldırımdan görülen şeylerdir.
+
+**Gizlilik:** kamera açılmaz, konum alınmaz; "evde, yolda, işte" yalnız saatten tahmindir. Tek kelimelik cevap
+telefonda kalır, Nef paketine girmez.
+
+**Ölçüm ve Gelişim:** canlı görev kayıtları `type: 'street-live'`; cevaplar kişinin beyanıdır, doğrulanamaz. Bu
+yüzden Gelişim'de hüküm kurmaz (`rule: 'none'`); Dikkat alanında "canlı görev günü" olarak görünür. Haftalık özet
+"Bu hafta 3 canlı görev" (sonuç ekranındaki hafta şeridi). Sürpriz soru cevapları (Gördüm/Görmedim/Emin değilim) yalnız
+kişinin kendi geçmişinde görünür.
+
+**Nef ile bağ:** Nef canlı görevi gönderen sestir. An motorunda yeni an türü yok; görev seçimi bu modülün `nef.moments`
+alanında saf işlevdir (Nef planı §4.8 madde 2). Haftalık mektupta "Bu hafta 3 canlı görev; sürpriz soruların 2'sinde
+emin değildin" gibi kişisel olgu (yalnız sayı). Kartta bilim satırı Chabris 2011.
+
+**Ekranlar** (`maket/son.html`): `lock` (sabah bildirimi), `hunt` (renk avı), `lock2` (akşam bildirimi), `evening`
+(akşam sorusu), `liveResult` (sonuç, hafta şeridi, Nef'in sonraki görev sorusu).
+
+**Aşama F7** (F5'ten sonra): `lib/streetLive.js` (görev bankası, seçim, tekrar etmeme), `screens/StreetLive.jsx`,
+manifest `remind` ve `routes`, `remindTexts` bağlantısı (bildirim oturumunun dosyası; bağlantı satırı onunla), testler:
+`streetLive.test.js`, `moduleRemind.test.js`'e bu modül, `notifyAll.test.js` sınır testleri (haftalık en çok 4, 30 dk).
 
 ## 10. Cihaz denetim listesi
 

@@ -104,3 +104,17 @@ Gözlem: Taradığım bu 9 uygulama ya da tür içinde, bir görev yaptırıp so
 | 29 | Dai, Li, Gan, Du, 2019, Sci Rep | 30718809 / 10.1038/s41598-019-39044-1 | Test-tekrar çalışması | Değişim bulma görevinde kapasite tahmininin test-tekrar korelasyonu 0,50–0,76; nesne sayısı arttıkça yükseldi. İki ölçüm günün aynı saatinde yapılınca güvenirlik daha yüksekti. | Laboratuvar, bilgisayar. Telefon ve sahne görevi değil. |
 
 Çıkarım: "Ne değişti?" görevinin zorluk düğmesi sahnedeki nesne sayısıdır (28). Bu tür görevde kişi-içi ölçüm makul güvenirlikte tekrarlanabiliyor (29); bizim sahne görevimiz için güvenirlik ölçülmedi, ilk ay verisiyle denetlenir. Aynı saat önerisi (29) Nef'in "drift" anıyla uyumludur.
+
+## 8. Ek: gerçek hayattaki canlı görevler (ana oturum, 2026-10-01, PubMed ile doğrulandı)
+
+| # | Yazar, yıl, dergi | PMID / DOI | Tür | Özetteki bulgu | Sınır |
+|---|---|---|---|---|---|
+| 30 | Chabris, Weinberger, Fontaine, Simons, 2011, i-Perception | 23145232 / 10.1068/i0436 | Saha deneyi | Birini koşarak takip edenlerin gece %35'i, gündüz %56'sı yol kenarında sahnelenen kavgayı fark etti; dikkat yükü artınca fark etme anlamlı biçimde azaldı. | Tek senaryo; kişi sayısı özette yok. |
+| 31 | Labonte-LeMoyne ve ark., 2022, Hum Factors | 36426775 / 10.1177/00187208221141175 | Laboratuvar deneyi | 78 kişi: yürürken ya da dururken telefonla yapılan her iş (oyun, okuma, mesaj) yaya görsel ayırt etme görevini kötüleştirdi; en kötüsü oyun. | Simülasyon, koşu bandı. |
+| 32 | Jiang ve ark., 2018, Accid Anal Prev | 29604515 / 10.1016/j.aap.2018.03.019 | Açık hava deneyi | 28 öğrenci: mesajlaşan yayalar karşıdan geçerken sağa sola daha az baktı, trafiğe daha az dikkat ayırdı. | Küçük örneklem. |
+| 33 | Killingsworth & Gilbert, 2010, Science | 21071660 / 10.1126/science.1192439 | Telefonla anlık örnekleme | İnsanlar o an olmayan bir şeyi neredeyse o an olan şey kadar sık düşünüyor; bu çoğunlukla mutsuzlukla birlikte. | Gözlemsel; neden-sonuç kurmaz. |
+
+Çıkarım: gerçek hayatta da dikkat bir şeye kilitliyken göz önündeki kaçabiliyor (30). Bu yüzden canlı görev "sayarken
+başka bir şeyi fark ettin mi?" biçiminde kurulabilir. Yolda telefonla uğraşmak görsel dikkati bozuyor (31, 32): yol
+görevleri telefona bakmadan yapılır, cevap sonra verilir. Telefonla anlık soru yöntemi bilimsel bir yöntemdir (33).
+Kanıt yok: gerçek hayattaki bu tür kısa görevlerin fark etmeyi kalıcı olarak artırdığını gösteren çalışma bulmadım.
