@@ -29,6 +29,7 @@ Bağlayıcı:
 - PLAN §5b'deki 15 madde bağlayıcıdır. Her yeni ya da değişen ekran, cihazdaki hareketli hâlinin kaydıyla 5 sn kapısından
   (5 yeni kişi, ≥ 4/5, 390 ve 320, iki tema) geçer; en çok iki tur, geçmezse sahibe sor. Mükemmel bulmadığını sahibe
   gösterme. Maketler (`maket/son.html`) yön ve içerik içindir; kapıdan geçmiş tasarım değildir.
+- Sıkmama kuralları (PLAN §9c, 13 madde) bağlayıcıdır ve 90 günlük simülasyon testiyle denetlenir.
 - Canlı görevler (PLAN §9b) F7 aşamasıdır; bildirim dosyaları bildirim oturumuyla sıraya konur.
 - Testler: aşama içinde yalnız ilgili dosyalar (`npx vitest run …`), sonda tam takım ve derleme bir kez. PLAN §7'deki
   test listesinin dışında bir test değişirse dur ve nedenini yaz.

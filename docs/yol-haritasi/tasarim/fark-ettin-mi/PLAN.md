@@ -308,6 +308,39 @@ emin değildin" gibi kişisel olgu (yalnız sayı). Kartta bilim satırı Chabri
 manifest `remind` ve `routes`, `remindTexts` bağlantısı (bildirim oturumunun dosyası; bağlantı satırı onunla), testler:
 `streetLive.test.js`, `moduleRemind.test.js`'e bu modül, `notifyAll.test.js` sınır testleri (haftalık en çok 4, 30 dk).
 
+## 9c. Sıkmama: Nef her gün aynı şeyi yapmaz (sahip isteği 2026-10-01)
+
+Sahibin sözü: "kişi sıkılmaması lazım her gün asla aynı şeyleri Nef yapmasın". Gerekçe: bildirimin etkisi zamanla
+azalıyor (Klasnja 2019, PMID 30192907); soru beklenince fark etme ölçüsü bozuluyor (Simons 2010, PMID 23397479). Kurallar
+kodda saf işlevdir ve testle denetlenir; sayılar VARSAYIM, ilk ay ölçülür.
+
+**Modül turu**
+1. Aynı sahne art arda iki gün gelmez; aynı (sahne, saat dilimi, hava) üçlüsü 14 gün içinde tekrar etmez.
+2. Sayma hedefi son 7 turda tekrar etmez (sahne başına ≥ 8 hedef).
+3. "Ne değişti?" turundaki 4 sahnede değişiklik türü (renk, nesne gelir/gider, yer değiştirir, tabela) en çok iki kez
+   aynıdır; değişen nesne son 5 turda değişen nesnelerden biri olmaz.
+4. "Gözünden kaçan" şablonu son 3 turda sorulmaz (sahne başına ≥ 12 şablon); yakalama turu (kişi yoktu) rastgele,
+   iki tur üst üste değil.
+5. Her 7. tur "haftanın sahnesi": o hafta açılmış en yeni sahne ya da çeşitleme (akşam, yağmur).
+6. Bilim kartı 7 gün içinde tekrar etmez; açılan kart 30 gün dinlenir (Nef planı §4.4 madde 4).
+
+**Canlı görevler**
+7. Aynı görev türü art arda gelmez (renk avı → say ve sürpriz → başını kaldır dönüşümlü, kişinin saatlerine göre).
+8. Hedef (renk, nesne) 21 gün, sürpriz soru 30 gün tekrar etmez.
+9. Bildirim cümlesi: her tür için ≥ 6 onaylı kalıp; aynı kalıp 21 gün tekrar etmez (Nef planı §4.4 madde 1).
+10. Saat sabit değil: penceresi içinde gün gün ±20 dk oynar; kişinin elle seçtiği saat varsa o saat kalır.
+11. Üç görev üst üste yanıtsız kalırsa canlı görevler 14 gün dinlenir; dönüşte Nef bir kez sorar: "Canlı görevleri
+    azaltayım mı?" (Evet · Böyle kalsın). Suçlama ve "özledik" yok.
+
+**Nef'in sözleri**
+12. Bu modülün her an hücresinde (N1–N4 ve canlı görev sonucu) ≥ 6 onaylı cümle; aynı cümle 21 gün, aynı olgu bir kez
+    (Nef planı §4.4). Aynı an türü Ana sayfada üst üste iki gün gelmez.
+13. Söylenecek yeni olgu yoksa Nef bu modül için susar (Nef planı §4.5).
+
+**Test (F2, F5, F7):** 90 günlük tohumlu simülasyonda (her gün tur + haftada 4 canlı görev) yukarıdaki 13 kuralın hiçbiri
+çiğnenmez; aynı (sahne, sayma hedefi, soru seti) üçlüsü hiç tekrar etmez. Kombinasyon sayısı bunu taşır: 5 sahne ×
+≥ 8 hedef × ≥ 12 şablon × 4 değişiklik türü.
+
 ## 10. Cihaz denetim listesi
 
 - [ ] 390 ve 320 (iPhone SE), açık ve koyu: hiçbir ekranda taşma, kesik yazı yok; "Yürümeye başla" ilk ekranda.
