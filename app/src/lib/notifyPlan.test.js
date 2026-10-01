@@ -1,6 +1,6 @@
 import { describe, it, expect, afterEach } from 'vitest'
 import * as notifyPlan from './notifyPlan.js'
-import { HORIZON_DAYS, LEAD_MS, walkThreshold, TEXTS, textFor, planNotifications } from './notifyPlan.js'
+import { HORIZON_DAYS, LEAD_MS, NOW_SHIFT_MS, walkThreshold, TEXTS, textFor, planNotifications } from './notifyPlan.js'
 import { TYPE_INDEX, NUDGE_TYPES } from './reminders.js'
 import { dayKey, keyDay } from './habitLog.js'
 
@@ -59,6 +59,22 @@ describe('planNotifications: geçmiş an', () => {
     expect(p.log.filter((e) => e.type === 'mola')).toHaveLength(6)
     expect(logOf(p, 'walk', TODAY)).toBeDefined()
     for (const n of p.notifications) expect(n.at.getTime()).toBeGreaterThan(new Date(2026, 8, 27, 13, 0).getTime() + LEAD_MS)
+  })
+  // Sahip kararı 2026-10-01: şu anki dakikaya kurulan saat "birkaç saniye sonra gelsin" (NOW_SHIFT_MS); bir kez
+  it('şu anki dakikaya kurulan saat 5 sn sonra kurulur; yeniden planda aynı anla kalır; dakika geçince kurulmaz', () => {
+    const now = new Date(2026, 8, 27, 12, 30, 20)
+    const p = plan({ now })
+    const n = p.notifications.find((x) => x.type === 'mola' && x.extra.date === TODAY)
+    expect(n.at.getTime()).toBe(now.getTime() + NOW_SHIFT_MS)
+    // 3 sn sonra yeniden plan: aynı an planda kalır (bekleyen bildirim iptal edilmez), yeni kaydırma yapılmaz
+    const later = new Date(now.getTime() + 3000)
+    const q = plan({ now: later, log: p.log })
+    expect(q.notifications.find((x) => x.type === 'mola' && x.extra.date === TODAY).at.getTime()).toBe(n.at.getTime())
+    // Bildirim gittikten sonra (aynı dakika içinde) yeniden kurulmaz
+    const after = new Date(now.getTime() + 10000)
+    expect(plan({ now: after, log: p.log }).notifications.some((x) => x.type === 'mola' && x.extra.date === TODAY)).toBe(false)
+    // Dakika geçtiyse (12.31) bugün kurulmaz
+    expect(plan({ now: new Date(2026, 8, 27, 12, 31, 0) }).notifications.some((x) => x.type === 'mola' && x.extra.date === TODAY)).toBe(false)
   })
   // Pay 15 sn (sahip, 2026-10-01: 1 dk sonrasına kurulan saat de gelsin)
   it('15 sn içindeki an kurulmaz; 1 dk sonrası kurulur', () => {

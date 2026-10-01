@@ -6,6 +6,14 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Build 74'ten sonraki TestFlight ('2026-10-01-2' Build 74'te gitti, 11.52). Sahip kararı: "birkaç saniye sonra gelsin".
+    id: '2026-10-01-3',
+    title: '1 Ekim, üçüncü güncelleme',
+    items: [
+      { kind: 'change', text: 'Hatırlatmayı şu anki dakikaya kurarsan birkaç saniye sonra gelir; sonraki günlerde o saatte gelir.' },
+    ],
+  },
+  {
     // Build 71'den sonraki TestFlight ('2026-10-01-1' Build 71'de gitti; sahibin 11.12 ekranında gün çipleri var).
     // Sahip kararları 2026-10-01: "yeni saatte kurulsun", "yine de gelsin".
     id: '2026-10-01-2',

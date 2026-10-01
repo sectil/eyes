@@ -15,6 +15,8 @@ import { WEEKDAYS, mondayIndex } from './calendar.js'
 export const HORIZON_DAYS = 7 // gün 0 (bugün) … 6
 export const NUDGE_ID = 7400 // + gün×10 + TYPE_INDEX
 export const FOCUS_ID = 7500 // + k − 1 (k. saat)
+export const NOW_SHIFT_MS = 5000 // şu anki dakikaya kurulan saat bu kadar sonra gelir
+const MINUTE_MS = 60000
 export const LEAD_MS = 15000 // bu kadar yakın an kurulmaz (geçmiş an hemen çalar); 1 dk sonrası kurulabilsin (sahip, 2026-10-01)
 const HOUR = 3600000
 
@@ -123,6 +125,8 @@ export function planNotifications({ now = new Date(), reminders, study = null, h
   // Zamanı gelmemiş kayıtların anı (tarih|tür → ms): LEAD_MS içine girmiş an yeni kurulmaz, ama aynı anla önceden
   // planlanmışsa planda kalır. Yoksa uygulamayı hatırlatmadan hemen önce açmak bekleyen bildirimi iptal eder ve günün
   // kaydını siler (mergePlanned zamanı gelmemiş kaydı planla değiştirir).
+  // Bu gün ve tür için anı `atMs` ya da sonrası olan kayıt var mı (şu anki dakikanın kaydırması bir kez yapılır)
+  const loggedSince = (key, type, atMs) => logList.some((e) => e?.date === key && e?.type === type && Date.parse(e.plannedAt) >= atMs)
   const plannedAhead = new Map(
     logList.filter((e) => Date.parse(e?.plannedAt) > nowMs).map((e) => [`${e.date}|${e.type}`, Date.parse(e.plannedAt)]),
   )
@@ -142,10 +146,17 @@ export function planNotifications({ now = new Date(), reminders, study = null, h
     for (const type of NUDGE_TYPES) {
       const cfg = r.types[type]
       if (!cfg.on) continue
-      const at = atOn(day, cfg.time)
-      const atMs = at.getTime()
-      if (atMs <= nowMs) continue // geçmiş an: kurulmaz, günlüğe de yazılmaz
-      if (atMs <= nowMs + LEAD_MS && plannedAhead.get(`${key}|${type}`) !== atMs) continue // çok yakın yeni an kurulmaz
+      const atMs = atOn(day, cfg.time).getTime()
+      const ahead = plannedAhead.get(`${key}|${type}`)
+      let fireMs = atMs
+      if (atMs <= nowMs) {
+        // Şu anki dakikaya kurulan saat (sahip kararı 2026-10-01: "birkaç saniye sonra gelsin"): dakika bitmediyse ve
+        // bu an için günlükte kayıt yoksa NOW_SHIFT_MS sonra; önceden kaydırılmış an bekliyorsa aynı anla planda kalır
+        if (ahead != null && ahead > nowMs && ahead >= atMs && ahead - atMs < MINUTE_MS + NOW_SHIFT_MS) fireMs = ahead
+        else if (d === 0 && nowMs - atMs < MINUTE_MS && !loggedSince(key, type, atMs)) fireMs = nowMs + NOW_SHIFT_MS
+        else continue // geçmiş an: kurulmaz, günlüğe de yazılmaz
+      } else if (atMs <= nowMs + LEAD_MS && ahead !== atMs) continue // çok yakın yeni an kurulmaz
+      const at = new Date(fireMs)
       let skipReason = null
       if (!cfg.days.includes(day.getDay())) skipReason = 'day'
       else if (type === 'walk' && avg == null) skipReason = 'noData'
