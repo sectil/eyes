@@ -343,7 +343,7 @@ describe('kurulum sayfası', () => {
     await r.tap('Hayır')
     expect(r.text()).not.toContain('Ne zaman sussun?')
   })
-  it('gün seçilmemişse özet "Yarın Salı 07:00\'de bir kez çalar.", düğme "Yarın 07:00\'ye kur" (tek seferlik kurar); ilk çalış bugünse "Bugün"', async () => {
+  it('gün seçilmemişse özet "Yarın Salı 07:00\'de bir kez çalar.", tek düğme "Alarmı kur" (tek seferlik kurar); ilk çalış bugünse "Bugün"', async () => {
     vi.useFakeTimers({ toFake: ['Date'] })
     vi.setSystemTime(EVE)
     onTestFinished(() => vi.useRealTimers())
@@ -351,12 +351,12 @@ describe('kurulum sayfası', () => {
     await web.tap('Her gün')
     await web.tap('Her gün')
     expect(web.text()).toContain("Yarın Salı 07:00'de bir kez çalar.")
-    expect(web.text()).toContain("Yarın 07:00'ye kur")
+    expect(web.text()).toContain('Alarmı kur') // özet günü ve saati söylüyor; düğme tekrar etmez
     expect(web.text()).not.toContain('Kur · 07:00')
     await web.tap('Pt')
     expect(web.text()).toContain('Kur · 07:00')
     expect(web.text()).not.toContain('bir kez çalar')
-    expect(web.text()).not.toContain("Yarın 07:00'ye kur")
+    expect(web.text()).not.toContain('Alarmı kur')
     // uyku sesiyle: "Yalnız kur · 07:00" yerine "Uyku sesi olmadan kur"; dokununca tek seferlik kurulur
     native.scheduleAlarm.mockClear()
     native.scheduleAlarm.mockResolvedValueOnce({ ok: true, snooze: false })
@@ -379,7 +379,7 @@ describe('kurulum sayfası', () => {
     await m.tap('Her gün')
     expect(m.text()).not.toContain('Yarın')
     expect(m.text()).toContain("Bugün 07:00'de bir kez çalar.")
-    expect(m.text()).toContain("Bugün 07:00'ye kur")
+    expect(m.text()).toContain('Alarmı kur')
   })
   it('"Her gün" yedi günü seçer, yeniden dokununca boşaltır; düzen notu yalnız eksik günlerde', async () => {
     const r = await mount(h(AlarmSetup, { status: { platform: 'web', auth: null }, now: EVE, onBack: () => {} }))

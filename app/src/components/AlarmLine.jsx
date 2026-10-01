@@ -125,12 +125,12 @@ export default function AlarmLine({ status, onStart, now = new Date() }) {
     return (
       <>
         <div className="al-miss">
-          <AlarmClockOff size={20} aria-hidden="true" className="al-miss-ic" />
+          <AlarmClockOff size={20} strokeWidth={2.4} aria-hidden="true" className="al-miss-ic" />
           <div className="al-miss-tx">
             <b id={`${missId}t`}>Alarm telefonda kurulu değil</b>
             <span id={`${missId}s`}>{`${dayWord} ${withSuffix(minOfDay(next), 'loc')} çalmaz.`}</span>
           </div>
-          <button type="button" className="btn btn-secondary btn-sm al-miss-btn" aria-describedby={`${missId}t ${missId}s`} onClick={() => onStart('alarm')}>Yeniden kur</button>
+          <button type="button" className="btn btn-sm al-miss-btn" aria-describedby={`${missId}t ${missId}s`} onClick={() => onStart('alarm')}>Yeniden kur</button>
         </div>
         {toast}
       </>

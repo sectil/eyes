@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { X, Play, Square } from 'lucide-react'
+import { X, Play, Square, AlarmClock } from 'lucide-react'
 import {
   setupDefaults, buildAlarm, hhmm, withSuffix, parseHhmm, daysLabel, latency, LATENCY_START, nextOccurrence, nextRing, ringLabel,
   WEEK_ORDER, WEEKDAY_SHORT, WEEKDAY_LONG, SLEEP_CHOICES, SLEEP_OTHER, sleepMinutes, lateSleepSeconds,
@@ -65,9 +65,9 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
   // Seçili günler yarını içermiyorsa ilk çalış yazılır ("Kur · 07:00" yarın sanılmasın)
   const first = nextOccurrence({ hour: Math.floor(time / 60), minute: time % 60, days }, now)
   const firstIsTomorrow = first && keyDay(dayKey(first)) - keyDay(dayKey(now)) <= 1
-  // Gün seçilmemiş: tek seferlik (sahip onaylı 2026-10-01; alarm-risk.md N1). 2. tur: düğmelerin üstünde özet
-  // ("Yarın Cuma 06:35'te bir kez çalar."); tek düğme "Yarın 06:35'e kur" / "Bugün 23:30'a kur", uyku sesiyle ikincil
-  // düğme "Uyku sesi olmadan kur". Bugün/yarın gerçek ilk çalıştan (first)
+  // Gün seçilmemiş: tek seferlik (sahip onaylı 2026-10-01; alarm-risk.md N1). Düğmelerin üstünde simgeli özet kutusu
+  // ("Yarın Cuma 06:35'te bir kez çalar."; bugün/yarın gerçek ilk çalıştan, first). Tek düğme "Alarmı kur" (3. tur: özet
+  // zaten günü ve saati söylüyor), uyku sesiyle ikincil düğme "Uyku sesi olmadan kur"
   const onceTomorrow = !days.length && first && keyDay(dayKey(first)) - keyDay(dayKey(now)) === 1
   const onceToday = !days.length && first && keyDay(dayKey(first)) - keyDay(dayKey(now)) === 0
   // Tek seferlik: düğmelerin üstünde ne zaman çalacağı (2. tur; gerçek ilk çalıştan: bugün ya da yarın + gün adı)
@@ -191,7 +191,7 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
             <button key={x} type="button" role="checkbox" className="al-day" aria-checked={days.includes(x)} aria-label={WEEKDAY_LONG[x]} onClick={() => toggleDay(x)}>{WEEKDAY_SHORT[x]}</button>
           ))}
         </div>
-        <p className="al-q-sub al-days-sub">{days.length ? `${daysLabel(days)} · dokun, çıkar ya da ekle` : 'Yalnız yarın · gün seçersen her hafta çalar'}</p>
+        <p className="al-q-sub">{days.length ? `${daysLabel(days)} · dokun, çıkar ya da ekle` : 'Yalnız yarın · gün seçersen her hafta çalar'}</p>
         {first && !firstIsTomorrow && <p className="al-q-sub">Yarın çalmaz · ilk: {ringLabel(first, now)}</p>}
         {/* Windred 2024 (doi:10.1093/sleep/zsad253): düzenli uyku-uyanma, süreden güçlü bir gösterge (gözlemsel) */}
         {days.length > 0 && days.length < 7 && <p className="al-q-sub">Her gün aynı saatte kalkmak uyku düzenini korur.</p>}
@@ -276,7 +276,7 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
           {tonight > 0 ? `Kurunca uyku sesi hemen başlar: ${tonightText}, sonra yavaşça susar.` : 'Alarma çok az var; uyku sesi çalmaz.'}
         </p>
       )}
-      {onceWhen && <p className="al-once">{`${onceWhen} ${withSuffix(time, 'loc')} bir kez çalar.`}</p>}
+      {onceWhen && <p className="al-once"><AlarmClock size={18} aria-hidden="true" /><span>{`${onceWhen} ${withSuffix(time, 'loc')} bir kez çalar.`}</span></p>}
       {withSoundOk ? (
         <>
           <button type="button" className="btn" disabled={busy || !platform} onClick={() => submit(true)}>
@@ -288,7 +288,7 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
         </>
       ) : (
         <button type="button" className="btn" disabled={busy || !platform} onClick={() => submit(false)}>
-          {notify ? `${withSuffix(time, 'loc')} hatırlat` : onceTomorrow || onceToday ? `${onceTomorrow ? 'Yarın' : 'Bugün'} ${withSuffix(time, 'dat')} kur` : `Kur · ${hhmm(time)}`}
+          {notify ? `${withSuffix(time, 'loc')} hatırlat` : onceTomorrow || onceToday ? 'Alarmı kur' : `Kur · ${hhmm(time)}`}
         </button>
       )}
       {live && <button type="button" className="btn btn-ghost" disabled={busy} onClick={remove}>{notify ? 'Hatırlatmayı kaldır' : 'Alarmı kaldır'}</button>}

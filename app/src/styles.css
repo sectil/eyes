@@ -191,6 +191,9 @@ button { font: inherit; color: inherit; }
   font-size: 1rem; font-weight: 650; letter-spacing: -0.01em;
   border: 1px solid transparent; border-radius: 16px;
   background: var(--accent-grad); color: var(--accent-ink); box-shadow: var(--accent-glow);
+  /* Gradyan kenarlık kutusundan başlasın: padding-box'ta (varsayılan) saydam 1 px kenarlığın altında gradyan
+     tekrarlanıyor, sağ kenarda başlangıç rengi (#0b7480 / #19c2d1) 1 px çizgi olarak görünüyordu (alarm 3. tur) */
+  background-origin: border-box;
   cursor: pointer; transition: transform 0.12s ease, filter 0.12s ease, background 0.2s;
 }
 .btn:active { transform: scale(0.98); }
