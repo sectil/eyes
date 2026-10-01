@@ -32,3 +32,12 @@ test koşuları, turlarda düzenek onarımı, ikiden fazla düzeltme turu, uzun 
 
 Rıza (açık rıza, izin) sayfalarında değerlendiriciye "etkilendin mi?" sorulmaz. Soru: "5 saniyede ne istendiğini, verinin
 nereye gittiğini ve nasıl hayır diyeceğini anladın mı?" Beş kişinin en az dördü anlamalı. Metin harfi harfine kalır.
+
+## Her tasarım: 5 saniyede etkileme ve mükemmellik (sahip, 2026-10-01: "her tasarım 5 sn etkileme ve mükemmellik üzerine olacak")
+
+- Her yeni ya da değişen ekran, kart ve bildirim görünümü beş bağımsız değerlendiriciye 5 saniyelik ilk bakışla
+  gösterilir; soru "etkilendin mi?" ("idare eder" = hayır). En az 4/5. İki tema, 390 ve 320.
+- Değerlendiriciler geçirse de ben görüntülere bakar, mükemmel bulmazsam sahibe göndermem; yalnız sonucu yazarım.
+- Rıza sayfalarında anlaşılırlık ölçütü (yukarıda) da kalır: ikisi birlikte aranır.
+- Yalnız "anlaşılırlık" ile geçmiş ekranlar (ör. Hatırlatmalar sayfası, D5+D6: 5/5 anlaşıldı) etkileme için yeniden
+  sınanır.
