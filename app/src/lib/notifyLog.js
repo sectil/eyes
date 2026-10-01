@@ -111,7 +111,11 @@ export function mergePlanned(log, planned, todayKey, now = new Date()) {
   }
   for (const p of Array.isArray(planned) ? planned : []) {
     const e = clean({ ...p, tapped: false })
-    if (!e || keyDay(e.date) < today || out.has(keyOf(e))) continue
+    // Bugünün zamanı gelmiş kaydı varken saat değiştiyse (gelecekteki yeni an), yeni an kaydı geçer (sahip kararı
+    // 2026-10-01: "yeni saatte kurulsun"); yoksa planlayıcı LEAD_MS içinde bu anı tanımaz ve bekleyen bildirim düşer
+    const prev = e ? out.get(keyOf(e)) : null
+    const moved = prev && Date.parse(e.plannedAt) > t && e.plannedAt !== prev.plannedAt
+    if (!e || keyDay(e.date) < today || (prev && !moved)) continue
     e.tapped = tapped.get(keyOf(e)) === true
     out.set(keyOf(e), e)
   }

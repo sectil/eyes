@@ -6,6 +6,16 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Build 71'den sonraki TestFlight ('2026-10-01-1' Build 71'de gitti; sahibin 11.12 ekranında gün çipleri var).
+    // Sahip kararları 2026-10-01: "yeni saatte kurulsun", "yine de gelsin".
+    id: '2026-10-01-2',
+    title: '1 Ekim, ikinci güncelleme',
+    items: [
+      { kind: 'fix', text: 'Hatırlatmanın saatini değiştirince yeni saat aynı gün de geçerli; bir dakika sonrasına kurduğun saat de gelir.' },
+      { kind: 'change', text: 'Mola, su ve nefes hatırlatmaları o gün yapmış olsan da seçtiğin saatte gelir. Yürüyüş hatırlatması adımın az olduğu günlerde gelmeye devam eder.' },
+    ],
+  },
+  {
     // Build 70'ten sonraki TestFlight (Bug 36 kuralı: '2026-09-30-2' Build 70'te gitti). Sahip kararları 2026-10-01 (D5+D6).
     id: '2026-10-01-1',
     title: '1 Ekim güncellemesi',

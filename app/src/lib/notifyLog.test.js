@@ -102,11 +102,14 @@ describe('mergePlanned', () => {
     expect(out.find((e) => e.date === today)).toMatchObject({ skipReason: 'doneBefore', eligible: false, tapped: true })
     expect(out.find((e) => e.date === key(2026, 9, 28)).skipReason).toBe('focus')
   })
-  it('bugünün zamanı gelmiş kaydı planda olmasa da kalır; saati sonradan değişse de ikinci kayıt açılmaz', () => {
+  // Sahip kararı 2026-10-01 ("yeni saatte kurulsun"): saat bugün değiştiyse gelecekteki yeni an kaydın yerine geçer
+  it('bugünün zamanı gelmiş kaydı planda olmasa da kalır; saat sonradan değişince yeni an kaydın yerine geçer', () => {
     const log = [entry(today, 'mola', { plannedAt: iso(2026, 9, 27, 12, 30) })]
     expect(mergePlanned(log, [], today, now)).toHaveLength(1)
-    const later = [{ date: today, type: 'mola', eligible: true, arm: 'silent', skipReason: null, plannedAt: iso(2026, 9, 27, 15) }]
-    expect(mergePlanned(log, later, today, now)).toEqual(log)
+    const later = [{ date: today, type: 'mola', eligible: true, arm: 'send', skipReason: null, plannedAt: iso(2026, 9, 27, 15) }]
+    const out = mergePlanned(log, later, today, now)
+    expect(out).toHaveLength(1)
+    expect(out[0].plannedAt).toBe(iso(2026, 9, 27, 15))
   })
   it('tür kapandı: zamanı gelmemiş kayıtlar silinir', () => {
     const log = [entry(today, 'water', { plannedAt: iso(2026, 9, 27, 16) }), entry(key(2026, 9, 29), 'water', { plannedAt: iso(2026, 9, 29, 11) })]

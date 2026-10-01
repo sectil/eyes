@@ -33,7 +33,8 @@
 //   - "Yerelde yenilendi" (2. katman, AlarmKit stopIntent): Swift'in o gün yeniden yazdığı 7700 yeniden yazılmaz;
 //     bildirim keepPending: true ve metinsiz çıkar, notifyApply bekleyeni yerinde tutar. Katman 2 bu turda YOK:
 //     takeLocalRefresh her zaman null döner.
-import { LEAD_MS } from './notifyPlan.js'
+// Sabah havası kendi payını korur (60 sn); hatırlatmaların payı 15 sn'ye indi (sahip, 2026-10-01), bu hava kuralı değişmedi
+const LEAD_MS = 60000
 import { toMinutes } from './reminders.js'
 import { dayKey } from './habitLog.js'
 import { nextRing } from './alarm.js'

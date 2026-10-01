@@ -291,8 +291,8 @@ describe('planModuleReminders: deney türünde çok saat', () => {
     const q = planModuleReminders({ now, reminders, modules: [breathMod], moduleReminders: mr, log })
     // 13.00 bugün geçti → yarın 13.00 (24 saat içinde); 17.00 bugün
     expect(q.extras.map((n) => [dayKey(n.at), hm(n.at)])).toEqual([[dayKey(new Date(2026, 9, 1)), [13, 0]], [dayKey(now), [17, 0]]])
-    // Saat şimdiden LEAD_MS (1 dk) içinde: yarına kayar ve ufukta kalır ('past' diye düşmez)
-    const edge = new Date(2026, 8, 30, 12, 59, 30)
+    // Saat şimdiden LEAD_MS (15 sn) içinde: yarına kayar ve ufukta kalır ('past' diye düşmez)
+    const edge = new Date(2026, 8, 30, 12, 59, 50)
     const r = planModuleReminders({ now: edge, reminders, modules: [breathMod], moduleReminders: mr, log })
     expect(r.extras.map((n) => [dayKey(n.at), hm(n.at)])).toEqual([[dayKey(new Date(2026, 9, 1)), [13, 0]], [dayKey(now), [17, 0]]])
     expect(r.skipped.filter((s) => s.reason === 'past')).toEqual([])

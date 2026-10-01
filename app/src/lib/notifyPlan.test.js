@@ -60,13 +60,15 @@ describe('planNotifications: geçmiş an', () => {
     expect(logOf(p, 'walk', TODAY)).toBeDefined()
     for (const n of p.notifications) expect(n.at.getTime()).toBeGreaterThan(new Date(2026, 8, 27, 13, 0).getTime() + LEAD_MS)
   })
-  it('60 sn içindeki an da kurulmaz', () => {
-    expect(logOf(plan({ now: new Date(2026, 8, 27, 12, 29, 30) }), 'mola', TODAY)).toBeUndefined()
-    expect(logOf(plan({ now: new Date(2026, 8, 27, 12, 29, 0) }), 'mola', TODAY)).toBeUndefined()
-    expect(logOf(plan({ now: new Date(2026, 8, 27, 12, 28, 59) }), 'mola', TODAY)).toBeDefined()
+  // Pay 15 sn (sahip, 2026-10-01: 1 dk sonrasına kurulan saat de gelsin)
+  it('15 sn içindeki an kurulmaz; 1 dk sonrası kurulur', () => {
+    expect(logOf(plan({ now: new Date(2026, 8, 27, 12, 29, 50) }), 'mola', TODAY)).toBeUndefined()
+    expect(logOf(plan({ now: new Date(2026, 8, 27, 12, 29, 45) }), 'mola', TODAY)).toBeUndefined()
+    expect(logOf(plan({ now: new Date(2026, 8, 27, 12, 29, 44) }), 'mola', TODAY)).toBeDefined()
+    expect(logOf(plan({ now: new Date(2026, 8, 27, 12, 29, 0) }), 'mola', TODAY)).toBeDefined()
   })
-  it('60 sn içindeki an önceden aynı anla planlandıysa planda kalır (bildirim ve günlük); saat değiştiyse kurulmaz', () => {
-    const now = new Date(2026, 8, 27, 12, 29, 30)
+  it('15 sn içindeki an önceden aynı anla planlandıysa planda kalır (bildirim ve günlük); saat değiştiyse kurulmaz', () => {
+    const now = new Date(2026, 8, 27, 12, 29, 50)
     const at = new Date(2026, 8, 27, 12, 30)
     const earlier = plan({ now: new Date(2026, 8, 27, 9, 0) })
     const prev = logOf(earlier, 'mola', TODAY)
@@ -82,14 +84,14 @@ describe('planNotifications: geçmiş an', () => {
     // tür kapandıysa korunmaz
     expect(logOf(plan({ now, log: earlier.log, rem: { types: { ...ALL_ON, mola: { on: false, time: '12:30' } } } }), 'mola', TODAY)).toBeUndefined()
   })
-  it('saat bugün değiştiyse ve bugünün kaydı zamanı gelmiş duruyorsa ikinci kez kurulmaz (log verilirse)', () => {
+  // Sahip kararı 2026-10-01: "yeni saatte kurulsun" — bugün o türden bildirim gitmiş olsa da yeni saat bugün kurulur
+  it('saat bugün değiştiyse bugünün kaydı zamanı gelmiş dursa da yeni saatte bugün yine kurulur', () => {
     const now = new Date(2026, 8, 27, 14, 0)
     const log = [{ date: TODAY, type: 'mola', eligible: true, arm: 'send', skipReason: null, plannedAt: new Date(2026, 8, 27, 12, 30).toISOString() }]
     const rem = { types: { ...ALL_ON, mola: { on: true, time: '17:30' } } }
-    expect(logOf(plan({ now, rem }), 'mola', TODAY)).toBeDefined()
     const p = plan({ now, rem, log })
-    expect(logOf(p, 'mola', TODAY)).toBeUndefined()
-    expect(p.notifications.some((n) => n.type === 'mola' && n.extra.date === TODAY)).toBe(false)
+    expect(logOf(p, 'mola', TODAY).plannedAt).toBe(new Date(2026, 8, 27, 17, 30).toISOString())
+    expect(p.notifications.find((n) => n.type === 'mola' && n.extra.date === TODAY).at.getTime()).toBe(new Date(2026, 8, 27, 17, 30).getTime())
   })
 })
 
@@ -166,20 +168,21 @@ describe('planNotifications: atlama nedenleri', () => {
     const morn = plan({ now: new Date(2026, 8, 27, 7, 30), focus: { startedAt: new Date(2026, 8, 27, 7, 30).toISOString(), hours: 4 } })
     expect(morn.notifications.filter((n) => n.type === 'focus').map((n) => [n.id, n.extra.k])).toEqual([[7501, 2], [7502, 3], [7503, 4]])
   })
-  it("bugün yapıldıysa (yalnız gün 0) 'doneBefore': mola/su habit, nefes ≥ 60 sn", () => {
+  // Sahip kararı 2026-10-01: "yine de gelsin" — o gün yapılmış olsa da mola, su ve nefes gelir (yürüyüş adım koşulu kalır)
+  it('bugün yapılmış olsa da mola, su ve nefes kurulur (doneBefore yok)', () => {
     const now = new Date(2026, 8, 27, 10, 0)
     const habits = [
       { date: TODAY, type: 'mola', at: new Date(2026, 8, 27, 9, 0).toISOString() },
       { date: TODAY, type: 'water', at: new Date(2026, 8, 27, 9, 30).toISOString() },
     ]
     const p = plan({ now, habits })
-    expect(logOf(p, 'mola', TODAY).skipReason).toBe('doneBefore')
-    expect(logOf(p, 'water', TODAY).skipReason).toBe('doneBefore')
+    expect(logOf(p, 'mola', TODAY).skipReason).toBeNull()
+    expect(logOf(p, 'water', TODAY).skipReason).toBeNull()
     expect(logOf(p, 'mola', dayKey(addDays(now, 1))).skipReason).toBeNull()
     const short = plan({ now, sessions: [{ type: 'breath', seconds: 59, date: new Date(2026, 8, 27, 9, 0).toISOString() }] })
     expect(logOf(short, 'breath', TODAY).skipReason).toBeNull()
     const full = plan({ now, sessions: [{ type: 'breath', seconds: 60, date: new Date(2026, 8, 27, 9, 0).toISOString() }] })
-    expect(logOf(full, 'breath', TODAY).skipReason).toBe('doneBefore')
+    expect(logOf(full, 'breath', TODAY).skipReason).toBeNull()
     const yesterday = plan({ now, sessions: [{ type: 'breath', seconds: 300, date: new Date(2026, 8, 26, 20, 0).toISOString() }] })
     expect(logOf(yesterday, 'breath', TODAY).skipReason).toBeNull()
   })

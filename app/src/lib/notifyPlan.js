@@ -8,16 +8,14 @@
 // gönderilir (günlükte arm 'send'). VARSAYIM (D5+D6 plan madde 2): gece sessizliği kişinin kendi seçtiği bu saatleri
 // engellemez (açık seçim kazanır; notifyAll gece kuralını yalnız yeni kaynaklara uygular).
 import { NUDGE_TYPES, TYPE_INDEX, normalizeReminders, toMinutes } from './reminders.js'
-import { dayKey, keyDay, habitsOn } from './habitLog.js'
+import { dayKey, keyDay } from './habitLog.js'
 import { FOCUS_HOURS, breakTimes } from './focus.js'
-import { BREATH_DONE_SEC } from './notifyLog.js'
-import { isBreath } from './breath.js'
 import { WEEKDAYS, mondayIndex } from './calendar.js'
 
 export const HORIZON_DAYS = 7 // gün 0 (bugün) … 6
 export const NUDGE_ID = 7400 // + gün×10 + TYPE_INDEX
 export const FOCUS_ID = 7500 // + k − 1 (k. saat)
-export const LEAD_MS = 60000 // bu kadar yakın an kurulmaz (geçmiş an hemen çalar)
+export const LEAD_MS = 15000 // bu kadar yakın an kurulmaz (geçmiş an hemen çalar); 1 dk sonrası kurulabilsin (sahip, 2026-10-01)
 const HOUR = 3600000
 
 // Bildirim saatine kadar "beklenen" adım: ortalama × (saat / 24). VARSAYIM (plan §3): gün boyu eşit dağılım.
@@ -100,7 +98,9 @@ function focusSpan(focus) {
 //   reminders: settings.reminders (ham; burada normalize edilir) · study: settings.reminder ({ days, time })
 //   habits: loadHabits() · sessions: store.sessions · health: { todaySteps, avgSteps, readAt } | null
 //   focus: loadFocus() · seed: artık kullanılmaz (sessiz gün zarı kalktı; eski çağrılar için kabul edilir) · log (isteğe bağlı): loadLog() — bugünün zamanı gelmiş kaydı varsa
-//   (saat sonradan değişti) o tür bugün ikinci kez kurulmaz; zamanı gelmemiş kaydın anı LEAD_MS içine girdiyse
+//   ve kişi saati sonradan değiştirdiyse yeni saat bugün yine kurulur (sahip kararı 2026-10-01: "yeni saatte kurulsun");
+//   o gün yapılmış olsa da gönderilir (sahip: "yine de gelsin"; yürüyüş adım koşulu türün tanımıdır, kalır). Zamanı
+//   gelmemiş kaydın anı LEAD_MS içine girdiyse
 //   o an planda kalır (bekleyen bildirim iptal edilmez, günün kaydı silinmez)
 // Çıktı: notifications (uygulayıcıya), log (yalnız NUDGE_TYPES, gün 0–6; notifyLog.mergePlanned'e; uygun günde
 //   arm 'send', atlanan günde arm null + skipReason 'day' | 'noData' | 'focus' | 'doneBefore'),
@@ -120,26 +120,18 @@ export function planNotifications({ now = new Date(), reminders, study = null, h
   const inFocus = (t) => span != null && t >= span.start && t <= span.end
 
   const logList = Array.isArray(log) ? log : []
-  // Bugünün zamanı gelmiş kaydı olan türler (bildirim gitti ya da atlandı)
-  const firedToday = new Set(logList.filter((e) => e?.date === todayKey && Date.parse(e.plannedAt) <= nowMs).map((e) => e.type))
   // Zamanı gelmemiş kayıtların anı (tarih|tür → ms): LEAD_MS içine girmiş an yeni kurulmaz, ama aynı anla önceden
   // planlanmışsa planda kalır. Yoksa uygulamayı hatırlatmadan hemen önce açmak bekleyen bildirimi iptal eder ve günün
   // kaydını siler (mergePlanned zamanı gelmemiş kaydı planla değiştirir).
   const plannedAhead = new Map(
     logList.filter((e) => Date.parse(e?.plannedAt) > nowMs).map((e) => [`${e.date}|${e.type}`, Date.parse(e.plannedAt)]),
   )
-  // Bugün yapıldı mı (yalnız gün 0)
-  const todayHabits = habitsOn(habits, todayKey)
-  const list = Array.isArray(sessions) ? sessions : []
+  // Yapılmış olsa da gönderilir (sahip, 2026-10-01). Yalnız yürüyüş: "Adımın az olduğu günlerde" türün tanımıdır;
+  // bugünün adımı eşiğe ulaştıysa kurulmaz (VARSAYIM, sahibe soruldu; native WalkGuard da aynı kuralla iptal eder)
   const avg = Number.isFinite(health?.avgSteps) && health.avgSteps > 0 ? health.avgSteps : null
   const freshToday = Number.isFinite(Date.parse(health?.readAt)) && dayKey(health.readAt) === todayKey
   const todaySteps = freshToday && Number.isFinite(health.todaySteps) ? health.todaySteps : null
-  const doneToday = {
-    mola: todayHabits.some((h) => h.type === 'mola'),
-    water: todayHabits.some((h) => h.type === 'water'),
-    breath: list.some((s) => isBreath(s) && s.seconds >= BREATH_DONE_SEC && dayKey(s.date) === todayKey),
-    walk: todaySteps != null && avg != null && todaySteps >= walkThreshold(avg, r.types.walk.time),
-  }
+  const walkDone = todaySteps != null && avg != null && todaySteps >= walkThreshold(avg, r.types.walk.time)
 
   const studyDays = Array.isArray(study?.days) ? study.days : []
   const studyOn = r.types.study.on && studyDays.length > 0 && toMinutes(study?.time) != null
@@ -154,12 +146,11 @@ export function planNotifications({ now = new Date(), reminders, study = null, h
       const atMs = at.getTime()
       if (atMs <= nowMs) continue // geçmiş an: kurulmaz, günlüğe de yazılmaz
       if (atMs <= nowMs + LEAD_MS && plannedAhead.get(`${key}|${type}`) !== atMs) continue // çok yakın yeni an kurulmaz
-      if (d === 0 && firedToday.has(type)) continue
       let skipReason = null
       if (!cfg.days.includes(day.getDay())) skipReason = 'day'
       else if (type === 'walk' && avg == null) skipReason = 'noData'
       else if (inFocus(at.getTime())) skipReason = 'focus'
-      else if (d === 0 && doneToday[type]) skipReason = 'doneBefore'
+      else if (d === 0 && type === 'walk' && walkDone) skipReason = 'doneBefore'
       const eligible = skipReason == null
       const arm = eligible ? 'send' : null
       plannedLog.push({ date: key, type, eligible, arm, skipReason, plannedAt: at.toISOString() })
