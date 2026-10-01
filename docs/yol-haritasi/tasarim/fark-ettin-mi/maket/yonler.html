@@ -154,21 +154,22 @@ const chartLab = (light) => `<div style="display:flex;justify-content:space-betw
 const V = { A: {}, B: {}, C: {} }
 // ================= Yön A: sade kartlar =================
 V.A.intro = () => `${status()}<div class="body">${topBar(0)}
-  <div class="fill card"><div class="scn">${scene(200, 520)}</div></div>
+  <div class="fill card"><div class="scn">${scene(220, 470, { vy: 400, vh: 420 })}</div></div>
   <div style="display:flex;align-items:center;gap:14px;margin-top:16px;flex:none">${carIco(W320 ? 54 : 70)}<div><span class="ey">Görevin · 2 dk</span><h1 style="margin-top:4px">Mavi arabaları say</h1></div></div>
-  <div class="nef" style="margin-top:14px"><div class="iris"></div><p>Gözün mavi arabalarda olsun. Sonra iki sahnede neyin değiştiğini bulacaksın.</p></div>
-  <p class="small" style="margin:14px 0 10px">${FOOT}</p>
+  <div class="nef" style="margin:14px 0 16px"><div class="iris"></div><p>Gözün mavi arabalarda olsun. Sonra iki sahnede neyin değiştiğini bulacaksın.</p></div>
   <button class="btn">Yürümeye başla</button></div>`
 V.A.change = () => `${status()}<div class="body">${topBar(52)}
   <span class="ey">Ne değişti? · sahne 2 / 4</span><h1 style="margin-top:6px">Bir şey değişti. Nerede?</h1>
-  <div class="fill card" style="margin:14px 0 12px"><div class="scn">${scene(470, 520, { people: changed })}</div></div>
-  <div class="row2" style="margin-bottom:12px"><span class="meta"><span class="dots"><i class="on"></i><i></i><i></i></span>1. bakış</span><span class="meta" style="color:var(--ink-3)">Sahnede 14 şey</span></div>
+  <div class="fill card" style="margin:14px 0 12px"><div class="scn">${scene(380, 520, { people: changed, vy: 330, vh: 470 })}</div></div>
+  <div class="row2" style="margin-bottom:12px"><span class="meta"><span class="dots"><i class="on"></i><i></i><i></i></span>1. bakış</span><span class="meta" style="color:var(--ink-3)">Sahnede 14 nesne</span></div>
   <button class="btn ghost">Bulamadım, bir daha göster</button></div>`
+const SW = (c) => `<span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:${F.C[c]};vertical-align:-2px;border:1.5px solid rgba(0,0,0,.15)"></span>`
 V.A.found = () => `${status()}<div class="body">${topBar(58)}
-  <span class="ey">Ne değişti? · sahne 2 / 4</span><h1 style="margin-top:6px">Buldun: şapka maviye döndü.</h1>
-  <div class="fill card" style="margin:14px 0 12px"><div class="scn">${scene(470, 520, { people: changed, spot: { ...HAT, r: 44 } })}</div></div>
-  <div class="row2" style="margin-bottom:12px"><span class="chip ok">İlk bakışta</span><span class="meta" style="color:var(--ink-3)">Sıradaki sahne: 16 şey</span></div>
-  <button class="btn">Sıradaki</button></div>`
+  <span class="ey">Ne değişti? · sahne 2 / 4</span><h1 style="margin-top:6px">Buldun!</h1>
+  <p class="lead">Şapka ${SW('kirmizi')} kırmızıydı, ${SW('mavi')} mavi oldu.</p>
+  <div class="fill card" style="margin:12px 0"><div class="scn">${scene(380, 520, { people: changed, spot: { ...HAT, r: 40 }, vy: 330, vh: 470 })}</div></div>
+  <div class="row2" style="margin-bottom:12px"><span class="chip ok">✓ İlk bakışta</span><span class="meta" style="color:var(--ink-3)">Sıradaki: 16 nesne</span></div>
+  <button class="btn">Sıradaki sahne</button></div>`
 const FOGA = { x: 760, y: SY - 80, r: 90, c: DARK ? '#3a3f48' : '#D9DEE2', ink: DARK ? '#c9d3da' : '#5B6976' }
 V.A.ask = () => `${status()}<div class="body">${topBar(80)}
   <span class="ey">Gözünden kaçan · soru 1 / 2</span><h1 style="margin-top:6px">Caddede kahkaha atan bir kadın vardı.</h1><p class="lead">Onu fark ettin mi?</p>
@@ -177,22 +178,25 @@ V.A.ask = () => `${status()}<div class="body">${topBar(80)}
 const COLS = ['turuncu', 'mor', 'yesil', 'kirmizi'], CN = { turuncu: 'Turuncu', mor: 'Mor', yesil: 'Yeşil', kirmizi: 'Kırmızı' }
 const colorOpts = `<div class="grid2">${COLS.map((c) => `<div class="opt"><span class="sw" style="background:${F.C[c]}"></span>${CN[c]}</div>`).join('')}</div>`
 V.A.ask2 = () => `${status()}<div class="body">${topBar(86)}
-  <span class="ey">Gözünden kaçan · soru 1 / 2</span><div style="display:flex;gap:8px;margin-top:8px"><span class="chip sel">Görmedim</span></div><h1 style="margin-top:10px">Elbisesi ne renkti?</h1><p class="lead">Görmediysen de tahmin et.</p>
+  <span class="ey">Gözünden kaçan · soru 1 / 2</span><h1 style="margin-top:6px">Elbisesi ne renkti?</h1><p class="lead">Görmedin; yine de tahmin et.</p>
   <div class="fill card" style="margin:14px 0"><div class="scn" style="filter:grayscale(1) contrast(.85) brightness(${DARK ? .8 : 1.05})">${scene(560, 420, { fog: { ...FOGA, r: 70 }, vy: 260, vh: 420 })}</div></div>
   ${colorOpts}</div>`
 function meter(n = 16, base = 11, max = 30) {
-  let o = '<div style="display:grid;grid-template-columns:repeat(15,1fr);gap:5px;margin-top:14px">'
-  for (let i = 1; i <= max; i++) o += `<i style="display:block;aspect-ratio:1;border-radius:50%;background:${i <= n ? 'var(--accent-g)' : 'var(--surface-2)'};${i === base ? 'outline:2px dashed var(--ink-3);outline-offset:2px;' : ''}"></i>`
+  let o = `<div style="display:grid;grid-template-columns:repeat(15,1fr);gap:${W320 ? 4 : 5}px;margin-top:14px;flex:none">`
+  for (let i = 1; i <= max; i++) o += `<i style="display:block;aspect-ratio:1;border-radius:50%;background:${i <= base ? 'color-mix(in srgb, var(--accent-g) 38%, var(--surface-2))' : i <= n ? 'var(--accent-g)' : 'var(--surface-2)'}"></i>`
   return o + '</div>'
 }
 V.A.result = () => `${status()}<div class="body">${topBar(100)}
-  <span class="ey">Bugünkü turun</span>
-  <div style="display:flex;align-items:baseline;gap:10px;margin-top:10px"><b style="font:800 ${W320 ? 54 : 68}px/0.95 var(--font-display);letter-spacing:-.05em">16</b><span style="font:700 20px var(--font-display);color:var(--ink-2)">nesne</span></div>
-  <p class="lead">Değişikliği 16 nesnelik kalabalıkta buldun.</p>
+  <span class="ey">Bugünkü en kalabalık sahnen</span>
+  <div style="display:flex;align-items:baseline;gap:10px;margin-top:8px;flex:none"><b style="font:800 ${W320 ? 54 : 68}px/0.95 var(--font-display);letter-spacing:-.05em">16</b><span style="font:700 22px var(--font-display);color:var(--ink-2)">nesne</span></div>
   ${meter()}
-  <div style="display:flex;gap:8px;align-items:center;margin-top:12px"><span class="chip ok">Başlangıcından iyi</span><span class="small">kesikli halka: başlangıcın, 11</span></div>
-  <div class="fill card" style="margin:14px 0 12px"><div class="scn">${scene(470, 520, { people: changed, spot: { ...HAT, r: 44 } })}</div><span class="chip" style="position:absolute;left:10px;bottom:10px;background:rgba(12,18,26,.8);color:#fff">Bugün buldun: şapka</span></div>
-  ${ROWS}
+  <div style="display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap;flex:none"><span class="chip ok" style="white-space:nowrap">Başlangıcından iyi</span><span class="meta" style="color:var(--ink-2)">Başlangıcın 11 → bugün 16</span></div>
+  <div class="fill card hide320" style="margin:14px 0 0"><div class="scn">${scene(380, 520, { people: changed, spot: { ...HAT, r: 40 }, vy: 330, vh: 470 })}</div></div>
+  <div class="fill" style="display:${W320 ? 'block' : 'none'}"></div>
+  <div class="rows" style="margin-top:12px">
+    <div class="r"><i class="ok">BULDUN</i><span>Şapkanın rengi değişti</span></div>
+    <div class="r"><i class="ok">TAM</i><span>Mavi araba: <b>5</b> geçti, sen de 5 dedin</span></div>
+    <div class="r"><i class="no">KAÇTI</i><span>Kahkaha atan kadının elbisesi: <b>turuncu</b></span></div></div>
   <button class="btn" style="margin-top:12px">Bitti</button></div>`
 
 // ================= Yön B: sahne her yerde, cam katmanlar =================
@@ -272,11 +276,14 @@ V.C.result = () => `${status()}<div class="body">${topBar(100)}
 V.home = () => `${status()}<div class="body" style="gap:10px"><span class="ey" style="margin-top:4px">Bugünün yolu · 6. gün</span>
   <div style="border-radius:24px;background:var(--surface);border:1px solid var(--border);padding:16px;flex:none">
     <div style="display:flex;gap:10px;align-items:center;font-weight:700;font-size:14px;color:var(--ink-3)"><div class="iris" style="width:26px;height:26px"></div>Nef</div>
-    <p style="margin-top:10px;font-size:${W320 ? 16 : 18}px;line-height:1.4;font-weight:600">Yolunda yeni bir durak var. Bir caddeden geçip neyin değiştiğini bulacaksın.</p>
+    <p style="margin-top:10px;font-size:${W320 ? 16 : 18}px;line-height:1.4;font-weight:600">Yoluna yeni bir durak geldi. Caddede neyin değiştiğini bulacaksın.</p>
     <div class="card" style="position:relative;height:${W320 ? 96 : 140}px;margin-top:12px;border-radius:16px"><div class="scn">${scene(500, 420, { vy: 360, vh: 280 })}</div></div>
     <button class="btn" style="margin-top:12px;height:48px;font-size:16px">Fark Ettin mi? · 2 dk</button></div>
-  <div class="r"><i class="ok">✓</i><span>Göz egzersizleri ve Nefes tamam</span></div>
-  <div class="r"><span>Sırada: Yılan oyunu · 1 dk</span></div></div>`
+  <div class="r"><i class="ok">✓</i><span>Göz egzersizleri · 4 dk</span></div>
+  <div class="r"><i class="ok">✓</i><span>Nefes · 3 dk</span></div>
+  <div class="r" style="border:2px solid var(--accent-g);background:var(--surface)"><i style="background:color-mix(in srgb, var(--accent-g) 16%, transparent);color:var(--accent)">YENİ</i><span><b>Fark Ettin mi?</b> · Ne değişti? · 2 dk</span></div>
+  <div class="r hide320"><span>Yılan oyunu · 1 dk</span></div>
+  <div class="r hide320"><span>Göz kırpma · 1 dk</span></div></div>`
 
 const fn = S_ === 'home' ? V.home : (V[D][S_] || V[D].intro)
 document.body.className = D
