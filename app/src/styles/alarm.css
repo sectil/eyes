@@ -66,6 +66,8 @@
 .al-q { display: flex; flex-direction: column; gap: 10px; }
 .al-q > h2 { margin: 0; font-size: 1.1rem; font-weight: 650; letter-spacing: -0.01em; }
 .al-q-sub { margin: 0; font-size: 0.875rem; line-height: 1.45; color: var(--ink-3); }
+.al-q-sub.al-days-sub { color: var(--ink-2); } /* "Hangi günler?" açıklaması gri değil (2. tur) */
+.al-once { margin: 0; font-size: 0.95rem; font-weight: 650; line-height: 1.4; color: var(--ink); } /* tek seferlik: ne zaman çalacak (2. tur) */
 .al-q-label { margin: 4px 0 0; font-size: 0.9rem; font-weight: 600; color: var(--ink-2); }
 
 .al-chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -142,14 +144,23 @@
 .hh-fact.al-fact .al-fact-ar { margin-left: auto; color: var(--ink-3); }
 .hh-fact.al-fact.off, .hh-fact.al-fact.off b { color: var(--ink-3); }
 .hh-fact.al-fact.off .f5 { opacity: 0.55; }
-/* Kayıt açık ama telefonda alarm yok: uyarı rengi; dar ekranda satır kırılır (cümle sayı satırlarından uzun) */
-.hh-fact.al-fact.miss { white-space: normal; color: var(--warn); }
-.hh-fact.al-fact.miss .f5 { color: var(--warn); }
-/* "Yeniden kur" bölünmez; dar ekranda satır "·"den sonra kırılır, "Yeniden kur" bütün olarak alt satıra geçer */
-.hh-fact.al-fact.miss .al-nw { white-space: nowrap; }
-/* Dokunma alanı en az 44 pt: görünmez ::before dikeyde taşar; hap büyümez, komşular itilmez */
-.hh-fact.al-fact.miss { position: relative; }
-.hh-fact.al-fact.miss::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: max(100%, 44px); transform: translateY(-50%); }
+/* Kayıt açık ama telefonda alarm yok (2. tur): haplardan ayrı, tam genişlikte uyarı kartı. Yalnız tokenlar (zemin
+   --warn-bg, kenar --warn %45: styles/gokyuzu.css .gk-sun ile aynı); yalnız "Yeniden kur" dokunulur. ≤ 360 px'te düğme
+   metnin altına tam genişlikte iner. */
+.al-miss {
+  flex: 1 1 100%; display: flex; align-items: center; gap: 8px 12px; padding: 12px 12px 12px 14px;
+  border-radius: var(--radius-sm); background: var(--warn-bg); border: 1px solid color-mix(in srgb, var(--warn) 45%, transparent);
+}
+.al-miss-ic { flex: none; color: var(--warn); }
+.al-miss-tx { flex: 1 1 auto; min-width: 0; display: grid; gap: 2px; }
+.al-miss-tx b { font: 650 0.92rem/1.3 var(--font-body); color: var(--warn); text-wrap: balance; } /* 390 pt: "değil" tek kalmasın */
+.al-miss-tx span { font: 500 0.85rem/1.35 var(--font-body); color: var(--ink-2); }
+.al-miss .al-miss-btn { flex: none; min-height: 44px; }
+@media (max-width: 360px) {
+  .al-miss { flex-wrap: wrap; }
+  .al-miss-tx { flex-basis: calc(100% - 32px); }
+  .al-miss .al-miss-btn { width: 100%; }
+}
 /* Alt sayfa */
 .al-sh-back { position: fixed; inset: 0; z-index: 1000; background: rgba(2, 5, 8, 0.6); display: flex; align-items: flex-end; justify-content: center; }
 .al-sh {

@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AlarmClock, ChevronRight, Moon, PencilLine, AlarmClockOff } from 'lucide-react'
 import {
-  nextRing, untilText, hhmm, minOfDay, daysLabel, dayShort, sleepMinutes, bedtimeFor, withSuffix, SLEEP_TARGET_H,
+  nextRing, untilText, hhmm, minOfDay, daysLabel, dayShort, sleepMinutes, bedtimeFor, withSuffix, SLEEP_TARGET_H, WEEKDAY_LONG,
 } from '../lib/alarm.js'
 import { loadAlarm, loadAlarmLog, saveAlarm, addAlarmEvent } from '../lib/alarmLog.js'
 import { cancelAlarm, scheduleAlarm } from '../lib/alarmNative.js'
@@ -14,7 +14,8 @@ import '../styles/alarm.css'
 // Kurulu: "07:00 alarm · yarın ›"; dokununca alttan seçenekler (düzenle · uyku sesi · kapat). Kurulu değil: sönük
 // "— alarm yok", dokununca kurulum. Profil → Alarm → "Ana sayfada göster" kapalıysa satır da yok.
 // Kayıt açık ama telefonda (AlarmKit) alarm yok (status.missing; lib/alarmNative.js nativeMissing, sahip 2026-10-01):
-// "Alarm telefonda kurulu değil · Yeniden kur", dokununca kurulum (kayıt kendi ayarıyla açılır).
+// hap değil, tam genişlikte uyarı kartı (2. tur, 5 kişilik kapı): "Alarm telefonda kurulu değil" / "Yarın 06:35'te çalmaz."
+// ve sağda "Yeniden kur" düğmesi (kurulum, kayıt kendi ayarıyla açılır). Yalnız düğme dokunulur (tek eylem).
 const UNDO_MS = 5000
 
 export default function AlarmLine({ status, onStart, now = new Date() }) {
@@ -28,6 +29,7 @@ export default function AlarmLine({ status, onStart, now = new Date() }) {
   const undoRef = useRef(null)
   const firstRef = useRef(null)
   const rowRef = useRef(null)
+  const missId = useId()
   useEffect(() => subscribePrefs((p) => setShow(p.alarmCard)), [])
   useEffect(() => {
     if (!undo) return undefined
@@ -117,12 +119,19 @@ export default function AlarmLine({ status, onStart, now = new Date() }) {
   // Kart/satır kapatılsa da "Geri al" şeridi 5 sn kalır (gövdede)
   if (!show) return toast || null
   if (next && status?.missing && alarm.kind === 'alarmkit') {
+    // Gün sözcüğü sıradaki çalıştan (dayShort): bugün · yarın · gün adı
+    const d = dayShort(next, now)
+    const dayWord = d === 'bugün' ? 'Bugün' : d === 'yarın' ? 'Yarın' : WEEKDAY_LONG[next.getDay()]
     return (
       <>
-        <button type="button" className="hh-fact al-fact miss" onClick={() => onStart('alarm')}>
-          <AlarmClockOff size={14} aria-hidden="true" className="f5" /><span>Alarm telefonda kurulu <span className="al-nw">değil ·</span> <span className="al-nw">Yeniden kur</span></span>
-          <ChevronRight size={13} aria-hidden="true" className="al-fact-ar" />
-        </button>
+        <div className="al-miss">
+          <AlarmClockOff size={20} aria-hidden="true" className="al-miss-ic" />
+          <div className="al-miss-tx">
+            <b id={`${missId}t`}>Alarm telefonda kurulu değil</b>
+            <span id={`${missId}s`}>{`${dayWord} ${withSuffix(minOfDay(next), 'loc')} çalmaz.`}</span>
+          </div>
+          <button type="button" className="btn btn-secondary btn-sm al-miss-btn" aria-describedby={`${missId}t ${missId}s`} onClick={() => onStart('alarm')}>Yeniden kur</button>
+        </div>
         {toast}
       </>
     )

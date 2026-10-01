@@ -242,13 +242,15 @@ describe('Ana sayfa alarm satırı ve kartı (v5)', () => {
     expect(r.text()).toContain('alarm yok')
     expect(r.text()).toContain('Alarm kurayım mı?')
   })
-  it('kayıt açık ama telefonda AlarmKit alarmı yok (status.missing): "Alarm telefonda kurulu değil · Yeniden kur" kuruluma götürür', async () => {
+  it('kayıt açık ama telefonda AlarmKit alarmı yok (status.missing): uyarı kartı, "Yeniden kur" düğmesi kuruluma götürür', async () => {
     const alarm = { on: true, hour: 6, minute: 35, days: [1, 2, 3, 4, 5, 6], sound: 'phone', sleep: 'off', wake: 'none', kind: 'alarmkit', setAt: at(2026, 9, 27).toISOString() }
     mem.set(ALARM_KEY, JSON.stringify(alarm))
     const onStart = vi.fn()
     const r = await mount(card({ onStart, status: { platform: 'alarmkit', auth: 'authorized', missing: true } }))
-    expect(r.text()).toBe('Alarm telefonda kurulu değil · Yeniden kur')
-    await r.tap('Alarm telefonda kurulu değil · Yeniden kur')
+    // Pazartesi akşamı, alarm Pt–Ct 06:35: sıradaki çalış yarın
+    expect(r.text()).toBe("Alarm telefonda kurulu değilYarın 06:35'te çalmaz.Yeniden kur")
+    expect(r.container.querySelectorAll((n) => n.nodeName === 'BUTTON').length).toBe(1) // yalnız düğme dokunulur
+    await r.tap('Yeniden kur')
     expect(onStart).toHaveBeenCalledWith('alarm')
     expect(sheetText()).toBe('') // seçenekler sayfası açılmaz
     // telefonda kuruluysa bugünkü satır
@@ -341,19 +343,21 @@ describe('kurulum sayfası', () => {
     await r.tap('Hayır')
     expect(r.text()).not.toContain('Ne zaman sussun?')
   })
-  it('gün seçilmemişse kur düğmesi "Yalnız yarın kur" (tek seferlik kurar); ilk çalış bugünse eski yazı kalır', async () => {
+  it('gün seçilmemişse özet "Yarın Salı 07:00\'de bir kez çalar.", düğme "Yarın 07:00\'ye kur" (tek seferlik kurar); ilk çalış bugünse "Bugün"', async () => {
     vi.useFakeTimers({ toFake: ['Date'] })
     vi.setSystemTime(EVE)
     onTestFinished(() => vi.useRealTimers())
     const web = await mount(h(AlarmSetup, { status: { platform: 'web', auth: null }, now: EVE, onBack: () => {} }))
     await web.tap('Her gün')
     await web.tap('Her gün')
-    expect(web.text()).toContain('Yalnız yarın kur')
+    expect(web.text()).toContain("Yarın Salı 07:00'de bir kez çalar.")
+    expect(web.text()).toContain("Yarın 07:00'ye kur")
     expect(web.text()).not.toContain('Kur · 07:00')
     await web.tap('Pt')
     expect(web.text()).toContain('Kur · 07:00')
-    expect(web.text()).not.toContain('Yalnız yarın kur')
-    // uyku sesiyle: "Yalnız kur · 07:00" yerine "Yalnız yarın kur"; dokununca tek seferlik kurulur
+    expect(web.text()).not.toContain('bir kez çalar')
+    expect(web.text()).not.toContain("Yarın 07:00'ye kur")
+    // uyku sesiyle: "Yalnız kur · 07:00" yerine "Uyku sesi olmadan kur"; dokununca tek seferlik kurulur
     native.scheduleAlarm.mockClear()
     native.scheduleAlarm.mockResolvedValueOnce({ ok: true, snooze: false })
     const onDone = vi.fn()
@@ -361,19 +365,21 @@ describe('kurulum sayfası', () => {
     await r.tap('Her gün')
     await r.tap('Her gün')
     expect(r.text()).toContain('Kur ve uyku sesini başlat')
-    await r.tap('Yalnız yarın kur')
+    expect(r.text()).toContain("Yarın Salı 07:00'de bir kez çalar.")
+    await r.tap('Uyku sesi olmadan kur')
     expect(native.scheduleAlarm).toHaveBeenCalledWith(expect.objectContaining({ hour: 7, minute: 0, days: [], at: at(2026, 9, 29, 7, 0).toISOString() }), 'alarmkit')
     expect(onDone).toHaveBeenCalledWith(undefined)
     expect(loadAlarmLog().at(-1)).toMatchObject({ type: 'set', days: [], snooze: false })
-    // sabah 05.00'te 07:00 tek seferlik bugün çalar: "yarın" yazılmaz
+    // sabah 05.00'te 07:00 tek seferlik bugün çalar: "yarın" yazılmaz, "Bugün"
     mem.clear()
     const dawn = at(2026, 9, 29, 5, 0)
     vi.setSystemTime(dawn)
     const m = await mount(h(AlarmSetup, { status: { platform: 'web', auth: null }, now: dawn, onBack: () => {} }))
     await m.tap('Her gün')
     await m.tap('Her gün')
-    expect(m.text()).not.toContain('Yalnız yarın kur')
-    expect(m.text()).toContain('Kur · 07:00')
+    expect(m.text()).not.toContain('Yarın')
+    expect(m.text()).toContain("Bugün 07:00'de bir kez çalar.")
+    expect(m.text()).toContain("Bugün 07:00'ye kur")
   })
   it('"Her gün" yedi günü seçer, yeniden dokununca boşaltır; düzen notu yalnız eksik günlerde', async () => {
     const r = await mount(h(AlarmSetup, { status: { platform: 'web', auth: null }, now: EVE, onBack: () => {} }))
