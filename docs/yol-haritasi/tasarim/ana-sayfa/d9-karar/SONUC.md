@@ -27,3 +27,9 @@ güncelleme günü neyin değiştiği anlatılmıyor, eski duraklarda "Yeni" roz
 nokta sayıları açıklamasız, üstte boşluk. Sahibe gönderilmedi (mükemmel değil).
 Sahibe sorular: hava hapında Apple Weather atfı; "Nefes · 5 dk mola" gün başında gizli; 7 günden ötesi her gün mü,
 yoksa bölüm kartı mı.
+
+## Sahip kararları (2026-10-01, D9 sonrası)
+1. Gelecek: **yarın ayrıntılı, sonrası bölüm kartları** (her 7 günlük bölüm bir kart: ne yeni geliyor, sonundaki ödül).
+2. Geçmiş: **Ana sayfadan çıkar, Gelişim'de durur** (bölüm özeti).
+3. Nef yorumları: **taslak cümleler hazırlanır, sahip onaylar**; onaysız koda girmez.
+4. Hava hapında **küçük Apple Hava Durumu işareti** de olur.
