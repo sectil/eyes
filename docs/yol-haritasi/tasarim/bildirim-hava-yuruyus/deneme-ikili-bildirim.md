@@ -25,3 +25,11 @@ Kendi incelemem: P4 GEÇERSİZ. Değerlendiricilere "raporda başlangıç günü
 FirstReport.jsx (HEAD) "İlk günlerinde neler oldu": düzen, uygulama öncesi→sonrası puanlar, modül ölçümleri. Göz
 başlangıcı en erken 22. günde. P4 rapordaki olmayan bir şeyi vaat ediyor. Hata benim: ekranı açmadan bağlam yazdım.
 T6: kabul (dokunuş managementURL açar; VARSAYIM, cihazda doğrulanacak).
+
+## Sahip kararları ve rapor metni yeni tur (2026-10-01)
+- Deneme metni T6: sahip "Onaylıyorum".
+- Rapor metni, gerçek ekranla yeni tur (FirstReport görüntüsü değerlendiricilere verildi):
+  - R3 "İlk 5 günün raporu hazır / Ne kadar düzenliydin, molalardan sonra nasıl hissettin, bir bak." 5/5.
+  - R1 2/5, R2 0/5, R4 0/5.
+  - Kendi incelemem: R3 raporun Düzen ve Uygulamalardan sonra kartlarıyla örtüşüyor; "mola" uygulamanın kendi dili ("Nefes · 5 dk mola"). Kabul.
+- Sahip R3'ü onayladı. Kodlama: rapor 7302'de, deneme bitişi yeni kimlikte, dokununca Apple abonelik sayfası.
