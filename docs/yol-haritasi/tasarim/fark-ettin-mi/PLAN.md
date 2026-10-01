@@ -151,7 +151,7 @@ nef: {
   kreitz2020, simons2024, schofield2015, pandit2022, simons2010, most2001, luck1997, dai2019, simons2016. `FACTS`
   kartları bu anahtarlara bağlanır (DOI ve PMID tek yerden).
 
-## 5. Ekranlar (maketler `maket/maket.html?s=…`, kapı sonuçları `kapi/`)
+## 5. Ekranlar (seçilen yön A: `maket/yonler.html?d=A&s=…`; kapı sonuçları `kapi/`)
 
 1. **Görev** (`intro`): üstte sahnenin kendisi (tam genişlik), görev kartı ikonla, tur bölümleri 01–03, Nef satırı,
    iddia sınırı, "Yürümeye başla".
@@ -213,10 +213,24 @@ Her aşama sonunda yalnız ilgili testler; sonda tam takım ve derleme (İş ak�
 
 ## 9. Sahibe sorular
 
-1. Ses: sahne sesi (cadde uğultusu) ilk sürümde yok. İstenirse ücretli üretim (ElevenLabs ses efekti) onayınla.
-2. Işığa duyarlılık sorusu: Ne değişti? geçişi yanıp sönme değil. Yine de Tek Bakışta'daki soruyu burada da soralım mı?
-   Önerim: hayır.
-3. "Beynin görmüş olabilir" cümlesi kalksın mı? Önerim: evet (METINLER Ş1 yerine).
+5 saniye kapısı: iki tur, ardından üç yön (A seçildi, 4 kişiden 3'ü), ardından A'nın doğrulaması. Doğrulama geçmedi
+(`kapi/5sn-A-son.md`); kurala göre durup soruyorum. Bulguların çoğu düzeltilebilir hatalar; aşağıdakiler senin kararın.
+
+1. **Soru biçimi.** "Kahkaha atan bir kadın vardı. Fark ettin mi?" iki kişiye yönlendirici geldi. Önerim: "Caddede
+   kahkaha atan biri var mıydı? Vardı · Yoktu · Emin değilim"; bazı turlarda o kişi gerçekten yoktur. "Gördüm"
+   cevabı şişmez, ölçü dürüst olur.
+2. **Ölçü sözcüğü.** "16 nesne": dört kişi en anlaşılır buldu, bir kişi insanlar için soğuk buldu. Önerim: "nesne"
+   kalsın.
+3. **İddia sınırı cümlesi.** Bugünkü "Gerçek hayatta daha çok fark ettirdiği gösterilmedi." iki kişide dil olarak
+   yanlış anlaşıldı, görev ekranında beş kişiden dördü "neden yapayım" dedi. Önerim: cümle "Bu bir gözlem
+   alıştırması. Günlük hayatta fark etmeyi artırdığı gösterilmedi." olsun ve görev ekranından sonuç ekranının altına
+   taşınsın.
+4. **"Beynin görmüş olabilir"** cümlesi kalksın mı? Önerim: evet.
+5. **Ses.** İlk sürümde yok. İstersen ücretli ses üretimi senin onayınla.
+6. **Işığa duyarlılık sorusu.** Ne değişti? geçişi yanıp sönme değil; Tek Bakışta'daki soru burada sorulmasın.
+   Önerim: sorulmasın.
+
+Kararlarından sonra düzeltilmiş A, beş yeni kişiyle tek turda sınanır; geçmeyeni sana göstermem.
 
 ## 10. Cihaz denetim listesi
 
