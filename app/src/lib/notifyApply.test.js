@@ -264,7 +264,8 @@ describe('cancelOwn', () => {
     expect(r).toEqual({ ok: true })
     const ids = f.LN.cancel.mock.calls[0][0].notifications.map((n) => n.id)
     // 7400–7499, 7500–7509, 7700–7701, 7800–7867 (uzlaştırılan) + 7710–7719 (yalnız iptal); PLAN.v1 §5.5 madde 2
-    expect(ids).toHaveLength(190)
+    // Nef 7900–7919 (Nef PLAN, ANA_OTURUM_ISTEMI madde 5)
+    expect(ids).toHaveLength(210)
     expect(ids).toContain(7400)
     expect(ids).toContain(7499)
     expect(ids).toContain(7509)
@@ -398,6 +399,26 @@ describe('yeni özellik (PLAN.v1 §5.5 madde 2–3)', () => {
     await run(createApplier(async () => ({ LN: g.LN })), plan([nudge(7400, inMin(120))]))
     expect(g.LN.schedule.mock.calls[0][0].notifications[0]).not.toHaveProperty('threadIdentifier')
     expect(g.LN.schedule.mock.calls[0][0].notifications[0]).not.toHaveProperty('relevanceScore')
+  })
+
+  // Nef 7900–7919 (Nef PLAN, ANA_OTURUM_ISTEMI madde 5)
+  it('Nef 7900–7919: kurulur ve yeni kimlik sayılır (grouped), açılışta teslim edilmişi kaldırılır, plan istemezse ve cancelOwn\'da iptal; 7920 dokunulmaz', async () => {
+    const nefN = (id, at) => ({ id, at, type: 'nef', title: 'Yürüyüşün yağmura denk geliyor', body: 'b\nKaynak: Apple Weather', extra: { kind: 'nef', type: 'rainOnWalk' }, level: 'active' })
+    const f = withDelivered(fakeLN({ pending: [other(7901), other(7920)] }), [7900, 7919, 7403])
+    const ap = createApplier(async () => ({ LN: f.LN }))
+    const p = ap.applyPlan({ ...plan([nudge(7400, inMin(120)), nefN(7900, inMin(240))]), grouped: true }, { tidy: true })
+    await vi.advanceTimersByTimeAsync(400)
+    expect(await p).toMatchObject({ ok: true, scheduled: 2, cancelled: 1 })
+    const sent = f.LN.schedule.mock.calls[0][0].notifications
+    expect(sent.map((n) => n.id).sort()).toEqual([7400, 7900])
+    expect(new Set(sent.map((n) => n.threadIdentifier))).toEqual(new Set(['nefona'])) // Nef yeni kimliktir: grup açılır
+    expect(f.LN.removeDeliveredNotifications.mock.calls[0][0].notifications.map((n) => n.id)).toEqual([7900, 7919])
+    expect([...f.store.keys()].sort()).toEqual([7400, 7900, 7920])
+    await ap.cancelOwn()
+    const ids = f.LN.cancel.mock.calls.at(-1)[0].notifications.map((n) => n.id)
+    for (const id of [7900, 7919]) expect(ids).toContain(id)
+    for (const id of [7899, 7920]) expect(ids).not.toContain(id)
+    expect([...f.store.keys()]).toEqual([7920])
   })
 
   it('grouped ama kurulacak yeni bildirim yoksa (yalnız textKey) gruplama yok: 74xx bugünkü biçimde, açılışta temizlik yok', async () => {

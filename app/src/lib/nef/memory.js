@@ -90,6 +90,21 @@ export function recordSaid(entry, { storage, now = new Date() } = {}) {
   return next
 }
 
+// Planlayıcının (notify.js planNef) bildirim kararlarını yazar: saati henüz gelmemiş 'notify' satırları silinir (plan her
+// açılışta yeniden kurulur; eski karar yerini yenisine bırakır), entries eklenir. entries: planAll(...).nef
+// ([{ type, key, id, at: ISO (bildirimin saati), date }]). Saati geçmiş satırlar (gönderilmiş sayılır) korunur.
+// VARSAYIM: kurulan bildirim saatinde gönderilmiş sayılır (iOS teslimi JS'e bildirmez). Döner: yeni liste
+export function syncPlannedNotify(entries, { storage, now = new Date() } = {}) {
+  const nowMs = new Date(now).getTime()
+  const kept = loadSaid({ storage, now }).filter((r) => r.channel !== 'notify' || time(r) <= nowMs)
+  const add = (Array.isArray(entries) ? entries : [])
+    .map((e) => normalizeRow({ ...e, channel: 'notify' }))
+    .filter((r) => r && time(r) > nowMs)
+  const next = prune([...kept, ...add], now)
+  save(next, storage)
+  return next
+}
+
 // Kartın ya da bildirimin sonucu: { id, date?, channel? } ile eşleşen en son satıra outcome yazılır
 export function markOutcome(match, outcome, { storage, now = new Date() } = {}) {
   const rows = loadSaid({ storage, now })

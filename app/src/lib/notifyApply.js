@@ -11,7 +11,8 @@ import { isIOSApp, setWalkGuards } from './native.js'
 export { notifyPermission, askNotifyPermission } from './restNotify.js'
 
 // Kendi aralığımız (uzlaştırılır; PLAN.v1 §5.5 madde 2): 7400 + gün×10 + tür (gün 0..6), çalışma oturumu 7500–7503
-// (VARSAYIM; 7509'a dek ayrıldı), sabah havası 7700–7701, modül hatırlatmaları 7800–7859, legacy ek saatleri 7860–7867.
+// (VARSAYIM; 7509'a dek ayrıldı), sabah havası 7700–7701, modül hatırlatmaları 7800–7859, legacy ek saatleri 7860–7867,
+// Nef 7900–7919.
 // Yalnız iptal (cancelOwn, rıza geri çekme, "Tüm verileri sil"): 7710–7719 yürüyüş sorusu ve "fark et" teklifi; onları
 // Swift kurar, JS uzlaştırmaz. 7301 (mola bitti), 7302 (deneme) ve 7600–7607 bu aralıklarda değil: dokunulmaz.
 const OWN_RANGES = [
@@ -20,6 +21,7 @@ const OWN_RANGES = [
   [7700, 7701],
   [7800, 7859],
   [7860, 7867],
+  [7900, 7919], // Nef'in kendi bildirimi (lib/nef/notify.js; Nef PLAN §4.3, ANA_OTURUM_ISTEMI madde 5)
 ]
 const CANCEL_ONLY_RANGES = [[7710, 7719]]
 const idsOf = (ranges) => ranges.flatMap(([a, b]) => Array.from({ length: b - a + 1 }, (_, i) => a + i))
@@ -38,7 +40,7 @@ const isTidyId = (id) => inRanges([...OWN_RANGES, ...CANCEL_ONLY_RANGES], id) &&
 // Yeni özelliğin kurduğu kimlikler (sabah havası, modül hatırlatmaları, ek saatler). Gruplama (threadIdentifier,
 // relevanceScore, açılış temizliği) yalnız bunlardan en az biri gerçekten kurulacaksa devreye girer: metni bağlanmamış
 // bildirim kurulmadığı için plan.grouped tek başına yetmez (inceleme; B1a'da metinler bağlanınca kendiliğinden açılır).
-const isNewId = (id) => inRanges([[7700, 7701], [7800, 7867]], id)
+const isNewId = (id) => inRanges([[7700, 7701], [7800, 7867], [7900, 7919]], id)
 
 // Bildirim Merkezi'nde tek grup (yalnız yeni özellik açıkken). relevanceScore özet sıralaması içindir (VARSAYIM:
 // çalışma oturumu en üstte, sonra hava, deney ve ek saatler, en altta modül hatırlatmaları).

@@ -52,6 +52,16 @@ describe('bildirim', () => {
     expect(n.text).not.toMatch(/derece/)
   })
 
+  it('notifyBodyMax: gövde sınırı daralınca sığmayan cümle seçilmez; hiçbiri sığmazsa bildirim yok (kart etkilenmez)', () => {
+    const moments = buildMoments(rainCtx({ walk: { at: 1170, source: 'remind' } }))
+    const n = ch(say({ moments, notifyBodyMax: 88 }), 'notify')
+    expect(n).toBeDefined()
+    expect([...n.text].length).toBeLessThanOrEqual(88)
+    const none = say({ moments, notifyBodyMax: 20 })
+    expect(ch(none, 'notify')).toBeUndefined()
+    expect(ch(none, 'card')).toBeDefined()
+  })
+
   it('gece 01–05 bildirim yok', () => {
     const moments = buildMoments(rainCtx())
     expect(ch(say({ moments, notifyAt: new Date(2026, 9, 1, 1, 0) }), 'notify')).toBeUndefined()

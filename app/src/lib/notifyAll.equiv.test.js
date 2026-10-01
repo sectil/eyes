@@ -73,6 +73,34 @@ describe('eşdeğerlik (i): planAll ≡ taban planNotifications (yeni özellik k
   })
 })
 
+// Nef (lib/nef/notify.js): nef girdisi verilse de Nef ancak olgusu varsa (yağmur kişinin yürüyüş saatine denk) bildirim
+// ekler ya da metin zenginleştirir. Söyleyecek olgusu olmayan bağlamda çıktı tabanın kendisi.
+describe('eşdeğerlik (iii): Nef verisi var, olgusu yok → planAll ≡ taban', () => {
+  it(`${N} bağlamda Nef konuşmadıysa derin eşit; konuştuysa yalnız Nef'in kimliği eklendi ya da 7700–7701 metni değişti`, { timeout: 120000 }, () => {
+    let diffs = 0
+    let spoke = 0
+    let first = null
+    for (const { ctx, all } of contexts()) {
+      const a = planAll({ ...all, nef: { rows: [] } })
+      const b = basePlan(ctx)
+      if (a.nef?.length) {
+        spoke++
+        const rest = a.notifications.filter((n) => n.id < 7900 || n.id > 7919)
+        const same = rest.length === b.notifications.length && rest.every((n, i) => n.id === b.notifications[i].id && n.at.getTime() === b.notifications[i].at.getTime() && (isDeepStrictEqual(n, b.notifications[i]) || (n.id >= 7700 && n.id <= 7701)))
+        if (!same) diffs++
+        continue
+      }
+      if (!isDeepStrictEqual(a, b)) {
+        diffs++
+        if (!first) first = { now: ctx.now.toString(), got: a, want: b }
+      }
+    }
+    if (first) console.log('İLK FARK', first.now, '\nplanAll:', show(first.got), '\ntaban:', show(first.want))
+    expect(diffs).toBe(0)
+    expect(spoke).toBeLessThan(N / 10) // Nef çoğu bağlamda susar
+  })
+})
+
 // Sahte eklenti: her çağrıyı sırayla kaydeder (setWalkGuards dâhil)
 function recorder(pendingInit, perm, delivered) {
   const calls = []
@@ -171,7 +199,8 @@ describe('eşdeğerlik (ii): notifyApply çağrı dizisi ≡ taban notifyApply (
     const w = want[0][1].notifications.map((n) => n.id)
     expect(w.every((id) => g.includes(id))).toBe(true)
     const range = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i)
-    expect(g.filter((id) => !w.includes(id)).sort()).toEqual([...range(7700, 7701), ...range(7710, 7719), ...range(7800, 7867)])
+    // Nef 7900–7919 (Nef PLAN, ANA_OTURUM_ISTEMI madde 5)
+    expect(g.filter((id) => !w.includes(id)).sort()).toEqual([...range(7700, 7701), ...range(7710, 7719), ...range(7800, 7867), ...range(7900, 7919)])
     expect(got[1]).toEqual(want[1])
   })
 

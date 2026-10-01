@@ -11,7 +11,8 @@ import { toMinutes } from './reminders.js'
 import { dayKey } from './habitLog.js'
 import { createApplier } from './notifyApply.js'
 import { nextRing } from './alarm.js'
-import { mulberry32, makeContext, makeFeatureInput, MODULES } from '../../test/notifyCtx.js'
+import { mulberry32, makeContext, makeFeatureInput, makeWeatherInput, MODULES } from '../../test/notifyCtx.js'
+import { NEF_ID, NEF_ID_LAST } from './nef/notify.js'
 
 const N = 20000
 // Saat dilimi dosya yüklenirken (NOW gibi sabitler Berlin saatiyle kurulsun); sonda geri alınır
@@ -514,5 +515,246 @@ describe('planAll: sabah havası', () => {
     expect(w).toHaveLength(1)
     expect(w[0]).toMatchObject({ id: 7700, keepPending: true })
     expect(w[0].title).toBeUndefined()
+  })
+})
+
+// Nef (lib/nef/notify.js; Nef PLAN §4.2, §4.3, §4.5): en düşük öncelik, kimlik 7900–7919, F1 zenginleştirmesi
+describe('planAll: Nef', () => {
+  const HOUR = 3600000
+  const isNef = (n) => n.id >= NEF_ID && n.id <= NEF_ID_LAST
+  const at = (h, m = 0, d = 0) => new Date(2026, 8, 30 + d, h, m)
+  // sky.js önbelleği: 30 Eylül ve 1 Ekim saatlik; rain: [başlangıç, bitiş) saat, 30 Eylül 00.00'dan sayılır
+  const wxCache = ({ rain = [19, 22], fetched = new Date(2026, 8, 30, 6, 50), feels = {} } = {}) => {
+    const d0 = new Date(2026, 8, 30)
+    const hours = Array.from({ length: 48 }, (_, h) => ({ at: new Date(2026, 8, 30 + Math.floor(h / 24), h % 24).getTime(), tempC: 18, apparentC: feels[h] ?? 17, precipChance: rain && h >= rain[0] && h < rain[1] ? 0.8 : 0.1 }))
+    return { at: fetched.toISOString(), data: { fetchedAt: fetched.getTime(), hours, days: [{ date: dayKey(d0), highC: 24 }, { date: dayKey(new Date(2026, 9, 1)), highC: 22 }] } }
+  }
+  const WALK = (time = '19:30') => REM({ walk: { on: true, time } })
+  // Deney zarı yürüyüşü bugün sessiz atmasın diye günlük elle (gönder)
+  const sendLog = (d = 0) => [{ date: dayKey(at(12, 0, d)), type: 'walk', eligible: true, arm: 'send', skipReason: null, plannedAt: at(19, 30, d).toISOString() }]
+  const nefIn = (o = {}) => base({ reminders: WALK(), log: sendLog(), weather: { cache: wxCache(), place: { il: 'İzmir', ilce: 'Gaziemir' }, localRefresh: null }, nef: { rows: [] }, ...o })
+  const without = ({ nef: _n, ...i }) => i
+  const fixed = (p) => p.notifications.filter((n) => (n.id >= 7400 && n.id <= 7599) || (n.id >= 7860 && n.id <= 7867))
+
+  it('Nef olgusu yokken (yürüyüş saati ya da yağmur yok) plan tabanın kendisi: 0 fark', () => {
+    for (const i of [nefIn({ reminders: REM() }), nefIn({ weather: { cache: wxCache({ rain: null }) } }), nefIn({ nef: null }), nefIn({ weather: null })]) {
+      const p = planAll(i)
+      expect(p).toEqual(planNotifications(i))
+      expect(p.notifications.some(isNef)).toBe(false)
+    }
+    // Öteki yeni özellikler açıkken de Nef bir şey eklemezse bildirimler aynı
+    const mr = { blink: man(['10:00']) }
+    const p = planAll(nefIn({ reminders: REM(), moduleReminders: mr }))
+    expect(p.notifications).toEqual(planAll(without(nefIn({ reminders: REM(), moduleReminders: mr }))).notifications)
+  })
+
+  it('yağmur yürüyüşe denk: tek Nef bildirimi 7900; en düşük öncelik (öteki her bildirim aynen yerinde); 74xx dokunulmaz', () => {
+    const i = nefIn({ reminders: REM({ walk: { on: true, time: '19:30' }, mola: { on: true, time: '12:30' } }), moduleReminders: { blink: man(['10:00']), yoga: auto(['17:00']) } })
+    const p = planAll(i)
+    const q = planAll(without(i))
+    const nef = p.notifications.filter(isNef)
+    expect(nef).toHaveLength(1)
+    expect(nef[0]).toMatchObject({ id: NEF_ID, type: 'nef', extra: { kind: 'nef', type: 'rainOnWalk', date: dayKey(NOW) } })
+    expect(p.notifications.filter((n) => !isNef(n))).toEqual(q.notifications)
+    expect(fixed(p)).toEqual(fixed(q))
+    expect(fixed(p).length).toBeGreaterThan(0)
+    // Nef'in yoga 17.00'ye 30 dk'dan yakın olmaması: 16.30
+    expect(hm(nef[0].at)).toBe('16:30')
+    expect(p.nef).toEqual([expect.objectContaining({ notifyId: NEF_ID, mode: 'own', channel: 'notify' })])
+    expect(nef[0].body).toMatch(/Kaynak: Apple Weather$/)
+    expect(nef[0].body).not.toMatch(/derece|°/)
+  })
+
+  it('gece 01.00–05.00 ve gece sessizliğinde yok; sessizlik daralınca kurulur', () => {
+    // Yürüyüş 08.30, yarın yağmur 08.00–11.00 → Nef 06.00 ister. Şimdi 29 Eylül 21.00, tahmin 20.50
+    const i = (quiet) => nefIn({ now: at(21, 0, -1), reminders: WALK('08:30'), log: sendLog(0), quiet, weather: { cache: wxCache({ rain: [8, 11], fetched: at(20, 50, -1) }) } })
+    const open = planAll(i({ from: '23:00', to: '06:00' })).notifications.filter(isNef)
+    expect(open.map((n) => n.at.getTime())).toEqual([at(6, 0).getTime()])
+    const p = planAll(i(null))
+    for (const n of p.notifications.filter(isNef)) expect(inNight(n.at.getTime(), null)).toBe(false)
+    expect(p.notifications.some(isNef)).toBe(false) // 07.00'den sonra öne alınacak saat kalmıyor: susar
+    // 01.00–05.00: yağmur 05.00'te, yürüyüş 06.00 → Nef 03.00 ister; hiçbir ayarla kurulmaz
+    const h = planAll(nefIn({ now: at(21, 0, -1), reminders: WALK('06:00'), log: sendLog(0), quiet: { from: '23:00', to: '06:00' }, weather: { cache: wxCache({ rain: [5, 8], fetched: at(20, 50, -1) }) } }))
+    for (const n of h.notifications.filter(isNef)) {
+      const m = minOf(n.at)
+      expect(m >= 60 && m < 300).toBe(false)
+    }
+  })
+
+  it('alarm varsa yatmadan önceki 60 dk\'da yok; çalışma oturumunda yok', () => {
+    // Alarm 03.00 → yatma 20.00, yasak 19.00'dan: yürüyüş 21.30, yağmur 21.00 → Nef 19.00 yerine 18.45
+    const bed = nefIn({ reminders: WALK('21:30'), weather: { cache: wxCache({ rain: [21, 23] }) } })
+    expect(planAll(bed).notifications.filter(isNef).map((n) => hm(n.at))).toEqual(['19:00'])
+    const alarm = { on: true, hour: 3, minute: 0, days: [0, 1, 2, 3, 4, 5, 6], at: null }
+    expect(planAll({ ...bed, alarm }).notifications.filter(isNef).map((n) => hm(n.at))).toEqual(['18:45'])
+    // Oturum 16.00–18.00: 17.00 yerine 15.45 (oturum molaları 75xx da 30 dk uzakta)
+    const now = at(15, 30)
+    const f = planAll(nefIn({ now, focus: { startedAt: at(16, 0).toISOString(), hours: 2 }, weather: { cache: wxCache({ fetched: at(15, 20) }) } }))
+    const n = f.notifications.filter(isNef)
+    expect(n.map((x) => hm(x.at))).toEqual(['15:45'])
+    for (const b of f.notifications.filter((x) => x.id >= 7500 && x.id <= 7509)) expect(Math.abs(b.at - n[0].at)).toBeGreaterThanOrEqual(MIN_APART_MIN * 60000)
+  })
+
+  it('kişi bugünkü yolunu bitirdiyse Nef bildirimi yok', () => {
+    expect(planAll(nefIn({ nef: { rows: [], pathDoneToday: true } }))).toEqual(planNotifications(nefIn()))
+    const p = planAll(nefIn({ nef: { rows: [], pathDoneToday: true }, moduleReminders: { blink: man(['10:00']) } }))
+    expect(p.notifications.some(isNef)).toBe(false)
+    expect(p.skipped).toContainEqual({ module: 'nef', date: dayKey(NOW), time: null, reason: 'pathDone' })
+  })
+
+  it('bütçe: bugün Nef konuştuysa yok; son 7 günde 4 ise yok', () => {
+    const row = (d, h = 18) => ({ at: at(h, 0, -d).toISOString(), date: dayKey(at(h, 0, -d)), type: 'rainOnWalk', key: `k${d}`, id: 'F1E-1', channel: 'notify' })
+    expect(planAll(nefIn({ nef: { rows: [row(0, 6)] } })).notifications.some(isNef)).toBe(false)
+    expect(planAll(nefIn({ nef: { rows: [1, 2, 3, 4].map((d) => row(d)) } })).notifications.some(isNef)).toBe(false)
+    expect(planAll(nefIn({ nef: { rows: [1, 2, 3].map((d) => row(d)) } })).notifications.filter(isNef)).toHaveLength(1)
+  })
+
+  it('F1 zenginleştirme: sabah havasının kimliği ve saati aynı, metni F1; ayrıca Nef bildirimi yok; sıcak yalnız kartta', () => {
+    const ALARM = { on: true, hour: 7, minute: 50, days: [0, 1, 2, 3, 4, 5, 6], at: null }
+    const i = nefIn({ morningWeather: true, alarm: ALARM, weather: { cache: wxCache({ feels: { 18: 31, 19: 31 } }), place: { il: 'İzmir', ilce: 'Gaziemir' }, localRefresh: null } })
+    const p = planAll(i)
+    const q = planAll(without(i))
+    const wp = p.notifications.find((n) => n.id === 7700)
+    const wq = q.notifications.find((n) => n.id === 7700)
+    expect(wq).toBeDefined()
+    expect(wp.at).toEqual(wq.at)
+    expect(wp.type).toBe(wq.type)
+    expect(wp.extra).toMatchObject(wq.extra)
+    expect(wp.title).not.toBe(wq.title)
+    expect(wp.body).not.toBe(wq.body)
+    expect(wp.body).toMatch(/\nKaynak: Apple Weather$/)
+    expect(wp.body).not.toMatch(/derece|issedilen|°/)
+    expect(p.notifications.some(isNef)).toBe(false)
+    expect(p.notifications.map((n) => [n.id, n.at.getTime()])).toEqual(q.notifications.map((n) => [n.id, n.at.getTime()]))
+    expect(fixed(p)).toEqual(fixed(q))
+    expect(p.nef).toEqual([expect.objectContaining({ notifyId: 7700, mode: 'enrich' })])
+  })
+
+  it('74xx deney bildirimleri ve 7860–7867 ek saatleri asla zenginleşmez (metin, kimlik, saat aynı)', () => {
+    const i = nefIn({ moduleReminders: { walk: man(['16:00']) } })
+    // Ek saatin zarı: bugün 'send'
+    const p = planAll({ ...i, log: sendLog() })
+    const q = planAll(without({ ...i, log: sendLog() }))
+    expect(fixed(p)).toEqual(fixed(q))
+    for (const n of p.notifications.filter((x) => x.id >= 7400 && x.id <= 7499)) expect(n.extra?.nef).toBeUndefined()
+    for (const n of p.notifications.filter((x) => x.id >= 7860 && x.id <= 7867)) expect(n.extra?.nef).toBeUndefined()
+  })
+})
+
+// Rastgele: Nef açık (rastgele hafıza, yol, sabah havası açık/kapalı). Kurallar ve en düşük öncelik.
+describe('planAll: Nef rastgele', { timeout: 120000 }, () => {
+  const HOUR_MS = 3600000
+  const M = 6000
+  const isNef = (n) => n.id >= NEF_ID && n.id <= NEF_ID_LAST
+  const enrichedOk = (n) => (n.id >= 7700 && n.id <= 7701) || (n.id >= 7800 && n.id <= 7859 && (n.module ?? n.extra?.module) === 'walk')
+  let runs = null
+  const sweep = () => {
+    if (runs) return runs
+    const rnd = mulberry32(7)
+    const wrnd = mulberry32(8)
+    runs = []
+    for (let i = 0; i < M; i++) {
+      const ctx = makeContext(rnd)
+      if (ctx.reminders) {
+        ctx.reminders.optIn = 'yes'
+        if (wrnd() < 0.8) ctx.reminders.types.walk = { on: true, time: `${String(7 + Math.floor(wrnd() * 15)).padStart(2, '0')}:${['00', '15', '30', '45'][Math.floor(wrnd() * 4)]}` }
+      }
+      const input = wrnd() < 0.5 ? makeFeatureInput(rnd, ctx) : { ...ctx }
+      const wx = makeWeatherInput(wrnd, ctx.now)
+      input.weather = wx.weather
+      // yağmur sık olsun: yürüyüş saatinin çevresinde
+      const walkM = toMinutes(ctx.reminders?.types?.walk?.time ?? '') ?? 0
+      if (wrnd() < 0.7) {
+        const d0 = new Date(ctx.now.getFullYear(), ctx.now.getMonth(), ctx.now.getDate() + (wrnd() < 0.3 ? 1 : 0)).getTime()
+        const from = Math.max(0, Math.floor(walkM / 60) - Math.floor(wrnd() * 3))
+        for (const h of input.weather.cache.data.hours) {
+          const rel = Math.round((h.at - d0) / 3600000)
+          h.precipChance = rel >= from && rel < from + 1 + Math.floor(wrnd() * 4) ? 0.8 : 0.1
+        }
+      }
+      if (wrnd() < 0.5) input.morningWeather = wx.morningWeather
+      const rows = []
+      for (let k = 0, n = Math.floor(wrnd() * 6); k < n; k++) {
+        const d = new Date(ctx.now.getTime() - Math.floor(wrnd() * 8 * 24) * 3600000)
+        rows.push({ at: d.toISOString(), date: dayKey(d), type: 'rainOnWalk', key: `r${k}`, id: 'F1E-1', channel: wrnd() < 0.8 ? 'notify' : 'card' })
+      }
+      const nef = { rows, pathDoneToday: wrnd() < 0.1 }
+      input.texts = wrnd() < 0.5
+      runs.push({ input, nef, out: planAll({ ...input, nef }), off: planAll(input) })
+    }
+    return runs
+  }
+
+  it('Nef gerçekten konuşuyor (kendi bildirimi ve zenginleştirme ikisi de)', () => {
+    const r = sweep()
+    expect(r.filter(({ out }) => out.notifications.some(isNef)).length).toBeGreaterThan(M / 100)
+    expect(r.filter(({ out }) => (out.nef ?? []).some((s) => s.mode === 'enrich')).length).toBeGreaterThan(M / 200)
+  })
+
+  it('en düşük öncelik: Nef dışındaki her bildirimin kimliği, saati ve türü aynı; metni yalnız 7700–7701 ve yürüyüş modülünün 78xx\'inde değişir; 74xx, 75xx, 7860–7867 derin eşit', () => {
+    for (const { out, off } of sweep()) {
+      const rest = out.notifications.filter((n) => !isNef(n))
+      expect(rest.map((n) => [n.id, n.at.getTime(), n.type])).toEqual(off.notifications.map((n) => [n.id, n.at.getTime(), n.type]))
+      rest.forEach((n, k) => {
+        const o = off.notifications[k]
+        if (n === o || (n.title === o.title && n.body === o.body)) return
+        expect(enrichedOk(n)).toBe(true)
+        expect(n.extra.nef?.type).toBe('rainOnWalk')
+      })
+      const fx = (p) => p.notifications.filter((n) => (n.id >= 7400 && n.id <= 7599) || (n.id >= 7860 && n.id <= 7867))
+      expect(fx(out)).toEqual(fx(off))
+      if (!(out.nef ?? []).length) expect(out.notifications).toEqual(off.notifications)
+    }
+  })
+
+  it('Nef\'in kendi bildirimi: 7900–7919, gece ve sessizlikte değil, oturumda değil, yatma öncesinde değil, öteki bildirimlere ≥ 30 dk, 74xx\'e ≥ 60 dk; bekleyen ≤ 58', () => {
+    let seen = 0
+    for (const { input, out } of sweep()) {
+      const own = out.notifications.filter(isNef)
+      const pending = out.notifications.filter((n) => OWN.some(([a, b]) => n.id >= a && n.id <= b) || isNef(n)).filter((n) => n.at.getTime() > input.now.getTime())
+      expect(pending.length).toBeLessThanOrEqual(MAX_PENDING)
+      for (const n of own) {
+        seen++
+        const t = n.at.getTime()
+        expect(n.id).toBeLessThanOrEqual(NEF_ID_LAST)
+        expect(inNight(t, input.quiet)).toBe(false)
+        const fs = Date.parse(input.focus?.startedAt)
+        if (Number.isFinite(fs) && [1, 2, 4].includes(input.focus.hours)) expect(t >= fs && t <= fs + input.focus.hours * HOUR_MS).toBe(false)
+        if (input.alarm?.on) {
+          for (let d = -1; d <= 2; d++) {
+            const noon = new Date(n.at.getFullYear(), n.at.getMonth(), n.at.getDate() + d, 12)
+            const ring = nextRingOf(input.alarm, noon)
+            if (ring != null) expect(t >= ring - 8 * HOUR_MS && t < ring).toBe(false)
+          }
+        }
+        for (const o of out.notifications) {
+          if (o === n) continue
+          expect(Math.abs(o.at.getTime() - t)).toBeGreaterThanOrEqual(MIN_APART_MIN * 60000)
+          if (o.id >= 7400 && o.id <= 7499) expect(Math.abs(o.at.getTime() - t)).toBeGreaterThanOrEqual(60 * 60000)
+        }
+        expect(n.body).not.toMatch(/derece|°/)
+      }
+    }
+    expect(seen).toBeGreaterThan(0)
+  })
+
+  it('bütçe: Nef metni (kendi bildirimi + zenginleştirme) günde en çok 1, hafızayla birlikte son 7 günde en çok 4; yol bittiyse bugün yok', () => {
+    for (const { input, nef, out } of sweep()) {
+      const said = out.nef ?? []
+      const byDay = new Map()
+      for (const s of said) byDay.set(s.date, (byDay.get(s.date) ?? 0) + 1)
+      for (const [date, c] of byDay) {
+        expect(c).toBeLessThanOrEqual(1)
+        const past = nef.rows.filter((r) => r.channel === 'notify' && Date.parse(r.at) <= input.now.getTime())
+        const end = new Date(`${date}T12:00:00`)
+        const from = dayKey(new Date(end.getFullYear(), end.getMonth(), end.getDate() - 6, 12))
+        const week = [...past, ...said].filter((r) => r.date >= from && r.date <= date)
+        expect(week.length).toBeLessThanOrEqual(4)
+        expect(past.filter((r) => r.date === date).length + c).toBeLessThanOrEqual(1)
+      }
+      if (nef.pathDoneToday) expect(said.some((s) => s.date === dayKey(input.now))).toBe(false)
+      // Her söz bir bildirime bağlı; kimlik ve saat planda aynen
+      for (const s of said) expect(out.notifications.some((n) => n.id === s.notifyId && n.at.toISOString() === s.at)).toBe(true)
+    }
   })
 })

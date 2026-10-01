@@ -95,7 +95,9 @@ const nightAt = (d) => {
 //   lang      istenen dil · now: şimdi · notifyAt: bildirimin çalacağı an (yoksa now)
 //   lexicon   ad ve ölçüm sözcükleri; verilmezse manifestlerin `nef` alanından (lexicon.js moduleLexicon, o dilde)
 //   pathDone  kişi bugünkü yolunu bitirdi mi (an motorundan bağımsız ikinci koruma) · channels: istenen kanallar
-export function speak({ moments = [], rows = [], bank = null, lang = null, now = new Date(), notifyAt = null, lexicon = null, pathDone = false, channels = ['card', 'notify'] } = {}) {
+//   notifyBodyMax  bildirim gövdesinin üst sınırı (varsayılan BODY_MAX; planlayıcı altına eklenecek kaynak satırının
+//             payını düşer: lib/nef/notify.js)
+export function speak({ moments = [], rows = [], bank = null, lang = null, now = new Date(), notifyAt = null, lexicon = null, pathDone = false, channels = ['card', 'notify'], notifyBodyMax = BODY_MAX } = {}) {
   if (!bank || !lang || bank.lang !== lang) return []
   lexicon = lexicon ?? moduleLexicon(lang)
   const list = (Array.isArray(moments) ? moments : []).filter((m) => m && allowed(m)).sort((a, b) => b.priority - a.priority)
@@ -121,7 +123,7 @@ export function speak({ moments = [], rows = [], bank = null, lang = null, now =
       for (const m of pool) {
         if (!m.channels?.includes('notify') || !TITLE_CELLS[m.type]) continue
         if (typeResting(rows, m.type, now) || !factFree(rows, m.key)) continue
-        const body = pick(bank, cellGroups(m, rows, now), m.facts, { rows, now, lexicon, max: BODY_MAX, seed: m.key })
+        const body = pick(bank, cellGroups(m, rows, now), m.facts, { rows, now, lexicon, max: Math.min(BODY_MAX, notifyBodyMax), seed: m.key })
         const title = body && pick(bank, [[TITLE_CELLS[m.type]]], m.facts, { rows, now, lexicon, max: TITLE_MAX, seed: `${m.key}|title` })
         if (!body || !title) continue // bir hücre susarsa an susar
         out.push({ channel: 'notify', type: m.type, key: m.key, cell: body.cell, id: body.id, text: body.text, title: title.text, titleId: title.id })

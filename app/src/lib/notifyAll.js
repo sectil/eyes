@@ -4,6 +4,10 @@
 //   planNotifications (lib/notifyPlan.js, yalnız sahip izniyle değişir; 74xx deney + çalışma günleri, 75xx çalışma oturumu)
 //   + planModuleReminders (lib/moduleRemind.js; 78xx modül hatırlatmaları, 7860–7867 legacy ek saatleri)
 //   + sabah havası 7700–7701 (lib/weatherNotify.js; B2 1. katman) · yürüyüş sorusunun yasak dilimleri 7710–7719 (B3): YOK
+//   + Nef 7900–7919 (lib/nef/notify.js planNef; EN DÜŞÜK öncelik, öteki kaynaklar dizildikten sonra kalan boşluğa;
+//     F1 metin zenginleştirmesi 7700–7701 ve yürüyüş modülünün 78xx'inde, kimlik ve saat değişmeden; 74xx ve
+//     7860–7867'ye dokunmaz). Yalnız input.nef verilmişse; Nef bir şey eklemezse ve öteki yeni özellikler kapalıysa
+//     çıktı yine planNotifications'ın kendisi (eşdeğerlik).
 //
 // Kurallar:
 //   - Yeni özellik kapalıyken (moduleReminders boş, sabah havası kapalı) çıktı planNotifications'ın çıktısıdır, bayt bayt (eşdeğerlik §5.4).
@@ -39,6 +43,7 @@ import { dayKey } from './habitLog.js'
 import { nextRing, SLEEP_TARGET_H } from './alarm.js'
 import { resolvePlanTexts } from './remindTexts.js'
 import { planMorningWeather, morningOn } from './weatherNotify.js'
+import { planNef } from './nef/notify.js'
 
 export const MIN_APART_MIN = 30 // planlayıcıda iki bildirim arası en az (VARSAYIM, §A.4)
 export const DAY_CAP = 6 // modül hatırlatmalarından günde en çok (VARSAYIM, §A.4)
@@ -144,17 +149,24 @@ export function loadSlots(storage) {
 //     taşıyanı kurmadığı için metinsiz plan hiçbir yeni bildirim kurmaz) · names: { [modül]: ad } (birleşik bildirim)
 //   VARSAYIM: texts bu turda isteğe bağlı (varsayılan kapalı): notifyAll.test.js'teki "yalnız textKey: hiçbiri kurulmaz"
 //   beklentisi sahip onayıyla değişene dek. Uygulama planı kurarken texts: true verir.
+//   nef: { rows: memory.loadSaid(), lang?, pathDoneToday, who5Low?, appGapDays? } (lib/nef/notify.js; hava weather.cache'ten,
+//     yürüyüş saati reminders.types.walk'tan okunur; yoksa Nef yok)
 // Çıktı: kapalıyken planNotifications'ın çıktısı aynen. Açıkken ayrıca:
 //   grouped: true (notifyApply: threadIdentifier, relevanceScore, açılışta teslim edilmişlerin kaldırılması)
 //   slots: [{ date, type, times }] (ek saatler; notify-slots), updates, proposals (moduleRemind.js),
 //   skipped: moduleRemind.js'inkiler + 'focus' | 'night' | 'bed' | 'gap' | 'pending' ('focus', 'night', 'bed', 'gap'
 //     yalnız Nef'in seçtiği saatlerde)
 //   horizon: modül hatırlatmalarının kurulduğu gün sayısı
+//   nef (yalnız nef girdisiyle): Nef'in bu plandaki bildirim kararları; çağıran memory.syncPlannedNotify ile yazar.
+//     skipped'e { module: 'nef', reason } eklenir.
 export function planAll(input = {}) {
   const base = planNotifications(input)
   // Sabah havası: settings.morningWeather açık ve hava verisi (weather: { cache, place }) verilmişse
   const weatherOn = morningOn(input.morningWeather) && isObj(input.weather)
-  if (!newFeaturesOn(input) && !weatherOn) return base
+  // Nef (lib/nef/notify.js): nef girdisi (söz hafızası ve gün olguları) ve hava verisi varsa
+  const nefOn = isObj(input.nef) && isObj(input.weather)
+  const othersOn = newFeaturesOn(input) || weatherOn
+  if (!othersOn && !nefOn) return base
 
   const { now = new Date(), modules = [], moduleReminders, reminders, study = null, sessions = [], health = null, focus = null, alarm = null, quiet = null } = input
   const nowMs = new Date(now).getTime()
@@ -199,11 +211,27 @@ export function planAll(input = {}) {
     skipped: result.skipped,
     horizon: result.horizon,
   }
-  if (input.texts !== true) return plan
-  // Cümlenin kaynağı modülün havuzundaysa bildirim o kaynağı taşır (yol: PATH_REMIND.science)
-  const science = Object.fromEntries(modules.filter((m) => m?.id && Array.isArray(m.remind?.science)).map((m) => [m.id, m.remind.science]))
-  if (!science[PATH_ID]) science[PATH_ID] = PATH_REMIND.science
-  return resolvePlanTexts(plan, { names: input.names ?? null, science })
+  let out = plan
+  if (input.texts === true) {
+    // Cümlenin kaynağı modülün havuzundaysa bildirim o kaynağı taşır (yol: PATH_REMIND.science)
+    const science = Object.fromEntries(modules.filter((m) => m?.id && Array.isArray(m.remind?.science)).map((m) => [m.id, m.remind.science]))
+    if (!science[PATH_ID]) science[PATH_ID] = PATH_REMIND.science
+    out = resolvePlanTexts(plan, { names: input.names ?? null, science })
+  }
+  if (!nefOn) return out
+  // Nef en sonda: öteki kaynaklar yerleşmiş, metinleri bağlanmış. Kurallar planlayıcınınkiyle aynı (gece, sessizlik,
+  // yatma öncesi, oturum); bekleyen payı 58'den kalan.
+  const nef = planNef({
+    now,
+    notifications: out.notifications,
+    reminders,
+    weather: input.weather,
+    log: base.log,
+    nef: input.nef,
+    rules: { blocked: (ms) => (inFocus(ms) ? 'focus' : inNight(ms, quiet) ? 'night' : inBed(ms) ? 'bed' : null), room: MAX_PENDING - out.notifications.length, leadMs: LEAD_MS },
+  })
+  if (!nef.changed && !othersOn) return base
+  return { ...out, notifications: nef.notifications, skipped: [...out.skipped, ...nef.skipped], nef: nef.said }
 
   // Kurulan bir hatırlatmayla (ek saat, modül) ±60 sn içinde çakışan oturum molalarının (75xx) kimlikleri: tek
   // bildirim kalsın, hatırlatma kazanır. Nef'in saatleri oturuma hiç düşmediği için pratikte yalnız elle seçilenler.
