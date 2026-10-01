@@ -233,11 +233,16 @@ export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp 
           {/* Yalnız geliştirici derlemesinde (App.jsx SKY_UI): B2 hava akışının cihaz denemesi; kullanıcıya görünmez */}
           {onSkyTry && <Row Icon={Sparkles} label="Hava (deneme)" sub="Geliştirici derlemesi" onClick={onSkyTry} />}
           {/* Yalnız test derlemesinde: alarmın telefondaki gerçek kaydı (D4 tanısı; lib/alarmNative.js alarmDiag) */}
-          {onAlarmDiag && <Row Icon={Sparkles} label="Alarm (tanı)" sub="Geliştirici derlemesi" onClick={async () => setDiag(await onAlarmDiag())} />}
+          {onAlarmDiag && <Row Icon={Sparkles} label="Alarm (tanı)" sub={diag == null ? 'Geliştirici derlemesi' : 'Aşağıda · yenilemek için dokun'} onClick={async () => {
+            setDiag('Okunuyor…')
+            try { setDiag(await onAlarmDiag()) } catch (e) { setDiag(`Hata: ${String(e?.message ?? e)}`) }
+            // Sonuç satırın altında; sekme çubuğunun arkasında kalmasın (Build 70: "tıklanmıyor" sanıldı)
+            setTimeout(() => document.getElementById('alarm-diag')?.scrollIntoView({ block: 'center', behavior: 'smooth' }), 0)
+          }} />}
         </div>
       </section>
 
-      {diag && <pre className="small" style={{ whiteSpace: 'pre-wrap', userSelect: 'text' }} aria-label="Alarm tanısı">{diag}</pre>}
+      {diag && <pre id="alarm-diag" className="small" style={{ whiteSpace: 'pre-wrap', userSelect: 'text', WebkitUserSelect: 'text' }} aria-label="Alarm tanısı">{diag}</pre>}
 
       <section className="stack">
         <span className="eyebrow">Verilerim</span>

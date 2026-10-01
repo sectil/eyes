@@ -102,15 +102,19 @@ describe('iOS 15 ve web', () => {
     expect(await skyAvailable({ isAvailable: async () => ({ available: false }) }, true)).toBe(false)
   })
   it('konum izni: yuvarlanmış konum ve kesinlik; web/ret → konum yok', async () => {
-    const plugin = { requestLocation: vi.fn(async () => ({ status: 'granted', accuracy: 'reduced', lat: 41.0082, lon: 28.9784 })) }
+    // Swift'in gerçek değerleri (SkyPlugin.swift statusName): izin 'whenInUse' ya da 'always'
+    const plugin = { requestLocation: vi.fn(async () => ({ status: 'whenInUse', accuracy: 'reduced', lat: 41.0082, lon: 28.9784 })) }
     expect(await requestLocation(plugin, true)).toEqual({ status: 'granted', accuracy: 'reduced', pos: { lat: 41.01, lon: 28.98 } })
     // precise: true → Swift, kişi kesin konumu açtıysa 'full' döndürebilir (G yolu); açmadıysa yaklaşık kalır
     expect(plugin.requestLocation).toHaveBeenCalledWith({ precise: true })
-    const full = { requestLocation: async () => ({ status: 'granted', accuracy: 'full', lat: 38.3182, lon: 27.1321 }) }
+    const full = { requestLocation: async () => ({ status: 'always', accuracy: 'full', lat: 38.3182, lon: 27.1321 }) }
     expect(await requestLocation(full, true)).toEqual({ status: 'granted', accuracy: 'full', pos: { lat: 38.32, lon: 27.13 } })
     expect(await requestLocation({ requestLocation: async () => ({ status: 'notDetermined' }) }, true)).toEqual({ status: 'unavailable', accuracy: null, pos: null })
     expect(await requestLocation({ requestLocation: async () => ({ status: 'denied' }) }, true)).toEqual({ status: 'denied', accuracy: null, pos: null })
     expect((await requestLocation(plugin, false)).pos).toBeNull()
+    // Build 70 hatası: Swift 'granted' göndermez; izin var ama konum gelmediyse de liste
+    expect(await requestLocation({ requestLocation: async () => ({ status: 'whenInUse', accuracy: 'reduced' }) }, true)).toEqual({ status: 'unavailable', accuracy: null, pos: null })
+    expect(await requestLocation({ requestLocation: async () => ({ status: 'restricted' }) }, true)).toEqual({ status: 'denied', accuracy: null, pos: null })
   })
 })
 

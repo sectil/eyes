@@ -57,11 +57,14 @@ export async function skyAvailable(plugin = SkyPlugin, native = isIOSApp()) {
 // NSLocationDefaultAccuracyReduced). Yaklaşık ya da kesin, il ve en yakın ilçe kendiliğinden seçilir (places.js
 // placeFromLocation; sahip kararı 2026-10-01); G yolu ("…'de misin?") akıştan çıktı.
 // Döner: { status: 'granted'|'denied'|'unavailable', accuracy: 'full'|'reduced'|null, pos: { lat, lon } yuvarlanmış|null }
+const GRANTED = new Set(['whenInUse', 'always'])
 export async function requestLocation(plugin = SkyPlugin, native = isIOSApp()) {
   if (!native) return { status: 'unavailable', accuracy: null, pos: null }
   try {
     const r = await plugin.requestLocation({ precise: true })
-    if (r?.status !== 'granted') return { status: r?.status === 'denied' ? 'denied' : 'unavailable', accuracy: null, pos: null }
+    // SkyPlugin.swift izin verilmişse 'whenInUse' ya da 'always' döner ('granted' diye bir değer yok; Build 70'te
+    // konum hep listeye düşüyordu, sahip 2026-10-01). Konum gelmediyse (lat/lon yok) yine liste.
+    if (!GRANTED.has(r?.status) || roundPoint(r) == null) return { status: r?.status === 'denied' || r?.status === 'restricted' ? 'denied' : 'unavailable', accuracy: null, pos: null }
     return { status: 'granted', accuracy: r.accuracy === 'full' ? 'full' : 'reduced', pos: roundPoint(r) }
   } catch {
     return { status: 'unavailable', accuracy: null, pos: null }

@@ -151,3 +151,7 @@ yolda da yüzlerce aşama var gibi. Aralarda nefes kısmı gibi yoga, Dalga gibi
 yarın için alarm kuruluysa alarm saati olabilir; 'hatırlatma kurmak ister misin' yazıp bildirimlere yönlendirilebilir.
 Asla kendin için mükemmel olmayanı bana sunma; 5 sn kuralını unutma." Plan: YAPILACAKLAR D9.
 
+## Günaydın'da hava; Ana sayfada hava (2026-10-01)
+Sahip: "Günaydın kısmında hava durumu da lazım bence." "Konum kabul ettim ama hangi ildesin diye tekrar sordu. İzmir
+Gaziemir seçtim. Bunun şu anda çalışan ana sayfa tasarımında da gözükmesi lazım, unutma." Plan: D3, D10, D9.
+

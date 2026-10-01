@@ -86,8 +86,10 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
       "İlçe ara" ile aynı kalıp).
 - [ ] D2 **İl seçince onay düğmesi yok:** İzmir seçildi; ilçe adımındaki "Yalnız İzmir" satırı bir onay gibi okunmuyor.
       Açık bir onay düğmesi tasarlanır, anlaşılırlık kapısından geçer.
-- [ ] D3 **Konum kendiliğinden bulunmadı, liste açıldı** (karar: il ve ilçe konumdan kendiliğinden). Nedeni bilinmiyor
-      (izin mi, konum yanıtı mı, tablo eşleşmesi mi). Önce tanı: hava akışına neden kaydı; sonra düzeltme.
+- [~] D3 **Konum kendiliğinden bulunmadı, liste açıldı** (Build 70'te yine; sahip izni verdi). NEDEN: SkyPlugin.swift
+      izin verilince durumu 'whenInUse' / 'always' gönderiyor, JS (`lib/sky.js` requestLocation) yalnız 'granted'
+      bekliyordu; testler de yanlış 'granted' taklidiyle yazılmıştı. Düzeltildi; cihazda bakılacak (konum izni varken
+      "Değiştir"e gerek kalmadan İzmir Gaziemir gelmeli). WeatherKit cihazda veri döndürdü (sahip, 09.53: 16°, saatlik şerit).
 - [ ] D4 **Alarm (06.35):** gece ekranı ve uyku müziği çalışıyor; alarm bir kez çaldı, beklenen ikinci çalış olmadı.
       Sahip: ertesi gün çalmadı. Bulgu: uygulama alarmın telefonda gerçekten kurulu olup olmadığını hiç sormuyor
       (`AlarmPlugin.current` JS'te çağrılmıyor); "kurulu" yazısı yalnız uygulamanın kendi kaydından. Neden henüz bilinmiyor.
@@ -96,6 +98,9 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
       İpucu (sahibin 09.32 Ana sayfa görüntüsü): üst satır "— alarm yok" diyor; yani uygulamanın KENDİ kaydı da alarmı
       artık görmüyor (`AlarmLine.jsx`: `nextRing` boş → kayıt kapalı, silinmiş ya da tek seferlik). Tanıdaki "Kayıt" ve
       "Son olaylar" satırı bunu ayıracak.
+      Build 70 (09.44–09.50): 09.50'ye kurulan alarm çaldı, uyku müziği ve gece ekranı çalıştı. "Alarm (tanı)" dokununca
+      "tıklanmıyor" sanıldı: sonuç sekme çubuğunun arkasında, satırın altında açılıyordu; artık "Okunuyor…" yazıp
+      sonuca kaydırıyor.
 - [ ] D5 **Hatırlatmalarda "Çoğu gün" / "Gün aşırı" kalkar:** alarmdaki gibi gün seçimi (Pzt–Paz), günleri kişi seçer.
       VARSAYIM: "Bazı günler bilerek göndermiyoruz" seyreltmesi de kalkar (kişinin seçtiği gün geçerli) — onaya.
 - [ ] D6 **Saat kısıtı kalkar:** hatırlatmalarda ve göz çalışması hatırlatmasında kişi her saati seçebilir ("Saat
@@ -121,6 +126,10 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
       gösterilmez. Yöntem: önce tasarım (gerçek koddan çizim, iki tema, 390/320), beş kişilik 5 sn kapısı ≥4/5, geçen
       görsel + kısa plan sahibe; kod onaydan sonra. Altyapı var: merdivenler (`lib/ladders.js`) ve `stageOf` gelecek
       günlerin basamağını hesaplayabilir. Ana sayfa ilk iki gün denemeleri (ilk2) bunun ilk ekranı sayılır.
+
+- [ ] D10 **Günaydın ekranında hava durumu** (sahip, 2026-10-01): alarm sonrası "Günaydın." ekranında (uyku → sabah)
+      bugünün havası. Hava rızası ve yer varsa; cümleler onaylı sabah havası hücrelerinden. Ana sayfa tasarımında da hava
+      görünmeli (D9 ve ilk2 tasarımına girdi).
 
 **Sahipte bekleyenler:** (1) `sky-check.sh` çıktısı; (2) Build 67'de Y1'in 10 maddesi; (3) B2'nin 5 yeni cümlesi
 ("Hangi ilçedesin?", "İlçe ara", "Yalnız İzmir", "Konumuna en yakın ilçe merkezi bu.", "Konum") ve rızada "Nerede
