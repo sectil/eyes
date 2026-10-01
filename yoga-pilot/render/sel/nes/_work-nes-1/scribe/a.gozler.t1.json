@@ -1,0 +1,15 @@
+{
+ "unit": "a.gozler",
+ "take": "t1",
+ "asset_id": "fW9cYNnIkgV4LXmnl7hA",
+ "source_node_id": "WBzidAFGqD2qsmecyPTD",
+ "stt_node_id": "QkpoIBOSUa68hdPuBLFc",
+ "session_id": "zyrpXDeT3z64cZ4GcwNm",
+ "generation_id": "f4tT6lsyROigfI0Tqclb",
+ "actual_credits": 26.4,
+ "actual_cents": 0.48,
+ "scribe_text": "Gözlerini kapatmak ya da açık tutmak sana kalmış. Bakışın serbest",
+ "spoken_duration_secs": "4.64",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 10\n}"
+}

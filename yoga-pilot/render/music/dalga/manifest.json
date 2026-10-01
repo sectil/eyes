@@ -1,0 +1,3279 @@
+{
+ "source": "dalga (app engine, sakin)",
+ "abLabel": "assigned by orchestrator (_ab_key.json)",
+ "created": "2026-09-29T11:56:51+00:00",
+ "costCents": 0,
+ "paidCalls": 0,
+ "ledgerLines": 0,
+ "engine": {
+  "filesSha256": {
+   "src/lib/audioUnmute.js": "5e0fc0ab5542735ea58132047d0bfd54abf39fa062cbe1ce51380663b7d894e7",
+   "src/lib/dalgaAudio.js": "09a745c031959aa26e8218f14aa2299a9d76fe2efbad3c3165acb4dc8c0bb373",
+   "src/lib/dalgaMusic.js": "f260455c9171a7e984351057b6f327c2592c274ec4f30f6ffda9beb80f1ef812",
+   "src/lib/dalgaSleep.js": "e109bd13e6789539d0c180fa9b441d440482a46200d57e16af3f13006e7618e9",
+   "src/lib/wav.js": "63788e3c0f1dea0bac54c62b296ed143efb1e2014ee38ad7ba9af637681bcb42",
+   "orig_master.py": "83e6b091d08c8cc6afbc05fb83fc4c05f4c90c72df35102a3ef201257861dc9f",
+   "orig_render.html": "f152d06d90301ae6b38ba05ee6aea3ff4d10a0cef2e128673b8ba88df80678bc",
+   "orig_render.mjs": "b24bda75cb7114e1b1fed27eb907e49cf66543633593f6c5d5f8299c99329913"
+  },
+  "repoLastCommitTouchingDalgaFiles": "ac5e143573a427659c0acabf25923f8d1e84bd26 (read-only git log)",
+  "copiedVerbatimTo": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/work/src/lib",
+  "repoWrites": 0,
+  "method": "app/design/dalga-uyku render.html pattern: OfflineAudioContext(2 ch, 44100 Hz) + buildGraph + makeVoices + makeComposer(\"sakin\"), master gain 0.8 (renderLoop level), seeded mulberry32 replacing Math.random (render.html), transpose +12 (render.html, phone speaker) +1 (E-flat, music.key). Rendered on a bar grid instead of a 96 s loop, 2 bars of pre-roll discarded. Headless Chromium via Playwright page.route serving the scratch copy; no vite/dev server was started (modules have no bare imports).",
+  "harness": [
+   "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/work/render.html",
+   "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/work/render_dalga.mjs",
+   "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/work/jobs.json"
+  ],
+  "tools": [
+   "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/tools/build_dalga.py",
+   "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/tools/analyze_music.py",
+   "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/tools/make_manifest.py"
+  ]
+ },
+ "decisions": [
+  "Key/register: sakin is D major -> +1 = E-flat major; +12 as render.html (Bug 22). Measured on a 48 s test: +1 gives <300 Hz 81.0 %, 500-4000 Hz 3.0 %; +13 gives 17.3 % / 40.5 % (PLAN §D.3 wants <=10 % / >=40 %).",
+  "Varış-Derinleşme: sakin events unchanged (pad, bass piano note, upper piano, pentatonic melody, Karplus guitar, silent 6th bar).",
+  "Derin (VARSAYIM; the engine has no density or per-texture volume setting): event filter on the same composer output - guitar removed, upper piano only on steps 0 and 4, melody only on step 6; pad and bass note unchanged, same voices. Result: sparser (about half the note onsets, see events/onset) but NOT natively quieter - raw LUFS equals the VD raw LUFS within 0.4 dB because the pad dominates; the quieter Derin level comes from the mix (music.duckedBedLufs Derin -36 vs Varış -33).",
+  "Kapanış (VARSAYIM): sakin events; the file starts with 2 crossfade-in bars at phase 4,5 (mod 24), resolves on E-flat maj7 (global bar 72, after a silent bar) at 176 s; in that bar only pad/bass/upper piano, pad held 7 s (engine pad dur), natural decay to 188 s (-95.6 dBFS raw in the last second).",
+  "İmge (VARSAYIM): the engine's own sakin melody rule alone (steps 2/6, p = 0.38, walk -2..+2 over SAKIN_SCALE), engine piano voice, silent 6th bar kept, E-flat major pentatonic. Default dalga_imge.wav = SAKIN_SCALE + 13 (MIDI 75-94, E-flat5-B-flat6): \"one octave up\" read as one octave above the engine's own pentatonic line in E-flat. This is the same register as the +13 bed's melody. The other reading (\"one octave above the bed\") is delivered as dalga_imge_alt_p25.wav (same notes, +25). Measured: +13 has 1.5-4 kHz 33.3 %, >4 kHz 2.6 %; +25 has 66.7 % / 14.9 % (both 0 % below 300 Hz); integrated -38.0 vs -36.3 LUFS at the same gain. Choice is for the ear.",
+  "Segments (vd*, derin*) all start with bars = 22,23 (mod 24) and end with bars = 22,23 (mod 24), length 24k+2 bars: the last 8 s of any segment overlaps the first 8 s of any other on the same chords, so they can be chained in any order (PLAN §D.3 variant logic). Seam = B-flat sus bar + silent bar; the next seed takes over on the E-flat maj7 home chord.",
+  "Crossfade: 8 s equal-power. Dalga seeds share the deterministic pad + bass note on the same grid, so the two sides of a seam are phase-coherent (measured rho, seamEvidence). Plain sin/cos then adds a loudness bump (measured in seamEvidence.plainSinCos); the joined files use g = [cos, sin](theta) / sqrt(1 + rho(t) sin 2theta), which equals sin/cos at rho = 0 and keeps summed power constant. The mix must use this law (or linear) when it crossfades Dalga segments/families with each other.",
+  "Binaural: not rendered. In the app sakin binaural is conditional (headphones only; experiment half off: dalga.js binauralPlan), the offline sleep path has none (dalgaSleep.js), PLAN §D.3 says \"Binaural katman yok\".",
+  "No EQ (PLAN §D.3 150 Hz HPF and 1.5-4 kHz dip): measured <150 Hz and 1.5-4 kHz shares are ~0, so it would be nearly a no-op; left to the mix so A and B get identical processing.",
+  "Level: one gain per family to -24 LUFS integrated (PLAN §D.3), family DC removed, true peak <= -1.5 dBTP checked, 5 ms raised-cosine at every file edge, PCM 24-bit."
+ ],
+ "mixGuidance": {
+  "crossfadeLawForDalga": "g_a = cos(th)/sqrt(1+rho*sin(2th)), g_b = sin(th)/sqrt(1+rho*sin(2th)), th = pi/2*u, rho measured on the overlap (1 s windows); or linear. Not plain sin/cos.",
+  "harmonicAlignment": "bar = 4 s; phase(t) = (gridBar0 + t/4) mod 24. Crossfade two Dalga files only where their phases are equal; best at bars = 4,5 (mod 6) (last sounding bar + silent bar).",
+  "opening": "start with dalga_varis_x.wav (E-flat maj7 at t=0) or a vd segment from t = 8 s (skip its crossfade-in bars).",
+  "closing": "dalga_kapanis.wav: crossfade in over its first 8 s from Derin/VD read at phase 4,5; final chord at 176 s."
+ },
+ "summary": [
+  {
+   "id": "dalga.vd1",
+   "sec": 296.0,
+   "lufs": -23.94,
+   "tp": -12.63,
+   "noDrums": true,
+   "noClicks": true,
+   "spreadFull": 10.57,
+   "spreadSounding": 1.34,
+   "onsetPerMin": 52.3,
+   "percussive": 0.0196,
+   "lt300": 0.1665,
+   "b500_4k": 0.4287
+  },
+  {
+   "id": "dalga.vd2",
+   "sec": 296.0,
+   "lufs": -23.93,
+   "tp": -12.85,
+   "noDrums": true,
+   "noClicks": true,
+   "spreadFull": 10.34,
+   "spreadSounding": 1.45,
+   "onsetPerMin": 52.3,
+   "percussive": 0.0192,
+   "lt300": 0.1669,
+   "b500_4k": 0.4348
+  },
+  {
+   "id": "dalga.vd3",
+   "sec": 296.0,
+   "lufs": -24.14,
+   "tp": -12.86,
+   "noDrums": true,
+   "noClicks": true,
+   "spreadFull": 10.21,
+   "spreadSounding": 1.17,
+   "onsetPerMin": 52.7,
+   "percussive": 0.0189,
+   "lt300": 0.1833,
+   "b500_4k": 0.4347
+  },
+  {
+   "id": "dalga.vd_family",
+   "sec": 872.0,
+   "lufs": -24.0,
+   "tp": -12.63,
+   "noDrums": true,
+   "noClicks": true,
+   "spreadFull": 10.28,
+   "spreadSounding": 1.24,
+   "onsetPerMin": 53.12,
+   "percussive": 0.0192,
+   "lt300": 0.1714,
+   "b500_4k": 0.4314
+  },
+  {
+   "id": "dalga.derin1",
+   "sec": 200.0,
+   "lufs": -24.16,
+   "tp": -12.96,
+   "noDrums": true,
+   "noClicks": true,
+   "spreadFull": 10.31,
+   "spreadSounding": 1.23,
+   "onsetPerMin": 30.0,
+   "percussive": 0.0183,
+   "lt300": 0.1717,
+   "b500_4k": 0.4351
+  },
+  {
+   "id": "dalga.derin2",
+   "sec": 200.0,
+   "lufs": -24.11,
+   "tp": -13.34,
+   "noDrums": true,
+   "noClicks": true,
+   "spreadFull": 10.36,
+   "spreadSounding": 1.3,
+   "onsetPerMin": 36.3,
+   "percussive": 0.0179,
+   "lt300": 0.1847,
+   "b500_4k": 0.4403
+  },
+  {
+   "id": "dalga.derin3",
+   "sec": 200.0,
+   "lufs": -23.76,
+   "tp": -12.92,
+   "noDrums": true,
+   "noClicks": true,
+   "spreadFull": 10.47,
+   "spreadSounding": 1.43,
+   "onsetPerMin": 34.5,
+   "percussive": 0.0188,
+   "lt300": 0.1586,
+   "b500_4k": 0.4166
+  },
+  {
+   "id": "dalga.derin_family",
+   "sec": 584.0,
+   "lufs": -24.0,
+   "tp": -12.92,
+   "noDrums": true,
+   "noClicks": true,
+   "spreadFull": 10.33,
+   "spreadSounding": 1.25,
+   "onsetPerMin": 34.21,
+   "percussive": 0.0183,
+   "lt300": 0.1702,
+   "b500_4k": 0.4284
+  },
+  {
+   "id": "dalga.varis_x",
+   "sec": 192.0,
+   "lufs": -24.0,
+   "tp": -12.58,
+   "noDrums": true,
+   "noClicks": true,
+   "spreadFull": 10.11,
+   "spreadSounding": 1.32,
+   "onsetPerMin": 48.12,
+   "percussive": 0.019,
+   "lt300": 0.1531,
+   "b500_4k": 0.4156
+  },
+  {
+   "id": "dalga.kapanis",
+   "sec": 188.0,
+   "lufs": -24.0,
+   "tp": -12.49,
+   "noDrums": true,
+   "noClicks": true,
+   "spreadFull": 10.74,
+   "spreadSounding": 1.63,
+   "onsetPerMin": 45.64,
+   "percussive": 0.0178,
+   "lt300": 0.1539,
+   "b500_4k": 0.4365
+  },
+  {
+   "id": "dalga.imge",
+   "sec": 180.0,
+   "lufs": -38.02,
+   "tp": -25.4,
+   "noDrums": true,
+   "noClicks": true,
+   "spreadFull": 81.67,
+   "spreadSounding": 95.95,
+   "onsetPerMin": 8.33,
+   "percussive": 0.0035,
+   "lt300": 0.0,
+   "b500_4k": 0.974
+  },
+  {
+   "id": "dalga.imge_alt_p25",
+   "sec": 180.0,
+   "lufs": -36.3,
+   "tp": -24.97,
+   "noDrums": true,
+   "noClicks": true,
+   "spreadFull": 81.96,
+   "spreadSounding": 89.02,
+   "onsetPerMin": 8.33,
+   "percussive": 0.0037,
+   "lt300": 0.0,
+   "b500_4k": 0.8508
+  }
+ ],
+ "families": {
+  "varis-derinlesme": {
+   "joinedFile": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd_family.wav",
+   "joinedDurationSec": 872.0,
+   "uniqueSec": 872.0,
+   "segments": [
+    {
+     "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd1.wav",
+     "durationSec": 296.0,
+     "seed": 202609291,
+     "gridBars": [
+      46,
+      120
+     ]
+    },
+    {
+     "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd2.wav",
+     "durationSec": 296.0,
+     "seed": 202609292,
+     "gridBars": [
+      118,
+      192
+     ]
+    },
+    {
+     "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd3.wav",
+     "durationSec": 296.0,
+     "seed": 202609293,
+     "gridBars": [
+      190,
+      264
+     ]
+    }
+   ],
+   "seamsXfadeStartSec": [
+    288.0,
+    576.0
+   ],
+   "gainDb": -4.89,
+   "dcRemoved": [
+    -5.95e-05,
+    -3.16e-05
+   ],
+   "seamEvidence": {
+    "usedLaw": {
+     "rows": [
+      {
+       "xfadeStartSec": 288.0,
+       "deltaDb": -2.63,
+       "minusBaselineMedianDb": -0.11
+      },
+      {
+       "xfadeStartSec": 576.0,
+       "deltaDb": -2.32,
+       "minusBaselineMedianDb": 0.19
+      }
+     ],
+     "baseline": {
+      "n": 33,
+      "median": -2.51,
+      "p95": -2.21,
+      "max": -2.14
+     }
+    },
+    "plainSinCos": {
+     "rows": [
+      {
+       "xfadeStartSec": 288.0,
+       "deltaDb": -0.34,
+       "minusBaselineMedianDb": 2.17
+      },
+      {
+       "xfadeStartSec": 576.0,
+       "deltaDb": -0.04,
+       "minusBaselineMedianDb": 2.47
+      }
+     ],
+     "baseline": {
+      "n": 33,
+      "median": -2.51,
+      "p95": -2.21,
+      "max": -2.14
+     }
+    },
+    "overlapCorrelation": [
+     {
+      "rhoGlobal": 0.951,
+      "rho1sMin": -0.376,
+      "rho1sMax": 0.988
+     },
+     {
+      "rhoGlobal": 0.938,
+      "rho1sMin": -0.297,
+      "rho1sMax": 0.984
+     }
+    ]
+   }
+  },
+  "derin": {
+   "joinedFile": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin_family.wav",
+   "joinedDurationSec": 584.0,
+   "uniqueSec": 584.0,
+   "segments": [
+    {
+     "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin1.wav",
+     "durationSec": 200.0,
+     "seed": 202609295,
+     "gridBars": [
+      46,
+      96
+     ]
+    },
+    {
+     "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin2.wav",
+     "durationSec": 200.0,
+     "seed": 202609296,
+     "gridBars": [
+      94,
+      144
+     ]
+    },
+    {
+     "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin3.wav",
+     "durationSec": 200.0,
+     "seed": 202609297,
+     "gridBars": [
+      142,
+      192
+     ]
+    }
+   ],
+   "seamsXfadeStartSec": [
+    192.0,
+    384.0
+   ],
+   "gainDb": -4.73,
+   "dcRemoved": [
+    7.84e-07,
+    6.86e-07
+   ],
+   "seamEvidence": {
+    "usedLaw": {
+     "rows": [
+      {
+       "xfadeStartSec": 192.0,
+       "deltaDb": -2.41,
+       "minusBaselineMedianDb": 0.02
+      },
+      {
+       "xfadeStartSec": 384.0,
+       "deltaDb": -2.68,
+       "minusBaselineMedianDb": -0.25
+      }
+     ],
+     "baseline": {
+      "n": 21,
+      "median": -2.43,
+      "p95": -2.2,
+      "max": -2.19
+     }
+    },
+    "plainSinCos": {
+     "rows": [
+      {
+       "xfadeStartSec": 192.0,
+       "deltaDb": -0.11,
+       "minusBaselineMedianDb": 2.32
+      },
+      {
+       "xfadeStartSec": 384.0,
+       "deltaDb": -0.39,
+       "minusBaselineMedianDb": 2.04
+      }
+     ],
+     "baseline": {
+      "n": 21,
+      "median": -2.43,
+      "p95": -2.2,
+      "max": -2.19
+     }
+    },
+    "overlapCorrelation": [
+     {
+      "rhoGlobal": 0.963,
+      "rho1sMin": -0.215,
+      "rho1sMax": 0.994
+     },
+     {
+      "rhoGlobal": 0.962,
+      "rho1sMin": -0.26,
+      "rho1sMax": 0.991
+     }
+    ]
+   }
+  }
+ },
+ "uniqueness": {
+  "varis-derinlesme+varis_x": {
+   "soundingBarsWithRandomEvents": 223,
+   "distinctBarSignatures": 221,
+   "crossSeedSamePhaseBarPairs": 927,
+   "identicalPairs": 0
+  },
+  "derin": {
+   "soundingBarsWithRandomEvents": 121,
+   "distinctBarSignatures": 81,
+   "crossSeedSamePhaseBarPairs": 247,
+   "identicalPairs": 5
+  }
+ },
+ "registerTest": {
+  "p1": {
+   "transpose": 1,
+   "seconds": 48,
+   "lt300": 0.8098,
+   "500_4000": 0.0297,
+   "lt150": 0.1684,
+   "1500_4000": 0.0015,
+   "method": "Welch nperseg 8192, mid channel, seed 11, bars 24-36"
+  },
+  "p13": {
+   "transpose": 13,
+   "seconds": 48,
+   "lt300": 0.1734,
+   "500_4000": 0.4051,
+   "lt150": 0.0,
+   "1500_4000": 0.0056,
+   "method": "Welch nperseg 8192, mid channel, seed 11, bars 24-36"
+  }
+ },
+ "notVerified": [
+  "No Scribe transcription on any Dalga file (vocal absence is by construction only).",
+  "No listening: every statement is measured; the blind A/B by ear is the owner's."
+ ],
+ "files": [
+  {
+   "id": "dalga.vd1",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd1.wav",
+   "sha256": "7fb464037610ae92e7cf1507e54b1c2e098499497cf62fc5dcf748e274de385b",
+   "family": "varis-derinlesme",
+   "role": "segment",
+   "note": null,
+   "durationSec": 296.0,
+   "sampleRate": 44100,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "parts": [
+    "vd1"
+   ],
+   "seeds": [
+    202609291
+   ],
+   "transposeSemitones": 13,
+   "grid": {
+    "barSec": 4.0,
+    "gridBar0": 46,
+    "gridBarEnd": 120,
+    "harmonicPhaseAtStart(bar mod 24)": 22
+   },
+   "gainDb": -4.89,
+   "lufsIntegrated": -23.94,
+   "truePeakDbtp": -12.63,
+   "rawInfo": [
+    {
+     "rawLufs": -19.05,
+     "last1sRmsDbfsRaw": -70.9
+    }
+   ],
+   "events": [
+    {
+     "eventsInFile": 392,
+     "perMinuteByRole": {
+      "bass": 12.36,
+      "gtr": 6.89,
+      "mel": 8.92,
+      "pad": 12.36,
+      "up": 38.92
+     },
+     "instCountsAll": {
+      "pad": 63,
+      "piano": 307,
+      "guitar": 35
+     },
+     "drumEvents": 0,
+     "bars": 74,
+     "silentBars": 13,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 291.0145,
+     "maxGapBetweenOnsetsSec": 5.99,
+     "maxGapInclEdgesSec": 5.99
+    }
+   ],
+   "checks": {
+    "format44k1Stereo": {
+     "pass": true,
+     "subtype": "PCM_24"
+    },
+    "lufsIntegrated": {
+     "value": -23.94,
+     "target": -24.0,
+     "pass": true,
+     "note": null
+    },
+    "truePeak": {
+     "valueDbtp": -12.63,
+     "limit": -1.5,
+     "pass": true
+    },
+    "noDrums": {
+     "pass": true,
+     "drumEventsInRenderLog": 0,
+     "percussiveEnergyRatioHPSS": 0.0196,
+     "basis": "render log: 0 kick/shaker/bass events (sakin composer never emits them); HPSS ratio is informational"
+    },
+    "noVocals": {
+     "pass": null,
+     "basis": "by construction only (oscillators, Karplus string, noise-impulse reverb; no voice source)",
+     "scribe": "NOT RUN - not verified by transcription"
+    },
+    "onsetStrength": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0354,
+     "peakRatePerMin": 52.3,
+     "pass": null,
+     "basis": "measured; SPEC has no numeric limit. The engine is a slow piano texture, so onsets are real note attacks. Compare with the ElevenLabs set using the same tool (tools/analyze_music.py)."
+    },
+    "loudnessSpread3s": {
+     "fullSpreadP10P90": 10.57,
+     "fullSpreadMaxMin": 21.42,
+     "p50": -24.05,
+     "soundingOnlySpreadP10P90": 1.34,
+     "soundingOnlySpreadMaxMin": 1.71,
+     "lastThirdMinusFirstThirdDb": -0.09,
+     "pass": null,
+     "basis": "SPEC: \"dinamik düz (3 sn LUFS yayılımı dar)\" without a number. Full-file spread is set by the engine's designed silent bar (every 6th 4 s bar, Bernardi 2005 in dalgaMusic.js); sounding-only spread = the texture itself."
+    },
+    "noClicks": {
+     "pass": true,
+     "hfTransients": 22,
+     "attributedToNoteOnsets": 22,
+     "unattributed": 0,
+     "unattributedFirst10": [],
+     "unattributedInSeams": 0,
+     "fileEdgeAbs": {
+      "first": 4.77e-07,
+      "last": 1.19e-07
+     },
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient; a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "speakerCriterionPlanD3": {
+     "lt300": 0.1665,
+     "500_4000": 0.4287,
+     "lt300_le_0_10": false,
+     "500_4000_ge_0_40": true,
+     "basis": "PLAN.v2 §D.3 \"Hoparlör dersi\" (VARSAYIM)"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0023,
+     "min1sRmsDbfs": -76.9,
+     "pass": null,
+     "note": "reported; room tone is added in the mix (SPEC §6)"
+    },
+    "binaural": {
+     "present": false
+    }
+   },
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd1.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 296.0,
+    "lufsIntegrated": -23.94,
+    "truePeakDbtp": -12.63,
+    "samplePeakDbfs": -12.63,
+    "dc": [
+     1.68e-05,
+     7.51e-06
+    ],
+    "edgeAbs": {
+     "first": 4.77e-07,
+     "last": 1.19e-07
+    },
+    "shortTerm3s": {
+     "windows": 294,
+     "below70": 0,
+     "min": -44.11,
+     "p5": -34.37,
+     "p10": -33.66,
+     "p50": -24.05,
+     "p90": -23.09,
+     "p95": -22.81,
+     "max": -22.69,
+     "spreadP10P90": 10.57,
+     "spreadP5P95": 11.56,
+     "spreadMaxMin": 21.42,
+     "excludingIntervals": {
+      "n": 218,
+      "p10": -24.25,
+      "p50": -23.66,
+      "p90": -22.91,
+      "spreadP10P90": 1.34,
+      "spreadMaxMin": 1.71,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": -0.09
+    },
+    "onset": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0354,
+     "fluxMax": 0.1334,
+     "peakRatePerMin": 52.3,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.932,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0196,
+    "clicks": {
+     "hfTransients": 22,
+     "hfMaxDbfs": -58.9,
+     "hfP50Dbfs": -96.7,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 22,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0023,
+     "min1sRmsDbfs": -76.9
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1665,
+     "300_500": 0.4045,
+     "500_4000": 0.4287,
+     "1500_4000": 0.0071,
+     "gt4000": 0.0003
+    },
+    "stereo": {
+     "lrCorrelation": 0.98
+    }
+   }
+  },
+  {
+   "id": "dalga.vd2",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd2.wav",
+   "sha256": "a604dd2f59749012bc3584aa83187bf1f96208a9b919b0ec38627c0e79559066",
+   "family": "varis-derinlesme",
+   "role": "segment",
+   "note": null,
+   "durationSec": 296.0,
+   "sampleRate": 44100,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "parts": [
+    "vd2"
+   ],
+   "seeds": [
+    202609292
+   ],
+   "transposeSemitones": 13,
+   "grid": {
+    "barSec": 4.0,
+    "gridBar0": 118,
+    "gridBarEnd": 192,
+    "harmonicPhaseAtStart(bar mod 24)": 22
+   },
+   "gainDb": -4.89,
+   "lufsIntegrated": -23.93,
+   "truePeakDbtp": -12.85,
+   "rawInfo": [
+    {
+     "rawLufs": -19.04,
+     "last1sRmsDbfsRaw": -69.8
+    }
+   ],
+   "events": [
+    {
+     "eventsInFile": 385,
+     "perMinuteByRole": {
+      "bass": 12.36,
+      "gtr": 4.86,
+      "mel": 10.34,
+      "pad": 12.36,
+      "up": 38.11
+     },
+     "instCountsAll": {
+      "pad": 63,
+      "piano": 309,
+      "guitar": 26
+     },
+     "drumEvents": 0,
+     "bars": 74,
+     "silentBars": 13,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 291.0133,
+     "maxGapBetweenOnsetsSec": 5.999,
+     "maxGapInclEdgesSec": 5.999
+    }
+   ],
+   "checks": {
+    "format44k1Stereo": {
+     "pass": true,
+     "subtype": "PCM_24"
+    },
+    "lufsIntegrated": {
+     "value": -23.93,
+     "target": -24.0,
+     "pass": true,
+     "note": null
+    },
+    "truePeak": {
+     "valueDbtp": -12.85,
+     "limit": -1.5,
+     "pass": true
+    },
+    "noDrums": {
+     "pass": true,
+     "drumEventsInRenderLog": 0,
+     "percussiveEnergyRatioHPSS": 0.0192,
+     "basis": "render log: 0 kick/shaker/bass events (sakin composer never emits them); HPSS ratio is informational"
+    },
+    "noVocals": {
+     "pass": null,
+     "basis": "by construction only (oscillators, Karplus string, noise-impulse reverb; no voice source)",
+     "scribe": "NOT RUN - not verified by transcription"
+    },
+    "onsetStrength": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0351,
+     "peakRatePerMin": 52.3,
+     "pass": null,
+     "basis": "measured; SPEC has no numeric limit. The engine is a slow piano texture, so onsets are real note attacks. Compare with the ElevenLabs set using the same tool (tools/analyze_music.py)."
+    },
+    "loudnessSpread3s": {
+     "fullSpreadP10P90": 10.34,
+     "fullSpreadMaxMin": 21.4,
+     "p50": -23.99,
+     "soundingOnlySpreadP10P90": 1.45,
+     "soundingOnlySpreadMaxMin": 2.03,
+     "lastThirdMinusFirstThirdDb": -0.13,
+     "pass": null,
+     "basis": "SPEC: \"dinamik düz (3 sn LUFS yayılımı dar)\" without a number. Full-file spread is set by the engine's designed silent bar (every 6th 4 s bar, Bernardi 2005 in dalgaMusic.js); sounding-only spread = the texture itself."
+    },
+    "noClicks": {
+     "pass": true,
+     "hfTransients": 14,
+     "attributedToNoteOnsets": 14,
+     "unattributed": 0,
+     "unattributedFirst10": [],
+     "unattributedInSeams": 0,
+     "fileEdgeAbs": {
+      "first": 4.77e-07,
+      "last": 1.19e-07
+     },
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient; a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "speakerCriterionPlanD3": {
+     "lt300": 0.1669,
+     "500_4000": 0.4348,
+     "lt300_le_0_10": false,
+     "500_4000_ge_0_40": true,
+     "basis": "PLAN.v2 §D.3 \"Hoparlör dersi\" (VARSAYIM)"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0024,
+     "min1sRmsDbfs": -75.6,
+     "pass": null,
+     "note": "reported; room tone is added in the mix (SPEC §6)"
+    },
+    "binaural": {
+     "present": false
+    }
+   },
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd2.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 296.0,
+    "lufsIntegrated": -23.93,
+    "truePeakDbtp": -12.85,
+    "samplePeakDbfs": -12.86,
+    "dc": [
+     6.81e-05,
+     4.13e-05
+    ],
+    "edgeAbs": {
+     "first": 4.77e-07,
+     "last": 1.19e-07
+    },
+    "shortTerm3s": {
+     "windows": 294,
+     "below70": 0,
+     "min": -44.06,
+     "p5": -34.04,
+     "p10": -33.34,
+     "p50": -23.99,
+     "p90": -23.0,
+     "p95": -22.78,
+     "max": -22.66,
+     "spreadP10P90": 10.34,
+     "spreadP5P95": 11.26,
+     "spreadMaxMin": 21.4,
+     "excludingIntervals": {
+      "n": 218,
+      "p10": -24.32,
+      "p50": -23.73,
+      "p90": -22.87,
+      "spreadP10P90": 1.45,
+      "spreadMaxMin": 2.03,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": -0.13
+    },
+    "onset": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0351,
+     "fluxMax": 0.1337,
+     "peakRatePerMin": 52.3,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.925,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0192,
+    "clicks": {
+     "hfTransients": 14,
+     "hfMaxDbfs": -59.0,
+     "hfP50Dbfs": -96.9,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 14,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0024,
+     "min1sRmsDbfs": -75.6
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1669,
+     "300_500": 0.398,
+     "500_4000": 0.4348,
+     "1500_4000": 0.0068,
+     "gt4000": 0.0003
+    },
+    "stereo": {
+     "lrCorrelation": 0.964
+    }
+   }
+  },
+  {
+   "id": "dalga.vd3",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd3.wav",
+   "sha256": "245655b3ff0f3b08000eac6e19c913ee4491364c3ad4a205cdd0bad48e0bb2c1",
+   "family": "varis-derinlesme",
+   "role": "segment",
+   "note": null,
+   "durationSec": 296.0,
+   "sampleRate": 44100,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "parts": [
+    "vd3"
+   ],
+   "seeds": [
+    202609293
+   ],
+   "transposeSemitones": 13,
+   "grid": {
+    "barSec": 4.0,
+    "gridBar0": 190,
+    "gridBarEnd": 264,
+    "harmonicPhaseAtStart(bar mod 24)": 22
+   },
+   "gainDb": -4.89,
+   "lufsIntegrated": -24.14,
+   "truePeakDbtp": -12.86,
+   "rawInfo": [
+    {
+     "rawLufs": -19.25,
+     "last1sRmsDbfsRaw": -70.9
+    }
+   ],
+   "events": [
+    {
+     "eventsInFile": 384,
+     "perMinuteByRole": {
+      "bass": 12.36,
+      "gtr": 6.08,
+      "mel": 8.51,
+      "pad": 12.36,
+      "up": 38.51
+     },
+     "instCountsAll": {
+      "pad": 63,
+      "piano": 300,
+      "guitar": 30
+     },
+     "drumEvents": 0,
+     "bars": 74,
+     "silentBars": 13,
+     "midiRange": [
+      56,
+      91
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 290,
+     "maxGapBetweenOnsetsSec": 5.99,
+     "maxGapInclEdgesSec": 6.0
+    }
+   ],
+   "checks": {
+    "format44k1Stereo": {
+     "pass": true,
+     "subtype": "PCM_24"
+    },
+    "lufsIntegrated": {
+     "value": -24.14,
+     "target": -24.0,
+     "pass": true,
+     "note": null
+    },
+    "truePeak": {
+     "valueDbtp": -12.86,
+     "limit": -1.5,
+     "pass": true
+    },
+    "noDrums": {
+     "pass": true,
+     "drumEventsInRenderLog": 0,
+     "percussiveEnergyRatioHPSS": 0.0189,
+     "basis": "render log: 0 kick/shaker/bass events (sakin composer never emits them); HPSS ratio is informational"
+    },
+    "noVocals": {
+     "pass": null,
+     "basis": "by construction only (oscillators, Karplus string, noise-impulse reverb; no voice source)",
+     "scribe": "NOT RUN - not verified by transcription"
+    },
+    "onsetStrength": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0355,
+     "peakRatePerMin": 52.7,
+     "pass": null,
+     "basis": "measured; SPEC has no numeric limit. The engine is a slow piano texture, so onsets are real note attacks. Compare with the ElevenLabs set using the same tool (tools/analyze_music.py)."
+    },
+    "loudnessSpread3s": {
+     "fullSpreadP10P90": 10.21,
+     "fullSpreadMaxMin": 21.09,
+     "p50": -24.15,
+     "soundingOnlySpreadP10P90": 1.17,
+     "soundingOnlySpreadMaxMin": 1.7,
+     "lastThirdMinusFirstThirdDb": -0.12,
+     "pass": null,
+     "basis": "SPEC: \"dinamik düz (3 sn LUFS yayılımı dar)\" without a number. Full-file spread is set by the engine's designed silent bar (every 6th 4 s bar, Bernardi 2005 in dalgaMusic.js); sounding-only spread = the texture itself."
+    },
+    "noClicks": {
+     "pass": true,
+     "hfTransients": 24,
+     "attributedToNoteOnsets": 24,
+     "unattributed": 0,
+     "unattributedFirst10": [],
+     "unattributedInSeams": 0,
+     "fileEdgeAbs": {
+      "first": 5.96e-07,
+      "last": 0.0
+     },
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient; a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "speakerCriterionPlanD3": {
+     "lt300": 0.1833,
+     "500_4000": 0.4347,
+     "lt300_le_0_10": false,
+     "500_4000_ge_0_40": true,
+     "basis": "PLAN.v2 §D.3 \"Hoparlör dersi\" (VARSAYIM)"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0022,
+     "min1sRmsDbfs": -77.0,
+     "pass": null,
+     "note": "reported; room tone is added in the mix (SPEC §6)"
+    },
+    "binaural": {
+     "present": false
+    }
+   },
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd3.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 296.0,
+    "lufsIntegrated": -24.14,
+    "truePeakDbtp": -12.86,
+    "samplePeakDbfs": -12.87,
+    "dc": [
+     -8.55e-05,
+     -4.95e-05
+    ],
+    "edgeAbs": {
+     "first": 5.96e-07,
+     "last": 0.0
+    },
+    "shortTerm3s": {
+     "windows": 294,
+     "below70": 0,
+     "min": -44.08,
+     "p5": -34.22,
+     "p10": -33.52,
+     "p50": -24.15,
+     "p90": -23.31,
+     "p95": -23.2,
+     "max": -22.99,
+     "spreadP10P90": 10.21,
+     "spreadP5P95": 11.02,
+     "spreadMaxMin": 21.09,
+     "excludingIntervals": {
+      "n": 218,
+      "p10": -24.4,
+      "p50": -24.04,
+      "p90": -23.23,
+      "spreadP10P90": 1.17,
+      "spreadMaxMin": 1.7,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": -0.12
+    },
+    "onset": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0355,
+     "fluxMax": 0.1392,
+     "peakRatePerMin": 52.7,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.926,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0189,
+    "clicks": {
+     "hfTransients": 24,
+     "hfMaxDbfs": -64.9,
+     "hfP50Dbfs": -98.3,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 24,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0022,
+     "min1sRmsDbfs": -77.0
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1833,
+     "300_500": 0.3818,
+     "500_4000": 0.4347,
+     "1500_4000": 0.0062,
+     "gt4000": 0.0002
+    },
+    "stereo": {
+     "lrCorrelation": 0.972
+    }
+   }
+  },
+  {
+   "id": "dalga.vd_family",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd_family.wav",
+   "sha256": "40c2a510c5d797b38180a0a950968ae99649f12b1a6e8a38411f6e766f09da5a",
+   "family": "varis-derinlesme",
+   "role": "family-joined",
+   "note": null,
+   "durationSec": 872.0,
+   "sampleRate": 44100,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "parts": [
+    "vd1",
+    "vd2",
+    "vd3"
+   ],
+   "seeds": [
+    202609291,
+    202609292,
+    202609293
+   ],
+   "transposeSemitones": 13,
+   "grid": {
+    "barSec": 4.0,
+    "gridBar0": 46,
+    "gridBarEnd": 264,
+    "harmonicPhaseAtStart(bar mod 24)": 22
+   },
+   "gainDb": -4.89,
+   "lufsIntegrated": -24.0,
+   "truePeakDbtp": -12.63,
+   "rawInfo": [
+    {
+     "rawLufs": -19.05,
+     "last1sRmsDbfsRaw": -70.9
+    },
+    {
+     "rawLufs": -19.04,
+     "last1sRmsDbfsRaw": -69.8
+    },
+    {
+     "rawLufs": -19.25,
+     "last1sRmsDbfsRaw": -70.9
+    }
+   ],
+   "events": [
+    {
+     "eventsInFile": 392,
+     "perMinuteByRole": {
+      "bass": 12.36,
+      "gtr": 6.89,
+      "mel": 8.92,
+      "pad": 12.36,
+      "up": 38.92
+     },
+     "instCountsAll": {
+      "pad": 63,
+      "piano": 307,
+      "guitar": 35
+     },
+     "drumEvents": 0,
+     "bars": 74,
+     "silentBars": 13,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 291.0145,
+     "maxGapBetweenOnsetsSec": 5.99,
+     "maxGapInclEdgesSec": 5.99
+    },
+    {
+     "eventsInFile": 385,
+     "perMinuteByRole": {
+      "bass": 12.36,
+      "gtr": 4.86,
+      "mel": 10.34,
+      "pad": 12.36,
+      "up": 38.11
+     },
+     "instCountsAll": {
+      "pad": 63,
+      "piano": 309,
+      "guitar": 26
+     },
+     "drumEvents": 0,
+     "bars": 74,
+     "silentBars": 13,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 291.0133,
+     "maxGapBetweenOnsetsSec": 5.999,
+     "maxGapInclEdgesSec": 5.999
+    },
+    {
+     "eventsInFile": 384,
+     "perMinuteByRole": {
+      "bass": 12.36,
+      "gtr": 6.08,
+      "mel": 8.51,
+      "pad": 12.36,
+      "up": 38.51
+     },
+     "instCountsAll": {
+      "pad": 63,
+      "piano": 300,
+      "guitar": 30
+     },
+     "drumEvents": 0,
+     "bars": 74,
+     "silentBars": 13,
+     "midiRange": [
+      56,
+      91
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 290,
+     "maxGapBetweenOnsetsSec": 5.99,
+     "maxGapInclEdgesSec": 6.0
+    }
+   ],
+   "checks": {
+    "format44k1Stereo": {
+     "pass": true,
+     "subtype": "PCM_24"
+    },
+    "lufsIntegrated": {
+     "value": -24.0,
+     "target": -24.0,
+     "pass": true,
+     "note": null
+    },
+    "truePeak": {
+     "valueDbtp": -12.63,
+     "limit": -1.5,
+     "pass": true
+    },
+    "noDrums": {
+     "pass": true,
+     "drumEventsInRenderLog": 0,
+     "percussiveEnergyRatioHPSS": 0.0192,
+     "basis": "render log: 0 kick/shaker/bass events (sakin composer never emits them); HPSS ratio is informational"
+    },
+    "noVocals": {
+     "pass": null,
+     "basis": "by construction only (oscillators, Karplus string, noise-impulse reverb; no voice source)",
+     "scribe": "NOT RUN - not verified by transcription"
+    },
+    "onsetStrength": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0354,
+     "peakRatePerMin": 53.12,
+     "pass": null,
+     "basis": "measured; SPEC has no numeric limit. The engine is a slow piano texture, so onsets are real note attacks. Compare with the ElevenLabs set using the same tool (tools/analyze_music.py)."
+    },
+    "loudnessSpread3s": {
+     "fullSpreadP10P90": 10.28,
+     "fullSpreadMaxMin": 21.45,
+     "p50": -24.09,
+     "soundingOnlySpreadP10P90": 1.24,
+     "soundingOnlySpreadMaxMin": 2.03,
+     "lastThirdMinusFirstThirdDb": -0.23,
+     "pass": null,
+     "basis": "SPEC: \"dinamik düz (3 sn LUFS yayılımı dar)\" without a number. Full-file spread is set by the engine's designed silent bar (every 6th 4 s bar, Bernardi 2005 in dalgaMusic.js); sounding-only spread = the texture itself."
+    },
+    "noClicks": {
+     "pass": true,
+     "hfTransients": 58,
+     "attributedToNoteOnsets": 58,
+     "unattributed": 0,
+     "unattributedFirst10": [],
+     "unattributedInSeams": 0,
+     "fileEdgeAbs": {
+      "first": 4.77e-07,
+      "last": 0.0
+     },
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient; a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "seams": {
+     "rows": [
+      {
+       "xfadeStartSec": 288.0,
+       "loudnessDeltaDb": -2.63,
+       "percentileInBaseline": 45.5,
+       "hfJumpAtXfadeEdgesDb": [
+        2.0,
+        2.2
+       ],
+       "unattributedHfTransientsInXfade": []
+      },
+      {
+       "xfadeStartSec": 576.0,
+       "loudnessDeltaDb": -2.32,
+       "percentileInBaseline": 66.7,
+       "hfJumpAtXfadeEdgesDb": [
+        1.8,
+        12.8
+       ],
+       "unattributedHfTransientsInXfade": []
+      }
+     ],
+     "baselineSamePhase": {
+      "positions": "same harmonic phase (seam + k*24.0 s)",
+      "n": 33,
+      "p5": -3.15,
+      "p50": -2.51,
+      "p95": -2.21,
+      "max": -2.14
+     },
+     "definition": "energy-mean 400 ms loudness inside the 8 s crossfade minus mean of the 16 s before and 16 s after (dB)"
+    },
+    "speakerCriterionPlanD3": {
+     "lt300": 0.1714,
+     "500_4000": 0.4314,
+     "lt300_le_0_10": false,
+     "500_4000_ge_0_40": true,
+     "basis": "PLAN.v2 §D.3 \"Hoparlör dersi\" (VARSAYIM)"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0022,
+     "min1sRmsDbfs": -77.0,
+     "pass": null,
+     "note": "reported; room tone is added in the mix (SPEC §6)"
+    },
+    "binaural": {
+     "present": false
+    }
+   },
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd_family.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 872.0,
+    "lufsIntegrated": -24.0,
+    "truePeakDbtp": -12.63,
+    "samplePeakDbfs": -12.63,
+    "dc": [
+     -4.64e-07,
+     -4.22e-07
+    ],
+    "edgeAbs": {
+     "first": 4.77e-07,
+     "last": 0.0
+    },
+    "shortTerm3s": {
+     "windows": 870,
+     "below70": 0,
+     "min": -44.11,
+     "p5": -34.17,
+     "p10": -33.47,
+     "p50": -24.09,
+     "p90": -23.19,
+     "p95": -22.89,
+     "max": -22.66,
+     "spreadP10P90": 10.28,
+     "spreadP5P95": 11.28,
+     "spreadMaxMin": 21.45,
+     "excludingIntervals": {
+      "n": 650,
+      "p10": -24.32,
+      "p50": -23.78,
+      "p90": -23.08,
+      "spreadP10P90": 1.24,
+      "spreadMaxMin": 2.03,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": -0.23
+    },
+    "onset": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0354,
+     "fluxMax": 0.138,
+     "peakRatePerMin": 53.12,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.93,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0192,
+    "clicks": {
+     "hfTransients": 58,
+     "hfMaxDbfs": -58.9,
+     "hfP50Dbfs": -97.2,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 58,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0022,
+     "min1sRmsDbfs": -77.0
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1714,
+     "300_500": 0.397,
+     "500_4000": 0.4314,
+     "1500_4000": 0.0067,
+     "gt4000": 0.0003
+    },
+    "stereo": {
+     "lrCorrelation": 0.971
+    },
+    "seams": {
+     "xfadeSec": 8.0,
+     "rows": [
+      {
+       "xfadeStartSec": 288.0,
+       "loudnessDeltaDb": -2.63,
+       "percentileInBaseline": 45.5,
+       "hfJumpAtXfadeEdgesDb": [
+        2.0,
+        2.2
+       ],
+       "unattributedHfTransientsInXfade": []
+      },
+      {
+       "xfadeStartSec": 576.0,
+       "loudnessDeltaDb": -2.32,
+       "percentileInBaseline": 66.7,
+       "hfJumpAtXfadeEdgesDb": [
+        1.8,
+        12.8
+       ],
+       "unattributedHfTransientsInXfade": []
+      }
+     ],
+     "baseline": {
+      "positions": "same harmonic phase (seam + k*24.0 s)",
+      "n": 33,
+      "p5": -3.15,
+      "p50": -2.51,
+      "p95": -2.21,
+      "max": -2.14
+     },
+     "deltaDefinition": "energy-mean 400 ms loudness inside the 8 s crossfade minus mean of the 16 s before and 16 s after (dB)"
+    }
+   }
+  },
+  {
+   "id": "dalga.derin1",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin1.wav",
+   "sha256": "55576da872156fdd47e9d8403b7aacec5eddd4131fd8894a2041616642d2df54",
+   "family": "derin",
+   "role": "segment",
+   "note": null,
+   "durationSec": 200.0,
+   "sampleRate": 44100,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "parts": [
+    "derin1"
+   ],
+   "seeds": [
+    202609295
+   ],
+   "transposeSemitones": 13,
+   "grid": {
+    "barSec": 4.0,
+    "gridBar0": 46,
+    "gridBarEnd": 96,
+    "harmonicPhaseAtStart(bar mod 24)": 22
+   },
+   "gainDb": -4.73,
+   "lufsIntegrated": -24.16,
+   "truePeakDbtp": -12.96,
+   "rawInfo": [
+    {
+     "rawLufs": -19.43,
+     "last1sRmsDbfsRaw": -71.7
+    }
+   ],
+   "events": [
+    {
+     "eventsInFile": 157,
+     "perMinuteByRole": {
+      "bass": 12.3,
+      "mel": 3.3,
+      "pad": 12.3,
+      "up": 19.2
+     },
+     "instCountsAll": {
+      "pad": 43,
+      "piano": 122
+     },
+     "drumEvents": 0,
+     "bars": 50,
+     "silentBars": 9,
+     "midiRange": [
+      56,
+      91
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 195,
+     "maxGapBetweenOnsetsSec": 7.989,
+     "maxGapInclEdgesSec": 7.989
+    }
+   ],
+   "checks": {
+    "format44k1Stereo": {
+     "pass": true,
+     "subtype": "PCM_24"
+    },
+    "lufsIntegrated": {
+     "value": -24.16,
+     "target": -24.0,
+     "pass": true,
+     "note": null
+    },
+    "truePeak": {
+     "valueDbtp": -12.96,
+     "limit": -1.5,
+     "pass": true
+    },
+    "noDrums": {
+     "pass": true,
+     "drumEventsInRenderLog": 0,
+     "percussiveEnergyRatioHPSS": 0.0183,
+     "basis": "render log: 0 kick/shaker/bass events (sakin composer never emits them); HPSS ratio is informational"
+    },
+    "noVocals": {
+     "pass": null,
+     "basis": "by construction only (oscillators, Karplus string, noise-impulse reverb; no voice source)",
+     "scribe": "NOT RUN - not verified by transcription"
+    },
+    "onsetStrength": {
+     "fluxP50": 0.0047,
+     "fluxP99": 0.0163,
+     "peakRatePerMin": 30.0,
+     "pass": null,
+     "basis": "measured; SPEC has no numeric limit. The engine is a slow piano texture, so onsets are real note attacks. Compare with the ElevenLabs set using the same tool (tools/analyze_music.py)."
+    },
+    "loudnessSpread3s": {
+     "fullSpreadP10P90": 10.31,
+     "fullSpreadMaxMin": 21.25,
+     "p50": -24.21,
+     "soundingOnlySpreadP10P90": 1.23,
+     "soundingOnlySpreadMaxMin": 1.77,
+     "lastThirdMinusFirstThirdDb": 0.09,
+     "pass": null,
+     "basis": "SPEC: \"dinamik düz (3 sn LUFS yayılımı dar)\" without a number. Full-file spread is set by the engine's designed silent bar (every 6th 4 s bar, Bernardi 2005 in dalgaMusic.js); sounding-only spread = the texture itself."
+    },
+    "noClicks": {
+     "pass": true,
+     "hfTransients": 0,
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedFirst10": [],
+     "unattributedInSeams": 0,
+     "fileEdgeAbs": {
+      "first": 4.77e-07,
+      "last": 0.0
+     },
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient; a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "speakerCriterionPlanD3": {
+     "lt300": 0.1717,
+     "500_4000": 0.4351,
+     "lt300_le_0_10": false,
+     "500_4000_ge_0_40": true,
+     "basis": "PLAN.v2 §D.3 \"Hoparlör dersi\" (VARSAYIM)"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0026,
+     "min1sRmsDbfs": -77.3,
+     "pass": null,
+     "note": "reported; room tone is added in the mix (SPEC §6)"
+    },
+    "binaural": {
+     "present": false
+    }
+   },
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin1.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 200.0,
+    "lufsIntegrated": -24.16,
+    "truePeakDbtp": -12.96,
+    "samplePeakDbfs": -12.97,
+    "dc": [
+     -2.66e-07,
+     -2.29e-07
+    ],
+    "edgeAbs": {
+     "first": 4.77e-07,
+     "last": 0.0
+    },
+    "shortTerm3s": {
+     "windows": 198,
+     "below70": 0,
+     "min": -44.29,
+     "p5": -33.84,
+     "p10": -33.6,
+     "p50": -24.21,
+     "p90": -23.29,
+     "p95": -23.16,
+     "max": -23.04,
+     "spreadP10P90": 10.31,
+     "spreadP5P95": 10.68,
+     "spreadMaxMin": 21.25,
+     "excludingIntervals": {
+      "n": 146,
+      "p10": -24.42,
+      "p50": -24.02,
+      "p90": -23.19,
+      "spreadP10P90": 1.23,
+      "spreadMaxMin": 1.77,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": 0.09
+    },
+    "onset": {
+     "fluxP50": 0.0047,
+     "fluxP99": 0.0163,
+     "fluxMax": 0.1007,
+     "peakRatePerMin": 30.0,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.927,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0183,
+    "clicks": {
+     "hfTransients": 0,
+     "hfMaxDbfs": -64.9,
+     "hfP50Dbfs": -106.6,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0026,
+     "min1sRmsDbfs": -77.3
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1717,
+     "300_500": 0.3931,
+     "500_4000": 0.4351,
+     "1500_4000": 0.0033,
+     "gt4000": 0.0001
+    },
+    "stereo": {
+     "lrCorrelation": 0.977
+    }
+   }
+  },
+  {
+   "id": "dalga.derin2",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin2.wav",
+   "sha256": "e10964ebd7c52edaaaf4139f1a663956bebc6b355d4f9526c3af2710e7529b56",
+   "family": "derin",
+   "role": "segment",
+   "note": null,
+   "durationSec": 200.0,
+   "sampleRate": 44100,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "parts": [
+    "derin2"
+   ],
+   "seeds": [
+    202609296
+   ],
+   "transposeSemitones": 13,
+   "grid": {
+    "barSec": 4.0,
+    "gridBar0": 94,
+    "gridBarEnd": 144,
+    "harmonicPhaseAtStart(bar mod 24)": 22
+   },
+   "gainDb": -4.73,
+   "lufsIntegrated": -24.11,
+   "truePeakDbtp": -13.34,
+   "rawInfo": [
+    {
+     "rawLufs": -19.38,
+     "last1sRmsDbfsRaw": -71.0
+    }
+   ],
+   "events": [
+    {
+     "eventsInFile": 169,
+     "perMinuteByRole": {
+      "bass": 12.3,
+      "mel": 4.8,
+      "pad": 12.3,
+      "up": 21.3
+     },
+     "instCountsAll": {
+      "pad": 43,
+      "piano": 133
+     },
+     "drumEvents": 0,
+     "bars": 50,
+     "silentBars": 9,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 194.0121,
+     "maxGapBetweenOnsetsSec": 5.991,
+     "maxGapInclEdgesSec": 5.991
+    }
+   ],
+   "checks": {
+    "format44k1Stereo": {
+     "pass": true,
+     "subtype": "PCM_24"
+    },
+    "lufsIntegrated": {
+     "value": -24.11,
+     "target": -24.0,
+     "pass": true,
+     "note": null
+    },
+    "truePeak": {
+     "valueDbtp": -13.34,
+     "limit": -1.5,
+     "pass": true
+    },
+    "noDrums": {
+     "pass": true,
+     "drumEventsInRenderLog": 0,
+     "percussiveEnergyRatioHPSS": 0.0179,
+     "basis": "render log: 0 kick/shaker/bass events (sakin composer never emits them); HPSS ratio is informational"
+    },
+    "noVocals": {
+     "pass": null,
+     "basis": "by construction only (oscillators, Karplus string, noise-impulse reverb; no voice source)",
+     "scribe": "NOT RUN - not verified by transcription"
+    },
+    "onsetStrength": {
+     "fluxP50": 0.0048,
+     "fluxP99": 0.0219,
+     "peakRatePerMin": 36.3,
+     "pass": null,
+     "basis": "measured; SPEC has no numeric limit. The engine is a slow piano texture, so onsets are real note attacks. Compare with the ElevenLabs set using the same tool (tools/analyze_music.py)."
+    },
+    "loudnessSpread3s": {
+     "fullSpreadP10P90": 10.36,
+     "fullSpreadMaxMin": 21.51,
+     "p50": -24.18,
+     "soundingOnlySpreadP10P90": 1.3,
+     "soundingOnlySpreadMaxMin": 1.68,
+     "lastThirdMinusFirstThirdDb": 0.04,
+     "pass": null,
+     "basis": "SPEC: \"dinamik düz (3 sn LUFS yayılımı dar)\" without a number. Full-file spread is set by the engine's designed silent bar (every 6th 4 s bar, Bernardi 2005 in dalgaMusic.js); sounding-only spread = the texture itself."
+    },
+    "noClicks": {
+     "pass": true,
+     "hfTransients": 0,
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedFirst10": [],
+     "unattributedInSeams": 0,
+     "fileEdgeAbs": {
+      "first": 4.77e-07,
+      "last": 1.19e-07
+     },
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient; a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "speakerCriterionPlanD3": {
+     "lt300": 0.1847,
+     "500_4000": 0.4403,
+     "lt300_le_0_10": false,
+     "500_4000_ge_0_40": true,
+     "basis": "PLAN.v2 §D.3 \"Hoparlör dersi\" (VARSAYIM)"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0049,
+     "min1sRmsDbfs": -76.2,
+     "pass": null,
+     "note": "reported; room tone is added in the mix (SPEC §6)"
+    },
+    "binaural": {
+     "present": false
+    }
+   },
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin2.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 200.0,
+    "lufsIntegrated": -24.11,
+    "truePeakDbtp": -13.34,
+    "samplePeakDbfs": -13.35,
+    "dc": [
+     -2.91e-07,
+     -2.9e-07
+    ],
+    "edgeAbs": {
+     "first": 4.77e-07,
+     "last": 1.19e-07
+    },
+    "shortTerm3s": {
+     "windows": 198,
+     "below70": 0,
+     "min": -44.44,
+     "p5": -33.99,
+     "p10": -33.62,
+     "p50": -24.18,
+     "p90": -23.26,
+     "p95": -23.04,
+     "max": -22.93,
+     "spreadP10P90": 10.36,
+     "spreadP5P95": 10.95,
+     "spreadMaxMin": 21.51,
+     "excludingIntervals": {
+      "n": 146,
+      "p10": -24.37,
+      "p50": -23.93,
+      "p90": -23.07,
+      "spreadP10P90": 1.3,
+      "spreadMaxMin": 1.68,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": 0.04
+    },
+    "onset": {
+     "fluxP50": 0.0048,
+     "fluxP99": 0.0219,
+     "fluxMax": 0.0962,
+     "peakRatePerMin": 36.3,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.927,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0179,
+    "clicks": {
+     "hfTransients": 0,
+     "hfMaxDbfs": -58.9,
+     "hfP50Dbfs": -100.7,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0049,
+     "min1sRmsDbfs": -76.2
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1847,
+     "300_500": 0.3747,
+     "500_4000": 0.4403,
+     "1500_4000": 0.0046,
+     "gt4000": 0.0003
+    },
+    "stereo": {
+     "lrCorrelation": 0.974
+    }
+   }
+  },
+  {
+   "id": "dalga.derin3",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin3.wav",
+   "sha256": "5d967bf543fb3c542922db3633f3909946902a5464cc6380a4748c408be85b52",
+   "family": "derin",
+   "role": "segment",
+   "note": null,
+   "durationSec": 200.0,
+   "sampleRate": 44100,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "parts": [
+    "derin3"
+   ],
+   "seeds": [
+    202609297
+   ],
+   "transposeSemitones": 13,
+   "grid": {
+    "barSec": 4.0,
+    "gridBar0": 142,
+    "gridBarEnd": 192,
+    "harmonicPhaseAtStart(bar mod 24)": 22
+   },
+   "gainDb": -4.73,
+   "lufsIntegrated": -23.76,
+   "truePeakDbtp": -12.92,
+   "rawInfo": [
+    {
+     "rawLufs": -19.03,
+     "last1sRmsDbfsRaw": -70.3
+    }
+   ],
+   "events": [
+    {
+     "eventsInFile": 168,
+     "perMinuteByRole": {
+      "bass": 12.3,
+      "mel": 5.4,
+      "pad": 12.3,
+      "up": 20.4
+     },
+     "instCountsAll": {
+      "pad": 43,
+      "piano": 133
+     },
+     "drumEvents": 0,
+     "bars": 50,
+     "silentBars": 9,
+     "midiRange": [
+      56,
+      91
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 194.0164,
+     "maxGapBetweenOnsetsSec": 7.984,
+     "maxGapInclEdgesSec": 7.984
+    }
+   ],
+   "checks": {
+    "format44k1Stereo": {
+     "pass": true,
+     "subtype": "PCM_24"
+    },
+    "lufsIntegrated": {
+     "value": -23.76,
+     "target": -24.0,
+     "pass": true,
+     "note": null
+    },
+    "truePeak": {
+     "valueDbtp": -12.92,
+     "limit": -1.5,
+     "pass": true
+    },
+    "noDrums": {
+     "pass": true,
+     "drumEventsInRenderLog": 0,
+     "percussiveEnergyRatioHPSS": 0.0188,
+     "basis": "render log: 0 kick/shaker/bass events (sakin composer never emits them); HPSS ratio is informational"
+    },
+    "noVocals": {
+     "pass": null,
+     "basis": "by construction only (oscillators, Karplus string, noise-impulse reverb; no voice source)",
+     "scribe": "NOT RUN - not verified by transcription"
+    },
+    "onsetStrength": {
+     "fluxP50": 0.0047,
+     "fluxP99": 0.0185,
+     "peakRatePerMin": 34.5,
+     "pass": null,
+     "basis": "measured; SPEC has no numeric limit. The engine is a slow piano texture, so onsets are real note attacks. Compare with the ElevenLabs set using the same tool (tools/analyze_music.py)."
+    },
+    "loudnessSpread3s": {
+     "fullSpreadP10P90": 10.47,
+     "fullSpreadMaxMin": 21.28,
+     "p50": -23.91,
+     "soundingOnlySpreadP10P90": 1.43,
+     "soundingOnlySpreadMaxMin": 1.75,
+     "lastThirdMinusFirstThirdDb": 0.08,
+     "pass": null,
+     "basis": "SPEC: \"dinamik düz (3 sn LUFS yayılımı dar)\" without a number. Full-file spread is set by the engine's designed silent bar (every 6th 4 s bar, Bernardi 2005 in dalgaMusic.js); sounding-only spread = the texture itself."
+    },
+    "noClicks": {
+     "pass": true,
+     "hfTransients": 0,
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedFirst10": [],
+     "unattributedInSeams": 0,
+     "fileEdgeAbs": {
+      "first": 3.58e-07,
+      "last": 1.19e-07
+     },
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient; a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "speakerCriterionPlanD3": {
+     "lt300": 0.1586,
+     "500_4000": 0.4166,
+     "lt300_le_0_10": false,
+     "500_4000_ge_0_40": true,
+     "basis": "PLAN.v2 §D.3 \"Hoparlör dersi\" (VARSAYIM)"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0032,
+     "min1sRmsDbfs": -75.7,
+     "pass": null,
+     "note": "reported; room tone is added in the mix (SPEC §6)"
+    },
+    "binaural": {
+     "present": false
+    }
+   },
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin3.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 200.0,
+    "lufsIntegrated": -23.76,
+    "truePeakDbtp": -12.92,
+    "samplePeakDbfs": -12.94,
+    "dc": [
+     -2.33e-07,
+     -2.53e-07
+    ],
+    "edgeAbs": {
+     "first": 3.58e-07,
+     "last": 1.19e-07
+    },
+    "shortTerm3s": {
+     "windows": 198,
+     "below70": 0,
+     "min": -43.82,
+     "p5": -33.64,
+     "p10": -33.41,
+     "p50": -23.91,
+     "p90": -22.94,
+     "p95": -22.6,
+     "max": -22.54,
+     "spreadP10P90": 10.47,
+     "spreadP5P95": 11.04,
+     "spreadMaxMin": 21.28,
+     "excludingIntervals": {
+      "n": 146,
+      "p10": -24.08,
+      "p50": -23.47,
+      "p90": -22.65,
+      "spreadP10P90": 1.43,
+      "spreadMaxMin": 1.75,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": 0.08
+    },
+    "onset": {
+     "fluxP50": 0.0047,
+     "fluxP99": 0.0185,
+     "fluxMax": 0.0942,
+     "peakRatePerMin": 34.5,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.929,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0188,
+    "clicks": {
+     "hfTransients": 0,
+     "hfMaxDbfs": -64.9,
+     "hfP50Dbfs": -103.9,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0032,
+     "min1sRmsDbfs": -75.7
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1586,
+     "300_500": 0.4248,
+     "500_4000": 0.4166,
+     "1500_4000": 0.0037,
+     "gt4000": 0.0001
+    },
+    "stereo": {
+     "lrCorrelation": 0.971
+    }
+   }
+  },
+  {
+   "id": "dalga.derin_family",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin_family.wav",
+   "sha256": "6145941c5cd2a4ccb611348dcde847ba44b19f83138c5d24074155a3b2e2edac",
+   "family": "derin",
+   "role": "family-joined",
+   "note": null,
+   "durationSec": 584.0,
+   "sampleRate": 44100,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "parts": [
+    "derin1",
+    "derin2",
+    "derin3"
+   ],
+   "seeds": [
+    202609295,
+    202609296,
+    202609297
+   ],
+   "transposeSemitones": 13,
+   "grid": {
+    "barSec": 4.0,
+    "gridBar0": 46,
+    "gridBarEnd": 192,
+    "harmonicPhaseAtStart(bar mod 24)": 22
+   },
+   "gainDb": -4.73,
+   "lufsIntegrated": -24.0,
+   "truePeakDbtp": -12.92,
+   "rawInfo": [
+    {
+     "rawLufs": -19.43,
+     "last1sRmsDbfsRaw": -71.7
+    },
+    {
+     "rawLufs": -19.38,
+     "last1sRmsDbfsRaw": -71.0
+    },
+    {
+     "rawLufs": -19.03,
+     "last1sRmsDbfsRaw": -70.3
+    }
+   ],
+   "events": [
+    {
+     "eventsInFile": 157,
+     "perMinuteByRole": {
+      "bass": 12.3,
+      "mel": 3.3,
+      "pad": 12.3,
+      "up": 19.2
+     },
+     "instCountsAll": {
+      "pad": 43,
+      "piano": 122
+     },
+     "drumEvents": 0,
+     "bars": 50,
+     "silentBars": 9,
+     "midiRange": [
+      56,
+      91
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 195,
+     "maxGapBetweenOnsetsSec": 7.989,
+     "maxGapInclEdgesSec": 7.989
+    },
+    {
+     "eventsInFile": 169,
+     "perMinuteByRole": {
+      "bass": 12.3,
+      "mel": 4.8,
+      "pad": 12.3,
+      "up": 21.3
+     },
+     "instCountsAll": {
+      "pad": 43,
+      "piano": 133
+     },
+     "drumEvents": 0,
+     "bars": 50,
+     "silentBars": 9,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 194.0121,
+     "maxGapBetweenOnsetsSec": 5.991,
+     "maxGapInclEdgesSec": 5.991
+    },
+    {
+     "eventsInFile": 168,
+     "perMinuteByRole": {
+      "bass": 12.3,
+      "mel": 5.4,
+      "pad": 12.3,
+      "up": 20.4
+     },
+     "instCountsAll": {
+      "pad": 43,
+      "piano": 133
+     },
+     "drumEvents": 0,
+     "bars": 50,
+     "silentBars": 9,
+     "midiRange": [
+      56,
+      91
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 194.0164,
+     "maxGapBetweenOnsetsSec": 7.984,
+     "maxGapInclEdgesSec": 7.984
+    }
+   ],
+   "checks": {
+    "format44k1Stereo": {
+     "pass": true,
+     "subtype": "PCM_24"
+    },
+    "lufsIntegrated": {
+     "value": -24.0,
+     "target": -24.0,
+     "pass": true,
+     "note": null
+    },
+    "truePeak": {
+     "valueDbtp": -12.92,
+     "limit": -1.5,
+     "pass": true
+    },
+    "noDrums": {
+     "pass": true,
+     "drumEventsInRenderLog": 0,
+     "percussiveEnergyRatioHPSS": 0.0183,
+     "basis": "render log: 0 kick/shaker/bass events (sakin composer never emits them); HPSS ratio is informational"
+    },
+    "noVocals": {
+     "pass": null,
+     "basis": "by construction only (oscillators, Karplus string, noise-impulse reverb; no voice source)",
+     "scribe": "NOT RUN - not verified by transcription"
+    },
+    "onsetStrength": {
+     "fluxP50": 0.0048,
+     "fluxP99": 0.0189,
+     "peakRatePerMin": 34.21,
+     "pass": null,
+     "basis": "measured; SPEC has no numeric limit. The engine is a slow piano texture, so onsets are real note attacks. Compare with the ElevenLabs set using the same tool (tools/analyze_music.py)."
+    },
+    "loudnessSpread3s": {
+     "fullSpreadP10P90": 10.33,
+     "fullSpreadMaxMin": 21.9,
+     "p50": -24.06,
+     "soundingOnlySpreadP10P90": 1.25,
+     "soundingOnlySpreadMaxMin": 2.27,
+     "lastThirdMinusFirstThirdDb": 0.36,
+     "pass": null,
+     "basis": "SPEC: \"dinamik düz (3 sn LUFS yayılımı dar)\" without a number. Full-file spread is set by the engine's designed silent bar (every 6th 4 s bar, Bernardi 2005 in dalgaMusic.js); sounding-only spread = the texture itself."
+    },
+    "noClicks": {
+     "pass": true,
+     "hfTransients": 0,
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedFirst10": [],
+     "unattributedInSeams": 0,
+     "fileEdgeAbs": {
+      "first": 4.77e-07,
+      "last": 1.19e-07
+     },
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient; a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "seams": {
+     "rows": [
+      {
+       "xfadeStartSec": 192.0,
+       "loudnessDeltaDb": -2.41,
+       "percentileInBaseline": 57.1,
+       "hfJumpAtXfadeEdgesDb": [
+        0.7,
+        13.1
+       ],
+       "unattributedHfTransientsInXfade": []
+      },
+      {
+       "xfadeStartSec": 384.0,
+       "loudnessDeltaDb": -2.68,
+       "percentileInBaseline": 28.6,
+       "hfJumpAtXfadeEdgesDb": [
+        2.6,
+        2.7
+       ],
+       "unattributedHfTransientsInXfade": []
+      }
+     ],
+     "baselineSamePhase": {
+      "positions": "same harmonic phase (seam + k*24.0 s)",
+      "n": 21,
+      "p5": -3.12,
+      "p50": -2.43,
+      "p95": -2.2,
+      "max": -2.19
+     },
+     "definition": "energy-mean 400 ms loudness inside the 8 s crossfade minus mean of the 16 s before and 16 s after (dB)"
+    },
+    "speakerCriterionPlanD3": {
+     "lt300": 0.1702,
+     "500_4000": 0.4284,
+     "lt300_le_0_10": false,
+     "500_4000_ge_0_40": true,
+     "basis": "PLAN.v2 §D.3 \"Hoparlör dersi\" (VARSAYIM)"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0049,
+     "min1sRmsDbfs": -77.3,
+     "pass": null,
+     "note": "reported; room tone is added in the mix (SPEC §6)"
+    },
+    "binaural": {
+     "present": false
+    }
+   },
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin_family.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 584.0,
+    "lufsIntegrated": -24.0,
+    "truePeakDbtp": -12.92,
+    "samplePeakDbfs": -12.94,
+    "dc": [
+     -2.49e-07,
+     -2.44e-07
+    ],
+    "edgeAbs": {
+     "first": 4.77e-07,
+     "last": 1.19e-07
+    },
+    "shortTerm3s": {
+     "windows": 582,
+     "below70": 0,
+     "min": -44.44,
+     "p5": -33.92,
+     "p10": -33.45,
+     "p50": -24.06,
+     "p90": -23.12,
+     "p95": -23.03,
+     "max": -22.54,
+     "spreadP10P90": 10.33,
+     "spreadP5P95": 10.89,
+     "spreadMaxMin": 21.9,
+     "excludingIntervals": {
+      "n": 434,
+      "p10": -24.32,
+      "p50": -23.83,
+      "p90": -23.07,
+      "spreadP10P90": 1.25,
+      "spreadMaxMin": 2.27,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": 0.36
+    },
+    "onset": {
+     "fluxP50": 0.0048,
+     "fluxP99": 0.0189,
+     "fluxMax": 0.0998,
+     "peakRatePerMin": 34.21,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.931,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0183,
+    "clicks": {
+     "hfTransients": 0,
+     "hfMaxDbfs": -58.9,
+     "hfP50Dbfs": -103.8,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0049,
+     "min1sRmsDbfs": -77.3
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1702,
+     "300_500": 0.4013,
+     "500_4000": 0.4284,
+     "1500_4000": 0.0039,
+     "gt4000": 0.0002
+    },
+    "stereo": {
+     "lrCorrelation": 0.974
+    },
+    "seams": {
+     "xfadeSec": 8.0,
+     "rows": [
+      {
+       "xfadeStartSec": 192.0,
+       "loudnessDeltaDb": -2.41,
+       "percentileInBaseline": 57.1,
+       "hfJumpAtXfadeEdgesDb": [
+        0.7,
+        13.1
+       ],
+       "unattributedHfTransientsInXfade": []
+      },
+      {
+       "xfadeStartSec": 384.0,
+       "loudnessDeltaDb": -2.68,
+       "percentileInBaseline": 28.6,
+       "hfJumpAtXfadeEdgesDb": [
+        2.6,
+        2.7
+       ],
+       "unattributedHfTransientsInXfade": []
+      }
+     ],
+     "baseline": {
+      "positions": "same harmonic phase (seam + k*24.0 s)",
+      "n": 21,
+      "p5": -3.12,
+      "p50": -2.43,
+      "p95": -2.2,
+      "max": -2.19
+     },
+     "deltaDefinition": "energy-mean 400 ms loudness inside the 8 s crossfade minus mean of the 16 s before and 16 s after (dB)"
+    }
+   }
+  },
+  {
+   "id": "dalga.varis_x",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_varis_x.wav",
+   "sha256": "381113fd10c90c82594998b62ee2490175029969ae57ee89e574ab6ef3ea3543",
+   "family": "varis-aday",
+   "role": "first-impression Varış candidate (starts on E-flat maj7; ends with bars 22,23 mod 24 so it crossfades into any vd segment)",
+   "note": null,
+   "durationSec": 192.0,
+   "sampleRate": 44100,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "parts": [
+    "varis_x"
+   ],
+   "seeds": [
+    202609294
+   ],
+   "transposeSemitones": 13,
+   "grid": {
+    "barSec": 4.0,
+    "gridBar0": 24,
+    "gridBarEnd": 72,
+    "harmonicPhaseAtStart(bar mod 24)": 0
+   },
+   "gainDb": -4.92,
+   "lufsIntegrated": -24.0,
+   "truePeakDbtp": -12.58,
+   "rawInfo": [
+    {
+     "rawLufs": -19.08,
+     "last1sRmsDbfsRaw": -71.1
+    }
+   ],
+   "events": [
+    {
+     "eventsInFile": 243,
+     "perMinuteByRole": {
+      "bass": 12.5,
+      "gtr": 3.12,
+      "mel": 9.06,
+      "pad": 12.5,
+      "up": 38.75
+     },
+     "instCountsAll": {
+      "pad": 41,
+      "piano": 198,
+      "guitar": 10
+     },
+     "drumEvents": 0,
+     "bars": 48,
+     "silentBars": 8,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 187.0111,
+     "maxGapBetweenOnsetsSec": 7.0,
+     "maxGapInclEdgesSec": 7.0
+    }
+   ],
+   "checks": {
+    "format44k1Stereo": {
+     "pass": true,
+     "subtype": "PCM_24"
+    },
+    "lufsIntegrated": {
+     "value": -24.0,
+     "target": -24.0,
+     "pass": true,
+     "note": null
+    },
+    "truePeak": {
+     "valueDbtp": -12.58,
+     "limit": -1.5,
+     "pass": true
+    },
+    "noDrums": {
+     "pass": true,
+     "drumEventsInRenderLog": 0,
+     "percussiveEnergyRatioHPSS": 0.019,
+     "basis": "render log: 0 kick/shaker/bass events (sakin composer never emits them); HPSS ratio is informational"
+    },
+    "noVocals": {
+     "pass": null,
+     "basis": "by construction only (oscillators, Karplus string, noise-impulse reverb; no voice source)",
+     "scribe": "NOT RUN - not verified by transcription"
+    },
+    "onsetStrength": {
+     "fluxP50": 0.005,
+     "fluxP99": 0.0346,
+     "peakRatePerMin": 48.12,
+     "pass": null,
+     "basis": "measured; SPEC has no numeric limit. The engine is a slow piano texture, so onsets are real note attacks. Compare with the ElevenLabs set using the same tool (tools/analyze_music.py)."
+    },
+    "loudnessSpread3s": {
+     "fullSpreadP10P90": 10.11,
+     "fullSpreadMaxMin": 21.97,
+     "p50": -24.1,
+     "soundingOnlySpreadP10P90": 1.32,
+     "soundingOnlySpreadMaxMin": 1.99,
+     "lastThirdMinusFirstThirdDb": -0.28,
+     "pass": null,
+     "basis": "SPEC: \"dinamik düz (3 sn LUFS yayılımı dar)\" without a number. Full-file spread is set by the engine's designed silent bar (every 6th 4 s bar, Bernardi 2005 in dalgaMusic.js); sounding-only spread = the texture itself."
+    },
+    "noClicks": {
+     "pass": true,
+     "hfTransients": 6,
+     "attributedToNoteOnsets": 6,
+     "unattributed": 0,
+     "unattributedFirst10": [],
+     "unattributedInSeams": 0,
+     "fileEdgeAbs": {
+      "first": 1.19e-07,
+      "last": 1.19e-07
+     },
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient; a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "speakerCriterionPlanD3": {
+     "lt300": 0.1531,
+     "500_4000": 0.4156,
+     "lt300_le_0_10": false,
+     "500_4000_ge_0_40": true,
+     "basis": "PLAN.v2 §D.3 \"Hoparlör dersi\" (VARSAYIM)"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0034,
+     "min1sRmsDbfs": -77.7,
+     "pass": null,
+     "note": "reported; room tone is added in the mix (SPEC §6)"
+    },
+    "binaural": {
+     "present": false
+    }
+   },
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_varis_x.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 192.0,
+    "lufsIntegrated": -24.0,
+    "truePeakDbtp": -12.58,
+    "samplePeakDbfs": -12.58,
+    "dc": [
+     -5.77e-08,
+     -5.79e-08
+    ],
+    "edgeAbs": {
+     "first": 1.19e-07,
+     "last": 1.19e-07
+    },
+    "shortTerm3s": {
+     "windows": 190,
+     "below70": 0,
+     "min": -44.64,
+     "p5": -34.36,
+     "p10": -33.37,
+     "p50": -24.1,
+     "p90": -23.26,
+     "p95": -22.86,
+     "max": -22.67,
+     "spreadP10P90": 10.11,
+     "spreadP5P95": 11.5,
+     "spreadMaxMin": 21.97,
+     "excludingIntervals": {
+      "n": 144,
+      "p10": -24.41,
+      "p50": -23.67,
+      "p90": -23.09,
+      "spreadP10P90": 1.32,
+      "spreadMaxMin": 1.99,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": -0.28
+    },
+    "onset": {
+     "fluxP50": 0.005,
+     "fluxP99": 0.0346,
+     "fluxMax": 0.1223,
+     "peakRatePerMin": 48.12,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.928,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.019,
+    "clicks": {
+     "hfTransients": 6,
+     "hfMaxDbfs": -58.8,
+     "hfP50Dbfs": -95.4,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 6,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0034,
+     "min1sRmsDbfs": -77.7
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1531,
+     "300_500": 0.4308,
+     "500_4000": 0.4156,
+     "1500_4000": 0.0085,
+     "gt4000": 0.0004
+    },
+    "stereo": {
+     "lrCorrelation": 0.975
+    }
+   }
+  },
+  {
+   "id": "dalga.kapanis",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_kapanis.wav",
+   "sha256": "3a83a9b933909ac1f7e417cf89aef960a8ace30fc1a74d3ec419ecd882d6cade",
+   "family": "kapanis",
+   "role": "closing: 8 s crossfade-in bars (phase 4,5), E-flat maj7 final chord at 176 s held 7 s, natural decay",
+   "note": null,
+   "durationSec": 188.0,
+   "sampleRate": 44100,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "parts": [
+    "kapanis"
+   ],
+   "seeds": [
+    202609298
+   ],
+   "transposeSemitones": 13,
+   "grid": {
+    "barSec": 4.0,
+    "gridBar0": 28,
+    "gridBarEnd": 75,
+    "harmonicPhaseAtStart(bar mod 24)": 4
+   },
+   "gainDb": -5.12,
+   "lufsIntegrated": -24.0,
+   "truePeakDbtp": -12.49,
+   "rawInfo": [
+    {
+     "rawLufs": -18.88,
+     "last1sRmsDbfsRaw": -95.6,
+     "cutResidualAfterEndRmsDbfsRaw": -171.5
+    }
+   ],
+   "events": [
+    {
+     "eventsInFile": 229,
+     "perMinuteByRole": {
+      "bass": 11.81,
+      "gtr": 5.43,
+      "mel": 7.34,
+      "pad": 11.81,
+      "up": 36.7
+     },
+     "instCountsAll": {
+      "pad": 39,
+      "piano": 185,
+      "guitar": 17
+     },
+     "drumEvents": 0,
+     "bars": 47,
+     "silentBars": 8,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 179.012,
+     "maxGapBetweenOnsetsSec": 5.0,
+     "maxGapInclEdgesSec": 8.988
+    }
+   ],
+   "checks": {
+    "format44k1Stereo": {
+     "pass": true,
+     "subtype": "PCM_24"
+    },
+    "lufsIntegrated": {
+     "value": -24.0,
+     "target": -24.0,
+     "pass": true,
+     "note": null
+    },
+    "truePeak": {
+     "valueDbtp": -12.49,
+     "limit": -1.5,
+     "pass": true
+    },
+    "noDrums": {
+     "pass": true,
+     "drumEventsInRenderLog": 0,
+     "percussiveEnergyRatioHPSS": 0.0178,
+     "basis": "render log: 0 kick/shaker/bass events (sakin composer never emits them); HPSS ratio is informational"
+    },
+    "noVocals": {
+     "pass": null,
+     "basis": "by construction only (oscillators, Karplus string, noise-impulse reverb; no voice source)",
+     "scribe": "NOT RUN - not verified by transcription"
+    },
+    "onsetStrength": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0347,
+     "peakRatePerMin": 45.64,
+     "pass": null,
+     "basis": "measured; SPEC has no numeric limit. The engine is a slow piano texture, so onsets are real note attacks. Compare with the ElevenLabs set using the same tool (tools/analyze_music.py)."
+    },
+    "loudnessSpread3s": {
+     "fullSpreadP10P90": 10.74,
+     "fullSpreadMaxMin": 43.5,
+     "p50": -24.1,
+     "soundingOnlySpreadP10P90": 1.63,
+     "soundingOnlySpreadMaxMin": 43.5,
+     "lastThirdMinusFirstThirdDb": -0.23,
+     "pass": null,
+     "basis": "SPEC: \"dinamik düz (3 sn LUFS yayılımı dar)\" without a number. Full-file spread is set by the engine's designed silent bar (every 6th 4 s bar, Bernardi 2005 in dalgaMusic.js); sounding-only spread = the texture itself."
+    },
+    "noClicks": {
+     "pass": true,
+     "hfTransients": 8,
+     "attributedToNoteOnsets": 8,
+     "unattributed": 0,
+     "unattributedFirst10": [],
+     "unattributedInSeams": 0,
+     "fileEdgeAbs": {
+      "first": 1.07e-06,
+      "last": 1.19e-07
+     },
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient; a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "speakerCriterionPlanD3": {
+     "lt300": 0.1539,
+     "500_4000": 0.4365,
+     "lt300_le_0_10": false,
+     "500_4000_ge_0_40": true,
+     "basis": "PLAN.v2 §D.3 \"Hoparlör dersi\" (VARSAYIM)"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0029,
+     "min1sRmsDbfs": -87.4,
+     "pass": null,
+     "note": "reported; room tone is added in the mix (SPEC §6)"
+    },
+    "binaural": {
+     "present": false
+    }
+   },
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_kapanis.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 188.0,
+    "lufsIntegrated": -24.0,
+    "truePeakDbtp": -12.49,
+    "samplePeakDbfs": -12.51,
+    "dc": [
+     -1.84e-08,
+     -5.8e-08
+    ],
+    "edgeAbs": {
+     "first": 1.07e-06,
+     "last": 1.19e-07
+    },
+    "shortTerm3s": {
+     "windows": 186,
+     "below70": 0,
+     "min": -65.48,
+     "p5": -40.7,
+     "p10": -33.82,
+     "p50": -24.1,
+     "p90": -23.08,
+     "p95": -22.57,
+     "max": -21.98,
+     "spreadP10P90": 10.74,
+     "spreadP5P95": 18.13,
+     "spreadMaxMin": 43.5,
+     "excludingIntervals": {
+      "n": 138,
+      "p10": -24.63,
+      "p50": -23.86,
+      "p90": -23.0,
+      "spreadP10P90": 1.63,
+      "spreadMaxMin": 43.5,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": -0.23
+    },
+    "onset": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0347,
+     "fluxMax": 0.1217,
+     "peakRatePerMin": 45.64,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.908,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0178,
+    "clicks": {
+     "hfTransients": 8,
+     "hfMaxDbfs": -59.1,
+     "hfP50Dbfs": -96.7,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 8,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0029,
+     "min1sRmsDbfs": -87.4
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1539,
+     "300_500": 0.4092,
+     "500_4000": 0.4365,
+     "1500_4000": 0.0078,
+     "gt4000": 0.0004
+    },
+    "stereo": {
+     "lrCorrelation": 0.982
+    }
+   }
+  },
+  {
+   "id": "dalga.imge",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_imge.wav",
+   "sha256": "44fba02f2b6579f3304b7181970e26e136b1da2b2375cdb1ec01aa4a9bcda89c",
+   "family": "imge",
+   "role": "layer: sparse engine piano, E-flat major pentatonic",
+   "note": "gain = Derin family gain (keeps the engine-native balance of melody vs. bed); its integrated LUFS is therefore below -24",
+   "durationSec": 180.0,
+   "sampleRate": 44100,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "parts": [
+    "imge"
+   ],
+   "seeds": [
+    202609299
+   ],
+   "transposeSemitones": 13,
+   "grid": {
+    "barSec": 4.0,
+    "gridBar0": 24,
+    "gridBarEnd": 69,
+    "harmonicPhaseAtStart(bar mod 24)": 0
+   },
+   "gainDb": -4.73,
+   "lufsIntegrated": -38.02,
+   "truePeakDbtp": -25.4,
+   "rawInfo": [
+    {
+     "rawLufs": -33.35,
+     "last1sRmsDbfsRaw": -240.0,
+     "cutResidualAfterEndRmsDbfsRaw": -240.0
+    }
+   ],
+   "events": [
+    {
+     "eventsInFile": 25,
+     "perMinuteByRole": {
+      "mel": 8.33
+     },
+     "instCountsAll": {
+      "piano": 25
+     },
+     "drumEvents": 0,
+     "bars": 45,
+     "silentBars": 7,
+     "midiRange": [
+      75,
+      94
+     ],
+     "firstEventSec": 1,
+     "lastEventSec": 161,
+     "maxGapBetweenOnsetsSec": 24.0,
+     "maxGapInclEdgesSec": 24.0
+    }
+   ],
+   "checks": {
+    "format44k1Stereo": {
+     "pass": true,
+     "subtype": "PCM_24"
+    },
+    "lufsIntegrated": {
+     "value": -38.02,
+     "target": null,
+     "pass": null,
+     "note": "layer: Derin family gain, no own target"
+    },
+    "truePeak": {
+     "valueDbtp": -25.4,
+     "limit": -1.5,
+     "pass": true
+    },
+    "noDrums": {
+     "pass": true,
+     "drumEventsInRenderLog": 0,
+     "percussiveEnergyRatioHPSS": 0.0035,
+     "basis": "render log: 0 kick/shaker/bass events (sakin composer never emits them); HPSS ratio is informational"
+    },
+    "noVocals": {
+     "pass": null,
+     "basis": "by construction only (oscillators, Karplus string, noise-impulse reverb; no voice source)",
+     "scribe": "NOT RUN - not verified by transcription"
+    },
+    "onsetStrength": {
+     "fluxP50": 0.0015,
+     "fluxP99": 0.0048,
+     "peakRatePerMin": 8.33,
+     "pass": null,
+     "basis": "measured; SPEC has no numeric limit. The engine is a slow piano texture, so onsets are real note attacks. Compare with the ElevenLabs set using the same tool (tools/analyze_music.py).",
+     "note": "sparse layer with gaps: 3 s spread and flux-based onset rate are not meaningful; use note statistics"
+    },
+    "loudnessSpread3s": {
+     "fullSpreadP10P90": 81.67,
+     "fullSpreadMaxMin": 142.36,
+     "p50": -53.35,
+     "soundingOnlySpreadP10P90": 95.95,
+     "soundingOnlySpreadMaxMin": 142.36,
+     "lastThirdMinusFirstThirdDb": 0.3,
+     "pass": null,
+     "basis": "SPEC: \"dinamik düz (3 sn LUFS yayılımı dar)\" without a number. Full-file spread is set by the engine's designed silent bar (every 6th 4 s bar, Bernardi 2005 in dalgaMusic.js); sounding-only spread = the texture itself.",
+     "note": "sparse layer with gaps: 3 s spread and flux-based onset rate are not meaningful; use note statistics"
+    },
+    "noClicks": {
+     "pass": true,
+     "hfTransients": 0,
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedFirst10": [],
+     "unattributedInSeams": 0,
+     "fileEdgeAbs": {
+      "first": 0.0,
+      "last": 0.0
+     },
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient; a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "speakerCriterionPlanD3": {
+     "lt300": 0.0,
+     "500_4000": 0.974,
+     "lt300_le_0_10": true,
+     "500_4000_ge_0_40": true,
+     "basis": "PLAN.v2 §D.3 \"Hoparlör dersi\" (VARSAYIM)"
+    },
+    "digitalSilence": {
+     "longestRunSec": 18.9499,
+     "min1sRmsDbfs": -138.8,
+     "pass": null,
+     "note": "reported; room tone is added in the mix (SPEC §6)"
+    },
+    "binaural": {
+     "present": false
+    },
+    "layerNotes": {
+     "notesPerMin": 8.33,
+     "firstNoteSec": 1,
+     "lastNoteSec": 161,
+     "maxGapBetweenNotesSec": 24.0,
+     "midiRange": [
+      75,
+      94
+     ]
+    }
+   },
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_imge.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 180.0,
+    "lufsIntegrated": -38.02,
+    "truePeakDbtp": -25.4,
+    "samplePeakDbfs": -25.41,
+    "dc": [
+     -7.51e-08,
+     -7.5e-08
+    ],
+    "edgeAbs": {
+     "first": 0.0,
+     "last": 0.0
+    },
+    "shortTerm3s": {
+     "windows": 178,
+     "below70": 82,
+     "min": -178.34,
+     "p5": -138.25,
+     "p10": -120.76,
+     "p50": -53.35,
+     "p90": -39.09,
+     "p95": -38.66,
+     "max": -35.98,
+     "spreadP10P90": 81.67,
+     "spreadP5P95": 99.59,
+     "spreadMaxMin": 142.36,
+     "excludingIntervals": {
+      "n": 116,
+      "p10": -134.73,
+      "p50": -51.08,
+      "p90": -38.78,
+      "spreadP10P90": 95.95,
+      "spreadMaxMin": 142.36,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": 0.3
+    },
+    "onset": {
+     "fluxP50": 0.0015,
+     "fluxP99": 0.0048,
+     "fluxMax": 0.2011,
+     "peakRatePerMin": 8.33,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.464,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0035,
+    "clicks": {
+     "hfTransients": 0,
+     "hfMaxDbfs": -58.6,
+     "hfP50Dbfs": -143.8,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 18.9499,
+     "min1sRmsDbfs": -138.8
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.0,
+     "300_500": 0.0,
+     "500_4000": 0.974,
+     "1500_4000": 0.3334,
+     "gt4000": 0.026
+    },
+    "stereo": {
+     "lrCorrelation": 0.941
+    }
+   }
+  },
+  {
+   "id": "dalga.imge_alt_p25",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_imge_alt_p25.wav",
+   "sha256": "25a76088f019839e5b66ccbcf96147d747a34a3c87f2d52dc15b0cb974191f79",
+   "family": "imge",
+   "role": "ALTERNATIVE (not default): same notes one octave above the default imge (+25, E-flat6-B-flat7) = \"one octave above the +13 bed\" reading",
+   "note": "same seed and note sequence as dalga_imge.wav, only the octave differs",
+   "durationSec": 180.0,
+   "sampleRate": 44100,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "parts": [
+    "imge_alt_p25"
+   ],
+   "seeds": [
+    202609299
+   ],
+   "transposeSemitones": 25,
+   "grid": {
+    "barSec": 4.0,
+    "gridBar0": 24,
+    "gridBarEnd": 69,
+    "harmonicPhaseAtStart(bar mod 24)": 0
+   },
+   "gainDb": -4.73,
+   "lufsIntegrated": -36.3,
+   "truePeakDbtp": -24.97,
+   "rawInfo": [
+    {
+     "rawLufs": -31.67,
+     "last1sRmsDbfsRaw": -240.0,
+     "cutResidualAfterEndRmsDbfsRaw": -240.0
+    }
+   ],
+   "events": [
+    {
+     "eventsInFile": 25,
+     "perMinuteByRole": {
+      "mel": 8.33
+     },
+     "instCountsAll": {
+      "piano": 25
+     },
+     "drumEvents": 0,
+     "bars": 45,
+     "silentBars": 7,
+     "midiRange": [
+      87,
+      106
+     ],
+     "firstEventSec": 1,
+     "lastEventSec": 161,
+     "maxGapBetweenOnsetsSec": 24.0,
+     "maxGapInclEdgesSec": 24.0
+    }
+   ],
+   "checks": {
+    "format44k1Stereo": {
+     "pass": true,
+     "subtype": "PCM_24"
+    },
+    "lufsIntegrated": {
+     "value": -36.3,
+     "target": null,
+     "pass": null,
+     "note": "layer: Derin family gain, no own target"
+    },
+    "truePeak": {
+     "valueDbtp": -24.97,
+     "limit": -1.5,
+     "pass": true
+    },
+    "noDrums": {
+     "pass": true,
+     "drumEventsInRenderLog": 0,
+     "percussiveEnergyRatioHPSS": 0.0037,
+     "basis": "render log: 0 kick/shaker/bass events (sakin composer never emits them); HPSS ratio is informational"
+    },
+    "noVocals": {
+     "pass": null,
+     "basis": "by construction only (oscillators, Karplus string, noise-impulse reverb; no voice source)",
+     "scribe": "NOT RUN - not verified by transcription"
+    },
+    "onsetStrength": {
+     "fluxP50": 0.0015,
+     "fluxP99": 0.0047,
+     "peakRatePerMin": 8.33,
+     "pass": null,
+     "basis": "measured; SPEC has no numeric limit. The engine is a slow piano texture, so onsets are real note attacks. Compare with the ElevenLabs set using the same tool (tools/analyze_music.py).",
+     "note": "sparse layer with gaps: 3 s spread and flux-based onset rate are not meaningful; use note statistics"
+    },
+    "loudnessSpread3s": {
+     "fullSpreadP10P90": 81.96,
+     "fullSpreadMaxMin": 146.81,
+     "p50": -51.47,
+     "soundingOnlySpreadP10P90": 89.02,
+     "soundingOnlySpreadMaxMin": 146.81,
+     "lastThirdMinusFirstThirdDb": 0.58,
+     "pass": null,
+     "basis": "SPEC: \"dinamik düz (3 sn LUFS yayılımı dar)\" without a number. Full-file spread is set by the engine's designed silent bar (every 6th 4 s bar, Bernardi 2005 in dalgaMusic.js); sounding-only spread = the texture itself.",
+     "note": "sparse layer with gaps: 3 s spread and flux-based onset rate are not meaningful; use note statistics"
+    },
+    "noClicks": {
+     "pass": true,
+     "hfTransients": 0,
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedFirst10": [],
+     "unattributedInSeams": 0,
+     "fileEdgeAbs": {
+      "first": 0.0,
+      "last": 0.0
+     },
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient; a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "speakerCriterionPlanD3": {
+     "lt300": 0.0,
+     "500_4000": 0.8508,
+     "lt300_le_0_10": true,
+     "500_4000_ge_0_40": true,
+     "basis": "PLAN.v2 §D.3 \"Hoparlör dersi\" (VARSAYIM)"
+    },
+    "digitalSilence": {
+     "longestRunSec": 18.9501,
+     "min1sRmsDbfs": -138.8,
+     "pass": null,
+     "note": "reported; room tone is added in the mix (SPEC §6)"
+    },
+    "binaural": {
+     "present": false
+    },
+    "layerNotes": {
+     "notesPerMin": 8.33,
+     "firstNoteSec": 1,
+     "lastNoteSec": 161,
+     "maxGapBetweenNotesSec": 24.0,
+     "midiRange": [
+      87,
+      106
+     ]
+    }
+   },
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_imge_alt_p25.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 180.0,
+    "lufsIntegrated": -36.3,
+    "truePeakDbtp": -24.97,
+    "samplePeakDbfs": -25.02,
+    "dc": [
+     -7.51e-08,
+     -7.51e-08
+    ],
+    "edgeAbs": {
+     "first": 0.0,
+     "last": 0.0
+    },
+    "shortTerm3s": {
+     "windows": 178,
+     "below70": 82,
+     "min": -181.35,
+     "p5": -135.79,
+     "p10": -119.69,
+     "p50": -51.47,
+     "p90": -37.73,
+     "p95": -37.15,
+     "max": -34.54,
+     "spreadP10P90": 81.96,
+     "spreadP5P95": 98.64,
+     "spreadMaxMin": 146.81,
+     "excludingIntervals": {
+      "n": 115,
+      "p10": -126.48,
+      "p50": -49.33,
+      "p90": -37.46,
+      "spreadP10P90": 89.02,
+      "spreadMaxMin": 146.81,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": 0.58
+    },
+    "onset": {
+     "fluxP50": 0.0015,
+     "fluxP99": 0.0047,
+     "fluxMax": 0.1969,
+     "peakRatePerMin": 8.33,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.464,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0037,
+    "clicks": {
+     "hfTransients": 0,
+     "hfMaxDbfs": -47.3,
+     "hfP50Dbfs": -123.4,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 18.9501,
+     "min1sRmsDbfs": -138.8
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.0,
+     "300_500": 0.0,
+     "500_4000": 0.8508,
+     "1500_4000": 0.6667,
+     "gt4000": 0.1492
+    },
+    "stereo": {
+     "lrCorrelation": 0.937
+    }
+   }
+  }
+ ]
+}

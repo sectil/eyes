@@ -1,0 +1,35 @@
+{
+ "pad_only": {
+  "pulse_clarity": 0.0,
+  "percussive_share": 0.061,
+  "events_per_min": 0.0,
+  "strong_onsets_per_min": 0.0,
+  "flux_mean_db": 0.1482,
+  "flux_median_db": 0.1288,
+  "flux_p99_db": 0.463,
+  "flux_max_db": 0.537,
+  "flux_max_at_s": 55.02
+ },
+ "pad_plus_soft_kick_70bpm": {
+  "pulse_clarity": 0.885,
+  "percussive_share": 0.066,
+  "events_per_min": 139.0,
+  "strong_onsets_per_min": 74.0,
+  "flux_mean_db": 0.2932,
+  "flux_median_db": 0.1468,
+  "flux_p99_db": 5.031,
+  "flux_max_db": 7.102,
+  "flux_max_at_s": 2.11
+ },
+ "pad_plus_sparse_notes": {
+  "pulse_clarity": 0.399,
+  "percussive_share": 0.06,
+  "events_per_min": 23.0,
+  "strong_onsets_per_min": 23.0,
+  "flux_mean_db": 0.1735,
+  "flux_median_db": 0.1304,
+  "flux_p99_db": 0.529,
+  "flux_max_db": 7.509,
+  "flux_max_at_s": 3.07
+ }
+}

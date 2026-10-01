@@ -1,0 +1,1032 @@
+--- pilot/_onceki_tur3/timing.py	2026-09-29 05:08:36.284227260 +0000
++++ pilot/timing.py	2026-09-29 06:50:28.240389886 +0000
+@@ -1,11 +1,16 @@
+ #!/usr/bin/env python3
+-"""Nefona Yoga · Ders 2 "Derin Dinlenme" · zamanlama denetleyicisi ve başvuru planlayıcısı (3. tur).
++"""Nefona Yoga · Ders 2 "Derin Dinlenme" · zamanlama denetleyicisi ve başvuru planlayıcısı (4. tur).
+ 
+ Ne yapar:
+-  ders2.lesson.json'u okur; 5..30 dakikanın HER dakikası için, üç eklemleme hızında (5.2 / 5.6 / 6.6 hece/sn)
+-  ve her hızda iki TTS-içi duraklama profilinde (düşük = Neslihan v2 ölçümü, yüksek = Hakan v2 ölçümü) planı kurar
+-  ve denetler. Bir "vaka" (hız × dakika) ancak iki duraklama profilinde de bütün denetimler geçerse GEÇER. 3 × 26 = 78 vaka.
+-  Aynı 78 vaka dönüşümlü seçenek takımlarıyla (P-N5) ve sahne takımlarıyla (kıyı, orman; H6/L2-04) ayrıca kurulur.
++  ders2.lesson.json'u okur; 5..30 dakikanın HER dakikası için, üç eklemleme hızında ve her hızda iki TTS-içi duraklama
++  profilinde (düşük = Neslihan v2 ölçümü, yüksek = Hakan v2 ölçümü) planı kurar ve denetler. Bir "vaka" (hız × dakika)
++  ancak bütün duraklama profillerinde bütün denetimler geçerse GEÇER. 3 × 26 = 78 vaka. Aynı 78 vaka dönüşümlü seçenek
++  takımlarıyla (P-N5) ve sahne takımlarıyla (kıyı, orman; H6/L2-04) ayrıca kurulur.
++  Seslendirme yolu sahip kararıdır (2026-09-29): yalnız MCP; hız ayarı yok. 5,6 hece/sn (eleven_v4, ölçüm) ÜRETİM hızı,
++  6,6 (v2 varsayılan, ölçüm) hızlı uç, 5,2 yalnız muhafazakâr ALT ZARF (tasarlanacak hoca sesi ölçülene kadar). T6 boş
++  payı üretim köşesinde (5,6 yüksek) denetlenir; zarf köşesi (5,2 yüksek) raporlanır ve bütün öteki denetimlerden geçer.
++  Yeni bir aday ses için (Z3-04):  python3 timing.py --rate 7.1 --profile aday:0.30,0.10,0.20,0.60
++  (çıktı timing.out.aday.txt; profil = cümle sonu, virgül, noktalı virgül/iki nokta, üç nokta duraklamaları, sn).
+ 
+ Planlayıcı (PLAN §B.3'ün kesin hali; lib/yoga.js bunun aynısını uygular):
+   1. Tek Varış ve tek Kapanış bloğu (T4); zorunlu klipleri her sürede çalar.
+@@ -18,16 +23,21 @@
+   4. Sessizlik dağıtımı: kalan süre R = hedef - konuşma; bütün sessizlikler aynı oranla min→pref ya da pref→max esner.
+      R > max toplamı İÇERİK HATASIDIR (sessizlik sınırı aşılarak kapatılmaz). Konuşma asla hızlandırılmaz ya da kırpılmaz.
+   5. (3. tur, L2-08 + Z2-07) Mikro-listelerde sessizlik "klipten sonra" değil, BAŞLANGIÇTAN BAŞLANGICA periyotla
+-     tanımlanır: onsetPeriod{min,pref,max}; sessizlik = max(gapFloor, periyot − klibin gerçek süresi). Böylece "diz…"
+-     ile "Sağ elin başparmağı…" aynı ritimle gelir. Bölüm sonu öğeleri (bilinçli durak) sabit gapAfter taşır.
++     tanımlanır: onsetPeriod{min,pref,max}; sessizlik = max(gapFloor, periyot − klibin gerçek süresi).
++  6. (4. tur, MT3-02 + L3-02) Çok cümleli klip tek TTS isteğidir ve cümle sonlarından kesilir (nefes çiftinde virgülden);
++     uygulama cümleler arasına sentenceGap{min,pref,max} koyar; bu sessizlikler de öteki sessizliklerle aynı oranla esner.
++  7. (4. tur, L3-03 + MT3-05) short{belowSec,text,gapAfter} taşıyan klip, hedef belowSec'in altındayken kısa metin ve
++     boşlukla çalar; kimlik aynıdır (önek kuralı korunur).
+ 
+ Süre modeli (VARSAYIM; ölçümlerden kalibre, bkz. ders2.script.md §2):
+-  klip süresi = hece / eklemleme hızı + TTS-içi duraklamalar (klip içindeki noktalama) + uç payı
+-  - Uç payı: normal klip 0,31 sn; taşıyıcıdan kesilen mikro-klip 0,15 sn (VARSAYIM; ilk üretimde ölçülüp değişecek, Z2-07).
+-  - Duraklamalar (sn): düşük profil = Neslihan v2; yüksek profil = Hakan v2. 5,2 hece/sn (REST speed≈0,8) iken ×1,25.
++  alt klip süresi = hece / eklemleme hızı + TTS-içi duraklamalar (cümle içindeki noktalama) + uç payı
++  - Uç payı: normal klip ve kesilen her cümle 0,31 sn; taşıyıcıdan kesilen mikro-klip 0,15 sn (VARSAYIM).
++  - Kesilen cümle sınırındaki TTS duraklaması yerine uç payları ve uygulamanın cümle arası sessizliği gelir.
++  - Duraklamalar (sn): düşük profil = Neslihan v2; yüksek profil = Hakan v2. 5,2 hece/sn zarfında ×1,25.
+ 
+ Çalıştırma:  python3 timing.py            (ders2.lesson.json yanında; çıktı: timing.out.txt)
+ """
++import argparse
+ import copy
+ import json
+ import os
+@@ -39,20 +49,25 @@
+ LESSON_PATH = os.path.join(HERE, 'ders2.lesson.json')
+ OUT_PATH = os.path.join(HERE, 'timing.out.txt')
+ 
+-RATES = [5.2, 5.6, 6.6]                    # hece/sn, duraklamalar hariç (2026-09-28 ölçümleri)
++RATES = [5.2, 5.6, 6.6]                    # hece/sn, duraklamalar hariç (2026-09-28 ölçümleri; 5,2 zarf)
+ SPEED_PAUSE_SCALE = {5.2: 1.25, 5.6: 1.0, 6.6: 1.0}
+ PROFILES = {
+     'lo': {'sent': 0.17, 'comma': 0.05, 'semi': 0.12, 'ell': 0.32},   # Neslihan v2 (en kısa gözlenen)
+     'hi': {'sent': 0.87, 'comma': 0.38, 'semi': 0.60, 'ell': 1.53},   # Hakan v2 (en uzun gözlenen)
+ }
++PRODUCTION = (5.6, 'hi')                   # L3-01, Z3-02: MCP üretim köşesi (eleven_v4 + uzun duraklamalı ses)
++ENVELOPE = (5.2, 'hi')                     # Z3-02, MT3-03: muhafazakâr alt zarf (tasarlanacak ses ölçülene kadar)
++MCP_RATES = (5.6, 6.6)                     # ölçülmüş MCP modelleri (v4, v2)
+ EDGE = 0.31
+ EDGE_MICRO = 0.15
+ GAP_FLOOR = 0.8                            # L2-08: periyotlu mikro-klipten sonra en az 0,8 sn sessizlik (VARSAYIM)
+ DUR_SCALE = 1.0                            # Z2-04: sarsıntı taraması için bütün klip sürelerinin çarpanı (normalde 1)
+ MINUTES = list(range(5, 31))
++SENT_GAP_DEFAULT = {'Varış': {'min': 0.6, 'pref': 0.8, 'max': 1.0}, 'Derinleşme': {'min': 0.8, 'pref': 1.0, 'max': 1.3},
++                    'Derin': {'min': 1.2, 'pref': 1.8, 'max': 2.5}, 'Kapanış': {'min': 0.8, 'pref': 1.0, 'max': 1.2}}
+ 
+ # Denetim eşikleri (VARSAYIM; PLAN C.2 yoğunluk bantları + pay). Sonuca bakılarak gevşetilmedi.
+-CLIP_MAX_SEC = 15.0
++CLIP_MAX_SEC = 15.0                        # Z3-07: birimin konuşması, HER hızda (yavaş ses dahil)
+ WINDOW_MAX = 90.0
+ DENS_MAX_SYLL_60 = 150.0      # herhangi bir 60 sn penceresinde en çok hece
+ DENS_MAX_FRAC_60 = 0.60       # herhangi bir 60 sn penceresinde en çok konuşma payı
+@@ -77,7 +92,8 @@
+ SPARSE_WINDOW = (180.0, 0.12)
+ EYES_OPEN_BEFORE_IMAGERY_SEC = 60.0  # P-B2
+ SAME_GAP_RUN = (6, 2.0)              # P-S6
+-QUICK_BOUNDS = (60.0, 95.0)          # PLAN B.5 (3. tur: G2-04 ve G2-07'nin güvenlik satırları + Z2-05 → üst sınır 95)
++QUICK_BOUNDS = (60.0, 110.0)         # PLAN B.5; 4. tur (S3-01, S3-02, MT3-07): ön klipler ve 4 sn giriş → üst sınır 110
++QUICK_BOUNDS_WINDOW = (60.0, 120.0)  # 4. tur: duyurulmuş pencerenin sessizliğinde basılırsa önce karşılama + 4 sn rampa
+ STOP_BOUNDS = (20.0, 30.0)           # PLAN B.5 (S4)
+ DAWN_SPAN = (60.0, 90.0)             # N8/S18
+ ABILIR_RUN_MAX = 3                   # T18
+@@ -93,13 +109,24 @@
+ PERIOD_SPREAD_MAX = 0.6              # L2-08: mikro-liste içinde başlangıç periyotlarının yayılımı en çok 0,6 sn
+ SENSITIVE_WORDS = ('göğüs', 'karın', 'kalça', 'kalçalar')   # G2-06 (güvenlik §11.B-9; liste tasarım çıkarımı)
+ BLOCK_MIN = {'core': 55.0, 'niyet': 20.0}   # PLAN B.3 adım 8 (VARSAYIM)
+-BLOCK_MIN_AMEND = {'C2': 30.0, 'N2': 18.0}  # H1: Ders 2'nin 5 dk sürümü için sahibe görünür değişiklik (PLAN B.3 adım 8)
++BLOCK_MIN_AMEND = {'C2': 30.0, 'N2': 15.0}  # H1 (+ 4. tur L3-03/MT3-05: N2 5 dakikada "bir kez daha"): 5 dk'ya özgü, sahibe görünür
+ AMEND_BELOW_SEC = 360                # yalnız 5 dk (T < 6 dk)
+-T6_FLOOR = 15.0                      # T6/Z2-04: 5 dk'nın en yavaş köşesinde (5,2 yüksek) min sessizliklere göre boş pay
++T6_FLOOR = 15.0                      # T6/Z2-04 → 4. tur L3-01, Z3-02: üretim köşesinde (5,6 yüksek) min sessizliklere göre boş pay
+ NONVISUAL_BEFORE_RETURN = 2          # H2: C4'te c4.don'dan önce en az 2 görme dışı duyu klibi
+ REP_WINDOW_SEC = 10.0                # L2-14: 10 sn içindeki cümle kliplerinde 5 harflik kök tekrarı (uyarı)
+ SHORT_ROOTS = ('dön',)               # L2-14: 5 harften kısa, duyulan kök (dönüş / dönebilir / dön)
+ PERTURB = (0.90, 0.95, 1.05, 1.10)   # Z2-04: sarsıntı taraması
++# 4. tur denetimleri (hepsi VARSAYIM; fixlog.md 4. tur tablosu)
++SENT_GAP_MIN_DERIN = 1.0             # L3-02: Derin evrede her cümle sınırında en az 1,0 sn sessizlik
++LONGEST_GAP_5MIN = 16.0              # L3-03: 5 dakikada en uzun boşluk >= 16 sn (MCP hızlarında)
++SKIP_DOOR_BEFORE_SENSITIVE = 120.0   # S3-04: göğüs/karından önceki 120 sn içinde bir atlama kapısı
++SENSITIVE_DOOR_TARGETS = ('c1.f20', 'c1.f21')
++GAIN_RAMP_SEC = 4.0                  # S3-02: evre düzeyi yalnız >= 4 sn'lik sessizlikte rampayla değişir
++BLOCK_SHARE_FLOOR = 0.26             # Z3-01: PLAN B.4.1 rehberli çekirdek alt sınırı (bilgi; sahibe görünür istisna)
++BLOCK_SHARE_BLOCKS = ('C2', 'C3', 'C4')
++BLOCK_SHARE_FROM = 20
++SUFFIX_GROUPS = ('arasından', 'ötesinde', 'üstünde', 'altında', 'ardında', 'içinde', 'kenarında', 'yanında', 'önünde')
++GAIN_DB = {'Varış': 0.0, 'Derinleşme': -1.5, 'Derin': -3.0, 'Kapanış': 0.0}
+ 
+ VOWELS = set('aeıioöuüâîûAEIİOÖUÜÂÎÛ')
+ WORD_RE = re.compile(r"[A-Za-zÇĞİÖŞÜçğıöşüÂÎÛâîû]+")
+@@ -115,7 +142,9 @@
+ # "iz bırak" ve "kalacak" eklendi (EV2-01, EV2-02, EV2-03).
+ FORBIDDEN_E12 = ['rahatla', 'rahatlarsın', 'gevşeyeceksin', 'gevşiyorsun', 'uyuyacak', 'iyi gelecek', 'geçecek',
+                  'daha da derin', 'biraz daha dinleniyor', 'sakin;', 'dinlenmiş', 'iz bırak', 'kalacak',
+-                 'dinleniyorsun', 'dinleniyor;']
++                 'dinleniyorsun', 'dinleniyor;',
++                 # EV3-13: sonuç vaadinin yaygın Türkçe kökleri
++                 'sakinleş', 'huzur bul', 'yenilen', 'tazelen', 'dinç', 'gevşedin', 'gevşemiş', 'derin uyku']
+ FORBIDDEN_WHITELIST = set()
+ ENGLISH = ['mindfulness', 'body scan', 'relax', 'okay', 'ok ', 'yoga nidra', 'breath', 'scan', 'nidra']
+ SANSKRIT = ['sankalpa', 'yoga', 'nidra', 'şavasana', 'savasana', 'prana', 'pranayama', 'mantra', 'drişti',
+@@ -140,13 +169,54 @@
+     return parts
+ 
+ 
++def split_keep(text):
++    """Cümleleri noktalamasıyla ayırır; tırnak içinde biten son cümle bölünmez (sentences() ile aynı sayı)."""
++    out, start = [], 0
++    for m in re.finditer(r'[.!?]+["”’]?(?=\s+\S)', text):
++        out.append(text[start:m.end()].strip())
++        start = m.end()
++    out.append(text[start:].strip())
++    return [x for x in out if WORD_RE.search(x)]
++
++
++_SUB_CACHE = {}
++_PAUSE_CACHE = {}
++
++
++def sub_texts(c):
++    """MT3-02/L3-02: birimin kesilen parçaları. Taşıyıcı öğesi tek parçadır; nefes çifti (breathPair) ilk virgülden,
++    öteki klipler cümle sonlarından kesilir."""
++    if c.get('carrier'):
++        return [c['text']]
++    t = c['text']
++    key = (t, bool(c.get('breathPair')))
++    got = _SUB_CACHE.get(key)
++    if got is None:
++        if c.get('breathPair') and ', ' in t:
++            a, b = t.split(', ', 1)
++            got = [a + ',', b]
++        else:
++            got = split_keep(t)
++        _SUB_CACHE[key] = got
++    return got
++
++
+ def n_abil(text):
+     return len(ABIL_RE.findall(text))
+ 
+ 
+ def internal_pauses(text, prof):
++    key = (text, tuple(sorted(prof.items())))
++    got = _PAUSE_CACHE.get(key)
++    if got is None:
++        got = _internal_pauses(text, prof)
++        _PAUSE_CACHE[key] = got
++    return got
++
++
++def _internal_pauses(text, prof):
+     t = text.strip()
+-    t = re.sub(r'[\s"”’.!?…]+$', '', t)          # son noktalama klibin kuyruğudur (uç payına dahil)
++    t = re.sub(r'[\s"”’.!?…,;:]+$', '', t)       # son noktalama klibin (alt klibin) kuyruğudur (uç payına dahil)
+     t = t.replace('...', '…')
+     n_ell = t.count('…')
+     t2 = t.replace('…', ' ')
+@@ -157,13 +227,34 @@
+ 
+ 
+ def profile(name, rate):
+-    s = SPEED_PAUSE_SCALE[rate]
++    s = SPEED_PAUSE_SCALE.get(rate, 1.0)
+     return {k: v * s for k, v in PROFILES[name].items()}
+ 
+ 
++def sub_durs(c, rate, prof):
++    """Birimin her kesilen parçasının süresi (konuşma + parçanın içindeki TTS duraklamaları + uç payı)."""
++    if c.get('carrier'):
++        return [DUR_SCALE * (c['syllables'] / rate + EDGE_MICRO + internal_pauses(c['text'], prof))]
++    return [DUR_SCALE * (syllables(t) / rate + EDGE + internal_pauses(t, prof)) for t in sub_texts(c)]
++
++
+ def clip_dur(c, rate, prof):
+-    edge = EDGE_MICRO if c.get('carrier') else EDGE
+-    return DUR_SCALE * (c['syllables'] / rate + edge + internal_pauses(c['text'], prof))
++    """Birimin konuşma süresi (uygulamanın cümle arası sessizlikleri HARİÇ)."""
++    return sum(sub_durs(c, rate, prof))
++
++
++def sent_gaps(c):
++    """MT3-02/L3-02: birimin cümle sınırlarındaki uygulama sessizlikleri ({min,pref,max} listesi)."""
++    n = len(sub_texts(c)) - 1
++    if n <= 0:
++        return []
++    g = c.get('sentenceGap') or SENT_GAP_DEFAULT.get(c.get('phase'), SENT_GAP_DEFAULT['Derin'])
++    return [g] * n
++
++
++def unit_len(c, rate, prof, lv='pref'):
++    """Birimin konuşma + cümle arası sessizlik süresi (lv düzeyinde)."""
++    return clip_dur(c, rate, prof) + sum(g[lv] for g in sent_gaps(c))
+ 
+ 
+ def gap_of(c, rate, prof):
+@@ -177,6 +268,20 @@
+     return {lv: max(fl, per[lv] - d) for lv in ('min', 'pref', 'max')}
+ 
+ 
++def apply_short(c, T):
++    """L3-03 + MT3-05: hedef short.belowSec'in altındaysa kısa metin ve boşluk (kimlik aynı)."""
++    sh = c.get('short')
++    if not sh or T >= sh['belowSec']:
++        return c
++    cc = dict(c)
++    cc['text'] = sh['text']
++    cc['syllables'] = syllables(sh['text'])
++    cc['sentences'] = len(sentences(sh['text']))
++    cc['gapAfter'] = sh['gapAfter']
++    cc['shortForm'] = True
++    return cc
++
++
+ # ----------------------------------------------------------------------------------------------- planlayıcı
+ def load(path=LESSON_PATH):
+     with open(path, encoding='utf-8') as f:
+@@ -259,9 +364,9 @@
+                 mt = c.get('minTarget')
+                 if mt is not None and T < mt:
+                     continue
+-                seq.append((b['id'], c))
++                seq.append((b['id'], apply_short(c, T)))
+             elif c['id'] in inc:
+-                seq.append((b['id'], c))
++                seq.append((b['id'], apply_short(c, T)))
+ 
+     add(A)
+     for b in core:
+@@ -285,7 +390,7 @@
+ def totals(seq, lesson, rate, prof):
+     lead = lesson['leadIn']
+     S = sum(clip_dur(c, rate, prof) for _, c in seq)
+-    gs = [gap_of(c, rate, prof) for _, c in seq]
++    gs = [gap_of(c, rate, prof) for _, c in seq] + [g for _, c in seq for g in sent_gaps(c)]
+     g = {lv: lead[lv] + sum(x[lv] for x in gs) for lv in ('min', 'pref', 'max')}
+     g['cap'] = g['pref'] + STRETCH_CAP_BEFORE_INCREMENT * (g['max'] - g['pref'])
+     g['half'] = g['min'] + COMPRESS_CAP_ON_ENTRY * (g['pref'] - g['min'])
+@@ -390,11 +495,24 @@
+     events = []
+     t = gapval(lesson['leadIn'])
+     for bid, c in seq:
+-        d = clip_dur(c, rate, prof)
++        t0 = t
++        texts = sub_texts(c)
++        ds = sub_durs(c, rate, prof)
++        sgd = sent_gaps(c)
++        subs = []
++        for i, d in enumerate(ds):
++            syl = c['syllables'] if c.get('carrier') else syllables(texts[i])
++            subs.append({'start': t, 'end': t + d, 'syl': syl, 'text': texts[i]})
++            t += d
++            if i < len(sgd):
++                sg = gapval(sgd[i])
++                subs[-1]['sgap'] = sg
++                t += sg
+         gd = gap_of(c, rate, prof)
+         gap = gapval(gd)
+-        events.append({'block': bid, 'clip': c, 'start': t, 'end': t + d, 'dur': d, 'gap': gap, 'gd': gd})
+-        t += d + gap
++        events.append({'block': bid, 'clip': c, 'start': t0, 'end': t, 'dur': t - t0, 'speech': sum(ds),
++                       'subs': subs, 'sgd': sgd, 'gap': gap, 'gd': gd})
++        t += gap
+     return {'T': T, 'rate': rate, 'prof': profname, 'variant': var, 'A': A['id'], 'K': K['id'],
+             'sel': sel, 'inc': inc, 'events': events, 'total': t, 'status': status, 'mode': mode, 'f': f,
+             'speech': S, 'gaps': g, 'notes': notes, 'stop': stop}
+@@ -405,6 +523,11 @@
+     return [(ev['end'], ev['end'] + ev['gap']) for ev in p['events'] if ev['clip'].get('window')]
+ 
+ 
++def speech_spans(ev):
++    """Olayın konuşulan parçaları (başlangıç, bitiş, hece); cümle arası sessizlikler konuşma değildir (MT3-02)."""
++    return [(x['start'], x['end'], x['syl']) for x in ev['subs']]
++
++
+ def density(p):
+     """1 sn adımla kayan 60 sn pencereler: hece, konuşma payı, evre."""
+     T = p['total']
+@@ -417,11 +540,12 @@
+         syl = sp = 0.0
+         phases = set()
+         for ev in evs:
+-            ov = max(0.0, min(b, ev['end']) - max(a, ev['start']))
+-            if ov > 0:
+-                syl += ev['clip']['syllables'] * ov / ev['dur']
+-                sp += ov
+-                phases.add(ev['clip']['phase'])
++            for s0, s1, sy in speech_spans(ev):
++                ov = max(0.0, min(b, s1) - max(a, s0))
++                if ov > 0:
++                    syl += sy * ov / (s1 - s0)
++                    sp += ov
++                    phases.add(ev['clip']['phase'])
+         worst['syll'] = max(worst['syll'], syl)
+         worst['frac'] = max(worst['frac'], sp / 60.0)
+         if phases == {'Derin'}:
+@@ -463,7 +587,7 @@
+ 
+ 
+ def speech_in(p, a, b):
+-    return sum(max(0.0, min(b, ev['end']) - max(a, ev['start'])) for ev in p['events'])
++    return sum(max(0.0, min(b, s1) - max(a, s0)) for ev in p['events'] for s0, s1, _ in speech_spans(ev))
+ 
+ 
+ def stretch(p):
+@@ -510,6 +634,9 @@
+         g = ev['gd']
+         if ev['gap'] < g['min'] - 1e-6 or ev['gap'] > g['max'] + 1e-6:
+             fails.append('%s sessizliği %.2f sınır dışı [%.2f, %.2f]' % (ev['clip']['id'], ev['gap'], g['min'], g['max']))
++        for sub, sg in zip(ev['subs'], ev['sgd']):          # MT3-02: cümle arası sessizlik de sınırları içinde
++            if sub['sgap'] < sg['min'] - 1e-6 or sub['sgap'] > sg['max'] + 1e-6:
++                fails.append('%s cümle arası sessizliği %.2f sınır dışı' % (ev['clip']['id'], sub['sgap']))
+         if ev['clip'].get('window') and ev['gap'] > WINDOW_MAX + 1e-6:
+             fails.append('%s penceresi %.1f > %d sn' % (ev['clip']['id'], ev['gap'], WINDOW_MAX))
+         if i and ev['start'] < evs[i - 1]['end'] - 1e-9:
+@@ -595,11 +722,10 @@
+         for a, b in zip(times, times[1:]):
+             if b - a < 60.0:
+                 fails.append('dolgu "%s" 60 sn içinde iki kez (%.0f, %.0f)' % (fw, a, b))
+-    # klip uzunluğu (<= 15 sn, 6.6 hece/sn'de)
+-    if p['rate'] == 6.6:
+-        for ev in evs:
+-            if ev['dur'] > CLIP_MAX_SEC:
+-                fails.append('klip > 15 sn: %s %.1f' % (ev['clip']['id'], ev['dur']))
++    # klip uzunluğu (Z3-07: her hızda, yavaş ses dahil; birimin konuşması, cümle arası sessizlikler hariç)
++    for ev in evs:
++        if ev['speech'] > CLIP_MAX_SEC:
++            fails.append('klip > 15 sn (yavaş ses): %s %.1f' % (ev['clip']['id'], ev['speech']))
+     # yoğunluk
+     d = density(p)
+     if d['syll'] > DENS_MAX_SYLL_60:
+@@ -621,6 +747,7 @@
+         fails.append('dikkat eğrisi: "%s" %.0f sn > %.0f' % (longest[0], longest[2] - longest[1], TEXTURE_MAX_RUN))
+     fails += round2_checks(lesson, p)
+     fails += round3_checks(lesson, p)
++    fails += round4_checks(lesson, p)
+     return fails, d, runs
+ 
+ 
+@@ -799,6 +926,49 @@
+     return fails
+ 
+ 
++def round4_checks(lesson, p):
++    """4. tur denetimleri (fixlog.md 4. tur tablosu). Eşikler VARSAYIM."""
++    fails = []
++    evs = p['events']
++    T = p['T']
++    ids = [ev['clip']['id'] for ev in evs]
++    # L3-02 (+ MT3-02): Derin evrede her cümle sınırında en az SENT_GAP_MIN_DERIN sn uygulama sessizliği
++    for ev in evs:
++        if ev['clip']['phase'] == 'Derin':
++            for sub in ev['subs'][:-1]:
++                if sub['sgap'] < SENT_GAP_MIN_DERIN - 1e-6:
++                    fails.append('L3-02: %s cümle sınırında %.2f sn < %g' % (ev['clip']['id'], sub['sgap'],
++                                                                            SENT_GAP_MIN_DERIN))
++    # S3-03: ağırlık listesi çalıyorsa bağışlama cümlesi de çalar
++    if 'c3.a1' in ids and 'c3.gelmezse' not in ids:
++        fails.append('S3-03: c3.a1 var, c3.gelmezse yok')
++    # MT3-09 + L3-11: bağışlama, denemeden önce değil, "bütün beden ağır."dan sonra
++    if 'c3.gelmezse' in ids and 'c3.a3' in ids and ids.index('c3.gelmezse') < ids.index('c3.a3'):
++        fails.append('MT3-09: c3.gelmezse c3.a3\'ten önce')
++    # S3-04: göğüs ya da karından önceki SKIP_DOOR_BEFORE_SENSITIVE sn içinde bir atlama kapısı başlar
++    doors = [ev['start'] for ev in evs if ev['clip']['tags'].get('safety') == 'skip']
++    for ev in evs:
++        if ev['clip']['id'] in SENSITIVE_DOOR_TARGETS:
++            if not any(0 <= ev['start'] - d0 <= SKIP_DOOR_BEFORE_SENSITIVE for d0 in doors):
++                fails.append('S3-04: %s öncesi %g sn içinde atlama kapısı yok' % (ev['clip']['id'],
++                                                                              SKIP_DOOR_BEFORE_SENSITIVE))
++    # MT3-11 + L3-06: imge her sürümde bir varış yeriyle döner (varış klibi ya da dinlenecek köşe, c4.don'dan önce)
++    if 'C4' in p['sel']:
++        don = ids.index('c4.don')
++        if not any(ev['clip']['tags'].get('arrival') or ev['clip']['id'] == 'c4.yerles' for ev in evs[:don]):
++            fails.append('MT3-11: C4 var, c4.don öncesi varış yeri yok')
++    # MT3-12: 7. dakikadan itibaren varış zemin cümlesiyle biter
++    arr = [ev['clip']['id'] for ev in evs if ev['block'] == 'A']
++    if 'a.agirlik' in arr and arr[-1] != 'a.agirlik':
++        fails.append('MT3-12: varışın son cümlesi a.agirlik değil (%s)' % arr[-1])
++    # L3-03: 5 dakikada en uzun boşluk >= LONGEST_GAP_5MIN (MCP hızlarında, iki profilde)
++    if T < AMEND_BELOW_SEC and p['rate'] in MCP_RATES:
++        mg = max(ev['gap'] for ev in evs)
++        if mg < LONGEST_GAP_5MIN - 1e-6:
++            fails.append('L3-03: 5 dakikada en uzun boşluk %.1f sn < %g' % (mg, LONGEST_GAP_5MIN))
++    return fails
++
++
+ # ----------------------------------------------------------------------------------------------- metin denetimleri
+ def all_unique_clips(lesson):
+     seen = {}
+@@ -808,16 +978,39 @@
+     for ex in lesson.get('extras', {}).values():
+         for c in ex['clips']:
+             seen.setdefault(c['id'], (ex['id'], c))
++        for pre in (ex.get('prefixByActiveBlock') or {}).values():   # S3-01: hızlı kapanışın ön klipleri
++            for c in pre:
++                seen.setdefault(c['id'], (ex['id'], c))
+     return seen
+ 
+ 
+ def text_forms(c):
+-    """Bir klibin bütün söylenen biçimleri: ana metin, dönüşümlü seçenekler, sahne metinleri."""
++    """Bir klibin bütün söylenen biçimleri: ana metin, dönüşümlü seçenekler, sahne metinleri, 5 dakikanın kısa
++    biçimi (L3-03) ve kör panel yedeği (TR3-08)."""
+     out = [c['text']] + [a['text'] for a in (c.get('alternates') or [])]
+     out += [s['text'] for s in (c.get('scenes') or {}).values()]
++    if c.get('short') and c['short']['text'] != c['text']:
++        out.append(c['short']['text'])
++    if c.get('panelFallback'):
++        out.append(c['panelFallback']['text'])
+     return out
+ 
+ 
++def ui_texts(lesson):
++    """EV3-06: kart ve ekran metinleri (başlık hariç: "Yoga Nidra" orada bilinçli)."""
++    out = [lesson['tagline'], lesson['openingNotice'], *lesson['openingScreen'], *lesson['preparationCard'],
++           *[t['label'] for t in lesson.get('preparationToggles', [])],
++           *[o['label'] for o in lesson['scenePicker']['options']], lesson['eveningHint']['text'],
++           lesson.get('evidenceLine', '')]
++    if lesson.get('soundCheck'):
++        out += [lesson['soundCheck']['question'], lesson['soundCheck']['screenText']]
++    if lesson.get('progress'):
++        out.append(lesson['progress']['question'])
++    if lesson.get('afterCheck'):
++        out += [lesson['afterCheck']['question'], *lesson['afterCheck']['options'], lesson['afterCheck']['onCok']]
++    return [t for t in out if t]
++
++
+ def lint_text(lesson):
+     out = []
+     fails = []
+@@ -874,59 +1067,201 @@
+         n = sum(1 for c in b['clips'] if c['tags'].get('explain'))
+         if n > 1:
+             fails.append('%s: %d açıklama cümlesi (> 1)' % (b['id'], n))
+-    # E.6 #14: TTS-içi duraklamalar dahil hiçbir klip 2,5 hece/sn'nin altına inmez
++    # E.6 #14: TTS-içi duraklamalar dahil hiçbir klip 2,5 hece/sn'nin altına inmez (her kesilen parça kendi içinde)
+     slowest = (99.0, None)
+     for bid, c in clips.values():
+         if c.get('carrier') or c['syllables'] < 4:
+             continue
+         for rate in RATES:
+             for pn in PROFILES:
+-                d = clip_dur(c, rate, profile(pn, rate)) - EDGE
+-                r = c['syllables'] / d
++                r = inner_rate(c, rate, profile(pn, rate))
+                 if r < slowest[0]:
+                     slowest = (r, '%s @%.1f %s' % (c['id'], rate, pn))
+                 if r < 2.5:
+                     fails.append('%s: %.2f hece/sn < 2,5 (%.1f, %s)' % (c['id'], r, rate, pn))
+     out.append('en yavaş klip (duraklamalar dahil): %.2f hece/sn (%s)' % slowest)
+-    # EV2-04: Derin evre cümle kliplerinin iç hızı; "Derin evre iç hız tavanı" (VARSAYIM; kanıta dayanmaz)
++    # EV2-04 + MT3-02: Derin evre cümle kliplerinin iç hızı (cümle içi, TTS duraklamaları dahil) ve etkin hızı (birimin
++    # cümle arası uygulama sessizlikleri, pref, dahil); "Derin evre iç hız tavanı" (VARSAYIM; kanıta dayanmaz)
+     meds = {}
+     for rate in RATES:
+         for pn in PROFILES:
+-            rs = sorted(c['syllables'] / (clip_dur(c, rate, profile(pn, rate)) - EDGE)
+-                        for _, c in clips.values() if not c.get('carrier') and c['phase'] == 'Derin'
+-                        and c['syllables'] >= 6)
+-            med = rs[len(rs) // 2]
+-            out.append('Derin cümle iç hızı %.1f %s: medyan %.2f, en yüksek %.2f hece/sn → Derin evre iç hız tavanı '
+-                       '(<= %g; VARSAYIM, kanıta dayanmaz) %s' % (rate, pn, med, rs[-1], DERIN_CLIP_RATE_CEIL,
+-                                                                  'medyan tavanın altında' if med <= DERIN_CLIP_RATE_CEIL
+-                                                                  else 'medyan tavanın üstünde'))
+-            meds.setdefault(rate, []).append(med)
+-    if min(meds[5.2]) > DERIN_CLIP_RATE_CEIL:
+-        fails.append('P-S1: 5,2 yolunda hiçbir ses tipinde Derin medyan iç hız <= %g değil' % DERIN_CLIP_RATE_CEIL)
+-    # PLAN B.5: "Kapanışa geç" 60–90 sn; Durdur dönüşü 20–30 sn
+-    for key, (lo_, hi_) in (('quickClosing', QUICK_BOUNDS), ('stopReturn', STOP_BOUNDS)):
+-        ex = lesson['extras'][key]
++            pr = profile(pn, rate)
++            dcl = [c for _, c in clips.values() if not c.get('carrier') and c['phase'] == 'Derin'
++                   and c['syllables'] >= 6 and not c.get('prefixFor')]
++            rs = sorted(inner_rate(c, rate, pr) for c in dcl)
++            es = sorted(effective_rate(c, rate, pr) for c in dcl)
++            med, emed = rs[len(rs) // 2], es[len(es) // 2]
++            out.append('Derin cümle iç hızı %.1f %s: medyan %.2f, en yüksek %.2f hece/sn; etkin hız (cümle arası '
++                       'sessizlik dahil) medyan %.2f, en yüksek %.2f → Derin evre iç hız tavanı (<= %g; VARSAYIM, kanıta '
++                       'dayanmaz) iç hızda %s, etkin hızda %s' % (
++                           rate, pn, med, rs[-1], emed, es[-1], DERIN_CLIP_RATE_CEIL,
++                           'medyan tavanın altında' if med <= DERIN_CLIP_RATE_CEIL else 'medyan tavanın üstünde',
++                           'medyan tavanın altında' if emed <= DERIN_CLIP_RATE_CEIL else 'medyan tavanın üstünde'))
++            meds.setdefault(rate, []).append(emed)
++    # P-S1 → 4. tur (MCP kararı): önerilen model (eleven_v4, 5,6) en az bir duraklama profilinde etkin medyanla tavanın
++    # altında kalmalı
++    if min(meds[PRODUCTION[0]]) > DERIN_CLIP_RATE_CEIL:
++        fails.append('P-S1: üretim hızında (%.1f) hiçbir ses tipinde Derin etkin medyan hız <= %g değil' % (
++            PRODUCTION[0], DERIN_CLIP_RATE_CEIL))
++    # TR3-08: kör panel yedeği anahtar cümlelerin kısalmasını bozmaz
++    keys = {c['tags']['key']: c for _, c in clips.values() if c['tags'].get('key')}
++    for c in keys.values():
++        fb = c.get('panelFallback')
++        if fb:
++            k = c['tags']['key']
++            lo_ = keys.get(k + 1, {}).get('syllables', 0)
++            hi_ = keys.get(k - 1, {}).get('syllables', 999)
++            if not lo_ < syllables(fb['text']) < hi_:
++                fails.append('TR3-08: %s yedeği anahtar cümle kısalmasını bozuyor' % c['id'])
++    # MT3-02: json'daki alt klipler ve TTS birimi metinden türetilenle aynı
++    for _, c in clips.values():
++        forms = [(c, c.get('subclips'))] + [(dict(c, text=a['text']), a.get('subclips')) for a in
++                                            (c.get('alternates') or [])]
++        forms += [(dict(c, text=sc['text']), sc.get('subclips')) for sc in (c.get('scenes') or {}).values()]
++        for cc, subs in forms:
++            want = sub_texts(cc)
++            got = [x['text'] for x in subs] if subs else [cc['text']]
++            if not c.get('carrier') and want != got:
++                fails.append('MT3-02: %s alt klipleri metinle tutmuyor' % c['id'])
++    # EV3-06 + EV3-13: kart ve ekran metinleri de yasak ve E12 listeleriyle
++    for t in ui_texts(lesson):
++        for w in FORBIDDEN + FORBIDDEN_E12:
++            if re.search(r'(?<!\w)' + re.escape(w), t.lower()):
++                fails.append('UI yasak/E12: "%s" (%s)' % (w, t))
++    f2, o2 = quick_and_stop(lesson)
++    return fails + f2, out + o2
++
++
++def inner_rate(c, rate, prof):
++    """Cümle içi hız: hece ÷ (konuşma − parça başına uç payı)."""
++    n = len(sub_texts(c))
++    return c['syllables'] / (clip_dur(c, rate, prof) - n * EDGE)
++
++
++def effective_rate(c, rate, prof):
++    """MT3-02: etkin hız: hece ÷ (birimin konuşması + cümle arası sessizlikler (pref) − bir uç payı)."""
++    return c['syllables'] / (unit_len(c, rate, prof, 'pref') - EDGE)
++
++
++# ----------------------------------------------------------------------------------------------- hızlı kapanış
++def quick_contexts(lesson):
++    """S3-01 + MT3-07 + S3-02: "Kapanışa geç" dizisi, basıldığı yere göre. Dönüş: {ad: (giriş evresi, ön klipler)}."""
++    q = lesson['extras']['quickClosing']
++    allc = {c['id']: (b['id'], c) for b in lesson['blocks'] for c in b['clips']}
++    ctx = {'temel (Derin evreden)': ('Derin', [])}
++    for blk, pre in q.get('prefixByActiveBlock', {}).items():
++        ctx['etkin %s' % blk] = ('Derin', list(pre))
++    for win, welcome in q.get('windowReturn', {}).items():
++        bid, w = allc[welcome]
++        ctx['pencere %s' % win] = ('Derin', [w] + list(q.get('prefixByActiveBlock', {}).get(bid, [])))
++    return ctx
++
++
++def quick_sequence_for(lesson, bid, cid, in_window):
++    """Motor kuralı: basılan yerdeki (o anki) klibe göre dizinin ön klipleri."""
++    q = lesson['extras']['quickClosing']
++    pre = []
++    blocks = block_map(lesson)
++    if in_window and cid in q.get('windowReturn', {}):
++        w = next(c for c in blocks[bid]['clips'] if c['id'] == q['windowReturn'][cid])
++        pre.append(w)
++    rel = q.get('releaseClip', {}).get(bid)
++    if rel:
++        order = [c['id'] for c in blocks[bid]['clips']]
++        if cid in order and order.index(cid) < order.index(rel):
++            pre += list(q['prefixByActiveBlock'][bid])
++    return pre
++
++
++def seq_timeline(clips, rate, prof, lead, entry_phase):
++    """Klip dizisinin pref sessizliklerle zaman çizelgesi: [(klip, başlangıç, bitiş, sonraki sessizlik)], toplam."""
++    t = lead
++    rows = []
++    for i, c in enumerate(clips):
++        u = unit_len(c, rate, prof, 'pref')
++        g = c['gapAfter']['pref']
++        nxt = clips[i + 1] if i + 1 < len(clips) else None
++        if nxt is not None and GAIN_DB.get(c['phase']) != GAIN_DB.get(nxt['phase']):
++            g = max(g, GAIN_RAMP_SEC)          # S3-02: düzey değişimi yalnız >= 4 sn sessizlikte, rampayla
++        rows.append((c, t, t + u, g))
++        t += u + g
++    return rows, t
++
++
++def quick_and_stop(lesson):
++    """S3-01 + S3-02 + MT3-07: "Kapanışa geç"in bütün bağlamları ve Durdur dönüşü; T1, G2-04, TR2-03, dolgu, kazanç."""
++    fails, out = [], []
++    q = lesson['extras']['quickClosing']
++    lead = q.get('leadInSec', 0.0)
++    for name, (entry_phase, pre) in quick_contexts(lesson).items():
++        clips = pre + q['clips']
+         for rate in RATES:
+             for pn in PROFILES:
+                 pr = profile(pn, rate)
+-                d = sum(clip_dur(c, rate, pr) + c['gapAfter']['pref'] for c in ex['clips'])
+-                if not lo_ <= d <= hi_:
+-                    fails.append('%s %.1f sn, [%g, %g] dışında (%.1f, %s)' % (key, d, lo_, hi_, rate, pn))
+-        # T1 (Z2-01, G2-05): "birkaç nefes" isteyen klipten sonra >= 10 sn; dizinin SON klibi muaf (ses orada biter,
+-        # bekleme ekran metniyle sessizce sürer)
++                rows, tot = seq_timeline(clips, rate, pr, lead, entry_phase)
++                lo_b, hi_b = QUICK_BOUNDS_WINDOW if name.startswith('pencere') else QUICK_BOUNDS
++                if not lo_b <= tot <= hi_b:
++                    fails.append('quickClosing[%s] %.1f sn, [%g, %g] dışında (%.1f, %s)' % (
++                        name, tot, lo_b, hi_b, rate, pn))
++                # TR2-03: herhangi bir 60 sn'de en çok 3 "-(y)abil-"
++                ab = [(t0, n_abil(c['text'])) for c, t0, _, _ in rows]
++                if any(sum(n for t, n in ab if s0 <= t < s0 + 60.0) > ABIL_MAX_60 for s0, _ in ab):
++                    fails.append('TR2-03: quickClosing[%s] 60 sn\'de > %d "-(y)abil-" (%.1f, %s)' % (
++                        name, ABIL_MAX_60, rate, pn))
++                for fw in FILLERS:
++                    ts = [t0 for c, t0, _, _ in rows if re.search(r'(?<!\w)' + fw + r'(?!\w)', c['text'].lower())]
++                    if any(b - a < 60.0 for a, b in zip(ts, ts[1:])):
++                        fails.append('quickClosing[%s]: dolgu "%s" 60 sn içinde iki kez' % (name, fw))
++                # S3-02: girişte düzey değişecekse ön sessizlik rampayı taşır
++                if GAIN_DB.get(entry_phase) != GAIN_DB.get(clips[0]['phase']) and lead < GAIN_RAMP_SEC - 1e-6:
++                    fails.append('S3-02: quickClosing[%s] girişte %.1f sn < %g sn rampa' % (name, lead, GAIN_RAMP_SEC))
++        rows, tot = seq_timeline(clips, 5.6, profile('hi', 5.6), lead, entry_phase)
++        out.append('Kapanışa geç [%s]: %s' % (name, ' → '.join(c['id'] for c in clips)))
++    # T1 (Z2-01, G2-05): "birkaç nefes" isteyen klipten sonra >= 10 sn; dizinin SON klibi muaf; G2-04: kalkış klibi
++    for key in ('quickClosing', 'stopReturn'):
++        ex = lesson['extras'][key]
+         for c in ex['clips'][:-1]:
+             if breath_wait_needed(c['text']) and c['gapAfter']['pref'] < BREATH_WAIT_MIN_SEC - 1e-6:
+                 fails.append('%s: %s nefes beklemesi %.1f sn < %g' % (key, c['id'], c['gapAfter']['pref'],
+                                                                       BREATH_WAIT_MIN_SEC))
+-        # G2-04: kalkış adımı baş dönmesi satırıyla gelir
+         for c in ex['clips']:
+             if 'kalk' in (c['tags'].get('step') or '').split('+'):
+                 low = c['text'].lower()
+                 if not ('baş' in low and 'dön' in low):
+                     fails.append('G2-04: %s kalkış klibinde baş dönmesi satırı yok: %s' % (key, c['id']))
++    # Durdur dönüşü 20–30 sn
++    ex = lesson['extras']['stopReturn']
++    for rate in RATES:
++        for pn in PROFILES:
++            _, tot = seq_timeline(ex['clips'], rate, profile(pn, rate), 0.0, 'Kapanış')
++            if not STOP_BOUNDS[0] <= tot <= STOP_BOUNDS[1]:
++                fails.append('stopReturn %.1f sn, [%g, %g] dışında (%.1f, %s)' % (tot, STOP_BOUNDS[0], STOP_BOUNDS[1],
++                                                                                   rate, pn))
+     return fails, out
+ 
+ 
++def quick_prefix_checks(lesson, plans):
++    """S3-01: her planda C3/C4'ün bırakma klibinden önceki her klip konumunda "Kapanışa geç" dizisi eşleşen ön klibi
++    taşır; pencere sessizliğinde basılırsa önce karşılama klibi."""
++    fails = []
++    q = lesson['extras']['quickClosing']
++    for p in plans:
++        for ev in p['events']:
++            bid, cid = ev['block'], ev['clip']['id']
++            if bid not in q.get('releaseClip', {}):
++                continue
++            order = [c['id'] for c in block_map(lesson)[bid]['clips']]
++            active = order.index(cid) < order.index(q['releaseClip'][bid])
++            for in_win in ((False, True) if ev['clip'].get('window') else (False,)):
++                pre = [c['id'] for c in quick_sequence_for(lesson, bid, cid, in_win)]
++                want = [c['id'] for c in q['prefixByActiveBlock'][bid]] if active else []
++                if [x for x in pre if x in want] != want:
++                    fails.append('S3-01: %s içinde %s konumunda ön klip eksik' % (bid, cid))
++                if in_win and pre[:1] != [q['windowReturn'][cid]]:
++                    fails.append('S3-01: %s penceresinde karşılama klibi yok' % cid)
++    return sorted(set(fails))
++
++
+ def stems(text, ok):
+     out = set()
+     for w in words(text):
+@@ -944,9 +1279,46 @@
+                'edebilirsin'.split())
+ 
+ 
++def suffix_words(text, ok):
++    """TR3-06: art arda gelen cümlelerde aynı ilgeç/durum sözcüğü ("…ların arasından") kök denetiminden bağımsız."""
++    out = {w.lower() for w in words(text) if w.lower() in SUFFIX_GROUPS}
++    return {w for w in out if not any(w.startswith(o) for o in ok)}
++
++
++def short_stems(text):
++    """MT3-16: klip içi denetim için 3 harf ve üstü kökler (5 harfle kısaltılır)."""
++    out = set()
++    for w in words(text):
++        lw = w.lower()
++        if len(lw) >= 3 and lw not in REP_STOP:
++            out.add(lw[:5])
++    return out
++
++
++def within_clip_warnings(lesson):
++    """MT3-16: aynı klibin ardışık iki cümlesinde aynı kök (3 harf ve üstü; biri ötekinin başıysa da). repeatOk geçerli.
++    Ana metin, seçenekler, sahne metinleri ve kısa biçimler."""
++    pairs = {}
++    for cid, (_, c) in all_unique_clips(lesson).items():
++        if c.get('carrier'):
++            continue
++        ok = set(c['tags'].get('repeatOk', []))
++        for t in text_forms(c):
++            ss = sentences(t)
++            for a, b in zip(ss, ss[1:]):
++                sa, sb = short_stems(a), short_stems(b)
++                common = {x for x in sa for y in sb if x == y or (min(len(x), len(y)) >= 3 and
++                                                                  (x.startswith(y) or y.startswith(x)))}
++                common = {x for x in common if not any(x.startswith(o) or o.startswith(x) for o in ok)}
++                if common:
++                    pairs[(cid, 'klip içi')] = sorted(common)
++    return pairs
++
++
+ def repetition_warnings(lesson, plans):
+     """Ardışık iki cümle klibinde ya da aralarındaki sessizlik <= REP_WINDOW_SEC olan iki cümle klibinde aynı 5 harflik
+-    kök (L2-14: 'dön' gibi kısa kökler de). Bilinçli tekrarlar repeatOk etiketlidir. Uyarı listesi."""
++    kök (L2-14: 'dön' gibi kısa kökler de) ya da aynı ilgeç sözcüğü (TR3-06). Bilinçli tekrarlar repeatOk etiketlidir.
++    4. tur: sahne planları da verilir (TR3-06) ve klip içi cümle çiftleri eklenir (MT3-16). Uyarı listesi."""
+     pairs = {}
+     for p in plans:
+         evs = [ev for ev in p['events'] if not ev['clip'].get('carrier')]
+@@ -957,8 +1329,10 @@
+                     break
+                 ok = set(a['clip']['tags'].get('repeatOk', [])) | set(b['clip']['tags'].get('repeatOk', []))
+                 common = stems(a['clip']['text'], ok) & stems(b['clip']['text'], ok)
++                common |= suffix_words(a['clip']['text'], ok) & suffix_words(b['clip']['text'], ok)
+                 if common:
+                     pairs[(a['clip']['id'], b['clip']['id'])] = sorted(common)
++    pairs.update(within_clip_warnings(lesson))
+     return pairs
+ 
+ 
+@@ -985,20 +1359,27 @@
+     return a, n, core, k
+ 
+ 
++def slack5(results, corner):
++    """5 dakikanın verilen köşesinde (hız, profil) min sessizliklere göre boş pay."""
++    p5 = results[(corner[0], 5)][corner[1]][0]
++    return 300 - (p5['speech'] + p5['gaps']['min'])
++
++
+ def run_all(lesson):
+     results = {}
++    profs = list(PROFILES)
+     for rate in RATES:
+         for m in MINUTES:
+             T = m * 60
+             case = {}
+-            for prof in ('lo', 'hi'):
++            for prof in profs:
+                 p = plan(lesson, T, rate, prof)
+                 fails, d, runs = check_plan(lesson, p)
+                 case[prof] = (p, fails, d, runs)
+             results[(rate, m)] = case
+     # dakikalar arası denetimler
+     for rate in RATES:
+-        for prof in ('lo', 'hi'):
++        for prof in profs:
+             ids = {m: [ev['clip']['id'] for ev in results[(rate, m)][prof][0]['events']] for m in MINUTES}
+             for m in MINUTES:
+                 p, fails = results[(rate, m)][prof][:2]
+@@ -1014,22 +1395,50 @@
+                     fails.append('T5: içerik doymadan esneme f=%.2f > %g' % (stretch(p), STRETCH_MAX_UNSATURATED))
+                 if m == 30 and stretch(p) > STRETCH_MAX_AT_30 + 1e-9:
+                     fails.append('T2: 30:00\'da esneme f=%.2f > %g' % (stretch(p), STRETCH_MAX_AT_30))
+-    # T6/Z2-04: 5 dk'nın en yavaş köşesinde boş pay (min sessizliklere göre)
+-    p5 = results[(5.2, 5)]['hi'][0]
+-    slack = 300 - (p5['speech'] + p5['gaps']['min'])
+-    if slack < T6_FLOOR - 1e-6:
+-        results[(5.2, 5)]['hi'][1].append('T6: 5 dk 5,2 yüksek köşesinde boş pay %.1f sn < %g' % (slack, T6_FLOOR))
++    # T6 → 4. tur (L3-01, Z3-02): 5 dk'nın ÜRETİM köşesinde (5,6 yüksek) boş pay >= 15 sn. Zarf köşesi (5,2 yüksek)
++    # raporlanır; oradaki plan da bütün öteki denetimlerden geçmek zorundadır.
++    if PRODUCTION[0] in RATES and PRODUCTION[1] in PROFILES:
++        sl = slack5(results, PRODUCTION)
++        if sl < T6_FLOOR - 1e-6:
++            results[(PRODUCTION[0], 5)][PRODUCTION[1]][1].append(
++                'T6: 5 dk üretim köşesinde (%.1f %s) boş pay %.1f sn < %g' % (PRODUCTION[0], PRODUCTION[1], sl, T6_FLOOR))
+     return results
+ 
+ 
++def plateaus(results, rate, prof):
++    """Z3-09: içeriği bir önceki dakikayla aynı olan dakikalar (düzlükler)."""
++    ids = {m: {ev['clip']['id'] for ev in results[(rate, m)][prof][0]['events']} for m in MINUTES}
++    return [m for m in MINUTES[1:] if ids[m] == ids[m - 1]]
++
++
++def block_shares(results):
++    """Z3-01: >= 20 dk planlarda C2, C3, C4'ün blok konuşma payı (konuşma ÷ blok süresi; cümle arası sessizlikler
++    sessizliktir). Dönüş: {blok: (en düşük, en yüksek, en düşüğün vakası)}."""
++    out = {}
++    for (rate, m), case in results.items():
++        if m < BLOCK_SHARE_FROM:
++            continue
++        for prof, (p, _, _, _) in case.items():
++            for b in BLOCK_SHARE_BLOCKS:
++                evs = [ev for ev in p['events'] if ev['block'] == b]
++                if not evs:
++                    continue
++                share = sum(ev['speech'] for ev in evs) / sum(ev['dur'] + ev['gap'] for ev in evs)
++                lo_, hi_, where = out.get(b, (9.0, 0.0, ''))
++                if share < lo_:
++                    lo_, where = share, '%.1f %s %d dk' % (rate, prof, m)
++                out[b] = (lo_, max(hi_, share), where)
++    return out
++
++
+ def case_ok(case):
+-    return not case['lo'][1] and not case['hi'][1]
++    return all(not v[1] for v in case.values())
+ 
+ 
+ def failure_kinds(results):
+     kinds = {}
+     for (r, m), c in results.items():
+-        for pr in ('lo', 'hi'):
++        for pr in c:
+             for f in c[pr][1]:
+                 # ölçülen sayılar "#" olur; denetim kimlikleri (T5, H1/B.3-8, C2) korunur
+                 k = re.sub(r'(?<![A-Za-z.\-/])\d+(?:[.,]\d+)?', '#', f.split(' (')[0])[:70]
+@@ -1037,16 +1446,46 @@
+     return kinds
+ 
+ 
+-def main():
+-    global DUR_SCALE
++def parse_args(argv):
++    """Z3-04: aday ses için hız ve duraklama profili komut satırından eklenir."""
++    ap = argparse.ArgumentParser(description='Ders 2 zamanlama denetimi')
++    ap.add_argument('--rate', type=float, action='append', default=[],
++                    help='ek eklemleme hızı (hece/sn), ör. --rate 7.1')
++    ap.add_argument('--profile', action='append', default=[],
++                    help='ek duraklama profili ad:cümle,virgül,noktalı_virgül,üç_nokta (sn), ör. aday:0.3,0.1,0.2,0.6')
++    return ap.parse_args(argv)
++
++
++def main(argv=None):
++    global DUR_SCALE, OUT_PATH
++    extra = False
++    if argv:
++        args = parse_args(argv)
++        for r in args.rate:
++            if r not in RATES:
++                RATES.append(r)
++                RATES.sort()
++                SPEED_PAUSE_SCALE.setdefault(r, 1.0)
++                extra = True
++        for spec in args.profile:
++            name, vals = spec.split(':', 1)
++            a, b, c, d = (float(x) for x in vals.split(','))
++            PROFILES[name] = {'sent': a, 'comma': b, 'semi': c, 'ell': d}
++            extra = True
++        if extra:
++            OUT_PATH = os.path.join(HERE, 'timing.out.aday.txt')
+     lesson = load()
+     lines = []
+     P = lines.append
+-    P('Nefona Yoga · Ders 2 "Derin Dinlenme" · timing.py çıktısı (3. tur)')
++    P('Nefona Yoga · Ders 2 "Derin Dinlenme" · timing.py çıktısı (4. tur)')
+     P('Ders dosyası: ders2.lesson.json (sürüm %s)' % lesson['version'])
+-    P('Model: hece/hız + TTS-içi duraklama (düşük=Neslihan v2, yüksek=Hakan v2; 5,2\'de ×1,25) + uç payı 0,31 sn '
+-      '(mikro 0,15); mikro-listelerde başlangıç periyodu (sessizlik = periyot − süre, en az %g sn). Vaka = hız × dakika; '
+-      'iki duraklama profilinde de geçmeli.' % GAP_FLOOR)
++    P('Model: hece/hız + TTS-içi duraklama (düşük=Neslihan v2, yüksek=Hakan v2; 5,2 zarfında ×1,25) + uç payı 0,31 sn '
++      '(mikro 0,15); mikro-listelerde başlangıç periyodu (sessizlik = periyot − süre, en az %g sn); çok cümleli birimler '
++      'cümle sonlarından kesilir, aralarına uygulamanın cümle arası sessizliği girer (MT3-02). Vaka = hız × dakika; bütün '
++      'duraklama profillerinde geçmeli. Yol: yalnız MCP (sahip kararı); üretim köşesi %.1f %s, zarf %.1f %s.'
++      % (GAP_FLOOR, PRODUCTION[0], PRODUCTION[1], ENVELOPE[0], ENVELOPE[1]))
++    if extra:
++        P('ADAY SES ÇALIŞMASI: hızlar %s, profiller %s' % (RATES, sorted(PROFILES)))
+     P('')
+     tf, tout = lint_text(lesson)
+     P('== Metin denetimi ==')
+@@ -1057,22 +1496,26 @@
+         P('  HATA: ' + f)
+     P('')
+     results = run_all(lesson)
++    all_plans = [c[pr][0] for c in results.values() for pr in c]
+     variant_lines = []
+     variants_ok = True
+     for k in range(1, n_variants(lesson)):          # P-N5: seçenek metinleriyle aynı 78 vaka
+         rk = run_all(with_variant(lesson, k))
+         nk = sum(1 for c in rk.values() if case_ok(c))
+         variants_ok &= (nk == len(rk))
+-        bad = ['%.1f %d dk %s: %s' % (r, m, pr, c[pr][1][0]) for (r, m), c in rk.items() for pr in ('lo', 'hi') if c[pr][1]]
++        bad = ['%.1f %d dk %s: %s' % (r, m, pr, c[pr][1][0]) for (r, m), c in rk.items() for pr in c if c[pr][1]]
+         variant_lines.append('  seçenek takımı %d: %d/%d vaka GEÇTİ%s' % (k, nk, len(rk), ('; ilk hata ' + bad[0]) if bad else ''))
+     scene_lines = []
+     scenes_ok = True
++    scene_plans = []
+     for sc in scene_names(lesson):                  # H6/L2-04: sahne takımları
+         rs = run_all(with_scene(lesson, sc))
++        scene_plans += [c[pr][0] for c in rs.values() for pr in c]
+         ns = sum(1 for c in rs.values() if case_ok(c))
+         scenes_ok &= (ns == len(rs))
+-        bad = ['%.1f %d dk %s: %s' % (r, m, pr, c[pr][1][0]) for (r, m), c in rs.items() for pr in ('lo', 'hi') if c[pr][1]]
++        bad = ['%.1f %d dk %s: %s' % (r, m, pr, c[pr][1][0]) for (r, m), c in rs.items() for pr in c if c[pr][1]]
+         scene_lines.append('  sahne "%s": %d/%d vaka GEÇTİ%s' % (sc, ns, len(rs), ('; ilk hata ' + bad[0]) if bad else ''))
++    qf = quick_prefix_checks(lesson, all_plans + scene_plans)
+     n_pass = 0
+     per_rate = {}
+     P('== Vaka tablosu (her satır: hız, dakika, profil) ==')
+@@ -1080,7 +1523,7 @@
+       'pencereler | en yoğun 60 sn (hece, pay) | ort. hece/dk')
+     for (rate, m), case in results.items():
+         ok = True
+-        for prof in ('lo', 'hi'):
++        for prof in case:
+             p, fails, d, runs = case[prof]
+             if fails:
+                 ok = False
+@@ -1099,8 +1542,9 @@
+             n_pass += 1
+     P('')
+     P('== Tekrar uyarıları (10 sn içindeki ya da ardışık cümle kliplerinde aynı 5 harflik kök; "dön" gibi kısa kökler '
+-      'dahil; bilinçli olanlar etiketli) ==')
+-    reps = repetition_warnings(lesson, [c[pr][0] for c in results.values() for pr in ('lo', 'hi')])
++      'dahil; ilgeç sözcükleri (TR3-06); sahne planları dahil; klip içi ardışık cümleler (MT3-16); bilinçli olanlar '
++      'etiketli) ==')
++    reps = repetition_warnings(lesson, all_plans + scene_plans)
+     if not reps:
+         P('  yok')
+     for (a, b), ws in sorted(reps.items()):
+@@ -1108,7 +1552,7 @@
+     P('')
+     P('== "-(y)abil-" yoğunluğu (TR2-03, H11) ==')
+     for rate in RATES:
+-        for prof in ('lo', 'hi'):
++        for prof in PROFILES:
+             p = results[(rate, 5)][prof][0]
+             sc = [ev for ev in p['events'] if not ev['clip'].get('carrier')]
+             n_ab = sum(n_abil(ev['clip']['text']) for ev in sc)
+@@ -1127,26 +1571,49 @@
+     for m in (5, 10, 15, 20, 30):
+         row = []
+         for rate in RATES:
+-            for prof in ('lo', 'hi'):
++            for prof in PROFILES:
+                 a, n, c, k = anchor_split(results[(rate, m)][prof][0])
+                 row.append('%.1f%s %.0f/%.0f/%.0f/%.0f' % (rate, prof[0], a, n, c, k))
+         P('  %2d dk: %s' % (m, ' · '.join(row)))
+     P('')
+-    P('== Kapanışa geç (hızlı kapanış) ve Durdur dönüşü (pref sessizliklerle) ==')
++    P('== Blok konuşma payı (Z3-01; >= %d dk; C2, C3, C4; PLAN B.4.1 rehberli çekirdek alt sınırı %.2f; bilgi, sahibe '
++      'görünür istisna) ==' % (BLOCK_SHARE_FROM, BLOCK_SHARE_FLOOR))
++    for b, (lo_, hi_, where) in sorted(block_shares(results).items()):
++        P('  %s: en düşük %.2f (%s), en yüksek %.2f → %s' % (b, lo_, where, hi_,
++                                                          'alt sınırın altında' if lo_ < BLOCK_SHARE_FLOOR else 'alt sınırda ya da üstünde'))
++    P('')
++    P('== Düzlükler (Z3-09; içeriği bir önceki dakikayla aynı olan dakikalar) ==')
++    for rate in RATES:
++        for prof in PROFILES:
++            pl = plateaus(results, rate, prof)
++            P('  %.1f %s: %s' % (rate, prof, ', '.join('%d' % m for m in pl) or 'yok'))
++    P('')
++    P('== Kapanışa geç (hızlı kapanış; ön sessizlik %.0f sn dahil, pref sessizliklerle) ve Durdur dönüşü ==' %
++      lesson['extras']['quickClosing'].get('leadInSec', 0))
++    q = lesson['extras']['quickClosing']
++    for name, (entry, pre) in quick_contexts(lesson).items():
++        row = []
++        for rate in RATES:
++            for prof in PROFILES:
++                _, tot = seq_timeline(pre + q['clips'], rate, profile(prof, rate), q.get('leadInSec', 0.0), entry)
++                row.append('%.1f%s %.1f' % (rate, prof[0], tot))
++        P('  %-28s %s' % (name, ' · '.join(row)))
++    row = []
+     for rate in RATES:
+-        for prof in ('lo', 'hi'):
+-            pr = profile(prof, rate)
+-            for key in ('quickClosing', 'stopReturn'):
+-                ex = lesson['extras'][key]
+-                s = sum(clip_dur(c, rate, pr) + c['gapAfter']['pref'] for c in ex['clips'])
+-                P('  %.1f %s %-12s %.1f sn' % (rate, prof, key, s))
++        for prof in PROFILES:
++            _, tot = seq_timeline(lesson['extras']['stopReturn']['clips'], rate, profile(prof, rate), 0.0, 'Kapanış')
++            row.append('%.1f%s %.1f' % (rate, prof[0], tot))
++    P('  %-28s %s' % ('Durdur dönüşü', ' · '.join(row)))
++    P('  ön klip denetimi (S3-01; her planda C3/C4 konumları): %s' % ('GEÇTİ' if not qf else 'KALDI'))
++    for f in qf:
++        P('  HATA: ' + f)
+     P('')
+     P('== Seçenek metinleri (P-N5) ve sahne takımları (H6/L2-04) ==')
+     for ln in (variant_lines or ['  seçenek yok']) + (scene_lines or ['  sahne yok']):
+         P(ln)
+     P('')
+     P('== Sarsıntı taraması (Z2-04; bütün klip süreleri × ölçek; ana metin; bilgi, sonucu değiştirmez) ==')
+-    for sc in PERTURB:
++    for sc in (() if os.environ.get('HIZLI') else PERTURB):
+         DUR_SCALE = sc
+         rp = run_all(lesson)
+         DUR_SCALE = 1.0
+@@ -1158,18 +1625,23 @@
+     P('== ÖZET ==')
+     for rate in RATES:
+         a, b = per_rate[rate]
+-        P('  %.1f hece/sn: %d/%d dakika GEÇTİ (düşük ve yüksek duraklama profilinde)' % (rate, a, b))
+-    p5 = results[(5.2, 5)]['hi'][0]
+-    P('  5 dk 5,2 yüksek köşesinde boş pay: %.1f sn (T6 tabanı %g)' % (300 - (p5['speech'] + p5['gaps']['min']), T6_FLOOR))
+-    P('  TOPLAM: %d/%d vaka GEÇTİ (ana metin); seçenek takımları %s; sahne takımları %s; metin denetimi %s' % (
+-        n_pass, len(results), 'GEÇTİ' if variants_ok else 'KALDI', 'GEÇTİ' if scenes_ok else 'KALDI',
+-        'GEÇTİ' if not tf else 'KALDI'))
++        P('  %.1f hece/sn%s: %d/%d dakika GEÇTİ (bütün duraklama profillerinde)' % (
++            rate, ' (zarf)' if rate == ENVELOPE[0] else (' (üretim)' if rate == PRODUCTION[0] else ''), a, b))
++    P('  5 dk üretim köşesinde (%.1f %s) boş pay: %.1f sn (T6 tabanı %g)' % (
++        PRODUCTION[0], PRODUCTION[1], slack5(results, PRODUCTION), T6_FLOOR))
++    if ENVELOPE[0] in RATES:
++        P('  5 dk zarf köşesinde (%.1f %s) boş pay: %.1f sn (bilgi; plan bütün öteki denetimlerden geçer)' % (
++            ENVELOPE[0], ENVELOPE[1], slack5(results, ENVELOPE)))
++    P('  TOPLAM: %d/%d vaka GEÇTİ (ana metin); seçenek takımları %s; sahne takımları %s; metin denetimi %s; '
++      'hızlı kapanış ön klipleri %s' % (
++          n_pass, len(results), 'GEÇTİ' if variants_ok else 'KALDI', 'GEÇTİ' if scenes_ok else 'KALDI',
++          'GEÇTİ' if not tf else 'KALDI', 'GEÇTİ' if not qf else 'KALDI'))
+     P('  Kapsam: bu sayı zamanlama ve metin kurallarıdır; dinleme, söyleyiş ve insan onayı değildir (P-S1).')
+     with open(OUT_PATH, 'w', encoding='utf-8') as f:
+         f.write('\n'.join(lines) + '\n')
+-    print('\n'.join(lines[-9:]))
+-    return 0 if (n_pass == len(results) and not tf and variants_ok and scenes_ok) else 1
++    print('\n'.join(lines[-10:]))
++    return 0 if (n_pass == len(results) and not tf and variants_ok and scenes_ok and not qf) else 1
+ 
+ 
+ if __name__ == '__main__':
+-    sys.exit(main())
++    sys.exit(main(sys.argv[1:]))

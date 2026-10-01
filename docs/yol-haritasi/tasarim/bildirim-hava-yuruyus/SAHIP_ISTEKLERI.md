@@ -1,0 +1,33 @@
+# Sahibin istekleri · bildirimler, hava, yürüyüş (2026-09-30)
+
+## İlk istek (kelimesi kelimesine)
+> bazı düzeltmeler ve yeni fikir ekleyeceğzi . kullanıcı bölümnde bildimrler bölümü olacka... her modülde şık bir şekidle günlük bildirime ekle seçeneği olacak... mesela göz egezerisizi.. biliyorsun sonsuz yol olarak modlü inşaa ettik buna dikkat et... örneğin ben göz egzersizi yaptım altta şık bir tasatımla banahatırlat bölümü var ... hatırlatma aktif dediğinde hangi saatte hatırlatılsın sen karar vvere dediğinde sistem en uygun ve yoğun kulalndığı uygulamnın zmaanı bualrak kontrol eder ve bildirimi gönderir bildirimler üst üste asla binmez... örneğin göz egezersizi yaparken bana hatırlat bölümünü işaretledim ve hatırlatma erkanı çıktı nezman hatırlatayım sen hatırlat veya istenilen zmanı yacaka gündü kazç kez ise o saatler yazılacak... hatırlat kurulduğunda bir daha aynı baştan başladı örneğin yola 1. gün 4 test tekrar girdiğinde hatırlatma aktif olarak görecek... ve bildirimleri bölümünde bu hatırlatmayı görüş kapatıp aavilecek... mesela hava durumu hatırlatması... ilk ana ektran yürük saysııs adım sayısının üstünde konum durumu istenecek örneğin izmir gaziemir hava durumu 23. derece üzzerien taıkladnıldaoığın gelişmiş bir hava tahmin durumu alınacak jef .burada yorum yapsın ve bu yorum bildirm olarak ta isteinildiğinde glesin örneğin kullanıcı hava tahmini bildirimini açtı herügn alrmı kullanıcı 06:00 kuruyor... mantıklı oolan 10 dakiak içinde hava durumunu jef yorurumu ile gelmesi örneğin bugün yamışru ise jev şöyle diyebilir bugün 21.00 -22.00 arası yağmru bekeniyor bir kaz zeki cümle eklenebilir unutmaman gerekn jef yani bizim söyleidğimiz nef ai zeki değil ama prımlt ve örğğteilerek zeki hale getirelebilir çok ucuz ama çok kalitlie hale getrireceğiz.... bütün bildirimlerde jev yani nef etkisi olacak .. ve adım örneğin bazen ayağa kalk yanlış zmanada gelkiyor gece saat 1 den 4 kadar kalk bilidimrleir geldi... saat 21 den sorna kalk mantıksız.... her bildirim pubmed makaleleriden bilimsel verielre datandırılacak... zeki olacakğız. örneğin ben yürüşe ıkıyor.um sistem appledeki gibi hareketten yürütüşe mi çıktın tespiet edecek jev yani nef bilrimi yütüşe mi çıktın hava 23 derece ılıke ve yürüyüş için ideal bir sıkcaklık yürüş için sana refakat etmemiz istemrisin ? tıkaldığında apple watch gibi ekran açıalcakkk ve adım sayacak apple ile birebir aynı olamsı lazım şuda aönemli... ses koçu mesela şuanakii hızını söylesin emsela benim için en önemlisi 1 km kaç dakiakda koşuıyorum veya yürüyüroum... mesela 250 metre de bir şuandaki hızın bu diye söylesin ama bu açaılır kağanır birşey olsun.... anladın mı bu bildirim hava durumu ve yürüyüş bölümlerini ... yoga öenemliiii bekliyorzu sonsuz yol öenmli bekliyoruz... asla unutmaman gerekne bütün tasarımalr ve bütün işler mükemmel değilse tekrar gözden geçirmelisin... mükemmle olmayan iş önerme... işlerde en önmelli madde 5 saniyede kulalncının etkilenmesi? 5 sn ekileniyormu soru bu cevap evet ise uygula.
+
+("jef", "jev" = Nef.)
+
+## Aynı gün, oturum içinde (kelimesi kelimesine)
+1. App Review sorusu üzerine: "Ana sayfada hava: Onaylı planın yedek kuralına göre App Review cevabı.. bunu daha öcne komnuşmuştuk gerek yok demiştin böyle bir bölüm yok dmeiştin onun için yamadık apple"
+   → Karar: Apple'a soru gönderilmez; hava Ana sayfada adım satırının üstünde durur, atıf kuralı satırın kendisinde karşılanır.
+2. "sonsuz yoldaki modüllerde şık bir hatırmatma gibi kısım olacak bunu anladın mı ve plana eklemişmiydin"
+3. "tabii hatırlatma mesajında da ne yazacğaı öenmli çok zeki bir ai miş gibi cevaplanması gerkiyor bu jey biliyorsun yani bizim deyimizmile nef.. göz mesela egzersizi ypacak... hop pubmed bir bilimsel yazı altında yazabiliriz ikna edelim isnaları teeşvikl edelim makale linki vs.... ytütül yapacak nefes egzersizi örneğin dolunay da .... anladın mı"
+4. "koşu yaparken veya yürürken nef yürüdüğümü tespi ediyor... .... burada nef bildirim ögnderiyor... son 15 dakiakda örneğin 1 km yürüdün hava 23 derece.. yürüşmü yapıyorsun destek olmamlı istemriisin olabilir, Nef size yardımcı olmak işsştıyr olavilri."
+5. "jef ai sinin en an kulalnımla en üst zekaya sahip olasmnu da araştırmışmıydın veya planladın mı"
+6. "yürürüş kolşu bölüümünde ne 250 ömeteede bir hatırlat dedim ayrıca 1 km de de bir olması lazım neya kulalncıuı seçebilsin mesela 250 meterede bir değilde 500 meerede bir diyebilir... ... ayrıca dediğğin gibi mesela su içme kişi bana birden falza saat seçebilmeli fazla seçenek olabilir dediğin gibi"
+   → Karar: sesli koçta aralığı kişi seçer (250 m, 500 m, 1 km); her tam kilometrede ayrıca o kilometrenin süresi söylenir. Nefes, mola, su ve yürüyüş hatırlatmalarında da birden fazla saat seçilebilir (en çok 3); bildirim deneyi gün düzeyinde sürer.
+
+## Onay (2026-09-30, kelimesi kelimesine)
+> 1. senin öngördüğün şekilde .. 2 kapalı ise bildirim gönderip açmasnını istemelisin whatsapp anlık konum gönderediğinde istenildiği gidi.. 3. mantıklı.
+
+→ Karar 1: önerilen sıra (Build 60 → B1 → B2 → Y2–Y4 → B3 → Y6). Karar 2: "Yürürken beni fark et" varsayılan kapalı; kapalıyken
+Nef kaçırdığı bir yürüyüşten sonra bildirimle açmayı teklif eder (WhatsApp'ın anlık konumda izni o an istemesi gibi).
+Karar 3: cümle bankası; görünür bilim satırı günde bir, bilim kartı her bildirimde.
+
+## Tur 2'den sonra (2026-09-30)
+Soru: B3, "Kullanırken" konum izniyle hukukçudan önce yayına çıksın mı? Cevap (seçenekten): "Evet, konumla çıksın".
+→ Karar: B3 konumla çıkar; konum saklanmaz, telefondan çıkmaz; "Her Zaman" hukukçu cevabını bekler.
+
+## Ana oturumda (2026-09-30, kelimesi kelimesine)
+- "senin önerilerini uygulayalım" → B0 beş adım; 7302 ve oturum sonu çakışması tabandan önce düzeltildi (Bug 34,
+  `57a7734`), "Çalışma günleri" saatine dokunulmadı; B1a Build 60'tan sonra.
+- "rıza taslaklarını onaylıyorum." → `rizalar-taslak.md`'deki `weather`, `walk`, `walkDetect` metinleri onaylı; kendi
+  parçalarında harfi harfine koda girer. Hukukçu onayı yine beklenir (`consent.js` notu).

@@ -1,0 +1,172 @@
+{
+ "unit": "c2.yuz",
+ "phase": "Derinleşme",
+ "sex": "m",
+ "pieces_needed": 1,
+ "takes": [
+  "t1.mp3",
+  "t2.mp3",
+  "t3.mp3"
+ ],
+ "median_active_sec": 3.457,
+ "ranking": [
+  {
+   "rank": 1,
+   "take": "t3.mp3",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d03/c2.yuz/t3.mp3",
+   "score": 1.42,
+   "penalties": {
+    "rate": 1.3,
+    "dur": 0.0,
+    "f0sd": 0.12
+   },
+   "soft_violations": [
+    "eklemleme 4.61 bant dışı (5.0–6.2)"
+   ],
+   "reasons": [
+    "süre 3.46 sn, ortancadan %0.0",
+    "F0 yayılımı 3.83 yt"
+   ],
+   "metrics": {
+    "duration": 3.68,
+    "active_sec": 3.457,
+    "speech_sec": 3.038,
+    "articulation": 4.61,
+    "f0_mean_hz": 111.4,
+    "f0_geo_hz": 108.8,
+    "f0_sd_semitones": 3.83,
+    "lufs": -17.57,
+    "rms_db": -15.55,
+    "true_peak_dbtp": -4.69,
+    "sibilance_ratio": 0.0039,
+    "pause_total_sec": 0.419
+   },
+   "cut": {
+    "needed": 1,
+    "found": 2,
+    "gaps_available": 1,
+    "cuts_sec": [],
+    "pieces": [
+     {
+      "name": "s1",
+      "keep": true,
+      "start": 0.0,
+      "end": 3.68,
+      "speech_sec": 3.038,
+      "syll": 14,
+      "rate": 4.61
+     }
+    ]
+   },
+   "joins": null,
+   "join_max_st": null
+  },
+  {
+   "rank": 2,
+   "take": "t1.mp3",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d03/c2.yuz/t1.mp3",
+   "score": 1.491,
+   "penalties": {
+    "rate": 1.433,
+    "dur": 0.058,
+    "f0sd": 0.0
+   },
+   "soft_violations": [
+    "eklemleme 4.57 bant dışı (5.0–6.2)"
+   ],
+   "reasons": [
+    "süre 3.47 sn, ortancadan %0.3",
+    "F0 yayılımı 3.77 yt"
+   ],
+   "metrics": {
+    "duration": 3.68,
+    "active_sec": 3.467,
+    "speech_sec": 3.063,
+    "articulation": 4.57,
+    "f0_mean_hz": 111.7,
+    "f0_geo_hz": 109.2,
+    "f0_sd_semitones": 3.77,
+    "lufs": -17.76,
+    "rms_db": -15.63,
+    "true_peak_dbtp": -4.96,
+    "sibilance_ratio": 0.0051,
+    "pause_total_sec": 0.404
+   },
+   "cut": {
+    "needed": 1,
+    "found": 2,
+    "gaps_available": 1,
+    "cuts_sec": [],
+    "pieces": [
+     {
+      "name": "s1",
+      "keep": true,
+      "start": 0.0,
+      "end": 3.68,
+      "speech_sec": 3.063,
+      "syll": 14,
+      "rate": 4.57
+     }
+    ]
+   },
+   "joins": null,
+   "join_max_st": null
+  },
+  {
+   "rank": 3,
+   "take": "t2.mp3",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d03/c2.yuz/t2.mp3",
+   "score": 1.716,
+   "penalties": {
+    "rate": 1.567,
+    "dur": 0.029,
+    "f0sd": 0.12
+   },
+   "soft_violations": [
+    "eklemleme 4.53 bant dışı (5.0–6.2)"
+   ],
+   "reasons": [
+    "süre 3.45 sn, ortancadan %0.1",
+    "F0 yayılımı 3.83 yt"
+   ],
+   "metrics": {
+    "duration": 3.68,
+    "active_sec": 3.452,
+    "speech_sec": 3.093,
+    "articulation": 4.53,
+    "f0_mean_hz": 110.9,
+    "f0_geo_hz": 108.4,
+    "f0_sd_semitones": 3.83,
+    "lufs": -17.98,
+    "rms_db": -16.02,
+    "true_peak_dbtp": -5.19,
+    "sibilance_ratio": 0.0052,
+    "pause_total_sec": 0.359
+   },
+   "cut": {
+    "needed": 1,
+    "found": 2,
+    "gaps_available": 1,
+    "cuts_sec": [],
+    "pieces": [
+     {
+      "name": "s1",
+      "keep": true,
+      "start": 0.0,
+      "end": 3.68,
+      "speech_sec": 3.093,
+      "syll": 14,
+      "rate": 4.53
+     }
+    ]
+   },
+   "joins": null,
+   "join_max_st": null
+  }
+ ],
+ "excluded": [],
+ "order_rule": "SPEC §4.1: zorunlu (a,b) geçenler; önce yumuşak ihlal sayısı (c,f,kesim kuşkusu), sonra ceza toplamı",
+ "weights_note": "VARSAYIM ceza birimleri: hız 0.30 hece/sn, süre %5, F0 yayılımı 0.5 yt, eklem 2.0 yt",
+ "note": "Sıralama yalnız nesneldir; §4.2 Scribe doğrulaması ayrıca yapılmalıdır.",
+ "_rc": 0
+}

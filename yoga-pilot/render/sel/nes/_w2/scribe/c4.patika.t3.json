@@ -1,0 +1,16 @@
+{
+ "unit": "c4.patika",
+ "take": "t3",
+ "ref_node": "8ja61I49DT42szLakW0c",
+ "asset_id": "yiOLW26u065vK5yu9Z86",
+ "stt_node": "lqhJkN4LunEEFWZ8qUmy",
+ "session_id": "QGUc3NQLMQFucw3nzQg1",
+ "generation_id": "70DvFgkZUTac1iqnYdGT",
+ "actual_credits": 17.6,
+ "actual_cents": 0.32,
+ "spoken_duration_secs": 3.02,
+ "scribe_text": "Kendini yumuşak bir patikanın başında bulabilirsin",
+ "tts": "Kendini yumuşak bir patikanın başında bulabilirsin.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 6\n}"
+}

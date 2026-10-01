@@ -1,0 +1,25 @@
+/* Açık rıza sayfası (components/ConsentSheet.jsx). Renkler styles.css tokenlarından. */
+.cs-back { position: fixed; inset: 0; z-index: 1000; background: rgba(2, 5, 8, 0.72); display: flex; align-items: flex-end; justify-content: center; }
+.cs-sheet { width: 100%; max-width: 560px; max-height: 92vh; overflow-y: auto; display: grid; gap: 16px; padding: 10px 22px calc(26px + env(safe-area-inset-bottom, 0px));
+  background: var(--surface); border-radius: 32px 32px 0 0; border-top: 1px solid var(--border); animation: cs-up 0.28s ease-out; }
+@keyframes cs-up { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .cs-sheet { animation: none; } }
+.cs-grab { width: 40px; height: 5px; border-radius: 3px; background: var(--surface-3); justify-self: center; }
+.cs-shield { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; color: var(--accent);
+  background: linear-gradient(140deg, color-mix(in srgb, var(--iris-1) 18%, transparent), color-mix(in srgb, var(--iris-2) 18%, transparent)); }
+.cs-sheet h2 { margin: 0; font: 700 1.35rem/1.15 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
+.cs-lead { margin: -6px 0 0; color: var(--ink-2); font-size: 0.9rem; }
+.cs-facts { margin: 0; display: grid; gap: 1px; border-radius: 18px; overflow: hidden; background: var(--border); }
+.cs-facts div { display: grid; gap: 3px; padding: 11px 14px; background: var(--surface-2); }
+.cs-facts dt { font-size: 0.78rem; font-weight: 600; line-height: 1.3; color: var(--ink-3); }
+.cs-facts dd { margin: 0; font-size: 0.9rem; line-height: 1.4; color: var(--ink); }
+.cs-ok { position: relative; display: flex; gap: 12px; align-items: flex-start; padding: 14px; border-radius: 18px; border: 1.5px solid var(--border); cursor: pointer; }
+.cs-ok.on { border-color: var(--accent); }
+.cs-ok input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.cs-ok input:focus-visible + .cs-box { outline: 2px solid var(--accent); outline-offset: 2px; }
+.cs-box { width: 24px; height: 24px; flex: none; margin-top: 1px; border-radius: 7px; border: 2px solid var(--ink-3); display: grid; place-items: center; color: var(--accent-ink); }
+.cs-ok.on .cs-box { background: var(--accent); border-color: var(--accent); }
+.cs-ok > span:last-child { font-weight: 500; font-size: 0.88rem; line-height: 1.4; }
+.cs-btns { display: grid; gap: 8px; }
+.cs-foot { margin: 0; text-align: center; font-size: 0.75rem; color: var(--ink-3); }
+.cs-foot a { color: var(--accent); }

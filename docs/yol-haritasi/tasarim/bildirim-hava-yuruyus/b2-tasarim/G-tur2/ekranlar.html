@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nefona B2 Tur 2</title>
+<meta name="description" content="Nefona B2, tur 2: Gaziemir onayı (kısa ve uzun ilçe adı) ve uygulamanın mevcut rıza sayfasında weather rızası; iki tema, 390 ve 320 pt.">
+<link rel="stylesheet" href="file:///home/user/eyes/app/node_modules/@fontsource-variable/onest/index.css">
+<link rel="stylesheet" href="file:///home/user/eyes/app/node_modules/@fontsource-variable/unbounded/index.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Onest:wght@400;500;600;700&display=swap">
+<style>
+/* ============ Sayfa çevresi ============ */
+:root {
+  --pg-bg: #eef2f4; --pg-ink: #0d1720; --pg-ink-2: #3a4955; --pg-ink-3: #5b6976;
+  --f-display: 'Unbounded Variable', 'Unbounded', 'Avenir Next', system-ui, sans-serif;
+  --f-body: 'Onest Variable', 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: var(--f-display); --font-body: var(--f-body);
+  --pw: 390px; --ph: 844px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --pg-bg: #070c12; --pg-ink: #eef3f6; --pg-ink-2: #b9c4cd; --pg-ink-3: #8b98a5; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --pg-bg: #070c12; --pg-ink: #eef3f6; --pg-ink-2: #b9c4cd; --pg-ink-3: #8b98a5; color-scheme: dark; }
+body.w320 { --pw: 320px; --ph: 568px; }
+* { box-sizing: border-box; }
+body { background: var(--pg-bg); color: var(--pg-ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; margin: 0; }
+p { margin: 0; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 28px 20px 60px; }
+@media (max-width: 480px) { .wrap { padding-inline: 16px; } }
+.pg-h { font: 700 1.6rem/1.15 var(--f-display); letter-spacing: -0.015em; margin: 0; }
+.pg-lead { color: var(--pg-ink-2); margin-top: 8px; max-width: 44rem; }
+.sec { margin-top: 34px; }
+.sec > h2 { font: 600 1.1rem/1.2 var(--f-display); margin: 0; }
+.sec .note { color: var(--pg-ink-2); margin-top: 6px; max-width: 46rem; font-size: 0.92rem; }
+.strip { display: flex; flex-wrap: wrap; gap: 22px; padding-top: 16px; overflow-x: auto; }
+.cell { margin: 0; display: grid; gap: 8px; align-content: start; }
+.cap { font: 600 0.8rem/1.3 var(--f-body); color: var(--pg-ink-3); }
+
+/* ============ Telefon: app/src/styles.css tokenları (+ G için Yön C gökyüzü) ============ */
+.t-light {
+  --bg: #f3f6f8; --bg-grad: radial-gradient(900px 520px at 0% -12%, rgba(17,169,184,0.12) 0%, rgba(17,169,184,0) 60%);
+  --surface: #ffffff; --surface-2: #e9eef2; --surface-3: #dde4ea; --border: #e1e7ec;
+  --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --accent: #0b7480; --accent-ink: #ffffff; --accent-soft: rgba(17,169,184,0.12);
+  --accent-grad: linear-gradient(90deg, #0b7480, #2458cc); --accent-glow: 0 8px 22px -10px rgba(36,88,204,0.55);
+  --iris-1: #11a9b8; --iris-2: #2f6bea;
+  --shadow: 0 1px 2px rgba(11,18,25,0.04), 0 8px 24px rgba(11,18,25,0.05);
+  --frame: #1a2128;
+  --sky: radial-gradient(70% 34% at 88% -4%, rgba(255,196,110,0.42) 0%, rgba(255,196,110,0) 70%),
+         linear-gradient(180deg, #bcdcf1 0%, #d6e9f5 26%, #e9f2f7 48%, #f3f6f8 72%);
+  --glass: rgba(255,255,255,0.80); --glass-line: rgba(255,255,255,0.95); --glass-rule: rgba(11,18,25,0.08);
+  --nef-glow: 0 0 0 6px rgba(17,169,184,0.10), 0 10px 30px -6px rgba(47,107,234,0.40);
+}
+.t-dark {
+  --bg: #070c12; --bg-grad: radial-gradient(900px 520px at 0% -12%, rgba(25,194,209,0.12) 0%, rgba(25,194,209,0) 60%);
+  --surface: #0f171f; --surface-2: #141e28; --surface-3: #1c2834; --border: rgba(255,255,255,0.08);
+  --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --accent: #19c2d1; --accent-ink: #041017; --accent-soft: rgba(25,194,209,0.14);
+  --accent-grad: linear-gradient(90deg, #19c2d1, #3e7bfa); --accent-glow: 0 8px 24px -8px rgba(25,194,209,0.55);
+  --iris-1: #19c2d1; --iris-2: #3e7bfa;
+  --shadow: none;
+  --frame: #2a323b;
+  --sky: radial-gradient(70% 30% at 86% -4%, rgba(191,230,255,0.16) 0%, rgba(191,230,255,0) 70%),
+         radial-gradient(130% 62% at 50% -8%, #173656 0%, #0c1a2b 50%, #070c12 100%);
+  --glass: rgba(16,27,39,0.78); --glass-line: rgba(255,255,255,0.10); --glass-rule: rgba(255,255,255,0.08);
+  --nef-glow: 0 0 0 6px rgba(25,194,209,0.10), 0 0 34px rgba(62,123,250,0.45);
+}
+.shot { padding: 11px; }
+.phone { position: relative; width: var(--pw); height: var(--ph); border-radius: 46px; overflow: hidden;
+  background: var(--bg-grad), var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px;
+  box-shadow: 0 0 0 9px var(--frame), 0 0 0 10px rgba(127,140,150,0.35); }
+.phone.sky { background: var(--sky); }
+body.w320 .phone { border-radius: 30px; }
+.sb { display: flex; justify-content: space-between; align-items: center; padding: 14px 28px 0; height: 46px; font: 600 0.92rem/1 var(--f-body); }
+body.w320 .sb { padding: 8px 18px 0; height: 30px; font-size: 0.8rem; }
+.sb i { display: inline-flex; gap: 5px; align-items: center; font-style: normal; letter-spacing: -1px; }
+.sb i s { display: inline-block; width: 18px; height: 9px; border-radius: 3px; box-shadow: inset 0 0 0 1.5px currentColor; position: relative; }
+.sb i s::after { content: ''; position: absolute; inset: 2px 5px 2px 2px; background: currentColor; border-radius: 1px; }
+.home-ind { position: absolute; bottom: 8px; left: 50%; width: 134px; margin-left: -67px; height: 5px; border-radius: 3px; background: var(--ink); opacity: 0.85; }
+body.w320 .home-ind { display: none; }
+.ico { width: 18px; height: 18px; flex: none; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---- app .btn (styles.css 188-200, birebir) ---- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 54px; padding: 14px 18px;
+  font-family: var(--f-body); font-size: 1rem; font-weight: 650; letter-spacing: -0.01em; line-height: normal;
+  border: 1px solid transparent; border-radius: 16px; background: var(--accent-grad); color: var(--accent-ink); box-shadow: var(--accent-glow); }
+.btn[disabled] { opacity: 0.4; }
+.btn-secondary { background: var(--surface); color: var(--ink); border-color: var(--border); box-shadow: var(--shadow); }
+.btn-ghost { background: transparent; color: var(--ink-2); border-color: var(--border); font-weight: 550; box-shadow: none; }
+
+/* ============ R · app/src/styles/consent.css, BİREBİR (yalnız position: fixed → telefon içi absolute) ============ */
+.cs-back { position: absolute; inset: 0; z-index: 10; background: rgba(2, 5, 8, 0.72); display: flex; align-items: flex-end; justify-content: center; }
+.cs-sheet { width: 100%; max-width: 560px; display: grid; gap: 16px; padding: 10px 22px 26px;
+  background: var(--surface); border-radius: 32px 32px 0 0; border-top: 1px solid var(--border); }
+.cs-grab { width: 40px; height: 5px; border-radius: 3px; background: var(--surface-3); justify-self: center; }
+.cs-shield { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; color: var(--accent);
+  background: linear-gradient(140deg, color-mix(in srgb, var(--iris-1) 18%, transparent), color-mix(in srgb, var(--iris-2) 18%, transparent)); }
+.cs-shield .ico { width: 26px; height: 26px; }
+.cs-sheet h2 { margin: 0; font: 700 1.35rem/1.15 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
+.cs-lead { margin: -6px 0 0; color: var(--ink-2); font-size: 0.9rem; line-height: 1.55; }
+.cs-facts { margin: 0; display: grid; gap: 1px; border-radius: 18px; overflow: hidden; background: var(--border); }
+.cs-facts div { display: grid; gap: 3px; padding: 11px 14px; background: var(--surface-2); }
+.cs-facts dt { font-size: 0.78rem; font-weight: 600; line-height: 1.3; color: var(--ink-3); }
+.cs-facts dd { margin: 0; font-size: 0.9rem; line-height: 1.4; color: var(--ink); }
+.cs-ok { position: relative; display: flex; gap: 12px; align-items: flex-start; padding: 14px; border-radius: 18px; border: 1.5px solid var(--border); }
+.cs-box { width: 24px; height: 24px; flex: none; margin-top: 1px; border-radius: 7px; border: 2px solid var(--ink-3); display: grid; place-items: center; color: var(--accent-ink); }
+.cs-ok > span:last-child { font-weight: 500; font-size: 0.88rem; line-height: 1.4; }
+.cs-btns { display: grid; gap: 8px; }
+.cs-foot { margin: 0; text-align: center; font-size: 0.75rem; color: var(--ink-3); line-height: 1.55; }
+/* Tam boy çekim: sayfa iOS'ta max-height 92vh ile kayar; burada kaydırılmamış hâli tamamen gösterilir. */
+.phone.tall { height: auto; min-height: var(--ph); display: flex; flex-direction: column; }
+.phone.tall .cs-back { position: relative; inset: auto; flex: 1; padding-top: calc(var(--ph) * 0.08); }
+.phone.tall .sb { position: absolute; left: 0; right: 0; top: 0; z-index: 11; color: rgba(255,255,255,0.9); }
+.fold { position: absolute; left: 0; right: 0; top: var(--ph); z-index: 12; border-top: 2px dashed #f5a623; }
+.fold span { position: absolute; right: 8px; top: 3px; font: 700 0.66rem/1 var(--f-body); color: #041017; background: #f5a623; padding: 3px 6px; border-radius: 5px; }
+
+/* ============ G · Kesin konumda ilçe onayı (Yön C'den) ============ */
+/* Değişiklik: içerik aşağıya, düğmelerin hemen üstüne toplanır; orta boşluk kalmaz, üst bant gökyüzü. */
+.g-in { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 20px; padding: 60px 22px 34px; }
+body.w320 .g-in { padding: 32px 14px 16px; gap: 12px; }
+/* Güneş ışığı Nef'in arkasında: üst bant boş gök değil, Nef'ten yayılan ışık. */
+.g-head::before { content: ''; position: absolute; width: 460px; height: 460px; left: 50%; top: 42px; transform: translate(-50%, -50%); border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,210,140,0.46) 0%, rgba(255,210,140,0) 62%); pointer-events: none; }
+.t-dark .g-head::before { background: radial-gradient(circle, rgba(120,190,255,0.24) 0%, rgba(120,190,255,0) 62%); }
+body.w320 .g-head::before { width: 320px; height: 320px; top: 28px; }
+.g-head > * { position: relative; }
+.g-head { display: grid; justify-items: center; gap: 12px; text-align: center; position: relative; }
+body.w320 .g-head { gap: 8px; }
+.nef { width: 40px; height: 40px; border-radius: 50%; flex: none; position: relative;
+  background: radial-gradient(circle at 50% 50%, #041017 0 22%, transparent 23%), conic-gradient(from 200deg, var(--iris-1), var(--iris-2), var(--iris-1));
+  box-shadow: var(--nef-glow); }
+.nef::after { content: ''; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #fff; left: 56%; top: 34%; }
+.nef.lg { width: 84px; height: 84px; }
+.nef.lg::after { width: 10px; height: 10px; }
+body.w320 .nef.lg { width: 56px; height: 56px; }
+body.w320 .nef.lg::after { width: 7px; height: 7px; }
+.who { font: 600 0.74rem/1 var(--f-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.g-t { margin: 0; font: 700 2.3rem/1.1 var(--f-display); letter-spacing: -0.02em; text-wrap: balance; max-width: 100%; }
+body.w320 .g-t { font-size: 1.62rem; }
+/* Uzun ilçe adı (11+ harf): yazı küçülür, soru iki satıra iner ("…'da" / "misin?"). */
+.g-t.uzun { font-size: 1.5rem; line-height: 1.16; }
+body.w320 .g-t.uzun { font-size: 1.24rem; }
+
+.g-card { position: relative; border-radius: 22px; background: var(--glass); border: 1px solid var(--glass-line); box-shadow: var(--shadow);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); overflow: hidden; }
+body.w320 .g-card { border-radius: 18px; }
+.g-row { display: grid; grid-template-columns: 40px minmax(0,1fr); gap: 14px; align-items: center; padding: 16px 16px 14px; }
+body.w320 .g-row { grid-template-columns: 32px minmax(0,1fr); gap: 10px; padding: 11px 12px 10px; }
+.g-pi { width: 40px; height: 40px; border-radius: 13px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.g-pi .ico { width: 20px; height: 20px; }
+body.w320 .g-pi { width: 32px; height: 32px; border-radius: 10px; }
+body.w320 .g-pi .ico { width: 17px; height: 17px; }
+.lbl { display: block; font: 600 0.78rem/1.2 var(--f-body); color: var(--ink-3); white-space: nowrap; }
+body.w320 .lbl { font-size: 0.72rem; }
+.g-place { display: block; margin-top: 4px; font: 600 1.3rem/1.2 var(--f-display); letter-spacing: -0.01em; color: var(--ink); }
+body.w320 .g-place { font-size: 1.04rem; margin-top: 3px; }
+.g-why { display: flex; align-items: center; gap: 8px; padding: 11px 16px 12px; border-top: 1px solid var(--glass-rule);
+  font: 500 0.92rem/1.35 var(--f-body); color: var(--ink-2); }
+.g-why .ico { width: 16px; height: 16px; color: var(--accent); }
+body.w320 .g-why { padding: 8px 12px 9px; font-size: 0.8rem; gap: 7px; }
+body.w320 .g-why .ico { width: 14px; height: 14px; }
+.g-note { display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: -6px; font: 500 0.84rem/1.3 var(--f-body); color: var(--ink-3); position: relative; }
+.g-note .ico { width: 14px; height: 14px; }
+body.w320 .g-note { font-size: 0.74rem; margin-top: -3px; }
+body.w320 .g-note .ico { width: 12px; height: 12px; }
+.g-btns { display: grid; gap: 10px; position: relative; }
+body.w320 .g-btns { gap: 8px; }
+body.w320 .g-btns .btn { min-height: 48px; padding: 11px 14px; font-size: 0.94rem; border-radius: 14px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-locate" viewBox="0 0 24 24"><line x1="2" x2="5" y1="12" y2="12"/><line x1="19" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="5"/><line x1="12" x2="12" y1="19" y2="22"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+</svg>
+<main class="wrap">
+  <h1 class="pg-h">B2 tur 2 · Gaziemir onayı ve hava rızası</h1>
+  <p class="pg-lead">G, Yön C'den: içerik düğmelerin üstüne toplandı, yer adı okunaklı bir kartta, neden önerildiği tek satırda. R, uygulamanın bugünkü rıza sayfası (ConsentSheet, consent.css) ile, weather metni harfi harfine.</p>
+  <section class="sec"><h2>G · Kesin konumda ilçe onayı</h2><p class="note">Yalnız kesin konum izni verilmişse. "Başka ilçe" K'daki listeye döner.</p><div class="strip" data-set="G"></div></section>
+  <section class="sec"><h2>G-uzun · Uzun ilçe adı</h2><p class="note">İlçe adı 11 harf ve üstüyse soru küçük boyla iki satıra iner; kartta il ve ilçe iki satıra kırılabilir.</p><div class="strip" data-set="G-uzun"></div></section>
+  <section class="sec"><h2>R · Hava rızası, mevcut rıza sayfasında</h2><p class="note">Kalkan, başlık, giriş, dört satır, işaretsiz kutu, iki düğme, dip not: health rızasıyla aynı düzen. Tam boy çekim; turuncu kesikli çizgi telefonun ilk ekranının bittiği yer, altı kaydırınca görünür.</p><div class="strip" data-set="R"></div></section>
+</main>
+
+<template id="tpl-G">
+  <div class="phone sky">
+    <div class="sb"><span>09:43</span><i>●●● <s></s></i></div>
+    <div class="g-in">
+      <div class="g-head">
+        <span class="nef lg"></span>
+        <span class="who">Nef</span>
+        <h2 class="g-t" data-q></h2>
+      </div>
+      <div class="g-card">
+        <div class="g-row">
+          <span class="g-pi"><svg class="ico"><use href="#i-pin"/></svg></span>
+          <div><span class="lbl">İl ve ilçe</span><b class="g-place" data-place></b></div>
+        </div>
+        <p class="g-why"><svg class="ico"><use href="#i-locate"/></svg><span>Konumuna en yakın ilçe merkezi bu.</span></p>
+      </div>
+      <p class="g-note"><svg class="ico"><use href="#i-lock"/></svg>Konumunun kendisi saklanmaz.</p>
+      <div class="g-btns">
+        <span class="btn">Evet</span>
+        <span class="btn btn-secondary">Başka ilçe</span>
+      </div>
+    </div>
+    <span class="home-ind"></span>
+  </div>
+</template>
+
+<!-- R: ConsentSheet.jsx yapısı birebir; metin rizalar-taslak.md `weather`, harfi harfine. -->
+<template id="tpl-R">
+  <div class="phone tall">
+    <div class="sb"><span>09:42</span><i>●●● <s></s></i></div>
+    <div class="cs-back" role="presentation">
+      <div class="cs-sheet" role="dialog" aria-modal="true">
+        <span class="cs-grab" aria-hidden="true"></span>
+        <span class="cs-shield" aria-hidden="true"><svg class="ico"><use href="#i-shield"/></svg></span>
+        <h2>Bulunduğun yerin havasını da göstereyim mi?</h2>
+        <p class="cs-lead">İstersen Ana sayfada hava ve yağmur saatini gösteririm. İzin vermesen de her şey açık kalır; il ve ilçeyi listeden de seçebilirsin.</p>
+        <dl class="cs-facts">
+          <div><dt>Ne kaydedilir?</dt><dd>Yaklaşık konumun ya da seçtiğin il ve ilçenin merkezi. Telefonda yalnız il ve ilçe adı kalır. Konumunun kendisi saklanmaz.</dd></div>
+          <div><dt>Ne işe yarar?</dt><dd>Hava, yağmur olasılığı ve istersen alarmdan sonra gelen sabah havası bildirimi.</dd></div>
+          <div><dt>Nerede durur?</dt><dd>Hava bilgisi için konum yuvarlanarak Apple'ın hava servisine (yurt dışı) gider. Sabah bildirimi yenilenirken yalnız seçtiğin yerin merkezi gider. Sunucumuza ve Nef'e gitmez.</dd></div>
+          <div><dt>Ne kadar kalır?</dt><dd>Telefonda il ve ilçe adı, hava önbelleği ve 90 günlük günlük hava özeti. İzin kapanınca ilk açılışta il adı ve önbellek silinir.</dd></div>
+        </dl>
+        <label class="cs-ok">
+          <span class="cs-box" aria-hidden="true"></span>
+          <span>Hava bilgisi için yaklaşık konumumun ya da seçtiğim yerin merkezinin yurt dışındaki Apple hava servisine gönderilmesine açık rıza veriyorum.</span>
+        </label>
+        <div class="cs-btns">
+          <span class="btn" disabled>İzin ver</span>
+          <span class="btn btn-ghost">Şimdi değil</span>
+        </div>
+        <p class="cs-foot">İznini Profilim → İzinlerim'den her an geri çekebilirsin.</p>
+      </div>
+    </div>
+    <span class="fold"><span>ilk ekran sonu</span></span>
+  </div>
+</template>
+
+<script>
+(function () {
+  var data = {
+    G: { tpl: 'G', q: "Gaziemir'de misin?", place: 'İzmir Gaziemir', uzun: false, cap: 'Kesin konum: en yakın ilçe merkezi' },
+    'G-uzun': { tpl: 'G', q: "Mustafakemalpaşa'da misin?", place: 'Bursa Mustafakemalpaşa', uzun: true, cap: 'En uzun ilçe adlarından biri' },
+    R: { tpl: 'R', cap: 'Kutu işaretsiz, İzin ver kapalı' },
+  };
+  document.querySelectorAll('.strip').forEach(function (strip) {
+    var set = strip.dataset.set, d = data[set];
+    ['acik', 'koyu'].forEach(function (th) {
+      var cell = document.createElement('figure'); cell.className = 'cell';
+      var shot = document.createElement('div'); shot.className = 'shot';
+      shot.dataset.shot = set + '-' + th;
+      shot.style.background = th === 'acik' ? '#eef2f4' : '#070c12';
+      var frag = document.getElementById('tpl-' + d.tpl).content.cloneNode(true);
+      frag.querySelector('.phone').classList.add(th === 'acik' ? 't-light' : 't-dark');
+      var q = frag.querySelector('[data-q]');
+      if (q) { q.textContent = d.q; if (d.uzun) q.classList.add('uzun'); frag.querySelector('[data-place]').textContent = d.place; }
+      shot.appendChild(frag); cell.appendChild(shot);
+      var cap = document.createElement('figcaption'); cap.className = 'cap';
+      cap.textContent = set + ' · ' + (th === 'acik' ? 'açık' : 'koyu') + ' · ' + d.cap;
+      cell.appendChild(cap); strip.appendChild(cell);
+    });
+  });
+})();
+</script>
+</body>
+</html>

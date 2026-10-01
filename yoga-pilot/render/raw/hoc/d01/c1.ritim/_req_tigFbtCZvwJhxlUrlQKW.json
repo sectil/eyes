@@ -1,0 +1,37 @@
+{
+ "node_id": "tigFbtCZvwJhxlUrlQKW",
+ "session_ids": [
+  "a98GWHpYtg46MXXNq13j",
+  "Z8Vw2neLNfrXumyrwZ7o",
+  "H0n0pb2M6zwlU7HCSMQZ"
+ ],
+ "requested_at": "2026-09-30T06:58:04.755Z",
+ "tts": "Sıradaki nefeslerde alış dört sayı, veriş altı sayı sürecek. Arada nefesi tutmak yok.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "a98GWHpYtg46MXXNq13j",
+   "generation_id": "pPi9YbozRF2fULV6eZGT",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/a98GWHpYtg46MXXNq13j/pPi9YbozRF2fULV6eZGT/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065810Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=68bf620ac41eb3776757e687da0c187082bdc41bea3cf5ba3b2effc3a75a9fc1f9cc05431cec7fcfa9e4092517c336bbce48230a34ba0310863d4d1ce197ca616eedf58444c85c2f3af497c5b1f2c569c715c3c84a1fb2a1a6d90566703c0be4e804962ecb2bb0bdbab18e6a1441860e6cfa030dfde0ce39b162b0dffc59758c91be13c99e86f4a85bf6ccc1d4c632b91666e4aa76730d551aad5b33ee36f312313c5e3da69ef5937c142c8dbaf99fede5c926a97eb4db5fb7141242b14e2c53f5284f3467afdc6c8247763416696cb236b4fa027f1eb53d18aadc238e8058945b1f0adfafd081e3fff43dd0fcf48c7c115e53e9288d1d3a47ccff615c9535b6",
+   "duration_secs": 7.12,
+   "prompt": "Sıradaki nefeslerde alış dört sayı, veriş altı sayı sürecek. Arada nefesi tutmak yok.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "Z8Vw2neLNfrXumyrwZ7o",
+   "generation_id": "WyHbkTAYwmvNblKWybKE",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/Z8Vw2neLNfrXumyrwZ7o/WyHbkTAYwmvNblKWybKE/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065810Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=d6829dabb828393eb5943375bdf6812a3b47f175b759d9208203e5437efe1be6375fb7d78264551b381b40688846fb7ed41a168c1e588482d2d9a927daae06a903f743731d5dcfb7bedfd2aa23986075c4dadd6b008532582988852e799b53ab284bb9d4ed3c012a4bdd0694fc8e6cb938d8dc48d56efb7692eb7c0b8611e2cfaed89705689835fdf332fb44acda505a6be2781acbd8840e608852951d82d11acfc91b9de354acbe392d3dcbd1264d3f17b897dffb69e6736446d8943d0ae83b954150cb9dc2a1f61510df87f749e812c64464105080312090a61307dee671c43d9f949083e088c5f895ede3b9bd0671096c94f77f9f8a139c9501815e6004d2",
+   "duration_secs": 6.96,
+   "prompt": "Sıradaki nefeslerde alış dört sayı, veriş altı sayı sürecek. Arada nefesi tutmak yok.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "H0n0pb2M6zwlU7HCSMQZ",
+   "generation_id": "owlSFRTK0yeuc4hFM9T5",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/H0n0pb2M6zwlU7HCSMQZ/owlSFRTK0yeuc4hFM9T5/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065810Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=2e233b9c50586a9dac0bf214d87d45d97ce9e6f3a965b92586aef63a1b3ac5f4a4e85d621226918f701c9a310458a7679256c60b1b0427fce8630c85dce80c50033eb5beae7e7a30e74b5241d2cdf57232ccecfdef6e0e97024126b5fefd44d01ff6561175215301e46d59d61b14f07ffaa0ccf2282de5f4e7225081cc1bc0e558600880884a47d0107d40702dba7747a17809451b89d6bc3e1b4c3042d4f97ee3a34303d901bc5a7172509005f2e1b37f8db6a2fc3e5cb53ea8d9896f64a7fde5fc28e1af215a3326664c63cb33a2e4910e48d29149a9fab2a86200da11636cfa0f06cf5d5ba00f71948274139b91b4786216f21a6d005db6d5950eb82b40e7",
+   "duration_secs": 7.04,
+   "prompt": "Sıradaki nefeslerde alış dört sayı, veriş altı sayı sürecek. Arada nefesi tutmak yok.",
+   "kind": "audio"
+  }
+ ]
+}

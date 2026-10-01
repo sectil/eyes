@@ -1,0 +1,17 @@
+{
+ "unit": "k.otur",
+ "take": "t2",
+ "asset_id": "6ZFOTdIDFlCqq8VegMrr",
+ "asset_size_bytes": 72886,
+ "ref_node": "omE3fRDWOhZssQBPZ5Yw",
+ "stt_node": "9WZRcdaM1GTaOFJ0tgf7",
+ "session_id": "2cRQyOHF5F1a9IM0uTix",
+ "generation_id": "5fLsURR1VO8HXao6jZD7",
+ "actual_credits": 18.92,
+ "actual_cents": 0.344,
+ "spoken_duration_secs": 3.22,
+ "scribe_text": "Ellerinden destek alarak yavaşça doğrulup otur",
+ "tts": "Ellerinden destek alarak yavaşça doğrulup otur.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 6\n}"
+}

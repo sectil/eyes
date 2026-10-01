@@ -1,0 +1,71 @@
+{
+ "file": "el/el-kapanis.wav",
+ "src_sr": 44100,
+ "src_channels": 2,
+ "duration_s": 180.0,
+ "lufs_i": -11.43,
+ "true_peak_dbtp": -1.26,
+ "sample_peak_dbfs": -1.27,
+ "clipped_samples": 0,
+ "dc": [
+  -0.000185,
+  -0.000331
+ ],
+ "lr_corr": 0.83,
+ "lead_silence_ms": 241.0,
+ "tail_silence_ms": 476.6,
+ "flatness": {
+  "st_lufs_p5": -12.35,
+  "st_lufs_p50": -11.41,
+  "st_lufs_p95": -10.38,
+  "spread_p5_p95_lu": 1.98,
+  "st_std_lu": 0.68,
+  "range_full_lu": 36.48,
+  "max_rise_10s_lu": 18.97,
+  "crescendo_10s_spans": 0,
+  "verdict": "PASS"
+ },
+ "onsets": {
+  "pulse_clarity": 0.059,
+  "percussive_share": 0.105,
+  "events_per_min": 118.67,
+  "strong_onsets_per_min": 0.0,
+  "flux_mean_db": 0.6266,
+  "flux_median_db": 0.6089,
+  "flux_p99_db": 1.235,
+  "flux_max_db": 1.769,
+  "flux_max_at_s": 120.28
+ },
+ "clicks_hf": {
+  "count": 5,
+  "first": [
+   [
+    36.399,
+    12.5
+   ],
+   [
+    62.504,
+    14.4
+   ],
+   [
+    62.544,
+    12.1
+   ],
+   [
+    65.539,
+    13.5
+   ],
+   [
+    159.112,
+    13.9
+   ]
+  ]
+ },
+ "spectrum": {
+  "centroid_hz": 214.8,
+  "share_lt300": 0.867,
+  "share_500_4k": 0.034,
+  "share_1k5_4k": 0.0011,
+  "share_gt8k": 0.0
+ }
+}

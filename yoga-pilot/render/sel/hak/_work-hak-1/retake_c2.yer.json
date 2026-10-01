@@ -1,0 +1,39 @@
+{
+ "unit": "c2.yer",
+ "reason": "SPEC §4.2: Scribe of all three original takes (t2, t1, t3 in rank order) returned 'nefeste ise' vs tts 'nefesteyse'",
+ "model_id": "eleven_v4",
+ "voice_id": "DwjDVVARfPVjBKepXK2c",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "generations_count": 3,
+ "prompt": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta.",
+ "node_id": "inZnic1wcRX2VqKqpg99",
+ "session_ids": [
+  "poMXhHziAPYrtdsvSvjv",
+  "sVt6xwvmK3VAumO7SoXm",
+  "dSQwWFMRVHRqizSWJNAS"
+ ],
+ "requested_at": "2026-09-29T12:51:01Z",
+ "gens": [
+  {
+   "slot": 4,
+   "session_id": "poMXhHziAPYrtdsvSvjv",
+   "generation_id": "RPENRRDRTPA3fL4Yukcb",
+   "duration_secs": 8.08,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/poMXhHziAPYrtdsvSvjv/RPENRRDRTPA3fL4Yukcb/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T125058Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=3667ed6081f6697e2f7bfc9f0cdb00e82a0828a357e9f8e3cba893205885bec915163ee0ba9f1bd75c283d724f30c0d2007bff264ee201026611609fa0e271d261bb488b3e8b944f2c0654096b99e7edd57be3e6328610de9ae1666a252c859be868007369ce3226cfeaee806a53ee299dd095b9f8f7058171f3e318265d89dd4b617735fc0c6fea02add03f397fe2108eb822a82cf0203350ef0de7f68087767a49696f8d624f96c972b07f24e2d6209e3161b565c9282fcc3099e5e68e93ef3574184fe570afe65b1caeebf4b782e16a338a9a537b8fbcba919adffb6c935bd48340d8229b9ea93e3485ee8a522744e2fee4bc2b44ff2ffcfd2a6085510905"
+  },
+  {
+   "slot": 5,
+   "session_id": "sVt6xwvmK3VAumO7SoXm",
+   "generation_id": "wV85Kny4XUt3Vmte8k6l",
+   "duration_secs": 8.08,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/sVt6xwvmK3VAumO7SoXm/wV85Kny4XUt3Vmte8k6l/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T125058Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=55962341fce7ad51e524640aa0e5893b75b974dbcc3a442998e5630358cbddf2b26d31cbb362d9c1a9d5c4854db95e01f0be795fbbdfb007612ae87c66b8399f1f9a9a83d0873ac41597bea918e0144104f30c778b36b6bfde9ed5c65eabb8edcd730d052f79d57e61810857f0419f61e2b57ebd4346dfa005b72a9b3a42217cd3d59eaf3e8603bbd9dc2ad405079e86aa0988113748c3a387eb930ab713f55c8b995ef24c72def54e5a1bdfc9c6e34ed492c41f2eb4dcfd37d584922b5dbda7e122dd7dc2f3e03d779f992338f117581fa88a580ae794bacc6a5f8c731a06d74535ced848d5db0a33c7f2db0bfc435066e47da2449700aaa2d1de1720462856"
+  },
+  {
+   "slot": 6,
+   "session_id": "dSQwWFMRVHRqizSWJNAS",
+   "generation_id": "KCDWuNar7u244f6hWzGe",
+   "duration_secs": 8.08,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/dSQwWFMRVHRqizSWJNAS/KCDWuNar7u244f6hWzGe/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T125058Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=237892f4d9fafe5d56ec717503fc18b69d802789d285e3d42280ebed35cbdc6215f8e505a1e8aed01c11956f181c07003d9d417b08e74912a92985b46ea3a54fccf7aaae4cdaa7771dfe7dad9ec3d32343cad415a1e8378b2d2a530b1c44d076f3bbe7809bb2770b301e7ed88307663dbf3206b3a49b9934ef2851994c5550562f70665d6145878eec5d90b62519393aa434e96d78f7351cd1f98ff25d78c42128a3077b620e64e28414144c956d54df2f6273dd4096a3cbcf4f0a9e600c9405647c93c9707570483c8684f9e9038a50d742808e50e85a0cf4be4e3a98d0873bc807de2e2d3dbb422153da7cdc36a6ce9e37abf4c39f9a74cfab308921d201aa"
+  }
+ ]
+}

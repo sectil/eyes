@@ -1,0 +1,73 @@
+{
+ "unit": "k.nefes",
+ "idx": 53,
+ "voice": "hoc",
+ "voice_name": "Nefona Hoca",
+ "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+ "model_id": "eleven_v4",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "node_id": "UEHxSKBtPxLFZSKb3SC1",
+ "session_ids": [
+  "fJIcfcWO5J7Q3ryk9hxN",
+  "zmnlnW63UjZoFtiRBsET",
+  "pBpjgKx6jeq8RIy4cXwX"
+ ],
+ "requested_at": "2026-09-29T21:56:58Z",
+ "downloaded_at": "2026-09-29T21:57:24.193056+00:00",
+ "tts": "Nefesin kendi ritmini bulabilir.",
+ "generations_count": 3,
+ "takes": [
+  {
+   "take": 1,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/k.nefes/t1.mp3",
+   "session_id": "fJIcfcWO5J7Q3ryk9hxN",
+   "generation_id": "OyJJIEigwh2esNk5CV6E",
+   "api_duration_secs": 2.4,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/fJIcfcWO5J7Q3ryk9hxN/OyJJIEigwh2esNk5CV6E/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T215702Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=d692085392ddf8808289affcca95d68572d85995ef7b1ffe319b981a03aeaa710c497d1493f880c3dc98a9df4afd514e1ba8c6f08f5c3693b310e88b46f6c917b9e6597915d6bedb30ab9ff0a8b9fd759959d44621452812fed7567d63b1cf9f9e8e14c0d502c0c0957a23d191e22b2e64cfc1a49413cdf9af4e8132f5a527ed16bfa95d87ad12f0a69d33d6dc96a8e6fdd5825f388b78ebcd097eaef297a5904631acae750a156522eb45ae90bca049357a7355fce7444fac6878c691c6c909a7590f68cc945bad108af41274ab15bc79020f8e8e18240f1890778a84830a82feaddff7614af54fe6da280e74dfbb6a8eedd946d566d50b8128e6feba0847f6",
+   "node_id": "UEHxSKBtPxLFZSKb3SC1",
+   "ok": true,
+   "duration_secs": 2.4,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 56168,
+   "attempts": 1
+  },
+  {
+   "take": 2,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/k.nefes/t2.mp3",
+   "session_id": "zmnlnW63UjZoFtiRBsET",
+   "generation_id": "GihHmI3Pctdq31pxtdDQ",
+   "api_duration_secs": 2.32,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/zmnlnW63UjZoFtiRBsET/GihHmI3Pctdq31pxtdDQ/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T215702Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=af8c70585a648e73bf5aba17f42428844264446dd4a688e5cb9c31c437648e6d296064b48d828c9a9b4bc0e3fcf4c30823c03f6a73ff70cddb1dcf71f36421bfd2d211c59bf1ee73b9cdd8bce0563f274b98708af09e63f71144336b5c31c8c2b3288a55dccc4495b0821de24b2bec307b7d18c89dcd69b02198b622bed4034a019303898fcb3a01f221dc654439872b26a1cc4e50f3114f4c681a8a4b0c005d5eec94b5954679feaff0e045f0372f75469cbe4ffa14ade21e0877ce8afe4a06d0ebc49f6ccc64ac795bb3a3cf6f35ee79589dc61c94fb414d1ecae4efcd429ea4cf59c47cdb532736ab47ce88b70f6086479feb82a66b129d3ef2a46eecfad1",
+   "node_id": "UEHxSKBtPxLFZSKb3SC1",
+   "ok": true,
+   "duration_secs": 2.32,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 54914,
+   "attempts": 1
+  },
+  {
+   "take": 3,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/k.nefes/t3.mp3",
+   "session_id": "pBpjgKx6jeq8RIy4cXwX",
+   "generation_id": "AX8WNISHwe5gD0xr7C6s",
+   "api_duration_secs": 2.4,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/pBpjgKx6jeq8RIy4cXwX/AX8WNISHwe5gD0xr7C6s/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T215702Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=500051e2004f3e619d2fbcdd52f0365d6a30cd75ad93be3866dd7bf9f3ae3bcf38a491048d1d9da7bf25be9c27d3435427a92e6c10acf28470717f2dbea0eeed35e4f6d5679225eb070d1308b7625caff961dd9b7c7aa823c47e569168b019996b78e5148a9515304ec21604db08f4d5596a610f469e44b9dde7f4e86c7d40940df29497819b3dfb166a96c63ef3f2139f912a948547f4ed90fa9140584e1f6ba25505587f24f3cbce5fa1437f8cfed56b72f793133a31a540790d986ae23a6dfedc7900184916c5144d7a95b4c104ba4df5015d5bbb21cedfedefa8382855612f49ea0c3da9ea98add1ad66e08d90f67269b8f43cd48834c01914b5df88e4db",
+   "node_id": "UEHxSKBtPxLFZSKb3SC1",
+   "ok": true,
+   "duration_secs": 2.4,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 56168,
+   "attempts": 1
+  }
+ ],
+ "all_ok": true,
+ "n_takes_ok": 3,
+ "failed_generations": [],
+ "who": "hoc-2",
+ "retake": false,
+ "server_prompt_echo": "Nefesin kendi ritmini bulabilir.",
+ "server_prompt_equals_tts": true
+}

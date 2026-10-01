@@ -1,0 +1,73 @@
+{
+ "unit": "c2.x.ritim",
+ "idx": 67,
+ "voice": "hoc",
+ "voice_name": "Nefona Hoca",
+ "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+ "model_id": "eleven_v4",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "node_id": "4bb3jMQkxuk7FIBFTah9",
+ "session_ids": [
+  "kDAvgdwOjiUJBgBdiORE",
+  "D3eBAxLyZtsOdoBla3qk",
+  "DVwNc2Vi1GhKKPwKiLR4"
+ ],
+ "requested_at": "2026-09-29T22:05:43Z",
+ "downloaded_at": "2026-09-29T22:06:12.905491+00:00",
+ "tts": "Nefes kendi ritminde sürüyor. Giren hava serin, çıkan hava ılık olabilir.",
+ "generations_count": 3,
+ "takes": [
+  {
+   "take": 1,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/c2.x.ritim/t1.mp3",
+   "session_id": "kDAvgdwOjiUJBgBdiORE",
+   "generation_id": "4HwPF3Q12BUWsnT6bwu6",
+   "api_duration_secs": 5.92,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/kDAvgdwOjiUJBgBdiORE/4HwPF3Q12BUWsnT6bwu6/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T220547Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=b4f2fcc609e932d058eeab2ab48dbd654e83a65dbfa00dc261ed11254fd710d1829612aec6a510850f3550a6fa3dafb2ab50ab2dfded3823b6c84b23cf42718aa6782d6a32f307970b2f14782035b1b6c7cb019eef7951ae42ea7100203a1117326e3c9efcc8e37ce7c2cb651fc6b8ad50124ffb60d98e3265b76fa710eba82c2f23d900227e48363f1dd4d262fad4c8fae11200289706310aa69f80ff79ccccd59a7502cdd7b1eeb2f87c049a91f6c344991a9892129ae6fe0c7f1a30cd5ff21321752732fe2c41f6c4e9493709e8ad7d4a3bc895a8ccde46a2cb80dff54356685b93cbdd045af1dd057f805ae649397f6bc78a6ac4cc08b728a7ea777ab7ae",
+   "node_id": "4bb3jMQkxuk7FIBFTah9",
+   "ok": true,
+   "duration_secs": 5.92,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 112592,
+   "attempts": 1
+  },
+  {
+   "take": 2,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/c2.x.ritim/t2.mp3",
+   "session_id": "D3eBAxLyZtsOdoBla3qk",
+   "generation_id": "M35VJTMQvH7Jmrz5MCxy",
+   "api_duration_secs": 6.08,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/D3eBAxLyZtsOdoBla3qk/M35VJTMQvH7Jmrz5MCxy/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T220547Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=14f24367b0ccab0c00af8b1ed1c5bbb6019ad602c2ea38c566affef6b8d79c4f74dab66c6d1b0423c69bad1616b7fd6f7de5e2d99f754a3fa31ae02e67e7d86afb09cdf895fabd5a4d1861e108b60e6482ac47ef20ddf3fb9bbb38d5a884c0eb412cfe98b8d59da2c517ed5ce2108b2d9348299b7086c7cfde3282f27964f1e1943e8cf9ce718229cafb2fec087535e161539c2ecb2a9d8f5d2e0ca4c652d0fcc6bfd75a6f5532fc7ad8170a2c3562036c5b75243b297ed453ab6b820f0c2b4d15a94f4e80510c7a6da11ea054d29315320353518321ee72288b1c5ed3cf19dde464ac5e2cb18d0f3f389829b32e8c16d6a20888496901748caa7efaa78ff3fc",
+   "node_id": "4bb3jMQkxuk7FIBFTah9",
+   "ok": true,
+   "duration_secs": 6.08,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 115100,
+   "attempts": 1
+  },
+  {
+   "take": 3,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/c2.x.ritim/t3.mp3",
+   "session_id": "DVwNc2Vi1GhKKPwKiLR4",
+   "generation_id": "M7eir1cTJUpxaTNbMh6I",
+   "api_duration_secs": 5.84,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/DVwNc2Vi1GhKKPwKiLR4/M7eir1cTJUpxaTNbMh6I/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T220547Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=dba86652f512b2c685599484a9525932e8bf3807bc343375141077f80b478c11726d18bed6861ad90f6657ec0dbbfa85b27dc3a58ada93d284f47e2ad17656d6621509ace0ce41dc4d9668d4bb78764ad3045564892afdc2353c87384122b7ec0e83bbe85d0a67ca1e3ef34615a4d3c33aa4d8353b7edb8aa0279bcd9a2121fd023ebbef7a3225cdf10f755e8aba90d3fbef8a9beeb01ce55340e3f40ec44705c6aac7b6b63ed1ed48d751c2a0ac3d0eb3122a706e8a36b132fc57664a76703e605035e3fe1a1bf426b988686ce9c81e9775dc28a67d48f435f892975ab3c2eb6d6612e9c073c9388b528d4b6a50925168a0efe9116a059b01d5425e1560f001",
+   "node_id": "4bb3jMQkxuk7FIBFTah9",
+   "ok": true,
+   "duration_secs": 5.84,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 111338,
+   "attempts": 1
+  }
+ ],
+ "all_ok": true,
+ "n_takes_ok": 3,
+ "failed_generations": [],
+ "who": "hoc-2",
+ "retake": false,
+ "server_prompt_echo": "Nefes kendi ritminde sürüyor. Giren hava serin, çıkan hava ılık olabilir.",
+ "server_prompt_equals_tts": true
+}

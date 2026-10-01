@@ -1,0 +1,129 @@
+/* Hesap, "Seni tanıyalım", deneme çizelgesi ve Profilim hesap bölümü (Build 23b). Renkler tema belirteçlerinden. */
+.acct { min-height: 100dvh; display: flex; flex-direction: column; gap: 14px; }
+.acct .grow { flex: 1; }
+.acct-top { display: flex; justify-content: space-between; align-items: center; min-height: 44px; }
+.acct-title { font-family: var(--font-display); font-weight: 700; font-size: 1.85rem; line-height: 1.15; letter-spacing: -0.02em; text-align: center; margin: 0; text-wrap: balance; }
+.acct-sub { color: var(--ink-2); text-align: center; margin: 0; font-size: 1rem; line-height: 1.5; text-wrap: pretty; }
+.acct-actions { display: flex; flex-direction: column; gap: 10px; }
+.acct-btn {
+  width: 100%; min-height: 50px; border-radius: 16px; display: flex; gap: 10px; align-items: center; justify-content: center;
+  padding: 12px 18px; font: 600 1.06rem/1.25 var(--font-body); text-align: center; cursor: pointer; border: 1px solid var(--border);
+}
+.acct-btn svg { flex: none; }
+.acct-btn:disabled { opacity: 0.5; }
+.acct-btn.apple { background: #05080c; color: #fff; border-color: #05080c; }
+:root[data-theme='dark'] .acct-btn.apple { background: #f4f6f8; color: #05080c; border-color: #f4f6f8; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .acct-btn.apple { background: #f4f6f8; color: #05080c; border-color: #f4f6f8; } }
+/* Google: markanın kendi renkleri (açık: beyaz / #747775 çerçeve; koyu: #131314 / #8e918f) */
+.acct-btn.google { background: var(--hello-g-bg); color: var(--hello-g-ink); border-color: var(--hello-g-border); }
+.acct-btn.mail { background: var(--surface); color: var(--ink); border-color: color-mix(in srgb, var(--ink) 18%, transparent); }
+.acct-btn.mail svg { color: var(--accent); }
+.acct-guest { align-self: center; font-weight: 600; }
+.acct-fine { font-size: 0.78rem; color: var(--ink-3); text-align: center; margin: 4px 0 0; line-height: 1.45; }
+.acct-fine a { color: var(--ink-2); }
+.acct-msg { color: var(--warn); text-align: center; margin: 0; font-size: 0.9rem; }
+/* E-posta ve kod adımı simgesi: altın odak köşeleri içinde zarf */
+.acct-mailhero { position: relative; width: 84px; height: 84px; display: grid; place-items: center; align-self: center; margin-top: 2vh; }
+.acct-mailhero > div { width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center; color: var(--accent); background: var(--surface);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 14%, transparent), 0 0 40px -6px var(--hello-halo); }
+.acct-mailhero .k, .acct-hello .k { position: absolute; width: 16px; height: 16px; border: 0 solid var(--hello-gold); }
+.acct-mailhero .tl { top: 0; left: 0; border-top-width: 2px; border-left-width: 2px; border-top-left-radius: 2px; }
+.acct-mailhero .tr { top: 0; right: 0; border-top-width: 2px; border-right-width: 2px; border-top-right-radius: 2px; }
+.acct-mailhero .bl { bottom: 0; left: 0; border-bottom-width: 2px; border-left-width: 2px; border-bottom-left-radius: 2px; }
+.acct-mailhero .br { bottom: 0; right: 0; border-bottom-width: 2px; border-right-width: 2px; border-bottom-right-radius: 2px; }
+.acct-code { font-family: var(--font-mono); font-size: 1.5rem; letter-spacing: 0.3em; text-align: center; }
+
+.acct-badge { display: inline-flex; gap: 8px; align-items: center; font-size: 0.8rem; color: var(--ink-2); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px; width: fit-content; }
+.acct-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+
+.bd-wrap { display: grid; gap: 4px; }
+.bd-boxes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.5fr); gap: 8px; }
+.bd-box { text-align: center; font-variant-numeric: tabular-nums; min-width: 0; width: 100%; box-sizing: border-box; }
+.bd-boxes.bad .bd-box { border-color: var(--warn); }
+
+.city { position: relative; }
+.city-input { position: relative; }
+.city-input svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.city-input .input { padding-left: 36px; width: 100%; box-sizing: border-box; }
+.city-list { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+.city-opt { font: 550 0.88rem var(--font-body); color: var(--ink); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 7px 12px; cursor: pointer; }
+
+.setup { display: flex; flex-direction: column; gap: 16px; }
+.setup-avatar { display: flex; gap: 14px; align-items: center; }
+.setup-req { color: var(--ink-3); font-weight: 400; }
+
+.trial-tl { list-style: none; margin: 4px 0; padding: 0; display: grid; }
+.trial-tl li { position: relative; display: grid; gap: 2px; padding: 0 0 14px 28px; color: var(--ink-2); font-size: 0.95rem; }
+.trial-tl li b { color: var(--ink); }
+.trial-tl li::before { content: ''; position: absolute; left: 4px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+.trial-tl li:not(:last-child)::after { content: ''; position: absolute; left: 9px; top: 18px; bottom: 0; width: 2px; background: var(--accent-soft); }
+
+.ph-acct .danger { color: var(--danger); }
+.acct-sheet-back { position: fixed; inset: 0; z-index: 50; background: rgba(0, 0, 0, 0.45); display: flex; align-items: flex-end; justify-content: center; }
+.acct-sheet {
+  width: min(100%, 520px); box-sizing: border-box; background: var(--surface); border: 1px solid var(--border); border-radius: 22px 22px 0 0;
+  padding: 20px 20px calc(env(safe-area-inset-bottom) + 20px); display: grid; gap: 12px; box-shadow: var(--shadow-lg);
+}
+.acct-sheet h2 { margin: 0; font-family: var(--font-display); font-size: 1.15rem; }
+.acct-sheet p { margin: 0; color: var(--ink-2); }
+/* Bug 13: açılır şehir listesi — boşken 81 il kaydırılır, yazınca süzülmüş öneriler */
+.city-list.all { flex-wrap: wrap; max-height: 220px; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-2); }
+.city-opt[aria-selected="true"] { border-color: var(--accent); color: var(--accent); }
+.acct-detail { margin: 4px 0 0; text-align: center; font-family: var(--font-mono); font-size: 0.7rem; overflow-wrap: anywhere; user-select: text; -webkit-user-select: text; }
+
+/* ---------- Hoş geldin (hesap seçimi) — Artifact "Nefona Hoş Geldin Ekranı" öneri 2 ----------
+   Tam ekran sahne: gökyüzü (SkyChart) + giriş ekranındaki iris ufku gibi kavisli zemin. Belirteçler iki tema için. */
+:root {
+  --hello-sky: linear-gradient(180deg, #f7fafb 0%, #eef4f6 60%, #e6eef2 100%);
+  --hello-ground: #ffffff;
+  --hello-rim: rgba(11, 116, 128, 0.28);
+  --hello-rim-glow: rgba(11, 116, 128, 0.1);
+  --hello-star: #56677a;
+  --hello-star-hi: #7a4e00;
+  --hello-line: rgba(40, 70, 95, 0.2);
+  --hello-gold: #b57300;
+  --hello-glow-a: 0.14;
+  --hello-halo: rgba(11, 116, 128, 0.16);
+  --hello-g-bg: #ffffff; --hello-g-border: #747775; --hello-g-ink: #1f1f1f;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --hello-sky: linear-gradient(180deg, #02050a 0%, #06101a 55%, #081521 100%);
+    --hello-ground: #07131d; --hello-rim: rgba(150, 232, 240, 0.45); --hello-rim-glow: rgba(25, 194, 209, 0.22);
+    --hello-star: #cfe3f5; --hello-star-hi: #fff4de; --hello-line: rgba(170, 205, 230, 0.22); --hello-gold: #ffb13b; --hello-glow-a: 0.34;
+    --hello-halo: rgba(25, 194, 209, 0.28);
+    --hello-g-bg: #131314; --hello-g-border: #8e918f; --hello-g-ink: #e3e3e3;
+  }
+}
+:root[data-theme='dark'] {
+  --hello-sky: linear-gradient(180deg, #02050a 0%, #06101a 55%, #081521 100%);
+  --hello-ground: #07131d; --hello-rim: rgba(150, 232, 240, 0.45); --hello-rim-glow: rgba(25, 194, 209, 0.22);
+  --hello-star: #cfe3f5; --hello-star-hi: #fff4de; --hello-line: rgba(170, 205, 230, 0.22); --hello-gold: #ffb13b; --hello-glow-a: 0.34;
+  --hello-halo: rgba(25, 194, 209, 0.28);
+  --hello-g-bg: #131314; --hello-g-border: #8e918f; --hello-g-ink: #e3e3e3;
+}
+.acct-hello {
+  position: fixed; inset: 0; z-index: 30; overflow: hidden; display: flex; flex-direction: column;
+  background: var(--hello-sky); color: var(--ink);
+}
+.hello-top { min-height: 44px; flex: none; display: flex; align-items: center; padding: env(safe-area-inset-top) 20px 0; }
+.hello-sky { position: relative; flex: 1; min-height: 110px; display: grid; place-items: center; padding: 4px 0 10px; }
+.sky-chart { width: 100%; max-width: 560px; height: 100%; max-height: 236px; }
+.sky-star { fill: var(--hello-star); }
+.sky-line { stroke: var(--hello-line); stroke-width: 1; stroke-linecap: round; }
+.sky-star-hi { fill: var(--hello-star-hi); }
+.sky-cross line { stroke: var(--hello-star-hi); stroke-width: 1; opacity: 0.6; }
+.sky-brackets path { fill: none; stroke: var(--hello-gold); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sky-glow-in { stop-color: var(--hello-gold); stop-opacity: var(--hello-glow-a); }
+.sky-glow-out { stop-color: var(--hello-gold); stop-opacity: 0; }
+.hello-base { position: relative; flex: none; padding: 34px 24px calc(26px + env(safe-area-inset-bottom)); }
+.hello-base::before {
+  content: ''; position: absolute; z-index: 0; left: 50%; top: 0; width: max(1100px, 280vw); aspect-ratio: 1; transform: translateX(-50%);
+  border-radius: 50%; background: var(--hello-ground); box-shadow: 0 0 0 1px var(--hello-rim), 0 -18px 60px -10px var(--hello-rim-glow);
+}
+.hello-base > * { position: relative; z-index: 1; max-width: 480px; margin-inline: auto; }
+.hello-title { margin: 0 auto; text-align: center; font: 700 1.9rem/1.15 var(--font-display); letter-spacing: -0.02em; text-wrap: balance; }
+.hello-sub { margin: 10px auto 0; max-width: 30ch; text-align: center; font-size: 1rem; line-height: 1.5; color: var(--ink-2); text-wrap: pretty; }
+.hello-acts { display: grid; gap: 9px; margin-top: 22px; }
+.hello-acts .acct-guest { justify-self: center; min-height: 44px; font-size: 1.06rem; }
+.hello-acts .acct-fine { margin-top: 2px; }

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nef örnekleri</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+/* Nefona tokenları: app/src/styles.css ile aynı değerler */
+:root {
+  --f-display: 'Unbounded', 'Avenir Next', system-ui, sans-serif;
+  --f-body: 'Onest', system-ui, -apple-system, sans-serif;
+  --bg: #f3f6f8; --surface: #ffffff; --surface-2: #e9eef2; --surface-3: #dde4ea; --border: #e1e7ec;
+  --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --accent: #0b7480; --accent-soft: rgba(17,169,184,.12); --accent-graphic: #11a9b8;
+  --iris-1: #11a9b8; --iris-2: #2f6bea;
+  --shadow: 0 1px 2px rgba(11,18,25,.04), 0 8px 24px rgba(11,18,25,.05);
+  --wall: radial-gradient(120% 80% at 20% 0%, #9fd9e0 0%, #5c9fc4 45%, #2b4e86 100%);
+  --glass: rgba(255,255,255,.62); --glass-ink: #0b1219; --glass-ink-2: rgba(11,18,25,.72);
+  --w: 390px; --h: 844px;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #070c12; --surface: #0f171f; --surface-2: #141e28; --surface-3: #1c2834; --border: rgba(255,255,255,.08);
+  --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --accent: #19c2d1; --accent-soft: rgba(25,194,209,.14); --accent-graphic: #19c2d1;
+  --iris-1: #19c2d1; --iris-2: #3e7bfa; --shadow: none;
+  --wall: radial-gradient(120% 80% at 20% 0%, #1d4d63 0%, #10233d 50%, #05080f 100%);
+  --glass: rgba(40,48,58,.66); --glass-ink: #f2f5f7; --glass-ink-2: rgba(242,245,247,.74);
+  color-scheme: dark;
+}
+:root[data-w="320"] { --w: 320px; --h: 568px; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); }
+body { font-family: var(--f-body); color: var(--ink); -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+.phone { width: var(--w); height: var(--h); position: relative; overflow: hidden; background: var(--bg); }
+[hidden] { display: none !important; }
+
+/* ---- kilit ekranı ---- */
+.lock { background: var(--wall); color: #fff; display: flex; flex-direction: column; align-items: center; }
+.lock .date { margin-top: 64px; font-weight: 600; font-size: 19px; opacity: .92; }
+.lock .clock { font-family: var(--f-display); font-weight: 600; font-size: 86px; line-height: 1; letter-spacing: -.03em; margin-top: 4px; }
+:root[data-w="320"] .lock .date { margin-top: 40px; font-size: 16px; }
+:root[data-w="320"] .lock .clock { font-size: 66px; }
+.notif { position: absolute; left: 10px; right: 10px; bottom: 132px; background: var(--glass); color: var(--glass-ink);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6); backdrop-filter: blur(24px) saturate(1.6);
+  border-radius: 22px; padding: 13px 15px 14px; display: grid; grid-template-columns: 38px 1fr; gap: 0 11px; }
+:root[data-w="320"] .notif { bottom: 74px; left: 8px; right: 8px; }
+.app-ic { width: 38px; height: 38px; border-radius: 9px; background: #070c12; display: grid; place-items: center; grid-row: span 3; align-self: start; margin-top: 2px; }
+.app-ic i { width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 50% 50%, #070c12 0 28%, transparent 29%), conic-gradient(from 200deg, #19c2d1, #3e7bfa, #19c2d1); }
+.n-head { display: flex; justify-content: space-between; font-size: 13px; color: var(--glass-ink-2); }
+.n-head b { font-weight: 600; letter-spacing: .02em; }
+.n-title { font-weight: 700; font-size: 15.5px; line-height: 1.3; margin-top: 1px; }
+.n-body { font-size: 15px; line-height: 1.34; color: var(--glass-ink); }
+.n-src { font-size: 13px; color: var(--glass-ink-2); margin-top: 3px; grid-column: 2; }
+.lock .bottom { position: absolute; bottom: 34px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 46px; }
+.lock .bottom span { width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,.16); display: grid; place-items: center; }
+:root[data-w="320"] .lock .bottom { bottom: 16px; }
+:root[data-w="320"] .lock .bottom span { width: 42px; height: 42px; }
+.lock .bar { position: absolute; bottom: 8px; left: 50%; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: rgba(255,255,255,.85); }
+
+/* ---- uygulama ---- */
+.app { padding: 58px 16px 0; background: var(--bg); }
+:root[data-w="320"] .app { padding-top: 40px; }
+.eyebrow { font-size: 13px; color: var(--ink-3); font-weight: 600; }
+.app h1 { font-family: var(--f-display); font-weight: 650; font-size: 25px; letter-spacing: -.02em; margin: 4px 0 18px; }
+:root[data-w="320"] .app h1 { font-size: 21px; margin-bottom: 12px; }
+.card { background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); border: 1px solid var(--border); padding: 18px; position: relative; overflow: hidden; }
+:root[data-w="320"] .card { padding: 15px; border-radius: 20px; }
+.badge { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; color: var(--accent); background: var(--accent-soft); padding: 5px 11px 5px 6px; border-radius: 999px; }
+.badge i { width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle, var(--surface) 0 26%, transparent 27%), conic-gradient(from 200deg, var(--iris-1), var(--iris-2), var(--iris-1)); }
+.ghost { height: 64px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); margin-top: 12px; opacity: .55; }
+.ghost.s { height: 48px; }
+
+.row-card { display: flex; justify-content: space-between; align-items: center; min-height: 54px; padding: 0 18px; margin-top: 12px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); font-size: 15px; }
+.rc-k { font-weight: 700; } .rc-v { color: var(--ink-2); }
+:root[data-w="320"] .row-card { min-height: 46px; margin-top: 10px; font-size: 14px; }
+/* M2 hatırlayan Nef */
+.recall .big { font-family: var(--f-display); font-weight: 600; font-size: 22px; line-height: 1.28; letter-spacing: -.015em; margin: 14px 0 0; }
+:root[data-w="320"] .recall .big { font-size: 18.5px; margin-top: 11px; }
+.recall .big em { font-style: normal; color: var(--accent); }
+.scale { margin: 18px 2px 4px; position: relative; height: 34px; }
+:root[data-w="320"] .scale { margin-top: 14px; }
+.scale .track { position: absolute; left: 0; right: 0; top: 14px; height: 6px; border-radius: 3px; background: var(--surface-2); }
+.scale .fill { position: absolute; top: 14px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--surface-3), var(--accent-graphic)); left: 40%; width: 30%; }
+.scale .dot { position: absolute; top: 8px; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; border: 3px solid var(--surface); }
+.scale .d1 { left: 40%; background: var(--ink-3); }
+.scale .d2 { left: 70%; background: var(--accent-graphic); box-shadow: 0 0 0 4px var(--accent-soft); }
+.scale .lab { position: absolute; top: -6px; font-size: 12px; font-weight: 700; color: var(--ink-2); transform: translateX(-50%); }
+.scale .l1 { left: 40%; } .scale .l2 { left: 70%; color: var(--accent); }
+.scale .ends { position: absolute; top: 24px; left: 0; right: 0; display: flex; justify-content: space-between; font-size: 11.5px; color: var(--ink-3); }
+.note { font-size: 13px; color: var(--ink-3); margin: 8px 0 14px; }
+.act { display: flex; justify-content: space-between; align-items: center; min-height: 50px; padding: 0 16px; border-radius: 15px; background: var(--accent); color: #fff; font-weight: 700; font-size: 16px; }
+:root[data-theme="dark"] .act { color: #041017; }
+.act .min { font-weight: 600; opacity: .85; white-space: nowrap; }
+
+/* M4 mektup */
+.letter { padding: 22px 20px 20px; }
+:root[data-w="320"] .letter { padding: 16px; }
+.letter::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 4px; background: linear-gradient(90deg, var(--iris-1), var(--iris-2)); }
+.letter h2 { font-family: var(--f-display); font-weight: 650; font-size: 21px; letter-spacing: -.015em; margin: 14px 0 12px; line-height: 1.2; }
+:root[data-w="320"] .letter h2 { font-size: 18px; margin: 10px 0 8px; }
+.letter p { margin: 0 0 11px; font-size: 16px; line-height: 1.5; color: var(--ink); }
+:root[data-w="320"] .letter p { font-size: 14.5px; line-height: 1.42; margin-bottom: 8px; }
+:root[data-w="320"] .chips span { font-size: 12px; padding: 5px 9px; }
+:root[data-w="320"] .letter .tip { font-size: 14px; padding: 9px 11px; }
+:root[data-w="320"] .app h1 { margin-bottom: 10px; }
+.letter p b { font-weight: 700; }
+.letter .tip { background: var(--accent-soft); border-radius: 14px; padding: 11px 13px; font-weight: 600; color: var(--ink); }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 12px; }
+.chips { flex-wrap: nowrap; }
+.chips span { white-space: nowrap; font-size: 13px; font-weight: 700; padding: 6px 11px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); }
+.sig { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: var(--ink-3); border-top: 1px solid var(--border); padding-top: 10px; }
+.sig b { font-family: var(--f-display); font-weight: 600; color: var(--accent); font-size: 15px; }
+</style>
+
+<style>
+.wk { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 14px 0 6px; }
+.wk div { display: grid; justify-items: center; gap: 5px; font-size: 11.5px; color: var(--ink-3); font-weight: 600; }
+.wk i { width: 100%; aspect-ratio: 1; max-width: 38px; border-radius: 11px; background: var(--surface-2); display: grid; place-items: center; font-style: normal; font-size: 17px; }
+.wk i.w { background: var(--accent-graphic); color: #fff; }
+.wk i.b { background: var(--accent-soft); color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent-graphic); }
+.lg { display: flex; gap: 14px; font-size: 12.5px; color: var(--ink-3); margin-bottom: 12px; }
+.lg span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; background: var(--accent-graphic); }
+.lg span.b::before { background: var(--accent-soft); box-shadow: inset 0 0 0 2px var(--accent-graphic); }
+.hero { font-family: var(--f-display); font-weight: 600; font-size: 22px; line-height: 1.28; letter-spacing: -.015em; margin: 14px 0 12px; }
+:root[data-w="320"] .hero { font-size: 18.5px; margin: 10px 0 8px; }
+.tipline { display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 50px; padding: 0 16px; border-radius: 15px; background: var(--accent-soft); color: var(--ink); font-weight: 700; font-size: 15px; }
+:root[data-w="320"] .tipline { font-size: 14px; padding: 8px 12px; }
+.short p { font-size: 17px; line-height: 1.5; margin: 0 0 10px; }
+:root[data-w="320"] .short p { font-size: 15.5px; }
+.short .sign { font-family: var(--f-display); color: var(--accent); font-weight: 600; font-size: 17px; text-align: right; margin-top: 4px; }
+.spark { display: flex; align-items: flex-end; gap: 7px; height: 70px; margin: 16px 0 6px; }
+.spark i { flex: 1; border-radius: 6px 6px 3px 3px; background: var(--surface-3); }
+.spark i.top { background: var(--accent-graphic); box-shadow: 0 0 0 4px var(--accent-soft); }
+.steps { display: flex; gap: 8px; margin: 16px 0 8px; }
+.steps div { flex: 1; border-radius: 14px; padding: 10px 0; text-align: center; background: var(--surface-2); color: var(--ink-3); font-weight: 700; font-size: 15px; }
+.steps div small { display: block; font-weight: 600; font-size: 11.5px; }
+.steps .done { background: var(--accent-soft); color: var(--accent); }
+.steps .now { background: var(--accent); color: #fff; }
+:root[data-theme="dark"] .steps .now { color: #041017; }
+.doms { display: grid; gap: 7px; margin: 14px 0 10px; }
+.doms div { display: grid; grid-template-columns: 82px 1fr; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 600; color: var(--ink-2); }
+.doms b { height: 10px; border-radius: 5px; background: var(--surface-2); position: relative; overflow: hidden; }
+.doms b::after { content: ''; position: absolute; inset: 0 auto 0 0; width: var(--v); background: var(--accent-graphic); border-radius: 5px; }
+.doms div.gap { color: var(--ink); }
+.doms div.gap b { box-shadow: inset 0 0 0 2px var(--accent-graphic); background: transparent; }
+</style>
+</head><body>
+<div class="phone lock" id="M1A" hidden>
+  <div class="date">Perşembe 1 Ekim</div><div class="clock">08.12</div>
+  <div class="notif"><div class="app-ic"><i></i></div><div class="n-head"><b>NEFONA</b><span>şimdi</span></div>
+    <div class="n-title">Yürüyüşün yağmura denk geliyor</div><div class="n-body">Yağmur 19.00'da bekleniyor. Bugün 18.00'de çıkarsan kuru yürürsün.</div><div class="n-src">Kaynak: Apple Weather</div></div>
+  <div class="bottom"><span></span><span></span></div><div class="bar"></div></div>
+<div class="phone lock" id="M1B" hidden>
+  <div class="date">Perşembe 1 Ekim</div><div class="clock">08.12</div>
+  <div class="notif"><div class="app-ic"><i></i></div><div class="n-head"><b>NEFONA</b><span>şimdi</span></div>
+    <div class="n-title">Bugün yürüyüş 18.00'de</div><div class="n-body">Her zamanki 19.30'a yağmur denk geliyor. Bir saat erken çık, yağmura kalma.</div><div class="n-src">Kaynak: Apple Weather</div></div>
+  <div class="bottom"><span></span><span></span></div><div class="bar"></div></div>
+<div class="phone lock" id="M1C" hidden>
+  <div class="date">Perşembe 1 Ekim</div><div class="clock">08.12</div>
+  <div class="notif"><div class="app-ic"><i></i></div><div class="n-head"><b>NEFONA</b><span>şimdi</span></div>
+    <div class="n-title">Yürüyüşün yağmura denk geliyor</div><div class="n-body">Bu hafta üç akşam 19.30'da yürüdün. Bugün yağmur 19.00'da bekleniyor; 18.00'de çıkabilirsin.</div><div class="n-src">Kaynak: Apple Weather</div></div>
+  <div class="bottom"><span></span><span></span></div><div class="bar"></div></div>
+<div class="phone app" id="M4A" hidden><div class="eyebrow">Pazartesi, 5 Ekim</div><h1>Günaydın</h1><section class="card"><span class="badge"><i></i>Nef'ten mektup</span>
+<p class="hero">Yağmurlu iki akşam yürüyüş yerine nefesi seçtin; düzenin bozulmadı.</p><div class="wk"><div><i class="w"></i>Pzt</div><div><i class=""></i>Sal</div><div><i class="w"></i>Çar</div><div><i class="b"></i>Per</div><div><i class="w"></i>Cum</div><div><i class=""></i>Cmt</div><div><i class="b"></i>Paz</div></div>
+<div class="lg"><span>yürüyüş</span><span class="b">nefes, yağmurlu akşam</span></div>
+<div class="tipline"><span>Bu hafta: salı, perşembe 19.30</span><span>›</span></div></section></div>
+<div class="phone app" id="M4B" hidden><div class="eyebrow">Pazartesi, 5 Ekim</div><h1>Günaydın</h1><section class="card"><span class="badge"><i></i>Nef'ten mektup</span>
+<p class="hero" style="font-size:20px">Geçen haftan</p><div class="wk"><div><i class="w"></i>Pzt</div><div><i class=""></i>Sal</div><div><i class="w"></i>Çar</div><div><i class="b"></i>Per</div><div><i class="w"></i>Cum</div><div><i class=""></i>Cmt</div><div><i class="b"></i>Paz</div></div>
+<div class="lg"><span>yürüyüş</span><span class="b">nefes, yağmurlu akşam</span></div>
+<p style="margin:0 0 12px;font-size:16px;line-height:1.45">Beş gün geldin. Yağmur iki akşam yürüyüşü bozdu, sen nefese döndün.</p>
+<div class="tipline"><span>Bu hafta: salı, perşembe 19.30</span><span>›</span></div></section></div>
+<div class="phone app" id="M4C" hidden><div class="eyebrow">Pazartesi, 5 Ekim</div><h1>Günaydın</h1><section class="card letter short"><span class="badge"><i></i>Nef'ten mektup</span>
+<p style="margin-top:14px">Geçen hafta yağmur iki akşam yürüyüşünü bozdu. Sen ikisinde de nefese döndün.</p>
+<p>Bu hafta salı ve perşembe 19.30 senin.</p><div class="sign">Nef</div></section></div>
+<div class="phone app" id="M5A" hidden><div class="eyebrow">Çarşamba, 7 Ekim</div><h1>İyi günler</h1><section class="card"><span class="badge"><i></i>Nef</span>
+<p class="hero">Çemberler'de isabetin ilk kez %80'i geçti.</p>
+<div class="spark"><i style="height:48%"></i><i style="height:52%"></i><i style="height:50%"></i><i style="height:58%"></i><i style="height:55%"></i><i style="height:61%"></i><i style="height:66%"></i><i style="height:64%"></i><i style="height:72%"></i><i style="height:86%" class=top></i></div>
+<p class="note">Son 10 turun. En sağdaki bugün: %82.</p>
+<div class="act"><span>Bir tur daha</span><span class="min">2 dk ›</span></div></section></div>
+<div class="phone app" id="M5B" hidden><div class="eyebrow">Çarşamba, 7 Ekim</div><h1>Günaydın</h1><section class="card"><span class="badge"><i></i>Nef</span>
+<p class="hero">Nefes bugün 3 dakikaya çıkıyor.</p>
+<div class="steps"><div class="done">1 dk<small>pazartesi</small></div><div class="done">2 dk<small>dün</small></div><div class="now">3 dk<small>bugün</small></div></div>
+<p class="note">Dün 2 dakikayı sonuna kadar yaptın.</p>
+<div class="act"><span>Başla</span><span class="min">3 dk ›</span></div></section></div>
+<div class="phone app" id="M5C" hidden><div class="eyebrow">Pazar, 11 Ekim</div><h1>İyi akşamlar</h1><section class="card"><span class="badge"><i></i>Nef</span>
+<p class="hero">Bu hafta beş alanın dördünde çalıştın. Sırada Dikkat var.</p>
+<div class="doms"><div>Göz<b style="--v:86%"></b></div><div>Nefes<b style="--v:71%"></b></div><div>Ruh hâli<b style="--v:43%"></b></div><div>Hareket<b style="--v:57%"></b></div><div class="gap">Dikkat<b style="--v:0%"></b></div></div>
+<p class="note" style="margin-top:2px">Çubuk: bu hafta o alanda çalıştığın günler.</p><div class="act"><span>Dikkat için Yılan oyunu</span><span class="min">2 dk ›</span></div></section></div>
+<script>
+const q = new URLSearchParams(location.search)
+document.documentElement.dataset.theme = q.get('t') === 'dark' ? 'dark' : 'light'
+document.documentElement.dataset.w = q.get('w') === '320' ? '320' : '390'
+const el = document.getElementById(q.get('s') || 'M1A'); if (el) el.hidden = false
+</script></body></html>

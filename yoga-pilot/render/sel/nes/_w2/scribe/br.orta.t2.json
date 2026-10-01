@@ -1,0 +1,16 @@
+{
+ "unit": "br.orta",
+ "take": "t2",
+ "ref_node": "DgyNxRSekYtyS44jCXjq",
+ "asset_id": "v2OodcCB85o820YXXQyc",
+ "stt_node": "gPWPt5C7DuaxO9tCAthD",
+ "session_id": "1ambyB81sG4Qh1NIhoPu",
+ "generation_id": "XLKf5rU65wOgq82rETT3",
+ "actual_credits": 55.44,
+ "actual_cents": 1.008,
+ "spoken_duration_secs": 9.9,
+ "scribe_text": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde. Gözlerin açıksa bakışın serbest. Zemin seni hep taşıyor",
+ "tts": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde. Gözlerin açıksa bakışın serbest. Zemin seni hep taşıyor.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 19\n}"
+}

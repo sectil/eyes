@@ -1,0 +1,16 @@
+{
+ "unit": "c2.yer",
+ "take": "t2",
+ "asset_id": "bv85SkvJsKvK0VvSZ8NU",
+ "source_node_id": "TT9cgkYucKuOqaxX5q3h",
+ "stt_node_id": "840mrjYxipaclCDejXZS",
+ "session_id": "XElnqah3RTvYXGEF5bex",
+ "generation_id": "fIf3zdinuzSRLXRHCWn0",
+ "actual_credits": 43.12,
+ "actual_cents": 0.784,
+ "spoken_duration_secs": 7.64,
+ "scribe_text": "Dikkatin nefeste ise onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta",
+ "tts": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta.",
+ "compare_exit": 1,
+ "compare": "{\n \"equal\": false,\n \"a\": [\n  \"dikkatin\",\n  \"nefesteyse\",\n  \"onu\",\n  \"en\",\n  \"net\",\n  \"fark\",\n  \"ettiğin\",\n  \"yeri\",\n  \"bulabilirsin\",\n  \"burun\",\n  \"göğüs\",\n  \"karın\",\n  \"ya\",\n  \"da\",\n  \"başka\",\n  \"bir\",\n  \"nokta\"\n ],\n \"b\": [\n  \"dikkatin\",\n  \"nefeste\",\n  \"ise\",\n  \"onu\",\n  \"en\",\n  \"net\",\n  \"fark\",\n  \"ettiğin\",\n  \"yeri\",\n  \"bulabilirsin\",\n  \"burun\",\n  \"göğüs\",\n  \"karın\",\n  \"ya\",\n  \"da\",\n  \"başka\",\n  \"bir\",\n  \"nokta\"\n ],\n \"diff\": [\n  {\n   \"op\": \"replace\",\n   \"a_pos\": 1,\n   \"a\": [\n    \"nefesteyse\"\n   ],\n   \"b_pos\": 1,\n   \"b\": [\n    \"nefeste\",\n    \"ise\"\n   ]\n  }\n ]\n}\nreplace @a1/b1: -nefesteyse +nefeste ise"
+}

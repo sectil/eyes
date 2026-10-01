@@ -1,0 +1,16 @@
+{
+ "unit": "a.agirlik",
+ "take": "t3",
+ "asset_id": "atBuZC3xloEnxM11iyE0",
+ "source_node_id": "tQAe7rvAQm9DCo19c0AK",
+ "stt_node_id": "3QEUXbgQOhLI0KkJ4gCS",
+ "session_id": "SHABOes58SWnmHAGKSbb",
+ "generation_id": "SzAJoMUgjgYBLKD1Zo6x",
+ "actual_credits": 13.64,
+ "actual_cents": 0.248,
+ "spoken_duration_secs": 2.32,
+ "scribe_text": "Zemin seni baştan ayağa taşıyor",
+ "tts": "Zemin seni baştan ayağa taşıyor.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 5\n}"
+}

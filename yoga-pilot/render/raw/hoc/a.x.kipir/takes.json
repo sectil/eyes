@@ -1,0 +1,73 @@
+{
+ "unit": "a.x.kipir",
+ "idx": 66,
+ "voice": "hoc",
+ "voice_name": "Nefona Hoca",
+ "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+ "model_id": "eleven_v4",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "node_id": "mOfWCeIEZI6lgMVQMeB1",
+ "session_ids": [
+  "vuVxeMLrmKme9F5oRfcz",
+  "6yHzK9LLo7mCDs03Ruvl",
+  "yS3hud3iYTDotDHG7eQU"
+ ],
+ "requested_at": "2026-09-29T22:05:09Z",
+ "downloaded_at": "2026-09-29T22:05:37.388568+00:00",
+ "tts": "Bir iki kez kıpırdanıp yerleşmek de dinlenmenin bir parçası.",
+ "generations_count": 3,
+ "takes": [
+  {
+   "take": 1,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/a.x.kipir/t1.mp3",
+   "session_id": "vuVxeMLrmKme9F5oRfcz",
+   "generation_id": "TXtQSF90HpskUJ5uIxYz",
+   "api_duration_secs": 4.08,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/vuVxeMLrmKme9F5oRfcz/TXtQSF90HpskUJ5uIxYz/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T220513Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=38ec399e512300b47f910c73f91dc087a3db9af9e13fa69a4d80f6fa75b79d783bec0ac57d79002cc76f23f035d43dc68f7d60fc0068faa25b13c5fd75ba153512a6a93ed320b05fb44c30b32a9e19993d3f2608f75e96b797da4d7c9b3cb92ee98faa7d8faf18deb159f9433fe772edd9d5e059acbb121ee279228d415ee1c362a24538ecef786fc707e0955086fd44fcf322b24886c60116566184d30b657f71cc89f3b6f235901b64dd25efb2baa01a72235cc4327372dd7ca9c86a22cacd7ed14f3c2b3dc751807d044bac8d3178d0bc0a3d16ea17767191cf3027d874b41cf21bec9ba6d807cb63fbfdcad7710f455c0cd74de9b5138ce40dd480f31043",
+   "node_id": "mOfWCeIEZI6lgMVQMeB1",
+   "ok": true,
+   "duration_secs": 4.08,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 83335,
+   "attempts": 1
+  },
+  {
+   "take": 2,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/a.x.kipir/t2.mp3",
+   "session_id": "6yHzK9LLo7mCDs03Ruvl",
+   "generation_id": "8b2OrgXzGkvuWVy42Lvi",
+   "api_duration_secs": 4.08,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/6yHzK9LLo7mCDs03Ruvl/8b2OrgXzGkvuWVy42Lvi/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T220514Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6da209cf0bb0f62d36b48be1c57096ee6fa2d7e474b6aacc6c29be829bb4209902825cded43dd7566688d3d58110e9613bcca7012c44b737a6c13d5b2861de35f4820b5382f06342540e204a815f4635113677a5eea4e60c01d2bb528e7c4685085e9dc50c8df4f7d4eca77a23f19eefd3bb9d55c2b995bc68abc9a8c2c23c5057cad1ad174937c5323e5f4ca75fd68ce7203513b2b86a204fe7da913671ad2fc8e43eb50823b5b9b48bb397878ca3a3b9cf121fc3afc305d7dc61250532d399f284f365d22c09dde9a2e8bf4ee744548bb4c5e31c17400510ff86a25153dd6d1965951db2b556c7141c4c9aeb1d93171269d234bca0f192fa0cf7647713ddde",
+   "node_id": "mOfWCeIEZI6lgMVQMeB1",
+   "ok": true,
+   "duration_secs": 4.08,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 83335,
+   "attempts": 1
+  },
+  {
+   "take": 3,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/a.x.kipir/t3.mp3",
+   "session_id": "yS3hud3iYTDotDHG7eQU",
+   "generation_id": "frMesuZPthn4ZTaRozd9",
+   "api_duration_secs": 4.16,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/yS3hud3iYTDotDHG7eQU/frMesuZPthn4ZTaRozd9/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T220514Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=be8ecd37d0ead31db7f24f5d05457227211a43d2d7fe39534d5e604f129ab2f1dd8f9d375d986190760fc761863c2987cd392fdca99f665a973a0393fc96f43d3d02b0fb74074c2b63beb188de75bb3a7e5e856fbaf6b723fcccf3e7f02611c1fa722477bfefc8f7f5943ee5f0cd3b6448aa5fdac55a8567040b59c852f5cc9b718f828c92e50db12a631bc020c92dafe37edadf5283de2377415812d5ad0cae961229daa57b0a2acbb9d4ae19129d7a4cc8fcc7ff0ab46500528dfe0a991df6108b89098ed233de343b3ab4da8fc938dd4dadb3df4eb9a90fbef2bd90b4e7607e37e88da339f3891b0fdcccc9a25e99488e0e9a5027b7cfe9c420d0baf1b993",
+   "node_id": "mOfWCeIEZI6lgMVQMeB1",
+   "ok": true,
+   "duration_secs": 4.16,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 84589,
+   "attempts": 1
+  }
+ ],
+ "all_ok": true,
+ "n_takes_ok": 3,
+ "failed_generations": [],
+ "who": "hoc-2",
+ "retake": false,
+ "server_prompt_echo": "Bir iki kez kıpırdanıp yerleşmek de dinlenmenin bir parçası.",
+ "server_prompt_equals_tts": true
+}

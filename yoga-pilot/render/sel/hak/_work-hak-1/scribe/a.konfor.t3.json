@@ -1,0 +1,19 @@
+{
+ "unit": "a.konfor",
+ "take": "t3",
+ "asset_id": "zmDOQxUjiNSvPMZx90NN",
+ "source_node_id": "euaWxOcaHIwC21FcD1SV",
+ "stt_node_id": "bazLrMSDFOVAgP3LSCCm",
+ "session_id": "hHdK0RJKpap13P1kOoXZ",
+ "generation_id": "VOsyF6toWszSIko3FrFt",
+ "actual_credits": 30.8,
+ "actual_cents": 0.56,
+ "spoken_duration_secs": 5.4,
+ "scribe_text": "Uzanmadan önce üstüne ince bir örtü, dizlerinin altına bir yastık alman iyi olur",
+ "tts": "Uzanmadan önce üstüne ince bir örtü, dizlerinin altına bir yastık alman iyi olur.",
+ "compare_exit": 0,
+ "compare": {
+  "equal": true,
+  "words": 13
+ }
+}

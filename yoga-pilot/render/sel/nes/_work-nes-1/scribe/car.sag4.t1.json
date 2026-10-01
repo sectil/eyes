@@ -1,0 +1,15 @@
+{
+ "unit": "car.sag4",
+ "take": "t1",
+ "asset_id": "CgacxNSQDwGpTgbDwPz4",
+ "source_node_id": "cQrNMHtNXsdHxVellUe7",
+ "stt_node_id": "UnWyV2gzk7eJFIiwm4Mt",
+ "session_id": "eT2M2ZUpecMTDe7O9bSo",
+ "generation_id": "rSVsWFOaNcQKbvEdEiAp",
+ "actual_credits": 35.64,
+ "actual_cents": 0.648,
+ "scribe_text": "Uyluk, diz, baldır, ayak bileği, topuk, ayak tabanı",
+ "spoken_duration_secs": "6.26",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 8\n}"
+}

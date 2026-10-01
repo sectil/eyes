@@ -1,0 +1,19 @@
+{
+ "unit": "a.acilis",
+ "take": "t2",
+ "asset_id": "IVYCfeQKU7LLRwh62xLC",
+ "source_node_id": "3VNzvhGm9bzd15Q2I2oB",
+ "stt_node_id": "yFAXSpuc17VdExEwSDrZ",
+ "session_id": "AmI3A6x2CacXWM4fMTFw",
+ "generation_id": "BqLeqmLAFQLfAz0KpkVQ",
+ "actual_credits": 21.56,
+ "actual_cents": 0.392,
+ "spoken_duration_secs": 3.74,
+ "scribe_text": "Bir şey başarman gerekmiyor. Yalnızca dinlenmek var",
+ "tts": "Bir şey başarman gerekmiyor; yalnızca dinlenmek var.",
+ "compare_exit": 0,
+ "compare": {
+  "equal": true,
+  "words": 7
+ }
+}

@@ -1,0 +1,63 @@
+{
+ "file": "common/orman-4.wav",
+ "src_sr": 44100,
+ "src_channels": 2,
+ "duration_s": 30.0,
+ "lufs_i": -45.93,
+ "true_peak_dbtp": -25.58,
+ "sample_peak_dbfs": -26.16,
+ "clipped_samples": 0,
+ "dc": [
+  -7.3e-05,
+  -7.7e-05
+ ],
+ "lr_corr": 0.183,
+ "lead_silence_ms": 0.0,
+ "tail_silence_ms": 0.0,
+ "flatness": {
+  "st_lufs_p5": -50.12,
+  "st_lufs_p50": -46.13,
+  "st_lufs_p95": -43.4,
+  "spread_p5_p95_lu": 6.71,
+  "st_std_lu": 2.08,
+  "range_full_lu": 7.86,
+  "max_rise_10s_lu": 7.86,
+  "crescendo_10s_spans": 0,
+  "verdict": "KULAK"
+ },
+ "onsets": {
+  "pulse_clarity": 0.058,
+  "percussive_share": 0.568,
+  "events_per_min": 290.0,
+  "strong_onsets_per_min": 10.0,
+  "flux_mean_db": 0.9834,
+  "flux_median_db": 0.9534,
+  "flux_p99_db": 1.95,
+  "flux_max_db": 3.238,
+  "flux_max_at_s": 10.17
+ },
+ "clicks_hf": {
+  "count": 0,
+  "first": []
+ },
+ "spectrum": {
+  "centroid_hz": 7320.8,
+  "share_lt300": 0.014,
+  "share_500_4k": 0.171,
+  "share_1k5_4k": 0.1423,
+  "share_gt8k": 0.40724
+ },
+ "loop_seam": {
+  "lead_silence_ms": 0.0,
+  "tail_silence_ms": 0.0,
+  "wrap_step": 0.00043739844113588333,
+  "interior_step_p999": 0.015424830469302993,
+  "wrap_step_ratio_p999": 0.028,
+  "hf_excess_wrap_db": 1.16,
+  "hf_excess_interior_p95_db": 3.96,
+  "level_end_minus_start_db": 3.44,
+  "spec_dist_wrap_db": 3.29,
+  "spec_dist_interior_p95_db": 5.47,
+  "verdict": "CHECK"
+ }
+}
