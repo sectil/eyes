@@ -84,11 +84,27 @@ Durum: TEŞHİS BİTTİ · PLAN SAHİP ONAYI BEKLİYOR. Onaysız kod değişikli
 - Yukarı ve aşağı kazancı ayarda ayrı ölçülür. Kapak eşiği kişinin aşağı bakışından alınır.
 - Asıl düzeltme 2.1: yukarı giderken tahta içinde baş izlemek artık yanal komut üretmez.
 
-### 2.4 Tasarım
-- Gözle oyunda tahtanın dört kenarında yön kapıları: bakış dışarı çıkınca o kapı dolar.
-- Tahtanın altındaki bakış kutusu kalkar, durum tek satır olarak tahtanın üstüne taşınır.
-- Yeni ekranlar: ayar, kontrol, oyun, sonuç. 390 ve 320 genişlik, açık ve koyu tema, 5 kişilik kapı.
+### 2.4 Tasarım: bugünkü ekranlar düzeltilir, sıfırdan yapılmaz
+Bugünkü dört ekran 5 saniye kapısında 0/5 (`5SN_TABAN.md`). Değişiklikler mevcut ekranların üstünde:
+- **Giriş:** canlı tahta önizlemesi başrolde, insan çizimi küçülür ya da "Nasıl oynanır"a iner. "En yüksek skor" 320'de
+  düğmenin üstünde görünür.
+- **Şimdi sen dene → Yılan ayarı:** ayrı kart yerine gerçek tahtanın üstünde. Bakılacak kapı büyük ve parlak, dolan halka.
+  Alttaki tekrar eden kutu kalkar.
+- **Oyun:** tahta daha büyük ve daha kontrastlı, yılan ve yem daha canlı. İki yanda bakılacak görünür yön kapıları için
+  tahta biraz daralır. Alttaki "Bakışla kontrol" kutusu kalkar; durum tek satır olarak tahtanın üstünde.
+- **Sonuç:** skor bir kez ve büyük; rekora kalan; bakış kontrolü isabeti. Arkadaki bulanık kalıntılar kalkar.
+- Her değişen ekran 390 ve 320, açık ve koyu temada yeniden 5 kişilik kapıdan geçer, en çok 2 tur.
 - Yeni her cümle önce taslak olarak sahibe gelir.
+
+### 2.4b Planın kapattığı eksikler (sahip sorusu: "plan mükemmel mi?")
+1. Sağ ve sol: tahtanın iki yanında görünür kapı; kişiden telefonun dışına bakması istenmez.
+2. Oyun sırasında kayma: yem yenince bakış o an yeme yakın sayılır, merkez küçük adımla düzeltilir. Yalnız Yılan
+   kaydına yazılır, sınırlı ve testli.
+3. Hız: başlangıç hızı yeni bekleme süresine göre sentetik gecikme tablosuyla seçilir.
+4. Gerçek göz titremesi bilinmiyor: eşikler sentetikle seçilir, cihaz denetim listesinde doğrulanır; teşhis kaydı
+   ayar verisini de içerir.
+5. "Sağa bak" derken "Sola bakıyorsun": her girişteki yön kontrolü bunu ölçer; ters çıkarsa ayar yenilenir.
+6. Gelişim ölçüsü: anlamlı değişim eşiği yok; Gelişim kendi istatistiğiyle bakar. Yeterli veri gelince eşik konur.
 
 ### 2.5 Gelişim ve Nef
 - Oturum kaydına yalnız sayılar eklenir: kontrol isabeti, kontrol süresi ortancası, ayar kalitesi.
