@@ -36,6 +36,7 @@ yapılmadı: model, ElevenLabs ve banka üretimi yok. Kod, onaydan sonra ana otu
 | OpenAI'den zeki | Dürüst cevap §1'de |
 | PubMed bilgi bankası | `sources.js` genişler: her kaynağın bulgusu, sınırı ve hangi an için kullanılacağı tutulur. Model yalnız bankadan alıntı yapar (§5) |
 | Bütün diller | Cümle bankası, bilgi bankası, ses ve ek tablosu dile göre anahtarlı. Şimdi yalnız `tr` yazılır (§4.7) |
+| Büyüyen, öğrenen Nef | Her modül Nef'e manifestindeki `progress` alanıyla kendiliğinden öğretilir; öğretilmemiş modül testten geçemez. Uyku ölçülünce o da kendiliğinden girer (§4.8) |
 
 ---
 
@@ -353,6 +354,85 @@ kuruyoruz ki sonra yeniden yazılmasın:
 - **Maliyet:** dil başına banka üretimi ≈ 1 USD ve ses ≈ 0,4 USD (§7). Asıl maliyet her dilde bir ana dili
   konuşanın onayıdır.
 
+### 4.8 Büyüyen Nef: her yeni modül Nef'e kendiliğinden öğretilir
+
+Sahip, 2026-10-01: "yeni modüller eklendiğinde nef öğretilmesi lazım … devamlı büyüyen öğrenen bir yapıda olacak …
+gelişim merkezinden veri alarak yönlendirmesi ve takip etmesi gerekiyor her modülü … nef de sadece 3 değil yoga nefes
+dalga göz egzersizleri de olacak; uyku kalitesi ölçülmüyor, ölçüldüğünde olacak".
+
+**Bugünkü durum** (`modules/*/manifest.js`, bu oturumda okundu):
+- 21 canlı modül var. Bunların 9'u `coach()` ile Nef'e özet gönderiyor; Dalga, Gökyüzü, Yön, göz egzersizleri,
+  okuma, mola ve su göndermiyor.
+- Buna karşılık her modül zorunlu `progress` alanında ne ölçtüğünü zaten bildiriyor:
+  - `domain`: hangi alana sayıldığı.
+  - `effects`: öncesi–sonrası puan.
+  - `metrics`: zaman içindeki ölçüm.
+- Gelişim de bunu okuyor. Nef'in ayrıca `coach()` istemesi gereksiz bir ikinci kapı.
+
+**Öneri: Nef de `progress`'i okur; modül eklemek Nef'i de büyütür.**
+
+1. **Genel an türleri.** Her modülden kendiliğinden çıkar, modül ek kod yazmaz. Veri Gelişim merkezinden gelir
+   (`growthCenter`, `acuteEffects`, `metricTrend`, `verifiedChange`).
+
+| Modülde ne varsa | Nef'in kendiliğinden kurduğu an | Örnek (taslak) |
+|---|---|---|
+| `effects` (öncesi–sonrası) | `recallEffect`, `effectPattern` | "Geçen hafta bu akşam Dalga'dan sonra sakinliğin 4'ten 7'ye çıkmıştı." |
+| `metrics`, `better` yönünde rekor | `metricBest` | "Sayı hafızan ilk kez 7 haneye çıktı." |
+| `metrics`, doğrulanmış değişim | `metricChange` (yalnız `verifiedChange` ya da `meaningful` eşiği geçilince) | "Okunuş bulmada son iki haftada ortalaman 3 saniye kısaldı." |
+| `progression` basamağı | `ladderStep` | "Nefes bugün 3 dakikaya çıkıyor." |
+| İlk kayıt | `firstTime` | "İlk yoga dersin tamam." |
+| Uzun ara | `returnAfterGap` | Onaylı cümle 3: "Kaldığın yerden: basamakların aynı." |
+| `remind` saati ile gerçek saat farkı | `drift` (F8) | "Yogayı son iki haftada çoğunlukla 07.30'da yaptın…" |
+
+2. **İsteğe bağlı `nef` alanı.** Manifeste yeni bir alan gelir; hepsi isteğe bağlıdır.
+   - `name`: modülün Türkçe çekimleri. "Dalga" → "Dalga'dan", "Dalga'yı". Yoksa ek tablosu ünlü uyumuyla kurar; özel
+     adlarda modül kendi çekimini verir. Dil başına ayrı tutulur (§4.7).
+   - `metricWords`: metrik sözcükleri; örneğin `span` → "hane", `ms` → "saniye".
+   - `moments`: modüle özel an kuralı (saf işlev, test edilir). Örnek: yoga "sabah dersinden sonraki gece uykuya
+     dalma kolaylığı" sorusu.
+   - `cells`: o modüle özel onaylı cümle hücreleri; bankada `bank/tr.js` içinde modül kimliğiyle durur.
+   - `evidence`: bilgi bankası anahtarları. Modülün `remind.science` alanında zaten en az bir PubMed kaynağı var;
+     Nef aynı havuzu kullanır.
+   - `note`: modülün kendini Nef'e tanıtan tek satırı (`YOL.nef.md` §4.4 `coachNote`); mektup isteminde kullanılır.
+3. **Sözleşme testi** (`registry.test.js` yanında). Her canlı modül için şunlar denetlenir:
+   - En az bir genel an üretilebiliyor mu?
+   - Ad çekimi her ek için doğru mu?
+   - `evidence` anahtarları `sources.js`'te PMID ve DOI ile kayıtlı mı?
+   - Bankada o modülün genel hücrelerinde onaylı cümle var mı?
+
+   Bunlardan biri yoksa test düşer. Yani **Nef'e öğretilmemiş modül yayına çıkamaz**.
+4. **Mektup ve sohbet de kendiliğinden büyür.** Haftalık paket modül listesini manifestlerden kurar. `coachCore.js`'in
+   bugünkü "en çok 10 modül" sınırı (ACIK_ISLER) yerine haftanın en çok 4 olayı seçilir. Model yeni modülü `note`
+   satırından tanır; istem elle değişmez.
+
+**Bugünkü modüllerde Nef'in takip edeceği** (ilk sürümde genel anlarla):
+
+| Alan | Modül | Nef'in okuduğu |
+|---|---|---|
+| Göz | E testi, okuma, rutin, kırpma, günlük | Haftalık ölçüm ve doğrulanmış değişim (sabit doktor cümleleri modelden ve an motorundan bağımsız kalır), basamak, gün sayısı |
+| Sakinlik | Nefes, Dalga (sakin, güç, motive), Gökyüzü, yoga | Öncesi–sonrası puanlar, basamak, ders sayısı, yoganın uyku sorusu |
+| Dikkat | Çemberler, Yılan, Hızlı Bakış, Tek Bakışta | Rekor, isabet, doğrulanmış değişim |
+| Farkındalık | Fark ettin, Farkındalık, notice | Gün ve ölçüm serisi |
+| Kendin | Yön | "Dışarıdan bak" rahatsızlık puanı, ayna puanı |
+| İyi oluş | WHO-5, alarm | WHO-5 durumu (düşükse yalnız sabit yönlendirme); alarm ve uyku saati düzeni |
+| Beden | Mola, su, yürüyüş (B3) | Gün sayısı, adım (yalnız telefonda; Apple Sağlık verisi sunucuya gitmez) |
+| Uyku | **Henüz ölçülmüyor** | Uyku modülü `metrics` ile geldiği gün Nef'in genel anları kendiliğinden açılır. Nef o güne kadar uyku hakkında yorum yapmaz |
+
+**Sahibin örnekleriyle gelecekteki iki modül:**
+- **Sayı hafızası** (rakamları aklında tutma). `metrics: [{ key: 'digits', unit: 'hane', better: 'up' }]` ve
+  `effects` yoksa Nef kendiliğinden şunu söyler: "Sayı hafızan ilk kez 7 haneye çıktı." ve "Son iki haftada en iyi
+  dizin 6 haneden 7'ye." Sağlık ya da "zekâ artar" iddiası yok; kaynak modül tasarlanırken PubMed'de taranır.
+- **Okunuş bulma** ("hvaa" → "hava"). `metrics: [{ key: 'solveMs', unit: 'saniye', better: 'down' }, { key: 'solved',
+  better: 'up' }]` → "Karışık kelimeleri bu hafta ortalama 4 saniyede buldun; geçen hafta 6'ydı." Kelime listesi dile
+  göre ayrı tutulur (§4.7).
+
+**"Zeki olduğunu anlaması" için kural:** Nef her modülde ilk kez **kişiye özgü bir olgu** söylediği anda bunu
+kaydeder (`nef-said`). Kişi ilk 7 günde en az 3 farklı modülden böyle bir cümle görür; eşik VARSAYIM, ilk ay ölçülür.
+5 saniye kapısının dersi de bu: etkileyen şey kişinin kendi olgusu (§9).
+
+**Bilim kuralı:** yeni modül bilgi bankasına en az bir PubMed kaynağı getirmeden (bulgu ve sınırıyla, §5) Nef o
+modül için bilim satırı kuramaz. Kaynak yoksa Nef yalnız kişinin kendi sayısını söyler, "kanıt" sözü etmez.
+
 ---
 
 ## 5. PubMed bilgi bankası
@@ -481,6 +561,7 @@ Sıra, onaylı işlerin önüne geçmez. N1, B1b ve B2 sabah havasıyla birlikte
 - İçerik:
   - `lib/nef/` iskeleti: moments, speak, memory, `bank/tr.js`, `tr.grammar.js`.
   - F1 (F3 yan cümlesiyle), F2, F4.
+  - Genel an türleri ve modül sözleşme testi (§4.8): bugünkü 21 canlı modülün hepsi Nef'e bağlanır.
   - Mevcut Nef seslerinin an motoruna taşınması: eşdeğerlik 0 fark.
   - `nef-said` hafızası; `planNef` 7900–7919.
   - Bugün kartının model çağrısının kalkması.
