@@ -10,6 +10,9 @@ sayfası: `tasarim.html` (Artifact). Maket: `maket/maket.html`. Kapı notları: 
 
 ---
 
+> **2026-10-01 notu:** Ekran tasarımı (§1–§2, §4.1, §5'in ilk üç satırı) `DEVIR.md` ile değişti: ışık kubbesi yerine
+> "ışıktan baş" (`maket/ordu/parcacik/v6.html`). Veri, bildirim, rıza, kod sözleşmesi, kalite ve sıra bölümleri geçerli.
+
 ## 1. Tek sayfada
 
 **Ne değişir.** Gelişim sekmesinin başı, verinin hepsinin toplandığı tek bir canlı resim olur: **ışık kubbesi.** Tabanda
