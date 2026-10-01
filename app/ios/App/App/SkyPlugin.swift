@@ -360,6 +360,7 @@ enum SkyWeather {
             let row: [String: Any] = [
                 "at": ms(at),
                 "tempC": celsius(h.temperature),
+                "apparentC": celsius(h.apparentTemperature),
                 "precipChance": chance(h.precipitationChance),
                 "symbol": h.symbolName
             ]

@@ -84,7 +84,7 @@ export const MODULES = [
 ]
 
 // Sabah havası girdisi (weatherNotify.planMorningWeather): önbellek now'dan 0–20 saat önce çekilmiş (18 saat sınırının
-// iki yanı), bugün + yarın saatlik satırlar, rastgele yağmur saatleri; ayar alarm/alarmsız/"alarmsız günde gönderme".
+// iki yanı), bugün + yarın saatlik satırlar (hissedilen apparentC dâhil), rastgele yağmur saatleri; ayar alarm/alarmsız/"alarmsız günde gönderme".
 export function makeWeatherInput(rnd, now) {
   const pick = (list) => list[Math.floor(rnd() * list.length)]
   const H = 3600000
@@ -93,7 +93,10 @@ export function makeWeatherInput(rnd, now) {
   const rainAt = rnd() < 0.4 ? Math.floor(rnd() * 48) : -1
   const hours = Array.from({ length: 48 }, (_, h) => {
     const at = new Date(d0.getFullYear(), d0.getMonth(), d0.getDate() + Math.floor(h / 24), h % 24).getTime()
-    return { at, tempC: Math.round(-5 + rnd() * 40), precipChance: rainAt >= 0 && h >= rainAt && h < rainAt + 3 ? 0.8 : 0.1 }
+    const tempC = Math.round(-5 + rnd() * 40)
+    // apparentC rnd çağırmaz (dizi ve öteki bağlamlar değişmesin). Swift hours[] satırı da apparentC taşır
+    // (SkyPlugin.swift hourRows; karar 2: bildirim saatindeki hissedilen)
+    return { at, tempC, apparentC: tempC - 2, precipChance: rainAt >= 0 && h >= rainAt && h < rainAt + 3 ? 0.8 : 0.1 }
   })
   const days = [0, 1].map((off) => {
     const d = new Date(d0.getFullYear(), d0.getMonth(), d0.getDate() + off)

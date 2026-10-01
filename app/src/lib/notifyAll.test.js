@@ -340,13 +340,13 @@ describe('planAll: kurallar', () => {
   })
 })
 
-// Sabah havası (lib/weatherNotify.js, 1. katman; PLAN.v1 §2 "Sabah havası", §3.B.4). Metin sahip onaylı şablonlardan
-// gelir; burada metinsiz plan sınanır (notifyApply metinsizi kurmaz).
+// Sabah havası (lib/weatherNotify.js, 1. katman; PLAN.v1 §2 "Sabah havası", §3.B.4). Metin sahip onaylı cümlelerden
+// (MORNING_TEMPLATES, sabah-havasi-onay.md) planda bağlanır; metin bağlanamayan gün plana girmez.
 describe('planAll: sabah havası', () => {
   const HOUR = 3600000
   const wxCache = (fetched = new Date(2026, 8, 30, 6, 50)) => {
     const d0 = new Date(2026, 8, 30)
-    const hours = Array.from({ length: 48 }, (_, h) => ({ at: d0.getTime() + h * HOUR, tempC: 18, precipChance: 0 }))
+    const hours = Array.from({ length: 48 }, (_, h) => ({ at: d0.getTime() + h * HOUR, tempC: 18, apparentC: 17, precipChance: 0 }))
     return { at: fetched.toISOString(), data: { fetchedAt: fetched.getTime(), hours, days: [{ date: dayKey(d0), highC: 24 }, { date: dayKey(new Date(2026, 9, 1)), highC: 22 }] } }
   }
   const WX = { cache: wxCache(), place: { il: 'İzmir', ilce: 'Gaziemir' }, localRefresh: null }
@@ -369,6 +369,10 @@ describe('planAll: sabah havası', () => {
     expect(w[0].extra).toMatchObject({ kind: 'weather', date: dayKey(NOW), alarm: false })
     expect(w[0].at.getTime()).toBe(at(8, 0))
     expect(p.notifications.filter((n) => n.id < 7700)).toEqual(planNotifications(i).notifications)
+    // Onaylı metin bağlı (notifyApply kurar); texts: true onu değiştirmez
+    expect(w[0].title).toBe('Gaziemir 18° · en çok 24°')
+    expect(w[0].body).toBe('Sabah 06.50 tahminine göre kuru bir gün bekleniyor; hissedilen 17°, serin.\nKaynak: Apple Weather')
+    expect(weatherOf(planAll({ ...i, texts: true }))).toEqual(w)
   })
 
   it('alarma bağlı hava 30 dk kuralından ve gece sessizliğinden muaf; alarmsız hava ikisine de uyar', () => {
@@ -378,10 +382,12 @@ describe('planAll: sabah havası', () => {
     const a2 = planAll(base({ morningWeather: true, weather: WX, alarm: ALARM(7, 50), moduleReminders: { dalga: man(['08:15']) } }))
     expect(weatherOf(a2).map((n) => n.at.getTime())).toEqual([at(8, 0)])
     expect(a2.notifications.some((n) => n.id >= 7800 && n.id <= 7859 && n.at.getTime() === at(8, 15))).toBe(true)
-    // Alarmsız 08.00: sessizlik 10.00'a dek sürerse (60 dk kaydırma yetmez) kurulmaz
+    // Alarmsız 08.00: sessizlik 09.00'dan sonra (10.00'da) biterse sessizliğin bittiği dakikada (sahip kararı 4)
     const q = planAll(base({ morningWeather: true, weather: WX, quiet: { from: '23:00', to: '10:00' } }))
-    expect(weatherOf(q)).toEqual([])
-    expect(q.skipped).toContainEqual({ module: 'weather', date: dayKey(NOW), time: null, reason: 'night' })
+    expect(weatherOf(q).map((n) => n.at.getTime())).toEqual([at(10, 0)])
+    expect(weatherOf(q)[0].extra.shifted).toBe(true)
+    const q2 = planAll(base({ morningWeather: true, weather: WX, quiet: { from: '23:00', to: '09:40' } }))
+    expect(weatherOf(q2).map((n) => n.at.getTime())).toEqual([at(9, 40)])
     // Alarmsız 08.00 önce yerini alır; 08.10'daki elle seçilmiş hatırlatma 30 dk kuralıyla düşer
     const g = planAll(base({ morningWeather: true, weather: WX, moduleReminders: { dalga: man(['08:10']) } }))
     const gw = weatherOf(g)

@@ -10,8 +10,10 @@
 //   - 74xx ve 75xx hiçbir zaman birleşmez, kaymaz, metni/kimliği/saati değişmez, tavana sayılmaz, kırpılmaz.
 //   - İki bildirim arasında en az 30 dk (planlayıcı güvencesi; kurulumda 60 dk ayar anında aranır). Alarm bu listede
 //     değil (AlarmKit); alarma bağlı sabah havası istisnadır (30 dk'ya ve gece sessizliğine uymaz, 01.00–05.00'e uyar).
-//     Alarmsız günün sabah havası gece sessizliğine ve 30 dk'ya uyar; çakışırsa 15 dk adımla en çok 60 dk ileri kayar
-//     (VARSAYIM), yer yoksa o gün kurulmaz. Sabah havası modül hatırlatmalarından önce yer alır.
+//     Alarmsız günün sabah havası gece sessizliğine ve 30 dk'ya uyar: sessizliğin sabah ucundaysa weatherNotify onu
+//     sessizlik bitimine kaydırır (09.00'dan sonra biterse bitiş dakikası; sahip kararı 4), 30 dk'ya çakışırsa burada
+//     15 dk adımla en çok 60 dk ileri kayar (VARSAYIM), yer yoksa o gün kurulmaz. Sabah havası modül
+//     hatırlatmalarından önce yer alır.
 //   - Yalnız elle seçilmiş iki modül hatırlatması 30 dk içine düşerse tek bildirimde birleşir; "Sen karar ver" saati
 //     boş dilime kayar; öteki çakışan yeni bildirim düşer.
 //   - Oturum sürerken modül hatırlatması ve ek saat yok. Günde en çok 6 modül bildirimi; fazlası birleşir.
@@ -151,7 +153,7 @@ export function planAll(input = {}) {
   const inBed = (ms) => blocks.some(([a, b]) => ms >= a && ms < b)
   const fixedNudgeMs = base.notifications.filter((n) => isFixedNudge(n.id)).map((n) => n.at.getTime())
   const wx = weatherOn
-    ? planMorningWeather({ now, morning: input.morningWeather, alarm, cache: input.weather.cache ?? null, place: input.weather.place ?? null, log: base.log, localRefresh: input.weather.localRefresh ?? null, templates: input.weather.templates ?? null })
+    ? planMorningWeather({ now, morning: input.morningWeather, alarm, cache: input.weather.cache ?? null, place: input.weather.place ?? null, log: base.log, localRefresh: input.weather.localRefresh ?? null, quiet: normalizeQuiet(quiet), ...('templates' in input.weather ? { templates: input.weather.templates } : {}) })
     : { notifications: [], skipped: [] }
   const remindOf = (id) => (id === PATH_ID ? (modules.find((m) => m?.id === PATH_ID)?.remind ?? PATH_REMIND) : modules.find((m) => m?.id === id)?.remind)
 
@@ -206,9 +208,9 @@ export function planAll(input = {}) {
     }
 
     // 1b) Sabah havası (günde tek). Alarma bağlı olan istisna: 30 dk'ya ve gece sessizliğine bakılmaz, başkalarını da
-    // itmez (taken'a girmez). Alarmsız günün havası sessizliğe ve 30 dk'ya uyar; çakışırsa en çok 60 dk ileri kayar.
-    // VARSAYIM (planda yok, sahip kararı bekliyor): 15 dk adım, en çok 60 dk. Sonuç: sessizliği 09.00'dan geç biten
-    // kişiye alarmsız günde sabah havası gelmez (skipped 'night').
+    // itmez (taken'a girmez). Alarmsız günün havası sessizliğe ve 30 dk'ya uyar: sessizlik kaydırması weatherNotify'da
+    // (karar 4: 09.00'dan sonra biten sessizlikte bitiş dakikası, 60 dk sınırı yok); burada 30 dk çakışmasında
+    // VARSAYIM 15 dk adım, en çok 60 dk.
     const weather = []
     for (const n of wx.notifications) {
       if (n.extra.alarm || n.keepPending) {
@@ -227,6 +229,7 @@ export function planAll(input = {}) {
       }
       taken.push({ ms: placed, kind: 'weather' })
       weather.push(placed === ms0 ? n : { ...n, at: new Date(placed), extra: { ...n.extra, shifted: true } })
+      // VARSAYIM (sınır): weatherNotify'ın 'opened' (karar 5) denetimi bu 30 dk kaydırmasından önceki saate göredir
     }
 
     // 2) Modül hatırlatmaları: önce elle seçilenler, sonra "Sen karar ver" (kayabilen) saatleri
