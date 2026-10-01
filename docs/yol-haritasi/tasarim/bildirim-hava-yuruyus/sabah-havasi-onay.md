@@ -1,4 +1,6 @@
-# Sabah havası: önerilen cümleler (onayına)
+# Sabah havası: cümleler
+
+**ONAYLANDI (sahip, 2026-10-01: "uygula").** Beş karar önerilerle: (1) yağmur %60+ "bekleniyor", %30–59 "olasılığı %N" (bu hücrenin cümlesi yeni, ayrıca onaya), %30 altı kuru; (2) hissedilen bildirim saatindeki değer, hücre de ondan; (3) ilçe adı 12 harften uzunsa başlıkta yalnız sıcaklık; (4) sessizlik 09.00'dan sonra biterse alarmsız günde sessizlik bitince gelir; (5) uygulama bildirim saatinden sonraki 2 saat içinde açılırsa o günün bildirimi iptal.
 
 Her hücreye tek cümle; hepsi yürüyüş önerisi taşımıyor, o yüzden deneyde yürüyüşün sessiz gününde de aynı cümle gider. Başlık hepsinde aynı: "Gaziemir 17° · en çok 26°". Gövdenin son satırı "Kaynak: Apple Weather". Uzunluk bu satır dâhil, 110 sınırı; en kötü değerlerle (eksi 12°, 45°) ölçüldü. İki incelemenin düzelttiği her şey işlendi; reddedilen aday yok.
 

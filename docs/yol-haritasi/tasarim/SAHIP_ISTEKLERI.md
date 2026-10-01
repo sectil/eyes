@@ -128,3 +128,7 @@ Sahip: "il ilçeyi otomatik konumumdan bulması lazım, kullanıcı girmesine ge
 en yakın ilçe merkezi telefondaki tablodan (ters coğrafi kodlama yok, sunucuya gitmez) kendiliğinden seçilir; ekranda
 "Değiştir" bağlantısı kalır. Liste yalnız izin yokken ya da kişi değiştirmek isterse açılır. "…'de misin?" onayı adımı
 kalkar. Plan §3.B.1'in "ilçe listeden" kuralını değiştirir.
+
+## Ana sayfa: iris ilk 7 gün ilk ekranda yok; hava Ana sayfada denensin (2026-10-01)
+Sahip: "uygula, ana sayfada da deneyelim." İris yeni kullanıcının ilk 7 gününde ilk ekrandan çıkar (yerine yol öne gelir;
+iris yeterince dolunca görünür). Hava satırı Ana sayfada TestFlight test derlemesinde denenir (App Store'da kapalı).
