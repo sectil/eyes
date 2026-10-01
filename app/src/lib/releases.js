@@ -6,6 +6,16 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Alarm: erteleme kaldırıldı (sahip kararı 2026-10-01), telefonda kaybolan alarm uyarısı, tek seferlik alarm özeti.
+    id: '2026-10-01-7',
+    title: '1 Ekim, yedinci güncelleme',
+    items: [
+      { kind: 'change', text: "Alarmda erteleme yok: alarm çalınca kapatırsın ya da \"Nefona'yı aç\"a dokunursun." },
+      { kind: 'new', text: 'Alarmın telefonda kurulu değilse Ana sayfada uyarı çıkar; "Yeniden kur" ile tek dokunuşta yeniden kurarsın.' },
+      { kind: 'change', text: 'Gün seçmeden alarm kurarsan, düğmelerin üstünde ne zaman bir kez çalacağı yazar.' },
+    ],
+  },
+  {
     id: '2026-10-01-6',
     title: '1 Ekim, altıncı güncelleme',
     items: [
