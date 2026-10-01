@@ -81,7 +81,7 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
 - [ ] B3 yürüyüş eşliği. · [ ] B3+ Canlı Etkinlik.
 
 **Cihazdan gelen düzeltmeler (sahip, 2026-10-01, Build 69)** — hepsi `[ ]`; büyük olanlar önce plan + onay
-- [ ] D1 **Hava il adımında yer tutucu görünüyor:** "[[sky.place.ilSor]]" ve "[[sky.place.ilAra]]" (`SkyPlace.jsx`, il
+- [~] D1 **Hava il adımında yer tutucu görünüyor:** (sahip onayladı, koda girdi; cihazda bakılacak) "[[sky.place.ilSor]]" ve "[[sky.place.ilAra]]" (`SkyPlace.jsx`, il
       adımının iki cümlesi onaysız kalmış). Taslak, onaya: "Hangi ildesin?" ve "İl ara" (onaylı "Hangi ilçedesin?" /
       "İlçe ara" ile aynı kalıp).
 - [ ] D2 **İl seçince onay düğmesi yok:** İzmir seçildi; ilçe adımındaki "Yalnız İzmir" satırı bir onay gibi okunmuyor.
@@ -89,12 +89,14 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
 - [ ] D3 **Konum kendiliğinden bulunmadı, liste açıldı** (karar: il ve ilçe konumdan kendiliğinden). Nedeni bilinmiyor
       (izin mi, konum yanıtı mı, tablo eşleşmesi mi). Önce tanı: hava akışına neden kaydı; sonra düzeltme.
 - [ ] D4 **Alarm (06.35):** gece ekranı ve uyku müziği çalışıyor; alarm bir kez çaldı, beklenen ikinci çalış olmadı.
-      Sahibe soru: ertesi gün mü çalmadı, yoksa ertelemeden sonra mı? Tanı: alarm günlüğü ve AlarmKit kaydı.
+      Sahip: ertesi gün çalmadı. Bulgu: uygulama alarmın telefonda gerçekten kurulu olup olmadığını hiç sormuyor
+      (`AlarmPlugin.current` JS'te çağrılmıyor); "kurulu" yazısı yalnız uygulamanın kendi kaydından. Neden henüz bilinmiyor.
 - [ ] D5 **Hatırlatmalarda "Çoğu gün" / "Gün aşırı" kalkar:** alarmdaki gibi gün seçimi (Pzt–Paz), günleri kişi seçer.
       VARSAYIM: "Bazı günler bilerek göndermiyoruz" seyreltmesi de kalkar (kişinin seçtiği gün geçerli) — onaya.
 - [ ] D6 **Saat kısıtı kalkar:** hatırlatmalarda ve göz çalışması hatırlatmasında kişi her saati seçebilir ("Saat
       09:00–21:00 arasında olmalı" kalkar). Yerine bilgi satırı, örnek: "Bu saatte 3 bildirimin var · Bildirimleri
-      göster". `lib/reminders.js`'e dokunmayı gerektirir (bildirim işinde o dosyaya dokunma yasağı var) — sahip izni gerek.
+      göster". Sahip `lib/reminders.js` için izin verdi (2026-10-01). Planlayıcı (`notifyPlan.js`) da pencere dışını atlıyor
+      ve sessiz gün deneyi (%25) var: ikisi için ayrı izin ve eşdeğerlik testinin bilerek değişmesi gerekiyor.
       Gece sessizliği ile ilişkisi planda yazılır.
 
 **Sahipte bekleyenler:** (1) `sky-check.sh` çıktısı; (2) Build 67'de Y1'in 10 maddesi; (3) B2'nin 5 yeni cümlesi

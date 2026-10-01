@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react'
 import { ChevronLeft, ChevronRight, MapPin, Lock, Search } from 'lucide-react'
 import { ilList, searchIlce, accusative, fold } from '../lib/places.js'
-import { PH } from '../lib/sky.js'
 import '../styles/sky.css'
 
 // K · il ve ilçe seçimi (tasarım b2-tasarim/K-C, 5sn-b2.md: 4/5 geçti). Yaklaşık konum yalnız ili bulur ("yaklaşık"
@@ -26,7 +25,7 @@ export default function SkyPlace({ il: il0 = null, approx: approx0 = false, onPi
         <span className="sky-nef" aria-hidden="true" />
         <p className="sky-bubble">
           <span className="sky-who">Nef</span>
-          {!il ? PH('sky.place.ilSor') : approx ? `${accusative(il)} buldum. Hangi ilçedesin?` : 'Hangi ilçedesin?'}
+          {!il ? 'Hangi ildesin?' : approx ? `${accusative(il)} buldum. Hangi ilçedesin?` : 'Hangi ilçedesin?'}
         </p>
       </div>
       {il && (
@@ -42,7 +41,7 @@ export default function SkyPlace({ il: il0 = null, approx: approx0 = false, onPi
       <p className="sky-keep"><Lock size={15} aria-hidden="true" /><span>Telefonda yalnız il ve ilçe adı kalır.</span></p>
       <label className="sky-search">
         <Search size={18} aria-hidden="true" />
-        <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={il ? 'İlçe ara' : PH('sky.place.ilAra')} aria-label={il ? 'İlçe ara' : PH('sky.place.ilAra')} />
+        <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={il ? 'İlçe ara' : 'İl ara'} aria-label={il ? 'İlçe ara' : 'İl ara'} />
       </label>
       <div className="sky-list" role="list">
         {il && !q && (

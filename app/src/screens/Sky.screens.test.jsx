@@ -84,9 +84,10 @@ describe('K · il ve ilçe', () => {
     await v.tap('Yalnız İzmir')
     expect(got).toEqual({ il: 'İzmir', ilce: null, approx: true })
   })
-  it('konum yok: önce il listesi (yer tutuculu soru), il seçilince ilçeler', async () => {
+  it('konum yok: önce il listesi ("Hangi ildesin?"), il seçilince ilçeler', async () => {
     const v = await mount(h(SkyPlace, { il: null, onPick: () => {}, onBack: () => {} }))
-    expect(v.text()).toContain('[[sky.place.ilSor]]')
+    expect(v.text()).toContain('Hangi ildesin?')
+    expect(v.text()).not.toContain('[[')
     expect(v.btns((n) => n.getAttribute('role') === 'listitem')).toHaveLength(81)
     await v.tap('Bursa')
     expect(v.text()).toContain('Hangi ilçedesin?')
