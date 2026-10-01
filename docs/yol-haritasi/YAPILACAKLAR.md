@@ -108,8 +108,8 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
       (güvenli alan payıyla; `Paywall.jsx` `pw-cta` örneği), içerik arkasında kayar; 320×568 (iPhone SE) dahil her ekran
       çekilip denetlenir.
 - [ ] D8 **Düğmeye basınca hafif, şık bir titreşim** (sahip): her düğmede zaten hafif titreşim var (`installTapHaptics`,
-      Bilgi'de "Titreşim" ayarı). Telefonda hissedilip hissedilmediği doğrulanmadı (yukarıda "Şimdi" madde 5). Sahibe soru:
-      titreşim mi, düğmenin görsel küçük sallanması mı, ikisi mi?
+      Bilgi'de "Titreşim" ayarı). Sahip: ikisi birden (titreşim + düğmenin yaylı basış hareketi); ŞU AN HİÇ TİTREMİYOR
+      (hata). Tanı: Bilgi → "Titreşimi dene" sonucunun ekran görüntüsü (hangi yol çaldı, hata).
 
 **Sahipte bekleyenler:** (1) `sky-check.sh` çıktısı; (2) Build 67'de Y1'in 10 maddesi; (3) B2'nin 5 yeni cümlesi
 ("Hangi ilçedesin?", "İlçe ara", "Yalnız İzmir", "Konumuna en yakın ilçe merkezi bu.", "Konum") ve rızada "Nerede
