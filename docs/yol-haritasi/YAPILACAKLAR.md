@@ -98,7 +98,8 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
 - [ ] D6 **Saat kısıtı kalkar:** hatırlatmalarda ve göz çalışması hatırlatmasında kişi her saati seçebilir ("Saat
       09:00–21:00 arasında olmalı" kalkar). Yerine bilgi satırı, örnek: "Bu saatte 3 bildirimin var · Bildirimleri
       göster". Sahip `lib/reminders.js` için izin verdi (2026-10-01). Planlayıcı (`notifyPlan.js`) da pencere dışını atlıyor
-      ve sessiz gün deneyi (%25) var: ikisi için ayrı izin ve eşdeğerlik testinin bilerek değişmesi gerekiyor.
+      ve sessiz gün deneyi (%25) var. Sahip: notifyPlan.js izinli, sessiz gün kalkar, su 18.00 ve 1 saat kuralı kalkar.
+      Plan: `tasarim/bildirim-hava-yuruyus/D5-D6-plan.md` (onay bekliyor).
       Gece sessizliği ile ilişkisi planda yazılır.
 
 **Sahipte bekleyenler:** (1) `sky-check.sh` çıktısı; (2) Build 67'de Y1'in 10 maddesi; (3) B2'nin 5 yeni cümlesi
