@@ -44,3 +44,36 @@ Görüntüler: `tur1/`, `tur2/`. Kaynak dosya: `ornekler.html`, 2. tur hâli.
    Kodlanınca yeniden kapıya girer.
 
 Sahibe yalnız M2 "geçti" diye gösterilir. Öbürleri bu tabloyla birlikte, sonuçlarıyla anlatılır.
+
+## Tur 3 · yöntem değişti: her parça için üç yön (2026-10-01)
+
+Beş yeni değerlendirici baktı: esnaf, kıdemli tasarımcı, acil doktoru, edebiyat öğretmeni ve koşucu öğrenci.
+Görüntüler `tur3/`, kaynak dosya `tur3.html`.
+
+| Taslak | Evet | Seçen | Sonuç |
+|---|---|---|---|
+| M1A · "Yürüyüşün yağmura denk geliyor" · erken çık | 0/5 | 0 | Kaldı: "düz hava uyarısı" |
+| M1B · "Bugün yürüyüş 18.00'de" | 2/5 | 1 | Kaldı: "bir saat erken" ile 18.00 arasındaki 1,5 saat çelişki |
+| **M1C · "Bu hafta üç akşam 19.30'da yürüdün. Bugün yağmur 19.00'da bekleniyor; 18.00'de çıkabilirsin."** | **4/5** | **4** | **Geçti** |
+| **M4A · tek cümle başlık + 7 günlük şerit + tek öneri** | **5/5** | **4** | **Geçti** |
+| M4B · "Geçen haftan" başlık + şerit + cümle | 0/5 | 0 | Kaldı: başlık yarım, tekrar |
+| M4C · kısa düz mektup, imzalı | 2/5 | 1 | Kaldı: "sıcak ama sıradan kart" |
+| M5A · Çemberler rekoru, son 10 tur çubuğu | 3/5 | — | Kaldı: oyun adı ve çubuk farkı anlaşılmadı |
+| M5B · nefes 1 → 2 → 3 dk basamağı | 0/5 | — | Kaldı: "bildik ilerleme kartı" |
+| **M5C · "Beş alanın dördünde çalıştın. Sırada Dikkat var."** | **4/5** | — | **Geçti** |
+
+**Ders:** geçen üçü de kişinin kendi düzeninden bir olgu söylüyor:
+- M1C: "üç akşam 19.30".
+- M4A: "yağmurda nefesi seçtin".
+- M5C: "dört alan, sırada Dikkat".
+
+Kalanlar ya genel bilgi veriyor ya da bildik bir ilerleme kartına benziyor.
+
+**Geçtikten sonra yapılan iki küçük düzeltme** (değerlendiricilerin notu; yeniden kapıya girmedi, görüntüler güncel):
+- M4A'da 320 genişlikte "19.30" alt satıra düşüyordu. Metin "Bu hafta: salı, perşembe 19.30" oldu.
+- M5C'de "Yılan"ın ne olduğu anlaşılmıyordu. Düğme "Dikkat için Yılan oyunu" oldu, çubuğun anlamı bir satırla yazıldı.
+
+**Kalan uyarılar:**
+- Kilit ekranında uygulama adı NEFONA görünür. Bu iOS'un düzeni.
+- Oyun adları (Çemberler, Yılan) ilk kez görene yabancı. Nef cümlelerinde modül adı geçerken türü de yazılır, örneğin
+  "Yılan oyunu". Bu kural plan §4.8'e işlendi.

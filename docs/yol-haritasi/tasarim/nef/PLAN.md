@@ -98,8 +98,11 @@ Bütün telefon kurallarının token maliyeti 0'dır. Sinyal adlarının nerede 
   kişinin kurduğu yürüyüş hatırlatması ya da son 28 günün yürüyüş adımlarından çıkan alışkanlık saati.
 - An: sabah havası bildiriminin yerine ya da yürüyüş hatırlatmasının metni olarak. Günde tek hava cümlesi kuralı
   bozulmaz.
-- Örnek: başlık "Yağmur 19.00'da bekleniyor", gövde "Her zamanki 19.30 yürüyüşünü bir saat öne alırsan yağmura
-  kalmazsın." (görsel M1).
+- Örnek (görsel M1C, 5 saniye kapısında 4/5 ile **geçti**): başlık "Yürüyüşün yağmura denk geliyor", gövde "Bu hafta üç
+  akşam 19.30'da yürüdün. Bugün yağmur 19.00'da bekleniyor; 18.00'de çıkabilirsin."
+- Cümle önce kişinin kendi düzenini söyler, sonra havayı. Kişisel olgu yoksa (yürüyüş alışkanlığı oluşmadıysa) bu an
+  kurulmaz; düz hava uyarısı 0/5 aldı (M1A).
+- Saatler tutarlı olmalı: "bir saat erken" deyip 1,5 saat önceki saati önermek güveni kırdı (M1B).
 - Neden şaşırtır: hava uygulaması yağmuru söyler; Nef **senin** yürüyüşünü söyler.
 - iOS: var olan sabah havası yolu kullanılır. Türkiye'de Apple'ın dakikalık yağmuru yok
   (support.apple.com/105038), saatlik tahmin yeter.
@@ -145,9 +148,11 @@ Bütün telefon kurallarının token maliyeti 0'dır. Sinyal adlarının nerede 
   Olguları an motoru seçer.
 - An: Pazartesi, kişinin en sık açtığı saatte, Ana sayfada kart. Bildirim isteğe bağlı ve varsayılan kapalı
   (Gelişim planındaki "Haftalık gelişim" satırıyla birleşir; iki ayrı Pazartesi bildirimi olmaz).
-- Örnek (görsel M4): "Yedi günün beşinde geldin. Perşembe akşamı nefesten sonra sakinliğin 2'den 4'e çıktı. Yağmurlu
-  iki akşam yürüyüş yerine nefesi seçtin; düzenin bozulmadı." ve "Bu haftaya tek öneri: yürüyüşün en çok 19.00'da.
-  Salı ve perşembe bu saat senin olsun."
+- Görünüm (görsel M4A, 5 saniye kapısında 5/5 ile **geçti**):
+  - Tek cümlelik başlık: "Yağmurlu iki akşam yürüyüş yerine nefesi seçtin; düzenin bozulmadı."
+  - Altında 7 günlük şerit: yürüyüş, yağmurlu akşamın nefesi ve boş gün.
+  - En altta tek öneri satırı: "Bu hafta: salı, perşembe 19.30".
+  - Uzun metin yok. Uzun mektup 2/5 aldı: "metin duvarı".
 - Model yalnız cümleyi kurar. Sayılar paketteki sayılarla birebir aynı olmalı; değilse mektup atılır ve şablon
   mektup gösterilir (§6.3).
 - Rıza: `coach` sürüm 2 (`YOL.nef.md` §7.4).
@@ -426,6 +431,9 @@ dalga göz egzersizleri de olacak; uyku kalitesi ölçülmüyor, ölçüldüğü
   better: 'up' }]` → "Karışık kelimeleri bu hafta ortalama 4 saniyede buldun; geçen hafta 6'ydı." Kelime listesi dile
   göre ayrı tutulur (§4.7).
 
+**Modül adı kuralı:** Nef cümlesinde oyun ya da modül adı geçerken türü de yazılır: "Yılan oyunu", "Dalga sesi". 5
+saniye kapısında yalın ad ilk kez görene anlaşılmadı.
+
 **"Zeki olduğunu anlaması" için kural:** Nef her modülde ilk kez **kişiye özgü bir olgu** söylediği anda bunu
 kaydeder (`nef-said`). Kişi ilk 7 günde en az 3 farklı modülden böyle bir cümle görür; eşik VARSAYIM, ilk ay ölçülür.
 5 saniye kapısının dersi de bu: etkileyen şey kişinin kendi olgusu (§9).
@@ -598,18 +606,26 @@ Sıra, onaylı işlerin önüne geçmez. N1, B1b ve B2 sabah havasıyla birlikte
 
 ## 9. 5 saniye kapısı
 
-Dört örnek iki temada, 390 ve 320 genişlikte çizildi (`ornekler/`). Her turda beş yeni ve bağımsız değerlendirici
-baktı. Ayrıntı `ornekler/5sn-sonuclari.md` dosyasında.
+Üç tur yapıldı; her turda beş yeni ve bağımsız değerlendirici baktı. İki tema, 390 ve 320 genişlik. Ayrıntı
+`ornekler/5sn-sonuclari.md` dosyasında. İki tur geçmeyen parçalar için 3. turda yöntem değişti: her biri üç yönle
+çizildi.
 
-| Örnek | Tur 1 | Tur 2 | Sonuç |
-|---|---|---|---|
-| M2 · seni hatırlayan Nef | 5/5 | 4/5 | **Geçti** |
-| M1 · yağmur ve kişinin yürüyüş saati | 5/5 | 3/5 | Aynı tasarım iki turda farklı puan aldı. Kesin değil; kodlanınca yeniden kapıya girer |
-| M4 · Nef'ten mektup | 5/5 | 2/5 | Tur 1 hâli aday. Tur 2'de eklenen ölçek sözü ve metin yükü bozdu, geri alındı |
-| M3 · havaya göre su | 0/5 | 1/5 | **Kaldı.** Yöntem değişti: su ayrı an değil, kişinin yürüyüş cümlesine yan cümle (F3) |
+| Parça | Geçen tasarım | Sonuç |
+|---|---|---|
+| Seni hatırlayan Nef (F2) | M2 | 5/5 ve 4/5 · **geçti** |
+| Yağmur ve kişinin yürüyüş saati (F1) | M1C | 4/5 · **geçti**, 4 kişi en iyisi seçti |
+| Nef'ten mektup (F5) | M4A: tek cümle + 7 günlük şerit + tek öneri | 5/5 · **geçti**, 4 kişi en iyisi seçti |
+| Haftanın alanları, büyüyen Nef (§4.8) | M5C "Sırada Dikkat var" | 4/5 · **geçti** |
+| Rekor kartı (§4.8 `metricBest`) | M5A | 3/5 · kaldı |
+| Basamak kartı (§4.8 `ladderStep`) | M5B | 0/5 · kaldı; basamak bilgisi ayrı Nef kartı olmaz, yolun kendisinde kalır |
+| Havaya göre su (F3) | M3 | 0/5 ve 1/5 · kaldı; yürüyüş cümlesine yan cümle oldu |
 
-Çıkan ders, planın ana fikrini doğruluyor: "akıllı" hissini **kişinin kendi olgusu** veriyor (M2, M1). Havanın ya da
-suyun kendisi vermiyor (M3).
+**Rekor kartı için karar:** iki tur kuralı nedeniyle yeniden denenmedi. Kod aşamasında yeni yöntemle ele alınacak:
+gerçek veri, oyunun türü cümlede, çubuklarda değer etiketi. Kapıdan geçene kadar rekor yalnız Gelişim'de görünür, Nef
+kartı olmaz.
+
+**Çıkan ders:** etkileyen şey kişinin kendi düzeninden bir olgu. Hava, su ya da genel ilerleme kartı tek başına
+etkilemiyor.
 
 ## 10. Sahibe sorular
 
