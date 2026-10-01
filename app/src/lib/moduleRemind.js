@@ -31,13 +31,16 @@ export const SECOND_GAP_MIN = 120 // ikinci saat: aynı günde ilkinden en az 2 
 export const RECALC_DAYS = 14
 export const EXTRA_DONE_MS = 2 * 3600000 // ek saat: o saatten önceki son 2 saatte yapıldıysa düşer (§5.5 madde 1)
 export const PATH_ID = 'path'
-// "Bana hatırlat" kuralları (PLAN.v1 §A.2, §A.4; D5+D6'da değişmedi, eskiden lib/reminders.js'teydi): legacy türlerin
-// 2. ve 3. saati (ek saatler) 09.00–21.00 ve su ≤ 18.00 penceresinde; bildirimler arası en az 60 dk. D5+D6 bu kuralları
-// yalnız Hatırlatmalar'daki ilk saatten (74xx) kaldırdı; buradakiler sahibe ayrı soru.
+// "Bana hatırlat" pencereleri ve 60 dk (PLAN.v1 §A.2, §A.4; eskiden lib/reminders.js'teydi): legacy türler 09.00–21.00,
+// su ≤ 18.00; bildirimler arası en az 60 dk. Sahip kararı (2026-10-01, D5+D6'nın devamı: "kullanıcı istediği saate
+// kurar, bunu kısıtlayamazsın"): bu kurallar yalnız Nef'in KENDİ seçtiği saatlere uygulanır ("Nef seçsin" önerisi ve
+// yeniden hesabı, veri yokken öneri saati; mode 'auto'). Kişinin elle seçtiği saatlere (mode 'manual') pencere, su
+// 18.00 ve 60 dk uygulanmaz; kurulumda yalnız geçersiz saat hatadır (remindTimeError).
 export const LEGACY_WINDOW = Object.freeze({ from: '09:00', to: '21:00' })
 export const WATER_LAST = '18:00'
 export const MIN_GAP_MIN = 60
-// Pencereler (PLAN §A.4 gece kuralı): hareket 09–21, sakin 08–22; legacy türler LEGACY_WINDOW (su ≤ 18.00)
+// Pencereler (PLAN §A.4 gece kuralı; yalnız Nef'in kendi saatleri): hareket 09–21, sakin 08–22; legacy türler
+// LEGACY_WINDOW (su ≤ 18.00)
 export const REMIND_WINDOWS = Object.freeze({
   move: Object.freeze({ from: '09:00', to: '21:00' }),
   calm: Object.freeze({ from: '08:00', to: '22:00' }),
@@ -60,7 +63,7 @@ const atOn = (day, time) => {
   return new Date(day.getFullYear(), day.getMonth(), day.getDate(), Math.floor(m / 60), m % 60, 0, 0)
 }
 
-// Modülün penceresi (dakika). legacy: LEGACY_WINDOW (su WATER_LAST); yoksa window ('move' varsayılan)
+// Modülün penceresi (dakika; Nef'in kendi saatleri için). legacy: LEGACY_WINDOW (su WATER_LAST); yoksa window ('move' varsayılan)
 export function windowOf(remind) {
   const w = remind?.legacy
     ? { from: LEGACY_WINDOW.from, to: remind.legacy === 'water' ? WATER_LAST : LEGACY_WINDOW.to }
@@ -131,13 +134,10 @@ function freeFrom(m, win, busy) {
   return null
 }
 
-// Kurulum denetimi (saat seçici): pencere ve başka bildirimle ≥ 60 dk. Hata anahtarı döner (cümle değil) ya da null.
-export function remindTimeError(time, remind, busy = []) {
-  const m = toMinutes(time)
-  const win = windowOf(remind)
-  if (m == null || m < win.from || m > win.to) return 'window'
-  if (clash(m, busy.map(toMin).filter(Number.isFinite))) return 'gap'
-  return null
+// Kurulum denetimi (saat seçici, elle seçilen saat): yalnız geçersiz saat hatadır ('invalid'); pencere ve 60 dk yok
+// (sahip kararı 2026-10-01). Yakındaki öteki bildirimler engel değil, bilgi satırıdır (components/NearNote.jsx).
+export function remindTimeError(time) {
+  return toMinutes(time) == null ? 'invalid' : null
 }
 
 // "Sen karar ver" (PLAN §A.3).
@@ -222,6 +222,8 @@ const evidenceFor = (remind, key) => {
 //   proposals: [{ module, type, from, to }]   deney türü: saat yalnız kişi onaylarsa değişir (§A.3)
 //   skipped: [{ module, date, time, reason }] 'doneBefore' | 'window' | 'gap' | 'past' | 'budget' | 'arm'
 // }
+// 'window' ve 'gap' yalnız Nef'in seçtiği saatlerde (mode 'auto'); elle seçilen saat (mode 'manual') pencereye, su
+// 18.00'e, deney saatine 60 dk'ya ve ek saatte ilk saate 60 dk'ya bakılmadan kurulur (sahip kararı 2026-10-01).
 export function planModuleReminders({
   now = new Date(), modules = [], moduleReminders, reminders, study = null, sessions = [],
   fixed = [], log = null, health = null, horizon = MR_HORIZON_DAYS,
@@ -266,6 +268,7 @@ export function planModuleReminders({
       }
     }
     const win = windowOf(m.remind)
+    const manual = cfg.mode === 'manual'
     for (let d = 0; d < days; d++) {
       const day = new Date(base.getFullYear(), base.getMonth(), base.getDate() + d)
       const key = dayKey(day)
@@ -275,8 +278,8 @@ export function planModuleReminders({
         const at = atOn(day, time)
         if (at.getTime() <= nowMs + LEAD_MS) { skip('past'); continue }
         if (d === 0 && isDone(m)) { skip('doneBefore'); continue }
-        if (min < win.from || min > win.to) { skip('window'); continue }
-        if (nearFixed(at.getTime())) { skip('gap'); continue } // deney saatine 60 dk'dan yakın kurulmaz (§A.4 (1))
+        if (!manual && (min < win.from || min > win.to)) { skip('window'); continue }
+        if (!manual && nearFixed(at.getTime())) { skip('gap'); continue } // Nef'in saati deney saatine 60 dk'dan yakın kurulmaz (§A.4 (1))
         perDay[d].push({ m, time, at, key, auto: cfg.mode === 'auto' })
       }
     }
@@ -314,6 +317,7 @@ export function planModuleReminders({
     }
     const firstMin = toMinutes(r.types[type].time)
     const win = windowOf(m.remind)
+    const manual = cfg.mode === 'manual'
     const doneMs = (Array.isArray(m.records) ? m.records : []).map(recordLocal).filter(Boolean).map((x) => x.ms)
     cfg.times.slice(0, capOf(m.id, m.remind) - 1).slice(0, 2).forEach((time, slot) => {
       const min = toMinutes(time)
@@ -324,8 +328,8 @@ export function planModuleReminders({
       // Ufuk önümüzdeki 24 saat. VARSAYIM: bugünkü saat (now, now + LEAD_MS] içindeyse yarına kayan an 24 saati en çok
       // LEAD_MS aşar; o da ufukta sayılır (yoksa plan yeniden kurulana dek düşerdi; inceleme NIT 5)
       if (at.getTime() > nowMs + DAY_MS + LEAD_MS) return skip('past')
-      if (min < win.from || min > win.to) return skip('window')
-      if (Math.abs(min - firstMin) < MIN_GAP_MIN || nearFixed(at.getTime())) return skip('gap')
+      if (!manual && (min < win.from || min > win.to)) return skip('window')
+      if (!manual && (Math.abs(min - firstMin) < MIN_GAP_MIN || nearFixed(at.getTime()))) return skip('gap')
       // Zar gün başına bir kez atılır ve o türün bütün saatlerine uygulanır: günün kaydı 'send' değilse ek saat yok
       const entry = logList.find((e) => e?.date === key && e?.type === type)
       if (entry?.arm !== 'send') return skip('arm')

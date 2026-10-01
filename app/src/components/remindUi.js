@@ -1,7 +1,7 @@
 // "Bana hatırlat" ekranlarının saf yardımcıları (PLAN.v1 §3.A.2, §A.5; components/RemindField.jsx,
 // components/RemindSheet.jsx, screens/Notifications.jsx, screens/QuietHours.jsx). Ayar yazmaz: yeni nesne döner, App
 // store.setSetting('moduleReminders' | 'reminders', …) ile yazar. Cümle yazmaz (onaylı olanlar bileşenlerde, aynen).
-import { normalizeModuleReminders, remindTimeError, capOf, windowOf, fromMinutes, LEGACY_ORDER } from '../lib/moduleRemind.js'
+import { normalizeModuleReminders, remindTimeError, capOf, fromMinutes, LEGACY_ORDER } from '../lib/moduleRemind.js'
 import { remindOptIn } from '../lib/notifyAll.js'
 import { normalizeReminders, toMinutes, TYPE_LABEL } from '../lib/reminders.js'
 
@@ -22,35 +22,21 @@ export function locTime(t) {
   return `${dot(fromMinutes(m))}'${suf}`
 }
 
-// Başka bildirimlerin saatleri: [{ time: 'HH:MM', label }] ya da 'HH:MM'. remindTimeError dakika/dize ister.
-const busyTimes = (busy) => (Array.isArray(busy) ? busy.map((b) => (typeof b === 'string' ? b : b?.time)).filter((t) => toMinutes(t) != null) : [])
+// Elle seçilen saatlerin denetimi (sahip kararı 2026-10-01: "kullanıcı istediği saate kurar"): pencere, su 18.00 ve
+// 60 dk yok; yalnız geçersiz saat hatadır. [{ time, error: null|'invalid' }]. Yakındaki öteki bildirimler engel değil:
+// sheetNear + NearNote bilgi satırı.
+export function checkTimes(times) {
+  return times.map((time) => ({ time, error: remindTimeError(time) }))
+}
 
-// Elle seçilen saatlerin denetimi: her saat pencerede, başka bildirimlerden ve birbirinden ≥ 60 dk (kurulum kuralı,
-// §A.2). [{ time, error: null|'window'|'gap', clash: { time, label }|null, suggest: 'HH:MM'|null }]
-export function checkTimes(times, remind, busy = []) {
-  const others = busyTimes(busy)
-  const win = windowOf(remind)
-  return times.map((time, i) => {
-    const mine = times.filter((_, j) => j !== i)
-    const error = remindTimeError(time, remind, [...others, ...mine])
-    let clash = null
-    let suggest = null
-    if (error === 'gap') {
-      const m = toMinutes(time)
-      const hit = [...(Array.isArray(busy) ? busy : []).map((b) => (typeof b === 'string' ? { time: b, label: null } : b)), ...mine.map((t) => ({ time: t, label: null }))]
-        .find((b) => toMinutes(b?.time) != null && Math.abs(toMinutes(b.time) - m) < 60)
-      clash = hit ?? null
-      // Öneri: çakışandan bir saat sonra, 15 dk'ya yuvarlı; o da uymazsa bir saat önce (VARSAYIM). Hiçbiri yoksa null.
-      if (hit) {
-        const base = toMinutes(hit.time)
-        for (const c of [base + 60, base - 60]) {
-          const r = Math.round(c / 15) * 15
-          if (r >= win.from && r <= win.to && !remindTimeError(fromMinutes(r), remind, [...others, ...mine])) { suggest = fromMinutes(r); break }
-        }
-      }
-    }
-    return { time, error, clash, suggest }
-  })
+// Saat sayfasında i. saatin NEAR_MIN dakika içindeki öteki bildirimler (NearNote): başka bildirimler (busy:
+// [{ time, label }] ya da 'HH:MM'; App'in remindBusy'si, modülün kendisi hariç) ve bu sayfadaki öteki saatler (label:
+// modülün adı). Her gün sayılır (modül hatırlatmaları her gün kurulur). nearTimes çıktısı.
+export function sheetNear(times, i, busy = [], label = null) {
+  const others = (Array.isArray(busy) ? busy : [])
+    .map((b, j) => (typeof b === 'string' ? { key: `busy-${j}`, time: b, label: null, days: null } : { key: `busy-${j}`, time: b?.time, label: b?.label ?? null, days: null }))
+  const mine = (Array.isArray(times) ? times : []).map((t, j) => ({ key: `own-${j}`, time: t, label, days: null })).filter((_, j) => j !== i)
+  return nearTimes(times?.[i], [...others, ...mine])
 }
 
 // Kaydet: modülün yeni kaydı ve (gerekirse) yeni settings.reminders.

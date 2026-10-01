@@ -34,7 +34,7 @@ export default function Notifications({ modules = [], moduleReminders, reminders
   const q = normalizeQuiet(quiet)
   const today = dayKey(new Date(now))
   const extras = (Array.isArray(slots) ? slots : loadSlots()).filter((s) => s.date === today)
-  const clashes = quietClashes(reminders, quiet)
+  const clashes = quietClashes(reminders, quiet, moduleReminders)
   // Bütün modül hatırlatmaları (bitiş ekranındaki satır kapalıyken — App REMIND_ROW — tek kurulum yeri burası): kurulmamış
   // olan kapalı satır olarak Nef'in önereceği saatle durur; anahtar açar. Legacy türler aşağıda kendi satırında.
   const rows = modules.filter((m) => !m.legacy)
@@ -93,7 +93,8 @@ export default function Notifications({ modules = [], moduleReminders, reminders
         })}
         {legacy.map((t) => {
           const ex = extras.find((s) => s.type === t)?.times ?? mr[t]?.times ?? []
-          const cl = clashes.find((c) => c.type === t)
+          // Uyarı yalnız saati Nef seçtiyse; kişinin elle seçtiği saat sessizlikte de gelir (sahip kararı 2026-10-01)
+          const cl = clashes.find((c) => c.type === t && c.nef)
           return (
             <div key={t} className="nt-legacy">
               {/* Tasarım: her satır saat ve tek anahtar. Anahtar yalnız settings.reminders.types[t].on'u değiştirir (App

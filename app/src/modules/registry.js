@@ -86,7 +86,8 @@ export const DOMAINS = ['eye', 'calm', 'self', 'awareness', 'focus', 'wellbeing'
 const KEY_RE = /^[a-z][a-z0-9-]*$/
 const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k)
 // "Bana hatırlat" (PLAN.v1 §A.1, §A.4): legacy türler kendi penceresinde (lib/moduleRemind.js LEGACY_WINDOW, su WATER_LAST);
-// yeni kaynaklarda 'move' (kalk, göz hareketi, oyun) ve 'calm' (nefes dışı sakin pratikler). Uçlar dâhil (timeError gibi).
+// yeni kaynaklarda 'move' (kalk, göz hareketi, oyun) ve 'calm' (nefes dışı sakin pratikler). Uçlar dâhil. Pencere yalnız
+// Nef'in kendi seçtiği saatlere (öneri, defaultTime) uygulanır; kişinin elle seçtiği saate değil (sahip kararı 2026-10-01).
 export const REMIND_LEGACY = [...NUDGE_TYPES]
 // Pencereler tek kaynaktan (lib/moduleRemind.js; planlayıcı da onu kullanır)
 export { REMIND_WINDOWS }

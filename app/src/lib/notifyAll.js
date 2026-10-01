@@ -14,14 +14,18 @@
 //     sessizlik bitimine kaydırır (09.00'dan sonra biterse bitiş dakikası; sahip kararı 4), 30 dk'ya çakışırsa burada
 //     15 dk adımla en çok 60 dk ileri kayar (VARSAYIM), yer yoksa o gün kurulmaz. Sabah havası modül
 //     hatırlatmalarından önce yer alır.
-//   - Yalnız elle seçilmiş iki modül hatırlatması 30 dk içine düşerse tek bildirimde birleşir; "Sen karar ver" saati
-//     boş dilime kayar; öteki çakışan yeni bildirim düşer.
+//   - Kişinin ELLE seçtiği saat (modül hatırlatması ya da legacy ek saati, mode 'manual') 30 dk kuralıyla düşmez ve gece
+//     kurallarına uymaz (sahip kararı 2026-10-01: "kullanıcı istediği saate kurar"; 74xx'te olduğu gibi açık seçim
+//     kazanır). Elle seçilmiş iki farklı modülün hatırlatması 30 dk içine düşerse tek bildirimde birleşir; aynı modülün
+//     iki elle saati birleşmez, ikisi de kurulur. Nef'in seçtiği saat ("Sen karar ver") boş dilime kayar; Nef'in çakışan
+//     öteki yeni bildirimi (ek saat) düşer.
 //   - Oturum sürerken modül hatırlatması ve ek saat yok. Günde en çok 6 modül bildirimi; fazlası birleşir.
 //   - JS'in bekleyeni ≤ 58 (2 yuva Swift'in 771x'ine); deney planı kırpılmaz, modül hatırlatmalarının ufku 3 → 2 → 1
 //     güne iner.
-//   - Gece (yalnız yeni kaynaklar): 01.00–05.00 hiç; gece sessizliği (varsayılan 23.00–07.00); alarm kuruluysa yatmadan
-//     önceki 60 dk. Hatırlatmalar'daki türlerin kişinin seçtiği saati (74xx) gece kuralına uymaz (D5+D6: açık seçim
-//     kazanır); bu türlerin ek saatleri moduleRemind.js LEGACY_WINDOW'da (09.00–21.00, su ≤ 18.00).
+//   - Gece (yalnız Nef'in kendi saatleri: "Sen karar ver" modül saati, sabah havası): 01.00–05.00 hiç; gece sessizliği
+//     (varsayılan 23.00–07.00); alarm kuruluysa yatmadan önceki 60 dk. Kişinin seçtiği saat gece kuralına uymaz: 74xx
+//     (D5+D6) ve elle seçilmiş modül saati ile ek saat (2026-10-01). Nef'in seçtiği ek saatler moduleRemind.js
+//     LEGACY_WINDOW'da (09.00–21.00, su ≤ 18.00). Çalışma oturumu (focus) herkese uygulanır (74xx'te de).
 import { planNotifications, LEAD_MS } from './notifyPlan.js'
 import { planModuleReminders, normalizeModuleReminders, windowOf, LEGACY_ORDER, PATH_ID, PATH_REMIND, MR_HORIZON_DAYS, MIN_GAP_MIN } from './moduleRemind.js'
 import { FOCUS_HOURS } from './focus.js'
@@ -137,7 +141,8 @@ export function loadSlots(storage) {
 // Çıktı: kapalıyken planNotifications'ın çıktısı aynen. Açıkken ayrıca:
 //   grouped: true (notifyApply: threadIdentifier, relevanceScore, açılışta teslim edilmişlerin kaldırılması)
 //   slots: [{ date, type, times }] (ek saatler; notify-slots), updates, proposals (moduleRemind.js),
-//   skipped: moduleRemind.js'inkiler + 'focus' | 'night' | 'bed' | 'gap' | 'pending'
+//   skipped: moduleRemind.js'inkiler + 'focus' | 'night' | 'bed' | 'gap' | 'pending' ('night', 'bed', 'gap' yalnız
+//     Nef'in seçtiği saatlerde)
 //   horizon: modül hatırlatmalarının kurulduğu gün sayısı
 export function planAll(input = {}) {
   const base = planNotifications(input)
@@ -157,6 +162,9 @@ export function planAll(input = {}) {
     ? planMorningWeather({ now, morning: input.morningWeather, alarm, cache: input.weather.cache ?? null, place: input.weather.place ?? null, log: base.log, localRefresh: input.weather.localRefresh ?? null, quiet: normalizeQuiet(quiet), ...('templates' in input.weather ? { templates: input.weather.templates } : {}) })
     : { notifications: [], skipped: [] }
   const remindOf = (id) => (id === PATH_ID ? (modules.find((m) => m?.id === PATH_ID)?.remind ?? PATH_REMIND) : modules.find((m) => m?.id === id)?.remind)
+  // Ek saati kişi mi seçti: türün kaydı elle (moduleRemind.js ile aynı arama: önce tür, sonra o türün modülü)
+  const mrAll = normalizeModuleReminders(moduleReminders)
+  const extraManual = (type) => (mrAll[type] ?? mrAll[(Array.isArray(modules) ? modules : []).find((m) => m?.remind?.legacy === type)?.id])?.mode === 'manual'
 
   let result = null
   for (let h = MR_HORIZON_DAYS; h >= 1; h--) {
@@ -197,12 +205,15 @@ export function planAll(input = {}) {
     const taken = base.notifications.map((n) => ({ ms: n.at.getTime(), kind: 'base' }))
     const near = (ms) => taken.filter((t) => Math.abs(t.ms - ms) < MIN_APART_MIN * MIN)
 
-    // 1) Ek saatler (deney bildirimi; öncelik modül hatırlatmalarından önce)
+    // 1) Ek saatler (deney bildirimi; öncelik modül hatırlatmalarından önce). Önce kişinin elle seçtikleri (30 dk'ya
+    // bakılmaz), sonra Nef'in seçtikleri (30 dk'ya uyar, çakışırsa düşer)
     const extras = []
-    for (const n of [...mr.extras].sort((a, b) => a.at - b.at || a.id - b.id)) {
+    const byAt = (a, b) => a.at - b.at || a.id - b.id
+    const exManual = mr.extras.filter((n) => extraManual(n.type)).sort(byAt)
+    for (const n of [...exManual, ...mr.extras.filter((n) => !exManual.includes(n)).sort(byAt)]) {
       const ms = n.at.getTime()
       if (inFocus(ms)) { skip(n, 'focus'); continue }
-      if (near(ms).length) { skip(n, 'gap'); continue }
+      if (!exManual.includes(n) && near(ms).length) { skip(n, 'gap'); continue }
       const e = { ms, kind: 'extra', n }
       taken.push(e)
       extras.push(e)
@@ -233,33 +244,34 @@ export function planAll(input = {}) {
       // VARSAYIM (sınır): weatherNotify'ın 'opened' (karar 5) denetimi bu 30 dk kaydırmasından önceki saate göredir
     }
 
-    // 2) Modül hatırlatmaları: önce elle seçilenler, sonra "Sen karar ver" (kayabilen) saatleri
+    // 2) Modül hatırlatmaları: önce elle seçilenler (gece kurallarına ve 30 dk'ya bakılmaz; yalnız oturum), sonra
+    // "Sen karar ver" (kayabilen) saatleri
     const blocked = (ms) => (inFocus(ms) ? 'focus' : inNight(ms, quiet) ? 'night' : inBed(ms) ? 'bed' : null)
     const mods = []
     const byTime = (a, b) => a.at - b.at || a.id - b.id
     const cands = [...mr.notifications.filter((n) => !n.extra.auto).sort(byTime), ...mr.notifications.filter((n) => n.extra.auto).sort(byTime)]
     for (const n of cands) {
       const ms = n.at.getTime()
-      const why = blocked(ms)
+      const manual = !n.extra.auto
+      const why = manual ? (inFocus(ms) ? 'focus' : null) : blocked(ms)
       if (why) { skip(n, why); continue }
       const hit = near(ms)
-      const manual = !n.extra.auto
       if (!hit.length) {
         add(n, ms)
         continue
       }
-      if (manual && hit.every((t) => t.kind === 'module' && t.manual)) {
-        // Elle seçilmiş iki modül hatırlatması: tek bildirim, erken olanın saatinde (§A.4 (2))
-        const g = hit.sort((a, b) => a.ms - b.ms)[0]
-        if (!g.modules.includes(n.module)) g.modules.push(n.module)
+      if (manual) {
+        // Elle seçilmiş iki farklı modülün hatırlatması: tek bildirim, erken olanın saatinde (§A.4 (2)). Aynı modülün
+        // yakın iki elle saati birleşmez (birleşse biri kaybolurdu); başka bildirime yakınsa da kurulur, düşmez.
+        const mods = hit.filter((t) => t.kind === 'module' && t.manual).sort((a, b) => a.ms - b.ms)
+        if (mods.length && !mods.some((g) => g.modules.includes(n.module))) mods[0].modules.push(n.module)
+        else add(n, ms)
         continue
       }
-      if (!manual) {
-        const t = shiftFree(n, ms)
-        if (t != null) {
-          add(n, t)
-          continue
-        }
+      const t = shiftFree(n, ms)
+      if (t != null) {
+        add(n, t)
+        continue
       }
       skip(n, 'gap')
     }

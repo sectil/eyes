@@ -38,3 +38,18 @@ Uygulandı; bağımsız inceleme; anlaşılırlık kapısı 5/5 (ilk tur). Sahip
 kısmında da pencere/su/aralık kuralları kalkar (sahip: "orada da kalksın"); değişecek testler sahibe listelenir.
 Açık: notifyLog.js evaluate/thinCandidate artık kullanılmıyor; QuietHours/Bildirimler'deki "gece sessizliğinin
 içinde; saatini değiştir" uyarısı (gizli sayfalar) yeni kurala göre yanıltıcı.
+
+## "Bana hatırlat" (gizli arayüz) da sınırsız (sahip: "orada da kalksın", 2026-10-01)
+Kişinin elle seçtiği modül saatlerinde pencere, su ≤ 18.00, 60 dk aralık, gece sessizliği, 01.00–05.00 ve yatmadan
+önceki 60 dk uygulanmaz; 30 dk kuralıyla düşmez. Nef'in kendi seçtiği saatler eski kurallarla sürer. Eşdeğerlik 0 fark
+(fikstür değişmedi). Testler 2282/2282.
+Değişen testler (hepsi bu kararın sonucu):
+- moduleRemind.test: remindTimeError yalnız geçersiz saat; pencere dışı elle saat kurulur (auto'da eski beklenti);
+  74xx'e 60 dk'dan yakın elle saat kurulur; ilk saate yakın elle ek saat kurulur; YENİ: elle su 19.00/23.30 kurulur.
+- notifyAll.test: 20.000 bağlamlı taramada 30 dk, pencere ve gece denetimleri yalnız Nef'in saatlerinde (4 test);
+  74xx yanında elle 12.45 kurulur; YENİ: elle yakın saatler kurulur, aynı modülün iki yakın saati birleşmez; gece
+  22.00/03.00 elle kurulur; yatma kuralı elle 21.30'a uygulanmaz; sabah havası testinde elle 08.10 kurulur.
+- RemindField.test: pencere cümlesi yok, çakışma engel değil (bilgi satırı, Kaydet açık); gece sessizliği uyarısı
+  yalnız saati Nef seçtiyse.
+Açık (sahibe): yeni cümle taslakları — "Günde en çok {N} saat."; Bildirimler'de "Hiçbiri üst üste gelmez." silinsin;
+"Bu saatlerde Nef'in seçtiği hatırlatmalar gelmez; senin seçtiğin saatler gelir."

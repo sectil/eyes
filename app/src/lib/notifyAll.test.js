@@ -6,7 +6,7 @@ vi.mock('./native.js', () => native)
 
 import { planAll, remindOptIn, newFeaturesOn, normalizeQuiet, inNight, MAX_PENDING, DAY_CAP, MIN_APART_MIN, MERGED_TEXT_KEY } from './notifyAll.js'
 import { planNotifications } from './notifyPlan.js'
-import { windowOf, PATH_REMIND } from './moduleRemind.js'
+import { windowOf, PATH_REMIND, normalizeModuleReminders } from './moduleRemind.js'
 import { toMinutes } from './reminders.js'
 import { dayKey } from './habitLog.js'
 import { createApplier } from './notifyApply.js'
@@ -35,6 +35,14 @@ const isAlarmWeather = (n) => isWeather(n) && !isFreeWeather(n)
 const minOf = (d) => d.getHours() * 60 + d.getMinutes()
 const OWN = [[7400, 7499], [7500, 7509], [7700, 7701], [7800, 7859], [7860, 7867]]
 const pick3 = (n) => ({ id: n.id, title: n.title, body: n.body, at: n.at.getTime() })
+// Saati kişi mi seçti (sahip kararı 2026-10-01): modül hatırlatmasında (birleşikte ilk modül) ya da ek saatte türün
+// kaydı elle (mode 'manual'). Bunlar 30 dk'ya, pencereye ve gece kurallarına uymaz; Nef'in saatleri uyar.
+const chosen = (input, n) => {
+  const mr = normalizeModuleReminders(input.moduleReminders)
+  if (isModule(n)) return mr[n.extra.module ?? n.extra.modules?.[0]]?.mode === 'manual'
+  if (isExtra(n)) return mr[n.type]?.mode === 'manual'
+  return false
+}
 
 // 20.000 rastgele AÇIK ayar: her biri bir kez hesaplanır, maddeler aynı listeden sınanır
 let cases = null
@@ -63,14 +71,16 @@ describe('planAll: 20.000 rastgele açık ayar', { timeout: 60000 }, () => {
     expect(c.filter(({ out }) => out.notifications.some((n) => isWeather(n) && n.extra.shifted)).length).toBeGreaterThan(0)
   })
 
-  it(`yeni bildirimlerden hiçbiri başka bir bildirime ${MIN_APART_MIN} dk'dan yakın değil (alarm ve alarma bağlı hava dışında)`, () => {
+  it(`Nef'in yeni bildirimlerinden hiçbiri başka bir bildirime ${MIN_APART_MIN} dk'dan yakın değil (alarm, alarma bağlı hava ve kişinin elle seçtiği modül saati dışında; Nef'in modül saati ona da uzak)`, () => {
     let bad = null
     let pairs = 0
-    for (const { out } of all()) {
+    for (const { input, out } of all()) {
       const list = out.notifications
-      for (const a of list.filter((n) => isNew(n) || isFreeWeather(n))) {
+      for (const a of list.filter((n) => (isNew(n) && !chosen(input, n)) || isFreeWeather(n))) {
         for (const b of list) {
           if (a === b || isAlarmWeather(b)) continue
+          // Elle seçilmiş modül saati ek saatlerden ve havadan sonra yerini alır, onlara bakmaz; Nef'in modül saati ona uyar
+          if (isModule(b) && chosen(input, b) && !isModule(a)) continue
           pairs++
           if (!bad && Math.abs(a.at - b.at) < MIN_APART_MIN * 60000) bad = [a, b]
         }
@@ -84,21 +94,24 @@ describe('planAll: 20.000 rastgele açık ayar', { timeout: 60000 }, () => {
   // dokunamaz (§A.4 (1), eşdeğerlik §5.4); o yüzden 30 dk güvencesi en az birinin yeni kaynak olduğu çiftler içindir
   // (üstteki sınama). İki eski bildirim arasındaki yakınlık bugünkü planNotifications'ın kuralıdır (gece ve yakınlık
   // düzeltmesi ana oturumda); burada yalnız planAll'ın ona yeni bir yakın çift eklemediği sınanır.
-  it(`${MIN_APART_MIN} dk'dan yakın her çift iki eski bildirimdir (74xx/75xx) ve aynı çift tabanda da vardır`, () => {
+  it(`${MIN_APART_MIN} dk'dan yakın her çift ya iki eski bildirimdir (74xx/75xx, aynı çift tabanda da var) ya da birinin saatini kişi elle seçti`, () => {
     let bad = null
+    let byChoice = 0
     const key = (n) => `${n.id}@${n.at.getTime()}`
-    for (const { out, base } of all()) {
+    for (const { input, out, base } of all()) {
       const inBase = new Set(base.notifications.map(key))
       const list = [...out.notifications].sort((a, b) => a.at - b.at)
       for (let i = 0; i < list.length; i++) {
         for (let j = i + 1; j < list.length && list[j].at - list[i].at < MIN_APART_MIN * 60000; j++) {
           const [a, b] = [list[i], list[j]]
           if (isAlarmWeather(a) || isAlarmWeather(b)) continue // alarma bağlı hava istisnası (§A.4)
+          if (chosen(input, a) || chosen(input, b)) { byChoice++; continue } // açık seçim kazanır (sahip kararı 2026-10-01)
           if (isNew(a) || isNew(b) || isWeather(a) || isWeather(b) || !inBase.has(key(a)) || !inBase.has(key(b))) bad ??= [a, b]
         }
       }
     }
     expect(bad).toBeNull()
+    expect(byChoice).toBeGreaterThan(0) // elle seçilen yakın saat gerçekten kuruluyor (düşmüyor)
   })
 
   it('74xx ve 75xx: title, body, id, at değişmez; hepsi yerinde (kırpılmaz); günlük tabandaki gibi', () => {
@@ -121,24 +134,31 @@ describe('planAll: 20.000 rastgele açık ayar', { timeout: 60000 }, () => {
     }
   })
 
-  it('pencereler: modül hatırlatması kendi penceresinde; ek saat deney kuralında (09–21, su ≤ 18)', () => {
+  it('pencereler yalnız Nef\'in saatinde: modül hatırlatması kendi penceresinde, ek saat deney kuralında (09–21, su ≤ 18); elle seçilen pencere dışında da kurulur', () => {
     const remindOf = (id) => (id === 'path' ? PATH_REMIND : MODULES.find((m) => m.id === id).remind)
-    for (const { out } of all()) {
-      for (const n of out.notifications.filter(isModule)) {
+    let outside = 0
+    for (const { input, out } of all()) {
+      for (const n of out.notifications.filter((n) => (isModule(n) || isExtra(n)) && chosen(input, n))) {
+        const m = minOf(n.at)
+        if (m < toMinutes('08:00') || m > toMinutes('22:00')) outside++
+      }
+      for (const n of out.notifications.filter((n) => isModule(n) && !chosen(input, n))) {
         const mods = n.extra.modules ?? [n.extra.module]
         const m = minOf(n.at)
         // birleşik bildirim ilk modülün saatinde: en az birinin penceresinde
         expect(mods.some((id) => { const w = windowOf(remindOf(id)); return m >= w.from && m <= w.to })).toBe(true)
       }
-      for (const n of out.notifications.filter(isExtra)) {
+      for (const n of out.notifications.filter((n) => isExtra(n) && !chosen(input, n))) {
         const m = minOf(n.at)
         expect(m).toBeGreaterThanOrEqual(toMinutes('09:00'))
         expect(m).toBeLessThanOrEqual(toMinutes(n.type === 'water' ? '18:00' : '21:00'))
       }
     }
+    expect(outside).toBeGreaterThan(0)
   })
 
-  it('yeni kaynaklardan hiçbiri gece sessizliğinde ya da 01.00–05.00’te değil; alarm varsa yatmadan önceki 60 dk’da değil', () => {
+  it('Nef\'in yeni saatlerinden hiçbiri gece sessizliğinde ya da 01.00–05.00’te değil; alarm varsa yatmadan önceki 60 dk’da değil; elle seçilen gece de kurulur', () => {
+    let atNight = 0
     for (const { input, out } of all()) {
       for (const n of out.notifications.filter(isWeather)) {
         const m = minOf(n.at)
@@ -147,7 +167,8 @@ describe('planAll: 20.000 rastgele açık ayar', { timeout: 60000 }, () => {
       }
       expect(out.notifications.filter(isWeather).length).toBeLessThanOrEqual(2)
       if (!input.morningWeather) expect(out.notifications.some(isWeather)).toBe(false)
-      for (const n of out.notifications.filter(isModule)) {
+      atNight += out.notifications.filter((n) => isModule(n) && chosen(input, n) && inNight(n.at.getTime(), input.quiet)).length
+      for (const n of out.notifications.filter((n) => isModule(n) && !chosen(input, n))) {
         expect(inNight(n.at.getTime(), input.quiet)).toBe(false)
         if (input.alarm) {
           const noon = new Date(n.at.getFullYear(), n.at.getMonth(), n.at.getDate(), 12)
@@ -159,6 +180,7 @@ describe('planAll: 20.000 rastgele açık ayar', { timeout: 60000 }, () => {
         }
       }
     }
+    expect(atNight).toBeGreaterThan(0)
   })
 
   it('oturum sürerken modül hatırlatması ve ek saat yok', () => {
@@ -256,14 +278,30 @@ describe('planAll: kurallar', () => {
     expect(t[1].extra.shifted).toBe(true)
   })
 
-  it('74xx asla birleşmez ve kaymaz: deney saatine 60 dk’dan yakın modül hatırlatması kurulmaz', () => {
+  it('74xx asla birleşmez ve kaymaz; deney saatine 60 dk’dan yakın Nef saati kurulmaz, elle seçilen kurulur', () => {
     const i = base({ reminders: REM({ mola: { on: true, time: '12:30' } }), seed: 'gönder', moduleReminders: { blink: man(['12:45']) } })
     const p = planAll(i)
     expect(p.notifications.filter((n) => !isNew(n))).toEqual(planNotifications(i).notifications)
-    // gönderilen deney gününde 12.45 kurulmaz; sessiz günde (74xx yok) kurulabilir
     const sentDays = new Set(p.notifications.filter((n) => n.id >= 7400 && n.id <= 7499).map((n) => dayKey(n.at)))
     expect(sentDays.size).toBeGreaterThan(0)
-    expect(p.notifications.filter((n) => isModule(n) && sentDays.has(dayKey(n.at)))).toHaveLength(0)
+    // Elle seçilen 12.45 deney gününde de kurulur (açık seçim kazanır; sahip kararı 2026-10-01)
+    // (modül ufku 3 gün; üçü de deney günü)
+    expect(p.notifications.filter((n) => isModule(n) && sentDays.has(dayKey(n.at))).map((n) => hm(n.at))).toEqual(['12:45', '12:45', '12:45'])
+    // Nef'in seçtiği 12.45 deney gününde kurulmaz
+    const a = planAll({ ...i, moduleReminders: { blink: auto(['12:45']) } })
+    expect(a.notifications.filter((n) => !isNew(n))).toEqual(planNotifications(i).notifications)
+    expect(a.notifications.filter((n) => isModule(n) && sentDays.has(dayKey(n.at)))).toHaveLength(0)
+  })
+
+  it('elle seçilen saat başka bildirime 30 dk’dan yakınsa da kurulur; aynı modülün iki yakın elle saati birleşmez', () => {
+    const reminders = REM({ mola: { on: true, time: '12:30' }, breath: { on: true, time: '09:00' } })
+    const t = planAll(base({ reminders, moduleReminders: { blink: man(['12:40']), breath: man(['12:50']) } }))
+    // 12.40 modül saati (mola 74xx 12.30'a 10 dk) ve 12.50 nefes ek saati (moduleReminders.breath elle): ikisi de bugün
+    expect(t.notifications.filter((n) => isModule(n) && today(n)).map((n) => hm(n.at))).toEqual(['12:40'])
+    expect(t.notifications.filter((n) => isExtra(n) && today(n)).map((n) => hm(n.at))).toEqual(['12:50'])
+    expect(t.skipped.filter((s) => s.reason === 'gap')).toEqual([])
+    const same = planAll(base({ moduleReminders: { blink: man(['10:00', '10:15']) } })).notifications.filter((n) => isModule(n) && today(n))
+    expect(same.map((n) => [n.extra.module, hm(n.at)])).toEqual([['blink', '10:00'], ['blink', '10:15']])
   })
 
   it(`günlük tavan: ${DAY_CAP}'dan fazlası altıncıda birleşir`, () => {
@@ -273,21 +311,27 @@ describe('planAll: kurallar', () => {
     expect(t[DAY_CAP - 1].extra).toMatchObject({ kind: 'remindMerged', modules: ['snake', 'yoga'] })
   })
 
-  it('gece: sessizlik 22.00’den başlarsa 22.00’deki sakin hatırlatma kurulmaz; varsayılanda kurulur', () => {
-    const mr = { yoga: man(['22:00']) }
+  it('gece: sessizlik 22.00’den başlarsa Nef’in 22.00’deki sakin hatırlatması kurulmaz, elle seçilen kurulur (01.00–05.00 de); varsayılanda ikisi de', () => {
+    const mr = { yoga: auto(['22:00']) }
     expect(planAll(base({ moduleReminders: mr })).notifications.filter(isModule)).toHaveLength(3)
     expect(planAll(base({ moduleReminders: mr, quiet: { from: '22:00', to: '07:00' } })).notifications.filter(isModule)).toHaveLength(0)
+    expect(planAll(base({ moduleReminders: { yoga: man(['22:00']) }, quiet: { from: '22:00', to: '07:00' } })).notifications.filter(isModule)).toHaveLength(3)
+    // Elle seçilen 03.00: bugünkü geçti (07.00), yarın ve öbür gün kurulur
+    expect(planAll(base({ moduleReminders: { yoga: man(['03:00']) } })).notifications.filter(isModule).map((n) => hm(n.at))).toEqual(['03:00', '03:00'])
     expect(normalizeQuiet({ from: '03:00', to: '12:00' })).toEqual({ from: 23 * 60, to: 7 * 60 })
     expect(inNight(new Date(2026, 8, 30, 2, 0).getTime(), { from: '00:00', to: '06:00' })).toBe(true) // 01–05 hiçbir ayarla açılmaz
   })
 
-  it('alarm 05.00 → yatma 22.00: 21.30’daki hatırlatma kurulmaz, 20.30’daki kurulur', () => {
+  it('alarm 05.00 → yatma 22.00: Nef’in 21.30’daki hatırlatması kurulmaz, 20.30’daki kurulur; elle seçilen 21.30 kurulur', () => {
     const alarm = { on: true, hour: 5, minute: 0, days: [], at: null }
     alarm.days = [0, 1, 2, 3, 4, 5, 6]
-    const p = planAll(base({ alarm, moduleReminders: { yoga: man(['20:30']), gokyuzu: man(['21:30']) } }))
+    const p = planAll(base({ alarm, moduleReminders: { yoga: man(['20:30']), gokyuzu: auto(['21:30']) } }))
     const t = p.notifications.filter((n) => isModule(n) && today(n))
     expect(t.map((n) => n.extra.module)).toEqual(['yoga'])
     expect(p.skipped.some((s) => s.module === 'gokyuzu' && s.reason === 'bed')).toBe(true)
+    const m = planAll(base({ alarm, moduleReminders: { yoga: man(['20:30']), gokyuzu: man(['21:30']) } }))
+    expect(m.notifications.filter((n) => isModule(n) && today(n)).map((n) => n.extra.module)).toEqual(['yoga', 'gokyuzu'])
+    expect(m.skipped.some((s) => s.reason === 'bed')).toBe(false)
   })
 
   it('oturum sürerken modül hatırlatması yok', () => {
@@ -384,12 +428,16 @@ describe('planAll: sabah havası', () => {
     expect(weatherOf(q)[0].extra.shifted).toBe(true)
     const q2 = planAll(base({ morningWeather: true, weather: WX, quiet: { from: '23:00', to: '09:40' } }))
     expect(weatherOf(q2).map((n) => n.at.getTime())).toEqual([at(9, 40)])
-    // Alarmsız 08.00 önce yerini alır; 08.10'daki elle seçilmiş hatırlatma 30 dk kuralıyla düşer
+    // Alarmsız 08.00 önce yerini alır; 08.10'daki elle seçilmiş hatırlatma yine kurulur (açık seçim; sahip kararı 2026-10-01)
     const g = planAll(base({ morningWeather: true, weather: WX, moduleReminders: { dalga: man(['08:10']) } }))
     const gw = weatherOf(g)
-    expect(gw).toHaveLength(1)
-    const mods = g.notifications.filter((n) => n.id >= 7800 && n.id <= 7859 && n.at.getTime() < at(12, 0))
-    for (const m of mods) expect(Math.abs(m.at - gw[0].at)).toBeGreaterThanOrEqual(MIN_APART_MIN * 60000)
+    expect(gw.map((n) => n.at.getTime())).toEqual([at(8, 0)])
+    expect(g.notifications.filter((n) => n.id >= 7800 && n.id <= 7859 && n.at.getTime() < at(12, 0)).map((n) => n.at.getTime())).toEqual([at(8, 10)])
+    // Nef'in seçtiği 08.10 ise 30 dk kuralıyla kayar
+    const ga = planAll(base({ morningWeather: true, weather: WX, moduleReminders: { dalga: auto(['08:10']) } }))
+    const mods = ga.notifications.filter((n) => n.id >= 7800 && n.id <= 7859 && n.at.getTime() < at(12, 0))
+    expect(mods).toHaveLength(1)
+    for (const m of mods) expect(Math.abs(m.at - weatherOf(ga)[0].at)).toBeGreaterThanOrEqual(MIN_APART_MIN * 60000)
   })
 
   it('alarmsız hava sessizlik bitince 15 dk adımla kayar (extra.shifted); saat ve kimlik değişmez', () => {

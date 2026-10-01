@@ -102,11 +102,14 @@ describe('pickAutoTime: gece kayıtları, pencere, 60 dk', () => {
     const everyHour = Array.from({ length: 13 }, (_, i) => (9 + i) * 60)
     expect(pickAutoTime({ records: recs, remind: move, now: NOW, busy: everyHour }).times).toEqual([])
   })
-  it('remindTimeError: pencere ve 60 dk (hata anahtarı)', () => {
-    expect(remindTimeError('08:30', move)).toBe('window')
+  it('remindTimeError: elle seçilen saatte yalnız geçersiz saat hata; pencere, su 18.00 ve 60 dk yok (sahip kararı 2026-10-01)', () => {
+    expect(remindTimeError('08:30', move)).toBeNull()
     expect(remindTimeError('08:30', calm)).toBeNull()
-    expect(remindTimeError('13:00', move, ['12:30'])).toBe('gap')
+    expect(remindTimeError('23:30', { legacy: 'water' })).toBeNull()
+    expect(remindTimeError('13:00', move, ['12:30'])).toBeNull()
     expect(remindTimeError('13:30', move, ['12:30'])).toBeNull()
+    expect(remindTimeError('x', move)).toBe('invalid')
+    expect(remindTimeError('', move)).toBe('invalid')
   })
 })
 
@@ -176,10 +179,13 @@ describe('planModuleReminders: kapalıyken boş, kimlikler, pencere', () => {
     expect(['a', 'b']).toContain(p.notifications[0].extra.evidence)
     expect(new Set(p.notifications.map((n) => n.id)).size).toBe(12)
   })
-  it('pencere dışı saat kurulmaz: move 08.15 ve 21.30 düşer', () => {
+  it('pencere yalnız Nef\'in saatinde: elle seçilen move 08.15 ve 21.30 kurulur; Nef\'in seçtiği (auto) 08.15 ve 21.30 düşer', () => {
     const p = planModuleReminders({ now: NOW, modules: mods, reminders: yes, moduleReminders: { blink: { on: true, mode: 'manual', times: ['08:15', '21:30', '12:00'] } } })
-    expect(p.notifications.map((n) => hm(n.at))).toEqual([[12, 0], [12, 0], [12, 0]])
-    expect(p.skipped.filter((s) => s.reason === 'window')).toHaveLength(6)
+    expect(p.notifications.map((n) => hm(n.at))).toEqual([[8, 15], [12, 0], [21, 30], [8, 15], [12, 0], [21, 30], [8, 15], [12, 0], [21, 30]])
+    expect(p.skipped.filter((s) => s.reason === 'window')).toHaveLength(0)
+    const q = planModuleReminders({ now: NOW, modules: mods, reminders: yes, moduleReminders: { blink: { on: true, mode: 'auto', times: ['08:15', '21:30', '12:00'] } } })
+    expect(q.notifications.map((n) => hm(n.at))).toEqual([[12, 0], [12, 0], [12, 0]])
+    expect(q.skipped.filter((s) => s.reason === 'window')).toHaveLength(6)
   })
   it('günde en çok 3 saat (maxTimes ile daha az)', () => {
     const p = planModuleReminders({ now: NOW, reminders: yes, modules: [{ id: 'yoga', remind: { ...calm, maxTimes: 2 } }], moduleReminders: { yoga: { on: true, mode: 'manual', times: ['09:00', '12:00', '15:00'] } } })
@@ -192,11 +198,17 @@ describe('planModuleReminders: kapalıyken boş, kimlikler, pencere', () => {
     expect(p.notifications).toHaveLength(2)
     expect(p.skipped[0].reason).toBe('doneBefore')
   })
-  it('deney saatine (74xx) 60 dk’dan yakın modül hatırlatması kurulmaz; geçmiş an kurulmaz', () => {
+  it('deney saatine (74xx) 60 dk’dan yakın: Nef\'in saati kurulmaz, elle seçilen kurulur; geçmiş an kurulmaz', () => {
     const later = new Date(2026, 8, 30, 11, 0)
     const reminders = { optIn: 'yes', types: { mola: { on: true, time: '12:30' } } }
     const fixed = planNotifications({ now: later, reminders, seed: 's' }).notifications
-    const p = planModuleReminders({ now: later, reminders, fixed, modules: mods, moduleReminders: { blink: { on: true, mode: 'manual', times: ['10:00', '13:00', '14:00'] } } })
+    // Elle seçilen 13.00 deney saatine (12.30) 30 dk yakın: yine de her gün kurulur, 'gap' yok
+    const m = planModuleReminders({ now: later, reminders, fixed, modules: mods, moduleReminders: { blink: { on: true, mode: 'manual', times: ['10:00', '13:00', '14:00'] } } })
+    expect(m.notifications.filter((n) => n.at.getHours() === 13)).toHaveLength(3)
+    expect(m.skipped.filter((s) => s.reason === 'gap')).toEqual([])
+    expect(m.skipped.some((s) => s.reason === 'past' && s.time === '10:00')).toBe(true)
+    // Nef'in seçtiği (auto) aynı saatler: 60 dk kuralı sürer
+    const p = planModuleReminders({ now: later, reminders, fixed, modules: mods, moduleReminders: { blink: { on: true, mode: 'auto', times: ['10:00', '13:00', '14:00'] } } })
     const sent = new Set(fixed.map((n) => dayKey(n.at)))
     for (const n of p.notifications) {
       for (const f of fixed) expect(Math.abs(f.at - n.at)).toBeGreaterThanOrEqual(3600000)
@@ -265,12 +277,16 @@ describe('planModuleReminders: deney türünde çok saat', () => {
     expect(q.extras).toEqual([])
     expect(q.skipped.filter((s) => s.reason === 'arm' && s.date === today)).toHaveLength(2)
   })
-  it('günlük yoksa ek saat kurulmaz; ilk saate 60 dk’dan yakın ek saat kurulmaz; ufuk 24 saat', () => {
+  it('günlük yoksa ek saat kurulmaz; ilk saate 60 dk’dan yakın ek saat: Nef\'inki kurulmaz, elle seçilen kurulur; ufuk 24 saat', () => {
     const now = new Date(2026, 8, 30, 14, 0)
     expect(planModuleReminders({ now, reminders, modules: [breathMod], moduleReminders: mr }).extras).toEqual([])
     const log = [dayKey(now), dayKey(new Date(2026, 9, 1))].map((date) => ({ date, type: 'breath', arm: 'send' }))
-    const p = planModuleReminders({ now, reminders, modules: [breathMod], moduleReminders: { breath: { on: true, mode: 'manual', times: ['10:30', '17:00'] } }, log })
-    // 10.30 ilk saate (10.00) yakın → gap; 17.00 bugün
+    const m = planModuleReminders({ now, reminders, modules: [breathMod], moduleReminders: { breath: { on: true, mode: 'manual', times: ['10:30', '17:00'] } }, log })
+    // Elle seçilen 10.30 ilk saate (10.00) yakın: yine kurulur (bugün geçti → yarın 10.30); 17.00 bugün
+    expect(m.extras.map((n) => [dayKey(n.at), hm(n.at)])).toEqual([[dayKey(new Date(2026, 9, 1)), [10, 30]], [dayKey(now), [17, 0]]])
+    expect(m.skipped.filter((s) => s.reason === 'gap')).toEqual([])
+    const p = planModuleReminders({ now, reminders, modules: [breathMod], moduleReminders: { breath: { on: true, mode: 'auto', times: ['10:30', '17:00'] } }, log })
+    // Nef'in seçtiği 10.30 ilk saate (10.00) yakın → gap; 17.00 bugün
     expect(p.extras.map((n) => [dayKey(n.at), hm(n.at)])).toEqual([[dayKey(now), [17, 0]]])
     const q = planModuleReminders({ now, reminders, modules: [breathMod], moduleReminders: mr, log })
     // 13.00 bugün geçti → yarın 13.00 (24 saat içinde); 17.00 bugün
@@ -288,6 +304,18 @@ describe('planModuleReminders: deney türünde çok saat', () => {
     const p = planModuleReminders({ now, reminders, modules: [done], moduleReminders: { breath: { on: true, mode: 'manual', times: ['16:00', '19:00'] } }, log })
     expect(p.extras.map((n) => hm(n.at))).toEqual([[19, 0]])
     expect(p.skipped.find((s) => s.reason === 'doneBefore').time).toBe('16:00')
+  })
+  it('ek saat penceresi yalnız Nef\'in saatinde: elle seçilen su 19.00 ve 23.30 kurulur; Nef\'in seçtiği 19.00 kurulmaz', () => {
+    const now = new Date(2026, 8, 30, 9, 0)
+    const rw = { optIn: 'yes', types: { mola: { on: false }, water: { on: true, time: '11:00' } } }
+    const waterMod = { id: 'water', remind: { legacy: 'water', science: ['w'] }, records: [] }
+    const log = [{ date: dayKey(now), type: 'water', arm: 'send' }]
+    const m = planModuleReminders({ now, reminders: rw, modules: [waterMod], moduleReminders: { water: { on: true, mode: 'manual', times: ['19:00', '23:30'] } }, log })
+    expect(m.extras.map((n) => hm(n.at))).toEqual([[19, 0], [23, 30]])
+    expect(m.skipped.filter((s) => s.reason === 'window')).toEqual([])
+    const a = planModuleReminders({ now, reminders: rw, modules: [waterMod], moduleReminders: { water: { on: true, mode: 'auto', times: ['19:00'] } }, log })
+    expect(a.extras).toEqual([])
+    expect(a.skipped).toContainEqual({ module: 'water', date: dayKey(now), time: '19:00', reason: 'window' })
   })
   it('yürüyüş ek saatine kendi eşiğiyle WalkGuard', () => {
     const now = new Date(2026, 8, 30, 9, 0)

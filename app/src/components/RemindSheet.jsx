@@ -4,18 +4,22 @@ import { Plus, X } from 'lucide-react'
 import { pickAutoTime, capOf, windowOf, fromMinutes } from '../lib/moduleRemind.js'
 import { NAMES } from '../lib/remindTexts.js'
 import { TYPE_LABEL } from '../lib/reminders.js'
-import { applyRemind, checkTimes, dot, locTime } from './remindUi.js'
+import { applyRemind, checkTimes, sheetNear, dot } from './remindUi.js'
+import NearNote from './NearNote.jsx'
 import { IrisMark } from './ui.jsx'
 import '../styles/remind.css'
 
 // "Bana hatırlat" saat sayfası (PLAN.v1 §3.A.2; tasarım b1a-son/ekranlar.html S, 5 sn kapısı son tur 5/5). Alttan
 // açılır. Başlık satırında ad ve kapat; seçici "Nef seçsin" (Önerilen; pickAutoTime; sahip onaylı metin, metin-B1a-onay.md)
 // | "Saatleri ben seçeyim" (en çok remind.maxTimes, varsayılan 3). "Nef seçsin"de Nef'in TEK işareti (IrisMark) ve
-// kuyruklu balon: Önerilen etiketi, büyük saat, neden cümlesi; ana düğme balonun altında. Kurulumda 60 dk kuralı remindTimeError ile canlı denetlenir; hata varken
-// Kaydet kapalı. Ayar yazmaz: onSave({ moduleReminders, reminders|null }) (components/remindUi.js applyRemind).
+// kuyruklu balon: Önerilen etiketi, büyük saat, neden cümlesi; ana düğme balonun altında. Elle seçilen saatte pencere,
+// su 18.00 ve 60 dk kuralı yok (sahip kararı 2026-10-01: "kullanıcı istediği saate kurar"); yalnız geçersiz saatte
+// Kaydet kapalı. Saatin yarım saat içinde başka bildirim varsa engel değil, bilgi satırı (NearNote; Hatırlatmalar'daki
+// gibi). Pencere yalnız Nef'in önerisinde (pickAutoTime). Ayar yazmaz: onSave({ moduleReminders, reminders|null })
+// (components/remindUi.js applyRemind).
 //   moduleId, remind: registry.reminders() kaydı ya da manifest remind · moduleReminders: settings.moduleReminders
 //   reminders: settings.reminders (ilk açılışta optIn 'yes', varsayılanı açık mola kapanır; §A.2)
-//   busy: başka bildirimlerin saatleri [{ time: 'HH:MM', label }] (label: "Mola" gibi; çakışma cümlesinde)
+//   busy: başka bildirimlerin saatleri [{ time: 'HH:MM', label }] (label: "Mola" gibi; bilgi satırının listesinde)
 //   records: bu modülün yol dışı kayıtları (pickAutoTime) · permission: restNotify.notifyPermission değeri
 //   onAskPermission: izin penceresi (App) · onWhy: "Bazı günler neden gelmez?" (yalnız legacy/deney türü)
 
@@ -63,8 +67,9 @@ export default function RemindSheet({
   const [mode, setMode] = useState('auto')
   const [times, setTimes] = useState(() => (pick.times.length ? [pick.times[0]] : [fromMinutes(win.from)]))
   const [permNote, setPermNote] = useState(false)
-  const checks = checkTimes(times, remind, busy)
+  const checks = checkTimes(times)
   const bad = mode === 'manual' && checks.some((c) => c.error)
+  const ownLabel = NAMES[moduleId] ?? TYPE_LABEL[remind.legacy] ?? TYPE_LABEL[moduleId] ?? null
 
   function save(chosen, m) {
     if (!chosen.length) return
@@ -129,17 +134,7 @@ export default function RemindSheet({
                     <button type="button" className="rs-del" aria-label={`${dot(c.time)} saatini kaldır`} onClick={() => setTimes((ts) => ts.filter((_, j) => j !== i))}><X size={18} /></button>
                   )}
                 </label>
-                {c.error === 'gap' && c.clash?.label && (
-                  <div className="rs-clash" role="status">
-                    <p>{`${locTime(c.clash.time)} ${c.clash.label} var.`}</p>
-                    {c.suggest && (
-                      <>
-                        <p>Bir saat sonra olsun mu?</p>
-                        <button type="button" className="btn btn-secondary" onClick={() => setAt(i, c.suggest)}>{`${dot(c.suggest)} yap`}</button>
-                      </>
-                    )}
-                  </div>
-                )}
+                {!c.error && <NearNote near={sheetNear(times, i, busy, ownLabel)} />}
               </div>
             ))}
             {times.length < cap && (
@@ -147,9 +142,6 @@ export default function RemindSheet({
                 <Plus size={18} aria-hidden="true" /> Bir saat daha
               </button>
             )}
-            <p className={`rs-win${checks.some((c) => c.error === 'window') ? ' bad' : ''}`}>
-              {`${dot(fromMinutes(win.from))}–${dot(fromMinutes(win.to))} arasında, günde en çok ${cap} saat.`}
-            </p>
             <button type="button" className="btn" disabled={bad} onClick={() => save(times, 'manual')}>Kaydet</button>
           </div>
         )}

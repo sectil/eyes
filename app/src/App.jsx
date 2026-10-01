@@ -845,7 +845,8 @@ export default function App() {
     refresh()
   }
   const remindEntryOf = (id) => registry.reminders().find((e) => e.module === id) ?? null
-  // Başka bildirimlerin saatleri (saat sayfasının 60 dk kuralı ve çakışma cümlesi): açık deney türleri, çalışma günleri
+  // Başka bildirimlerin saatleri (saat sayfasının "Yarım saat içinde …" bilgi satırı ve Nef'in önerisinin 60 dk'sı):
+  // açık deney türleri, çalışma günleri
   // ve öteki modül hatırlatmaları. Etiketler bugünkü adlardan (reminders.js TYPE_LABEL, remindTexts.js NAMES).
   const remindBusy = (selfId) => {
     const entry = remindEntryOf(selfId)
@@ -1126,7 +1127,7 @@ export default function App() {
     )
   }
   if (screen === 'quiet-hours') {
-    return <QuietHours quiet={settings.quiet ?? null} reminders={settings.reminders} onChange={(q) => { store.setSetting('quiet', q); refresh() }} onOpenReminders={() => go('reminders')} onBack={() => go('notifications')} />
+    return <QuietHours quiet={settings.quiet ?? null} reminders={settings.reminders} moduleReminders={settings.moduleReminders} onChange={(q) => { store.setSetting('quiet', q); refresh() }} onOpenReminders={() => go('reminders')} onBack={() => go('notifications')} />
   }
   if (screen === 'profile-questions') {
     return <ProfileQuestions profile={settings.profile ?? profileFromScreening(settings.screening)} trueDepth={native.trueDepth} onSave={saveProfile} onBack={() => go('profile')} />

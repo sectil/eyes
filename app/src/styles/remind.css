@@ -72,7 +72,7 @@
   font: 700 0.76rem/1 var(--font-body); letter-spacing: 0.05em; text-transform: uppercase; }
 .rs-big { display: block; margin-top: 10px; font: 500 3.3rem/1 var(--font-display); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; color: var(--ink); }
 .rs-why { margin: 10px 0 0; font: 400 0.95rem/1.5 var(--font-body); color: var(--ink-2); }
-.rs-win, .rs-note { margin: 0; color: var(--ink-2); font-size: 0.95rem; }
+.rs-note { margin: 0; color: var(--ink-2); font-size: 0.95rem; }
 .rs-note { margin-top: 12px; }
 @media (max-width: 360px) {
   .rs-sheet { padding: 8px 16px calc(18px + env(safe-area-inset-bottom)); border-radius: 22px 22px 0 0; }
@@ -91,14 +91,11 @@
   .rs-big { margin-top: 7px; font-size: 2.4rem; }
   .rs-why { margin-top: 6px; font-size: 0.8rem; line-height: 1.4; }
 }
-.rs-win.bad { color: var(--warn); }
 .rs-btns { display: flex; gap: 8px; flex-wrap: wrap; }
 .rs-row { display: flex; flex-direction: column; gap: 6px; }
 .rs-time { display: flex; align-items: center; gap: 8px; }
 .input.rs-input { flex: 1; min-height: 54px; font-size: 1.35rem; font-weight: 600; font-variant-numeric: tabular-nums; -webkit-appearance: none; appearance: none; }
 .rs-del { width: 44px; height: 44px; border: 0; background: none; color: var(--ink-3); }
-.rs-clash { padding: 10px 12px; border-radius: var(--radius-sm); background: var(--surface-2); }
-.rs-clash p { margin: 0 0 6px; }
 .rs-link { align-self: flex-start; border: 0; background: none; padding: 8px 0; color: var(--accent); font-weight: 600; }
 
 /* ---------- Bildirimler ---------- */

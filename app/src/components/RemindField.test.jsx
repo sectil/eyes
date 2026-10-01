@@ -10,7 +10,7 @@ globalThis.localStorage = { getItem: (k) => (mem.has(k) ? mem.get(k) : null), se
 const { createRoot } = await import('react-dom/client')
 const { default: RemindField } = await import('./RemindField.jsx')
 const { default: RemindSheet } = await import('./RemindSheet.jsx')
-const { applyRemind, checkTimes, locTime, listTimes } = await import('./remindUi.js')
+const { applyRemind, checkTimes, sheetNear, locTime, listTimes } = await import('./remindUi.js')
 const { default: QuietHours, quietClashes } = await import('../screens/QuietHours.jsx')
 const { default: Notifications } = await import('../screens/Notifications.jsx')
 
@@ -89,21 +89,33 @@ describe('RemindSheet', () => {
     expect(asked).toBe(1)
   })
 
-  it('elle: pencere cümlesi türüne göre, "Bir saat daha" en çok 3 saat', async () => {
-    const v = await mount(h(RemindSheet, { moduleId: 'yoga', remind: YOGA, reminders: rem({ optIn: 'yes' }), now: NOW }))
+  it('elle: pencere cümlesi yok (saat sınırı yok), "Bir saat daha" en çok 3 saat; yakın bildirim bilgi satırında, Kaydet açık', async () => {
+    let saved = null
+    const busy = [{ time: '22:15', label: 'Mola' }]
+    const v = await mount(h(RemindSheet, { moduleId: 'yoga', remind: YOGA, reminders: rem({ optIn: 'yes' }), busy, now: NOW, onSave: (x) => { saved = x } }))
     await v.tap('Saatleri ben seçeyim')
-    expect(v.text()).toContain('08.00–22.00 arasında, günde en çok 3 saat.')
-    await v.tap('Bir saat daha')
+    expect(v.text()).not.toContain('arasında, günde en çok')
+    expect(v.text()).not.toContain('Yarım saat içinde')
+    await v.tap('Bir saat daha') // 22.00: Mola 22.15'e 15 dk
+    expect(v.text()).toContain('Yarım saat içinde 1 bildirimin daha var')
+    expect(v.text()).toContain('22.15 Mola')
     await v.tap('Bir saat daha')
     expect(v.btn('Bir saat daha')).toBeUndefined()
+    const k = v.btn('Kaydet')
+    expect(k.disabled ?? k.getAttribute('disabled') != null).toBeFalsy()
+    await v.tap('Kaydet')
+    expect(saved.moduleReminders.yoga).toMatchObject({ on: true, mode: 'manual', times: ['16:30', '22:00'] })
   })
 
-  it('çakışma: "12.30\'da Mola var." ve bir saat sonrası önerisi; hata varken Kaydet kapalı', async () => {
+  it('çakışma engel değil: hata yalnız geçersiz saatte; yakın bildirimler (başka ve kendi saatleri) bilgi satırına', async () => {
     const busy = [{ time: '12:30', label: 'Mola' }]
-    const c = checkTimes(['12:00'], BLINK, busy)[0]
-    expect(c).toMatchObject({ error: 'gap', suggest: '13:30' })
-    expect(checkTimes(['08:00'], BLINK, busy)[0].error).toBe('window')
-    expect(checkTimes(['10:00', '10:30'], BLINK)[1].error).toBe('gap') // kendi saatleri arasında da 60 dk
+    expect(checkTimes(['12:00'], BLINK, busy)[0]).toEqual({ time: '12:00', error: null })
+    expect(checkTimes(['08:00'], BLINK, busy)[0].error).toBeNull() // pencere dışı
+    expect(checkTimes(['10:00', '10:30'], BLINK)[1].error).toBeNull() // kendi saatleri arasında 60 dk yok
+    expect(checkTimes(['', '10:00'])[0].error).toBe('invalid')
+    expect(sheetNear(['12:15'], 0, busy, 'Göz kırpma').map((b) => [b.time, b.label])).toEqual([['12:30', 'Mola']])
+    expect(sheetNear(['10:00', '10:20'], 1, [], 'Göz kırpma').map((b) => [b.time, b.label])).toEqual([['10:00', 'Göz kırpma']])
+    expect(sheetNear(['11:45'], 0, busy)).toEqual([]) // 45 dk: yakın değil
     expect(locTime('12:30')).toBe("12.30'da")
     expect(locTime('09:15')).toBe("09.15'te")
     expect(locTime('13:40')).toBe("13.40'ta")
@@ -167,18 +179,29 @@ describe('Gece sessizliği', () => {
     expect(v.text()).not.toContain('gece sessizliğinin içinde')
   })
 
-  it('sınırda "+" kapalı ve nedenini söyler (en geç 10.00); deney saati içerideyse uyarı', async () => {
+  it('sınırda "+" kapalı ve nedenini söyler (en geç 10.00); deney saati içerideyse uyarı yalnız saati Nef seçtiyse', async () => {
     let q = null
     const reminders = rem({ optIn: 'yes', types: { mola: { on: true, time: '09:30' } } })
     const v = await mount(h(QuietHours, { quiet: { from: '23:00', to: '10:00' }, reminders, onChange: (x) => { q = x } }))
     expect(v.btn('Geç bitir').disabled ?? v.btn('Geç bitir').getAttribute('disabled') != null).toBeTruthy()
     expect(v.text()).toContain('en geç 10.00')
-    expect(v.text()).toContain('09.30 Mola gece sessizliğinin içinde; saatini değiştir')
-    expect(v.text()).toContain('Mola saatine git')
+    // Kişinin seçtiği saat: uyarı yok (sahip kararı 2026-10-01); sessizlikte de gelenler listesinde
+    expect(v.text()).not.toContain('gece sessizliğinin içinde')
+    expect(v.text()).not.toContain('Mola saatine git')
     expect(v.text()).toContain('Mola hatırlatması')
     await v.tap('Erken bitir')
     expect(q).toEqual({ from: '23:00', to: '09:30' })
     expect(quietClashes(reminders, { from: '23:00', to: '09:00' })).toEqual([])
+    // Saati Nef seçtiyse ("Nef seçsin") uyarı kalır
+    const nefMr = { mola: { on: true, mode: 'auto', times: [] } }
+    expect(quietClashes(reminders, { from: '23:00', to: '10:00' }, nefMr)).toEqual([{ type: 'mola', time: '09:30', nef: true }])
+    const n = await mount(h(QuietHours, { quiet: { from: '23:00', to: '10:00' }, reminders, moduleReminders: nefMr }))
+    expect(n.text()).toContain('09.30 Mola gece sessizliğinin içinde; saatini değiştir')
+    expect(n.text()).toContain('Mola saatine git')
+    // Bildirimler'deki satır uyarısı da aynı kuralla
+    const nt = (moduleReminders) => mount(h(Notifications, { modules: [], moduleReminders, reminders, quiet: { from: '23:00', to: '10:00' }, slots: [], now: NOW }))
+    expect((await nt({})).text()).not.toContain('gece sessizliğinin içinde')
+    expect((await nt(nefMr)).text()).toContain('09.30 Mola gece sessizliğinin içinde; saatini değiştir')
   })
 
   it('başlangıç 24.00\'e kadar; 24.00 "00:00" olarak yazılır', async () => {
