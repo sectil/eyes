@@ -67,13 +67,17 @@
 .al-q > h2 { margin: 0; font-size: 1.1rem; font-weight: 650; letter-spacing: -0.01em; }
 /* Kurulum notları ink-2 (3. tur: ink-3 koyu temada soluk kalıyordu); .al-q-sub yalnız bu ekranda */
 .al-q-sub { margin: 0; font-size: 0.875rem; line-height: 1.45; color: var(--ink-2); }
-/* Tek seferlik: ne zaman çalacak, düğmelerin üstünde simgeli yumuşak kutu (3. tur); uyku notundan ayrı */
+/* Tek seferlik: düğmelerin üstünde simgeli özet kutusu. 4. tur: zemin nötr yüzey + ince kenar (accent-soft seçili
+   çiplerle aynı tondu, basılabilir sanılıyordu); yalnız simge accent. --surface-3: sayfa zeminine karşı koyuda 1,31:1
+   (--surface-2 1,16, eski accent-soft 1,23), açıkta 1,18:1. Uyku sesi notu ikinci satır (normal, ink-2) */
 .al-once {
-  display: flex; align-items: center; gap: 10px; margin: 4px 0 0; padding: 12px 14px; border-radius: var(--radius-sm);
-  background: var(--accent-soft); color: var(--ink); font-size: 0.95rem; font-weight: 650; line-height: 1.4;
+  display: flex; align-items: flex-start; gap: 10px; margin: 4px 0 0; padding: 12px 14px; border-radius: var(--radius-sm);
+  background: var(--surface-3); border: 1px solid var(--border); color: var(--ink); font-size: 0.95rem; font-weight: 650; line-height: 1.4;
 }
-.al-once svg { flex: none; color: var(--accent); }
-.al-once span { text-wrap: balance; } /* 320 pt: "çalar." tek kalmasın */
+.al-once svg { flex: none; margin-top: 2px; color: var(--accent); }
+.al-once-tx { display: grid; gap: 4px; min-width: 0; }
+.al-once-tx p { margin: 0; }
+.al-once-tx .al-once-sub { font-size: 0.875rem; font-weight: 400; line-height: 1.45; color: var(--ink-2); }
 .al-q-label { margin: 4px 0 0; font-size: 0.9rem; font-weight: 600; color: var(--ink-2); }
 
 .al-chips { display: flex; flex-wrap: wrap; gap: 8px; }

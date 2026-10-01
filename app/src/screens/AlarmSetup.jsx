@@ -109,6 +109,9 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
   const tonight = sleepFor(buildAlarm({ time, days, sleep, sound, wake, kind: notify ? 'notify' : 'alarmkit' }, clock), clock)
   const tonightText = tonight >= 60 ? `${Math.round(tonight / 60)} dk` : `${tonight} sn`
   const withSoundOk = sleepOn && tonight > 0 && platform !== 'web'
+  const sleepNote = sleepOn && platform !== 'web'
+    ? tonight > 0 ? `Kurunca uyku sesi hemen başlar: ${tonightText}, sonra yavaşça susar.` : 'Alarma çok az var; uyku sesi çalmaz.'
+    : null
 
   // withSound: "Kur ve uyku sesini başlat". Müzik AYNI dokunuşta, alarm kurulmadan (beklemeden) önce başlar: iOS sesi
   // yalnız dokunuşun içinde açar (Bug 22). Alarm kurulamazsa müzik durur.
@@ -271,12 +274,17 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
       {notify && <p className="al-warn">Bu telefonda gerçek alarm yok (iOS 26 gerekir). Bildirim olarak gelir; sessiz modda ses çıkmaz.</p>}
       {err && <p className="al-err" role="alert">{err}</p>}
       <div className="grow" />
-      {sleepOn && platform !== 'web' && (
-        <p className="al-q-sub al-now">
-          {tonight > 0 ? `Kurunca uyku sesi hemen başlar: ${tonightText}, sonra yavaşça susar.` : 'Alarma çok az var; uyku sesi çalmaz.'}
-        </p>
+      {/* Uyku sesi notu: gün seçiliyken düğmelerin üstünde; tek seferlikte özet kutusunun ikinci satırı (4. tur: tek blok) */}
+      {sleepNote && !onceWhen && <p className="al-q-sub al-now">{sleepNote}</p>}
+      {onceWhen && (
+        <div className="al-once">
+          <AlarmClock size={18} aria-hidden="true" />
+          <div className="al-once-tx">
+            <p>{`${onceWhen} ${withSuffix(time, 'loc')} bir kez çalar.`}</p>
+            {sleepNote && <p className="al-once-sub">{sleepNote}</p>}
+          </div>
+        </div>
       )}
-      {onceWhen && <p className="al-once"><AlarmClock size={18} aria-hidden="true" /><span>{`${onceWhen} ${withSuffix(time, 'loc')} bir kez çalar.`}</span></p>}
       {withSoundOk ? (
         <>
           <button type="button" className="btn" disabled={busy || !platform} onClick={() => submit(true)}>
