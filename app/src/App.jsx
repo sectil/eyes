@@ -76,7 +76,7 @@ import { viewFor } from './modules/views.js'
 import IPHONE_SCREENS from './lib/iphoneScreens.json'
 import GazeCalibration from './screens/GazeCalibration.jsx'
 import GazeTest from './screens/GazeTest.jsx'
-import { alarmStatus, consumeOpen, cancelAlarm, ALARM_CHANGED } from './lib/alarmNative.js'
+import { alarmStatus, consumeOpen, cancelAlarm, alarmDiag, ALARM_CHANGED } from './lib/alarmNative.js'
 import { loadAlarm, loadAlarmLog, addAlarmEvent } from './lib/alarmLog.js'
 import { wakeSignal, morningCard, nextRing, daysLabel, hhmm, minOfDay, latency } from './lib/alarm.js'
 import { soundById } from './lib/alarmSounds.js'
@@ -1317,6 +1317,7 @@ export default function App() {
       <Info
         onGo={(s) => (s === 'schedule' ? openSchedule('info') : go(s))}
         onSkyTry={SKY_UI ? () => startSky('locate') : null}
+        onAlarmDiag={SKY_UI ? () => alarmDiag() : null}
         iosApp={isIOSApp()}
         trueDepth={native.trueDepth}
         calibration={settings.calibration}

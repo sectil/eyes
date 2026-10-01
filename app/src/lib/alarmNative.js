@@ -5,6 +5,7 @@
 import { Alarm, isIOSApp } from './native.js'
 import { notifyPermission } from './restNotify.js'
 import { soundById } from './alarmSounds.js'
+import { loadAlarm, loadAlarmLog } from './alarmLog.js'
 
 export const FALLBACK_BASE = 7600
 export const FALLBACK_ONCE = 7607
@@ -152,4 +153,32 @@ export async function stopPreview() {
   } catch {
     // yoksay
   }
+}
+
+// Tanı (D4, sahip 2026-10-01: alarm ertesi gün çalmadı). Yalnız test derlemesinde Bilgi → "Alarm (tanı)".
+// Uygulamanın kaydı (gün, saat, açık mı), telefonda saklanan kimlik ve AlarmKit'teki gerçek alarmlar, son 10 olay.
+// alarm/log/native verilebilir (test); verilmezse kayıttan ve eklentiden okunur.
+export async function alarmDiag({ alarm = loadAlarm(), log = loadAlarmLog(), native } = {}) {
+  let n = native
+  if (n === undefined) {
+    try {
+      n = isIOSApp() ? await Alarm.list() : null
+    } catch (e) {
+      n = { error: String(e?.message ?? e) }
+    }
+  }
+  const lines = []
+  lines.push(alarm ? `Kayıt: ${alarm.on ? 'açık' : 'kapalı'} · ${String(alarm.hour).padStart(2, '0')}:${String(alarm.minute).padStart(2, '0')} · günler [${alarm.days.join(',')}] (0 = Pazar)` : 'Kayıt: yok')
+  if (!n) lines.push('AlarmKit: okunamadı (web ya da eklenti yok)')
+  else {
+    if (n.error) lines.push(`AlarmKit hata: ${n.error}`)
+    if (n.available === false) lines.push('AlarmKit: yok (iOS 26 gerekir)')
+    lines.push(`Saklanan kimlik: ${n.stored || 'yok'}`)
+    const list = Array.isArray(n.alarms) ? n.alarms : []
+    lines.push(`AlarmKit alarmları: ${list.length}`)
+    for (const a of list) lines.push(`· ${a.id === n.stored ? '(saklanan) ' : ''}${a.state} · ${a.schedule}`)
+  }
+  lines.push('Son olaylar:')
+  for (const e of log.slice(-10)) lines.push(`· ${e.at} ${e.type}${e.via ? ` (${e.via})` : ''}`)
+  return lines.join('\n')
 }

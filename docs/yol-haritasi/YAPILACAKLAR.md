@@ -91,6 +91,8 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
 - [ ] D4 **Alarm (06.35):** gece ekranı ve uyku müziği çalışıyor; alarm bir kez çaldı, beklenen ikinci çalış olmadı.
       Sahip: ertesi gün çalmadı. Bulgu: uygulama alarmın telefonda gerçekten kurulu olup olmadığını hiç sormuyor
       (`AlarmPlugin.current` JS'te çağrılmıyor); "kurulu" yazısı yalnız uygulamanın kendi kaydından. Neden henüz bilinmiyor.
+      Sahip: günler Pazartesi–Cumartesi. Tanı satırı eklendi (test derlemesi, Bilgi → "Alarm (tanı)": kayıt, telefondaki
+      AlarmKit alarmları, son olaylar); sahip ekran görüntüsünü gönderince neden bulunur.
 - [ ] D5 **Hatırlatmalarda "Çoğu gün" / "Gün aşırı" kalkar:** alarmdaki gibi gün seçimi (Pzt–Paz), günleri kişi seçer.
       VARSAYIM: "Bazı günler bilerek göndermiyoruz" seyreltmesi de kalkar (kişinin seçtiği gün geçerli) — onaya.
 - [ ] D6 **Saat kısıtı kalkar:** hatırlatmalarda ve göz çalışması hatırlatmasında kişi her saati seçebilir ("Saat

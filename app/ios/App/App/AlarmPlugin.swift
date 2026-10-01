@@ -44,6 +44,7 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "schedule", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "cancel", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "current", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "list", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "preview", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "stopPreview", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "consumeOpen", returnType: CAPPluginReturnPromise),
@@ -178,6 +179,28 @@ public class AlarmPlugin: CAPPlugin, CAPBridgedPlugin {
         }
         #endif
         call.reject("AlarmKit yok (iOS 26 gerekir)", "UNAVAILABLE")
+    }
+
+    /// Tanı (yalnız test derlemesinde Bilgi → "Alarm (tanı)"): AlarmKit'te bu uygulamanın bütün alarmları.
+    /// Alarm'ın belgeli alanları: id, schedule (isteğe bağlı), state (alarmkit_alarm.json); durum ve çizelge metin olarak.
+    @objc func list(_ call: CAPPluginCall) {
+        let stored = UserDefaults.standard.string(forKey: Self.idKey) ?? ""
+        #if canImport(AlarmKit)
+        if #available(iOS 26.0, *) {
+            do {
+                let rows: [[String: Any]] = try AlarmManager.shared.alarms.map { a in
+                    ["id": a.id.uuidString,
+                     "state": String(describing: a.state),
+                     "schedule": a.schedule.map { String(describing: $0) } ?? "yok"]
+                }
+                call.resolve(["available": true, "stored": stored, "alarms": rows])
+            } catch {
+                call.resolve(["available": true, "stored": stored, "alarms": [], "error": "\(error)"])
+            }
+            return
+        }
+        #endif
+        call.resolve(["available": false, "stored": stored, "alarms": []])
     }
 
     @objc func cancel(_ call: CAPPluginCall) {
