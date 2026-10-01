@@ -171,6 +171,40 @@ yere düşen yumuşak gölgeler, sınırlı renk paleti (uygulama turkuazı yaln
 paleti, lambaların ışığı. Tabelaları ağaç ve lamba kesmez (aralara konur). Hareket: kişilerde adım, arabalarda tekerlek
 dönüşü; `prefers-reduced-motion`'da sahne kayar ama kişiler durur. Ses: ilk sürümde yok (§9 soru).
 
+## 5b. Bağlayıcı tasarım maddeleri (beş kapı turunun bulguları) ve kapının yeri
+
+Durağan maket beş turda 4/5'e ulaşmadı (`kapi/`). Ana oturum ekranları uygularken aşağıdakilerin hepsini sağlar ve
+5 sn kapısını **cihazdaki hareketli ekranın kaydıyla** (390 ve 320, iki tema; 5 yeni kişi, ≥ 4/5) yapar. Geçmeyen
+ekran sahibe gösterilmez.
+
+Modül turu:
+1. Sahne her genişlikte aynı içeriği gösterir: "Ne değişti?" karesi 4:5 ve kenar boşlukları ekranla aynı; görev
+   ekranında tabela ve kişiler kesilmez (kırpım nesne sınırlarına göre seçilir).
+2. "Ne değişti?" iki görüntüyü gerçekten gösterir: ilk kare 3 sn, göz kırpar gibi yumuşak kararma, ikinci kare; altta
+   "Değişen yere dokun" ipucu. Bakış noktaları kalır.
+3. Bulununca kutlama: sahne karartılmaz; değişen nesne parlar, kısa bir halka dalgası ve hafif titreşim. Vurgu başka
+   nesneye (araba, tabela) binmez; değişen nesne sahnede tek başına durduğu yerden seçilir.
+4. Gözünden kaçan: silüet ya da sis cevabı ele vermez (bacak, gölge görünmez); "yakalama" turlarında aynı görsel.
+   İki adımlı soru tek ilerleme göstergesiyle ("Soru 1 · seçenek" yerine noktalar: ●○ ●●).
+5. Üç seçenekli düğmeler tek satıra sığar; 320'de iki satır olur ama metin kenara yapışmaz.
+6. Sonuç: ölçek noktalarının ne olduğu tek satırla yazılır ("her nokta bir nesne"); 320 ve 390 aynı satırları
+   gösterir; ortada boşluk kalmaz. İddia sınırı zafer anının altında değil: "Neye dayanıyor?" sayfasında ve modülün ilk
+   turunda görev ekranında bir kez.
+7. Ana sayfa: Nef kartı tek düğme; kart görseli soru ve değişiklik konusu olmayan bir kareden.
+
+Canlı görevler:
+8. Bildirim "telefona bakma" demez. Yol görevi: "Yürürken sarı kapıları say. Cevabını akşam sorarım."
+9. Ekranda aynı anda tek canlı görev bildirimi kalır: süresi geçen görev bildirimi kaldırılır (teslim edilmiş bildirimi
+   silme, VARSAYIM: Swift köprüsünde `removeDeliveredNotifications`; yoksa yeni iş).
+10. Varsayılan sıklık haftada 2; kişi 4'e çıkarabilir. Akşam sorusu yalnız sabah görevi verildiyse gelir.
+11. Bildirim zaman etiketi metne binmez (gerçek iOS bildirimi; maket hatasıydı).
+12. Renk avı ekranı: sayaç ve süre ayrı (büyük sayı 3/5, altında ince süre çubuğu); ekranda aranan renk görünür
+    (örnek renk noktası).
+13. Akşam sorusu çiziminde sayılan nesne (sarı kapılar) görünür; 320'de çizim kalkınca boşluk kalmaz.
+14. Sonuçta Nef sorusu açık iki düğmeyle: "Evet, gönder" · "Şimdilik hayır". Gizli onay yok.
+15. Oyun hissi: hafta şeridi, sürpriz sorunun ertesi gün açığa çıkan "doğru cevabı" yok (doğrulanamaz); bunun yerine
+    kişinin kendi serisi ve "emin değildim" sayısının haftalar içindeki seyri yalnız kişiye gösterilir, hüküm kurmaz.
+
 ## 6. Aşamalar (ana oturum uygular)
 
 | Aşama | İş | Dosyalar (izinli) | Bitti tanımı |

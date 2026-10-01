@@ -26,8 +26,10 @@ Bağlayıcı:
   kart metni yalnız özette yazanı söyler.
 - Sağlık iddiası yok; "beyin", "tanıma" yok; değişim sözcükleri yalnız dört hüküm sözcüğü.
 - Görünür her metin METINLER.md'den; yeni metin gerekirse yaz, 5 sn kapısına ve sahibe götür, kendin uydurup koyma.
-- Her yeni ya da değişen ekran cihaz görüntüsüyle 5 sn kapısından (5 kişi, ≥ 4/5, 390 ve 320, iki tema) geçer;
-  mükemmel bulmadığını sahibe gösterme.
+- PLAN §5b'deki 15 madde bağlayıcıdır. Her yeni ya da değişen ekran, cihazdaki hareketli hâlinin kaydıyla 5 sn kapısından
+  (5 yeni kişi, ≥ 4/5, 390 ve 320, iki tema) geçer; en çok iki tur, geçmezse sahibe sor. Mükemmel bulmadığını sahibe
+  gösterme. Maketler (`maket/son.html`) yön ve içerik içindir; kapıdan geçmiş tasarım değildir.
+- Canlı görevler (PLAN §9b) F7 aşamasıdır; bildirim dosyaları bildirim oturumuyla sıraya konur.
 - Testler: aşama içinde yalnız ilgili dosyalar (`npx vitest run …`), sonda tam takım ve derleme bir kez. PLAN §7'deki
   test listesinin dışında bir test değişirse dur ve nedenini yaz.
 - Commit yazarı `Claude <noreply@anthropic.com>`; ileti sonunda Co-Authored-By ve Claude-Session satırları; model adı
