@@ -25,7 +25,7 @@ const OFF_PATH = new Set(['daily'])
 const NEW_WINDOW_DAYS = 7 // VARSAYIM
 
 // Modülün "yapıldı" ölçütü: manifest.progression.match → ölçüm türü → sessions.match (yoksa null: sayılmaz)
-function matcherOf(m) {
+export function matcherOf(m) {
   if (typeof m?.progression?.match === 'function') return m.progression.match
   if (TEST_TYPES[m?.id]) return (r) => r?.type === TEST_TYPES[m.id]
   if (typeof m?.sessions?.match === 'function') return m.sessions.match

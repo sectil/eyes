@@ -137,7 +137,7 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
       Bilgi'de "Titreşim" ayarı). Sahip: ikisi birden (titreşim + düğmenin yaylı basış hareketi); ŞU AN HİÇ TİTREMİYOR
       (hata). Tanı: Bilgi → "Titreşimi dene" sonucunun ekran görüntüsü (hangi yol çaldı, hata).
 
-- [ ] D9 **Sonsuz yol uzun olacak, Duolingo gibi** (sahip, 2026-10-01): Ana sayfadaki yol çok kısa (bugünün 4 durağı).
+- [~] D9 **Sonsuz yol uzun olacak, Duolingo gibi** (sahip, 2026-10-01): Ana sayfadaki yol çok kısa (bugünün 4 durağı).
       Aşağı doğru yüzlerce aşama görünür (gelecek günler, kilitli); aralarda nefes, yoga, Dalga gibi duraklar; Nef'in
       kısa yorumları; yarın için alarm kuruluysa alarm saati durağı; "Hatırlatma kurmak ister misin?" durağı →
       Hatırlatmalar. Etiketler kolay anlaşılır. 5 sn kuralı geçerli ("heyecanımı kaybettirme"); mükemmel olmayan sahibe
@@ -148,6 +148,11 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
       0–1/5 kaldı. Sahibe gönderilmedi: "E testi" üç kez, clip-art göz, 320'de yapışık etiketler, yol gizli (D9'a aykırı);
       ayrıca düzenek kopyalarında yazı tipleri yüklenmemişti (node_modules izni) — düzeltildi. D9 tasarımı bu öğrenmelerle
       başladı (iş akışı w0r4k0ij6).
+      Kod dalda (2026-10-01, sürüm notu 2026-10-01-9; cihazda bakılmadı → [~]). Tur 9'da "Yarın" bölüm kartının içine
+      alındı (sahip kararı). Mutlak 5 sn kapısında aynı görüntü turdan tura 4/5 → 2/5 oynadı; sahip kararıyla yöntem kör
+      yan yana karşılaştırma oldu: yeni hâl 7 senaryonun 7'sinde eskiyi yendi (4/5, bölüm sonu 5/5). Son 5 sn kapısı
+      10/11 geçti; 1. gün yol görünümü 3/5 (açık: Dalga kartı durak mı ek mi belli değil; ödül kartta üç ayrı göz
+      simgesiyle; kartlar arası bağlantı düz; bölüm kartı 320'de uzun). Sahip "şimdi gönder" dedi; son karar cihazda.
 
 - [ ] D10 **Günaydın ekranında hava durumu** (sahip, 2026-10-01): alarm sonrası "Günaydın." ekranında (uyku → sabah)
       bugünün havası. Hava rızası ve yer varsa; cümleler onaylı sabah havası hücrelerinden. Ana sayfa tasarımında da hava

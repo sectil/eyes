@@ -1368,6 +1368,8 @@ export default function App() {
         alarmStatus={alarmSt}
         alarmTest={Boolean(access.testUnlock)}
         onYogaMorning={refresh}
+        // Hava satırı (B2 tpl-home): yalnız SKY_UI açıkken, weather rızası ve kayıtlı yer varken (yoksa Ana sayfada yer yok)
+        sky={SKY_UI && hasConsent(settings.consents, 'weather') ? loadPlace() : null}
       />
     )
   }

@@ -14,6 +14,7 @@ vi.mock('../lib/pathLater.js', async (orig) => ({ ...(await orig()), loadLater: 
 
 const { default: Home } = await import('./Home.jsx')
 const { buildPath } = await import('../lib/today.js')
+const { AHEAD_DAYS } = await import('../lib/pathAhead.js')
 
 const settings = { profile: null, reminders: null, consents: {} }
 const render = (tests, sessions) => renderToStaticMarkup(h(Home, { tests, sessions, settings, onStart: () => {} }))
@@ -33,9 +34,19 @@ describe('Ana sayfa · ilerleme bağlamı', () => {
     const tests = ['R', 'L', 'OU'].map((eye) => ({ type: 'va-weekly', eye, date: iso(1) }))
     const sessions = [{ type: 'game', game: 'track', date: iso(1) }, { type: 'breath', seconds: 60, date: iso(1) }, { type: 'routine', setId: 'kirpma', seconds: 30, date: iso(1) }]
     const html = render(tests, sessions)
-    const ctx = buildPath.mock.calls[0][1]
+    // Ana sayfa dünün yolunu da kurar (günün cümlesi, öncelik 7: "Dün yolunun bütün duraklarını tamamladın."; bugünün
+    // yolundan önce). Bugünün çağrısı "Sonra yaparım" kaydını taşıyandır. D9 (uzun yol; beklenti bu yüzden değişti: önce
+    // tam 2 çağrı): bugünün yolundan sonra gelecek günler kurulur (lib/pathAhead.js projectDays; D9 v2: 70 gün, on bölüm)
+    // ve en sonda bugünün yolu bir kez daha (routine modülünün bugünkü grup adları); bu çağrıların hiçbiri "Sonra yaparım"
+    // kaydını taşımaz.
+    const i = buildPath.mock.calls.findIndex(([, c]) => c.later === LATER)
+    expect(buildPath.mock.calls.filter(([, c]) => c.later === LATER).length).toBe(1)
+    const ahead = buildPath.mock.calls.filter(([, c]) => c.later == null && c.now > Date.now() + 3600000)
+    expect(ahead.length).toBe(AHEAD_DAYS)
+    expect(ahead.map(([, c]) => c.progression.pathDay)).toEqual(Array.from({ length: AHEAD_DAYS }, (_, k) => 2 + k))
+    const ctx = buildPath.mock.calls[i][1]
     expect(ctx.progression.pathDay).toBe(1)
-    const keys = buildPath.mock.results[0].value.stops.map((s) => s.key)
+    const keys = buildPath.mock.results[i].value.stops.map((s) => s.key)
     expect(keys).toEqual(expect.arrayContaining(['snake', 'notice']))
     expect(html).toContain('Yeni')
   })

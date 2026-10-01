@@ -73,10 +73,13 @@ describe('göz molası önerisi 5 dk\'lık nefes açar (yolun basamağı değil)
     expect(eye.begun).toEqual(['path'])
     await act(async () => root.unmount())
   })
+  // D9: sakin seçenek "5 dk mola" yolun içinde, yolun Nefes durağı beklemiyorken (aynı ekranda iki ayrı nefes okunmasın;
+  // beklenti bu yüzden değişti: önce gün başında da vardı). Burada 1. günün Nefes durağı bitti.
   it('yeni kullanıcı 1. gün: sakin seçenek "5 dk mola" de breath-5 açar; mola bugünkü kuralla başlar (yolun istisnası yok)', async () => {
     const opened = []
     eye.st = { locked: false, due: null, used: MIN, budgetMs: 5 * MIN, leftMs: 4 * MIN }
-    const { container, root } = await mount({ eyeBudget: eye.st, onStart: (r) => opened.push(r) })
+    const sessions = [{ type: 'breath', seconds: 62, pattern: 'calm', stage: 'N1', date: new Date(Date.now() - MIN).toISOString() }]
+    const { container, root } = await mount({ sessions, eyeBudget: eye.st, onStart: (r) => opened.push(r) })
     const alt = byText(container, '5 dk mola')
     expect(alt).not.toBeNull()
     await act(async () => alt.click())
@@ -84,7 +87,9 @@ describe('göz molası önerisi 5 dk\'lık nefes açar (yolun basamağı değil)
     expect(eye.begun).toEqual(['path']) // Y1 öncesi kural: son moladan beri ≥ 1 dk göz çalışması
     await act(async () => root.unmount())
   })
-  it('yolun Nefes durağı breath-rest ile açılır (1. gün: 1 dk nefesten sonra mola başlamaz)', async () => {
+  // 5 saniye turu 6 (Yön B, ilk 7 gün): sıradaki durak büyük kartta, sade listede tekrar etmez. Durağın kendisi kartla
+  // açılır (aşağıdaki test); listede bir sonraki duraklar sıralı, dokununca "Önce: Nefes" der ve açılmaz.
+  it('yolun Nefes durağı breath-rest ile açılır (1. gün: 1 dk nefesten sonra mola başlamaz); listede tekrar yok', async () => {
     const opened = []
     eye.st = { locked: false, due: null, used: MIN, budgetMs: 5 * MIN, leftMs: 4 * MIN }
     // 1. gün: E testi ve Çemberler bitti, sıradaki Nefes (1 dk)
@@ -92,8 +97,13 @@ describe('göz molası önerisi 5 dk\'lık nefes açar (yolun basamağı değil)
     const tests = ['R', 'L', 'OU'].map((e, i) => ({ type: 'va-weekly', eye: e, date: new Date(now - (10 - i) * MIN).toISOString() }))
     const sessions = [{ type: 'game', game: 'track', date: new Date(now - 3 * MIN).toISOString() }]
     const { container, root } = await mount({ tests, sessions, eyeBudget: eye.st, onStart: (r) => opened.push(r) })
-    const stop = btns(container).find((b) => (b.attrs['aria-label'] ?? '').startsWith('Nefes, mola, 1 dakika'))
-    expect(stop).toBeTruthy()
+    // D9: yol başladıktan sonra sıradaki durak yolda yerinde ("…, sırada"); önce Yön B listesinde hiç yoktu
+    expect(btns(container).find((b) => (b.attrs['aria-label'] ?? '') === 'Nefes, mola, 1 dakika, sırada')).toBeDefined()
+    const later = btns(container).find((b) => (b.attrs['aria-label'] ?? '').startsWith('Göz kırpma'))
+    expect(later?.attrs['aria-label']).toMatch(/Önce Nefes$/)
+    await act(async () => later.click())
+    expect(opened).toEqual([]) // ilerideki durak açılmaz
+    const stop = byText(container, 'Yola devam et')
     await act(async () => stop.click())
     expect(opened).toEqual(['breath-rest'])
     expect(eye.begun).toEqual([]) // kullanılan 1 + 2. bölüm 1 dk ≤ 5: mola nefes kadar
@@ -125,8 +135,10 @@ describe('göz molası önerisi 5 dk\'lık nefes açar (yolun basamağı değil)
   })
 })
 
+// D9: yol her gün uzun yol (LongPath); bant yolun içinde .lp-band.nefes, süresi altta ("Mola · N dk"). Sıradaki durak
+// gün ortasında yolda yerinde ve vurgulu (erişilebilir adı "…, sırada"); süre bandın yazdığı mola süresidir.
 describe('mola bandı: yolun molası sürerken ve bittikten sonra "Mola · 5 dk" (eski kullanıcı)', () => {
-  const band = (html) => html.match(/<span class="tp-btag">(.*?)<\/span>/)?.[1]
+  const band = (html) => html.match(/class="lp-band nefes[^"]*"[^>]*>[\s\S]*?<small>(.*?)<\/small>/)?.[1]?.replace(/\u00a0/g, ' ')
   // haftalık E testi 3 gün, okuma 2 gün önce: bugün yolda ölçüm yok
   const tests = [...['R', 'L', 'OU'].map((e) => ({ type: 'va-weekly', eye: e, logMAR: 0.1, date: iso(3) })), { type: 'reading', wpm: 180, date: iso(2) }]
   const render = (props) => renderToStaticMarkup(h(Home, { tests, settings, onStart: () => {}, ...props }))
@@ -135,7 +147,9 @@ describe('mola bandı: yolun molası sürerken ve bittikten sonra "Mola · 5 dk"
   it('nefese dokunmadan önce, mola sürerken, nefes bitip kilit sürerken ve mola bittikten sonra 5 dk', () => {
     const s = [...oldUser(80), ...today()]
     const html = render({ sessions: s, eyeBudget: { locked: false, due: null, used: 3 * MIN, budgetMs: 5 * MIN, leftMs: 2 * MIN } })
-    expect(html).toContain('aria-label="Nefes, yeni, mola, 3 dakika, sırada"') // 1. bölüm bitti, sıradaki Nefes (güncelleme günü: "Günün ritmi" yeni)
+    // 1. bölüm bitti, sıradaki Nefes. D9 v2 (sahibin kuralı; beklenti bu yüzden değişti: önce "yeni"): güncelleme gününde de
+    // nefesi önceden yapmış kişide Nefes "Yeni" değil
+    expect(html).toContain('aria-label="Nefes, mola, 5 dakika, sırada"')
     expect(band(html)).toBe('Mola · 5 dk')
     expect(band(render({ sessions: s, eyeBudget: { locked: true, reason: 'path', leftMs: 4 * MIN, due: null } }))).toBe('Mola · 5 dk')
     const withBreath = [...s, { type: 'breath', seconds: 185, pattern: 'calm', stage: 'N3', date: new Date(Date.now() - 2 * MIN).toISOString() }]
@@ -143,8 +157,12 @@ describe('mola bandı: yolun molası sürerken ve bittikten sonra "Mola · 5 dk"
     eye.hist = [{ reason: 'path', start: Date.now() - 6 * MIN, until: Date.now() - MIN }]
     expect(band(render({ sessions: withBreath, eyeBudget: { locked: false, due: null, used: 0, budgetMs: 5 * MIN, leftMs: 5 * MIN } }))).toBe('Mola · 5 dk')
   })
-  it('yeni kullanıcı 1. gün: nefes bitti, yolun molası başlamadı → "Mola · 1 dk"', () => {
+  // D9: ilk 7 günde de bant var (yol her gün aynı uzun yol; sekme çubuğunun kenarında kesilmesini Home.jsx önler);
+  // önce (Yön B) ilk 7 günde bant yoktu. Nefes bitti, yolun molası başlamadı: mola nefes kadar (S0 kararı 8: 1. gün 1 dk).
+  it('yeni kullanıcı 1. gün: nefes bitti, yolun molası başlamadı → bant "Mola · 1 dk", tamam', () => {
     const s = [{ type: 'breath', seconds: 62, pattern: 'calm', stage: 'N1', date: new Date(Date.now() - MIN).toISOString() }]
-    expect(band(render({ sessions: s, eyeBudget: { locked: false, due: null, used: MIN, budgetMs: 5 * MIN, leftMs: 4 * MIN } }))).toBe('Mola · 1 dk')
+    const html = render({ sessions: s, eyeBudget: { locked: false, due: null, used: MIN, budgetMs: 5 * MIN, leftMs: 4 * MIN } })
+    expect(band(html)).toBe('Mola · 1 dk')
+    expect(html).toContain('aria-label="Nefes, mola, tamam"')
   })
 })

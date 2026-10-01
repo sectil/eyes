@@ -10,7 +10,8 @@ import '../styles/todaypath.css'
 // alındı (sıralı duraklar, görünür ilerleme); biçim markanın kendi dünyası:
 //   egzersiz = diyafram (kanatlar kapalı → yarı açık → açık iris), ölçüm = mercek, pratik = kanatların
 //   ardında sahne, mola = su ve ay (Nefes), final = altın kenar (fark etme). Nef tek kelimeyle yol gösterir.
-// Her bölüm bir kanat yayı: 1. bölüm sağa ")", 2. bölüm sola "(" bükülür; arada su bandı.
+// Her bölüm bir yay: 1. bölüm sağa ")", 2. bölüm sola "(" bükülür; arada su bandı (arkadaki soluk hilal kaldırıldı:
+// değerlendiriciler çizim hatası sandı).
 // plan: lib/today.js buildPath sonucu; eye: App eyeStatus(); day: lib/notice.js dayNumber(now).
 // newKeys: bugün ilk kez gelen durak ya da basamak (lib/progression.js newStopKeys): etikette "Yeni" (S0 taslağı b).
 // restMin: molanın süresi (lib/progression.js pathRestMinutes; yoksa Nefes durağının süresi): bant ve baloncuk bunu yazar.
@@ -23,6 +24,8 @@ import '../styles/todaypath.css'
 // lead: Ana sayfanın büyük düğmesi yolun sıradaki durağını açıyor (5 saniye turu 2). İlerlemeyle kurulan yolda, az önce
 // biten durak yokken sıradaki durakta Nef baloncuğu ve "Başla" çizilmez (ilk görünümde aynı çağrı üç kez yazıyordu);
 // durak kendi etiketiyle görünür, dokununca açılır. "Yeni" rozeti büyük düğmede olduğu için bu etikette yok.
+// Durak düğmesi data-key taşır (durağın anahtarı): Ana sayfanın "Bugünün yolu" satırı bugünün yeni durağına iner
+// (ana sayfa 5 saniye yeniden tasarımı). Çizim ve davranış değişmez.
 
 const W = 300 // yol koordinatı (px); ortalanır
 const STEP = 116
@@ -243,9 +246,7 @@ function layout(stops) {
   })
   let band = null
   let label2 = null
-  let cres = []
   const lastY1 = s1.length ? y - STEP : 20
-  if (s1.length > 1) cres.push(crescent(74, lastY1, false))
   if (restIdx >= 0) {
     const top = lastY1 + 62
     band = { top, height: 136, moon: [124, top + 60] }
@@ -256,7 +257,6 @@ function layout(stops) {
       pos.push([226 - 146 * bend(s2.length, i), y])
       y += STEP
     })
-    if (s2.length > 1) cres.push(crescent(label2 + 64, y - STEP, true))
   }
   const lastY = pos.length ? pos.at(-1)[1] : 0
   const segs = pos.slice(0, -1).map(([x0, y0], i) => {
@@ -264,16 +264,7 @@ function layout(stops) {
     const dy = y1 - y0
     return `M${x0} ${y0}C${x0} ${y0 + dy * 0.5} ${x1} ${y1 - dy * 0.5} ${x1} ${y1}`
   })
-  return { pos, band, label2, cres, segs, foot: lastY + 76, height: lastY + 130 }
-}
-// Bölümün arkasındaki soluk kanat (hilal); y0..y1 ilk ve son durak
-function crescent(y0, y1, mirror) {
-  const yA = y0 - 30
-  const yB = y1 + 30
-  const mid = (yA + yB) / 2
-  const k = (yB - yA) / 524
-  const X = (x) => (mirror ? W - x : x)
-  return `M${X(42)} ${yA}C${X(190)} ${yA - 14 * k} ${X(276)} ${mid - 136 * k} ${X(276)} ${mid}C${X(276)} ${mid + 136 * k} ${X(190)} ${yB + 14 * k} ${X(42)} ${yB}C${X(150)} ${yB - 28 * k} ${X(176)} ${mid + 114 * k} ${X(176)} ${mid}C${X(176)} ${mid - 114 * k} ${X(150)} ${yA + 28 * k} ${X(42)} ${yA}Z`
+  return { pos, band, label2, segs, foot: lastY + 76, height: lastY + 130 }
 }
 const STARS = [[26, 16, 0.8], [64, 6, 0.5], [104, 24, 0.7], [168, 10, 0.6], [206, 22, 0.8], [244, 6, 0.5], [282, 20, 0.7], [146, 2, 0.4]]
 // İlk yıldız "Mola · N dk" etiketinin altında (S0 kararı Ç17: etiketin üstüne düşüyordu); ilerlemeyle kurulan yolda
@@ -391,7 +382,6 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
               <stop offset="1" stopColor="#1F5FD6" />
             </radialGradient>
           </defs>
-          {L.cres.map((d, i) => <path key={i} className="tp-cres" d={d} />)}
           {L.segs.map((d, i) => (
             <g key={i}>
               <path className="tp-ln todo" d={d} />
@@ -427,6 +417,7 @@ export default function TodayPath({ plan, eye = null, day = 0, icons = {}, onSta
               <button
                 ref={i === jIdx ? nowRef : undefined}
                 type="button"
+                data-key={s.key}
                 className={`tp-st ${form} ${st}`}
                 style={{ left: px(x), top: y, ...(s.restSlot ? { '--p': restP } : {}) }}
                 onClick={() => tap(s, st)}

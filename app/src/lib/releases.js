@@ -6,6 +6,16 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // D9 uzun yol: Ana sayfa yolu ve bölüm kartı (yarın bölüm kartının içinde). Metin sahip onaylı (2026-10-01).
+    id: '2026-10-01-9',
+    title: '1 Ekim, dokuzuncu güncelleme',
+    items: [
+      { kind: 'new', text: 'Ana sayfa yeni: bugünün durakları kıvrımlı bir yolda sırayla durur, sıradaki durak öne çıkar.' },
+      { kind: 'new', text: 'Yolun altında içinde bulunduğun bölüm var: günlerin, bugünün yeri ve yarının durakları aynı kartta.' },
+      { kind: 'new', text: 'Bölümün son günü ve 30. gün yolda ödülüyle görünür.' },
+    ],
+  },
+  {
     // Gelişim merkezi G1 (veri): ölçü kuralı v2, denetim düzeltmeleri. Metinler sahip onaylı (2026-10-01, G1-METINLER.md).
     id: '2026-10-01-8',
     title: '1 Ekim, sekizinci güncelleme',
