@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fark Ettin mi · üç yön</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root {
+  --font-display: 'Unbounded', system-ui, sans-serif; --font-body: 'Onest', system-ui, sans-serif; --font-mono: ui-monospace, 'SF Mono', monospace;
+  --bg: #f3f6f8; --surface: #fff; --surface-2: #e9eef2; --border: #e1e7ec; --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --accent: #0b7480; --accent-g: #11a9b8; --accent-grad: linear-gradient(90deg, #0b7480, #2458cc); --accent-ink: #fff;
+  --ok: #13704b; --ok-bg: rgba(31,169,116,.13); --no: #b4431c; --no-bg: rgba(232,96,62,.12); --gold: #9a5b00; --gold-bg: rgba(245,166,35,.16);
+  --paper: #f7f2e8; --paper-2: #efe7d8; --paper-ink: #2b241b;
+}
+:root[data-theme="dark"] {
+  --bg: #070c12; --surface: #0f171f; --surface-2: #141e28; --border: rgba(255,255,255,.08); --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --accent: #19c2d1; --accent-g: #19c2d1; --accent-grad: linear-gradient(90deg, #19c2d1, #3e7bfa); --accent-ink: #041017;
+  --ok: #35d39a; --ok-bg: rgba(53,211,154,.14); --no: #ff9a7d; --no-bg: rgba(255,122,89,.14); --gold: #ffb13b; --gold-bg: rgba(255,177,59,.14);
+  --paper: #17130e; --paper-2: #211b14; --paper-ink: #f1e8d8;
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; background: var(--bg); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow: hidden; }
+.status { height: 47px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 28px 0 34px; font-weight: 700; font-size: 16px; position: relative; z-index: 5; }
+.status i { font-style: normal; letter-spacing: 2px; font-size: 13px; }
+.page { height: 100vh; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+.body { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 0 20px 22px; }
+.top { display: flex; align-items: center; gap: 14px; padding: 4px 0 14px; flex: none; }
+.x { width: 42px; height: 42px; border-radius: 14px; border: 1px solid var(--border); background: var(--surface); display: grid; place-items: center; color: var(--ink-2); flex: none; }
+.bar { flex: 1; height: 6px; border-radius: 3px; background: var(--surface-2); overflow: hidden; }
+.bar b { display: block; height: 100%; background: var(--accent-grad); border-radius: 3px; }
+.ey { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: 26px; line-height: 1.12; letter-spacing: -.02em; }
+.lead { margin-top: 6px; font-size: 16px; color: var(--ink-2); line-height: 1.4; }
+.btn { flex: none; height: 56px; border-radius: 18px; border: 0; background: var(--accent-grad); color: var(--accent-ink); font: 700 18px var(--font-body); display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 26px -12px rgba(36,88,204,.6); width: 100%; }
+.btn.ghost { background: transparent; color: var(--ink-2); box-shadow: none; height: 44px; font-weight: 600; font-size: 15px; border: 1.5px solid var(--border); }
+.fill { flex: 1; min-height: 0; position: relative; }
+.scn { position: absolute; inset: 0; overflow: hidden; }
+.scn svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.card { border-radius: 24px; overflow: hidden; }
+.small { font-size: 12px; color: var(--ink-3); line-height: 1.4; }
+.row2 { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex: none; }
+.dots { display: flex; gap: 6px; align-items: center; }
+.dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--surface-2); border: 1.5px solid var(--ink-3); }
+.dots i.on { background: var(--accent-g); border-color: var(--accent-g); }
+.meta { font-size: 14px; color: var(--ink-2); font-weight: 600; display: flex; gap: 10px; align-items: center; }
+.opt { height: 58px; border-radius: 18px; background: var(--surface); border: 1.5px solid var(--border); display: flex; align-items: center; gap: 12px; padding: 0 16px; font-weight: 700; font-size: 17px; }
+.opt .sw { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid rgba(0,0,0,.15); flex: none; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: none; }
+.yn .opt { justify-content: center; height: 64px; font-size: 18px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px; border-radius: 17px; font-weight: 700; font-size: 14px; }
+.chip.ok { background: var(--ok-bg); color: var(--ok); }
+.chip.sel { background: var(--surface-2); color: var(--ink); }
+.rows { display: grid; gap: 8px; flex: none; }
+.r { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 16px; background: var(--surface-2); font-size: 14.5px; color: var(--ink-2); }
+.r b { color: var(--ink); }
+.r i { font-style: normal; font-size: 11px; font-weight: 800; letter-spacing: .05em; padding: 4px 8px; border-radius: 9px; flex: none; }
+.r i.ok { background: var(--ok-bg); color: var(--ok); } .r i.no { background: var(--no-bg); color: var(--no); }
+.r span { flex: 1; }
+.iris { width: 34px; height: 34px; border-radius: 50%; flex: none; background: radial-gradient(circle at 50% 50%, #0b1219 0 28%, transparent 29%), radial-gradient(circle at 50% 50%, #3e7bfa 0 52%, #19c2d1 53% 62%, transparent 63%); box-shadow: 0 0 0 2px var(--accent-g), 0 0 0 5px rgba(25,194,209,.15); position: relative; }
+.iris::after { content: ''; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #fff; left: 19px; top: 10px; }
+.nef { display: flex; gap: 12px; align-items: center; flex: none; }
+.nef p { font-size: 15px; line-height: 1.4; color: var(--ink-2); }
+/* --- Yön B: sahne arka planda, cam katmanlar --- */
+.B .page { color: #fff; }
+.B .bgscene { position: absolute; inset: 0; z-index: 0; }
+.B .bgscene svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.B .bgscene::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,9,14,.72) 0%, rgba(5,9,14,.2) 30%, rgba(5,9,14,0) 48%, rgba(5,9,14,.55) 70%, rgba(5,9,14,.88) 100%); }
+.B .status, .B .body { position: relative; z-index: 2; }
+.B .x { background: rgba(10,16,24,.5); border-color: rgba(255,255,255,.15); color: #fff; backdrop-filter: blur(10px); }
+.B .bar { background: rgba(255,255,255,.2); }
+.B .ey { color: #7fe6f0; }
+.B .lead { color: rgba(255,255,255,.82); }
+.glass { background: rgba(12,18,26,.62); border: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-radius: 24px; padding: 16px; color: #fff; }
+.B .opt { background: rgba(12,18,26,.62); border-color: rgba(255,255,255,.16); color: #fff; backdrop-filter: blur(14px); }
+.B .r { background: rgba(255,255,255,.08); color: rgba(255,255,255,.82); }
+.B .r b { color: #fff; }
+.B .btn.ghost { color: #fff; border-color: rgba(255,255,255,.25); }
+.B .dots i { background: transparent; border-color: rgba(255,255,255,.6); }
+.B .meta { color: #fff; }
+.B .nef p { color: rgba(255,255,255,.88); }
+.B .chip.sel { background: rgba(255,255,255,.14); color: #fff; }
+/* --- Yön C: gözlem defteri --- */
+.C { --bg: var(--paper); --surface: #fffdf8; --surface-2: var(--paper-2); --ink: var(--paper-ink); --border: rgba(60,45,25,.14); }
+:root[data-theme="dark"] .C { --surface: #201a13; --border: rgba(255,240,220,.1); --ink-2: #d4c8b5; --ink-3: #a1937d; }
+.C h1 { font-family: var(--font-display); }
+.C .ey { color: #b0601c; }
+:root[data-theme="dark"] .C .ey { color: #ffb36b; }
+.polar { background: #fffdf8; padding: 10px 10px 34px; border-radius: 6px; box-shadow: 0 16px 34px -18px rgba(40,25,5,.55), 0 2px 6px rgba(40,25,5,.12); position: relative; }
+:root[data-theme="dark"] .polar { background: #f4ecdd; }
+.polar .ph { position: relative; overflow: hidden; border-radius: 2px; }
+.polar .ph svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.polar .cap { position: absolute; left: 14px; right: 14px; bottom: 9px; font: 600 14px var(--font-body); color: #3b3126; display: flex; justify-content: space-between; }
+.tape { position: absolute; width: 74px; height: 22px; background: rgba(230,200,120,.55); top: -10px; left: 50%; transform: translateX(-50%) rotate(-3deg); }
+.ladder { display: flex; flex-direction: column-reverse; gap: 3px; }
+.ladder i { height: 6px; border-radius: 3px; background: var(--surface-2); }
+.ladder i.on { background: linear-gradient(90deg, #f0a24a, #e0612a); }
+.ladder i.base { outline: 2px dashed var(--ink-3); outline-offset: 1px; }
+@media (max-width: 340px) {
+  h1 { font-size: 22px; } .lead { font-size: 14px; } .body { padding: 0 16px 14px; } .btn { height: 50px; font-size: 17px; }
+  .opt { height: 50px; font-size: 15px; } .yn .opt { height: 54px; } .r { padding: 8px 12px; font-size: 13px; } .nef p { font-size: 13.5px; }
+  .hide320 { display: none !important; }
+}
+</style>
+<script src="scene.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const q = new URLSearchParams(location.search)
+const S_ = q.get('s') || 'intro', D = q.get('d') || 'A'
+const DARK = (q.get('theme') || 'light') === 'dark'
+document.documentElement.dataset.theme = DARK ? 'dark' : 'light'
+const W320 = innerWidth < 340
+const F = window.FEM
+const st = F.genStreet(42, 2400)
+const SY = F.Y.side + 30
+const PEOPLE = [
+  { x: 330, y: SY, top: 'mor', skin: F.SKIN[0], hair: 'kahve', dress: true, longHair: true, bag: 'sari' },
+  { x: 470, y: SY + 4, top: 'beyaz', skin: F.SKIN[2], hair: 'siyah', phone: true },
+  { x: 610, y: SY, top: 'yesil', skin: F.SKIN[1], hair: 'gri', hat: 'kirmizi', dir: -1 },
+  { x: 760, y: SY + 6, top: 'turuncu', skin: F.SKIN[3], hair: 'siyah', dress: true, longHair: true, laugh: true },
+  { x: 900, y: SY, top: 'lacivert', skin: F.SKIN[0], hair: 'sari', glasses: true, dir: -1 },
+  { x: 1040, y: SY + 2, top: 'kirmizi', skin: F.SKIN[4], hair: 'siyah' },
+  { x: 120, y: SY + 4, top: 'siyah', skin: F.SKIN[1], hair: 'kizil', dress: true, longHair: true, bag: 'mavi', dir: -1 },
+]
+const BASE = { bikes: [{ x: 560, color: 'kirmizi' }, { x: 1140, color: 'mavi' }], cats: [{ x: 410, color: 'turuncu' }], vendors: [{ x: 205, type: 'simit' }],
+  carsFar: [{ x: 120, color: 'beyaz', dir: -1 }, { x: 520, color: 'mavi', dir: -1 }, { x: 980, color: 'sari', taxi: true, dir: -1 }], carsNear: [{ x: 300, color: 'mavi' }, { x: 720, color: 'kirmizi' }, { x: 1120, color: 'gri' }] }
+const mode = DARK ? 'dusk' : 'day'
+const scene = (vx, vw, extra = {}) => F.renderStreet(st, extra.mode || mode, { vx, vw, people: PEOPLE, ...BASE, ...extra })
+const changed = PEOPLE.map((p) => (p.hat ? { ...p, hat: 'mavi' } : p))
+const HAT = { x: 610, y: SY - 146 }
+const status = (light) => `<div class="status" style="${light ? 'color:#fff' : ''}"><span>17:02</span><i>●●● ◆ ▮</i></div>`
+const X = `<button class="x" aria-label="Çık"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`
+const topBar = (pct) => `<div class="top">${X}<div class="bar"><b style="width:${pct}%"></b></div></div>`
+const carIco = (w = 64) => `<svg width="${w}" height="${w * 0.52}" viewBox="-96 -84 192 100" style="flex:none">${F.car({ x: 0, color: 'mavi' }, F.PAL.day, 'x').replace(/translate\([^)]*\)/, 'translate(0 0)')}</svg>`
+const FOOT = 'Bu bir gözlem alıştırması. Günlük hayatta fark etmeyi artırdığı gösterilmedi.'
+const ROWS = `<div class="rows">
+  <div class="r"><i class="ok">TAM</i><span>Mavi araba: <b>5</b> geçti, sen de 5 dedin</span></div>
+  <div class="r"><i class="no">KAÇTI</i><span>Kahkaha atan kadının elbisesi: <b>turuncu</b></span></div>
+  <div class="r hide320"><i class="ok">GÖRDÜN</i><span>Sokak satıcısı: <b>simit</b></span></div></div>`
+function chart(h = 92, light = false) {
+  const pts = [10, 10, 12, 10, 12, 14, 12, 14, 16, 14, 16], Wd = 320, min = 6, max = 20, base = 11
+  const xs = (i) => 14 + i * ((Wd - 28) / (pts.length - 1)), ys = (v) => h - 10 - ((v - min) / (max - min)) * (h - 22)
+  const ink = light ? 'rgba(255,255,255,.6)' : 'var(--ink-3)', ln = light ? '#7fe6f0' : 'var(--accent-g)', dotf = light ? '#0c121a' : 'var(--surface)'
+  let o = `<svg viewBox="0 0 ${Wd} ${h}" width="100%" height="${h}" preserveAspectRatio="none" style="display:block;overflow:visible">`
+  o += `<line x1="6" x2="${Wd - 6}" y1="${ys(base)}" y2="${ys(base)}" stroke="${ink}" stroke-dasharray="4 5" stroke-width="1.5"/>`
+  o += `<path d="${pts.map((v, i) => `${i ? 'L' : 'M'}${xs(i)} ${ys(v)}`).join('')}" fill="none" stroke="${ln}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>`
+  pts.forEach((v, i) => (o += `<circle cx="${xs(i)}" cy="${ys(v)}" r="${i === pts.length - 1 ? 6 : 3.2}" fill="${i === pts.length - 1 ? ln : dotf}" stroke="${ln}" stroke-width="2.5"/>`))
+  return o + '</svg>'
+}
+const chartLab = (light) => `<div style="display:flex;justify-content:space-between;font-size:12px;margin-top:6px;color:${light ? 'rgba(255,255,255,.7)' : 'var(--ink-3)'}"><span>- - - başlangıç 11</span><span>son 11 tur</span></div>`
+
+const V = { A: {}, B: {}, C: {} }
+// ================= Yön A: sade kartlar =================
+V.A.intro = () => `${status()}<div class="body">${topBar(0)}
+  <div class="fill card"><div class="scn">${scene(200, 520)}</div></div>
+  <div style="display:flex;align-items:center;gap:14px;margin-top:16px;flex:none">${carIco(W320 ? 54 : 70)}<div><span class="ey">Görevin · 2 dk</span><h1 style="margin-top:4px">Mavi arabaları say</h1></div></div>
+  <div class="nef" style="margin-top:14px"><div class="iris"></div><p>Gözün mavi arabalarda olsun. Sonra iki sahnede neyin değiştiğini bulacaksın.</p></div>
+  <p class="small" style="margin:14px 0 10px">${FOOT}</p>
+  <button class="btn">Yürümeye başla</button></div>`
+V.A.change = () => `${status()}<div class="body">${topBar(52)}
+  <span class="ey">Ne değişti? · sahne 2 / 4</span><h1 style="margin-top:6px">Bir şey değişti. Nerede?</h1>
+  <div class="fill card" style="margin:14px 0 12px"><div class="scn">${scene(470, 520, { people: changed })}</div></div>
+  <div class="row2" style="margin-bottom:12px"><span class="meta"><span class="dots"><i class="on"></i><i></i><i></i></span>1. bakış</span><span class="meta" style="color:var(--ink-3)">Sahnede 14 şey</span></div>
+  <button class="btn ghost">Bulamadım, bir daha göster</button></div>`
+V.A.found = () => `${status()}<div class="body">${topBar(58)}
+  <span class="ey">Ne değişti? · sahne 2 / 4</span><h1 style="margin-top:6px">Buldun: şapka maviye döndü.</h1>
+  <div class="fill card" style="margin:14px 0 12px"><div class="scn">${scene(470, 520, { people: changed, spot: { ...HAT, r: 44 } })}</div></div>
+  <div class="row2" style="margin-bottom:12px"><span class="chip ok">İlk bakışta</span><span class="meta" style="color:var(--ink-3)">Sıradaki sahne: 16 şey</span></div>
+  <button class="btn">Sıradaki</button></div>`
+const FOGA = { x: 760, y: SY - 80, r: 90, c: DARK ? '#3a3f48' : '#D9DEE2', ink: DARK ? '#c9d3da' : '#5B6976' }
+V.A.ask = () => `${status()}<div class="body">${topBar(80)}
+  <span class="ey">Gözünden kaçan · soru 1 / 2</span><h1 style="margin-top:6px">Caddede kahkaha atan bir kadın vardı.</h1><p class="lead">Onu fark ettin mi?</p>
+  <div class="fill card" style="margin:14px 0"><div class="scn" style="filter:grayscale(1) contrast(.85) brightness(${DARK ? .8 : 1.05})">${scene(560, 420, { fog: { ...FOGA, r: 70 }, vy: 260, vh: 420 })}</div></div>
+  <div class="grid2 yn"><div class="opt">Gördüm</div><div class="opt">Görmedim</div></div></div>`
+const COLS = ['turuncu', 'mor', 'yesil', 'kirmizi'], CN = { turuncu: 'Turuncu', mor: 'Mor', yesil: 'Yeşil', kirmizi: 'Kırmızı' }
+const colorOpts = `<div class="grid2">${COLS.map((c) => `<div class="opt"><span class="sw" style="background:${F.C[c]}"></span>${CN[c]}</div>`).join('')}</div>`
+V.A.ask2 = () => `${status()}<div class="body">${topBar(86)}
+  <span class="ey">Gözünden kaçan · soru 1 / 2</span><div style="display:flex;gap:8px;margin-top:8px"><span class="chip sel">Görmedim</span></div><h1 style="margin-top:10px">Elbisesi ne renkti?</h1><p class="lead">Görmediysen de tahmin et.</p>
+  <div class="fill card" style="margin:14px 0"><div class="scn" style="filter:grayscale(1) contrast(.85) brightness(${DARK ? .8 : 1.05})">${scene(560, 420, { fog: { ...FOGA, r: 70 }, vy: 260, vh: 420 })}</div></div>
+  ${colorOpts}</div>`
+function meter(n = 16, base = 11, max = 30) {
+  let o = '<div style="display:grid;grid-template-columns:repeat(15,1fr);gap:5px;margin-top:14px">'
+  for (let i = 1; i <= max; i++) o += `<i style="display:block;aspect-ratio:1;border-radius:50%;background:${i <= n ? 'var(--accent-g)' : 'var(--surface-2)'};${i === base ? 'outline:2px dashed var(--ink-3);outline-offset:2px;' : ''}"></i>`
+  return o + '</div>'
+}
+V.A.result = () => `${status()}<div class="body">${topBar(100)}
+  <span class="ey">Bugünkü turun</span>
+  <div style="display:flex;align-items:baseline;gap:10px;margin-top:10px"><b style="font:800 ${W320 ? 54 : 68}px/0.95 var(--font-display);letter-spacing:-.05em">16</b><span style="font:700 20px var(--font-display);color:var(--ink-2)">nesne</span></div>
+  <p class="lead">Değişikliği 16 nesnelik kalabalıkta buldun.</p>
+  ${meter()}
+  <div style="display:flex;gap:8px;align-items:center;margin-top:12px"><span class="chip ok">Başlangıcından iyi</span><span class="small">kesikli halka: başlangıcın, 11</span></div>
+  <div class="fill card" style="margin:14px 0 12px"><div class="scn">${scene(470, 520, { people: changed, spot: { ...HAT, r: 44 } })}</div><span class="chip" style="position:absolute;left:10px;bottom:10px;background:rgba(12,18,26,.8);color:#fff">Bugün buldun: şapka</span></div>
+  ${ROWS}
+  <button class="btn" style="margin-top:12px">Bitti</button></div>`
+
+// ================= Yön B: sahne her yerde, cam katmanlar =================
+const bg = (vx, vw, extra) => `<div class="bgscene">${scene(vx, vw, extra)}</div>`
+V.B.intro = () => `${bg(220, 470)}${status(true)}<div class="body">${topBar(0)}
+  <span class="ey">Fark Ettin mi? · 2 dk · Cadde</span>
+  <div class="fill"></div>
+  <div class="glass" style="flex:none">
+    <div style="display:flex;align-items:center;gap:12px">${carIco(W320 ? 54 : 66)}<div><span style="font-size:13px;opacity:.75">Görevin</span><h1 style="margin-top:2px;color:#fff">Mavi arabaları say</h1></div></div>
+    <div class="nef" style="margin-top:12px"><div class="iris"></div><p>Gözün mavi arabalarda olsun. Sonra iki sahnede neyin değiştiğini bulacaksın.</p></div>
+  </div>
+  <p class="small" style="color:rgba(255,255,255,.7);margin:12px 2px 10px">${FOOT}</p>
+  <button class="btn">Yürümeye başla</button></div>`
+V.B.change = () => `${bg(470, 440, { people: changed })}${status(true)}<div class="body">${topBar(52)}
+  <span class="ey">Ne değişti? · 2 / 4</span><h1 style="margin-top:6px;color:#fff">Bir şey değişti. Nerede?</h1>
+  <div class="fill"></div>
+  <div class="row2" style="margin-bottom:12px"><span class="meta"><span class="dots"><i class="on"></i><i></i><i></i></span>1. bakış</span><span class="meta" style="opacity:.8">Sahnede 14 ayrıntı</span></div>
+  <button class="btn ghost">Bulamadım, bir daha göster</button></div>`
+V.B.found = () => `${bg(470, 440, { people: changed, spot: { ...HAT, r: 44 } })}${status(true)}<div class="body">${topBar(58)}
+  <span class="ey">Ne değişti? · 2 / 4</span><h1 style="margin-top:6px;color:#fff">Buldun: şapka maviye döndü.</h1>
+  <div class="fill"></div>
+  <div class="row2" style="margin-bottom:12px"><span class="chip ok" style="background:rgba(53,211,154,.2);color:#6ff0bf">İlk bakışta</span><span class="meta" style="opacity:.8">Sıradaki: 16 ayrıntı</span></div>
+  <button class="btn">Sıradaki</button></div>`
+const FOGB = { x: 760, y: SY - 80, r: 90, c: '#2a3038', ink: '#dfe6eb' }
+V.B.ask = () => `<div class="bgscene" style="filter:grayscale(1) brightness(.75)">${scene(600, 320, { fog: FOGB, vy: 280, vh: 420 })}</div>${status(true)}<div class="body">${topBar(80)}
+  <span class="ey">Gözünden kaçan · soru 1 / 2</span><h1 style="margin-top:6px;color:#fff">Caddede kahkaha atan bir kadın vardı.</h1><p class="lead">Onu fark ettin mi?</p>
+  <div class="fill"></div><div class="grid2 yn"><div class="opt">Gördüm</div><div class="opt">Görmedim</div></div></div>`
+V.B.ask2 = () => `<div class="bgscene" style="filter:grayscale(1) brightness(.75)">${scene(600, 320, { fog: FOGB, vy: 280, vh: 420 })}</div>${status(true)}<div class="body">${topBar(86)}
+  <span class="ey">Gözünden kaçan · soru 1 / 2</span><div style="margin-top:8px"><span class="chip sel">Görmedim</span></div><h1 style="margin-top:10px;color:#fff">Elbisesi ne renkti?</h1><p class="lead">Görmediysen de tahmin et.</p>
+  <div class="fill"></div>${colorOpts}</div>`
+V.B.result = () => `${bg(470, 440, { people: changed, spot: { ...HAT, r: 44 } })}${status(true)}<div class="body">${topBar(100)}
+  <span class="ey">Bugünkü turun</span>
+  <div style="display:flex;align-items:baseline;gap:10px;margin-top:8px"><b style="font:800 ${W320 ? 54 : 68}px/0.95 var(--font-display);letter-spacing:-.05em">16</b><span style="font:700 20px var(--font-display);opacity:.85">ayrıntılı sahne</span></div>
+  <p class="lead">Değişikliği bu kalabalıkta, ilk bakışta buldun.</p>
+  <div class="fill"></div>
+  <div class="glass" style="flex:none;padding:14px 16px 12px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span class="chip ok" style="background:rgba(53,211,154,.2);color:#6ff0bf">Başlangıcından iyi</span></div>${chart(W320 ? 54 : 78, true)}${chartLab(true)}</div>
+  <div class="hide320" style="margin-top:10px">${ROWS}</div>
+  <button class="btn" style="margin-top:12px">Bitti</button></div>`
+
+// ================= Yön C: gözlem defteri =================
+const polar = (h, svg, cap, rot = -1.5, filt = '') => `<div class="polar" style="transform:rotate(${rot}deg)"><span class="tape"></span><div class="ph" style="height:${h}px;${filt}">${svg}</div><div class="cap">${cap}</div></div>`
+V.C.intro = () => `${status()}<div class="body">${topBar(0)}
+  <span class="ey">Gözlem defteri · 6. gün</span><h1 style="margin-top:6px">Bugünkü görevin: mavi arabaları say.</h1>
+  <div class="fill" style="display:flex;align-items:center;justify-content:center;padding:12px 6px"><div style="width:100%">${polar(W320 ? 120 : 330, scene(200, 520), '<span>Cadde</span><span>40 sn</span>')}</div></div>
+  <div class="nef"><div class="iris"></div><p>Gözün mavi arabalarda olsun. Sonra iki sahnede neyin değiştiğini bulacaksın.</p></div>
+  <p class="small" style="margin:12px 0 10px">${FOOT}</p>
+  <button class="btn">Yürümeye başla</button></div>`
+V.C.change = () => `${status()}<div class="body">${topBar(52)}
+  <span class="ey">Ne değişti? · sayfa 2 / 4</span><h1 style="margin-top:6px">Bir şey değişti. Nerede?</h1>
+  <div class="fill" style="display:flex;align-items:center;padding:14px 4px"><div style="width:100%;height:100%;display:flex">${`<div class="polar" style="transform:rotate(1deg);width:100%;display:flex;flex-direction:column"><div class="ph" style="flex:1">${scene(470, 520, { people: changed })}</div><div class="cap"><span>1. bakış</span><span>14 şey</span></div></div>`}</div></div>
+  <button class="btn ghost">Bulamadım, bir daha göster</button></div>`
+V.C.found = () => `${status()}<div class="body">${topBar(58)}
+  <span class="ey">Ne değişti? · sayfa 2 / 4</span><h1 style="margin-top:6px">Buldun: şapka maviye döndü.</h1>
+  <div class="fill" style="display:flex;align-items:center;padding:14px 4px"><div style="width:100%;height:100%;display:flex"><div class="polar" style="transform:rotate(1deg);width:100%;display:flex;flex-direction:column"><div class="ph" style="flex:1">${scene(470, 520, { people: changed, spot: { ...HAT, r: 44 } })}</div><div class="cap"><span>İlk bakışta ✓</span><span>sıradaki: 16 şey</span></div></div></div></div>
+  <button class="btn">Sıradaki</button></div>`
+V.C.ask = () => `${status()}<div class="body">${topBar(80)}
+  <span class="ey">Gözünden kaçan · soru 1 / 2</span><h1 style="margin-top:6px">Caddede kahkaha atan bir kadın vardı.</h1><p class="lead">Onu fark ettin mi?</p>
+  <div class="fill" style="display:flex;align-items:center;justify-content:center;padding:12px 10px"><div style="width:100%">${polar(W320 ? 110 : 230, scene(560, 420, { fog: { ...FOGA, r: 70 }, vy: 260, vh: 420 }), '<span>Cadde · 1 dk önce</span><span>?</span>', -2, 'filter:grayscale(1) sepia(.25) contrast(.9)')}</div></div>
+  <div class="grid2 yn"><div class="opt">Gördüm</div><div class="opt">Görmedim</div></div></div>`
+V.C.ask2 = () => `${status()}<div class="body">${topBar(86)}
+  <span class="ey">Gözünden kaçan · soru 1 / 2</span><div style="margin-top:8px"><span class="chip sel">Görmedim</span></div><h1 style="margin-top:10px">Elbisesi ne renkti?</h1><p class="lead">Görmediysen de tahmin et.</p>
+  <div class="fill" style="display:flex;align-items:center;justify-content:center;padding:12px 10px"><div style="width:100%">${polar(W320 ? 70 : 200, scene(560, 420, { fog: { ...FOGA, r: 70 }, vy: 260, vh: 420 }), '<span>Cadde · 1 dk önce</span><span>?</span>', -2, 'filter:grayscale(1) sepia(.25) contrast(.9)')}</div></div>
+  ${colorOpts}</div>`
+function ladder(n = 16, base = 11) {
+  let o = '<div class="ladder" style="width:46px">'
+  for (let i = 6; i <= 24; i += 1) o += `<i class="${i <= n ? 'on' : ''}${i === base ? ' base' : ''}"></i>`
+  return o + '</div>'
+}
+V.C.result = () => `${status()}<div class="body">${topBar(100)}
+  <span class="ey">Gözlem defteri · bugün</span>
+  <div style="display:flex;gap:18px;align-items:flex-end;margin-top:12px;flex:none">${ladder()}<div><b style="font:800 ${W320 ? 54 : 68}px/0.95 var(--font-display);letter-spacing:-.05em">16'lık</b><p class="lead" style="margin-top:6px">sahnede değişikliği buldun. Başlangıcın 11'likti.</p><span class="chip ok" style="margin-top:10px">Başlangıcından iyi</span></div></div>
+  <div class="fill" style="display:flex;align-items:center;padding:16px 8px"><div style="width:100%;height:100%;display:flex"><div class="polar" style="transform:rotate(-1.5deg);width:100%;display:flex;flex-direction:column"><span class="tape"></span><div class="ph" style="flex:1">${scene(470, 520, { people: changed, spot: { ...HAT, r: 44 } })}</div><div class="cap"><span>Bugün: şapka</span><span>ilk bakışta</span></div></div></div></div>
+  ${ROWS}
+  <button class="btn" style="margin-top:12px">Bitti</button></div>`
+
+// ================= Ana sayfa (tek) =================
+V.home = () => `${status()}<div class="body" style="gap:10px"><span class="ey" style="margin-top:4px">Bugünün yolu · 6. gün</span>
+  <div style="border-radius:24px;background:var(--surface);border:1px solid var(--border);padding:16px;flex:none">
+    <div style="display:flex;gap:10px;align-items:center;font-weight:700;font-size:14px;color:var(--ink-3)"><div class="iris" style="width:26px;height:26px"></div>Nef</div>
+    <p style="margin-top:10px;font-size:${W320 ? 16 : 18}px;line-height:1.4;font-weight:600">Yolunda yeni bir durak var. Bir caddeden geçip neyin değiştiğini bulacaksın.</p>
+    <div class="card" style="position:relative;height:${W320 ? 96 : 140}px;margin-top:12px;border-radius:16px"><div class="scn">${scene(500, 420, { vy: 360, vh: 280 })}</div></div>
+    <button class="btn" style="margin-top:12px;height:48px;font-size:16px">Fark Ettin mi? · 2 dk</button></div>
+  <div class="r"><i class="ok">✓</i><span>Göz egzersizleri ve Nefes tamam</span></div>
+  <div class="r"><span>Sırada: Yılan oyunu · 1 dk</span></div></div>`
+
+const fn = S_ === 'home' ? V.home : (V[D][S_] || V[D].intro)
+document.body.className = D
+document.getElementById('app').innerHTML = `<div class="page">${fn()}</div>`
+</script>
+</body>
+</html>

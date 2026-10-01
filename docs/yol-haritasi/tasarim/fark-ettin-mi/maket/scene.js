@@ -230,7 +230,7 @@
     const shops = SHOPS.slice().sort(() => r() - 0.5)
     while (x < L) {
       const w = 220 + Math.floor(r() * 80)
-      s.buildings.push({ x, w, h: 330 + Math.floor(r() * 120), body: '', shop: shops[i % shops.length], aw: AW[i % AW.length], balcony: r() < 0.5 })
+      s.buildings.push({ x, w, h: 420 + Math.floor(r() * 120), body: '', shop: shops[i % shops.length], aw: AW[i % AW.length], balcony: r() < 0.5 })
       x += w + 14
       i++
     }
@@ -241,10 +241,12 @@
   }
   function renderStreet(s, mode = 'day', opts = {}) {
     const p = PAL[mode], r = rng(7)
-    let o = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${opts.vx || 0} 0 ${opts.vw || s.L} ${H}" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">`
-    o += sky(s.L, p) + clouds(s.L, r, p) + skyline(s.L, r, p)
+    let o = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${opts.vx || 0} ${opts.vy || 0} ${opts.vw || s.L} ${opts.vh || H}" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">`
+    o += sky(s.L, p) + clouds(s.L, r, p) + skyline(s.L, r, p) + `<rect width="${s.L}" height="${Y.side}" fill="${p.sky[1]}" opacity=".35"/>`
     s.buildings.forEach((b, j) => { b.body = p.facades[j % p.facades.length]; o += building(b, p, r) })
+    o += `<defs><linearGradient id="g-sun" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${mode === 'day' ? '#FFF3D6' : '#FFB070'}" stop-opacity="${mode === 'day' ? 0.22 : 0.12}"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="${s.L}" height="${Y.side}" fill="url(#g-sun)"/>`
     o += ground(s.L, p)
+    o += `<rect y="${Y.side}" width="${s.L}" height="16" fill="#000" opacity=".07"/>`
     s.trees.forEach((t) => (o += tree(t, p)))
     s.lamps.forEach((l) => (o += lamp(l, p)))
     ;(opts.bikes || []).forEach((b) => (o += bike(b)))
@@ -254,6 +256,8 @@
     ;(opts.carsFar || []).forEach((k) => (o += car(k, p, 'far')))
     ;(opts.carsNear || []).forEach((k) => (o += car(k, p, 'near')))
     if (opts.mark) o += `<circle cx="${opts.mark.x}" cy="${opts.mark.y}" r="${opts.mark.r}" fill="none" stroke="#19C2D1" stroke-width="6"/><circle cx="${opts.mark.x}" cy="${opts.mark.y}" r="${opts.mark.r + 9}" fill="none" stroke="#fff" stroke-width="2.5" opacity=".9"/>`
+    if (opts.spot) { const t = opts.spot; o += `<mask id="m-spot"><rect x="0" y="0" width="${s.L}" height="${H}" fill="#fff"/><circle cx="${t.x}" cy="${t.y}" r="${t.r}" fill="#000"/></mask><rect x="0" y="0" width="${s.L}" height="${H}" fill="#04080d" opacity=".6" mask="url(#m-spot)"/><circle cx="${t.x}" cy="${t.y}" r="${t.r}" fill="none" stroke="#19C2D1" stroke-width="4"/>` }
+    if (opts.fog) { const t = opts.fog; o += `<filter id="f-fog" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter><ellipse cx="${t.x}" cy="${t.y}" rx="${t.r * 0.8}" ry="${t.r}" fill="${t.c || '#D9DEE2'}" filter="url(#f-fog)"/><text x="${t.x}" y="${t.y + 22}" text-anchor="middle" font-family="Unbounded, Onest, system-ui" font-weight="800" font-size="64" fill="${t.ink || '#5B6976'}">?</text>` }
     return o + '</svg>'
   }
 
