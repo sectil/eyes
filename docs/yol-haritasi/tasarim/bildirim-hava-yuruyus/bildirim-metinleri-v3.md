@@ -32,3 +32,17 @@ F3. Ekrana kısa bir ara / Bir saat geçti. Biraz dolaş, bir su iç, sonra deva
 
 ## deneme (denemenin 5. günü)
 R2. Deneme süren 2 gün sonra bitiyor / İlk 5 günün raporu hazır. İptal için: Ayarlar → adın → Abonelikler.
+
+## Tur 2 sonucu (beş bağımsız değerlendirici, soru: "5 saniyede etkilendin mi?")
+Geçen (≥ 4/5): M3 4, W1 5, W3 4, B3 5, S1 5, S2 5, G1 4, G3 4, F2 5.
+Kalan (iki turda da geçemedi): M1 1, W2 3, W4 1, B4 0, F3 0, R2 0.
+Ortak notlar: W4 başlık–gövde "tur" tekrarı; B4 "… vakti" kalıbı ve makine dili; F3 üç ayrı iş; R2 rapor haberiyle
+iptal yolu tek gövdede, oklu menü yolu kilit ekranında okunmuyor.
+
+Kendi incelemem (geçenlerde): G4 "göz çalışması" diyor, uygulamanın her yerinde "göz egzersizi" (remindTexts.js,
+RemindSheet.jsx); F4 de F3'ü düşüren "üç ayrı iş" kusurunu taşıyor. İkisini de çıkarıyorum.
+
+Önerilen son liste (18; her türde en az 2 metin; sahip onayı bekliyor):
+- mola: M2, M3, M4 · yürüyüş: W1, W3 · nefes: B1, B2, B3 · su: S1, S2, S3 · göz egzersizi: G1, G2, G3
+- çalışma oturumu: F1, F2 · mola bitti: R1 · alarm yedeği: R3
+- R2 (deneme bitiyor) tek metin; iki tur doldu, yöntem sahibe soruldu.
