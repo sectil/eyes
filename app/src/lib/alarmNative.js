@@ -10,8 +10,8 @@ import { loadAlarm, loadAlarmLog } from './alarmLog.js'
 export const FALLBACK_BASE = 7600
 export const FALLBACK_ONCE = 7607
 const FALLBACK_IDS = Array.from({ length: 8 }, (_, i) => FALLBACK_BASE + i)
-export const ALARM_TITLE = 'Nefona · Günaydın'
-export const FALLBACK_BODY = 'Güne başlama vakti.'
+export const ALARM_TITLE = 'Günaydın'
+export const FALLBACK_BODY = 'Kalkma vakti geldi. Yavaştan güne başlayabilirsin.'
 // Kurma/kaldırma sonrası (izin penceresi görünürlük olayı tetiklemez): App durumu yeniden okur
 export const ALARM_CHANGED = 'nefona:alarm-changed'
 const changed = () => {

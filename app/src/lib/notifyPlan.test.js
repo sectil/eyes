@@ -359,15 +359,15 @@ describe('yaz saati', () => {
 
 describe('metinler', () => {
   const all = (type) => TEXTS[type].flatMap((t) => [t.title, t.body])
-  it('her türde 5–6 metin; her türde en az bir öz-yeterlik ifadesi', () => {
+  // Sahibin onayladığı metinler (2026-10-01): türde 2–3 metin; öz-yeterlik kalıbı (yapabilirsin/istersen) aranmaz
+  it('her türde 2–3 metin', () => {
     for (const type of ['mola', 'walk', 'breath', 'water', 'study', 'focus']) {
-      expect(TEXTS[type].length).toBeGreaterThanOrEqual(5)
-      expect(TEXTS[type].length).toBeLessThanOrEqual(6)
+      expect(TEXTS[type].length).toBeGreaterThanOrEqual(2)
+      expect(TEXTS[type].length).toBeLessThanOrEqual(3)
       for (const t of TEXTS[type]) {
         expect(typeof t.title).toBe('string')
         expect(t.body.length).toBeGreaterThan(0)
       }
-      expect(all(type).some((s) => /yapabilirsin|[iİ]stersen/.test(s))).toBe(true)
     }
   })
   it('yürüyüş metinlerinde rakam yok (kilit ekranı)', () => {

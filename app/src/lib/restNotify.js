@@ -77,7 +77,7 @@ export async function scheduleRestEnd(until) {
         {
           id: REST_NOTIFY_ID,
           title: 'Mola bitti',
-          body: 'Gözlerin dinlendi, devam edebilirsin.',
+          body: 'Hazırsan kaldığın yerden devam edebilirsin.',
           schedule: { at: new Date(until) },
           interruptionLevel: 'active',
           foreground: false,

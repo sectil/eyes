@@ -32,51 +32,36 @@ export function walkThreshold(avgSteps, time) {
   return Math.round((avgSteps * m) / 1440)
 }
 
-// Kısa, suçlamasız, sağlık iddiasız; her türde en az biri öz-yeterlik ifadesi (Tannenbaum 2015). Yürüyüş
-// metinlerinde rakam yok (kilit ekranında adım bilgisi görünmesin). 5–6 metin sırayla (VARSAYIM; Bell 2023).
+// Sahibin onayladığı metinler (2026-10-01). Kısa, suçlamasız, sağlık iddiasız. Yürüyüş metinlerinde rakam yok
+// (kilit ekranında adım bilgisi görünmesin). 2–3 metin sırayla.
 export const TEXTS = {
   mola: [
-    { title: 'Bir dakikalık mola', body: 'Bir dakika yeter: kalk, uzağa bak.' },
-    { title: 'Mola zamanı', body: 'İstersen şimdi kalk, pencereden uzağa bak.' },
-    { title: 'Kısa bir ara', body: 'Kalk, biraz gerin, sonra uzağa bak. Bir dakikada yapabilirsin.' },
-    { title: 'Mola', body: 'Başını ekrandan kaldır, uzaktaki bir noktaya bak. Sonra devam edersin.' },
-    { title: 'Bir dakika senin', body: 'Kalk, pencereye kadar yürü, uzağa bak.' },
-    { title: 'Ara ver', body: 'Dokun, bir dakikalık molayı birlikte yapalım.' },
+    { title: 'Uzağa bir bak', body: 'Başını ekrandan kaldır, gördüğün en uzak şeye bir dakika bak.' },
+    { title: 'Bir dakikalığına kalk', body: 'Pencereden dışarı bak, sonra kaldığın yerden devam et.' },
+    { title: 'Kalk, biraz dolaş', body: 'Pencereye kadar git, dışarıya şöyle bir bak.' },
   ],
   walk: [
-    { title: 'Kısa yürüyüş', body: 'Birkaç dakikalık yürüyüş? Şimdi yapabilirsin.' },
-    { title: 'Biraz hareket', body: 'Kalkıp biraz yürümek ister misin?' },
-    { title: 'Yürüyüş molası', body: 'Koridorda ya da dışarıda kısa bir tur atabilirsin.' },
-    { title: 'Kalk, biraz yürü', body: 'İstersen şimdi birkaç dakika yürü, sonra devam et.' },
-    { title: 'Kısa bir tur', body: 'Su almaya ya da pencereye kadar yürüyebilirsin.' },
+    { title: 'Biraz yürü', body: 'Birkaç dakika dolaş, koridor bile olur.' },
+    { title: 'Bir dolaşıp gel', body: 'Su almaya git ya da merdivenden inip çık.' },
   ],
   breath: [
-    { title: 'Nefes', body: '1 dakika nefes? Dokun, birlikte yapalım.' },
-    { title: 'Bir dakika nefes', body: 'İstersen şimdi yavaşça nefes al, uzun ver.' },
-    { title: 'Nefes arası', body: 'Bir dakikan varsa birlikte yavaş nefes alabiliriz.' },
-    { title: 'Yavaş nefes', body: 'Omuzlarını bırak; bir dakika nefesine odaklanabilirsin.' },
-    { title: 'Kısa nefes', body: 'Dokun, bir dakikalık rehberli nefes başlasın.' },
+    { title: 'Bir dakika nefes', body: 'Dokun, birlikte yavaşça nefes alıp verelim.' },
+    { title: 'Bir dakikan var mı?', body: 'Birlikte yavaş yavaş nefes alalım. Dokunman yeter.' },
+    { title: 'Omuzlarını gevşet', body: 'Yavaşça nefes al, uzun uzun ver. Bir dakika yeter.' },
   ],
   water: [
-    { title: 'Su', body: 'Birkaç yudum su?' },
-    { title: 'Bir bardak su', body: 'İstersen şimdi birkaç yudum iç.' },
-    { title: 'Su molası', body: 'Suyun yanında mı? Birkaç yudum alabilirsin.' },
-    { title: 'Su', body: 'Kalkıp suyunu tazelemek ister misin?' },
-    { title: 'Birkaç yudum', body: 'Birkaç yudum iç, sonra dokunup kaydedebilirsin.' },
+    { title: 'Su molası', body: 'Bardağın yakındaysa bir iki yudum al.' },
+    { title: 'Bir bardak su iyi gider', body: 'Kalkıp kendine bir tane doldur.' },
+    { title: 'Suyun yanında mı?', body: 'Değilse kalkıp bir bardak doldur.' },
   ],
   study: [
-    { title: 'Göz çalışması', body: 'Bugün çalışma günün. Hazırsan başlayabilirsin.' },
-    { title: 'Çalışma zamanı', body: 'Bugünün yolu seni bekliyor. İstersen şimdi başla.' },
-    { title: 'Çalışma günü', body: 'Planladığın saat geldi. Dokun, birlikte başlayalım.' },
-    { title: 'Göz çalışması', body: 'Birkaç dakikan varsa kaldığın yerden devam edebilirsin.' },
-    { title: 'Çalışma günü', body: 'Kısa bir göz çalışması için uygun bir an olabilir.' },
+    { title: 'Bugün göz egzersizi günü', body: 'Hazırsan başlayalım.' },
+    { title: 'Bugünkü egzersizler hazır', body: 'Müsaitsen şimdi başlayalım, değilsen sonra da olur.' },
+    { title: 'Göz egzersizi saati', body: 'Birkaç dakikan varsa başlayalım.' },
   ],
   focus: [
-    { title: 'Çalışma oturumu', body: 'Bir saat oldu. Kalk, uzağa bak; sonra devam edebilirsin.' },
-    { title: 'Mola zamanı', body: 'Bir saat oldu. İstersen bir dakika kalk, uzağa bak.' },
-    { title: 'Kısa mola', body: 'Bir saat doldu. Kalk, biraz gerin, sonra devam et.' },
-    { title: 'Çalışma oturumu', body: 'Dokun, bir dakikalık molayı yap; sonra kaldığın yerden sürdürürsün.' },
-    { title: 'Ara ver', body: 'Bir saat geçti. Uzağa bakıp biraz yürüyebilirsin.' },
+    { title: 'Bir saat oldu bile', body: 'Şöyle bir kalk, bir dakika uzağa bak.' },
+    { title: 'Bir saattir oturuyorsun', body: 'Kalk, pencereden dışarı bak.' },
   ],
 }
 

@@ -6,6 +6,13 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    id: '2026-10-01-5',
+    title: '1 Ekim, beşinci güncelleme',
+    items: [
+      { kind: 'change', text: 'Bildirim metinleri yeniden yazıldı: daha kısa ve daha doğal.' },
+    ],
+  },
+  {
     // Build 75'ten sonraki TestFlight ('2026-10-01-3' Build 75'te gitti). Sahip kararı 2026-10-01: "Çalışma oturumu
     // sürerken, senin kurduğun hatırlatmalar gelsin."
     id: '2026-10-01-4',

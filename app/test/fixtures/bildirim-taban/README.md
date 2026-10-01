@@ -26,3 +26,10 @@ kurala göre donduruldu: 74xx ve Çalışma günleri oturum içinde de kurulur (
 ±60 sn içinde (uç dahil, `FOCUS_CLASH_MS`) çakışan oturum molası (75xx) kurulmaz, hatırlatma kalır. `focus.js`'te
 yalnız baş yorumu güncellendi (davranış aynı). `notifyApply.js` değişmedi. İki dosya yine `src/lib`'deki hâllerinin
 aynısı (yalnız içe aktarma yolları farklı).
+
+## Yeniden dondurma · 2026-10-01 (onaylı metinler)
+
+Sahibin onayladığı bildirim metinleri: `notifyPlan.js`'te yalnız `TEXTS` (ve üstündeki yorum) değişti; her türün
+listesi 2–3 metin. Seçim kuralı aynı (`(dönem günü + kaydırma) % n`); liste boyu değiştiği için aynı gün başka metin
+düşebilir. `focus.js` ve `notifyApply.js` değişmedi. `notifyPlan.js` yine `src/lib`'deki hâlinin aynısı (yalnız içe
+aktarma yolları farklı).
