@@ -160,3 +160,11 @@ Sahip: "Nefes bildirimi gelmedi, hava durumu bildirimi ise doğallıktan çok uz
 gidiyor. Mesela burada yürüyüş planı varsa hatırlatması yanına yağmur yapacağına dair bir ifade olabilir. 5 sn kuralı,
 mükemmel olduğunu görmeden gönderme, ilk önce sen onayla. Kuralları unutma." Plan: YAPILACAKLAR D11, D12.
 
+## Modül hatırlatmaları ve alarm (2026-10-01 öğleden sonra)
+Sahip: "Bildirimlerde Yoga, Dalga gibi bütün modüllerin bildirim seçenekleri olmalı. Bunu daha önce de konuşmuştuk, hatta
+modüllerde hatırlat bölümü olacak şeklinde tasarımda yapmıştın; umarım uzun yola eklemişsindir, unutmamışsındır."
+(Eklenmemişti: B1a arayüzü kapalı; uzun yolda yalnız genel kart vardı.) Kararlar: kurulu olanlar + "Hatırlatma ekle";
+öneri saati modüle göre; durakta ve kartta. Alarm: "Önce ertelemeyi kaldır, sonra uzantıyı ekle"; güvenilirlik
+düzeltmeleri: ilk cevap "Hayır", hemen düzeltti: "bu hayır değil evet olacak". Çalışma oturumu sırasında hatırlatmalar:
+"Gelsin". Bildirim metinleri: "Evet, yeniden yaz". Plan: YAPILACAKLAR D13–D15.
+

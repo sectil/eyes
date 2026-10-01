@@ -143,6 +143,16 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
 - [ ] D12 **Nefes 11.38'de 11.38'e kuruldu, gelmedi** (sahip): seçilen dakika o an geçmiş sayılır; ayrıca 11.22
       düzeltmesinin yüklü sürümde olup olmadığı bilinmiyor. Tanıya bekleyen bildirimler ve izin eklendi (2d257ba).
 
+- [ ] D13 **Bildirim metinleri yeniden** (sahip: "Türkçe ifadesi çok kötü, gerin ne demek"): mola, yürüyüş, nefes, su,
+      çalışma oturumu, mola bitti, deneme, alarm. Taslak + 5 kişilik doğallık sınaması (≥4/5) + kendi onayım → sahibe.
+- [ ] D14 **B1a "Bana hatırlat" arayüzü yeniden açılır** (sahip, 2026-10-01: "bütün modüllerin bildirim seçenekleri
+      olmalı"). Kararlar: Bildirimler sayfası yalnız kurulu hatırlatmalar + "Hatırlatma ekle"; veri yokken öneri saati
+      modüle göre farklı (kaynaklı); uzun yolda her modül durağının ayrıntısında "Bana hatırlat" + yoldaki kart Bildirimler
+      sayfasına gider + modül bitiş ekranında "Bana hatırlat" satırı. 5 sn kapısı ≥4/5. Uzun yol tasarımına (D9) eklenir.
+- [~] D15 **Alarm:** erteleme geçici kaldırıldı, sonra widget uzantısı (Mac'te Xcode) ile geri gelir; açılışta telefondaki
+      alarmla kayıt karşılaştırılır ("Alarm telefonda kurulu değil · Yeniden kur"), gün seçilmediyse "Yalnız yarın kur"
+      (sahip onaylı). Araştırma: `tasarim/bildirim-hava-yuruyus/alarm-risk.md`.
+
 **Sahipte bekleyenler:** (1) `sky-check.sh` çıktısı; (2) Build 67'de Y1'in 10 maddesi; (3) B2'nin 5 yeni cümlesi
 ("Hangi ilçedesin?", "İlçe ara", "Yalnız İzmir", "Konumuna en yakın ilçe merkezi bu.", "Konum") ve rızada "Nerede
 durur?"un başa alınması; (4) B1a arayüzü için 2 karar.
