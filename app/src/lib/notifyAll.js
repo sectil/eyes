@@ -20,11 +20,12 @@
 //   - JS'in bekleyeni ≤ 58 (2 yuva Swift'in 771x'ine); deney planı kırpılmaz, modül hatırlatmalarının ufku 3 → 2 → 1
 //     güne iner.
 //   - Gece (yalnız yeni kaynaklar): 01.00–05.00 hiç; gece sessizliği (varsayılan 23.00–07.00); alarm kuruluysa yatmadan
-//     önceki 60 dk. Deney türleri ve ek saatleri bugünkü kuralda (09.00–21.00, su ≤ 18.00; moduleRemind.js).
+//     önceki 60 dk. Hatırlatmalar'daki türlerin kişinin seçtiği saati (74xx) gece kuralına uymaz (D5+D6: açık seçim
+//     kazanır); bu türlerin ek saatleri moduleRemind.js LEGACY_WINDOW'da (09.00–21.00, su ≤ 18.00).
 import { planNotifications, LEAD_MS } from './notifyPlan.js'
-import { planModuleReminders, normalizeModuleReminders, windowOf, LEGACY_ORDER, PATH_ID, PATH_REMIND, MR_HORIZON_DAYS } from './moduleRemind.js'
+import { planModuleReminders, normalizeModuleReminders, windowOf, LEGACY_ORDER, PATH_ID, PATH_REMIND, MR_HORIZON_DAYS, MIN_GAP_MIN } from './moduleRemind.js'
 import { FOCUS_HOURS } from './focus.js'
-import { NUDGE_TYPES, MIN_GAP_MIN, normalizeReminders, toMinutes } from './reminders.js'
+import { NUDGE_TYPES, normalizeReminders, toMinutes } from './reminders.js'
 import { dayKey } from './habitLog.js'
 import { nextRing, SLEEP_TARGET_H } from './alarm.js'
 import { resolvePlanTexts } from './remindTexts.js'
@@ -126,7 +127,7 @@ export function loadSlots(storage) {
   }
 }
 
-// Girdiler: planNotifications'ınkiler (now, reminders, study, habits, sessions, health, focus, seed, log) ve
+// Girdiler: planNotifications'ınkiler (now, reminders, study, habits, sessions, health, focus, log; seed artık kullanılmaz) ve
 //   modules: registry.reminders() + App'in süzdüğü kayıtlar ({ id, remind, doneToday, records? }; moduleRemind.js)
 //   moduleReminders: settings.moduleReminders · alarm: loadAlarm() | null · quiet: { from, to } | null (gece sessizliği)
 //   texts: true → textKey'li yeni bildirimlere onaylı metin bağlanır (lib/remindTexts.js; notifyApply yalnız textKey

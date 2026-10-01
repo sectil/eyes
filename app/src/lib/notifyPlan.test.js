@@ -1,5 +1,6 @@
 import { describe, it, expect, afterEach } from 'vitest'
-import { SILENT_RATE, HORIZON_DAYS, LEAD_MS, dice, walkThreshold, TEXTS, textFor, planNotifications } from './notifyPlan.js'
+import * as notifyPlan from './notifyPlan.js'
+import { HORIZON_DAYS, LEAD_MS, walkThreshold, TEXTS, textFor, planNotifications } from './notifyPlan.js'
 import { TYPE_INDEX, NUDGE_TYPES } from './reminders.js'
 import { dayKey, keyDay } from './habitLog.js'
 
@@ -69,7 +70,7 @@ describe('planNotifications: geçmiş an', () => {
     const at = new Date(2026, 8, 27, 12, 30)
     const earlier = plan({ now: new Date(2026, 8, 27, 9, 0) })
     const prev = logOf(earlier, 'mola', TODAY)
-    expect(prev.arm).toBe('send') // tohum-1 zarı bugün mola için 'send'
+    expect(prev.arm).toBe('send') // uygun gün her zaman 'send' (sessiz gün yok)
     const p = plan({ now, log: earlier.log })
     expect(logOf(p, 'mola', TODAY)).toEqual(prev)
     const n = p.notifications.find((x) => x.type === 'mola' && x.extra.date === TODAY)
@@ -93,21 +94,38 @@ describe('planNotifications: geçmiş an', () => {
 })
 
 describe('planNotifications: atlama nedenleri', () => {
-  it('pencere dışı saat (ayar seçici dışından gelmiş) → window; su 18:00 sonrası → window', () => {
-    const p = plan({ rem: { types: { ...ALL_ON, mola: { on: true, time: '08:00' }, water: { on: true, time: '19:00' } } } })
-    for (const t of ['mola', 'water']) {
+  it('saat kısıtı yok (D5+D6): 09.00–21.00 dışı ve su 18.00 sonrası da seçilen saatte kurulur, kaydırılmaz', () => {
+    const times = { mola: '06:35', water: '19:00', walk: '23:30', breath: '00:15' }
+    const types = Object.fromEntries(Object.entries(times).map(([t, time]) => [t, { on: true, time }]))
+    const p = plan({ now: new Date(2026, 8, 27, 0, 5), rem: { types } })
+    for (const [t, time] of Object.entries(times)) {
       const list = p.log.filter((e) => e.type === t)
-      expect(list.every((e) => e.skipReason === 'window' && !e.eligible && e.arm === null)).toBe(true)
-      expect(p.notifications.some((n) => n.type === t)).toBe(false)
+      expect(list).toHaveLength(HORIZON_DAYS)
+      expect(list.every((e) => e.eligible && e.arm === 'send' && e.skipReason === null)).toBe(true)
+      const sent = p.notifications.filter((n) => n.type === t)
+      expect(sent).toHaveLength(HORIZON_DAYS)
+      for (const n of sent) expect(`${String(n.at.getHours()).padStart(2, '0')}:${String(n.at.getMinutes()).padStart(2, '0')}`).toBe(time)
     }
+    expect(p.log.some((e) => e.skipReason === 'window')).toBe(false)
   })
-  it("gün aşırı: dönem günü tek olan günler 'thin', çift günler uygun", () => {
-    const p = plan({ rem: { types: ALL_ON, thin: { mola: 'alt' } } })
-    for (const e of p.log.filter((x) => x.type === 'mola')) {
-      if (keyDay(e.date) % 2 === 0) expect(e.eligible).toBe(true)
-      else expect(e).toMatchObject({ eligible: false, arm: null, skipReason: 'thin' })
+  it("seçilmeyen gün 'day' diye atlanır; seçilen günlerde gelir (0 = Pazar)", () => {
+    // 27 Eylül 2026 Pazar: ufuk Pz, Pt, Sa, Ça, Pe, Cu, Ct
+    const p = plan({ rem: { types: { ...ALL_ON, mola: { on: true, time: '12:30', days: [1, 3, 5] } } } })
+    const mola = p.log.filter((e) => e.type === 'mola')
+    expect(mola).toHaveLength(HORIZON_DAYS)
+    for (const e of mola) {
+      const wd = new Date(e.plannedAt).getDay()
+      if ([1, 3, 5].includes(wd)) expect(e).toMatchObject({ eligible: true, arm: 'send', skipReason: null })
+      else expect(e).toMatchObject({ eligible: false, arm: null, skipReason: 'day' })
     }
-    expect(p.log.filter((x) => x.type === 'walk').every((e) => e.skipReason !== 'thin')).toBe(true)
+    expect(p.notifications.filter((n) => n.type === 'mola').map((n) => n.at.getDay())).toEqual([1, 3, 5])
+    // Öteki türlerin günleri değişmez
+    expect(p.notifications.filter((n) => n.type === 'breath')).toHaveLength(HORIZON_DAYS)
+  })
+  it("eski 'Gün aşırı' kaydı yok sayılır: her gün gelir", () => {
+    const p = plan({ rem: { types: ALL_ON, thin: { mola: 'alt' }, thinAsked: { mola: '2026-09-20T10:00:00.000Z' } } })
+    expect(p.log.filter((x) => x.type === 'mola').every((e) => e.eligible && e.skipReason === null)).toBe(true)
+    expect(p.notifications.filter((n) => n.type === 'mola')).toHaveLength(HORIZON_DAYS)
   })
   it("çalışma oturumu anı kapsıyorsa 'focus'; oturum bildirimleri 7500+k-1, timeSensitive, günlükte yok", () => {
     const now = new Date(2026, 8, 27, 11, 30)
@@ -186,66 +204,37 @@ describe('planNotifications: atlama nedenleri', () => {
   })
 })
 
-describe('zar ve sessiz gün', () => {
-  it('dice [0,1) ve deterministik; oran ≈ SILENT_RATE', () => {
-    expect(dice('a', '2026-09-27', 'mola')).toBe(dice('a', '2026-09-27', 'mola'))
-    expect(dice('a', '2026-09-27', 'mola')).not.toBe(dice('b', '2026-09-27', 'mola'))
-    let silent = 0
-    const N = 4000
-    for (let i = 0; i < N; i++) {
-      const v = dice('tohum', `2026-01-${i}`, NUDGE_TYPES[i % 4])
-      expect(v).toBeGreaterThanOrEqual(0)
-      expect(v).toBeLessThan(1)
-      if (v < SILENT_RATE) silent++
-    }
-    expect(silent / N).toBeGreaterThan(0.22)
-    expect(silent / N).toBeLessThan(0.28)
+describe('sessiz gün yok (D5+D6)', () => {
+  it('zar kalktı: dice ve SILENT_RATE dışa verilmez', () => {
+    expect(notifyPlan.dice).toBeUndefined()
+    expect(notifyPlan.SILENT_RATE).toBeUndefined()
   })
-  it('plan yeniden kurulunca (başka saatte, başka girdiyle) aynı günün zarı değişmez', () => {
-    const a = plan()
-    const b = plan({ now: new Date(2026, 8, 27, 10, 45), habits: [{ date: TODAY, type: 'water', at: new Date(2026, 8, 27, 10, 0).toISOString() }] })
-    let compared = 0
-    for (const e of b.log) {
-      const old = logOf(a, e.type, e.date)
-      if (!old.eligible || !e.eligible) continue
-      expect(e.arm).toBe(old.arm)
-      compared++
+  it("uygun her gün 'send'; bildirimler tam olarak 'send' kayıtları; tohum sonucu değiştirmez", () => {
+    for (const seed of ['tohum-1', 's1', 's2', '']) {
+      const p = plan({ seed })
+      expect(p.log.some((e) => e.arm === 'silent')).toBe(false)
+      for (const e of p.log) expect(e.arm).toBe(e.eligible ? 'send' : null)
+      const sends = p.log.filter((e) => e.arm === 'send').map((e) => `${e.date}|${e.type}`).sort()
+      expect(nudges(p).map((n) => `${n.extra.date}|${n.type}`).sort()).toEqual(sends)
+      expect(p).toEqual(plan({ seed: 'başka' }))
     }
-    expect(compared).toBeGreaterThan(20)
   })
-  it('sessiz gün: bildirim yok ama günlükte var; yerine başka tür gönderilmez; bildirimler tam olarak "send" kayıtları', () => {
-    let p = null
-    for (let i = 0; i < 50 && !p; i++) {
-      const q = plan({ seed: `s${i}` })
-      if (q.log.some((e) => e.arm === 'silent')) p = q
-    }
-    expect(p).not.toBeNull()
-    const silent = p.log.filter((e) => e.arm === 'silent')
-    for (const e of silent) {
-      expect(e.eligible).toBe(true)
-      expect(e.skipReason).toBeNull()
-      expect(p.notifications.some((n) => n.type === e.type && n.extra.date === e.date)).toBe(false)
-    }
-    const sends = p.log.filter((e) => e.arm === 'send').map((e) => `${e.date}|${e.type}`).sort()
-    expect(nudges(p).map((n) => `${n.extra.date}|${n.type}`).sort()).toEqual(sends)
-  })
-  it('zar yalnız uygun günde atılır', () => {
+  it('arm yalnız uygun günde', () => {
     const p = plan({ health: null })
     for (const e of p.log) expect(e.arm === null).toBe(!e.eligible)
   })
 })
 
 describe('walkGuards', () => {
-  it('yalnız gönderilen yürüyüşler için { id, date, threshold }', () => {
-    let seen = { send: false, silent: false }
-    for (let i = 0; i < 30; i++) {
-      const p = plan({ seed: `g${i}` })
-      const walkSend = p.notifications.filter((n) => n.type === 'walk')
-      expect(p.walkGuards).toEqual(walkSend.map((n) => ({ id: n.id, date: n.extra.date, threshold: walkThreshold(8000, '15:00') })))
-      if (walkSend.length) seen.send = true
-      if (p.log.some((e) => e.type === 'walk' && e.arm === 'silent')) seen.silent = true
-    }
-    expect(seen).toEqual({ send: true, silent: true })
+  it('yalnız gönderilen yürüyüşler için { id, date, threshold }; seçilmeyen günde bekçi yok', () => {
+    const p = plan()
+    const walkSend = p.notifications.filter((n) => n.type === 'walk')
+    expect(walkSend).toHaveLength(HORIZON_DAYS)
+    expect(p.walkGuards).toEqual(walkSend.map((n) => ({ id: n.id, date: n.extra.date, threshold: walkThreshold(8000, '15:00') })))
+    const some = plan({ rem: { types: { ...ALL_ON, walk: { on: true, time: '15:00', days: [2, 4] } } } })
+    const sent = some.notifications.filter((n) => n.type === 'walk')
+    expect(sent.map((n) => n.at.getDay())).toEqual([2, 4])
+    expect(some.walkGuards.map((g) => g.id)).toEqual(sent.map((n) => n.id))
   })
   it('eşik: ortalama × dakika / 1440', () => {
     expect(walkThreshold(8000, '15:00')).toBe(5000)

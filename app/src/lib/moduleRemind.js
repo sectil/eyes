@@ -11,7 +11,7 @@
 // }
 // Kimlikler: 7800–7859 modül hatırlatmaları (7800 + gün × 20 + sıra; ufuk 3 gün); 7860–7867 legacy ek saatleri
 // (7860 + tür sırası × 2 + yuva; ufuk 24 saat). Kapalıyken (moduleReminders boş) çıktı boştur.
-import { WINDOW, WATER_LAST, MIN_GAP_MIN, normalizeReminders, toMinutes } from './reminders.js'
+import { normalizeReminders, toMinutes } from './reminders.js'
 import { dayKey, keyDay } from './habitLog.js'
 import { LEAD_MS, walkThreshold } from './notifyPlan.js'
 
@@ -31,7 +31,13 @@ export const SECOND_GAP_MIN = 120 // ikinci saat: aynı günde ilkinden en az 2 
 export const RECALC_DAYS = 14
 export const EXTRA_DONE_MS = 2 * 3600000 // ek saat: o saatten önceki son 2 saatte yapıldıysa düşer (§5.5 madde 1)
 export const PATH_ID = 'path'
-// Pencereler (PLAN §A.4 gece kuralı): hareket 09–21, sakin 08–22; legacy türler bugünkü kural (su ≤ 18.00)
+// "Bana hatırlat" kuralları (PLAN.v1 §A.2, §A.4; D5+D6'da değişmedi, eskiden lib/reminders.js'teydi): legacy türlerin
+// 2. ve 3. saati (ek saatler) 09.00–21.00 ve su ≤ 18.00 penceresinde; bildirimler arası en az 60 dk. D5+D6 bu kuralları
+// yalnız Hatırlatmalar'daki ilk saatten (74xx) kaldırdı; buradakiler sahibe ayrı soru.
+export const LEGACY_WINDOW = Object.freeze({ from: '09:00', to: '21:00' })
+export const WATER_LAST = '18:00'
+export const MIN_GAP_MIN = 60
+// Pencereler (PLAN §A.4 gece kuralı): hareket 09–21, sakin 08–22; legacy türler LEGACY_WINDOW (su ≤ 18.00)
 export const REMIND_WINDOWS = Object.freeze({
   move: Object.freeze({ from: '09:00', to: '21:00' }),
   calm: Object.freeze({ from: '08:00', to: '22:00' }),
@@ -54,10 +60,10 @@ const atOn = (day, time) => {
   return new Date(day.getFullYear(), day.getMonth(), day.getDate(), Math.floor(m / 60), m % 60, 0, 0)
 }
 
-// Modülün penceresi (dakika). legacy: bugünkü deney kuralı; yoksa window ('move' varsayılan)
+// Modülün penceresi (dakika). legacy: LEGACY_WINDOW (su WATER_LAST); yoksa window ('move' varsayılan)
 export function windowOf(remind) {
   const w = remind?.legacy
-    ? { from: WINDOW.from, to: remind.legacy === 'water' ? WATER_LAST : WINDOW.to }
+    ? { from: LEGACY_WINDOW.from, to: remind.legacy === 'water' ? WATER_LAST : LEGACY_WINDOW.to }
     : (REMIND_WINDOWS[remind?.window] ?? REMIND_WINDOWS.move)
   return { from: toMinutes(w.from), to: toMinutes(w.to) }
 }

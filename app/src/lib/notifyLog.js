@@ -1,10 +1,12 @@
-// Bildirim günlüğü ve telefonda ölçme (plan §6). Her gün ve her deney türü için tek kayıt: o gün kurallara göre
-// gönderilebilir miydi (eligible), zar ne dedi (arm), gönderilmediyse neden (skipReason). Uygun günlerin bir kısmında
-// bilerek gönderilmez; kayıt oranı gelen ve gelmeyen günlerde karşılaştırılır. Veri telefondan çıkmaz, coach() yok.
+// Bildirim günlüğü (plan §6). Her gün ve her tür için tek kayıt: o gün kurallara göre gönderilebilir miydi
+// (eligible), gönderildi mi (arm), gönderilmediyse neden (skipReason). Veri telefondan çıkmaz, coach() yok.
+// D5+D6 (2026-10-01): sessiz gün deneyi ve "Gün aşırı" sorusu kalktı; planlayıcı artık 'silent', 'window', 'thin'
+// yazmaz (eski kayıtlarda okunur), seçilmeyen gün 'day'. evaluate ve thinCandidate uygulamada kullanılmıyor (Gelişim
+// karşılaştırma kartı ve Ana sayfa sorusu kalktı); testleriyle birlikte silinmesi sahibe soru.
 //
 //   gozolcum:notify-log  → [{ date, type, eligible, arm: 'send'|'silent'|null,
-//                             skipReason: null|'focus'|'window'|'noData'|'doneBefore'|'thin', plannedAt: ISO|null, tapped }]
-//   gozolcum:notify-seed → rastgele dize; zar tohum + tarih + türden türer (plan yeniden kurulunca değişmez)
+//                             skipReason: null|'day'|'focus'|'noData'|'doneBefore'|'window'|'thin', plannedAt: ISO|null, tapped }]
+//   gozolcum:notify-seed → rastgele dize; eski zarın tohumu (artık kullanılmaz)
 import { NUDGE_TYPES, TYPE_INDEX, normalizeReminders } from './reminders.js'
 import { dayKey, keyDay } from './habitLog.js'
 import { isBreath } from './breath.js'
@@ -18,7 +20,7 @@ export const READY_SILENT = 5 // … ve en az 5 sessiz gün birikmeden sonuç g�
 export const THIN_AFTER = 3 // VARSAYIM (plan §3, Head 2013): üst üste 3 hatırlatma gününde ne dokunma ne kayıt
 
 const ARMS = ['send', 'silent']
-const REASONS = ['focus', 'window', 'noData', 'doneBefore', 'thin']
+const REASONS = ['day', 'focus', 'window', 'noData', 'doneBefore', 'thin']
 const store = (s) => s ?? globalThis.localStorage
 const isIso = (v) => typeof v === 'string' && Number.isFinite(Date.parse(v))
 const keyOf = (e) => `${e.date}|${e.type}`

@@ -3,7 +3,7 @@ import {
   MR_ID, MR_ID_LAST, EXTRA_ID, MAX_TIMES, REMIND_WINDOWS, PATH_ID,
   pickAutoTime, planModuleReminders, normalizeModuleReminders, recordLocal, remindTimeError, windowOf,
 } from './moduleRemind.js'
-import { planNotifications, dice, SILENT_RATE } from './notifyPlan.js'
+import { planNotifications } from './notifyPlan.js'
 import { toMinutes } from './reminders.js'
 import { dayKey } from './habitLog.js'
 
@@ -243,32 +243,27 @@ describe('planModuleReminders: deney türünde çok saat', () => {
   const reminders = { optIn: 'yes', types: { mola: { on: false, time: '12:30' }, breath: { on: true, time: '10:00' } } }
   const mr = { breath: { on: true, mode: 'manual', times: ['13:00', '17:00'] } }
 
-  it('ek saatler yalnız o günün zarı "send" iken; sessiz günde hiçbiri; kimlik 7860 + tür×2 + yuva; 78xx kurulmaz', () => {
-    let sendSeen = false
-    let silentSeen = false
-    for (let i = 0; i < 40; i++) {
-      const seed = `z${i}`
-      const now = new Date(2026, 8, 30, 9, 0)
-      const base = planNotifications({ now, reminders, seed })
-      const p = planModuleReminders({ now, reminders, modules: [breathMod], moduleReminders: mr, fixed: base.notifications, log: base.log })
-      expect(p.notifications).toEqual([])
-      const today = dayKey(now)
-      const arm = dice(seed, today, 'breath') < SILENT_RATE ? 'silent' : 'send'
-      expect(base.log.find((e) => e.date === today && e.type === 'breath').arm).toBe(arm)
-      if (arm === 'send') {
-        sendSeen = true
-        expect(p.extras.map((n) => [n.id, hm(n.at), n.extra])).toEqual([
-          [EXTRA_ID + 2 * 2 + 0, [13, 0], { kind: 'nudge', type: 'breath', date: today, slot: 0 }],
-          [EXTRA_ID + 2 * 2 + 1, [17, 0], { kind: 'nudge', type: 'breath', date: today, slot: 1 }],
-        ])
-        expect(p.extras.every((n) => n.textKey === 'nudge.breath' && n.title === undefined)).toBe(true)
-      } else {
-        silentSeen = true
-        expect(p.extras).toEqual([])
-        expect(p.skipped.filter((s) => s.reason === 'arm')).toHaveLength(2)
-      }
-    }
-    expect(sendSeen && silentSeen).toBe(true)
+  it('ek saatler uygun (seçilen) günde kurulur; kimlik 7860 + tür×2 + yuva; 78xx kurulmaz; seçilmeyen günde ne 74xx ne ek saat', () => {
+    const now = new Date(2026, 8, 30, 9, 0) // Çarşamba (getDay 3)
+    const today = dayKey(now)
+    const base = planNotifications({ now, reminders })
+    const p = planModuleReminders({ now, reminders, modules: [breathMod], moduleReminders: mr, fixed: base.notifications, log: base.log })
+    expect(p.notifications).toEqual([])
+    expect(base.log.find((e) => e.date === today && e.type === 'breath').arm).toBe('send')
+    expect(p.extras.map((n) => [n.id, hm(n.at), n.extra])).toEqual([
+      [EXTRA_ID + 2 * 2 + 0, [13, 0], { kind: 'nudge', type: 'breath', date: today, slot: 0 }],
+      [EXTRA_ID + 2 * 2 + 1, [17, 0], { kind: 'nudge', type: 'breath', date: today, slot: 1 }],
+    ])
+    expect(p.extras.every((n) => n.textKey === 'nudge.breath' && n.title === undefined)).toBe(true)
+    // Çarşamba seçilmemiş: o gün ne 74xx ne ek saat
+    const off = { ...reminders, types: { ...reminders.types, breath: { on: true, time: '10:00', days: [0, 1, 2, 4, 5, 6] } } }
+    const offBase = planNotifications({ now, reminders: off })
+    expect(offBase.log.find((e) => e.date === today && e.type === 'breath')).toMatchObject({ arm: null, skipReason: 'day' })
+    expect(offBase.notifications.filter((n) => n.type === 'breath' && dayKey(n.at) === today)).toEqual([])
+    const q = planModuleReminders({ now, reminders: off, modules: [breathMod], moduleReminders: mr, fixed: offBase.notifications, log: offBase.log })
+    expect(q.notifications).toEqual([])
+    expect(q.extras).toEqual([])
+    expect(q.skipped.filter((s) => s.reason === 'arm' && s.date === today)).toHaveLength(2)
   })
   it('günlük yoksa ek saat kurulmaz; ilk saate 60 dk’dan yakın ek saat kurulmaz; ufuk 24 saat', () => {
     const now = new Date(2026, 8, 30, 14, 0)

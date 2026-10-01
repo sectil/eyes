@@ -2,37 +2,23 @@
 // (notifyApply.js) bunları tek seferlik kurar. Uygulama kapalıyken kod çalışmaz: saat ve metin kurulduğu anda
 // sabitlenir, bu yüzden plan her açılışta, kayıtta, sağlık okumasında ve ayar değişince yeniden kurulur.
 //
-// Kurallar: her deney türünden günde en çok 1 bildirim; geçmiş an kurulmaz; o gün yapılan tür gönderilmez;
-// çalışma oturumu sürerken diğer türler gelmez; uygun günlerin bir kısmında zar gereği bilerek gönderilmez
-// (sessiz gün; bildirim yok, günlükte var). Aynı saat çakışması ayar anında engellenir (reminders.timeError);
-// burada saat kaydırılmaz.
-import { NUDGE_TYPES, TYPE_INDEX, WINDOW, WATER_LAST, normalizeReminders, toMinutes } from '../../../src/lib/reminders.js'
+// Kurallar: her türden günde en çok 1 bildirim; yalnız kişinin seçtiği günlerde (seçilmeyen gün 'day'); geçmiş an
+// kurulmaz; o gün yapılan tür gönderilmez; çalışma oturumu sürerken diğer türler gelmez. Kişinin seçtiği saat
+// kaydırılmaz ve saat penceresi yok (D5+D6, sahip kararı 2026-10-01). Sessiz gün deneyi kalktı: uygun her gün
+// gönderilir (günlükte arm 'send'). VARSAYIM (D5+D6 plan madde 2): gece sessizliği kişinin kendi seçtiği bu saatleri
+// engellemez (açık seçim kazanır; notifyAll gece kuralını yalnız yeni kaynaklara uygular).
+import { NUDGE_TYPES, TYPE_INDEX, normalizeReminders, toMinutes } from '../../../src/lib/reminders.js'
 import { dayKey, keyDay, habitsOn } from '../../../src/lib/habitLog.js'
 import { FOCUS_HOURS, breakTimes } from './focus.js'
 import { BREATH_DONE_SEC } from '../../../src/lib/notifyLog.js'
 import { isBreath } from '../../../src/lib/breath.js'
 import { WEEKDAYS, mondayIndex } from '../../../src/lib/calendar.js'
 
-export const SILENT_RATE = 0.25 // VARSAYIM (plan §6): uygun günlerin %25'inde bilerek gönderilmez
 export const HORIZON_DAYS = 7 // gün 0 (bugün) … 6
 export const NUDGE_ID = 7400 // + gün×10 + TYPE_INDEX
 export const FOCUS_ID = 7500 // + k − 1 (k. saat)
 export const LEAD_MS = 60000 // bu kadar yakın an kurulmaz (geçmiş an hemen çalar)
 const HOUR = 3600000
-
-// [0,1) deterministik zar: tohum + tarih + tür → FNV-1a karması → mulberry32'nin bir adımı
-export function dice(seed, date, type) {
-  const s = `${seed}|${date}|${type}`
-  let h = 2166136261
-  for (let i = 0; i < s.length; i++) {
-    h ^= s.charCodeAt(i)
-    h = Math.imul(h, 16777619)
-  }
-  let t = (h + 0x6d2b79f5) | 0
-  t = Math.imul(t ^ (t >>> 15), t | 1)
-  t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
-  return ((t ^ (t >>> 14)) >>> 0) / 4294967296
-}
 
 // Bildirim saatine kadar "beklenen" adım: ortalama × (saat / 24). VARSAYIM (plan §3): gün boyu eşit dağılım.
 // Native WalkGuard bugünün adımı bu eşiğe ulaşınca bekleyen yürüyüş bildirimini iptal eder.
@@ -113,12 +99,13 @@ function focusSpan(focus) {
 // Girdiler:
 //   reminders: settings.reminders (ham; burada normalize edilir) · study: settings.reminder ({ days, time })
 //   habits: loadHabits() · sessions: store.sessions · health: { todaySteps, avgSteps, readAt } | null
-//   focus: loadFocus() · seed: getSeed() · log (isteğe bağlı): loadLog() — bugünün zamanı gelmiş kaydı varsa
+//   focus: loadFocus() · seed: artık kullanılmaz (sessiz gün zarı kalktı; eski çağrılar için kabul edilir) · log (isteğe bağlı): loadLog() — bugünün zamanı gelmiş kaydı varsa
 //   (saat sonradan değişti) o tür bugün ikinci kez kurulmaz; zamanı gelmemiş kaydın anı LEAD_MS içine girdiyse
 //   o an planda kalır (bekleyen bildirim iptal edilmez, günün kaydı silinmez)
-// Çıktı: notifications (uygulayıcıya), log (yalnız deney türleri, gün 0–6; notifyLog.mergePlanned'e),
+// Çıktı: notifications (uygulayıcıya), log (yalnız NUDGE_TYPES, gün 0–6; notifyLog.mergePlanned'e; uygun günde
+//   arm 'send', atlanan günde arm null + skipReason 'day' | 'noData' | 'focus' | 'doneBefore'),
 //   walkGuards (native iptal: adım eşiğe ulaşınca bekleyen yürüyüş bildirimi silinir)
-export function planNotifications({ now = new Date(), reminders, study = null, habits = [], sessions = [], health = null, focus = null, seed = '', log = null } = {}) {
+export function planNotifications({ now = new Date(), reminders, study = null, habits = [], sessions = [], health = null, focus = null, log = null } = {}) {
   const notifications = []
   const plannedLog = []
   const walkGuards = []
@@ -131,12 +118,9 @@ export function planNotifications({ now = new Date(), reminders, study = null, h
   const span = focusSpan(focus)
   // Bitiş anı dahil: oturumun son molası bitiş anında gelir; aynı dakikadaki hatırlatma üst üste binmesin (DEVIR §8.3)
   const inFocus = (t) => span != null && t >= span.start && t <= span.end
-  const from = toMinutes(WINDOW.from)
-  const to = toMinutes(WINDOW.to)
-  const waterLast = toMinutes(WATER_LAST)
 
   const logList = Array.isArray(log) ? log : []
-  // Bugünün zamanı gelmiş kaydı olan türler (bildirim gitti ya da sessiz kaldı)
+  // Bugünün zamanı gelmiş kaydı olan türler (bildirim gitti ya da atlandı)
   const firedToday = new Set(logList.filter((e) => e?.date === todayKey && Date.parse(e.plannedAt) <= nowMs).map((e) => e.type))
   // Zamanı gelmemiş kayıtların anı (tarih|tür → ms): LEAD_MS içine girmiş an yeni kurulmaz, ama aynı anla önceden
   // planlanmışsa planda kalır. Yoksa uygulamayı hatırlatmadan hemen önce açmak bekleyen bildirimi iptal eder ve günün
@@ -171,23 +155,20 @@ export function planNotifications({ now = new Date(), reminders, study = null, h
       if (atMs <= nowMs) continue // geçmiş an: kurulmaz, günlüğe de yazılmaz
       if (atMs <= nowMs + LEAD_MS && plannedAhead.get(`${key}|${type}`) !== atMs) continue // çok yakın yeni an kurulmaz
       if (d === 0 && firedToday.has(type)) continue
-      const m = toMinutes(cfg.time)
       let skipReason = null
-      if (m < from || m > to || (type === 'water' && m > waterLast)) skipReason = 'window'
-      else if (r.thin[type] === 'alt' && keyDay(key) % 2 !== 0) skipReason = 'thin'
+      if (!cfg.days.includes(day.getDay())) skipReason = 'day'
       else if (type === 'walk' && avg == null) skipReason = 'noData'
       else if (inFocus(at.getTime())) skipReason = 'focus'
       else if (d === 0 && doneToday[type]) skipReason = 'doneBefore'
       const eligible = skipReason == null
-      // Zar yalnız uygun günde atılır
-      const arm = eligible ? (dice(seed, key, type) < SILENT_RATE ? 'silent' : 'send') : null
+      const arm = eligible ? 'send' : null
       plannedLog.push({ date: key, type, eligible, arm, skipReason, plannedAt: at.toISOString() })
       if (arm !== 'send') continue
       const id = NUDGE_ID + d * 10 + TYPE_INDEX[type]
       notifications.push({ id, at, type, ...textFor(type, key), extra: { kind: 'nudge', date: key, type, arm }, level: 'active' })
       if (type === 'walk') walkGuards.push({ id, date: key, threshold: walkThreshold(avg, cfg.time) })
     }
-    // Çalışma günleri: deneyde değil (günlük yok, zar yok); seçili günlerde settings.reminder saatinde
+    // Çalışma günleri: günlük yok; seçili günlerde settings.reminder saatinde
     if (studyOn && studyDays.includes(WEEKDAYS[mondayIndex(day)].id)) {
       const at = atOn(day, study.time)
       if (at.getTime() > nowMs + LEAD_MS && !inFocus(at.getTime())) {
@@ -198,7 +179,8 @@ export function planNotifications({ now = new Date(), reminders, study = null, h
   }
 
   // Çalışma oturumu: k. saatte (k = 1..hours) mola; İş/Rahatsız Etme modunda da gelsin diye timeSensitive. Yalnız
-  // gündüz penceresindeki saatler kurulur (Bug 33: gece 01.00–04.00 "kalk" bildirimi; focus.breakTimes).
+  // gündüz penceresindeki saatler kurulur (Bug 33: gece 01.00–04.00 "kalk" bildirimi; focus.breakTimes, BREAK_WINDOW).
+  // Bu, kişinin seçtiği saat değil, Nefona'nın kendiliğinden kurduğu bildirim; gece koruması sürer.
   if (span) {
     for (const t of breakTimes(span.start, span.hours)) {
       const k = Math.round((t - span.start) / HOUR)

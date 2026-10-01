@@ -4,9 +4,9 @@ import {
   TYPE_INDEX,
   TYPE_LABEL,
   DEFAULT_REMINDERS,
-  WINDOW,
-  WATER_LAST,
-  MIN_GAP_MIN,
+  ALL_DAYS,
+  TIME_ERROR,
+  normalizeDays,
   normalizeReminders,
   timeError,
   enabledTypes,
@@ -14,19 +14,14 @@ import {
   toMinutes,
 } from './reminders.js'
 
-const WIN = 'Saat 09:00–21:00 arasında olmalı'
-const WATER = 'Su hatırlatması en geç 18:00'
-const GAP = 'Başka bir hatırlatmayla arasında en az 1 saat olmalı'
 const withTypes = (types, extra = {}) => normalizeReminders({ types, ...extra })
 
 describe('sabitler', () => {
-  it('deney türleri, kimlik sırası, etiketler, sınırlar', () => {
+  it('türler, kimlik sırası, etiketler, günler (saat sınırı yok: D5+D6)', () => {
     expect(NUDGE_TYPES).toEqual(['mola', 'walk', 'breath', 'water'])
     expect(TYPE_INDEX).toEqual({ mola: 0, walk: 1, breath: 2, water: 3, study: 4 })
     expect(TYPE_LABEL.study).toBe('Çalışma günleri')
-    expect(WINDOW).toEqual({ from: '09:00', to: '21:00' })
-    expect(WATER_LAST).toBe('18:00')
-    expect(MIN_GAP_MIN).toBe(60)
+    expect(ALL_DAYS).toEqual([0, 1, 2, 3, 4, 5, 6])
   })
   it('toMinutes: geçersiz biçim null', () => {
     expect(toMinutes('12:30')).toBe(750)
@@ -44,10 +39,10 @@ describe('normalizeReminders', () => {
       optIn: null,
       askedAt: null,
       types: {
-        mola: { on: true, time: '12:30' },
-        walk: { on: false, time: '15:00' },
-        breath: { on: false, time: '16:30' },
-        water: { on: false, time: '11:00' },
+        mola: { on: true, time: '12:30', days: [0, 1, 2, 3, 4, 5, 6] },
+        walk: { on: false, time: '15:00', days: [0, 1, 2, 3, 4, 5, 6] },
+        breath: { on: false, time: '16:30', days: [0, 1, 2, 3, 4, 5, 6] },
+        water: { on: false, time: '11:00', days: [0, 1, 2, 3, 4, 5, 6] },
         study: { on: false },
       },
       thin: {},
@@ -55,7 +50,9 @@ describe('normalizeReminders', () => {
     })
     expect(r).toEqual(normalizeReminders(DEFAULT_REMINDERS))
     r.types.mola.on = false
+    r.types.mola.days.pop()
     expect(normalizeReminders(undefined).types.mola.on).toBe(true)
+    expect(normalizeReminders(undefined).types.mola.days).toEqual(ALL_DAYS)
     expect(DEFAULT_REMINDERS.types.mola.on).toBe(true)
   })
   it('bozuk alanlar varsayılana döner, geçerliler kalır', () => {
@@ -68,10 +65,10 @@ describe('normalizeReminders', () => {
     })
     expect(r.optIn).toBeNull()
     expect(r.askedAt).toBeNull()
-    expect(r.types.mola).toEqual({ on: true, time: '12:30' })
-    expect(r.types.walk).toEqual({ on: true, time: '14:00' })
-    expect(r.types.breath).toEqual({ on: false, time: '16:30' })
-    expect(r.types.water).toEqual({ on: false, time: '11:00' })
+    expect(r.types.mola).toEqual({ on: true, time: '12:30', days: ALL_DAYS })
+    expect(r.types.walk).toEqual({ on: true, time: '14:00', days: ALL_DAYS })
+    expect(r.types.breath).toEqual({ on: false, time: '16:30', days: ALL_DAYS })
+    expect(r.types.water).toEqual({ on: false, time: '11:00', days: ALL_DAYS })
     expect(r.types.study).toEqual({ on: true })
     expect(r.thin).toEqual({ mola: 'alt' })
     expect(r.thinAsked).toEqual({ mola: '2026-09-20T10:00:00.000Z' })
@@ -80,39 +77,35 @@ describe('normalizeReminders', () => {
   })
 })
 
+describe('günler', () => {
+  it('eski kayıtta gün yoksa her gün; seçilen günler sıralı ve tekrarsız kalır', () => {
+    expect(withTypes({ mola: { on: true, time: '12:30' } }).types.mola.days).toEqual(ALL_DAYS)
+    expect(withTypes({ mola: { on: true, time: '12:30', days: [5, 1, 3, 1] } }).types.mola).toEqual({ on: true, time: '12:30', days: [1, 3, 5] })
+    expect(withTypes({ walk: { on: true, days: [0] } }).types.walk.days).toEqual([0])
+  })
+  it('bozuk ya da boş gün listesi her gün sayılır; geçersiz değerler atılır', () => {
+    for (const days of [undefined, null, 'Pt', [], [7, -1, 1.5, '2'], {}]) expect(normalizeDays(days)).toEqual(ALL_DAYS)
+    expect(normalizeDays([6, 9, 2, '3'])).toEqual([2, 6])
+    const d = normalizeDays(null)
+    d.pop()
+    expect(ALL_DAYS).toHaveLength(7)
+  })
+  it('eski "Gün aşırı" kaydı okunur ama günleri değiştirmez', () => {
+    const r = withTypes({ mola: { on: true, time: '12:30' } }, { thin: { mola: 'alt' } })
+    expect(r.thin).toEqual({ mola: 'alt' })
+    expect(r.types.mola.days).toEqual(ALL_DAYS)
+  })
+})
+
 describe('timeError', () => {
-  it('pencere 09:00–21:00 (uçlar dahil); bozuk biçim de pencere hatası', () => {
-    const r = normalizeReminders(null)
-    expect(timeError('walk', '08:59', r)).toBe(WIN)
-    expect(timeError('walk', '21:01', r)).toBe(WIN)
-    expect(timeError('walk', '09:00', r)).toBeNull()
-    expect(timeError('walk', '21:00', r)).toBeNull()
-    expect(timeError('walk', '9:00', r)).toBe(WIN)
-    expect(timeError('walk', undefined, r)).toBe(WIN)
-  })
-  it('su en geç 18:00', () => {
-    const r = normalizeReminders(null)
-    expect(timeError('water', '18:00', r)).toBeNull()
-    expect(timeError('water', '18:01', r)).toBe(WATER)
-    expect(timeError('water', '22:00', r)).toBe(WIN)
-  })
-  it('açık başka türle arası en az 60 dk; kapalı türler ve kendi eski saati sayılmaz', () => {
-    const r = withTypes({ mola: { on: true, time: '12:30' }, breath: { on: false, time: '13:00' } })
-    expect(timeError('walk', '13:00', r)).toBe(GAP)
-    expect(timeError('walk', '12:00', r)).toBe(GAP)
-    expect(timeError('walk', '13:30', r)).toBeNull()
-    expect(timeError('walk', '11:30', r)).toBeNull()
-    expect(timeError('water', '13:00', withTypes({ mola: { on: false } }))).toBeNull()
-    expect(timeError('mola', '12:45', r)).toBeNull()
-  })
-  it('Çalışma günleri açıksa saati de aralığa girer; kendi saatine pencere uygulanmaz', () => {
-    const r = withTypes({ mola: { on: false }, study: { on: true } })
+  it('yalnız geçersiz saat: pencere, "su en geç" ve türler arası aralık yok (D5+D6)', () => {
+    const r = withTypes({ mola: { on: true, time: '12:30' }, study: { on: true } })
     const study = { days: ['MO'], time: '20:00' }
-    expect(timeError('walk', '19:30', r, study)).toBe(GAP)
-    expect(timeError('walk', '19:30', withTypes({ mola: { on: false }, study: { on: false } }), study)).toBeNull()
-    expect(timeError('study', '22:30', normalizeReminders(null))).toBeNull()
-    expect(timeError('study', '13:00', normalizeReminders(null))).toBe(GAP)
-    expect(timeError('study', 'x', normalizeReminders(null))).toBe(WIN)
+    for (const t of ['00:00', '06:35', '08:59', '12:30', '12:45', '20:00', '21:01', '23:59']) {
+      for (const type of ['mola', 'walk', 'breath', 'water', 'study']) expect(timeError(type, t, r, study)).toBeNull()
+    }
+    for (const bad of ['9:00', '24:00', '12:60', '', undefined, null]) expect(timeError('walk', bad, r)).toBe(TIME_ERROR)
+    expect(TIME_ERROR).toBe('Bir saat seç')
   })
 })
 

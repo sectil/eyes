@@ -1,9 +1,9 @@
 // "Bana hatırlat" ekranlarının saf yardımcıları (PLAN.v1 §3.A.2, §A.5; components/RemindField.jsx,
 // components/RemindSheet.jsx, screens/Notifications.jsx, screens/QuietHours.jsx). Ayar yazmaz: yeni nesne döner, App
 // store.setSetting('moduleReminders' | 'reminders', …) ile yazar. Cümle yazmaz (onaylı olanlar bileşenlerde, aynen).
-import { normalizeModuleReminders, remindTimeError, capOf, windowOf, fromMinutes } from '../lib/moduleRemind.js'
+import { normalizeModuleReminders, remindTimeError, capOf, windowOf, fromMinutes, LEGACY_ORDER } from '../lib/moduleRemind.js'
 import { remindOptIn } from '../lib/notifyAll.js'
-import { normalizeReminders, toMinutes } from '../lib/reminders.js'
+import { normalizeReminders, toMinutes, TYPE_LABEL } from '../lib/reminders.js'
 
 // 'HH:MM' → '09.15' (ekranda saat noktayla yazılır; tasarım)
 export const dot = (t) => (typeof t === 'string' ? t.replace(':', '.') : '')
@@ -96,4 +96,47 @@ export function shownTimes(moduleId, remind, moduleReminders, reminders) {
 export function listTimes(times) {
   const d = times.map(dot)
   return d.length <= 1 ? (d[0] ?? '') : `${d.slice(0, -1).join(', ')} ve ${d.at(-1)}`
+}
+
+// ---------- Aynı saatteki bildirimler (D5+D6 bilgi satırı; engel değil) ----------
+// Kişi saati istediği gibi seçer; seçtiği saatin NEAR_MIN dakika içinde başka bildirim varsa Hatırlatmalar ve Çalışma
+// günleri sayfası yalnız bilgi verir ("Yarım saat içinde N bildirimin daha var · Bildirimleri göster"). Kaydet hiç kapanmaz.
+export const NEAR_MIN = 30
+const STUDY_DAY = { SU: 0, MO: 1, TU: 2, WE: 3, TH: 4, FR: 5, SA: 6 } // settings.reminder.days ('MO') → getDay()
+
+// Kurulu bildirimlerin listesi: [{ key, time: 'HH:MM', label, days: [0–6] | null }] (days null: her gün).
+// Açık türler (Hatırlatmalar), açık Çalışma günleri ve açık "Bana hatırlat" saatleri (legacy ek saatleri dâhil).
+// Hatırlatmalar kapalıysa (optIn 'yes' değil) hiçbiri gelmez: boş. names: modül adları (remindTexts NAMES).
+export function notifyTimes({ reminders, study = null, moduleReminders, names = {} } = {}) {
+  const r = normalizeReminders(reminders)
+  if (r.optIn !== 'yes') return []
+  const out = []
+  for (const t of Object.keys(LEGACY_ORDER)) {
+    const c = r.types[t]
+    if (c?.on && toMinutes(c.time) != null) out.push({ key: t, time: c.time, label: TYPE_LABEL[t], days: c.days })
+  }
+  const sDays = (Array.isArray(study?.days) ? study.days : []).map((d) => STUDY_DAY[d]).filter((d) => d != null)
+  if (r.types.study.on && sDays.length && toMinutes(study?.time) != null) out.push({ key: 'study', time: study.time, label: TYPE_LABEL.study, days: sDays })
+  for (const [k, c] of Object.entries(normalizeModuleReminders(moduleReminders))) {
+    // Legacy türün ek saatleri yalnız tür açıkken kurulur (moduleRemind.planModuleReminders); kapalıysa sayılmaz
+    if (!c.on || (k in LEGACY_ORDER && !r.types[k].on)) continue
+    const label = names?.[k] ?? TYPE_LABEL[k] ?? k
+    for (const time of c.times) out.push({ key: k, time, label, days: k in LEGACY_ORDER ? r.types[k].days : null })
+  }
+  return out
+}
+
+// time'ın NEAR_MIN dakika içindeki öteki bildirimler (self anahtarı hariç; günleri hiç kesişmeyenler hariç), saat
+// sırasıyla. Gece yarısını aşan fark da sayılır (23.50 ile 00.10 arası 20 dk). days: seçilen günler (null: her gün).
+export function nearTimes(time, list, self = null, days = null) {
+  const m = toMinutes(time)
+  if (m == null || !Array.isArray(list)) return []
+  const meets = (d) => !Array.isArray(days) || !Array.isArray(d) || d.some((x) => days.includes(x))
+  return list
+    .filter((b) => b && b.key !== self && toMinutes(b.time) != null && meets(b.days))
+    .filter((b) => {
+      const diff = Math.abs(toMinutes(b.time) - m)
+      return Math.min(diff, 1440 - diff) <= NEAR_MIN
+    })
+    .sort((a, b) => toMinutes(a.time) - toMinutes(b.time))
 }

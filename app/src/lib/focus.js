@@ -4,21 +4,24 @@
 //
 //   gozolcum:focus → { startedAt: ISO, hours: 1 | 2 | 4 } | yok
 //
-// Gece mola bildirimi yok (Bug 33): mola anları yalnız öteki hatırlatmaların gündüz penceresinde (reminders.WINDOW)
-// kurulur. Oturum pencerenin dışına taşarsa o saatlerin bildirimi gelmez; hiç mola sığmıyorsa oturum başlatılmaz.
-import { WINDOW, toMinutes } from './reminders.js'
+// Gece mola bildirimi yok (Bug 33): mola anları yalnız gündüz penceresinde (BREAK_WINDOW) kurulur. Oturum pencerenin
+// dışına taşarsa o saatlerin bildirimi gelmez; hiç mola sığmıyorsa oturum başlatılmaz. Bu pencere kişinin seçtiği
+// hatırlatma saatlerine uygulanmaz (D5+D6'da reminders.js'ten kalktı); yalnız Nefona'nın kendiliğinden kurduğu oturum
+// molaları için, değeri ve davranışı aynı kaldı.
+import { toMinutes } from './reminders.js'
 
 export const FOCUS_KEY = 'gozolcum:focus'
 export const FOCUS_HOURS = [1, 2, 4]
+export const BREAK_WINDOW = Object.freeze({ from: '09:00', to: '21:00' })
 const HOUR = 3600000
 
 const store = (s) => s ?? globalThis.localStorage
 
-// An (ms) yerel saatle gündüz penceresinde mi (uçlar dahil; notifyPlan'daki öteki türlerle aynı kural)
+// An (ms) yerel saatle gündüz penceresinde mi (uçlar dahil)
 export function inBreakWindow(ms) {
   const d = new Date(ms)
   const m = d.getHours() * 60 + d.getMinutes()
-  return m >= toMinutes(WINDOW.from) && m <= toMinutes(WINDOW.to)
+  return m >= toMinutes(BREAK_WINDOW.from) && m <= toMinutes(BREAK_WINDOW.to)
 }
 
 // Oturumun pencere içindeki mola anları (k. saat, k = 1..hours; son mola bitişte)

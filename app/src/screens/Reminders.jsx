@@ -2,19 +2,26 @@ import { useEffect, useId, useRef, useState } from 'react'
 import { Bell, BellOff, Eye, Footprints, Wind, GlassWater, CalendarDays, Clock, ChevronRight, Info, Timer } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
 import PrefToggle from '../components/PrefToggle.jsx'
-import { NUDGE_TYPES, TYPE_LABEL, WINDOW, normalizeReminders, timeError, behaviorCount } from '../lib/reminders.js'
-import { FOCUS_HOURS, breakTimes, focusFits } from '../lib/focus.js'
+import { NUDGE_TYPES, TYPE_LABEL, ALL_DAYS, normalizeReminders, timeError, behaviorCount } from '../lib/reminders.js'
+import { FOCUS_HOURS, BREAK_WINDOW, breakTimes, focusFits } from '../lib/focus.js'
 import { WEEKDAYS } from '../lib/calendar.js'
+import { WEEK_ORDER, WEEKDAY_SHORT, WEEKDAY_LONG } from '../lib/alarm.js'
+import { nearTimes, dot } from '../components/remindUi.js'
+import NearNote from '../components/NearNote.jsx'
+import '../styles/alarm.css'
 import '../styles/reminders.css'
 
-// Hatırlatmalar (bildirim planı v2 §5). Her türü kişi kendisi açar, saatini kendisi seçer. Saat kuralları
-// (pencere, su en geç, türler arası 1 saat) ayar anında timeError ile denetlenir; planlayıcı saatleri kaydırmaz.
+// Hatırlatmalar (bildirim planı v2 §5; D5+D6). Her türü kişi kendisi açar; saatini ve günlerini kendisi seçer
+// (gün çipleri alarm kurulumundakiyle aynı: screens/AlarmSetup.jsx, lib/alarm.js). Saat kısıtı yok: pencere, su en geç
+// ve türler arası aralık kuralı kalktı (sahip kararı 2026-10-01); timeError yalnız boş/bozuk saati yakalar. Seçilen
+// saatin 30 dk içinde başka bildirim varsa yalnız bilgi satırı çıkar (NearNote). Planlayıcı saatleri kaydırmaz.
 // Ana anahtar settings.reminders.optIn: 'yes' olmadan hiçbir hatırlatma kurulmaz (Ana sayfa kartıyla aynı alan).
 // Bildirim izni, Sağlık rızası ve Çalışma oturumu App'te; bu ekran yalnız gösterir ve geri çağırır.
 //   reminders: settings.reminders (ham; burada normalize edilir) · study: settings.reminder ({ days, time })
 //   permission: 'granted' | 'denied' | 'prompt' | 'unsupported' (restNotify.notifyPermission) · focus: loadFocus() | null
 //   stepsMissing: Sağlık rızası var ama adım okunamadı (iOS okuma izni kapalı → değerler 0; plan §4)
 //   onAskHealth verilmezse (HealthKit yok: web, bazı iPad'ler) izin düğmesi yerine yürüyüşün neden çalışmadığı yazar
+//   others: kurulu bildirimler (remindUi.notifyTimes; App verir) — bilgi satırı için
 
 const TYPE_ICON = { mola: Eye, walk: Footprints, breath: Wind, water: GlassWater }
 // Satır alt yazısı: tür ne, tek bakışta (iddia yok)
@@ -80,8 +87,9 @@ function PermissionStatus({ permission, onAsk }) {
   return null
 }
 
-// Saat seçici (iOS'ta çark). Hata canlı gösterilir; hata varken Kaydet kapalı.
-function TimeEditor({ label, value, error, onChange, onSave, onCancel }) {
+// Saat seçici (iOS'ta çark). Hata (yalnız boş/bozuk saat) canlı gösterilir; hata varken Kaydet kapalı. near: aynı
+// saatteki öteki bildirimler (bilgi; Kaydet'i kapatmaz).
+function TimeEditor({ label, value, error, near = [], onChange, onSave, onCancel }) {
   const input = useRef(null)
   const errId = useId()
   // Açılınca odak saat alanına (VoiceOver alanı okusun)
@@ -104,9 +112,35 @@ function TimeEditor({ label, value, error, onChange, onSave, onCancel }) {
       </label>
       {/* Canlı bölge önceden durur; içerik değişince okunur */}
       <p id={errId} className="rem-err" aria-live="polite">{error ?? ''}</p>
+      {!error && <NearNote near={near} />}
       <div className="rem-edit-actions">
         <button type="button" className="btn" disabled={Boolean(error)} onClick={onSave}>Kaydet</button>
         <button type="button" className="btn btn-ghost" onClick={onCancel}>Vazgeç</button>
+      </div>
+    </div>
+  )
+}
+
+// Gün çipleri (alarm kurulumundaki "Her gün" + Pt…Pz; styles/alarm.css). En az bir gün kalır: son günü kaldıran
+// dokunuş yok sayılır (türü kapatmak anahtarla). onChange(yeni gün listesi, 0 = Pazar).
+function DayChips({ label, days, onChange }) {
+  const all = days.length === ALL_DAYS.length
+  const toggle = (x) => {
+    if (days.includes(x)) {
+      if (days.length > 1) onChange(days.filter((y) => y !== x))
+    } else onChange([...days, x].sort((a, b) => a - b))
+  }
+  return (
+    <div className="rem-daysel">
+      <div className="al-chips">
+        <button type="button" className={`al-chip${all ? ' on' : ''}`} aria-pressed={all} onClick={() => !all && onChange([...ALL_DAYS])}>Her gün</button>
+      </div>
+      <div className="al-days" role="group" aria-label={label}>
+        {WEEK_ORDER.map((x) => (
+          <button key={x} type="button" role="checkbox" className="al-day" aria-checked={days.includes(x)} aria-label={WEEKDAY_LONG[x]} onClick={() => toggle(x)}>
+            {WEEKDAY_SHORT[x]}
+          </button>
+        ))}
       </div>
     </div>
   )
@@ -134,7 +168,7 @@ function FocusCard({ focus, permission = null, onStart, onStop }) {
     if (!focusFits(now)) {
       return (
         <div className="card">
-          <p className="small rem-focus-lead">{`Mola hatırlatmaları ${WINDOW.from}–${WINDOW.to} arasında gelir; oturumu bu saatlerde başlatabilirsin.`}</p>
+          <p className="small rem-focus-lead">{`Gece mola bildirimi gelmez (${dot(BREAK_WINDOW.to)}–${dot(BREAK_WINDOW.from)}).`}</p>
         </div>
       )
     }
@@ -188,6 +222,7 @@ export default function Reminders({
   onAskHealth,
   onStartFocus,
   onStopFocus,
+  others = [],
   onBack,
 }) {
   const r = normalizeReminders(reminders)
@@ -195,7 +230,6 @@ export default function Reminders({
   const [edit, setEdit] = useState(null) // { type, time, turnOn } — saat seçicisi açık tür; turnOn: kaydedince türü aç
   const [waterNote, setWaterNote] = useState(false) // su açılınca bir kez; cevap saklanmaz
   const [wilson, setWilson] = useState(false)
-  const [studyErr, setStudyErr] = useState(null)
 
   const withType = (type, patch) => ({ ...r, types: { ...r.types, [type]: { ...r.types[type], ...patch } } })
 
@@ -206,7 +240,6 @@ export default function Reminders({
       setEdit(null)
       setWilson(false)
       setWaterNote(false)
-      setStudyErr(null)
     }
   }
 
@@ -224,8 +257,8 @@ export default function Reminders({
       onSave?.(withType(type, { on: false }))
       return
     }
-    // Kayıtlı saat kurala uymuyorsa (ör. başka türle 1 saatten yakın) önce saat seçtir; planlayıcı kaydırmaz
-    if (timeError(type, r.types[type].time, r, study)) {
+    // Kayıtlı saat bozuksa (normalize sonrası olmaz; savunma) önce saat seçtir
+    if (timeError(type, r.types[type].time)) {
       setEdit({ type, time: r.types[type].time, turnOn: true })
       return
     }
@@ -235,18 +268,16 @@ export default function Reminders({
   }
 
   function saveTime() {
-    if (!edit || timeError(edit.type, edit.time, r, study)) return
+    if (!edit || timeError(edit.type, edit.time)) return
     const next = withType(edit.type, edit.turnOn ? { on: true, time: edit.time } : { time: edit.time })
     onSave?.(next)
     setEdit(null)
     if (edit.turnOn) opened(edit.type, next)
   }
 
-  // Çalışma günleri saati Schedule.jsx'te seçilir; burada yalnız çakışma denetlenir
+  // Çalışma günleri saati ve günleri Schedule.jsx'te seçilir
   function toggleStudy(value) {
-    const err = value && study?.time ? timeError('study', study.time, r, study) : null
-    setStudyErr(err)
-    if (!err) onSave?.(withType('study', { on: value }))
+    onSave?.(withType('study', { on: value }))
   }
 
   const studyText = studyLabel(study)
@@ -267,8 +298,6 @@ export default function Reminders({
           <div className="list">
             {NUDGE_TYPES.map((type) => {
               const cfg = r.types[type]
-              // "Her gün" değil: uygun günlerin bir kısmında bilerek gönderilmez (alttaki not)
-              const every = r.thin[type] === 'alt' ? 'Gün aşırı' : 'Çoğu gün'
               return (
                 <div key={type} className="rem-group">
                   <PrefToggle
@@ -282,7 +311,8 @@ export default function Reminders({
                     <TimeEditor
                       label={`${TYPE_LABEL[type]} saati`}
                       value={edit.time}
-                      error={timeError(type, edit.time, r, study)}
+                      error={timeError(type, edit.time)}
+                      near={nearTimes(edit.time, others, type, cfg.days)}
                       onChange={(time) => setEdit((e) => e && { ...e, time })}
                       onSave={saveTime}
                       onCancel={() => setEdit(null)}
@@ -293,11 +323,10 @@ export default function Reminders({
                         type="button"
                         className="rem-time"
                         onClick={() => setEdit({ type, time: cfg.time, turnOn: false })}
-                        aria-label={`${TYPE_LABEL[type]} saatini değiştir. Şu an ${every.toLocaleLowerCase('tr')} ${cfg.time}`}
+                        aria-label={`${TYPE_LABEL[type]} saatini değiştir. Şu an ${cfg.time}`}
                       >
                         <Clock size={18} aria-hidden="true" />
                         <span className="rem-time-val">
-                          <span className="muted">{every}</span>
                           <strong>{cfg.time}</strong>
                         </span>
                         <span className="rem-time-go">
@@ -306,6 +335,7 @@ export default function Reminders({
                       </button>
                     )
                   )}
+                  {cfg.on && <DayChips label={`${TYPE_LABEL[type]} günleri`} days={cfg.days} onChange={(days) => onSave?.(withType(type, { days }))} />}
                   {type === 'walk' && cfg.on && !healthConsent && !onAskHealth && (
                     <div className="rem-inline" role="status">
                       <Info size={16} aria-hidden="true" />
@@ -343,10 +373,6 @@ export default function Reminders({
               Aynı anda 2–3 alışkanlıkla başlayanlarda sonuç en iyiydi, 4 ve üstünde etki düştü (Wilson 2015; bildirim değil, yaşam tarzı önerileri). Seçim senin.
             </p>
           )}
-          <p className="note">
-            <Info size={16} aria-hidden="true" />
-            {"Bazı günler bilerek göndermiyoruz; hatırlatmanın işine yarayıp yaramadığını Gelişim'de görmen için."}
-          </p>
         </section>
       )}
 
@@ -356,8 +382,7 @@ export default function Reminders({
           <div className="list">
             <div className="rem-group">
               <PrefToggle Icon={CalendarDays} label="Çalışma günleri" sub="Seçtiğin günlerde" checked={r.types.study.on} onChange={toggleStudy} />
-              {studyErr && <p className="rem-err rem-inset" role="alert">{studyErr}</p>}
-              {(r.types.study.on || studyErr) && (
+              {r.types.study.on && (
                 <button
                   type="button"
                   className="rem-time"

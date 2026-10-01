@@ -101,9 +101,9 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
       Build 70 (09.44–09.50): 09.50'ye kurulan alarm çaldı, uyku müziği ve gece ekranı çalıştı. "Alarm (tanı)" dokununca
       "tıklanmıyor" sanıldı: sonuç sekme çubuğunun arkasında, satırın altında açılıyordu; artık "Okunuyor…" yazıp
       sonuca kaydırıyor.
-- [ ] D5 **Hatırlatmalarda "Çoğu gün" / "Gün aşırı" kalkar:** alarmdaki gibi gün seçimi (Pzt–Paz), günleri kişi seçer.
+- [~] D5 **Hatırlatmalarda "Çoğu gün" / "Gün aşırı" kalkar:** (UYGULANDI, kapı 5/5; cihazda bakılacak) alarmdaki gibi gün seçimi (Pzt–Paz), günleri kişi seçer.
       VARSAYIM: "Bazı günler bilerek göndermiyoruz" seyreltmesi de kalkar (kişinin seçtiği gün geçerli) — onaya.
-- [ ] D6 **Saat kısıtı kalkar:** hatırlatmalarda ve göz çalışması hatırlatmasında kişi her saati seçebilir ("Saat
+- [~] D6 **Saat kısıtı kalkar:** (UYGULANDI, bilgi satırı "Yarım saat içinde N bildirimin daha var"; "Bana hatırlat" kısmı sırada) hatırlatmalarda ve göz çalışması hatırlatmasında kişi her saati seçebilir ("Saat
       09:00–21:00 arasında olmalı" kalkar). Yerine bilgi satırı, örnek: "Bu saatte 3 bildirimin var · Bildirimleri
       göster". Sahip `lib/reminders.js` için izin verdi (2026-10-01). Planlayıcı (`notifyPlan.js`) da pencere dışını atlıyor
       ve sessiz gün deneyi (%25) var. Sahip: notifyPlan.js izinli, sessiz gün kalkar, su 18.00 ve 1 saat kuralı kalkar.

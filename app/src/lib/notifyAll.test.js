@@ -5,7 +5,7 @@ const native = vi.hoisted(() => ({ isIOSApp: () => false, setWalkGuards: vi.fn(a
 vi.mock('./native.js', () => native)
 
 import { planAll, remindOptIn, newFeaturesOn, normalizeQuiet, inNight, MAX_PENDING, DAY_CAP, MIN_APART_MIN, MERGED_TEXT_KEY } from './notifyAll.js'
-import { planNotifications, dice, SILENT_RATE } from './notifyPlan.js'
+import { planNotifications } from './notifyPlan.js'
 import { windowOf, PATH_REMIND } from './moduleRemind.js'
 import { toMinutes } from './reminders.js'
 import { dayKey } from './habitLog.js'
@@ -297,17 +297,13 @@ describe('planAll: kurallar', () => {
     expect(t.map((n) => hm(n.at))).toEqual(['16:00'])
   })
 
-  it('sessiz günde 3 saatin hiçbiri kurulmaz; gönderilen günde 74xx + ek saatler', () => {
-    const find = (want) => {
-      for (let i = 0; ; i++) {
-        const s = `t${i}`
-        if ((dice(s, dayKey(NOW), 'breath') < SILENT_RATE) === want) return s
-      }
-    }
-    const mk = (seed) => planAll(base({ seed, reminders: REM({ breath: { on: true, time: '10:00' } }), moduleReminders: { breath: auto(['13:00', '17:00']) } }))
-    const silent = mk(find(true)).notifications.filter((n) => n.type === 'breath' && today(n))
-    expect(silent).toHaveLength(0)
-    const sent = mk(find(false))
+  it('seçilmeyen günde ne 74xx ne ek saat kurulur; gönderilen günde 74xx + ek saatler', () => {
+    const mk = (days) => planAll(base({ reminders: REM({ breath: { on: true, time: '10:00', ...(days ? { days } : {}) } }), moduleReminders: { breath: auto(['13:00', '17:00']) } }))
+    // NOW Çarşamba (getDay 3); Çarşamba seçilmemiş
+    const off = mk([0, 1, 2, 4, 5, 6])
+    expect(off.notifications.filter((n) => n.type === 'breath' && today(n))).toHaveLength(0)
+    expect(off.notifications.filter((n) => ((n.id >= 7400 && n.id <= 7499) || isExtra(n)) && today(n))).toHaveLength(0)
+    const sent = mk()
     expect(sent.notifications.filter((n) => n.type === 'breath' && today(n)).map((n) => [n.id, hm(n.at)])).toEqual([[7402, '10:00'], [7864, '13:00'], [7865, '17:00']])
     expect(sent.slots).toEqual([{ date: dayKey(NOW), type: 'breath', times: ['13:00', '17:00'] }])
   })

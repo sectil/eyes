@@ -28,7 +28,7 @@ import { walkNudge, fmtSteps } from '../lib/health.js'
 import ConsentSheet from '../components/ConsentSheet.jsx'
 import { registry } from '../modules/registry.js'
 import { viewFor } from '../modules/views.js'
-import { normalizeReminders, TYPE_LABEL } from '../lib/reminders.js'
+import { normalizeReminders } from '../lib/reminders.js'
 import { coachAllowed } from '../lib/consent.js'
 import { getPrefs } from '../lib/prefs.js'
 import { greeting } from '../lib/greeting.js'
@@ -106,15 +106,14 @@ function ModuleRows({ section, ctx, onStart }) {
 
 // Hatırlatma izni kartı (bildirim planı v2 §6): optIn henüz yoksa bir kez. "Evet" → iOS izni istenir; izin
 // reddedilse de cevap 'yes' kalır ve kart ayar yolunu gösterir. onAnswer(yes) → Promise<izin | null>.
-// "Her gün" denmez: uygun günlerin bir kısmında bilerek gönderilmez (notifyPlan SILENT_RATE); bu, açılış anında
-// tek cümleyle söylenir (plan §4 "her tür açılırken tek cümle").
+// D5+D6: sessiz gün deneyi kalktı; "bilerek göndermiyoruz" cümlesi de kalktı. Gün ve saat Hatırlatmalar'da seçilir.
 function ReminderAsk({ time, onAnswer }) {
   const [busy, setBusy] = useState(false)
   return (
     <section className="card tone-accent hh-ask" aria-label="Hatırlatma">
       <span className="eyebrow">Hatırlatma · isteğe bağlı</span>
       <h3>Günde bir mola hatırlatması ister misin?</h3>
-      <p className="small">{`Günde en çok bir kez (saat ${time}), bir dakikalık mola: kalk, uzağa bak. Bazı günler bilerek göndermiyoruz; işine yarayıp yaramadığını Gelişim'de görmen için. Saatini ve diğer hatırlatmaları Bilgi → Hatırlatmalar'dan seçersin.`}</p>
+      <p className="small">{`Günde en çok bir kez (saat ${time}), bir dakikalık mola: kalk, uzağa bak. Saatini, günlerini ve diğer hatırlatmaları Bilgi → Hatırlatmalar'dan seçersin.`}</p>
       <div className="row">
         <button type="button" className="btn btn-sm" disabled={busy} onClick={() => { setBusy(true); onAnswer(true) }}>
           <Bell size={16} aria-hidden="true" /> Evet
@@ -151,12 +150,12 @@ function FocusStrip({ focus, now, block = null, onStop }) {
 }
 
 // Bildirim planı v2 (App verir): reminderAsk + onReminders(yes) izin kartı; focus + focusBlock + onStopFocus oturum şeridi;
-// trialNote ({ daysLeft }) + onTrialNote: izni olmayana deneme 5. gün şeridi; thinAsk (tür) + onThin(tür, 'keep'|'alt').
+// trialNote ({ daysLeft }) + onTrialNote: izni olmayana deneme 5. gün şeridi.
 // alarmStatus ({ platform, auth }; App) + alarmTest (14.00 eşiği): "Bugünün yolu"nun altındaki alarm kartı (AlarmCard).
-// İlk ekran kalabalıklaşmasın: kart yuvası tek (izin kartı → deneme şeridi → seyreltme sorusu), rıza sayfası açıkken boş.
+// İlk ekran kalabalıklaşmasın: kart yuvası tek (izin kartı → izin ayar yolu → deneme şeridi), rıza sayfası açıkken boş.
 // healthSheetKind: 'health' ya da eski metne izin vermiş kişiye 'healthUpdate' (lib/consent.js; cevap yine onHealthConsent).
 // onYogaMorning: yoga sabah kartı cevabı kayda yazılınca (App kayıtları yeniler).
-export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, healthSheetKind = 'health', onCoach, onStart, onAsk, onSaveProfile, reminderAsk = false, onReminders, focus = null, focusBlock = null, onStopFocus, trialNote = null, onTrialNote, thinAsk = null, onThin, alarmStatus = null, alarmTest = false, onYogaMorning }) {
+export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, healthSheetKind = 'health', onCoach, onStart, onAsk, onSaveProfile, reminderAsk = false, onReminders, focus = null, focusBlock = null, onStopFocus, trialNote = null, onTrialNote, alarmStatus = null, alarmTest = false, onYogaMorning }) {
   const [permNote, setPermNote] = useState(false) // "Evet" dendi ama izin kapalı: ayar yolu (bir kez, bu ekranda)
   const now = new Date()
   // Oyun oturumları (type 'game') ve WHO-5 egzersiz süresine ve haftalık ölçüm/egzersiz gününe sayılmaz.
@@ -239,7 +238,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   const rem = normalizeReminders(settings.reminders)
   // Kart yuvası: rıza sayfası açıkken hiçbiri; yoksa sırayla tek kart
   const sheetOpen = Boolean((askConsent && onConsent) || (askHealth && onHealthConsent))
-  const slot = sheetOpen ? null : reminderAsk && onReminders ? 'remind' : permNote ? 'perm' : trialNote && onTrialNote ? 'trial' : thinAsk && onThin ? 'thin' : null
+  const slot = sheetOpen ? null : reminderAsk && onReminders ? 'remind' : permNote ? 'perm' : trialNote && onTrialNote ? 'trial' : null
   // Nef tanıtım kartı da bir rıza kartı: hatırlatma kartı açıkken gizlenir (ikisi aynı anda çıkmasın)
   const prefs = getPrefs()
   const coachIntro = !coachAllowed(prefs, settings.consents).on && !prefs.coachHidden
@@ -364,16 +363,6 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           <div className="row">
             <button type="button" className="btn btn-sm" onClick={() => { onTrialNote(); onStart('first-report') }}>İlk raporun</button>
             <button type="button" className="btn btn-ghost btn-sm" onClick={onTrialNote}>Tamam</button>
-          </div>
-        </section>
-      )}
-      {slot === 'thin' && (
-        <section className="card hh-ask" aria-label="Hatırlatma sıklığı">
-          <span className="eyebrow">Hatırlatma · bir kez soruyoruz</span>
-          <p className="small">{`${TYPE_LABEL[thinAsk]} hatırlatması son günlerde pek işine yaramıyor olabilir. Böyle mi kalsın, gün aşırı mı gelsin?`}</p>
-          <div className="row">
-            <button type="button" className="btn btn-sm btn-secondary" onClick={() => onThin(thinAsk, 'keep')}>Böyle kalsın</button>
-            <button type="button" className="btn btn-sm btn-secondary" onClick={() => onThin(thinAsk, 'alt')}>Gün aşırı</button>
           </div>
         </section>
       )}

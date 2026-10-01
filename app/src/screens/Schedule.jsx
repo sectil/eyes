@@ -2,13 +2,23 @@ import { useState } from 'react'
 import { Check, Bell } from 'lucide-react'
 import { PageHeader } from '../components/ui.jsx'
 import { WEEKDAYS, DEFAULT_WEEKLY_TARGET } from '../lib/calendar.js'
-import { normalizeReminders, timeError } from '../lib/reminders.js'
+import { WEEK_ORDER, WEEKDAY_SHORT, WEEKDAY_LONG } from '../lib/alarm.js'
+import { normalizeReminders } from '../lib/reminders.js'
+import { nearTimes } from '../components/remindUi.js'
+import NearNote from '../components/NearNote.jsx'
+import '../styles/alarm.css'
+import '../styles/reminders.css'
 
 // Çalışma günleri (Takvim, Ana sayfa ve Gelişim bunu kullanır). Hatırlatması artık uygulama bildirimi
-// (bildirim planı v2 §6; lib/notifyPlan.js "study"): Bilgi → Hatırlatmalar'dan açılır. Hatırlatma açıksa saat,
-// diğer hatırlatmalarla 1 saat aralık kuralına uymalı (lib/reminders.js timeError; Reminders.jsx ile aynı kural).
-// reminders: settings.reminders (ham) — verilmezse denetim yok. iosApp false (web): bildirim yok, Hatırlatmalar satırı yok.
-export default function Schedule({ initial, reminders = null, iosApp = true, onSave, onBack }) {
+// (bildirim planı v2 §6; lib/notifyPlan.js "study"): Bilgi → Hatırlatmalar'dan açılır. Saat kısıtı yok (D5+D6):
+// hatırlatma açıksa seçilen saatin 30 dk içindeki öteki bildirimler yalnız bilgi satırıyla söylenir (NearNote), Kaydet
+// kapanmaz. reminders: settings.reminders (ham) — verilmezse bilgi satırı yok. others: kurulu bildirimler
+// (remindUi.notifyTimes; App verir). iosApp false (web): bildirim yok, Hatırlatmalar satırı yok.
+// Gün seçimi Hatırlatmalar ve alarm kurulumundaki yuvarlak çiplerle aynı ("Her gün" + Pt…Pz; styles/alarm.css);
+// kayıt biçimi değişmedi: gün kimlikleri ('MO' …), dokunma sırasıyla eklenir, hepsi kaldırılabilir (Kaydet kapanır).
+const DAY_NUM = { SU: 0, MO: 1, TU: 2, WE: 3, TH: 4, FR: 5, SA: 6 }
+const NUM_DAY = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']
+export default function Schedule({ initial, reminders = null, others = [], iosApp = true, onSave, onBack }) {
   const [days, setDays] = useState(initial?.days ?? ['MO', 'WE', 'FR'])
   const [time, setTime] = useState(initial?.time ?? '20:00')
   const [msg, setMsg] = useState(null)
@@ -17,11 +27,17 @@ export default function Schedule({ initial, reminders = null, iosApp = true, onS
     setMsg(null)
     setDays((d) => (d.includes(id) ? d.filter((x) => x !== id) : [...d, id]))
   }
+  const allDays = WEEKDAYS.every((w) => days.includes(w.id))
+  const selectAll = () => {
+    if (allDays) return
+    setMsg(null)
+    setDays((d) => [...d, ...WEEKDAYS.map((w) => w.id).filter((id) => !d.includes(id))])
+  }
   const rem = reminders ? normalizeReminders(reminders) : null
   const studyOn = Boolean(rem?.types.study.on)
   const remindOn = studyOn && rem.optIn === 'yes'
-  const err = studyOn ? timeError('study', time, rem, { days, time }) : null
-  const valid = days.length > 0 && /^\d{2}:\d{2}$/.test(time) && !err
+  const valid = days.length > 0 && /^\d{2}:\d{2}$/.test(time)
+  const near = remindOn ? nearTimes(time, others, 'study', days.map((d) => DAY_NUM[d])) : []
 
   function save() {
     onSave({ days, time, weeklyTarget: DEFAULT_WEEKLY_TARGET })
@@ -38,12 +54,17 @@ export default function Schedule({ initial, reminders = null, iosApp = true, onS
 
       <section className="card">
         <span className="eyebrow">Günler</span>
-        <div className="weekday-row">
-          {WEEKDAYS.map((w) => (
-            <button key={w.id} className={days.includes(w.id) ? 'day-pill on' : 'day-pill'} aria-pressed={days.includes(w.id)} onClick={() => toggle(w.id)}>
-              {w.short}
-            </button>
-          ))}
+        <div className="rem-daysel" style={{ margin: '8px 0 4px' }}>
+          <div className="al-chips">
+            <button type="button" className={`al-chip${allDays ? ' on' : ''}`} aria-pressed={allDays} onClick={selectAll}>Her gün</button>
+          </div>
+          <div className="al-days" role="group" aria-label="Çalışma günleri">
+            {WEEK_ORDER.map((x) => (
+              <button key={x} type="button" role="checkbox" className="al-day" aria-checked={days.includes(NUM_DAY[x])} aria-label={WEEKDAY_LONG[x]} onClick={() => toggle(NUM_DAY[x])}>
+                {WEEKDAY_SHORT[x]}
+              </button>
+            ))}
+          </div>
         </div>
         {days.length > 0 && days.length < DEFAULT_WEEKLY_TARGET && (
           <p className="small" style={{ color: 'var(--warn)' }}>Haftalık hedef 3 gün; en az 3 gün seçmeni öneririz.</p>
@@ -58,11 +79,9 @@ export default function Schedule({ initial, reminders = null, iosApp = true, onS
               setMsg(null)
               setTime(e.target.value)
             }}
-            aria-invalid={err ? true : undefined}
-            aria-describedby="schedule-err"
           />
         </label>
-        <p id="schedule-err" className="small" style={{ color: 'var(--warn)', margin: 0 }} aria-live="polite">{err ?? ''}</p>
+        <NearNote near={near} />
       </section>
 
       <button className="btn" disabled={!valid} onClick={save}>

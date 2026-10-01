@@ -16,16 +16,16 @@ import { createTapHandler } from './lib/notifyTap.js'
 import { resetAllData } from './lib/notifyReset.js'
 import ScienceCard from './components/ScienceCard.jsx'
 import { NAMES as REMIND_NAMES } from './lib/remindTexts.js'
-import { applyRemind, shownTimes } from './components/remindUi.js'
+import { applyRemind, shownTimes, notifyTimes } from './components/remindUi.js'
 // "Bana hatırlat" satırı ve saat sayfası; Profil → Bildirimler ve Gece sessizliği (K2 yazıyor; PLAN.v1 §A.2, §A.5)
 import RemindField from './components/RemindField.jsx'
 import RemindSheet from './components/RemindSheet.jsx'
 import Notifications from './screens/Notifications.jsx'
 import QuietHours from './screens/QuietHours.jsx'
-import { loadLog, saveLog, mergeForPermission, markTapped, getSeed, evaluate, thinCandidate } from './lib/notifyLog.js'
+import { loadLog, saveLog, mergeForPermission, markTapped } from './lib/notifyLog.js'
 import { loadHabits, dayKey } from './lib/habitLog.js'
 import { loadFocus, startFocus, stopFocus } from './lib/focus.js'
-import { normalizeReminders, enabledTypes, TYPE_LABEL } from './lib/reminders.js'
+import { normalizeReminders, TYPE_LABEL } from './lib/reminders.js'
 import Reminders from './screens/Reminders.jsx'
 import ConsentSheet from './components/ConsentSheet.jsx'
 import FirstReport from './screens/FirstReport.jsx'
@@ -594,7 +594,6 @@ export default function App() {
       sessions: st.sessions,
       health: healthOk && health ? { todaySteps: health.today?.steps ?? null, avgSteps: health.avgSteps, readAt: health.at } : null,
       focus: loadFocus(now),
-      seed: on ? getSeed() : '',
       log,
       moduleReminders: st.settings.moduleReminders,
       modules: hasMr ? remindModules(st.sessions) : [],
@@ -627,15 +626,6 @@ export default function App() {
     if (plan.slots) saveSlots(plan.slots)
     applyPlan(plan)
   }, [planTick, data, health, healthOk, healthWait, notifyPerm])
-  // Seyreltme sorusu (Ana sayfa, tür başına bir kez): son 3 hatırlatma gününde ne dokunma ne kayıt. Bildirim izni
-  // yokken sorulmaz (hatırlatma zaten gelmiyor; web'de de).
-  const thinAsk = useMemo(() => {
-    if (notifyPerm !== 'granted') return null
-    const st = store.get()
-    const walkData = hasConsent(st.settings.consents, 'health')
-    return thinCandidate(loadLog(), st.settings.reminders, { habits: loadHabits(), sessions: st.sessions, healthDays: walkData ? health?.stepRows ?? [] : [], avgSteps: walkData ? health?.avgSteps ?? null : null })
-    // planTick: dokunuş ve günlük değişimi
-  }, [data, health, planTick, notifyPerm])
   // Deneme hatırlatması (7302): izin hangi yoldan verilirse verilsin (Ana sayfa kartı, Hatırlatmalar, mola kilidi,
   // iOS Ayarlar) 'granted' görülünce, deneme 5. günden önceyse ve üyelik gerçekten denemedeyse kurulur; kurulduğu
   // settings.trialReminder'a yazılır (şerit kararı). scheduleTrialReminder önce iptal edip kurar: tekrar çağrı zararsız.
@@ -829,11 +819,6 @@ export default function App() {
     store.setSetting('reminders', r)
     refresh()
   }
-  // Seyreltme sorusunun cevabı: 'alt' → gün aşırı; her iki cevapta da bir daha sorulmaz
-  const answerThin = (type, choice) => {
-    const r = normalizeReminders(store.get().settings.reminders)
-    saveReminders({ ...r, thin: choice === 'alt' ? { ...r.thin, [type]: 'alt' } : r.thin, thinAsked: { ...r.thinAsked, [type]: nowIso() } })
-  }
   const beginFocus = (h) => {
     startFocus(h)
     replan()
@@ -845,21 +830,6 @@ export default function App() {
   const openSchedule = (from) => {
     setScheduleBack(from)
     go('schedule')
-  }
-  // Gelişim ölçüm kartı: açık deney türleri (lib/notifyLog.js evaluate); web'de hatırlatma yok, kart da yok.
-  // Yürüyüşte yalnız adımı okunabilen günler (son STEP_DAYS gün) sayılır; daha eskisi "yapılmadı" sayılmasın.
-  // Yürüyüş ölçülemiyorsa neden (blocked) kartta sayı yerine yazılır: HealthKit yok / v2 rızası yok / adım okunamıyor.
-  const nudgeStats = () => {
-    if (!isIOSApp()) return []
-    const r = normalizeReminders(settings.reminders)
-    const on = r.optIn === 'yes' ? enabledTypes(r) : []
-    if (!on.length) return []
-    const rows = healthOk ? health?.stepRows ?? [] : []
-    const oldest = rows[0]?.date ?? null
-    const log = loadLog().filter((e) => e.type !== 'walk' || (oldest != null && e.date >= oldest))
-    const ev = evaluate(log, { habits: loadHabits(), sessions, healthDays: rows, avgSteps: healthOk ? health?.avgSteps ?? null : null })
-    const walkBlocked = healthAvail === false ? 'noHealth' : !healthOk ? 'consent' : health && !health.hasData ? 'steps' : null
-    return on.map((type) => ({ type, ...ev[type], blocked: type === 'walk' ? walkBlocked : null }))
   }
   // Çalışma oturumu bildirimi gelebilir mi (mola bitti ekranı, Ana sayfa şeridi): 'web' | 'off' (hatırlatmalar
   // kapalı) | 'perm' (bildirim izni yok) | null. İzne hâlâ bakılıyorsa engel sayılmaz.
@@ -892,6 +862,8 @@ export default function App() {
     }
     return out
   }
+  // Kurulu bildirimler (Hatırlatmalar ve Çalışma günleri sayfasının "Yarım saat içinde N bildirimin daha var" bilgi satırı; D5+D6)
+  const notifyList = () => notifyTimes({ reminders: settings.reminders, study: settings.reminder, moduleReminders: settings.moduleReminders, names: REMIND_NAMES })
   const remindRecords = (id) => remindModules(sessions).find((x) => x.id === id)?.records ?? []
   // ctx.remindField(route, { inPath }): modülün bitiş bloğundaki "Bana hatırlat" satırı (components/RemindField.jsx;
   // saat sayfasını kendisi açar). remind'i olmayan modülde null. Yol içinde açılan modülde modül inPath: true verir.
@@ -1274,7 +1246,7 @@ export default function App() {
 
   switch (screen) {
     case 'schedule':
-      return <Schedule initial={settings.reminder} reminders={settings.reminders} iosApp={isIOSApp()} onBack={() => go(scheduleBack)} onSave={(r) => { store.setSetting('reminder', r); refresh() }} />
+      return <Schedule initial={settings.reminder} reminders={settings.reminders} others={notifyList()} iosApp={isIOSApp()} onBack={() => go(scheduleBack)} onSave={(r) => { store.setSetting('reminder', r); refresh() }} />
     case 'reminders':
       return (
         <>
@@ -1292,6 +1264,7 @@ export default function App() {
             onAskHealth={healthAvail === false ? undefined : () => healthAvail && setHealthSheet(true)}
             onStartFocus={beginFocus}
             onStopFocus={endFocus}
+            others={notifyList()}
             onBack={() => go('info')}
           />
           {healthSheet && <ConsentSheet kind={healthSheetKind} onAnswer={(g) => { setHealthSheet(false); answerHealth(g) }} />}
@@ -1310,7 +1283,7 @@ export default function App() {
   // --- Sekmeli ekranlar ---
   const tab = TAB_SCREENS.includes(screen) ? screen : 'home'
   let content
-  if (tab === 'progress') content = <Progress tests={tests} sessions={sessions} profile={settings.profile} identity={settings.identity} health={health} weeklyTarget={settings.reminder?.weeklyTarget} reportDay={rDay} nudges={nudgeStats()} notifyOff={isIOSApp() && notifyPerm != null && notifyPerm !== 'granted'} onStart={go} />
+  if (tab === 'progress') content = <Progress tests={tests} sessions={sessions} profile={settings.profile} identity={settings.identity} health={health} weeklyTarget={settings.reminder?.weeklyTarget} reportDay={rDay} onStart={go} />
   else if (tab === 'calendar') content = <Calendar records={[...tests, ...exercise]} schedule={settings.reminder} onEditSchedule={() => openSchedule('calendar')} />
   else if (tab === 'info') {
     content = (
@@ -1380,8 +1353,6 @@ export default function App() {
         onStopFocus={endFocus}
         trialNote={trialNote}
         onTrialNote={() => { store.setSetting('trialNoteSeen', { date: nowIso() }); refresh() }}
-        thinAsk={thinAsk}
-        onThin={answerThin}
         alarmStatus={alarmSt}
         alarmTest={Boolean(access.testUnlock)}
         onYogaMorning={refresh}

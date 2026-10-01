@@ -6,6 +6,16 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Build 70'ten sonraki TestFlight (Bug 36 kuralı: '2026-09-30-2' Build 70'te gitti). Sahip kararları 2026-10-01 (D5+D6).
+    id: '2026-10-01-1',
+    title: '1 Ekim güncellemesi',
+    items: [
+      { kind: 'new', text: 'Hatırlatmalarda günleri sen seçersin: alarmdaki gibi Pt…Pz ya da "Her gün". Çalışma günleri de aynı görünümde.' },
+      { kind: 'change', text: 'Hatırlatma saatini istediğin gibi seçersin; saat sınırı yok. Yarım saat içinde başka bildirimin varsa yalnız bilgi olarak yazar.' },
+      { kind: 'change', text: 'Hatırlatmalar artık bazı günler bilerek atlanmaz; seçtiğin her gün gelir. Gelişim\'deki "hatırlatma gelen / gelmeyen gün" karşılaştırması bu yüzden kalktı.' },
+    ],
+  },
+  {
     // Build 64'ten sonraki TestFlight (Bug 36 kuralı). VARSAYIM: Build 64 '2026-09-30-1'i içeriyor (sahip komutu dba1054'ten
     // sonra çalıştırdı; derlemenin commit'i görülmedi). Yanlışsa bu madde '2026-09-30-1'e taşınır.
     id: '2026-09-30-2',

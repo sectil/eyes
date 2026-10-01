@@ -5,6 +5,7 @@ import { normalizeQuiet, loadSlots } from '../lib/notifyAll.js'
 import { normalizeReminders, TYPE_LABEL } from '../lib/reminders.js'
 import { NAMES } from '../lib/remindTexts.js'
 import { dayKey } from '../lib/habitLog.js'
+import { daysLabel } from '../lib/alarm.js'
 import { dot, listTimes } from '../components/remindUi.js'
 import { viewFor } from '../modules/views.js'
 import { quietClashes } from './QuietHours.jsx'
@@ -100,7 +101,8 @@ export default function Notifications({ modules = [], moduleReminders, reminders
               {row(t, {
                 label: TYPE_LABEL[t],
                 Icon: iconOf(t),
-                sub: r.types[t].time ? { pre: 'Her gün ', t: dot(r.types[t].time), nef: Boolean(mr[t]?.on && mr[t]?.mode === 'auto') } : null,
+                // Gün: Hatırlatmalar'daki gün çipleri (D5+D6); hepsi seçiliyse "Her gün"
+                sub: r.types[t].time ? { pre: `${daysLabel(r.types[t].days)} `, t: dot(r.types[t].time), nef: Boolean(mr[t]?.on && mr[t]?.mode === 'auto') } : null,
                 on: master && Boolean(r.types[t].on),
                 onTap: () => onOpenReminders?.(t),
                 onFlip: (v) => onToggleLegacy?.(t, v),

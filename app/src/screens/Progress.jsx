@@ -16,7 +16,7 @@ import {
   ScanEye,
   ThumbsUp,
   TriangleAlert,
-  Trophy, Wind, BellOff } from 'lucide-react'
+  Trophy, Wind } from 'lucide-react'
 import ProgressChart from '../components/ProgressChart.jsx'
 import ProgressOverview, { DomainDetail } from '../components/ProgressOverview.jsx'
 import { PageHeader, IrisMark } from '../components/ui.jsx'
@@ -40,10 +40,6 @@ import {
 import { registry } from '../modules/registry.js'
 import { LadderStrip } from '../components/readingArt.jsx'
 import { readingV1, readingV2, cpsText, fmtLogMAR, ladderStatus, jevProgressLine } from '../lib/reading.js'
-import { TYPE_LABEL } from '../lib/reminders.js'
-import { READY_DAYS, READY_SILENT } from '../lib/notifyLog.js'
-import { SILENT_RATE } from '../lib/notifyPlan.js'
-import { Citation } from '../components/Sources.jsx'
 import '../styles/sources.css'
 import '../styles/progress.css'
 
@@ -352,119 +348,6 @@ function PracticeSection({ sessions, now, onStart }) {
   )
 }
 
-// ---------- Hatırlatmaların ölçümü (bildirim planı v2 §6; lib/notifyLog.js evaluate) ----------
-// Sayıdan sonra Türkçe iyelik + bulunma eki ("10'unda", "2'sinde"): son okunan sözcüğe göre.
-const LOC_ONES = ['ında', 'inde', 'sinde', 'ünde', 'ünde', 'inde', 'sında', 'sinde', 'inde', 'unda'] // sıfır, bir … dokuz
-const LOC_TENS = [null, 'unda', 'sinde', 'unda', 'ında', 'sinde', 'ında', 'inde', 'inde', 'ında'] // on … doksan
-export function locSuffix(n) {
-  const v = Math.abs(Math.round(n))
-  if (v === 0) return LOC_ONES[0]
-  if (v % 10) return LOC_ONES[v % 10]
-  if (v % 100) return LOC_TENS[(v % 100) / 10]
-  return v % 1000 ? 'ünde' : 'inde' // yüz, bin
-}
-
-// Fisher kesin testi (iki yönlü): a/n1 ile b/n2 aynı oranda mı? Küçük sayılar için; p döner.
-export function fisherP(a, n1, b, n2) {
-  const lf = (k) => {
-    let x = 0
-    for (let i = 2; i <= k; i++) x += Math.log(i)
-    return x
-  }
-  const k = a + b
-  const n = n1 + n2
-  if (n1 <= 0 || n2 <= 0 || k === 0 || k === n) return 1
-  const logP = (x) => lf(k) + lf(n - k) + lf(n1) + lf(n2) - lf(n) - lf(x) - lf(k - x) - lf(n1 - x) - lf(n2 - k + x)
-  const obs = logP(a)
-  let p = 0
-  for (let x = Math.max(0, k - n2); x <= Math.min(k, n1); x++) {
-    const lp = logP(x)
-    if (lp <= obs + 1e-9) p += Math.exp(lp)
-  }
-  return Math.min(1, p)
-}
-// Fark "belli" sayılır: p < 0,05 (VARSAYIM; sayılar küçük, yine de kesin sonuç denmez)
-const DIFF_P = 0.05
-
-// Tür başına: gelen ve gelmeyen günlerin adı, yapılanın adı ve uygulama dışını göremediğimizi söyleyen cümle
-const NUDGE_TEXT = {
-  mola: { sent: 'Hatırlatma gelen', silent: 'gelmeyen', silentLead: 'hatırlatmanın gelmediği gün', on: 'Hatırlatma gelen günlerde', did: "Nefona'da mola ekranını tamamladın.", outside: 'Uygulama dışındaki molalarını göremiyoruz.' },
-  water: { sent: 'Hatırlatma gelen', silent: 'gelmeyen', silentLead: 'hatırlatmanın gelmediği gün', on: 'Hatırlatma gelen günlerde', did: "Nefona'da su kaydettin.", outside: 'Uygulama dışında içtiğin suyu göremiyoruz.' },
-  breath: { sent: 'Hatırlatma gelen', silent: 'gelmeyen', silentLead: 'hatırlatmanın gelmediği gün', on: 'Hatırlatma gelen günlerde', did: "Nefona'da en az 1 dakika nefes çalıştın.", outside: 'Uygulama dışındaki nefes çalışmalarını göremiyoruz.' },
-  // Yürüyüş: uygulama kapalıyken adım o saate dek yeterliyse telefon hatırlatmayı iptal eder, o gün yine "hatırlatma
-  // günü" sayılır (App: walkGuardLog 'doneBefore'a çevrilmez). Uygulama saatten önce açılıp adım zaten yeterliyse
-  // planlayıcı 'doneBefore' yazar, gün sayılmaz. Sessiz taraf "gelmeyen" değil: iptal edilen günde de hatırlatma gelmez.
-  walk: {
-    sent: 'Hatırlatma günü olan',
-    silent: 'bilerek gönderilmeyen',
-    silentLead: 'bilerek gönderilmeyen gün',
-    on: 'Hatırlatma günlerinde',
-    did: 'adımın günlük ortalamana ulaştı.',
-    outside: 'Uygulamayı açmadığın bir günde adımın o saate kadar yeterliyse telefon hatırlatmayı iptal eder; o gün yine hatırlatma günü sayılır. Uygulamayı saatten önce açtığında adımın zaten yeterliyse o gün sayılmaz.',
-  },
-}
-// Yürüyüş ölçülemiyorsa (App nudgeStats blocked) sayı yerine neden
-const BLOCKED_TEXT = {
-  noHealth: "Yürüyüş hatırlatması yalnız Apple Sağlık olan iPhone'da çalışır; bu cihazda gelmez ve ölçülemez.",
-  consent: "Adımlarını okuma iznin yok; bu yüzden yürüyüş hatırlatması gelmiyor ve ölçülemiyor. İzni Bilgi → Hatırlatmalar'dan verebilirsin.",
-  steps: 'Adımların okunamıyor (Sağlık > Veri Erişimi > Nefona); bu yüzden yürüyüş hatırlatması gelmiyor ve ölçülemiyor.',
-}
-const withLoc = (n) => `${n}'${locSuffix(n)}`
-
-// r: evaluate(...)[type] ({ days, sentDays, silentDays, sentDone, silentDone, ready }) + blocked (yalnız yürüyüş).
-// off: bildirim izni yok → yeni gün birikmez; eski sayılar gerçek günlerden, gösterilir.
-export function nudgeLines(type, r, { off = false } = {}) {
-  const t = NUDGE_TEXT[type]
-  if (!t || !r) return null
-  if (r.blocked && BLOCKED_TEXT[r.blocked]) return { lead: BLOCKED_TEXT[r.blocked], body: null, verdict: null }
-  if (!r.ready || !r.sentDays) {
-    const lead = off
-      ? 'Ölçüm duruyor: bildirimler kapalı.'
-      : r.days < READY_DAYS ? `Ölçüm sürüyor: ${Math.max(0, r.days)}/${READY_DAYS} gün` : `Ölçüm sürüyor: ${t.silentLead} ${r.silentDays}/${READY_SILENT}`
-    return { lead, body: null, verdict: null }
-  }
-  const body = `${t.sent} ${r.sentDays} günün ${withLoc(r.sentDone)}, ${t.silent} ${r.silentDays} günün ${withLoc(r.silentDone)} ${t.did} ${t.outside} Sayılar küçük, kesin sonuç değil.`
-  const p = fisherP(r.sentDone, r.sentDays, r.silentDone, r.silentDays)
-  const verdict = p >= DIFF_P ? 'Henüz fark belli değil.' : `${t.on} daha ${r.sentDone / r.sentDays > r.silentDone / r.silentDays ? 'sık' : 'seyrek'}.`
-  return { lead: null, body, verdict }
-}
-
-// nudges: [{ type, …evaluate, blocked }] — yalnız açık türler (App verir; web'de boş). Veri telefondan çıkmaz; Nef'e
-// gitmez. notifyOff: bildirim izni yok (iOS) → bölüm başında ayar yolu.
-function NudgeSection({ nudges, notifyOff = false }) {
-  const cards = (nudges ?? []).map((n) => ({ n, lines: nudgeLines(n.type, n, { off: notifyOff }) })).filter((c) => c.lines)
-  if (!cards.length) return null
-  const pct = Math.round(SILENT_RATE * 100)
-  const walk = cards.some(({ n }) => n.type === 'walk' && !n.blocked)
-  return (
-    <section className="stack" aria-label="Hatırlatmaların">
-      <span className="eyebrow">Hatırlatmaların</span>
-      {notifyOff && (
-        <p className="note">
-          <BellOff size={16} aria-hidden="true" />
-          {'Bildirimler kapalı: Ayarlar > Nefona > Bildirimler. Kapalıyken hatırlatma gelmez, ölçüm de ilerlemez.'}
-        </p>
-      )}
-      {cards.map(({ n, lines }) => (
-        <div key={n.type} className="card stack" style={{ gap: 6 }}>
-          <strong>{TYPE_LABEL[n.type]} hatırlatması</strong>
-          {lines.lead && <p className="muted small" style={{ margin: 0 }}>{lines.lead}</p>}
-          {lines.body && <p className="small" style={{ margin: 0 }}>{lines.body}</p>}
-          {lines.verdict && <p className="small" style={{ margin: 0, fontWeight: 600 }}>{lines.verdict}</p>}
-        </div>
-      ))}
-      <details className="src-list">
-        <summary>Nasıl ölçüyoruz?</summary>
-        <p className="src-note">
-          {`Uygun günlerin %${pct}'${locSuffix(pct)} hatırlatmayı bilerek göndermiyoruz; hangi gün olacağını zar belirliyor. Hatırlatmanın gelip gelmediği günleri karşılaştırıyoruz. Hatırlatma saatinden önce uygulamada zaten yaptıysan, çalışma oturumundaysan ya da gün aşırıya aldıysan o gün sayılmaz.${walk ? ' Yürüyüşte bir fark var: uygulamayı açmadığın bir günde adımın yeterli olduğu için telefonun iptal ettiği hatırlatma, hatırlatma günü sayılır.' : ''} Veri yalnız bu telefonda kalır. ${READY_DAYS} gün ve en az ${READY_SILENT} bilerek gönderilmeyen gün birikince sayılar çıkar.`}
-        </p>
-        <Citation id="klasnja2019" />
-        <Citation id="bell2023" />
-      </details>
-    </section>
-  )
-}
-
 // Görme testi koşulu (AcuityTest WEAR + eski 'glasses'); trend yalnızca aynı koşulu birleştirir (lib/trend.js)
 const CONDITION_TEXT = { none: 'gözlüksüz', reading: 'okuma gözlüğüyle', progressive: 'progresif gözlükle', distance: 'uzak gözlüğüyle', contacts: 'lensle', glasses: 'gözlüklü (eski kayıt)' }
 
@@ -626,8 +509,7 @@ function ReadingCard({ tests, profile, onStart }) {
 // onStart (isteğe bağlı): boş durumlardaki "Hafif seti başlat" / "Haftalık testi başlat" düğmeleri
 // için App'in go fonksiyonu. weeklyTarget (isteğe bağlı): settings.reminder?.weeklyTarget;
 // verilmezse calendar.js varsayılanı (Ana sayfa ve Takvim ile aynı).
-// nudges (isteğe bağlı): açık hatırlatma türlerinin ölçümü (App: lib/notifyLog.js evaluate)
-export default function Progress({ tests = [], sessions = [], profile = null, identity = null, health = null, weeklyTarget, reportDay = null, nudges = null, notifyOff = false, onStart }) {
+export default function Progress({ tests = [], sessions = [], profile = null, identity = null, health = null, weeklyTarget, reportDay = null, onStart }) {
   const now = new Date()
   const todayKey = dayKey(now)
   // Tüm kayıtlar: gün listesi (oyunlar da görünür), ay gezinme sınırı, yılan rekoru.
@@ -686,7 +568,6 @@ export default function Progress({ tests = [], sessions = [], profile = null, id
       />
       <DayPanel sel={sel} list={sel ? days.get(sel) ?? [] : []} now={now} last={activities.at(-1)} onJump={jump} onStart={onStart} />
       <PracticeSection sessions={sessions} now={now} onStart={onStart} />
-      <NudgeSection nudges={nudges} notifyOff={notifyOff} />
       <VisionSection tests={tests} profile={profile} onStart={onStart} />
     </>
   )

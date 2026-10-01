@@ -75,9 +75,9 @@
 // }
 
 import { SOURCES } from '../lib/sources.js'
-import { NUDGE_TYPES, WINDOW, WATER_LAST, toMinutes } from '../lib/reminders.js'
+import { NUDGE_TYPES, toMinutes } from '../lib/reminders.js'
 import { isSameDay } from '../lib/today.js'
-import { REMIND_WINDOWS } from '../lib/moduleRemind.js'
+import { REMIND_WINDOWS, LEGACY_WINDOW, WATER_LAST } from '../lib/moduleRemind.js'
 
 export const RINGS = ['eye', 'attention', 'life']
 export const KINDS = ['measure', 'exercise', 'practice']
@@ -85,7 +85,7 @@ export const SECTIONS = ['measure', 'exercise', 'practice']
 export const DOMAINS = ['eye', 'calm', 'self', 'awareness', 'focus', 'wellbeing', 'body']
 const KEY_RE = /^[a-z][a-z0-9-]*$/
 const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k)
-// "Bana hatırlat" (PLAN.v1 §A.1, §A.4): legacy türler deneyin kendi penceresinde (lib/reminders.js WINDOW, su WATER_LAST);
+// "Bana hatırlat" (PLAN.v1 §A.1, §A.4): legacy türler kendi penceresinde (lib/moduleRemind.js LEGACY_WINDOW, su WATER_LAST);
 // yeni kaynaklarda 'move' (kalk, göz hareketi, oyun) ve 'calm' (nefes dışı sakin pratikler). Uçlar dâhil (timeError gibi).
 export const REMIND_LEGACY = [...NUDGE_TYPES]
 // Pencereler tek kaynaktan (lib/moduleRemind.js; planlayıcı da onu kullanır)
@@ -95,9 +95,9 @@ export { REMIND_WINDOWS }
 export const REMIND_APP_ROUTES = ['home']
 export const REMIND_MAX_TIMES = 3
 
-// remind → { from, to } ('HH:MM'). Legacy türün penceresi deneyinkidir.
+// remind → { from, to } ('HH:MM'). Legacy türün penceresi LEGACY_WINDOW.
 export function remindWindow(r) {
-  if (r?.legacy) return { from: WINDOW.from, to: r.legacy === 'water' ? WATER_LAST : WINDOW.to }
+  if (r?.legacy) return { from: LEGACY_WINDOW.from, to: r.legacy === 'water' ? WATER_LAST : LEGACY_WINDOW.to }
   return REMIND_WINDOWS[r?.window ?? 'move'] ?? null
 }
 
@@ -118,7 +118,7 @@ export function validateRemind(m, sources = SOURCES) {
   if (r.window != null) {
     need(own(REMIND_WINDOWS, r.window), "window 'move' ya da 'calm' olmalı")
     // VARSAYIM: plan window'u "legacy yoksa" diye tanımlıyor; ikisi birlikte yazılırsa hangisinin geçerli olduğu
-    // belirsiz kalmasın diye reddedilir (legacy türün penceresi lib/reminders.js'ten gelir).
+    // belirsiz kalmasın diye reddedilir (legacy türün penceresi lib/moduleRemind.js LEGACY_WINDOW).
     need(r.legacy == null, 'legacy türde window yazılmaz (pencere deneyinkidir)')
   }
   if (r.defaultTime != null) {
