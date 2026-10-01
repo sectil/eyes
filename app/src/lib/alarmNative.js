@@ -158,7 +158,7 @@ export async function stopPreview() {
 // Tanı (D4, sahip 2026-10-01: alarm ertesi gün çalmadı). Yalnız test derlemesinde Bilgi → "Alarm (tanı)".
 // Uygulamanın kaydı (gün, saat, açık mı), telefonda saklanan kimlik ve AlarmKit'teki gerçek alarmlar, son 10 olay.
 // alarm/log/native verilebilir (test); verilmezse kayıttan ve eklentiden okunur.
-export async function alarmDiag({ alarm = loadAlarm(), log = loadAlarmLog(), native } = {}) {
+export async function alarmDiag({ alarm = loadAlarm(), log = loadAlarmLog(), native, pending } = {}) {
   let n = native
   if (n === undefined) {
     try {
@@ -180,5 +180,26 @@ export async function alarmDiag({ alarm = loadAlarm(), log = loadAlarmLog(), nat
   }
   lines.push('Son olaylar:')
   for (const e of log.slice(-10)) lines.push(`· ${e.at} ${e.type}${e.via ? ` (${e.via})` : ''}`)
+  // Bekleyen bildirimler (hatırlatma "gelmedi" tanısı, sahip 2026-10-01): izin ve iOS'ta kurulu olanlar
+  let p = pending
+  if (p === undefined) {
+    try {
+      const pl = await ln()
+      if (pl) {
+        const perm = (await pl.LN.checkPermissions())?.display ?? '?'
+        const r = await pl.LN.getPending()
+        p = { perm, list: Array.isArray(r?.notifications) ? r.notifications : [] }
+      } else p = null
+    } catch (e) {
+      p = { error: String(e?.message ?? e) }
+    }
+  }
+  if (!p) lines.push('Bildirimler: okunamadı (web)')
+  else {
+    if (p.error) lines.push(`Bildirimler hata: ${p.error}`)
+    lines.push(`Bildirim izni: ${p.perm ?? '?'} · bekleyen: ${(p.list ?? []).length}`)
+    const sorted = [...(p.list ?? [])].sort((a, b) => String(a?.schedule?.at ?? '').localeCompare(String(b?.schedule?.at ?? '')))
+    for (const n of sorted.slice(0, 15)) lines.push(`· ${n.id} ${n?.schedule?.at ?? (n?.schedule?.on ? 'haftalık' : '?')} ${n.title ?? ''}`)
+  }
   return lines.join('\n')
 }

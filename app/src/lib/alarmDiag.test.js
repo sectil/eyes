@@ -8,7 +8,7 @@ describe('alarmDiag', () => {
 
   it('kayıt, saklanan kimlik ve AlarmKit alarmlarını yazar; saklananı işaretler', async () => {
     const native = { available: true, stored: 'A1', alarms: [{ id: 'A1', state: 'scheduled', schedule: 'relative(...)' }] }
-    const t = await alarmDiag({ alarm, log, native })
+    const t = await alarmDiag({ alarm, log, native, pending: null })
     expect(t).toContain('Kayıt: açık · 06:35 · günler [1,2,3,4,5,6]')
     expect(t).toContain('Saklanan kimlik: A1')
     expect(t).toContain('AlarmKit alarmları: 1')
@@ -16,9 +16,16 @@ describe('alarmDiag', () => {
     expect(t).toContain('set (setup)')
   })
 
+  it('bekleyen bildirimleri saate göre sıralar; izni yazar', async () => {
+    const pending = { perm: 'granted', list: [{ id: 7402, schedule: { at: '2026-10-01T09:00:00Z' }, title: 'Nefes' }, { id: 7400, schedule: { at: '2026-10-01T08:00:00Z' }, title: 'Mola' }] }
+    const t = await alarmDiag({ alarm: null, log: [], native: null, pending })
+    expect(t).toContain('Bildirim izni: granted · bekleyen: 2')
+    expect(t.indexOf('7400')).toBeLessThan(t.indexOf('7402'))
+  })
+
   it('AlarmKit boşsa sayısı 0; kayıt yoksa "yok"; eklenti yoksa okunamadı', async () => {
-    expect(await alarmDiag({ alarm, log: [], native: { available: true, stored: 'A1', alarms: [] } })).toContain('AlarmKit alarmları: 0')
-    expect(await alarmDiag({ alarm: null, log: [], native: null })).toContain('Kayıt: yok')
-    expect(await alarmDiag({ alarm: null, log: [], native: null })).toContain('AlarmKit: okunamadı')
+    expect(await alarmDiag({ alarm, log: [], native: { available: true, stored: 'A1', alarms: [] }, pending: null })).toContain('AlarmKit alarmları: 0')
+    expect(await alarmDiag({ alarm: null, log: [], native: null, pending: null })).toContain('Kayıt: yok')
+    expect(await alarmDiag({ alarm: null, log: [], native: null, pending: null })).toContain('AlarmKit: okunamadı')
   })
 })
