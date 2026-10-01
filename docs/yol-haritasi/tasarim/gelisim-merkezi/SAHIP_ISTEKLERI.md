@@ -42,3 +42,10 @@ Okunuşu:
 - Kota için orduyu küçültme kararı verildi: yalnız bu teknik için 6 ajanlık tur (maket/ordu/isik-tozu.workflow.js).
 - Kabul ölçütü: Claude'un "mükemmel" demesi yeterlidir. Bu yüzden "mükemmel" sözü ancak görüntülere bakılıp doğrulandıktan
   sonra söylenir.
+
+## DEVIR §6 cevapları (sahip, 2026-10-01, ana oturum)
+1. Kendi yüzün: **"Evet, ilk sürüme girsin."** → G2b kodlanır; DEVIR §3 gizlilik kurallarının hepsi uygulanır. Rıza ve
+   aydınlatma metni sahip onaylamadan koda girmez (sahibin genel kuralı: "Rıza metinleri ben onaylamadan koda girmez").
+2. Aylık bildirim metni: **"Onaylıyorum."** Başlık "İlk ayın tamam", gövde "{N} alanda başlangıcından iyisin: {alanlar}."
+   (alanlar kişinin verisinden). Hiçbir alan iyileşmediyse ne yazılacağı ayrıca sahibe sorulacak.
+3. Performans tutmazsa: **"Sana cihazda gösterilsin."** Nokta azaltılmış hâl TestFlight'ta sahibe gösterilir, onaysız kalmaz.
