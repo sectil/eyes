@@ -51,3 +51,6 @@ Kaynaklar: `arastirma/KAYNAKLAR.md`, 14 kaynak, hepsi PMID ve DOI ile doğruland
 
 ## 5. Sahibe sorular
 Sohbette soruldu; cevaplar gelince buraya yazılır.
+
+Sahip cevabı (2026-10-01): "senin önerin olsun mükemmel olacak". Kararlar: ad Rakam Avı; yolda 9. günden haftada
+3 gün; geri sayım yok; kaydırarak işaretleme. Ayrıntı `PLAN.md` §8.

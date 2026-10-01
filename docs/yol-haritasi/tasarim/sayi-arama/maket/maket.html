@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rakam Avı maket</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root {
+  --bg: radial-gradient(120% 70% at 50% -10%, #dff3f5 0%, #f3f7f9 45%, #eef3f6 100%);
+  --surface: #ffffff; --surface-2: #f1f5f8; --line: rgba(11, 18, 25, 0.08);
+  --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --teal: #0b8a97; --blue: #2458cc; --grad: linear-gradient(90deg, #0b7480, #2458cc); --btn-ink: #fff;
+  --gold-1: #ffcf6b; --gold-2: #f2a516; --gold-ink: #3a2500; --gold-glow: rgba(242, 165, 22, 0.35);
+  --swipe: rgba(17, 169, 184, 0.22); --swipe-line: #11a9b8; --warn: #b4431c;
+  --ok: #13704b; --ok-bg: rgba(31, 169, 116, 0.13);
+  --shadow: 0 18px 40px -22px rgba(11, 30, 45, 0.35), 0 2px 6px -2px rgba(11, 30, 45, 0.08);
+  --digit: #22303b; --digit-dim: #7b8894;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --dark: 1; }
+}
+:root[data-theme="dark"] {
+  --bg: radial-gradient(120% 70% at 50% -10%, #0b3440 0%, #07131c 45%, #050b11 100%);
+  --surface: #0f1a24; --surface-2: #142230; --line: rgba(255, 255, 255, 0.08);
+  --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --teal: #19c2d1; --blue: #3e7bfa; --grad: linear-gradient(90deg, #19c2d1, #3e7bfa); --btn-ink: #041017;
+  --gold-1: #ffd27a; --gold-2: #ffb13b; --gold-ink: #2a1a00; --gold-glow: rgba(255, 177, 59, 0.4);
+  --swipe: rgba(25, 194, 209, 0.22); --swipe-line: #19c2d1; --warn: #ff9a7d;
+  --ok: #35d39a; --ok-bg: rgba(53, 211, 154, 0.14);
+  --shadow: 0 22px 44px -24px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --digit: #dfe7ec; --digit-dim: #6f7d89;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body { background: var(--bg); background-color: #eef3f6; color: var(--ink); font-family: 'Onest', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow: hidden; }
+:root[data-theme="dark"] body { background-color: #050b11; }
+.app { height: 100vh; display: flex; flex-direction: column; padding: 10px 16px 18px; gap: 12px; }
+.top { display: flex; align-items: center; gap: 10px; height: 40px; flex: none; }
+.back { width: 36px; height: 36px; border-radius: 50%; background: var(--surface); box-shadow: var(--shadow); display: grid; place-items: center; }
+.back svg { width: 16px; height: 16px; stroke: var(--ink-2); }
+.top .t { font-family: 'Unbounded'; font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
+.top .sp { flex: 1; }
+.pill { font-size: 12px; font-weight: 600; color: var(--ink-3); background: var(--surface); border-radius: 999px; padding: 6px 10px; box-shadow: var(--shadow); }
+
+/* aranan */
+.target { background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); padding: 12px 14px; display: flex; align-items: center; gap: 12px; flex: none; position: relative; }
+.target .lab { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+.tiles { display: flex; gap: 6px; margin-top: 6px; }
+.tile { width: 40px; height: 48px; border-radius: 12px; display: grid; place-items: center; font-family: 'Unbounded'; font-weight: 700; font-size: 24px; color: var(--ink); background: var(--surface-2); position: relative; }
+.tile::before { content: ''; position: absolute; inset: 0; border-radius: 12px; padding: 1.5px; background: var(--grad); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+.rings { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.rings .n { font-family: 'Unbounded'; font-weight: 600; font-size: 13px; color: var(--ink-2); }
+.rings .n b { color: var(--ink); font-size: 18px; }
+.dots { display: flex; gap: 5px; }
+.dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--line); background: transparent; }
+.dot.on { border: none; background: radial-gradient(circle at 35% 30%, var(--gold-1), var(--gold-2)); box-shadow: 0 0 10px var(--gold-glow); }
+.dot.new { animation: none; box-shadow: 0 0 0 4px var(--gold-glow), 0 0 14px var(--gold-glow); }
+
+/* ızgara */
+.board { background: var(--surface); border-radius: 24px; box-shadow: var(--shadow); padding: 8px; position: relative; flex: 1; min-height: 0; display: flex; }
+.grid { position: relative; display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(10, 1fr); flex: 1; }
+.c { display: grid; place-items: center; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--digit); position: relative; z-index: 2; min-height: 36px; }
+.cap { border-radius: 999px; z-index: 1; margin: 5px 3px; position: relative; }
+.cap.gold { background: linear-gradient(180deg, var(--gold-1), var(--gold-2)); box-shadow: 0 6px 18px -6px var(--gold-glow), 0 0 0 1px rgba(255, 255, 255, 0.25) inset; }
+.cap.swipe { background: var(--swipe); box-shadow: 0 0 0 2px var(--swipe-line) inset, 0 0 22px -4px var(--swipe-line); }
+.cap.burst::after { content: ''; position: absolute; inset: -6px; border-radius: 999px; border: 2px solid var(--gold-2); opacity: 0.55; }
+.cap.burst::before { content: ''; position: absolute; inset: -11px; border-radius: 999px; border: 1.5px solid var(--gold-2); opacity: 0.22; }
+.c.ing { color: var(--gold-ink); font-weight: 700; }
+.c.ins { color: var(--ink); font-weight: 700; }
+.fing { z-index: 3; position: relative; }
+.finger { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.1) 60%, transparent 70%); box-shadow: 0 0 0 2px var(--swipe-line); transform: translate(-50%, -50%); }
+:root[data-theme="dark"] .finger { background: radial-gradient(circle, rgba(25, 194, 209, 0.35), rgba(25, 194, 209, 0.08) 60%, transparent 70%); }
+.tst { z-index: 4; position: relative; display: flex; justify-content: center; align-items: center; }
+.toast { background: linear-gradient(180deg, var(--gold-1), var(--gold-2)); color: var(--gold-ink); font-weight: 700; font-size: 14px; border-radius: 999px; padding: 8px 14px; box-shadow: 0 10px 24px -10px var(--gold-glow); white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+.toast svg { width: 16px; height: 16px; }
+.foot { display: flex; justify-content: center; flex: none; height: 34px; align-items: center; }
+.hint { height: 34px; display: grid; place-items: center; text-align: center; font-size: 13px; color: var(--ink-3); flex: none; }
+
+/* giriş */
+.hero { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; position: relative; }
+.field { position: absolute; left: -16px; right: -16px; top: -60px; height: 300px; z-index: -1; font-family: 'Unbounded'; font-weight: 600; font-size: 26px; line-height: 44px; letter-spacing: 18px; color: var(--teal); opacity: 0.09; overflow: hidden; white-space: nowrap; -webkit-mask: linear-gradient(180deg, #000 10%, transparent 95%); mask: linear-gradient(180deg, #000 10%, transparent 95%); }
+.field span { color: var(--gold-2); opacity: 1; }
+:root[data-theme="dark"] .field { opacity: 0.12; }
+@media (max-width: 340px) { .field { display: none; } }
+.kicker { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); }
+h1 { font-family: 'Unbounded'; font-weight: 700; font-size: 34px; letter-spacing: -0.02em; line-height: 1.05; }
+.lead { font-size: 16px; line-height: 1.45; color: var(--ink-2); }
+.demo { background: var(--surface); border-radius: 24px; box-shadow: var(--shadow); padding: 14px; }
+.demo .row { display: grid; grid-template-columns: repeat(8, 1fr); position: relative; }
+.demo .c { font-size: 18px; }
+.demo .row.dim .c { color: var(--digit-dim); }
+.demo .meta { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.chip { font-size: 12px; font-weight: 600; color: var(--ink-2); background: var(--surface-2); border-radius: 999px; padding: 6px 10px; display: inline-flex; gap: 6px; align-items: center; }
+.chip svg { width: 13px; height: 13px; stroke: var(--teal); }
+.btn { display: block; width: 100%; border: 0; border-radius: 18px; padding: 16px; font-family: 'Unbounded'; font-weight: 600; font-size: 16px; color: var(--btn-ink); background: var(--grad); box-shadow: 0 14px 30px -14px rgba(36, 88, 204, 0.6); text-align: center; flex: none; }
+.fine { font-size: 12px; line-height: 1.45; color: var(--ink-3); text-align: center; flex: none; }
+
+/* sonuç */
+.res { flex: 1; display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+.big { background: var(--surface); border-radius: 26px; box-shadow: var(--shadow); padding: 18px 18px 16px; position: relative; overflow: hidden; }
+.big::after { content: ''; position: absolute; right: -40px; top: -40px; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, var(--swipe), transparent 70%); }
+.caps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 14px; position: relative; z-index: 1; }
+.mc { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.pill7 { width: 100%; text-align: center; border-radius: 999px; padding: 5px 0; font-weight: 700; font-size: 12px; letter-spacing: 0.04em; color: var(--gold-ink); background: linear-gradient(180deg, var(--gold-1), var(--gold-2)); box-shadow: 0 4px 10px -6px var(--gold-glow); }
+.mc em { font-style: normal; font-size: 12px; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
+.mc.miss .pill7 { background: transparent; color: var(--ink-3); box-shadow: 0 0 0 1.5px var(--line) inset; }
+.mc.miss em { color: var(--ink-3); font-weight: 500; font-size: 11px; }
+.res > * { flex: none; }
+.res > .spacer { flex: 1; }
+.chip.wr { margin-left: auto; margin-bottom: 6px; position: relative; z-index: 1; }
+.bigrow { display: flex; align-items: flex-end; gap: 12px; }
+.bars { margin-left: auto; display: flex; align-items: flex-end; gap: 6px; height: 74px; position: relative; padding-bottom: 16px; z-index: 1; }
+.bar { width: 14px; border-radius: 7px 7px 4px 4px; background: linear-gradient(180deg, var(--gold-1), var(--gold-2)); position: relative; }
+.bar.miss { background: transparent; border: 1.5px dashed var(--ink-3); opacity: 0.6; height: 58px; }
+.bar em { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); font-style: normal; font-size: 10px; font-weight: 700; color: var(--ink-3); }
+.bars .med { position: absolute; left: -4px; right: -4px; border-top: 1.5px dashed var(--teal); }
+.big .lab { font-size: 13px; color: var(--ink-3); font-weight: 600; }
+.num { font-family: 'Unbounded'; font-weight: 700; font-size: 64px; letter-spacing: -0.03em; line-height: 1; margin-top: 8px; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+.num small { font-size: 22px; font-weight: 600; margin-left: 4px; }
+.sub { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+.verdict { display: flex; align-items: center; gap: 12px; background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); padding: 14px 16px; }
+.vchip { font-weight: 700; font-size: 14px; border-radius: 999px; padding: 7px 12px; white-space: nowrap; }
+.vchip.start { color: var(--teal); background: var(--swipe); }
+.vchip.better { color: var(--ok); background: var(--ok-bg); }
+.verdict { flex-wrap: wrap; }
+.verdict p { font-size: 13px; color: var(--ink-2); line-height: 1.4; }
+.steps { display: flex; gap: 4px; margin-top: 6px; }
+.steps i { width: 18px; height: 6px; border-radius: 3px; background: var(--line); }
+.steps i.on { background: var(--teal); }
+.chart { background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); padding: 14px 16px 10px; }
+.chart .h { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-3); font-weight: 600; }
+.chart svg { width: 100%; height: 86px; display: block; margin-top: 4px; }
+.nef { display: flex; gap: 12px; align-items: center; background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); padding: 12px 14px; }
+.orb { width: 34px; height: 34px; border-radius: 50%; flex: none; background: radial-gradient(circle at 35% 30%, #9ff3f9, #19c2d1 45%, #2458cc 100%); box-shadow: 0 0 14px rgba(25, 194, 209, 0.45); }
+.nef p { font-size: 14px; line-height: 1.4; color: var(--ink); }
+.nef p b { font-weight: 700; }
+.rf { display: flex; align-items: center; gap: 12px; border: 1px dashed var(--line); border-radius: 18px; padding: 10px 14px; }
+.rf .ic { width: 30px; height: 30px; border-radius: 10px; background: var(--surface-2); display: grid; place-items: center; flex: none; }
+.rf .ic svg { width: 16px; height: 16px; stroke: var(--teal); }
+.rf strong { font-size: 14px; }
+.rf span { display: block; font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+.rf .tg { margin-left: auto; width: 40px; height: 24px; border-radius: 12px; background: var(--line); position: relative; flex: none; }
+.rf .tg::after { content: ''; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--surface); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); }
+.spacer { flex: 1; }
+
+@media (max-width: 340px) {
+  .pill7 { font-size: 10.5px; padding: 4px 0; }
+  .mc em { font-size: 10.5px; }
+  .mc.miss em { font-size: 9.5px; }
+  .caps { gap: 4px; margin-top: 10px; }
+  .sub .chip { padding: 5px 9px; }
+  .app { padding: 8px 12px 12px; gap: 9px; }
+  h1 { font-size: 28px; }
+  .lead { font-size: 14.5px; }
+  .tile { width: 34px; height: 40px; font-size: 20px; border-radius: 10px; }
+  .tile::before { border-radius: 10px; }
+  .target { padding: 10px 12px; border-radius: 18px; }
+  .dot { width: 11px; height: 11px; }
+  .num { font-size: 46px; }
+  .big { padding: 14px 16px 12px; }
+  .chart svg { height: 64px; }
+  .btn { padding: 13px; font-size: 15px; }
+  .nef p { font-size: 13px; }
+  .verdict { padding: 11px 13px; }
+  .rf { padding: 8px 12px; }
+  .demo { padding: 10px; }
+  .hero { gap: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<script>
+const q = new URLSearchParams(location.search)
+const screen = q.get('s') || 'play'
+document.documentElement.dataset.theme = q.get('theme') || 'light'
+const narrow = innerWidth <= 340
+
+// tohumlu ızgara: aranan 7061, 5 hedef, 6 benzer çeldirici
+let seed = 20261001
+const rnd = () => ((seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648)
+const T = '7061'
+const ROWS = 10, COLS = 8
+const g = Array.from({ length: ROWS }, () => Array.from({ length: COLS }, () => String(Math.floor(rnd() * 10))))
+const targets = [[1, 2], [3, 0], [5, 4], [7, 1], [9, 3]]
+const lures = [[0, 3, '7016'], [2, 4, '0761'], [4, 1, '7068'], [6, 4, '7601'], [8, 0, '7051'], [9, 4 + 0, '1706']]
+for (const [r, c, s] of lures) for (let i = 0; i < 4; i++) g[r][c + i] = s[i]
+for (const [r, c] of targets) for (let i = 0; i < 4; i++) g[r][c + i] = T[i]
+// başka yerde tesadüfi 7061 olmasın
+for (let r = 0; r < ROWS; r++) for (let c = 0; c <= COLS - 4; c++) {
+  if (g[r].slice(c, c + 4).join('') === T && !targets.some(([tr, tc]) => tr === r && tc === c)) g[r][c + 3] = '9'
+}
+
+const chev = '<svg viewBox="0 0 16 16" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg>'
+const check = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg>'
+const bell = '<svg viewBox="0 0 16 16" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11V7a4 4 0 0 1 8 0v4l1.2 1.5H2.8L4 11Z"/><path d="M6.5 14h3"/></svg>'
+const clock = '<svg viewBox="0 0 16 16" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M8 4.8V8l2 1.4"/></svg>'
+const grid4 = '<svg viewBox="0 0 16 16" fill="none" stroke-width="1.8" stroke-linecap="round"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5"/><path d="M2.5 8h11M8 2.5v11"/></svg>'
+const swipeI = '<svg viewBox="0 0 16 16" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h11M10 5l3 3-3 3"/></svg>'
+
+const topBar = (title, right = '') => `<div class="top"><div class="back">${chev}</div><div class="t">${title}</div><div class="sp"></div>${right}</div>`
+const tiles = (s) => `<div class="tiles">${[...s].map((d) => `<div class="tile">${d}</div>`).join('')}</div>`
+const dots = (n, newIdx = -1) => `<div class="dots">${[0, 1, 2, 3, 4].map((i) => `<i class="dot ${i < n ? 'on' : ''} ${i === newIdx ? 'new' : ''}"></i>`).join('')}</div>`
+const targetCard = (n, newIdx) => `<div class="target"><div><div class="lab">Aranan</div>${tiles(T)}</div><div class="rings"><div class="n"><b>${n}</b> / 5</div>${dots(n, newIdx)}</div></div>`
+
+function board({ gold = [], swipe = null, burst = null, finger = null, toast = null }) {
+  const fs = narrow ? 19 : 22
+  const mark = {}
+  for (const [r, c] of gold) for (let i = 0; i < 4; i++) mark[`${r}:${c + i}`] = 'ing'
+  if (burst) for (let i = 0; i < 4; i++) mark[`${burst[0]}:${burst[1] + i}`] = 'ing'
+  if (swipe) for (let i = 0; i < swipe[2]; i++) mark[`${swipe[0]}:${swipe[1] + i}`] = 'ins'
+  const at = (r, c, span = 1) => `grid-row:${r + 1};grid-column:${c + 1} / span ${span}`
+  const cells = g.map((row, r) => row.map((d, c) => `<div class="c ${mark[`${r}:${c}`] ?? ''}" style="${at(r, c)};font-size:${fs}px">${d}</div>`).join('')).join('')
+  const cap = (r, c, len, cls) => `<div class="cap ${cls}" style="${at(r, c, len)}"></div>`
+  let caps = gold.map(([r, c]) => cap(r, c, 4, 'gold')).join('')
+  if (burst) caps += cap(burst[0], burst[1], 4, 'gold burst')
+  if (swipe) caps += cap(swipe[0], swipe[1], swipe[2], 'swipe')
+  const f = finger ? `<div class="fing" style="${at(finger[0], finger[1])}"><div class="finger"></div></div>` : ''
+  const t = toast ? `<div class="tst" style="${at(toast[0] - 1, 0, 8)}"><div class="toast">${check}${toast[1]}</div></div>` : ''
+  return `<div class="board"><div class="grid">${caps}${cells}${f}${t}</div></div>`
+}
+
+function chart() {
+  const vals = [6.4, 5.9, 5.8, 5.4, 6.0, 5.5, 5.7, 5.2, 4.9, 4.6, 4.7, 4.3, 4.1, 4.2]
+  const W = 320, H = 86, lo = 3.6, hi = 6.8
+  const x = (i) => 8 + i * ((W - 16) / (vals.length - 1))
+  const y = (v) => 8 + (1 - (v - lo) / (hi - lo)) * (H - 16)
+  const base = 5.6
+  const line = vals.map((v, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join(' ')
+  const pts = vals.map((v, i) => `<circle cx="${x(i)}" cy="${y(v)}" r="${i === vals.length - 1 ? 5 : 3}" fill="${i < 2 ? 'var(--ink-3)' : 'var(--teal)'}" ${i < 2 ? 'opacity="0.45"' : ''}/>`).join('')
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="var(--teal)"/><stop offset="1" stop-color="var(--blue)"/></linearGradient></defs>
+  <rect x="${x(2)}" y="${y(base) - 6}" width="${x(7) - x(2)}" height="12" rx="6" fill="var(--swipe)"/>
+  <line x1="8" x2="${W - 8}" y1="${y(base)}" y2="${y(base)}" stroke="var(--ink-3)" stroke-dasharray="3 4" stroke-width="1" opacity="0.6"/>
+  <path d="${line}" fill="none" stroke="url(#lg)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${pts}</svg>`
+}
+
+function field() {
+  let out = ''
+  for (let r = 0; r < 7; r++) { let line = ''; for (let c = 0; c < 14; c++) line += String(Math.floor(rnd() * 10)); if (r === 2) line = line.slice(0, 5) + '<span>7061</span>' + line.slice(9); out += line + '<br>' }
+  return out
+}
+const S = {
+  intro() {
+    const r1 = '3 5 8 2 7 0 6 1'.split(' '), r0 = '9 1 4 7 0 1 6 3'.split(' '), r2 = '6 0 7 1 5 2 9 4'.split(' ')
+    const row = (a, cls = '') => `<div class="row ${cls}">${a.map((d, i) => `<div class="c ${cls === 'hit' && i >= 4 ? 'ing' : ''}">${d}</div>`).join('')}</div>`
+    return `${topBar('', '<span class="pill">2 dk · 5 dizi</span>')}
+    <div class="hero">
+      <div class="field">${field()}</div>
+      <div><div class="kicker">Dikkat · arama</div><h1>Rakam Avı</h1></div>
+      <div class="target" style="box-shadow:none;background:transparent;padding:0"><div><div class="lab">Bu diziyi bul</div>${tiles(T)}</div></div>
+      <p class="lead">Izgarada 5 kez saklı. Bulunca parmağını üstünden kaydır.</p>
+      <div class="demo"><div style="position:relative">
+        <div class="cap gold" style="position:absolute;left:50%;width:50%;top:calc(100% / 3 + 3px);height:calc(100% / 3 - 6px)"></div>
+        ${row(r0, 'dim')}${row(r1, 'hit')}${row(r2, 'dim')}</div>
+        <div class="meta"><span class="chip">${swipeI}Soldan sağa, tek satırda</span><span class="chip">${clock}Geri sayım yok</span></div>
+      </div>
+    </div>
+    <div class="btn">Başla</div>
+    <p class="fine">Bu bir arama alıştırması. Çalıştığın işte hızlanırsın; günlük hayata geçtiği gösterilmedi.</p>`
+  },
+  play() {
+    return `${topBar('Rakam Avı')}${targetCard(2)}
+    ${board({ gold: [[1, 2], [7, 1]], swipe: [5, 4, 3], finger: [5, 7] })}
+    <p class="hint">Kendi hızında ara. Geri sayım yok.</p>`
+  },
+  found() {
+    return `${topBar('Rakam Avı')}${targetCard(3, 2)}
+    ${board({ gold: [[1, 2], [7, 1]], burst: [5, 4] })}
+    <div class="foot"><div class="toast">${check}Buldun · 3 / 5</div></div>`
+  },
+  result1() {
+    return `${topBar('Rakam Avı')}
+    <div class="res">
+      <div class="big"><div class="lab">Tur bitti · bir diziyi bulma süren</div><div class="bigrow"><div class="num">5,7<small>sn</small></div><span class="chip wr">2 yanlış işaret</span></div><div class="caps"><div class="mc"><span class="pill7">7061</span><em>3,8 sn</em></div><div class="mc"><span class="pill7">7061</span><em>7,9 sn</em></div><div class="mc"><span class="pill7">7061</span><em>5,2 sn</em></div><div class="mc miss"><span class="pill7">7061</span><em>bulunmadı</em></div><div class="mc"><span class="pill7">7061</span><em>6,1 sn</em></div></div></div>
+      <div class="verdict"><span class="vchip start">başlangıç</span><div><p>Başlangıcın 6 ölçüm günü sonra oluşur.</p><div class="steps"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+      <div class="nef"><div class="orb"></div><p>Bugünün en hızlı dizisi <b>3,8 saniyede</b> geldi.</p></div>
+      <div class="spacer"></div>
+      <div class="rf"><div class="ic">${bell}</div><div><strong>Bana hatırlat</strong><span>Her gün, senin için uygun saatte. Saati Nef de seçebilir.</span></div><div class="tg"></div></div>
+      <div class="btn">Tamam</div>
+    </div>`
+  },
+  result2() {
+    return `${topBar('Rakam Avı')}
+    <div class="res">
+      <div class="big"><div class="lab">Tur bitti · bir diziyi bulma süren</div><div class="bigrow"><div class="num">4,2<small>sn</small></div><span class="chip wr">0 yanlış işaret</span></div><div class="caps"><div class="mc"><span class="pill7">7061</span><em>3,1 sn</em></div><div class="mc"><span class="pill7">7061</span><em>4,6 sn</em></div><div class="mc"><span class="pill7">7061</span><em>4,2 sn</em></div><div class="mc"><span class="pill7">7061</span><em>5,0 sn</em></div><div class="mc"><span class="pill7">7061</span><em>3,6 sn</em></div></div></div>
+      <div class="verdict"><span class="vchip better">başlangıcından iyi</span><p>Başlangıç <b>5,6 sn</b> · şimdi <b>4,2 sn</b></p></div>
+      <div class="chart"><div class="h"><span>Son 14 gün</span><span>düşük daha iyi</span></div>${chart()}</div>
+      <div class="nef"><div class="orb"></div><p>Bu hafta bir diziyi ortalama <b>4,2 saniyede</b> buldun; geçen hafta 4,8 saniyeydi.</p></div>
+      <div class="spacer"></div>
+      <div class="btn">Tamam</div>
+    </div>`
+  },
+}
+document.getElementById('app').innerHTML = S[screen]()
+</script>
+</body>
+</html>
