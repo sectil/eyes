@@ -1,9 +1,12 @@
 // Yılan: gözle ya da dokunarak oynanan göz pratiği. Eğlence; görmeyi ölçmez.
 import { BEST_KEY, OPTS_KEY, bestFromSessions } from '../../lib/snake.js'
+import { SNAKE_GAZE_KEY, CHECK_PASS_HITS } from '../../lib/snakeGaze.js'
 import { NBSP, finite, join, durationPart, CONTROL_LABEL } from '../../lib/format.js'
 import { withinDays, isSameDay } from '../../lib/today.js'
 import { unlocked } from '../../lib/progression.js'
 const isSnake = (s) => s.type === 'game' && s.game === 'snake'
+// Girişteki kısa kontrolde dört kapının hepsi tuttuysa süre ortancası (ms). Yalnız sayı; oyun puanı değil.
+const gazeMs = (s) => (s && isSnake(s) && s.gaze?.hits >= CHECK_PASS_HITS && Number.isFinite(s.gaze?.ms) ? s.gaze.ms : null)
 
 export default {
   id: 'snake',
@@ -12,9 +15,20 @@ export default {
   ring: 'attention',
   kind: 'practice',
   // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
-  progress: { domain: 'focus' }, // oyun puanı gelişim ölçüsü sayılmaz (rekor ayrı)
-  gates: { gaze: true, eyeBudget: 'eye' },
-  storageKeys: [BEST_KEY, OPTS_KEY],
+  // Oyun puanı gelişim ölçüsü sayılmaz (rekor ayrı). Ölçü: girişteki kontrolde kapıya bakıştan dönüşe geçen süre.
+  // VARSAYIM: yayımlanmış anlamlı değişim eşiği yok (meaningful yok); Gelişim ilk yarı / son yarı kuralıyla bakar.
+  progress: {
+    domain: 'focus',
+    metrics: [
+      {
+        key: 'snake-gaze-ms', label: 'Bakışla yön verme', unit: 'ms', better: 'down',
+        series: ({ sessions }) => sessions.filter((s) => gazeMs(s) != null).map((s) => ({ date: s.date, value: gazeMs(s) })),
+      },
+    ],
+  },
+  // Yılan kendi bakış ayarını yapar (lib/snakeGaze.js); sistem göz kalibrasyonunu şart koşmaz.
+  gates: { eyeBudget: 'eye' },
+  storageKeys: [BEST_KEY, OPTS_KEY, SNAKE_GAZE_KEY],
   home: { section: 'practice', order: 20 },
   sessions: {
     match: (s) => s.type === 'game' && s.game === 'snake',

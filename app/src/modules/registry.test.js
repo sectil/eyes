@@ -17,7 +17,8 @@ describe('modül soketi: gerçek modüller', () => {
   })
   it('ekran adları ve kapılar', () => {
     expect(registry.forRoute('routine-lite')?.id).toBe('routine')
-    expect(registry.forRoute('snake')?.gates).toMatchObject({ gaze: true, eyeBudget: 'eye' })
+    expect(registry.forRoute('snake')?.gates).toMatchObject({ eyeBudget: 'eye' })
+    expect(registry.forRoute('snake')?.gates.gaze).toBeUndefined() // Yılan kendi ayarını yapar (lib/snakeGaze.js)
     expect(registry.forRoute('daily')?.gates.eyeBudget).toBe('test')
     expect(registry.forRoute('blink')?.gates.eyeBudget).toBeUndefined() // dinlendirici; molada açık
     expect(registry.forRoute('breath')?.gates.eyeBudget).toBeUndefined()
@@ -100,6 +101,7 @@ describe('modül soketi: tak / çıkar', () => {
       notice: { type: 'notice', date: '2026-01-01', count: 2 },
       'breath-count': { type: 'breath-count', date: '2026-01-01', accuracy: 90 },
       yon: { type: 'yon', tool: 'ayna', date: '2026-01-01', score: 3.4 },
+      snake: { type: 'game', game: 'snake', date: '2026-01-01', score: 4, gaze: { hits: 4, n: 4, wrong: 0, ms: 820 } }, // girişteki kapı kontrolü (lib/snakeGaze.js)
       yoga: { type: 'yoga', lesson: 3, date: '2026-01-01', sleepEase: 7 }, // Uykuya Geçiş: ertesi sabahın sorusu (modul.md §9)
     }
     for (const x of registry.metrics()) {

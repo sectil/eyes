@@ -15,11 +15,21 @@ const W = 375, H = 812, mm = (pt) => pt / PT
 const MODEL = { version: 3, ok: true, closeAt: 0.5, phone: null, date: '2026-09-28T10:00:00Z',
   x: { feature: 'scrX', c: 0, neg: mm(0.08 * W - 0.5 * W), pos: mm(0.92 * W - 0.5 * W), score: 9 },
   y: { feature: 'scrY', c: 0, neg: -mm(0.84 * H - 0.46 * H), pos: mm(0.46 * H - 0.12 * H), score: 9 } }
+// Sahte göz: ekranda parlayan hedefe (kapı ya da ortadaki nokta) bakar; hedef yoksa tahtanın ortasına.
+// Ekran noktası mm = (hedef - ekran ortası) / 6,1; y yukarı pozitif.
+const LOOK = `setInterval(() => {
+  const el = document.querySelector('.snake-gate.is-target, .snake-aim') || document.querySelector('.snake-board-wrap')
+  if (!el) return
+  const r = el.getBoundingClientRect()
+  window.__gaze = { x: (r.left + r.width / 2 - innerWidth / 2) / 6.1, y: (innerHeight * 0.46 - (r.top + r.height / 2)) / 6.1 }
+}, 50)`
+const start = async (p) => { await p.click('.snake-cta .btn') }
 const SCENES = [
-  ['1-giris', { practiced: false }, async () => {}],
-  ['2-dene', { practiced: false }, async (p) => { await p.click('.snake-cta .btn'); await p.waitForTimeout(1500) }],
-  ['3-oyun', { practiced: true }, async (p) => { await p.click('.snake-cta .btn'); await p.waitForTimeout(4400) }],
-  ['4-sonuc', { practiced: true }, async (p) => { await p.click('.snake-cta .btn'); await p.waitForSelector('#snake-over-title', { timeout: 20000 }); await p.waitForTimeout(900) }],
+  ['1-giris', { cal: false }, async () => {}],
+  ['2-ayar', { cal: false }, async (p) => { await start(p); await p.waitForTimeout(2600) }],
+  ['3-kontrol', { cal: false }, async (p) => { await start(p); await p.waitForSelector('text=Kontrol', { timeout: 30000 }); await p.waitForTimeout(300) }],
+  ['4-oyun', { cal: false }, async (p) => { await start(p); await p.waitForSelector('.snake-game.is-playing', { timeout: 60000 }); await p.waitForTimeout(1200) }],
+  ['5-sonuc', { cal: false }, async (p) => { await start(p); await p.waitForSelector('#snake-over-title', { timeout: 60000 }); await p.waitForTimeout(900) }],
 ]
 const b = await chromium.launch()
 const errs = []
@@ -29,10 +39,12 @@ for (const [name, opts, act] of SCENES) {
     const ctx = await b.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 2, colorScheme: scheme, locale: 'tr-TR' })
     await ctx.addInitScript(([m, o]) => {
       localStorage.setItem('gozolcum:gaze-model-v1', JSON.stringify(m))
-      localStorage.setItem('gozolcum:snake-opts', JSON.stringify({ control: 'eyes', walls: 'classic', practiced: o.practiced }))
+      localStorage.setItem('gozolcum:snake-opts', JSON.stringify({ control: 'eyes', walls: 'classic', practiced: true }))
+      if (o.cal) localStorage.setItem('gozolcum:snake-gaze-v1', JSON.stringify(o.cal))
       localStorage.setItem('gozolcum:snake-best', '14')
       window.__gaze = { x: 0, y: 0 }
     }, [MODEL, opts])
+    await ctx.addInitScript(LOOK)
     const p = await ctx.newPage()
     p.on('pageerror', (e) => errs.push(`${name}: ${e.message}`))
     await p.goto(URL0)
