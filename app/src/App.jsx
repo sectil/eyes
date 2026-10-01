@@ -5,7 +5,7 @@ import RestLock from './components/RestLock.jsx'
 import EyeBudgetPill from './components/EyeBudgetPill.jsx'
 import { recordTime, eyeStatus, beginRest, resetBudget, flushBudget, EXHAUSTED_EVENT } from './lib/eyeBudgetStore.js'
 import { LIMITS as EYE_LIMITS } from './lib/eyeBudget.js'
-import { REST_NOTIFY_ID, TRIAL_NOTIFY_ID, TRIAL_REMIND_DAYS, scheduleTrialReminder } from './lib/restNotify.js'
+import { REST_NOTIFY_ID, TRIAL_NOTIFY_ID, TRIAL_REMIND_DAYS, MANAGE_SUBS_URL, scheduleTrialReminder } from './lib/restNotify.js'
 import { applyPlan, cancelOwn, onNotifyTap, notifyPermission, askNotifyPermission } from './lib/notifyApply.js'
 // Tek planlayıcı (PLAN.v1 §5.5): planNotifications (dokunulmaz) + modül hatırlatmaları + ek saatler; yeni özellik
 // kapalıyken çıktısı planNotifications'ınkiyle aynı (notifyAll.equiv.test.js)
@@ -59,7 +59,7 @@ import Schedule from './screens/Schedule.jsx'
 import Evidence from './screens/Evidence.jsx'
 import Info from './screens/Info.jsx'
 import Paywall from './screens/Paywall.jsx'
-import { getAccess, getMembership, linkPurchaser, unlinkPurchaser } from './lib/subscription.js'
+import { getAccess, getMembership, linkPurchaser, unlinkPurchaser, withTimeout } from './lib/subscription.js'
 import AccountStart from './screens/AccountStart.jsx'
 import WhatsNew from './components/WhatsNew.jsx'
 import { RELEASES, unseenReleases, latestRelease } from './lib/releases.js'
@@ -220,9 +220,9 @@ export default function App() {
   const [skyFlow, setSkyFlow] = useState(null)
   // Tek bildirim dokunma dağıtıcısı (lib/notifyApply.js onNotifyTap). Uygulama kapalıyken yapılan dokunuş yalnız
   // İLK bağlanan dinleyiciye gider: her şeyden önce, bir kez bağlanır (restNotify'ın eski iki dinleyicisi kalktı).
-  // 7301 mola bitti → Ana sayfa · 7302 deneme → İlk rapor · hatırlatma → günlükte "dokunuldu" + türün ekranı ·
-  // çalışma oturumu → mola · modül hatırlatması → modül + bilim kartı. go her çizimde değişir; dağıtıcı son halini
-  // goRef'ten okur.
+  // 7301 mola bitti → Ana sayfa · 7302 deneme → İlk rapor · 7303 deneme bitişi → Apple'ın abonelik sayfası ·
+  // hatırlatma → günlükte "dokunuldu" + türün ekranı · çalışma oturumu → mola · modül hatırlatması → modül + bilim
+  // kartı. go her çizimde değişir; dağıtıcı son halini goRef'ten okur.
   const goRef = useRef(null)
   // Bilim kartı (components/ScienceCard.jsx): { evidence, route } | null; yalnız o ekran açıkken üstte durur
   const [sciCard, setSciCard] = useState(null)
@@ -240,6 +240,16 @@ export default function App() {
         setBudget(eyeStatus())
       },
       onTrial: () => setScreen('first-report'),
+      // 7303: adres RevenueCat managementURL (lib/subscription.js manageUrl), yoksa MANAGE_SUBS_URL (Profil "Aboneliği
+      // yönet" ile aynı kural). Açma yolu Profil bağlantısınınki (eklenti yok): uygulama dışı adrese gidişi Capacitor'ın
+      // WebView temsilcisi (WebViewDelegationHandler decidePolicyFor) iptal edip UIApplication.open'a verir; uygulama
+      // sayfası değişmez. VARSAYIM: üyelik 3 sn'de gelmezse yedek adres.
+      onTrialEnd: () => {
+        withTimeout(getMembership(), 3000, 'Üyelik okunamadı (zaman aşımı)')
+          .then((m) => m?.manageUrl || MANAGE_SUBS_URL, () => MANAGE_SUBS_URL)
+          .then((url) => window.location.assign(url))
+          .catch(() => {})
+      },
       onAlarm: () => wakeCheck.current?.(Date.now()),
       mark: (date, type) => saveLog(markTapped(loadLog(), date, type)),
       replan: () => setPlanTick((t) => t + 1),
@@ -626,9 +636,9 @@ export default function App() {
     if (plan.slots) saveSlots(plan.slots)
     applyPlan(plan)
   }, [planTick, data, health, healthOk, healthWait, notifyPerm])
-  // Deneme hatırlatması (7302): izin hangi yoldan verilirse verilsin (Ana sayfa kartı, Hatırlatmalar, mola kilidi,
-  // iOS Ayarlar) 'granted' görülünce, deneme 5. günden önceyse ve üyelik gerçekten denemedeyse kurulur; kurulduğu
-  // settings.trialReminder'a yazılır (şerit kararı). scheduleTrialReminder önce iptal edip kurar: tekrar çağrı zararsız.
+  // Deneme hatırlatması (7302 rapor ve 7303 deneme bitişi, birlikte): izin hangi yoldan verilirse verilsin (Ana sayfa
+  // kartı, Hatırlatmalar, mola kilidi, iOS Ayarlar) 'granted' görülünce, deneme 5. günden önceyse ve üyelik gerçekten
+  // denemedeyse kurulur; kurulduğu settings.trialReminder'a yazılır (şerit kararı). scheduleTrialReminder önce iptal edip kurar: tekrar çağrı zararsız.
   const trialOffer = data.settings.trialOffer
   const trialMs = trialOffer?.started ? Date.parse(trialOffer.date) : NaN
   useEffect(() => {
@@ -1305,8 +1315,8 @@ export default function App() {
           const autoCal = isIOSApp() && settings.calibration?.method === 'auto' ? settings.calibration : null
           // Kayıt (settings.moduleReminders ve gece sessizliği dâhil) silinir; deneme çizelgesi (TRIAL_KEYS) kalır.
           // Bildirimler: kendi aralığımız (74xx/75xx, 7700–7701, 78xx, 7860–7867) ve yalnız-iptal 7710–7719 iptal;
-          // native yürüyüş koruması boşalır (cancelOwn); gozolcum:notify-slots silinir. Deneme hatırlatması (7302)
-          // kalır. (lib/notifyReset.js resetAllData; sıra bugünküyle aynı: önce kayıt)
+          // native yürüyüş koruması boşalır (cancelOwn); gozolcum:notify-slots silinir. Deneme bildirimleri (7302,
+          // 7303) kalır. (lib/notifyReset.js resetAllData; sıra bugünküyle aynı: önce kayıt)
           // B2 hava: il ve ilçe adı, önbellek, günlük özet (SKY_KEYS) aynı çağrıda silinir (sky.test.js resetAll)
           resetAllData({ store, cancel: cancelOwn, autoCal, keys: SKY_KEYS })
           // Modüllerin cihazdaki rekorları ve seçenekleri de silinir (manifest storageKeys);

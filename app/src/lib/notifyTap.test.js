@@ -7,7 +7,7 @@ vi.mock('./native.js', () => native)
 import { tapAction, createTapHandler, TAP_ROUTE } from './notifyTap.js'
 import { createApplier } from './notifyApply.js'
 import { markTapped } from './notifyLog.js'
-import { REST_NOTIFY_ID, TRIAL_NOTIFY_ID } from './restNotify.js'
+import { REST_NOTIFY_ID, TRIAL_NOTIFY_ID, TRIAL_END_NOTIFY_ID } from './restNotify.js'
 import { resetAllData, TRIAL_KEYS, NOTIFY_RESET_KEYS } from './notifyReset.js'
 import { NOTIFY_SLOTS_KEY } from './notifyAll.js'
 import { createStore } from './storage.js'
@@ -18,6 +18,7 @@ const handler = (over = {}) => {
     go: vi.fn(),
     onRest: vi.fn(),
     onTrial: vi.fn(),
+    onTrialEnd: vi.fn(),
     onAlarm: vi.fn(),
     mark: vi.fn(),
     replan: vi.fn(),
@@ -42,6 +43,21 @@ describe('tapAction: dokunma sözlüğü', () => {
     const { deps, h } = handler()
     h({ id: TRIAL_NOTIFY_ID, extra: null })
     expect(deps.onTrial).toHaveBeenCalledTimes(1)
+  })
+
+  it("7303 deneme bitişi → Apple'ın abonelik sayfası (onTrialEnd); ekran değişmez", () => {
+    expect(TRIAL_END_NOTIFY_ID).toBe(7303)
+    expect(tapAction({ id: TRIAL_END_NOTIFY_ID })).toEqual({ kind: 'trialEnd' })
+    expect(tapAction({ id: TRIAL_END_NOTIFY_ID, actionId: 'dismiss' })).toBeNull()
+    const { deps, h } = handler()
+    h({ id: TRIAL_END_NOTIFY_ID, extra: null })
+    expect(deps.onTrialEnd).toHaveBeenCalledTimes(1)
+    expect(deps.onTrial).not.toHaveBeenCalled()
+    expect(deps.go).not.toHaveBeenCalled()
+    // onTrialEnd yoksa hiçbir ekrana gidilmez
+    const bare = handler({ onTrialEnd: undefined })
+    bare.h({ id: TRIAL_END_NOTIFY_ID, extra: null })
+    expect(bare.deps.go).not.toHaveBeenCalled()
   })
 
   it('7400–7499 deney (bugünkü): günlükte dokunuldu + türün ekranı + plan yeniden', () => {

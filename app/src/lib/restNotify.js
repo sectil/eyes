@@ -102,15 +102,33 @@ export async function cancelRestEnd() {
 }
 
 // Dokunma dinleyicisi burada YOK: uygulama kapalıyken yapılan dokunuş yalnız ilk bağlanan dinleyiciye gider.
-// Tek dinleyici lib/notifyApply.js onNotifyTap'te; App 7301'i (Ana sayfa) ve 7302'yi (İlk rapor) oradan dağıtır.
+// Tek dinleyici lib/notifyApply.js onNotifyTap'te; App 7301'i (Ana sayfa), 7302'yi (İlk rapor) ve 7303'ü (Apple'ın
+// abonelik sayfası) oradan dağıtır (sözlük lib/notifyTap.js).
 
-// Deneme hatırlatması (Build 23b): 7 günlük denemenin 5. günü. İzin İSTEMEZ (bildirim planı v2 §4): izin yoksa
-// kurulmaz; o kişiye 5. gün Ana sayfada uygulama içi şerit çıkar (App.jsx). İzin hangi yoldan verilirse verilsin
-// (Ana sayfa kartı, Hatırlatmalar, mola kilidi, iOS Ayarlar) App 'granted' görünce 5. günden önce yeniden çağırır.
-// Önce iptal edip kurar: tekrar çağrı zararsız. Zamanı geçmişse kurulmaz (geçmiş an hemen çalar).
-// "Tüm verileri sil" bunu iptal ETMEZ: Apple denemesi yerel veriyle birlikte bitmez, ücretlendirme öncesi uyarı kalır.
+// Deneme hatırlatması (Build 23b): 7 günlük denemenin 5. günü, iki ayrı bildirim (sahip onayı 2026-10-01):
+//   7302 ilk raporun hazır olduğu (dokununca İlk rapor) · 7303 denemenin bittiği ve nasıl iptal edileceği (dokununca
+//   Apple'ın abonelik yönetim sayfası). İzin İSTEMEZ (bildirim planı v2 §4): izin yoksa ikisi de kurulmaz; o kişiye
+// 5. gün Ana sayfada uygulama içi şerit çıkar (App.jsx). İzin hangi yoldan verilirse verilsin (Ana sayfa kartı,
+// Hatırlatmalar, mola kilidi, iOS Ayarlar) App 'granted' görünce 5. günden önce yeniden çağırır.
+// İkisini de önce iptal edip kurar: tekrar çağrı zararsız. Zamanı geçmişse kurulmaz (geçmiş an hemen çalar).
+// "Tüm verileri sil" ikisini de iptal ETMEZ: Apple denemesi yerel veriyle birlikte bitmez, ücretlendirme öncesi uyarı
+// kalır (ikisi de notifyApply cancelOwn aralıklarının dışında).
+// Bekleyen sınırı (iOS 64): JS planı ≤ 58 (notifyAll MAX_PENDING) + 2 yuva Swift'in 771x'ine = 60; 7301, 7302 ve 7303
+// bu 60'ın dışında kalan 4 yuvadan 3'ünü kullanır. Alarmın iOS 15–25 yedek bildirimleri (7600–7607) bu hesapta yok.
 export const TRIAL_NOTIFY_ID = 7302
+export const TRIAL_END_NOTIFY_ID = 7303
 export const TRIAL_REMIND_DAYS = 5
+// 7303'e dokununca: RevenueCat managementURL (lib/subscription.js manageUrl) yoksa Apple'ın abonelik sayfası
+export const MANAGE_SUBS_URL = 'https://apps.apple.com/account/subscriptions'
+// Sahibin onayladığı metinler (2026-10-01), harfi harfine
+export const TRIAL_REPORT_TEXT = Object.freeze({
+  title: 'İlk 5 günün raporu hazır',
+  body: 'Ne kadar düzenliydin, molalardan sonra nasıl hissettin, bir bak.',
+})
+export const TRIAL_END_TEXT = Object.freeze({
+  title: 'Deneme süren 2 gün sonra bitiyor',
+  body: "Bitince ücretli planın başlar. İptal etmek istersen dokun; Apple'ın abonelik sayfası açılır.",
+})
 
 // 5. günün anı, gündüze alınmış (DEVIR §8.2: gece 23.40'ta başlayan deneme 5 gün sonra 23.40'ta çalıyordu). Yerel
 // saatle 09.00'dan önceyse aynı gün 10.00, 21.00'den sonraysa aynı gün 20.00; gün değişmez, "2 gün sonra" doğru kalır.
@@ -124,6 +142,20 @@ export function trialRemindAt(startMs) {
   return at
 }
 
+// Deneme bitişi bildiriminin anı: rapor bildiriminden 60 dk sonra; bu yerel saatle 21.00'i geçerse 60 dk önce.
+// VARSAYIM (sahibin verdiği kural, cihazda denenmedi): trialRemindAt en geç 21.00 olduğundan "önce" kolu 19.00–20.00
+// arasına düşer; gün değişmez, "2 gün sonra" doğru kalır.
+export const TRIAL_END_GAP_MS = 60 * 60000
+export function trialEndAt(startMs) {
+  const at = trialRemindAt(startMs)
+  if (!Number.isFinite(at)) return NaN
+  const d = new Date(at)
+  const limit = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 21, 0, 0, 0).getTime()
+  return at + TRIAL_END_GAP_MS > limit ? at - TRIAL_END_GAP_MS : at + TRIAL_END_GAP_MS
+}
+
+// Döner: rapor bildirimi (7302) kurulduysa true (App şerit kararını buna göre yazar). Deneme bitişi (7303) aynı
+// çağrıda kurulur; anı geçmişse (VARSAYIM: yalnız rapor anından en çok 60 dk önce çağrılırsa) yalnız o atlanır.
 export async function scheduleTrialReminder(startMs = Date.now()) {
   const at = trialRemindAt(startMs)
   if (!Number.isFinite(at) || at <= Date.now()) return false
@@ -131,18 +163,21 @@ export async function scheduleTrialReminder(startMs = Date.now()) {
   if (!pl) return false
   if ((await notifyPermission()) !== 'granted') return false
   const { LN } = pl
+  const endAt = trialEndAt(startMs)
+  const one = (id, text, ms) => ({
+    id,
+    title: text.title,
+    body: text.body,
+    schedule: { at: new Date(ms) },
+    interruptionLevel: 'active',
+    foreground: false,
+  })
   try {
-    await LN.cancel({ notifications: [{ id: TRIAL_NOTIFY_ID }] })
+    await LN.cancel({ notifications: [{ id: TRIAL_NOTIFY_ID }, { id: TRIAL_END_NOTIFY_ID }] })
     await LN.schedule({
       notifications: [
-        {
-          id: TRIAL_NOTIFY_ID,
-          title: 'İlk 5 günün raporu hazır',
-          body: 'Neler değişti, bak. Deneme 2 gün sonra bitiyor; iptal etmezsen seçtiğin plan başlar (Ayarlar → Apple Kimliği → Abonelikler).',
-          schedule: { at: new Date(at) },
-          interruptionLevel: 'active',
-          foreground: false,
-        },
+        one(TRIAL_NOTIFY_ID, TRIAL_REPORT_TEXT, at),
+        ...(endAt > Date.now() ? [one(TRIAL_END_NOTIFY_ID, TRIAL_END_TEXT, endAt)] : []),
       ],
     })
     return true

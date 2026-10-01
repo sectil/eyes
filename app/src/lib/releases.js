@@ -6,6 +6,13 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    id: '2026-10-01-6',
+    title: '1 Ekim, altıncı güncelleme',
+    items: [
+      { kind: 'change', text: 'Denemenin 5. günü iki ayrı bildirim gelir: biri ilk raporun, öteki denemenin ne zaman bittiği ve nasıl iptal edileceği. İkincisine dokununca Apple\'ın abonelik sayfası açılır.' },
+    ],
+  },
+  {
     id: '2026-10-01-5',
     title: '1 Ekim, beşinci güncelleme',
     items: [

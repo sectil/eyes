@@ -123,6 +123,16 @@ describe('applyPlan', () => {
     expect(f.LN.cancelAll).not.toHaveBeenCalled()
   })
 
+  it('7303 (deneme bitişi, restNotify) kendi aralığında değil: plan uzlaştırması iptal etmez, plandaki 7303 kurulmaz', async () => {
+    const other = (id) => ({ id, title: 'x', body: 'y', schedule: { at: inMin(300) } })
+    const f = fakeLN({ pending: [other(7302), other(7303)] })
+    const r = await run(createApplier(async () => ({ LN: f.LN })), plan([nudge(7303, inMin(30)), nudge(7401, inMin(90))]))
+    expect(r).toMatchObject({ ok: true, scheduled: 1, cancelled: 0 })
+    expect(f.LN.cancel).not.toHaveBeenCalled()
+    expect(f.LN.schedule.mock.calls[0][0].notifications.map((n) => n.id)).toEqual([7401])
+    expect([...f.store.keys()].sort()).toEqual([7302, 7303, 7401])
+  })
+
   it('değişmeyen bildirim yeniden kurulmaz; zamanı ya da metni değişen iptal edilip kurulur', async () => {
     const f = fakeLN()
     const ap = createApplier(async () => ({ LN: f.LN }))
@@ -265,6 +275,16 @@ describe('cancelOwn', () => {
     expect(native.setWalkGuards).toHaveBeenLastCalledWith([])
   })
 
+  it('"Tüm verileri sil" (cancelOwn) deneme bildirimlerini iptal etmez: 7302 ve 7303 kalır', async () => {
+    const other = (id) => ({ id, title: 'x', body: 'y', schedule: { at: inMin(300) } })
+    const f = fakeLN({ pending: [other(7302), other(7303), other(7400)] })
+    expect(await createApplier(async () => ({ LN: f.LN })).cancelOwn()).toEqual({ ok: true })
+    const ids = f.LN.cancel.mock.calls[0][0].notifications.map((n) => n.id)
+    expect(ids).not.toContain(7302)
+    expect(ids).not.toContain(7303)
+    expect([...f.store.keys()].sort()).toEqual([7302, 7303])
+  })
+
   it('pencerede bekleyen planı düşürür (son çağrı kazanır)', async () => {
     const f = fakeLN()
     const ap = createApplier(async () => ({ LN: f.LN }))
@@ -301,6 +321,18 @@ describe('onNotifyTap', () => {
     expect(cb1).toHaveBeenCalledTimes(1)
     off2()
     expect(f.listenerCount()).toBe(1) // dinleyici kalır
+  })
+
+  it('7303 (deneme bitişi) dokunuşu aynı tek dinleyiciden { id, extra } olarak iletilir; kapatma iletilmez', async () => {
+    const f = fakeLN()
+    const ap = createApplier(async () => ({ LN: f.LN }))
+    const cb = vi.fn()
+    await ap.onNotifyTap(cb)
+    f.tap(tapOf(7303))
+    f.tap(tapOf(7303, undefined, 'dismiss'))
+    expect(cb).toHaveBeenCalledTimes(1)
+    expect(cb).toHaveBeenCalledWith({ id: 7303, extra: null })
+    expect(f.LN.addListener).toHaveBeenCalledTimes(1)
   })
 
   it('cb yokken gelen dokunuş bekletilir, cb bağlanınca iletilir', async () => {

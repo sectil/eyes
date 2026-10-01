@@ -4,6 +4,7 @@
 // | Kimlik    | extra.kind                | Açılan ekran                                             |
 // | 7301      | —                         | Ana sayfa (mola kilidi kalkar)                           |
 // | 7302      | —                         | İlk rapor                                                |
+// | 7303      | —                         | Apple'ın abonelik yönetim sayfası (uygulama dışı)        |
 // | 7400–7509 | bugünkü (nudge/focus)     | bugünkü (türün ekranı + markTapped / mola)               |
 // | 7600–7607 | alarm                     | uyanma işareti                                           |
 // | 7800–7859 | remind / remindMerged     | modül ya da Ana sayfa (birleşik), üstte bilim kartı      |
@@ -14,7 +15,7 @@
 //
 // actionId: yalnız dokunma (notifyApply 'tap'ı actionId'siz iletir) yönlendirir. Bildirim eylemleri (walkLater,
 // detectNo, sciOpen …) bu turda hiçbir yöne götürmez (VARSAYIM: eylemlerin ekranları B2/B3 ile gelir).
-import { REST_NOTIFY_ID, TRIAL_NOTIFY_ID } from './restNotify.js'
+import { REST_NOTIFY_ID, TRIAL_NOTIFY_ID, TRIAL_END_NOTIFY_ID } from './restNotify.js'
 import { NUDGE_TYPES } from './reminders.js'
 import { sourceOf } from './sources.js'
 import { WEATHER_IDS } from './weatherNotify.js'
@@ -30,7 +31,7 @@ const inRange = ([a, b], id) => Number.isInteger(id) && id >= a && id <= b
 const scienceOf = (evidence) => (typeof evidence === 'string' && sourceOf(evidence) ? evidence : null)
 
 // ev: { id, extra, actionId? } → eylem | null
-//   { kind: 'rest' } · { kind: 'trial', route } · { kind: 'focus', route } · { kind: 'alarm' }
+//   { kind: 'rest' } · { kind: 'trial', route } · { kind: 'trialEnd' } · { kind: 'focus', route } · { kind: 'alarm' }
 //   { kind: 'nudge', route, mark: { date, type } | null }
 //   { kind: 'remind', route, science: sources.js anahtarı | null } · { kind: 'weather', route, date }
 // routeOk(route): uygulamanın açabildiği ekran mı (App: registry.forRoute ya da 'home'); değilse Ana sayfa.
@@ -41,6 +42,7 @@ export function tapAction(ev, { routeOk = () => true } = {}) {
   const extra = ev.extra && typeof ev.extra === 'object' ? ev.extra : null
   if (id === REST_NOTIFY_ID) return { kind: 'rest' }
   if (id === TRIAL_NOTIFY_ID) return { kind: 'trial', route: 'first-report' }
+  if (id === TRIAL_END_NOTIFY_ID) return { kind: 'trialEnd' }
   if (extra?.kind === 'focus') return { kind: 'focus', route: 'mola' }
   if (extra?.kind === 'alarm') return { kind: 'alarm' }
   if (extra?.kind === 'nudge') {
@@ -60,7 +62,8 @@ export function tapAction(ev, { routeOk = () => true } = {}) {
 }
 
 // App'in dinleyicisi. Bağımlılıklar çağrı anında okunur (App'te ref'ler):
-//   go(route), onRest(), onTrial() (yoksa go), onAlarm(), mark(date, type), replan(), showScience({ evidence, route }), routeOk(route)
+//   go(route), onRest(), onTrial() (yoksa go), onTrialEnd() (abonelik sayfası; yoksa hiçbir şey), onAlarm(),
+//   mark(date, type), replan(), showScience({ evidence, route }), routeOk(route)
 export function createTapHandler(deps = {}) {
   return (ev) => {
     const a = tapAction(ev, { routeOk: deps.routeOk })
@@ -68,6 +71,7 @@ export function createTapHandler(deps = {}) {
     if (a.kind === 'rest') return deps.onRest?.()
     if (a.kind === 'alarm') return deps.onAlarm?.()
     if (a.kind === 'trial') return deps.onTrial ? deps.onTrial() : deps.go?.(a.route)
+    if (a.kind === 'trialEnd') return deps.onTrialEnd?.()
     if (a.kind === 'nudge') {
       if (a.mark) deps.mark?.(a.mark.date, a.mark.type)
       deps.replan?.()
