@@ -132,3 +132,10 @@ kalkar. Plan §3.B.1'in "ilçe listeden" kuralını değiştirir.
 ## Ana sayfa: iris ilk 7 gün ilk ekranda yok; hava Ana sayfada denensin (2026-10-01)
 Sahip: "uygula, ana sayfada da deneyelim." İris yeni kullanıcının ilk 7 gününde ilk ekrandan çıkar (yerine yol öne gelir;
 iris yeterince dolunca görünür). Hava satırı Ana sayfada TestFlight test derlemesinde denenir (App Store'da kapalı).
+
+## Cihazdan düzeltmeler (2026-10-01, Build 69)
+Sahip: "İzmir seçtim ama onaylama düğmesi yok. Konumu otomatik tespit etmesi lazım." Alarm 06.35: "ilk bir defa çaldı,
+mükerrer alarm çalmadı gerekmesine rağmen çalmadı." "Bildirimlerde çoğu gün değil alarm gibi günler çıkmalı, oradan
+seçmeli." "Bildirimlerde kullanıcı istediği saate kurar, bunu kısıtlayamazsın. Göz çalışmasındaki hatırlatmada da aynı
+şekilde." Bilgi amaçlı olabilir: "bu saatte 3 bildirimimiz mevcut, bildirimleri göster". Plan: YAPILACAKLAR D1–D6.
+

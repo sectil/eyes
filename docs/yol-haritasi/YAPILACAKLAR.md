@@ -80,6 +80,23 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
       sabah havası katman 1–2.
 - [ ] B3 yürüyüş eşliği. · [ ] B3+ Canlı Etkinlik.
 
+**Cihazdan gelen düzeltmeler (sahip, 2026-10-01, Build 69)** — hepsi `[ ]`; büyük olanlar önce plan + onay
+- [ ] D1 **Hava il adımında yer tutucu görünüyor:** "[[sky.place.ilSor]]" ve "[[sky.place.ilAra]]" (`SkyPlace.jsx`, il
+      adımının iki cümlesi onaysız kalmış). Taslak, onaya: "Hangi ildesin?" ve "İl ara" (onaylı "Hangi ilçedesin?" /
+      "İlçe ara" ile aynı kalıp).
+- [ ] D2 **İl seçince onay düğmesi yok:** İzmir seçildi; ilçe adımındaki "Yalnız İzmir" satırı bir onay gibi okunmuyor.
+      Açık bir onay düğmesi tasarlanır, anlaşılırlık kapısından geçer.
+- [ ] D3 **Konum kendiliğinden bulunmadı, liste açıldı** (karar: il ve ilçe konumdan kendiliğinden). Nedeni bilinmiyor
+      (izin mi, konum yanıtı mı, tablo eşleşmesi mi). Önce tanı: hava akışına neden kaydı; sonra düzeltme.
+- [ ] D4 **Alarm (06.35):** gece ekranı ve uyku müziği çalışıyor; alarm bir kez çaldı, beklenen ikinci çalış olmadı.
+      Sahibe soru: ertesi gün mü çalmadı, yoksa ertelemeden sonra mı? Tanı: alarm günlüğü ve AlarmKit kaydı.
+- [ ] D5 **Hatırlatmalarda "Çoğu gün" / "Gün aşırı" kalkar:** alarmdaki gibi gün seçimi (Pzt–Paz), günleri kişi seçer.
+      VARSAYIM: "Bazı günler bilerek göndermiyoruz" seyreltmesi de kalkar (kişinin seçtiği gün geçerli) — onaya.
+- [ ] D6 **Saat kısıtı kalkar:** hatırlatmalarda ve göz çalışması hatırlatmasında kişi her saati seçebilir ("Saat
+      09:00–21:00 arasında olmalı" kalkar). Yerine bilgi satırı, örnek: "Bu saatte 3 bildirimin var · Bildirimleri
+      göster". `lib/reminders.js`'e dokunmayı gerektirir (bildirim işinde o dosyaya dokunma yasağı var) — sahip izni gerek.
+      Gece sessizliği ile ilişkisi planda yazılır.
+
 **Sahipte bekleyenler:** (1) `sky-check.sh` çıktısı; (2) Build 67'de Y1'in 10 maddesi; (3) B2'nin 5 yeni cümlesi
 ("Hangi ilçedesin?", "İlçe ara", "Yalnız İzmir", "Konumuna en yakın ilçe merkezi bu.", "Konum") ve rızada "Nerede
 durur?"un başa alınması; (4) B1a arayüzü için 2 karar.
