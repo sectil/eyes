@@ -163,6 +163,22 @@ Maket: `maket/maket.html?s=<ekran>&theme=<light|dark>`. Görüntüler `maket/<tu
 Tasarım dili Nefona'nın kendisi: Onest ve Unbounded, teal–mavi vurgu, altın bulunan iz; iki tema. Kart gölgesi ve
 yuvarlaklık Ana sayfa ile aynı aile.
 
+## 5b. Kapı sonuçları ve bağlayıcı maddeler
+
+İki tur (`kapi/5sn-tur1.md`, `kapi/5sn-tur2.md`):
+
+| Ekran | Tur 1 | Tur 2 | Durum |
+|---|---|---|---|
+| intro | 4/5 | 5/5 | geçti (tur 2 hâli: `maket/tur2/intro-*`) |
+| found | 3/5 | 5/5 | geçti (tur 2 hâli) |
+| play | 3/5 | 2/5 | kaldı: durağan görüntü hareketi göstermiyor; renk karışıklığı |
+| result1 | 0/5 | 0/5 | kaldı: ilk günlerde ekran "bekle" diyor |
+| result2 | 3/5 | 3/5 | kaldı: üç sayının hangisinin ne olduğu yazmıyor |
+
+Bağlayıcı maddeler `kapi/5sn-tur2.md` sonundaki 7 madde. Yöntem değişikliği: `play` ve sonuç ekranlarının kapısı
+gerçek kodda, hareketli ekran kaydıyla yapılır (Fark Ettin mi? kararıyla aynı). result1 için tasarım kararı sahibe
+soruldu (sohbet, 2026-10-01).
+
 ## 6. Aşamalar (ana oturum uygular)
 
 | # | İş | Dosyalar |
