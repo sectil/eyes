@@ -145,6 +145,11 @@
 /* Kayıt açık ama telefonda alarm yok: uyarı rengi; dar ekranda satır kırılır (cümle sayı satırlarından uzun) */
 .hh-fact.al-fact.miss { white-space: normal; color: var(--warn); }
 .hh-fact.al-fact.miss .f5 { color: var(--warn); }
+/* "Yeniden kur" bölünmez; dar ekranda satır "·"den sonra kırılır, "Yeniden kur" bütün olarak alt satıra geçer */
+.hh-fact.al-fact.miss .al-nw { white-space: nowrap; }
+/* Dokunma alanı en az 44 pt: görünmez ::before dikeyde taşar; hap büyümez, komşular itilmez */
+.hh-fact.al-fact.miss { position: relative; }
+.hh-fact.al-fact.miss::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: max(100%, 44px); transform: translateY(-50%); }
 /* Alt sayfa */
 .al-sh-back { position: fixed; inset: 0; z-index: 1000; background: rgba(2, 5, 8, 0.6); display: flex; align-items: flex-end; justify-content: center; }
 .al-sh {

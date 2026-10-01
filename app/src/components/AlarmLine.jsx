@@ -120,7 +120,7 @@ export default function AlarmLine({ status, onStart, now = new Date() }) {
     return (
       <>
         <button type="button" className="hh-fact al-fact miss" onClick={() => onStart('alarm')}>
-          <AlarmClockOff size={14} aria-hidden="true" className="f5" /><span>Alarm telefonda kurulu değil · Yeniden kur</span>
+          <AlarmClockOff size={14} aria-hidden="true" className="f5" /><span>Alarm telefonda kurulu <span className="al-nw">değil ·</span> <span className="al-nw">Yeniden kur</span></span>
           <ChevronRight size={13} aria-hidden="true" className="al-fact-ar" />
         </button>
         {toast}
