@@ -46,3 +46,11 @@ RemindSheet.jsx); F4 de F3'ü düşüren "üç ayrı iş" kusurunu taşıyor. İ
 - mola: M2, M3, M4 · yürüyüş: W1, W3 · nefes: B1, B2, B3 · su: S1, S2, S3 · göz egzersizi: G1, G2, G3
 - çalışma oturumu: F1, F2 · mola bitti: R1 · alarm yedeği: R3
 - R2 (deneme bitiyor) tek metin; iki tur doldu, yöntem sahibe soruldu.
+
+## Sahip kararı ve R2 karşılaştırmalı tur (2026-10-01)
+- Sahip 18 metni onayladı ("Onaylıyorum"). R2 için "Yöntem değiştir".
+- Karşılaştırmalı tur (4 aday, her değerlendirici her adaya evet/hayır + en iyi): hiçbiri ≥ 4/5 değil.
+  - "2 gün sonra ücretli planın başlıyor / İlk 5 günün raporu hazır. …" 2/5; ötekiler 1/5.
+  - Ortak not: tek bildirim hem rapor hem ücret taşıyınca biri öbürünü gölgeliyor; "Sonra" ve "İstemezsen" rapor
+    cümlesinden sonra gelince neyi kastettiği karışıyor; "iptal et" emri sert.
+- Sahip kararı: "İki ayrı bildirim olsun". Adaylar kapıda (scratchpad ikili-aday).
