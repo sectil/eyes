@@ -77,6 +77,7 @@
 .al-once svg { flex: none; margin-top: 2px; color: var(--accent); }
 .al-once-tx { display: grid; gap: 4px; min-width: 0; }
 .al-once-tx p { margin: 0; }
+.al-once-nw { white-space: nowrap; }
 .al-once-tx .al-once-sub { font-size: 0.875rem; font-weight: 400; line-height: 1.45; color: var(--ink-2); }
 .al-q-label { margin: 4px 0 0; font-size: 0.9rem; font-weight: 600; color: var(--ink-2); }
 

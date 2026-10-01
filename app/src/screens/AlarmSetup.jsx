@@ -280,7 +280,8 @@ export default function AlarmSetup({ status: given = null, now: nowProp = null, 
         <div className="al-once">
           <AlarmClock size={18} aria-hidden="true" />
           <div className="al-once-tx">
-            <p>{`${onceWhen} ${withSuffix(time, 'loc')} bir kez çalar.`}</p>
+            {/* 320 pt'de cümle tek satıra sığmaz (243 pt gerekir, 222 var): "bir kez çalar." bölünmez, satır saatten sonra kırılır */}
+            <p>{`${onceWhen} ${withSuffix(time, 'loc')} `}<span className="al-once-nw">bir kez çalar.</span></p>
             {sleepNote && <p className="al-once-sub">{sleepNote}</p>}
           </div>
         </div>
