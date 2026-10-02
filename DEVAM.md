@@ -104,12 +104,11 @@ Ayrıntı `docs/yol-haritasi/YAPILACAKLAR.md`'de. Kısaca:
 
 1. **Yılan:** Sahibe "ya oturuma devam et de ya da Nef'ten sonra burada yaparım" diye sorulmuştu; cevap gelmedi.
    Bkz. §5.
-2. **Ders 3 sesleri yalnız yerel dalda.**
-   - Yerel dal `worktree-wf_62d8458a-757-2` (commit `d581fff`) hiç uzağa gönderilmedi.
-   - İçinde `ders3-15.mp3`, `ders3-5.mp3`, `ders3-kuyruk.mp3` var. Ücretli ElevenLabs üretimi olabilir.
-   - Ana dal Ders 3'ü bilerek sonraya bıraktı.
-   - Bu sesleri korumak için dalı uzağa göndermek sahibin iznine bağlı. Başka dala push izni yok; sor.
-   - Aynı yerde `scratchpad/yoga/render` (6 GB, 723 mp3) duruyor; silinmedi. Container kapanınca kaybolur.
+2. **Ders 3 sesleri korundu.** Sahip onayıyla ("eveet", 2026-10-02) yerel dal `worktree-wf_62d8458a-757-2`
+   (commit `d581fff`) uzağa `claude/yoga-ders3-sesler` olarak gönderildi; taslak PR
+   https://github.com/sectil/eyes/pull/15 (yalnız saklama, BİRLEŞTİRİLMEZ; öteki ders sesleri ana dalda daha yeni).
+   Ders 3 alınacağı zaman yalnız `app/public/yoga/ders3-*` dosyaları seçilerek alınır. `scratchpad/yoga/render`
+   (6 GB, 723 mp3) hâlâ yalnız geçici klasörde; silinmedi, container kapanınca kaybolur.
 3. **Nefona özeti denetiminde çıkan iki çelişki** (sahibe söylendi, karar gelmedi):
    - Site (`site/pages/index.html:133`) "Öneriyi bir dil modeli üretir" diyor. Rıza metni
      (`app/src/lib/consent.js:56-69`) OpenRouter'a gönderimi anlatıyor. Oysa Ana sayfa Nef kartı artık model
