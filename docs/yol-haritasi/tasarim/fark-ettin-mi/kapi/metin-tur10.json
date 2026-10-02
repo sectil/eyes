@@ -1,0 +1,62 @@
+{
+ "S0-1": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "S0-2": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "S0-4a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "S0-4b": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"4'ünde de\" kulağa robotik geliyor; \"hepsinde\" çok daha doğal.",
+   "\"4 sahnenin 4'ünde de\" sayıyı gereksizce yineliyor ve kulağa hantal geliyor; \"hepsinde\" daha doğal.",
+   "\"4'ünde de\" rakamla yazılınca okunuşu tökezliyor; \"hepsinde\" varken zorlama duruyor.",
+   "\"4 sahnenin 4'ünde de\" kulağa hantal geliyor; doğal söyleyiş \"hepsinde\".",
+   "\"4 sahnenin 4'ünde de\" kendini tekrarlıyor, kulağa hantal geliyor."
+  ]
+ },
+ "S0-3h": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "S0-0a": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "\"Bu tur\" eksik kalıyor, \"bu turda\" olmalı; \"gözünden kaçtı\" da hafif suçlayıcı.",
+   "\"Bu tur\" eksik kalmış, \"Bu turda\" olmalı.",
+   "\"Bu tur değişiklikler\" ilk okuyuşta \"bu tür değişiklikler\" diye algılanıyor, anlam bulanıklaşıyor.",
+   "\"Bu tur değişiklikler\" ilk okumada \"bu tür değişiklikler\" gibi algılanıyor, anlam bulanıklaşıyor."
+  ]
+ },
+ "S0-0b": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "Büyük başlık için uzun; ikinci yarıdaki söz de dayatmacı ve kesin olmayan bir vaat.",
+   "\"Sıradaki tur daha sade\" belirsiz ve mekanik bir vaat gibi duruyor, noktalı virgül de cümleyi ağırlaştırıyor.",
+   "Sonuca eklenen \"sıradaki tur daha sade\" sözü yersiz bir vaat gibi duruyor ve satırı uzatıyor.",
+   "Büyük başlıkta \"bulamadın\" sert duruyor, noktalı virgülle eklenen \"daha sade\" sözü de hem yamalı hem dayatan bir vaat gibi.",
+   "İlk yarı sert bir kusur bildirimi, \"sıradaki tur daha sade\" ise yarım kalmış bir söz gibi duruyor."
+  ]
+ },
+ "S0-0c": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "Sonucu açıkça söylemiyor; kaç sahnede bulunduğu anlaşılmıyor, belirsiz kalıyor.",
+   "\"Değişiklikler zor çıktı\" ne anlattığı belli olmayan, yarım kalmış bir ifade; \"Bugün\" de tura değil güne gönderme yapıyor."
+  ]
+ }
+}

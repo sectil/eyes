@@ -118,3 +118,13 @@ Kapı: kapi/metin-tur6 (9 satırdan 8'i 5/5; "0 geçti" 0/5), metin-tur7 (sıfı
   Gözlüklü kişiler · Işıklı vitrinler · Kırmızı şemsiyeler · Sarı yağmurluk giyenler · Karpuzlar · Şapkalı satıcılar ·
   Kırmızı kasalar · Sepetler · Çiçek dolu kovalar · Balonlar · Uçurtmalar · Koşanlar · Toplar · Bebek arabaları ·
   Güvercinler.
+
+## Ezberleme başlığı ve sonuç başlığı (2026-10-02) — durum K: kapıdan geçti, sahip onayı bekliyor
+Neden: ekran kapısı 3. turda (kare dizileri) beş yargıç da ilk 3 saniyede başlığın "Bir şey değişti. Nerede?" demesini
+yanlış buldu (henüz bir şey değişmedi); sonuçta büyük "14 nesne" kişiye sonuç söylemiyor. Kapı: kapi/metin-tur9, 10, 11.
+- B1 · Ne değişti?, ilk 3 saniye başlığı: "İyi bak, birazdan bir şey değişecek." (5/5; "İyi bak.", "Bu sahneye iyi bak.",
+  "Sahneyi aklında tut." de 5/5). Değişmiş kare gelince onaylı D2 "Bir şey değişti. Nerede?" + D3.
+- S0 · sonuç ekranının en büyük yazısı (altında onaylı R2 "{N} nesne" ve cümlesi kalır):
+  "{n} sahnenin 1'inde buldun" · "{n} sahnenin 2'sinde buldun" · "{n} sahnenin 3'ünde buldun" (5/5) ·
+  hepsinde: "{n} sahnenin hepsinde buldun" (5/5; n = 3 ya da 4) ·
+  hiçbirinde: "Bu turda değişiklikler gözünden kaçtı" (4/5; R2 satırı bu durumda yok).

@@ -1,0 +1,34 @@
+{
+ "S0-0d": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Kaç sahnede kaçırdığını söylemiyor, 'bazıları mı hepsi mi' belli değil."
+  ]
+ },
+ "S0-0e": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "\"4 sahnede de\" ile tekil \"değişiklik\" birlikte aksak duruyor; ayrıca dört kez kaçırdığını vurgulaması gereksiz yere ağır kalıyor."
+  ]
+ },
+ "S0-0f": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "Tekil \"değişikliği\" dört sahneyle uyuşmuyor, tek bir değişiklik kaçmış gibi okunuyor.",
+   "Tekil \"değişikliği\" dört sahneyle uyuşmuyor, \"yakalayamadın\" da başarısızlığı kişiye yüklüyor.",
+   "Tekil 'değişikliği' dört sahneyle uyuşmuyor, 'yakalayamadın' da hafif suçlayıcı.",
+   "Dört sahne varken tekil \"değişikliği\" bağlama oturmuyor; \"yakalayamadın\" de hafif suçlayıcı geliyor.",
+   "\"Yakalayamadın\" başarısızlık gibi batıyor, tekil \"değişikliği\" de 4 sahneyle uymuyor."
+  ]
+ },
+ "S0-0g": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Doğru ama yüzüne vurur gibi sert, yorgun birine tokat gibi geliyor."
+  ]
+ }
+}

@@ -1,0 +1,10 @@
+Bağlam: Nefona'daki "Fark Ettin mi?" alıştırması. "Ne değişti?" bölümünde önce sahnenin ilk hâli 3 saniye görünür; kişi bu sırada sahneye iyi bakıp aklında tutmalı, henüz dokunmaz. Sonra göz kırpar gibi kısa bir kararma olur, sahnenin değişmiş hâli gelir ve başlık "Bir şey değişti. Nerede?" olur, altında "Değişen yere dokun." yazar. Bu turda ilk 3 saniyenin başlığı aranıyor. Ayrıca sonuç ekranının en büyük yazısı aranıyor: kişi 4 sahnenin kaçında değişikliği bulduğunu ve bulduğu en kalabalık sahnenin nesne sayısını görür; altta zaten "Değişikliği 14 nesnenin olduğu kalabalık bir sahnede buldun." cümlesi var. Her satır: kimlik | nerede görünür | metin. Her satıra ayrı karar ver.
+
+B1a | Ne değişti?, ilk 3 saniye, büyük başlık | İyi bak.
+B1b | Ne değişti?, ilk 3 saniye, büyük başlık | Bu sahneye iyi bak.
+B1c | Ne değişti?, ilk 3 saniye, büyük başlık | Sahneyi aklında tut.
+B1d | Ne değişti?, ilk 3 saniye, büyük başlık | İyi bak, birazdan bir şey değişecek.
+S0a | sonuç ekranı, en büyük yazı | 4 sahnenin 3'ünde buldun
+S0b | sonuç ekranı, en büyük yazı (büyük sayı "3 / 4", altında küçük satır) | 3 / 4 · değişikliği bulduğun sahne
+S0c | sonuç ekranı, büyük sayı "14 nesne", hemen altında küçük etiket | En kalabalık sahnen
+S0d | sonuç ekranı, büyük sayı "14 nesne", hemen altında küçük etiket | Bulduğun en kalabalık sahne

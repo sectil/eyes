@@ -1,0 +1,10 @@
+Bağlam: Nefona'daki "Fark Ettin mi?" alıştırmasının sonuç ekranı. En büyük yazı, kişinin "Ne değişti?" bölümündeki 4 (ilk günlerde 3) sahnenin kaçında değişikliği bulduğunu söyler. Onaylanmış örnek kalıp: "4 sahnenin 3'ünde buldun". Bu turda sayının öteki durumları için hâller aranıyor. Altında küçük satırda bulunan en kalabalık sahnenin nesne sayısı yazar; hiç bulunamadıysa o satır olmaz. Her satır: kimlik | durum | metin. Her satıra ayrı karar ver.
+
+S0-1 | 4 sahnenin 1'inde buldu | 4 sahnenin 1'inde buldun
+S0-2 | 4 sahnenin 2'sinde buldu | 4 sahnenin 2'sinde buldun
+S0-4a | 4 sahnenin hepsinde buldu | 4 sahnenin hepsinde buldun
+S0-4b | 4 sahnenin hepsinde buldu | 4 sahnenin 4'ünde de buldun
+S0-3h | ilk günler, 3 sahnenin hepsinde buldu | 3 sahnenin hepsinde buldun
+S0-0a | hiçbirinde bulamadı | Bu tur değişiklikler gözünden kaçtı
+S0-0b | hiçbirinde bulamadı | 4 sahnede de bulamadın; sıradaki tur daha sade
+S0-0c | hiçbirinde bulamadı | Bugün değişiklikler zor çıktı
