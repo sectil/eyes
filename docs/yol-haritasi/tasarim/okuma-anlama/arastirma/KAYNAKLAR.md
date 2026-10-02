@@ -101,3 +101,24 @@ kus, surungen, deniz, memeli.
 
 Not: oa044 için Science'ta bir yorum yazısı (26113714) sol-sağ yanlılığı varsayımını eleştiriyor; metin yalnız
 özgün özeti izler. oa047'de "mantis karidesi", oa045'te "cam kurbağası" genel ad olarak kullanıldı.
+
+## B4. Metin kaynakları, takım 4 (`banka/taslak-04.json`)
+
+Her satır bu oturumda `get_article_metadata` ile çekildi (2026-10-02). Bulgu sütunu yalnız özette yazanı söyler. Konu
+alanı: `bitki`, `mikro`, `insan`, `bocek`.
+
+| Metin | Anahtar | Kaynak | PMID | DOI | Bulgu, özete göre |
+|---|---|---|---|---|---|
+| oa031 | bohm2016 | Böhm J ve ark. The Venus flytrap Dionaea muscipula counts prey-induced action potentials to induce sodium uptake. Curr Biol 2016;26(3):286-95 | 26804557 | 10.1016/j.cub.2015.11.057 | 2 aksiyon potansiyelinde kapan kapanır; 2. uyarıdan sonra dokunma hormonu yolu; sindirim genleri için 3'ten fazla uyarı, ifade uyarı sayısıyla orantılı; sodyum bezlerden alınır |
+| oa032 | gagliano2014 | Gagliano M ve ark. Experience teaches plants to learn faster and forget slower in environments where it matters. Oecologia 2014;175(1):63-72 | 24390479 | 10.1007/s00442-013-2873-7 | Küstüm otunda yaprak kapatmaya alışma; enerji bakımından masraflı ortamda daha belirgin ve kalıcı; daha elverişli ortamda 1 ay rahatsız edilmeden sonra da sürdü |
+| oa033 | runyon2006 | Runyon JB, Mescher MC, De Moraes CM. Volatile chemical cues guide host location and host selection by parasitic plants. Science 2006;313(5795):1964-7 | 17008532 | 10.1126/science.1131371 | Küsküt fideleri domatese ve yalnız domates uçucularına yönelir; kına çiçeği ve buğday da yönlendirir; domatesi buğdaya yeğler; birkaç tek madde çeker, buğdaydan biri iter |
+| oa034 | prindle2015 | Prindle A ve ark. Ion channels enable electrical communication in bacterial communities. Nature 2015;527(7576):59-63 | 26503040 | 10.1038/nature15709 | Biyofilmde iyon kanalları potasyum dalgalarıyla uzun menzilli elektrik sinyali taşır; metabolik tetik, komşu hücrelerde depolarizasyon; iç ve dış hücrelerin metabolik durumu eşgüdümlenir; kanal silinince tepki yok |
+| oa035 | mitchell2009 | Mitchell A ve ark. Adaptive prediction of environmental changes by microorganisms. Nature 2009;460(7252):220-4 | 19536156 | 10.1038/nature08112 | E. coli ve maya sıradaki uyarıya önceden hazırlanır; erken uyarıyla ön karşılaşma uyumu artırır; yalnız ilk uyarıyla evrilen soylarda kayıp; erken uyarı sonraki genleri de açar, geç uyarı yalnız kendi genlerini |
+| oa036 | nityananda2016 | Nityananda V ve ark. Insect stereopsis demonstrated using a 3D insect cinema. Sci Rep 2016;6:18718 | 26740144 | 10.1038/srep18718 | Minik 3B gözlükler; dairesel polarizasyon görüntü karışması yüzünden başarısız; renk süzgeçli anaglif peygamberdevesine derinlik yanılsaması verdi; stereo görme kesin gösterildi |
+| oa037 | sarfati2021 | Sarfati R, Hayes JC, Peleg O. Self-organization in natural swarms of [tür adı] synchronous fireflies. Sci Adv 2021;7(28):eabg9259 | 34233879 | 10.1126/sciadv.abg9259 | Doğal sürülerde binlerce ateşböceği; düşük yoğunlukta bağımsız, yüksek yoğunlukta periyodik patlamalarda eşzamanlı; 3B yeniden kurgu: patlamalar bayrak yarışı gibi yayılır; arazi ve bitki örtüsüyle tanımlı görsel ağ öneriliyor |
+| oa038 | zentner2010 | Zentner M, Eerola T. Rhythmic engagement with music in infancy. Proc Natl Acad Sci U S A 2010;107(13):5768-73 | 20231438 | 10.1073/pnas.1000121107 | 5–24 aylık 120 bebek; müziğe ve ritimli seslere konuşmadan çok ritimli hareket; tempoya bir ölçüde uyum; uyum olumlu duygu gösterimiyle ilişkili; yatkınlık düşündürüyor |
+| oa039 | wardle2022 | Wardle SG ve ark. Illusory faces are more likely to be perceived as male than female. Proc Natl Acad Sci U S A 2022;119(5):e2117413119 | 35074880 | 10.1073/pnas.2117413119 | 3815 yetişkin; nesnelerdeki yanılsama yüzlere duygu, yaş ve cinsiyet yakıştırılır; güçlü erkek yanlılığı; anlamsal ya da görsel özelliklerle açıklanmaz; geniş ayarlı yüz değerlendirme sistemi |
+| oa040 | dudley2007 | Dudley SA, File AL. Kin recognition in an annual plant. Biol Lett 2007;3(4):435-8 | 17567552 | 10.1098/rsbl.2007.0232 | Tek yıllık Cakile edentula: yabancılar aynı saksıda köke daha çok pay ayırır, kardeşler ayırmaz; ipucu kök etkileşimi olabilir; akraba seçilimiyle uyumlu |
+
+Not: oa037'nin PubMed başlığında tür adı düşmüş ("swarms ofsynchronous"); tür adı uydurulmadı, köşeli
+ayraçla boş bırakıldı. Metinde tür adı geçmez. oa038 ve oa039'da `dergi` önceki takımlardaki gibi "PNAS" yazıldı.

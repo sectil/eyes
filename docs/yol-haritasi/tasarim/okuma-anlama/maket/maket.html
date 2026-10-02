@@ -109,7 +109,9 @@ h2.q { font-family: var(--font-display); font-weight: 600; font-size: 25px; line
 .anl span.ok { color: var(--ok); background: var(--ok-bg); }
 .anl span.lo { color: var(--lens-strong); background: var(--lens-soft); }
 .anl { flex-direction: column; align-items: center; gap: 6px; }
-.anl span.meas { padding: 0; font-size: 14px; font-weight: 500; color: var(--ink-2); }
+.anl span.spd { padding: 0; display: inline-flex; align-items: baseline; gap: 8px; }
+.anl .spd .num { font-family: var(--font-display); font-weight: 650; font-size: 34px; letter-spacing: -.02em; color: var(--ink-3); text-decoration: line-through; text-decoration-color: var(--wrong); text-decoration-thickness: 3px; }
+.anl .spd .un { padding: 0; font-size: 14px; font-weight: 600; color: var(--ink-3); }
 .verd { margin: 16px 20px 0; display: flex; gap: 12px; align-items: flex-start; }
 .verd .dot { flex: none; width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 50% 50%, var(--pupil) 0 26%, transparent 27%), conic-gradient(from 20deg, var(--iris-1), var(--iris-2), var(--iris-1)); margin-top: 1px; }
 .verd p { margin: 0; font-size: 17px; line-height: 1.4; font-weight: 500; text-wrap: pretty; }
@@ -290,10 +292,10 @@ function sonuc(ok) {
   return `<div class="screen">
     <div class="bar"><span class="ib">${X}</span><span class="mid">Yıldızlarla yol bulan böcek</span><span style="width:40px"></span></div>
     <div class="ring">${ring(ok ? 4 : 2)}<div class="c">${ok ? '<span class="n">212</span><span class="u">kelime / dakika</span>' : '<span class="n">2/4</span><span class="u">doğru</span>'}</div></div>
-    <div class="anl">${ok ? '<span class="ok">4 sorunun 4’ü doğru</span>' : '<span class="lo">Hız sayılmadı</span><span class="meas">Ölçülen hız 348 kelime/dk</span>'}</div>
+    <div class="anl">${ok ? '<span class="ok">4 sorunun 4’ü doğru</span>' : '<span class="spd"><b class="num">348</b><span class="un">kelime / dakika</span></span><span class="lo">Hız sayılmadı</span>'}</div>
     <div class="verd"><span class="dot"></span><p><span class="nm">Nef</span>${ok ? 'Hızın sayıldı: metni anladın.' : 'Hız, en az 3 doğruyla sayılır. Bir dahakine biraz daha yavaş oku.'}</p></div>
     <div class="rows">
-      <div class="row"><span class="k">Başlangıç</span><span class="v">${ok ? '5 okumayla belirlenir · 3/5' : '5 okumayla belirlenir · 2/5'}</span><span class="pips">${[0, 1, 2, 3, 4].map((i) => `<i class="${i < (ok ? 3 : 2) ? 'on' : ''}"></i>`).join('')}</span></div>
+      <div class="row"><span class="k">Başlangıç</span><span class="v">${ok ? '5 okumayla belirlenir · 3/5' : 'Bu okuma eklenmedi · 2/5'}</span><span class="pips">${[0, 1, 2, 3, 4].map((i) => `<i class="${i < (ok ? 3 : 2) ? 'on' : ''}"></i>`).join('')}</span></div>
       <div class="row"><span class="k">Bu metin bir çalışmadan</span><span class="v">Dacke ve ark., 2013</span><span class="go">${GO}</span></div>
       <div class="row"><span class="k">Bana hatırlat</span><span class="v">Her gün bir okuma</span><span class="tg"></span></div>
     </div>
