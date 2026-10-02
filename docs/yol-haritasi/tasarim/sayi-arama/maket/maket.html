@@ -68,7 +68,7 @@ body { background: var(--bg); background-color: #eef3f6; color: var(--ink); font
 .cap.burst::before { content: ''; position: absolute; inset: -11px; border-radius: 999px; border: 1.5px solid var(--gold-2); opacity: 0.22; }
 .c.ing { color: var(--gold-ink); font-weight: 700; }
 .c.ins { color: var(--ink); font-weight: 700; }
-.fing { z-index: 3; position: relative; }
+.fing { z-index: 1; position: relative; }
 .finger { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.1) 60%, transparent 70%); box-shadow: 0 0 0 2px var(--swipe-line); transform: translate(-50%, -50%); }
 :root[data-theme="dark"] .finger { background: radial-gradient(circle, rgba(25, 194, 209, 0.35), rgba(25, 194, 209, 0.08) 60%, transparent 70%); }
 .tst { z-index: 4; position: relative; display: flex; justify-content: center; align-items: center; }
@@ -169,6 +169,8 @@ h1 { font-family: 'Unbounded'; font-weight: 700; font-size: 34px; letter-spacing
 }
 
 /* son */
+.c.ins { z-index: 2; }
+@media (max-width: 340px) { .mgrid { grid-template-rows: repeat(10, 12px); } .mgrid .c { font-size: 9.5px; } .mini-b { padding: 8px 12px 6px; } }
 .mini-b { background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); padding: 10px 14px 8px; }
 .mh { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 .mgrid { display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(10, 14px); }
@@ -392,14 +394,8 @@ const S = {
   result1() {
     return `${topBar('Rakam Avı')}
     <div class="res">
-      ${bigCard('5,7', '0,6 sn daha hızlı', ['3,8', '7,9', '5,3', null, '6,1'])}
-      <div class="row2"><span class="mini">2 yanlış kaydırma</span><span class="mini">Başlangıç · 2/8 gün <span class="steps sm"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span></span></div>
-      <div class="prog">
-        <div class="ph"><span class="ptl">Önceki turuna göre</span><span class="mini">kısa daha iyi</span></div>
-        <div class="cmpbar"><span>Önceki tur</span><i style="width:100%" class="prev"></i><b>6,3 sn</b></div>
-        <div class="cmpbar"><span>Bugün</span><i style="width:90.5%" class="now"></i><b>5,7 sn</b></div>
-        ${nefLine('Bugünün en hızlı dizisi <b>3,8 saniyede</b> geldi.')}
-      </div>
+      ${bigCard('5,7', '2 yanlış kaydırma', ['3,8', '7,9', '5,3', null, '6,1'], 'plain')}
+      <div class="prog">${nefLine('Bugünün en hızlı dizisi <b>3,8 saniyede</b> geldi.').replace('nefrow', 'nefrow first')}</div>
       ${narrow ? '' : miniBoard([5, 4])}
       <div class="rf"><div class="ic">${bell}</div><div><strong>Bana hatırlat</strong><span>Her gün, senin için uygun saatte. Saati Nef de seçebilir.</span></div><div class="tg"></div></div>
       <div class="spacer"></div>

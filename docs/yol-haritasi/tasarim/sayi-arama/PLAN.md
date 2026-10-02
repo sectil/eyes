@@ -94,14 +94,12 @@ gerekmez.
 - `medianMs`: `findMs` ortancası; 2'den az dizi bulunduysa `null` (tek değer ölçü sayılmaz).
 - `wrong`: yanlış kaydırma sayısı (4 haneyi kaplayıp aranan dizi olmayan iz). Ekranda "yanlış kaydırma".
 
-### 4.1b Önceki tur karşılaştırması (sahip kararı 2026-10-02: "önerini uygulayalım")
-- Yalnız sonuç ekranında ve yalnız ölçü kuralı v2 hükmü `start` iken (ilk 8 ölçüm günü). Gelişim ekranları ve dört
-  hüküm sözcüğü değişmez.
-- Bugünkü `medianMs` ile `medianMs`'i olan bir önceki tur karşılaştırılır. Fark mutlak değerce 0,1 sn'den küçükse
-  "önceki turla aynı"; değilse "{d} sn daha hızlı" ya da "{d} sn daha yavaş". İki yatay çubuk: önceki tur, bugün.
-- İlk tur: karşılaştırma yok; Nef N2 cümlesi.
-- Hüküm `start` değilse karşılaştırma kalkar; yerine hüküm sözcüğü ve 14 günlük grafik gelir.
-- Başlangıç ilerlemesi tek küçük satır: "Başlangıç · {d}/8 gün". Bekleme anlatılmaz.
+### 4.1b İlk 8 günün sonucu (sahip kararı 2026-10-02, ikinci: "onay")
+- İlk karar "önceki turla kıyas" tur 3'te 0/5 kaldı: kalabalık, tek tur kıyası gürültüden ayrılamıyor, bulunamayan dizi
+  dışarıda kalınca kişi hızlanmış görünüyor (`kapi/5sn-tur3.md`). Sahip sade öneriyi onayladı.
+- İlk 8 ölçüm gününde sonuç ekranı kıyas yapmaz ve başlangıçtan söz etmez: büyük sayı, beş dizi, yanlış kaydırma,
+  Nef satırı, günün küçük ızgarası (320'de gizli), Bana hatırlat, Tamam.
+- 8. günden sonra hüküm sözcüğü ve 14 günlük grafik gelir (result2, tur 3'te 5/5).
 
 ### 4.2 Gelişim (`progress`)
 ```
@@ -167,7 +165,7 @@ Maket: `maket/maket.html?s=<ekran>&theme=<light|dark>`. Görüntüler `maket/<tu
 | `intro` | Ad, aranan dizi örneği, kaydırma anlatımı (çizimle), "2 dk · 5 dizi", Başla, iddia satırı |
 | `play` | Aranan dizi, 5 halka (2 dolu), ızgarada 2 altın iz, parmak altında yarım teal iz |
 | `found` | Yeni bulunan dizi parlıyor, halka doluyor, "Buldun · 3/5" |
-| `result1` | İlk 8 gün: "Dizi başına süren" büyük sayı, "0,6 sn daha hızlı" çipi, beş dizi kapsülü ve süreleri, "2 yanlış kaydırma · Başlangıç 2/8 gün" satırı, önceki tur ve bugün çubukları, Nef satırı, Bana hatırlat, Tamam |
+| `result1` | İlk 8 gün: "Dizi başına süren" büyük sayı, yanlış kaydırma çipi, beş dizi kapsülü ve süreleri, Nef satırı, günün küçük ızgarası, Bana hatırlat, Tamam |
 | `result2` | 8. günden sonra: büyük sayı, beş kapsül, "başlangıcından iyi", 14 günlük grafik (kesik çizgi "başlangıç 5,6", son nokta "bugün 4,1"), Nef satırı, Tamam |
 
 Son hâl: `maket/maket.html`, görüntüler `maket/son/`. Kapıdan geçenler intro ve found (tur 2 hâli, son hâlde
@@ -220,4 +218,4 @@ gerçek kodda, hareketli ekran kaydıyla yapılır (Fark Ettin mi? kararıyla ay
 3. Geri sayım yok.
 4. Kaydırarak işaretleme.
 5. Seviye yok; zorluk sabit, ölçü temiz.
-6. İlk 8 günde sonuç ekranı yalnız önceki turla karşılaştırır (§4.1b; sahip 2026-10-02).
+6. İlk 8 günde sonuç ekranı kıyas yapmaz (§4.1b; sahip 2026-10-02, önceki tur kıyası tur 3'te kaldı).

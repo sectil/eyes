@@ -15,7 +15,7 @@ Her yeni modül gibi isteğe bağlı hatırlatma kurulabilir. 5 saniye kuralı v
 
 Tasarım klasörü: `docs/yol-haritasi/tasarim/sayi-arama/`
 1. `PLAN.md` tamamı. Özellikle §1 tur yapısı, §2 ızgara üretimi, §3 ilerleyiş, §4 ölçüm, Gelişim, Nef, hatırlatma,
-   **§4.1b önceki tur karşılaştırması**, §5 ekranlar, **§5b kapı sonuçları**, §6 aşamalar, §7 riskler, §8 kararlar.
+   **§4.1b ilk 8 günün sonucu (kıyas yok)**, §5 ekranlar, **§5b kapı sonuçları**, §6 aşamalar, §7 riskler, §8 kararlar.
 2. `METINLER.md`: görünür her cümle buradan. Yalnız **S** (sahip onaylı) olanlar harfi harfine koda girer.
 3. `arastirma/KAYNAKLAR.md`: 14 kaynak, PMID ve DOI PubMed aracıyla doğrulandı.
 4. `kapi/5sn-tur1.md`, `kapi/5sn-tur2.md`: iki turun bulguları ve **7 bağlayıcı madde**.
@@ -52,7 +52,6 @@ Uygulama tarafında oku:
 - `resolveSwipe(grid, row, c0, c1)`: 4 haneyi tam kaplayan yatay iz → `'hit' | 'wrong'`; 1–3 hane → `'short'`
   (sayılmaz). Zaten bulunmuş diziye ikinci iz `'short'` gibi sayılmaz.
 - `makeRecord(...)` PLAN §4.1 biçiminde; `medianMs` 2'den az dizi bulunduysa `null`.
-- `compareToPrevious(sessions, today)` PLAN §4.1b: 0,1 sn eşiği, "aynı / hızlı / yavaş".
 - Son 14 turda aynı aranan dizi tekrar etmez.
 - Bitti: testler geçer; 1000 tohumda her ızgara kurallara uyar.
 

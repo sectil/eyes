@@ -49,9 +49,9 @@ Yasaklar: sağlık ve "zekâ" iddiası yok; "beyin" ve "tanıma" yok; değişim 
 | S2 | {x} sn | T |
 | S3 | Kapsül altında: {t} sn / bulunmadı | T |
 | S4 | {w} yanlış kaydırma | T |
-| S5 | Başlangıç · {d}/8 gün | T |
-| S6 | {d} sn daha hızlı / {d} sn daha yavaş / önceki turla aynı | T (sahip kararı 2026-10-02) |
-| S7 | Önceki turuna göre · kısa daha iyi · Önceki tur · Bugün | T |
+| S5 | ~~Başlangıç · {d}/8 gün~~ kaldırıldı (tur 3) | — |
+| S6 | ~~önceki tur kıyası~~ kaldırıldı (tur 3 0/5; sahip onayı 2026-10-02) | — |
+| S7 | Bugünkü ızgaran · {k} / 5 bulundu | T |
 | S8 | başlangıcından iyi / değişim yok / henüz belli değil | onaylı Gelişim sözcükleri; result2 tur 3 5/5 |
 | S9b | result2'deki S2, S3, S4, S9, S10 | K (tur 3, 5/5); "Dizi başına süren" için iki kişi "yarım" dedi, B verilmedi |
 | S9 | Grafik: başlangıç · bugün · Son 14 gün · düşük daha iyi | T |
