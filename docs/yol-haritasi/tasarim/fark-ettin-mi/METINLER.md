@@ -106,3 +106,15 @@ Limon · Armut · Portakal · İncir · Kavun · Erik · Kiraz · Nar; ek renk a
 adları kedi, köpek, bisiklet, scooter, saksı, çöp kutusu, ayaklı tabela, top, valiz, bebek arabası, kasa, kova, sandalye,
 güvercin, sepet, koni, karpuz, bank, yangın musluğu, tente, kapı, şapka, çanta, tişört, elbise, atkı, şemsiye, balon,
 telefon, gözlük.
+
+## R5 sayım satırı (2026-10-02) — durum K: kapıdan geçti, sahip onayı bekliyor
+Kapı: kapi/metin-tur6 (9 satırdan 8'i 5/5; "0 geçti" 0/5), metin-tur7 (sıfır durumu; "sen 0 dedin" 5/5).
+- Hareket eden hedef (mavi araba, sarı taksi, kırmızı araba, bisiklet, bebek arabası): "{Hedefler}: {n} geçti, sen de {n}
+  dedin" · "{Hedefler}: {n} geçti, sen {m} dedin" (ör. "Mavi arabalar: 3 geçti, sen 0 dedin").
+- Öteki hedefler: "{Hedefler}: {n} vardı, sen de {n} dedin" · "{Hedefler}: {n} vardı, sen {m} dedin" (ör. "Çiçek dolu
+  kovalar: 3 vardı, sen 4 dedin").
+- Hedef sayısı sahnede her zaman 2–6 (street.js nTarget); "hiç geçmedi/hiç yoktu" kalıbı gerekmez.
+- {Hedefler}: Mavi arabalar · Sarı taksiler · Kediler · Bisikletler · Kırmızı arabalar · Köpekler · Şapkalı kişiler ·
+  Gözlüklü kişiler · Işıklı vitrinler · Kırmızı şemsiyeler · Sarı yağmurluk giyenler · Karpuzlar · Şapkalı satıcılar ·
+  Kırmızı kasalar · Sepetler · Çiçek dolu kovalar · Balonlar · Uçurtmalar · Koşanlar · Toplar · Bebek arabaları ·
+  Güvercinler.

@@ -1,0 +1,53 @@
+{
+ "R5a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "R5b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "R5c": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "R5d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "R5e": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "R5f": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "R5g": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "R5h": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "R5i": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"0 geçti\" robot gibi duruyor, \"hiç geçmedi\" denmeli.",
+   "\"0 geçti\" makine gibi duruyor, doğrusu \"hiç geçmedi\" olurdu.",
+   "\"0 geçti\" kulağa makine gibi geliyor; doğal hali \"hiç geçmedi\" olur.",
+   "\"0 geçti\" kulağa robot gibi geliyor; \"hiç geçmedi, sen 1 dedin\" daha doğal olur.",
+   "\"0 geçti\" kulağa robot gibi geliyor; \"hiç geçmedi\" daha doğal olur."
+  ]
+ }
+}

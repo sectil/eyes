@@ -1,0 +1,9 @@
+Bağlam: Nefona'daki "Fark Ettin mi?" alıştırmasının sonuç ekranı. Kişi sahneden geçerken kendisine verilen şeyi saydı, sonra "Kaç … geçti?" ya da "Kaç … gördün?" sorusuna cevap verdi. Sonuç ekranında görev satırının altındaki küçük satır gerçek sayıyı ve kişinin cevabını gösterir. Onaylı örnekler: "Mavi arabalar: 4 geçti, sen de 4 dedin", "Karpuzlar: 5 vardı, sen 6 dedin". Bu turda yalnız sayılacak şeyin hiç olmadığı durum var. Her satır: kimlik | durum | metin. Her satıra ayrı karar ver.
+
+R5i | hareketli hedef hiç geçmedi, kişi 1 dedi | Bebek arabaları: hiç geçmedi, sen 1 dedin
+R5j | hareketli hedef hiç geçmedi, kişi de 0 dedi | Bebek arabaları: hiç geçmedi, sen de hiç demedin
+R5k | hareketli hedef hiç geçmedi, kişi de 0 dedi | Bebek arabaları: hiç geçmedi, sen de 0 dedin
+R5l | duran hedef hiç yoktu, kişi 2 dedi | Karpuzlar: hiç yoktu, sen 2 dedin
+R5m | duran hedef hiç yoktu, kişi de 0 dedi | Karpuzlar: hiç yoktu, sen de 0 dedin
+R5n | hareketli hedef 3 geçti, kişi 0 dedi | Mavi arabalar: 3 geçti, sen hiç geçmedi dedin
+R5o | hareketli hedef 3 geçti, kişi 0 dedi | Mavi arabalar: 3 geçti, sen 0 dedin
