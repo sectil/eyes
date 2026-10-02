@@ -1,0 +1,23 @@
+Bağlam: Nefona'daki "Fark Ettin mi?" alıştırması. Kişi canlı çizilmiş bir caddeden (ya da pazar yerinden, parktan) geçer; geçerken kendisine verilen şeyi sayar. En sonda "Gözünden kaçan" sorularını cevaplar: önce "… vardı. Onu fark ettin mi?" (Gördüm · Görmedim), sonra ayrıntı sorusu. Beş sahnenin adları: Cadde, Pazar yeri, Park, (akşam sahnesi), Yağmurlu cadde. Akşam sahnesi aynı caddenin akşam ışığındaki hâlidir. Her satır: kimlik | nerede görünür | metin (gerçek veriyle doldurulmuş örnek). a/b/c sürümleri seçenektir; her birine ayrı karar ver.
+
+S4a | sahne adı, görev ekranı üst satırı | Fark Ettin mi? · 2 dk · Akşamüstü cadde
+S4a2 | Ana sayfa yol durağı, sahnenin ilk günü | Yeni sahne: Akşamüstü cadde · 2 dk
+S4b | sahne adı, görev ekranı üst satırı | Fark Ettin mi? · 2 dk · Akşam vakti cadde
+S4b2 | Ana sayfa yol durağı, sahnenin ilk günü | Yeni sahne: Akşam vakti cadde · 2 dk
+S4c | sahne adı, görev ekranı üst satırı | Fark Ettin mi? · 2 dk · Akşam caddede
+S4c2 | Ana sayfa yol durağı, sahnenin ilk günü | Yeni sahne: Akşam caddede · 2 dk
+
+H12a | görev (pazar; gri kovalarda satılık çiçekler) | Çiçek dolu kovaları say
+H12aq | yürüyüş bitince soru | Kaç çiçek dolu kova gördün?
+H12b | görev (pazar; gri kovalarda satılık çiçekler) | Çiçekli kovaları say
+H12bq | yürüyüş bitince soru | Kaç çiçekli kova gördün?
+
+K7 | ilk soru (bağlam) | Caddede sakallı bir adam vardı.
+K7dc | ayrıntı sorusu | Tişörtü ne renkti?
+K12 | ilk soru (bağlam) | Caddede bastonlu yaşlı bir adam vardı.
+K12dc | ayrıntı sorusu | Gömleği ne renkti?
+K12dd | ayrıntı sorusu | Tişörtü ne renkti?
+
+K11 | ilk soru (bağlam) | Caddede scooter süren biri vardı.
+K11da | ayrıntı sorusu | Scooter ne renkti?
+K11db | ayrıntı sorusu | Bindiği scooter ne renkti?

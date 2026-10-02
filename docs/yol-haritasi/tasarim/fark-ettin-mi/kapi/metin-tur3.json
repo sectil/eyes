@@ -1,0 +1,536 @@
+{
+ "S1": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "S2": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "S3": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "S4": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "\"Akşam caddesi\" Akşam adında bir cadde gibi okunuyor; \"Akşam vakti cadde\" daha açık olur.",
+   "\"Akşam caddesi\" bir sokağın adı gibi okunuyor, sahnenin akşam olduğu anlaşılmıyor.",
+   "\"Akşam caddesi\" bir sokak adı gibi okunuyor; \"Akşamüstü cadde\" ya da \"Cadde, akşam\" daha doğal olur."
+  ]
+ },
+ "S5": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H1": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H1q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H1g": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H2": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H2q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H3a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H3aq": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H3b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H3bq": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H4": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H4q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H5": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H5q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H6": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H6q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H7": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H7q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H8": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H8q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H9": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H9q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H10": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H10q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H11": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H11q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H12": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "\"Çiçek kovası\" pek bilinen bir şey değil, neyin sayılacağı belli olmuyor.",
+   "\"Çiçek kovası\" alışılmadık bir ifade; neyin sayılacağı ilk bakışta anlaşılmıyor."
+  ]
+ },
+ "H12q": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "\"Çiçek kovası\" belirsiz, insan neyi saydığını bilemiyor.",
+   "\"Çiçek kovası\" alışılmadık bir ifade, soru da aynı belirsizliği taşıyor."
+  ]
+ },
+ "H13": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H13q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H14": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H14q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H15": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H15q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H16": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H16q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H17": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H17q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H18": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H18q": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Y1": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Y2": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Y3": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K1": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K1d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K2": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K2d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K3": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K3d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K4": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K4d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K5": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K5d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K6": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K6d": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Seçenekler meyve adı; 'Tabelasında ne yazıyordu?' yerine 'Ne satıyordu?' daha doğal olurdu."
+  ]
+ },
+ "K7": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K7da": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "\"Üstü\" konuşma dilinden geliyor ve belirsiz; ceketi mi gömleği mi, anlaşılmıyor.",
+   "\"Üstü\" kıyafet mi, başka bir şey mi, ilk okuyuşta tam anlaşılmıyor.",
+   "'Üstü' belirsiz kalıyor, ceket mi tişört mü anlaşılmıyor."
+  ]
+ },
+ "K7db": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K8": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K8d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K9": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K9d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K10": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K10d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K11": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "\"Scooter\" yabancı bir kelime, \"Scooter'ı\" da okurken insanı tökezletiyor."
+  ]
+ },
+ "K11d": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "\"Scooter'ı ne renkti?\" yabancı kelimeye Türkçe ek getirildiği için yazılışı ve okunuşu göze batıyor.",
+   "Yabancı kelimeye kesmeyle ek getirilmiş, \"Scooter'ı\" göze ve kulağa takılıyor."
+  ]
+ },
+ "K12": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K12da": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "\"Üstü\" belirsiz ve konuşma diline kaçıyor.",
+   "\"Üstü\" kıyafet mi, başka bir şey mi, ilk okuyuşta tam anlaşılmıyor.",
+   "'Üstü' belirsiz kalıyor, hangi giysi olduğu anlaşılmıyor."
+  ]
+ },
+ "K12db": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Bastonlu yaşlı bir adam için tişört varsayımı yerine oturmuyor; \"Üstü\" daha uygun."
+  ]
+ },
+ "K13": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K13d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K14": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K14d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K15": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K15d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K16": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K16d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K17": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K17d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "C1": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "C2": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "C3": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "C4a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "C4b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "C5a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "C5b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "C6a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "C6b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "C7a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "C7b": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "Kimin başına eklendiği belli değil, sistem mesajı gibi kuru duruyor.",
+   "Kuru ve makine dili gibi; şapkanın nereye, kime eklendiği belli değil.",
+   "Kısa ve program diliyle yazılmış, kimin başına eklendiği de söylenmiyor.",
+   "Kime ya da nereye eklendiği belli değil, sistem kaydı gibi kuru okunuyor.",
+   "Kime, nereye eklendiği belli değil; kuru ve robot gibi."
+  ]
+ },
+ "C8a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "C8b": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Gözlük kaldırıldı\" gözlüğün yukarı itildiği gibi de okunabiliyor, ayrıca mekanik duruyor.",
+   "Edilgen ve robotik; kimin gözlüğü olduğu anlaşılmıyor.",
+   "Robot gibi, edilgen bir ifade; kimin gözlüğü olduğu belli değil.",
+   "Kimin gözlüğü olduğu belirsiz ve edilgen yapı robotik duruyor.",
+   "'Gözlük kaldırıldı' gözlüğü alnına kaldırmak gibi de okunabiliyor, belirsiz."
+  ]
+ },
+ "C9": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "C10a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "C10b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ }
+}

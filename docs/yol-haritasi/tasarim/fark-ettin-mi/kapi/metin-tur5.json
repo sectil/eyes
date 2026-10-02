@@ -1,0 +1,58 @@
+{
+ "A1": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "A1y": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "A2": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "Tek başına \"Akşam\" çok çıplak kalıyor, neyin akşamı olduğu belli değil.",
+   "Tek başına 'Akşam' bir yer değil saat etiketi gibi okunuyor; diğer sahne adlarının yanında havada kalıyor."
+  ]
+ },
+ "A2y": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "\"Yeni sahne: Akşam\" yarım kalmış gibi duruyor, sahne adı gibi okunmuyor.",
+   "'Yeni sahne: Akşam' çıplak ve belirsiz; sahnenin ne olduğunu söylemiyor."
+  ]
+ },
+ "A3": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Ekli 'Caddede' başlıkta hantal duruyor, diğer kısa sahne adlarının yanında idare eder kalıyor."
+  ]
+ },
+ "A3y": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "'Yeni sahne: Caddede akşam' kulağa çeviri gibi geliyor, akıcı bir ad değil."
+  ]
+ },
+ "A4": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "Sahne gecenin lacivertine ve yanan lambalara varıyor; 'Gün batımı' bunun yalnızca başını anlatıyor, caddeyi de çağrıştırmıyor.",
+   "Gün batımı tek bir anı anlatıyor; lacivert göğü ve yanan ışıkları karşılamıyor, ayrıca ayrı bir doğa sahnesi gibi duruyor."
+  ]
+ },
+ "A4y": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "'Gün batımı' sahnenin lambaların yandığı akşam hâlini tam karşılamıyor.",
+   "Ad sahnenin içeriğiyle örtüşmüyor; kullanıcı caddeyi değil manzara bekler."
+  ]
+ }
+}
