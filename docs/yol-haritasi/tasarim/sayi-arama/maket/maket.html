@@ -169,6 +169,15 @@ h1 { font-family: 'Unbounded'; font-weight: 700; font-size: 34px; letter-spacing
 }
 
 /* son */
+.mini-b { background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); padding: 10px 14px 8px; }
+.mh { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.mgrid { display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(10, 14px); }
+.mgrid .c { min-height: 0; font-size: 10.5px; color: var(--digit-dim); font-weight: 600; }
+.mgrid .c.ing { color: var(--gold-ink); font-weight: 700; }
+.mgrid .c.mis { color: var(--ink-2); font-weight: 700; }
+.mgrid .cap { margin: 1px 6px; }
+.mgrid .cap.missc { box-shadow: 0 0 0 1.5px var(--ink-3) inset; opacity: 0.7; background: transparent; border-radius: 999px; }
+.mgrid .cap.missc { background-image: none; }
 .ptl { font-size: 13px; font-weight: 700; color: var(--ink-2); }
 .cmpbar { display: grid; grid-template-columns: 76px 1fr 54px; align-items: center; gap: 10px; font-size: 13px; color: var(--ink-2); font-weight: 600; }
 .cmpbar i { display: block; height: 14px; border-radius: 7px; }
@@ -341,6 +350,14 @@ function chart() {
 
 const caps5 = (times) => `<div class="caps">${times.map((t) => t ? `<div class="mc"><span class="pill7">7061</span><em>${t} sn</em></div>` : '<div class="mc miss"><span class="pill7">7061</span><em>bulunmadı</em></div>').join('')}</div>`
 const bigCard = (num, chip, times, chipCls = 'cmp') => `<div class="big"><div class="lab">Dizi başına süren</div><div class="bigrow"><div class="num">${num}<small>sn</small></div>${chip ? `<span class="chip wr ${chipCls}">${chip}</span>` : ''}</div>${caps5(times)}</div>`
+function miniBoard(missed = null) {
+  const at = (r, c, span = 1) => `grid-row:${r + 1};grid-column:${c + 1} / span ${span}`
+  const mark = {}
+  for (const [r, c] of targets) for (let i = 0; i < 4; i++) mark[`${r}:${c + i}`] = (missed && missed[0] === r) ? 'mis' : 'ing'
+  const cells = g.map((row, r) => row.map((d, c) => `<div class="c ${mark[`${r}:${c}`] ?? ''}" style="${at(r, c)}">${d}</div>`).join('')).join('')
+  const caps = targets.map(([r, c]) => `<div class="cap ${missed && missed[0] === r ? 'missc' : 'gold'}" style="${at(r, c, 4)}"></div>`).join('')
+  return `<div class="mini-b"><div class="mh"><span class="ptl">Bugünkü ızgaran</span><span class="mini">${missed ? '4 / 5 bulundu' : '5 / 5 bulundu'}</span></div><div class="mgrid">${caps}${cells}</div></div>`
+}
 const nefLine = (html) => `<div class="nefrow"><div class="orb"></div><p>${html}</p></div>`
 
 const S = {
@@ -383,6 +400,7 @@ const S = {
         <div class="cmpbar"><span>Bugün</span><i style="width:90.5%" class="now"></i><b>5,7 sn</b></div>
         ${nefLine('Bugünün en hızlı dizisi <b>3,8 saniyede</b> geldi.')}
       </div>
+      ${narrow ? '' : miniBoard([5, 4])}
       <div class="rf"><div class="ic">${bell}</div><div><strong>Bana hatırlat</strong><span>Her gün, senin için uygun saatte. Saati Nef de seçebilir.</span></div><div class="tg"></div></div>
       <div class="spacer"></div>
       <div class="btn">Tamam</div>
@@ -397,6 +415,7 @@ const S = {
         <div class="chart">${chart()}</div>
         ${nefLine('En hızlı dizin bugün geldi: <b>3,1 saniye</b>.')}
       </div>
+      ${narrow ? '' : miniBoard()}
       <div class="spacer"></div>
       <div class="btn">Tamam</div>
     </div>`
