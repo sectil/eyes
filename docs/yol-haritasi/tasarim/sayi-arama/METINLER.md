@@ -1,7 +1,7 @@
 # Rakam Avı · görünür metinler (2026-10-01)
 
 Durum: **T** taslak · **K** 5 sn kapısından geçti (ekranıyla) · **B** benim onayım · **S** sahip onayı.
-Sahip onayı istenenler: K B olanlar (2026-10-02).
+Sahip onayı istenenler: K B olanlar (2026-10-02, henüz cevap yok). S olanlar onaylı.
 Ana oturum yalnız S olanları harfi harfine kullanır. `{…}` yer tutucuyu kod doldurur.
 
 Yasaklar: sağlık ve "zekâ" iddiası yok; "beyin" ve "tanıma" yok; değişim sözcükleri yalnız "başlangıcından iyi",
@@ -45,7 +45,7 @@ Yasaklar: sağlık ve "zekâ" iddiası yok; "beyin" ve "tanıma" yok; değişim 
 ## Sonuç (S) · kapıdan geçmedi; son hâl kodda kapıya girer
 | # | Metin | Durum |
 |---|---|---|
-| S1 | Dizi başına süren | T |
+| S1 | Bir diziyi bulma süren | **S** (sahip 2026-10-02 "ONAY"; iki sonuç ekranında da) |
 | S2 | {x} sn | T |
 | S3 | Kapsül altında: {t} sn / bulunmadı | T |
 | S4 | {w} yanlış kaydırma | T |
@@ -65,8 +65,8 @@ haftadır sürüyor.", "{b} → {c} sn".
 Sonuç ekranındaki tek satır; kişinin kendi olgusu. Banka hücreleri `rakam-avi` kimliğiyle.
 | # | Metin | Durum |
 |---|---|---|
-| N1 | Bugünün en hızlı dizisi {x} saniyede geldi. | T |
-| N1b | En hızlı dizin bugün geldi: {x} saniye. (bütün zamanların en kısası iken) | T |
+| N1 | Bugünün en hızlısını {x} saniyede buldun. | **S** (sahip 2026-10-02 "ONAY") |
+| N1b | ~~En hızlı dizin bugün geldi~~ yerine N1 kullanılır (tur 4: "geldi" başarıyı kişiye vermiyor) | — |
 | N2 | İlk Rakam Avı turun tamam. Başlangıcını birlikte kuracağız. | T |
 | N3 | İki hafta önce bir dizi {y} saniye sürüyordu; şimdi {x}. (yalnız v2 "başlangıcından iyi" iken) | T |
 | N4 | Bu turda {w} yanlış kaydırma vardı. Acele etmeden bakmak da ölçünün parçası. | T |

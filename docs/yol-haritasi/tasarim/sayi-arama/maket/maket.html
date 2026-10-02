@@ -351,7 +351,7 @@ function chart() {
 }
 
 const caps5 = (times) => `<div class="caps">${times.map((t) => t ? `<div class="mc"><span class="pill7">7061</span><em>${t} sn</em></div>` : '<div class="mc miss"><span class="pill7">7061</span><em>bulunmadı</em></div>').join('')}</div>`
-const bigCard = (num, chip, times, chipCls = 'cmp') => `<div class="big"><div class="lab">Dizi başına süren</div><div class="bigrow"><div class="num">${num}<small>sn</small></div>${chip ? `<span class="chip wr ${chipCls}">${chip}</span>` : ''}</div>${caps5(times)}</div>`
+const bigCard = (num, chip, times, chipCls = 'cmp') => `<div class="big"><div class="lab">Bir diziyi bulma süren</div><div class="bigrow"><div class="num">${num}<small>sn</small></div>${chip ? `<span class="chip wr ${chipCls}">${chip}</span>` : ''}</div>${caps5(times)}</div>`
 function miniBoard(missed = null) {
   const at = (r, c, span = 1) => `grid-row:${r + 1};grid-column:${c + 1} / span ${span}`
   const mark = {}
@@ -395,7 +395,7 @@ const S = {
     return `${topBar('Rakam Avı')}
     <div class="res">
       ${bigCard('5,7', '2 yanlış kaydırma', ['3,8', '7,9', '5,3', null, '6,1'], 'plain')}
-      <div class="prog">${nefLine('Bugünün en hızlı dizisi <b>3,8 saniyede</b> geldi.').replace('nefrow', 'nefrow first')}</div>
+      <div class="prog">${nefLine('Bugünün en hızlısını <b>3,8 saniyede</b> buldun.').replace('nefrow', 'nefrow first')}</div>
       ${narrow ? '' : miniBoard([5, 4])}
       <div class="rf"><div class="ic">${bell}</div><div><strong>Bana hatırlat</strong><span>Her gün, senin için uygun saatte. Saati Nef de seçebilir.</span></div><div class="tg"></div></div>
       <div class="spacer"></div>
@@ -409,7 +409,7 @@ const S = {
       <div class="prog">
         <div class="ph"><span class="vchip better">başlangıcından iyi</span></div>
         <div class="chart">${chart()}</div>
-        ${nefLine('En hızlı dizin bugün geldi: <b>3,1 saniye</b>.')}
+        ${nefLine('Bugünün en hızlısını <b>3,1 saniyede</b> buldun.')}
       </div>
       ${narrow ? '' : miniBoard()}
       <div class="spacer"></div>
