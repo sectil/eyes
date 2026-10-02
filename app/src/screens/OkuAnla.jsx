@@ -39,6 +39,9 @@ const fontScaleNow = () => {
 }
 // "4 sorunun 3’ü doğru": Türkçe iyelik eki (1’i, 2’si, 3’ü, 4’ü)
 const EK = { 0: 'ı', 1: 'i', 2: 'si', 3: 'ü', 4: 'ü' }
+const EK5 = { ...EK, 5: 'i' }
+// Kaynak satırı: "Mampe ve ark., 2009" yerine Türkçe "Mampe ve ekibi, 2009"; dergi adı gösterilmez (kapı 2026-10-02)
+const sourceOf = (t) => `${String(t.yazar).replace(/ ve ark\.?$/, ' ve ekibi')}, ${t.yil}`
 
 // Kelimelerden iris (maket iris()): her halka iki yay; yazı hiçbir yerde baş aşağı değil. Süs, ekran okuyucuya kapalı.
 const RINGS = [
@@ -53,8 +56,10 @@ const RINGS_SE = [
   [86, 'oku · anla · oku · anla', 'anla · oku · anla · oku', 18, 0.75],
 ]
 function Iris({ rings = RINGS, id = 'f', className = '' }) {
+  // Halkasız (rings boş): yalnız göz bebeği ve kitap; dönen küçük yazılar girişte bilmece gibi duruyordu (kapı 2026-10-02)
+  const vb = rings.length ? '0 0 300 300' : '86 86 128 128'
   return (
-    <svg viewBox="0 0 300 300" aria-hidden="true" className={className}>
+    <svg viewBox={vb} aria-hidden="true" className={className}>
       <defs>
         <linearGradient id={`oa-g${id}`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="var(--iris-1)" /><stop offset="1" stopColor="var(--iris-2)" /></linearGradient>
         <radialGradient id={`oa-gl${id}`}><stop offset="0" stopColor="var(--iris-1)" stopOpacity=".22" /><stop offset="1" stopColor="var(--iris-1)" stopOpacity="0" /></radialGradient>
@@ -126,13 +131,13 @@ function ResultRing({ k }) {
 }
 
 const VERDICT_LINE = {
-  null: 'Hızın sayıldı, çünkü metni anladın.',
+  null: 'Metni anladın; hızın kaydedildi.',
   // Sahip onaylı sayılmadı ekranının cümlesi (maket, "OK ONAYLIYORUM"): üstteki "Hız sayılmadı" etiketini tekrarlamaz (tur 1)
-  'dusuk-anlama': 'Hız, en az 3\u00a0doğruyla sayılır. Bir\u00a0dahakine biraz daha yavaş oku.',
-  'cok-hizli': 'Bu sefer hız sayılmadı; bu kadar hızlı okuma göz gezdirmeye döner. Bir dahakine her cümleyi oku.',
-  ara: 'Okurken uygulamadan çıktın, bu yüzden hız sayılmadı.',
+  'dusuk-anlama': 'Hızın kaydedilmesi için en az üç soruyu bilmelisin. Bir\u00a0dahakine biraz daha yavaş oku.',
+  'cok-hizli': 'Bu hızda metin okunmaz, yalnız göz gezdirilir; bu yüzden hız kaydedilmedi. Bir dahakine her cümleyi oku.',
+  ara: 'Okurken uygulamadan çıktın; bu yüzden hız kaydedilmedi.',
   // Sahip onayı 2026-10-02 (kapi/metin-tur1.md Y3, 5/5)
-  'cok-yavas': 'Bu okuma çok uzun sürdü; hız ancak ara vermeden okuyunca sayılır.',
+  'cok-yavas': 'Okuma çok uzun sürdü. Hız, ara vermeden okuyunca kaydedilir.',
 }
 
 export default function OkuAnla({ sessions = [], storage = globalThis.localStorage, onSave, onExit, remindField = null, now: nowProp = null }) {
@@ -159,7 +164,7 @@ export default function OkuAnla({ sessions = [], storage = globalThis.localStora
     document.addEventListener('visibilitychange', vis)
     return () => { cancelAnimationFrame(id); document.removeEventListener('visibilitychange', vis) }
   }, [phase])
-  // "Bitirdim, metnin sonunda" ipucu: düğme görünene dek
+  // "“Bitirdim” düğmesi metnin sonunda" ipucu: düğme görünene dek
   useEffect(() => {
     if (phase !== 'metin' || !endRef.current || typeof IntersectionObserver === 'undefined') return undefined
     const io = new IntersectionObserver(([e]) => setAtEnd(e.isIntersecting), { threshold: 0.6 })
@@ -205,10 +210,15 @@ export default function OkuAnla({ sessions = [], storage = globalThis.localStora
       <main className="oa">
         <div className="oa-bar"><button type="button" className="oa-ib" onClick={onExit} aria-label="Geri"><ChevronLeft size={20} aria-hidden="true" /></button><span /><span className="oa-gap" /></div>
         <div className="oa-grow">
-          <div className="oa-hero"><Iris className="full" /><Iris className="compact" id="s" rings={RINGS_SE} /></div>
+          <div className="oa-hero"><Iris className="plain" id="p" rings={[]} /></div>
           <h1 className="t">Oku ve Anla</h1>
-          <p className="lead">Bilimden kısa, şaşırtıcı bir bulgu oku. Sonra dört soru gelir.</p>
-          <ol className="oa-steps"><li><b>1</b>Oku</li><li><b>2</b>Bitir</li><li><b>3</b>Dört soru</li></ol>
+          {/* Sahip isteği 2026-10-02: girişte ne yapılacağı, sonra ne olacağı ve neyin ölçüldüğü 5 sn'de anlaşılsın */}
+          <p className="lead">Kısa bir bilim metni oku; ne kadar hızlı okuduğunu ve ne kadar anladığını gör.</p>
+          <ol className="oa-steps v">
+            <li><b>1</b><span><strong>Oku</strong><small>Süre, metin açılınca başlar.</small></span></li>
+            <li><b>2</b><span><strong>Bitirince “Bitirdim”e bas</strong><small>Süre o anda durur.</small></span></li>
+            <li><b>3</b><span><strong>Dört soruyu cevapla</strong><small>En az üçünü bilirsen okuma hızın kaydedilir.</small></span></li>
+          </ol>
           <div className="oa-today">
             <span className="ic"><BookOpen size={24} strokeWidth={1.9} aria-hidden="true" /></span>
             <span><small>BUGÜNÜN METNİ</small><strong>{text.baslik}</strong><em>{words} kelime</em></span>
@@ -216,7 +226,7 @@ export default function OkuAnla({ sessions = [], storage = globalThis.localStora
         </div>
         <div className="oa-spacer" style={{ height: 118 }} />
         <div className="oa-dock">
-          <p className="fair">Hızın, anladığınla birlikte sayılır.</p>
+          <p className="fair">Hızın, dakikada okuduğun kelimeyle ölçülür.</p>
           <button type="button" className="btn" onClick={() => setPhase('metin')}>Okumaya başla</button>
         </div>
       </main>
@@ -232,14 +242,14 @@ export default function OkuAnla({ sessions = [], storage = globalThis.localStora
           <h2 className="tt">{text.baslik}</h2>
           <div className="oa-meta">
             <span className="tag"><TagIcon size={15} strokeWidth={2} aria-hidden="true" />{TAGS[text.etiket]}</span>
-            <span>{text.dergi}, {text.yil}</span>
+            <span>{sourceOf(text)}</span>
           </div>
           <p className="read">{text.metin}</p>
           <button type="button" className="btn endbtn" ref={endRef} onClick={readDone}>Bitirdim</button>
-          <p className="hint">Süre, sen dokununca durur.</p>
+          <p className="hint">Basınca süre durur.</p>
         </div>
         <div className={`oa-veil${atEnd ? ' off' : ''}`} aria-hidden="true" />
-        <span className={`oa-more${atEnd ? ' off' : ''}`} aria-hidden="true"><ChevronDown size={16} strokeWidth={2.2} /><span>Bitirdim, metnin sonunda</span></span>
+        <span className={`oa-more${atEnd ? ' off' : ''}`} aria-hidden="true"><ChevronDown size={16} strokeWidth={2.2} /><span>“Bitirdim” düğmesi metnin sonunda</span></span>
       </main>
     )
   }
@@ -301,8 +311,8 @@ export default function OkuAnla({ sessions = [], storage = globalThis.localStora
       </div>
       <div className="oa-anl">
         {r.valid
-          ? <span className="chip ok">4 sorunun {k}’{EK[k]} doğru</span>
-          : <>{Number.isFinite(r.wpm) ? <span className="spd"><b className="num">{r.wpm}</b><span className="un">kelime / dakika</span></span> : null}<span className="chip lo">Hız sayılmadı</span></>}
+          ? <span className="chip ok">{k === 4 ? '4 sorunun hepsi doğru' : `4 sorunun ${k}’${EK[k]} doğru`}</span>
+          : <>{Number.isFinite(r.wpm) ? <span className="spd"><b className="num">{r.wpm}</b><span className="un">kelime / dakika</span></span> : null}<span className="chip lo">Hız kaydedilmedi</span></>}
       </div>
       {line ? <div className="oa-verd"><span className="dot" aria-hidden="true" /><p><span className="nm">Nef</span><span className="tx">{line}</span></p></div> : null}
       <div className="oa-rows">
@@ -310,15 +320,15 @@ export default function OkuAnla({ sessions = [], storage = globalThis.localStora
           ? <div className="oa-row"><span className="k">Okuma hızı</span><span className="v">{verdictWord(v2.verdict, { cap: true })}</span></div>
           : (
             <div className="oa-row has-pips">
-              <span className="k">Başlangıç</span>
-              <span className="v">{!r.valid ? 'Bu okuma eklenmedi' : days === 3 ? 'İki okuma daha, sonra karşılaştırırız' : '5 okumayla belirlenir'}{'\u00a0'}· {Math.min(days, BASE_N)}/5</span>
+              <span className="k">Başlangıç hızın</span>
+              <span className="v">5 okumanın {Math.min(days, BASE_N)}’{EK5[Math.min(days, BASE_N)]} tamam</span>
               <span className="oa-pips" aria-hidden="true">{[0, 1, 2, 3, 4].map((i) => <i key={i} className={i < days ? 'on' : ''} />)}</span>
             </div>
           )}
         <a className="oa-row" href={pubmedUrl(text.pmid)} target="_blank" rel="noreferrer">
-          <span className="k">Bu metin bir çalışmadan</span>
+          <span className="k">Kaynak araştırma</span>
           {/* Sahip onaylı sonuç ekranının biçimi (maket: "Dacke ve ark., 2013"); dergi okuma ekranında yazar (tur 2) */}
-          <span className="v">{text.yazar}, {text.yil}</span>
+          <span className="v">{sourceOf(text)}</span>
           <span className="go" aria-hidden="true"><ChevronRight size={18} /></span>
         </a>
       </div>

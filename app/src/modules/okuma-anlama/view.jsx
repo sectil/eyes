@@ -10,7 +10,7 @@ export default {
   icon: BookOpenText,
   sub: (ctx) => {
     const last = lastOf(ctx)
-    return last ? `${Number.isFinite(last.wpm) ? `${last.wpm} kelime/dk · ` : ''}${last.correct}/4 · 2 dk` : 'Bilimden kısa, şaşırtıcı bir bulgu oku. · 2 dk'
+    return last ? `${Number.isFinite(last.wpm) ? `${last.wpm} kelime/dk · ` : ''}${last.correct}/4 · 2 dk` : 'Kısa bir bilim metni, dört soru · 2 dk'
   },
   badge: (ctx) => {
     const last = lastOf(ctx)

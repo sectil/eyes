@@ -91,7 +91,7 @@ export const TEXTS = Object.freeze({
   'remind.okuma-anlama': [
     { id: 'OA1', title: 'Bugünün bulgusu hazır', body: 'Kısa bir bilim metni ve dört soru. İki dakika yeter.', source: 'rayner2016' },
     { id: 'OA2', title: 'Bir metin, dört soru', body: 'Bugün hangi hayvanın sırrını okuyacaksın? Kendi hızında.', source: 'rayner2016' },
-    { id: 'OA3', title: 'Okuma molası', body: 'Kısa bir bulgu oku; hızın anladığınla birlikte sayılır.', source: 'rayner2016' },
+    { id: 'OA3', title: 'Okuma molası', body: 'Kısa bir bilim metni oku; soruları bilirsen hızın kaydedilir.', source: 'rayner2016' },
   ],
   'remind.yakala-yaz': [
     { id: 'YY1', title: 'Yakala Yaz hazır', body: 'İki kelime, bir an. Kısa bir tur ister misin?', source: 'rubin1992' },

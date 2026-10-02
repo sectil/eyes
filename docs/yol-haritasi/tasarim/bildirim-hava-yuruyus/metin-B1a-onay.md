@@ -119,7 +119,7 @@ Kaynak: geçici `bell2023`, genel destek, karar 2. YN3 çıkarıldı: iki incele
 
 - OA1 · **Bugünün bulgusu hazır** · Kısa bir bilim metni ve dört soru. İki dakika yeter. · 21/52
 - OA2 · **Bir metin, dört soru** · Bugün hangi hayvanın sırrını okuyacaksın? Kendi hızında. · 20/56
-- OA3 · **Okuma molası** · Kısa bir bulgu oku; hızın anladığınla birlikte sayılır. · 12/55
+- OA3 · **Okuma molası** · Kısa bir bilim metni oku; soruları bilirsen hızın kaydedilir. · 12/61
 
 Kaynak: `rayner2016`. Cümleler `okuma-anlama/METINLER.md` §5'ten harfi harfine; sahip onayı 2026-10-02 ("Onay", okuma-anlama/ARA_RAPOR_1.md §11). 5 kişilik metin kapısından geçmedi, sahip doğrudan onayladı.
 

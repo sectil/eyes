@@ -93,7 +93,7 @@ Yeni ya da değişen cümle sahip onayı olmadan koda girmez: taslak → 5 kişi
 ### Hatırlatma cümleleri (remindTexts biçimi, başlık ≤ 30, gövde ≤ 110 harf)
 1. "Bugünün bulgusu hazır" · "Kısa bir bilim metni ve dört soru. İki dakika yeter."
 2. "Bir metin, dört soru" · "Bugün hangi hayvanın sırrını okuyacaksın? Kendi hızında."
-3. "Okuma molası" · "Kısa bir bulgu oku; hızın anladığınla birlikte sayılır."
+3. "Okuma molası" · "Kısa bir bilim metni oku; soruları bilirsen hızın kaydedilir."
 
 ### Sahip onayı sonradan (2026-10-02, "onay"; kapi/metin-tur1.md)
 - Hız sayılmadı, çok yavaş: "Bu okuma çok uzun sürdü; hız ancak ara vermeden okuyunca sayılır." (5/5)
