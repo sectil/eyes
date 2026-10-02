@@ -20,7 +20,7 @@
           "secenekler": [
             "Tek hücreli bir mayadan kısa sürede çok hücreli kümelerin evrilmesini",
             "Maya kümelerinin büyürken bir gençlik evresinden geçmesini",
-            "Maya hücrelerinin bir arada kalmayı hiçbir ortamda başaramamasını",
+            "Tek hücreli mayaların başka mikroplarla birleşip küme kurmasını",
             "Mayaların ekmek hamurunu ılık ve nemli ortamda kabartmasını"
           ]
         },
@@ -110,12 +110,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bu çalışmadan önce ne bilinmiyordu?",
+          "soru": "Önceki ölçümlere göre elektrik akımları çamurda ne kadarlık bir mesafe boyunca akıyordu?",
           "secenekler": [
-            "Elektrik akımını neyin taşıdığı",
-            "Çamurda oksijen olup olmadığı",
-            "Sülfürün nasıl koktuğu",
-            "Deniz dibinin ne kadar derin olduğu"
+            "Birkaç santimetre",
+            "Birkaç milimetre",
+            "Birkaç metre",
+            "Birkaç kilometre"
           ]
         },
         {
@@ -206,7 +206,7 @@
           "tur": "ayrinti",
           "soru": "Amipler bakterileri nereye katıyordu?",
           "secenekler": [
-            "Sporlarını taşıyan yapının içine",
+            "Sporlarının bulunduğu yapının içine",
             "Toprağa açtıkları küçük çukurlara",
             "Yakındaki bitkilerin köklerine",
             "Suyun yüzeyindeki köpüklere"
@@ -288,12 +288,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Diller en çok hangi bakımdan birbirine benziyordu?",
+          "soru": "Ele alınan iki özellik tek tek bakıldığında diller arasında nasıldı?",
           "secenekler": [
-            "Bilgi hızında",
-            "Konuşanların sayısında",
-            "Hece sayısında",
-            "Sözcük uzunluğunda"
+            "Dilden dile çok farklıydı",
+            "Bütün dillerde hemen hemen aynıydı",
+            "Yalnız iki dilde farklıydı",
+            "Dillerin yarısında aynıydı"
           ]
         }
       ]
@@ -317,7 +317,7 @@
             "Duyamadığımızı sormak için kullanılan sözün dillerde çok benzemesini",
             "Tekrar istemek için kullanılan sözün İngilizcede huh diye söylenmesini",
             "Bu küçük sözün her dilde bambaşka bir biçimde söylenmesini",
-            "İnsanların konuşurken söz kesmeyi ve sıra almayı öğrenmesini"
+            "Bu küçük sözün her dilde en sık kullanılan sözcük olmasını"
           ]
         },
         {
@@ -364,7 +364,7 @@
           "tur": "ayrinti",
           "soru": "Araştırmacılara göre benzerlik nereden geliyor olabilir?",
           "secenekler": [
-            "Her dilde duyulmayan sözün yeniden sorulmasından",
+            "Bütün dillerde yaşanan ortak bir konuşma durumundan",
             "Dillerin birbirinden sözcük ödünç almasından",
             "Dillerin hepsinin çok eski tek bir ortak dilden doğmuş olmasından",
             "Sözcüğün doğuştan gelmesinden"
@@ -391,7 +391,7 @@
             "Bazı böceklerin sudan nasıl sıçradığını ve bunu taklit eden robotu",
             "Küçük robotların suyun üstünde sıçrayamadığını ve hemen battığını",
             "Bazı böceklerin suyun üstünde nasıl avlandığını ve neyle beslendiğini",
-            "Su üstünde yaşayan böceklerin kışı nerede ve nasıl geçirdiğini"
+            "Böceklerin kanat çırparak sudan nasıl sıçradığını ve ne kadar yükseldiğini"
           ]
         },
         {
@@ -502,7 +502,7 @@
           "tur": "ayrinti",
           "soru": "Ekip karıncaların bedenlerini birbirine bağlamasını neye benzetiyor?",
           "secenekler": [
-            "Su geçirmez bir kumaş dokumaya",
+            "Bir kumaş dokumaya",
             "Taşları üst üste koyarak sağlam bir duvar örmeye",
             "Bir ip düğümlemeye",
             "Bir kayıkta kürek çekmeye"
@@ -537,7 +537,7 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Bitkinin nişastasını şafağa kadar yetecek hızda harcamasını",
-            "Bitkinin gündüz ürettiği besini nişasta olarak saklamasını",
+            "Bitkinin gündüz sabaha yetecek kadar çok nişasta biriktirmesini",
             "Bitkinin nişastasını şafaktan önce bitirip aç kalmasını",
             "Bitkinin sabaha karşı yapraklarını güneşe çevirmesini"
           ]
@@ -554,12 +554,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Nişasta gece boyunca nasıl azalıyordu?",
+          "soru": "Araştırmacılar tahminlerini hangi bitkilerde denedi?",
           "secenekler": [
-            "Aşağı yukarı düzenli bir hızla",
-            "Akşam birden, sonra hiç",
-            "Yalnız şafaktan hemen önce",
-            "Gece yarısına kadar hiç azalmadan"
+            "Gece bir süre ışık verilen bitkilerde",
+            "Hiç ışık görmeden yetiştirilen bitkilerde",
+            "Tarlada kendiliğinden yetişen bitkilerde",
+            "Yalnız çiçek açmış bitkilerde"
           ]
         },
         {
@@ -613,7 +613,7 @@
             "Bir bitkinin tohumlarını fırlatıp sonra kendiliğinden toprağa gömmesini",
             "Bu küçük ve çiçekli bitkinin sardunyalarla akraba olmasını",
             "Bu bitkinin tohumlarının ancak hayvanlar yardımıyla toprağa gömülebilmesini",
-            "Bu küçük bitkinin çiçeklerinin arılar ve sineklerce tozlanmasını"
+            "Bu bitkinin tohumlarının toprağı ağırlıklarıyla delip gömülmesini"
           ]
         },
         {
@@ -686,7 +686,7 @@
           "secenekler": [
             "Çiçeklerdeki küçük yapıların düzensizliğinin arılara işaret vermesini",
             "Ekibin yüzey düzensizliği ayarlanabilen yapay çiçekler yapmasını",
-            "Çiçeklerdeki küçük yapıların her zaman kusursuz bir düzenle dizilmesini",
+            "Çiçeklerdeki kusursuz düzenli yapıların arılara işaret vermesini",
             "Bombus arılarının topladıkları çiçek tozunu kovana taşımasını"
           ]
         },
@@ -725,9 +725,9 @@
           "soru": "Ekip yapay çiçeklerle neyi inceledi?",
           "secenekler": [
             "Bombus arılarının bu çiçeklere tepkisini",
-            "Çiçeklerin rüzgârda nasıl sallandığını",
-            "Yapay çiçeklerin ne kadar dayandığını",
-            "Kelebeklerin hangi renge konduğunu"
+            "Bombus arılarının bu çiçeklerin tozunu nasıl taşıdığını",
+            "Bu çiçeklerin rüzgârda nasıl sallandığını",
+            "Kelebeklerin bu çiçeklerden hangisine konduğunu"
           ]
         },
         {

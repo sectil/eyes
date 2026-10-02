@@ -18,7 +18,7 @@
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Bombus arılarının ip çekmeyi öğrenip birbirine aktarmasını",
+            "Bombus arılarında yeni bir becerinin yuvada yayılmasını",
             "Ödülün arıların doğrudan ulaşamayacağı bir yere konmasını",
             "Yeni becerilerin ancak çok zeki hayvanlarda yayılabilmesini",
             "Bombus arılarının çiçeklerin yerini birbirine bildirmesini"
@@ -174,12 +174,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Çiçeklere hangi ses dinletildi?",
+          "soru": "Araştırma hangi ülkede yapıldı?",
           "secenekler": [
-            "Uçan bir arının kaydedilmiş sesi",
-            "Bir kuşun sabah ötüşü",
-            "Çatıya yağan yağmurun sesi",
-            "Yakında yüksek sesle konuşan insanların sesi"
+            "İsrail",
+            "İtalya",
+            "İspanya",
+            "Yunanistan"
           ]
         },
         {
@@ -426,12 +426,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kuşlar bu beceriyi nasıl edinmişti?",
+          "soru": "Metne göre bu bulgular papağanlarda neyin varlığını gösteriyor?",
           "secenekler": [
-            "Birbirlerinden öğrenerek",
-            "İnsanların eğitmesiyle",
-            "Başka kuş türlerini izleyerek",
-            "Doğuştan bilerek"
+            "Yiyecek bulmaya dayalı bir kültürün",
+            "Sese dayalı gelişmiş bir dilin",
+            "Doğuştan gelen bir açma içgüdüsünün",
+            "Sürüyü yöneten tek bir önderin"
           ]
         },
         {
@@ -544,12 +544,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Canlının bedeni neyden oluşur?",
+          "soru": "Bu cıvık mantar kaç hücreden oluşur?",
           "secenekler": [
-            "Farklı kalınlıkta, birbirine bağlı tüplerden",
-            "Milyonlarca küçük ve birbirinden ayrı hücreden",
-            "Yapraklardan ve köklerden",
-            "Sert bir kabuktan"
+            "Tek bir dev hücreden",
+            "İki büyük hücreden",
+            "Yüzlerce küçük hücreden",
+            "Milyonlarca küçük hücreden"
           ]
         },
         {
@@ -604,7 +604,7 @@
       "yazar": "Dong ve ark.",
       "dergi": "Science",
       "yil": 2023,
-      "metin": "Bal arıları kovanda özel bir dansla yiyeceğin yerini birbirine anlatır. Dans eden arı, yiyeceğin hangi yönde ve ne kadar uzakta olduğunu, bir de ne kadar değerli olduğunu hareket ve sesle anlatır. Peki arılar bu dansı doğuştan mı biliyor, yoksa başkalarından mı öğreniyor? Araştırmacılar bazı arıların ilk danslarından önce hiç dans izlemesine izin vermedi. Bu arıların dansları, dans izleyebilen arılarınkinden belirgin biçimde daha düzensizdi; yön hataları da daha büyüktü. Yiyeceğin uzaklığını da yanlış anlatıyorlardı. Deneyim kazandıkça düzensizlik ve yön hataları azaldı. Ama uzaklık hatası ömür boyu sürdü. Başka dansçıları izleyebilen arıların ilk danslarında ise bu sorunların hiçbiri yoktu. Demek ki arılar da, tıpkı insan bebekleri ve kuşlar gibi, dansı doğru yapmayı başkalarından öğreniyor.",
+      "metin": "Bal arıları kovanda özel bir dansla yiyeceğin yerini birbirine anlatır. Dans eden arı, yiyeceğin hangi yönde ve ne kadar uzakta olduğunu, bir de ne kadar değerli olduğunu hareket ve sesle anlatır. Peki arılar bu dansı doğuştan mı biliyor, yoksa başkalarından mı öğreniyor? Araştırmacılar bazı arıların ilk danslarından önce hiç dans izlemesine izin vermedi. Bu arıların dansları, dans izleyebilen arılarınkinden belirgin biçimde daha düzensizdi; yön hataları da daha büyüktü. Yiyeceğin uzaklığını da yanlış anlatıyorlardı. Deneyim kazandıkça düzensizlik ve yön hataları azaldı. Ama uzaklık hatası ömür boyu sürdü. Başka dansçıları izleyebilen arıların ilk danslarında ise bu sorunların hiçbiri yoktu. Demek ki arılar dansı doğru yapmayı başkalarından öğreniyor; insan bebekleri ve kuşlar da iletişim kurmayı böyle öğrenir.",
       "sorular": [
         {
           "tur": "ana",
@@ -658,12 +658,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Dans izleyebilen arıların ilk dansları nasıldı?",
+          "soru": "Dans eden arı, anlattığı bilgileri neyle aktarır?",
           "secenekler": [
-            "Sorunsuzdu",
-            "Uzaklığı yanlış gösteriyordu",
-            "Yönü yanlış gösteriyordu",
-            "Çok kısa ve sessizdi"
+            "Hareket ve sesle",
+            "Koku ve renkle",
+            "Yalnız dokunarak",
+            "Kanatlarındaki desenle"
           ]
         }
       ]
@@ -686,7 +686,7 @@
           "secenekler": [
             "Baştankaralarda yeni bir yöntemin yerel geleneğe dönüşmesini",
             "Kuşların hareketlerinin otomatik bir düzenle kaydedilmesini",
-            "Geleneklerin yalnız insan topluluklarında doğabilmesini",
+            "Baştankaraların her bölgede farklı ötüş geleneği geliştirmesini",
             "Baştankaraların kışın yiyecek bulmak için göç etmesini"
           ]
         },

@@ -184,12 +184,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Her denemeden sonra ne yaptılar?",
+          "soru": "Daha düzenli ve doğru vuranlar süreyi nasıl tahmin etti?",
           "secenekler": [
-            "Parçanın süresini tahmin ettiler",
-            "Parçanın adını yazdılar",
-            "Parçayı ne kadar sevdiklerini puanladılar",
-            "Parçayı kendileri yeniden çaldılar"
+            "Daha kısa",
+            "Daha uzun",
+            "Ötekilerle aynı",
+            "Hiç tahmin edemediler"
           ]
         },
         {
@@ -243,7 +243,7 @@
             "Bir yaprağın yankısıyla yarasaları çiçeklere nasıl çektiğini",
             "Yarasaların çiçekleri yalnız renklerine bakarak bulduğunu",
             "Gündüz açan çiçeklerin arıları görünüşüyle nasıl çektiğini",
-            "Yarasaların çiçek tozunu bitkiden bitkiye nasıl taşıdığını"
+            "Yarasaların yankıyla yapraklar arasında nasıl yol bulduğunu"
           ]
         },
         {
@@ -362,12 +362,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bu düzeneği anlamak neye yardım edebilir?",
+          "soru": "Dikenin kalınlığı ve yüzeyi nasıl değişiyordu?",
           "secenekler": [
-            "Sisten su toplayan yeni malzemeler tasarlamaya",
-            "Sisi dağıtıp yolları açan aletler yapmaya",
-            "Deniz suyunu içme suyuna çevirmeye",
-            "Kurak yerlerde az su harcayan bitkiler yetiştirmeye"
+            "Ucundan dibine doğru",
+            "Geceden gündüze",
+            "Mevsimden mevsime",
+            "Kaktüs yaşlandıkça"
           ]
         }
       ]
@@ -436,12 +436,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Yapı ilk başta ne sanılmıştı?",
+          "soru": "Araştırmacılar yapıyı hangi yöntemlerle inceledi?",
           "secenekler": [
-            "Çok hücreli bir göz",
-            "Bir besin parçası",
-            "Bir kum tanesi",
-            "Bir yumurta"
+            "Elektron mikroskobu ve gen okuma yöntemleriyle",
+            "Işık mikroskobu ve boyama yöntemleriyle",
+            "X ışını görüntüleri ve bilgisayar modelleriyle",
+            "Laboratuvarda yetiştirme ve izleme yöntemleriyle"
           ]
         }
       ]
@@ -685,7 +685,7 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Çok küçük bir kurbağanın sesleri nasıl duyabildiğini",
-            "Orta kulağı olmayan bu kurbağanın seslerle haberleşemediğini",
+            "Bu minik kurbağanın seslerle haberleşemediğini",
             "Bu kurbağanın en küçük dört ayaklılardan biri olduğunu",
             "Bu küçük kurbağanın yumurtalarını nereye bıraktığını"
           ]

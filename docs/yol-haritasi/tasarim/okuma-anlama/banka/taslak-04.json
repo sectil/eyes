@@ -20,7 +20,7 @@
           "secenekler": [
             "Sinekkapanının dokunuş sayısına göre avı besin saymasını",
             "Sinekkapanında bir hormon sisteminin devreye girmesini",
-            "Sinekkapanının her yakaladığını hemen sindirmesini",
+            "Sinekkapanının dokunuş sayısı arttıkça avı serbest bırakmasını",
             "Sinekkapanının böcekleri kokusuyla kendine çekmesini"
           ]
         },
@@ -46,12 +46,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Avı sindirecek maddeleri yapan genler ne zaman daha çok çalıştı?",
+          "soru": "Bir böcek kapanın iç yüzündeki tüylere dokununca bitkide ne oluşur?",
           "secenekler": [
-            "Dokunuş sayısı arttıkça",
-            "Güneş ışığı güçlendikçe",
-            "Toprak her gün sulandıkça",
-            "Havanın sıcaklığı arttıkça"
+            "Elektrik sinyalleri",
+            "Ses sinyalleri",
+            "Koku sinyalleri",
+            "Işık sinyalleri"
           ]
         },
         {
@@ -66,12 +66,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kapan kapandıktan sonra içindeki böcek ne yapar?",
+          "soru": "Venüs sinekkapanı hangi topraklarda yetiştiğinde böcek yakalayarak beslenmek zorunda kalır?",
           "secenekler": [
-            "Kurtulmaya çalışırken tüylere tekrar tekrar dokunur",
-            "Hemen hareketsiz kalır",
-            "Kapanı kemirip delerek kaçar",
-            "Kapanın içinde yumurta bırakır"
+            "Besin bakımından fakir topraklarda",
+            "Çok sıcak çöl kumlarında",
+            "Sık ormanların gölgeli topraklarında",
+            "Tuzlu deniz kıyısı topraklarında"
           ]
         }
       ]
@@ -95,7 +95,7 @@
             "Küstüm otunun alışmayı uzun süre hatırlamasını",
             "Küstüm otunun giderek daha güçlü tepki vermesini",
             "Bitkilerin öğrendiklerini hemen unutmasını",
-            "Küstüm otu tohumlarının uzun süre canlı kalmasını"
+            "Küstüm otunun kendisine dokunan hayvanları tek tek hatırlamasını"
           ]
         },
         {
@@ -110,12 +110,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Aynı rahatsızlık tekrarlandıkça tepkinin azalmasına ne denir?",
+          "soru": "Alışma nasıl bir öğrenme biçimi sayılır?",
           "secenekler": [
-            "Alışma",
-            "Uyuma",
-            "Solma",
-            "Kuruma"
+            "Basit bir öğrenme biçimi",
+            "Çok karmaşık bir öğrenme biçimi",
+            "Yalnız insana özgü bir öğrenme biçimi",
+            "Yalnız kuşlarda görülen bir öğrenme biçimi"
           ]
         },
         {
@@ -133,9 +133,9 @@
           "soru": "Bitkiler elverişli ortamda ne kadar kaldıktan sonra da öğrendiklerini hatırlıyordu?",
           "secenekler": [
             "Bir ay",
-            "Bir saat",
             "Bir gün",
-            "On yıl"
+            "Bir hafta",
+            "Bir yıl"
           ]
         },
         {
@@ -204,12 +204,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Başka hiçbir ipucu yokken, domatesten elde edilen uçucu maddeler fideleri nasıl etkiledi?",
+          "soru": "Metnin başına göre uçucu maddelerin bitkiler arasındaki önemi konusunda durum nedir?",
           "secenekler": [
-            "Fideleri kendilerine doğru yöneltti",
-            "Fideleri kendilerinden uzaklaştırdı",
-            "Fidelerin büyümesini tamamen durdurdu",
-            "Fideleri hiç etkilemedi"
+            "Çok tartışılıyor",
+            "Kesin olarak biliniyor",
+            "Hiç araştırılmadı",
+            "Yalnız tarımda önemli sayılıyor"
           ]
         },
         {
@@ -317,7 +317,7 @@
             "Mikropların sıradaki değişikliğe önceden hazırlanmasını",
             "Bazı mikropların ortamının gelişigüzel değişmesini",
             "Mikropların değişikliğe ancak sonradan uyum sağlamasını",
-            "Mikropların uygun ortamda bölünerek hızla çoğalmasını"
+            "Mikropların sıradaki değişikliği komşu mikroplardan öğrenmesini"
           ]
         },
         {
@@ -332,12 +332,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "İlk değişikliği önceden yaşayan mikroplar ikinci değişiklikte ne yaptı?",
+          "soru": "Genler incelenince ne görüldü?",
           "secenekler": [
-            "Onunla daha iyi başa çıktı",
-            "Hemen dağıldı",
-            "Büyümeyi tamamen durdurdu",
-            "Ondan uzaklaşmaya çalışıp dağıldı"
+            "Doğadaki sıranın genlerin çalışma düzenine işlendiği",
+            "Genlerin her seferinde rastgele bir sırayla çalıştığı",
+            "Genlerin çalışma sırasının her kuşakta değiştiği",
+            "Bakteriyle mayanın genlerinin aynı sırayla dizildiği"
           ]
         },
         {
@@ -390,7 +390,7 @@
           "secenekler": [
             "Peygamberdevesinin üç boyutlu gördüğünün gözlükle doğrulanmasını",
             "Bilim insanlarının üç boyutlu görmeyi örnek olarak kullanmasını",
-            "Peygamberdevesinin derinliği algılayamadığının anlaşılmasını",
+            "Gözlüklerin peygamberdevesinde hiçbir derinlik yanılsaması yaratmamasını",
             "Peygamberdevesinin avını dikenli ön bacaklarıyla yakalamasını"
           ]
         },
@@ -436,12 +436,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bu çalışmadan önce omurgasızlar arasında üç boyutlu görme hangi hayvanda gösterilmişti?",
+          "soru": "Metne göre bu yeni yöntem neyin yolunu açıyor?",
           "secenekler": [
-            "Yalnız peygamberdevesinde",
-            "Yalnız arılarda ve sineklerde",
-            "Yalnız ahtapotlarda",
-            "Yalnız kelebeklerde"
+            "Böceklerde üç boyutlu görmeyi incelemenin",
+            "İnsanlar için daha ucuz üç boyut gözlükleri yapmanın",
+            "Böceklerin gece görüşünü güçlendirmenin",
+            "Peygamberdevelerini tarlalarda zararlılara karşı kullanmanın"
           ]
         }
       ]
@@ -480,12 +480,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Sürü kalabalıklaşınca ne oldu?",
+          "soru": "Ekip ateşböceklerinin ışık gösterisini nerede kaydetti?",
           "secenekler": [
-            "Ateşböcekleri toplu parlamalar hâlinde aynı anda yanıp söndü",
-            "Işıklar giderek sönükleşti ve sürü tamamen karanlıkta kaldı",
-            "Ateşböcekleri dağıldı",
-            "Işıklar renk değiştirdi"
+            "Doğadaki sürülerde",
+            "Laboratuvardaki cam kaplarda",
+            "Bir hayvanat bahçesinde",
+            "Karanlık bir deney odasında"
           ]
         },
         {
@@ -564,12 +564,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bebekler neyi duyduklarında daha çok ritimli hareket yaptı?",
+          "soru": "Çalışmaya kaç bebek katıldı?",
           "secenekler": [
-            "Müzik ve ritimli sesleri",
-            "Bir yetişkine seslenen konuşmayı",
-            "Bir bebeğe seslenen konuşmayı",
-            "Kendi adlarının söylenişini"
+            "120",
+            "12",
+            "1200",
+            "20"
           ]
         },
         {
@@ -638,12 +638,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Nesnelerdeki yüzler daha çok nasıl görüldü?",
+          "soru": "Metinde hayalî yüzlerin daha çok erkek görülmesi nasıl nitelendiriliyor?",
           "secenekler": [
-            "Erkek olarak",
-            "Kadın olarak",
-            "Çocuk olarak",
-            "Hayvan olarak"
+            "En çarpıcı bulgu olarak",
+            "Beklenen bir sonuç olarak",
+            "Önemsiz bir ayrıntı olarak",
+            "Deneydeki bir hata olarak"
           ]
         },
         {
@@ -715,7 +715,7 @@
           "soru": "Metnin sonuna göre kardeşlerde görülen sonuç hangi fikirle uyumlu?",
           "secenekler": [
             "Akrabaların birbirini kayırdığı fikriyle",
-            "Yabancıların birbirine yardım ettiği fikriyle",
+            "Akrabaların birbiriyle daha sert yarıştığı fikriyle",
             "Bitkilerin yalnız ışık için yarıştığı fikriyle",
             "Köklerin yalnız su bulmaya yaradığı fikriyle"
           ]

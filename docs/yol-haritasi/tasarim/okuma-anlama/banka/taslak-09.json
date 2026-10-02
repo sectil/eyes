@@ -14,7 +14,7 @@
   "metinler": [
     {
       "id": "oa081",
-      "baslik": "Kutu denizanasının dersi",
+      "baslik": "Engellerden kaçan denizanası",
       "etiket": "deniz",
       "kaynak": "bielecki2023",
       "pmid": "37741280",
@@ -105,7 +105,7 @@
             "Palyaço balıklarının rakibi çizgi sayısından tanımasını",
             "Palyaço balıklarının çizgi sayısına hiç aldırmamasını",
             "Palyaço balıklarının şakayığı başka balıklarla paylaşmasını",
-            "Palyaço balıklarının çizgilerinin yaşla birlikte değişmesini"
+            "Palyaço balıklarının eşini çizgi sayısından seçmesini"
           ]
         },
         {
@@ -140,12 +140,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Balıklara kaç çeşit maket gösterildi?",
+          "soru": "Ekip kaç balığa maket gösterdi?",
           "secenekler": [
-            "Dört",
-            "İki",
-            "Üç",
-            "Beş"
+            "120",
+            "30",
+            "60",
+            "240"
           ]
         },
         {
@@ -184,12 +184,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Metne göre bozulmuş bir resifin hangi özellikleri değişir?",
+          "soru": "Ses çalınan öbeklerde tür sayısı ötekilerden ne kadar fazlaydı?",
           "secenekler": [
-            "Kokusu ve sesi",
-            "Derinliği ve akıntısı",
-            "Tuzluluğu ve sıcaklığı",
-            "Dalgaları ve gelgiti"
+            "Yüzde 50",
+            "Yüzde 10",
+            "Yüzde 100",
+            "Yüzde 200"
           ]
         },
         {
@@ -204,12 +204,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Öbeklere hangi ses çalındı?",
+          "soru": "Deneydeki resif öbekleri neyden oluşuyordu?",
           "secenekler": [
-            "Sağlıklı bir resifin sesi",
-            "Yunus ıslıkları",
-            "Uzaktan geçen bir geminin motor sesi",
-            "Yağmur sesi"
+            "Mercan kırıntılarından",
+            "Beton bloklardan",
+            "Deniz yosunlarından",
+            "Batık gemi parçalarından"
           ]
         },
         {
@@ -278,12 +278,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Filler kabı seçerken hangi duyuyu kullandı?",
+          "soru": "Ekibe göre hayvanlar karşılaştırılırken neye dikkat edilmeli?",
           "secenekler": [
-            "Koku alma",
-            "Görme ve dokunma birlikte",
-            "İşitme",
-            "Tat alma"
+            "Her birinin dünyayı hangi duyuyla algıladığına",
+            "Hepsinin aynı duyuyla sınanmasına",
+            "Hepsinin yalnız gözle sınanmasına",
+            "Hepsinin aynı miktarda yiyecekle sınanmasına"
           ]
         },
         {
@@ -352,12 +352,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bu sesler hangi durumda duyuldu?",
+          "soru": "Gorillerin yemek sırasında ses çıkardığı önceden nasıl biliniyordu?",
           "secenekler": [
-            "Yalnız beslenirken",
-            "Yalnız uyumadan önce",
-            "Yalnız yağmur yağarken",
-            "Yalnız gruplar karşılaşınca"
+            "Yalnız tek tük gözlemlerle",
+            "Yıllar süren düzenli kayıtlarla",
+            "Hayvanat bahçesindeki deneylerle",
+            "Laboratuvardaki ses ölçümleriyle"
           ]
         },
         {
@@ -525,7 +525,7 @@
             "Gagalamayı güçlendiren sert bir çekiç gibi",
             "Darbeyi dağıtan sağlam bir kalkan gibi",
             "Titreşimi söndüren esnek bir yay gibi",
-            "Sesi azaltan bir tampon gibi"
+            "Kuşu ağaç gövdesine tutturan bir kanca gibi"
           ]
         }
       ]

@@ -103,7 +103,7 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Yetenekli köpeklerin nesne adlarını uzun süre hatırlamasını",
-            "Yetenekli köpeklerin öğrendikleri adları birkaç günde unutmasını",
+            "Köpeklerin çoğunun nesne adlarını uzun süre hatırlamasını",
             "Küçük çocukların sözcükleri uzun süre akılda tutmasının önemini",
             "Yetenekli köpeklerin nesneleri koklayarak bulmasını"
           ]
@@ -140,12 +140,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Köpekler bu nesnelerin adını ne kadar önce öğrenmişti?",
+          "soru": "Araştırmacılara göre bu sonuç neyi anlamaya yardım ediyor?",
           "secenekler": [
-            "İki yıl önce",
-            "İki gün önce",
-            "İki hafta önce",
-            "İki ay önce"
+            "Böyle köpeklerin bu kadar çok adı nasıl öğrendiğini",
+            "Köpeklerin sahiplerinin sesini nasıl tanıdığını",
+            "Köpeklerin hangi nesneleri daha çok sevdiğini",
+            "Küçük çocukların ilk sözcüklerini ne zaman söylediğini"
           ]
         },
         {
@@ -179,7 +179,7 @@
             "Bir kuşun kanat tüyleriyle çıkardığı sesin nasıl oluştuğunu",
             "Bu kuşun aynı sesi aslında boğazıyla çıkardığını",
             "Canlılarda bu kadar ince bir ayarın ender olduğunu",
-            "Erkek kuşların bu sesle dişileri nasıl etkilediğini"
+            "Kanat tüyleriyle çıkarılan sesin dişileri nasıl etkilediğini"
           ]
         },
         {
@@ -362,12 +362,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ezildiğinde hangi model daha dayanıklı çıktı?",
+          "soru": "Denizatları kuyruklarını nasıl kullanır?",
           "secenekler": [
-            "Köşeli model",
-            "Yuvarlak model",
-            "İkisi aynı ölçüde dayanıklıydı",
-            "İkisi de hemen kırıldı"
+            "Esnek bir tutunma aracı gibi",
+            "Yüzerken bir dümen gibi",
+            "Avlarını sokan bir iğne gibi",
+            "Yavrularını taşıyan bir kese gibi"
           ]
         },
         {
@@ -401,7 +401,7 @@
             "Fillerin hortumla emerek yiyecek kavramasını",
             "Fillerin yiyeceği yalnız hortum ucuyla kıstırmasını",
             "Bulguların robot çalışmalarına ilham vermesini",
-            "Fillerin hortumla su içip serinlemesini"
+            "Fillerin hortumla emerek su içmesini"
           ]
         },
         {
@@ -520,12 +520,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kısa uykular toplanınca günde ne kadar uyku birikti?",
+          "soru": "Yuvadaki kuşlar neye karşı sürekli tetikteydi?",
           "secenekler": [
-            "11 saatten fazla",
-            "1 saatten az",
-            "Yaklaşık 3 saat",
-            "Yaklaşık 6 saat"
+            "Bir yırtıcıya ve öteki penguenlere",
+            "Fırtınaya ve dondurucu soğuğa",
+            "Kayan buz kütlelerine ve dalgalara",
+            "Yaklaşan insanlara ve gemilere"
           ]
         }
       ]
@@ -554,12 +554,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Araştırmacılar hangi iki grubu inceledi?",
+          "soru": "Bu hızlar, boyca en küçüğüyle en büyüğü arasında kaç kat fark olan hayvanlarda görüldü?",
           "secenekler": [
-            "Bukalemunları ve akciğersiz bazı semenderleri",
-            "Kurbağaları ve kaplumbağaları",
-            "Yılanları ve timsahları",
-            "Gekoları ve iguanaları"
+            "30 kat",
+            "3 kat",
+            "300 kat",
+            "10 kat"
           ]
         },
         {
@@ -631,7 +631,7 @@
           "soru": "Deniz yıldızları neyle sürünür?",
           "secenekler": [
             "Yüzlerce küçük tüp ayakla",
-            "Birkaç büyük, kaslı ayakla",
+            "Birkaç büyük tüp ayakla",
             "Beş kolunu kürek gibi çırparak",
             "Dikenleriyle iterek"
           ]
@@ -742,12 +742,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bir güvercinin sürü içinde genellikle uçtuğu yer neyle ilişkiliydi?",
+          "soru": "Sürülerin hareket desenlerinin neyden doğduğu düşünülür?",
           "secenekler": [
-            "Sıra düzenindeki yeriyle",
-            "Tüylerinin rengiyle",
-            "Kanatlarının uzunluğuyla ve genişliğiyle",
-            "Yaşıyla"
+            "Her kuşun yakınındaki kuşlara verdiği küçük tepkilerden",
+            "Sürüdeki en yaşlı kuşun verdiği işaretlerden",
+            "Rüzgârın yönündeki değişikliklerden",
+            "Güneşin gökteki konumundan"
           ]
         }
       ]

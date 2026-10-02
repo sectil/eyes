@@ -46,12 +46,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Dinleyiciler şarkılar hakkında neyi puanladı?",
+          "soru": "İlk deneyde kaç kişi şarkılardan parçalar dinledi?",
           "secenekler": [
-            "Şarkının ne için söylendiğini",
-            "Şarkıyı ne kadar beğendiklerini",
-            "Şarkının hangi dilde olduğunu",
-            "Şarkıyı daha önce duyup duymadıklarını"
+            "750",
+            "60",
+            "75",
+            "7500"
           ]
         },
         {
@@ -132,10 +132,10 @@
           "tur": "ayrinti",
           "soru": "Beyaz ve altın demek kimlerde daha yaygındı?",
           "secenekler": [
-            "Yaşlılar ve kadınlar",
-            "Gençler ve erkekler",
-            "Bilgisayardan bakanlar",
-            "Ressamlar ve fotoğrafçılar"
+            "Yaşlılarda ve kadınlarda",
+            "Gençlerde ve erkeklerde",
+            "Bilgisayardan bakanlarda",
+            "Ressamlarda ve fotoğrafçılarda"
           ]
         },
         {
@@ -194,12 +194,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Deneyde dokunuş, harekete göre ne zaman geliyordu?",
+          "soru": "Metne göre, kendi dokunuşumuzun zayıf gelmesi için dokunuşun ne zaman gelmesi gerekir?",
           "secenekler": [
-            "Hep belli bir gecikmeyle",
-            "Her seferinde rastgele bir anda",
+            "Beklenen anda",
             "Hareketten hemen önce",
-            "Yalnız ikinci hareketten sonra"
+            "Hareketten çok sonra",
+            "Rastgele bir anda"
           ]
         },
         {
@@ -214,12 +214,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Gecikmeye alışan kişileri hangi dokunuşlar daha az gıdıklıyordu?",
+          "soru": "Gecikmeyi tekrar tekrar yaşayanlar, anında gelen dokunuşu zayıf hissetmeyi ne kadar çabuk bıraktı?",
           "secenekler": [
-            "Gecikmeli dokunuşlar",
-            "Anında gelen dokunuşlar",
-            "Başkasının yaptığı dokunuşlar",
-            "En güçlü dokunuşlar"
+            "Hızla",
+            "Ancak birkaç ay sonra",
+            "Ancak yıllar sonra",
+            "Birkaç hafta içinde"
           ]
         }
       ]
@@ -352,12 +352,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "İyon kanalları sinyali alınca hücrenin içinde ne artıyor?",
+          "soru": "Bitki zarar gördüğünü fark edince haberi nereye yayar?",
           "secenekler": [
-            "Kalsiyum miktarı",
-            "Hücredeki suyun miktarı",
-            "Hücrenin sıcaklığı",
-            "Şeker miktarı"
+            "Her yanına",
+            "Yalnız yenen yaprağa",
+            "Yalnız gövdesine",
+            "Komşu bitkilere"
           ]
         },
         {
@@ -470,12 +470,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Metne göre rotiferler nasıl canlılardır?",
+          "soru": "Daha önce donmuş topraktan yeniden canlandırılan minik kurtlara ne ad veriliyor?",
           "secenekler": [
-            "Çok küçük, çok hücreli hayvanlar",
-            "Tek hücreli bakteriler",
-            "Toprakta yaşayan, gözle görülmeyen bitkiler",
-            "Gözle kolayca görülen iri böcekler"
+            "Nematod",
+            "Rotifer",
+            "Bdelloid",
+            "Planarya"
           ]
         },
         {
@@ -628,12 +628,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekibin bulduğu yeni duyu nedir?",
+          "soru": "Metinde sayılan, böceklerin yiyecek ararken yararlandığı ipuçlarından biri hangisidir?",
           "secenekler": [
-            "Çiçeklerin elektrik alanını algılamak",
-            "Çiçeklerin yapraklarındaki titreşimi duymak",
-            "Morötesi ışığı görmek",
-            "Nemi ayaklarıyla ölçmek"
+            "Çiçeğin rengi",
+            "Çiçeğin sıcaklığı",
+            "Çiçeğin nemi",
+            "Çiçeğin çıkardığı ses"
           ]
         },
         {
@@ -722,12 +722,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kışlama yerindekine benzer bir soğukta tutulan sonbahar göçmenleri ne yaptı?",
+          "soru": "Sonbahar göçmenleri kışlama yerindekine benzer bir soğukta ne zaman tutuldu?",
           "secenekler": [
-            "Kuzeye yöneldi",
-            "Güneye uçmayı sürdürdü",
-            "Yerinden hiç kıpırdamadı",
-            "Batıya döndü"
+            "Vakti gelmeden",
+            "Göçü tamamladıktan sonra",
+            "Yalnız geceleri",
+            "Yumurtadan çıkar çıkmaz"
           ]
         },
         {

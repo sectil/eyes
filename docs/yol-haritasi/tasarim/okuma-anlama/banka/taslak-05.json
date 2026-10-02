@@ -95,7 +95,7 @@
             "Kea papağanlarının olasılığa dayalı tahmin yapmasını",
             "Deneycinin yığından rastgele bir parça çekmesini",
             "Papağanların büyük maymunlardan daha zeki olmasını",
-            "Kea papağanlarının dağlarda yiyecek aramasını"
+            "Kea papağanlarının tahminlerini yalnız şansa bırakmasını"
           ]
         },
         {
@@ -243,7 +243,7 @@
             "Ebabillerin aylarca havada kalmasını",
             "Kışın ebabil görmenin zor olmasını",
             "Ebabillerin göçte sık sık konmasını",
-            "Ebabillerin yuvasını çamurdan yapmasını"
+            "Ebabillerin havada nasıl uyuduğunun çözülmesini"
           ]
         },
         {
@@ -317,7 +317,7 @@
             "Cam kurbağalarının saydam kalmak için kanlarını saklamasını",
             "Cam kurbağalarının kanının pıhtılaşmadan kalmasını",
             "Saydamlık için yalnız saydam dokuların yetmesini",
-            "Cam kurbağalarının yumurtalarını yaprakların altına bırakmasını"
+            "Cam kurbağalarının gündüzleri yaprakların altında saklanmasını"
           ]
         },
         {
@@ -612,7 +612,7 @@
           "secenekler": [
             "Çıplak köstebek farelerinin koloniye özgü şivesini",
             "Bütün çıplak köstebek farelerinin ortak tek şivesini",
-            "Çıplak köstebek farelerinin tünel kazma yöntemini",
+            "Koloni şivelerinin zamanla hiç bozulmadan aynı kalmasını",
             "Çıplak köstebek farelerinin toprak altında besin bulma yolunu"
           ]
         },
@@ -658,7 +658,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kraliçe ortadan kalkınca şiveye ne oldu?",
+          "soru": "Koloniyi yöneten hayvan ortadan kalkınca şiveye ne oldu?",
           "secenekler": [
             "Bozulmaya başladı",
             "Daha da belirginleşti",
@@ -684,9 +684,9 @@
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Zürafaların anlaşmaya yarayabilecek bir ses çıkarmasını",
+            "Zürafalarda anlaşmaya yarayabilecek yeni bir ses bulunmasını",
             "Zürafa sürülerinin sık sık dağılıp yeniden toplanmasını",
-            "Zürafaların hiç ses çıkarmadığının ortaya konmasını",
+            "Zürafaların geceleri burun sesleriyle birbirini uyarmasını",
             "Zürafaların uzun boyunlarıyla yüksek dallara uzanmasını"
           ]
         },

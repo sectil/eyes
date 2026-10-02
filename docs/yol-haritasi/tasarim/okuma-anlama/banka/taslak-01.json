@@ -66,12 +66,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Böcekler deneyin ilk bölümünde nerede izlendi?",
+          "soru": "Metindeki gübre böcekleri hangi kıtada yaşıyor?",
           "secenekler": [
-            "Açık ve yıldızlı bir gökyüzü altında",
-            "Karanlık bir mağarada",
-            "Bulutlu bir sabahta",
-            "Bir akvaryumda"
+            "Afrika'da",
+            "Asya'da",
+            "Avrupa'da",
+            "Güney Amerika'da"
           ]
         }
       ]
@@ -214,12 +214,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Yavrularla bebeklerin ortak özelliklerinden biri hangisidir?",
+          "soru": "Metinde, yavrularla bebeklerin ortak özelliği olarak adı geçen hangisidir?",
           "secenekler": [
-            "Heceleri tekrarlamak",
-            "Her heceyi yalnız bir kez söylemek",
-            "Sesleri hiçbir ritim olmadan çıkarmak",
-            "Bu sesleri ancak yetişkin olunca çıkarmak"
+            "Belli bir ritimle ses çıkarmak",
+            "Annesinin seslerini taklit etmek",
+            "Sesleri giderek alçaltmak",
+            "Uzun ezgiler söylemek"
           ]
         }
       ]
@@ -242,7 +242,7 @@
           "secenekler": [
             "Mürekkep balıklarının daha iyi bir ödül için bekleyebildiğini",
             "Kendini tutma becerisinin çoğunlukla omurgalılarda incelendiğini",
-            "Mürekkep balıklarının her zaman hemen alınan yiyeceği seçtiğini",
+            "Mürekkep balıklarının ödülü yalnız çok aç olduklarında bekleyebildiğini",
             "Mürekkep balıklarının avını pusuya yatarak nasıl beklediğini"
           ]
         },
@@ -281,19 +281,19 @@
           "soru": "Kendini tutma ne demektir?",
           "secenekler": [
             "Bir ödülü hemen almak yerine daha iyisi için beklemek",
-            "Korkunca saklanmak",
-            "Hiç yemek yememek",
-            "Başkalarının yiyeceğini almamak"
+            "Daha iyi bir ödül için başkalarıyla yarışmak",
+            "Ödülü hemen alıp bir kısmını sonraya saklamak",
+            "Hangi ödülün daha iyi olduğunu tahmin etmek"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Mürekkep balıklarına sunulan iki seçenek neydi?",
+          "soru": "Araştırmacılara göre mürekkep balıklarının sabrı hangi canlılarınkine yakın?",
           "secenekler": [
-            "Hemen sıradan bir yiyecek ya da bekleyince daha iyi bir yiyecek",
-            "Tek bir büyük yiyecek ya da aynı anda önüne konan iki küçük yiyecek",
-            "Yiyecek ya da oyuncak",
-            "Sıcak su ya da soğuk su"
+            "Zekâsıyla bilinen bazı omurgalılarınkine",
+            "Yeni doğmuş omurgalı yavrularınkine",
+            "Öteki bütün omurgasızlarınkine",
+            "Avını pusuda bekleyen yırtıcı balıklarınkine"
           ]
         }
       ]
@@ -326,7 +326,7 @@
           "secenekler": [
             "Tanımadıkları başka atların",
             "Kendi yavrularının",
-            "Aynı ahırdaki atların",
+            "Aynı ahırda yaşadıkları başka atların",
             "Sahiplerinin"
           ]
         },
@@ -416,12 +416,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Orangutanın kullandığı sarmaşık neyle biliniyor?",
+          "soru": "Metne göre orangutanın kullandığı sarmaşık neyle biliniyor?",
           "secenekler": [
             "Ağrı kesici ve ateş düşürücü etkileriyle",
-            "Zehirli ve acı meyveleriyle",
-            "Çok hızlı büyüyüp ağaçları sarmasıyla",
-            "Güzel kokulu, iri çiçekleriyle"
+            "Uyku getirici ve sakinleştirici etkileriyle",
+            "Kanı hızla durduran yapışkan özüyle",
+            "İştah açıcı ve kuvvet verici etkileriyle"
           ]
         },
         {
@@ -462,7 +462,7 @@
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Keçilerin gülen insan yüzünü tercih ettiğini",
+            "Keçilerin insan yüzündeki ifadeleri ayırt edebildiğini",
             "Köpeklerin ve atların insan yüzünü okuyabildiğini",
             "Keçilerin insan yüzlerini köpeklerden daha iyi okuduğunu",
             "Keçilerin sürüdeki öteki keçileri yüzünden tanıdığını"
@@ -539,7 +539,7 @@
             "Güvercinlerin gerçek sözcükleri anlamsız harf dizilerinden ayırabildiğini",
             "Bazı bilim insanlarının sözcük tanımayı nesne tanımaya bağladığını",
             "Sözcükleri tanımak için insanınkine benzer bir görme sistemi gerektiğini",
-            "Güvercinlerin uzak yerlerden yuvalarına dönerken yolu nasıl bulduğunu"
+            "Güvercinlerin öğrendikleri sözcüklerin anlamını da bildiğini"
           ]
         },
         {
@@ -612,7 +612,7 @@
           "secenekler": [
             "Okçu balıklarının insan yüzlerini ayırt etmeyi öğrenebildiğini",
             "Balıkların doğada insan yüzüyle neredeyse hiç karşılaşmadığını",
-            "Yüzleri ayırt etmenin yalnız insana özgü bir yetenek olduğunu",
+            "Okçu balıklarının insan yüzlerini hiç eğitilmeden ayırt edebildiğini",
             "Okçu balıklarının kendi türdeşlerini yüzlerinden nasıl tanıdığını"
           ]
         },
@@ -692,12 +692,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kopyalar en çok kimler arasında duyuldu?",
+          "soru": "Metinde, anne ile yavrusunun yanı sıra hangi yunuslar yakın yunuslara örnek gösteriliyor?",
           "secenekler": [
-            "Anne ile yavrusu gibi yakın yunuslar arasında",
-            "Aynı sürüdeki bütün yunuslar arasında",
-            "Yeni karşılaşan genç yunuslar arasında",
-            "Yiyecek için yarışan yunuslar arasında"
+            "Birlikte dolaşan erkekler",
+            "Birlikte avlanan dişiler",
+            "Aynı yıl doğan yavrular",
+            "Komşu sürülerden gelen erkekler"
           ]
         },
         {

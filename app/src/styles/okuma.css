@@ -60,8 +60,8 @@
 
 /* Soru */
 .oa-qwrap { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 20px; }
-.oa-qhead { display: grid; place-items: center; margin: 0 0 16px; }
-.oa-qhead .qr { width: 150px; height: 150px; }
+.oa-qhead { display: grid; place-items: center; margin: 0 0 12px; }
+.oa-qhead .qr { width: 128px; height: 128px; }
 .oa-qhead .qmini { display: none; align-items: center; gap: 10px; font: 650 14px/1 var(--font-body); color: var(--ink-2); }
 .oa-qhead .qmini .segs { display: flex; gap: 4px; }
 .oa-qhead .qmini i { width: 18px; height: 6px; border-radius: 3px; background: var(--oa-track); }

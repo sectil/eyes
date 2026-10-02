@@ -39,7 +39,7 @@
           "soru": "Kuru kum nasıl davranır?",
           "secenekler": [
             "Kimi zaman katı, kimi zaman akışkan gibi",
-            "Kimi zaman katı, kimi zaman gaz gibi",
+            "Kimi zaman katı, kimi zaman lastik gibi",
             "Hep katı gibi, hiç akmadan",
             "Hep sıvı gibi, hiç sertleşmeden"
           ]
@@ -120,12 +120,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kaplumbağalar suyun içindeyken ürenin büyük kısmını nereden attı?",
+          "soru": "Metindeki kaplumbağa türünün kabuğu nasıldır?",
           "secenekler": [
-            "Ağızlarından",
-            "Böbreklerinden",
-            "Derilerinden",
-            "Kabuklarından"
+            "Yumuşak",
+            "Taş gibi sert",
+            "Dikenli",
+            "Parlak renkli"
           ]
         },
         {
@@ -214,12 +214,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Daha gürültülü derenin kurbağaları genellikle nasıl sesleniyordu?",
+          "soru": "Metne göre hızla akan suyun uğultusu nasıldır?",
           "secenekler": [
-            "Daha yüksek perdeden",
-            "Daha kalın sesle",
-            "Daha seyrek ve kısık sesle",
-            "Yalnız gündüzleri ve kısa kısa"
+            "Kalın ve güçlü",
+            "İnce ve tiz",
+            "Hafif ve kesik kesik",
+            "Yumuşak ve fısıltı gibi"
           ]
         },
         {
@@ -252,18 +252,18 @@
           "secenekler": [
             "Ağaçta yaşayan semenderlerin düşerken süzülmesini",
             "Semenderlerin eğrelti otlarının arasında yaşamasını",
-            "Bütün semenderlerin düşüşlerini aynı ustalıkla yönetmesini",
+            "Bütün semenderlerin düşerken aynı ustalıkla süzülmesini",
             "Semenderlerin kopan kuyruklarını nasıl yenilediğini"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Bu semenderler nerede yaşar?",
+          "soru": "Araştırmacılar bu türün yanında kaç semender türünü daha izledi?",
           "secenekler": [
-            "En uzun ağaçların tepelerinde",
-            "Ağaçların dibindeki yaprak yığınlarında",
-            "Ağaç köklerinin arasındaki nemli toprakta",
-            "Alçak çalıların arasında"
+            "Üç",
+            "Bir",
+            "Beş",
+            "On"
           ]
         },
         {
@@ -400,7 +400,7 @@
           "secenekler": [
             "Muhabbet kuşlarında esnemenin bulaşıcı olmasını",
             "Muhabbet kuşlarının sürü hâlinde yaşamasını",
-            "Kuşların yalnız uykuları gelince esnemesini",
+            "Muhabbet kuşlarında esnemenin hiç bulaşmamasını",
             "Muhabbet kuşlarının ağaç kovuklarında yuva kurmasını"
           ]
         },
@@ -446,12 +446,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bu çalışmayla bulaşıcı esneme ilk kez ne tür bir hayvanda deneyle gösterildi?",
+          "soru": "İlk deneyde kuşlar kafeslere nasıl yerleştirildi?",
           "secenekler": [
-            "Memeli olmayan bir hayvanda",
-            "Bir maymun türünde",
-            "Evde beslenen köpeklerde",
-            "Denizde yaşayan bir memelide"
+            "İkişer ikişer, yan yana",
+            "Tek tek, ayrı odalara",
+            "Üçer üçer, üst üste",
+            "Hepsi birlikte, tek bir kafese"
           ]
         }
       ]
@@ -474,7 +474,7 @@
           "secenekler": [
             "Penguenlerin sıkı kümede birlikte küçük adımlarla yer değiştirmesini",
             "Kümedeki her penguenin kış boyunca hep aynı yerde kalmasını",
-            "Sıkı kümelerin kışın penguenleri hiç ısıtmamasını",
+            "Sıkı kümelerin penguenlerin kışı atlatmasına hiç yaramamasını",
             "Erkek penguenlerin kış boyunca yumurtayı ayaklarının üstünde taşımasını"
           ]
         },
@@ -520,12 +520,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bu hareketlerin sonunda küme nasıl oluyordu?",
+          "soru": "Zamanla küçük adımlar kümenin düzenini nasıl etkiliyordu?",
           "secenekler": [
-            "Hem sıkı kalıyor hem kımıldayabiliyordu",
-            "Dağılıp birbirinden uzak küçük gruplara ayrılıyordu",
-            "Tamamen hareketsiz kalıyordu",
-            "Denize doğru yürüyordu"
+            "Baştan sona değiştiriyordu",
+            "Yalnız kenarlarını değiştiriyordu",
+            "Kümeyi ikiye bölüyordu",
+            "Hiç değiştirmiyordu"
           ]
         }
       ]

@@ -95,7 +95,7 @@
             "Bir güvenin çok tiz sesleri duyabilmesini",
             "Yarasaların avını seslerin yankısıyla bulmasını",
             "Güvelerin yarasa seslerini hiç duyamamasını",
-            "Güvelerin yarasadan kaçarken yere dalmasını"
+            "Bütün güvelerin çok tiz sesleri duyabilmesini"
           ]
         },
         {
@@ -130,12 +130,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Güveler yaklaşan yarasayı neyle duymaya çalışır?",
+          "soru": "Ekibe göre bu güve neye karşı şimdiden hazırlıklı?",
           "secenekler": [
-            "Çok küçük kulaklarıyla",
-            "Uzun duyargalarıyla",
-            "Kanatlarındaki ince pullarla",
-            "Bacaklarındaki tüylerle"
+            "Yarasa seslerinde ileride olabilecek değişikliklere",
+            "Yarasaların ileride daha hızlı uçmasına",
+            "Gece ışıklarının ileride çoğalmasına",
+            "Havaların ileride daha da ısınmasına"
           ]
         },
         {
@@ -197,9 +197,9 @@
           "soru": "Bakteriler kokuyu ne zaman salıyordu?",
           "secenekler": [
             "Yalnız spor üretirken",
-            "Yalnız yağmur yağarken",
-            "Yalnız gece olunca",
-            "Yalnız toprak donunca"
+            "Yalnız sporları çimlenirken",
+            "Yalnız kollembolleri sezince",
+            "Yalnız toprak ıslanınca"
           ]
         },
         {
@@ -243,7 +243,7 @@
             "Yenidoğanların ağlama ezgisinin çevrelerindeki dile göre değişmesini",
             "Yenidoğanların annelerinin sesini başka seslere tercih etmesini",
             "Yenidoğanların ağlama ezgisinin her dilde aynı biçimde kalmasını",
-            "Yenidoğanların ağlayarak açlığını ve uykusunu belli etmesini"
+            "Bebeklerin ağlama ezgisini ancak aylar sonra konuşmadan öğrenmesini"
           ]
         },
         {
@@ -291,9 +291,9 @@
           "soru": "Ekip ağlamaların hangi özelliklerine baktı?",
           "secenekler": [
             "Ses şiddetine ve ezgisine",
-            "Süresine ve gün içindeki saatine",
-            "Gözyaşı miktarına ve yüz rengine",
-            "Sıklığına ve ne kadar çabuk dindiğine"
+            "Süresine ve ezgisine",
+            "Sıklığına ve ezgisine",
+            "Gözyaşı miktarına ve ezgisine"
           ]
         }
       ]
@@ -490,12 +490,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kuzey yarım küredeki bakterilerin hangi yöne yöneldiği düşünülüyordu?",
+          "soru": "Ekibin bulduğu davranış, o güne dek bildirilen davranışlara göre nasıldı?",
           "secenekler": [
-            "Manyetik kuzeye",
-            "Manyetik güneye",
-            "Doğuya",
-            "Batıya"
+            "Hepsinin tersiydi",
+            "Yalnız birkaçının tersiydi",
+            "Çoğuyla aynıydı",
+            "Yarısının tersiydi"
           ]
         },
         {
@@ -513,7 +513,7 @@
           "soru": "Zıt yönlere yüzen bakterilerin bir arada yaşaması neyle çelişiyor?",
           "secenekler": [
             "Bu davranışın kazancını anlatan bugünkü açıklamalarla",
-            "Bakterilerin içinde demir kristali bulunduğu bilgisiyle",
+            "Bakterilerin suda yüzerek yer değiştirebildiği bilgisiyle",
             "Bakterilerin manyetik alana tepki verdiği bilgisiyle",
             "Oksijenin suyun üst katmanlarında daha çok olduğu bilgisiyle"
           ]
@@ -621,9 +621,9 @@
           "soru": "Bombardıman böcekleri kendilerini korumak için ne yapar?",
           "secenekler": [
             "Sıcak bir sıvı püskürtür",
-            "Soğuk bir köpük salar",
-            "Yüksek bir ses çıkarır",
-            "Renk değiştirir"
+            "Soğuk bir sıvı püskürtür",
+            "Yapışkan bir köpük püskürtür",
+            "Kokulu bir gaz püskürtür"
           ]
         },
         {
@@ -648,12 +648,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Akışın kesik kesik olmasını ne denetliyor?",
+          "soru": "Ekip tepkime odasında neyin hareketini ölçtü?",
           "secenekler": [
-            "İki bölmenin birleştiği yerdeki özel parçalar",
-            "Böceğin bacaklarındaki kaslar",
-            "Böceğin duyargaları",
-            "Havanın sıcaklığı"
+            "Buharın",
+            "Havanın",
+            "Suyun",
+            "Kabuk parçalarının"
           ]
         },
         {
@@ -715,9 +715,9 @@
           "soru": "Ekibin baktığı çekirdeklerin yüzde kaçı canlı kökenliydi?",
           "secenekler": [
             "Yüzde 69 ile 100'ü",
-            "Yüzde 1 ile 10'u",
-            "Yüzde 20 ile 30'u",
-            "Yüzde 40 ile 50'si"
+            "Yüzde 40 ile 60'ı",
+            "Yüzde 50 ile 80'i",
+            "Yüzde 60 ile 90'ı"
           ]
         },
         {
@@ -727,7 +727,7 @@
             "Bakteri",
             "Polen",
             "Böcek parçası",
-            "Kum tanesi"
+            "Mantar sporu"
           ]
         },
         {

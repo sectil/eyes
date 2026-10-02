@@ -110,12 +110,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "İri balık mürene neden işaret veriyordu?",
+          "soru": "İri balık hangi balık ailesindendi?",
           "secenekler": [
-            "Onu birlikte ava çağırmak için",
-            "Ona avından pay vermek için",
-            "Onu yuvasından kovmak için",
-            "Onu kendinden uzak tutmak için"
+            "Orfoz ailesinden",
+            "Köpekbalığı ailesinden",
+            "Ton balığı ailesinden",
+            "Müren ailesinden"
           ]
         },
         {
@@ -258,12 +258,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Taşınan ıstakozlar nereye doğru yöneldi?",
+          "soru": "Istakozlar taşınırken yolda yön ipuçları alabildi mi?",
           "secenekler": [
-            "Yakalandıkları yere doğru",
-            "Rastgele farklı yönlere",
-            "Hep güneşin doğduğu yöne",
-            "Hep en yakın kıyı şeridine doğru"
+            "Bilinen hiçbir yön ipucunu alamadılar",
+            "Yalnız güneşin konumunu görebildiler",
+            "Yalnız suyun akıntısını hissedebildiler",
+            "Bilinen bütün yön ipuçlarını alabildiler"
           ]
         },
         {
@@ -416,12 +416,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Deneyde hangi kaplumbağalar kullanıldı?",
+          "soru": "Araştırmacılar kaplumbağa yavrularıyla nerede çalıştı?",
           "secenekler": [
-            "Yumurtadan yeni çıkmış iribaş deniz kaplumbağaları",
-            "Yaşlı ve büyük kara kaplumbağaları",
-            "Göllerde yaşayan küçük su kaplumbağaları",
-            "Hayvanat bahçesinde büyütülmüş yetişkin tatlı su kaplumbağaları"
+            "Florida'da",
+            "Brezilya'da",
+            "Avustralya'da",
+            "Japonya'da"
           ]
         },
         {
@@ -510,12 +510,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kapağı başka bir sakallı ejderin açtığını gören kertenkeleler ne yaptı?",
+          "soru": "Bulgular taklit yoluyla öğrenme hakkında neyi düşündürüyor?",
           "secenekler": [
-            "Kapağı aynı yana doğru açtılar",
-            "Kapağı hiç açmadılar",
-            "Kapağı öteki yana doğru açtılar",
-            "Kapaktan uzaklaşıp bir taşın altına saklandılar"
+            "Çok eski kökleri olabileceğini",
+            "Yalnız insanlara özgü olduğunu",
+            "Çok yakın zamanda ortaya çıktığını",
+            "Yalnız kuşlarda geliştiğini"
           ]
         }
       ]
