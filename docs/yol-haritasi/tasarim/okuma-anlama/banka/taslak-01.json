@@ -19,7 +19,7 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Gübre böceklerinin karanlık gecelerde yıldızlarla yön bulmasını",
-            "Gübre böceklerinin yiyeceklerini nasıl sakladığını",
+            "Gübre böceklerinin topladıkları gübreyi yuvalarında nasıl sakladığını",
             "Planetaryumların nasıl çalıştığını",
             "Böceklerin bulutlu havada nasıl dinlendiğini"
           ]
@@ -29,7 +29,7 @@
           "soru": "Böcekler topu neden kalabalıktan uzaklaştırıyor?",
           "secenekler": [
             "Topu başka böceklere kaptırmamak için",
-            "Topu güneşte kurutmak için",
+            "Topu güneşin altında iyice kurutup sertleştirmek için",
             "Yuvalarını su basmasın diye",
             "Topu daha da büyütmek için"
           ]
@@ -39,7 +39,7 @@
           "soru": "Gökyüzü bulutla kapandığında ne oldu?",
           "secenekler": [
             "Böcekler düz yol alma becerisini kaybetti",
-            "Böcekler daha hızlı yuvarladı",
+            "Böcekler toplarını eskisinden çok daha hızlı yuvarladı",
             "Böcekler aya doğru yürüdü",
             "Böcekler yeni bir top yaptı"
           ]
@@ -93,7 +93,7 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Kedilerin kendi adlarını başka sözcüklerden ayırt edebildiğini",
-            "Kedilerin köpeklerden daha akıllı olduğunu",
+            "Kedilerin sözcükleri öğrenmede köpeklerden çok daha akıllı olduğunu",
             "Kedilerin yalnız sahiplerinin sesini duyduğunu",
             "Kedi kafelerinin nasıl kurulduğunu"
           ]
@@ -160,14 +160,14 @@
       "yazar": "Fernandez ve ark.",
       "dergi": "Science",
       "yil": 2021,
-      "metin": "İnsan bebekleri konuşmaya başlamadan önce ba ba ba gibi heceleri ritimle tekrar eder. Bu heceleme dönemi, konuşmaya giden yolda önemli bir adım sayılır. Bilim insanları uzun süre bunun başka memelilerde de olup olmadığını merak etti, ama elde çok az kanıt vardı. Berlin'deki bir ekip, yeni sesler öğrenebilen bir yarasa türünü doğada izledi. Yirmi yarasa yavrusunun sesleri, üç aylık büyüme dönemleri boyunca kaydedildi. Kayıtlar, insan bebeklerinin heceleme dönemiyle karşılaştırıldı. Bebeklerde görülen sekiz özelliğin sekizi de yarasa yavrularında bulundu. Bunların arasında heceleri tekrar etmek ve belli bir ritimle ses çıkarmak da vardı. Araştırmacılara göre bu benzerlik, birbirinden çok farklı iki memelide ses öğrenmenin nasıl başladığını karşılaştırmak için yeni bir kapı açıyor.",
+      "metin": "İnsan bebekleri konuşmaya başlamadan önce ba ba ba gibi heceleri ritimle tekrar eder. Bu heceleme dönemi, konuşmaya giden yolda önemli bir adım sayılır. Bilim insanları uzun süre bunun başka memelilerde de olup olmadığını merak etti, ama elde çok az kanıt vardı. Berlin'deki bir ekip, yeni sesler öğrenebilen bir yarasa türünü doğada izledi. Yirmi yarasa yavrusunun sesleri, üç aylık büyüme dönemleri boyunca kaydedildi. Kayıtlar, insan bebeklerinin heceleme dönemiyle karşılaştırıldı. Bebeklerde görülen sekiz özelliğin sekizi de yarasa yavrularında bulundu. Bunların arasında heceleri tekrar etmek ve belli bir ritimle ses çıkarmak da vardı. Araştırmacılara göre bu benzerlik, birbirinden çok farklı iki memelide hecelemeyi ve işlevini karşılaştırmak için yeni bir kapı açıyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Yarasa yavrularının seslerinin bebeklerin heceleme dönemine benzediğini",
-            "Yarasaların karanlıkta nasıl yön bulduğunu",
+            "Yarasaların karanlık gecelerde sesin yankısıyla nasıl yön bulup avlandığını",
             "Bebeklerin yarasa seslerine nasıl tepki verdiğini",
             "Berlin'deki bir hayvanat bahçesini"
           ]
@@ -177,7 +177,7 @@
           "soru": "Kaç yarasa yavrusu izlendi?",
           "secenekler": [
             "Yirmi",
-            "On",
+            "Yüz elli",
             "Otuz",
             "Elli"
           ]
@@ -187,7 +187,7 @@
           "soru": "Yavruların sesleri ne kadar süre kaydedildi?",
           "secenekler": [
             "Üç aylık büyüme dönemleri boyunca",
-            "Bir hafta boyunca",
+            "Yalnız bir haftalık kısa bir süre boyunca",
             "Bir yıl boyunca",
             "Yalnız doğdukları gün"
           ]
@@ -241,7 +241,7 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Mürekkep balıklarının daha iyi bir ödül için bekleyebildiğini",
-            "Mürekkep balıklarının renk değiştirmesini",
+            "Mürekkep balıklarının düşmanlarından saklanmak için nasıl renk değiştirdiğini",
             "Mürekkep balıklarının nasıl avlandığını",
             "Deniz canlılarının uyku düzenini"
           ]
@@ -253,7 +253,7 @@
             "50 ile 130 saniye arasında",
             "5 ile 10 saniye arasında",
             "10 ile 20 dakika arasında",
-            "Bir gün boyunca"
+            "Bir gün boyunca hiç ara vermeden"
           ]
         },
         {
@@ -263,7 +263,7 @@
             "Kural değişince yeniden öğrenmede",
             "Daha hızlı yüzmede",
             "Kumda saklanmada",
-            "Daha çok yiyecek bulmada"
+            "Kumun altında saklı daha çok yiyecek bulmada"
           ]
         },
         {
@@ -273,7 +273,7 @@
             "Omurgası olmayan bir deniz canlısı",
             "Bir memeli",
             "Bir kuş",
-            "Tatlı suda yaşayan bir balık"
+            "Göllerde ve nehirlerde yaşayan bir tatlı su balığı"
           ]
         },
         {
@@ -291,7 +291,7 @@
           "soru": "Mürekkep balıklarına sunulan iki seçenek neydi?",
           "secenekler": [
             "Hemen sıradan bir yiyecek ya da bekleyince daha iyi bir yiyecek",
-            "Büyük bir yiyecek ya da iki küçük yiyecek",
+            "Tek bir büyük yiyecek ya da aynı anda önüne konan iki küçük yiyecek",
             "Yiyecek ya da oyuncak",
             "Sıcak su ya da soğuk su"
           ]
@@ -316,7 +316,7 @@
           "secenekler": [
             "Atların başka atların yüz ifadelerini ayırt edebildiğini",
             "Atların nasıl eğitildiğini",
-            "Atların fotoğrafının nasıl çekildiğini",
+            "Atların fotoğrafının ahırda hangi ışıkla ve nasıl çekildiğini",
             "Atların ne kadar hızlı koştuğunu"
           ]
         },
@@ -357,7 +357,7 @@
             "Kendiliğinden, eğitim almadan",
             "Uzun bir eğitimden sonra",
             "Yalnız ödül verilince",
-            "Yalnız sahipleri yanındayken"
+            "Yalnız sahipleri yanlarındayken"
           ]
         },
         {
@@ -382,14 +382,14 @@
       "yazar": "Laumer ve ark.",
       "dergi": "Scientific Reports",
       "yil": 2024,
-      "metin": "Sumatra adasında yaşayan yetişkin bir erkek orangutanın yüzünde bir yara açıldı. Araştırmacılar onu izlemeye devam etti ve şaşırtıcı bir şey gördü. Yaralanmasından üç gün sonra orangutan, ormanda yetişen tırmanıcı bir bitkinin yapraklarını seçerek kopardı. Yaprakları çiğnedi ve çıkan suyu defalarca yarasına sürdü. Son olarak yaranın üzerini çiğnenmiş yapraklarla tamamen kapattı. Bu bitki Güneydoğu Asya'nın tropik ormanlarında yetişiyor. Daha önce bazı hayvanların belli yaprakları yuttuğu ya da tüylerine sürdüğü görülmüştü. Ancak vahşi bir hayvanın yarasını böyle bir bitkiyle etkin biçimde ele aldığı ilk kez bu kadar düzenli biçimde kaydedildi. Araştırmacılar bu davranışın, insanlarda yara bakımının nasıl başladığına dair yeni ipuçları verdiğini düşünüyor.",
+      "metin": "Sumatra adasında yaşayan bir erkek orangutanın yüzünde bir yara açıldı. Araştırmacılar onu izlemeye devam etti ve şaşırtıcı bir şey gördü. Yaralanmasından üç gün sonra orangutan, ormanda yetişen tırmanıcı bir bitkinin yapraklarını seçerek kopardı. Yaprakları çiğnedi ve çıkan suyu defalarca yarasına sürdü. Son olarak yaranın üzerini çiğnenmiş yapraklarla tamamen kapattı. Bu bitki Güneydoğu Asya'nın tropik ormanlarında yetişiyor. Daha önce bazı hayvanların belli yaprakları yuttuğu ya da tüylerine sürdüğü görülmüştü. Ancak vahşi bir hayvanın yarasını böyle bir bitkiyle etkin biçimde ele aldığı ilk kez bu kadar düzenli biçimde kaydedildi. Araştırmacılar bu davranışın, bu orangutanın kendi bulduğu yeni bir alışkanlık olabileceğini düşünüyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Bir orangutanın yarasını bir bitkiyle ele almasını",
-            "Orangutanların nasıl yuva yaptığını",
+            "Orangutanların ağaçların tepesinde nasıl yuva yaptığını",
             "Sumatra'daki ormanların büyüklüğünü",
             "Orangutanların ne kadar yaşadığını"
           ]
@@ -419,7 +419,7 @@
           "soru": "Orangutan en son ne yaptı?",
           "secenekler": [
             "Yaranın üzerini çiğnenmiş yapraklarla kapattı",
-            "Yarayı suyla yıkadı",
+            "Yarayı dereden aldığı temiz suyla uzun uzun yıkadı",
             "Yaprakları toprağa gömdü",
             "Başka bir ağaca geçti"
           ]
@@ -456,14 +456,14 @@
       "yazar": "Nawroth ve ark.",
       "dergi": "Royal Society Open Science",
       "yil": 2018,
-      "metin": "Köpeklerin ve atların insan yüz ifadelerine duyarlı olduğu biliniyor. Bu hayvanlar insanla yakın çalışmak için evcilleştirildi. Peki daha çok süt ve et için yetiştirilen keçiler de insan yüzünü okuyabilir mi? Bir araştırma ekibi bunu sınamak için keçilere aynı anda iki fotoğraf gösterdi. İki fotoğraf da tanımadıkları aynı kişiye aitti. Birinde kişi gülüyor, ötekinde kızgın bakıyordu. Fotoğraflar duvara birbirinden 1,3 metre uzakta asıldı. Keçiler serbest bırakıldığında önce gülen yüze gidip onu incelemeyi seçti. Bu tercih, gülen yüz sağ taraftayken belirgindi. Gülen yüz sol taraftayken ise bir tercih görülmedi. Sonuç, insanla çalışmak için değil üretim için evcilleştirilen hayvanların da insan duygularını ayırt edebildiğini gösteriyor.",
+      "metin": "İnsan yüz ifadelerinin köpekler ve atlar için önemli bir bilgi kaynağı olabileceği düşünülüyor. Bu hayvanlar insanla yakın çalışmak için evcilleştirildi. Peki daha çok süt ve et için yetiştirilen keçiler de insan yüzünü okuyabilir mi? Bir araştırma ekibi bunu sınamak için keçilere aynı anda iki fotoğraf gösterdi. İki fotoğraf da tanımadıkları aynı kişiye aitti. Birinde kişi gülüyor, ötekinde kızgın bakıyordu. Fotoğraflar duvara birbirinden 1,3 metre uzakta asıldı. Keçiler serbest bırakıldığında önce gülen yüze gidip onu incelemeyi seçti. Bu tercih, gülen yüz sağ taraftayken belirgindi. Gülen yüz sol taraftayken ise bir tercih görülmedi. Sonuç, insanla çalışmak için değil üretim için evcilleştirilen hayvanların da insan yüz ifadelerini ayırt edebildiğini gösteriyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Keçilerin gülen insan yüzünü tercih ettiğini",
-            "Keçilerin nasıl beslendiğini",
+            "Keçilerin otlakta hangi bitkileri seçerek beslendiğini",
             "Keçilerin birbirini nasıl tanıdığını",
             "Hayvan fotoğrafı çekmenin kurallarını"
           ]
@@ -494,7 +494,7 @@
           "secenekler": [
             "Gülen yüz sağ taraftayken",
             "Gülen yüz sol taraftayken",
-            "Fotoğraflar yan yana dururken",
+            "Fotoğraflar yere konduğunda",
             "Keçiler aç olduğunda"
           ]
         },
@@ -537,7 +537,7 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Güvercinlerin gerçek sözcükleri anlamsız harf dizilerinden ayırabildiğini",
-            "Güvercinlerin uzak yerlerden yuvalarına nasıl döndüğünü",
+            "Güvercinlerin yüzlerce kilometre uzaktaki yerlerden yuvalarına nasıl döndüğünü",
             "Alfabedeki harflerin tarihini",
             "Güvercinlerin konuşmayı öğrendiğini"
           ]
@@ -549,7 +549,7 @@
             "Daha önce hiç görmedikleri sözcükleri tanımayı",
             "Sözcükleri sesli okumayı",
             "Harfleri gagalarıyla yazmayı",
-            "Sözcüklerin anlamını göstermeyi"
+            "Her sözcüğün anlamını resimler arasından gagalayarak göstermeyi"
           ]
         },
         {
@@ -579,7 +579,7 @@
             "Hangi harflerin sık sık yan yana geldiğine",
             "Harflerin rengine",
             "Sözcüklerin söyleniş sesine",
-            "Sözcüklerin yazıldığı kâğıda"
+            "Sözcüklerin yazıldığı kâğıdın rengine ve büyüklüğüne"
           ]
         },
         {
@@ -587,7 +587,7 @@
           "soru": "Metne göre okumayı öğrenmenin iki parçası nedir?",
           "secenekler": [
             "Harflerin seslerini bilmek ve sözcüklerin yazılı biçimini tanımak",
-            "Hızlı konuşmak ve yüksek sesle okumak",
+            "Hızlı konuşabilmek ve her sözcüğü yüksek sesle, takılmadan okuyabilmek",
             "Harfleri yazmak ve sözcükleri ezberlemek",
             "Resimlere bakmak ve hikâye anlatmak"
           ]
@@ -611,7 +611,7 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Okçu balıklarının insan yüzlerini ayırt etmeyi öğrenebildiğini",
-            "Okçu balıklarının nerede yaşadığını",
+            "Okçu balıklarının hangi sularda yaşadığını ve yavrularını nasıl büyüttüğünü",
             "Balıkların renkleri nasıl gördüğünü",
             "Akvaryum bakımının inceliklerini"
           ]
@@ -622,7 +622,7 @@
           "secenekler": [
             "Ağızlarından su fışkırtarak",
             "Ağ örerek",
-            "Kumda saklanıp bekleyerek",
+            "Kumda saklanıp avını bekleyerek",
             "Sürü hâlinde kovalayarak"
           ]
         },
@@ -663,7 +663,7 @@
             "Doğada insan yüzüyle neredeyse hiç karşılaşmazlar",
             "Gözleri çok zayıftır",
             "Hep karanlık sularda yaşarlar",
-            "Avlarını yalnız kokuyla bulurlar"
+            "Avlarını gözleriyle değil yalnız kokularıyla bulurlar"
           ]
         }
       ]
@@ -685,7 +685,7 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Yunusların yakınlarının ıslığını kopyalamasını",
-            "Yunusların nasıl uyuduğunu",
+            "Yunusların okyanusta yüzerken nasıl uyuyabildiğini",
             "Yunusların avlanma yöntemini",
             "Yunusların uzun göç yollarını"
           ]
@@ -695,7 +695,7 @@
           "soru": "Kopyalar en çok kimler arasında görüldü?",
           "secenekler": [
             "Anne ile yavrusu gibi yakın yunuslar arasında",
-            "Hiç tanışmayan yunuslar arasında",
+            "Daha önce hiç karşılaşmamış, birbirine yabancı yunuslar arasında",
             "Rakip gruplar arasında",
             "Yunuslarla balinalar arasında"
           ]
@@ -725,7 +725,7 @@
           "soru": "Kopya asıl ıslıktan nasıl ayırt edilebiliyordu?",
           "secenekler": [
             "Kopyalayan yunus ıslığın bazı özelliklerini hep biraz değiştiriyordu",
-            "Kopya hep daha yüksek sesliydi",
+            "Kopya, asıl ıslıktan her zaman çok daha yüksek sesle ve daha uzun çalınıyordu",
             "Kopya yalnız gece çalınıyordu",
             "Kopya hep iki kez tekrarlanıyordu"
           ]

@@ -29,9 +29,9 @@
           "soru": "Ödüle nasıl ulaşılabiliyordu?",
           "secenekler": [
             "Bir ipi çekerek",
-            "Bir kapağı iterek",
-            "Bir tüpün içine girerek",
-            "Bir düğmeye basarak"
+            "Kapağı iterek",
+            "Tüpe girerek",
+            "Tuşa basarak"
           ]
         },
         {
@@ -49,7 +49,7 @@
           "soru": "Eğitilmemiş arılar beceriyi nasıl kaptı?",
           "secenekler": [
             "Eğitilmiş bir arıyı uzaktan izleyerek",
-            "Kovandaki bir kokunun izini sürerek giderek",
+            "Kovandaki bir kokunun izini sürerek",
             "Araştırmacıların elinden beslenerek",
             "Gece kovanda uyurken"
           ]
@@ -71,7 +71,7 @@
             "Tek bir bilgili arıdan toplayıcıların çoğuna hızla",
             "Yalnız kraliçe arıya, çok yavaşça",
             "Hiç yayılmadı, tek arıda kaldı",
-            "Yalnız yavru arılara, yıllar içinde ve çok yavaş biçimde"
+            "Yalnız yavru arılara, yıllar içinde"
           ]
         }
       ]
@@ -114,8 +114,8 @@
           "secenekler": [
             "Arkasından kaç ses geleceğini",
             "Karganın kaç yaşında olduğunu",
-            "İşaretin hangi renkte olduğunu",
-            "Karganın hangi yuvadan geldiğini"
+            "İşaretin rengini",
+            "Karganın yuvasının yerini"
           ]
         },
         {
@@ -134,7 +134,7 @@
           "secenekler": [
             "Dizideki sırasını",
             "Karganın boyunu",
-            "Havanın sıcaklığını",
+            "Havanın ısısını",
             "Günün saatini"
           ]
         },
@@ -169,7 +169,7 @@
             "Çiçeklerin arı sesine nektarlarını tatlandırarak karşılık vermesini",
             "Arıların çiçekleri sesle nasıl bulduğunu",
             "Çiçeklerin gece neden kapandığını",
-            "Müziğin bitkileri nasıl hızla büyüttüğünü ve bol bol çiçeklendirdiğini"
+            "Müziğin bitkileri nasıl hızla büyüttüğünü"
           ]
         },
         {
@@ -209,7 +209,7 @@
             "Ne titreşime ne tatlanmaya yol açtı",
             "Nektarı daha da çok tatlandırdı",
             "Çiçekleri birkaç dakikada soldurdu",
-            "Çiçekleri her zamankinden çok daha güçlü titretti"
+            "Çiçekleri daha güçlü titretti"
           ]
         },
         {
@@ -243,7 +243,7 @@
             "Tek hücreli bir canlının uyarılara sıralı tepki verdiğinin doğrulanmasını",
             "Tek hücreli canlıların nasıl çoğaldığını",
             "Mikroskobun 1906'da nasıl icat edildiğini",
-            "Tek hücreli canlıların ışığa doğru nasıl yüzdüğünü ve sonra nasıl beslendiğini"
+            "Tek hücreli canlıların ışığa doğru nasıl yüzdüğünü"
           ]
         },
         {
@@ -317,7 +317,7 @@
             "Çöl karıncalarının mesafeyi adımlarıyla ölçmesini",
             "Çöl karıncalarının sıcaktan nasıl korunduğunu",
             "Karıncaların yuvalarını nasıl kazdığını",
-            "Çöl karıncalarının yuvaya dönerken kokuyla iz sürmesini"
+            "Çöl karıncalarının kokuyla iz sürmesini"
           ]
         },
         {
@@ -441,7 +441,7 @@
             "Kuşların kendine özgü açma biçimleri olduğunu",
             "Bütün kuşların tıpatıp aynı biçimde açtığını",
             "Yalnız yavru kuşların kutu açtığını",
-            "Kuşların yalnız geceleri karanlıkta kutu açtığını"
+            "Kuşların yalnız geceleri kutu açtığını"
           ]
         }
       ]
@@ -465,7 +465,7 @@
             "Ayçiçeklerinin hareketlerinin iç saatle düzenlenmesini",
             "Ayçiçeklerinin tohumlarını nasıl dağıttığını",
             "Ayçiçeklerinin kuraklığa nasıl dayandığını",
-            "Ayçiçeklerinin neden yalnız gece karanlığında çiçek açtığını"
+            "Ayçiçeklerinin yalnız gece çiçek açmasını"
           ]
         },
         {
@@ -494,7 +494,7 @@
           "secenekler": [
             "Gövdenin doğu ve batı yanlarının sırayla uzamasıyla",
             "Köklerin toprağın içinde dönmesiyle",
-            "Yaprakların kuş kanadı gibi aşağı yukarı çırpmasıyla",
+            "Yaprakların kanat gibi çırpmasıyla",
             "Gövdenin her gün biraz daha kısalıp eğilmesiyle"
           ]
         },
@@ -539,7 +539,7 @@
             "Bir balçık mantarının besinin yerini tüplerinde saklamasını",
             "Balçık mantarlarının nasıl çoğaldığını",
             "Mantarların topraktan nasıl su çektiğini",
-            "Balçık mantarının güneş ışığından ve sıcaktan nasıl kaçıp saklandığını"
+            "Balçık mantarının ışıktan nasıl kaçtığını"
           ]
         },
         {
@@ -559,7 +559,7 @@
             "Bir kısmı kalınlaştı, bir kısmı inceldi",
             "Hepsi aynı kalınlıkta kaldı",
             "Hepsi bir anda koptu",
-            "Hepsi renk değiştirip parlak sarıya döndü"
+            "Hepsi renk değiştirip sarıya döndü"
           ]
         },
         {
@@ -613,7 +613,7 @@
             "Bal arılarının dansı başka arıları izleyerek öğrenmesini",
             "Bal arılarının çiçeklerden nasıl bal yaptığını",
             "Arıların sıcak günlerde kovanı nasıl soğuttuğunu",
-            "Arıların çiçek kokularını birbirinden nasıl ayırt ettiğini"
+            "Arıların çiçek kokularını nasıl ayırt ettiğini"
           ]
         },
         {
@@ -687,7 +687,7 @@
             "Baştankaralarda yeni bir yöntemin yerel geleneğe dönüşmesini",
             "Baştankaraların kışın hangi yollarla göç ettiğini",
             "Baştankaraların yuvalarını nasıl yaptığını",
-            "Baştankaraların yavrularına uzun ve karmaşık şarkılar öğretmesini"
+            "Baştankaraların yavrularına şarkı öğretmesini"
           ]
         },
         {
