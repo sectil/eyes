@@ -69,7 +69,7 @@ Aşağıdakiler **S**; yukarıdaki tablolarda aynı kimliğin T durumu bu listey
 - Y1 (yeni) "Caddeden geç, değişeni bul · 2 dk" · Y2 "Yeni sahne: {sahne} · 2 dk"
 - N1–N4 bu listede yok: Nef kartı sahip kararıyla yalnız güçlü haberde (örüntü, ilerleme) ve Nef'in onaylı genel bankasıyla konuşur.
 
-## Yeni metinler (2026-10-02) — durum K: kapıdan geçti, sahip onayı bekliyor
+## Yeni metinler (2026-10-02) — durum S: sahip onaylı ("Onaylıyorum", 2026-10-02)
 Kapı: kapi/metin-tur3 (100 satır, 92 geçti), metin-tur4 (geçemeyenlerin yeni sürümü), metin-tur5 (akşam sahnesinin adı;
 "… cadde" kalıbı iki turda geçemedi, yöntem değişti). Her satır ≥ 4/5.
 
