@@ -1,0 +1,41 @@
+{
+ "Ö3b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Ö3c": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Ö5c": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "\"Sahne\" ile \"sahnede\" art arda geliyor; sesli okununca form alanı gibi kuru ve tekrarlı duyuluyor."
+  ]
+ },
+ "Ö5d": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Kuru ve tekrarlı; \"bulamadın\" sesli okununca suçlayıcı geliyor."
+  ]
+ },
+ "Ö5e": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Ö5f": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "Görmeyen bir kullanıcıya sesle okunan etikette \"gözünden kaçtı\" demek yerinde değil.",
+   "Gözü görmeyen birine sesle okunan etikette \"gözünden kaçtı\" deyimi incitici ve yersiz kaçar.",
+   "Gözü görmeyen birine sesle okunan etikette \"gözünden kaçtı\" demek yersiz ve incitici kaçıyor.",
+   "Görmeyen birine sesle okunan etikette \"gözünden kaçtı\" demek incitebilir, yerine uygun değil."
+  ]
+ }
+}

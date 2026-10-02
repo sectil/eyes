@@ -1,0 +1,145 @@
+{
+ "01-gorev-ilk": {
+  "yes": 4,
+  "n": 5,
+  "weak": [
+   "01-gorev-ilk-320-acik-3: kahraman görselin solundaki tabela \"ASTANE\" diye yarım kesiliyor. Düğmenin hemen üstündeki \"…henüz kanıt yok\" paragrafı 320'de üç satır tutuyor ve başlamadan önce hevesi söndürüyor.",
+   "01-gorev-ilk-390-acik-3: Görsel güçlü, şapkalılar hemen göze çarpıyor ve görev başlığı büyük. Ama 'FARK ETTİN Mİ? · 2 DK · CADDE' satırı aralıklı, ince, küçük harfli monospace yazıyla dizilmiş; gözlükle zor okunuyor. Düğmenin hemen üstündeki 'henüz kanıt yok' cümlesi de başlangıç heyecanını söndürüyor.",
+   "01-gorev-ilk-390-acik-3: sağdaki siyah köpeğin bacakları tarak dişi gibi dört düz çubuk, kırık bir çizim gibi duruyor. Ayrıca göz simgeli satırdaki daire (x≈34) sol 40 px hizasından taşıyor, üstündeki ve altındaki metinle aynı çizgide durmuyor.",
+   "01-gorev-ilk-390-acik-3 / koyu-3: Kahraman görselin sol kenarında bayraklı figür yarıya kadar kesik. Aynı ekran 01-gorev-ilk-320-acik-3'te bambaşka bir kırpımla açılıyor (geniş cadde, minicik şapkalar). Ayrıca birincil düğmenin hemen üstündeki \"henüz kanıt yok\" cümlesi, başlamadan önceki heyecanı söndürüyor.",
+   "01-gorev-ilk-390-acik-3: Görev kutucuğundaki şapkalı adam çizimi küçük ve kaba duruyor (bacaklar kopuk iki çubuk), üstteki zengin sahnenin yanında ucuz kalıyor. Ayrıca kahraman görsel çok yakın kırpılmış, soldaki kişi kenardan yarıya bölünmüş."
+  ]
+ },
+ "02-gorev-sonraki": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "02-gorev-sonraki-320-acik-3 ve koyu-3: \"FARK ETTİN Mİ? · 2 DK · AKŞAM IŞIKLARI\" satırı sağ kenara kadar dayanıyor, \"IŞIKLARI\" ekranın kenarına değiyor. 16px'lik yan boşluk yok, metin taşmış gibi duruyor.",
+   "02-gorev-sonraki-320-acik-3 / -koyu-3: 'FARK ETTİN Mİ? · 2 DK · AKŞAM IŞIKLARI' satırı sağ kenara kadar dayanıyor ve 16 px'lik kenar boşluğunu aşıyor; 'IŞIKLARI' ekranın kenarına değiyor. 390'da sorun yok, 320'de taşıyor.",
+   "02-gorev-sonraki-320-acik-3/koyu-3: 'FARK ETTİN Mİ? · 2 DK · AKŞAM IŞIKLARI' satırı 320'de ekranın sağ kenarına kadar uzanıyor, sağda hiç boşluk kalmıyor. 'IŞIKLARI' kelimesi kenara yapışık.",
+   "02-gorev-sonraki-320-acik-3 / koyu-3: \"FARK ETTİN Mİ? · 2 DK · AKŞAM IŞIKLARI\" üst satırı 320'de sağ kenara dayanıyor; 16 px boşluk yok, neredeyse kesiliyor. 390'da sorun yok, 320'de ilk bakışta taşmış duruyor.",
+   "02-gorev-sonraki-320-acik-3/koyu-3: Üst satırdaki 'FARK ETTİN Mİ? · 2 DK · AKŞAM IŞIKLARI' ekranın sağ kenarına dayanıyor, sağ boşluk kalmıyor. 320'de taşma var. 390'daki 'akşam ışıkları' sahnesi de gündüz gibi aydınlık, adıyla uyuşmuyor."
+  ]
+ },
+ "03-yuruyus": {
+  "yes": 3,
+  "n": 5,
+  "weak": [
+   "03-yuruyus-320-acik-2: sayılacak tek bisiklet sağ kenarda yarısı kesik duruyor. Süre halkasında rakam yok, bu yüzden kalan süre sezilmiyor. Koyu hapın gece gökyüzünden ayrımı da zayıf.",
+   "03-yuruyus-390-koyu-2: Sayılacak bisiklet yalnızca sağ kenarda yarısı kesik küçük bir yeşil bisiklet olarak görünüyor; ekranın üst yarısını ise binaların cepheleri kaplıyor. Sağ üstteki halka sayacında saniye yazmadığı için ne kadar süre kaldığı belli değil.",
+   "03-yuruyus-390-koyu-1 / 320-acik-1: sağ üstteki halka sayaçta ne rakam ne etiket var, başta yalnız dolu bir camgöbeği çember görünüyor. 40 saniyeden ne kaldığı okunmuyor. Ekranın en altında da yaklaşık 110 px'lik boş, gri bir kaldırım şeridi duruyor.",
+   "03-yuruyus-390-acik-2: Ekranın üst yarısını cephe ve gökyüzü kaplıyor. Sayılacak bisikletler alt üçte birlik kaldırımda, kenarda yarım görünüyor (sağ alttaki yeşil bisiklet kesik). Göz asıl işe değil boş binaya gidiyor. Zaman halkasında kalan saniye de yok.",
+   "03-yuruyus-390-acik-2: Ekranın üst %55'ini sayılacak hiçbir şey olmayan bina cepheleri kaplıyor. Bisikletler alttaki dar kaldırım şeridinde küçük kalıyor ve kenarda yarım görünüyor. Süre halkasında rakam yok, kalan süre anlaşılmıyor."
+  ]
+ },
+ "04-sayi": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "04-sayi-390-koyu-3: 2x2 sayı kutuları ekranın üst dörtte birine sıkışmış, altı %65 boş kalıyor. Ne görsel ne bağlam var, düğmeler başparmaktan uzak. Premium değil, form gibi duruyor.",
+   "04-sayi-390-acik-3: Soru ve dört düğme ekranın üst üçte birine sığdırılmış, altta yaklaşık 1100 px boş, düz bir alan kalıyor. Yarım kalmış bir form gibi duruyor, premium bir his vermiyor. 40 saniyelik canlı yürüyüşten sonra görsel hiçbir bağlantı yok (bisiklet çizimi, sahneden iz gibi).",
+   "04-sayi-390-acik-3 / 320-koyu-3: dört sayı düğmesi ekranın üst üçte birine sıkışmış, altında ekranın üçte ikisi bomboş. Başparmağın uzandığı bölgede hiçbir şey yok. Kuru bir form gibi duruyor, ödüllendirici bir an gibi değil.",
+   "04-sayi-390/320-acik-3 ve koyu-3: Ekran soru ve dört sade sayı kutusundan ibaret, alttaki üçte iki tamamen boş. Ne sahneden bir iz var ne bir his; az önceki zengin cadde sahnesinden sonra bir form ekranına düşmüş gibi duruyor.",
+   "04-sayi-390-acik-3: Az önceki canlı caddeden sonra ekranın üstünde dört çıplak sayı düğmesi var, aşağıdaki yaklaşık %70'lik alan bomboş. Ne bir görsel ne bir sıcaklık var, ekran yarım kalmış bir form gibi duruyor."
+  ]
+ },
+ "05-degisti-1": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "05-degisti-1-390-acik-3: ezberleme anında başlık \"Bir şey değişti. Nerede?\" diyor, oysa henüz hiçbir şey değişmedi. \"Ezberle\" uyarısı ya da 3 saniyelik geri sayım yok. Kişi dokunmaya çalışır, gri \"Bulamadım\" düğmesini de bozuk sanar.",
+   "05-degisti-1-390-acik-3 / -320-acik-3: Ezberleme anında başlık 'Bir şey değişti. Nerede?' diyor, oysa henüz hiçbir şey değişmedi. 'İyi bak, aklında tut' gibi bir yönlendirme ya da 3 saniyelik bir sayaç da yok. Altta soluk 'Bulamadım, bir daha göster' düğmesi duruyor; kişi daha bakarken bir şey aramaya ve dokunmaya yönlendiriliyor.",
+   "05-degisti-1-390-acik-3 / 320-acik-3: ezberleme anında başlık 'Bir şey değişti. Nerede?' yazıyor, oysa henüz hiçbir şey değişmedi. 'Ezberle' uyarısı da 3 saniyelik geri sayım da yok. Kişi hemen dokunmaya çalışır, gri ve devre dışı 'Bulamadım' düğmesi de ne olduğunu açıklamıyor.",
+   "05-degisti-1-320-acik-3 ve 390-acik-3: Ezberleme anında, sahnenin ilk hâli görünürken başlık \"Bir şey değişti. Nerede?\" diyor. Henüz hiçbir şey değişmedi ve 3 saniyelik geri sayım da yok. Altta soluk \"Bulamadım, bir daha göster\" duruyor, kişi şimdi dokunması gerektiğini sanıyor.",
+   "05-degisti-1-390-acik-3: 3 saniyelik ezberleme anında 'şimdi ezberle' diyen bir söz ya da geri sayım yok. Alt yazı yalnızca 'Bu sahnede 12 nesne var' diyor, sönük 'Bulamadım, bir daha göster' düğmesi ise dokunulmaması gereken anda görünüyor. 05-degisti-1-320'de ilerleme çubuğu tümden kayboluyor."
+  ]
+ },
+ "06-goz-kirpma": {
+  "yes": 1,
+  "n": 5,
+  "weak": [
+   "06-goz-kirpma-320-acik-2: kararma göz kapağı gibi değil, sadece kartın üstüne düz siyah bir perde iniyor. Açık temada bu, \"ışık söndü\" etkisi veriyor. Alt yazının ortadaki karede hâlâ \"12 nesne var\" demesi de geçişi yarım hissettiriyor.",
+   "06-goz-kirpma-390-acik-2: 'Göz kırpma' yalnızca resim kartının hafifçe kararmasından ibaret; başlık, alt yazı ve soluk düğme olduğu gibi kalıyor, bu yüzden göz kırpma hissi vermiyor. 320 dizisinde (06-goz-kirpma-320-acik-2) üstte ilerleme çubuğu yok, 390'da var; iki genişlik birbirini tutmuyor.",
+   "06-goz-kirpma-390-koyu-2 / 320-acik-2: kırpma yalnız sahne kartını kabaca %50 karartıyor. Başlık ve düğme hiç kıpırdamıyor, bu yüzden 'göz kırpma' değil sıradan bir yükleme solması gibi algılanıyor. Değişimi haber veren tek şey küçük alt satırın 'Değişen yere dokun.' olması.",
+   "06-goz-kirpma-320-acik-2 / 390-koyu-2: \"Göz kırpma\" yalnızca sahne kartının düz bir kararması. Başlık, düğme ve çerçeve parlak kalıyor, bu yüzden açık temada yükleniyor ya da devre dışı izlenimi veriyor, kırpılan göz hissi vermiyor. Üstelik 320'de (05–08) ilerleme çubuğu kaybolup yerine etiket geliyor, 09'da geri dönüyor.",
+   "06-goz-kirpma-390-koyu-2: 'Göz kırpma' yalnızca sahne kartını karartıyor; başlık, alt yazı ve düğme parlak kalıyor, bu yüzden kırpma değil resmin kısılması gibi hissettiriyor. 06-goz-kirpma-320'de ilerleme çubuğu yok (390'da var)."
+  ]
+ },
+ "07-halka": {
+  "yes": 3,
+  "n": 5,
+  "weak": [
+   "07-halka-320-acik-2: dalga etkisi tek ve çok soluk bir dış hale olarak kalıyor, kutlama hissi zayıf. Turkuaz elips sandalyenin üstüne oturduğu için bulunan nesne halkanın içinde kayboluyor.",
+   "07-halka-390-koyu-2: Kesik çizgili eski yer ile camgöbeği halka iyi, ama dışa yayılan dalga çok ince ve soluk; telefonda neredeyse fark edilmiyor. Alttaki yeşil kutu bir övgüyle başlayıp hemen 'Sıradaki sahnede 14 nesne var' bilgisine geçiyor, sevinç anı kısa kalıyor.",
+   "07-halka-390-acik-3 / 320-koyu-3: bulunan sandalye halkanın içinde soluk ve yarı saydam çiziliyor, silinmiş ya da devre dışı bir nesne gibi görünüyor. Zafer anı sönük kalıyor. 07-halka-390-koyu-2'deki dış dalga da neredeyse görünmeyecek kadar zayıf.",
+   "07-halka-390-acik-3: Halka daire değil, basık bir oval. İçindeki sandalye soluk mavimsi bir lekeye dönüşüp kimliğini yitiriyor. 07-halka-320-acik-2'deki dalga tek ve çok silik bir ikinci halka; kutlama anı biraz cılız kalıyor.",
+   "07-halka-320-acik-2: 320'de üst çubuk değişiyor; ilerleme çubuğu kalkıyor, üst satır X'in yanına geçiyor. Bu, 390'la ve öteki bölümlerle tutarsız. Halka dalgası ince ve küçük, 'Buldun.' anı sönük kalıyor. Övgü ile 'Sıradaki sahnede 14 nesne var' bilgisi de aynı kutuya sıkışmış."
+  ]
+ },
+ "08-bulunamadi": {
+  "yes": 1,
+  "n": 5,
+  "weak": [
+   "08-bulunamadi-390-acik-3: sahnede iki bebek arabası ve sandalye içi boş çizgi olarak çizilmiş, geri kalan dolgulu illüstrasyonla çelişiyor ve bitmemiş görünüyor. Sol üstteki \"önceki hâl\" kutusu tabelanın ve tentenin üstünü kapatıyor, işaretli şapkaya bir bağı da yok.",
+   "08-bulunamadi-390-acik-3: 'Önceki hâl' küçük resmi sahnenin sol üst köşesini örtüyor; KİTAPÇI tabelası ve tente yarıda kesiliyor. Alttaki gri 'Sıradaki sahnede 12 nesne var.' kutusu bulamayan kişiye hiçbir teselli ya da yol göstermeden geçip gidiyor.",
+   "08-bulunamadi-390-acik-3 / 320-acik-3: sahnenin altındaki iki bebek arabası ve sandalye içi boş çizgi çizim olarak duruyor, oysa sahnenin geri kalanı dolu renkli. Yarım kalmış çizim gibi görünüyor. Sol üstteki 'önceki hâl' kutusunun köşe yuvarlaklığı da sahne kartının büyük köşe yuvarlaklığıyla örtüşmüyor, köşede taşıyor.",
+   "08-bulunamadi-390-acik-3 / 320-acik-3: Sol üstteki \"önceki hâl\" küçük görseli etiketsiz (\"Önce\" yazmıyor), sahnenin sol üst çeyreğini örtüyor ve şapkayı kesik gösteriyor. Aynı sahnedeki puset ve sandalye dolgusuz çizgi çizimler, düz renkli illüstrasyon dilinden kopuk, yer tutucu gibi duruyor.",
+   "08-bulunamadi-390-acik-1: İki bebek arabası ve sandalye yalnız çizgi olarak çizilmiş, sahnenin geri kalanı ise dolgulu illüstrasyon. Bunlar bitmemiş yer tutucu simgeler gibi duruyor. Eski hâli gösteren küçük kutuda (08-bulunamadi-390-acik-3) kırmızı şapka kadının gözlerini örtüyor. 320'de ilerleme çubuğu yine yok."
+  ]
+ },
+ "09-kacan-adim1": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "09-kacan-adim1-390-acik-3: gri kutu içindeki gri silüet \"görsel yüklenemedi\" yer tutucusuna benziyor. Ekranın üst %28'i bomboş kalıyor, içerik aşağı itilmiş.",
+   "09-kacan-adim1-390-acik-3: Üst çubukla başlık arasında yaklaşık 350 px boşluk kalıyor. Gri, bacakları silikleşen insan ve köpek silüeti yer tutucu bir görsel gibi duruyor; 'merak uyandıran bir sır' hissi vermiyor.",
+   "09-kacan-adim1-390-acik-3: gri kutudaki silüet hazır, sıradan bir simge gibi duruyor ve bacakları silikleşerek kayboluyor. Altındaki 'Akşam ışıkları · 1 dk önce' yazısı fotoğraf zaman damgası gibi anlamsız. Üstte ilerleme çubuğuyla başlık arasında yaklaşık 330 px boşluk var.",
+   "09-kacan-adim1-390-acik-3: Gri kart üstündeki gri silüet düşük kontrastlı, yer tutucu gibi duruyor. Üst çubukla başlık arasında yaklaşık 300 px ölü boşluk var. İçerik ortalanmış ama ekran yarı boş bir taslak hissi veriyor.",
+   "09-kacan-adim1-390-acik-1: Geçişin başında ekran tümden boş, yani her adım arası boş bir 'flaş' var. Oturmuş hâlde (acik-3) silüetin bacakları gradyanla eriyip kayboluyor, bu da çizim hatası gibi okunuyor. İçeriğin üstündeki yaklaşık %25'lik alan da boş."
+  ]
+ },
+ "10-kacan-adim2": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "10-kacan-adim2-320-koyu-3: koyu temada \"siyah\" renk noktası koyu düğme zemininde neredeyse görünmüyor, seçenek renksiz bir boş daire gibi duruyor. Silüet kartı önceki adımla aynı gri yer tutucu.",
+   "10-kacan-adim2-390-koyu-3 / -320-koyu-3: Koyu temada 'siyah' renk dairesi koyu kartın üstünde neredeyse görünmüyor; yalnızca gri çerçevesi seçiliyor. Üstteki boşluk ve gri silüet 09'daki gibi yine boş ve sönük duruyor.",
+   "10-kacan-adim2-390-koyu-3 / 320-koyu-3: koyu temada 'siyah' renk dairesi koyu düğme zemininde neredeyse kayboluyor, yalnızca gri halkasından seçiliyor. Silüet ve 'Akşam ışıkları · 1 dk önce' yazısı da bir önceki ekranın aynısı, yeni bir şey göstermiyor.",
+   "10-kacan-adim2-390-koyu-3 / 320-koyu-3: \"siyah\" renk dairesi koyu temada koyu düğme zemininde neredeyse kayboluyor, yalnızca gri halkası seçiliyor. Açık temada \"beyaz\" dairesi de beyaz düğmede aynı sorunu yaşıyor. Renk sorusunda rengin kendisi okunmuyor.",
+   "10-kacan-adim2-390-koyu-3: Koyu temada 'siyah' renk örneği koyu kartın üstünde neredeyse görünmüyor. Silüet bir önceki adımdakinin aynısı, yeni bir şey göstermiyor. Adım geçişi yine tümden boş bir kareden başlıyor (koyu-1)."
+  ]
+ },
+ "11-s1-acilis": {
+  "yes": 2,
+  "n": 5,
+  "weak": [
+   "11-s1-acilis-320-acik-3: açık temada kırpılmış sahnenin kenarlarındaki beyaz vinyet sisli ve bulanık görünüyor, alt kenarda kesik bir mavi araba parçası kalıyor. Üç satırlık kalın yeşil açıklama metni de ağır duruyor.",
+   "11-s1-acilis-390-acik-3 / -320-acik-3: Açık temada cevap resminin kenarları beyaz bir sisle örtülüyor; tabelalar ve sol taraf bulanık, lekeli görünüyor, alt kenarda da mavi bir araba kavisi kesik kalıyor. Cevabın gösterildiği an temiz bir açılış gibi değil, solmuş bir fotoğraf gibi duruyor.",
+   "11-s1-acilis-390-acik-3 / 320-acik-3: cevabı gösteren kırpılmış görüntünün kenarları açık temada beyaz bir sise boğulmuş. Solda yarım bir insan, altta mavi bir leke var. Köpeği gezdiren kişi işaretlenmemiş, mavi giyen adam köpeğin hemen üstünde durduğu için kimin gezdirdiği tek bakışta anlaşılmıyor.",
+   "11-s1-acilis-390-acik-3 / 320-acik-3: Açık temada cevap görselinin kenarları beyaza doğru sisli bir vinyetle soluyor, üstteki siyah tabela şeritleri ise sinema şeridi gibi kalıntı izlenimi veriyor. Köpek küçük ve sol altta; tasmayı kimin tuttuğu da hemen anlaşılmıyor. Koyu tema belirgin şekilde daha iyi.",
+   "11-s1-acilis-390-acik-3: Açık temada gerçek sahnenin kenarlarındaki beyaz radyal sis görüntüyü kirli ve bulanık gösteriyor, koyu temadaki temiz karartmanın yanında hatalı duruyor. Açıklama metni ile Devam düğmesi arasında da gereksiz büyük bir boşluk var."
+  ]
+ },
+ "12-sonuc": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "12-sonuc-390-acik-3: ana sonuç \"14 nesne\" ne anlatıyor, belli değil. Kişi bisiklet saydı ama başlık bir puan gibi nesne sayısı gösteriyor. Ekranın üst %27'si de boş.",
+   "12-sonuc-390-acik-3: En büyük öğe '14 nesne'; puanım mı, kaç tane bulduğum mu, ilk bakışta anlaşılmıyor. Üstte yaklaşık 350 px boşluk var. 'DOĞRU MU, EFSANE Mİ?' yazısı küçük, monospace ve aralıklı, okunması zor. 320'de 'Köpeğini gezdiren / biri ·' satırı kötü bir yerden bölünüyor.",
+   "12-sonuc-390-acik-3: büyük vurgu '14 nesne' yazıyor, bu kişiye bir sonuç söylemiyor: kaç sahnede buldum, kaç tanesini kaçırdım? Başlığın üstünde de yaklaşık 380 px boşluk var, sayfa ortadan aşağı kaymış gibi duruyor.",
+   "12-sonuc-390-acik-3: Kahraman metrik \"14 nesne\" kişiye bir başarı anlatmıyor, anlamı ancak alt cümleyle çözülüyor. Üstte yaklaşık 300 px boşluk var. 12-sonuc-320-acik-3'te \"Köpeğini gezdiren / biri · sarı\" satırı rozetin yanında çirkin kırılıyor.",
+   "12-sonuc-390-acik-3: Kahraman sonuç olarak '14 nesne' gösteriliyor; yorgun biri için bu bir başarı ya da puan anlamı taşımıyor. Ekranın üst yaklaşık %25'i boş. 12-sonuc-320-koyu-3'te 'Köpeğini gezdiren biri ·' satırı 'biri ·' kopuk kalacak şekilde kırılıyor."
+  ]
+ },
+ "12-kart": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "12-kart-320-acik-3 ve koyu-3: açılan \"Doğru mu, efsane mi?\" kartı 320'de sabit \"Bitti\" düğmesinin altında sert bir çizgiyle kesiliyor. \"Doğru.\" açıklaması ve kaynak görünmüyor, kaydırılabileceğine dair bir ipucu da yok.",
+   "12-kart-320-koyu-3: Açılan kartın alt kısmı sabit 'Bitti' düğmesinin altında kalıyor; 'Doğru.' açıklaması ve kaynak satırı görünmüyor, kartın çerçevesi yarıda kesiliyor. 390'da (12-kart-390-acik-3) sorun yok.",
+   "12-kart-320-acik-3 / koyu-3: 320'de 'Doğru mu, efsane mi?' kartı açılınca altta sabit duran 'Bitti' düğmesi kartı kesiyor. 'Doğru.' cevabı ve kaynak görünmüyor, kart kenarı da geçişsiz, keskin bir çizgiyle bitiyor. Kişi açtığı kartın cevabını göremiyor.",
+   "12-kart-320-acik-3 / koyu-3: Açılan \"Doğru mu, efsane mi?\" kartı sabit Bitti düğmesinin altında kesiliyor. \"Doğru.\" açıklaması ve kaynak görünmüyor, ekran açılan karta kaymıyor. 390'da kusursuz olan an, 320'de yarım kalıyor.",
+   "12-kart-320-acik-3/koyu-3: 'Doğru mu, efsane mi?' kartı açıldığında yapışkan 'Bitti' düğmesinin arkasında sert bir çizgiyle kesiliyor. 'Doğru.' açıklaması ve kaynak hiç görünmüyor, ne solma ne kaydırma ipucu var."
+  ]
+ }
+}

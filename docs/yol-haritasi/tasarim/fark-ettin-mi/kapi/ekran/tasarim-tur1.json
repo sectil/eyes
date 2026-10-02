@@ -1,0 +1,101 @@
+{
+ "10": {
+  "yes": 1,
+  "n": 5,
+  "weak": [
+   "10-390-koyu/10-320-koyu: 'siyah' renk dairesi koyu kartın üzerinde neredeyse görünmüyor, seçeneklerden biri okunmaz hâlde. Kişi figürü burada da düz gri yer tutucu, parlayan köpeğin tasması ise hâlâ kuyruğa bağlı.",
+   "10-390-acik: buzlu köpeğin rengi neredeyse 'beyaz' seçeneğinin dairesiyle aynı, bu da tahmini beyaza itiyor. 10-390-koyu ve 10-320-koyu'da 'siyah' rengin dairesi koyu kartın üstünde neredeyse kayboluyor.",
+   "10-390-koyu/10-320-koyu: 'siyah' renk dairesi koyu düğme zemininde neredeyse görünmüyor, seçeneklerin dördüncüsü yok gibi. Ayrıca tasmanın ucu köpeğe değmeden havada bitiyor ve kişinin eli yerine kalçasından çıkıyor.",
+   "10-390-acik: köpeği çevreleyen camgöbeği parlama tasmanın ucunu da içine alıyor, tasma kuyruk gibi okunuyor. 10-390-koyu/10-320-koyu: 'siyah' renk yuvarlağı koyu kart üstünde neredeyse görünmüyor. Başlık 09'a göre yaklaşık 50 px aşağı zıplıyor.",
+   "10-390-koyu ve 10-320-koyu: \"siyah\" seçeneğinin renk dairesi koyu kart üzerinde neredeyse görünmüyor; dört seçenekten biri okunmuyor. 10-390'da başlık 09'a göre yaklaşık 55 px aşağı zıplıyor, üstte yine ölü boşluk kalıyor."
+  ]
+ },
+ "11": {
+  "yes": 1,
+  "n": 5,
+  "weak": [
+   "11-320-acik/koyu: kaynak satırı satır sonunda tek başına bir '·' bırakıp 'Q J Exp Psychol' kısmını yalnız bir satıra itiyor. 11-390'da 'sarı' etiketi vitrindeki renkli topların üstüne biniyor ve tasma yine köpeğin kuyruğunda bitiyor. 11-390-acik-2'de figür değil bütün ekran (başlık, Devam düğmesi) soluk görünüyor.",
+   "11-320: kaynak satırı küçük, gri, eşit aralıklı bir yazıyla iki satıra bölünüyor ve ilk satır 'Kreitz ve ark. 2020 ·' diye noktayla sarkıyor; 52 yaşında, gözlüklü biri için okunmaz bir kuyruk. 11-390'da 'sarı' hapı vitrin rafındaki topların üstüne biniyor.",
+   "11-390-acik-1 ile 11-390-acik-3: gerçek renklere dönen figür siluetle aynı biçimde değil. Silüetteki köpeğin başı yuvarlak ve tasma kalçadan çıkıyor, gerçek köpeğin kulağı sivri ve tasma elden çıkıyor. Bu yüzden renk değişimi 'açılma' değil, şekil zıplaması gibi görünüyor. 11-320'de de kaynak satırı 'Kreitz ve ark. 2020 ·' diye bitiyor, nokta satır sonunda yalnız kalıyor.",
+   "11-390-acik-3: gerçek renkli hâlde tasma köpeğin boynuna değil kuyruğuna bağlı, adamın kolu yok ve el gövdenin altından çıkıyor; ortaya çıkış anı karikatür kadar özenli değil. 'sarı' etiketi sarı-mor vitrin toplarının üstüne biniyor. 11-320'de kaynak satırı 'Kreitz ve ark. 2020 ·' diye satır sonunda tek kalan bir noktayla kırılıyor. Başlık 10'dan yaklaşık 100 px yukarı zıplıyor.",
+   "11-320-acik/koyu: Kaynak satırı ikiye kırılıyor; \"Kreitz ve ark. 2020 ·\" satır sonunda nokta ile asılı kalıyor, \"Q J Exp Psychol\" alta tek başına düşüyor. 11-*-2 ara karesi: figür kendi rengine dönmüyor, başlık ve Devam düğmesi dahil bütün ekran soluk hâlde birlikte beliriyor; vaat edilen an kayboluyor. Ayrıca 10'daki köpek parıltısı 11-*-1'de habersizce kayboluyor."
+  ]
+ },
+ "12": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "12-320-acik/koyu: küçük resimler 390'daki yakın çekimler yerine sahnenin tamamını gösteriyor. Bu yüzden halkalar okunmayacak kadar küçük, 4. karede halka '14' rozetinin altında kalıyor, 2. karedeki kesik çizgili halka açık temada görünmüyor. 'Baretli bir işçi · turuncu · KAÇTI' satırında turuncunun kişinin cevabı mı yoksa doğru renk mi olduğu da anlaşılmıyor.",
+   "12-320: dört küçük sahnede değişen yer seçilemeyecek kadar ufak. Dördüncü karede '14' rozeti değişen yeri gösteren camgöbeği halkanın üstünü örtüyor, onay rozetleri de komşu karelere taşıyor. 12-390'da turuncu çerçeveli kare sağ kenar hizasını (740 px) aşıp yaklaşık 752 px'e kadar çıkıyor. Ayrıca 11'de 'doğru bildin' denen köpek satırına 'TAHMİN' etiketi konmuş, bu çelişkili.",
+   "12-390-acik/koyu: dördüncü karonun turuncu çerçevesi sağ kenar boşluğunu aşıp 752 px'e taşıyor. 12-320'de dört küçük karonun içindeki işaret çemberleri seçilmiyor, dördüncü karodaki çember '14' rozetinin altında kalmış.",
+   "12-390-acik/koyu: vurgulu 4. karenin turuncu çerçevesi ve tik rozeti sağdaki 40 px kenar boşluğunu aşıyor (yaklaşık 752 px'e kadar taşıyor). 1. ve 3. karenin rozetleri yan karelerin üstüne biniyor. 12-320'de 4. karedeki camgöbeği halka karenin alt kenarında kesiliyor; 390 yakın plan, 320 tam sahne gösteriyor, iki boyut aynı ekran gibi durmuyor.",
+   "12-390 ve 12-320: Seçili 4. karonun turuncu çerçevesi ve onay rozeti sağ kenar çizgisini aşıyor (390'da yaklaşık 752 px'e kadar, sınır 740; 320'de yaklaşık 612 px'e kadar, sınır 600). 12-320'de 4. karodaki turkuaz halka \"14\" etiketinin altında kalmış, değişiklik görünmüyor; küçük karolar da okunmayacak kadar ufak."
+  ]
+ },
+ "04-once": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "04-once-390-acik/koyu: sahne kırpılmış. Soldaki dükkân tabelası yazısız siyah bir şerit olarak kenarda kesiliyor, kartın alt dörtte biri ise boş asfalt. 320'de solda tek başına bir 'U' harfi ve sağda kesik bir siyah tabela kalıyor. Sağ üstteki onay rozetinin ne anlattığı da (bitti mi, doğru mu) anlaşılmıyor.",
+   "04-once-390: sahnenin alt üçte biri (arabanın altındaki asfalt, yaklaşık 1140-1290 px arası) bomboş, göz orada boşa geziyor. Sağ üstteki camgöbeği onay halkası hiçbir şey anlatmıyor; 'bitti mi, doğru mu?' diye düşündürüyor.",
+   "04-once-390-acik/koyu: soldaki dükkânın tabelası yazısız kara bir kalıp olarak kesilmiş, sağ üstteki daire içindeki tik işaretinin ne anlama geldiği hiç belli değil. Ekranda tek araç beyaz bir araba var, 'Kaç mavi araba geçti?' sorusunun altında bu insanı bir an şaşırtıyor.",
+   "04-once-390-acik/koyu: sahnenin sağ üstündeki koyu daire içindeki tik bir anlam taşımıyor (sayım bitti mi, doğru mu?) ve soru anında görev çipiyle yarışıyor. Soldaki dükkân tabelası yazısız kara bir şerit olarak kesilmiş, 320'de de 'U' harfi yarım kalmış; sahne bitmiş değil, kırpılmış duruyor.",
+   "04-once-390-acik/koyu: Soru \"Kaç mavi araba geçti?\" ama sahnede donmuş tek araç beyaz. Sahnenin alt üçte biri de boş asfalt; soldaki dükkân tabelası yazısız siyah bir kütük gibi kesilmiş, 320'de yalnızca \"U\" kalmış. Sağ üstteki turkuaz halkalı onay rozetinin ne anlattığı da belli değil."
+  ]
+ },
+ "04-sonra": {
+  "yes": 3,
+  "n": 5,
+  "weak": [
+   "04-sonra (dört görüntünün hepsi): başlıktaki kelime boşluğu, sıkı harf aralığı yüzünden neredeyse kaybolmuş ve 'Çokyakın.' tek kelime gibi okunuyor. Ayrıca 04-sonra-320'de araba paneli kaldırımdaki insanların bacaklarını kapatıyor. Koyu temada kaçırılan arabanın kutusu da çamurlu bir kahverengi dolguda kalıyor.",
+   "04-sonra-320: beş arabalık panel insanların bacaklarını ve kaldırımı kapatıyor. Kaçırılan beşinci arabanın kesik çizgili kutusunda 'kaçırdığın' gibi bir etiket yok. Üstteki 'Mavi arabaları say' hapı sonuç anında da görev hâlâ sürüyormuş gibi duruyor.",
+   "04-sonra-320-acik/koyu: araba tepsisi sahnenin yarısını kapatıyor, insanların bacakları ve kaldırım kayboluyor. Sağ üstteki anlamsız tik rozeti hâlâ duruyor; işaretli 4 arabanın yanında kafa karıştırıyor.",
+   "04-sonra-390-acik/koyu: büyük başlıkta kelime arası neredeyse yok, 'Çok yakın.' gözle 'Çokyakın.' diye okunuyor (320'de de aynı). Beş tane birebir aynı mavi araba kartı sonucu anlatıyor ama ödül hissi vermiyor; üstteki anlamsız tik rozeti de sahnede duruyor.",
+   "04-sonra-320-acik/koyu: Araba tepsisi sahnenin yarısını kaplayıp insanların bacaklarını kesiyor. Sonuç ekranında \"Mavi arabaları say\" hapı ve anlamı belirsiz onay rozeti hâlâ duruyor, bu da üst bölümü kalabalıklaştırıyor."
+  ]
+ },
+ "05": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "05-390-acik-3/koyu-3: göz saatinin 'kapanması' fark edilmiyor. Bitişte göz simgesi yalnızca biraz soluyor, gözkapağı kapanmıyor, süre de iki yandaki çubukların küçülmesiyle anlatılıyor. Ayrıca 05-320'de sahne kartı başlık sütunundan daha içeride başlıyor (yazı 40 px'te, kart 66 px'te), ve sahnenin dörtte biri boş asfalt.",
+   "05-390-acik-1/2/3: 'göz saati' iki ince çubuğun ortaya doğru erimesi ve küçük bir gözün kapanmasından ibaret. Gözlükle bakınca 3 saniyelik süre sayaç gibi okunmuyor, ancak son karede fark ediliyor. Sahnenin ortası ise nesnesiz boş yol. 05-320'de sahne kartı (66-574 px) başlık ve çubuk kenarlarından (40-600 px) içeride kalıyor.",
+   "05-320-acik-2/koyu-3: sahne 66–574 px arasına daraltılmış, başlık ve süre çubukları ise 40–600 arasında, kenar boşlukları tutmuyor. Göz saatinin sonundaki (05-390-koyu-3) yarı kapalı göz gri bir lekeye dönüyor, kapandığı okunmuyor. Ayrıca sağdaki tabela tek bir 'B' harfiyle kesik kalmış.",
+   "05-390-acik-3/koyu-3: 'göz saati' kapanmıyor, göz yalnızca soluklaşıp üstüne ince kirpikler geliyor. Beyaz gölgeli daire basılacak bir düğme gibi duruyor, iki yandaki çubuklar da ilerleme çubuğu gibi okunuyor. 05-390'da sahnenin altında yaklaşık 180 px ölü boşluk var. 05-320'de sahne kartı başlıktan ve ilerleme çubuğundan dar (sol kenar 66 px, öbürleri 40 px), hizalar tutmuyor.",
+   "05-320-acik/koyu: Sahne 66–574 px'te duruyor, başlık ve göz saati çubukları ise 40–600 px'te; kenarlar hizasız görünüyor. 05-390 kareleri: göz saatinin altında yaklaşık 190 px ölü boşluk var. 05-*-koyu-3'te kapanan göz simgesi koyu zeminde neredeyse kayboluyor."
+  ]
+ },
+ "06": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "06-390-acik/koyu: başlık 05'e göre yaklaşık 60 px aşağıda başlıyor; ezberleme ile değişmiş hâl arasında düzen zıplıyor ve fark ilk bakışta bu kaymaya karışıyor. Üstte ve sahne ile 'Bulamadım' düğmesi arasında ölü boşluk var, gri çerçeveli düğme de silik duruyor.",
+   "06-320: sahne kartı yine başlık ve 'Bulamadım' düğmesinden dar (66-574 px'e karşı 40-600 px), kenarlar hizasız. 06-390'da üstte (140-300 px) ve sahne ile düğme arasında (1310-1450 px) ölü boşluk var. Sahnede dokunulacak yere dair hiçbir ipucu yok, ortadaki boş asfalt da 'buraya mı dokunsam' dedirtiyor.",
+   "06-390-acik/koyu: üst çubukla başlık arasında yaklaşık 150 px, sahneyle 'Bulamadım' düğmesi arasında yaklaşık 140 px ölü boşluk var. 06-320'de sahne düğmeden 26 px dar duruyor, iki kutu aynı hizaya oturmuyor.",
+   "06-390-acik/koyu: başlık 05'e göre yaklaşık 60 px aşağı kaymış. Üst çubukla başlık arasında yaklaşık 170 px, sahneyle 'Bulamadım' düğmesi arasında yaklaşık 140 px boşluk var; ekran dağınık. 320'de de sahne kartı başlık sütunundan dar kalıyor ve sağdaki tabela 'B' diye kesik.",
+   "06-390-acik/koyu: Başlık 05'e göre yaklaşık 60 px aşağı kaymış (üstte 180 px boşluk), sahneyle \"Bulamadım\" düğmesi arasında da yaklaşık 140 px boşluk var; ekran yarı boş görünüyor. 320'de sahne yine başlık ve düğmeden dar. Değişen tek şey şapka rengi (kırmızıdan mora) ve sağdaki kesik \"B\" tabelası dikkati dağıtıyor."
+  ]
+ },
+ "09": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "09-390-acik: 'buzlu cam' figür aslında arkasını göstermeyen, düz gri, beyaz çizgili bir silüet; eksik bir görselin yerine konmuş yer tutucu gibi duruyor. 09-390-koyu ve 09-320-koyu'da göğüste bulanık bir parlak leke var ve çizim hatası gibi görünüyor. Tasma da köpeğin boynuna değil kuyruğuna bağlanıyor.",
+   "09-390-acik: 'buzlu cam' figür, kenarı beyaz çizgili düz açık gri bir karton gibi duruyor; cam, bulanıklık ya da arkayı gösterme hissi yok. Koyu temada da göğüste tek bir parlak leke var. 09-320'de ÇİÇEKÇİ tabelası tamamen kırpılmış, tente yarım kalmış, sağda kırmızı kapı kesik.",
+   "09-390-acik: 'buzlu cam' figür aslında düz açık gri bir yer tutucu gibi duruyor, arkasındaki vitrin topları kenarda kesilip bitiyor, cam etkisi yok. 09-320'de ÇİÇEKÇİ tabelası tamamen kırpılmış, sahnede yalnızca tente uçları kalmış.",
+   "09-390-acik: 'buzlu cam' figür arkasını göstermiyor; kolsuz, kafası bir topak, mat gri bir çıkartma gibi duruyor ve açık temada açık mavi vitrin üstünde neredeyse kayboluyor. Tasma kalçadan çıkıp köpeğin kuyruğuna bağlanıyor. 09-320'de ÇİÇEKÇİ tabelası kadrajdan çıkmış, sahnenin bağlamı kayboluyor.",
+   "09-320-acik/koyu: ÇİÇEKÇİ tabelası tamamen kırpılmış, sahnede yalnızca tente kenarı kalmış, yer duygusu kayboluyor. \"Buzlu cam\" figür, açık temada düz gri-beyaz bir kesik gibi duruyor (09-*-acik). Koyu temada gövdenin ortasında açıklanamayan, bulanık açık bir leke var (09-390-koyu)."
+  ]
+ },
+ "12-kart": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "12-kart-390-acik/koyu: kart temiz ama yalnızca yazıdan oluşuyor, 5 saniyede etkilemiyor. Başlığın son kelimesi 'edilmeyebilir.' üçüncü satırda tek başına kalıyor. Kart ekranın altına oturan bir sayfa gibi değil, 'Bitti' düğmesinin üstünde havada duruyor.",
+   "12-kart-320: kart 24-616 px'e taşıyor, altındaki 'Bitti' düğmesi ise 40-600 px'te; kenarlar hizasız. Kaynak satırı ve 'doi 10.1068/p281059' küçük, gri, eşit aralıklı bir yazıyla verilmiş, bir öğretmene hiçbir şey söylemeyen bir kalabalık. Arkadaki 'Bitti' düğmesi kararmadan parlak kaldığı için ekranda iki çıkış varmış gibi duruyor.",
+   "12-kart-390-acik/koyu: başlığın son satırında 'edilmeyebilir.' tek başına kalıyor. 12-kart-320'de kart 24 px kenar boşluğuyla açılıyor, sayfanın geri kalanı 40 px; ayrıca koyu temada arka plan karartması kartı zeminden pek ayırmıyor.",
+   "12-kart-390-acik/koyu: kart başlığında 'edilmeyebilir.' üçüncü satırda tek başına kalıyor. 12-kart-390-koyu/320-koyu: arka plan perdesi koyu temada hemen hiç karartmıyor, koyu kart arka planla kaynaşıyor. Kartın arkasında 4. karenin taşan turuncu çerçevesi de görünmeye devam ediyor.",
+   "12-kart-320-acik/koyu: Kart 24–616 px'e yayılıyor, sayfanın geri kalanı ise 40–600 px'te; kenarlar hizasız. 12-kart-*-koyu'da perde çok zayıf, kart siyah zeminden zor ayrılıyor. \"Doğru. Fark etme, …\" cümlesindeki \"Fark etme\" ilk okuyuşta \"fark etme!\" emri gibi okunuyor."
+  ]
+ }
+}

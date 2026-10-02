@@ -1,0 +1,77 @@
+{
+ "Ö1a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Ö1b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Ö1c": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "\"Gördüğün gibi\" akla önce \"görüldüğü üzere\" anlamını getiriyor, ne demek istediği belirsiz.",
+   "Ne kastedildiği belirsiz, 'gördüğün gibi' neyi anlatıyor hemen anlaşılmıyor.",
+   "Ne demek istediği belirsiz, 'gördüğün gibi' neye göre, anlaşılmıyor.",
+   "Ne demek istediği ilk okumada anlaşılmıyor, 'gördüğün gibi' hem 'gördüğün şekilde' hem 'görüyorsun ya' diye okunabiliyor."
+  ]
+ },
+ "Ö2a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Ö2b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Ö3": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "Geri sayım gibi duyuluyor, ilk sahnenin 3 saniye sürdüğü anlaşılmıyor.",
+   "Fiilsiz, kopuk bir ifade; geri sayım mı süre mi olduğu anlaşılmıyor.",
+   "'Değişime 3 saniye' geri sayım gibi duyuluyor, ilk sahnenin 3 saniye gösterildiğini anlatmıyor.",
+   "Geri sayım mı yoksa sahnenin süresi mi, belli değil; \"İlk sahne 3 saniye\" daha açık olur."
+  ]
+ },
+ "Ö4a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Ö4b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Ö5a": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "Kelimeler robot gibi art arda diziliyor, neyin bulunduğu ve 14 nesnenin ne olduğu belli değil.",
+   "Noktalarla bölünmüş robot dili; 'buldun' sözü neyi bulduğunu söylemiyor, 14 nesneyi bulmuş gibi de anlaşılabilir.",
+   "Sesli okununca '14 nesne buldun' gibi anlaşılıyor, neyin bulunduğu belirsiz.",
+   "'14 nesne · buldun' sesli okununca neyin bulunduğu ve 14'ün ne olduğu anlaşılmıyor."
+  ]
+ },
+ "Ö5b": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "Kelimeler robot gibi art arda diziliyor, neyin bulunamadığı ve 12 nesnenin ne olduğu belli değil.",
+   "Kopuk ve robot gibi; neyin bulunamadığı açık değil.",
+   "'12 nesne bulamadın' gibi duyuluyor, sahnedeki farkı bulamadığı anlaşılmıyor.",
+   "'12 nesne · bulamadın' kopuk okunuyor, neyin bulunamadığı belirsiz kalıyor."
+  ]
+ },
+ "Ö6": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ }
+}

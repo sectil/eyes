@@ -1,0 +1,8 @@
+Bağlam: Nefona'daki "Fark Ettin mi?" alıştırması. Bu satırlar ekran okuyucu (VoiceOver) etiketleridir: gözü görmeyen kişiye sesle okunur; kısa, açık, cümle gibi olmalı. "Ne değişti?" bölümünde her sahnenin ilk hâli 3 saniye gösterilir, ekranda bu süreyi gösteren yazısız bir saat vardır; sonra sahne değişir ve kişi değişen yeri bulur. Sonuç ekranında turun 4 sahnesinin küçük kareleri durur; her karede kişinin o sahnedeki değişikliği bulup bulmadığı ve sahnedeki nesne sayısı görünür. Her satır: kimlik | nerede | metin. Her satıra ayrı karar ver.
+
+Ö3b | ekran okuyucu: ilk sahnenin 3 saniyesini gösteren yazısız saat | İlk sahne 3 saniye görünür
+Ö3c | ekran okuyucu: ilk sahnenin 3 saniyesini gösteren yazısız saat | Sahne 3 saniye sonra değişecek
+Ö5c | ekran okuyucu: sonuç ekranında bulunan sahnenin küçük karesi | 2. sahne: değişikliği buldun, sahnede 14 nesne vardı
+Ö5d | ekran okuyucu: sonuç ekranında bulunamayan sahnenin küçük karesi | 3. sahne: değişikliği bulamadın, sahnede 12 nesne vardı
+Ö5e | ekran okuyucu: sonuç ekranında bulunan sahnenin küçük karesi | 2. sahnede değişikliği buldun. 14 nesne vardı.
+Ö5f | ekran okuyucu: sonuç ekranında bulunamayan sahnenin küçük karesi | 3. sahnede değişiklik gözünden kaçtı. 12 nesne vardı.

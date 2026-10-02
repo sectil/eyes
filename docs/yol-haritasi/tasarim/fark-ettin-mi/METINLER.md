@@ -128,3 +128,16 @@ yanlış buldu (henüz bir şey değişmedi); sonuçta büyük "14 nesne" kişiy
   "{n} sahnenin 1'inde buldun" · "{n} sahnenin 2'sinde buldun" · "{n} sahnenin 3'ünde buldun" (5/5) ·
   hepsinde: "{n} sahnenin hepsinde buldun" (5/5; n = 3 ya da 4) ·
   hiçbirinde: "Bu turda değişiklikler gözünden kaçtı" (4/5; R2 satırı bu durumda yok).
+
+## Gözünden kaçan başlıkları ve ekran okuyucu etiketleri (2026-10-02) — durum S: sahip onaylı
+Kapı: kapi/metin-tur12, metin-tur13. Sahip onayı 2026-10-02 ("Gözünden kaçmamış." seçimi ve "Onaylıyorum").
+- Ö1 · "Gördüm" deyip doğru bilince büyük başlık: "Gözünden kaçmamış." (5/5)
+- Ö2 · yanlış seçenek seçilince büyük başlık: "Doğrusu buydu." (5/5)
+- Ö3 · ekran okuyucu, ezberleme süre göstergesi: "İlk sahne 3 saniye görünür" (5/5)
+- Ö4 · ekran okuyucu, sayı sonrası karolar: "Kaçırdığın araba" / "Saydığın araba" (5/5; hedefin adıyla)
+- Ö5 · ekran okuyucu, sonuçtaki sahne kareleri: "{i}. sahne: değişikliği buldun, sahnede {N} nesne vardı" /
+  "{i}. sahne: değişikliği bulamadın, sahnede {N} nesne vardı" (4/5, 4/5)
+- Ö6 · ekran okuyucu, bilim kartını kapatan düğme: "Kapat" (5/5)
+Ekran kapısı (kapi/ekran/): kodlu ekran 4 tur + tasarım maketi 2 tur, hiçbiri ≥ 4/5 değil. Sahip kararı 2026-10-02: maket
+koda aktarılır, karar cihazda sahibin. Not (benim hatam): tasarım 2. turda yargıç açıklaması eski maketi ("göz saati")
+anlatıyordu; kural: her turdan önce açıklama o turun TASARIM.md'sinden yazılır.

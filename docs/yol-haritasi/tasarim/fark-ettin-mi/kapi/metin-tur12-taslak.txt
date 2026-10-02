@@ -1,0 +1,13 @@
+Bağlam: Nefona'daki "Fark Ettin mi?" alıştırması. "Gözünden kaçan" bölümünde kişiye önce "Caddede köpeğini gezdiren biri vardı. Onu fark ettin mi?" sorulur (Gördüm · Görmedim), sonra "Köpeği ne renkti?" diye sorulur ve 4 renk seçeneği çıkar. Cevaptan sonra aynı ekranda o kişi gerçek renkleriyle açılır. "Görmedim" deyip doğru bilene zaten şu yazı çıkıyor: "Görmediğini düşünsen de doğru bildin. Araştırmalarda bu tür tahminler şanstan daha sık tutuyor." Bu turda öteki iki durumun başlığı ve ekran okuyucu (VoiceOver) etiketleri aranıyor. Ekran okuyucu etiketleri gözü görmeyen kişiye sesle okunur; kısa ve açık olmalı. Her satır: kimlik | nerede | metin. Her satıra ayrı karar ver.
+
+Ö1a | "Gördüm" deyip doğru bilince, büyük başlık | Gözünden kaçmamış.
+Ö1b | "Gördüm" deyip doğru bilince, büyük başlık | Doğru, fark etmişsin.
+Ö1c | "Gördüm" deyip doğru bilince, büyük başlık | Gördüğün gibiymiş.
+Ö2a | yanlış renk seçince, büyük başlık | Doğrusu buydu.
+Ö2b | yanlış renk seçince, büyük başlık | Köpek sarıymış.
+Ö3 | ekran okuyucu: "Ne değişti?" bölümünde ilk sahnenin 3 saniyesini gösteren yazısız saat | Değişime 3 saniye
+Ö4a | ekran okuyucu: sayı sorusundan sonra kişinin saymayıp kaçırdığı arabayı gösteren karo | Kaçırdığın araba
+Ö4b | ekran okuyucu: kişinin saydığı arabayı gösteren karo | Saydığın araba
+Ö5a | ekran okuyucu: sonuç ekranında turun sahnelerinden küçük kare, bulunan | 2. sahne · 14 nesne · buldun
+Ö5b | ekran okuyucu: sonuç ekranında turun sahnelerinden küçük kare, bulunamayan | 3. sahne · 12 nesne · bulamadın
+Ö6 | bilim kartını kapatan çarpı düğmesinin ekran okuyucu etiketi | Kapat
