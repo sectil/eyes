@@ -73,8 +73,8 @@ Yap:
 - Merdiven: kare nesne sayısı 8'den başlar; ilk bakışta bulunursa +2, ikinci bakışta aynı, bulunamazsa −2; sınır 6–30;
   son değer sonraki turun başlangıcı. Turun ölçüsü `changeN` = ilk ya da ikinci bakışta bulunan en kalabalık karenin
   nesne sayısı; hiç bulunmazsa `null`.
-- Gözünden kaçan: önce varlık sorusu ("Caddede kahkaha atan biri var mıydı?" Vardı · Yoktu · Emin değilim), sonra
-  seçenek. Turların üçte birinde sorulan kişi sahnede yoktur (yakalama sorusu), iki tur üst üste değil.
+- Gözünden kaçan (sahip kararı 2026-10-02): "… vardı. Onu fark ettin mi?" Gördüm · Görmedim, sonra iki cevapta da
+  seçenek. Yakalama sorusu yok (PLAN §9 madde 1).
 - Sahne merdiveni `LADDERS['fark-ettin']` (PLAN §2 tablosu: F1 D0 Cadde, F2 D2 4 sahne, F3 D4 Pazar, F4 D7 Park,
   F5 D10 Akşam; V1 D14 yağmur, V2 D21 tabela değişikliği).
 - **Sıkmama kuralları PLAN §9c madde 1–6** saf işlevler olarak; seçimler tohumlu ve geçmiş kayıtlara bakar.

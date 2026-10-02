@@ -74,7 +74,7 @@ Gelişim sözcükleri geçer.
 | çeşitleme V1 | 14 | Yağmurlu cadde (şemsiyeler, ıslak yol yansıması) |
 | çeşitleme V2 | 21 | Değişiklik türüne "tabela harfi" eklenir |
 
-Eşikler VARSAYIM. Her gün sahne, açılmış olanlardan tohumla seçilir; aynı sahne art arda iki gün gelmez.
+Eşikler VARSAYIM. Her gün sahne, açılmış olanlardan tohumla seçilir; iki ve daha çok sahne açıkken aynı sahne art arda iki gün gelmez (§9c madde 1).
 - Yaş ve kişi: başlangıç nesne sayısı herkes için 8 (Horwood 2016, PMID 26758974 yaşla fark etmenin düştüğünü gösterir;
   merdiven kişiye kendiliğinden uyar, yaş sorulmaz).
 - Yolda yeri değişmez: 6. günden açılır, haftada 3 gün, Tek Bakışta ile `week3` dönüşümü (HATA_GUNLUGU Build 29
@@ -184,7 +184,7 @@ Modül turu:
    "Değişen yere dokun" ipucu. Bakış noktaları kalır.
 3. Bulununca kutlama: sahne karartılmaz; değişen nesne parlar, kısa bir halka dalgası ve hafif titreşim. Vurgu başka
    nesneye (araba, tabela) binmez; değişen nesne sahnede tek başına durduğu yerden seçilir.
-4. Gözünden kaçan: silüet ya da sis cevabı ele vermez (bacak, gölge görünmez); "yakalama" turlarında aynı görsel.
+4. Gözünden kaçan: silüet ya da sis cevabı ele vermez (bacak, gölge görünmez); (yakalama turu yok, §9 madde 1).
    İki adımlı soru tek ilerleme göstergesiyle ("Soru 1 · seçenek" yerine noktalar: ●○ ●●).
 5. Üç seçenekli düğmeler tek satıra sığar; 320'de iki satır olur ama metin kenara yapışmaz.
 6. Sonuç: ölçek noktalarının ne olduğu tek satırla yazılır ("her nokta bir nesne"); 320 ve 390 aynı satırları
@@ -248,8 +248,10 @@ Her aşama sonunda yalnız ilgili testler; sonda tam takım ve derleme (İş ak�
 
 ## 9. Kararlar (sahip 2026-10-01: "kararlar senin olsun")
 
-1. Soru biçimi: "Caddede kahkaha atan biri var mıydı? Vardı · Yoktu · Emin değilim", ardından renk ya da nesne. Turların
-   üçte birinde sorulan kişi sahnede yoktur (yakalama sorusu); "Vardı" cevabının doğruluğu ölçülebilir.
+1. Soru biçimi (sahip kararı 2026-10-02, "Onaylı metin kalsın"): "Caddede kahkaha atan bir kadın vardı. Onu fark ettin
+   mi?" Gördüm · Görmedim, ardından iki cevapta da renk ya da nesne ("Görmediysen de tahmin et."). Yakalama sorusu yok;
+   sorulan kişi her zaman sahnededir. Bedeli: "gördüm" deyip yanılma ayrıca ölçülmez. (Eski biçim "var mıydı? Vardı ·
+   Yoktu · Emin değilim" onaylı G2/G3 ile çelişiyordu.)
 2. Ölçü sözcüğü "nesne" (dört kişiden dördü en anlaşılır buldu).
 3. İddia sınırı cümlesi: "Bu bir gözlem alıştırması. Günlük hayatta fark etmeyi artırdığı gösterilmedi." Görev
    ekranından kalkar, sonuç ekranının altında durur. Bugünkü cümlenin yerini alır.
@@ -315,12 +317,14 @@ azalıyor (Klasnja 2019, PMID 30192907); soru beklenince fark etme ölçüsü bo
 kodda saf işlevdir ve testle denetlenir; sayılar VARSAYIM, ilk ay ölçülür.
 
 **Modül turu**
-1. Aynı sahne art arda iki gün gelmez; aynı (sahne, saat dilimi, hava) üçlüsü 14 gün içinde tekrar etmez.
+1. (Sahip kararı 2026-10-02, "İlk 4 gün Cadde kalsın") Yalnız bir sahne açıkken o sahne her gün gelir; içerik kural 2–4
+   ile yenilenir. İki ve daha çok sahne açıkken aynı sahne art arda iki gün gelmez, bir sahne 7 günde en çok 2 kez gelir;
+   seçim izinliler arasından tohumla rastgeledir (sabit döngü yok). Eski "14 günde aynı üçlü yok" kuralı 5 sahneyle
+   sağlanamadığı için kaldırıldı.
 2. Sayma hedefi son 7 turda tekrar etmez (sahne başına ≥ 8 hedef).
 3. "Ne değişti?" turundaki 4 sahnede değişiklik türü (renk, nesne gelir/gider, yer değiştirir, tabela) en çok iki kez
    aynıdır; değişen nesne son 5 turda değişen nesnelerden biri olmaz.
-4. "Gözünden kaçan" şablonu son 3 turda sorulmaz (sahne başına ≥ 12 şablon); yakalama turu (kişi yoktu) rastgele,
-   iki tur üst üste değil.
+4. "Gözünden kaçan" şablonu son 3 turda sorulmaz (sahne başına ≥ 12 şablon); yakalama turu yok (§9 madde 1).
 5. Her 7. tur "haftanın sahnesi": o hafta açılmış en yeni sahne ya da çeşitleme (akşam, yağmur).
 6. Bilim kartı 7 gün içinde tekrar etmez; açılan kart 30 gün dinlenir (Nef planı §4.4 madde 4).
 
