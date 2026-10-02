@@ -13,7 +13,9 @@ const ios = vi.hoisted(() => ({ on: false }))
 vi.mock('./native.js', async (orig) => ({ ...(await orig()), isIOSApp: () => ios.on }))
 
 const MIN = 60000
-const LIVE = registry.live.filter((m) => m.id !== 'yoga') // gerçek yoga manifesti web'de zaten null döndürür
+// gerçek yoga manifesti web'de zaten null döndürür. Yakala Yaz bu ilerlemesiz benzetimde yok (eski senaryolar değişmesin;
+// ilerlemeli yoldaki yeri today.test.js Yakala Yaz benzetiminde)
+const LIVE = registry.live.filter((m) => m.id !== 'yoga' && m.id !== 'yakala-yaz')
 const REAL_YOGA = registry.live.find((m) => m.id === 'yoga') ?? null
 const TITLES = { 1: 'Nefesin Ritmi', 2: 'Derin Dinlenme', 3: 'Uykuya Geçiş', 4: 'Zor Anlar İçin', 5: 'Tek Nokta', 6: 'Sabah Niyeti', 7: 'Kendine Şefkat', 8: 'Sağlam Yer', 9: 'Kendini Tanımak', 10: 'Gelecekteki Sen' }
 // lib/yogaLessons.js biçiminde taklit: LESSONS (başlık) ve publishedMinutes(id)
@@ -346,7 +348,7 @@ describe('Gerçek yoga manifesti ve ders verisiyle (modules/yoga/manifest.js, li
         for (let n = 1; n <= 40; n++) {
           const now = at(n)
           const ctx = { tests: [...tests], sessions: [...sessions], now }
-          const withY = buildPath(registry.live, ctx)
+          const withY = buildPath([...LIVE, REAL_YOGA], ctx)
           const noY = buildPath(LIVE, ctx)
           out.push({ n, withY, noY, yoga: withY.stops.find((s) => s.id === 'yoga') ?? null })
           for (const s of withY.stops) record(s, now, tests, sessions)

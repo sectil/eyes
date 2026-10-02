@@ -164,6 +164,9 @@ Toplam 112 cümle. Ayrıca kart etiketi: "Nef".
 - Okuma hızın başlangıcından iyi, anlaman da yerinde.
 - Bir süredir okumadın. Bugün kısa bir bulgu seni bekliyor.
 
+## Yakala Yaz · modüle özel (sahip onayı 2026-10-02, "onay"; kelime-hafiza/METINLER.md N1)
+- İlk Yakala Yaz turunda iki kelimeyi 183 ms'de yakaladın; başlangıcın bu.
+
 ## Nef kartı düğmeleri (sahip onayı 2026-10-02, "Onaylıyorum"; kapı 5/5)
 - Puan kartı, kartın zaman dilimiyle aynı dilimde: "Bu akşam da Dalga sesi · 8 dk" (dilim + "da/de", modül, süre)
 - Puan kartı, başka dilimde: "Bugün de Dalga sesi · 8 dk"

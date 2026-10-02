@@ -110,7 +110,7 @@ export const LADDERS = { breath, routine, 'fark-ettin': farkEttin }
 
 // Açılma eşikleri: pathDay (yola ait kaydı olan ayrı gün sayısı, bugün sayılmaz) en az bu kadar olmalı (§A.3, §A.7).
 // Her gün açan yeni kullanıcıda Yılan ve Bugünün görevi 2., Fark Ettin mi? 6., Tek Bakışta 8. gün gelir. VARSAYIM.
-export const UNLOCK = { snake: 1, notice: 1, 'okuma-anlama': 2, 'fark-ettin': 5, 'tek-bakis': 7 }
+export const UNLOCK = { snake: 1, notice: 1, 'okuma-anlama': 2, 'fark-ettin': 5, 'tek-bakis': 7, 'yakala-yaz': 9 }
 
 // "Yeni" rozeti (lib/progression.js newStopKeys). DAY_ONE: 1. günden yolda olan duraklar hiç "Yeni" olmaz (1. günde
 // rozet yok; 1. gün atlanıp ertesi gün yine gelince de yeni değil). UPDATE_NEW: eski kullanıcının güncelleme gününde Y1

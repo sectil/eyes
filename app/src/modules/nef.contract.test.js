@@ -24,6 +24,7 @@ const APPROVED_NAMES = [
   'göz kırpma egzersizi', 'göz egzersizi', '1 dakikalık mola', 'su kaydı', 'kısa E testi', 'haftalık E testi', 'okuma testi',
   'iyi oluş soruları', 'alarm',
   'Oku ve Anla alıştırması', // sahip onayı 2026-10-02 (okuma-anlama/METINLER.md §5)
+  'Yakala Yaz alıştırması', // sahip onayı 2026-10-02 (kelime-hafiza/METINLER.md A2)
 ]
 // Sahip onaylı ölçüm adları (2026-10-01): Ayna puanından söz eden cümlede Yön'ün adı
 const APPROVED_METRIC_NAMES = { 'yon-ayna': 'Yön alıştırması' }

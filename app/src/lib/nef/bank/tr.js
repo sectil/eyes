@@ -194,6 +194,8 @@ export const cells = Object.freeze({
     { id: 'FTB-8', needs: ['metric'], only: { metric: 'tek-bakis-span' }, text: 'İlk Tek Bakışta turunda {başlangıç} harf kavradın; başlangıcın bu.' },
     // Oku ve Anla'ya özel (METINLER.md §5, sahip onayı 2026-10-02): ilk okumada sayı söylemez
     { id: 'FTB-OA1', only: { module: 'okuma-anlama' }, text: 'İlk okuman tamam. Hızın ancak anladığında sayılır; acele etme.' },
+    // Yakala Yaz'a özel (kelime-hafiza/METINLER.md N1, sahip onayı 2026-10-02)
+    { id: 'FYY-1', needs: ['metric'], only: { metric: 'yakala-yaz-ms' }, text: "İlk Yakala Yaz turunda iki kelimeyi {başlangıç} ms'de yakaladın; başlangıcın bu." },
   ],
   // returnAfterGap: bir modüle uzun aradan dönüş
   RG: [

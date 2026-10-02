@@ -15,7 +15,7 @@ const MIN = 60000
 const NOW = new Date('2026-09-25T10:00:00')
 const TODAY = NOW.toISOString()
 const daysAgo = (n) => new Date(NOW.getTime() - n * 86400000).toISOString()
-const path = (tests = [], sessions = [], extra = {}) => buildPath(registry.live, { tests, sessions: [...SPAN3, ...STREET3, ...sessions], now: NOW, ...extra })
+const path = (tests = [], sessions = [], extra = {}) => buildPath(registry.live, { tests, sessions: [...SPAN3, ...STREET3, ...YAKALA3, ...sessions], now: NOW, ...extra })
 const keys = (p) => p.stops.map((s) => s.key)
 // Normal gün: haftalık test (üç göz) 2 gün, okuma 3 gün önce (yol planı §4, "Ali" kurgusal)
 const wk = (eyes, date) => eyes.map((eye) => ({ type: 'va-weekly', eye, date }))
@@ -26,6 +26,8 @@ const DAILY_DONE = ['R', 'L'].map((eye) => ({ type: 'va-daily', eye, date: TODAY
 const SPAN3 = [2, 3, 4].map((d) => ({ type: 'span', span: 8, left: 4, right: 4, durationMs: 100, accuracy: 0.8, seconds: 120, date: daysAgo(d) }))
 // Fark Ettin mi? de bu hafta 3 gün yapıldı → yolda yok
 const STREET3 = [2, 3, 4].map((d) => ({ type: 'street', noticed: 2, asked: 3, task: 1, level: 1, seconds: 60, date: daysAgo(d) }))
+// Yakala Yaz da bu hafta 3 gün yapıldı → yolda yok (kendi davranışı ayrı testte)
+const YAKALA3 = [2, 3, 4].map((d) => ({ type: 'yakala-yaz', thresholdMs: 183, thresholdStep: 10, trials: [], seconds: 120, date: daysAgo(d) }))
 // Karar 2026-09-29: E testi haftada bir; haftalık testin olmadığı günlerde yolda E testi yok.
 // Sahip kararı 2026-10-02: Oku ve Anla (bu hafta yapılmadı) okuma testinin eski yerinde, 2. bölümde (yol göz payı 0)
 const DAY = ['routine:isinma', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'okuma-anlama', 'routine:kirpma', 'snake']
@@ -298,7 +300,7 @@ describe('haftalık E testi: "tamam" = aynı gün sağ, sol ve iki göz (karar S
     expect(lastComplete(full, 'va-weekly')).toBe(full[2])
     expect(eyeDay(full, 'va-weekly', new Date('2026-09-24T23:59:59'))).toMatchObject({ complete: true })
     // hafta tamam: 25'inin yolunda haftalık yok, kısa E testi de yok (karar 2026-09-29)
-    const p = buildPath(registry.live, { tests: [...NORMAL.slice(3), ...full], sessions: [...SPAN3, ...STREET3], now: after })
+    const p = buildPath(registry.live, { tests: [...NORMAL.slice(3), ...full], sessions: [...SPAN3, ...STREET3, ...YAKALA3], now: after })
     expect(keys(p)).not.toContain('weekly')
     expect(keys(p)).not.toContain('daily')
     // aynı koşu 00:01'de yarıda kaldı (sağ 23:59, sol 00:01): 25'inde test baştan açılır, "Kalan" yok, göz atlanmaz
@@ -691,6 +693,57 @@ describe('Sonsuz yol · ilerleme açık, yeni kullanıcı (§3.A.9: her gün 10.
     // 3. gün sabah (hiç göz çalışması yok) bant 5 dk: 1. bölümün 2 dk'sı eklenir
     expect(pathRestMinutes(st(0), day(3).withY, day(3).ctx.progression)).toBe(5)
     expect(pathRestMinutes(st(0), day(1).withY, day(1).ctx.progression)).toBe(1)
+  })
+})
+
+// Yakala Yaz (kelime-hafiza istemi §5, sahip yetkisi 2026-10-02): 10. günden, haftada 3 gün, 2 dk; Tek Bakışta ile aynı
+// gün yok; Tek Bakışta ile Fark Ettin mi?'nin week3 dönüşümü Yakala Yaz yokkenkiyle aynı
+function yySimulate(mods, days, { profile } = {}) {
+  const tests = []
+  const sessions = []
+  const out = []
+  for (let n = 1; n <= days; n++) {
+    const now = new Date(2026, 9, n, 10)
+    const base = { tests: [...tests], sessions: [...sessions], now, ...(profile ? { profile } : {}) }
+    const ctx = { ...base, progression: progressionCtx({ ...base, modules: mods }) }
+    const p = buildPath(mods, ctx)
+    out.push({ n, k: keys(p), p })
+    for (const s of p.stops) y1Record(s, now, tests, sessions)
+  }
+  return out
+}
+
+describe('Sonsuz yol · Yakala Yaz (90 gün, her gün 10.00, her durak)', () => {
+  const NO_YY = Y1_ALL.filter((m) => m.id !== 'yakala-yaz')
+  const rows = yySimulate(Y1_ALL, 90)
+  const base = yySimulate(NO_YY, 90)
+  const yyDays = rows.filter((r) => r.k.includes('yakala-yaz')).map((r) => r.n)
+  it('10. günden önce yok; sonra gelir', () => {
+    expect(yyDays.length).toBeGreaterThan(0)
+    expect(Math.min(...yyDays)).toBeGreaterThanOrEqual(10)
+    // her durağı yapan kişide Fark Ettin mi? günlerinde yol dolu, Yakala Yaz (dropRank 1.5) düşer: haftada 2 gün gelir
+    for (let n = 14; n + 6 <= 90; n++) expect(yyDays.some((d) => d >= n && d <= n + 6), `gün ${n}–${n + 6}`).toBe(true)
+  })
+  it('Tek Bakışta ile aynı gün hiç yok', () => {
+    for (const r of rows) expect(r.k.includes('yakala-yaz') && r.k.includes('tek-bakis'), `gün ${r.n}`).toBe(false)
+  })
+  it('herhangi 7 günde en çok 3 gün; durak 2 dk, gövdede', () => {
+    for (const r of rows) {
+      const week = yyDays.filter((d) => d <= r.n && d > r.n - 7)
+      expect(week.length, `gün ${r.n}`).toBeLessThanOrEqual(3)
+    }
+    const stop = rows.find((r) => r.n === yyDays[0]).p.stops.find((s) => s.key === 'yakala-yaz')
+    expect(stop).toMatchObject({ minutes: 2, slot: 'body', dropRank: 1.5 })
+  })
+  it('Tek Bakışta ve Fark Ettin mi? günleri Yakala Yaz yokkenkiyle aynı; ikisi de gelir', () => {
+    const pick = (list) => list.map((r) => r.k.filter((k) => k === 'tek-bakis' || k === 'fark-ettin').join(','))
+    expect(pick(rows)).toEqual(pick(base))
+    expect(rows.some((r) => r.k.includes('tek-bakis'))).toBe(true)
+    expect(rows.some((r) => r.k.includes('fark-ettin'))).toBe(true)
+  })
+  it('ışığa duyarlılık "emin değilim" ise yolda hiç yok (Harding 2005)', () => {
+    const off = yySimulate(Y1_ALL, 40, { profile: { seizure: 'unsure' } })
+    expect(off.some((r) => r.k.includes('yakala-yaz'))).toBe(false)
   })
 })
 

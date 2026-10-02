@@ -93,6 +93,11 @@ export const TEXTS = Object.freeze({
     { id: 'OA2', title: 'Bir metin, dört soru', body: 'Bugün hangi hayvanın sırrını okuyacaksın? Kendi hızında.', source: 'rayner2016' },
     { id: 'OA3', title: 'Okuma molası', body: 'Kısa bir bulgu oku; hızın anladığınla birlikte sayılır.', source: 'rayner2016' },
   ],
+  'remind.yakala-yaz': [
+    { id: 'YY1', title: 'Yakala Yaz hazır', body: 'İki kelime, bir an. Kısa bir tur ister misin?', source: 'rubin1992' },
+    { id: 'YY2', title: 'Bir tur Yakala Yaz?', body: 'Yaklaşık 2 dakika. Hazır olduğunda dokun.', source: 'rubin1992' },
+    { id: 'YY3', title: 'Yakala Yaz', body: 'Bugünkü basamağın seni bekliyor. Seçim senin: şimdi ya da sonra.', source: 'rubin1992' },
+  ],
   'remind.merged': [
     { id: 'BR1', title: '2 hatırlatma bir arada', body: '{A} ve {B} hazır. Hangisiyle başlarsın?', source: null },
     { id: 'BR2', title: 'Sırada 2 pratik', body: '{A} ile {B} hazır. Dokun, Ana sayfadan birini seç.', source: null },
@@ -135,6 +140,7 @@ export const NAMES = Object.freeze({
   'gokyuzu': 'Gökyüzü molası',
   'yon': 'Yön',
   'okuma-anlama': 'Oku ve Anla',
+  'yakala-yaz': 'Yakala Yaz',
 })
 
 export const SCI_LINES = Object.freeze({

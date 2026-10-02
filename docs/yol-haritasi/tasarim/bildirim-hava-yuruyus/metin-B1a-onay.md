@@ -123,6 +123,14 @@ Kaynak: geçici `bell2023`, genel destek, karar 2. YN3 çıkarıldı: iki incele
 
 Kaynak: `rayner2016`. Cümleler `okuma-anlama/METINLER.md` §5'ten harfi harfine; sahip onayı 2026-10-02 ("Onay", okuma-anlama/ARA_RAPOR_1.md §11). 5 kişilik metin kapısından geçmedi, sahip doğrudan onayladı.
 
+### `remind.yakala-yaz` · Yakala Yaz
+
+- YY1 · **Yakala Yaz hazır** · İki kelime, bir an. Kısa bir tur ister misin? · 16/45
+- YY2 · **Bir tur Yakala Yaz?** · Yaklaşık 2 dakika. Hazır olduğunda dokun. · 19/41
+- YY3 · **Yakala Yaz** · Bugünkü basamağın seni bekliyor. Seçim senin: şimdi ya da sonra. · 10/64
+
+Kaynak: `rubin1992`. Cümleler `kelime-hafiza/METINLER.md` H1–H3'ten harfi harfine; sahip onayı 2026-10-02 ("onay"). Metin kapısı ana oturumda gerçek ekranla (bildirim) yapılmadı: bildirim sayfası uygulamada kapalı.
+
 ### `remind.merged` · Birleşik bildirim
 
 - BR1 · **2 hatırlatma bir arada** · {A} ve {B} hazır. Hangisiyle başlarsın? · 22/61

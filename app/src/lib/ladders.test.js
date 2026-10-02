@@ -19,10 +19,12 @@ describe('ladders: biçim', () => {
   })
   it('açılma eşikleri planla aynı; Fark Ettin mi? ve Tek Bakışta göz merdiveninin yeni grup günlerine düşmez', () => {
     // Oku ve Anla 3. günden (pathDay ≥ 2): 1. ve 2. gün mola kuralı bozulmasın (sahip kararı 2026-10-02)
-    expect(UNLOCK).toEqual({ snake: 1, notice: 1, 'okuma-anlama': 2, 'fark-ettin': 5, 'tek-bakis': 7 })
+    // Yakala Yaz 10. günden (pathDay ≥ 9; kelime-hafiza istemi, sahip yetkisi 2026-10-02)
+    expect(UNLOCK).toEqual({ snake: 1, notice: 1, 'okuma-anlama': 2, 'fark-ettin': 5, 'tek-bakis': 7, 'yakala-yaz': 9 })
     const groupDays = LADDERS.routine.steps.map((s) => s.from)
     expect(groupDays).not.toContain(UNLOCK['fark-ettin'])
     expect(groupDays).not.toContain(UNLOCK['tek-bakis'])
+    expect(groupDays).not.toContain(UNLOCK['yakala-yaz'])
   })
 })
 
