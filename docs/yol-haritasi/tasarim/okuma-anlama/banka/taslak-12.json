@@ -160,7 +160,7 @@
       "yazar": "Hammerschmidt ve Wöllner",
       "dergi": "Music Perception",
       "yil": 2020,
-      "metin": "Müzik dinlerken zamanın nasıl geçtiğini hiç düşündünüz mü? Bir ekip, ritme farklı biçimlerde eşlik etmenin zaman algısını değiştirip değiştirmediğini inceledi. Müzisyenler ve müzisyen olmayanlar, üç farklı hızda çalınan ritim kalıplarını dinledi. Bazı denemelerde parmaklarıyla ritme vurdular; vuruşları kimi zaman seyrek, kimi zaman sık aralıklarla tuttular. Bazı denemelerde ise hiç vurmadan yalnız dinlediler. Her denemeden sonra parçanın ne kadar sürdüğünü tahmin ettiler. En seyrek vuruşlarla eşlik edenler süreyi en kısa tahmin etti; zaman onlara daha hızlı geçmiş gibi geldi. Yalnız dinlemek en uzun tahminlere yol açtı. Kalıplar hızlandıkça tahmin edilen süre de uzadı. Müzisyenlerle ötekiler arasında fark çıkmadı, ama daha düzgün vuranlar süreyi daha kısa tahmin etti.",
+      "metin": "Müzik dinlerken zamanın nasıl geçtiğini hiç düşündünüz mü? Bir ekip, ritme farklı biçimlerde eşlik etmenin zaman algısını değiştirip değiştirmediğini inceledi. Müzisyenler ve müzisyen olmayanlar, üç farklı hızda çalınan ritim kalıplarını dinledi. Bazı denemelerde parmaklarıyla ritme vurdular; vuruşları kimi zaman seyrek, kimi zaman sık aralıklarla tuttular. Bazı denemelerde ise hiç vurmadan yalnız dinlediler. Her denemeden sonra parçanın ne kadar sürdüğünü tahmin ettiler. En seyrek vuruşlarla eşlik edildiğinde süre en kısa tahmin edildi; zaman daha hızlı geçmiş gibi geldi. Yalnız dinlemek en uzun tahminlere yol açtı. Kalıplar hızlandıkça tahmin edilen süre de uzadı. Müzisyenlerle ötekiler arasında fark çıkmadı, ama daha düzgün vuranlar süreyi daha kısa tahmin etti.",
       "sorular": [
         {
           "tur": "ana",
@@ -194,12 +194,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Süreyi en kısa kimler tahmin etti?",
+          "soru": "Süre en kısa hangi durumda tahmin edildi?",
           "secenekler": [
-            "En seyrek vuruşlarla eşlik edenler",
-            "Hiç vurmadan yalnız dinleyenler",
-            "Gözlerini kapatarak dinleyenler",
-            "Parçayı daha önce birçok kez duymuş olanlar"
+            "En seyrek vuruşlarla eşlik edildiğinde",
+            "Hiç vurmadan yalnız dinlerken",
+            "Gözler kapalıyken dinlerken",
+            "Parça daha önce birçok kez duyulmuşken"
           ]
         },
         {
@@ -382,7 +382,7 @@
       "yazar": "Gavelis ve ark.",
       "dergi": "Nature",
       "yil": 2015,
-      "metin": "Kamera gibi çalışan gözler birkaç hayvan grubunda var; böyle karmaşık yapılar için çoğu zaman çok hücreli olmak gerekli sayılır. Oysa dinoflagellat denen bazı tek hücrelilerde göze benzer bir yapı var. Yapının saydam bir ön katmana, merceğe, bir halkaya ve ışık alan bir tabakaya benzeyen parçaları bulunur. Bu canlılar laboratuvarda yetiştirilemiyor ve doğada az rastlanıyor. Bu yüzden yapının işi ve kökeni belirsizdi. Bir ekip yapıyı elektron mikroskobu ve tek hücreden gen okuma yöntemleriyle inceledi. Saydam ön katmanın, enerji işleri gören hücre parçaları olan mitokondrilerden oluştuğunu buldu. Işık alan tabaka ise plastit denen başka hücre parçalarının birbirine bağlanmasıyla yapılmıştı. Yani göz, hücrenin hazır parçalarından kurulmuştu. Yapı o kadar karmaşık ki ilk başta çok hücreli bir göz sanılmıştı.",
+      "metin": "Kamera gibi çalışan gözler birkaç hayvan grubunda var; böyle karmaşık yapılar için çoğu zaman çok hücreli olmak gerekli sayılır. Oysa dinoflagellat denen bazı tek hücrelilerde göze benzer bir yapı var. Yapıda saydam bir ön katmana, merceğe, halkaya ve ışık alan bir tabakaya benzeyen parçalar bulunur. Bu canlılar yetiştirilemiyor ve doğada az bulunuyor. Bu yüzden yapının işi ve kökeni belirsizdi. Bir ekip yapıyı elektron mikroskobu ve tek hücreden gen okuma yöntemleriyle inceledi. Saydam ön katmanın, enerji işleri gören hücre parçaları olan mitokondrilerden oluştuğunu buldu. Işık alan tabakaya benzeyen parça ise plastit denen başka hücre parçalarının birbirine bağlanmasıyla yapılmıştı. Yani yapı, hücrenin hazır parçalarından kurulmuştu. Yapı o kadar karmaşık ki ilk başta çok hücreli bir göz sanılmıştı.",
       "sorular": [
         {
           "tur": "ana",
@@ -426,7 +426,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Işık alan tabaka neden yapılmıştı?",
+          "soru": "Işık alan tabakaya benzeyen parça neden yapılmıştı?",
           "secenekler": [
             "Birbirine bağlanan plastitlerden",
             "Mitokondrilerden",
@@ -530,13 +530,13 @@
       "yazar": "Bolmin ve ark.",
       "dergi": "PNAS",
       "yil": 2021,
-      "metin": "Birçok küçük hayvan, kaslarının gücü yetmediğinde yaylardan ve kilitlerden yararlanır. Tıklayan böcekler de gövdelerini göğüs bölgesindeki bir menteşeden büker, sonra çok hızlı biçimde açar. Bu harekete tıklama denir ve böcek serbestse onu havaya sıçratır. Sıçrayış ayrıntılı incelenmişti, ama gövdenin bu kadar hızlı açılmasını sağlayan düzenek incelenmemişti. Bir ekip önce hareketi kilitlenme, yüklenme ve enerjinin bırakılması diye üç evreye ayırdı. Menteşenin içini çok hızlı çekilen X ışını görüntüleriyle izledi. Menteşedeki yumuşak dış örtünün hızla geri esneyerek yayın bir parçası gibi çalıştığına dair kanıt buldu. Ekip ardından hareketi matematikle modelledi. Kullanılan yöntemlerin, başka küçük hayvanların aşırı hızlı hareketlerini anlamaya da yardım edebileceğini söylüyor.",
+      "metin": "Birçok küçük hayvan, kaslarının gücü yetmediğinde yaylardan ve kilitlerden yararlanır. Bazı böcekler de yay ve kilit kullanarak gövdelerini göğüs bölgesindeki bir menteşeden büker, sonra çok hızlı biçimde açar. Bu harekete tıklama denir ve böcek serbestse onu havaya sıçratır. Sıçrayış ayrıntılı incelenmişti, ama gövdenin bu kadar hızlı açılmasını sağlayan düzenek incelenmemişti. Bir ekip önce hareketi kilitlenme, yüklenme ve enerjinin bırakılması diye üç evreye ayırdı. Menteşenin içini çok hızlı çekilen X ışını görüntüleriyle izledi. Menteşedeki yumuşak dış örtünün hızla geri esneyerek yayın bir parçası gibi çalıştığına dair kanıt buldu. Ekip ardından hareketi matematikle modelledi. Kullanılan yöntemlerin, başka küçük hayvanların aşırı hızlı hareketlerini anlamaya da yardım edebileceğini söylüyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Tıklayan böceklerin gövdelerini nasıl çok hızlı açtığını",
+            "Bir böceğin gövdesini nasıl çok hızlı açtığını",
             "Böceklerin soğuk kış aylarını nerede ve nasıl geçirdiğini",
             "Böceklerin hangi bitkilerle beslendiğini",
             "X ışınlarının nasıl bulunduğunu"
@@ -641,7 +641,7 @@
           "soru": "Sert bölgeler ötekilere göre nasıldı?",
           "secenekler": [
             "İki kat kalın, dört kat sert",
-            "Dört kat kalın, iki kat sert",
+            "Yarı kalınlıkta ve daha yumuşak",
             "Daha ince ve daha yumuşak",
             "Aynı kalınlıkta, daha ıslak"
           ]
@@ -678,7 +678,7 @@
       "yazar": "Boistel ve ark.",
       "dergi": "PNAS",
       "yil": 2013,
-      "metin": "Karada yaşayan dört ayaklı hayvanlarda orta kulak, kara yaşamına uyum sağlamış bir yapıdır. Dünyanın en küçük dört ayaklı kara hayvanlarından biri olan bir kurbağa türünün ise orta kulağı yoktur; bu yüzden ilk bakışta duyamıyor gibi görünür. Yine de bu kurbağa sesli işaretler üretir. Bir ekip, bu minik kurbağanın nasıl duyduğunu araştırdı. Kulak çevresindeki dokuların özelliklerini çok güçlü X ışınlarıyla elde edilen görüntülerle ölçtü. Sonra sesin bu dokularda nasıl yayıldığını modelledi. Modellere göre ses, kemikler üzerinden iç kulağa ulaşıyordu. Kurbağanın ağız boşluğu da sesle birlikte titreşerek bu iletimi güçlendiriyordu. Böylece orta kulağı olmayan bu küçük kurbağalar, birbirleriyle etkili biçimde iletişim kurabiliyor.",
+      "metin": "Karada yaşayan dört ayaklı hayvanlarda orta kulak, kara yaşamına uyum sağlamış bir yapıdır. Dünyanın en küçük dört ayaklı kara hayvanlarından biri olan bir kurbağa türünün ise orta kulağı yoktur; bu yüzden ilk bakışta duyamıyor gibi görünür. Yine de bu kurbağa sesli işaretler üretir. Bir ekip, bu minik kurbağanın nasıl duyduğunu araştırdı. Kulak çevresindeki dokuların özelliklerini çok güçlü X ışınlarıyla elde edilen görüntülerle ölçtü. Sonra sesin bu dokularda nasıl yayıldığını modelledi. Modellere göre ses, kemikler üzerinden iç kulağa ulaşıyordu. Kurbağanın ağız boşluğu da sesle birlikte titreşerek bu iletimi güçlendiriyordu. Modeller, orta kulağı olmayan bu küçük kurbağaların birbirleriyle böylece etkili biçimde iletişim kurabildiğini gösteriyor.",
       "sorular": [
         {
           "tur": "ana",

@@ -188,7 +188,7 @@ remind: { route: 'okuma-anlama', window: 'calm', science: ['rayner2016'], doneTo
 1. **Bu oturum:**
    - İlk 10 metin ve kapı.
    - Sahip onayı: ad, görünür metinler, üslup.
-   - Kalan 110 metin, 10'arlı takımlarla; her takım denetimden geçer.
+   - Kalan 110 metin, 10'arlı takımlarla; her takım denetimden geçer. **Tamam:** 120 metin, hepsi bağımsız doğrulamalı.
    - `ANA_OTURUM_ISTEMI.md`.
 2. **Ana oturum:**
    - Bağlantı satırları: Gelişim birimi, kaynaklar, Nef adı ve cümleleri, hatırlatma cümleleri.

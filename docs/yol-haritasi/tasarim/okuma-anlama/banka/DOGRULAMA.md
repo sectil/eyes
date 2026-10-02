@@ -1,5 +1,20 @@
 # Bilimsel doğrulama kayıtları
 
+## taslak-12
+
+PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor. Yayın türü: hepsi "Journal Article" (oa115 ek olarak "Video-Audio Media", özgün çalışma); yorum, derleme, düzeltme yok. Eleştiri taraması: başlık anahtar sözcükleri, ilk yazar ve "comment" ile arandı; eleştiri yorumu ya da yanıt bulunmadı. Yalnız aynı ekiplerin sonraki özgün çalışmaları çıktı (oa111 için 39565142, oa113 için 33512699, oa118 için 31113839); metinler bunlarla çelişmiyor. oa120'deki kurbağa, bankadaki önceki kurbağa/semender metinleri gibi `surungen` etiketinde bırakıldı. Uzunluk oranı sonrası: doğru seçenek en uzun 12/60 (%20).
+
+- oa111 | tamam (metinde köken savı yok; "yazıdan büyük ölçüde bağımsız, sesle şekil bağı" özetle uyuşuyor) | değişiklik yok
+- oa112 | tamam | değişiklik yok
+- oa113 | düzeltildi: tekrarlı ölçüm deseni grup gibi anlatılmıştı ("en seyrek vuruşlarla eşlik edenler") → "en seyrek vuruşlarla eşlik edildiğinde süre en kısa tahmin edildi" | ilgili soru "kimler" yerine "hangi durumda" diye kuruldu, seçenekler durum biçimine çevrildi
+- oa114 | tamam | değişiklik yok
+- oa115 | tamam | değişiklik yok
+- oa116 | düzeltildi: özette işlevi belirsiz denen yapı için kesin "ışık alan tabaka" → "ışık alan tabakaya benzeyen parça"; "göz kurulmuştu" → "yapı kurulmuştu"; "laboratuvarda" silindi (özette uncultivated); kelime 120 → 115 | ilgili soru kökü "ışık alan tabakaya benzeyen parça" diye güncellendi
+- oa117 | tamam | değişiklik yok
+- oa118 | düzeltildi: yerleşik Türkçe adı olmayan "tıklayan böcekler" yerine özetteki gibi "bazı böcekler de yay ve kilit kullanarak" | ana sorunun doğru seçeneği "bir böceğin gövdesini" diye uyduruldu
+- oa119 | tamam | kalınlık/sertlik sorusunda değerleri yer değiştiren tuzak seçenek ("dört kat kalın, iki kat sert") "yarı kalınlıkta ve daha yumuşak" yapıldı
+- oa120 | düzeltildi: modelden çıkan "etkili iletişim" sonucu kesin anlatılmıştı → "modeller ... kurabildiğini gösteriyor" | değişiklik yok
+
 ## taslak-11
 
 PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor. Yayın türü: hepsi "Journal Article" (oa104 ek olarak "Video-Audio Media", özgün çalışma); yorum, derleme, düzeltme yok. Eleştiri taraması: her kayıt için başlık anahtar sözcükleri, ilk yazar ve "comment / reply / response" ile `Comment[Publication Type]` araması yapıldı; eleştiri yorumu ya da yanıt bulunmadı. Yalnız tanıtım yazıları var (oa105 için 26138964, oa107 için 38033078 ve 38100681), ayrıca oa108 yazarlarının derlemesi (42150523); metinler değişmedi. Uzunluk oranı sonrası: doğru seçenek en uzun 18/60 (%30).

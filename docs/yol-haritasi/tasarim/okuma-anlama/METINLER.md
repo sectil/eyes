@@ -37,8 +37,10 @@ Sahip onayı olmadan koda girmez: taslak → 5 kişilik kapı → kendi onayım 
   Kaynak ayrıntısı `arastirma/KAYNAKLAR.md` §B'de.
 - Denetim: `node banka/denetle.mjs banka/*.json`. Uzunluk, tekrar kimlik, tekrar kaynak, parantez, yasak sözcük,
   soru sayısı, seçenek sayısı ve olumsuz soru kurallarına bakar.
-- Hedef: 120 metin. İlk takım 10 metin: `taslak-01.json`. Kalan 110 metin sahip ilk takımın üslubunu onaylayınca
-  10'arlı takımlarla yazılır.
+- **120 metin tamam** (2026-10-02): `taslak-01..12.json`.
+  - Her takım iki adımdan geçti: önce yazıldı, sonra bağımsız doğrulayıcı özetle karşılaştırdı (`banka/DOGRULAMA.md`).
+  - Liste: `banka/METIN_LISTESI.md`.
+  - Takım 2–12 koda girmeden önce sahip onayı bekler.
 
 ## 5. Görünür metinler (taslak, kapı ve sahip onayı bekliyor)
 
