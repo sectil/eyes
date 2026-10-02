@@ -1,0 +1,106 @@
+{
+ "log": [
+  "01-f2a-dalga 3/5, 02-f2c-oruntu 3/5, 03-f4a-sessiz 0/5, 04-f4c-donus 0/5, 05-ft-yilan 0/5, 06-mc-tekbakis 1/5, 07-pd-yolbitti 0/5, 08-f3b-sicak 3/5, 09-who5-dusuk 0/5"
+ ],
+ "result": {
+  "01-f2a-dalga": {
+   "yes": 3,
+   "n": 5,
+   "weak": [
+    "01-f2a-dalga-kart-390-acik.png: Cümle geçmişte kalıyor (\"bir hafta önce... yükselmişti\") ve sonunda ne yapmam gerektiğini söylemiyor; \"şimdi Dalga'yı aç\" gibi bir öneri ya da düğme yok, bu yüzden \"eee?\" diye kalıyorum. Çubukta da ölçeğin ne olduğu yazmıyor, \"sakinlik\" etiketi yok, sadece 0–10 var. Tasarım iki temada ve 320'de temiz.",
+    "01-f2a-dalga-kart-390-acik.png / 320-koyu: Cetveldeki 4 ve 7 noktalarının hangisinin 'önce', hangisinin 'sonra' olduğu yazmıyor. 0 ve 10 etiketleri de küçük ve soluk gri, gözlükle zor okunuyor. 'Bir hafta önce yükselmişti' cümlesi bugün ne yapmam gerektiğini (Dalga'yı yine dene) söylemiyor.",
+    "01-f2a-dalga-kart-390-acik.png: Tek bir seansa dayanıyor ('bir hafta önce bu saatlerde'), bir muhasebeci için tek gözlem kanıt sayılmaz. Bir de 'şimdi Dalga'yı aç' gibi bir düğme yok. Aynı görüntüde 'yükselmişti.' tek başına son satıra düşmüş. Kaydırıcı ve iki tema temiz.",
+    "01-f2a-dalga-kart-390-acik.png: Kart kişiye özel bir içgörü veriyor ('bu saatlerde', 4→7 kaydırıcıyla destekleniyor) ama sonu boş kalıyor. 'Yükselmişti' örtük bir 'şimdi Dalga'yı aç' çağrısı taşıyor, fakat kartta bunu yapacak bir dokunuş ya da düğme yok.",
+    "01-f2a-dalga-kart-390-koyu.png / 320-koyu: kaydırıcının altındaki 0 ve 10 etiketleri koyu zeminde çok sönük kalıyor. Kartta 'şimdi Dalga'yı aç' gibi dokunulabilir bir yol da yok. Not beni harekete geçiriyor ama sesi bulmak için aşağı kaydırmam gerekiyor."
+   ]
+  },
+  "02-f2c-oruntu": {
+   "yes": 3,
+   "n": 5,
+   "weak": [
+    "02-f2c-oruntu-kart-390-acik.png: 01 ile neredeyse aynı kart; tek fark başka bir sayı. Sonuç bildiriyor ama bir anlam ya da sonraki adım vermiyor (ne zaman aç, ne yap). Çubuk 4→6 farkını küçük gösteriyor, bu yüzden \"ilerleme\" hissi zayıf.",
+    "02-f2c-oruntu-kart-320-koyu.png: Koyu temada cetvel çizgisi kart zeminine neredeyse karışıyor. Noktalar etiketsiz, 0/10 yazıları da küçük ve soluk. Kart 01 ile birebir aynı kalıpta, bu yüzden üst üste görünce 'sana özel' hissi azalıyor.",
+    "02-f2c-oruntu-kart-390-koyu.png: 5 seansın ortalaması ve 4→6 kaydırıcısı ikna edici, iki temada ve 320'de düzgün. Eksiği, kartın bir eyleme bağlanmaması: 'Dalga'yı şimdi dinle' düğmesi olmadığı için bilgi havada kalıyor.",
+    "02-f2c-oruntu-kart-390-acik.png: 'Son 5 Dalga sesi seansında' ifadesi hantal ve teknik duruyor. Kaydırıcı ortalamayı tek bir noktayla gösterdiği için 01'deki tek seansla aynı görünüyor; 'örüntü' olduğu görselden anlaşılmıyor, eylem de yok.",
+    "02-f2c-oruntu-kart-320-acik.png: 'Son 5 Dalga sesi seansında' yorgun gözle takılarak okunuyor, 'sesi seansında' kuruluşu ağır. Kart 01 ile neredeyse aynı göründüğü için iki gün üst üste çıkarsa ikincisi tekrar gibi gelir."
+   ]
+  },
+  "03-f4a-sessiz": {
+   "yes": 0,
+   "n": 5,
+   "weak": [
+    "03-f4a-sessiz-kart-390-acik.png: \"Bugün yeni bir haberim yok\" diyen bir kart bana bilgi vermeden ana sayfada yer kaplıyor. Söyleyecek bir şey yoksa kartın hiç gösterilmemesi daha şık olur. Görsel olarak iki temada düzgün, ama gereksiz.",
+    "03-f4a-sessiz-kart-390-acik.png / 320-koyu: Diğer kartlardaki büyük başlık yerine burada küçük, ince ve gri yazı var. 52 yaşında gözlüklü biri için en zor okunan kart bu. 'Bugün yeni bir haberim yok' da bilgi vermeyen, boş bir cümle.",
+    "03-f4a-sessiz-kart-320-acik.png: 'Bugün yeni bir haberim yok. Yolun hazır.' ne demek istiyor, belli değil. Hangi yol hazır, ne yapmam gerekiyor? Haber yoksa bu kart neden yer kaplıyor? Görünüşte sorun yok ama içi boş.",
+    "03-f4a-sessiz-kart-390-acik.png: 'Bugün yeni bir haberim yok' diyen kart ana sayfada boşuna yer kaplıyor. Hap biçimindeki 'Nef' etiketi ve düz gri metin bir sesten çok bir ayar satırı gibi okunuyor. Söyleyecek bir şey yoksa kartın hiç görünmemesi daha şık olur.",
+    "03-f4a-sessiz-kart-390-acik.png: Sade ve iki temada da düzgün, ama 'Yolun hazır.' bana bir şey söylemiyor. Gri, ince yazı ana sayfada kayboluyor. Kartın orada olmasının bir anlamı kalmıyor."
+   ]
+  },
+  "04-f4c-donus": {
+   "yes": 0,
+   "n": 5,
+   "weak": [
+    "04-f4c-donus-kart-390-acik.png: \"Hoş geldin; geçmiş kayıtların yerinde, yolun hazır.\" genel ve kişisel değil. Ne kadar süredir uzak kaldığımı ya da nereden devam edeceğimi söylemiyor. Bu kadar sıradan bir cümle için başlık boyutu fazla büyük, noktalı virgül de konuşma diline yakışmıyor.",
+    "04-f4c-donus-kart-390-acik.png: 'Hoş geldin; geçmiş kayıtların yerinde, yolun hazır.' cümlesi kalıp gibi ve noktalı virgülle resmi duruyor. Ne kadar ara verdiğimi ve nereden devam edeceğimi söylemiyor, hiç kişisel değil.",
+    "04-f4c-donus-kart-390-acik.png: 'Hoş geldin; geçmiş kayıtların yerinde, yolun hazır.' resmi daire diliyle yazılmış ve bana özel tek bir bilgi içermiyor. Kaç gün ara verdiğim yazmıyor, nereden devam edeceğim de söylenmiyor. Kocaman puntoyla boş bir cümle.",
+    "04-f4c-donus-kart-390-acik.png: 'Hoş geldin; geçmiş kayıtların yerinde, yolun hazır.' kişisel değil, sistem mesajı gibi duruyor (noktalı virgül de robotik). Ne kadar ara verildiği ya da nereden devam edileceği yok, yine de dev başlık puntosuyla yazılmış.",
+    "04-f4c-donus-kart-390-acik.png: 'Geçmiş kayıtların yerinde' yedekleme bildirimi gibi okunuyor. Ne kadar ara verdiğimi bilmiyor, sıcak bir karşılama da değil. Kalın başlık boyutu bu sıradan güvence cümlesini gereğinden fazla bağırtıyor."
+   ]
+  },
+  "05-ft-yilan": {
+   "yes": 0,
+   "n": 5,
+   "weak": [
+    "05-ft-yilan-kart-390-acik.png: \"Yılan oyununu ilk kez denedin.\" zaten bildiğim bir şeyi bana söylüyor. Skor, bir sonraki hedef ya da kısa bir ipucu yok; kocaman başlık yazısı boş bir bilgiyi taşıyor.",
+    "05-ft-yilan-kart-390-acik.png / 320-koyu: 'Yılan oyununu ilk kez denedin.' yalnızca bildiğim bir şeyi bana geri söylüyor. Ne sonuç ne de bir sonraki adım var. Büyük kart boşa kullanılmış ve 'eee?' dedirtiyor.",
+    "05-ft-yilan-kart-390-acik.png: 'Yılan oyununu ilk kez denedin.' bana zaten bildiğim bir şeyi söylüyor. Puan, süre ya da bir sonraki hedef yok. Koca bir kartı tek bir bilgisiz cümleye harcamış.",
+    "05-ft-yilan-kart-390-acik.png: 'Yılan oyununu ilk kez denedin.' kullanıcının zaten bildiği bir şeyi büyük puntoyla tekrar ediyor. Ne skor var ne bir gözlem ne de sonraki adım; içi boş bir onay.",
+    "05-ft-yilan-kart-390-acik.png: 'Yılan oyununu ilk kez denedin.' bildiğim bir şeyi bana tekrar söylüyor. Ne bir sayı ne bir anlam ne de bir sonraki adım var. Büyük başlık ve gradyan şerit boş bir cümleye harcanmış."
+   ]
+  },
+  "06-mc-tekbakis": {
+   "yes": 1,
+   "n": 5,
+   "weak": [
+    "06-mc-tekbakis-kart-390-acik.png: \"çıktı.\" tek başına son satıra düşmüş (390'da). \"İlerleme var:\" gereksiz bir giriş, ne kadar sürede olduğu da belli değil. 01 ve 02'deki çubuk görseli burada yok, bu yüzden aynı türden kartlar tutarsız görünüyor.",
+    "06-mc-tekbakis-kart-390-acik.png: Kart 01/02'deki gibi bir gelişme anlatıyor ama 4'ten 6'ya artış için görsel cetvel yok, kartlar arasında tutarsızlık var. 'kavradığın harf sayısı' ifadesi de ilk okuyuşta biraz teknik geliyor.",
+    "06-mc-tekbakis-kart-390-acik.png: 02'deki aynı '4'ten 6'ya' kalıbında kaydırıcı var, burada yok, tutarsız. 'ilerleme var:' sözü fazlalık. Bu görüntüde 'çıktı.' tek başına son satıra düşmüş.",
+    "06-mc-tekbakis-kart-390-acik.png: 01 ve 02'deki aynı türden 4→6 artış burada görselsiz. Bu tutarsızlık kartı yarım bırakıyor. 'İlerleme var:' fazlalık, 'kavradığın harf sayısı' ise teknik kalıyor.",
+    "06-mc-tekbakis-kart-390-acik.png: '4'ten 6'ya' gibi gerçek bir veri var ama 01 ve 02'deki kaydırıcı burada yok, aynı kalıpta görselsiz kalınca sönük duruyor. 'ilerleme var:' boş bir dolgu; cümle doğrudan 'Bir bakışta kavradığın harf 4'ten 6'ya çıktı' olabilirdi."
+   ]
+  },
+  "07-pd-yolbitti": {
+   "yes": 0,
+   "n": 5,
+   "weak": [
+    "07-pd-yolbitti-kart-390-acik.png: Ana sayfada hemen üstte zaten \"Bu hafta 3 gün · hedef tamam\" yazıyor (07-pd-yolbitti-ilk-390-acik.png); kart aynı bilgiyi büyük puntoyla tekrar ediyor. Tebrik ya da gelecek haftaya bir bağ yok.",
+    "07-pd-yolbitti-kart-390-acik.png: 'Bu hafta yolu üçüncü kez bitirdin.' cümlesi ne bir takdir ne de bir hedef içeriyor; 3/3 mü, seriye ne kaldı belli değil. Kuru bir sayım olarak kalıyor, başarı duygusu vermiyor.",
+    "07-pd-yolbitti-kart-390-acik.png: 'üçüncü' sayısı vurgulanmamış ve 3 nokta ya da hafta şeridi gibi bir görsel yok. Haftalık hedefe ne kadar kaldığı da yazmıyor. Kuru bir sayım; 'bravo' hissi vermiyor.",
+    "07-pd-yolbitti-kart-390-acik.png: Hemen üstteki 'Bu hafta 3 gün · hedef tamam' satırını (07-pd-yolbitti-ilk-390-acik.png) neredeyse aynen tekrar ediyor. Nef yeni bir şey söylemiyor, sadece yankı yapıyor.",
+    "07-pd-yolbitti-kart-390-acik.png ile 07-pd-yolbitti-ilk-390-acik.png birlikte bakınca: hemen üstte zaten 'Bu hafta 3 gün · hedef tamam' ve 'Bugünkü yol tamam.' yazıyor. Nef aynı bilgiyi üçüncü kez söylüyor, bana özel bir yorum katmıyor."
+   ]
+  },
+  "08-f3b-sicak": {
+   "yes": 3,
+   "n": 5,
+   "weak": [
+    "08-f3b-sicak-kart-320-acik.png: Kart somut, bana özel ve işe yarıyor, ama 320'de \"yarar.\" tek başına son satıra düşüyor. Ayrıca \"Kaynak: Apple Weather\" yalnızca yazı; Apple'ın WeatherKit için istediği logo ve yasal bilgi bağlantısı yok, App Store incelemesinde sorun çıkabilir.",
+    "08-f3b-sicak-kart-320-acik.png / 320-koyu: Dar ekranda 'yarar.' kelimesi tek başına son satıra düşüyor. 'Kaynak: Apple Weather' satırı küçük ve soluk gri, koyu temada ise zor seçiliyor.",
+    "08-f3b-sicak-kart-320-acik.png: Saat, hissedilen sıcaklık ve öneri bir arada; dokuz karttan en işe yarayanı bu. Ama 320'de 'yarar.' tek başına son satıra düşmüş. 19.30 ve 31 derece de öteki kartlardaki gibi renkle vurgulanmamış.",
+    "08-f3b-sicak-kart-320-acik.png: Dar ekranda son satırda tek başına 'yarar.' kalıyor. Ayrıca 'Kaynak: Apple Weather' düz metin olarak yazılmış; Apple'ın istediği Weather işareti ve yasal bağlantı yok. İçerik en kullanışlı olanlardan, ama dar ekranda kusursuz değil.",
+    "08-f3b-sicak-kart-320-acik.png / 320-koyu: dar ekranda 'yarar.' son satırda tek başına kalıyor. Bilgi gerçekten işe yarıyor ama düz metin olarak kalmış; saat ya da sıcaklık için küçük bir görsel ipucu yok."
+   ]
+  },
+  "09-who5-dusuk": {
+   "yes": 0,
+   "n": 5,
+   "weak": [
+    "09-who5-dusuk-kart-390-acik.png: Kart \"Bu bir tanı değil.\" diye başlıyor ama \"bu\"nun neyi gösterdiği yazmıyor; ne puan ne de ölçüm adı var. Hassas bir anda ilk okunan şey soğuk bir uyarı oluyor ve sonraki adım belirsiz kalıyor (bir bağlantı ya da \"nereye başvurabilirim\" yok). 390'da \"gelebilir.\" tek başına son satıra düşüyor.",
+    "09-who5-dusuk-kart-390-acik.png: Kart 'Bu bir tanı değil.' uyarısıyla açılıyor; neyin tanı olmadığı söylenmeden soğuk bir giriş yapılıyor. Yazı küçük ve gri, en hassas mesaj en zor okunan biçimde verilmiş. Kime, nasıl başvurulacağına dair bir yol da yok.",
+    "09-who5-dusuk-kart-390-acik.png: Söze 'Bu bir tanı değil' uyarısıyla başlıyor, soğuk ve hukuki duruyor. Puan da yok, kime ya da nereye başvurulacağına dair bağlantı da yok. Bu görüntüde 'gelebilir.' tek başına son satırda kalmış. Üstteki parlak kutlama şeridi de düşük iyi oluş mesajının tonuna uymuyor.",
+    "09-who5-dusuk-kart-390-acik.png: Hassas bir mesaj soğuk bir hukuki uyarıyla ('Bu bir tanı değil.') açılıyor ve 'bu'nun neye işaret ettiği belli değil. Önce bir sıcaklık cümlesi ya da somut bir yönlendirme gelmeli; kutlama hissi veren degrade üst şerit de bu tona uymuyor.",
+    "09-who5-dusuk-kart-390-acik.png: İyi oluşu düşük biri olarak açtığımda ilk okuduğum şey 'Bu bir tanı değil.' oluyor, yani savunmacı bir yasal not. Puanıma ya da kime, nasıl ulaşacağıma dair somut bir şey yok. 390 genişlikte 'gelebilir.' tek başına alt satıra düşüyor."
+   ]
+  }
+ }
+}

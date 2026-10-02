@@ -60,6 +60,12 @@ doğrulanmadı ya da eksiği var — TAMAMLANDI SAYILMAZ; `[ ]` = yapılmadı. M
 - [ ] Y2 Gelişim "Yolun" bölümü: B2'den sonra; Gelişim merkezi oturumunun devri bekleniyor.
 - [ ] Y3 günün ilk açılışı: yeni Ana sayfa tasarımına bağlı.
 - [ ] Y4 "Günün nasıl geçti".  · Y5 (hava) → B2'ye taşındı.  · [ ] Y6 Nef dönem yorumları.
+- [~] Nef N1 "telefon aklı" (sahip onaylı plan docs/yol-haritasi/tasarim/nef/): kod dalda (a499aea, 22158f3, d1736e7 +
+      kart; sürüm notu 2026-10-02-1; cihazda bakılmadı). 112 cümle + düğmeler sahip onaylı (N1-CUMLELER-onay.md). Kart
+      sahip kararıyla yalnız güçlü haberde: örüntü 5/5, oyun ilerleme 5/5, yoga örüntü 4/5 (kapi/kart-tur1..4). Tek seans,
+      sıcak, ilk kez, dönüş, düşük WHO-5 günlerinde kart yok. Açık: Nef bildirimi yürüyüş saatini yalnız kurulu yürüyüş
+      hatırlatmasından biliyor; F1 notu yalnız 7700 sabah havasında; cihazda bir hafta (aynı cümle iki kez yok, günde ≤1).
+      Tam koşuda alarm.test/yogaLessons.test yük altında zaman aşımına düşebiliyor (tek başına geçiyor).
 - [ ] (d) sessiz ölçüm, (e) uyku ve yürüyüş (yürüyüş = B3), (f) Nef haftalık/aylık. (g) yoga: 3 ders Build 67'de, kalan 6
       ders ücretli üretim bekliyor.
 - [ ] §3.K nefona.com güncellemesi: en sonda, modüller cihazda görülünce.

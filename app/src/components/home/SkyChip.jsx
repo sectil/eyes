@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { ChevronRight, CloudRain, Cloud, CloudSun, Sun, Moon, CloudMoon, CloudDrizzle, CloudLightning, CloudSnow, CloudFog, Wind } from 'lucide-react'
 import { loadCache, ageHours, PAGE_MAX_AGE_H } from '../../lib/sky.js'
 import { rainSpan, nowView, loadAttribution, ATTR_FALLBACK } from '../../lib/skyView.js'
+import { WxMark } from '../WeatherAttr.jsx'
 
 // Ana sayfa · ilk görünümde hava (sahibin isteği 2026-10-01, D9): selamın altındaki hap satırında küçük ve okunur:
 // "Gaziemir 23° · 21.00'de yağmur". Veri yalnız hava önbelleğinden (lib/sky.js loadCache; istek hava sayfasında); önbellek
@@ -33,14 +34,7 @@ export function skyChipView(place, cache, now = new Date()) {
 // .wx-mark: temanın işaret görseli, yoksa metin işaret "Apple Weather"; lib/skyView.js ATTR_FALLBACK). Yasal sayfa bağlantısı
 // hava sayfasında (hap oraya açılır).
 export function SkyMark({ attr = ATTR_FALLBACK }) {
-  const a = attr ?? ATTR_FALLBACK
-  return (
-    <span className="wx-mark hh-sky-mark">
-      {a.markLight ? <img className="wx-mark-l" src={a.markLight} alt={a.serviceName} /> : a.markDark && <span className="wx-mark-l">{a.serviceName}</span>}
-      {a.markDark ? <img className="wx-mark-d" src={a.markDark} alt={a.serviceName} /> : a.markLight && <span className="wx-mark-d">{a.serviceName}</span>}
-      {!a.markLight && !a.markDark && <span>{a.serviceName}</span>}
-    </span>
-  )
+  return <WxMark attr={attr} className="hh-sky-mark" />
 }
 
 export default function SkyChip({ place, now = new Date(), onOpen, storage, plugin }) {

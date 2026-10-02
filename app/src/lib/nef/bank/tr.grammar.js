@@ -182,6 +182,10 @@ export function nounForms(stem, { compound = false } = {}) {
   return { '': base, ABL: kase('ABL'), ACC: kase('ACC'), LOC: kase('LOC'), DAT: kase('DAT'), INS: kase('INS'), POSS: poss, 'POSS-ABL': `${poss}d${h2(poss)}n` }
 }
 
+// "de/da" bağlacı (ayrı yazılır; ünsüz benzeşmesi yok, yalnız iki yönlü ünlü uyumu): "akşam" → "da", "gece" → "de",
+// "öğlen" → "de", "sabah" → "da" (Nef kartı düğmesi: "Bu akşam da …")
+export const conjDe = (word) => `d${h2(word)}`
+
 // Cümle başı büyük harf (dile göre: "i" → "İ")
 export const upperFirst = (s, lang) => (s ? s[0].toLocaleUpperCase(lang) + s.slice(1) : s)
 

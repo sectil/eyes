@@ -19,7 +19,7 @@ export default {
     effects: [{ key: 'yon-uzak', label: 'Yön · Dışarıdan bak', measure: 'rahatsızlık', max: 10, better: 'down', pick: (s) => (s?.type === SESSION_TYPE && s.tool === 'uzak' ? [s.before, s.after] : null) }],
     metrics: [
       {
-        key: 'yon-ayna', label: 'Kendine yaklaşım (Ayna)', unit: '/5', better: 'up',
+        key: 'yon-ayna', label: 'Kendine yaklaşım (Ayna)', unit: '/5', better: 'up', min: 1, max: 5, // 1–5 ortalama (lib/yon.js scoreAyna)
         series: ({ sessions }) => sessions.filter((s) => s?.type === SESSION_TYPE && s.tool === 'ayna' && Number.isFinite(s.score)).map((s) => ({ date: s.date, value: s.score })),
       },
     ],

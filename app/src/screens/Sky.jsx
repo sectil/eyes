@@ -5,6 +5,7 @@ import { placeLabel, placePoint } from '../lib/places.js'
 import { hourStrip, nefLine, todayRange, nowView, loadAttribution, ATTR_FALLBACK } from '../lib/skyView.js'
 import { isIOSApp } from '../lib/native.js'
 import '../styles/info.css'
+import WeatherAttr from '../components/WeatherAttr.jsx'
 import '../styles/sky.css'
 
 // Hava sayfası (B2; PLAN.v1 §3.B.3; tasarım bildirim-hava-yuruyus/tasarim.html "07 Hava sayfası", 5 sn tur 1 ve 2: 5/5).
@@ -126,15 +127,7 @@ export default function Sky({ place, onBack, onChange, morning = null, onMorning
       )}
 
       {st.kind !== 'hidden' && (
-        <div className="wx-attr">
-          <span className="wx-mark">
-            {/* Temanın işareti yoksa o temada metin işaret (yalnız biri geçerli https ise öteki temada atıf düşmesin) */}
-            {a.markLight ? <img className="wx-mark-l" src={a.markLight} alt={a.serviceName} /> : a.markDark && <span className="wx-mark-l">{a.serviceName}</span>}
-            {a.markDark ? <img className="wx-mark-d" src={a.markDark} alt={a.serviceName} /> : a.markLight && <span className="wx-mark-d">{a.serviceName}</span>}
-            {!a.markLight && !a.markDark && <span>{a.serviceName}</span>}
-          </span>
-          <a href={a.legalPageURL} target="_blank" rel="noreferrer">Veri kaynakları</a>
-        </div>
+        <WeatherAttr attr={a} />
       )}
     </main>
   )

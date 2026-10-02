@@ -14,7 +14,9 @@ import { morningOn, normalizeMorning } from './lib/weatherNotify.js'
 import { normalizeModuleReminders } from './lib/moduleRemind.js'
 import { createTapHandler } from './lib/notifyTap.js'
 import { resetAllData } from './lib/notifyReset.js'
-import { NEF_SAID_KEY } from './lib/nef/memory.js'
+import { NEF_SAID_KEY, loadSaid, syncPlannedNotify } from './lib/nef/memory.js'
+import { nefLang, pathState, who5LowOf, nefNotifyInput } from './lib/nef/context.js'
+import { loadLater } from './lib/pathLater.js'
 import ScienceCard from './components/ScienceCard.jsx'
 import { NAMES as REMIND_NAMES } from './lib/remindTexts.js'
 import { applyRemind, shownTimes, notifyTimes } from './components/remindUi.js'
@@ -572,6 +574,33 @@ export default function App() {
     if (p.coach && !hasConsent(settings.consents, 'coach')) setPrefs({ coach: false, coachLife: false, coachHidden: false })
     else if (p.coachLife && !hasConsent(settings.consents, 'coachLife')) setPrefs({ coachLife: false })
   }, [settings.consents])
+  // --- Nef girdisi (N1; lib/nef/context.js): tek yerde kurulur, Ana sayfa kartına ve bildirim planına aynısı gider.
+  // Oturumlar, testler, alışkanlık günlüğü, yürüyüş hatırlatması, hava önbelleği (weather rızasıyla), WHO-5 ve bugünkü yol.
+  // Hepsi telefonda okunur; Nef sunucuya hiçbir şey göndermez (model çağrısı yok). Dil Intl ile (nefLang).
+  const nefDay = dayKey(new Date())
+  const nefPremium = access.loading || access.premium
+  const nefWx = SKY_UI && hasConsent(settings.consents, 'weather')
+  const nefPath = useMemo(
+    () => pathState({ tests, sessions, now: new Date(), profile: settings.profile, premium: nefPremium, eye: budget, later: loadLater(new Date()) }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [tests, sessions, settings.profile, nefDay, nefPremium, budget?.budgetMs, budget?.locked, budget?.due],
+  )
+  const nefIn = useMemo(
+    () => ({
+      lang: nefLang(),
+      tests,
+      sessions,
+      habits: loadHabits(),
+      reminders: settings.reminders ?? null,
+      weather: nefWx ? { cache: loadCache() } : null,
+      path: nefPath,
+      who5Low: who5LowOf(sessions, new Date()),
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [data, nefWx, nefPath, nefDay],
+  )
+  const nefRef = useRef(nefIn)
+  nefRef.current = nefIn
   // weather rızası yoksa (geri çekildi / hiç verilmedi) il ve ilçe adı, hava önbelleği ve hava özeti silinir
   // (rıza metni "Ne kadar kalır?"; lib/sky.js). Bayraktan bağımsız: yalnız hava anahtarlarını siler.
   useEffect(() => { enforceWeatherConsent(settings.consents) }, [settings.consents])
@@ -611,7 +640,11 @@ export default function App() {
       modules: hasMr ? remindModules(st.sessions) : [],
       alarm: hasMr || wxOn ? loadAlarm() : null,
       morningWeather: wxOn ? st.settings.morningWeather : null,
-      weather: wxOn ? { cache: loadCache(), place: loadPlace(), localRefresh: null } : null,
+      // Nef de hava verisini (telefonda) okur: weather rızası varken sabah havası kapalı olsa da önbellek verilir; sabah
+      // havası yine yalnız morningWeather açıkken kurulur (notifyAll weatherOn)
+      weather: wxOn || nefWx ? { cache: loadCache(), place: loadPlace(), localRefresh: null } : null,
+      // Nef'in bildirim kararı (lib/nef/notify.js planNef; en düşük öncelik): söz hafızası ve gün olguları
+      ...(nefWx ? { nef: nefNotifyInput(nefRef.current, { now, rows: loadSaid({ now }) }) } : {}),
       // Gece sessizliği: settings.quiet ({ from, to }; screens/QuietHours.jsx)
       quiet: st.settings.quiet ?? null,
       texts: true,
@@ -622,6 +655,7 @@ export default function App() {
     if (!on) {
       if (applied.current !== 'off') cancelOwn()
       applied.current = 'off'
+      syncPlannedNotify([], { now }) // kurulmayan Nef bildirimi söylenmiş sayılmaz
       return
     }
     // "Sen karar ver": deney dışı modülde yeni saat kendiliğinden yazılır (moduleRemind.js updates; §A.3). Yazılınca
@@ -632,8 +666,13 @@ export default function App() {
       store.setSetting('moduleReminders', next)
       refresh()
     }
-    if (notifyPerm !== 'granted') return
+    if (notifyPerm !== 'granted') {
+      syncPlannedNotify([], { now })
+      return
+    }
     applied.current = 'on'
+    // Nef'in bu plandaki bildirimleri söz hafızasına (saati gelmemiş eski kararların yerine; lib/nef/memory.js)
+    syncPlannedNotify(plan.nef ?? [], { now })
     // O günün ek saatleri (gozolcum:notify-slots): yalnız kurulan planınki; Hatırlatmalar salt okunur gösterir
     if (plan.slots) saveSlots(plan.slots)
     applyPlan(plan)
@@ -1356,7 +1395,8 @@ export default function App() {
         askHealth={Boolean(healthAvail) && !(signedIn(settings.account) && shouldAsk(settings.consents, 'profileSync')) && shouldAsk(settings.consents, 'health')}
         onHealthConsent={answerHealth}
         healthSheetKind={healthSheetKind}
-        onCoach={setCoach} onStart={go}
+        onStart={go}
+        nef={nefIn}
         onAsk={(group) => { if (group === 'iris') { go('iris-recheck'); return } const ids = missing(settings.profile, GROUPS[group] ?? []); if (ids.length) setAskFor({ ids, then: 'home', back: 'home' }) }}
         onSaveProfile={saveProfile}
         // Hatırlatma kartı yalnız iPhone uygulamasında (web'de bildirim yok); Home rıza sayfası açıkken göstermez

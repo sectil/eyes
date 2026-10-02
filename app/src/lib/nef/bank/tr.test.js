@@ -3,12 +3,23 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import bank, { cells, render, label, lang } from './tr.js'
+import bank, { cells, render, label, lang, actions, renderAction } from './tr.js'
+import { DAY_PARTS } from './tr.grammar.js'
 import { NEEDS } from '../speak.js'
 
 const ONAY = fileURLToPath(new URL('../../../../../docs/yol-haritasi/tasarim/nef/N1-CUMLELER-onay.md', import.meta.url))
 const onayText = readFileSync(ONAY, 'utf8')
-const approved = onayText.split('\n').filter((l) => l.startsWith('- ')).map((l) => l.slice(2).trim())
+// Cümleler düğme bölümünden önce; düğme yazıları onay dosyasının son bölümünde (aşağıdaki "düğme" testi)
+const BTN_HEAD = '## Nef kartı düğmeleri'
+const [sentencePart, buttonPart = ''] = onayText.split(BTN_HEAD)
+const approved = sentencePart.split('\n').filter((l) => l.startsWith('- ')).map((l) => l.slice(2).trim())
+// Düğme bölümündeki tırnaklı örnekler, satırın başına göre: onaylı (kullanılan), yedek, kullanılmaz
+const btnLines = buttonPart.split('\n').filter((l) => l.startsWith('- '))
+const quoted = (l) => [...l.matchAll(/"([^"]+)"/g)].map((m) => m[1])
+// Onaylı satırda örnek ilk tırnaktadır (sonraki parantez açıklama: dilim + "da/de")
+const btnApproved = btnLines.filter((l) => !/^- (Yedek|Kullanılmaz)/.test(l)).map((l) => quoted(l)[0])
+const btnSpare = btnLines.filter((l) => /^- Yedek/.test(l)).flatMap(quoted)
+const btnRejected = btnLines.filter((l) => /^- Kullanılmaz/.test(l)).flatMap(quoted)
 
 // Örnek verideki modül adları ve ölçüm sözcükleri: onaylı cümlelerde geçen biçimler (ileride manifest nef.name)
 const lexicon = {
@@ -200,5 +211,63 @@ describe('bank/tr.js · onaylı metinle harfi harfine', () => {
     expect(render(cells.FT[0].text, { module: 'track' }, lexicon)).toBeNull()
     expect(render(cells.FT[0].text, { module: 'yoga' }, null)).toBeNull()
     expect(render('{bilinmeyen}', {}, lexicon)).toBeNull()
+  })
+})
+
+// Nef kartı düğmeleri (sahip onayı 2026-10-02; onay dosyasının son bölümü)
+describe('bank/tr.js · kart düğmeleri onaylı örneklerle harfi harfine', () => {
+  const EXB = [
+    ['slot', { part: 'evening', name: 'Dalga sesi', minutes: 8 }, 'Bu akşam da Dalga sesi · 8 dk'],
+    ['day', { part: 'evening', name: 'Dalga sesi', minutes: 8 }, 'Bugün de Dalga sesi · 8 dk'],
+    ['slot', { part: 'evening', name: 'Nefesin Ritmi', minutes: 12 }, 'Bu akşam da Nefesin Ritmi · 12 dk'],
+    ['play', { minutes: 2 }, 'Bugünkü turu oyna · 2 dk'],
+  ]
+  it('onay dosyası okunuyor: dört onaylı örnek, bir yedek, iki kullanılmaz', () => {
+    expect(btnApproved).toEqual(EXB.map((x) => x[2]))
+    expect(btnSpare).toEqual(['Dalga sesini aç · 8 dk'])
+    expect(btnRejected).toEqual(['Tek Bakışta · 2 dk', 'Şimdi Dalga sesi · 8 dk'])
+  })
+  it.each(EXB.map(([k, f, want]) => [want, k, f]))('"%s"', (want, kind, facts) => {
+    expect(renderAction(kind, facts)).toBe(want)
+    expect(bank.renderAction(kind, facts)).toBe(want)
+  })
+  it('dilim + da/de, cümle başı "Bu": sabah, öğlen, akşam, gece', () => {
+    const f = { name: 'Dalga sesi', minutes: 8 }
+    expect(renderAction('slot', { ...f, part: 'morning' })).toBe('Bu sabah da Dalga sesi · 8 dk')
+    expect(renderAction('slot', { ...f, part: 'noon' })).toBe('Bu öğlen de Dalga sesi · 8 dk')
+    expect(renderAction('slot', { ...f, part: 'evening' })).toBe('Bu akşam da Dalga sesi · 8 dk')
+    expect(renderAction('slot', { ...f, part: 'night' })).toBe('Bu gece de Dalga sesi · 8 dk')
+  })
+  it('süre, ad ya da dilim yoksa düğme kurulmaz (süresiz kalıp yok)', () => {
+    for (const kind of Object.keys(actions)) {
+      expect(renderAction(kind, { part: 'evening', name: 'Dalga sesi' }), kind).toBeNull()
+      expect(renderAction(kind, { part: 'evening', name: 'Dalga sesi', minutes: 0 }), kind).toBeNull()
+      expect(renderAction(kind, { part: 'evening', name: 'Dalga sesi', minutes: 2.5 }), kind).toBeNull()
+    }
+    expect(renderAction('slot', { minutes: 8, name: 'Dalga sesi' })).toBeNull()
+    expect(renderAction('slot', { minutes: 8, part: 'evening' })).toBeNull()
+    expect(renderAction('day', { minutes: 8 })).toBeNull()
+    expect(renderAction('yok', { minutes: 8 })).toBeNull()
+  })
+  it('geçmeyen kalıplar hiçbir girdide kurulmaz; bankada üç kalıp var, yedek yok, şablonda rakam yok', () => {
+    expect(Object.keys(actions).sort()).toEqual(['day', 'play', 'slot'])
+    const out = []
+    const names = ['Dalga sesi', 'Nefesin Ritmi', 'Tek Bakışta', 'Tek Bakışta oyunu', 'nefes pratiği']
+    for (const kind of Object.keys(actions)) {
+      for (const part of [...Object.keys(DAY_PARTS), undefined]) for (const name of [...names, undefined]) for (const minutes of [1, 2, 5, 8, 12, 90]) {
+        const t = renderAction(kind, { part, name, minutes })
+        if (t) out.push(t)
+      }
+    }
+    expect(out.length).toBeGreaterThan(0)
+    for (const t of out) {
+      expect(btnRejected).not.toContain(t)
+      expect(btnSpare).not.toContain(t)
+      expect(t).not.toMatch(/^Şimdi/)
+      expect(t).not.toMatch(/^Tek Bakışta · /)
+      expect(t).toMatch(/^(Bu (sabah|öğlen|akşam|gece) (da|de) |Bugün de |Bugünkü turu oyna)/)
+      expect(t).toMatch(/ · \d+ dk$/)
+    }
+    for (const a of Object.values(actions)) expect(a.text.replace(/\{[^{}]*\}/g, '')).not.toMatch(/[0-9]/)
   })
 })

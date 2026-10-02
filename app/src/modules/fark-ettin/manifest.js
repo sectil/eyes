@@ -19,7 +19,7 @@ export default {
     domain: 'awareness',
     metrics: [
       {
-        key: 'street-noticed', label: 'Fark etme isabeti', unit: '%', better: 'up',
+        key: 'street-noticed', label: 'Fark etme isabeti', unit: '%', better: 'up', max: 100, // 100 × fark edilen / sorulan (≤ sorulan; lib/street.js scoreRound)
         series: ({ sessions }) => sessions.filter((s) => s?.type === SESSION_TYPE && Number.isFinite(s.noticed) && s.asked > 0).map((s) => ({ date: s.date, value: (100 * s.noticed) / s.asked })),
       },
     ],

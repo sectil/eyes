@@ -15,7 +15,7 @@ export default {
     domain: 'awareness',
     metrics: [
       {
-        key: 'notice-count', label: 'Bugünün görevinde fark edilen', unit: 'kez', better: 'up',
+        key: 'notice-count', label: 'Bugünün görevinde fark edilen', unit: 'kez', better: 'up', max: COUNTS.length - 1, // kaydedilen seçeneğin sırası 0–3, "3+" = 3 (lib/notice.js COUNTS, makeRecord)
         series: ({ sessions }) => sessions.filter((s) => s?.type === SESSION_TYPE && Number.isFinite(s.count)).map((s) => ({ date: s.date, value: s.count })),
       },
     ],

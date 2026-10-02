@@ -6,6 +6,17 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Nef N1: Ana sayfa kartı an motorundan, günlük model çağrısı kalktı, F1 yağmur notu. Metin sahip onaylı (2026-10-02).
+    id: '2026-10-02-1',
+    title: '2 Ekim, birinci güncelleme',
+    items: [
+      { kind: 'change', text: 'Nef Ana sayfada yalnız kayıtlarında kanıtı olan bir şey söyleyeceği zaman görünür; örneğin son seanslarının ortalaması ya da bir oyundaki ilerlemen.' },
+      { kind: 'new', text: "Nef'in kartından ilgili alıştırmayı tek dokunuşla açarsın." },
+      { kind: 'change', text: 'Ana sayfadaki Nef notu artık internetten gelmiyor; telefonunda, senin kayıtlarından yazılıyor.' },
+      { kind: 'new', text: 'Yürüyüş hatırlatman yağmura denk gelirse sabah havası bildirimi bunu söyler.' },
+    ],
+  },
+  {
     // D9 uzun yol: Ana sayfa yolu ve bölüm kartı (yarın bölüm kartının içinde). Metin sahip onaylı (2026-10-01).
     id: '2026-10-01-9',
     title: '1 Ekim, dokuzuncu güncelleme',

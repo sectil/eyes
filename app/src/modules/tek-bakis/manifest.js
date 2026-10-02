@@ -1,7 +1,7 @@
 // Tek Bakışta: görsel menzil — gözü kıpırdatmadan tanınan harf sayısı (lib/span.js). Göz halkası; pratik.
 // İddia sınırı: alıştırma kazanımı çalışmalarda çevresel görüşte gösterildi (Chung 2004, Yu 2010); normal okumaya
 // aktarımı ve görmeyi iyileştirdiği gösterilmedi. Harfler kısa süre göründüğü için ilk turdan önce epilepsi sorusu.
-import { SESSION_TYPE, isSpan } from '../../lib/span.js'
+import { SESSION_TYPE, isSpan, SPAN_MAX } from '../../lib/span.js'
 import { withinDays, isSameDay } from '../../lib/today.js'
 import { unlocked } from '../../lib/progression.js'
 import { profileSignals } from '../../lib/profile.js'
@@ -21,7 +21,7 @@ export default {
     domain: 'focus',
     metrics: [
       {
-        key: 'tek-bakis-span', label: 'Tek bakışta kavranan', unit: 'harf', better: 'up',
+        key: 'tek-bakis-span', label: 'Tek bakışta kavranan', unit: 'harf', better: 'up', max: SPAN_MAX, // 0–12 (lib/span.js)
         series: ({ sessions }) => sessions.filter((s) => s?.type === SESSION_TYPE && Number.isFinite(s.span)).map((s) => ({ date: s.date, value: s.span })),
       },
     ],
@@ -79,6 +79,8 @@ export default {
     name: { tr: { '': 'Tek Bakışta oyunu', ABL: 'Tek Bakışta oyunundan', ACC: 'Tek Bakışta oyununu', LOC: 'Tek Bakışta oyununda', DAT: 'Tek Bakışta oyununa', INS: 'Tek Bakışta oyunuyla' } },
     metricWords: { tr: { 'tek-bakis-span': { word: 'kavradığın harf sayısı', unit: 'harf' } } },
     moments: ['metricChange', 'firstTime', 'returnAfterGap'],
+    // Oyun: ilerleme kartının (metricChange) düğmesi "Bugünkü turu oyna · {dk} dk" (süre today() durağından)
+    play: true,
     cells: ['FTB-8'],
     evidence: ['chung2004'],
     note: 'Tek Bakışta oyunu: gözü kıpırdatmadan kavranan harf sayısı (görsel menzil).',

@@ -4,12 +4,12 @@
 // İlk yayında yalnız iPhone uygulamasında (PLAN.v3 §D.7): web'de Pratikler kutucuğu, mola listesi ve yol durağı yok.
 import { isIOSApp } from '../../lib/native.js'
 import { yogaPathStop } from '../../lib/yoga.js'
-import { LESSONS, publishedMinutes, isPublished } from '../../lib/yogaLessons.js'
+import { LESSONS, publishedMinutes, isPublished, pickMinutes, visibleLessons } from '../../lib/yogaLessons.js'
 import { isYoga, minutesOf, dayCount } from '../../lib/yogaRecord.js'
 import { withinDays } from '../../lib/today.js'
 import { NBSP, join, durationPart } from '../../lib/format.js'
 import { LATER_KEY } from '../../lib/pathLater.js'
-import { YOGA_OPTS_KEY } from './opts.js'
+import { YOGA_OPTS_KEY, loadYogaOpts } from './opts.js'
 
 // "Sonra yaparım" (lib/pathLater.js); "Tüm verileri sil" temizler (§B.5). Anahtarın tek kaynağı pathLater.js.
 export const PATH_LATER_KEY = LATER_KEY
@@ -34,6 +34,33 @@ const effects = lessonNos
 const YOGA_NAME_TR = { '': 'yoga dersi', ABL: 'yoga dersinden', ACC: 'yoga dersini', LOC: 'yoga dersinde', DAT: 'yoga dersine', INS: 'yoga dersiyle', POSS: 'yoga dersin', 'POSS-ABL': 'yoga dersinden' }
 const lessonName = (title) => Object.fromEntries(Object.entries(YOGA_NAME_TR).map(([k, v]) => [k, `${title} ${v}`]))
 const effectNames = Object.fromEntries(lessonNos.filter((n) => LESSONS[n].effectKey && LESSONS[n].measure).map((n) => [LESSONS[n].effectKey, { tr: lessonName(LESSONS[n].title) }]))
+const lessonOfEffect = (key) => lessonNos.find((n) => LESSONS[n].effectKey === key) ?? null
+
+// Nef kartı düğmesi (puan kartı; onaylı kalıp "Bu akşam da Nefesin Ritmi · 12 dk"): dersin rotası, dersin adı ve ders
+// ayrıntısı açılınca seçili gelen süre (Yoga.jsx: yolun süresi o dersse o, yoksa son seçilen, yoksa dersin varsayılanı;
+// lib/yogaLessons.js pickMinutes). Yalnız iPhone uygulamasında ve görünen (yayımlanmış) derste; değilse düğme yok.
+function todayStop(ctx = {}) {
+  if (!isIOSApp()) return null // ilk yayında yoga yalnız iPhone uygulamasında (lib/native.js:10; §D.7)
+  const stop = yogaPathStop(ctx, { LESSONS, publishedMinutes })
+  if (!stop || !LESSONS[stop.stage?.lesson]) return null // < 2 kayıtlı gün, E testi günü ya da uygun yayımlanmış ders yok
+  if (!stop.done && !isPublished(stop.stage.lesson, stop.minutes)) return null // çalınamayan durak gösterilmez
+  return stop
+}
+
+function nefStart(ctx = {}) {
+  const n = lessonOfEffect(ctx.facts?.effect)
+  if (n == null || !isIOSApp() || !visibleLessons(ctx.now ?? new Date()).includes(n)) return null
+  let path = null
+  try {
+    // view.jsx pathMinutesFor ile aynı: manifestin today() durağı bu dersse onun süresi
+    const stop = todayStop({ tests: ctx.tests ?? [], sessions: ctx.sessions ?? [], now: ctx.now ?? new Date(), profile: ctx.profile ?? null })
+    path = stop?.stage?.lesson === n ? stop.stage.minutes : null
+  } catch {
+    path = null
+  }
+  const minutes = pickMinutes(n, path ?? loadYogaOpts(ctx.storage).minutesByLesson[n])
+  return minutes ? { route: `yoga-${n}`, minutes, name: { tr: LESSONS[n].title } } : null
+}
 
 export default {
   id: 'yoga',
@@ -104,19 +131,14 @@ export default {
   // yayımlanmış süreler aday olur (publishedMinutes); yoga hiçbir durağı düşürmez (yields: yalnız sığarsa yolda).
   // Durak: { title: 'Yoga', sub: ders adı, minutes, route: 'yoga-<ders>', slot: 'practice', order: 105, glyph: 'lotus',
   //          done, yields: true, later, stage: { lesson, minutes, full, soft, night } } (lib/yoga.js yogaPathStop)
-  today(ctx = {}) {
-    if (!isIOSApp()) return null // ilk yayında yoga yalnız iPhone uygulamasında (lib/native.js:10; §D.7)
-    const stop = yogaPathStop(ctx, { LESSONS, publishedMinutes })
-    if (!stop || !LESSONS[stop.stage?.lesson]) return null // < 2 kayıtlı gün, E testi günü ya da uygun yayımlanmış ders yok
-    if (!stop.done && !isPublished(stop.stage.lesson, stop.minutes)) return null // çalınamayan durak gösterilmez
-    return stop
-  },
+  today: todayStop,
   // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
   // Sahip kararı: uyku metriği (yoga-uyku-dalma) Nef'te anılmaz (lib/nef/moments.js EXCLUDED_METRICS); metricWords yok.
   // Kanıt: remind.science ile aynı havuz (radin2025 yalnız meditasyon içeriği, burada yok).
   nef: {
     name: { tr: YOGA_NAME_TR, effects: effectNames },
     moments: ['recallEffect', 'effectPattern', 'firstTime', 'returnAfterGap'],
+    start: nefStart,
     evidence: ['moszeik2025', 'luu2024'],
     note: 'Sesli yoga dersleri; derse göre öncesi ve sonrası gerginlik, beden gerginliği ya da odak puanı (0–10). Nef uyku hakkında yorum yapmaz.',
   },

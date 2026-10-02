@@ -14,6 +14,7 @@ export const isSpan = (s) => s?.type === SESSION_TYPE && Number.isFinite(s.span)
 // Karışması zor büyük harfler (I/İ, O/Ö/Ç, Ş, Ğ, Ü dışarıda; VARSAYIM)
 export const LETTERS = 'ABCDEFGHKLMNPRSTUVYZ'.split('')
 export const MAX_POS = 6 // sabitleme noktasının solunda/sağında 1..6. yuva (üçlünün ortası)
+export const SPAN_MAX = 2 * MAX_POS // menzilin en büyük değeri (summarize: span = sol + sağ, her biri en çok MAX_POS)
 export const PER_POS = 4 // her yuvada deneme sayısı (12 yuva × 4 = 48 deneme ≈ 2 dk)
 export const PASS = 0.75 // yuva "tanındı" sayılır: 4 denemede ≥ 3 doğru (VARSAYIM; taslakta %80 çizgisi)
 export const START_MS = 100 // Kwon 2007

@@ -1,0 +1,29 @@
+{
+ "log": [
+  "06-mc-tekbakis 5/5, 12-f2d-yoga-oruntu 0/5"
+ ],
+ "result": {
+  "06-mc-tekbakis": {
+   "yes": 5,
+   "n": 5,
+   "weak": [
+    "06-mc-tekbakis-kart-390-acik.png (koyu da aynı): Başlıkta zorla satır kırılıyor. 'harf sayısı' tek başına kısa bir satırda kalıyor, '4'ten 6'ya' alt satıra itiliyor, bu yüzden metin 320'deki dengeli dizilişe göre kopuk görünüyor. Ayrıca çubuktaki 0 ve 12 etiketleri çubuğun uçlarıyla tam hizalı değil, biraz dışarı taşıyor.",
+    "06-mc-tekbakis-kart-390-acik.png: Ölçeğin uçlarındaki '0' ve '12' sayıları ince ve açık gri. Gözlükle bile zor okunuyor, koyu temada (kart-390-koyu) daha da kayboluyor. Ayrıca 390 genişlikte 'harf sayısı' satırı kısa kalıyor, '4'ten 6'ya' zorla alt satıra itilmiş gibi duruyor.",
+    "Mesaj net ve iki temada da 320 genişlikte temiz duruyor. Yine de 06-mc-tekbakis-kart-390-acik.png'de bir dönem belirtilmemiş: 4'ten 6'ya hangi sürede çıktı? Ayrıca 'harf sayısı' satırı yarım kalıyor, cümle de zorla bölünmüş gibi görünüyor. 0–12 ölçeğinin neyi saydığı da yazmıyor.",
+    "06-mc-tekbakis-kart-390-acik.png (koyu da aynı): başlıkta vurgudan önce zorla satır kırılıyor, \"harf sayısı\" yarım satırda tek başına kalıyor ve sağda büyük bir boşluk açılıyor. 320'de metin doğal akıyor, 390'da ise kırık duruyor. Bunun dışında dört görüntüde de sade, kişisel ve iki temada temiz.",
+    "06-mc-tekbakis-kart-390-acik.png / -koyu.png: Başlıktaki zorunlu satır kırılması \"harf sayısı\" kelimelerini tek başına kısa bir satırda bırakıyor, metnin sağ kenarı da bu yüzden düzensiz görünüyor (320 genişlikte bu sorun yok). Ayrıca 0–12 ölçeğinin neyi gösterdiği yazmıyor, \"12\" yorgun gözle bir anlam taşımıyor."
+   ]
+  },
+  "12-f2d-yoga-oruntu": {
+   "yes": 0,
+   "n": 5,
+   "weak": [
+    "12-f2d-yoga-oruntu-kart-320-acik.png ve 320-koyu: Buton metni iki satıra bölünüyor ('Bugün de Nefesin / Ritmi · 5 dk'), bu da dar ekranda kartın kusursuz olmadığını gösteriyor. Ayrıca 390-acik görüntüsünde 'ortalama' tek başına bir satırda kalıyor. Çubukta da önce/sonra etiketi ya da ok yok: 4,2 vurgulu ve solda, 6 gri ve sağda duruyor, bu yüzden düşüşün yönü ilk bakışta okunmuyor.",
+    "12-f2d-yoga-oruntu-kart-320-acik.png ve kart-320-koyu.png: Düğme iki satıra bölünüyor ('Bugün de Nefesin / Ritmi · 5 dk'), dar ekranda kusursuz değil. Ölçekte de yön belirsiz: vurgulu nokta 4,2, gri nokta 6. Önce/sonra etiketi ya da ok olmadığı için düşüşü bir bakışta okuyamıyorum. 390'da (kart-390-acik.png) 'ortalama' tek başına bir satırda kalıyor, '1,8 puan' da 06'daki gibi renkle vurgulanmamış.",
+    "12-f2d-yoga-oruntu-kart-320-acik.png ve 320-koyu'da düğme metni iki satıra taşıyor ('Bugün de Nefesin / Ritmi · 5 dk'), dar ekranda kusurlu görünüyor. 390-acik'te 'ortalama' tek başına bir satırda kalıyor. Asıl sayı olan 1,8 de 06'daki gibi renkle vurgulanmamış. Çubukta 6'nın dersten önceki, 4,2'nin dersten sonraki değer olduğu ve gerginliğin hangi ölçekle ölçüldüğü de anlatılmıyor.",
+    "12-f2d-yoga-oruntu-kart-320-acik.png ve 320-koyu: CTA \"Bugün de Nefesin / Ritmi · 5 dk\" diye iki satıra kırılıyor, dar ekranda kusursuz değil. Ayrıca 390-acik'te \"ortalama\" tek başına bir satırda kalıyor ve asıl haber olan \"1,8 puan düştü\" 06'daki gibi renkle vurgulanmıyor. Çizelgede 6'dan 4,2'ye düşüşü gösteren bir yön işareti de yok; soldan sağa okuyan biri değeri yükselmiş sanabilir.",
+    "12-f2d-yoga-oruntu-kart-390-acik.png: Başlık beş satıra yayılıyor ve \"ortalama\" kelimesi tek başına bir satırda kalıyor. Asıl haber olan \"1,8 puan düştü\" 06'daki gibi vurgu rengiyle öne çıkarılmamış. Çubukta 6'dan 4,2'ye düşüşün yönü belli değil, hangi değerin önce hangisinin sonra olduğu anlaşılmıyor. 12-f2d-yoga-oruntu-kart-320-acik.png / -koyu.png: Buton metni iki satıra kırılıyor, bu da dar ekranda kartı hantal gösteriyor."
+   ]
+  }
+ }
+}

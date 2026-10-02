@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { numberWords, ordinalWords, lastSpokenWord, suffixFor, formatNumber, numberWith, formatClock, clockWith, possessive2, upperFirst, DAY_PARTS, nounForms } from './tr.grammar.js'
+import { numberWords, ordinalWords, lastSpokenWord, suffixFor, formatNumber, numberWith, formatClock, clockWith, possessive2, upperFirst, DAY_PARTS, nounForms, conjDe } from './tr.grammar.js'
 import { hourTable } from '../../weatherNotify.js'
 import { clockWithSuffix } from '../../sky.js'
 
@@ -166,5 +166,15 @@ describe('Nef kodunda bölge sabiti yok', () => {
     ].filter((f) => f.endsWith('.js') && !f.endsWith('.test.js'))
     expect(files.length).toBeGreaterThanOrEqual(5)
     for (const f of files) expect(fs.readFileSync(f, 'utf8'), f).not.toMatch(/tr-TR/)
+  })
+})
+
+describe('"de/da" bağlacı (Nef kartı düğmesi)', () => {
+  it('gün dilimlerinde ünlü uyumu; ünsüz benzeşmesi yok (ayrı yazılan bağlaç)', () => {
+    expect(conjDe(DAY_PARTS.evening[''])).toBe('da') // akşam
+    expect(conjDe(DAY_PARTS.morning[''])).toBe('da') // sabah
+    expect(conjDe(DAY_PARTS.night[''])).toBe('de') // gece
+    expect(conjDe(DAY_PARTS.noon[''])).toBe('de') // öğlen
+    expect(conjDe('Bugün')).toBe('de')
   })
 })

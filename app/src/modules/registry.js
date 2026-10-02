@@ -42,10 +42,13 @@
 //     domain: 'eye'|'calm'|'self'|'awareness'|'focus'|'wellbeing'|'body',  sayıldığı alan (DOMAINS)
 //     effects?: [{ key, label, measure, max, domain?, pick(s) → [önce, sonra] | null }]
 //                                       oturum öncesi → sonrası puanı ("şu an nasıl hissediyorsun")
-//     metrics?: [{ key, label, unit, better: 'up'|'down', domain?, meaningful?, source?,
+//     metrics?: [{ key, label, unit, better: 'up'|'down', domain?, meaningful?, source?, min?, max?,
 //                  series({ tests, sessions }) → [{ date, value }] }]
 //                                       zaman içindeki ölçüm. meaningful: yayımlanmış anlamlı değişim eşiği
-//                                       (birim cinsinden); yoksa ilk yarı / son yarı istatistiğiyle bakılır
+//                                       (birim cinsinden); yoksa ilk yarı / son yarı istatistiğiyle bakılır.
+//                                       max: ölçümün tanımlı en büyük değeri (modülün kendi mantığından; uydurma değil),
+//                                       min: en küçüğü (yoksa 0). Nef ilerleme kartının çizgisi bu uçlarla; max yoksa
+//                                       çizgi yok (lib/nef/card.js)
 //   }
 //   sessions?: {                        kayıtların Gelişim'e nasıl gireceği
 //     match(s) → bool,
@@ -89,6 +92,13 @@
 //     moments?: ['recallEffect' | 'effectPattern' | 'metricChange' | 'firstTime' | 'returnAfterGap', …]
 //                                       modülün kendiliğinden üretebileceği genel an türleri (lib/nef/moments.js MODULE_MOMENTS)
 //     cells?: ['FTB-8', …]              bu modüle özel onaylı cümle kimlikleri (lib/nef/bank/tr.js, only: { metric })
+//     play?: true                       oyun: ilerleme kartının (metricChange) düğmesi "Bugünkü turu oyna · {dk} dk"
+//                                       (lib/nef/card.js). Oyun değilse ilerleme kartında düğme yok.
+//     start?(ctx) → { route, minutes, name?: { tr } } | null
+//                                       Nef kartı düğmesi (puan kartı): dokununca açılan rota, açılışta seçili gelen süre
+//                                       (dk) ve düğmedeki ad (yoksa nef.name; yoga dersinde dersin adı). ctx: { tests,
+//                                       sessions, now, profile, facts (anın olguları), storage? }. Yoksa düğmenin süresi ve
+//                                       rotası modülün today() durağından; süre yoksa düğme yok (lib/nef/card.js).
 //     evidence?: ['sourceKey', …]       kanıt havuzu (lib/sources.js anahtarları, pmid ve doi taşır)
 //     note?: 'tek satır'                modülün kendini Nef'e tanıttığı satır (mektup istemi, N2)
 //   }
@@ -202,6 +212,8 @@ function validateProgress(p, need) {
       need(x?.better === 'up' || x?.better === 'down', `metric ${x?.key}: better 'up' ya da 'down' olmalı`)
       need(typeof x?.series === 'function', `metric ${x?.key}: series fonksiyon olmalı`)
       if (x?.meaningful != null) need(Number.isFinite(x.meaningful) && x.meaningful > 0, `metric ${x.key}: meaningful pozitif sayı olmalı`)
+      if (x?.min != null) need(Number.isFinite(x.min), `metric ${x.key}: min sayı olmalı`)
+      if (x?.max != null) need(Number.isFinite(x.max) && x.max > (Number.isFinite(x.min) ? x.min : 0), `metric ${x.key}: max min'den büyük sayı olmalı`)
       if (x?.domain != null) need(DOMAINS.includes(x.domain), `metric ${x.key}: domain geçersiz`)
     }
   }

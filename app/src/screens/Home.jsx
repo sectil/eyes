@@ -39,8 +39,6 @@ import ConsentSheet from '../components/ConsentSheet.jsx'
 import { registry } from '../modules/registry.js'
 import { viewFor } from '../modules/views.js'
 import { normalizeReminders } from '../lib/reminders.js'
-import { coachAllowed } from '../lib/consent.js'
-import { getPrefs } from '../lib/prefs.js'
 import { greeting } from '../lib/greeting.js'
 import { isIOSApp } from '../lib/native.js'
 import { loadLater } from '../lib/pathLater.js'
@@ -151,7 +149,7 @@ function FocusStrip({ focus, now, block = null, onStop }) {
 // İlk ekran kalabalıklaşmasın: kart yuvası tek (izin kartı → izin ayar yolu → deneme şeridi), rıza sayfası açıkken boş.
 // healthSheetKind: 'health' ya da eski metne izin vermiş kişiye 'healthUpdate' (lib/consent.js; cevap yine onHealthConsent).
 // onYogaMorning: yoga sabah kartı cevabı kayda yazılınca (App kayıtları yeniler).
-export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, healthSheetKind = 'health', onCoach, onStart: onStartProp, onAsk, onSaveProfile, reminderAsk = false, onReminders, focus = null, focusBlock = null, onStopFocus, trialNote = null, onTrialNote, alarmStatus = null, alarmTest = false, onYogaMorning, sky = null }) {
+export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, healthSheetKind = 'health', onStart: onStartProp, onAsk, onSaveProfile, reminderAsk = false, onReminders, focus = null, focusBlock = null, onStopFocus, trialNote = null, onTrialNote, alarmStatus = null, alarmTest = false, onYogaMorning, sky = null, nef = null }) {
   const [permNote, setPermNote] = useState(false) // "Evet" dendi ama izin kapalı: ayar yolu (bir kez, bu ekranda)
   const now = new Date()
   // Ana sayfadan açılan her şey günün ilk dokunuşudur (günün cümlesi o ana kadar görünür; components/home/dayOpen.js)
@@ -273,9 +271,6 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   // Kart yuvası: rıza sayfası açıkken hiçbiri; yoksa sırayla tek kart
   const sheetOpen = Boolean((askConsent && onConsent) || (askHealth && onHealthConsent))
   const slot = sheetOpen ? null : reminderAsk && onReminders ? 'remind' : permNote ? 'perm' : trialNote && onTrialNote ? 'trial' : null
-  // Nef tanıtım kartı da bir rıza kartı: hatırlatma kartı açıkken gizlenir (ikisi aynı anda çıkmasın)
-  const prefs = getPrefs()
-  const coachIntro = !coachAllowed(prefs, settings.consents).on && !prefs.coachHidden
   const answerReminders = async (yes) => {
     const perm = await onReminders(yes)
     if (yes && perm === 'denied') setPermNote(true)
@@ -666,7 +661,10 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
       {/* Gelişim haritası yolun altında (5 saniye turu): ilk görünüm bugünün işini söyler, alan dengesi sonra gelir */}
       <HomeMap tests={tests} sessions={sessions} profile={settings?.profile ?? null} onStart={onStart} />
 
-      {!(slot === 'remind' && coachIntro) && <CoachCard tests={tests} sessions={sessions} profile={settings.profile} weeklyTarget={week.target} consents={settings.consents} onCoach={onCoach} onStart={onStart} />}
+      {/* Nef kartı (N1): an motorundan, model çağrısı yok (App'in Nef girdisi). Göz uyarısı sabit metniyle; Nef'in cümlesi
+          yalnız güçlü haberde (örüntü, ilerleme; sahip kararı 2026-10-02), yoksa kart yok. Örüntü kartının ve oyunun
+          ilerleme kartının düğmesi (onaylı yazı) modülü onStart ile açar */}
+      <CoachCard nef={nef} alert={r.alert ?? null} onStart={onStart} profile={settings?.profile ?? null} />
 
       <div className="home-h">
         <h2>Ölçümlerin</h2>

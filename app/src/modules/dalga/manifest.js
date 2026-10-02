@@ -1,7 +1,7 @@
 // Dalga: birkaç dakikalık ses (Sakin / Güç / Motivasyon; lib/dalga.js). Yaşam halkası; pratik. Günlük yola girmez.
 // Kanıt sınırı: müzik stresi azaltır (de Witte 2019); binaural kanıtı karışık (Xiong 2025, Ingendoh 2023); 528 Hz
 // iddiası kanıtsız. Tedavi değildir; puan kişi-içi gidişat içindir.
-import { SESSION_TYPE, DALGA_OPTS_KEY, MODES, isDalga, experimentOf } from '../../lib/dalga.js'
+import { SESSION_TYPE, DALGA_OPTS_KEY, MODES, isDalga, experimentOf, loadDalgaOpts } from '../../lib/dalga.js'
 import { withinDays } from '../../lib/today.js'
 import { NBSP, join, durationPart } from '../../lib/format.js'
 
@@ -55,6 +55,8 @@ export default {
   nef: {
     name: { tr: { '': 'Dalga sesi', ABL: 'Dalga sesinden', ACC: 'Dalga sesini', LOC: 'Dalga sesinde', DAT: 'Dalga sesine', INS: 'Dalga sesiyle' } },
     moments: ['recallEffect', 'effectPattern', 'firstTime', 'returnAfterGap'],
+    // Nef kartı düğmesi: Dalga ekranı açılınca seçili gelen süre (screens/Dalga.jsx loadDalgaOpts; son seçilen, yoksa 5)
+    start: ({ storage } = {}) => ({ route: 'dalga', minutes: loadDalgaOpts(storage).minutes }),
     evidence: ['dewitte2019'],
     note: 'Dalga sesi: birkaç dakikalık ses (Sakin, Güç, Motivasyon); öncesi ve sonrası sakinlik, kendine güven ya da enerji puanı (0–10).',
   },

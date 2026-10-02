@@ -21,7 +21,7 @@
 //     `nef.name.tr`, lexicon.js). Ad yoksa cümle kurulmaz.
 //   {ölçü} "sakinlik", {ölçü:POSS} "sakinliğin", {Ölçü} · {önce} {sonra} {önceOrt} {sonraOrt} (:ABL :DAT)
 //   {fark} ortalama fark, en çok bir ondalık · {başlangıç} {şimdi} (:ABL :DAT :GEÇMİŞ) · {metrik} {birim} · {feels}
-import { clockWith, numberWith, numberWords, ordinalWords, possessive2, upperFirst, DAY_PARTS } from './tr.grammar.js'
+import { clockWith, numberWith, numberWords, ordinalWords, possessive2, upperFirst, conjDe, DAY_PARTS } from './tr.grammar.js'
 
 export const lang = 'tr'
 // Kart etiketi (onaylı; taslak KET-1)
@@ -212,12 +212,37 @@ export const cells = Object.freeze({
   ],
 })
 
+// ---------- Nef kartı düğmeleri (sahip onayı 2026-10-02, "Onaylıyorum"; onay dosyasının son bölümü, kapı 5/5) ----------
+// Puan kartı (F2) ve oyunların ilerleme kartı (metricChange). Dokununca modül açılır (components/CoachCard.jsx).
+//   {dilim:DE}  kartın gün dilimi + "da/de" bağlacı ("akşam da"; tr.grammar.js conjDe) · {ad} düğmedeki ad: modülün adı,
+//   yoga dersinde dersin adı ("Nefesin Ritmi") · {dk} süre (dakika; modülün today() durağından ya da manifestin nef.start'ından).
+// Süre yoksa düğme kurulmaz (süresiz kalıp yok; yeni metin yok). Onay dosyasındaki yedek ("Dalga sesini aç · 8 dk") bankada
+// yok; kapıda 0/5 alanlar ("Tek Bakışta · 2 dk", "Şimdi …") hiçbir zaman kurulmaz (tr.test.js).
+export const actions = Object.freeze({
+  // Puan kartı, kartın zaman dilimiyle şimdiki dilim aynı: "Bu akşam da Dalga sesi · 8 dk"
+  slot: { id: 'NB-1', text: 'Bu {dilim:DE} {ad} · {dk} dk' },
+  // Puan kartı, başka dilimde (ya da kartın dilimi yok: örüntü): "Bugün de Dalga sesi · 8 dk"
+  day: { id: 'NB-2', text: 'Bugün de {ad} · {dk} dk' },
+  // Oyunların ilerleme kartı: "Bugünkü turu oyna · 2 dk"
+  play: { id: 'NB-4', text: 'Bugünkü turu oyna · {dk} dk' },
+})
+
 // ---------- Doldurma ----------
 const PH_RE = /\{([^{}:]+)(?::([^{}]+))?\}/g
 const CLOCKS = new Set(['walkAt', 'earlyAt', 'rainFrom', 'rainTo'])
 const NUMS = { önce: 'before', sonra: 'after', başlangıç: 'start', şimdi: 'current' }
 const AVGS = { önceOrt: 'beforeAvg', sonraOrt: 'afterAvg' }
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v)
+
+// Cümleye giren sayının değeri (ekranda yazılan, yuvarlanmış): ortalamalar tam sayıya, öteki sayılar bir ondalığa
+// (numberWith maxFraction 1), {fark} bir ondalığa. Kartın önce–sonra çizimi etiketlerini ve nokta konumlarını buradan alır (lib/nef/card.js
+// scaleOf): cümle "6'dan 4'e" derken çizim "4,3" yazmaz. Tek kaynak.
+export function shown(key, facts = {}) {
+  if (key === 'fark') return isNum(facts.gain) ? Number(facts.gain.toFixed(1)) : null
+  if (key in AVGS) return isNum(facts[AVGS[key]]) ? Math.round(facts[AVGS[key]]) : null
+  if (key in NUMS) return isNum(facts[NUMS[key]]) ? Number(facts[NUMS[key]].toFixed(1)) : null
+  return null
+}
 
 // Modülün türlü adı ve çekimleri: lexicon.names[effect], lexicon.names[metric] ya da lexicon.names[module] → { '': yalın,
 // ABL, ACC, … } (etkinin ya da ölçümün kendi adı modülünkinden önce; ör. Ayna puanında "Yön alıştırması").
@@ -254,16 +279,28 @@ function value(name, form, facts, lexicon) {
     if (form === 'SIRA') return ordinalWords(facts.n)
     return form ? null : numberWith(facts.n, null, lang)
   }
-  if (key === 'dilim') return up(DAY_PARTS[facts.part]?.[form || ''] ?? null)
+  if (key === 'dilim') {
+    if (form === 'DE') {
+      const w = DAY_PARTS[facts.part]?.[''] ?? null
+      return w ? up(`${w} ${conjDe(w)}`) : null
+    }
+    return up(DAY_PARTS[facts.part]?.[form || ''] ?? null)
+  }
+  // Düğme: ad (düz yazılır, çekim yok) ve süre (pozitif tam dakika)
+  if (key === 'ad') return typeof facts.name === 'string' && facts.name.trim() && !form ? facts.name.trim() : null
+  if (key === 'dk') return Number.isInteger(facts.minutes) && facts.minutes > 0 && !form ? numberWith(facts.minutes, null, lang) : null
   if (key === 'modül') return up(nameOf(facts, lexicon, form))
   if (key === 'ölçü') return up(measureOf(facts, lexicon, form))
-  if (key === 'fark') return isNum(facts.gain) && !form ? numberWith(facts.gain, null, lang) : null
+  if (key === 'fark') return shown('fark', facts) != null && !form ? numberWith(shown('fark', facts), null, lang) : null
   if (key === 'feels') return isNum(facts.feels) && !form ? numberWith(Math.round(facts.feels), null, lang) : null
-  if (key in AVGS) return isNum(facts[AVGS[key]]) ? numberWith(Math.round(facts[AVGS[key]]), form || null, lang) : null
+  if (key in AVGS) {
+    const v = shown(key, facts)
+    return v != null ? numberWith(v, form || null, lang) : null
+  }
   if (key in NUMS) {
-    const v = facts[NUMS[key]]
+    const v = shown(key, facts)
     const m = metricOf(facts, lexicon)
-    return isNum(v) ? numberWith(v, form || null, lang, { percent: Boolean(m?.percent) }) : null
+    return v != null ? numberWith(v, form || null, lang, { percent: Boolean(m?.percent) }) : null
   }
   if (key === 'metrik') return up(metricOf(facts, lexicon)?.word ?? null)
   if (key === 'birim') {
@@ -275,7 +312,14 @@ function value(name, form, facts, lexicon) {
 
 // Şablon + olgular → cümle ya da null (yer tutucu bilinmiyor ya da değeri yok: cümle kurulmaz, başka cümle de uydurulmaz).
 // Cümle başı büyük harfle ("nefes pratiğinden sonra …" → "Nefes pratiğinden sonra …").
+// "{modül} seansında" adı "dersi" ile biten modülde (yoga dersleri: "Nefesin Ritmi yoga dersi seansında") hantal: bu
+// şablon o modül için kurulmaz (null); seçici modülün ayrılma hâliyle geçen onaylı şablonu seçer ("… yoga dersinden
+// sonra … son 8 seansta …"). Yeni metin yok.
+const LESSON_SESSION_RE = /\{modül\} seans/
+const lessonName = (facts, lexicon) => /dersi$/.test(nameOf(facts, lexicon, '') ?? '')
+
 export function render(text, facts = {}, lexicon = null) {
+  if (LESSON_SESSION_RE.test(String(text)) && lessonName(facts ?? {}, lexicon)) return null
   let bad = false
   const out = String(text).replace(PH_RE, (_, name, form) => {
     const v = value(name, form, facts ?? {}, lexicon)
@@ -286,4 +330,10 @@ export function render(text, facts = {}, lexicon = null) {
   return upperFirst(out.replace(/ {2,}/g, ' ').replace(/ ([.,;:])/g, '$1').trim(), lang)
 }
 
-export default { lang, label, cells, render }
+// Düğme yazısı: kind 'slot' | 'day' | 'play' · facts { part?, name?, minutes }. Değer eksikse null (düğme yok)
+export function renderAction(kind, facts = {}) {
+  const t = actions[kind]
+  return t ? render(t.text, facts) : null
+}
+
+export default { lang, label, cells, render, shown, actions, renderAction }
