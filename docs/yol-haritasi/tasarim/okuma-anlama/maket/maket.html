@@ -17,7 +17,7 @@
   --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
   --accent: #0b7480; --accent-ink: #ffffff; --accent-soft: rgba(17,169,184,.12); --iris-1: #11a9b8; --iris-2: #2f6bea;
   --accent-grad: linear-gradient(90deg, #0b7480, #2458cc); --accent-glow: 0 8px 22px -10px rgba(36,88,204,.55);
-  --lens: #f5a623; --lens-text: #9a5b06; --lens-soft: rgba(245,166,35,.16); --wrong: #d97706;
+  --lens: #f5a623; --lens-text: #9a5b06; --lens-soft: rgba(245,166,35,.16); --wrong: #d97706; --lens-strong: #7a4502;
   --ok: #13704b; --ok-bg: rgba(31,169,116,.13); --danger: #b91c1c; --danger-bg: rgba(220,38,38,.1);
   --shadow: 0 1px 2px rgba(11,18,25,.04), 0 8px 24px rgba(11,18,25,.05);
   --pupil: #081018; --track: rgba(91,105,118,.16);
@@ -27,9 +27,9 @@
   --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
   --accent: #19c2d1; --accent-ink: #041017; --accent-soft: rgba(25,194,209,.14); --iris-1: #19c2d1; --iris-2: #3e7bfa;
   --accent-grad: linear-gradient(90deg, #19c2d1, #3e7bfa); --accent-glow: 0 8px 24px -8px rgba(25,194,209,.55);
-  --lens: #ffb13b; --lens-text: #ffb13b; --lens-soft: rgba(255,177,59,.14); --wrong: #ffb13b;
+  --lens: #ffb13b; --lens-text: #ffb13b; --lens-soft: rgba(255,177,59,.14); --wrong: #ffb13b; --lens-strong: #ffc062;
   --ok: #35d39a; --ok-bg: rgba(53,211,154,.12); --danger: #fca5a5; --danger-bg: rgba(248,113,113,.14);
-  --shadow: none; --pupil: #03070b; --track: rgba(185,196,205,.12);
+  --shadow: none; --pupil: #03070b; --track: rgba(185,196,205,.24);
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -90,7 +90,7 @@ h2.tt { font-family: var(--font-display); font-weight: 600; font-size: 21.5px; l
 h2.q { font-family: var(--font-display); font-weight: 600; font-size: 25px; line-height: 1.22; letter-spacing: -.015em; margin: 0; }
 .opts { display: flex; flex-direction: column; gap: 10px; }
 .opt { display: flex; gap: 12px; align-items: center; padding: 14px 16px; min-height: 58px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 18px; font-size: 16.5px; font-weight: 550; line-height: 1.3; color: var(--ink); box-shadow: var(--shadow); }
-.opt .r { flex: none; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--surface-3); display: grid; place-items: center; }
+.opt .r { flex: none; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--track); display: grid; place-items: center; }
 .opt.right { border-color: var(--ok); background: var(--ok-bg); box-shadow: none; }
 .opt.right .r { background: var(--ok); border-color: var(--ok); }
 .opt.right .r svg { width: 14px; height: 14px; stroke: var(--bg); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
@@ -107,8 +107,8 @@ h2.q { font-family: var(--font-display); font-weight: 600; font-size: 25px; line
 .anl { display: flex; justify-content: center; margin: 12px 20px 0; }
 .anl span { font-size: 15px; font-weight: 650; padding: 7px 14px; border-radius: 99px; }
 .anl span.ok { color: var(--ok); background: var(--ok-bg); }
-.anl span.lo { color: var(--lens-text); background: var(--lens-soft); }
-.anl span.lo em.dim { font-style: normal; font-weight: 500; opacity: .72; }
+.anl span.lo { color: var(--lens-strong); background: var(--lens-soft); }
+.anl span.lo em.dim { font-style: normal; }
 .verd { margin: 16px 20px 0; display: flex; gap: 12px; align-items: flex-start; }
 .verd .dot { flex: none; width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 50% 50%, var(--pupil) 0 26%, transparent 27%), conic-gradient(from 20deg, var(--iris-1), var(--iris-2), var(--iris-1)); margin-top: 1px; }
 .verd p { margin: 0; font-size: 17px; line-height: 1.4; font-weight: 500; text-wrap: pretty; }
@@ -149,7 +149,6 @@ h2.q { text-align: center; }
   .qtop { display: flex; align-items: center; gap: 14px; }
   .qhead { margin: 0; flex: none; } .qhead .qr { width: 96px; height: 96px; }
   .qtop h2.q { text-align: left; font-size: 18.5px; }
-  .opt .ot small.okline { display: inline; margin: 0 0 0 6px; }
   h2.q { font-size: 19.5px; }
   .qwrap .opts { padding-top: 10px; }
   .meta { margin-bottom: 12px; font-size: 12.5px; }
@@ -252,8 +251,8 @@ function qring(done, cur) {
   const arc = (i, stroke, w) => `<circle cx="60" cy="60" r="${r}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${seg.toFixed(1)} ${(c - seg).toFixed(1)}" stroke-dashoffset="${(-(i * c / 4) - gap / 2).toFixed(1)}" transform="rotate(-90 60 60)"/>`
   let out = ''
   for (let i = 0; i < 4; i++) {
-    if (i < done) out += arc(i, 'url(#g3)', 10)
-    else if (i === cur) out += `<g filter="url(#glow)">${arc(i, 'var(--iris-1)', 10)}</g>`.replace('stroke="var(--iris-1)"', 'stroke="var(--iris-1)" stroke-opacity=".38"')
+    if (i < done) out += arc(i, 'var(--accent)', 10)
+    else if (i === cur) out += `<g filter="url(#glow)">${arc(i, 'var(--accent)', 10)}</g>`.replace('stroke="var(--accent)"', 'stroke="var(--accent)" stroke-opacity=".4"')
     else out += arc(i, 'var(--track)', 10)
   }
   return `<svg class="qr" viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--iris-1)"/><stop offset="1" stop-color="var(--iris-2)"/></linearGradient><filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>${out}
@@ -292,7 +291,7 @@ function sonuc(ok) {
     <div class="anl">${ok ? '<span class="ok">4 sorunun 4’ü doğru</span>' : '<span class="lo">Hız sayılmadı <em class="dim">· 348 kelime/dk</em></span>'}</div>
     <div class="verd"><span class="dot"></span><p><span class="nm">Nef</span>${ok ? 'Hızın sayıldı: metni anladın.' : 'Hız, en az 3 doğruyla sayılır. Bir dahakine biraz daha yavaş oku.'}</p></div>
     <div class="rows">
-      <div class="row"><span class="k">Başlangıç</span><span class="v">${ok ? 'Kuruluyor: 3/5 okuma' : 'Kuruluyor: 2/5 okuma'}</span><span class="pips">${[0, 1, 2, 3, 4].map((i) => `<i class="${i < (ok ? 3 : 2) ? 'on' : ''}"></i>`).join('')}</span></div>
+      <div class="row"><span class="k">Başlangıç</span><span class="v">${ok ? '5 okumayla belirlenir · 3/5' : '5 okumayla belirlenir · 2/5'}</span><span class="pips">${[0, 1, 2, 3, 4].map((i) => `<i class="${i < (ok ? 3 : 2) ? 'on' : ''}"></i>`).join('')}</span></div>
       <div class="row"><span class="k">Bu metin bir çalışmadan</span><span class="v">Dacke ve ark., 2013</span><span class="go">${GO}</span></div>
       <div class="row"><span class="k">Bana hatırlat</span><span class="v">Her gün bir okuma</span><span class="tg"></span></div>
     </div>
