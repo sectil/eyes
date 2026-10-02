@@ -1,0 +1,746 @@
+{
+  "surum": "taslak-10",
+  "not": "Takım 10. Konu alanı: bitki, mikro, insan, bocek. Kaynak ayrıntısı arastirma/KAYNAKLAR.md §B10. Doğru seçenek ilk sırada; uygulama karıştırır.",
+  "metinler": [
+    {
+      "id": "oa091",
+      "baslik": "Salatalığın kıvrık kolları",
+      "etiket": "bitki",
+      "kaynak": "gerbode2012",
+      "pmid": "22936777",
+      "doi": "10.1126/science.1223304",
+      "yazar": "Gerbode ve ark.",
+      "dergi": "Science",
+      "yil": 2012,
+      "metin": "Salatalık gibi tırmanıcı bitkiler, bir desteğe tutunmak için sülük denen kollar uzatır. Bu sülüklerin nasıl sarmal biçim aldığı yüzyıllardır merak ediliyor, ama düzenek tam bilinmiyordu. Darwin, kıvrılmış sülükleri yumuşak yaylara benzetmişti; yine de bu yayların nasıl davrandığı bilinmiyordu. Bir ekip salatalık sülükleri üzerinde deneyler yaptı. Kıvrılmanın, sülüğün içindeki özel hücrelerden oluşan lifli bir şeridin iki yanının eşit olmayan biçimde kısalmasıyla olduğunu gösterdi. Ekip ardından bu şeritleri ve yaşlı sülükleri iki ucundan çekti. Sarmal çekilince açılmadı; tersine, bükülmeden daha çok kıvrıldı. Önce yumuşak davranan sülük, çok uzatılınca giderek sertleşti. Ekip bu davranışı lastik şeritlerle ve matematik modellerle açıkladı. Bulgular, Darwin'in yay benzetmesini ölçülere döküyor ve yeni yay tasarımlarına fikir veriyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Salatalık sülüklerinin nasıl kıvrıldığını ve çekilince ne yaptığını",
+            "Salatalık bitkisinin meyvesini nasıl büyüttüğünü ve tohumunu nasıl dağıttığını",
+            "Darwin'in bitkiler üzerine yazdığı kitapların konusunu",
+            "Tırmanıcı bitkilerin hangi ağaçları seçtiğini ve nedenini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Darwin kıvrılmış sülükleri neye benzetmişti?",
+          "secenekler": [
+            "Yumuşak yaylara",
+            "Sert çubuklara",
+            "Kalın halatlara",
+            "Kuş yuvalarına"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre sülüğün kıvrılmasını ne sağlıyor?",
+          "secenekler": [
+            "İçindeki şeridin iki yanının eşit olmayan biçimde kısalması",
+            "Rüzgârın sülüğü desteğin çevresinde döndürüp sarması",
+            "Sülüğün ucundan salgılanan yapışkan bir sıvı",
+            "Güneş ışığının sülüğün yalnız bir yanını kurutması"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sarmal iki ucundan çekilince ne oldu?",
+          "secenekler": [
+            "Açılmadı, daha çok kıvrıldı",
+            "Hemen düz bir ipe dönüştü",
+            "Ortasından ikiye ayrılıp koptu",
+            "Rengi koyulaşıp sarardı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sülük çok uzatılınca nasıl davrandı?",
+          "secenekler": [
+            "Giderek sertleşti",
+            "Giderek yumuşadı",
+            "Kendiliğinden kısaldı",
+            "Hiç değişmedi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip bu davranışı neyle açıkladı?",
+          "secenekler": [
+            "Lastik şeritler ve matematik modellerle",
+            "Salatalık yapraklarının ölçümleriyle",
+            "Bahçıvanlarla yapılan görüşmelerle",
+            "Farklı bitkilerin tohumlarını karşılaştırarak"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa092",
+      "baslik": "Güvenin kulağındaki sınır",
+      "etiket": "bocek",
+      "kaynak": "moir2013",
+      "pmid": "23658005",
+      "doi": "10.1098/rsbl.2013.0241",
+      "yazar": "Moir ve ark.",
+      "dergi": "Biology Letters",
+      "yil": 2013,
+      "metin": "Yarasalar avlanırken insan kulağının duyamayacağı kadar tiz sesler çıkarır ve yankılarını dinleyerek avlarını bulur. Güveler ise çok küçük kulaklarıyla yaklaşan yarasayı duymaya çalışır. Bu iki hayvan arasında süregiden bir yarış var. Bilinen en yüksek perdeli yarasa sesi 212 kilohertz düzeyindedir. Kilohertz, sesin bir saniyedeki titreşim sayısını binlerle anlatan bir birimdir. Güvelerin duyabildiği en yüksek perdenin ise bundan çok daha düşük olduğu düşünülüyordu. Bir ekip bir güve türünün duyma gücünü inceledi. Bu güvenin 300 kilohertze yaklaşan sesleri duyabildiğini gösterdi. Bu, hayvanlar arasında bilinen en yüksek perde duyarlılığıdır. Ekibe göre bu güve, yarasaların seslerinde ileride olabilecek değişikliklere karşı da şimdiden hazırlıklı.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bir güvenin çok tiz sesleri duyabilmesini",
+            "Yarasaların karanlıkta nerede uyuduğunu",
+            "Güvelerin geceleri neden ışığa doğru uçtuğunu",
+            "Yarasa seslerinin nasıl kaydedilip saklandığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yarasalar avlarını nasıl bulur?",
+          "secenekler": [
+            "Çıkardıkları seslerin yankısını dinleyerek",
+            "Avın kokusunu uzaktan alarak",
+            "Ay ışığında avı görerek",
+            "Avın bıraktığı ısıyı izleyerek"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bilinen en yüksek perdeli yarasa sesi hangi düzeydedir?",
+          "secenekler": [
+            "212 kilohertz",
+            "30 kilohertz",
+            "500 kilohertz",
+            "1000 kilohertz"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İncelenen güve hangi sesleri duyabiliyor?",
+          "secenekler": [
+            "300 kilohertze yaklaşan sesleri",
+            "Yalnız 20 kilohertzin altındaki sesleri",
+            "Yalnız insan konuşmasını",
+            "Yalnız kendi kanat sesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre bu güvenin duyarlılığı hayvanlar arasında nasıl?",
+          "secenekler": [
+            "Bilinen en yüksek perde duyarlılığı",
+            "Ortalama, sıradan bir duyarlılık düzeyi",
+            "Bütün yarasalardan çok daha düşük",
+            "Öteki bütün güvelerle tam aynı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Güvelerin duyduğu en yüksek perde için önceden ne düşünülüyordu?",
+          "secenekler": [
+            "Yarasa seslerinden çok daha düşük olduğu",
+            "Yarasa seslerinden çok daha yüksek olduğu",
+            "Hiçbir zaman ölçülemeyeceği",
+            "Gece ile gündüz arasında değiştiği"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa093",
+      "baslik": "Toprağın kokusu kime?",
+      "etiket": "mikro",
+      "kaynak": "becher2020",
+      "pmid": "32251369",
+      "doi": "10.1038/s41564-020-0697-x",
+      "yazar": "Becher ve ark.",
+      "dergi": "Nature Microbiology",
+      "yil": 2020,
+      "metin": "Bakterilerin saldığı geosmin ve 2-MIB denen iki madde toprak gibi kokar. İnsanlar ve pek çok hayvan bu maddeleri çok düşük miktarda bile fark eder. Streptomyces denen bakterilerin neredeyse bütün türleri geosmin yapma genlerini taşır. Yine de bu kokunun bakteriye ne kazandırdığı pek bilinmiyordu. Bir ekip arazide yaptığı deneylerde, kollembol denen toprak eklembacaklılarının bu bakteri kolonilerinin kokusuna geldiğini gördü. Bir kollembol türünün duyargaları iki maddeye de tepki verdi ve hayvanlar bu maddelere yöneldi. Bakteriler kokuyu yalnız spor üretirken salıyordu. Kollemboller kolonilerden beslenirken sporları hem dışkılarıyla hem de vücutlarına yapışmış hâlde taşıdı. Böylece koku, sporların toprak hayvanlarınca yayılmasını sağlayarak bakterinin yaşam döngüsünü tamamlıyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Toprak kokusunun bakterinin sporlarını yaymasına yardım etmesini",
+            "İnsanların toprak kokusunu neden sevdiğini",
+            "Kollembollerin kışı nasıl geçirdiğini",
+            "Bakterilerin topraktaki suyu nasıl tuttuğunu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Geosmin ve 2-MIB için metinde ne söyleniyor?",
+          "secenekler": [
+            "Çok düşük miktarda bile fark edildikleri",
+            "Yalnız çok yüksek miktarda fark edildikleri",
+            "Hiçbir hayvanın onları fark edemediği",
+            "Yalnız bitkilerin onları fark ettiği"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Arazi deneylerinde kollemboller ne yaptı?",
+          "secenekler": [
+            "Bakteri kolonilerinin kokusuna geldi",
+            "Bakteri kolonilerinden hızla uzaklaştı",
+            "Kolonilerin çevresine yuva kazdı",
+            "Kokuya hiçbir tepki göstermedi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bakteriler kokuyu ne zaman salıyordu?",
+          "secenekler": [
+            "Yalnız spor üretirken",
+            "Yalnız yağmur yağarken",
+            "Yalnız gece olunca",
+            "Yalnız toprak donunca"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kollemboller sporları nasıl taşıdı?",
+          "secenekler": [
+            "Dışkılarıyla ve vücutlarına yapışmış hâlde",
+            "Ağızlarında tutup yuvalarının derinine götürerek",
+            "Kanatlarıyla havaya savurarak",
+            "Spor dolu yaprakları sürükleyerek"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kollembol türünün duyargaları neye tepki verdi?",
+          "secenekler": [
+            "Geosmine ve 2-MIB'e",
+            "Yalnız ışığa",
+            "Yalnız sıcaklığa",
+            "Yalnız titreşime"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa094",
+      "baslik": "Ağlamanın ezgisi",
+      "etiket": "insan",
+      "kaynak": "mampe2009",
+      "pmid": "19896378",
+      "doi": "10.1016/j.cub.2009.09.064",
+      "yazar": "Mampe ve ark.",
+      "dergi": "Current Biology",
+      "yil": 2009,
+      "metin": "Bebekler daha doğmadan, gebeliğin son üç ayında dışarıdan gelen sesleri akılda tutabilir. Özellikle müzikte ve konuşmada sesin inip çıkışına duyarlıdırlar. Doğduklarında annelerinin sesini başka seslere tercih ederler. Doğumdan önce duyulan dilin, bebeklerin sesleri algılayışını etkilediği biliniyordu. Ama bu dilin bebeklerin çıkardığı sesleri çok daha sonra etkilediği sanılıyordu. Bir ekip 30 Fransız ve 30 Alman yenidoğanın ağlamalarını inceledi. Ağlamaların ezgisine, yani sesin perdesinin nasıl yükselip alçaldığına, bir de ses şiddetine baktı. Fransız bebekler daha çok yükselen bir ezgiyle ağladı. Alman bebekler ise daha çok alçalan bir ezgiyle ağladı. Bulgular, yenidoğanların ağlama ezgisinin çevrelerindeki konuşmanın ezgisinden etkilendiğini gösteriyor. Ekibe göre bu, doğuştan gelen yatkınlıklara dayanan bir ses öğrenmesiyle olabilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Yenidoğanların ağlama ezgisinin çevrelerindeki dile göre değişmesini",
+            "Bebeklerin hangi yaşta yürümeye başladığını",
+            "Fransızca ile Almancanın sözcük sayısını",
+            "Annelerin bebeklerine nasıl ninni söylediğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre bebekler dışarıdan gelen sesleri ne zaman akılda tutabilir?",
+          "secenekler": [
+            "Gebeliğin son üç ayında",
+            "Ancak doğumdan tam bir yıl sonra",
+            "Ancak konuşmaya başlayınca",
+            "Ancak okula başlayınca"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip kaç bebeğin ağlamasını inceledi?",
+          "secenekler": [
+            "30 Fransız ve 30 Alman bebeğin",
+            "10 Fransız ve 10 Alman bebeğin",
+            "Yalnız 30 Alman bebeğin",
+            "100 Fransız ve 100 Alman bebeğin"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Fransız bebekler daha çok nasıl bir ezgiyle ağladı?",
+          "secenekler": [
+            "Yükselen",
+            "Alçalan",
+            "Hiç değişmeyen",
+            "Fısıltıya benzeyen"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Doğduklarında bebekler kimin sesini tercih eder?",
+          "secenekler": [
+            "Annelerinin",
+            "Babalarının",
+            "Kardeşlerinin",
+            "Tanımadıkları birinin"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip ağlamaların hangi özelliklerine baktı?",
+          "secenekler": [
+            "Ezgisine ve ses şiddetine",
+            "Süresine ve gün içindeki saatine",
+            "Gözyaşı miktarına ve yüz rengine",
+            "Hangi odada olduğuna ve kimin yanında olduğuna"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa095",
+      "baslik": "Ağaca tırmanan sarmaşık",
+      "etiket": "bitki",
+      "kaynak": "gianoli2014",
+      "pmid": "24768053",
+      "doi": "10.1016/j.cub.2014.03.010",
+      "yazar": "Gianoli ve Carrasco-Urra",
+      "dergi": "Current Biology",
+      "yil": 2014,
+      "metin": "Bir canlının başka bir canlıya benzeyerek kazanç sağlamasına taklit denir. Taklit hayvanlarda oldukça yaygındır, ama bitkilerde az sayıda örneği bilinir. Bir ekip ılıman bir yağmur ormanında yaşayan odunsu bir sarmaşık türünü inceledi. Bu sarmaşık, sarıldığı ağacın yapraklarını boy, biçim, renk, yön, sap uzunluğu ya da ucun dikenli olması bakımından taklit ediyordu. Tek bir sarmaşık farklı ağaçlara uzandığında, her birinin yaprağına sırayla benziyordu. Hiçbir şeye tutunmayan sarmaşıkların yaprakları, ağaç yapraklarının arasında tırmananlarınkinden farklıydı. Ekip yaprakların ne kadar yenildiğine de baktı. En çok yenenler yapraksız gövdelere tırmanan sarmaşıklardı, en az yenenler ise yapraklı ağaçlara tırmananlar. Yani sarmaşık yalnız tırmanarak değil, yapraklarını taklit ettiği ağaçlara tırmanarak da korunuyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bir sarmaşığın sarıldığı ağacın yapraklarını taklit edip korunmasını",
+            "Yağmur ormanlarındaki ağaçların nasıl bu kadar hızlı ve uzun büyüdüğünü",
+            "Sarmaşıkların çiçeklerini hangi böceklerin ziyaret ettiğini",
+            "Ağaçların sarmaşıklardan nasıl kurtulduğunu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre taklit nerede oldukça yaygındır?",
+          "secenekler": [
+            "Hayvanlarda",
+            "Bitkilerde",
+            "Mantarlarda",
+            "Bakterilerde"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Tek bir sarmaşık farklı ağaçlara uzandığında ne oldu?",
+          "secenekler": [
+            "Her birinin yaprağına sırayla benzedi",
+            "Yalnız ilk sarıldığı ağacın yaprağına benzedi",
+            "Yapraklarını tümüyle döktü",
+            "Hiçbir ağaca benzemedi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yaprakları en çok yenen sarmaşıklar hangileriydi?",
+          "secenekler": [
+            "Yapraksız gövdelere tırmananlar",
+            "Yapraklı ağaçlara tırmananlar",
+            "Hiçbir şeye tutunmayanlar",
+            "Kayalara tırmananlar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sarmaşık ağacın yaprağını hangi bakımlardan taklit ediyordu?",
+          "secenekler": [
+            "Boy, biçim ve renk gibi bakımlardan",
+            "Yalnız kokusu bakımından",
+            "Yalnız meyvesinin tadı bakımından",
+            "Yalnız kökünün derinliği bakımından"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İncelenen sarmaşık nerede yaşıyor?",
+          "secenekler": [
+            "Ilıman bir yağmur ormanında",
+            "Kurak bir çölde",
+            "Bir dağın karlı zirvesinde",
+            "Bir göl kıyısında"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa096",
+      "baslik": "Tepenin içindeki rüzgâr",
+      "etiket": "bocek",
+      "kaynak": "king2015",
+      "pmid": "26316023",
+      "doi": "10.1073/pnas.1423242112",
+      "yazar": "King ve ark.",
+      "dergi": "PNAS",
+      "yil": 2015,
+      "metin": "Mantar yetiştiren bazı termitler, milimetre boylarına karşın yerden metrelerce yükselen dev tepeler yapar. Kendileri yerin altındaki yuvada yaşar; tepede oturmazlar, ama tepe geniş tünellerle doludur. Bu tepelerin, mantar ve yavru yetiştirmek için ısıyı, nemi ve hava değişimini düzenlediği genel olarak kabul edilir. Ancak içerideki havanın neyle hareket ettiği, yerinde ölçüm yapılmadığı için kesin bilinmiyordu. Bir ekip, bir termit türünün tepelerinde yüzeydeki kanallardan geçen havayı gün boyu ölçtü. Gündüz dıştaki ince kanallar, daha derindeki bacalardan hızlı ısınıyordu. Bu yüzden hava kanallarda yükselip bacadan aşağı iniyordu. Gece ise akış tersine dönüyordu. Bu döngü yuvadaki karbondioksidi dışarı atıp havayı tazeliyor. Tepe böylece gündüz ile gece arasındaki sıcaklık değişimini işe yarar bir güce çeviriyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Termit tepelerinin gece ile gündüz arasındaki sıcaklık farkıyla havalanmasını",
+            "Termitlerin mantarı nasıl topladığını",
+            "Termitlerin yeni yuva yerini nasıl seçtiğini",
+            "Termit tepelerinin kaç yılda yıkıldığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Termitler nerede yaşar?",
+          "secenekler": [
+            "Yerin altındaki yuvada",
+            "Tepenin en üst katında",
+            "Ağaç kovuklarında",
+            "Tepenin dış kanallarında"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre tepedeki havanın hareketi neden kesin bilinmiyordu?",
+          "secenekler": [
+            "Yerinde ölçüm yapılmadığı için",
+            "Termitler ölçüm aletlerini yediği için",
+            "Tepeler çok uzak ülkelerde olduğu için",
+            "Tepelerin içi tümüyle dolu olduğu için"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Gündüz hangi bölüm daha hızlı ısınıyordu?",
+          "secenekler": [
+            "Dıştaki ince kanallar",
+            "Derindeki bacalar",
+            "Yerin altındaki yuva",
+            "Tepenin tabanındaki toprak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Gece hava akışına ne oluyordu?",
+          "secenekler": [
+            "Tersine dönüyordu",
+            "Tümüyle duruyordu",
+            "İki kat hızlanıyordu",
+            "Yalnız yuvada kalıyordu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bu hava döngüsü yuvadan neyi dışarı atıyor?",
+          "secenekler": [
+            "Karbondioksidi",
+            "Mantar sporlarını",
+            "Yağmur suyunu",
+            "Kumu ve toprağı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa097",
+      "baslik": "Pusulası olan bakteriler",
+      "etiket": "mikro",
+      "kaynak": "simmons2006",
+      "pmid": "16424338",
+      "doi": "10.1126/science.1122843",
+      "yazar": "Simmons ve ark.",
+      "dergi": "Science",
+      "yil": 2006,
+      "metin": "Bazı bakterilerin içinde zarla sarılı demir kristalleri bulunur ve bu bakteriler manyetik alana tepki verir. Bu bakterilerin bir bölümünün, oksijen çok olunca aşağıya, az oksijenli ya da oksijensiz katmanlara doğru yüzdüğü düşünülür. Bu aşağı yolculukta kuzey yarım küredeki bakterilerin manyetik kuzeye, güney yarım küredekilerin ise manyetik güneye yöneldiği düşünülüyordu. Bir ekip kuzey yarım kürede bu bakterilerden topluluklar buldu. Bu bakteriler oksijen artınca kuzeye değil, güneye doğru yüzüyordu. Bu, daha önce bildirilen bütün davranışların tersiydi. Ortamın kimyasal bir ölçüsü yükseldikçe güneye yönelen bakterilerin oranı da artıyordu. Aynı ortamda iki zıt yöne yüzen bakterilerin bir arada bulunması, bu davranışın bakteriye ne kazandırdığını anlatan bugünkü açıklamalarla çelişiyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Kuzey yarım kürede güneye yüzen bakterilerin bulunmasını",
+            "Bakterilerin demiri topraktan nasıl topladığını",
+            "Manyetik alanın Dünya'da nasıl oluştuğunu",
+            "Bakterilerin suda ne kadar hızlı çoğaldığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bu bakterilerin içinde ne bulunur?",
+          "secenekler": [
+            "Zarla sarılı demir kristalleri",
+            "Suyla dolu, ince hava kabarcıkları",
+            "Işık yayan pigmentler",
+            "Yağ damlacıkları"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bakterilerin oksijen çok olunca ne yaptığı düşünülür?",
+          "secenekler": [
+            "Az oksijenli katmanlara doğru aşağı yüzdüğü",
+            "Suyun yüzeyine doğru yükseldiği",
+            "Bulunduğu yerde hareketsiz kaldığı",
+            "Daha çok oksijen bulmak için yukarı çıktığı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kuzey yarım küredeki bakterilerin hangi yöne yöneldiği düşünülüyordu?",
+          "secenekler": [
+            "Manyetik kuzeye",
+            "Manyetik güneye",
+            "Doğuya",
+            "Batıya"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekibin bulduğu bakteriler oksijen artınca hangi yöne yüzüyordu?",
+          "secenekler": [
+            "Güneye",
+            "Kuzeye",
+            "Doğuya",
+            "Yüzeye"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İki zıt yöne yüzen bakterilerin bir arada bulunması neyle çelişiyor?",
+          "secenekler": [
+            "Bu davranışın kazancını anlatan bugünkü açıklamalarla",
+            "Bakterilerin demir içerdiği bilgisiyle",
+            "Dünya'nın yuvarlak olduğu bilgisiyle",
+            "Bakterilerin suda yaşadığı bilgisiyle"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa098",
+      "baslik": "Göz kırpmanın zamanı",
+      "etiket": "insan",
+      "kaynak": "nakano2009",
+      "pmid": "19640888",
+      "doi": "10.1098/rspb.2009.0828",
+      "yazar": "Nakano ve ark.",
+      "dergi": "Proceedings of the Royal Society B",
+      "yil": 2009,
+      "metin": "Gözle dikkat isteyen bir işi yaparken genellikle daha az göz kırparız. İşin ne zaman başlayıp biteceği belliyse, göz kırpmalar işin öncesine ya da sonrasına toplanır. Video izlerken sahne değişimlerinde kırpmamız beklenir. Ama bir sahnenin ne kadar süreceği önceden bilinmez. Bir ekip, katılımcılara aynı kısa video öykülerini izletip göz kırpmalarını kaydetti. Kişilerin göz kırpmaları büyük ölçüde aynı anlara denk geldi, ama doğrudan sahne geçişlerine bağlı değildi. Kırpmalar daha çok bir hareketin bittiği, ana karakterin görünmediği ya da benzer bir sahnenin tekrarlandığı anlarda toplandı. Arka planda oynayan bir videoda ya da sesli okunan bir öyküyü dinlerken bu uyum görülmedi. Ekibe göre insanlarda, önemli bir görüntüyü kaçırmamak için kırpmaya uygun anı arayan ortak bir düzenek olabilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Video izleyen kişilerin göz kırpmalarının aynı anlara denk gelmesini",
+            "Ekranın gözleri ne kadar yorduğunu",
+            "Video öykülerinin nasıl çekildiğini",
+            "İnsanların gün boyunca kaç kez uyuduğunu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Gözle dikkat isteyen bir iş yaparken göz kırpmamız nasıl değişir?",
+          "secenekler": [
+            "Genellikle azalır",
+            "Genellikle iki katına çıkar",
+            "Hiç değişmez",
+            "Tümüyle durur"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Göz kırpmalar hangi anlarda toplandı?",
+          "secenekler": [
+            "Bir hareketin bittiği anlarda",
+            "Ana karakterin konuştuğu anlarda",
+            "Müziğin en yüksek olduğu anlarda",
+            "Yeni bir karakterin çıktığı anlarda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kişilerin göz kırpmaları sahne geçişlerine bağlı mıydı?",
+          "secenekler": [
+            "Doğrudan bağlı değildi",
+            "Yalnız sahne geçişlerinde oldu",
+            "Her geçişte iki kez oldu",
+            "Yalnız ilk geçişte oldu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Hangi durumda göz kırpmalardaki uyum görülmedi?",
+          "secenekler": [
+            "Sesli okunan bir öyküyü dinlerken",
+            "Aynı kısa video öykülerini izlerken",
+            "Ana karakter ekrandan çıkınca",
+            "Benzer bir sahne tekrarlanınca"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekibe göre ortak düzenek neyi sağlıyor olabilir?",
+          "secenekler": [
+            "Önemli bir görüntüyü kaçırmamayı",
+            "Gözlerin daha hızlı kurumasını",
+            "Videonun daha kısa sürmesini",
+            "Seslerin daha iyi duyulmasını"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa099",
+      "baslik": "Böceğin içindeki patlamalar",
+      "etiket": "bocek",
+      "kaynak": "arndt2015",
+      "pmid": "25931557",
+      "doi": "10.1126/science.1261166",
+      "yazar": "Arndt ve ark.",
+      "dergi": "Science",
+      "yil": 2015,
+      "metin": "Bombardıman böcekleri kendilerini korumak için sıcak bir sıvı püskürtür. Bu püskürtme tek bir fışkırma değildir; art arda gelen çok hızlı patlamalardan oluşur. Patlamalar, vücudun arka ucundaki bir bezin içinde, tepkime odası denen bir bölmede olur. Bir ekip, püskürtmenin neden kesik kesik çıktığını anlamak istedi. Böceklerin bu bölgesinin yapısını inceledi. Ayrıca özel bir X ışını düzeneğiyle canlı böceklerin içini görüntüleyip patlamaları doğrudan izledi. Odadaki buharın nasıl hareket ettiğini de ölçtü. Kesik kesik akışı, maddelerin saklandığı bölme ile tepkime odasının birleştiği yerdeki özel yapıların denetlediğini buldu. Modeller, her patlamanın bu yapıları yerinden oynattığını düşündürüyor. Yani akışı patlamanın kendisi düzenliyor olabilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bir böceğin püskürtmesinin neden kesik kesik çıktığını",
+            "Böceklerin yiyeceklerini nasıl ısıttığını",
+            "X ışınlarının nasıl bulunduğunu",
+            "Böceklerin yuvalarını nasıl savunduğunu ve onardığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bombardıman böcekleri kendilerini korumak için ne yapar?",
+          "secenekler": [
+            "Sıcak bir sıvı püskürtür",
+            "Soğuk bir köpük salar",
+            "Yüksek bir ses çıkarır",
+            "Renk değiştirir"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Patlamalar nerede oluyor?",
+          "secenekler": [
+            "Tepkime odası denen bir bölmede",
+            "Böceğin ağzının içinde",
+            "Böceğin kanatlarının altında",
+            "Böceğin bacaklarındaki kıllarda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip patlamaları nasıl izledi?",
+          "secenekler": [
+            "Canlı böcekleri X ışınıyla görüntüleyerek",
+            "Böcekleri sudan geçirip yavaşlatarak",
+            "Patlama seslerini mikrofonla kaydedip dinleyerek",
+            "Böcekleri ısıtıp soğutarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kesik kesik akışı ne denetliyor?",
+          "secenekler": [
+            "İki bölmenin birleştiği yerdeki özel yapılar",
+            "Böceğin bacaklarındaki kaslar",
+            "Böceğin duyargaları",
+            "Havanın sıcaklığı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Modellere göre her patlama ne yapıyor olabilir?",
+          "secenekler": [
+            "Özel yapıları yerinden oynatıyor",
+            "Bezi tümüyle boşaltıp kapağını sıkıca kapatıyor",
+            "Böceği havaya sıçratıyor",
+            "Sıvıyı soğutup donduruyor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa100",
+      "baslik": "Karın içindeki gizli yolcu",
+      "etiket": "mikro",
+      "kaynak": "christner2008",
+      "pmid": "18309078",
+      "doi": "10.1126/science.1149757",
+      "yazar": "Christner ve ark.",
+      "dergi": "Science",
+      "yil": 2008,
+      "metin": "Havada suyun donmasını başlatan parçacıklara buz çekirdeği denir. Bu parçacıklar, havada yağışa yol açan olaylarda temel bir rol oynar. Yine de nereden geldikleri ve havada nasıl dağıldıkları iyi bilinmiyordu. Bir ekip, orta ve yüksek enlemlerdeki farklı yerlere yağan karı inceledi. Kardaki buz çekirdeklerinin en etkili olanları canlılardan geliyordu. Sıfırın altında 7 dereceden daha sıcakta işe yarayan ve 0,2 mikrometreden büyük çekirdeklerin yüzde 69 ile 100'ü canlı kökenliydi. Bir mikrometre, milimetrenin binde biridir. Bunların önemli bir bölümü bakteriydi. Bulgular, canlılar dünyasının çok etkili buz çekirdeklerinin bir kaynağı olduğunu gösteriyor. Ekibe göre bu parçacıklar yağış döngüsünü ya da havada taşınırken kendilerinin yağışla yere inmesini etkileyebilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Kardaki en etkili buz çekirdeklerinin canlılardan gelmesini",
+            "Kar tanelerinin neden altı köşeli olduğunu",
+            "Bakterilerin soğukta nasıl uyuduğunu",
+            "Yağmurun bitkileri nasıl büyüttüğünü"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Buz çekirdeği nedir?",
+          "secenekler": [
+            "Havada suyun donmasını başlatan parçacık",
+            "Kar tanesinin tam ortasındaki küçük hava boşluğu",
+            "Buzulların en derindeki katmanı",
+            "Donmuş bir bakterinin kabuğu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip neyi inceledi?",
+          "secenekler": [
+            "Farklı yerlere yağan karı",
+            "Göllerin üstündeki buzu",
+            "Dağlardaki kayaları",
+            "Bulutların fotoğraflarını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Belirtilen çekirdeklerin yüzde kaçı canlı kökenliydi?",
+          "secenekler": [
+            "Yüzde 69 ile 100'ü",
+            "Yüzde 1 ile 10'u",
+            "Yüzde 20 ile 30'u",
+            "Yüzde 40 ile 50'si"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Canlı kökenli çekirdeklerin önemli bir bölümü neydi?",
+          "secenekler": [
+            "Bakteri",
+            "Polen",
+            "Böcek parçası",
+            "Kum tanesi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekibe göre bu parçacıklar neyi etkileyebilir?",
+          "secenekler": [
+            "Yağış döngüsünü",
+            "Rüzgârın yönünü",
+            "Denizlerin tuzluluğunu",
+            "Gün ışığının süresini"
+          ]
+        }
+      ]
+    }
+  ]
+}
