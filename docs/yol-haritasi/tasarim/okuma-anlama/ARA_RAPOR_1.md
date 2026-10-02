@@ -99,3 +99,15 @@ Sahibin cevabı, kelimesi kelimesine: "UYGUN".
 Kararlar:
 - Modül adı **Oku ve Anla**, onaylı.
 - VARSAYIM: cevap önerilen yol 1'i de kapsıyor. Sahibe bildirildi.
+
+## 9. Sahip kararı (2026-10-02, son kapı turundan sonra)
+Soru:
+1. Soru ve sayılmadı ekranları düzeltilip yalnız onlar için bir kapı turu daha açılsın mı?
+2. İlk 10 metnin üslubu onaylı mı?
+
+Sahibin cevabı, kelimesi kelimesine: "ONAY".
+
+Kararlar:
+- İki ekran için bir kapı turu daha açılacak.
+- `banka/taslak-01.json`'ın üslubu onaylı. Kalan 110 metin aynı üslup ve kurallarla 10'arlı takımlar hâlinde yazılır.
+  Metinler koda girmeden önce yine sahip onayına sunulur.

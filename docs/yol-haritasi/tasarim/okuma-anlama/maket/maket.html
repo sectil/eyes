@@ -122,7 +122,7 @@ h2.q { font-family: var(--font-display); font-weight: 600; font-size: 25px; line
 .pips { grid-row: 1 / span 2; grid-column: 2; display: flex; gap: 4px; }
 .pips i { width: 9px; height: 9px; border-radius: 50%; background: var(--track); }
 .pips i.on { background: var(--accent); }
-.tg { grid-row: 1 / span 2; grid-column: 2; width: 46px; height: 28px; border-radius: 99px; background: var(--surface-3); position: relative; }
+.tg { grid-row: 1 / span 2; grid-column: 2; width: 46px; height: 28px; border-radius: 99px; background: rgba(120,134,148,.38); position: relative; }
 .tg::after { content: ''; position: absolute; left: 3px; top: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
 
 
@@ -136,7 +136,7 @@ h2.tt, h2.q, .opt > span, .row .v, .row .k, .lead, .verd p, .today strong { text
 h2.q { text-align: center; }
 .bar.q { justify-content: flex-start; gap: 14px; }
 .bar.q .dots { flex: 1; } .bar.q .dots i { flex: 1; width: auto; }
-.opt .tagok { margin-left: auto; flex: none; font-size: 13px; font-weight: 700; color: var(--ok); }
+.opt .ot small.okline { display: block; margin-top: 3px; font-size: 13px; font-weight: 700; color: var(--ok); letter-spacing: .01em; }
 .anl { gap: 8px; flex-wrap: wrap; }
 .anl span.off { color: var(--ink-2); background: var(--surface-2); }
 .ring .n.off { font-size: 40px; }
@@ -145,7 +145,8 @@ h2.q { text-align: center; }
   .verd p { font-size: 15px; }
   h2.q { font-size: 21px; }
   .qwrap .opts { padding-top: 12px; }
-  .qhead { margin: -8px 0 2px; } .qhead .qr { width: 68px; height: 68px; }
+  .qhead { margin: -10px 0 0; } .qhead .qr { width: 60px; height: 60px; }
+  .opt .ot small.okline { display: inline; margin: 0 0 0 6px; }
   h2.q { font-size: 19.5px; }
   .qwrap .opts { padding-top: 10px; }
   .meta { margin-bottom: 12px; font-size: 12.5px; }
@@ -242,16 +243,18 @@ function metin() {
     <div class="veil"></div><span class="more">${DOWN}<span>Bitirdim, metnin sonunda</span></span>
   </div>`
 }
-// Soru halkası: sonuçtaki dört soru halkasının küçüğü; sorular ilerledikçe dolar.
+// Soru halkası: sonuçtaki dört soru halkasının küçüğü. Cevaplanan dolu, şu anki içi boş çerçeve, bekleyen gri.
 function qring(done, cur) {
   const r = 46, c = 2 * Math.PI * r, gap = 16, seg = c / 4 - gap
+  const arc = (i, stroke, w) => `<circle cx="60" cy="60" r="${r}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${seg.toFixed(1)} ${(c - seg).toFixed(1)}" stroke-dashoffset="${(-(i * c / 4) - gap / 2).toFixed(1)}" transform="rotate(-90 60 60)"/>`
   let out = ''
   for (let i = 0; i < 4; i++) {
-    const col = i < done || i === cur ? 'url(#g3)' : 'var(--track)'
-    out += `<circle cx="60" cy="60" r="${r}" opacity="${i === cur ? .5 : 1}" fill="none" stroke="${col}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${seg.toFixed(1)} ${(c - seg).toFixed(1)}" stroke-dashoffset="${(-(i * c / 4) - gap / 2).toFixed(1)}" transform="rotate(-90 60 60)"/>`
+    if (i < done) out += arc(i, 'url(#g3)', 10)
+    else if (i === cur) out += arc(i, 'url(#g3)', 11) + arc(i, 'var(--bg)', 5.5)
+    else out += arc(i, 'var(--track)', 10)
   }
   return `<svg class="qr" viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--iris-1)"/><stop offset="1" stop-color="var(--iris-2)"/></linearGradient></defs>${out}
-    <text x="60" y="56" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-weight="650" font-size="34" fill="var(--ink)">${cur + 1}</text><text x="60" y="86" text-anchor="middle" font-family="var(--font-body)" font-weight="600" font-size="18" fill="var(--ink-3)">/ 4</text></svg>`
+    <text x="60" y="61" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-weight="650" fill="var(--ink)"><tspan font-size="32">${cur + 1}</tspan><tspan font-size="20" fill="var(--ink-3)" dx="1">/4</tspan></text></svg>`
 }
 function soru() {
   const o = ['Gübre böceklerinin karanlık gecelerde yıldızlarla yön bulmasını', 'Gübre böceklerinin yiyeceklerini nasıl sakladığını', 'Planetaryumların nasıl çalıştığını', 'Böceklerin bulutlu havada nasıl dinlendiğini']
@@ -259,7 +262,7 @@ function soru() {
   return `<div class="screen">
     <div class="bar"><span class="ib">${X}</span><span class="mid"></span><span style="width:40px"></span></div>
     <div class="qwrap"><div class="qhead">${qring(1, 1)}</div><h2 class="q">Metin en çok neyi anlatıyor?</h2>
-    <div class="opts">${order.map((i) => i === 0 ? `<div class="opt right"><span class="r">${CHK}</span><span>${o[i]}</span><span class="tagok">Doğru</span></div>` : `<div class="opt"><span class="r"></span><span>${o[i]}</span></div>`).join('')}</div></div>
+    <div class="opts">${order.map((i) => i === 0 ? `<div class="opt right"><span class="r">${CHK}</span><span class="ot">${o[i]}<small class="okline">Doğru</small></span></div>` : `<div class="opt"><span class="r"></span><span>${o[i]}</span></div>`).join('')}</div></div>
     <div class="spacer" style="height:112px"></div>
     <div class="dock"><div class="btn">Sonraki soru</div></div>
   </div>`
@@ -270,11 +273,11 @@ function ring(k) {
   let out = ''
   for (let i = 0; i < 4; i++) {
     const on = i < k
-    out += `<circle cx="132" cy="132" r="${r}" fill="none" stroke="${on ? 'url(#g2)' : 'var(--track)'}" stroke-width="14" stroke-linecap="round" stroke-dasharray="${seg.toFixed(1)} ${(c - seg).toFixed(1)}" stroke-dashoffset="${(-(i * c / 4) - gap / 2).toFixed(1)}" transform="rotate(-90 132 132)"/>`
+    out += `<circle cx="132" cy="132" r="${r}" fill="none" stroke="${on ? 'url(#g2)' : 'var(--lens)'}" opacity="${on ? 1 : .55}" stroke-width="14" stroke-linecap="round" stroke-dasharray="${seg.toFixed(1)} ${(c - seg).toFixed(1)}" stroke-dashoffset="${(-(i * c / 4) - gap / 2).toFixed(1)}" transform="rotate(-90 132 132)"/>`
     const a = (-90 + i * 90 + 45) * Math.PI / 180, x = 132 + r * Math.cos(a), y = 132 + r * Math.sin(a)
-    out += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="13" fill="${on ? 'var(--ok)' : 'var(--surface-3)'}" stroke="var(--bg)" stroke-width="3"/>`
+    out += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="13" fill="${on ? 'var(--ok)' : 'var(--lens)'}" stroke="var(--bg)" stroke-width="3"/>`
     out += on ? `<path d="M${(x - 5).toFixed(1)} ${(y + .5).toFixed(1)} l3.5 3.5 l6.5 -7" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`
-              : `<path d="M${(x - 4).toFixed(1)} ${(y - 4).toFixed(1)} l8 8 M${(x + 4).toFixed(1)} ${(y - 4).toFixed(1)} l-8 8" stroke="var(--ink-3)" stroke-width="2.4" stroke-linecap="round"/>`
+              : `<path d="M${(x - 4).toFixed(1)} ${(y - 4).toFixed(1)} l8 8 M${(x + 4).toFixed(1)} ${(y - 4).toFixed(1)} l-8 8" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round"/>`
   }
   return `<svg viewBox="0 0 264 264" aria-hidden="true"><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--iris-1)"/><stop offset="1" stop-color="var(--iris-2)"/></linearGradient></defs>
     ${out}<circle cx="132" cy="132" r="88" fill="var(--surface)" stroke="var(--border)"/></svg>`
@@ -286,7 +289,7 @@ function sonuc(ok) {
     <div class="anl">${ok ? '<span class="ok">4 sorunun 4’ü doğru</span>' : '<span class="lo">348 kelime/dk · hız sayılmadı</span>'}</div>
     <div class="verd"><span class="dot"></span><p><span class="nm">Nef</span>${ok ? 'Hızın sayıldı: metni anladın.' : 'Hız, en az 3 doğruyla sayılır. Bir dahakine biraz daha yavaş oku.'}</p></div>
     <div class="rows">
-      <div class="row"><span class="k">Başlangıç</span><span class="v">${ok ? '3/5 okuma sayıldı' : '2/5 okuma sayıldı'}</span><span class="pips">${[0, 1, 2, 3, 4].map((i) => `<i class="${i < (ok ? 3 : 2) ? 'on' : ''}"></i>`).join('')}</span></div>
+      <div class="row"><span class="k">Başlangıç</span><span class="v">${ok ? 'Kuruluyor: 3/5 okuma' : 'Kuruluyor: 2/5 okuma'}</span><span class="pips">${[0, 1, 2, 3, 4].map((i) => `<i class="${i < (ok ? 3 : 2) ? 'on' : ''}"></i>`).join('')}</span></div>
       <div class="row"><span class="k">Bu metin bir çalışmadan</span><span class="v">Dacke ve ark., 2013</span><span class="go">${GO}</span></div>
       <div class="row"><span class="k">Bana hatırlat</span><span class="v">Her gün bir okuma</span><span class="tg"></span></div>
     </div>

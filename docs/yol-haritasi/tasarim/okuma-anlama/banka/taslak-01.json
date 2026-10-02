@@ -5,142 +5,752 @@
     {
       "id": "oa001",
       "baslik": "Yıldızlarla yol bulan böcek",
+      "etiket": "bocek",
       "kaynak": "dacke2013",
+      "pmid": "23352694",
+      "doi": "10.1016/j.cub.2012.12.034",
+      "yazar": "Dacke ve ark.",
+      "dergi": "Current Biology",
+      "yil": 2013,
       "metin": "Afrika'daki bazı gübre böcekleri, buldukları gübreden bir top yapar ve bu topu yuvarlayarak kalabalıktan uzaklaşır. Amaçları topu başka böceklere kaptırmadan, olabildiğince düz bir çizgide ilerlemektir. Gündüz güneşi, gece ayı yön bulmak için kullandıkları zaten biliniyordu. Peki ayın olmadığı karanlık gecelerde ne yapıyorlar? Araştırmacılar böcekleri önce açık ve yıldızlı bir gökyüzü altında izledi. Böcekler toplarını yine düz yollarda yuvarladı. Gökyüzü bulutla kapandığında ise bu beceriyi kaybettiler. Ardından deney bir planetaryuma taşındı. Böcekler tüm yıldızlar gösterildiğinde de, yalnız Samanyolu gösterildiğinde de aynı başarıyla yol aldı. Bu, bir böceğin yıldızlı gökyüzünü pusula gibi kullandığının ilk güçlü kanıtı oldu. Hayvanlar dünyasında Samanyolu'na bakarak yön bulduğu gösterilen ilk canlı olarak kayda geçtiler.",
       "sorular": [
-        { "tur": "ana", "soru": "Metin en çok neyi anlatıyor?", "secenekler": ["Gübre böceklerinin karanlık gecelerde yıldızlarla yön bulmasını", "Gübre böceklerinin yiyeceklerini nasıl sakladığını", "Planetaryumların nasıl çalıştığını", "Böceklerin bulutlu havada nasıl dinlendiğini"] },
-        { "tur": "ayrinti", "soru": "Böcekler topu neden kalabalıktan uzaklaştırıyor?", "secenekler": ["Topu başka böceklere kaptırmamak için", "Topu güneşte kurutmak için", "Yuvalarını su basmasın diye", "Topu daha da büyütmek için"] },
-        { "tur": "ayrinti", "soru": "Gökyüzü bulutla kapandığında ne oldu?", "secenekler": ["Böcekler düz yol alma becerisini kaybetti", "Böcekler daha hızlı yuvarladı", "Böcekler aya doğru yürüdü", "Böcekler yeni bir top yaptı"] },
-        { "tur": "ayrinti", "soru": "Planetaryumda yalnız Samanyolu gösterildiğinde böcekler nasıl yol aldı?", "secenekler": ["Tüm yıldızlar gösterildiğindeki kadar başarılı", "Hiç yol alamadılar", "Yalnız daire çizerek döndüler", "Yalnız geri geri gittiler"] },
-        { "tur": "ayrinti", "soru": "Gündüz yön bulmak için ne kullandıkları biliniyordu?", "secenekler": ["Güneşi", "Rüzgârı", "Kokuyu", "Toprağın sıcaklığını"] },
-        { "tur": "ayrinti", "soru": "Böcekler deneyin ilk bölümünde nerede izlendi?", "secenekler": ["Açık ve yıldızlı bir gökyüzü altında", "Karanlık bir mağarada", "Bulutlu bir sabahta", "Bir akvaryumda"] }
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Gübre böceklerinin karanlık gecelerde yıldızlarla yön bulmasını",
+            "Gübre böceklerinin yiyeceklerini nasıl sakladığını",
+            "Planetaryumların nasıl çalıştığını",
+            "Böceklerin bulutlu havada nasıl dinlendiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Böcekler topu neden kalabalıktan uzaklaştırıyor?",
+          "secenekler": [
+            "Topu başka böceklere kaptırmamak için",
+            "Topu güneşte kurutmak için",
+            "Yuvalarını su basmasın diye",
+            "Topu daha da büyütmek için"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Gökyüzü bulutla kapandığında ne oldu?",
+          "secenekler": [
+            "Böcekler düz yol alma becerisini kaybetti",
+            "Böcekler daha hızlı yuvarladı",
+            "Böcekler aya doğru yürüdü",
+            "Böcekler yeni bir top yaptı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Planetaryumda yalnız Samanyolu gösterildiğinde böcekler nasıl yol aldı?",
+          "secenekler": [
+            "Tüm yıldızlar gösterildiğindeki kadar başarılı",
+            "Hiç yol alamadılar",
+            "Yalnız daire çizerek döndüler",
+            "Yalnız geri geri gittiler"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Gündüz yön bulmak için ne kullandıkları biliniyordu?",
+          "secenekler": [
+            "Güneşi",
+            "Rüzgârı",
+            "Kokuyu",
+            "Toprağın sıcaklığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Böcekler deneyin ilk bölümünde nerede izlendi?",
+          "secenekler": [
+            "Açık ve yıldızlı bir gökyüzü altında",
+            "Karanlık bir mağarada",
+            "Bulutlu bir sabahta",
+            "Bir akvaryumda"
+          ]
+        }
       ]
     },
     {
       "id": "oa002",
       "baslik": "Kedi adını tanır mı?",
+      "etiket": "memeli",
       "kaynak": "saito2019",
+      "pmid": "30948740",
+      "doi": "10.1038/s41598-019-40616-4",
+      "yazar": "Saito ve ark.",
+      "dergi": "Scientific Reports",
+      "yil": 2019,
       "metin": "Köpeklerin insanla nasıl anlaştığı uzun zamandır araştırılıyor, ama kediler bu konuda daha az incelendi. Japonya'da bir ekip, kedilerin kendi adlarını başka sözcüklerden ayırt edip edemediğini merak etti. Kedilere önce arka arkaya dört sözcük dinletildi. Bunlar sıradan sözcükler ya da aynı evde yaşayan öteki kedilerin adlarıydı. Kediler her yeni sözcüğe biraz daha az tepki verdi, yani alıştı. Sonra kendi adları söylendi. Evde yaşayan kediler bu anda belirgin biçimde yeniden tepki gösterdi. Ad, tanımadıkları biri tarafından söylendiğinde bile sonuç değişmedi. Kedi kafelerinde yaşayan kediler de adlarını sıradan sözcüklerden ayırdı. Ancak onlar kendi adlarını, aynı kafedeki öteki kedilerin adlarından ayıramadı. Ekip, kedilerin sözcükleri seslerindeki farka göre ayırt edebildiği sonucuna vardı.",
       "sorular": [
-        { "tur": "ana", "soru": "Metin en çok neyi anlatıyor?", "secenekler": ["Kedilerin kendi adlarını başka sözcüklerden ayırt edebildiğini", "Kedilerin köpeklerden daha akıllı olduğunu", "Kedilerin yalnız sahiplerinin sesini duyduğunu", "Kedi kafelerinin nasıl kurulduğunu"] },
-        { "tur": "ayrinti", "soru": "Araştırma hangi ülkede yapıldı?", "secenekler": ["Japonya", "Kore", "Çin", "Tayland"] },
-        { "tur": "ayrinti", "soru": "Kedilere kendi adlarından önce kaç sözcük dinletildi?", "secenekler": ["Dört", "İki", "Altı", "On"] },
-        { "tur": "ayrinti", "soru": "Ad, tanımadıkları biri tarafından söylendiğinde ne oldu?", "secenekler": ["Sonuç değişmedi", "Kediler hiç tepki vermedi", "Kediler odadan kaçtı", "Kediler yalnız sahiplerine baktı"] },
-        { "tur": "ayrinti", "soru": "Kafe kedileri neyi ayıramadı?", "secenekler": ["Kendi adlarını aynı kafedeki öteki kedilerin adlarından", "Kendi adlarını sıradan sözcüklerden", "Yüksek sesi alçak sesten", "Kadın sesini erkek sesinden"] },
-        { "tur": "ayrinti", "soru": "Ekibe göre kediler sözcükleri neye göre ayırt ediyor?", "secenekler": ["Seslerindeki farka göre", "Söyleyenin yüzüne göre", "Söylendiği saate göre", "Ödül verilip verilmemesine göre"] }
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Kedilerin kendi adlarını başka sözcüklerden ayırt edebildiğini",
+            "Kedilerin köpeklerden daha akıllı olduğunu",
+            "Kedilerin yalnız sahiplerinin sesini duyduğunu",
+            "Kedi kafelerinin nasıl kurulduğunu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırma hangi ülkede yapıldı?",
+          "secenekler": [
+            "Japonya",
+            "Kore",
+            "Çin",
+            "Tayland"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kedilere kendi adlarından önce kaç sözcük dinletildi?",
+          "secenekler": [
+            "Dört",
+            "İki",
+            "Altı",
+            "On"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ad, tanımadıkları biri tarafından söylendiğinde ne oldu?",
+          "secenekler": [
+            "Sonuç değişmedi",
+            "Kediler hiç tepki vermedi",
+            "Kediler odadan kaçtı",
+            "Kediler yalnız sahiplerine baktı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kafe kedileri neyi ayıramadı?",
+          "secenekler": [
+            "Kendi adlarını aynı kafedeki öteki kedilerin adlarından",
+            "Kendi adlarını sıradan sözcüklerden",
+            "Yüksek sesi alçak sesten",
+            "Kadın sesini erkek sesinden"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekibe göre kediler sözcükleri neye göre ayırt ediyor?",
+          "secenekler": [
+            "Seslerindeki farka göre",
+            "Söyleyenin yüzüne göre",
+            "Söylendiği saate göre",
+            "Ödül verilip verilmemesine göre"
+          ]
+        }
       ]
     },
     {
       "id": "oa003",
       "baslik": "Heceleyen yarasa yavruları",
+      "etiket": "memeli",
       "kaynak": "fernandez2021",
+      "pmid": "34413237",
+      "doi": "10.1126/science.abf9279",
+      "yazar": "Fernandez ve ark.",
+      "dergi": "Science",
+      "yil": 2021,
       "metin": "İnsan bebekleri konuşmaya başlamadan önce ba ba ba gibi heceleri ritimle tekrar eder. Bu heceleme dönemi, konuşmaya giden yolda önemli bir adım sayılır. Bilim insanları uzun süre bunun başka memelilerde de olup olmadığını merak etti, ama elde çok az kanıt vardı. Berlin'deki bir ekip, yeni sesler öğrenebilen bir yarasa türünü doğada izledi. Yirmi yarasa yavrusunun sesleri, üç aylık büyüme dönemleri boyunca kaydedildi. Kayıtlar, insan bebeklerinin heceleme dönemiyle karşılaştırıldı. Bebeklerde görülen sekiz özelliğin sekizi de yarasa yavrularında bulundu. Bunların arasında heceleri tekrar etmek ve belli bir ritimle ses çıkarmak da vardı. Araştırmacılara göre bu benzerlik, birbirinden çok farklı iki memelide ses öğrenmenin nasıl başladığını karşılaştırmak için yeni bir kapı açıyor.",
       "sorular": [
-        { "tur": "ana", "soru": "Metin en çok neyi anlatıyor?", "secenekler": ["Yarasa yavrularının seslerinin bebeklerin heceleme dönemine benzediğini", "Yarasaların karanlıkta nasıl yön bulduğunu", "Bebeklerin yarasa seslerine nasıl tepki verdiğini", "Berlin'deki bir hayvanat bahçesini"] },
-        { "tur": "ayrinti", "soru": "Kaç yarasa yavrusu izlendi?", "secenekler": ["Yirmi", "On", "Otuz", "Elli"] },
-        { "tur": "ayrinti", "soru": "Yavruların sesleri ne kadar süre kaydedildi?", "secenekler": ["Üç aylık büyüme dönemleri boyunca", "Bir hafta boyunca", "Bir yıl boyunca", "Yalnız doğdukları gün"] },
-        { "tur": "ayrinti", "soru": "Bebeklerde görülen özelliklerden kaçı yavrularda bulundu?", "secenekler": ["Sekizin sekizi", "Sekizin dördü", "Yalnız biri", "Hiçbiri"] },
-        { "tur": "ayrinti", "soru": "Yavrular nerede izlendi?", "secenekler": ["Doğada", "Bir laboratuvar kafesinde", "Bir hayvanat bahçesinde", "Bir mağara maketinde"] },
-        { "tur": "ayrinti", "soru": "Ortak özelliklerden biri hangisi?", "secenekler": ["Heceleri tekrar etmek", "Yalnız uyurken ses çıkarmak", "Annesinin sesini hiç taklit etmemek", "Yalnız yemek isterken ses çıkarmak"] }
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Yarasa yavrularının seslerinin bebeklerin heceleme dönemine benzediğini",
+            "Yarasaların karanlıkta nasıl yön bulduğunu",
+            "Bebeklerin yarasa seslerine nasıl tepki verdiğini",
+            "Berlin'deki bir hayvanat bahçesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kaç yarasa yavrusu izlendi?",
+          "secenekler": [
+            "Yirmi",
+            "On",
+            "Otuz",
+            "Elli"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yavruların sesleri ne kadar süre kaydedildi?",
+          "secenekler": [
+            "Üç aylık büyüme dönemleri boyunca",
+            "Bir hafta boyunca",
+            "Bir yıl boyunca",
+            "Yalnız doğdukları gün"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bebeklerde görülen özelliklerden kaçı yavrularda bulundu?",
+          "secenekler": [
+            "Sekizin sekizi",
+            "Sekizin dördü",
+            "Yalnız biri",
+            "Hiçbiri"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yavrular nerede izlendi?",
+          "secenekler": [
+            "Doğada",
+            "Bir laboratuvar kafesinde",
+            "Bir hayvanat bahçesinde",
+            "Bir mağara maketinde"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ortak özelliklerden biri hangisi?",
+          "secenekler": [
+            "Heceleri tekrar etmek",
+            "Yalnız uyurken ses çıkarmak",
+            "Annesinin sesini hiç taklit etmemek",
+            "Yalnız yemek isterken ses çıkarmak"
+          ]
+        }
       ]
     },
     {
       "id": "oa004",
       "baslik": "Bekleyebilen mürekkep balığı",
+      "etiket": "deniz",
       "kaynak": "schnell2021",
+      "pmid": "33653135",
+      "doi": "10.1098/rspb.2020.3161",
+      "yazar": "Schnell ve ark.",
+      "dergi": "Proceedings of the Royal Society B",
+      "yil": 2021,
       "metin": "Bir ödülü hemen almak yerine daha iyisi için beklemek kolay değildir. Bu beceriye kendini tutma denir ve bugüne kadar en çok büyük omurgalı hayvanlarda incelendi. Bir araştırma ekibi bu kez soruyu, omurgası olmayan bir deniz canlısına, mürekkep balığına sordu. Mürekkep balıklarına iki seçenek sunuldu. Biri hemen alınabilen sıradan bir yiyecekti. Öteki biraz beklenirse gelecek daha iyi bir yiyecekti. Mürekkep balıkları daha iyi yiyecek için 50 ile 130 saniye arasında bekleyebildi. Ekip ayrıca hangi işaretin ödül getirdiğini öğrenme ve kural değişince yeniden öğrenme becerisini ölçtü. Daha uzun bekleyebilen mürekkep balıkları bu öğrenme işinde de daha başarılıydı. Sonuçlar, bu canlının sabrının bazı büyük omurgalılarınkiyle boy ölçüşebildiğini gösteriyor.",
       "sorular": [
-        { "tur": "ana", "soru": "Metin en çok neyi anlatıyor?", "secenekler": ["Mürekkep balıklarının daha iyi bir ödül için bekleyebildiğini", "Mürekkep balıklarının renk değiştirmesini", "Mürekkep balıklarının nasıl avlandığını", "Deniz canlılarının uyku düzenini"] },
-        { "tur": "ayrinti", "soru": "Mürekkep balıkları daha iyi yiyecek için ne kadar bekleyebildi?", "secenekler": ["50 ile 130 saniye arasında", "5 ile 10 saniye arasında", "10 ile 20 dakika arasında", "Bir gün boyunca"] },
-        { "tur": "ayrinti", "soru": "Daha uzun bekleyenler başka hangi işte daha başarılıydı?", "secenekler": ["Kural değişince yeniden öğrenmede", "Daha hızlı yüzmede", "Kumda saklanmada", "Daha çok yiyecek bulmada"] },
-        { "tur": "ayrinti", "soru": "Metne göre mürekkep balığı nasıl bir canlıdır?", "secenekler": ["Omurgası olmayan bir deniz canlısı", "Bir memeli", "Bir kuş", "Tatlı suda yaşayan bir balık"] },
-        { "tur": "ayrinti", "soru": "Kendini tutma ne demektir?", "secenekler": ["Bir ödülü hemen almak yerine daha iyisi için beklemek", "Korkunca saklanmak", "Hiç yemek yememek", "Başkalarının yiyeceğini almamak"] },
-        { "tur": "ayrinti", "soru": "Mürekkep balıklarına sunulan iki seçenek neydi?", "secenekler": ["Hemen sıradan bir yiyecek ya da bekleyince daha iyi bir yiyecek", "Büyük bir yiyecek ya da iki küçük yiyecek", "Yiyecek ya da oyuncak", "Sıcak su ya da soğuk su"] }
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Mürekkep balıklarının daha iyi bir ödül için bekleyebildiğini",
+            "Mürekkep balıklarının renk değiştirmesini",
+            "Mürekkep balıklarının nasıl avlandığını",
+            "Deniz canlılarının uyku düzenini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Mürekkep balıkları daha iyi yiyecek için ne kadar bekleyebildi?",
+          "secenekler": [
+            "50 ile 130 saniye arasında",
+            "5 ile 10 saniye arasında",
+            "10 ile 20 dakika arasında",
+            "Bir gün boyunca"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Daha uzun bekleyenler başka hangi işte daha başarılıydı?",
+          "secenekler": [
+            "Kural değişince yeniden öğrenmede",
+            "Daha hızlı yüzmede",
+            "Kumda saklanmada",
+            "Daha çok yiyecek bulmada"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre mürekkep balığı nasıl bir canlıdır?",
+          "secenekler": [
+            "Omurgası olmayan bir deniz canlısı",
+            "Bir memeli",
+            "Bir kuş",
+            "Tatlı suda yaşayan bir balık"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kendini tutma ne demektir?",
+          "secenekler": [
+            "Bir ödülü hemen almak yerine daha iyisi için beklemek",
+            "Korkunca saklanmak",
+            "Hiç yemek yememek",
+            "Başkalarının yiyeceğini almamak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Mürekkep balıklarına sunulan iki seçenek neydi?",
+          "secenekler": [
+            "Hemen sıradan bir yiyecek ya da bekleyince daha iyi bir yiyecek",
+            "Büyük bir yiyecek ya da iki küçük yiyecek",
+            "Yiyecek ya da oyuncak",
+            "Sıcak su ya da soğuk su"
+          ]
+        }
       ]
     },
     {
       "id": "oa005",
       "baslik": "Atlar yüz okur",
+      "etiket": "memeli",
       "kaynak": "wathan2016",
+      "pmid": "27995958",
+      "doi": "10.1038/srep38322",
+      "yazar": "Wathan ve ark.",
+      "dergi": "Scientific Reports",
+      "yil": 2016,
       "metin": "İnsanlar birbirinin yüzüne bakarak çok şey anlar: kızgınlık, sevinç ya da ilgi. Peki bu beceri yalnız insanlara ve onlara yakın türlere mi özgü? İngiltere'de bir ekip bu soruyu evcil atlarla sınadı. Atlara, tanımadıkları başka atların yüz fotoğrafları gösterildi. Fotoğraflardaki atlar farklı durumlarda çekilmişti. Kimi rahat ve ilgiliydi, kimi saldırgan. Atlar, rahat ve ilgili görünen atların fotoğraflarına yaklaşmayı daha çok seçti. Saldırgan ifadeli fotoğraftan ise uzak durdular. Ekip atların kalp atışını da ölçtü. Olumlu ve saldırgan ifadeler, kalp atışında farklı değişimlere yol açtı. Atlar bu ifadeleri kendiliğinden, eğitim almadan ayırt etti. Sonuçlar, insandan çok uzak bir soydan gelen atların da yüz ifadelerinden bilgi çıkarabildiğini gösteriyor.",
       "sorular": [
-        { "tur": "ana", "soru": "Metin en çok neyi anlatıyor?", "secenekler": ["Atların başka atların yüz ifadelerini ayırt edebildiğini", "Atların nasıl eğitildiğini", "Atların fotoğrafının nasıl çekildiğini", "Atların ne kadar hızlı koştuğunu"] },
-        { "tur": "ayrinti", "soru": "Fotoğraflardaki atlar kimdi?", "secenekler": ["Tanımadıkları atlar", "Kendi yavruları", "Aynı ahırdaki atlar", "At heykelleri"] },
-        { "tur": "ayrinti", "soru": "Atlar saldırgan ifadeli fotoğrafa ne yaptı?", "secenekler": ["Uzak durdular", "Hemen yaklaştılar", "Önünde uyudular", "Onu ısırdılar"] },
-        { "tur": "ayrinti", "soru": "Ekip atların başka neyini ölçtü?", "secenekler": ["Kalp atışını", "Vücut ısısını", "Koşu hızını", "Kilosunu"] },
-        { "tur": "ayrinti", "soru": "Atlar ifadeleri nasıl ayırt etti?", "secenekler": ["Kendiliğinden, eğitim almadan", "Uzun bir eğitimden sonra", "Yalnız ödül verilince", "Yalnız sahipleri yanındayken"] },
-        { "tur": "ayrinti", "soru": "Araştırma hangi ülkede yapıldı?", "secenekler": ["İngiltere", "İrlanda", "Almanya", "Fransa"] }
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Atların başka atların yüz ifadelerini ayırt edebildiğini",
+            "Atların nasıl eğitildiğini",
+            "Atların fotoğrafının nasıl çekildiğini",
+            "Atların ne kadar hızlı koştuğunu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Fotoğraflardaki atlar kimdi?",
+          "secenekler": [
+            "Tanımadıkları atlar",
+            "Kendi yavruları",
+            "Aynı ahırdaki atlar",
+            "At heykelleri"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Atlar saldırgan ifadeli fotoğrafa ne yaptı?",
+          "secenekler": [
+            "Uzak durdular",
+            "Hemen yaklaştılar",
+            "Önünde uyudular",
+            "Onu ısırdılar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip atların başka neyini ölçtü?",
+          "secenekler": [
+            "Kalp atışını",
+            "Vücut ısısını",
+            "Koşu hızını",
+            "Kilosunu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Atlar ifadeleri nasıl ayırt etti?",
+          "secenekler": [
+            "Kendiliğinden, eğitim almadan",
+            "Uzun bir eğitimden sonra",
+            "Yalnız ödül verilince",
+            "Yalnız sahipleri yanındayken"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırma hangi ülkede yapıldı?",
+          "secenekler": [
+            "İngiltere",
+            "İrlanda",
+            "Almanya",
+            "Fransa"
+          ]
+        }
       ]
     },
     {
       "id": "oa006",
       "baslik": "Yaprakla yarasını saran orangutan",
+      "etiket": "memeli",
       "kaynak": "laumer2024",
+      "pmid": "38698007",
+      "doi": "10.1038/s41598-024-58988-7",
+      "yazar": "Laumer ve ark.",
+      "dergi": "Scientific Reports",
+      "yil": 2024,
       "metin": "Sumatra adasında yaşayan yetişkin bir erkek orangutanın yüzünde bir yara açıldı. Araştırmacılar onu izlemeye devam etti ve şaşırtıcı bir şey gördü. Yaralanmasından üç gün sonra orangutan, ormanda yetişen tırmanıcı bir bitkinin yapraklarını seçerek kopardı. Yaprakları çiğnedi ve çıkan suyu defalarca yarasına sürdü. Son olarak yaranın üzerini çiğnenmiş yapraklarla tamamen kapattı. Bu bitki Güneydoğu Asya'nın tropik ormanlarında yetişiyor. Daha önce bazı hayvanların belli yaprakları yuttuğu ya da tüylerine sürdüğü görülmüştü. Ancak vahşi bir hayvanın yarasını böyle bir bitkiyle etkin biçimde ele aldığı ilk kez bu kadar düzenli biçimde kaydedildi. Araştırmacılar bu davranışın, insanlarda yara bakımının nasıl başladığına dair yeni ipuçları verdiğini düşünüyor.",
       "sorular": [
-        { "tur": "ana", "soru": "Metin en çok neyi anlatıyor?", "secenekler": ["Bir orangutanın yarasını bir bitkiyle ele almasını", "Orangutanların nasıl yuva yaptığını", "Sumatra'daki ormanların büyüklüğünü", "Orangutanların ne kadar yaşadığını"] },
-        { "tur": "ayrinti", "soru": "Orangutan yaprakları yaralanmasından kaç gün sonra kullandı?", "secenekler": ["Üç", "Bir", "Yedi", "On"] },
-        { "tur": "ayrinti", "soru": "Orangutan yaprakları ne yaptı?", "secenekler": ["Çiğneyip suyunu yarasına sürdü", "Yuvasına serdi", "Yavrularına verdi", "Suya attı"] },
-        { "tur": "ayrinti", "soru": "Orangutan en son ne yaptı?", "secenekler": ["Yaranın üzerini çiğnenmiş yapraklarla kapattı", "Yarayı suyla yıkadı", "Yaprakları toprağa gömdü", "Başka bir ağaca geçti"] },
-        { "tur": "ayrinti", "soru": "Orangutanın yarası neredeydi?", "secenekler": ["Yüzünde", "Kolunda", "Ayağında", "Sırtında"] },
-        { "tur": "ayrinti", "soru": "Orangutan hangi adada yaşıyordu?", "secenekler": ["Sumatra", "Borneo", "Cava", "Bali"] }
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bir orangutanın yarasını bir bitkiyle ele almasını",
+            "Orangutanların nasıl yuva yaptığını",
+            "Sumatra'daki ormanların büyüklüğünü",
+            "Orangutanların ne kadar yaşadığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Orangutan yaprakları yaralanmasından kaç gün sonra kullandı?",
+          "secenekler": [
+            "Üç",
+            "Bir",
+            "Yedi",
+            "On"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Orangutan yaprakları ne yaptı?",
+          "secenekler": [
+            "Çiğneyip suyunu yarasına sürdü",
+            "Yuvasına serdi",
+            "Yavrularına verdi",
+            "Suya attı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Orangutan en son ne yaptı?",
+          "secenekler": [
+            "Yaranın üzerini çiğnenmiş yapraklarla kapattı",
+            "Yarayı suyla yıkadı",
+            "Yaprakları toprağa gömdü",
+            "Başka bir ağaca geçti"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Orangutanın yarası neredeydi?",
+          "secenekler": [
+            "Yüzünde",
+            "Kolunda",
+            "Ayağında",
+            "Sırtında"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Orangutan hangi adada yaşıyordu?",
+          "secenekler": [
+            "Sumatra",
+            "Borneo",
+            "Cava",
+            "Bali"
+          ]
+        }
       ]
     },
     {
       "id": "oa007",
       "baslik": "Keçiler gülen yüzü seçiyor",
+      "etiket": "memeli",
       "kaynak": "nawroth2018",
+      "pmid": "30225038",
+      "doi": "10.1098/rsos.180491",
+      "yazar": "Nawroth ve ark.",
+      "dergi": "Royal Society Open Science",
+      "yil": 2018,
       "metin": "Köpeklerin ve atların insan yüz ifadelerine duyarlı olduğu biliniyor. Bu hayvanlar insanla yakın çalışmak için evcilleştirildi. Peki daha çok süt ve et için yetiştirilen keçiler de insan yüzünü okuyabilir mi? Bir araştırma ekibi bunu sınamak için keçilere aynı anda iki fotoğraf gösterdi. İki fotoğraf da tanımadıkları aynı kişiye aitti. Birinde kişi gülüyor, ötekinde kızgın bakıyordu. Fotoğraflar duvara birbirinden 1,3 metre uzakta asıldı. Keçiler serbest bırakıldığında önce gülen yüze gidip onu incelemeyi seçti. Bu tercih, gülen yüz sağ taraftayken belirgindi. Gülen yüz sol taraftayken ise bir tercih görülmedi. Sonuç, insanla çalışmak için değil üretim için evcilleştirilen hayvanların da insan duygularını ayırt edebildiğini gösteriyor.",
       "sorular": [
-        { "tur": "ana", "soru": "Metin en çok neyi anlatıyor?", "secenekler": ["Keçilerin gülen insan yüzünü tercih ettiğini", "Keçilerin nasıl beslendiğini", "Keçilerin birbirini nasıl tanıdığını", "Hayvan fotoğrafı çekmenin kurallarını"] },
-        { "tur": "ayrinti", "soru": "Fotoğraflardaki kişi kimdi?", "secenekler": ["Keçilerin tanımadığı aynı kişi", "Keçilerin bakıcısı", "İki farklı çocuk", "Bir çiftçi ailesi"] },
-        { "tur": "ayrinti", "soru": "Fotoğraflar birbirinden ne kadar uzağa asıldı?", "secenekler": ["1,3 metre", "30 santimetre", "4 metre", "10 metre"] },
-        { "tur": "ayrinti", "soru": "Keçilerin tercihi ne zaman belirgindi?", "secenekler": ["Gülen yüz sağ taraftayken", "Gülen yüz sol taraftayken", "Fotoğraflar yan yana dururken", "Keçiler aç olduğunda"] },
-        { "tur": "ayrinti", "soru": "Fotoğraflarda kişinin hangi ifadeleri vardı?", "secenekler": ["Gülen ve kızgın", "Üzgün ve şaşkın", "Uykulu ve gülen", "Korkmuş ve kızgın"] },
-        { "tur": "ayrinti", "soru": "Metne göre keçiler daha çok ne için yetiştirilir?", "secenekler": ["Süt ve et için", "Bekçilik için", "Yük taşımak için", "Yarışlar için"] }
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Keçilerin gülen insan yüzünü tercih ettiğini",
+            "Keçilerin nasıl beslendiğini",
+            "Keçilerin birbirini nasıl tanıdığını",
+            "Hayvan fotoğrafı çekmenin kurallarını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Fotoğraflardaki kişi kimdi?",
+          "secenekler": [
+            "Keçilerin tanımadığı aynı kişi",
+            "Keçilerin bakıcısı",
+            "İki farklı çocuk",
+            "Bir çiftçi ailesi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Fotoğraflar birbirinden ne kadar uzağa asıldı?",
+          "secenekler": [
+            "1,3 metre",
+            "30 santimetre",
+            "4 metre",
+            "10 metre"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Keçilerin tercihi ne zaman belirgindi?",
+          "secenekler": [
+            "Gülen yüz sağ taraftayken",
+            "Gülen yüz sol taraftayken",
+            "Fotoğraflar yan yana dururken",
+            "Keçiler aç olduğunda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Fotoğraflarda kişinin hangi ifadeleri vardı?",
+          "secenekler": [
+            "Gülen ve kızgın",
+            "Üzgün ve şaşkın",
+            "Uykulu ve gülen",
+            "Korkmuş ve kızgın"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre keçiler daha çok ne için yetiştirilir?",
+          "secenekler": [
+            "Süt ve et için",
+            "Bekçilik için",
+            "Yük taşımak için",
+            "Yarışlar için"
+          ]
+        }
       ]
     },
     {
       "id": "oa008",
       "baslik": "Sözcük tanıyan güvercinler",
+      "etiket": "kus",
       "kaynak": "scarf2016",
+      "pmid": "27638211",
+      "doi": "10.1073/pnas.1607870113",
+      "yazar": "Scarf ve ark.",
+      "dergi": "PNAS",
+      "yil": 2016,
       "metin": "Okumayı öğrenmenin bir parçası, harflerin hangi seslere karşılık geldiğini bilmektir. Öteki parçası ise sözcüklerin yazılı biçimini görünce tanımaktır. Bazı bilim insanları bu ikinci becerinin, günlük nesneleri tanıyan görme yeteneğinden geliştiğini düşünüyor. Yeni Zelanda ve Almanya'dan bir ekip, bu yeteneğin insandan çok farklı canlılarda da olup olmadığını merak etti. Güvercinlere, gerçek sözcükleri anlamsız harf dizilerinden ayırmayı öğrettiler. Güvercinler zamanla daha önce hiç görmedikleri sözcükleri de doğru tanımaya başladı. Hangi harflerin sık sık yan yana geldiğine de duyarlıydılar. İnsanla yolları 300 milyon yıldan uzun süre önce ayrılan güvercinlerin bunu yapabilmesi şaşırtıcı. Sonuç, sözcüğün biçimini tanımanın yalnız insanın görme düzenine özgü olmadığını gösteriyor.",
       "sorular": [
-        { "tur": "ana", "soru": "Metin en çok neyi anlatıyor?", "secenekler": ["Güvercinlerin gerçek sözcükleri anlamsız harf dizilerinden ayırabildiğini", "Güvercinlerin uzak yerlerden yuvalarına nasıl döndüğünü", "Alfabedeki harflerin tarihini", "Güvercinlerin konuşmayı öğrendiğini"] },
-        { "tur": "ayrinti", "soru": "Güvercinler zamanla neyi başardı?", "secenekler": ["Daha önce hiç görmedikleri sözcükleri tanımayı", "Sözcükleri sesli okumayı", "Harfleri gagalarıyla yazmayı", "Sözcüklerin anlamını göstermeyi"] },
-        { "tur": "ayrinti", "soru": "Ekip hangi ülkelerdendi?", "secenekler": ["Yeni Zelanda ve Almanya", "Avustralya ve Fransa", "Kanada ve İspanya", "İngiltere ve İrlanda"] },
-        { "tur": "ayrinti", "soru": "Güvercinlerle insanın yolları ne zaman ayrıldı?", "secenekler": ["300 milyon yıldan uzun süre önce", "3 milyon yıl önce", "30 bin yıl önce", "3 bin yıl önce"] },
-        { "tur": "ayrinti", "soru": "Güvercinler neye duyarlıydı?", "secenekler": ["Hangi harflerin sık sık yan yana geldiğine", "Harflerin rengine", "Sözcüklerin söyleniş sesine", "Sözcüklerin yazıldığı kâğıda"] },
-        { "tur": "ayrinti", "soru": "Metne göre okumayı öğrenmenin iki parçası nedir?", "secenekler": ["Harflerin seslerini bilmek ve sözcüklerin yazılı biçimini tanımak", "Hızlı konuşmak ve yüksek sesle okumak", "Harfleri yazmak ve sözcükleri ezberlemek", "Resimlere bakmak ve hikâye anlatmak"] }
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Güvercinlerin gerçek sözcükleri anlamsız harf dizilerinden ayırabildiğini",
+            "Güvercinlerin uzak yerlerden yuvalarına nasıl döndüğünü",
+            "Alfabedeki harflerin tarihini",
+            "Güvercinlerin konuşmayı öğrendiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Güvercinler zamanla neyi başardı?",
+          "secenekler": [
+            "Daha önce hiç görmedikleri sözcükleri tanımayı",
+            "Sözcükleri sesli okumayı",
+            "Harfleri gagalarıyla yazmayı",
+            "Sözcüklerin anlamını göstermeyi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip hangi ülkelerdendi?",
+          "secenekler": [
+            "Yeni Zelanda ve Almanya",
+            "Avustralya ve Fransa",
+            "Kanada ve İspanya",
+            "İngiltere ve İrlanda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Güvercinlerle insanın yolları ne zaman ayrıldı?",
+          "secenekler": [
+            "300 milyon yıldan uzun süre önce",
+            "3 milyon yıl önce",
+            "30 bin yıl önce",
+            "3 bin yıl önce"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Güvercinler neye duyarlıydı?",
+          "secenekler": [
+            "Hangi harflerin sık sık yan yana geldiğine",
+            "Harflerin rengine",
+            "Sözcüklerin söyleniş sesine",
+            "Sözcüklerin yazıldığı kâğıda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre okumayı öğrenmenin iki parçası nedir?",
+          "secenekler": [
+            "Harflerin seslerini bilmek ve sözcüklerin yazılı biçimini tanımak",
+            "Hızlı konuşmak ve yüksek sesle okumak",
+            "Harfleri yazmak ve sözcükleri ezberlemek",
+            "Resimlere bakmak ve hikâye anlatmak"
+          ]
+        }
       ]
     },
     {
       "id": "oa009",
       "baslik": "İnsan yüzü ayırt eden balık",
+      "etiket": "deniz",
       "kaynak": "newport2016",
+      "pmid": "27272551",
+      "doi": "10.1038/srep27523",
+      "yazar": "Newport ve ark.",
+      "dergi": "Scientific Reports",
+      "yil": 2016,
       "metin": "Okçu balıkları, suyun üstündeki böcekleri ağızlarından fışkırttıkları su ile vurup düşürerek avlanır. Bu iş keskin bir göz ister. Avustralya'daki bir ekip, bu balıkların insan yüzlerini ayırt etmeyi öğrenip öğrenemeyeceğini merak etti. Balıklar doğada insan yüzüyle neredeyse hiç karşılaşmaz, yani böyle bir beceriye ihtiyaçları yoktur. Ekip balıklara her seferinde iki yüz resmi gösterdi ve bunlardan doğru olanı seçmeyi öğretti. İlk deneyde balıklar 44 farklı yüz resmiyle başarılı oldu. Araştırmacılar ikinci deneyde yüzlerin rengini, baş biçimini ve parlaklığını eşitledi. Balıklar bu kez 18 yüzle de yüksek doğrulukta başarılı oldu. Bu, insan yüzünü tanımak için özel bir yapısı olmayan bir canlının bile bunu öğrenebildiğini gösteriyor.",
       "sorular": [
-        { "tur": "ana", "soru": "Metin en çok neyi anlatıyor?", "secenekler": ["Okçu balıklarının insan yüzlerini ayırt etmeyi öğrenebildiğini", "Okçu balıklarının nerede yaşadığını", "Balıkların renkleri nasıl gördüğünü", "Akvaryum bakımının inceliklerini"] },
-        { "tur": "ayrinti", "soru": "Okçu balıkları nasıl avlanır?", "secenekler": ["Ağızlarından su fışkırtarak", "Ağ örerek", "Kumda saklanıp bekleyerek", "Sürü hâlinde kovalayarak"] },
-        { "tur": "ayrinti", "soru": "İlk deneyde kaç farklı yüz resmi kullanıldı?", "secenekler": ["44", "18", "4", "100"] },
-        { "tur": "ayrinti", "soru": "İkinci deneyde yüzlerin nesi eşitlendi?", "secenekler": ["Rengi, baş biçimi ve parlaklığı", "Göz rengi ve saç biçimi", "Yaşı ve boyu", "Sesi ve kokusu"] },
-        { "tur": "ayrinti", "soru": "Ekip hangi ülkedeydi?", "secenekler": ["Avustralya", "Yeni Zelanda", "Japonya", "Kanada"] },
-        { "tur": "ayrinti", "soru": "Metne göre balıkların neden böyle bir beceriye ihtiyacı yoktur?", "secenekler": ["Doğada insan yüzüyle neredeyse hiç karşılaşmazlar", "Gözleri çok zayıftır", "Hep karanlık sularda yaşarlar", "Avlarını yalnız kokuyla bulurlar"] }
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Okçu balıklarının insan yüzlerini ayırt etmeyi öğrenebildiğini",
+            "Okçu balıklarının nerede yaşadığını",
+            "Balıkların renkleri nasıl gördüğünü",
+            "Akvaryum bakımının inceliklerini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Okçu balıkları nasıl avlanır?",
+          "secenekler": [
+            "Ağızlarından su fışkırtarak",
+            "Ağ örerek",
+            "Kumda saklanıp bekleyerek",
+            "Sürü hâlinde kovalayarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İlk deneyde kaç farklı yüz resmi kullanıldı?",
+          "secenekler": [
+            "44",
+            "18",
+            "4",
+            "100"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İkinci deneyde yüzlerin nesi eşitlendi?",
+          "secenekler": [
+            "Rengi, baş biçimi ve parlaklığı",
+            "Göz rengi ve saç biçimi",
+            "Yaşı ve boyu",
+            "Sesi ve kokusu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip hangi ülkedeydi?",
+          "secenekler": [
+            "Avustralya",
+            "Yeni Zelanda",
+            "Japonya",
+            "Kanada"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre balıkların neden böyle bir beceriye ihtiyacı yoktur?",
+          "secenekler": [
+            "Doğada insan yüzüyle neredeyse hiç karşılaşmazlar",
+            "Gözleri çok zayıftır",
+            "Hep karanlık sularda yaşarlar",
+            "Avlarını yalnız kokuyla bulurlar"
+          ]
+        }
       ]
     },
     {
       "id": "oa010",
       "baslik": "Arkadaşının ıslığını çalan yunus",
+      "etiket": "deniz",
       "kaynak": "king2013",
+      "pmid": "23427174",
+      "doi": "10.1098/rspb.2013.0053",
+      "yazar": "King ve ark.",
+      "dergi": "Proceedings of the Royal Society B",
+      "yil": 2013,
       "metin": "Şişe burunlu yunusların her birinin kendine özgü bir imza ıslığı vardır. Bilim insanları yunusların bazen başka bir yunusun ıslığını kopyaladığını fark etti. Peki bunu neden yapıyorlar? Bir araştırma ekibi bu kopyaların ne zaman ve kimler arasında görüldüğünü inceledi. Kopyalar neredeyse yalnız yakın yunuslar arasında görüldü: anne ile yavrusu ya da birlikte dolaşan erkekler gibi. Üstelik kopyalar çoğunlukla birbirlerinden ayrı düştüklerinde ortaya çıktı. Kopyalamanın ardından hiç kavga görülmedi. Kopyalayan yunus, ıslığın bazı özelliklerini hep biraz değiştiriyordu. Böylece kopya, asıl ıslıktan ayırt edilebiliyordu. Araştırmacılar bu kullanımı insan dilindeki bir kullanıma benzetiyor. İkisinde de amaç, karşıdakiyle kurulan bağı sürdürmek gibi görünüyor.",
       "sorular": [
-        { "tur": "ana", "soru": "Metin en çok neyi anlatıyor?", "secenekler": ["Yunusların yakınlarının ıslığını kopyalamasını", "Yunusların nasıl uyuduğunu", "Yunusların avlanma yöntemini", "Yunusların uzun göç yollarını"] },
-        { "tur": "ayrinti", "soru": "Kopyalar en çok kimler arasında görüldü?", "secenekler": ["Anne ile yavrusu gibi yakın yunuslar arasında", "Hiç tanışmayan yunuslar arasında", "Rakip gruplar arasında", "Yunuslarla balinalar arasında"] },
-        { "tur": "ayrinti", "soru": "Kopyalar çoğunlukla ne zaman ortaya çıktı?", "secenekler": ["Yunuslar birbirinden ayrı düştüğünde", "Avlanırken", "Uyumadan önce", "Yemek paylaşırken"] },
-        { "tur": "ayrinti", "soru": "Kopyalamanın ardından kavga çıktı mı?", "secenekler": ["Hiç kavga görülmedi", "Her seferinde kavga çıktı", "Yalnız erkekler arasında kavga çıktı", "Yalnız gece kavga çıktı"] },
-        { "tur": "ayrinti", "soru": "Kopya asıl ıslıktan nasıl ayırt edilebiliyordu?", "secenekler": ["Kopyalayan yunus ıslığın bazı özelliklerini hep biraz değiştiriyordu", "Kopya hep daha yüksek sesliydi", "Kopya yalnız gece çalınıyordu", "Kopya hep iki kez tekrarlanıyordu"] },
-        { "tur": "ayrinti", "soru": "Araştırmacılar bu davranışı neye benzetiyor?", "secenekler": ["İnsan dilinde bağı sürdürmek için yapılan bir kullanıma", "Kuşların kavga ötüşüne", "Bir oyuna", "Bir uyarı sesine"] }
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Yunusların yakınlarının ıslığını kopyalamasını",
+            "Yunusların nasıl uyuduğunu",
+            "Yunusların avlanma yöntemini",
+            "Yunusların uzun göç yollarını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kopyalar en çok kimler arasında görüldü?",
+          "secenekler": [
+            "Anne ile yavrusu gibi yakın yunuslar arasında",
+            "Hiç tanışmayan yunuslar arasında",
+            "Rakip gruplar arasında",
+            "Yunuslarla balinalar arasında"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kopyalar çoğunlukla ne zaman ortaya çıktı?",
+          "secenekler": [
+            "Yunuslar birbirinden ayrı düştüğünde",
+            "Avlanırken",
+            "Uyumadan önce",
+            "Yemek paylaşırken"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kopyalamanın ardından kavga çıktı mı?",
+          "secenekler": [
+            "Hiç kavga görülmedi",
+            "Her seferinde kavga çıktı",
+            "Yalnız erkekler arasında kavga çıktı",
+            "Yalnız gece kavga çıktı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kopya asıl ıslıktan nasıl ayırt edilebiliyordu?",
+          "secenekler": [
+            "Kopyalayan yunus ıslığın bazı özelliklerini hep biraz değiştiriyordu",
+            "Kopya hep daha yüksek sesliydi",
+            "Kopya yalnız gece çalınıyordu",
+            "Kopya hep iki kez tekrarlanıyordu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar bu davranışı neye benzetiyor?",
+          "secenekler": [
+            "İnsan dilinde bağı sürdürmek için yapılan bir kullanıma",
+            "Kuşların kavga ötüşüne",
+            "Bir oyuna",
+            "Bir uyarı sesine"
+          ]
+        }
       ]
     }
-  ]
+  ],
+  "etiketler": {
+    "bocek": "Böcekler",
+    "kus": "Kuşlar",
+    "memeli": "Memeliler",
+    "deniz": "Deniz canlıları",
+    "bitki": "Bitkiler",
+    "insan": "İnsan",
+    "mikro": "Mikroplar",
+    "surungen": "Sürüngenler ve kurbağalar"
+  }
 }
