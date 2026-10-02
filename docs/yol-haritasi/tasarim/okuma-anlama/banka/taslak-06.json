@@ -272,7 +272,7 @@
           "secenekler": [
             "Hece başına düşen bilgiyi ve konuşma hızını",
             "Konuşanların sayısını ve dilin ne kadar eski olduğunu",
-            "Ses yüksekliğini ve konuşma hızını",
+            "Ses yüksekliğini ve vurgunun yerini",
             "Harf sayısını ve cümle uzunluğunu"
           ]
         },
@@ -352,7 +352,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip bu sözün ne olduğunu gösterdi?",
+          "soru": "Ekip bu söz hakkında neyi gösterdi?",
           "secenekler": [
             "Öğrenilmesi gereken gerçek bir sözcük olduğunu",
             "Bir homurtu olduğunu",
@@ -530,7 +530,7 @@
       "yazar": "Scialdone ve ark.",
       "dergi": "eLife",
       "yil": 2013,
-      "metin": "Bitkiler gündüz ışıkla ürettikleri besinin bir kısmını yapraklarında nişasta olarak biriktirir. Gece bu birikimi kullanarak yaşamlarını sürdürür ve büyürler. Bir ekip, bir bitkinin yapraklarındaki nişastanın gece boyunca nasıl azaldığını inceledi. Nişasta, gece boyunca aşağı yukarı düzenli bir hızla tükeniyordu. Karanlık erken ya da geç bastığında, birikmiş nişasta az ya da çok olduğunda bitki bu hızı ayarlıyordu. Böylece birikim neredeyse tam şafak sökerken bitiyordu. Bunun için bitkinin, eldeki nişastayı şafağa kalan süreye bölmesi gerekir. Ekip, bu bölme işini kimyasal tepkimelerle yapabilecek iki model önerdi. Modellerin tahminleri, gece bir süre ışık verilen bitkilerde ve nişastayı parçalama yolu değişmiş bitkilerde başarıyla sınandı.",
+      "metin": "Birçok bitki gündüz ışıkla ürettiği besinin bir kısmını yapraklarında nişasta olarak biriktirir. Gece bu birikimi kullanarak yaşamını sürdürür ve büyür. Bir ekip, bir bitkinin yapraklarındaki nişastanın gece boyunca nasıl azaldığını inceledi. Nişasta, gece boyunca aşağı yukarı düzenli bir hızla tükeniyordu. Karanlık erken ya da geç bastığında, birikmiş nişasta az ya da çok olduğunda bitki bu hızı ayarlıyordu. Böylece birikim neredeyse tam şafak sökerken bitiyordu. Bunun için bitkinin, eldeki nişastayı şafağa kalan süreye bölmesi gerekir. Ekip, bu bölme işini kimyasal tepkimelerle yapabilecek iki model önerdi. Modellerin tahminleri, gece bir süre ışık verilen bitkilerde ve nişastayı parçalama yolu değişmiş bitkilerde başarıyla sınandı.",
       "sorular": [
         {
           "tur": "ana",
@@ -544,7 +544,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bitkiler nişastayı nerede biriktiriyor?",
+          "soru": "Metne göre bitki nişastayı nerede biriktiriyor?",
           "secenekler": [
             "Yapraklarında",
             "Köklerinde",

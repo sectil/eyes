@@ -1,5 +1,20 @@
 # Bilimsel doğrulama kayıtları
 
+## taslak-06
+
+PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor; hepsi "Journal Article" (yorum, derleme, düzeltme yok). Uzunluk oranı sonrası: doğru seçenek en uzun 13/60 (%22).
+
+- oa051 | tamam | değişiklik yok
+- oa052 | tamam | değişiklik yok
+- oa053 | tamam | değişiklik yok
+- oa054 | tamam | iki özellik sorusunda yarısı doğru olan "ses yüksekliği ve konuşma hızı" seçeneği (konuşma hızı doğru cevapta da var) "ses yüksekliği ve vurgunun yeri" yapıldı
+- oa055 | tamam | bozuk soru kökü "Ekip bu sözün ne olduğunu gösterdi?" → "Ekip bu söz hakkında neyi gösterdi?"
+- oa056 | tamam ("su yüzeyinde yaşayan bazı böcekler" genel ad; özette water striders) | değişiklik yok
+- oa057 | tamam | değişiklik yok
+- oa058 | düzeltildi: özet yalnız Arabidopsis yapraklarından söz ettiği için "Bitkiler ... biriktirir" genellemesi "Birçok bitki ... biriktirir" yapıldı | ilgili soru kökü "Metne göre bitki nişastayı nerede biriktiriyor?" yapıldı
+- oa059 | tamam | değişiklik yok
+- oa060 | tamam | değişiklik yok
+
 ## taslak-05
 
 PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor. Uzunluk oranı sonrası: doğru seçenek en uzun 16/60 (%27).
