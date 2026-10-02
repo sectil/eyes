@@ -117,3 +117,22 @@ satır. Öteki bulgular:
 - Dinleme bitince onay işareti yok.
 
 Durum: sahibin seçtiği tasarım iki turda geçmedi. Sahibe soruldu.
+
+## Sahip kararı: bir tur daha · beş yeni kişi
+Düzeltmeler:
+- Dinlerken alan ipucu "Söylediğin burada".
+- Alanla düğme arasında 14 px.
+- Dinleme bitince "✓ Duydum" ve "Doğruysa Gönder'e bas.".
+
+| yaz-mic | dinle0 | dinle1 | dinle2 | a | b | c |
+|---|---|---|---|---|---|---|
+| **4/5 geçti** | **4/5 geçti** | **4/5 geçti** | **4/5 geçti** | **5/5** | **5/5** | 4/5, biri "yanlışsa ne yapacağımı tam bilmiyorum" dedi |
+
+Her ekranda tek H aynı kişiden geldi: "ms" yazısını anlamıyor, koyu zeminde soluk yazıyı zor seçiyor.
+
+**Sonuç: Yakala Yaz'ın mikrofonlu ekranları da 5 sn kapısından geçti.** Kalan iş sahipte, cihazda:
+- Ses seviyesi çubukları gerçekten oynuyor mu?
+- Uçak modunda sesle cevap çalışıyor mu?
+- iOS izin penceresinin kendi cümlesi İ3 ile çelişiyor mu?
+
+Son madde VARSAYIM: iOS'un konuşma izni penceresinde Apple'ın kendi metni de çıkabilir; bakmadım.

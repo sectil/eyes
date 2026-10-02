@@ -60,8 +60,8 @@ değil", "başlangıç"; başkasıyla kıyas yok; puan yok; emoji yok; kelime/da
 | R9 | Bitti | S · kapı: gerçek ekran |
 | R10 | Kodda kullanılan (kod kapısı, sahip yetkisi 2026-10-02; `kapi/kod-y2.md`): büyük sayı altında "Bu sürede iki kelimeyi yaklaşık dört denemeden üçünde yakalıyorsun."; başlangıç döneminde çip "Başlangıç · {k}/8 gün" ve "İlk 8 günde başlangıcın ölçülüyor; sonra değişimi Gelişim'de görürsün."; grafik "Son {n} tur", eksen "↑ Hızlı / ↓ Yavaş"; R3, R5'in çubuk açıklaması ve R7 kullanılmaz | K S |
 | P1 | Profil satırı (İ4'ün "Profil'den"i): başlık "Yakala Yaz", anahtar "Yazmak yerine sesle söyle", alt satır İ3 ("Ses telefonunda yazıya çevrilir. Kaydedilmez, hiçbir yere gönderilmez.") | K S (metin kapısı tur 2: 5/5; sahip yetkisi) |
-| L1 | Dinlerken kart: "İki kelimeyi söyle." / ilk kelimeden sonra "İkinci kelimeyi söyle." / dinleme bitince "Gerekirse düzelt, sonra Gönder'e bas." | S (sahip yetkisi; görev testi a–c 5/5, `kapi/kod-y5.md`) |
-| L2 | Dinlerken alanın içinde "● Dinliyorum"; düğme "■ Durdur" (sahip kararı 2026-10-02) | S · kapı: gerçek ekran |
+| L1 | Dinlerken kart: "● Dinliyorum" ve ses çubukları; altında "İki kelimeyi söyle." / ilk kelimeden sonra "İkinci kelimeyi söyle."; dinleme bitince "✓ Duydum" ve "Doğruysa Gönder'e bas." | K S (kod kapısı 4/5, `kapi/kod-y5.md`) |
+| L2 | Düğme boşta "Söyle", dinlerken "■ Durdur"; dinlerken alan ipucu "Söylediğin burada" (sahip kararları 2026-10-02) | K S |
 | V1 | Sürüm notu: "Yakala Yaz geldi: iki kelime bir an görünür, aklında tutup yazarsın. Doğru yazdıkça kelimeler daha kısa süre görünür, yanlışta daha uzun." / "Destekleyen telefonlarda kelimeleri sesle de söyleyebilirsin. Ses telefonunda yazıya çevrilir, hiçbir yere gönderilmez." | K S (metin kapısı: 5/5 ve 4/5) |
 
 ## Mikrofon izni (İ) — ekran `sesizin` (rıza sayfası: anlaşılırlık ölçütü de aranır)
