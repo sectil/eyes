@@ -17,7 +17,7 @@
   --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
   --accent: #0b7480; --accent-ink: #ffffff; --accent-soft: rgba(17,169,184,.12); --iris-1: #11a9b8; --iris-2: #2f6bea;
   --accent-grad: linear-gradient(90deg, #0b7480, #2458cc); --accent-glow: 0 8px 22px -10px rgba(36,88,204,.55);
-  --lens: #f5a623; --lens-text: #9a5b06; --lens-soft: rgba(245,166,35,.16);
+  --lens: #f5a623; --lens-text: #9a5b06; --lens-soft: rgba(245,166,35,.16); --wrong: #d97706;
   --ok: #13704b; --ok-bg: rgba(31,169,116,.13); --danger: #b91c1c; --danger-bg: rgba(220,38,38,.1);
   --shadow: 0 1px 2px rgba(11,18,25,.04), 0 8px 24px rgba(11,18,25,.05);
   --pupil: #081018; --track: rgba(91,105,118,.16);
@@ -27,7 +27,7 @@
   --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
   --accent: #19c2d1; --accent-ink: #041017; --accent-soft: rgba(25,194,209,.14); --iris-1: #19c2d1; --iris-2: #3e7bfa;
   --accent-grad: linear-gradient(90deg, #19c2d1, #3e7bfa); --accent-glow: 0 8px 24px -8px rgba(25,194,209,.55);
-  --lens: #ffb13b; --lens-text: #ffb13b; --lens-soft: rgba(255,177,59,.14);
+  --lens: #ffb13b; --lens-text: #ffb13b; --lens-soft: rgba(255,177,59,.14); --wrong: #ffb13b;
   --ok: #35d39a; --ok-bg: rgba(53,211,154,.12); --danger: #fca5a5; --danger-bg: rgba(248,113,113,.14);
   --shadow: none; --pupil: #03070b; --track: rgba(185,196,205,.12);
   color-scheme: dark;
@@ -108,6 +108,7 @@ h2.q { font-family: var(--font-display); font-weight: 600; font-size: 25px; line
 .anl span { font-size: 15px; font-weight: 650; padding: 7px 14px; border-radius: 99px; }
 .anl span.ok { color: var(--ok); background: var(--ok-bg); }
 .anl span.lo { color: var(--lens-text); background: var(--lens-soft); }
+.anl span.lo em.dim { font-style: normal; font-weight: 500; opacity: .72; }
 .verd { margin: 16px 20px 0; display: flex; gap: 12px; align-items: flex-start; }
 .verd .dot { flex: none; width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 50% 50%, var(--pupil) 0 26%, transparent 27%), conic-gradient(from 20deg, var(--iris-1), var(--iris-2), var(--iris-1)); margin-top: 1px; }
 .verd p { margin: 0; font-size: 17px; line-height: 1.4; font-weight: 500; text-wrap: pretty; }
@@ -132,7 +133,7 @@ h2.tt, h2.q, .opt > span, .row .v, .row .k, .lead, .verd p, .today strong { text
 .qwrap { justify-content: center; }
 .qwrap .opts { padding-top: 20px; }
 .qhead { display: grid; place-items: center; margin: 0 0 22px; }
-.qhead .qr { width: 132px; height: 132px; }
+.qhead .qr { width: 150px; height: 150px; }
 h2.q { text-align: center; }
 .bar.q { justify-content: flex-start; gap: 14px; }
 .bar.q .dots { flex: 1; } .bar.q .dots i { flex: 1; width: auto; }
@@ -145,7 +146,9 @@ h2.q { text-align: center; }
   .verd p { font-size: 15px; }
   h2.q { font-size: 21px; }
   .qwrap .opts { padding-top: 12px; }
-  .qhead { margin: -10px 0 0; } .qhead .qr { width: 60px; height: 60px; }
+  .qtop { display: flex; align-items: center; gap: 14px; }
+  .qhead { margin: 0; flex: none; } .qhead .qr { width: 96px; height: 96px; }
+  .qtop h2.q { text-align: left; font-size: 18.5px; }
   .opt .ot small.okline { display: inline; margin: 0 0 0 6px; }
   h2.q { font-size: 19.5px; }
   .qwrap .opts { padding-top: 10px; }
@@ -250,10 +253,10 @@ function qring(done, cur) {
   let out = ''
   for (let i = 0; i < 4; i++) {
     if (i < done) out += arc(i, 'url(#g3)', 10)
-    else if (i === cur) out += arc(i, 'url(#g3)', 11) + arc(i, 'var(--bg)', 5.5)
+    else if (i === cur) out += `<g filter="url(#glow)">${arc(i, 'var(--iris-1)', 10)}</g>`.replace('stroke="var(--iris-1)"', 'stroke="var(--iris-1)" stroke-opacity=".38"')
     else out += arc(i, 'var(--track)', 10)
   }
-  return `<svg class="qr" viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--iris-1)"/><stop offset="1" stop-color="var(--iris-2)"/></linearGradient></defs>${out}
+  return `<svg class="qr" viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--iris-1)"/><stop offset="1" stop-color="var(--iris-2)"/></linearGradient><filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>${out}
     <text x="60" y="61" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-weight="650" fill="var(--ink)"><tspan font-size="32">${cur + 1}</tspan><tspan font-size="20" fill="var(--ink-3)" dx="1">/4</tspan></text></svg>`
 }
 function soru() {
@@ -261,7 +264,7 @@ function soru() {
   const order = [1, 0, 3, 2]
   return `<div class="screen">
     <div class="bar"><span class="ib">${X}</span><span class="mid"></span><span style="width:40px"></span></div>
-    <div class="qwrap"><div class="qhead">${qring(1, 1)}</div><h2 class="q">Metin en çok neyi anlatıyor?</h2>
+    <div class="qwrap"><div class="qtop"><div class="qhead">${qring(1, 1)}</div><h2 class="q">Metin en çok neyi anlatıyor?</h2></div>
     <div class="opts">${order.map((i) => i === 0 ? `<div class="opt right"><span class="r">${CHK}</span><span class="ot">${o[i]}<small class="okline">Doğru</small></span></div>` : `<div class="opt"><span class="r"></span><span>${o[i]}</span></div>`).join('')}</div></div>
     <div class="spacer" style="height:112px"></div>
     <div class="dock"><div class="btn">Sonraki soru</div></div>
@@ -273,9 +276,9 @@ function ring(k) {
   let out = ''
   for (let i = 0; i < 4; i++) {
     const on = i < k
-    out += `<circle cx="132" cy="132" r="${r}" fill="none" stroke="${on ? 'url(#g2)' : 'var(--lens)'}" opacity="${on ? 1 : .55}" stroke-width="14" stroke-linecap="round" stroke-dasharray="${seg.toFixed(1)} ${(c - seg).toFixed(1)}" stroke-dashoffset="${(-(i * c / 4) - gap / 2).toFixed(1)}" transform="rotate(-90 132 132)"/>`
+    out += `<circle cx="132" cy="132" r="${r}" fill="none" stroke="${on ? 'url(#g2)' : 'var(--wrong)'}" opacity="1" stroke-width="14" stroke-linecap="round" stroke-dasharray="${seg.toFixed(1)} ${(c - seg).toFixed(1)}" stroke-dashoffset="${(-(i * c / 4) - gap / 2).toFixed(1)}" transform="rotate(-90 132 132)"/>`
     const a = (-90 + i * 90 + 45) * Math.PI / 180, x = 132 + r * Math.cos(a), y = 132 + r * Math.sin(a)
-    out += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="13" fill="${on ? 'var(--ok)' : 'var(--lens)'}" stroke="var(--bg)" stroke-width="3"/>`
+    out += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="13" fill="${on ? 'var(--iris-1)' : 'var(--wrong)'}" stroke="var(--bg)" stroke-width="3"/>`
     out += on ? `<path d="M${(x - 5).toFixed(1)} ${(y + .5).toFixed(1)} l3.5 3.5 l6.5 -7" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`
               : `<path d="M${(x - 4).toFixed(1)} ${(y - 4).toFixed(1)} l8 8 M${(x + 4).toFixed(1)} ${(y - 4).toFixed(1)} l-8 8" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round"/>`
   }
@@ -286,7 +289,7 @@ function sonuc(ok) {
   return `<div class="screen">
     <div class="bar"><span class="ib">${X}</span><span class="mid">Yıldızlarla yol bulan böcek</span><span style="width:40px"></span></div>
     <div class="ring">${ring(ok ? 4 : 2)}<div class="c">${ok ? '<span class="n">212</span><span class="u">kelime / dakika</span>' : '<span class="n">2/4</span><span class="u">doğru</span>'}</div></div>
-    <div class="anl">${ok ? '<span class="ok">4 sorunun 4’ü doğru</span>' : '<span class="lo">348 kelime/dk · hız sayılmadı</span>'}</div>
+    <div class="anl">${ok ? '<span class="ok">4 sorunun 4’ü doğru</span>' : '<span class="lo">Hız sayılmadı <em class="dim">· 348 kelime/dk</em></span>'}</div>
     <div class="verd"><span class="dot"></span><p><span class="nm">Nef</span>${ok ? 'Hızın sayıldı: metni anladın.' : 'Hız, en az 3 doğruyla sayılır. Bir dahakine biraz daha yavaş oku.'}</p></div>
     <div class="rows">
       <div class="row"><span class="k">Başlangıç</span><span class="v">${ok ? 'Kuruluyor: 3/5 okuma' : 'Kuruluyor: 2/5 okuma'}</span><span class="pips">${[0, 1, 2, 3, 4].map((i) => `<i class="${i < (ok ? 3 : 2) ? 'on' : ''}"></i>`).join('')}</span></div>
