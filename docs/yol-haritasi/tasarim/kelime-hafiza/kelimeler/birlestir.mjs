@@ -1,7 +1,7 @@
 import { GROUPS } from './kelimeler.mjs'
 import { EK, EK2 } from './ek.mjs'
-const DROP = new Set('uğur böcek burun kanun kete divit hokka arasta ılgın hünnap kumkuat muşmula papirüs lagün koyak çökelek ardıç gürgen mersin pelin köfte kebap pastırma sucuk dürüm kafes kuru sulu saka obua'.split(' '))
-const strip = (w) => w.replace(/ç/g,'c').replace(/ğ/g,'g').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ş/g,'s').replace(/ü/g,'u')
+const DROP = new Set('uğur böcek burun kanun kete divit hokka arasta ılgın hünnap kumkuat muşmula papirüs lagün koyak çökelek ardıç gürgen mersin pelin köfte kebap pastırma sucuk dürüm kafes kuru sulu saka obua eşek inek köpek keçi armut ayva kabak midye tokmak sürgü kamış misket bilye kaval fıçı balina aşure hurma lama alpaka kuyu boğaz kürek beşik makas çekiç kibrit körebe mantar kabuk yengeç şeker baykuş askı sandık selvi sahlep etajer ladin pike sahra kumul heybe gravür kakule kuskus eskiz kolaj kanvas akor çello sülün gevrek keklik tavus kırağı kartal fener fidan pınar şahin domino'.split(' '))
+const strip = (w) => w.replace(/ç/g,'c').replace(/ğ/g,'g').replace(/ı/g,'i').replace(/ö/g,'o').replace(/ş/g,'s').replace(/ü/g,'u').replace(/â/g,'a')
 const seen = new Map(), st = new Map(), out = {}
 for (const src of [GROUPS, EK, EK2]) for (const [g, s] of Object.entries(src)) for (const w of s.split(/\s+/).filter(Boolean)) {
   const n = [...w].length

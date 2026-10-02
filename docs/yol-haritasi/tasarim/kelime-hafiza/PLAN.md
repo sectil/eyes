@@ -14,7 +14,7 @@ Dayanaklar: `arastirma/KAYNAKLAR.md` (PMID ve DOI'ler PubMed aracıyla çekildi)
 |---|---|
 | "Kelimeler" adı, yeşil arka plan, turuncu düğme, puan sayacı | Kendi adı, Nefona'nın renkleri, puan yok: **hız merdiveni** (18 basamak, 500 → 50 ms) |
 | Hız sabit ya da belirsiz | Her doğru cevapta **bir basamak hızlanır**, yanlışta üç basamak yavaşlar (García-Pérez 1998) |
-| Kelimeler sabit bir listeden, tekrar ediyor | 446 kelimelik kendi listemiz; 7 gün tekrar yok, aynı çift hiç yok (testle) |
+| Kelimeler sabit bir listeden, tekrar ediyor | 384 kelimelik kendi listemiz; 7 gün tekrar yok, aynı çift hiç yok (testle) |
 | "Görme açınızı genişletir", "okuma hızınıza ciddi katkı" | İddia yok: "Okuma hızını artırdığı gösterilmedi" (Rayner 2016; Simons 2016) |
 | Gelişim takibi yok | Ölçü `progress.metrics`'te, ölçü kuralı v2, Gelişim → Dikkat; Nef aynı veriden konuşur |
 | Konuşma için sunucuya ses gidebilir | Mikrofon yalnız cihaz içinde çalışıyorsa görünür; ses kaydedilmez, gönderilmez |
@@ -34,7 +34,7 @@ Bir deneme:
    basamak yavaşlıyoruz: 250 ms." Sonra sıradaki deneme.
 
 Doğru sayılma (VARSAYIM, ilk 30 gün verisiyle denetlenir):
-- Karşılaştırma Türkçe küçük harfle (`tr-TR`: İ→i, I→ı), baştaki/sondaki boşluklar ve noktalama atılır.
+- Karşılaştırma Türkçe küçük harfle (`tr-TR`: İ→i, I→ı; şapka atılır: â→a), baştaki/sondaki boşluklar ve noktalama atılır.
 - Türkçe harfin eksik yazılması doğru sayılır ("cinar" = "çınar"): telefon klavyesinde sık. Liste bu yüzden
   harf atınca çakışan kelime içermez (KELIMELER.md).
 - Deneme doğru = **iki kelime de** doğru. Tek kelime doğruysa kayıtta `part: 1` (ölçüye girmez, kişiye "Biri doğru"
@@ -76,7 +76,7 @@ yazılır (`partial: true`), ölçüye girer (eşik son 10 denemeden).
 kısa süre) ayrıca kaydedilir ve sonuçta gösterilir; ölçü değildir (şanslı tek deneme).
 
 ## 3. Kelime seçimi ve tekrar etmeme
-`KELIMELER.md`: 446 kelime, 4–6 harf, 8 grup. Kurallar (saf işlev, testle): turda tekrar yok; 7 gün tekrar yok; aynı
+`KELIMELER.md`: 384 kelime, 4–6 harf, 8 grup. Kurallar (saf işlev, testle): turda tekrar yok; 7 gün tekrar yok; aynı
 çift hiç yok; çiftte farklı gruplar, toplam ≤ 12 harf; bir grubun payı ≤ %30; tohumlu. Kelimeler kayıtta tutulur
 (`trials[].w`); geçmiş kayıtlardan okunur, ayrı depolama anahtarı yok.
 
@@ -232,6 +232,6 @@ Her aşamada yalnız ilgili testler; sonda tam takım ve derleme (İş akışı 
 | Klavye önerisi cevabı ele verir | Öneri kapalı; cihazda denetim |
 | Mikrofon yanlış duyar | Otomatik gönderme yok; kişi düzeltir |
 | Ses sunucuya gider | `strictOnDevice`; desteklemeyen telefonda düğme yok |
-| Kelimeler sıkar | 446 kelime, 7 gün tekrar yok, çift hiç tekrar yok |
+| Kelimeler sıkar | 384 kelime, 7 gün tekrar yok, çift hiç tekrar yok |
 | Ölçü güvenirliği bilinmiyor | Benzetimde tur içi ±%7; gerçek veriyle ilk 30 gün test–tekrar bakılır, `sdFloor` gerekirse yükselir |
 | Hızlı okuma iddiası gibi algılanır | Kelime/dakika yok; iddia sınırı cümlesi; kanıt kartında Rayner 2016 |

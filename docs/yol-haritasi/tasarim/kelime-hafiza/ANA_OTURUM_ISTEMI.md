@@ -50,7 +50,7 @@ Yap:
   ortancası; `bestOkMs`; cevap denetimi (PLAN §1: `tr-TR` küçük harf, noktalama ve boşluk temizliği, Türkçe harf
   eksikliği doğru, sıra serbest, iki kelime de doğruysa doğru, `part`); `makeRecord` (PLAN §4.2).
 - `lib/yakalaYazWords.js`: `kelimeler/liste.json`'daki onaylı liste (gruplarıyla) ve seçim: PLAN §3 / KELIMELER
-  kuralları 1–6; geçmiş `sessions` kayıtlarından okunur.
+  kuralları 1–7; geçmiş `sessions` kayıtlarından okunur.
 Bitti: `yakalaYaz.test.js`, `yakalaYazWords.test.js`. **90 günlük tohumlu benzetim**: günde 1–3 tur, kurallar hiç
 çiğnenmez; aynı çift hiç tekrar etmez; Türkçe harf atılınca çakışan iki kelime listede yok; merdiven 1–18 dışına
 çıkmaz; benzetimdeki gibi (lojistik eğri) doğru oranı %70–80.
