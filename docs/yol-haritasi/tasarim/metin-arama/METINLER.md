@@ -47,11 +47,11 @@ kendi onayım → sahip. "beyin" ve "tanıma" sözcükleri geçmez. Değişim s�
 | S2 | {x} sn | doğru bulunan kelimelerin ortalama süresi, her kelime en çok 20 sn |
 | S2b | {d}/6 · doğru | sağda; doğru bulunan ve doğru "Yok" sayısı |
 | S3b | Süre için en az 3 kelime bulmak gerekiyor; bu tur sayılarla kaydedildi. | 3'ten az bulunduysa S1 ve S2 yerine |
-| S4 | Kelimelerin | altı kelimelik özet başlığı; 320'de gizli |
+| S4 | Kelimelerin | altı kelimelik özet başlığı; 320'de başlık gizli, kutular görünür |
 | S4b | {kelime} · {s} sn · yok, doğru · metindeydi · süre doldu | özet kutularındaki sonuç; yanlış "Yok" "metindeydi", süre dolması "süre doldu" |
 | S5 | Kelime bulma süresi | yalnız başlangıç oluştuktan sonra, S6 ile tek satır |
 | S6 | başlangıcından iyi · değişim yok · henüz belli değil | `metricStatusV2` + `changeText` + `verdictWord`'den; modül kendisi kurmaz |
-| S7 | Bugün okuduğun | altında iki metnin başlığı ve "{Yazar} ve ark. · {Dergi} {Yıl}"; PMID yok |
+| S7 | Bugün okuduğun | altında iki metnin başlığı ve "{Yazar} ve ark. · {Dergi} {Yıl}"; PMID yok; 320'de başlık gizli, kaynak satırı görünür |
 | S8 | Tamam | düğme |
 
 ### Neye dayanıyor? sayfası

@@ -39,10 +39,11 @@ Sahibin isteği: `SAHIP_ISTEGI.md`. Araştırma: `ARA_RAPOR_1.md`, `arastirma/KA
 3. Her hedef için: üstte aranan kelime, altında süre çizgisi (20 sn). Metin hedefler boyunca aynı kalır; yalnız aranan
    kelime değişir. Hedef sırası metin içinde karışık sunulur, metindeki sırayla değil.
 4. Dokunuş:
-   - Doğru kelime: kart yeşile döner, süre büyük yazılır (A4), kelime dolu renkle parlar, hafif titreşim. 0,9 sn sonra
+   - Doğru kelime: üstte "Buldun", kelime ve "{s} saniyede" yeşil (A4), metindeki kelime dolu renkle parlar, hafif
+     titreşim. 0,9 sn sonra
      sıradaki hedef. Bulunan kelime işaretli kalmaz (kapı tur 1: ipucu gibi okundu).
    - Yanlış kelime: kelime kısa sallanır, renk değişmez, sayaç işler (A5 yalnız sesli okuyucuya).
-   - “Metinde yok”: hedef yoksa A7 ve benzer biçimlerin altı kesik çizgili; hedef varsa A8 ve kelime işaretlenir.
+   - “Metinde yok”: hedef yoksa A7a–A7c ve benzer biçimler kesik çizgili kutuda; hedef varsa A8 ve kelime işaretlenir.
    - 20 sn dolarsa A6a ya da A6b.
 5. **Sonuç** (S1–S8).
 
@@ -113,15 +114,18 @@ kelimeye taşmaz.
 Maketteki hâl yön ve içerik içindir; tasarım tokenları uygulamanınkidir. Kapı kayıtları `kapi/`. Arama ekranının kapı sorusu "5 saniyede anladın mı" (sahip kararı 2026-10-02);
 öbür ekranlar "etkilendin mi".
 1. Arama: aranan kelime ortada, büyük ve renkli; altında süre çizgisi ve kalan süre "{s} sn kaldı" sade, ikincil renkte; aranan kelimeyle yarışmaz. Metin kartı
-   sol kenarında renkli şerit, yazı 390'da 25 px / 1,55, 320'de 19 px / 1,5, kart içinde dikey ortalı. 40 kelimelik
+   sol kenarında renkli şerit, içerik kadar yüksek; yazı 390'da 24 px / 1,55, 320'de 18,5 px / 1,5. Aranan kelime ve
+   kart birlikte dikey ortalı, "Metinde yok" düğmesi altta (kapı tur 3: kart içinde ortalı metin boşluk bıraktı). 40 kelimelik
    metin 320×568'de kaydırmasız sığmalı; sığmazsa yazı küçülmez, metin kısalır.
 2. Arama sırasında metin kartında yalnız metin olur; kaynak satırı, bulunan kelime işareti, puan yok.
 3. Bulma anı: "Buldun", kelime ve süre yeşil; metindeki kelime dolu renk ve halka. Yanıp sönme yok.
 4. "Yok" doğru: "Doğru, metinde yok", altında A7b; benzer biçimler kesik çizgili kutuda, üstü çizili değil.
    Düğme "Devam".
-5. Sonuç: üstte rekor kırıldıysa "Yeni en iyi turun"; büyük ortalama süre ve sağda "{d}/6 doğru"; "Kelimelerin":
-   altı kelime ve sonucu iki sütunda, 320'de gizli; "Bugün öğrendiğin": iki metnin başlığı ve yazar · dergi · yıl.
-   PMID sonuçta yok. Puan, seri, yıldız yok.
+5. Sonuç: rekor kırıldıysa rekor kartı ekranın en büyük öğesi: "Yeni en iyi turun", "{önceki} → {bu} sn" (önceki
+   üstü çizili), "Önceki en iyin … · {d}/6 doğru" (kapı tur 6: 5/5). Rekor yoksa "Bu turdaki ortalaman", büyük süre,
+   sağda "{d}/6 doğru". Altında "Kelimelerin": altı kutu üç sütunda, kelime üstte sonuç altta, 320'de de görünür.
+   "Bugün okuduğun": iki metnin başlığı ve yazar · dergi · yıl, 320'de de. PMID sonuçta yok. Gelişim kutusu ilk 8 gün
+   yok. Puan, seri, yıldız yok. Sıradan tur hâli kapıdan geçmedi (tur 6: 0/5); ana oturumda yeniden sınanır.
 6. İddia sınırı "Neye dayanıyor?" sayfasında (N5); girişte yalnız bağlantı.
 7. Erişilebilirlik: kelimeler sesli okuyucuda tek tek seçilebilir; renk tek başına bilgi taşımaz; dokunma alanı
    ≥ 44 pt; `prefers-reduced-motion`'da halka ve sallanma yok. Kaynak yazısı en az 12 px, ikincil metin `ink-2`.
