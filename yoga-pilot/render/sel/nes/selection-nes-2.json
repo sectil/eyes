@@ -1,0 +1,6071 @@
+{
+ "part": "nes-2",
+ "voice": "nes",
+ "voice_id": "wQ7dVQFxIqwokkwsMqqn",
+ "sex": "f",
+ "unit_index_range": [
+  34,
+  67
+ ],
+ "written_at": "2026-09-29T12:32:18.591154+00:00",
+ "who": "nes-2-sel",
+ "method": {
+  "rank": "audio.py rank (SPEC 4.1) on raw/nes/<id>/t1..t3.mp3",
+  "scribe": "SPEC 4.2: best take URL (fresh signed URL from creative_get_flow_run_status, md5 = local file) -> creative_attach_reference_file on flow zAYOhRc6cOKeStKp4ijv -> creative_transcribe_audio (eleven_scribe_v1, connect_from) -> poll; audio.py compare vs unit tts",
+  "cut_verification": "SPEC 4.3(c) metric-only for every multi-piece unit: (a) unavailable - Scribe returns plain text only (no word timestamps in creative_get_flow_run_status nor in the transcript .txt); (b) unavailable - no local-file upload tool exposed in this session (creative_create_asset_upload/finalize absent; get_more_tools call returned an MCP schema error). Metric checks: piece count = target, audio.py boundary_misalign <= 0.12 (syllable/speech-time band), cut at middle of the chosen silence (nearest zero crossing, 5 ms fades). Every multi-piece unit therefore carries flag kesim-kulak.",
+  "process": "audio.py process --sex f (HPF 90 Hz, trim -50 dBFS 60/250 ms, de-ess if needed, >=1 s: -18 LUFS / <=-1.5 dBTP; <1 s: phase reference speech RMS, +1 dB --micro for 1-syllable carrier items). Output 44.1 kHz mono FLOAT WAV. Phase gain NOT applied (mix.py).",
+  "reference_rms": {
+   "Derin": {
+    "clip": "c2.kal (processed, -18.0 LUFS)",
+    "speech_rms_db": -17.05,
+    "used_for": "car.sayi items c2.n10..c2.n01 (<1 s); c2.n08 came out 1.105 s -> LUFS mode (-18.0 LUFS, speech RMS -17.26)"
+   },
+   "Kapanış": {
+    "clip": "k.sesler",
+    "speech_rms_db": -17.06,
+    "used_for": "none (no <1 s Kapanış piece)"
+   },
+   "Varış": {
+    "clip": "a.x.kipir",
+    "speech_rms_db": -16.7,
+    "used_for": "none"
+   }
+  },
+  "extra_check": "file-start transient (\"pop\") survey on all raw takes; audio.py rank click detector missed it. n2.dilek t1, k.donus t1, k.goz t1 (all ranked #1) excluded under SPEC 4.1(a) and the next take was Scribe-verified. Processed k.goz t1 showed a detected click at 34.9 ms; processed n2.dilek t1 / k.donus t1 had a digital-zero -> -28/-32 dBFS step at onset."
+ },
+ "units": {
+  "c2.akis": {
+   "idx": 34,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Nefes kendiliğinden geliyor. Kendiliğinden gidiyor.",
+   "screen": "Nefes kendiliğinden geliyor. Kendiliğinden gidiyor.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t2",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.akis/t2.mp3",
+    "generation_id": "bfTxobBT6hvicBy5iCrR",
+    "session_id": "gbtDhEdkrZQc6yodsq5F",
+    "duration_secs": 3.84
+   },
+   "rank_order_original": [
+    "t2.mp3",
+    "t1.mp3",
+    "t3.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t2.mp3",
+    "rank": 1,
+    "score": 1.328,
+    "penalties": {
+     "rate": 1.167,
+     "dur": 0.161,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 5.35 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 3.70 sn, ortancadan %0.8",
+     "F0 yayılımı 3.88 yt"
+    ],
+    "metrics": {
+     "duration": 3.84,
+     "active_sec": 3.697,
+     "speech_sec": 3.362,
+     "articulation": 5.35,
+     "f0_mean_hz": 227.8,
+     "f0_geo_hz": 222.3,
+     "f0_sd_semitones": 3.88,
+     "lufs": -19.7,
+     "rms_db": -18.87,
+     "true_peak_dbtp": -8.25,
+     "sibilance_ratio": 0.003,
+     "pause_total_sec": 0.334
+    },
+    "cut": {
+     "needed": 2,
+     "found": 2,
+     "cuts_sec": [
+      2.1756
+     ],
+     "chosen_gaps": [
+      [
+       2.01,
+       2.345
+      ]
+     ],
+     "margin_ratio": null,
+     "boundary_misalign": 0.037,
+     "cut_suspect": false,
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 2.176,
+       "speech_sec": 1.981,
+       "syll": 10,
+       "rate": 5.05
+      },
+      {
+       "name": "s2",
+       "keep": true,
+       "start": 2.176,
+       "end": 3.84,
+       "speech_sec": 1.392,
+       "syll": 8,
+       "rate": 5.75
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Nefes kendiliğinden geliyor, kendiliğinden gidiyor",
+     "compare_exit": 0,
+     "generation_id": "mbJBa7r3WTJIqC1dDXjB",
+     "session_id": "uYaEQwxqc0uumhu0gjq6",
+     "stt_node": "WjH4PMrJ4qoa2kAsm962",
+     "ref_node": "CjiNZuE9gaQqmgwyQdYM",
+     "asset_id": "KT5vqn6pwfnIrXnnzPQz",
+     "actual_credits": 21.12,
+     "actual_cents": 0.384,
+     "spoken_duration_secs": 3.66
+    }
+   ],
+   "scribe_text": "Nefes kendiliğinden geliyor, kendiliğinden gidiyor",
+   "compare": {
+    "equal": true,
+    "words": 5
+   },
+   "compare_equal": true,
+   "cut_method": "audio.py cut (longest N-1 gaps) + 4.3(c) metric-only",
+   "cut": {
+    "cuts": [
+     2.1756
+    ],
+    "chosen_gaps": [
+     [
+      2.01,
+      2.345
+     ]
+    ],
+    "margin_ratio": null,
+    "boundary_misalign": 0.037,
+    "cut_suspect": false,
+    "thr_db": -51.7,
+    "pieces": [
+     {
+      "name": "s1",
+      "start": 0.0,
+      "end": 2.1756,
+      "dur": 2.176,
+      "speech_sec": 1.981,
+      "syll": 10,
+      "rate": 5.05
+     },
+     {
+      "name": "s2",
+      "start": 2.1756,
+      "end": 3.84,
+      "dur": 1.664,
+      "speech_sec": 1.392,
+      "syll": 8,
+      "rate": 5.75
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece_id": "c2.akis#1",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.akis/c2.akis#1.wav",
+     "text": "Nefes kendiliğinden geliyor.",
+     "syll": 10,
+     "duration": 2.285,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -7.14,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 2.285,
+      "lufs": -18.0,
+      "speech_rms_db": -17.21,
+      "true_peak_dbtp": -7.14,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c2.akis#2",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.akis/c2.akis#2.wav",
+     "text": "Kendiliğinden gidiyor.",
+     "syll": 8,
+     "duration": 1.703,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -7.74,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 1.703,
+      "lufs": -18.0,
+      "speech_rms_db": -17.19,
+      "true_peak_dbtp": -7.74,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+    }
+   ],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 5.35 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "c2.sayac": {
+   "idx": 35,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Geriye doğru sayacağım. Nefes sayılara uymak zorunda değil.",
+   "screen": "Geriye doğru sayacağım. Nefes sayılara uymak zorunda değil.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t1",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.sayac/t1.mp3",
+    "generation_id": "k7JZMhncvlS2UafT9qZR",
+    "session_id": "PpTonUpphMGJGJvSq3Pv",
+    "duration_secs": 3.92
+   },
+   "rank_order_original": [
+    "t1.mp3",
+    "t3.mp3",
+    "t2.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t1.mp3",
+    "rank": 1,
+    "score": 5.433,
+    "penalties": {
+     "rate": 5.433,
+     "dur": 0.0,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 6.63 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 3.77 sn, ortancadan %0.0",
+     "F0 yayılımı 3.61 yt"
+    ],
+    "metrics": {
+     "duration": 3.92,
+     "active_sec": 3.771,
+     "speech_sec": 3.317,
+     "articulation": 6.63,
+     "f0_mean_hz": 250.8,
+     "f0_geo_hz": 245.5,
+     "f0_sd_semitones": 3.61,
+     "lufs": -20.7,
+     "rms_db": -19.65,
+     "true_peak_dbtp": -8.47,
+     "sibilance_ratio": 0.0073,
+     "pause_total_sec": 0.454
+    },
+    "cut": {
+     "needed": 2,
+     "found": 2,
+     "cuts_sec": [
+      1.5091
+     ],
+     "chosen_gaps": [
+      [
+       1.282,
+       1.736
+      ]
+     ],
+     "margin_ratio": null,
+     "boundary_misalign": 0.036,
+     "cut_suspect": false,
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 1.509,
+       "speech_sec": 1.267,
+       "syll": 9,
+       "rate": 7.1
+      },
+      {
+       "name": "s2",
+       "keep": true,
+       "start": 1.509,
+       "end": 3.92,
+       "speech_sec": 2.06,
+       "syll": 13,
+       "rate": 6.31
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Geriye doğru sayacağım. Nefes sayılara uymak zorunda değil",
+     "compare_exit": 0,
+     "generation_id": "LSP5wVwBONqAwcqKwbm9",
+     "session_id": "1lpastgvjk5PgVw7A0mm",
+     "stt_node": "WO2Ns1S5dlb1EOtqeoiY",
+     "ref_node": "PWTRGIRvnfcDuhBi2png",
+     "asset_id": "PJQkB3jNDBBS4YqXEaz9",
+     "actual_credits": 21.56,
+     "actual_cents": 0.392,
+     "spoken_duration_secs": 3.76
+    }
+   ],
+   "scribe_text": "Geriye doğru sayacağım. Nefes sayılara uymak zorunda değil",
+   "compare": {
+    "equal": true,
+    "words": 8
+   },
+   "compare_equal": true,
+   "cut_method": "audio.py cut (longest N-1 gaps) + 4.3(c) metric-only",
+   "cut": {
+    "cuts": [
+     1.5091
+    ],
+    "chosen_gaps": [
+     [
+      1.282,
+      1.736
+     ]
+    ],
+    "margin_ratio": null,
+    "boundary_misalign": 0.036,
+    "cut_suspect": false,
+    "thr_db": -52.7,
+    "pieces": [
+     {
+      "name": "s1",
+      "start": 0.0,
+      "end": 1.5091,
+      "dur": 1.509,
+      "speech_sec": 1.267,
+      "syll": 9,
+      "rate": 7.1
+     },
+     {
+      "name": "s2",
+      "start": 1.5091,
+      "end": 3.92,
+      "dur": 2.411,
+      "speech_sec": 2.06,
+      "syll": 13,
+      "rate": 6.31
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece_id": "c2.sayac#1",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.sayac/c2.sayac#1.wav",
+     "text": "Geriye doğru sayacağım.",
+     "syll": 9,
+     "duration": 1.572,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -6.94,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 1.572,
+      "lufs": -18.0,
+      "speech_rms_db": -17.13,
+      "true_peak_dbtp": -6.94,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c2.sayac#2",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.sayac/c2.sayac#2.wav",
+     "text": "Nefes sayılara uymak zorunda değil.",
+     "syll": 13,
+     "duration": 2.364,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -6.83,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 2.364,
+      "lufs": -18.0,
+      "speech_rms_db": -17.34,
+      "true_peak_dbtp": -6.83,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+    }
+   ],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 6.63 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "car.sayi": {
+   "idx": 36,
+   "kind": "carrier",
+   "phase": "Derin",
+   "tts": "sayıyorum: on… dokuz… sekiz… yedi… altı… beş… dört… üç… iki… bir.",
+   "screen": "sayıyorum: on… dokuz… sekiz… yedi… altı… beş… dört… üç… iki… bir.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t3",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/car.sayi/t3.mp3",
+    "generation_id": "Bpe9U91LGsulCbrnw2RB",
+    "session_id": "5ifML0vDs7mEy004Z8Bo",
+    "duration_secs": 10.24
+   },
+   "rank_order_original": [
+    "t3.mp3",
+    "t2.mp3",
+    "t1.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t3.mp3",
+    "rank": 1,
+    "score": 1.925,
+    "penalties": {
+     "rate": 0.0,
+     "dur": 0.0,
+     "f0sd": 0.22,
+     "join": 1.705
+    },
+    "soft_violations": [
+     "taşıyıcı eklemi 3.41 > 2.0 yt"
+    ],
+    "reasons": [
+     "eklemleme 3.05 ≤ 5.0",
+     "süre 10.07 sn, ortancadan %0.0",
+     "F0 yayılımı 3.12 yt"
+    ],
+    "metrics": {
+     "duration": 10.24,
+     "active_sec": 10.072,
+     "speech_sec": 6.236,
+     "articulation": 3.05,
+     "f0_mean_hz": 203.9,
+     "f0_geo_hz": 200.5,
+     "f0_sd_semitones": 3.12,
+     "lufs": -23.38,
+     "rms_db": -21.19,
+     "true_peak_dbtp": -6.42,
+     "sibilance_ratio": 0.0122,
+     "pause_total_sec": 3.837
+    },
+    "cut": {
+     "needed": 11,
+     "found": 11,
+     "cuts_sec": [
+      0.9475,
+      1.7639,
+      2.7561,
+      3.8444,
+      4.7445,
+      5.7315,
+      6.6898,
+      7.6491,
+      8.5388,
+      9.3928
+     ],
+     "chosen_gaps": [
+      [
+       0.688,
+       1.207
+      ],
+      [
+       1.551,
+       1.976
+      ],
+      [
+       2.604,
+       2.903
+      ],
+      [
+       3.692,
+       3.986
+      ],
+      [
+       4.525,
+       4.964
+      ],
+      [
+       5.557,
+       5.902
+      ],
+      [
+       6.53,
+       6.839
+      ],
+      [
+       7.438,
+       7.857
+      ],
+      [
+       8.346,
+       8.73
+      ],
+      [
+       9.189,
+       9.593
+      ]
+     ],
+     "margin_ratio": null,
+     "boundary_misalign": 0.071,
+     "cut_suspect": false,
+     "pieces": [
+      {
+       "name": "_pre",
+       "keep": false,
+       "start": 0.0,
+       "end": 0.948,
+       "speech_sec": 0.678,
+       "syll": 4,
+       "rate": 5.9
+      },
+      {
+       "name": "c2.n10",
+       "keep": true,
+       "start": 0.948,
+       "end": 1.764,
+       "speech_sec": 0.354,
+       "syll": 1,
+       "rate": 2.82
+      },
+      {
+       "name": "c2.n09",
+       "keep": true,
+       "start": 1.764,
+       "end": 2.756,
+       "speech_sec": 0.644,
+       "syll": 2,
+       "rate": 3.11
+      },
+      {
+       "name": "c2.n08",
+       "keep": true,
+       "start": 2.756,
+       "end": 3.844,
+       "speech_sec": 0.793,
+       "syll": 2,
+       "rate": 2.52
+      },
+      {
+       "name": "c2.n07",
+       "keep": true,
+       "start": 3.844,
+       "end": 4.744,
+       "speech_sec": 0.549,
+       "syll": 2,
+       "rate": 3.64
+      },
+      {
+       "name": "c2.n06",
+       "keep": true,
+       "start": 4.744,
+       "end": 5.731,
+       "speech_sec": 0.604,
+       "syll": 2,
+       "rate": 3.31
+      },
+      {
+       "name": "c2.n05",
+       "keep": true,
+       "start": 5.731,
+       "end": 6.69,
+       "speech_sec": 0.639,
+       "syll": 1,
+       "rate": 1.57
+      },
+      {
+       "name": "c2.n04",
+       "keep": true,
+       "start": 6.69,
+       "end": 7.649,
+       "speech_sec": 0.609,
+       "syll": 1,
+       "rate": 1.64
+      },
+      {
+       "name": "c2.n03",
+       "keep": true,
+       "start": 7.649,
+       "end": 8.539,
+       "speech_sec": 0.499,
+       "syll": 1,
+       "rate": 2.0
+      },
+      {
+       "name": "c2.n02",
+       "keep": true,
+       "start": 8.539,
+       "end": 9.393,
+       "speech_sec": 0.474,
+       "syll": 2,
+       "rate": 4.22
+      },
+      {
+       "name": "c2.n01",
+       "keep": true,
+       "start": 9.393,
+       "end": 10.24,
+       "speech_sec": 0.499,
+       "syll": 1,
+       "rate": 2.0
+      }
+     ]
+    },
+    "join_max_st": 3.41,
+    "joins": [
+     {
+      "from": "c2.n10",
+      "to": "c2.n09",
+      "step_st": 2.54,
+      "a_hz": 176.6,
+      "b_hz": 204.5,
+      "widened": false
+     },
+     {
+      "from": "c2.n09",
+      "to": "c2.n08",
+      "step_st": -2.17,
+      "a_hz": 213.8,
+      "b_hz": 188.6,
+      "widened": false
+     },
+     {
+      "from": "c2.n08",
+      "to": "c2.n07",
+      "step_st": -1.6,
+      "a_hz": 202.9,
+      "b_hz": 185.1,
+      "widened": false
+     },
+     {
+      "from": "c2.n07",
+      "to": "c2.n06",
+      "step_st": -1.48,
+      "a_hz": 191.7,
+      "b_hz": 176.0,
+      "widened": false
+     },
+     {
+      "from": "c2.n06",
+      "to": "c2.n05",
+      "step_st": 0.15,
+      "a_hz": 194.1,
+      "b_hz": 195.9,
+      "widened": false
+     },
+     {
+      "from": "c2.n05",
+      "to": "c2.n04",
+      "step_st": -0.2,
+      "a_hz": 200.1,
+      "b_hz": 197.8,
+      "widened": false
+     },
+     {
+      "from": "c2.n04",
+      "to": "c2.n03",
+      "step_st": 3.16,
+      "a_hz": 202.9,
+      "b_hz": 243.5,
+      "widened": false
+     },
+     {
+      "from": "c2.n03",
+      "to": "c2.n02",
+      "step_st": -0.43,
+      "a_hz": 243.5,
+      "b_hz": 237.5,
+      "widened": false
+     },
+     {
+      "from": "c2.n02",
+      "to": "c2.n01",
+      "step_st": -3.41,
+      "a_hz": 237.5,
+      "b_hz": 195.0,
+      "widened": false
+     }
+    ]
+   },
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Sayıyorum. On, dokuz, sekiz, yedi, altı, beş, dört, üç, iki, bir",
+     "compare_exit": 0,
+     "generation_id": "lXeQOTe88R5bMAtlfS8k",
+     "session_id": "Zcs8PnBcj9KuipPjRBtU",
+     "stt_node": "iMsiP5AneHmx3I0XOnqp",
+     "ref_node": "nA6hPSdbdrqA7pmxsGYl",
+     "asset_id": "JtdrEjAd3NMd471JZ7Bp",
+     "actual_credits": 56.32,
+     "actual_cents": 1.024,
+     "spoken_duration_secs": 9.98
+    }
+   ],
+   "scribe_text": "Sayıyorum. On, dokuz, sekiz, yedi, altı, beş, dört, üç, iki, bir",
+   "compare": {
+    "equal": true,
+    "words": 11
+   },
+   "compare_equal": true,
+   "cut_method": "audio.py cut (longest N-1 gaps) + 4.3(c) metric-only",
+   "cut": {
+    "cuts": [
+     0.9475,
+     1.7639,
+     2.7561,
+     3.8444,
+     4.7445,
+     5.7315,
+     6.6898,
+     7.6491,
+     8.5388,
+     9.3928
+    ],
+    "chosen_gaps": [
+     [
+      0.688,
+      1.207
+     ],
+     [
+      1.551,
+      1.976
+     ],
+     [
+      2.604,
+      2.903
+     ],
+     [
+      3.692,
+      3.986
+     ],
+     [
+      4.525,
+      4.964
+     ],
+     [
+      5.557,
+      5.902
+     ],
+     [
+      6.53,
+      6.839
+     ],
+     [
+      7.438,
+      7.857
+     ],
+     [
+      8.346,
+      8.73
+     ],
+     [
+      9.189,
+      9.593
+     ]
+    ],
+    "margin_ratio": null,
+    "boundary_misalign": 0.071,
+    "cut_suspect": false,
+    "thr_db": -55.38,
+    "pieces": [
+     {
+      "name": "_pre",
+      "start": 0.0,
+      "end": 0.9475,
+      "dur": 0.948,
+      "speech_sec": 0.678,
+      "syll": 4,
+      "rate": 5.9
+     },
+     {
+      "name": "c2.n10",
+      "start": 0.9475,
+      "end": 1.7639,
+      "dur": 0.816,
+      "speech_sec": 0.354,
+      "syll": 1,
+      "rate": 2.82
+     },
+     {
+      "name": "c2.n09",
+      "start": 1.7639,
+      "end": 2.7561,
+      "dur": 0.992,
+      "speech_sec": 0.644,
+      "syll": 2,
+      "rate": 3.11
+     },
+     {
+      "name": "c2.n08",
+      "start": 2.7561,
+      "end": 3.8444,
+      "dur": 1.088,
+      "speech_sec": 0.793,
+      "syll": 2,
+      "rate": 2.52
+     },
+     {
+      "name": "c2.n07",
+      "start": 3.8444,
+      "end": 4.7445,
+      "dur": 0.9,
+      "speech_sec": 0.549,
+      "syll": 2,
+      "rate": 3.64
+     },
+     {
+      "name": "c2.n06",
+      "start": 4.7445,
+      "end": 5.7315,
+      "dur": 0.987,
+      "speech_sec": 0.604,
+      "syll": 2,
+      "rate": 3.31
+     },
+     {
+      "name": "c2.n05",
+      "start": 5.7315,
+      "end": 6.6898,
+      "dur": 0.958,
+      "speech_sec": 0.639,
+      "syll": 1,
+      "rate": 1.57
+     },
+     {
+      "name": "c2.n04",
+      "start": 6.6898,
+      "end": 7.6491,
+      "dur": 0.959,
+      "speech_sec": 0.609,
+      "syll": 1,
+      "rate": 1.64
+     },
+     {
+      "name": "c2.n03",
+      "start": 7.6491,
+      "end": 8.5388,
+      "dur": 0.89,
+      "speech_sec": 0.499,
+      "syll": 1,
+      "rate": 2.0
+     },
+     {
+      "name": "c2.n02",
+      "start": 8.5388,
+      "end": 9.3928,
+      "dur": 0.854,
+      "speech_sec": 0.474,
+      "syll": 2,
+      "rate": 4.22
+     },
+     {
+      "name": "c2.n01",
+      "start": 9.3928,
+      "end": 10.24,
+      "dur": 0.847,
+      "speech_sec": 0.499,
+      "syll": 1,
+      "rate": 2.0
+     }
+    ]
+   },
+   "discarded": [
+    "_pre (\"sayıyorum:\")"
+   ],
+   "pieces": [
+    {
+     "piece_id": "c2.n10",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n10.wav",
+     "text": "on…",
+     "syll": 1,
+     "duration": 0.658,
+     "level_mode": "rms",
+     "level": -16.05,
+     "true_peak_dbtp": -6.01,
+     "deess": false,
+     "process_pass": true,
+     "ref_rms_db": -17.05,
+     "micro": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 0.658,
+      "lufs": null,
+      "speech_rms_db": -16.05,
+      "true_peak_dbtp": -6.01,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c2.n09",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n09.wav",
+     "text": "dokuz…",
+     "syll": 2,
+     "duration": 0.946,
+     "level_mode": "rms",
+     "level": -17.05,
+     "true_peak_dbtp": -3.6,
+     "deess": false,
+     "process_pass": true,
+     "ref_rms_db": -17.05,
+     "micro": false,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 0.946,
+      "lufs": null,
+      "speech_rms_db": -17.05,
+      "true_peak_dbtp": -3.6,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c2.n08",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n08.wav",
+     "text": "sekiz…",
+     "syll": 2,
+     "duration": 1.105,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -2.38,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 1.105,
+      "lufs": -18.0,
+      "speech_rms_db": -17.26,
+      "true_peak_dbtp": -2.38,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c2.n07",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n07.wav",
+     "text": "yedi…",
+     "syll": 2,
+     "duration": 0.85,
+     "level_mode": "rms",
+     "level": -17.05,
+     "true_peak_dbtp": -6.66,
+     "deess": false,
+     "process_pass": true,
+     "ref_rms_db": -17.05,
+     "micro": false,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 0.85,
+      "lufs": null,
+      "speech_rms_db": -17.05,
+      "true_peak_dbtp": -6.66,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c2.n06",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n06.wav",
+     "text": "altı…",
+     "syll": 2,
+     "duration": 0.906,
+     "level_mode": "rms",
+     "level": -17.05,
+     "true_peak_dbtp": -2.51,
+     "deess": false,
+     "process_pass": true,
+     "ref_rms_db": -17.05,
+     "micro": false,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 0.906,
+      "lufs": null,
+      "speech_rms_db": -17.05,
+      "true_peak_dbtp": -2.51,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c2.n05",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n05.wav",
+     "text": "beş…",
+     "syll": 1,
+     "duration": 0.947,
+     "level_mode": "rms",
+     "level": -16.05,
+     "true_peak_dbtp": -1.55,
+     "deess": false,
+     "process_pass": true,
+     "ref_rms_db": -17.05,
+     "micro": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 0.947,
+      "lufs": null,
+      "speech_rms_db": -16.05,
+      "true_peak_dbtp": -1.55,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c2.n04",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n04.wav",
+     "text": "dört…",
+     "syll": 1,
+     "duration": 0.914,
+     "level_mode": "rms",
+     "level": -16.05,
+     "true_peak_dbtp": -3.34,
+     "deess": false,
+     "process_pass": true,
+     "ref_rms_db": -17.05,
+     "micro": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 0.914,
+      "lufs": null,
+      "speech_rms_db": -16.05,
+      "true_peak_dbtp": -3.34,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c2.n03",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n03.wav",
+     "text": "üç…",
+     "syll": 1,
+     "duration": 0.806,
+     "level_mode": "rms",
+     "level": -16.05,
+     "true_peak_dbtp": -3.6,
+     "deess": false,
+     "process_pass": true,
+     "ref_rms_db": -17.05,
+     "micro": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 0.806,
+      "lufs": null,
+      "speech_rms_db": -16.05,
+      "true_peak_dbtp": -3.6,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c2.n02",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n02.wav",
+     "text": "iki…",
+     "syll": 2,
+     "duration": 0.775,
+     "level_mode": "rms",
+     "level": -17.05,
+     "true_peak_dbtp": -6.0,
+     "deess": false,
+     "process_pass": true,
+     "ref_rms_db": -17.05,
+     "micro": false,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 0.775,
+      "lufs": null,
+      "speech_rms_db": -17.05,
+      "true_peak_dbtp": -6.0,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c2.n01",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/car.sayi/c2.n01.wav",
+     "text": "bir.",
+     "syll": 1,
+     "duration": 0.806,
+     "level_mode": "rms",
+     "level": -16.05,
+     "true_peak_dbtp": -3.08,
+     "deess": false,
+     "process_pass": true,
+     "ref_rms_db": -17.05,
+     "micro": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 0.806,
+      "lufs": null,
+      "speech_rms_db": -16.05,
+      "true_peak_dbtp": -3.08,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+    }
+   ],
+   "notes": [
+    "SPEC 4.1(f) carrier join > 2.0 st in all 3 takes (t1 4.02, t2 4.45, t3 3.41); chosen t3 joins: n04->n03 +3.16 st, n02->n01 -3.41 st, n10->n09 +2.54, n09->n08 -2.17 (soft criterion, reported)",
+    "item levels: c2.n08 is 1.105 s after trim -> -18 LUFS (speech RMS -17.26); other items RMS-matched to Derin ref -17.05 dB, 1-syllable items (c2.n10 on, c2.n05 beş, c2.n04 dört, c2.n03 üç, c2.n01 bir) +1 dB micro = -16.05",
+    "t3 has a file-start transient inside the discarded _pre piece only",
+    "no right/left carrier in this part: SPEC 4.4 not applicable (car.sayi is a counting carrier)",
+    "soft (4.1): taşıyıcı eklemi 3.41 > 2.0 yt"
+   ],
+   "accepted": true
+  },
+  "c2.birak": {
+   "idx": 37,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Sayıları bırakabilirsin. Zihnin arada başka yerlere kaydıysa o da olur.",
+   "screen": "Sayıları bırakabilirsin. Zihnin arada başka yerlere kaydıysa o da olur.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t3",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.birak/t3.mp3",
+    "generation_id": "GvLUxkrWi4aBR5vOsxT5",
+    "session_id": "qRzmyumyblmWE0MwIwMC",
+    "duration_secs": 5.04
+   },
+   "rank_order_original": [
+    "t3.mp3",
+    "t2.mp3",
+    "t1.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t3.mp3",
+    "rank": 1,
+    "score": 3.314,
+    "penalties": {
+     "rate": 3.133,
+     "dur": 0.181,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 5.94 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 4.94 sn, ortancadan %0.9",
+     "F0 yayılımı 3.88 yt"
+    ],
+    "metrics": {
+     "duration": 5.04,
+     "active_sec": 4.939,
+     "speech_sec": 4.545,
+     "articulation": 5.94,
+     "f0_mean_hz": 263.0,
+     "f0_geo_hz": 256.7,
+     "f0_sd_semitones": 3.88,
+     "lufs": -21.63,
+     "rms_db": -20.82,
+     "true_peak_dbtp": -8.1,
+     "sibilance_ratio": 0.0092,
+     "pause_total_sec": 0.394
+    },
+    "cut": {
+     "needed": 2,
+     "found": 2,
+     "cuts_sec": [
+      1.5694
+     ],
+     "chosen_gaps": [
+      [
+       1.372,
+       1.766
+      ]
+     ],
+     "margin_ratio": null,
+     "boundary_misalign": 0.081,
+     "cut_suspect": false,
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 1.569,
+       "speech_sec": 1.357,
+       "syll": 10,
+       "rate": 7.37
+      },
+      {
+       "name": "s2",
+       "keep": true,
+       "start": 1.569,
+       "end": 5.04,
+       "speech_sec": 3.198,
+       "syll": 17,
+       "rate": 5.32
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Sayıları bırakabilirsin. Zihnin arada başka yerlere kaydıysa o da olur",
+     "compare_exit": 0,
+     "generation_id": "DlvLsOIng8R4xyDuXFxp",
+     "session_id": "FwipESvz1AaGGC1PntYB",
+     "stt_node": "rvykdU1Iy51XNlDEjna6",
+     "ref_node": "GeTmLIOYJuq7ZtH5CeFZ",
+     "asset_id": "kcF4hcDJ7We7VeMGFwAj",
+     "actual_credits": 27.72,
+     "actual_cents": 0.504,
+     "spoken_duration_secs": 4.86
+    }
+   ],
+   "scribe_text": "Sayıları bırakabilirsin. Zihnin arada başka yerlere kaydıysa o da olur",
+   "compare": {
+    "equal": true,
+    "words": 10
+   },
+   "compare_equal": true,
+   "cut_method": "audio.py cut (longest N-1 gaps) + 4.3(c) metric-only",
+   "cut": {
+    "cuts": [
+     1.5694
+    ],
+    "chosen_gaps": [
+     [
+      1.372,
+      1.766
+     ]
+    ],
+    "margin_ratio": null,
+    "boundary_misalign": 0.081,
+    "cut_suspect": false,
+    "thr_db": -53.63,
+    "pieces": [
+     {
+      "name": "s1",
+      "start": 0.0,
+      "end": 1.5694,
+      "dur": 1.569,
+      "speech_sec": 1.357,
+      "syll": 10,
+      "rate": 7.37
+     },
+     {
+      "name": "s2",
+      "start": 1.5694,
+      "end": 5.04,
+      "dur": 3.471,
+      "speech_sec": 3.198,
+      "syll": 17,
+      "rate": 5.32
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece_id": "c2.birak#1",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.birak/c2.birak#1.wav",
+     "text": "Sayıları bırakabilirsin.",
+     "syll": 10,
+     "duration": 1.661,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -6.0,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 1.661,
+      "lufs": -18.0,
+      "speech_rms_db": -17.29,
+      "true_peak_dbtp": -6.0,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c2.birak#2",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.birak/c2.birak#2.wav",
+     "text": "Zihnin arada başka yerlere kaydıysa o da olur.",
+     "syll": 17,
+     "duration": 3.502,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -4.11,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.502,
+      "lufs": -18.0,
+      "speech_rms_db": -17.41,
+      "true_peak_dbtp": -4.11,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+    }
+   ],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 5.94 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "c2.kal": {
+   "idx": 38,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Bir süre hiçbir şey yapmadan dinlenmek var.",
+   "screen": "Bir süre hiçbir şey yapmadan dinlenmek var.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t1",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.kal/t1.mp3",
+    "generation_id": "ALwy1STnkJWthfw5Rbkg",
+    "session_id": "Y0Jcn3FJbYM1wcIJ8yfX",
+    "duration_secs": 3.04
+   },
+   "rank_order_original": [
+    "t1.mp3",
+    "t2.mp3",
+    "t3.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t1.mp3",
+    "rank": 1,
+    "score": 0.135,
+    "penalties": {
+     "rate": 0.0,
+     "dur": 0.135,
+     "f0sd": 0.0
+    },
+    "soft_violations": [],
+    "reasons": [
+     "eklemleme 4.42 ≤ 5.0",
+     "süre 2.94 sn, ortancadan %0.7",
+     "F0 yayılımı 3.48 yt"
+    ],
+    "metrics": {
+     "duration": 3.04,
+     "active_sec": 2.938,
+     "speech_sec": 2.938,
+     "articulation": 4.42,
+     "f0_mean_hz": 226.7,
+     "f0_geo_hz": 222.1,
+     "f0_sd_semitones": 3.48,
+     "lufs": -20.47,
+     "rms_db": -19.51,
+     "true_peak_dbtp": -9.15,
+     "sibilance_ratio": 0.0076,
+     "pause_total_sec": 0
+    },
+    "cut": {
+     "needed": 1,
+     "found": 1,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.04,
+       "speech_sec": 2.938,
+       "syll": 13,
+       "rate": 4.42
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Bir süre hiçbir şey yapmadan dinlenmek var",
+     "compare_exit": 0,
+     "generation_id": "L2KgrIndabcGd7kcnSof",
+     "session_id": "KCHcAVVA9HzZ7ZHfJugu",
+     "stt_node": "lK0VRFpMwmXHpdYI8DKS",
+     "ref_node": "T6iebtDJ1XYIFz76pDto",
+     "asset_id": "a65ONn5hgAykXePwYq2U",
+     "actual_credits": 16.72,
+     "actual_cents": 0.304,
+     "spoken_duration_secs": 2.88
+    }
+   ],
+   "scribe_text": "Bir süre hiçbir şey yapmadan dinlenmek var",
+   "compare": {
+    "equal": true,
+    "words": 7
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "c2.kal",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.kal/c2.kal.wav",
+     "text": "Bir süre hiçbir şey yapmadan dinlenmek var.",
+     "syll": 13,
+     "duration": 3.24,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -7.19,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.24,
+      "lufs": -18.0,
+      "speech_rms_db": -17.05,
+      "true_peak_dbtp": -7.19,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [],
+   "accepted": true
+  },
+  "br.k2": {
+   "idx": 39,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Bedenin dinlenebilir; sen uyanıksın.",
+   "screen": "Bedenin dinlenebilir; sen uyanıksın.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t1",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/br.k2/t1.mp3",
+    "generation_id": "h0ycMIaxtMnYveO7srIF",
+    "session_id": "juCrXIXci1UTHBgPEdP4",
+    "duration_secs": 3.12
+   },
+   "rank_order_original": [
+    "t1.mp3",
+    "t3.mp3",
+    "t2.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t1.mp3",
+    "rank": 1,
+    "score": 0.379,
+    "penalties": {
+     "rate": 0.0,
+     "dur": 0.379,
+     "f0sd": 0.0
+    },
+    "soft_violations": [],
+    "reasons": [
+     "eklemleme 4.98 ≤ 5.0",
+     "süre 2.96 sn, ortancadan %1.9",
+     "F0 yayılımı 3.52 yt"
+    ],
+    "metrics": {
+     "duration": 3.12,
+     "active_sec": 2.958,
+     "speech_sec": 2.609,
+     "articulation": 4.98,
+     "f0_mean_hz": 231.5,
+     "f0_geo_hz": 226.6,
+     "f0_sd_semitones": 3.52,
+     "lufs": -20.25,
+     "rms_db": -19.39,
+     "true_peak_dbtp": -8.55,
+     "sibilance_ratio": 0.0066,
+     "pause_total_sec": 0.349
+    },
+    "cut": {
+     "needed": 1,
+     "found": 2,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.12,
+       "speech_sec": 2.609,
+       "syll": 13,
+       "rate": 4.98
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Bedenin dinlenebilir. Sen uyanıksın",
+     "compare_exit": 0,
+     "generation_id": "VXZPPukycsFWYv0dEgbM",
+     "session_id": "odTGoI1DWjLpgNcr9xla",
+     "stt_node": "72DSRKg9MS7oq5JTRQvl",
+     "ref_node": "XcrCGopTSNX6YOMxXcdN",
+     "asset_id": "zDLCnCYdj2SkorYwAc4w",
+     "actual_credits": 17.16,
+     "actual_cents": 0.312,
+     "spoken_duration_secs": 2.94
+    }
+   ],
+   "scribe_text": "Bedenin dinlenebilir. Sen uyanıksın",
+   "compare": {
+    "equal": true,
+    "words": 4
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "br.k2",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/br.k2/br.k2.wav",
+     "text": "Bedenin dinlenebilir; sen uyanıksın.",
+     "syll": 13,
+     "duration": 3.261,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -4.79,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.261,
+      "lufs": -18.0,
+      "speech_rms_db": -17.0,
+      "true_peak_dbtp": -4.79,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [],
+   "accepted": true
+  },
+  "br.orta": {
+   "idx": 40,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde. Gözlerin açıksa bakışın serbest. Zemin seni hep taşıyor.",
+   "screen": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde. Gözlerin açıksa bakışın serbest. Zemin seni hep taşıyor.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t2",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/br.orta/t2.mp3",
+    "generation_id": "rbAsnJYXXvlP0QIWGddV",
+    "session_id": "YqBq3pdSpfR9WYA32qtl",
+    "duration_secs": 10.08
+   },
+   "rank_order_original": [
+    "t2.mp3",
+    "t3.mp3",
+    "t1.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t2.mp3",
+    "rank": 1,
+    "score": 0.533,
+    "penalties": {
+     "rate": 0.533,
+     "dur": 0.0,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 5.16 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 9.92 sn, ortancadan %0.0",
+     "F0 yayılımı 4.03 yt"
+    ],
+    "metrics": {
+     "duration": 10.08,
+     "active_sec": 9.922,
+     "speech_sec": 8.91,
+     "articulation": 5.16,
+     "f0_mean_hz": 223.4,
+     "f0_geo_hz": 217.4,
+     "f0_sd_semitones": 4.03,
+     "lufs": -22.24,
+     "rms_db": -20.97,
+     "true_peak_dbtp": -8.71,
+     "sibilance_ratio": 0.0125,
+     "pause_total_sec": 1.013
+    },
+    "cut": {
+     "needed": 3,
+     "found": 4,
+     "cuts_sec": [
+      5.2379,
+      8.0319
+     ],
+     "chosen_gaps": [
+      [
+       4.994,
+       5.483
+      ],
+      [
+       7.862,
+       8.201
+      ]
+     ],
+     "margin_ratio": 1.838,
+     "boundary_misalign": 0.036,
+     "cut_suspect": false,
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 5.238,
+       "speech_sec": 4.779,
+       "syll": 27,
+       "rate": 5.65
+      },
+      {
+       "name": "s2",
+       "keep": true,
+       "start": 5.238,
+       "end": 8.032,
+       "speech_sec": 2.39,
+       "syll": 11,
+       "rate": 4.6
+      },
+      {
+       "name": "s3",
+       "keep": true,
+       "start": 8.032,
+       "end": 10.08,
+       "speech_sec": 1.761,
+       "syll": 8,
+       "rate": 4.54
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde. Gözlerin açıksa bakışın serbest. Zemin seni hep taşıyor",
+     "compare_exit": 0,
+     "generation_id": "XLKf5rU65wOgq82rETT3",
+     "session_id": "1ambyB81sG4Qh1NIhoPu",
+     "stt_node": "gPWPt5C7DuaxO9tCAthD",
+     "ref_node": "DgyNxRSekYtyS44jCXjq",
+     "asset_id": "v2OodcCB85o820YXXQyc",
+     "actual_credits": 55.44,
+     "actual_cents": 1.008,
+     "spoken_duration_secs": 9.9
+    }
+   ],
+   "scribe_text": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde. Gözlerin açıksa bakışın serbest. Zemin seni hep taşıyor",
+   "compare": {
+    "equal": true,
+    "words": 19
+   },
+   "compare_equal": true,
+   "cut_method": "audio.py cut (longest N-1 gaps) + 4.3(c) metric-only",
+   "cut": {
+    "cuts": [
+     5.2379,
+     8.0319
+    ],
+    "chosen_gaps": [
+     [
+      4.994,
+      5.483
+     ],
+     [
+      7.862,
+      8.201
+     ]
+    ],
+    "margin_ratio": 1.838,
+    "boundary_misalign": 0.036,
+    "cut_suspect": false,
+    "thr_db": -54.24,
+    "pieces": [
+     {
+      "name": "s1",
+      "start": 0.0,
+      "end": 5.2379,
+      "dur": 5.238,
+      "speech_sec": 4.779,
+      "syll": 27,
+      "rate": 5.65
+     },
+     {
+      "name": "s2",
+      "start": 5.2379,
+      "end": 8.0319,
+      "dur": 2.794,
+      "speech_sec": 2.39,
+      "syll": 11,
+      "rate": 4.6
+     },
+     {
+      "name": "s3",
+      "start": 8.0319,
+      "end": 10.08,
+      "dur": 2.048,
+      "speech_sec": 1.761,
+      "syll": 8,
+      "rate": 4.54
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece_id": "br.orta#1",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/br.orta/br.orta#1.wav",
+     "text": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde.",
+     "syll": 27,
+     "duration": 5.265,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -4.36,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 5.265,
+      "lufs": -18.0,
+      "speech_rms_db": -16.82,
+      "true_peak_dbtp": -4.36,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "br.orta#2",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/br.orta/br.orta#2.wav",
+     "text": "Gözlerin açıksa bakışın serbest.",
+     "syll": 11,
+     "duration": 2.695,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -2.73,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 2.695,
+      "lufs": -18.0,
+      "speech_rms_db": -16.8,
+      "true_peak_dbtp": -2.73,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "br.orta#3",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/br.orta/br.orta#3.wav",
+     "text": "Zemin seni hep taşıyor.",
+     "syll": 8,
+     "duration": 2.066,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -4.47,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 2.066,
+      "lufs": -18.0,
+      "speech_rms_db": -16.75,
+      "true_peak_dbtp": -4.47,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+    }
+   ],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 5.16 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "c4.yer": {
+   "idx": 41,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Zihninde sana iyi gelen bir orman belirebilir.",
+   "screen": "Zihninde sana iyi gelen bir orman belirebilir.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t1",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.yer/t1.mp3",
+    "generation_id": "6knCJ6OO6RNFWP3mwzRE",
+    "session_id": "aDqHEjIlHsZusV9kxYgt",
+    "duration_secs": 3.28
+   },
+   "rank_order_original": [
+    "t1.mp3",
+    "t3.mp3",
+    "t2.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t1.mp3",
+    "rank": 1,
+    "score": 1.3,
+    "penalties": {
+     "rate": 1.3,
+     "dur": 0.0,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 5.39 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 3.15 sn, ortancadan %0.0",
+     "F0 yayılımı 2.74 yt"
+    ],
+    "metrics": {
+     "duration": 3.28,
+     "active_sec": 3.153,
+     "speech_sec": 3.153,
+     "articulation": 5.39,
+     "f0_mean_hz": 247.1,
+     "f0_geo_hz": 244.0,
+     "f0_sd_semitones": 2.74,
+     "lufs": -20.01,
+     "rms_db": -19.08,
+     "true_peak_dbtp": -9.01,
+     "sibilance_ratio": 0.0036,
+     "pause_total_sec": 0
+    },
+    "cut": {
+     "needed": 1,
+     "found": 1,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.28,
+       "speech_sec": 3.153,
+       "syll": 17,
+       "rate": 5.39
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Zihninde sana iyi gelen bir orman belirebilir",
+     "compare_exit": 0,
+     "generation_id": "B4B64g2UjPAFylVYpSWG",
+     "session_id": "IcGLTVaoQ9cEc5JLssgd",
+     "stt_node": "bvybdiK4RXr0g0inHlQg",
+     "ref_node": "T4Oor0RZg7nxc6OJQQYQ",
+     "asset_id": "lG8yaKUbk4A3NkXnNMdj",
+     "actual_credits": 18.04,
+     "actual_cents": 0.328,
+     "spoken_duration_secs": 3.08
+    }
+   ],
+   "scribe_text": "Zihninde sana iyi gelen bir orman belirebilir",
+   "compare": {
+    "equal": true,
+    "words": 7
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "c4.yer",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.yer/c4.yer.wav",
+     "text": "Zihninde sana iyi gelen bir orman belirebilir.",
+     "syll": 17,
+     "duration": 3.461,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -6.05,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.461,
+      "lufs": -18.0,
+      "speech_rms_db": -17.09,
+      "true_peak_dbtp": -6.05,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 5.39 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "c4.gelmezse": {
+   "idx": 42,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Bir görüntü gelmese de olur, gözlerin açık kalsa da.",
+   "screen": "Bir görüntü gelmese de olur, gözlerin açık kalsa da.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t3",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.gelmezse/t3.mp3",
+    "generation_id": "E4omjJNmCkH1DGjGKEdD",
+    "session_id": "8LzTF5VUDSS5LIWUwJb9",
+    "duration_secs": 3.92
+   },
+   "rank_order_original": [
+    "t3.mp3",
+    "t1.mp3",
+    "t2.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t3.mp3",
+    "rank": 1,
+    "score": 1.38,
+    "penalties": {
+     "rate": 1.033,
+     "dur": 0.347,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 5.31 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 3.76 sn, ortancadan %1.7",
+     "F0 yayılımı 3.86 yt"
+    ],
+    "metrics": {
+     "duration": 3.92,
+     "active_sec": 3.756,
+     "speech_sec": 3.387,
+     "articulation": 5.31,
+     "f0_mean_hz": 243.3,
+     "f0_geo_hz": 237.3,
+     "f0_sd_semitones": 3.86,
+     "lufs": -21.4,
+     "rms_db": -20.29,
+     "true_peak_dbtp": -8.85,
+     "sibilance_ratio": 0.0104,
+     "pause_total_sec": 0.369
+    },
+    "cut": {
+     "needed": 1,
+     "found": 2,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.92,
+       "speech_sec": 3.387,
+       "syll": 18,
+       "rate": 5.31
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Bir görüntü gelmese de olur. Gözlerin açık kalsa da",
+     "compare_exit": 0,
+     "generation_id": "QPx1G2y24rKP3LzQhV0w",
+     "session_id": "UifbOvlAZFZ8KJefBO88",
+     "stt_node": "d9YJo1gDbPweWtHCLSs6",
+     "ref_node": "tf1f3rM56wSSzb9bTy5a",
+     "asset_id": "f1SK6ujPrwLT07WD5brB",
+     "actual_credits": 21.56,
+     "actual_cents": 0.392,
+     "spoken_duration_secs": 3.74
+    }
+   ],
+   "scribe_text": "Bir görüntü gelmese de olur. Gözlerin açık kalsa da",
+   "compare": {
+    "equal": true,
+    "words": 9
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "c4.gelmezse",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.gelmezse/c4.gelmezse.wav",
+     "text": "Bir görüntü gelmese de olur, gözlerin açık kalsa da.",
+     "syll": 18,
+     "duration": 4.061,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -5.25,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 4.061,
+      "lufs": -18.0,
+      "speech_rms_db": -16.82,
+      "true_peak_dbtp": -5.25,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 5.31 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "c4.patika": {
+   "idx": 43,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Kendini yumuşak bir patikanın başında bulabilirsin.",
+   "screen": "Kendini yumuşak bir patikanın başında bulabilirsin.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t3",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.patika/t3.mp3",
+    "generation_id": "zZ0rGZrVcqBjsPnWlvEm",
+    "session_id": "try3oAPDDK9kLguC18Ds",
+    "duration_secs": 3.2
+   },
+   "rank_order_original": [
+    "t3.mp3",
+    "t2.mp3",
+    "t1.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t3.mp3",
+    "rank": 1,
+    "score": 4.2,
+    "penalties": {
+     "rate": 4.167,
+     "dur": 0.033,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 6.25 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 3.04 sn, ortancadan %0.2",
+     "F0 yayılımı 2.77 yt"
+    ],
+    "metrics": {
+     "duration": 3.2,
+     "active_sec": 3.038,
+     "speech_sec": 3.038,
+     "articulation": 6.25,
+     "f0_mean_hz": 242.2,
+     "f0_geo_hz": 239.0,
+     "f0_sd_semitones": 2.77,
+     "lufs": -20.86,
+     "rms_db": -19.7,
+     "true_peak_dbtp": -8.4,
+     "sibilance_ratio": 0.0115,
+     "pause_total_sec": 0
+    },
+    "cut": {
+     "needed": 1,
+     "found": 1,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.2,
+       "speech_sec": 3.038,
+       "syll": 19,
+       "rate": 6.25
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Kendini yumuşak bir patikanın başında bulabilirsin",
+     "compare_exit": 0,
+     "generation_id": "70DvFgkZUTac1iqnYdGT",
+     "session_id": "QGUc3NQLMQFucw3nzQg1",
+     "stt_node": "lqhJkN4LunEEFWZ8qUmy",
+     "ref_node": "8ja61I49DT42szLakW0c",
+     "asset_id": "yiOLW26u065vK5yu9Z86",
+     "actual_credits": 17.6,
+     "actual_cents": 0.32,
+     "spoken_duration_secs": 3.02
+    }
+   ],
+   "scribe_text": "Kendini yumuşak bir patikanın başında bulabilirsin",
+   "compare": {
+    "equal": true,
+    "words": 6
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "c4.patika",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.patika/c4.patika.wav",
+     "text": "Kendini yumuşak bir patikanın başında bulabilirsin.",
+     "syll": 19,
+     "duration": 3.344,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -6.34,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.344,
+      "lufs": -18.0,
+      "speech_rms_db": -16.9,
+      "true_peak_dbtp": -6.34,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 6.25 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "c4.yol": {
+   "idx": 44,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Yol önünde açılıyor. Kendi hızında yürüyorsun.",
+   "screen": "Yol önünde açılıyor. Kendi hızında yürüyorsun.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t3",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.yol/t3.mp3",
+    "generation_id": "T4OBGHfai8mKbSa24kRG",
+    "session_id": "7xFF6970jYb7H3BtpygO",
+    "duration_secs": 3.44
+   },
+   "rank_order_original": [
+    "t3.mp3",
+    "t2.mp3",
+    "t1.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t3.mp3",
+    "rank": 1,
+    "score": 3.36,
+    "penalties": {
+     "rate": 3.1,
+     "dur": 0.0,
+     "f0sd": 0.26
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 5.93 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 3.22 sn, ortancadan %0.0",
+     "F0 yayılımı 4.54 yt"
+    ],
+    "metrics": {
+     "duration": 3.44,
+     "active_sec": 3.223,
+     "speech_sec": 2.868,
+     "articulation": 5.93,
+     "f0_mean_hz": 217.2,
+     "f0_geo_hz": 209.7,
+     "f0_sd_semitones": 4.54,
+     "lufs": -21.4,
+     "rms_db": -20.38,
+     "true_peak_dbtp": -9.06,
+     "sibilance_ratio": 0.0087,
+     "pause_total_sec": 0.354
+    },
+    "cut": {
+     "needed": 2,
+     "found": 2,
+     "cuts_sec": [
+      1.6329
+     ],
+     "chosen_gaps": [
+      [
+       1.457,
+       1.811
+      ]
+     ],
+     "margin_ratio": null,
+     "boundary_misalign": 0.022,
+     "cut_suspect": false,
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 1.633,
+       "speech_sec": 1.427,
+       "syll": 8,
+       "rate": 5.61
+      },
+      {
+       "name": "s2",
+       "keep": true,
+       "start": 1.633,
+       "end": 3.44,
+       "speech_sec": 1.452,
+       "syll": 9,
+       "rate": 6.2
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Yol önünde açılıyor. Kendi hızında yürüyorsun",
+     "compare_exit": 0,
+     "generation_id": "V7jOKSYvLxacmPcWZeX8",
+     "session_id": "RBjEhu6OfMlegyiveXqS",
+     "stt_node": "g0rAYA0HLxJjUGiSjYPn",
+     "ref_node": "Z7i44QVOOHld92aYklE1",
+     "asset_id": "z81qlLjW1nKdn03VjV6t",
+     "actual_credits": 18.92,
+     "actual_cents": 0.344,
+     "spoken_duration_secs": 3.24
+    }
+   ],
+   "scribe_text": "Yol önünde açılıyor. Kendi hızında yürüyorsun",
+   "compare": {
+    "equal": true,
+    "words": 6
+   },
+   "compare_equal": true,
+   "cut_method": "audio.py cut (longest N-1 gaps) + 4.3(c) metric-only",
+   "cut": {
+    "cuts": [
+     1.6329
+    ],
+    "chosen_gaps": [
+     [
+      1.457,
+      1.811
+     ]
+    ],
+    "margin_ratio": null,
+    "boundary_misalign": 0.022,
+    "cut_suspect": false,
+    "thr_db": -53.4,
+    "pieces": [
+     {
+      "name": "s1",
+      "start": 0.0,
+      "end": 1.6329,
+      "dur": 1.633,
+      "speech_sec": 1.427,
+      "syll": 8,
+      "rate": 5.61
+     },
+     {
+      "name": "s2",
+      "start": 1.6329,
+      "end": 3.44,
+      "dur": 1.807,
+      "speech_sec": 1.452,
+      "syll": 9,
+      "rate": 6.2
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece_id": "c4.yol#1",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.yol/c4.yol#1.wav",
+     "text": "Yol önünde açılıyor.",
+     "syll": 8,
+     "duration": 1.734,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -5.78,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 1.734,
+      "lufs": -18.0,
+      "speech_rms_db": -17.4,
+      "true_peak_dbtp": -5.78,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c4.yol#2",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.yol/c4.yol#2.wav",
+     "text": "Kendi hızında yürüyorsun.",
+     "syll": 9,
+     "duration": 1.758,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -5.59,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 1.758,
+      "lufs": -18.0,
+      "speech_rms_db": -17.32,
+      "true_peak_dbtp": -5.59,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+    }
+   ],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 5.93 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "c4.ses": {
+   "idx": 45,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Uzaktan gelip giden yaprak hışırtısı.",
+   "screen": "Uzaktan gelip giden yaprak hışırtısı.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t3",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.ses/t3.mp3",
+    "generation_id": "08dmInRuYwK1ikfH5QzV",
+    "session_id": "5SQqQRhGYCF7H2tLzWNX",
+    "duration_secs": 2.64
+   },
+   "rank_order_original": [
+    "t3.mp3",
+    "t2.mp3",
+    "t1.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t3.mp3",
+    "rank": 1,
+    "score": 1.167,
+    "penalties": {
+     "rate": 1.167,
+     "dur": 0.0,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 5.35 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 2.43 sn, ortancadan %0.0",
+     "F0 yayılımı 2.95 yt"
+    ],
+    "metrics": {
+     "duration": 2.64,
+     "active_sec": 2.43,
+     "speech_sec": 2.43,
+     "articulation": 5.35,
+     "f0_mean_hz": 227.7,
+     "f0_geo_hz": 224.3,
+     "f0_sd_semitones": 2.95,
+     "lufs": -22.09,
+     "rms_db": -20.7,
+     "true_peak_dbtp": -9.42,
+     "sibilance_ratio": 0.0124,
+     "pause_total_sec": 0
+    },
+    "cut": {
+     "needed": 1,
+     "found": 1,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 2.64,
+       "speech_sec": 2.43,
+       "syll": 13,
+       "rate": 5.35
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Uzaktan gelip giden yaprak hışırtısı",
+     "compare_exit": 0,
+     "generation_id": "3BW5JmLswSC9ZrVwAMpV",
+     "session_id": "Jr0Rh6ECmymHc5W95A6h",
+     "stt_node": "bfmfLUkDZkxDINtzGWQ6",
+     "ref_node": "WpDY8SdIglVd5HTtvLZQ",
+     "asset_id": "InOcdqM0NopINsE6axTB",
+     "actual_credits": 14.52,
+     "actual_cents": 0.264,
+     "spoken_duration_secs": 2.44
+    }
+   ],
+   "scribe_text": "Uzaktan gelip giden yaprak hışırtısı",
+   "compare": {
+    "equal": true,
+    "words": 5
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "c4.ses",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.ses/c4.ses.wav",
+     "text": "Uzaktan gelip giden yaprak hışırtısı.",
+     "syll": 13,
+     "duration": 2.732,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -4.28,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 2.732,
+      "lufs": -18.0,
+      "speech_rms_db": -16.62,
+      "true_peak_dbtp": -4.28,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 5.35 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "c4.gunes": {
+   "idx": 46,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Açık, aydınlık bir yere varıyorsun. Güneş tenini tatlı tatlı ısıtıyor.",
+   "screen": "Açık, aydınlık bir yere varıyorsun. Güneş tenini tatlı tatlı ısıtıyor.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t2",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.gunes/t2.mp3",
+    "generation_id": "BnuSlrvdlv9wp7bjpaQk",
+    "session_id": "QURlNOkNB8XjABKsYEsX",
+    "duration_secs": 5.6
+   },
+   "rank_order_original": [
+    "t2.mp3",
+    "t1.mp3",
+    "t3.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t2.mp3",
+    "rank": 1,
+    "score": 0.324,
+    "penalties": {
+     "rate": 0.1,
+     "dur": 0.224,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 5.03 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 5.41 sn, ortancadan %1.1",
+     "F0 yayılımı 3.28 yt"
+    ],
+    "metrics": {
+     "duration": 5.6,
+     "active_sec": 5.413,
+     "speech_sec": 4.974,
+     "articulation": 5.03,
+     "f0_mean_hz": 223.1,
+     "f0_geo_hz": 219.0,
+     "f0_sd_semitones": 3.28,
+     "lufs": -22.14,
+     "rms_db": -20.38,
+     "true_peak_dbtp": -8.41,
+     "sibilance_ratio": 0.0162,
+     "pause_total_sec": 0.439
+    },
+    "cut": {
+     "needed": 2,
+     "found": 2,
+     "cuts_sec": [
+      2.6142
+     ],
+     "chosen_gaps": [
+      [
+       2.395,
+       2.834
+      ]
+     ],
+     "margin_ratio": null,
+     "boundary_misalign": 0.009,
+     "cut_suspect": false,
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 2.614,
+       "speech_sec": 2.355,
+       "syll": 12,
+       "rate": 5.1
+      },
+      {
+       "name": "s2",
+       "keep": true,
+       "start": 2.614,
+       "end": 5.6,
+       "speech_sec": 2.629,
+       "syll": 13,
+       "rate": 4.94
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Açık, aydınlık bir yere varıyorsun. Güneş tenini tatlı tatlı ısıtıyor.",
+     "compare_exit": 0,
+     "generation_id": "mRX5qfkGsPYiN3uNHVXx",
+     "session_id": "VjlmVde1x3fr1qwf9j2t",
+     "stt_node": "nOcD2YuzMqjmwWlMHpC5",
+     "ref_node": "6an2Is3rDq3QALlRQ5mL",
+     "asset_id": "3vE1b2siqMxQLYs3LK7w",
+     "actual_credits": 30.8,
+     "actual_cents": 0.56,
+     "spoken_duration_secs": 5.4
+    }
+   ],
+   "scribe_text": "Açık, aydınlık bir yere varıyorsun. Güneş tenini tatlı tatlı ısıtıyor.",
+   "compare": {
+    "equal": true,
+    "words": 10
+   },
+   "compare_equal": true,
+   "cut_method": "audio.py cut (longest N-1 gaps) + 4.3(c) metric-only",
+   "cut": {
+    "cuts": [
+     2.6142
+    ],
+    "chosen_gaps": [
+     [
+      2.395,
+      2.834
+     ]
+    ],
+    "margin_ratio": null,
+    "boundary_misalign": 0.009,
+    "cut_suspect": false,
+    "thr_db": -54.14,
+    "pieces": [
+     {
+      "name": "s1",
+      "start": 0.0,
+      "end": 2.6142,
+      "dur": 2.614,
+      "speech_sec": 2.355,
+      "syll": 12,
+      "rate": 5.1
+     },
+     {
+      "name": "s2",
+      "start": 2.6142,
+      "end": 5.6,
+      "dur": 2.986,
+      "speech_sec": 2.629,
+      "syll": 13,
+      "rate": 4.94
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece_id": "c4.gunes#1",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.gunes/c4.gunes#1.wav",
+     "text": "Açık, aydınlık bir yere varıyorsun.",
+     "syll": 12,
+     "duration": 2.658,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -4.45,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 2.658,
+      "lufs": -18.0,
+      "speech_rms_db": -16.45,
+      "true_peak_dbtp": -4.45,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c4.gunes#2",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.gunes/c4.gunes#2.wav",
+     "text": "Güneş tenini tatlı tatlı ısıtıyor.",
+     "syll": 13,
+     "duration": 2.934,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -4.31,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 2.934,
+      "lufs": -18.0,
+      "speech_rms_db": -16.18,
+      "true_peak_dbtp": -4.31,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+    }
+   ],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 5.03 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "c4.don": {
+   "idx": 47,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Aynı patikadan, acele etmeden geri dönüyorsun.",
+   "screen": "Aynı patikadan, acele etmeden geri dönüyorsun.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t3",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.don/t3.mp3",
+    "generation_id": "VvN3X7PotO9ndHrk8xi2",
+    "session_id": "MSxIormPWeBoxQjbRbAE",
+    "duration_secs": 3.36
+   },
+   "rank_order_original": [
+    "t3.mp3",
+    "t2.mp3",
+    "t1.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t3.mp3",
+    "rank": 1,
+    "score": 3.767,
+    "penalties": {
+     "rate": 3.767,
+     "dur": 0.0,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 6.13 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 3.18 sn, ortancadan %0.0",
+     "F0 yayılımı 4.34 yt"
+    ],
+    "metrics": {
+     "duration": 3.36,
+     "active_sec": 3.178,
+     "speech_sec": 2.938,
+     "articulation": 6.13,
+     "f0_mean_hz": 238.8,
+     "f0_geo_hz": 231.4,
+     "f0_sd_semitones": 4.34,
+     "lufs": -21.69,
+     "rms_db": -20.5,
+     "true_peak_dbtp": -8.29,
+     "sibilance_ratio": 0.0066,
+     "pause_total_sec": 0.239
+    },
+    "cut": {
+     "needed": 1,
+     "found": 2,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.36,
+       "speech_sec": 2.938,
+       "syll": 18,
+       "rate": 6.13
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Aynı patikadan acele etmeden geri dönüyorsun",
+     "compare_exit": 0,
+     "generation_id": "oPE3mw5je6LnJw1JSNbs",
+     "session_id": "tC4HBz3Tu80k6SMcJcRH",
+     "stt_node": "nTwcKrW5zWpygJUgio3h",
+     "ref_node": "usKyQ0Ys0jLiI22hk2aX",
+     "asset_id": "Pa2plXOoJYyPKslrcMFl",
+     "actual_credits": 18.48,
+     "actual_cents": 0.336,
+     "spoken_duration_secs": 3.18
+    }
+   ],
+   "scribe_text": "Aynı patikadan acele etmeden geri dönüyorsun",
+   "compare": {
+    "equal": true,
+    "words": 6
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "c4.don",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.don/c4.don.wav",
+     "text": "Aynı patikadan, acele etmeden geri dönüyorsun.",
+     "syll": 18,
+     "duration": 3.485,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -4.56,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.485,
+      "lufs": -18.0,
+      "speech_rms_db": -16.69,
+      "true_peak_dbtp": -4.56,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 6.13 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "c4.solma": {
+   "idx": 48,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Görüntü usulca siliniyor. Seni taşıyan zemini yeniden hissedebilirsin.",
+   "screen": "Görüntü usulca siliniyor. Seni taşıyan zemini yeniden hissedebilirsin.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t3",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c4.solma/t3.mp3",
+    "generation_id": "rp3VqzZVjYbfT3amhrcR",
+    "session_id": "edsBxsRI9jMJZPQQYEZV",
+    "duration_secs": 5.36
+   },
+   "rank_order_original": [
+    "t3.mp3",
+    "t2.mp3",
+    "t1.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t3.mp3",
+    "rank": 1,
+    "score": 2.32,
+    "penalties": {
+     "rate": 2.067,
+     "dur": 0.253,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 5.62 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 5.20 sn, ortancadan %1.3",
+     "F0 yayılımı 3.54 yt"
+    ],
+    "metrics": {
+     "duration": 5.36,
+     "active_sec": 5.198,
+     "speech_sec": 4.804,
+     "articulation": 5.62,
+     "f0_mean_hz": 222.4,
+     "f0_geo_hz": 217.7,
+     "f0_sd_semitones": 3.54,
+     "lufs": -21.06,
+     "rms_db": -20.11,
+     "true_peak_dbtp": -9.63,
+     "sibilance_ratio": 0.0106,
+     "pause_total_sec": 0.394
+    },
+    "cut": {
+     "needed": 2,
+     "found": 2,
+     "cuts_sec": [
+      2.1692
+     ],
+     "chosen_gaps": [
+      [
+       1.971,
+       2.365
+      ]
+     ],
+     "margin_ratio": null,
+     "boundary_misalign": 0.027,
+     "cut_suspect": false,
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 2.169,
+       "speech_sec": 1.956,
+       "syll": 10,
+       "rate": 5.11
+      },
+      {
+       "name": "s2",
+       "keep": true,
+       "start": 2.169,
+       "end": 5.36,
+       "speech_sec": 2.859,
+       "syll": 17,
+       "rate": 5.95
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Görüntü usulca siliniyor. Seni taşıyan zemini yeniden hissedebilirsin",
+     "compare_exit": 0,
+     "generation_id": "qVCkKezzj0dVWFMUFjQ9",
+     "session_id": "CciPybAS9LJFfawnQt48",
+     "stt_node": "mdAIk48evZ1Maw0i0CAh",
+     "ref_node": "jL2Km5NZ3TXCNbEPNxJU",
+     "asset_id": "aWr3SBEvnulU0GzKzRdc",
+     "actual_credits": 29.48,
+     "actual_cents": 0.536,
+     "spoken_duration_secs": 5.18
+    }
+   ],
+   "scribe_text": "Görüntü usulca siliniyor. Seni taşıyan zemini yeniden hissedebilirsin",
+   "compare": {
+    "equal": true,
+    "words": 8
+   },
+   "compare_equal": true,
+   "cut_method": "audio.py cut (longest N-1 gaps) + 4.3(c) metric-only",
+   "cut": {
+    "cuts": [
+     2.1692
+    ],
+    "chosen_gaps": [
+     [
+      1.971,
+      2.365
+     ]
+    ],
+    "margin_ratio": null,
+    "boundary_misalign": 0.027,
+    "cut_suspect": false,
+    "thr_db": -53.06,
+    "pieces": [
+     {
+      "name": "s1",
+      "start": 0.0,
+      "end": 2.1692,
+      "dur": 2.169,
+      "speech_sec": 1.956,
+      "syll": 10,
+      "rate": 5.11
+     },
+     {
+      "name": "s2",
+      "start": 2.1692,
+      "end": 5.36,
+      "dur": 3.191,
+      "speech_sec": 2.859,
+      "syll": 17,
+      "rate": 5.95
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece_id": "c4.solma#1",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.solma/c4.solma#1.wav",
+     "text": "Görüntü usulca siliniyor.",
+     "syll": 10,
+     "duration": 2.259,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -5.27,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 2.259,
+      "lufs": -18.0,
+      "speech_rms_db": -16.8,
+      "true_peak_dbtp": -5.27,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c4.solma#2",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c4.solma/c4.solma#2.wav",
+     "text": "Seni taşıyan zemini yeniden hissedebilirsin.",
+     "syll": 17,
+     "duration": 3.164,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -7.3,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.164,
+      "lufs": -18.0,
+      "speech_rms_db": -17.48,
+      "true_peak_dbtp": -7.3,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+    }
+   ],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 5.62 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "n2.hatirla": {
+   "idx": 49,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
+   "screen": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "retake-t2",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/n2.hatirla/retake/t2.mp3",
+    "generation_id": "6ribRV7rdIqob0FLhHZ5",
+    "session_id": "uZ0B2lHHI7YfH30eQSZi",
+    "duration_secs": 8.4
+   },
+   "rank_order_original": [
+    "t1.mp3",
+    "t3.mp3",
+    "t2.mp3"
+   ],
+   "excluded_by_rank": [],
+   "retake_rank_order": [
+    "t3.mp3",
+    "t2.mp3",
+    "t1.mp3"
+   ],
+   "rank_all6_order": [
+    "t5.mp3 (=retake-t2)",
+    "t6.mp3 (=retake-t3)",
+    "t4.mp3 (=retake-t1)",
+    "t1.mp3",
+    "t3.mp3",
+    "t2.mp3"
+   ],
+   "chosen_rank": {
+    "take": "t2.mp3",
+    "rank": 2,
+    "score": 1.383,
+    "penalties": {
+     "rate": 0.933,
+     "dur": 0.27,
+     "f0sd": 0.18
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 5.28 > 5.0 hece/sn (VARSAYIM, raporlanır)",
+     "kesim hece payından sapıyor (0.171 > 0.12)"
+    ],
+    "reasons": [
+     "süre 8.19 sn, ortancadan %1.3",
+     "F0 yayılımı 4.07 yt"
+    ],
+    "metrics": {
+     "duration": 8.4,
+     "active_sec": 8.186,
+     "speech_sec": 7.194,
+     "articulation": 5.28,
+     "f0_mean_hz": 229.1,
+     "f0_geo_hz": 222.8,
+     "f0_sd_semitones": 4.07,
+     "lufs": -21.2,
+     "rms_db": -19.8,
+     "true_peak_dbtp": -6.54,
+     "sibilance_ratio": 0.009,
+     "pause_total_sec": 0.993
+    },
+    "cut": {
+     "needed": 2,
+     "found": 3,
+     "cuts_sec": [
+      5.5827
+     ],
+     "chosen_gaps": [
+      [
+       5.318,
+       5.847
+      ]
+     ],
+     "margin_ratio": 1.14,
+     "boundary_misalign": 0.171,
+     "cut_suspect": true,
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 5.583,
+       "speech_sec": 4.834,
+       "syll": 19,
+       "rate": 3.93
+      },
+      {
+       "name": "s2",
+       "keep": true,
+       "start": 5.583,
+       "end": 8.4,
+       "speech_sec": 2.37,
+       "syll": 19,
+       "rate": 8.02
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "retake-t2",
+     "scribe_text": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Ya da yine şunu: Kendime dinlenmeye izin veriyorum.",
+     "compare_exit": 0,
+     "generation_id": "r0hoKYajklzt9deArCWn",
+     "session_id": "4WAkal0PjLSakku1L8us",
+     "stt_node": "OwrYsZ7HqUxKE5l2TdOB",
+     "ref_node": "eNDhyxIdKOhErD7l4Pps",
+     "asset_id": "rxY276KviSgwWeDLxGtB",
+     "actual_credits": 46.2,
+     "actual_cents": 0.84,
+     "spoken_duration_secs": 8.18
+    }
+   ],
+   "scribe_text": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Ya da yine şunu: Kendime dinlenmeye izin veriyorum.",
+   "compare": {
+    "equal": true,
+    "words": 16
+   },
+   "compare_equal": true,
+   "cut_method": "sentence-boundary gap (DEVIATION from SPEC 3 longest-gap rule) + 4.3(c) metric-only",
+   "cut": {
+    "candidates": [
+     {
+      "gap": [
+       3.791,
+       4.255
+      ],
+      "dur": 0.464,
+      "cut_sec": 4.0229,
+      "speech_sec": [
+       3.771,
+       3.442
+      ],
+      "rates": [
+       5.04,
+       5.52
+      ],
+      "misalign": 0.023
+     },
+     {
+      "gap": [
+       5.318,
+       5.847
+      ],
+      "dur": 0.529,
+      "cut_sec": 5.5827,
+      "speech_sec": [
+       4.834,
+       2.37
+      ],
+      "rates": [
+       3.93,
+       8.02
+      ],
+      "misalign": 0.171
+     }
+    ],
+    "spec_rule_cut (longest gap)": {
+     "gap": [
+      5.318,
+      5.847
+     ],
+     "dur": 0.529,
+     "cut_sec": 5.5827,
+     "speech_sec": [
+      4.834,
+      2.37
+     ],
+     "rates": [
+      3.93,
+      8.02
+     ],
+     "misalign": 0.171
+    },
+    "chosen_cut (sentence boundary)": {
+     "gap": [
+      3.791,
+      4.255
+     ],
+     "dur": 0.464,
+     "cut_sec": 4.0229,
+     "speech_sec": [
+      3.771,
+      3.442
+     ],
+     "rates": [
+      5.04,
+      5.52
+     ],
+     "misalign": 0.023
+    },
+    "cut_misalign_max": 0.12
+   },
+   "pieces": [
+    {
+     "piece_id": "n2.hatirla#1",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/n2.hatirla/n2.hatirla#1.wav",
+     "text": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli.",
+     "syll": 19,
+     "cut_start": 0.0,
+     "cut_end": 4.0229,
+     "duration": 4.079,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -2.78,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 4.079,
+      "lufs": -18.0,
+      "speech_rms_db": -16.75,
+      "true_peak_dbtp": -2.78,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "n2.hatirla#2",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/n2.hatirla/n2.hatirla#2.wav",
+     "text": "Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
+     "syll": 19,
+     "cut_start": 4.0229,
+     "cut_end": 8.4,
+     "duration": 4.266,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -5.74,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 4.266,
+      "lufs": -18.0,
+      "speech_rms_db": -16.7,
+      "true_peak_dbtp": -5.74,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+    },
+    {
+     "flag": "kulak",
+     "reason": "no take passes SPEC 4.3 with the SPEC 3 cut rule: in all 3 original takes and all 3 re-takes the longest pause is after \"şunu:\" (inside sentence 2), so the longest-gap cut splits \"... yeterli. Ya da yine şunu:\" | \"Kendime dinlenmeye izin veriyorum.\" (misalign 0.165-0.186, piece rates ~3.9 vs ~8.0 syll/s). Single re-take used (3 takes). Best of 6 = retake-t2 (Scribe exact match, 16 words)."
+    },
+    {
+     "flag": "kesim-kuraldisi",
+     "reason": "DEVIATION needing owner/orchestrator approval: pieces cut at the sentence-boundary gap 3.791-4.255 s (2nd-longest pause, cut 4.0229 s, misalign 0.023, rates 5.04/5.52) instead of the longest gap 5.318-5.847 s, so that piece text = screen text. If rejected, this unit has no SPEC-conformant pieces."
+    }
+   ],
+   "notes": [
+    "original t1-t3 were not Scribe-checked: eliminated before 4.2 by the mandatory cut criterion (metric)",
+    "soft (4.1): Derin tavanı aşıldı: 5.28 > 5.0 hece/sn (VARSAYIM, raporlanır)",
+    "soft (4.1): kesim hece payından sapıyor (0.171 > 0.12)"
+   ],
+   "accepted": true
+  },
+  "n2.dilek": {
+   "idx": 50,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Niyetini dersten sonra da taşımak sana kalmış.",
+   "screen": "Niyetini dersten sonra da taşımak sana kalmış.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t2",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/n2.dilek/t2.mp3",
+    "generation_id": "2K6J17fPPLTAhhU9v9lt",
+    "session_id": "4Xp1UlZZri3Xoa2q7yVW",
+    "duration_secs": 3.2
+   },
+   "rank_order_original": [
+    "t1.mp3",
+    "t2.mp3",
+    "t3.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t2.mp3",
+    "rank": 2,
+    "score": 1.379,
+    "penalties": {
+     "rate": 0.8,
+     "dur": 0.299,
+     "f0sd": 0.28
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 5.24 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 3.05 sn, ortancadan %1.5",
+     "F0 yayılımı 3.66 yt"
+    ],
+    "metrics": {
+     "duration": 3.2,
+     "active_sec": 3.053,
+     "speech_sec": 3.053,
+     "articulation": 5.24,
+     "f0_mean_hz": 253.9,
+     "f0_geo_hz": 248.3,
+     "f0_sd_semitones": 3.66,
+     "lufs": -22.11,
+     "rms_db": -21.34,
+     "true_peak_dbtp": -8.55,
+     "sibilance_ratio": 0.0239,
+     "pause_total_sec": 0
+    },
+    "cut": {
+     "needed": 1,
+     "found": 1,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.2,
+       "speech_sec": 3.053,
+       "syll": 16,
+       "rate": 5.24
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Niyetini dersten sonra da taşımak sana kalmış",
+     "compare_exit": 0,
+     "generation_id": "y16DjWhiZdLbmkNpM203",
+     "session_id": "JY3yBxKK7OLV9N6PPHwZ",
+     "stt_node": "WohLgAQCsp6OqS6NgYmb",
+     "ref_node": "i6OqTJy91XZrvAd2tRPt",
+     "asset_id": "upLJnLthPrV33SENe5Za",
+     "actual_credits": 17.16,
+     "actual_cents": 0.312,
+     "spoken_duration_secs": 2.94
+    },
+    {
+     "take": "t2",
+     "scribe_text": "Niyetini dersten sonra da taşımak sana kalmış",
+     "compare_exit": 0,
+     "generation_id": "TMJRWfDRHCwvcj3UAqg3",
+     "session_id": "X4JlyGPfBtlWA5fFuQyS",
+     "stt_node": "LsJPFK5gFxYva9YuyEvJ",
+     "ref_node": "Pw5A5grsOUKgS4myQud2",
+     "asset_id": "dX4hGLoSx8kzzVpBS9ot",
+     "actual_credits": 17.6,
+     "actual_cents": 0.32,
+     "spoken_duration_secs": 3.0
+    }
+   ],
+   "scribe_text": "Niyetini dersten sonra da taşımak sana kalmış",
+   "compare": {
+    "equal": true,
+    "words": 7
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "n2.dilek",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/n2.dilek/n2.dilek.wav",
+     "text": "Niyetini dersten sonra da taşımak sana kalmış.",
+     "syll": 16,
+     "duration": 3.359,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -2.96,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.359,
+      "lufs": -18.0,
+      "speech_rms_db": -17.17,
+      "true_peak_dbtp": -2.96,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [
+    "rank #1 take t1 excluded: file-start transient/pop (first 5 ms at -30.9 dBFS then decaying), missed by audio.py click detector; next take used and Scribe-verified",
+    "soft (4.1): Derin tavanı aşıldı: 5.24 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "k.anahtar3": {
+   "idx": 51,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Uyanık bir dinlenme bu.",
+   "screen": "Uyanık bir dinlenme bu.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t2",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.anahtar3/t2.mp3",
+    "generation_id": "mol485dpa5Bz4DoPfYfv",
+    "session_id": "E5xLz2R0tIJAbox4vxC3",
+    "duration_secs": 1.68
+   },
+   "rank_order_original": [
+    "t2.mp3",
+    "t1.mp3",
+    "t3.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t2.mp3",
+    "rank": 1,
+    "score": 1.807,
+    "penalties": {
+     "rate": 1.767,
+     "dur": 0.0,
+     "f0sd": 0.04
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 5.53 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 1.45 sn, ortancadan %0.0",
+     "F0 yayılımı 3.36 yt"
+    ],
+    "metrics": {
+     "duration": 1.68,
+     "active_sec": 1.447,
+     "speech_sec": 1.447,
+     "articulation": 5.53,
+     "f0_mean_hz": 185.4,
+     "f0_geo_hz": 181.8,
+     "f0_sd_semitones": 3.36,
+     "lufs": -20.3,
+     "rms_db": -18.85,
+     "true_peak_dbtp": -8.16,
+     "sibilance_ratio": 0.0009,
+     "pause_total_sec": 0
+    },
+    "cut": {
+     "needed": 1,
+     "found": 1,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 1.68,
+       "speech_sec": 1.447,
+       "syll": 8,
+       "rate": 5.53
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Uyanık bir dinlenme bu",
+     "compare_exit": 0,
+     "generation_id": "MB2vvR9muZG075x1e3R8",
+     "session_id": "sPvdM1Uv3LLNQAaVOnNB",
+     "stt_node": "JaZr0eny9xsQ8nyf4vta",
+     "ref_node": "gjGOFAGAEE8ZdCZ9eRDF",
+     "asset_id": "hcURO8v2rgptgrQ7ULUF",
+     "actual_credits": 9.24,
+     "actual_cents": 0.168,
+     "spoken_duration_secs": 1.46
+    }
+   ],
+   "scribe_text": "Uyanık bir dinlenme bu",
+   "compare": {
+    "equal": true,
+    "words": 4
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "k.anahtar3",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.anahtar3/k.anahtar3.wav",
+     "text": "Uyanık bir dinlenme bu.",
+     "syll": 8,
+     "duration": 1.755,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -6.11,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 1.755,
+      "lufs": -18.0,
+      "speech_rms_db": -16.17,
+      "true_peak_dbtp": -6.11,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 5.53 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "k.donus": {
+   "idx": 52,
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Artık dönüş zamanı.",
+   "screen": "Artık dönüş zamanı.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t2",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.donus/t2.mp3",
+    "generation_id": "pdCKoLBFuAfvEstiNItx",
+    "session_id": "5UI9rt3K2UDroqamQP5c",
+    "duration_secs": 1.84
+   },
+   "rank_order_original": [
+    "t1.mp3",
+    "t2.mp3",
+    "t3.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t2.mp3",
+    "rank": 2,
+    "score": 1.639,
+    "penalties": {
+     "rate": 1.167,
+     "dur": 0.132,
+     "f0sd": 0.34
+    },
+    "soft_violations": [
+     "eklemleme 4.65 bant dışı (5.0–6.2)"
+    ],
+    "reasons": [
+     "süre 1.51 sn, ortancadan %0.7",
+     "F0 yayılımı 3.75 yt"
+    ],
+    "metrics": {
+     "duration": 1.84,
+     "active_sec": 1.507,
+     "speech_sec": 1.507,
+     "articulation": 4.65,
+     "f0_mean_hz": 191.3,
+     "f0_geo_hz": 186.7,
+     "f0_sd_semitones": 3.75,
+     "lufs": -21.13,
+     "rms_db": -19.68,
+     "true_peak_dbtp": -7.16,
+     "sibilance_ratio": 0.01,
+     "pause_total_sec": 0
+    },
+    "cut": {
+     "needed": 1,
+     "found": 1,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 1.84,
+       "speech_sec": 1.507,
+       "syll": 7,
+       "rate": 4.65
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Artık dönüş zamanı",
+     "compare_exit": 0,
+     "generation_id": "jWjSXuNQiTpKglY9igdE",
+     "session_id": "TJ1yERrJY7JaR16N9kvC",
+     "stt_node": "rSSdwudi0IFhm816yh4E",
+     "ref_node": "0yJH3jB7mT9ojGDWxoi6",
+     "asset_id": "zhNmOLrF2hc4S1aGTM9z",
+     "actual_credits": 8.8,
+     "actual_cents": 0.16,
+     "spoken_duration_secs": 1.44
+    },
+    {
+     "take": "t2",
+     "scribe_text": "Artık dönüş zamanı",
+     "compare_exit": 0,
+     "generation_id": "uTgaz1IcclYlBuAv9g1W",
+     "session_id": "200L1BiAw1KwuMcumWr4",
+     "stt_node": "rTABA564I4cWjKbKSCs9",
+     "ref_node": "n3A7WqJN0M9nXqxUqXJx",
+     "asset_id": "sVfdnFXSWMBT5r96w76y",
+     "actual_credits": 10.12,
+     "actual_cents": 0.184,
+     "spoken_duration_secs": 1.44
+    }
+   ],
+   "scribe_text": "Artık dönüş zamanı",
+   "compare": {
+    "equal": true,
+    "words": 3
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "k.donus",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.donus/k.donus.wav",
+     "text": "Artık dönüş zamanı.",
+     "syll": 7,
+     "duration": 1.817,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -2.95,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 1.817,
+      "lufs": -18.0,
+      "speech_rms_db": -16.38,
+      "true_peak_dbtp": -2.95,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [
+    "rank #1 take t1 excluded: file-start transient/pop (first 5 ms at -33.4 dBFS then decaying), missed by audio.py click detector; next take used and Scribe-verified",
+    "soft (4.1): eklemleme 4.65 bant dışı (5.0–6.2)"
+   ],
+   "accepted": true
+  },
+  "k.nefes": {
+   "idx": 53,
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Nefesin kendi ritmini bulabilir.",
+   "screen": "Nefesin kendi ritmini bulabilir.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t2",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.nefes/t2.mp3",
+    "generation_id": "cf1WbbbkPUPu6p4RL5Zj",
+    "session_id": "x9yWYlDyvclUAjzZKQXR",
+    "duration_secs": 2.24
+   },
+   "rank_order_original": [
+    "t2.mp3",
+    "t1.mp3",
+    "t3.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t2.mp3",
+    "rank": 1,
+    "score": 0.566,
+    "penalties": {
+     "rate": 0.0,
+     "dur": 0.566,
+     "f0sd": 0.0
+    },
+    "soft_violations": [],
+    "reasons": [
+     "eklemleme 5.82 bantta",
+     "süre 2.06 sn, ortancadan %2.8",
+     "F0 yayılımı 3.53 yt"
+    ],
+    "metrics": {
+     "duration": 2.24,
+     "active_sec": 2.06,
+     "speech_sec": 2.06,
+     "articulation": 5.82,
+     "f0_mean_hz": 247.3,
+     "f0_geo_hz": 242.3,
+     "f0_sd_semitones": 3.53,
+     "lufs": -21.13,
+     "rms_db": -20.01,
+     "true_peak_dbtp": -8.16,
+     "sibilance_ratio": 0.0057,
+     "pause_total_sec": 0
+    },
+    "cut": {
+     "needed": 1,
+     "found": 1,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 2.24,
+       "speech_sec": 2.06,
+       "syll": 12,
+       "rate": 5.82
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Nefesin kendi ritmini bulabilir",
+     "compare_exit": 0,
+     "generation_id": "A3xTtuyYcPQq3MxkI9e9",
+     "session_id": "qPJgYHpwcryXef94ptIx",
+     "stt_node": "6pEmszj2jNLx08gCe7Dp",
+     "ref_node": "zYGHd7s5eWIiMX58qZMe",
+     "asset_id": "ryr0Z0pvL5C7Z9YLHrTy",
+     "actual_credits": 12.32,
+     "actual_cents": 0.224,
+     "spoken_duration_secs": 2.0,
+     "language_probability": 0.663
+    }
+   ],
+   "scribe_text": "Nefesin kendi ritmini bulabilir",
+   "compare": {
+    "equal": true,
+    "words": 4
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "k.nefes",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.nefes/k.nefes.wav",
+     "text": "Nefesin kendi ritmini bulabilir.",
+     "syll": 12,
+     "duration": 2.365,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -6.41,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 2.365,
+      "lufs": -18.0,
+      "speech_rms_db": -16.97,
+      "true_peak_dbtp": -6.41,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [
+    "Scribe language_probability 0.663 (low); words identical"
+   ],
+   "accepted": true
+  },
+  "k.sesler": {
+   "idx": 54,
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Yakındaki ve uzaktaki sesler yeniden duyuluyor.",
+   "screen": "Yakındaki ve uzaktaki sesler yeniden duyuluyor.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t1",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.sesler/t1.mp3",
+    "generation_id": "8TmgJmh0ZEjTi5yZXov0",
+    "session_id": "5PLgZyqH48ZoR9k4fWM5",
+    "duration_secs": 3.52
+   },
+   "rank_order_original": [
+    "t1.mp3",
+    "t2.mp3",
+    "t3.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t1.mp3",
+    "rank": 1,
+    "score": 0.02,
+    "penalties": {
+     "rate": 0.0,
+     "dur": 0.0,
+     "f0sd": 0.02
+    },
+    "soft_violations": [],
+    "reasons": [
+     "eklemleme 5.33 bantta",
+     "süre 3.38 sn, ortancadan %0.0",
+     "F0 yayılımı 4.09 yt"
+    ],
+    "metrics": {
+     "duration": 3.52,
+     "active_sec": 3.377,
+     "speech_sec": 3.377,
+     "articulation": 5.33,
+     "f0_mean_hz": 225.5,
+     "f0_geo_hz": 219.2,
+     "f0_sd_semitones": 4.09,
+     "lufs": -21.03,
+     "rms_db": -20.2,
+     "true_peak_dbtp": -7.96,
+     "sibilance_ratio": 0.0078,
+     "pause_total_sec": 0
+    },
+    "cut": {
+     "needed": 1,
+     "found": 1,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.52,
+       "speech_sec": 3.377,
+       "syll": 18,
+       "rate": 5.33
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Yakındaki ve uzaktaki sesler yeniden duyuluyor",
+     "compare_exit": 0,
+     "generation_id": "72MbX4WHSDYOiFvGN3fV",
+     "session_id": "lcGtaSsTKn8fjOWN0dzT",
+     "stt_node": "Rum6woZsUeOCruzo5LS2",
+     "ref_node": "iAPbGfW75ka3sGSjk9W8",
+     "asset_id": "PIyYRTRDH3ry2iVtNAvY",
+     "actual_credits": 19.36,
+     "actual_cents": 0.352,
+     "spoken_duration_secs": 3.34
+    }
+   ],
+   "scribe_text": "Yakındaki ve uzaktaki sesler yeniden duyuluyor",
+   "compare": {
+    "equal": true,
+    "words": 6
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "k.sesler",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.sesler/k.sesler.wav",
+     "text": "Yakındaki ve uzaktaki sesler yeniden duyuluyor.",
+     "syll": 18,
+     "duration": 3.683,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -4.88,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.683,
+      "lufs": -18.0,
+      "speech_rms_db": -17.06,
+      "true_peak_dbtp": -4.88,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [],
+   "accepted": true
+  },
+  "k.hareket": {
+   "idx": 55,
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin. Bir yerin ağrırsa ya da başın dönerse hareketi bırak.",
+   "screen": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin. Bir yerin ağrırsa ya da başın dönerse hareketi bırak.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t1",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.hareket/t1.mp3",
+    "generation_id": "cVqs4qPDK4S2TV78dzxx",
+    "session_id": "FzlPXro0TXBfA97HONcj",
+    "duration_secs": 8.08
+   },
+   "rank_order_original": [
+    "t1.mp3",
+    "t3.mp3",
+    "t2.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t1.mp3",
+    "rank": 1,
+    "score": 0.0,
+    "penalties": {
+     "rate": 0.0,
+     "dur": 0.0,
+     "f0sd": 0.0
+    },
+    "soft_violations": [],
+    "reasons": [
+     "eklemleme 5.63 bantta",
+     "süre 7.91 sn, ortancadan %0.0",
+     "F0 yayılımı 3.64 yt"
+    ],
+    "metrics": {
+     "duration": 8.08,
+     "active_sec": 7.912,
+     "speech_sec": 7.288,
+     "articulation": 5.63,
+     "f0_mean_hz": 234.9,
+     "f0_geo_hz": 229.8,
+     "f0_sd_semitones": 3.64,
+     "lufs": -20.89,
+     "rms_db": -19.74,
+     "true_peak_dbtp": -6.99,
+     "sibilance_ratio": 0.0071,
+     "pause_total_sec": 0.624
+    },
+    "cut": {
+     "needed": 2,
+     "found": 3,
+     "cuts_sec": [
+      3.8669
+     ],
+     "chosen_gaps": [
+      [
+       3.637,
+       4.106
+      ]
+     ],
+     "margin_ratio": 3.032,
+     "boundary_misalign": 0.04,
+     "cut_suspect": false,
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.867,
+       "speech_sec": 3.612,
+       "syll": 22,
+       "rate": 6.09
+      },
+      {
+       "name": "s2",
+       "keep": true,
+       "start": 3.867,
+       "end": 8.08,
+       "speech_sec": 3.687,
+       "syll": 19,
+       "rate": 5.15
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin. Bir yerin ağrırsa ya da başın dönerse hareketi bırak",
+     "compare_exit": 0,
+     "generation_id": "754n08alZ7sltc8ey5TF",
+     "session_id": "PA5rL3qj33S1ZkzALVDV",
+     "stt_node": "tJmTt9YtLO0nDiUSXV76",
+     "ref_node": "6N930Z0SDwvHXY66FZZh",
+     "asset_id": "5NUQQF4nraZiZmDfDvfZ",
+     "actual_credits": 44.44,
+     "actual_cents": 0.808,
+     "spoken_duration_secs": 7.86
+    }
+   ],
+   "scribe_text": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin. Bir yerin ağrırsa ya da başın dönerse hareketi bırak",
+   "compare": {
+    "equal": true,
+    "words": 16
+   },
+   "compare_equal": true,
+   "cut_method": "audio.py cut (longest N-1 gaps) + 4.3(c) metric-only",
+   "cut": {
+    "cuts": [
+     3.8669
+    ],
+    "chosen_gaps": [
+     [
+      3.637,
+      4.106
+     ]
+    ],
+    "margin_ratio": 3.032,
+    "boundary_misalign": 0.04,
+    "cut_suspect": false,
+    "thr_db": -52.89,
+    "pieces": [
+     {
+      "name": "s1",
+      "start": 0.0,
+      "end": 3.8669,
+      "dur": 3.867,
+      "speech_sec": 3.612,
+      "syll": 22,
+      "rate": 6.09
+     },
+     {
+      "name": "s2",
+      "start": 3.8669,
+      "end": 8.08,
+      "dur": 4.213,
+      "speech_sec": 3.687,
+      "syll": 19,
+      "rate": 5.15
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece_id": "k.hareket#1",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.hareket/k.hareket#1.wav",
+     "text": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin.",
+     "syll": 22,
+     "duration": 3.916,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -4.02,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.916,
+      "lufs": -18.0,
+      "speech_rms_db": -16.97,
+      "true_peak_dbtp": -4.02,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "k.hareket#2",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.hareket/k.hareket#2.wav",
+     "text": "Bir yerin ağrırsa ya da başın dönerse hareketi bırak.",
+     "syll": 19,
+     "duration": 4.145,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -4.95,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 4.145,
+      "lufs": -18.0,
+      "speech_rms_db": -16.99,
+      "true_peak_dbtp": -4.95,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+    }
+   ],
+   "notes": [],
+   "accepted": true
+  },
+  "k.goz": {
+   "idx": 56,
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin.",
+   "screen": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t3",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.goz/t3.mp3",
+    "generation_id": "LkQ1eSweivID0Kk75dW7",
+    "session_id": "6wWkNeuWopooW3zUY9k7",
+    "duration_secs": 5.12
+   },
+   "rank_order_original": [
+    "t1.mp3",
+    "t3.mp3",
+    "t2.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t3.mp3",
+    "rank": 2,
+    "score": 0.771,
+    "penalties": {
+     "rate": 0.0,
+     "dur": 0.771,
+     "f0sd": 0.0
+    },
+    "soft_violations": [],
+    "reasons": [
+     "eklemleme 6.12 bantta",
+     "süre 4.98 sn, ortancadan %3.9",
+     "F0 yayılımı 3.06 yt"
+    ],
+    "metrics": {
+     "duration": 5.12,
+     "active_sec": 4.984,
+     "speech_sec": 4.739,
+     "articulation": 6.12,
+     "f0_mean_hz": 256.2,
+     "f0_geo_hz": 252.4,
+     "f0_sd_semitones": 3.06,
+     "lufs": -22.01,
+     "rms_db": -21.09,
+     "true_peak_dbtp": -8.59,
+     "sibilance_ratio": 0.0171,
+     "pause_total_sec": 0.244
+    },
+    "cut": {
+     "needed": 1,
+     "found": 2,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 5.12,
+       "speech_sec": 4.739,
+       "syll": 29,
+       "rate": 6.12
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin",
+     "compare_exit": 0,
+     "generation_id": "uzA8wf71yuHLQgFrzTG9",
+     "session_id": "Ml2Quvi3HTGd0SFwltVO",
+     "stt_node": "CL5fnX7VtvQNHK2dcwrq",
+     "ref_node": "ilDtf3GA5WIrlziwuWbD",
+     "asset_id": "bEUuCivuQpqM3JIPMrOP",
+     "actual_credits": 27.28,
+     "actual_cents": 0.496,
+     "spoken_duration_secs": 4.78
+    },
+    {
+     "take": "t3",
+     "scribe_text": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin",
+     "compare_exit": 0,
+     "generation_id": "uaET8YpqIRItcURkNcu8",
+     "session_id": "3A38o5sVj5X3czCZYfMu",
+     "stt_node": "0QNbYWetWA4Fx9FA2zcQ",
+     "ref_node": "XDj0V7t8ZccwyEIG0Opl",
+     "asset_id": "RH5IUwgVHBRlwDJH322z",
+     "actual_credits": 28.16,
+     "actual_cents": 0.512,
+     "spoken_duration_secs": 4.96
+    }
+   ],
+   "scribe_text": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin",
+   "compare": {
+    "equal": true,
+    "words": 9
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "k.goz",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.goz/k.goz.wav",
+     "text": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin.",
+     "syll": 29,
+     "duration": 5.288,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -4.46,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 5.288,
+      "lufs": -18.0,
+      "speech_rms_db": -16.94,
+      "true_peak_dbtp": -4.46,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [
+    "rank #1 take t1 excluded: file-start transient/pop (first 5 ms at -54.1 dBFS (processed: click detected at 34.9 ms) then decaying), missed by audio.py click detector; next take used and Scribe-verified"
+   ],
+   "accepted": true
+  },
+  "k.oda.ayrinti": {
+   "idx": 57,
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Bir renk, bir biçim, bir doku.",
+   "screen": "Bir renk, bir biçim, bir doku.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t3",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.oda.ayrinti/t3.mp3",
+    "generation_id": "I9vk2yjm07rLKqPNXHOk",
+    "session_id": "dCB1CE5GhbrTEYqheYA2",
+    "duration_secs": 3.04
+   },
+   "rank_order_original": [
+    "t3.mp3",
+    "t1.mp3",
+    "t2.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t3.mp3",
+    "rank": 1,
+    "score": 5.247,
+    "penalties": {
+     "rate": 5.167,
+     "dur": 0.0,
+     "f0sd": 0.08
+    },
+    "soft_violations": [
+     "eklemleme 3.45 bant dışı (5.0–6.2)"
+    ],
+    "reasons": [
+     "süre 2.89 sn, ortancadan %0.0",
+     "F0 yayılımı 3.59 yt"
+    ],
+    "metrics": {
+     "duration": 3.04,
+     "active_sec": 2.888,
+     "speech_sec": 2.32,
+     "articulation": 3.45,
+     "f0_mean_hz": 218.1,
+     "f0_geo_hz": 213.3,
+     "f0_sd_semitones": 3.59,
+     "lufs": -21.85,
+     "rms_db": -19.9,
+     "true_peak_dbtp": -8.12,
+     "sibilance_ratio": 0.0041,
+     "pause_total_sec": 0.569
+    },
+    "cut": {
+     "needed": 1,
+     "found": 3,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.04,
+       "speech_sec": 2.32,
+       "syll": 8,
+       "rate": 3.45
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Bir renk, bir biçim, bir doku",
+     "compare_exit": 0,
+     "generation_id": "taYhyAUv45SlpmvVMPLP",
+     "session_id": "jeWShh2fzprd73Yuv9yn",
+     "stt_node": "R1PMMEaLNrwyRehuMASm",
+     "ref_node": "n2271Olho2fm1r8oXr9s",
+     "asset_id": "eWp1R1cZdYxMl8xzCkiS",
+     "actual_credits": 16.72,
+     "actual_cents": 0.304,
+     "spoken_duration_secs": 2.84
+    }
+   ],
+   "scribe_text": "Bir renk, bir biçim, bir doku",
+   "compare": {
+    "equal": true,
+    "words": 6
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "k.oda.ayrinti",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.oda.ayrinti/k.oda.ayrinti.wav",
+     "text": "Bir renk, bir biçim, bir doku.",
+     "syll": 8,
+     "duration": 3.196,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -3.82,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.196,
+      "lufs": -18.0,
+      "speech_rms_db": -15.9,
+      "true_peak_dbtp": -3.82,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [
+    "soft (4.1): eklemleme 3.45 bant dışı (5.0–6.2)"
+   ],
+   "accepted": true
+  },
+  "k.zaman": {
+   "idx": 58,
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun.",
+   "screen": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t2",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.zaman/t2.mp3",
+    "generation_id": "uDjKIfNO3nVgOgGB9KUs",
+    "session_id": "DnpIiTt62lgRTCPWPCIV",
+    "duration_secs": 3.6
+   },
+   "rank_order_original": [
+    "t2.mp3",
+    "t1.mp3",
+    "t3.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t2.mp3",
+    "rank": 1,
+    "score": 0.46,
+    "penalties": {
+     "rate": 0.0,
+     "dur": 0.0,
+     "f0sd": 0.46
+    },
+    "soft_violations": [],
+    "reasons": [
+     "eklemleme 6.10 bantta",
+     "süre 3.44 sn, ortancadan %0.0",
+     "F0 yayılımı 4.46 yt"
+    ],
+    "metrics": {
+     "duration": 3.6,
+     "active_sec": 3.442,
+     "speech_sec": 3.442,
+     "articulation": 6.1,
+     "f0_mean_hz": 228.9,
+     "f0_geo_hz": 221.3,
+     "f0_sd_semitones": 4.46,
+     "lufs": -20.68,
+     "rms_db": -19.83,
+     "true_peak_dbtp": -8.58,
+     "sibilance_ratio": 0.0063,
+     "pause_total_sec": 0
+    },
+    "cut": {
+     "needed": 1,
+     "found": 1,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.6,
+       "speech_sec": 3.442,
+       "syll": 21,
+       "rate": 6.1
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun?",
+     "compare_exit": 0,
+     "generation_id": "bWgduRTjk0IqyvWCcfEt",
+     "session_id": "wOddH0Vy60kWqLM2ntwH",
+     "stt_node": "Gin17rSgdSccnDxFV2zD",
+     "ref_node": "dHi4UQQcPW3cPyJ6KSlE",
+     "asset_id": "wJUQCVULnZJciesZLaH4",
+     "actual_credits": 19.8,
+     "actual_cents": 0.36,
+     "spoken_duration_secs": 3.42
+    }
+   ],
+   "scribe_text": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun?",
+   "compare": {
+    "equal": true,
+    "words": 7
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "k.zaman",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.zaman/k.zaman.wav",
+     "text": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun.",
+     "syll": 21,
+     "duration": 3.745,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -6.81,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.745,
+      "lufs": -18.0,
+      "speech_rms_db": -17.18,
+      "true_peak_dbtp": -6.81,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [
+    "Scribe punctuated as a question (\"hatırlıyorsun?\"): words identical, but intonation may sound interrogative - ear check suggested"
+   ],
+   "accepted": true
+  },
+  "k.yan": {
+   "idx": 59,
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "screen": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "retake-t1",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.yan/retake/t1.mp3",
+    "generation_id": "UOhPYfXUsAkcPvjC8eea",
+    "session_id": "yGkwD8eX9Mm2VdFlWSOH",
+    "duration_secs": 3.12
+   },
+   "rank_order_original": [
+    "t1.mp3",
+    "t2.mp3",
+    "t3.mp3"
+   ],
+   "excluded_by_rank": [],
+   "retake_rank_order": [
+    "t1.mp3",
+    "t3.mp3",
+    "t2.mp3"
+   ],
+   "rank_all6_order": [
+    "t4.mp3 (=retake-t1)",
+    "t1.mp3",
+    "t6.mp3 (=retake-t3)",
+    "t2.mp3",
+    "t5.mp3 (=retake-t2)",
+    "t3.mp3"
+   ],
+   "chosen_rank": {
+    "take": "t1.mp3",
+    "rank": 1,
+    "score": 0.203,
+    "penalties": {
+     "rate": 0.0,
+     "dur": 0.203,
+     "f0sd": 0.0
+    },
+    "soft_violations": [],
+    "reasons": [
+     "eklemleme 5.27 bantta",
+     "süre 2.89 sn, ortancadan %1.0",
+     "F0 yayılımı 3.61 yt"
+    ],
+    "metrics": {
+     "duration": 3.12,
+     "active_sec": 2.888,
+     "speech_sec": 2.659,
+     "articulation": 5.27,
+     "f0_mean_hz": 252.9,
+     "f0_geo_hz": 247.6,
+     "f0_sd_semitones": 3.61,
+     "lufs": -21.07,
+     "rms_db": -19.77,
+     "true_peak_dbtp": -8.84,
+     "sibilance_ratio": 0.0093,
+     "pause_total_sec": 0.23
+    },
+    "cut": {
+     "needed": 1,
+     "found": 2,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.12,
+       "speech_sec": 2.659,
+       "syll": 14,
+       "rate": 5.27
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "retake-t1",
+     "scribe_text": "Sırt üstü yatıyorsan önce bir yanına dön",
+     "compare_exit": 1,
+     "generation_id": "RN4655Umup99EWOiVWDH",
+     "session_id": "F6k6TnTYs0Kozv3rmeSR",
+     "stt_node": "WDH7etRNUhA0q7SZl5W2",
+     "ref_node": "oZCfivuNx6Sj5HqEkCjS",
+     "asset_id": "wsTwu0UvCQ3Kcyx9MLky",
+     "actual_credits": 17.16,
+     "actual_cents": 0.312,
+     "spoken_duration_secs": 2.9
+    },
+    {
+     "take": "retake-t2",
+     "scribe_text": "Sırt üstü yatıyorsan önce bir yanına dön",
+     "compare_exit": 1,
+     "generation_id": "TFrl0JXMky7ESiDBEr40",
+     "session_id": "2ZrkmtzboYTpI9mwiYcB",
+     "stt_node": "Tz7eUTKVE3GqBInqUbcU",
+     "ref_node": "W0LDMGHaHkHVM0ttA9ea",
+     "asset_id": "fjLcl7zas0dyFKAEVDE4",
+     "actual_credits": 16.72,
+     "actual_cents": 0.304,
+     "spoken_duration_secs": 2.84
+    },
+    {
+     "take": "retake-t3",
+     "scribe_text": "Sırt üstü yatıyorsan önce bir yanına dön",
+     "compare_exit": 1,
+     "generation_id": "M2lEEuzyhlCtRLEiroMQ",
+     "session_id": "BbuyfPfCLsJ6yldRiobj",
+     "stt_node": "PqV035nhGQMOUKNBJ5Sb",
+     "ref_node": "cwd7neg5E39K4af8E9bI",
+     "asset_id": "d6Zx6Yq8Ass0aK995Ah6",
+     "actual_credits": 16.72,
+     "actual_cents": 0.304,
+     "spoken_duration_secs": 2.82
+    },
+    {
+     "take": "t1",
+     "scribe_text": "Sırt üstü yatıyorsan önce bir yanına dön",
+     "compare_exit": 1,
+     "generation_id": "8KKX6d3SFCr703RgJrU6",
+     "session_id": "VPiuar8P31Vj6vTxFMYH",
+     "stt_node": "usNfUgcXuVa16bFxovw9",
+     "ref_node": "QithEkJVTvphMG2GLfh3",
+     "asset_id": "TL2gjiJcsgjXJiqypk6h",
+     "actual_credits": 17.16,
+     "actual_cents": 0.312,
+     "spoken_duration_secs": 2.92
+    },
+    {
+     "take": "t2",
+     "scribe_text": "Sırt üstü yatıyorsan önce bir yanına dön",
+     "compare_exit": 1,
+     "generation_id": "TtxornuRXXQgnLq0RWq1",
+     "session_id": "E33ZuKDsVitveu516r7Q",
+     "stt_node": "fIRIrd3hIFw3KoDOKjtY",
+     "ref_node": "jQZRwvqFxOYFxzkOqMID",
+     "asset_id": "hJ3RFcu3j2zLwZKIi0oY",
+     "actual_credits": 17.16,
+     "actual_cents": 0.312,
+     "spoken_duration_secs": 2.9
+    },
+    {
+     "take": "t3",
+     "scribe_text": "Sırt üstü yatıyorsan önce bir yanına dön",
+     "compare_exit": 1,
+     "generation_id": "y0JZx2Xke4jwsYpF12s2",
+     "session_id": "APYgzH7wzLKHAmLH1Pdg",
+     "stt_node": "Hm5Lb7JvSBVQ5tV3WXJN",
+     "ref_node": "cGTqQqtle95Evm3YwUZc",
+     "asset_id": "Yirsh8cHvSvJPniu6TSG",
+     "actual_credits": 18.04,
+     "actual_cents": 0.328,
+     "spoken_duration_secs": 3.06
+    }
+   ],
+   "scribe_text": "Sırt üstü yatıyorsan önce bir yanına dön",
+   "compare": {
+    "equal": false,
+    "a": [
+     "sırtüstü",
+     "yatıyorsan",
+     "önce",
+     "bir",
+     "yanına",
+     "dön"
+    ],
+    "b": [
+     "sırt",
+     "üstü",
+     "yatıyorsan",
+     "önce",
+     "bir",
+     "yanına",
+     "dön"
+    ],
+    "diff": [
+     {
+      "op": "replace",
+      "a_pos": 0,
+      "a": [
+       "sırtüstü"
+      ],
+      "b_pos": 0,
+      "b": [
+       "sırt",
+       "üstü"
+      ]
+     }
+    ]
+   },
+   "compare_equal": false,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "k.yan",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.yan/k.yan.wav",
+     "text": "Sırtüstü yatıyorsan önce bir yanına dön.",
+     "syll": 14,
+     "duration": 3.192,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -6.64,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.192,
+      "lufs": -18.0,
+      "speech_rms_db": -16.7,
+      "true_peak_dbtp": -6.64,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kulak",
+     "reason": "Scribe wrote \"Sırt üstü\" (2 words) for \"Sırtüstü\" in all 6 takes (3 original + 3 re-take) -> word sequence not identical under SPEC 4.2 normalization. Every other word matched; likely Scribe orthography, not a misreading - owner to confirm by ear. Chosen = best-ranked of all 6 (retake-t1)."
+    }
+   ],
+   "notes": [],
+   "accepted": true
+  },
+  "k.yandakal": {
+   "idx": 60,
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Bir süre yan yatarak dinlenmek de olur.",
+   "screen": "Bir süre yan yatarak dinlenmek de olur.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t2",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.yandakal/t2.mp3",
+    "generation_id": "qiXCUVW3KFLxWAJzF1Ik",
+    "session_id": "D1ODRThfkXaTsSUpj5P2",
+    "duration_secs": 2.64
+   },
+   "rank_order_original": [
+    "t2.mp3",
+    "t3.mp3",
+    "t1.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t2.mp3",
+    "rank": 1,
+    "score": 0.081,
+    "penalties": {
+     "rate": 0.0,
+     "dur": 0.081,
+     "f0sd": 0.0
+    },
+    "soft_violations": [],
+    "reasons": [
+     "eklemleme 5.22 bantta",
+     "süre 2.49 sn, ortancadan %0.4",
+     "F0 yayılımı 2.42 yt"
+    ],
+    "metrics": {
+     "duration": 2.64,
+     "active_sec": 2.489,
+     "speech_sec": 2.489,
+     "articulation": 5.22,
+     "f0_mean_hz": 274.7,
+     "f0_geo_hz": 272.2,
+     "f0_sd_semitones": 2.42,
+     "lufs": -20.33,
+     "rms_db": -19.67,
+     "true_peak_dbtp": -9.05,
+     "sibilance_ratio": 0.006,
+     "pause_total_sec": 0
+    },
+    "cut": {
+     "needed": 1,
+     "found": 1,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 2.64,
+       "speech_sec": 2.489,
+       "syll": 13,
+       "rate": 5.22
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Bir süre yan yatarak dinlenmek de olur",
+     "compare_exit": 0,
+     "generation_id": "eKi8mWjGbms3XQLTZtXB",
+     "session_id": "jxApte1OU0CxBPXgluwT",
+     "stt_node": "73aElrUQO6Dqr4dCxlRk",
+     "ref_node": "tuJGkUjyhrkBsnvR7FhJ",
+     "asset_id": "w4UiKqKSbDYcwcr796jM",
+     "actual_credits": 14.52,
+     "actual_cents": 0.264,
+     "spoken_duration_secs": 2.44
+    }
+   ],
+   "scribe_text": "Bir süre yan yatarak dinlenmek de olur",
+   "compare": {
+    "equal": true,
+    "words": 7
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "k.yandakal",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.yandakal/k.yandakal.wav",
+     "text": "Bir süre yan yatarak dinlenmek de olur.",
+     "syll": 13,
+     "duration": 2.795,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -6.35,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 2.795,
+      "lufs": -18.0,
+      "speech_rms_db": -17.2,
+      "true_peak_dbtp": -6.35,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [],
+   "accepted": true
+  },
+  "k.otur": {
+   "idx": 61,
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Ellerinden destek alarak yavaşça doğrulup otur.",
+   "screen": "Ellerinden destek alarak yavaşça doğrulup otur.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t3",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.otur/t3.mp3",
+    "generation_id": "S8NxMVJp5u2zhmWLj5rQ",
+    "session_id": "0eVbHJ8mbjUrrHXVXqCz",
+    "duration_secs": 3.52
+   },
+   "rank_order_original": [
+    "t3.mp3",
+    "t1.mp3",
+    "t2.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t3.mp3",
+    "rank": 1,
+    "score": 0.41,
+    "penalties": {
+     "rate": 0.0,
+     "dur": 0.41,
+     "f0sd": 0.0
+    },
+    "soft_violations": [],
+    "reasons": [
+     "eklemleme 5.09 bantta",
+     "süre 3.34 sn, ortancadan %2.1",
+     "F0 yayılımı 3.67 yt"
+    ],
+    "metrics": {
+     "duration": 3.52,
+     "active_sec": 3.342,
+     "speech_sec": 3.342,
+     "articulation": 5.09,
+     "f0_mean_hz": 239.3,
+     "f0_geo_hz": 233.9,
+     "f0_sd_semitones": 3.67,
+     "lufs": -21.68,
+     "rms_db": -20.75,
+     "true_peak_dbtp": -9.03,
+     "sibilance_ratio": 0.0074,
+     "pause_total_sec": 0
+    },
+    "cut": {
+     "needed": 1,
+     "found": 1,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.52,
+       "speech_sec": 3.342,
+       "syll": 17,
+       "rate": 5.09
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Ellerinden destek alarak yavaşça doğrulup otur",
+     "compare_exit": 0,
+     "generation_id": "kU3UbkkS1I9ZOxOev77h",
+     "session_id": "bvgX87ZSWKet9mGVyRIN",
+     "stt_node": "MdNoDId6PLi9gCVGmY6b",
+     "ref_node": "30qSfIdRT7tbUR3w4GA6",
+     "asset_id": "ZX7yYGPMgOklH7K21yLD",
+     "actual_credits": 19.36,
+     "actual_cents": 0.352,
+     "spoken_duration_secs": 3.34
+    }
+   ],
+   "scribe_text": "Ellerinden destek alarak yavaşça doğrulup otur",
+   "compare": {
+    "equal": true,
+    "words": 6
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "k.otur",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.otur/k.otur.wav",
+     "text": "Ellerinden destek alarak yavaşça doğrulup otur.",
+     "syll": 17,
+     "duration": 3.646,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -5.16,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.646,
+      "lufs": -18.0,
+      "speech_rms_db": -17.04,
+      "true_peak_dbtp": -5.16,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [],
+   "accepted": true
+  },
+  "k.bekle": {
+   "idx": 62,
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Kalkmadan önce birkaç nefes böyle kal.",
+   "screen": "Kalkmadan önce birkaç nefes böyle kal.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t1",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.bekle/t1.mp3",
+    "generation_id": "uNTXlFYqL1uTqnrbyehb",
+    "session_id": "EaUEgPfkjkzr3qQhPG7Y",
+    "duration_secs": 2.96
+   },
+   "rank_order_original": [
+    "t1.mp3",
+    "t2.mp3",
+    "t3.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t1.mp3",
+    "rank": 1,
+    "score": 1.333,
+    "penalties": {
+     "rate": 1.333,
+     "dur": 0.0,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "eklemleme 4.60 bant dışı (5.0–6.2)"
+    ],
+    "reasons": [
+     "süre 2.78 sn, ortancadan %0.0",
+     "F0 yayılımı 3.87 yt"
+    ],
+    "metrics": {
+     "duration": 2.96,
+     "active_sec": 2.779,
+     "speech_sec": 2.609,
+     "articulation": 4.6,
+     "f0_mean_hz": 228.7,
+     "f0_geo_hz": 223.0,
+     "f0_sd_semitones": 3.87,
+     "lufs": -21.69,
+     "rms_db": -20.06,
+     "true_peak_dbtp": -8.54,
+     "sibilance_ratio": 0.0094,
+     "pause_total_sec": 0.17
+    },
+    "cut": {
+     "needed": 1,
+     "found": 2,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 2.96,
+       "speech_sec": 2.609,
+       "syll": 12,
+       "rate": 4.6
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Kalkmadan önce birkaç nefes böyle kal",
+     "compare_exit": 0,
+     "generation_id": "C8upTbZMFi5SA6vHkVGt",
+     "session_id": "1gorh4GxlYUhmeyVHCHf",
+     "stt_node": "yasenHQlQEZ7XLBPGUQz",
+     "ref_node": "b3WJZzKljAcZJDPHJHja",
+     "asset_id": "G27nRfADCU3vicBdiSbG",
+     "actual_credits": 16.28,
+     "actual_cents": 0.296,
+     "spoken_duration_secs": 2.78
+    }
+   ],
+   "scribe_text": "Kalkmadan önce birkaç nefes böyle kal",
+   "compare": {
+    "equal": true,
+    "words": 6
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "k.bekle",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.bekle/k.bekle.wav",
+     "text": "Kalkmadan önce birkaç nefes böyle kal.",
+     "syll": 12,
+     "duration": 3.083,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -3.85,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.083,
+      "lufs": -18.0,
+      "speech_rms_db": -16.27,
+      "true_peak_dbtp": -3.85,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [
+    "soft (4.1): eklemleme 4.60 bant dışı (5.0–6.2)"
+   ],
+   "accepted": true
+  },
+  "k.kalk": {
+   "idx": 63,
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Sonra acele etmeden kalkabilirsin; başın dönerse yeniden otur ve bekle.",
+   "screen": "Sonra acele etmeden kalkabilirsin; başın dönerse yeniden otur ve bekle.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t2",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.kalk/t2.mp3",
+    "generation_id": "Pf9uW76sEizq32QdLsec",
+    "session_id": "MachHvgdtxSLywIjXj86",
+    "duration_secs": 5.76
+   },
+   "rank_order_original": [
+    "t2.mp3",
+    "t1.mp3",
+    "t3.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t2.mp3",
+    "rank": 1,
+    "score": 0.161,
+    "penalties": {
+     "rate": 0.0,
+     "dur": 0.141,
+     "f0sd": 0.02
+    },
+    "soft_violations": [],
+    "reasons": [
+     "eklemleme 5.13 bantta",
+     "süre 5.63 sn, ortancadan %0.7",
+     "F0 yayılımı 3.85 yt"
+    ],
+    "metrics": {
+     "duration": 5.76,
+     "active_sec": 5.632,
+     "speech_sec": 5.063,
+     "articulation": 5.13,
+     "f0_mean_hz": 241.2,
+     "f0_geo_hz": 235.4,
+     "f0_sd_semitones": 3.85,
+     "lufs": -21.93,
+     "rms_db": -20.66,
+     "true_peak_dbtp": -7.28,
+     "sibilance_ratio": 0.0114,
+     "pause_total_sec": 0.569
+    },
+    "cut": {
+     "needed": 1,
+     "found": 3,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 5.76,
+       "speech_sec": 5.063,
+       "syll": 26,
+       "rate": 5.13
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Sonra acele etmeden kalkabilirsin. Başın dönerse yeniden otur ve bekle",
+     "compare_exit": 0,
+     "generation_id": "s63a3C3JQWBFqv1NVfqw",
+     "session_id": "vvQwY7G8K9DFDuAkp5GW",
+     "stt_node": "qQldEqAcCYFX3jYiLWf5",
+     "ref_node": "1UWnIK4oD0vHzJKgE3SV",
+     "asset_id": "gd2cYsb92xoLMpTw1E0e",
+     "actual_credits": 31.68,
+     "actual_cents": 0.576,
+     "spoken_duration_secs": 5.62
+    }
+   ],
+   "scribe_text": "Sonra acele etmeden kalkabilirsin. Başın dönerse yeniden otur ve bekle",
+   "compare": {
+    "equal": true,
+    "words": 10
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "k.kalk",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.kalk/k.kalk.wav",
+     "text": "Sonra acele etmeden kalkabilirsin; başın dönerse yeniden otur ve bekle.",
+     "syll": 26,
+     "duration": 5.937,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -2.52,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 5.937,
+      "lufs": -18.0,
+      "speech_rms_db": -16.71,
+      "true_peak_dbtp": -2.52,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [],
+   "accepted": true
+  },
+  "k.son": {
+   "idx": 64,
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Buradasın ve uyanıksın.",
+   "screen": "Buradasın ve uyanıksın.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t3",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/k.son/t3.mp3",
+    "generation_id": "JBFKYlbyZLjluaGdvVjO",
+    "session_id": "rOfYS5oq7G1c1E5GghPV",
+    "duration_secs": 2.32
+   },
+   "rank_order_original": [
+    "t3.mp3",
+    "t2.mp3",
+    "t1.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t3.mp3",
+    "rank": 1,
+    "score": 0.133,
+    "penalties": {
+     "rate": 0.133,
+     "dur": 0.0,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "eklemleme 4.96 bant dışı (5.0–6.2)"
+    ],
+    "reasons": [
+     "süre 2.12 sn, ortancadan %0.0",
+     "F0 yayılımı 3.25 yt"
+    ],
+    "metrics": {
+     "duration": 2.32,
+     "active_sec": 2.115,
+     "speech_sec": 1.816,
+     "articulation": 4.96,
+     "f0_mean_hz": 223.4,
+     "f0_geo_hz": 219.3,
+     "f0_sd_semitones": 3.25,
+     "lufs": -22.25,
+     "rms_db": -20.31,
+     "true_peak_dbtp": -9.06,
+     "sibilance_ratio": 0.0088,
+     "pause_total_sec": 0.299
+    },
+    "cut": {
+     "needed": 1,
+     "found": 2,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 2.32,
+       "speech_sec": 1.816,
+       "syll": 9,
+       "rate": 4.96
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Buradasın ve uyanıksın",
+     "compare_exit": 0,
+     "generation_id": "M0JLzy7686xvkmA4VfCy",
+     "session_id": "cyCB4CIe5elNPSI02zI4",
+     "stt_node": "MOgNN4SilkzTUETkY4Jj",
+     "ref_node": "VecRVhuVMBK5u8b2HvyA",
+     "asset_id": "ML6jsdRXrc5fFuQ2LOaJ",
+     "actual_credits": 12.76,
+     "actual_cents": 0.232,
+     "spoken_duration_secs": 2.12
+    }
+   ],
+   "scribe_text": "Buradasın ve uyanıksın",
+   "compare": {
+    "equal": true,
+    "words": 3
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "k.son",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/k.son/k.son.wav",
+     "text": "Buradasın ve uyanıksın.",
+     "syll": 9,
+     "duration": 2.421,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -5.45,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 2.421,
+      "lufs": -18.0,
+      "speech_rms_db": -16.15,
+      "true_peak_dbtp": -5.45,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [
+    "soft (4.1): eklemleme 4.96 bant dışı (5.0–6.2)"
+   ],
+   "accepted": true
+  },
+  "c2.durak": {
+   "idx": 65,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Nefes verdikten sonra kısa bir duraklama olabilir. Yeni nefes kendiliğinden gelir.",
+   "screen": "Nefes verdikten sonra kısa bir duraklama olabilir. Yeni nefes kendiliğinden gelir.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t2",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.durak/t2.mp3",
+    "generation_id": "VcUsLSWpfQ1cOl88xC8m",
+    "session_id": "mQw7QKrA2t3QN1kKXkuC",
+    "duration_secs": 6.0
+   },
+   "rank_order_original": [
+    "t2.mp3",
+    "t3.mp3",
+    "t1.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t2.mp3",
+    "rank": 1,
+    "score": 1.351,
+    "penalties": {
+     "rate": 1.3,
+     "dur": 0.051,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 5.39 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 5.84 sn, ortancadan %0.3",
+     "F0 yayılımı 4.18 yt"
+    ],
+    "metrics": {
+     "duration": 6.0,
+     "active_sec": 5.837,
+     "speech_sec": 5.378,
+     "articulation": 5.39,
+     "f0_mean_hz": 229.6,
+     "f0_geo_hz": 223.0,
+     "f0_sd_semitones": 4.18,
+     "lufs": -21.28,
+     "rms_db": -20.25,
+     "true_peak_dbtp": -8.73,
+     "sibilance_ratio": 0.0078,
+     "pause_total_sec": 0.459
+    },
+    "cut": {
+     "needed": 2,
+     "found": 2,
+     "cuts_sec": [
+      3.5873
+     ],
+     "chosen_gaps": [
+      [
+       3.352,
+       3.811
+      ]
+     ],
+     "margin_ratio": null,
+     "boundary_misalign": 0.0,
+     "cut_suspect": false,
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.587,
+       "speech_sec": 3.303,
+       "syll": 18,
+       "rate": 5.45
+      },
+      {
+       "name": "s2",
+       "keep": true,
+       "start": 3.587,
+       "end": 6.0,
+       "speech_sec": 2.085,
+       "syll": 11,
+       "rate": 5.28
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Nefes verdikten sonra kısa bir duraklama olabilir. Yeni nefes kendiliğinden gelir",
+     "compare_exit": 0,
+     "generation_id": "D8jUDhWUtdTYFD8zhT1z",
+     "session_id": "3UlBBJqMKF72Z3YcjjS9",
+     "stt_node": "SfSE7u7VYkCOPBlRk2ts",
+     "ref_node": "6Rz82fJONhDGKBoRhgIj",
+     "asset_id": "xc16h2DbapmK2xl11ZJe",
+     "actual_credits": 33.0,
+     "actual_cents": 0.6,
+     "spoken_duration_secs": 5.78
+    }
+   ],
+   "scribe_text": "Nefes verdikten sonra kısa bir duraklama olabilir. Yeni nefes kendiliğinden gelir",
+   "compare": {
+    "equal": true,
+    "words": 11
+   },
+   "compare_equal": true,
+   "cut_method": "audio.py cut (longest N-1 gaps) + 4.3(c) metric-only",
+   "cut": {
+    "cuts": [
+     3.5873
+    ],
+    "chosen_gaps": [
+     [
+      3.352,
+      3.811
+     ]
+    ],
+    "margin_ratio": null,
+    "boundary_misalign": 0.0,
+    "cut_suspect": false,
+    "thr_db": -53.28,
+    "pieces": [
+     {
+      "name": "s1",
+      "start": 0.0,
+      "end": 3.5873,
+      "dur": 3.587,
+      "speech_sec": 3.303,
+      "syll": 18,
+      "rate": 5.45
+     },
+     {
+      "name": "s2",
+      "start": 3.5873,
+      "end": 6.0,
+      "dur": 2.413,
+      "speech_sec": 2.085,
+      "syll": 11,
+      "rate": 5.28
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece_id": "c2.durak#1",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.durak/c2.durak#1.wav",
+     "text": "Nefes verdikten sonra kısa bir duraklama olabilir.",
+     "syll": 18,
+     "duration": 3.607,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -5.04,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.607,
+      "lufs": -18.0,
+      "speech_rms_db": -17.01,
+      "true_peak_dbtp": -5.04,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c2.durak#2",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.durak/c2.durak#2.wav",
+     "text": "Yeni nefes kendiliğinden gelir.",
+     "syll": 11,
+     "duration": 2.389,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -5.81,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 2.389,
+      "lufs": -18.0,
+      "speech_rms_db": -17.33,
+      "true_peak_dbtp": -5.81,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+    }
+   ],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 5.39 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  },
+  "a.x.kipir": {
+   "idx": 66,
+   "kind": "clip",
+   "phase": "Varış",
+   "tts": "Bir iki kez kıpırdanıp yerleşmek de dinlenmenin bir parçası.",
+   "screen": "Bir iki kez kıpırdanıp yerleşmek de dinlenmenin bir parçası.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t1",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/a.x.kipir/t1.mp3",
+    "generation_id": "u5vtVpD6rdPLEsY4eGlf",
+    "session_id": "R65d3ONhD1klv8gWcpjr",
+    "duration_secs": 3.92
+   },
+   "rank_order_original": [
+    "t1.mp3",
+    "t3.mp3",
+    "t2.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t1.mp3",
+    "rank": 1,
+    "score": 0.02,
+    "penalties": {
+     "rate": 0.0,
+     "dur": 0.0,
+     "f0sd": 0.02
+    },
+    "soft_violations": [],
+    "reasons": [
+     "eklemleme 5.32 bantta",
+     "süre 3.76 sn, ortancadan %0.0",
+     "F0 yayılımı 3.1 yt"
+    ],
+    "metrics": {
+     "duration": 3.92,
+     "active_sec": 3.761,
+     "speech_sec": 3.761,
+     "articulation": 5.32,
+     "f0_mean_hz": 239.8,
+     "f0_geo_hz": 235.9,
+     "f0_sd_semitones": 3.1,
+     "lufs": -20.8,
+     "rms_db": -19.61,
+     "true_peak_dbtp": -8.59,
+     "sibilance_ratio": 0.007,
+     "pause_total_sec": 0
+    },
+    "cut": {
+     "needed": 1,
+     "found": 1,
+     "cuts_sec": [],
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 3.92,
+       "speech_sec": 3.761,
+       "syll": 20,
+       "rate": 5.32
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Bir iki kez kıpırdanıp yerleşmek de dinlenmenin bir parçası",
+     "compare_exit": 0,
+     "generation_id": "e4EeeYTORDVwhAbZKlzd",
+     "session_id": "tJ8VGdYVWh2JtwNIfTS9",
+     "stt_node": "g4TuR8tYxFrpBf2ijnvS",
+     "ref_node": "PWbyWNOmqTcV47ugm8H7",
+     "asset_id": "e7ZbeV4duqeHMOVo1hCq",
+     "actual_credits": 21.56,
+     "actual_cents": 0.392,
+     "spoken_duration_secs": 3.72
+    }
+   ],
+   "scribe_text": "Bir iki kez kıpırdanıp yerleşmek de dinlenmenin bir parçası",
+   "compare": {
+    "equal": true,
+    "words": 9
+   },
+   "compare_equal": true,
+   "cut_method": "none (single sentence)",
+   "pieces": [
+    {
+     "piece_id": "a.x.kipir",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/a.x.kipir/a.x.kipir.wav",
+     "text": "Bir iki kez kıpırdanıp yerleşmek de dinlenmenin bir parçası.",
+     "syll": 20,
+     "duration": 4.065,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -6.48,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 4.065,
+      "lufs": -18.0,
+      "speech_rms_db": -16.7,
+      "true_peak_dbtp": -6.48,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [],
+   "notes": [],
+   "accepted": true
+  },
+  "c2.x.ritim": {
+   "idx": 67,
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Nefes kendi ritminde sürüyor. Giren hava serin, çıkan hava ılık olabilir.",
+   "screen": "Nefes kendi ritminde sürüyor. Giren hava serin, çıkan hava ılık olabilir.",
+   "screen_equals_tts": true,
+   "chosen": {
+    "take": "t3",
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/c2.x.ritim/t3.mp3",
+    "generation_id": "GIxe552IdJGWaOKiE4w9",
+    "session_id": "O6kzzvqjUeyIvsmEnTTZ",
+    "duration_secs": 5.68
+   },
+   "rank_order_original": [
+    "t3.mp3",
+    "t2.mp3",
+    "t1.mp3"
+   ],
+   "excluded_by_rank": [],
+   "chosen_rank": {
+    "take": "t3.mp3",
+    "rank": 1,
+    "score": 0.767,
+    "penalties": {
+     "rate": 0.767,
+     "dur": 0.0,
+     "f0sd": 0.0
+    },
+    "soft_violations": [
+     "Derin tavanı aşıldı: 5.23 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+    ],
+    "reasons": [
+     "süre 5.51 sn, ortancadan %0.0",
+     "F0 yayılımı 3.79 yt"
+    ],
+    "metrics": {
+     "duration": 5.68,
+     "active_sec": 5.512,
+     "speech_sec": 4.974,
+     "articulation": 5.23,
+     "f0_mean_hz": 239.6,
+     "f0_geo_hz": 234.0,
+     "f0_sd_semitones": 3.79,
+     "lufs": -21.7,
+     "rms_db": -20.57,
+     "true_peak_dbtp": -7.62,
+     "sibilance_ratio": 0.0071,
+     "pause_total_sec": 0.539
+    },
+    "cut": {
+     "needed": 2,
+     "found": 3,
+     "cuts_sec": [
+      2.2323
+     ],
+     "chosen_gaps": [
+      [
+       2.065,
+       2.4
+      ]
+     ],
+     "margin_ratio": 1.634,
+     "boundary_misalign": 0.016,
+     "cut_suspect": false,
+     "pieces": [
+      {
+       "name": "s1",
+       "keep": true,
+       "start": 0.0,
+       "end": 2.232,
+       "speech_sec": 2.035,
+       "syll": 10,
+       "rate": 4.91
+      },
+      {
+       "name": "s2",
+       "keep": true,
+       "start": 2.232,
+       "end": 5.68,
+       "speech_sec": 2.948,
+       "syll": 16,
+       "rate": 5.43
+      }
+     ]
+    },
+    "join_max_st": null,
+    "joins": null
+   },
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Nefes kendi ritminde sürüyor. Giren hava serin, çıkan hava ılık olabilir",
+     "compare_exit": 0,
+     "generation_id": "5a5vZXtJzt9MnJq0Ge9z",
+     "session_id": "sTbDwK2kudHdVkj2vOZr",
+     "stt_node": "f6LM1uNMYDTt047Et3VZ",
+     "ref_node": "I6jP1dtgw5GDQEC2T1eX",
+     "asset_id": "8UOb6GeLqUMS3lKJZNpl",
+     "actual_credits": 31.24,
+     "actual_cents": 0.568,
+     "spoken_duration_secs": 5.44
+    }
+   ],
+   "scribe_text": "Nefes kendi ritminde sürüyor. Giren hava serin, çıkan hava ılık olabilir",
+   "compare": {
+    "equal": true,
+    "words": 11
+   },
+   "compare_equal": true,
+   "cut_method": "audio.py cut (longest N-1 gaps) + 4.3(c) metric-only",
+   "cut": {
+    "cuts": [
+     2.2323
+    ],
+    "chosen_gaps": [
+     [
+      2.065,
+      2.4
+     ]
+    ],
+    "margin_ratio": 1.634,
+    "boundary_misalign": 0.016,
+    "cut_suspect": false,
+    "thr_db": -53.7,
+    "pieces": [
+     {
+      "name": "s1",
+      "start": 0.0,
+      "end": 2.2323,
+      "dur": 2.232,
+      "speech_sec": 2.035,
+      "syll": 10,
+      "rate": 4.91
+     },
+     {
+      "name": "s2",
+      "start": 2.2323,
+      "end": 5.68,
+      "dur": 3.448,
+      "speech_sec": 2.948,
+      "syll": 16,
+      "rate": 5.43
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece_id": "c2.x.ritim#1",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.x.ritim/c2.x.ritim#1.wav",
+     "text": "Nefes kendi ritminde sürüyor.",
+     "syll": 10,
+     "duration": 2.338,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -6.62,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 2.338,
+      "lufs": -18.0,
+      "speech_rms_db": -17.12,
+      "true_peak_dbtp": -6.62,
+      "clicks": 0,
+      "clipped": false
+     }
+    },
+    {
+     "piece_id": "c2.x.ritim#2",
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/c2.x.ritim/c2.x.ritim#2.wav",
+     "text": "Giren hava serin, çıkan hava ılık olabilir.",
+     "syll": 16,
+     "duration": 3.457,
+     "level_mode": "lufs",
+     "level": -18.0,
+     "true_peak_dbtp": -3.01,
+     "deess": false,
+     "process_pass": true,
+     "verify": {
+      "sr": 44100,
+      "ch": 1,
+      "subtype": "FLOAT",
+      "dur": 3.457,
+      "lufs": -18.0,
+      "speech_rms_db": -16.84,
+      "true_peak_dbtp": -3.01,
+      "clicks": 0,
+      "clipped": false
+     }
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+    }
+   ],
+   "notes": [
+    "soft (4.1): Derin tavanı aşıldı: 5.23 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "accepted": true
+  }
+ },
+ "summary": {
+  "units": 34,
+  "units_with_pieces": 34,
+  "pieces": 55,
+  "scribe_exact_match_units": 33,
+  "flags": [
+   {
+    "unit": "c2.akis",
+    "flag": "kesim-kulak",
+    "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+   },
+   {
+    "unit": "c2.sayac",
+    "flag": "kesim-kulak",
+    "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+   },
+   {
+    "unit": "car.sayi",
+    "flag": "kesim-kulak",
+    "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+   },
+   {
+    "unit": "c2.birak",
+    "flag": "kesim-kulak",
+    "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+   },
+   {
+    "unit": "br.orta",
+    "flag": "kesim-kulak",
+    "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+   },
+   {
+    "unit": "c4.yol",
+    "flag": "kesim-kulak",
+    "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+   },
+   {
+    "unit": "c4.gunes",
+    "flag": "kesim-kulak",
+    "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+   },
+   {
+    "unit": "c4.solma",
+    "flag": "kesim-kulak",
+    "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+   },
+   {
+    "unit": "n2.hatirla",
+    "flag": "kesim-kulak",
+    "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+   },
+   {
+    "unit": "n2.hatirla",
+    "flag": "kulak",
+    "reason": "no take passes SPEC 4.3 with the SPEC 3 cut rule: in all 3 original takes and all 3 re-takes the longest pause is after \"şunu:\" (inside sentence 2), so the longest-gap cut splits \"... yeterli. Ya da yine şunu:\" | \"Kendime dinlenmeye izin veriyorum.\" (misalign 0.165-0.186, piece rates ~3.9 vs ~8.0 syll/s). Single re-take used (3 takes). Best of 6 = retake-t2 (Scribe exact match, 16 words)."
+   },
+   {
+    "unit": "n2.hatirla",
+    "flag": "kesim-kuraldisi",
+    "reason": "DEVIATION needing owner/orchestrator approval: pieces cut at the sentence-boundary gap 3.791-4.255 s (2nd-longest pause, cut 4.0229 s, misalign 0.023, rates 5.04/5.52) instead of the longest gap 5.318-5.847 s, so that piece text = screen text. If rejected, this unit has no SPEC-conformant pieces."
+   },
+   {
+    "unit": "k.hareket",
+    "flag": "kesim-kulak",
+    "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+   },
+   {
+    "unit": "k.yan",
+    "flag": "kulak",
+    "reason": "Scribe wrote \"Sırt üstü\" (2 words) for \"Sırtüstü\" in all 6 takes (3 original + 3 re-take) -> word sequence not identical under SPEC 4.2 normalization. Every other word matched; likely Scribe orthography, not a misreading - owner to confirm by ear. Chosen = best-ranked of all 6 (retake-t1)."
+   },
+   {
+    "unit": "c2.durak",
+    "flag": "kesim-kulak",
+    "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+   },
+   {
+    "unit": "c2.x.ritim",
+    "flag": "kesim-kulak",
+    "reason": "SPEC 4.3(c): cut verified by metrics only (no Scribe word timestamps, no local upload tool)"
+   }
+  ],
+  "retakes": [
+   {
+    "unit": "n2.hatirla",
+    "takes": 3,
+    "chars": 108,
+    "cents_est": 5.4562,
+    "result": "cut still fails (same prosody); retake-t2 chosen, flagged"
+   },
+   {
+    "unit": "k.yan",
+    "takes": 3,
+    "chars": 40,
+    "cents_est": 2.0208,
+    "result": "Scribe still \"Sırt üstü\"; retake-t1 chosen, flagged kulak"
+   }
+  ],
+  "scribe_calls": 42,
+  "ledger_cents_nes2sel": {
+   "scribe_after_reconcile": 17.2,
+   "retake_speech_est": 7.477,
+   "total": 24.677
+  },
+  "speech_cap_total_all_agents_at_write": 473.233,
+  "speech_cap": 550,
+  "tool_notes": [
+   "audio.py process: when speech onset < 60 ms (or tail < 250 ms) it pads digital zeros and applies the 10 ms fades to the pad, leaving the data edge unfaded; worst residual step in this part -58.1 dBFS (c4.yer head), all others <= -61 dBFS; affects other parts too",
+   "audio.py rank click detector does not catch file-start transients (see extra_check)"
+  ]
+ }
+}

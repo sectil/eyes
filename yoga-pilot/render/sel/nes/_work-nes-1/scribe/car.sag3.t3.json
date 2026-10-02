@@ -1,0 +1,15 @@
+{
+ "unit": "car.sag3",
+ "take": "t3",
+ "asset_id": "E5b0FPX1AHC0KUDtK2gS",
+ "source_node_id": "NEKaQeL0c4agToPyRUto",
+ "stt_node_id": "BP8N8RQ1SJVlXL03BLVW",
+ "session_id": "FJVKTsZYJdFq4jHLSsNQ",
+ "generation_id": "wvWnMB7BUesIhWsVLche",
+ "actual_credits": 26.4,
+ "actual_cents": 0.48,
+ "scribe_text": "Üst kol, omuz, belin sağ yanı, kalça",
+ "spoken_duration_secs": "4.56",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 7\n}"
+}

@@ -1,0 +1,73 @@
+{
+ "unit": "k.bekle",
+ "idx": 62,
+ "voice": "hoc",
+ "voice_name": "Nefona Hoca",
+ "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+ "model_id": "eleven_v4",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "node_id": "dGcBvMbOKwwoiYKviO2m",
+ "session_ids": [
+  "nOSrIbcRXNb4OymIG21N",
+  "G7ThSKZNeAaGPzOIGnei",
+  "LZ3YDesZTdF2Fo60yI61"
+ ],
+ "requested_at": "2026-09-29T22:02:40Z",
+ "downloaded_at": "2026-09-29T22:03:06.757054+00:00",
+ "tts": "Kalkmadan önce birkaç nefes böyle kal.",
+ "generations_count": 3,
+ "takes": [
+  {
+   "take": 1,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/k.bekle/t1.mp3",
+   "session_id": "nOSrIbcRXNb4OymIG21N",
+   "generation_id": "jNnSA8ElUFefpBeduemZ",
+   "api_duration_secs": 3.12,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/nOSrIbcRXNb4OymIG21N/jNnSA8ElUFefpBeduemZ/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T220244Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=0f71741310b9f899f6219dda422a4868a915bc3194ccfe16fab2a83868897a73ff04e37f375e7713df05c89d55fe51620918bcd97dc2b1b02b2030537bab77850755a2a49a42f4150dc40a38ade48d200a8d109ca8550d2ae3229ecb209507c29e63e31513f04d530af14d9cc47793de78b2a188f674b01671b0cffad587eb7dd5ef808ee16947a5c43a7a684bfce2718dede84413a30d3349a6f79168a120bee6a0dd09a7a365bffe50a048bcc0519ad4db743761577201a2b6cee06bd11f1c84829000f3ffd5444a3529a4bbfe7b35f7cfdb21882e8c6678068e788e585dad4531b2dde97f9fde740e4adb961a58bf6cd346f2683f2d488cdce92e66aaebd8",
+   "node_id": "dGcBvMbOKwwoiYKviO2m",
+   "ok": true,
+   "duration_secs": 3.12,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 67871,
+   "attempts": 1
+  },
+  {
+   "take": 2,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/k.bekle/t2.mp3",
+   "session_id": "G7ThSKZNeAaGPzOIGnei",
+   "generation_id": "zN6WdkJOtEc53rp6jvk6",
+   "api_duration_secs": 3.12,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/G7ThSKZNeAaGPzOIGnei/zN6WdkJOtEc53rp6jvk6/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T220244Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=1471d7e58bd0069231f276c84e3547e4eb705c00a64bc03e0b2fd79f6881d9e8f5dbdecc9edac553579bde58a1a3c85b80e571165e9d65f755d46eb6a03de6052b5627db26f8aca0059bab47e632758b3f3a38d6f15ccd63e8d7b8e1ebfc9efbb0eda24db997c1dc1048b2c3d756aee26312054452849b89571186988cf655ee036df914f3b85daf2884d3a8d5c425ba8b2b5183cc0c2d51cac444ddf9a488cecfa30cf49a06a317d6d0fcab520c47d57655695877891ce80ef82707db9d4550ee63522228b467b362043175707e0c66220c386a620dee0ea7125608cf604b9ecaf86bed896c5ecd9d61abad895e220f139a10faaf2dbebb520660ae3af36d1a",
+   "node_id": "dGcBvMbOKwwoiYKviO2m",
+   "ok": true,
+   "duration_secs": 3.12,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 67871,
+   "attempts": 1
+  },
+  {
+   "take": 3,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/k.bekle/t3.mp3",
+   "session_id": "LZ3YDesZTdF2Fo60yI61",
+   "generation_id": "3Mho6Ql8emnq0UbZbM7S",
+   "api_duration_secs": 3.12,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/LZ3YDesZTdF2Fo60yI61/3Mho6Ql8emnq0UbZbM7S/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T220244Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=19ad6cc0d229ad3c1b82560078bdfe67480ba43e64ab9cb6b82f0cc73c3222793c61ee652a1ffb7174f39785801eb654a9d900a453bb217b1dd566f754e2bdcbaf11850009988a297b5d71bf720c9d375da2517f55d12c3008f766a2dd3f581f8102449af42f1ee661c428393ce0d20b5f4f3c4e8bbd14ec4de149cf67a892991f113cd84423bca3bd97df18c39142d9d554d7747ed3102fc56b1d755d753d4209152734f3a73247d06d1f6f8299a82fbc033283fc8d29fabb5e9cf6a23e80459f053123fd47c3d108ee15bbb26c248fa29f535e0c97ba96b8ec2d9aa77cdcc29f111882e0645f316c8b19e6987a70d6827f373bc747763be84c9fb6b8bf4f8c",
+   "node_id": "dGcBvMbOKwwoiYKviO2m",
+   "ok": true,
+   "duration_secs": 3.12,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 67871,
+   "attempts": 1
+  }
+ ],
+ "all_ok": true,
+ "n_takes_ok": 3,
+ "failed_generations": [],
+ "who": "hoc-2",
+ "retake": false,
+ "server_prompt_echo": "Kalkmadan önce birkaç nefes böyle kal.",
+ "server_prompt_equals_tts": true
+}

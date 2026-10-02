@@ -1,0 +1,47 @@
+// Gökyüzü molası: 2 dk ufka ve gökyüzüne bakma (lib/gokyuzu.js). Yaşam halkası; pratik; günlük yola girmez.
+// Doğrudan gökyüzü çalışması yok; yakın kanıtlar ve kaynakları lib/sources.js. Sağlık iddiası yok.
+import { SESSION_TYPE, isGokyuzu, history } from '../../lib/gokyuzu.js'
+import { withinDays } from '../../lib/today.js'
+import { NBSP, join, durationPart } from '../../lib/format.js'
+
+export default {
+  id: 'gokyuzu',
+  title: 'Gökyüzü molası',
+  label: 'Gökyüzü molası',
+  ring: 'life',
+  kind: 'practice',
+  // Gelişim 2.0: bu modülün kişinin takibine katkısı (registry.js progress sözleşmesi)
+  progress: {
+    domain: 'calm',
+    effects: [{ key: 'gokyuzu-rest', label: 'Gökyüzü molası', measure: 'dinlenmişlik', max: 10, pick: (s) => (s?.type === SESSION_TYPE ? [s.before, s.after] : null) }],
+  },
+  gates: {},
+  home: { section: 'practice', order: 36 },
+  // "Bana hatırlat" (bildirim PLAN.v1 §A.1 modül tablosu; metin lib/remindTexts.js, sahip onaylı metin-B1a-onay.md).
+  // Kendi rotası, sakin pencere (08.00–22.00). Kaynaklar zayıf destek (onay dosyası). VARSAYIM: defaultTime yok.
+  remind: { route: 'gokyuzu', window: 'calm', science: ['yamashita2021', 'talens2022'] },
+  sessions: {
+    match: (s) => s?.type === SESSION_TYPE,
+    countsTowardGoal: true,
+    describe(s, { seconds }) {
+      return {
+        title: 'Gökyüzü molası',
+        detail: join([Number.isFinite(s.before) && Number.isFinite(s.after) ? `dinlenmişlik ${s.before}→${s.after}` : null, durationPart(seconds, false)]),
+      }
+    },
+  },
+  stats(sessions, now) {
+    const all = sessions.filter(isGokyuzu)
+    if (!all.length) return []
+    const week = withinDays(all, now)
+    const h = history(all)
+    return [{ label: 'Gökyüzü molası · 7 gün', value: `${week.length}${NBSP}mola`, sub: h.mean != null ? `ortalama değişim ${h.mean >= 0 ? '+' : '−'}${Math.abs(h.mean).toFixed(1).replace('.', ',')}` : `${h.n}/3 puanlı mola` }]
+  },
+  // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
+  nef: {
+    name: { tr: { '': 'Gökyüzü molası', ABL: 'Gökyüzü molasından', ACC: 'Gökyüzü molasını', LOC: 'Gökyüzü molasında', DAT: 'Gökyüzü molasına', INS: 'Gökyüzü molasıyla', POSS: 'Gökyüzü molan', 'POSS-ABL': 'Gökyüzü molandan' } },
+    moments: ['recallEffect', 'effectPattern', 'firstTime', 'returnAfterGap'],
+    evidence: ['yamashita2021', 'talens2022'],
+    note: 'Gökyüzü molası: 2 dakika ufka ve gökyüzüne bakma; öncesi ve sonrası dinlenmişlik puanı (0–10).',
+  },
+}

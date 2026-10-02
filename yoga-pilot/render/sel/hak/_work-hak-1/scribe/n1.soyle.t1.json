@@ -1,0 +1,16 @@
+{
+ "unit": "n1.soyle",
+ "take": "t1",
+ "asset_id": "5ELeXVargdkRrh1gnSpY",
+ "source_node_id": "L4GcvJBncQTNp1TdFvnR",
+ "stt_node_id": "M0o77rvB92VB1ydkbemW",
+ "session_id": "bdC39xovVO4k05Krw4YK",
+ "generation_id": "WZWi0jAGrWGQ7XjFuIRp",
+ "actual_credits": 16.28,
+ "actual_cents": 0.296,
+ "spoken_duration_secs": 2.76,
+ "scribe_text": "Niyetini içinden üç kez söylemek yeterli",
+ "tts": "Niyetini içinden üç kez söylemek yeterli.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 6\n}"
+}

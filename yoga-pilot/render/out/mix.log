@@ -1,0 +1,29 @@
+20:31:17 plan nes
+20:31:18 nes status ok total 900.000 check_plan fails [] missing []
+20:31:18 plan hak
+20:31:18 hak status ok total 900.000 check_plan fails [] missing []
+20:31:18 konuşma izi nes
+20:31:37 müzik nes A
+20:31:47 müzik nes B
+20:33:00 kodlama ders2-15dk-nes-A TP ham -2.10, sınırlayıcı {'ceiling_dbtp': -2.0, 'max_reduction_db': 0.0, 'sec_over_0_5db': 0.0, 'sec_over_1db': 0.0}, TP(önce) -2.10
+20:33:47 ölçüm ders2-15dk-nes-A
+20:34:33 ders2-15dk-nes-A bytes 12607374 I -17.33 TP -2.56 dur 900.049
+20:35:01 kodlama ders2-15dk-nes-B TP ham -2.56, sınırlayıcı {'ceiling_dbtp': -2.0, 'max_reduction_db': 0.0, 'sec_over_0_5db': 0.0, 'sec_over_1db': 0.0}, TP(önce) -2.56
+20:35:51 ölçüm ders2-15dk-nes-B
+20:36:37 ders2-15dk-nes-B bytes 12387514 I -17.74 TP -3.03 dur 900.049
+20:36:37 konuşma izi hak
+20:36:50 müzik hak A
+20:36:59 müzik hak B
+20:37:54 yerel yatak kısması hak {'c1.l19': 0.86}
+20:38:27 kodlama ders2-15dk-hak-A TP ham -1.17, sınırlayıcı {'ceiling_dbtp': -2.0, 'max_reduction_db': 0.83, 'sec_over_0_5db': 0.365, 'sec_over_1db': 0.0, 'at_s': 18.776}, TP(önce) -2.00
+20:39:13 ölçüm ders2-15dk-hak-A
+20:40:01 ders2-15dk-hak-A bytes 12811995 I -17.51 TP -1.67 dur 900.049
+20:40:34 kodlama ders2-15dk-hak-B TP ham -1.08, sınırlayıcı {'ceiling_dbtp': -2.0, 'max_reduction_db': 0.92, 'sec_over_0_5db': 0.266, 'sec_over_1db': 0.0, 'at_s': 49.805}, TP(önce) -2.00
+20:41:23 ölçüm ders2-15dk-hak-B
+20:42:07 ders2-15dk-hak-B bytes 12578857 I -18.00 TP -1.77 dur 900.049
+20:42:13 konum denetimi ders2-15dk-nes-A {'pieces': 127, 'min_corr': 0.983, 'min_corr_piece': 'c2.n08', 'median_corr': 0.991, 'max_abs_offset_ms': 0.05, 'n_corr_below_0_9': 0, 'order_ok': True}
+20:42:20 konum denetimi ders2-15dk-nes-B {'pieces': 127, 'min_corr': 0.98, 'min_corr_piece': 'c2.n08', 'median_corr': 0.99, 'max_abs_offset_ms': 0.05, 'n_corr_below_0_9': 0, 'order_ok': True}
+20:42:27 konum denetimi ders2-15dk-hak-A {'pieces': 129, 'min_corr': 0.963, 'min_corr_piece': 'c1.l10', 'median_corr': 0.986, 'max_abs_offset_ms': 0.05, 'n_corr_below_0_9': 0, 'order_ok': True}
+20:42:33 konum denetimi ders2-15dk-hak-B {'pieces': 129, 'min_corr': 0.948, 'min_corr_piece': 'c1.l10', 'median_corr': 0.985, 'max_abs_offset_ms': 0.05, 'n_corr_below_0_9': 0, 'order_ok': True}
+20:42:33 bitti
+exit 0

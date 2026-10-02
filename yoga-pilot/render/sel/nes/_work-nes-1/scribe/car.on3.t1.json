@@ -1,0 +1,15 @@
+{
+ "unit": "car.on3",
+ "take": "t1",
+ "asset_id": "Z3vlswS75vsXezyFhAKq",
+ "source_node_id": "clcLdkbmob9am5L2fWHB",
+ "stt_node_id": "GRB5mVrwpVNNMKk0lTq2",
+ "session_id": "vcjzxRhOfloUf41HnoG2",
+ "generation_id": "SDGjkWZlu2ntmqAxy8mt",
+ "actual_credits": 55.88,
+ "actual_cents": 1.016,
+ "scribe_text": "Üst dudak, alt dudak, çene, boyun, sağ köprücük kemiği, sol köprücük kemiği, göğüs, karın",
+ "spoken_duration_secs": "9.9",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 14\n}"
+}

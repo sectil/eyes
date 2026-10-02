@@ -1,0 +1,9 @@
+/* Yenilikler (components/WhatsNew.jsx) */
+.wn { display: flex; flex-direction: column; gap: 16px; }
+.wn-list { display: grid; gap: 18px; }
+.wn-rel h2 { font-family: var(--font-display); font-size: 1.05rem; margin: 0 0 8px; }
+.wn-rel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.wn-item { display: grid; gap: 4px; padding: 12px 14px; border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--border); color: var(--ink); line-height: 1.45; }
+.wn-kind { display: inline-flex; gap: 6px; align-items: center; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); }
+.wn-item.fix .wn-kind { color: var(--ok); }
+.wn-item.change .wn-kind { color: var(--ink-3); }

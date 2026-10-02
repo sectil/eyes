@@ -1,0 +1,632 @@
+{
+  "summary": "Yoga v1 birleşik planı: 10 ders × 30 dk tasarım, ilk yayında 3/5/15 dk, yola günlere göre entegrasyon; araştır → yaz → karşı incele (en çok 2 tur)",
+  "agentCount": 11,
+  "logs": [
+    "İncelemeler: 4/4"
+  ],
+  "result": {
+    "found": [
+      "Yoga süre planı hazır, ama sahibine gidecek kadar mükemmel değil. Önce senin (orkestratör) ya da sahibin karar vermesi gereken 7 madde var (belgenin §9 bölümü). Hiçbir ses dinlenmedi, 3 dk'nın bütün süre ve hece değerleri ölçülmemiş varsayımlar.\n\n1. Evet, 10 dersin her biri 30 dk olarak tasarlandı (PLAN.v2.md:603-769, dikkat eğrisi :455-472). Bugünkü alt sınır 5 dk: ders2.lesson.json:11-15 ve timing.py:65.\n2. 3, 5 ve 15 dk aynı dersten çıkar. Planlayıcıda her plan bir sonraki dakikanın alt kümesi (timing.py:22). Bir dersin 15 dk sesi üretilince 5–15 arası her dakika ek ses istemez; yalnız 3 ve 5 dk'nın kısa biçimleri ayrıca okutulur.\n3. 3 dk yalnız oturarak yapılan derslerde gerçekçi. Şablon: giriş ve Varış 0:34, tek çekirdek 1:38, kısa kapanış 0:48. Metin ders başına ≈ 310–330 hece (≈ 110–140 sözcük); bu sayı ölçülen hızlarla kurulmuş bir varsayım modelinden geliyor.\n4. 3 dk'sı olan yedi ders: 1, 4 (yalnız dayanak), 5, 6, 8, 9 (yalnız oturarak), 10 (sınırda).\n5. Üç derste 3 dk yok, en kısası 5 dk:\n   - **Ders 2 sığmıyor.** Uzanarak kapanış ölçülmüş sürelerle 1:42–1:44. Varış ile Kapanış tek başına 2:30–2:33, tek bir çekirdek blokla 3:23–3:27 ediyor.\n   - **Ders 3'te anlamsız.** Kısa yolu zaten \"Uykuya geç\" düğmesi ve müzik kuyruğu.\n   - **Ders 7'de güvenlik açısından sakıncalı.** Kademeli öz-şefkat sırası 4:07 istiyor (güvenlik §11.B-12, Creaser 2022, PMID 35391975).\n6. 3 dk'nın etkisini sınayan doğrulanmış bir çalışma dosyalarda yok; en kısa sınanan oturumlar 5–11 dk. Gerçek kullanım ise kısa: günde ortalama 3,36 dk (Radin 2025, PMID 39808431). Bu yüzden varsayılan süre 5 dk kalmalı.\n7. 15 dk pilotunun en önemli dersi: ölçülen klip süreleri planlayıcının tahmininden Neslihan'da %10,9, Hakan'da %5,5 uzun.\n   - Bu yüzden Ders 2'nin 5 dk sürümünde Neslihan'la boş pay 17,7 sn'den 11,6 sn'ye iniyor (taban 15 sn).\n   - En yoğun dakika 149,5 hece, tavan 150.\n   - Çözüm önerim: Varış'tan ≈ 16 hecelik bir 5 dk kısa biçimi.\n8. Ders 2 kapakları ölçüldü: 5 dk'da Varış %49, uzanarak Kapanış %36; 15 dk'da Varış %36, Kapanış %33. PLAN'ın %45–60 bandı yalnız 5 dk Varış'ına uyuyor. Bu yüzden kapak metinleri paydan değil, içerikten hesaplandı.\n9. Pilot üretiminden metin dersleri:\n   - İki nokta üst üste kesimi bozuyor; 5 dk'nın `n2.hatirla` kısa biçimi de \"şunu:\" taşıyor.\n   - Scribe \"Sırtüstü\"nü ayrı yazıyor.\n   - Hakan'ın 1 sn'den kısa parçalarında konuşma müziğin 15 dB'den az üstünde kalıyor.\n   - 5 dk için 3 birim × 2 ses hiç üretilmedi, bu yüzden 5 dk karışımı henüz kurulamıyor.\n10. 3 dk için yeni kurallar: tek duruş oturarak, çekirdekte en az 12 sn'lik nefes payı, anahtar cümle bir kez. Ortak açılış cümlesi tek başına üç \"-(y)abil-\" taşıyor; bu yüzden 6 dersin açılışı \"-(y)abil-\"siz kısa biçimle söylenmeli. Kapanıştaki görsel şafak 60 sn yerine 45–48 sn olmalı. 3 dk planı 5 dk'nın alt kümesi kalmalı (timing.py:1389).\n11. Sahibe görünür istisnalar: Ders 8 C1 0:38 ve Ders 10 C5 0:43 (çekirdek tabanı 0:55).\n12. Uzanarak seçenekleri: Ders 7 uzanarak en kısa 6 dk, Ders 9'un 3 dk'sı yalnız oturarak.\n13. İlk yayında Ders 2'nin hiçbir sürümünde zıtlık çiftleri yok; bu blok 19. dakikada giriyor (timing.out.txt:103-104). Önerim Ders 2'ye 20 dk çipinin eklenmesi ve varsayılan olması.\n14. Aşamalar:\n    - **Aşama 1:** Ders 2'nin 5 dk kısa biçimleri üretilir. 3 dk'nın ilk ölçümü Ders 1'de yapılır, çünkü Ders 2'nin 3 dk'sı yok.\n    - **Aşama 2, ilk yayın:** 30 dk iskeleti sabitlenir, ≤ 15 dk metni ve sesi üretilir. Çipler 3 · 5 · 15; Ders 3 ve 7'de 5 · 15; Ders 2'de 5 · 15 · 20.\n    - **Aşama 3:** 16–30 dk sesi ve kilitli ekranda 30 dk cihaz testinden sonra 30 dk ve \"istenen dakika\" kaydırıcısı gelir.\n15. 30 dk konuşma üretimi 15 dk'nın ≈ 1,75–1,9 katı (Ders 2 modeli). 5–15 kaydırıcısı ek ses istemez, istenirse Aşama 2'de açılabilir; karar sahibin.\n16. Yol ile ilişki: yoldaki durak dersin en kısa sürümü olur (1, 4, 5, 6, 8, 9, 10'da 3 dk; 2 ve 7'de 5 dk). Ders 3 gündüz yolunda yer almaz. Meditasyon modülündeki 3 dk'lık `sefkat` parçası (YOL.moduller.md:507) Ders 7'deki güvenlik sorununu taşıyor.\n17. Sözleşme değişikliklerinin hepsi isteğe bağlı: derse göre `minutes.min` 3 ya da 5, `presets`, liste biçiminde `short`, `minTarget`, duruş girdisi, 3 dk eşikleri ve test dakikaları (§8). Mevcut sistem bozulmaz.\n\nDepo değişmedi, ücretli çağrı yapılmadı. Ölçülmüş sürelerle kurduğum hesap, pilot raporundaki 15 dk yoğunluk değerlerini (119,0 ve 125,96 hece) birebir veriyor.\n\nDosyalar /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3 içinde:\n- sure.md\n- calc/ (measure.py, short.py, check5.py, dump5.py, tables.py, measured_durs.json)",
+      "**Yoga · Bugün'ün yolu: tek karar (özet, 25 satır)**\n1. Giriş: yoga yola 3. gün girer (`totalDays ≥ 2`, bugün sayılmaz). 1. gün E testi, 2. gün okuma, Yılan ve Görev; 3. gün yeni durağı olmayan ilk gün.\n2. Süre: yolda her gün 3 dk kısa ders. 6 kısa yoga gününden sonra, ölçüm olmayan ilk gün 5 dk tam ders gelir (yaklaşık haftada bir).\n3. 15 dk yolda yok: Ana sayfa → Yoga'da ve durağın açtığı ders ekranındaki 3·5·15 seçiminde durur. Yol bütçesine yine 3 ya da 5 yazılır.\n4. Ders sırası PLAN.v2 §A.3'e göre; her gün en az tamamlanmış uygun ders gelir. 3 dk'lık dersler 1, 4, 5, 6, 8, 9, 10 (sure.md ile aynı).\n5. Derin Dinlenme (uzanarak; kapaklar tek başına 154 sn, timing.out.txt:201) ile Kendine Şefkat en az 5 dk sürer. Bu iki ders yalnız tam ders günlerinde sırayla gelir.\n6. Sabah Niyeti yalnız 05.00–12.00 arasında gelir. Uykuya Geçiş sıraya girmez: 20.00'den sonra ders ekranında seçenek olarak durur ve tamamlanırsa durak da tamamlanır.\n7. Yeri: 2. bölümün son durağı (`slot: 'practice'`, `order: 105`): Yılan'dan sonra, Görev'den önce. Göz bütçesine sayılmaz; göz molası kilidinde sıradaki durak olabilir.\n8. Final yuvası seçilmedi: TodayPath.jsx:135-136 final durağını \"günün görevi\" diye okur, `allDone` da finali beklemez (today.js:325-327).\n9. Dönüşüm yok. Nefes her gün kalır (breath/manifest.js:53-54), yönlendirilen kısmı en çok 3 dk olur, mola yine 5 dk. Yürüyüş her gün kalır.\n10. Meditasyon yolda ayrı durak değil, yoganın kısa dersleri tek sakin durak. Bu, \"meditasyon zamanlaması tek\" açığını kapatır. Meditasyonun 3 dk'lık `sefkat` parçasındaki güvenlik sorunu da böylece ortadan kalkar.\n11. E testinin zamanı bugün geldiyse yoga yolda yok. E testi yapılmazsa yoga ertesi gün geri gelir (okuma testindeki \"en çok bir gün\" kalıbı, today.js:124-127). Okuma gününde yoga 3 dk, tam ders yok.\n12. Benzetimde gerçek `buildPath` ve E testi/okuma kuralları kullanıldı; ilerleme merdivenleri henüz kodda yok, VARSAYIM.\n13. 30 günde 24 yoga günü (21 kısa, 3 tam). Yol 8–20 dk, ortalama 17,1 (yogasız 16,0). 20 dk hiç aşılmadı.\n14. Yoga 30 günde yalnız 2 okuma gününde bir oyun durağını ertesi güne itti. 90 günde 76 yoga günü, 10 tam ders.\n15. Seçenekler: her gün 5 dk → yoga 2 okuma gününde düşüyor. YOL.ilerleme okuması → yürüyüş 13 gün yoldan çıkıyor. YOL.moduller okuması → sakin durak 15 gün yok.\n16. Yogadan bağımsız iki bulgu: ilerleme merdivenleriyle yol zaten 15 dk hedefini aşıyor. Yılan, R2 (2. bölüm göz payı) yüzünden 30 günün 21'inde düşüyor.\n17. Atlanan gün ceza değil: sıradaki ders bekler. 14 günden uzun aradan sonraki ilk gün 3 dk olur, tam ders gelmez.\n18. \"Sonra yaparım\": durak yerinde kalır, yol \"tamam\" sayılır, gece yarısı düşer, yarına taşınmaz.\n19. Kayıt PLAN.v2 §E.4 kaydıdır; yoldan ya da Ana sayfadan yapılan herhangi bir tamamlanmış ders durağı tamamlar.\n20. Kod: saf `pathYoga(ctx)` (lib/yoga.js). Manifestin `today()` işlevi yalnız `ctx.progression` varken durak verir, `stage` alanı ders ve süreyi taşır.\n21. today.js'e üç küçük ek: R5, `allDone`'ın `later` durağı beklememesi, `collect`'e `later` ve `stage`. 19 gerçek manifestle 20.000 rastgele bağlamda bugünkü yolla 0 fark.\n22. TodayPath'e `lotus` çizimi ve \"Yoga / Nefesin Ritmi · 3 dk\" alt satırı eklenir; bugünkü kartlar değişmez.\n23. Üretim: 7 dersin 3 dk'lık, Ders 2 ile 7'nin 5 dk'lık sürümü gerekir. Ders 2'nin 5 dk'sı için 3 kısa klip üretilmedi (`n1.soyle`, `c2.akis`, `n2.hatirla`).\n24. Ölçülmüş sürelerle Ders 2'nin 5 dk boş payı Neslihan'da taban altında (sure.md §0.6; yeniden hesaplamadım). Ücretli çağrı yapılmadı.\n25. Sahibe 4 soru: meditasyon tek durakta birleşsin mi, nefes yolda 3 dk'da dursun mu, \"Sonra yaparım\" denince yol tamam sayılsın mı, Zor Anlar İçin yolda gelsin mi.\n\nDosyalar:\n- /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/yol.md\n- /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/sim/yolsim_b.mjs (karar benzetimi)\n- /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/sim/yolsim.mjs (öteki okumalar)\n- /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/sim/yolsim_b_nocap.mjs\n- /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/sim/today_patched.js\n- /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/sim/esdeger.mjs\n- /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/sim/tablo_10.md\n- /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/sim/ozet_tablo.txt",
+      "Üretim notunu yazdım: `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/uretim.md` (464 satır). Hesap betikleri aynı klasörde: `calc.py`, `plans.py`, `plans2.py`, `plans3.py`.\n\n**Özet (25 satır):**\n1. Pilot defteri 399 satır, satır satır toplandı: 62.940,3 kredi, yani 11,44 USD (5.500 kredi = 1 USD).\n2. Ses ve müzik ayrı: konuşma 28.640,3 kredi (TTS 24.151,9 + Scribe 4.488,4; 520,83 sent). Müzik tarafı 34.299,9 kredi (müzik 24.294,6 + vokal denetimi Scribe 9.592 + doğa/tını 413,3; 623,63 sent).\n3. TTS satırları gerçek fiyatla hiç uzlaştırılmadı (tahmin fiyatı 0,926 kredi/karakter/çekim). Müziğin gerçek fiyatı tahminin %55'i çıktı; Scribe ise tahminin 16 katı.\n4. Çekim sayısı 3 kalmalı: en iyi okuma birimlerin %25–31'inde 3. çekimdi. \"Sırtüstü\" yazım farkı iki seste de boşuna yeniden çekime yol açtı; Scribe'a bir kural eklenmeli.\n5. Öneri, ilk yayında ön-karışım: her ders × süre × ses için tek dosya ve `timeline.json`. Çalışma anında karışım motoru 2. aşamaya kalır.\n6. Gerekçe: \"ses asla kesilmez\" yayından önce dosya üzerinde ölçülerek kanıtlanır. Oynatıcı AVAudioPlayer olur; uygulamadaki uyku sesi de bununla çalıyor (AlarmPlugin.swift:244-248). Uygulamada JS planlayıcıya gerek kalmaz.\n7. Ön-karışımın kaybettirdikleri: sahne seçimi, dönüşümlü açılış ve ±6 dB konuşma/müzik dengesi. Karşılıklar: tek sahne; klip başından sürdürme (timeline + AlarmPlugin.swift:259'daki `setVolume` kalıbı); \"kapanışa geç\" için 5 dk dosyasının Kapanış başına 2 sn geçiş.\n8. 3 dk sürümü dersten türetilemiyor. Planlayıcı 180 sn'de sığmıyor: en kısa hâli 203,1 sn ve yedi bulgu var. Kapanış tek başına ≈ 102 sn, hızlı kapanışın alt sınırı 60 sn (timing.py:95).\n9. Bu yüzden her ders için yeni ve kısa bir Varış ile Kapanış yazılmalı, büyük olasılıkla oturarak ya da gözler açık yapılacak biçimde. Karar usta hoca ve güvenlik incelemesinindir. 5 dk sürümünün 3 kısa metni (194 karakter) de pilotta seslendirilmedi.\n10. Mevcut ses yolu: kilitli ekranda çalma izni var (Info.plist:56-59). iOS'ta yerel oynatıcı kullanılıyor (dalgaSleep.js:72-74), ama çalınan dosya sabit (AlarmPlugin.swift:231). Kesintiden sonra yalnız iOS izin verirse sürdürüyor (:302-311).\n11. Uygulamada olmayanlar: kilit ekranı denetimi (Now Playing), kulaklık çıkarılınca duraklatma, indirme altyapısı (`@capacitor/filesystem`) ve Supabase Storage kullanımı.\n12. Gereken yerel ek: `lesson*` yöntemleri, `AlarmPlugin.swift` içine. Mevcut `sleepStart`/`sleepStop`/`sleepStatus` değişmez. Swift bu ortamda derlenmediği için ilk deneme Mac'te olur.\n13. Boyut, 1 ses, 230 dk: AAC 64 ile ≈ 110 MB, AAC 96 ile ≈ 166 MB, pilotun MP3'üyle 190–196 MB. İki ses bunu ikiye katlar. Çalışma anında motorla ≈ 96 MB tutardı (VARSAYIM), yani fark küçük.\n14. AAC bu ortamda üretilemiyor; sahibin Mac'inde `afconvert` ile yapılır. Kodek kararı kör dinleme testiyle verilir.\n15. Yer önerisi: hepsi pakette. Olmazsa 3 ve 5 dk pakette kalır (≈ 38 MB), 15 dk'lar tek paket hâlinde indirilir.\n16. İndirme seçilirse: dosya adları içerik özeti olur, dersler tek paket inir, istekte kullanıcı kimliği taşınmaz. Dosya özetle doğrulanmadan açılmaz; akışla çalma yok.\n17. Kredi, ilk yayın, 1 ses: ElevenLabs müziğiyle 371–533 bin (67,5–96,9 USD). Karma müzikle 273–397 bin. Dalga müziğiyle 150–228 bin. İki ses ve ElevenLabs müziğiyle 519–759 bin.\n18. Parti başına 122–184 bin kredi. En büyük kalem müzik; TTS'in gerçek fiyatı VARSAYIM.\n19. Tabloda olmayanlar: sahibin kararındaki 3. aday ses pilotta hiç üretilmedi (≈ 14–15 bin kredi). Düzeltmeler için %15 yedek pay var. Tam karışımın Scribe denetimi isteğe bağlı: ses başına 75,9 bin kredi.\n20. Müzik yatakları dersler arasında paylaşılmaz (PLAN A.2.1'deki müzik imzaları). Bir dersin 3/5/15 sürümleri aynı yatakları kullanır.\n21. Paylaşılabilenler: oda sesi, doğa türleri ve yerelde üretilen dönüş tınısı. Dalga motorunda tek bir Re majör dizi var (dalgaMusic.js:5-11); 10 ayrı imza için kod yazmak gerekir.\n22. Onay kapıları: önce pilot kapatılır → sahip kör dinler → kalıp kilitlenir ve Ders 2'nin 3/5/15'i cihazda dinlenir → 3 parti: (1, 3, 5), (4, 7, 8), (6, 9, 10) → yayın.\n23. Pilotu kapatmak için: Hakan'da sınırlayıcının 3 dB'den fazla kıstığı 40 parça, Scribe yazım kuralı, kesim kuralı, kulak listesi ve 3. aday ses kararı.\n24. Araç işleri: `mix.py` (T=900 :47, Orman :48, 14 MB :60) ve `timing.py` (Ders 2'ye bağlı :49, yalnız 5–30 dk :65) genelleştirilmeli. Deftere TTS için gerçek fiyat satırı eklenmeli.\n25. Bu bölüm henüz \"mükemmel\" değil: TTS'in gerçek fiyatı, 3 dk tasarımı ve 3. aday ses açık. Kör dinleme için A/B eşlemesi belgede açıklanmadı.",
+      "Belge hazır: `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/modul.md` (900 satır). Depoya dokunulmadı, git'e yazılmadı, ücretli çağrı yapılmadı.\n\n1. İlk yayında on dersin hepsi var. Süre çipleri yedi derste 3 · 5 · 15, Ders 2, 3 ve 7'de 5 · 15. 30 dakika ve kaydırıcı sonraki aşamada; bölüme atlama ilk yayında var.\n2. Akış: Ana sayfa (Pratikler, sıra 33) → kütüphane → ders ayrıntısı → ilk kez güvenlik kartı ve 10 sn ses denetimi → önce puanı → oynatıcı → sonra puanı ve \"zorlandın mı\" → bitiş. Yoldan açılan ders de aynı ekranlardan geçer.\n3. Ders ekranında şunlar var: bölüm şeridi, ses seçimi, arka plan, Ders 7 ve 9'da duruş seçimi, Ders 2'de sahne, \"Konuşmayı daha net duymak istiyorum\" anahtarı, Kaynaklar kartı ve açılış satırları. Arka planda yalnız ölçümden geçmiş seçenekler görünür.\n4. PLAN.v2'nin sabit \"Bu derste\" listesi kaldırıldı, çünkü seçilen sürede çalmayan bölümü de sayıyordu. Serbest konuşma ↔ müzik kaydırıcısı da yok: 15 dB kuralını kişinin eliyle bozdurabilirdi.\n5. Oynatıcı hep karanlık, kilitli ekranda sürer, Wake Lock istemez. Duraklatılan ders klibin başından sürer. \"Kapanışa geç\" cümlenin bitmesini bekler, kapanışı kısaltmaz. X onay sormaz, ardından dönüş ekranı gelir.\n6. Görsel, pilotun timeline.json biçiminden okunur. Hareketi Azalt açıksa ya da nöbet cevabı \"Hayır\" değilse (cevapsız dahil) form nabız atmaz.\n7. Kayıt `type:'yoga'`, `lesson` 1–10. Tamamlandı sayılması için kapanışa ulaşılmış ve sürenin en az %60'ı dinlenmiş olmalı. Kayıt ses bittiği anda yazılır, puanlar sonra eklenir; bunun için `storage.updateSession` eki gerekiyor (bugün depo yalnız ekliyor, storage.js:87-92).\n8. Gelişim: dokuz dersin önce → sonra etkisi dersin kendi alanına düşer (registry.js:154). Pratikler kartı 3 satır; rekor kutusu pratik yapılan gün sayısını gösterir. 28 günlük şeritte yoga Sakinlik'e sayılır.\n9. Nef'e yalnız dört sayı gider: ders, dakika, tamamlanan ve pratik günü. Son 7 günde yoga yoksa `null` döner; coachStats.test.js:22 bunu şart koşuyor. Ders adı süzgeçten zaten geçemezdi (coachCore.js:48-50). Rıza metni değişmez.\n10. Nef'in \"Yoga\" önerebilmesi için sunucu isteminde bir satır ve CoachCard eşlemesi gerekiyor. Risk: 10 modül sınırında `yoga` alfabe sırasında en sonda, sınır aşılınca ilk düşen o olur.\n11. Sabah sorusu yalnız 18:00–05:59 arasında başlamış uyku dersinden sonra, sabah 04:00–11:59 arasında gelir. Alarmın sorusu bekliyorsa önce o sorulur. PLAN'daki \"ertesi gün\" kuralı gece yarısından sonra dinlenen dersi kaçırıyordu.\n12. Sabah cevabı o gecenin ders kaydına yazılır. Ayrı kayıt türü olsaydı cevap \"yoga günü\" sayılırdı. registry.test.js:95-108 de metriğin kayıttan okunmasını istiyor.\n13. Güvenlik dayanakları C1–C29 ve PLAN.v2 Ek'inden: kart, ders ekranında araç uyarısı (uyku dersinde ikinci satır), kalkış satırı, onaysız durdurma, kesilmeyen kapanış, zorlanma sorusu, tamamen susan uyku dersi.\n14. Hazır metinlerde dört kusur bulunup düzeltildi. Karttaki \"durabilirsin\" ve \"Araç kullanırken dinleme\" iki anlama geliyordu.\n15. \"Çok\" cevabının metni dersi bitiren kişiye de \"durman doğruydu\" diyordu ve var olmayan bir \"gözleri açık sürüm\" öneriyordu; iki ayrı metne ayrıldı. Akşam uyarısı için yazılmış iki ayrı saat (20:00 ve 21:00) tek saate indirildi. Hepsi Türkçe editör onayına bağlı.\n16. Kaldığın yerden kartı yalnız 15 ve 20 dakikalık derslerde çıkar. Ders bölümün başından ve açılış izni klibiyle sürer; bu klip zaten var, yeni üretim gerekmez. Kart Ana sayfada değil, kütüphanededir; yol.md §3.9 buna göre düzeltilmeli.\n17. Ücret: bütün uygulama tek premium kapısının arkasında (App.jsx:895-908), ilk yayında yoga da orada. trialGate.js abonelikle ilgili değil, E testinin deneme kapısı.\n18. §G'de kapananlar: G5'in ses yolu (yalnız MCP, eleven_v4) ve G6 (Neslihan, Hakan ve tasarlanacak aday). Tasarlanan sesin tarifi sahipten gelmeli; aday henüz üretilmedi.\n19. G9, sahip hazır kör A/B karışımlarını dinleyince kapanır. G1'i ilk yayın için (a) ile kapatmayı öneriyorum.\n20. Sahipte açık kalanlar: G2 (ilk yayın ≈ 165–180 MB, VARSAYIM), G3, G4, G7, G8, G11 ve G10.\n21. G10 en ağırı: pilot, insan inceleyici atanmadan seslendirildi. Yayının kapısı insan onayıdır.\n22. Mevcut testlerden değişecekler: registry.test.js:7 ve :32'deki listeler, :84 ve :95'teki örnekler. coachStats, today.test.js:22-27 ve dataHub.test.js:19 değişmeden yeşil kalmalı.\n23. Belgede ayrıca yeni birim testleri (A–H), 30 maddelik cihaz kontrol listesi, sürüm notu metni ve YAPILACAKLAR (g) maddesi hazır.\n24. Doğrulanmayanlar: yerel motorun kilitte 15 dakika sürmesi, Bluetooth gecikmesi, hoparlörde Hakan'ın anlaşılırlığı, IPA boyutu. Kulakla hiçbir şey dinlenmedi.\n25. Bu belgeden sahibe yeni soru çıkmadı; buradaki kararlar tasarım kararı. Sıradaki adım: sahibin pilotu dinlemesi, sonra tasarım Artifact'ı."
+    ],
+    "draft": "**Plan dosyası:** /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/PLAN.v3.md\n\n1. **Kapsam:** On dersin her biri 30 dakikalık tam ders olarak tasarlanır. İlk yayında 7 derste 3 · 5 · 15 dakika var. Derin Dinlenme'de 5 · 15 · 20 dakika, Uykuya Geçiş ile Kendine Şefkat'te 5 · 15 dakika sunulur. Bu üç derste 3 dakika olmamasının nedenleri, ölçülmüş sürelerle ve güvenlik gerekçesiyle A bölümünde yazılı. 30 dakika ve \"istediğin dakika\" ikinci aşamaya kalıyor.\n2. **Çelişkiler:** Dört çalışma notu arasındaki 13 çelişki §2.0'da tek tek seçildi ve gerekçelendirildi. En önemlileri: tek dosya olarak hazır karışım (modul.md'nin önerdiği çalışma anında karışım yerine), tek hoca sesi (sahibin \"dinleyip seçer\" kararı), 3 dakikanın yalnız yedi derste olması ve ilk yayında arka plan, sahne, duruş ya da netlik seçeneği bulunmaması.\n3. **Yol kuralı:** Yoga yola 3. günde girer ve 2. bölümün son durağı olur. Her gün 3 dakikalık bir ders gelir; altı kısa yoga gününden sonra, ölçüm olmayan ilk gün 5 dakikalık tam ders gelir. Haftalık E testi günü yoga yoktur, okuma testi günü 3 dakikadır. Her gün o güne kadar en az yapılmış ders seçilir. Meditasyon ayrı bir durak olmaz; Nefes yolda 3 dakikada durur.\n4. **Benzetim:** 30 günde hiçbir gün 20 dakikayı aşmadı, ortalama 17,1 dakika (yogasız 16,0). 90 günde ortalama 17,9 dakika. 1–30. günlerin tablosu B bölümünde. Bugünkü `today.js`'e üç küçük ek önerildi; eşdeğerlik sınaması yeniden koşuldu ve 20.000 bağlamda bugünkü yolla 0 fark verdi.\n5. **Bağımlılık:** Yol durağı, sonsuz yol planının (c) adımı olan ilerleme motoruna dayanır. Bu motorun yoga üretimiyle aynı dönemde yazılması öneriliyor. Yetişmezse yoga önce Ana sayfada yayımlanır, durak (c) gelince kendiliğinden açılır.\n6. **Kredi:** Harcama defteri satır satır yeniden toplandı: pilot 62.940,3 kredi (11,44 USD). Konuşma karakter başına 3,47–3,62 kredi, müzik saniye başına 15,0 kredi tutuyor. İlk yayın tek ses ve ElevenLabs müziğiyle ≈ 370–530 bin kredi; tasarlanan ses adayı ve %15 düzeltme payıyla ≈ 405–575 bin. Müzik uygulamanın kendi motorundan gelirse ≈ 185–270 bin. Üç partinin her biri ≈ 121–178 bin.\n7. **Boyut:** Ses dosyaları 236–261 dakika tutar. AAC 64 ile ≈ 113–125 MB, kodek testi 96 isterse ≈ 170–188 MB. Uygulamanın bugünkü ses ve model dosyaları ≈ 80 MB (bu görevde ölçüldü). Hepsi uygulama paketinde gelir, indirme yok.\n8. **Oynatıcı:** Uygulamadaki uyku sesiyle aynı sınıf (AVAudioPlayer; AlarmPlugin.swift:244-248) kullanılır. Kapanışa geçme, sarma, ilk ders cümlesi ve kaldığın yerden sürdürme; aynı dosya içinde ya da küçük yardımcı dosyalarla, geçişli olarak yapılır.\n9. **Modül:** Ekranlar, kayıt, Gelişim, Nef'e giden dört sayı, sabah sorusu ve güvenlik D bölümünde. Mevcut sistem bozulmaz. Yalnız küçük eklemeler gerekiyor; örneğin kayıt deposu bugün sadece ekleme yapıyor, ona küçük bir `updateSession` eki geliyor (storage.js:87-92).\n10. **Kalite kapıları:** Her metin, seslendirilmeden önce üç insan incelemesinden geçer. Her klip Scribe ile yazıya çevrilip harf harf karşılaştırılır. Her dosya ölçüm tablosundan geçer. Kör dinleme panelinde kodek ve anlaşılırlık sınanır (biri 65 yaş üstü). Cihaz listesi uygulanır ve \"bitti\" koşulu yeniden tanımlandı.\n11. **Sahibin onay kapıları:** Kapı 1 bu plan; 2 kör dinleme (ses ve müzik); 3 tasarım ve Ders 2 tarayıcıda; 4 Ders 2 iPhone'da, kilitli ekranda; 5–7 üç parti (1-3-5, 4-7-8, 6-9-10); 8 yayın. Plan onayından yayına ≈ 8–10 hafta (tahmin).\n12. **Sahibin beş kararı (öneriyle):** (1) Tasarlanan hoca sesi kör dinlemeye girsin; tarif ve örnek cümle önerildi. (2) İnsan inceleyicileri ve dinleme panelini sahip belirlesin. (3) Bütçe tavanı parti başına 185 bin, toplam 580 bin kredi. (4) Derin Dinlenme'ye 20 dakika eklensin; 3 dakikada iki kısa blok ve 45 saniyelik şafak istisnası onaylansın. (5) Yolda tek sakin durak yoga olsun ve (c) paralel yazılsın.\n13. **Ders 2'nin 5 dakikası:** Ölçülmüş sürelerle boş pay 11,6 saniyeye iniyor, taban 15 saniye. Sormadan düzeltme olarak karşılama bölümüne ≈ 16 hece kısa bir biçim yazılıyor. Ders 2'nin 20 dakikası 18 klip ve 653 karakter ekliyor (pilot planlayıcısıyla hesaplandı).\n14. **Dürüst sınırlar:** Kulakla dinleme yapılmadı. İnsan inceleyici henüz yok. Cihazda hiçbir şey denenmedi. TTS'in gerçek fiyatı uzlaştırılmadı. 3 dakikalık oturumun etkisini sınayan bir çalışma yok; hepsi VARSAYIM listesiyle G bölümünde.\n15. **Kurallar:** Sağlık iddiası yok. Bilimsel iddialar 10 PMID/DOI ile ve yalnız yoga-pilot dosyalarında doğrulanmış kayıtlardan. Kod iddiaları yalnız bu görevde okunan satırlardan. Depoda hiçbir dosya değişmedi, ücretli çağrı yapılmadı.\n\n**Yardımcı hesap betikleri:** /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/v3calc/kredi.py ve /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/v3calc/d2_20.py",
+    "rounds": [
+      [
+        {
+          "lens": "sahip-ve-kod",
+          "findings": [
+            {
+              "severity": "BLOCKER",
+              "section": "§B.5 Kod sözleşmesi; §B.2 kural 2 (\"Göz bütçesine sayılmaz\"); §1 yol özeti",
+              "problem": "Yoga durağı `dropRank: 1.8` ve `order: 105` ile 2. bölüme giriyor. today.js:286'daki bölüm göz payı döngüsü ise `dropOne([sec2])` ile durağın göz bütçeli olup olmadığına bakmadan en düşük dropRank'lı durağı düşürüyor. Göz payı taştığında önce Yılan (1), Tek Bakışta (1,5) ve Fark Ettin mi (1,6) düşüyor, sıradaki yoga (1,8) oluyor. Yoganın eyeMin değeri 0 olduğu için onu düşürmek payı azaltmıyor; döngü sonra Daire'yi de (3) düşürüyor. Plan \"göz bütçesine sayılmaz\" diyor ama durağı bu döngüden korumuyor. Planın benzetimi ctx.eye vermediği için bütçe hep varsayılan 5 dk sayıldı ve sorun görünmedi. Sonuç: 3 dk göz bütçeli kullanıcıda (hareket tutması öyküsü) yoga yoldan neredeyse tamamen çıkıyor. Bu durum sahibin \"günlere göre yolda\" isteğini karşılamıyor.",
+              "evidence": "app/src/lib/today.js:245-246 (cap = bütçe − 1 dk), :286 (`while (!sec2.some(exclusive) && eyeSum(sec2) > cap && dropOne([sec2]))`), :216-227 (dropOne yalnız done ve dropRank'a bakıyor); app/src/lib/eyeBudget.js:19 (`budgetMotionMs: 3 * MIN`), :99; app/src/screens/Home.jsx:162 (`eye: eyeBudget` buildPath'e veriliyor). Planın kendi benzetimine (sim/yolsim_b.mjs + today_patched.js) yalnız ctx.eye ekledim (yoga-v3/inceleme/yolsim_eye.mjs). Sonuçlar: 5 dk bütçede 30 günde 24 yoga günü (plandakiyle aynı); 3 dk bütçede 10.00'da 4/30, 19.00'da 4/30, 90 günde 4/90. 286. satırdaki döngü yalnız `budget === 'eye'` durakları düşürecek biçimde değiştirilince (inceleme/today_fix286.js) 3 dk bütçede de 24/30 çıktı. Aynı düzeltme sim/esdeger.mjs'nin 20.000 bağlamlık sınamasında bugünkü today.js ile 0 fark verdi (inceleme/esdeger_fix.mjs). Bugün 2. bölümde dropRank taşıyan her durak (snake, tek-bakis, fark-ettin, routine:daire) göz bütçelidir (modules/*/manifest.js gates).",
+              "fix": "B.5'e dördüncü bir ek yazılmalı: today.js:286'daki döngü yalnız `budget === 'eye'` olan durakları düşürsün. Bugünkü modüllerde davranış değişmez (0 fark). Teste şu durum eklenmeli: \"ctx.eye.budgetMs = 3 dk iken yoga 2. bölümde kalır\". Yol benzetimi 3 ve 5 dk göz bütçesiyle yeniden koşulmalı; §1 ve §B.3'teki sayıların hangi bütçe için geçerli olduğu yazılmalı. §G'deki \"benzetim göz bütçesi bağlamı vermez\" sınırı kapatılmalı."
+            },
+            {
+              "severity": "BLOCKER",
+              "section": "§1 karar 5; §B.5 Bağımlılık; §F \"Paralel\" satırı; §E.7 \"Bitti\" tanımı; §F \"Kısmi yayın yoktur\"",
+              "problem": "Yol entegrasyonu ilk yayının koşulu değil. Plan \"(c) yoga yayınına yetişmezse yoga önce Ana sayfada yayımlanır\" diyor. E.7'deki dört koşulda ve Kapı 8'de yol durağı yok. Bu, sahibin açık isteğiyle (\"yolda modül entegre olacak, günlere göre yoga modülleri yollarda yer alacak\") ve planın kendi \"Kısmi yayın yoktur\" kuralıyla çelişiyor. Ayrıca durak (c)'ye (ilerleme motoru + nefes ve göz merdivenleri) bağlanıyor ve karar 5, (c)'yi yoga üretimiyle aynı döneme çekmeyi öneriyor. Oysa sahibin bağlayıcı iş sırası \"1) Yoga modülü … 2) Sonra sonsuz yol üst akıl planı (merdivenler, …)\" biçiminde. Plan, önerisinin bu sırayı değiştirdiğini sahibe söylemiyor.",
+              "evidence": "PLAN.v3 satır 45 (\"Durak … (c) adımı ile birlikte açılır\"), 72 (karar 5), 308-312 (\"(c) … yetişmezse yoga önce Ana sayfada yayımlanır\"), 690-692 (E.7'nin dört koşulu yolu içermiyor), 710-711, 717. yoga-pilot/SAHIP_ISTEKLERI.md:27-28; docs/yol-haritasi/tasarim/SAHIP_ISTEKLERI.md:64-65 ve :68-70 (bağlayıcı iş sırası); docs/yol-haritasi/YAPILACAKLAR.md:77-79 ((c) ayrı onaylı adım, (g) yoga en sonda). Kodda `ctx.progression` yok: Home.jsx:162'de buildPath bağlamı yalnız tests, sessions, now, profile, eye ve gate.",
+              "fix": "İki yoldan biri seçilmeli ve sahibe açıkça yazılmalı. (a) Yol durağı yayının koşulu olur: E.7'ye beşinci koşul, Kapı 8'e \"yol durağı cihazda çalıştı\" eklenir. Karar 5'te bunun (c)'yi \"önce yoga, sonra sonsuz yol\" sırasının önüne aldığı açıkça söylenir. (b) (c)'ye bağlı olmayan bir yoga durağı tasarlanır: sayaçlarını (yol günü, yoga günleri, ders sayıları) ctx.sessions ve ctx.tests'ten kendisi türetir (readingStatus'un today.js:141-142'de yaptığı gibi). Durak bugünkü yolla (merdivensiz, Nefes 5 dk) benzetilir ve 20 dk sınırı gösterilir. \"Ana sayfada yayımla, durak sonra\" yedeği ya kaldırılmalı ya da sahibin açık onayına bağlanmalı."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§B.2 kural 9 (\"Sonra yaparım\"); §B.5 (\"lib/today.js'e üç küçük ek\")",
+              "problem": "\"Sonra yaparım\" için sayılan üç ek yetmiyor. `next` (today.js:322) `later` işaretli durağı atlamıyor. Yoga için \"Sonra yaparım\" denince sıradaki durak yine yoga kalıyor. canOpen yalnız sıradaki durağı açtığından Bugünün görevi (finale) yoldan açılamıyor; yol \"tamam\" görünürken akşam raporu kilitli kalıyor. yol.md bu eki \"(c)'nin işi\" diye anıyor, ama PLAN.v3 yalnız üç ek sayıyor. yol.md:168'deki gece senaryosu (\"Sonra yaparım der, Bugünün görevi'ni bitirir\") bu hâliyle çalışmaz.",
+              "evidence": "app/src/lib/today.js:322 (`next = stops.find((s) => !s.done && !s.finale) ?? …`), :367-370 (canOpen: yalnız done ya da plan.next). Planın yamalı kopyasıyla (sim/today_patched.js) koşulan yoga-v3/inceleme/later.mjs çıktısı: `allDone true | next Yoga | Bugünün görevi açılır mı false`. yol.md:437-438 (`next` eki gerekir), :168.",
+              "fix": "B.5'e `next` eki (`!s.later`) dördüncü/beşinci ek olarak yazılmalı ya da açıkça (c)'nin bağımlılığı diye listelenmeli. Test: \"yoga later iken Bugünün görevi açılabilir\". Eşdeğerlik sınaması bu ekle yeniden koşulmalı."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§D.3 Oynatıcı ve yerel kod; §D.8 Değişen dosyalar; §E.5 Cihaz listesi",
+              "problem": "Ders oynatıcısının uyku sesiyle \"aynı kalıbı\" (AppAudioSession.shared.beginSleep) kullanması, tek bir `sleepActive` bayrağını iki oynatıcıya paylaştırır. Hangisi önce biterse endSleep() oturumu kapatır ve kullanıcının tercihini yeniden uygular; ses kapalıysa kategori .ambient olur. Bu durumda öbür oynatıcı kilitli ekranda susabilir, yani \"ses asla kesilmez\" kuralı bozulur. Plan yalnız bir yönü düzenliyor (uyku sesi çalarken ders başlarsa uyku sesi durur). Ders çalarken Dalga'dan uyku sesi başlatılırsa sleepStart yalnız kendi oynatıcısını durdurur ve iki ses birlikte çalar; uyku sesi bitince ders kesilir. D.8, AppAudioSession'ın bulunduğu FeedbackPlugin.swift'i değişen dosyalar arasında saymıyor.",
+              "evidence": "ios/App/App/FeedbackPlugin.swift:247 (`private var sleepActive = false`, tek bayrak), :255 (tercih yalnız sleepActive iken ertelenir), :286-290 beginSleep, :298-304 endSleep (`setActive(false, .notifyOthersOnDeactivation)` ve ardından tercih uygulanır); ios/App/App/AlarmPlugin.swift:236 (sleepStart önce yalnız kendi uyku oynatıcısını durdurur), :286-299 stopSleepOnMain → endSleep; app/src/lib/native.js:304-311 (ses tercihi playback ya da ambient). PLAN.v3 satır 524-527 (\"Ders oynatıcısı aynı kalıbı kullanır\"), 549 (tek yönlü kural), 601-605 (D.8).",
+              "fix": "AppAudioSession'a ders için ayrı bir bayrak ya da sayaç eklenmeli (ör. beginLesson/endLesson); oturum ancak iki oynatıcı da bitince bırakılmalı. Karşılıklı dışlama iki yönlü kurulmalı: ders başlarken uyku sesi durur, uyku sesi başlarken ders durur ya da uyku sesi o sırada başlatılamaz. D.8'e FeedbackPlugin.swift eklenmeli. E.5'e iki madde eklenmeli: \"ders çalarken Dalga uyku sesi başlatılıp durdurulur, ders kesilmez\" ve \"ses kapalı tercihiyle, ekran açılıp kapanırken ders kilitli ekranda sürer\"."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§C.2 Dağıtım ve Depo; §D.8 (\"sunucu yeniden yayımlanır\")",
+              "problem": "Yoga ses dosyaları app/public/yoga altına konuyor ve D.8, Nef istemi için sunucunun yeniden yayımlanmasını istiyor. Vercel dağıtımı bu klasörden yapılıyor ve .vercelignore, public altında yalnız mediapipe-wasm'ı dışarıda bırakıyor. Sunucu yeniden yayımlandığında ≈ 113–125 MB'lık yoga sesleri Vercel'e yüklenir. Proje yapı çıktısını da sunuyorsa (VARSAYIM) dosyalar herkese açık adreslerden, abonelik kapısı (D.7) atlanarak indirilebilir.",
+              "evidence": "app/.vercelignore (ios, build-ios, dist, node_modules, docs, public/mediapipe-wasm, .env*); app/api/coach.js aynı kökte; docs/yol-haritasi/YAPILACAKLAR.md:131-132 (Nef sunucusu bu klasörden 499 dosyayla yayımlandı); PLAN.v3 satır 403-405 (dosyalar app/public'te), 603-604 (sunucu yeniden yayımlanır).",
+              "fix": "D.8'e \".vercelignore'a `public/yoga` satırı eklenir\" maddesi yazılmalı. Kapı 8'den önce Vercel dağıtımında yoga dosyası bulunmadığı denetlenmeli."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 \"On ders ve ilk yayındaki süreleri\"; §1 \"Senden istenen kararlar\"; §2.0 satır 3",
+              "problem": "Sahip ilk yayın için \"3-5-15\" dedi. Plan ise Derin Dinlenme, Uykuya Geçiş ve Kendine Şefkat'te 3 dk vermiyor. Gerekçe yazılmış, ama bu sapma karar listesinde sahibe sorulmuyor: karar 4 yalnız 20 dk eklemeyi ve 3 dk taban istisnalarını soruyor. Sahibin açık sözünden sapan bir karar onaysız uygulanmış oluyor.",
+              "evidence": "yoga-pilot/SAHIP_ISTEKLERI.md:27-28 (\"ilk etapta 3 -5-15 dakikda gibi bölümler olacak\"); PLAN.v3 satır 32-36 (üç derste 3 dk yok), 62-72 (karar listesi), 84 (§2.0 satır 3: \"Yedi ders\").",
+              "fix": "Karar 4'e ya da ayrı bir karara şu madde gerekçesiyle eklenmeli: \"3 dk yalnız yedi derste; Derin Dinlenme, Uykuya Geçiş ve Kendine Şefkat'te en kısa sürüm 5 dk\". Önerilen seçenek (ör. 3 dk yerine oturarak kısa bir tanışma sürümü ya da yok) açıkça sunulmalı."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§E.4 madde 3; §E.6 Kapı 5–7; §E.7 koşul 3",
+              "problem": "Parti 2 ve 3'te birçok dersin varsayılan sürümü hiçbir insan kulağından geçmiyor. Panel her partide \"en az bir 3 dk ve bir 15 dk dosyası\" dinliyor; sahip \"en kısa sürüm ve 15 dk\" dinliyor; cihaz koşulu da en kısa sürüm ve 15 dk. Böylece Ders 4, 6, 8, 9 ve 10'un 5 dk dosyaları yayına dinlenmeden girer. Bunların dördünde (4, 6, 8, 10) 5 dk varsayılan sürüm ve yoldaki tam ders günlerinde çalan sürümdür. Plan \"Model sesi dinleyemez; kulak kararı gereken her şey insanla verilir\" diyor ve sahibin kuralı \"yalnız mükemmel olduğuna inandığın şeyi gönder\". En çok dinlenecek sürümün kulakla denetlenmemesi bu ikisiyle çelişiyor.",
+              "evidence": "PLAN.v3 satır 104-113 (A.1: 1, 4, 5, 6, 7, 8 ve 10'da varsayılan 5 dk), 115-118 (5 dk en çok dinlenecek sürüm), 663 (E.4.3), 665, 683 (E.6 Kapı 5–7: \"en kısa sürüm ve 15 dk (ilk partide bütün süreler)\"), 690-691 (E.7 koşul 3).",
+              "fix": "Yayına giren her süre en az bir kez panelde dinlenmeli. Sahibin Kapı 5–7 dinlemesine ve E.7'ye her dersin varsayılan sürümü eklenmeli; ek yük ders başına yaklaşık 5 dakikadır."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§A.4 (ikinci aşama); §F Aşamalar ve takvim",
+              "problem": "Sahibin ilk isteklerinin çekirdeği olan 30 dakikalık dersler ve \"istediğim dakikayı dinlerim\" ikinci aşamaya bırakılmış. Sahip \"ilk etapta 3-5-15\" dediği için bu erteleme kabul edilebilir. Ancak §F Kapı 8'de bitiyor; ikinci aşama için ne kapı, ne takvim, ne de bütçe satırı var. PLAN.v2'nin \"5 ve 30 dk\" bitti koşulu da \"ikinci aşamaya geçer\" deniyor, ama hangi kapıda döneceği belirsiz. Böylece sahibin açık istekleri tarihsiz bir sonraya kalıyor.",
+              "evidence": "yoga-pilot/SAHIP_ISTEKLERI.md:3 (\"30'ar dakikalık ama … istediğim dakikasını dinleyebilirim\"), :4 (\"zamanlayıcı önemli\"), :7 (\"30 dakika hayranlıkla dinleyeceğiz\"); docs/yol-haritasi/tasarim/SAHIP_ISTEKLERI.md:25 (\"istenen dakikası dinlenebilir\"); PLAN.v3 satır 36, 182-189, 450-451 (yalnız kaba kredi tahmini), 692, 698-711 (§F tablosu Kapı 8'de bitiyor).",
+              "fix": "§F'ye ikinci aşama satırları eklenmeli: 16–30 dk metni ve incelemesi, istenen dakikayı seçme (kaydırıcı ve çalışma anındaki motor), 30 dk kilitli ekran cihaz testi. Her biri için tahmini süre ve kredi yazılmalı; E.7'deki \"5 ve 30 dk\" koşulunun döneceği kapı belirtilmeli."
+            },
+            {
+              "severity": "NIT",
+              "section": "§B.5 (today.js satır atıfları)",
+              "problem": "İki satır atfı kayık. `collect` durak alanlarını :190-203'te değil :178-205'te kopyalıyor. `allDone` :326'da değil :327'de; :326 `core` satırıdır (değişiklik o satıra gelse de metin allDone'u :326'da gösteriyor).",
+              "evidence": "app/src/lib/today.js:178-205 (out.push nesnesi), :326 (`const core = …`), :327 (`const allDone = …`).",
+              "fix": "Atıflar \"collect :163, alan kopyası :178-205\" ve \"core :326 / allDone :327\" olarak düzeltilmeli."
+            },
+            {
+              "severity": "NIT",
+              "section": "§D.3 \"İlk ders cümlesi\" satırı; §B.2 kural 11",
+              "problem": "İki kullanıcı metni Türkçe editörden önce düzeltilmeli. (1) \"Bugün yalnızca tanışıyoruz; zorlanırsan kısalt.\" cümlesinde nesne eksik; ayrıca ilk yayında dersi kısaltan bir düğme yok (yalnız \"Kapanışa geç\" ve durdurma var). Ses, ekranda olmayan bir eylemi söylüyor; bu \"ekrandaki = söylenen\" ilkesiyle çelişir. (2) \"Sık tekrarlarsa bir uzmanla konuşmak iyi olur.\" cümlesinin öznesi yok; ekranda tek başına görününce neyin tekrarladığı anlaşılmıyor.",
+              "evidence": "PLAN.v3 satır 545, 242-244; tasarim/SAHIP_ISTEKLERI.md:42 (\"Ekranda yazan cümle = söylenen cümle\"); yoga-pilot/SAHIP_ISTEKLERI.md:13-17.",
+              "fix": "Örneğin \"Bugün yalnızca tanışıyoruz; zorlanırsan kapanışa geçebilirsin.\" (-(y)abil- sayısı denetlenerek) ve \"Bu zorlanma sık sık oluyorsa bir uzmanla konuşmak iyi olur.\" Son biçim Türkçe editör onayına sunulmalı."
+            },
+            {
+              "severity": "NIT",
+              "section": "§1 karar 1; §F \"PLAN.v2 §G'nin durumu\" (G1)",
+              "problem": "(1) Karar 1, sahibin 29 Eylül'de zaten verdiği kararı (\"Neslihan, Hakan + yeni aday; üçü kör karşılaştırılır\") yeniden soruyor; sorulması gereken yalnız sesin tarifi. (2) PLAN.v2 G1 için \"pilotta (a), 10 ders tamamlanırken (b)\" önermişti. PLAN.v3 on derslik yayında (a)'yı karar listesine koymadan kalıcı yapıyor. Bu yüzden Kendine Şefkat ve Kendini Tanımak kayıtları Gelişim'in 28 günlük şeridinde \"Kendine yaklaşım\" ya da \"Farkındalık\" yerine \"Sakinlik\"e sayılıyor.",
+              "evidence": "yoga-pilot/SAHIP_ISTEKLERI.md:23-24; PLAN.v3 satır 63-64, 569, 719; yoga-pilot/PLAN.v2.md:1675 (G1 önerisi); app/src/lib/dataHub.js:36-38 (kaydın alanı modülün tek progress.domain'i).",
+              "fix": "Karar 1, \"tarifi onaylar mısın?\" diye daraltılmalı. G1 için (a) mı (b) mi seçileceği karar listesine taşınmalı ya da PLAN.v2'nin önerisi korunmalı."
+            }
+          ]
+        },
+        {
+          "lens": "sayi-ve-dil",
+          "findings": [
+            {
+              "severity": "BLOCKER",
+              "section": "§1 Elde olan (PLAN.v3.md:47-48)",
+              "problem": "Özet pilot için 'ölçüm eşiklerini geçti' diyor. Oysa planın kendi §E.3 eşiğine göre dört karışımdan üçü geçmiyor. Sahibe iş 'olmuş gibi' bildiriliyor.",
+              "evidence": "§E.3 (PLAN.v3.md:645) eşiği 'Konuşma / yatak ≥ 15 dB, mikro parçalar dahil' diye koyuyor. Aynı satırın pilot sütunu da '1 sn'den kısa parçalardan Hakan'da 8–9'u, Neslihan'ın bir karışımında 1'i altında' diyor. Kaynakta: hak-A'da 8 parça 13,69–14,88 dB, hak-B'de 9 parça 13,03–14,73 dB, nes-B'de c1.l08 14,75 dB (report.md:57-59). Ayrıca nes n2.hatirla'daki kesim sapması çözülmedi ('kesim-kuraldisi — DEVIATION needing owner/orchestrator approval', report.md:120). Tam karışımın Scribe hizalaması yapılmadı (report.md:94, :105). Geçilen tek ölçüt pilot SPEC'inin daha gevşek olanı: speech_over_bed_ge15_pieces_ge_1s (report.md:99).",
+              "fix": "Şöyle yazılsın: 'Pilot, SPEC ölçütlerini geçti. Bu planın daha sıkı eşiğinde (mikro parçalar dahil ≥ 15 dB) Hakan'ın iki karışımında 8–9, Neslihan'ın bir karışımında 1 kısa parça eşiğin altında kalıyor; iki kesim de kulak onayı bekliyor. Bunlar A aşamasında düzeltilir. Karışımlar henüz kulakla dinlenmedi.'"
+            },
+            {
+              "severity": "BLOCKER",
+              "section": "§1 Türkçe: anlatım bozuklukları (PLAN.v3.md:34-36, 41-42, 51-52, 59, 71)",
+              "problem": "Özette ortak öğe yanlışlığı, eksik nesne, mantık bozukluğu, belirsiz yüklem ve eksik hâl eki var.",
+              "evidence": "(a) 'ekran tasarımını ve seçilen sesle Ders 2'nin 5 · 15 · 20 dakikasını tarayıcıda görür, dinlersin': ortak nesne yüzünden 'tasarımı dinlersin' okunuyor. (b) 'Her gün 10.00'da açan yeni kullanıcının ilk 14 günü': neyi açan? Nesne eksik. (c) 'Kendine Şefkat'in kademeli sırası 3 dakikada güvenli değildir': sıra güvensiz değil, 3 dakikaya sığmıyor; güvensiz olan onu kısaltmak (§A.3 de bunu söylüyor). (d) 'Nefes yolda 3 dakikada dursun': '3. dakikada dursun' diye okunabiliyor. (e) 'kodek testi 96 isterse': belirtme eki yok ve ne olduğu belirsiz.",
+              "fix": "(a) 'Kapı 3: ekran tasarımını görür, seçilen sesle Ders 2'nin 5, 15 ve 20 dakikasını tarayıcıda dinlersin.' (b) 'Uygulamayı her gün 10.00'da açan yeni bir kullanıcının ilk 14 günü:' (c) 'Kendine Şefkat'in kademeli sırası 3 dakikaya sığmaz, kısaltmak da güvenli olmaz.' (d) 'Nefes yolda en çok 3 dakika olsun.' (e) 'kodek testi AAC 96'yı gerektirirse'"
+            },
+            {
+              "severity": "BLOCKER",
+              "section": "§1 Türkçe: yüklemsiz cümleler (PLAN.v3.md:28, 38-39, 55, 57-60, 64-66)",
+              "problem": "Özetteki birçok cümle, madde değil tam cümle olduğu halde yüklemsiz kalmış.",
+              "evidence": "'Ne yapılacak. On dersten oluşan sesli bir yoga modülü.' · 'Her gün 3 dakikalık bir ders; altı kısa yoga gününden sonra, ölçüm olmayan ilk gün 5 dakikalık tam ders (yaklaşık haftada bir).' · 'Plan onayından yayına ≈ 8–10 hafta (tahmin).' · 'Tek ses ve ElevenLabs müziğiyle ≈ 370–530 bin kredi (≈ 67–96 USD); tasarlanan ses adayı ve %15 düzeltme payıyla ≈ 405–575 bin' · 'Müzik uygulamanın kendi motorundan gelirse, aday ve pay dahil ≈ 185–270 bin.' · 'uygulamanın bugünkü ses ve model dosyaları ≈ 80 MB.' · 'Türkçe editör, usta hoca, Ders 4 ve 7 için klinik psikolog ve en az beş kişilik dinleme paneli (biri 65 yaş üstü).'",
+              "fix": "Her cümleye yüklem eklensin: '…bir yoga modülü yapılacak.' · 'Her gün 3 dakikalık bir ders gelir; … ilk gün 5 dakikalık tam ders gelir.' · '… ≈ 8–10 hafta sürer (tahmin).' · '… ≈ 370–530 bin kredi tutar …; … ≈ 405–575 bine çıkar.' · '… ≈ 185–270 bin tutar.' · '… ≈ 80 MB'tır.' · 'İnceleyiciler şunlar olmalı: Türkçe editör, …'"
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 Ne yapılacak (PLAN.v3.md:28-29)",
+              "problem": "'Her ders … ilk yayında 3, 5 ve 15 dakikalık sürümlerle gelir' cümlesi üç ders için yanlış. Hemen sonraki paragraf bunun tersini söylüyor.",
+              "evidence": "Aynı bölümün 32-36. satırları şöyle: 'Üç derste 3 dakika yok'; Derin Dinlenme 5·15·20, Uykuya Geçiş 5·15, Kendine Şefkat 5·15.",
+              "fix": "'… ilk yayında yedi ders 3, 5 ve 15 dakikalık, üç ders 5 ve 15 dakikalık sürümlerle gelir (Derin Dinlenme'de ayrıca 20).'"
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 karar 3, §C.3 Bütçe tavanı",
+              "problem": "Önerilen tavanlar planın kendi üst tahminine yer bırakmıyor. Üst uçta parti tavanı ve toplam tavan aşılıyor, üretim de 'tavan aşılacaksa durulur' kuralı yüzünden durur.",
+              "evidence": "v3calc/kredi.py yeniden koşuldu. Parti 2'nin üst ucu 178,0 bin; konuşması 21.095 karakter × 3,618 = 76,3 bin, bunun %15 payı 11,4 bin, toplam ≈ 189,5 bin. Parti 3'te de toplam ≈ 189,6 bin. İkisi de 185 bin parti tavanını aşıyor. Toplamın üst ucu 575,0 bin; buna tablo dışında sayılan 'Ders 2'nin 20 dk'sı için ek müzik ≤ ≈ 6 bin' ile maliyeti bilinmeyen önizlemeler eklenince en az 581 bin eder, yani 580 bin tavanın üstünde. Ayrıca pilotun 62,9 binlik toplamının 24,2 bini uzlaştırılmamış TTS tahmininden geliyor. §1'deki 'Pilot 62,9 bin (11,44 USD) tuttu' cümlesi bunu söylemiyor.",
+              "fix": "Parti tavanı ≥ 190 bin olsun ya da %15 pay tavanın dışında ayrı bir havuz olarak tutulsun. Toplam tavan ≥ 590 bin olsun ya da 20 dk müziği ve önizlemeler tabloya eklensin. §1'e şu not eklensin: '(TTS kısmı tahmin fiyatıyla; gerçek fiyatla uzlaştırılmadı)'."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 ve §F Takvim",
+              "problem": "'≈ 8–10 hafta' tahmini §F'deki adım sürelerinden çıkmıyor.",
+              "evidence": "§F'deki süreler: A 2–4 gün, B 1–2 hafta, C 1–2 hafta, üç parti 1–2'şer hafta, Kapı 8 ≈ 1 hafta. Toplamları ≈ 6,3–11,6 hafta. Metin şöyle diyor: 'kalan dokuz dersin seslendirmesi ise Kapı 4'ün kalıp kilidinden önce başlamaz'. Yani partiler sıralı ilerliyor. Sahibin Kapı 2–8'deki dinleme süresi ile henüz olmayan inceleyicilerin bulunması (§G) bu toplama dahil değil.",
+              "fix": "'≈ 7–12 hafta; sahibin dinleme süreleri ve inceleyicilerin bulunması hariç (VARSAYIM)' yazılsın ya da 8–10 haftanın hesabı gösterilsin."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 Yolda, §B.2-3/5",
+              "problem": "'Yaklaşık haftada bir tam ders' benzetimle uyuşmuyor. Tam dersin hep aynı iki ders olduğu da söylenmiyor.",
+              "evidence": "yolsim_b.mjs 90 gün için yeniden koşuldu. Tam ders günleri 10, 18, 26, 34, 42, 52, 60, 68, 76 ve 84: 8–10 günde bir, 90 günde 10 kez (haftada bir olsa ≈ 13 olurdu). Tam derslerin hepsi sırayla Derin Dinlenme ya da Kendine Şefkat (5/5). Öteki yedi dersin 5 dakikası yolda hiç çıkmıyor, çünkü bu dersler kısa günlerde de sayıldığından iki dersin sayacı hep en düşük kalıyor. Plan bu sonucu yalnız 'kendiliğinden öne çıkar' diye yazıyor.",
+              "fix": "'yaklaşık 8 günde bir' yazılsın ve 'tam ders yolda sırayla Derin Dinlenme ile Kendine Şefkat olur; öteki derslerin 5 dakikası Ana sayfadadır' diye açıkça söylensin. Döngü isteniyorsa tam ders günlerinde 5 dakikalık tamamlamalar ayrı sayılsın."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 Yolda, §B.3 Yol bütçesi",
+              "problem": "Özet '20 dakikayı aşmadı (ortalama 17,1)' diyor. Sahibin '≈ 15 dk' hedefini ve 20 dk sınırının kodla zorlandığını söylemiyor.",
+              "evidence": "20 dk sınırı kodda zorlanıyor: R7 durak düşürerek sınırı korur (app/src/lib/today.js:289-293, PATH.capMin 20, :160). Yani 'aşmadı' sonucu bir sığma kanıtı değil. Hedef ise 'Yol ≈ 15 dk' (YAPILACAKLAR.md:67; PATH.targetMin 15). Benzetimde 30 günün 25'inde yol 15 dakikayı aşıyor (yogasız 23 gün); 90 günde bu 85 gün. Ortalama yogayla 17,1, yogasız 16,0 dk.",
+              "fix": "§1'e şu eklensin: 'Hedef ≈ 15 dk. Yol yogasız da ortalama 16,0 dk, yogayla 17,1 dk; 30 günün 25'inde 15 dakikayı aşıyor. 20 dk sınırını kod durak düşürerek korur; yoga 30 günde iki kez bir oyun durağını düşürdü.'"
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 Maliyet ve boyut, §C.2",
+              "problem": "200 MB eşiği anılıyor ama sonucu söylenmiyor. Tablodaki toplam da uygulamanın tamamı değil.",
+              "evidence": "AAC 64 ile yalnız ses ve model dosyaları 193–205 MB ediyor, üst ucu 200'ün üstünde. AAC 96 ile 250–268 MB ediyor; plan buna rağmen 'hepsi pakette (AAC 96 gerekse de)' diyor. '≈ 80 MB' yalnız app/public (54 MB) ile iOS Sounds'tan (25 MB) oluşuyor (du ile doğrulandı). Buna rağmen tablo sütununun adı 'Uygulamanın yeni toplamı'; ikili dosya ve JS bu toplamda yok.",
+              "fix": "Sütunun adı 'Ses ve model dosyaları toplamı' olsun. §1'e şu eklensin: 'AAC 64'te sınırda, AAC 96'da 200 MB eşiğinin üstünde (eşik VARSAYIM); IPA ve indirme boyutu TestFlight'ta ölçülür.' Bu durum sahibin kararına açılsın."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§A.2 kural 6 (3 dk'nın uygulanabilirliği)",
+              "problem": "3 dakikada '-(y)abil-' sınırı yalnız açılış cümlesi için ele alınmış. Oturarak yapılan 3 dk Kapanış'ı tek başına sınırı dolduruyor, bu da çekirdek metnini sıkıştırıyor. Metin yazarı ve inceleyiciler bunu bilmezse hata ancak incelemeden sonra, planlayıcı testinde çıkar.",
+              "evidence": "sure.md §2.3'e göre oturarak kapanış Ders 2'nin k.donus, k.nefes, k.hareket, k.goz ve k.son klipleriyle kuruluyor. Bu kliplerin üçünde '-(y)abil-' var: 'bulabilir', 'gerinebilirsin', 'bakabilirsin' (units.json). Üçü de 48 saniyeye giriyor; sınır ABIL_MAX_60 = 3 (timing.py:104). Varış'taki a.izin de üç tane taşıyor. Bu yüzden 98 sn'lik çekirdeğin ilk ≈ 30 ve son ≈ 12–25 saniyesinde hiç '-(y)abil-' olamaz.",
+              "fix": "Kural 6 genişletilsin: '3 dk Kapanış'ı üç -(y)abil- taşır; çekirdeğin ilk ≈ 30 ve son ≈ 25 sn'si -(y)abil-siz yazılır.' Ya da k.nefes ve k.goz'un -(y)abil-siz 3 dk kısa biçimleri yazılsın."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 karar 2 ile §F A aşaması",
+              "problem": "Özetteki mutlak kuralla planın kendi A aşaması çelişiyor.",
+              "evidence": "Karar 2'de 'onayları olmadan hiçbir metin seslendirilmez' yazıyor. A aşaması ise Kapı 2'den önce tasarlanan sesle 'Ders 2'nin 15 dk birimleri seslendirilir' diyor. Ders 2 metninin insan incelemesi daha sonra, B aşamasında (§F, §E.1). Bu metinde, planın yasakladığı iki noktalı çok cümleli birimler de var: n1.sec ve n2.hatirla (§A.3; report.md:116-120).",
+              "fix": "Kural açık bir istisnayla yazılsın: 'Kör karşılaştırma için pilot metni, incelemeden önce üçüncü sesle de okutulur; bu kayıtlar yayına girmez.'"
+            },
+            {
+              "severity": "NIT",
+              "section": "§C.3 Birim değerler",
+              "problem": "Yazılan birim fiyatlarla 33,9 bin çıkmıyor.",
+              "evidence": "1.620 sn × (15,0 + 5,5) = 33,2 bin eder. 33,9 bin, pilotun gerçek toplamı: 24.294,6 kredi müzik + 1.744 sn üzerinde 9.592 kredi Scribe denetimi (ledger.jsonl). Denetlenen saniye müzik saniyesinden fazla. 9 derste fark ≈ 6 bin.",
+              "fix": "'1.620 sn müzik ve pilottaki gibi 1.744 sn vokal denetimiyle 33,9 bin' yazılsın."
+            },
+            {
+              "severity": "NIT",
+              "section": "§A.3 Uykuya Geçiş (Harvey & Payne 2002)",
+              "problem": "Kaynağın ifadesi hafifçe genişletilmiş: bildirim ve karşılaştırma grubu düşmüş.",
+              "evidence": "Dossier'daki ifade şu: 'İmgeleme grubu talimatsız gruba göre daha kısa uykuya dalma süresi … bildirdi'; ölçüm yönteminin özette olmadığı da not edilmiş (dossier-sakin.dogrulanmis.md:157, :468).",
+              "fix": "'talimat almayan gruba göre daha kısa uykuya dalma süresi bildirmesidir' yazılsın."
+            },
+            {
+              "severity": "NIT",
+              "section": "§1 karar 1 ve karar 4",
+              "problem": "Karar 1'i sahip zaten verdi; karar 4'ün gerekçesi sahibin anlayamayacağı terimlerle yazılmış.",
+              "evidence": "Karar 1 için SAHIP_ISTEKLERI.md:23-24'te sahibin kararı var: 'pilotta üçü kör karşılaştırılır'. Karar 4'teki 'zıtlık çiftleri ancak 19. dakikada giriyor' ve 'kapanış şafağı' terimleri açıklanmıyor.",
+              "fix": "Karar 1 'onaylanmış karar' olarak gösterilsin; yalnız sesin tarifi sorulsun. Karar 4 şöyle açıklansın: 'Yoga Nidra'nın zıt duyumlar bölümü ancak 20 dakikalık sürümde yer buluyor' ve 'kapanıştaki görsel aydınlanma 60 yerine 45 saniye sürsün'."
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "lens": "sahip-ve-kod",
+          "findings": [
+            {
+              "severity": "BLOCKER",
+              "section": "§1 \"Yolun süresi\", §B.2 kural 2, §B.3 özet, §B.5 \"Eşdeğerlik\"",
+              "problem": "Planda sahibe \"yoga başka bir durağı yoldan çıkarmaz\" deniyor. Bu yalnız Hızlı Bakış'ı hiç oynamamış kişi için doğru. Hızlı Bakış'ı bir kez denemiş kullanıcıda okuma gününe denk gelen Hızlı Bakış günlerinde yoga mevcut bir durağı yoldan çıkarıyor: yol 18 dk'dan 21 dk'ya çıkıyor ve R7, dropRank'ı 1 olan Hızlı Bakış'ı düşürüyor. O gün 2. bölümde hiç göz durağı kalmıyor. Bu, \"mevcut sistem bozulmaz\" kuralına aykırı. Karar 5 de yanlış bir sonuç cümlesiyle onaya sunuluyor.",
+              "evidence": "quick-look/manifest.js:47 (`exclusive: true, dropRank: 1`). today.js:251-254: Hızlı Bakış günü yalnız göz bütçeli duraklar süzülüyor, bütçesiz yoga (order 105) yolda kalıyor. today.js:289-293: R7 en düşük dropRank'ı düşürüyor, yani 1 < 1,8. Planın kendi betiğinin kopyasıyla sınadım (scratchpad/yoga-v3/inceleme2/hb.mjs): 9. gün yogasız yol 'Okuma 3 · Hızlı Bakış 5' ile 18 dk; yogalı yol 'Okuma 3 · Yoga 3' ile 16 dk, Hızlı Bakış düşüyor. sim_bugun.mjs'e 1. gün tek bir quick-look kaydı ekledim (inceleme2/sim_hb.mjs 10 90 - --gorev --hb): 90 günün 4'ünde (9, 44, 51, 58) \"yoga yüzünden düşen: quick-look\". §B.2 kural 2 düşme sırasını \"oyunlardan (Yılan, Tek Bakışta, Fark Ettin mi?) sonra\" diye yazıyor, Hızlı Bakış'ı saymıyor. §B.5'te esdeger_yoga'nın 3.614 farkı \"rastgele bağlamlar gerçek günlerden ağır\" denerek geçiştirilmiş (yol.md:550'de \"Hızlı Bakış'ı hiç oynamamış kullanıcı\" sınırı yazılı, PLAN.v3 §G'de yok).",
+              "fix": "Kuralı düzeltin. Seçenek: okuma günü Hızlı Bakış da yoldaysa yoga o gün yolda olmasın (E testi günündeki gibi). Diğer seçenek: o gün yoganın dropRank'ı 1'in altına insin. Benzetime Hızlı Bakış kullanan kullanıcıyı ekleyip yeniden koşun. §1, §B.2 kural 2 (düşme sırasına Hızlı Bakış), §B.3 ve karar 5'teki \"yoga hiçbir durağı düşürmez\" cümlelerini sonuca göre yeniden yazın. §B.5 test listesine \"Hızlı Bakış + okuma günü\" sınamasını ekleyin."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§D.7 Ücret, §D.3 Oynatıcı, §C.2 Vercel, §D.8",
+              "problem": "Yoganın web'deki davranışı tanımlı değil ve §D.7'deki kod iddiası yanlış. Plan \"Bugün bütün uygulama tek yetkinin arkasında… Yoga da bu kapının arkasındadır\" diyor. Oysa web'de uygulama her zaman açık. Ders oynatıcısı yalnız yerel (AlarmPlugin) ve `.vercelignore`'a `public/yoga` ekleniyor. Web yapısı sunuluyorsa (planın kendi VARSAYIMI) yoga kutucuğu ve yol durağı web'de görünür, ama ne dosya ne oynatıcı vardır. Sonuç, çalmayan bir yol durağı olur.",
+              "evidence": "lib/subscription.js:69 `if (!isNative()) return { premium: true, native: false }`. App.jsx:357 yorumu: \"yalnızca iOS uygulamasında kilit; web'de açık\". Var olan ses modülünün web yedeği var (dalgaSleep.js:72-74 createWebSleepPlayer), yoga planında yok. modul.md:649-650 \"Web'de uygulama her zaman açık\" diyor, ama PLAN.v3 §D.7 (satır 756-757) bunu düşürmüş. Modüllerde platform kapısı yok (modules/* içinde isIOSApp yok).",
+              "fix": "§D.7'yi düzeltin: kilit yalnız iOS'ta. Ayrıca ilk yayında yoganın web'de ne yapacağına karar verin. Örneğin yoga yalnız iOS'ta olsun: `today()` null döndürsün ve kutucuk `!isIOSApp()` iken gizlensin; bu §D.8'e ve teste eklensin. Bu seçilmezse web oynatıcısı ve dosya dağıtımı planlanmalı."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§B.1 (\"Bölüm\" satırı), karar 5",
+              "problem": "Sahibin \"30 dakikadan oluşuyor ve 10 bölüm… bunları yayman lazım\" ve \"yoga bölümleri de parça parça yer alacak\" sözlerinin iki okuması var. Birincisi, 30 dk'lık içeriğin günlere yayılması (YOL.ilerleme §5.13). İkincisi, her gün bir kısa dersin baştan sona çalması. Plan ikincisini kendisi seçmiş ve karar olarak sormuyor. Seçimin sonucu da sahibe söylenmiyor: yolda yalnız 7 adet 3 dk'lık ve 2 adet 5 dk'lık dosya sonsuz dönüyor, 15 dk sürümlerin içeriği yola hiç girmiyor.",
+              "evidence": "tasarim/SAHIP_ISTEKLERI.md:5-7 ve :64-65. YOL.ilerleme.md:264-265 (\"Bölüm n = merdiven basamağı n (1–10), her bölüm 3 dk\"). Planda §B.1 satır 261 \"Her gün bütün bir kısa ders; sıra sonsuz döner\". Karar 5 (satır 107-112) bu seçimi içermiyor. 90 günlük benzetim (sim_bugun.mjs 10 90): 66 kısa gün / 7 ders, yani aynı 3 dk dosyası ≈ 9–10 kez çalıyor; Derin Dinlenme ve Kendine Şefkat'in 5 dk'sı 5'er kez.",
+              "fix": "Karar 5'e ayrı bir alt karar ekleyin: \"Yolda her gün on dersten birinin kısa sürümü mü çalsın (öneri), yoksa bir dersin ardışık parçaları mı?\" Gerekçeyi (her sürüm karşılamayla başlar, kapanışla biter) ve tekrar sayısını (90 günde her 3 dk dosyası ≈ 9–10 kez) açıkça yazın."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 \"Elde olan\", §G \"Sınırlar\"",
+              "problem": "\"Pilot, kendi şartnamesinin (SPEC) ölçütlerini geçti.\" cümlesi hâlâ fazla iddialı. SPEC §7'nin bir ölçütü yapılmadı, bir kesim de şartnamenin kuralı dışında kaldı. Hemen sonraki cümleler bunu kısmen söylüyor, yani paragraf kendi içinde çelişiyor. Sahibin kuralı açık: \"mükemmel değilse olmuş gibi yazma\". Ayrıca Hakan'ın `c2.yer` klibinde Scribe ile birebir eşleşen çekim yok, bu da yazılmamış.",
+              "evidence": "SPEC.md:94-95: §7 \"Bitti sayılmak için (hepsi ölçülür)\" başlığında \"tam karışımın Scribe metni plan metniyle hizalanır\" var. report.md:94 `full_mix_scribe_alignment | None`, report.md:154 \"YAPILMADI\". report.md:120 n2.hatirla \"DEVIATION needing owner/orchestrator approval\". report.md:125 hak c2.yer \"no take matched Scribe word-for-word\".",
+              "fix": "Şöyle yazın: \"Pilot, ölçülen SPEC ölçütlerini geçti. Biri (tam karışımın Scribe denetimi) yapılmadı. Bir kesim (`n2.hatirla`) şartname kuralının dışında kaldı. Hakan'ın bir klibi (`c2.yer`) Scribe ile birebir eşleşmedi.\" Aynı notu §G'ye de ekleyin."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§D.5 Gelişim, §D.8",
+              "problem": "Ders başına alan için önerilen `sessions.domainOf` yalnız dataHub'a bağlanıyor. Dışa aktarma aynı kaydın alanını hâlâ modülün tek alanından okuyor. Bu durumda aynı CSV'de bir yoga oturumunun süre satırı 'calm' diye yazılır, önce→sonra satırları ise dersin kendi alanıyla (focus, self…) çıkar. Veri merkezi ilkesi bozulur: Gelişim ve raporlar aynı kaydı farklı alanda gösterir. §D.8'in \"değişen dosyalar\" listesi bu yüzden eksik.",
+              "evidence": "lib/exportData.js:69 `…?.progress.domain ?? ''` (domainOf'u görmez). Effect satırları ise e.domain kullanıyor (exportData.js:60; registry.js:154). Plan yalnız dataHub.js:36-38 ve :181'i sayıyor (plan satır 729-730, 770).",
+              "fix": "`domainOf` kullanımını exportData.js:69'a (ve modul.md:520'deki 5. gün raporu/PDF yoluna) da ekleyin, §D.8'e yazın. Tek kaynaktan okunmasını sağlayan bir test ekleyin: aynı kayıt, Gelişim'de ve dışa aktarmada aynı alanda görünmeli."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§B.2 kural 5 ve 11, §E.1 (klinik psikolog)",
+              "problem": "Yol kuralı, Kendine Şefkat'i (5 dk) her tam ders gününün yarısında ve günün herhangi bir saatinde herkese kendiliğinden getiriyor. Zor Anlar İçin de ≈ 9 günde bir, istenmeden yola geliyor. PLAN.v2 Ders 7'yi \"akşam ya da zor bir günün sonu\" için tasarlamış ve travma yaşamış kişilerde tehdit tepkisi uyarısı taşıyor. Klinik psikoloğun inceleme kapsamı ise yalnız metinler; bu derslerin yolda istenmeden önüne gelmesi incelenmiyor.",
+              "evidence": "Plan satır 287-290 (tam ders sırayla Derin Dinlenme ve Kendine Şefkat; benzetimde 18, 34, 52, 68, 84. günler saat 10.00'da). PLAN.v2.md:354 \"Zaman ve duruş: akşam ya da zor bir günün sonu\". PLAN.v2.md:359-362 Creaser 2022 (PMID 35391975) uyarısı. Plan §E.1 satır 791: \"Klinik psikolog: Ders 4 ve 7, kısa sürümleri dahil\"; yolda gösterilme kararı kapsamda yok.",
+              "fix": "Ders 4 ve 7'nin yolda kendiliğinden gösterilmesini klinik psikoloğun onayına ekleyin (§E.1). Ya da karar 5'e bir seçenek koyun: Ders 7 yolda yalnız akşam gelsin veya tam ders dokuz ders arasında dönsün (planın kendi yedek seçeneği)."
+            },
+            {
+              "severity": "NIT",
+              "section": "§D.3, §D.8",
+              "problem": "Ders çalarken Dalga'dan uyku sesi başlatılırsa `sleepStart` BUSY dönecek ve Dalga ekranı \"Önce çalan dersi durdur.\" diyecek. Bugünkü Dalga ekranı bu hatayı 'blocked' durumuna çeviriyor ve \"iOS çalmayı reddetti, yeniden dokun\" akışını açıyor; her dokunuş yine BUSY döner. Gereken JS değişikliği §D.8'de yok. Aynı BUSY kodu bugün \"ses kaydı sürüyor\" için de kullanılıyor.",
+              "evidence": "dalgaSleep.js:104-117 (hata → phase 'blocked'). Dalga.jsx:207, :231, :339-342 (onKick → resume). AlarmPlugin.swift:240-242 (BUSY = kayıt). Plan satır 681-682 ve 767-768 yalnız Swift tarafını sayıyor.",
+              "fix": "§D.8'e dalgaSleep.js ve Dalga.jsx eklensin: ders yüzünden gelen reddi ayrı bir kodla ayırın (ör. 'LESSON'), metni gösterin, yeniden deneme döngüsü açılmasın. Alarm kartından başlayan uyku sesi için de aynısı geçerli."
+            },
+            {
+              "severity": "NIT",
+              "section": "§1 \"Ne yapılacak\" ve \"Yolda (kural)\"",
+              "problem": "Sahibin okuyacağı özette üç küçük dil ve tutarlılık kusuru var. (a) \"Bugün'ün yoluna\": özelliğin adı \"Bugünün yolu\", kesme işareti yanlış. (b) \"Her gün 3 dakikalık bir ders gelir.\" doğru değil: E testi günlerinde yoga yok, tam ders günlerinde 5 dk. (c) \"2. bölümün son durağı olur\" ifadesi §B.2'deki \"Bugünün görevi'nden önce\" ile çelişiyor.",
+              "evidence": "Plan satır 33, 43-44, 276. Home.jsx:358 'Bugünün yolu'.",
+              "fix": "(a) \"Bugünün yoluna bağlanır\". (b) \"Kısa günlerde 3 dakikalık bir ders gelir\". (c) \"2. bölümde göz durağı olarak son sırada, Bugünün görevi'nden önce gelir\" ya da \"yolun son pratik durağı\"."
+            },
+            {
+              "severity": "NIT",
+              "section": "Belge başı, §B.3, §B.5",
+              "problem": "\"19 canlı manifest\" sayısı yanlış. Canlı modül 20; benzetimler who5'i Node'da yükleyemeyip sessizce atlıyor. who5'in `today()`'i olmadığı için yol sayıları değişmiyor, ama kod iddiası olarak düzeltilmeli. Ayrıca \"Yılan, Tek Bakışta ve Fark Ettin mi? düştükten sonra\" ifadesinde Tek Bakışta ile Fark Ettin mi? aynı `rotate: 'week3'` grubunda; aynı gün yalnız biri yolda olur.",
+              "evidence": "registry.test.js:8 (21 modül) ve breath-count/manifest.js:24 (`retired: true`): 20 canlı. sim/loadmods.mjs çıktısı: \"YÜKLENEMEDİ who5 … glob is not a function\". sim_bugun.mjs içinde `catch {}`. tek-bakis/manifest.js:47 ve fark-ettin/manifest.js:44 `rotate: 'week3'`. today.js:256-266.",
+              "fix": "\"20 canlı manifest (who5 Node'da yüklenmiyor; `today()`'i olmadığı için yolu etkilemez)\" diye yazın. R7a açıklamasını \"Yılan ve o günün Tek Bakışta ya da Fark Ettin mi? durağı\" diye düzeltin."
+            },
+            {
+              "severity": "NIT",
+              "section": "§A.3 son madde, §E.2",
+              "problem": "Scribe normalleştirme istisnası yalnız bitişik birleşik sözcükleri kapsıyor. Pilotta Hakan'ın `c2.yer` klibindeki eşleşmeme bir ek-fiil yazımı farkı (\"nefesteyse\" / \"nefeste ise\"). Kural böyle kalırsa bu tür klipler her üretimde gereksiz yere kulak listesine düşer.",
+              "evidence": "sel/hak/selection-hak-1.json c2.yer tts \"Dikkatin nefesteyse…\". report.md:125 Scribe farkı \"Dikkatin nefeste ise…\". Plan satır 229 ve 799-800 yalnız \"bitişik yazılan birleşik sözcükler\".",
+              "fix": "İstisna listesine ek-fiilin bitişik ve ayrı yazımını (-(y)sA / ise, -(y)DI / idi, -(y)mIş / imiş) ekleyin; Türkçe editör listeyi onaylasın."
+            }
+          ]
+        },
+        {
+          "lens": "sayi-ve-dil",
+          "findings": [
+            {
+              "severity": "BLOCKER",
+              "section": "§1 Maliyet ve boyut; karar 6 (satır 113-118); §C.2 Boyut tablosu ve Sonuç (satır 510-521)",
+              "problem": "Boyut toplamında iki farklı birim toplanmış. Ses dosyaları ondalık MB ile hesaplanmış (64 kbit/sn × 60 / 8 = 0,48 MB/dk). 'Bugünkü ≈ 80 MB' ise `du -h`'nin MiB değerlerinden gelir (54M + 25M). Tek birimle hesaplanınca karar 6'daki 'kısılma MP3'leri çıkınca ≈ 185–197 MB olur ve eşiğin altında kalır' sonucu tutmuyor: üst uç tam 200 MB'a denk geliyor. Tabloda JS varlıkları ve `timeline.json` dosyaları da yok; bunlar eklenince eşik aşılıyor.",
+              "evidence": "`du -sb`: app/public 56.265.717 B, ios/App/App/Sounds 25.931.208 B, toplam 82,2 MB (ondalık). Plan ise 80 MB kullanıyor; §C.2'deki '34 MB mediapipe-wasm' MiB'dir, gerçekte 35.444.140 B, yani 35,4 MB. AAC 64: 236–261 dk × 0,48 = 113,3–125,3 MB; 82,2 eklenince 195,5–207,5 MB (plan: 193–205). Kısılma MP3'leri 7.564.643 B (7,56 MB) tutuyor; çıkarılınca 187,9–199,9 MB (plan: 185–197, 'eşiğin altında'). AAC 96: 252,1–270,1 MB, MP3'ler çıkınca 244,5–262,5 MB (plan: 250–268 / 242–260). Hesaba girmeyenler: dist/assets 2.326.450 B JS/CSS, 28 dosyanın `timeline.json`'ı (15 dk'lık olanlar 72.675–75.589 B; toplam ≈ 1 MB) ve yerel ikili dosya.",
+              "fix": "Bütün boyutları ondalık MB'ye çevir (bugün ≈ 82 MB). Karar 6'yı ve §C.2'deki Sonuç'u şöyle yaz: 'AAC 64'te ses ve model dosyaları ≈ 196–208 MB; kısılma MP3'leri çıkınca ≈ 188–200 MB. Bu, 200 MB eşiğinin (VARSAYIM) tam sınırıdır; JS, `timeline.json` ve uygulama ikilisi eklenince eşik aşılabilir.' 'Eşiğin altında kalır' cümlesini sil. Gerçek sıkıştırılmış indirme boyutunun erken ölçülmesini ayrı bir adım yap (aşağıdaki SHOULD bulgusuna bak)."
+            },
+            {
+              "severity": "BLOCKER",
+              "section": "§1 Elde olan (satır 63-68)",
+              "problem": "Özet, pilot için 'kendi şartnamesinin (SPEC) ölçütlerini geçti' diyor. Oysa SPEC §7'nin bir bitti ölçütü, yani tam karışımın Scribe hizalaması yapılmadı. Hemen ardından gelen 'Bunlar A aşamasında düzeltilir.' cümlesi bu eksikliği de kapsıyor, ama plan başka iki yerde bu denetimin hiç yapılmayacağını yazıyor. Sahibe giden özette iç çelişki var.",
+              "evidence": "SPEC.md:95 bitti ölçütü: 'eksik/çift cümle yok (tam karışımın Scribe metni plan metniyle hizalanır)'. report.md:105 'full_mix_scribe_alignment = None'; report.md:151 'SPEC §7 ... YAPILMADI'. PLAN.v3 satır 587: '...yapılmaz, yerine parça konum denetimi'; satır 825: 'Tam karışımın Scribe ile yazıya çevrilmesi yapılmaz'. Satır 64: 'Pilot, kendi şartnamesinin (SPEC) ölçütlerini geçti.' Satır 67: 'Bunlar A aşamasında düzeltilir.'",
+              "fix": "Şöyle yaz: 'Pilot, SPEC'in ölçülen bütün ölçütlerini geçti. Tam karışımın yazıya çevrilerek denetlenmesi yapılmadı; yerine her parçanın konumu ölçüldü ve üretimde de böyle olacak (§E.3). Hakan'ın mikro parçaları ve kesim kuralı A aşamasında düzeltilir; Neslihan'ın iki kesimi kulak onayına gider.'"
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§F tablosu, B satırı (satır 887); §C.3 (satır 568, 588)",
+              "problem": "B adımının kredisi '≈ 3–5 bin (+ düzeltme)' yazıyor. Ancak Ders 2'nin 20 dakikalık karışımı B'de kuruluyor ve §C.3 bunun için ≤ ≈ 6 binlik ek müzik ayırıyor. Bu kalem §F'de hiçbir satırda yok, bu yüzden §F'deki kalemler §C.3'teki toplama ulaşmıyor.",
+              "evidence": "Ders 2 eki (5 dk kısa biçimler + 20 dk birimleri) 2,9–3,4 bin tutuyor (`v3calc/kredi.py`); yardımcı klipler ≈ 1 bin. 20 dk müziği: 300 sn × 15,0 + 300 sn × 5,5 ≈ 6,15 bin. §F üst uçları: A 15 + B 5 + parti payla 175 + 190 + 190 = 575 bin. §C.3 ve karar 3 ise ≈ 581 bin diyor.",
+              "fix": "B satırını '≈ 3–5 bin konuşma + ≤ ≈ 6 bin 20 dk müziği (+ düzeltme)' diye yaz, ya da 20 dk müziğini ayrı bir kalem olarak göster. Böylece §F'nin toplamı §C.3 ile eşleşir."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§F C satırı ve Kapı 4 (satır 889-890); §E.5 yol maddeleri (satır 850-852); §B.5 `pathYoga`",
+              "problem": "Kapı 4'teki TestFlight derlemesi 'yalnız Ders 2 yayımlı, yol durağı açık' olarak tanımlı. Bu durumda yol durağı hiç görünmez. Kısa günlerde aday yalnız 3 dakikalık derslerdir ve Ders 2'nin 3 dakikası yoktur, bu yüzden durak `null` döner. Tam ders sayacı da yalnız kısa yoga günlerini saydığı için tam gün hiç gelmez. Sonuç: §E.5'teki yol maddeleri (3. günde yoga, 3 dk göz bütçesi, 'Sonra yaparım') Kapı 4'te cihazda sınanamaz.",
+              "evidence": "§B.2 kural 5: 'Kısa günlerde yalnız 3 dk'sı olan yedi ders aday olur.' §B.2 kural 3: 'Sayaç yoga günlerini sayar.' §B.5 taslağı: `if (!p) return null // ... yayımlanmış ders yok`. `v3fix/sim_bugun.mjs`'teki `yogaStop`: `cands = SEQ.filter((l) => LESSONS[l][1] <= minutes ...)`; minutes = 3 iken Ders 2 elenir, `shortSince` 0'da kalır.",
+              "fix": "İki yoldan birini seç. (a) Yoldaki cihaz sınamalarını Kapı 5'e taşı; Parti 1'de Ders 1 ve 5'in 3 dakikası gelir. (b) Yalnız TestFlight derlemesine özel bir geri dönüş ekle: yayımlanmış 3 dakikalık ders yoksa kısa günde en kısa yayımlanmış sürüm çalınır. Hangisini seçersen §F'nin C satırına yaz."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "Karar 5 (satır 111-112); §B.5 Eşdeğerlik (satır 446-450); §B.2 kural 4; §B.4",
+              "problem": "'20 dakikalık sınır aşılmaz' cümlesi koşulsuz yazılmış. Oysa planın kendi eşdeğerlik betiği, yoganın o gün zaten yapıldığı 263 bağlamda yolun 21–24 dakikada kaldığını yazdırıyor ve plan bu sayıyı aktarmıyor. Bunun gerçekçi bir karşılığı da var: kişi E testi gününde Ana sayfadan 15 dakikalık bir ders yaparsa tamamlanmış yoga durağı yolda görünür ve 5 dk sayılır. Bu, 'E testi günü yolda yoga yoktur' kuralıyla çelişir ve R7 Yılan'ı, Daire'yi ve Bugünün görevi'ni düşürür.",
+              "evidence": "`node v3fix/esdeger_yoga.mjs`: '...bunların 1289'ünde yoga bugün zaten yapılmış, 263'ünde yol yine 20'yi aşıyor'. Kopya betikle (`v3fix/_rev_esdeger_ov.mjs`) bakıldı: bu 263 bağlamın hepsinde yoga tamamlanmış; yogasız yol ≤ 20 dk, yogalı yol 21–24 dk. `sim_bugun` kopyasında (`_rev_sim_pre.mjs`, 8. gün, sabah Ana sayfadan 15 dk yoga) yol 20 dk tutuyor: Yoga 5 görünüyor, Yılan, Daire ve Bugünün görevi yok. Yogasız 8. gün (r_10.json) 19 dk ve bu üç durak yolda. Nedeni: today.js:220 tamamlanmış durağı düşürmüyor; `yogaStop`'ta `if (!todayDone && eDayToday(...)) return null` satırı var.",
+              "fix": "Eşdeğerlik paragrafına 263 bağlamı (21–24 dk, hepsi yoga tamamlanmış) ekle. Karar 5'i 'yoganın yolda yapıldığı günlerde 20 dk aşılmaz' diye daralt. Kuralı da netleştir: E testi gününde yoga yolda gösterilmesin, ya da tamamlanmış yoga yolun süresine sayılmasın (0 dk). Böylece Bugünün görevi düşmez. Kararı §B.4'e satır olarak yaz."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "Karar 6 (satır 113-118); §F takvim",
+              "problem": "Boyut kararı 'TestFlight'ta ölçülen gerçek boyutla' verilecek. Ama bütün ders dosyalarıyla ölçülebilen tam paket ancak Parti 3'ten sonra, Kapı 8'de ortaya çıkıyor. O noktada paket 200 MB'ı aşarsa ve indirme altyapısı gerekirse, bu iş 7–12 haftalık takvimde yok; yayın kapısında sürpriz olur. Kodek kararı Kapı 3'ten önce verildiği için boyut çok daha erken bilinebilir.",
+              "evidence": "Satır 118: 'Karar, TestFlight'ta ölçülen gerçek boyutla verilir.' §F'de C satırının TestFlight'ında yalnız Ders 2 var. Takvim hesabında (satır 900-901) indirme altyapısı için süre yok. Üst uç ≈ 200 MB, eşiğin tam üstünde (yukarıdaki BLOCKER bulgusu).",
+              "fix": "C adımına bir iş ekle: kodek testinden sonra, son toplam boyutta yer tutucu ses dosyalarıyla (28 karışım + yardımcılar, seçilen bit hızında) bir TestFlight derlemesi yapılır ve App Store Connect'in bildirdiği indirme boyutu ölçülür. Karar 6 Kapı 4'te bu ölçümle verilir. Eşik aşılırsa indirme altyapısı için takvime süre ayır."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 'Yolda (kural)' paragrafı (satır 43-49)",
+              "problem": "Özette dört anlam hatası var. (1) 'Her gün 3 dakikalık bir ders gelir.' Bu doğru değil: 1. ve 2. günlerde ve E testi günlerinde yoga yok, tam ders günlerinde ders 5 dakika. (2) 'Tam ders günleri, 3 dakikası olmayan iki derse ayrılmıştır' cümlesi, iki satır önce 'Üç derste 3 dakika yok' deniyorken okuru şaşırtır. (3) '15 dakika yolda durak değildir' cümlesinde özne ile yüklem anlamca uyuşmuyor; bir süre durak olamaz, kastedilen 15 dakikalık sürüm. (4) 'sayaçlarını kendi kayıtlarından türetir' yanlış; durak bütün uygulama kayıtlarını kullanıyor (§B.5: `ctx.sessions` ve `ctx.tests`). Bir küçük nokta daha: 'Öteki yedi dersin 5 dakikası Ana sayfadadır' dersler aslında kütüphanede (§D.2: Ana sayfa → Pratikler → Yoga → kütüphane).",
+              "evidence": "Satır 44: 'Her gün 3 dakikalık bir ders gelir.' Satır 45: '3 dakikası olmayan iki derse ayrılmıştır'. Satır 48: '15 dakika yolda durak değildir'. Satır 48-49: 'sayaçlarını kendi kayıtlarından türetir'. Karşılaştırma: satır 397-399, 648.",
+              "fix": "Önerilen biçimler: 'Kısa günlerde 3 dakikalık bir ders gelir.' / 'Tam ders günleri, 3 dakikası olmayan üç dersten ikisine ayrılmıştır (Uykuya Geçiş gece dersidir, yolda yoktur): sırayla Derin Dinlenme ve Kendine Şefkat gelir.' / '15 dakikalık sürüm yolda durak olarak gelmez; kişi dersi ekranda 15 dakikaya uzatabilir.' / 'Sayaçlarını uygulamadaki kayıtlardan kendisi türetir.' / 'Öteki yedi dersin 5 dakikası kütüphanededir.'"
+            },
+            {
+              "severity": "SHOULD",
+              "section": "Karar 5 (satır 108-110)",
+              "problem": "İki cümle birbiriyle çelişiyor: yoganın kısa dersleri 'yolun tek sakin durağı olsun' deniyor, hemen ardından 'Nefes yolda bugünkü gibi 5 dakika kalsın' deniyor. Sahip ikisini aynı kararda onaylayacak.",
+              "evidence": "Satır 108-109: 'Meditasyon yolda ayrı durak olmasın; yoganın kısa dersleri yolun tek sakin durağı olsun. İlk yayında Nefes yolda bugünkü gibi 5 dakika kalsın.' Benzetimde Nefes her gün yolda 5 dk (r_10.json, bütün günler).",
+              "fix": "Şöyle yaz: 'Meditasyon yolda ayrı durak olmasın; yolun sesli rehberli dersi yalnız yoganın kısa dersleri olsun. Nefes molası yolda bugünkü gibi 5 dakika kalır.'"
+            },
+            {
+              "severity": "SHOULD",
+              "section": "Karar 1 ve karar 2 (satır 91, 95)",
+              "problem": "Karar 1'de yüklemsiz cümleler var ve örnek cümlenin de onaya dahil olup olmadığı belirsiz. Karar 2'deki 'Onayları olmadan hiçbir metin seslendirilmez' cümlesi dinleme panelini de kapsıyor. Oysa panel metin onaylamaz, seslendirilmiş dosyaları dinler (§E.1'de üç insan onayı var, §E.4'te panel seslendirmeden sonra çalışır). Sahip beş kişilik panelin metni onaylaması gerektiğini sanabilir.",
+              "evidence": "Satır 91: 'Onayını istediğim yalnız tarif: \"...\"; örnek cümle Ders 2'nin açılışı.' Satır 93-95: '...en az beş kişilik bir dinleme paneli (biri 65 yaş üstü). ... Onayları olmadan hiçbir metin seslendirilmez.'",
+              "fix": "Karar 1: 'Onayını istediğim yalnız tariftir: \"...\". Önizleme için okunacak örnek cümle, Ders 2'nin açılış cümlesidir.' Karar 2: 'Türkçe editörün, usta hocanın ve (Ders 4 ile 7'de) klinik psikoloğun onayı olmadan hiçbir metin seslendirilmez; panel, seslendirilmiş dosyaları dinler.'"
+            },
+            {
+              "severity": "NIT",
+              "section": "§A.2 3 dakika iskeleti (satır 171)",
+              "problem": "Sözcük aralığı hece bütçesinden çıkmıyor. Alt uç (110) fazla düşük.",
+              "evidence": "render/units.json: 1.405 hece / 596 sözcük = 2,36 hece/sözcük. 310–330 hece bu oranla ≈ 131–140 sözcük eder.",
+              "fix": "'≈ 310–330 hece (≈ 130–140 sözcük)' diye yaz."
+            },
+            {
+              "severity": "NIT",
+              "section": "§1 (satır 41, 70, 77) ve karar 4(b) (satır 104)",
+              "problem": "Terim ve söyleyişte küçük tutarsızlıklar var. Satır 41 'istediğin dakika', satır 77 ve 236 'istenen dakika' diyor. 'Sıradaki adımlar ve onay kapıların' başlığı 'kapıların' sözcüğünün ilgi hâli sanılmasına açık. 'Derin Dinlenme'ye 20 dakika da eklensin ve varsayılanı olsun' cümlesinde neyin varsayılan olacağı bir an belirsiz kalıyor.",
+              "evidence": "Satır 41: '30 dakika ve \"istediğin dakika\" ikinci aşamada gelir'. Satır 77: 'İkinci aşama (30 dakika ve istenen dakika)'. Satır 70: 'Sıradaki adımlar ve onay kapıların.' Satır 104: '(b) Derin Dinlenme'ye 20 dakika da eklensin ve varsayılanı olsun.'",
+              "fix": "Tek terim kullan ('istediğin dakika'). Başlığı 'Sıradaki adımlar ve senin onay kapıların' diye değiştir. Karar 4(b)'yi 'Derin Dinlenme'ye 20 dakikalık sürüm de eklensin ve dersin varsayılanı bu olsun.' diye yaz."
+            },
+            {
+              "severity": "NIT",
+              "section": "§C.3 'Tabloya girmeyenler' (satır 587)",
+              "problem": "'Yerel dosyayı yükleme yolu yok' bir olgu gibi yazılmış, ama pilot oturumuna ait bir gözlem. Bu oturumun ElevenLabs MCP talimatı yerel dosya için bir yükleme akışı tarif ediyor. Karar yine de maliyet gerekçesiyle ayakta kalır: 241 dk × 60 × 5,5 ≈ 79,5 bin kredi; 581 + 79,5 bin, 600 binlik tavanı aşar.",
+              "evidence": "report.md:151: 'Yerel dosya yükleme aracı bu oturumda yok'. Bu oturumun ElevenLabs sunucu talimatında şu akış var: creative_create_asset_upload → PUT → creative_finalize_asset_upload. Bu araçlar yüklü araç listesinde görünmüyor; durumları doğrulanmadı.",
+              "fix": "Şöyle yaz: 'Pilot oturumunda yerel yükleme aracı yoktu. Yükleme yolu bulunsa bile ≈ 80 bin kredi toplam tavanı aşar; bu yüzden tam karışım yazıya çevrilmez, parça konum denetimi yapılır.'"
+            }
+          ]
+        }
+      ]
+    ],
+    "fixes": [
+      "PLAN.v3.md'yi düzelttim. 11 BLOCKER, 14 SHOULD ve 5 NIT'in hepsini kaynaktan yeniden denetledim ve hepsinin doğru olduğunu gördüm. İki NIT'te önerilen biçim yerine başka bir biçim seçtim; gerekçeleri aşağıda ve planın sonundaki \"İnceleme izi\" bölümünde (her bulgu için ayrı satır).\n\n**En büyük değişiklik: yol durağı artık (c)'yi beklemiyor.** İki BLOCKER'ı bu kararla kapattım. Durak sayaçlarını kayıtlardan kendisi türetiyor ve ilk yayının koşulu oldu. Böylece sahibin iş sırası (\"önce yoga, sonra sonsuz yol\") değişmiyor. Bunun bedeli: ilk yayında Nefes yolda 5 dk kalıyor, yoga olan günlerde yol ≈ 15 dk hedefini aşıyor (ortalama 16,9–17,9 dk). 20 dk sınırı hiç aşılmıyor. Bu, karar 5'te sahibe açıkça yazıldı.\n\n**Değişenler:**\n\n1. **Başlık:** yeni benzetimler anıldı; notlar planla çelişirse planın geçerli olduğu yazıldı.\n2. **§1 baştan yazıldı.**\n   - Yüklemsiz cümleler ve anlatım bozuklukları düzeltildi (S2 a–e, S3).\n   - \"Her ders 3·5·15\" yanlışı düzeltildi; üç derste 3 dk olmaması bir sapma olarak sahibe sunuldu.\n   - \"Yaklaşık haftada bir\" yerine \"yaklaşık 8 günde bir\" yazıldı. Tam dersin hep Derin Dinlenme ile Kendine Şefkat olduğu açıkça söylendi.\n   - Yeni \"Yolun süresi\" paragrafı eklendi: 15 dk hedefi, 20 dk sınırını kodun durak düşürerek koruduğu ve 3 dk göz bütçesindeki sonuç.\n   - \"Ölçüm eşiklerini geçti\" cümlesi düzeltildi: pilot yalnız SPEC ölçütlerini geçiyor. Mikro parçalar planın eşiğinin altında; Neslihan'ın iki kesimi kulak onayı bekliyor; tam karışım Scribe'dan geçmedi.\n   - Takvim ≈ 7–12 hafta oldu (dinleme süreleri ve inceleyici bulma hariç). İkinci aşama Kapı 9–11 olarak eklendi.\n   - Kredi ≈ 405–581 bin oldu. Pilottaki 24,2 binlik TTS'in uzlaştırılmadığı yazıldı. 200 MB eşiğinin sonucu söylendi.\n3. **Kararlar:**\n   - Karar 1 yalnız sesin tarifine daraltıldı.\n   - Karar 2'ye kör karşılaştırma istisnası eklendi.\n   - Karar 3: parti tavanı 195 bin, toplam 600 bin (≈ 109 USD).\n   - Karar 4 dört alt karar oldu. (a) 3 dk'nın yalnız yedi derste olması, seçenekleriyle. (d) terimleri açıklandı.\n   - Karar 5 yeniden yazıldı.\n   - Yeni karar 6: paket boyutu. iOS'ta çalınmayan uyku kısılma MP3'leri yalnız iOS paketinden çıkarılabilir, çünkü `dalgaSleep.test.js:65` onları `public`'te bekliyor.\n4. **§2.0:** satır 3, 10 (≈ 7 sn) ve 13 güncellendi; satır 14 (yol durağının bağımlılığı) eklendi.\n5. **§A.2 kural 6:** 3 dk Kapanış'ta en çok bir \"-(y)abil-\" olur; `a.izin`'in başta yarattığı sınır da yazıldı.\n6. **§A.3:** Harvey & Payne kaynaktaki ifadeye döndürüldü. **§A.4:** §F'ye atıf eklendi.\n7. **§B.1 ve §B.2:**\n   - Giriş sayacı artık kayıtlardan geliyor.\n   - Kural 2: yoga göz payı dolunca düşmez; 20 dk sınırında hangi sırayla düştüğü yazıldı.\n   - Kural 5: tam ders günlerinin iki derse ayrılması açık kural oldu, dönen seçenekle birlikte.\n   - Kural 9 (\"Sonra yaparım\"), kural 10 (Nefes ilk yayında 5 dk), kural 11 (uzman satırının yeni biçimi) yeniden yazıldı.\n8. **§B.3 baştan yazıldı.** Tablo bugünkü yolla yeniden benzetildi. 5 dk ve 3 dk bütçe özetleri, uzun ara, (c) geldiğindeki merdivenli sonuçlar ve 15 dk'yı aşan gün sayıları eklendi. **§B.4'e** yeni satır eklendi.\n9. **§B.5 baştan yazıldı:**\n   - Durak (c)'den bağımsız.\n   - \"Sonra yaparım\" kaydı için `lib/pathLater.js` ve Home.jsx bağlamı.\n   - `today.js`'e beş ek: collect, R7a, R5, `next`, `allDone`.\n   - Eşdeğerlik: 20.000 bağlamda 0 fark. Yoga eklenince yalnız 20 dk sınırında durak düşmesi oluyor (3.614 bağlam), başka fark yok.\n   - Test yardımcıları, `registry.test.js:8` ve yeni testler. Satır atıfları düzeltildi.\n10. **§C.2:** tablo sütununun adı değişti; \"Sonuç\" paragrafı ve Vercel/`.vercelignore` notu eklendi.\n11. **§C.3:** 33,9 binin açıklaması, 20 dk müziği sütunu, önizleme notu, payla parti tutarları, tavanlar ve ikinci aşama toplamı (≈ 285–355 bin) eklendi.\n12. **§D.3:** ders için ayrı ses oturumu bayrağı ve iki yönlü dışlama (ders çalarken uyku sesi başlamaz). İlk ders cümlesi değişti; olay tablosuna satır eklendi.\n13. **§D.5:** G1 için PLAN.v2'nin kendi önerisi olan (b) uygulanıyor: her ders Gelişim şeridinde kendi alanını doldurur (`sessions.domainOf`). **§D.8:** dosya listesi baştan yazıldı.\n14. **§E:**\n   - E.1: \"-(y)abil-\" kuralı ve Ders 2 istisnası.\n   - E.4.3: yayına girecek her dosya panelde dinlenir.\n   - E.5: ses oturumu ve yol maddeleri.\n   - E.6: sahip Kapı 5–7'de her dersin bütün sürelerini dinler.\n   - E.7: ders koşulları sıkılaştırıldı; modül koşulları (5) ve (6) eklendi; \"5 ve 30 dk\" koşulu Kapı 11'de geri geliyor.\n15. **§F:** Kapı 1'de altı karar; A ve C satırları güncellendi (C artık 1,5–2,5 hafta); partilere pay eklendi; Kapı 8'e yol ve Vercel denetimi. Kapı 9–11 eklendi. Takvimin hesabı yazıldı. \"Paralel (c)\" satırı yerine \"(c) ile ilişki\" notu geldi; yedek plan kaldırıldı; G1 → (b).\n16. **§G:** pilot notu eklendi, benzetim sınırı yeniden yazıldı, VARSAYIM listesi güncellendi, okunan dosyalar genişletildi.\n17. **Yeni bölüm:** \"İnceleme izi\" (K1–K11, S1–S14 ve düzeltme sırasında bulunan üç ek madde).\n\n**Önerilenden farklı yaptıklarım:**\n- **K10, ilk cümle:** önerilen \"kapanışa geçebilirsin\" yerine \"zorlanırsan kapanışa geçmen yeterli.\" seçildi. Hemen ardından çalan `a.izin` üç \"-(y)abil-\" taşıyor; dördüncüsü 60 sn sınırını aşardı.\n- **K10, uzman satırı:** \"Bu zorlanma sık sık oluyorsa\" yerine \"Zor anlar sık sık geliyorsa bir uzmanla konuşmak iyi olur.\" seçildi. Satır Ders 4'ün sonunda tek başına görünüyor; \"zorlanma\" ekranda hiçbir şeye bağlanmıyordu. İkisi de Türkçe editör onayına bırakıldı.\n\n**Hâlâ açık olanlar:**\n- Vercel projesinin `public` klasörünü sunup sunmadığı doğrulanamadı; VARSAYIM olarak işaretlendi.\n- Ses tasarımı önizlemelerinin fiyatı bilinmiyor.\n- Karışımlar henüz kulakla dinlenmedi.\n\nDepoda hiçbir dosya değişmedi, git ve ücretli çağrı yapılmadı.\n\nDosyalar (/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3):\n- PLAN.v3.md\n- v3fix/PLAN.v3.inceleme-oncesi.md (düzeltmeden önceki yedek)\n- v3fix/sim_bugun.mjs, v3fix/sim_bugun_no286.mjs, v3fix/yoga_stop.mjs, v3fix/yolsim_c.mjs\n- v3fix/today_v3.js, v3fix/esdeger_v3.mjs, v3fix/esdeger_yoga.mjs, v3fix/later_v3.mjs\n- v3fix/b3b5.md (B.3–B.5'in yeni metni)",
+      "PLAN.v3.md'deki üç BLOCKER'ın üçü de düzeltildi. Aynı turda gelen 10 SHOULD ve 9 NIT de işlendi. Bulguların hepsini kaynağından yeniden denetledim; hepsi doğru çıktı. Tek sapma: bir bulgudaki PLAN.v2 satır numaraları 1–2 satır kaymıştı, düzelterek yazdım. Depoya hiçbir şey yazılmadı, git komutu çalışmadı, ücretli çağrı yapılmadı.\n\n**BLOCKER'lar**\n\n1. **Yoga, Hızlı Bakış'ı yoldan çıkarıyordu (K2.1).** Reviewer'ın önerdiği iki seçenek yerine ikisini de kapsayan genel bir kural koydum:\n   - Yoga artık düşme sırası (`dropRank`) taşımıyor; yerine `yields: true` alanı var.\n   - `today.js`'e eklenen yeni kural (R7b): 20 dk sınırı önce yogasız yola uygulanır. Yoga ancak ondan sonra, sığarsa eklenir; Ana sayfadan bugün yapılmış olsa da sığmıyorsa o gün yolda olmaz.\n   - E testi günü yoga yolda hiç yok, o gün yapılmış olsa da.\n   - Bu, 263 bağlamlık \"20 dk aşılıyor\" bulgusunu (S2.5) da kapattı.\n   - Önceki turdaki R7a eki gereksiz kaldı ve kalktı; `today.js`'e ek sayısı yine beş.\n   - Sınama sonuçları:\n     - 20.000 rastgele bağlamda yoga dışındaki duraklar yogasız yolla 0 farkla aynı (önce 3.614 fark vardı).\n     - Her gün açan kullanıcının 90 günü, iki saatte ve iki göz bütçesinde gün gün aynı; sahibe gösterilen ilk 14 gün değişmedi.\n     - Hızlı Bakış oynayan kullanıcıda hiçbir durak düşmüyor; yoga 90 günün 4'ünde (9, 51, 58, 65) o gün yolda yok.\n     - (c) merdivenleriyle 30 günde 22 yoga günü var ve düşen durak yok.\n   - İşlendiği yerler: §1 \"Yolda\" ve \"Yolun süresi\", karar 5.1, §B.1, §B.2 kural 2 ve 4, §B.3 (yeni Hızlı Bakış paragrafı, uzun ara, (c) sayıları), §B.4'e üç satır, §B.5 (kod taslağı, ek 1–2, eşdeğerlik, testler), §G.\n\n2. **Boyutlarda iki birim toplanmıştı (S2.1).** Bayt olarak yeniden ölçtüm ve her şeyi ondalık MB'ye çevirdim:\n\n   | Durum | Önceki plan | Düzeltilmiş |\n   |---|---|---|\n   | Uygulamanın bugünkü ses ve model dosyaları | ≈ 80 MB | 82,2 MB |\n   | AAC 64 toplam | 193–205 MB | ≈ 195–207 MB |\n   | AAC 64, kısılma MP3'leri çıkınca | 185–197 MB, \"eşiğin altında\" | ≈ 188–200 MB, 200 MB eşiğinin tam sınırı |\n   | AAC 96 toplam (MP3'ler çıkınca) | 250–268 (242–260) MB | ≈ 252–270 (245–263) MB |\n   | MP3 satırı (ses / toplam) | 196–222 / 276–302 MB | ≈ 195–223 / 277–305 MB |\n\n   - \"Eşiğin altında kalır\" cümlesi silindi. Yerine JS, `timeline.json` ve uygulama dosyası eklenince eşiğin aşılabileceği yazıldı.\n   - İşlendiği yerler: §1, karar 6, §C.2, §G.\n\n3. **§1 \"Elde olan\" kendi içinde çelişiyordu (S2.2 ve K2.4).** Paragraf \"ölçülen ölçütleri geçti, ama üç konu açık\" diye yeniden yazıldı:\n   - Tam karışımın Scribe denetimi yapılmadı; üretimde de yapılmayacak, yerine parça konum denetimi var.\n   - `n2.hatirla` kesimi şartnamenin kuralı dışında kaldı.\n   - Üç klip Scribe ile harfi harfine eşleşmedi, farkların hepsi yazım farkı: iki seste `a.durus` ve `k.yan`, Hakan'da `c2.yer` (\"nefesteyse\" / \"nefeste ise\").\n   - §G'ye \"Pilot bitmiş değildir\" maddesi eklendi.\n\n**SHOULD ve NIT'ler**\n- **Web (K2.2):** İlk yayında yoga yalnız iPhone'da. Web'de `today()` `null` döndürür; kutucuk, Nef düğmesi ve yol durağı gizli. §D.7 \"Ücret ve platform\" oldu ve kilidin yalnız iOS'ta olduğu doğru yazıldı.\n- **\"Parça parça\" okuması (K2.3):** Yeni karar 5.2. İki okuma, sonuçları ve tekrar sayıları sahibe soruluyor (90 günde her 3 dk'lık ders 9–10 kez, 19.00'da açanda 11 kez).\n- **Ders 4 ve 7'nin yolda istenmeden gelmesi (K2.6):** §E.1'de klinik psikoloğun onayına eklendi. Yeni karar 5.3'te öneri ve yedek kural var (Kendine Şefkat yolda yalnız 17.00'den sonra, bu saat VARSAYIM).\n- **Gelişim alanı tek kaynaktan (K2.5):** `domainOfSession`, `domainOf`'u okur. dataHub.js:181 ve exportData.js:69 da ona bağlanır; bir test eklendi. 5. gün raporu ve PDF'nin değişmesi gerekmedi (kayıt başına alan okumuyorlar).\n- **Uyku sesi reddi (K2.7):** Ders çalarken gelen ret ayrı bir \"LESSON\" koduyla dönüyor; uyku ekranında \"dokun, başlat\" yeniden deneme döngüsü açılmıyor. §D.3, §D.8 ve §E.5 güncellendi.\n- **Scribe istisnası (K2.10):** Ek-fiilin bitişik ve ayrı yazımı eklendi (§A.3, §E.2, §C.4, §F).\n- **Kapı 4'te yol durağı görünmez (S2.4):** Ders 2'nin 3 dakikası olmadığı için yolun cihaz sınamaları Kapı 5'e taşındı.\n- **Boyut erken ölçülüyor (S2.6):** C adımına, yer tutucu ses dosyalarıyla bir TestFlight ölçümü eklendi; karar 6 Kapı 4'te veriliyor. İndirme altyapısı gerekirse takvime ≈ 1–2 hafta eklenir (VARSAYIM).\n- **Kredi (S2.3):** §F'nin B satırına 20 dk müziği (≤ ≈ 6 bin) eklendi; kalemler artık §C.3'teki ≈ 581 bin toplamına ulaşıyor.\n- **Dil ve sayılar:**\n  - §1 \"Yolda\" paragrafındaki anlam hataları düzeltildi (K2.8, S2.7).\n  - Karar 1 ve 2 yeniden yazıldı; panel metni değil, seslendirilmiş dosyaları dinliyor (S2.9).\n  - Karar 5'teki \"tek sakin durak\" çelişkisi giderildi (S2.8).\n  - 3 dk metni \"≈ 130–140 sözcük\" oldu (S2.10).\n  - \"İstediğin dakika\" tek terim oldu; başlık \"senin onay kapıların\" oldu (S2.11).\n  - \"Yükleme yolu yok\" cümlesi düzeltildi (S2.12).\n  - Belge başında \"canlı 20 manifestin who5 dışındaki 19'u\" yazıldı (K2.9).\n\n**İnceleme izi:** Mevcut tablonun başına \"Birinci tur\" başlığı kondu. Altına \"İkinci tur\" tablosu (K2.1–K2.10, S2.1–S2.12) ve \"bu turda ayrıca bulunanlar\" eklendi. Kaynaklara bu turda okunan satırlar yazıldı.\n\nBu iki merceğin açtığı hiçbir BLOCKER ya da SHOULD açık kalmadı; bence plan onaya gönderilebilir. Plana içerikten gelen VARSAYIM'lar (App Store'un 200 MB eşiği, gerçek indirme boyutu) açık kalıyor; ikisi de artık Kapı 4'te ölçümle kapanıyor.\n\nDosyalar (hepsi /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3 altında):\n- PLAN.v3.md\n- v3fix2/PLAN.v3.inceleme2-oncesi.md (düzeltme öncesi yedek)\n- v3fix2/today_v4.js (beş ekli today.js kopyası)\n- v3fix2/yoga_stop_v4.mjs\n- v3fix2/sim_bugun_v4.mjs\n- v3fix2/yolsim_c_v4.mjs\n- v3fix2/yolsim_c_eski_kural.mjs\n- v3fix2/esdeger_v4.mjs\n- v3fix2/esdeger_yoga_v4.mjs\n- v3fix2/esdeger_kiyas_v4.mjs\n- v3fix2/later_v4.mjs\n- v3fix2/hb_v4.mjs\n- v3fix2/hb_v4_yapilmis.mjs"
+    ]
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "İncele"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "Yaz"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 3,
+      "title": "Karşı incele"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "incele:sure",
+      "phaseIndex": 1,
+      "phaseTitle": "İncele",
+      "agentId": "a468e93fd6a8c3e3d",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790699158817,
+      "queuedAt": 1790699158779,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "cd /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290…",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor; Türkçe arayüz). Depo /home/user/eyes (uygulama /home/user/eyes/app). Yoga çalışma belgeleri /home/user/eyes/yoga-pilot (PLAN.v2.md tam plan, SAHIP_ISTEKLERI.md sahibin kelimesi kelimesine istekleri + kararları, CRITIQUE.md, render/SPEC.md üretim kuralları, render/out/report.md pilot ölçüm raporu, render/ledger.jsonl ElevenLabs harcama kayd…",
+      "promptFramed": true,
+      "lastProgressAt": 1790700472668,
+      "tokens": 421622,
+      "toolCalls": 76,
+      "durationMs": 1313815,
+      "resultPreview": "Yoga süre planı hazır, ama sahibine gidecek kadar mükemmel değil. Önce senin (orkestratör) ya da sahibin karar vermesi gereken 7 madde var (belgenin §9 bölümü). Hiçbir ses dinlenmedi, 3 dk'nın bütün süre ve hece değerleri ölçülmemiş varsayımlar.\n\n1. Evet, 10 dersin her biri 30 dk olarak tasarlandı (PLAN.v2.md:603-769, dikkat eğrisi :455-472). Bugünkü alt sınır 5 dk: ders2.lesson.json:11-15 ve timi…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "incele:yol",
+      "phaseIndex": 1,
+      "phaseTitle": "İncele",
+      "agentId": "ab77c6502f2d54025",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790699158852,
+      "queuedAt": 1790699158780,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "cd /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290…",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor; Türkçe arayüz). Depo /home/user/eyes (uygulama /home/user/eyes/app). Yoga çalışma belgeleri /home/user/eyes/yoga-pilot (PLAN.v2.md tam plan, SAHIP_ISTEKLERI.md sahibin kelimesi kelimesine istekleri + kararları, CRITIQUE.md, render/SPEC.md üretim kuralları, render/out/report.md pilot ölçüm raporu, render/ledger.jsonl ElevenLabs harcama kayd…",
+      "promptFramed": true,
+      "lastProgressAt": 1790701251039,
+      "tokens": 563736,
+      "toolCalls": 100,
+      "durationMs": 2090977,
+      "resultPreview": "**Yoga · Bugün'ün yolu: tek karar (özet, 25 satır)**\n1. Giriş: yoga yola 3. gün girer (`totalDays ≥ 2`, bugün sayılmaz). 1. gün E testi, 2. gün okuma, Yılan ve Görev; 3. gün yeni durağı olmayan ilk gün.\n2. Süre: yolda her gün 3 dk kısa ders. 6 kısa yoga gününden sonra, ölçüm olmayan ilk gün 5 dk tam ders gelir (yaklaşık haftada bir).\n3. 15 dk yolda yok: Ana sayfa → Yoga'da ve durağın açtığı ders e…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "incele:uretim",
+      "phaseIndex": 1,
+      "phaseTitle": "İncele",
+      "agentId": "a2b39e28345dc2d9e",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790700476164,
+      "queuedAt": 1790699158780,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "cd /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290…",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor; Türkçe arayüz). Depo /home/user/eyes (uygulama /home/user/eyes/app). Yoga çalışma belgeleri /home/user/eyes/yoga-pilot (PLAN.v2.md tam plan, SAHIP_ISTEKLERI.md sahibin kelimesi kelimesine istekleri + kararları, CRITIQUE.md, render/SPEC.md üretim kuralları, render/out/report.md pilot ölçüm raporu, render/ledger.jsonl ElevenLabs harcama kayd…",
+      "promptFramed": true,
+      "lastProgressAt": 1790701635105,
+      "tokens": 368601,
+      "toolCalls": 70,
+      "durationMs": 1158939,
+      "resultPreview": "Üretim notunu yazdım: `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/uretim.md` (464 satır). Hesap betikleri aynı klasörde: `calc.py`, `plans.py`, `plans2.py`, `plans3.py`.\n\n**Özet (25 satır):**\n1. Pilot defteri 399 satır, satır satır toplandı: 62.940,3 kredi, yani 11,44 USD (5.500 kredi = 1 USD).\n2. Ses ve müzik ayrı: konuşma 28.640,3 kredi (TTS 24.151,9 + Scrib…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "incele:modul",
+      "phaseIndex": 1,
+      "phaseTitle": "İncele",
+      "agentId": "a4c26bbd94361ea3b",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790701254782,
+      "queuedAt": 1790699158780,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "cd /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290…",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor; Türkçe arayüz). Depo /home/user/eyes (uygulama /home/user/eyes/app). Yoga çalışma belgeleri /home/user/eyes/yoga-pilot (PLAN.v2.md tam plan, SAHIP_ISTEKLERI.md sahibin kelimesi kelimesine istekleri + kararları, CRITIQUE.md, render/SPEC.md üretim kuralları, render/out/report.md pilot ölçüm raporu, render/ledger.jsonl ElevenLabs harcama kayd…",
+      "promptFramed": true,
+      "lastProgressAt": 1790702756015,
+      "tokens": 509593,
+      "toolCalls": 98,
+      "durationMs": 1501231,
+      "resultPreview": "Belge hazır: `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/modul.md` (900 satır). Depoya dokunulmadı, git'e yazılmadı, ücretli çağrı yapılmadı.\n\n1. İlk yayında on dersin hepsi var. Süre çipleri yedi derste 3 · 5 · 15, Ders 2, 3 ve 7'de 5 · 15. 30 dakika ve kaydırıcı sonraki aşamada; bölüme atlama ilk yayında var.\n2. Akış: Ana sayfa (Pratikler, sıra 33) → kütüpha…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 5,
+      "label": "yaz",
+      "phaseIndex": 2,
+      "phaseTitle": "Yaz",
+      "agentId": "a59a5d8d4750dfdcc",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790702759654,
+      "queuedAt": 1790702759590,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "cd /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290…",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor; Türkçe arayüz). Depo /home/user/eyes (uygulama /home/user/eyes/app). Yoga çalışma belgeleri /home/user/eyes/yoga-pilot (PLAN.v2.md tam plan, SAHIP_ISTEKLERI.md sahibin kelimesi kelimesine istekleri + kararları, CRITIQUE.md, render/SPEC.md üretim kuralları, render/out/report.md pilot ölçüm raporu, render/ledger.jsonl ElevenLabs harcama kayd…",
+      "promptFramed": true,
+      "lastProgressAt": 1790704318408,
+      "tokens": 482054,
+      "toolCalls": 68,
+      "durationMs": 1558753,
+      "resultPreview": "**Plan dosyası:** /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga-v3/PLAN.v3.md\n\n1. **Kapsam:** On dersin her biri 30 dakikalık tam ders olarak tasarlanır. İlk yayında 7 derste 3 · 5 · 15 dakika var. Derin Dinlenme'de 5 · 15 · 20 dakika, Uykuya Geçiş ile Kendine Şefkat'te 5 · 15 dakika sunulur. Bu üç derste 3 dakika olmamasının nedenleri, ölçülmüş sürelerle ve güvenli…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 6,
+      "label": "incele:sahip-ve-kod:1",
+      "phaseIndex": 3,
+      "phaseTitle": "Karşı incele",
+      "agentId": "a4f5ad62c6faef13d",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790704322311,
+      "queuedAt": 1790704322217,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor; Türkçe arayüz). Depo /home/user/eyes (uygulama /home/user/eyes/app). Yoga çalışma belgeleri /home/user/eyes/yoga-pilot (PLAN.v2.md tam plan, SAHIP_ISTEKLERI.md sahibin kelimesi kelimesine istekleri + kararları, CRITIQUE.md, render/SPEC.md üretim kuralları, render/out/report.md pilot ölçüm raporu, render/ledger.jsonl ElevenLabs harcama kayd…",
+      "promptFramed": true,
+      "lastProgressAt": 1790705200387,
+      "tokens": 271726,
+      "toolCalls": 65,
+      "durationMs": 878022,
+      "resultPreview": "{\"findings\":[{\"severity\":\"BLOCKER\",\"section\":\"§B.5 Kod sözleşmesi; §B.2 kural 2 (\\\"Göz bütçesine sayılmaz\\\"); §1 yol özeti\",\"problem\":\"Yoga durağı `dropRank: 1.8` ve `order: 105` ile 2. bölüme giriyor. today.js:286'daki bölüm göz payı döngüsü ise `dropOne([sec2])` ile durağın göz bütçeli olup olmadığına bakmadan en düşük dropRank'lı durağı düşürüyor. Göz payı taştığında önce Yılan (1), Tek Bakışta…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 7,
+      "label": "incele:sayi-ve-dil:1",
+      "phaseIndex": 3,
+      "phaseTitle": "Karşı incele",
+      "agentId": "a3bd071a0d169fdc0",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790704322364,
+      "queuedAt": 1790704322217,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor; Türkçe arayüz). Depo /home/user/eyes (uygulama /home/user/eyes/app). Yoga çalışma belgeleri /home/user/eyes/yoga-pilot (PLAN.v2.md tam plan, SAHIP_ISTEKLERI.md sahibin kelimesi kelimesine istekleri + kararları, CRITIQUE.md, render/SPEC.md üretim kuralları, render/out/report.md pilot ölçüm raporu, render/ledger.jsonl ElevenLabs harcama kayd…",
+      "promptFramed": true,
+      "lastProgressAt": 1790705222742,
+      "tokens": 299535,
+      "toolCalls": 61,
+      "durationMs": 899373,
+      "resultPreview": "{\"findings\":[{\"severity\":\"BLOCKER\",\"section\":\"§1 Elde olan (PLAN.v3.md:47-48)\",\"problem\":\"Özet pilot için 'ölçüm eşiklerini geçti' diyor. Oysa planın kendi §E.3 eşiğine göre dört karışımdan üçü geçmiyor. Sahibe iş 'olmuş gibi' bildiriliyor.\",\"evidence\":\"§E.3 (PLAN.v3.md:645) eşiği 'Konuşma / yatak ≥ 15 dB, mikro parçalar dahil' diye koyuyor. Aynı satırın pilot sütunu da '1 sn'den kısa parçalardan …"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 8,
+      "label": "düzelt:1",
+      "phaseIndex": 3,
+      "phaseTitle": "Karşı incele",
+      "agentId": "aca62368ef9fcd090",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790705225412,
+      "queuedAt": 1790705225363,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "cd /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290…",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor; Türkçe arayüz). Depo /home/user/eyes (uygulama /home/user/eyes/app). Yoga çalışma belgeleri /home/user/eyes/yoga-pilot (PLAN.v2.md tam plan, SAHIP_ISTEKLERI.md sahibin kelimesi kelimesine istekleri + kararları, CRITIQUE.md, render/SPEC.md üretim kuralları, render/out/report.md pilot ölçüm raporu, render/ledger.jsonl ElevenLabs harcama kayd…",
+      "promptFramed": true,
+      "lastProgressAt": 1790706729403,
+      "tokens": 407795,
+      "toolCalls": 112,
+      "durationMs": 1503990,
+      "resultPreview": "PLAN.v3.md'yi düzelttim. 11 BLOCKER, 14 SHOULD ve 5 NIT'in hepsini kaynaktan yeniden denetledim ve hepsinin doğru olduğunu gördüm. İki NIT'te önerilen biçim yerine başka bir biçim seçtim; gerekçeleri aşağıda ve planın sonundaki \"İnceleme izi\" bölümünde (her bulgu için ayrı satır).\n\n**En büyük değişiklik: yol durağı artık (c)'yi beklemiyor.** İki BLOCKER'ı bu kararla kapattım. Durak sayaçlarını kay…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 9,
+      "label": "incele:sahip-ve-kod:2",
+      "phaseIndex": 3,
+      "phaseTitle": "Karşı incele",
+      "agentId": "a58ba8fcc46ae7aaf",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790706733425,
+      "queuedAt": 1790706733372,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor; Türkçe arayüz). Depo /home/user/eyes (uygulama /home/user/eyes/app). Yoga çalışma belgeleri /home/user/eyes/yoga-pilot (PLAN.v2.md tam plan, SAHIP_ISTEKLERI.md sahibin kelimesi kelimesine istekleri + kararları, CRITIQUE.md, render/SPEC.md üretim kuralları, render/out/report.md pilot ölçüm raporu, render/ledger.jsonl ElevenLabs harcama kayd…",
+      "promptFramed": true,
+      "lastProgressAt": 1790707666225,
+      "tokens": 323853,
+      "toolCalls": 76,
+      "durationMs": 932759,
+      "resultPreview": "{\"findings\":[{\"severity\":\"BLOCKER\",\"section\":\"§1 \\\"Yolun süresi\\\", §B.2 kural 2, §B.3 özet, §B.5 \\\"Eşdeğerlik\\\"\",\"problem\":\"Planda sahibe \\\"yoga başka bir durağı yoldan çıkarmaz\\\" deniyor. Bu yalnız Hızlı Bakış'ı hiç oynamamış kişi için doğru. Hızlı Bakış'ı bir kez denemiş kullanıcıda okuma gününe denk gelen Hızlı Bakış günlerinde yoga mevcut bir durağı yoldan çıkarıyor: yol 18 dk'dan 21 dk'ya çık…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 10,
+      "label": "incele:sayi-ve-dil:2",
+      "phaseIndex": 3,
+      "phaseTitle": "Karşı incele",
+      "agentId": "a0bcfac4ea8e1ef58",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790706733465,
+      "queuedAt": 1790706733373,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor; Türkçe arayüz). Depo /home/user/eyes (uygulama /home/user/eyes/app). Yoga çalışma belgeleri /home/user/eyes/yoga-pilot (PLAN.v2.md tam plan, SAHIP_ISTEKLERI.md sahibin kelimesi kelimesine istekleri + kararları, CRITIQUE.md, render/SPEC.md üretim kuralları, render/out/report.md pilot ölçüm raporu, render/ledger.jsonl ElevenLabs harcama kayd…",
+      "promptFramed": true,
+      "lastProgressAt": 1790707832886,
+      "tokens": 306562,
+      "toolCalls": 68,
+      "durationMs": 1098356,
+      "resultPreview": "{\"findings\":[{\"severity\":\"BLOCKER\",\"section\":\"§1 Maliyet ve boyut; karar 6 (satır 113-118); §C.2 Boyut tablosu ve Sonuç (satır 510-521)\",\"problem\":\"Boyut toplamında iki farklı birim toplanmış. Ses dosyaları ondalık MB ile hesaplanmış (64 kbit/sn × 60 / 8 = 0,48 MB/dk). 'Bugünkü ≈ 80 MB' ise `du -h`'nin MiB değerlerinden gelir (54M + 25M). Tek birimle hesaplanınca karar 6'daki 'kısılma MP3'leri çık…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 11,
+      "label": "düzelt:2",
+      "phaseIndex": 3,
+      "phaseTitle": "Karşı incele",
+      "agentId": "ad473372cc7a6c84c",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790707835616,
+      "queuedAt": 1790707835563,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "cd /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290…",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor; Türkçe arayüz). Depo /home/user/eyes (uygulama /home/user/eyes/app). Yoga çalışma belgeleri /home/user/eyes/yoga-pilot (PLAN.v2.md tam plan, SAHIP_ISTEKLERI.md sahibin kelimesi kelimesine istekleri + kararları, CRITIQUE.md, render/SPEC.md üretim kuralları, render/out/report.md pilot ölçüm raporu, render/ledger.jsonl ElevenLabs harcama kayd…",
+      "promptFramed": true,
+      "lastProgressAt": 1790709722026,
+      "tokens": 473234,
+      "toolCalls": 137,
+      "durationMs": 1886409,
+      "resultPreview": "PLAN.v3.md'deki üç BLOCKER'ın üçü de düzeltildi. Aynı turda gelen 10 SHOULD ve 9 NIT de işlendi. Bulguların hepsini kaynağından yeniden denetledim; hepsi doğru çıktı. Tek sapma: bir bulgudaki PLAN.v2 satır numaraları 1–2 satır kaymıştı, düzelterek yazdım. Depoya hiçbir şey yazılmadı, git komutu çalışmadı, ücretli çağrı yapılmadı.\n\n**BLOCKER'lar**\n\n1. **Yoga, Hızlı Bakış'ı yoldan çıkarıyordu (K2.1)…"
+    }
+  ],
+  "totalTokens": 4428311,
+  "totalToolCalls": 931
+}

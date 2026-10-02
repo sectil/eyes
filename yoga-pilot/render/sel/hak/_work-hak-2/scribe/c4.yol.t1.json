@@ -1,0 +1,17 @@
+{
+ "unit": "c4.yol",
+ "take": "t1",
+ "asset_id": "QOypkF4BPNXnx6fiXwp7",
+ "asset_size_bytes": 70378,
+ "ref_node": "fzwXcsIv2eGyXoXJRESL",
+ "stt_node": "l6K8gInIkzonDNcZJoE3",
+ "session_id": "EvdqoffLwZps1RRdkiOX",
+ "generation_id": "qNvFarAKAswS5ZXD3P6p",
+ "actual_credits": 18.04,
+ "actual_cents": 0.328,
+ "spoken_duration_secs": 3.14,
+ "scribe_text": "Yol önünde açılıyor. Kendi hızında yürüyorsun",
+ "tts": "Yol önünde açılıyor. Kendi hızında yürüyorsun.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 6\n}"
+}

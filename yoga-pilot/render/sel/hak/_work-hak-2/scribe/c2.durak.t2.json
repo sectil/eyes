@@ -1,0 +1,17 @@
+{
+ "unit": "c2.durak",
+ "take": "t2",
+ "asset_id": "dQgjmVNCHIBXCKwp8SUT",
+ "asset_size_bytes": 110084,
+ "ref_node": "LSz544lS915Sfkgnka7j",
+ "stt_node": "Wt1TrvoA57mMJWzZUajT",
+ "session_id": "zyDTUAn94fks4HZsSnD0",
+ "generation_id": "zWj8rJDCNh5PFBriREWM",
+ "actual_credits": 31.68,
+ "actual_cents": 0.576,
+ "spoken_duration_secs": 5.56,
+ "scribe_text": "Nefes verdikten sonra kısa bir duraklama olabilir. Yeni nefes kendiliğinden gelir",
+ "tts": "Nefes verdikten sonra kısa bir duraklama olabilir. Yeni nefes kendiliğinden gelir.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 11\n}"
+}

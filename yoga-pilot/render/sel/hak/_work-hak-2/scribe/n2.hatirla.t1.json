@@ -1,0 +1,17 @@
+{
+ "unit": "n2.hatirla",
+ "take": "t1",
+ "asset_id": "fStx45qiJLw03UWXTzsO",
+ "asset_size_bytes": 149791,
+ "ref_node": "FAVI6wqLYV1khkDv4CHP",
+ "stt_node": "lx3E1UTQnarM9aSoSigu",
+ "session_id": "gxiJsUu2XnzJTwmZiiiz",
+ "generation_id": "GzKNqVoAXbwAv459t0Kh",
+ "actual_credits": 45.32,
+ "actual_cents": 0.824,
+ "spoken_duration_secs": 8.02,
+ "scribe_text": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Ya da yine şunu: Kendime dinlenmeye izin veriyorum",
+ "tts": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 16\n}"
+}

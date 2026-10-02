@@ -1,0 +1,3037 @@
+{
+ "a.hosgeldin": {
+  "a.hosgeldin#1": {
+   "duration": 0.949,
+   "speech_sec": 0.664,
+   "articulation": 4.52,
+   "pauses": [],
+   "f0_mean_hz": 196.7,
+   "f0_sd_semitones": 4.37,
+   "sibilance_ratio": 0.0065,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.43
+   },
+   "dc": -3.21e-08,
+   "lufs": -18.28,
+   "rms_db": -17.28,
+   "true_peak_dbtp": -5.42,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "a.hosgeldin#2": {
+   "duration": 1.456,
+   "speech_sec": 1.147,
+   "articulation": 6.1,
+   "pauses": [],
+   "f0_mean_hz": 210.6,
+   "f0_sd_semitones": 3.51,
+   "sibilance_ratio": 0.0103,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -3.13
+   },
+   "dc": -4.82e-08,
+   "lufs": -18.0,
+   "rms_db": -16.81,
+   "true_peak_dbtp": -3.06,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "a.acilis": {
+  "a.acilis": {
+   "duration": 4.32,
+   "speech_sec": 3.592,
+   "articulation": 4.45,
+   "pauses": [
+    [
+     1.851,
+     2.27
+    ]
+   ],
+   "f0_mean_hz": 236.7,
+   "f0_sd_semitones": 3.95,
+   "sibilance_ratio": 0.0085,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.85
+   },
+   "dc": -4.97e-09,
+   "lufs": -18.0,
+   "rms_db": -17.28,
+   "true_peak_dbtp": -5.81,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15267 Hz; A: bant ≥ 15767 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "a.konfor": {
+  "a.konfor": {
+   "duration": 6.013,
+   "speech_sec": 5.453,
+   "articulation": 5.5,
+   "pauses": [
+    [
+     2.844,
+     3.098
+    ]
+   ],
+   "f0_mean_hz": 240.4,
+   "f0_sd_semitones": 4.05,
+   "sibilance_ratio": 0.0065,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.81
+   },
+   "dc": -9.92e-09,
+   "lufs": -18.0,
+   "rms_db": -16.99,
+   "true_peak_dbtp": -5.8,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "a.durus": {
+  "a.durus": {
+   "duration": 3.832,
+   "speech_sec": 3.527,
+   "articulation": 4.82,
+   "pauses": [],
+   "f0_mean_hz": 248.5,
+   "f0_sd_semitones": 3.83,
+   "sibilance_ratio": 0.0068,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.72
+   },
+   "dc": -4.34e-09,
+   "lufs": -18.0,
+   "rms_db": -17.14,
+   "true_peak_dbtp": -5.7,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "a.gozler": {
+  "a.gozler": {
+   "duration": 4.962,
+   "speech_sec": 4.325,
+   "articulation": 5.09,
+   "pauses": [
+    [
+     3.288,
+     3.617
+    ]
+   ],
+   "f0_mean_hz": 253.2,
+   "f0_sd_semitones": 3.46,
+   "sibilance_ratio": 0.0181,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -3.11
+   },
+   "dc": -3.59e-09,
+   "lufs": -18.0,
+   "rms_db": -16.65,
+   "true_peak_dbtp": -3.08,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "a.karar": {
+  "a.karar": {
+   "duration": 3.034,
+   "speech_sec": 2.729,
+   "articulation": 5.86,
+   "pauses": [],
+   "f0_mean_hz": 204.1,
+   "f0_sd_semitones": 3.64,
+   "sibilance_ratio": 0.012,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.39
+   },
+   "dc": -9.81e-09,
+   "lufs": -18.0,
+   "rms_db": -17.45,
+   "true_peak_dbtp": -4.37,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "a.izin": {
+  "a.izin": {
+   "duration": 5.182,
+   "speech_sec": 4.719,
+   "articulation": 6.15,
+   "pauses": [
+    [
+     3.243,
+     3.397
+    ]
+   ],
+   "f0_mean_hz": 228.9,
+   "f0_sd_semitones": 4.01,
+   "sibilance_ratio": 0.0099,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.35
+   },
+   "dc": -6.14e-09,
+   "lufs": -18.0,
+   "rms_db": -17.09,
+   "true_peak_dbtp": -5.35,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15525 Hz; A: bant ≥ 16025 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "a.kolay": {
+  "a.kolay": {
+   "duration": 4.154,
+   "speech_sec": 3.547,
+   "articulation": 4.79,
+   "pauses": [
+    [
+     2.25,
+     2.549
+    ]
+   ],
+   "f0_mean_hz": 229.4,
+   "f0_sd_semitones": 3.96,
+   "sibilance_ratio": 0.0129,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.26
+   },
+   "dc": -4.19e-09,
+   "lufs": -18.0,
+   "rms_db": -16.99,
+   "true_peak_dbtp": -5.26,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "a.agirlik": {
+  "a.agirlik": {
+   "duration": 2.682,
+   "speech_sec": 2.375,
+   "articulation": 5.05,
+   "pauses": [],
+   "f0_mean_hz": 238.6,
+   "f0_sd_semitones": 3.94,
+   "sibilance_ratio": 0.0128,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.28
+   },
+   "dc": -1.66e-08,
+   "lufs": -18.0,
+   "rms_db": -17.42,
+   "true_peak_dbtp": -5.26,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "n1.sec": {
+  "n1.sec#1": {
+   "duration": 2.957,
+   "speech_sec": 2.454,
+   "articulation": 5.7,
+   "pauses": [
+    [
+     0.489,
+     0.683
+    ]
+   ],
+   "f0_mean_hz": 267.5,
+   "f0_sd_semitones": 3.88,
+   "sibilance_ratio": 0.0143,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.0
+   },
+   "dc": 8.27e-10,
+   "lufs": -18.0,
+   "rms_db": -16.52,
+   "true_peak_dbtp": -4.95,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15547 Hz; A: bant ≥ 16047 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "n1.sec#2": {
+   "duration": 5.42,
+   "speech_sec": 4.545,
+   "articulation": 5.5,
+   "pauses": [
+    [
+     2.365,
+     2.933
+    ]
+   ],
+   "f0_mean_hz": 243.4,
+   "f0_sd_semitones": 4.26,
+   "sibilance_ratio": 0.0085,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -3.27
+   },
+   "dc": -8.34e-09,
+   "lufs": -18.0,
+   "rms_db": -16.9,
+   "true_peak_dbtp": -3.24,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "n1.soyle": {
+  "n1.soyle": {
+   "duration": 3.239,
+   "speech_sec": 2.933,
+   "articulation": 5.11,
+   "pauses": [],
+   "f0_mean_hz": 242.6,
+   "f0_sd_semitones": 4.26,
+   "sibilance_ratio": 0.015,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.5
+   },
+   "dc": 3.22e-07,
+   "lufs": -18.0,
+   "rms_db": -16.61,
+   "true_peak_dbtp": -5.48,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "n1.birak": {
+  "n1.birak#1": {
+   "duration": 2.435,
+   "speech_sec": 2.125,
+   "articulation": 7.06,
+   "pauses": [],
+   "f0_mean_hz": 266.9,
+   "f0_sd_semitones": 3.74,
+   "sibilance_ratio": 0.0147,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.46
+   },
+   "dc": -1.66e-08,
+   "lufs": -18.0,
+   "rms_db": -16.95,
+   "true_peak_dbtp": -4.42,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "n1.birak#2": {
+   "duration": 3.065,
+   "speech_sec": 2.759,
+   "articulation": 6.16,
+   "pauses": [],
+   "f0_mean_hz": 245.0,
+   "f0_sd_semitones": 3.49,
+   "sibilance_ratio": 0.0033,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.62
+   },
+   "dc": -1.01e-08,
+   "lufs": -18.0,
+   "rms_db": -17.19,
+   "true_peak_dbtp": -4.56,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "c1.cerceve": {
+  "c1.cerceve#1": {
+   "duration": 2.614,
+   "speech_sec": 2.305,
+   "articulation": 6.07,
+   "pauses": [],
+   "f0_mean_hz": 240.2,
+   "f0_sd_semitones": 3.41,
+   "sibilance_ratio": 0.0043,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.7
+   },
+   "dc": -1.17e-08,
+   "lufs": -18.0,
+   "rms_db": -17.39,
+   "true_peak_dbtp": -5.7,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.cerceve#2": {
+   "duration": 2.748,
+   "speech_sec": 2.245,
+   "articulation": 5.79,
+   "pauses": [
+    [
+     1.881,
+     2.075
+    ]
+   ],
+   "f0_mean_hz": 259.9,
+   "f0_sd_semitones": 3.16,
+   "sibilance_ratio": 0.0083,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.08
+   },
+   "dc": -1.49e-08,
+   "lufs": -18.0,
+   "rms_db": -16.59,
+   "true_peak_dbtp": -4.08,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "c1.tekrar": {
+  "c1.tekrar": {
+   "duration": 3.752,
+   "speech_sec": 3.273,
+   "articulation": 5.5,
+   "pauses": [
+    [
+     1.112,
+     1.282
+    ]
+   ],
+   "f0_mean_hz": 202.1,
+   "f0_sd_semitones": 3.28,
+   "sibilance_ratio": 0.0136,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.66
+   },
+   "dc": -2.15e-08,
+   "lufs": -18.0,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -4.65,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15569 Hz; A: bant ≥ 16069 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "car.sag1": {
+  "c1.s01": {
+   "duration": 1.849,
+   "speech_sec": 1.542,
+   "articulation": 4.54,
+   "pauses": [],
+   "f0_mean_hz": 224.2,
+   "f0_sd_semitones": 4.73,
+   "sibilance_ratio": 0.0065,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -6.01
+   },
+   "dc": 5.93e-11,
+   "lufs": -18.0,
+   "rms_db": -17.23,
+   "true_peak_dbtp": -6.01,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s02": {
+   "duration": 1.428,
+   "speech_sec": 1.122,
+   "articulation": 5.35,
+   "pauses": [],
+   "f0_mean_hz": 199.1,
+   "f0_sd_semitones": 3.82,
+   "sibilance_ratio": 0.007,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -6.0
+   },
+   "dc": -2.69e-08,
+   "lufs": -18.0,
+   "rms_db": -16.74,
+   "true_peak_dbtp": -6.0,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s03": {
+   "duration": 1.224,
+   "speech_sec": 0.918,
+   "articulation": 4.36,
+   "pauses": [],
+   "f0_mean_hz": 208.1,
+   "f0_sd_semitones": 2.87,
+   "sibilance_ratio": 0.0023,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.39
+   },
+   "dc": -3.66e-08,
+   "lufs": -18.0,
+   "rms_db": -16.08,
+   "true_peak_dbtp": -2.38,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s04": {
+   "duration": 1.213,
+   "speech_sec": 0.908,
+   "articulation": 5.51,
+   "pauses": [],
+   "f0_mean_hz": 187.9,
+   "f0_sd_semitones": 3.38,
+   "sibilance_ratio": 0.0046,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.02
+   },
+   "dc": -3.16e-08,
+   "lufs": -18.0,
+   "rms_db": -15.9,
+   "true_peak_dbtp": -4.02,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s05": {
+   "duration": 1.379,
+   "speech_sec": 1.073,
+   "articulation": 3.73,
+   "pauses": [],
+   "f0_mean_hz": 212.6,
+   "f0_sd_semitones": 2.29,
+   "sibilance_ratio": 0.0231,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.6
+   },
+   "dc": -2.86e-08,
+   "lufs": -18.0,
+   "rms_db": -17.57,
+   "true_peak_dbtp": -2.59,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "car.sag2": {
+  "c1.s06": {
+   "duration": 1.348,
+   "speech_sec": 1.048,
+   "articulation": 3.82,
+   "pauses": [],
+   "f0_mean_hz": 229.4,
+   "f0_sd_semitones": 2.6,
+   "sibilance_ratio": 0.0302,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -1.68
+   },
+   "dc": -9.85e-08,
+   "lufs": -18.0,
+   "rms_db": -16.24,
+   "true_peak_dbtp": -1.67,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s07": {
+   "duration": 1.195,
+   "speech_sec": 0.893,
+   "articulation": 4.48,
+   "pauses": [],
+   "f0_mean_hz": 202.6,
+   "f0_sd_semitones": 2.27,
+   "sibilance_ratio": 0.0183,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.89
+   },
+   "dc": -5.16e-08,
+   "lufs": -18.0,
+   "rms_db": -15.71,
+   "true_peak_dbtp": -4.86,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15569 Hz; A: bant ≥ 16069 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s08": {
+   "duration": 0.906,
+   "speech_sec": 0.599,
+   "articulation": 3.34,
+   "pauses": [],
+   "f0_mean_hz": 185.4,
+   "f0_sd_semitones": 1.47,
+   "sibilance_ratio": 0.0058,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.54
+   },
+   "dc": -3.88e-08,
+   "lufs": -18.82,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -5.53,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15525 Hz; A: bant ≥ 16025 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s09": {
+   "duration": 0.936,
+   "speech_sec": 0.629,
+   "articulation": 3.18,
+   "pauses": [],
+   "f0_mean_hz": 220.3,
+   "f0_sd_semitones": 2.98,
+   "sibilance_ratio": 0.0002,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -6.45
+   },
+   "dc": -4.4e-08,
+   "lufs": -19.57,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -6.44,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s10": {
+   "duration": 1.011,
+   "speech_sec": 0.703,
+   "articulation": 2.84,
+   "pauses": [],
+   "f0_mean_hz": 178.2,
+   "f0_sd_semitones": 0.82,
+   "sibilance_ratio": 0.0399,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.41
+   },
+   "dc": -5.78e-08,
+   "lufs": -18.0,
+   "rms_db": -15.28,
+   "true_peak_dbtp": -2.38,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "car.sag3": {
+  "c1.s11": {
+   "duration": 1.116,
+   "speech_sec": 0.833,
+   "articulation": 2.4,
+   "pauses": [],
+   "f0_mean_hz": 221.9,
+   "f0_sd_semitones": 4.2,
+   "sibilance_ratio": 0.0058,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -3.87
+   },
+   "dc": -6.29e-07,
+   "lufs": -18.0,
+   "rms_db": -16.12,
+   "true_peak_dbtp": -3.86,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s12": {
+   "duration": 0.94,
+   "speech_sec": 0.634,
+   "articulation": 3.16,
+   "pauses": [],
+   "f0_mean_hz": 179.5,
+   "f0_sd_semitones": 2.74,
+   "sibilance_ratio": 0.0076,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.16
+   },
+   "dc": -2.75e-07,
+   "lufs": -19.46,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -5.15,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s13": {
+   "duration": 1.41,
+   "speech_sec": 1.103,
+   "articulation": 4.54,
+   "pauses": [],
+   "f0_mean_hz": 218.1,
+   "f0_sd_semitones": 4.13,
+   "sibilance_ratio": 0.0047,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.52
+   },
+   "dc": -2.81e-08,
+   "lufs": -18.0,
+   "rms_db": -16.66,
+   "true_peak_dbtp": -5.51,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s14": {
+   "duration": 0.918,
+   "speech_sec": 0.609,
+   "articulation": 3.29,
+   "pauses": [],
+   "f0_mean_hz": 186.7,
+   "f0_sd_semitones": 1.35,
+   "sibilance_ratio": 0.0161,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -3.46
+   },
+   "dc": -3.83e-08,
+   "lufs": -18.5,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -3.42,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "car.sag4": {
+  "c1.s15": {
+   "duration": 0.934,
+   "speech_sec": 0.629,
+   "articulation": 3.18,
+   "pauses": [],
+   "f0_mean_hz": 207.6,
+   "f0_sd_semitones": 2.14,
+   "sibilance_ratio": 0.0004,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -7.31
+   },
+   "dc": -3.31e-08,
+   "lufs": -19.07,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -7.29,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 14987 Hz; A: bant ≥ 15487 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s16": {
+   "duration": 0.885,
+   "speech_sec": 0.569,
+   "articulation": 1.76,
+   "pauses": [],
+   "f0_mean_hz": 185.7,
+   "f0_sd_semitones": 2.16,
+   "sibilance_ratio": 0.0206,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.87
+   },
+   "dc": -5.72e-08,
+   "lufs": -17.82,
+   "rms_db": -16.03,
+   "true_peak_dbtp": -4.87,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15504 Hz; A: bant ≥ 16004 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s17": {
+   "duration": 1.021,
+   "speech_sec": 0.713,
+   "articulation": 2.8,
+   "pauses": [],
+   "f0_mean_hz": 181.7,
+   "f0_sd_semitones": 1.45,
+   "sibilance_ratio": 0.0025,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.67
+   },
+   "dc": -3.2e-08,
+   "lufs": -18.0,
+   "rms_db": -17.15,
+   "true_peak_dbtp": -4.66,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15547 Hz; A: bant ≥ 16047 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s18": {
+   "duration": 1.086,
+   "speech_sec": 0.778,
+   "articulation": 6.42,
+   "pauses": [],
+   "f0_mean_hz": 204.8,
+   "f0_sd_semitones": 3.63,
+   "sibilance_ratio": 0.001,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.41
+   },
+   "dc": -2.66e-08,
+   "lufs": -18.0,
+   "rms_db": -15.41,
+   "true_peak_dbtp": -4.38,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s19": {
+   "duration": 0.883,
+   "speech_sec": 0.579,
+   "articulation": 3.46,
+   "pauses": [],
+   "f0_mean_hz": 220.5,
+   "f0_sd_semitones": 2.26,
+   "sibilance_ratio": 0.0036,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.42
+   },
+   "dc": -6.58e-08,
+   "lufs": -19.49,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -2.42,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15504 Hz; A: bant ≥ 16004 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.s20": {
+   "duration": 1.12,
+   "speech_sec": 0.813,
+   "articulation": 6.15,
+   "pauses": [],
+   "f0_mean_hz": 198.5,
+   "f0_sd_semitones": 3.15,
+   "sibilance_ratio": 0.0033,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -1.85
+   },
+   "dc": -6.03e-08,
+   "lufs": -18.0,
+   "rms_db": -15.42,
+   "true_peak_dbtp": -1.84,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "c1.kacirma": {
+  "c1.kacirma": {
+   "duration": 3.431,
+   "speech_sec": 2.918,
+   "articulation": 5.83,
+   "pauses": [
+    [
+     1.342,
+     1.547
+    ]
+   ],
+   "f0_mean_hz": 248.3,
+   "f0_sd_semitones": 4.39,
+   "sibilance_ratio": 0.0175,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -1.67
+   },
+   "dc": -1.13e-08,
+   "lufs": -18.0,
+   "rms_db": -17.01,
+   "true_peak_dbtp": -1.66,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15525 Hz; A: bant ≥ 16025 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "car.sol1": {
+  "c1.l01": {
+   "duration": 1.896,
+   "speech_sec": 1.586,
+   "articulation": 4.41,
+   "pauses": [],
+   "f0_mean_hz": 231.5,
+   "f0_sd_semitones": 4.98,
+   "sibilance_ratio": 0.0076,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.57
+   },
+   "dc": -2.21e-08,
+   "lufs": -18.0,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -4.57,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l02": {
+   "duration": 1.415,
+   "speech_sec": 1.108,
+   "articulation": 5.42,
+   "pauses": [],
+   "f0_mean_hz": 196.6,
+   "f0_sd_semitones": 3.62,
+   "sibilance_ratio": 0.0107,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.96
+   },
+   "dc": -2.55e-08,
+   "lufs": -18.0,
+   "rms_db": -16.73,
+   "true_peak_dbtp": -4.92,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l03": {
+   "duration": 1.234,
+   "speech_sec": 0.928,
+   "articulation": 4.31,
+   "pauses": [],
+   "f0_mean_hz": 199.2,
+   "f0_sd_semitones": 2.98,
+   "sibilance_ratio": 0.002,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.47
+   },
+   "dc": -3.89e-08,
+   "lufs": -18.0,
+   "rms_db": -15.9,
+   "true_peak_dbtp": -2.46,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l04": {
+   "duration": 1.219,
+   "speech_sec": 0.913,
+   "articulation": 5.48,
+   "pauses": [],
+   "f0_mean_hz": 193.9,
+   "f0_sd_semitones": 3.3,
+   "sibilance_ratio": 0.0049,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.17
+   },
+   "dc": -3.87e-08,
+   "lufs": -18.0,
+   "rms_db": -16.04,
+   "true_peak_dbtp": -4.15,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l05": {
+   "duration": 1.405,
+   "speech_sec": 1.098,
+   "articulation": 3.64,
+   "pauses": [],
+   "f0_mean_hz": 211.4,
+   "f0_sd_semitones": 2.34,
+   "sibilance_ratio": 0.0249,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -3.31
+   },
+   "dc": -3.1e-07,
+   "lufs": -18.0,
+   "rms_db": -17.34,
+   "true_peak_dbtp": -3.3,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "car.sol2": {
+  "c1.l06": {
+   "duration": 1.35,
+   "speech_sec": 1.048,
+   "articulation": 3.82,
+   "pauses": [],
+   "f0_mean_hz": 234.0,
+   "f0_sd_semitones": 2.59,
+   "sibilance_ratio": 0.0328,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -1.6
+   },
+   "dc": -8.99e-07,
+   "lufs": -18.0,
+   "rms_db": -16.25,
+   "true_peak_dbtp": -1.6,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l07": {
+   "duration": 1.212,
+   "speech_sec": 0.908,
+   "articulation": 4.41,
+   "pauses": [],
+   "f0_mean_hz": 201.4,
+   "f0_sd_semitones": 2.26,
+   "sibilance_ratio": 0.0178,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -3.11
+   },
+   "dc": -4.26e-08,
+   "lufs": -18.0,
+   "rms_db": -15.4,
+   "true_peak_dbtp": -3.06,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15569 Hz; A: bant ≥ 16069 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l08": {
+   "duration": 0.909,
+   "speech_sec": 0.604,
+   "articulation": 3.31,
+   "pauses": [],
+   "f0_mean_hz": 181.4,
+   "f0_sd_semitones": 2.25,
+   "sibilance_ratio": 0.0061,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.09
+   },
+   "dc": -4.05e-08,
+   "lufs": -20.27,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -4.09,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15525 Hz; A: bant ≥ 16025 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l09": {
+   "duration": 0.933,
+   "speech_sec": 0.624,
+   "articulation": 3.21,
+   "pauses": [],
+   "f0_mean_hz": 222.7,
+   "f0_sd_semitones": 2.7,
+   "sibilance_ratio": 0.0002,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.08
+   },
+   "dc": -4.32e-08,
+   "lufs": -19.24,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -4.07,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15267 Hz; A: bant ≥ 15767 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l10": {
+   "duration": 1.016,
+   "speech_sec": 0.708,
+   "articulation": 2.82,
+   "pauses": [],
+   "f0_mean_hz": 182.9,
+   "f0_sd_semitones": 1.23,
+   "sibilance_ratio": 0.0345,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.85
+   },
+   "dc": -7.05e-08,
+   "lufs": -18.0,
+   "rms_db": -16.5,
+   "true_peak_dbtp": -4.84,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "car.sol3": {
+  "c1.l11": {
+   "duration": 1.119,
+   "speech_sec": 0.813,
+   "articulation": 2.46,
+   "pauses": [],
+   "f0_mean_hz": 220.7,
+   "f0_sd_semitones": 4.17,
+   "sibilance_ratio": 0.009,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.95
+   },
+   "dc": -3.63e-08,
+   "lufs": -18.0,
+   "rms_db": -15.59,
+   "true_peak_dbtp": -2.94,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l12": {
+   "duration": 0.917,
+   "speech_sec": 0.609,
+   "articulation": 3.29,
+   "pauses": [],
+   "f0_mean_hz": 182.6,
+   "f0_sd_semitones": 2.79,
+   "sibilance_ratio": 0.0107,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.45
+   },
+   "dc": 2.26e-07,
+   "lufs": -19.54,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -5.45,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l13": {
+   "duration": 1.445,
+   "speech_sec": 1.137,
+   "articulation": 4.4,
+   "pauses": [],
+   "f0_mean_hz": 218.0,
+   "f0_sd_semitones": 4.14,
+   "sibilance_ratio": 0.007,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.94
+   },
+   "dc": -3.23e-08,
+   "lufs": -18.0,
+   "rms_db": -16.81,
+   "true_peak_dbtp": -5.9,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l14": {
+   "duration": 0.916,
+   "speech_sec": 0.609,
+   "articulation": 3.29,
+   "pauses": [],
+   "f0_mean_hz": 186.0,
+   "f0_sd_semitones": 1.84,
+   "sibilance_ratio": 0.0202,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.49
+   },
+   "dc": -6.73e-08,
+   "lufs": -18.35,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -2.47,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "car.sol4": {
+  "c1.l15": {
+   "duration": 0.909,
+   "speech_sec": 0.604,
+   "articulation": 3.31,
+   "pauses": [],
+   "f0_mean_hz": 209.3,
+   "f0_sd_semitones": 1.84,
+   "sibilance_ratio": 0.0008,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -6.0
+   },
+   "dc": -4.39e-08,
+   "lufs": -18.74,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -5.99,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 14664 Hz; A: bant ≥ 15164 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l16": {
+   "duration": 0.921,
+   "speech_sec": 0.614,
+   "articulation": 1.63,
+   "pauses": [],
+   "f0_mean_hz": 188.4,
+   "f0_sd_semitones": 2.67,
+   "sibilance_ratio": 0.0184,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.54
+   },
+   "dc": -5.4e-08,
+   "lufs": -17.59,
+   "rms_db": -16.03,
+   "true_peak_dbtp": -4.52,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l17": {
+   "duration": 1.044,
+   "speech_sec": 0.738,
+   "articulation": 2.71,
+   "pauses": [],
+   "f0_mean_hz": 176.6,
+   "f0_sd_semitones": 1.62,
+   "sibilance_ratio": 0.0052,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -1.61
+   },
+   "dc": -3.35e-06,
+   "lufs": -18.0,
+   "rms_db": -17.25,
+   "true_peak_dbtp": -1.6,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l18": {
+   "duration": 1.127,
+   "speech_sec": 0.818,
+   "articulation": 6.11,
+   "pauses": [],
+   "f0_mean_hz": 207.3,
+   "f0_sd_semitones": 3.67,
+   "sibilance_ratio": 0.0011,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -3.83
+   },
+   "dc": 7.19e-10,
+   "lufs": -18.0,
+   "rms_db": -15.53,
+   "true_peak_dbtp": -3.82,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l19": {
+   "duration": 0.854,
+   "speech_sec": 0.549,
+   "articulation": 3.64,
+   "pauses": [],
+   "f0_mean_hz": 222.6,
+   "f0_sd_semitones": 1.87,
+   "sibilance_ratio": 0.0084,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -1.65
+   },
+   "dc": -7.25e-08,
+   "lufs": -20.5,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -1.64,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.l20": {
+   "duration": 1.118,
+   "speech_sec": 0.813,
+   "articulation": 6.15,
+   "pauses": [],
+   "f0_mean_hz": 201.5,
+   "f0_sd_semitones": 3.33,
+   "sibilance_ratio": 0.0017,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -1.64
+   },
+   "dc": -4.77e-07,
+   "lufs": -18.0,
+   "rms_db": -15.47,
+   "true_peak_dbtp": -1.6,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "c1.gecis.arka": {
+  "c1.gecis.arka": {
+   "duration": 1.752,
+   "speech_sec": 1.447,
+   "articulation": 5.53,
+   "pauses": [],
+   "f0_mean_hz": 236.3,
+   "f0_sd_semitones": 3.93,
+   "sibilance_ratio": 0.0026,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.85
+   },
+   "dc": -2.29e-08,
+   "lufs": -18.0,
+   "rms_db": -16.49,
+   "true_peak_dbtp": -4.84,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "car.sirt": {
+  "c1.b01": {
+   "duration": 1.516,
+   "speech_sec": 1.207,
+   "articulation": 4.97,
+   "pauses": [],
+   "f0_mean_hz": 208.4,
+   "f0_sd_semitones": 4.26,
+   "sibilance_ratio": 0.0071,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.66
+   },
+   "dc": -2.17e-09,
+   "lufs": -18.0,
+   "rms_db": -16.34,
+   "true_peak_dbtp": -4.66,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15569 Hz; A: bant ≥ 16069 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.b02": {
+   "duration": 1.521,
+   "speech_sec": 1.212,
+   "articulation": 4.95,
+   "pauses": [],
+   "f0_mean_hz": 203.5,
+   "f0_sd_semitones": 3.25,
+   "sibilance_ratio": 0.0069,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -3.02
+   },
+   "dc": -4.8e-09,
+   "lufs": -18.0,
+   "rms_db": -16.8,
+   "true_peak_dbtp": -3.0,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.b03": {
+   "duration": 1.241,
+   "speech_sec": 0.933,
+   "articulation": 4.29,
+   "pauses": [],
+   "f0_mean_hz": 191.6,
+   "f0_sd_semitones": 2.56,
+   "sibilance_ratio": 0.0125,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.89
+   },
+   "dc": -2.23e-09,
+   "lufs": -18.0,
+   "rms_db": -16.51,
+   "true_peak_dbtp": -4.88,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.b04": {
+   "duration": 2.176,
+   "speech_sec": 1.566,
+   "articulation": 4.47,
+   "pauses": [
+    [
+     0.683,
+     0.988
+    ]
+   ],
+   "f0_mean_hz": 209.9,
+   "f0_sd_semitones": 3.06,
+   "sibilance_ratio": 0.0006,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.91
+   },
+   "dc": -1.82e-08,
+   "lufs": -18.0,
+   "rms_db": -16.24,
+   "true_peak_dbtp": -4.91,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15159 Hz; A: bant ≥ 15659 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.b05": {
+   "duration": 1.272,
+   "speech_sec": 0.963,
+   "articulation": 3.12,
+   "pauses": [],
+   "f0_mean_hz": 211.9,
+   "f0_sd_semitones": 1.82,
+   "sibilance_ratio": 0.0547,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.09
+   },
+   "dc": -5.15e-08,
+   "lufs": -18.0,
+   "rms_db": -16.67,
+   "true_peak_dbtp": -5.07,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15504 Hz; A: bant ≥ 16004 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "c1.gecis.on": {
+  "c1.gecis.on#1": {
+   "duration": 2.18,
+   "speech_sec": 1.871,
+   "articulation": 5.35,
+   "pauses": [],
+   "f0_mean_hz": 248.4,
+   "f0_sd_semitones": 3.86,
+   "sibilance_ratio": 0.0036,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.08
+   },
+   "dc": -3.68e-08,
+   "lufs": -18.0,
+   "rms_db": -17.18,
+   "true_peak_dbtp": -5.07,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.gecis.on#2": {
+   "duration": 2.149,
+   "speech_sec": 1.841,
+   "articulation": 5.98,
+   "pauses": [],
+   "f0_mean_hz": 255.6,
+   "f0_sd_semitones": 3.37,
+   "sibilance_ratio": 0.0072,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -6.01
+   },
+   "dc": -1.95e-08,
+   "lufs": -18.0,
+   "rms_db": -16.88,
+   "true_peak_dbtp": -5.97,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "car.on1": {
+  "c1.f01": {
+   "duration": 1.666,
+   "speech_sec": 1.362,
+   "articulation": 3.67,
+   "pauses": [],
+   "f0_mean_hz": 241.7,
+   "f0_sd_semitones": 3.74,
+   "sibilance_ratio": 0.0215,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -1.57
+   },
+   "dc": -7.1e-06,
+   "lufs": -18.0,
+   "rms_db": -16.56,
+   "true_peak_dbtp": -1.57,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15569 Hz; A: bant ≥ 16069 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f02": {
+   "duration": 0.733,
+   "speech_sec": 0.424,
+   "articulation": 4.72,
+   "pauses": [],
+   "f0_mean_hz": 189.0,
+   "f0_sd_semitones": 3.36,
+   "sibilance_ratio": 0.0003,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.35
+   },
+   "dc": 3.41e-08,
+   "lufs": -19.61,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -2.31,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15116 Hz; A: bant ≥ 15616 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f03": {
+   "duration": 1.238,
+   "speech_sec": 0.933,
+   "articulation": 3.22,
+   "pauses": [],
+   "f0_mean_hz": 249.1,
+   "f0_sd_semitones": 2.74,
+   "sibilance_ratio": 0.0168,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.6
+   },
+   "dc": -3.59e-08,
+   "lufs": -18.0,
+   "rms_db": -17.85,
+   "true_peak_dbtp": -4.6,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15569 Hz; A: bant ≥ 16069 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f04": {
+   "duration": 1.278,
+   "speech_sec": 0.968,
+   "articulation": 3.1,
+   "pauses": [],
+   "f0_mean_hz": 225.7,
+   "f0_sd_semitones": 2.55,
+   "sibilance_ratio": 0.027,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.51
+   },
+   "dc": -5.4e-08,
+   "lufs": -18.0,
+   "rms_db": -17.27,
+   "true_peak_dbtp": -2.51,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f05": {
+   "duration": 1.21,
+   "speech_sec": 0.903,
+   "articulation": 2.21,
+   "pauses": [],
+   "f0_mean_hz": 231.5,
+   "f0_sd_semitones": 2.39,
+   "sibilance_ratio": 0.0209,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.12
+   },
+   "dc": -4.15e-08,
+   "lufs": -18.0,
+   "rms_db": -17.34,
+   "true_peak_dbtp": -4.11,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15590 Hz; A: bant ≥ 16090 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f06": {
+   "duration": 1.198,
+   "speech_sec": 0.893,
+   "articulation": 2.24,
+   "pauses": [],
+   "f0_mean_hz": 216.7,
+   "f0_sd_semitones": 2.27,
+   "sibilance_ratio": 0.0221,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -1.91
+   },
+   "dc": -4.82e-08,
+   "lufs": -18.0,
+   "rms_db": -17.11,
+   "true_peak_dbtp": -1.9,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15504 Hz; A: bant ≥ 16004 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "car.on2": {
+  "c1.f07": {
+   "duration": 1.365,
+   "speech_sec": 1.058,
+   "articulation": 4.73,
+   "pauses": [],
+   "f0_mean_hz": 208.4,
+   "f0_sd_semitones": 3.63,
+   "sibilance_ratio": 0.0108,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.27
+   },
+   "dc": -3.61e-08,
+   "lufs": -18.0,
+   "rms_db": -15.91,
+   "true_peak_dbtp": -4.21,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15525 Hz; A: bant ≥ 16025 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f08": {
+   "duration": 1.553,
+   "speech_sec": 1.247,
+   "articulation": 4.81,
+   "pauses": [],
+   "f0_mean_hz": 209.8,
+   "f0_sd_semitones": 3.05,
+   "sibilance_ratio": 0.024,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.45
+   },
+   "dc": 6.18e-09,
+   "lufs": -18.0,
+   "rms_db": -16.89,
+   "true_peak_dbtp": -5.44,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f09": {
+   "duration": 1.263,
+   "speech_sec": 0.958,
+   "articulation": 3.13,
+   "pauses": [],
+   "f0_mean_hz": 239.8,
+   "f0_sd_semitones": 3.99,
+   "sibilance_ratio": 0.0122,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.24
+   },
+   "dc": -3.88e-08,
+   "lufs": -18.0,
+   "rms_db": -17.39,
+   "true_peak_dbtp": -2.21,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15504 Hz; A: bant ≥ 16004 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f10": {
+   "duration": 1.234,
+   "speech_sec": 0.928,
+   "articulation": 3.23,
+   "pauses": [],
+   "f0_mean_hz": 221.2,
+   "f0_sd_semitones": 2.54,
+   "sibilance_ratio": 0.0151,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.19
+   },
+   "dc": -4.71e-08,
+   "lufs": -18.0,
+   "rms_db": -17.23,
+   "true_peak_dbtp": -2.18,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f11": {
+   "duration": 1.283,
+   "speech_sec": 0.978,
+   "articulation": 3.07,
+   "pauses": [],
+   "f0_mean_hz": 212.1,
+   "f0_sd_semitones": 4.01,
+   "sibilance_ratio": 0.0134,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -6.95
+   },
+   "dc": -2.84e-08,
+   "lufs": -18.0,
+   "rms_db": -17.71,
+   "true_peak_dbtp": -6.93,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f12": {
+   "duration": 1.197,
+   "speech_sec": 0.888,
+   "articulation": 3.38,
+   "pauses": [],
+   "f0_mean_hz": 206.9,
+   "f0_sd_semitones": 3.46,
+   "sibilance_ratio": 0.0104,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -3.82
+   },
+   "dc": -4.3e-08,
+   "lufs": -18.0,
+   "rms_db": -17.49,
+   "true_peak_dbtp": -3.8,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f13": {
+   "duration": 1.196,
+   "speech_sec": 0.888,
+   "articulation": 4.5,
+   "pauses": [],
+   "f0_mean_hz": 215.1,
+   "f0_sd_semitones": 3.99,
+   "sibilance_ratio": 0.0049,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -6.92
+   },
+   "dc": -4.59e-08,
+   "lufs": -18.0,
+   "rms_db": -16.34,
+   "true_peak_dbtp": -6.9,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15202 Hz; A: bant ≥ 15702 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "car.on3": {
+  "c1.f14": {
+   "duration": 1.3,
+   "speech_sec": 0.993,
+   "articulation": 3.02,
+   "pauses": [],
+   "f0_mean_hz": 208.0,
+   "f0_sd_semitones": 4.51,
+   "sibilance_ratio": 0.0161,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.16
+   },
+   "dc": -4.72e-08,
+   "lufs": -18.0,
+   "rms_db": -15.74,
+   "true_peak_dbtp": -2.15,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f15": {
+   "duration": 1.197,
+   "speech_sec": 0.888,
+   "articulation": 3.38,
+   "pauses": [],
+   "f0_mean_hz": 197.2,
+   "f0_sd_semitones": 1.91,
+   "sibilance_ratio": 0.0031,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -1.57
+   },
+   "dc": -1.9e-05,
+   "lufs": -18.0,
+   "rms_db": -14.49,
+   "true_peak_dbtp": -1.56,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f16": {
+   "duration": 0.785,
+   "speech_sec": 0.479,
+   "articulation": 4.18,
+   "pauses": [],
+   "f0_mean_hz": 183.0,
+   "f0_sd_semitones": 1.89,
+   "sibilance_ratio": 0.0123,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -7.88
+   },
+   "dc": -4.44e-08,
+   "lufs": -18.3,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -7.87,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f17": {
+   "duration": 0.792,
+   "speech_sec": 0.484,
+   "articulation": 4.13,
+   "pauses": [],
+   "f0_mean_hz": 182.0,
+   "f0_sd_semitones": 1.59,
+   "sibilance_ratio": 0.0002,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -6.15
+   },
+   "dc": -5.09e-10,
+   "lufs": -18.42,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -6.14,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 14643 Hz; A: bant ≥ 15143 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f18": {
+   "duration": 1.713,
+   "speech_sec": 1.407,
+   "articulation": 4.98,
+   "pauses": [],
+   "f0_mean_hz": 215.1,
+   "f0_sd_semitones": 4.41,
+   "sibilance_ratio": 0.0085,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.35
+   },
+   "dc": -2.38e-08,
+   "lufs": -18.0,
+   "rms_db": -16.46,
+   "true_peak_dbtp": -4.34,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f19": {
+   "duration": 1.683,
+   "speech_sec": 1.377,
+   "articulation": 5.08,
+   "pauses": [],
+   "f0_mean_hz": 189.2,
+   "f0_sd_semitones": 3.24,
+   "sibilance_ratio": 0.0147,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.11
+   },
+   "dc": -1.95e-08,
+   "lufs": -18.0,
+   "rms_db": -16.22,
+   "true_peak_dbtp": -2.09,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f20": {
+   "duration": 1.032,
+   "speech_sec": 0.723,
+   "articulation": 2.76,
+   "pauses": [],
+   "f0_mean_hz": 190.1,
+   "f0_sd_semitones": 2.48,
+   "sibilance_ratio": 0.0229,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.39
+   },
+   "dc": -3.92e-08,
+   "lufs": -18.0,
+   "rms_db": -16.13,
+   "true_peak_dbtp": -4.38,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.f21": {
+   "duration": 0.744,
+   "speech_sec": 0.439,
+   "articulation": 4.56,
+   "pauses": [],
+   "f0_mean_hz": 174.6,
+   "f0_sd_semitones": 2.04,
+   "sibilance_ratio": 0.0011,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.0
+   },
+   "dc": -6.06e-08,
+   "lufs": -18.66,
+   "rms_db": -17.03,
+   "true_peak_dbtp": -4.99,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "car.butun": {
+  "c1.w01": {
+   "duration": 1.741,
+   "speech_sec": 1.432,
+   "articulation": 3.49,
+   "pauses": [],
+   "f0_mean_hz": 237.8,
+   "f0_sd_semitones": 4.82,
+   "sibilance_ratio": 0.0149,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.18
+   },
+   "dc": -2.58e-08,
+   "lufs": -18.0,
+   "rms_db": -17.78,
+   "true_peak_dbtp": -4.17,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15504 Hz; A: bant ≥ 16004 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.w02": {
+   "duration": 1.749,
+   "speech_sec": 1.442,
+   "articulation": 3.47,
+   "pauses": [],
+   "f0_mean_hz": 210.9,
+   "f0_sd_semitones": 3.74,
+   "sibilance_ratio": 0.01,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.95
+   },
+   "dc": -3.32e-08,
+   "lufs": -18.0,
+   "rms_db": -17.32,
+   "true_peak_dbtp": -4.92,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.w03": {
+   "duration": 1.347,
+   "speech_sec": 1.038,
+   "articulation": 4.82,
+   "pauses": [],
+   "f0_mean_hz": 214.1,
+   "f0_sd_semitones": 4.1,
+   "sibilance_ratio": 0.0127,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.03
+   },
+   "dc": -5.59e-10,
+   "lufs": -18.0,
+   "rms_db": -17.21,
+   "true_peak_dbtp": -4.02,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.w04": {
+   "duration": 1.469,
+   "speech_sec": 1.162,
+   "articulation": 3.44,
+   "pauses": [],
+   "f0_mean_hz": 248.7,
+   "f0_sd_semitones": 3.99,
+   "sibilance_ratio": 0.0162,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -3.29
+   },
+   "dc": -3.18e-08,
+   "lufs": -18.0,
+   "rms_db": -16.66,
+   "true_peak_dbtp": -3.28,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.w05": {
+   "duration": 1.509,
+   "speech_sec": 1.202,
+   "articulation": 3.33,
+   "pauses": [],
+   "f0_mean_hz": 214.1,
+   "f0_sd_semitones": 3.2,
+   "sibilance_ratio": 0.0071,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.73
+   },
+   "dc": -3.02e-08,
+   "lufs": -18.0,
+   "rms_db": -16.63,
+   "true_peak_dbtp": -2.72,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.w06": {
+   "duration": 1.154,
+   "speech_sec": 0.848,
+   "articulation": 4.72,
+   "pauses": [],
+   "f0_mean_hz": 212.5,
+   "f0_sd_semitones": 3.05,
+   "sibilance_ratio": 0.0056,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -3.3
+   },
+   "dc": 4.62e-09,
+   "lufs": -18.0,
+   "rms_db": -16.43,
+   "true_peak_dbtp": -3.23,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15267 Hz; A: bant ≥ 15767 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.w07": {
+   "duration": 2.359,
+   "speech_sec": 2.05,
+   "articulation": 4.39,
+   "pauses": [],
+   "f0_mean_hz": 217.3,
+   "f0_sd_semitones": 3.9,
+   "sibilance_ratio": 0.006,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -3.58
+   },
+   "dc": -1.96e-08,
+   "lufs": -18.0,
+   "rms_db": -16.78,
+   "true_peak_dbtp": -3.56,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15396 Hz; A: bant ≥ 15896 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.w08": {
+   "duration": 1.227,
+   "speech_sec": 0.918,
+   "articulation": 4.36,
+   "pauses": [],
+   "f0_mean_hz": 188.7,
+   "f0_sd_semitones": 2.24,
+   "sibilance_ratio": 0.0028,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.76
+   },
+   "dc": -7.33e-10,
+   "lufs": -18.0,
+   "rms_db": -16.9,
+   "true_peak_dbtp": -5.75,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c1.w09": {
+   "duration": 1.273,
+   "speech_sec": 0.968,
+   "articulation": 4.13,
+   "pauses": [],
+   "f0_mean_hz": 188.7,
+   "f0_sd_semitones": 2.3,
+   "sibilance_ratio": 0.0027,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.68
+   },
+   "dc": -4.74e-08,
+   "lufs": -18.0,
+   "rms_db": -16.63,
+   "true_peak_dbtp": -4.68,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "c1.k1": {
+  "c1.k1": {
+   "duration": 3.547,
+   "speech_sec": 2.903,
+   "articulation": 5.51,
+   "pauses": [
+    [
+     1.412,
+     1.746
+    ]
+   ],
+   "f0_mean_hz": 233.4,
+   "f0_sd_semitones": 3.58,
+   "sibilance_ratio": 0.0066,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -6.62
+   },
+   "dc": -7.5e-09,
+   "lufs": -18.0,
+   "rms_db": -17.1,
+   "true_peak_dbtp": -6.6,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "c2.dikkat": {
+  "c2.dikkat#1": {
+   "duration": 3.41,
+   "speech_sec": 3.103,
+   "articulation": 5.48,
+   "pauses": [],
+   "f0_mean_hz": 245.3,
+   "f0_sd_semitones": 4.42,
+   "sibilance_ratio": 0.014,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.94
+   },
+   "dc": -4.59e-09,
+   "lufs": -18.0,
+   "rms_db": -17.13,
+   "true_peak_dbtp": -4.92,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c2.dikkat#2": {
+   "duration": 3.448,
+   "speech_sec": 3.143,
+   "articulation": 5.73,
+   "pauses": [],
+   "f0_mean_hz": 242.6,
+   "f0_sd_semitones": 3.01,
+   "sibilance_ratio": 0.0125,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.48
+   },
+   "dc": -1.29e-08,
+   "lufs": -18.0,
+   "rms_db": -16.95,
+   "true_peak_dbtp": -4.47,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "c2.yer": {
+  "c2.yer#1": {
+   "duration": 4.524,
+   "speech_sec": 3.981,
+   "articulation": 5.53,
+   "pauses": [
+    [
+     1.527,
+     1.761
+    ]
+   ],
+   "f0_mean_hz": 246.1,
+   "f0_sd_semitones": 3.95,
+   "sibilance_ratio": 0.0126,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -5.0
+   },
+   "dc": -7.34e-09,
+   "lufs": -18.0,
+   "rms_db": -16.45,
+   "true_peak_dbtp": -5.0,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  },
+  "c2.yer#2": {
+   "duration": 3.817,
+   "speech_sec": 2.804,
+   "articulation": 4.64,
+   "pauses": [
+    [
+     0.564,
+     0.793
+    ],
+    [
+     1.437,
+     1.686
+    ],
+    [
+     2.135,
+     2.365
+    ]
+   ],
+   "f0_mean_hz": 196.9,
+   "f0_sd_semitones": 3.45,
+   "sibilance_ratio": 0.006,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -4.65
+   },
+   "dc": -1.6e-08,
+   "lufs": -18.0,
+   "rms_db": -15.91,
+   "true_peak_dbtp": -4.6,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ },
+ "c2.alt": {
+  "c2.alt": {
+   "duration": 3.711,
+   "speech_sec": 3.128,
+   "articulation": 6.07,
+   "pauses": [
+    [
+     1.591,
+     1.866
+    ]
+   ],
+   "f0_mean_hz": 248.7,
+   "f0_sd_semitones": 2.93,
+   "sibilance_ratio": 0.012,
+   "clipping": {
+    "clipped": false,
+    "count": 0,
+    "peak_dbfs": -2.2
+   },
+   "dc": -9.05e-09,
+   "lufs": -18.0,
+   "rms_db": -16.72,
+   "true_peak_dbtp": -2.19,
+   "clicks": {
+    "count": 0,
+    "times": [],
+    "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+   },
+   "format": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT"
+   }
+  }
+ }
+}

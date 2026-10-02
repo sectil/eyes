@@ -1,0 +1,251 @@
+/* ============================================================
+   Egzersiz sahnesi (Artifact "Nefona Egzersiz Sahnesi", onaylı)
+   screens/Routine.jsx (setler, yol durakları) ve screens/BlinkExercise.jsx.
+   Kalibrasyonla aynı dil: kart yok, tek parlak şey hareketin kendisi; altın = ilerleme / tamam,
+   turuncu = uyarı. "Gözlerini kapat" adımında iki temada da zemin kararır (.rest).
+   ============================================================ */
+:root {
+  --ex-ground: #e9eef2; --ex-ground-hi: #ffffff;
+  --ex-ink: var(--ink); --ex-ink2: var(--ink-2); --ex-ink3: var(--ink-3);
+  --ex-glass: rgba(11, 18, 25, 0.05); --ex-glass-line: rgba(11, 18, 25, 0.09);
+  --ex-gold: #b57300; --ex-teal: #0b8a97; --ex-ok: #13704b; --ex-warn: #b4431c;
+  --ex-sclera: rgba(255, 255, 255, 0.9); --ex-vig: rgba(214, 96, 52, 0.26);
+  --ex-sky0: #d7ecf1; --ex-sky1: #f5efe2; --ex-h1: #a9cfd6; --ex-h2: #6aa7b0; --ex-h3: #2f6f78;
+  --ex-btn: linear-gradient(90deg, #0b7480, #2458cc); --ex-btn-ink: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --ex-ground: #070c12; --ex-ground-hi: #0e1a24;
+    --ex-glass: rgba(255, 255, 255, 0.06); --ex-glass-line: rgba(255, 255, 255, 0.1);
+    --ex-gold: #ffb13b; --ex-teal: #19c2d1; --ex-ok: #35d39a; --ex-warn: #ff9a7d;
+    --ex-sclera: rgba(238, 243, 246, 0.07); --ex-vig: rgba(255, 122, 89, 0.3);
+    --ex-sky0: #0b1c28; --ex-sky1: #123646; --ex-h1: #1a4656; --ex-h2: #12384a; --ex-h3: #0a2432;
+    --ex-btn: linear-gradient(90deg, #19c2d1, #3e7bfa); --ex-btn-ink: #041017;
+  }
+}
+:root[data-theme='dark'] {
+  --ex-ground: #070c12; --ex-ground-hi: #0e1a24;
+  --ex-glass: rgba(255, 255, 255, 0.06); --ex-glass-line: rgba(255, 255, 255, 0.1);
+  --ex-gold: #ffb13b; --ex-teal: #19c2d1; --ex-ok: #35d39a; --ex-warn: #ff9a7d;
+  --ex-sclera: rgba(238, 243, 246, 0.07); --ex-vig: rgba(255, 122, 89, 0.3);
+  --ex-sky0: #0b1c28; --ex-sky1: #123646; --ex-h1: #1a4656; --ex-h2: #12384a; --ex-h3: #0a2432;
+  --ex-btn: linear-gradient(90deg, #19c2d1, #3e7bfa); --ex-btn-ink: #041017;
+}
+
+/* ---------- Sahne ---------- */
+.ex-stage {
+  position: fixed; inset: 0; z-index: 5; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center;
+  padding: calc(env(safe-area-inset-top) + 12px) 18px calc(env(safe-area-inset-bottom) + 20px);
+  background: radial-gradient(120% 70% at 50% 50%, var(--ex-ground-hi), var(--ex-ground) 62%);
+  color: var(--ex-ink); transition: background 0.6s ease;
+}
+/* Gözler kapalı: iki temada da gece zemini (parlak ekran ışığı göz kapağından geçmesin) */
+.ex-stage.rest {
+  --ex-ground: #020508; --ex-ground-hi: #0a141c;
+  --ex-ink: #c9d3da; --ex-ink2: #8d9aa6; --ex-ink3: #5f6c78;
+  --ex-glass: rgba(255, 255, 255, 0.04); --ex-glass-line: rgba(255, 255, 255, 0.07);
+  --ex-gold: #d99a3a; --ex-teal: #127f8a; --ex-ok: #35d39a; --ex-sclera: rgba(255, 255, 255, 0.04);
+  color-scheme: dark;
+}
+.ex-stage::after { content: ''; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 90px 6px transparent; transition: box-shadow 0.4s; }
+.ex-stage.noface::after { box-shadow: inset 0 0 90px 6px var(--ex-vig); }
+.ex-stage > * { position: relative; z-index: 1; width: 100%; max-width: 520px; }
+
+/* Üst: kapat · adım çizgisi · ses (kalibrasyonla aynı cam düğmeler) */
+.ex-top { display: flex; align-items: center; gap: 14px; flex: none; }
+.ex-ic, .ex-stage .ex-sound {
+  flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  background: var(--ex-glass); border: 1px solid var(--ex-glass-line); color: var(--ex-ink2); box-shadow: none; cursor: pointer;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.ex-ic svg { width: 19px; height: 19px; }
+.ex-stage .ex-sound.on { background: var(--ex-glass); border-color: var(--ex-glass-line); box-shadow: none; }
+.ex-stage .ex-sound .sound-text { display: none; }
+.ex-stage .ex-sound .sound-knob { position: static; transform: none; width: 100%; height: 100%; background: transparent; box-shadow: none; color: var(--ex-ink3); }
+.ex-stage .ex-sound.on .sound-knob { transform: none; color: var(--ex-teal); }
+.ex-segs { flex: 1; display: flex; gap: 3px; height: 4px; }
+.ex-segs span { position: relative; flex: 1; border-radius: 2px; background: var(--ex-glass-line); overflow: hidden; }
+.ex-segs span.d { background: color-mix(in srgb, var(--ex-ink) 55%, transparent); }
+.ex-segs span i { position: absolute; inset: 0 auto 0 0; background: var(--ex-gold); transition: width 0.4s linear; }
+.ex-top .ex-spacer { width: 44px; flex: none; }
+
+/* Yönerge */
+.ex-copy { flex: none; margin-top: 22px; display: grid; justify-items: center; gap: 9px; text-align: center; animation: fade-in 0.3s ease both; }
+.ex-step { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ex-ink3); font-variant-numeric: tabular-nums; }
+.ex-step b { color: var(--ex-gold); font-weight: 600; }
+.ex-step em { font-style: normal; color: var(--ex-teal); }
+.ex-title { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 1.75rem; line-height: 1.14; letter-spacing: -0.02em; color: var(--ex-ink); text-wrap: balance; }
+.ex-copy .ex-title { max-width: 330px; }
+.ex-sub { margin: 0; max-width: 320px; font-size: 0.97rem; line-height: 1.4; color: var(--ex-ink2); text-wrap: balance; }
+
+/* Sahne */
+.ex-mid { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 14px 0; }
+.ex-arena { position: relative; width: min(260px, 70vw, 34vh); aspect-ratio: 1; }
+.ex-arena > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ex-overlay { position: absolute; inset: 0; display: grid; place-items: center; }
+.ex-base { fill: var(--ex-glass); }
+.ex-track { fill: none; stroke: var(--ex-glass-line); stroke-width: 2; }
+.ex-arc { fill: none; stroke: var(--ex-gold); stroke-width: 3; stroke-linecap: round; transition: stroke-dasharray 0.35s linear; filter: drop-shadow(0 0 3px color-mix(in srgb, var(--ex-gold) 60%, transparent)); }
+.ex-arena.warn .ex-arc { stroke: var(--ex-warn); filter: none; }
+.ex-arena .ex-art { transition: opacity 0.3s, filter 0.3s; }
+.ex-arena.off .ex-art { opacity: 0.45; filter: grayscale(1); }
+.ex-arena.off .ex-arc { opacity: 0.4; filter: none; }
+
+/* Göz */
+.ex-sclera { fill: var(--ex-sclera); }
+.ex-lid-line { fill: none; stroke: var(--ex-ink); stroke-width: 3; stroke-linejoin: round; opacity: 0.9; }
+.ex-lid { fill: none; stroke: var(--ex-ink); stroke-width: 3.4; stroke-linecap: round; opacity: 0.92; }
+.ex-eye.squeeze .ex-lid { stroke-width: 4.6; }
+.ex-tension { fill: none; stroke: var(--ex-gold); stroke-width: 3; stroke-linecap: round; }
+.ex-eye { animation: ex-eye-in 0.25s ease both; transform-box: view-box; transform-origin: 130px 130px; }
+@keyframes ex-eye-in { from { opacity: 0.2; transform: scaleY(0.6); } to { opacity: 1; transform: none; } }
+
+/* Bakış */
+.ex-look-stop0 { stop-color: var(--ex-teal); stop-opacity: 0; }
+.ex-look-stop1 { stop-color: var(--ex-teal); stop-opacity: 0.22; }
+.ex-look.ok .ex-look-stop0 { stop-color: var(--ex-gold); }
+.ex-look.ok .ex-look-stop1 { stop-color: var(--ex-gold); stop-opacity: 0.3; }
+.ex-dash { fill: none; stroke: var(--ex-ink3); stroke-width: 1.5; stroke-dasharray: 3 5; opacity: 0.6; }
+.ex-chev { fill: none; stroke: var(--ex-teal); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+.ex-tint { fill: var(--ex-teal); opacity: 0.16; }
+.ex-look.ok .ex-tint { fill: var(--ex-gold); }
+.ex-lock { fill: none; stroke: var(--ex-gold); stroke-width: 3; filter: drop-shadow(0 0 4px color-mix(in srgb, var(--ex-gold) 60%, transparent)); }
+.ex-gaze .halo { fill: var(--ex-ink); opacity: 0.18; }
+.ex-gaze .dot { fill: var(--ex-ink); stroke: var(--ex-ground); stroke-width: 2.5; }
+.ex-gaze.gold .halo, .ex-gaze.gold .dot { fill: var(--ex-gold); }
+.ex-gaze.warn .halo, .ex-gaze.warn .dot { fill: var(--ex-warn); }
+.ex-gaze circle { transition: cx 0.12s linear, cy 0.12s linear; }
+
+/* Daire */
+.ex-orbit-path { fill: none; stroke: var(--ex-teal); stroke-width: 2; opacity: 0.35; }
+.ex-orbit-spin { transform-box: view-box; transform-origin: 130px 130px; animation: ex-spin 5s linear infinite; }
+.ex-orbit-spin.ccw { animation-direction: reverse; }
+.ex-orbit.tracked .ex-orbit-spin { opacity: 0.55; }
+@keyframes ex-spin { to { transform: rotate(360deg); } }
+
+/* Uzak */
+.ex-sky0 { stop-color: var(--ex-sky0); }
+.ex-sky1 { stop-color: var(--ex-sky1); }
+.ex-h1 { fill: var(--ex-h1); } .ex-h2 { fill: var(--ex-h2); } .ex-h3 { fill: var(--ex-h3); }
+.ex-horizon.faint .scene { opacity: 0.28; }
+.ex-sun circle { fill: var(--ex-gold); }
+.ex-sun .halo { opacity: 0.25; animation: ex-breathe 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes ex-breathe { 0%, 100% { transform: scale(0.85); } 50% { transform: scale(1.15); } }
+
+/* Yakın */
+.ex-near-ring { fill: none; stroke: var(--ex-teal); stroke-width: 2; opacity: 0.5; animation: ex-breathe 3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+
+/* Dinlenme ışığı */
+.ex-glow0 { stop-color: var(--ex-teal); stop-opacity: 0.16; }
+.ex-glow1 { stop-color: var(--ex-teal); stop-opacity: 0; }
+
+/* Tamam */
+.ex-done { animation: ex-pop 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.25) both; transform-box: view-box; transform-origin: 130px 130px; }
+.ex-done .halo { fill: var(--ex-gold); opacity: 0.14; }
+.ex-done .disc { fill: var(--ex-gold); }
+.ex-done .tick { fill: none; stroke: #1a0f00; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+@keyframes ex-pop { from { transform: scale(0.5); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Sahne altı: şimdi ne / ne kaldı */
+.ex-now { flex: none; min-height: 84px; display: grid; align-content: start; justify-items: center; gap: 10px; text-align: center; transition: opacity 0.3s; }
+.ex-now.paused { opacity: 0.4; }
+.ex-big { font-family: var(--font-display); font-weight: 600; font-size: 2.75rem; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; color: var(--ex-ink); }
+.ex-big small, .ex-word small { font-family: var(--font-mono); font-size: 0.875rem; font-weight: 500; letter-spacing: 0.06em; color: var(--ex-ink3); margin-left: 6px; }
+.ex-big.gold { color: var(--ex-gold); }
+.ex-word { font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; line-height: 1.1; letter-spacing: -0.02em; color: var(--ex-ink); }
+.ex-pips { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.78rem; color: var(--ex-ink3); letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+.ex-pips i { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid color-mix(in srgb, var(--ex-ink) 32%, transparent); transition: background 0.25s, border-color 0.25s; }
+.ex-pips i.f { background: var(--ex-gold); border-color: var(--ex-gold); box-shadow: 0 0 8px color-mix(in srgb, var(--ex-gold) 55%, transparent); }
+.ex-pips b { font-weight: 600; color: var(--ex-ink2); margin-left: 4px; }
+
+/* Durum satırı */
+.ex-st { flex: none; min-height: 26px; margin-top: 10px; display: flex; justify-content: center; }
+.ex-st span { display: inline-flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; color: var(--ex-ink2); text-align: center; line-height: 1.3; }
+.ex-st span::before { content: ''; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--ex-ok); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ex-ok) 22%, transparent); }
+.ex-st .w { color: var(--ex-warn); }
+.ex-st .w::before { background: var(--ex-warn); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ex-warn) 22%, transparent); }
+.ex-st .g::before { background: var(--ex-gold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ex-gold) 22%, transparent); }
+.ex-st .n::before { background: var(--ex-ink3); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ex-ink3) 20%, transparent); }
+
+/* Alt */
+.ex-foot { flex: none; min-height: 92px; margin-top: 14px; display: grid; justify-items: center; align-content: end; gap: 10px; }
+.ex-skip {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 18px; border-radius: 999px; cursor: pointer;
+  background: var(--ex-glass); border: 1px solid var(--ex-glass-line); color: var(--ex-ink2); font: 600 0.9rem var(--font-body);
+}
+.ex-skip svg { width: 15px; height: 15px; }
+.ex-btn {
+  width: 100%; min-height: 54px; border-radius: 16px; border: 0; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--ex-btn); color: var(--ex-btn-ink); font: 650 1.03rem var(--font-body);
+  box-shadow: 0 10px 26px -12px rgba(36, 88, 204, 0.6); animation: fade-in 0.3s ease both;
+}
+.ex-btn svg { width: 18px; height: 18px; }
+.ex-btn.ghost { background: var(--ex-glass); border: 1px solid var(--ex-glass-line); color: var(--ex-ink); box-shadow: none; }
+.ex-fine { margin: 0; font-size: 0.8rem; line-height: 1.4; color: var(--ex-ink3); text-align: center; }
+
+/* ---------- Başlangıç ---------- */
+.ex-intro { flex: none; margin-top: 18px; display: grid; gap: 8px; }
+.ex-intro .ex-step { justify-self: start; }
+.ex-intro .ex-title { font-size: 2rem; }
+.ex-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.ex-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 11px; border-radius: 999px; background: var(--ex-glass); border: 1px solid var(--ex-glass-line); font-size: 0.8rem; font-weight: 550; color: var(--ex-ink2); }
+.ex-chip svg { width: 14px; height: 14px; color: var(--ex-teal); }
+.ex-moves {
+  flex: 1; min-height: 0; margin-top: 22px; padding: 0 0 36px; list-style: none; overflow-y: auto; display: grid; align-content: start;
+  -webkit-mask-image: linear-gradient(#000 calc(100% - 44px), transparent); mask-image: linear-gradient(#000 calc(100% - 44px), transparent);
+}
+.ex-mv { position: relative; display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 12px; min-height: 44px; }
+.ex-mv + .ex-mv::before { content: ''; position: absolute; left: 16.5px; top: -10px; height: 12px; width: 1.5px; background: var(--ex-glass-line); }
+.ex-mv .g { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--ex-glass); border: 1px solid var(--ex-glass-line); color: var(--ex-teal); }
+.ex-mv .g svg { width: 17px; height: 17px; }
+.ex-mv .nm { display: flex; align-items: center; gap: 8px; min-width: 0; font-size: 0.95rem; font-weight: 550; color: var(--ex-ink); }
+.ex-mv .v { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ex-ink3); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ex-tag { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 6px; border-radius: 6px; color: var(--ex-gold); background: color-mix(in srgb, var(--ex-gold) 14%, transparent); }
+.ex-voice { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0; font-size: 0.8rem; color: var(--ex-ink3); }
+.ex-voice svg { width: 15px; height: 15px; color: var(--ex-teal); flex: none; }
+.ex-voice b { color: var(--ex-ink2); font-weight: 600; }
+
+/* ---------- Bitiş ---------- */
+.ex-res { flex: 1; min-height: 0; display: grid; align-content: center; justify-items: center; gap: 14px; text-align: center; }
+.ex-res .ex-title { margin-top: 6px; }
+.ex-goal { width: 180px; height: 180px; overflow: visible; }
+.ex-goal .trk { fill: var(--ex-glass); stroke: var(--ex-glass-line); stroke-width: 10; }
+.ex-goal .arc { fill: none; stroke: var(--ex-gold); stroke-width: 10; stroke-linecap: round; filter: drop-shadow(0 0 6px color-mix(in srgb, var(--ex-gold) 50%, transparent)); }
+.ex-goal .num { font-family: var(--font-display); font-weight: 600; font-size: 34px; fill: var(--ex-ink); }
+.ex-goal .unit { font-family: var(--font-mono); font-size: 12px; letter-spacing: 1px; fill: var(--ex-ink3); }
+.ex-badge .halo { fill: var(--ex-gold); opacity: 0.14; }
+.ex-badge .disc { fill: var(--ex-gold); }
+.ex-badge .tick { fill: none; stroke: #1a0f00; stroke-linecap: round; stroke-linejoin: round; }
+.ex-stats { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 1px; width: 100%; margin-top: 8px; border-radius: 16px; overflow: hidden; background: var(--ex-glass-line); }
+.ex-stats div { display: grid; gap: 3px; padding: 13px 6px; background: color-mix(in srgb, var(--ex-ground) 88%, var(--ex-ink) 4%); }
+.ex-stats b { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; color: var(--ex-ink); }
+.ex-stats span { font-size: 0.75rem; color: var(--ex-ink3); }
+.ex-honest { margin: 0; max-width: 330px; font-size: 0.82rem; line-height: 1.45; color: var(--ex-ink3); }
+
+/* ---------- Göz kırpma egzersizi ---------- */
+.ex-rhythm { display: grid; gap: 7px; width: min(300px, 100%); }
+.ex-intro .ex-rhythm { width: 100%; }
+.ex-rhythm .bar { display: flex; gap: 3px; height: 6px; }
+.ex-rhythm .bar span { position: relative; border-radius: 3px; background: var(--ex-glass-line); overflow: hidden; }
+.ex-rhythm .bar span.d { background: color-mix(in srgb, var(--ex-ink) 45%, transparent); }
+.ex-rhythm .bar span i { position: absolute; inset: 0 auto 0 0; background: var(--ex-gold); transition: width 0.25s linear; }
+.ex-rhythm .lb { display: flex; gap: 3px; font-family: var(--font-mono); font-size: 0.66rem; color: var(--ex-ink3); letter-spacing: 0.02em; }
+.ex-rhythm .lb span { text-align: center; white-space: nowrap; }
+.ex-rhythm .lb span.on { color: var(--ex-ink); }
+.ex-blink-intro { flex: 1 1 auto; min-height: 0; overflow-y: auto; align-content: start; gap: 12px; padding-bottom: 28px; -webkit-mask-image: linear-gradient(#000 calc(100% - 28px), transparent); mask-image: linear-gradient(#000 calc(100% - 28px), transparent); }
+.ex-para { margin: 0; font-size: 0.95rem; line-height: 1.5; color: var(--ex-ink2); }
+.ex-hero { justify-self: center; width: 190px; height: 161px; }
+.ex-ev { border-radius: 14px; background: var(--ex-glass); border: 1px solid var(--ex-glass-line); }
+.ex-ev summary { display: flex; align-items: center; justify-content: space-between; min-height: 46px; padding: 0 14px; font-size: 0.9rem; font-weight: 600; color: var(--ex-ink); cursor: pointer; list-style: none; }
+.ex-ev summary::-webkit-details-marker { display: none; }
+.ex-ev summary svg { width: 16px; height: 16px; color: var(--ex-ink3); transition: transform 0.2s; }
+.ex-ev[open] summary svg { transform: rotate(90deg); }
+.ex-ev p { margin: 0; padding: 0 14px 14px; font-size: 0.85rem; line-height: 1.5; color: var(--ex-ink2); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ex-orbit-spin, .ex-sun .halo, .ex-near-ring { animation: none; }
+  .ex-eye, .ex-done { animation: none; }
+  .ex-arc, .ex-segs span i, .ex-rhythm .bar span i { transition: none; }
+}

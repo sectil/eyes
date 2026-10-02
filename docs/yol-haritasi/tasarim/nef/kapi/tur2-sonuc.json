@@ -1,0 +1,487 @@
+{
+ "F1T-8": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F1T-9": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F1T-10": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Yağmur yakın\" belirsiz kalıyor; ne zaman yağacağı anlaşılmıyor.",
+   "\"Yürüyüşüne yağmur yakın\" alışılmış bir Türkçe söyleyiş değil; ne denmek istendiği bir an düşündürüyor.",
+   "\"Yürüyüşe yağmur yakın\" belirsiz; ne zaman, ne kadar yakın anlaşılmıyor.",
+   "\"Yağmur yakın\" belirsiz; saatin mi yoksa yerin mi yakın olduğu anlaşılmıyor.",
+   "\"Yürüyüşüne yağmur yakın\" biraz muğlak; ne demek istediği hemen anlaşılmıyor."
+  ]
+ },
+ "F1A-8": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F1A-9": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "\"18.00 daha kuru görünüyor\" çeviri kokuyor; saat kuru olmaz, hava kuru olur.",
+   "\"18.00 daha kuru görünüyor\" çeviri kokuyor, doğal Türkçe değil."
+  ]
+ },
+ "F1A-10": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F1B-7": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F1B-8": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "\"Kısa bir tur\" yürüyüşü kısaltmayı dayatıyor; \"yağmur\" iki kez tekrar ediyor."
+  ]
+ },
+ "F1B-9": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F1B-10": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F1C-7": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F1C-8": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Evde kısa bir yürüyüş\" garip ve gerçekçi olmayan bir öneri.",
+   "\"Evde kısa bir yürüyüş\" garip bir öneri; evde yürüyüş yapılmaz.",
+   "\"Evde kısa bir yürüyüş\" garip ve pek uygulanabilir değil.",
+   "\"Evde kısa bir yürüyüş\" garip ve uygulanabilir bir öneri değil.",
+   "\"Evde kısa bir yürüyüş\" garip ve pek gerçekçi değil."
+  ]
+ },
+ "F1C-9": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "Rakamla açılan \"19.30 senin yürüyüş saatin\" robot gibi duruyor, sonundaki nefes önerisi de reklam gibi.",
+   "\"19.30 senin yürüyüş saatin\" robot gibi; nefes pratiğine geçiş reklam gibi kopuk."
+  ]
+ },
+ "F1C-10": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F1C-11": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Evde birkaç tur atmak\" tuhaf duruyor, değer katmıyor.",
+   "\"Evde birkaç tur atmak\" tuhaf ve pek uygulanabilir olmayan bir öneri.",
+   "\"Evde birkaç tur atmak\" tuhaf ve ciddiye alınacak bir öneri gibi durmuyor.",
+   "\"Evde birkaç tur atmak\" tuhaf, biraz da alaycı bir öneri gibi okunuyor.",
+   "\"Evde birkaç tur atmak\" tuhaf bir öneri gibi duruyor."
+  ]
+ },
+ "F1D-7": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "\"Yürüyüşüne yağmur yakın\" yine doğal olmayan bir söyleyiş.",
+   "\"Yürüyüşüne yağmur yakın\" kalıbı doğal değil, belirsiz.",
+   "\"Yürüyüşüne yağmur yakın\" ifadesi muğlak kalıyor."
+  ]
+ },
+ "F1D-8": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F1D-9": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "\"Yağmur yakın\" ve \"18.00 daha kuru görünüyor\" ikisi birden yapay duruyor.",
+   "\"Yürüyüşüne yağmur yakın\" yapısı garip, cümle sıkışık.",
+   "\"Yağmur yakın\" ve \"daha kuru görünüyor\" bir arada yapay duruyor."
+  ]
+ },
+ "F1E-7": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "\"18.00 daha kuru görünüyor\" çeviri Türkçesi gibi.",
+   "\"Daha kuru görünüyor\" çeviri gibi duruyor."
+  ]
+ },
+ "F1E-8": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F3A-8": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Hava durumu uygulaması gibi genel bir tavsiye, bana özel değil."
+  ]
+ },
+ "F3A-9": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F3B-7": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "\"Suyunu yanına al\" emir gibi, biraz ebeveyn tınısı var."
+  ]
+ },
+ "F3B-8": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "\"Gölgeli yolu\" diyor ama hangi yolu kastettiği belli değil.",
+   "\"Gölgeli yolu\" belirli bir yol varmış gibi konuşuyor; 19.30 için de pek anlamlı değil."
+  ]
+ },
+ "F3B-9": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F2A-8": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F2A-9": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "\"Geçen hafta bu akşamki\" dil bilgisi açısından tuhaf duruyor.",
+   "\"Geçen hafta bu akşamki\" dilbilgisi açısından aksak bir söyleyiş.",
+   "\"Geçen hafta bu akşamki\" dilbilgisi olarak yanlış; bu akşama ait gibi okunuyor.",
+   "\"Geçen hafta bu akşamki\" dil bilgisi açısından hatalı, \"bu akşamki\" bugünü anlatır."
+  ]
+ },
+ "F2A-10": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F2B-7": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "\"Rahatsızlığın\" hastalık gibi okunuyor; \"Yön yazı egzersizi\" adı da anlaşılmıyor.",
+   "\"Rahatsızlığın\" hastalık gibi okunuyor, ürkütüyor.",
+   "\"Rahatsızlığın\" hastalık çağrıştırıyor, \"Yön yazı egzersizi\" de belirsiz.",
+   "\"Rahatsızlığın inmişti\" hastalık gibi okunuyor, kulağa garip geliyor."
+  ]
+ },
+ "F2B-8": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F2B-9": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F2C-8": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "\"Puanın ... 2 puan arttı\" tekrarı robot gibi duruyor.",
+   "\"Puanın... 2 puan\" diye kelime tekrarı var, cümle hantal.",
+   "\"Puanın ... 2 puan\" tekrarı robotik duruyor."
+  ]
+ },
+ "F2C-9": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F2C-10": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F2D-7": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "Uzun isim zinciri ve \"puan\" tekrarı yüzünden rapor satırı gibi okunuyor.",
+   "Uzun, puan kelimesi iki kez geçiyor ve \"rahatsızlık\" hastalık çağrıştırıyor.",
+   "\"Son 4 Yön yazı egzersizi seansında rahatsızlık puanın\" ağır, robotik bir isim zinciri.",
+   "\"Puanın ... puan\" tekrarı var, \"rahatsızlık\" hastalık gibi okunuyor.",
+   "\"Yön yazı egzersizi seansında rahatsızlık puanın\" diye uzayan zincir hantal kalıyor."
+  ]
+ },
+ "F2D-8": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "\"Rahatsızlığın\" hastalık gibi okunuyor, can sıkıyor.",
+   "\"Rahatsızlığın\" hastalık gibi okunuyor.",
+   "\"Rahatsızlığın\" hastalık çağrıştırıyor, kişisel ve olumlu bir tını taşımıyor.",
+   "\"Rahatsızlığın indi\" hastalık gibi okunuyor."
+  ]
+ },
+ "F2D-9": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F4A-9": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F4A-10": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Eklenecek\" garip duruyor; \"seni bekliyor\" hafif suçluluk yaratıyor.",
+   "\"Eklenecek yeni bir şey yok\" resmî ve mekanik kaçıyor.",
+   "\"Eklenecek yeni bir şey\" kimin neyi ekleyeceği belirsiz, sistem dili gibi.",
+   "\"Eklenecek yeni bir şey yok\" sistem mesajı gibi robotik.",
+   "\"Eklenecek\" resmi duruyor; \"seni bekliyor\" ise hafif baskı hissettiriyor."
+  ]
+ },
+ "F4A-11": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F4A-12": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Yalnız yolun var; ne zaman istersen\" kopuk ve belirsiz.",
+   "\"Ne zaman istersen\" havada kalıyor, cümle yarım hissi veriyor.",
+   "\"Bugün yalnız yolun var\" muğlak, yalnızlık çağrışımı yapıyor; ikinci yarısı yarım kalmış.",
+   "\"Yalnız yolun var\" belirsiz ve yalnızlık çağrıştırıyor; \"ne zaman istersen\" havada kalıyor.",
+   "\"Yalnız yolun var\" belirsiz, biraz da yalnızlık tınısı taşıyor."
+  ]
+ },
+ "F4A-13": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F4B-8": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Kuru bir boşluk bildirimi, değer katmıyor."
+  ]
+ },
+ "F4B-9": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Değer katmayan, kapanışı olmayan boş bir bildirim."
+  ]
+ },
+ "F4B-10": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Eklenecek yeni bir şey yok\" sistem mesajı gibi duruyor.",
+   "\"Eklenecek yeni bir şey yok\" mekanik duruyor.",
+   "\"Eklenecek yeni bir şey\" mekanik ve belirsiz.",
+   "\"Eklenecek yeni bir şey yok\" robotik.",
+   "\"Eklenecek yeni bir şey\" sistem mesajı gibi duruyor."
+  ]
+ },
+ "F4B-11": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F4B-12": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F4C-8": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F4C-9": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "F4C-10": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "MC-8": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "\"Algı eşiği\" ve milisaniye fazla teknik; düşmenin iyi bir şey olduğu da anlaşılmıyor.",
+   "Algı eşiğinin inmesinin iyi mi kötü mü olduğu belli değil; teknik ve soğuk.",
+   "\"Milisaniye\" tekrarı var, düşüşün iyi olduğu da sezilmiyor; teknik ve ağır."
+  ]
+ },
+ "MC-10": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "MC-11": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "MC-12": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "MC-13": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Başlangıcından iyi:\" kulağa çeviri gibi geliyor.",
+   "\"Başlangıcından iyi:\" diye açılış eksik ve garip.",
+   "\"Başlangıcından iyi:\" garip, eksik bir ifade.",
+   "\"Başlangıcından iyi:\" garip ve eksik bir kalıp.",
+   "\"Başlangıcından iyi:\" eksik ve garip bir giriş."
+  ]
+ },
+ "MC-14": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "Teknik terimler var; eşiğin inmesinin iyi bir şey olduğu belli değil.",
+   "\"Eşiğin 40 milisaniye indi\" teknik; iyi bir şey olduğu anlaşılmıyor."
+  ]
+ },
+ "MC-15": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "FT-7": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "FT-8": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "FT-9": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "Zaten bildiğim şeyi söylüyor, değer katmıyor.",
+   "Kuru bir tespit, okuyana bir şey katmıyor; izleniyormuş hissi veriyor.",
+   "Sadece olanı söylüyor, robot gibi ve değer katmıyor.",
+   "Kişinin zaten bildiği bir şeyi düz bir dille tekrarlıyor.",
+   "Kuru bir bilgi notu; sıcaklık ya da değer katmıyor."
+  ]
+ },
+ "FT-10": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "FTB-7": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "\"Başlangıcın 4 harf\" kopuk ve eksik bir cümle gibi.",
+   "\"Başlangıcın 4 harf\" fazla kısa ve ne anlama geldiği belirsiz.",
+   "\"Başlangıcın 4 harf\" kısa kesilmiş, robotik."
+  ]
+ },
+ "FTB-8": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "FTB-9": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "\"Başlangıç eşiği\" ve milisaniye teknik ve soğuk kalıyor.",
+   "\"Başlangıç eşiğin\" jargon; ne ölçüldüğü anlaşılmıyor."
+  ]
+ },
+ "FTB-10": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "Teknik; 120 milisaniyenin iyi mi kötü mü olduğu anlaşılmıyor.",
+   "120 milisaniyenin neyin ölçüsü olduğu belirsiz."
+  ]
+ },
+ "FTB-11": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "\"Dinlenmişlik puanın\" yapay bir kelime gibi duruyor.",
+   "\"Dinlenmişlik puanı\" yapay bir kelime.",
+   "\"Dinlenmişlik puanı\" yapay ve garip bir kelime.",
+   "\"Dinlenmişlik puanın\" yapay ve ağır bir ifade."
+  ]
+ },
+ "RG-7": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "RG-8": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "PD-7": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "PD-8": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "PD-9": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "PD-10": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ }
+}

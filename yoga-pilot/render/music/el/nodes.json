@@ -1,0 +1,148 @@
+{
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "items": [
+  {
+   "id": "el-vd-a",
+   "role": "varis-derinlesme bed A",
+   "node_id": "5Dj3lvpLbDgTjMw4Ery3",
+   "type": "music",
+   "prompt_key": "varis",
+   "duration_s": 300,
+   "gens": 1,
+   "est_credits": 8250,
+   "est_cents": 150,
+   "session_ids": [
+    "w5qf0rXw8zn7NwglhToC"
+   ],
+   "run_started": "2026-09-29T10:52Z"
+  },
+  {
+   "id": "el-vd-b",
+   "role": "varis-derinlesme bed B",
+   "node_id": "CsAAaLHUWW6Zuo1mL43k",
+   "type": "music",
+   "prompt_key": "varis",
+   "duration_s": 300,
+   "gens": 1,
+   "est_credits": 8250,
+   "est_cents": 150,
+   "session_ids": [
+    "7RgIHuCG8ppo9qeFVsOQ"
+   ],
+   "run_started": "2026-09-29T10:52Z"
+  },
+  {
+   "id": "el-v-aday",
+   "role": "varis opening candidate",
+   "node_id": "Ocgf9HewGMmcpgcVqsn1",
+   "type": "music",
+   "prompt_key": "varis",
+   "duration_s": 180,
+   "gens": 1,
+   "est_credits": 4950,
+   "est_cents": 90,
+   "session_ids": [
+    "dr0bUzrZdW1D9ut65YBN"
+   ],
+   "run_started": "2026-09-29T10:52Z"
+  },
+  {
+   "id": "el-derin-a",
+   "role": "derin bed A",
+   "node_id": "HEbCx0QT9YJqhVaNCODO",
+   "type": "music",
+   "prompt_key": "derin",
+   "duration_s": 240,
+   "gens": 1,
+   "est_credits": 6600,
+   "est_cents": 120,
+   "session_ids": [
+    "jcpli1sbW3Iui6seyGxf"
+   ],
+   "run_started": "2026-09-29T10:52Z"
+  },
+  {
+   "id": "el-derin-b",
+   "role": "derin bed B",
+   "node_id": "uyJGYOUSsD5ZlDVGHuCb",
+   "type": "music",
+   "prompt_key": "derin",
+   "duration_s": 240,
+   "gens": 1,
+   "est_credits": 6600,
+   "est_cents": 120,
+   "session_ids": [
+    "6WDjGoBZhvEhqd86cSa8"
+   ],
+   "run_started": "2026-09-29T10:52Z"
+  },
+  {
+   "id": "el-imge",
+   "role": "imge layer (sparse distant piano)",
+   "node_id": "BGJ4RBze1tiQwO4EZC01",
+   "type": "music",
+   "prompt_key": "imge",
+   "duration_s": 180,
+   "gens": 1,
+   "est_credits": 4950,
+   "est_cents": 90,
+   "session_ids": [
+    "bbGswh09S82BuWOO8BL9"
+   ],
+   "run_started": "2026-09-29T10:52Z"
+  },
+  {
+   "id": "el-kapanis",
+   "role": "kapanis bed",
+   "node_id": "DjYpdp8OdRbEUsT6nXrc",
+   "type": "music",
+   "prompt_key": "kapanis",
+   "duration_s": 180,
+   "gens": 1,
+   "est_credits": 4950,
+   "est_cents": 90,
+   "session_ids": [
+    "JjAoGN8mATdbmiJtHHct"
+   ],
+   "run_started": "2026-09-29T10:52Z"
+  },
+  {
+   "id": "orman",
+   "role": "nature loop orman (wind+leaves) x4",
+   "node_id": "duSbTQ456NFAXpeOZXAc",
+   "type": "sfx",
+   "prompt_key": "orman",
+   "duration_s": 30,
+   "gens": 4,
+   "loop": true,
+   "prompt_influence": 0.5,
+   "est_credits": 1320,
+   "est_cents": 24,
+   "session_ids": [
+    "CFvcrKMzKjfWYMZRFCxq",
+    "Z5ffFV6YVzqnNWyGyfN8",
+    "95Lmhi20eTgrt5cZd0Kj",
+    "IRPG44qf9k0Zp8yOkI8k"
+   ],
+   "run_started": "2026-09-29T10:52Z"
+  },
+  {
+   "id": "donus",
+   "role": "return tone",
+   "node_id": "TjwwHAH79pSuGL9Nvwq5",
+   "type": "sfx",
+   "prompt_key": "donus",
+   "duration_s": 4,
+   "gens": 1,
+   "loop": false,
+   "prompt_influence": 0.5,
+   "est_credits": 44,
+   "est_cents": 0.8,
+   "session_ids": [
+    "771hqrqrNnqDqxT2Mwo9"
+   ],
+   "run_started": "2026-09-29T10:52Z"
+  }
+ ],
+ "estimate_total_cents": 834.8
+}

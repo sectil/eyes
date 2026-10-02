@@ -1,0 +1,3206 @@
+{
+ "voice": "hoc",
+ "T": 900,
+ "rate": 5.6,
+ "profile": "hi",
+ "scene": "orman",
+ "method": "timing.plan(with_scene(L,\"orman\"), 900, 5.6, \"hi\") with timing.sub_durs monkeypatched to the measured frame counts of the selected processed pieces (render/sel/hoc/*/*.wav)",
+ "status": "ok",
+ "mode": "pref→max",
+ "f": 0.0884,
+ "total": 900.0,
+ "speech_sec": 290.892,
+ "gaps": {
+  "min": 487.198,
+  "pref": 592.421,
+  "max": 781.221,
+  "cap": 686.821,
+  "half": 539.81,
+  "fit": 592.421
+ },
+ "sel": [
+  "N1",
+  "C1",
+  "C2",
+  "N2",
+  "C4"
+ ],
+ "inc": [
+  "a.agirlik",
+  "a.karar",
+  "a.konfor",
+  "c1.b01",
+  "c1.b02",
+  "c1.b03",
+  "c1.b05",
+  "c1.gecis.arka",
+  "c1.gecis.on",
+  "c1.kacirma",
+  "c1.l02",
+  "c1.l03",
+  "c1.l04",
+  "c1.l05",
+  "c1.l06",
+  "c1.l07",
+  "c1.l08",
+  "c1.l09",
+  "c1.l10",
+  "c1.l11",
+  "c1.l13",
+  "c1.l14",
+  "c1.l15",
+  "c1.l17",
+  "c1.l18",
+  "c1.l19",
+  "c1.s02",
+  "c1.s03",
+  "c1.s04",
+  "c1.s05",
+  "c1.s06",
+  "c1.s07",
+  "c1.s08",
+  "c1.s09",
+  "c1.s10",
+  "c1.s11",
+  "c1.s13",
+  "c1.s14",
+  "c1.s15",
+  "c1.s17",
+  "c1.s18",
+  "c1.s19",
+  "c1.tekrar",
+  "c2.alt",
+  "c2.birak",
+  "c2.n01",
+  "c2.n02",
+  "c2.n03",
+  "c2.n04",
+  "c2.n05",
+  "c2.n06",
+  "c2.n07",
+  "c2.n08",
+  "c2.n09",
+  "c2.n10",
+  "c2.sayac",
+  "c2.yer",
+  "k.oda.ayrinti",
+  "k.sesler",
+  "k.yandakal",
+  "k.zaman",
+  "n1.birak",
+  "n2.dilek"
+ ],
+ "stop": [
+  285,
+  "c2.durak",
+  "sığmadı"
+ ],
+ "notes": [],
+ "check_plan": {
+  "fails": [],
+  "pass": true,
+  "density": {
+   "syll": 119.0,
+   "frac": 0.473,
+   "deep_syll": 96.501,
+   "deep_frac": 0.351,
+   "dead": [],
+   "avg": 81.867
+  },
+  "texture_runs": [
+   [
+    "A/cümle",
+    4.18,
+    105.93
+   ],
+   [
+    "N1/cümle",
+    105.93,
+    155.83
+   ],
+   [
+    "C1/cümle",
+    155.83,
+    172.82
+   ],
+   [
+    "C1/mikro-liste",
+    172.82,
+    229.18
+   ],
+   [
+    "C1/cümle",
+    229.18,
+    235.69
+   ],
+   [
+    "C1/mikro-liste",
+    235.69,
+    292.06
+   ],
+   [
+    "C1/cümle",
+    292.06,
+    295.99
+   ],
+   [
+    "C1/mikro-liste",
+    295.99,
+    314.14
+   ],
+   [
+    "C1/cümle",
+    314.14,
+    321.7
+   ],
+   [
+    "C1/mikro-liste",
+    321.7,
+    335.35
+   ],
+   [
+    "C1/cümle",
+    335.35,
+    346.51
+   ],
+   [
+    "C2/cümle",
+    346.51,
+    433.25
+   ],
+   [
+    "C2/mikro-liste",
+    433.25,
+    495.54
+   ],
+   [
+    "C2/cümle",
+    495.54,
+    528.7
+   ],
+   [
+    "BR.K2/cümle",
+    528.7,
+    544.3
+   ],
+   [
+    "BR.orta/cümle",
+    544.3,
+    571.45
+   ],
+   [
+    "C4/cümle",
+    571.45,
+    708.96
+   ],
+   [
+    "N2/cümle",
+    708.96,
+    746.83
+   ],
+   [
+    "K/cümle",
+    746.83,
+    900.0
+   ]
+  ]
+ },
+ "units_needed": [
+  "a.acilis",
+  "a.agirlik",
+  "a.durus",
+  "a.gozler",
+  "a.hosgeldin",
+  "a.izin",
+  "a.karar",
+  "a.kolay",
+  "a.konfor",
+  "br.k2",
+  "br.orta",
+  "c1.cerceve",
+  "c1.gecis.arka",
+  "c1.gecis.on",
+  "c1.k1",
+  "c1.kacirma",
+  "c1.tekrar",
+  "c2.akis",
+  "c2.alt",
+  "c2.birak",
+  "c2.dikkat",
+  "c2.kal",
+  "c2.sayac",
+  "c2.yer",
+  "c4.don",
+  "c4.gelmezse",
+  "c4.gunes",
+  "c4.patika",
+  "c4.ses",
+  "c4.solma",
+  "c4.yer",
+  "c4.yol",
+  "car.butun",
+  "car.on1",
+  "car.on2",
+  "car.on3",
+  "car.sag1",
+  "car.sag2",
+  "car.sag3",
+  "car.sag4",
+  "car.sayi",
+  "car.sirt",
+  "car.sol1",
+  "car.sol2",
+  "car.sol3",
+  "car.sol4",
+  "k.anahtar3",
+  "k.bekle",
+  "k.donus",
+  "k.goz",
+  "k.hareket",
+  "k.kalk",
+  "k.nefes",
+  "k.oda.ayrinti",
+  "k.otur",
+  "k.sesler",
+  "k.son",
+  "k.yan",
+  "k.yandakal",
+  "k.zaman",
+  "n1.birak",
+  "n1.sec",
+  "n1.soyle",
+  "n2.dilek",
+  "n2.hatirla"
+ ],
+ "units_missing": [],
+ "events": [
+  {
+   "clip": "a.hosgeldin",
+   "unit": "a.hosgeldin",
+   "block": "A",
+   "phase": "Varış",
+   "start": 4.1768,
+   "end": 7.4941,
+   "speech": 2.4997,
+   "gapAfter": 2.0884,
+   "gapBounds": {
+    "min": 1.0,
+    "pref": 2.0,
+    "max": 3.0
+   },
+   "subs": [
+    {
+     "start": 4.1768,
+     "end": 5.1375,
+     "text": "Hoş geldin.",
+     "sgapAfter": 0.8177
+    },
+    {
+     "start": 5.9552,
+     "end": 7.4941,
+     "text": "Bu dakikalar senin.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "phase:varis",
+    "music": "phase:varis"
+   },
+   "window": null
+  },
+  {
+   "clip": "a.acilis",
+   "unit": "a.acilis",
+   "block": "A",
+   "phase": "Varış",
+   "start": 9.5825,
+   "end": 14.0655,
+   "speech": 4.4829,
+   "gapAfter": 5.1768,
+   "gapBounds": {
+    "min": 2.0,
+    "pref": 5.0,
+    "max": 7.0
+   },
+   "subs": [
+    {
+     "start": 9.5825,
+     "end": 14.0655,
+     "text": "Bir şey başarman gerekmiyor; yalnızca dinlenmek var.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "a.konfor",
+   "unit": "a.konfor",
+   "block": "A",
+   "phase": "Varış",
+   "start": 19.2422,
+   "end": 25.3335,
+   "speech": 6.0912,
+   "gapAfter": 12.2652,
+   "gapBounds": {
+    "min": 12.0,
+    "pref": 12.0,
+    "max": 15.0
+   },
+   "subs": [
+    {
+     "start": 19.2422,
+     "end": 25.3335,
+     "text": "Uzanmadan önce üstüne ince bir örtü, dizlerinin altına bir yastık alman iyi olur.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "a.durus",
+   "unit": "a.durus",
+   "block": "A",
+   "phase": "Varış",
+   "start": 37.5986,
+   "end": 41.578,
+   "speech": 3.9794,
+   "gapAfter": 8.3535,
+   "gapBounds": {
+    "min": 8.0,
+    "pref": 8.0,
+    "max": 12.0
+   },
+   "subs": [
+    {
+     "start": 37.5986,
+     "end": 41.578,
+     "text": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "a.gozler",
+   "unit": "a.gozler",
+   "block": "A",
+   "phase": "Varış",
+   "start": 49.9316,
+   "end": 55.1999,
+   "speech": 5.2683,
+   "gapAfter": 4.2652,
+   "gapBounds": {
+    "min": 4.0,
+    "pref": 4.0,
+    "max": 7.0
+   },
+   "subs": [
+    {
+     "start": 49.9316,
+     "end": 55.1999,
+     "text": "Gözlerini kapatmak ya da açık tutmak sana kalmış; bakışın serbest.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "a.karar",
+   "unit": "a.karar",
+   "block": "A",
+   "phase": "Varış",
+   "start": 59.4651,
+   "end": 62.6735,
+   "speech": 3.2085,
+   "gapAfter": 7.1768,
+   "gapBounds": {
+    "min": 6.0,
+    "pref": 7.0,
+    "max": 9.0
+   },
+   "subs": [
+    {
+     "start": 59.4651,
+     "end": 62.6735,
+     "text": "Ne kadar gevşeyeceğine sen karar veriyorsun.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "a.izin",
+   "unit": "a.izin",
+   "block": "A",
+   "phase": "Varış",
+   "start": 69.8503,
+   "end": 75.0494,
+   "speech": 5.1991,
+   "gapAfter": 6.1768,
+   "gapBounds": {
+    "min": 3.0,
+    "pref": 6.0,
+    "max": 8.0
+   },
+   "subs": [
+    {
+     "start": 69.8503,
+     "end": 75.0494,
+     "text": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "a.kolay",
+   "unit": "a.kolay",
+   "block": "A",
+   "phase": "Varış",
+   "start": 81.2261,
+   "end": 85.5214,
+   "speech": 4.2953,
+   "gapAfter": 9.1768,
+   "gapBounds": {
+    "min": 3.0,
+    "pref": 9.0,
+    "max": 11.0
+   },
+   "subs": [
+    {
+     "start": 81.2261,
+     "end": 85.5214,
+     "text": "Gevşemek her zaman kolay olmaz; bunda yanlış bir şey yok.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "a.agirlik",
+   "unit": "a.agirlik",
+   "block": "A",
+   "phase": "Varış",
+   "start": 94.6982,
+   "end": 97.5812,
+   "speech": 2.883,
+   "gapAfter": 8.3535,
+   "gapBounds": {
+    "min": 8.0,
+    "pref": 8.0,
+    "max": 12.0
+   },
+   "subs": [
+    {
+     "start": 94.6982,
+     "end": 97.5812,
+     "text": "Zemin seni baştan ayağa taşıyor.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "n1.sec",
+   "unit": "n1.sec",
+   "block": "N1",
+   "phase": "Derinleşme",
+   "start": 105.9348,
+   "end": 115.2527,
+   "speech": 8.2914,
+   "gapAfter": 10.4419,
+   "gapBounds": {
+    "min": 8.0,
+    "pref": 10.0,
+    "max": 15.0
+   },
+   "subs": [
+    {
+     "start": 105.9348,
+     "end": 108.7977,
+     "text": "Bugün kendine kısa bir niyet seçiyorsun.",
+     "sgapAfter": 1.0265
+    },
+    {
+     "start": 109.8243,
+     "end": 115.2527,
+     "text": "Aklına bir şey gelmezse önerim şu: \"Kendime dinlenmeye izin veriyorum.\"",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "phase:derinlesme",
+    "music": "phase:derinlesme"
+   },
+   "window": null
+  },
+  {
+   "clip": "n1.soyle",
+   "unit": "n1.soyle",
+   "block": "N1",
+   "phase": "Derinleşme",
+   "start": 125.6946,
+   "end": 128.9288,
+   "speech": 3.2342,
+   "gapAfter": 13.6187,
+   "gapBounds": {
+    "min": 10.0,
+    "pref": 13.0,
+    "max": 20.0
+   },
+   "subs": [
+    {
+     "start": 125.6946,
+     "end": 128.9288,
+     "text": "Niyetini içinden üç kez söylemek yeterli.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "n1.birak",
+   "unit": "n1.birak",
+   "block": "N1",
+   "phase": "Derinleşme",
+   "start": 142.5475,
+   "end": 149.1986,
+   "speech": 5.6245,
+   "gapAfter": 6.6326,
+   "gapBounds": {
+    "min": 6.0,
+    "pref": 6.5,
+    "max": 8.0
+   },
+   "subs": [
+    {
+     "start": 142.5475,
+     "end": 145.0966,
+     "text": "Dersin sonunda niyetini hatırlatacağım.",
+     "sgapAfter": 1.0265
+    },
+    {
+     "start": 146.1231,
+     "end": 149.1986,
+     "text": "O zamana kadar onu aklında tutman gerekmiyor.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.cerceve",
+   "unit": "c1.cerceve",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 155.8311,
+   "end": 162.3544,
+   "speech": 5.4968,
+   "gapAfter": 3.0884,
+   "gapBounds": {
+    "min": 2.5,
+    "pref": 3.0,
+    "max": 4.0
+   },
+   "subs": [
+    {
+     "start": 155.8311,
+     "end": 158.5259,
+     "text": "Adını andığım her yeri fark ediyorsun.",
+     "sgapAfter": 1.0265
+    },
+    {
+     "start": 159.5524,
+     "end": 162.3544,
+     "text": "Rahatsız eden bir bölge olursa atla.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.tekrar",
+   "unit": "c1.tekrar",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 165.4428,
+   "end": 169.236,
+   "speech": 3.7932,
+   "gapAfter": 3.5884,
+   "gapBounds": {
+    "min": 3.0,
+    "pref": 3.5,
+    "max": 4.5
+   },
+   "subs": [
+    {
+     "start": 165.4428,
+     "end": 169.236,
+     "text": "Hissetmesen de her adı içinden tekrarlayabilirsin.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s01",
+   "unit": "car.sag1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 172.8244,
+   "end": 174.6875,
+   "speech": 1.8631,
+   "gapAfter": 0.8811,
+   "gapBounds": {
+    "min": 0.8,
+    "pref": 0.8369160997732428,
+    "max": 1.3369160997732428
+   },
+   "subs": [
+    {
+     "start": 172.8244,
+     "end": 174.6875,
+     "text": "Sağ elin başparmağı…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s02",
+   "unit": "car.sag1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 175.5686,
+   "end": 176.9776,
+   "speech": 1.4091,
+   "gapAfter": 1.3351,
+   "gapBounds": {
+    "min": 0.9909297052154193,
+    "pref": 1.2909297052154196,
+    "max": 1.7909297052154196
+   },
+   "subs": [
+    {
+     "start": 175.5686,
+     "end": 176.9776,
+     "text": "işaret parmağı…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s03",
+   "unit": "car.sag1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 178.3128,
+   "end": 179.5949,
+   "speech": 1.2821,
+   "gapAfter": 1.4621,
+   "gapBounds": {
+    "min": 1.1178911564625849,
+    "pref": 1.4178911564625851,
+    "max": 1.9178911564625851
+   },
+   "subs": [
+    {
+     "start": 178.3128,
+     "end": 179.5949,
+     "text": "orta parmak…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s04",
+   "unit": "car.sag1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 181.0569,
+   "end": 182.3098,
+   "speech": 1.2528,
+   "gapAfter": 1.4914,
+   "gapBounds": {
+    "min": 1.14718820861678,
+    "pref": 1.4471882086167802,
+    "max": 1.9471882086167802
+   },
+   "subs": [
+    {
+     "start": 181.0569,
+     "end": 182.3098,
+     "text": "yüzük parmağı…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s05",
+   "unit": "car.sag1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 183.8011,
+   "end": 185.1684,
+   "speech": 1.3673,
+   "gapAfter": 1.3769,
+   "gapBounds": {
+    "min": 1.0327437641723356,
+    "pref": 1.3327437641723359,
+    "max": 1.8327437641723359
+   },
+   "subs": [
+    {
+     "start": 183.8011,
+     "end": 185.1684,
+     "text": "serçe parmak…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s06",
+   "unit": "car.sag2",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 186.5453,
+   "end": 187.7267,
+   "speech": 1.1814,
+   "gapAfter": 1.5628,
+   "gapBounds": {
+    "min": 1.2186167800453513,
+    "pref": 1.5186167800453516,
+    "max": 2.0186167800453516
+   },
+   "subs": [
+    {
+     "start": 186.5453,
+     "end": 187.7267,
+     "text": "avuç içi…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s07",
+   "unit": "car.sag2",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 189.2895,
+   "end": 190.4495,
+   "speech": 1.16,
+   "gapAfter": 1.5842,
+   "gapBounds": {
+    "min": 1.2400226757369615,
+    "pref": 1.5400226757369617,
+    "max": 2.040022675736962
+   },
+   "subs": [
+    {
+     "start": 189.2895,
+     "end": 190.4495,
+     "text": "elin sırtı…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s08",
+   "unit": "car.sag2",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 192.0337,
+   "end": 192.9717,
+   "speech": 0.9379,
+   "gapAfter": 1.8063,
+   "gapBounds": {
+    "min": 1.4620634920634918,
+    "pref": 1.762063492063492,
+    "max": 2.262063492063492
+   },
+   "subs": [
+    {
+     "start": 192.0337,
+     "end": 192.9717,
+     "text": "bilek…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s09",
+   "unit": "car.sag2",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 194.7779,
+   "end": 195.6704,
+   "speech": 0.8925,
+   "gapAfter": 1.8517,
+   "gapBounds": {
+    "min": 1.5075056689342403,
+    "pref": 1.8075056689342406,
+    "max": 2.3075056689342404
+   },
+   "subs": [
+    {
+     "start": 194.7779,
+     "end": 195.6704,
+     "text": "ön kol…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s10",
+   "unit": "car.sag2",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 197.5221,
+   "end": 198.5429,
+   "speech": 1.0208,
+   "gapAfter": 1.7234,
+   "gapBounds": {
+    "min": 1.379206349206349,
+    "pref": 1.6792063492063494,
+    "max": 2.1792063492063494
+   },
+   "subs": [
+    {
+     "start": 197.5221,
+     "end": 198.5429,
+     "text": "dirsek…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s11",
+   "unit": "car.sag3",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 200.2663,
+   "end": 201.3023,
+   "speech": 1.036,
+   "gapAfter": 1.7082,
+   "gapBounds": {
+    "min": 1.3640136054421768,
+    "pref": 1.664013605442177,
+    "max": 2.164013605442177
+   },
+   "subs": [
+    {
+     "start": 200.2663,
+     "end": 201.3023,
+     "text": "üst kol…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s12",
+   "unit": "car.sag3",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 203.0105,
+   "end": 203.9771,
+   "speech": 0.9666,
+   "gapAfter": 1.7775,
+   "gapBounds": {
+    "min": 1.4333560090702946,
+    "pref": 1.7333560090702949,
+    "max": 2.233356009070295
+   },
+   "subs": [
+    {
+     "start": 203.0105,
+     "end": 203.9771,
+     "text": "omuz…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s13",
+   "unit": "car.sag3",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 205.7547,
+   "end": 207.1931,
+   "speech": 1.4384,
+   "gapAfter": 1.3058,
+   "gapBounds": {
+    "min": 0.9616326530612245,
+    "pref": 1.2616326530612247,
+    "max": 1.7616326530612247
+   },
+   "subs": [
+    {
+     "start": 205.7547,
+     "end": 207.1931,
+     "text": "belin sağ yanı…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s14",
+   "unit": "car.sag3",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 208.4989,
+   "end": 209.4023,
+   "speech": 0.9034,
+   "gapAfter": 1.8408,
+   "gapBounds": {
+    "min": 1.4966213151927437,
+    "pref": 1.796621315192744,
+    "max": 2.296621315192744
+   },
+   "subs": [
+    {
+     "start": 208.4989,
+     "end": 209.4023,
+     "text": "kalça…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s15",
+   "unit": "car.sag4",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 211.2431,
+   "end": 212.2398,
+   "speech": 0.9967,
+   "gapAfter": 1.7475,
+   "gapBounds": {
+    "min": 1.403265306122449,
+    "pref": 1.7032653061224492,
+    "max": 2.203265306122449
+   },
+   "subs": [
+    {
+     "start": 211.2431,
+     "end": 212.2398,
+     "text": "uyluk…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s16",
+   "unit": "car.sag4",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 213.9873,
+   "end": 214.899,
+   "speech": 0.9117,
+   "gapAfter": 1.8325,
+   "gapBounds": {
+    "min": 1.4882766439909296,
+    "pref": 1.78827664399093,
+    "max": 2.2882766439909297
+   },
+   "subs": [
+    {
+     "start": 213.9873,
+     "end": 214.899,
+     "text": "diz…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s17",
+   "unit": "car.sag4",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 216.7315,
+   "end": 217.7711,
+   "speech": 1.0397,
+   "gapAfter": 1.7045,
+   "gapBounds": {
+    "min": 1.3603401360544216,
+    "pref": 1.6603401360544219,
+    "max": 2.1603401360544217
+   },
+   "subs": [
+    {
+     "start": 216.7315,
+     "end": 217.7711,
+     "text": "baldır…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s18",
+   "unit": "car.sag4",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 219.4757,
+   "end": 220.5752,
+   "speech": 1.0995,
+   "gapAfter": 1.6447,
+   "gapBounds": {
+    "min": 1.3004761904761903,
+    "pref": 1.6004761904761906,
+    "max": 2.100476190476191
+   },
+   "subs": [
+    {
+     "start": 219.4757,
+     "end": 220.5752,
+     "text": "ayak bileği…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s19",
+   "unit": "car.sag4",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 222.2198,
+   "end": 223.1372,
+   "speech": 0.9174,
+   "gapAfter": 1.8268,
+   "gapBounds": {
+    "min": 1.4826077097505668,
+    "pref": 1.782607709750567,
+    "max": 2.2826077097505673
+   },
+   "subs": [
+    {
+     "start": 222.2198,
+     "end": 223.1372,
+     "text": "topuk…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.s20",
+   "unit": "car.sag4",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 224.964,
+   "end": 226.047,
+   "speech": 1.0829,
+   "gapAfter": 3.1326,
+   "gapBounds": {
+    "min": 2.0,
+    "pref": 3.0,
+    "max": 4.5
+   },
+   "subs": [
+    {
+     "start": 224.964,
+     "end": 226.047,
+     "text": "ayak tabanı…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.kacirma",
+   "unit": "c1.kacirma",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 229.1795,
+   "end": 232.5566,
+   "speech": 3.3771,
+   "gapAfter": 3.1326,
+   "gapBounds": {
+    "min": 2.5,
+    "pref": 3.0,
+    "max": 4.5
+   },
+   "subs": [
+    {
+     "start": 229.1795,
+     "end": 232.5566,
+     "text": "Bir adı kaçırırsan bir sonrakiyle devam edersin.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l01",
+   "unit": "car.sol1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 235.6892,
+   "end": 237.5038,
+   "speech": 1.8146,
+   "gapAfter": 0.9296,
+   "gapBounds": {
+    "min": 0.8,
+    "pref": 0.8853968253968256,
+    "max": 1.3853968253968256
+   },
+   "subs": [
+    {
+     "start": 235.6892,
+     "end": 237.5038,
+     "text": "Sol elin başparmağı…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l02",
+   "unit": "car.sol1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 238.4334,
+   "end": 239.8184,
+   "speech": 1.385,
+   "gapAfter": 1.3592,
+   "gapBounds": {
+    "min": 1.0149659863945577,
+    "pref": 1.314965986394558,
+    "max": 1.814965986394558
+   },
+   "subs": [
+    {
+     "start": 238.4334,
+     "end": 239.8184,
+     "text": "işaret parmağı…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l03",
+   "unit": "car.sol1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 241.1776,
+   "end": 242.456,
+   "speech": 1.2785,
+   "gapAfter": 1.4657,
+   "gapBounds": {
+    "min": 1.1215419501133785,
+    "pref": 1.4215419501133788,
+    "max": 1.9215419501133788
+   },
+   "subs": [
+    {
+     "start": 241.1776,
+     "end": 242.456,
+     "text": "orta parmak…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l04",
+   "unit": "car.sol1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 243.9218,
+   "end": 245.17,
+   "speech": 1.2483,
+   "gapAfter": 1.4959,
+   "gapBounds": {
+    "min": 1.1517460317460317,
+    "pref": 1.451746031746032,
+    "max": 1.951746031746032
+   },
+   "subs": [
+    {
+     "start": 243.9218,
+     "end": 245.17,
+     "text": "yüzük parmağı…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l05",
+   "unit": "car.sol1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 246.666,
+   "end": 248.0176,
+   "speech": 1.3516,
+   "gapAfter": 1.3926,
+   "gapBounds": {
+    "min": 1.0483673469387753,
+    "pref": 1.3483673469387756,
+    "max": 1.8483673469387756
+   },
+   "subs": [
+    {
+     "start": 246.666,
+     "end": 248.0176,
+     "text": "serçe parmak…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l06",
+   "unit": "car.sol2",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 249.4102,
+   "end": 250.5883,
+   "speech": 1.1781,
+   "gapAfter": 1.5661,
+   "gapBounds": {
+    "min": 1.2219047619047618,
+    "pref": 1.521904761904762,
+    "max": 2.021904761904762
+   },
+   "subs": [
+    {
+     "start": 249.4102,
+     "end": 250.5883,
+     "text": "avuç içi…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l07",
+   "unit": "car.sol2",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 252.1544,
+   "end": 253.3718,
+   "speech": 1.2174,
+   "gapAfter": 1.5268,
+   "gapBounds": {
+    "min": 1.1825850340136053,
+    "pref": 1.4825850340136055,
+    "max": 1.9825850340136055
+   },
+   "subs": [
+    {
+     "start": 252.1544,
+     "end": 253.3718,
+     "text": "elin sırtı…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l08",
+   "unit": "car.sol2",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 254.8985,
+   "end": 255.8116,
+   "speech": 0.913,
+   "gapAfter": 1.8312,
+   "gapBounds": {
+    "min": 1.4869841269841269,
+    "pref": 1.7869841269841271,
+    "max": 2.286984126984127
+   },
+   "subs": [
+    {
+     "start": 254.8985,
+     "end": 255.8116,
+     "text": "bilek…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l09",
+   "unit": "car.sol2",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 257.6427,
+   "end": 258.5375,
+   "speech": 0.8947,
+   "gapAfter": 1.8495,
+   "gapBounds": {
+    "min": 1.505283446712018,
+    "pref": 1.8052834467120182,
+    "max": 2.3052834467120182
+   },
+   "subs": [
+    {
+     "start": 257.6427,
+     "end": 258.5375,
+     "text": "ön kol…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l10",
+   "unit": "car.sol2",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 260.3869,
+   "end": 261.4024,
+   "speech": 1.0155,
+   "gapAfter": 1.7287,
+   "gapBounds": {
+    "min": 1.3845124716553288,
+    "pref": 1.684512471655329,
+    "max": 2.184512471655329
+   },
+   "subs": [
+    {
+     "start": 260.3869,
+     "end": 261.4024,
+     "text": "dirsek…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l11",
+   "unit": "car.sol3",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 263.1311,
+   "end": 264.1884,
+   "speech": 1.0573,
+   "gapAfter": 1.6869,
+   "gapBounds": {
+    "min": 1.3427437641723354,
+    "pref": 1.6427437641723357,
+    "max": 2.1427437641723355
+   },
+   "subs": [
+    {
+     "start": 263.1311,
+     "end": 264.1884,
+     "text": "üst kol…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l12",
+   "unit": "car.sol3",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 265.8753,
+   "end": 266.8277,
+   "speech": 0.9523,
+   "gapAfter": 1.7919,
+   "gapBounds": {
+    "min": 1.4476643990929703,
+    "pref": 1.7476643990929706,
+    "max": 2.2476643990929706
+   },
+   "subs": [
+    {
+     "start": 265.8753,
+     "end": 266.8277,
+     "text": "omuz…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l13",
+   "unit": "car.sol3",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 268.6195,
+   "end": 270.0555,
+   "speech": 1.4359,
+   "gapAfter": 1.3083,
+   "gapBounds": {
+    "min": 0.9640589569160998,
+    "pref": 1.2640589569161,
+    "max": 1.7640589569161
+   },
+   "subs": [
+    {
+     "start": 268.6195,
+     "end": 270.0555,
+     "text": "belin sol yanı…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l14",
+   "unit": "car.sol3",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 271.3637,
+   "end": 272.2425,
+   "speech": 0.8788,
+   "gapAfter": 1.8653,
+   "gapBounds": {
+    "min": 1.5211564625850338,
+    "pref": 1.821156462585034,
+    "max": 2.321156462585034
+   },
+   "subs": [
+    {
+     "start": 271.3637,
+     "end": 272.2425,
+     "text": "kalça…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l15",
+   "unit": "car.sol4",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 274.1079,
+   "end": 275.1169,
+   "speech": 1.009,
+   "gapAfter": 1.7351,
+   "gapBounds": {
+    "min": 1.390952380952381,
+    "pref": 1.6909523809523812,
+    "max": 2.190952380952381
+   },
+   "subs": [
+    {
+     "start": 274.1079,
+     "end": 275.1169,
+     "text": "uyluk…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l16",
+   "unit": "car.sol4",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 276.8521,
+   "end": 277.7541,
+   "speech": 0.902,
+   "gapAfter": 1.8422,
+   "gapBounds": {
+    "min": 1.498004535147392,
+    "pref": 1.7980045351473923,
+    "max": 2.2980045351473923
+   },
+   "subs": [
+    {
+     "start": 276.8521,
+     "end": 277.7541,
+     "text": "diz…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l17",
+   "unit": "car.sol4",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 279.5963,
+   "end": 280.64,
+   "speech": 1.0437,
+   "gapAfter": 1.7005,
+   "gapBounds": {
+    "min": 1.3562585034013606,
+    "pref": 1.6562585034013608,
+    "max": 2.156258503401361
+   },
+   "subs": [
+    {
+     "start": 279.5963,
+     "end": 280.64,
+     "text": "baldır…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l18",
+   "unit": "car.sol4",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 282.3405,
+   "end": 283.4832,
+   "speech": 1.1428,
+   "gapAfter": 1.6014,
+   "gapBounds": {
+    "min": 1.2572335600907028,
+    "pref": 1.557233560090703,
+    "max": 2.057233560090703
+   },
+   "subs": [
+    {
+     "start": 282.3405,
+     "end": 283.4832,
+     "text": "ayak bileği…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l19",
+   "unit": "car.sol4",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 285.0847,
+   "end": 286.0129,
+   "speech": 0.9282,
+   "gapAfter": 1.816,
+   "gapBounds": {
+    "min": 1.471814058956916,
+    "pref": 1.7718140589569162,
+    "max": 2.2718140589569162
+   },
+   "subs": [
+    {
+     "start": 285.0847,
+     "end": 286.0129,
+     "text": "topuk…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.l20",
+   "unit": "car.sol4",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 287.8289,
+   "end": 288.9249,
+   "speech": 1.0961,
+   "gapAfter": 3.1326,
+   "gapBounds": {
+    "min": 2.0,
+    "pref": 3.0,
+    "max": 4.5
+   },
+   "subs": [
+    {
+     "start": 287.8289,
+     "end": 288.9249,
+     "text": "ayak tabanı…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.gecis.arka",
+   "unit": "c1.gecis.arka",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 292.0575,
+   "end": 293.9047,
+   "speech": 1.8472,
+   "gapAfter": 2.0884,
+   "gapBounds": {
+    "min": 1.5,
+    "pref": 2.0,
+    "max": 3.0
+   },
+   "subs": [
+    {
+     "start": 292.0575,
+     "end": 293.9047,
+     "text": "Bedenin arka tarafı.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.b01",
+   "unit": "car.sirt",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 295.9931,
+   "end": 297.5579,
+   "speech": 1.5648,
+   "gapAfter": 1.1794,
+   "gapBounds": {
+    "min": 0.8351927437641722,
+    "pref": 1.1351927437641725,
+    "max": 1.6351927437641725
+   },
+   "subs": [
+    {
+     "start": 295.9931,
+     "end": 297.5579,
+     "text": "Sağ kürek kemiği…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.b02",
+   "unit": "car.sirt",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 298.7373,
+   "end": 300.2606,
+   "speech": 1.5234,
+   "gapAfter": 1.2208,
+   "gapBounds": {
+    "min": 0.8766213151927438,
+    "pref": 1.176621315192744,
+    "max": 1.676621315192744
+   },
+   "subs": [
+    {
+     "start": 298.7373,
+     "end": 300.2606,
+     "text": "sol kürek kemiği…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.b03",
+   "unit": "car.sirt",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 301.4815,
+   "end": 302.7117,
+   "speech": 1.2302,
+   "gapAfter": 1.5139,
+   "gapBounds": {
+    "min": 1.169750566893424,
+    "pref": 1.4697505668934243,
+    "max": 1.9697505668934243
+   },
+   "subs": [
+    {
+     "start": 301.4815,
+     "end": 302.7117,
+     "text": "bel boşluğu…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.b04",
+   "unit": "car.sirt",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 304.2257,
+   "end": 306.4439,
+   "speech": 2.2183,
+   "gapAfter": 3.1326,
+   "gapBounds": {
+    "min": 2.0,
+    "pref": 3.0,
+    "max": 4.5
+   },
+   "subs": [
+    {
+     "start": 304.2257,
+     "end": 306.4439,
+     "text": "omurga, boydan boya…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.b05",
+   "unit": "car.sirt",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 309.5765,
+   "end": 311.008,
+   "speech": 1.4315,
+   "gapAfter": 3.1326,
+   "gapBounds": {
+    "min": 2.0,
+    "pref": 3.0,
+    "max": 4.5
+   },
+   "subs": [
+    {
+     "start": 309.5765,
+     "end": 311.008,
+     "text": "bütün sırt.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.gecis.on",
+   "unit": "c1.gecis.on",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 314.1406,
+   "end": 319.6114,
+   "speech": 4.4443,
+   "gapAfter": 2.0884,
+   "gapBounds": {
+    "min": 1.5,
+    "pref": 2.0,
+    "max": 3.0
+   },
+   "subs": [
+    {
+     "start": 314.1406,
+     "end": 316.4971,
+     "text": "Yüzün ve bedenin ön tarafı.",
+     "sgapAfter": 1.0265
+    },
+    {
+     "start": 317.5236,
+     "end": 319.6114,
+     "text": "İstemediğin yeri yine atla.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.f02",
+   "unit": "car.on1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 321.6998,
+   "end": 322.3975,
+   "speech": 0.6977,
+   "gapAfter": 2.0465,
+   "gapBounds": {
+    "min": 1.702312925170068,
+    "pref": 2.0023129251700684,
+    "max": 2.5023129251700684
+   },
+   "subs": [
+    {
+     "start": 321.6998,
+     "end": 322.3975,
+     "text": "alın…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.f07",
+   "unit": "car.on2",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 324.444,
+   "end": 325.8122,
+   "speech": 1.3682,
+   "gapAfter": 1.376,
+   "gapBounds": {
+    "min": 1.031768707482993,
+    "pref": 1.3317687074829934,
+    "max": 1.8317687074829934
+   },
+   "subs": [
+    {
+     "start": 324.444,
+     "end": 325.8122,
+     "text": "göz kapakları…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.f20",
+   "unit": "car.on3",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 327.1882,
+   "end": 328.2253,
+   "speech": 1.0372,
+   "gapAfter": 1.707,
+   "gapBounds": {
+    "min": 1.3628344671201813,
+    "pref": 1.6628344671201816,
+    "max": 2.162834467120182
+   },
+   "subs": [
+    {
+     "start": 327.1882,
+     "end": 328.2253,
+     "text": "göğüs…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.w07",
+   "unit": "car.butun",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 329.9324,
+   "end": 332.2136,
+   "speech": 2.2812,
+   "gapAfter": 3.1326,
+   "gapBounds": {
+    "min": 2.0,
+    "pref": 3.0,
+    "max": 4.5
+   },
+   "subs": [
+    {
+     "start": 329.9324,
+     "end": 332.2136,
+     "text": "baştan ayağa bütün beden…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c1.k1",
+   "unit": "c1.k1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 335.3462,
+   "end": 339.0657,
+   "speech": 3.7195,
+   "gapAfter": 7.4419,
+   "gapBounds": {
+    "min": 5.0,
+    "pref": 7.0,
+    "max": 12.0
+   },
+   "subs": [
+    {
+     "start": 335.3462,
+     "end": 339.0657,
+     "text": "Bedenin dinlenebilir; sen uyanık kalıyorsun.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c2.dikkat",
+   "unit": "c2.dikkat",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 346.5076,
+   "end": 355.233,
+   "speech": 6.8635,
+   "gapAfter": 10.3535,
+   "gapBounds": {
+    "min": 7.0,
+    "pref": 10.0,
+    "max": 14.0
+   },
+   "subs": [
+    {
+     "start": 346.5076,
+     "end": 349.8569,
+     "text": "Şimdi nefesini değiştirmeden izlemek yeterli.",
+     "sgapAfter": 1.8619
+    },
+    {
+     "start": 351.7188,
+     "end": 355.233,
+     "text": "Ellerini hissetmek ya da gözlerini açmak da olur.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "phase:derin",
+    "music": "phase:derin"
+   },
+   "window": null
+  },
+  {
+   "clip": "c2.yer",
+   "unit": "c2.yer",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 365.5865,
+   "end": 375.8486,
+   "speech": 8.4002,
+   "gapAfter": 14.4419,
+   "gapBounds": {
+    "min": 11.0,
+    "pref": 14.0,
+    "max": 19.0
+   },
+   "subs": [
+    {
+     "start": 365.5865,
+     "end": 370.1513,
+     "text": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin.",
+     "sgapAfter": 1.8619
+    },
+    {
+     "start": 372.0131,
+     "end": 375.8486,
+     "text": "Burun, göğüs, karın ya da başka bir nokta.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c2.alt",
+   "unit": "c2.alt",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 390.2905,
+   "end": 394.1692,
+   "speech": 3.8787,
+   "gapAfter": 10.2652,
+   "gapBounds": {
+    "min": 9.0,
+    "pref": 10.0,
+    "max": 13.0
+   },
+   "subs": [
+    {
+     "start": 390.2905,
+     "end": 394.1692,
+     "text": "Dikkatin ellerindeyse avuçlarını hissedebilirsin.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c2.akis",
+   "unit": "c2.akis",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 404.4344,
+   "end": 411.7569,
+   "speech": 4.2342,
+   "gapAfter": 12.5303,
+   "gapBounds": {
+    "min": 9.0,
+    "pref": 12.0,
+    "max": 18.0
+   },
+   "subs": [
+    {
+     "start": 404.4344,
+     "end": 406.8694,
+     "text": "Nefes kendiliğinden geliyor.",
+     "sgapAfter": 3.0884
+    },
+    {
+     "start": 409.9578,
+     "end": 411.7569,
+     "text": "Kendiliğinden gidiyor.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c2.sayac",
+   "unit": "c2.sayac",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 424.2873,
+   "end": 430.1611,
+   "speech": 4.0119,
+   "gapAfter": 3.0884,
+   "gapBounds": {
+    "min": 2.5,
+    "pref": 3.0,
+    "max": 4.0
+   },
+   "subs": [
+    {
+     "start": 424.2873,
+     "end": 425.9171,
+     "text": "Geriye doğru sayacağım.",
+     "sgapAfter": 1.8619
+    },
+    {
+     "start": 427.7789,
+     "end": 430.1611,
+     "text": "Nefes sayılara uymak zorunda değil.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c2.n10",
+   "unit": "car.sayi",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 433.2494,
+   "end": 433.9359,
+   "speech": 0.6864,
+   "gapAfter": 5.3401,
+   "gapBounds": {
+    "min": 5.113582766439909,
+    "pref": 5.313582766439909,
+    "max": 5.613582766439909
+   },
+   "subs": [
+    {
+     "start": 433.2494,
+     "end": 433.9359,
+     "text": "on…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "pulse",
+    "breath": {
+     "count": 10
+    }
+   },
+   "window": null
+  },
+  {
+   "clip": "c2.n09",
+   "unit": "car.sayi",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 439.276,
+   "end": 440.2715,
+   "speech": 0.9955,
+   "gapAfter": 5.031,
+   "gapBounds": {
+    "min": 4.804467120181406,
+    "pref": 5.004467120181406,
+    "max": 5.304467120181406
+   },
+   "subs": [
+    {
+     "start": 439.276,
+     "end": 440.2715,
+     "text": "dokuz…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "pulse",
+    "breath": {
+     "count": 9
+    }
+   },
+   "window": null
+  },
+  {
+   "clip": "c2.n08",
+   "unit": "car.sayi",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 445.3025,
+   "end": 446.3546,
+   "speech": 1.0521,
+   "gapAfter": 4.9744,
+   "gapBounds": {
+    "min": 4.747913832199546,
+    "pref": 4.947913832199546,
+    "max": 5.247913832199546
+   },
+   "subs": [
+    {
+     "start": 445.3025,
+     "end": 446.3546,
+     "text": "sekiz…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "pulse",
+    "breath": {
+     "count": 8
+    }
+   },
+   "window": null
+  },
+  {
+   "clip": "c2.n07",
+   "unit": "car.sayi",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 451.329,
+   "end": 452.1067,
+   "speech": 0.7777,
+   "gapAfter": 5.2489,
+   "gapBounds": {
+    "min": 5.022335600907029,
+    "pref": 5.222335600907029,
+    "max": 5.522335600907029
+   },
+   "subs": [
+    {
+     "start": 451.329,
+     "end": 452.1067,
+     "text": "yedi…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "pulse",
+    "breath": {
+     "count": 7
+    }
+   },
+   "window": null
+  },
+  {
+   "clip": "c2.n06",
+   "unit": "car.sayi",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 457.3555,
+   "end": 458.2271,
+   "speech": 0.8716,
+   "gapAfter": 5.1549,
+   "gapBounds": {
+    "min": 4.928367346938775,
+    "pref": 5.128367346938775,
+    "max": 5.428367346938775
+   },
+   "subs": [
+    {
+     "start": 457.3555,
+     "end": 458.2271,
+     "text": "altı…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "pulse",
+    "breath": {
+     "count": 6
+    }
+   },
+   "window": null
+  },
+  {
+   "clip": "c2.n05",
+   "unit": "car.sayi",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 463.382,
+   "end": 464.3603,
+   "speech": 0.9783,
+   "gapAfter": 5.0483,
+   "gapBounds": {
+    "min": 4.821746031746032,
+    "pref": 5.021746031746032,
+    "max": 5.321746031746032
+   },
+   "subs": [
+    {
+     "start": 463.382,
+     "end": 464.3603,
+     "text": "beş…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "pulse",
+    "breath": {
+     "count": 5
+    }
+   },
+   "window": null
+  },
+  {
+   "clip": "c2.n04",
+   "unit": "car.sayi",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 469.4085,
+   "end": 470.3355,
+   "speech": 0.927,
+   "gapAfter": 5.0995,
+   "gapBounds": {
+    "min": 4.873015873015873,
+    "pref": 5.073015873015873,
+    "max": 5.373015873015873
+   },
+   "subs": [
+    {
+     "start": 469.4085,
+     "end": 470.3355,
+     "text": "dört…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "pulse",
+    "breath": {
+     "count": 4
+    }
+   },
+   "window": null
+  },
+  {
+   "clip": "c2.n03",
+   "unit": "car.sayi",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 475.4351,
+   "end": 476.2643,
+   "speech": 0.8293,
+   "gapAfter": 5.1973,
+   "gapBounds": {
+    "min": 4.970748299319728,
+    "pref": 5.170748299319728,
+    "max": 5.470748299319728
+   },
+   "subs": [
+    {
+     "start": 475.4351,
+     "end": 476.2643,
+     "text": "üç…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "pulse",
+    "breath": {
+     "count": 3
+    }
+   },
+   "window": null
+  },
+  {
+   "clip": "c2.n02",
+   "unit": "car.sayi",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 481.4616,
+   "end": 482.2784,
+   "speech": 0.8168,
+   "gapAfter": 5.2097,
+   "gapBounds": {
+    "min": 4.983219954648526,
+    "pref": 5.183219954648526,
+    "max": 5.483219954648526
+   },
+   "subs": [
+    {
+     "start": 481.4616,
+     "end": 482.2784,
+     "text": "iki…",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "pulse",
+    "breath": {
+     "count": 2
+    }
+   },
+   "window": null
+  },
+  {
+   "clip": "c2.n01",
+   "unit": "car.sayi",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 487.4881,
+   "end": 488.3611,
+   "speech": 0.873,
+   "gapAfter": 7.1768,
+   "gapBounds": {
+    "min": 5.0,
+    "pref": 7.0,
+    "max": 9.0
+   },
+   "subs": [
+    {
+     "start": 487.4881,
+     "end": 488.3611,
+     "text": "bir.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "pulse",
+    "breath": {
+     "count": 1
+    }
+   },
+   "window": null
+  },
+  {
+   "clip": "c2.birak",
+   "unit": "c2.birak",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 495.5379,
+   "end": 502.6546,
+   "speech": 5.2549,
+   "gapAfter": 6.1768,
+   "gapBounds": {
+    "min": 5.0,
+    "pref": 6.0,
+    "max": 8.0
+   },
+   "subs": [
+    {
+     "start": 495.5379,
+     "end": 497.2134,
+     "text": "Sayıları bırakabilirsin.",
+     "sgapAfter": 1.8619
+    },
+    {
+     "start": 499.0753,
+     "end": 502.6546,
+     "text": "Zihnin arada başka yerlere kaydıysa o da olur.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c2.kal",
+   "unit": "c2.kal",
+   "block": "C2",
+   "phase": "Derin",
+   "start": 508.8314,
+   "end": 512.3461,
+   "speech": 3.5147,
+   "gapAfter": 16.3535,
+   "gapBounds": {
+    "min": 12.0,
+    "pref": 16.0,
+    "max": 20.0
+   },
+   "subs": [
+    {
+     "start": 508.8314,
+     "end": 512.3461,
+     "text": "Bir süre hiçbir şey yapmadan dinlenmek var.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "br.k2",
+   "unit": "br.k2",
+   "block": "BR.K2",
+   "phase": "Derin",
+   "start": 528.6996,
+   "end": 532.1215,
+   "speech": 3.4219,
+   "gapAfter": 12.1768,
+   "gapBounds": {
+    "min": 11.0,
+    "pref": 12.0,
+    "max": 14.0
+   },
+   "subs": [
+    {
+     "start": 528.6996,
+     "end": 532.1215,
+     "text": "Bedenin dinlenebilir; sen uyanıksın.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "br.orta",
+   "unit": "br.orta",
+   "block": "BR.orta",
+   "phase": "Derin",
+   "start": 544.2983,
+   "end": 558.274,
+   "speech": 10.252,
+   "gapAfter": 13.1768,
+   "gapBounds": {
+    "min": 12.0,
+    "pref": 13.0,
+    "max": 15.0
+   },
+   "subs": [
+    {
+     "start": 544.2983,
+     "end": 549.8022,
+     "text": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde.",
+     "sgapAfter": 1.8619
+    },
+    {
+     "start": 551.6641,
+     "end": 554.3114,
+     "text": "Gözlerin açıksa bakışın serbest.",
+     "sgapAfter": 1.8619
+    },
+    {
+     "start": 556.1733,
+     "end": 558.274,
+     "text": "Zemin seni hep taşıyor.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c4.yer",
+   "unit": "c4.yer",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 571.4508,
+   "end": 574.9583,
+   "speech": 3.5076,
+   "gapAfter": 12.2652,
+   "gapBounds": {
+    "min": 10.0,
+    "pref": 12.0,
+    "max": 15.0
+   },
+   "subs": [
+    {
+     "start": 571.4508,
+     "end": 574.9583,
+     "text": "Zihninde sana iyi gelen bir orman belirebilir.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "image:on",
+    "music": "layer:imge",
+    "nature": "sahne: kıyı → uzak dalga, orman → yaprak; ana metinde doğa −8 dB (L2-03)"
+   },
+   "window": null
+  },
+  {
+   "clip": "c4.gelmezse",
+   "unit": "c4.gelmezse",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 587.2235,
+   "end": 591.3149,
+   "speech": 4.0914,
+   "gapAfter": 12.2652,
+   "gapBounds": {
+    "min": 9.0,
+    "pref": 12.0,
+    "max": 15.0
+   },
+   "subs": [
+    {
+     "start": 587.2235,
+     "end": 591.3149,
+     "text": "Bir görüntü gelmese de olur, gözlerin açık kalsa da.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c4.patika",
+   "unit": "c4.patika",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 603.58,
+   "end": 607.0167,
+   "speech": 3.4367,
+   "gapAfter": 6.5884,
+   "gapBounds": {
+    "min": 6.0,
+    "pref": 6.5,
+    "max": 7.5
+   },
+   "subs": [
+    {
+     "start": 603.58,
+     "end": 607.0167,
+     "text": "Kendini yumuşak bir patikanın başında bulabilirsin.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c4.yol",
+   "unit": "c4.yol",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 613.6051,
+   "end": 619.072,
+   "speech": 3.6051,
+   "gapAfter": 14.3535,
+   "gapBounds": {
+    "min": 11.0,
+    "pref": 14.0,
+    "max": 18.0
+   },
+   "subs": [
+    {
+     "start": 613.6051,
+     "end": 615.4139,
+     "text": "Yol önünde açılıyor.",
+     "sgapAfter": 1.8619
+    },
+    {
+     "start": 617.2757,
+     "end": 619.072,
+     "text": "Kendi hızında yürüyorsun.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c4.ses",
+   "unit": "c4.ses",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 633.4256,
+   "end": 636.1936,
+   "speech": 2.768,
+   "gapAfter": 12.4419,
+   "gapBounds": {
+    "min": 8.0,
+    "pref": 12.0,
+    "max": 17.0
+   },
+   "subs": [
+    {
+     "start": 633.4256,
+     "end": 636.1936,
+     "text": "Uzaktan gelip giden yaprak hışırtısı.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c4.gunes",
+   "unit": "c4.gunes",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 648.6355,
+   "end": 656.2677,
+   "speech": 5.7703,
+   "gapAfter": 11.4419,
+   "gapBounds": {
+    "min": 8.0,
+    "pref": 11.0,
+    "max": 16.0
+   },
+   "subs": [
+    {
+     "start": 648.6355,
+     "end": 651.3646,
+     "text": "Açık, aydınlık bir yere varıyorsun.",
+     "sgapAfter": 1.8619
+    },
+    {
+     "start": 653.2264,
+     "end": 656.2677,
+     "text": "Güneş tenini tatlı tatlı ısıtıyor.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c4.don",
+   "unit": "c4.don",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 667.7096,
+   "end": 671.3128,
+   "speech": 3.6032,
+   "gapAfter": 16.1768,
+   "gapBounds": {
+    "min": 12.0,
+    "pref": 16.0,
+    "max": 18.0
+   },
+   "subs": [
+    {
+     "start": 667.7096,
+     "end": 671.3128,
+     "text": "Aynı patikadan, acele etmeden geri dönüyorsun.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "c4.solma",
+   "unit": "c4.solma",
+   "block": "C4",
+   "phase": "Derin",
+   "start": 687.4896,
+   "end": 694.7783,
+   "speech": 5.4268,
+   "gapAfter": 14.1768,
+   "gapBounds": {
+    "min": 10.0,
+    "pref": 14.0,
+    "max": 16.0
+   },
+   "subs": [
+    {
+     "start": 687.4896,
+     "end": 689.7604,
+     "text": "Görüntü usulca siliniyor.",
+     "sgapAfter": 1.8619
+    },
+    {
+     "start": 691.6223,
+     "end": 694.7783,
+     "text": "Seni taşıyan zemini yeniden hissedebilirsin.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "visual": "image:off",
+    "music": "layer:imge-off",
+    "nature": "restore"
+   },
+   "window": null
+  },
+  {
+   "clip": "n2.hatirla",
+   "unit": "n2.hatirla",
+   "block": "N2",
+   "phase": "Derin",
+   "start": 708.955,
+   "end": 718.8682,
+   "speech": 8.0513,
+   "gapAfter": 17.2652,
+   "gapBounds": {
+    "min": 10.0,
+    "pref": 17.0,
+    "max": 20.0
+   },
+   "subs": [
+    {
+     "start": 708.955,
+     "end": 712.9876,
+     "text": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli.",
+     "sgapAfter": 1.8619
+    },
+    {
+     "start": 714.8495,
+     "end": 718.8682,
+     "text": "Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "n2.dilek",
+   "unit": "n2.dilek",
+   "block": "N2",
+   "phase": "Derin",
+   "start": 736.1333,
+   "end": 739.5641,
+   "speech": 3.4308,
+   "gapAfter": 7.2652,
+   "gapBounds": {
+    "min": 5.0,
+    "pref": 7.0,
+    "max": 10.0
+   },
+   "subs": [
+    {
+     "start": 736.1333,
+     "end": 739.5641,
+     "text": "Niyetini dersten sonra da taşımak sana kalmış.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "k.anahtar3",
+   "unit": "k.anahtar3",
+   "block": "K",
+   "phase": "Derin",
+   "start": 746.8293,
+   "end": 748.6642,
+   "speech": 1.835,
+   "gapAfter": 6.2652,
+   "gapBounds": {
+    "min": 5.0,
+    "pref": 6.0,
+    "max": 9.0
+   },
+   "subs": [
+    {
+     "start": 746.8293,
+     "end": 748.6642,
+     "text": "Uyanık bir dinlenme bu.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "k.donus",
+   "unit": "k.donus",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 754.9294,
+   "end": 756.7314,
+   "speech": 1.802,
+   "gapAfter": 3.6326,
+   "gapBounds": {
+    "min": 3.5,
+    "pref": 3.5,
+    "max": 5.0
+   },
+   "subs": [
+    {
+     "start": 754.9294,
+     "end": 756.7314,
+     "text": "Artık dönüş zamanı.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "music": "phase:kapanis; returnTone:-2s",
+    "visual": "dawn",
+    "voiceGain": "rampa −3 → 0 dB, k.anahtar3 sonundan k.donus başına (sessizlik boyunca; basamak yok)"
+   },
+   "window": null
+  },
+  {
+   "clip": "k.nefes",
+   "unit": "k.nefes",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 760.364,
+   "end": 762.8634,
+   "speech": 2.4993,
+   "gapAfter": 4.2652,
+   "gapBounds": {
+    "min": 4.0,
+    "pref": 4.0,
+    "max": 7.0
+   },
+   "subs": [
+    {
+     "start": 760.364,
+     "end": 762.8634,
+     "text": "Nefesin kendi ritmini bulabilir.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "k.sesler",
+   "unit": "k.sesler",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 767.1285,
+   "end": 770.995,
+   "speech": 3.8665,
+   "gapAfter": 6.1768,
+   "gapBounds": {
+    "min": 6.0,
+    "pref": 6.0,
+    "max": 8.0
+   },
+   "subs": [
+    {
+     "start": 767.1285,
+     "end": 770.995,
+     "text": "Yakındaki ve uzaktaki sesler yeniden duyuluyor.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "k.hareket",
+   "unit": "k.hareket",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 777.1718,
+   "end": 786.2058,
+   "speech": 8.0163,
+   "gapAfter": 10.2652,
+   "gapBounds": {
+    "min": 10.0,
+    "pref": 10.0,
+    "max": 13.0
+   },
+   "subs": [
+    {
+     "start": 777.1718,
+     "end": 781.1239,
+     "text": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin.",
+     "sgapAfter": 1.0177
+    },
+    {
+     "start": 782.1416,
+     "end": 786.2058,
+     "text": "Bir yerin ağrırsa ya da başın dönerse hareketi bırak.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "k.goz",
+   "unit": "k.goz",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 796.471,
+   "end": 801.5998,
+   "speech": 5.1288,
+   "gapAfter": 9.2652,
+   "gapBounds": {
+    "min": 9.0,
+    "pref": 9.0,
+    "max": 12.0
+   },
+   "subs": [
+    {
+     "start": 796.471,
+     "end": 801.5998,
+     "text": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "music": "chord"
+   },
+   "window": null
+  },
+  {
+   "clip": "k.oda.ayrinti",
+   "unit": "k.oda.ayrinti",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 810.8649,
+   "end": 814.236,
+   "speech": 3.3711,
+   "gapAfter": 8.1768,
+   "gapBounds": {
+    "min": 8.0,
+    "pref": 8.0,
+    "max": 10.0
+   },
+   "subs": [
+    {
+     "start": 810.8649,
+     "end": 814.236,
+     "text": "Bir renk, bir biçim, bir doku.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "k.zaman",
+   "unit": "k.zaman",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 822.4128,
+   "end": 826.2281,
+   "speech": 3.8153,
+   "gapAfter": 4.721,
+   "gapBounds": {
+    "min": 4.5,
+    "pref": 4.5,
+    "max": 7.0
+   },
+   "subs": [
+    {
+     "start": 822.4128,
+     "end": 826.2281,
+     "text": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "k.yan",
+   "unit": "k.yan",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 830.9491,
+   "end": 834.2428,
+   "speech": 3.2938,
+   "gapAfter": 6.1768,
+   "gapBounds": {
+    "min": 6.0,
+    "pref": 6.0,
+    "max": 8.0
+   },
+   "subs": [
+    {
+     "start": 830.9491,
+     "end": 834.2428,
+     "text": "Sırtüstü yatıyorsan önce bir yanına dön.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "k.yandakal",
+   "unit": "k.yandakal",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 840.4196,
+   "end": 843.1894,
+   "speech": 2.7698,
+   "gapAfter": 12.2652,
+   "gapBounds": {
+    "min": 12.0,
+    "pref": 12.0,
+    "max": 15.0
+   },
+   "subs": [
+    {
+     "start": 840.4196,
+     "end": 843.1894,
+     "text": "Bir süre yan yatarak dinlenmek de olur.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "k.otur",
+   "unit": "k.otur",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 855.4545,
+   "end": 859.1575,
+   "speech": 3.703,
+   "gapAfter": 8.2652,
+   "gapBounds": {
+    "min": 8.0,
+    "pref": 8.0,
+    "max": 11.0
+   },
+   "subs": [
+    {
+     "start": 855.4545,
+     "end": 859.1575,
+     "text": "Ellerinden destek alarak yavaşça doğrulup otur.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "k.bekle",
+   "unit": "k.bekle",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 867.4227,
+   "end": 870.5426,
+   "speech": 3.1199,
+   "gapAfter": 12.3535,
+   "gapBounds": {
+    "min": 12.0,
+    "pref": 12.0,
+    "max": 16.0
+   },
+   "subs": [
+    {
+     "start": 867.4227,
+     "end": 870.5426,
+     "text": "Kalkmadan önce birkaç nefes böyle kal.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "k.kalk",
+   "unit": "k.kalk",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 882.8962,
+   "end": 889.1162,
+   "speech": 6.22,
+   "gapAfter": 3.0884,
+   "gapBounds": {
+    "min": 3.0,
+    "pref": 3.0,
+    "max": 4.0
+   },
+   "subs": [
+    {
+     "start": 882.8962,
+     "end": 889.1162,
+     "text": "Sonra acele etmeden kalkabilirsin; başın dönerse yeniden otur ve bekle.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {},
+   "window": null
+  },
+  {
+   "clip": "k.son",
+   "unit": "k.son",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 892.2046,
+   "end": 894.7348,
+   "speech": 2.5302,
+   "gapAfter": 5.2652,
+   "gapBounds": {
+    "min": 5.0,
+    "pref": 5.0,
+    "max": 8.0
+   },
+   "subs": [
+    {
+     "start": 892.2046,
+     "end": 894.7348,
+     "text": "Buradasın ve uyanıksın.",
+     "sgapAfter": null
+    }
+   ],
+   "cue": {
+    "music": "fade:5s",
+    "visual": "end"
+   },
+   "window": null
+  }
+ ]
+}

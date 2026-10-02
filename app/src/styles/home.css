@@ -1,0 +1,623 @@
+/* Bugün (Ana sayfa) — atlas ekran 07. Renkler yalnızca styles.css tokenlarından. */
+
+.home-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding-top: 4px; }
+.home-head h1 { margin-top: 2px; }
+.home-head-side { display: flex; align-items: center; gap: 10px; flex: none; }
+
+.streak-chip {
+  display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 999px;
+  font-size: 0.8rem; font-weight: 700; white-space: nowrap;
+  color: var(--lens-text); background: var(--lens-soft);
+  border: 1px solid color-mix(in srgb, var(--lens) 38%, transparent);
+}
+
+/* Nef işareti (geçici; kamera açıkken kullanıcının kendi gözü gelecek) */
+.iris-mark {
+  position: relative; display: inline-block; flex: none; border-radius: 50%; overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, var(--surface-2) 0 58%, var(--surface-3) 100%);
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 3.5px var(--iris-1);
+}
+.iris-mark-iris {
+  position: absolute; left: 50%; top: 50%; width: 58%; aspect-ratio: 1; transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #041017 0 30%, transparent 31%),
+    conic-gradient(from 20deg, var(--iris-1), var(--iris-2), var(--iris-1), var(--iris-2), var(--iris-1));
+}
+.iris-mark-iris::after {
+  content: ''; position: absolute; width: 20%; height: 20%; top: 20%; left: 56%; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+}
+.iris-mark-lid {
+  position: absolute; left: 0; right: 0; top: 0; height: 0; background: var(--surface-3);
+  animation: iris-lid 6s infinite;
+}
+@keyframes iris-lid { 0%, 91%, 100% { height: 0; } 94% { height: 100%; } }
+
+/* Bugünün planı — diyafram kartı */
+.plan-hero {
+  position: relative; overflow: hidden; border-radius: 28px; padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+  background:
+    radial-gradient(120% 90% at 18% 0%, color-mix(in srgb, var(--iris-1) 20%, var(--surface)) 0%, var(--surface) 55%, var(--surface-2) 100%);
+  border: 1px solid var(--border); box-shadow: var(--shadow-lg);
+}
+.plan-hero > * { position: relative; z-index: 1; }
+.plan-hero .aperture { position: absolute; right: -72px; top: -78px; width: 232px; height: 232px; z-index: 0; opacity: 0.8; pointer-events: none; }
+.aperture circle { fill: none; stroke: url(#home-iris); stroke-linecap: round; transform-origin: center; }
+.aperture .r1 { stroke-width: 10; stroke-dasharray: 30 14; animation: aperture-spin 40s linear infinite; }
+.aperture .r2 { stroke-width: 4; stroke-dasharray: 2 9; opacity: 0.7; animation: aperture-spin 70s linear infinite reverse; }
+.aperture .r3 { stroke-width: 18; stroke-dasharray: 6 5; opacity: 0.35; animation: aperture-spin 90s linear infinite; }
+@keyframes aperture-spin { to { transform: rotate(360deg); } }
+
+.plan-title {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.45rem; line-height: 1.12;
+  letter-spacing: -0.01em; max-width: 13ch; text-wrap: balance; margin-top: 18px;
+}
+.plan-steps { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; }
+.plan-steps li { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 0.72rem; color: var(--ink-3); }
+.plan-steps li::before { content: ''; height: 4px; border-radius: 2px; background: var(--surface-3); }
+.plan-steps li.done::before { background: var(--accent-grad); }
+.plan-steps li.now::before { background: color-mix(in srgb, var(--iris-1) 45%, var(--surface-3)); }
+.plan-steps li.now { color: var(--ink); font-weight: 650; }
+.plan-steps span { display: inline-flex; align-items: center; gap: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.plan-done { color: var(--ink-2); }
+.plan-week { color: var(--ink-3); }
+
+/* Bölüm başlığı */
+.home-h { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.home-h h2 { font-family: var(--font-display); font-size: 1.02rem; font-weight: 650; letter-spacing: -0.005em; }
+.home-h .link-btn { display: inline-flex; align-items: center; gap: 2px; padding: 6px 0; font-size: 0.875rem; }
+
+/* Ölçüm kutucukları */
+.home-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.home-tiles > :nth-child(odd):last-child { grid-column: 1 / -1; }
+.home-tile {
+  min-width: 0; text-align: left; color: inherit; font: inherit; cursor: pointer;
+  display: flex; flex-direction: column; gap: 2px; padding: 14px 14px 10px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.home-tile .t { font-size: 0.8rem; font-weight: 550; color: var(--ink-3); }
+.home-tile .big { font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; line-height: 1.2; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.home-tile .big small { font-family: var(--font-body); font-weight: 600; font-size: 0.75rem; color: var(--ink-3); margin-left: 4px; letter-spacing: 0; }
+.home-tile .s { font-size: 0.8rem; color: var(--ink-3); }
+.home-tile .s.good { color: var(--ok); }
+.home-tile .s.warn { color: var(--warn); }
+.home-tile .s.bad { color: var(--danger); }
+.home-tile svg { width: 100%; height: 22px; margin-top: 6px; overflow: visible; }
+
+/* Pratikler */
+.prax { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px; }
+.prax-tile {
+  min-width: 0; min-height: 96px; text-align: left; color: inherit; font: inherit; cursor: pointer;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 8px; padding: 12px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow);
+}
+.prax-tile > svg { color: var(--accent); }
+.prax-tile .title { font-weight: 700; font-size: 0.92rem; line-height: 1.2; }
+.prax-tile em { font-style: normal; font-size: 0.75rem; font-weight: 550; color: var(--ink-3); display: inline-flex; align-items: center; gap: 4px; }
+
+/* Modül satırları (Egzersiz, Ölçüm) */
+.mod-rows { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.mod-row {
+  display: flex; align-items: center; gap: 12px; width: 100%; min-height: 60px; padding: 12px 14px;
+  text-align: left; color: inherit; font: inherit; cursor: pointer; background: none; border: 0;
+}
+.mod-row + .mod-row { border-top: 1px solid var(--border); }
+.mod-ic {
+  width: 38px; height: 38px; border-radius: 12px; flex: none; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent-soft); color: var(--accent);
+}
+.mod-ic.tinted { background: color-mix(in srgb, var(--row-color) 18%, transparent); color: color-mix(in srgb, var(--row-color) 70%, var(--ink)); }
+.mod-row .grow { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.mod-row .title { font-weight: 650; }
+.mod-row .sub { font-size: 0.8125rem; color: var(--ink-3); }
+.mod-row .chev { color: var(--ink-3); flex: none; }
+.mod-row:active, .home-tile:active, .prax-tile:active { background: var(--surface-2); }
+
+@media (prefers-reduced-motion: reduce) {
+  .aperture circle, .iris-mark-lid { animation: none; }
+}
+
+/* ---- Ana sayfa başı (tasarım: Artifact "Nefona Bugün ve Profil"): avatar, günün diyaframı, Nef önerisi ----
+   (5 saniye turu 2'den beri Ana sayfa günün diyaframını (DayDial, .hh-day, .dd) çizmiyor; bugün kartı aşağıda) */
+.home-head { align-items: flex-start; }
+.home-head h1 { line-height: 1.05; }
+.hh-name { font-style: normal; color: transparent; background: linear-gradient(100deg, var(--accent), var(--iris-2)); -webkit-background-clip: text; background-clip: text; }
+.hh-me { position: relative; flex: none; padding: 2px; border: 0; border-radius: 50%; background: conic-gradient(from 200deg, var(--iris-1), var(--iris-2), var(--iris-1)); cursor: pointer; }
+.hh-me .ph-avatar { display: grid; border: 2px solid var(--bg); }
+.hh-me:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.hh-star { position: absolute; right: -2px; bottom: -2px; width: 17px; height: 17px; border-radius: 50%; background: #ffb13b; border: 2.5px solid var(--bg); display: grid; place-items: center; }
+.hh-star svg { width: 9px; height: 9px; fill: #1a1204; }
+
+/* Sayı sütunu yazının tamamı kadar yer alır (telefondaki yazı tipi daha geniş olabilir; HATA_GUNLUGU Bug 21);
+   diyafram kalan yere sığar: en çok 172, en az 96 px */
+.hh-day { position: relative; display: grid; grid-template-columns: minmax(96px, 172px) max-content; justify-content: space-between; gap: 14px; align-items: center; margin-top: 4px; }
+.hh-day > .dd { width: 100%; height: auto; }
+.hh-day > .hh-num:first-child { grid-column: 1 / -1; } /* bugün plan yoksa diyafram yok: sütun tüm genişlik */
+.hh-day::before { content: ''; position: absolute; left: -30px; top: -30px; width: 232px; height: 232px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, color-mix(in srgb, var(--iris-1) 20%, transparent), color-mix(in srgb, var(--iris-2) 7%, transparent) 45%, transparent 70%); }
+.dd { position: relative; display: block; max-width: 100%; }
+.dd { --dd-blade: #dce3e9; --dd-blade-2: #cfd8df; --dd-edge: rgba(11, 18, 25, 0.22); --dd-well: #c4ced6; --dd-rim: rgba(11, 18, 25, 0.14); --dd-track: #c9d3db; --dd-now: #0b1219; --dd-rest: rgba(11, 18, 25, 0.3); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .dd { --dd-blade: #182430; --dd-blade-2: #22303d; --dd-edge: rgba(255, 255, 255, 0.16); --dd-well: #0b121a; --dd-rim: rgba(255, 255, 255, 0.1); --dd-track: #1c2834; --dd-now: #eef3f6; --dd-rest: rgba(238, 243, 246, 0.3); }
+}
+:root[data-theme='dark'] .dd { --dd-blade: #182430; --dd-blade-2: #22303d; --dd-edge: rgba(255, 255, 255, 0.16); --dd-well: #0b121a; --dd-rim: rgba(255, 255, 255, 0.1); --dd-track: #1c2834; --dd-now: #eef3f6; --dd-rest: rgba(238, 243, 246, 0.3); }
+.dd-tk { fill: none; stroke-width: 7; stroke-linecap: round; }
+.dd-tk.l { stroke: var(--dd-track); }
+.dd-tk.d { stroke: url(#dd-ig); }
+.dd-tk.n { stroke: var(--dd-rest); stroke-width: 5; stroke-dasharray: 1.5 5; }
+.dd-tk.r { stroke: var(--dd-rest); }
+.dd-now { fill: var(--dd-now); }
+.dd-moon { fill: var(--dd-rest); }
+.dd-well { fill: var(--dd-well); }
+.dd-b0 { fill: var(--dd-blade); }
+.dd-b1 { fill: var(--dd-blade-2); }
+.dd-be { fill: none; stroke: var(--dd-edge); stroke-width: 0.7; }
+.dd-rim { fill: none; stroke: var(--dd-rim); stroke-width: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .dd-tk.n { animation: dd-dash 1.6s linear infinite; }
+  @keyframes dd-dash { to { stroke-dashoffset: -13; } }
+}
+
+.hh-num { position: relative; display: grid; gap: 12px; min-width: 0; }
+.hh-big { display: flex; align-items: baseline; gap: 6px; }
+.hh-big b { font: 800 3.2rem/0.85 var(--font-display); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; color: var(--ink); }
+.hh-big small { font: 600 1.1rem/1 var(--font-display); color: var(--ink-3); }
+.hh-lbl { font: 500 0.68rem/1.3 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-top: -4px; }
+.hh-facts { display: grid; gap: 8px; padding-top: 12px; border-top: 1px solid var(--border); }
+.hh-num > .hh-facts:first-child { border-top: 0; padding-top: 0; }
+.hh-fact { display: flex; align-items: center; gap: 8px; font: 500 0.82rem/1.2 var(--font-body); color: var(--ink-2); white-space: nowrap; }
+.hh-fact b { font: 600 0.82rem/1 var(--font-mono); color: var(--ink); font-variant-numeric: tabular-nums; min-width: 30px; }
+.hh-fact svg { flex: none; }
+.hh-fact .f1 { color: var(--lens-text); }
+.hh-fact .f2 { color: var(--iris-1); }
+.hh-fact .f3 { color: var(--iris-2); }
+.hh-fact .f4 { color: var(--ok); }
+.hh-wk { display: inline-flex; gap: 3px; margin-left: auto; flex: none; }
+.hh-wk i { width: 6px; height: 6px; border-radius: 2px; background: var(--surface-3); }
+.hh-wk i.d { background: var(--iris-1); }
+.hh-wk i.t { background: none; box-shadow: inset 0 0 0 1.5px var(--iris-1); }
+
+.hh-alt { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.hh-alt.n1 { grid-template-columns: 1fr; }
+.hh-alt button { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); color: var(--ink); text-align: left; cursor: pointer; }
+.hh-alt button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.hh-alt .ic { width: 34px; height: 34px; flex: none; border-radius: 12px; display: grid; place-items: center; }
+.hh-alt .ic.breath { background: color-mix(in srgb, var(--ink) 8%, transparent); color: var(--ink); }
+.hh-alt .ic.dalga { background: color-mix(in srgb, var(--iris-2) 15%, transparent); color: var(--iris-2); }
+.hh-alt .tx { display: grid; gap: 1px; }
+.hh-alt b { font: 600 0.9rem/1.2 var(--font-body); }
+.hh-alt small { font: 400 0.75rem/1.2 var(--font-body); color: var(--ink-3); }
+@media (max-width: 360px) { .hh-big b { font-size: 2.6rem; } }
+
+/* ---- Hatırlatmalar (bildirim planı v2): tek kart yuvası ve çalışma oturumu şeridi; yalnız tokenlar ---- */
+.hh-ask { display: grid; gap: 8px; }
+.hh-ask h3 { margin: 0; font: 650 1.02rem/1.3 var(--font-display); color: var(--ink); }
+.hh-ask p { margin: 0; color: var(--ink-2); }
+.hh-focus {
+  display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; border-radius: 16px;
+  background: var(--accent-soft); color: var(--ink); font-size: 0.875rem; line-height: 1.3;
+}
+.hh-focus > svg { flex: none; color: var(--accent); }
+.hh-focus .grow { flex: 1; min-width: 0; }
+.hh-focus b { font-weight: 650; }
+.hh-focus .btn { flex: none; }
+.hh-focus-note { display: block; margin-top: 2px; font-size: 0.8rem; color: var(--ink-2); }
+
+/* Ana sayfa gelişim haritası (Artifact "Nefona Gelişim Haritası" ekran 3) */
+.hm { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 14px; align-items: center; }
+.hm-map { border: 0; background: none; padding: 0; width: 76px; height: 76px; border-radius: 50%; cursor: pointer; }
+.hm-tx { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.hm-tx > b { font-weight: 650; }
+.hm-tx > span { font-size: 0.82rem; color: var(--ink-2); overflow-wrap: anywhere; }
+.hm-act { margin-top: 4px; display: flex; align-items: center; justify-content: space-between; gap: 8px; border: 0; border-radius: 12px; background: var(--surface-2); color: var(--ink); padding: 9px 10px; text-align: start; font: inherit; cursor: pointer; }
+.hm-act span { display: flex; flex-direction: column; min-width: 0; }
+.hm-act b { font-size: 0.88rem; font-weight: 650; }
+.hm-act small { font-size: 0.72rem; color: var(--ink-3); }
+
+/* ---- 5 saniye turu (Y1 ilk görünüm): ne kadar sürer gövde yazısıyla ve kalın; daktilo harfi yalnız sayılarda ---- */
+.hh-lbl { font: 500 0.9rem/1.3 var(--font-body); letter-spacing: 0; text-transform: none; color: var(--ink-2); margin-top: -2px; }
+.hh-lbl b { font-weight: 700; color: var(--ink); white-space: nowrap; }
+/* Büyük düğmede "Yeni": düğmenin yazı renginde dolu hap (açık temada beyaz, koyu temada koyu), yazısı vurgu renginde */
+.hh-new { font: 700 0.68rem/1 var(--font-body); font-style: normal; letter-spacing: 0.02em; text-transform: none; padding: 3px 8px; border-radius: 999px; background: var(--accent-ink); color: var(--accent); }
+.hh-facts:empty { display: none; } /* alarm satırı çizilmeyince (web) boş sütunun çizgisi kalmasın */
+
+/* ---- 5 saniye turu 2 (Y1 ilk görünüm): sayılar hap satırında, "Bugün" kartı (süre, günün zinciri, büyük düğme) ----
+   Günün diyaframı ve "0 / N" büyük sayısı kalktı: en büyük yazı bugünün süresi, en belirgin şey ilk adımın düğmesi.
+   Yalnız tokenlar; iki tema tokenlardan gelir. */
+.hh-facts.hh-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; border: 0; margin-top: -4px; }
+.hh-facts.hh-chips:empty { display: none; } /* alarm satırı çizilmeyince (web) boş hap satırı yer kaplamasın */
+.hh-chips .hh-fact {
+  gap: 6px; padding: 6px 12px 6px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border);
+  font: 600 0.82rem/1.2 var(--font-body); color: var(--ink-2);
+}
+.hh-chips .hh-fact b { font: 700 0.84rem/1 var(--font-body); min-width: 0; color: var(--ink); }
+/* Seri bir ödül: mercek rengi yalnız burada (tasarım sistemi: mercek sarısı yalnız ödül ve seri) */
+.hh-chips .hh-fact.lens { background: var(--lens-soft); border-color: color-mix(in srgb, var(--lens) 42%, transparent); color: var(--lens-text); }
+.hh-chips .hh-fact.lens b { color: var(--lens-text); }
+.hh-chips .hh-fact.al-fact { width: auto; margin: 0; min-height: 0; padding: 6px 10px; border: 1px solid var(--border); background: var(--surface); border-radius: 999px; }
+.hh-chips .hh-fact.al-fact .al-fact-ar { margin-left: 0; }
+
+.hh-alt button { padding: 10px 12px; }
+@media (max-width: 360px) {
+  .hh-facts.hh-chips { gap: 6px; }
+  .hh-chips .hh-fact { gap: 5px; padding: 5px 9px; font-size: 0.78rem; }
+  .hh-chips .hh-fact:not(.lens):not(.al-fact) > svg { display: none; } /* 320 pt'de iki hap tek satıra sığsın; seri alevi kalır */
+  .hh-chips .hh-fact b { font-size: 0.8rem; }
+}
+
+/* Günün zinciri (components/DayChain.jsx): duraklar eşit aralıkla, arkada yol çizgisi; bitenlere kadar çizgi dolu */
+.dc { position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); align-items: center; height: 36px; }
+.dc::before, .dc::after { content: ''; position: absolute; top: 50%; height: 3px; margin-top: -1.5px; left: calc(50% / var(--n)); border-radius: 2px; }
+.dc::before { right: calc(50% / var(--n)); background: var(--surface-3); }
+.dc::after { width: calc((100% - 100% / var(--n)) * var(--p)); background: var(--accent-grad); }
+.dc-s { position: relative; z-index: 1; display: grid; place-items: center; min-width: 0; }
+.dc-d {
+  width: min(26px, calc(100% - 3px)); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+  background: color-mix(in srgb, var(--ink) 7%, var(--surface)); color: var(--ink-3); box-shadow: 0 0 0 3px var(--dc-ring, var(--surface));
+}
+.dc-d svg { width: 62%; height: 62%; display: block; }
+.dc-s.me .dc-d { border-radius: 50% / 40%; }
+.dc-s.rest .dc-d { color: var(--accent); background: var(--accent-soft); }
+.dc-s.fi .dc-d { box-shadow: 0 0 0 3px var(--dc-ring, var(--surface)), inset 0 0 0 2px var(--lens); color: var(--lens-text); }
+.dc-s.locked .dc-d { opacity: 0.55; }
+.dc-s.done .dc-d { background: var(--accent-grad); color: var(--accent-ink); }
+.dc-s.now { z-index: 2; }
+.dc-s.now .dc-d {
+  width: min(32px, calc(100% + 5px)); background: var(--surface); color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-graphic), 0 0 0 5px var(--accent-soft);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dc-s.now .dc-d { animation: dc-now 2.4s ease-in-out infinite; }
+  @keyframes dc-now { 50% { box-shadow: 0 0 0 2px var(--accent-graphic), 0 0 0 8px color-mix(in srgb, var(--accent-soft) 40%, transparent); } }
+}
+
+/* ---- Ana sayfa 5 saniye yeniden tasarımı (2026-09-30): Yön B "Senin gözün" ve beş değerlendiricinin aşıları ----
+   İlk görünüm ekran boyunda tek sahnedir (.hf): selam, kişinin gözü (her gün bir ışın; components/home/DayIris.jsx),
+   günün tek cümlesi, tek büyük düğme, "Bugünün yolu" satırı. Sahne en az ekran boyudur: ardından gelen her şey ekranın
+   altından başlar, sahnenin son satırı sekme çubuğunun 12 pt üstünde biter (çubuğun ardına yazı sızmaz). Gözün boyu
+   (--iris) Home.jsx'te sahneye sığdırılır; buradaki değer ilk çizim içindir. Renkler tokenlardan; göz bebeği her temada
+   siyah olduğu için bebeğin yazısı sabit açık renktir (koyu temanın ink tokenlarının değerleri). */
+.hf {
+  --tabbar-h: 70px;
+  --iris: clamp(150px, min(100vw - 72px, 100svh - 540px), 320px);
+  position: relative; display: flex; flex-direction: column; gap: 12px;
+  min-height: calc(100vh - 20px - env(safe-area-inset-top));
+  min-height: calc(100svh - 20px - env(safe-area-inset-top));
+  padding-bottom: calc(var(--tabbar-h) + 12px + env(safe-area-inset-bottom));
+}
+.hf .nw { white-space: nowrap; }
+.hf-alert { margin: 0; }
+.hf-hero { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; min-height: 0; overflow-x: clip; }
+.hf-hero-in { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 2px 0 4px; }
+.hf-yol { display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 12px; }
+
+/* Senin gözün */
+.hi { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; }
+.hi-today { display: inline-flex; align-items: center; gap: 4px; height: 18px; font: 700 0.84rem/1 var(--font-body); letter-spacing: 0.01em; color: var(--accent); }
+.hi-today.done { color: var(--ok); }
+.hi-eye { display: block; padding: 0; border: 0; background: none; color: inherit; cursor: pointer; border-radius: 50%; }
+.hi-eye:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.hi-disc { position: relative; display: block; width: var(--iris); height: var(--iris); }
+.hi-disc::before { /* gözün yumuşak ışık halesi (iris renkleri) */
+  content: ''; position: absolute; inset: -8%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, color-mix(in srgb, var(--iris-1) 18%, transparent) 0%, color-mix(in srgb, var(--iris-2) 7%, transparent) 42%, transparent 66%);
+}
+.hi-disc.seed::before { opacity: 0.6; }
+.hi-disc canvas { position: relative; display: block; width: 100%; height: 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .hi-disc canvas { animation: hi-in 0.6s ease-out both; }
+  @keyframes hi-in { from { opacity: 0; transform: scale(0.97); } }
+}
+.hi-pupil {
+  --pupil-ink: #eef3f6; --pupil-ink-2: #b9c4cd; --pupil-lens: #ffb13b;
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: grid; justify-items: center; gap: calc(var(--iris) * 0.01); text-align: center; pointer-events: none;
+}
+.hi-pupil b { font: 800 calc(var(--iris) * 0.108)/0.9 var(--font-display); letter-spacing: -0.03em; color: var(--pupil-ink); font-variant-numeric: tabular-nums; }
+/* "gün seninle" göz bebeğine sığar: büyük gözde tek satır, küçük gözde (320 pt) "gün" / "seninle" iki satır */
+.hi-pupil small {
+  max-width: calc(var(--iris) * 0.27); font: 650 clamp(10px, calc(var(--iris) * 0.042), 13px)/1.05 var(--font-body);
+  color: var(--pupil-ink-2); text-wrap: balance;
+}
+.hi-pupil.lens small { color: var(--pupil-lens); }
+.hi-pupil.word b { font-size: calc(var(--iris) * 0.088); letter-spacing: -0.01em; }
+.hi-legend { margin: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 8px; font: 600 0.92rem/1.25 var(--font-body); color: var(--ink-2); }
+.hi-streak { font: 700 0.8rem/1 var(--font-body); padding: 5px 10px; border-radius: 999px; background: var(--lens-soft); color: var(--lens-text); }
+
+/* Günün tek cümlesi: büyük ve kalın (Yön A'dan aşı); "Bugün yeni"de adın önünde durağın çizimi */
+.hl { display: grid; gap: 6px; justify-items: center; text-align: center; padding: 0 2px; max-width: 100%; }
+.hl-t { margin: 0; font: 700 1.55rem/1.22 var(--font-body); letter-spacing: -0.015em; color: var(--ink); text-wrap: balance; }
+.hl.long .hl-t { font-size: 1.24rem; line-height: 1.3; }
+.hl-chip {
+  display: inline-grid; place-items: center; width: 1.28em; height: 1.28em; margin: 0 0.24em 0 0.04em; border-radius: 0.34em;
+  vertical-align: -0.22em; background: var(--accent-soft); color: var(--accent);
+}
+.hl-chip svg { width: 0.78em; height: 0.78em; }
+.hl-s { margin: 0; font: 500 1rem/1.35 var(--font-body); color: var(--ink-2); text-wrap: balance; }
+/* Güncelleme günü: "Yolun yenilendi." altında bugünün yeni durakları (yoldaki çizim ve ad); tek bakışta ne değişti */
+.hl-list { margin: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 6px; font: 500 0.92rem/1.2 var(--font-body); color: var(--ink-2); }
+.hl-item {
+  display: inline-flex; align-items: center; gap: 5px; min-height: 30px; padding: 4px 10px 4px 7px; border-radius: 999px; white-space: nowrap;
+  font: 650 0.88rem/1.1 var(--font-body); color: var(--ink); background: var(--accent-soft);
+}
+.hl-list-h { flex-basis: 100%; } /* "Bugün yeni:" kendi satırında, duraklar altında tek satır (390 ve 320 pt) */
+.hl-item svg { flex: none; color: var(--accent); }
+.hl-s.ok { display: inline-flex; align-items: center; gap: 6px; color: var(--ok); font-weight: 650; }
+
+/* Büyük düğme: tek <button>; "Başla" alt şeritte yazılı (değerlendirici 3 ve 4), sağ üstte durağın çizimi (1 ve 5).
+   Renkleri yerel tokenlardan (--go-*): açık temada iris degradesi ve beyaz yazı, "Başla" beyaz şerit; koyu temada kart
+   derin iris renginde ve açık yazılı, "Başla" parlak vurgu renginde koyu yazılı (5 saniye kapı turu 1: koyu temada
+   parlak turkuaz kart yorgun göze fazla parlak, üstündeki "Başla" orta mavide soluk okundu). */
+.hf {
+  --go-bg: var(--accent-grad); --go-ink: var(--accent-ink); --go-glow: var(--accent-glow);
+  --go-cta: #ffffff; --go-cta-ink: var(--accent); --go-art: rgba(3, 16, 24, 0.9); --go-art-ink: var(--iris-1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .hf {
+    --go-bg: linear-gradient(135deg, #0b3f48 0%, #0f3350 48%, #152f6e 100%); --go-ink: #eef3f6;
+    --go-glow: inset 0 0 0 1px rgba(25, 194, 209, 0.3), 0 10px 30px -16px rgba(25, 194, 209, 0.6);
+    --go-cta: #19c2d1; --go-cta-ink: #041017; --go-art: rgba(3, 12, 20, 0.72); --go-art-ink: #19c2d1;
+  }
+}
+:root[data-theme='dark'] .hf {
+  --go-bg: linear-gradient(135deg, #0b3f48 0%, #0f3350 48%, #152f6e 100%); --go-ink: #eef3f6;
+  --go-glow: inset 0 0 0 1px rgba(25, 194, 209, 0.3), 0 10px 30px -16px rgba(25, 194, 209, 0.6);
+  --go-cta: #19c2d1; --go-cta-ink: #041017; --go-art: rgba(3, 12, 20, 0.72); --go-art-ink: #19c2d1;
+}
+.hg {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: 't art' 'cta cta'; align-items: center; gap: 12px 14px;
+  width: 100%; padding: 16px 16px 14px 18px; border: 0; border-radius: 24px; text-align: left; cursor: pointer;
+  background: var(--go-bg); color: var(--go-ink); box-shadow: var(--go-glow);
+}
+.hg:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.hg .t { grid-area: t; display: grid; gap: 4px; min-width: 0; }
+.hg .t small { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; font: 700 0.82rem/1.1 var(--font-body); color: color-mix(in srgb, var(--go-ink) 84%, transparent); }
+.hg .t b { font: 700 1.2rem/1.18 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
+.hg .t .s { font: 500 0.9rem/1.3 var(--font-body); color: color-mix(in srgb, var(--go-ink) 90%, transparent); text-wrap: balance; }
+.hg-tag { font: 650 0.72rem/1 var(--font-body); font-style: normal; padding: 3px 8px; border-radius: 999px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--go-ink) 55%, transparent); color: var(--go-ink); }
+.hg-art { grid-area: art; width: 54px; height: 54px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--go-art); color: var(--go-art-ink); }
+.hg-cta {
+  grid-area: cta; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 16px;
+  font: 750 1.05rem/1 var(--font-body); letter-spacing: 0.01em; color: var(--go-cta-ink); background: var(--go-cta);
+}
+.hg-cta .gl { display: none; }
+/* Akşam ya da serbest gün: Dalga sakin bir seçenek (degrade iş düğmesi değil); üstünde koyu, durgun dalga görseli
+   (Yön A'dan aşı). Görselin zemini gece rengidir, her temada koyu (dalga çizgileri iris tokenlarından). */
+.hg.calm {
+  grid-template-areas: 'art art' 't cta'; gap: 12px; padding: 10px 12px 12px;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--border); box-shadow: var(--shadow);
+}
+.hg.calm .hg-art.wave {
+  width: 100%; height: 78px; border-radius: 16px; overflow: hidden;
+  background: radial-gradient(120% 150% at 30% 0%, color-mix(in srgb, var(--iris-1) 26%, #06131b) 0%, #07151d 52%, #050c12 100%);
+}
+.hg-wave { display: block; width: 100%; height: 100%; }
+.hg-wave path { fill: none; stroke-width: 2; stroke-linecap: round; }
+.hg-wave .w1 { stroke: var(--iris-1); opacity: 0.85; }
+.hg-wave .w2 { stroke: var(--iris-2); opacity: 0.75; }
+.hg-wave .w3 { stroke: #d6e6ee; opacity: 0.45; stroke-width: 1.5; }
+.hg-wave circle { fill: var(--iris-1); opacity: 0.55; }
+.hg.calm .t { padding-left: 6px; }
+.hg.calm .t b { font-size: 1.1rem; }
+.hg.calm .t .s { color: var(--ink-2); }
+.hg.calm .hg-cta { min-height: 46px; padding: 0 18px; background: var(--surface-2); color: var(--ink); box-shadow: none; }
+.hg.calm .hg-cta svg { color: var(--accent); }
+
+/* "Bugünün yolu" satırı: yol aşağıda; dokununca yola (bugünün yenisi varsa o durağa) iner */
+.hf-path {
+  display: flex; align-items: center; gap: 10px; width: 100%; min-height: 52px; padding: 4px 4px 4px 6px;
+  border: 0; border-radius: 16px; background: none; text-align: left; cursor: pointer; color: var(--ink);
+}
+.hf-path:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.hf-path .tx { display: grid; gap: 3px; flex: 1; min-width: 0; }
+.hf-path .tx b { font: 650 1rem/1.2 var(--font-display); letter-spacing: -0.005em; }
+.hf-path .tx span { display: inline-flex; align-items: center; gap: 5px; font: 500 0.9rem/1.25 var(--font-body); color: var(--ink-2); }
+.hf-path .tx span.ok { color: var(--ok); font-weight: 650; }
+.hf-path .pill { flex: none; font: 700 0.8rem/1 var(--font-body); padding: 6px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.hf-path .chev { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--border); color: var(--ink-2); }
+
+/* Dar ekran (320 pt) */
+@media (max-width: 360px) {
+  .hf .home-head h1 { font-size: 1.42rem; }
+  .hl-t { font-size: 1.36rem; }
+  .hl.long .hl-t { font-size: 1.12rem; }
+  .hg .t b { font-size: 1.06rem; }
+}
+/* Kısa ekran (≤ 740 pt: 320 × 640, iPhone SE): düğme tek satır; durağın çizimi ve "Başla" sağda tek sütun */
+@media (max-height: 740px) {
+  .hf { gap: 10px; }
+  .hf-hero-in { gap: 8px; }
+  .hi-legend { font-size: 0.86rem; }
+  .hl-t { font-size: 1.28rem; }
+  .hl.long .hl-t { font-size: 1.06rem; }
+  .hl-s { font-size: 0.9rem; }
+  .hl-list { font-size: 0.88rem; gap: 4px 6px; }
+  .hl-item { min-height: 28px; font-size: 0.86rem; padding: 3px 10px 3px 7px; }
+  .hg { grid-template-areas: 't cta'; gap: 10px; padding: 12px 12px 12px 16px; border-radius: 22px; }
+  .hg .t b { font-size: 1.04rem; }
+  .hg .t .s { font-size: 0.84rem; }
+  .hg-art { display: none; }
+  .hg-cta { flex-direction: column; gap: 4px; width: 66px; min-height: 70px; padding: 0; border-radius: 18px; font-size: 0.84rem; }
+  .hg-cta .gl { display: grid; }
+  .hg-cta .play { display: none; }
+  .hg.calm { grid-template-columns: 56px minmax(0, 1fr) auto; grid-template-areas: 'art t cta'; padding: 8px 8px 8px 8px; }
+  .hg.calm .hg-art.wave { display: block; width: 56px; height: 60px; border-radius: 14px; }
+  .hg.calm .t { padding-left: 0; }
+  .hg.calm .t .s { font-size: 0.84rem; }
+  .hg.calm .hg-cta { width: 60px; min-height: 60px; background: var(--surface-2); color: var(--ink); }
+  .hf-path { min-height: 48px; }
+}
+
+/* ---- İlk 7 gün (sahibin kararı 2026-10-01: iris yok) · Yön B "Tek büyük kart" (5 saniye turu 6) ----
+   .hf.wk1: sahne yine ekran boyu (son satırı sekme çubuğunun üstünde biter; mola bandı ve durak yazıları çubuğun ardında
+   kesilmez). Kahraman bugünün ilk işinin büyük kartı (.hg.hero): üstte işin kendi çizimi (HeroArt), boyu --hero ile
+   sahneye sığdırılır (Home.jsx fitStage). Kartın altında "Bugünün yolu" satırı; sade yol listesi (PathList) ekranın
+   altından başlar. 2. günden kartın üstünde dünün izi (WeekTrace). */
+.hf.wk1 { --hero: 200px; }
+.hf.wk1 .hf-hero-in { padding-top: 2px; gap: 12px; }
+.hf.wk1 .hl { align-self: stretch; }
+
+.hg.hero {
+  grid-template-columns: minmax(0, 1fr); grid-template-areas: 'art' 't' 'cta'; gap: 12px; padding: 10px 10px 12px;
+  --ha-ray: #ffffff; --ha-ray-o: 0.5; --ha-limbus: rgba(255, 255, 255, 0.4); --ha-glow: rgba(255, 255, 255, 0.16);
+  --ha-tile: #ffffff; --ha-chev: rgba(255, 255, 255, 0.5); --ha-chev-on: #ffffff; --ha-sclera: #f6fafc;
+  --ha-lid: rgba(4, 16, 23, 0.4); --ha-moonbg: rgba(3, 16, 24, 0.62); --ha-moon: #e9f6ff; --ha-ripple: rgba(255, 255, 255, 0.55);
+  --ha-stage: radial-gradient(60% 75% at 50% 48%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 70%), rgba(3, 22, 34, 0.14);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .hg.hero {
+    --ha-ray: #3fd3df; --ha-ray-o: 0.55; --ha-limbus: rgba(25, 194, 209, 0.45); --ha-glow: rgba(25, 194, 209, 0.14);
+    --ha-tile: #e6edf2; --ha-chev: rgba(25, 194, 209, 0.45); --ha-chev-on: #5edce6; --ha-sclera: #dfe8ee;
+    --ha-lid: rgba(4, 16, 23, 0.55); --ha-moonbg: rgba(2, 8, 14, 0.7); --ha-moon: #c9f3f7; --ha-ripple: rgba(25, 194, 209, 0.6);
+    --ha-stage: radial-gradient(60% 75% at 50% 48%, rgba(25, 194, 209, 0.16), rgba(25, 194, 209, 0) 70%), rgba(0, 0, 0, 0.24);
+  }
+}
+:root[data-theme='dark'] .hg.hero {
+  --ha-ray: #3fd3df; --ha-ray-o: 0.55; --ha-limbus: rgba(25, 194, 209, 0.45); --ha-glow: rgba(25, 194, 209, 0.14);
+  --ha-tile: #e6edf2; --ha-chev: rgba(25, 194, 209, 0.45); --ha-chev-on: #5edce6; --ha-sclera: #dfe8ee;
+  --ha-lid: rgba(4, 16, 23, 0.55); --ha-moonbg: rgba(2, 8, 14, 0.7); --ha-moon: #c9f3f7; --ha-ripple: rgba(25, 194, 209, 0.6);
+  --ha-stage: radial-gradient(60% 75% at 50% 48%, rgba(25, 194, 209, 0.16), rgba(25, 194, 209, 0) 70%), rgba(0, 0, 0, 0.24);
+}
+.hg-stage { grid-area: art; position: relative; display: block; height: var(--hero); min-height: 0; border-radius: 18px; background: var(--ha-stage); overflow: hidden; }
+.ha { position: absolute; inset: 4px; display: block; width: calc(100% - 8px); height: calc(100% - 8px); }
+.hg.hero .t { padding: 0 8px; gap: 5px; }
+.hg.hero .t b { font-size: 1.5rem; line-height: 1.12; }
+.hg.hero .t .s { font-size: 1rem; }
+.hg.hero .hg-cta { min-height: 54px; gap: 10px; border-radius: 18px; font-size: 1.12rem; }
+.ha-glow { fill: var(--ha-glow); }
+.ha-limbus { fill: none; stroke: var(--ha-limbus); stroke-width: 1.2; }
+.ha-ray { fill: none; stroke: var(--ha-ray); stroke-linecap: round; }
+.ha-ray.dim { stroke-width: 1; opacity: calc(var(--ha-ray-o) * 0.5); }
+.ha-ray.mid { stroke-width: 1.4; opacity: var(--ha-ray-o); }
+.ha-ray.hi { stroke-width: 1.8; opacity: calc(var(--ha-ray-o) + 0.35); }
+.ha-tile { fill: var(--ha-tile); filter: drop-shadow(0 3px 6px rgba(2, 12, 20, 0.28)); }
+.ha-lines { fill: none; stroke: #0b1219; stroke-width: 3.6; stroke-linecap: round; }
+.ha-chev { fill: none; stroke: var(--ha-chev); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.ha-chev.on { stroke: var(--ha-chev-on); }
+.ha-sclera { fill: var(--ha-sclera); }
+.ha-lidline { fill: none; stroke: var(--ha-lid); stroke-width: 1.6; }
+.ha-pupil { fill: #03080d; }
+.ha-glint { fill: #ffffff; opacity: 0.85; }
+.ha-lid { fill: var(--ha-sclera); transform-box: fill-box; transform-origin: top; transform: scaleY(0); }
+.ha-moonbg { fill: var(--ha-moonbg); }
+.ha-moon { fill: var(--ha-moon); }
+.ha-gl { color: var(--ha-moon); }
+.ha-dot { fill: var(--ha-moon); }
+.ha-ripple { fill: none; stroke: var(--ha-ripple); stroke-width: 1.4; opacity: 0; }
+/* E testinde sağa bakan E; sağ ok parlak ve sağa doğru hafifçe kayar (kaydırma ipucu) */
+.ha-swipe .ha-chev { stroke-width: 3.2; }
+@media (prefers-reduced-motion: no-preference) {
+  .ha-swipe { animation: ha-swipe 2.4s ease-in-out infinite; }
+  @keyframes ha-swipe { 0%, 30%, 100% { transform: translateX(0); } 60% { transform: translateX(6px); } }
+  .ha-iris.mv-x { animation: ha-x 3.2s ease-in-out infinite alternate; }
+  .ha-iris.mv-y { animation: ha-y 3.2s ease-in-out infinite alternate; }
+  .ha-iris.mv-o { animation: ha-o 4.8s linear infinite; }
+  .ha-lid { animation: ha-blink 3.6s ease-in-out infinite; }
+  .ha-ripple { animation: ha-rip 4.5s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+  .ha-ripple.r1 { animation-delay: -1.5s; }
+  .ha-ripple.r2 { animation-delay: -3s; }
+  @keyframes ha-x { from { transform: translateX(-21px); } to { transform: translateX(21px); } }
+  @keyframes ha-y { from { transform: translateY(-11px); } to { transform: translateY(11px); } }
+  @keyframes ha-o { 0% { transform: translate(17px, 0); } 25% { transform: translate(0, 10px); } 50% { transform: translate(-17px, 0); } 75% { transform: translate(0, -10px); } 100% { transform: translate(17px, 0); } }
+  @keyframes ha-blink { 0%, 80%, 100% { transform: scaleY(0); } 88% { transform: scaleY(1); } }
+  @keyframes ha-rip { from { transform: scale(1); opacity: 0.7; } to { transform: scale(2.2); opacity: 0; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ha-iris.mv-x { transform: translateX(16px); }
+  .ha-ripple.r0 { opacity: 0.5; transform: scale(1.5); transform-box: fill-box; transform-origin: center; }
+}
+
+/* Dünün izi: yedi küçük göz (kaydı olan gün yanmış, bugün halka, kalan günler soluk), altında dünün satırı */
+.wt { display: grid; justify-items: center; gap: 6px; width: 100%; }
+.wt-row { display: flex; justify-content: center; gap: 16px; }
+.wt-c { position: relative; display: grid; justify-items: center; }
+.wt-m { display: block; width: 28px; height: 28px; }
+.wt-m svg { display: block; width: 100%; height: 100%; }
+.wt-iris { fill: var(--iris-1); }
+.wt-m.lit svg { filter: drop-shadow(0 0 5px color-mix(in srgb, var(--iris-1) 55%, transparent)); }
+.wt-ray { fill: none; stroke: #e9fbff; stroke-width: 1.4; stroke-linecap: round; opacity: 0.85; }
+.wt-pupil { fill: #03080d; }
+.wt-ring { fill: none; stroke: var(--border); stroke-width: 2; stroke-dasharray: 2.4 3.2; }
+.wt-m.now .wt-ring { stroke: var(--accent); stroke-width: 2.4; stroke-dasharray: none; }
+.wt-l { position: absolute; top: 31px; font: 700 0.76rem/1 var(--font-body); white-space: nowrap; }
+.wt-l.ok { color: var(--ok); }
+.wt-l.now { color: var(--accent); }
+.wt-row:has(.wt-l) { margin-bottom: 15px; }
+.wt-s { margin: 0; max-width: 100%; font: 650 0.88rem/1.3 var(--font-body); color: var(--ok); text-align: center; text-wrap: balance; }
+.wt-s svg { display: inline-block; vertical-align: -2px; margin-right: 6px; }
+@media (prefers-reduced-motion: no-preference) {
+  .wt-m.now .wt-ring { animation: wt-now 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes wt-now { 50% { stroke-width: 3.4; } }
+}
+
+/* Sade yol listesi (ilk 7 gün): çizim, ad; süre yok. Satırlar arasında yolun noktalı çizgisi. */
+.pl { display: grid; gap: 12px; }
+.pl-list { list-style: none; margin: 0; padding: 4px 0; display: grid; border-radius: 22px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
+.pl-i { position: relative; display: grid; }
+.pl-i + .pl-i::before { /* yolun noktalı çizgisi: bir önceki durağın çiziminden bu durağın çizimine */
+  content: ''; position: absolute; left: 35px; top: -9px; height: 18px; border-left: 2px dotted color-mix(in srgb, var(--ink-3) 55%, transparent);
+}
+.pl-row {
+  display: flex; align-items: center; gap: 14px; width: 100%; min-height: 58px; padding: 7px 16px; border: 0; background: none;
+  color: var(--ink); text-align: left; cursor: pointer; border-radius: 18px; font: inherit;
+}
+.pl-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.pl-ic { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.pl-i.rest .pl-ic { background: color-mix(in srgb, var(--iris-2) 16%, transparent); color: var(--iris-2); }
+.pl-i.done .pl-ic { background: color-mix(in srgb, var(--ok) 16%, transparent); color: var(--ok); }
+.pl-i.locked .pl-ic { opacity: 0.6; }
+.pl-t { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; min-width: 0; }
+.pl-t b { font: 650 1.02rem/1.2 var(--font-body); }
+.pl-i.done .pl-t b { color: var(--ink-2); }
+.pl-t small { flex-basis: 100%; font: 600 0.86rem/1.2 var(--font-body); color: var(--ink-2); }
+.pl-tag { font: 700 0.74rem/1 var(--font-body); font-style: normal; padding: 4px 8px; border-radius: 999px; background: color-mix(in srgb, var(--iris-2) 14%, transparent); color: var(--iris-2); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .pl-i.rest .pl-ic, :root:not([data-theme='light']) .pl-tag { color: #8fb0ff; } }
+:root[data-theme='dark'] .pl-i.rest .pl-ic, :root[data-theme='dark'] .pl-tag { color: #8fb0ff; }
+.pl-chip, .pl-nudge { display: inline-flex; align-items: center; gap: 6px; justify-self: start; margin: 2px 16px 4px 70px; padding: 5px 10px; border-radius: 999px; font: 650 0.84rem/1.2 var(--font-body); background: var(--surface-2); color: var(--ink-2); }
+.pl-fn { margin: 0; font: 500 0.8rem/1.45 var(--font-body); color: var(--ink-3); text-align: center; }
+
+/* Kısa ekran (≤ 740 pt: 320 × 640): aynı dizilim, daha sıkı; çizimin boyu yine sahneye sığdırılır */
+@media (max-height: 740px) {
+  .hf.wk1 { --hero: 120px; }
+  .hf.wk1 .hf-hero-in { gap: 8px; }
+  .hg.hero { gap: 8px; padding: 8px 8px 10px; border-radius: 22px; }
+  .hg.hero .hg-stage { border-radius: 15px; }
+  .hg.hero .t { gap: 3px; padding: 0 6px; }
+  .hg.hero .t b { font-size: 1.2rem; }
+  .hg.hero .t .s { font-size: 0.88rem; }
+  .hg.hero .hg-cta { flex-direction: row; width: auto; min-height: 48px; padding: 0; border-radius: 15px; font-size: 1rem; }
+  .hg.hero .hg-cta .play { display: inline; }
+  .wt-m { width: 22px; height: 22px; }
+  .wt-row { gap: 14px; }
+  .wt-l { top: 24px; font-size: 0.7rem; }
+  .wt-row:has(.wt-l) { margin-bottom: 12px; }
+  .wt-s { font-size: 0.82rem; }
+}
+
+/* ---- Hava satırı (components/SkyLine.jsx; B2 tasarımı tpl-home). 320 pt'de il adı düşer, ilçe kısalmaz. ---- */
+.wxc { --wx-rain: #2f6bea; display: grid; gap: 8px; padding: 12px 14px; border-radius: 22px; border: 1px solid var(--border);
+  background: linear-gradient(160deg, rgba(47, 107, 234, 0.12), rgba(17, 169, 184, 0.06)), var(--surface); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .wxc { --wx-rain: #6f9bff; } }
+:root[data-theme='dark'] .wxc { --wx-rain: #6f9bff; }
+.wxc-main { display: grid; gap: 8px; width: 100%; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; border-radius: 14px; }
+.wxc-main:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.wxc-top { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; min-height: 44px; }
+.wxc-deg { font: 800 2.4rem/0.9 var(--font-display); letter-spacing: -0.03em; }
+.wxc-tx { min-width: 0; display: grid; gap: 4px; }
+.wxc-tx b { font: 700 1rem/1.15 var(--font-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wxc-tx .il { color: var(--ink-2); font-weight: 600; }
+.wxc-tx .rain { font: 600 0.88rem/1.25 var(--font-body); color: var(--wx-rain); }
+.wxc-ic { color: var(--ink-2); }
+.wxc-ic.r { color: var(--wx-rain); }
+.wxc-bars { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; align-items: end; height: 30px; }
+.wxc-bars i { display: block; border-radius: 3px; background: var(--surface-3); min-height: 3px; }
+.wxc-bars i.r { background: var(--wx-rain); }
+.wxc-ax { display: flex; justify-content: space-between; font: 500 0.7rem/1 var(--font-body); font-variant-numeric: tabular-nums; color: var(--ink-3); }
+.wxc-attr { display: flex; justify-content: space-between; align-items: center; min-height: 24px; font: 600 0.74rem/1 var(--font-body); color: var(--ink-3); }
+.wxc-attr a { display: inline-flex; align-items: center; min-height: 44px; margin: -10px 0; color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 359px) {
+  .wxc-tx .il { display: none; }
+  .wxc-deg { font-size: 2rem; }
+}

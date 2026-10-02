@@ -1,0 +1,48 @@
+{
+ "sex": "f",
+ "hpf_hz": 90.0,
+ "in_duration": 2.93,
+ "trim_thr_source": "lufs",
+ "trim_passes": [
+  {
+   "trim_thr_in_dbfs": -54.02,
+   "applied_gain_db": 4.01
+  }
+ ],
+ "trim_in_sec": [
+  0.054,
+  2.701
+ ],
+ "lead_pad_ms": 5.7,
+ "tail_pad_ms": 21.0,
+ "deess": {
+  "applied": false,
+  "threshold_db": -14.54,
+  "band_peak_over_thr_db": -11.74,
+  "max_reduction_db": 0.0,
+  "time_reduced_sec": 0.0
+ },
+ "level_mode": "lufs",
+ "out_duration": 2.957,
+ "target": -18.0,
+ "level": -18.0,
+ "true_peak_dbtp": -4.95,
+ "limiter_max_db": -0.0,
+ "limiter_sec": 0.0,
+ "limiter_sec_over_1db": 0.0,
+ "rms_db": -16.52,
+ "lufs": -18.0,
+ "checks": {
+  "level_in_tolerance": true,
+  "true_peak_ok": true,
+  "no_clipping": true
+ },
+ "pass": true,
+ "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_work-nes-1/cuts/n1.sec/n1.sec#1.wav",
+ "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/n1.sec/n1.sec#1.wav",
+ "out_format": {
+  "sr": 44100,
+  "channels": 1,
+  "subtype": "FLOAT"
+ }
+}

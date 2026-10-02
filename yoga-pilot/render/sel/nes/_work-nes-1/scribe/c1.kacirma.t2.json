@@ -1,0 +1,15 @@
+{
+ "unit": "c1.kacirma",
+ "take": "t2",
+ "asset_id": "s3VWhNb4X2xmXZCYJ0Nb",
+ "source_node_id": "Z5dkD9En8PPPAlUK2MQp",
+ "stt_node_id": "oGq9hSQSSGmWlScnSjDA",
+ "session_id": "aATgMSaAvFgVtk5zjlXT",
+ "generation_id": "QKn9OzsqzJoUTWGkijDx",
+ "actual_credits": 18.04,
+ "actual_cents": 0.328,
+ "scribe_text": "Bir adı kaçırırsan bir sonrakiyle devam edersin",
+ "spoken_duration_secs": "3.14",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 7\n}"
+}

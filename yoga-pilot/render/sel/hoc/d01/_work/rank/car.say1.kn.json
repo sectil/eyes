@@ -1,0 +1,538 @@
+{
+ "unit": "car.say1.kn",
+ "phase": "Derinleşme",
+ "sex": "m",
+ "pieces_needed": 10,
+ "takes": [
+  "t1.mp3",
+  "t2.mp3"
+ ],
+ "median_active_sec": 8.685,
+ "ranking": [
+  {
+   "rank": 1,
+   "take": "t1.mp3",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d01/car.say1.kn/t1.mp3",
+   "score": 11.077,
+   "penalties": {
+    "rate": 7.767,
+    "dur": 0.241,
+    "f0sd": 0.0,
+    "join": 3.07
+   },
+   "soft_violations": [
+    "eklemleme 2.67 bant dışı (5.0–6.2)",
+    "taşıyıcı eklemi 6.14 > 2.0 yt"
+   ],
+   "reasons": [
+    "süre 8.79 sn, ortancadan %1.2",
+    "F0 yayılımı 4.14 yt"
+   ],
+   "metrics": {
+    "duration": 8.96,
+    "active_sec": 8.79,
+    "speech_sec": 4.869,
+    "articulation": 2.67,
+    "f0_mean_hz": 100.6,
+    "f0_geo_hz": 97.8,
+    "f0_sd_semitones": 4.14,
+    "lufs": -22.0,
+    "rms_db": -18.68,
+    "true_peak_dbtp": -5.03,
+    "sibilance_ratio": 0.0044,
+    "pause_total_sec": 3.921
+   },
+   "cut": {
+    "needed": 10,
+    "found": 10,
+    "gaps_available": 9,
+    "chosen_gaps": [
+     [
+      0.359,
+      0.888
+     ],
+     [
+      1.322,
+      1.801
+     ],
+     [
+      2.285,
+      2.669
+     ],
+     [
+      3.213,
+      3.647
+     ],
+     [
+      4.171,
+      4.63
+     ],
+     [
+      5.049,
+      5.508
+     ],
+     [
+      5.976,
+      6.361
+     ],
+     [
+      6.904,
+      7.254
+     ],
+     [
+      7.852,
+      8.296
+     ]
+    ],
+    "shortest_chosen_gap": 0.349,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "cuts_sec": [
+     0.6198,
+     1.5533,
+     2.4753,
+     3.4323,
+     4.3979,
+     5.2825,
+     6.1658,
+     7.0753,
+     8.0753
+    ],
+    "pieces": [
+     {
+      "name": "c1.s1.01",
+      "keep": true,
+      "start": 0.0,
+      "end": 0.62,
+      "speech_sec": 0.349,
+      "syll": 1,
+      "rate": 2.86
+     },
+     {
+      "name": "c1.s1.02",
+      "keep": true,
+      "start": 0.62,
+      "end": 1.553,
+      "speech_sec": 0.444,
+      "syll": 2,
+      "rate": 4.5
+     },
+     {
+      "name": "c1.s1.03",
+      "keep": true,
+      "start": 1.553,
+      "end": 2.475,
+      "speech_sec": 0.494,
+      "syll": 1,
+      "rate": 2.02
+     },
+     {
+      "name": "c1.s1.04",
+      "keep": true,
+      "start": 2.475,
+      "end": 3.432,
+      "speech_sec": 0.559,
+      "syll": 1,
+      "rate": 1.79
+     },
+     {
+      "name": "c1.s1.05",
+      "keep": true,
+      "start": 3.432,
+      "end": 4.398,
+      "speech_sec": 0.534,
+      "syll": 1,
+      "rate": 1.87
+     },
+     {
+      "name": "c1.s1.06",
+      "keep": true,
+      "start": 4.398,
+      "end": 5.283,
+      "speech_sec": 0.434,
+      "syll": 2,
+      "rate": 4.61
+     },
+     {
+      "name": "c1.s1.07",
+      "keep": true,
+      "start": 5.283,
+      "end": 6.166,
+      "speech_sec": 0.479,
+      "syll": 1,
+      "rate": 2.09
+     },
+     {
+      "name": "c1.s1.08",
+      "keep": true,
+      "start": 6.166,
+      "end": 7.075,
+      "speech_sec": 0.554,
+      "syll": 1,
+      "rate": 1.81
+     },
+     {
+      "name": "c1.s1.09",
+      "keep": true,
+      "start": 7.075,
+      "end": 8.075,
+      "speech_sec": 0.614,
+      "syll": 1,
+      "rate": 1.63
+     },
+     {
+      "name": "c1.s1.10",
+      "keep": true,
+      "start": 8.075,
+      "end": 8.96,
+      "speech_sec": 0.514,
+      "syll": 2,
+      "rate": 3.89
+     }
+    ],
+    "boundary_misalign": 0.058,
+    "cut_suspect": false
+   },
+   "joins": [
+    {
+     "from": "c1.s1.01",
+     "to": "c1.s1.02",
+     "step_st": 1.33,
+     "a_hz": 85.8,
+     "b_hz": 92.7,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.02",
+     "to": "c1.s1.03",
+     "step_st": 6.14,
+     "a_hz": 92.7,
+     "b_hz": 132.2,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.03",
+     "to": "c1.s1.04",
+     "step_st": -5.13,
+     "a_hz": 132.2,
+     "b_hz": 98.3,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.04",
+     "to": "c1.s1.05",
+     "step_st": -0.13,
+     "a_hz": 96.5,
+     "b_hz": 95.7,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.05",
+     "to": "c1.s1.06",
+     "step_st": -0.23,
+     "a_hz": 95.2,
+     "b_hz": 94.0,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.06",
+     "to": "c1.s1.07",
+     "step_st": 5.31,
+     "a_hz": 94.0,
+     "b_hz": 127.7,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.07",
+     "to": "c1.s1.08",
+     "step_st": -5.29,
+     "a_hz": 127.7,
+     "b_hz": 94.1,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.08",
+     "to": "c1.s1.09",
+     "step_st": 2.38,
+     "a_hz": 93.9,
+     "b_hz": 107.7,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.09",
+     "to": "c1.s1.10",
+     "step_st": -2.26,
+     "a_hz": 103.2,
+     "b_hz": 90.6,
+     "widened": false
+    }
+   ],
+   "join_max_st": 6.14
+  },
+  {
+   "rank": 2,
+   "take": "t2.mp3",
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d01/car.say1.kn/t2.mp3",
+   "score": 11.309,
+   "penalties": {
+    "rate": 8.033,
+    "dur": 0.241,
+    "f0sd": 0.02,
+    "join": 3.015
+   },
+   "soft_violations": [
+    "eklemleme 2.59 bant dışı (5.0–6.2)",
+    "taşıyıcı eklemi 6.03 > 2.0 yt"
+   ],
+   "reasons": [
+    "süre 8.58 sn, ortancadan %1.2",
+    "F0 yayılımı 4.15 yt"
+   ],
+   "metrics": {
+    "duration": 8.8,
+    "active_sec": 8.581,
+    "speech_sec": 5.013,
+    "articulation": 2.59,
+    "f0_mean_hz": 100.7,
+    "f0_geo_hz": 97.9,
+    "f0_sd_semitones": 4.15,
+    "lufs": -21.12,
+    "rms_db": -17.7,
+    "true_peak_dbtp": -3.83,
+    "sibilance_ratio": 0.005,
+    "pause_total_sec": 3.567
+   },
+   "cut": {
+    "needed": 10,
+    "found": 10,
+    "gaps_available": 9,
+    "chosen_gaps": [
+     [
+      0.384,
+      0.793
+     ],
+     [
+      1.212,
+      1.721
+     ],
+     [
+      2.235,
+      2.524
+     ],
+     [
+      3.098,
+      3.492
+     ],
+     [
+      4.021,
+      4.46
+     ],
+     [
+      4.904,
+      5.373
+     ],
+     [
+      5.872,
+      6.176
+     ],
+     [
+      6.71,
+      7.089
+     ],
+     [
+      7.698,
+      8.072
+     ]
+    ],
+    "shortest_chosen_gap": 0.289,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "cuts_sec": [
+     0.5808,
+     1.4723,
+     2.3887,
+     3.2954,
+     4.2425,
+     5.1398,
+     6.0302,
+     6.8998,
+     7.8839
+    ],
+    "pieces": [
+     {
+      "name": "c1.s1.01",
+      "keep": true,
+      "start": 0.0,
+      "end": 0.581,
+      "speech_sec": 0.354,
+      "syll": 1,
+      "rate": 2.82
+     },
+     {
+      "name": "c1.s1.02",
+      "keep": true,
+      "start": 0.581,
+      "end": 1.472,
+      "speech_sec": 0.429,
+      "syll": 2,
+      "rate": 4.66
+     },
+     {
+      "name": "c1.s1.03",
+      "keep": true,
+      "start": 1.472,
+      "end": 2.389,
+      "speech_sec": 0.524,
+      "syll": 1,
+      "rate": 1.91
+     },
+     {
+      "name": "c1.s1.04",
+      "keep": true,
+      "start": 2.389,
+      "end": 3.295,
+      "speech_sec": 0.584,
+      "syll": 1,
+      "rate": 1.71
+     },
+     {
+      "name": "c1.s1.05",
+      "keep": true,
+      "start": 3.295,
+      "end": 4.243,
+      "speech_sec": 0.544,
+      "syll": 1,
+      "rate": 1.84
+     },
+     {
+      "name": "c1.s1.06",
+      "keep": true,
+      "start": 4.243,
+      "end": 5.14,
+      "speech_sec": 0.459,
+      "syll": 2,
+      "rate": 4.36
+     },
+     {
+      "name": "c1.s1.07",
+      "keep": true,
+      "start": 5.14,
+      "end": 6.03,
+      "speech_sec": 0.504,
+      "syll": 1,
+      "rate": 1.98
+     },
+     {
+      "name": "c1.s1.08",
+      "keep": true,
+      "start": 6.03,
+      "end": 6.9,
+      "speech_sec": 0.539,
+      "syll": 1,
+      "rate": 1.86
+     },
+     {
+      "name": "c1.s1.09",
+      "keep": true,
+      "start": 6.9,
+      "end": 7.884,
+      "speech_sec": 0.619,
+      "syll": 1,
+      "rate": 1.62
+     },
+     {
+      "name": "c1.s1.10",
+      "keep": true,
+      "start": 7.884,
+      "end": 8.8,
+      "speech_sec": 0.529,
+      "syll": 2,
+      "rate": 3.78
+     }
+    ],
+    "boundary_misalign": 0.063,
+    "cut_suspect": false
+   },
+   "joins": [
+    {
+     "from": "c1.s1.01",
+     "to": "c1.s1.02",
+     "step_st": 0.63,
+     "a_hz": 87.4,
+     "b_hz": 90.7,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.02",
+     "to": "c1.s1.03",
+     "step_st": 6.03,
+     "a_hz": 90.7,
+     "b_hz": 128.4,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.03",
+     "to": "c1.s1.04",
+     "step_st": -4.95,
+     "a_hz": 129.1,
+     "b_hz": 97.0,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.04",
+     "to": "c1.s1.05",
+     "step_st": 0.7,
+     "a_hz": 92.9,
+     "b_hz": 96.7,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.05",
+     "to": "c1.s1.06",
+     "step_st": -0.73,
+     "a_hz": 95.7,
+     "b_hz": 91.8,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.06",
+     "to": "c1.s1.07",
+     "step_st": 5.61,
+     "a_hz": 91.8,
+     "b_hz": 126.9,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.07",
+     "to": "c1.s1.08",
+     "step_st": -4.83,
+     "a_hz": 126.9,
+     "b_hz": 96.0,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.08",
+     "to": "c1.s1.09",
+     "step_st": 1.54,
+     "a_hz": 95.3,
+     "b_hz": 104.2,
+     "widened": false
+    },
+    {
+     "from": "c1.s1.09",
+     "to": "c1.s1.10",
+     "step_st": -1.72,
+     "a_hz": 99.8,
+     "b_hz": 90.3,
+     "widened": false
+    }
+   ],
+   "join_max_st": 6.03
+  }
+ ],
+ "excluded": [],
+ "order_rule": "SPEC §4.1: zorunlu (a,b) geçenler; önce yumuşak ihlal sayısı (c,f,kesim kuşkusu), sonra ceza toplamı",
+ "weights_note": "VARSAYIM ceza birimleri: hız 0.30 hece/sn, süre %5, F0 yayılımı 0.5 yt, eklem 2.0 yt",
+ "note": "Sıralama yalnız nesneldir; §4.2 Scribe doğrulaması ayrıca yapılmalıdır.",
+ "_rc": 0
+}

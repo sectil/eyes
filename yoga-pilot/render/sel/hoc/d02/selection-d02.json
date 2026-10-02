@@ -1,0 +1,6335 @@
+{
+ "lesson": "d02",
+ "voice": "hoc",
+ "voice_name": "Nefona Hoca",
+ "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+ "sex_param": "m",
+ "model_id": "eleven_v4",
+ "spec": "yoga-pilot/b/SPEC.v3.md §4–§6",
+ "units": {
+  "n1.sec": {
+   "unit": "n1.sec",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derinleşme",
+   "tts": "Bugün kendine kısa bir niyet seçiyorsun. Aklına bir şey gelmezse niyetin \"Kendime dinlenmeye izin veriyorum\" olsun.",
+   "screen": "Bugün kendine kısa bir niyet seçiyorsun. Aklına bir şey gelmezse niyetin \"Kendime dinlenmeye izin veriyorum\" olsun.",
+   "screen_equals_tts": true,
+   "chosen_take": "t1.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/n1.sec/t1.mp3",
+   "generation_id": "wzoAytRzCnhKUzw5n1G2",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.012,
+   "soft_violations": [],
+   "metrics": {
+    "duration": 8.48,
+    "active_sec": 8.216,
+    "speech_sec": 7.383,
+    "articulation": 5.42,
+    "f0_mean_hz": 135.1,
+    "f0_geo_hz": 132.4,
+    "f0_sd_semitones": 3.51,
+    "lufs": -18.67,
+    "rms_db": -17.0,
+    "true_peak_dbtp": -4.94,
+    "sibilance_ratio": 0.0087,
+    "pause_total_sec": 0.833
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Bugün kendine kısa bir niyet seçiyorsun. Aklına bir şey gelmezse niyetin \"Kendime dinlenmeye izin veriyorum.\" olsun.",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "zbQBVshkJhejQ8ZzvOHf",
+     "session_ids": [
+      "xMM2kWNIuXbymcDnfLon"
+     ]
+    }
+   ],
+   "scribe_text": "Bugün kendine kısa bir niyet seçiyorsun. Aklına bir şey gelmezse niyetin \"Kendime dinlenmeye izin veriyorum.\" olsun.",
+   "compare": "equal",
+   "cut": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/n1.sec/t1.mp3",
+    "n": 2,
+    "thr_db": -50.67,
+    "pauses": [
+     [
+      2.739,
+      3.273
+     ],
+     [
+      5.433,
+      5.732
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 3,
+    "gaps_available": 2,
+    "chosen_gaps": [
+     [
+      2.739,
+      3.273
+     ]
+    ],
+    "shortest_chosen_gap": 0.534,
+    "longest_unchosen_gap": 0.299,
+    "margin_ratio": 1.783,
+    "ok": true,
+    "cuts": [
+     3.0108
+    ],
+    "pieces": [
+     {
+      "name": "n1.sec#1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/n1.sec/n1.sec#1.wav",
+      "start": 0.0,
+      "end": 3.0108,
+      "dur": 3.011,
+      "speech_sec": 2.669,
+      "syll": 14,
+      "rate": 5.25
+     },
+     {
+      "name": "n1.sec#2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/n1.sec/n1.sec#2.wav",
+      "start": 3.0108,
+      "end": 8.48,
+      "dur": 5.469,
+      "speech_sec": 4.764,
+      "syll": 26,
+      "rate": 5.46
+     }
+    ],
+    "boundary_misalign": 0.002,
+    "cut_suspect": false
+   },
+   "joins": null,
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC.v3 §4.6 (c): kesim yalnız ölçüyle denetlendi (Scribe sözcük zaman damgası ve yerel yükleme aracı yok)"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "n1.sec#1",
+     "text": "Bugün kendine kısa bir niyet seçiyorsun.",
+     "syll": 14,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/n1.sec/n1.sec#1.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/n1.sec/n1.sec#1.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 3.011,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.92,
+        "applied_gain_db": 0.96
+       }
+      ],
+      "trim_in_sec": [
+       0.077,
+       2.743
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 0.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.35,
+       "band_peak_over_thr_db": -9.04,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 2.976,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.96,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.39,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/n1.sec/n1.sec#1.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/n1.sec/n1.sec#1.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 2.976,
+      "speech_sec": 2.669,
+      "articulation": 5.25,
+      "f0_mean_hz": 140.2,
+      "f0_sd_semitones": 3.5,
+      "sibilance_ratio": 0.0121,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.99
+      },
+      "dc": 4.06e-09,
+      "lufs": -18.0,
+      "rms_db": -16.39,
+      "true_peak_dbtp": -5.96,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "n1.sec#2",
+     "text": "Aklına bir şey gelmezse niyetin \"Kendime dinlenmeye izin veriyorum\" olsun.",
+     "syll": 26,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/n1.sec/n1.sec#2.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/n1.sec/n1.sec#2.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 5.469,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -51.05,
+        "applied_gain_db": 0.95
+       }
+      ],
+      "trim_in_sec": [
+       0.258,
+       5.28
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 61.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.82,
+       "band_peak_over_thr_db": -10.88,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 5.332,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -6.44,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.87,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/n1.sec/n1.sec#2.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/n1.sec/n1.sec#2.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 5.332,
+      "speech_sec": 4.724,
+      "articulation": 5.5,
+      "f0_mean_hz": 133.1,
+      "f0_sd_semitones": 3.46,
+      "sibilance_ratio": 0.0089,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -6.77
+      },
+      "dc": -1.05e-08,
+      "lufs": -18.0,
+      "rms_db": -16.87,
+      "true_peak_dbtp": -6.44,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "n2.hatirla": {
+   "unit": "n2.hatirla",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Hatırlamazsan \"Kendime dinlenmeye izin veriyorum\" demen de olur.",
+   "screen": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Hatırlamazsan \"Kendime dinlenmeye izin veriyorum\" demen de olur.",
+   "screen_equals_tts": true,
+   "chosen_take": "t1.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/n2.hatirla/t1.mp3",
+   "generation_id": "GFUlGOV7ZEDmtjzOiOWD",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 1.733,
+   "soft_violations": [
+    "Derin tavanı aşıldı: 5.52 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "metrics": {
+    "duration": 8.88,
+    "active_sec": 8.675,
+    "speech_sec": 7.613,
+    "articulation": 5.52,
+    "f0_mean_hz": 125.8,
+    "f0_geo_hz": 122.3,
+    "f0_sd_semitones": 4.1,
+    "lufs": -17.65,
+    "rms_db": -15.73,
+    "true_peak_dbtp": -3.39,
+    "sibilance_ratio": 0.0067,
+    "pause_total_sec": 1.063
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Hatırlamazsan kendime dinlenmeye izin veriyorum demen de olur",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "HrqZkcNjCR6olv4l6nNP",
+     "session_ids": [
+      "vF1104GMzjbQpYDlNjT5"
+     ]
+    }
+   ],
+   "scribe_text": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Hatırlamazsan kendime dinlenmeye izin veriyorum demen de olur",
+   "compare": "equal",
+   "cut": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/n2.hatirla/t1.mp3",
+    "n": 2,
+    "thr_db": -49.65,
+    "pauses": [
+     [
+      3.816,
+      4.37
+     ],
+     [
+      5.238,
+      5.562
+     ],
+     [
+      7.648,
+      7.832
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 4,
+    "gaps_available": 3,
+    "chosen_gaps": [
+     [
+      3.816,
+      4.37
+     ]
+    ],
+    "shortest_chosen_gap": 0.554,
+    "longest_unchosen_gap": 0.324,
+    "margin_ratio": 1.708,
+    "ok": true,
+    "cuts": [
+     4.0931
+    ],
+    "pieces": [
+     {
+      "name": "n2.hatirla#1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/n2.hatirla/n2.hatirla#1.wav",
+      "start": 0.0,
+      "end": 4.0931,
+      "dur": 4.093,
+      "speech_sec": 3.766,
+      "syll": 19,
+      "rate": 5.04
+     },
+     {
+      "name": "n2.hatirla#2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/n2.hatirla/n2.hatirla#2.wav",
+      "start": 4.0931,
+      "end": 8.88,
+      "dur": 4.787,
+      "speech_sec": 3.856,
+      "syll": 23,
+      "rate": 5.96
+     }
+    ],
+    "boundary_misalign": 0.04,
+    "cut_suspect": false
+   },
+   "joins": null,
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC.v3 §4.6 (c): kesim yalnız ölçüyle denetlendi (Scribe sözcük zaman damgası ve yerel yükleme aracı yok)"
+    },
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 5.04 hece/sn",
+     "piece": "n2.hatirla#1"
+    },
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 5.96 hece/sn",
+     "piece": "n2.hatirla#2"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "n2.hatirla#1",
+     "text": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli.",
+     "syll": 19,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/n2.hatirla/n2.hatirla#1.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/n2.hatirla/n2.hatirla#1.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 4.093,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.34,
+        "applied_gain_db": 0.33
+       }
+      ],
+      "trim_in_sec": [
+       0.056,
+       3.821
+      ],
+      "lead_pad_ms": 4.1,
+      "tail_pad_ms": 0.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.49,
+       "band_peak_over_thr_db": -7.92,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 4.075,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.06,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.16,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/n2.hatirla/n2.hatirla#1.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/n2.hatirla/n2.hatirla#1.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 4.075,
+      "speech_sec": 3.766,
+      "articulation": 5.04,
+      "f0_mean_hz": 122.4,
+      "f0_sd_semitones": 4.18,
+      "sibilance_ratio": 0.0089,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.07
+      },
+      "dc": -2.82e-09,
+      "lufs": -18.0,
+      "rms_db": -16.16,
+      "true_peak_dbtp": -5.06,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "n2.hatirla#2",
+     "text": "Hatırlamazsan \"Kendime dinlenmeye izin veriyorum\" demen de olur.",
+     "syll": 23,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/n2.hatirla/n2.hatirla#2.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/n2.hatirla/n2.hatirla#2.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 4.787,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.25,
+        "applied_gain_db": -0.08
+       },
+       {
+        "trim_thr_in_dbfs": -49.92,
+        "applied_gain_db": -0.08
+       }
+      ],
+      "trim_in_sec": [
+       0.277,
+       4.634
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 97.1,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.37,
+       "band_peak_over_thr_db": -10.63,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 4.667,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -4.3,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.46,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/n2.hatirla/n2.hatirla#2.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/n2.hatirla/n2.hatirla#2.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 4.667,
+      "speech_sec": 3.856,
+      "articulation": 5.96,
+      "f0_mean_hz": 129.4,
+      "f0_sd_semitones": 3.94,
+      "sibilance_ratio": 0.007,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -4.35
+      },
+      "dc": -9.62e-09,
+      "lufs": -18.0,
+      "rms_db": -16.46,
+      "true_peak_dbtp": -4.3,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "c4.ses.orman": {
+   "unit": "c4.ses.orman",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Uzaktan yaprak hışırtısı gelip gidiyor.",
+   "screen": "Uzaktan yaprak hışırtısı gelip gidiyor.",
+   "screen_equals_tts": true,
+   "chosen_take": "t1.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.ses.orman/t1.mp3",
+   "generation_id": "yET5wwpYui7BhbuHRQ3o",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.464,
+   "soft_violations": [],
+   "metrics": {
+    "duration": 3.04,
+    "active_sec": 2.864,
+    "speech_sec": 2.864,
+    "articulation": 4.89,
+    "f0_mean_hz": 116.3,
+    "f0_geo_hz": 113.2,
+    "f0_sd_semitones": 4.02,
+    "lufs": -18.91,
+    "rms_db": -16.77,
+    "true_peak_dbtp": -4.94,
+    "sibilance_ratio": 0.0099,
+    "pause_total_sec": 0
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Uzaktan yaprak hışırtısı gelip gidiyor",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "l0DJOexDGsknpEyvbmEI",
+     "session_ids": [
+      "hrJ3JDISWw847y6x8cMA"
+     ]
+    }
+   ],
+   "scribe_text": "Uzaktan yaprak hışırtısı gelip gidiyor",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [],
+   "pieces": [
+    {
+     "piece_id": "c4.ses.orman",
+     "text": "Uzaktan yaprak hışırtısı gelip gidiyor.",
+     "syll": 14,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.ses.orman/c4.ses.orman.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.ses.orman/t1.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 3.04,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -51.45,
+        "applied_gain_db": 1.47
+       }
+      ],
+      "trim_in_sec": [
+       0.065,
+       2.92
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 129.8,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.6,
+       "band_peak_over_thr_db": -10.7,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 3.165,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -3.42,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.13,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.ses.orman/t1.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.ses.orman/c4.ses.orman.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 3.165,
+      "speech_sec": 2.859,
+      "articulation": 4.9,
+      "f0_mean_hz": 116.8,
+      "f0_sd_semitones": 3.95,
+      "sibilance_ratio": 0.012,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -3.42
+      },
+      "dc": -9.44e-09,
+      "lufs": -18.0,
+      "rms_db": -16.13,
+      "true_peak_dbtp": -3.42,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15525 Hz; A: bant ≥ 16025 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "c4.ses.kiyi": {
+   "unit": "c4.ses.kiyi",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Uzaktan dalgaların sesi gelip gidiyor.",
+   "screen": "Uzaktan dalgaların sesi gelip gidiyor.",
+   "screen_equals_tts": true,
+   "chosen_take": "t2.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.ses.kiyi/t2.mp3",
+   "generation_id": "dEBzS99AkkzRFE2ekQsL",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.036,
+   "soft_violations": [],
+   "metrics": {
+    "duration": 2.96,
+    "active_sec": 2.799,
+    "speech_sec": 2.799,
+    "articulation": 5.0,
+    "f0_mean_hz": 108.8,
+    "f0_geo_hz": 106.5,
+    "f0_sd_semitones": 3.54,
+    "lufs": -18.13,
+    "rms_db": -16.18,
+    "true_peak_dbtp": -5.53,
+    "sibilance_ratio": 0.0095,
+    "pause_total_sec": 0
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Uzaktan dalgaların sesi gelip gidiyor",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "vuZH5DFgRgK9FkQCiPre",
+     "session_ids": [
+      "rDRKpRIYO6aKsSyDJmmy"
+     ]
+    }
+   ],
+   "scribe_text": "Uzaktan dalgaların sesi gelip gidiyor",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [],
+   "pieces": [
+    {
+     "piece_id": "c4.ses.kiyi",
+     "text": "Uzaktan dalgaların sesi gelip gidiyor.",
+     "syll": 14,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.ses.kiyi/c4.ses.kiyi.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.ses.kiyi/t2.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.96,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.85,
+        "applied_gain_db": 0.81
+       }
+      ],
+      "trim_in_sec": [
+       0.051,
+       2.845
+      ],
+      "lead_pad_ms": 9.0,
+      "tail_pad_ms": 135.1,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.99,
+       "band_peak_over_thr_db": -10.18,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 3.104,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -4.91,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.18,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.ses.kiyi/t2.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.ses.kiyi/c4.ses.kiyi.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 3.104,
+      "speech_sec": 2.799,
+      "articulation": 5.0,
+      "f0_mean_hz": 109.0,
+      "f0_sd_semitones": 3.55,
+      "sibilance_ratio": 0.0114,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -4.92
+      },
+      "dc": -4.14e-09,
+      "lufs": -18.0,
+      "rms_db": -16.18,
+      "true_peak_dbtp": -4.91,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "a.gozler.kisa": {
+   "unit": "a.gozler.kisa",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Varış",
+   "tts": "Gözlerini kapatıp kapatmamak sana kalmış.",
+   "screen": "Gözlerini kapatıp kapatmamak sana kalmış.",
+   "screen_equals_tts": true,
+   "chosen_take": "t1.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/a.gozler.kisa/t1.mp3",
+   "generation_id": "DN1wC4cbD91WfLLFu3Y7",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.698,
+   "soft_violations": [
+    "eklemleme 4.87 bant dışı (5.0–6.2)"
+   ],
+   "metrics": {
+    "duration": 3.28,
+    "active_sec": 3.078,
+    "speech_sec": 3.078,
+    "articulation": 4.87,
+    "f0_mean_hz": 137.1,
+    "f0_geo_hz": 134.1,
+    "f0_sd_semitones": 3.68,
+    "lufs": -18.8,
+    "rms_db": -17.09,
+    "true_peak_dbtp": -5.72,
+    "sibilance_ratio": 0.0051,
+    "pause_total_sec": 0
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Gözlerini kapatıp kapatmamak sana kalmış",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "rNPRDwRno6aIoYIcoaLM",
+     "session_ids": [
+      "SSU1oXjoVuJgwJqXuzsL"
+     ]
+    }
+   ],
+   "scribe_text": "Gözlerini kapatıp kapatmamak sana kalmış",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [],
+   "pieces": [
+    {
+     "piece_id": "a.gozler.kisa",
+     "text": "Gözlerini kapatıp kapatmamak sana kalmış.",
+     "syll": 15,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/a.gozler.kisa/a.gozler.kisa.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/a.gozler.kisa/t1.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 3.28,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -51.39,
+        "applied_gain_db": 1.37
+       }
+      ],
+      "trim_in_sec": [
+       0.052,
+       3.128
+      ],
+      "lead_pad_ms": 7.6,
+      "tail_pad_ms": 98.1,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.74,
+       "band_peak_over_thr_db": -9.84,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 3.386,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -4.26,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.36,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/a.gozler.kisa/t1.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/a.gozler.kisa/a.gozler.kisa.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 3.386,
+      "speech_sec": 3.078,
+      "articulation": 4.87,
+      "f0_mean_hz": 136.1,
+      "f0_sd_semitones": 3.75,
+      "sibilance_ratio": 0.0061,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -4.26
+      },
+      "dc": -1.46e-08,
+      "lufs": -18.0,
+      "rms_db": -16.36,
+      "true_peak_dbtp": -4.26,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15267 Hz; A: bant ≥ 15767 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "a.kolay.kisa": {
+   "unit": "a.kolay.kisa",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Varış",
+   "tts": "Gevşemek zor gelirse bu da olur.",
+   "screen": "Gevşemek zor gelirse bu da olur.",
+   "screen_equals_tts": true,
+   "chosen_take": "t3.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/a.kolay.kisa/t3.mp3",
+   "generation_id": "TkGi8CjJ6t2Kfxhy8yiI",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 1.8,
+   "soft_violations": [
+    "eklemleme 4.46 bant dışı (5.0–6.2)"
+   ],
+   "metrics": {
+    "duration": 2.64,
+    "active_sec": 2.464,
+    "speech_sec": 2.464,
+    "articulation": 4.46,
+    "f0_mean_hz": 137.0,
+    "f0_geo_hz": 134.7,
+    "f0_sd_semitones": 3.25,
+    "lufs": -17.92,
+    "rms_db": -16.21,
+    "true_peak_dbtp": -4.07,
+    "sibilance_ratio": 0.0068,
+    "pause_total_sec": 0
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Gevşemek zor gelirse bu da olur",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "oEYRQlWFgVDlYCdWep5C",
+     "session_ids": [
+      "P2qwr17LsK147iy4Qrgw"
+     ]
+    }
+   ],
+   "scribe_text": "Gevşemek zor gelirse bu da olur",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [],
+   "pieces": [
+    {
+     "piece_id": "a.kolay.kisa",
+     "text": "Gevşemek zor gelirse bu da olur.",
+     "syll": 11,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/a.kolay.kisa/a.kolay.kisa.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/a.kolay.kisa/t3.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.64,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.36,
+        "applied_gain_db": 0.28
+       }
+      ],
+      "trim_in_sec": [
+       0.035,
+       2.492
+      ],
+      "lead_pad_ms": 24.6,
+      "tail_pad_ms": 102.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.78,
+       "band_peak_over_thr_db": -12.07,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 2.767,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -4.21,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.5,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/a.kolay.kisa/t3.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/a.kolay.kisa/a.kolay.kisa.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 2.767,
+      "speech_sec": 2.464,
+      "articulation": 4.46,
+      "f0_mean_hz": 136.5,
+      "f0_sd_semitones": 3.26,
+      "sibilance_ratio": 0.0077,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -4.22
+      },
+      "dc": -1.12e-08,
+      "lufs": -18.0,
+      "rms_db": -16.5,
+      "true_peak_dbtp": -4.21,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "n1.soyle.kisa": {
+   "unit": "n1.soyle.kisa",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derinleşme",
+   "tts": "İçinden bir kez söylemek yeterli.",
+   "screen": "İçinden bir kez söylemek yeterli.",
+   "screen_equals_tts": true,
+   "chosen_take": "t1.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/n1.soyle.kisa/t1.mp3",
+   "generation_id": "wAaQY9vOqE62Z15mp7kB",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.767,
+   "soft_violations": [
+    "eklemleme 4.77 bant dışı (5.0–6.2)"
+   ],
+   "metrics": {
+    "duration": 2.56,
+    "active_sec": 2.305,
+    "speech_sec": 2.305,
+    "articulation": 4.77,
+    "f0_mean_hz": 117.6,
+    "f0_geo_hz": 113.0,
+    "f0_sd_semitones": 4.94,
+    "lufs": -17.59,
+    "rms_db": -15.85,
+    "true_peak_dbtp": -5.39,
+    "sibilance_ratio": 0.0055,
+    "pause_total_sec": 0
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "İçinden bir kez söylemek yeterli",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "qVKBO9D8oJVMTvrEpDLp",
+     "session_ids": [
+      "ihRixZHvPbU6UfabcduC"
+     ]
+    }
+   ],
+   "scribe_text": "İçinden bir kez söylemek yeterli",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [],
+   "pieces": [
+    {
+     "piece_id": "n1.soyle.kisa",
+     "text": "İçinden bir kez söylemek yeterli.",
+     "syll": 11,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/n1.soyle.kisa/n1.soyle.kisa.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/n1.soyle.kisa/t1.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.56,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.36,
+        "applied_gain_db": 0.3
+       }
+      ],
+      "trim_in_sec": [
+       0.041,
+       2.338
+      ],
+      "lead_pad_ms": 19.1,
+      "tail_pad_ms": 28.1,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.71,
+       "band_peak_over_thr_db": -12.15,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 2.607,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.77,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.41,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/n1.soyle.kisa/t1.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/n1.soyle.kisa/n1.soyle.kisa.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 2.607,
+      "speech_sec": 2.3,
+      "articulation": 4.78,
+      "f0_mean_hz": 118.4,
+      "f0_sd_semitones": 4.94,
+      "sibilance_ratio": 0.0068,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.85
+      },
+      "dc": -1.01e-08,
+      "lufs": -18.0,
+      "rms_db": -16.41,
+      "true_peak_dbtp": -5.77,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "n2.hatirla.kisa": {
+   "unit": "n2.hatirla.kisa",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Niyetini içinden bir kez daha söylemek yeterli.",
+   "screen": "Niyetini içinden bir kez daha söylemek yeterli.",
+   "screen_equals_tts": true,
+   "chosen_take": "t1.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/n2.hatirla.kisa/t1.mp3",
+   "generation_id": "WrDvQzdAyhEmDiNPCf56",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 1.83,
+   "soft_violations": [
+    "Derin tavanı aşıldı: 5.52 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "metrics": {
+    "duration": 3.28,
+    "active_sec": 3.078,
+    "speech_sec": 3.078,
+    "articulation": 5.52,
+    "f0_mean_hz": 123.6,
+    "f0_geo_hz": 119.7,
+    "f0_sd_semitones": 4.42,
+    "lufs": -17.1,
+    "rms_db": -15.26,
+    "true_peak_dbtp": -5.17,
+    "sibilance_ratio": 0.0041,
+    "pause_total_sec": 0
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Niyetini içinden bir kez daha söylemek yeterli",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "DQZIsfSul9TDcLAtFwyl",
+     "session_ids": [
+      "vJctBEVcv6KqKmnMTyRt"
+     ]
+    }
+   ],
+   "scribe_text": "Niyetini içinden bir kez daha söylemek yeterli",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 5.52 hece/sn",
+     "piece": "n2.hatirla.kisa"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "n2.hatirla.kisa",
+     "text": "Niyetini içinden bir kez daha söylemek yeterli.",
+     "syll": 17,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/n2.hatirla.kisa/n2.hatirla.kisa.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/n2.hatirla.kisa/t1.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 3.28,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -49.55,
+        "applied_gain_db": -0.35
+       }
+      ],
+      "trim_in_sec": [
+       0.044,
+       3.119
+      ],
+      "lead_pad_ms": 16.2,
+      "tail_pad_ms": 88.8,
+      "deess": {
+       "applied": false,
+       "threshold_db": -9.93,
+       "band_peak_over_thr_db": -13.24,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 3.385,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.65,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.28,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/n2.hatirla.kisa/t1.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/n2.hatirla.kisa/n2.hatirla.kisa.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 3.385,
+      "speech_sec": 3.078,
+      "articulation": 5.52,
+      "f0_mean_hz": 124.1,
+      "f0_sd_semitones": 4.35,
+      "sibilance_ratio": 0.0047,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.66
+      },
+      "dc": -6.76e-09,
+      "lufs": -18.0,
+      "rms_db": -16.28,
+      "true_peak_dbtp": -5.65,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "car.agir": {
+   "unit": "car.agir",
+   "status": "ok",
+   "kind": "carrier",
+   "phase": "Derin",
+   "tts": "Kollar ağır… bacaklar ağır… sırt ağır… omuzlar ağır… bütün beden ağır.",
+   "screen": "Kollar ağır… bacaklar ağır… sırt ağır… omuzlar ağır… bütün beden ağır.",
+   "screen_equals_tts": true,
+   "chosen_take": "t1.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/car.agir/t1.mp3",
+   "generation_id": "mZwzkMrmG9MWQUBxKhYz",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 5.271,
+   "soft_violations": [
+    "taşıyıcı eklemi 9.26 > 2.0 yt"
+   ],
+   "metrics": {
+    "duration": 8.48,
+    "active_sec": 8.311,
+    "speech_sec": 6.72,
+    "articulation": 3.42,
+    "f0_mean_hz": 89.1,
+    "f0_geo_hz": 87.0,
+    "f0_sd_semitones": 3.81,
+    "lufs": -18.54,
+    "rms_db": -16.18,
+    "true_peak_dbtp": -5.99,
+    "sibilance_ratio": 0.0044,
+    "pause_total_sec": 1.591
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Kollar ağır, bacaklar ağır, sırt ağır, omuzlar ağır, bütün beden ağır",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "JSCdiYH33dmYQTzL6LlI",
+     "session_ids": [
+      "R9f2MSo9l4LBej4Keoei"
+     ]
+    }
+   ],
+   "scribe_text": "Kollar ağır, bacaklar ağır, sırt ağır, omuzlar ağır, bütün beden ağır",
+   "compare": "equal",
+   "cut": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/car.agir/t1.mp3",
+    "n": 5,
+    "thr_db": -50.54,
+    "pauses": [
+     [
+      1.362,
+      1.606
+     ],
+     [
+      2.948,
+      3.342
+     ],
+     [
+      4.43,
+      4.899
+     ],
+     [
+      6.156,
+      6.64
+     ]
+    ],
+    "breaths": [],
+    "needed": 5,
+    "found": 5,
+    "gaps_available": 4,
+    "chosen_gaps": [
+     [
+      1.362,
+      1.606
+     ],
+     [
+      2.948,
+      3.342
+     ],
+     [
+      4.43,
+      4.899
+     ],
+     [
+      6.156,
+      6.64
+     ]
+    ],
+    "shortest_chosen_gap": 0.244,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     1.4842,
+     3.1457,
+     4.6675,
+     6.4058
+    ],
+    "pieces": [
+     {
+      "name": "c3.a1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a1.wav",
+      "start": 0.0,
+      "end": 1.4842,
+      "dur": 1.484,
+      "speech_sec": 1.332,
+      "syll": 4,
+      "rate": 3.0
+     },
+     {
+      "name": "c3.a2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a2.wav",
+      "start": 1.4842,
+      "end": 3.1457,
+      "dur": 1.661,
+      "speech_sec": 1.357,
+      "syll": 5,
+      "rate": 3.68
+     },
+     {
+      "name": "c3.a2b",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a2b.wav",
+      "start": 3.1457,
+      "end": 4.6675,
+      "dur": 1.522,
+      "speech_sec": 1.063,
+      "syll": 3,
+      "rate": 2.82
+     },
+     {
+      "name": "c3.a2c",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a2c.wav",
+      "start": 4.6675,
+      "end": 6.4058,
+      "dur": 1.738,
+      "speech_sec": 1.267,
+      "syll": 5,
+      "rate": 3.95
+     },
+     {
+      "name": "c3.a3",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a3.wav",
+      "start": 6.4058,
+      "end": 8.48,
+      "dur": 2.074,
+      "speech_sec": 1.711,
+      "syll": 6,
+      "rate": 3.51
+     }
+    ],
+    "boundary_misalign": 0.022,
+    "cut_suspect": false
+   },
+   "joins": [
+    {
+     "a": "c3.a1",
+     "b": "c3.a2",
+     "step_st": -2.03,
+     "pass": false
+    },
+    {
+     "a": "c3.a2",
+     "b": "c3.a2b",
+     "step_st": 9.29,
+     "pass": false
+    },
+    {
+     "a": "c3.a2b",
+     "b": "c3.a2c",
+     "step_st": 7.58,
+     "pass": false
+    },
+    {
+     "a": "c3.a2c",
+     "b": "c3.a3",
+     "step_st": 8.85,
+     "pass": false
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC.v3 §4.6 (c): kesim yalnız ölçüyle denetlendi (Scribe sözcük zaman damgası ve yerel yükleme aracı yok)"
+    },
+    {
+     "flag": "eklem>2yt",
+     "reason": "taşıyıcı ekleminde F0 basamağı > 2 yt: [('c3.a1', -2.03), ('c3.a2', 9.29), ('c3.a2b', 7.58), ('c3.a2c', 8.85)]"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "c3.a1",
+     "text": "Kollar ağır…",
+     "syll": 4,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.agir/c3.a1.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a1.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 1.484,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -49.23,
+        "applied_gain_db": -0.38
+       },
+       {
+        "trim_thr_in_dbfs": -49.62,
+        "applied_gain_db": -0.38
+       }
+      ],
+      "trim_in_sec": [
+       0.039,
+       1.267
+      ],
+      "lead_pad_ms": 20.8,
+      "tail_pad_ms": 32.7,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.31,
+       "band_peak_over_thr_db": -34.47,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.538,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -8.04,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.69,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a1.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.agir/c3.a1.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.538,
+      "speech_sec": 1.282,
+      "articulation": 3.12,
+      "f0_mean_hz": 106.6,
+      "f0_sd_semitones": 3.4,
+      "sibilance_ratio": 0.0002,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -8.05
+      },
+      "dc": -3.67e-07,
+      "lufs": -18.0,
+      "rms_db": -16.69,
+      "true_peak_dbtp": -8.04,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "c3.a2",
+     "text": "bacaklar ağır…",
+     "syll": 5,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.agir/c3.a2.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a2.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 1.661,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -52.63,
+        "applied_gain_db": 2.43
+       }
+      ],
+      "trim_in_sec": [
+       0.119,
+       1.47
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 58.1,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.94,
+       "band_peak_over_thr_db": -14.17,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.661,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -4.74,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -15.51,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a2.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.agir/c3.a2.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.661,
+      "speech_sec": 1.352,
+      "articulation": 3.7,
+      "f0_mean_hz": 79.4,
+      "f0_sd_semitones": 2.01,
+      "sibilance_ratio": 0.0024,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -4.76
+      },
+      "dc": 6.68e-07,
+      "lufs": -18.0,
+      "rms_db": -15.51,
+      "true_peak_dbtp": -4.74,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "c3.a2b",
+     "text": "sırt ağır…",
+     "syll": 3,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.agir/c3.a2b.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a2b.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 1.522,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -53.33,
+        "applied_gain_db": 3.36
+       }
+      ],
+      "trim_in_sec": [
+       0.193,
+       1.297
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 25.6,
+      "deess": {
+       "applied": false,
+       "threshold_db": -13.75,
+       "band_peak_over_thr_db": -7.72,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.414,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -3.78,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.39,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a2b.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.agir/c3.a2b.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.414,
+      "speech_sec": 1.108,
+      "articulation": 2.71,
+      "f0_mean_hz": 83.7,
+      "f0_sd_semitones": 4.56,
+      "sibilance_ratio": 0.0443,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -3.82
+      },
+      "dc": -4.73e-08,
+      "lufs": -18.0,
+      "rms_db": -16.39,
+      "true_peak_dbtp": -3.78,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "c3.a2c",
+     "text": "omuzlar ağır…",
+     "syll": 5,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.agir/c3.a2c.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a2c.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 1.738,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.5,
+        "applied_gain_db": 0.45
+       }
+      ],
+      "trim_in_sec": [
+       0.229,
+       1.491
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 2.4,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.67,
+       "band_peak_over_thr_db": -11.11,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.572,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.49,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.22,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a2c.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.agir/c3.a2c.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.572,
+      "speech_sec": 1.262,
+      "articulation": 3.96,
+      "f0_mean_hz": 91.0,
+      "f0_sd_semitones": 3.19,
+      "sibilance_ratio": 0.0046,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.51
+      },
+      "dc": -2.13e-08,
+      "lufs": -18.0,
+      "rms_db": -16.22,
+      "true_peak_dbtp": -5.49,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "c3.a3",
+     "text": "bütün beden ağır.",
+     "syll": 6,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.agir/c3.a3.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a3.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.074,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -51.83,
+        "applied_gain_db": 1.5
+       },
+       {
+        "trim_thr_in_dbfs": -51.5,
+        "applied_gain_db": 1.51
+       }
+      ],
+      "trim_in_sec": [
+       0.233,
+       1.937
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 113.2,
+      "deess": {
+       "applied": false,
+       "threshold_db": -12.01,
+       "band_peak_over_thr_db": -24.41,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 2.014,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.14,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.51,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.agir/c3.a3.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.agir/c3.a3.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 2.014,
+      "speech_sec": 1.706,
+      "articulation": 3.52,
+      "f0_mean_hz": 86.5,
+      "f0_sd_semitones": 3.15,
+      "sibilance_ratio": 0.0005,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.28
+      },
+      "dc": -2.59e-08,
+      "lufs": -18.0,
+      "rms_db": -16.51,
+      "true_peak_dbtp": -5.14,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "car.hafif": {
+   "unit": "car.hafif",
+   "status": "ok",
+   "kind": "carrier",
+   "phase": "Derin",
+   "tts": "Kollar hafif… bacaklar hafif… sırt hafif… omuzlar hafif… bütün beden hafif.",
+   "screen": "Kollar hafif… bacaklar hafif… sırt hafif… omuzlar hafif… bütün beden hafif.",
+   "screen_equals_tts": true,
+   "chosen_take": "t3.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/car.hafif/t3.mp3",
+   "generation_id": "4tjGCo52SUtEMuGOCw3s",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 5.485,
+   "soft_violations": [
+    "taşıyıcı eklemi 10.89 > 2.0 yt"
+   ],
+   "metrics": {
+    "duration": 8.88,
+    "active_sec": 8.7,
+    "speech_sec": 6.76,
+    "articulation": 3.4,
+    "f0_mean_hz": 106.7,
+    "f0_geo_hz": 103.9,
+    "f0_sd_semitones": 4.05,
+    "lufs": -18.76,
+    "rms_db": -16.38,
+    "true_peak_dbtp": -5.02,
+    "sibilance_ratio": 0.0045,
+    "pause_total_sec": 1.941
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Kollar hafif, bacaklar hafif, sırt hafif, omuzlar hafif, bütün beden hafif",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "LeUYZZPZ5qjFMES7p4Pz",
+     "session_ids": [
+      "crcblWX8wBmxQ2av1K3o"
+     ]
+    }
+   ],
+   "scribe_text": "Kollar hafif, bacaklar hafif, sırt hafif, omuzlar hafif, bütün beden hafif",
+   "compare": "equal",
+   "cut": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/car.hafif/t3.mp3",
+    "n": 5,
+    "thr_db": -50.76,
+    "pauses": [
+     [
+      1.322,
+      1.766
+     ],
+     [
+      3.063,
+      3.547
+     ],
+     [
+      4.759,
+      5.258
+     ],
+     [
+      6.47,
+      6.984
+     ]
+    ],
+    "breaths": [],
+    "needed": 5,
+    "found": 5,
+    "gaps_available": 4,
+    "chosen_gaps": [
+     [
+      1.322,
+      1.766
+     ],
+     [
+      3.063,
+      3.547
+     ],
+     [
+      4.759,
+      5.258
+     ],
+     [
+      6.47,
+      6.984
+     ]
+    ],
+    "shortest_chosen_gap": 0.444,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     1.543,
+     3.3123,
+     5.0058,
+     6.7188
+    ],
+    "pieces": [
+     {
+      "name": "c3.h1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h1.wav",
+      "start": 0.0,
+      "end": 1.543,
+      "dur": 1.543,
+      "speech_sec": 1.297,
+      "syll": 4,
+      "rate": 3.08
+     },
+     {
+      "name": "c3.h2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h2.wav",
+      "start": 1.543,
+      "end": 3.3123,
+      "dur": 1.769,
+      "speech_sec": 1.262,
+      "syll": 5,
+      "rate": 3.96
+     },
+     {
+      "name": "c3.h2b",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h2b.wav",
+      "start": 3.3123,
+      "end": 5.0058,
+      "dur": 1.694,
+      "speech_sec": 1.222,
+      "syll": 3,
+      "rate": 2.45
+     },
+     {
+      "name": "c3.h2c",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h2c.wav",
+      "start": 5.0058,
+      "end": 6.7188,
+      "dur": 1.713,
+      "speech_sec": 1.217,
+      "syll": 5,
+      "rate": 4.11
+     },
+     {
+      "name": "c3.h3",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h3.wav",
+      "start": 6.7188,
+      "end": 8.88,
+      "dur": 2.161,
+      "speech_sec": 1.751,
+      "syll": 6,
+      "rate": 3.43
+     }
+    ],
+    "boundary_misalign": 0.025,
+    "cut_suspect": false
+   },
+   "joins": [
+    {
+     "a": "c3.h1",
+     "b": "c3.h2",
+     "step_st": -0.84,
+     "pass": true
+    },
+    {
+     "a": "c3.h2",
+     "b": "c3.h2b",
+     "step_st": 10.61,
+     "pass": false
+    },
+    {
+     "a": "c3.h2b",
+     "b": "c3.h2c",
+     "step_st": -0.66,
+     "pass": true
+    },
+    {
+     "a": "c3.h2c",
+     "b": "c3.h3",
+     "step_st": -0.29,
+     "pass": true
+    }
+   ],
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC.v3 §4.6 (c): kesim yalnız ölçüyle denetlendi (Scribe sözcük zaman damgası ve yerel yükleme aracı yok)"
+    },
+    {
+     "flag": "eklem>2yt",
+     "reason": "taşıyıcı ekleminde F0 basamağı > 2 yt: [('c3.h2', 10.61)]"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "c3.h1",
+     "text": "Kollar hafif…",
+     "syll": 4,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.hafif/c3.h1.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h1.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 1.543,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -49.46,
+        "applied_gain_db": -0.25
+       },
+       {
+        "trim_thr_in_dbfs": -49.75,
+        "applied_gain_db": -0.25
+       }
+      ],
+      "trim_in_sec": [
+       0.03,
+       1.209
+      ],
+      "lead_pad_ms": 29.7,
+      "tail_pad_ms": 0.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -9.72,
+       "band_peak_over_thr_db": -33.53,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.489,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.54,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -15.97,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h1.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.hafif/c3.h1.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.489,
+      "speech_sec": 1.232,
+      "articulation": 3.25,
+      "f0_mean_hz": 121.3,
+      "f0_sd_semitones": 3.46,
+      "sibilance_ratio": 0.0002,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.54
+      },
+      "dc": 6.02e-10,
+      "lufs": -18.0,
+      "rms_db": -15.97,
+      "true_peak_dbtp": -5.54,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "c3.h2",
+     "text": "bacaklar hafif…",
+     "syll": 5,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.hafif/c3.h2.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h2.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 1.769,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -51.67,
+        "applied_gain_db": 1.59
+       }
+      ],
+      "trim_in_sec": [
+       0.22,
+       1.502
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 0.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.21,
+       "band_peak_over_thr_db": -14.55,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.592,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -4.7,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -15.62,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h2.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.hafif/c3.h2.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.592,
+      "speech_sec": 1.282,
+      "articulation": 3.9,
+      "f0_mean_hz": 92.8,
+      "f0_sd_semitones": 1.72,
+      "sibilance_ratio": 0.0019,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -4.71
+      },
+      "dc": -4.36e-10,
+      "lufs": -18.0,
+      "rms_db": -15.62,
+      "true_peak_dbtp": -4.7,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15482 Hz; A: bant ≥ 15982 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "c3.h2b",
+     "text": "sırt hafif…",
+     "syll": 3,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.hafif/c3.h2b.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h2b.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 1.694,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -53.52,
+        "applied_gain_db": 3.22
+       },
+       {
+        "trim_thr_in_dbfs": -53.22,
+        "applied_gain_db": 3.22
+       }
+      ],
+      "trim_in_sec": [
+       0.227,
+       1.462
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 18.3,
+      "deess": {
+       "applied": false,
+       "threshold_db": -13.31,
+       "band_peak_over_thr_db": -7.29,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.545,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -3.64,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.1,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h2b.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.hafif/c3.h2b.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.545,
+      "speech_sec": 1.237,
+      "articulation": 2.42,
+      "f0_mean_hz": 127.5,
+      "f0_sd_semitones": 2.16,
+      "sibilance_ratio": 0.0419,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -3.65
+      },
+      "dc": -3.43e-08,
+      "lufs": -18.0,
+      "rms_db": -16.1,
+      "true_peak_dbtp": -3.64,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15525 Hz; A: bant ≥ 16025 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "c3.h2c",
+     "text": "omuzlar hafif…",
+     "syll": 5,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.hafif/c3.h2c.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h2c.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 1.713,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.46,
+        "applied_gain_db": 0.41
+       }
+      ],
+      "trim_in_sec": [
+       0.253,
+       1.451
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 0.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.95,
+       "band_peak_over_thr_db": -17.03,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.508,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.29,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.53,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h2c.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.hafif/c3.h2c.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.508,
+      "speech_sec": 1.202,
+      "articulation": 4.16,
+      "f0_mean_hz": 118.0,
+      "f0_sd_semitones": 1.8,
+      "sibilance_ratio": 0.0025,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.3
+      },
+      "dc": 1.26e-09,
+      "lufs": -18.0,
+      "rms_db": -16.53,
+      "true_peak_dbtp": -5.29,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "c3.h3",
+     "text": "bütün beden hafif.",
+     "syll": 6,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.hafif/c3.h3.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h3.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.161,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -52.48,
+        "applied_gain_db": 2.43
+       }
+      ],
+      "trim_in_sec": [
+       0.266,
+       2.014
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 102.7,
+      "deess": {
+       "applied": false,
+       "threshold_db": -12.54,
+       "band_peak_over_thr_db": -23.73,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 2.057,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -3.24,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.12,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/car.hafif/c3.h3.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/car.hafif/c3.h3.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 2.057,
+      "speech_sec": 1.751,
+      "articulation": 3.43,
+      "f0_mean_hz": 93.6,
+      "f0_sd_semitones": 3.11,
+      "sibilance_ratio": 0.0008,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -3.24
+      },
+      "dc": -1.15e-08,
+      "lufs": -18.0,
+      "rms_db": -16.12,
+      "true_peak_dbtp": -3.24,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15504 Hz; A: bant ≥ 16004 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "c3.agir": {
+   "unit": "c3.agir",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Önce ağırlıkla başlıyoruz. İstemezsen bu bölümü atlayıp zemini hissedebilirsin.",
+   "screen": "Önce ağırlıkla başlıyoruz. İstemezsen bu bölümü atlayıp zemini hissedebilirsin.",
+   "screen_equals_tts": true,
+   "chosen_take": "t1.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c3.agir/t1.mp3",
+   "generation_id": "cB8wukXz78bzP0Pz3Paq",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 3.8,
+   "soft_violations": [
+    "Derin tavanı aşıldı: 6.14 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "metrics": {
+    "duration": 5.52,
+    "active_sec": 5.318,
+    "speech_sec": 4.884,
+    "articulation": 6.14,
+    "f0_mean_hz": 127.0,
+    "f0_geo_hz": 123.4,
+    "f0_sd_semitones": 4.14,
+    "lufs": -18.55,
+    "rms_db": -17.14,
+    "true_peak_dbtp": -6.07,
+    "sibilance_ratio": 0.0109,
+    "pause_total_sec": 0.434
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Önce ağırlıkla başlıyoruz. İstemezsen bu bölümü atlayıp zemini hissedebilirsin",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "py5O02waatk9TKWPuXIE",
+     "session_ids": [
+      "pZRMPbqifFhtOtBao7PG"
+     ]
+    }
+   ],
+   "scribe_text": "Önce ağırlıkla başlıyoruz. İstemezsen bu bölümü atlayıp zemini hissedebilirsin",
+   "compare": "equal",
+   "cut": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c3.agir/t1.mp3",
+    "n": 2,
+    "thr_db": -50.55,
+    "pauses": [
+     [
+      1.871,
+      2.305
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      1.871,
+      2.305
+     ]
+    ],
+    "shortest_chosen_gap": 0.434,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     2.0881
+    ],
+    "pieces": [
+     {
+      "name": "c3.agir#1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.agir/c3.agir#1.wav",
+      "start": 0.0,
+      "end": 2.0881,
+      "dur": 2.088,
+      "speech_sec": 1.851,
+      "syll": 10,
+      "rate": 5.4
+     },
+     {
+      "name": "c3.agir#2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.agir/c3.agir#2.wav",
+      "start": 2.0881,
+      "end": 5.52,
+      "dur": 3.432,
+      "speech_sec": 3.083,
+      "syll": 20,
+      "rate": 6.49
+     }
+    ],
+    "boundary_misalign": 0.031,
+    "cut_suspect": false
+   },
+   "joins": null,
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC.v3 §4.6 (c): kesim yalnız ölçüyle denetlendi (Scribe sözcük zaman damgası ve yerel yükleme aracı yok)"
+    },
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 5.42 hece/sn",
+     "piece": "c3.agir#1"
+    },
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 6.58 hece/sn",
+     "piece": "c3.agir#2"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "c3.agir#1",
+     "text": "Önce ağırlıkla başlıyoruz.",
+     "syll": 10,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c3.agir/c3.agir#1.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.agir/c3.agir#1.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.088,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.51,
+        "applied_gain_db": 0.36
+       }
+      ],
+      "trim_in_sec": [
+       0.028,
+       1.872
+      ],
+      "lead_pad_ms": 31.9,
+      "tail_pad_ms": 33.7,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.59,
+       "band_peak_over_thr_db": -13.23,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 2.154,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -6.38,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -17.23,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.agir/c3.agir#1.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c3.agir/c3.agir#1.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 2.154,
+      "speech_sec": 1.846,
+      "articulation": 5.42,
+      "f0_mean_hz": 137.6,
+      "f0_sd_semitones": 4.44,
+      "sibilance_ratio": 0.0027,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -6.4
+      },
+      "dc": -1.27e-08,
+      "lufs": -18.0,
+      "rms_db": -17.23,
+      "true_peak_dbtp": -6.38,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "c3.agir#2",
+     "text": "İstemezsen bu bölümü atlayıp zemini hissedebilirsin.",
+     "syll": 20,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c3.agir/c3.agir#2.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.agir/c3.agir#2.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 3.432,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -51.22,
+        "applied_gain_db": 1.2
+       }
+      ],
+      "trim_in_sec": [
+       0.215,
+       3.252
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 70.4,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.77,
+       "band_peak_over_thr_db": -8.75,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 3.347,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.19,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.57,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.agir/c3.agir#2.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c3.agir/c3.agir#2.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 3.347,
+      "speech_sec": 3.038,
+      "articulation": 6.58,
+      "f0_mean_hz": 122.2,
+      "f0_sd_semitones": 3.69,
+      "sibilance_ratio": 0.0183,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.19
+      },
+      "dc": -1.57e-08,
+      "lufs": -18.0,
+      "rms_db": -16.57,
+      "true_peak_dbtp": -5.19,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "c3.gelmezse": {
+   "unit": "c3.gelmezse",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Ağırlığı hissetmesen de olur. Sözcükleri dinlemen yeter.",
+   "screen": "Ağırlığı hissetmesen de olur. Sözcükleri dinlemen yeter.",
+   "screen_equals_tts": true,
+   "chosen_take": "t3.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c3.gelmezse/t3.mp3",
+   "generation_id": "unhy2AB66aJBmeVIRbcl",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 2.383,
+   "soft_violations": [
+    "Derin tavanı aşıldı: 5.63 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "metrics": {
+    "duration": 4.08,
+    "active_sec": 3.946,
+    "speech_sec": 3.552,
+    "articulation": 5.63,
+    "f0_mean_hz": 119.2,
+    "f0_geo_hz": 115.0,
+    "f0_sd_semitones": 4.66,
+    "lufs": -17.85,
+    "rms_db": -16.26,
+    "true_peak_dbtp": -6.53,
+    "sibilance_ratio": 0.0102,
+    "pause_total_sec": 0.394
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Ağırlığı hissetmesen de olur. Sözcükleri dinlemen yeter",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "pOMiFTxxvYWV6q0X7AI8",
+     "session_ids": [
+      "oCNra3UV88tmiXxzHHZG"
+     ]
+    }
+   ],
+   "scribe_text": "Ağırlığı hissetmesen de olur. Sözcükleri dinlemen yeter",
+   "compare": "equal",
+   "cut": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c3.gelmezse/t3.mp3",
+    "n": 2,
+    "thr_db": -49.85,
+    "pauses": [
+     [
+      1.921,
+      2.315
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      1.921,
+      2.315
+     ]
+    ],
+    "shortest_chosen_gap": 0.394,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     2.1258
+    ],
+    "pieces": [
+     {
+      "name": "c3.gelmezse#1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.gelmezse/c3.gelmezse#1.wav",
+      "start": 0.0,
+      "end": 2.1258,
+      "dur": 2.126,
+      "speech_sec": 1.891,
+      "syll": 11,
+      "rate": 5.82
+     },
+     {
+      "name": "c3.gelmezse#2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.gelmezse/c3.gelmezse#2.wav",
+      "start": 2.1258,
+      "end": 4.08,
+      "dur": 1.954,
+      "speech_sec": 1.671,
+      "syll": 9,
+      "rate": 5.39
+     }
+    ],
+    "boundary_misalign": 0.015,
+    "cut_suspect": false
+   },
+   "joins": null,
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC.v3 §4.6 (c): kesim yalnız ölçüyle denetlendi (Scribe sözcük zaman damgası ve yerel yükleme aracı yok)"
+    },
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 5.82 hece/sn",
+     "piece": "c3.gelmezse#1"
+    },
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 5.39 hece/sn",
+     "piece": "c3.gelmezse#2"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "c3.gelmezse#1",
+     "text": "Ağırlığı hissetmesen de olur.",
+     "syll": 11,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c3.gelmezse/c3.gelmezse#1.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.gelmezse/c3.gelmezse#1.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.126,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.47,
+        "applied_gain_db": 0.37
+       }
+      ],
+      "trim_in_sec": [
+       0.038,
+       1.925
+      ],
+      "lead_pad_ms": 21.6,
+      "tail_pad_ms": 49.5,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.05,
+       "band_peak_over_thr_db": -9.96,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 2.197,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -4.85,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.67,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.gelmezse/c3.gelmezse#1.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c3.gelmezse/c3.gelmezse#1.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 2.197,
+      "speech_sec": 1.891,
+      "articulation": 5.82,
+      "f0_mean_hz": 138.7,
+      "f0_sd_semitones": 4.04,
+      "sibilance_ratio": 0.0184,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -4.89
+      },
+      "dc": -2.01e-08,
+      "lufs": -18.0,
+      "rms_db": -16.67,
+      "true_peak_dbtp": -4.85,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "c3.gelmezse#2",
+     "text": "Sözcükleri dinlemen yeter.",
+     "syll": 9,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c3.gelmezse/c3.gelmezse#2.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.gelmezse/c3.gelmezse#2.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 1.954,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.68,
+        "applied_gain_db": 0.35
+       },
+       {
+        "trim_thr_in_dbfs": -50.35,
+        "applied_gain_db": 0.35
+       }
+      ],
+      "trim_in_sec": [
+       0.186,
+       1.852
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 148.1,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.07,
+       "band_peak_over_thr_db": -14.1,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.976,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -6.93,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.72,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.gelmezse/c3.gelmezse#2.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c3.gelmezse/c3.gelmezse#2.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.976,
+      "speech_sec": 1.671,
+      "articulation": 5.39,
+      "f0_mean_hz": 105.0,
+      "f0_sd_semitones": 3.27,
+      "sibilance_ratio": 0.0052,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -6.93
+      },
+      "dc": -1.46e-08,
+      "lufs": -18.0,
+      "rms_db": -16.72,
+      "true_peak_dbtp": -6.93,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "c3.hafif": {
+   "unit": "c3.hafif",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Şimdi hafifliğe geçiyoruz.",
+   "screen": "Şimdi hafifliğe geçiyoruz.",
+   "screen_equals_tts": true,
+   "chosen_take": "t1.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c3.hafif/t1.mp3",
+   "generation_id": "B1bgaRkG3LvUfUAtkgmE",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.0,
+   "soft_violations": [],
+   "metrics": {
+    "duration": 2.32,
+    "active_sec": 2.135,
+    "speech_sec": 2.135,
+    "articulation": 4.68,
+    "f0_mean_hz": 142.6,
+    "f0_geo_hz": 139.3,
+    "f0_sd_semitones": 3.81,
+    "lufs": -18.96,
+    "rms_db": -17.64,
+    "true_peak_dbtp": -6.53,
+    "sibilance_ratio": 0.0044,
+    "pause_total_sec": 0
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Şimdi hafifliğe geçiyoruz",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "vFdhK7IPE1ZfLfd9PXh8",
+     "session_ids": [
+      "llLhN3ndLiLPWLlrlaap"
+     ]
+    }
+   ],
+   "scribe_text": "Şimdi hafifliğe geçiyoruz",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [],
+   "pieces": [
+    {
+     "piece_id": "c3.hafif",
+     "text": "Şimdi hafifliğe geçiyoruz.",
+     "syll": 10,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c3.hafif/c3.hafif.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c3.hafif/t1.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.32,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -51.19,
+        "applied_gain_db": 1.35
+       }
+      ],
+      "trim_in_sec": [
+       0.038,
+       2.161
+      ],
+      "lead_pad_ms": 21.7,
+      "tail_pad_ms": 90.6,
+      "deess": {
+       "applied": false,
+       "threshold_db": -12.19,
+       "band_peak_over_thr_db": -14.68,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 2.432,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.12,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.84,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c3.hafif/t1.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c3.hafif/c3.hafif.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 2.432,
+      "speech_sec": 2.13,
+      "articulation": 4.69,
+      "f0_mean_hz": 143.0,
+      "f0_sd_semitones": 3.81,
+      "sibilance_ratio": 0.005,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.12
+      },
+      "dc": -1.58e-08,
+      "lufs": -18.0,
+      "rms_db": -16.84,
+      "true_peak_dbtp": -5.12,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "c3.birak": {
+   "unit": "c3.birak",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Bu hisleri bırakabilirsin. Beden kendi hâlinde.",
+   "screen": "Bu hisleri bırakabilirsin. Beden kendi hâlinde.",
+   "screen_equals_tts": true,
+   "chosen_take": "t3.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c3.birak/t3.mp3",
+   "generation_id": "RzKNDwzghbsNDshaokhg",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 1.469,
+   "soft_violations": [
+    "Derin tavanı aşıldı: 5.40 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "metrics": {
+    "duration": 3.92,
+    "active_sec": 3.722,
+    "speech_sec": 3.148,
+    "articulation": 5.4,
+    "f0_mean_hz": 111.3,
+    "f0_geo_hz": 107.8,
+    "f0_sd_semitones": 4.47,
+    "lufs": -17.32,
+    "rms_db": -15.53,
+    "true_peak_dbtp": -4.49,
+    "sibilance_ratio": 0.0071,
+    "pause_total_sec": 0.574
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Bu hisleri bırakabilirsin. Beden kendi halinde",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "ALm7Kg8y2R97SUzwYiy2",
+     "session_ids": [
+      "m98v9Ah6uZAYpU5hU25g"
+     ]
+    }
+   ],
+   "scribe_text": "Bu hisleri bırakabilirsin. Beden kendi halinde",
+   "compare": "equal",
+   "cut": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c3.birak/t3.mp3",
+    "n": 2,
+    "thr_db": -49.32,
+    "pauses": [
+     [
+      1.581,
+      2.155
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      1.581,
+      2.155
+     ]
+    ],
+    "shortest_chosen_gap": 0.574,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     1.8677
+    ],
+    "pieces": [
+     {
+      "name": "c3.birak#1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.birak/c3.birak#1.wav",
+      "start": 0.0,
+      "end": 1.8677,
+      "dur": 1.868,
+      "speech_sec": 1.547,
+      "syll": 10,
+      "rate": 6.47
+     },
+     {
+      "name": "c3.birak#2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.birak/c3.birak#2.wav",
+      "start": 1.8677,
+      "end": 3.92,
+      "dur": 2.052,
+      "speech_sec": 1.611,
+      "syll": 7,
+      "rate": 4.34
+     }
+    ],
+    "boundary_misalign": 0.089,
+    "cut_suspect": false
+   },
+   "joins": null,
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC.v3 §4.6 (c): kesim yalnız ölçüyle denetlendi (Scribe sözcük zaman damgası ve yerel yükleme aracı yok)"
+    },
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 6.47 hece/sn",
+     "piece": "c3.birak#1"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "c3.birak#1",
+     "text": "Bu hisleri bırakabilirsin.",
+     "syll": 10,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c3.birak/c3.birak#1.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.birak/c3.birak#1.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 1.868,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.09,
+        "applied_gain_db": 0.04
+       }
+      ],
+      "trim_in_sec": [
+       0.041,
+       1.586
+      ],
+      "lead_pad_ms": 18.8,
+      "tail_pad_ms": 0.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.68,
+       "band_peak_over_thr_db": -11.64,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.855,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -6.59,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.63,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.birak/c3.birak#1.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c3.birak/c3.birak#1.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.855,
+      "speech_sec": 1.547,
+      "articulation": 6.47,
+      "f0_mean_hz": 112.3,
+      "f0_sd_semitones": 4.7,
+      "sibilance_ratio": 0.0172,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -6.59
+      },
+      "dc": -2.86e-10,
+      "lufs": -18.0,
+      "rms_db": -16.63,
+      "true_peak_dbtp": -6.59,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15181 Hz; A: bant ≥ 15681 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "c3.birak#2",
+     "text": "Beden kendi hâlinde.",
+     "syll": 7,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c3.birak/c3.birak#2.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.birak/c3.birak#2.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.052,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.2,
+        "applied_gain_db": 0.13
+       }
+      ],
+      "trim_in_sec": [
+       0.285,
+       1.893
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 91.2,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.3,
+       "band_peak_over_thr_db": -28.04,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.918,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.5,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.17,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c3.birak/c3.birak#2.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c3.birak/c3.birak#2.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.918,
+      "speech_sec": 1.611,
+      "articulation": 4.34,
+      "f0_mean_hz": 112.7,
+      "f0_sd_semitones": 3.96,
+      "sibilance_ratio": 0.0005,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.53
+      },
+      "dc": -2.42e-08,
+      "lufs": -18.0,
+      "rms_db": -16.17,
+      "true_peak_dbtp": -5.5,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "c4.yerles": {
+   "unit": "c4.yerles",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Yolun kenarında rahat bir köşe bulabilirsin.",
+   "screen": "Yolun kenarında rahat bir köşe bulabilirsin.",
+   "screen_equals_tts": true,
+   "chosen_take": "t3.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.yerles/t3.mp3",
+   "generation_id": "O0y8ZYVLwuN39H3foIcI",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 2.367,
+   "soft_violations": [
+    "Derin tavanı aşıldı: 5.71 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "metrics": {
+    "duration": 2.96,
+    "active_sec": 2.804,
+    "speech_sec": 2.804,
+    "articulation": 5.71,
+    "f0_mean_hz": 132.0,
+    "f0_geo_hz": 129.6,
+    "f0_sd_semitones": 3.25,
+    "lufs": -18.34,
+    "rms_db": -16.52,
+    "true_peak_dbtp": -5.49,
+    "sibilance_ratio": 0.0045,
+    "pause_total_sec": 0
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Yolun kenarında rahat bir köşe bulabilirsin",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "NsWNYYAx74WyyplFhC8M",
+     "session_ids": [
+      "lPNe2Tz93kh3MUSjGbB6"
+     ]
+    }
+   ],
+   "scribe_text": "Yolun kenarında rahat bir köşe bulabilirsin",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 5.71 hece/sn",
+     "piece": "c4.yerles"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "c4.yerles",
+     "text": "Yolun kenarında rahat bir köşe bulabilirsin.",
+     "syll": 16,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.yerles/c4.yerles.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.yerles/t3.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.96,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.73,
+        "applied_gain_db": 0.66
+       }
+      ],
+      "trim_in_sec": [
+       0.028,
+       2.83
+      ],
+      "lead_pad_ms": 31.7,
+      "tail_pad_ms": 120.2,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.9,
+       "band_peak_over_thr_db": -12.24,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 3.112,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.03,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.24,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.yerles/t3.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.yerles/c4.yerles.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 3.112,
+      "speech_sec": 2.804,
+      "articulation": 5.71,
+      "f0_mean_hz": 132.1,
+      "f0_sd_semitones": 3.29,
+      "sibilance_ratio": 0.005,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.03
+      },
+      "dc": -9.77e-09,
+      "lufs": -18.0,
+      "rms_db": -16.24,
+      "true_peak_dbtp": -5.03,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15246 Hz; A: bant ≥ 15746 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "c4.adim": {
+   "unit": "c4.adim",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Her adımda ayak tabanlarını hissedebilirsin.",
+   "screen": "Her adımda ayak tabanlarını hissedebilirsin.",
+   "screen_equals_tts": true,
+   "chosen_take": "t3.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.adim/t3.mp3",
+   "generation_id": "qZfaL5v35xXea1e7L765",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 1.532,
+   "soft_violations": [
+    "Derin tavanı aşıldı: 5.45 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "metrics": {
+    "duration": 3.28,
+    "active_sec": 3.118,
+    "speech_sec": 3.118,
+    "articulation": 5.45,
+    "f0_mean_hz": 100.6,
+    "f0_geo_hz": 98.5,
+    "f0_sd_semitones": 3.57,
+    "lufs": -17.29,
+    "rms_db": -15.37,
+    "true_peak_dbtp": -4.57,
+    "sibilance_ratio": 0.0062,
+    "pause_total_sec": 0
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Her adımda ayak tabanlarını hissedebilirsin",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "es6o0e8qI2TuXApYdTCC",
+     "session_ids": [
+      "RUaAkPRZjoYeXM6KyrAR"
+     ]
+    }
+   ],
+   "scribe_text": "Her adımda ayak tabanlarını hissedebilirsin",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 5.46 hece/sn",
+     "piece": "c4.adim"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "c4.adim",
+     "text": "Her adımda ayak tabanlarını hissedebilirsin.",
+     "syll": 17,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.adim/c4.adim.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.adim/t3.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 3.28,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.13,
+        "applied_gain_db": 0.11
+       }
+      ],
+      "trim_in_sec": [
+       0.043,
+       3.155
+      ],
+      "lead_pad_ms": 17.4,
+      "tail_pad_ms": 125.3,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.29,
+       "band_peak_over_thr_db": -11.3,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 3.423,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -4.98,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.18,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.adim/t3.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.adim/c4.adim.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 3.423,
+      "speech_sec": 3.113,
+      "articulation": 5.46,
+      "f0_mean_hz": 101.7,
+      "f0_sd_semitones": 3.57,
+      "sibilance_ratio": 0.0077,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -4.99
+      },
+      "dc": -1.02e-08,
+      "lufs": -18.0,
+      "rms_db": -16.18,
+      "true_peak_dbtp": -4.98,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "c4.koku": {
+   "unit": "c4.koku",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Havada çam ve yosun kokusu var.",
+   "screen": "Havada çam ve yosun kokusu var.",
+   "screen_equals_tts": true,
+   "chosen_take": "t1.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.koku/t1.mp3",
+   "generation_id": "s2WYQQ7qxIWMcmNytGAH",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.0,
+   "soft_violations": [],
+   "metrics": {
+    "duration": 2.64,
+    "active_sec": 2.449,
+    "speech_sec": 2.449,
+    "articulation": 4.49,
+    "f0_mean_hz": 131.7,
+    "f0_geo_hz": 129.7,
+    "f0_sd_semitones": 3.05,
+    "lufs": -17.74,
+    "rms_db": -16.39,
+    "true_peak_dbtp": -3.1,
+    "sibilance_ratio": 0.0045,
+    "pause_total_sec": 0
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Havada çam ve yosun kokusu var",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "aZArA1vDbfxbh0Pic1rs",
+     "session_ids": [
+      "OqPuLjjbwCJ5tMEwwyhZ"
+     ]
+    }
+   ],
+   "scribe_text": "Havada çam ve yosun kokusu var",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [],
+   "pieces": [
+    {
+     "piece_id": "c4.koku",
+     "text": "Havada çam ve yosun kokusu var.",
+     "syll": 11,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.koku/c4.koku.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.koku/t1.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.64,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.21,
+        "applied_gain_db": 0.17
+       }
+      ],
+      "trim_in_sec": [
+       0.039,
+       2.482
+      ],
+      "lead_pad_ms": 21.1,
+      "tail_pad_ms": 92.5,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.93,
+       "band_peak_over_thr_db": -12.6,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 2.754,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -4.6,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.75,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.koku/t1.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.koku/c4.koku.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 2.754,
+      "speech_sec": 2.444,
+      "articulation": 4.5,
+      "f0_mean_hz": 132.0,
+      "f0_sd_semitones": 3.04,
+      "sibilance_ratio": 0.0051,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -4.62
+      },
+      "dc": -7.87e-09,
+      "lufs": -18.0,
+      "rms_db": -16.75,
+      "true_peak_dbtp": -4.6,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "c4.pencere": {
+   "unit": "c4.pencere",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Bir süre sessiz kalacağım. İstediğin an gözlerini açabilirsin. Sonra yine seslenirim.",
+   "screen": "Bir süre sessiz kalacağım. İstediğin an gözlerini açabilirsin. Sonra yine seslenirim.",
+   "screen_equals_tts": true,
+   "chosen_take": "t1.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.pencere/t1.mp3",
+   "generation_id": "8baGxM9wOoinH3KjVHVb",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 4.567,
+   "soft_violations": [
+    "Derin tavanı aşıldı: 6.37 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "metrics": {
+    "duration": 6.08,
+    "active_sec": 5.887,
+    "speech_sec": 4.864,
+    "articulation": 6.37,
+    "f0_mean_hz": 106.2,
+    "f0_geo_hz": 102.8,
+    "f0_sd_semitones": 4.41,
+    "lufs": -19.27,
+    "rms_db": -17.71,
+    "true_peak_dbtp": -4.6,
+    "sibilance_ratio": 0.0188,
+    "pause_total_sec": 1.023
+   },
+   "excluded_takes": [
+    {
+     "take": "t2.mp3",
+     "reasons": [
+      "tık 1: [2.0384]"
+     ]
+    }
+   ],
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Bir süre sessiz kalacağım. İstediğin an gözlerini açabilirsin. Sonra yine seslenirim",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "1gms7rYxeexj6iu9iR7Z",
+     "session_ids": [
+      "hHxFrTqjqUsSSIzcHCoU"
+     ]
+    }
+   ],
+   "scribe_text": "Bir süre sessiz kalacağım. İstediğin an gözlerini açabilirsin. Sonra yine seslenirim",
+   "compare": "equal",
+   "cut": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.pencere/t1.mp3",
+    "n": 3,
+    "thr_db": -51.27,
+    "pauses": [
+     [
+      1.571,
+      2.025
+     ],
+     [
+      3.981,
+      4.55
+     ]
+    ],
+    "breaths": [],
+    "needed": 3,
+    "found": 3,
+    "gaps_available": 2,
+    "chosen_gaps": [
+     [
+      1.571,
+      2.025
+     ],
+     [
+      3.981,
+      4.55
+     ]
+    ],
+    "shortest_chosen_gap": 0.454,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     1.7983,
+     4.2637
+    ],
+    "pieces": [
+     {
+      "name": "c4.pencere#1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.pencere/c4.pencere#1.wav",
+      "start": 0.0,
+      "end": 1.7983,
+      "dur": 1.798,
+      "speech_sec": 1.547,
+      "syll": 9,
+      "rate": 5.82
+     },
+     {
+      "name": "c4.pencere#2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.pencere/c4.pencere#2.wav",
+      "start": 1.7983,
+      "end": 4.2637,
+      "dur": 2.465,
+      "speech_sec": 1.956,
+      "syll": 14,
+      "rate": 7.16
+     },
+     {
+      "name": "c4.pencere#3",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.pencere/c4.pencere#3.wav",
+      "start": 4.2637,
+      "end": 6.08,
+      "dur": 1.816,
+      "speech_sec": 1.377,
+      "syll": 8,
+      "rate": 5.81
+     }
+    ],
+    "boundary_misalign": 0.023,
+    "cut_suspect": false
+   },
+   "joins": null,
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC.v3 §4.6 (c): kesim yalnız ölçüyle denetlendi (Scribe sözcük zaman damgası ve yerel yükleme aracı yok)"
+    },
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 5.82 hece/sn",
+     "piece": "c4.pencere#1"
+    },
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 7.16 hece/sn",
+     "piece": "c4.pencere#2"
+    },
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 5.81 hece/sn",
+     "piece": "c4.pencere#3"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "c4.pencere#1",
+     "text": "Bir süre sessiz kalacağım.",
+     "syll": 9,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.pencere/c4.pencere#1.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.pencere/c4.pencere#1.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 1.798,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.99,
+        "applied_gain_db": 0.92
+       }
+      ],
+      "trim_in_sec": [
+       0.033,
+       1.575
+      ],
+      "lead_pad_ms": 27.4,
+      "tail_pad_ms": 26.9,
+      "deess": {
+       "applied": false,
+       "threshold_db": -12.07,
+       "band_peak_over_thr_db": -9.0,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.853,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -4.91,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -17.15,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.pencere/c4.pencere#1.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.pencere/c4.pencere#1.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.853,
+      "speech_sec": 1.547,
+      "articulation": 5.82,
+      "f0_mean_hz": 112.9,
+      "f0_sd_semitones": 5.44,
+      "sibilance_ratio": 0.0371,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -4.92
+      },
+      "dc": -2.99e-08,
+      "lufs": -18.0,
+      "rms_db": -17.15,
+      "true_peak_dbtp": -4.91,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "c4.pencere#2",
+     "text": "İstediğin an gözlerini açabilirsin.",
+     "syll": 14,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.pencere/c4.pencere#2.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.pencere/c4.pencere#2.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.465,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -51.22,
+        "applied_gain_db": 1.14
+       }
+      ],
+      "trim_in_sec": [
+       0.223,
+       2.175
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 0.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.74,
+       "band_peak_over_thr_db": -10.68,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 2.262,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.25,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.6,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.pencere/c4.pencere#2.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.pencere/c4.pencere#2.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 2.262,
+      "speech_sec": 1.956,
+      "articulation": 7.16,
+      "f0_mean_hz": 108.0,
+      "f0_sd_semitones": 3.97,
+      "sibilance_ratio": 0.0111,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.25
+      },
+      "dc": -1.54e-07,
+      "lufs": -18.0,
+      "rms_db": -16.6,
+      "true_peak_dbtp": -5.25,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "c4.pencere#3",
+     "text": "Sonra yine seslenirim.",
+     "syll": 8,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.pencere/c4.pencere#3.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.pencere/c4.pencere#3.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 1.816,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -53.44,
+        "applied_gain_db": 3.18
+       },
+       {
+        "trim_thr_in_dbfs": -53.18,
+        "applied_gain_db": 3.18
+       }
+      ],
+      "trim_in_sec": [
+       0.281,
+       1.653
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 86.5,
+      "deess": {
+       "applied": false,
+       "threshold_db": -14.14,
+       "band_peak_over_thr_db": -10.15,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.682,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -3.91,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.97,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.pencere/c4.pencere#3.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.pencere/c4.pencere#3.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.682,
+      "speech_sec": 1.377,
+      "articulation": 5.81,
+      "f0_mean_hz": 105.9,
+      "f0_sd_semitones": 4.1,
+      "sibilance_ratio": 0.0215,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -3.92
+      },
+      "dc": -2.43e-08,
+      "lufs": -18.0,
+      "rms_db": -16.97,
+      "true_peak_dbtp": -3.91,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15202 Hz; A: bant ≥ 15702 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "c4.donus1": {
+   "unit": "c4.donus1",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Yeniden seninleyim. Dalıp gittiysen de sorun değil.",
+   "screen": "Yeniden seninleyim. Dalıp gittiysen de sorun değil.",
+   "screen_equals_tts": true,
+   "chosen_take": "t2.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.donus1/t2.mp3",
+   "generation_id": "B8mMtt7LXVWejUe2Fpw0",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.452,
+   "soft_violations": [
+    "Derin tavanı aşıldı: 5.06 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "metrics": {
+    "duration": 3.92,
+    "active_sec": 3.811,
+    "speech_sec": 3.362,
+    "articulation": 5.06,
+    "f0_mean_hz": 111.9,
+    "f0_geo_hz": 108.2,
+    "f0_sd_semitones": 4.51,
+    "lufs": -18.72,
+    "rms_db": -16.42,
+    "true_peak_dbtp": -5.1,
+    "sibilance_ratio": 0.0077,
+    "pause_total_sec": 0.449
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Yeniden seninleyim. Dalıp gittiysen de sorun değil",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "HtvXOVVbtfk3JJB4oKTd",
+     "session_ids": [
+      "uc8CHz3EDdST3kHxdxBi"
+     ]
+    }
+   ],
+   "scribe_text": "Yeniden seninleyim. Dalıp gittiysen de sorun değil",
+   "compare": "equal",
+   "cut": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.donus1/t2.mp3",
+    "n": 2,
+    "thr_db": -50.72,
+    "pauses": [
+     [
+      1.267,
+      1.716
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      1.267,
+      1.716
+     ]
+    ],
+    "shortest_chosen_gap": 0.449,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     1.4893
+    ],
+    "pieces": [
+     {
+      "name": "c4.donus1#1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.donus1/c4.donus1#1.wav",
+      "start": 0.0,
+      "end": 1.4893,
+      "dur": 1.489,
+      "speech_sec": 1.272,
+      "syll": 7,
+      "rate": 5.5
+     },
+     {
+      "name": "c4.donus1#2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.donus1/c4.donus1#2.wav",
+      "start": 1.4893,
+      "end": 3.92,
+      "dur": 2.431,
+      "speech_sec": 2.1,
+      "syll": 10,
+      "rate": 4.76
+     }
+    ],
+    "boundary_misalign": 0.044,
+    "cut_suspect": false
+   },
+   "joins": null,
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC.v3 §4.6 (c): kesim yalnız ölçüyle denetlendi (Scribe sözcük zaman damgası ve yerel yükleme aracı yok)"
+    },
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 5.97 hece/sn",
+     "piece": "c4.donus1#1"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "c4.donus1#1",
+     "text": "Yeniden seninleyim.",
+     "syll": 7,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.donus1/c4.donus1#1.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.donus1/c4.donus1#1.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 1.489,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -48.47,
+        "applied_gain_db": -1.3
+       }
+      ],
+      "trim_in_sec": [
+       0.016,
+       1.185
+      ],
+      "lead_pad_ms": 44.5,
+      "tail_pad_ms": 0.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -9.2,
+       "band_peak_over_thr_db": -11.44,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.479,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -6.38,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.5,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.donus1/c4.donus1#1.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.donus1/c4.donus1#1.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.479,
+      "speech_sec": 1.172,
+      "articulation": 5.97,
+      "f0_mean_hz": 116.0,
+      "f0_sd_semitones": 4.58,
+      "sibilance_ratio": 0.0107,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -6.39
+      },
+      "dc": 1.81e-07,
+      "lufs": -18.0,
+      "rms_db": -16.5,
+      "true_peak_dbtp": -6.38,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15418 Hz; A: bant ≥ 15918 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "c4.donus1#2",
+     "text": "Dalıp gittiysen de sorun değil.",
+     "syll": 10,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.donus1/c4.donus1#2.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.donus1/c4.donus1#2.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.431,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -53.29,
+        "applied_gain_db": 3.27
+       }
+      ],
+      "trim_in_sec": [
+       0.221,
+       2.322
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 141.2,
+      "deess": {
+       "applied": false,
+       "threshold_db": -13.16,
+       "band_peak_over_thr_db": -13.16,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 2.411,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -4.24,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -15.89,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/c4.donus1/c4.donus1#2.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.donus1/c4.donus1#2.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 2.411,
+      "speech_sec": 2.105,
+      "articulation": 4.75,
+      "f0_mean_hz": 110.0,
+      "f0_sd_semitones": 4.19,
+      "sibilance_ratio": 0.0065,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -4.25
+      },
+      "dc": 1.1e-08,
+      "lufs": -18.0,
+      "rms_db": -15.89,
+      "true_peak_dbtp": -4.24,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "c4.acele": {
+   "unit": "c4.acele",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Hiçbir şeyin acelesi yok.",
+   "screen": "Hiçbir şeyin acelesi yok.",
+   "screen_equals_tts": true,
+   "chosen_take": "t3.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.acele/t3.mp3",
+   "generation_id": "nXHxGLg3imULz2fJMs4z",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.713,
+   "soft_violations": [],
+   "metrics": {
+    "duration": 2.16,
+    "active_sec": 2.005,
+    "speech_sec": 2.005,
+    "articulation": 4.49,
+    "f0_mean_hz": 94.3,
+    "f0_geo_hz": 93.1,
+    "f0_sd_semitones": 2.77,
+    "lufs": -18.01,
+    "rms_db": -16.48,
+    "true_peak_dbtp": -5.3,
+    "sibilance_ratio": 0.01,
+    "pause_total_sec": 0
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Hiçbir şeyin acelesi yok",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "6zxnL5lacvOYdYtCYjnD",
+     "session_ids": [
+      "iJoCCpgXayAyDDwCg3dp"
+     ]
+    }
+   ],
+   "scribe_text": "Hiçbir şeyin acelesi yok",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [],
+   "pieces": [
+    {
+     "piece_id": "c4.acele",
+     "text": "Hiçbir şeyin acelesi yok.",
+     "syll": 9,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.acele/c4.acele.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.acele/t3.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.16,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.79,
+        "applied_gain_db": 0.79
+       }
+      ],
+      "trim_in_sec": [
+       0.05,
+       2.051
+      ],
+      "lead_pad_ms": 9.7,
+      "tail_pad_ms": 141.1,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.36,
+       "band_peak_over_thr_db": -12.11,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 2.311,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.72,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.57,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.acele/t3.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.acele/c4.acele.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 2.311,
+      "speech_sec": 2.005,
+      "articulation": 4.49,
+      "f0_mean_hz": 94.7,
+      "f0_sd_semitones": 2.76,
+      "sibilance_ratio": 0.0124,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.73
+      },
+      "dc": -2.05e-08,
+      "lufs": -18.0,
+      "rms_db": -16.57,
+      "true_peak_dbtp": -5.72,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15439 Hz; A: bant ≥ 15939 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "c4.geride": {
+   "unit": "c4.geride",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Sesler ve ışık yavaş yavaş geride kalıyor.",
+   "screen": "Sesler ve ışık yavaş yavaş geride kalıyor.",
+   "screen_equals_tts": true,
+   "chosen_take": "t2.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.geride/t2.mp3",
+   "generation_id": "MA2ZfeGLMpwrAoOeQRmF",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.0,
+   "soft_violations": [],
+   "metrics": {
+    "duration": 3.44,
+    "active_sec": 3.372,
+    "speech_sec": 3.372,
+    "articulation": 4.45,
+    "f0_mean_hz": 113.3,
+    "f0_geo_hz": 109.9,
+    "f0_sd_semitones": 4.32,
+    "lufs": -17.12,
+    "rms_db": -15.56,
+    "true_peak_dbtp": -3.72,
+    "sibilance_ratio": 0.0131,
+    "pause_total_sec": 0
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Sesler ve ışık yavaş yavaş geride kalıyor.",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "geVtjJccL1fAYZOAqjSt",
+     "session_ids": [
+      "FNxSqFH1o5wHqJphLjyv"
+     ]
+    }
+   ],
+   "scribe_text": "Sesler ve ışık yavaş yavaş geride kalıyor.",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [],
+   "pieces": [
+    {
+     "piece_id": "c4.geride",
+     "text": "Sesler ve ışık yavaş yavaş geride kalıyor.",
+     "syll": 15,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.geride/c4.geride.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.geride/t2.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 3.44,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -49.65,
+        "applied_gain_db": -0.41
+       }
+      ],
+      "trim_in_sec": [
+       0.029,
+       3.389
+      ],
+      "lead_pad_ms": 31.0,
+      "tail_pad_ms": 199.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.41,
+       "band_peak_over_thr_db": -8.99,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 3.67,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -4.85,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.82,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.geride/t2.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.geride/c4.geride.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 3.67,
+      "speech_sec": 3.362,
+      "articulation": 4.46,
+      "f0_mean_hz": 113.4,
+      "f0_sd_semitones": 4.25,
+      "sibilance_ratio": 0.0157,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -4.86
+      },
+      "dc": -2.01e-08,
+      "lufs": -18.0,
+      "rms_db": -16.82,
+      "true_peak_dbtp": -4.85,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15375 Hz; A: bant ≥ 15875 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "c4.x.istemiyor": {
+   "unit": "c4.x.istemiyor",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Derin",
+   "tts": "Burada kimse senden bir şey istemiyor.",
+   "screen": "Burada kimse senden bir şey istemiyor.",
+   "screen_equals_tts": true,
+   "chosen_take": "t2.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.x.istemiyor/t2.mp3",
+   "generation_id": "fg5QlHcFQUM4Vn4Q5ShS",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 1.7,
+   "soft_violations": [
+    "Derin tavanı aşıldı: 5.51 > 5.0 hece/sn (VARSAYIM, raporlanır)"
+   ],
+   "metrics": {
+    "duration": 2.48,
+    "active_sec": 2.36,
+    "speech_sec": 2.36,
+    "articulation": 5.51,
+    "f0_mean_hz": 122.3,
+    "f0_geo_hz": 120.3,
+    "f0_sd_semitones": 3.15,
+    "lufs": -18.54,
+    "rms_db": -17.27,
+    "true_peak_dbtp": -6.48,
+    "sibilance_ratio": 0.0221,
+    "pause_total_sec": 0
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Burada kimse senden bir şey istemiyor",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "bokXsUCVi5MFzn0qjOZP",
+     "session_ids": [
+      "9B7rAMsIqE1i82PuLjAt"
+     ]
+    }
+   ],
+   "scribe_text": "Burada kimse senden bir şey istemiyor",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [
+    {
+     "flag": "derin>5",
+     "reason": "Derin evrede eklemleme 5.51 hece/sn",
+     "piece": "c4.x.istemiyor"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "c4.x.istemiyor",
+     "text": "Burada kimse senden bir şey istemiyor.",
+     "syll": 13,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.x.istemiyor/c4.x.istemiyor.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.x.istemiyor/t2.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.48,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.94,
+        "applied_gain_db": 0.88
+       }
+      ],
+      "trim_in_sec": [
+       0.026,
+       2.382
+      ],
+      "lead_pad_ms": 33.8,
+      "tail_pad_ms": 152.4,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.82,
+       "band_peak_over_thr_db": -7.78,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 2.666,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -6.61,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.94,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/c4.x.istemiyor/t2.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/c4.x.istemiyor/c4.x.istemiyor.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 2.666,
+      "speech_sec": 2.36,
+      "articulation": 5.51,
+      "f0_mean_hz": 123.8,
+      "f0_sd_semitones": 3.16,
+      "sibilance_ratio": 0.0249,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -6.62
+      },
+      "dc": -1.47e-08,
+      "lufs": -18.0,
+      "rms_db": -16.94,
+      "true_peak_dbtp": -6.61,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15202 Hz; A: bant ≥ 15702 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "g.ilk": {
+   "unit": "g.ilk",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Varış",
+   "tts": "Bugün yalnızca tanışıyoruz; zorlanırsan ekrandaki \"Kapanışa geç\" düğmesine dokunman yeterli.",
+   "screen": "Bugün yalnızca tanışıyoruz; zorlanırsan ekrandaki \"Kapanışa geç\" düğmesine dokunman yeterli.",
+   "screen_equals_tts": true,
+   "chosen_take": "t3.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/g.ilk/t3.mp3",
+   "generation_id": "0WSOR0XG7SNinUnmz4uG",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.0,
+   "soft_violations": [],
+   "metrics": {
+    "duration": 6.8,
+    "active_sec": 6.59,
+    "speech_sec": 6.151,
+    "articulation": 5.36,
+    "f0_mean_hz": 127.1,
+    "f0_geo_hz": 123.1,
+    "f0_sd_semitones": 4.41,
+    "lufs": -18.52,
+    "rms_db": -16.7,
+    "true_peak_dbtp": -5.32,
+    "sibilance_ratio": 0.0052,
+    "pause_total_sec": 0.439
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t3",
+     "scribe_text": "Bugün yalnızca tanışıyoruz. Zorlanırsan ekrandaki \"kapanışa geç\" düğmesine dokunman yeterli",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "EdRQBy582PHfBo2w0jCJ",
+     "session_ids": [
+      "z1NvgNL2668J8Dpp9HaF"
+     ]
+    }
+   ],
+   "scribe_text": "Bugün yalnızca tanışıyoruz. Zorlanırsan ekrandaki \"kapanışa geç\" düğmesine dokunman yeterli",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [],
+   "pieces": [
+    {
+     "piece_id": "g.ilk",
+     "text": "Bugün yalnızca tanışıyoruz; zorlanırsan ekrandaki \"Kapanışa geç\" düğmesine dokunman yeterli.",
+     "syll": 33,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/g.ilk/g.ilk.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/g.ilk/t3.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 6.8,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -51.08,
+        "applied_gain_db": 1.07
+       }
+      ],
+      "trim_in_sec": [
+       0.052,
+       6.632
+      ],
+      "lead_pad_ms": 7.9,
+      "tail_pad_ms": 82.2,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.38,
+       "band_peak_over_thr_db": -11.5,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 6.89,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.2,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.31,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/g.ilk/t3.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/g.ilk/g.ilk.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 6.89,
+      "speech_sec": 6.141,
+      "articulation": 5.37,
+      "f0_mean_hz": 127.2,
+      "f0_sd_semitones": 4.4,
+      "sibilance_ratio": 0.0061,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.21
+      },
+      "dc": -5.15e-09,
+      "lufs": -18.0,
+      "rms_db": -16.31,
+      "true_peak_dbtp": -5.2,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15353 Hz; A: bant ≥ 15853 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "k.hizli.imge": {
+   "unit": "k.hizli.imge",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Görüntü usulca siliniyor. Zemin seni taşıyor.",
+   "screen": "Görüntü usulca siliniyor. Zemin seni taşıyor.",
+   "screen_equals_tts": true,
+   "chosen_take": "t2.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/k.hizli.imge/t2.mp3",
+   "generation_id": "8TQBORhGwBXgvopPA6XE",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.554,
+   "soft_violations": [
+    "eklemleme 4.91 bant dışı (5.0–6.2)"
+   ],
+   "metrics": {
+    "duration": 4.0,
+    "active_sec": 3.886,
+    "speech_sec": 3.462,
+    "articulation": 4.91,
+    "f0_mean_hz": 106.5,
+    "f0_geo_hz": 103.3,
+    "f0_sd_semitones": 4.25,
+    "lufs": -18.77,
+    "rms_db": -16.4,
+    "true_peak_dbtp": -4.92,
+    "sibilance_ratio": 0.0107,
+    "pause_total_sec": 0.424
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Görüntü usulca siliniyor. Zemin seni taşıyor",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "w9eWeYGYGqMoBOGOIoCz",
+     "session_ids": [
+      "Ph2xK9PegmwrIWqrn3sO"
+     ]
+    }
+   ],
+   "scribe_text": "Görüntü usulca siliniyor. Zemin seni taşıyor",
+   "compare": "equal",
+   "cut": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/k.hizli.imge/t2.mp3",
+    "n": 2,
+    "thr_db": -50.77,
+    "pauses": [
+     [
+      2.025,
+      2.449
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      2.025,
+      2.449
+     ]
+    ],
+    "shortest_chosen_gap": 0.424,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     2.2374
+    ],
+    "pieces": [
+     {
+      "name": "k.hizli.imge#1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/k.hizli.imge/k.hizli.imge#1.wav",
+      "start": 0.0,
+      "end": 2.2374,
+      "dur": 2.237,
+      "speech_sec": 2.005,
+      "syll": 10,
+      "rate": 4.99
+     },
+     {
+      "name": "k.hizli.imge#2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/k.hizli.imge/k.hizli.imge#2.wav",
+      "start": 2.2374,
+      "end": 4.0,
+      "dur": 1.763,
+      "speech_sec": 1.467,
+      "syll": 7,
+      "rate": 4.77
+     }
+    ],
+    "boundary_misalign": 0.001,
+    "cut_suspect": false
+   },
+   "joins": null,
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC.v3 §4.6 (c): kesim yalnız ölçüyle denetlendi (Scribe sözcük zaman damgası ve yerel yükleme aracı yok)"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "k.hizli.imge#1",
+     "text": "Görüntü usulca siliniyor.",
+     "syll": 10,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/k.hizli.imge/k.hizli.imge#1.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/k.hizli.imge/k.hizli.imge#1.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.237,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -51.58,
+        "applied_gain_db": 1.42
+       }
+      ],
+      "trim_in_sec": [
+       0.027,
+       2.025
+      ],
+      "lead_pad_ms": 32.6,
+      "tail_pad_ms": 37.1,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.37,
+       "band_peak_over_thr_db": -12.19,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 2.307,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -3.34,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -15.95,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/k.hizli.imge/k.hizli.imge#1.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/k.hizli.imge/k.hizli.imge#1.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 2.307,
+      "speech_sec": 2.0,
+      "articulation": 5.0,
+      "f0_mean_hz": 120.9,
+      "f0_sd_semitones": 4.78,
+      "sibilance_ratio": 0.0093,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -3.34
+      },
+      "dc": -1.67e-08,
+      "lufs": -18.0,
+      "rms_db": -15.95,
+      "true_peak_dbtp": -3.34,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "k.hizli.imge#2",
+     "text": "Zemin seni taşıyor.",
+     "syll": 7,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/k.hizli.imge/k.hizli.imge#2.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/k.hizli.imge/k.hizli.imge#2.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 1.763,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -51.15,
+        "applied_gain_db": 1.26
+       }
+      ],
+      "trim_in_sec": [
+       0.21,
+       1.67
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 158.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.49,
+       "band_peak_over_thr_db": -9.22,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.771,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -6.1,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.23,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/k.hizli.imge/k.hizli.imge#2.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/k.hizli.imge/k.hizli.imge#2.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.771,
+      "speech_sec": 1.462,
+      "articulation": 4.79,
+      "f0_mean_hz": 98.5,
+      "f0_sd_semitones": 3.4,
+      "sibilance_ratio": 0.0187,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -6.11
+      },
+      "dc": -2.78e-08,
+      "lufs": -18.0,
+      "rms_db": -16.23,
+      "true_peak_dbtp": -6.1,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15332 Hz; A: bant ≥ 15832 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "k.hizli.his": {
+   "unit": "k.hizli.his",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Bu hisleri bırakmak yeterli. Beden kendi hâlinde.",
+   "screen": "Bu hisleri bırakmak yeterli. Beden kendi hâlinde.",
+   "screen_equals_tts": true,
+   "chosen_take": "t2.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/k.hizli.his/t2.mp3",
+   "generation_id": "2dzcE68gykhOTy5yn2WA",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.288,
+   "soft_violations": [],
+   "metrics": {
+    "duration": 4.08,
+    "active_sec": 3.871,
+    "speech_sec": 3.253,
+    "articulation": 5.23,
+    "f0_mean_hz": 115.9,
+    "f0_geo_hz": 112.7,
+    "f0_sd_semitones": 4.14,
+    "lufs": -18.45,
+    "rms_db": -16.48,
+    "true_peak_dbtp": -5.84,
+    "sibilance_ratio": 0.004,
+    "pause_total_sec": 0.619
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Bu hisleri bırakmak yeterli. Beden kendi halinde",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "Vreb1WarEwgsDTch2tCR",
+     "session_ids": [
+      "RHyOWabzTEQ72sLFIQA5"
+     ]
+    }
+   ],
+   "scribe_text": "Bu hisleri bırakmak yeterli. Beden kendi halinde",
+   "compare": "equal",
+   "cut": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/k.hizli.his/t2.mp3",
+    "n": 2,
+    "thr_db": -50.45,
+    "pauses": [
+     [
+      1.726,
+      2.345
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      1.726,
+      2.345
+     ]
+    ],
+    "shortest_chosen_gap": 0.619,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     2.0323
+    ],
+    "pieces": [
+     {
+      "name": "k.hizli.his#1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/k.hizli.his/k.hizli.his#1.wav",
+      "start": 0.0,
+      "end": 2.0323,
+      "dur": 2.032,
+      "speech_sec": 1.691,
+      "syll": 10,
+      "rate": 5.91
+     },
+     {
+      "name": "k.hizli.his#2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/k.hizli.his/k.hizli.his#2.wav",
+      "start": 2.0323,
+      "end": 4.08,
+      "dur": 2.048,
+      "speech_sec": 1.571,
+      "syll": 7,
+      "rate": 4.45
+     }
+    ],
+    "boundary_misalign": 0.061,
+    "cut_suspect": false
+   },
+   "joins": null,
+   "flags": [
+    {
+     "flag": "kesim-kulak",
+     "reason": "SPEC.v3 §4.6 (c): kesim yalnız ölçüyle denetlendi (Scribe sözcük zaman damgası ve yerel yükleme aracı yok)"
+    }
+   ],
+   "pieces": [
+    {
+     "piece_id": "k.hizli.his#1",
+     "text": "Bu hisleri bırakmak yeterli.",
+     "syll": 10,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/k.hizli.his/k.hizli.his#1.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/k.hizli.his/k.hizli.his#1.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.032,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.82,
+        "applied_gain_db": 0.79
+       }
+      ],
+      "trim_in_sec": [
+       0.046,
+       1.731
+      ],
+      "lead_pad_ms": 14.1,
+      "tail_pad_ms": 0.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.1,
+       "band_peak_over_thr_db": -12.04,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.995,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -6.15,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.32,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/k.hizli.his/k.hizli.his#1.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/k.hizli.his/k.hizli.his#1.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.995,
+      "speech_sec": 1.686,
+      "articulation": 5.93,
+      "f0_mean_hz": 115.0,
+      "f0_sd_semitones": 4.0,
+      "sibilance_ratio": 0.0084,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -6.17
+      },
+      "dc": 6.99e-11,
+      "lufs": -18.0,
+      "rms_db": -16.32,
+      "true_peak_dbtp": -6.15,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    },
+    {
+     "piece_id": "k.hizli.his#2",
+     "text": "Beden kendi hâlinde.",
+     "syll": 7,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/k.hizli.his/k.hizli.his#2.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/k.hizli.his/k.hizli.his#2.wav",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 2.048,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -51.79,
+        "applied_gain_db": 1.42
+       },
+       {
+        "trim_thr_in_dbfs": -51.42,
+        "applied_gain_db": 1.42
+       }
+      ],
+      "trim_in_sec": [
+       0.31,
+       1.882
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 84.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -11.77,
+       "band_peak_over_thr_db": -28.69,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 1.882,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.77,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.35,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/_work/cuts/k.hizli.his/k.hizli.his#2.wav",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/k.hizli.his/k.hizli.his#2.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 1.882,
+      "speech_sec": 1.576,
+      "articulation": 4.44,
+      "f0_mean_hz": 119.4,
+      "f0_sd_semitones": 3.8,
+      "sibilance_ratio": 0.0004,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.78
+      },
+      "dc": -1.37e-08,
+      "lufs": -18.0,
+      "rms_db": -16.35,
+      "true_peak_dbtp": -5.77,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15289 Hz; A: bant ≥ 15789 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "d.goz": {
+   "unit": "d.goz",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Gözlerini aç, etrafına bak, acele etme.",
+   "screen": "Gözlerini aç, etrafına bak, acele etme.",
+   "screen_equals_tts": true,
+   "chosen_take": "t2.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/d.goz/t2.mp3",
+   "generation_id": "PiVrl546lijF5o8eZGTA",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.059,
+   "soft_violations": [],
+   "metrics": {
+    "duration": 3.52,
+    "active_sec": 3.357,
+    "speech_sec": 2.674,
+    "articulation": 5.61,
+    "f0_mean_hz": 118.9,
+    "f0_geo_hz": 117.3,
+    "f0_sd_semitones": 2.95,
+    "lufs": -17.7,
+    "rms_db": -15.41,
+    "true_peak_dbtp": -4.2,
+    "sibilance_ratio": 0.0026,
+    "pause_total_sec": 0.683
+   },
+   "excluded_takes": [
+    {
+     "take": "t1.mp3",
+     "reasons": [
+      "tık 3: [2.627, 2.635, 2.655]"
+     ]
+    }
+   ],
+   "scribe_attempts": [
+    {
+     "take": "t2",
+     "scribe_text": "Gözlerini aç. Etrafına bak. Acele etme",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "gUVRWT5nX8SLDxbR6JB7",
+     "session_ids": [
+      "HL6oKEuozTLJfJfcuvbn"
+     ]
+    }
+   ],
+   "scribe_text": "Gözlerini aç. Etrafına bak. Acele etme",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [],
+   "pieces": [
+    {
+     "piece_id": "d.goz",
+     "text": "Gözlerini aç, etrafına bak, acele etme.",
+     "syll": 15,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/d.goz/d.goz.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/d.goz/t2.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 3.52,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.27,
+        "applied_gain_db": 0.39
+       }
+      ],
+      "trim_in_sec": [
+       0.044,
+       3.398
+      ],
+      "lead_pad_ms": 16.4,
+      "tail_pad_ms": 128.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.03,
+       "band_peak_over_thr_db": -16.66,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 3.664,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -3.77,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -15.63,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/d.goz/t2.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/d.goz/d.goz.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 3.664,
+      "speech_sec": 2.674,
+      "articulation": 5.61,
+      "f0_mean_hz": 119.8,
+      "f0_sd_semitones": 2.77,
+      "sibilance_ratio": 0.003,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -3.79
+      },
+      "dc": 2.63e-07,
+      "lufs": -18.0,
+      "rms_db": -15.63,
+      "true_peak_dbtp": -3.77,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15461 Hz; A: bant ≥ 15961 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "d.kalk": {
+   "unit": "d.kalk",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Uzanıyorsan önce yana dön, sonra otur.",
+   "screen": "Uzanıyorsan önce yana dön, sonra otur.",
+   "screen_equals_tts": true,
+   "chosen_take": "t1.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/d.kalk/t1.mp3",
+   "generation_id": "LkEGycYO62RKwJFst9PA",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 1.474,
+   "soft_violations": [
+    "eklemleme 4.75 bant dışı (5.0–6.2)"
+   ],
+   "metrics": {
+    "duration": 3.76,
+    "active_sec": 3.542,
+    "speech_sec": 2.948,
+    "articulation": 4.75,
+    "f0_mean_hz": 134.7,
+    "f0_geo_hz": 130.6,
+    "f0_sd_semitones": 4.38,
+    "lufs": -18.3,
+    "rms_db": -16.3,
+    "true_peak_dbtp": -6.02,
+    "sibilance_ratio": 0.005,
+    "pause_total_sec": 0.594
+   },
+   "excluded_takes": [
+    {
+     "take": "t2.mp3",
+     "reasons": [
+      "tık 3: [1.0606, 1.0965, 1.1205]"
+     ]
+    },
+    {
+     "take": "t3.mp3",
+     "reasons": [
+      "tık 1: [1.1364]"
+     ]
+    }
+   ],
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Uzanıyorsan önce yana dön, sonra otur",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "ofFJhm3Kza3eg0ObRx5n",
+     "session_ids": [
+      "GBq2Wf45P4WymKQpwCyp"
+     ]
+    }
+   ],
+   "scribe_text": "Uzanıyorsan önce yana dön, sonra otur",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [],
+   "pieces": [
+    {
+     "piece_id": "d.kalk",
+     "text": "Uzanıyorsan önce yana dön, sonra otur.",
+     "syll": 14,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/d.kalk/d.kalk.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/d.kalk/t1.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 3.76,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.84,
+        "applied_gain_db": 0.99
+       }
+      ],
+      "trim_in_sec": [
+       0.068,
+       3.599
+      ],
+      "lead_pad_ms": 0.0,
+      "tail_pad_ms": 89.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.91,
+       "band_peak_over_thr_db": -10.27,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 3.841,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.85,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -15.92,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/d.kalk/t1.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/d.kalk/d.kalk.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 3.841,
+      "speech_sec": 2.943,
+      "articulation": 4.76,
+      "f0_mean_hz": 134.7,
+      "f0_sd_semitones": 4.44,
+      "sibilance_ratio": 0.0058,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.86
+      },
+      "dc": -9.9e-09,
+      "lufs": -18.0,
+      "rms_db": -15.92,
+      "true_peak_dbtp": -5.85,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15310 Hz; A: bant ≥ 15810 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  },
+  "d.bekle": {
+   "unit": "d.bekle",
+   "status": "ok",
+   "kind": "clip",
+   "phase": "Kapanış",
+   "tts": "Birkaç nefes böyle kal; başın dönerse biraz daha bekle.",
+   "screen": "Birkaç nefes böyle kal; başın dönerse biraz daha bekle.",
+   "screen_equals_tts": true,
+   "chosen_take": "t1.mp3",
+   "chosen_take_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/d.bekle/t1.mp3",
+   "generation_id": "TShTwrPN1hcRjms6k5UH",
+   "rank_position": 1,
+   "n_takes": 3,
+   "score": 0.748,
+   "soft_violations": [
+    "eklemleme 4.96 bant dışı (5.0–6.2)"
+   ],
+   "metrics": {
+    "duration": 4.56,
+    "active_sec": 4.36,
+    "speech_sec": 3.632,
+    "articulation": 4.96,
+    "f0_mean_hz": 122.4,
+    "f0_geo_hz": 119.1,
+    "f0_sd_semitones": 4.09,
+    "lufs": -18.2,
+    "rms_db": -16.27,
+    "true_peak_dbtp": -5.84,
+    "sibilance_ratio": 0.0102,
+    "pause_total_sec": 0.728
+   },
+   "excluded_takes": [],
+   "scribe_attempts": [
+    {
+     "take": "t1",
+     "scribe_text": "Birkaç nefes böyle kal. Başın dönerse biraz daha bekle",
+     "equal": true,
+     "strict_equal": true,
+     "exceptions": [],
+     "diff": [],
+     "stt_node_id": "tSuWvjg95f3csbSdl7AH",
+     "session_ids": [
+      "v8vs2NhEwGvPw9elHd0D"
+     ]
+    }
+   ],
+   "scribe_text": "Birkaç nefes böyle kal. Başın dönerse biraz daha bekle",
+   "compare": "equal",
+   "cut": null,
+   "joins": null,
+   "flags": [],
+   "pieces": [
+    {
+     "piece_id": "d.bekle",
+     "text": "Birkaç nefes böyle kal; başın dönerse biraz daha bekle.",
+     "syll": 18,
+     "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/d.bekle/d.bekle.wav",
+     "source_piece": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/d.bekle/t1.mp3",
+     "micro": false,
+     "process": {
+      "sex": "m",
+      "hpf_hz": 70.0,
+      "in_duration": 4.56,
+      "trim_thr_source": "lufs",
+      "trim_passes": [
+       {
+        "trim_thr_in_dbfs": -50.8,
+        "applied_gain_db": 0.78
+       }
+      ],
+      "trim_in_sec": [
+       0.043,
+       4.393
+      ],
+      "lead_pad_ms": 17.4,
+      "tail_pad_ms": 83.0,
+      "deess": {
+       "applied": false,
+       "threshold_db": -10.98,
+       "band_peak_over_thr_db": -10.6,
+       "max_reduction_db": 0.0,
+       "time_reduced_sec": 0.0
+      },
+      "level_mode": "lufs",
+      "level_rule": "v3",
+      "peak": {
+       "chain": "limiter",
+       "trigger_limiter_db": -0.0,
+       "peak_mode": "auto"
+      },
+      "out_duration": 4.66,
+      "target": -18.0,
+      "level": -18.0,
+      "true_peak_dbtp": -5.13,
+      "limiter_max_db": -0.0,
+      "limiter_sec": 0.0,
+      "limiter_sec_over_1db": 0.0,
+      "rms_db": -16.2,
+      "lufs": -18.0,
+      "checks": {
+       "level_in_tolerance": true,
+       "true_peak_ok": true,
+       "no_clipping": true
+      },
+      "pass": true,
+      "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d02/d.bekle/t1.mp3",
+      "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hoc/d02/d.bekle/d.bekle.wav",
+      "out_format": {
+       "sr": 44100,
+       "channels": 1,
+       "subtype": "FLOAT"
+      }
+     },
+     "measure": {
+      "duration": 4.66,
+      "speech_sec": 3.622,
+      "articulation": 4.97,
+      "f0_mean_hz": 123.3,
+      "f0_sd_semitones": 3.88,
+      "sibilance_ratio": 0.0121,
+      "clipping": {
+       "clipped": false,
+       "count": 0,
+       "peak_dbfs": -5.14
+      },
+      "dc": -1.27e-09,
+      "lufs": -18.0,
+      "rms_db": -16.2,
+      "true_peak_dbtp": -5.13,
+      "clicks": {
+       "count": 0,
+       "times": [],
+       "mode": "codec: fc 15181 Hz; A: bant ≥ 15681 Hz (0), B: sessizlikte 10 kHz üstü (0); kör nokta: konuşma içindeki bant sınırlı tık"
+      }
+     }
+    }
+   ]
+  }
+ },
+ "failed": {},
+ "generated_at": "2026-09-30T05:53:59.110788+00:00",
+ "summary": {
+  "units": 28,
+  "failed": [],
+  "flag_counts": {
+   "kesim-kulak": 11,
+   "derin>5": 15,
+   "eklem>2yt": 2
+  }
+ }
+}

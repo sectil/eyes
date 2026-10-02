@@ -1,0 +1,15 @@
+{
+ "unit": "a.durus",
+ "take": "t5",
+ "asset_id": "W4hBG7ub6WYlYPQgRvM5",
+ "source_node_id": "Q7jtTeyt5QIriowmZU2A",
+ "stt_node_id": "8Nt91FTfxFh8OWY8zrXJ",
+ "session_id": "hNWfyK8qgyfSifhvGJAW",
+ "generation_id": "BioxJrNpbtCfhRubyw3q",
+ "actual_credits": 20.68,
+ "actual_cents": 0.376,
+ "scribe_text": "Sırt üstü ya da yan yatıp zemine yerleşmen yeterli",
+ "spoken_duration_secs": "3.56",
+ "compare_exit": 1,
+ "compare_out": "{\n \"equal\": false,\n \"a\": [\n  \"sırtüstü\",\n  \"ya\",\n  \"da\",\n  \"yan\",\n  \"yatıp\",\n  \"zemine\",\n  \"yerleşmen\",\n  \"yeterli\"\n ],\n \"b\": [\n  \"sırt\",\n  \"üstü\",\n  \"ya\",\n  \"da\",\n  \"yan\",\n  \"yatıp\",\n  \"zemine\",\n  \"yerleşmen\",\n  \"yeterli\"\n ],\n \"diff\": [\n  {\n   \"op\": \"replace\",\n   \"a_pos\": 0,\n   \"a\": [\n    \"sırtüstü\"\n   ],\n   \"b_pos\": 0,\n   \"b\": [\n    \"sırt\",\n    \"üstü\"\n   ]\n  }\n ]\n}\nreplace @a0/b0: -sırtüstü +sırt üstü"
+}

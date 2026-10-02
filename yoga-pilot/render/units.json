@@ -1,0 +1,972 @@
+{
+ "lesson": "ders2",
+ "scene": "orman",
+ "note": "14–16 dk × 5,2/5,6/6,6 × lo/hi planlarının birleşimi; carrier = tek istekte okunur, \"…\" duraklarından items sayısınca kesilir; clip birden çok cümleyse cümle sonlarından kesilir (sentences)",
+ "units": [
+  {
+   "id": "a.hosgeldin",
+   "kind": "clip",
+   "tts": "Hoş geldin. Bu dakikalar senin.",
+   "screen": "Hoş geldin. Bu dakikalar senin.",
+   "sentences": [
+    "Hoş geldin.",
+    "Bu dakikalar senin."
+   ],
+   "phase": "Varış",
+   "syllables": 10
+  },
+  {
+   "id": "a.acilis",
+   "kind": "clip",
+   "tts": "Bir şey başarman gerekmiyor; yalnızca dinlenmek var.",
+   "screen": "Bir şey başarman gerekmiyor; yalnızca dinlenmek var.",
+   "sentences": [
+    "Bir şey başarman gerekmiyor; yalnızca dinlenmek var."
+   ],
+   "phase": "Varış",
+   "syllables": 16
+  },
+  {
+   "id": "a.konfor",
+   "kind": "clip",
+   "tts": "Uzanmadan önce üstüne ince bir örtü, dizlerinin altına bir yastık alman iyi olur.",
+   "screen": "Uzanmadan önce üstüne ince bir örtü, dizlerinin altına bir yastık alman iyi olur.",
+   "sentences": [
+    "Uzanmadan önce üstüne ince bir örtü, dizlerinin altına bir yastık alman iyi olur."
+   ],
+   "phase": "Varış",
+   "syllables": 30
+  },
+  {
+   "id": "a.durus",
+   "kind": "clip",
+   "tts": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
+   "screen": "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli.",
+   "sentences": [
+    "Sırtüstü ya da yan yatıp zemine yerleşmen yeterli."
+   ],
+   "phase": "Varış",
+   "syllables": 17
+  },
+  {
+   "id": "a.gozler",
+   "kind": "clip",
+   "tts": "Gözlerini kapatmak ya da açık tutmak sana kalmış; bakışın serbest.",
+   "screen": "Gözlerini kapatmak ya da açık tutmak sana kalmış; bakışın serbest.",
+   "sentences": [
+    "Gözlerini kapatmak ya da açık tutmak sana kalmış; bakışın serbest."
+   ],
+   "phase": "Varış",
+   "syllables": 22
+  },
+  {
+   "id": "a.karar",
+   "kind": "clip",
+   "tts": "Ne kadar gevşeyeceğine sen karar veriyorsun.",
+   "screen": "Ne kadar gevşeyeceğine sen karar veriyorsun.",
+   "sentences": [
+    "Ne kadar gevşeyeceğine sen karar veriyorsun."
+   ],
+   "phase": "Varış",
+   "syllables": 16
+  },
+  {
+   "id": "a.izin",
+   "kind": "clip",
+   "tts": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+   "screen": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+   "sentences": [
+    "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin."
+   ],
+   "phase": "Varış",
+   "syllables": 29
+  },
+  {
+   "id": "a.kolay",
+   "kind": "clip",
+   "tts": "Gevşemek her zaman kolay olmaz; bunda yanlış bir şey yok.",
+   "screen": "Gevşemek her zaman kolay olmaz; bunda yanlış bir şey yok.",
+   "sentences": [
+    "Gevşemek her zaman kolay olmaz; bunda yanlış bir şey yok."
+   ],
+   "phase": "Varış",
+   "syllables": 17
+  },
+  {
+   "id": "a.agirlik",
+   "kind": "clip",
+   "tts": "Zemin seni baştan ayağa taşıyor.",
+   "screen": "Zemin seni baştan ayağa taşıyor.",
+   "sentences": [
+    "Zemin seni baştan ayağa taşıyor."
+   ],
+   "phase": "Varış",
+   "syllables": 12
+  },
+  {
+   "id": "n1.sec",
+   "kind": "clip",
+   "tts": "Bugün kendine kısa bir niyet seçiyorsun. Aklına bir şey gelmezse önerim şu: \"Kendime dinlenmeye izin veriyorum.\"",
+   "screen": "Bugün kendine kısa bir niyet seçiyorsun. Aklına bir şey gelmezse önerim şu: \"Kendime dinlenmeye izin veriyorum.\"",
+   "sentences": [
+    "Bugün kendine kısa bir niyet seçiyorsun.",
+    "Aklına bir şey gelmezse önerim şu: \"Kendime dinlenmeye izin veriyorum.\""
+   ],
+   "phase": "Derinleşme",
+   "syllables": 39
+  },
+  {
+   "id": "n1.soyle",
+   "kind": "clip",
+   "tts": "Niyetini içinden üç kez söylemek yeterli.",
+   "screen": "Niyetini içinden üç kez söylemek yeterli.",
+   "sentences": [
+    "Niyetini içinden üç kez söylemek yeterli."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 15
+  },
+  {
+   "id": "n1.birak",
+   "kind": "clip",
+   "tts": "Dersin sonunda niyetini hatırlatacağım. O zamana kadar onu aklında tutman gerekmiyor.",
+   "screen": "Dersin sonunda niyetini hatırlatacağım. O zamana kadar onu aklında tutman gerekmiyor.",
+   "sentences": [
+    "Dersin sonunda niyetini hatırlatacağım.",
+    "O zamana kadar onu aklında tutman gerekmiyor."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 32
+  },
+  {
+   "id": "c1.cerceve",
+   "kind": "clip",
+   "tts": "Adını andığım her yeri fark ediyorsun. Rahatsız eden bir bölge olursa atla.",
+   "screen": "Adını andığım her yeri fark ediyorsun. Rahatsız eden bir bölge olursa atla.",
+   "sentences": [
+    "Adını andığım her yeri fark ediyorsun.",
+    "Rahatsız eden bir bölge olursa atla."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 27
+  },
+  {
+   "id": "c1.tekrar",
+   "kind": "clip",
+   "tts": "Hissetmesen de her adı içinden tekrarlayabilirsin.",
+   "screen": "Hissetmesen de her adı içinden tekrarlayabilirsin.",
+   "sentences": [
+    "Hissetmesen de her adı içinden tekrarlayabilirsin."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 18
+  },
+  {
+   "id": "car.sag1",
+   "kind": "carrier",
+   "tts": "Sağ elin başparmağı… işaret parmağı… orta parmak… yüzük parmağı… serçe parmak…",
+   "screen": "Sağ elin başparmağı… işaret parmağı… orta parmak… yüzük parmağı… serçe parmak…",
+   "items": [
+    "c1.s01",
+    "c1.s02",
+    "c1.s03",
+    "c1.s04",
+    "c1.s05"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 26,
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "itemText": {
+    "c1.s01": "Sağ elin başparmağı…",
+    "c1.s02": "işaret parmağı…",
+    "c1.s03": "orta parmak…",
+    "c1.s04": "yüzük parmağı…",
+    "c1.s05": "serçe parmak…"
+   }
+  },
+  {
+   "id": "car.sag2",
+   "kind": "carrier",
+   "tts": "Avuç içi… elin sırtı… bilek… ön kol… dirsek…",
+   "screen": "Avuç içi… elin sırtı… bilek… ön kol… dirsek…",
+   "items": [
+    "c1.s06",
+    "c1.s07",
+    "c1.s08",
+    "c1.s09",
+    "c1.s10"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 14,
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "itemText": {
+    "c1.s06": "avuç içi…",
+    "c1.s07": "elin sırtı…",
+    "c1.s08": "bilek…",
+    "c1.s09": "ön kol…",
+    "c1.s10": "dirsek…"
+   }
+  },
+  {
+   "id": "car.sag3",
+   "kind": "carrier",
+   "tts": "Üst kol… omuz… belin sağ yanı… kalça…",
+   "screen": "Üst kol… omuz… belin sağ yanı… kalça…",
+   "items": [
+    "c1.s11",
+    "c1.s12",
+    "c1.s13",
+    "c1.s14"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 11,
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "itemText": {
+    "c1.s11": "üst kol…",
+    "c1.s12": "omuz…",
+    "c1.s13": "belin sağ yanı…",
+    "c1.s14": "kalça…"
+   }
+  },
+  {
+   "id": "car.sag4",
+   "kind": "carrier",
+   "tts": "Uyluk… diz… baldır… ayak bileği… topuk… ayak tabanı…",
+   "screen": "Uyluk… diz… baldır… ayak bileği… topuk… ayak tabanı…",
+   "items": [
+    "c1.s15",
+    "c1.s16",
+    "c1.s17",
+    "c1.s18",
+    "c1.s19",
+    "c1.s20"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 17,
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "itemText": {
+    "c1.s15": "uyluk…",
+    "c1.s16": "diz…",
+    "c1.s17": "baldır…",
+    "c1.s18": "ayak bileği…",
+    "c1.s19": "topuk…",
+    "c1.s20": "ayak tabanı…"
+   }
+  },
+  {
+   "id": "c1.kacirma",
+   "kind": "clip",
+   "tts": "Bir adı kaçırırsan bir sonrakiyle devam edersin.",
+   "screen": "Bir adı kaçırırsan bir sonrakiyle devam edersin.",
+   "sentences": [
+    "Bir adı kaçırırsan bir sonrakiyle devam edersin."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 17
+  },
+  {
+   "id": "car.sol1",
+   "kind": "carrier",
+   "tts": "Sol elin başparmağı… işaret parmağı… orta parmak… yüzük parmağı… serçe parmak…",
+   "screen": "Sol elin başparmağı… işaret parmağı… orta parmak… yüzük parmağı… serçe parmak…",
+   "items": [
+    "c1.l01",
+    "c1.l02",
+    "c1.l03",
+    "c1.l04",
+    "c1.l05"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 26,
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "itemText": {
+    "c1.l01": "Sol elin başparmağı…",
+    "c1.l02": "işaret parmağı…",
+    "c1.l03": "orta parmak…",
+    "c1.l04": "yüzük parmağı…",
+    "c1.l05": "serçe parmak…"
+   }
+  },
+  {
+   "id": "car.sol2",
+   "kind": "carrier",
+   "tts": "Avuç içi… elin sırtı… bilek… ön kol… dirsek…",
+   "screen": "Avuç içi… elin sırtı… bilek… ön kol… dirsek…",
+   "items": [
+    "c1.l06",
+    "c1.l07",
+    "c1.l08",
+    "c1.l09",
+    "c1.l10"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 14,
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "itemText": {
+    "c1.l06": "avuç içi…",
+    "c1.l07": "elin sırtı…",
+    "c1.l08": "bilek…",
+    "c1.l09": "ön kol…",
+    "c1.l10": "dirsek…"
+   }
+  },
+  {
+   "id": "car.sol3",
+   "kind": "carrier",
+   "tts": "Üst kol… omuz… belin sol yanı… kalça…",
+   "screen": "Üst kol… omuz… belin sol yanı… kalça…",
+   "items": [
+    "c1.l11",
+    "c1.l12",
+    "c1.l13",
+    "c1.l14"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 11,
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "itemText": {
+    "c1.l11": "üst kol…",
+    "c1.l12": "omuz…",
+    "c1.l13": "belin sol yanı…",
+    "c1.l14": "kalça…"
+   }
+  },
+  {
+   "id": "car.sol4",
+   "kind": "carrier",
+   "tts": "Uyluk… diz… baldır… ayak bileği… topuk… ayak tabanı…",
+   "screen": "Uyluk… diz… baldır… ayak bileği… topuk… ayak tabanı…",
+   "items": [
+    "c1.l15",
+    "c1.l16",
+    "c1.l17",
+    "c1.l18",
+    "c1.l19",
+    "c1.l20"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 17,
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "itemText": {
+    "c1.l15": "uyluk…",
+    "c1.l16": "diz…",
+    "c1.l17": "baldır…",
+    "c1.l18": "ayak bileği…",
+    "c1.l19": "topuk…",
+    "c1.l20": "ayak tabanı…"
+   }
+  },
+  {
+   "id": "c1.gecis.arka",
+   "kind": "clip",
+   "tts": "Bedenin arka tarafı.",
+   "screen": "Bedenin arka tarafı.",
+   "sentences": [
+    "Bedenin arka tarafı."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 8
+  },
+  {
+   "id": "car.sirt",
+   "kind": "carrier",
+   "tts": "Sağ kürek kemiği… sol kürek kemiği… bel boşluğu… omurga, boydan boya… bütün sırt.",
+   "screen": "Sağ kürek kemiği… sol kürek kemiği… bel boşluğu… omurga, boydan boya… bütün sırt.",
+   "items": [
+    "c1.b01",
+    "c1.b02",
+    "c1.b03",
+    "c1.b04",
+    "c1.b05"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 26,
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "itemText": {
+    "c1.b01": "Sağ kürek kemiği…",
+    "c1.b02": "sol kürek kemiği…",
+    "c1.b03": "bel boşluğu…",
+    "c1.b04": "omurga, boydan boya…",
+    "c1.b05": "bütün sırt."
+   }
+  },
+  {
+   "id": "c1.gecis.on",
+   "kind": "clip",
+   "tts": "Yüzün ve bedenin ön tarafı. İstemediğin yeri yine atla.",
+   "screen": "Yüzün ve bedenin ön tarafı. İstemediğin yeri yine atla.",
+   "sentences": [
+    "Yüzün ve bedenin ön tarafı.",
+    "İstemediğin yeri yine atla."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 21
+  },
+  {
+   "id": "car.on1",
+   "kind": "carrier",
+   "tts": "Başın tepesi… alın… sağ şakak… sol şakak… sağ kaş… sol kaş…",
+   "screen": "Başın tepesi… alın… sağ şakak… sol şakak… sağ kaş… sol kaş…",
+   "items": [
+    "c1.f01",
+    "c1.f02",
+    "c1.f03",
+    "c1.f04",
+    "c1.f05",
+    "c1.f06"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 17,
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "itemText": {
+    "c1.f01": "başın tepesi…",
+    "c1.f02": "alın…",
+    "c1.f03": "sağ şakak…",
+    "c1.f04": "sol şakak…",
+    "c1.f05": "sağ kaş…",
+    "c1.f06": "sol kaş…"
+   }
+  },
+  {
+   "id": "car.on2",
+   "kind": "carrier",
+   "tts": "Göz kapakları… gözlerin çevresi… sağ kulak… sol kulak… sağ yanak… sol yanak… burnun ucu…",
+   "screen": "Göz kapakları… gözlerin çevresi… sağ kulak… sol kulak… sağ yanak… sol yanak… burnun ucu…",
+   "items": [
+    "c1.f07",
+    "c1.f08",
+    "c1.f09",
+    "c1.f10",
+    "c1.f11",
+    "c1.f12",
+    "c1.f13"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 27,
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "itemText": {
+    "c1.f07": "göz kapakları…",
+    "c1.f08": "gözlerin çevresi…",
+    "c1.f09": "sağ kulak…",
+    "c1.f10": "sol kulak…",
+    "c1.f11": "sağ yanak…",
+    "c1.f12": "sol yanak…",
+    "c1.f13": "burnun ucu…"
+   }
+  },
+  {
+   "id": "car.on3",
+   "kind": "carrier",
+   "tts": "Üst dudak… alt dudak… çene… boyun… sağ köprücük kemiği… sol köprücük kemiği… göğüs… karın…",
+   "screen": "Üst dudak… alt dudak… çene… boyun… sağ köprücük kemiği… sol köprücük kemiği… göğüs… karın…",
+   "items": [
+    "c1.f14",
+    "c1.f15",
+    "c1.f16",
+    "c1.f17",
+    "c1.f18",
+    "c1.f19",
+    "c1.f20",
+    "c1.f21"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 28,
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "itemText": {
+    "c1.f14": "üst dudak…",
+    "c1.f15": "alt dudak…",
+    "c1.f16": "çene…",
+    "c1.f17": "boyun…",
+    "c1.f18": "sağ köprücük kemiği…",
+    "c1.f19": "sol köprücük kemiği…",
+    "c1.f20": "göğüs…",
+    "c1.f21": "karın…"
+   }
+  },
+  {
+   "id": "car.butun",
+   "kind": "carrier",
+   "tts": "Bütün sağ bacak… bütün sol bacak… her iki bacak… bütün sağ kol… bütün sol kol… her iki kol… baştan ayağa bütün beden… bütün beden… bütün beden.",
+   "screen": "Bütün sağ bacak… bütün sol bacak… her iki bacak… bütün sağ kol… bütün sol kol… her iki kol… baştan ayağa bütün beden… bütün beden… bütün beden.",
+   "items": [
+    "c1.w01",
+    "c1.w02",
+    "c1.w03",
+    "c1.w04",
+    "c1.w05",
+    "c1.w06",
+    "c1.w07",
+    "c1.w08",
+    "c1.w09"
+   ],
+   "phase": "Derinleşme",
+   "syllables": 44,
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "itemText": {
+    "c1.w01": "Bütün sağ bacak…",
+    "c1.w02": "bütün sol bacak…",
+    "c1.w03": "her iki bacak…",
+    "c1.w04": "bütün sağ kol…",
+    "c1.w05": "bütün sol kol…",
+    "c1.w06": "her iki kol…",
+    "c1.w07": "baştan ayağa bütün beden…",
+    "c1.w08": "bütün beden…",
+    "c1.w09": "bütün beden."
+   }
+  },
+  {
+   "id": "c1.k1",
+   "kind": "clip",
+   "tts": "Bedenin dinlenebilir; sen uyanık kalıyorsun.",
+   "screen": "Bedenin dinlenebilir; sen uyanık kalıyorsun.",
+   "sentences": [
+    "Bedenin dinlenebilir; sen uyanık kalıyorsun."
+   ],
+   "phase": "Derinleşme",
+   "syllables": 16
+  },
+  {
+   "id": "c2.dikkat",
+   "kind": "clip",
+   "tts": "Şimdi nefesini değiştirmeden izlemek yeterli. Ellerini hissetmek ya da gözlerini açmak da olur.",
+   "screen": "Şimdi nefesini değiştirmeden izlemek yeterli. Ellerini hissetmek ya da gözlerini açmak da olur.",
+   "sentences": [
+    "Şimdi nefesini değiştirmeden izlemek yeterli.",
+    "Ellerini hissetmek ya da gözlerini açmak da olur."
+   ],
+   "phase": "Derin",
+   "syllables": 35
+  },
+  {
+   "id": "c2.yer",
+   "kind": "clip",
+   "tts": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta.",
+   "screen": "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin. Burun, göğüs, karın ya da başka bir nokta.",
+   "sentences": [
+    "Dikkatin nefesteyse onu en net fark ettiğin yeri bulabilirsin.",
+    "Burun, göğüs, karın ya da başka bir nokta."
+   ],
+   "phase": "Derin",
+   "syllables": 35
+  },
+  {
+   "id": "c2.alt",
+   "kind": "clip",
+   "tts": "Dikkatin ellerindeyse avuçlarını hissedebilirsin.",
+   "screen": "Dikkatin ellerindeyse avuçlarını hissedebilirsin.",
+   "sentences": [
+    "Dikkatin ellerindeyse avuçlarını hissedebilirsin."
+   ],
+   "phase": "Derin",
+   "syllables": 19
+  },
+  {
+   "id": "c2.akis",
+   "kind": "clip",
+   "tts": "Nefes kendiliğinden geliyor. Kendiliğinden gidiyor.",
+   "screen": "Nefes kendiliğinden geliyor. Kendiliğinden gidiyor.",
+   "sentences": [
+    "Nefes kendiliğinden geliyor.",
+    "Kendiliğinden gidiyor."
+   ],
+   "phase": "Derin",
+   "syllables": 18
+  },
+  {
+   "id": "c2.sayac",
+   "kind": "clip",
+   "tts": "Geriye doğru sayacağım. Nefes sayılara uymak zorunda değil.",
+   "screen": "Geriye doğru sayacağım. Nefes sayılara uymak zorunda değil.",
+   "sentences": [
+    "Geriye doğru sayacağım.",
+    "Nefes sayılara uymak zorunda değil."
+   ],
+   "phase": "Derin",
+   "syllables": 22
+  },
+  {
+   "id": "car.sayi",
+   "kind": "carrier",
+   "tts": "sayıyorum: on… dokuz… sekiz… yedi… altı… beş… dört… üç… iki… bir.",
+   "screen": "sayıyorum: on… dokuz… sekiz… yedi… altı… beş… dört… üç… iki… bir.",
+   "items": [
+    "c2.n10",
+    "c2.n09",
+    "c2.n08",
+    "c2.n07",
+    "c2.n06",
+    "c2.n05",
+    "c2.n04",
+    "c2.n03",
+    "c2.n02",
+    "c2.n01"
+   ],
+   "phase": "Derin",
+   "syllables": 19,
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı; ön söz (\"sayıyorum:\") kesilip atılır",
+   "itemText": {
+    "c2.n10": "on…",
+    "c2.n09": "dokuz…",
+    "c2.n08": "sekiz…",
+    "c2.n07": "yedi…",
+    "c2.n06": "altı…",
+    "c2.n05": "beş…",
+    "c2.n04": "dört…",
+    "c2.n03": "üç…",
+    "c2.n02": "iki…",
+    "c2.n01": "bir."
+   }
+  },
+  {
+   "id": "c2.birak",
+   "kind": "clip",
+   "tts": "Sayıları bırakabilirsin. Zihnin arada başka yerlere kaydıysa o da olur.",
+   "screen": "Sayıları bırakabilirsin. Zihnin arada başka yerlere kaydıysa o da olur.",
+   "sentences": [
+    "Sayıları bırakabilirsin.",
+    "Zihnin arada başka yerlere kaydıysa o da olur."
+   ],
+   "phase": "Derin",
+   "syllables": 27
+  },
+  {
+   "id": "c2.kal",
+   "kind": "clip",
+   "tts": "Bir süre hiçbir şey yapmadan dinlenmek var.",
+   "screen": "Bir süre hiçbir şey yapmadan dinlenmek var.",
+   "sentences": [
+    "Bir süre hiçbir şey yapmadan dinlenmek var."
+   ],
+   "phase": "Derin",
+   "syllables": 13
+  },
+  {
+   "id": "br.k2",
+   "kind": "clip",
+   "tts": "Bedenin dinlenebilir; sen uyanıksın.",
+   "screen": "Bedenin dinlenebilir; sen uyanıksın.",
+   "sentences": [
+    "Bedenin dinlenebilir; sen uyanıksın."
+   ],
+   "phase": "Derin",
+   "syllables": 13
+  },
+  {
+   "id": "br.orta",
+   "kind": "clip",
+   "tts": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde. Gözlerin açıksa bakışın serbest. Zemin seni hep taşıyor.",
+   "screen": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde. Gözlerin açıksa bakışın serbest. Zemin seni hep taşıyor.",
+   "sentences": [
+    "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde.",
+    "Gözlerin açıksa bakışın serbest.",
+    "Zemin seni hep taşıyor."
+   ],
+   "phase": "Derin",
+   "syllables": 46
+  },
+  {
+   "id": "c4.yer",
+   "kind": "clip",
+   "tts": "Zihninde sana iyi gelen bir orman belirebilir.",
+   "screen": "Zihninde sana iyi gelen bir orman belirebilir.",
+   "sentences": [
+    "Zihninde sana iyi gelen bir orman belirebilir."
+   ],
+   "phase": "Derin",
+   "syllables": 17
+  },
+  {
+   "id": "c4.gelmezse",
+   "kind": "clip",
+   "tts": "Bir görüntü gelmese de olur, gözlerin açık kalsa da.",
+   "screen": "Bir görüntü gelmese de olur, gözlerin açık kalsa da.",
+   "sentences": [
+    "Bir görüntü gelmese de olur, gözlerin açık kalsa da."
+   ],
+   "phase": "Derin",
+   "syllables": 18
+  },
+  {
+   "id": "c4.patika",
+   "kind": "clip",
+   "tts": "Kendini yumuşak bir patikanın başında bulabilirsin.",
+   "screen": "Kendini yumuşak bir patikanın başında bulabilirsin.",
+   "sentences": [
+    "Kendini yumuşak bir patikanın başında bulabilirsin."
+   ],
+   "phase": "Derin",
+   "syllables": 19
+  },
+  {
+   "id": "c4.yol",
+   "kind": "clip",
+   "tts": "Yol önünde açılıyor. Kendi hızında yürüyorsun.",
+   "screen": "Yol önünde açılıyor. Kendi hızında yürüyorsun.",
+   "sentences": [
+    "Yol önünde açılıyor.",
+    "Kendi hızında yürüyorsun."
+   ],
+   "phase": "Derin",
+   "syllables": 17
+  },
+  {
+   "id": "c4.ses",
+   "kind": "clip",
+   "tts": "Uzaktan gelip giden yaprak hışırtısı.",
+   "screen": "Uzaktan gelip giden yaprak hışırtısı.",
+   "sentences": [
+    "Uzaktan gelip giden yaprak hışırtısı."
+   ],
+   "phase": "Derin",
+   "syllables": 13
+  },
+  {
+   "id": "c4.gunes",
+   "kind": "clip",
+   "tts": "Açık, aydınlık bir yere varıyorsun. Güneş tenini tatlı tatlı ısıtıyor.",
+   "screen": "Açık, aydınlık bir yere varıyorsun. Güneş tenini tatlı tatlı ısıtıyor.",
+   "sentences": [
+    "Açık, aydınlık bir yere varıyorsun.",
+    "Güneş tenini tatlı tatlı ısıtıyor."
+   ],
+   "phase": "Derin",
+   "syllables": 25
+  },
+  {
+   "id": "c4.don",
+   "kind": "clip",
+   "tts": "Aynı patikadan, acele etmeden geri dönüyorsun.",
+   "screen": "Aynı patikadan, acele etmeden geri dönüyorsun.",
+   "sentences": [
+    "Aynı patikadan, acele etmeden geri dönüyorsun."
+   ],
+   "phase": "Derin",
+   "syllables": 18
+  },
+  {
+   "id": "c4.solma",
+   "kind": "clip",
+   "tts": "Görüntü usulca siliniyor. Seni taşıyan zemini yeniden hissedebilirsin.",
+   "screen": "Görüntü usulca siliniyor. Seni taşıyan zemini yeniden hissedebilirsin.",
+   "sentences": [
+    "Görüntü usulca siliniyor.",
+    "Seni taşıyan zemini yeniden hissedebilirsin."
+   ],
+   "phase": "Derin",
+   "syllables": 27
+  },
+  {
+   "id": "n2.hatirla",
+   "kind": "clip",
+   "tts": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
+   "screen": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
+   "sentences": [
+    "Başta seçtiğin niyeti içinden üç kez söylemek yeterli.",
+    "Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\""
+   ],
+   "phase": "Derin",
+   "syllables": 38
+  },
+  {
+   "id": "n2.dilek",
+   "kind": "clip",
+   "tts": "Niyetini dersten sonra da taşımak sana kalmış.",
+   "screen": "Niyetini dersten sonra da taşımak sana kalmış.",
+   "sentences": [
+    "Niyetini dersten sonra da taşımak sana kalmış."
+   ],
+   "phase": "Derin",
+   "syllables": 16
+  },
+  {
+   "id": "k.anahtar3",
+   "kind": "clip",
+   "tts": "Uyanık bir dinlenme bu.",
+   "screen": "Uyanık bir dinlenme bu.",
+   "sentences": [
+    "Uyanık bir dinlenme bu."
+   ],
+   "phase": "Derin",
+   "syllables": 8
+  },
+  {
+   "id": "k.donus",
+   "kind": "clip",
+   "tts": "Artık dönüş zamanı.",
+   "screen": "Artık dönüş zamanı.",
+   "sentences": [
+    "Artık dönüş zamanı."
+   ],
+   "phase": "Kapanış",
+   "syllables": 7
+  },
+  {
+   "id": "k.nefes",
+   "kind": "clip",
+   "tts": "Nefesin kendi ritmini bulabilir.",
+   "screen": "Nefesin kendi ritmini bulabilir.",
+   "sentences": [
+    "Nefesin kendi ritmini bulabilir."
+   ],
+   "phase": "Kapanış",
+   "syllables": 12
+  },
+  {
+   "id": "k.sesler",
+   "kind": "clip",
+   "tts": "Yakındaki ve uzaktaki sesler yeniden duyuluyor.",
+   "screen": "Yakındaki ve uzaktaki sesler yeniden duyuluyor.",
+   "sentences": [
+    "Yakındaki ve uzaktaki sesler yeniden duyuluyor."
+   ],
+   "phase": "Kapanış",
+   "syllables": 18
+  },
+  {
+   "id": "k.hareket",
+   "kind": "clip",
+   "tts": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin. Bir yerin ağrırsa ya da başın dönerse hareketi bırak.",
+   "screen": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin. Bir yerin ağrırsa ya da başın dönerse hareketi bırak.",
+   "sentences": [
+    "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin.",
+    "Bir yerin ağrırsa ya da başın dönerse hareketi bırak."
+   ],
+   "phase": "Kapanış",
+   "syllables": 41
+  },
+  {
+   "id": "k.goz",
+   "kind": "clip",
+   "tts": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin.",
+   "screen": "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin.",
+   "sentences": [
+    "Gözlerini ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakabilirsin."
+   ],
+   "phase": "Kapanış",
+   "syllables": 29
+  },
+  {
+   "id": "k.oda.ayrinti",
+   "kind": "clip",
+   "tts": "Bir renk, bir biçim, bir doku.",
+   "screen": "Bir renk, bir biçim, bir doku.",
+   "sentences": [
+    "Bir renk, bir biçim, bir doku."
+   ],
+   "phase": "Kapanış",
+   "syllables": 8
+  },
+  {
+   "id": "k.zaman",
+   "kind": "clip",
+   "tts": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun.",
+   "screen": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun.",
+   "sentences": [
+    "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun."
+   ],
+   "phase": "Kapanış",
+   "syllables": 21
+  },
+  {
+   "id": "k.yan",
+   "kind": "clip",
+   "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "screen": "Sırtüstü yatıyorsan önce bir yanına dön.",
+   "sentences": [
+    "Sırtüstü yatıyorsan önce bir yanına dön."
+   ],
+   "phase": "Kapanış",
+   "syllables": 14
+  },
+  {
+   "id": "k.yandakal",
+   "kind": "clip",
+   "tts": "Bir süre yan yatarak dinlenmek de olur.",
+   "screen": "Bir süre yan yatarak dinlenmek de olur.",
+   "sentences": [
+    "Bir süre yan yatarak dinlenmek de olur."
+   ],
+   "phase": "Kapanış",
+   "syllables": 13
+  },
+  {
+   "id": "k.otur",
+   "kind": "clip",
+   "tts": "Ellerinden destek alarak yavaşça doğrulup otur.",
+   "screen": "Ellerinden destek alarak yavaşça doğrulup otur.",
+   "sentences": [
+    "Ellerinden destek alarak yavaşça doğrulup otur."
+   ],
+   "phase": "Kapanış",
+   "syllables": 17
+  },
+  {
+   "id": "k.bekle",
+   "kind": "clip",
+   "tts": "Kalkmadan önce birkaç nefes böyle kal.",
+   "screen": "Kalkmadan önce birkaç nefes böyle kal.",
+   "sentences": [
+    "Kalkmadan önce birkaç nefes böyle kal."
+   ],
+   "phase": "Kapanış",
+   "syllables": 12
+  },
+  {
+   "id": "k.kalk",
+   "kind": "clip",
+   "tts": "Sonra acele etmeden kalkabilirsin; başın dönerse yeniden otur ve bekle.",
+   "screen": "Sonra acele etmeden kalkabilirsin; başın dönerse yeniden otur ve bekle.",
+   "sentences": [
+    "Sonra acele etmeden kalkabilirsin; başın dönerse yeniden otur ve bekle."
+   ],
+   "phase": "Kapanış",
+   "syllables": 26
+  },
+  {
+   "id": "k.son",
+   "kind": "clip",
+   "tts": "Buradasın ve uyanıksın.",
+   "screen": "Buradasın ve uyanıksın.",
+   "sentences": [
+    "Buradasın ve uyanıksın."
+   ],
+   "phase": "Kapanış",
+   "syllables": 9
+  },
+  {
+   "id": "c2.durak",
+   "kind": "clip",
+   "tts": "Nefes verdikten sonra kısa bir duraklama olabilir. Yeni nefes kendiliğinden gelir.",
+   "screen": "Nefes verdikten sonra kısa bir duraklama olabilir. Yeni nefes kendiliğinden gelir.",
+   "sentences": [
+    "Nefes verdikten sonra kısa bir duraklama olabilir.",
+    "Yeni nefes kendiliğinden gelir."
+   ],
+   "phase": "Derin",
+   "syllables": 29
+  },
+  {
+   "id": "a.x.kipir",
+   "kind": "clip",
+   "tts": "Bir iki kez kıpırdanıp yerleşmek de dinlenmenin bir parçası.",
+   "screen": "Bir iki kez kıpırdanıp yerleşmek de dinlenmenin bir parçası.",
+   "sentences": [
+    "Bir iki kez kıpırdanıp yerleşmek de dinlenmenin bir parçası."
+   ],
+   "phase": "Varış",
+   "syllables": 20
+  },
+  {
+   "id": "c2.x.ritim",
+   "kind": "clip",
+   "tts": "Nefes kendi ritminde sürüyor. Giren hava serin, çıkan hava ılık olabilir.",
+   "screen": "Nefes kendi ritminde sürüyor. Giren hava serin, çıkan hava ılık olabilir.",
+   "sentences": [
+    "Nefes kendi ritminde sürüyor.",
+    "Giren hava serin, çıkan hava ılık olabilir."
+   ],
+   "phase": "Derin",
+   "syllables": 26
+  }
+ ]
+}

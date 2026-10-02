@@ -1,0 +1,37 @@
+{
+ "node_id": "aHVlfL7VLgbkBuMrPTAC",
+ "session_ids": [
+  "SnWhH1GEq27cQt6KZn6m",
+  "KlvUaZqbGJvUaHg2728A",
+  "UFmLr7h0UUJP1zWG8tnm"
+ ],
+ "requested_at": "2026-09-30T07:03:16.237Z",
+ "tts": "Işık artık küçük ve parlak bir nokta.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "SnWhH1GEq27cQt6KZn6m",
+   "generation_id": "GI7ROZQbntz7Do2C8lAL",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/SnWhH1GEq27cQt6KZn6m/GI7ROZQbntz7Do2C8lAL/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070319Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=dc07896ae07a222cb2675fba973ba6098f600b46dcd105e6093e99eb9d616f76ec72db3a65406346c5120d2992d3d854625be399b43ae6d699d2d0d74797e997f831327472309d5a60db034db5c378431d0e09a5b684c3370583c4681544ea0e134a8115c240daf523b200a3279006ddb58498e701fd7aec3e53bfa1ebb48ad5fe127264d30de3e95c013b0998bb225edf938f2650987e0fd55fe462c408b931343e03c87efa9097169d18bdbabe7e9108b344b8c5349ff2de2a8b1aacc4d484554bd8bce0da60bb98761c3cabcc896848b6e6fddd37016ae88294497f699eb94dfeaa9cdc3c471aec994a40c1d81cf6c0d145a35fddf724cd6505dfd4f89b66",
+   "duration_secs": 3.28,
+   "prompt": "Işık artık küçük ve parlak bir nokta.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "KlvUaZqbGJvUaHg2728A",
+   "generation_id": "AWMo6kCnNIODW7VGKZxt",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/KlvUaZqbGJvUaHg2728A/AWMo6kCnNIODW7VGKZxt/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070320Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=1472893330baf1c3c438f632a84a88c78ce2421d8ad58d44a31cc1eab396be81a272562a4035f3ccb2b7e38fc699763d28ec70a190298a656e359754323b3c8dfa7ec20379e82d0a9fa21653160efc8c225cb71e5f085d17b690cc98cfb283107c96772a24b7d2d5aadd281a21f8df841168e658458d7efac49de3ea6efc969014491bba8f1d5273220230c1531a76c339eee94fd69122c75ef0ab9a606d10ccddd05e6d9c4b1a62f19e7e55258af92ff787ef6c5379f09592a47fccad1740bd83fac93e63bbfe1c1f9dc378de768019a337525877e685dd8a78546173a8cc7426adb764db4799772184088754e3746b036a46ecdf6ef13bdfcb80ec58865b3b",
+   "duration_secs": 3.28,
+   "prompt": "Işık artık küçük ve parlak bir nokta.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "UFmLr7h0UUJP1zWG8tnm",
+   "generation_id": "Tdt6FUjIEkNY3i4rhVhY",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/UFmLr7h0UUJP1zWG8tnm/Tdt6FUjIEkNY3i4rhVhY/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070319Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=795f79342bbc30f6072721e8c96cc78f234d3a7201b7e07c6cf4e0164448ad45efd0e51b3f7d35ef5a1a4311e2064a47256edec7bdb20cac4c7704aea50b177b82115180f4c68aa735b76db27a1fb251befae9656b8f66b429d73e96e9d51f50b9d0f0b6d8b049f22684dd7b801928d909c4d3f04ee2e29db1f5a83521c8f3307eb954bc9f785057927ea6248b70d3c17b58f59c34a573ecf46ee29dbea7f6261b1e614b31e6e1a9dcf0f3f732c6eb660491d69bda570b80a353548711cb0cd1be65e4949239a14062e790c9f203ce7aedf41c8c5a2e41d67bd487fd063c5957260853115b5645e3922774cc96e95b9c6f78f823872e00104e38587caea0e1d6",
+   "duration_secs": 3.2,
+   "prompt": "Işık artık küçük ve parlak bir nokta.",
+   "kind": "audio"
+  }
+ ]
+}

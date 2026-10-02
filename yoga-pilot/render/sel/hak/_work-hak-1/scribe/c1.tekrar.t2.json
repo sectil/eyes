@@ -1,0 +1,16 @@
+{
+ "unit": "c1.tekrar",
+ "take": "t2",
+ "asset_id": "WKJQCsGamkWfYXGOucyV",
+ "source_node_id": "dR3xbGro06kr3I8wzuUd",
+ "stt_node_id": "Vsb5Wci3dEIVLyELjP7q",
+ "session_id": "SU5iGJKngn37Ojdnf7MF",
+ "generation_id": "272GYlzR5VeejyZLJAse",
+ "actual_credits": 19.36,
+ "actual_cents": 0.352,
+ "spoken_duration_secs": 3.3,
+ "scribe_text": "Hissetmesen de her adı içinden tekrarlayabilirsin",
+ "tts": "Hissetmesen de her adı içinden tekrarlayabilirsin.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 6\n}"
+}

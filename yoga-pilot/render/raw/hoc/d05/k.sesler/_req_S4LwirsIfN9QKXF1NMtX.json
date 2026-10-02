@@ -1,0 +1,37 @@
+{
+ "node_id": "S4LwirsIfN9QKXF1NMtX",
+ "session_ids": [
+  "EobVBlP4Ohmn4Ihveo9y",
+  "pFIJeHsYPGwLCOn9aHQE",
+  "VoD0Z04cYY8qBCx5o2XP"
+ ],
+ "requested_at": "2026-09-30T06:56:51.081Z",
+ "tts": "Odadaki sesler de ışığın içine giriyor.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "EobVBlP4Ohmn4Ihveo9y",
+   "generation_id": "qn329gOYrnZyCA7kxhO5",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/EobVBlP4Ohmn4Ihveo9y/qn329gOYrnZyCA7kxhO5/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065812Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=2f9b9a95b1ba3cec546edb3034c3af5700b13304e78e75fd426c674e46b9556ea04836d85a6e77a8fc39d78488675731deff55c551136c304ef3f827cd6d98a6bf322a7138d05dbb8ce67ae7e16ef62460bd6c7fb84f3ac7ef87711775e0be4e31981cce6ea69d7b069164496f0eb6c61a03cb35879e36bac60ba505df1636e1f295227e41137f5df6b9524af36e3909ef36b3cf710fd39928a5c4e32b3b6abae7a002ecbb5b037e1a97198e638e82bd2ef2fd1631151e4d4497b0a0f6667d29bb1572dff0a16cc149e98c29c80721eb9353622af57269fc3b52f5d1e5b6b4bbd90150baca3f4780063914513022d46ef37c18000518c4817531e9db807185d9",
+   "duration_secs": 2.88,
+   "prompt": "Odadaki sesler de ışığın içine giriyor.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "pFIJeHsYPGwLCOn9aHQE",
+   "generation_id": "52sXf7ASh0drv2SnUYrd",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/pFIJeHsYPGwLCOn9aHQE/52sXf7ASh0drv2SnUYrd/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065812Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=02e090268c01a0f88f286550f934e9d32d487ef03263e8c66c7c20d08c6e8e583f54e3ed9e67b4dbbffbc7b3a3be43738ee2fbe3f87daeec5a9279440d8c526ddbf725088a7bc755b8c167bc3a0c9943e879ed1d115b69ac45e10567542ba924e12b9834b9b5d15570675f63d402c9cd940649fb99c1df689a1f333487f4b5be18deea16a6d6595bcae18dfe32d462d945f4b49187d254a7f588998a993f67dbfa86fbc6ff2691f64015b9885bd502cb76f774779ed98c695de5fd35245eed30d0c0491f0de48f2d12aff84715fe361d23695c806a20f9a9b9ba4c8545d4ad6e3c959cdb6b5ab30b460337b3bdee3d47d2f086b3a54f13849663686ec8544d2d",
+   "duration_secs": 2.96,
+   "prompt": "Odadaki sesler de ışığın içine giriyor.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "VoD0Z04cYY8qBCx5o2XP",
+   "generation_id": "MYxW5rH4gIKxGjJXunHB",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/VoD0Z04cYY8qBCx5o2XP/MYxW5rH4gIKxGjJXunHB/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065812Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=b7966260904ad53ce35ac240bb6c5dcff8eb56e679099ac14b1fb397f12062cc82203078607a61256b91db07cdb99a0a9575606af2e67492fa14546d70e831ec59d42af6c1a22cf9a774f51e05113147e206cfd751692f554ae353521c37b5a54c6772a87accda33db7b3d9fa46e8c29b57fd12308c6c596005f88225db56b1a139287c4891e35eaf2be8b3b9fee56dda01b326956586f9dfd1a3945f8e9946a10f44b13a035fc00b92ab9def29b8902f954b70ead6e960ff71ba73f395ca2f3959274acd6c3d63a52f0021a6a4f779709ab12a3bb4d96a49ea8964302a895d23c10524bdef0f88f06d2671f2e78e6be8cafdf32b90fb8c18a66e7b84221c2db",
+   "duration_secs": 2.88,
+   "prompt": "Odadaki sesler de ışığın içine giriyor.",
+   "kind": "audio"
+  }
+ ]
+}

@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nefona Gökyüzü Dili</title>
+<meta name="description" content="Nefona B2, Yön C: gökyüzü tonunda yumuşak ışık, Nef'in sesi önde. Hava rızası, il ve ilçe, Gaziemir onayı ve Ana sayfadaki teklif; iki tema, 390 ve 320 pt.">
+<!-- Uygulamanın kendi yazı tipleri: app/src/main.jsx → @fontsource-variable (Onest, Unbounded). -->
+<link rel="stylesheet" href="file:///home/user/eyes/app/node_modules/@fontsource-variable/onest/index.css">
+<link rel="stylesheet" href="file:///home/user/eyes/app/node_modules/@fontsource-variable/unbounded/index.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Onest:wght@400;500;600;700&display=swap">
+<style>
+/* ============ Sayfa çevresi ============ */
+:root {
+  --pg-bg: #eef2f4; --pg-ink: #0d1720; --pg-ink-2: #3a4955; --pg-ink-3: #5b6976; --pg-line: #d8e0e6;
+  --f-display: 'Unbounded Variable', 'Unbounded', 'Avenir Next', system-ui, sans-serif;
+  --f-body: 'Onest Variable', 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --pw: 390px; --ph: 844px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --pg-bg: #070c12; --pg-ink: #eef3f6; --pg-ink-2: #b9c4cd; --pg-ink-3: #8b98a5; --pg-line: rgba(255,255,255,0.09); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --pg-bg: #070c12; --pg-ink: #eef3f6; --pg-ink-2: #b9c4cd; --pg-ink-3: #8b98a5; --pg-line: rgba(255,255,255,0.09); color-scheme: dark; }
+body.w320 { --pw: 320px; --ph: 568px; }
+* { box-sizing: border-box; }
+body { background: var(--pg-bg); color: var(--pg-ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; margin: 0; }
+p { margin: 0; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 28px 20px 60px; }
+@media (max-width: 480px) { .wrap { padding-inline: 16px; } }
+.pg-h { font: 700 1.6rem/1.15 var(--f-display); letter-spacing: -0.015em; margin: 0; }
+.pg-lead { color: var(--pg-ink-2); margin-top: 8px; max-width: 44rem; }
+.sec { margin-top: 34px; }
+.sec h2 { font: 600 1.1rem/1.2 var(--f-display); margin: 0; }
+.sec .note { color: var(--pg-ink-2); margin-top: 6px; max-width: 46rem; font-size: 0.92rem; }
+.strip { display: flex; flex-wrap: wrap; gap: 22px; padding-top: 16px; overflow-x: auto; }
+.cell { margin: 0; display: grid; gap: 8px; align-content: start; }
+.cap { font: 600 0.8rem/1.3 var(--f-body); color: var(--pg-ink-3); }
+
+/* ============ Telefon: app/src/styles.css tokenları + Yön C gökyüzü katmanı ============ */
+.t-light {
+  --bg: #f3f6f8; --surface: #ffffff; --surface-2: #e9eef2; --surface-3: #dde4ea; --border: #e1e7ec;
+  --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --accent: #0b7480; --accent-ink: #ffffff; --accent-soft: rgba(17,169,184,0.12);
+  --accent-grad: linear-gradient(90deg, #0b7480, #2458cc); --accent-glow: 0 8px 22px -10px rgba(36,88,204,0.55);
+  --iris-1: #11a9b8; --iris-2: #2f6bea; --lens: #f5a623;
+  --shadow: 0 1px 2px rgba(11,18,25,0.04), 0 8px 24px rgba(11,18,25,0.05);
+  --frame: #1a2128;
+  /* Yön C: gün göğü; üstte açık mavi, sağ üstte yumuşak güneş ışığı, altta uygulama zemini */
+  --sky: radial-gradient(70% 34% at 88% -4%, rgba(255,196,110,0.42) 0%, rgba(255,196,110,0) 70%),
+         linear-gradient(180deg, #bcdcf1 0%, #d6e9f5 26%, #e9f2f7 48%, #f3f6f8 72%);
+  --sky-card: radial-gradient(80% 90% at 92% 0%, rgba(255,196,110,0.30) 0%, rgba(255,196,110,0) 62%),
+              linear-gradient(160deg, #d3e8f6 0%, #eaf3f9 55%, #ffffff 100%);
+  --sky-line: rgba(47,107,234,0.14);
+  --glass: rgba(255,255,255,0.72); --glass-line: rgba(255,255,255,0.9);
+  --nef-glow: 0 0 0 6px rgba(17,169,184,0.10), 0 10px 30px -6px rgba(47,107,234,0.40);
+  --bubble: #ffffff; --bubble-ink: #0b1219;
+  --chip: rgba(245,166,35,0.18); --chip-ink: #7a4a05;
+}
+.t-dark {
+  --bg: #070c12; --surface: #0f171f; --surface-2: #141e28; --surface-3: #1c2834; --border: rgba(255,255,255,0.08);
+  --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --accent: #19c2d1; --accent-ink: #041017; --accent-soft: rgba(25,194,209,0.14);
+  --accent-grad: linear-gradient(90deg, #19c2d1, #3e7bfa); --accent-glow: 0 8px 24px -8px rgba(25,194,209,0.55);
+  --iris-1: #19c2d1; --iris-2: #3e7bfa; --lens: #ffb13b;
+  --shadow: none;
+  --frame: #2a323b;
+  /* Yön C: gece göğü; üstte derin mavi, ufukta soğuk ışık */
+  --sky: radial-gradient(70% 30% at 86% -4%, rgba(191,230,255,0.16) 0%, rgba(191,230,255,0) 70%),
+         radial-gradient(130% 62% at 50% -8%, #173656 0%, #0c1a2b 50%, #070c12 100%);
+  --sky-card: radial-gradient(80% 90% at 92% 0%, rgba(191,230,255,0.16) 0%, rgba(191,230,255,0) 62%),
+              linear-gradient(160deg, #16314d 0%, #0f1f31 60%, #0f171f 100%);
+  --sky-line: rgba(191,230,255,0.14);
+  --glass: rgba(15,23,31,0.66); --glass-line: rgba(255,255,255,0.08);
+  --nef-glow: 0 0 0 6px rgba(25,194,209,0.10), 0 0 34px rgba(62,123,250,0.45);
+  --bubble: rgba(24,38,54,0.92); --bubble-ink: #eef3f6;
+  --chip: rgba(255,177,59,0.16); --chip-ink: #ffc56b;
+}
+.shot { padding: 11px; }
+.phone { position: relative; width: var(--pw); height: var(--ph); border-radius: 46px; overflow: hidden;
+  background: var(--sky); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.4;
+  box-shadow: 0 0 0 9px var(--frame), 0 0 0 10px rgba(127,140,150,0.35); }
+.phone.tall { height: auto; min-height: var(--ph); }
+body.w320 .phone { border-radius: 30px; }
+.sb { display: flex; justify-content: space-between; align-items: center; padding: 14px 28px 0; height: 46px; font: 600 0.92rem/1 var(--f-body); }
+body.w320 .sb { padding: 8px 18px 0; height: 30px; font-size: 0.8rem; }
+.sb i { display: inline-flex; gap: 5px; align-items: center; font-style: normal; letter-spacing: -1px; }
+.sb i s { display: inline-block; width: 18px; height: 9px; border-radius: 3px; box-shadow: inset 0 0 0 1.5px currentColor; position: relative; }
+.sb i s::after { content: ''; position: absolute; inset: 2px 5px 2px 2px; background: currentColor; border-radius: 1px; }
+.home-ind { position: absolute; bottom: 8px; left: 50%; width: 134px; margin-left: -67px; height: 5px; border-radius: 3px; background: var(--ink); opacity: 0.85; }
+body.w320 .home-ind { display: none; }
+.ico { width: 18px; height: 18px; flex: none; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.nw { white-space: nowrap; }
+
+/* ---- Nef: iris küresi ve sesi ---- */
+.nef { width: 40px; height: 40px; border-radius: 50%; flex: none; position: relative;
+  background: radial-gradient(circle at 50% 50%, #041017 0 22%, transparent 23%), conic-gradient(from 200deg, var(--iris-1), var(--iris-2), var(--iris-1));
+  box-shadow: var(--nef-glow); }
+.nef::after { content: ''; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #fff; left: 56%; top: 34%; }
+.nef.lg { width: 76px; height: 76px; }
+.nef.lg::after { width: 9px; height: 9px; }
+.nef.sm { width: 30px; height: 30px; }
+.nef.sm::after { width: 4px; height: 4px; }
+body.w320 .nef.lg { width: 60px; height: 60px; }
+.who { font: 600 0.74rem/1 var(--f-body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.says { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 12px; align-items: end; }
+.bubble { background: var(--bubble); color: var(--bubble-ink); border-radius: 22px 22px 22px 6px; padding: 12px 16px 13px;
+  font: 500 1.02rem/1.35 var(--f-body); box-shadow: var(--shadow); border: 1px solid var(--glass-line); }
+body.w320 .bubble { font-size: 0.94rem; padding: 10px 13px 11px; border-radius: 18px 18px 18px 5px; }
+.bubble .who { display: block; margin-bottom: 5px; }
+
+/* ---- Düğmeler: app .btn ---- */
+.btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 54px; padding: 14px 18px;
+  font: 650 1rem/1.1 var(--f-body); letter-spacing: -0.01em; border: 1px solid transparent; border-radius: 16px;
+  background: var(--accent-grad); color: var(--accent-ink); box-shadow: var(--accent-glow); white-space: nowrap; }
+.btn[disabled] { opacity: 0.4; box-shadow: none; }
+.btn-secondary { background: var(--glass); color: var(--ink); border-color: var(--glass-line); box-shadow: var(--shadow); backdrop-filter: blur(12px); }
+.btn-ghost { background: transparent; color: var(--ink-2); border-color: var(--border); font-weight: 550; box-shadow: none; }
+.btn-text { background: none; box-shadow: none; color: var(--ink-3); min-height: 44px; font-weight: 600; font-size: 0.95rem; }
+body.w320 .btn { min-height: 48px; padding: 11px 14px; font-size: 0.94rem; border-radius: 14px; }
+body.w320 .btn-text { min-height: 40px; font-size: 0.88rem; }
+
+/* ============ R · Rıza sayfası ============ */
+.r-back { position: absolute; inset: 0; background: rgba(2,5,8,0.36); }
+.t-dark .r-back { background: rgba(2,5,8,0.55); }
+.r-sheet { position: relative; margin-top: 18px; border-radius: 32px 32px 0 0; overflow: hidden; background: var(--surface);
+  border-top: 1px solid var(--border); padding-bottom: 30px; }
+body.w320 .r-sheet { margin-top: 8px; border-radius: 24px 24px 0 0; padding-bottom: 20px; }
+.r-sky { background: var(--sky-card); padding: 10px 22px 20px; display: grid; gap: 14px; border-bottom: 1px solid var(--sky-line); }
+body.w320 .r-sky { padding: 8px 16px 14px; gap: 10px; }
+.grab { width: 40px; height: 5px; border-radius: 3px; background: var(--surface-3); justify-self: center; opacity: 0.8; }
+.r-nef { display: flex; align-items: center; gap: 10px; }
+.r-t { margin: 0; font: 700 1.42rem/1.18 var(--f-display); letter-spacing: -0.012em; text-wrap: balance; }
+body.w320 .r-t { font-size: 1.12rem; }
+.r-lead { font: 400 0.95rem/1.42 var(--f-body); color: var(--ink-2); }
+body.w320 .r-lead { font-size: 0.85rem; }
+.r-body { padding: 16px 22px 0; display: grid; gap: 14px; }
+body.w320 .r-body { padding: 12px 14px 0; gap: 11px; }
+.facts { margin: 0; display: grid; gap: 1px; border-radius: 18px; overflow: hidden; background: var(--border); }
+.facts div { display: grid; grid-template-columns: 28px minmax(0,1fr); column-gap: 10px; row-gap: 3px; padding: 11px 14px; background: var(--surface-2); }
+body.w320 .facts div { padding: 9px 11px; grid-template-columns: 22px minmax(0,1fr); column-gap: 8px; }
+.facts .fi { grid-row: 1 / span 2; width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+body.w320 .facts .fi { width: 22px; height: 22px; border-radius: 7px; }
+.facts .fi .ico { width: 15px; height: 15px; }
+body.w320 .facts .fi .ico { width: 12px; height: 12px; }
+.facts dt { font: 600 0.78rem/1.3 var(--f-body); color: var(--ink-3); }
+.facts dd { margin: 0; font: 400 0.9rem/1.4 var(--f-body); color: var(--ink); }
+body.w320 .facts dt { font-size: 0.72rem; }
+body.w320 .facts dd { font-size: 0.8rem; line-height: 1.38; }
+.ok { display: flex; gap: 12px; align-items: flex-start; padding: 14px; border-radius: 18px; border: 1.5px solid var(--border); }
+body.w320 .ok { padding: 11px; gap: 10px; border-radius: 16px; }
+.box { width: 24px; height: 24px; flex: none; margin-top: 1px; border-radius: 7px; border: 2px solid var(--ink-3); }
+.ok p { font: 500 0.88rem/1.4 var(--f-body); }
+body.w320 .ok p { font-size: 0.8rem; }
+.btns { display: grid; gap: 8px; }
+.foot { text-align: center; font-size: 0.75rem; color: var(--ink-3); }
+body.w320 .foot { font-size: 0.7rem; }
+
+/* ============ K · İl ve ilçe ============ */
+.scr { padding: 8px 20px 28px; display: grid; gap: 16px; align-content: start; }
+body.w320 .scr { padding: 4px 14px 16px; gap: 11px; }
+.back { display: inline-flex; align-items: center; gap: 4px; font: 600 0.95rem/1 var(--f-body); color: var(--accent); }
+body.w320 .back { font-size: 0.88rem; }
+.place { display: grid; grid-template-columns: 34px minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 12px 14px;
+  border-radius: 20px; background: var(--glass); border: 1px solid var(--glass-line); box-shadow: var(--shadow); backdrop-filter: blur(14px); }
+body.w320 .place { grid-template-columns: 28px minmax(0,1fr) auto; gap: 9px; padding: 9px 11px; border-radius: 16px; }
+.place .pi { width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+body.w320 .place .pi { width: 28px; height: 28px; border-radius: 9px; }
+.place .lbl { display: block; font: 600 0.74rem/1.2 var(--f-body); color: var(--ink-3); }
+.place .val { display: flex; align-items: center; gap: 8px; margin-top: 3px; flex-wrap: nowrap; }
+.place .val b { font: 600 1.12rem/1.15 var(--f-display); letter-spacing: -0.01em; white-space: nowrap; }
+body.w320 .place .val b { font-size: 0.98rem; }
+.chip { font: 600 0.74rem/1 var(--f-body); padding: 5px 9px; border-radius: 999px; background: var(--chip); color: var(--chip-ink); white-space: nowrap; }
+body.w320 .chip { font-size: 0.68rem; padding: 4px 7px; }
+.link { font: 600 0.9rem/1 var(--f-body); color: var(--accent); white-space: nowrap; }
+body.w320 .link { font-size: 0.82rem; }
+.keep { display: flex; gap: 8px; align-items: center; padding: 0 4px; font: 500 0.84rem/1.35 var(--f-body); color: var(--ink-2); }
+.keep .ico { width: 15px; height: 15px; color: var(--ink-3); }
+body.w320 .keep { font-size: 0.76rem; }
+.search { display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); color: var(--ink-3); font: 400 1rem/1 var(--f-body); }
+body.w320 .search { height: 40px; font-size: 0.9rem; border-radius: 12px; }
+.list { border-radius: 20px; background: var(--surface); border: 1px solid var(--border); overflow: hidden; box-shadow: var(--shadow); }
+body.w320 .list { border-radius: 16px; }
+.li { display: flex; justify-content: space-between; align-items: center; padding: 0 16px; height: 48px; font: 500 1rem/1 var(--f-body); white-space: nowrap; }
+.li + .li { border-top: 1px solid var(--border); }
+.li .ico { width: 16px; height: 16px; color: var(--ink-3); }
+body.w320 .li { height: 41px; font-size: 0.9rem; padding: 0 13px; }
+.k-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(180deg, transparent, var(--bg) 85%); pointer-events: none; }
+body.w320 .k-fade { height: 56px; }
+.letter { font: 600 0.74rem/1 var(--f-body); color: var(--ink-3); letter-spacing: 0.06em; padding: 2px 6px 0; }
+
+/* ============ G · Kesin konumda onay ============ */
+.g-in { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 60px 22px 34px; }
+body.w320 .g-in { padding: 36px 14px 16px; }
+.g-sun { position: absolute; width: 360px; height: 360px; left: 50%; top: 70px; margin-left: -180px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,210,140,0.34) 0%, rgba(255,210,140,0) 62%); pointer-events: none; }
+.t-dark .g-sun { background: radial-gradient(circle, rgba(120,190,255,0.20) 0%, rgba(120,190,255,0) 62%); }
+body.w320 .g-sun { top: 20px; width: 280px; height: 280px; margin-left: -140px; }
+.g-mid { flex: 1; display: grid; justify-items: center; align-content: center; gap: 14px; text-align: center; position: relative; }
+body.w320 .g-mid { gap: 10px; }
+.g-t { margin: 0; font: 700 2rem/1.1 var(--f-display); letter-spacing: -0.02em; }
+body.w320 .g-t { font-size: 1.5rem; }
+.g-pl { display: inline-flex; align-items: center; gap: 6px; padding: 7px 13px; border-radius: 999px; background: var(--glass); border: 1px solid var(--glass-line); font: 600 0.9rem/1 var(--f-body); color: var(--ink-2); white-space: nowrap; backdrop-filter: blur(10px); }
+.g-pl .ico { width: 15px; height: 15px; color: var(--accent); }
+body.w320 .g-pl { font-size: 0.82rem; padding: 6px 11px; }
+.g-note { font: 500 0.86rem/1.35 var(--f-body); color: var(--ink-3); display: inline-flex; align-items: center; gap: 6px; }
+.g-note .ico { width: 14px; height: 14px; }
+body.w320 .g-note { font-size: 0.78rem; }
+.g-btns { display: grid; gap: 10px; position: relative; }
+body.w320 .g-btns { gap: 8px; }
+
+/* ============ T · Ana sayfa teklifi ============ */
+.phone.home { background: var(--bg); }
+.phone.home::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 300px; background: radial-gradient(900px 520px at 0% -12%, var(--accent-soft) 0%, transparent 60%); pointer-events: none; }
+.hatch { border-radius: 18px; border: 1.5px dashed var(--surface-3);
+  background: repeating-linear-gradient(135deg, transparent 0 8px, color-mix(in srgb, var(--surface-3) 45%, transparent) 8px 9px); }
+.h-top { height: 58px; }
+.h-steps { height: 112px; display: flex; align-items: center; gap: 12px; padding: 0 18px; color: var(--ink-3); }
+.h-steps .ico { width: 22px; height: 22px; }
+.h-steps i { display: block; height: 10px; border-radius: 5px; background: var(--surface-3); }
+.h-rest { height: 150px; }
+body.w320 .h-top { height: 40px; }
+body.w320 .h-steps { height: 84px; }
+body.w320 .h-rest { height: 90px; }
+.offer { position: relative; border-radius: 26px; background: var(--sky-card); border: 1px solid var(--sky-line); box-shadow: var(--shadow); padding: 18px 18px 12px; display: grid; gap: 14px; overflow: hidden; }
+body.w320 .offer { padding: 13px 13px 6px; gap: 10px; border-radius: 22px; }
+.offer .o-cl { position: absolute; right: -24px; top: -18px; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, rgba(255,210,140,0.45) 0%, rgba(255,210,140,0) 64%); pointer-events: none; }
+.t-dark .offer .o-cl { background: radial-gradient(circle, rgba(150,205,255,0.22) 0%, rgba(150,205,255,0) 64%); }
+.o-head { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 12px; align-items: start; position: relative; }
+body.w320 .o-head { gap: 10px; }
+.o-q { margin: 4px 0 0; font: 600 1.14rem/1.28 var(--f-display); letter-spacing: -0.01em; text-wrap: balance; }
+body.w320 .o-q { font-size: 0.96rem; }
+.o-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; position: relative; }
+body.w320 .o-btns { grid-template-columns: 1fr; gap: 7px; }
+.o-btns .btn { min-height: 48px; font-size: 0.95rem; padding: 10px 12px; border-radius: 14px; }
+body.w320 .o-btns .btn { min-height: 44px; font-size: 0.9rem; }
+.o-no { justify-self: center; position: relative; }
+.tabs { position: absolute; left: 0; right: 0; bottom: 0; height: 84px; background: color-mix(in srgb, var(--surface) 94%, transparent); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding-top: 12px; }
+.tabs span { width: 26px; height: 26px; border-radius: 8px; background: var(--surface-3); }
+.tabs span.on { background: var(--accent); }
+body.w320 .tabs { height: 52px; padding-top: 10px; }
+body.w320 .tabs span { width: 22px; height: 22px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 10h18"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-steps" viewBox="0 0 24 24"><path d="M4 16v-2.4C4 11.5 3 10.5 3 8c0-2.7 1.5-6 4.5-6C9.4 2 10 3.8 10 5.5c0 3.1-2 5.7-2 8.7V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.4c0-2.1 1-3.1 1-5.6 0-2.7-1.5-6-4.5-6C14.6 6 14 7.8 14 9.5c0 3.1 2 5.7 2 8.7V20a2 2 0 1 0 4 0Z"/></symbol>
+</svg>
+<main class="wrap">
+  <h1 class="pg-h">Yön C · Nefona gökyüzü dili</h1>
+  <p class="pg-lead">Gökyüzü tonunda yumuşak ışık; açık temada gün göğü ve sağ üstte güneş ışığı, koyu temada gece göğü. Nef'in iris küresi her ekranda konuşanın kim olduğunu söyler. Akış: T teklif → R rıza → iOS izin penceresi, "Kullanırken", yaklaşık → K il bulundu, ilçe listeden. Kesin konum verilmişse K yerine G.</p>
+  <section class="sec"><h2>T · Nef'in teklifi, adımların üstünde</h2><p class="note">Ana sayfa yeniden tasarlandığı için çevresi taralı yer tutucu; kart adım bilgisinin hemen üstündeki yuvada durur. Günün ilk dokunuşundan sonra bir kez; "Hayır" kalıcı. Hava verisi gösterilmediği için atıf satırı yok; veri gelince satırın kendisinde işaret ve "Veri kaynakları" durur.</p><div class="strip" data-set="T"></div></section>
+  <section class="sec"><h2>R · Hava rızası, iOS izninden önce</h2><p class="note">Onaylı weather metni harfi harfine; kutu işaretsiz, "İzin ver" kutu işaretlenene dek kapalı. iOS izin penceresi bu sayfadan sonra açılır. Kaydırılmış tam boy çekim.</p><div class="strip" data-set="R"></div></section>
+  <section class="sec"><h2>K · Yaklaşık konumdan il, listeden ilçe</h2><p class="note">Yaklaşık konum yalnız ili bulur; "yaklaşık" parantezsiz, ilin yanında küçük bir etiket. İlçe listeden, arama alanıyla. İlçe profile yazılmaz; alttaki cümle rıza metninden aynen.</p><div class="strip" data-set="K"></div></section>
+  <section class="sec"><h2>G · Kesin konumda ilçe onayı</h2><p class="note">Yalnız kesin konum izni verilmişse: en yakın ilçe merkezi telefonda bulunur, ters coğrafi kodlama yok. Nef sorar; "Başka ilçe" K'daki listeye döner.</p><div class="strip" data-set="G"></div></section>
+</main>
+
+<!-- ============ T ============ -->
+<template id="tpl-T">
+  <div class="phone home">
+    <div class="sb"><span>09:41</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <div class="hatch h-top"></div>
+      <section class="offer" aria-label="Hava teklifi">
+        <span class="o-cl"></span>
+        <div class="o-head">
+          <span class="nef sm"></span>
+          <div><span class="who">Nef</span><p class="o-q">Bulunduğun yerin havasını da göstereyim mi?</p></div>
+        </div>
+        <div class="o-btns">
+          <span class="btn"><svg class="ico"><use href="#i-pin"/></svg>Konumumu kullan</span>
+          <span class="btn btn-secondary">İl ve ilçe seç</span>
+        </div>
+        <span class="btn btn-text o-no">Hayır</span>
+      </section>
+      <div class="hatch h-steps"><svg class="ico"><use href="#i-steps"/></svg><div style="display:grid;gap:8px;flex:1"><i style="width:40%"></i><i style="width:70%"></i></div></div>
+      <div class="hatch h-rest"></div>
+    </div>
+    <div class="tabs"><span class="on"></span><span></span><span></span><span></span></div>
+  </div>
+</template>
+
+<!-- ============ R ============ -->
+<template id="tpl-R">
+  <div class="phone tall">
+    <div class="sb"><span>09:42</span><i>●●● <s></s></i></div>
+    <span class="r-back"></span>
+    <div class="r-sheet" role="dialog" aria-labelledby="r-t">
+      <div class="r-sky">
+        <span class="grab"></span>
+        <div class="r-nef"><span class="nef sm"></span><span class="who">Nef</span></div>
+        <h2 class="r-t">Bulunduğun yerin havasını da göstereyim mi?</h2>
+        <p class="r-lead">İstersen Ana sayfada hava ve yağmur saatini gösteririm. İzin vermesen de her şey açık kalır; il ve ilçeyi listeden de seçebilirsin.</p>
+      </div>
+      <div class="r-body">
+        <dl class="facts">
+          <div><span class="fi"><svg class="ico"><use href="#i-db"/></svg></span><dt>Ne kaydedilir?</dt><dd>Yaklaşık konumun ya da seçtiğin il ve ilçenin merkezi. Telefonda yalnız il ve ilçe adı kalır. Konumunun kendisi saklanmaz.</dd></div>
+          <div><span class="fi"><svg class="ico"><use href="#i-spark"/></svg></span><dt>Ne işe yarar?</dt><dd>Hava, yağmur olasılığı ve istersen alarmdan sonra gelen sabah havası bildirimi.</dd></div>
+          <div><span class="fi"><svg class="ico"><use href="#i-globe"/></svg></span><dt>Nerede durur?</dt><dd>Hava bilgisi için konum yuvarlanarak Apple'ın hava servisine (yurt dışı) gider. Sabah bildirimi yenilenirken yalnız seçtiğin yerin merkezi gider. Sunucumuza ve Nef'e gitmez.</dd></div>
+          <div><span class="fi"><svg class="ico"><use href="#i-clock"/></svg></span><dt>Ne kadar kalır?</dt><dd>Telefonda il ve ilçe adı, hava önbelleği ve 90 günlük günlük hava özeti. İzin kapanınca ilk açılışta il adı ve önbellek silinir.</dd></div>
+        </dl>
+        <div class="ok"><span class="box" aria-hidden="true"></span><p>Hava bilgisi için yaklaşık konumumun ya da seçtiğim yerin merkezinin yurt dışındaki Apple hava servisine gönderilmesine açık rıza veriyorum.</p></div>
+        <div class="btns">
+          <span class="btn" disabled>İzin ver</span>
+          <span class="btn btn-ghost">Şimdi değil</span>
+        </div>
+        <p class="foot">İznini Profilim → İzinlerim'den her an geri çekebilirsin.</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<!-- ============ K ============ -->
+<template id="tpl-K">
+  <div class="phone">
+    <div class="sb"><span>09:43</span><i>●●● <s></s></i></div>
+    <div class="scr">
+      <span class="back"><svg class="ico"><use href="#i-back"/></svg>Ana sayfa</span>
+      <div class="says"><span class="nef"></span><p class="bubble"><span class="who">Nef</span>İzmir'i buldum. Hangi ilçedesin?</p></div>
+      <div>
+        <div class="place">
+          <span class="pi"><svg class="ico"><use href="#i-pin"/></svg></span>
+          <div><span class="lbl">İl</span><span class="val"><b>İzmir</b><span class="chip">yaklaşık</span></span></div>
+          <span class="link">Değiştir</span>
+        </div>
+      </div>
+      <p class="keep"><svg class="ico"><use href="#i-lock"/></svg><span>Telefonda yalnız il ve ilçe adı kalır.</span></p>
+      <div class="search"><svg class="ico"><use href="#i-search"/></svg>İlçe ara</div>
+      <div class="list">
+        <div class="li">Aliağa<svg class="ico"><use href="#i-chev"/></svg></div>
+        <div class="li">Balçova<svg class="ico"><use href="#i-chev"/></svg></div>
+        <div class="li">Bayındır<svg class="ico"><use href="#i-chev"/></svg></div>
+        <div class="li">Bayraklı<svg class="ico"><use href="#i-chev"/></svg></div>
+        <div class="li">Bergama<svg class="ico"><use href="#i-chev"/></svg></div>
+        <div class="li">Beydağ<svg class="ico"><use href="#i-chev"/></svg></div>
+        <div class="li">Bornova<svg class="ico"><use href="#i-chev"/></svg></div>
+        <div class="li">Buca<svg class="ico"><use href="#i-chev"/></svg></div>
+        <div class="li">Çeşme<svg class="ico"><use href="#i-chev"/></svg></div>
+      </div>
+    </div>
+    <span class="k-fade"></span>
+  </div>
+</template>
+
+<!-- ============ G ============ -->
+<template id="tpl-G">
+  <div class="phone">
+    <div class="sb"><span>09:43</span><i>●●● <s></s></i></div>
+    <span class="g-sun"></span>
+    <div class="g-in">
+      <div class="g-mid">
+        <span class="nef lg"></span>
+        <span class="who">Nef</span>
+        <h2 class="g-t">Gaziemir'de misin?</h2>
+        <span class="g-pl"><svg class="ico"><use href="#i-pin"/></svg>İzmir Gaziemir</span>
+        <p class="g-note"><svg class="ico"><use href="#i-lock"/></svg>Konumunun kendisi saklanmaz.</p>
+      </div>
+      <div class="g-btns">
+        <span class="btn">Evet</span>
+        <span class="btn btn-secondary">Başka ilçe</span>
+      </div>
+    </div>
+    <span class="home-ind"></span>
+  </div>
+</template>
+
+<script>
+(function () {
+  var caps = { T: 'Konum hiç seçilmemiş; günün ilk dokunuşundan sonra', R: 'Kutu işaretsiz, İzin ver kapalı', K: 'Yaklaşık konum: il bulundu, ilçe listede', G: 'Kesin konum: en yakın ilçe merkezi' };
+  document.querySelectorAll('.strip').forEach(function (strip) {
+    var set = strip.dataset.set;
+    ['acik', 'koyu'].forEach(function (th) {
+      var cell = document.createElement('figure');
+      cell.className = 'cell';
+      var shot = document.createElement('div');
+      shot.className = 'shot';
+      shot.dataset.shot = set + '-' + th;
+      shot.style.background = th === 'acik' ? '#eef2f4' : '#070c12';
+      var frag = document.getElementById('tpl-' + set).content.cloneNode(true);
+      frag.querySelector('.phone').classList.add(th === 'acik' ? 't-light' : 't-dark');
+      shot.appendChild(frag);
+      cell.appendChild(shot);
+      var cap = document.createElement('figcaption');
+      cap.className = 'cap';
+      cap.textContent = set + ' · ' + (th === 'acik' ? 'açık' : 'koyu') + ' · ' + caps[set];
+      cell.appendChild(cap);
+      strip.appendChild(cell);
+    });
+  });
+})();
+</script>
+</body>
+</html>

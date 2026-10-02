@@ -1,0 +1,67 @@
+{
+ "file": "el/el-vd-b.wav",
+ "src_sr": 44100,
+ "src_channels": 2,
+ "duration_s": 300.0,
+ "lufs_i": -13.23,
+ "true_peak_dbtp": -0.55,
+ "sample_peak_dbfs": -0.56,
+ "clipped_samples": 0,
+ "dc": [
+  -2.4e-05,
+  -4.3e-05
+ ],
+ "lr_corr": 0.602,
+ "lead_silence_ms": 65.0,
+ "tail_silence_ms": 442.9,
+ "flatness": {
+  "st_lufs_p5": -14.17,
+  "st_lufs_p50": -13.2,
+  "st_lufs_p95": -12.13,
+  "spread_p5_p95_lu": 2.04,
+  "st_std_lu": 0.79,
+  "range_full_lu": 34.21,
+  "max_rise_10s_lu": 14.69,
+  "crescendo_10s_spans": 9,
+  "verdict": "PASS"
+ },
+ "onsets": {
+  "pulse_clarity": 0.055,
+  "percussive_share": 0.044,
+  "events_per_min": 43.8,
+  "strong_onsets_per_min": 2.8,
+  "flux_mean_db": 0.4384,
+  "flux_median_db": 0.4191,
+  "flux_p99_db": 0.924,
+  "flux_max_db": 3.568,
+  "flux_max_at_s": 89.07
+ },
+ "clicks_hf": {
+  "count": 4,
+  "first": [
+   [
+    45.832,
+    12.2
+   ],
+   [
+    76.444,
+    15.8
+   ],
+   [
+    145.645,
+    14.9
+   ],
+   [
+    209.109,
+    14.6
+   ]
+  ]
+ },
+ "spectrum": {
+  "centroid_hz": 175.4,
+  "share_lt300": 0.857,
+  "share_500_4k": 0.027,
+  "share_1k5_4k": 0.0001,
+  "share_gt8k": 0.0
+ }
+}

@@ -1,0 +1,504 @@
+{
+ "name": "ders3-kuyruk",
+ "lesson": "d03",
+ "loop_s": 600,
+ "app_contract": "tail { file, seconds: dk*60, fade: 180 }; döngü −1",
+ "generated_utc": "2026-09-30T08:50:25.885327+00:00",
+ "tool": "render/tools/kuyruk_ib.py",
+ "file": "ders3-kuyruk.mp3",
+ "bytes": 8690417,
+ "encoding": {
+  "mode": "ABR 120 kbit/s (lameenc, q=2)",
+  "bytes": 8690417,
+  "kbps_avg": 115.9
+ },
+ "duration_decoded_s": 600.008,
+ "target_lufs_from_lesson_end": {
+  "15": {
+   "spans_s": [
+    [
+     889.56,
+     891.56
+    ],
+    [
+     893.39,
+     894.8
+    ]
+   ],
+   "lufs": -42.05
+  },
+  "5": {
+   "spans_s": [
+    [
+     290.85,
+     292.85
+    ]
+   ],
+   "lufs": -42.62
+  }
+ },
+ "integrated_lufs": -42.47,
+ "true_peak_dbtp_mp3": -21.41,
+ "tp_limiter": [
+  {
+   "ceiling_dbtp": -2.0,
+   "limiter": {
+    "ceiling_dbtp": -2.0,
+    "max_reduction_db": 0.0,
+    "sec_over_0_5db": 0.0,
+    "sec_over_1db": 0.0
+   },
+   "tp_mp3": -21.41
+  }
+ ],
+ "loudness_rise_two_loops": {
+  "stem": "yatak, tınısız, açılış kararması dışında (pencere başı ≥ 6.0 sn)",
+  "max_rise_db_per_s": 0.75,
+  "at_s": 298.6,
+  "max_rise_in_speech_free_s": 0.75,
+  "at_speech_free_s": 298.6,
+  "n_1s_steps_over_1db": 0,
+  "top5": [
+   [
+    298.6,
+    0.75
+   ],
+   [
+    898.6,
+    0.75
+   ],
+   [
+    298.7,
+    0.69
+   ],
+   [
+    898.7,
+    0.69
+   ],
+   [
+    173.1,
+    0.67
+   ]
+  ]
+ },
+ "clicks_float_two_loops": {
+  "edit_point": 0,
+  "speech_content": 0,
+  "bed_content": 1800,
+  "mix_only": 0,
+  "nature_at_edit": 2
+ },
+ "clicks_mp3_two_loops": {
+  "edit_point": 0,
+  "speech_content": 0,
+  "bed_content": 1064,
+  "mix_only": 0,
+  "nature_at_edit": 0
+ },
+ "clicks_list": {
+  "float": [],
+  "mp3": [],
+  "float_nature_at_edit": [
+   [
+    296.0,
+    null,
+    -60.8,
+    -240.0,
+    -60.8,
+    {
+     "loop": "yagmur-4.wav",
+     "src_pos_s": 9.574,
+     "weight": 1.0
+    }
+   ],
+   [
+    896.001,
+    null,
+    -60.5,
+    -240.0,
+    -60.5,
+    {
+     "loop": "yagmur-4.wav",
+     "src_pos_s": 9.575,
+     "weight": 1.0
+    }
+   ]
+  ],
+  "mp3_nature_at_edit": []
+ },
+ "seam": {
+  "sample_jump": 0.000225,
+  "p99_9_neighbour_diff": 0.003984,
+  "clicks_at_seam": []
+ },
+ "digital_silence_two_loops": {
+  "longest_run_s": 0.0,
+  "at_s": 69.151,
+  "runs_over_100ms": 0,
+  "threshold": "|x| <= 1/32768 on both channels"
+ },
+ "build": {
+  "placements": [
+   {
+    "file": "d3-uyku.wav",
+    "t0": 0.0,
+    "t1": 265.5,
+    "off": 23.0
+   },
+   {
+    "file": "d3-derin-b.up.lev.wav",
+    "t0": 257.5,
+    "t1": 450.0,
+    "off": 13.0
+   },
+   {
+    "file": "d3-derin.up.wav",
+    "t0": 442.0,
+    "t1": 614.0,
+    "off": 15.0
+   }
+  ],
+  "loop_window_in_render_s": [
+   4.0,
+   604.0
+  ],
+  "seam_xf_s": 8.0,
+  "crossfades": [
+   {
+    "t0": 257.5,
+    "t1": 265.5,
+    "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+    "rho_min": -0.01,
+    "rho_max": 0.009,
+    "rho_mean": -0.002
+   },
+   {
+    "t0": 442.0,
+    "t1": 450.0,
+    "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+    "rho_min": -0.084,
+    "rho_max": 0.093,
+    "rho_mean": 0.0
+   }
+  ],
+  "nature_events": [
+   {
+    "t0": 0.0,
+    "t1": 34.0,
+    "loop": "yagmur-3.wav",
+    "rotation_s": 19.723,
+    "gain_db": 12.61
+   },
+   {
+    "t0": 30.0,
+    "t1": 64.0,
+    "loop": "yagmur-1.wav",
+    "rotation_s": 12.139,
+    "gain_db": 12.12
+   },
+   {
+    "t0": 60.0,
+    "t1": 94.0,
+    "loop": "yagmur-3.wav",
+    "rotation_s": 28.832,
+    "gain_db": 12.61
+   },
+   {
+    "t0": 90.0,
+    "t1": 124.0,
+    "loop": "yagmur-4.wav",
+    "rotation_s": 24.085,
+    "gain_db": 10.91
+   },
+   {
+    "t0": 120.0,
+    "t1": 154.0,
+    "loop": "yagmur-2.wav",
+    "rotation_s": 27.139,
+    "gain_db": 9.0
+   },
+   {
+    "t0": 150.0,
+    "t1": 184.0,
+    "loop": "yagmur-3.wav",
+    "rotation_s": 3.07,
+    "gain_db": 12.61
+   },
+   {
+    "t0": 180.0,
+    "t1": 214.0,
+    "loop": "yagmur-4.wav",
+    "rotation_s": 2.952,
+    "gain_db": 10.91
+   },
+   {
+    "t0": 210.0,
+    "t1": 244.0,
+    "loop": "yagmur-1.wav",
+    "rotation_s": 25.533,
+    "gain_db": 12.12
+   },
+   {
+    "t0": 240.0,
+    "t1": 274.0,
+    "loop": "yagmur-3.wav",
+    "rotation_s": 5.256,
+    "gain_db": 12.61
+   },
+   {
+    "t0": 270.0,
+    "t1": 304.0,
+    "loop": "yagmur-4.wav",
+    "rotation_s": 9.574,
+    "gain_db": 10.91
+   },
+   {
+    "t0": 300.0,
+    "t1": 334.0,
+    "loop": "yagmur-2.wav",
+    "rotation_s": 15.208,
+    "gain_db": 9.0
+   },
+   {
+    "t0": 330.0,
+    "t1": 364.0,
+    "loop": "yagmur-1.wav",
+    "rotation_s": 28.022,
+    "gain_db": 12.12
+   },
+   {
+    "t0": 360.0,
+    "t1": 394.0,
+    "loop": "yagmur-2.wav",
+    "rotation_s": 20.838,
+    "gain_db": 9.0
+   },
+   {
+    "t0": 390.0,
+    "t1": 424.0,
+    "loop": "yagmur-1.wav",
+    "rotation_s": 26.41,
+    "gain_db": 12.12
+   },
+   {
+    "t0": 420.0,
+    "t1": 454.0,
+    "loop": "yagmur-4.wav",
+    "rotation_s": 9.643,
+    "gain_db": 10.91
+   },
+   {
+    "t0": 450.0,
+    "t1": 484.0,
+    "loop": "yagmur-3.wav",
+    "rotation_s": 27.371,
+    "gain_db": 12.61
+   },
+   {
+    "t0": 480.0,
+    "t1": 514.0,
+    "loop": "yagmur-1.wav",
+    "rotation_s": 0.769,
+    "gain_db": 12.12
+   },
+   {
+    "t0": 510.0,
+    "t1": 544.0,
+    "loop": "yagmur-4.wav",
+    "rotation_s": 0.04,
+    "gain_db": 10.91
+   },
+   {
+    "t0": 540.0,
+    "t1": 574.0,
+    "loop": "yagmur-2.wav",
+    "rotation_s": 9.167,
+    "gain_db": 9.0
+   },
+   {
+    "t0": 570.0,
+    "t1": 604.0,
+    "loop": "yagmur-1.wav",
+    "rotation_s": 17.183,
+    "gain_db": 12.12
+   },
+   {
+    "t0": 600.0,
+    "t1": 614.0,
+    "loop": "yagmur-4.wav",
+    "rotation_s": 10.038,
+    "gain_db": 10.91
+   }
+  ],
+  "room_events": [
+   {
+    "t0": 0.0,
+    "t1": 32.0,
+    "loop": "oda-sesi-1.wav",
+    "rotation_s": 11.394,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 30.0,
+    "t1": 62.0,
+    "loop": "oda-sesi-2.wav",
+    "rotation_s": 29.341,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 60.0,
+    "t1": 92.0,
+    "loop": "oda-sesi-1.wav",
+    "rotation_s": 23.048,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 90.0,
+    "t1": 122.0,
+    "loop": "oda-sesi-2.wav",
+    "rotation_s": 23.046,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 120.0,
+    "t1": 152.0,
+    "loop": "oda-sesi-1.wav",
+    "rotation_s": 4.67,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 150.0,
+    "t1": 182.0,
+    "loop": "oda-sesi-2.wav",
+    "rotation_s": 13.662,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 180.0,
+    "t1": 212.0,
+    "loop": "oda-sesi-1.wav",
+    "rotation_s": 25.036,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 210.0,
+    "t1": 242.0,
+    "loop": "oda-sesi-2.wav",
+    "rotation_s": 26.529,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 240.0,
+    "t1": 272.0,
+    "loop": "oda-sesi-1.wav",
+    "rotation_s": 14.159,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 270.0,
+    "t1": 302.0,
+    "loop": "oda-sesi-2.wav",
+    "rotation_s": 18.272,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 300.0,
+    "t1": 332.0,
+    "loop": "oda-sesi-1.wav",
+    "rotation_s": 19.666,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 330.0,
+    "t1": 362.0,
+    "loop": "oda-sesi-2.wav",
+    "rotation_s": 18.805,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 360.0,
+    "t1": 392.0,
+    "loop": "oda-sesi-1.wav",
+    "rotation_s": 29.555,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 390.0,
+    "t1": 422.0,
+    "loop": "oda-sesi-2.wav",
+    "rotation_s": 16.275,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 420.0,
+    "t1": 452.0,
+    "loop": "oda-sesi-1.wav",
+    "rotation_s": 14.333,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 450.0,
+    "t1": 482.0,
+    "loop": "oda-sesi-2.wav",
+    "rotation_s": 23.327,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 480.0,
+    "t1": 512.0,
+    "loop": "oda-sesi-1.wav",
+    "rotation_s": 28.43,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 510.0,
+    "t1": 542.0,
+    "loop": "oda-sesi-2.wav",
+    "rotation_s": 16.285,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 540.0,
+    "t1": 572.0,
+    "loop": "oda-sesi-1.wav",
+    "rotation_s": 8.962,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 570.0,
+    "t1": 602.0,
+    "loop": "oda-sesi-2.wav",
+    "rotation_s": 11.34,
+    "gain_db": 0.0
+   },
+   {
+    "t0": 600.0,
+    "t1": 614.0,
+    "loop": "oda-sesi-1.wav",
+    "rotation_s": 24.305,
+    "gain_db": 0.0
+   }
+  ],
+  "rise_limit": {
+   "applied": false,
+   "max_rise_iter": [
+    0.753
+   ]
+  },
+  "gain_to_target_db": -18.62
+ },
+ "criteria": {
+  "sure_600_pm1s": true,
+  "duzey_ders_sonu_pm1": true,
+  "yatak_yukselisi_le_1dB_s_iki_dongu": true,
+  "dikiste_tik_yok": true,
+  "dikiste_sicrama_yok": true,
+  "gecis_tiki_yok_mp3": true,
+  "gecis_tiki_yok_float": true,
+  "dijital_sessizlik_100ms_yok": true,
+  "gercek_tepe_le_m1": true,
+  "boyut_le_15MB": true,
+  "mp3_44k1_stereo": true
+ },
+ "pass": true
+}

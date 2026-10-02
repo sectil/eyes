@@ -1,0 +1,19 @@
+{
+ "node_id": "5mWt5wIHmHFmWiaQIN5B",
+ "session_ids": [
+  "VQCOrhhhDlh4Yr8LXd9U"
+ ],
+ "requested_at": "2026-09-30T06:57:27.344Z",
+ "tts": "Omuzlarını kulaklarından uzaklaştırıp çeneni gevşek bırakıyorsun.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "VQCOrhhhDlh4Yr8LXd9U",
+   "generation_id": "8dSUJe4ouhdvpVbiIVRO",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/VQCOrhhhDlh4Yr8LXd9U/8dSUJe4ouhdvpVbiIVRO/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065730Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=a1f17b67b1f89db62c46fd9e70894e040174c0c8826b482b3867b065980f281be122c41c126276710cb71de4df148f557a8b00e248e2442aa8531ede8ee1d9eb9e52e70403668ecee2fe752671504497f00d515662015e9ac9d7caf431a080d4348e00e131b5290522adcc4bf9fdfc5d8bd6608db1a6dc216475c8d78147df3ee44b540149cbab3499860cb335d14b402264cd3a6572c7a461d7fa7e6551e0221d708776beed1f9823985eb04c11e0a1b7a2a83e8a90b276df35c79fb0219612b2a2cc7eb928109b46219309aaa9a0a7d171c784138ea2950bef57b44873bf2122537c2a383cc678257225752927e8dc2468ed9d175a9a5be8d0a7fd4bfc5ce2",
+   "duration_secs": 4.72,
+   "prompt": "Omuzlarını kulaklarından uzaklaştırıp çeneni gevşek bırakıyorsun.",
+   "kind": "audio"
+  }
+ ]
+}

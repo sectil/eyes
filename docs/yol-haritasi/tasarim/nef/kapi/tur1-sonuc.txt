@@ -1,0 +1,171 @@
+geçen 72 / 130
+
+## F1.T · bildirim başlığı  geçen 4/7
++ F1T-1 5/5 Yürüyüşün yağmura denk geliyor
++ F1T-2 5/5 Yağmur yürüyüş saatine yakın
+- F1T-3 0/5 Yağmur senin saatine yakın  ← "Senin saatine" belirsiz; hangi saat olduğu anlaşılmıyor. / "Senin saatine" belirsiz; hangi saat olduğu anlaşılmıyor.
++ F1T-4 5/5 Yürüyüşünle yağmur çakışabilir
+- F1T-5 0/5 Yürüyüş saatin ve yağmur  ← Fiilsiz, robot gibi; ne söylediği belli değil. / Yüklemi olmayan, ne demek istediği belli olmayan bir başlık.
+- F1T-6 0/5 Bugünkü yürüyüşün için not  ← Belirsiz, tıklatmaya çalışan genel bir başlık; bilgi vermiyor. / Hiçbir şey söylemiyor, robot gibi duruyor.
++ F1T-7 5/5 Yürüyüşünde yağmur ihtimali
+
+## F1.A · yürüyüş yağmur aralığının içinde, ilk kez  geçen 5/7
++ F1A-1 5/5 Bu hafta üç akşam 19.30'da yürüdün. Bugün yağmur 19.00'da bekleniyor; 18.00'de çıkabilirsin.
++ F1A-2 4/5 Akşam yürüyüşlerin genelde 19.30'da. Bugün yağmur 19.00'da bekleniyor; 18.00 daha kuru görünüyor.
++ F1A-3 5/5 Son iki haftada çoğunlukla 19.30'da yürüdün. Bugün yağmur 19.00'da bekleniyor; istersen 18.00'de çık.
+- F1A-4 0/5 Bu hafta yürüyüşlerinin üç tanesi 19.30'da oldu. Bugün yağmur 19.00'da bekleniyor; 18.00'de çıkmak da olur.  ← "Yürüyüşlerinin üç tanesi 19.30'da oldu" hantal, rapor dili gibi. / "Yürüyüşlerinin üç tanesi ... oldu" hantal ve yapay bir anlatım.
++ F1A-5 5/5 Her zamanki 19.30 yürüyüşünü 18.00'e alırsan yağmurdan önce dönebilirsin; yağmur 19.00'da bekleniyor.
+- F1A-6 0/5 Bu hafta 19.30 senin yürüyüş saatin oldu. Bugün yağmur 19.00'da bekleniyor; 18.00'de çıkabilirsin.  ← "19.30 senin yürüyüş saatin oldu" garip bir kuruluş. / "19.30 senin yürüyüş saatin oldu" çeviri kokan, garip bir yapı.
++ F1A-7 4/5 Bu hafta akşam yürüyüşlerin 19.30'da oldu. Bugün yağmur 19.00'da bekleniyor; 18.00 daha kuru görünüyor.
+
+## F1.B · yürüyüş yağmurdan az önce  geçen 3/6
+- F1B-1 1/5 Bu hafta üç akşam 18.00'de yürüdün. Bugün yağmur 19.00'da bekleniyor; yürüyüş ondan önce sığabilir.  ← "Yürüyüş ondan önce sığabilir" doğal değil, çeviri gibi. / "Yürüyüş ondan önce sığabilir" Türkçede doğal durmuyor.
++ F1B-2 5/5 Akşam yürüyüşlerin genelde 18.00'de. Bugün yağmur biraz sonra, 19.00'da bekleniyor; kısa bir tur sığabilir.
++ F1B-3 5/5 Son iki haftada çoğunlukla 18.00'de yürüdün. Bugün yağmur 19.00'da bekleniyor; ondan önce dönebilirsin.
++ F1B-4 5/5 Her zamanki 18.00 yürüyüşünle yağmur arasında az zaman var: yağmur 19.00'da bekleniyor.
+- F1B-5 0/5 Bu hafta 18.00 senin yürüyüş saatin oldu. Bugün yağmur 19.00'da bekleniyor; yürüyüş ondan önce bitebilir.  ← "18.00 senin yürüyüş saatin oldu" garip bir kuruluş. / "18.00 senin yürüyüş saatin oldu" çeviri kokan, garip bir yapı.
+- F1B-6 0/5 18.00 yürüyüşün bugün yağmurdan biraz önceye düşüyor; yağmur 19.00'da bekleniyor.  ← "Yağmurdan biraz önceye düşüyor" hantal ve aynı şeyi iki kez söylüyor. / "Yağmurdan biraz önceye düşüyor" dolambaçlı ve kulağa garip geliyor.
+
+## F1.C · kuru aralık yok, içeride  geçen 2/6
+- F1C-1 0/5 Bu hafta üç akşam 19.30'da yürüdün. Bugün yağmur 17.00'de bekleniyor; 5 dakikalık nefes pratiği de olur.  ← Yağmurun ne zaman biteceği yok, nefes pratiğine geçiş kopuk kalıyor. / Yağmurun ne zamana kadar süreceği söylenmiyor, nefes pratiğine de birden geçiliyor.
+- F1C-2 2/5 Akşam yürüyüşlerin genelde 19.30'da. Bugün yağmur 17.00'den 22.00'ye kadar bekleniyor; içeride de olur.  ← "İçeride de olur" belirsiz; içeride ne olacağı söylenmiyor. / "İçeride de olur" yarım kalmış; ne olacağı söylenmiyor.
+- F1C-3 2/5 19.30 yürüyüşün bugün yağmurun ortasına düşebilir; yağmur 22.00'ye kadar bekleniyor. İçeride de olur.  ← "İçeride de olur" belirsiz, sondaki ek cümle kopuk. / "İçeride de olur" yarım kalmış, "yağmurun ortasına düşebilir" de garip.
+- F1C-4 0/5 Son iki haftada çoğunlukla 19.30'da yürüdün. Bugün o saatlerde yağmur bekleniyor; koridorda bir tur da olur.  ← "Koridorda bir tur" tuhaf ve evimi bilmeden yapılmış bir öneri. / Herkesin evinde koridor yok; öneri tuhaf kaçıyor.
++ F1C-5 5/5 19.30 senin yürüyüş saatin; bugün yağmur 22.00'ye kadar bekleniyor. Yürüyüşü yarına bırakmak da olur.
++ F1C-6 5/5 Bu hafta üç akşam 19.30'da yürüdün. Bugün akşam boyu yağmur bekleniyor; içeride kısa bir yürüyüş de olur.
+
+## F1.D · tekrar  geçen 4/6
++ F1D-1 4/5 Bugün de akşam yürüyüşüne yağmur yakın: 19.00'da bekleniyor. 18.00 daha kuru görünüyor.
+- F1D-2 2/5 Dün olduğu gibi bugün de 19.30 yürüyüşüne yağmur yakın; yağmur 19.00'da bekleniyor, 18.00'de çıkabilirsin.  ← Fazla uzun, "yağmur" sözcüğü de gereksiz yere tekrar ediyor. / Uzun, "yağmur" tekrarlanıyor ve tek nefeste okunmuyor.
++ F1D-3 4/5 Yürüyüş saatin 19.30; bugün de yağmur 19.00'da bekleniyor. 18.00 daha kuru görünüyor.
++ F1D-4 5/5 19.30 yürüyüşüne bu hafta ikinci kez yağmur yakın. Bugün 19.00'da bekleniyor; 18.00'de çıkabilirsin.
++ F1D-5 5/5 Akşam yürüyüşlerin genelde 19.30'da; bugün de yağmur 19.00'da bekleniyor. 18.00'de çıkmak da olur.
+- F1D-6 0/5 Bugün de senin saatine yağmur yakın: 19.00'da bekleniyor. 18.00'de çıkabilirsin.  ← "Senin saatine" belirsiz; saat açık değil. / "Senin saatine" belirsiz kalıyor.
+
+## F1.E · saat kişinin kurduğu hatırlatmadan  geçen 5/6
++ F1E-1 5/5 Yürüyüş hatırlatman 19.30'da. Bugün yağmur 19.00'da bekleniyor; 18.00'de çıkabilirsin.
++ F1E-2 4/5 Yürüyüş için seçtiğin saat 19.30. Yağmur bugün 19.00'da bekleniyor; 18.00 daha kuru görünüyor.
+- F1E-3 0/5 Kendi seçtiğin 19.30 yürüyüşü yağmura denk gelebilir; yağmur 19.00'da bekleniyor. 18.00'de çıkmak da olur.  ← "Kendi seçtiğin" hafif suçlayıcı bir tını taşıyor, cümle de uzun. / "Kendi seçtiğin" vurgusu hafif suçlayıcı, cümle de uzun.
++ F1E-4 5/5 19.30 senin yürüyüş saatin. Bugün yağmur 19.00'da bekleniyor; istersen 18.00'de çık.
++ F1E-5 4/5 Yürüyüşünü 19.30'a kurmuştun. Bugün yağmur 19.00'da bekleniyor; 18.00'de çıkabilirsin.
++ F1E-6 4/5 Hatırlatman 19.30'da gelecek; yağmur bugün 19.00'da bekleniyor. 18.00 daha kuru görünüyor.
+
+## F3.A · F1'e eklenen yan cümle, saatsiz  geçen 5/7
++ F3A-1 5/5 Hissedilen 31 derece; suyunu yanına al.
++ F3A-2 5/5 Hissedilen 31 derece; su yanında olsun.
+- F3A-3 0/5 Hava 31 derece hissettiriyor; suyunu yanına alabilirsin.  ← "31 derece hissettiriyor" çeviri kokan, doğal olmayan bir kalıp. / "31 derece hissettiriyor" İngilizceden çeviri kokuyor.
++ F3A-4 5/5 Hissedilen 31 derece; gölgeli yolu seçebilirsin.
++ F3A-5 5/5 O saatte hissedilen 31 derece; bir şişe su yanında olsun.
++ F3A-6 5/5 Hissedilen 31 derece; yolda su yanında olsun.
+- F3A-7 0/5 Sıcaklık 31 derece hissettiriyor; gölge ve su işine yarar.  ← "Sıcaklık 31 derece hissettiriyor" doğal olmayan bir kalıp. / "Sıcaklık 31 derece hissettiriyor" çeviri kokan ve yanlış bir söyleyiş.
+
+## F3.B · yağmursuz gün, kişinin yürüyüş saatinde sıcak  geçen 4/6
++ F3B-1 5/5 Her zamanki 19.30 yürüyüşünde hissedilen 31 derece; suyunu yanına al.
++ F3B-2 5/5 19.30 yürüyüşünde hissedilen 31 derece bekleniyor; su yanında olsun.
+- F3B-3 3/5 Bu hafta 19.30'da yürüdün; o saatte hissedilen 31 derece. Suyunu yanına alabilirsin.  ← "O saatte" geçmiş yürüyüşü mü bugünü mü kastediyor, belirsiz. / "O saatte" geçmiş haftaya mı bugüne mi, belli değil.
+- F3B-4 0/5 19.30'da, yürüyüş saatinde, hissedilen 31 derece; gölgeli yolu seçebilirsin.  ← Virgüllerle bölünmüş yapı robot gibi okunuyor. / Araya virgülle sıkıştırılmış "yürüyüş saatinde" cümleyi hantallaştırıyor.
++ F3B-5 5/5 Akşam yürüyüşlerin genelde 19.30'da; o saatte hissedilen 31 derece. Su yanında olsun.
++ F3B-6 4/5 Yürüyüş saatin 19.30; hissedilen 31 derece. Gölge ve su işine yarar.
+
+## F2.A · tek seans, artış  geçen 4/7
++ F2A-1 5/5 Geçen hafta bu akşam Dalga sesinden sonra sakinliğin 4'ten 7'ye çıkmıştı.
+- F2A-2 0/5 Geçen hafta bu akşam: Dalga sesi, sakinlik puanın önce 4, sonra 7.  ← Telgraf gibi kesik, doğal bir cümle değil. / Kesik kesik, telgraf gibi; doğal bir cümle değil.
++ F2A-3 4/5 Geçen hafta bu akşam sakinlik puanın Dalga sesinden önce 4, sonra 7 olmuştu.
++ F2A-4 5/5 Bir hafta önce bu saatlerde Dalga sesinden sonra sakinlik puanın 4'ten 7'ye yükselmişti.
++ F2A-5 5/5 Geçen hafta bu akşam Dalga sesini seçmiştin; sakinlik puanın 4'ten 7'ye çıkmıştı.
+- F2A-6 3/5 Yedi gün önce bu akşam nefes pratiğinden sonra sakinliğin 2'den 4'e yükselmişti.  ← "Yedi gün önce bu akşam" makine gibi duruyor. / "Yedi gün önce bu akşam" yapay; "geçen hafta" denmeli.
+- F2A-7 0/5 Geçen hafta aynı saatlerde Dalga sesi vardı: sakinlik puanın 4'ten 7'ye çıkmıştı.  ← "Dalga sesi vardı" tuhaf; ses sanki kendiliğinden oradaymış gibi. / "Dalga sesi vardı" garip; sanki dışarıda bir ses varmış gibi anlaşılıyor.
+
+## F2.B · tek seans, azalış, iyi yön aşağı  geçen 4/6
++ F2B-1 5/5 Geçen hafta bu akşam Nefesin Ritmi yoga dersinden sonra gerginliğin 6'dan 3'e inmişti.
++ F2B-2 5/5 Geçen hafta bu akşam Yön yazı egzersizi bitince rahatsızlık puanın 7'den 4'e azalmıştı.
+- F2B-3 3/5 Yedi gün önce bu akşam Yön yazı egzersizinden sonra rahatsızlığın 7'den 4'e inmişti.  ← "Yedi gün önce bu akşam" makine gibi duruyor. / "Yedi gün önce bu akşam" yapay bir zaman ifadesi.
++ F2B-4 5/5 Bir hafta önce bu saatlerde Nefesin Ritmi yoga dersinden sonra gerginlik puanın 6'dan 3'e düşmüştü.
++ F2B-5 5/5 Geçen hafta bu akşam Yön yazı egzersizini seçmiştin; rahatsızlık puanın 7'den 4'e inmişti.
+- F2B-6 0/5 Geçen hafta aynı saatlerde Nefesin Ritmi yoga dersi vardı: gerginlik puanın 6'dan 3'e inmişti.  ← "Yoga dersi vardı" tuhaf ve pasif. / "Yoga dersi vardı" garip; dersi kişinin yaptığı anlaşılmıyor.
+
+## F2.C · örüntü, en az 3 seans, artış  geçen 4/7
++ F2C-1 5/5 Dalga sesinden sonra sakinlik puanın son 5 seansta ortalama 2 puan arttı.
++ F2C-2 5/5 Son 5 Dalga sesi seansında sakinlik puanın ortalama 4'ten 6'ya çıktı.
+- F2C-3 0/5 Önce ve sonra puanların: son 5 Dalga sesi seansında sakinlik ortalama 2 puan arttı.  ← "Önce ve sonra puanların:" girişi robot gibi. / "Önce ve sonra puanların:" diye başlamak rapor dili gibi, robotik.
+- F2C-4 0/5 Son 5 seansın ortalamasına göre Dalga sesinden sonra sakinlik puanın 2 puan yükseliyor.  ← Rapor dili gibi, hantal ve dolambaçlı. / "Ortalamasına göre ... yükseliyor" kuru ve resmî bir anlatım.
++ F2C-5 5/5 Sakinlik puanın Dalga sesinden sonra son 5 seansta ortalama 2 puan yükseldi.
+- F2C-6 0/5 Son 5 Dalga sesi seansında ortalama sakinlik puanın: önce 4, sonra 6.  ← Telgraf gibi kesik, iki nokta ile tablo okuyor gibi. / Kesik kesik, tablo satırı gibi okunuyor.
++ F2C-7 5/5 Tek seferlik değil: son 5 Dalga sesi seansında sakinlik puanın ortalama 2 puan arttı.
+
+## F2.D · örüntü, en az 3 seans, azalış, iyi yön aşağı  geçen 4/6
++ F2D-1 5/5 Yön yazı egzersizinden sonra rahatsızlık puanın son 4 seansta ortalama 1,5 puan azaldı.
++ F2D-2 4/5 Son 4 Yön yazı egzersizi seansında rahatsızlık puanın ortalama 7'den 5'e indi.
+- F2D-3 0/5 Önce ve sonra puanların: son 4 Yön yazı egzersizi seansında rahatsızlık ortalama 1,5 puan azaldı.  ← "Önce ve sonra puanların:" girişi robot gibi. / "Önce ve sonra puanların:" diye başlamak rapor dili gibi, robotik.
+- F2D-4 0/5 Son 4 seansın ortalamasına göre Yön yazı egzersizinden sonra rahatsızlık puanın 1,5 puan iniyor.  ← Rapor dili gibi, hantal ve dolambaçlı. / "Ortalamasına göre ... iniyor" kuru ve resmî bir anlatım.
++ F2D-5 5/5 Gerginlik puanın Nefesin Ritmi yoga dersinden sonra son 4 seansta ortalama 1,5 puan düştü.
++ F2D-6 4/5 Tek seferlik değil: son 4 Yön yazı egzersizi seansında rahatsızlık puanın ortalama 1,5 puan azaldı.
+
+## F4.A · sessiz gün, yol var ve bitmedi  geçen 3/8
+- F4A-1 0/5 Bugün senden bir şey istemiyorum. Yolun hazır.  ← "Senden bir şey istemiyorum" sitemli ya da pasif-agresif tınlıyor. / "Senden bir şey istemiyorum" küskün ya da soğuk bir tını taşıyor.
++ F4A-2 5/5 Bugün söyleyecek yeni bir şeyim yok. Yolun hazır.
+- F4A-3 0/5 Bugün sessizim. Yolun hazır.  ← "Bugün sessizim" küsmüş gibi duruyor. / "Bugün sessizim" tuhaf ve hafif küskün bir söz.
+- F4A-4 0/5 Bugün yeni bir haber yok. Yolun yerinde.  ← "Yolun yerinde" anlamsız ve garip. / "Yolun yerinde" anlamsız kalıyor.
+- F4A-5 0/5 Bugün sana bir şey eklemiyorum. Yolun hazır.  ← "Sana bir şey eklemiyorum" garip ve anlamı belirsiz. / "Sana bir şey eklemiyorum" garip ve anlamı belirsiz.
+- F4A-6 2/5 Bugün kısa konuşuyorum: yolun hazır.  ← "Kısa konuşuyorum" yapay, gereksiz bir üst yorum. / "Kısa konuşuyorum" gereksiz bir açıklama, yapay duruyor.
++ F4A-7 4/5 Bugün yalnız yolun var; acelesi yok.
++ F4A-8 5/5 Bugün benden yeni bir not yok. Yolun hazır.
+
+## F4.B · sessiz gün, yol yok ya da bitti  geçen 3/7
+- F4B-1 0/5 Bugün senden bir şey istemiyorum.  ← Sitemli ya da pasif-agresif tınlıyor. / "Senden bir şey istemiyorum" küskün ya da soğuk bir tını taşıyor.
++ F4B-2 5/5 Bugün söyleyecek yeni bir şeyim yok.
+- F4B-3 0/5 Bugün sessizim.  ← "Bugün sessizim" küsmüş gibi duruyor. / "Bugün sessizim" tuhaf ve hafif küskün bir söz.
++ F4B-4 5/5 Bugün yeni bir haber yok; gün senin.
+- F4B-5 0/5 Bugün sana bir şey eklemiyorum.  ← Garip ve anlamı belirsiz. / "Sana bir şey eklemiyorum" garip ve anlamı belirsiz.
++ F4B-6 5/5 Bugün benden yeni bir not yok.
+- F4B-7 2/5 Bugün kısa konuşuyorum: gün senin.  ← "Kısa konuşuyorum" yapay, gereksiz bir üst yorum. / "Kısa konuşuyorum" yapay bir açıklama, değer katmıyor.
+
+## F4.C · uzun aradan dönüş, uygulama düzeyinde  geçen 4/7
++ F4C-1 5/5 Hoş geldin; bugün nereden başlayacağın sende.
+- F4C-2 0/5 Ara vermek de yolun parçası; bugün buradan sürüyor.  ← Klişe; "buradan sürüyor" belirsiz. / Öğüt verir gibi; "buradan sürüyor" da belirsiz.
++ F4C-3 5/5 Yeniden buradasın; yolun hazır.
++ F4C-4 5/5 Hoş geldin; bugün kısa bir durak da yeter.
+- F4C-5 0/5 Hoş geldin; bugün her şey kendi hızında.  ← "Her şey kendi hızında" boş bir klişe. / "Her şey kendi hızında" boş ve belirsiz bir laf.
+- F4C-6 1/5 Hoş geldin; yolun bugün ilk durağından başlıyor.  ← İlerlemem sıfırlanmış gibi okunabiliyor, belirsiz. / "İlk durağından başlıyor" ilerlemem sıfırlandı mı diye kaygı veriyor.
++ F4C-7 5/5 Hoş geldin; geçmiş kayıtların yerinde, yolun hazır.
+
+## 5.1 `metricChange` · doğrulanmış değişim  geçen 1/7
+- MC-1 0/5 Hızlı Bakış oyununda son iki haftada ortalaman 40 milisaniye kısaldı.  ← "Ortalaman kısaldı" belirsiz; neyin ortalaması olduğu söylenmiyor. / Neyin ortalamasının kısaldığı belli değil.
++ MC-2 5/5 Tek Bakışta oyununda kavradığın harf sayısı 4'ten 6'ya çıktı.
+- MC-3 0/5 Fark ölçüm payını geçti: Hızlı Bakış oyununda algı eşiğin 120 milisaniyeden 80 milisaniyeye indi.  ← "Ölçüm payını geçti" teknik jargon, cümle de uzun. / "Ölçüm payını geçti" teknik bir dil; sıradan kullanıcı anlamaz.
+- MC-4 2/5 Tek Bakışta oyununda başta 4 harf, şimdi 6 harf.  ← Fiil yok, telgraf gibi; iyi mi kötü mü anlaşılmıyor. / Fiilsiz telgraf dili; 4 harfin ne olduğu açık değil.
+- MC-5 0/5 Algı eşiğin değişti: Hızlı Bakış oyununda 120 milisaniyeden 80 milisaniyeye.  ← "Değişti" iyileşme olduğunu söylemiyor, fiilsiz kuyruğu da kesik. / "Değişti" demek yetmiyor; iyiye mi kötüye mi gittiği söylenmiyor, cümle de yarım.
+- MC-6 2/5 İki ayrı haftada aynı sonuç: Tek Bakışta oyununda kavradığın harf sayısı 4'ten 6'ya çıktı.  ← Kanıt sunar gibi resmi ve uzun. / Uzun ve metodoloji kokuyor.
+- MC-7 0/5 Tek Bakışta turlarında değişim yerleşti: kavradığın harf sayısı artık 6.  ← "Değişim yerleşti" garip bir ifade. / "Değişim yerleşti" yapay bir jargon.
+
+## firstTime.A · sayısız  geçen 3/6
++ FT-1 5/5 İlk yoga dersin tamam.
++ FT-2 5/5 Yılan oyununu ilk kez denedin.
+- FT-3 0/5 İlk kaydın yazıldı: Gökyüzü molası.  ← "İlk kaydın yazıldı" sistem mesajı gibi. / "İlk kaydın yazıldı" sistem mesajı gibi duruyor.
+- FT-4 0/5 Dikkat alanına ilk gün yazıldı: Yılan oyunu.  ← "Dikkat alanına ilk gün yazıldı" robot gibi ve anlaşılmaz. / "Dikkat alanına ilk gün yazıldı" anlaşılmaz ve robotik.
+- FT-5 0/5 Yılan oyunu için ilk kayıt bugün.  ← Sönük, kayıt defteri dili gibi. / Kuru bir kayıt bilgisi; kullanıcıya bir şey katmıyor.
++ FT-6 5/5 Yılan oyununda ilk günün geride kaldı.
+
+## firstTime.B · ilk ölçüm ya da ilk önce–sonra puanı  geçen 2/6
+- FTB-1 0/5 Tek Bakışta oyununda ilk ölçümün 4 harf. Sonrakiler buna göre okunacak.  ← "Sonrakiler buna göre okunacak" bürokratik. / "Sonrakiler buna göre okunacak" garip ve resmî kaçıyor.
++ FTB-2 5/5 Başlangıç sayın belli oldu: Tek Bakışta oyununda 4 harf.
+- FTB-3 2/5 İlk Gökyüzü molası seansında dinlenmişlik puanın önce 3, sonra 6.  ← "Dinlenmişlik puanı" hantal, yapay bir söz. / Telgraf dili; "dinlenmişlik puanın" de hantal.
++ FTB-4 4/5 İlk Gökyüzü molandan sonra dinlenmişliğin 3'ten 6'ya çıktı.
+- FTB-5 0/5 Hızlı Bakış oyunu ilk kez: algı eşiğin 120 milisaniye.  ← "Hızlı Bakış oyunu ilk kez:" kesik ve robot gibi. / "Hızlı Bakış oyunu ilk kez:" kesik ve telgraf gibi.
+- FTB-6 0/5 Bundan sonraki her Tek Bakışta turu bu ilk sayıyla karşılaştırılacak: 4 harf.  ← Bürokratik ve gereksiz uzun. / Uzun ve bürokratik bir cümle.
+
+## 5.3 `returnAfterGap` · bir modüle uzun aradan dönüş  geçen 5/6
++ RG-1 5/5 Dalga sesi kaldığın yerde duruyor.
++ RG-2 5/5 Dalga sesine yeniden hoş geldin.
++ RG-3 4/5 Bir aradan sonra Yılan oyunu; kayıtların olduğu gibi duruyor.
++ RG-4 5/5 Tek Bakışta oyununu yeniden açtın; önceki kayıtların Gelişim'de.
++ RG-5 5/5 En son Dalga sesinden sonra sakinlik puanın 4'ten 7'ye çıkmıştı.
+- RG-6 0/5 Tek Bakışta oyununda son ölçümün 6 harf idi; oradan devam.  ← "6 harf idi" katı ve eski bir yazı dili. / Doğrusu "harfti"; "harf idi" yapay duruyor, "oradan devam" da buyurgan kaçıyor.
+
+## 5.5 `pathDone` · bugünkü yol bitti  geçen 3/6
++ PD-1 5/5 Bu hafta yolu dördüncü kez bitirdin.
++ PD-2 5/5 Bu hafta dört gün yolun sonuna vardın.
+- PD-3 0/5 Bu hafta yedi günün dördünde yol tamam.  ← "Yedi günün dördünde" kaçırdığım günleri sayıyor gibi, karne tınısı var. / Hafta bitmeden "yedi günün dördünde" demek yanıltıcı ve kuru.
+- PD-4 0/5 Bugünle birlikte bu hafta dört tam gün.  ← "Dört tam gün" belirsiz; neyin tamamlandığı söylenmiyor. / "Dört tam gün" ne demek, belli değil.
+- PD-5 2/5 Bugün, bu hafta yolu bitirdiğin dördüncü gün.  ← Virgüllü yapı hantal. / Virgülle bölünmüş, hantal bir yapı.
++ PD-6 5/5 Bu hafta dört gün bütün durakları bitirdin.

@@ -1,0 +1,28 @@
+{
+ "node_id": "TM6ebDAOvolJtQL6jFBv",
+ "session_ids": [
+  "y91MN9PLnuFFbyVcuJkz",
+  "5vZuvflqVzODI0pBoxTx"
+ ],
+ "requested_at": "2026-09-30T07:12:04.154Z",
+ "tts": "Alış kendiliğinden gelir; verişi sen uzatırsın.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "y91MN9PLnuFFbyVcuJkz",
+   "generation_id": "wBJWPuwcGhydji62yzkb",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/y91MN9PLnuFFbyVcuJkz/wBJWPuwcGhydji62yzkb/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T071207Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=07aa63878933ebdcb3514c4e379ad591cde340d0cb8ebc20306b207c11f7201f4c5a159f8ecff20d9e2bb8fbe9720a03dcc5383b4b80a2e47e0ae3f2ff4f24431098f8537efe1beca9d62d4ba9778b7721b8e31303d2babaaf7d123a56f88ab9425ec5e7a2678b289604e9ac615749cd60c147dd0cd5e0015fc90c381707d87d61fd50708408403567a7ca3c866f09fd338de0acc4e7e300a4f013dd2f949496821ba0af7b350ab6d6fa8a023975bbf9e5711c67bbe9172816bf76eab9ae8f03426b15347c07a3f7859d9310112a4f1a9a7defc9d49e36ed97178eb58b77e3e8d2080c5e0d400b95829de614ebf0b30b4328f357242efd481b6444116d728c12",
+   "duration_secs": 3.92,
+   "prompt": "Alış kendiliğinden gelir; verişi sen uzatırsın.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "5vZuvflqVzODI0pBoxTx",
+   "generation_id": "BMm6EJtuZUOUnZSVAfcY",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/5vZuvflqVzODI0pBoxTx/BMm6EJtuZUOUnZSVAfcY/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T071207Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=bf5fb8c2367b89d720ee070c586f7942adda6640d64f3fa862dcade0958c48ea6d5bfab7fd5529aeb50f8d15fc43d062b4654035e5a5b4c0f703a3fca0f822cfcd13205e5e95569d05ff40199edd6966c657fa5234e7f5fcacfdf6e9e282faf0ae9d4cca89173df8bcb8b3a883b7b566eb98532836f01529685dbba7acc7bd20f97ef926dd6ab541fc0e815eb4ecd38614a1b513ace2108a843ef36f591eb85365fb56c200c2dc9a20d560b3e3f580ebbdc8ba232902df88792e8cc72e23eac865fc40b68d2a61ab85baf09ff440c9dac04504756bb643dd8ccaba7a7b64ba988794ada59d9aca011bab7ea22f615ffb763d61a4865c0a8bb54dfd234a2acfde",
+   "duration_secs": 3.92,
+   "prompt": "Alış kendiliğinden gelir; verişi sen uzatırsın.",
+   "kind": "audio"
+  }
+ ]
+}

@@ -1,0 +1,104 @@
+{
+"a.hosgeldin": {
+"take": "t1.mp3"
+},
+"a.acilis": {
+"take": "t2.mp3"
+},
+"a.konfor": {
+"take": "t3.mp3"
+},
+"a.gozler": {
+"take": "t1.mp3"
+},
+"a.karar": {
+"take": "t1.mp3"
+},
+"a.izin": {
+"take": "t2.mp3"
+},
+"a.kolay": {
+"take": "t1.mp3"
+},
+"a.agirlik": {
+"take": "t3.mp3"
+},
+"n1.sec": {
+"take": "t3.mp3"
+},
+"n1.soyle": {
+"take": "t1.mp3"
+},
+"n1.birak": {
+"take": "t1.mp3"
+},
+"c1.cerceve": {
+"take": "t2.mp3"
+},
+"c1.tekrar": {
+"take": "t2.mp3"
+},
+"car.sag1": {
+"take": "t2.mp3"
+},
+"car.sag2": {
+"take": "t1.mp3"
+},
+"car.sag3": {
+"take": "t3.mp3"
+},
+"car.sag4": {
+"take": "t1.mp3"
+},
+"c1.kacirma": {
+"take": "t1.mp3"
+},
+"car.sol1": {
+"take": "t1.mp3"
+},
+"car.sol2": {
+"take": "t3.mp3"
+},
+"car.sol3": {
+"take": "t3.mp3"
+},
+"car.sol4": {
+"take": "t1.mp3"
+},
+"c1.gecis.arka": {
+"take": "t1.mp3"
+},
+"car.sirt": {
+"take": "t3.mp3"
+},
+"c1.gecis.on": {
+"take": "t2.mp3"
+},
+"car.on1": {
+"take": "t1.mp3"
+},
+"car.on2": {
+"take": "t2.mp3"
+},
+"car.on3": {
+"take": "t1.mp3"
+},
+"car.butun": {
+"take": "t1.mp3"
+},
+"c1.k1": {
+"take": "t2.mp3"
+},
+"c2.dikkat": {
+"take": "t2.mp3"
+},
+"c2.alt": {
+"take": "t1.mp3"
+},
+"a.durus": {
+"take": "t5.mp3"
+},
+"c2.yer": {
+"take": "t2.mp3"
+}
+}

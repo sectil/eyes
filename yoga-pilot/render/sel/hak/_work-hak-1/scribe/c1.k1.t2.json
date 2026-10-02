@@ -1,0 +1,16 @@
+{
+ "unit": "c1.k1",
+ "take": "t2",
+ "asset_id": "oaR1kRVO4v0V6M2mu4Ew",
+ "source_node_id": "VhtvcGPctCtARS6jHCso",
+ "stt_node_id": "jzRXZsFLscmfgSeYIxJ4",
+ "session_id": "cfuUbJc5dMTwHNOtnc83",
+ "generation_id": "WP41E6PiB98EZiS1q7hh",
+ "actual_credits": 18.92,
+ "actual_cents": 0.344,
+ "spoken_duration_secs": 3.26,
+ "scribe_text": "Bedenin dinlenebilir. Sen uyanık kalıyorsun",
+ "tts": "Bedenin dinlenebilir; sen uyanık kalıyorsun.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 5\n}"
+}

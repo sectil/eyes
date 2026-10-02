@@ -1,0 +1,578 @@
+/* ---- Ana sayfa · uzun yol (D9; components/home/LongPath.jsx, ChapterStrip.jsx, SkyChip.jsx) ----
+   Yalnız tokenlar: iki tema tokenlardan gelir. Bugünün sıradaki durağı dolu degrade ve halkalı, sonrakiler açık renk,
+   bitenler yeşil; gelecek günler tek durak (günün numarası), kilitli. Yol çizgisi bugün düz, gelecekte noktalı. Her
+   turun rengi ayrı (data-l 0..3, 28 günde bir). Tur 2: satır başına çizgi parçası (kopukluk yok). */
+.lp { --lp-line: color-mix(in srgb, var(--accent-graphic) 45%, transparent); --lp-dot: color-mix(in srgb, var(--ink-3) 50%, transparent);
+  display: flex; flex-direction: column; padding-bottom: 8px; }
+.lp-box { display: block; }
+
+.lp-r { position: relative; width: 100%; flex: none; }
+.lp-line { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.lp-line path { fill: none; stroke: var(--lp-line); stroke-width: 9; stroke-linecap: butt; }
+
+/* Ortadaki satır (kart, bant, hap): çizgi ortadan düz geçer */
+.lp-r.c { display: flex; justify-content: center; align-items: center; padding: 7px 0; }
+.lp-r.c::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 9px; margin-left: -4.5px; background: var(--lp-line); }
+.lp-r.c.ahead::before { width: 6px; margin-left: -3px; background: radial-gradient(circle, var(--lp-dot) 0 2.6px, transparent 3.1px) center -3.5px / 6px 13px repeat-y; }
+.lp-r.c.first::before { top: 50%; }
+.lp-r.c > * { position: relative; z-index: 1; }
+.lp-r.c.wide > * { width: 100%; }
+.lp-r.c.band { padding: 7px 0; }
+.lp-r.c.band > .lp-band { width: 100%; height: 100%; }
+
+/* Durak */
+.lp-n { position: absolute; top: 50%; transform: translate(-50%, -50%); display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%;
+  font: inherit; color: inherit; cursor: default; }
+button.lp-n { cursor: pointer; }
+.lp-n.today:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+/* sıradaki: dolu degrade, halka */
+.lp-n.today.now { background: var(--accent-grad); color: var(--accent-ink);
+  box-shadow: 0 5px 0 color-mix(in srgb, var(--iris-2) 55%, #000 25%), 0 0 0 8px var(--accent-soft), 0 0 0 10.5px color-mix(in srgb, var(--accent) 55%, transparent); }
+.lp-n.today.now::after { content: ''; position: absolute; inset: -12px; border-radius: 50%; border: 2px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  animation: lp-pulse 2.2s ease-out infinite; pointer-events: none; }
+@keyframes lp-pulse { 0% { transform: scale(0.92); opacity: 0.9; } 100% { transform: scale(1.22); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .lp-n.today.now::after { animation: none; opacity: 0.6; } }
+/* sonra: açık zemin, renkli çizim ve halka */
+.lp-n.today.open { background: var(--surface); color: var(--accent);
+  box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--accent) 55%, transparent), 0 4px 0 color-mix(in srgb, var(--accent) 22%, var(--surface-3)); }
+.lp-n.today.done { background: var(--ok); color: #ffffff; box-shadow: 0 5px 0 color-mix(in srgb, var(--ok) 60%, #000 30%); }
+.lp-n.today.locked, .lp-n.today.running { background: var(--surface); color: var(--ink-3); box-shadow: inset 0 0 0 3px var(--surface-3); }
+.lp-n.today:active { transform: translate(-50%, calc(-50% + 3px)); }
+.lp-gl { display: grid; place-items: center; }
+.lp-lk { position: absolute; right: -4px; bottom: -4px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--surface-2); color: var(--ink-3); box-shadow: 0 0 0 2px var(--bg); }
+
+/* Etiket: durağın boş tarafında */
+.lp-lb { position: absolute; top: 50%; transform: translateY(-50%); display: grid; gap: 4px; min-width: 0; max-width: calc(50% + 40px); }
+.lp-lb.r { justify-items: start; text-align: left; }
+.lp-lb.l { justify-items: end; text-align: right; }
+.lp-lb b { font: 650 1.02rem/1.2 var(--font-body); color: var(--ink); overflow-wrap: anywhere; }
+.lp-r.ahead .lp-lb b { font-size: 0.95rem; font-weight: 650; color: var(--ink); }
+.lp-r.ahead .lp-lb b .lp-dname { font-weight: 750; }
+.lp-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
+.lp-lb.l .lp-meta { justify-content: flex-end; }
+.lp-meta small { font: 500 0.86rem/1.2 var(--font-body); color: var(--ink-2); }
+.lp-meta:empty { display: none; }
+.lp .hh-new { background: var(--accent); color: var(--accent-ink); font-size: 0.72rem; padding: 3px 8px; }
+
+/* Ara bantlar: nefes, yoga, Dalga */
+.lp-band { --b: var(--iris-2); position: relative; display: flex; align-items: center; gap: 12px;
+  padding: 0 16px 0 10px; border: 0; border-radius: 22px; overflow: hidden; text-align: left; font: inherit; color: var(--ink);
+  background: color-mix(in srgb, var(--b) 14%, var(--surface)); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--b) 24%, transparent); }
+.lp-band.yoga { --b: var(--ok); }
+.lp-band.dalga { --b: var(--iris-1); }
+button.lp-band { cursor: pointer; }
+button.lp-band:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.lp-band.locked { opacity: 0.6; }
+.lp-band.now { box-shadow: inset 0 0 0 2.5px var(--b), 0 0 0 5px color-mix(in srgb, var(--b) 18%, transparent); }
+.lp-bic { position: relative; flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--b); color: #ffffff; }
+.lp-band.done .lp-bic { background: var(--ok); }
+.lp-band.ahead { background: color-mix(in srgb, var(--b) 9%, var(--bg)); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--b) 30%, transparent); }
+.lp-band.ahead .lp-bic { width: 40px; height: 40px; background: color-mix(in srgb, var(--b) 20%, var(--surface)); color: color-mix(in srgb, var(--b) 80%, var(--ink)); }
+.lp-btx { position: relative; flex: 1; display: grid; gap: 2px; min-width: 0; }
+.lp-btx b { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font: 700 1.02rem/1.2 var(--font-body); }
+.lp-band.ahead .lp-btx b { font-size: 0.95rem; font-weight: 650; }
+.lp-btx small { font: 500 0.86rem/1.2 var(--font-body); color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lp-wave { position: absolute; right: -4px; top: 0; width: 34%; height: 100%; opacity: 0.4; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 55%); mask-image: linear-gradient(90deg, transparent, #000 55%); }
+.lp-wave path { fill: none; stroke: var(--b); stroke-width: 2; stroke-linecap: round; }
+.lp-wave path.b { opacity: 0.6; }
+.lp-band.ahead .lp-wave { opacity: 0.25; }
+.lp-bgo { position: relative; flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--b); color: #ffffff; }
+.lp-run { font: 700 0.84rem/1.2 var(--font-mono); color: var(--accent); }
+
+/* Haplar (bölüm ve gün, alarm, bitiş) */
+.lp-day-h { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: var(--surface);
+  border: 1px solid var(--border); box-shadow: var(--shadow); font: 500 0.92rem/1.1 var(--font-body); color: var(--ink-3); }
+.lp-day-h b { font: 700 1rem/1.1 var(--font-body); color: var(--ink); }
+.lp-day-h.now { background: color-mix(in srgb, var(--accent) 13%, var(--bg)); border-color: color-mix(in srgb, var(--accent) 35%, transparent); box-shadow: none; }
+.lp-day-h.now b { color: var(--accent); }
+.lp-day-h.ok { min-height: 44px; color: #ffffff; background: var(--ok); border-color: transparent; }
+.lp-day-h.ok b { color: #ffffff; }
+
+.lp-nef { width: 100%; padding: 14px 16px; border-radius: 20px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
+.lp-nef-b { display: inline-flex; align-items: center; gap: 6px; font: 700 0.84rem/1 var(--font-body); color: var(--accent); }
+.lp-nef p { margin: 8px 0 0; font: 500 1rem/1.4 var(--font-body); color: var(--ink); text-wrap: pretty; }
+.lp-nef p b { font-weight: 750; }
+
+.lp-al { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px;
+  background: color-mix(in srgb, var(--lens) 16%, var(--bg)); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--lens) 45%, transparent); color: var(--lens-text); }
+.lp-al b { font: 700 0.98rem/1.1 var(--font-body); }
+
+.lp-rem { display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 12px 14px; border-radius: 20px; text-align: left;
+  font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); cursor: pointer; }
+.lp-rem:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.lp-rem b { flex: 1; min-width: 0; font: 650 1rem/1.3 var(--font-body); }
+.lp-rem-ic { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.lp-rem .chev { flex: none; color: var(--ink-3); }
+
+.lp-nudge { position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%); z-index: 3; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+  border-radius: 999px; background: var(--ink); color: var(--bg); font: 650 0.84rem/1.2 var(--font-body); white-space: nowrap; }
+.lp-end { height: 1px; }
+
+/* İlk 7 gün: bölümün yedi günü */
+.cs { display: grid; justify-items: center; gap: 10px; width: 100%; }
+.cs-h { font: 750 1rem/1 var(--font-display); color: var(--accent); letter-spacing: 0.01em; }
+.cs-row { position: relative; list-style: none; margin: 0; padding: 0; width: 100%; display: flex; justify-content: space-between; align-items: flex-start; }
+.cs-row::before { content: ''; position: absolute; left: 20px; right: 20px; top: 20px; height: 3px; margin-top: -1.5px; border-radius: 2px; background: var(--surface-3); }
+.cs-d { position: relative; z-index: 1; display: grid; justify-items: center; gap: 5px; width: 40px; }
+.cs-c { width: 34px; height: 34px; margin-top: 3px; border-radius: 50%; display: grid; place-items: center; background: var(--bg);
+  box-shadow: inset 0 0 0 2px var(--ink-3); }
+/* gelecek gün: dolu, açık renk (kesik çizgi "yükleniyor" gibi okundu; tur 2) */
+.cs-d.next .cs-c { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent) 30%, transparent); }
+.cs-c b { font: 700 0.86rem/1 var(--font-body); color: var(--ink-2); }
+.cs-d.done .cs-c { background: var(--accent-grad); color: var(--accent-ink); box-shadow: none; }
+.cs-d.now .cs-c { width: 40px; height: 40px; margin-top: 0; background: var(--surface); box-shadow: inset 0 0 0 3px var(--accent), 0 0 0 4px var(--accent-soft); }
+.cs-d.now .cs-c b { color: var(--accent); font-size: 1rem; font-weight: 800; }
+.cs-d.rw .cs-c { background: color-mix(in srgb, var(--lens) 16%, var(--surface)); box-shadow: inset 0 0 0 2px var(--lens); }
+.cs-d small { font: 700 0.78rem/1 var(--font-body); color: var(--accent); white-space: nowrap; }
+
+/* Hap satırında hava (dokunulur, 44 pt) */
+.hh-chips .hh-fact.sky { --wx-rain: #2f6bea; min-height: 44px; padding: 0 8px 0 12px; gap: 7px; cursor: pointer; font: 650 0.9rem/1.2 var(--font-body); color: var(--ink); }
+.hh-chips .hh-fact.sky svg { color: var(--ink-2); flex: none; }
+.hh-chips .hh-fact.sky.r svg:first-child { color: var(--wx-rain); }
+.hh-chips .hh-fact.sky .chev { color: var(--ink-3); margin-left: -2px; }
+.hh-chips .hh-fact.sky:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .hh-chips .hh-fact.sky { --wx-rain: #6f9bff; } }
+:root[data-theme='dark'] .hh-chips .hh-fact.sky { --wx-rain: #6f9bff; }
+
+/* Sahnenin kahramanı yukarıda toplanır; kalan pay sahnenin dibinde (Home.jsx fit: yol yukarı çıkar) */
+.hf .hf-hero { flex: none; }
+
+/* İlk 7 gün sahnesi ekran boyu değil: yol düğmenin hemen altından başlar */
+.hf.wk1 { min-height: 0; padding-bottom: 0; }
+.hf.wk1 .hf-hero { flex: none; }
+
+/* Büyük düğme, ad cümlede: durağın çizimi ve "Başla" */
+.hg.bare { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: 'art go'; gap: 10px; padding: 10px; border-radius: 26px; }
+.hg.bare .hg-art { display: grid; width: 58px; height: 58px; }
+.hg-go { grid-area: go; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; border-radius: 18px;
+  font: 800 1.22rem/1 var(--font-body); letter-spacing: 0.01em; color: var(--go-cta-ink); background: var(--go-cta); }
+/* Akşamın Dalga kartı: "Başla" dolu (gri kutu birincil eylem gibi durmuyordu; tur 2) */
+.hg.calm .hg-cta { background: var(--iris-1); color: #ffffff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .hg.calm .hg-cta { color: #04161a; } }
+:root[data-theme='dark'] .hg.calm .hg-cta { color: #04161a; }
+/* Kilometre taşı günü: cümlenin altındaki satır vurgulu (30. gün "küçük gri satır" kaldı; tur 2) */
+.hl-s.mile { display: inline-flex; text-align: left; text-wrap: pretty; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; font-weight: 700; color: var(--lens-text);
+  background: color-mix(in srgb, var(--lens) 16%, var(--bg)); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--lens) 45%, transparent); }
+.hl-s.mile svg { flex: none; color: var(--lens); }
+
+@media (max-height: 740px) {
+  .hg.bare { grid-template-areas: 'art go'; padding: 8px; }
+  .hg.bare .hg-art { display: grid; width: 52px; height: 52px; }
+  .hg-go { min-height: 52px; }
+  .lp-lb b { font-size: 0.96rem; }
+}
+@media (max-width: 360px) {
+  .lp-lb b { font-size: 0.94rem; }
+  .lp-r.ahead .lp-lb b { font-size: 0.88rem; }
+  .lp-meta small { font-size: 0.8rem; }
+  .cs-d { width: 36px; }
+  .cs-c { width: 32px; height: 32px; }
+  .cs-d.now .cs-c { width: 38px; height: 38px; }
+  .cs-row::before { left: 18px; right: 18px; top: 19px; }
+}
+/* 320 pt'de haplardaki simge gizlenir (home.css); havanın simgesi kalır */
+.hh-chips .hh-fact.sky:not(.lens):not(.al-fact) > svg { display: block; }
+/* Art arda duraklar: tek çizgi parçası */
+.lp-run { position: relative; width: 100%; flex: none; }
+.lp-run .lp-r { position: relative; }
+/* Etiketin zemini: yol çizgisi yazının ardından geçmesin */
+.lp-lb { padding: 3px 7px; border-radius: 12px; background: color-mix(in srgb, var(--bg) 88%, transparent); }
+
+/* ---- D9 v2: ritim, yarın, bölüm kartları ---- */
+/* Bugünün durakları: sıradaki büyük ve halkalı, kalanlar sakin, bitenler küçük ve tikli */
+.lp-n.today.now { box-shadow: 0 6px 0 color-mix(in srgb, var(--iris-2) 55%, #000 25%), 0 0 0 9px var(--accent-soft), 0 0 0 12px color-mix(in srgb, var(--accent) 60%, transparent); }
+.lp-n.today.open { background: color-mix(in srgb, var(--accent) 5%, var(--surface)); color: color-mix(in srgb, var(--accent) 80%, var(--ink-2));
+  box-shadow: inset 0 0 0 2.5px color-mix(in srgb, var(--accent) 32%, transparent), 0 3px 0 color-mix(in srgb, var(--accent) 14%, var(--surface-3)); }
+.lp-n.today.done { box-shadow: 0 3px 0 color-mix(in srgb, var(--ok) 60%, #000 30%); }
+.lp-lb.now b { font: 750 1.14rem/1.2 var(--font-body); }
+.lp-lb.now .lp-meta small { font-weight: 650; color: var(--accent); }
+.lp-lb.open b { font-weight: 600; color: var(--ink-2); }
+.lp-lb.done b { font: 600 0.9rem/1.2 var(--font-body); color: var(--ink-2); } /* tur 4: biten durağın adı ink-2 (açıkta soluktu) */
+.lp-run.today .lp-line path { stroke-width: 8; }
+
+/* Yarın (D9 v2 tur 2): tek kart; başlık, alarm, yarının durakları yol sırasıyla küçük haplar (ikinci uzun sütun değil) */
+.lp-r.c.tom::before { width: 6px; margin-left: -3px; background: radial-gradient(circle, var(--lp-dot) 0 2.6px, transparent 3.1px) center -3.5px / 6px 13px repeat-y; }
+.lp-tc { display: grid; gap: 12px; padding: 14px 14px 16px; border-radius: 22px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
+.lp-tc-h { display: flex; align-items: center; gap: 12px; }
+.lp-tc-ic { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.lp-tm-t { flex: 1; min-width: 0; font: 700 1.06rem/1.25 var(--font-body); color: var(--ink); }
+.lp-tc .lp-al { justify-self: start; min-height: 38px; padding: 0 14px; }
+.lp-tps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+/* Yarının ilk 3 durağı (tur 3): alt alta, yol sırasıyla; çizimler ince bir çizgiyle bağlı (sıra), ad okunur boyda */
+.lp-tp { position: relative; display: flex; align-items: center; gap: 12px; min-height: 48px; font: 650 1.02rem/1.25 var(--font-body); color: var(--ink); }
+.lp-tp + .lp-tp::before { content: ''; position: absolute; left: 18px; top: -6px; height: 12px; width: 3px; margin-left: -1.5px; border-radius: 2px;
+  background: color-mix(in srgb, var(--accent) 30%, var(--surface-3)); }
+.lp-tp-g { flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface)); color: color-mix(in srgb, var(--accent) 80%, var(--ink-2));
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent) 30%, transparent); }
+.lp-tp-t { min-width: 0; }
+.lp-tp.nefes .lp-tp-g { background: color-mix(in srgb, var(--iris-2) 16%, var(--surface)); color: var(--iris-2); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--iris-2) 35%, transparent); }
+.lp-tp.yoga .lp-tp-g { background: color-mix(in srgb, var(--ok) 16%, var(--surface)); color: var(--ok); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--ok) 35%, transparent); }
+.lp-tp.new .lp-tp-g { background: var(--accent); color: var(--accent-ink); box-shadow: 0 0 0 4px var(--accent-soft); }
+.lp-tp .hh-new { flex: none; font-size: 0.72rem; padding: 3px 8px; }
+.lp-tc-more { padding-left: 48px; margin-top: -4px; font: 600 0.95rem/1.3 var(--font-body); color: var(--ink-2); }
+.lp-rem-t { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.lp-rem-t b { font: 650 1rem/1.3 var(--font-body); }
+.lp-rem-t small { font: 500 0.86rem/1.3 var(--font-body); color: var(--ink-2); }
+
+/* Bugünün yeni durağı (gerçekten ilk kez): vurgu halkası ve köşede kıvılcım (eski kullanıcı: "yeni durak sıradan görünüyor") */
+.lp-n.today.open.new { box-shadow: inset 0 0 0 3px var(--accent), 0 0 0 5px var(--accent-soft), 0 3px 0 5px color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
+.lp-n-new { position: absolute; top: -5px; right: -5px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--accent); color: var(--accent-ink); box-shadow: 0 0 0 2.5px var(--bg); }
+.lp-day-t { color: var(--lens); margin-left: -2px; }
+
+/* Tur renkleri: 28 günde bir (bölümün gözü ve kartın tonu aynı turun rengi) */
+.lp [data-l='0'] { --ch: var(--iris-1); }
+.lp [data-l='1'] { --ch: var(--iris-2); }
+.lp [data-l='2'] { --ch: var(--lens); }
+.lp [data-l='3'] { --ch: var(--ok); }
+
+/* Bölümün gözü: 28 ışın, bölümün çeyreği parlak; biten turlar dışta ince halka */
+.lp-eye { position: relative; flex: none; display: inline-block; }
+.lp-eye svg { display: block; overflow: visible; }
+.lp-eye .iris { fill: color-mix(in srgb, var(--ch) 12%, var(--surface)); stroke: color-mix(in srgb, var(--ch) 35%, transparent); stroke-width: 1; }
+.lp-eye .r { stroke-linecap: round; stroke-width: 2.5; }
+.lp-eye .r.off { stroke: color-mix(in srgb, var(--ink-3) 24%, transparent); }
+.lp-eye .r.lit { stroke: color-mix(in srgb, var(--ch) 42%, var(--surface)); }
+.lp-eye .r.goal, .lp-eye .r.got { stroke: var(--ch); stroke-width: 3.3; }
+.lp-eye .r.now { stroke: var(--accent); stroke-width: 3.8; }
+.lp-eye .pupil { fill: #08111a; stroke: color-mix(in srgb, var(--ch) 30%, transparent); stroke-width: 1; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) .lp-eye .iris { fill: color-mix(in srgb, var(--ch) 24%, var(--surface)); } }
+:root[data-theme='dark'] .lp-eye .iris { fill: color-mix(in srgb, var(--ch) 24%, var(--surface)); }
+.lp-eye .glint { fill: rgba(255, 255, 255, 0.75); }
+.lp-eye-b { position: absolute; right: -4px; bottom: -4px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--lens); color: #ffffff; box-shadow: 0 0 0 2.5px var(--bg); }
+
+/* Günün hedefi (bölüm sonu, 30. gün; tur 3): bugünün sıradaki durağından büyük (132 pt), kendi renginde (30. gün kupası
+   --lens, bölüm sonu madalyası turun rengi --ch), tek ilerleme halkası: iz turun renginin açığı, dolan kısım rengin kendisi */
+.lp-gm { --gm: var(--ch); display: grid; justify-items: center; gap: 8px; padding: 6px 0 2px; }
+.lp-gm.month { --gm: var(--lens); }
+.lp-gm-c { position: relative; border-radius: 50%; background: var(--bg); }
+.lp-gm-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
+.lp-gm-ring circle { fill: none; stroke-linecap: round; }
+.lp-gm-ring circle.tr { stroke: color-mix(in srgb, var(--gm) 32%, var(--surface-2)); }
+.lp-gm-ring circle.on { stroke: var(--gm); }
+.lp-gm-in { position: absolute; inset: 17px; border-radius: 50%; display: grid; place-items: center; color: var(--gm);
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--gm) 14%, var(--surface)), color-mix(in srgb, var(--gm) 30%, var(--surface)));
+  box-shadow: inset 0 0 0 2.5px color-mix(in srgb, var(--gm) 60%, transparent), 0 5px 0 color-mix(in srgb, var(--gm) 40%, var(--surface-3)); }
+.lp-gm.done .lp-gm-in { color: #ffffff; background: var(--gm); box-shadow: 0 12px 30px -8px var(--gm); }
+.lp-gm-ok { position: absolute; right: 8px; bottom: 8px; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--ok); color: #ffffff; box-shadow: 0 0 0 3px var(--bg); }
+.lp-gm small { font: 750 1rem/1 var(--font-body); color: var(--ink); padding: 6px 14px; border-radius: 999px;
+  background: color-mix(in srgb, var(--gm) 16%, var(--bg)); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--gm) 45%, transparent); }
+
+/* Bölüm kartları: kısa kart, sağda bölümün gözü; bugünün bölümünde yedi günün sırası */
+.lp-r.c.unit { padding: 8px 0; }
+.lp-cc { --ch: var(--iris-1); display: grid; gap: 10px; padding: 13px 14px 14px 16px; border-radius: 22px; color: var(--ink);
+  background: color-mix(in srgb, var(--ch) 9%, var(--surface)); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ch) 32%, transparent); }
+.lp-cc.cur { background: color-mix(in srgb, var(--accent) 7%, var(--surface)); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent) 50%, transparent); }
+.lp-cc { grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; align-items: center; }
+.lp-cc-t { grid-column: 1; font: 750 1.06rem/1.25 var(--font-display); letter-spacing: -0.005em; }
+.lp-cc > .lp-eye { grid-column: 2; grid-row: 1; align-self: center; }
+.lp-cc-new, .lp-cc-pr, .lp-cc-d { grid-column: 1 / -1; }
+.lp-cc:not(.cur) .lp-cc-t { font-size: 1rem; }
+/* Bir sonraki bölüm (tur 3): yalnız başlık (ödülü varsa ödül) ve küçük göz; sakin zemin, kesik kenar (henüz gelmedi) */
+.lp-cc.nx { gap: 8px; padding: 12px 14px 12px 16px; background: color-mix(in srgb, var(--ch) 6%, var(--bg));
+  box-shadow: none; border: 1.5px dashed color-mix(in srgb, var(--ch) 45%, transparent); }
+.lp-cc-more { font: 600 0.88rem/1.2 var(--font-body); color: var(--ink-2); padding-left: 2px; }
+.lp-cc-pr { display: flex; align-items: center; gap: 7px; font: 600 0.9rem/1.3 var(--font-body); color: var(--ink-2); }
+.lp-cc-pr > :first-child { flex: none; }
+.lp-cc-new { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.lp-cc-nl { font: 700 0.88rem/1 var(--font-body); color: color-mix(in srgb, var(--ch) 70%, var(--ink)); margin-right: 1px; }
+.lp-cc-chip { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 7px; border-radius: 999px; background: var(--surface);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ch) 40%, transparent); font: 650 0.86rem/1.2 var(--font-body); color: var(--ink); }
+.lp-cc-chip svg { flex: none; color: color-mix(in srgb, var(--ch) 80%, var(--ink)); }
+.lp-cc.cur .lp-cc-nl { color: var(--accent); }
+.lp-cc.cur .lp-cc-chip { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--accent) 45%, transparent); }
+.lp-cc.cur .lp-cc-chip svg { color: var(--accent); }
+.lp-cc-d { list-style: none; margin: 2px 0 0; padding: 0; display: flex; justify-content: space-between; align-items: flex-start; position: relative; }
+.lp-cc-d::before { content: ''; position: absolute; left: 16px; right: 16px; top: 16px; height: 3px; margin-top: -1.5px; border-radius: 2px; background: var(--surface-3); }
+.lp-cc-d li { position: relative; z-index: 1; width: 34px; display: grid; justify-items: center; gap: 4px; }
+.lp-cc-o { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); color: var(--ink-3);
+  box-shadow: inset 0 0 0 2px var(--surface-3); font: 700 0.8rem/1 var(--font-body); }
+.lp-cc-d li.past .lp-cc-o { background: var(--ok); color: #ffffff; box-shadow: none; }
+.lp-cc-d li.now .lp-cc-o { color: var(--accent); background: var(--surface); box-shadow: inset 0 0 0 3px var(--accent), 0 0 0 4px var(--accent-soft); }
+.lp-cc-d li.past:has(small) .lp-cc-o { box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 25%, transparent); }
+.lp-cc-d li.next .lp-cc-o { color: var(--ink-2); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent) 45%, transparent); }
+.lp-cc-d li:last-child .lp-cc-o { background: transparent; box-shadow: none; }
+.lp-cc-d small { font: 700 0.76rem/1 var(--font-body); color: var(--accent); white-space: nowrap; }
+.lp-cc-d li.past small { color: var(--ok); }
+@media (max-width: 360px) {
+  .lp-cc { padding: 12px 12px 13px 14px; }
+  .lp-cc-t { font-size: 0.98rem; }
+  .lp-cc-chip, .lp-cc-pr { font-size: 0.82rem; }
+  .lp-cc-d li { width: 30px; }
+  .lp-cc-o { width: 28px; height: 28px; font-size: 0.74rem; }
+  .lp-cc-d::before { left: 14px; right: 14px; top: 14px; }
+  .lp-tm-t { font-size: 0.98rem; }
+  .lp-tp { font-size: 0.98rem; }
+  .lp-lb.now b { font-size: 1.04rem; }
+}
+
+/* Hava hapında Apple Weather işareti (D9 v2): yazının altında küçük; temalar hava sayfasının .wx-mark kuralıyla */
+.hh-chips .hh-fact.sky { padding-top: 5px; padding-bottom: 5px; }
+.hh-sky-tx { display: grid; gap: 1px; min-width: 0; text-align: left; }
+.hh-sky-mark { display: block; font: 600 0.7rem/1.2 var(--font-body); color: var(--ink-3); letter-spacing: 0.01em; }
+.hh-sky-mark img { height: 11px; }
+.hh-sky-mark .wx-mark-d { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .hh-sky-mark .wx-mark-l { display: none; }
+  :root:not([data-theme='light']) .hh-sky-mark .wx-mark-d { display: block; }
+}
+:root[data-theme='dark'] .hh-sky-mark .wx-mark-l { display: none; }
+:root[data-theme='dark'] .hh-sky-mark .wx-mark-d { display: block; }
+
+/* Nef (D9 v2): simge solda, adı küçük, cümle tek akış */
+.lp-nef { display: flex; align-items: flex-start; gap: 12px; padding: 13px 16px 14px 13px; }
+.lp-nef-a { flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.lp-nef.end .lp-nef-a { background: var(--ok); color: #ffffff; }
+.lp-nef-tx { flex: 1; min-width: 0; display: grid; gap: 3px; }
+.lp-nef .lp-nef-b { font: 700 0.78rem/1.1 var(--font-body); letter-spacing: 0.02em; color: var(--accent); }
+.lp-nef p { margin: 0; font: 600 1.02rem/1.38 var(--font-body); text-wrap: wrap; }
+
+/* Biten durak: dokunma alanı 44 pt, görünen daire 34 (bitenler küçük ve tikli; akşam sütunu kısalır) */
+.lp-n.today.done { background: transparent; box-shadow: none; color: #ffffff; }
+.lp-gl.ok { width: 34px; height: 34px; border-radius: 50%; background: var(--ok); box-shadow: 0 3px 0 color-mix(in srgb, var(--ok) 60%, #000 30%); }
+
+/* Nef (D9 v2 tur 2): yolun başında sıcak tonlu kart (düz beyaz kutu "sistem bildirimi" gibi okundu); yol bitince yeşil, büyük
+   tik (günün sonu ödülü) */
+.lp-nef { background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, var(--surface)), var(--surface) 70%);
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--border)); }
+.lp-nef.end { background: linear-gradient(135deg, color-mix(in srgb, var(--ok) 16%, var(--surface)), color-mix(in srgb, var(--ok) 5%, var(--surface)));
+  border-color: color-mix(in srgb, var(--ok) 45%, transparent); align-items: center; padding: 14px 16px 14px 14px; }
+.lp-nef.end .lp-nef-a { width: 46px; height: 46px; box-shadow: 0 0 0 5px color-mix(in srgb, var(--ok) 22%, transparent); }
+.lp-nef.end .lp-nef-b { color: var(--ok); }
+.lp-nef.end p { font-size: 1.08rem; font-weight: 700; }
+.lp-nef.mile .lp-nef-a { background: color-mix(in srgb, var(--lens) 20%, var(--surface)); color: var(--lens); }
+
+/* Yolun sonu (tur 3): son kartın altında noktalı çizgi boşluğa sarkmasın */
+.lp > .lp-r.c:last-child::before { bottom: 50%; }
+
+/* Yolun altındaki Ana sayfa bölümleri (tur 3: yol kısalınca kaydırılmış görünümlere girdi): 44 pt dokunma alanı. Başlık
+   bağlantıları ("Gelişim ›", "Farkındalık ›") görünen yeri değişmeden büyür; koçun tanıtım düğmesi 40 → 44 pt */
+.home-h .link-btn { min-height: 44px; margin: -7px 0; }
+.coach-intro .btn-sm { min-height: 44px; }
+/* Bugün bölümün son günüyse (tur 3b, 7. gün): son gündeki göz de bugünün halkasını alır */
+
+/* ---- D9 v2 tur 4 ---- */
+/* Yarından sonrası (tur 5): bugünün kıvrımlı yolu aynı dille sürer. Kartlar dirseklerde sırayla solda ve sağda (l, r);
+   çizgi (lp-aline, LongPath tarayıcıda kartların yerinden çizer) kartların altından geçer; hatırlatma kartı yarın kartının
+   hemen altında, dar ve solda: çizgi onun sağından geçer (yolun dışında). */
+.lp-side { --off: 52px; position: relative; }
+.lp-aline { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+.lp-aline path { fill: none; stroke: var(--lp-line); stroke-width: 8; }
+.lp-side > .lp-r.c { padding: 22px 0; }
+/* yarın kartı bugünün sonundan önceki turdaki uzaklıkta (ilk görünümün alt kenarı r3'teki gibi kalsın) */
+.lp-side > div.lp-r.c:first-of-type { padding-top: 7px; }
+.lp-side > .lp-r.c::before { display: none; }
+.lp-side > .lp-r.c.l { justify-content: flex-start; padding-right: var(--off); }
+.lp-side > .lp-r.c.r { justify-content: flex-end; padding-left: var(--off); }
+.lp-side > .lp-r.c.stop.l + .lp-r.c.rem { padding-top: 0; margin-top: -12px; }
+.lp-side > .lp-r.c.rem { padding-right: 22%; }
+.lp-side > .lp-r.c.rem > .lp-rem { box-shadow: none; }
+@media (max-width: 360px) {
+  .lp-side { --off: 26px; }
+  .lp-side > .lp-r.c.rem { padding-right: 18%; }
+  /* dar ekranda yarın ve hatırlatma kartının simgesi yok: başlık tek satır kalır */
+  .lp-side .lp-rem-ic { display: none; }
+}
+
+/* "Yeni" tek işaret: yolda pırıltı rozeti yok, yalnız "Yeni" etiketi */
+.lp-n-new { display: none; }
+
+/* Bölüm başlığı: tek satıra sığmıyorsa (ölçü kopyası .lp-cc-tm, LongPath.jsx) "·" atılır, iki temiz satır */
+.lp-cc-t { position: relative; min-width: 0; }
+.lp-cc-t > span { white-space: nowrap; }
+.lp-cc-t .lp-cc-tm { position: absolute; left: 0; top: 0; visibility: hidden; pointer-events: none; }
+.lp-cc-t.two .lp-cc-dot { display: none; }
+.lp-cc-t.two > span:not(.lp-cc-dot):not(.lp-cc-tm) { display: block; }
+
+/* 30. günü içeren bölümün gözünde kupa rozeti gözün solunda, üstüne binmez */
+.lp-eye.m { padding-left: 30px; box-sizing: border-box; }
+.lp-eye.m .lp-eye-b { right: auto; left: 0; top: 50%; bottom: auto; margin-top: -12px; box-shadow: none; }
+
+/* Gün sırası: halka ve "bugün" kartın içinde, komşu daireye değmez */
+.lp-cc-d { padding: 0 2px; }
+.lp-cc-d li.now:last-child .lp-cc-o { background: var(--surface); box-shadow: inset 0 0 0 3px var(--accent); }
+@media (max-width: 360px) {
+  .lp-cc-d li { width: 28px; }
+  .lp-cc-o { width: 26px; height: 26px; }
+  .lp-cc-d li.now .lp-cc-o { box-shadow: inset 0 0 0 3px var(--accent), 0 0 0 2.5px var(--accent-soft); }
+  .lp-cc-d li.now:last-child .lp-cc-o { box-shadow: inset 0 0 0 3px var(--accent); }
+  .lp-cc-d::before { left: 13px; right: 13px; top: 13px; }
+  .lp-cc-d small { font-size: 0.72rem; }
+}
+
+/* Bölüm sonu madalyası, ödül iris haritası: içinde ilk görünümün iris simgesi */
+.lp-gm.iris .lp-gm-in .iris-mark { box-shadow: 0 0 0 3px var(--surface); }
+/* "Yeni:" başlığı hapların üstünde kendi satırında; haplar ve "ve N durak daha" altta aynı akışta (sayı tek başına
+   satıra düşerse LongPath bir hapı sayıya katar). Dar ekranda haplar simgesiz. */
+.lp-cc-new { row-gap: 6px; }
+.lp-cc-new .lp-cc-nl { flex-basis: 100%; }
+@media (max-width: 360px) {
+  .lp-cc-chip { padding: 4px 10px; }
+  .lp-cc-more { font-size: 0.84rem; }
+}
+
+/* ---- D9 v2 tur 5 ---- */
+/* Bölüm kartının tiki ilk görünümdeki ilerleme satırının (ChapterStrip .cs-d.done) renginde */
+.lp-cc-d li.past .lp-cc-o { background: var(--accent-grad); color: var(--accent-ink); }
+.lp-cc-d li.past:has(small) .lp-cc-o { box-shadow: 0 0 0 3px var(--accent-soft); }
+.lp-cc-d li.past small { color: var(--accent); }
+/* Gün sırası: "bugün" halkası komşu daireye değmez (halka 3 pt, daire 30 pt) */
+.lp-cc-o { width: 30px; height: 30px; }
+.lp-cc-d li.now .lp-cc-o { box-shadow: inset 0 0 0 3px var(--accent), 0 0 0 3px var(--accent-soft); }
+.lp-cc-d::before { left: 15px; right: 15px; top: 15px; }
+@media (max-width: 360px) {
+  .lp-cc-o { width: 26px; height: 26px; }
+  .lp-cc-d li.now .lp-cc-o { box-shadow: inset 0 0 0 3px var(--accent), 0 0 0 2px var(--accent-soft); }
+  .lp-cc-d::before { left: 13px; right: 13px; top: 13px; }
+}
+/* 30. günü içeren bölümün gözü: kupa rozeti başlıktan ve gözden en az 8 pt ayrı */
+.lp-cc:has(.lp-eye.m) { column-gap: 14px; }
+.lp-eye.m { padding-left: 34px; }
+/* İlk görünümün ilerleme satırı: "bugün" halkası komşuya değmez */
+.cs-d.now .cs-c { width: 38px; height: 38px; margin: 1px 0; box-shadow: inset 0 0 0 3px var(--accent), 0 0 0 3px var(--accent-soft); }
+@media (max-width: 360px) {
+  .cs-d.now .cs-c { width: 34px; height: 34px; margin: 2px 0; box-shadow: inset 0 0 0 3px var(--accent), 0 0 0 2px var(--accent-soft); }
+}
+
+/* ---- D9 v2 tur 6 ---- */
+/* Hatırlatma yarın kartının son satırı: zil, cümle 10, › (44 pt dokunma alanı) */
+.lp-tc-rem { display: flex; align-items: center; gap: 10px; min-height: 48px; margin: 2px -4px -6px; padding: 8px 4px 0; border: 0;
+  border-top: 1px solid var(--border); background: none; font: inherit; color: var(--ink); text-align: left; cursor: pointer; }
+.lp-tc-rem:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 12px; }
+.lp-tc-rem b { flex: 1; min-width: 0; font: 650 0.98rem/1.3 var(--font-body); }
+.lp-tc-rem-ic { flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.lp-tc-rem .chev { flex: none; color: var(--ink-3); }
+
+/* Tam genişlikteki bantlar (Nefes, Yoga, Dalga) yolu kesmez: çizgi bandın zemininin üstünden, yazı ve simgenin altından geçer */
+.lp-r.c.band > .lp-band { z-index: auto; }
+.lp-r.c.band::before { z-index: 1; opacity: 0.55; }
+.lp-band > .lp-bic, .lp-band > .lp-btx, .lp-band > .lp-bgo, .lp-band > .lp-wave { z-index: 2; }
+
+/* Bitmiş durak tiki ilk görünümün ilerleme satırının renginde (ChapterStrip .cs-d.done) */
+.lp-gl.ok { background: var(--accent-grad); color: var(--accent-ink); box-shadow: 0 3px 0 color-mix(in srgb, var(--iris-2) 45%, #000 25%); }
+.lp-band.done .lp-bic { background: var(--accent-grad); color: var(--accent-ink); }
+
+/* Sıradaki durak, açık tema: alttaki koyu disk (kabartma gölgesi) kaymış baskı gibi okundu; açıkta yalnız halkalar */
+.lp-n.today.now { box-shadow: 0 0 0 9px var(--accent-soft), 0 0 0 12px color-mix(in srgb, var(--accent) 60%, transparent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .lp-n.today.now { box-shadow: 0 6px 0 color-mix(in srgb, var(--iris-2) 55%, #000 25%), 0 0 0 9px var(--accent-soft), 0 0 0 12px color-mix(in srgb, var(--accent) 60%, transparent); }
+}
+:root[data-theme='dark'] .lp-n.today.now { box-shadow: 0 6px 0 color-mix(in srgb, var(--iris-2) 55%, #000 25%), 0 0 0 9px var(--accent-soft), 0 0 0 12px color-mix(in srgb, var(--accent) 60%, transparent); }
+
+/* İlk görünümün ilerleme satırı: son nokta ve "bugün" ekranın içinde kalır */
+.cs-row { padding: 0 4px; box-sizing: border-box; }
+.cs-row::before { left: 24px; right: 24px; }
+.cs-d small { justify-self: center; }
+.cs-d.now:last-child small { justify-self: end; }
+.cs-d.now:first-child small { justify-self: start; }
+@media (max-width: 360px) { .cs-row::before { left: 22px; right: 22px; } }
+
+/* İlk 7 gün: yol Başla kartının hemen altından başlar (çizgi aradaki boşluktan geçer); sekme çubuğunda kesilecek yazı
+   varsa boşluk yolun başına değil o satırın önüne girer (Home.jsx settle, --pre) ve çizgi o boşluktan da geçer */
+.hf.wk1 + .lp-box { position: relative; }
+.hf.wk1 + .lp-box::before { content: ''; position: absolute; left: 50%; top: -16px; height: 16px; width: 8px; margin-left: -4px;
+  background: color-mix(in srgb, var(--accent-graphic) 45%, var(--bg)); }
+.lp > .lp-run[data-pre] { margin-top: var(--pre); }
+.lp > .lp-run[data-pre]::before { content: ''; position: absolute; left: 50%; width: 8px; margin-left: -4px; top: calc(-1 * var(--pre)); height: var(--pre); background: var(--lp-line); }
+.lp > .lp-r.c[data-pre] { margin-top: var(--pre); }
+.lp > .lp-r.c[data-pre]::before { top: calc(-1 * var(--pre)); }
+.lp-side > .lp-r[data-pre] { margin-top: var(--pre); }
+.lp > .lp-side[data-pre] { margin-top: var(--pre); }
+.lp > .lp-side[data-pre]::before { content: ''; position: absolute; left: 50%; width: 8px; margin-left: -4px; top: calc(-1 * var(--pre)); height: var(--pre); background: var(--lp-line); }
+
+/* ---- D9 v2 tur 6b ---- */
+/* Hatırlatma satırı tek satır: satır kartın tam genişliğini kullanır (kartın iç boşluğuna taşar), simge ve ok küçük */
+.lp-tc-rem { margin: 2px -14px -16px; padding: 6px 8px 6px 10px; gap: 8px; border-radius: 0 0 22px 22px; }
+.lp-tc-rem b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.9rem; }
+.lp-tc-rem-ic { width: 30px; height: 30px; }
+.lp-tc-rem { min-width: 0; }
+@media (max-width: 360px) {
+  /* yalnız hatırlatma satırı olan yarın kartı genişler (yol genliği ve öteki kartlar aynı) */
+  .lp-side > .lp-r.c.l:has(.lp-tc-rem) { padding-right: 10px; }
+  .lp-tc-rem { gap: 6px; padding: 6px 6px 6px 8px; }
+  .lp-tc-rem b { font-size: 0.86rem; }
+  .lp-tc-rem-ic { width: 26px; height: 26px; }
+}
+/* Bantta çizgi yazı alanında görünmez; yalnız bandın üst ve alt kenar boşluğunda (bant satırının iç boşluğu ve bandın ilk
+   ve son 12 pt'si) */
+.lp-r.c.band::before { opacity: 1;
+  -webkit-mask-image: linear-gradient(180deg, #000 0 19px, transparent 19px calc(100% - 19px), #000 calc(100% - 19px));
+  mask-image: linear-gradient(180deg, #000 0 19px, transparent 19px calc(100% - 19px), #000 calc(100% - 19px)); }
+
+/* ---- D9 v2 tur 7 ---- */
+/* Bantlara giriş ve çıkış: bant satırının kendi çizgi parçası yok; komşu yol parçası (kıvrım ya da düz satır) bandın kenar
+   boşluğuna kadar sürer ve orada solarak kaybolur (LongPath BAND_EXT 26). Çizgiler bant zemininin üstünde, yazı ve
+   duraklar çizginin üstünde. */
+.lp-r.c.band::before { display: none; }
+.lp-line, .lp-aline { color: var(--lp-line); }
+.lp-run > .lp-line { z-index: 1; }
+.lp-run .lp-n, .lp-run .lp-lb { z-index: 2; }
+.lp-r.c::before { z-index: 1; }
+.lp-r.c.band + .lp-r.c::before { top: -26px;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 26px); mask-image: linear-gradient(180deg, transparent, #000 26px); }
+.lp-r.c:has(+ .lp-r.c.band)::before { bottom: -26px;
+  -webkit-mask-image: linear-gradient(0deg, transparent, #000 26px); mask-image: linear-gradient(0deg, transparent, #000 26px); }
+.lp-r.c.band + .lp-r.c:has(+ .lp-r.c.band)::before {
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 26px, #000 calc(100% - 26px), transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 26px, #000 calc(100% - 26px), transparent); }
+/* Dar başlık: göz 30 pt ve aralık 6 pt (yazı boyu aynı) */
+.lp-cc:has(.lp-cc-t.tight) { column-gap: 6px; }
+.lp-cc:has(.lp-cc-t.tight) .lp-eye.m { padding-left: 30px; }
+/* Gelecek bölüm kartı tek renk ailesinde (deniz mavisi): 3. ve 4. turun kehribar ve yeşil tonu kartta ve gözde yok */
+.lp .lp-cc.nx[data-l='2'], .lp .lp-cc.nx[data-l='2'] [data-l] { --ch: var(--iris-1); }
+.lp .lp-cc.nx[data-l='3'], .lp .lp-cc.nx[data-l='3'] [data-l] { --ch: var(--iris-2); }
+/* Bölüm sonu madalyası, ödül iris haritası: iris büyük ve renkli zeminde, 30. gün kupasıyla aynı boyda */
+.lp-gm.iris { --gm: var(--iris-1); }
+.lp-gm.iris .lp-gm-in { background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--iris-1) 30%, var(--surface)), color-mix(in srgb, var(--iris-2) 45%, var(--surface)));
+  box-shadow: inset 0 0 0 2.5px color-mix(in srgb, var(--iris-1) 70%, transparent), 0 5px 0 color-mix(in srgb, var(--iris-1) 45%, var(--surface-3)); }
+.lp-gm.iris .lp-gm-in .iris-mark { box-shadow: 0 0 0 3px color-mix(in srgb, #ffffff 70%, transparent), 0 4px 12px -2px color-mix(in srgb, var(--iris-2) 60%, transparent); }
+/* İlk 7 günde yolun başındaki Nef kartı sıkı (Başla'nın altında; ilk durak ilk ekranda tam görünsün; metin aynı) */
+.hf.wk1 + .lp-box .lp-nef:not(.end) { padding: 9px 14px 10px 10px; gap: 10px; }
+.hf.wk1 + .lp-box .lp-nef:not(.end) .lp-nef-a { width: 30px; height: 30px; }
+.hf.wk1 + .lp-box .lp-nef:not(.end) p { line-height: 1.3; }
+.hf.wk1 + .lp-box .lp-r.c.wide:has(> .lp-nef) { padding: 4px 0; }
+
+/* Yol çizgisi opak (zeminle karışık; zemin üzerinde aynı renk): üst üste binen parçalar koyulaşmaz */
+.lp { --lp-line: color-mix(in srgb, var(--accent-graphic) 45%, var(--bg)); }
+/* Kesik yazı boşluğu (--pre) bandın hemen ardındaysa çizgi bandın kenarından solarak gelir */
+.lp > .lp-r.c.band + .lp-run[data-pre]::before { top: calc(-1 * var(--pre) - 26px); height: calc(var(--pre) + 26px);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 26px); mask-image: linear-gradient(180deg, transparent, #000 26px); }
+
+/* ---- D9 v2 tur 8 ---- */
+/* Bantlar opak ve yol çizgisinin üstünde: çizgi bandın arkasında gizli, yalnız bant kenarlarında görünür */
+.lp-r.c.band > .lp-band { z-index: 2; }
+/* 320 pt: yarın kartının takvim simgesi küçük ama yerinde */
+@media (max-width: 360px) {
+  .lp-side .lp-tc-ic { width: 32px; height: 32px; }
+  .lp-side .lp-tc-ic svg { width: 18px; height: 18px; }
+  .lp-side .lp-tc-h { gap: 8px; }
+}
+/* 320 pt, ilk 7 gün: yolun başındaki Nef kartı tek satırlık sıkı şerit (metin aynı; yolun ilk iki durağı ilk ekranda) */
+@media (max-width: 360px) {
+  .hf.wk1 + .lp-box .lp-nef:not(.end) { align-items: center; gap: 6px; padding: 6px 8px; border-radius: 14px; overflow: hidden; }
+  .hf.wk1 + .lp-box .lp-nef:not(.end) .lp-nef-a { display: none; }
+  .hf.wk1 + .lp-box .lp-nef:not(.end) .lp-nef-tx { display: flex; align-items: baseline; gap: 5px; }
+  .hf.wk1 + .lp-box .lp-nef:not(.end) .lp-nef-b { flex: none; font-size: 0.7rem; }
+  .hf.wk1 + .lp-box .lp-nef:not(.end) p { font-size: 0.74rem; line-height: 1.25; white-space: nowrap; letter-spacing: -0.01em; }
+  .hf.wk1 + .lp-box .lp-r.c.wide:has(> .lp-nef) { padding: 2px 0; }
+}
+
+/* ---- D9 v2 tur 9: yarın bölüm kartının içinde ---- */
+.lp-cc-tom { grid-column: 1 / -1; }
+.lp-tc.in { gap: 10px; padding: 12px 0 0; margin-top: 2px; border: 0; border-top: 1px solid color-mix(in srgb, var(--ch) 25%, var(--border));
+  border-radius: 0; background: none; box-shadow: none; }
+.lp-cc.cur .lp-tc.in { border-top-color: color-mix(in srgb, var(--accent) 22%, var(--border)); }
+.lp-tc.in .lp-tc-rem { margin: 0 -14px -14px -16px; padding: 6px 10px 6px 14px; border-top-color: color-mix(in srgb, var(--accent) 22%, var(--border)); }
+@media (max-width: 360px) {
+  .lp-tc.in .lp-tc-rem { margin: 0 -12px -13px -14px; padding: 6px 6px 6px 10px; }
+  .lp-cc .lp-tc.in .lp-tc-ic { width: 32px; height: 32px; }
+  .lp-cc .lp-tc.in .lp-tc-ic svg { width: 18px; height: 18px; }
+  .lp-cc .lp-tc.in .lp-tc-h { gap: 8px; }
+}
+/* Tur 10: bölüm sonu günü "bugün" şeridin son noktasında: etiket noktanın sağ kenarına yaslı (kart kenarına en az 12 pt) */
+.lp-cc-d li.now:last-child small { justify-self: end; }

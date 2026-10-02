@@ -1,0 +1,15 @@
+{
+ "unit": "a.izin",
+ "take": "t3",
+ "asset_id": "gPTa0VsFL4hE6qyxvKuQ",
+ "source_node_id": "yPsd1mfe8VF85P2EEnf7",
+ "stt_node_id": "oVSjfj2oA5POT7YOhwpM",
+ "session_id": "mt5daaO8rch59vzlGNvG",
+ "generation_id": "GN208y5b6AsMrwpaxxB8",
+ "actual_credits": 27.72,
+ "actual_cents": 0.504,
+ "scribe_text": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin",
+ "spoken_duration_secs": "4.88",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 9\n}"
+}

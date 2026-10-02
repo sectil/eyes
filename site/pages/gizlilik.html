@@ -1,0 +1,55 @@
+<!-- title: Gizlilik ve KVKK · Nefona -->
+<!-- desc: Nefona hangi veriyi nerede tutar, kamera görüntüsüne ne olur, hangi izinler ayrı ayrı sorulur, veriler nasıl silinir. -->
+<section>
+  <div class="narrow doc">
+    <span class="eyebrow">Gizlilik ve KVKK</span>
+    <h1>Verin telefonunda kalır</h1>
+    <p class="lead">Nefona'nın gizlilik ilkesi tek cümledir: kamera görüntüsü telefondan çıkmaz, her veri amacı için ayrı açık rıza alınır, hiçbir izin bir özelliği kilitlemez.</p>
+    <p><span class="draft">taslak</span> Bu metin yayından önce veri sorumlusunun unvanı ve adresiyle tamamlanır ve hukukçu incelemesinden geçer. Uygulamadaki rıza metinleriyle birebir aynı amaç ve kapsamı taşır.</p>
+
+    <h2>Kamera</h2>
+    <ul>
+      <li>Ölçümlerde kamera yalnız iki iş için çalışır: telefonla göz arasındaki mesafeyi ölçmek ve göz kırpmayı, bakış yönünü, göz kapağını okumak.</li>
+      <li>Görüntü işlenir ve anında atılır. Kaydedilmez, telefondan çıkmaz. Kaydedilen yalnız sayıdır: mesafe (mm), kırpma sayısı, bakış yönü.</li>
+      <li>Kamera izni vermezsen ölçümler kamerasız sürer; kamera isteyen her ekranda "Kamerasız devam" vardır.</li>
+    </ul>
+
+    <h2>Telefonda tutulanlar</h2>
+    <ul>
+      <li>Ölçümler (görme keskinliği, okuma, kırpma), pratik kayıtları (süre, önce ve sonra puanları), günlük yol ve seri, iris haritası cevapları.</li>
+      <li>Kimlik: ad, doğum tarihi, şehir, istersen fotoğraf. Fotoğraf yalnız telefonda kalır.</li>
+      <li>Hepsi uygulamanın kendi deposundadır. Bilgi → "Tüm verileri sil" ile onayladığın an silinir; yalnız tema, ses ve titreşim tercihlerin kalır.</li>
+    </ul>
+
+    <h2>Ayrı ayrı sorulan izinler</h2>
+    <p>Her izin kendi ekranında sorulur: ne kaydedilir, neden, nerede durur, ne kadar kalır. Önceden işaretli kutu yoktur. "Şimdi değil" hiçbir özelliği kapatmaz. İzinler Profilim → İzinlerim'den her an geri çekilir; metin değişirse yeniden sorulur.</p>
+    <table>
+      <caption class="muted" style="text-align:left;padding-bottom:8px">Ayrı ayrı sorulan izinler</caption>
+      <thead><tr><th>İzin</th><th>Ne</th><th>Nerede</th></tr></thead>
+      <tbody>
+        <tr><td>Profilini hesabına kaydet</td><td>Ad, doğum tarihi, şehir, gözlük/lens bilgisi. Fotoğraf değil.</td><td>Supabase, Almanya (Frankfurt); şifreli bağlantı. İzni geri çekene ya da hesabını silene kadar.</td></tr>
+        <tr><td>Hareketini de görelim</td><td>Adım, yürüme mesafesi, egzersiz dakikası (Apple Sağlık, yalnız okuma).</td><td>Yalnız telefonda. Sunucuya gitmez.</td></tr>
+        <tr><td>Nef her gün bir öneri yazsın</td><td>Son 7 günün özetleri: çalışma günü, dakika ve seri; görme ortancası, başlangıçtan farkı ve uyarı düzeyi; okuma hızı; oyun ve egzersiz puanları; günün saati. Kamera görüntüsü, ad, e-posta, cihaz kimliği gitmez.</td><td>Yurt dışı: Vercel üzerindeki sunucumuz ve OpenRouter üzerinden bir yapay zekâ modeli. Sunucumuz içeriği kaydetmez.</td></tr>
+        <tr><td>Profil cevapların da Nef'e gitsin</td><td>Uyku puanı, ekran süresi, gece telefona bakma, stres puanı (özet).</td><td>Aynı yol; iznini çektiğin an gönderim durur.</td></tr>
+      </tbody>
+    </table>
+    <p>Görme ölçümü ve hareket verisi sağlığa ilişkin veridir (KVKK md. 6); bu yüzden bu verileri işleyen her amaç için, telefonda kalsa da yurt dışına gitse de, açık rıza ayrı alınır.</p>
+
+    <h2>Hesap ve abonelik</h2>
+    <ul>
+      <li>Hesap isteğe bağlıdır (Apple ile giriş ya da Google ile giriş). Hesapsız kullanımda profil bilgin sunucuya gitmez; yalnız abonelik doğrulaması (aşağıda) ve, açık rıza verdiysen, Nef'e giden özet sayılar bunun dışındadır.</li>
+      <li>Abonelik Apple üzerinden yapılır; ödeme bilgin Nefona'ya ulaşmaz. Abonelik durumu RevenueCat aracılığıyla doğrulanır (anonim kimlik; hesabın varsa hesap kimliği).</li>
+      <li>Hesabını uygulamadan silersin; sunucudaki profil kaydı silinir.</li>
+    </ul>
+
+    <h2>Kullanılmayanlar</h2>
+    <ul>
+      <li>Reklam yok, reklam kimliği yok, üçüncü taraf izleme yok.</li>
+      <li>E-posta adresin başka hiçbir servise gönderilmez.</li>
+      <li>Kamera görüntüsü, ses kaydı ve konum sunucuya hiç gitmez; profil fotoğrafın yalnız telefonda durur.</li>
+    </ul>
+
+    <h2>Haklar</h2>
+    <p>KVKK kapsamındaki haklarını (bilgi alma, düzeltme, silme, itiraz) uygulamadan doğrudan kullanabilirsin: veriyi görme ve dışa aktarma (Doktoruma göster), silme (Tüm verileri sil, Hesabımı sil), izinleri geri çekme (İzinlerim). Diğer talepler için <a href="/destek.html">Destek</a>.</p>
+  </div>
+</section>

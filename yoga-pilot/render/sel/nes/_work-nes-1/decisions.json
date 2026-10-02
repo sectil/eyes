@@ -1,0 +1,126 @@
+{
+ "a.acilis": {
+  "take": "t1.mp3",
+  "scribe": "a.acilis.t1.json"
+ },
+ "a.agirlik": {
+  "take": "t2.mp3",
+  "scribe": "a.agirlik.t2.json"
+ },
+ "a.gozler": {
+  "take": "t1.mp3",
+  "scribe": "a.gozler.t1.json"
+ },
+ "a.hosgeldin": {
+  "take": "t3.mp3",
+  "scribe": "a.hosgeldin.t3.json"
+ },
+ "a.izin": {
+  "take": "t3.mp3",
+  "scribe": "a.izin.t3.json"
+ },
+ "a.karar": {
+  "take": "t2.mp3",
+  "scribe": "a.karar.t2.json"
+ },
+ "a.kolay": {
+  "take": "t3.mp3",
+  "scribe": "a.kolay.t3.json"
+ },
+ "a.konfor": {
+  "take": "t3.mp3",
+  "scribe": "a.konfor.t3.json"
+ },
+ "c1.cerceve": {
+  "take": "t1.mp3",
+  "scribe": "c1.cerceve.t1.json"
+ },
+ "c1.gecis.arka": {
+  "take": "t1.mp3",
+  "scribe": "c1.gecis.arka.t1.json"
+ },
+ "c1.gecis.on": {
+  "take": "t2.mp3",
+  "scribe": "c1.gecis.on.t2.json"
+ },
+ "c1.k1": {
+  "take": "t2.mp3",
+  "scribe": "c1.k1.t2.json"
+ },
+ "c1.kacirma": {
+  "take": "t2.mp3",
+  "scribe": "c1.kacirma.t2.json"
+ },
+ "c1.tekrar": {
+  "take": "t2.mp3",
+  "scribe": "c1.tekrar.t2.json"
+ },
+ "c2.alt": {
+  "take": "t3.mp3",
+  "scribe": "c2.alt.t3.json"
+ },
+ "c2.dikkat": {
+  "take": "t2.mp3",
+  "scribe": "c2.dikkat.t2.json"
+ },
+ "car.butun": {
+  "take": "t2.mp3",
+  "scribe": "car.butun.t2.json"
+ },
+ "car.on1": {
+  "take": "t1.mp3",
+  "scribe": "car.on1.t1.json"
+ },
+ "car.on2": {
+  "take": "t2.mp3",
+  "scribe": "car.on2.t2.json"
+ },
+ "car.on3": {
+  "take": "t1.mp3",
+  "scribe": "car.on3.t1.json"
+ },
+ "car.sag1": {
+  "take": "t1.mp3",
+  "scribe": "car.sag1.t1.json"
+ },
+ "car.sag2": {
+  "take": "t1.mp3",
+  "scribe": "car.sag2.t1.json"
+ },
+ "car.sag3": {
+  "take": "t3.mp3",
+  "scribe": "car.sag3.t3.json"
+ },
+ "car.sag4": {
+  "take": "t1.mp3",
+  "scribe": "car.sag4.t1.json"
+ },
+ "car.sirt": {
+  "take": "t1.mp3",
+  "scribe": "car.sirt.t1.json"
+ },
+ "car.sol1": {
+  "take": "t1.mp3",
+  "scribe": "car.sol1.t1.json"
+ },
+ "car.sol2": {
+  "take": "t3.mp3",
+  "scribe": "car.sol2.t3.json"
+ },
+ "car.sol3": {
+  "take": "t1.mp3",
+  "scribe": "car.sol3.t1.json"
+ },
+ "car.sol4": {
+  "take": "t2.mp3",
+  "scribe": "car.sol4.t2.json"
+ },
+ "n1.birak": {
+  "take": "t3.mp3",
+  "scribe": "n1.birak.t3.json"
+ },
+ "n1.soyle": {
+  "take": "t2.mp3",
+  "scribe": "n1.soyle.t2.json"
+ }
+}
