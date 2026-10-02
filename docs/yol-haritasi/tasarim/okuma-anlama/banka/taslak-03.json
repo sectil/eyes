@@ -19,9 +19,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Temizlikçi balıkların ayna sınavını geçmesini",
-            "Temizlikçi balıkların nasıl beslendiğini",
-            "Büyük maymunların aynayla nasıl oynadığını",
-            "Balıkların renkleri birbirinden nasıl ayırt ettiğini"
+            "Temizlikçi balıkların beslenmesini",
+            "Büyük maymunların oyunlarını",
+            "Balıkların renk ayırt etmesini"
           ]
         },
         {
@@ -86,16 +86,16 @@
       "yazar": "Bshary ve ark.",
       "dergi": "PLoS Biology",
       "yil": 2006,
-      "metin": "Farklı türden iki hayvan birlikte ava çıkabilir mi? Bir ekip, Kızıldeniz'de yaptığı gözlemlerle iki balığın ortaklığını inceledi: lahos adlı bir balık ile dev bir müren. Bu iki balığın yan yana görülmesi rastlantı değildi. Lahos, mürene işaret vererek onu birlikte av aramaya çağırıyor, avın saklandığı yere de onun dikkatini çekiyordu. Lahos bu işaretleri ne kadar acıktığına göre veriyordu. Ortaklıktan iki balık da kazançlı çıkıyordu. Araştırmacılara göre bunun nedeni, iki türün av becerilerinin birbirini tamamlaması. Avı hangisi yakalarsa onu hemen bütün olarak yutuyor, bu yüzden biri avı zorla kendine ayıramıyor. Ekip, başka avcı türlerin çoğunda ortak avın önündeki asıl engelin, avın birinin elinde kalabilmesi olduğunu düşünüyor.",
+      "metin": "Farklı türden iki hayvan birlikte ava çıkabilir mi? Bir ekip, Kızıldeniz'de yaptığı gözlemlerle iki balığın ortaklığını inceledi: orfoz ailesinden iri bir balık ile dev bir müren. Bu iki balığın yan yana görülmesi rastlantı değildi. İri balık, mürene işaret vererek onu birlikte av aramaya çağırıyor, avın saklandığı yere de onun dikkatini çekiyordu. Bu işaretleri ne kadar acıktığına göre veriyordu. Ortaklıktan iki balık da kazançlı çıkıyordu. Araştırmacılara göre bunun nedeni, iki türün av becerilerinin birbirini tamamlaması. Avı hangisi yakalarsa onu hemen bütün olarak yutuyor, bu yüzden biri avı zorla kendine ayıramıyor. Ekip, başka avcı ikililerin çoğunda birlikte avlanmanın önündeki asıl engelin, avın birinin elinde kalabilmesi olduğunu düşünüyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "İki farklı balık türünün birlikte avlanmasını",
-            "Mürenlerin yuvalarını nasıl seçtiğini",
-            "Kızıldeniz'in sıcaklığının nasıl değiştiğini",
-            "Lahos balıklarının yumurtalarını nereye bıraktığını"
+            "Mürenlerin yuva seçmesini",
+            "Kızıldeniz'in sıcaklığını",
+            "Balıkların yumurtlamasını"
           ]
         },
         {
@@ -110,17 +110,17 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Lahos mürene ne yapıyordu?",
+          "soru": "İri balık mürene ne yapıyordu?",
           "secenekler": [
             "İşaret vererek onu birlikte av aramaya çağırıyordu",
             "Ona avından pay veriyordu",
-            "Ondan sürekli uzak duruyordu",
-            "Onu kendi yuvasının önünden her seferinde kovuyordu"
+            "Ondan uzak duruyordu",
+            "Onu yuvasından kovuyordu"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Lahos işaretleri neye göre veriyordu?",
+          "soru": "İri balık işaretleri neye göre veriyordu?",
           "secenekler": [
             "Ne kadar acıktığına göre",
             "Suyun ne kadar soğuk olduğuna göre",
@@ -144,8 +144,8 @@
           "secenekler": [
             "İki türün av becerilerinin birbirini tamamlaması",
             "İki balığın aynı yuvada yaşaması",
-            "Mürenin lahostan daha hızlı yüzmesi",
-            "Lahosun avı her zaman hiç dokunmadan mürene bırakması"
+            "Mürenin iri balıktan daha hızlı yüzmesi",
+            "İri balığın avı her zaman hiç dokunmadan mürene bırakması"
           ]
         }
       ]
@@ -160,16 +160,16 @@
       "yazar": "Godfrey-Smith ve ark.",
       "dergi": "PLoS ONE",
       "yil": 2022,
-      "metin": "Ahtapotlar bir şeyi hedefe doğru fırlatabilir mi? Avustralya'daki bir koyda yaşayan yabani ahtapotlar sık sık bir şeyler fırlatıyor. Ahtapotlar kollarının arasına kabuk, çamur ya da yosun alıyor. Sonra kollarının altındaki huni denen borudan güçlü bir su akımı vererek bunları ileri savuruyor. Bir ekip, bu atışları farklı durumlarda inceledi. Başka ahtapotlarla karşılaşırken atılan şeyler çoğu zaman onlara çarpıyordu. Bu atışlar daha güçlüydü ve daha çok çamurla yapılıyordu. Güçlü atışlarda ahtapotun vücut deseni çoğunlukla tek renkli ya da koyu oluyordu. Bazı atışlar kolların altından farklı biçimde yönlendiriliyordu ve bunlar başka ahtapotlara daha sık çarpıyordu. Kendi türünden birine bir şey fırlatmak, daha önce yalnız bazı sosyal memelilerde görülmüştü.",
+      "metin": "Ahtapotlar bir şeyi hedefe doğru fırlatabilir mi? Avustralya'daki bir koyda yaşayan yabani ahtapotlar sık sık bir şeyler fırlatıyor. Ahtapotlar kollarının arasına kabuk, çamur ya da yosun alıyor. Sonra kollarının altındaki huni denen borudan güçlü bir su akımı vererek bunları ileri savuruyor. Bir ekip, bu atışları farklı durumlarda inceledi. Başka ahtapotlarla karşılaşırken atılan şeyler sıklıkla onlara çarpıyordu. Bu atışlar daha güçlüydü ve daha çok çamurla yapılıyordu. Güçlü atışlarda ahtapotun vücut deseni çoğunlukla tek renkli ya da koyu oluyordu. Bazı atışlar kolların altından farklı biçimde yönlendiriliyordu ve bunlar başka ahtapotlara daha sık çarpıyordu. Kendi türünden birine bir şey fırlatmak, daha önce yalnız bazı sosyal memelilerde görülmüştü.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Yabani ahtapotların bir şeyler fırlatmasını",
-            "Ahtapotların yuvalarını nasıl kazdığını",
-            "Ahtapotların ne kadar hızlı yüzdüğünü",
-            "Avustralya'daki koyların zamanla nasıl oluştuğunu"
+            "Ahtapotların yuva kazmasını",
+            "Ahtapotların yüzme hızını",
+            "Avustralya koylarının oluşumunu"
           ]
         },
         {
@@ -187,9 +187,9 @@
           "soru": "Ahtapotlar fırlatmak için ne kullanıyor?",
           "secenekler": [
             "Huni denen borudan verdikleri güçlü bir su akımını",
-            "Uzun kollarıyla yaptıkları bir savurma hareketini",
             "Ağızlarından püskürttükleri mürekkebi",
-            "Uzun kollarıyla geriye doğru yaptıkları güçlü bir savurma hareketini"
+            "Suyun kendi akıntısını",
+            "Kayalara çarpan dalgaları"
           ]
         },
         {
@@ -219,7 +219,7 @@
             "Yalnız bazı sosyal memelilerde",
             "Yalnız bazı kuşlarda",
             "Bütün balıklarda",
-            "Yalnız bazı kuşlarda ve kemirgenlerde"
+            "Yalnız bazı kuşlarda ve sürüngenlerde"
           ]
         }
       ]
@@ -234,16 +234,16 @@
       "yazar": "Boles ve Lohmann",
       "dergi": "Nature",
       "yil": 2003,
-      "metin": "Bir hayvanı hiç görmediği bir yere götürseniz evinin yönünü bulabilir mi? Buna gerçek yön bulma denir ve şimdiye kadar yalnız birkaç omurgalıda gösterilmişti. İncelenen omurgasızlar ise tanıdık işaretlere ya da pusula yönüne güvenerek yol buluyordu. Bir ekip, bunu dikenli ıstakozlarla sınadı. Istakozlar yakalandıkları yerden 12 ile 37 kilometre uzağa, hiç bilmedikleri yerlere taşındı. Yolda bilinen hiçbir ipucu almamalarına karşın yakalandıkları yere doğru döndüler. Ekip daha sonra onları belli yerlerin manyetik alanını taklit eden düzeneklere koydu. Yakalandıkları yerin kuzeyine ait alanda ıstakozlar güneye döndü. Güneyine ait alanda ise kuzeye yöneldiler. Sonuç, ıstakozların Dünya'nın manyetik alanını bir tür harita gibi kullanarak yol bulduğunu gösteriyor.",
+      "metin": "Bir hayvanı hiç görmediği bir yere götürseniz evinin yönünü bulabilir mi? Buna gerçek yön bulma denir ve şimdiye kadar yalnız birkaç omurgalıda gösterilmişti. İncelenen omurgasızlar ise tanıdık işaretlere ya da pusula yönüne güvenerek yol buluyordu. Bir ekip, bunu dikenli ıstakozlarla sınadı. Istakozlar yakalandıkları yerden 12 ile 37 kilometre uzağa, hiç bilmedikleri yerlere taşındı. Yolda bilinen hiçbir ipucu almamalarına karşın yakalandıkları yere doğru döndüler. Ekip daha sonra onları belli yerlerin manyetik alanını taklit eden düzeneklere koydu. Yakalandıkları yerin kuzeyine ait alanda ıstakozlar güneye döndü. Güneyine ait alanda ise kuzeye yöneldiler. Sonuç, ıstakozların Dünya'nın manyetik alanını bir tür harita gibi kullanarak yol bulduğunu düşündürüyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Dikenli ıstakozların bilmedikleri yerden yön bulmasını",
-            "Istakozların nasıl avlandığını",
-            "Istakozların kabuklarını nasıl değiştirdiğini",
-            "Denizdeki akıntıların yıl boyunca nasıl yön değiştirdiğini"
+            "Istakozların avlanmasını",
+            "Istakozların kabuk değiştirmesini",
+            "Deniz akıntılarının yönünü"
           ]
         },
         {
@@ -263,7 +263,7 @@
             "Yakalandıkları yere doğru",
             "Rastgele farklı yönlere",
             "Hep güneşin doğduğu yöne",
-            "Hep güneşin doğduğu yöne doğru"
+            "Hep en yakın kıyı şeridine doğru"
           ]
         },
         {
@@ -283,7 +283,7 @@
             "Yalnız birkaç omurgalıda",
             "Bütün omurgasızlarda",
             "Yalnız böceklerde",
-            "Yalnız böceklerde ve örümceklerde"
+            "Yalnız örümceklerde"
           ]
         },
         {
@@ -315,9 +315,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Kaplumbağaların başka bir kaplumbağanın bakışını izlemesini",
-            "Kaplumbağaların ne kadar uzun yaşadığını",
-            "Kaplumbağaların kabuklarının rengini",
-            "Kaplumbağaların kabuklarının yıllar içinde nasıl renk değiştirdiğini"
+            "Kaplumbağaların ömrünü",
+            "Kabukların rengini",
+            "Kabukların renk değiştirmesini"
           ]
         },
         {
@@ -365,9 +365,9 @@
           "soru": "Bakışı izlemek hayvanlara ne sağlayabilir?",
           "secenekler": [
             "Yiyecek ya da düşman gibi önemli şeyleri fark etmeyi",
-            "Daha hızlı koşabilmeyi ve kaçabilmeyi",
-            "Kışın daha uzun süre uyuyabilmeyi",
-            "Suyun altında nefes almadan daha uzun süre kalabilmeyi"
+            "Daha hızlı kaçabilmeyi",
+            "Kışın uzun uyuyabilmeyi",
+            "Su altında uzun kalabilmeyi"
           ]
         }
       ]
@@ -382,7 +382,7 @@
       "yazar": "Putman ve ark.",
       "dergi": "Current Biology",
       "yil": 2011,
-      "metin": "Uzun bir yolculukta yönünü bulmak için hem kuzey güney konumunu hem de doğu batı konumunu bilmek gerekir. Birincisine enlem, ikincisine boylam denir. Bazı hayvanların enlemi manyetik ipuçlarıyla bulduğu biliniyordu. Ama boylamı nasıl algıladıkları bilinmiyordu, çünkü manyetik alan doğu batı yönünde pek az değişir. Bir ekip, Florida'da yumurtadan yeni çıkmış iribaş deniz kaplumbağalarıyla çalıştı. Yavruları, Atlas Okyanusu'nun iki ayrı yakasında aynı enlemdeki iki yerin manyetik alanına tuttular. Yavrular bu iki alanda farklı yönlere yüzdü ve her iki yön de onları dairesel göç yollarında ilerletecek yöndü. Bu, bir göçmen hayvanın boylamı manyetik alandan okuyabildiğinin ilk kanıtı oldu. Kaplumbağalar manyetik alanı enlem ve boylamı birlikte veren bir harita gibi kullanıyor.",
+      "metin": "Uzun bir yolculukta yönünü bulmak için hem kuzey güney konumunu hem de doğu batı konumunu bilmek gerekir. Birincisine enlem, ikincisine boylam denir. Bazı hayvanların enlemi manyetik ipuçlarıyla bulduğu biliniyordu. Ama boylamı nasıl algıladıkları bilinmiyordu, çünkü manyetik alan doğu batı yönünde pek az değişir. Bir ekip, Florida'da yumurtadan yeni çıkmış iribaş deniz kaplumbağalarıyla çalıştı. Yavruları, Atlas Okyanusu'nun iki ayrı yakasında aynı enlemdeki iki yerin manyetik alanına tuttular. Yavrular bu iki alanda farklı yönlere yüzdü ve her iki yön de onları dairesel göç yollarında ilerletecek yöndü. Bu, bir göçmen hayvanın boylamı manyetik alandan okuyabildiğinin ilk kanıtı oldu. Bulgular, kaplumbağaların manyetik alanı enlem ve boylamı birlikte veren bir harita gibi kullandığını düşündürüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -411,7 +411,7 @@
             "Manyetik alan doğu batı yönünde pek az değiştiği için",
             "Kaplumbağalar yalnız gece yüzdüğü için",
             "Okyanusta hiç ışık olmadığı için",
-            "Yavrular okyanusa yalnız gece karanlığında çıktığı için"
+            "Yavrular çok küçük olduğu için"
           ]
         },
         {
@@ -421,7 +421,7 @@
             "Yumurtadan yeni çıkmış iribaş deniz kaplumbağaları",
             "Yaşlı ve büyük kara kaplumbağaları",
             "Göllerde yaşayan küçük su kaplumbağaları",
-            "Hayvanat bahçesinde yaşayan yaşlı ve büyük kara kaplumbağaları"
+            "Hayvanat bahçesinde büyütülmüş yetişkin tatlı su kaplumbağaları"
           ]
         },
         {
@@ -441,7 +441,7 @@
             "Atlas Okyanusu'nun iki yakasında aynı enlemdeki iki yer",
             "Aynı kıyıda birbirine çok yakın iki kumsal",
             "Biri kuzey kutbunda biri ekvatorda iki yer",
-            "Biri kuzey kutbunda, öteki ekvatorda bulunan birbirinden çok uzak iki yer"
+            "Pasifik Okyanusu'nun ortasında birbirinden çok uzak iki küçük ada"
           ]
         }
       ]
@@ -463,9 +463,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Bir kertenkelenin taklit yoluyla öğrenebilmesini",
-            "Kertenkelelerin nasıl renk değiştirdiğini",
-            "Kertenkelelerin ne yediğini",
-            "Kertenkelelerin kuyruklarını nasıl yeniden büyüttüğünü"
+            "Kertenkelelerin renk değiştirmesini",
+            "Kertenkelelerin beslenmesini",
+            "Kuyrukların yeniden büyümesini"
           ]
         },
         {
@@ -495,7 +495,7 @@
             "Kapağı açmayı başaramadı",
             "Kapağı daha hızlı açtı",
             "Kapağı ters yönde açtı",
-            "Kapağı herkesten önce ve daha hızlı açtı"
+            "Kapağı ilk denemede hemen açtı"
           ]
         },
         {
@@ -530,7 +530,7 @@
       "yazar": "Hajnal ve Durgin",
       "dergi": "Experimental Brain Research",
       "yil": 2022,
-      "metin": "İki kişi yan yana yürürken adımları kendiliğinden aynı tempoya girer mi? Önceki deneyler bunun sık olabileceğini düşündürüyordu. Bir ekip, aynı şeyin gündelik hayatta ne kadar olduğunu merak etti. Yaya yollarında yürüyen insanları kameraya kaydettiler. Kayıtlarda birlikte yürüyen 498 çift incelendi. Bu çiftlerin yalnız yaklaşık yüzde 6'sı yol boyunca adım adım aynı tempoda yürüyordu. Ekibin incelemesine göre farklı kişiler aynı hızda bile farklı bir adım temposunu tercih ediyor. Yani her yürüyüşçünün adım uzunluğu ile adım sıklığı arasında kendine özgü bir oranı var. Ancak birlikte yürüyenler bu oranı birbirine doğru biraz yaklaştırıyor olabilir. Bu yakınlaşma, adımlar tam olarak denk gelmese bile yaşanıyor gibi görünüyor.",
+      "metin": "İki kişi yan yana yürürken adımları kendiliğinden aynı tempoya girer mi? Önceki deneyler bunun sık olabileceğini düşündürüyordu. Bir ekip, aynı şeyin gündelik hayatta ne kadar olduğunu merak etti. Yaya yollarında yürüyen insanları kameraya kaydettiler. Kayıtlarda birlikte yürüyen 498 çift incelendi. Bu çiftlerin yalnız yaklaşık yüzde 6'sı yol boyunca adım adım aynı tempoda yürüyordu. Ekibin incelemesine göre farklı kişiler aynı hızda bile farklı bir adım temposunu tercih etme eğiliminde. Yani her yürüyüşçünün adım uzunluğu ile adım sıklığı arasında kendi tercih ettiği bir oran var. Ancak birlikte yürüyenler bu oranı birbirine doğru biraz yaklaştırıyor olabilir. Bu yakınlaşma, adımlar tam olarak denk gelmese bile yaşanıyor gibi görünüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -547,7 +547,7 @@
           "soru": "Ekip yürüyüşleri nasıl kaydetti?",
           "secenekler": [
             "Yaya yollarında kameraya alarak",
-            "Katılımcılara anket doldurtarak",
+            "Anket doldurtarak",
             "Koşu bandında ölçerek",
             "Ayakkabılara aygıt takarak"
           ]
@@ -576,7 +576,7 @@
           "tur": "ayrinti",
           "soru": "Farklı kişiler aynı hızda yürürken ne görüldü?",
           "secenekler": [
-            "Farklı bir adım temposunu tercih ediyorlar",
+            "Farklı bir adım temposunu tercih etme eğiliminde",
             "Hepsi aynı adım temposunu tercih ediyor",
             "Hepsi aynı uzunlukta adım atıyor",
             "Hepsi aynı adım temposunu ve aynı adım boyunu seçiyor"
@@ -587,9 +587,9 @@
           "soru": "Birlikte yürüyenler neyi birbirine doğru biraz yaklaştırıyor olabilir?",
           "secenekler": [
             "Adım uzunluğu ile adım sıklığı arasındaki oranı",
-            "Kollarını sallama biçimlerini ve hızlarını",
-            "Yürürken baktıkları yönü ve noktayı",
-            "Konuşurken kullandıkları ses tonunu ve ses yüksekliğini"
+            "Kol sallama biçimlerini",
+            "Baktıkları yönü",
+            "Ses tonlarını"
           ]
         }
       ]
@@ -604,7 +604,7 @@
       "yazar": "Porter ve ark.",
       "dergi": "Nature Neuroscience",
       "yil": 2006,
-      "metin": "Koku izi sürmek denince akla çoğu zaman insanlar gelmez. Bir ekip, insanların bir koku izini takip edip edemeyeceğini merak etti. Bir de şunu sordular: İki burun deliği arasındaki fark bu işe yardım ediyor mu? Memelilerde bu sorunun cevabı henüz bilinmiyordu. Deneyler, insanların koku izi sürebildiğini açıkça gösterdi. Üstelik katılımcılar alıştırma yaptıkça daha iyi iz sürdü. Ekip, iki burun deliğinin aynı yeri koklamadığını da buldu. Delikler yaklaşık 3,5 santimetre arayla birbirinden ayrı bölgelerden koku alıyordu. En önemlisi, iki delikten gelen kokunun karşılaştırılması iz sürmeyi kolaylaştırıyordu. Araştırmacılara göre insan koku alma duyusunun kötü ünü, yeteneğin kendisinden çok bu yeteneği ne kadar az kullandığımızdan kaynaklanıyor olabilir.",
+      "metin": "Koku izi sürmek denince akla çoğu zaman insanlar gelmez. Bir ekip, insanların bir koku izini takip edip edemeyeceğini merak etti. Bir de şunu sordular: İki burun deliği arasındaki fark bu işe yardım ediyor mu? Memelilerde bu sorunun cevabı henüz bilinmiyordu. Deneyler, insanların koku izi sürebildiğini gösterdi. Üstelik katılımcılar alıştırma yaptıkça daha iyi iz sürdü. Ekip, iki burun deliğinin aynı yeri koklamadığını da buldu. Delikler yaklaşık 3,5 santimetre arayla birbirinden ayrı bölgelerden koku alıyordu. En önemlisi, iki delikten gelen kokunun karşılaştırılması iz sürmeyi kolaylaştırıyordu. Araştırmacılara göre insan koku alma duyusunun kötü ünü, kısmen yeteneğin kendisinden değil, gündelik hayatta bu yeteneğe pek ihtiyaç duymamamızdan kaynaklanıyor olabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -641,9 +641,9 @@
           "soru": "İz sürmeyi ne kolaylaştırıyordu?",
           "secenekler": [
             "İki delikten gelen kokunun karşılaştırılması",
-            "Tek bir deliğin tamamen kapatılması",
-            "Gözlerin sıkıca kapatılması",
-            "Ağızdan derin ve yavaş biçimde nefes alıp verilmesi"
+            "Tek deliğin kapatılması",
+            "Gözlerin kapatılması",
+            "Ağızdan nefes alınması"
           ]
         },
         {
@@ -658,12 +658,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Araştırmacılara göre insan koku duyusunun kötü ünü neden kaynaklanıyor olabilir?",
+          "soru": "Araştırmacılara göre insan koku duyusunun kötü ünü kısmen neden kaynaklanıyor olabilir?",
           "secenekler": [
-            "Bu yeteneği ne kadar az kullandığımızdan",
+            "Bu yeteneğe pek ihtiyaç duymamamızdan",
             "Burnumuzun çok küçük olmasından",
-            "Kokuların havada hızla kaybolmasından",
-            "Kokuların açık havada çok hızla yok olup gitmesinden"
+            "Kokuların havada çabucak dağılmasından",
+            "Burun deliklerimizin birbirine çok yakın olmasından"
           ]
         }
       ]
@@ -715,9 +715,9 @@
           "soru": "Ekip gömülen yerleri neyle haritaya döktü?",
           "secenekler": [
             "Uydu konum aygıtıyla",
-            "Kâğıt ve kalemle",
+            "Kâğıt kalemle",
             "Gizli kameralarla",
-            "Koku izleyen köpeklerle"
+            "Köpeklerle"
           ]
         },
         {
