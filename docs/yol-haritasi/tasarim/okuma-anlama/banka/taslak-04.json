@@ -648,12 +648,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Metinde eğilimi açıklamadığı söylenen şeylerden biri hangisi?",
+          "soru": "Araştırmacılara göre bu yanlılık nereden doğuyor?",
           "secenekler": [
-            "Resimlerdeki görsel özellikler",
-            "Katılımcıların yaşı",
-            "Deneyin süresi",
-            "Deneyin yapıldığı odadaki ışığın rengi"
+            "Yüzleri değerlendiren geniş ayarlı bir sistemden",
+            "Katılımcıların o günkü yorgunluğundan ve dalgınlığından",
+            "Deneyde gösterilen resimlerin boyutlarından",
+            "Nesnelerin üretildiği fabrikalardan"
           ]
         },
         {

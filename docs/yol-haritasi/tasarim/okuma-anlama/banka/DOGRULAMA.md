@@ -1,5 +1,20 @@
 # Bilimsel doğrulama kayıtları
 
+## taslak-04
+
+PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor. Uzunluk oranı sonrası: doğru seçenek en uzun 20/60 (%33).
+
+- oa031 | düzeltildi: özette olmayan "küçük" (elektrik sinyalleri) silindi | tamam
+- oa032 | tamam | alışma sorusunda "hiç ışık görmeyenlerde" seçeneği, çalışmadaki enerji açısından zor ortamla karışabileceği için "en genç olanlarda" yapıldı
+- oa033 | düzeltildi: Impatiens wallerana için "kına çiçeği" (başka tür) yerine Türkçe adı "camgüzeli" | ilgili sorunun doğru seçeneği metne uyduruldu
+- oa034 | tamam | biyofilm sorusunda kısmen doğru sayılabilecek "koloni ağı" yerine "yuva"; potasyum sorusunda birbirinin tekrarı "şeker/çözünmüş şeker" yerine "kalsiyum"
+- oa035 | tamam | tamam
+- oa036 | tamam | tamam
+- oa037 | tamam | tamam
+- oa038 | tamam | tamam
+- oa039 | tamam | "eğilimi açıklayamayan" sorusu, metinde hiç değinilmeyen seçeneklerin de doğru sayılabilmesi nedeniyle "metinde açıklamadığı söylenen" diye yeniden kuruldu
+- oa040 | tamam | tamam
+
 ## taslak-03
 
 PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor. Uzunluk oranı sonrası: doğru seçenek en uzun 15/60 (%25).

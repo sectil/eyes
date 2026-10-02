@@ -35,7 +35,7 @@ for (const f of files) {
     for (const q of t.sorular) {
       if (q.secenekler.length !== 4) e.push('4 seçenek değil')
       if (new Set(q.secenekler).size !== 4) e.push('seçenek tekrar')
-      if (/yanlış|değildir|olmayan/i.test(q.soru)) e.push('olumsuz soru: ' + q.soru)
+      if (/yanlış|değildir|olmayan|m[ae]d[ıiuü]ğ[ıiuü]|m[ae]z\b/i.test(q.soru)) e.push('olumsuz soru: ' + q.soru)
     }
     console.log(t.id, words, 'kelime', chars, 'harf', e.join('; ') || 'tamam')
     if (e.length) bad++
