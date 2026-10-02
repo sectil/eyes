@@ -1,0 +1,15 @@
+Bağlam: Nefona Ana sayfasındaki Nef kartı. Kartın büyük cümlesinin altında, modülü hemen başlatan TEK bir düğme olacak. Aşağıda her satır: kimlik | kartın cümlesi → düğmenin yazısı. Değerlendirilen yalnız DÜĞME yazısıdır.
+
+## Puan kartı (geçen haftanın aynı anı ya da son seansların ortalaması)
+D-1 | Geçen hafta bu akşam Dalga sesinden sonra sakinliğin 4'ten 7'ye çıkmıştı. → Dalga sesi · 8 dk
+D-2 | Geçen hafta bu akşam Dalga sesinden sonra sakinliğin 4'ten 7'ye çıkmıştı. → Bu akşam da Dalga sesi · 8 dk
+D-3 | Geçen hafta bu akşam Dalga sesinden sonra sakinliğin 4'ten 7'ye çıkmıştı. → Şimdi Dalga sesi · 8 dk
+D-4 | Geçen hafta bu akşam Dalga sesinden sonra sakinliğin 4'ten 7'ye çıkmıştı. → Dalga sesini aç · 8 dk
+D-5 | Son 5 seansta Dalga sesinden sonra sakinliğin ortalama 2 puan yükseldi. → Bugün de Dalga sesi · 8 dk
+D-6 | Geçen hafta bu akşam Nefesin Ritmi yoga dersinden sonra gerginliğin 6'dan 3'e inmişti. → Bu akşam da Nefesin Ritmi · 12 dk
+D-7 | Bir hafta önce bu saatlerde Gökyüzü molasından sonra dinlenmişliğin 3'ten 6'ya çıkmıştı. → Gökyüzü molası · 3 dk
+
+## Ölçü kartı (bir oyunda kalıcı ilerleme)
+D-8 | Tek Bakışta oyununda ilerleme var: kavradığın harf sayısı 4'ten 6'ya çıktı. → Tek Bakışta · 2 dk
+D-9 | Tek Bakışta oyununda ilerleme var: kavradığın harf sayısı 4'ten 6'ya çıktı. → Bugünkü turu oyna · 2 dk
+D-10 | Tek Bakışta oyununda ilerleme var: kavradığın harf sayısı 4'ten 6'ya çıktı. → Tek Bakışta oyununu aç

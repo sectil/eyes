@@ -157,3 +157,11 @@ Her cümle 5 kişilik kapıda en az 4/5 aldı ve ben de okudum. Örnekler gerçe
 - Bu hafta yolun sonuna dördüncü kez geldin.
 
 Toplam 112 cümle. Ayrıca kart etiketi: "Nef".
+
+## Nef kartı düğmeleri (sahip onayı 2026-10-02, "Onaylıyorum"; kapı 5/5)
+- Puan kartı, kartın zaman dilimiyle aynı dilimde: "Bu akşam da Dalga sesi · 8 dk" (dilim + "da/de", modül, süre)
+- Puan kartı, başka dilimde: "Bugün de Dalga sesi · 8 dk"
+- Yoga dersinde ders adıyla: "Bu akşam da Nefesin Ritmi · 12 dk"
+- Oyunların ilerleme kartı: "Bugünkü turu oyna · 2 dk"
+- Yedek (kullanılmıyor): "Dalga sesini aç · 8 dk"
+- Kullanılmaz (kapıda 0/5): "Tek Bakışta · 2 dk", "Şimdi Dalga sesi · 8 dk"
