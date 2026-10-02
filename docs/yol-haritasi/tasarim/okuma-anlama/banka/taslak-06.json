@@ -382,7 +382,7 @@
       "yazar": "Koh ve ark.",
       "dergi": "Science",
       "yil": 2015,
-      "metin": "Su yüzeyinde yaşayan bazı böcekler, suyun üstünde yürümekle kalmaz, oradan havaya da sıçrar. Bu, başka canlılarda pek görülmeyen bir hareket biçimidir. Araştırmacılar, sıçrayış sırasında suyun nasıl davrandığını inceledi ve bu bilgiyle küçük bir robot yapmak istedi. Böceklerin, bacaklarının kıvrık uçlarını içe doğru döndürdüğünü gördüler. Bacaklarını suya görece yavaş indiriyorlardı. Uyguladıkları kuvvet, su yüzeyini yırtmaya yetecek kuvvetin hemen altında kalıyordu. Ekip bu bilgiyle böcek boyutunda, 68 miligramlık bir robot yaptı. Robot da suyun üstünden sıçradı; sıçrarken suya verebileceği en güçlü itişi verdi. Bulgular, bu küçük canlıların sudan nasıl sıçradığını anlamamıza yardım ediyor. Aynı beceriyi makinelere kazandırmanın yolunu da gösteriyor.",
+      "metin": "Su yüzeyinde yaşayan bazı böcekler, suyun üstünde yürümekle kalmaz, oradan havaya da sıçrar. Bu, başka canlılarda pek görülmeyen bir hareket biçimidir. Araştırmacılar, sıçrayış sırasında suyun nasıl davrandığını inceledi ve bu bilgiyle küçük bir robot yapmak istedi. Böceklerin, bacaklarının kıvrık uçlarını içe doğru döndürdüğünü gördüler. Bacaklarını suya görece yavaş indiriyorlardı. Uyguladıkları kuvvet, su yüzeyini yırtmaya yetecek kuvvetin hemen altında kalıyordu. Ekip bu bilgiyle böcek boyutunda, 68 miligramlık bir robot yaptı. Robot da suyun üstünden sıçradı; sıçrarken suya, yüzeyi yırtmadan verilebilecek en güçlü itişi verdi. Bulgular, bu küçük canlıların sudan nasıl sıçradığını anlamamıza yardım ediyor. Aynı beceriyi makinelere kazandırmanın yolunu da gösteriyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -410,8 +410,8 @@
           "secenekler": [
             "Görece yavaş",
             "Çok hızlı ve sert",
-            "Tek tek ve sırayla",
-            "Yalnız ikisini birden"
+            "Giderek hızlanarak",
+            "Bir hızlı, bir yavaş"
           ]
         },
         {
@@ -438,10 +438,10 @@
           "tur": "ayrinti",
           "soru": "Robot sıçrarken suya nasıl bir itiş verdi?",
           "secenekler": [
-            "Verebileceği en güçlü itişi",
-            "Böceğinkinin yarısı kadar bir itişi",
-            "Neredeyse hiç itiş vermedi",
-            "Yalnız ilk denemede küçük bir itiş"
+            "Yüzeyi yırtmadan verilebilecek en güçlü itişi",
+            "Yüzeyi yırtıp geçen çok güçlü bir itişi",
+            "Böceğin verdiğinin yarısı kadar zayıf bir itişi",
+            "Yalnız ilk denemede küçük bir itişi"
           ]
         }
       ]
@@ -465,7 +465,7 @@
             "Ateş karıncalarının bedenlerini bağlayarak su geçirmez sal kurmasını",
             "Tek bir ateş karıncasının suya düşünce yüzmekte zorlanmasını",
             "Ateş karıncalarının salı tümüyle gönüllü iş birliğiyle kurmasını",
-            "Ateş karıncalarının yuvalarını sokarak düşmanlara karşı korumasını"
+            "Ateş karıncalarının bedenlerinden kurduğu salın suda çabucak dağılıp batmasını"
           ]
         },
         {
@@ -490,12 +490,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Su geçirmezliğin daha önce hangi yüzeylerin değişmeyen bir özelliği olduğu sanılıyordu?",
+          "soru": "Metinde, su geçirmezliğin sabit bir özellik olduğu sanılan yüzeylere hangi örnekler veriliyor?",
           "secenekler": [
-            "Yaprakların ya da böcek kabuklarının",
-            "Su kuşlarının yağla kaplı kanat tüylerinin",
-            "Taşların ve kumun",
-            "Balık pullarının"
+            "Yaprak ve böcek kabuğu",
+            "Kâğıt ve karton",
+            "Kumaş ve deri",
+            "Çakıl taşı ve deniz kumu"
           ]
         },
         {

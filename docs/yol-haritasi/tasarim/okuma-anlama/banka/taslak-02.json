@@ -332,12 +332,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Çalışmadan önce hangi konu hâlâ bir bilmeceydi?",
+          "soru": "Araştırmacılara göre adımları büyüyen bir karınca ne yapmalıydı?",
           "secenekler": [
-            "Karıncaların aldıkları yolu nasıl ölçtüğü",
-            "Karıncaların yönü nasıl bulduğu",
-            "Karıncaların neyle beslendiği",
-            "Bir yuvada kaç karınca yaşadığı"
+            "Aynı sayıda adımla daha uzun bir yol almalıydı",
+            "Aynı sayıda adımla daha kısa bir yol almalıydı",
+            "Aynı yolu daha çok sayıda adımla yürümeliydi",
+            "Aynı sayıda adımla yine aynı yolu almalıydı"
           ]
         },
         {
@@ -362,12 +362,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bacakları değiştirilen karıncalar nasıl yürüyordu?",
+          "soru": "Araştırmacılar hangi karıncaların bacaklarını değiştirdi?",
           "secenekler": [
-            "Serbestçe",
-            "Bir tüpün içinde",
-            "Bir koşu bandının üstünde",
-            "Bir ipe bağlı olarak"
+            "Serbestçe yürüyen karıncaların",
+            "Bir tüpün içinde yürüyen karıncaların",
+            "Koşu bandında yürüyen karıncaların",
+            "Bir ipe bağlı yürüyen karıncaların"
           ]
         }
       ]

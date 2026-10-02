@@ -281,9 +281,9 @@
           "soru": "Bebeklerin doğmadan önce duydukları dilin neyi etkilediği biliniyordu?",
           "secenekler": [
             "Sesleri nasıl algıladıklarını",
-            "Ne kadar sık ağlayacaklarını",
-            "Hangi sözcükleri önce söyleyeceklerini",
-            "Seslerinin ne kadar yüksek çıkacağını"
+            "Sesleri nasıl çıkardıklarını",
+            "Ne kadar sık ağladıklarını",
+            "Ne kadar yüksek sesle ağladıklarını"
           ]
         },
         {
@@ -308,16 +308,16 @@
       "yazar": "Gianoli ve Carrasco-Urra",
       "dergi": "Current Biology",
       "yil": 2014,
-      "metin": "Bir canlının başka bir canlıya benzeyerek kazanç sağlamasına taklit denir. Taklit hayvanlarda oldukça yaygındır, ama bitkilerde az sayıda örneği bilinir. Araştırmacılar ılıman bir yağmur ormanında yaşayan odunsu bir sarmaşık türünü inceledi. Bu sarmaşığın yaprakları, sarıldığı ağacın yapraklarına boy, biçim, renk, duruş yönü, sap uzunluğu ya da ucunun dikenli olması bakımından benziyordu. Tek bir sarmaşık farklı ağaçlara uzandığında, yaprakları her ağaçta o ağacın yaprağına benziyordu. Hiçbir şeye tutunmayan sarmaşıkların yaprakları, yapraklı ağaçlara tırmananlarınkinden farklıydı. Ekip, yaprakların ne kadarının yendiğine de baktı. Yaprakları en çok yenenler, yapraksız gövdelere tırmananlardı. En az yenenler ise yapraklı ağaçlara tırmananlardı. Yani sarmaşığı asıl koruyan şey, sarıldığı ağacın yapraklarına benzemesi.",
+      "metin": "Bir canlının başka bir canlıya benzeyerek kazanç sağlamasına taklit denir. Taklit hayvanlarda oldukça yaygındır, ama bitkilerde az sayıda örneği bilinir. Araştırmacılar ılıman bir yağmur ormanında yaşayan odunsu bir sarmaşık türünü inceledi. Bu sarmaşığın yaprakları, sarıldığı ağacın yapraklarına boy, biçim, renk, duruş yönü, sap uzunluğu ya da ucunun dikenli olması bakımından benziyordu. Tek bir sarmaşık farklı ağaçlara uzandığında, yaprakları her ağaçta o ağacın yaprağına benziyordu. Hiçbir şeye tutunmayan sarmaşıkların yaprakları, yapraklı ağaçlara tırmananlarınkinden farklıydı. Ekip, yaprakların ne kadarının yendiğine de baktı. Yaprakları en çok yenenler, yapraksız gövdelere tırmananlardı. En az yenenler ise yapraklı ağaçlara tırmananlardı. Bu da sarmaşığın, sarıldığı ağacın yapraklarına benzeyerek korunduğunu düşündürüyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Bir sarmaşığın sarıldığı ağacın yapraklarını taklit edip korunmasını",
-            "Hiçbir şeye tutunmayan sarmaşıkların yapraklarının farklı olmasını",
-            "Sarmaşığın yapraklarının yenmesini hiçbir biçimde önleyememesini",
-            "Sarmaşığın tohumlarını kuşlar aracılığıyla uzaklara yaymasını"
+            "Bir sarmaşığın hep tek bir ağaç türünün yapraklarını taklit etmesini",
+            "Bir sarmaşığın ağaç yapraklarını taklit ettiğinde daha çok yenmesini",
+            "Bir sarmaşığın bir yere tutunmadığında da ağaç yapraklarını taklit etmesini"
           ]
         },
         {
@@ -332,12 +332,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Tek bir sarmaşık farklı ağaçlara uzandığında yaprakları nasıldı?",
+          "soru": "Araştırmacıların incelediği sarmaşık nasıl bir türdü?",
           "secenekler": [
-            "Her ağaçta o ağacın yaprağına benziyordu",
-            "Hep ilk sarıldığı ağacın yaprağına benziyordu",
-            "Hepsi dökülmüştü",
-            "Her ağaçta aynı biçimdeydi"
+            "Odunsu bir sarmaşık",
+            "Otsu bir sarmaşık",
+            "Etli bir sarmaşık",
+            "Tüylü bir sarmaşık"
           ]
         },
         {
@@ -456,16 +456,16 @@
       "yazar": "Simmons ve ark.",
       "dergi": "Science",
       "yil": 2006,
-      "metin": "Bazı bakterilerin içinde zarla sarılı demir kristalleri bulunur; bu bakteriler manyetik alana tepki verir. Bu bakterilerin bir bölümünün, oksijen çoğalınca aşağıya, oksijeni az olan ya da hiç olmayan katmanlara doğru yüzdüğü düşünülür. Kuzey yarım küredeki bakterilerin aşağı inerken manyetik kuzeye, güney yarım küredekilerin ise manyetik güneye yöneldiği sanılıyordu. Araştırmacılar ise kuzey yarım kürede, oksijen artınca kuzeye değil güneye yüzen bakteri toplulukları buldu. Bu, o güne dek bildirilen bütün davranışların tersiydi. Ortamın oksitleme gücü denen kimyasal bir özelliği arttıkça, güneye yönelen bakterilerin oranı da artıyordu. Aynı ortamda zıt yönlere yüzen bakterilerin bir arada yaşaması, bu davranışın bakteriye ne kazandırdığını anlatan bugünkü açıklamalarla çelişiyor.",
+      "metin": "Bazı bakterilerin içinde zarla sarılı demir kristalleri bulunur; bu bakteriler manyetik alana tepki verir. Bu bakterilerin bir bölümünün, oksijen çoğalınca aşağıya, oksijeni az olan ya da hiç olmayan katmanlara doğru yüzdüğü düşünülür. Kuzey yarım küredeki bakterilerin aşağı inerken manyetik kuzeye, güney yarım küredekilerin ise manyetik güneye yöneldiği sanılıyordu. Araştırmacılar ise kuzey yarım kürede, oksijen artınca kuzeye değil güneye yüzen bakteri toplulukları buldu. Bu, kuzey yarım küre için o güne dek bildirilen davranışın tersiydi. Ortamın oksitleme gücü denen kimyasal bir özelliği arttıkça, güneye yönelen bakterilerin oranı da artıyordu. Aynı ortamda zıt yönlere yüzen bakterilerin bir arada yaşaması, manyetik alana göre yön bulmanın bakteriye ne kazandırdığını anlatan bugünkü açıklamalarla çelişiyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Kuzey yarım kürede güneye yüzen bakterilerin bulunmasını",
-            "Bakterilerin hep aynı yöne yüzdüğünün doğrulanmasını",
-            "Dünya'nın manyetik kutuplarının zamanla yer değiştirmesini",
-            "Bakterilerin göl dibindeki çamurda hızla çoğalmasını"
+            "Güneye yüzen bakterilerin yalnız güney yarım kürede yaşamasını",
+            "Bakterilerin oksijen azalınca güneye doğru yüzmeye başlamasını",
+            "Dünya'nın manyetik kutuplarının zamanla yer değiştirmesini"
           ]
         },
         {
@@ -473,7 +473,7 @@
           "soru": "Bu bakterilerin içinde ne bulunur?",
           "secenekler": [
             "Zarla sarılı demir kristalleri",
-            "Suyla dolu, ince hava kabarcıkları",
+            "İçi gazla dolu ince kabarcıklar",
             "Işık yayan pigmentler",
             "Yağ damlacıkları"
           ]
@@ -490,12 +490,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekibin bulduğu davranış, o güne dek bildirilen davranışlara göre nasıldı?",
+          "soru": "Ekibin bulduğu davranış neyin tersiydi?",
           "secenekler": [
-            "Hepsinin tersiydi",
-            "Yalnız birkaçının tersiydi",
-            "Çoğuyla aynıydı",
-            "Yarısının tersiydi"
+            "Kuzey yarım küre için bildirilen davranışın",
+            "Güney yarım küre için bildirilen davranışın",
+            "Oksijensiz sularda bildirilen davranışın",
+            "Laboratuvarda bildirilen davranışın"
           ]
         },
         {
@@ -512,7 +512,7 @@
           "tur": "ayrinti",
           "soru": "Zıt yönlere yüzen bakterilerin bir arada yaşaması neyle çelişiyor?",
           "secenekler": [
-            "Bu davranışın kazancını anlatan bugünkü açıklamalarla",
+            "Manyetik yön bulmanın kazancını anlatan açıklamalarla",
             "Bakterilerin suda yüzerek yer değiştirebildiği bilgisiyle",
             "Bakterilerin manyetik alana tepki verdiği bilgisiyle",
             "Oksijenin suyun üst katmanlarında daha çok olduğu bilgisiyle"

@@ -12,7 +12,7 @@
       "yazar": "Mehr ve ark.",
       "dergi": "Current Biology",
       "yil": 2018,
-      "metin": "İnsanlar pek çok iş için şarkı söyler: dans etmek, bebeği yatıştırmak ya da sevgilerini anlatmak için. Peki hiç tanımadığımız bir topluluğun şarkısını duyunca ne işe yaradığını anlayabilir miyiz? Bir ekip bunu internet üzerinden araştırdı. 60 ülkeden 750 kişi, çoğu küçük topluluklarda kaydedilmiş şarkılardan kısa parçalar dinledi. Parçalar arasında dans şarkıları, ninniler ve aşk şarkıları vardı; her biri yalnız 14 saniye sürüyordu. Dinleyiciler her şarkının ne için söylendiğini puanladı. Bu toplulukları hiç tanımadıkları hâlde tahminleri doğru çıktı. İkinci bir deneyde başka dinleyiciler, şarkıcının kadın mı erkek mi olduğu gibi ipuçlarını ve ezginin karmaşıklığı gibi müzik özelliklerini puanladı. Sonuçlar, bir şarkının kulağa nasıl geldiğiyle ne işe yaradığı arasında, dünyanın her yerinde geçerli bir bağ olabileceğini düşündürüyor.",
+      "metin": "İnsanlar pek çok iş için şarkı söyler: dans etmek, bebeği yatıştırmak ya da sevgilerini anlatmak için. Peki hiç tanımadığımız bir topluluğun şarkısını duyunca ne işe yaradığını anlayabilir miyiz? Bir ekip bunu internette sınadı. 60 ülkeden 750 kişi, çoğu küçük topluluklarda kaydedilmiş dans şarkıları, ninniler ve aşk şarkılarından 14 saniyelik parçalar dinledi. Dinleyiciler her şarkının ne için söylendiğini puanladı. Bu toplulukları tanımadıkları hâlde tahminleri çoğunlukla doğru çıktı. İkinci deneyde başka dinleyiciler, şarkıcının kadın mı erkek mi olduğu gibi ipuçlarını ve ezginin karmaşıklığı gibi müzik özelliklerini puanladı. Bu ipuçları tahminleri öngörüyordu, ama müzik özellikleri de tahminlere ayrıca katkı yapıyordu. Sonuçlar, şarkının kulağa nasıl geldiğiyle ne işe yaradığı arasında evrensel bir bağ olabileceğini düşündürüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -530,7 +530,7 @@
       "yazar": "Lauga ve ark.",
       "dergi": "Biophysical Journal",
       "yil": 2005,
-      "metin": "E. coli, en çok incelenen bakterilerden biridir ve sıvının içinde yüzerek ilerler. Bu bakteri katı bir yüzeyin yakınında yüzerken ilginç bir şey yapar: saat yönünde daireler çizer. Peki bunun nedeni ne olabilir? Bir ekip, bu davranışı açıklamak için sıvının hareketine dayanan bir model kurdu. Modelde bakteri kendi gücüyle yüzer; onu dışarıdan iten ya da döndüren ayrı bir kuvvet yoktur. Yine de bakteri ile yüzey, aradaki sıvı aracılığıyla birbirini etkiler; daireler de bu etkinin doğal sonucudur. Aynı etki, bakterileri yüzeye yakın tutar; sanki onları orada hapseder. Ekip, modelin sonuçlarını deneylerde ölçülen verilerle karşılaştırdı ve ikisinin oldukça iyi uyuştuğunu gördü. Ayrıca gövdesi daha uzun olan bakterilerin daha geniş daireler çizdiği görüldü.",
+      "metin": "E. coli, en çok incelenen bakterilerden biridir ve sıvının içinde yüzerek ilerler. Bu bakteri katı bir yüzeyin yakınında yüzerken ilginç bir şey yapar: saat yönünde daireler çizer. Peki bunun nedeni ne olabilir? Bir ekip, bu davranışı açıklamak için sıvının hareketine dayanan bir model kurdu. Modelde bakteri kendi gücüyle yüzer; onu dışarıdan iten ya da döndüren ayrı bir kuvvet yoktur. Yine de bakteri ile yüzey, aradaki sıvı aracılığıyla birbirini etkiler; daireler de bu etkinin doğal sonucudur. Aynı etki, bakterileri yüzeye yakın tutar; sanki onları orada hapseder. Ekip, modelin sonuçlarını deneylerde ölçülen verilerle karşılaştırdı ve ikisinin oldukça iyi uyuştuğunu gördü. Bu karşılaştırmada, gövdesi daha uzun olan bakterilerin daha geniş daireler çizdiği de görüldü.",
       "sorular": [
         {
           "tur": "ana",
@@ -538,8 +538,8 @@
           "secenekler": [
             "Bir bakterinin yüzey yakınında neden daireler çizdiğinin açıklanmasını",
             "E. coli'nin en çok incelenen bakterilerden biri olarak bilinmesini",
-            "Bakterileri yüzeyde döndüren ayrı bir dış kuvvetin bulunmasını",
-            "Bakterilerin besin bulmak için sıvıdaki kimyasal izleri nasıl takip ettiğini"
+            "Bakterilere yüzeyde daireler çizdiren ayrı bir dış kuvvetin bulunmasını",
+            "Bakterilerin besine ulaşmak için yüzeyde daireler çizmesini"
           ]
         },
         {
@@ -678,16 +678,16 @@
       "yazar": "Guerra ve Reppert",
       "dergi": "Current Biology",
       "yil": 2013,
-      "metin": "Kuzey Amerika'nın doğusundaki monark kelebekleri her sonbaharda kuzeyden, Meksika'nın ortasındaki kışlama yerlerine göç eder. Bu yolculukta yönlerini güneşe bakarak bulurlar. Güneş gün boyunca gökte yer değiştirir; kelebekler bu kaymayı duyargalarındaki iç saatlerle hesaba katar ve güneye doğru sabit bir yön tutar. İlkbaharda aynı kelebekler kuzeye, Birleşik Devletler'in güneyine döner. Bir ekip, kelebeklerin dönüşte de duyargalarına bağlı aynı güneş pusulasını kullandığını gösterdi. Peki yön neden tersine dönüyor? Bu, göçün uzun süredir çözülemeyen bilmecelerinden biriydi. Sonbahar göçmenleri, vakti gelmeden kışlama yerindekine benzer bir soğukta tutulunca kuzeye yöneldi. Soğukla hiç karşılaşmadan yaşlanan göçmenler ise güneye yönelmeyi sürdürdü. Demek ki göçün tamamlanması için kışlama yerindeki soğuk şart.",
+      "metin": "Kuzey Amerika'nın doğusundaki monark kelebekleri her sonbaharda kuzeyden, Meksika'nın ortasındaki kışlama yerlerine göç eder. Bu yolculukta yönlerini güneşe bakarak bulurlar. Güneş gün boyunca gökte yer değiştirir; kelebekler bu kaymayı duyargalarındaki iç saatlerle hesaba katar ve güneye doğru sabit bir yön tutar. İlkbaharda aynı kelebekler kuzeye, Birleşik Devletler'in güneyine döner. Bir ekip, kelebeklerin dönüşte de duyargalarına bağlı aynı güneş pusulasını kullandığını gösterdi. Peki yön neden tersine dönüyor? Bu, göçün uzun süredir çözülemeyen bilmecelerinden biriydi. Sonbahar göçmenleri, kış gelmeden kışlama yerindekine benzer bir soğukta tutulunca kuzeye yöneldi. Soğukla hiç karşılaşmadan yaşlanan göçmenler ise güneye yönelmeyi sürdürdü. Demek ki göçün tamamlanması için kışlama yerindeki soğuk şart.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Monark kelebeklerinin göç yönünü neyin tersine çevirdiğini",
-            "Bu kelebeklerin Kuzey Amerika'nın doğusunda yaşamasını",
-            "Kelebeklerin dönüşte bambaşka bir pusula kullanmasını",
-            "Monark tırtıllarının hangi bitkilerle beslendiğini"
+            "Soğuğun monark kelebeklerinin güneş pusulasını bozduğunu",
+            "Kelebeklerin dönüşte bambaşka bir pusula kullandığını",
+            "Monark kelebeklerinin eve dönüşte yönü sıcaklığa bakarak bulduğunu"
           ]
         },
         {
@@ -722,12 +722,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Sonbahar göçmenleri kışlama yerindekine benzer bir soğukta ne zaman tutuldu?",
+          "soru": "Kuzeye yönelen sonbahar göçmenleri nasıl bir soğukta tutulmuştu?",
           "secenekler": [
-            "Vakti gelmeden",
-            "Göçü tamamladıktan sonra",
-            "Yalnız geceleri",
-            "Yumurtadan çıkar çıkmaz"
+            "Kışlama yerindekine benzer bir soğukta",
+            "Kuzeydeki kışa benzer bir soğukta",
+            "Göç yolundakine benzer bir soğukta",
+            "Okyanus kıyısındakine benzer bir soğukta"
           ]
         },
         {

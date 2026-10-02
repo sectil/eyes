@@ -234,7 +234,7 @@
       "yazar": "Hedenström ve ark.",
       "dergi": "Current Biology",
       "yil": 2016,
-      "metin": "Bir kuş aylarca hiç konmadan yaşayabilir mi? Ebabiller, yiyeceklerini ve yuva malzemelerini havada yakalar. Bilim insanları, bu kuşların üreme dönemi dışında, Sahra'nın güneyine göç ederken bile hep havada kaldığını düşünüyordu. Kışın ebabil görmek zordu; Afrika'da geceledikleri bir yer de hiç bulunmamıştı. Araştırmacılar, bazı ebabillere hareketi ölçen küçük bir kayıt aygıtı taktı. İkinci yıl aygıtlara, kuşun yerini gün ışığından hesaplayan bir algılayıcı da eklendi. Kayıtlar, ebabillerin üreme dönemi dışındaki 10 ayın %99'undan fazlasını havada geçirdiğini gösterdi. Bazı kuşlar bu sürede bir kez bile konmadı. Kuşlar gündüz geceden daha az hareket ediyordu; büyük olasılıkla gündüzleri sıcak hava akımlarında uzun süre süzülüyorlardı. Sonuçlar yeni sorular doğuruyor: Bu kuşlar böyle uzun uçuşlara nasıl dayanıyor, havada nasıl uyuyor?",
+      "metin": "Bir kuş aylarca hiç konmadan yaşayabilir mi? Ebabiller, yiyeceklerini ve yuva malzemelerini havada yakalar. Bilim insanları, bu kuşların üreme dönemi dışında, Sahra'nın güneyinde kışlarken de hep havada kaldığını düşünüyordu. Kışın ebabil görmek zordu; Afrika'da geceledikleri bir yer de hiç bulunmamıştı. Araştırmacılar, bazı ebabillere hareketi ölçen küçük bir kayıt aygıtı taktı. İkinci yıl aygıtlara, kuşun yerini gün ışığından hesaplayan bir algılayıcı da eklendi. Kayıtlar, ebabillerin üreme dönemi dışındaki 10 ayın %99'undan fazlasını havada geçirdiğini gösterdi. Bazı kuşlar bu sürede bir kez bile konmadı. Kuşlar gündüz geceden daha az hareket ediyordu; büyük olasılıkla gündüzleri sıcak hava akımlarında uzun süre süzülüyorlardı. Sonuçlar yeni sorular doğuruyor: Bu kuşlar böyle uzun uçuşlara nasıl dayanıyor, havada nasıl uyuyor?",
       "sorular": [
         {
           "tur": "ana",
@@ -242,18 +242,18 @@
           "secenekler": [
             "Ebabillerin aylarca havada kalmasını",
             "Kışın ebabil görmenin zor olmasını",
-            "Ebabillerin göçte sık sık konmasını",
+            "Ebabillerin yalnız kışın havada kalmasını",
             "Ebabillerin havada nasıl uyuduğunun çözülmesini"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Ebabiller yiyeceklerini nerede yakalar?",
+          "soru": "Kuşun yeri ikinci yıl neye bakılarak hesaplandı?",
           "secenekler": [
-            "Havada",
-            "Suyun yüzeyinde",
-            "Ağaç kabuklarının altında",
-            "Yerde otların arasında"
+            "Gün ışığına",
+            "Yıldızların konumuna",
+            "Uydu sinyallerine",
+            "Yerin manyetik alanına"
           ]
         },
         {
@@ -261,14 +261,14 @@
           "soru": "Ebabiller üreme dönemi dışındaki zamanın ne kadarını havada geçirdi?",
           "secenekler": [
             "%99'undan fazlasını",
-            "Yarısını",
-            "Dörtte üçünü",
-            "%10'undan azını"
+            "%90'ından azını",
+            "%80'inden azını",
+            "%70'inden azını"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Ebabillerin üreme dönemi dışında geçirdiği süre kaç ay?",
+          "soru": "Ebabillerde üreme dönemi dışındaki süre kaç aydır?",
           "secenekler": [
             "10 ay",
             "2 ay",
@@ -281,9 +281,9 @@
           "soru": "Kuşlar gündüz büyük olasılıkla neden daha az hareket ediyordu?",
           "secenekler": [
             "Sıcak hava akımlarında süzüldükleri için",
-            "Ağaç dallarında dinlendikleri için",
-            "Yağmurdan saklandıkları için",
-            "Binaların çatısında uyudukları için"
+            "Güçlü rüzgârlarla sürüklendikleri için",
+            "Gündüz daha az böcek avladıkları için",
+            "Yüksekte daha yavaş kanat çırptıkları için"
           ]
         },
         {

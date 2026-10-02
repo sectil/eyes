@@ -160,26 +160,26 @@
       "yazar": "Hammerschmidt ve Wöllner",
       "dergi": "Music Perception",
       "yil": 2020,
-      "metin": "Müzik dinlerken zamanın nasıl geçtiğini hiç düşündünüz mü? Bir ekip, ritme farklı biçimlerde eşlik etmenin zaman algısını değiştirip değiştirmediğini inceledi. Müzisyenler ve müzisyen olmayanlar, üç farklı hızda çalınan ritim kalıplarını dinledi. Bazı denemelerde parmaklarıyla ritme uyarak vurdular; bunu kimi zaman seyrek, kimi zaman sık yaptılar. Bazı denemelerde ise hiç vurmadan yalnız dinlediler. Her denemeden sonra parçanın ne kadar sürdüğünü tahmin ettiler. En seyrek vurdukları denemelerde süreyi en kısa tahmin ettiler; yani zaman onlara daha hızlı geçmiş gibi geldi. Hiç vurmadan yalnız dinlediklerinde ise süreyi en uzun tahmin ettiler. Ritim daha hızlı çalındığında tahmin edilen süre de uzadı. Müzisyenlerle ötekiler arasında fark çıkmadı; ama daha düzenli ve doğru vuranlar süreyi daha kısa tahmin etti.",
+      "metin": "Müzik dinlerken zamanın nasıl geçtiğini hiç düşündünüz mü? Bir ekip, ritme farklı biçimlerde eşlik etmenin zaman algısını değiştirip değiştirmediğini inceledi. Müzisyenler ve müzisyen olmayanlar, üç farklı hızda çalınan ritim kalıplarını dinledi. Bazı denemelerde parmaklarıyla ritme uyarak tempo tuttular; bunu kimi zaman seyrek, kimi zaman sık yaptılar. Bazı denemelerde ise hiç vurmadan yalnız dinlediler. Her denemeden sonra parçanın ne kadar sürdüğünü tahmin ettiler. En seyrek vurdukları denemelerde süreyi en kısa tahmin ettiler; yani zaman onlara daha hızlı geçmiş gibi geldi. Hiç vurmadan yalnız dinlediklerinde ise süreyi en uzun tahmin ettiler. Ritim daha hızlı çalındığında tahmin edilen süre de uzadı. Müzisyenlerle ötekiler arasında fark çıkmadı; ama daha düzenli ve doğru vuranlar süreyi daha kısa tahmin etti.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Ritme eşlik etme biçiminin süre tahminini nasıl etkilediğini",
-            "Ritme eşlik etmenin zaman algısını hiç etkilemediğini",
-            "Ritim kalıplarının üç farklı hızda çalındığını",
-            "Müziğin dinleyenlerin ruh hâlini nasıl değiştirdiğini"
+            "Müzisyenlerin süreyi ötekilerden çok daha doğru tahmin ettiğini",
+            "Parmakla tempo tutunca zamanın daha yavaş geçtiğini",
+            "Parmakla tempo tutmanın ritmi hatırlamayı kolaylaştırdığını"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Katılımcılar ritme nasıl eşlik etti?",
+          "soru": "Ritim kalıpları kaç farklı hızda çalındı?",
           "secenekler": [
-            "Parmaklarıyla vurarak",
-            "Parmaklarını şıklatarak",
-            "Ellerini çırparak",
-            "Ayaklarıyla yere vurarak"
+            "Üç",
+            "İki",
+            "Dört",
+            "Beş"
           ]
         },
         {
@@ -234,7 +234,7 @@
       "yazar": "Simon ve ark.",
       "dergi": "Science",
       "yil": 2011,
-      "metin": "Gündüz açan pek çok çiçek, arıları ve kuşları göz alıcı görünüşüyle kendine çeker. Yarasalar ise çevrelerini, çıkardıkları seslerin yankısını dinleyerek tanır. Peki yarasaların tozlaştırdığı çiçekler de onlara yankıyla fark edilen bir işaret veriyor mu? Araştırmacılar, bir sarmaşık türünde çiçek salkımlarının hemen üstünde duran, çanak biçimli alışılmadık bir yaprağı inceledi. Bu yaprağın yankılarının, iyi bir işarette bulunması gereken özellikleri taşıdığını gösterdiler. Yankılar güçlüydü ve birçok yöne yayılıyordu. Ayrıca yankının, her seferinde aynı kalan ve kolayca tanınan bir izi vardı. Ardından çiçekleri ziyaret eden yarasalarla davranış deneyleri yaptılar. Yaprak yerindeyken yarasaların yiyecek arayarak geçirdiği süre yarıya indi. Demek ki çanak yaprak, yankısıyla yarasaları çiçeklere çekiyor.",
+      "metin": "Gündüz açan pek çok çiçek, arıları ve kuşları göz alıcı görünüşüyle kendine çeker. Yarasalar ise çevrelerini, çıkardıkları seslerin yankısını dinleyerek tanır. Peki yarasaların tozlaştırdığı çiçekler de onlara yankıyla fark edilen bir işaret veriyor mu? Araştırmacılar, bir sarmaşık türünde çiçek salkımlarının hemen üstünde duran, çanak biçimli alışılmadık bir yaprağı inceledi. Bu yaprağın yankılarının, iyi bir işarette bulunması gereken özellikleri taşıdığını gösterdiler. Yankılar güçlüydü ve birçok yöne yayılıyordu. Ayrıca yankının, her seferinde aynı kalan ve kolayca tanınan bir izi vardı. Ardından çiçekleri ziyaret eden yarasalarla davranış deneyleri yaptılar. Yaprak varken yarasaların yiyecek arama süresi, yaprak yokkenkinin yarısıydı. Demek ki çanak yaprak, yankısıyla yarasaları çiçeklere çekiyor ve çiçekleri bulmayı kolaylaştırıyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -278,12 +278,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Yaprak yerindeyken yarasaların yiyecek arama süresi ne oldu?",
+          "soru": "Yaprak varken yarasaların yiyecek arama süresi, yaprak yokkenkine göre ne kadardı?",
           "secenekler": [
-            "Yarıya indi",
-            "İki katına çıktı",
-            "Hiç değişmedi",
-            "Üç katına çıktı"
+            "Yarısı kadardı",
+            "İki katı kadardı",
+            "Üç katı kadardı",
+            "Dörtte biri kadardı"
           ]
         },
         {
@@ -382,14 +382,14 @@
       "yazar": "Gavelis ve ark.",
       "dergi": "Nature",
       "yil": 2015,
-      "metin": "Kamera gibi çalışan gözler birkaç hayvan grubunda vardır. Böyle karmaşık bir yapının ancak çok hücreli canlılarda olabileceği düşünülür. Oysa dinoflagellat denen bazı tek hücrelilerde göze benzer bir yapı bulunur. Bu yapıda saydam bir ön katmana, merceğe, halkaya ve ışık alan bir tabakaya benzeyen parçalar vardır. Bu canlılar laboratuvarda yetiştirilemiyor ve doğada az bulunuyor. Bu yüzden yapının ne işe yaradığı ve nasıl oluştuğu bilinmiyordu. Araştırmacılar yapıyı elektron mikroskobu ve tek hücreden gen okuma yöntemleriyle inceledi. Saydam ön katman, hücrenin enerji üreten parçaları olan mitokondrilerden oluşuyordu. Işık alan tabakaya benzeyen parça ise plastit denen hücre parçalarının birleşmesiyle oluşmuştu. Yani yapı, hücrede zaten bulunan parçalardan kurulmuştu. Yapı o kadar karmaşıktı ki ilk başta çok hücreli bir göz sanılmıştı.",
+      "metin": "Kamera gibi çalışan gözler birkaç hayvan grubunda vardır. Böyle karmaşık bir yapının ancak çok hücreli canlılarda olabileceği düşünülür. Oysa dinoflagellat denen bazı tek hücrelilerde göze benzer bir yapı bulunur. Bu yapıda saydam bir ön katmana, merceğe, halkaya ve ışık alan bir tabakaya benzeyen parçalar vardır. Yapı o kadar karmaşıktır ki ilk başta çok hücreli bir göz sanılmıştı. Bu canlılar laboratuvarda yetiştirilemiyor ve doğada az bulunuyor. Bu yüzden yapının ne işe yaradığı ve nasıl oluştuğu bilinmiyordu. Araştırmacılar yapıyı elektron mikroskobu ve tek hücreden gen okuma yöntemleriyle inceledi. Saydam ön katman, hücrenin enerji üreten parçaları olan mitokondrilerden oluşuyordu. Işık alan tabakaya benzeyen parça ise plastit denen hücre parçalarının birleşmesiyle oluşmuştu. Yani yapı, hücrede zaten bulunan parçalardan kurulmuştu.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Tek hücreli bir canlıdaki göze benzer yapının nelerden kurulduğunu",
-            "Bu yapının hücreye dışarıdan giren parçalardan oluştuğunu",
+            "Göze benzer yapının hücrenin yeni ürettiği parçalardan kurulduğunu",
             "Kamera gibi çalışan gözlerin birkaç hayvan grubunda olduğunu",
             "Tek hücreli canlıların ışığa doğru nasıl yüzüp ilerlediğini"
           ]

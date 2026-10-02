@@ -177,19 +177,19 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Kurbağaların gürültülü derede daha yüksek perdeden seslenmesini",
-            "Seslerin çoğu özelliğinin her yerde benzer kalmasını",
+            "Kurbağaların gürültülü derede seslerini tamamen kesmesini",
             "Kurbağaların her derede hep aynı perdeden seslenmesini",
-            "Kurbağaların akıntılı derelerin kıyısında hangi böcekleri avladığını"
+            "Kurbağaların gürültülü derede daha alçak perdeden seslenmesini"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Bilim insanlarına göre kurbağa, çok yüksek perdeden seslenerek sesini neyden korur?",
+          "soru": "Ekip hangi kurbağaların seslerini kaydetti?",
           "secenekler": [
-            "Suyun uğultusunda kaybolmaktan",
-            "Akıntıya karışıp dağılmaktan",
-            "Yırtıcılarca duyulmaktan",
-            "Çabucak kısılmaktan"
+            "Erkek kurbağaların",
+            "Dişi kurbağaların",
+            "Yavru kurbağaların",
+            "Yaşlı kurbağaların"
           ]
         },
         {
@@ -244,7 +244,7 @@
       "yazar": "Brown ve ark.",
       "dergi": "Journal of Experimental Biology",
       "yil": 2022,
-      "metin": "Bir semender ağaçtan düşerken ne yapar? Bazı semenderler dünyanın en uzun ağaçlarının tepelerinde, dallarda yetişen eğrelti otlarının arasında yaşar. Bu semenderler rahatsız edildiklerinde hemen aşağı atlar. Kanat gibi özel bir yapıları yoktur; düşerken bacaklarını ve kuyruklarını hafifçe oynatarak dengede kalırlar. Araştırmacılar bu türü ve üç başka semender türünü iki durumda izledi: kısa bir yükseklikten düşerken ve yukarı doğru esen bir rüzgâr tünelinin içinde. Ağaçta yaşayan semenderler düşüşlerini yavaşlatmakta ve yönlendirmekte ötekilerden daha başarılıydı. Bunlardan ağaç tepesinde yaşayan tür ile yakın akrabası, düşerken hep paraşüt gibi yavaşlayıp süzüldü. Neredeyse dik düşüyorlardı, ama düşüşlerindeki küçük eğim bile onları kendi ağaçlarının gövdesine ya da yakın dallara ulaştırmaya yetiyordu.",
+      "metin": "Bir semender ağaçtan düşerken ne yapar? Bir semender türü dünyanın en uzun ağaçlarının tepelerinde, dallarda yetişen eğrelti otlarının arasında yaşar. Bu semenderler rahatsız edildiklerinde hemen aşağı atlar. Kanat gibi özel bir yapıları yoktur; düşerken bacaklarını ve kuyruklarını hafifçe oynatarak dengede kalırlar. Araştırmacılar bu türü ve üç başka semender türünü iki durumda izledi: kısa bir yükseklikten düşerken ve yukarı doğru esen bir rüzgâr tünelinin içinde. Ağaçta yaşayan semenderler düşüşlerini yavaşlatmakta ve yönlendirmekte ötekilerden daha başarılıydı. Bunlardan ağaç tepesinde yaşayan tür ile yakın akrabası, düşerken hep paraşüt gibi yavaşlayıp süzüldü. Neredeyse dik düşüyorlardı, ama düşüşlerindeki küçük eğim bile, yüksekten atladıklarında onları kendi ağaçlarının gövdesine ya da yakın dallara ulaştırmaya yetebilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -252,13 +252,13 @@
           "secenekler": [
             "Ağaçta yaşayan semenderlerin düşerken süzülmesini",
             "Semenderlerin eğrelti otlarının arasında yaşamasını",
-            "Bütün semenderlerin düşerken aynı ustalıkla süzülmesini",
-            "Semenderlerin kopan kuyruklarını nasıl yenilediğini"
+            "Semenderlerin ağaçtan ağaca uzun mesafeler süzülmesini",
+            "Ağaçta yaşayan semenderlerin süzülmede ötekilerden geri kalmasını"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Araştırmacılar bu türün yanında kaç semender türünü daha izledi?",
+          "soru": "Araştırmacılar ağaç tepesinde yaşayan türün yanında kaç semender türünü daha izledi?",
           "secenekler": [
             "Üç",
             "Bir",
@@ -293,17 +293,17 @@
             "Kısa bir yükseklikten düşerken ve rüzgâr tünelinde",
             "Büyük bir akvaryumda ve sığ bir havuzda yüzerken",
             "Karanlık bir mağarada ve toprak altında",
-            "Ağaç tepesinde, gece yuvalarında uyurken"
+            "Ağaç tepesinde tırmanırken ve dalda uyurken"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Düşüşlerindeki küçük eğim semenderleri nereye ulaştırmaya yetiyordu?",
+          "soru": "Düşüşlerindeki küçük eğim semenderleri nereye ulaştırmaya yetebilir?",
           "secenekler": [
             "Kendi ağaçlarının gövdesine ya da yakın dallara",
-            "Uzaktaki bir göle",
-            "Ormanın dışına",
-            "Başka bir dağa"
+            "Komşu ağacın tepesindeki eğrelti otlarına",
+            "Ağacın dibindeki toprağa ya da düşmüş yaprakların arasına",
+            "Rüzgârın sürüklediği uzak bir açıklığa"
           ]
         }
       ]

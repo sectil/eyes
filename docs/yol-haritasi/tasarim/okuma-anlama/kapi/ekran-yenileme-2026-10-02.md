@@ -67,5 +67,18 @@ Bu turdan önce ön denetim ve sığma denemesi de yapıldı:
 Örneklem: 30 metnin 13'ü E çıktı. Önceki turda bulunan sorunların hepsi düzelmişti; yalnız oa111 kısmen düzelmişti.
 Yeni bulgular çoğunlukla sorulardaydı: tahmin edilebilen çeldiriciler, soruya uymayan seçenekler. Birkaç metinde de
 mantık hatası vardı: oa095, oa002, oa019, oa021, oa046. Metin bankası iki turda geçmediği için orada da yöntem
-değişti: bankanın tamamı bağımsız okurlarca kusur için taranıyor, her kusur düzeltmeden sonra ayrıca doğrulanıyor. Sonucu
+değişti: bankanın tamamı bağımsız okurlarca kusur için tarandı, her kusur düzeltmeden sonra ayrıca doğrulandı. Sonucu
 banka-denetim-2026-10-02.md dosyasında.
+
+## Tur 4 · soru ekranı, halka 128 px
+Banka değişince 390'da en kötü durumda yedi soru sığmıyordu; halka 150 px'ten 128 px'e indi. Beş yeni okur:
+soru ekranı **5/5**. Aynı kapıda 30 metinlik örneklem 6/30 E çıktı; sahip kararı "Somut kusurları düzelt, bitir"
+(banka-denetim-2026-10-02.md, "Son kapı").
+
+## Sürüm notu 2026-10-02-5
+- Tur 1, tek değerlendirici beş okur gibi: A 3/5, B 3/5. "girişi" oturum açma diye okundu; "Türkçe olarak" ve
+  "düzeldi" takıldı.
+- Tur 2, beş ayrı okur: A **5/5**, B **4/5**. B'ye beşinci okurun "baştan sona" önerisi işlendi.
+  - A: "Oku ve Anla'yı açınca ne yapacağın artık adım adım yazıyor: metni oku, "Bitirdim"e bas, dört soruyu cevapla."
+  - B: "Oku ve Anla'daki bilim metinlerinin ve soruların Türkçesi baştan sona elden geçirildi; çeviri kokan, anlamı
+    kaymış cümleler düzeltildi."

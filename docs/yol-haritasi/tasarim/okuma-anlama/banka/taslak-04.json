@@ -41,7 +41,7 @@
             "Üçten fazla",
             "Yalnız bir",
             "Tam iki",
-            "Hiç gerekmedi"
+            "Tam üç"
           ]
         },
         {
@@ -66,7 +66,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Venüs sinekkapanı hangi topraklarda yetiştiğinde böcek yakalayarak beslenmek zorunda kalır?",
+          "soru": "Sinekkapanı hangi topraklarda böcekle beslenmek zorunda kalır?",
           "secenekler": [
             "Besin bakımından fakir topraklarda",
             "Çok sıcak çöl kumlarında",
@@ -316,7 +316,7 @@
           "secenekler": [
             "Mikropların sıradaki değişikliğe önceden hazırlanmasını",
             "Bazı mikropların ortamının gelişigüzel değişmesini",
-            "Mikropların değişikliğe ancak sonradan uyum sağlamasını",
+            "Mikropların sıradaki değişikliği önceden sezip ortamdan kaçmasını",
             "Mikropların sıradaki değişikliği komşu mikroplardan öğrenmesini"
           ]
         },
@@ -352,12 +352,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Erken gelen değişiklik hangi genleri çalıştırıyordu?",
+          "soru": "Geç gelen değişiklik hangi genleri çalıştırıyordu?",
           "secenekler": [
-            "İleride gerekecek genleri de",
-            "Yalnız kendisiyle başa çıkmaya yarayanları",
-            "Rastgele seçilen genleri",
-            "Yalnız rengi belirleyen genleri"
+            "Yalnız kendisiyle başa çıkmaya yarayan genleri",
+            "İleride gerekecek başka genleri de",
+            "Daha önce gelmiş değişikliğe yarayan genleri de",
+            "Hücreyi bölünmeye hazırlayan genleri"
           ]
         },
         {

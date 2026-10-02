@@ -22,26 +22,26 @@
       "yazar": "Drerup ve ark.",
       "dergi": "Journal of Experimental Biology",
       "yil": 2025,
-      "metin": "Birçok hayvan, çevresinin rengine ve dokusuna benzeyerek gizlenir. Sığ sularda ise dipteki görüntü durmadan değişir, çünkü dibin üzerinde parlak ışık bantları kayar. Mürekkep balıkları, derilerindeki küçük çıkıntıları kabartıp indirerek gizlenebilir. Araştırmacılar, kayan ışığın bu çıkıntıları etkileyip etkilemediğini sınadı. Hayvanlara dokusu ve rengi farklı taşlar gösterdiler; bunu hem kayan hem durgun ışıkta yaptılar. Gördükleri sahnede açık ve koyu yerler arasındaki fark büyüdükçe hayvanlar çıkıntılarını daha çok kabarttı. Kayan ışık bantları da, ortada bir taş olsa da olmasa da, çıkıntıları kabarttı. Peki bu tepki, avcılardan gizlenmeye yarayan bir uyum mu, yoksa hayvanın görme yeteneğindeki bir sınırdan mı kaynaklanıyor? Araştırmacılar bunu tartışıyor.",
+      "metin": "Birçok hayvan, çevresinin rengine ve dokusuna benzeyerek gizlenir. Sığ sularda ise dipteki görüntü durmadan değişir, çünkü dibin üzerinde parlak ışık bantları kayar. Mürekkep balıkları, derilerindeki küçük çıkıntıları kabartıp indirerek gizlenebilir. Araştırmacılar, kayan ışığın bu çıkıntıları etkileyip etkilemediğini sınadı. Hayvanlara dokusu ve rengi farklı taşlar gösterdiler; bunu hem kayan hem durgun ışıkta yaptılar. Hayvanlar, gördükleri sahnede açık ve koyu yerler arasındaki fark büyüdükçe çıkıntılarını daha çok kabarttı. Kayan ışık bantları da, ortada bir taş olsa da olmasa da, çıkıntıları kabarttı. Peki bu tepki, avcılardan gizlenmeye yarayan bir uyum mu, yoksa hayvanın görmesindeki bir sınırın sonucu mu? Araştırmacılar bunu tartışıyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Kayan ışığın mürekkep balıklarının deri çıkıntılarına etkisini",
-            "Mürekkep balıklarının gizlenmek için yalnız renklerini kullanmasını",
+            "Kayan ışığın mürekkep balıklarının rengini açmasını",
             "Sığ sularda dipteki görüntünün durmadan değişmesini",
-            "Mürekkep balıklarının avcılarından kaçarken mürekkep püskürtmesini"
+            "Kayan ışığın mürekkep balıklarının çıkıntılarını düzleştirmesini"
           ]
         },
         {
           "tur": "ayrinti",
           "soru": "Sığ sularda dipteki görüntü neden durmadan değişir?",
           "secenekler": [
-            "Dibin üzerinde parlak ışık bantları kayar",
-            "Dipteki kum akıntıyla sürekli yer değiştirir",
-            "Balık sürüleri dibe sık sık gölge düşürür",
-            "Dipteki yosunlar gün boyunca durmadan renk değiştirir"
+            "Dibin üzerinde parlak ışık bantları kaydığı için",
+            "Dipteki kum akıntıyla sürekli kaydığı için",
+            "Güneş ışığı dibe gün boyu farklı açıyla düştüğü için",
+            "Dipteki yosunlar durmadan renk değiştirdiği için"
           ]
         },
         {
@@ -56,7 +56,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Gördükleri sahnede açık ve koyu yerler arasındaki fark büyüyünce ne oldu?",
+          "soru": "Hayvanların gördüğü sahnede açık ve koyu yerler arasındaki fark büyüyünce ne oldu?",
           "secenekler": [
             "Hayvanlar çıkıntılarını daha çok kabarttı",
             "Hayvanlar çıkıntılarını tamamen düzleştirdi",
@@ -392,7 +392,7 @@
       "yazar": "Schulz ve ark.",
       "dergi": "Journal of the Royal Society Interface",
       "yil": 2021,
-      "metin": "Bir filin hortumu 100 kilogramdan ağırdır, ama filler çoğunlukla hafif bitkilerle beslenir. Bu kadar ağır bir hortum küçük şeyleri nasıl tutar? Bir ekip, Atlanta'daki bir hayvanat bahçesinde yaşayan filleri filme aldı. Filler hortumlarıyla havayı içeri çekerek, yani emerek yiyecek tutabiliyordu. Emerek yiyecek tutmanın daha önce yalnız balıklarda görüldüğü sanılıyordu. Ekibin hesabına göre filler, geniş burun delikleri ve büyük akciğerleri sayesinde, insan akciğerindekine yakın bir basınçla yiyecek emebiliyor. Ekip, fillerin havayı saniyede 150 metreden hızlı çekebildiğini tahmin ediyor; bu, insan hapşırığının yaklaşık 30 katı hızdır. Bu hız sayesinde filler sebze küplerini ve kolay kırılan cipsleri emerek toplayabildi. Ekip, bulguların robot çalışmalarına da ilham vermesini umuyor.",
+      "metin": "Bir filin hortumu 100 kilogramdan ağırdır, ama filler çoğunlukla hafif bitkilerle beslenir. Bu kadar ağır bir hortum küçük şeyleri nasıl tutar? Bir ekip, Atlanta'daki bir hayvanat bahçesinde yaşayan filleri filme aldı. Filler hortumlarıyla havayı içeri çekerek, yani emerek yiyecek tutabiliyordu. Emerek yiyecek tutmanın daha önce yalnız balıklarda görüldüğü sanılıyordu. Ekibin hesabına göre filler, geniş burun delikleri ve büyük akciğerleriyle yiyecek emerken bir insan akciğerinin yaratabildiğine yakın bir emme basıncı uyguluyor. Ekip, bu basınçla fillerin havayı saniyede 150 metreden hızlı çekebildiğini tahmin ediyor; bu, insan hapşırığının yaklaşık 30 katı hızdır. Bu hız sayesinde filler sebze küplerini ve kolay kırılan cipsleri emerek toplayabildi. Ekip, bulguların robot çalışmalarına da ilham vermesini umuyor.",
       "sorular": [
         {
           "tur": "ana",

@@ -308,7 +308,7 @@
       "yazar": "Wathan ve ark.",
       "dergi": "Scientific Reports",
       "yil": 2016,
-      "metin": "İnsanlar birbirinin yüzüne bakarak çok şey anlar: kızgınlık, sevinç ya da ilgi. Peki bu beceri yalnız insanlara ve maymunlar gibi yakın akrabalarına mı özgü? İngiltere'deki araştırmacılar bu soruyu evcil atlarla sınadı. Atlara, tanımadıkları başka atların yüz fotoğrafları gösterildi. Fotoğraflar farklı durumlarda çekilmişti. Kimisinde at rahat ve ilgili, kimisinde saldırgan görünüyordu. Deneydeki atlar, rahat ve ilgili görünen yüzlere daha çok yaklaştı. Saldırgan yüzlü fotoğraftan ise uzak durdular. Ekip atların kalp atışını da ölçtü. Olumlu ve saldırgan yüzler, kalp atışını farklı biçimlerde değiştirdi. Atlar bu ifadeleri kendiliğinden, hiç eğitim almadan ayırt etti. Demek ki insanla akrabalığı çok uzak olan atlar da yüz ifadelerinden bilgi çıkarabiliyor.",
+      "metin": "İnsanlar birbirinin yüzüne bakarak çok şey anlar: kızgınlık, sevinç ya da ilgi. Peki bu beceri yalnız insanlara ve maymunlar gibi yakın akrabalarına mı özgü? İngiltere'deki araştırmacılar bu soruyu evcil atlarla sınadı. Atlara, tanımadıkları başka atların yüz fotoğrafları gösterildi. Fotoğraflar farklı durumlarda çekilmişti. Kimisinde at rahat ve ilgili, kimisinde saldırgan görünüyordu. Deneydeki atlar, rahat ve ilgili görünen yüzlere daha çok yaklaştı. Saldırgan görünen yüzün fotoğrafından ise uzak durdular. Ekip atların kalp atışını da ölçtü. Olumlu ve saldırgan yüz ifadeleri, kalp atışını farklı biçimlerde değiştirdi. Atlar bu ifadeleri kendiliğinden, hiç eğitim almadan ayırt etti. Demek ki insanla akrabalığı çok uzak olan atlar da yüz ifadelerinden bilgi çıkarabiliyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -332,12 +332,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Atlar saldırgan yüzlü fotoğrafa ne yaptı?",
+          "soru": "Atlar saldırgan görünen at fotoğrafı karşısında nasıl davrandı?",
           "secenekler": [
-            "Uzak durdular",
-            "Hemen yaklaştılar",
-            "Önünde uyudular",
-            "Onu ısırdılar"
+            "Ondan uzak durdular",
+            "Ona daha çok yaklaştılar",
+            "Önünde uzun süre beklediler",
+            "Onu dikkatle kokladılar"
           ]
         },
         {
@@ -382,7 +382,7 @@
       "yazar": "Laumer ve ark.",
       "dergi": "Scientific Reports",
       "yil": 2024,
-      "metin": "Sumatra adasında yaşayan bir erkek orangutanın yüzünde bir yara açıldı. Araştırmacılar onu izlemeyi sürdürdü ve kısa süre sonra şaşırtıcı bir şey gördü. Yaralanmasından üç gün sonra orangutan, ormandaki bir sarmaşığın yapraklarını seçerek kopardı. Yaprakları çiğnedi ve çıkan suyu defalarca yarasına sürdü. Son olarak yaranın üzerini çiğnenmiş yapraklarla tamamen kapattı, tıpkı bir sargı gibi. Güneydoğu Asya'nın tropik ormanlarında yetişen bu sarmaşık, ağrı kesici ve ateş düşürücü etkileriyle biliniyor. Bazı hayvanların belli yaprakları yuttuğu ya da tüylerine sürdüğü daha önce de görülmüştü. Ama yabani bir hayvanın kendi yarasını bir bitkiyle böyle özenle tedavi ettiği ilk kez bu kadar ayrıntılı kaydedildi. Araştırmacılar bu davranışın, orangutanın kendi bulduğu yeni bir alışkanlık olabileceğini düşünüyor.",
+      "metin": "Sumatra adasında yaşayan bir erkek orangutanın yüzünde bir yara açıldı. Araştırmacılar onu izlemeyi sürdürdü ve kısa süre sonra şaşırtıcı bir şey gördü. Yaralanmasından üç gün sonra orangutan, ormandaki bir sarmaşığın yapraklarını seçerek kopardı. Yaprakları çiğnedi ve çıkan suyu defalarca yarasına sürdü. Son olarak yaranın üzerini çiğnenmiş yapraklarla tamamen kapattı, tıpkı bir sargı gibi. Güneydoğu Asya'nın tropik ormanlarında yetişen bu sarmaşık, ağrı kesici ve ateş düşürücü etkileriyle biliniyor. Bazı hayvanların belli yaprakları yuttuğu ya da tüylerine sürdüğü daha önce de görülmüştü. Ama yabani bir hayvanın kendi yarasını bir bitkiyle böyle özenle tedavi ettiği ilk kez bu kadar ayrıntılı kaydedildi. Araştırmacılar bu davranışın, orangutanın kendi bulduğu yeni bir yöntem olabileceğini düşünüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -390,8 +390,8 @@
           "secenekler": [
             "Bir orangutanın yarasını bir bitkiyle tedavi etmesini",
             "Kullanılan sarmaşığın Güneydoğu Asya'da yetişmesini",
-            "Bütün orangutanların yaralarını yapraklarla sarmayı bilmesini",
-            "Orangutanların sarmaşıklara tutunarak ağaçlarda gezmesini"
+            "Bir orangutanın yarasını başka orangutanlara temizletmesini",
+            "Bir orangutanın yaralanınca yaprakları tüylerine sürmesini"
           ]
         },
         {
@@ -473,9 +473,9 @@
           "soru": "Fotoğraflardaki kişi kimdi?",
           "secenekler": [
             "Keçilerin tanımadığı aynı kişi",
-            "Keçilerin bakıcısı",
-            "İki farklı çocuk",
-            "Bir çiftçi ailesi"
+            "Keçilerin her gün gördüğü bakıcı",
+            "Keçileri besleyen çiftlik sahibi",
+            "Keçilerin önceden tanıdığı bir çiftçi"
           ]
         },
         {

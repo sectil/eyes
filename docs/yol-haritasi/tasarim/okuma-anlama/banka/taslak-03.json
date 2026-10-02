@@ -288,12 +288,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip ıstakozları ne tür düzeneklere koydu?",
+          "soru": "Sonuçlara göre ıstakozlar Dünya'nın manyetik alanını nasıl kullanıyor olabilir?",
           "secenekler": [
-            "Belli yerlerin manyetik alanını taklit eden düzeneklere",
-            "Farklı su sıcaklıkları veren büyük havuzlara",
-            "Işığı tamamen kesen karanlık kutulara",
-            "Farklı kokular yayan uzun cam tüplerle donatılmış düzeneklere"
+            "Bir tür harita gibi",
+            "Bir tür pusula gibi",
+            "Bir tür yol işareti gibi",
+            "Bir tür saat gibi"
           ]
         }
       ]
@@ -382,7 +382,7 @@
       "yazar": "Putman ve ark.",
       "dergi": "Current Biology",
       "yil": 2011,
-      "metin": "Uzun yolculuk yapan bir hayvan yolunu bulmak için iki şeyi bilmelidir: ne kadar kuzeyde ya da güneyde, ne kadar doğuda ya da batıda olduğunu. Birincisine enlem, ikincisine boylam denir. Bazı hayvanların enlemi manyetik ipuçlarıyla bulduğu biliniyordu. Ama hiçbir hayvanın boylamı nasıl algıladığı bilinmiyordu. Dünya'nın manyetik alanı da bu iş için uygun görünmüyordu, çünkü genellikle doğu-batı yönünde, kuzey-güney yönünde olduğundan daha az değişir. Araştırmacılar Florida'da yumurtadan yeni çıkmış iribaş deniz kaplumbağalarıyla çalıştı. Atlas Okyanusu'nun iki yakasındaki, aynı enlemde bulunan iki yerin manyetik alanını taklit ettiler. Yavrular bu iki alanda farklı yönlere yüzdü. İki yön de onları daire biçimindeki göç yollarında ilerletecek yöndü. Böylece bir göçmen hayvanın boylamı manyetik alandan okuyabildiği ilk kez gösterildi.",
+      "metin": "Uzun yolculuk yapan bir hayvan yolunu bulmak için iki şeyi bilmelidir: ne kadar kuzeyde ya da güneyde, ne kadar doğuda ya da batıda olduğunu. Birincisine enlem, ikincisine boylam denir. Bazı hayvanların enlemi manyetik ipuçlarıyla bulduğu biliniyordu. Ama hiçbir hayvanın boylamı nasıl algıladığı bilinmiyordu. Manyetik alan da bu iş için uygun görünmüyordu, çünkü genellikle doğu-batı yönünde, kuzey-güney yönünde olduğundan daha az değişir. Araştırmacılar Florida'da yumurtadan yeni çıkmış Caretta caretta türü deniz kaplumbağalarıyla çalıştı. Atlas Okyanusu'nun iki yakasındaki, aynı enlemde bulunan iki yerin manyetik alanını taklit ettiler. Yavrular bu iki alanda farklı yönlere yüzdü. İki yön de onları daire biçimindeki göç yolunda ilerletecekti. Böylece bir göçmen hayvanın boylamı manyetik alandan okuyabildiği ilk kez gösterildi.",
       "sorular": [
         {
           "tur": "ana",
@@ -396,12 +396,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bazı hayvanların enlemi neyle bulduğu biliniyordu?",
+          "soru": "Manyetik alanı taklit edilen iki yer hangi bakımdan aynıydı?",
           "secenekler": [
-            "Manyetik ipuçlarıyla",
-            "Yıldızlara bakarak",
-            "Kokuları izleyerek",
-            "Dalgaların yönüyle"
+            "Aynı enlemdeydiler",
+            "Aynı boylamdaydılar",
+            "Aynı derinlikteydiler",
+            "Aynı sıcaklıktaydılar"
           ]
         },
         {
@@ -438,10 +438,10 @@
           "tur": "ayrinti",
           "soru": "Araştırmacılar hangi iki yerin manyetik alanını taklit etti?",
           "secenekler": [
-            "Atlas Okyanusu'nun iki yakasındaki, aynı enlemde bulunan iki yer",
+            "Atlas Okyanusu'nun iki yakasındaki iki yer",
             "Aynı kıyıda birbirine çok yakın iki kumsal",
             "Biri kuzey kutbunda biri ekvatorda iki yer",
-            "Pasifik Okyanusu'nun ortasında birbirinden çok uzak iki küçük ada"
+            "Pasifik Okyanusu'nun ortasındaki iki küçük ada"
           ]
         }
       ]
@@ -464,8 +464,8 @@
           "secenekler": [
             "Bir kertenkelenin taklit yoluyla öğrenebilmesini",
             "Taklidin uzun süre insana özgü sanılmasını",
-            "Sürüngenlerin hiçbir hareketi taklit edememesini",
-            "Kertenkelelerin kuyruğunu koparıp kaçmasını"
+            "Bir kertenkelenin bir insanı izleyerek öğrenebilmesini",
+            "Bir kertenkelenin kendi kendine açılan kapaktan öğrenebilmesini"
           ]
         },
         {
@@ -474,17 +474,17 @@
           "secenekler": [
             "Sakallı ejder denen bir kertenkele",
             "Bukalemun denen bir kertenkele",
-            "Bir deniz kaplumbağası",
-            "Bir timsah yavrusu ile annesi birlikte"
+            "Geko denen bir kertenkele",
+            "İguana denen bir kertenkele"
           ]
         },
         {
           "tur": "ayrinti",
           "soru": "İlk gruptaki kertenkeleler neyi izledi?",
           "secenekler": [
-            "Başka bir sakallı ejderin bir kapağı açışını",
-            "Bir insanın yere yem bırakışını",
-            "Bir kuşun yuva yapışını",
+            "Başka bir kertenkelenin bir kapağı bir yana açışını",
+            "Bir insanın bir kapağı bir yana açışını",
+            "Bir kuşun bir kapağı gagasıyla açışını",
             "Başka bir kertenkelenin kumda derin bir yuva kazışını"
           ]
         },
