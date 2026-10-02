@@ -1,7 +1,7 @@
 # Rakam Avı · görünür metinler (2026-10-01)
 
 Durum: **T** taslak · **K** 5 sn kapısından geçti (ekranıyla) · **B** benim onayım · **S** sahip onayı.
-Sahip onayı istenenler: K B olanlar (2026-10-02, henüz cevap yok). S olanlar onaylı.
+Sahip onayı: S olanlar onaylı (2026-10-02, "ONAY" ve "OK").
 Ana oturum yalnız S olanları harfi harfine kullanır. `{…}` yer tutucuyu kod doldurur.
 
 Yasaklar: sağlık ve "zekâ" iddiası yok; "beyin" ve "tanıma" yok; değişim sözcükleri yalnız "başlangıcından iyi",
@@ -10,20 +10,20 @@ Yasaklar: sağlık ve "zekâ" iddiası yok; "beyin" ve "tanıma" yok; değişim 
 ## Ad
 | # | Metin | Durum |
 |---|---|---|
-| A1 | Rakam Avı | K B (iki turda 10/10 değerlendirici ilk bakışta anladı) |
+| A1 | Rakam Avı | **S** (iki turda 10/10 değerlendirici ilk bakışta anladı) |
 | A2 | Kart alt satırı: 4 haneli diziyi ızgarada bul · 2 dk | T |
 
 ## Giriş (G) · ekran 5 sn kapısından geçti (tur 2, 5/5)
 | # | Metin | Durum |
 |---|---|---|
-| G1 | Rakam Avı | K B |
-| G1b | Üst satır: Dikkat · arama | K B |
-| G1c | Sağ üst: 2 dk · 5 dizi | K B |
-| G2 | Bu diziyi bul | K B |
-| G3 | Izgarada 5 kez saklı. Bulunca parmağını üstünden kaydır. | K B |
-| G4 | Adımlar: 1 Diziye bak · 2 Izgarada ara · 3 Üstünden kaydır | K B |
-| G5 | Geri sayım yok. Her tur yeni bir ızgara. | K B |
-| G6 | Başla | K B |
+| G1 | Rakam Avı | **S** |
+| G1b | Üst satır: Dikkat · arama | **S** |
+| G1c | Sağ üst: 2 dk · 5 dizi | **S** |
+| G2 | Bu diziyi bul | **S** |
+| G3 | Izgarada 5 kez saklı. Bulunca parmağını üstünden kaydır. | **S** |
+| G4 | Adımlar: 1 Diziye bak · 2 Izgarada ara · 3 Üstünden kaydır | **S** |
+| G5 | Geri sayım yok. Her tur yeni bir ızgara. | **S** |
+| G6 | Başla | **S** |
 | G8 | Kısa giriş (4. turdan sonra): Bu diziyi bul · 5 kez saklı | T |
 
 ## İddia sınırı (I)
@@ -34,13 +34,13 @@ Yasaklar: sağlık ve "zekâ" iddiası yok; "beyin" ve "tanıma" yok; değişim 
 ## Oyun (O) · bulundu anı kapıdan geçti (tur 2, 5/5); kaydırma anı geçmedi, kapı kodda
 | # | Metin | Durum |
 |---|---|---|
-| O1 | Aranan | K B |
-| O2 | {k} / 5 | K B |
-| O3 | Buldun · {t} sn (o dizinin süresi) | K B |
+| O1 | Aranan | **S** |
+| O2 | {k} / 5 | **S** |
+| O3 | Buldun · {t} sn (o dizinin süresi) | **S** |
 | O4 | Bu dizi değil (yanlış kaydırmada, 1 sn) | T |
 | O5 | Göster (90 sn sonra) | T |
 | O6 | Kalan diziler (Göster'e basınca) | T |
-| O7 | Kendi hızında ara. Geri sayım yok. | K B (tur 3) |
+| O7 | Kendi hızında ara. Geri sayım yok. | **S** (tur 3) |
 
 ## Sonuç (S) · kapıdan geçmedi; son hâl kodda kapıya girer
 | # | Metin | Durum |
