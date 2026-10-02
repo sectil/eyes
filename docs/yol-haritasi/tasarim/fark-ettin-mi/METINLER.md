@@ -119,7 +119,7 @@ Kapı: kapi/metin-tur6 (9 satırdan 8'i 5/5; "0 geçti" 0/5), metin-tur7 (sıfı
   Kırmızı kasalar · Sepetler · Çiçek dolu kovalar · Balonlar · Uçurtmalar · Koşanlar · Toplar · Bebek arabaları ·
   Güvercinler.
 
-## Ezberleme başlığı ve sonuç başlığı (2026-10-02) — durum K: kapıdan geçti, sahip onayı bekliyor
+## Ezberleme başlığı ve sonuç başlığı (2026-10-02) — durum S: sahip onaylı ("İyi bak, birazdan bir şey değişecek." ve S0 "Onaylıyorum", 2026-10-02)
 Neden: ekran kapısı 3. turda (kare dizileri) beş yargıç da ilk 3 saniyede başlığın "Bir şey değişti. Nerede?" demesini
 yanlış buldu (henüz bir şey değişmedi); sonuçta büyük "14 nesne" kişiye sonuç söylemiyor. Kapı: kapi/metin-tur9, 10, 11.
 - B1 · Ne değişti?, ilk 3 saniye başlığı: "İyi bak, birazdan bir şey değişecek." (5/5; "İyi bak.", "Bu sahneye iyi bak.",
