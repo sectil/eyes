@@ -28,8 +28,8 @@ Sahip onayı olmadan koda girmez: taslak → 5 kişilik kapı → kendi onayım 
 - Dört seçenek, tek doğru. Doğru cevap metinde açıkça yazar; yorum ya da genel kültür gerekmez.
 - Tuzak yok: "hangisi yanlıştır", "değildir", çift olumsuz yok. Yanlış seçenekler metinde hiç geçmeyen ya da açıkça
   başka bir şey söyleyen seçeneklerdir. Doğruya yarım yamalak benzeyen, "kısmen doğru" seçenek yazılmaz.
-- Seçenekler aşağı yukarı aynı uzunlukta; doğru seçenek en uzun olmaya alışmasın diye en az bir yanlış seçenek
-  ondan uzun ya da eşit tutulur. VARSAYIM: bu kural pilotla sınanır.
+- Seçenekler aşağı yukarı aynı uzunlukta. Doğru seçenek bir takımda soruların %15–35'inde en uzun olur; böylece ne
+  "en uzun doğrudur" ne "en uzun yanlıştır" tahmini işler. `denetle.mjs` ölçer.
 - Bankada doğru seçenek ilk sıradadır; uygulama şıkları her gösterimde karıştırır.
 
 ## 4. Banka

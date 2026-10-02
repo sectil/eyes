@@ -31,15 +31,15 @@ Bu istem, `taslak-NN.json` takımlarını yazan ajan içindir. Sahip `taslak-01.
 - Sade Türkçe; parantez yok; "beyin", "hastalık", "tehlike" yok.
 - Makale cümlesi çevrilmez; baştan Nefona Türkçesiyle yazılır.
 - Başlık 2–6 kelime, merak uyandırır, bulguyu ele vermez.
-- Etiket: `bocek, kus, memeli, deniz, bitki, insan, mikro, surungen`. Bir takımda en çok 3 `memeli`. Takımda en az
-  5 farklı etiket olur.
+- Etiket: `bocek, kus, memeli, deniz, bitki, insan, mikro, surungen`. Bir takımda en çok 3 `memeli`, en az 4 farklı
+  etiket. Banka genelinde hiçbir etiket %30'u geçmez.
 
 ## Soru kuralı
 - Doğru cevap metinde açıkça yazar.
 - "Yanlış", "değildir", "olmayan" sorusu yok.
 - Yanlış seçenekler metinde hiç geçmeyen ya da açıkça başka şey söyleyen seçeneklerdir. "Kısmen doğru" seçenek yok.
   Aralık sorularında yanlış aralıklar doğru aralıkla örtüşmez.
-- En az bir yanlış seçenek doğru seçenek kadar uzun olur.
+- Doğru seçenek takımdaki soruların %15–35'inde en uzun olur, kalanında değil. `denetle.mjs` ölçer.
 
 ## Bitirmeden önce
 1. `node banka/denetle.mjs banka/taslak-*.json` hatasız geçmeli.

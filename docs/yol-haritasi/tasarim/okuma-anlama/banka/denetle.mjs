@@ -9,6 +9,12 @@ const ETIKET = new Set(['bocek', 'kus', 'memeli', 'deniz', 'bitki', 'insan', 'mi
 let bad = 0
 for (const f of files) {
   const b = JSON.parse(readFileSync(f, 'utf8'))
+  // Doğru seçenek takımın %15–35 sorusunda en uzun olur: ne "en uzun doğrudur" ne "en uzun yanlıştır" tahmini işler
+  let qn = 0, longest = 0
+  for (const t of b.metinler) for (const q of t.sorular) { qn++; const L = q.secenekler.map((x) => x.length); if (L[0] > Math.max(...L.slice(1))) longest++ }
+  const oran = longest / qn
+  console.log(`${f}: doğru seçenek en uzun ${longest}/${qn} (%${Math.round(oran * 100)})`)
+  if (oran < 0.15 || oran > 0.35) { console.log(`${f}: HATA uzunluk oranı %15–35 dışında`); bad++ }
   for (const t of b.metinler) {
     const e = []
     const words = t.metin.trim().split(/\s+/).length, chars = t.metin.length
