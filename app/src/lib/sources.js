@@ -9,6 +9,8 @@
 export const DESIGNS = {
   meta: 'Meta-analiz',
   review: 'Sistematik derleme',
+  // Sistematik olmayan, anlatı biçiminde derleme (ör. Rayner 2016; sahip onayı 2026-10-02)
+  narrative: 'Derleme',
   cohort: 'Prospektif kohort çalışması',
   validation: 'Geçerlik ve güvenirlik çalışması',
   rct: 'Randomize kontrollü çalışma',
@@ -25,7 +27,7 @@ export const DESIGNS = {
   expert: 'Uzman önerisi',
 }
 // Kanıtın gücü için kaba sıra (yüksek = daha güçlü). Kullanıcıya "ne kadar güvenilir?" diye gösterilir.
-export const DESIGN_RANK = { meta: 4, review: 3, rct: 3, mrt: 3, crossover: 3, cohort: 2, experiment: 2, field: 2, quasi: 2, validation: 1, prepost: 1, observational: 1, case: 0, expert: 0 }
+export const DESIGN_RANK = { meta: 4, review: 3, narrative: 1, rct: 3, mrt: 3, crossover: 3, cohort: 2, experiment: 2, field: 2, quasi: 2, validation: 1, prepost: 1, observational: 1, case: 0, expert: 0 }
 
 export const SOURCES = {
   ulrich1984: {
@@ -517,13 +519,12 @@ export const SOURCES = {
   },
   // Oku ve Anla (okuma-anlama/arastirma/KAYNAKLAR.md §A; künye PubMed'den, 2026-10-02). finding/limit yok: bilim kartı
   // cümleleri henüz kapıdan ve sahip onayından geçmedi.
-  // VARSAYIM: Rayner 2016 anlatı derlemesi; DESIGNS'ta ayrı tür yok, 'review' seçildi (sahibe soruldu).
   rayner2016: {
     authors: ['Rayner K', 'Schotter ER', 'Masson ME', 'Potter MC', 'Treiman R'], year: 2016,
     title: 'So Much to Read, So Little Time: How Do We Read, and Can Speed Reading Help?',
     titleTr: 'Okunacak çok şey, az zaman: Nasıl okuruz ve hızlı okuma işe yarar mı?',
     journal: 'Psychol Sci Public Interest', cite: '17(1):4-34', doi: '10.1177/1529100615623267', pmid: '26769745',
-    design: 'review',
+    design: 'narrative', // VARSAYIM: güç sırası 1 (sistematik olmayan derleme; geçerlik çalışmasıyla aynı)
   },
   kuperman2021: {
     authors: ['Kuperman V', 'Kyröläinen AJ', 'Porretta V', 'Brysbaert M', 'Yang S'], year: 2021,

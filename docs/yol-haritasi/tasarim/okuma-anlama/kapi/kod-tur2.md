@@ -29,3 +29,7 @@ Tur 1 düzeltmelerinden sonra (`kod-tur1.md` "Tur 2 için yapılanlar"). Yeni 5 
 ## Karar
 Kural: en çok 2 tur, sonra yöntem değişir ya da sahibe sorulur. Sonuç ve sayılmadı ekranlarının düzeltilmiş hâli
 sahibe gösterildi; karar sahibin.
+
+## Sahip kararı (2026-10-02)
+Düzeltilmiş sonuç ve sayılmadı ekranları (390 açık, 320 koyu ve açık görüntüleri) sahibe gösterildi. Sahibin cevabı,
+kelimesi kelimesine: "onay". Beş ekran tamam: giris 4/5, metin 5/5, soru 5/5, sonuc ve sayilmadi sahip onayı.
