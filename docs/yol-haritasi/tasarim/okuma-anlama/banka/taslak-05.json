@@ -46,7 +46,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip kayıtları ne kadar süre boyunca topladı?",
+          "soru": "Ekibin incelediği kayıtlar ne kadar sürede toplanmıştı?",
           "secenekler": [
             "Yirmi yıl",
             "İki yıl",
@@ -226,74 +226,74 @@
     },
     {
       "id": "oa044",
-      "baslik": "Sol mu, sağ mı?",
+      "baslik": "Ebabilin uzun yolculuğu",
       "etiket": "kus",
-      "kaynak": "rugani2015",
-      "pmid": "25635096",
-      "doi": "10.1126/science.aaa1379",
-      "yazar": "Rugani ve ark.",
-      "dergi": "Science",
-      "yil": 2015,
-      "metin": "Sayılar bir çizgi üzerinde sıralansa, küçükler hangi yanda durur? İnsanlar sayıları zihinlerinde bir çizgi gibi düşünür; küçük sayılar solda, büyükler sağda yer alır. Bu düzenin nereden geldiği ve kültürel deneyimle bağı henüz açık değil. Henüz konuşmayan bebekler ve başka türler de sayılarla ilgili birçok beceri gösteriyor. Bir ekip, 3 günlük evcil civcivlerle deneyler yaptı. Civcivler önce 5 sayısına alıştırıldı. Sonra kendiliğinden 2 sayısını sol yanla, 8 sayısını sağ yanla eşleştirdiler. Alıştırılan sayı 20 olduğunda ise aynı 8 sayısı sol yanla eşleşti. Yani aynı sayı, alıştırılan sayıya göre bazen sola, bazen sağa yerleşti. Araştırmacılara göre civcivler de insanlar gibi küçük sayıları sola, büyükleri sağa yerleştiriyor.",
+      "kaynak": "hedenstrom2016",
+      "pmid": "28094028",
+      "doi": "10.1016/j.cub.2016.09.014",
+      "yazar": "Hedenström ve ark.",
+      "dergi": "Current Biology",
+      "yil": 2016,
+      "metin": "Bir kuş aylarca hiç konmadan yaşayabilir mi? Ebabiller, yiyeceklerini ve yuva malzemelerini havada yakalar. Bilim insanları, bu kuşların üreme dönemi dışında, Sahra'nın güneyine yaptıkları göç de dahil, hep havada kaldığını tahmin ediyordu. Kışın ebabil görmek zordu ve Afrika'da konakladıkları bir yer hiç bulunmamıştı. Bir ekip, bazı ebabillere hareketi ölçen küçük bir kayıt aygıtı taktı. İkinci yıl aygıtlara, kuşun yerini ışıktan bulan bir algılayıcı da eklendi. Kayıtlar, ebabillerin üreme dönemi dışındaki 10 ayın %99'undan fazlasında havada kaldığını gösterdi. Bazı kuşlar bu sürede hiç konmadı. Gündüz ölçülen uçuş hareketi geceden azdı; büyük olasılıkla kuşlar gündüz sıcak hava akımlarında uzun süre süzülüyordu. Araştırmacılara göre bu sonuç, uzun uçuşa nasıl dayanıldığını ve havada uyuma gereğini anlamak için önemli.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Civcivlerin küçük sayıları sola, büyükleri sağa koymasını",
-            "Civcivlerin annelerini tanımasını",
-            "Bebeklerin konuşmayı öğrenmesini",
-            "Tavukların yem seçmesini"
+            "Ebabillerin aylarca havada kalmasını",
+            "Ebabillerin yuvalarını çamurdan yapmasını",
+            "Kuşların kışın Afrika'da yuva kurmasını",
+            "Kuşların gece şarkı söylemesini"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Deneydeki civcivler kaç günlüktü?",
+          "soru": "Ebabiller yiyeceklerini nerede yakalar?",
           "secenekler": [
-            "3 günlük",
-            "10 günlük",
-            "1 aylık",
-            "1 yaşında"
+            "Havada",
+            "Suyun yüzeyinde",
+            "Ağaç kabuklarının altında",
+            "Yerde otların arasında"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Civcivler önce hangi sayıya alıştırıldı?",
+          "soru": "Ebabiller üreme dönemi dışındaki zamanın ne kadarında havada kaldı?",
           "secenekler": [
-            "5",
-            "2",
-            "8",
-            "12"
+            "%99'undan fazlasında",
+            "Yarısı kadarında",
+            "Dörtte üçü kadarında",
+            "%10'undan azında"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Alıştırılan sayı 5 iken civcivler 2 sayısını hangi yanla eşleştirdi?",
+          "soru": "Ebabillerin üreme dönemi dışındaki zamanı kaç ay sürüyor?",
           "secenekler": [
-            "Sol yanla",
-            "Sağ yanla",
-            "Ön yanla",
-            "Arka yanla"
+            "10 ay",
+            "2 ay",
+            "4 ay",
+            "6 ay"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Alıştırılan sayı 20 olunca 8 sayısı hangi yanla eşleşti?",
+          "soru": "Gündüz uçuş hareketinin az olmasının olası nedeni neydi?",
           "secenekler": [
-            "Sol yanla",
-            "Sağ yanla",
-            "Üst yanla",
-            "Hiçbir yanla"
+            "Sıcak hava akımlarında süzülmeleri",
+            "Ağaç dallarında dinlenmeleri",
+            "Yağmurdan saklanmaları",
+            "Binaların çatısında uyumaları"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Metne göre insanlar zihinlerinde büyük sayıları nereye yerleştirir?",
+          "soru": "Ekip ebabillere ne taktı?",
           "secenekler": [
-            "Çizginin sağına",
-            "Çizginin soluna",
-            "Çizginin tam ortasına",
-            "Çizginin altına"
+            "Hareketi ölçen küçük bir kayıt aygıtı",
+            "Renkli bir ayak halkası",
+            "Küçük bir kamera",
+            "Sesi kaydeden bir mikrofon"
           ]
         }
       ]

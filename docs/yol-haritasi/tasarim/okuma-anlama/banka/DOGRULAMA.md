@@ -1,5 +1,20 @@
 # Bilimsel doğrulama kayıtları
 
+## taslak-05
+
+PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor. Uzunluk oranı sonrası: doğru seçenek en uzun 16/60 (%27).
+
+- oa041 | tamam | kayıt süresi sorusu "ekip topladı" yerine metne uygun "ekibin incelediği kayıtlar ne kadar sürede toplanmıştı" yapıldı (kayıtları ekip toplamadı, inceledi)
+- oa042 | tamam | değişiklik yok
+- oa043 | tamam | değişiklik yok
+- oa044 | değiştirildi: rugani2015 (25635096, civcivlerde sayı-yön eşlemesi) Science'taki eleştiri yorumu (26113714) nedeniyle tartışmalı sayılıp çıkarıldı; yerine hedenstrom2016 (28094028, ebabilin üreme dışı 10 ayının %99'undan fazlasını havada geçirmesi) yazıldı, 114 kelime / 831 harf | 6 yeni soru; aralık sorusunda yanlış aralıklar (yarısı, dörtte üçü, %10'dan az) %99'la örtüşmüyor
+- oa045 | tamam ("cam kurbağası" yerleşik ad) | değişiklik yok
+- oa046 | tamam | değişiklik yok
+- oa047 | tamam ("mantis karidesi" yerleşik ad) | değişiklik yok
+- oa048 | tamam ("aynı kuşaktan, akraba olmayan" özetteki yatay aktarım tanımına dayanıyor) | değişiklik yok
+- oa049 | tamam | değişiklik yok
+- oa050 | tamam | değişiklik yok
+
 ## taslak-04
 
 PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor. Uzunluk oranı sonrası: doğru seçenek en uzun 20/60 (%33).
