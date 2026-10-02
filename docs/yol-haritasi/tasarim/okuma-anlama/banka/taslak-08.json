@@ -12,7 +12,7 @@
       "yazar": "Mehr ve ark.",
       "dergi": "Current Biology",
       "yil": 2018,
-      "metin": "İnsanlar pek çok iş için şarkı söyler: dans etmek, bebeği yatıştırmak ya da sevgisini anlatmak için. Peki hiç tanımadığımız bir topluluğun şarkısını duyunca, ne işe yaradığını anlayabilir miyiz? Bir ekip bunu internet üzerinden sınadı. 60 ülkeden 750 kişi, çoğu küçük topluluklarda kaydedilmiş şarkılardan kısa parçalar dinledi. Parçalar arasında dans şarkıları, ninniler ve aşk şarkıları vardı; her biri yalnız 14 saniye sürüyordu. Dinleyiciler her şarkının ne için söylendiğini puanladı. Bu toplulukları hiç tanımadıkları hâlde, şarkıların işini doğru tahmin ettiler. İkinci bir deneyde başka dinleyiciler, şarkıcının kadın mı erkek mi olduğu gibi ipuçlarını ve ezginin karmaşıklığı gibi müzik özelliklerini puanladı. Sonuçlar, bir şarkının kulağa gelişiyle işlevi arasında dünyanın her yerinde geçerli bir bağ olabileceğini düşündürüyor.",
+      "metin": "İnsanlar pek çok iş için şarkı söyler: dans etmek, bebeği yatıştırmak ya da sevgilerini anlatmak için. Peki hiç tanımadığımız bir topluluğun şarkısını duyunca, şarkının ne işe yaradığını anlayabilir miyiz? Bir ekip bunu internette sınadı. 60 ülkeden 750 kişi, çoğu küçük topluluklarda kaydedilmiş şarkılardan kısa parçalar dinledi. Parçalar arasında dans şarkıları, ninniler ve aşk şarkıları vardı; her biri yalnız 14 saniye sürüyordu. Dinleyiciler her şarkının ne için söylendiğini puanladı. Bu toplulukları hiç tanımadıkları hâlde tahminleri doğru çıktı. İkinci bir deneyde başka dinleyiciler, şarkıcının kadın mı erkek mi olduğu gibi ipuçlarını ve ezginin karmaşıklığı gibi müzik özelliklerini puanladı. Sonuçlar, bir şarkının kulağa nasıl geldiğiyle ne işe yaradığı arasında, dünyanın her yerinde geçerli bir bağ olabileceğini düşündürüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -56,12 +56,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Dinleyiciler toplulukları tanımadıkları hâlde ne başardı?",
+          "soru": "Dinlenen şarkıların çoğu nerelerde kaydedilmişti?",
           "secenekler": [
-            "Şarkıların işini doğru tahmin ettiler",
-            "Şarkıcıların adlarını bildiler",
-            "Şarkıların sözlerini tek tek çevirdiler",
-            "Şarkıları hangi topluluğun söylediğini buldular"
+            "Küçük topluluklarda",
+            "Büyük konser salonlarında",
+            "Radyo stüdyolarında",
+            "Okul korolarında"
           ]
         },
         {
@@ -86,7 +86,7 @@
       "yazar": "Lafer-Sousa ve ark.",
       "dergi": "Current Biology",
       "yil": 2015,
-      "metin": "İnternette bir elbise fotoğrafı yayılınca insanlar ikiye bölündü: kimi elbiseyi beyaz ve altın rengi, kimi mavi ve siyah gördü. Oysa fotoğraftaki renkler aslında kahverengi ve maviydi. Bu bölünme, internetteki sorunun yalnız iki seçenekle sorulmasından mı doğmuştu? Bir ekip bunu anlamak için 1401 kişiye, seçenek vermeden elbisenin rengini sordu. Fotoğrafı ilk kez görenler dahil çoğu kişi yine beyaz ve altın ya da mavi ve siyah dedi; bazıları ise mavi ve kahverengi gördü. Yaşlılar ve kadınlar arasında beyaz ve altın diyenler daha çoktu. Yeniden sorulunca bazı kişilerin gördüğü renk değişti. Ekibe göre herkes, fotoğraftaki ışığın nasıl bir ışık olduğunu farklı tahmin ediyor olabilir. Nitekim fotoğrafa ışığı belli eden ipuçları eklenince elbisenin görünen rengi değişti.",
+      "metin": "İnternette bir elbise fotoğrafı yayılınca insanlar ikiye bölündü: kimi elbiseyi beyaz ve altın rengi, kimi mavi ve siyah gördü. Oysa fotoğraftaki renkler aslında kahverengi ve maviydi. Bu bölünme, internetteki sorunun yalnız iki seçenekle sorulmasından mı doğmuştu? Bir ekip bunu anlamak için 1401 kişiye, seçenek vermeden elbisenin rengini sordu. Fotoğrafı ilk kez görenler dahil çoğu kişi yine beyaz ve altın ya da mavi ve siyah dedi; bazıları ise mavi ve kahverengi gördü. Yaşlılar ve kadınlar arasında beyaz ve altın diyenler daha çoktu. Yeniden sorulunca bazı kişilerin gördüğü renk değişti. Ekibe göre insanlar, fotoğrafın nasıl bir ışıkta çekildiğini farklı tahmin ediyor olabilir. Nitekim fotoğrafa ışığı belli eden ipuçları eklenince elbisenin görünen rengi değişti.",
       "sorular": [
         {
           "tur": "ana",
@@ -115,7 +115,7 @@
             "Seçenek vermeden",
             "İki seçenek sunarak",
             "Renk kartı göstererek",
-            "Elbiseyi elle tutturarak"
+            "Dört renkten birini seçtirerek"
           ]
         },
         {
@@ -160,7 +160,7 @@
       "yazar": "Kilteni ve ark.",
       "dergi": "eLife",
       "yil": 2019,
-      "metin": "Kendimize dokunduğumuzda his, başkasının aynı dokunuşundan daha zayıf gelir ve daha az gıdıklar. Çünkü hareketimizin nasıl bir dokunuş yaratacağını önceden kestiririz. Bu kestirimin işe yaraması için zamanlamanın da tutması gerekir. Bir ekip, bu zamanlamanın sonradan değişip değişemeyeceğini araştırdı. Deneyde kişi bir elini oynatınca öteki eline bir dokunuş geliyordu. Ama bu dokunuş, hareketten hep belli bir gecikmeyle geliyordu. Bu gecikmeyi tekrar tekrar yaşayanlar, anında gelen dokunuşu zayıf hissetmeyi hızla bıraktı; bunun yerine gecikmeli dokunuşu zayıf hissetmeye başladı. Değişimin ne kadar büyük olacağı, kişinin kaç deneme yaptığına bağlıydı. Artık gecikmeli dokunuşlar onları daha az, anında gelenler daha çok gıdıklıyordu. Demek ki kendi dokunuşumuzu zayıf hissetmemiz, duruma göre ayarlanabiliyor.",
+      "metin": "Kendi dokunuşumuz, başkasının aynı dokunuşundan daha zayıf gelir ve bizi daha az gıdıklar. Çünkü hareketimizin nasıl bir dokunuş yaratacağını önceden kestiririz. Bu kestirimin işe yaraması için dokunuşun beklenen anda gelmesi de gerekir. Bir ekip, beklenen bu anın sonradan değişip değişemeyeceğini araştırdı. Deneyde kişi bir elini oynatınca öteki eline bir dokunuş geliyordu. Ama bu dokunuş, hareketten hep belli bir gecikmeyle geliyordu. Bu gecikmeyi tekrar tekrar yaşayanlar, anında gelen dokunuşu zayıf hissetmeyi hızla bıraktı; bunun yerine gecikmeli dokunuşu zayıf hissetmeye başladı. Değişimin ne kadar büyük olacağı, kişinin kaç deneme yaptığına bağlıydı. Artık gecikmeli dokunuşlar onları daha az, anında gelenler daha çok gıdıklıyordu. Demek ki kendi dokunuşumuzu zayıf hissetmemiz, duruma göre ayarlanabiliyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -174,12 +174,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kendimize dokunduğumuzda his nasıl gelir?",
+          "soru": "Deneyde kişi bir elini oynatınca ne oluyordu?",
           "secenekler": [
-            "Daha zayıf ve daha az gıdıklayıcı",
-            "Daha güçlü ve daha çok gıdıklayıcı",
-            "Başkasının dokunuşuyla tamamen aynı",
-            "Yalnız gözümüz açıkken hissedilir"
+            "Öteki eline bir dokunuş geliyordu",
+            "Bir zil sesi duyuluyordu",
+            "Ekranda bir ışık yanıyordu",
+            "Kolu hafifçe titreşiyordu"
           ]
         },
         {
@@ -234,7 +234,7 @@
       "yazar": "Box ve ark.",
       "dergi": "PNAS",
       "yil": 2024,
-      "metin": "Bitkilerde hızlı hareket pek görülmez, ama tohumunu fırlatarak dağıtan bitkiler için bu hız şarttır. Eşek hıyarı, tohumlarını yüksek basınçlı bir sıvı fışkırtarak atar. Bu olay yüzyıllardır bilim insanlarının ilgisini çekse de nasıl işlediği tam bilinmiyordu. Bir ekip; deneyleri, yüksek hızlı kamerayla çekilen videoları ve matematik modellerini bir araya getirdi. Fırlatmayı sağlayan iç basıncı ölçtüler. Beklenmedik bir ayrıntı da buldular: fırlatmadan önce meyvenin içindeki sıvının bir kısmı sapa geçiyordu. Tohumlar, kendi boylarının 2000 katından daha uzağa gidebiliyordu. Bu özellikler birlikte, tohumların ana bitkiden uzakta neredeyse eşit biçimde dağılmasını sağlıyordu. Ekibe göre bu dağılım, aynı türden bitkiler arasındaki rekabeti azaltabilir.",
+      "metin": "Bitkilerde hızlı hareket pek görülmez, ama tohumunu fırlatarak dağıtan bitkiler için bu hız şarttır. Eşek hıyarı, tohumlarını yüksek basınçlı bir sıvıyla birlikte fışkırtarak atar. Bu olay yüzyıllardır bilim insanlarının ilgisini çekse de nasıl işlediği tam bilinmiyordu. Bir ekip bunu deneyler, yüksek hızlı kamera çekimleri ve matematik modelleriyle inceledi. Fırlatmayı sağlayan iç basıncı ölçtü. Beklenmedik bir ayrıntı da buldu: fırlatmadan önce meyvenin içindeki sıvının bir kısmı sapa geçiyordu. Tohumlar, kendi boylarının 2000 katından daha uzağa gidebiliyordu. Bütün bunlar bir araya gelince tohumlar, ana bitkiden uzakta neredeyse eşit biçimde dağılıyordu. Ekibe göre bu dağılım, aynı türden bitkiler arasındaki rekabeti azaltabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -250,7 +250,7 @@
           "tur": "ayrinti",
           "soru": "Eşek hıyarı tohumlarını nasıl atar?",
           "secenekler": [
-            "Yüksek basınçlı bir sıvı fışkırtarak",
+            "Yüksek basınçlı bir sıvıyla fışkırtarak",
             "Kabuğunu yavaşça açıp dökerek",
             "Rüzgâra bırakarak",
             "Hayvanların tüylerine yapıştırıp uzağa taşıtarak"
@@ -258,12 +258,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip hangi yöntemleri bir araya getirdi?",
+          "soru": "Ekip bu olayı nasıl inceledi?",
           "secenekler": [
-            "Deneyleri, videoları ve matematik modellerini",
-            "Eski kitaplardaki çizimleri ve botanik bahçesi kayıtlarını",
-            "Çiftçilerle yapılan görüşmeleri",
-            "Uzaydan çekilen fotoğrafları"
+            "Deneyler, kamera çekimleri ve modellerle",
+            "Eski kitaplardaki çizimlere bakarak",
+            "Çiftçilerle görüşerek",
+            "Uzaydan çekilen fotoğraflarla"
           ]
         },
         {
@@ -308,7 +308,7 @@
       "yazar": "Toyota ve ark.",
       "dergi": "Science",
       "yil": 2018,
-      "metin": "Hayvanların vücudunda bir yerde olan bir şeyin haberi, uzak bölgelere hızla ulaşmalıdır. Omurgalıların sinir sisteminde bu iş için kullanılan maddelerden biri glutamattır. Glutamat bir amino asittir ve sinir hücreleri arasında uyarı taşır. Bitkiler de benzer bir sorunla karşılaşır. Örneğin otçul bir hayvan bir yaprağı yemeye başlayınca, bitki bu yerel olayı fark eder ve haberi bütün gövdesine yayar. Böylece zarar görmemiş bölgelerde de savunma hızla başlar. Bir ekip, glutamatın bitkilerde bir yara sinyali olduğunu gösterdi. Bu sinyali hücrelerdeki bazı iyon kanalları algılıyor. Kanallar, sinyali hücre içindeki kalsiyumun artışına çeviriyor. Bu kalsiyum artışı uzaktaki organlara yayılıyor ve orada savunma tepkilerini başlatıyor.",
+      "metin": "Bir hayvanın vücudunun bir yerinde olan bir olayın haberi, uzaktaki bölgelere de hızla ulaşmalıdır. Omurgalıların sinir sisteminde bu haberleri taşıyan maddelerden biri glutamattır. Glutamat bir amino asittir ve sinir hücreleri arasında sinyal taşır. Bitkilerin de benzer bir ihtiyacı vardır. Örneğin otçul bir hayvan bir yaprağı yemeye başlayınca, bitki bunu fark eder ve haberi her yanına yayar. Böylece zarar görmemiş bölgelerde de savunma hızla başlar. Bir ekip, glutamatın bitkilerde de yaralanma haberini taşıyan bir sinyal olduğunu gösterdi. Bu sinyali hücrelerdeki bazı iyon kanalları algılıyor. Kanallar sinyali alınca, hücrenin içindeki kalsiyum miktarı artıyor. Bu kalsiyum artışı bitkinin uzaktaki bölümlerine yayılıyor ve orada savunma tepkilerini başlatıyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -324,7 +324,7 @@
           "tur": "ayrinti",
           "soru": "Omurgalıların sinir sisteminde glutamat ne işe yarar?",
           "secenekler": [
-            "Sinir hücreleri arasında uyarı taşır",
+            "Sinir hücreleri arasında sinyal taşır",
             "Kemiklerin büyümesini ve güçlenmesini sağlar",
             "Kanın pıhtılaşmasını sağlar",
             "Vücudun sıcaklığını korur"
@@ -352,17 +352,17 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "İyon kanalları sinyali neye çeviriyor?",
+          "soru": "İyon kanalları sinyali alınca hücrenin içinde ne artıyor?",
           "secenekler": [
-            "Hücre içindeki kalsiyumun artışına",
-            "Yapraktaki suyun hızla buharlaşmasına",
-            "Gövdenin ısınmasına",
-            "Yaprağın kapanmasına"
+            "Kalsiyum miktarı",
+            "Hücredeki suyun miktarı",
+            "Hücrenin sıcaklığı",
+            "Şeker miktarı"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Kalsiyum artışı uzaktaki organlara ulaşınca ne oluyor?",
+          "soru": "Kalsiyum artışı bitkinin uzaktaki bölümlerine ulaşınca ne oluyor?",
           "secenekler": [
             "Savunma tepkileri başlıyor",
             "Yeni yapraklar açılıyor",
@@ -382,7 +382,7 @@
       "yazar": "Volland ve ark.",
       "dergi": "Science",
       "yil": 2022,
-      "metin": "Bakterilerin çoğu çok küçüktür; hücreleri yaklaşık 2 mikrometre boyundadır; bir mikrometre, milimetrenin binde biridir. Bilinen en büyük bakteriler bile 750 mikrometre dolayındaydı. Bir ekip, çeşitli mikroskoplar kullanarak ve kalıtım bilgisini okuyarak bir bakteri türünü ayrıntılı biçimde inceledi. Bu bakterinin hücreleri ortalama 9000 mikrometreden, yani 9 milimetreden uzundu ve çıplak gözle görülebiliyordu. Bakteri, hücre büyüklüğü için öngörülen sınırları çok aşıyordu. Hücre, çok büyük kalıtım bilgisinin yarım milyondan fazla kopyasını taşıyordu. Bu kalıtım malzemesi, zarla çevrili bölmelerin içinde duruyordu. Ekibe göre bu özellikler, bu bakteri soyunun daha karmaşık bir yapı kazandığını gösteriyor. Bulgular, bakteri hücresi hakkındaki alışılmış düşünceleri sarsıyor.",
+      "metin": "Bakterilerin çoğu çok küçüktür: hücreleri yaklaşık 2 mikrometre boyundadır. Bir mikrometre, milimetrenin binde biridir. Bilinen en büyük bakteriler bile 750 mikrometre dolayındaydı. Bir ekip, çeşitli mikroskoplar kullanarak ve kalıtım bilgisini okuyarak bir bakteri türünü ayrıntılı biçimde inceledi. Bu bakterinin hücreleri ortalama 9000 mikrometreden, yani 9 milimetreden uzundu ve çıplak gözle görülebiliyordu. Bu boy, bir bakteri hücresinin ulaşabileceği sanılan boyun çok üstündeydi. Hücrenin kalıtım bilgisi çok büyüktü ve hücrede bu bilginin yarım milyondan fazla kopyası vardı. Bu kopyalar, zarla çevrili bölmelerin içinde duruyordu. Ekibe göre bütün bunlar, bu bakteri grubunun daha karmaşık bir yapı kazandığını gösteriyor. Bulgular, bakteri hücresi hakkındaki alışılmış düşünceleri sarsıyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -416,17 +416,17 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip bakteriyi incelerken neler kullandı?",
+          "soru": "Ekip bakteriyi hangi yollarla inceledi?",
           "secenekler": [
-            "Mikroskopları ve kalıtım bilgisini okumayı",
-            "Yalnız büyüteç ve cetveli",
-            "Bakteriyi tartan, çok hassas bir laboratuvar terazisini",
-            "Bakterinin çıkardığı sesleri"
+            "Mikroskoplarla ve kalıtım bilgisini okuyarak",
+            "Yalnız büyüteç ve cetvelle",
+            "Bakteriyi çok hassas bir laboratuvar terazisiyle tartarak",
+            "Bakterinin çıkardığı sesleri kaydederek"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Hücre kalıtım bilgisinin kaç kopyasını taşıyordu?",
+          "soru": "Hücrede kalıtım bilgisinin kaç kopyası vardı?",
           "secenekler": [
             "Yarım milyondan fazla",
             "Yalnız bir tane",
@@ -436,7 +436,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kalıtım malzemesi hücrede nerede duruyordu?",
+          "soru": "Kalıtım bilgisinin kopyaları hücrede nerede duruyordu?",
           "secenekler": [
             "Zarla çevrili bölmelerin içinde",
             "Hücrenin dışındaki bir kabukta",
@@ -456,7 +456,7 @@
       "yazar": "Shmakova ve ark.",
       "dergi": "Current Biology",
       "yil": 2021,
-      "metin": "Sürekli donmuş topraklarda bazı canlılar çok uzun süre korunabilir. Daha önce bu tür topraklardan alınan tohum dokusundan bitkiler yetiştirilmiş, nematod denen solucanlar yeniden canlandırılmıştı. Bdelloid denen rotiferler, gözle görülemeyecek kadar küçük, çok hücreli hayvanlardır ve çok düşük sıcaklıklara dayanmalarıyla bilinir. Önceki kayıtlarda donmuş hâlde 6 ila 10 yıl sonra canlandıkları bildirilmişti. Bir ekip, Sibirya'nın kuzeydoğusundaki donmuş topraktan canlı bir rotifer çıkardı. Toprağın yaşı yaklaşık 24 bin yıl olarak belirlendi. Bu, bir rotiferin donmuş hâlde canlı kaldığı bildirilen en uzun süre oldu. Deneylerde bu eski rotifer, yavaşça soğutulup en az yedi gün donmuş kalmaya dayandı. Laboratuvarda eş olmadan çoğalarak sürekli yeni bireyler üretebildi.",
+      "metin": "Sürekli donmuş topraklarda bazı canlılar çok uzun süre korunabilir. Daha önce bu tür topraklardan alınan tohum dokusundan bitkiler yetiştirilmiş, nematod denen minik kurtlar yeniden canlandırılmıştı. Rotiferler, gözle görülemeyecek kadar küçük, çok hücreli hayvanlardır. Bunların bdelloid denen bir grubu, çok düşük sıcaklıklara dayanmasıyla bilinir. Önceki kayıtlara göre bu rotiferler, donmuş hâlde 6 ila 10 yıl kaldıktan sonra canlanabiliyordu. Bir ekip, Sibirya'nın kuzeydoğusundaki donmuş topraktan canlı bir bdelloid rotifer çıkardı. Toprağın yaklaşık 24 bin yıllık olduğu belirlendi. Bu, bir rotiferin donmuş hâlde canlı kaldığı bildirilen en uzun süre oldu. Deneylerde bu eski rotifer, yavaşça soğutulup en az yedi gün donmuş kalmaya dayandı. Laboratuvarda eş olmadan çoğalarak sürekli yeni bireyler üretebildi.",
       "sorular": [
         {
           "tur": "ana",
@@ -470,17 +470,17 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Metne göre bdelloid rotiferler nasıl canlılardır?",
+          "soru": "Metne göre rotiferler nasıl canlılardır?",
           "secenekler": [
             "Çok küçük, çok hücreli hayvanlar",
             "Tek hücreli bakteriler",
             "Toprakta yaşayan, gözle görülmeyen bitkiler",
-            "Göz kadar büyük böcekler"
+            "Gözle kolayca görülen iri böcekler"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Önceki kayıtlarda bu rotiferlerin donmuş hâlde ne kadar sonra canlandığı bildirilmişti?",
+          "soru": "Önceki kayıtlara göre bu rotiferler donmuş hâlde ne kadar kaldıktan sonra canlanabiliyordu?",
           "secenekler": [
             "6 ila 10 yıl",
             "1 ila 2 ay",
@@ -514,8 +514,8 @@
           "secenekler": [
             "Eş olmadan",
             "Yalnız soğukta yumurtlayarak",
-            "Başka rotiferlerle birleşerek",
-            "Hiç çoğalmadı"
+            "Bir eşle çiftleşerek",
+            "Başka hayvanların içinde yaşayarak"
           ]
         }
       ]
@@ -530,7 +530,7 @@
       "yazar": "Lauga ve ark.",
       "dergi": "Biophysical Journal",
       "yil": 2005,
-      "metin": "E. coli, en çok incelenen bakterilerden biridir ve sıvının içinde yüzerek ilerler. Bu bakteri katı bir yüzeyin yakınında yüzerken ilginç bir şey yapar: saat yönünde daireler çizer. Peki bunun nedeni ne olabilir? Bir ekip, bu davranışı açıklamak için sıvının hareketine dayanan bir model kurdu. Yüzen bir bakteriyi dışarıdan iten ya da döndüren bir güç yoktur. Modele göre bakteri ile yüzey, aradaki sıvı aracılığıyla birbirini etkiler; daireler bu etkinin doğal sonucudur. Aynı etki, bakterileri yüzeye yakın tutar; sanki onları orada hapseder. Ekip, modelin sonuçlarını deneylerde ölçülen verilerle karşılaştırdı ve ikisinin makul ölçüde uyuştuğunu gördü. Ayrıca gövdesi daha uzun olan bakterilerin daha geniş daireler çizdiği görüldü.",
+      "metin": "E. coli, en çok incelenen bakterilerden biridir ve sıvının içinde yüzerek ilerler. Bu bakteri katı bir yüzeyin yakınında yüzerken ilginç bir şey yapar: saat yönünde daireler çizer. Peki bunun nedeni ne olabilir? Bir ekip, bu davranışı açıklamak için sıvının hareketine dayanan bir model kurdu. Bakteri kendi gücüyle yüzer; onu dışarıdan iten ya da döndüren ayrı bir kuvvet yoktur. Modele göre ise bakteri ile yüzey, aradaki sıvı aracılığıyla birbirini etkiler; daireler de bu etkinin doğal sonucudur. Aynı etki, bakterileri yüzeye yakın tutar; sanki onları orada hapseder. Ekip, modelin sonuçlarını deneylerde ölçülen verilerle karşılaştırdı ve ikisinin oldukça iyi uyuştuğunu gördü. Ayrıca gövdesi daha uzun olan bakterilerin daha geniş daireler çizdiği görüldü.",
       "sorular": [
         {
           "tur": "ana",
@@ -554,22 +554,22 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekibin kurduğu model neye dayanıyordu?",
+          "soru": "Ekip, modelin sonuçlarını neyle karşılaştırdı?",
           "secenekler": [
-            "Sıvının hareketine",
-            "Bakterinin kalıtım bilgisine",
-            "Işığın yönüne",
-            "Suyun sıcaklığına"
+            "Deneylerde ölçülen verilerle",
+            "Başka bakterilerin fotoğraflarıyla",
+            "Eski kitaplardaki çizimlerle",
+            "Bakterilerin sayısındaki artışla"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Metne göre yüzen bir bakteri için hangisi doğrudur?",
+          "soru": "Modele göre bakteri ile yüzey birbirini nasıl etkiler?",
           "secenekler": [
-            "Onu dışarıdan iten ya da döndüren bir güç yoktur",
-            "Yüzeye çarpınca hemen durur",
-            "Yalnız ışığa doğru yüzebilir",
-            "Sürekli başka bakterilerce itilir"
+            "Aradaki sıvı aracılığıyla",
+            "Birbirine doğrudan çarparak",
+            "Elektrik yüküyle birbirini çekerek",
+            "Bakteri yüzeye yapışarak"
           ]
         },
         {
@@ -604,7 +604,7 @@
       "yazar": "Clarke ve ark.",
       "dergi": "Science",
       "yil": 2013,
-      "metin": "Böcekler yiyecek ararken pek çok ipucundan yararlanır. Çiçeğin rengi, biçimi, deseni ve kokusu bunlardan bazılarıdır. Bir ekip, bir bombus arısı türünde daha önce fark edilmemiş bir duyu buldu: çiçeklerin elektrik alanını algılamak. Bu alan da arıya çiçek hakkında bir ipucu veriyor. Arılar doğal olarak elektrik yükü taşır; bu yüzden bir arı çiçeğe konunca çiçeğin alanı değişir. Gözle görülen işaretler gibi elektrik alanlarının da farklı desenleri ve yapıları var. Arılar bu farkları ayırt edebiliyor. Elektrik alanı bilgisi, öteki ipuçlarıyla birlikte, arının hangi çiçekte yiyecek bulduğunu hatırlamasını kolaylaştırıyor. Bu alanlar saniyeler içinde değişebildiği için, çiçeklerle arılar arasında hızlı bir iletişim yolu olabilir.",
+      "metin": "Böcekler yiyecek ararken pek çok ipucundan yararlanır. Çiçeğin rengi, biçimi, deseni ve kokusu bunlardan bazılarıdır. Bir ekip, bir bombus arısı türünde daha önce fark edilmemiş bir duyu buldu: çiçeklerin elektrik alanını algılamak. Bu alan da arıya çiçek hakkında bir ipucu veriyor. Arılar doğal olarak elektrik yükü taşır; bu yüzden bir arı çiçeğe konunca çiçeğin elektrik alanı değişir. Tıpkı çiçeklerin renk desenleri gibi, elektrik alanlarının desenleri de çiçekten çiçeğe değişiyor. Arılar bu farkları ayırt edebiliyor. Elektrik alanından gelen bilgi, öteki ipuçlarıyla birlikte, arının hangi çiçekte yiyecek bulduğunu hatırlamasını kolaylaştırıyor. Bu alanlar saniyeler içinde değişebildiği için, çiçeklerle arılar arasında hızlı bir iletişim yolu olabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -618,12 +618,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Böceklerin yiyecek ararken kullandığı ipuçlarından biri hangisidir?",
+          "soru": "Metinde elektrik alanlarının desenleri neye benzetiliyor?",
           "secenekler": [
-            "Çiçeğin kokusu",
-            "Çiçeğin sıcaklığı",
-            "Çiçeğin çıkardığı ses",
-            "Çiçeğin yaşı"
+            "Çiçeklerin renk desenlerine",
+            "Örümcek ağlarına",
+            "Arı kovanının peteklerine",
+            "Suya düşen damlaların halkalarına"
           ]
         },
         {
@@ -648,7 +648,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Elektrik alanı bilgisi arıya ne konuda yardım ediyor?",
+          "soru": "Elektrik alanından gelen bilgi arıya ne konuda yardım ediyor?",
           "secenekler": [
             "Yiyecek bulduğu çiçeği hatırlamakta",
             "Kovanın yolunu bulmakta",
@@ -678,13 +678,13 @@
       "yazar": "Guerra ve Reppert",
       "dergi": "Current Biology",
       "yil": 2013,
-      "metin": "Kuzey Amerika'nın doğusundaki monark kelebekleri her sonbahar kuzeyden, Meksika'nın ortasındaki kışlama yerlerine göç eder. Bu yolculukta yönlerini güneşe bakarak bulurlar. Güneş gün boyunca gökte yer değiştirir; kelebekler bu kaymayı duyargalarındaki iç saatlerle hesaba katar ve güneye doğru sabit bir yön tutar. İlkbaharda aynı kelebekler kuzeye, Birleşik Devletler'in güneyine döner. Bir ekip, kelebeklerin dönüşte de duyargalarına bağlı aynı güneş pusulasını kullandığını gösterdi. Peki yön neden tersine dönüyor? Bu, göçün uzun süredir çözülemeyen bilmecelerinden biriydi. Sonbahar göçmenleri erkenden, kışlama yerindekine benzer bir soğukta tutulunca kuzeye yöneldi. Soğuk görmeyen yaşlı göçmenler ise güneye yönelmeyi sürdürdü. Demek ki göçün tamamlanması için kışlama yerindeki soğuk şart.",
+      "metin": "Kuzey Amerika'nın doğusundaki monark kelebekleri her sonbaharda kuzeyden, Meksika'nın ortasındaki kışlama yerlerine göç eder. Bu yolculukta yönlerini güneşe bakarak bulurlar. Güneş gün boyunca gökte yer değiştirir; kelebekler bu kaymayı duyargalarındaki iç saatlerle hesaba katar ve güneye doğru sabit bir yön tutar. İlkbaharda aynı kelebekler kuzeye, Birleşik Devletler'in güneyine döner. Bir ekip, kelebeklerin dönüşte de duyargalarına bağlı aynı güneş pusulasını kullandığını gösterdi. Peki yön neden tersine dönüyor? Bu, göçün uzun süredir çözülemeyen bilmecelerinden biriydi. Sonbahar göçmenleri, vakti gelmeden kışlama yerindekine benzer bir soğukta tutulunca kuzeye yöneldi. Soğukla hiç karşılaşmadan yaşlanan göçmenler ise güneye yönelmeyi sürdürdü. Demek ki göçün tamamlanması için kışlama yerindeki soğuk şart.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Soğuğun monark kelebeklerini kuzeye yönelttiğini",
+            "Soğuğun monark kelebeklerini kuzeye yöneltmesini",
             "Kelebeklerin kanat desenlerinin nasıl oluştuğunu",
             "Kelebeklerin çiçeklerden nasıl beslendiğini",
             "Kelebeklerin yumurtalarını nereye bıraktığını"
@@ -722,7 +722,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Erkenden soğukta tutulan sonbahar göçmenleri ne yaptı?",
+          "soru": "Kışlama yerindekine benzer bir soğukta tutulan sonbahar göçmenleri ne yaptı?",
           "secenekler": [
             "Kuzeye yöneldi",
             "Güneye uçmayı sürdürdü",
@@ -732,12 +732,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Soğuk görmeyen yaşlı göçmenler hangi yöne yöneldi?",
+          "soru": "Monark kelebekleri ilkbaharda nereye döner?",
           "secenekler": [
-            "Güneye",
-            "Kuzeye",
-            "Doğuya",
-            "Batıya"
+            "Birleşik Devletler'in güneyine",
+            "Kanada'nın kuzeyine",
+            "Avrupa kıyılarına",
+            "Güney Amerika'ya"
           ]
         }
       ]

@@ -22,7 +22,7 @@
       "yazar": "Bielecki ve ark.",
       "dergi": "Current Biology",
       "yil": 2023,
-      "metin": "Sinirleri bedenine dağılmış bir hayvan, yaşadıklarından ders çıkarabilir mi? Deneyimle böyle öğrenme bugüne kadar yalnız omurgalılar, eklembacaklılar ve yumuşakçalar gibi hayvanlarda kesin olarak görülmüştü. Kutu denizanalarından bir tür, mangrov ağaçlarının sudaki kökleri arasında beslenir. Bu sırada önüne çıkan engelleri görür ve onlardan kaçar. Araştırmacılar bu davranıştan yararlanarak denizanasının öğrenip öğrenemediğini sınadı. Denizanaları engellerden kaçmayı deneyimle öğrendi. Öğrenirken gözle gördükleri işaretleri, dokunarak aldıkları uyarılarla birleştirdiler. Bu denizanasının sinir sistemi dağınıktır; çoğu hayvandaki gibi tek bir merkezde toplanmaz. Bu yüzden bulgu, öğrenmenin karmaşık sinir devreleri gerektirdiği görüşünü sarsıyor. Böyle öğrenmenin bütün sinir sistemlerinin temel bir özelliği olabileceğini de düşündürüyor.",
+      "metin": "Sinirleri bedenine dağılmış bir hayvan, yaşadıklarından ders çıkarabilir mi? Böyle bir öğrenme bugüne kadar kesin olarak yalnız omurgalılar, eklembacaklılar ve yumuşakçalar gibi hayvan gruplarında görülmüştü. Kutu denizanalarından bir tür, mangrov ağaçlarının sudaki kökleri arasında beslenir. Bu sırada önüne çıkan engelleri görür ve onlardan kaçar. Araştırmacılar bu davranıştan yararlanarak denizanasının öğrenip öğrenemediğini sınadı. Denizanaları, engellerden kaçmayı deneyimle öğrendi. Öğrenirken, gördükleri işaretleri dokunarak hissettikleriyle birleştirdiler. Bu denizanasının sinir sistemi dağınıktır; çoğu hayvandaki gibi tek bir merkezde toplanmaz. Bu yüzden bulgu, öğrenmenin karmaşık sinir devreleri gerektirdiği görüşünü sarsıyor. Bulgu, böyle öğrenmenin bütün sinir sistemlerinin temel bir özelliği olabileceğini de düşündürüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -60,7 +60,7 @@
           "secenekler": [
             "Omurgalılar, eklembacaklılar ve yumuşakçalar gibi hayvanlarda",
             "Yalnız memelilerde",
-            "Yalnız bitkilerde ve mantarlarda",
+            "Yalnız mercanlarda ve süngerlerde",
             "Hiçbir hayvanda"
           ]
         },
@@ -68,7 +68,7 @@
           "tur": "ayrinti",
           "soru": "Denizanası öğrenirken gördüğü işaretleri neyle birleştiriyordu?",
           "secenekler": [
-            "Dokunarak aldığı uyarılarla",
+            "Dokunarak hissettiğiyle",
             "Suyun sıcaklığındaki küçük değişimlerle",
             "Ayın evreleriyle",
             "Yiyeceğin kokusuyla"
@@ -96,7 +96,7 @@
       "yazar": "Hayashi ve ark.",
       "dergi": "Journal of Experimental Biology",
       "yil": 2024,
-      "metin": "Mercan resiflerindeki balıklar parlak renkleriyle dikkat çeker. Palyaço balıkları da bedenlerindeki beyaz çizgilerle tanınır. Bu balıklar bir deniz şakayığına yerleşir ve onu kendi bölgesi gibi korur. Bilinen 28 türün bedeninde sıfır ile üç arasında beyaz çizgi bulunur. Bu çizgilerin, balıkların kendi türlerini tanımasına yaradığı düşünülüyordu. Araştırmacılar, üç çizgili bir türün akvaryumda doğup büyümüş bireylerini inceledi. Bölgelerine başka bir palyaço balığı girince, bu balıklar kendi türlerinden olana öteki türlerden olanlara göre daha sık saldırdı. Ekip sonra 120 balığa çizgisiz, bir, iki ve üç çizgili maketler gösterdi. En çok saldırı alan, üç çizgili maket oldu. Balıklar ona, kendi türlerinden canlı bir balığa olduğu kadar sık saldırdı. Demek ki bu balıklar, aynı şakayığı isteyebilecek rakiplerini çizgi sayısından tanıyor.",
+      "metin": "Palyaço balıkları bedenlerindeki beyaz çizgilerle tanınır. Bu balıklar bir deniz şakayığına yerleşir ve onu başka balıklara karşı korur. Bilinen 28 türün kiminde hiç beyaz çizgi yoktur, kiminde ise bir, iki ya da üç çizgi bulunur. Bu çizgilerin, balıkların kendi türlerinden olanları tanımasına yaradığı düşünülüyordu. Araştırmacılar, üç çizgili bir türün akvaryumda doğup büyümüş bireylerini inceledi. Bölgelerine başka bir palyaço balığı girince bu balıklar, kendi türlerinden olana başka türlerden olanlara göre daha sık saldırdı. Ekip sonra 120 balığa çizgisiz, bir, iki ve üç çizgili maketler gösterdi. Balıklar en çok üç çizgili makete saldırdı. Bu makete, kendi türlerinden canlı bir balığa saldırdıkları kadar sık saldırdılar. Demek ki bu balıklar, aynı şakayığı isteyebilecek rakiplerini çizgi sayısından tanıyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -110,22 +110,22 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Palyaço balıkları nerede yaşar?",
+          "soru": "Bölgelerine giren palyaço balıklarından hangisine daha sık saldırdılar?",
           "secenekler": [
-            "Bir deniz şakayığında",
-            "Batık gemilerin içinde",
-            "Kumun altına kazdıkları tünellerde",
-            "Deniz yosunlarının yapraklarında"
+            "Kendi türlerinden olana",
+            "Başka türlerden olana",
+            "En küçük olana",
+            "Çizgisi olmayana"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Bilinen palyaço balığı türlerinde kaç beyaz çizgi bulunur?",
+          "soru": "Bilinen palyaço balığı türlerinde en çok kaç beyaz çizgi bulunur?",
           "secenekler": [
-            "Sıfır ile üç arasında",
-            "Dört ile altı arasında",
-            "Yedi ile on arasında",
-            "Her türde tam beş"
+            "Üç",
+            "Beş",
+            "Yedi",
+            "On"
           ]
         },
         {
@@ -142,10 +142,10 @@
           "tur": "ayrinti",
           "soru": "Balıklara kaç çeşit maket gösterildi?",
           "secenekler": [
-            "Dört: çizgisiz, bir, iki ve üç çizgili",
-            "İki: çizgisiz ve üç çizgili",
-            "Üç: bir, iki ve üç çizgili",
-            "Beş: bir ile beş çizgi arası"
+            "Dört",
+            "İki",
+            "Üç",
+            "Beş"
           ]
         },
         {
@@ -170,7 +170,7 @@
       "yazar": "Gordon ve ark.",
       "dergi": "Nature Communications",
       "yil": 2019,
-      "metin": "Dünyanın her yerinde mercan resifleri insan etkisiyle giderek daha çok zarar görüyor. Sağlıklı bir balık topluluğu, resifin bozulmasına karşı koymaya yardım eder. Ama bozulmuş bir resifin kokusu da sesi de değişir. Bu yüzden yerleşecek yer arayan balıklara sağlıklı bir resif kadar çekici gelmez. Araştırmacılar bu sorunu sesle çözmeyi denedi. Altı hafta süren bir deneyde, mercan kırıntılarından oluşan resif öbeklerine hoparlörle sağlıklı bir resifin sesi çalındı. Öteki öbeklerde ise hiçbir ses değiştirilmedi. Ses çalınan öbeklerde balık sayısı ötekilerin iki katına çıktı. Tür sayısı da yüzde 50 daha fazlaydı. Artış, farklı biçimde beslenen bütün büyük balık gruplarında görüldü. Ekibe göre bu yol, resif onarımı ve iyi bir korumayla birlikte kullanılırsa toparlanmayı hızlandırabilir.",
+      "metin": "Mercan resifleri insan etkisiyle giderek daha çok zarar görüyor. Sağlıklı bir balık topluluğu, resifin bozulmaya dayanmasına yardım eder. Ama bozulmuş bir resifin kokusu da sesi de değişir. Bu yüzden bozulmuş resif, yerleşecek yer arayan balıklara sağlıklı bir resif kadar çekici gelmez. Araştırmacılar bu sorunu sesle çözmeyi denedi. Altı hafta süren bir deneyde, mercan kırıntılarından oluşan resif öbeklerinin bir kısmına hoparlör kondu ve sağlıklı bir resifin sesi çalındı. Öteki öbeklere hiçbir ses eklenmedi. Ses çalınan öbeklerde balık sayısı ötekilerin iki katına çıktı. Tür sayısı da yüzde 50 daha fazlaydı. Artış, beslenme biçimi farklı olan bütün büyük balık gruplarında görüldü. Ekibe göre bu yöntem, resif onarımı ve iyi bir korumayla birlikte kullanılırsa resiflerin toparlanmasını hızlandırabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -226,7 +226,7 @@
           "tur": "ayrinti",
           "soru": "Artış hangi balıklarda görüldü?",
           "secenekler": [
-            "Farklı biçimde beslenen bütün büyük balık gruplarında",
+            "Beslenme biçimi farklı olan bütün büyük gruplarda",
             "Yalnız bitkiyle beslenen balıklarda",
             "Yalnız en küçük balıklarda",
             "Yalnız resifte doğmuş balıklarda"
@@ -244,7 +244,7 @@
       "yazar": "Plotnik ve ark.",
       "dergi": "PNAS",
       "yil": 2019,
-      "metin": "Birçok hayvan yiyecek ararken çok olanı az olandan ayırmak zorundadır. Bu yeteneği sınayan çalışmalar şimdiye kadar çoğunlukla gözle görülen bilgiye dayanıyordu. Araştırmacılar, fillerin aynı ayrımı yalnız koku alarak yapıp yapamayacağını sınadı. Fillerin önüne, içinde ayçiçeği tohumu bulunan iki kap kondu. İki kaptaki tohum miktarı birbirine göre 11 farklı oranda ayarlandı. Filler genel olarak, koklayarak tohumu daha çok olan kabı seçti. İki miktar arasındaki fark büyüdükçe daha başarılı oldular. Miktarlar birbirine yaklaştıkça başarıları düştü. Kaplardaki toplam yiyecek miktarı ise sonucu etkilemedi. Bu sonuçlar, gözle sınanan hayvanlarda görülenle uyuşuyor. Ekibe göre hayvanlar karşılaştırılırken, her birinin dünyayı hangi duyuyla algıladığı da hesaba katılmalı.",
+      "metin": "Birçok hayvan yiyecek ararken çok olanı az olandan ayırmak zorundadır. Bu yeteneği sınayan çalışmalar şimdiye kadar çoğunlukla gözle görülen bilgiye dayanıyordu. Araştırmacılar, fillerin aynı ayrımı yalnız koklayarak yapıp yapamayacağını sınadı. Fillerin önüne, içinde ayçiçeği tohumu bulunan iki kap kondu. İki kaba konan tohum miktarlarının oranı denemeden denemeye değiştirildi; toplam 11 farklı oran kullanıldı. Filler genel olarak, koklayarak tohumu daha çok olan kabı seçti. İki miktar arasındaki fark büyüdükçe daha başarılı oldular. Miktarlar birbirine yaklaştıkça başarıları düştü. Kaplardaki toplam yiyecek miktarı ise sonucu etkilemedi. Bu sonuçlar, gözle sınanan hayvanlarda görülenle uyuşuyor. Ekibe göre hayvanlar karşılaştırılırken, her birinin dünyayı hangi duyuyla algıladığı da hesaba katılmalı.",
       "sorular": [
         {
           "tur": "ana",
@@ -268,7 +268,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Tohum miktarları kaç farklı oranda ayarlandı?",
+          "soru": "Deneyde kaç farklı tohum oranı kullanıldı?",
           "secenekler": [
             "11",
             "3",
@@ -318,7 +318,7 @@
       "yazar": "Luef ve ark.",
       "dergi": "PLoS One",
       "yil": 2016,
-      "metin": "Birçok maymun türü belirli bir yiyecekle karşılaşınca ya da onu yerken ses çıkarır. Büyük maymunlardan şempanze ve bonobonun bu sesleri ayrıntılı incelenmişti. Gorillerin yemek sırasında şarkı ya da mırıltı denen sesler çıkardığı ise yalnız tek tük gözlemlerle biliniyordu. Bir ekip, Kongo Cumhuriyeti'nde doğada serbest yaşayan iki batı ova gorili grubunun seslerini inceledi. Bu sesler yalnız beslenirken duyuldu, başka hiçbir durumda duyulmadı. Seslerin sıklığı gorillerin yaşına ve cinsiyetine göre değişiyordu. Sesler yalnız belirli yiyecekler yenirken çıkıyordu. Grup birlikte beslenirken genellikle tek bir goril ses çıkarıyordu. Ama bazı yiyeceklerde iki ya da daha çok goril aynı anda sesleniyordu. Bulgu, gorillerin ses yetenekleri hakkında yeni bilgi veriyor.",
+      "metin": "Birçok maymun türü belirli bir yiyecekle karşılaşınca ya da onu yerken ses çıkarır. Büyük maymunlardan yalnız şempanzelerin ve bonoboların bu sesleri ayrıntılı incelenmişti. Gorillerin yemek sırasında şarkı ya da mırıltı denen sesler çıkardığı ise yalnız tek tük gözlemlerle biliniyordu. Bir ekip, Kongo Cumhuriyeti'nde doğada serbest yaşayan iki batı ova gorili grubunun seslerini inceledi. Bu sesler yalnız beslenme sırasında duyuldu; başka hiçbir durumda duyulmadı. Seslerin sıklığı gorillerin yaşına ve cinsiyetine göre değişiyordu. Sesler yalnız belirli yiyecekler yenirken çıkıyordu. Grup birlikte beslenirken genellikle tek bir goril ses çıkarıyordu. Ama bazı yiyecekler yenirken iki ya da daha çok goril aynı anda sesleniyordu. Bulgu, gorillerin ses yetenekleri hakkında yeni bilgi veriyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -392,7 +392,7 @@
       "yazar": "Colombelli-Négrel ve ark.",
       "dergi": "Proceedings of the Royal Society B",
       "yil": 2014,
-      "metin": "Yumurtanın içindeki bir yavru kuş, dışarıdaki sesleri ayırt edebilir mi? Avustralya'da yaşayan ötücü bir kuş türünde dişi, kuluçka sırasında yumurtalara bir ses öğretir. Yavrular yumurtadan çıkınca bu sesi bir parola gibi kullanır ve daha çok yiyecek ister. Araştırmacılar, yumurtadaki yavruların sesleri birbirinden ayırıp ayıramadığını sınadı. Doğadaki yuvalardan alınan yumurtalara sesler dinletildi ve yavruların kalp atışı ölçüldü. Ekip, yavruların aynı sese alışıp yeni bir sese yeniden tepki verip vermediğine baktı. Kendi türlerinin sesini duyan yavruların kalp atışı, başka bir türün sesini duyduklarına göre daha çok yavaşladı. Kendi türlerinden yeni bir bireyin sesi de kalp atışını yavaşlattı. Böylece bu kuş, insan gibi sesleri öğrenerek çıkaran ve daha yumurtadayken öğrenebildiği bilinen türlerden biri oluyor.",
+      "metin": "Yumurtadaki bir yavru kuş, dışarıdaki sesleri ayırt edebilir mi? Avustralya'da yaşayan ötücü bir kuş türünde anne kuş, kuluçka sırasında yumurtadaki yavrularına bir ses öğretir. Yavrular yumurtadan çıkınca bu sesi bir parola gibi kullanarak daha çok yiyecek ister. Araştırmacılar, yumurtadaki yavruların sesleri birbirinden ayırıp ayıramadığını sınadı. Doğadaki yuvalardan alınan yumurtalara sesler dinletildi ve yavruların kalp atışı ölçüldü. Ekip, yavruların aynı sese alışıp alışmadığına, yeni bir ses duyunca yeniden tepki verip vermediğine baktı. Yavruların kalp atışı, kendi türlerinin sesini duyunca, başka bir türün sesini duyduklarından daha çok yavaşladı. Kendi türlerinden yeni bir bireyin sesi de kalp atışlarını yavaşlattı. Böylece bu kuş, insan gibi hem seslerini öğrenerek edinen hem de yumurtadayken öğrenebilen türlere katılıyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -406,12 +406,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Dişi kuş yumurtalara ne zaman ses öğretir?",
+          "soru": "Anne kuş yumurtadaki yavrularına sesi ne zaman öğretir?",
           "secenekler": [
             "Kuluçka sırasında",
             "Yuvayı yaparken",
             "Göç sırasında",
-            "Yavrular uçtuktan sonra"
+            "Yumurtlamadan önce"
           ]
         },
         {
@@ -446,7 +446,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kendi türünden yeni bir bireyin sesi kalp atışına ne yaptı?",
+          "soru": "Kendi türlerinden yeni bir bireyin sesi, yavruların kalp atışını nasıl etkiledi?",
           "secenekler": [
             "Yavaşlattı",
             "Hızlandırdı",
@@ -466,7 +466,7 @@
       "yazar": "Van Wassenbergh ve ark.",
       "dergi": "Current Biology",
       "yil": 2022,
-      "metin": "Ağaçkakan gagasıyla ağaca vurduğunda kafatası ne işe yarıyor? Uzun süre, kafatasının vuruşun enerjisini bir yastık gibi yuttuğu düşünüldü. Bu fikir, enerji emen malzemelerin ve aletlerin tasarımına bile ilham verdi. Ama fikirde bir çelişki vardı. Kafatası vuruşun enerjisini yutsaydı, kuşun ağaca vurma gücü de azalırdı. Böyle bir özelliğin doğal seçilimle ortaya çıkması bu yüzden zor görünüyordu. Bir ekip, üç ağaçkakan türünde başın ağaca çarptığı anda ne kadar hızla yavaşladığını canlı kuşlarda ölçtü. Ölçümleri, kafanın nasıl çalıştığını hesaplayan modellerle de inceledi. Kafatasının enerjiyi yutmadığı, gagalamayı güçlendiren sert bir çekiç gibi çalıştığı ortaya çıktı. Bulgu, kafatasının bu ünlü davranıştaki görevine dair yaygın görüşle çelişiyor.",
+      "metin": "Ağaçkakan gagasıyla ağaca vurduğunda kafatası ne işe yarıyor? Uzun süre, kafatasının vuruşun enerjisini bir yastık gibi emdiği düşünüldü. Bu fikir, darbe emen malzemelerin ve kask gibi aletlerin tasarımına bile ilham verdi. Ama fikirde bir çelişki vardı. Kafatası vuruşun enerjisini emseydi, kuşun ağaca vurma gücü de azalırdı. Bu yüzden böyle bir özelliğin doğal seçilimle ortaya çıkması pek olası görünmüyordu. Bir ekip, üç türden canlı ağaçkakanlarda başın ağaca çarptığı anda ne kadar ani yavaşladığını ölçtü. Ekip, ölçümlerini bilgisayar modelleriyle de sınadı. Sonuçlara göre kafatası enerjiyi emmiyor, gagalamayı güçlendiren sert bir çekiç gibi çalışıyor. Yani kafatasının darbeyi bir yastık gibi emdiği yolundaki yaygın görüş yanlış.",
       "sorular": [
         {
           "tur": "ana",
@@ -480,19 +480,19 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Uzun süre ağaçkakanın kafatasının nasıl çalıştığı düşünüldü?",
+          "soru": "Uzun süre ağaçkakanın kafatası neye benzetildi?",
           "secenekler": [
-            "Vuruşun enerjisini yutan bir yastık gibi",
-            "Sesi büyüten bir boru gibi",
-            "Isıyı saklayan bir kap gibi",
-            "Kendini onaran bir kabuk gibi"
+            "Vuruşun enerjisini emen bir yastığa",
+            "Sesi büyüten bir boruya",
+            "Isıyı saklayan bir kaba",
+            "Kendini onaran bir kabuğa"
           ]
         },
         {
           "tur": "ayrinti",
           "soru": "Eski fikir neye ilham verdi?",
           "secenekler": [
-            "Enerji emen malzemelere ve aletlere",
+            "Darbe emen malzemelere ve aletlere",
             "Ormanda kullanılan matkaplara",
             "Uçak kanatlarının biçimine",
             "Su pompalarına"
@@ -500,7 +500,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kafatası darbenin enerjisini yutsaydı ne olurdu?",
+          "soru": "Kafatası vuruşun enerjisini emseydi ne olurdu?",
           "secenekler": [
             "Kuşun ağaca vurma gücü azalırdı",
             "Kuş daha yükseğe ve daha uzağa uçabilirdi",
@@ -512,7 +512,7 @@
           "tur": "ayrinti",
           "soru": "Ekip canlı kuşlarda neyi ölçtü?",
           "secenekler": [
-            "Başın ağaca çarptığı anda ne kadar hızla yavaşladığını",
+            "Başın ağaca çarptığı anda ne kadar ani yavaşladığını",
             "Gaganın kaç yılda uzadığını",
             "Kuşun bir günde kaç ağaç gezdiğini",
             "Ağaç kabuğunun ne kadar kalın olduğunu"
@@ -520,7 +520,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekibe göre kafatası nasıl çalışıyor?",
+          "soru": "Sonuçlara göre kafatası nasıl çalışıyor?",
           "secenekler": [
             "Gagalamayı güçlendiren sert bir çekiç gibi",
             "Enerjiyi emen yumuşak bir yastık gibi",
@@ -540,7 +540,7 @@
       "yazar": "Bailey ve ark.",
       "dergi": "Proceedings of the Royal Society B",
       "yil": 2014,
-      "metin": "Kuşların yuva yaparken hangi malzemeyi seçeceğinin doğuştan belirlendiği genellikle varsayılır. Bir ekip bu varsayımı erkek zebra ispinozlarında sınadı. Kuşlara yuva yapmaları için esnek ya da daha sert ip verildi. Kısa bir süre esnek iple yuva yapan kuşlar, sonra sert ipi tercih etti. Sert iple yuva yapanlar ise iki ip arasında ayrım yapmadı. Bir yuvayı tamamen bitirdikten sonra bütün kuşların sert ipe ilgisi arttı. Üstü kapalı bir yuva için sert ipten daha az parça gerekiyordu; yani sert ip daha iyi bir malzeme gibi görünüyordu. Kuşların tercihi babalarının ya da kardeşlerinin tercihine benzemiyordu. Gençken iki ipten birini kullanmak bile sert ipe ilgiyi artırdı. Demek ki kuşlar malzemeyi sertliğine göre seçiyor ve bu seçimi deneyim de şekillendiriyor.",
+      "metin": "Kuşların yuva yaparken hangi malzemeyi seçeceğinin doğuştan belirlendiği genellikle varsayılır. Bir ekip bu varsayımı erkek zebra ispinozlarında sınadı. Kuşlara yuva yapmaları için esnek ya da daha sert ip verildi. Kısa bir süre esnek iple yuva yapan kuşlar, sonra sert ipi tercih etti. Sert iple yuva yapanlar ise iki ip arasında ayrım yapmadı. Bir yuvayı bitirdikten sonra bütün kuşların sert ipe ilgisi arttı. Üstü kapalı bir yuva için sert ipten daha az parça gerekiyordu; yani sert ip daha iyi bir malzeme gibi görünüyordu. Kuşların tercihi babalarının ya da kardeşlerinin tercihine benzemiyordu. Gençken iki ipten herhangi birini tanımış olmak bile sert ipe ilgiyi artırdı. Demek ki kuşlar malzemeyi sertliğine göre seçiyor ve bu seçimi deneyim de şekillendiriyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -614,7 +614,7 @@
       "yazar": "Prötzel ve ark.",
       "dergi": "Scientific Reports",
       "yil": 2018,
-      "metin": "Işığı emip başka bir renkte geri vermeye floresan denir; bu, denizdeki canlılarda yaygın ama karadaki dört ayaklı hayvanlarda seyrektir. Araştırmacılar, birçok bukalemun türünde kafatasından dışarı çıkan kemik tümsekler buldu. Bu tümsekler pulların ardından görünüyor ve morötesi ışıkta parlıyor. Tümseğin üstünde yalnız ince ve saydam bir deri tabakası kalıyor; böylece kemiğe açılan bir pencere oluşuyor. Bir bukalemun cinsinin çoğu türünde tümsek sayısı erkekle dişide farklı. Bu, tümseklerin bir işaret olarak kullanılabileceğini düşündürüyor. Kemiğin morötesi ışıkta parladığı biliniyordu, ama bir canlının bundan yararlandığı ilk kez gösterildi. Parıltı, nemli ormanlarda yaşayan türlerde yaygın. Yayılan mavi ışık, ormanın yeşil ve kahverengi zemini üstünde iyi seçiliyor.",
+      "metin": "Bir maddenin ışığı emip başka bir renkte geri vermesine floresan denir. Floresan denizdeki canlılarda yaygındır, ama karadaki dört ayaklı hayvanlarda seyrektir. Araştırmacılar, birçok bukalemun türünün kafatasında dışa doğru çıkıntı yapan kemik tümsekler buldu. Bu tümsekler pulların altından görülebiliyor ve morötesi ışıkta parlıyor. Tümseğin üstünde yalnız ince ve saydam bir deri tabakası kalıyor; böylece kemiğe açılan bir pencere oluşuyor. Bir bukalemun cinsine ait türlerin çoğunda tümsek sayısı erkekle dişide farklı. Bu, tümseklerin bir işaret olarak kullanılabileceğini düşündürüyor. Kemiğin morötesi ışıkta parladığı biliniyordu, ama bir canlının bu parıltıdan yararlandığı ilk kez gösterildi. Bu parıltı, özellikle nemli ormanlarda yaşayan türlerde yaygın. Yayılan mavi ışık, ormanın yeşil ve kahverengi arka planında kolayca seçiliyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -688,7 +688,7 @@
       "yazar": "Autumn ve ark.",
       "dergi": "Nature",
       "yil": 2000,
-      "metin": "Geko denen kertenkeleler düz ve dik yüzeylerde hızla tırmanabilir. Mikroskopla bakıldığında bir gekonun ayağında yaklaşık beş yüz bin ince kıl görülür. Her kıl bir insan saçının onda biri kalınlığındadır ve ucunda yüzlerce küçük çıkıntı taşır. Bu yapı yüzyıla yakın süredir biliniyordu, ama tek bir kılın tutunma gücü hiç ölçülmemişti. Araştırmacılar bunu, çok küçük kuvvetleri ölçen bir algılayıcıyla ölçtü. Tek kıl, bütün hayvan üzerinden yapılan en yüksek tahminden on kat daha iyi tutunuyordu. Ölçümler, kılların moleküller arasındaki zayıf çekimle tutunduğu fikrini destekledi. Gekolar parmaklarını yüzeyden bant gibi soyarak kaldırır. Bu alışkanlık iki ipucu verdi. Kıl doğru yönde yüzeye bastırılınca tutunma gücü sürtünmeden beklenenin 600 katına çıktı. Belli bir açının üstünde ise kıl yüzeyden kolayca ayrıldı.",
+      "metin": "Geko denen kertenkeleler pürüzsüz ve dik yüzeylerde hızla tırmanabilir. Bir gekonun ayağında yaklaşık beş yüz bin ince kıl vardır. Her kıl, bir insan saçının onda biri kalınlığındadır ve ucunda yüzlerce çıkıntı bulunur. Bu yapı yüzyıla yakın süredir biliniyordu, ama tek bir kılın tutunma gücü ölçülmemişti. Araştırmacılar bu gücü özel bir algılayıcıyla ölçtü. Tek bir kıl, hayvanın tamamına bakılarak yapılan en yüksek tahminden on kat daha güçlü tutunuyordu. Ölçümler, kılların moleküller arasındaki zayıf çekimle tutunduğu fikrini destekledi. Gekolar parmaklarını yüzeyden bant gibi soyarak kaldırır. Bu alışkanlık araştırmacılara iki ipucu verdi. Kıl yüzeye doğru yönde bastırılınca, tutunma gücü yalnız sürtünmeyle açıklanabilecek gücün 600 katına çıktı. Kılın yüzeyle yaptığı açı belli bir değeri geçince ise kıl kolayca ayrıldı.",
       "sorular": [
         {
           "tur": "ana",
@@ -722,12 +722,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Tek kıl, en yüksek tahmine göre ne kadar iyi tutunuyordu?",
+          "soru": "Tek bir kıl, en yüksek tahminden ne kadar güçlü tutunuyordu?",
           "secenekler": [
-            "On kat daha iyi",
-            "Yarı yarıya daha kötü",
+            "On kat daha güçlü",
+            "Tahminin yarısı kadar",
             "Tam tahmin kadar",
-            "Bin kat daha iyi"
+            "Bin kat daha güçlü"
           ]
         },
         {
@@ -742,12 +742,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kıl belli bir açının üstüne gelince ne oldu?",
+          "soru": "Kılın yüzeyle yaptığı açı belli bir değeri geçince ne oldu?",
           "secenekler": [
-            "Yüzeyden kolayca ayrıldı",
-            "Yüzeye eskisinden çok daha sıkı yapıştı",
-            "Koptu",
-            "Isınıp eridi"
+            "Kıl yüzeyden kolayca ayrıldı",
+            "Kıl yüzeye çok daha sıkı yapıştı",
+            "Kıl koptu",
+            "Kıl ısınıp eridi"
           ]
         }
       ]
