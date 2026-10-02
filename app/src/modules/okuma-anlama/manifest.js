@@ -49,7 +49,7 @@ export default {
     describe(s, { seconds }) {
       return {
         title: 'Oku ve Anla',
-        detail: join([Number.isFinite(s.wpm) ? `${s.wpm}${NBSP}kelime/dk` : null, Number.isFinite(s.correct) ? `${s.correct}/${QUESTIONS}` : null, durationPart(seconds, false)]),
+        detail: join([Number.isFinite(s.wpm) ? `${s.wpm}${NBSP}kelime/dk` : null, Number.isFinite(s.correct) ? `${s.correct}/${QUESTIONS} doğru` : null, durationPart(seconds, false)]),
       }
     },
   },

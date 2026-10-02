@@ -47,46 +47,57 @@ Yeni ya da değişen cümle sahip onayı olmadan koda girmez: taslak → 5 kişi
 ### Modül adı
 **Oku ve Anla**: sahip onaylı, 2026-10-02.
 
-### Giriş
+### Giriş (sahip isteği 2026-10-02: "ne yapacağımı anlatmıyor"; yetki "sen onayla")
 - Başlık: "Oku ve Anla"
-- Alt satır: "Bilimden kısa, şaşırtıcı bir bulgu oku. Sonra dört soru gelir."
-- Adımlar: "Oku" · "Bitir" · "Dört soru"
+- Alt satır: "Kısa bir bilim metni oku; ne kadar hızlı okuduğunu ve ne kadar anladığını gör."
+- Adım 1: "Oku" · "Süre, metin açılınca başlar."
+- Adım 2: "Bitirince “Bitirdim”e bas" · "Süre o anda durur."
+- Adım 3: "Dört soruyu cevapla" · "En az üçünü bilirsen okuma hızın kaydedilir."
 - Kart: "BUGÜNÜN METNİ" · {başlık} · "{n} kelime"
-- Not: "Hızın, anladığınla birlikte sayılır."
+- Not: "Hızın, bir dakikada okuduğun kelime sayısıdır."
 - Düğme: "Okumaya başla"
 
 ### Okuma
 - Üst satır: "Kendi hızında oku"
 - Üst etiket: "Bugünün metni"
+- Bilgi satırı: {konu} · "{yazar} ve ekibi, {yıl}"
 - Düğme: "Bitirdim"
-- Not: "Süre, sen dokununca durur."
+- Not: "Basınca süre durur."
+- Metin uzunsa altta: "“Bitirdim” düğmesi metnin sonunda"
 
 ### Soru
-- Etiket: "{n}. soru"
+- Halka: "Soru" · "{n}/4"
 - Doğru cevaptan sonra: "Doğru."
 - Yanlış cevaptan sonra: "Doğrusu bu." Doğru seçenek yeşil olur.
 - Düğme: "Sonraki soru"; son soruda "Sonucu gör"
 
 ### Sonuç
 - Sayı altı: "kelime / dakika"
-- Anlama: "4 sorunun {k}’{ek} doğru"
-- Hız sayıldı: "Hızın sayıldı, çünkü metni anladın."
-- Hız sayılmadı, anlama düşük: "Bu sefer hız sayılmadı. Hız, en az 3 doğruyla sayılır; bir dahakine biraz daha yavaş oku."
-- Hız sayılmadı, çok hızlı: "Bu sefer hız sayılmadı; bu kadar hızlı okuma göz gezdirmeye döner. Bir dahakine her cümleyi oku."
-- Hız sayılmadı, ara verildi: "Okurken uygulamadan çıktın, bu yüzden hız sayılmadı."
-- Satır: "Başlangıç" · "İki okuma daha, sonra karşılaştırırız" · "{k} / 5"
-- Satır: "Bu metin bir çalışmadan" · "{yazar} ve ark. · {dergi} · {yıl}"
-- Satır: "Bana hatırlat" · "Her gün bir okuma"
+- Anlama: "4 sorunun {k}’{ek} doğru"; dördü doğruysa "4 sorunun hepsi doğru"
+- Hız kaydedilmediyse etiket: "Hız kaydedilmedi"
+- Hız kaydedildi: "Metni anladın; hızın kaydedildi."
+- Kaydedilmedi, anlama düşük: "Hızın kaydedilmesi için dört sorudan en az üçünü bilmelisin. Bir dahaki sefere biraz daha
+  yavaş oku."
+- Kaydedilmedi, çok hızlı: "Bu hızda metin okunmaz, yalnız göz gezdirilir; bu yüzden hız kaydedilmedi. Bir dahaki
+  sefere her cümleyi oku."
+- Kaydedilmedi, ara verildi: "Okurken uygulamadan çıktın; bu yüzden hız kaydedilmedi."
+- Kaydedilmedi, çok yavaş: "Okuma çok uzun sürdü. Hız, ara vermeden okuyunca kaydedilir."
+- Satır, ilk beş gün: "Başlangıç hızın" · "{n} gün daha okuyunca belli olacak"; sonra "Okuma hızı" · {değişim sözcüğü}
+- Satır: "Kaynak" · "{yazar} ve ekibi, {yıl}"
 - Düğme: "Bitti"
+
+### Pratikler kartı ve geçmiş
+- Alt satır, ilk okumadan önce: "Kısa bir bilim metni, dört soru · 2 dk"
+- Sonra: "{hız} kelime/dk · {k}/4 doğru · 2 dk"; geçmiş satırı da "{k}/4 doğru"
 
 ### Gelişim satırları
 - Ölçü adları: "Okuma hızı" `kelime/dk`; "Anlama" `%`.
 - Değişim sözcükleri yalnız: "başlangıcından iyi", "değişim yok", "henüz belli değil", "başlangıç".
 
 ### Nef cümleleri (N1 biçiminde, taslak)
-- firstTime: "İlk okuman tamam. Hızın ancak anladığında sayılır; acele etme."
+- firstTime: "İlk okuman tamam. Hızın, metni anladığında kaydedilir; acele etme."
 - metricChange, iyi: "Okuma hızın başlangıcından iyi, anlaman da yerinde."
-- returnAfterGap: "Bir süredir okumadın. Bugün kısa bir bulgu seni bekliyor."
+- returnAfterGap: "Bir süredir okumadın. Bugün seni kısa bir bilim metni bekliyor."
 - VARSAYIM: Nef cümlelerinde rakam yok; `tests` deposunda değil `sessions` deposunda olduğumuz için metricChange
   anı izinli.
 

@@ -39,7 +39,6 @@ const fontScaleNow = () => {
 }
 // "4 sorunun 3’ü doğru": Türkçe iyelik eki (1’i, 2’si, 3’ü, 4’ü)
 const EK = { 0: 'ı', 1: 'i', 2: 'si', 3: 'ü', 4: 'ü' }
-const EK5 = { ...EK, 5: 'i' }
 // Kaynak satırı: "Mampe ve ark., 2009" yerine Türkçe "Mampe ve ekibi, 2009"; dergi adı gösterilmez (kapı 2026-10-02)
 const sourceOf = (t) => `${String(t.yazar).replace(/ ve ark\.?$/, ' ve ekibi')}, ${t.yil}`
 
@@ -98,8 +97,10 @@ function QRing({ done, cur }) {
         <circle key={i} cx="60" cy="60" r={r} fill="none" stroke={i <= cur ? 'var(--accent)' : 'var(--oa-track)'} strokeOpacity={i === cur && i >= done ? 0.42 : 1} strokeWidth="10" strokeLinecap="round"
           strokeDasharray={`${seg.toFixed(1)} ${(c - seg).toFixed(1)}`} strokeDashoffset={(-(i * c / 4) - gap / 2).toFixed(1)} transform="rotate(-90 60 60)" />
       ))}
-      <text x="60" y="61" textAnchor="middle" dominantBaseline="central" fontFamily="var(--font-display)" fontWeight="650" fill="var(--ink)">
-        <tspan fontSize="32">{cur + 1}</tspan><tspan fontSize="20" fill="var(--ink-3)" dx="1">/4</tspan>
+      {/* "Soru" yazısı: "2/4" puan sanılmasın (kapı 2026-10-02); iki parça aynı taban çizgisinde */}
+      <text x="60" y="47" textAnchor="middle" fontFamily="var(--font-body)" fontWeight="600" fontSize="13" fill="var(--ink-3)">Soru</text>
+      <text x="60" y="78" textAnchor="middle" fontFamily="var(--font-display)" fontWeight="650" fill="var(--ink)">
+        <tspan fontSize="30">{cur + 1}</tspan><tspan fontSize="20" fill="var(--ink-3)" dx="1">/4</tspan>
       </text>
     </svg>
   )
@@ -133,8 +134,8 @@ function ResultRing({ k }) {
 const VERDICT_LINE = {
   null: 'Metni anladın; hızın kaydedildi.',
   // Sahip onaylı sayılmadı ekranının cümlesi (maket, "OK ONAYLIYORUM"): üstteki "Hız sayılmadı" etiketini tekrarlamaz (tur 1)
-  'dusuk-anlama': 'Hızın kaydedilmesi için en az üç soruyu bilmelisin. Bir\u00a0dahakine biraz daha yavaş oku.',
-  'cok-hizli': 'Bu hızda metin okunmaz, yalnız göz gezdirilir; bu yüzden hız kaydedilmedi. Bir dahakine her cümleyi oku.',
+  'dusuk-anlama': 'Hızın kaydedilmesi için dört sorudan en az üçünü bilmelisin. Bir\u00a0dahaki sefere biraz daha yavaş oku.',
+  'cok-hizli': 'Bu hızda metin okunmaz, yalnız göz gezdirilir; bu yüzden hız kaydedilmedi. Bir dahaki sefere her cümleyi oku.',
   ara: 'Okurken uygulamadan çıktın; bu yüzden hız kaydedilmedi.',
   // Sahip onayı 2026-10-02 (kapi/metin-tur1.md Y3, 5/5)
   'cok-yavas': 'Okuma çok uzun sürdü. Hız, ara vermeden okuyunca kaydedilir.',
@@ -226,7 +227,7 @@ export default function OkuAnla({ sessions = [], storage = globalThis.localStora
         </div>
         <div className="oa-spacer" style={{ height: 118 }} />
         <div className="oa-dock">
-          <p className="fair">Hızın, dakikada okuduğun kelimeyle ölçülür.</p>
+          <p className="fair">Hızın, bir dakikada okuduğun kelime sayısıdır.</p>
           <button type="button" className="btn" onClick={() => setPhase('metin')}>Okumaya başla</button>
         </div>
       </main>
@@ -321,12 +322,12 @@ export default function OkuAnla({ sessions = [], storage = globalThis.localStora
           : (
             <div className="oa-row has-pips">
               <span className="k">Başlangıç hızın</span>
-              <span className="v">5 okumanın {Math.min(days, BASE_N)}’{EK5[Math.min(days, BASE_N)]} tamam</span>
+              <span className="v">{BASE_N - Math.min(days, BASE_N)} gün daha okuyunca belli olacak</span>
               <span className="oa-pips" aria-hidden="true">{[0, 1, 2, 3, 4].map((i) => <i key={i} className={i < days ? 'on' : ''} />)}</span>
             </div>
           )}
         <a className="oa-row" href={pubmedUrl(text.pmid)} target="_blank" rel="noreferrer">
-          <span className="k">Kaynak araştırma</span>
+          <span className="k">Kaynak</span>
           {/* Sahip onaylı sonuç ekranının biçimi (maket: "Dacke ve ark., 2013"); dergi okuma ekranında yazar (tur 2) */}
           <span className="v">{sourceOf(text)}</span>
           <span className="go" aria-hidden="true"><ChevronRight size={18} /></span>
