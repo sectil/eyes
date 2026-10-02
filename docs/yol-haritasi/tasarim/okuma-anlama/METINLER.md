@@ -1,6 +1,6 @@
 # Oku ve Anla · metin, soru ve ekran metinleri kuralları (taslak, 2026-10-02)
 
-"Oku ve Anla" çalışma adıdır; modül adı kapıdan ve sahipten geçer (§5). Bu belgedeki görünür her cümle **taslaktır**.
+Modül adı **Oku ve Anla**: sahip onaylı, 2026-10-02. Bu belgedeki öteki görünür cümleler **taslaktır**.
 Sahip onayı olmadan koda girmez: taslak → 5 kişilik kapı → kendi onayım → sahip.
 
 ## 1. Kaynak kuralı
@@ -42,10 +42,8 @@ Sahip onayı olmadan koda girmez: taslak → 5 kişilik kapı → kendi onayım 
 
 ## 5. Görünür metinler (taslak, kapı ve sahip onayı bekliyor)
 
-### Modül adı adayları
-1. **Oku ve Anla** (önerim; kısa, ne yapılacağını söyler)
-2. Bir Bulgu Oku
-3. Okuma Hızı ve Anlama
+### Modül adı
+**Oku ve Anla**: sahip onaylı, 2026-10-02.
 
 ### Giriş
 - Başlık: "Oku ve Anla"

@@ -53,6 +53,7 @@ html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: v
 .hero { position: relative; display: grid; place-items: center; margin: 0 0 4px; }
 .hero svg { width: min(74vw, 290px); height: auto; overflow: visible; }
 .hero text { font-family: var(--font-body); font-weight: 600; letter-spacing: .05em; }
+.hero .deco { display: none; }
 h1.t { font-family: var(--font-display); font-weight: 650; font-size: 31px; letter-spacing: -.02em; line-height: 1.08; margin: 4px 0 8px; text-align: center; }
 .lead { font-size: 17px; line-height: 1.42; color: var(--ink-2); text-align: center; margin: 0 auto; max-width: 30ch; text-wrap: balance; padding: 0 20px; }
 .steps { display: flex; justify-content: center; gap: 8px; margin: 16px 20px 0; }
@@ -70,13 +71,14 @@ h1.t { font-family: var(--font-display); font-weight: 650; font-size: 31px; lett
 .kick { font-size: 12.5px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 14px 0 6px; }
 h2.tt { font-family: var(--font-display); font-weight: 600; font-size: 21.5px; line-height: 1.18; letter-spacing: -.015em; margin: 0 0 10px; }
 .meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin: 0 0 16px; font-size: 13.5px; color: var(--ink-3); }
+.meta > span { white-space: nowrap; }
 .meta .tag { display: inline-flex; align-items: center; gap: 6px; font-weight: 650; color: var(--accent); background: var(--accent-soft); padding: 4px 10px 4px 7px; border-radius: 99px; }
 .meta .tag svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .read { font-size: 19px; line-height: 1.62; color: var(--ink); margin: 0; text-wrap: pretty; }
 .endbtn { margin: 26px 0 0; }
 .hint { text-align: center; font-size: 13.5px; color: var(--ink-3); margin: 10px 0 40px; }
-.veil { position: fixed; left: 0; right: 0; bottom: 0; height: 104px; background: linear-gradient(to bottom, transparent, var(--bg) 58%); pointer-events: none; }
-.more { position: fixed; left: 0; right: 0; bottom: 22px; text-align: center; font-size: 13px; font-weight: 500; color: var(--ink-3); display: flex; flex-direction: column; gap: 2px; align-items: center; pointer-events: none; }
+.veil { position: fixed; left: 0; right: 0; bottom: 0; height: 132px; background: linear-gradient(to bottom, transparent, var(--bg) 46%); pointer-events: none; }
+.more { position: fixed; left: 0; right: 0; bottom: 14px; text-align: center; font-size: 13px; font-weight: 500; color: var(--ink-3); display: flex; flex-direction: column; gap: 2px; align-items: center; pointer-events: none; }
 .more svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 
 /* Soru */
@@ -143,11 +145,14 @@ h2.q { text-align: center; }
   .verd p { font-size: 15px; }
   h2.q { font-size: 21px; }
   .qwrap .opts { padding-top: 12px; }
-  .qhead { display: none; }
+  .qhead { margin: -8px 0 2px; } .qhead .qr { width: 68px; height: 68px; }
+  h2.q { font-size: 19.5px; }
+  .qwrap .opts { padding-top: 10px; }
   .meta { margin-bottom: 12px; font-size: 12.5px; }
   .screen { padding-top: 14px; }
   .hero svg { width: 150px; }
-  .hero .inner { display: none; }
+  .hero text { display: none; }
+  .hero .deco { display: inline; }
   h1.t { font-size: 26px; margin-top: 0; }
   .lead { font-size: 15.5px; }
   .steps { margin-top: 12px; gap: 6px; } .steps span { font-size: 12.5px; padding: 5px 10px 5px 6px; }
@@ -161,7 +166,7 @@ h2.q { text-align: center; }
   .verd { margin-top: 12px; } .verd p { font-size: 15.5px; }
   .rows { margin-top: 12px; } .row { padding: 10px 14px; }
   h2.q { font-size: 20px; margin-bottom: 12px; } .qn { margin-top: 14px; }
-  .opt { font-size: 14.5px; padding: 9px 12px; min-height: 48px; gap: 10px; } .opts { gap: 7px; }
+  .opt { font-size: 14px; padding: 8px 12px; min-height: 44px; gap: 10px; border-radius: 15px; } .opts { gap: 6px; }
 }
 @media (max-width: 340px) {
   .pad { padding: 0 16px; }
@@ -192,8 +197,8 @@ function iris() {
   const rings = [
     [128, 'yıldızlarla yol bulan böcek · kedi adını tanır mı', 'heceleyen yarasa yavruları · atlar yüz okur', 11.5, .95],
     [106, 'bekleyebilen mürekkep balığı · sözcük tanıyan güvercinler', 'keçiler gülen yüzü seçiyor · yunusun ıslığı', 10.5, .78],
-    [86, 'insan yüzü ayırt eden balık · yaprakla saran orangutan', 'oku · anla · oku · anla · oku · anla', 9.5, .6],
-    [68, 'oku · anla · oku · anla · oku', 'anla · oku · anla · oku · anla', 9, .42],
+    [86, 'insan yüzü ayırt eden balık · yaprakla saran orangutan', 'oku · anla · oku · anla · oku · anla', 10.5, .62],
+    [68, 'oku · anla · oku · anla · oku', 'anla · oku · anla · oku · anla', 10.5, .45],
   ]
   let defs = '', body = ''
   rings.forEach(([r, top, bot, fs, op], i) => {
@@ -208,6 +213,7 @@ function iris() {
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--iris-1)"/><stop offset="1" stop-color="var(--iris-2)"/></linearGradient>
     <radialGradient id="gl"><stop offset="0" stop-color="var(--iris-1)" stop-opacity=".22"/><stop offset="1" stop-color="var(--iris-1)" stop-opacity="0"/></radialGradient>${defs}</defs>
     <circle cx="150" cy="150" r="150" fill="url(#gl)"/>${body}
+    <g class="deco" fill="none" stroke="url(#g)" stroke-linecap="round"><circle cx="150" cy="150" r="124" stroke-width="5" stroke-dasharray="2 13" opacity=".9"/><circle cx="150" cy="150" r="98" stroke-width="4" stroke-dasharray="2 11" opacity=".65"/><circle cx="150" cy="150" r="74" stroke-width="3" stroke-dasharray="2 9" opacity=".45"/></g>
     <circle cx="150" cy="150" r="50" fill="var(--pupil)"/>
     <circle cx="150" cy="128" r="9" fill="url(#g)"/>
     <g transform="translate(150 158)" fill="none" stroke="url(#g)" stroke-width="2.4" stroke-linecap="round"><path d="M-22 -10 q11 -6 22 0 q11 -6 22 0 v22 q-11 -6 -22 0 q-11 -6 -22 0z"/><path d="M0 -10 v22"/></g>
@@ -231,7 +237,7 @@ function giris() {
 function metin() {
   return `<div class="screen" style="padding-bottom:0">
     <div class="bar"><span class="ib">${X}</span><span class="mid">Kendi hızında oku</span><span style="width:40px"></span></div>
-    <div class="pad"><div class="kick">Bugünün metni</div><h2 class="tt">Yıldızlarla yol bulan böcek</h2><div class="meta"><span class="tag">${BUG}Böcekler</span><span>107 kelime</span><span>Current Biology, 2013</span></div><p class="read">${TEXT}</p>
+    <div class="pad"><div class="kick">Bugünün metni</div><h2 class="tt">Yıldızlarla yol bulan böcek</h2><div class="meta"><span class="tag">${BUG}Böcekler</span><span>Current Biology, 2013</span></div><p class="read">${TEXT}</p>
     <div class="endbtn btn">Bitirdim</div><p class="hint">Süre, sen dokununca durur.</p></div>
     <div class="veil"></div><span class="more">${DOWN}<span>Bitirdim, metnin sonunda</span></span>
   </div>`
@@ -241,17 +247,17 @@ function qring(done, cur) {
   const r = 46, c = 2 * Math.PI * r, gap = 16, seg = c / 4 - gap
   let out = ''
   for (let i = 0; i < 4; i++) {
-    const col = i < done ? 'var(--ok)' : i === cur ? 'url(#g3)' : 'var(--track)'
-    out += `<circle cx="60" cy="60" r="${r}" fill="none" stroke="${col}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${seg.toFixed(1)} ${(c - seg).toFixed(1)}" stroke-dashoffset="${(-(i * c / 4) - gap / 2).toFixed(1)}" transform="rotate(-90 60 60)"/>`
+    const col = i < done || i === cur ? 'url(#g3)' : 'var(--track)'
+    out += `<circle cx="60" cy="60" r="${r}" opacity="${i === cur ? .5 : 1}" fill="none" stroke="${col}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${seg.toFixed(1)} ${(c - seg).toFixed(1)}" stroke-dashoffset="${(-(i * c / 4) - gap / 2).toFixed(1)}" transform="rotate(-90 60 60)"/>`
   }
   return `<svg class="qr" viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--iris-1)"/><stop offset="1" stop-color="var(--iris-2)"/></linearGradient></defs>${out}
-    <text x="60" y="60" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-weight="650" font-size="34" fill="var(--ink)">${cur + 1}</text></svg>`
+    <text x="60" y="56" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-weight="650" font-size="34" fill="var(--ink)">${cur + 1}</text><text x="60" y="86" text-anchor="middle" font-family="var(--font-body)" font-weight="600" font-size="18" fill="var(--ink-3)">/ 4</text></svg>`
 }
 function soru() {
   const o = ['Gübre böceklerinin karanlık gecelerde yıldızlarla yön bulmasını', 'Gübre böceklerinin yiyeceklerini nasıl sakladığını', 'Planetaryumların nasıl çalıştığını', 'Böceklerin bulutlu havada nasıl dinlendiğini']
   const order = [1, 0, 3, 2]
   return `<div class="screen">
-    <div class="bar"><span class="ib">${X}</span><span class="mid">4 sorudan 2.</span><span style="width:40px"></span></div>
+    <div class="bar"><span class="ib">${X}</span><span class="mid"></span><span style="width:40px"></span></div>
     <div class="qwrap"><div class="qhead">${qring(1, 1)}</div><h2 class="q">Metin en çok neyi anlatıyor?</h2>
     <div class="opts">${order.map((i) => i === 0 ? `<div class="opt right"><span class="r">${CHK}</span><span>${o[i]}</span><span class="tagok">Doğru</span></div>` : `<div class="opt"><span class="r"></span><span>${o[i]}</span></div>`).join('')}</div></div>
     <div class="spacer" style="height:112px"></div>
@@ -276,12 +282,12 @@ function ring(k) {
 function sonuc(ok) {
   return `<div class="screen">
     <div class="bar"><span class="ib">${X}</span><span class="mid">Yıldızlarla yol bulan böcek</span><span style="width:40px"></span></div>
-    <div class="ring">${ring(ok ? 4 : 2)}<div class="c">${ok ? '<span class="n">212</span><span class="u">kelime / dakika</span>' : '<span class="n off">348</span><span class="u">kelime / dakika</span>'}</div></div>
-    <div class="anl">${ok ? '<span class="ok">4 sorunun 4’ü doğru</span>' : '<span class="lo">4 sorunun 2’si doğru</span><span class="off">Hız sayılmadı</span>'}</div>
+    <div class="ring">${ring(ok ? 4 : 2)}<div class="c">${ok ? '<span class="n">212</span><span class="u">kelime / dakika</span>' : '<span class="n">2/4</span><span class="u">doğru</span>'}</div></div>
+    <div class="anl">${ok ? '<span class="ok">4 sorunun 4’ü doğru</span>' : '<span class="lo">348 kelime/dk · hız sayılmadı</span>'}</div>
     <div class="verd"><span class="dot"></span><p><span class="nm">Nef</span>${ok ? 'Hızın sayıldı: metni anladın.' : 'Hız, en az 3 doğruyla sayılır. Bir dahakine biraz daha yavaş oku.'}</p></div>
     <div class="rows">
       <div class="row"><span class="k">Başlangıç</span><span class="v">${ok ? '3/5 okuma sayıldı' : '2/5 okuma sayıldı'}</span><span class="pips">${[0, 1, 2, 3, 4].map((i) => `<i class="${i < (ok ? 3 : 2) ? 'on' : ''}"></i>`).join('')}</span></div>
-      <div class="row"><span class="k">Bu metin bir çalışmadan</span><span class="v">Dacke ve ark. · Current Biology · 2013</span><span class="go">${GO}</span></div>
+      <div class="row"><span class="k">Bu metin bir çalışmadan</span><span class="v">Dacke ve ark., 2013</span><span class="go">${GO}</span></div>
       <div class="row"><span class="k">Bana hatırlat</span><span class="v">Her gün bir okuma</span><span class="tg"></span></div>
     </div>
     <div class="spacer"></div>

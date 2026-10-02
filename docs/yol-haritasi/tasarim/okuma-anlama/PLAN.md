@@ -2,7 +2,7 @@
 
 Yeni modül: kişi kısa bir bilim metni okur, "Bitirdim"e dokunur, okuma hızı kelime/dakika ölçülür, metin kalkar,
 dört soru gelir. Sonuçta hız ve anlama birlikte görünür.
-- "Oku ve Anla" çalışma adıdır; görünür metinler `METINLER.md`'de taslaktır ve sahip onayı bekler.
+- Modül adı **Oku ve Anla**, sahip onaylı. Öteki görünür metinler `METINLER.md`'de taslaktır ve sahip onayı bekler.
 - Kaynaklar `arastirma/KAYNAKLAR.md`'de.
 - Sahibin cevapları `ARA_RAPOR_1.md` §7'de.
 

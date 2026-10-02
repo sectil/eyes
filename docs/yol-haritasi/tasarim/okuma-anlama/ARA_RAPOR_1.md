@@ -88,3 +88,14 @@ olabilir... 5 sn ve mükemmlik kuralı..."
 | 5 | Dört seçenekli soru, tuzaksız | Olabilir: 4 seçenek, "hangisi yanlıştır" yok |
 
 Hepsine bağlı kural: 5 saniye ve mükemmellik.
+
+## 8. Sahip kararı (2026-10-02, kapı yöntem 2'den sonra)
+Soru:
+- Modül adı "Oku ve Anla" uygun mu?
+- Yol 1: kalan altı küçük düzeltme ve son bir kapı turu. Yol 2: tasarımı baştan kurmak.
+
+Sahibin cevabı, kelimesi kelimesine: "UYGUN".
+
+Kararlar:
+- Modül adı **Oku ve Anla**, onaylı.
+- VARSAYIM: cevap önerilen yol 1'i de kapsıyor. Sahibe bildirildi.

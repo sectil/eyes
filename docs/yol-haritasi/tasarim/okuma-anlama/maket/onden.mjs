@@ -29,6 +29,9 @@ for (const [s, kind] of Object.entries(screens)) for (const theme of ['light', '
       const probe = document.createElement('span'); probe.textContent = lastW; probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap'; el.appendChild(probe)
       const short = probe.getBoundingClientRect().width < el.getBoundingClientRect().width * 0.25; probe.remove()
       if (lines.length > 1 && short && words.filter((t) => t === lines.at(-1)).length === 1) out.push(`yetim kelime: ${el.className || el.tagName} "${el.textContent.trim().slice(0, 30)}"`)
+      // Satır ayraçla başlıyor ("· 2013")
+      const toks = el.textContent.trim().split(/\s+/)
+      let k = 0; for (const t of toks) { if (k < words.length && /^[·•–—,;:]$/.test(t) && lines.indexOf(words[k]) > 0 && words[k] !== words[k - 1]) out.push(`satır ayraçla başlıyor: ${el.className}`); k++ }
       if (/^H2$/.test(el.tagName) && lines.length === 2) {
         const first = words.filter((t) => t === lines[0]).length, second = words.length - first
         if (second > first + 1) out.push('başlık erken kırılıyor')
@@ -47,6 +50,12 @@ for (const [s, kind] of Object.entries(screens)) for (const theme of ['light', '
     if (ring) {
       const d = ring.getBoundingClientRect().width * (176 / 264) // iç daire çapı
       for (const e of document.querySelectorAll('.ring .c > *')) { const wd = e.getBoundingClientRect().width; if (wd > d * 0.8) out.push(`iç dairede dar: ${e.className} ${Math.round(wd)}/${Math.round(d)}`) }
+    }
+    // SVG yazısı görünür boyu: en az 9,5 px
+    for (const t of document.querySelectorAll('svg text')) {
+      if (!t.getClientRects().length || getComputedStyle(t).display === 'none') continue
+      const svg = t.ownerSVGElement, vb = svg.viewBox.baseVal.width, px = parseFloat(t.getAttribute('font-size')) * svg.getBoundingClientRect().width / vb
+      if (px < 9.5) { out.push(`SVG yazısı küçük: ${px.toFixed(1)} px`); break }
     }
     const more = document.querySelector('.more')
     if (more) { const cs = getComputedStyle(more); if (cs.borderTopWidth !== '0px' || cs.backgroundColor !== 'rgba(0, 0, 0, 0)') out.push('kaydırma ipucu düğmeye benziyor') }
