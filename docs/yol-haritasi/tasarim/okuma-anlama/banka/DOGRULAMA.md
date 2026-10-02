@@ -1,5 +1,20 @@
 # Bilimsel doğrulama kayıtları
 
+## taslak-11
+
+PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor. Yayın türü: hepsi "Journal Article" (oa104 ek olarak "Video-Audio Media", özgün çalışma); yorum, derleme, düzeltme yok. Eleştiri taraması: her kayıt için başlık anahtar sözcükleri, ilk yazar ve "comment / reply / response" ile `Comment[Publication Type]` araması yapıldı; eleştiri yorumu ya da yanıt bulunmadı. Yalnız tanıtım yazıları var (oa105 için 26138964, oa107 için 38033078 ve 38100681), ayrıca oa108 yazarlarının derlemesi (42150523); metinler değişmedi. Uzunluk oranı sonrası: doğru seçenek en uzun 18/60 (%30).
+
+- oa101 | düzeltildi: mürekkep balığı balık olmadığı için metinde ve sorularda "balıklar" → "hayvanlar" | 2 soru kökü ve 7 seçenek buna uyduruldu
+- oa102 | tamam | değişiklik yok
+- oa103 | değiştirildi: endler2010 (20832314, büyük çardak kuşunun zorlanmış perspektifi), çardak kuşu yanılsaması bulgu dizisine Science'taki eleştiri yorumu (22822134, KAYNAKLAR B7 notu) nedeniyle tartışmalı sayılıp çıkarıldı; yerine bostwick2009 (19906670, Proc Biol Sci; bir kuşun kur sesini kalın saplı kanat tüylerinin tınlamasıyla çıkarması, lazerle titreşim ölçümü, iki türle karşılaştırma) yazıldı, 109 kelime / 769 harf; tür adı Türkçede yerleşik olmadığı için "küçük bir kuş türü"; "1500 titreşim" özetteki 1500 Hz'in sadeleştirmesi | 6 yeni soru; KAYNAKLAR B11 satırı ve notu güncellendi
+- oa104 | tamam ("kara kaplumbağası" tortoise için yerleşik) | değişiklik yok
+- oa105 | tamam | değişiklik yok
+- oa106 | tamam | hortum ağırlığı sorusunda "1000 kilogramdan fazla" seçeneği doğru cevap "100 kilogramdan fazla" ile örtüştüğü için "Yaklaşık 50 kilogram" yapıldı
+- oa107 | düzeltildi: "kafanın iki yanı" cümlesi çıkarıldı, yarıküre bulgusu "beyin" sözcüğü olmadan doğal anlatılamadı; "her iki yan 11 saatten fazla uyudu" → "günde 11 saatten fazla uyku birikti" (her yarıküre için 11 saatten fazlası en az bu toplamı verir); "uyanık kalması" → özetteki vigilance anlamıyla "tetikte kalması"; son cümle özetteki "suggests" ve "successfully breeding" ile "başarıyla üreyen bu kuşların böyle uyuması ... düşündürüyor" yapıldı; uzunluk için özetteki yumurta avcısı ve saldırganlık cümlesi eklendi; "çenebantlı penguen" Pygoscelis antarcticus için yerleşik ad | 11 saat sorusunun kökü yeni cümleye uyduruldu
+- oa108 | düzeltildi: özette "energy transfer" olduğu için "kasın gücünün aktarılması" ve "Güç, 3 ile 30 milisaniye içinde aktarılır" → "enerji" | değişiklik yok
+- oa109 | tamam | değişiklik yok
+- oa110 | tamam | değişiklik yok
+
 ## taslak-10
 
 PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor. Yayın türü: hepsi "Journal Article"; yorum, derleme, düzeltme yok. Eleştiri taraması: her kayıt için başlık anahtar sözcükleri, ilk yazar ve "comment / reply / response" ile, ayrıca konu sözcükleriyle `Comment[Publication Type]` araması yapıldı; eleştiri yorumu ya da yanıt bulunmadı. Yalnız destekleyici tanıtım yazıları var (oa093 için 32467621, 32273596; oa095 için 24801183), metin değişmedi. Uzunluk oranı sonrası: doğru seçenek en uzun 16/60 (%27).

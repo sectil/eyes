@@ -22,7 +22,7 @@
       "yazar": "Drerup ve ark.",
       "dergi": "Journal of Experimental Biology",
       "yil": 2025,
-      "metin": "Birçok hayvan, çevresinin rengine ve dokusuna benzeyerek gizlenir. Sığ sularda ise dipteki görüntü durmadan değişir, çünkü dipte kayan parlak ışık bantları oluşur. Mürekkep balıklarının derisinde, kabartıp indirebildikleri küçük çıkıntılar vardır. Bir ekip, bu oynak ışığın gizlenmeye yarayan bu çıkıntıları etkileyip etkilemediğini sınadı. Ekip balıklara dokusu ve rengi farklı taşlar gösterdi; bunu hem kayan ışıkta hem durgun ışıkta yaptı. Görüntüde açık ve koyu yerler arasındaki fark büyüdükçe balıklar çıkıntılarını daha çok kabarttı. Kayan ışık bantları da çıkıntıların kabarmasına yol açtı. Bu tepki, görüş alanında bir taş olsa da olmasa da görüldü. Ekip bunun fark edilmeyi zorlaştıran bir uyum mu, yoksa görmenin bir sınırı mı olduğunu tartışıyor.",
+      "metin": "Birçok hayvan, çevresinin rengine ve dokusuna benzeyerek gizlenir. Sığ sularda ise dipteki görüntü durmadan değişir, çünkü dipte kayan parlak ışık bantları oluşur. Mürekkep balıklarının derisinde, kabartıp indirebildikleri küçük çıkıntılar vardır. Bir ekip, bu oynak ışığın gizlenmeye yarayan bu çıkıntıları etkileyip etkilemediğini sınadı. Ekip hayvanlara dokusu ve rengi farklı taşlar gösterdi; bunu hem kayan ışıkta hem durgun ışıkta yaptı. Görüntüde açık ve koyu yerler arasındaki fark büyüdükçe hayvanlar çıkıntılarını daha çok kabarttı. Kayan ışık bantları da çıkıntıların kabarmasına yol açtı. Bu tepki, görüş alanında bir taş olsa da olmasa da görüldü. Ekip bunun fark edilmeyi zorlaştıran bir uyum mu, yoksa görmenin bir sınırı mı olduğunu tartışıyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -46,7 +46,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip balıklara ne gösterdi?",
+          "soru": "Ekip hayvanlara ne gösterdi?",
           "secenekler": [
             "Dokusu ve rengi farklı taşlar",
             "Farklı büyüklükte balık maketleri",
@@ -58,10 +58,10 @@
           "tur": "ayrinti",
           "soru": "Görüntüde açık ve koyu yerler arasındaki fark büyüyünce ne oldu?",
           "secenekler": [
-            "Balıklar çıkıntılarını daha çok kabarttı",
-            "Balıklar çıkıntılarını tamamen düzleştirdi",
-            "Balıklar taşlardan uzaklaşıp kumun altına girdi",
-            "Balıkların rengi bembeyaz oldu"
+            "Hayvanlar çıkıntılarını daha çok kabarttı",
+            "Hayvanlar çıkıntılarını tamamen düzleştirdi",
+            "Hayvanlar taşlardan uzaklaşıp kumun altına girdi",
+            "Hayvanların rengi bembeyaz oldu"
           ]
         },
         {
@@ -70,7 +70,7 @@
           "secenekler": [
             "Görüş alanında taş olsa da olmasa da",
             "Yalnız görüş alanında bir taş varken",
-            "Yalnız balıklar beslenirken",
+            "Yalnız hayvanlar beslenirken",
             "Yalnız gece karanlığında"
           ]
         },
@@ -79,9 +79,9 @@
           "soru": "Ekip bu tepkiyi nasıl tartışıyor?",
           "secenekler": [
             "Gizlenme uyumu mu, görmenin sınırı mı diye",
-            "Balıkların eşlerine işaret mi verdiği diye",
+            "Hayvanların eşlerine işaret mi verdiği diye",
             "Taşların sıcaklığına mı tepki olduğu diye",
-            "Balıkların acıkınca mı kabardığı diye"
+            "Hayvanların acıkınca mı kabardığı diye"
           ]
         }
       ]
@@ -162,74 +162,74 @@
     },
     {
       "id": "oa103",
-      "baslik": "Kuşun kurduğu sahne",
+      "baslik": "Kanatla söylenen şarkı",
       "etiket": "kus",
-      "kaynak": "endler2010",
-      "pmid": "20832314",
-      "doi": "10.1016/j.cub.2010.08.033",
-      "yazar": "Endler ve ark.",
-      "dergi": "Current Biology",
-      "yil": 2010,
-      "metin": "Bir kuş, izleyicisinin gözünü yanıltan bir sahne kurabilir mi? Bir çardak kuşu türünün erkekleri, uzun bir koridoru olan bir yapı kurar. Dişi bu koridorun içinden bakar ve erkeğin yapının önündeki alanda yaptığı gösteriyi izler. Erkekler bu alana gri ve beyaz nesneler dizer. Nesneler koridorun girişinden uzaklaştıkça büyür. Bu sıralama yüzünden nesneler dişinin gözünde, gelişigüzel dizilmiş olsalardı görünecekleri hâlden daha eşit boyda görünür. Böyle bir düzen, boyutun ve uzaklığın yanlış algılanmasına yol açabilir. Araştırmacılar nesnelerin sırasını tersine çevirdi. Erkekler sıralamayı 3 gün içinde düzeltti; iki hafta sonra ilk düzenden pek fark kalmadı. Ekibe göre bu sahneyi kurup korumak, bu kuşlar için açıkça önemli.",
+      "kaynak": "bostwick2009",
+      "pmid": "19906670",
+      "doi": "10.1098/rspb.2009.1576",
+      "yazar": "Bostwick ve ark.",
+      "dergi": "Proceedings of the Royal Society B",
+      "yil": 2009,
+      "metin": "Bir kuş kanatlarıyla şarkı söyleyebilir mi? Küçük bir kuş türünün erkekleri, kur yaparken özel kanat tüyleriyle uzun ve düz bir ses çıkarır. Doğada bu sesin perdesi saniyede yaklaşık 1500 titreşimdir. Bu tüylerin sapları olağandan çok kalındır ve sesin bu sapların titreşmesinden doğduğu düşünülüyordu. Bir ekip, tüylerin titreşimini lazer ışığıyla ölçtü. Aynı ölçümü, özel tüyleri olmayan aynı aileden iki türde de yaptı. Özel tüyler 1500 titreşim dolayında güçlü biçimde tınladı; bu, canlılarda pek görülmeyen keskin bir ayardı. Aynı kanattaki sıradan tüyler tek başına güçlü tınlamadı, ama özel tüylere bağlıyken hepsi birlikte tınladı. Öteki iki türün tüyleri çok daha zayıf tınladı. Bulgular, sesin tüylerin tınlamasından doğduğu fikrine önemli bir destek veriyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Çardak kuşlarının izleyeni yanıltabilen bir sahne düzenlemesini",
-            "Çardak kuşlarının yuvalarını ağaçlara nasıl ördüğünü",
-            "Çardak kuşlarının şarkılarını kimden öğrendiğini",
-            "Çardak kuşlarının kışın hangi meyveleri topladığını"
+            "Bir kuşun kanat tüyleriyle çıkardığı sesin nasıl oluştuğunu",
+            "Kuşların göç ederken nasıl yön bulduğunu",
+            "Kuş yavrularının şarkıyı kimden öğrendiğini",
+            "Kuşların tüylerini hangi mevsimde değiştirdiğini"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Dişi gösteriyi nereden izler?",
+          "soru": "Erkekler bu sesi neyle çıkarır?",
           "secenekler": [
-            "Koridorun içinden",
-            "Bir ağacın tepesinden",
-            "Yapının arkasından",
-            "Havada uçarken"
+            "Özel kanat tüyleriyle",
+            "Gagalarını dala vurarak",
+            "Ayaklarını yere sürterek",
+            "Boğazlarını şişirerek"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Erkekler alana hangi renk nesneler dizer?",
+          "soru": "Özel tüylerin sapları nasıldır?",
           "secenekler": [
-            "Gri ve beyaz",
-            "Kırmızı ve sarı",
-            "Mavi ve yeşil",
-            "Siyah ve turuncu"
+            "Olağandan çok kalın",
+            "Olağandan çok ince",
+            "Kıvrık ve yumuşak",
+            "Çok kısa ve tüysüz"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Nesneler koridorun girişinden uzaklaştıkça nasıl değişir?",
+          "soru": "Ekip tüylerin titreşimini neyle ölçtü?",
           "secenekler": [
-            "Büyür",
-            "Küçülür",
-            "Renk değiştirir",
-            "Hep aynı boyda kalır"
+            "Lazer ışığıyla",
+            "Bir termometreyle",
+            "Bir terazi ile",
+            "Elle dokunarak"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Araştırmacılar sıralamayı tersine çevirince erkekler ne yaptı?",
+          "soru": "Sıradan tüyler özel tüylere bağlıyken ne oldu?",
           "secenekler": [
-            "3 gün içinde düzelttiler",
-            "Yapıyı bırakıp başka yere gittiler",
-            "Yeni sırayı olduğu gibi bıraktılar",
-            "Bütün nesneleri alandan attılar"
+            "Hepsi birlikte tınladı",
+            "Hiçbiri titremedi",
+            "Özel tüyleri susturdu",
+            "Kanattan koptu"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "İki hafta sonra düzen nasıldı?",
+          "soru": "Öteki iki türün tüyleri nasıl tınladı?",
           "secenekler": [
-            "İlk düzene çok yakındı",
-            "İlk düzenin tam tersiydi",
-            "Nesnelerin hepsi aynı boydaydı",
-            "Alanda hiç nesne kalmamıştı"
+            "Çok daha zayıf",
+            "Çok daha güçlü",
+            "Tıpatıp aynı güçte",
+            "Hep birlikte, tek parça gibi"
           ]
         }
       ]
@@ -411,7 +411,7 @@
             "100 kilogramdan fazla",
             "10 kilogramdan az",
             "Yaklaşık 1 kilogram",
-            "1000 kilogramdan fazla"
+            "Yaklaşık 50 kilogram"
           ]
         },
         {
@@ -466,7 +466,7 @@
       "yazar": "Libourel ve ark.",
       "dergi": "Science",
       "yil": 2023,
-      "metin": "Gözlerin kapanıp birkaç saniyeliğine uykuya dalınmasına mikro uyku denir. Bu kadar kısa uykuların, uykunun yararlarını sağlamaya yetip yetmediği bilinmiyordu. Sürekli uyanık kalması gereken hayvanların bu yola başvurabileceği düşünülüyordu. Bir ekip, Antarktika'da yaşayan yabani çenebantlı penguenlerin uykusunu, kafalarındaki elektrik etkinliğini kaydederek inceledi. Kayıtlar hem denizde hem de kuşlar yuvalarındayken alındı. Penguenler günde 10 binden fazla kez uyuklayıp uyandı. Her uyku ortalama yalnız 4 saniye sürdü. Uyku bazen kafanın iki yanında birden, bazen yalnız bir yanında görüldü. Bu kısa uykular toplanınca her iki yan da günde 11 saatten fazla uyumuş oldu. Ekibe göre uykunun yararları küçük parçalarla da birikebilir.",
+      "metin": "Gözlerin kapanıp birkaç saniyeliğine uykuya dalınmasına mikro uyku denir. Bu kadar kısa uykuların, uykunun yararlarını sağlamaya yetip yetmediği bilinmiyordu. Sürekli tetikte kalması gereken hayvanların bu yola başvurabileceği düşünülüyordu. Bir ekip, Antarktika'da yaşayan yabani çenebantlı penguenlerin uykusunu, kafalarındaki elektrik etkinliğini kaydederek inceledi. Kayıtlar hem denizde hem de kuşlar yuvalarındayken alındı. Yuvadaki kuşlar, yumurtalarını kapmak isteyen bir avcıyla ve öteki penguenlerin saldırganlığıyla sürekli karşı karşıyaydı. Penguenler günde 10 binden fazla kez uyuklayıp uyandı. Her uyku ortalama yalnız 4 saniye sürdü. Bu kısa uykular toplanınca günde 11 saatten fazla uyku birikti. Ekibe göre başarıyla üreyen bu kuşların böyle uyuması, uykunun yararlarının küçük parçalarla da birikebileceğini düşündürüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -520,7 +520,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kısa uykular toplanınca kafanın her iki yanı günde ne kadar uyumuş oldu?",
+          "soru": "Kısa uykular toplanınca günde ne kadar uyku birikti?",
           "secenekler": [
             "11 saatten fazla",
             "1 saatten az",
@@ -540,7 +540,7 @@
       "yazar": "Zeng ve ark.",
       "dergi": "Current Biology",
       "yil": 2025,
-      "metin": "Çok hızlı bir hareket için kasın gücünün bedene verimle aktarılması gerekir. Omurgalı, yani sırt kemiği olan hayvanlarda yoğun dokuların ve sınırlı esnekliğin bu gücü kısıtladığı düşünülür. Bir ekip, dilini çok hızlı fırlatan iki hayvan grubunu inceledi: bukalemunları ve akciğeri olmayan bazı semenderleri. İki grup, birbirinden bağımsız olarak aynı çözümü geliştirmiş. Dilin içinde uca doğru incelen sert bir çubuk vardır; kaslar bu çubuğu sıkınca dil kayarak fırlar. Bu düzen sayesinde dil saniyede 2 ile 5,5 metre hızla ileri atılır. Bu hız, boyları birbirinden 30 kat farklı hayvanlarda görüldü. Güç, 3 ile 30 milisaniye içinde aktarılır; milisaniye saniyenin binde biridir. Ekibe göre bu başarı olağanüstü malzemelerden değil, parçaların düzeninden geliyor.",
+      "metin": "Çok hızlı bir hareket için kasın enerjisinin verimle aktarılması gerekir. Omurgalı, yani sırt kemiği olan hayvanlarda yoğun dokuların ve sınırlı esnekliğin bu gücü kısıtladığı düşünülür. Bir ekip, dilini çok hızlı fırlatan iki hayvan grubunu inceledi: bukalemunları ve akciğeri olmayan bazı semenderleri. İki grup, birbirinden bağımsız olarak aynı çözümü geliştirmiş. Dilin içinde uca doğru incelen sert bir çubuk vardır; kaslar bu çubuğu sıkınca dil kayarak fırlar. Bu düzen sayesinde dil saniyede 2 ile 5,5 metre hızla ileri atılır. Bu hız, boyları birbirinden 30 kat farklı hayvanlarda görüldü. Enerji, 3 ile 30 milisaniye içinde aktarılır; milisaniye saniyenin binde biridir. Ekibe göre bu başarı olağanüstü malzemelerden değil, parçaların düzeninden geliyor.",
       "sorular": [
         {
           "tur": "ana",
