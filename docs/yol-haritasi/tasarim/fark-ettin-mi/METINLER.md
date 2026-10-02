@@ -59,3 +59,12 @@ emoji yok.
 | N2 | Fark Ettin mi? alıştırmasında değişikliği ilk kez {N} nesnelik sahnede buldun. | Nef satırı (metricBest) | T |
 | N3 | Fark Ettin mi? alıştırmasında başlangıcın {B} nesneydi; son günlerde {C}. | Nef kartı (metricChange, yalnız `better`) | T |
 | N4 | Uzmanlar da kaçırıyor: radyologların çoğu akciğer görüntüsüne konan goril resmini görmedi. (Drew 2013) | bilim satırı | T |
+
+## Sahip onayı (2026-10-02, "Onaylıyorum") — kapı iki tur (kapi/metin-tur1.json, metin-tur2.json)
+Aşağıdakiler **S**; yukarıdaki tablolarda aynı kimliğin T durumu bu listeyle geçersiz olur. Örnekler doldurulmuş hâldir.
+- M1 "Fark Ettin mi? · 2 dk · Cadde" · M2 "Görevin / Mavi arabaları say" · M3 "Gözün mavi arabalarda olsun. Sonunda birkaç sorum var." · M4 "01 Caddeden geç · 40 sn / 02 Ne değişti? · 4 sahne / 03 Gözünden kaçan · 2 soru"
+- D1 "Ne değişti? · 2 / 4" · D2 "Bir şey değişti. Nerede?" · D3 "Değişen yere dokun." · D4 (yeni) "Bu sahnede {N} nesne var" · D5 "Bulamadım, bir daha göster" · D6 "Buldun." · D7 "{Ne} {önce}ydı, {sonra} oldu" · D8 (yeni) "İlk bakışta buldun. Sıradaki sahnede {N} nesne var." / "İkinci bakışta buldun. Sıradaki sahnede {N} nesne var." · D9 (yeni) "Burasıydı. Sıradaki sahnede {N} nesne var."
+- G1 "Gözünden kaçan · {i} / 2" · G2 "Caddede kahkaha atan bir kadın vardı. / Onu fark ettin mi?" · G3 "Gördüm · Görmedim" · G4 "Elbisesi ne renkti? / Görmediysen de tahmin et." · G5 "{sahne} · {dk} dk önce" · Ş1 (yeni) "Görmediğini düşünsen de doğru bildin. Araştırmalarda bu tür tahminler şanstan daha sık tutuyor."
+- R1 "Bugünkü turun" · R2 (yeni) "{N} nesne" / "Değişikliği {N} nesnenin olduğu kalabalık bir sahnede buldun." · R3: başlangıç oluşurken Gelişim'in onaylı sözü "henüz belli değil" (ayrı çip metni yok) · R4 (yeni) "Başlangıç: {B} nesne · Bugün: {N} nesne" · R5 TAM / YAKIN / KAÇTI / GÖRDÜN / TAHMİN ve "{görev}: {n} geçti, sen de {n} dedin"
+- Y1 (yeni) "Caddeden geç, değişeni bul · 2 dk" · Y2 "Yeni sahne: {sahne} · 2 dk"
+- N1–N4 bu listede yok: Nef kartı sahip kararıyla yalnız güçlü haberde (örüntü, ilerleme) ve Nef'in onaylı genel bankasıyla konuşur.

@@ -1,0 +1,109 @@
+{
+ "D4a": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Tek başına 'İkinci bakış' neyi anlattığını söylemiyor, belirsiz kalıyor."
+  ]
+ },
+ "D4b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D4c": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Noktayla bölünmüş iki parça, cümle gibi değil makine etiketi gibi duruyor."
+  ]
+ },
+ "D8a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D8b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D9a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D9b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Ş1a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Ş1b": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "'Fark etmesen de' görmediğimi kesin sayıyor, mesajın kendisiyle çelişiyor.",
+   "\"Tahmin\" kelimesi iki cümlede tekrar ediyor, \"fark etmesen de\" kişinin kendi sözüyle çelişiyor.",
+   "\"Fark etmesen de\" kişinin yerine hüküm veriyor, \"doğru\" da iki kez tekrarlanıyor.",
+   "\"Doğru\" iki kez tekrarlanıyor, \"fark etmesen de\" ise kişinin fark etmediğini kesin bir şeymiş gibi söylüyor.",
+   "'Doğru' iki kez geçiyor, cümle ağır ve kitap gibi."
+  ]
+ },
+ "R2a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "R3a": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "'Başlangıcın oluşuyor' tuhaf ve ne demek istediği belirsiz.",
+   "\"Başlangıcın oluşuyor\" anlamı belirsiz, Türkçede tuhaf duruyor.",
+   "\"Başlangıcın oluşuyor\" Türkçede tuhaf duruyor ve ne demek istediği anlaşılmıyor.",
+   "\"Başlangıcın oluşuyor\" ne demek olduğu anlaşılmayan, tuhaf bir ifade.",
+   "'Başlangıcın oluşuyor' ne demek anlamadım."
+  ]
+ },
+ "R3b": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "Bir çip için uzun ve robot gibi; \"3. gün, 8 günde tamamlanır\" kısmı da hantal.",
+   "Bir çip için uzun ve robot gibi."
+  ]
+ },
+ "R4a": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "'10 nesnede buluyordun' doğal Türkçe değil, takılıyor.",
+   "\"10 nesnede buluyordun\" ne demek olduğu ilk okumada anlaşılmıyor.",
+   "\"10 nesnede buluyordun\" sanki değişikliği nesnenin içinde buluyormuş gibi okunuyor, oysa kastedilen 10 nesneli sahne."
+  ]
+ },
+ "R4b": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Tablo satırı gibi kuru ve robotik, cümle değil."
+  ]
+ },
+ "Y1a": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Hangi değişiklik olduğu belli değil, bağlamsız bir buyruk gibi."
+  ]
+ },
+ "Y1b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ }
+}
