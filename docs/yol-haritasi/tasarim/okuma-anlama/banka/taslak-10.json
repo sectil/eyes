@@ -142,8 +142,8 @@
           "tur": "ayrinti",
           "soru": "Güvelerin duyduğu en yüksek perde için önceden ne düşünülüyordu?",
           "secenekler": [
-            "Yarasa seslerinden çok daha düşük olduğu",
-            "Yarasa seslerinden çok daha yüksek olduğu",
+            "En yüksek yarasa sesinden çok daha düşük olduğu",
+            "En yüksek yarasa sesinden çok daha yüksek olduğu",
             "Hiçbir zaman ölçülemeyeceği",
             "Gece ile gündüz arasında değiştiği"
           ]
@@ -160,7 +160,7 @@
       "yazar": "Becher ve ark.",
       "dergi": "Nature Microbiology",
       "yil": 2020,
-      "metin": "Bakterilerin saldığı geosmin ve 2-MIB denen iki madde toprak gibi kokar. İnsanlar ve pek çok hayvan bu maddeleri çok düşük miktarda bile fark eder. Streptomyces denen bakterilerin neredeyse bütün türleri geosmin yapma genlerini taşır. Yine de bu kokunun bakteriye ne kazandırdığı pek bilinmiyordu. Bir ekip arazide yaptığı deneylerde, kollembol denen toprak eklembacaklılarının bu bakteri kolonilerinin kokusuna geldiğini gördü. Bir kollembol türünün duyargaları iki maddeye de tepki verdi ve hayvanlar bu maddelere yöneldi. Bakteriler kokuyu yalnız spor üretirken salıyordu. Kollemboller kolonilerden beslenirken sporları hem dışkılarıyla hem de vücutlarına yapışmış hâlde taşıdı. Böylece koku, sporların toprak hayvanlarınca yayılmasını sağlayarak bakterinin yaşam döngüsünü tamamlıyor.",
+      "metin": "Bakterilerin saldığı geosmin ve 2-MIB denen iki madde toprak gibi kokar. İnsanlar ve pek çok hayvan bu maddeleri çok düşük miktarda bile fark eder. Streptomyces denen bakterilerin neredeyse bütün türleri geosmin yapma genlerini taşır. Yine de bu kokunun bakteriye ne kazandırdığı pek bilinmiyordu. Bir ekip arazide yaptığı deneylerde, kollembol denen toprak eklembacaklılarının bu bakteri kolonilerinin kokusuna geldiğini gördü. Bir kollembol türünün duyargaları iki maddeye de tepki verdi ve hayvanlar bu maddelere yöneldi. Bakteriler kokuyu yalnız spor üretirken salıyordu. Kollemboller kolonilerden beslenirken sporları hem dışkılarıyla hem de vücutlarına yapışmış hâlde taşıdı. Bulgular, kokunun sporların toprak hayvanlarınca yayılmasına yardım ederek bakterinin yaşam döngüsünü tamamladığını gösteriyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -530,7 +530,7 @@
       "yazar": "Nakano ve ark.",
       "dergi": "Proceedings of the Royal Society B",
       "yil": 2009,
-      "metin": "Gözle dikkat isteyen bir işi yaparken genellikle daha az göz kırparız. İşin ne zaman başlayıp biteceği belliyse, göz kırpmalar işin öncesine ya da sonrasına toplanır. Video izlerken sahne değişimlerinde kırpmamız beklenir. Ama bir sahnenin ne kadar süreceği önceden bilinmez. Bir ekip, katılımcılara aynı kısa video öykülerini izletip göz kırpmalarını kaydetti. Kişilerin göz kırpmaları büyük ölçüde aynı anlara denk geldi, ama doğrudan sahne geçişlerine bağlı değildi. Kırpmalar daha çok bir hareketin bittiği, ana karakterin görünmediği ya da benzer bir sahnenin tekrarlandığı anlarda toplandı. Arka planda oynayan bir videoda ya da sesli okunan bir öyküyü dinlerken bu uyum görülmedi. Ekibe göre insanlarda, önemli bir görüntüyü kaçırmamak için kırpmaya uygun anı arayan ortak bir düzenek olabilir.",
+      "metin": "Gözle dikkat isteyen bir işi yaparken genellikle daha az göz kırparız. İşin ne zaman başlayıp biteceği belliyse, göz kırpmalar işin öncesine ya da sonrasına toplanır. Video izlerken sahne değişimlerinde kırpmamız beklenir. Ama bir sahnenin ne kadar süreceği önceden bilinmez. Bir ekip, katılımcılara aynı kısa video öykülerini izletip göz kırpmalarını kaydetti. Kişilerin göz kırpmaları büyük ölçüde aynı anlara denk geldi, ama doğrudan sahne geçişlerine bağlı değildi. Bu ortak kırpmalar, bir hareketin bittiği, ana karakterin görünmediği ya da benzer bir sahnenin tekrarlandığı anlarda oldu. Arka planda oynayan bir videoda ya da sesli okunan bir öyküyü dinlerken bu uyum görülmedi. Ekibe göre insanlarda, önemli bir görüntüyü kaçırmamak için kırpmaya uygun anı arayan ortak bir düzenek olabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -554,7 +554,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Göz kırpmalar hangi anlarda toplandı?",
+          "soru": "Ortak göz kırpmalar hangi anlarda oldu?",
           "secenekler": [
             "Bir hareketin bittiği anlarda",
             "Ana karakterin konuştuğu anlarda",
@@ -574,12 +574,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Hangi durumda göz kırpmalardaki uyum görülmedi?",
+          "soru": "Video yerine sesli okunan bir öykü dinlenince ne oldu?",
           "secenekler": [
-            "Sesli okunan bir öyküyü dinlerken",
-            "Aynı kısa video öykülerini izlerken",
-            "Ana karakter ekrandan çıkınca",
-            "Benzer bir sahne tekrarlanınca"
+            "Kırpmalar arasında uyum görülmedi",
+            "Kırpmalar videodakinden de uyumlu oldu",
+            "Kişiler öykü boyunca hiç göz kırpmadı",
+            "Kırpmalar yalnız öykünün sonunda toplandı"
           ]
         },
         {
@@ -604,7 +604,7 @@
       "yazar": "Arndt ve ark.",
       "dergi": "Science",
       "yil": 2015,
-      "metin": "Bombardıman böcekleri kendilerini korumak için sıcak bir sıvı püskürtür. Bu püskürtme tek bir fışkırma değildir; art arda gelen çok hızlı patlamalardan oluşur. Patlamalar, vücudun arka ucundaki bir bezin içinde, tepkime odası denen bir bölmede olur. Bir ekip, püskürtmenin neden kesik kesik çıktığını anlamak istedi. Böceklerin bu bölgesinin yapısını inceledi. Ayrıca özel bir X ışını düzeneğiyle canlı böceklerin içini görüntüleyip patlamaları doğrudan izledi. Odadaki buharın nasıl hareket ettiğini de ölçtü. Kesik kesik akışı, maddelerin saklandığı bölme ile tepkime odasının birleştiği yerdeki özel yapıların denetlediğini buldu. Modeller, her patlamanın bu yapıları yerinden oynattığını düşündürüyor. Yani akışı patlamanın kendisi düzenliyor olabilir.",
+      "metin": "Bombardıman böcekleri kendilerini korumak için sıcak bir sıvı püskürtür. Bu püskürtme tek bir fışkırma değildir; art arda gelen çok hızlı patlamalardan oluşur. Patlamalar, vücudun arka ucundaki bir bezin içinde, tepkime odası denen bir bölmede olur. Bir ekip, püskürtmenin neden kesik kesik çıktığını anlamak istedi. Böceklerin bu bölgesinin yapısını inceledi. Ayrıca özel bir X ışını düzeneğiyle canlı böceklerin içini görüntüleyip patlamaları doğrudan izledi. Odadaki buharın nasıl hareket ettiğini de ölçtü. Ölçümler, kesik kesik akışı maddelerin saklandığı bölme ile tepkime odasının birleştiği yerdeki özel yapıların denetlediğini gösterdi. Modeller, her patlamanın bu yapıları yerinden oynattığını düşündürüyor. Yani akışı patlamanın kendisi düzenliyor olabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -613,7 +613,7 @@
             "Bir böceğin püskürtmesinin neden kesik kesik çıktığını",
             "Böceklerin yiyeceklerini nasıl ısıttığını",
             "X ışınlarının nasıl bulunduğunu",
-            "Böceklerin yuvalarını nasıl savunduğunu ve onardığını"
+            "Böceklerin yuvalarını nasıl kazdığını ve onardığını"
           ]
         },
         {

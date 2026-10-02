@@ -1,5 +1,20 @@
 # Bilimsel doğrulama kayıtları
 
+## taslak-10
+
+PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor. Yayın türü: hepsi "Journal Article"; yorum, derleme, düzeltme yok. Eleştiri taraması: her kayıt için başlık anahtar sözcükleri, ilk yazar ve "comment / reply / response" ile, ayrıca konu sözcükleriyle `Comment[Publication Type]` araması yapıldı; eleştiri yorumu ya da yanıt bulunmadı. Yalnız destekleyici tanıtım yazıları var (oa093 için 32467621, 32273596; oa095 için 24801183), metin değişmedi. Uzunluk oranı sonrası: doğru seçenek en uzun 16/60 (%27).
+
+- oa091 | tamam ("sülük" tırmanıcı bitkide tendrilin yerleşik Türkçe terimi) | değişiklik yok
+- oa092 | tamam ("insan kulağının duyamayacağı" ultrasonic'in genel bilgi sadeleştirmesi) | önceki inanç sorusunda "yarasa seslerinden çok daha düşük" genellemesi metne göre "en yüksek yarasa sesinden" yapıldı
+- oa093 | düzeltildi: son cümle kesin yargıdan özetteki "indicate" anlamına, "Bulgular ... gösteriyor"a çekildi | değişiklik yok
+- oa094 | tamam | değişiklik yok
+- oa095 | tamam (en az yenmenin ağaca tırmananlarda olması özetteki iki karşılaştırmadan çıkıyor) | değişiklik yok
+- oa096 | tamam | değişiklik yok
+- oa097 | tamam | değişiklik yok
+- oa098 | düzeltildi: özette yalnız eş zamanlı kırpmaların belli sahnelerde olduğu yazıyor; "kırpmalar daha çok ... toplandı" → "bu ortak kırpmalar ... anlarda oldu" | kırpma anı sorusu kökü buna uyduruldu; "hangi durumda uyum görülmedi" olumsuz kökü "sesli öykü dinlenince ne oldu" diye yeniden kuruldu
+- oa099 | düzeltildi: "buldu" → özetteki "indicates" anlamıyla "ölçümler ... gösterdi"; "bombardıman böceği" Brachinini için yerleşik ad | ana soruda savunma temasıyla örtüşen "yuvalarını nasıl savunduğunu" seçeneği "nasıl kazdığını" yapıldı
+- oa100 | tamam | değişiklik yok
+
 ## taslak-09
 
 PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor. Yayın türü: hepsi "Journal Article" (oa087 ek olarak "Video-Audio Media", özgün çalışma); yorum, derleme, düzeltme yok. Uzunluk oranı sonrası: doğru seçenek en uzun 17/60 (%28).
