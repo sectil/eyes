@@ -89,3 +89,31 @@ Bulgular:
 - Biri "ms"yi anlamadı.
 
 Durum: sahibe soruldu.
+
+## Sahip kararı (2026-10-02): ses seviyesi
+Kartta "● Dinliyorum" yazısı ve ses çubukları var. Değerler SpeechPlugin `speechLevel` olayından gelir; yalnız 0–1
+arası bir sayı, ses gitmez.
+
+## Ses seviyesi · tur 1 · beş yeni kişi
+| dinle0 | dinle1 | dinle2 | görevler |
+|---|---|---|---|
+| 1/5 | 3/5 | 2/5 | **5/5** |
+
+Bulgular ve düzeltmeler:
+- Dinlerken alan boştu → "Buraya yazılır".
+- Satır kalkınca başlık kayıyordu → satırın yeri tutuldu.
+- Düğme genişliği değişiyordu → tek genişlik, "Söyle" ve "Durdur".
+
+## Ses seviyesi · tur 2 · beş yeni kişi
+| yaz-mic | dinle0 | dinle1 | dinle2 | görevler |
+|---|---|---|---|---|
+| 2/5 | 2/5 | 3/5 | 2/5 | **5/5** |
+
+Gerçek kusur: tur 1'den sonra eklenen yer tutma, 320'de "Ne gördün?" başlığını basamak etiketinin üstüne bindiriyordu.
+İki kişinin H'si buna dayanıyordu. Düzeltildi: dinleme satırı ipucu yerinin içinde, mikrofonlu hâlde bu yer hep iki
+satır. Öteki bulgular:
+- "Buraya yazılır" edilgen bulundu.
+- Halkalar arası boşluk dar.
+- Dinleme bitince onay işareti yok.
+
+Durum: sahibin seçtiği tasarım iki turda geçmedi. Sahibe soruldu.

@@ -48,10 +48,9 @@ function Track({ cur, start = 0, lost = 0, lo = 6, hi = 18 }) {
 
 // Dinlerken kartta: kırmızı nokta, "Dinliyorum" ve ses çubukları (sahip kararı 2026-10-02: sesin alındığı görünsün)
 const LVL = [0.55, 0.8, 1, 0.8, 0.55]
-// on değilken yeri tutulur (görünmez): dinleme başlayıp bitince başlık kaymaz (dinleme kapısı tur 4)
-function LiveRow({ level, on }) {
+function LiveRow({ level }) {
   return (
-    <span className="live" role="status" style={on ? undefined : { visibility: 'hidden' }} aria-hidden={on ? undefined : true}>
+    <span className="live">
       <i aria-hidden="true" />Dinliyorum
       <span className="lvl" aria-hidden="true">{LVL.map((m, k) => <b key={k} style={{ height: 4 + Math.round(14 * Math.min(1, level * m * 1.4)) }} />)}</span>
     </span>
@@ -345,7 +344,15 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
           <span className="mask" ref={maskRef} aria-hidden="true" style={{ visibility: 'hidden' }}>
             <i style={{ width: `${pair[0].length * 0.62}em` }} /><i style={{ width: `${pair[1].length * 0.62}em` }} />
           </span>
-          {sub === 'ask' ? <div className="q" role="status">Ne gördün?{micReady ? <LiveRow level={level} on={listening} /> : null}<small>{listening ? (value.trim() ? 'İkinci kelimeyi söyle.' : 'İki kelimeyi söyle.') : heard ? "Gerekirse düzelt, sonra Gönder'e bas." : unheard ? 'Duyamadım, yazabilirsin.' : micReady ? "Yaz ve Gönder'e bas, ya da mikrofona söyle." : "Yaz ve Gönder'e bas."}</small></div> : null}
+          {sub === 'ask' ? (
+            <div className="q" role="status">Ne gördün?
+              {/* Mikrofonlu hâlde ipucu yeri hep iki satır: dinleme satırı gelip gidince başlık kaymaz, 320'de taşmaz */}
+              <small className={micReady ? 'two' : undefined}>
+                {listening ? <LiveRow level={level} /> : null}
+                {listening ? (value.trim() ? 'İkinci kelimeyi söyle.' : 'İki kelimeyi söyle.') : heard ? "Gerekirse düzelt, sonra Gönder'e bas." : unheard ? 'Duyamadım, yazabilirsin.' : micReady ? "Yaz ve Gönder'e bas, ya da mikrofona söyle." : "Yaz ve Gönder'e bas."}
+              </small>
+            </div>
+          ) : null}
           {fb?.ok ? <span className="words ok" role="status"><span className="w ok">{fb.words[0]}</span><span className="w ok">{fb.words[1]}</span></span> : null}
           {fb && !fb.ok ? (
             <div className="cmp" role="status">
