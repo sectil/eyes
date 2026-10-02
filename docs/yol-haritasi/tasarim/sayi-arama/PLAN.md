@@ -185,9 +185,11 @@ yuvarlaklık Ana sayfa ile aynı aile.
 |---|---|---|---|
 | intro | 4/5 | 5/5 | geçti (tur 2 hâli: `maket/tur2/intro-*`) |
 | found | 3/5 | 5/5 | geçti (tur 2 hâli) |
-| play | 3/5 | 2/5 | kaldı: durağan görüntü hareketi göstermiyor; renk karışıklığı |
-| result1 | 0/5 | 0/5 | kaldı: ilk günlerde ekran "bekle" diyor |
-| result2 | 3/5 | 3/5 | kaldı: üç sayının hangisinin ne olduğu yazmıyor |
+| play | 3/5 | 2/5 | tur 3: **4/5 geçti** (`maket/son/play-*`) |
+| result1 | 0/5 | 0/5 | tur 3: 0/5 kaldı; sahibe soruldu (2026-10-02) |
+| result2 | 3/5 | 3/5 | tur 3: **5/5 geçti** (`maket/son/result2-*`) |
+
+Tur 3 sahip isteğiyle, yeni beş kimlikle yapıldı (`kapi/5sn-tur3.md`).
 
 Bağlayıcı maddeler `kapi/5sn-tur2.md` sonundaki 7 madde. Yöntem değişikliği: `play` ve sonuç ekranlarının kapısı
 gerçek kodda, hareketli ekran kaydıyla yapılır (Fark Ettin mi? kararıyla aynı). result1 için sahip kararı §4.1b.

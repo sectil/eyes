@@ -40,7 +40,7 @@ Yasaklar: sağlık ve "zekâ" iddiası yok; "beyin" ve "tanıma" yok; değişim 
 | O4 | Bu dizi değil (yanlış kaydırmada, 1 sn) | T |
 | O5 | Göster (90 sn sonra) | T |
 | O6 | Kalan diziler (Göster'e basınca) | T |
-| O7 | Kendi hızında ara. Geri sayım yok. | T |
+| O7 | Kendi hızında ara. Geri sayım yok. | K B (tur 3) |
 
 ## Sonuç (S) · kapıdan geçmedi; son hâl kodda kapıya girer
 | # | Metin | Durum |
@@ -52,7 +52,8 @@ Yasaklar: sağlık ve "zekâ" iddiası yok; "beyin" ve "tanıma" yok; değişim 
 | S5 | Başlangıç · {d}/8 gün | T |
 | S6 | {d} sn daha hızlı / {d} sn daha yavaş / önceki turla aynı | T (sahip kararı 2026-10-02) |
 | S7 | Önceki turuna göre · kısa daha iyi · Önceki tur · Bugün | T |
-| S8 | başlangıcından iyi / değişim yok / henüz belli değil | onaylı Gelişim sözcükleri |
+| S8 | başlangıcından iyi / değişim yok / henüz belli değil | onaylı Gelişim sözcükleri; result2 tur 3 5/5 |
+| S9b | result2'deki S2, S3, S4, S9, S10 | K (tur 3, 5/5); "Dizi başına süren" için iki kişi "yarım" dedi, B verilmedi |
 | S9 | Grafik: başlangıç · bugün · Son 14 gün · düşük daha iyi | T |
 | S10 | Tamam | T |
 
