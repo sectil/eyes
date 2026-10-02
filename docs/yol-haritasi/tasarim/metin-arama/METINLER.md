@@ -12,7 +12,7 @@ kendi onayım → sahip. "beyin" ve "tanıma" sözcükleri geçmez. Değişim s�
 | G1 | Dikkat · 2 dk | üst satır |
 | G2 | Kelime Avı | başlık |
 | G3 | Bilimden kısa bir metin, aranan bir kelime. Bul ve dokun; metinde yoksa “Yok” de. | |
-| G3b | Bir deneyde kuzgunlar, ileride kullanacakları bir aleti 17 saat öncesinden seçebildi. | giriş örnek kartındaki metin; aranan kelime "kuzgunlar" |
+| G3b | Bir deneyde kuzgunlar, ileride kullanacakları bir aleti 17 saate varan süre öncesinden seçebildi. | giriş örnek kartındaki metin; aranan kelime "kuzgunlar" |
 | G4a | Kelime üstte çıkar | adım 1 |
 | G4b | Metinde bul ve dokun | adım 2 |
 | G4c | Yoksa “Yok” de | adım 3 |
@@ -22,10 +22,10 @@ kendi onayım → sahip. "beyin" ve "tanıma" sözcükleri geçmez. Değişim s�
 ### Arama
 | Kimlik | Metin | Not |
 |---|---|---|
-| A1 | Bu kelimeyi bul | aranan kelimenin üstünde, ortada; 320'de de görünür |
-| A1b | {s} sn kaldı | süre çizgisinin yanında; 20'den geri sayar |
+| A1 | Bu kelimeyi bul ve dokun | aranan kelimenin üstünde, ortada; 320'de de görünür |
+| A1b | {s} sn kaldı | süre çizgisinin yanında, ikincil renkte; 20'den geri sayar |
 | A2 | Metinde yok | düğme |
-| A3 | {Yazar} ve ark. · {Dergi} {Yıl} · PMID {pmid} | arama sırasında görünmez; A9 geçişinde ve sonuçta S7 altında. İki yazarlıda "{Yazar1} ve {Yazar2}" |
+| A3 | {Yazar} ve ark. · {Dergi} {Yıl} · PMID {pmid} | arama sırasında görünmez; yalnız A9 geçişinde. İki yazarlıda "{Yazar1} ve {Yazar2}" |
 | A4a | Buldun | bulununca kelimenin üstündeki etiket; kelime ve süre yeşile döner |
 | A4b | {s} saniyede | bulma süresi, kelimenin altında büyük sayı; süre çizgisi kalkar |
 | A5 | Bu değil | yalnız sesli okuyucu; yanlış dokunuşta kelime kısa sallanır, renk değişmez |
@@ -40,15 +40,16 @@ kendi onayım → sahip. "beyin" ve "tanıma" sözcükleri geçmez. Değişim s�
 ### Sonuç
 | Kimlik | Metin | Not |
 |---|---|---|
-| S1 | Bu turda tipik bulma süren | büyük sayının üst etiketi |
-| S2 | {x} sn | büyük sayı: doğru bulunan kelimelerin ortanca süresi |
+| S0 | Yeni en iyi turun | yalnız bu turun ortalaması önceki en iyiden düşükse; ilk turda yok |
+| S1 | Bu turdaki ortalaman | büyük sayının üst etiketi |
+| S2 | {x} sn | doğru bulunan kelimelerin ortalama süresi, her kelime en çok 20 sn |
 | S2b | {d}/6 · doğru | sağda; doğru bulunan ve doğru "Yok" sayısı |
 | S3b | Süre için en az 3 kelime bulmak gerekiyor; bu tur sayılarla kaydedildi. | 3'ten az bulunduysa S1 ve S2 yerine |
-| S4 | Bugüne kadarki en iyi turun · {x} sn | en düşük `medianSec`; değişim sözcüğü değildir, Nef'in rekor anıyla aynı veri. İlk turda gösterilmez |
-| S5 | Kelime bulma süresi | Gelişim kutusunun başlığı, metrik adıyla aynı (GL1) |
-| S6b | 8 gün oynayınca başlangıç süren belli olur. | yalnız başlangıç oluşurken |
-| S6 | Başlangıç · {k}/8 gün · başlangıcından iyi · değişim yok · henüz belli değil | hüküm sözcüğü ve sayı `metricStatusV2` + `changeText` + `verdictWord`'den; modül kendisi kurmaz |
-| S7 | Bugün öğrendiğin | altında iki metnin başlığı ve A3 satırı |
+| S4 | Kelimelerin | altı kelimelik özet başlığı; 320'de gizli |
+| S4b | {kelime} · {s} sn · yok, doğru · metindeydi · süre doldu | özet kutularındaki sonuç; yanlış "Yok" "metindeydi", süre dolması "süre doldu" |
+| S5 | Kelime bulma süresi | yalnız başlangıç oluştuktan sonra, S6 ile tek satır |
+| S6 | başlangıcından iyi · değişim yok · henüz belli değil | `metricStatusV2` + `changeText` + `verdictWord`'den; modül kendisi kurmaz |
+| S7 | Bugün okuduğun | altında iki metnin başlığı ve "{Yazar} ve ark. · {Dergi} {Yıl}"; PMID yok |
 | S8 | Tamam | düğme |
 
 ### Neye dayanıyor? sayfası
@@ -69,8 +70,8 @@ kendi onayım → sahip. "beyin" ve "tanıma" sözcükleri geçmez. Değişim s�
 ### Nef (taslak; Nef oturumunun onaylı cümle biçimine göre son hâli orada kurulur)
 | Kimlik | Metin | An türü |
 |---|---|---|
-| NF1 | İlk Kelime Avı turun tamam: kelimeleri çoğunlukla {x} saniyede buldun. | firstTime |
-| NF2 | Kelime Avı'nda en hızlı turun: {x} saniye. | metricBest; `better: 'down'` olduğu için en düşük süre |
+| NF1 | İlk Kelime Avı turun tamam: bir kelimeyi ortalama {x} saniyede buldun. | firstTime |
+| NF2 | Kelime Avı'nda yeni en iyi turun: ortalama {x} saniye. | metricBest; `better: 'down'` olduğu için en düşük süre |
 | NF3 | Kelime Avı'nda bulma süren başlangıcından iyi: {a} → {b} saniye. | metricChange, yalnız doğrulanmış değişimde |
 | Ad çekimleri | Kelime Avı · Kelime Avı'nda · Kelime Avı'ndan · Kelime Avı'nı · Kelime Avı'na | `nef.name` |
 
@@ -93,9 +94,9 @@ Bal arıları kartlardaki şekilleri karşılaştırıp daha az şekilli olanı 
 
 Hedefler: **papağanlarda** kolay · **kartı** benzer · **arıya** yok
 
-### B2 · 17 saat sonrası için alet seçen kuzgunlar (`kabadayi2017`, B tipi, 35 kelime)
+### B2 · 17 saate kadar sonrası için alet seçen kuzgunlar (`kabadayi2017`, B tipi, 37 kelime)
 
-Geleceği planlamak uzun süre insana ve büyük maymunlara özgü sanıldı. Bir deneyde kuzgunlar, ileride kullanacakları bir aleti 17 saat öncesinden seçebildi; kendilerini de tuttular. Sonuçlar maymunlarınkine benziyor. Araştırmacılara göre bu beceri kuzgunlarda, maymunlardan bağımsız gelişmiş.
+Geleceği planlamak uzun süre insana ve büyük maymunlara özgü sanıldı. Bir deneyde kuzgunlar, ileride kullanacakları bir aleti 17 saate varan süre öncesinden seçebildi; kendilerini de tuttular. Sonuçlar maymunlarınkine benziyor. Araştırmacılara göre bu beceri kuzgunlarda, maymunlardan bağımsız gelişmiş.
 
 Hedefler: **aleti** kolay · **kuzgunlarda** benzer · **maymunlara** iki benzer
 

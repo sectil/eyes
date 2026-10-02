@@ -209,6 +209,20 @@ h1 { font-family: var(--font-display); font-weight: 700; font-size: 30px; line-h
 .grp { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; gap: 16px; }
 .paper.top p { font-size: 24px; }
 @media (max-width: 340px) { .grp { gap: 8px; } .paper.top p { font-size: 18.5px; } }
+
+/* tur 5 */
+.hrow b.left { font: 600 15px var(--font-body); color: var(--ink-3); }
+.newbest { flex: none; align-self: flex-start; display: inline-flex; gap: 8px; align-items: center; padding: 10px 16px; border-radius: 16px; background: var(--ok-bg); color: var(--ok); font: 700 17px var(--font-display); }
+.rhero .big { font-size: 84px; } .rk b { font-size: 40px; }
+.lc { padding: 18px; } .lc b { font-size: 18px; line-height: 1.3; } .lc span { font-size: 14px; margin-top: 6px; }
+.learn { gap: 10px; } .lt { font-size: 15px; }
+@media (max-width: 340px) { .rhero .big { font-size: 58px; } .rk b { font-size: 30px; } .lc { padding: 12px; } .lc b { font-size: 15.5px; } .lc span { font-size: 12.5px; } .newbest { font-size: 14px; padding: 8px 12px; } }
+
+.words { flex: none; display: grid; gap: 8px; } .wgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.wc { padding: 10px 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: baseline; gap: 6px; min-width: 0; }
+.wc b { font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .wc span { font-size: 13.5px; color: var(--ok); font-weight: 700; white-space: nowrap; }
+.wc.miss span { color: var(--ink-3); }
+@media (max-width: 340px) { .words { display: none; } }
 </style>
 </head>
 <body>
@@ -218,6 +232,7 @@ const q = new URLSearchParams(location.search)
 document.documentElement.dataset.theme = q.get('theme') === 'dark' ? 'dark' : 'light'
 const S = q.get('s') || 'intro'
 const VV = q.get('v') || ''
+const VV2 = q.get('r') || ''
 const X = window.TEXTS[0] // Sıfırı en küçük sayan arılar
 const low = (w) => w.toLocaleLowerCase('tr')
 const clean = (w) => w.replace(/^[^\p{L}\d]+|[^\p{L}\d]+$/gu, '')
@@ -245,21 +260,21 @@ const V = {
     <p class="lead">Bilimden kısa bir metin, aranan bir kelime. Bul ve dokun; metinde yoksa “Yok” de.</p>
     <div class="demo">
       <div class="dseek"><div class="lens">${lens}</div><div><div class="lbl">Bu kelimeyi bul</div><div class="w">kuzgunlar</div></div><span class="chip ok" style="margin-left:auto">${check} 2,4 sn</span></div>
-      <p class="dtext">Bir deneyde <span class="hunt">kuzgunlar</span>, ileride kullanacakları bir aleti 17 saat öncesinden seçebildi.</p>
+      <p class="dtext">Bir deneyde <span class="hunt">kuzgunlar</span>, ileride kullanacakları bir aleti 17 saate varan süre öncesinden seçebildi.</p>
     </div>
     <div class="steps"><div><b>1</b>Kelime üstte çıkar</div><div><b>2</b>Metinde bul ve dokun</div><div><b>3</b>Yoksa “Yok” de</div></div>
     <div class="sp"></div>
     <p class="small"><a>Neye dayanıyor?</a></p>
     <button class="btn">Başla</button></div>`,
-  search: () => `${status}<div class="body">${topBar(1, 1)}<div class="grp"><div class="hero"><div class="lbl">Bu kelimeyi bul</div><div class="hw">kartı</div><div class="hrow"><div class="hl"><i style="width:60%"></i></div><b>12 sn kaldı</b></div></div>${paper(X).replace('class="paper"', 'class="paper bar top"')}</div><button class="btn ghost">Metinde yok</button></div>`,
+  search: () => `${status}<div class="body">${topBar(1, 1)}<div class="grp"><div class="hero"><div class="lbl">Bu kelimeyi bul ve dokun</div><div class="hw">kartı</div><div class="hrow"><div class="hl"><i style="width:60%"></i></div><b class="left">12 sn kaldı</b></div></div>${paper(X).replace('class="paper"', 'class="paper bar top"')}</div><button class="btn ghost">Metinde yok</button></div>`,
   found: () => `${status}<div class="body">${topBar(2, 1)}<div class="grp"><div class="hero ok"><div class="lbl">${check} Buldun</div><div class="hw">kartı</div><div class="took"><b>2,8</b> saniyede</div></div>${paper(X, { kartı: 'found' }).replace('class="paper"', 'class="paper bar top"')}</div><button class="btn ghost" style="opacity:.35">Metinde yok</button></div>`,
   absent: () => `${status}<div class="body">${topBar(4, 3)}<div class="grp"><div class="hero ok"><div class="lbl">${check} Doğru, metinde yok</div><div class="hw">arıya</div><p class="why">Kesik çizgili kelimeler benzer ama aynı değil.</p></div>${paper(X, {}, 'arı').replace('class="paper"', 'class="paper bar top boxed"')}</div><button class="btn">Devam</button></div>`,
   result: () => `${status}<div class="body">
     <div class="top"><div class="x">${close}</div></div>
-    <div class="rhero"><div><div class="rl">Bu turda tipik bulma süren</div><div class="big" style="margin-top:4px">3,0<small>sn</small></div></div><div class="rk"><b>5/6</b><span>doğru</span></div></div>
-    <div class="best"><span>Bugüne kadarki en iyi turun</span><i>2,6 sn</i></div>
-    <div class="learn"><div class="lt">Bugün öğrendiğin</div><div class="lc"><b>Boş kartı en az sayan arılar</b><span>Howard ve ark. · Science 2018 · <em>PMID 29880690</em></span></div><div class="lc"><b>17 saat sonrası için alet seçen kuzgunlar</b><span>Kabadayi ve Osvath · Science 2017 · <em>PMID 28706072</em></span></div></div>
-    <div class="gel"><div class="h"><span>Kelime bulma süresi</span><b>Başlangıç · 3/8 gün</b></div><div class="seg">${[0,1,2,3,4,5,6,7].map((i) => `<i class="${i < 3 ? 'on' : ''}"></i>`).join('')}</div><div class="gs">8 gün oynayınca başlangıç süren belli olur.</div></div>
+    ${VV2 === 'rekor' ? `<div class="newbest">${check} Yeni en iyi turun</div>` : ''}
+    <div class="rhero"><div><div class="rl">Bu turdaki ortalaman</div><div class="big" style="margin-top:4px">3,0<small>sn</small></div></div><div class="rk"><b>5/6</b><span>doğru</span></div></div>
+    <div class="words"><div class="lt">Kelimelerin</div><div class="wgrid">${[['papağanlarda','1,9 sn'],['kartı','2,8 sn'],['arıya','yok, doğru'],['aleti','3,1 sn'],['kuzgunlarda','süre doldu'],['maymunlara','4,0 sn']].map(([w, t], i) => `<div class="wc ${i === 4 ? 'miss' : ''}"><b>${w}</b><span>${t}</span></div>`).join('')}</div></div>
+    <div class="learn"><div class="lt">Bugün okuduğun</div><div class="lc"><b>Boş kartı seçen arılar</b><span>Howard ve ark. · Science 2018</span></div><div class="lc"><b>17 saate kadar sonrası için alet seçen kuzgunlar</b><span>Kabadayi ve Osvath · Science 2017</span></div></div>
     <div class="sp"></div><button class="btn">Tamam</button></div>`,
 }
 
@@ -268,7 +283,7 @@ const near = ['arılarına', 'arılar']
 Object.assign(V, {
   'search-a': () => `${status}<div class="body">${topBar(1, 1)}<div class="seek"><div class="sk"><div class="lbl">Bu kelimeyi bul</div><div class="w">kartı</div></div>${ring(12, .6)}</div>${paper(X).replace('class="paper"', 'class="paper lg"')}<button class="btn ghost">Metinde yok</button></div>`,
   'search-b': () => `${status}<div class="body">${topBar(1, 1)}<div class="paper tabbed"><div class="tab"><span>${lens}</span><b>kartı</b><i>12 sn</i></div><div class="tline"><i style="width:60%"></i></div>${paper(X).replace('<div class="paper">', '').replace(/<\/div>$/, '')}</div><button class="btn ghost">Metinde yok</button></div>`,
-  'search-c': () => `${status}<div class="body">${topBar(1, 1)}<div class="hero"><div class="lbl">Bu kelimeyi bul</div><div class="hw">kartı</div><div class="hrow"><div class="hl"><i style="width:60%"></i></div><b>12</b></div></div>${paper(X).replace('class="paper"', 'class="paper bar"')}<button class="btn ghost">Metinde yok</button></div>`,
+  'search-c': () => `${status}<div class="body">${topBar(1, 1)}<div class="hero"><div class="lbl">Bu kelimeyi bul ve dokun</div><div class="hw">kartı</div><div class="hrow"><div class="hl"><i style="width:60%"></i></div><b>12</b></div></div>${paper(X).replace('class="paper"', 'class="paper bar"')}<button class="btn ghost">Metinde yok</button></div>`,
   'absent-a': () => `${status}<div class="body">${topBar(4, 3)}${seek('arıya', 30)}${paper(X, {}, 'arı').replace('class="paper"', 'class="paper dim"')}<div class="sheet"><div class="big-ok">${check}</div><div><b>Doğru, metinde yok.</b><p>Benzer kelimeler vardı:</p><div class="chips">${near.map((w) => `<span>${w}</span>`).join('')}</div></div></div></div>`,
   'absent-b': () => `${status}<div class="body">${topBar(4, 3)}<div class="seek ok"><div class="lens">${check}</div><div class="sk"><div class="lbl">Doğru, metinde yok</div><div class="w">arıya</div></div><div class="time"><b>Yok</b></div><div class="t" style="width:30%"></div></div>${paper(X, {}, 'arı').replace('class="paper"', 'class="paper thick"')}<div class="small" style="text-align:center">Kesik çizgili kelimeler benzerdi ama aynı değildi.</div></div>`,
   'absent-c': () => `${status}<div class="body">${topBar(4, 3)}${seek('arıya', 30, '', 'ok')}${paper(X, {}, 'arı').replace('class="paper"', 'class="paper boxed"')}<div class="toast">${check}<div><b>Doğru, metinde yok.</b> <span>Benzerler kutuda.</span></div></div></div>`,
@@ -290,7 +305,7 @@ Object.assign(V, {
     <div class="top"><div class="x">${close}</div></div>
     <div class="rhero"><div><div class="ey">Tur bitti</div><div class="big" style="margin-top:6px">3,0<small>sn</small></div></div><div class="rk"><b>5/6</b><span>doğru</span></div></div>
     <p class="lead">Kelimelerin yarısını bundan hızlı buldun.</p>
-    <div class="learn"><div class="small">Bugün öğrendiğin</div><div class="lc"><b>Arılar boş kartı en küçük saydı</b><span>Howard ve ark. · Science 2018 · PMID 29880690</span></div><div class="lc"><b>Kuzgunlar 17 saat sonrası için seçebildi</b><span>Kabadayi ve Osvath · Science 2017 · PMID 28706072</span></div></div>
+    <div class="learn"><div class="small">Bugün okuduğun</div><div class="lc"><b>Arılar boş kartı en küçük saydı</b><span>Howard ve ark. · Science 2018 · PMID 29880690</span></div><div class="lc"><b>Kuzgunlar 17 saat sonrası için seçebildi</b><span>Kabadayi ve Osvath · Science 2017 · PMID 28706072</span></div></div>
     <div class="gel"><div class="h"><span>Kelime bulma süresi</span><b>Başlangıç · 3/8 gün</b></div><div class="seg">${[0,1,2,3,4,5,6,7].map((i) => `<i class="${i < 3 ? 'on' : ''}"></i>`).join('')}</div></div>
     <div class="sp"></div><button class="btn">Tamam</button></div>`,
 })

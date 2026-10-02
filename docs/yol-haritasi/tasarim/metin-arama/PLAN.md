@@ -6,7 +6,8 @@ Sahibin isteği: `SAHIP_ISTEGI.md`. Araştırma: `ARA_RAPOR_1.md`, `arastirma/KA
 ## 0. Tek bakışta
 - Bilimden kısa bir metin, üstte aranan bir kelime. Kişi kelimeyi bulup dokunur; metinde yoksa “Yok” der.
 - Bir tur ≈ 2 dk: iki metin, altı hedef. Hedeflerden biri metinde yoktur.
-- Ölçü: doğru bulunan kelimelerin ortanca süresi, saniye. Gelişim'e ölçü kuralı v2 ile bağlanır.
+- Ölçü: doğru bulunan kelimelerin ortalama süresi, saniye; her kelime en çok 20 sn sayılır. Gelişim'e ölçü kuralı v2
+  ile bağlanır.
 - Metinler PubMed çalışmalarının Nefona'nın kendi sözleriyle anlatımı; her metin PMID ve DOI taşır.
 - Nef modülü manifestteki `progress` ve `nef` alanından tanır.
 - Puan, yıldız, seri ateşi yok. Örnek uygulamanın adı, görseli, düzeni ve metinleri alınmadı.
@@ -15,7 +16,9 @@ Sahibin isteği: `SAHIP_ISTEGI.md`. Araştırma: `ARA_RAPOR_1.md`, `arastirma/KA
 | Soru | Karar |
 |---|---|
 | Metin uzunluğu | 30–40 kelime |
-| Sonuçta kıyas | "En hızlı turun" rekor satırı |
+| Sonuçta kıyas | Rekor yalnız kırılınca: "Yeni en iyi turun" |
+| Sonuç ekranı | PMID sonuçtan kalkar; Gelişim kutusu ilk 8 gün sonuçta gösterilmez; tur süresi 20 sn sınırlı ortalama |
+| Arama ekranı kapısı | Ölçüt "5 saniyede anladın mı"; metin bloğu kavramın kendisi |
 | "Ağ bağlı" | Nef'e bağlı. Metinler uygulama paketinde durur, internetsiz çalışır; yeni metinler sürümle gelir |
 | Ad | Kelime Avı |
 | Süre | Kelime başına 20 sn, ince çizgi; büyük geri sayım ve puan yok |
@@ -67,12 +70,14 @@ kelimeye taşmaz.
 ```js
 { key: 'kelime-avi-time', label: 'Kelime bulma süresi', unit: 'sn', better: 'down',
   v2: { familiar: 2, sdFloor: 0.3 },
-  series: ({ sessions }) => sessions.filter(isKelimeAvi).filter((s) => Number.isFinite(s.medianSec))
-    .map((s) => ({ date: s.date, value: s.medianSec })) }
+  series: ({ sessions }) => sessions.filter(isKelimeAvi).filter((s) => Number.isFinite(s.meanSec))
+    .map((s) => ({ date: s.date, value: s.meanSec })) }
 ```
 - `progress.domain: 'focus'`.
-- `medianSec`: turda doğru bulunan kelimelerin sürelerinin ortancası, bir basamak. 3'ten az doğru varsa `null`; tur
-  kaydedilir ama seriye girmez (S3b). Sebep: hız ile doğruluk takası; az bulunan turun süresi yanıltır.
+- `meanSec`: turda doğru bulunan kelimelerin sürelerinin ortalaması, her süre en çok 20 sn, bir basamak (sahip kararı
+  2026-10-02: ekranda "ortalama" yazılsın; kapıda "ortanca" ve "tipik" anlaşılmadı). 20 sn sınırı ortalamayı tek
+  yavaş kelimeye karşı korur. 3'ten az doğru varsa `null`; tur kaydedilir ama seriye girmez (S3b). Sebep: hız ile
+  doğruluk takası. Günler arası ölçü kuralı v2'nin günlük ortancasıyla toplanır, bu değişmez.
 - `familiar: 2`: ilk iki gün arayüze alışma. `sdFloor: 0.3` sn: VARSAYIM; ilk kullanıcı verisiyle gözden geçirilir.
 - Doğruluk ayrı metrik olmaz; sonuç ekranında sayı olarak görünür. VARSAYIM: Gelişim'de ikinci satır istenirse
   `{ key: 'kelime-avi-hits', rule: 'none' }` eklenir.
@@ -81,14 +86,15 @@ kelimeye taşmaz.
 - `lib/changeText.js`: `DIGITS.sn = 1`, `TRIM`'e `sn` eklenmez ("3,0 sn" kalır).
 - `lib/progress.js`: `UNIT_SD_FLOOR.sn = 0.3`. Manifestteki `v2` zaten önce geldiği için bu satır yalnız tutarlılık.
 - Sonuç ekranı hüküm sözcüğünü ve sayıyı kendisi kurmaz: `metricStatusV2` + `changeText` + `verdictWord`. Başlangıç
-  oluşurken "Başlangıç · k/8 gün" (2 alışma + 6 başlangıç günü).
+  oluşurken (2 alışma + 6 başlangıç günü) sonuçta Gelişim kutusu gösterilmez; Gelişim ekranı "Başlangıç · k/8 gün"
+  gösterir. Başlangıç oluştuktan sonra sonuçta tek satır: S5 + S6.
 - 5. gün raporu, PDF ve CSV metriği manifestten kendiliğinden alır; ana oturum testle doğrular.
 
 ### 5.3 Kayıt
 ```js
 { type: 'kelime-avi', date, durationMs, texts: ['arilar-sifir', 'kuzgun-plan'],
   items: [{ w, kind: 'E'|'S'|'Z'|'Y', ms, result: 'hit'|'miss'|'timeout'|'rightNo'|'wrongNo', wrongTaps }],
-  medianSec, hits, present, rightNo, noItems, wrongTaps }
+  meanSec, hits, present, rightNo, noItems, wrongTaps }
 ```
 
 ## 6. Nef
@@ -97,23 +103,25 @@ kelimeye taşmaz.
 - `nef.evidence`: `sireteanu1995`, `chun1996`, `rayner1996`, `rayner2016`, `wolfe2021` ve metin kaynakları.
 - `nef.note`: "Bilimden kısa metinlerde aranan kelimeyi bulma alıştırması; ölçü kelime bulma süresi."
 - `nef.cells`: NF1–NF3 taslak; son biçim Nef oturumunun onaylı cümle düzenine göre orada kurulur.
-- `coach()`: `rounds7`, `median7` (7 günün tur ortancalarının ortancası), `hitRate7`.
+- `coach()`: `rounds7`, `mean7` (7 günün tur ortalamalarının ortancası), `hitRate7`, `best` (en düşük `meanSec`).
 - `remind: { route: 'kelime-avi', window: 'move', science: ['sireteanu1995'] }`.
 - `today()`: haftada 2 gün, 2 dk durak, `sub` KA2. Açılma günü ve yol sırası ana oturumun `lib/ladders.js` kararı.
   VARSAYIM: yol 10. günden sonra.
 - Nef sözleşme testi (Nef PLAN §4.8 madde 3) bu modül için geçmeli.
 
 ## 7. Ekranlar ve bağlayıcı tasarım maddeleri
-Maketteki hâl yön ve içerik içindir; tasarım tokenları uygulamanınkidir. Kapı kayıtları `kapi/`.
-1. Arama: aranan kelime ortada, büyük ve renkli; altında süre çizgisi ve kalan süre "{s} sn" yazıyla. Metin kartı
+Maketteki hâl yön ve içerik içindir; tasarım tokenları uygulamanınkidir. Kapı kayıtları `kapi/`. Arama ekranının kapı sorusu "5 saniyede anladın mı" (sahip kararı 2026-10-02);
+öbür ekranlar "etkilendin mi".
+1. Arama: aranan kelime ortada, büyük ve renkli; altında süre çizgisi ve kalan süre "{s} sn kaldı" sade, ikincil renkte; aranan kelimeyle yarışmaz. Metin kartı
    sol kenarında renkli şerit, yazı 390'da 25 px / 1,55, 320'de 19 px / 1,5, kart içinde dikey ortalı. 40 kelimelik
    metin 320×568'de kaydırmasız sığmalı; sığmazsa yazı küçülmez, metin kısalır.
 2. Arama sırasında metin kartında yalnız metin olur; kaynak satırı, bulunan kelime işareti, puan yok.
 3. Bulma anı: "Buldun", kelime ve süre yeşil; metindeki kelime dolu renk ve halka. Yanıp sönme yok.
 4. "Yok" doğru: "Doğru, metinde yok", altında A7b; benzer biçimler kesik çizgili kutuda, üstü çizili değil.
    Düğme "Devam".
-5. Sonuç: büyük süre ve sağda "{d}/6 doğru"; S3; "En hızlı turun" satırı; "Bugün öğrendiğin" kartları başlık ve
-   kaynakla, PMID bölünmez; Gelişim kutusu metrik adıyla.
+5. Sonuç: üstte rekor kırıldıysa "Yeni en iyi turun"; büyük ortalama süre ve sağda "{d}/6 doğru"; "Kelimelerin":
+   altı kelime ve sonucu iki sütunda, 320'de gizli; "Bugün öğrendiğin": iki metnin başlığı ve yazar · dergi · yıl.
+   PMID sonuçta yok. Puan, seri, yıldız yok.
 6. İddia sınırı "Neye dayanıyor?" sayfasında (N5); girişte yalnız bağlantı.
 7. Erişilebilirlik: kelimeler sesli okuyucuda tek tek seçilebilir; renk tek başına bilgi taşımaz; dokunma alanı
    ≥ 44 pt; `prefers-reduced-motion`'da halka ve sallanma yok. Kaynak yazısı en az 12 px, ikincil metin `ink-2`.
@@ -121,7 +129,7 @@ Maketteki hâl yön ve içerik içindir; tasarım tokenları uygulamanınkidir. 
 ## 8. Aşamalar (ana oturum uygular)
 | Aşama | İş | Bitti ölçütü |
 |---|---|---|
-| K1 | `lib/kelimeAvi.js`: metin havuzu, tur kurma, eşleşme, kayıt, `medianSec` | birim testleri; denetim kuralları test olarak; 90 günlük tohumlu simülasyonda aynı ikili tekrar etmez |
+| K1 | `lib/kelimeAvi.js`: metin havuzu, tur kurma, eşleşme, kayıt, `meanSec` | birim testleri; denetim kuralları test olarak; 90 günlük tohumlu simülasyonda aynı ikili tekrar etmez |
 | K2 | `screens/KelimeAvi.jsx`, stil | 390 ve 320, iki tema; cihazda 60 fps; 5 sn kapısı |
 | K3 | manifest: `progress`, `sessions`, `today`, `remind`, `coach`, `nef` | registry testleri; Gelişim → Dikkat'te "sn" satırı |
 | K4 | bağlantı satırları (§5.2) Gelişim sahibiyle; `sources.js`'e kaynaklar | `changeText` ve `progress` testleri; her `evidence` PMID + DOI taşır |
@@ -137,7 +145,7 @@ Başka test değişmemeli; değişirse durup sebebi yazılır.
 | Risk | Önlem |
 |---|---|
 | Metin bilimsel olarak abartılı | Yalnız özetteki bulgu; kapıda göz doktoru değerlendirici; sahip onayı |
-| Kişi metni okumaya dalar, süre şişer | Bu doğal; ölçü ortanca ve sabit karışım. Metin uzunluğu sınırlı |
+| Kişi metni okumaya dalar, süre şişer | Bu doğal; her kelime en çok 20 sn sayılır, karışım sabit. Metin uzunluğu sınırlı |
 | Tahminle "Yok" basmak | Doğruluk sonuçta görünür; 3'ten az doğru varsa süre seriye girmez |
 | Dokunma hatası, küçük kelime | 44 pt dokunma alanı; yanlış dokunuş yalnız sayılır, süreyi durdurmaz |
 | 24 metin bitince tekrar | Çiftler kayar; yeni metinler sürümle; tekrar eden metinde süre doğal olarak kısalır, bu yüzden ilk 12 turda havuz tekrar etmez |
