@@ -4,12 +4,13 @@
 // → "Ne gördün?" → cevap (klavye tur boyunca açık) → 900 ms geri bildirim. Gösterimi 1 kareden çok sapan deneme ölçüye
 // girmez, merdiveni oynatmaz, yeni çiftle tekrarlanır. Kelime gösterilirken ekran okuyucu kelimeyi okumaz.
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import { X, Mic, ArrowRight } from 'lucide-react'
+import { X, Mic, Square, Smartphone, Keyboard } from 'lucide-react'
 import { pickPairs } from '../lib/yakalaYazWords.js'
 import { MS, STEPS, msOf, nextStep, startStepOf, checkAnswer, markTyped, makeRecord, isBadShow, seriesOf, ROUND_TRIALS, DOT_MS, MASK_MS, FEEDBACK_MS, isYakala } from '../lib/yakalaYaz.js'
 import { metricStatusV2 } from '../lib/progress.js'
 import { changeText, verdictWord } from '../lib/changeText.js'
 import { haptic } from '../lib/native.js'
+import { createListener } from '../lib/yakalaMic.js'
 import '../styles/yakalayaz.css'
 
 export const V2 = { familiar: 2, sdFloor: 15 } // manifestle aynı (Gelişim aynı hükmü kurar)
@@ -30,13 +31,14 @@ function useViewportHeight() {
   return h
 }
 
-function Track({ cur, start = 0, lo = 6, hi = 18, dim = false }) {
+// lost: yanlışta bırakılan basamaklar (yeni basamaktan sonra, eskisine dek) işaretli; düşüş görünür (kör kapı, sahip 2026-10-02)
+function Track({ cur, start = 0, lost = 0, lo = 6, hi = 18 }) {
   return (
-    <div className={`yy-track${dim ? ' dim' : ''}`} aria-hidden="true">
+    <div className="yy-track" aria-hidden="true">
       <div className="bars">
         {Array.from({ length: STEPS }, (_, k) => {
           const i = k + 1
-          return <i key={i} className={[i < cur ? 'on' : '', i === cur ? 'cur' : '', i === start ? 'start' : ''].join(' ')} style={{ height: lo + ((hi - lo) * k) / (STEPS - 1) }} />
+          return <i key={i} className={[i < cur ? 'on' : '', i === cur ? 'cur' : '', i === start ? 'start' : '', i > cur && i <= lost ? 'lost' : ''].join(' ')} style={{ height: lo + ((hi - lo) * k) / (STEPS - 1) }} />
         })}
       </div>
       <div className="ends"><span>Yavaş · 500 ms</span><span>50 ms · Hızlı</span></div>
@@ -44,14 +46,15 @@ function Track({ cur, start = 0, lo = 6, hi = 18, dim = false }) {
   )
 }
 
-// Son 7 turun eşikleri (ms): eksende aşağı yön hızlı; kesikli çizgi başlangıç (Gelişim'in başlangıcı varsa)
+// Son 7 turun eşikleri (ms): hızlı tur yukarıda (sahip kararı 2026-10-02, kapı madde 9 değişti); kesikli çizgi başlangıç
 function Points({ values, baseline }) {
   const all = [...values, ...(Number.isFinite(baseline) ? [baseline] : [])]
   const lo = Math.min(...all), hi = Math.max(...all)
   const span = Math.max(30, hi - lo)
-  // yüzde koordinat: x %24–94 (soldaki Yavaş/Hızlı yazılarına binmez), y %14–86; küçük ms (hızlı) aşağıda
-  const y = (v) => 14 + ((hi - v) / span) * 72
-  const x = (i) => (values.length === 1 ? 59 : 24 + (i * 70) / (values.length - 1))
+  // yüzde koordinat: x %8–92 (eksen ayrı sütunda), y %22–72 (ms yazısı noktanın üstünde ya da
+  // altında; 320'de de kesilmez); küçük ms (hızlı) yukarıda
+  const y = (v) => 22 + ((v - lo) / span) * 50
+  const x = (i) => (values.length === 1 ? 50 : 8 + (i * 84) / (values.length - 1))
   return (
     <div className="yy-pts" aria-hidden="true">
       <svg viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -59,11 +62,19 @@ function Points({ values, baseline }) {
         {values.length > 1 ? <polyline points={values.map((v, i) => `${x(i)},${y(v)}`).join(' ')} className="ln" /> : null}
       </svg>
       {values.map((v, i) => <i key={i} className={i === values.length - 1 ? 't' : ''} style={{ left: `${x(i)}%`, top: `${y(v)}%` }} />)}
+      {/* ms yazısı çizginin gitmediği yanda: sonraki nokta (sonuncuda önceki) üstteyse yazı noktanın altında */}
+      {values.map((v, i) => {
+        const nb = values[i + 1] ?? values[i - 1]
+        const below = i < values.length - 1 ? y(nb) < y(v) : nb !== undefined && y(nb) < y(v)
+        return <b key={`v${i}`} className={[i === values.length - 1 ? 't' : '', below ? 'below' : ''].join(' ')} style={{ left: `${x(i)}%`, top: `${y(v)}%` }}>{v}</b>
+      })}
     </div>
   )
 }
 
-export default function YakalaYaz({ sessions = [], onSave, onExit, remindField = null, now: nowProp = null, micReady = false, onMic = null }) {
+// mic: yalnız telefon cihaz içi çalışabiliyorsa ve kişi kapatmadıysa verilir (view.jsx): { ask, setPref(v), request(),
+// start(onResult) } — ask: ilk dokunuşta izin sayfası (METINLER İ1–İ5). Yoksa mikrofon düğmesi hiç yok.
+export default function YakalaYaz({ sessions = [], onSave, onExit, remindField = null, now: nowProp = null, mic = null }) {
   const now = useMemo(() => nowProp ?? new Date(), [nowProp])
   const start = useMemo(() => startStepOf(sessions, now), [sessions, now])
   const pairs = useMemo(() => pickPairs({ seed: 'yakala-yaz', sessions, now }), [sessions, now])
@@ -84,7 +95,47 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
   const t0 = useRef(0)
   const timers = useRef([])
   const later = (fn, ms) => timers.current.push(setTimeout(fn, ms))
-  useEffect(() => () => timers.current.forEach(clearTimeout), [])
+  // Mikrofon (PLAN §6): dinleme iki kelime ya da 4 sn sessizlikte biter; metin alana yazılır, gönderme kişide
+  const [micGone, setMicGone] = useState(false) // "Hayır", iOS izni yok ya da cihaz içi başlamadı: bu turda klavye
+  const [sheet, setSheet] = useState(false)
+  const [listening, setListening] = useState(false)
+  const [unheard, setUnheard] = useState(false) // D11
+  const [heard, setHeard] = useState(false) // sesle iki kelime geldi: "Gerekirse düzelt, sonra Gönder'e bas." 
+  const listenRef = useRef(null)
+  const voice = useRef(false)
+  const micReady = Boolean(mic) && !micGone
+  const stopListen = () => { listenRef.current?.stop(); listenRef.current = null }
+  useEffect(() => () => { timers.current.forEach(clearTimeout); listenRef.current?.stop() }, [])
+  const listen = () => {
+    if (listenRef.current) { stopListen(); return }
+    setUnheard(false)
+    setHeard(false)
+    setListening(true)
+    listenRef.current = createListener({
+      start: mic.start,
+      onText: (t) => { voice.current = true; setValue(t) },
+      onDone: ({ heard, failed }) => {
+        listenRef.current = null
+        setListening(false)
+        if (failed) { setMicGone(true); inputRef.current?.focus() } else if (!heard) setUnheard(true)
+        else setHeard(true)
+      },
+    })
+  }
+  const onMicTap = () => (mic?.ask ? setSheet(true) : listen())
+  const allowMic = async () => {
+    const ok = await mic.request()
+    mic.setPref(ok ? 'on' : 'off')
+    setSheet(false)
+    if (ok) listen()
+    else { setMicGone(true); inputRef.current?.focus() }
+  }
+  const denyMic = () => {
+    mic.setPref('off')
+    setSheet(false)
+    setMicGone(true)
+    inputRef.current?.focus()
+  }
 
   const pair = pairs[pi] ?? pairs[pairs.length - 1]
 
@@ -156,7 +207,11 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
     if (phase !== 'run' || sub !== 'ask') return
     const ms = msOf(step)
     const typed = value
-    const mode = 'key'
+    const mode = voice.current ? 'voice' : 'key'
+    stopListen()
+    voice.current = false
+    setUnheard(false)
+    setHeard(false)
     if (isBadShow(ms, show.current.shownMs, show.current.hz)) {
       trials.current.push({ w: pair, step, ms, shownMs: show.current.shownMs ?? 0, ok: false, bad: true, mode })
       setValue('')
@@ -184,7 +239,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
   // ---------- Giriş ----------
   if (phase === 'giris') {
     return (
-      <main className="yy" style={{ height: vh }}>
+      <main className="yy yy-giris" style={{ height: vh }}>
         <div className="yy-top"><button type="button" className="yy-x" onClick={onExit} aria-label="Kapat"><X size={16} strokeWidth={2.2} aria-hidden="true" /></button><span className="sp" /><span className="cnt">2 dk</span></div>
         <div className="yy-ey">Yakala Yaz</div>
         <h1 className="yy-h1">İki kelime, <br />bir an.</h1>
@@ -223,6 +278,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
     return (
       <main className="yy res" style={{ minHeight: vh }}>
         <div className="yy-top"><button type="button" className="yy-x" onClick={onExit} aria-label="Kapat"><X size={16} strokeWidth={2.2} aria-hidden="true" /></button><span className="sp" /><span className="cnt">{good20.length}/{ROUND_TRIALS}</span></div>
+        <div className="yy-resbody">
         <div className="yy-ey">Bugün</div>
         {/* Kavram en çok üç (madde 11): süre, Gelişim hükmü, doğru sayısı. Basamak burada yok: eşik iki basamak arasına
             düşebilir ("125 ms" ile "Basamak 13 = 133 ms" çelişkisi, kapı tur 1) */}
@@ -236,13 +292,13 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
             <div className="shead"><span>Son {last7.length} tur</span></div>
             <div className="gwrap">
               <Points values={last7} baseline={verdict === 'start' ? null : v?.baseline} />
-              <div className="axis" aria-hidden="true"><span>Yavaş</span><span>Hızlı</span></div>
+              <div className="axis" aria-hidden="true"><span>↑ Hızlı</span><span>↓ Yavaş</span></div>
             </div>
           </div>
         ) : null}
         <div className="yy-rows"><div className="r"><span>Doğru</span><b>{good20.length} denemede {k}</b></div></div>
         {remindField ? <div className="yy-remind">{remindField}</div> : null}
-        <span className="sp" />
+        </div>
         <button type="button" className="yy-btn" onClick={onExit}>Bitti</button>
       </main>
     )
@@ -260,7 +316,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
         <div className="yy-bar"><b style={{ width: `${(trial / ROUND_TRIALS) * 100}%` }} /></div>
         <span className="cnt">{trial}/{ROUND_TRIALS}</span>
       </div>
-      <div className={`yy-stage grow${fb?.ok ? ' win-ok' : ''}`}>
+      <div className={`yy-stage grow${fb ? (fb.ok ? ' win-ok' : ' win-no') : ''}`}>
         <div className="shead">
           <span className="pill">Basamak <b>{shownStep}</b> · {MS[shownStep - 1]} ms</span>
           {fb?.ok && !fb.top ? <span className="plus" aria-hidden="true">+1</span> : null}
@@ -274,7 +330,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
           <span className="mask" ref={maskRef} aria-hidden="true" style={{ visibility: 'hidden' }}>
             <i style={{ width: `${pair[0].length * 0.62}em` }} /><i style={{ width: `${pair[1].length * 0.62}em` }} />
           </span>
-          {sub === 'ask' ? <div className="q" role="status">Ne gördün?{micReady ? <small>Yaz ve Gönder'e bas, ya da mikrofona söyle.</small> : null}</div> : null}
+          {sub === 'ask' ? <div className="q" role="status">Ne gördün?<small>{listening ? (value.trim() ? 'İkinci kelimeyi söyle.' : 'İki kelimeyi söyle.') : heard ? "Gerekirse düzelt, sonra Gönder'e bas." : unheard ? 'Duyamadım, yazabilirsin.' : micReady ? "Yaz ve Gönder'e bas, ya da mikrofona söyle." : "Yaz ve Gönder'e bas."}</small></div> : null}
           {fb?.ok ? <span className="words ok" role="status"><span className="w ok">{fb.words[0]}</span><span className="w ok">{fb.words[1]}</span></span> : null}
           {fb && !fb.ok ? (
             <div className="cmp" role="status">
@@ -286,23 +342,46 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
           ) : null}
         </div>
         {fb ? <p className={`fb ${fb.ok ? 'ok' : 'no'}`}>{feedbackLine(fb)}</p> : null}
-        <Track cur={shownStep} dim={sub === 'ask'} />
+        <Track cur={shownStep} lost={fb && !fb.ok ? fb.prevStep : 0} />
       </div>
-      <form className="yy-input" onSubmit={submit}>
-        <input
-          ref={inputRef}
-          className={`field${showing ? ' quiet' : ''}`}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder={showing ? '' : 'İki kelimeyi yaz'}
-          aria-label="İki kelimeyi yaz"
-          {...INPUT}
-        />
+      {/* Gösterimde ve geri bildirimde alan ve mikrofon görünmez ama yerinde ve odakta kalır: klavye kapanmaz, ekran
+          zıplamaz (sahip kararı 2026-10-02, kapı madde 3 değişti; geri bildirimde boş alan "yeniden yaz" sanılıyordu) */}
+      <form className={`yy-input${showing || sub === 'fb' ? ' hide' : ''}`} onSubmit={submit}>
+        <span className="fieldwrap">
+          <input
+            ref={inputRef}
+            className={`field${showing ? ' quiet' : ''}`}
+            value={value}
+            onChange={(e) => { setValue(e.target.value); setUnheard(false); setHeard(false) }}
+            placeholder={showing || listening ? '' : 'İki kelimeyi yaz'}
+            aria-label="İki kelimeyi yaz"
+            {...INPUT}
+          />
+          {/* Dinlerken alanın içinde, düğmenin hemen yanında (mikrofon kapısı tur 1–2, görev testi tur 1): yerleşime girmez */}
+          {listening ? <span className="live" role="status"><i aria-hidden="true" />Dinliyorum</span> : null}
+        </span>
+        {/* Alanın yanında yalnız mikrofon; gönderme klavyenin "Gönder"i (5sn-tur2: tek gönderme yolu) */}
         {micReady ? (
-          value ? <button type="submit" className="rb go" aria-label="Gönder"><ArrowRight size={22} strokeWidth={2.4} aria-hidden="true" /></button>
-            : <button type="button" className="rb" aria-label="Mikrofon" onClick={() => onMic?.({ setValue })}><Mic size={22} strokeWidth={2} aria-hidden="true" /></button>
+          <button type="button" className={`rb${listening ? ' on' : ''}`} aria-label={listening ? 'Dinlemeyi durdur' : 'Sesle söyle'} aria-pressed={listening} onPointerDown={(e) => e.preventDefault()} onClick={onMicTap}>
+            {listening ? <Square size={18} strokeWidth={0} fill="currentColor" aria-hidden="true" /> : <Mic size={22} strokeWidth={2.2} aria-hidden="true" />}
+          </button>
         ) : null}
       </form>
+      {/* İzin sayfası (sesizin; METINLER İ1–İ5 harfi harfine; 5 sn kapısı tur 2: 5/5, anlaşılırlık 5/5) */}
+      {sheet ? (
+        <div className="yy-sheetbg" role="dialog" aria-modal="true" aria-labelledby="yy-sheet-h">
+          <div className="yy-sheet">
+            <h2 id="yy-sheet-h">Kelimeleri sesle söylemek ister misin?</h2>
+            <div className="pts">
+              <div><b><Mic size={18} strokeWidth={2} aria-hidden="true" /></b><span>Mikrofon yalnız sen düğmeye basınca açılır; iki kelimeyi söyleyince kapanır.</span></div>
+              <div><b><Smartphone size={18} strokeWidth={2} aria-hidden="true" /></b><span>Ses telefonunda yazıya çevrilir. Kaydedilmez, hiçbir yere gönderilmez.</span></div>
+              <div><b><Keyboard size={18} strokeWidth={2} aria-hidden="true" /></b><span>İstemezsen klavyeyle devam et. Fikrini Profil'den ya da iPhone Ayarlar'dan değiştirebilirsin.</span></div>
+            </div>
+            <button type="button" className="yy-btn" onClick={allowMic}>Mikrofonu aç</button>
+            <button type="button" className="yy-btn ghost" onClick={denyMic}>Hayır, klavyeyle devam</button>
+          </div>
+        </div>
+      ) : null}
     </main>
   )
 }
@@ -314,11 +393,14 @@ const INPUT = { type: 'text', autoComplete: 'off', autoCorrect: 'off', autoCapit
 export function feedbackLine(fb) {
   if (fb.ok) return fb.top ? 'En hızlı basamaktasın.' : 'Doğru! Bir basamak hızlandın.'
   if (fb.clamped) return 'En yavaş basamaktasın.'
-  return { near: 'Bir harf farklı · üç basamak yavaşladı', one: 'Biri doğru · üç basamak yavaşladı', none: 'İkisi de farklı · üç basamak yavaşladı', empty: 'Boş geçtin · üç basamak yavaşladı' }[fb.kind]
+  // "yavaşladın": doğrudaki "hızlandın" ile aynı hitap (kapı tur 6, beş kişiden dördü; sahip yetkisi 2026-10-02)
+  return { near: 'Bir harf farklı · üç basamak yavaşladın', one: 'Biri doğru · üç basamak yavaşladın', none: 'İkisi de farklı · üç basamak yavaşladın', empty: 'Boş geçtin · üç basamak yavaşladın' }[fb.kind]
 }
 
 // Sonuç ekranının yeni iki cümlesi (kapi/5sn-tur2.md madde 7, 8): metin kapısı kelime-hafiza/kapi/metin-sonuc.md
 // (T1a 5/5, T2c 4/5); sahip onayı 2026-10-02, sahip kararı devretti ("sen onayla")
-export const RESULT_LINE = 'Denemelerin çoğunda iki kelimeyi bu sürede doğru yakaladın.'
+// Merdiven (+1 / −3) dört denemeden üçünün doğru olduğu süreye yerleşir; büyük sayı son 10 denemenin ortancası (kapı tur 6:
+// eski "Denemelerin çoğunda … bu sürede doğru" ölçüyü yanlış anlatıyordu)
+export const RESULT_LINE = 'Bu sürede iki kelimeyi yaklaşık dört denemeden üçünde yakalıyorsun.'
 export const START_LINE = "İlk 8 günde başlangıcın ölçülüyor; sonra değişimi Gelişim'de görürsün."
 export { isYakala }

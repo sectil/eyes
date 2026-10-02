@@ -36,13 +36,13 @@ değil", "başlangıç"; başkasıyla kıyas yok; puan yok; emoji yok; kelime/da
 | D1 | Basamak {n} · {ms} ms | K B S |
 | D2 | Yavaş · 500 ms / 50 ms · Hızlı (merdiven uçları) | K B S |
 | D3 | İki kelimeyi yaz (alan ipucu) | K B S |
-| D4 | Ne gördün? / Yaz ve Gönder'e bas, ya da mikrofona söyle. | K B S |
+| D4 | Ne gördün? / Yaz ve Gönder'e bas, ya da mikrofona söyle. Mikrofonsuz: "Yaz ve Gönder'e bas." (kod kapısı) | K B S |
 | D5 | Doğru! Bir basamak hızlandın. ("Sıradaki {ms} ms" kapı maddesi 1 ile kalktı) | K B S |
 | D6 | Doğrusu / Sen (yanlışta iki satır) | K B S |
-| D7 | Bir harf farklı · üç basamak yavaşladı ("Sıradaki" kalktı, madde 2) | K B S |
-| D8 | Biri doğru · üç basamak yavaşladı (tek kelime doğruysa) | S · kapı: gerçek ekran |
-| D9 | İkisi de farklı · üç basamak yavaşladı | S · kapı: gerçek ekran |
-| D10 | Boş geçtin · üç basamak yavaşladı | S · kapı: gerçek ekran |
+| D7 | Bir harf farklı · üç basamak yavaşladın ("Sıradaki" kalktı, madde 2; "yavaşladın": kod kapısı tur 6, sahip yetkisi) | K B S |
+| D8 | Biri doğru · üç basamak yavaşladın (tek kelime doğruysa) | S · kapı: gerçek ekran |
+| D9 | İkisi de farklı · üç basamak yavaşladın | S · kapı: gerçek ekran |
+| D10 | Boş geçtin · üç basamak yavaşladın | S · kapı: gerçek ekran |
 | D11 | Duyamadım, yazabilirsin. (mikrofon bir şey duymazsa; deneme sayılmaz) | S · kapı: gerçek ekran |
 | D12 | En yavaş basamaktasın. (1. basamakta yanlış) / En hızlı basamaktasın. (18. basamakta doğru) | S · kapı: gerçek ekran |
 
@@ -58,6 +58,8 @@ değil", "başlangıç"; başkasıyla kıyas yok; puan yok; emoji yok; kelime/da
 | R7 | Bir kez yetiştin · {ms} ms (turda doğru bilinen en kısa süre) | S · kapı: gerçek ekran |
 | R8 | Bana hatırlat · istersen her gün aynı saatte (var olan kart bileşeni; metni bildirim planındaki gibi) | S · kapı: gerçek ekran |
 | R9 | Bitti | S · kapı: gerçek ekran |
+| R10 | Kodda kullanılan (kod kapısı, sahip yetkisi 2026-10-02; `kapi/kod-y2.md`): büyük sayı altında "Bu sürede iki kelimeyi yaklaşık dört denemeden üçünde yakalıyorsun."; başlangıç döneminde çip "Başlangıç · {k}/8 gün" ve "İlk 8 günde başlangıcın ölçülüyor; sonra değişimi Gelişim'de görürsün."; grafik "Son {n} tur", eksen "↑ Hızlı / ↓ Yavaş"; R3, R5'in çubuk açıklaması ve R7 kullanılmaz | K S |
+| P1 | Profil satırı (İ4'ün "Profil'den"i): başlık "Yakala Yaz", satır "Kelimeleri sesle söyle", alt satır İ3'ün ilk cümleleri | B · kapı: metin |
 
 ## Mikrofon izni (İ) — ekran `sesizin` (rıza sayfası: anlaşılırlık ölçütü de aranır)
 | # | Metin | Durum |

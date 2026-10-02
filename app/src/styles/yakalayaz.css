@@ -26,8 +26,8 @@
 .yy-track i.on { background: linear-gradient(180deg, #4fe0ec, #2f7df0); }
 .yy-track i.cur { background: #fff; box-shadow: 0 0 0 2px rgba(79, 224, 236, 0.55), 0 0 14px rgba(79, 224, 236, 0.75); }
 .yy-track i.start { outline: 1.5px dashed rgba(255, 255, 255, 0.55); outline-offset: 2px; }
-.yy-track.dim .bars { opacity: 0.45; } /* madde 4: yazarken yerinde ama sönük; uç yazıları okunur kalır */
-.yy-track .ends { display: flex; justify-content: space-between; font: 600 12px var(--yy-mono); color: var(--stage-dim); letter-spacing: 0.06em; margin-top: 6px; text-transform: uppercase; } /* madde 6 */
+.yy-track i.lost { background: rgba(255, 154, 125, 0.55); } /* yanlışta bırakılan basamaklar: düşüş görünür */
+.yy-track .ends { display: flex; justify-content: space-between; font: 600 12px var(--yy-mono); color: var(--stage-dim); letter-spacing: 0.02em; margin-top: 6px; } /* madde 6; D2 harfi harfine ("ms" küçük; kapı tur 6) */
 @media (prefers-reduced-motion: reduce) { .yy-track i, .yy-bar b { transition: none; } }
 
 /* Sahne */
@@ -36,12 +36,17 @@
 .yy-stage > * { position: relative; }
 .yy-stage.prev { margin-top: 18px; }
 .yy-stage.prev .win { height: 150px; }
+/* Giriş: örnek pencere boş alanı doldurur (kapı tur 2: kurallarla not arası ölü alan) */
+.yy-giris .yy-stage.prev { flex: 1 1 auto; display: flex; flex-direction: column; max-height: 330px; }
+.yy-giris .yy-stage.prev .win { flex: 1; height: auto; min-height: 120px; }
+.yy-giris > .sp { flex: 0 0 12px; }
 .yy-stage.grow { flex: 1; min-height: 0; display: flex; flex-direction: column; }
 .yy-stage.grow .win { flex: 1; height: auto; min-height: 70px; }
 .yy-stage.win-ok { box-shadow: inset 0 0 0 2px rgba(111, 240, 192, 0.55), 0 0 40px -10px rgba(53, 211, 154, 0.7); }
+.yy-stage.win-no { box-shadow: inset 0 0 0 2px rgba(255, 154, 125, 0.5); } /* yanlışta da çerçeve: doğrudakinin karşılığı, parıltısız */
 .yy-stage.win-ok::before { background: radial-gradient(90% 80% at 50% 50%, rgba(53, 211, 154, 0.28), transparent 70%); }
 .yy-stage .shead { display: flex; justify-content: flex-start; gap: 10px; align-items: center; font: 600 12px var(--yy-mono); color: var(--stage-dim); letter-spacing: 0.06em; text-transform: uppercase; }
-.yy-stage .pill { white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 13px; background: rgba(255, 255, 255, 0.08); color: #e9f7fa; font: 700 12.5px var(--font-body); letter-spacing: 0; text-transform: none; }
+.yy-stage .pill { white-space: nowrap; display: inline-block; height: 26px; padding: 0 10px; border-radius: 13px; background: rgba(255, 255, 255, 0.08); color: #e9f7fa; font: 700 12.5px var(--font-body); letter-spacing: 0; text-transform: none; line-height: 26px; }
 .yy-stage .pill b { font: inherit; font-variant-numeric: tabular-nums; color: #7fe6f0; }
 .yy-stage .plus { font: 800 15px var(--font-display); color: #0b1219; background: #6ff0c0; border-radius: 12px; padding: 3px 10px; box-shadow: 0 6px 18px -6px rgba(53, 211, 154, 0.8); } /* madde 1: çipin yanında */
 .yy-stage .plus.minus { color: #3a1206; background: #ffb39c; box-shadow: none; } /* girişteki −3 işaretiyle aynı anlam */
@@ -55,13 +60,13 @@
 .yy-stage .mask i { display: block; height: clamp(24px, 8vw, 36px); font-size: clamp(24px, 8vw, 36px); border-radius: 8px; background: #5d6b78; } /* düz gri blok; desen ve kırmızı yok */
 .yy-stage .fix { width: 8px; height: 8px; border-radius: 50%; background: #7fe6f0; box-shadow: 0 0 12px #7fe6f0; }
 .yy-stage .q { font: 700 24px var(--font-display); color: #fff; text-align: center; }
-.yy-stage .q small { display: block; font: 500 14px var(--font-body); color: rgba(242, 246, 249, 0.75); margin-top: 6px; }
+.yy-stage .q small { display: block; text-wrap: balance; font: 500 14px var(--font-body); color: rgba(242, 246, 249, 0.75); margin-top: 6px; }
 .yy-stage .cmp { display: grid; gap: 6px; }
 .yy-stage .cmp > div { display: flex; gap: 12px; align-items: baseline; font: 600 22px var(--font-display); color: #fff; }
 .yy-stage .cmp > div > span { font: 600 13px var(--yy-mono); letter-spacing: 0.08em; color: rgba(242, 246, 249, 0.78); width: 72px; text-transform: uppercase; flex: none; } /* madde 2: ≥ 13 px, açık */
 .yy-stage .cmp b { font-weight: 600; word-spacing: 0.35em; white-space: nowrap; }
 .yy-stage .cmp .you b { color: #fff; }
-.yy-stage .cmp .you em { font-style: normal; color: #0b1219; background: #ff9a7d; border-radius: 4px; padding: 0 2px; }
+.yy-stage .cmp .you em { font-style: normal; color: #0b1219; background: #ff9a7d; border-radius: 3px; } /* dolgu yok: iki satır aynı hizada biter */
 .yy-stage .fb { text-align: center; font: 700 17px var(--font-body); color: #e9f7fa; margin: 0 0 10px; }
 .yy-stage .fb.ok { color: #6ff0c0; }
 .yy-stage .fb.no { color: #ffd2c4; }
@@ -77,9 +82,9 @@
 .yy-input { flex: none; display: flex; gap: 10px; align-items: center; margin: 12px 0 0; }
 .yy-input .field { flex: 1; min-width: 0; height: 52px; border-radius: 16px; background: var(--surface); border: 1.5px solid var(--accent-g, #11a9b8); box-shadow: 0 0 0 4px rgba(17, 169, 184, 0.14); padding: 0 16px; font: 600 18px var(--font-body); color: var(--ink); outline: none; }
 .yy-input .field::placeholder { color: var(--ink-3); font-weight: 500; font-size: 16px; }
-.yy-input .field.quiet { border-color: var(--border); box-shadow: none; } /* madde 3: gösterimde ipucu ve odak halkası yok */
+.yy-input .field.quiet { border-color: var(--border); box-shadow: none; }
+.yy-input.hide { opacity: 0; pointer-events: none; } /* gösterimde alan görünmez; odak ve klavye yerinde (sahip kararı) */
 .yy-input .rb { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; flex: none; border: 1.5px solid var(--border); background: var(--surface); color: var(--ink-2); padding: 0; cursor: pointer; }
-.yy-input .rb.go { background: var(--accent-grad); border: 0; color: var(--accent-ink); }
 
 /* Sonuç */
 .yy-big { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 6px; font: 700 64px/1 var(--font-display); letter-spacing: -0.03em; margin-top: 10px; font-variant-numeric: tabular-nums; }
@@ -90,28 +95,54 @@
 .yy-chip i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-g, #11a9b8); flex: none; }
 .yy-small.note { margin: 6px 0 0; }
 .yy-stage.graph { margin-top: 14px; }
-/* Grafik boş alanı doldurur (kapı tur 1: 390'da Bitti üstünde ölü alan); 320'de kısa */
-.yy.res .yy-stage.graph { flex: 1 1 auto; min-height: 150px; max-height: 260px; display: flex; flex-direction: column; }
-.yy.res .yy-stage.graph .gwrap { flex: 1; height: auto; min-height: 100px; }
+/* Sonuç gövdesi dikeyde ortalı; grafik boş alanı en çok 270 px'e dek doldurur (kör tur 1–2: üstte ve altta ölü alan).
+   320'de grafik kısalır (madde 12) */
+.yy-resbody { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 12px; }
+.yy.res .yy-stage.graph { flex: 1 1 auto; min-height: 0; max-height: 270px; display: flex; flex-direction: column; }
+.yy.res .yy-stage.graph .gwrap { flex: 1; height: auto; min-height: 110px; }
 .yy-stage.graph .gwrap { position: relative; display: flex; margin-top: 8px; height: 110px; }
-.yy-stage.graph .axis { position: absolute; left: 0; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-between; font: 600 12px var(--yy-mono); color: var(--stage-dim); text-transform: uppercase; letter-spacing: 0.06em; pointer-events: none; }
+/* Eksen ayrı sütunda, okla: "125" ile "Hızlı" yan yana tek ifade gibi okunmasın (kapı tur 6) */
+.yy-stage.graph .axis { position: relative; flex: none; margin-left: 10px; padding-left: 12px; border-left: 1px solid rgba(242, 246, 249, 0.16); text-align: left; display: flex; flex-direction: column; justify-content: space-between; font: 600 12px var(--yy-mono); color: var(--stage-dim); text-transform: uppercase; letter-spacing: 0.06em; pointer-events: none; }
 .yy-pts { position: relative; flex: 1; min-width: 0; }
 .yy-pts svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .yy-pts .base { stroke: rgba(242, 246, 249, 0.5); stroke-width: 1.5; stroke-dasharray: 5 5; vector-effect: non-scaling-stroke; }
 .yy-pts .ln { fill: none; stroke: rgba(127, 230, 240, 0.45); stroke-width: 2; vector-effect: non-scaling-stroke; }
 .yy-pts i { position: absolute; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: rgba(127, 230, 240, 0.6); }
+.yy-pts b { position: absolute; transform: translate(-50%, calc(-100% - 8px)); font: 700 12px var(--font-body); color: var(--stage-dim); white-space: nowrap; }
+.yy-pts b.t { color: #7fe6f0; }
+.yy-pts b.below { transform: translate(-50%, 10px); }
 .yy-pts i.t { width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px; background: #4fe0ec; box-shadow: 0 0 10px rgba(79, 224, 236, 0.8); }
 .yy-rows { display: grid; gap: 8px; margin-top: 12px; flex: none; }
 .yy-rows .r { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); font-size: 14.5px; color: var(--ink-2); }
-.yy-rows .r b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.yy-rows .r b { color: var(--ink); }
 .yy-remind { margin-top: 12px; }
 .yy.res .yy-btn { margin-top: 12px; }
 
+/* Mikrofon: dinlerken düğme dolu; izin sayfası (maket sesizin) */
+.yy-input { padding: 0 4px; } /* alanın odak halesi kartın hizasını taşmasın (mikrofon kapısı tur 2) */
+.yy-input { position: relative; }
+.yy-input .rb { color: var(--accent-g, #11a9b8); border: 2px solid var(--accent-g, #11a9b8); background: var(--surface); box-shadow: 0 0 0 4px rgba(17, 169, 184, 0.14); } /* boşta da dokunulacak düğme belli; alanla aynı hale */
+.yy-input .fieldwrap { position: relative; flex: 1; min-width: 0; display: flex; }
+.yy-input .fieldwrap .field { width: 100%; }
+.yy-input .live { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 10px; background: var(--surface-2); font: 600 13px var(--font-body); color: var(--ink-2); pointer-events: none; }
+.yy-input .live i { width: 8px; height: 8px; border-radius: 50%; background: #ff5a4a; box-shadow: 0 0 0 3px rgba(255, 90, 74, 0.2); flex: none; }
+.yy-input .rb.on { background: var(--accent-grad); border: 0; color: var(--accent-ink); box-shadow: 0 0 0 4px rgba(17, 169, 184, 0.22); } /* dinlerken dolu, durdur simgesi */
+/* İzin sayfası: arka plan koyu ve bulanık (kenarın arkadaki merdiveni kesiyor gibi görünmesin); altta ev çubuğu payı */
+.yy-sheetbg { position: fixed; inset: 0; z-index: 30; background: rgba(4, 8, 12, 0.66); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); display: flex; align-items: flex-end; }
+.yy-sheet { width: 100%; background: var(--surface); color: var(--ink); border-radius: 28px 28px 0 0; padding: 22px 20px max(28px, calc(16px + env(safe-area-inset-bottom))); }
+.yy-sheet h2 { margin: 0; font: 700 22px/1.2 var(--font-display); letter-spacing: -0.01em; }
+.yy-sheet .pts { display: grid; gap: 10px; margin: 16px 0 18px; }
+.yy-sheet .pts div { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--ink-2); line-height: 1.4; }
+.yy-sheet .pts b { width: 30px; height: 30px; border-radius: 10px; background: var(--surface-2); display: grid; place-items: center; flex: none; color: var(--accent-g, #11a9b8); }
+.yy-btn.ghost { background: transparent; color: var(--ink-2); box-shadow: none; border: 1.5px solid var(--border); font-weight: 600; font-size: 16px; height: 50px; margin-top: 10px; }
+
 @media (max-width: 340px) {
+  .yy-sheet h2 { font-size: 19px; } .yy-sheet .pts div { font-size: 14px; } .yy-sheet .pts { margin: 12px 0 14px; gap: 8px; }
   .yy { padding-left: 14px; padding-right: 14px; }
   .yy-h1 { font-size: 25px; } .yy-h1 br { display: none; }
   .yy-lead { font-size: 14.5px; margin-top: 4px; }
   .yy-stage.prev { margin-top: 10px; } .yy-stage.prev .win { height: 58px; margin: 6px 0; }
+  .yy-giris .yy-stage.prev .win { min-height: 56px; } /* kör tur 1: 320'de merdiven uç yazıları kesiliyordu */
   .yy-lg { margin-top: 8px; gap: 4px; } .yy-lg div { font-size: 13.5px; } .yy-lg b { width: 22px; height: 22px; }
   .yy-btn { height: 50px; font-size: 17px; }
   .yy-stage { padding: 10px 12px 8px; border-radius: 20px; }
@@ -128,5 +159,5 @@
   .yy-input { margin-top: 8px; } .yy-top { padding-bottom: 8px; }
   .yy-big { font-size: 52px; }
   .yy-rows .r { padding: 8px 12px; font-size: 13.5px; }
-  .yy.res .yy-stage.graph { min-height: 0; flex: 0 0 auto; } .yy.res .yy-stage.graph .gwrap { height: 64px; min-height: 64px; flex: none; } /* madde 12: satır düşmez, grafik kısalır */
+  .yy.res .yy-stage.graph .gwrap { min-height: 78px; } /* madde 12: satır düşmez, grafik kısalır */
 }
