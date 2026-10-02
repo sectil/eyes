@@ -5,7 +5,7 @@ window.TEXTS = [
   "src": "howard2018",
   "type": "A",
   "title": "Boş kartı en az sayan arılar",
-  "text": "Bal arıları kartlardaki şekilleri karşılaştırıp daha az şekilli olanı seçmeyi öğrendi. Sonra boş bir kart gösterildi. Arılar boş kartı, tek şekilli karttan da az saydı. Benzer bir beceri papağanlarda ve maymunlarda da görülmüştü.",
+  "text": "Bal arıları kartlardaki şekilleri karşılaştırıp daha az şekilli olanı seçmeyi öğrendi. Sonra boş bir kart gösterildi. Arılar boş kartı, tek şekilli karttan da daha az olarak değerlendirdi. Benzer bir beceri papağanlarda ve maymunlarda da görülmüştü.",
   "targets": [
    {
     "w": "papağanlarda",

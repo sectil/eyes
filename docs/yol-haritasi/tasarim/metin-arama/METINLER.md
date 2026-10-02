@@ -87,9 +87,9 @@ kopyalanmaz. PMID ve DOI `arastirma/KAYNAKLAR.md`'de. Tek kaynak `maket/metinler
 ile üretilir, elle düzenlenmez. Hedef türleri: E kolay, S benzer biçimli, Z iki benzer biçimli, Y metinde yok.
 
 <!-- B:basla -->
-### B1 · Boş kartı en az sayan arılar (`howard2018`, A tipi, 33 kelime)
+### B1 · Boş kartı en az sayan arılar (`howard2018`, A tipi, 35 kelime)
 
-Bal arıları kartlardaki şekilleri karşılaştırıp daha az şekilli olanı seçmeyi öğrendi. Sonra boş bir kart gösterildi. Arılar boş kartı, tek şekilli karttan da az saydı. Benzer bir beceri papağanlarda ve maymunlarda da görülmüştü.
+Bal arıları kartlardaki şekilleri karşılaştırıp daha az şekilli olanı seçmeyi öğrendi. Sonra boş bir kart gösterildi. Arılar boş kartı, tek şekilli karttan da daha az olarak değerlendirdi. Benzer bir beceri papağanlarda ve maymunlarda da görülmüştü.
 
 Hedefler: **papağanlarda** kolay · **kartı** benzer · **arıya** yok
 
