@@ -2,11 +2,12 @@ import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import {
   genStreet, makeQuestions, countOptions, taskScore, scoreRound, nextLevel, makeRecord, optionLabel, FACTS, factFor, isStreet,
-  LEVELS, TASKS, CLOTH, SCENE_IDS, SCENE_TARGETS, TEMPLATES, templatesFor, sceneStage, changeNOf, missedQuestion, countAll, VH, WALK_VY,
+  LEVELS, TASKS, CLOTH, SAW, SCENE_IDS, SCENE_TARGETS, TEMPLATES, templatesFor, sceneStage, changeNOf, missedQuestion, countAll, VH, WALK_VY,
 } from './street.js'
 import { streetSVG, sceneSVG, car, cat, bike } from './streetSvg.js'
 import { H, Y, SIGN, SKY_MAX, PERSON_TOP, renderScene, backdrop, itemBox, signBox, treeBoxes, lampBoxes, headBox, overlaps, SCENES } from './streetScenes.js'
-import { TEXTS, say, isApproved, textOr, optionText } from './streetText.js'
+import { TEXTS, say, textOr, optionText, lines, pastOf, changeSentence, missedLines, taskLines, sceneName, colorName } from './streetText.js'
+import { OBJECTS } from './streetChange.js'
 import { LADDERS } from './ladders.js'
 
 const SEEDS = Array.from({ length: 200 }, (_, i) => i * 7919 + 13)
@@ -116,7 +117,7 @@ describe('sorular', () => {
       }
     }
   })
-  it('Gözünden kaçan: sahne başına ≥ 12 şablon; konu sahnede tek ve cevap sahneyle tutarlı; yakalamada konu yok', () => {
+  it('Gözünden kaçan: sahne başına ≥ 12 şablon; konu her zaman sahnede ve tek; cevap sahneyle tutarlı', () => {
     for (const scene of SCENE_IDS) expect(Object.keys(TEMPLATES).filter((id) => TEMPLATES[id].scenes.includes(scene)).length, scene).toBeGreaterThanOrEqual(12)
     for (const scene of SCENE_IDS) {
       for (const seed of SEEDS.slice(0, 20)) {
@@ -136,23 +137,22 @@ describe('sorular', () => {
         expect(s.people.filter((p) => p.cane)).toHaveLength(1)
         expect(s.people.filter((p) => p.instrument)).toHaveLength(1)
         expect(s.people.filter((p) => p.scarf)).toHaveLength(1)
-        // yakalama: konu hiç yok
-        const without = genStreet(seed, 4, { scene, taskId, subjects: ids.filter((x) => x !== 'laugh' && x !== 'beard'), absent: ['laugh', 'beard'] })
-        expect(without.people.filter((p) => p.laugh || p.beard)).toHaveLength(0)
-        expect(missedQuestion(without, 'laugh', { catch: true })).toMatchObject({ catch: true, a: null, opts: [] })
+        expect(missedQuestion(s, ids[0])).not.toHaveProperty('catch')
       }
     }
   })
 })
 
 describe('puan, seviye ve kayıt', () => {
-  it('görev: tam 1, bir eksik/fazla ½, yoksa 0; tahmin ayrı; yakalama sorusu fark etme sayısına girmez', () => {
+  it('görev: tam 1, bir eksik/fazla ½, yoksa 0; Gördüm + doğru fark etme, Görmedim + doğru tahmin; soru sayısı hepsi', () => {
     expect(taskScore(4, 4)).toBe(1)
     expect(taskScore(5, 4)).toBe(0.5)
     expect(taskScore(1, 4)).toBe(0)
     const r = scoreRound({ countAnswer: 4, n: 4, answers: [{ ok: true, guess: false }, { ok: true, guess: true }, { ok: false, guess: false }] })
     expect(r).toEqual({ task: 1, noticed: 1, guessedRight: 1, asked: 3 })
-    expect(scoreRound({ countAnswer: 1, n: 4, answers: [{ ok: true, guess: false }, { ok: true, catch: true }] })).toEqual({ task: 0, noticed: 1, guessedRight: 0, asked: 1 })
+    const saw = [{ ok: true, saw: 'gordum' }, { ok: true, saw: 'gormedim' }, { ok: false, saw: 'gordum' }, { ok: false, saw: 'gormedim' }]
+    expect(scoreRound({ countAnswer: 1, n: 4, answers: saw })).toEqual({ task: 0, noticed: 1, guessedRight: 1, asked: 4 })
+    expect(SAW).toEqual(['gordum', 'gormedim'])
   })
   it('seviye = sahne basamağı (LADDERS F1..F5 → 1..5): D ayrı gün; bugün sayılmaz; eski kayıtlarla da', () => {
     const rec = (d, extra = {}) => ({ type: 'street', noticed: 1, asked: 3, task: 1, level: 1, date: ago(d), ...extra })
@@ -186,14 +186,16 @@ describe('puan, seviye ve kayıt', () => {
     const s = genStreet(7, 1)
     const rec = makeRecord({ street: s, countAnswer: s.counts[s.task.id], answers: [{ id: 'a', ok: true, guess: false }], seconds: 61.2 })
     expect(rec).toMatchObject({ type: 'street', seed: 7, level: 1, stage: 'F1', task: 1, noticed: 1, asked: 1, seconds: 61, scene: 'cadde', changeN: null, changes: [], askedIds: ['a'] })
-    expect(rec.answers[0]).toEqual({ id: 'a', ok: true, guess: false, saw: null, similar: false, catch: false })
+    expect(rec.answers[0]).toEqual({ id: 'a', ok: true, guess: false, saw: null, similar: false })
     expect(isStreet(rec)).toBe(true)
     const changes = [{ n: 8, looks: 1, found: true, kind: 'renk', obj: 'hat' }, { n: 10, looks: 2, found: true, kind: 'yer', obj: 'cat' }, { n: 10, looks: 3, found: true, kind: 'gider', obj: 'pot' }, { n: 12, looks: 3, found: false, kind: 'renk', obj: 'bag' }]
-    const r2 = makeRecord({ street: s, countAnswer: 0, answers: [{ id: 'laugh', ok: true, guess: false, saw: 'vardi', similar: true }, { id: 'beard', ok: true, catch: true, saw: 'yoktu' }], changes, fact: 'gorilla', factOpen: true })
+    const r2 = makeRecord({ street: s, countAnswer: 0, answers: [{ id: 'laugh', ok: true, saw: 'gordum', similar: true }, { id: 'beard', ok: true, saw: 'gormedim' }], changes, fact: 'gorilla', factOpen: true })
     expect(r2.changeN).toBe(10)
     expect(r2.changes).toEqual(changes)
-    expect(r2).toMatchObject({ asked: 1, noticed: 1, askedIds: ['laugh', 'beard'], fact: 'gorilla', factOpen: true })
-    expect(r2.answers[1]).toMatchObject({ saw: 'yoktu', catch: true })
+    expect(r2).toMatchObject({ asked: 2, noticed: 1, guessedRight: 1, askedIds: ['laugh', 'beard'], fact: 'gorilla', factOpen: true })
+    expect(r2.answers).toEqual([{ id: 'laugh', ok: true, guess: false, saw: 'gordum', similar: true }, { id: 'beard', ok: true, guess: true, saw: 'gormedim', similar: false }])
+    // eski kayıt (catch alanlı ya da saw'sız) okunurken bozulmaz
+    expect(scoreRound({ countAnswer: 0, n: 0, answers: [{ ok: true, guess: true, catch: false }, { ok: true, saw: 'vardi' }] })).toMatchObject({ noticed: 1, guessedRight: 1, asked: 2 })
     expect(changeNOf([{ n: 12, looks: 3, found: true }])).toBeNull()
     expect(changeNOf([])).toBeNull()
   })
@@ -282,44 +284,115 @@ describe('çizim (lib/streetScenes.js motoru)', () => {
   })
 })
 
-describe('metinler: onaysız metin ekrana çıkmaz', () => {
+describe('metinler: yalnız METINLER\'deki onaylı metin ekrana çıkar', () => {
   const metinler = readFileSync(new URL('../../../docs/yol-haritasi/tasarim/fark-ettin-mi/METINLER.md', import.meta.url), 'utf8')
+  const flat = metinler.replace(/\s+/g, ' ')
   const rows = metinler.split('\n').filter((l) => /^\| [A-ZŞ]\d+ \|/.test(l)).map((l) => l.split('|').map((c) => c.trim()))
-  it('METINLER\'deki her kimlik modülde; onaylı olanlar aynen, taslaklar metinsiz', () => {
-    expect(rows.length).toBeGreaterThanOrEqual(30)
+  // Sahip onayı bölümü (ilk S listesi): "ID (yeni) "metin"" ya da "ID "a" / "b""; yukarıdaki T durumunu geçersiz kılar
+  const sec = metinler.slice(metinler.indexOf('## Sahip onayı'), metinler.indexOf('## Yeni metinler'))
+  const owner = {}
+  for (const m of sec.matchAll(/([A-ZŞ]\d)(?: \(yeni\))? "([^"]+)"(?: \/ "([^"]+)")?/g)) owner[m[1]] = m[3] ? [m[2], m[3]] : [m[2]]
+  owner.R5 = [sec.match(/R5 [^"]*"([^"]+)"/)[1]] // rozetler tırnaksız, satır tırnaklı
+  const effective = (r) => (owner[r[1]] || r[1] === 'R3' ? 'S' : r.at(-2))
+  // örnekler doldurulmuş hâldir: örneğin değerleri
+  const EX = { M1: { sahne: 'Cadde' }, M2: { görev: 'Mavi arabaları say' }, M3: { hedef: 'mavi arabalarda' }, D1: { i: 2, n: 4 }, G2: { Yer: 'Caddede', kim: 'kahkaha atan bir kadın' }, G4: { soru: 'Elbisesi ne renkti?' } }
+  it('sahip onaylılar harfi harfine (örnek değerleriyle); iki parçalılar: D8 ayrı kimlik, R2 satır; R3 Gelişim\'in sözü', () => {
+    expect(Object.keys(owner).sort()).toEqual(['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'G1', 'G2', 'G3', 'G4', 'G5', 'M1', 'M2', 'M3', 'M4', 'R1', 'R2', 'R4', 'R5', 'Y1', 'Y2', 'Ş1'])
+    for (const [id, parts] of Object.entries(owner)) {
+      if (id === 'D8') {
+        expect(say('D8.1')).toBe(parts[0])
+        expect(say('D8.2')).toBe(parts[1])
+      } else if (id === 'R5') {
+        expect(say('R5')).toBe(parts[0])
+        expect(say('R5.tags')).toBe('TAM / YAKIN / KAÇTI / GÖRDÜN / TAHMİN')
+      } else {
+        expect(TEXTS[id].status, id).toBe('S')
+        expect(say(id, EX[id]), id).toBe(parts.join(' / '))
+      }
+    }
+    expect(say('R3')).toBe('henüz belli değil')
+    expect(lines('G2', EX.G2)).toEqual(['Caddede kahkaha atan bir kadın vardı.', 'Onu fark ettin mi?'])
+  })
+  it('METINLER tablosundaki her kimlik modülde; bugünkü onaylılar aynen; taslak yalnız N1–N4 ve metinsiz', () => {
     for (const r of rows) {
       const id = r[1]
-      const status = r.at(-2)
+      const st = effective(r)
       expect(TEXTS[id], id).toBeTruthy()
-      if (status.startsWith('onaylı')) {
-        expect(isApproved(id), id).toBe(true)
+      if (st.startsWith('onaylı')) {
+        expect(TEXTS[id].status).toBe('onayli')
         expect(say(id)).toBe(r[2])
-      } else {
-        expect(isApproved(id), id).toBe(false)
+      } else if (st !== 'S') {
         expect(TEXTS[id].text, id).toBeUndefined()
         expect(say(id), id).toBeNull()
         expect(textOr(id)).toBe(`⟨${id}⟩`)
       }
     }
+    expect(Object.keys(TEXTS).filter((id) => TEXTS[id].status === 'T')).toEqual(['N1', 'N2', 'N3', 'N4'])
   })
-  it('yeni görev, şablon ve seçenek adları onaysız (null); bugünkü görevler ve renk adları onaylı', () => {
-    for (const t of TASKS) {
-      expect(say(`task.${t.id}`)).toBe(t.text)
-      expect(say(`count.${t.id}`)).toBe(t.q)
+  it('modüldeki her S metni METINLER\'de var (yer tutuculular örnekle; M3 odak tablosu türetilmiştir)', () => {
+    for (const [id, e] of Object.entries(TEXTS)) {
+      if (e.status !== 'S' || !e.text || e.text.includes('{') || id.startsWith('focus.') || id === 'R3') continue
+      expect(flat.includes(e.text), `${id}: ${e.text}`).toBe(true)
     }
-    for (const id of ['redCar', 'watermelon', 'kite', 'litShop']) expect(say(`task.${id}`)).toBeNull()
-    expect(optionText('color', 'laugh', 'mavi')).toBe('mavi')
-    expect(optionText('item', 'musician', 'gitar')).toBeNull()
-    expect(optionText('stall', 'stall', 'ELMA')).toBeNull()
+    const filled = [
+      say('change.gelir', { ad: 'saksı' }), say('change.gider', { Ad: 'Çöp kutusu' }), say('change.geldi', { hayvan: 'güvercin' }),
+      say('change.gitti', { Hayvan: 'Kedi' }), say('change.belirdi', { yer: 'başında', ad: 'şapka' }), say('change.yokOldu', { iyelik: 'gözlüğü' }),
+      say('change.yer', { Ad: 'Bisiklet' }), say('change.tabela', { X: 'F', Y: 'P' }),
+      changeSentence({ kind: 'renk', obj: 'door', from: 'lacivert', to: 'bordo' }),
+    ]
+    for (const x of filled) expect(flat.includes(`"${x}"`), x).toBe(true)
+    // "{Yer} {kim} vardı." kalıbı, sahneye göre yer
+    expect(missedLines('blonde', 'pazar')).toEqual({ saw: ['Pazar yerinde sarışın bir kadın vardı.', 'Onu fark ettin mi?'], yesNo: ['Gördüm', 'Görmedim'], detail: ['Çantası ne renkti?', 'Görmediysen de tahmin et.'] })
+    expect(missedLines('kite', 'park').saw[0]).toBe('Parkta uçurtma uçuran bir çocuk vardı.')
+    expect(missedLines('laugh', 'yagmur').saw[0]).toBe('Caddede kahkaha atan bir kadın vardı.')
+    expect(missedLines('cane', 'cadde').detail[0]).toBe('Tişörtü ne renkti?')
+    expect(sceneName('aksam')).toBe('Akşam ışıkları')
   })
-  it('kaynak dosyalarda taslak cümle yok (bugünkü ekranda zaten olanlar dışında)', () => {
-    const sentences = rows.filter((r) => !r.at(-2).startsWith('onaylı')).flatMap((r) => r[2].split(/ \/ |(?<=[.?!]) |— ör\. |"/)).map((x) => x.replace(/["“”]/g, '').trim()).filter((x) => x.length >= 12 && !x.includes('{') && !/^ör\./.test(x))
-    expect(sentences.length).toBeGreaterThan(15)
-    // bugünkü ekranda zaten olanlar (modül adı, onaylı görev adı, bugünkü soru ve geri bildirim parçaları)
-    const today = ['Fark Ettin mi?', 'Mavi arabaları say', 'Elbisesi ne renkti?', 'Fark etmesen de doğru bildin.', 'Beynin görmüş olabilir']
+  it('kimliği olup metni olmayan yok: her görev, şablon, seçenek, sahne ve değişiklik onaylı metinle', () => {
+    for (const scene of SCENE_IDS) {
+      expect(sceneName(scene), scene).toBeTruthy()
+      for (const t of SCENE_TARGETS[scene]) {
+        const l = taskLines(t)
+        expect(l.task && l.focus && l.count, `${scene} ${t}`).toBeTruthy()
+        expect(l.focus.startsWith('Gözün ') && l.focus.endsWith(' olsun. Sonunda birkaç sorum var.')).toBe(true)
+      }
+      for (const id of templatesFor(scene, null)) {
+        const m = missedLines(id, scene)
+        expect(m.saw && m.detail, `${scene} ${id}`).toBeTruthy()
+        const s = genStreet(5, 3, { scene, taskId: SCENE_TARGETS[scene][0], subjects: [id] })
+        const q = missedQuestion(s, id)
+        for (const v of q.opts) expect(optionText(q.detail, id, v), `${scene} ${id} ${v}`).toBeTruthy()
+      }
+    }
+    expect(optionText('item', 'musician', 'gitar')).toBe('Gitar')
+    expect(optionText('stall', 'stall', 'İNCİR')).toBe('İncir')
+    for (const obj of Object.keys(OBJECTS)) {
+      for (const kind of OBJECTS[obj].kinds) {
+        const pal = OBJECTS[obj].palette ?? []
+        const c = kind === 'tabela' ? { obj, kind, from: 'FIRIN', to: 'FIRAN' } : { obj, kind, from: pal[0] ?? true, to: pal[1] ?? true, dress: false }
+        expect(changeSentence(c), `${obj} ${kind}`).toBeTruthy()
+        for (const col of pal) expect(colorName(col), `${obj} ${col}`).toBeTruthy()
+      }
+    }
+    expect(changeSentence({ obj: 'top', kind: 'renk', from: 'kirmizi', to: 'mavi', dress: true })).toBe('Elbise kırmızıydı, mavi oldu')
+    expect(changeSentence({ obj: 'top', kind: 'renk', from: 'kirmizi', to: 'mavi', dress: false })).toBe('Tişört kırmızıydı, mavi oldu')
+    expect(changeSentence({ obj: 'pigeon', kind: 'gelir' })).toBe('Bir güvercin geldi')
+    expect(changeSentence({ obj: 'cat', kind: 'gider' })).toBe('Kedi gitti')
+    expect(changeSentence({ obj: 'glasses', kind: 'gider' })).toBe('Birinin gözlüğü yok oldu')
+    expect(changeSentence({ obj: 'hat', kind: 'gelir' })).toBe('Birinin başında şapka belirdi')
+    expect(changeSentence({ obj: 'sign', kind: 'tabela', from: 'FIRIN', to: 'PIRIN' })).toBe('Tabelada F harfi P oldu')
+    // bugünkü dört görev aynen
+    for (const t of TASKS) expect([say(`task.${t.id}`), say(`count.${t.id}`)]).toEqual([t.text, t.q])
+  })
+  it('D7 geçmiş eki tr.grammar ile: 12 renk', () => {
+    expect(['kirmizi', 'mavi', 'sari', 'yesil', 'mor', 'turuncu', 'siyah', 'beyaz', 'gri', 'kahve', 'lacivert', 'bordo'].map((k) => pastOf(colorName(k)))).toEqual(['kırmızıydı', 'maviydi', 'sarıydı', 'yeşildi', 'mordu', 'turuncuydu', 'siyahtı', 'beyazdı', 'griydi', 'kahverengiydi', 'lacivertti', 'bordoydu'])
+  })
+  it('kaynak dosyalarda taslak cümle (N1–N4) yok', () => {
+    const sentences = rows.filter((r) => effective(r) === 'T').flatMap((r) => r[2].split(/(?<=[.?!:]) /)).map((x) => x.replace(/\(.*\)/g, '').trim()).filter((x) => x.length >= 12 && !x.includes('{') && x !== 'Fark Ettin mi?')
+    expect(sentences.length).toBeGreaterThanOrEqual(4)
     for (const f of ['../screens/StreetWalk.jsx', './street.js', './streetChange.js', './streetScenes.js', './streetText.js', './streetSvg.js']) {
       const src = readFileSync(new URL(f, import.meta.url), 'utf8')
-      for (const x of sentences) if (!today.includes(x)) expect(src.includes(x), `${f}: ${x}`).toBe(false)
+      for (const x of sentences) expect(src.includes(x), `${f}: ${x}`).toBe(false)
     }
   })
 })

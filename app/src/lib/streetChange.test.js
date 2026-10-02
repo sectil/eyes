@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   CHANGE_LADDER, nextN, startN, OBJECTS, objectsFor, family, FRAME, makeFrame, hitTest, chooseChanges, planRound, history,
-  weekScene, sceneTriple, roundTriple, wasCatch, pickFact, TEXT_IDS,
+  weekScene, roundTriple, pickFact, TEXT_IDS, SCENE_WEEK_MAX, missedTextIds,
 } from './streetChange.js'
 import { genStreet, makeRecord, isStreet, nextLevel, sceneStage, SCENE_IDS, SCENE_TARGETS, TEMPLATES, FACTS } from './street.js'
 import { itemBox, overlaps, SCENES } from './streetScenes.js'
@@ -9,7 +9,7 @@ import { sceneSVG } from './streetSvg.js'
 import { dayKey } from './calendar.js'
 import { calendarDaysBetween } from './today.js'
 import { seedHash } from './progression.js'
-import { say } from './streetText.js'
+import { say, isApproved } from './streetText.js'
 
 const START = new Date('2026-06-01T12:00:00')
 const dayAt = (d) => new Date(START.getTime() + d * 86400000)
@@ -154,9 +154,8 @@ function simulate({ legacyDays = 0, days = 90, salt = 'a', skip = () => false })
       return c
     })
     const answers = plan.questions.map((q) => {
-      const saw = ['vardi', 'yoktu', 'emin-degil'][Math.floor(r() * 3)]
-      if (q.catch) return { id: q.id, saw, catch: true, ok: saw === 'yoktu', guess: false }
-      return { id: q.id, saw, similar: q.similar, ok: r() < 0.6, guess: saw !== 'vardi' }
+      const saw = r() < 0.5 ? 'gordum' : 'gormedim'
+      return { id: q.id, saw, similar: q.similar, ok: r() < 0.6 }
     })
     const rec = makeRecord({ street: plan.street, countAnswer: plan.street.counts[plan.taskId], answers, seconds: 120, changes, fact: plan.fact?.id ?? null, factOpen: plan.fact ? r() < 0.5 : false }, now)
     log.push({ d, now, plan, rec, before: [...sessions] })
@@ -175,8 +174,6 @@ describe('90 günlük simülasyon: §9c madde 1–6 hiç çiğnenmez; (sahne, he
   for (const [name, { sessions, log }] of runs) {
     it(name, () => {
       const triples = new Set()
-      let catches = 0
-      let prevCatch = false
       for (const { d, now, plan, rec, before } of log) {
         const hist = history(before, now)
         const today = dayKey(now)
@@ -184,15 +181,24 @@ describe('90 günlük simülasyon: §9c madde 1–6 hiç çiğnenmez; (sahne, he
         const prev = hist.at(-1)
         const prevScene = prev ? prev.scene ?? 'cadde' : null
         const tag = `${name} gün ${d}`
-        // madde 1: aynı sahne art arda gelmez (açık seçenek varken); üçlü 14 günde tekrar etmez (seçenek varken)
+        const ago = (s) => calendarDaysBetween(dayKey(new Date(s.date)), today)
+        // madde 1 (sahip kararı): tek sahne açıkken o; ≥ 2 açıkken dünkü sahne yok, art arda yok; 7 günde ≤ 2 (seçenek varken)
         expect(stage.scenes).toContain(plan.scene)
-        if (stage.scenes.length >= 2) expect(plan.scene, tag).not.toBe(prevScene)
-        const recent = new Set(hist.filter((s) => calendarDaysBetween(dayKey(new Date(s.date)), today) < 14).map((s) => sceneTriple(s.scene ?? 'cadde')))
-        const alt = stage.scenes.filter((s) => s !== prevScene && !recent.has(sceneTriple(s)))
-        const week = weekScene(hist, stage, now)
-        if (alt.length && plan.scene !== week) expect(recent.has(sceneTriple(plan.scene)), `${tag} 14 gün`).toBe(false)
-        // madde 5: her 7. tur haftanın sahnesi
-        if (week && week !== prevScene) expect(plan.scene, `${tag} haftanın sahnesi`).toBe(week)
+        if (stage.scenes.length === 1) expect(plan.scene).toBe(stage.scenes[0])
+        else {
+          expect(plan.scene, `${tag} art arda`).not.toBe(prevScene)
+          const banned = new Set(hist.filter((s) => ago(s) <= 1).map((s) => s.scene ?? 'cadde'))
+          if (prevScene) banned.add(prevScene)
+          let open = stage.scenes.filter((s) => !banned.has(s))
+          if (open.length) expect(banned.has(plan.scene), `${tag} dünkü sahne`).toBe(false)
+          else open = stage.scenes.filter((s) => s !== prevScene)
+          const week7 = (sc) => hist.filter((s) => ago(s) < 7 && (s.scene ?? 'cadde') === sc).length
+          const limited = open.filter((s) => week7(s) < SCENE_WEEK_MAX)
+          if (limited.length) expect(week7(plan.scene), `${tag} 7 günde ≤ 2`).toBeLessThan(SCENE_WEEK_MAX)
+          // madde 5: her 7. tur haftanın sahnesi (izinliyse)
+          const week = weekScene(hist, stage, now)
+          if (week && (limited.length ? limited : open).includes(week)) expect(plan.scene, `${tag} haftanın sahnesi`).toBe(week)
+        }
         // madde 2: sayma hedefi son 7 turda yok
         expect(hist.slice(-7).map((s) => s.taskId), tag).not.toContain(plan.taskId)
         expect(SCENE_TARGETS[plan.scene]).toContain(plan.taskId)
@@ -210,18 +216,23 @@ describe('90 günlük simülasyon: §9c madde 1–6 hiç çiğnenmez; (sahne, he
           expect(c.n).toBeLessThanOrEqual(30)
         }
         expect(rec.changes[0].n, `${tag} başlangıç`).toBe(startN(hist))
-        // madde 4: şablon son 3 turda yok; yakalama iki tur üst üste değil
+        // madde 4: şablon son 3 turda yok; yakalama sorusu yok: konu her zaman sahnede, iki adım her soruda
         expect(rec.askedIds).toHaveLength(2)
+        for (const q of plan.questions) {
+          expect(q.a, `${tag} ${q.id}`).not.toBeNull()
+          expect(q.opts).toContain(q.a)
+          expect(q).not.toHaveProperty('catch')
+        }
+        for (const a of rec.answers) {
+          expect(['gordum', 'gormedim']).toContain(a.saw)
+          expect(a.guess).toBe(a.saw === 'gormedim')
+          expect(a).not.toHaveProperty('catch')
+        }
         const old3 = new Set(hist.slice(-3).flatMap((s) => s.askedIds ?? (s.answers ?? []).map((a) => a.id)))
         for (const id of rec.askedIds) {
           expect(old3.has(id), `${tag} şablon ${id}`).toBe(false)
           expect(TEMPLATES[id].scenes).toContain(plan.scene)
         }
-        const isCatch = wasCatch(rec)
-        expect(isCatch && prevCatch, `${tag} yakalama üst üste`).toBe(false)
-        expect(rec.answers.filter((a) => a.catch).length).toBeLessThanOrEqual(1)
-        if (isCatch) catches++
-        prevCatch = isCatch
         // madde 6: bilim kartı 7 günde tekrar etmez, açılan kart 30 gün dinlenir
         if (rec.fact) {
           for (const s of hist.filter((x) => x.fact === rec.fact)) {
@@ -239,9 +250,9 @@ describe('90 günlük simülasyon: §9c madde 1–6 hiç çiğnenmez; (sahne, he
         expect(isStreet(rec)).toBe(true)
         expect(rec.level).toBe(stage.level)
       }
-      const rate = catches / log.length
-      expect(rate).toBeGreaterThan(0.2)
-      expect(rate).toBeLessThan(0.45)
+      // döngü sabit değil: bütün sahneler açıldıktan sonra 2–7'lik periyot yok
+      const all = log.filter((l) => sceneStage(l.before, l.now).scenes.length === 5).map((l) => l.plan.scene)
+      if (all.length >= 20) for (let p = 2; p <= 7; p++) expect(all.some((sc, i) => i + p < all.length && sc !== all[i + p]), `${name} ${p}'li periyot`).toBe(true)
       expect(nextLevel(sessions, dayAt(400))).toBeGreaterThanOrEqual(1)
     })
   }
@@ -253,7 +264,24 @@ describe('90 günlük simülasyon: §9c madde 1–6 hiç çiğnenmez; (sahne, he
     const again = planRound({ sessions: before, now, seed: plan.seed })
     expect(JSON.stringify(again)).toBe(JSON.stringify(plan))
   })
-  it('eski kayıtlarla: isStreet, nextLevel ve tur planı çalışır', () => {
+  it('yalnız Cadde açıkken her gün Cadde, içerik her gün yeni', () => {
+    const { log } = runs[0][1]
+    const first = log.slice(0, 4)
+    expect(first.map((l) => l.plan.scene)).toEqual(['cadde', 'cadde', 'cadde', 'cadde'])
+    expect(new Set(first.map((l) => l.plan.taskId)).size).toBe(4)
+  })
+  it('Gözünden kaçan metin kimlikleri: G2/G4 kalıp, yer sahneden, kim ve soru şablondan; hepsi onaylı', () => {
+    expect(missedTextIds('laugh', 'park')).toMatchObject({ saw: 'G2', detail: 'G4', yesNo: 'G3', guessRight: 'Ş1', place: 'place.park', who: 'who.laugh', ask: 'ask.laugh' })
+    for (const scene of SCENE_IDS) for (const id of Object.keys(TEMPLATES).filter((t) => TEMPLATES[t].scenes.includes(scene))) {
+      const t = missedTextIds(id, scene)
+      for (const k of ['saw', 'detail', 'place', 'who', 'ask', 'yesNo', 'guessRight']) expect(isApproved(t[k]), `${scene} ${id} ${k}`).toBe(true)
+    }
+  })
+  it('eski kayıtlarla (yakalama alanlı yeni kayıt dahil): isStreet, nextLevel ve tur planı çalışır', () => {
+    const withCatch = { type: 'street', date: '2026-05-31T15:00:00Z', noticed: 1, asked: 1, task: 1, level: 1, scene: 'cadde', askedIds: ['laugh', 'beard'], answers: [{ id: 'laugh', ok: true, guess: false, saw: 'vardi', catch: false }, { id: 'beard', ok: true, guess: false, saw: 'yoktu', catch: true }] }
+    expect(isStreet(withCatch)).toBe(true)
+    const p0 = planRound({ sessions: [withCatch], now: START, seed: 9 })
+    expect(p0.questions.map((q) => q.id)).not.toContain('laugh')
     const old = [{ type: 'street', date: '2026-05-30T09:00:00Z', noticed: 2, asked: 3, task: 1, level: 3 }, { type: 'street', date: '2026-05-31T09:00:00Z', noticed: 1, asked: 3, task: 0.5, level: 3 }]
     expect(old.every(isStreet)).toBe(true)
     expect(nextLevel(old, START)).toBe(2)
@@ -265,12 +293,15 @@ describe('90 günlük simülasyon: §9c madde 1–6 hiç çiğnenmez; (sahne, he
 })
 
 describe('mantık metinleri kimlikle', () => {
-  it('turun metin kimlikleri METINLER kimlikleri; onaysız olanlar ekrana boş döner', () => {
+  it('turun metin kimlikleri METINLER kimlikleri ve hepsi onaylı; soruların kimliği şablona göre', () => {
     const p = planRound({ sessions: [], now: START, seed: 3 })
     expect(p.text.change.ask).toBe('D2')
-    expect(p.text.missed.saw).toBe('G2')
-    for (const group of Object.values(TEXT_IDS)) for (const id of Object.values(group)) if (!['M5', 'M6', 'R6'].includes(id)) expect(say(id), id).toBeNull()
+    for (const group of Object.values(TEXT_IDS)) for (const id of Object.values(group)) expect(isApproved(id), id).toBe(true)
     expect(say(p.text.intro.start)).toBe('Yürümeye başla')
+    expect(say(p.text.change.nextFirst, { N: 10 })).toBe('İlk bakışta buldun. Sıradaki sahnede 10 nesne var.')
+    for (const q of p.questions) expect(q.text).toEqual(missedTextIds(q.id, p.scene))
+    // bugünkü dört görev onaylı, yenileri değil
+    expect(say(p.text.task) === null).toBe(!['blueCar', 'taxi', 'cat', 'bike'].includes(p.taskId))
   })
   it('pickFact: hiç kart yoksa sırayla, uygun kart yoksa null', () => {
     expect(pickFact([], START).id).toBe(FACTS[0].id)

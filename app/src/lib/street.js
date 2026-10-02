@@ -177,11 +177,11 @@ export function genStreet(seed, level = 1, opts = {}) {
     }
   }
   // Yeşil tente (caddede tek; soru konusu "shop") ve pazarda yeşil tezgâh ("stall")
-  if (kind === 'street' && !(opts.absent ?? []).includes('shop')) {
+  if (kind === 'street') {
     const gi = Math.floor(r() * Math.min(s.buildings.length, SHOPS.length))
     s.buildings[gi].aw = 'yesil'
   }
-  if (kind === 'market' && !(opts.absent ?? []).includes('stall')) s.stalls[Math.floor(r() * s.stalls.length)].aw = 'yesil'
+  if (kind === 'market') s.stalls[Math.floor(r() * s.stalls.length)].aw = 'yesil'
 
   // Görev hedefi: 2–6 tane (sayılacak şey en az 2)
   const nTarget = 2 + Math.floor(r() * 5)
@@ -343,13 +343,13 @@ export function countOptions(n, r = Math.random) {
   return [0, 1, 2, 3].map((k) => start + k)
 }
 
-// "Gözünden kaçan" sorusu (yeni tur): önce varlık ("var mıydı?" Vardı · Yoktu · Emin değilim), sonra seçenek. Yakalama
-// sorusunda (catch) konu sahnede yoktur; seçenek adımı olmaz. similar: sorulan renk sayılan hedefin rengi (Most 2001).
-export const SAW = ['vardi', 'yoktu', 'emin-degil']
-export function missedQuestion(s, id, { catch: isCatch = false, similar = false } = {}, r = rng(s.seed + 2)) {
+// "Gözünden kaçan" sorusu (yeni tur; sahip kararı 2026-10-02): konu her zaman sahnededir. Her soruda aynı akış: kişi
+// bildirilir ve "Onu fark ettin mi?" (METINLER G2), "Gördüm · Görmedim" (G3), iki cevapta da ayrıntı sorusu ve "Görmediysen
+// de tahmin et." (G4). similar: sorulan renk sayılan hedefin rengi (Most 2001).
+export const SAW = ['gordum', 'gormedim']
+export function missedQuestion(s, id, { similar = false } = {}, r = rng(s.seed + 2)) {
   const t = TEMPLATES[id]
-  const q = { id, detail: t.detail, catch: Boolean(isCatch), similar: Boolean(similar), a: null, opts: [] }
-  if (isCatch) return q
+  const q = { id, detail: t.detail, similar: Boolean(similar), a: null, opts: [] }
   const sp = s.special ?? {}
   if (t.detail === 'shop' || t.detail === 'stall') {
     const list = t.detail === 'shop' ? s.buildings : s.stalls
@@ -367,16 +367,16 @@ export function missedQuestion(s, id, { catch: isCatch = false, similar = false 
   return { ...q, a, opts }
 }
 
-// Puan: görev tam 1, bir eksik/fazla ½, yoksa 0; fark ettiklerin = "fark ettim" + doğru; doğru tahmin ayrı, puana
-// katılmaz. Yakalama soruları (catch) fark etme sayısına girmez (konu yoktu).
+// Puan: görev tam 1, bir eksik/fazla ½, yoksa 0; fark ettiklerin = "Gördüm" + doğru; doğru tahmin ("Görmedim" + doğru,
+// METINLER Ş1) ayrı, puana katılmaz. guess: saw === 'gormedim' (saw yoksa eski ekranın guess alanı).
+export const guessOf = (a) => (SAW.includes(a?.saw) ? a.saw === 'gormedim' : Boolean(a?.guess))
 export const taskScore = (answer, n) => (answer === n ? 1 : Math.abs(answer - n) === 1 ? 0.5 : 0)
 export function scoreRound({ countAnswer, n, answers = [] }) {
-  const real = answers.filter((a) => !a.catch)
   return {
     task: taskScore(countAnswer, n),
-    noticed: real.filter((a) => a.ok && !a.guess).length,
-    guessedRight: real.filter((a) => a.ok && a.guess).length,
-    asked: real.length,
+    noticed: answers.filter((a) => a.ok && !guessOf(a)).length,
+    guessedRight: answers.filter((a) => a.ok && guessOf(a)).length,
+    asked: answers.length,
   }
 }
 
@@ -410,7 +410,7 @@ export const nextLevel = (sessions = [], now = new Date()) => sceneStage(session
 
 // ---------- kayıt ----------
 // Eski alanlar aynen yazılır; eklenenler (PLAN §3.3): scene, changeN, changes [{ n, looks, found, kind, obj }],
-// askedIds, answers[].saw/similar/catch; ayrıca stage (basamak kimliği, öbür merdivenli modüllerdeki gibi), obj (§9c madde
+// askedIds, answers[].saw ('gordum' | 'gormedim')/similar; ayrıca stage (basamak kimliği, öbür merdivenli modüllerdeki gibi), obj (§9c madde
 // 3 "değişen nesne" hafızası), fact ve factOpen (§9c madde 6 bilim kartı hafızası).
 export function changeNOf(changes = []) {
   const ok = (changes ?? []).filter((c) => c && c.found && c.looks >= 1 && c.looks <= 2 && Number.isFinite(c.n))
@@ -433,7 +433,7 @@ export function makeRecord({ street, countAnswer, answers = [], seconds, changes
     guessedRight: sc.guessedRight,
     asked: sc.asked,
     askedIds: answers.map((a) => a.id),
-    answers: answers.map((a) => ({ id: a.id, ok: Boolean(a.ok), guess: Boolean(a.guess), saw: a.saw ?? null, similar: Boolean(a.similar), catch: Boolean(a.catch) })),
+    answers: answers.map((a) => ({ id: a.id, ok: Boolean(a.ok), guess: guessOf(a), saw: SAW.includes(a.saw) ? a.saw : null, similar: Boolean(a.similar) })),
     changeN: changeNOf(changes),
     changes: (changes ?? []).map((c) => ({ n: c.n, looks: c.looks, found: Boolean(c.found), kind: c.kind, obj: c.obj ?? null })),
     fact,

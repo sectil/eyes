@@ -181,6 +181,7 @@ export function makeFrame(model, spec, n) {
     if (!target) target = { ...base, x: view.vx + view.vw / 2, y: BOTTOM }
     if (o.on === 'person') {
       const full = shown(target)
+      change.dress = Boolean(target.dress) // üstün adı: elbise ya da tişört
       target2 = { ...target }
       if (spec.kind === 'renk') {
         target2[o.attr] = shuffleWith(r, o.palette).find((c) => c !== target[o.attr])
@@ -253,8 +254,6 @@ export function history(sessions = [], now = new Date()) {
   const t = new Date(now).getTime()
   return (sessions ?? []).filter((s) => s?.type === SESSION_TYPE && dayOf(s) && new Date(s.date).getTime() < t).sort(byDate)
 }
-// Üçlü (sahne, saat dilimi, hava): sahneden (PLAN §9c madde 1). 5 sahnede üçlü sahneyle birebirdir.
-export const sceneTriple = (scene) => `${scene}|${SCENES[scene]?.light ?? 'gunduz'}|${SCENES[scene]?.weather ?? 'acik'}`
 const daysAgo = (s, today) => calendarDaysBetween(dayOf(s), today)
 
 // Madde 5: her 7. tur "haftanın sahnesi": son 7 günde açılmış en yeni sahne ya da çeşitleme (yoksa null). Sahne,
@@ -280,20 +279,27 @@ export function weekScene(hist, stage, now = new Date()) {
   return best
 }
 
-// Madde 1 (ve 5): aynı sahne art arda gelmez; aynı üçlü 14 gün içinde tekrar etmez. Açılmış tek sahne varsa ya da
-// bütün seçenekler 14 günde oynandıysa en uzun süredir oynanmayan seçilir (kural seçenek varken çiğnenmez).
-export function chooseScene(hist, stage, now, r) {
+// Madde 1 (sahip kararı 2026-10-02): yalnız bir sahne açıkken o sahne her gün gelir (içerik madde 2–4 ile yenidir).
+// ≥ 2 sahne açıkken dünkü sahne, aynı günün önceki turu ve bir önceki turun sahnesi gelmez; bir sahne son 7 günde en çok 2 kez gelir (seçenek
+// kalmazsa bu koşul gevşer, art arda yasağı kalır); izinliler arasından tohumla rastgele seçilir (sabit döngü yok).
+// Madde 5: her 7. tur haftanın sahnesi, aynı izinler içinde.
+export const SCENE_WEEK_MAX = 2
+export function sceneOptions(hist, stage, now) {
   const today = dayKey(now)
-  const prev = hist.length ? sceneOf(hist.at(-1)) : null
-  let cands = stage.scenes.filter((s) => s !== prev)
-  if (!cands.length) cands = [...stage.scenes]
-  const recent = new Set(hist.filter((s) => daysAgo(s, today) < 14).map((s) => sceneTriple(sceneOf(s))))
+  if (stage.scenes.length < 2) return { allowed: [...stage.scenes], open: [...stage.scenes] }
+  const banned = new Set(hist.filter((s) => daysAgo(s, today) <= 1).map(sceneOf))
+  if (hist.length) banned.add(sceneOf(hist.at(-1))) // art arda iki tur da aynı sahne olmaz (aradaki gün sayısından bağımsız)
+  let open = stage.scenes.filter((s) => !banned.has(s))
+  if (!open.length) open = stage.scenes.filter((s) => s !== sceneOf(hist.at(-1)))
+  const week = (sc) => hist.filter((s) => daysAgo(s, today) < 7 && sceneOf(s) === sc).length
+  const limited = open.filter((s) => week(s) < SCENE_WEEK_MAX)
+  return { allowed: limited.length ? limited : open, open }
+}
+export function chooseScene(hist, stage, now, r) {
+  const { allowed } = sceneOptions(hist, stage, now)
   const week = weekScene(hist, stage, now)
-  if (week && cands.includes(week)) return week
-  const fresh = cands.filter((s) => !recent.has(sceneTriple(s)))
-  if (fresh.length) return fresh[Math.floor(r() * fresh.length)]
-  const lastPlayed = (sc) => hist.reduce((k, s) => (sceneOf(s) === sc ? s.date : k), '')
-  return [...cands].sort((a, b) => String(lastPlayed(a)).localeCompare(String(lastPlayed(b))))[0]
+  if (week && allowed.includes(week)) return week
+  return allowed[Math.floor(r() * allowed.length)]
 }
 // Madde 2: sayma hedefi son 7 turda tekrar etmez
 export function chooseTargets(hist, scene, r) {
@@ -321,7 +327,7 @@ export function chooseChanges(hist, scene, stage, r) {
   }
   return out
 }
-// Madde 4: şablon son 3 turda sorulmaz; yakalama turu rastgele (üçte bir), iki tur üst üste değil
+// Madde 4: şablon son 3 turda sorulmaz (yakalama sorusu yok: sahip kararı 2026-10-02)
 export const pairKey = (ids) => [...ids].sort().join('+')
 export const roundTriple = (scene, taskId, ids) => `${scene}|${taskId}|${pairKey(ids)}`
 export function chooseQuestions(hist, scene, taskId, r, seen = new Set(hist.map((s) => roundTriple(sceneOf(s), s.taskId, s.askedIds ?? (s.answers ?? []).map((a) => a.id))))) {
@@ -329,11 +335,6 @@ export function chooseQuestions(hist, scene, taskId, r, seen = new Set(hist.map(
   const pool = shuffleWith(r, templatesFor(scene, taskId).filter((id) => !recent.has(id)))
   for (let i = 0; i < pool.length; i++) for (let j = i + 1; j < pool.length; j++) if (!seen.has(roundTriple(scene, taskId, [pool[i], pool[j]]))) return [pool[i], pool[j]]
   return null
-}
-export const wasCatch = (s) => (s?.answers ?? []).some((a) => a?.catch)
-export function catchIndex(hist, r) {
-  if (hist.length && wasCatch(hist.at(-1))) return -1
-  return r() < 0.5 ? Math.floor(r() * 2) : -1 // koşullu ½ → uzun vadede turların üçte biri
 }
 // Madde 6: bilim kartı 7 gün içinde tekrar etmez; açılan kart 30 gün dinlenir. Uygun kart yoksa kart yok (susar).
 export function pickFact(hist, now = new Date()) {
@@ -353,15 +354,21 @@ export function pickFact(hist, now = new Date()) {
 }
 
 // ---------- tur ----------
-// Ekran metinlerinin kimlikleri (METINLER.md; metin lib/streetText.js say/textOr'dan, yalnız onaylıysa)
+// Ekran metinlerinin kimlikleri (METINLER.md; metin lib/streetText.js say/textOr'dan, yalnız onaylıysa). D8 ve R5'in
+// parçaları alt kimlikle: D8.1 ilk bakış, D8.2 ikinci bakış; R5.tags rozetler, R5 satır. D7: streetText.changeSentence.
 export const TEXT_IDS = {
   intro: { title: 'M1', task: 'M2', lead: 'M3', parts: 'M4', limit: 'M5', start: 'M6' },
-  change: { head: 'D1', ask: 'D2', hint: 'D3', look: 'D4', again: 'D5', found: 'D6', what: 'D7', next: 'D8', shown: 'D9' },
-  missed: { head: 'G1', saw: 'G2', yesNo: 'G3', detail: 'G4', ago: 'G5', guessRight: 'Ş1' },
-  result: { head: 'R1', number: 'R2', verdict: 'R3', base: 'R4', rows: 'R5', done: 'R6' },
+  change: { head: 'D1', ask: 'D2', hint: 'D3', count: 'D4', again: 'D5', found: 'D6', what: 'D7', nextFirst: 'D8.1', nextSecond: 'D8.2', shown: 'D9' },
+  missed: { head: 'G1', yesNo: 'G3', ago: 'G5', guessRight: 'Ş1' },
+  result: { head: 'R1', number: 'R2', verdict: 'R3', base: 'R4', tags: 'R5.tags', row: 'R5', done: 'R6' },
+  path: { sub: 'Y1', newScene: 'Y2' },
 }
-// Bir turun planı: sahne, sayma hedefi, cadde, 2 "Gözünden kaçan" sorusu, "Ne değişti?" kareleri (n ekranda merdivenle
-// gelir: makeFrame(plan.street, plan.frames[i], n)), başlangıç n'si ve bilim kartı.
+// "Gözünden kaçan" sorusunun kimlikleri: G2 "{Yer} {kim} vardı. / Onu fark ettin mi?", G3, G4 "{soru} / Görmediysen de
+// tahmin et."; yer sahneye göre (place.<sahne>), kim ve soru şablona göre (who.<id>, ask.<id>). streetText.missedLines.
+export function missedTextIds(id, scene) {
+  return { ...TEXT_IDS.missed, saw: 'G2', detail: 'G4', place: `place.${scene}`, who: `who.${id}`, ask: `ask.${id}` }
+}
+
 export function planRound({ sessions = [], now = new Date(), seed = 1 } = {}) {
   const r = rng(seed)
   const hist = history(sessions, now)
@@ -381,28 +388,24 @@ export function planRound({ sessions = [], now = new Date(), seed = 1 } = {}) {
     taskId = SCENE_TARGETS[scene][0]
     asked = templatesFor(scene, taskId).slice(0, 2)
   }
-  const ci = catchIndex(hist, r)
   const tColor = TARGETS[taskId]?.color
   const answers = {}
-  const meta = asked.map((id, k) => {
+  const meta = asked.map((id) => {
     const t = TEMPLATES[id]
-    const isCatch = k === ci
     let similar = false
-    if (!isCatch && t.detail === 'color' && tColor && t.pool.includes(tColor) && r() < 0.5) {
+    if (t.detail === 'color' && tColor && t.pool.includes(tColor) && r() < 0.5) {
       similar = true
       answers[id] = tColor
-    } else if (!isCatch && t.pool) {
+    } else if (t.pool) {
       const pool = t.detail === 'color' && tColor ? t.pool.filter((c) => c !== tColor) : t.pool
       answers[id] = pool[Math.floor(r() * pool.length)]
     }
-    return { id, catch: isCatch, similar }
+    return { id, similar }
   })
   const decoys = shuffleWith(r, templatesFor(scene, taskId).filter((id) => !asked.includes(id))).slice(0, 2)
-  const present = [...meta.filter((m) => !m.catch).map((m) => m.id), ...decoys]
-  const absent = meta.filter((m) => m.catch).map((m) => m.id)
-  const street = genStreet(seed, stage.level, { scene, taskId, subjects: present, absent, answers })
+  const street = genStreet(seed, stage.level, { scene, taskId, subjects: [...asked, ...decoys], answers })
   const qr = rng(seed + 2)
-  const questions = meta.map((m) => missedQuestion(street, m.id, m, qr))
+  const questions = meta.map((m) => ({ ...missedQuestion(street, m.id, m, qr), text: missedTextIds(m.id, scene) }))
   return {
     seed,
     day: dayKey(now),
@@ -416,6 +419,6 @@ export function planRound({ sessions = [], now = new Date(), seed = 1 } = {}) {
     frames: chooseChanges(hist, scene, stage, r),
     startN: startN(hist),
     fact: pickFact(hist, now),
-    text: { ...TEXT_IDS, task: `task.${taskId}`, count: `count.${taskId}` },
+    text: { ...TEXT_IDS, task: `task.${taskId}`, count: `count.${taskId}`, focus: `focus.${taskId}`, scene: `scene.${scene}` },
   }
 }
