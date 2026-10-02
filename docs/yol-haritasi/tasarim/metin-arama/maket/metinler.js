@@ -5,8 +5,8 @@
 // A tipi metin: E, S, Y. B tipi metin: E, S, Z. Bir tur = bir A + bir B = 6 hedef, 1'i "yok" (beşte bir).
 export const TEXTS = [
   {
-    id: 'arilar-sifir', src: 'howard2018', type: 'A', title: 'Boş kartı en az sayan arılar',
-    text: 'Bal arıları kartlardaki şekilleri karşılaştırıp daha az şekilli olanı seçmeyi öğrendi. Sonra boş bir kart gösterildi. Arılar boş kartı, tek şekilli karttan da daha az olarak değerlendirdi. Benzer bir beceri papağanlarda ve maymunlarda da görülmüştü.',
+    id: 'arilar-sifir', src: 'howard2018', type: 'A', title: 'Boş kartı seçen arılar',
+    text: 'Bal arıları kartlardaki şekilleri karşılaştırıp daha az şekilli olanı seçmeyi öğrendi. Sonra boş bir kart gösterildi. Arılar “daha az olanı seç” kuralını boş karta da uyguladı ve boş kartı seçti. Benzer bir beceri papağanlarda ve maymunlarda da görülmüştü.',
     targets: [{ w: 'papağanlarda', t: 'E' }, { w: 'kartı', t: 'S', r: 'kart' }, { w: 'arıya', t: 'Y', r: 'arı' }],
   },
   {
