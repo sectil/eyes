@@ -19,9 +19,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Yeni bir serçe şarkısının kıtaya yayılmasını",
-            "Serçelerin ağaç kovuklarına yuva yapmasını",
-            "Kuşların kışın nasıl beslendiğini",
-            "Dağlarda yaşayan kuşların sayısını"
+            "Eski serçe şarkısının ıslığa benzemesini",
+            "Yeni şarkının dağların batısında sıkışıp kalmasını",
+            "Serçelerin şarkı söyleyerek eş seçmesini"
           ]
         },
         {
@@ -93,9 +93,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Kea papağanlarının olasılığa dayalı tahmin yapmasını",
-            "Kea papağanlarının yüksek dağlarda ne kadar hızlı uçtuğunu",
-            "Büyük maymunların oyunlarını",
-            "Papağanların konuşmayı öğrenmesini"
+            "Deneycinin yığından rastgele bir parça çekmesini",
+            "Papağanların büyük maymunlardan daha zeki olmasını",
+            "Kea papağanlarının dağlarda yiyecek aramasını"
           ]
         },
         {
@@ -167,9 +167,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Kakaduların bir alet takımını taşıyıp kullanmasını",
-            "Kakaduların yüksek ağaçların kovuklarında yuva kurmasını",
-            "Şempanzelerin termit yemesini",
-            "Papağanların ses taklidini"
+            "Deneydeki kakaduların insan bakımında yaşamasını",
+            "Kakaduların aletleri gelişigüzel art arda kullanmasını",
+            "Kakaduların aletlerini ağaç dallarından yapmasını"
           ]
         },
         {
@@ -241,9 +241,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Ebabillerin aylarca havada kalmasını",
-            "Ebabillerin yuvalarını çamurdan yapmasını",
-            "Kuşların kışın Afrika'da yuva kurmasını",
-            "Kuşların gece şarkı söylemesini"
+            "Kışın ebabil görmenin zor olmasını",
+            "Ebabillerin göçte sık sık konmasını",
+            "Ebabillerin yuvasını çamurdan yapmasını"
           ]
         },
         {
@@ -315,9 +315,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Cam kurbağalarının saydam kalmak için kanlarını saklamasını",
-            "Kurbağaların su içinde nefes almasını",
-            "Kurbağaların renk değiştirerek eş aramasını",
-            "Kurbağaların soğuk kışı çamurun içinde uyuyarak geçirmesini"
+            "Cam kurbağalarının kanının pıhtılaşmadan kalmasını",
+            "Saydamlık için yalnız saydam dokuların yetmesini",
+            "Cam kurbağalarının yumurtalarını yaprakların altına bırakmasını"
           ]
         },
         {
@@ -389,9 +389,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Bir kertenkelenin beklenmedik esnek davranışlarını",
-            "Kertenkelelerin ağaçlara nasıl tırmandığını",
-            "Kuşların kertenkelelerden farkını",
-            "Kertenkelelerin kuyruk yenilemesini"
+            "Kertenkelenin bir işaretle ödülü bağdaştırma hızını",
+            "Kertenkelelerin hep aynı kalıpta kalan davranışlarını",
+            "Tropik kertenkelelerin ağaçlarda beslenme alışkanlıklarını"
           ]
         },
         {
@@ -463,9 +463,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Mantis karidesinin farklı bir renk görme biçimini",
-            "Karideslerin avlarını nasıl yakaladığını",
-            "Deniz canlılarının renk değiştirmesini",
-            "Karideslerin derin ve karanlık sularda yol bulmasını"
+            "Çok sayıda algılayıcının renkleri daha ince ayırma gücünü",
+            "Mantis karidesinin avını sert bir darbeyle yakalama yolunu",
+            "Mantis karidesinin derin sularda gizlenme biçimini"
           ]
         },
         {
@@ -537,9 +537,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Kambur balina şarkılarının topluluklar arasında yayılmasını",
-            "Balinaların göç yollarını",
-            "Balinaların yavrularını beslemesini",
-            "Balinaların yiyecek bulmak için yaptığı derin dalışları"
+            "Kambur balina şarkısının kalıplaşmış bir yapıda olmasını",
+            "Balina şarkılarının yıllar boyu hiç değişmeden kalmasını",
+            "Kambur balinaların kışın sıcak sulara göç etmesini"
           ]
         },
         {
@@ -611,9 +611,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Çıplak köstebek farelerinin koloniye özgü şivesini",
-            "Köstebek farelerinin toprak altında uzun tüneller kazmasını",
-            "Farelerin kokuyla birbirini tanımasını",
-            "Farelerin karanlıkta görmesini"
+            "Bütün çıplak köstebek farelerinin ortak tek şivesini",
+            "Çıplak köstebek farelerinin tünel kazma yöntemini",
+            "Çıplak köstebek farelerinin toprak altında besin bulma yolunu"
           ]
         },
         {
@@ -684,10 +684,10 @@
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Zürafaların gece çıkardığı mırıltıyı",
-            "Zürafaların yaprak seçmesini",
-            "Zürafaların uzun boyunlarını",
-            "Zürafaların su içmek için nasıl eğildiğini"
+            "Zürafaların anlaşmaya yarayabilecek bir ses çıkarmasını",
+            "Zürafa sürülerinin sık sık dağılıp yeniden toplanmasını",
+            "Zürafaların hiç ses çıkarmadığının ortaya konmasını",
+            "Zürafaların uzun boyunlarıyla yüksek dallara uzanmasını"
           ]
         },
         {

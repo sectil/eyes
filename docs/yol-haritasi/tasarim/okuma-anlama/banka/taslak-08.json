@@ -19,9 +19,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Yabancı şarkıların ne için söylendiğinin kısa bir dinleyişle anlaşılmasını",
-            "Küçük toplulukların şarkılarını nasıl yazıp sakladığını",
-            "Ninnilerin bebekleri neden çabuk uyuttuğunu",
-            "İnternette en çok dinlenen şarkıların hangileri olduğunu"
+            "İnsanların dans etmek ya da bebeği yatıştırmak için şarkı söylemesini",
+            "Şarkıların ne işe yaradığının ancak o topluluğu tanıyanlarca anlaşılabilmesini",
+            "Farklı ülkelerde şarkılara hangi çalgılarla eşlik edildiğini"
           ]
         },
         {
@@ -93,9 +93,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Aynı elbise fotoğrafının insanlara farklı renklerde görünmesini",
-            "Bir elbisenin renginin yıkandıkça nasıl solduğunu",
-            "Fotoğraf makinelerinin renkleri neden yanlış çektiğini",
-            "İnsanların en çok hangi renk elbiseyi sevdiğini"
+            "Elbisenin renginin bakan herkese aynı biçimde görünmesini",
+            "Fotoğraf makinelerinin renkleri nasıl kaydettiğini",
+            "Elbisenin hangi kumaştan ve nasıl dikildiğini"
           ]
         },
         {
@@ -167,9 +167,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Kendi dokunuşumuzu zayıf hissetmenin gecikmeye göre ayarlanabilmesini",
-            "Bazı insanların neden hiç gıdıklanmadığını",
-            "Ellerin soğukta dokunuşu daha az hissetmesini",
-            "Çocukların gıdıklanmaya yetişkinlerden çok güldüğünü"
+            "Başkasının dokunuşunun bizi her zaman kendi dokunuşumuzdan az gıdıklamasını",
+            "Gıdıklanınca neden kendimizi tutamayıp kahkahayla güldüğümüzü",
+            "Derimizin sıcağı ve soğuğu dokunarak nasıl ayırt ettiğini"
           ]
         },
         {
@@ -240,10 +240,10 @@
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Eşek hıyarının tohumlarını fışkırtarak nasıl attığının incelenmesini",
-            "Hıyarın tarlada nasıl yetiştirildiğini",
-            "Tohumların rüzgârla uzaklara taşınmasını",
-            "Kuşların meyve yiyerek tohum taşımasını"
+            "Eşek hıyarındaki fırlatma düzeneğinin nasıl işlediğini",
+            "Bitkilerde hızlı hareketin pek görülmemesini",
+            "Tohumların rüzgârın yönüne göre hep tek bir yöne dağıldığını",
+            "Eşek hıyarının hangi topraklarda yetiştiğini"
           ]
         },
         {
@@ -315,9 +315,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Bitkilerde yara haberinin glutamat ve kalsiyumla uzağa taşınmasını",
-            "Bitkilerin kökleriyle sudan nasıl besin aldığını",
-            "Otçul hayvanların hangi yaprakları seçtiğini",
-            "Yaprakların sonbaharda neden renk değiştirdiğini"
+            "Glutamatın bir amino asit olarak omurgalılarda bulunmasını",
+            "Bitkilerin yaralanmayı yalnız yaralanan yaprağın kendisinde fark etmesini",
+            "Bitkilerin otçulları uzaklaştıran kokular salarak korunmasını"
           ]
         },
         {
@@ -389,9 +389,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Çıplak gözle görülecek kadar büyük ve karmaşık bir bakteriyi",
-            "Bakterilerin nasıl hızla çoğaldığını",
-            "Mikroskobun nasıl icat edildiğini",
-            "Bakterilerin toprakta nasıl yaşadığını"
+            "Bakteri hücresinin boyuna dair eski görüşü doğrulayan bulguyu",
+            "Büyüdükçe yapısı giderek sadeleşen dev bir bakteri türünü",
+            "Toprakta yaşayıp bitkilere yarar sağlayan küçük bir bakteriyi"
           ]
         },
         {
@@ -463,9 +463,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Donmuş topraktan binlerce yıl sonra canlı çıkan küçük bir hayvanı",
-            "Sibirya'da toprağın neden hep donmuş kaldığını",
-            "Rotiferlerin sıcak sularda nasıl beslendiğini",
-            "Eski tohumların tarlalarda yeniden ekilmesini"
+            "Donmuş topraktaki tohum dokusundan yeniden yetiştirilen bitkileri",
+            "Sıcak sularda yaşayan ve soğuğa hiç dayanamayan küçük bir hayvanı",
+            "Donmuş toprakta binlerce yıl bozulmadan kalan mamut kalıntılarını"
           ]
         },
         {
@@ -537,9 +537,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Bir bakterinin yüzey yakınında neden daireler çizdiğinin açıklanmasını",
-            "Bakterilerin besin bulmak için nasıl koku aldığını",
-            "Bakterilerin suda nasıl hızla çoğaldığını",
-            "Bakterilerin katı yüzeylere nasıl yapıştığını"
+            "E. coli'nin en çok incelenen bakterilerden biri olarak bilinmesini",
+            "Bakterileri yüzeyde döndüren ayrı bir dış kuvvetin bulunmasını",
+            "Bakterilerin besin bulmak için sıvıdaki kimyasal izleri nasıl takip ettiğini"
           ]
         },
         {
@@ -611,9 +611,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Bir bombus arısı türünün çiçeklerin elektrik alanını algılamasını",
-            "Arıların kovanda bal yapmayı nasıl öğrendiğini",
-            "Çiçeklerin renklerini neden değiştirdiğini",
-            "Arıların kışı nasıl geçirdiğini"
+            "Böceklerin yiyecek ararken çiçeğin biçiminden ve kokusundan yararlanmasını",
+            "Arıların çiçeklerin elektrik alanları arasındaki farkı ayırt edememesini",
+            "Bombus arılarının soğuk günlerde kovanlarını nasıl ısıttığını"
           ]
         },
         {
@@ -684,10 +684,10 @@
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Soğuğun monark kelebeklerini kuzeye yöneltmesini",
-            "Kelebeklerin kanat desenlerinin nasıl oluştuğunu",
-            "Kelebeklerin çiçeklerden nasıl beslendiğini",
-            "Kelebeklerin yumurtalarını nereye bıraktığını"
+            "Monark kelebeklerinin göç yönünü neyin tersine çevirdiğini",
+            "Bu kelebeklerin Kuzey Amerika'nın doğusunda yaşamasını",
+            "Kelebeklerin dönüşte bambaşka bir pusula kullanmasını",
+            "Monark tırtıllarının hangi bitkilerle beslendiğini"
           ]
         },
         {

@@ -28,10 +28,10 @@
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Bir kertenkelenin kumun içinde dalgalanarak yüzmesini",
-            "Kertenkelelerin çölde nasıl su bulduğunu",
-            "Kumun rüzgârla nasıl taşındığını",
-            "Kertenkelelerin güneşte nasıl ısınıp gölgede serinlediğini"
+            "Bir kertenkelenin kuru kumun içinde nasıl ilerlediğini",
+            "Bir canlının sudaki hızının hesaplanabildiğini",
+            "Kertenkelenin kumdaki hızının hiç hesaplanamayacağını",
+            "Kertenkelelerin çölde gündüzün yakıcı sıcağından korunmasını"
           ]
         },
         {
@@ -103,9 +103,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Bir kaplumbağanın atık maddeyi ağzından atmasını",
-            "Kaplumbağaların kabuklarını nasıl yenilediğini",
-            "Kaplumbağaların suda nasıl uyuduğunu",
-            "Kaplumbağaların kumda yumurta saklamasını"
+            "Tükürükteki ürenin kandakinden yoğun olmasını",
+            "Kaplumbağanın ürenin çoğunu böbreğiyle atmasını",
+            "Kaplumbağaların bataklıkta neyle beslendiğini"
           ]
         },
         {
@@ -177,9 +177,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Kurbağaların gürültülü derede daha yüksek perdeden seslenmesini",
-            "Kurbağaların derede nasıl yumurtladığını",
-            "Derelerin neden gürültülü aktığını",
-            "Kurbağaların kışı nerede geçirdiğini"
+            "Seslerin çoğu özelliğinin her yerde benzer kalmasını",
+            "Kurbağaların her derede hep aynı perdeden seslenmesini",
+            "Kurbağaların akıntılı derelerin kıyısında hangi böcekleri avladığını"
           ]
         },
         {
@@ -251,9 +251,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Ağaçta yaşayan semenderlerin düşerken süzülmesini",
-            "Semenderlerin uzun ağaçlara hangi yolla tırmandığını",
-            "Semenderlerin eğrelti otu yemesini",
-            "Rüzgâr tünellerinin nasıl yapıldığını"
+            "Semenderlerin eğrelti otlarının arasında yaşamasını",
+            "Bütün semenderlerin düşüşlerini aynı ustalıkla yönetmesini",
+            "Semenderlerin kopan kuyruklarını nasıl yenilediğini"
           ]
         },
         {
@@ -325,9 +325,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Sinek kuşlarının soğuk gecelerde derin uyuşukluğa girmesini",
-            "Sinek kuşlarının çiçeklerden nasıl beslendiğini",
-            "Kuşların kışın sıcak ülkelere göç etmesini",
-            "Dağlarda havanın neden soğuk olduğunu"
+            "Uyuşukluğun az yağ depolayan hayvanlara yaramasını",
+            "Sinek kuşlarının soğukta vücut sıcaklığını sabit tutmasını",
+            "Sinek kuşlarının dağlarda yuvalarını nasıl ısıttığını"
           ]
         },
         {
@@ -399,9 +399,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Muhabbet kuşlarında esnemenin bulaşıcı olmasını",
-            "Muhabbet kuşlarının konuşmayı nasıl öğrendiğini",
-            "Kuşların neden geceleri uyuduğunu",
-            "Papağanların renkli tüylerini"
+            "Muhabbet kuşlarının sürü hâlinde yaşamasını",
+            "Kuşların yalnız uykuları gelince esnemesini",
+            "Muhabbet kuşlarının ağaç kovuklarında yuva kurmasını"
           ]
         },
         {
@@ -473,9 +473,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Penguenlerin sıkı kümede birlikte küçük adımlarla yer değiştirmesini",
-            "Penguenlerin denizde nasıl balık avladığını",
-            "Penguenlerin buz üstünde kayarak yol almasını",
-            "Penguenlerin yavrularını nasıl beslediğini"
+            "Kümedeki her penguenin kış boyunca hep aynı yerde kalmasını",
+            "Sıkı kümelerin kışın penguenleri hiç ısıtmamasını",
+            "Erkek penguenlerin kış boyunca yumurtayı ayaklarının üstünde taşımasını"
           ]
         },
         {
@@ -547,9 +547,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Su aygırlarının birbirlerini seslerinden ayırt etmesini",
-            "Su aygırlarının suyun altında nasıl uyuduğunu",
-            "Su aygırlarının ne kadar ot yediğini",
-            "Göllerin neden kurumaya başladığını"
+            "Su aygırlarının iletişimi hakkında az şey bilinmesini",
+            "Su aygırlarının bütün seslere aynı tepkiyi vermesini",
+            "Su aygırlarının yavrularını yırtıcılardan nasıl koruduğunu"
           ]
         },
         {
@@ -620,10 +620,10 @@
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Erkek balon balıklarının deniz dibinde kurduğu daireleri",
-            "Balon balıklarının nasıl şiştiğini",
-            "Deniz dibindeki kumun nereden geldiğini",
-            "Balıkların mercanlar arasında saklanmasını"
+            "Balon balıklarının kumdan yaptığı dairelerin ne işe yaradığını",
+            "Balon balıklarının aynı daireyi her üremede yeniden kullanmasını",
+            "Yuvanın içindeki desenlerin düzensiz biçimde dizilmesini",
+            "Balon balıklarının deniz dibinde neyle beslendiğini"
           ]
         },
         {
@@ -694,10 +694,10 @@
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Bir deniz aslanının insanlar kadar iyi ritim tutmasını",
-            "Deniz aslanlarının denizde nasıl şarkı söylediğini",
-            "İnsanların müzik aletlerini nasıl çaldığını",
-            "Deniz aslanlarının balık yakalamayı öğrenmesini"
+            "Ritim tutmanın yalnız insanlara özgü bir yetenek olmadığını",
+            "Ekibin deneyde metronom gibi düzenli sesler kullanmasını",
+            "Deniz aslanının ritmi insanlardan başka yolla tuttuğunu",
+            "Deniz aslanlarının suyun altında nasıl ses çıkardığını"
           ]
         },
         {

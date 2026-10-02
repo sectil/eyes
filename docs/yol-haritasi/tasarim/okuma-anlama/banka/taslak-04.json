@@ -19,9 +19,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Sinekkapanının dokunuş sayısına göre avı besin saymasını",
-            "Sinekkapanının nasıl çiçek açtığını",
-            "Böceklerin kapandan nasıl kaçtığını",
-            "Sinekkapanının hangi topraklarda yetiştiğini"
+            "Sinekkapanında bir hormon sisteminin devreye girmesini",
+            "Sinekkapanının her yakaladığını hemen sindirmesini",
+            "Sinekkapanının böcekleri kokusuyla kendine çekmesini"
           ]
         },
         {
@@ -93,9 +93,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Küstüm otunun alışmayı uzun süre hatırlamasını",
-            "Küstüm otunun nasıl tohum dağıttığını",
-            "Hayvanların bitki yaprağı yemesini",
-            "Bitkilerin güneşe doğru büyümesini"
+            "Küstüm otunun giderek daha güçlü tepki vermesini",
+            "Bitkilerin öğrendiklerini hemen unutmasını",
+            "Küstüm otu tohumlarının uzun süre canlı kalmasını"
           ]
         },
         {
@@ -167,9 +167,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Asalak küsküt fidelerinin konak bitkiyi havadaki maddelerle bulmasını",
-            "Domatesin nasıl yetiştirildiğini",
-            "Buğdayın küskütten nasıl korunduğunu",
-            "Lalenin çiçek açma zamanını"
+            "Asalak küsküt fidelerinin konak bitkiyi ışığa yönelerek bulmasını",
+            "Uçucu maddelerin bitkiler arasındaki ilişkilerde rol oynamamasını",
+            "Asalak küskütün tarlalarda ekinleri sararak hızla yayılmasını"
           ]
         },
         {
@@ -241,9 +241,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Bakteri topluluklarında elektrik sinyalinin yayılmasını",
-            "Bakterilerin nasıl hızla çoğaldığını",
-            "Sinir hücrelerinin nasıl büyüdüğünü",
-            "Bakterilerin ışık saçmasını"
+            "Hücre zarında iyon kanalı denen kapıların bulunmasını",
+            "Bakterilerin birbirinden habersiz tek başına yaşamasını",
+            "Bakterilerin zamanla ilaçlara karşı direnç kazanmasını"
           ]
         },
         {
@@ -315,9 +315,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Mikropların sıradaki değişikliğe önceden hazırlanmasını",
-            "Mayanın ekmek yapımında kullanılmasını",
-            "Bakterilerin nasıl hareket ettiğini",
-            "Mikropların ışıktan kaçmasını"
+            "Bazı mikropların ortamının gelişigüzel değişmesini",
+            "Mikropların değişikliğe ancak sonradan uyum sağlamasını",
+            "Mikropların uygun ortamda bölünerek hızla çoğalmasını"
           ]
         },
         {
@@ -389,9 +389,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Peygamberdevesinin üç boyutlu gördüğünün gözlükle doğrulanmasını",
-            "Peygamberdevesinin nasıl avlandığını",
-            "Böceklerin renkleri nasıl gördüğünü",
-            "İnsanlar için yeni bir gözlük yapılmasını"
+            "Bilim insanlarının üç boyutlu görmeyi örnek olarak kullanmasını",
+            "Peygamberdevesinin derinliği algılayamadığının anlaşılmasını",
+            "Peygamberdevesinin avını dikenli ön bacaklarıyla yakalamasını"
           ]
         },
         {
@@ -463,9 +463,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Ateşböceği sürülerinde birlikte yanıp sönmenin nasıl başladığını",
-            "Ateşböceklerinin ne yediğini",
-            "Ateşböceklerinin kışı nasıl geçirdiğini",
-            "Ateşböceği ışığının hangi renkte olduğunu"
+            "Ekibin kayıtlardan sürünün üç boyutlu modelini çıkardığını",
+            "Bütün böceklerin karanlıkta birlikte nasıl ışık saçtığını",
+            "Ateşböceklerinin ışığı vücutlarının içinde nasıl ürettiğini"
           ]
         },
         {
@@ -537,9 +537,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Bebeklerin müziğe ritimli hareketle karşılık vermesini",
-            "Bebeklerin konuşmayı nasıl öğrendiğini",
-            "Bebeklerin uyku düzenini",
-            "Müzisyenlerin nasıl çalıştığını"
+            "Yetişkinlerin müzik duyunca ayakla tempo tutmasını",
+            "Ritim duygusunun yalnız müzik eğitimiyle kazanılmasını",
+            "Bebeklerin annelerinin sesini doğumdan önce tanımasını"
           ]
         },
         {
@@ -610,10 +610,10 @@
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Nesnelerde görülen yüzlerin daha çok erkek sanılmasını",
-            "İnsanların gerçek yüzleri nasıl ezberlediğini",
-            "Ressamların yüzleri nasıl çizdiğini",
-            "Nesnelerin nasıl üretildiğini"
+            "Cansız nesnelerdeki hayalî yüzlerin daha çok erkek sanılmasını",
+            "Hayalî yüz görme yanılgısının yalnız küçük çocuklara özgü olmasını",
+            "Yüz algılayan süreçlerin hayalî yüzlerde hiç çalışmamasını",
+            "İnsanların tanıdık yüzleri kalabalıkta hemen seçebilmesini"
           ]
         },
         {
@@ -685,9 +685,9 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Bitkilerin yarışırken akrabalarını ayırt etmesini",
-            "Bitkilerin saksıda nasıl sulanması gerektiğini",
-            "Hayvanların bitki tohumu taşımasını",
-            "Bitkilerin çiçek rengini seçmesini"
+            "Hayvanların toplu yaşamda akrabasını tanımasını",
+            "Bitkilerin akrabayı yabancıdan ayırt edememesini",
+            "Bitkilerin tohumlarını rüzgârla uzaklara dağıtmasını"
           ]
         },
         {
