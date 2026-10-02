@@ -525,6 +525,9 @@ export const SOURCES = {
     titleTr: 'Okunacak çok şey, az zaman: Nasıl okuruz ve hızlı okuma işe yarar mı?',
     journal: 'Psychol Sci Public Interest', cite: '17(1):4-34', doi: '10.1177/1529100615623267', pmid: '26769745',
     design: 'narrative', // VARSAYIM: güç sırası 1 (sistematik olmayan derleme; geçerlik çalışmasıyla aynı)
+    // Bilim kartı: Yakala Yaz METINLER B3 (sahip onaylı 2026-10-02)
+    finding: 'Okumayı iki üç kat hızlandırıp aynı anlamayı korumak olası görünmüyor; hızın özü dil becerisi.',
+    limit: 'Derleme; hızlı okuma programlarını değerlendirir.',
   },
   kuperman2021: {
     authors: ['Kuperman V', 'Kyröläinen AJ', 'Porretta V', 'Brysbaert M', 'Yang S'], year: 2021,
@@ -546,6 +549,99 @@ export const SOURCES = {
     titleTr: 'Okuma performansının standart ölçümü: Yeni Uluslararası Okuma Hızı Metinleri IReST.',
     journal: 'Invest Ophthalmol Vis Sci', cite: '53(9):5452-61', doi: '10.1167/iovs.11-8284', pmid: '22661485',
     design: 'validation', n: '17 dilde 436 kişi',
+  },
+  // Yakala Yaz (kelime-hafiza/arastirma/KAYNAKLAR.md; künye PubMed'den, 2026-10-02). finding ve limit yalnız METINLER B1–B4
+  // olanlarda (rubin1992, garcia1998, rayner2016, simons2016); ötekiler yalnız kanıt havuzu. levitt1971 ve baddeley2003
+  // girmez: PubMed'de DOI ya da özet yok.
+  rubin1992: {
+    authors: ['Rubin GS', 'Turano K'], year: 1992,
+    title: 'Reading without saccadic eye movements.',
+    titleTr: 'Sıçrayan göz hareketleri olmadan okuma.',
+    journal: 'Vision Res', cite: '32(5):895-902', doi: '10.1016/0042-6989(92)90032-e', pmid: '1604858',
+    design: 'experiment', n: '13 kişi',
+    finding: 'Tek tek gösterilen kelimeyi doğru okumak için gereken en kısa süre ortalama 69 ms çıktı.',
+    limit: '13 kişilik bir deney; iki kelime ve yazma bizim eklememiz.',
+  },
+  legge2001: {
+    authors: ['Legge GE', 'Mansfield JS', 'Chung ST'], year: 2001,
+    title: 'Psychophysics of reading. XX. Linking letter recognition to reading speed in central and peripheral vision.',
+    titleTr: 'Okumanın psikofiziği XX: Merkez ve yan görüşte harf tanımanın okuma hızıyla bağı.',
+    journal: 'Vision Res', cite: '41(6):725-43', doi: '10.1016/s0042-6989(00)00295-9', pmid: '11248262',
+    design: 'experiment',
+  },
+  akutsu1991: {
+    authors: ['Akutsu H', 'Legge GE', 'Ross JA', 'Schuebel KJ'], year: 1991,
+    title: 'Psychophysics of reading--X. Effects of age-related changes in vision.',
+    titleTr: 'Okumanın psikofiziği X: Yaşa bağlı görme değişikliklerinin etkisi.',
+    journal: 'J Gerontol', cite: '46(6):P325-31', doi: '10.1093/geronj/46.6.p325', pmid: '1940088',
+    design: 'experiment', n: '16 genç, 14 yaşlı',
+  },
+  chung2021: {
+    authors: ['Chung STL'], year: 2021,
+    title: 'Training to improve temporal processing of letters benefits reading speed for people with central vision loss.',
+    titleTr: 'Harflerin zamansal işlenmesini geliştiren alıştırma, merkez görme kaybı olanlarda okuma hızına yarar.',
+    journal: 'J Vis', cite: '21(1):14', doi: '10.1167/jov.21.1.14', pmid: '33507207',
+    design: 'prepost',
+  },
+  garcia1998: {
+    authors: ['García-Pérez MA'], year: 1998,
+    title: 'Forced-choice staircases with fixed step sizes: asymptotic and small-sample properties.',
+    titleTr: 'Sabit adımlı zorunlu seçim merdivenleri: uzun ve kısa dizilerde davranışları.',
+    journal: 'Vision Res', cite: '38(12):1861-81', doi: '10.1016/s0042-6989(97)00340-4', pmid: '9797963',
+    design: 'experiment', // VARSAYIM: benzetim çalışması; DESIGNS'ta ayrı tür yok
+    finding: 'Doğruda küçük, yanlışta büyük adımla ayarlanan merdiven sabit bir doğruluk noktasına yerleşir.',
+    limit: 'Benzetim çalışması; kişilerde denenmedi.',
+  },
+  kaernbach1991: {
+    authors: ['Kaernbach C'], year: 1991,
+    title: 'Simple adaptive testing with the weighted up-down method.',
+    titleTr: 'Ağırlıklı yukarı–aşağı yöntemiyle basit uyarlanan ölçüm.',
+    journal: 'Percept Psychophys', cite: '49(3):227-9', doi: '10.3758/bf03214307', pmid: '2011460',
+    design: 'experiment', // VARSAYIM: yöntem ve benzetim
+  },
+  breitmeyer2000: {
+    authors: ['Breitmeyer BG', 'Ogmen H'], year: 2000,
+    title: 'Recent models and findings in visual backward masking: a comparison, review, and update.',
+    titleTr: 'Görsel geriye maskelemede yeni modeller ve bulgular: karşılaştırma, derleme ve güncelleme.',
+    journal: 'Percept Psychophys', cite: '62(8):1572-95', doi: '10.3758/bf03212157', pmid: '11140180',
+    design: 'narrative',
+  },
+  elze2010: {
+    authors: ['Elze T'], year: 2010,
+    title: 'Misspecifications of stimulus presentation durations in experimental psychology: a systematic review of the psychophysics literature.',
+    titleTr: 'Deneysel psikolojide gösterim sürelerinin yanlış belirtilmesi: psikofizik yazınının sistematik derlemesi.',
+    journal: 'PLoS One', cite: '5(9):e12792', doi: '10.1371/journal.pone.0012792', pmid: '20927362',
+    design: 'review', n: '79 makale',
+  },
+  harding2005: {
+    authors: ['Harding G', 'Wilkins AJ', 'Erba G', 'Barkley GL', 'Fisher RS'], year: 2005,
+    title: 'Photic- and pattern-induced seizures: expert consensus of the Epilepsy Foundation of America Working Group.',
+    titleTr: 'Işık ve desenle tetiklenen nöbetler: Amerika Epilepsi Vakfı çalışma grubunun uzman uzlaşısı.',
+    journal: 'Epilepsia', cite: '46(9):1423-5', doi: '10.1111/j.1528-1167.2005.31305.x', pmid: '16146438',
+    design: 'expert',
+  },
+  schotter2014: {
+    authors: ['Schotter ER', 'Tran R', 'Rayner K'], year: 2014,
+    title: "Don't believe what you read (only once): comprehension is supported by regressions during reading.",
+    titleTr: 'Okuduğuna (bir kez okuyarak) inanma: Geri dönüşler anlamaya yardım eder.',
+    journal: 'Psychol Sci', cite: '25(6):1218-26', doi: '10.1177/0956797614531148', pmid: '24747167',
+    design: 'experiment',
+  },
+  simons2016: {
+    authors: ['Simons DJ', 'Boot WR', 'Charness N', 'Gathercole SE', 'Chabris CF', 'Hambrick DZ', 'Stine-Morrow EA'], year: 2016,
+    title: 'Do "Brain-Training" Programs Work?',
+    titleTr: 'Zihin alıştırma programları işe yarıyor mu?',
+    journal: 'Psychol Sci Public Interest', cite: '17(3):103-186', doi: '10.1177/1529100616661983', pmid: '27697851',
+    design: 'narrative',
+    finding: 'Alıştırılan görevde ilerleme güçlü; günlük hayata aktarım için kanıt az.',
+    limit: 'Derleme; tek bir alıştırmayı değil alanı değerlendirir.',
+  },
+  goz2017: {
+    authors: ['Göz İ', 'Tekcan AI', 'Erciyes AA'], year: 2017,
+    title: 'Subjective age-of-acquisition norms for 600 Turkish words from four age groups.',
+    titleTr: 'Dört yaş grubundan 600 Türkçe kelime için öznel edinim yaşı normları.',
+    journal: 'Behav Res Methods', cite: '49(5):1736-1746', doi: '10.3758/s13428-016-0817-y', pmid: '27743317',
+    design: 'observational', n: '457 kişi',
   },
 }
 

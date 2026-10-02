@@ -280,7 +280,8 @@ export default function OkuAnla({ sessions = [], storage = globalThis.localStora
   // Sonuç
   const r = record
   const k = Number.isFinite(r.correct) ? r.correct : 0
-  const all = [...sessions.filter((s) => s !== r), r]
+  // HATA_GUNLUGU Build 29 (Dalga): kayıttan sonra sessions kaydı zaten içerebilir; tür ve tarihle bir kez sayılır
+  const all = [...sessions.filter((s) => !(s?.type === r.type && s?.date === r.date)), r]
   const days = new Set(speedSeries(all).map((p) => dayKey(new Date(p.date)))).size
   const v2 = days >= BASE_N ? metricStatusV2(speedSeries(all), { better: 'up', now: new Date(r.date), familiar: 2, baseDays: 3, currentDays: 3, sdFloor: 10 }) : null
   const line = VERDICT_LINE[String(r.reason)] ?? (r.reason == null ? VERDICT_LINE.null : null)
