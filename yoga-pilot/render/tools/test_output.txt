@@ -1,0 +1,88 @@
+PASS test_analyze_real              (10.8 sn)
+     hak-duz  dur  17.65 speech  11.85 art 6.41 (PLAN 6.52) f0  98.4 Hz sd 1.54 yt sib 0.0222 lufs -23.3 tp -1.9 pauses 8
+     hak-uc   dur  22.01 speech  11.78 art 6.45 (PLAN -) f0  98.2 Hz sd 1.29 yt sib 0.0273 lufs -23.3 tp -1.8 pauses 9
+     hak-v3   dur  19.20 speech  12.16 art 6.25 (PLAN -) f0 108.2 Hz sd 2.85 yt sib 0.1372 lufs -18.8 tp -2.2 pauses 8
+     nes-duz  dur  12.35 speech  11.53 art 6.59 (PLAN 6.61) f0 193.8 Hz sd 2.92 yt sib 0.0187 lufs -21.0 tp -7.7 pauses 3
+     nes-uc   dur  15.00 speech  11.54 art 6.58 (PLAN -) f0 198.6 Hz sd 3.12 yt sib 0.0154 lufs -21.3 tp -7.2 pauses 8
+     nes-v3   dur  15.04 speech  12.29 art 6.18 (PLAN -) f0 201.8 Hz sd 3.70 yt sib 0.0107 lufs -16.2 tp -1.0 pauses 6
+     nes-v4   dur  15.76 speech  13.54 art 5.61 (PLAN 5.63) f0 228.0 Hz sd 4.11 yt sib 0.0120 lufs -21.5 tp -6.9 pauses 6
+PASS test_clicks_injected           (4.7 sn)
+     nes-v4 dürtü 0.020: 4/4 bulundu [0.0509, 3.0002, 5.9994, 9.0005]
+     nes-v4 dürtü 0.005: 4/4 bulundu [0.0509, 3.0002, 5.9994, 9.0005]
+     nes-v4 ek yeri (137 örnek atlama) 5.0 sn: [4.9996]
+     nes-v4 bant sınırlı tık (duraklama ortası) 3/3
+     hak-duz dürtü 0.020: 4/4 bulundu [0.0509, 3.0002, 5.9994, 9.0005]
+     hak-duz dürtü 0.005: 4/4 bulundu [0.0509, 3.0002, 5.9994, 9.0005]
+     hak-duz ek yeri (137 örnek atlama) 5.0 sn: [4.9996]
+     hak-duz bant sınırlı tık (duraklama ortası) 3/3
+     nes-duz dürtü 0.020: 4/4 bulundu [0.0509, 3.0002, 5.9994, 9.0005]
+     nes-duz dürtü 0.005: 4/4 bulundu [0.0509, 3.0002, 5.9994, 9.0005]
+     nes-duz ek yeri (137 örnek atlama) 5.0 sn: [4.9996]
+     nes-duz bant sınırlı tık (duraklama ortası) 3/3
+     nes-v3 dürtü 0.020: 1/4 bulundu [0.0509]
+     nes-v3 dürtü 0.005: 0/4 bulundu []
+     nes-v3 ek yeri (137 örnek atlama) 5.0 sn: []
+     nes-v3 bant sınırlı tık (duraklama ortası) 3/3
+PASS test_process_real              (62.1 sn)
+     hak-duz  LUFS -18.00  TP -1.59 dBTP  baş 60 ms son 238 ms  sınırlayıcı 1.57 dB (0.09 sn > 1 dB)  de-ess False 0.0  
+     hak-uc   LUFS -18.00  TP -1.60 dBTP  baş 59 ms son 249 ms  sınırlayıcı 1.08 dB (0.00 sn > 1 dB)  de-ess False 0.0  
+     hak-v3   LUFS -18.00  TP -1.59 dBTP  baş 60 ms son 245 ms  sınırlayıcı 1.00 dB (0.00 sn > 1 dB)  de-ess True 2.81  
+     nes-duz  LUFS -18.00  TP -3.96 dBTP  baş 60 ms son 250 ms  sınırlayıcı -0.00 dB (0.00 sn > 1 dB)  de-ess False 0.0  
+     nes-uc   LUFS -18.00  TP -2.63 dBTP  baş 60 ms son 250 ms  sınırlayıcı -0.00 dB (0.00 sn > 1 dB)  de-ess False 0.0  
+     nes-v3   LUFS -18.00  TP -2.90 dBTP  baş 60 ms son 250 ms  sınırlayıcı -0.00 dB (0.00 sn > 1 dB)  de-ess False 0.0  
+     nes-v4   LUFS -18.00  TP -3.89 dBTP  baş 60 ms son 250 ms  sınırlayıcı -0.00 dB (0.00 sn > 1 dB)  de-ess False 0.0  
+PASS test_process_short             (3.2 sn)
+     nes-uc parça 4 (konuşma 0.594 sn), referans rms -16.20 dB
+     micro=False: süre 0.899 sn, konuşma RMS -16.20 (hedef -16.20), TP -3.40
+     micro=True: süre 0.899 sn, konuşma RMS -15.20 (hedef -15.20), TP -2.40
+     v2 kuralı, referanssız kısa klip → çıkış 3: klip 0.899 sn < 1 sn: --ref-rms-db gerekli
+PASS test_deess                     (0.2 sn)
+     yapay sert ıslıklı: uygulandı, en çok 2.13 dB, 0.359 sn
+     nes-v4: uygulandı=False en çok 0.00 dB (bant tepe − eşik -9.83 dB)
+     hak-v3: uygulandı=True en çok 2.79 dB (bant tepe − eşik 3.72 dB)
+PASS test_cut_synthetic             (4.6 sn)
+     K=3: kesimler [0.9005, 2.0978] (beklenen [0.9, 2.1]), duraklamalar [[0.698, 1.103], [1.796, 2.4]], parçalar a,b,c yazıldı
+     K=5: çıkış 2, "5 parça bulunamadı (boşluk 2)"
+     K=2: en uzun duraklama seçildi, kesim [2.0978]
+     nefesli boşluk: nefes [[0.913, 1.137]] bulundu, kesim 0.806 sn saf sessizlikte (nefes 0.90–1.15)
+PASS test_normtext                  (13.9 sn)
+     eşit sayılan 9 çift geçti; normtext("Sağ elin başparmağı… İŞARET parmağı…") = ['sağ', 'elin', 'başparmağı', 'işaret', 'parmağı']
+     fark (--strict): 'bilek… ön kol…' ~ 'bilek önkol' → çıkış 1, [('replace', ['ön', 'kol'], ['önkol'])]
+     fark (--strict): 'on dokuz' ~ '10 8' → çıkış 1, [('replace', ['dokuz'], ['sekiz'])]
+     fark (--strict): 'Sağ elin başparmağı' ~ 'sol elin başparmağı' → çıkış 1, [('replace', ['sağ'], ['sol'])]
+     fark (--strict): 'bir iki üç' ~ 'bir iki' → çıkış 1, [('delete', ['üç'], [])]
+PASS test_f0                        (2.1 sn)
+     ton 110 Hz → 110.01 Hz, yayılım 0.002 yt, 99 sesli kare
+     ton 180 Hz → 180.00 Hz, yayılım 0.002 yt, 100 sesli kare
+     ton 250 Hz → 250.03 Hz, yayılım 0.002 yt, 100 sesli kare
+     f0step 200 → 224,5 Hz: 2.00 yt (sınır 2.0, pass=False)
+     f0step aynı ton: -0.00 yt
+PASS test_rank_real                 (4.8 sn)
+     sıra ['t2.mp3', 't3.mp3', 't1.mp3']; elenen {'t4.mp3': 'tık 3: [0.9369, 2.3656, 5.295]', 't5.mp3': 'kırpılma (3540 örnek)'}
+       1 t2.mp3 puan 2.38 ihlal [] eklemleme 5.61
+       2 t3.mp3 puan 2.91 ihlal ['eklemleme 6.58 bant dışı (5.0–6.2)'] eklemleme 6.58
+       3 t1.mp3 puan 5.68 ihlal ['eklemleme 6.59 bant dışı (5.0–6.2)'] eklemleme 6.59
+PASS test_rank_carrier_synthetic    (3.0 sn)
+     sıra ['t3.mp3', 't1.mp3']; t2 elendi: ['kesim tutmuyor: 3 parça gerekli, 2 bulundu']
+     t3 eklem en çok 0.25 yt; t1 eklem 3.86 yt (ihlal: ['eklemleme 2.49 bant dışı (5.0–6.2)', 'taşıyıcı eklemi 3.86 > 2.0 yt'])
+     --match-f0/--match-rate ile ilk: t3.mp3 (SPEC §4.4: geçerli çekimler içinde sağ taşıyıcıya perde+hız yakınlığı (eklem ihlali olanlar sonda))
+PASS test_units_pieces              (0.0 sn)
+     68 birim; ön sözlü taşıyıcı: [('car.sayi', 'sayıyorum:', 11)]; her birimde hece toplamı = units.json syllables
+PASS test_scribe_exceptions         (43.8 sn)
+     eş sayılan 14 çift (istisna JSON'da, --strict ile hepsi çıkış 1)
+     eş sayılmayan 14 çift → çıkış 1 (sen de~sende, ya da~yada, geldin mi~geldinmi, dedi ki~dediki)
+     birebir eşit metin istisna kullanmaz; copula_fuse örnekleri doğru
+PASS test_short_piece_v3            (6.5 sn)
+     hak-duz parça 8: konuşma 0.62 sn, tepe/yükseklik 22.4 dB
+     v2 (RMS -18.02 dB referansına): -20.05 LUFS, TP -1.57, sınırlayıcı 4.64 dB
+     v3: -19.00 LUFS (hedef -19.0, sınırlandı), TP -1.59, zincir soft+limiter, sınırlayıcı 2.45 dB, sıkıştırıcı 6.0 dB
+     yapay yatak −34,5 LUFS üstünde konuşma/yatak: v2 15.96 dB → v3 17.01 dB
+PASS test_soft_peak_v3              (46.4 sn)
+     hak-duz: sınırlayıcı 6.27 → 1.57 dB (+ sıkıştırıcı 5.99 dB), bozulma göstergesi 4.8 → 22.1 dB, LUFS -18.00, TP -1.59
+     hak-uc: sınırlayıcı 5.55 → 1.08 dB (+ sıkıştırıcı 5.99 dB), bozulma göstergesi 8.7 → 26.0 dB, LUFS -18.00, TP -1.60
+     nes-v4: sınırlayıcı -0.00 dB ≤ 1 dB → v3 çıktısı v2 ile örnek örnek aynı
+PASS test_local_duck                (0.2 sn)
+     eğri: derinlik 2,5 dB, düz 98,5–102,3 sn, en dik 1.00 dB/sn (≤ 1)
+     uçtan uca: fark 14.00 dB → 1.52 dB kısma → 15.52 dB (hedef ≥ 15.5)
+
+15/15 test geçti (206.3 sn)

@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gelişim maketi</title>
+<style>
+@font-face { font-family: 'Onest Local'; src: url('../../../../../../app/node_modules/@fontsource-variable/onest/files/onest-latin-ext-wght-normal.woff2') format('woff2'); font-weight: 100 900; unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Onest Local'; src: url('../../../../../../app/node_modules/@fontsource-variable/onest/files/onest-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Unbounded Local'; src: url('../../../../../../app/node_modules/@fontsource-variable/unbounded/files/unbounded-latin-ext-wght-normal.woff2') format('woff2'); font-weight: 200 900; unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Unbounded Local'; src: url('../../../../../../app/node_modules/@fontsource-variable/unbounded/files/unbounded-latin-wght-normal.woff2') format('woff2'); font-weight: 200 900; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Uygulamanın tokenları (app/src/styles.css) birebir; maket yalnız bunları kullanır. */
+:root {
+  --font-display: 'Unbounded Variable', 'Unbounded Local', 'Unbounded', 'Avenir Next', system-ui, sans-serif;
+  --font-body: 'Onest Variable', 'Onest Local', 'Onest', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+  --bg: #f3f6f8; --surface: #ffffff; --surface-2: #e9eef2; --surface-3: #dde4ea; --border: #e1e7ec;
+  --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --accent: #0b7480; --accent-ink: #ffffff; --accent-soft: rgba(17,169,184,.12); --iris-1: #11a9b8; --iris-2: #2f6bea;
+  --lens: #f08a00; --lens-text: #8a4600; --ok: #13704b; --ok-bg: rgba(31,169,116,.13);
+  --tabbar-bg: #f3f6f8;
+  --glow-a: 0.55; --track: rgba(91,105,118,.18); --head-line: rgba(11,116,128,.30); --head-fill: rgba(17,169,184,.05);
+  --sclera: #f7fafc; --pupil: #081018; --shade: #5b6976;
+  --t-dikkat: #5b4fe0; --t-nefes: #0e9fb0; --t-ruh: #b04fc8; --t-hareket: #14936b;
+}
+:root[data-theme='dark'] {
+  --bg: #070c12; --surface: #0f171f; --surface-2: #141e28; --surface-3: #1c2834; --border: rgba(255,255,255,.08);
+  --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --accent: #19c2d1; --accent-ink: #041017; --accent-soft: rgba(25,194,209,.14); --iris-1: #19c2d1; --iris-2: #3e7bfa;
+  --lens: #ffb13b; --lens-text: #ffb13b; --ok: #35d39a; --ok-bg: rgba(53,211,154,.12);
+  --tabbar-bg: #070c12;
+  --glow-a: 1; --track: rgba(185,196,205,.12); --head-line: rgba(25,194,209,.34); --head-fill: rgba(25,194,209,.045);
+  --sclera: #c9d4dd; --pupil: #03070b; --shade: #070c12;
+  --t-dikkat: #9d93ff; --t-nefes: #19c2d1; --t-ruh: #dc8cf2; --t-hareket: #3fd6a2;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+.screen { width: 100vw; min-height: 100vh; position: relative; overflow: hidden; background: var(--bg); }
+.status { height: 47px; }
+header.top { display: flex; align-items: baseline; justify-content: space-between; padding: 6px 20px 0; }
+header.top h1 { font-family: var(--font-display); font-weight: 600; font-size: 28px; letter-spacing: -0.01em; margin: 0; }
+header.top .day { font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--ink-2); }
+.hero { position: relative; margin: 10px 0 0; }
+.hero canvas { display: block; width: 100%; }
+.lbl { position: absolute; transform: translate(-50%, -50%); text-align: center; pointer-events: none; white-space: nowrap; }
+.lbl b { display: block; font-size: 13px; font-weight: 600; color: var(--ink); letter-spacing: .01em; }
+.lbl small { display: block; font-size: 11.5px; color: var(--ink-3); font-weight: 500; margin-top: 1px; }
+.lbl.live b, .lbl.live small { color: var(--lens-text); }
+.lbl.al-l { transform: translate(0, -50%); text-align: left; }
+.lbl.al-r { transform: translate(-100%, -50%); text-align: right; }
+.lbl.pill b { background: var(--bg); padding: 2px 9px; border-radius: 10px; font-size: 13px; font-weight: 600; }
+.lbl.pill .cnt { font-weight: 600; color: var(--ink-2); margin-left: 3px; }
+.lbl.pill.live .cnt { color: var(--lens-text); }
+.cap { text-align: center; font-size: 14px; color: var(--ink-2); margin: 4px 20px 14px; text-wrap: balance; }
+.lbl.pill .sw { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
+.lbl.pill .now { color: var(--lens-text); font-weight: 700; }
+.row .w.neutral { color: var(--ink); background: var(--surface-2); }
+.nef { display: flex; gap: 12px; align-items: flex-start; padding: 2px 20px 0; }
+.nef .dot { flex: none; width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 50% 50%, var(--pupil) 0 26%, transparent 27%), conic-gradient(from 20deg, var(--iris-1), var(--iris-2), var(--iris-1)); margin-top: 2px; }
+.nef p { margin: 0; font-size: 18px; line-height: 1.38; font-weight: 500; color: var(--ink); text-wrap: pretty; }
+.nef p .n { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink-3); letter-spacing: .02em; margin-bottom: 2px; }
+.nef p .live { color: var(--lens-text); }
+.rows { margin: 16px 16px 0; background: var(--surface); border-radius: 22px; border: 1px solid var(--border); overflow: hidden; }
+.row { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 13px 16px; border-top: 1px solid var(--border); align-items: center; }
+.row:first-child { border-top: 0; }
+.row .k { font-weight: 600; font-size: 16px; }
+.row .v { font-size: 14px; color: var(--ink-2); grid-column: 1; }
+.row .w { grid-row: 1 / span 2; grid-column: 2; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); padding: 5px 10px; border-radius: 99px; }
+.row .w.ok { color: var(--ok); background: var(--ok-bg); }
+.row .w.live { color: var(--lens-text); background: rgba(245,166,35,.18); }
+.tabbar { position: fixed; left: 0; right: 0; bottom: 0; height: 84px; background: var(--tabbar-bg); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding-top: 10px; backdrop-filter: blur(12px); }
+.tabbar span { font-size: 11px; font-weight: 600; color: var(--ink-3); display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.tabbar span svg { width: 25px; height: 25px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tabbar::before { content: ''; position: absolute; left: 0; right: 0; top: -18px; height: 18px; background: linear-gradient(to bottom, rgba(0,0,0,0), var(--bg)); pointer-events: none; opacity: .0; }
+.screen { padding-bottom: 96px; }
+.tabbar span.on { color: var(--accent); }
+@media (max-width: 340px) {
+  .hero { margin-top: 16px; }
+  header.top h1 { font-size: 24px; }
+  .nef p { font-size: 16px; }
+  .lbl b { font-size: 12px; } .lbl small { font-size: 10.5px; }
+  .row { padding: 11px 14px; } .row .k { font-size: 15px; } .row .v { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="status"></div>
+  <header class="top"><h1>Gelişim</h1><span class="day" id="day"></span></header>
+  <div class="hero" id="hero"><canvas id="c"></canvas></div>
+  <p class="cap" id="cap">Her yay bir alan: başladığından beri kaç günün kaçında çalıştığın.</p>
+  <div class="nef"><span class="dot" aria-hidden="true"></span><p id="nef"></p></div>
+  <div class="rows" id="rows"></div>
+  <nav class="tabbar">
+  <span><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Bugün</span>
+  <span class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.2"/></svg>Gelişim</span>
+  <span><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg>Pratik</span>
+  <span><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profilim</span>
+</nav>
+</div>
+<script>
+// ---------- Örnek veri (gerçek kayıt biçimine benzer; yeni kullanıcı, her gün yolu yapıyor) ----------
+const Q = new URLSearchParams(location.search)
+const DIR = Q.get('dir') || 'B', DAY = Q.get('day') || '9', THEME = Q.get('theme') || 'light'
+const GROW = (Q.get('grow') ?? '1') === '1'
+const STILL = Q.has('still'), T0 = Number(Q.get('t') || 2.2)
+document.documentElement.dataset.theme = THEME
+const DATA = {
+  '1': {
+    day: '1. gün', mature: 0, win: 1, nef: ['Dört alanda ilk ölçümün alındı; yayların çizildi.', 'Ruh hâli yarın ilk kısa soruyla gelir.'],
+    eye: { f: 1 / 28, days: 1, today: true, word: 'İlk ölçüm', line: 'İlk Bakış ve E testi bugün' },
+    r: {
+      dikkat: { f: 1 / 28, days: 1, today: true, word: 'Başladı', line: 'Çemberler · bugün' },
+      nefes: { f: 1 / 28, days: 1, today: true, word: 'Başladı', line: '1 dk nefes · bugün' },
+      ruh: { f: 0, days: 0, word: 'Yarın', line: 'İlk iyi oluş sorusu yarın' },
+      hareket: { f: 1 / 28, days: 1, today: true, word: 'Bugün', line: '3.412 adım' },
+    },
+  },
+  '9': {
+    day: '9. gün', mature: 0.2, win: 9, nef: ['9 günün 8\'inde buradaydın.', 'En dolu yaylar göz ve nefes.'],
+    eye: { f: 8 / 28, days: 8, today: true, word: 'Düzenli', line: 'E testi 2 kez · egzersiz 8 gün' },
+    r: {
+      dikkat: { f: 6 / 28, days: 6, today: true, word: 'Düzenli', line: 'Tek Bakışta, Çemberler · 6 gün' },
+      nefes: { f: 8 / 28, days: 8, today: true, word: 'Düzenli', line: 'Her gün 3 dk · 8 gün' },
+      ruh: { f: 3 / 28, days: 3, word: 'Başladı', line: 'İyi oluş ve uyanış · 3 gün' },
+      hareket: { f: 7 / 28, days: 7, today: true, word: 'Düzenli', line: '7 gün ort. 6.240 adım' },
+    },
+  },
+  '30': {
+    day: '30. gün', mature: 0.7, win: 28, nef: ['Hareket yayın bu ay ilk kez tamamlandı.', 'Dikkatte sonucun başlangıcından iyi.'],
+    eye: { f: 24 / 28, days: 24, today: true, word: 'Değişim yok', neutral: true, line: 'E testi haftada bir · 24 gün egzersiz' },
+    r: {
+      dikkat: { f: 21 / 28, days: 21, today: true, word: 'Başlangıçtan iyi', ok: true, line: 'Tek Bakışta · iki haftadır' },
+      nefes: { f: 26 / 28, days: 26, today: true, word: 'Düzenli', line: 'Nefesten sonra sakinlik puanın yüksek' },
+      ruh: { f: 12 / 28, days: 12, word: 'Değişim yok', neutral: true, line: 'İyi oluş · 2 ölçüm' },
+      hareket: { f: 1, days: 28, today: true, word: 'Her gün', line: '7 gün ort. 7.080 adım' },
+    },
+  },
+}
+DATA['1'].win = 7
+DATA['1'].phase = '1. gün'
+DATA['9'].phase = '9. gün'
+DATA['9'].win = 28
+DATA['30'].phase = 'Son 28 gün'
+DATA['3'] = { day: '3. gün', phase: '3. gün', mature: 0.05, win: 7, week: true, nef: ['3 günün 3\'ünde buradaydın.', 'Beş yayın da çizgisi artık yerinde.'],
+  eye: { days: 3, today: true, word: 'Alışma', line: 'E testi 1 kez · egzersiz 3 gün' },
+  r: { dikkat: { days: 2, today: true, word: 'Başladı', line: 'Çemberler, Yılan · 2 gün' }, nefes: { days: 3, today: true, word: 'Başladı', line: '1–2 dk nefes · 3 gün' }, ruh: { days: 1, word: 'Açıldı', line: 'İyi oluş · 1 ölçüm' }, hareket: { days: 2, today: true, word: 'Başladı', line: 'Mola 2 kez · 5.910 adım' } } }
+DATA['1'].week = true
+DATA.walk = JSON.parse(JSON.stringify(DATA['30']))
+DATA.walk.nef = ['Şu an yürüyorsun.', '14 dakikada 1,2 km, 1.690 adım.']
+DATA.walk.live = true
+DATA.walk.r.hareket = { f: 1, days: 28, today: true, live: true, word: 'Şu an', line: 'Yürüyüş · 1,2 km · 14 dk' }
+const D = DATA[DAY]
+if (GROW) D.win = 28
+const NAMES = { dikkat: 'Dikkat', nefes: 'Nefes', ruh: 'Ruh hâli', hareket: 'Hareket' }
+
+document.getElementById('day').textContent = D.phase || ''
+document.getElementById('cap').innerHTML = GROW ? (D.phase?.startsWith('Son') ? 'İnce çizgi: ilk ölçümün. Kalın ışık: son 28 günün kaçında çalıştığın.' : 'İnce çizgi: o alandaki ilk ölçümün. Kalın ışık: çalıştığın günler; tam yay 28 gün.') : GROW ? (D.phase?.startsWith('Son') ? 'Her yay bir alan; tam kubbe: son 28 günün hepsi.' : 'Her yay bir alan; çalıştığın her gün yay biraz daha uzar. Tam kubbe: 28 gün.') : D.week ? 'İlk haftan: her yay, 7 günün kaçında o alanda çalıştığın.' : D.phase?.startsWith('İlk ayın') ? 'İlk ayın: her yay, 28 günün kaçında o alanda çalıştığın.' : 'Her yay bir alan: son 28 günün kaçında çalıştığın.'
+document.getElementById('nef').innerHTML = `<span class="n">Nef</span>${D.live ? `<span class="live">${D.nef[0]}</span> ${D.nef[1]}` : `${D.nef[0]} ${D.nef[1]}`}`
+const rows = [['Göz', D.eye], ...Object.keys(NAMES).map((k) => [NAMES[k], D.r[k]])]
+document.getElementById('rows').innerHTML = rows.map(([k, x]) => `<div class="row"><span class="k">${k}</span><span class="v">${x.line}</span><span class="w${x.ok ? ' ok' : ''}${x.live ? ' live' : ''}${x.neutral ? ' neutral' : ''}">${x.word}</span></div>`).join('')
+
+// ---------- Çizim ----------
+const cv = document.getElementById('c'), hero = document.getElementById('hero'), ctx = cv.getContext('2d')
+const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim()
+const DARK = THEME === 'dark'
+let W, H, dpr
+function size() {
+  dpr = Math.min(3, window.devicePixelRatio || 1)
+  W = hero.clientWidth
+  H = Math.round(Math.min(W * (DIR === 'B' ? (W < 360 ? 0.9 : 0.84) : 0.95), DIR === 'B' ? 336 : 370))
+  cv.width = W * dpr; cv.height = H * dpr; cv.style.height = H + 'px'
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+}
+function rgba(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})` }
+function rnd(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296) }
+
+// Göz: sakin, hafif kapalı kapak; iris lifleri; kişinin kendi kırpma hızıyla kırpar; bakış yavaşça gezinir.
+// side: 0 önden, 1 profil (sağa bakar)
+function eye(cx, cy, r, t, lit, side = 0) {
+  const I1 = css('--iris-1'), I2 = css('--iris-2')
+  const blinkP = 6.7 // İlk Bakış: 20 sn'de 3 kırpma → ≈ 6,7 sn'de bir (kişinin kendi hızı)
+  const bt = t % blinkP
+  const open = bt < 0.18 ? Math.abs(Math.cos((bt / 0.18) * Math.PI)) : 1
+  const lookX = side ? r * 0.25 : Math.sin(t * 0.31) * r * 0.2
+  const lookY = r * 0.14 + Math.sin(t * 0.21 + 1) * r * 0.04
+  const w = side ? r * 1.25 : r * 1.9
+  const up = r * 1.25 * open, dn = r * 1.05 * open
+  const shape = new Path2D()
+  if (side) {
+    shape.moveTo(cx - w * 0.9, cy)
+    shape.quadraticCurveTo(cx - w * 0.1, cy - up * 1.5, cx + w * 0.55, cy - up * 0.55)
+    shape.quadraticCurveTo(cx + w * 0.62, cy, cx + w * 0.55, cy + dn * 0.5)
+    shape.quadraticCurveTo(cx - w * 0.1, cy + dn * 1.3, cx - w * 0.9, cy)
+  } else {
+    shape.moveTo(cx - w, cy + r * 0.05)
+    shape.bezierCurveTo(cx - w * 0.5, cy - up * 1.25, cx + w * 0.5, cy - up * 1.25, cx + w, cy - r * 0.05)
+    shape.bezierCurveTo(cx + w * 0.5, cy + dn * 1.05, cx - w * 0.5, cy + dn * 1.05, cx - w, cy + r * 0.05)
+  }
+  ctx.save()
+  ctx.fillStyle = rgba(css('--iris-1'), DARK ? 0.07 : 0.06); ctx.fill(shape)
+  ctx.clip(shape)
+  const ix = cx + lookX, iy = cy + lookY + r * 0.08
+  const sx = side ? 0.55 : 1
+  ctx.save(); ctx.translate(ix, iy); ctx.scale(sx, 1)
+  const g = ctx.createRadialGradient(0, 0, r * 0.15, 0, 0, r)
+  g.addColorStop(0, I2); g.addColorStop(0.55, I1); g.addColorStop(1, I2)
+  ctx.globalAlpha = 0.45 + 0.55 * lit
+  ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.fillStyle = g; ctx.fill()
+  const R = rnd(7); ctx.lineWidth = 0.7
+  for (let i = 0; i < 72; i++) {
+    const a = (i / 72) * Math.PI * 2 + R() * 0.05
+    ctx.strokeStyle = `rgba(255,255,255,${0.12 + R() * 0.25})`
+    ctx.beginPath(); ctx.moveTo(Math.cos(a) * r * 0.44, Math.sin(a) * r * 0.44); ctx.lineTo(Math.cos(a) * r * (0.78 + R() * 0.2), Math.sin(a) * r * (0.78 + R() * 0.2)); ctx.stroke()
+  }
+  ctx.globalAlpha = 1
+  ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.strokeStyle = rgba(I2, 0.85); ctx.lineWidth = r * 0.08; ctx.stroke()
+  ctx.beginPath(); ctx.arc(0, 0, r * 0.38, 0, 7); ctx.fillStyle = css('--pupil'); ctx.fill()
+  ctx.restore()
+  ctx.beginPath(); ctx.arc(ix - r * 0.2 * sx, iy - r * 0.3, r * 0.12, 0, 7); ctx.fillStyle = 'rgba(255,255,255,.92)'; ctx.fill()
+  // üst kapağın gölgesi (sakin bakış)
+  const sh = ctx.createLinearGradient(0, cy - up * 1.3, 0, cy - up * 0.2)
+  sh.addColorStop(0, rgba(css('--shade'), 0.55)); sh.addColorStop(1, rgba(css('--shade'), 0))
+  ctx.fillStyle = sh; ctx.fillRect(cx - w * 1.2, cy - up * 1.6, w * 2.4, up * 1.5)
+  ctx.restore()
+  ctx.save(); ctx.lineCap = 'round'
+  const lidUp = new Path2D(), lidDn = new Path2D()
+  if (side) { lidUp.moveTo(cx - w * 0.9, cy); lidUp.quadraticCurveTo(cx - w * 0.1, cy - up * 1.5, cx + w * 0.55, cy - up * 0.55); lidDn.moveTo(cx - w * 0.9, cy); lidDn.quadraticCurveTo(cx - w * 0.1, cy + dn * 1.3, cx + w * 0.55, cy + dn * 0.5) }
+  else { lidUp.moveTo(cx - w, cy + r * 0.05); lidUp.bezierCurveTo(cx - w * 0.5, cy - up * 1.25, cx + w * 0.5, cy - up * 1.25, cx + w, cy - r * 0.05); lidDn.moveTo(cx - w * 0.8, cy + r * 0.25); lidDn.bezierCurveTo(cx - w * 0.4, cy + dn * 1.05, cx + w * 0.4, cy + dn * 1.05, cx + w * 0.8, cy + r * 0.2) }
+  ctx.strokeStyle = rgba(I1, DARK ? 0.9 : 0.75); ctx.lineWidth = Math.max(1.6, r * 0.13); ctx.stroke(lidUp)
+  ctx.strokeStyle = rgba(I1, DARK ? 0.3 : 0.28); ctx.lineWidth = Math.max(1, r * 0.06); ctx.stroke(lidDn)
+  ctx.restore()
+}
+
+// Yumuşak ışık
+function glow(x, y, r, color, a) {
+  if (r <= 0) return
+  const g = ctx.createRadialGradient(x, y, 0, x, y, r)
+  g.addColorStop(0, rgba(color, Math.min(1, a))); g.addColorStop(1, rgba(color, 0))
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill()
+}
+
+// Etiketler (HTML; uzun çeviriye ve dar ekrana uyar). align: 'c' orta, 'l' sola yaslı (sağda durur), 'r' sağa yaslı (solda durur)
+const labels = {}
+function label(key, x, y, name, sub, live, align = 'c') {
+  let el = labels[key]
+  if (!el) { el = document.createElement('div'); hero.appendChild(el); labels[key] = el }
+  el.className = 'lbl' + (live ? ' live' : '') + ' al-' + align
+  el.style.left = x + 'px'; el.style.top = y + 'px'
+  el.innerHTML = `<b>${name}</b>${sub ? `<small>${sub}</small>` : ''}`
+  // ekranın içinde kalsın (dar ekran, uzun çeviri)
+  const w = el.offsetWidth, pad = 4
+  let L = x
+  if (align === 'c') L = Math.min(Math.max(x, w / 2 + pad), W - w / 2 - pad)
+  else if (align === 'l') L = Math.min(x, W - w - pad)
+  else L = Math.max(x, w + pad)
+  el.style.left = L + 'px'
+}
+function leader(x1, y1, x2, y2, live) {
+  ctx.save(); ctx.strokeStyle = rgba(live ? css('--lens') : css('--iris-1'), DARK ? 0.45 : 0.4); ctx.lineWidth = 1
+  ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke()
+  ctx.beginPath(); ctx.arc(x2, y2, 2.2, 0, 7); ctx.fillStyle = ctx.strokeStyle; ctx.fill(); ctx.restore()
+}
+const WORD = (x) => x.word
+
+// Beyin: bir bölgeye nokta bulutu (tohumlu), yakın komşular bağlanır
+const PTS = {}
+function cloud(key, inside, box, n, seed) {
+  if (PTS[key]) return PTS[key]
+  const R = rnd(seed); const p = []
+  let guard = 0
+  while (p.length < n && guard++ < 20000) {
+    const x = box[0] + R() * box[2], y = box[1] + R() * box[3]
+    if (inside(x, y)) p.push({ x, y, ph: R() * 6.28, s: 0.7 + R() * 1.1, o: R() })
+  }
+  // her noktanın en yakın iki komşusu
+  for (const a of p) {
+    a.nb = p.filter((b) => b !== a).map((b) => [b, (b.x - a.x) ** 2 + (b.y - a.y) ** 2]).sort((u, v) => u[1] - v[1]).slice(0, 2).map((u) => u[0])
+  }
+  return (PTS[key] = p)
+}
+function drawCloud(pts, frac, t, col, live) {
+  const I1 = css('--iris-1')
+  const lit = Math.max(0.1, frac)
+  ctx.lineWidth = 0.8
+  for (const p of pts) {
+    const on = p.o < lit
+    if (!on) continue
+    for (const q of p.nb) if (q.o < lit) { ctx.strokeStyle = rgba(col, DARK ? 0.28 : 0.3); ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke() }
+  }
+  for (const p of pts) {
+    const on = p.o < lit
+    const tw = 0.5 + 0.5 * Math.sin(t * (live ? 3.2 : 1.1) + p.ph)
+    ctx.fillStyle = on ? rgba(col, 0.55 + 0.45 * tw) : rgba(I1, DARK ? 0.14 : 0.18)
+    ctx.beginPath(); ctx.arc(p.x, p.y, on ? p.s * 1.3 : p.s * 0.75, 0, 7); ctx.fill()
+  }
+}
+
+// ---- Yön A: ışıktan baş (önden, burundan yukarısı; beyinde dört bölge) ----
+function headFront(cx, top, bottom, wMax) {
+  const h = bottom - top
+  const p = new Path2D()
+  p.moveTo(cx - wMax * 0.36, bottom)
+  p.bezierCurveTo(cx - wMax * 0.40, top + h * 0.86, cx - wMax * 0.43, top + h * 0.74, cx - wMax * 0.46, top + h * 0.6)
+  p.bezierCurveTo(cx - wMax * 0.53, top + h * 0.28, cx - wMax * 0.36, top, cx, top)
+  p.bezierCurveTo(cx + wMax * 0.36, top, cx + wMax * 0.53, top + h * 0.28, cx + wMax * 0.46, top + h * 0.6)
+  p.bezierCurveTo(cx + wMax * 0.43, top + h * 0.74, cx + wMax * 0.40, top + h * 0.86, cx + wMax * 0.36, bottom)
+  return p
+}
+function drawA(t) {
+  const I1 = css('--iris-1'), I2 = css('--iris-2'), L = css('--lens')
+  const cx = W / 2, top = H * 0.03, bottom = H, wMax = Math.min(W * 0.6, H * 0.74)
+  const h = bottom - top
+  const head = headFront(cx, top, bottom, wMax)
+  // hacim: içten ışıyan cam
+  const vg = ctx.createRadialGradient(cx - wMax * 0.1, top + h * 0.3, wMax * 0.05, cx, top + h * 0.45, wMax * 0.7)
+  vg.addColorStop(0, rgba(I1, DARK ? 0.16 : 0.12)); vg.addColorStop(1, rgba(I2, DARK ? 0.05 : 0.03))
+  ctx.fillStyle = vg; ctx.fill(head)
+  // kenar ışığı; burun hizasında kaybolur
+  const sg = ctx.createLinearGradient(0, top, 0, bottom)
+  sg.addColorStop(0, rgba(I1, DARK ? 0.7 : 0.55)); sg.addColorStop(0.7, rgba(I2, DARK ? 0.35 : 0.3)); sg.addColorStop(1, rgba(I2, 0))
+  ctx.strokeStyle = sg; ctx.lineWidth = 1.8; ctx.stroke(head)
+  // beyin: iki yarım küre, dört bölge (sol üst dikkat, sol alt nefes, sağ üst ruh hâli, sağ alt hareket)
+  const bcx = cx, bcy = top + h * 0.33, brx = wMax * 0.42, bry = h * 0.25
+  const inBrain = (x, y) => { const dx = (x - bcx) / brx, dy = (y - bcy) / bry; return dx * dx + dy * dy < 1 && Math.abs(x - bcx) > 3 }
+  const zone = { dikkat: (x, y) => x < bcx && y < bcy, nefes: (x, y) => x < bcx && y >= bcy, ruh: (x, y) => x >= bcx && y < bcy, hareket: (x, y) => x >= bcx && y >= bcy }
+  const box = [bcx - brx, bcy - bry, brx * 2, bry * 2]
+  const centers = { dikkat: [bcx - brx * 0.48, bcy - bry * 0.42], nefes: [bcx - brx * 0.48, bcy + bry * 0.45], ruh: [bcx + brx * 0.48, bcy - bry * 0.42], hareket: [bcx + brx * 0.48, bcy + bry * 0.45] }
+  let seed = 3
+  for (const k of ['dikkat', 'nefes', 'ruh', 'hareket']) {
+    const r = D.r[k], live = !!r.live, col = live ? L : I1
+    const [x, y] = centers[k]
+    glow(x, y, brx * (0.45 + 0.35 * r.f), live ? L : I2, (0.06 + 0.3 * r.f) * (DARK ? 1 : 0.7) * (live ? 1.4 + 0.5 * Math.sin(t * 6.3) : 1))
+    drawCloud(cloud('A' + k, (px, py) => inBrain(px, py) && zone[k](px, py), box, 72, seed += 5), r.f, t, col, live)
+    if (live) for (let i = 0; i < 3; i++) { const ph = (t * 1.8 + i / 3) % 1; ctx.strokeStyle = rgba(L, 0.55 * (1 - ph)); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(x, y, 6 + ph * brx * 0.5, 0, 7); ctx.stroke() }
+    // etiket dışarıda, ince çizgiyle
+    const left = x < bcx
+    const lx = left ? (cx - wMax * 0.49) - 10 : (cx + wMax * 0.49) + 10
+    const ly = y
+    leader(left ? lx + 4 : lx - 4, ly, x + (left ? -brx * 0.18 : brx * 0.18), y, live)
+    label(k, lx, ly, NAMES[k], WORD(r), live, left ? 'r' : 'l')
+  }
+  // orta yarık
+  ctx.strokeStyle = rgba(I1, DARK ? 0.18 : 0.16); ctx.lineWidth = 1
+  ctx.beginPath(); ctx.moveTo(bcx, bcy - bry * 0.95); ctx.bezierCurveTo(bcx - 3, bcy - bry * 0.3, bcx + 3, bcy + bry * 0.3, bcx, bcy + bry * 0.9); ctx.stroke()
+  // burun köprüsü
+  const eyeY = top + h * 0.8
+  const ng = ctx.createLinearGradient(0, eyeY, 0, bottom)
+  ng.addColorStop(0, rgba(I1, 0)); ng.addColorStop(1, rgba(I1, DARK ? 0.4 : 0.3))
+  ctx.strokeStyle = ng; ctx.lineWidth = 1.4
+  ctx.beginPath(); ctx.moveTo(cx - wMax * 0.06, eyeY - h * 0.05); ctx.quadraticCurveTo(cx - wMax * 0.03, eyeY + h * 0.08, cx - wMax * 0.035, bottom); ctx.stroke()
+  // gözler
+  const er = wMax * 0.065, ex = wMax * 0.19
+  glow(cx - ex, eyeY, er * 3, I1, (DARK ? 0.25 : 0.18) * D.eye.f)
+  glow(cx + ex, eyeY, er * 3, I1, (DARK ? 0.25 : 0.18) * D.eye.f)
+  eye(cx - ex, eyeY, er, t, D.eye.f)
+  eye(cx + ex, eyeY, er, t + 0.02, D.eye.f)
+  const gx = cx + wMax * 0.49 + 10
+  leader(gx - 4, eyeY, cx + ex + er * 2.1, eyeY, false)
+  label('goz', gx, eyeY, 'Göz', WORD(D.eye), false, 'l')
+}
+
+// ---- Yön B, yöntem 2: ışık kubbesi ----
+// Katmanlar baş biçimli kubbe; dolu kısım soldan sağa (gösterge gibi): yarısı dolu = tepede.
+// EYE=1: tabanda tek iris (Göz alanı; halkası oranla dolar). EYE=0: göz yok, Göz en içteki yay.
+const EYE = Q.get('eye') ?? '1'
+function domeD(cx, top, base, hw) {
+  const h = base - top
+  return `M${cx - hw * 0.9},${base} C${cx - hw * 1.14},${base - h * 0.38} ${cx - hw * 0.9},${top} ${cx},${top} C${cx + hw * 0.9},${top} ${cx + hw * 1.14},${base - h * 0.38} ${cx + hw * 0.9},${base}`
+}
+function svgLen(d) {
+  const el = svgLen.el || (svgLen.el = document.createElementNS('http://www.w3.org/2000/svg', 'path'))
+  el.setAttribute('d', d); return el
+}
+function drawB(t) {
+  const I1 = css('--iris-1'), I2 = css('--iris-2'), L = css('--lens'), TR = css('--track')
+  const cx = W / 2, base = EYE === '0' ? H * 0.92 : H * 0.84
+  const order = EYE === '0' ? ['goz', 'dikkat', 'nefes', 'ruh', 'hareket'] : ['dikkat', 'nefes', 'ruh', 'hareket']
+  const item = (k) => (k === 'goz' ? D.eye : D.r[k])
+  const er = Math.min(W * 0.068, 26) * (D.week ? 1.3 : 1)
+  const hw0 = EYE === '0' ? Math.min(W * 0.17, 66) : er * 2.9
+  const hwN = Math.min(W * 0.46, 188), dhw = (hwN - hw0) / (order.length - 1)
+  const top0 = EYE === '0' ? base - Math.min(H * 0.26, 88) : base - er * 3.4
+  const topN = H * 0.06, dtop = (top0 - topN) / (order.length - 1)
+  const lw = Math.max(5.5, W * 0.016) * (0.85 + 0.45 * (D.mature ?? 0))
+  ctx.lineCap = 'round'
+  const TONE = { goz: I1, dikkat: css('--t-dikkat'), nefes: css('--t-nefes'), ruh: css('--t-ruh'), hareket: css('--t-hareket') }
+  // iristen yükselen ışık: kubbenin kaynağı iris (Göz ilk ölçümü varsa)
+  if (EYE !== '0' && D.eye.days) {
+    const ey0 = base - er * 0.95
+    glow(cx, ey0, hwN * 0.95, I1, DARK ? 0.16 : 0.1)
+    glow(cx, ey0, er * 2.6, I2, DARK ? 0.28 : 0.16)
+    // alt kenarda yumuşak bitiş (kesik dikdörtgen görünmesin)
+    ctx.save(); ctx.globalCompositeOperation = 'destination-out'
+    const fm = ctx.createLinearGradient(0, H - 46, 0, H); fm.addColorStop(0, 'rgba(0,0,0,0)'); fm.addColorStop(1, 'rgba(0,0,0,1)')
+    ctx.fillStyle = fm; ctx.fillRect(0, H - 46, W, 46); ctx.restore()
+  }
+  order.forEach((k, i) => {
+    const x = item(k), live = !!x.live
+    const col = live ? L : TONE[k]
+    const top = top0 - i * dtop, hw = hw0 + i * dhw
+    const d = domeD(cx, top, base, hw)
+    const path = new Path2D(d)
+    const el = svgLen(d), per = el.getTotalLength()
+    // İnce çizgi = o alanın ilk ölçümü alındı (kayıt varsa). Yoksa kesikli bekleme izi.
+    if (!x.days) { ctx.setLineDash([2, lw * 1.4]); ctx.lineWidth = lw * 0.5; ctx.strokeStyle = rgba(col, DARK ? 0.45 : 0.5); ctx.stroke(path); ctx.setLineDash([]) }
+    else {
+      const bg = ctx.createLinearGradient(0, top, 0, base)
+      bg.addColorStop(0, rgba(col, DARK ? 0.75 : 0.7)); bg.addColorStop(1, rgba(col, DARK ? 0.35 : 0.3))
+      ctx.save(); ctx.lineWidth = 2; ctx.strokeStyle = bg; ctx.shadowColor = rgba(col, DARK ? 0.6 : 0.25); ctx.shadowBlur = DARK ? 6 : 3; ctx.stroke(path); ctx.restore()
+    }
+    // Kalın ışık = çalışılan gün / 28, tepeden iki yana (şişirme yok; en az bir çizgi kalınlığı görünür)
+    const f = x.days ? Math.min(1, x.days / 28) : 0
+    if (f > 0) {
+      const len = Math.max(per * f, lw * 2.2)
+      if (f < 0.5) glow(cx, top, lw * 2.4 + len * 0.35, col, (DARK ? 0.42 : 0.26) * (1 - f))
+      ctx.save()
+      ctx.lineWidth = lw
+      ctx.strokeStyle = col
+      ctx.shadowColor = rgba(col, DARK ? 0.7 : 0.45); ctx.shadowBlur = DARK ? 12 : 7
+      ctx.setLineDash(len >= per ? [] : [len, per]); ctx.lineDashOffset = -(per / 2 - len / 2)
+      ctx.stroke(path)
+      ctx.restore()
+      if (live) {
+        const s = ((t * 0.22 + 0.2) % 1) * per
+        for (let j = 0; j < 30; j++) {
+          const p = el.getPointAtLength(Math.max(0, s - j * 2.2))
+          ctx.fillStyle = rgba('#ffffff', 0.95 * (1 - j / 30)); ctx.beginPath(); ctx.arc(p.x, p.y, lw * 0.38, 0, 7); ctx.fill()
+        }
+      }
+    }
+    label('n' + k, cx, top - lw * 0.5 - 16, '', null, live)
+    const e = labels['n' + k]; e.classList.add('pill')
+    const name = k === 'goz' ? 'Göz' : NAMES[k]
+    e.querySelector('b').innerHTML = `<span class="sw" style="background:${col}"></span>${name} <span class="cnt">${x.days ? `${x.days} gün` : 'yarın'}</span>${live ? ' <span class="now">· şu an</span>' : ''}`
+  })
+  ctx.setLineDash([])
+  if (EYE !== '0') {
+    // tek iris: uygulamanın simgesiyle aynı dil; halkası Göz alanının oranıyla dolar
+    const ge = D.eye, gf = ge.days ? Math.min(1, ge.days / D.win) : 0
+    const ey = base - er * 0.95
+    ctx.lineWidth = GROW ? 2 : lw * 1.5; ctx.strokeStyle = gf > 0 ? rgba(I1, DARK ? 0.6 : 0.5) : TR; ctx.beginPath(); ctx.arc(cx, ey, er, 0, 7); ctx.stroke()
+    if (gf > 0) {
+      ctx.save(); ctx.lineWidth = lw * 1.5; ctx.strokeStyle = I1; ctx.shadowColor = rgba(I1, DARK ? 0.4 : 0.22); ctx.shadowBlur = DARK ? 5 : 3
+      const g2 = GROW ? Math.max(0.03, gf) : gf; ctx.beginPath(); if (GROW) ctx.arc(cx, ey, er, -Math.PI / 2 - Math.PI * g2, -Math.PI / 2 + Math.PI * g2); else ctx.arc(cx, ey, er, Math.PI * 0.5 + 0.0001, Math.PI * 0.5 + Math.PI * 2 * gf); ctx.stroke(); ctx.restore()
+    }
+    const g = ctx.createRadialGradient(cx, ey, er * 0.1, cx, ey, er * 0.74)
+    g.addColorStop(0, I2); g.addColorStop(1, rgba(I1, DARK ? 0.35 : 0.3))
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, ey, er * 0.7, 0, 7); ctx.fill()
+    const R = rnd(5); ctx.lineWidth = 0.8
+    for (let i = 0; i < 40; i++) { const a = (i / 40) * 6.283; ctx.strokeStyle = `rgba(255,255,255,${0.15 + R() * 0.25})`; ctx.beginPath(); ctx.moveTo(cx + Math.cos(a) * er * 0.36, ey + Math.sin(a) * er * 0.36); ctx.lineTo(cx + Math.cos(a) * er * 0.66, ey + Math.sin(a) * er * 0.66); ctx.stroke() }
+    // göz bebeği: kişinin kırpma hızıyla nefes alır gibi küçülüp büyür (kırpma gösterimi)
+    const bt = t % 6.7, k = bt < 0.25 ? 0.75 : 1
+    ctx.fillStyle = css('--pupil'); ctx.beginPath(); ctx.arc(cx, ey, er * 0.3 * k, 0, 7); ctx.fill()
+    label('goz', cx, ey, '', null)
+    const e = labels.goz; e.classList.add('pill')
+    e.style.top = ey + er + lw * 0.75 + 14 + 'px'
+    e.querySelector('b').innerHTML = `<span class="sw" style="background:${I1}"></span>Göz <span class="cnt">${ge.days ? (GROW ? `${ge.days} gün` : `${ge.days}/${D.win}`) : 'yarın'}</span>`
+  }
+}
+
+// ---- Yön C: profil (yandan, burundan yukarısı; bakış ileriye, kişiye değil) ----
+function drawC(t) {
+  const I1 = css('--iris-1'), I2 = css('--iris-2'), L = css('--lens')
+  const s = Math.min(W / 430, H / 330), ox = (W - 430 * s) / 2 + 30 * s
+  const X = (x) => ox + x * s, Y = (y) => y * s
+  const head = new Path2D()
+  head.moveTo(X(92), Y(330))
+  head.bezierCurveTo(X(70), Y(260), X(62), Y(170), X(92), Y(98))
+  head.bezierCurveTo(X(128), Y(18), X(236), Y(4), X(292), Y(60))
+  head.bezierCurveTo(X(322), Y(92), X(326), Y(150), X(322), Y(178))   // alın
+  head.bezierCurveTo(X(322), Y(194), X(330), Y(204), X(326), Y(214))  // kaş kemeri
+  head.bezierCurveTo(X(318), Y(226), X(320), Y(236), X(330), Y(256))  // göz çukuru → burun kökü
+  head.bezierCurveTo(X(342), Y(282), X(352), Y(304), X(356), Y(330))  // burun sırtı
+  const vg = ctx.createRadialGradient(X(200), Y(120), 10 * s, X(210), Y(170), 220 * s)
+  vg.addColorStop(0, rgba(I1, DARK ? 0.16 : 0.12)); vg.addColorStop(1, rgba(I2, DARK ? 0.04 : 0.025))
+  ctx.fillStyle = vg; ctx.fill(head)
+  const sg = ctx.createLinearGradient(0, 0, 0, Y(330))
+  sg.addColorStop(0, rgba(I1, DARK ? 0.7 : 0.55)); sg.addColorStop(0.75, rgba(I2, DARK ? 0.35 : 0.3)); sg.addColorStop(1, rgba(I2, 0))
+  ctx.strokeStyle = sg; ctx.lineWidth = 1.8; ctx.stroke(head)
+  // beyin: kafatasının içinde tek bulut, dört bölge (ön: dikkat, tepe: nefes, arka: ruh hâli, alt: hareket)
+  const bcx = X(196), bcy = Y(118), brx = 102 * s, bry = 74 * s
+  const inBrain = (x, y) => { const dx = (x - bcx) / brx, dy = (y - bcy) / bry; return dx * dx + dy * dy < 1 }
+  const ang = (x, y) => Math.atan2(y - bcy, x - bcx)
+  const zone = {
+    dikkat: (x, y) => { const a = ang(x, y); return a > -Math.PI / 4 && a <= Math.PI / 4 },
+    nefes: (x, y) => { const a = ang(x, y); return a > -3 * Math.PI / 4 && a <= -Math.PI / 4 },
+    ruh: (x, y) => { const a = ang(x, y); return a > 3 * Math.PI / 4 || a <= -3 * Math.PI / 4 },
+    hareket: (x, y) => { const a = ang(x, y); return a > Math.PI / 4 && a <= 3 * Math.PI / 4 },
+  }
+  const centers = { dikkat: [bcx + brx * 0.6, bcy], nefes: [bcx, bcy - bry * 0.6], ruh: [bcx - brx * 0.62, bcy], hareket: [bcx, bcy + bry * 0.6] }
+  const lpos = { dikkat: [X(372), Y(92), 'c'], nefes: [X(196), Y(20), 'c'], ruh: [X(8), Y(118), 'c'], hareket: [X(196), Y(222), 'c'] }
+  let seed = 9
+  const box = [bcx - brx, bcy - bry, brx * 2, bry * 2]
+  for (const k of ['dikkat', 'nefes', 'ruh', 'hareket']) {
+    const r = D.r[k], live = !!r.live, col = live ? L : I1
+    const [x, y] = centers[k]
+    glow(x, y, brx * (0.4 + 0.3 * r.f), live ? L : I2, (0.06 + 0.3 * r.f) * (DARK ? 1 : 0.7) * (live ? 1.4 + 0.5 * Math.sin(t * 6.3) : 1))
+    drawCloud(cloud('C' + k, (px, py) => inBrain(px, py) && zone[k](px, py), box, 72, seed += 5), r.f, t, col, live)
+    if (live) for (let i = 0; i < 3; i++) { const ph = (t * 1.8 + i / 3) % 1; ctx.strokeStyle = rgba(L, 0.55 * (1 - ph)); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(x, y, 6 + ph * brx * 0.45, 0, 7); ctx.stroke() }
+    const [lx, ly, al] = lpos[k]
+    label(k, lx, ly, NAMES[k], WORD(r), live, al)
+  }
+  // göz (profil), ileriye bakar
+  const er = 21 * s, ex = X(298), ey = Y(234)
+  glow(ex, ey, er * 3, I1, (DARK ? 0.25 : 0.18) * D.eye.f)
+  eye(ex, ey, er, t, D.eye.f, 1)
+  label('goz', X(262), Y(282), 'Göz', WORD(D.eye), false, 'r')
+}
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
+function frame(ms) {
+  const t = STILL || reduce ? T0 : ms / 1000 + T0
+  ctx.clearRect(0, 0, W, H)
+  if (DIR === 'A') drawA(t); else if (DIR === 'B') drawB(t); else drawC(t)
+  if (!STILL && !reduce) requestAnimationFrame(frame)
+}
+function start() { size(); frame(0) }
+document.fonts?.ready?.then(start) ?? start()
+addEventListener('resize', start)
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+{
+ "S4a": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "\"Akşamüstü cadde\" ad tamlaması olarak eksik, kulağa yanlış geliyor.",
+   "\"Akşamüstü cadde\" kulağa eksik geliyor, Türkçede böyle bir ad kalıbı oturmuyor."
+  ]
+ },
+ "S4a2": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "\"Akşamüstü cadde\" dilbilgisi açısından aksak bir ad.",
+   "\"Akşamüstü cadde\" ad olarak yamuk duruyor, ek eksik gibi okunuyor."
+  ]
+ },
+ "S4b": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Akşam vakti cadde\" kulağa takılıyor, sahne adı gibi durmuyor.",
+   "\"Akşam vakti cadde\" eksik ve hantal bir söyleyiş.",
+   "\"Akşam vakti cadde\" zarf ile ad yan yana konmuş gibi, doğal bir ad değil.",
+   "\"Akşam vakti cadde\" kulağa hantal ve çeviri gibi geliyor.",
+   "\"Akşam vakti cadde\" ağır ve hantal duruyor, ad gibi okunmuyor."
+  ]
+ },
+ "S4b2": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Akşam vakti cadde\" yarım cümle gibi, akmıyor.",
+   "\"Akşam vakti cadde\" doğal Türkçe bir ad değil.",
+   "\"Akşam vakti cadde\" ad olarak tuhaf, eksik bir cümle gibi okunuyor.",
+   "\"Akşam vakti cadde\" sahne adı olarak hantal duruyor.",
+   "\"Akşam vakti cadde\" sahne adı olarak hantal kalıyor."
+  ]
+ },
+ "S4c": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "\"Akşam caddede\" bir ad değil, yarım kalmış bir cümle gibi okunuyor; diğer sahne adlarıyla da uyumsuz.",
+   "Ad yerine cümle parçası gibi okunuyor, diğer sahne adlarının kalıbına da uymuyor.",
+   "\"Akşam caddede\" ad gibi değil, yarım kalmış bir cümle gibi duruyor; diğer sahne adlarıyla da uyuşmuyor."
+  ]
+ },
+ "S4c2": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "\"Yeni sahne: Akşam caddede\" ad gibi değil, eksik cümle gibi duruyor.",
+   "\"Yeni sahne: Akşam caddede\" ad gibi değil, yarım kalmış bir cümle gibi okunuyor.",
+   "\"Yeni sahne: Akşam caddede\" kulağa tuhaf geliyor, ad gibi okunmuyor."
+  ]
+ },
+ "H12a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H12aq": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "H12b": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "\"Çiçekli kova\" üzeri çiçek desenli kova diye de anlaşılabilir.",
+   "\"Çiçekli kova\" üstünde çiçek deseni olan kova diye de anlaşılabilir.",
+   "\"Çiçekli kova\" çiçek desenli kova diye de anlaşılabilir.",
+   "\"Çiçekli kova\", üstü çiçek desenli kova diye de anlaşılabilir."
+  ]
+ },
+ "H12bq": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "\"Çiçekli kova\" desenli kova anlamına da gelebildiği için belirsiz.",
+   "\"Çiçekli kova\" desenli kova mı, içi çiçek dolu kova mı belli değil.",
+   "\"Çiçekli kova\" desenli kova anlamına kayabiliyor.",
+   "\"Çiçekli kova\" desenli kova diye de anlaşılabilir, soru belirsiz kalıyor."
+  ]
+ },
+ "K7": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K7dc": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K12": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K12dc": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K12dd": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "K11": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "\"Scooter\" yabancı kelime, Türkçe metinde göze batıyor."
+  ]
+ },
+ "K11da": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Yabancı \"scooter\" kelimesi cümleyi Türkçe olmaktan çıkarıyor."
+  ]
+ },
+ "K11db": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "Yabancı kelime var; ayrıca bağlamdaki \"süren\" ile \"bindiği\" uyuşmuyor.",
+   "\"Bindiği\" gereksiz bir tekrar, soruyu ağırlaştırıyor."
+  ]
+ }
+}

@@ -1,0 +1,6819 @@
+{
+ "schema": "nefona.yoga.lesson/1 (PLAN §B.2 + ekler)",
+ "sozlesmeNotu": "Pilot ders2.lesson.json ile aynı şema (PLAN.v2 §B.2 + pilot 2.–4. tur ekleri: tier, syllables, words, sentences, phase, fillRank, fillGroup, requires, minTarget, carrier{id,index}, onsetPeriod + gapFloor + gapFromPeriod, subclips + sentenceGap + ttsUnit, short{belowSec,text,gapAfter}). Farklar: (1) v3 tek ses kararı: voice anahtarı female/male yerine 'hoc' (Nefona Hoca, voice_id Sr5w7dIZaRDglJ2cLaJm; sahip 2026-09-30, madde 8). (2) Nefes kilidi: tags.breathLock taşıyan her klibin onsetPeriod'u min=pref=max'tır; sessizlik = periyot − gerçek süre (en az gapFloor). Böylece 'Al…' ile bir sonraki 'Al…' arası tam döngü süresidir (C1 ve C2 10,000 sn, C3 13,000 sn) ve bordun ile halka buna kilitlenir. (3) Taşıyıcı öğeleri 'Al…', 'ver…', sayılar: mikro-klip, taşıyıcı cümlede üretilip üç nokta duraklarından kesilir (PLAN.v2 §B.2 mikro-klipler). (4) 16–30 dk blokları (C4, C5, BR.orta) blocks'ta değil, skeleton30'dadır (metinsiz; PLAN.v3 §A.4). (5) firstEverIntro: kişinin ilk yoga dersinde çalan ayrı giriş dosyası (PLAN.v3 §D.3), plana girmez. minSec/prefSec/maxSec tahmindir (Nefona Hoca köşesi: 4,68 hece/sn, yüksek duraklama; VARSAYIM); üretimden sonra voice.hoc.sec ile yeniden hesaplanır.",
+ "id": "ders1-nefesin-ritmi",
+ "version": "B-parti1-taslak-1 (2026-09-30; insan ya da yedek incelemeden geçmedi)",
+ "title": "Nefesin Ritmi",
+ "tagline": "Nefesini yavaşlatmayı ve verişini uzatmayı adım adım öğreniyorsun.",
+ "daypart": "day",
+ "posture": "seated",
+ "defaultMinutes": 5,
+ "minutes": {
+  "min": 3,
+  "max": 15,
+  "step": 1,
+  "presets": [
+   3,
+   5,
+   15
+  ],
+  "stage3Max": 30,
+  "note": "PLAN.v3 §A.1: ilk yayında 3 · 5 · 15; 30 dk ve kaydırıcı ikinci aşamada (Kapı 9–11)"
+ },
+ "openingNotice": "Bu dersi yalnızca araç ya da makine kullanmadığın ve suda olmadığın bir sırada dinle.",
+ "openingScreen": [
+  "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+  "Bu dersi yalnızca araç ya da makine kullanmadığın ve suda olmadığın bir sırada dinle.",
+  "Başın döner ya da ellerin karıncalanırsa normal nefesine dön."
+ ],
+ "preparationCard": [
+  "Sırtını dik tutabileceğin bir sandalye ya da minder",
+  "15 dakikalık sürümde vızıltılı nefes var; sesinin kimseyi rahatsız etmeyeceği bir yer seçmek iyi olur"
+ ],
+ "preparationToggles": [
+  {
+   "id": "speechClarity",
+   "label": "Konuşmayı daha net duymak istiyorum",
+   "default": false,
+   "remember": "kullanıcı başına",
+   "effect": "voicePhaseGainDb.clarityMode + music.clarityMode + qa.speechOverBedDbMinClarity",
+   "preselect": "profilde yaş bilgisi 60 ve üstüyse önceden işaretli (pilot L3-10; profil alanı doğrulanmadı, VARSAYIM)"
+  }
+ ],
+ "soundCheck": {
+  "when": "ilk Yoga oturumu, \"Başla\"dan önce (kütüphane sırasında Ders 1 ilk derstir, PLAN.v2 §A.3); ayarlardan yeniden açılabilir",
+  "clips": [
+   "c1.s1.01",
+   "c1.s1.02",
+   "c1.s1.05",
+   "c1.s1.10"
+  ],
+  "screenText": "Al… iki… ver… altı…",
+  "level": "Derinleşme evre düzeyi (−1,5 dB) ve kısık bordun yatağı (≈ −34,5 LUFS)",
+  "question": "Sözcükleri rahatça seçebildin mi?",
+  "options": [
+   "Evet",
+   "Hayır"
+  ],
+  "onNo": "speechClarity açılır ve kullanıcı başına hatırlanır",
+  "durationSec": 10,
+  "note": "VARSAYIM; pilotun kalıbı (ders2 soundCheck); sahibin kör dinlemesinde (karar 2 yedeği) sınanır"
+ },
+ "eveningHint": {
+  "afterLocalHour": 20,
+  "text": "Uyumadan önce dinliyorsan Uykuya Geçiş daha uygun olabilir.",
+  "note": "UI satırı, seste yok; metin PLAN.v3 §2.0 satır 7 (modul.md); saat eşiği VARSAYIM"
+ },
+ "leadIn": {
+  "min": 3.0,
+  "pref": 4.0,
+  "max": 5.0
+ },
+ "limits": {
+  "silenceWindowMaxSec": 90,
+  "clipMaxSec": 15,
+  "clipMaxNote": "Z3-07: birimin konuşması (cümle arası sessizlikler hariç) her hızda <= 15 sn",
+  "lastSecondsNoNewImage": 60,
+  "sentenceGapMinDerinSec": 1.0,
+  "silenceMaxSecUpTo15": 20,
+  "silenceNote": "<= 15 dk'da duyurulu pencere yok; hiçbir sessizlik 20 sn'yi aşmaz (PLAN.v2 §B.2 boşluk sınıfları; PLAN.v3 §A.2 kural 3). Pencereler (C5) 30 dk iskeletinde"
+ },
+ "sentenceGapByPhase": {
+  "Varış": {
+   "min": 0.6,
+   "pref": 0.8,
+   "max": 1.0
+  },
+  "Derinleşme": {
+   "min": 0.8,
+   "pref": 1.0,
+   "max": 1.3
+  },
+  "Derin": {
+   "min": 1.2,
+   "pref": 1.8,
+   "max": 2.5
+  },
+  "Kapanış": {
+   "min": 0.8,
+   "pref": 1.0,
+   "max": 1.2
+  }
+ },
+ "breathCycles": {
+  "C1": {
+   "periodSec": 10.0,
+   "in": 4.0,
+   "out": 6.0,
+   "hold": 0,
+   "droneLoopSec": 10.0,
+   "droneLoopSamples44k1": 441000,
+   "cues": "'Al…' döngü başında (4 sn), 'ver…' verişin başında (6 sn); kısa veriş cümlesi 'ver…'den 1,2 sn sonra başlar ve sonraki 'Al…'dan en az 0,6 sn önce biter"
+  },
+  "C2": {
+   "periodSec": 10.0,
+   "in": 2.5,
+   "topUp": 1.5,
+   "out": 6.0,
+   "hold": 0,
+   "droneLoopSec": 10.0,
+   "cues": "'Al…' (2,5 sn) → 'biraz daha…' (1,5 sn) → 'ver…' (6 sn); süre bölüşümü VARSAYIM (Balban 2023'te süre verilmiyor)"
+  },
+  "C3": {
+   "periodSec": 13.0,
+   "in": 4.0,
+   "out": 9.0,
+   "hold": 0,
+   "droneLoopSec": 13.0,
+   "droneLoopSamples44k1": 573000,
+   "cues": "ilk turda 'Al…' ve 'vızıltıyla ver…', ikinci turda yalnız 'Al…'"
+  },
+  "note": "PLAN.v2 Ders 1 kartı (C1 10,000 sn, C3 13,000 sn; Trivedi 2023 12–14 sn). Bordun uygulamanın kendi hattıdır (render.mjs); nefes serisinin ilk 'Al…'sıyla evreye oturtulur, seri dışındaki cümlelerde döngü sürer ama nefes ipucu yoktur"
+ },
+ "planner": {
+  "kural": "Pilot planlayıcısı (timing.py) aynen: T4 tek Varış ve tek Kapanış; P1 bloklar zorunlu klipleriyle; artımlar entryRank/fillRank sırasıyla, sessizlikler pref iken sığıyorsa; ilk sığmayanda durulur (önek kuralı ⇒ plan(T) ⊆ plan(T+1)); Kapanış sessizlikleri sıkıştırılmaz (min = pref). Ders 1 ekleri: (1) breathLock klipleri periyotla yerleşir, esnemez; (2) short (belowSec 240) ve minTarget (240) yalnız 3 dk'yı kurar; (3) 3 dk ⊆ 5 dk ve 5 → 15 her dakika bir sonrakinin alt kümesidir; (4) 16–30 dk artımlarının sırası 500 ve üstündedir (skeleton30), bu yüzden <= 15 dk planları ikinci aşamada değişmez.",
+  "stretchCapBeforeIncrement": 0.5,
+  "entryRanks": {
+   "C2": 295,
+   "C3": 400
+  },
+  "p1DropOrder": [],
+  "rankFloorStage3": 500,
+  "variants": "Ders 1'de dönüşümlü seçenek (alternates) yok (VARSAYIM; pilot P-N5 kalıbı ikinci aşamada eklenebilir)"
+ },
+ "timingModel": {
+  "model": "pilot timing.py: alt klip süresi = hece / eklemleme hızı + TTS-içi duraklamalar + uç payı (0,31; mikro 0,15) × DUR_SCALE",
+  "corners": {
+   "hoc": {
+    "rate": 4.68,
+    "profile": "hi",
+    "durScale": 1.0,
+    "basis": "Nefona Hoca önizleme eklemleme hızı 4,68 hece/sn (render/sel/hoc; orkestratör verisi) + yüksek (Hakan v2) duraklama profili. VARSAYIM. Denetim: aynı model Ders 2'nin ölçülmüş hoc kliplerinden %3,6 uzun (ölçülen/model 0,965; 110 ortak klip) → muhafazakâr"
+   },
+   "hoc-lo": {
+    "rate": 4.68,
+    "profile": "lo",
+    "durScale": 1.0,
+    "basis": "aynı hız, düşük duraklama profili. VARSAYIM. Ders 2'nin ölçülmüş hoc kliplerine en yakın model (ölçülen/model 0,990, 110 ortak klip)"
+   },
+   "nes": {
+    "rate": 5.6,
+    "profile": "hi",
+    "durScale": 1.109,
+    "basis": "Neslihan'ın Ders 2'de ölçülmüş süreleri: ölçülen/model(5,6 yüksek) = 1,109 (110 ortak klip; v3/calc/measure.py). VARSAYIM: Ders 1 metnine aynı oranla taşındı"
+   }
+  },
+  "slackFloors": {
+   "3": 10.0,
+   "5": 15.0,
+   "note": "min sessizliklerle boş pay; 5 dk tabanı pilot T6 (15 sn), 3 dk tabanı sure.md §8 önerisi (10 sn); ikisi de VARSAYIM"
+  },
+  "note": "Ölçülmüş Ders 1 süresi yok; bütün süreler tahmindir. Ses üretilince voice.hoc.sec ile yeniden kurulur ve check_plan yeniden koşar."
+ },
+ "voiceProduction": {
+  "path": "yalnız MCP (creative_generate_speech); hız, kararlılık, seed, previous_text ve telaffuz sözlüğü yok",
+  "voice": "Nefona Hoca (voice_id Sr5w7dIZaRDglJ2cLaJm; sahip 2026-09-30, madde 8, VARSAYIM seçimi)",
+  "model": "eleven_v4 (pilot SPEC §2)",
+  "takes": "birim ya da taşıyıcı başına 3 çekim (generations_count); Scribe birebir eşleşen, kesimi tutan ve taşıyıcı ekleminde F0 sıçraması <= 2 yarım ton olan çekim seçilir (SPEC §4, v3.1–v3.3)",
+  "microCuts": "sayılı taşıyıcıda öğeler arası duraklama kısa olabilir; kesim ölçüyle denetlenir ve kulak listesine girer (SPEC §4.3 c). 'Al…' ve 'ver…' ipuçları 8 öğelik taşıyıcılarda; aynı ipucunun iki kez çalmaması için her döngünün kendi öğesi var",
+  "status": "bu adımda hiçbir ses üretilmedi; ElevenLabs bağlantısı bu oturumda yok"
+ },
+ "voicePhaseGainDb": {
+  "Varış": 0.0,
+  "Derinleşme": -1.5,
+  "Derin": -3.0,
+  "Kapanış": 0.0,
+  "kapanisGecisi": "k.donus'tan önceki >= 4 sn'lik sessizlikte rampa, o anki evre düzeyinden 0 dB'e (basamak yok; pilot S3-02)",
+  "clarityMode": {
+   "Varış": 0.0,
+   "Derinleşme": -0.5,
+   "Derin": -1.0,
+   "Kapanış": 0.0,
+   "note": "pilot L2-10 (VARSAYIM)"
+  }
+ },
+ "music": {
+  "source": "müzik A = ElevenLabs Music (sahip 2026-09-30, madde 8) Varış ve Kapanış pad'i için; nefes bloklarının bordunu uygulamanın kendi hattı basar (PLAN.v2 §D.3: tempo ve döngü tam olmalı)",
+  "theme": "Re: tanpura benzeri bordun (Re + La, açık beşli; melodisiz) nefes bloklarında; Varış ve Kapanış'ta aynı tonda yumuşak pad (~60 BPM hissi istemde, ölçülür). 3, 5 ve 15 dk'da aynı tema (PLAN.v2 §A.1; PLAN.v3 §A.2 kural 11)",
+  "key": "Re (VARSAYIM; estetik karar)",
+  "bpmFeel": null,
+  "pulseNote": "ritimsiz pad; bordun döngüsü nefes döngüsüne eşit (C1/C2 10,000 sn, C3 13,000 sn) ve alışta hafif açılıp verişte kapanır (VARSAYIM; belirgin motif yok)",
+  "phases": [
+   "varis (pad)",
+   "cekirdek (bordun; C1–C3)",
+   "kapanis (pad)"
+  ],
+  "textureLayers": {
+   "bordun:10": "c1.izle: pad → bordun, >= 8 sn çapraz geçiş, konuşmanın altında",
+   "bordun:13": "c3.ad: aynı ton, döngü 13 sn",
+   "bordun-kısık": "c3.sessizlik: bordun Derin düzeyine iner",
+   "pad:kapanis": "k.donus: bordun çekilir, pad girer; dönüş tınısı 2 sn önce",
+   "rule": "3 dk'da iki doku geçişi (Varış → çekirdek, çekirdek → Kapanış; PLAN.v3 §A.2 kural 11); çapraz geçiş >= 8 sn; 20 sn'den kısa boşlukta doku değişimi yalnız bu iki sınırda"
+  },
+  "duckDefault": true,
+  "duckedBedLufs": {
+   "Varış": -33.0,
+   "Derinleşme": -34.5,
+   "Derin": -36.0,
+   "Kapanış": -33.0
+  },
+  "windowBedAboveDuckDb": 6.0,
+  "windows": "<= 15 dk'da yok",
+  "returnTone": "k.donus'tan 2 sn önce yumuşak dönüş tınısı (pilot P-S10; VARSAYIM)",
+  "endFadeSec": 5,
+  "nature": {
+   "default": "kapalı",
+   "note": "PLAN.v2 §A.2.1: doğa kapalı; 'Doğa' seçilirse ikinci aşamada motor en uygun türü çalar"
+  },
+  "clarityMode": {
+   "bedExtraDuckDb": -6.0,
+   "note": "pilot L2-10 (VARSAYIM)"
+  }
+ },
+ "visual": {
+  "form": "genişleyen halka",
+  "palette": {
+   "dark": "#8CCB9E",
+   "light": "#397E4C",
+   "note": "PLAN.v2 §E.2 (adaçayı yeşili)"
+  },
+  "phases": [
+   "varis",
+   "derinlesme",
+   "derin",
+   "kapanis(şafak)"
+  ],
+  "breathLock": "halka yalnız söylenen nefes ipuçlarına kilitlenir: 'Al…' ile cue.breath.in sn'de büyür, 'ver…' ile out sn'de küçülür; cue.breath.silent olan cümlede count döngü boyunca sessizce sürer; ipucu yoksa halka nefes almaz, yalnız >= 20 sn periyotlu ışık kayması (PLAN.v2 §E.2)",
+  "pulse": {
+   "respectFlashSafe": true,
+   "whenFlashSafeFalse": "ölçeklenme yok, yalnız çok yavaş opaklık"
+  },
+  "dawn": {
+   "startRule": "max(k.donus.start, end - 90)",
+   "spanSec": [
+    60,
+    90
+   ],
+   "spanSecBelow240": [
+    45,
+    90
+   ],
+   "minRampSec": 60,
+   "minRampSecBelow240": 45,
+   "dawnMaxLuminance": "bağıl %15 (PLAN.v2 §E.2 tavanı; VARSAYIM)",
+   "note": "3 dk'da şafak 45 sn (PLAN.v3 karar 4d)"
+  }
+ },
+ "qa": {
+  "speechOverBedDbMin": 15.0,
+  "speechOverBedDbMinClarity": 21.0,
+  "speechOverBedNote": "her konuşma parçası, 1 sn'den kısalar dahil (SPEC v3.4)",
+  "microClipLevel": "SPEC v3.3: >= 0,4 sn parça −18 LUFS kapılı; tek heceli mikro parçada ek ofset 0 dB",
+  "carrierJoinF0StepSemitones": 2.0,
+  "breathLockToleranceSec": 0.02,
+  "breathLockNote": "karışımda 'Al…' başlangıçları arası periyot ±20 ms (bordun ve halka buna kilitli; VARSAYIM)",
+  "derinClipRateCeil": 5.0,
+  "sentenceGapNote": "Derin evrede hiçbir cümle sınırında 1,0 sn'den kısa sessizlik yok (pilot L3-02)",
+  "piecePosition": "SPEC v3.5–v3.6: her parça ±50 ms içinde, 4 kHz altı ilinti >= 0,95, kayma <= 1 ms"
+ },
+ "evidenceLine": "Neye dayanıyor: yavaş nefesle ilgili 223 çalışmayı birleştiren bir incelemede kalp atışı değişkenliği seans sırasında ve hemen sonrasında arttı; kısa alış ve uzun verişle yapılan nefes, tersine göre daha çok gevşeme bildirimiyle ilişkiliydi. Bu ders bir sonuç vaadi taşımaz.",
+ "evidenceByVersion": {
+  "3": "Üç dakikalık sürümün etkisini doğrudan sınayan bir çalışma bulamadık. Bir çalışmada meditasyon uygulamasını kullananların çoğu günde beş dakikanın altında kaldı; bu sürüm o gerçek kullanım için var.",
+  "5": null,
+  "15": null,
+  "note": "PLAN.v3 §A.2 kural 12: 3 dk kartında etki cümlesi yok; yalnız Radin 2025'in kullanım bulgusu ve bu cümle"
+ },
+ "sourcesCard": {
+  "rows": [
+   {
+    "pmid": "35623448",
+    "cite": "Laborde 2022 · yavaş nefes ve kalp atışı değişkenliği (223 çalışma)",
+    "detail": "Laborde 2022 (SD/MA, 223 çalışma; seans sırasında, tek seanstan hemen sonra ve çok seanslı programdan sonra vagal aracılı KAD arttı; tempo özette verilmiyor)",
+    "doi": "10.1016/j.neubiorev.2022.104711",
+    "file": "sakin"
+   },
+   {
+    "pmid": "25156003",
+    "cite": "Van Diest 2014 · kısa alış, uzun veriş",
+    "detail": "Van Diest 2014 (n=30; alış/veriş oranı 0,42 ile 2,33 karşılaştırıldı; kısa alış/uzun veriş daha çok gevşeme bildirimiyle ilişkili; yüksek frekanslı KAD artışı yalnız yavaş + uzun verişte)",
+    "doi": "10.1007/s10484-014-9253-x",
+    "file": "sakin"
+   },
+   {
+    "pmid": "11751348",
+    "cite": "Bernardi 2001 · dakikada altı soluk ritmi",
+    "detail": "Bernardi 2001 (n=23; dakikada 6 kez okunan ritmik dualar ve mantralarda kardiyovasküler ritimler eşzamanlı güçlendi)",
+    "doi": "10.1136/bmj.323.7327.1446",
+    "file": "sakin"
+   },
+   {
+    "pmid": "36630953",
+    "cite": "Balban 2023 · günde 5 dakika iç çekiş",
+    "detail": "Balban 2023 (uzaktan RKÇ, n=108, 1 ay, günde 5 dk; döngüsel iç çekmede olumlu duygulanımda ve uyku sırasındaki solunum hızında meditasyondan fazla değişim; olumsuz duygulanım ve durumluk kaygıda gruplar arası fark yok; keşif amaçlı; tam metin)",
+    "doi": "10.1016/j.xcrm.2022.100895",
+    "file": "sakin, benlik"
+   },
+   {
+    "pmid": "38204770",
+    "cite": "Trivedi 2023 · vızıltılı nefeste döngü uzunluğu",
+    "detail": "Trivedi 2023 (kişi-içi çapraz, n=118; 8–14 sn döngüler; en yüksek KAD 12–14 sn döngüde)",
+    "doi": "10.4103/ijoy.ijoy_113_23",
+    "file": "sakin"
+   },
+   {
+    "pmid": "34306146",
+    "cite": "Toussaint 2021 · \"derin nefes\" talimatı ve uyarılma",
+    "detail": "Toussaint 2021 (RKÇ, n=60; derin nefes grubunda fizyolojik uyarılma önce arttı, sonra başlangıca döndü) → ders önce doğal nefesle başlar, 'derin nefes al' demez",
+    "doi": "10.1155/2021/5924040",
+    "file": "sakin, güvenlik"
+   },
+   {
+    "pmid": "37813123",
+    "cite": "Rana 2023 · hızlı soluma ve nöbet (neden hızlı nefes yok)",
+    "detail": "Rana 2023 (derleme; hiperventilasyon jeneralize epilepside hastaların %50'sine kadarında klinik nöbet tetikleyebilir) → derste hızlı ya da zorlu nefes yok",
+    "doi": "10.1055/s-0043-1774808",
+    "file": "güvenlik"
+   },
+   {
+    "pmid": "39690521",
+    "cite": "Luu 2024 · hazırlık, yerleşme ve dışa dönüş",
+    "detail": "Luu 2024 (travma-duyarlı YN'nin 10 bileşeni; uygun uzunluk ve hazırlık, yeterli yerleşme ve dışa dönüş; kavramsal)",
+    "doi": "10.17761/2024-D-24-00021",
+    "file": "sakin, güvenlik"
+   },
+   {
+    "pmid": "28300508",
+    "cite": "Howard 2017 · dönüşün önemi",
+    "detail": "Howard 2017 (klinik yorum ve 3 vaka; uyandırma başarısızlığı istenmeyen etkilerde önemli)",
+    "doi": "10.1080/00029157.2016.1203281",
+    "file": "güvenlik"
+   },
+   {
+    "pmid": "24146758",
+    "cite": "Cramer 2013 · yoganın yan etkileri",
+    "detail": "Cramer 2013 (vaka raporları; zorlu nefes en sık anılanlardan) → her harekette 'ağrı ya da baş dönmesi olursa bırak'",
+    "doi": "10.1371/journal.pone.0075515",
+    "file": "güvenlik"
+   },
+   {
+    "pmid": "39808431",
+    "cite": "Radin 2025 · gerçek kullanım kısa (3 dk kartı)",
+    "detail": "Radin 2025 (RKÇ, n=1458; tam metin: meditasyona özgü kullanım ortalama 3,36 dk/gün, kullanıcıların %69,7'si günde 5 dk'nın altında)",
+    "doi": "10.1001/jamanetworkopen.2024.54435",
+    "file": "benlik"
+   }
+  ],
+  "note": "cite kartta gösterilir; detail yalnız ders1.script.md için. Hepsi *.dogrulanmis.md dosyalarından",
+  "footer": "Kaynak: PubMed (National Library of Medicine). DOI'ler https://doi.org/ önekiyle açılır."
+ },
+ "progress": {
+  "domain": "calm",
+  "effectKey": "nefes-ritmi",
+  "measure": "gerginlik",
+  "question": "Şu an ne kadar gerginsin?",
+  "scale": [
+   1,
+   10
+  ],
+  "better": "down",
+  "when": "önce ve sonra; ikisi de atlanabilir",
+  "note": "önce → sonra bir 'nasıl hissettin' gidişatıdır, etki kanıtı değildir (güvenlik §11.F); PLAN.v2 Ders 1 kartı"
+ },
+ "afterCheck": {
+  "question": "Ders sırasında zorlandın mı?",
+  "options": [
+   "Hayır",
+   "Biraz",
+   "Çok"
+  ],
+  "skippable": true,
+  "onCok": "Bu olabiliyor ve durman doğruydu. Bir dahaki sefere daha kısa ya da gözleri açık bir sürüm deneyebilirsin. Sık tekrarlarsa ya da geçmezse bir uzmanla konuşmak iyi olur. Acil durumda 112.",
+  "storage": "veri telefonda kalır; puan olarak gösterilmez (pilot ders2 ile aynı)"
+ },
+ "panelChecks": [
+  "D1-01: sayılı döngüde 1 sn arayla gelen 'iki… üç…' öğeleri Derinleşme düzeyinde (−1,5 dB) net ve doğal mı; kesilmiş mikro parçalar kopuk duyuluyor mu?",
+  "D1-02: 'Al…' ve 'ver…' ipuçları makine gibi mi duyuluyor? Her döngünün kendi çekimi var; yine de tekdüzeyse kulak listesine",
+  "D1-03: veriş cümleleri ('Altı uzun gelirse beş de olur.' vb.) verişin içinde bitiyor mu; sonraki 'Al…'dan önce en az 0,6 sn boşluk kalıyor mu (karışımda ölçülür)",
+  "D1-04: bordun döngüsü (10,000 / 13,000 sn), halka ve 'Al…' başlangıçları cihazda aynı anda mı (kilitli ekran dahil)",
+  "D1-05: 'Sıradaki nefes sende; ben susuyorum.' ve ardından gelen ≈ 11 sn'lik sessiz döngü doğal mı, dinleyici ritmi sürdürebiliyor mu",
+  "D1-06: 'bramari' söyleyişi (Türkçe yazım, PLAN.v2 §C.7) ve 'vızıltıyla ver…' vurgusu",
+  "D1-07: vurgu ve eşyazımlılar insan kulağıyla: 'Yüzün' (surat), 'Al…' (fiil), 'dört… beş… altı…' sayılar"
+ ],
+ "carriers": [
+  {
+   "id": "car.say1",
+   "text": "Al… iki… üç… dört… ver… iki… üç… dört… beş… altı…",
+   "lead": "",
+   "items": [
+    "c1.s1.01",
+    "c1.s1.02",
+    "c1.s1.03",
+    "c1.s1.04",
+    "c1.s1.05",
+    "c1.s1.06",
+    "c1.s1.07",
+    "c1.s1.08",
+    "c1.s1.09",
+    "c1.s1.10"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "sayılı döngü; öğeler başlangıçtan başlangıca 1,0 sn (gapFloor 0,3)",
+   "syllables": 13,
+   "voice": {
+    "hoc": {
+     "file": "yoga-uretim/ders1/hoc/car.say1.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.say2",
+   "text": "Al… iki… üç… dört… ver… iki… üç… dört… beş… altı…",
+   "lead": "",
+   "items": [
+    "c1.s2.01",
+    "c1.s2.02",
+    "c1.s2.03",
+    "c1.s2.04",
+    "c1.s2.05",
+    "c1.s2.06",
+    "c1.s2.07",
+    "c1.s2.08",
+    "c1.s2.09",
+    "c1.s2.10"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "sayılı döngü; öğeler başlangıçtan başlangıca 1,0 sn (gapFloor 0,3)",
+   "syllables": 13,
+   "voice": {
+    "hoc": {
+     "file": "yoga-uretim/ders1/hoc/car.say2.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.c1a",
+   "text": "Al… ver… al… ver… al… ver… al… ver…",
+   "lead": "",
+   "items": [
+    "c1.d1.al",
+    "c1.d1.ver",
+    "c1.d2.al",
+    "c1.d2.ver",
+    "c1.d3.al",
+    "c1.d3.ver",
+    "c1.d4.al",
+    "c1.d4.ver"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "nefes ipuçları; her öğe kendi döngüsünün sınırına oturur",
+   "syllables": 8,
+   "voice": {
+    "hoc": {
+     "file": "yoga-uretim/ders1/hoc/car.c1a.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.c1b",
+   "text": "Al… ver… al… ver… al… ver… al… ver…",
+   "lead": "",
+   "items": [
+    "c1.d5.al",
+    "c1.d5.ver",
+    "c1.d6.al",
+    "c1.d6.ver",
+    "c1.d7.al",
+    "c1.d7.ver",
+    "c1.d8.al",
+    "c1.d8.ver"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "nefes ipuçları; her öğe kendi döngüsünün sınırına oturur",
+   "syllables": 8,
+   "voice": {
+    "hoc": {
+     "file": "yoga-uretim/ders1/hoc/car.c1b.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.c1c",
+   "text": "Al… ver… al… ver… al… al… al… al… al…",
+   "lead": "",
+   "items": [
+    "c1.d9.al",
+    "c1.d9.ver",
+    "c1.d10.al",
+    "c1.d10.ver",
+    "c1.d11.al",
+    "c1.d12.al",
+    "c1.d13.al",
+    "c1.d14.al",
+    "c1.d15.al"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "nefes ipuçları; her öğe kendi döngüsünün sınırına oturur",
+   "syllables": 9,
+   "voice": {
+    "hoc": {
+     "file": "yoga-uretim/ders1/hoc/car.c1c.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.c1d",
+   "text": "Al…",
+   "lead": "",
+   "items": [
+    "c1.d16.al"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "nefes ipuçları; her öğe kendi döngüsünün sınırına oturur",
+   "syllables": 1,
+   "voice": {
+    "hoc": {
+     "file": "yoga-uretim/ders1/hoc/car.c1d.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.c2a",
+   "text": "Al… biraz daha… ağzından ver… al… biraz daha… ver… al… biraz daha… ver…",
+   "lead": "",
+   "items": [
+    "c2.d1.al",
+    "c2.d1.ek",
+    "c2.d1.ver",
+    "c2.d2.al",
+    "c2.d2.ek",
+    "c2.d2.ver",
+    "c2.d3.al",
+    "c2.d3.ek",
+    "c2.d3.ver"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "nefes ipuçları; her öğe kendi döngüsünün sınırına oturur",
+   "syllables": 21,
+   "voice": {
+    "hoc": {
+     "file": "yoga-uretim/ders1/hoc/car.c2a.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.c2b",
+   "text": "Al… biraz daha… ver… al… biraz daha… ver… al… biraz daha… ver…",
+   "lead": "",
+   "items": [
+    "c2.d4.al",
+    "c2.d4.ek",
+    "c2.d4.ver",
+    "c2.d5.al",
+    "c2.d5.ek",
+    "c2.d5.ver",
+    "c2.d6.al",
+    "c2.d6.ek",
+    "c2.d6.ver"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "nefes ipuçları; her öğe kendi döngüsünün sınırına oturur",
+   "syllables": 18,
+   "voice": {
+    "hoc": {
+     "file": "yoga-uretim/ders1/hoc/car.c2b.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.c2c",
+   "text": "Al… al… al…",
+   "lead": "",
+   "items": [
+    "c2.d7.al",
+    "c2.d8.al",
+    "c2.d9.al"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "nefes ipuçları; her öğe kendi döngüsünün sınırına oturur",
+   "syllables": 3,
+   "voice": {
+    "hoc": {
+     "file": "yoga-uretim/ders1/hoc/car.c2c.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.c3a",
+   "text": "Al… vızıltıyla ver… al… vızıltıyla ver… al… ver… al… al… al…",
+   "lead": "",
+   "items": [
+    "c3.d1.al",
+    "c3.d1.ver",
+    "c3.d2.al",
+    "c3.d2.ver",
+    "c3.d3.al",
+    "c3.d3.ver",
+    "c3.d4.al",
+    "c3.d5.al",
+    "c3.d6.al"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "nefes ipuçları; her öğe kendi döngüsünün sınırına oturur",
+   "syllables": 17,
+   "voice": {
+    "hoc": {
+     "file": "yoga-uretim/ders1/hoc/car.c3a.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.c3b",
+   "text": "Al… al… al…",
+   "lead": "",
+   "items": [
+    "c3.d7.al",
+    "c3.d8.al",
+    "c3.d9.al"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "nefes ipuçları; her öğe kendi döngüsünün sınırına oturur",
+   "syllables": 3,
+   "voice": {
+    "hoc": {
+     "file": "yoga-uretim/ders1/hoc/car.c3b.wav",
+     "sec": null
+    }
+   }
+  }
+ ],
+ "blocks": [
+  {
+   "id": "A",
+   "kind": "arrival",
+   "priority": 0,
+   "playOrder": 0,
+   "title": "Varış (tek kapak; isteğe bağlılar süreyle eklenir)",
+   "clips": [
+    {
+     "id": "a.durus",
+     "text": "Bir sandalyede ya da yerde, sırtını germeden dik tutarak oturman yeterli.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 4.0,
+      "max": 8.0
+     },
+     "phase": "Varış",
+     "cue": {
+      "visual": "phase:varis",
+      "music": "phase:varis (pad, ElevenLabs Music)"
+     },
+     "tags": {
+      "texture": "varis",
+      "action": "dik ve rahat oturmak"
+     },
+     "short": {
+      "belowSec": 240,
+      "text": "Sırtını germeden dik oturman yeterli; gözlerini kapatmak ya da açık tutmak sana kalmış.",
+      "gapAfter": {
+       "min": 2.5,
+       "pref": 3.0,
+       "max": 4.0
+      },
+      "note": "3 dk: duruş ve gözler tek klipte (PLAN.v3 §A.2, sure.md §3.1)",
+      "syllables": 30,
+      "words": 13,
+      "sentences": 1,
+      "voice": {
+       "hoc": {
+        "file": "public/yoga/ders1/hoc/a.durus.k240.m4a",
+        "sec": null
+       }
+      }
+     },
+     "syllables": 25,
+     "words": 11,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/a.durus.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.eller",
+     "text": "Ellerin dizlerinde ya da kucağında dinleniyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 4.0,
+      "max": 8.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "action": "elleri bırakmak"
+     },
+     "fillRank": 260,
+     "syllables": 17,
+     "words": 6,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/a.eller.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.gozler",
+     "text": "Gözlerini kapatmak ya da açık tutmak sana kalmış; açıksa bakışın yumuşakça yere insin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 8.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "eyesOpen": true,
+      "eyes": "baskı yok; açıksa bakış yere iner",
+      "action": "gözleri kapatmak ya da bakışı indirmek"
+     },
+     "minTarget": 240,
+     "syllables": 31,
+     "words": 13,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/a.gozler.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.izin",
+     "text": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 4.0,
+      "max": 8.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "safety": "opening",
+      "eyesOpen": true,
+      "repeatOk": [
+       "gözle"
+      ]
+     },
+     "syllables": 29,
+     "words": 9,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/a.izin.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.acilis",
+     "text": "Bütün gün seninle olan nefesine şimdi kulak veriyorsun.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 6.0,
+      "max": 10.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "uniqueOpening": true,
+      "note": "PLAN.v2 §A.2.1 yönü (\"…şimdi yalnızca dinleyebilirsin\") \"-(y)abil-\"siz yazıldı: a.izin hemen önünde üç \"-(y)abil-\" taşır (PLAN.v3 §A.2 kural 6); her sürümde aynı metin"
+     },
+     "syllables": 20,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/a.acilis.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.omuz",
+     "text": "Omuzların gevşek dursun, çenen rahat kalsın.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 5.0,
+      "max": 9.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "action": "omuzları ve çeneyi bırakmak"
+     },
+     "fillRank": 250,
+     "syllables": 14,
+     "words": 6,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/a.omuz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.kolay",
+     "text": "Nefesine dikkat etmek ilk başta tuhaf gelirse bu da olur.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 5.0,
+      "max": 9.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "normalize": true,
+      "safety": "normalize"
+     },
+     "fillRank": 270,
+     "syllables": 20,
+     "words": 10,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/a.kolay.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.karar",
+     "text": "Verişini ne kadar uzatacağına her an sen karar veriyorsun.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 5.0,
+      "max": 9.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "safety": "control"
+     },
+     "fillRank": 355,
+     "syllables": 22,
+     "words": 9,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/a.karar.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 39.5,
+   "maxSec": 111.3,
+   "prefSec": {
+    "3": 32.4,
+    "5": 44.1,
+    "15": 79.6
+   },
+   "estimateBasis": "Nefona Hoca köşesi: 4,68 hece/sn + yüksek duraklama profili, cümle arası sessizlikler dahil (VARSAYIM); minSec = zorunlu klipler (5 dk ve üstü biçim) en kısa sessizlikle; prefSec = planlayıcının 3/5/15 dk planındaki blok süresi; üretimden sonra voice.hoc.sec ile"
+  },
+  {
+   "id": "C1",
+   "kind": "core",
+   "priority": 1,
+   "playOrder": 1,
+   "title": "Doğal nefes → uzun veriş (4 al / 6 ver, tutma yok)",
+   "clips": [
+    {
+     "id": "c1.izle",
+     "text": "Birkaç nefes boyunca hiçbir şeyi değiştirmeden izlemen yeterli.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 13.0,
+      "pref": 16.0,
+      "max": 20.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "phase:derinlesme",
+      "music": "bordun:varis-pad→bordun, >= 8 sn çapraz geçiş"
+     },
+     "tags": {
+      "texture": "dogal-nefes",
+      "breathRoom": true,
+      "safety": "observe-first",
+      "repeatOk": [
+       "nefes"
+      ],
+      "note": "nefes payı (PLAN.v3 §A.2 kural 3); önce doğal nefes (güvenlik §11.B-6)"
+     },
+     "short": {
+      "belowSec": 240,
+      "text": "Birkaç nefes boyunca hiçbir şeyi değiştirmeden izlemen yeterli.",
+      "gapAfter": {
+       "min": 12.0,
+       "pref": 13.0,
+       "max": 16.0
+      },
+      "note": "3 dk: aynı metin, nefes payı 12–16 sn",
+      "syllables": 22,
+      "words": 8,
+      "sentences": 1,
+      "voice": {
+       "hoc": {
+        "file": "public/yoga/ders1/hoc/c1.izle.k240.m4a",
+        "sec": null
+       }
+      }
+     },
+     "syllables": 22,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.izle.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.ses",
+     "text": "Burnundan giren ve çıkan havanın hafif bir sesi var.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 8.0,
+      "max": 12.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "dogal-nefes",
+      "arc": 1,
+      "sense": "işitme"
+     },
+     "fillRank": 120,
+     "syllables": 17,
+     "words": 9,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.ses.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.uzunluk",
+     "text": "Alış mı daha uzun, veriş mi? Fark etmen yeter; bir şey yapman gerekmiyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "dogal-nefes"
+     },
+     "fillRank": 140,
+     "syllables": 23,
+     "words": 13,
+     "sentences": 2,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "yoga-uretim/ders1/hoc/c1.uzunluk.wav",
+       "sec": null,
+       "note": "birim arşivi (tek TTS isteği); uygulama subclips dosyalarını çalar"
+      }
+     },
+     "subclips": [
+      {
+       "index": 1,
+       "text": "Alış mı daha uzun, veriş mi?",
+       "syllables": 10,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders1/hoc/c1.uzunluk.1.m4a",
+         "sec": null
+        }
+       }
+      },
+      {
+       "index": 2,
+       "text": "Fark etmen yeter; bir şey yapman gerekmiyor.",
+       "syllables": 13,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders1/hoc/c1.uzunluk.2.m4a",
+         "sec": null
+        }
+       }
+      }
+     ],
+     "ttsUnit": {
+      "text": "Alış mı daha uzun, veriş mi? Fark etmen yeter; bir şey yapman gerekmiyor.",
+      "cut": "cümle sonlarından; parça sayısı tutmazsa insan kararı"
+     }
+    },
+    {
+     "id": "c1.guven",
+     "text": "Başın döner ya da ellerin karıncalanırsa normal nefesine dön.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 3.0,
+      "max": 7.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "dogal-nefes",
+      "mood": "safety",
+      "safety": "breath",
+      "note": "PLAN.v2 Ders 1 kartı; \"karıncalanırsa\"nın öznesi eklendi (ellerin)"
+     },
+     "syllables": 22,
+     "words": 9,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.guven.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.burun",
+     "text": "Burnun açıksa alış da veriş de oradan olsun.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 3.0,
+      "max": 7.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "dogal-nefes",
+      "action": "burundan nefes",
+      "repeatOk": [
+       "alış",
+       "veriş"
+      ]
+     },
+     "fillRank": 170,
+     "syllables": 16,
+     "words": 8,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.burun.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.ritim",
+     "text": "Sıradaki nefeslerde alış dört sayı, veriş altı sayı sürecek. Arada nefesi tutmak yok.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 4.0,
+      "max": 8.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "dogal-nefes",
+      "safety": "no-hold",
+      "repeatOk": [
+       "nefes",
+       "altı"
+      ],
+      "explain": true
+     },
+     "short": {
+      "belowSec": 240,
+      "text": "Alış dört, veriş altı sayı sürecek; arada tutmak yok.",
+      "gapAfter": {
+       "min": 2.5,
+       "pref": 3.0,
+       "max": 5.0
+      },
+      "note": "3 dk: aynı yönerge tek cümlede",
+      "syllables": 18,
+      "words": 9,
+      "sentences": 1,
+      "voice": {
+       "hoc": {
+        "file": "public/yoga/ders1/hoc/c1.ritim.k240.m4a",
+        "sec": null
+       }
+      }
+     },
+     "syllables": 31,
+     "words": 13,
+     "sentences": 2,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "yoga-uretim/ders1/hoc/c1.ritim.wav",
+       "sec": null,
+       "note": "birim arşivi (tek TTS isteği); uygulama subclips dosyalarını çalar"
+      }
+     },
+     "subclips": [
+      {
+       "index": 1,
+       "text": "Sıradaki nefeslerde alış dört sayı, veriş altı sayı sürecek.",
+       "syllables": 22,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders1/hoc/c1.ritim.1.m4a",
+         "sec": null
+        }
+       }
+      },
+      {
+       "index": 2,
+       "text": "Arada nefesi tutmak yok.",
+       "syllables": 9,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders1/hoc/c1.ritim.2.m4a",
+         "sec": null
+        }
+       }
+      }
+     ],
+     "ttsUnit": {
+      "text": "Sıradaki nefeslerde alış dört sayı, veriş altı sayı sürecek. Arada nefesi tutmak yok.",
+      "cut": "cümle sonlarından; parça sayısı tutmazsa insan kararı"
+     }
+    },
+    {
+     "id": "c1.s1.01",
+     "text": "Al…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s",
+      "music": "bordun:sync"
+     },
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s1",
+      "role": "al"
+     },
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say1",
+      "index": 0
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s1.01.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s1.02",
+     "text": "iki…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s1",
+      "role": "say"
+     },
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say1",
+      "index": 1
+     },
+     "gapFromPeriod": true,
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s1.02.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s1.03",
+     "text": "üç…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s1",
+      "role": "say"
+     },
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say1",
+      "index": 2
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s1.03.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s1.04",
+     "text": "dört…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s1",
+      "role": "say"
+     },
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say1",
+      "index": 3
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s1.04.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s1.05",
+     "text": "ver…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s1",
+      "role": "ver"
+     },
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say1",
+      "index": 4
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s1.05.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s1.06",
+     "text": "iki…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s1",
+      "role": "say"
+     },
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say1",
+      "index": 5
+     },
+     "gapFromPeriod": true,
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s1.06.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s1.07",
+     "text": "üç…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s1",
+      "role": "say"
+     },
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say1",
+      "index": 6
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s1.07.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s1.08",
+     "text": "dört…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s1",
+      "role": "say"
+     },
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say1",
+      "index": 7
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s1.08.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s1.09",
+     "text": "beş…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s1",
+      "role": "say"
+     },
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say1",
+      "index": 8
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s1.09.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s1.10",
+     "text": "altı…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s1",
+      "role": "say"
+     },
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say1",
+      "index": 9
+     },
+     "gapFromPeriod": true,
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s1.10.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s2.01",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s",
+      "music": "bordun:sync"
+     },
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s2",
+      "role": "al"
+     },
+     "fillRank": 110,
+     "fillGroup": "c1.s2",
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say2",
+      "index": 0
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s2.01.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s2.02",
+     "text": "iki…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s2",
+      "role": "say"
+     },
+     "fillRank": 110,
+     "fillGroup": "c1.s2",
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say2",
+      "index": 1
+     },
+     "gapFromPeriod": true,
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s2.02.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s2.03",
+     "text": "üç…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s2",
+      "role": "say"
+     },
+     "fillRank": 110,
+     "fillGroup": "c1.s2",
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say2",
+      "index": 2
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s2.03.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s2.04",
+     "text": "dört…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s2",
+      "role": "say"
+     },
+     "fillRank": 110,
+     "fillGroup": "c1.s2",
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say2",
+      "index": 3
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s2.04.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s2.05",
+     "text": "ver…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s2",
+      "role": "ver"
+     },
+     "fillRank": 110,
+     "fillGroup": "c1.s2",
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say2",
+      "index": 4
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s2.05.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s2.06",
+     "text": "iki…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s2",
+      "role": "say"
+     },
+     "fillRank": 110,
+     "fillGroup": "c1.s2",
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say2",
+      "index": 5
+     },
+     "gapFromPeriod": true,
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s2.06.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s2.07",
+     "text": "üç…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s2",
+      "role": "say"
+     },
+     "fillRank": 110,
+     "fillGroup": "c1.s2",
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say2",
+      "index": 6
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s2.07.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s2.08",
+     "text": "dört…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s2",
+      "role": "say"
+     },
+     "fillRank": 110,
+     "fillGroup": "c1.s2",
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say2",
+      "index": 7
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s2.08.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s2.09",
+     "text": "beş…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s2",
+      "role": "say"
+     },
+     "fillRank": 110,
+     "fillGroup": "c1.s2",
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say2",
+      "index": 8
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s2.09.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s2.10",
+     "text": "altı…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "micro": "count",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.s2",
+      "role": "say"
+     },
+     "fillRank": 110,
+     "fillGroup": "c1.s2",
+     "onsetPeriod": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 1.0
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.say2",
+      "index": 9
+     },
+     "gapFromPeriod": true,
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.s2.10.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d1.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d1",
+      "role": "al",
+      "fade": false
+     },
+     "fillRank": 101,
+     "fillGroup": "c1.d1",
+     "onsetPeriod": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1a",
+      "index": 0
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d1.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d1.ver",
+     "text": "ver…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d1",
+      "role": "ver"
+     },
+     "fillRank": 101,
+     "fillGroup": "c1.d1",
+     "onsetPeriod": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c1a",
+      "index": 1
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d1.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d2.al",
+     "text": "Al…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d2",
+      "role": "al",
+      "fade": false
+     },
+     "onsetPeriod": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1a",
+      "index": 2
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d2.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d2.ver",
+     "text": "ver…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d2",
+      "role": "ver"
+     },
+     "onsetPeriod": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c1a",
+      "index": 3
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d2.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d2.s",
+     "text": "Altı uzun gelirse beş de olur.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.8,
+      "pref": 4.8,
+      "max": 4.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "nefes-ipucu",
+      "breathLock": true,
+      "cycle": "c1.d2",
+      "role": "veriş-cümlesi",
+      "normalize": true,
+      "safety": "no-force"
+     },
+     "onsetPeriod": {
+      "min": 4.8,
+      "pref": 4.8,
+      "max": 4.8
+     },
+     "gapFloor": 0.6,
+     "gapFromPeriod": true,
+     "syllables": 11,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d2.s.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d3.al",
+     "text": "Al…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d3",
+      "role": "al",
+      "fade": false
+     },
+     "onsetPeriod": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1a",
+      "index": 4
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d3.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d3.ver",
+     "text": "ver…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d3",
+      "role": "ver"
+     },
+     "onsetPeriod": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c1a",
+      "index": 5
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d3.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d3.s",
+     "text": "Sayıyı kaçırırsan yeniden başlamak yeter.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.8,
+      "pref": 4.8,
+      "max": 4.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "nefes-ipucu",
+      "breathLock": true,
+      "cycle": "c1.d3",
+      "role": "veriş-cümlesi",
+      "normalize": true,
+      "safety": "normalize"
+     },
+     "onsetPeriod": {
+      "min": 4.8,
+      "pref": 4.8,
+      "max": 4.8
+     },
+     "gapFloor": 0.6,
+     "gapFromPeriod": true,
+     "syllables": 15,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d3.s.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d4.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d4",
+      "role": "al",
+      "fade": false
+     },
+     "fillRank": 150,
+     "fillGroup": "c1.d4",
+     "onsetPeriod": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1a",
+      "index": 6
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d4.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d4.ver",
+     "text": "ver…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d4",
+      "role": "ver"
+     },
+     "fillRank": 150,
+     "fillGroup": "c1.d4",
+     "onsetPeriod": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c1a",
+      "index": 7
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d4.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d4.s",
+     "text": "Omuzların aşağı insin.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.8,
+      "pref": 4.8,
+      "max": 4.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "nefes-ipucu",
+      "breathLock": true,
+      "cycle": "c1.d4",
+      "role": "veriş-cümlesi",
+      "action": "omuzlar verişle iner"
+     },
+     "fillRank": 150,
+     "fillGroup": "c1.d4",
+     "onsetPeriod": {
+      "min": 4.8,
+      "pref": 4.8,
+      "max": 4.8
+     },
+     "gapFloor": 0.6,
+     "gapFromPeriod": true,
+     "syllables": 9,
+     "words": 3,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d4.s.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d5.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d5",
+      "role": "al",
+      "fade": false
+     },
+     "fillRank": 160,
+     "fillGroup": "c1.d5",
+     "onsetPeriod": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1b",
+      "index": 0
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d5.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d5.ver",
+     "text": "ver…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d5",
+      "role": "ver"
+     },
+     "fillRank": 160,
+     "fillGroup": "c1.d5",
+     "onsetPeriod": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c1b",
+      "index": 1
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d5.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d6.al",
+     "text": "Al…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d6",
+      "role": "al",
+      "fade": false
+     },
+     "onsetPeriod": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1b",
+      "index": 2
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d6.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d6.ver",
+     "text": "ver…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d6",
+      "role": "ver"
+     },
+     "onsetPeriod": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c1b",
+      "index": 3
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d6.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d6.s",
+     "text": "Sıradaki nefes sende; ben susuyorum.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 14.8,
+      "pref": 14.8,
+      "max": 14.8
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1,
+       "silent": true
+      },
+      "visual": "ring: sessiz döngü, halka sürer"
+     },
+     "tags": {
+      "texture": "nefes-ipucu",
+      "breathLock": true,
+      "cycle": "c1.d6",
+      "role": "veriş-cümlesi",
+      "silentCycle": true
+     },
+     "onsetPeriod": {
+      "min": 14.8,
+      "pref": 14.8,
+      "max": 14.8
+     },
+     "gapFloor": 0.6,
+     "gapFromPeriod": true,
+     "syllables": 13,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d6.s.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d7.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d7",
+      "role": "al",
+      "fade": false
+     },
+     "fillRank": 190,
+     "fillGroup": "c1.d7",
+     "onsetPeriod": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1b",
+      "index": 4
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d7.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d7.ver",
+     "text": "ver…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d7",
+      "role": "ver"
+     },
+     "fillRank": 190,
+     "fillGroup": "c1.d7",
+     "onsetPeriod": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c1b",
+      "index": 5
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d7.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d8.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d8",
+      "role": "al",
+      "fade": false
+     },
+     "fillRank": 200,
+     "fillGroup": "c1.d8",
+     "onsetPeriod": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1b",
+      "index": 6
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d8.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d8.ver",
+     "text": "ver…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d8",
+      "role": "ver"
+     },
+     "fillRank": 200,
+     "fillGroup": "c1.d8",
+     "onsetPeriod": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c1b",
+      "index": 7
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d8.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d8.s",
+     "text": "Yüzün ve çenen de gevşek kalsın.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.8,
+      "pref": 4.8,
+      "max": 4.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "nefes-ipucu",
+      "breathLock": true,
+      "cycle": "c1.d8",
+      "role": "veriş-cümlesi",
+      "action": "yüz ve çene"
+     },
+     "fillRank": 200,
+     "fillGroup": "c1.d8",
+     "onsetPeriod": {
+      "min": 4.8,
+      "pref": 4.8,
+      "max": 4.8
+     },
+     "gapFloor": 0.6,
+     "gapFromPeriod": true,
+     "syllables": 10,
+     "words": 6,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d8.s.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d9.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d9",
+      "role": "al",
+      "fade": false
+     },
+     "fillRank": 210,
+     "fillGroup": "c1.d9",
+     "onsetPeriod": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1c",
+      "index": 0
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d9.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d9.ver",
+     "text": "ver…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d9",
+      "role": "ver"
+     },
+     "fillRank": 210,
+     "fillGroup": "c1.d9",
+     "onsetPeriod": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c1c",
+      "index": 1
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d9.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d9.s",
+     "text": "Verişin sesi alışınkinden uzun.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.8,
+      "pref": 4.8,
+      "max": 4.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "nefes-ipucu",
+      "breathLock": true,
+      "cycle": "c1.d9",
+      "role": "veriş-cümlesi",
+      "arc": 1,
+      "sense": "işitme"
+     },
+     "fillRank": 210,
+     "fillGroup": "c1.d9",
+     "onsetPeriod": {
+      "min": 4.8,
+      "pref": 4.8,
+      "max": 4.8
+     },
+     "gapFloor": 0.6,
+     "gapFromPeriod": true,
+     "syllables": 12,
+     "words": 4,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d9.s.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d10.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d10",
+      "role": "al",
+      "fade": false
+     },
+     "fillRank": 375,
+     "fillGroup": "c1.d10",
+     "onsetPeriod": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1c",
+      "index": 2
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d10.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d10.ver",
+     "text": "ver…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d10",
+      "role": "ver"
+     },
+     "fillRank": 375,
+     "fillGroup": "c1.d10",
+     "onsetPeriod": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c1c",
+      "index": 3
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d10.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d10.s",
+     "text": "Bu nefes de sende.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 14.8,
+      "pref": 14.8,
+      "max": 14.8
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1,
+       "silent": true
+      },
+      "visual": "ring: sessiz döngü, halka sürer"
+     },
+     "tags": {
+      "texture": "nefes-ipucu",
+      "breathLock": true,
+      "cycle": "c1.d10",
+      "role": "veriş-cümlesi",
+      "silentCycle": true
+     },
+     "fillRank": 375,
+     "fillGroup": "c1.d10",
+     "onsetPeriod": {
+      "min": 14.8,
+      "pref": 14.8,
+      "max": 14.8
+     },
+     "gapFloor": 0.6,
+     "gapFromPeriod": true,
+     "syllables": 6,
+     "words": 4,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d10.s.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d11.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s, out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d11",
+      "role": "al",
+      "fade": true
+     },
+     "fillRank": 380,
+     "fillGroup": "c1.d11",
+     "onsetPeriod": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1c",
+      "index": 4
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d11.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d12.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s, out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d12",
+      "role": "al",
+      "fade": true
+     },
+     "fillRank": 285,
+     "fillGroup": "c1.d12",
+     "onsetPeriod": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1c",
+      "index": 5
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d12.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d13.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s, out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d13",
+      "role": "al",
+      "fade": true
+     },
+     "fillRank": 290,
+     "fillGroup": "c1.d13",
+     "onsetPeriod": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1c",
+      "index": 6
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d13.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d14.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s, out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d14",
+      "role": "al",
+      "fade": true
+     },
+     "fillRank": 385,
+     "fillGroup": "c1.d14",
+     "onsetPeriod": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1c",
+      "index": 7
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d14.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d15.al",
+     "text": "Al…",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s, out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d15",
+      "role": "al",
+      "fade": true
+     },
+     "fillRank": 450,
+     "fillGroup": "c1.d15",
+     "onsetPeriod": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1c",
+      "index": 8
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d15.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.d16.al",
+     "text": "Al…",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 4s, out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c1.d16",
+      "role": "al",
+      "fade": true
+     },
+     "fillRank": 455,
+     "fillGroup": "c1.d16",
+     "onsetPeriod": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c1d",
+      "index": 0
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.d16.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.anahtar1",
+     "text": "Alış kendiliğinden gelir; verişi sen uzatırsın.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 6.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "key": 1,
+      "texture": "anahtar",
+      "coreEnd": true,
+      "repeatOk": [
+       "veriş"
+      ]
+     },
+     "syllables": 17,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c1.anahtar1.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 95.0,
+   "maxSec": 317.0,
+   "prefSec": {
+    "3": 95.6,
+    "5": 180.2,
+    "15": 288.7
+   },
+   "estimateBasis": "Nefona Hoca köşesi: 4,68 hece/sn + yüksek duraklama profili, cümle arası sessizlikler dahil (VARSAYIM); minSec = zorunlu klipler (5 dk ve üstü biçim) en kısa sessizlikle; prefSec = planlayıcının 3/5/15 dk planındaki blok süresi; üretimden sonra voice.hoc.sec ile"
+  },
+  {
+   "id": "C2",
+   "kind": "core",
+   "priority": 2,
+   "playOrder": 2,
+   "entryRank": 295,
+   "title": "İç çekiş: iki alış + ağızdan uzun veriş",
+   "clips": [
+    {
+     "id": "c2.ad",
+     "text": "Sırada iç çekiş var.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 4.0,
+      "max": 8.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "music": "bordun:10,000 (aynı ton; kısa çapraz geçiş)"
+     },
+     "tags": {
+      "texture": "ic-cekis",
+      "explain": true
+     },
+     "syllables": 7,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.ad.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.nasil",
+     "text": "Burnundan bir kez alıyorsun, ardından küçük bir alış ekliyorsun. Sonra nefesi ağzından, uzun ve yumuşak bir verişle bırakıyorsun.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 6.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "ic-cekis",
+      "action": "iki alış + ağızdan uzun veriş"
+     },
+     "syllables": 44,
+     "words": 18,
+     "sentences": 2,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "yoga-uretim/ders1/hoc/c2.nasil.wav",
+       "sec": null,
+       "note": "birim arşivi (tek TTS isteği); uygulama subclips dosyalarını çalar"
+      }
+     },
+     "subclips": [
+      {
+       "index": 1,
+       "text": "Burnundan bir kez alıyorsun, ardından küçük bir alış ekliyorsun.",
+       "syllables": 21,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders1/hoc/c2.nasil.1.m4a",
+         "sec": null
+        }
+       }
+      },
+      {
+       "index": 2,
+       "text": "Sonra nefesi ağzından, uzun ve yumuşak bir verişle bırakıyorsun.",
+       "syllables": 23,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders1/hoc/c2.nasil.2.m4a",
+         "sec": null
+        }
+       }
+      }
+     ],
+     "ttsUnit": {
+      "text": "Burnundan bir kez alıyorsun, ardından küçük bir alış ekliyorsun. Sonra nefesi ağzından, uzun ve yumuşak bir verişle bırakıyorsun.",
+      "cut": "cümle sonlarından; parça sayısı tutmazsa insan kararı"
+     }
+    },
+    {
+     "id": "c2.guven",
+     "text": "Alışlar zorlamadan olsun; başın dönerse doğal nefesine dön.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 4.0,
+      "max": 8.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "ic-cekis",
+      "mood": "safety",
+      "safety": "breath",
+      "repeatOk": [
+       "nefes"
+      ]
+     },
+     "syllables": 21,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.guven.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d1.al",
+     "text": "Al…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 2.5
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 2.5,
+       "topUp": 1.5,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 2.5s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d1",
+      "role": "al"
+     },
+     "onsetPeriod": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 2.5
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c2a",
+      "index": 0
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d1.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d1.ek",
+     "text": "biraz daha…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.5,
+      "pref": 1.5,
+      "max": 1.5
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:in +1.5s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d1",
+      "role": "ek-alış"
+     },
+     "onsetPeriod": {
+      "min": 1.5,
+      "pref": 1.5,
+      "max": 1.5
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.c2a",
+      "index": 1
+     },
+     "gapFromPeriod": true,
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d1.ek.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d1.ver",
+     "text": "ağzından ver…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d1",
+      "role": "ver"
+     },
+     "onsetPeriod": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c2a",
+      "index": 2
+     },
+     "gapFromPeriod": true,
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d1.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d2.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 2.5
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 2.5,
+       "topUp": 1.5,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 2.5s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d2",
+      "role": "al"
+     },
+     "fillRank": 302,
+     "fillGroup": "c2.d2",
+     "onsetPeriod": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 2.5
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c2a",
+      "index": 3
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d2.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d2.ek",
+     "text": "biraz daha…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.5,
+      "pref": 1.5,
+      "max": 1.5
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:in +1.5s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d2",
+      "role": "ek-alış"
+     },
+     "fillRank": 302,
+     "fillGroup": "c2.d2",
+     "onsetPeriod": {
+      "min": 1.5,
+      "pref": 1.5,
+      "max": 1.5
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.c2a",
+      "index": 4
+     },
+     "gapFromPeriod": true,
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d2.ek.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d2.ver",
+     "text": "ver…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d2",
+      "role": "ver"
+     },
+     "fillRank": 302,
+     "fillGroup": "c2.d2",
+     "onsetPeriod": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c2a",
+      "index": 5
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d2.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d3.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 2.5
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 2.5,
+       "topUp": 1.5,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 2.5s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d3",
+      "role": "al"
+     },
+     "fillRank": 305,
+     "fillGroup": "c2.d3",
+     "onsetPeriod": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 2.5
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c2a",
+      "index": 6
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d3.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d3.ek",
+     "text": "biraz daha…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.5,
+      "pref": 1.5,
+      "max": 1.5
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:in +1.5s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d3",
+      "role": "ek-alış"
+     },
+     "fillRank": 305,
+     "fillGroup": "c2.d3",
+     "onsetPeriod": {
+      "min": 1.5,
+      "pref": 1.5,
+      "max": 1.5
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.c2a",
+      "index": 7
+     },
+     "gapFromPeriod": true,
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d3.ek.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d3.ver",
+     "text": "ver…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d3",
+      "role": "ver"
+     },
+     "fillRank": 305,
+     "fillGroup": "c2.d3",
+     "onsetPeriod": {
+      "min": 1.2,
+      "pref": 1.2,
+      "max": 1.2
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c2a",
+      "index": 8
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d3.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d3.s",
+     "text": "Uzun, yumuşak bir ses çıkıyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.8,
+      "pref": 4.8,
+      "max": 4.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "nefes-ipucu",
+      "breathLock": true,
+      "cycle": "c2.d3",
+      "role": "veriş-cümlesi",
+      "arc": 1,
+      "sense": "işitme"
+     },
+     "fillRank": 305,
+     "fillGroup": "c2.d3",
+     "onsetPeriod": {
+      "min": 4.8,
+      "pref": 4.8,
+      "max": 4.8
+     },
+     "gapFloor": 0.6,
+     "gapFromPeriod": true,
+     "syllables": 10,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d3.s.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d4.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 2.5
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 2.5,
+       "topUp": 1.5,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 2.5s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d4",
+      "role": "al"
+     },
+     "fillRank": 306,
+     "fillGroup": "c2.d4",
+     "onsetPeriod": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 2.5
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c2b",
+      "index": 0
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d4.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d4.ek",
+     "text": "biraz daha…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.5,
+      "pref": 1.5,
+      "max": 1.5
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:in +1.5s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d4",
+      "role": "ek-alış"
+     },
+     "fillRank": 306,
+     "fillGroup": "c2.d4",
+     "onsetPeriod": {
+      "min": 1.5,
+      "pref": 1.5,
+      "max": 1.5
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.c2b",
+      "index": 1
+     },
+     "gapFromPeriod": true,
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d4.ek.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d4.ver",
+     "text": "ver…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d4",
+      "role": "ver"
+     },
+     "fillRank": 306,
+     "fillGroup": "c2.d4",
+     "onsetPeriod": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c2b",
+      "index": 2
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d4.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d5.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 2.5
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 2.5,
+       "topUp": 1.5,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 2.5s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d5",
+      "role": "al"
+     },
+     "fillRank": 315,
+     "fillGroup": "c2.d5",
+     "onsetPeriod": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 2.5
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c2b",
+      "index": 3
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d5.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d5.ek",
+     "text": "biraz daha…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.5,
+      "pref": 1.5,
+      "max": 1.5
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:in +1.5s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d5",
+      "role": "ek-alış"
+     },
+     "fillRank": 315,
+     "fillGroup": "c2.d5",
+     "onsetPeriod": {
+      "min": 1.5,
+      "pref": 1.5,
+      "max": 1.5
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.c2b",
+      "index": 4
+     },
+     "gapFromPeriod": true,
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d5.ek.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d5.ver",
+     "text": "ver…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d5",
+      "role": "ver"
+     },
+     "fillRank": 315,
+     "fillGroup": "c2.d5",
+     "onsetPeriod": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c2b",
+      "index": 5
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d5.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.dogal",
+     "text": "İç çekişi bırakıyorsun; birkaç nefes boyunca her şey kendi hâlinde.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 12.0,
+      "pref": 14.0,
+      "max": 18.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "ic-cekis",
+      "breathRoom": true,
+      "repeatOk": [
+       "nefes",
+       "çekiş"
+      ]
+     },
+     "syllables": 23,
+     "words": 10,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.dogal.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.sonra",
+     "text": "Her iç çekişin ardından kısa bir sessizlik kalıyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 8.0,
+      "max": 12.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "ic-cekis",
+      "arc": 3,
+      "sense": "işitme",
+      "repeatOk": [
+       "çekiş"
+      ]
+     },
+     "fillRank": 397,
+     "syllables": 17,
+     "words": 8,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.sonra.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.tur2",
+     "text": "İstersen bir tur daha iç çekişle devam edebilirsin.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 2.0,
+      "pref": 3.0,
+      "max": 7.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "ic-cekis",
+      "repeatOk": [
+       "çekiş"
+      ]
+     },
+     "fillRank": 340,
+     "fillGroup": "c2.tur2",
+     "syllables": 18,
+     "words": 8,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.tur2.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d6.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 2.5
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 2.5,
+       "topUp": 1.5,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 2.5s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d6",
+      "role": "al"
+     },
+     "fillRank": 340,
+     "fillGroup": "c2.tur2",
+     "onsetPeriod": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 2.5
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c2b",
+      "index": 6
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d6.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d6.ek",
+     "text": "biraz daha…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.5,
+      "pref": 1.5,
+      "max": 1.5
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:in +1.5s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d6",
+      "role": "ek-alış"
+     },
+     "fillRank": 340,
+     "fillGroup": "c2.tur2",
+     "onsetPeriod": {
+      "min": 1.5,
+      "pref": 1.5,
+      "max": 1.5
+     },
+     "gapFloor": 0.3,
+     "carrier": {
+      "id": "car.c2b",
+      "index": 7
+     },
+     "gapFromPeriod": true,
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d6.ek.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d6.ver",
+     "text": "ver…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d6",
+      "role": "ver"
+     },
+     "fillRank": 340,
+     "fillGroup": "c2.tur2",
+     "onsetPeriod": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 6.0
+     },
+     "gapFloor": 0.6,
+     "carrier": {
+      "id": "car.c2b",
+      "index": 8
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d6.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d7.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 2.5,
+       "topUp": 1.5,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 2.5s, +1.5s, out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d7",
+      "role": "al",
+      "fade": true
+     },
+     "fillRank": 340,
+     "fillGroup": "c2.tur2",
+     "onsetPeriod": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c2c",
+      "index": 0
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d7.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d8.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 2.5,
+       "topUp": 1.5,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 2.5s, +1.5s, out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d8",
+      "role": "al",
+      "fade": true
+     },
+     "fillRank": 370,
+     "fillGroup": "c2.d8",
+     "onsetPeriod": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c2c",
+      "index": 1
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d8.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.d9.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 2.5,
+       "topUp": 1.5,
+       "out": 6,
+       "count": 1
+      },
+      "visual": "ring:in 2.5s, +1.5s, out 6s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c2.d9",
+      "role": "al",
+      "fade": true
+     },
+     "fillRank": 390,
+     "fillGroup": "c2.d9",
+     "onsetPeriod": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 10.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c2c",
+      "index": 2
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.d9.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.anahtar2",
+     "text": "Alış gelir, veriş uzar.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "key": 2,
+      "texture": "anahtar"
+     },
+     "syllables": 8,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c2.anahtar2.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 68.0,
+   "maxSec": 202.6,
+   "prefSec": {
+    "3": 0.0,
+    "5": 0.0,
+    "15": 174.6
+   },
+   "estimateBasis": "Nefona Hoca köşesi: 4,68 hece/sn + yüksek duraklama profili, cümle arası sessizlikler dahil (VARSAYIM); minSec = zorunlu klipler (5 dk ve üstü biçim) en kısa sessizlikle; prefSec = planlayıcının 3/5/15 dk planındaki blok süresi; üretimden sonra voice.hoc.sec ile"
+  },
+  {
+   "id": "C3",
+   "kind": "core",
+   "priority": 3,
+   "playOrder": 4,
+   "entryRank": 400,
+   "title": "Vızıltılı nefes (bramari): ağız kapalı, döngü 13 sn, parmaklar yüze değmez",
+   "clips": [
+    {
+     "id": "c3.ad",
+     "text": "Sıradaki nefesin adı bramari, yani vızıltılı nefes.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 6.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "music": "bordun:13,000 (aynı ton, daha alçak yatak)"
+     },
+     "tags": {
+      "texture": "vizilti",
+      "explain": true,
+      "sanskrit": "bramari (ilk ve tek geçiş; PLAN.v2 §C.7)"
+     },
+     "syllables": 20,
+     "words": 7,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.ad.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.nasil",
+     "text": "Verişte dudakların kapalı kalıyor ve arı vızıltısına benzer alçak bir ses çıkıyor.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 6.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "vizilti",
+      "action": "dudaklar kapalı, vızıltılı veriş",
+      "repeatOk": [
+       "vızıl"
+      ]
+     },
+     "syllables": 30,
+     "words": 12,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.nasil.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.agiz",
+     "text": "Dişlerin birbirine değmesin; dilin ağzında rahat dursun.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 5.0,
+      "max": 9.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "vizilti",
+      "action": "dişler aralık, dil rahat"
+     },
+     "fillRank": 401,
+     "syllables": 19,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.agiz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.eller",
+     "text": "Kulaklarını ya da gözlerini kapatman gerekmiyor.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.5,
+      "pref": 5.5,
+      "max": 9.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "vizilti",
+      "safety": "no-shanmukhi",
+      "note": "PLAN.v2 §A.1: parmaklar gözlere, kulaklara ve yüze değmez"
+     },
+     "syllables": 18,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.eller.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.sessiz",
+     "text": "Ses çıkarmak istemezsen vızıltıyı içinden duyman da olur.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 6.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "vizilti",
+      "safety": "alternative",
+      "note": "\"sesin kimseyi rahatsız etmeyeceği bir yer\" hazırlık kartında; burada sessiz seçenek"
+     },
+     "syllables": 20,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.sessiz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.kisa",
+     "text": "Vızıltı erken biterse bir sonraki alışı beklemen yeterli.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 4.0,
+      "max": 8.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "vizilti",
+      "normalize": true,
+      "safety": "no-force",
+      "repeatOk": [
+       "vızıl"
+      ]
+     },
+     "fillRank": 401,
+     "syllables": 21,
+     "words": 8,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.kisa.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.d1.al",
+     "text": "Al…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 9,
+       "count": 1,
+       "hum": true
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c3.d1",
+      "role": "al"
+     },
+     "onsetPeriod": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c3a",
+      "index": 0
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.d1.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.d1.ver",
+     "text": "vızıltıyla ver…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 9.0,
+      "pref": 9.0,
+      "max": 9.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 9s, titreşim"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c3.d1",
+      "role": "vızıltı"
+     },
+     "onsetPeriod": {
+      "min": 9.0,
+      "pref": 9.0,
+      "max": 9.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c3a",
+      "index": 1
+     },
+     "gapFromPeriod": true,
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.d1.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.d2.al",
+     "text": "Al…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 9,
+       "count": 1,
+       "hum": true
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c3.d2",
+      "role": "al"
+     },
+     "onsetPeriod": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c3a",
+      "index": 2
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.d2.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.d2.ver",
+     "text": "vızıltıyla ver…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 9.0,
+      "pref": 9.0,
+      "max": 9.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 9s, titreşim"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c3.d2",
+      "role": "vızıltı"
+     },
+     "onsetPeriod": {
+      "min": 9.0,
+      "pref": 9.0,
+      "max": 9.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c3a",
+      "index": 3
+     },
+     "gapFromPeriod": true,
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.d2.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.d3.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 9,
+       "count": 1,
+       "hum": true
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c3.d3",
+      "role": "al"
+     },
+     "fillRank": 400.5,
+     "fillGroup": "c3.d3",
+     "onsetPeriod": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 4.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c3a",
+      "index": 4
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.d3.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.d3.ver",
+     "text": "ver…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 9.0,
+      "pref": 9.0,
+      "max": 9.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "ring:out 9s, titreşim"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c3.d3",
+      "role": "vızıltı"
+     },
+     "fillRank": 400.5,
+     "fillGroup": "c3.d3",
+     "onsetPeriod": {
+      "min": 9.0,
+      "pref": 9.0,
+      "max": 9.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c3a",
+      "index": 5
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.d3.ver.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.titresim",
+     "text": "Titreşimi dudaklarında, burnunda ya da yüzünde fark edebilirsin.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "vizilti",
+      "arc": 2,
+      "sense": "dokunma"
+     },
+     "fillRank": 402,
+     "syllables": 23,
+     "words": 8,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.titresim.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.el",
+     "text": "İstersen bir elini göğsüne koyup titreşimi avucunda da hissedebilirsin.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 5.0,
+      "max": 9.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "vizilti",
+      "arc": 2,
+      "sense": "dokunma",
+      "repeatOk": [
+       "titre"
+      ],
+      "note": "el göğüste; yüz, göz ve kulaklara dokunulmaz"
+     },
+     "fillRank": 405,
+     "syllables": 27,
+     "words": 9,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.el.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.d4.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 13.0,
+      "pref": 13.0,
+      "max": 13.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 9,
+       "count": 1,
+       "hum": true
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c3.d4",
+      "role": "al"
+     },
+     "fillRank": 403,
+     "fillGroup": "c3.d4",
+     "onsetPeriod": {
+      "min": 13.0,
+      "pref": 13.0,
+      "max": 13.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c3a",
+      "index": 6
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.d4.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.d5.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 13.0,
+      "pref": 13.0,
+      "max": 13.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 9,
+       "count": 1,
+       "hum": true
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c3.d5",
+      "role": "al"
+     },
+     "fillRank": 404,
+     "fillGroup": "c3.d5",
+     "onsetPeriod": {
+      "min": 13.0,
+      "pref": 13.0,
+      "max": 13.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c3a",
+      "index": 7
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.d5.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.d6.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 13.0,
+      "pref": 13.0,
+      "max": 13.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 9,
+       "count": 1,
+       "hum": true
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c3.d6",
+      "role": "al"
+     },
+     "fillRank": 410,
+     "fillGroup": "c3.d6",
+     "onsetPeriod": {
+      "min": 13.0,
+      "pref": 13.0,
+      "max": 13.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c3a",
+      "index": 8
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.d6.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.d7.al",
+     "text": "Al…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 13.0,
+      "pref": 13.0,
+      "max": 13.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 9,
+       "count": 1,
+       "hum": true
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c3.d7",
+      "role": "al"
+     },
+     "fillRank": 420,
+     "fillGroup": "c3.d7",
+     "onsetPeriod": {
+      "min": 13.0,
+      "pref": 13.0,
+      "max": 13.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c3b",
+      "index": 0
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.d7.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.d8.al",
+     "text": "Al…",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 13.0,
+      "pref": 13.0,
+      "max": 13.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 9,
+       "count": 1,
+       "hum": true
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c3.d8",
+      "role": "al"
+     },
+     "fillRank": 465,
+     "fillGroup": "c3.d8",
+     "onsetPeriod": {
+      "min": 13.0,
+      "pref": 13.0,
+      "max": 13.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c3b",
+      "index": 1
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.d8.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.d9.al",
+     "text": "Al…",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 13.0,
+      "pref": 13.0,
+      "max": 13.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "breath": {
+       "in": 4,
+       "out": 9,
+       "count": 1,
+       "hum": true
+      },
+      "visual": "ring:in 4s"
+     },
+     "tags": {
+      "micro": "breath",
+      "breathLock": true,
+      "texture": "nefes-ipucu",
+      "cycle": "c3.d9",
+      "role": "al"
+     },
+     "fillRank": 470,
+     "fillGroup": "c3.d9",
+     "onsetPeriod": {
+      "min": 13.0,
+      "pref": 13.0,
+      "max": 13.0
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.c3b",
+      "index": 2
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.d9.al.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.sessizlik",
+     "text": "Ses dindi. Ardından kalan sessizliği de duyuyorsun.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 12.0,
+      "pref": 15.0,
+      "max": 19.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "phase:derin",
+      "music": "bordun kısılır; yatak Derin düzeyinde"
+     },
+     "tags": {
+      "texture": "sessizlik",
+      "arc": 3,
+      "sense": "işitme",
+      "breathRoom": true,
+      "repeatOk": [
+       "ses"
+      ]
+     },
+     "syllables": 17,
+     "words": 7,
+     "sentences": 2,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "yoga-uretim/ders1/hoc/c3.sessizlik.wav",
+       "sec": null,
+       "note": "birim arşivi (tek TTS isteği); uygulama subclips dosyalarını çalar"
+      }
+     },
+     "subclips": [
+      {
+       "index": 1,
+       "text": "Ses dindi.",
+       "syllables": 3,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders1/hoc/c3.sessizlik.1.m4a",
+         "sec": null
+        }
+       }
+      },
+      {
+       "index": 2,
+       "text": "Ardından kalan sessizliği de duyuyorsun.",
+       "syllables": 14,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders1/hoc/c3.sessizlik.2.m4a",
+         "sec": null
+        }
+       }
+      }
+     ],
+     "ttsUnit": {
+      "text": "Ses dindi. Ardından kalan sessizliği de duyuyorsun.",
+      "cut": "cümle sonlarından; parça sayısı tutmazsa insan kararı"
+     }
+    },
+    {
+     "id": "c3.dogal",
+     "text": "Nefes yeniden kendi hâlinde; bir şey yapman gerekmiyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "sessizlik"
+     },
+     "fillRank": 415,
+     "syllables": 18,
+     "words": 8,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.dogal.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.anahtar3",
+     "text": "Veriş uzar.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 6.0,
+      "max": 10.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "key": 3,
+      "texture": "anahtar"
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/c3.anahtar3.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 89.5,
+   "maxSec": 294.0,
+   "prefSec": {
+    "3": 0.0,
+    "5": 0.0,
+    "15": 249.8
+   },
+   "estimateBasis": "Nefona Hoca köşesi: 4,68 hece/sn + yüksek duraklama profili, cümle arası sessizlikler dahil (VARSAYIM); minSec = zorunlu klipler (5 dk ve üstü biçim) en kısa sessizlikle; prefSec = planlayıcının 3/5/15 dk planındaki blok süresi; üretimden sonra voice.hoc.sec ile"
+  },
+  {
+   "id": "K",
+   "kind": "closing",
+   "priority": 0,
+   "playOrder": 99,
+   "title": "Kapanış: dışa dönüş (gündüz, oturarak)",
+   "clips": [
+    {
+     "id": "k.donus",
+     "text": "Artık dönüş zamanı.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.5,
+      "pref": 3.5,
+      "max": 7.5
+     },
+     "phase": "Kapanış",
+     "cue": {
+      "music": "phase:kapanis (pad); returnTone:-2s; bordun çekilir",
+      "visual": "dawn",
+      "voiceGain": "rampa o anki evre düzeyinden 0 dB’e, önceki sessizlik boyunca (>= 4 sn; basamak yok)"
+     },
+     "tags": {
+      "texture": "kapanis"
+     },
+     "syllables": 7,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.donus.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.nefes",
+     "text": "Nefesin kendi ritmini buluyor.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 8.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "nefes",
+      "texture": "kapanis",
+      "note": "3 dk kuralı: \"-(y)abil-\"siz (PLAN.v3 §A.2 kural 6)"
+     },
+     "syllables": 11,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.nefes.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.say",
+     "text": "Saymadan, kendi hızında birkaç soluk alıp veriyorsun.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "nefes",
+      "texture": "kapanis"
+     },
+     "fillRank": 292,
+     "syllables": 18,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.say.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.sesler",
+     "text": "Odadaki sesler de yeniden duyuluyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 9.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "sesler",
+      "texture": "kapanis",
+      "arc": "dönüş"
+     },
+     "fillRank": 102,
+     "syllables": 14,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.sesler.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.hareket",
+     "text": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 7.0,
+      "max": 11.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "parmak+gerin",
+      "texture": "kapanis",
+      "mood": "safety",
+      "safety": "movement",
+      "action": "parmakları oynatmak ve gerinmek",
+      "note": "3 dk Kapanış'ın tek \"-(y)abil-\"i (PLAN.v3 §A.2 kural 6)"
+     },
+     "syllables": 31,
+     "words": 11,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.hareket.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.goz",
+     "text": "Gözlerin kapalıysa ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakmak yeter.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 7.0,
+      "max": 11.0
+     },
+     "phase": "Kapanış",
+     "cue": {
+      "music": "chord"
+     },
+     "tags": {
+      "step": "goz+oda",
+      "texture": "kapanis",
+      "eyes": "ışığa yavaş alışma",
+      "action": "gözleri açıp çevreye bakmak"
+     },
+     "short": {
+      "belowSec": 240,
+      "text": "Gözlerin kapalıysa açıp çevrene bakmak yeter.",
+      "gapAfter": {
+       "min": 7.0,
+       "pref": 7.0,
+       "max": 10.0
+      },
+      "note": "3 dk: Kapanış 0:48 içinde kalmak için kısa biçim",
+      "syllables": 16,
+      "words": 6,
+      "sentences": 1,
+      "voice": {
+       "hoc": {
+        "file": "public/yoga/ders1/hoc/k.goz.k240.m4a",
+        "sec": null
+       }
+      }
+     },
+     "syllables": 31,
+     "words": 11,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.goz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.oda",
+     "text": "Bir renge ya da ışığın düştüğü bir yere biraz daha uzun bakabilirsin.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 10.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "oda",
+      "texture": "kapanis"
+     },
+     "fillRank": 108,
+     "syllables": 25,
+     "words": 12,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.oda.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.zaman",
+     "text": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.5,
+      "pref": 4.5,
+      "max": 8.5
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "oda",
+      "texture": "kapanis"
+     },
+     "fillRank": 262,
+     "syllables": 21,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.zaman.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.gun",
+     "text": "Bu ritmi gün içinde, kısa bir molada yeniden bulabilirsin.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 8.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "texture": "kapanis",
+      "transfer": true
+     },
+     "fillRank": 365,
+     "syllables": 21,
+     "words": 9,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.gun.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.son",
+     "text": "Buradasın; nefesin de hep seninle.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 10.0
+     },
+     "phase": "Kapanış",
+     "cue": {
+      "music": "fade:5s",
+      "visual": "end"
+     },
+     "tags": {
+      "step": "son",
+      "texture": "kapanis",
+      "note": "açılış cümlesiyle çerçeve (\"Bütün gün seninle olan nefes\")"
+     },
+     "syllables": 12,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.son.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 49.9,
+   "maxSec": 142.9,
+   "prefSec": {
+    "3": 48.0,
+    "5": 71.7,
+    "15": 103.3
+   },
+   "estimateBasis": "Nefona Hoca köşesi: 4,68 hece/sn + yüksek duraklama profili, cümle arası sessizlikler dahil (VARSAYIM); minSec = zorunlu klipler (5 dk ve üstü biçim) en kısa sessizlikle; prefSec = planlayıcının 3/5/15 dk planındaki blok süresi; üretimden sonra voice.hoc.sec ile"
+  }
+ ],
+ "extras": {
+  "quickClosing": {
+   "id": "K.hizli",
+   "kind": "utility",
+   "title": "\"Kapanışa geç\" (oturarak ders: aynı dosyanın Kapanış'ına atlama)",
+   "mode": "sameFileClosing",
+   "cue": {
+    "music": "phase:kapanis; returnTone:-2s",
+    "visual": "dawn",
+    "voiceGain": "rampa: o anki evre düzeyinden 0 dB'e 4 sn"
+   },
+   "leadInSec": 4.0,
+   "voiceGainRampSec": 4.0,
+   "prefixByActiveBlock": {},
+   "releaseClip": {},
+   "windowReturn": {},
+   "rule": "PLAN.v3 §D.3: o anki cümle biter; aynı dosyada Kapanış'ın başına, dönüş tınısından önceki sessizliğe 2 sn'lik geçişle atlanır; kapanış kısalmaz. Ders 1'de imge ya da zor blok yok, bu yüzden bırakma ön klibi yok; k.nefes ('Nefesin kendi ritmini buluyor.') nefes kalıbını bırakır. Oturarak derste hızlı kapanış = dosyanın kendi Kapanış'ı (sure.md §3.2 kural 10: ≈ 45–55 sn en kısa sürümde). Aşağıdaki klipler denetim içindir: en kısa Kapanış'ın zorunlu klipleri.",
+   "clips": [
+    {
+     "id": "k.donus",
+     "text": "Artık dönüş zamanı.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.5,
+      "pref": 3.5,
+      "max": 7.5
+     },
+     "phase": "Kapanış",
+     "cue": {
+      "music": "phase:kapanis (pad); returnTone:-2s; bordun çekilir",
+      "visual": "dawn",
+      "voiceGain": "rampa o anki evre düzeyinden 0 dB’e, önceki sessizlik boyunca (>= 4 sn; basamak yok)"
+     },
+     "tags": {
+      "texture": "kapanis"
+     },
+     "syllables": 7,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.donus.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.nefes",
+     "text": "Nefesin kendi ritmini buluyor.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 8.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "nefes",
+      "texture": "kapanis",
+      "note": "3 dk kuralı: \"-(y)abil-\"siz (PLAN.v3 §A.2 kural 6)"
+     },
+     "syllables": 11,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.nefes.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.hareket",
+     "text": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 7.0,
+      "max": 11.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "parmak+gerin",
+      "texture": "kapanis",
+      "mood": "safety",
+      "safety": "movement",
+      "action": "parmakları oynatmak ve gerinmek",
+      "note": "3 dk Kapanış'ın tek \"-(y)abil-\"i (PLAN.v3 §A.2 kural 6)"
+     },
+     "syllables": 31,
+     "words": 11,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.hareket.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.goz",
+     "text": "Gözlerin kapalıysa ışığa alıştıra alıştıra açıp çevrende birkaç şeye bakmak yeter.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 7.0,
+      "max": 11.0
+     },
+     "phase": "Kapanış",
+     "cue": {
+      "music": "chord"
+     },
+     "tags": {
+      "step": "goz+oda",
+      "texture": "kapanis",
+      "eyes": "ışığa yavaş alışma",
+      "action": "gözleri açıp çevreye bakmak"
+     },
+     "short": {
+      "belowSec": 240,
+      "text": "Gözlerin kapalıysa açıp çevrene bakmak yeter.",
+      "gapAfter": {
+       "min": 7.0,
+       "pref": 7.0,
+       "max": 10.0
+      },
+      "note": "3 dk: Kapanış 0:48 içinde kalmak için kısa biçim",
+      "syllables": 16,
+      "words": 6,
+      "sentences": 1,
+      "voice": {
+       "hoc": {
+        "file": "public/yoga/ders1/hoc/k.goz.k240.m4a",
+        "sec": null
+       }
+      }
+     },
+     "syllables": 31,
+     "words": 11,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.goz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.son",
+     "text": "Buradasın; nefesin de hep seninle.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 10.0
+     },
+     "phase": "Kapanış",
+     "cue": {
+      "music": "fade:5s",
+      "visual": "end"
+     },
+     "tags": {
+      "step": "son",
+      "texture": "kapanis",
+      "note": "açılış cümlesiyle çerçeve (\"Bütün gün seninle olan nefes\")"
+     },
+     "syllables": 12,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/k.son.m4a",
+       "sec": null
+      }
+     }
+    }
+   ]
+  },
+  "stopReturn": {
+   "id": "D.durdur",
+   "kind": "utility",
+   "title": "Durdur (X) sonrası isteğe bağlı 20–30 sn sesli dönüş (her derste aynı metin; pilot ders2'den aynen)",
+   "clips": [
+    {
+     "id": "d.goz",
+     "text": "Gözlerini aç, etrafına bak, acele etme.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 3.0,
+      "max": 7.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "mood": "safety",
+      "step": "goz",
+      "screen": "Durdurma ekranı metniyle aynı",
+      "note": "her derste aynı metin (PLAN.v3 §C.3; pilot ders2 D.durdur)"
+     },
+     "syllables": 15,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/d.goz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "d.kalk",
+     "text": "Uzanıyorsan önce yana dön, sonra otur.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 13.0,
+      "pref": 13.0,
+      "max": 17.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "mood": "safety",
+      "step": "yan",
+      "screen": "Durdurma ekranı metniyle aynı"
+     },
+     "syllables": 14,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/d.kalk.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "d.bekle",
+     "text": "Birkaç nefes böyle kal; başın dönerse biraz daha bekle.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.0,
+      "max": 5.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "mood": "safety",
+      "step": "bekle"
+     },
+     "syllables": 18,
+     "words": 9,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/d.bekle.m4a",
+       "sec": null
+      }
+     }
+    }
+   ]
+  },
+  "firstEverIntro": {
+   "id": "I.ilk",
+   "kind": "utility",
+   "title": "Kişinin ilk yoga dersinde önce çalan kısa giriş dosyası (PLAN.v3 §D.3)",
+   "rule": "dersin giriş müziği + tek cümle, sonra dersin başına 2 sn'lik geçiş; ≈ 7 sn (VARSAYIM); planın dışında",
+   "clips": [
+    {
+     "id": "i.ilk",
+     "text": "Bugün yalnızca tanışıyoruz; zorlanırsan kapanışa geçmen yeterli.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.0,
+      "pref": 2.0,
+      "max": 6.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "firstEver": true,
+      "note": "PLAN.v3 §D.3: ayrı giriş dosyası; her derste aynı metin; \"-(y)abil-\" yok (a.izin hemen ardından)"
+     },
+     "syllables": 23,
+     "words": 7,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders1/hoc/i.ilk.m4a",
+       "sec": null
+      }
+     }
+    }
+   ]
+  }
+ },
+ "skeleton30": {
+  "status": "İKİNCİ AŞAMA (Kapı 9–11): 16–30 dk metni yazılmadı. Bu bölüm iskelettir; usta hoca (ya da karar 2 yedeği) onayına gider. Ayrıntı: iskelet30.md",
+  "playOrder": [
+   "A",
+   "C1",
+   "C2",
+   "BR.orta",
+   "C4",
+   "C3",
+   "C5",
+   "K"
+  ],
+  "blocks": [
+   {
+    "id": "BR.orta",
+    "kind": "bridge",
+    "placement": {
+     "before": "C4"
+    },
+    "requiresMinSec": 1200,
+    "entry": "C4 ile birlikte",
+    "content": "ortadaki çıkış kapısı: ortak açılış cümlesinin 'istediğin an … senin elinde' biçimi + gözler açıksa bakış serbest + dayanak (sandalye ya da zemin); ≥ 20 dk her sürümde (PLAN.v2 §C.5, güvenlik §11.B-3; pilot check_plan '>= 20 dk ortada hatırlatma')"
+   },
+   {
+    "id": "C4",
+    "kind": "core",
+    "priority": 4,
+    "playOrder": 3,
+    "entryRank": 520,
+    "title": "Nadi şodana (burun deliği değiştirme), tutmasız",
+    "content": "'Burnun tıkalıysa atla' ile açılır; önce 3–4 sesli sayımlı tur (sağ baş parmak sağ burun deliğini, yüzük parmağı sol burun deliğini kapatır; parmaklar göze değmez), sonra sessiz turlar; döngü 10,000 sn (4 al / 6 ver, tek burun deliğinden); tutma yok (güvenlik §11.C isteğe bağlı satırı)",
+    "anchorsSec": {
+     "20": 240,
+     "30": 360
+    }
+   },
+   {
+    "id": "C5",
+    "kind": "core",
+    "priority": 5,
+    "playOrder": 5,
+    "entryRank": 700,
+    "title": "Sessiz nefes tanıklığı: duyurulu pencereler (≤ 90 sn)",
+    "content": "iki pencere: önce duyuru ('Birkaç nefes sessizlik… sonra sesim geri gelecek.' kalıbı, bir kapı taşır), sonra karşılama; ikinci pencerede pad çekilir, yalnız bordun kalır (PLAN.v2 Ders 1 kartı); imge yayının son adımı: sesin ardından kalan sessizlik",
+    "anchorsSec": {
+     "30": 300
+    }
+   }
+  ],
+  "anchorsSec": {
+   "5": {
+    "A": 45,
+    "C1": 180,
+    "K": 75
+   },
+   "10": {
+    "A": 60,
+    "C1": 270,
+    "C2": 180,
+    "K": 90
+   },
+   "15": {
+    "A": 75,
+    "C1": 270,
+    "C2": 180,
+    "C3": 270,
+    "K": 105
+   },
+   "20": {
+    "A": 90,
+    "C1": 300,
+    "C2": 180,
+    "C4": 240,
+    "C3": 270,
+    "K": 120
+   },
+   "30": {
+    "A": 90,
+    "C1": 360,
+    "C2": 210,
+    "C4": 360,
+    "C3": 330,
+    "C5": 300,
+    "K": 150
+   },
+   "source": "PLAN.v2 §B.4 Ders 1 çapaları (VARSAYIM); <= 15 dk'nın planlanan süreleri timing.txt'te"
+  },
+  "keySentence": {
+   "1": "c1.anahtar1 · C1 sonu",
+   "2": "c2.anahtar2 · C2 sonu",
+   "3": "c3.anahtar3 · C3 sonu (30 dk'da C5'ten önce)"
+  },
+  "imageArc": [
+   "kendi nefesinin sesi (C1 c1.ses, C2 veriş sesi)",
+   "vızıltının dudaklarda, yüzde, göğüste titreşimi (C3)",
+   "sesin ardından kalan sessizlik (C3 sonu; 30 dk'da C5 pencereleri)"
+  ],
+  "rankFloor": 500,
+  "fillOrderStage3": "(1) BR.orta + C4 (entryRank 520, 16–19. dk), (2) C1/C2/C3'ün 16–30 genişletmeleri (fillRank 500–690), (3) C5 (entryRank 700, ≈ 25. dk), (4) Varış ve Kapanış'ın uzun biçimleri (30 dk çapası A 1:30, K 2:30) — sıra ikinci aşamada ölçülmüş sürelerle kesinleşir"
+ }
+}

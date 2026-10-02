@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="tr" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fark Ettin mi · dört an</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+/* ---------- Uygulamanın tokenları (app/src/styles.css, aynen) ---------- */
+:root {
+  --font-display: 'Unbounded Variable', 'Avenir Next', system-ui, sans-serif;
+  --font-body: 'Onest Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', monospace;
+  --bg: #f3f6f8; --bg-grad: radial-gradient(900px 520px at 0% -12%, rgba(17, 169, 184, 0.12) 0%, rgba(17, 169, 184, 0) 60%);
+  --surface: #ffffff; --surface-2: #e9eef2; --surface-3: #dde4ea; --border: #e1e7ec;
+  --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --accent: #0b7480; --accent-ink: #ffffff; --accent-soft: rgba(17, 169, 184, 0.12); --accent-graphic: #11a9b8;
+  --accent-grad: linear-gradient(90deg, #0b7480, #2458cc); --accent-glow: 0 8px 22px -10px rgba(36, 88, 204, 0.55);
+  --lens: #f5a623; --lens-soft: rgba(245, 166, 35, 0.16); --lens-text: #9a5b06;
+  --warn: #9a3412; --warn-bg: rgba(232, 96, 62, 0.12);
+  --ok: #13704b; --ok-bg: rgba(31, 169, 116, 0.13);
+  --shadow: 0 1px 2px rgba(11, 18, 25, 0.04), 0 8px 24px rgba(11, 18, 25, 0.05);
+  color-scheme: light;
+  /* Bu tasarımın yerel tokenları (TASARIM.md "Ölçüler") */
+  --gut: 20px;                                     /* tek yan boşluk: her öğe 20 px'te başlar ve biter */
+  --sw-tile: #ffffff; --sw-tile-edge: rgba(11, 18, 25, 0.10);
+  --sw-well: #3a4450;                              /* renk yuvarlağının arkasındaki zıt dolu halka (açık tema) */
+  --sw-hud: rgba(7, 12, 18, 0.82); --sw-hud-ink: #eef3f6;
+  --sw-key-edge: #d5dde4;
+  --sw-scrim: rgba(11, 18, 25, 0.45);
+}
+:root[data-theme='dark'] {
+  --bg: #070c12; --bg-grad: radial-gradient(900px 520px at 0% -12%, rgba(25, 194, 209, 0.12) 0%, rgba(25, 194, 209, 0) 60%);
+  --surface: #0f171f; --surface-2: #141e28; --surface-3: #1c2834; --border: rgba(255, 255, 255, 0.08);
+  --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --accent: #19c2d1; --accent-ink: #041017; --accent-soft: rgba(25, 194, 209, 0.14); --accent-graphic: #19c2d1;
+  --accent-grad: linear-gradient(90deg, #19c2d1, #3e7bfa); --accent-glow: 0 8px 24px -8px rgba(25, 194, 209, 0.55);
+  --lens: #ffb13b; --lens-soft: rgba(255, 177, 59, 0.15); --lens-text: #ffb13b;
+  --warn: #ff9a7d; --warn-bg: rgba(255, 122, 89, 0.14);
+  --ok: #35d39a; --ok-bg: rgba(53, 211, 154, 0.12);
+  --shadow: none;
+  color-scheme: dark;
+  --sw-tile: #3b4754; --sw-tile-edge: rgba(255, 255, 255, 0.10);
+  --sw-well: #dfe4e8;                              /* koyu temada açık halka: siyah yuvarlak görünür */
+  --sw-key-edge: rgba(255, 255, 255, 0.16);
+  --sw-scrim: rgba(0, 0, 0, 0.72);
+}
+
+/* ---------- Temel (styles.css .screen, .btn, .btn-icon, .oq-bar) ---------- */
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg-grad), var(--bg); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow: hidden; }
+h1, p { margin: 0; }
+button { font: inherit; color: inherit; }
+.screen { max-width: 560px; margin: 0 auto; height: 100dvh; padding: 20px var(--gut) 32px; display: flex; flex-direction: column; gap: 16px; overflow: hidden; position: relative; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 54px; padding: 14px 18px; font-size: 1rem; font-weight: 650; letter-spacing: -0.01em; border: 1px solid transparent; border-radius: 16px; background: var(--accent-grad); color: var(--accent-ink); box-shadow: var(--accent-glow); background-origin: border-box; cursor: pointer; flex: none; }
+.btn-2 { background: var(--surface); color: var(--ink); border: 1.5px solid color-mix(in srgb, var(--ink) 34%, transparent); font-weight: 650; box-shadow: var(--shadow); }
+.btn-icon { width: 44px; height: 44px; padding: 0; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); color: var(--ink-2); display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.top { display: flex; align-items: center; gap: 12px; height: 44px; flex: none; }
+.top .tb { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 7px; padding-top: 1px; }
+.bar { flex: 1; height: 6px; border-radius: 3px; background: var(--surface-3); overflow: hidden; }
+.top .tb .bar { flex: none; }
+.bar i { display: block; height: 100%; border-radius: 3px; background: var(--accent-grad); }
+.ey { font-family: var(--font-mono); font-size: 0.75rem; line-height: 16px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); display: block; }
+/* başlık: Unbounded sıkı harf aralığında sözcük boşluğu kayboluyordu ("Çokyakın.", kapı r2) */
+.h { font-family: var(--font-display); font-weight: 700; font-size: 1.55rem; line-height: 1.14; letter-spacing: -0.015em; word-spacing: 0.12em; text-wrap: balance; }
+.lead { font-size: 1rem; line-height: 1.4; color: var(--ink-2); text-wrap: pretty; }
+.ico { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.nw { white-space: nowrap; }
+.scn, .scn > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+@keyframes in-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pop { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+@keyframes wave { 0% { transform: scale(1); opacity: 0; } 12% { opacity: 0.9; } 100% { transform: scale(1.7); opacity: 0; } }
+@keyframes sheet { from { transform: translateY(100%); } to { transform: none; } }
+
+.chip { font: 700 0.875rem/1.2 var(--font-body); background: var(--sw-hud); color: var(--sw-hud-ink); border-radius: 999px; padding: 10px 14px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2); white-space: nowrap; }
+
+/* =========================================================
+   04 · Sayı sorusu
+   ========================================================= */
+.cnt-panel { flex: 1; min-height: 0; position: relative; border-radius: 24px; overflow: hidden; isolation: isolate; background: var(--surface-2); }
+.cnt-panel .chip { position: absolute; left: 12px; top: 12px; z-index: 2; }
+/* tepsi panelin ÜSTÜNDE (üst katlar): kaldırımdaki kişiler örtülmez (kapı r2, 320) */
+.tray { position: absolute; left: 10px; right: 10px; top: 10px; z-index: 2; padding: 12px; border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent); -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.35), inset 0 0 0 1px var(--sw-tile-edge);
+  display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 8px; animation: in-up 0.36s ease-out both; }
+.tile { position: relative; aspect-ratio: 3 / 2.3; border-radius: 12px; display: grid; place-items: center; padding: 4px 5px 10px; background: var(--sw-tile); box-shadow: inset 0 0 0 1px var(--sw-tile-edge); animation: in-up 0.32s ease-out both; animation-delay: calc(0.18s + var(--i) * 0.09s); }
+.tile > svg { width: 100%; height: 100%; }
+.tile .no { position: absolute; left: 6px; bottom: 4px; font: 700 0.6875rem/1 var(--font-mono); color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.tile .badge { position: absolute; top: 4px; right: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--accent-graphic); color: #041017; display: grid; place-items: center; animation: pop 0.32s ease-out both; animation-delay: calc(0.42s + var(--i) * 0.09s); }
+.tile .badge svg { width: 10px; height: 10px; stroke-width: 3.6; }
+.tile.miss { box-shadow: none; outline: 2.5px dashed var(--lens); outline-offset: -2.5px; }
+.tile.miss .no { color: var(--lens-text); }
+.tile.extra { background: transparent; box-shadow: none; outline: 2px dashed color-mix(in srgb, var(--ink) 35%, transparent); outline-offset: -2px; }
+.cnt-q { flex: none; height: var(--qh); position: relative; }
+.cnt-q > div { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; }
+.keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.key { height: 72px; border-radius: 20px; border: 1.5px solid var(--sw-key-edge); background: var(--surface); box-shadow: var(--shadow); font: 700 1.75rem/1 var(--font-display); font-variant-numeric: tabular-nums; color: var(--ink); cursor: pointer; }
+.answered .ask { visibility: hidden; }
+.answered .fb { animation: in-up 0.34s ease-out both; }
+.fb .h.near { color: var(--lens-text); }
+.fb .h.ok { color: var(--ok); }
+.fb .lead { color: var(--ink); font-weight: 600; margin-top: -6px; }
+
+/* =========================================================
+   05 / 06 · Ne değişti?: başlık, kare ve alt yuva iki durumda birebir aynı yerde
+   ========================================================= */
+.chg { flex: 1; min-height: 0; display: flex; flex-direction: column; container-type: size; }
+.chg .sp1 { flex: 1 1 0; } .chg .sp2 { flex: 1 1 0; }
+.chg-head { flex: none; display: flex; flex-direction: column; gap: 6px; }
+.chg-head .h { font-size: 1.75rem; height: calc(2 * 1.14em); }           /* başlık hep iki satır */
+.chg-head .lead { height: 1.4em; font-size: 1.05rem; }
+.chg-head .lead.cue { color: var(--accent); font-weight: 700; }
+.frame { position: relative; flex: none; width: 100%; aspect-ratio: 4 / 5; border-radius: 22px; overflow: hidden; background: var(--surface-2); margin-top: 14px; }
+.slot { flex: none; height: 56px; margin-top: 14px; display: flex; align-items: center; }
+.slot .btn { min-height: 56px; }
+/* süre: tek, kalın ilerleme çizgisi (3 sn doğrusal azalır); ilk karede dolu: süre başladı */
+.tbar { flex: 1; height: 14px; border-radius: 7px; background: var(--surface-3); overflow: hidden; box-shadow: inset 0 0 0 1px var(--sw-tile-edge); }
+.tbar i { display: block; height: 100%; border-radius: 7px; background: var(--accent-grad); transform-origin: left center; animation: tbar 3s linear both; }
+@keyframes tbar { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+/* =========================================================
+   09 / 10 / 11 · Gözünden kaçan: başlık yeri, kart ve alt blok üç adımda sabit
+   ========================================================= */
+.ms-head { flex: none; height: var(--mh); display: flex; flex-direction: column; gap: 8px; }
+.ms-card { flex: 1; min-height: 0; position: relative; margin: 0; border-radius: 24px; overflow: hidden; isolation: isolate; background: var(--surface-2); }
+.ms-card .layer { position: absolute; inset: 0; }
+.ms-card .layer > svg, .ms-card .mark { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ms-card .real { opacity: 0; }
+.ms-card .subj .fe-af rect:first-child { stroke: rgba(0, 0, 0, 0.3); stroke-width: 1.1; }   /* kol gövdeden ayrılsın */
+.pill { position: absolute; bottom: 12px; z-index: 3; display: flex; align-items: center; gap: 8px; font: 600 0.8125rem/1.2 var(--font-body); color: var(--sw-hud-ink); background: var(--sw-hud); border-radius: 999px; padding: 8px 12px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18); }
+.pill.l { left: 12px; }
+.pill.r { right: 12px; padding: 6px 12px 6px 7px; font: 700 0.9rem/1 var(--font-body); background: var(--surface); color: var(--ink); box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.5), 0 0 0 2px var(--ok); --sw-gap: var(--surface); }
+.pill.r .mk { width: 17px; height: 17px; color: var(--ok); stroke-width: 3; }
+.ms-blk { flex: none; height: var(--mb); position: relative; }
+.ms-blk > div { position: absolute; inset: 0; }
+.yn { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; height: 100%; }
+.yn button { border-radius: 22px; border: 1.5px solid var(--sw-key-edge); background: var(--surface); box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font: 700 1.15rem var(--font-body); color: var(--ink); cursor: pointer; }
+.yn button .ico { width: 30px; height: 30px; stroke-width: 1.9; color: var(--accent); }
+.opts { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; height: 100%; }
+.opt { display: flex; align-items: center; gap: 12px; padding: 0 14px; border-radius: 18px; border: 1.5px solid var(--sw-key-edge); background: var(--surface); font: 700 1.05rem var(--font-body); color: var(--ink); cursor: pointer; text-align: left; }
+/* renk yuvarlağı (uygulama street.css çözümü + zıt dolu halka): iç koyu çizgi, araya zemin, dışta temaya göre zıt
+   dolu halka (açıkta koyu, koyuda açık). Her renkte aynı: siyah koyu temada, beyaz açık temada görünür. */
+.sw { width: 26px; height: 26px; border-radius: 50%; flex: none; background: var(--c); box-shadow: inset 0 0 0 1.5px rgba(16, 22, 28, 0.42), 0 0 0 2px var(--sw-gap, var(--surface)), 0 0 0 4px var(--sw-well); margin: 0 2px; }
+.sw.s { width: 13px; height: 13px; box-shadow: inset 0 0 0 1px rgba(16, 22, 28, 0.42), 0 0 0 1.5px var(--sw-gap, var(--surface-2)), 0 0 0 3px var(--sw-well); margin: 0 3px; }
+.ans { display: flex; flex-direction: column; gap: 12px; justify-content: flex-end; height: 100%; }
+.cite { display: flex; gap: 8px; align-items: center; font: 500 0.8125rem/1.35 var(--font-body); color: var(--ink-2); }
+.cite .ico { width: 16px; height: 16px; color: var(--ink-3); }
+.ans .btn { min-height: 54px; }
+.mark .rg { fill: none; stroke-width: 3.5; vector-effect: non-scaling-stroke; transition: stroke 0.4s ease; }
+.mark .rg.halo { stroke: rgba(0, 0, 0, 0.35); stroke-width: 6.5; }
+.mark .rg.fg { stroke: #ffffff; }
+.st-11 .mark .rg.fg { stroke: #19c2d1; animation: fade-in 0.4s ease 0.45s both; }   /* sorulan parça halkası 10'dan gelir, renk turkuaza döner */
+.mark .wv { fill: none; stroke: #19c2d1; stroke-width: 4; vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center; opacity: 0; }
+/* 11: yalnız figür döner (yazılar anında yerinde değişir; bütün ekran solmaz, kapı r2) */
+.st-11 .glass { opacity: 0; animation: fade-out-s 0.6s ease 0.05s both; }
+.st-11 .real { opacity: 1; animation: fade-in 0.6s ease 0.05s both; }
+@keyframes fade-out-s { from { opacity: 1; } to { opacity: 0; } }
+.st-11 .mark .wv { animation: wave 0.9s ease-out 0.6s both; }
+.st-11 .mark .wv.w2 { animation-delay: 0.82s; }
+.st-11 .pick { animation: pop 0.34s ease-out 0.7s both; }
+/* cevap: alt blokta sade zeminde (vitrin toplarının üstüne binmez) */
+.pick { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px 0 10px; border-radius: 999px; background: var(--ok-bg); color: var(--ink); font: 700 1rem/1 var(--font-body); box-shadow: inset 0 0 0 1.5px var(--ok); --sw-gap: var(--surface); }
+.pick .mk { width: 18px; height: 18px; color: var(--ok); stroke-width: 3; }
+.pick .sw { width: 22px; height: 22px; }
+
+/* =========================================================
+   12 · Sonuç
+   ========================================================= */
+.sc-res { gap: 14px; }
+.res-head .h { font-size: 1.85rem; line-height: 1.1; }
+.strip { flex: none; display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+.thumb { position: relative; aspect-ratio: 170 / 112; border-radius: 16px; overflow: hidden; background: var(--surface-2); animation: in-up 0.34s ease-out both; animation-delay: calc(0.12s + var(--i) * 0.1s); isolation: isolate; }
+.thumb > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.thumb .rg { fill: none; stroke: #19c2d1; stroke-width: 3; vector-effect: non-scaling-stroke; }
+.thumb .rg.halo { stroke: rgba(0, 0, 0, 0.4); stroke-width: 5.5; }
+.thumb .rg.miss { stroke: #fff; stroke-dasharray: 6 4; }
+/* rozetler karenin İÇİNDE: komşu kareye ve sayfa kenarına taşmaz (kapı r2: 752 > 740) */
+.thumb .badge { position: absolute; top: 7px; right: 7px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent-graphic); color: #041017; display: grid; place-items: center; box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9); z-index: 2; animation: pop 0.32s ease-out both; animation-delay: calc(0.55s + var(--i) * 0.1s); }
+.thumb .badge svg { width: 13px; height: 13px; stroke-width: 3.4; }
+.thumb .n { position: absolute; left: 7px; top: 7px; z-index: 2; font: 700 0.8125rem/1 var(--font-mono); color: #eef3f6; background: rgba(7, 12, 18, 0.8); padding: 5px 7px; border-radius: 8px; font-variant-numeric: tabular-nums; }
+.thumb.best::after { content: ''; position: absolute; inset: 0; border-radius: 16px; box-shadow: inset 0 0 0 3px var(--lens); z-index: 3; pointer-events: none; animation: fade-in 0.4s ease 0.9s both; }
+.thumb.best .n { color: #2a1600; background: var(--lens); }
+.r2 { flex: none; font-size: 1rem; line-height: 1.4; font-weight: 600; color: var(--ink); text-wrap: pretty; }
+.rows { flex: none; display: grid; gap: 8px; }
+.row { display: flex; align-items: center; gap: 12px; padding: 8px 12px 8px 8px; border-radius: 16px; background: var(--surface-2); min-height: 58px; }
+.row .th { width: 40px; height: 44px; border-radius: 10px; overflow: hidden; flex: none; position: relative; background: var(--sw-tile); box-shadow: inset 0 0 0 1px var(--sw-tile-edge); }
+.row .th > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.row .th.ic { padding: 4px; display: grid; place-items: center; } .row .th.ic > svg { position: static; }
+.row .tx { flex: 1; min-width: 0; font-size: 0.9rem; line-height: 1.32; color: var(--ink-2); }
+.row .tx .a { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin-top: 3px; color: var(--ink); font-weight: 700; --sw-gap: var(--surface-2); }
+.row .tx .a > span { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.row .tx .a .mk { width: 15px; height: 15px; stroke-width: 3; }
+.row .tx .a .yes .mk { color: var(--ok); } .row .tx .a .not { color: var(--ink-3); font-weight: 600; } .row .tx .a .not .mk { color: var(--warn); }
+.row .tx .a .not .nm { text-decoration: line-through; text-decoration-thickness: 1.5px; }
+.row i.tag { font-style: normal; font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.05em; padding: 5px 8px; border-radius: 9px; flex: none; }
+/* TAHMİN = "görmedim" deyip doğru tahmin (puan değil ama doğru): yeşil ailede, 11'deki "doğru bildin" ile çelişmez */
+.tag.ok, .tag.guess { background: var(--ok-bg); color: var(--ok); } .tag.near { background: var(--lens-soft); color: var(--lens-text); }
+.tag.no { background: var(--warn-bg); color: var(--warn); }
+.fact { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 52px; padding: 0 12px 0 14px; border-radius: 16px; border: 1px solid var(--border); background: var(--surface); color: var(--ink); font: 650 0.95rem var(--font-body); cursor: pointer; }
+.fact .l { display: flex; align-items: center; gap: 10px; } .fact .l .ico { color: var(--accent); }
+.sc-res > .btn { margin-top: auto; }
+/* 12-kart: alttan açılan sayfa (tam genişlik, iç kenar 20 px); perde koyu temada da güçlü */
+.pop-scrim { position: fixed; inset: 0; background: var(--sw-scrim); z-index: 5; animation: fade-in 0.32s ease both; }
+.pop { position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; max-width: 560px; margin: 0 auto; border-radius: 26px 26px 0 0; background: var(--surface); box-shadow: 0 -12px 40px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08); padding: 8px var(--gut) 32px; display: flex; flex-direction: column; gap: 12px; animation: sheet 0.36s cubic-bezier(.2, .8, .2, 1) both; }
+:root[data-theme='dark'] .pop { background: #18232e; }
+.pop .grab { width: 40px; height: 5px; border-radius: 3px; background: color-mix(in srgb, var(--ink) 22%, transparent); margin: 0 auto 2px; }
+.pop .hd { display: flex; align-items: center; justify-content: space-between; min-height: 44px; font: 650 0.95rem var(--font-body); }
+.pop .hd .l { display: flex; align-items: center; gap: 10px; } .pop .hd .l .ico { color: var(--accent); }
+.pop .hd .x { width: 44px; height: 44px; margin-right: -10px; border: 0; background: none; display: grid; place-items: center; color: var(--ink-2); }
+.pop .art { position: relative; height: 128px; border-radius: 18px; overflow: hidden; background: var(--surface-2); }
+.pop .art .chip { position: absolute; right: 10px; bottom: 10px; font-size: 0.8125rem; padding: 8px 12px; }
+.pop .claim { font: 700 1.1rem/1.3 var(--font-display); letter-spacing: -0.01em; word-spacing: 0.08em; text-wrap: balance; }
+.pop .body { font-size: 0.98rem; line-height: 1.48; color: var(--ink-2); text-wrap: pretty; }
+.pop .body b { color: var(--ok); }
+.pop .src { display: flex; gap: 10px; align-items: flex-start; padding-top: 12px; border-top: 1px solid var(--border); font: 500 0.875rem/1.45 var(--font-body); color: var(--ink-2); }
+.pop .src .ico { width: 18px; height: 18px; margin-top: 1px; color: var(--ink-3); }
+.pop .src .ln { display: block; }
+
+/* ---------- 320 genişlik ---------- */
+@media (max-width: 340px) {
+  .screen { padding: 10px var(--gut) 14px; gap: 9px; }
+  .ey { font-size: 0.6875rem; letter-spacing: 0.08em; line-height: 15px; }
+  .h { font-size: 1.3rem; }
+  .lead { font-size: 0.9rem; }
+  .btn { min-height: 48px; padding: 10px 14px; }
+  .chip { font-size: 0.8125rem; padding: 9px 12px; }
+  .tray { padding: 9px; gap: 6px; left: 8px; right: 8px; top: 8px; border-radius: 16px; }
+  .tile { border-radius: 10px; padding: 3px 3px 9px; } .tile .no { font-size: 0.625rem; left: 4px; bottom: 3px; }
+  .tile .badge { width: 14px; height: 14px; top: 3px; right: 3px; } .tile .badge svg { width: 9px; height: 9px; }
+  .key { height: 60px; border-radius: 16px; font-size: 1.45rem; }
+  .cnt-q > div { gap: 10px; }
+  .chg-head { gap: 4px; }
+  .chg-head .h { font-size: 1.12rem; }
+  .chg-head .lead { font-size: 0.86rem; }
+  .frame { margin-top: 8px; }
+  .slot { height: 48px; margin-top: 8px; } .slot .btn { min-height: 48px; }
+  .tbar { height: 12px; }
+  .ms-head { gap: 5px; }
+  .yn button { border-radius: 18px; font-size: 1.05rem; gap: 6px; } .yn button .ico { width: 26px; height: 26px; }
+  .opts, .yn { gap: 8px; } .ans { gap: 8px; }
+  .opt { font-size: 0.98rem; gap: 10px; padding: 0 12px; border-radius: 16px; }
+  .sw { width: 22px; height: 22px; }
+  .ms-card { border-radius: 20px; }
+  .pill { font-size: 0.75rem; padding: 7px 10px; bottom: 10px; } .pill.l { left: 10px; } .pill.r { right: 10px; font-size: 0.85rem; }
+  .cite { font-size: 0.75rem; }
+  .pick { height: 34px; font-size: 0.9rem; } .pick .sw { width: 18px; height: 18px; }
+  .st-11 .ms-head .h { font-size: 1.12rem; }
+  .sc-res { gap: 9px; }
+  .res-head .h { font-size: 1.35rem; }
+  .strip { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .thumb { aspect-ratio: 4 / 5; border-radius: 12px; } .thumb.best::after { border-radius: 12px; box-shadow: inset 0 0 0 2.5px var(--lens); }
+  .thumb .n { font-size: 0.6875rem; left: 4px; top: 4px; padding: 3px 5px; border-radius: 6px; }
+  .thumb .badge { width: 17px; height: 17px; top: 4px; right: 4px; } .thumb .badge svg { width: 10px; height: 10px; }
+  .r2 { font-size: 0.875rem; line-height: 1.36; }
+  .rows { gap: 6px; }
+  .row { min-height: 50px; padding: 6px 10px 6px 6px; gap: 10px; border-radius: 14px; }
+  .row .th { width: 34px; height: 40px; border-radius: 9px; }
+  .row .tx { font-size: 0.8125rem; line-height: 1.3; }
+  .row i.tag { font-size: 0.625rem; padding: 4px 6px; }
+  .fact { min-height: 46px; font-size: 0.875rem; }
+  .pop { padding: 6px var(--gut) 14px; gap: 9px; border-radius: 22px 22px 0 0; }
+  .pop .hd { min-height: 40px; font-size: 0.875rem; }
+  .pop .art { height: 92px; border-radius: 14px; }
+  .pop .claim { font-size: 0.98rem; }
+  .pop .body { font-size: 0.875rem; line-height: 1.45; }
+  .pop .src { font-size: 0.8125rem; padding-top: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  /* süre bilgisi hareket değil, bilgidir: çizgi doğrusal azalmaya devam eder */
+  .tbar i { animation: tbar 3s linear both !important; }
+}
+</style>
+<script src="sahne.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const P = new URLSearchParams(location.search)
+const AN = P.get('an') || '04-once'
+const TEMA = P.get('tema') === 'koyu' ? 'dark' : 'light'
+document.documentElement.setAttribute('data-theme', TEMA)
+const MODE = TEMA === 'dark' ? 'dusk' : 'day'
+const { T, svg: ALL, meta: M } = window.SAHNE
+const S = ALL[MODE]
+const W = Math.min(window.innerWidth, 560)
+const NARROW = W <= 340
+
+const I = {
+  x: '<svg class="ico" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
+  check: '<svg class="ico" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>',
+  eye: '<svg class="ico" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>',
+  eyeOff: '<svg class="ico" viewBox="0 0 24 24"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>',
+  down: '<svg class="ico" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>',
+  book: '<svg class="ico" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>',
+  flask: '<svg class="ico" viewBox="0 0 24 24"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/><path d="M6.453 15h11.094"/><path d="M8.5 2h7"/></svg>',
+}
+const mk = (k) => I[k].replace('class="ico"', 'class="ico mk"')
+const barEl = (v) => `<div class="bar" role="progressbar" aria-label="${T.progress}"><i style="width:${Math.round(v * 100)}%"></i></div>`
+// Üst etiket (Ne değişti? · 1 / 4 …) ilerleme çizgisinin üstünde
+const topBar = (v, ey) => `<div class="top"><span class="btn-icon" aria-label="${T.exit}">${I.x}</span>${ey ? `<div class="tb"><span class="ey">${ey}</span>${barEl(v)}</div>` : barEl(v)}</div>`
+// Kaynak satırı: parçalar ("Kreitz ve ark. 2020", "Q J Exp Psychol") kendi içinde bölünmez; "·" önceki parçaya yapışık
+const citeHTML = (t) => t.split(' · ').map((x, i, a) => `<span class="nw">${x}${i < a.length - 1 ? ' ·' : ''}</span>`).join(' ')
+const sw = (o, small) => `<span class="sw${small ? ' s' : ''}" style="--c:${o.hex}" aria-hidden="true"></span>`
+const app = document.getElementById('app')
+
+// ---- Sahne kırpımı (app/src/lib/street.js coverView mantığı): tabela ya tam ya hiç ----
+// Görünüm verilir; kenarda yarım kalan tabela levhası ve yazısı kaldırılır (koda aktarımda renderScene seçeneği).
+function fitScene(svgEl, v) {
+  svgEl.setAttribute('viewBox', `${v.vx} ${v.vy} ${v.vw} ${v.vh}`)
+  const x0 = v.vx, x1 = v.vx + v.vw, top = M.sign.top
+  for (const r of [...svgEl.querySelectorAll(`rect[y="${top}"][height="${M.sign.h}"]`)]) {
+    const rx = +r.getAttribute('x'), rw = +r.getAttribute('width')
+    if (rx < x0 - 0.5 || rx + rw > x1 + 0.5 || top < v.vy - 0.5 || top + M.sign.h > v.vy + v.vh + 0.5) {
+      for (const t of svgEl.querySelectorAll('text')) { const tx = +t.getAttribute('x'); if (tx > rx && tx < rx + rw && Math.abs(+t.getAttribute('y') - (top + 18)) < 1) t.remove() }
+      r.remove()
+    }
+  }
+}
+const boxOf = (el) => el.getBoundingClientRect()
+
+// ---------------- 04 · Sayı sorusu ----------------
+function count(after) {
+  const n0 = M.n0, a = M.answer, d = Math.abs(a - n0)
+  const slots = Math.max(n0, a)
+  const tiles = Array.from({ length: slots }, (_, i) => {
+    const cls = i >= n0 ? 'extra' : i >= a ? 'miss' : 'got'
+    return `<span class="tile ${cls}" style="--i:${i}">${i < n0 ? S.icon : ''}<span class="no">${i + 1}</span>${cls === 'got' ? `<span class="badge">${I.check}</span>` : ''}</span>`
+  }).join('')
+  const head = d === 0 ? `<h1 class="h ok">${T.exact}</h1><p class="lead">${T.r5same}</p>` : d === 1 ? `<h1 class="h near">${T.near}</h1><p class="lead">${T.r5}</p>` : `<h1 class="h">${T.r5}</h1>`
+  app.innerHTML = `<main class="screen sc-count${after ? ' answered' : ''}">${topBar(0.3)}
+    <section class="cnt-panel" aria-label="${T.scene}">
+      <div class="scn" id="pn"></div>
+      ${after ? `<div class="tray" style="--n:${slots}" aria-hidden="true">${tiles}</div>` : `<span class="chip">${T.chip}</span>`}
+    </section>
+    <div class="cnt-q">
+      <div class="ask"><h1 class="h">${T.count}</h1>
+        <div class="keys" role="radiogroup" aria-label="${T.count}">${[3, 4, 5, 6].map((v) => `<button class="key" role="radio">${v}</button>`).join('')}</div></div>
+      <div class="fb" aria-live="polite" ${after ? '' : 'style="visibility:hidden" aria-hidden="true"'}>${head}<button class="btn">${T.next}</button></div>
+    </div></main>`
+  // alt blok iki hâlin büyüğü kadar (panel cevaptan sonra kıpırdamaz)
+  const q = app.querySelector('.cnt-q')
+  const hgt = Math.max(...[...q.children].map((c) => [...c.children].reduce((s, e) => s + e.getBoundingClientRect().height, 0) + (c.children.length - 1) * parseFloat(getComputedStyle(c).rowGap || 0)))
+  q.style.height = `${Math.ceil(hgt)}px`
+  // panel: caddenin sonundaki bina sınırlı aday aralıklardan, kutunun oranına sığan en genişi; alt kenar kaldırımın
+  // önü + yolun ilk 30 birimi (alt dörtte bir boş asfalt kalmaz)
+  const pb = boxOf(app.querySelector('.cnt-panel'))
+  const ar = pb.width / pb.height
+  const bottom = M.road + 30
+  let ci = 0
+  M.panelCands.forEach((c, i) => { if (bottom - c.vw / ar >= 60) ci = i })
+  const c = M.panelCands[ci]
+  const pn = document.getElementById('pn')
+  pn.innerHTML = S.panels[ci]
+  fitScene(pn.querySelector('svg'), { vx: c.vx, vw: c.vw, vh: c.vw / ar, vy: bottom - c.vw / ar })
+}
+
+// ---------------- 05 · Ezberleme (ve 06) ----------------
+function change(second) {
+  app.innerHTML = `<main class="screen sc-chg">${topBar(0.35, T.d1)}
+    <div class="chg"><div class="sp1"></div>
+      <header class="chg-head"><h1 class="h">${second ? `${T.d2a}<br>${T.d2b}` : T.b1}</h1>
+        <p class="lead${second ? ' cue' : ''}">${second ? T.d3 : T.d4}</p></header>
+      <div class="frame" role="img" aria-label="${T.d2}"><div class="scn">${second ? S.f1after : S.f1before}</div></div>
+      <div class="slot">${second ? `<button class="btn btn-2">${T.d5}</button>` : '<div class="tbar" aria-hidden="true"><i></i></div>'}</div>
+      <div class="sp2"></div></div></main>`
+  fitScene(app.querySelector('.frame svg'), M.frames[0].view)
+}
+T.d2 = `${T.d2a} ${T.d2b}`
+
+// ---------------- 09 / 10 / 11 · Gözünden kaçan ----------------
+function missed(step) {
+  const mh = NARROW ? 94 : 116
+  const mb = NARROW ? 114 : 134
+  const db = M.dogBox
+  const head = step === 9 ? `<h1 class="h">${T.g2[0]}</h1><p class="lead">${T.g2[1]}</p>`
+    : step === 10 ? `<h1 class="h">${T.g4[0]}</h1><p class="lead">${T.g4[1]}</p>`
+      : `<h1 class="h">${T.s1a}</h1><p class="lead">${T.s1b}</p>`
+  const ring = step === 9 ? '' : `<circle class="rg halo" cx="${db.cx}" cy="${db.cy}" r="${db.r}"/><circle class="rg fg" cx="${db.cx}" cy="${db.cy}" r="${db.r}"/>`
+  const waves = step === 11 ? `<circle class="wv" cx="${db.cx}" cy="${db.cy}" r="${db.r}"/><circle class="wv w2" cx="${db.cx}" cy="${db.cy}" r="${db.r}"/>` : ''
+  const yn = `<div class="yn" role="radiogroup" aria-label="${T.g2.join(' ')}"><button role="radio">${I.eye}${T.g3[0]}</button><button role="radio">${I.eyeOff}${T.g3[1]}</button></div>`
+  const opts = `<div class="opts" role="radiogroup" aria-label="${T.g4[0]}">${T.opts.map((o) => `<button class="opt" role="radio">${sw(o)}${o.name}</button>`).join('')}</div>`
+  const ans = `<div class="ans" aria-live="polite"><span class="pick">${mk('check')}${sw(T.a1)}${T.a1.name}</span><p class="cite">${I.book}<span>${citeHTML(T.s1cite)}</span></p><button class="btn">${T.next}</button></div>`
+  app.innerHTML = `<main class="screen sc-miss st-${step}" style="--mh:${mh}px;--mb:${mb}px">${topBar(step === 9 ? 0.75 : 0.8, T.g1)}
+    <div class="ms-head">${head}</div>
+    <figure class="ms-card"><div class="layer glass" aria-hidden="true">${S.glass}</div><div class="layer real" ${step === 11 ? `role="img" aria-label="${T.who1}"` : 'aria-hidden="true"'}>${S.real}</div>
+      <svg class="mark" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${ring}${waves}</svg>
+      <figcaption class="pill l">${T.g5}</figcaption></figure>
+    <div class="ms-blk"><div>${step === 9 ? yn : step === 10 ? opts : ans}</div></div></main>`
+  // kırpım: konunun binası tam (kenar bina sınırında, tabela tam); alt kenar ayakların 34 px altı (alt şerit yazı hapları
+  // için; boş asfalt yok)
+  const card = boxOf(app.querySelector('.ms-card'))
+  const b = M.subj.block
+  const vw = b.w, vh = vw * card.height / card.width
+  const scale = card.width / vw
+  const v = { vx: b.x, vw, vh, vy: M.subj.y + 8 + 40 / scale - vh }
+  for (const s of app.querySelectorAll('.ms-card .layer > svg, .ms-card .mark')) fitScene(s, v)
+}
+
+// ---------------- 12 · Sonuç ----------------
+function result(open) {
+  const best = M.frames.reduce((b, f, i) => (f.found && (b < 0 || f.n >= M.frames[b].n) ? i : b), -1)
+  const thumbs = M.frames.map((f, i) => `<div class="thumb${i === best ? ' best' : ''}" style="--i:${i}" data-i="${i}">${S.thumbs[i]}
+      <svg class="mk" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${f.found ? `<circle class="rg halo" cx="${f.ring.cx}" cy="${f.ring.cy}" r="${f.ring.r}"/><circle class="rg" cx="${f.ring.cx}" cy="${f.ring.cy}" r="${f.ring.r}"/>` : `<circle class="rg halo" cx="${f.ring.cx}" cy="${f.ring.cy}" r="${f.ring.r}"/><circle class="rg miss" cx="${f.ring.cx}" cy="${f.ring.cy}" r="${f.ring.r}"/>`}</svg>
+      <span class="n">${f.n}</span>${f.found ? `<span class="badge">${I.check}</span>` : ''}</div>`).join('')
+  const row = (th, txt, tag, cls) => `<div class="row">${th}<div class="tx">${txt}</div><i class="tag ${cls}">${tag}</i></div>`
+  const yes = (o) => `<span class="yes">${mk('check')}${sw(o, true)}<span class="nm">${o.name}</span></span>`
+  const not = (o) => `<span class="not">${mk('x')}${sw(o, true)}<span class="nm">${o.name}</span></span>`
+  const rows = row(`<span class="th ic">${S.icon}</span>`, T.r5, T.tags.YAKIN, 'near')
+    + row(`<span class="th">${S.who1}</span>`, `${T.who1u}<span class="a">${yes(T.a1)}</span>`, T.tags.TAHMIN, 'guess')
+    + row(`<span class="th">${S.who2}</span>`, `${T.who2u}<span class="a">${not(T.a2pick)}${yes(T.a2)}</span>`, T.tags.KACTI, 'no')
+  const f = T.fact
+  const [ref, doi] = f.cite.split(' · doi ')
+  const cite = `<span class="ln">${citeHTML(ref)}</span><span class="ln">doi ${doi}</span>`
+  app.innerHTML = `<main class="screen sc-res">${topBar(1, T.r1)}
+    <header class="res-head"><h1 class="h">${T.s0}</h1></header>
+    <div class="strip" role="img" aria-label="${T.s0}">${thumbs}</div>
+    <p class="r2">${T.r2s}</p>
+    <div class="rows">${rows}</div>
+    <button class="fact" aria-expanded="${open}"><span class="l">${I.flask}${f.head}</span>${I.down}</button>
+    <button class="btn">${T.done}</button>
+  </main>
+  ${open ? `<div class="pop-scrim"></div><section class="pop" role="dialog" aria-label="${f.head}"><span class="grab"></span>
+      <div class="hd"><span class="l">${I.flask}${f.head}</span><button class="x" aria-label="${T.exit}">${I.x}</button></div>
+      <div class="art"><div class="scn">${S.glass}</div><span class="chip">${T.chip}</span></div>
+      <p class="claim">${f.claim}</p><p class="body"><b>${f.answer}.</b> ${f.body}</p><p class="src">${I.book}<span>${cite}</span></p></section>` : ''}`
+  // özet kareleri: değişen yerin yakın planı (iki genişlikte aynı mantık); halka karenin kısa kenarının ~%58'i
+  for (const el of app.querySelectorAll('.thumb')) {
+    const fr = M.frames[+el.dataset.i]
+    const bx = boxOf(el)
+    const ar = bx.width / bx.height
+    const r = fr.ring
+    let vh = Math.max((2 * r.r) / 0.58 / Math.min(1, ar), 120)
+    let vw = vh * ar
+    const V = fr.view
+    if (vw > V.vw) { vw = V.vw; vh = vw / ar }
+    const vx = Math.max(V.vx, Math.min(V.vx + V.vw - vw, r.cx - vw / 2))
+    let vy = Math.max(V.vy, Math.min(V.vy + V.vh - vh, r.cy - vh / 2))
+    const v = { vx, vy, vw, vh }
+    for (const s of el.querySelectorAll(':scope > svg')) fitScene(s, v)
+  }
+  if (open) {
+    const art = app.querySelector('.pop .art')
+    const ab = boxOf(art)
+    // dikeyde tabelanın üstünden ayakların altına; yatayda konu solda üçte birde. Kenarda yarım kalan tabela fitScene ile
+    // kaldırılır (tabela ya tam ya hiç)
+    const ar = ab.width / ab.height
+    const vy = M.sign.top - 8, vh = M.subj.y + 22 - vy, vw = vh * ar
+    fitScene(art.querySelector('svg'), { vx: M.subj.x - vw * 0.3, vw, vh, vy })
+  }
+}
+
+const R = {
+  '04-once': () => count(false), '04-sonra': () => count(true),
+  '05': () => change(false), '06': () => change(true),
+  '09': () => missed(9), '10': () => missed(10), '11': () => missed(11),
+  '12': () => result(false), '12-kart': () => result(true),
+}
+;(R[AN] ?? R['04-once'])()
+document.title = `Fark Ettin mi · ${AN}`
+</script>
+</body>
+</html>

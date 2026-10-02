@@ -1,0 +1,20 @@
+/* Kaynak kartları ve listesi (components/Sources.jsx) */
+.src-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+.src-card p { margin: 0; font-size: 0.92rem; }
+.src-card .h { font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+.src-card b.ok { color: var(--ok); }
+.src-card b.no { color: var(--warn); }
+.src-card b.op { color: var(--lens-text); }
+.src-ey { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.src-cite { display: flex; flex-direction: column; gap: 2px; padding-top: 8px; border-top: 1px dashed var(--border); }
+.src-cite p { margin: 0; }
+.src-cite .who { font-weight: 700; font-size: 0.85rem; color: var(--ink); }
+.src-cite .title { font-size: 0.85rem; font-style: italic; color: var(--ink-2); }
+.src-cite .tr { font-size: 0.82rem; color: var(--ink-3); }
+.src-cite .meta { font: 500 0.7rem/1.5 var(--font-mono); color: var(--ink-3); }
+.src-cite .doi { font: 500 0.72rem var(--font-mono); color: var(--accent); display: inline-flex; gap: 4px; align-items: center; overflow-wrap: anywhere; min-height: 32px; }
+.src-none { font: 500 0.72rem var(--font-mono); color: var(--ink-3); }
+.src-list { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 10px 14px; }
+.src-list summary { cursor: pointer; font-weight: 700; font-size: 0.92rem; min-height: 32px; display: flex; align-items: center; }
+.src-list .src-cite { margin-top: 8px; }
+.src-note { margin: 10px 0 0; font-size: 0.75rem; color: var(--ink-3); }

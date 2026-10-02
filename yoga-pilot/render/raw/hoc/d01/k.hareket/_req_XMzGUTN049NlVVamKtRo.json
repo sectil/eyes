@@ -1,0 +1,37 @@
+{
+ "node_id": "XMzGUTN049NlVVamKtRo",
+ "session_ids": [
+  "4niLI5wp9OTdmJk6XAua",
+  "o4Kts86xJg0lcimwBXvC",
+  "OIYFBf36VZQv4VeDlURZ"
+ ],
+ "requested_at": "2026-09-30T06:57:03.016Z",
+ "tts": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "4niLI5wp9OTdmJk6XAua",
+   "generation_id": "M1BObP8YGZKJ7jSXj9On",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/4niLI5wp9OTdmJk6XAua/M1BObP8YGZKJ7jSXj9On/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065731Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=69a816e09f747b5593e25022846c4dec7ec830dc28833e7b2108ffb02f3e4a63cc718330fe60b283ddce01f506f054c40423f93cd44f9094b44ceae8dd4d546539b987e04dc48b72975a808823a0ccf7649b5e1599366684c969d4fc3ba03ce386f78e03f06893d67b841b583ca82bb9be6a6644089527cf0eecd1b215855422224fe2872519e859324b2701630adfe7635f86cc99c571adabf6fdde88930d4283c07b1c7132d8ba65820fb9ad2f83c0cff80287fba45fe177c511a6accd1eb18550e6631180af9b8d49bace09ed83b5e81138994accdb7ebabced725ca939b16c934a440876400562fea061c0f40158e6bf8e2a4f6d055e464869ee979eda46",
+   "duration_secs": 6.64,
+   "prompt": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "o4Kts86xJg0lcimwBXvC",
+   "generation_id": "RDT2hFWdg05OTvMWaTyt",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/o4Kts86xJg0lcimwBXvC/RDT2hFWdg05OTvMWaTyt/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065709Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=8afa76b3eaff8f742ed60a7c1c23853eb9b8f6edfc43498d277c5116046bc6e9f0a9ef9cb0ee3bb10d34f738036653b6bde6af1170d56796d48d655d8180d51e3d7670b1010c17f98dc09af8d4041af0472063913574d4c2982f8ae68b399b980a4d056491e7307c43b33da902a922277270caafd747984150072c3e8d6f2ca46e2d5d5d7b54dc76d5f7aafe40f8b019e3dbffca02e49ddfa033c85ee6db434371867fafda5cd72c55c609ff16d444d7bc23be8d86e678334c9fee60d8cd6ecc571322640cf17c98e89bbf4a232d995be0a8ca380bd21e9db7df7a3e4a0dbe5be59d0999f6a883d8f78c2fbc4a5bfb6d707484a49a88205af79889ef57a97b94",
+   "duration_secs": 6.48,
+   "prompt": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "OIYFBf36VZQv4VeDlURZ",
+   "generation_id": "FJ0UuptAmx2ghlsWkr0s",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/OIYFBf36VZQv4VeDlURZ/FJ0UuptAmx2ghlsWkr0s/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065709Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=bb529fed917253487b2cb6aca824de113412522d92d31004ced109614df701fc288e4a566267d031615acefeb693669813a1b303dfe02b83c4b4d9ff68b1f0e9fe4adc30bd22f43a960d6655d0c680cdec6f818f865668812e3885765450c7fff86a107d9845e28bad92449150e4cb480fe4b5461a95c83265eedd741107b27282c2096bfd2f2da97c41624a8efbbf46c85b231b5f2280214b7b81c208f97af041df319e3d4464fcc5c07c5af04c5024d873a98b03f1530b7bb3974514ce9e2c78e93836f43d9b0041d9a5285761b1eddcda1369dcc45f40de8adc958ecd8910bd7694ca50604a81e6c79778f035cf0c9891633b60d1a325703fe9a6648b69e3",
+   "duration_secs": 6.4,
+   "prompt": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.",
+   "kind": "audio"
+  }
+ ]
+}

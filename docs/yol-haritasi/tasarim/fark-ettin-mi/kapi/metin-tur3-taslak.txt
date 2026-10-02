@@ -1,0 +1,105 @@
+Bağlam: Nefona'daki "Fark Ettin mi?" alıştırması. Kişi canlı çizilmiş bir caddeden (ya da pazar yerinden, parktan) geçer; geçerken kendisine verilen şeyi sayar. Sonra "Ne değişti?" bölümünde iki görüntü arasındaki değişikliği bulur ve bulunca kısa bir açıklama görür. En sonda "Gözünden kaçan" sorularını cevaplar: önce "… vardı. Onu fark ettin mi?" (Gördüm · Görmedim), sonra ayrıntı sorusu ve altında "Görmediysen de tahmin et." Her satır: kimlik | nerede görünür | metin (gerçek veriyle doldurulmuş örnek). Aynı kimliğin a/b sürümleri seçenektir; her birine ayrı karar ver.
+
+S1 | sahne adı, görev ekranı üst satırı ve yol durağı | Cadde
+S2 | sahne adı | Pazar yeri
+S3 | sahne adı | Park
+S4 | sahne adı | Akşam caddesi
+S5 | sahne adı | Yağmurlu cadde
+
+H1 | görev ekranı, büyük yazı | Kırmızı arabaları say
+H1q | yürüyüş bitince soru | Kaç kırmızı araba geçti?
+H1g | görev ekranı, açıklama | Gözün kırmızı arabalarda olsun. Sonunda birkaç sorum var.
+H2 | görev | Köpekleri say
+H2q | soru | Kaç köpek gördün?
+H3a | görev | Şapkalı kişileri say
+H3aq | soru | Kaç şapkalı kişi gördün?
+H3b | görev | Şapka takanları say
+H3bq | soru | Kaç kişi şapka takıyordu?
+H4 | görev | Gözlüklü kişileri say
+H4q | soru | Kaç gözlüklü kişi gördün?
+H5 | görev (akşam sahnesi) | Işıklı vitrinleri say
+H5q | soru | Kaç ışıklı vitrin gördün?
+H6 | görev (yağmurlu sahne) | Kırmızı şemsiyeleri say
+H6q | soru | Kaç kırmızı şemsiye gördün?
+H7 | görev (yağmurlu sahne) | Sarı yağmurluk giyenleri say
+H7q | soru | Kaç kişi sarı yağmurluk giyiyordu?
+H8 | görev (pazar) | Karpuzları say
+H8q | soru | Kaç karpuz gördün?
+H9 | görev (pazar) | Şapkalı satıcıları say
+H9q | soru | Kaç şapkalı satıcı gördün?
+H10 | görev (pazar) | Kırmızı kasaları say
+H10q | soru | Kaç kırmızı kasa gördün?
+H11 | görev (pazar) | Sepetleri say
+H11q | soru | Kaç sepet gördün?
+H12 | görev (pazar) | Çiçek kovalarını say
+H12q | soru | Kaç çiçek kovası gördün?
+H13 | görev | Balonları say
+H13q | soru | Kaç balon gördün?
+H14 | görev (park) | Uçurtmaları say
+H14q | soru | Kaç uçurtma gördün?
+H15 | görev (park) | Koşanları say
+H15q | soru | Kaç kişi koşuyordu?
+H16 | görev (park) | Topları say
+H16q | soru | Kaç top gördün?
+H17 | görev (park) | Bebek arabalarını say
+H17q | soru | Kaç bebek arabası geçti?
+H18 | görev (park) | Güvercinleri say
+H18q | soru | Kaç güvercin gördün?
+
+Y1 | soru cümlesinin başı, cadde sahneleri | Caddede kahkaha atan bir kadın vardı.
+Y2 | soru cümlesinin başı, pazar | Pazar yerinde kahkaha atan bir kadın vardı.
+Y3 | soru cümlesinin başı, park | Parkta kahkaha atan bir kadın vardı.
+
+K1 | Gözünden kaçan, ilk soru | Caddede sarışın bir kadın vardı.
+K1d | ayrıntı sorusu | Çantası ne renkti?
+K2 | ilk soru | Caddede çocuklu bir kadın vardı.
+K2d | ayrıntı sorusu | Çocuğun elinde ne vardı?
+K3 | ilk soru | Caddede şapkalı bir adam vardı.
+K3d | ayrıntı sorusu | Şapkası ne renkti?
+K4 | ilk soru | Caddede bir sokak satıcısı vardı.
+K4d | ayrıntı sorusu | Ne satıyordu?
+K5 | ilk soru | Caddede yeşil tenteli bir dükkân vardı.
+K5d | ayrıntı sorusu (seçenekler: Fırın, Kafe, Berber…) | Hangi dükkândı?
+K6 | ilk soru | Pazar yerinde yeşil tenteli bir tezgâh vardı.
+K6d | ayrıntı sorusu (seçenekler: Elma, Limon, Nar…) | Tabelasında ne yazıyordu?
+K7 | ilk soru | Caddede sakallı bir adam vardı.
+K7da | ayrıntı sorusu | Üstü ne renkti?
+K7db | ayrıntı sorusu | Tişörtü ne renkti?
+K8 | ilk soru | Caddede köpeğini gezdiren biri vardı.
+K8d | ayrıntı sorusu | Köpeği ne renkti?
+K9 | ilk soru | Caddede atkılı bir kadın vardı.
+K9d | ayrıntı sorusu | Atkısı ne renkti?
+K10 | ilk soru | Caddede bisikletli biri vardı.
+K10d | ayrıntı sorusu | Bisikleti ne renkti?
+K11 | ilk soru | Caddede scooter süren biri vardı.
+K11d | ayrıntı sorusu | Scooter'ı ne renkti?
+K12 | ilk soru | Caddede bastonlu yaşlı bir adam vardı.
+K12da | ayrıntı sorusu | Üstü ne renkti?
+K12db | ayrıntı sorusu | Tişörtü ne renkti?
+K13 | ilk soru | Caddede elinde çiçek olan bir kadın vardı.
+K13d | ayrıntı sorusu | Çiçekler ne renkti?
+K14 | ilk soru | Caddede çalgı çalan bir adam vardı.
+K14d | ayrıntı sorusu (seçenekler: Gitar, Keman, Akordeon, Flüt) | Ne çalıyordu?
+K15 | ilk soru | Caddede şemsiyeli biri vardı.
+K15d | ayrıntı sorusu | Şemsiyesi ne renkti?
+K16 | ilk soru | Caddede baretli bir işçi vardı.
+K16d | ayrıntı sorusu | Bareti ne renkti?
+K17 | ilk soru | Parkta uçurtma uçuran bir çocuk vardı.
+K17d | ayrıntı sorusu | Uçurtması ne renkti?
+
+C1 | Ne değişti? bulunca açıklama (renk) | Kapı lacivertti, bordo oldu
+C2 | açıklama (renk) | Bank kahverengiydi, yeşil oldu
+C3 | açıklama (renk) | Kedi griydi, siyah oldu
+C4a | açıklama (bir şey eklendi) | Bir saksı eklendi
+C4b | açıklama (bir şey eklendi) | Kaldırıma bir saksı kondu
+C5a | açıklama (bir şey çıktı) | Çöp kutusu kaldırıldı
+C5b | açıklama (bir şey çıktı) | Çöp kutusu artık yok
+C6a | açıklama (hayvan geldi) | Bir güvercin geldi
+C6b | açıklama (hayvan gitti) | Kedi gitti
+C7a | açıklama (kişinin üstünde eklendi) | Birinin başında şapka belirdi
+C7b | açıklama (kişinin üstünde eklendi) | Şapka eklendi
+C8a | açıklama (kişinin üstünden kalktı) | Birinin gözlüğü yok oldu
+C8b | açıklama (kişinin üstünden kalktı) | Gözlük kaldırıldı
+C9 | açıklama (yer değişti) | Bisiklet yer değiştirdi
+C10a | açıklama (tabela) | Tabelada F harfi P oldu
+C10b | açıklama (tabela) | Tabeladaki bir harf değişti: FIRIN, PIRIN oldu

@@ -1,0 +1,231 @@
+Nefona Yoga · Ders 2 "Derin Dinlenme" · timing.py çıktısı (3. tur)
+Ders dosyası: ders2.lesson.json (sürüm pilot-3 (2026-09-29))
+Model: hece/hız + TTS-içi duraklama (düşük=Neslihan v2, yüksek=Hakan v2; 5,2'de ×1,25) + uç payı 0,31 sn (mikro 0,15); mikro-listelerde başlangıç periyodu (sessizlik = periyot − süre, en az 0.8 sn). Vaka = hız × dakika; iki duraklama profilinde de geçmeli.
+
+== Metin denetimi ==
+  bilgi: en yavaş klip (duraklamalar dahil): 3.21 hece/sn (k.oda.ayrinti @5.2 hi)
+  bilgi: Derin cümle iç hızı 5.2 lo: medyan 5.07, en yüksek 5.20 hece/sn → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) medyan tavanın üstünde
+  bilgi: Derin cümle iç hızı 5.2 hi: medyan 4.45, en yüksek 5.20 hece/sn → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) medyan tavanın altında
+  bilgi: Derin cümle iç hızı 5.6 lo: medyan 5.48, en yüksek 5.60 hece/sn → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) medyan tavanın üstünde
+  bilgi: Derin cümle iç hızı 5.6 hi: medyan 4.89, en yüksek 5.60 hece/sn → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) medyan tavanın altında
+  bilgi: Derin cümle iç hızı 6.6 lo: medyan 6.44, en yüksek 6.60 hece/sn → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) medyan tavanın üstünde
+  bilgi: Derin cümle iç hızı 6.6 hi: medyan 5.63, en yüksek 6.60 hece/sn → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) medyan tavanın üstünde
+  metin denetimi: GEÇTİ
+
+== Vaka tablosu (her satır: hız, dakika, profil) ==
+  kolonlar: sonuç | kapak | bloklar | klip sayısı | hece | konuşma % | sessizlik kipi f | en uzun boşluk | pencereler | en yoğun 60 sn (hece, pay) | ort. hece/dk
+  GEÇTİ 5.2  5 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  35 |  537 | 38.3% | min→pref 0.65 |  12.6 | - | 147, 0.52 | 107
+  GEÇTİ 5.2  5 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  35 |  537 | 42.5% | min→pref 0.36 |  12.0 | - | 147, 0.57 | 107
+  GEÇTİ 5.2  6 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  37 |  590 | 35.0% | pref→max 0.11 |  15.5 | - | 131, 0.46 |  98
+  GEÇTİ 5.2  6 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  36 |  572 | 37.9% | pref→max 0.11 |  15.5 | - | 131, 0.50 |  95
+  GEÇTİ 5.2  7 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  45 |  658 | 33.6% | pref→max 0.00 |  16.0 | - | 133, 0.47 |  94
+  GEÇTİ 5.2  7 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  38 |  603 | 34.1% | pref→max 0.38 |  17.5 | - | 125, 0.48 |  86
+  GEÇTİ 5.2  8 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  56 |  747 | 33.5% | pref→max 0.08 |  16.3 | - | 120, 0.42 |  93
+  GEÇTİ 5.2  8 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  55 |  725 | 35.8% | pref→max 0.01 |  16.1 | - | 120, 0.46 |  91
+  GEÇTİ 5.2  9 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  67 |  829 | 33.1% | pref→max 0.11 |  16.4 | - | 123, 0.43 |  92
+  GEÇTİ 5.2  9 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  59 |  807 | 35.3% | pref→max 0.15 |  16.6 | - | 128, 0.50 |  90
+  GEÇTİ 5.2 10 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  88 |  902 | 32.7% | pref→max 0.11 |  16.4 | - | 123, 0.44 |  90
+  GEÇTİ 5.2 10 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  83 |  875 | 34.6% | pref→max 0.10 |  16.4 | - | 119, 0.47 |  88
+  GEÇTİ 5.2 11 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  97 |  988 | 32.5% | pref→max 0.01 |  16.0 | - | 132, 0.46 |  90
+  GEÇTİ 5.2 11 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  95 |  949 | 34.0% | pref→max 0.01 |  16.1 | - | 120, 0.48 |  86
+  GEÇTİ 5.2 12 dk lo | tek   | A → N1 → C1 → C2 → N2 → K | 107 | 1056 | 31.9% | pref→max 0.03 |  16.1 | - | 128, 0.45 |  88
+  GEÇTİ 5.2 12 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  99 | 1021 | 33.5% | pref→max 0.08 |  16.3 | - | 119, 0.47 |  85
+  GEÇTİ 5.2 13 dk lo | tek   | A → N1 → C1 → C2 → N2 → K | 116 | 1130 | 31.6% | pref→max 0.03 |  16.1 | - | 129, 0.45 |  87
+  GEÇTİ 5.2 13 dk hi | tek   | A → N1 → C1 → C2 → N2 → K | 114 | 1098 | 33.2% | pref→max 0.11 |  16.4 | - | 118, 0.47 |  84
+  GEÇTİ 5.2 14 dk lo | tek   | A → N1 → C1 → C2 → N2 → K | 116 | 1130 | 29.3% | pref→max 0.36 |  17.4 | - | 119, 0.43 |  81
+  GEÇTİ 5.2 14 dk hi | tek   | A → N1 → C1 → C2 → N2 → K | 116 | 1130 | 31.8% | pref→max 0.25 |  17.0 | - | 118, 0.47 |  81
+  GEÇTİ 5.2 15 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 126 | 1347 | 32.5% | min→pref 0.60 |  14.4 | - | 133, 0.47 |  90
+  GEÇTİ 5.2 15 dk hi | tek   | A → N1 → C1 → C2 → N2 → K | 116 | 1130 | 29.6% | pref→max 0.58 |  18.3 | - | 116, 0.46 |  75
+  GEÇTİ 5.2 16 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 127 | 1364 | 30.9% | pref→max 0.01 |  16.0 | - | 130, 0.46 |  85
+  GEÇTİ 5.2 16 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 126 | 1347 | 33.4% | min→pref 0.89 |  15.6 | - | 120, 0.48 |  84
+  GEÇTİ 5.2 17 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 128 | 1375 | 29.3% | pref→max 0.23 |  16.9 | - | 120, 0.44 |  81
+  GEÇTİ 5.2 17 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 128 | 1375 | 32.0% | pref→max 0.11 |  16.4 | - | 118, 0.47 |  81
+  GEÇTİ 5.2 18 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 138 | 1476 | 29.7% | pref→max 0.11 |  16.4 | - | 123, 0.44 |  82
+  GEÇTİ 5.2 18 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 137 | 1456 | 32.1% | pref→max 0.02 |  16.1 | - | 119, 0.47 |  81
+  GEÇTİ 5.2 19 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 141 | 1545 | 29.5% | pref→max 0.03 |  46.2 | 46 | 128, 0.45 |  81
+  GEÇTİ 5.2 19 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 138 | 1476 | 30.9% | pref→max 0.23 |  16.9 | - | 118, 0.47 |  78
+  GEÇTİ 5.2 20 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 144 | 1588 | 28.8% | pref→max 0.07 |  48.2 | 48 | 125, 0.44 |  79
+  GEÇTİ 5.2 20 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 143 | 1573 | 31.4% | pref→max 0.00 |  45.1 | 45 | 120, 0.48 |  79
+  GEÇTİ 5.2 21 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 149 | 1668 | 28.8% | pref→max 0.04 |  46.6 | 47 | 128, 0.45 |  79
+  GEÇTİ 5.2 21 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 146 | 1619 | 30.8% | pref→max 0.06 |  47.8 | 48 | 118, 0.47 |  77
+  GEÇTİ 5.2 22 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 165 | 1769 | 29.2% | pref→max 0.01 |  45.6 | 46 | 129, 0.46 |  80
+  GEÇTİ 5.2 22 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 149 | 1668 | 30.3% | pref→max 0.11 |  49.9 | 50 | 118, 0.47 |  76
+  GEÇTİ 5.2 23 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 174 | 1836 | 29.0% | pref→max 0.04 |  46.6 | 47 | 128, 0.45 |  80
+  GEÇTİ 5.2 23 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 166 | 1784 | 30.9% | pref→max 0.03 |  46.5 | 46 | 120, 0.48 |  78
+  GEÇTİ 5.2 24 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 182 | 1873 | 28.4% | pref→max 0.11 |  50.1 | 50 | 123, 0.44 |  78
+  GEÇTİ 5.2 24 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 182 | 1873 | 31.0% | pref→max 0.01 |  45.3 | 45 | 120, 0.48 |  78
+  GEÇTİ 5.2 25 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 186 | 1950 | 28.3% | pref→max 0.09 |  49.1 | 49 | 124, 0.44 |  78
+  GEÇTİ 5.2 25 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 182 | 1873 | 29.8% | pref→max 0.17 |  52.8 | 53 | 118, 0.47 |  75
+  GEÇTİ 5.2 26 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 189 | 2014 | 28.1% | pref→max 0.05 |  47.0 | 47,47 | 127, 0.45 |  77
+  GEÇTİ 5.2 26 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 186 | 1950 | 29.8% | pref→max 0.15 |  51.6 | 52 | 118, 0.47 |  75
+  GEÇTİ 5.2 27 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 191 | 2084 | 28.0% | pref→max 0.02 |  50.2 | 50,46,46 | 129, 0.45 |  77
+  GEÇTİ 5.2 27 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 189 | 2014 | 29.7% | pref→max 0.09 |  48.9 | 49,49 | 118, 0.47 |  75
+  GEÇTİ 5.2 28 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 203 | 2148 | 27.9% | pref→max 0.02 |  50.2 | 50,46,46 | 129, 0.45 |  77
+  GEÇTİ 5.2 28 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 191 | 2084 | 29.7% | pref→max 0.05 |  50.5 | 51,47,47 | 120, 0.48 |  74
+  GEÇTİ 5.2 29 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 210 | 2215 | 27.7% | pref→max 0.01 |  50.1 | 50,45,45 | 129, 0.45 |  76
+  GEÇTİ 5.2 29 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 207 | 2172 | 29.8% | pref→max 0.00 |  50.0 | 50,45,45 | 120, 0.48 |  75
+  GEÇTİ 5.2 30 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 213 | 2272 | 27.5% | pref→max 0.04 |  50.4 | 50,47,47 | 127, 0.45 |  76
+  GEÇTİ 5.2 30 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 211 | 2231 | 29.6% | pref→max 0.00 |  50.0 | 50,45,45 | 120, 0.48 |  74
+  GEÇTİ 5.6  5 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  35 |  537 | 35.7% | min→pref 0.83 |  13.8 | - | 147, 0.48 | 107
+  GEÇTİ 5.6  5 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  35 |  537 | 39.0% | min→pref 0.60 |  12.2 | - | 147, 0.53 | 107
+  GEÇTİ 5.6  6 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  37 |  590 | 32.6% | pref→max 0.20 |  16.0 | - | 131, 0.42 |  98
+  GEÇTİ 5.6  6 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  37 |  590 | 35.7% | pref→max 0.08 |  15.4 | - | 131, 0.46 |  98
+  GEÇTİ 5.6  7 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  45 |  658 | 31.3% | pref→max 0.09 |  16.4 | - | 137, 0.45 |  94
+  GEÇTİ 5.6  7 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  38 |  603 | 31.3% | pref→max 0.50 |  18.0 | - | 130, 0.46 |  86
+  GEÇTİ 5.6  8 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  58 |  794 | 33.1% | pref→max 0.01 |  16.0 | - | 136, 0.46 |  99
+  GEÇTİ 5.6  8 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  56 |  747 | 33.9% | pref→max 0.05 |  16.2 | - | 121, 0.43 |  93
+  GEÇTİ 5.6  9 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  67 |  829 | 30.9% | pref→max 0.20 |  16.8 | - | 126, 0.41 |  92
+  GEÇTİ 5.6  9 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  67 |  829 | 33.4% | pref→max 0.09 |  16.3 | - | 120, 0.44 |  92
+  GEÇTİ 5.6 10 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  88 |  902 | 30.5% | pref→max 0.19 |  16.8 | - | 126, 0.41 |  90
+  GEÇTİ 5.6 10 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  88 |  902 | 32.8% | pref→max 0.09 |  16.3 | - | 120, 0.44 |  90
+  GEÇTİ 5.6 11 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  98 |  996 | 30.6% | pref→max 0.02 |  16.1 | - | 133, 0.43 |  91
+  GEÇTİ 5.6 11 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  96 |  967 | 31.9% | pref→max 0.05 |  16.2 | - | 124, 0.45 |  88
+  GEÇTİ 5.6 12 dk lo | tek   | A → N1 → C1 → C2 → N2 → K | 113 | 1078 | 30.5% | pref→max 0.00 |  16.0 | - | 133, 0.43 |  90
+  GEÇTİ 5.6 12 dk hi | tek   | A → N1 → C1 → C2 → N2 → K | 107 | 1056 | 32.0% | pref→max 0.01 |  16.1 | - | 125, 0.46 |  88
+  GEÇTİ 5.6 13 dk lo | tek   | A → N1 → C1 → C2 → N2 → K | 116 | 1130 | 29.5% | pref→max 0.10 |  16.4 | - | 132, 0.43 |  87
+  GEÇTİ 5.6 13 dk hi | tek   | A → N1 → C1 → C2 → N2 → K | 116 | 1130 | 31.6% | pref→max 0.01 |  16.0 | - | 125, 0.46 |  87
+  GEÇTİ 5.6 14 dk lo | tek   | A → N1 → C1 → C2 → N2 → K | 116 | 1130 | 27.4% | pref→max 0.43 |  17.7 | - | 119, 0.40 |  81
+  GEÇTİ 5.6 14 dk hi | tek   | A → N1 → C1 → C2 → N2 → K | 116 | 1130 | 29.3% | pref→max 0.34 |  17.4 | - | 118, 0.43 |  81
+  GEÇTİ 5.6 15 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 126 | 1347 | 30.3% | min→pref 0.75 |  15.0 | - | 133, 0.44 |  90
+  GEÇTİ 5.6 15 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 126 | 1347 | 32.8% | min→pref 0.56 |  14.2 | - | 135, 0.49 |  90
+  GEÇTİ 5.6 16 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 128 | 1375 | 29.0% | pref→max 0.04 |  16.1 | - | 133, 0.43 |  86
+  GEÇTİ 5.6 16 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 126 | 1347 | 30.7% | pref→max 0.05 |  16.2 | - | 123, 0.45 |  84
+  GEÇTİ 5.6 17 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 128 | 1375 | 27.3% | pref→max 0.31 |  17.3 | - | 120, 0.41 |  81
+  GEÇTİ 5.6 17 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 128 | 1375 | 29.5% | pref→max 0.21 |  16.8 | - | 120, 0.44 |  81
+  GEÇTİ 5.6 18 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 138 | 1476 | 27.7% | pref→max 0.19 |  16.8 | - | 126, 0.41 |  82
+  GEÇTİ 5.6 18 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 138 | 1476 | 30.0% | pref→max 0.09 |  16.3 | - | 120, 0.44 |  82
+  GEÇTİ 5.6 19 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 142 | 1554 | 27.7% | pref→max 0.05 |  47.2 | 47 | 133, 0.43 |  82
+  GEÇTİ 5.6 19 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 141 | 1545 | 29.9% | pref→max 0.00 |  45.0 | 45 | 126, 0.46 |  81
+  GEÇTİ 5.6 20 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 146 | 1619 | 27.4% | pref→max 0.05 |  47.2 | 47 | 133, 0.43 |  81
+  GEÇTİ 5.6 20 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 144 | 1588 | 29.1% | pref→max 0.05 |  47.2 | 47 | 123, 0.45 |  79
+  GEÇTİ 5.6 21 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 149 | 1668 | 26.9% | pref→max 0.10 |  49.7 | 50 | 132, 0.43 |  79
+  GEÇTİ 5.6 21 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 149 | 1668 | 29.2% | pref→max 0.01 |  45.5 | 45 | 125, 0.46 |  79
+  GEÇTİ 5.6 22 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 166 | 1784 | 27.4% | pref→max 0.03 |  46.5 | 47 | 133, 0.43 |  81
+  GEÇTİ 5.6 22 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 164 | 1753 | 29.2% | pref→max 0.03 |  46.4 | 46 | 124, 0.45 |  80
+  GEÇTİ 5.6 23 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 182 | 1873 | 27.6% | pref→max 0.01 |  45.4 | 45 | 133, 0.43 |  81
+  GEÇTİ 5.6 23 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 174 | 1836 | 29.2% | pref→max 0.01 |  45.6 | 46 | 125, 0.45 |  80
+  GEÇTİ 5.6 24 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 182 | 1873 | 26.5% | pref→max 0.18 |  52.9 | 53 | 127, 0.42 |  78
+  GEÇTİ 5.6 24 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 182 | 1873 | 28.6% | pref→max 0.09 |  49.1 | 49 | 120, 0.44 |  78
+  GEÇTİ 5.6 25 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 188 | 1989 | 26.9% | pref→max 0.00 |  45.1 | 45,45 | 133, 0.43 |  80
+  GEÇTİ 5.6 25 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 186 | 1950 | 28.5% | pref→max 0.07 |  48.2 | 48 | 121, 0.44 |  78
+  GEÇTİ 5.6 26 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 189 | 2014 | 26.2% | pref→max 0.10 |  49.7 | 50,50 | 132, 0.43 |  77
+  GEÇTİ 5.6 26 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 189 | 2014 | 28.4% | pref→max 0.03 |  46.1 | 46,46 | 124, 0.45 |  77
+  GEÇTİ 5.6 27 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 198 | 2123 | 26.6% | pref→max 0.01 |  50.1 | 50,46,46 | 133, 0.43 |  79
+  GEÇTİ 5.6 27 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 189 | 2014 | 27.3% | pref→max 0.17 |  52.5 | 52,52 | 120, 0.44 |  75
+  GEÇTİ 5.6 28 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 207 | 2172 | 26.3% | pref→max 0.03 |  50.3 | 50,46,46 | 133, 0.43 |  78
+  GEÇTİ 5.6 28 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 202 | 2139 | 28.0% | pref→max 0.03 |  50.3 | 50,46,46 | 124, 0.45 |  76
+  GEÇTİ 5.6 29 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 212 | 2252 | 26.3% | pref→max 0.01 |  50.1 | 50,46,46 | 133, 0.43 |  78
+  GEÇTİ 5.6 29 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 209 | 2200 | 27.8% | pref→max 0.01 |  50.1 | 50,45,45 | 125, 0.46 |  76
+  GEÇTİ 5.6 30 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 218 | 2311 | 26.1% | pref→max 0.02 |  50.2 | 50,46,46 | 133, 0.43 |  77
+  GEÇTİ 5.6 30 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 213 | 2272 | 27.7% | pref→max 0.03 |  50.3 | 50,46,46 | 124, 0.45 |  76
+  GEÇTİ 6.6  5 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  35 |  537 | 30.8% | pref→max 0.08 |  15.4 | - | 147, 0.42 | 107
+  GEÇTİ 6.6  5 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  35 |  537 | 34.1% | min→pref 0.92 |  14.4 | - | 147, 0.46 | 107
+  GEÇTİ 6.6  6 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  37 |  590 | 28.2% | pref→max 0.36 |  16.8 | - | 139, 0.39 |  98
+  GEÇTİ 6.6  6 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  37 |  590 | 31.3% | pref→max 0.24 |  16.2 | - | 134, 0.41 |  98
+  GEÇTİ 6.6  7 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  47 |  687 | 28.3% | pref→max 0.06 |  16.2 | - | 138, 0.39 |  98
+  GEÇTİ 6.6  7 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  46 |  671 | 30.6% | pref→max 0.03 |  16.1 | - | 134, 0.41 |  96
+  GEÇTİ 6.6  8 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  59 |  807 | 29.1% | pref→max 0.05 |  16.2 | - | 142, 0.41 | 101
+  GEÇTİ 6.6  8 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  58 |  794 | 31.5% | pref→max 0.05 |  16.2 | - | 137, 0.43 |  99
+  GEÇTİ 6.6  9 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  83 |  875 | 28.4% | pref→max 0.01 |  16.0 | - | 140, 0.39 |  97
+  GEÇTİ 6.6  9 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  67 |  829 | 29.3% | pref→max 0.25 |  17.0 | - | 126, 0.40 |  92
+  GEÇTİ 6.6 10 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  94 |  927 | 27.2% | pref→max 0.04 |  16.2 | - | 138, 0.39 |  93
+  GEÇTİ 6.6 10 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  93 |  911 | 29.1% | pref→max 0.02 |  16.1 | - | 138, 0.43 |  91
+  GEÇTİ 6.6 11 dk lo | tek   | A → N1 → C1 → C2 → N2 → K |  99 | 1021 | 27.2% | pref→max 0.05 |  16.2 | - | 138, 0.39 |  93
+  GEÇTİ 6.6 11 dk hi | tek   | A → N1 → C1 → C2 → N2 → K |  98 |  996 | 28.8% | pref→max 0.07 |  16.3 | - | 137, 0.43 |  91
+  GEÇTİ 6.6 12 dk lo | tek   | A → N1 → C1 → C2 → N2 → K | 114 | 1098 | 26.9% | pref→max 0.09 |  16.3 | - | 134, 0.38 |  91
+  GEÇTİ 6.6 12 dk hi | tek   | A → N1 → C1 → C2 → N2 → K | 113 | 1078 | 28.6% | pref→max 0.05 |  16.2 | - | 136, 0.43 |  90
+  GEÇTİ 6.6 13 dk lo | tek   | A → N1 → C1 → C2 → N2 → K | 116 | 1130 | 25.6% | pref→max 0.24 |  17.0 | - | 133, 0.37 |  87
+  GEÇTİ 6.6 13 dk hi | tek   | A → N1 → C1 → C2 → N2 → K | 116 | 1130 | 27.7% | pref→max 0.15 |  16.6 | - | 132, 0.42 |  87
+  GEÇTİ 6.6 14 dk lo | tek   | A → N1 → C1 → C2 → N2 → K | 116 | 1130 | 23.7% | pref→max 0.57 |  18.3 | - | 120, 0.35 |  81
+  GEÇTİ 6.6 14 dk hi | tek   | A → N1 → C1 → C2 → N2 → K | 116 | 1130 | 25.7% | pref→max 0.48 |  17.9 | - | 118, 0.38 |  81
+  GEÇTİ 6.6 15 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 126 | 1347 | 26.3% | pref→max 0.01 |  16.0 | - | 138, 0.39 |  90
+  GEÇTİ 6.6 15 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 126 | 1347 | 28.7% | min→pref 0.83 |  15.3 | - | 135, 0.43 |  90
+  GEÇTİ 6.6 16 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 128 | 1375 | 25.2% | pref→max 0.18 |  16.7 | - | 133, 0.37 |  86
+  GEÇTİ 6.6 16 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → BR.orta → C4 → N2 → K | 128 | 1375 | 27.5% | pref→max 0.08 |  16.3 | - | 133, 0.42 |  86
+  GEÇTİ 6.6 17 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 138 | 1476 | 25.5% | pref→max 0.08 |  16.3 | - | 135, 0.38 |  87
+  GEÇTİ 6.6 17 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 137 | 1456 | 27.5% | pref→max 0.01 |  16.0 | - | 133, 0.43 |  86
+  GEÇTİ 6.6 18 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 141 | 1545 | 25.1% | pref→max 0.01 |  45.5 | 46 | 138, 0.39 |  86
+  GEÇTİ 6.6 18 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 138 | 1476 | 26.3% | pref→max 0.23 |  16.9 | - | 126, 0.40 |  82
+  GEÇTİ 6.6 19 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 144 | 1588 | 24.5% | pref→max 0.06 |  47.8 | 48 | 136, 0.38 |  84
+  GEÇTİ 6.6 19 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 143 | 1573 | 26.6% | pref→max 0.01 |  45.6 | 46 | 133, 0.43 |  83
+  GEÇTİ 6.6 20 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 149 | 1668 | 24.4% | pref→max 0.04 |  46.7 | 47 | 137, 0.39 |  83
+  GEÇTİ 6.6 20 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 146 | 1619 | 26.1% | pref→max 0.08 |  48.6 | 49 | 133, 0.42 |  81
+  GEÇTİ 6.6 21 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 165 | 1769 | 24.7% | pref→max 0.02 |  45.9 | 46 | 138, 0.39 |  84
+  GEÇTİ 6.6 21 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 163 | 1740 | 26.7% | pref→max 0.01 |  45.3 | 45 | 133, 0.43 |  83
+  GEÇTİ 6.6 22 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 175 | 1847 | 24.7% | pref→max 0.01 |  45.5 | 45 | 139, 0.39 |  84
+  GEÇTİ 6.6 22 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 172 | 1806 | 26.4% | pref→max 0.02 |  45.7 | 46 | 133, 0.43 |  82
+  GEÇTİ 6.6 23 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 182 | 1873 | 23.9% | pref→max 0.13 |  50.6 | 51 | 133, 0.37 |  81
+  GEÇTİ 6.6 23 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → N2 → K | 182 | 1873 | 26.1% | pref→max 0.04 |  46.8 | 47 | 133, 0.43 |  81
+  GEÇTİ 6.6 24 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 186 | 1950 | 23.9% | pref→max 0.11 |  50.0 | 50 | 134, 0.38 |  81
+  GEÇTİ 6.6 24 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 186 | 1950 | 26.0% | pref→max 0.03 |  46.2 | 46 | 133, 0.43 |  81
+  GEÇTİ 6.6 25 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 189 | 2014 | 23.6% | pref→max 0.07 |  48.1 | 48,48 | 135, 0.38 |  81
+  GEÇTİ 6.6 25 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 188 | 1989 | 25.6% | pref→max 0.03 |  46.4 | 46,46 | 133, 0.43 |  80
+  GEÇTİ 6.6 26 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 191 | 2084 | 23.5% | pref→max 0.05 |  50.5 | 51,47,47 | 137, 0.39 |  80
+  GEÇTİ 6.6 26 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 189 | 2014 | 24.9% | pref→max 0.13 |  50.9 | 51,51 | 132, 0.42 |  77
+  GEÇTİ 6.6 27 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 207 | 2172 | 23.6% | pref→max 0.00 |  50.0 | 50,45,45 | 140, 0.39 |  80
+  GEÇTİ 6.6 27 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 202 | 2139 | 25.5% | pref→max 0.00 |  50.0 | 50,45,45 | 133, 0.43 |  79
+  GEÇTİ 6.6 28 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 211 | 2231 | 23.4% | pref→max 0.01 |  50.1 | 50,45,45 | 139, 0.39 |  80
+  GEÇTİ 6.6 28 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 208 | 2187 | 25.1% | pref→max 0.02 |  50.2 | 50,46,46 | 133, 0.43 |  78
+  GEÇTİ 6.6 29 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 218 | 2311 | 23.4% | pref→max 0.00 |  50.0 | 50,45,45 | 140, 0.39 |  80
+  GEÇTİ 6.6 29 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 213 | 2272 | 25.1% | pref→max 0.01 |  50.1 | 50,45,45 | 133, 0.43 |  78
+  GEÇTİ 6.6 30 dk lo | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 221 | 2356 | 23.0% | pref→max 0.02 |  50.2 | 50,46,46 | 139, 0.39 |  79
+  GEÇTİ 6.6 30 dk hi | tek   | A → N1 → C1 → C2 → BR.K2 → C3 → BR.orta → C4 → C5 → N2 → K | 219 | 2334 | 25.0% | pref→max 0.01 |  50.1 | 50,45,45 | 133, 0.43 |  78
+
+== Tekrar uyarıları (10 sn içindeki ya da ardışık cümle kliplerinde aynı 5 harflik kök; "dön" gibi kısa kökler dahil; bilinçli olanlar etiketli) ==
+  yok
+
+== "-(y)abil-" yoğunluğu (TR2-03, H11) ==
+  5.2 lo 5 dk: 22 cümle klibinde 8 "-(y)abil-" (klip başına 0.36; hedef <= 0.6); en yoğun 60 sn: 3
+  5.2 hi 5 dk: 22 cümle klibinde 8 "-(y)abil-" (klip başına 0.36; hedef <= 0.6); en yoğun 60 sn: 3
+  5.6 lo 5 dk: 22 cümle klibinde 8 "-(y)abil-" (klip başına 0.36; hedef <= 0.6); en yoğun 60 sn: 3
+  5.6 hi 5 dk: 22 cümle klibinde 8 "-(y)abil-" (klip başına 0.36; hedef <= 0.6); en yoğun 60 sn: 3
+  6.6 lo 5 dk: 22 cümle klibinde 8 "-(y)abil-" (klip başına 0.36; hedef <= 0.6); en yoğun 60 sn: 3
+  6.6 hi 5 dk: 22 cümle klibinde 8 "-(y)abil-" (klip başına 0.36; hedef <= 0.6); en yoğun 60 sn: 3
+
+== Evre başına ortalama cümle uzunluğu (H12; hece/cümle, 5,6 yüksek) ==
+   5 dk: Varış 19.5, Derinleşme 16.0, Derin 13.0, Kapanış 15.8
+  10 dk: Varış 18.2, Derinleşme 15.8, Derin 13.9, Kapanış 15.4
+  15 dk: Varış 18.8, Derinleşme 14.8, Derin 13.8, Kapanış 15.5
+  20 dk: Varış 18.8, Derinleşme 14.8, Derin 13.3, Kapanış 15.5
+  30 dk: Varış 18.8, Derinleşme 13.8, Derin 13.3, Kapanış 15.5
+
+== Kapak ve çekirdek payı (Z2-06; sn: Varış / niyet N1+N2 / çekirdek C1..C5 + köprüler / Kapanış) ==
+   5 dk: 5.2l 55/52/89/100 · 5.2h 54/51/89/103 · 5.6l 55/53/90/98 · 5.6h 54/52/90/100 · 6.6l 55/54/91/95 · 6.6h 55/54/91/96
+  10 dk: 5.2l 82/72/323/119 · 5.2h 85/75/314/122 · 5.6l 82/71/324/118 · 5.6h 82/73/324/118 · 6.6l 75/75/337/109 · 6.6h 76/68/341/110
+  15 dk: 5.2l 100/87/566/144 · 5.2h 124/113/490/168 · 5.6l 99/88/569/140 · 5.6h 99/87/567/143 · 6.6l 97/89/575/135 · 6.6h 97/88/574/137
+  20 dk: 5.2l 107/97/846/147 · 5.2h 108/99/841/148 · 5.6l 104/94/856/142 · 5.6h 106/97/848/146 · 6.6l 98/90/873/135 · 6.6h 102/94/860/140
+  30 dk: 5.2l 106/96/1448/146 · 5.2h 108/99/1441/148 · 5.6l 103/93/1459/141 · 5.6h 105/96/1450/145 · 6.6l 98/89/1474/135 · 6.6h 100/92/1467/138
+
+== Kapanışa geç (hızlı kapanış) ve Durdur dönüşü (pref sessizliklerle) ==
+  5.2 lo quickClosing 87.7 sn
+  5.2 lo stopReturn   27.1 sn
+  5.2 hi quickClosing 90.9 sn
+  5.2 hi stopReturn   29.0 sn
+  5.6 lo quickClosing 85.3 sn
+  5.6 lo stopReturn   26.4 sn
+  5.6 hi quickClosing 87.8 sn
+  5.6 hi stopReturn   27.9 sn
+  6.6 lo quickClosing 80.8 sn
+  6.6 lo stopReturn   25.2 sn
+  6.6 hi quickClosing 83.4 sn
+  6.6 hi stopReturn   26.6 sn
+
+== Seçenek metinleri (P-N5) ve sahne takımları (H6/L2-04) ==
+  seçenek takımı 1: 78/78 vaka GEÇTİ
+  seçenek takımı 2: 78/78 vaka GEÇTİ
+  sahne "kiyi": 78/78 vaka GEÇTİ
+  sahne "orman": 78/78 vaka GEÇTİ
+
+== Sarsıntı taraması (Z2-04; bütün klip süreleri × ölçek; ana metin; bilgi, sonucu değiştirmez) ==
+  ×0.90: 76/78 vaka geçiyor; kalan denetimler: # sn penceresinde # hece > # (2: 6.6 5 lo, 6.6 14 lo); Derin evrede # sn penceresinde # hece > # (1: 6.6 14 lo)
+  ×0.95: 75/78 vaka geçiyor; kalan denetimler: # sn penceresinde # hece > # (2: 6.6 5 lo, 6.6 14 lo); Derin evrede # sn penceresinde # hece > # (1: 6.6 14 lo); T5: içerik doymadan esneme f=# > # (1: 5.2 15 hi)
+  ×1.05: 74/78 vaka geçiyor; kalan denetimler: # sn penceresinde konuşma payı # > # (1: 5.2 5 hi); Derin evrede konuşma payı # > # (1: 5.2 16 hi); T5: içerik doymadan esneme f=# > # (2: 5.2 15 lo, 5.6 15 hi); T6: # dk # yüksek köşesinde boş pay # sn < # (1: 5.2 5 hi)
+  ×1.10: 75/78 vaka geçiyor; kalan denetimler: # sn penceresinde konuşma payı # > # (1: 5.2 5 hi); Derin evrede konuşma payı # > # (1: 5.2 16 hi); H1/B.3-8: C2 bloğu # sn < # (1: 5.2 6 hi); H3: anahtar cümle geçişleri # sn arayla (2: 5.2 5 lo, 5.2 5 hi); T6: # dk # yüksek köşesinde boş pay # sn < # (1: 5.2 5 hi)
+
+== ÖZET ==
+  5.2 hece/sn: 26/26 dakika GEÇTİ (düşük ve yüksek duraklama profilinde)
+  5.6 hece/sn: 26/26 dakika GEÇTİ (düşük ve yüksek duraklama profilinde)
+  6.6 hece/sn: 26/26 dakika GEÇTİ (düşük ve yüksek duraklama profilinde)
+  5 dk 5,2 yüksek köşesinde boş pay: 15.4 sn (T6 tabanı 15)
+  TOPLAM: 78/78 vaka GEÇTİ (ana metin); seçenek takımları GEÇTİ; sahne takımları GEÇTİ; metin denetimi GEÇTİ
+  Kapsam: bu sayı zamanlama ve metin kurallarıdır; dinleme, söyleyiş ve insan onayı değildir (P-S1).

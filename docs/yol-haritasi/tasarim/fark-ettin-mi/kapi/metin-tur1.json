@@ -1,0 +1,181 @@
+{
+ "M1": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "M2": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "M3": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "M4": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "\"Gözünden kaçan\" başlık olarak yarım kalıyor, \"Gözünden kaçanlar\" olmalı."
+  ]
+ },
+ "D1": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D2": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "İlk görüntüde henüz bir şey değişmemişken \"Bir şey değişti\" demek yanıltıcı, \"Bu sahneye iyi bak\" gibi bir şey olmalı."
+  ]
+ },
+ "D3": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D4": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "\"2. bakış · 14 nesne\" teknik ve ne anlattığı ilk bakışta anlaşılmıyor.",
+   "\"2. bakış · 14 nesne\" ne anlattığı belli olmayan, teknik bir kısaltma gibi duruyor.",
+   "'14 nesne' bana ne anlatıyor, neden sayıldığı belli değil.",
+   "\"14 nesne\" ne demek, neden bilmem gerek, anlamadım."
+  ]
+ },
+ "D5": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D6": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D7": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D8": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Sıradaki sahne 16 nesne\" telgraf gibi, robotik duruyor.",
+   "\"Sıradaki sahne 16 nesne\" fiilsiz, robot gibi bir ifade.",
+   "'Sıradaki sahne 16 nesne' telgraf gibi, yarım cümle kalmış.",
+   "\"Sıradaki sahne 16 nesne\" kırpık kalıyor, doğrusu \"Sıradaki sahnede 16 nesne\".",
+   "\"Sıradaki sahne 16 nesne\" kuru veri gibi, güzel başlangıcı soğutuyor."
+  ]
+ },
+ "D9": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Sıradaki sahne 12 nesne\" yine robotik ve kopuk bir ek.",
+   "\"Burasıydı. ·\" noktalaması garip, \"Sıradaki sahne 12 nesne\" ise robot gibi.",
+   "'Sıradaki sahne 12 nesne' kopuk ve robot gibi, neden azaldığı anlaşılmıyor.",
+   "\"Sıradaki sahne 12 nesne\" kırpık kalıyor, \"sahnede\" olmalı.",
+   "\"Burasıydı\" sıcak ama arkasındaki \"12 nesne\" robot gibi duruyor."
+  ]
+ },
+ "G1": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "\"Gözünden kaçan\" başlık olarak eksik kalıyor."
+  ]
+ },
+ "G2": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "G3": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "G4": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "G5": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "Ş1": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Şanstan sık tutuyor\" doğal Türkçe değil, ne demek istediği belirsiz.",
+   "\"Şanstan sık tutuyor\" Türkçede böyle söylenmez, anlamı bulanık.",
+   "'Şanstan sık tutuyor' kulağa tuhaf geliyor, ne demek istediği bulanık.",
+   "\"Şanstan sık tutuyor\" doğal Türkçe değil ve ne demek istediği anlaşılmıyor.",
+   "\"Şanstan sık tutuyor\" cümlesi tuhaf, ne demek istediği anlaşılmıyor."
+  ]
+ },
+ "R1": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "R2": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "Büyük sayı olarak \"16 nesne\" anlamsız kalıyor, \"nesnelik sahne\" de mekanik.",
+   "\"16 nesnelik kalabalık sahnede\" eksik ve sıkıntılı, araya \"bir\" gerekir; \"nesne\" kelimesi de soğuk duruyor."
+  ]
+ },
+ "R3": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Başlangıç · 3/8 gün\" neyi ölçtüğü belli olmayan bir şifre gibi.",
+   "\"Başlangıç · 3/8 gün\" ne demek, okuyan anlamaz.",
+   "Neyin başlangıcı, '3/8 gün' neyi sayıyor, belli değil.",
+   "\"Başlangıç · 3/8 gün\" kullanıcıya bir şey anlatmıyor, neyin oluştuğu belirsiz.",
+   "\"Başlangıç · 3/8 gün\" ne anlama geliyor, belirsiz."
+  ]
+ },
+ "R4": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"başlangıcın 10 · 6 tur önce · bugün 16\" çözmek için düşünmek gerekiyor.",
+   "Şifre gibi bir satır, küçük harfle başlıyor ve ne anlattığı anlaşılmıyor.",
+   "'başlangıcın 10 · 6 tur önce' şifre gibi, ilk okumada çözülmüyor.",
+   "\"başlangıcın 10\" teknik bir ifade, satır bir bakışta çözülmüyor.",
+   "\"başlangıcın 10 · 6 tur önce · bugün 16\" şifre gibi, yorgunken çözemem."
+  ]
+ },
+ "R5": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "KAÇTI, TAHMİN gibi tek kelimelik rozetlerin neye ait olduğu belirsiz."
+  ]
+ },
+ "Y1": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "Alıştırmanın adı \"Fark Ettin mi?\" iken burada \"Ne değişti?\" yazması kafa karıştırıyor.",
+   "Alıştırmanın adı 'Fark Ettin mi?' iken burada 'Ne değişti?' yazması kafa karıştırıyor."
+  ]
+ },
+ "Y2": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ }
+}

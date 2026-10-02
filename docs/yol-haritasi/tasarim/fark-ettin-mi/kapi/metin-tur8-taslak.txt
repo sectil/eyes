@@ -1,0 +1,7 @@
+Bağlam: Nefona'daki "Fark Ettin mi?" alıştırmasının ilk görev ekranı. Kişi bir caddeden geçip bir şey sayacak, sonra değişiklik bulacak. Ekranın altında, "Yürümeye başla" düğmesinin hemen üstünde küçük bir not durur; ilk turda bir kez görünür. Notun işi dürüst olmak: bu alıştırma bir fark etme çalışmasıdır, ama gündelik hayatta insanı daha çok fark ettirdiği bilimsel olarak gösterilmemiştir. Sağlık ya da dikkat iddiası olmamalı. Eski metin, bozuk bulunduğu için değişiyor: "Bu bir fark etme alıştırması. Gerçek hayatta daha çok fark ettirdiği gösterilmedi." Her satır: kimlik | nerede görünür | metin. Her satıra ayrı karar ver.
+
+M5a | ilk görev ekranı, alt not | Bu bir fark etme alıştırması. Günlük hayatta daha çok fark etmeni sağladığı henüz gösterilmedi.
+M5b | ilk görev ekranı, alt not | Bu bir fark etme alıştırması. Günlük hayatta daha çok fark etmeni sağladığına dair henüz kanıt yok.
+M5c | ilk görev ekranı, alt not | Bu bir fark etme alıştırması. Gündelik hayatta da işe yaradığı henüz kanıtlanmadı.
+M5d | ilk görev ekranı, alt not | Bu bir alıştırma. Gündelik hayatta daha çok fark ettirdiğine dair henüz kanıt yok.
+M5e | ilk görev ekranı, alt not | Bu bir fark etme alıştırması. Sokakta daha çok fark ettireceği henüz kanıtlanmadı.

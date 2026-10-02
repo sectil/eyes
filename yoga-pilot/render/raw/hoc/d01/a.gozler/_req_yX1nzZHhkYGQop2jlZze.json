@@ -1,0 +1,37 @@
+{
+ "node_id": "yX1nzZHhkYGQop2jlZze",
+ "session_ids": [
+  "fFhfZRGBNc0wXmxo5mhA",
+  "aqQKMB6PHiBaT8RxNFgg",
+  "7CGwf0LOk4DrK5GJWqaO"
+ ],
+ "requested_at": "2026-09-30T06:58:01.765Z",
+ "tts": "Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "fFhfZRGBNc0wXmxo5mhA",
+   "generation_id": "GBvOidAb0Qa7rkFItxHU",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/fFhfZRGBNc0wXmxo5mhA/GBvOidAb0Qa7rkFItxHU/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065806Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=423826508874be2e602beff7c367f992f66a754e47d7bf7437bcd4b6086bb9849d870c5f01709bc911d6eebc901ad76f06f802a539931d55fd08356fb02144067afafcdc3c205b8f92b4e743eba0935601a9ec2857f4d4a44a939534d7c7551e335a5abdcca0781ade3bcb92f1a909dce8a1350caeb2c1150a6b932ef15402fb29f12173595886d129dafdf33264e45a4325a3ba6489dbdccea856dfb5ad16d6712d6b3caad0d3af48a398677400eb0dd0d16ccd49374b3e18c972cc8c19174a10cbb9cac6d651f956ceba1203b370325a40e77b11bc3f5709e8fea18ea382ca7ec4921ef042658932c5813cf40727204ff4ec5bf84969bac04c58e6f1b7ff2b",
+   "duration_secs": 6.72,
+   "prompt": "Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "aqQKMB6PHiBaT8RxNFgg",
+   "generation_id": "ktTMcdCrDBn4Q6zNlwN8",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/aqQKMB6PHiBaT8RxNFgg/ktTMcdCrDBn4Q6zNlwN8/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065806Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=26ca5c653481302e8650ff48904a02b449dc342a31576d894c083b7a20c38477aee0c948f2144124d4e824fc4e9e6f831b4ef38f823d7555c479b0fe18305268ee997ed11736dfcaed75167b89f8f0ba95dcf0f280319049f882704ec77a40ff3fdc3a51e36b7dccf058cd735c2cf0b5fa72d0d6781d975e8b434d00fb07d86af1bf3e1f77dbae18c81a7eb3facd12bd71c8da2cb56164d20008a925ed5f8643a52b948d32c6d61fe5029a1cef31e6b31446699da9f210e250a9921b8a688c994e0a82df40d6a681f84af1e84180923f7acc71dbeabc140cd4b6383aa9f56f4c34941ce0ba13e6f62720808c899a6212700b244012c03876196e4a66e0c53f25",
+   "duration_secs": 6.8,
+   "prompt": "Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "7CGwf0LOk4DrK5GJWqaO",
+   "generation_id": "VeZj9rV1bDQbz2vEFCON",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/7CGwf0LOk4DrK5GJWqaO/VeZj9rV1bDQbz2vEFCON/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065806Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=dd548adf4c248986cf2dce5bcb9bd648ed4d1723aa0b825b229e9c1b9b5caac3edca432de5577a32d5b6400bfdf61e35658a943d78b74d4edeacd26db53ac889c39d7be50437d44303859593aff6140ea726abdd0fe809480f1f991ee878ba86019df3fc0c9de41ec4c8cee1b53715c5563c991e912a13f6c4d311b82a3e9c0dc93c5e02faee39f6821e91353a3e7defb7915aca98bbf7190c98dc0d75cf4f16ddf80a0827bc6c14f02c18da201ee98a965a13954cba90c1fca9675f45288f08536d16447eb288488f914935aa3b0aaa5f31d50942d2136bf77f9038ea54365d3252833c876721cdfc6d94f9c20c1293e6029c7ffd8c5b4f11394df79f68a9a1",
+   "duration_secs": 6.72,
+   "prompt": "Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.",
+   "kind": "audio"
+  }
+ ]
+}

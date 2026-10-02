@@ -1,0 +1,37 @@
+{
+ "node_id": "d2PeDY9aTaiQqif1aJNW",
+ "session_ids": [
+  "O7pNgXW8RMTEFpRcj8Vo",
+  "Xf4YuaJIRJ4e1rmm9Zol",
+  "YNq8WAH14MX0tVPr6GNt"
+ ],
+ "requested_at": "2026-09-30T08:01:26.637Z",
+ "tts": "Sıradaki nefesin adı bramari, yani vızıltılı nefes.",
+ "request": "retake",
+ "generations": [
+  {
+   "session_id": "O7pNgXW8RMTEFpRcj8Vo",
+   "generation_id": "ozPDlHy2mUfQBs4rZKVK",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/O7pNgXW8RMTEFpRcj8Vo/ozPDlHy2mUfQBs4rZKVK/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T080130Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=bedae2cc4e4039963fdb73869d60437b6886baa1e2e1d9d630293181eeaf6f2f50783bc320f3ce7816523373ea44028eaeea8ecfe630dde872b96fa0e9b770dec0daf08928aca851221a0b7918bcc746e4b79191fdb4a204a7dbce0dbb24959dff52363b32a970228d6e806294978662e08c6fbc9f1de7f076e9e765ca797a9898a826a6d9506b8ecfaa5769ff269935f7f88be4925aba972484b5557b4d20053038e14d49339fa2ebf30df0aaaf41e38d259a7abb4a30e6083520ea4f195bf06c964f0adb83e01c4e5e08e8e9917f886ce954bc8c0a23c36bd1805ee314ee7edddb12c8b77b294b4250f6e7e7f821622b5c325efc242c9945b9420307d51119",
+   "duration_secs": 4.72,
+   "prompt": "Sıradaki nefesin adı bramari, yani vızıltılı nefes.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "Xf4YuaJIRJ4e1rmm9Zol",
+   "generation_id": "3l48Jh8pRx4t90sGt1nv",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/Xf4YuaJIRJ4e1rmm9Zol/3l48Jh8pRx4t90sGt1nv/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T080130Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=d5dc1207a45e2fa4fff478b7b13f63ae4ce56d39385cfd8a642d2b3b4d2acc456ecb5fa12c08a918e6cbb97c496fb95eb41de7e801c009c3b454da83b03bddaa0bab2db45f7319576b325dcc467688dcd56034f56da36e7dcc40ef7918571c27a19b472970978bf364d5ce88407a96975dce732d657833c67a05732d5227d4936374454094cb4c295ef6123c097f3b677ffa63688a945e3a6e618236a217343fc9afb2a3545a40bb15b0005bd8951b533ff7194ef9eefd006b47cd1046c269591778df34479721c407fd1aef745d83fcc2953a4c3b14fc24315cdb90638c71d9caf2a83264dac009f7142e302b9f4f762249e933a3355a45757e707d51f2d9f9",
+   "duration_secs": 4.8,
+   "prompt": "Sıradaki nefesin adı bramari, yani vızıltılı nefes.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "YNq8WAH14MX0tVPr6GNt",
+   "generation_id": "mk1LnOP7EDLRJ4jHg4h4",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/YNq8WAH14MX0tVPr6GNt/mk1LnOP7EDLRJ4jHg4h4/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T080130Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=d9ef1e3fe19dfaaaee3a0e8a6e317ad555c8cc6f96b7a82fd7852d753c8e235ae75b5e2435fac5a3fc358177488c4342eeaef3b7e1ba36b3c92933bee61d379a3f84c4d36239d42fc771682f94fb523cf85cfd86d458d70586f04a910e222ea0696753de0a416bfe921cbbb07b9a5590d2ea58017d4dccdc5d959b4f2c0d32be9a1dd708549ae25b72bc4062bc65b5b57b622c0ca71d1c33bc3a7e3077a3e7803bbcac76e523c233251c7e8700b33ff6f1169efea88f8f34d706410969602177a6b4e29e2d9d75f8b38234c2c4f7922043441e4f8de5b409ef215c8aa0c003b926db580690074adf5f7838b76b397ac719b63da6f6e68ace5f471af3ef1041d4",
+   "duration_secs": 4.64,
+   "prompt": "Sıradaki nefesin adı bramari, yani vızıltılı nefes.",
+   "kind": "audio"
+  }
+ ]
+}

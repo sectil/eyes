@@ -1,0 +1,16 @@
+{
+ "unit": "c1.gecis.arka",
+ "take": "t1",
+ "asset_id": "gF8M5chs3dRVhu7gg3Xg",
+ "source_node_id": "LVIf9hj51C4bJQ7ASuR3",
+ "stt_node_id": "pUvjWsjxE0ZPhorD0gLt",
+ "session_id": "cyALjyL70MokwqUQuhbo",
+ "generation_id": "oB1HjIzY61pvxOKMx4uH",
+ "actual_credits": 8.8,
+ "actual_cents": 0.16,
+ "spoken_duration_secs": 1.4,
+ "scribe_text": "Bedenin arka tarafı",
+ "tts": "Bedenin arka tarafı.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 3\n}"
+}

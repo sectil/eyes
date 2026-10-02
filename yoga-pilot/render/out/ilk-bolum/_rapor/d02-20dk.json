@@ -1,0 +1,595 @@
+{
+ "name": "ders2-20",
+ "lesson": "d02",
+ "minutes": 20,
+ "T": 1200,
+ "generated_utc": "2026-09-30T08:57:38.747715+00:00",
+ "tool": "render/tools/mixib.py (mix.py fonksiyonları)",
+ "file": "ders2-20.mp3",
+ "bytes": 13677031,
+ "encoding": {
+  "mode": "ABR 96 kbit/s (lameenc, q=2)",
+  "bytes": 13677031,
+  "kbps_avg": 91.2
+ },
+ "mp3_decoder_offset_samples": 576,
+ "duration_decoded_s": 1200.014,
+ "integrated_lufs": -18.01,
+ "integrated_lufs_float": -17.58,
+ "lufs_target": -18.0,
+ "true_peak_dbtp_mp3": -2.86,
+ "true_peak_dbtp_float": -2.37,
+ "true_peak_before_limiter": -2.37,
+ "tp_limiter": [
+  {
+   "ceiling_dbtp": -2.0,
+   "limiter": {
+    "ceiling_dbtp": -2.0,
+    "max_reduction_db": 0.0,
+    "sec_over_0_5db": 0.0,
+    "sec_over_1db": 0.0
+   },
+   "tp_float_after_limiter": -2.37,
+   "tp_mp3": -2.86
+  }
+ ],
+ "master_trim_db": 0.0,
+ "master_trim_iterations": [
+  {
+   "trim_db": 0.0,
+   "integrated_lufs": -18.01
+  }
+ ],
+ "position_check": {
+  "pieces": 172,
+  "min_corr": 0.988,
+  "min_corr_piece": "c2.n02",
+  "median_corr": 0.993,
+  "max_abs_offset_ms": 0.023,
+  "n_corr_below_0_95": 0,
+  "pass": true,
+  "rule": "SPEC.v3 §13: iki sinyal 4 kHz altına süzülür (8. derece Butterworth, sıfır faz); ilinti ≥ 0,95, kayma ≤ 1 ms; ±50 ms arama; dosya başına tek kodlayıcı kayması",
+  "lowest5": [
+   [
+    "c2.n02",
+    0.988,
+    0.0
+   ],
+   [
+    "c1.f12",
+    0.988,
+    0.0
+   ],
+   [
+    "c2.n08",
+    0.989,
+    0.0
+   ],
+   [
+    "c1.f10",
+    0.989,
+    0.0
+   ],
+   [
+    "br.orta#2",
+    0.989,
+    0.0
+   ]
+  ]
+ },
+ "clicks_float": {
+  "edit_point": 0,
+  "speech_content": 681,
+  "bed_content": 1,
+  "mix_only": 0,
+  "nature_at_edit": 0
+ },
+ "clicks_mp3": {
+  "edit_point": 0,
+  "speech_content": 407,
+  "bed_content": 0,
+  "mix_only": 0,
+  "nature_at_edit": 0
+ },
+ "clicks_list": {
+  "float_edit_point": [],
+  "mp3_edit_point": [],
+  "float_nature_at_edit": [],
+  "mp3_nature_at_edit": [],
+  "mp3_mix_only": [],
+  "mp3_bed_content": []
+ },
+ "digital_silence_mp3": {
+  "longest_run_s": 0.0017,
+  "at_s": 1199.998,
+  "runs_over_100ms": 0,
+  "threshold": "|x| <= 1/32768 on both channels"
+ },
+ "speech_over_bed": {
+  "Varış": {
+   "pieces_ge_1s": 10,
+   "min_diff_ge_1s": 17.39,
+   "worst_piece": "a.x.kipir",
+   "p10_diff_ge_1s": 17.5,
+   "median_diff_ge_1s": 17.68,
+   "pieces_all": 11,
+   "min_diff_all": 17.39,
+   "n_below_15_all": 0,
+   "speech_lufs_median": -14.99,
+   "bed_st_under_speech_median": -32.71,
+   "st3_windows_ge90pct_speech": 189,
+   "st3_min_diff": 14.5,
+   "st3_median_diff": 17.57,
+   "st3_n_below_15": 7,
+   "st3_pct_below_15": 3.7,
+   "st3_worst_at_s": 93.3,
+   "st3_worst_pieces": [
+    "a.kolay"
+   ],
+   "below_15_pieces": [],
+   "pass_ge_1s": true
+  },
+  "Derinleşme": {
+   "pieces_ge_1s": 67,
+   "min_diff_ge_1s": 16.94,
+   "worst_piece": "c1.gecis.on#1",
+   "p10_diff_ge_1s": 17.3,
+   "median_diff_ge_1s": 17.81,
+   "pieces_all": 81,
+   "min_diff_all": 16.87,
+   "n_below_15_all": 0,
+   "speech_lufs_median": -16.49,
+   "bed_st_under_speech_median": -34.29,
+   "st3_windows_ge90pct_speech": 105,
+   "st3_min_diff": 13.76,
+   "st3_median_diff": 17.54,
+   "st3_n_below_15": 3,
+   "st3_pct_below_15": 2.9,
+   "st3_worst_at_s": 400.5,
+   "st3_worst_pieces": [
+    "c1.k1"
+   ],
+   "below_15_pieces": [],
+   "pass_ge_1s": true
+  },
+  "Derin": {
+   "pieces_ge_1s": 57,
+   "min_diff_ge_1s": 16.02,
+   "worst_piece": "c4.donus1#1",
+   "p10_diff_ge_1s": 17.04,
+   "median_diff_ge_1s": 17.89,
+   "pieces_all": 66,
+   "min_diff_all": 16.02,
+   "n_below_15_all": 0,
+   "speech_lufs_median": -17.99,
+   "bed_st_under_speech_median": -35.87,
+   "st3_windows_ge90pct_speech": 340,
+   "st3_min_diff": 14.91,
+   "st3_median_diff": 17.57,
+   "st3_n_below_15": 1,
+   "st3_pct_below_15": 0.3,
+   "st3_worst_at_s": 785.0,
+   "st3_worst_pieces": [
+    "c4.gelmezse"
+   ],
+   "below_15_pieces": [],
+   "pass_ge_1s": true
+  },
+  "Kapanış": {
+   "pieces_ge_1s": 14,
+   "min_diff_ge_1s": 17.11,
+   "worst_piece": "k.sesler",
+   "p10_diff_ge_1s": 17.14,
+   "median_diff_ge_1s": 17.6,
+   "pieces_all": 14,
+   "min_diff_all": 17.11,
+   "n_below_15_all": 0,
+   "speech_lufs_median": -14.99,
+   "bed_st_under_speech_median": -32.59,
+   "st3_windows_ge90pct_speech": 177,
+   "st3_min_diff": 13.98,
+   "st3_median_diff": 17.65,
+   "st3_n_below_15": 2,
+   "st3_pct_below_15": 1.1,
+   "st3_worst_at_s": 1114.4,
+   "st3_worst_pieces": [
+    "k.oda.ayrinti"
+   ],
+   "below_15_pieces": [],
+   "pass_ge_1s": true
+  }
+ },
+ "speech_over_bed_iterations": [
+  {
+   "iter": 0,
+   "offsets_db": {
+    "Varış": 0.0,
+    "Derinleşme": 0.0,
+    "Derin": 0.0,
+    "Kapanış": 0.0
+   },
+   "min_diff_ge_1s": {
+    "Varış": 17.39,
+    "Derinleşme": 16.94,
+    "Derin": 16.02,
+    "Kapanış": 17.11
+   }
+  }
+ ],
+ "local_duck": {
+  "spans": [],
+  "iterations": [
+   {
+    "iter": 0,
+    "below": {}
+   }
+  ]
+ },
+ "bed_rise_limit": null,
+ "loudness_rise": {
+  "criterion": "yatak zarfı: tınısız ve imge katmanısız yatak, açılış kararmasından sonra, konuşma altı dahil bütün dosyada ≤ 1 dB/sn (imge katmanının nota başlangıçları SPEC.v3 §7.2 ile ayrı sınırlanır; aşağıda imge dahil değer ayrıca)",
+  "bed_envelope_no_tone_no_imge": {
+   "stem": "yatak, tınısız, açılış kararması dışında (pencere başı ≥ 6.0 sn)",
+   "max_rise_db_per_s": 0.92,
+   "at_s": 918.5,
+   "max_rise_in_speech_free_s": 0.92,
+   "at_speech_free_s": 918.5,
+   "n_1s_steps_over_1db": 0,
+   "top5": [
+    [
+     918.5,
+     0.92
+    ],
+    [
+     656.3,
+     0.9
+    ],
+    [
+     656.4,
+     0.9
+    ],
+    [
+     656.6,
+     0.89
+    ],
+    [
+     918.6,
+     0.89
+    ]
+   ]
+  },
+  "bed_without_tone_with_imge_after_open_fade": {
+   "stem": "yatak, tınısız, açılış kararması dışında (pencere başı ≥ 6.0 sn)",
+   "max_rise_db_per_s": 1.45,
+   "at_s": 936.2,
+   "max_rise_in_speech_free_s": 1.45,
+   "at_speech_free_s": 936.2,
+   "n_1s_steps_over_1db": 22,
+   "top5": [
+    [
+     936.2,
+     1.45
+    ],
+    [
+     984.2,
+     1.42
+    ],
+    [
+     936.1,
+     1.38
+    ],
+    [
+     984.1,
+     1.37
+    ],
+    [
+     968.1,
+     1.24
+    ]
+   ]
+  },
+  "bed_without_tone": {
+   "stem": "yatak, tınısız",
+   "max_rise_db_per_s": 2.95,
+   "at_s": 1.5,
+   "max_rise_in_speech_free_s": 2.95,
+   "at_speech_free_s": 1.5,
+   "n_1s_steps_over_1db": 57,
+   "top5": [
+    [
+     1.5,
+     2.95
+    ],
+    [
+     1.6,
+     2.88
+    ],
+    [
+     1.7,
+     2.76
+    ],
+    [
+     1.8,
+     2.71
+    ],
+    [
+     2.5,
+     2.7
+    ]
+   ]
+  },
+  "bed_all": {
+   "stem": "yatak (müzik + doğa + oda + tını)",
+   "max_rise_db_per_s": 7.43,
+   "at_s": 957.0,
+   "max_rise_in_speech_free_s": 7.43,
+   "at_speech_free_s": 957.0,
+   "n_1s_steps_over_1db": 86,
+   "top5": [
+    [
+     957.0,
+     7.43
+    ],
+    [
+     956.9,
+     7.38
+    ],
+    [
+     956.8,
+     7.24
+    ],
+    [
+     956.7,
+     7.03
+    ],
+    [
+     956.6,
+     6.75
+    ]
+   ]
+  }
+ },
+ "plan": {
+  "status": "ok",
+  "mode": "pref→max",
+  "f": 0.0206,
+  "total": 1200.0,
+  "speech_sec": 378.977,
+  "check_plan": {
+   "fails": [],
+   "pass": true,
+   "density": {
+    "syll": 121.27,
+    "frac": 0.491,
+    "deep_syll": 98.077,
+    "deep_frac": 0.36,
+    "dead": [],
+    "avg": 79.0
+   }
+  },
+  "slack_min_s": 184.94
+ },
+ "music": {
+  "placements": [
+   {
+    "role": "Varış açılışı",
+    "file": "el-v-aday.keyA.wav",
+    "t0": 0.0,
+    "t1": 122.525,
+    "off": 0.0,
+    "gain_db": -8.69
+   },
+   {
+    "role": "Varış-Derinleşme ailesi",
+    "file": "el-vd-a.wav",
+    "t0": 114.525,
+    "t1": 401.275,
+    "off": 0.0,
+    "gain_db": -7.96
+   },
+   {
+    "role": "Varış-Derinleşme ailesi",
+    "file": "el-vd-b.wav",
+    "t0": 393.275,
+    "t1": 416.772,
+    "off": 7.5,
+    "gain_db": -7.35
+   },
+   {
+    "role": "Derin ailesi",
+    "file": "el-derin-a.wav",
+    "t0": 408.772,
+    "t1": 599.144,
+    "off": 4.5,
+    "gain_db": -9.86
+   },
+   {
+    "role": "Derin ailesi",
+    "file": "el-derin-b.keyD.wav",
+    "t0": 591.144,
+    "t1": 656.121,
+    "off": 17.5,
+    "gain_db": -1.2
+   },
+   {
+    "role": "Zıtlık dokusu",
+    "file": "el-zitlik-b.wav",
+    "t0": 648.121,
+    "t1": 725.947,
+    "off": 0.0,
+    "gain_db": 9.27
+   },
+   {
+    "role": "Derin ailesi",
+    "file": "el-derin-b.keyD.wav",
+    "t0": 717.947,
+    "t1": 849.226,
+    "off": 82.476,
+    "gain_db": -2.09
+   },
+   {
+    "role": "Derin ailesi",
+    "file": "el-derin-c.lev.wav",
+    "t0": 841.226,
+    "t1": 1065.181,
+    "off": 10.0,
+    "gain_db": -3.45
+   },
+   {
+    "role": "Kapanış",
+    "file": "el-kapanis.wav",
+    "t0": 1057.181,
+    "t1": 1200.0,
+    "off": 37.181,
+    "gain_db": -10.41
+   }
+  ],
+  "imge": [
+   {
+    "file": "el-imge.wav",
+    "t0": 766.519,
+    "t1": 913.15,
+    "off": 0.0
+   },
+   {
+    "file": "el-imge-b.wav",
+    "t0": 905.15,
+    "t1": 997.89,
+    "off": 0.0
+   }
+  ],
+  "zitlik": {
+   "t0": 648.1205582239521,
+   "t1": 725.9473843863934,
+   "file": "el-zitlik-b.wav"
+  },
+  "crossfades": [
+   {
+    "t0": 114.525,
+    "t1": 122.525,
+    "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+    "rho_min": -0.119,
+    "rho_max": 0.047,
+    "rho_mean": -0.009
+   },
+   {
+    "t0": 393.275,
+    "t1": 401.275,
+    "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+    "rho_min": -0.199,
+    "rho_max": 0.167,
+    "rho_mean": -0.03
+   },
+   {
+    "t0": 408.772,
+    "t1": 416.772,
+    "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+    "rho_min": -0.235,
+    "rho_max": 0.319,
+    "rho_mean": -0.006
+   },
+   {
+    "t0": 591.144,
+    "t1": 599.144,
+    "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+    "rho_min": -0.051,
+    "rho_max": 0.072,
+    "rho_mean": 0.008
+   },
+   {
+    "t0": 648.121,
+    "t1": 656.121,
+    "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+    "rho_min": -0.043,
+    "rho_max": 0.042,
+    "rho_mean": -0.009
+   },
+   {
+    "t0": 717.947,
+    "t1": 725.947,
+    "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+    "rho_min": -0.021,
+    "rho_max": 0.033,
+    "rho_mean": 0.007
+   },
+   {
+    "t0": 841.226,
+    "t1": 849.226,
+    "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+    "rho_min": -0.02,
+    "rho_max": 0.012,
+    "rho_mean": -0.001
+   },
+   {
+    "t0": 1057.181,
+    "t1": 1065.181,
+    "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+    "rho_min": -0.025,
+    "rho_max": 0.018,
+    "rho_mean": 0.002
+   },
+   {
+    "t0": 905.15,
+    "t1": 913.15,
+    "law": "eşit güç, g=[cos,sin]/sqrt(1+rho·sin2θ)",
+    "rho_min": -0.02,
+    "rho_max": 0.019,
+    "rho_mean": -0.006
+   }
+  ],
+  "notes": [
+   "Varış-Derinleşme ailesi: aile içi geçiş 393.27 sn (c1.w09; geçiş penceresinde konuşma payı 0.56; uygun aralık 128.3–401.0)",
+   "Derin ailesi: aile içi geçiş 591.14 sn (c2.x.ritim#1; geçiş penceresinde konuşma payı 0.75; uygun aralık 416.8–636.3)",
+   "Derin ailesi: aile içi geçiş 841.23 sn (c4.ses.orman; geçiş penceresinde konuşma payı 0.40; uygun aralık 787.7–855.5)",
+   "Zıtlık dokusu: 648.12–725.95 sn (c3.agir → c3.birak + 8 sn); Derin zinciri el-derin-b.keyD.wav dosyasının 82.5. sn'sinden sürer",
+   "İmge katmanı: aile içi geçiş 905.15 sn (c4.pencere#1; geçiş penceresinde konuşma payı 0.55; uygun aralık 831.9–932.5)"
+  ],
+  "levels": {
+   "Varış": -33.41,
+   "Derinleşme": -34.91,
+   "Derin": -36.41,
+   "Kapanış": -33.41
+  }
+ },
+ "tone_events": [
+  {
+   "t": 958.5,
+   "before_clip": "c4.donus1",
+   "lufs_integrated": -30.0,
+   "dur_s": 4.0,
+   "sound": "donus.synth-D5.wav"
+  },
+  {
+   "t": 1055.181,
+   "before_clip": "k.donus",
+   "lufs_integrated": -30.0,
+   "dur_s": 4.0,
+   "sound": "donus.synth-D5.wav"
+  }
+ ],
+ "windows": [
+  {
+   "t0": 914.575,
+   "t1": 960.5,
+   "kind": "swell"
+  }
+ ],
+ "criteria": {
+  "sure_hedef_pm1s": true,
+  "olay_sirasi_plan_ile_ayni": true,
+  "parca_konumu_mp3": true,
+  "kurgu_noktasi_tik_yok_float": true,
+  "kurgu_noktasi_tik_yok_mp3": true,
+  "karisim_kaynakli_tik_yok_mp3": true,
+  "dijital_sessizlik_100ms_yok": true,
+  "konusma_yatak_ge15_her_parca": true,
+  "yatak_yukselisi_le_1dB_s": true,
+  "gercek_tepe_le_m1": true,
+  "butunlesik_yukseklik": true,
+  "ekran_esit_soylenen": true,
+  "boyut_le_15MB": true,
+  "mp3_44k1_stereo": true
+ },
+ "pass": true,
+ "master_wav": "out/ilk-bolum/_master/d02-20dk-hoc-A.wav"
+}

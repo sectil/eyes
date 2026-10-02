@@ -1,0 +1,28 @@
+{
+ "node_id": "wYTxaYFoPCRr1NQNjVB1",
+ "session_ids": [
+  "LWx8YrV4sju9GwrLOzv5",
+  "IHHVizc2XK1OIFiPnh8m"
+ ],
+ "requested_at": "2026-09-30T07:11:59.237Z",
+ "tts": "Al… ver… al… ver… al… ver… al… ver…",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "LWx8YrV4sju9GwrLOzv5",
+   "generation_id": "anl5PEY9LSJ4AjzJRKKe",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/LWx8YrV4sju9GwrLOzv5/anl5PEY9LSJ4AjzJRKKe/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T071204Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=340a873e55ebe00131c6c9af6dd6c62bba27bc22a6c0341bd748dc62c91a777f5050f93983b829797359173b74668b226572148522e91c44a1688df9736b41957bb552450172ec6d383a49a5a02d371789be5688f3f4e84b6d5240f70c5595d57bc16d166547d7d1f703376a44ab45009b5cfb5a86d695ad72ee11ffea523d49b4ad5b53a7fdf96c6ab7639b41b3df775bde66420b5f54c01adb849403b91eba3ab2c8961cd5110a8db34bc463d98c9b1ff0dbb5eb087561a40836e7e98d0206d5918885b814022c5dcc3ab6d663ff1090783009c0dff357e3676b3a0ee9c823198a05ba8b2dd7a9aaaba0a76ffbac5e22757a1bec682544509c5a427eca6e34",
+   "duration_secs": 7.6,
+   "prompt": "Al… ver… al… ver… al… ver… al… ver…",
+   "kind": "audio"
+  },
+  {
+   "session_id": "IHHVizc2XK1OIFiPnh8m",
+   "generation_id": "mHGHfs4qCs92mYubB2Wz",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/IHHVizc2XK1OIFiPnh8m/mHGHfs4qCs92mYubB2Wz/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T071204Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=730e9e767993e4b01b208e56ac8dce96f76471f52a4c573c690d20175c23a29e815b2dfc2ea393b98a517d8eb7c45788de05d69f677da9b906f04c62b16080094157ab45e8948f9f17d531483757dca0424e760a3cf10ff47b4948e0f926079382d6fd43ae3d9f4f3ea083e31259f3c48cbd46b698a4825debba8be02e85c60b4bc1cc00013469261ee6025bbbf1acfca92cc31dceafe3139aa3aae6a52769f6b5d2d9199153af5c6606e5a744dcf5f4eb814fb5f28c6e9a0aecca07e71c84ff7ae938dd4d86d5f500dfdfb1fe214fcac90b48d4e965df0ec785d9649e771db3f9de7b0b8034d08d8070499a2762a7a0a3a380c7e367381fc5a2966de088bb97",
+   "duration_secs": 6.96,
+   "prompt": "Al… ver… al… ver… al… ver… al… ver…",
+   "kind": "audio"
+  }
+ ]
+}

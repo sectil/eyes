@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fark Ettin mi · son</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root {
+  --font-display: 'Unbounded', system-ui, sans-serif; --font-body: 'Onest', system-ui, sans-serif; --font-mono: ui-monospace, 'SF Mono', monospace;
+  --bg: #f3f6f8; --surface: #fff; --surface-2: #e9eef2; --border: #e1e7ec; --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --accent: #0b7480; --accent-g: #11a9b8; --accent-grad: linear-gradient(90deg, #0b7480, #2458cc); --accent-ink: #fff;
+  --ok: #13704b; --ok-bg: rgba(31,169,116,.13); --no: #b4431c; --no-bg: rgba(232,96,62,.12); --gold: #9a5b00; --gold-bg: rgba(245,166,35,.16);
+  --paper: #f7f2e8; --paper-2: #efe7d8; --paper-ink: #2b241b;
+}
+:root[data-theme="dark"] {
+  --bg: #070c12; --surface: #0f171f; --surface-2: #141e28; --border: rgba(255,255,255,.08); --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --accent: #19c2d1; --accent-g: #19c2d1; --accent-grad: linear-gradient(90deg, #19c2d1, #3e7bfa); --accent-ink: #041017;
+  --ok: #35d39a; --ok-bg: rgba(53,211,154,.14); --no: #ff9a7d; --no-bg: rgba(255,122,89,.14); --gold: #ffb13b; --gold-bg: rgba(255,177,59,.14);
+  --paper: #17130e; --paper-2: #211b14; --paper-ink: #f1e8d8;
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; background: var(--bg); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow: hidden; }
+.status { height: 47px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 28px 0 34px; font-weight: 700; font-size: 16px; position: relative; z-index: 5; }
+.status i { font-style: normal; letter-spacing: 2px; font-size: 13px; }
+.page { height: 100vh; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+.body { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 0 20px 22px; }
+.top { display: flex; align-items: center; gap: 14px; padding: 4px 0 14px; flex: none; }
+.x { width: 42px; height: 42px; border-radius: 14px; border: 1px solid var(--border); background: var(--surface); display: grid; place-items: center; color: var(--ink-2); flex: none; }
+.bar { flex: 1; height: 6px; border-radius: 3px; background: var(--surface-2); overflow: hidden; }
+.bar b { display: block; height: 100%; background: var(--accent-grad); border-radius: 3px; }
+.ey { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: 26px; line-height: 1.12; letter-spacing: -.02em; }
+.lead { margin-top: 6px; font-size: 16px; color: var(--ink-2); line-height: 1.4; }
+.btn { flex: none; height: 56px; border-radius: 18px; border: 0; background: var(--accent-grad); color: var(--accent-ink); font: 700 18px var(--font-body); display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 26px -12px rgba(36,88,204,.6); width: 100%; }
+.btn.ghost { background: transparent; color: var(--ink-2); box-shadow: none; height: 44px; font-weight: 600; font-size: 15px; border: 1.5px solid var(--border); }
+.fill { flex: 1; min-height: 0; position: relative; }
+.scn { position: absolute; inset: 0; overflow: hidden; }
+.scn svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.card { border-radius: 24px; overflow: hidden; }
+.small { font-size: 12px; color: var(--ink-3); line-height: 1.4; }
+.row2 { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex: none; }
+.dots { display: flex; gap: 6px; align-items: center; }
+.dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--surface-2); border: 1.5px solid var(--ink-3); }
+.dots i.on { background: var(--accent-g); border-color: var(--accent-g); }
+.meta { font-size: 14px; color: var(--ink-2); font-weight: 600; display: flex; gap: 10px; align-items: center; }
+.opt { height: 58px; border-radius: 18px; background: var(--surface); border: 1.5px solid var(--border); display: flex; align-items: center; gap: 12px; padding: 0 16px; font-weight: 700; font-size: 17px; }
+.opt .sw { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid rgba(0,0,0,.15); flex: none; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: none; }
+.yn .opt { justify-content: center; height: 64px; font-size: 18px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px; border-radius: 17px; font-weight: 700; font-size: 14px; }
+.chip.ok { background: var(--ok-bg); color: var(--ok); }
+.chip.sel { background: var(--surface-2); color: var(--ink); }
+.rows { display: grid; gap: 8px; flex: none; }
+.r { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 16px; background: var(--surface-2); font-size: 14.5px; color: var(--ink-2); }
+.r b { color: var(--ink); }
+.r i { font-style: normal; font-size: 11px; font-weight: 800; letter-spacing: .05em; padding: 4px 8px; border-radius: 9px; flex: none; }
+.r i.ok { background: var(--ok-bg); color: var(--ok); } .r i.no { background: var(--no-bg); color: var(--no); }
+.r span { flex: 1; }
+.iris { width: 34px; height: 34px; border-radius: 50%; flex: none; background: radial-gradient(circle at 50% 50%, #0b1219 0 28%, transparent 29%), radial-gradient(circle at 50% 50%, #3e7bfa 0 52%, #19c2d1 53% 62%, transparent 63%); box-shadow: 0 0 0 2px var(--accent-g), 0 0 0 5px rgba(25,194,209,.15); position: relative; }
+.iris::after { content: ''; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #fff; left: 19px; top: 10px; }
+.nef { display: flex; gap: 12px; align-items: center; flex: none; }
+.nef p { font-size: 15px; line-height: 1.4; color: var(--ink-2); }
+/* --- Yön B: sahne arka planda, cam katmanlar --- */
+.B .page { color: #fff; }
+.B .bgscene { position: absolute; inset: 0; z-index: 0; }
+.B .bgscene svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.B .bgscene::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,9,14,.72) 0%, rgba(5,9,14,.2) 30%, rgba(5,9,14,0) 48%, rgba(5,9,14,.55) 70%, rgba(5,9,14,.88) 100%); }
+.B .status, .B .body { position: relative; z-index: 2; }
+.B .x { background: rgba(10,16,24,.5); border-color: rgba(255,255,255,.15); color: #fff; backdrop-filter: blur(10px); }
+.B .bar { background: rgba(255,255,255,.2); }
+.B .ey { color: #7fe6f0; }
+.B .lead { color: rgba(255,255,255,.82); }
+.glass { background: rgba(12,18,26,.62); border: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-radius: 24px; padding: 16px; color: #fff; }
+.B .opt { background: rgba(12,18,26,.62); border-color: rgba(255,255,255,.16); color: #fff; backdrop-filter: blur(14px); }
+.B .r { background: rgba(255,255,255,.08); color: rgba(255,255,255,.82); }
+.B .r b { color: #fff; }
+.B .btn.ghost { color: #fff; border-color: rgba(255,255,255,.25); }
+.B .dots i { background: transparent; border-color: rgba(255,255,255,.6); }
+.B .meta { color: #fff; }
+.B .nef p { color: rgba(255,255,255,.88); }
+.B .chip.sel { background: rgba(255,255,255,.14); color: #fff; }
+/* --- Yön C: gözlem defteri --- */
+.C { --bg: var(--paper); --surface: #fffdf8; --surface-2: var(--paper-2); --ink: var(--paper-ink); --border: rgba(60,45,25,.14); }
+:root[data-theme="dark"] .C { --surface: #201a13; --border: rgba(255,240,220,.1); --ink-2: #d4c8b5; --ink-3: #a1937d; }
+.C h1 { font-family: var(--font-display); }
+.C .ey { color: #b0601c; }
+:root[data-theme="dark"] .C .ey { color: #ffb36b; }
+.polar { background: #fffdf8; padding: 10px 10px 34px; border-radius: 6px; box-shadow: 0 16px 34px -18px rgba(40,25,5,.55), 0 2px 6px rgba(40,25,5,.12); position: relative; }
+:root[data-theme="dark"] .polar { background: #f4ecdd; }
+.polar .ph { position: relative; overflow: hidden; border-radius: 2px; }
+.polar .ph svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.polar .cap { position: absolute; left: 14px; right: 14px; bottom: 9px; font: 600 14px var(--font-body); color: #3b3126; display: flex; justify-content: space-between; }
+.tape { position: absolute; width: 74px; height: 22px; background: rgba(230,200,120,.55); top: -10px; left: 50%; transform: translateX(-50%) rotate(-3deg); }
+.ladder { display: flex; flex-direction: column-reverse; gap: 3px; }
+.ladder i { height: 6px; border-radius: 3px; background: var(--surface-2); }
+.ladder i.on { background: linear-gradient(90deg, #f0a24a, #e0612a); }
+.ladder i.base { outline: 2px dashed var(--ink-3); outline-offset: 1px; }
+@media (max-width: 340px) {
+  h1 { font-size: 22px; } .lead { font-size: 14px; } .body { padding: 0 16px 14px; } .btn { height: 50px; font-size: 17px; }
+  .opt { height: 50px; font-size: 15px; } .yn .opt { height: 54px; } .r { padding: 8px 12px; font-size: 13px; } .nef p { font-size: 13.5px; }
+  .hide320 { display: none !important; }
+}
+</style>
+<style>
+.frame43 { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; margin: 12px 0; }
+.frame43 .card { position: relative; height: 100%; max-height: 100%; aspect-ratio: 4 / 5; max-width: 100%; }
+.yn3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; flex: none; }
+.yn3 .opt { justify-content: center; height: 60px; font-size: 16px; padding: 0 6px; text-align: center; line-height: 1.15; }
+@media (max-width: 340px) { .yn3 .opt { font-size: 14px; height: 54px; } }
+.sp320 { display: none; flex: 1; }
+@media (max-width: 340px) { .sp320 { display: block; } }
+.foot { font-size: 12px; color: var(--ink-3); line-height: 1.4; margin-top: 10px; flex: none; }
+/* kilit ekranı */
+.lock { position: fixed; inset: 0; background: linear-gradient(170deg, #1d3a5a 0%, #3c4f7c 45%, #b07a73 100%); color: #fff; display: flex; flex-direction: column; align-items: center; padding: 0 12px; }
+.lock .clock { font: 300 84px/1 var(--font-body); letter-spacing: -2px; margin-top: 30px; }
+.lock .date { font: 600 18px var(--font-body); opacity: .9; margin-top: 70px; }
+.ntf { width: 100%; border-radius: 22px; background: rgba(245,245,247,.82); color: #0b1219; padding: 12px 14px; display: flex; gap: 11px; backdrop-filter: blur(20px); margin-top: 10px; box-shadow: 0 6px 20px rgba(0,0,0,.15); }
+.ntf .ic { width: 38px; height: 38px; border-radius: 9px; background: #070c12; display: grid; place-items: center; flex: none; }
+.ntf .ic .iris { width: 24px; height: 24px; }
+.ntf b { font-size: 15px; } .ntf small { font-size: 13px; color: #5b6976; float: right; }
+.ntf p { font-size: 15px; line-height: 1.35; margin-top: 2px; }
+.ring { position: relative; width: min(62vw, 240px); aspect-ratio: 1; margin: 0 auto; }
+.ring svg { position: absolute; inset: 0; }
+.ring .c { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
+.ring .c b { font: 800 64px/1 var(--font-display); letter-spacing: -.04em; }
+.ring .c span { display: block; font-size: 15px; color: var(--ink-2); margin-top: 6px; }
+.big1 { height: 76px; font-size: 21px; border-radius: 22px; }
+.stepper { display: flex; align-items: center; justify-content: center; gap: 22px; flex: none; margin-top: 18px; }
+.stepper button { width: 64px; height: 64px; border-radius: 20px; border: 1.5px solid var(--border); background: var(--surface); font: 700 30px var(--font-body); color: var(--ink); }
+.stepper b { font: 800 72px/1 var(--font-display); min-width: 110px; text-align: center; letter-spacing: -.04em; }
+.surprise { border-radius: 22px; padding: 16px; background: var(--gold-bg); flex: none; }
+.surprise .ey { color: var(--gold); }
+.sci { border-radius: 20px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); flex: none; }
+.sci p { font-size: 15px; line-height: 1.45; color: var(--ink-2); }
+.sci small { display: block; font-size: 12px; color: var(--ink-3); margin-top: 6px; }
+.week { display: flex; gap: 6px; flex: none; }
+.week i { flex: 1; height: 34px; border-radius: 10px; background: var(--surface-2); display: grid; place-items: center; font-style: normal; font-size: 12px; font-weight: 700; color: var(--ink-3); }
+.week i.on { background: var(--accent-g); color: var(--accent-ink); }
+@media (max-width: 340px) { .ring .c b { font-size: 50px; } .big1 { height: 62px; font-size: 19px; } .stepper b { font-size: 56px; } .stepper button { width: 54px; height: 54px; } .lock .clock { font-size: 66px; margin-top: 18px; } .lock .date { margin-top: 40px; } .ntf p { font-size: 14px; } .sci p { font-size: 13.5px; } }
+</style>
+<script src="scene.js"></script>
+</head>
+<body class="A">
+<div id="app"></div>
+<script>
+const q = new URLSearchParams(location.search)
+const S_ = q.get('s') || 'intro'
+const DARK = (q.get('theme') || 'light') === 'dark'
+document.documentElement.dataset.theme = DARK ? 'dark' : 'light'
+const W320 = innerWidth < 340
+const F = window.FEM
+const st = F.genStreet(42, 2400)
+const SY = F.Y.side + 30
+const PEOPLE = [
+  { x: 330, y: SY, top: 'mor', skin: F.SKIN[0], hair: 'kahve', dress: true, longHair: true, bag: 'sari' },
+  { x: 470, y: SY + 4, top: 'beyaz', skin: F.SKIN[2], hair: 'siyah', phone: true },
+  { x: 610, y: SY, top: 'yesil', skin: F.SKIN[1], hair: 'gri', hat: 'kirmizi', dir: -1 },
+  { x: 760, y: SY + 6, top: 'turuncu', skin: F.SKIN[3], hair: 'siyah', dress: true, longHair: true, laugh: true },
+  { x: 900, y: SY, top: 'lacivert', skin: F.SKIN[0], hair: 'sari', glasses: true, dir: -1 },
+  { x: 1040, y: SY + 2, top: 'kirmizi', skin: F.SKIN[4], hair: 'siyah' },
+  { x: 120, y: SY + 4, top: 'siyah', skin: F.SKIN[1], hair: 'kizil', dress: true, longHair: true, bag: 'mavi', dir: -1 },
+]
+const BASE = { bikes: [{ x: 560, color: 'kirmizi' }, { x: 1140, color: 'mavi' }], cats: [{ x: 410, color: 'turuncu' }], vendors: [{ x: 205, type: 'simit' }],
+  carsFar: [{ x: 120, color: 'beyaz', dir: -1 }, { x: 520, color: 'mavi', dir: -1 }, { x: 980, color: 'sari', taxi: true, dir: -1 }], carsNear: [{ x: 300, color: 'mavi' }, { x: 720, color: 'kirmizi' }, { x: 1120, color: 'gri' }] }
+const mode = DARK ? 'dusk' : 'day'
+const scene = (vx, vw, extra = {}) => F.renderStreet(st, extra.mode || mode, { vx, vw, people: PEOPLE, ...BASE, ...extra })
+const BIKES2 = [{ x: 560, color: 'mavi' }, { x: 1140, color: 'mavi' }]
+// Ne değişti? karesi: her genişlikte aynı 4:5 kare (viewBox 376 × 470)
+const FR = { vx: 422, vw: 376, vy: 330, vh: 470 }
+const SPOT = { x: 560, y: F.Y.side + 38, rx: 50, ry: 32 }
+const status = () => `<div class="status"><span>17:02</span><i>●●● ◆ ▮</i></div>`
+const X = `<button class="x" aria-label="Çık"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`
+const topBar = (pct) => `<div class="top">${X}<div class="bar"><b style="width:${pct}%"></b></div></div>`
+const carIco = (w = 64) => `<svg width="${w}" height="${w * 0.52}" viewBox="-96 -84 192 100" style="flex:none">${F.car({ x: 0, color: 'mavi' }, F.PAL.day, 'x').replace(/translate\([^)]*\)/, 'translate(0 0)')}</svg>`
+const SW = (c) => `<span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:${F.C[c]};vertical-align:-2px;border:1.5px solid rgba(0,0,0,.15)"></span>`
+const FOOT = 'Bu bir gözlem alıştırması. Günlük hayatta fark etmeyi artırdığı gösterilmedi.'
+const V = {}
+
+// ---------- Modül turu ----------
+V.intro = () => `${status()}<div class="body">${topBar(0)}
+  <div class="fill card"><div class="scn">${scene(220, 470, { vy: 400, vh: 420 })}</div></div>
+  <div style="display:flex;align-items:center;gap:14px;margin-top:16px;flex:none">${carIco(W320 ? 54 : 70)}<div><span class="ey">Görevin · 2 dk</span><h1 style="margin-top:4px">Mavi arabaları say</h1></div></div>
+  <div class="nef" style="margin:14px 0 16px"><div class="iris"></div><p>Gözün mavi arabalarda olsun. Sonra iki sahnede neyin değiştiğini bulacaksın.</p></div>
+  <button class="btn">Yürümeye başla</button></div>`
+V.change = () => `${status()}<div class="body">${topBar(52)}
+  <span class="ey">Ne değişti? · sahne 2 / 4</span><h1 style="margin-top:6px">Bir şey değişti. Nerede?</h1>
+  <div class="frame43"><div class="card"><div class="scn">${scene(FR.vx, FR.vw, { bikes: BIKES2, vy: FR.vy, vh: FR.vh })}</div></div></div>
+  <div class="row2" style="margin-bottom:12px"><span class="meta"><span class="dots"><i class="on"></i><i></i><i></i></span>1. bakış</span><span class="meta" style="color:var(--ink-3)">Sahnede 14 nesne</span></div>
+  <button class="btn ghost">Bulamadım, bir daha göster</button></div>`
+V.found = () => `${status()}<div class="body">${topBar(58)}
+  <span class="ey">Ne değişti? · sahne 2 / 4</span><h1 style="margin-top:6px">Buldun!</h1>
+  <p class="lead">Bisiklet ${SW('kirmizi')} kırmızıydı, ${SW('mavi')} mavi oldu.</p>
+  <div class="frame43"><div class="card"><div class="scn">${scene(FR.vx, FR.vw, { bikes: BIKES2, vy: FR.vy, vh: FR.vh, spot: SPOT })}</div></div></div>
+  <div class="row2" style="margin-bottom:12px"><span class="chip ok">✓ İlk bakışta</span><span class="meta" style="color:var(--ink-3)">Sıradaki: 16 nesne</span></div>
+  <button class="btn">Sıradaki sahne</button></div>`
+const FOGA = { x: 760, y: SY - 80, r: 70, c: DARK ? '#3a3f48' : '#D9DEE2', ink: DARK ? '#c9d3da' : '#5B6976' }
+const memory = () => `<div class="frame43"><div class="card"><div class="scn" style="filter:grayscale(1) contrast(.85) brightness(${DARK ? .8 : 1.05})">${scene(572, 376, { fog: FOGA, vy: 300, vh: 470 })}</div></div></div>`
+V.ask = () => `${status()}<div class="body">${topBar(80)}
+  <span class="ey">Gözünden kaçan · soru 1 / 2</span><h1 style="margin-top:6px">Caddede kahkaha atan biri var mıydı?</h1>
+  ${memory()}
+  <div class="yn3"><div class="opt">Vardı</div><div class="opt">Yoktu</div><div class="opt">Emin değilim</div></div></div>`
+const COLS = ['turuncu', 'mor', 'yesil', 'kirmizi'], CN = { turuncu: 'Turuncu', mor: 'Mor', yesil: 'Yeşil', kirmizi: 'Kırmızı' }
+V.ask2 = () => `${status()}<div class="body">${topBar(86)}
+  <span class="ey">Gözünden kaçan · soru 1 / 2</span><h1 style="margin-top:6px">Ne renk giymişti?</h1><p class="lead">Bilmiyorsan tahmin et.</p>
+  ${memory()}
+  <div class="grid2">${COLS.map((c) => `<div class="opt"><span class="sw" style="background:${F.C[c]}"></span>${CN[c]}</div>`).join('')}</div></div>`
+function meter(n = 16, base = 11, max = 30) {
+  let o = `<div style="display:grid;grid-template-columns:repeat(15,1fr);gap:${W320 ? 5 : 6}px;flex:none">`
+  for (let i = 1; i <= max; i++) o += `<i style="display:block;aspect-ratio:1;border-radius:50%;background:${i <= base ? 'color-mix(in srgb, var(--accent-g) 38%, var(--surface-2))' : i <= n ? 'var(--accent-g)' : 'var(--surface-2)'}"></i>`
+  return o + '</div>'
+}
+V.result = () => `${status()}<div class="body">${topBar(100)}
+  <span class="ey">Bugünkü turun</span>
+  <p class="lead" style="margin-top:8px">Değişikliği bulduğun en kalabalık sahne</p>
+  <div style="display:flex;align-items:baseline;gap:10px;margin-top:4px;flex:none"><b style="font:800 ${W320 ? 54 : 68}px/0.95 var(--font-display);letter-spacing:-.05em">16</b><span style="font:700 22px var(--font-display);color:var(--ink-2)">nesne</span></div>
+  <div class="fill" style="display:flex;flex-direction:column;justify-content:center;gap:12px">${meter()}
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span class="chip ok" style="white-space:nowrap">Başlangıcından iyi</span><span class="meta" style="color:var(--ink-2)">Başlangıcın 11 → bugün 16</span></div></div>
+  <div class="rows">
+    <div class="r hide320"><i class="ok">BULDUN</i><span>Bisikletin rengi değişti</span></div>
+    <div class="r"><i class="ok">TAM</i><span>Mavi araba: <b>5</b> geçti, sen de 5 dedin</span></div>
+    <div class="r"><i class="no">GÖZDEN KAÇTI</i><span>Kahkaha atan kadın: <b>turuncu</b> giymişti</span></div></div>
+  <p class="foot">${FOOT}</p>
+  <button class="btn" style="margin-top:10px">Bitti</button></div>`
+V.home = () => `${status()}<div class="body" style="gap:10px"><span class="ey" style="margin-top:4px">Bugünün yolu · 6. gün</span>
+  <div style="border-radius:24px;background:var(--surface);border:1px solid var(--border);padding:16px;flex:none">
+    <div style="display:flex;gap:10px;align-items:center;font-weight:700;font-size:14px;color:var(--ink-3)"><div class="iris" style="width:26px;height:26px"></div>Nef</div>
+    <p style="margin-top:10px;font-size:${W320 ? 16 : 18}px;line-height:1.4;font-weight:600">Yoluna yeni bir durak geldi. Caddede neyin değiştiğini bulacaksın.</p>
+    <div class="card" style="position:relative;height:${W320 ? 96 : 150}px;margin-top:12px;border-radius:16px"><div class="scn">${scene(1180, 600, { vy: 380, vh: 300, people: [{ x: 1330, y: SY, top: 'mavi', skin: F.SKIN[2], hair: 'kahve' }, { x: 1520, y: SY + 4, top: 'sari', skin: F.SKIN[0], hair: 'kizil', dress: true, longHair: true, dir: -1 }], carsNear: [{ x: 1420, color: 'beyaz' }], carsFar: [] })}</div></div>
+    <button class="btn" style="margin-top:12px;height:50px;font-size:16px">Başla · 2 dk</button></div>
+  <div class="r"><i class="ok">✓</i><span>Göz egzersizleri · 4 dk</span></div>
+  <div class="r"><i class="ok">✓</i><span>Nefes · 3 dk</span></div>
+  <div class="r"><span>Sonra: Yılan oyunu · 1 dk</span></div>
+  <div class="r hide320"><span>Sonra: Göz kırpma · 1 dk</span></div></div>`
+
+// ---------- Canlı görevler (Nef'in bildirimle oynattığı) ----------
+const ic = `<div class="ic"><div class="iris"></div></div>`
+const ntf = (when, title, body) => `<div class="ntf">${ic}<div style="flex:1"><b>${title}</b><small>${when}</small><p>${body}</p></div></div>`
+V.lock = () => `<div class="lock"><div class="status" style="width:100%;color:#fff"><span></span><i>●●● ◆ ▮</i></div>
+  <div class="date">1 Ekim Perşembe</div><div class="clock">08.40</div><div style="flex:1;max-height:120px"></div>
+  ${ntf('şimdi', 'Fark Ettin mi? · canlı görev', 'Bugün yürürken sarı kapıları say. Telefona bakma; akşam soracağım.')}
+  ${ntf('dün', 'Fark Ettin mi? · canlı görev', 'Bulunduğun yerde 5 kırmızı şey bul. Bir dakikan var.')}</div>`
+V.lock2 = () => `<div class="lock"><div class="status" style="width:100%;color:#fff"><span></span><i>●●● ◆ ▮</i></div>
+  <div class="date">1 Ekim Perşembe</div><div class="clock">19.10</div><div style="flex:1;max-height:120px"></div>
+  ${ntf('şimdi', 'Fark Ettin mi? · akşam sorusu', 'Bugün yolda kaç sarı kapı saydın? Bir de sürpriz sorum var.')}</div>`
+function ringSvg(frac, label) {
+  const r = 46, c = 2 * Math.PI * r
+  return `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--surface-2)" stroke-width="7"/><circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--accent-g)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - frac)}" transform="rotate(-90 50 50)"/></svg>`
+}
+V.hunt = () => `${status()}<div class="body">${topBar(60)}
+  <span class="ey">Canlı görev · evde</span><h1 style="margin-top:6px">Bulunduğun yerde 5 kırmızı şey bul</h1>
+  <p class="lead">Etrafına bak. Her bulduğunda dokun.</p>
+  <div class="fill" style="display:flex;align-items:center;justify-content:center">
+    <div class="ring">${ringSvg(0.6)}<div class="c"><div><b>3<span style="display:inline;font-size:28px;color:var(--ink-3)"> / 5</span></b><span>42 sn kaldı</span></div></div></div></div>
+  <button class="btn big1">+1 Buldum</button>
+  <button class="btn ghost" style="margin-top:10px">Bitir</button></div>`
+V.evening = () => `${status()}<div class="body">${topBar(50)}
+  <span class="ey">Canlı görev · akşam sorusu</span><h1 style="margin-top:6px">Bugün yolda kaç sarı kapı saydın?</h1>
+  <div class="stepper"><button>−</button><b>7</b><button>+</button></div>
+  <div class="sp320"></div><div class="fill card hide320" style="margin:16px 0"><div class="scn">${scene(1180, 600, { mode: 'dusk', vy: 330, vh: 420, people: [{ x: 1330, y: SY, top: 'mavi', skin: F.SKIN[2], hair: 'kahve' }], carsNear: [], carsFar: [], cats: [] })}</div></div>
+  <div class="surprise"><span class="ey">Sürpriz soru</span><p style="font-weight:700;font-size:18px;margin-top:6px">Yolda bir köpek gördün mü?</p>
+    <div class="yn3" style="margin-top:12px"><div class="opt">Gördüm</div><div class="opt">Görmedim</div><div class="opt">Emin değilim</div></div></div>
+  <button class="btn" style="margin-top:14px">Kaydet</button></div>`
+V.liveResult = () => `${status()}<div class="body">${topBar(100)}
+  <span class="ey">Canlı görev tamam</span><h1 style="margin-top:6px">Yolda 7 sarı kapı saydın.</h1>
+  <p class="lead">Köpekten emin değilsin. Göz bir şeyi ararken öbürünü kolayca kaçırır.</p>
+  <div class="sci" style="margin-top:16px"><p>Koşarken birini takip edenlerin gece yalnız %35'i yol kenarındaki kavgayı fark etti.</p><small>Chabris ve ark. 2011 · i-Perception · deney</small></div>
+  <div class="sp320"></div><div class="fill card hide320" style="margin:16px 0"><div class="scn">${scene(1180, 600, { mode: 'dusk', vy: 330, vh: 420, people: [{ x: 1330, y: SY, top: 'mavi', skin: F.SKIN[2], hair: 'kahve' }], carsNear: [], carsFar: [], cats: [] })}</div></div>
+  <span class="small" style="margin-bottom:8px">Bu hafta canlı görevlerin</span>
+  <div class="week"><i class="on">Pzt</i><i>Sal</i><i class="on">Çar</i><i class="on">Per</i><i>Cum</i><i>Cmt</i><i>Paz</i></div>
+  <div class="nef" style="margin:14px 0 12px"><div class="iris"></div><p>Yarın evde bir görev göndereyim mi?</p></div>
+  <button class="btn">Tamam</button></div>`
+
+document.getElementById('app').innerHTML = (V[S_] === V.lock || V[S_] === V.lock2) ? V[S_]() : `<div class="page">${(V[S_] || V.intro)()}</div>`
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+ "unit": "a.x.kipir",
+ "take": "t1",
+ "ref_node": "PWbyWNOmqTcV47ugm8H7",
+ "asset_id": "e7ZbeV4duqeHMOVo1hCq",
+ "stt_node": "g4TuR8tYxFrpBf2ijnvS",
+ "session_id": "tJ8VGdYVWh2JtwNIfTS9",
+ "generation_id": "e4EeeYTORDVwhAbZKlzd",
+ "actual_credits": 21.56,
+ "actual_cents": 0.392,
+ "spoken_duration_secs": 3.72,
+ "scribe_text": "Bir iki kez kıpırdanıp yerleşmek de dinlenmenin bir parçası",
+ "tts": "Bir iki kez kıpırdanıp yerleşmek de dinlenmenin bir parçası.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 9\n}"
+}

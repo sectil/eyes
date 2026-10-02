@@ -1,0 +1,16 @@
+{
+ "unit": "car.sol1",
+ "take": "t3",
+ "asset_id": "1EdvcGemli0fhkKdyOCB",
+ "source_node_id": "IMzSzfuvfzeFKJuTU2fW",
+ "stt_node_id": "gfMJGZuHmJPiljKrIuRK",
+ "session_id": "x5NUDwXnPHIsFugziMP1",
+ "generation_id": "LL4nV7TsVMVb6AF8e5rK",
+ "actual_credits": 40.92,
+ "actual_cents": 0.744,
+ "spoken_duration_secs": 7.26,
+ "scribe_text": "Sol elin baş parmağı, işaret parmağı, orta parmak, yüzük parmağı, serçe parmak",
+ "tts": "Sol elin başparmağı… işaret parmağı… orta parmak… yüzük parmağı… serçe parmak…",
+ "compare_exit": 1,
+ "compare": "{\n \"equal\": false,\n \"a\": [\n  \"sol\",\n  \"elin\",\n  \"başparmağı\",\n  \"işaret\",\n  \"parmağı\",\n  \"orta\",\n  \"parmak\",\n  \"yüzük\",\n  \"parmağı\",\n  \"serçe\",\n  \"parmak\"\n ],\n \"b\": [\n  \"sol\",\n  \"elin\",\n  \"baş\",\n  \"parmağı\",\n  \"işaret\",\n  \"parmağı\",\n  \"orta\",\n  \"parmak\",\n  \"yüzük\",\n  \"parmağı\",\n  \"serçe\",\n  \"parmak\"\n ],\n \"diff\": [\n  {\n   \"op\": \"replace\",\n   \"a_pos\": 2,\n   \"a\": [\n    \"başparmağı\"\n   ],\n   \"b_pos\": 2,\n   \"b\": [\n    \"baş\",\n    \"parmağı\"\n   ]\n  }\n ]\n}\nreplace @a2/b2: -başparmağı +baş parmağı"
+}

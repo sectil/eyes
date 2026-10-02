@@ -1,0 +1,10 @@
+Bağlam: Nefona'daki "Fark Ettin mi?" alıştırması. Kişi canlı çizilmiş bir sahneden geçer. Beş sahnenin adları: Cadde, Pazar yeri, Park, (dördüncü sahne), Yağmurlu cadde. Dördüncü sahne aynı caddenin akşam hâlidir: gök turuncudan laciverte döner, vitrinlerin ve sokak lambalarının ışığı yanar. Bu sahnenin adını arıyoruz. Her satır: kimlik | nerede görünür | metin. Her satıra ayrı karar ver.
+
+A1 | görev ekranı üst satırı | Fark Ettin mi? · 2 dk · Akşam ışıkları
+A1y | Ana sayfa yol durağı, sahnenin ilk günü | Yeni sahne: Akşam ışıkları · 2 dk
+A2 | görev ekranı üst satırı | Fark Ettin mi? · 2 dk · Akşam
+A2y | Ana sayfa yol durağı, sahnenin ilk günü | Yeni sahne: Akşam · 2 dk
+A3 | görev ekranı üst satırı | Fark Ettin mi? · 2 dk · Caddede akşam
+A3y | Ana sayfa yol durağı, sahnenin ilk günü | Yeni sahne: Caddede akşam · 2 dk
+A4 | görev ekranı üst satırı | Fark Ettin mi? · 2 dk · Gün batımı
+A4y | Ana sayfa yol durağı, sahnenin ilk günü | Yeni sahne: Gün batımı · 2 dk

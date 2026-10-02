@@ -1,0 +1,5 @@
+node_modules
+dist
+src/data.json
+# üretilen sayfalar (scripts/pages.mjs; kaynak pages/)
+/*.html

@@ -1,0 +1,6 @@
+Bağlam: Nefona'daki "Fark Ettin mi?" alıştırmasının sonuç ekranı. En büyük yazı, "Ne değişti?" bölümündeki 4 sahnenin kaçında değişikliği bulduğunu söyler. Onaylı kalıplar: "4 sahnenin 3'ünde buldun", "4 sahnenin hepsinde buldun". Bu turda kişinin hiçbir sahnede bulamadığı durum için büyük yazı aranıyor. Suçlayıcı, sert ya da vaat eden olmamalı; durumu dürüst ve sakin söylemeli. Her satır: kimlik | durum | metin. Her satıra ayrı karar ver.
+
+S0-0d | 4 sahnenin hiçbirinde bulamadı | Bu turda değişiklikler gözünden kaçtı
+S0-0e | 4 sahnenin hiçbirinde bulamadı | 4 sahnede de değişiklik gözünden kaçtı
+S0-0f | 4 sahnenin hiçbirinde bulamadı | Bu turda değişikliği yakalayamadın
+S0-0g | 4 sahnenin hiçbirinde bulamadı | 4 sahnenin hiçbirinde bulamadın

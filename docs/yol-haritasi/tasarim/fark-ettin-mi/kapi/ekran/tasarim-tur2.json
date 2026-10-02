@@ -1,0 +1,101 @@
+{
+ "10": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "10-390-acik/koyu: 'Görmediysen de tahmin et.' ile sahne arasında yaklaşık 150 px ölü boşluk var (10-320'de yaklaşık 110 px). Sahne 09'un aynısı, sadece köpeğin üstüne bir halka eklenmiş. Yeni ekran açıldı hissi vermiyor.",
+   "10-390-koyu: \"siyah\" seçeneğinin renk dairesi koyu kartın üstünde neredeyse kayboluyor. 10-390 iki temada da alt başlıkla sahne arasında yaklaşık 140 px ölü boşluk var. 320'de de sahnenin tepesinde kesik sarı ve yeşil şeritler duruyor.",
+   "10-390-koyu/10-320-koyu: 'siyah' renk yuvarlağı koyu kart üstünde neredeyse görünmüyor, dört seçenekten biri okunmuyor. Ayrıca 10-390'da alt başlıkla sahne arasında yaklaşık 140 px boş bant var.",
+   "10-390-acik: buzlu cam köpek açık gri ve beyaza yakın göründüğü için kişiyi 'beyaz' seçeneğine itebilir, yani figür cevaba yön veriyor. Altyazı ile sahne arasında yaklaşık 150px ölü boşluk var.",
+   "10-390-acik'te alt başlık ile sahne arasında yaklaşık 150 px ölü boşluk var (320'de yaklaşık 120 px), seçenekler bu yüzden aşağı itiliyor. Açık temada köpeğin gri ve beyazımsı silueti \"beyaz\" seçeneğine istemeden ipucu veriyor. 10-320'de de sahne üstündeki sarı ve yeşil kırpma lekeleri duruyor."
+  ]
+ },
+ "11": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "11-390-acik-1: 'Görmediğini düşünsen de doğru bildin.' başlığı, figür daha buzlu ve griyken ilk karede ekranda. Sonucu metin önceden söylüyor, renge dönüş anı sürpriz olmaktan çıkıyor. 1. ve 2. karede 'sarı' çipinin yeri yaklaşık 100 px boş duruyor.",
+   "11-390/320-*-1 ve -2: \"sarı\" çipi gelmeden önce sahnenin altında boş bir delik kalıyor, ardından çip sonradan beliriyor. \"Kreitz ve ark. 2020 · Q J Exp Psychol\" gibi kısaltmalı, gri dergi satırı bana bir şey anlatmıyor. 320'de sahne tepesindeki kesik sarı ve yeşil şeritler burada da var. Renge dönüş anı güzel ama kusursuz değil.",
+   "11-390-acik-1 ve 11-320-koyu-2: 'Görmediğini düşünsen de doğru bildin' başlığı, figür daha gri/buzlu hâldeyken ilk karede yazıyor. Böylece renge dönüş anının sürprizi yok oluyor. 'sarı' çipi de ancak son karede geliyor, o zamana kadar yerinde boş bir delik duruyor.",
+   "11-390-acik-1: 'Görmediğini düşünsen de doğru bildin.' başlığı ve kaynak satırı, figür daha buzluyken ilk karede ekranda duruyor. Böylece cevap, görsel açılmadan önce yazıyla verilmiş oluyor. 11-320'de sahnenin üst köşelerinde kesik lamba ve ağaç parçaları var.",
+   "11-390-acik-2'de, yani dönüşümün ortasında, figür değil bütün sahne soluyor: tabela ve kapı açık griye dönüyor. Bu tasarlanmış bir an gibi değil, bir hata gibi görünüyor. Bitiş karesinde \"sarı\" çipi sola sıkışmış ve sağı boş kalıyor. 11-320-acik/koyu'da sahnenin üst köşelerindeki sarı ve yeşil kırpma lekeleri burada da var."
+  ]
+ },
+ "12": {
+  "yes": 1,
+  "n": 5,
+  "weak": [
+   "12-320-acik/koyu: dört küçük kare 4'lü sıraya sıkışmış. Halkalar sahneyi kaplıyor, 1. karede yüz kesiliyor, 4. karede bavul ve çiçek kenara kayıyor. 'Değişikliği 14 nesnenin olduğu kalabalık bir sahnede buldun' cümlesi kafa karıştırıyor: iki tane 14'lük sahne var ve biri kaçırılmış.",
+   "12-320-acik/koyu: dört küçük resim yaklaşık 130 px genişlikte, içleri kırpılmış (turuncu bavul ve saksı kesik). \"12/14\" rozetlerinin ne olduğu açıklanmıyor. Kaçırılan sahnede çarpı işareti yok, sadece kesikli halka var. Turuncu çerçevenin övgü mü uyarı mı olduğu anlaşılmıyor. Doğru bilinen köpek satırında \"TAHMİN\" yazması da kafa karıştırıyor.",
+   "12-390/320: küçük sahnelerdeki '12' ve '14' rozetlerinin ne demek olduğu yazmıyor, ancak alttaki cümleyi okuyunca anlaşılıyor. Kesik çizgili halkanın 'kaçırdın' demek olduğu da hiçbir yerde söylenmiyor. Doğru cevaba yeşil 'TAHMİN' etiketi koymak da kafa karıştırıyor.",
+   "12-320-acik/koyu: dört küçük sahne tek sıraya sıkışmış. '12'/'14' rozetleri ve onay işaretleri halkalara değiyor, 4. küçük resimdeki halka alt kenardan kesiliyor. Doğru bilinen bir cevabın 'TAHMİN' etiketiyle gösterilmesinin ne anlama geldiği de belirsiz.",
+   "12-390/320: küçük resimlerdeki \"12\" ve \"14\" rozetlerinin ne olduğu yazmıyor (nesne sayısı olduğu ancak alttaki cümleden anlaşılıyor). Doğru cevap için yeşil \"TAHMİN\" etiketi belirsiz kalıyor. 12-390-acik'te \"Köpeğini gezdiren biri\" satırının küçük resminde köpek kadrajın dışında kalmış, 12-320'de de halkalar şapkayı ve yüzü kesiyor."
+  ]
+ },
+ "04-once": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "04-once-390-acik/koyu: soru sorulurken sahnede tek araba yok ama 'Mavi arabaları say' hapı hâlâ pencerelerin üstünde duruyor. Görev bitmiş, talimat eskimiş. Dev, durgun ve boş bir cadde kartı soruyu ekranın en altına itiyor. 320'de başlık 'Kaç mavi / araba geçti?' diye ikiye bölünüyor.",
+   "04-once-320-acik/koyu: sahnenin tepesinde pencereler ince şeritler halinde kesilmiş, \"Mavi arabaları say\" etiketi de tam bu yarım pencerelerin üstüne oturuyor. Sayma bitmiş olduğu halde etiket hâlâ görünüyor ve sorunun tekrarı gibi duruyor. Sahnenin altındaki boş, gri yol bandı da ölü alan.",
+   "04-once-390: sahnenin üçte ikisi boş bina cephesi, yol bomboş. Az önce 40 saniye saydığım arabalardan hiçbir iz yok, soruyla görsel arasında bağ kurulmuyor. 04-once-320'de de 'Mavi arabaları say' çipi soru anında hâlâ ekranda duruyor ve üstteki pencereleri kesik şeritlere çevirip örtüyor.",
+   "04-once-320-acik/koyu: soru anında 'Mavi arabaları say' hapı hâlâ sahnenin üstünde duruyor ve üst pencere sırası hapın arkasında kesik şeritler olarak kalıyor. Sahne bu anda yalnızca boş bir dekor, soruya hiçbir şey katmıyor. 04-once-390: 'Kaç mavi araba geçti?' satırı sağ kenara yapışık (yaklaşık 5px pay).",
+   "04-once-390-acik/koyu: soru \"Kaç mavi araba geçti?\" ama sahnenin alt kısmındaki yol tamamen boş ve gri. Ekranın yarısını, cevapla ilgisi olmayan donmuş bir kafe cephesi kaplıyor. 04-once-320-acik/koyu'da üst kat pencereleri ince şeritler hâlinde kesilmiş, \"Mavi arabaları say\" çipi de bunların üstüne biniyor. Kadraj yanlışlıkla kırpılmış gibi duruyor."
+  ]
+ },
+ "04-sonra": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "04-sonra-320-acik/koyu: araba kutucuklarındaki 1–5 numaraları sol alt köşede arabanın tekerine ve kutu kenarına biniyor, yarım kalmış gibi duruyor. Kaçırılan 5. arabanın kesikli çerçeve fikri iyi ama dağınık numaralar premium hissini bozuyor.",
+   "04-sonra-390/320 (iki tema): araba kutularındaki 1–5 numaraları çok küçük ve soluk gri; kutunun köşesine sıkışmış, arabanın altında kalıyor. 52 yaşında gözlüklü biri olarak bu sayıları okuyamadım. Ayrıca kutu şeridinin üstünden yarım pencere parçaları görünüyor, sahne kesik duruyor.",
+   "04-sonra-390/320: ben sadece '4' dedim ama uygulama 1-4 numaralı arabaları 'gördün' diye tikliyor, 5'inciyi kaçırmışım gibi gösteriyor. Hangisini kaçırdığımı bilemez, bu uydurma bir kesinlik. Ayrıca kutulardaki 1-5 rakamları tekerleklerin ve tamponun üstüne biniyor, '4' arabanın altında kalıyor.",
+   "04-sonra-390/320: araba kutucuklarındaki 1–5 sayıları arabanın tamponuyla ve tekerleğiyle üst üste biniyor, bu yüzden sayaç şeridi özensiz görünüyor. 04-sonra-320'de sahne ile 'Çok yakın.' arasında yaklaşık 70px ölü boşluk var.",
+   "04-sonra-320-acik/koyu'da araba kutucuklarındaki 1–5 numaraları arabanın tekerleğinin altına girmiş, yarısı ezik okunuyor. 390'da da numara tekerleğe yapışık. Kaçırılan 5. araba yalnız kesik çizgili çerçeveyle ayrılıyor, \"bunu kaçırdın\" diyen bir etiket yok. Yorgun gözle bakınca kesik çizginin anlamı ilk bakışta çıkmıyor."
+  ]
+ },
+ "05": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "05-390-acik-1/2/3: ortada kapanan bir 'göz saati' yok. Süre, sahnenin altındaki düz yatay bir çubukla gösteriliyor (%93 → %50 → %5). Çubuğun altında yaklaşık 200 px ölü boşluk kalıyor. Sahnenin ortasındaki boş asfalt şeridi de ezberlenecek alanı israf ediyor.",
+   "05-390-acik-1/2/3: anlatılan ortadaki \"göz saati\" yok, yerine sahnenin altında sıradan bir dolum çubuğu var. Üstteki ilerleme çubuğuyla birlikte iki çubuk üst üste geliyor, hangisinin geri saydığı anlaşılmıyor. 390'da çubuğun altında yaklaşık 200 px ölü boşluk kalıyor.",
+   "05-390-acik-1/2/3: tarif edilen ortadaki kapanan 'göz saati' hiçbir karede yok. Süreyi sahnenin altındaki düz bir çubuk gösteriyor, üstteki '1 / 4' çubuğuyla birlikte ekranda iki ilerleme çubuğu yan yana duruyor. Çubuğun altında yaklaşık 220 px ölü boşluk var. Sahnenin ortasındaki geniş asfalt da boş.",
+   "05-390-acik-1/2/3: süreyi gösterecek, ortada kapanan 'göz saati' hiç yok. Süreyi sahnenin altındaki düz bir çubuk gösteriyor ve üstteki ilerleme çubuğuyla birlikte ekranda iki çubuk oluyor. Çubuğun altında yaklaşık 220px, başlığın üstünde de yaklaşık 150px ölü boşluk var.",
+   "05-390-acik/koyu ve 05-320'nin hiçbir karesinde ortada bir \"göz saati\" yok. Süreyi altta düz bir ilerleme çubuğu gösteriyor. Üstelik dizide çubuk sürekli azalmıyor: 05-390-acik-1'de yaklaşık %60, -2'de yaklaşık %93, -3'te yaklaşık %50. Ayrıca 390'da çubuğun altında yaklaşık 220 px ölü boşluk var ve sahnenin ortasını boş asfalt dolduruyor."
+  ]
+ },
+ "06": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "06-390-acik/koyu: üst çubukla başlık arasında yaklaşık 150 px, düğmenin altında da yaklaşık 180 px boşluk var. Ekran temiz ama sıradan, 'idare eder' düzeyinde. Değişen şey (şapka kırmızıdan mora dönmüş) iyi seçilmiş ama dokunma anında hiçbir görsel ipucu ya da çekicilik yok.",
+   "06-390-acik/koyu: başlığın üstünde yaklaşık 140 px, düğmenin altında yaklaşık 180 px ölü boşluk var. Sahnenin üçte birini boş asfalt kaplıyor; değişikliği (şapka rengi) aradığım yer küçük kalıyor.",
+   "06-390-acik/koyu: görev açık ama sahnenin üçte biri hâlâ boş asfalt. 'Bulamadım' düğmesinin altında da yaklaşık 180 px ölü alan kalıyor. Görsel, 05'in aynısı (şapka kırmızıdan mora dönüyor) ve bir an bile 'vay' dedirtmiyor.",
+   "06-390-acik/koyu: ekran düzgün ama sıradan. Başlığın üstünde yaklaşık 150px, 'Bulamadım, bir daha göster' düğmesinin altında yaklaşık 180px boşluk kalıyor. Yolun ortası boş asfalt, sahne 05'teki ezber anından hiç ayrışmıyor.",
+   "06-390-acik/koyu'da başlığın üstünde yaklaşık 150 px, düğmenin altında yaklaşık 180 px boşluk var. Ekrandaki tek ve en baskın düğme \"Bulamadım, bir daha göster\", yani vazgeçme seçeneği en çok öne çıkan eylem olmuş. Sahnenin üçte birini kaplayan boş yol, dokunulacak alanı gereksiz yere küçültüyor."
+  ]
+ },
+ "09": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "09-390-acik: buzlu cam figür, bacakları tek bir U boru gibi kaynaşmış gri bir lekeye benziyor. Premium bir 'gizlenmiş insan' gibi değil, eksik kalmış bir çizim gibi duruyor. 09-320'de sahnenin üst kenarı kesilmiş, sol üstte sarı, sağ üstte yeşil yarım şeritler kalıyor. Alt başlıkla sahne arasında da gereksiz boşluk var.",
+   "09-320-acik/koyu: sahnenin tepesinde sol üstte sarı, sağ üstte yeşil birer kesik şerit kalmış, kırpma hatası gibi görünüyor. Buzlu figür de buzlu cam gibi değil; bacakları iki düz dikdörtgen olan gri, bitmemiş bir yer tutucu gibi duruyor. \"Cadde · 1 dk önce\" etiketi figürün ayaklarına çok yakın.",
+   "09-390-koyu/acik: 'buzlu cam' figür, göğsünde bulanık açık renkli bir leke olan gri bir manken gibi duruyor. Cam etkisinden çok çizim hatasına benziyor. Başlıkla sahne arasında yaklaşık 100 px boşluk var. 09-320'de sahnenin üstü kırpılmış, sol üstte sarı, sağ üstte yeşil anlamsız parçalar kalmış.",
+   "09-390-koyu ve 09-320-koyu: buzlu cam figür, gövdesinin ortasında bulanık bej bir leke olan gri bir hayalet ya da yer tutucu gibi duruyor, premium buzlu cam etkisi vermiyor. 09-320'de sahne kırpılınca üst köşelerde lambadan ve ağaçtan ince parçalar kalıyor.",
+   "09-390-acik: buzlu cam yalnız insan figüründe var. Köpek düz gri bir dolgu, kalın beyaz bir kontur da ikisini çıkartma gibi gösteriyor. Bu yüzden premium bir buzlu cam yerine yer tutucu izlenimi veriyor. 09-320-acik/koyu'da sahnenin üst kenarında sol köşede sarı, sağ köşede yeşil kesik lekeler kalmış; kırpma hatası açıkça görülüyor."
+  ]
+ },
+ "12-kart": {
+  "yes": 1,
+  "n": 5,
+  "weak": [
+   "12-kart-390-acik/koyu: görselde sağdaki dükkânın 'KUYUMCU' tabelası kırpılmış (320'de görünüyor, 390'da yok). 'Mavi arabaları say' hapı vitrini kapatıyor. 'Doğru.' hükmü küçük yeşil bir kelimede kaldığı için bilim kartının vurucu anı kaybolmuş.",
+   "12-kart-390-acik/koyu: kuyumcunun tabelası kırpılmış; 320'de görünüyor, 390'da yok. \"Mavi arabaları say\" etiketi kuyumcu vitrinini kapatıyor. \"ÇİÇEKÇİ\" yazısı minicik. Kaynak satırındaki \"doi 10.1068/p281059\" bir öğretmen için anlamsız bir kod gibi duruyor.",
+   "12-kart-390/320: çizimde 'Mavi arabaları say' çipi var ama tek bir mavi araba yok. 'Dikkat göreve kilitli' fikri görselde anlatılmıyor, sadece gri hayalet bir adam görünüyor. 12-kart-390'da mor dükkânın KUYUMCU tabelası kırpılmış (320'de var), çip de o dükkânı örtüyor.",
+   "12-kart-390-acik/koyu: şerit görselde sağdaki dükkânın 'KUYUMCU' tabelası kırpılmış, oysa 320'de görünüyor. 'Mavi arabaları say' hapı da kuyumcu vitrinini kapatıyor. 11'de gerçek renkleriyle gösterilen adam ile köpek burada yeniden buzlu cam.",
+   "12-kart-390-acik/koyu'da çizim şeridi \"KUYUMCU\" tabelasını kırpıyor (320'de görünüyor), mor tentenin üstünde boş pembe bir bant kalıyor. Sağdaki \"Mavi arabaları say\" çipi vitrini kapatıyor. Arabaların geçtiği yol hiç gösterilmediği için kartın anlattığı \"göreve kilitlenip yanındakini kaçırma\" ilişkisi görselde kurulmuyor."
+  ]
+ }
+}

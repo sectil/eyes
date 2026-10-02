@@ -1,0 +1,55 @@
+{
+ "B1a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "B1b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "B1c": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "B1d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "S0a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "S0b": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "Nokta ayraçlı yapı robot gibi duruyor ve 3 sahne için tekil 'sahne' denmesi tuhaf kaçıyor.",
+   "Noktalı ayraçla kurulan bu kalıp robot gibi duruyor, üstelik \"3 / 4\" ile tekil \"sahne\" uyuşmuyor.",
+   "Noktalı etiket gibi duruyor, cümle değil; robot işi.",
+   "3/4'ün yanında tekil 'sahne' ve araya giren nokta, metni form etiketi gibi kuru ve dağınık gösteriyor.",
+   "3/4'ün yanında tekil \"sahne\" demek tuhaf ve robot gibi duruyor."
+  ]
+ },
+ "S0c": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "'En kalabalık sahnen' belirsiz kalıyor; değişikliği orada bulduğum anlaşılmıyor.",
+   "\"Sahnen\" iyelik eki tuhaf kaçıyor, sahne kişinin değil ve neyin kalabalığı olduğu belirsiz kalıyor.",
+   "\"Sahnen\" tuhaf kaçıyor, değişikliği bulduğun sahne olduğu da anlaşılmıyor.",
+   "'En kalabalık sahnen' değişikliği orada bulduğunu söylemiyor, sadece sana gösterilen sahne gibi okunuyor."
+  ]
+ },
+ "S0d": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Sanki sahneyi bulmuşum gibi okunuyor, oysa bulduğum şey değişiklikti."
+  ]
+ }
+}

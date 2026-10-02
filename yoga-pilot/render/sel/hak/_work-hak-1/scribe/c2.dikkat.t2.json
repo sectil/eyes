@@ -1,0 +1,16 @@
+{
+ "unit": "c2.dikkat",
+ "take": "t2",
+ "asset_id": "ApsI5XF32fhTR5s7eohK",
+ "source_node_id": "mtywTwkM1B8HQiTppgeX",
+ "stt_node_id": "6s3ppPHlm8NWKYbWIKvt",
+ "session_id": "Z00w2bGY4ROPTtVYvSnn",
+ "generation_id": "81OoXtwWZT9f56P6jpi7",
+ "actual_credits": 37.4,
+ "actual_cents": 0.68,
+ "spoken_duration_secs": 6.64,
+ "scribe_text": "Şimdi nefesini değiştirmeden izlemek yeterli. Ellerini hissetmek ya da gözlerini açmak da olur",
+ "tts": "Şimdi nefesini değiştirmeden izlemek yeterli. Ellerini hissetmek ya da gözlerini açmak da olur.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 13\n}"
+}

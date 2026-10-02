@@ -1,0 +1,24 @@
+[
+ {
+  "name": "derin1",
+  "family": "derin",
+  "kind": "derin",
+  "seed": 202609295,
+  "startBar": 46,
+  "endBar": 96,
+  "preBars": 2,
+  "transpose": 13,
+  "tailSec": 0
+ },
+ {
+  "name": "derin2",
+  "family": "derin",
+  "kind": "derin",
+  "seed": 202609296,
+  "startBar": 94,
+  "endBar": 144,
+  "preBars": 2,
+  "transpose": 13,
+  "tailSec": 0
+ }
+]

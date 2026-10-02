@@ -1,0 +1,70 @@
+{
+ "D-1": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "Yalnızca bir ad; düğmeye basınca ne olacağını söylemiyor, idare eder."
+  ]
+ },
+ "D-2": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D-3": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Şimdi\" acele ettiriyor, dayatıyor gibi duruyor.",
+   "\"Şimdi Dalga sesi\" radyo anonsu gibi duruyor, biraz dayatıyor.",
+   "\"Şimdi\" acele ettiriyor, dayatma gibi duruyor.",
+   "\"Şimdi\" acele ettiriyor, dayatıyor ve kulağa yapay geliyor.",
+   "\"Şimdi\" biraz dayatıyor, cümle eksik kalmış gibi duruyor."
+  ]
+ },
+ "D-4": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D-5": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D-6": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D-7": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D-8": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "Düğmede tek başına \"Tek Bakışta\" yazınca \"hızlı göz at\" gibi okunuyor, oyunu başlatacağı belli değil.",
+   "\"Tek Bakışta\" tek başına bir deyim gibi okunuyor; düğmenin ne yapacağı belirsiz.",
+   "Düğmede tek başına \"Tek Bakışta\" yazınca ne olacağı anlaşılmıyor, deyim gibi okunuyor.",
+   "\"Tek Bakışta\" tek başına zarf gibi okunuyor, düğmenin ne yaptığı belli değil.",
+   "Tek başına \"Tek Bakışta\" düğmeden çok başlığa benziyor, ne yapacağı belli değil."
+  ]
+ },
+ "D-9": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "D-10": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "Cümledeki oyun adını aynen tekrarlıyor, robot gibi ve süresi yok.",
+   "Cümledeki adı yeniden söylüyor ve süreyi vermiyor; kuru ve robotça.",
+   "\"Oyununu aç\" bir menü komutu gibi duruyor, süre de yok; \"oyna\" daha sıcak olurdu."
+  ]
+ }
+}

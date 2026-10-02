@@ -1,0 +1,95 @@
+{
+ "log": [
+  "01-f2a-dalga 2/5, 02-f2c-oruntu 5/5, 04-f4c-donus 0/5, 05-ft-yilan 0/5, 06-mc-tekbakis 3/5, 08-f3b-sicak 2/5, 09-who5-dusuk 0/5, 11-f2b-yoga 2/5"
+ ],
+ "result": {
+  "01-f2a-dalga": {
+   "yes": 2,
+   "n": 5,
+   "weak": [
+    "01-f2a-dalga-kart-320-acik/koyu: 'Bu akşam da / Dalga sesi · 8 dk' düğmesi iki satıra kırılıyor ve 5 satırlık başlıkla birleşince kart dar ekranda ağırlaşıyor. Ayrıca '0' ve '10' etiketleri çizginin altında, uç noktalarla hizasız duruyor.",
+    "01-f2a-dalga-kart-320-koyu.png: Alttaki düğme iki satıra bölünüyor (\"Bu akşam da / Dalga sesi · 8 dk\"), bu yüzden düğme şişkin ve dağınık görünüyor. Ölçeğin uçlarındaki 0 ve 10 da benim gözüme fazla küçük ve soluk gri.",
+    "01-f2a-dalga-kart-320-acik/koyu.png: Düğme \"Bu akşam da / Dalga sesi · 8 dk\" iki satıra kırılıyor, dar ekranda tıkız ve özensiz duruyor. 01-f2a-dalga-kart-390-acik.png'de de \"puanın\" tek başına bir satırda kalmış. Cümle kişisel ve çubuk anlaşılır ama bu kırılmalar şıklığı bozuyor.",
+    "01-f2a-dalga-kart-320-acik.png ve 01-f2a-dalga-kart-320-koyu.png: CTA \"Bu akşam da / Dalga sesi · 8 dk\" iki satıra kırılıyor ve hap düğme şişkin bir kutuya dönüşüyor. 01-f2a-dalga-kart-390-acik.png'de de başlık beş satıra yayılmış, \"puanın\" tek başına kalmış. Kısa bir not gibi değil, afiş gibi bağırıyor.",
+    "01-f2a-dalga-kart-390-acik.png: Başlıkta \"puanın\" tek başına bir satırda kalıyor, bu da okumayı kesiyor. 01-f2a-dalga-kart-320-koyu.png: Düğme metni \"Bu akşam da / Dalga sesi · 8 dk\" iki satıra bölünüyor ve düğme hantal görünüyor."
+   ]
+  },
+  "02-f2c-oruntu": {
+   "yes": 5,
+   "n": 5,
+   "weak": [
+    "02-f2c-oruntu-kart-390-acik: 'ortalama 4'ten 6'ya' neyin öncesi ve sonrası olduğunu (seans öncesi mi, sonrası mı) tam söylemiyor. Görsel olarak iki temada ve 320'de temiz, düğme tek satırda kalıyor.",
+    "02-f2c-oruntu-kart-390-acik.png: 0 ve 10 etiketleri küçük ve soluk, gözlükle bile zor seçiliyor. \"Son 5 seansta ortalama\" ifadesi de tek bakışta \"4'ten 6'ya\" ile tam oturmuyor; neyin ortalaması olduğunu bir kez daha okumak gerekiyor.",
+    "02-f2c-oruntu-kart-390-acik.png: \"ortalama 4'ten 6'ya\" belirsiz: seans öncesi ortalamadan seans sonrası ortalamaya mı, yoksa ilk seanstan sona mı? Bir muhasebeci olarak neyin neyle kıyaslandığını bilmek isterim. Bunun dışında dört görüntüde de temiz, düğme 320'de tek satırda kalıyor.",
+    "02-f2c-oruntu-kart-390-acik.png: \"Son 5 Dalga sesi seansında\" ifadesi biraz kurumsal (\"ses seansı\" tekrarı var). Ayrıca 0 ve 10 etiketleri çubuğun ucuna değil biraz dışına hizalanmış. Bunlar küçük kusurlar. 320'de CTA tek satıra sığıyor, iki tema da temiz.",
+    "02-f2c-oruntu-kart-390-acik.png: \"Ortalama 4'ten 6'ya\" ifadesinde 4'ün neyin ortalaması olduğu belli değil (seans öncesi mi, eski seanslar mı). Kart ayrıca 01 ile birebir aynı kalıpta, bu yüzden yan yana görülünce yeni bir şey söylemiyor."
+   ]
+  },
+  "04-f4c-donus": {
+   "yes": 0,
+   "n": 5,
+   "weak": [
+    "04-f4c-donus-kart-390-acik: 'Hoş geldin; geçmiş kayıtların yerinde, yolun hazır.' bana özel hiçbir şey söylemiyor ve devam etmem için bir eylem sunmuyor. Gri, ince yazı da kartı silik bırakıyor; 320'de üç satıra bölünmesi de boşluğu artırıyor.",
+    "04-f4c-donus-kart-390-acik.png: Yazı küçük ve gri, başlık gibi değil dipnot gibi duruyor. Ne bana özel bir bilgi veriyor ne de bir sonraki adımı (düğme yok). \"Yolun hazır\" deniyor ama yola nereden gireceğim belli değil. Sonuç: idare eder.",
+    "04-f4c-donus-kart-390-acik.png: \"Hoş geldin; geçmiş kayıtların yerinde, yolun hazır.\" herkese yazılabilecek, rakamsız ve düğmesiz bir hal hatır cümlesi. Bana özel hiçbir şey söylemiyor, 5 saniyede gözden kaçıyor. 320-koyu'da da üç satıra yayılıp gri ve sönük kalıyor.",
+    "04-f4c-donus-kart-390-acik.png: \"Hoş geldin; geçmiş kayıtların yerinde, yolun hazır.\" herkese aynı söylenebilecek kalıp bir cümle. Ne kaç gün uzak kaldığımı ne de nereden devam edeceğimi söylüyor, bir eylem de sunmuyor. Bana özel hissettirmiyor.",
+    "04-f4c-donus-kart-390-acik.png: \"Hoş geldin; geçmiş kayıtların yerinde, yolun hazır.\" her kullanıcıya yazılabilecek genel bir cümle. Ne kadar ara verdiğimi, nereden devam edeceğimi söylemiyor, düğmesi de yok. Yorgun gözle hiçbir şey kazandırmıyor."
+   ]
+  },
+  "05-ft-yilan": {
+   "yes": 0,
+   "n": 5,
+   "weak": [
+    "05-ft-yilan-kart-390-acik: 'Yılan oyununu ilk kez denedin.' bildiğim bir şeyi söylüyor; ne sonuç, ne övgü, ne de sonraki adım var. 05-ft-yilan-kart-320-acik'te ayrıca 'ilk / kez denedin' olarak kırılıyor ve sağda boşluk kalıyor.",
+    "05-ft-yilan-kart-390-acik.png: \"Yılan oyununu ilk kez denedin.\" zaten bildiğim bir şeyi söylüyor; ne bir sonuç, ne bir övgü, ne de bir sonraki adım var. Küçük gri yazı ve boş kart, Nef'in sesini sıradan bir sistem bildirimine dönüştürüyor.",
+    "05-ft-yilan-kart-390-acik.png: \"Yılan oyununu ilk kez denedin.\" zaten bildiğim bir şeyi söylüyor. Ne bir sonuç ne bir sonraki adım var, kartın varlık sebebi belli değil. 320-koyu'da \"ilk / kez denedin\" diye kırılınca iyice zayıflıyor.",
+    "05-ft-yilan-kart-390-acik.png: \"Yılan oyununu ilk kez denedin.\" kullanıcının zaten bildiği şeyi tekrar ediyor. Skor, gözlem ya da sonraki adım yok. 05-ft-yilan-kart-320-acik.png'de \"ilk / kez denedin.\" kırılması da cümleyi daha da zayıflatıyor.",
+    "05-ft-yilan-kart-390-acik.png: \"Yılan oyununu ilk kez denedin.\" zaten bildiğim bir şeyi söylüyor; sonuç, karşılaştırma ya da sonraki adım yok. 05-ft-yilan-kart-320-acik.png ekranında da \"ilk / kez\" iki satıra bölünüyor ve kısa cümle iyice zayıf görünüyor."
+   ]
+  },
+  "06-mc-tekbakis": {
+   "yes": 3,
+   "n": 5,
+   "weak": [
+    "06-mc-tekbakis-kart-390-acik: çubukta 0 ve üst sınır etiketi yok, bu yüzden 4'ten 6'ya artış çubuğun neredeyse tamamını kaplıyor. 02'deki aynı 4'ten 6'ya artış ise küçük görünüyor. Ölçek tutarsız ve abartılı duruyor.",
+    "06-mc-tekbakis-kart-390-acik.png: Ölçekte 0 ya da en yüksek değer yazmıyor, bu yüzden 6'nın iyi mi yoksa sınıra yakın mı olduğunu anlayamıyorum. 390 genişlikte \"harf sayısı\" satırı da yalnız kalıyor, cümle biraz uzun duruyor.",
+    "06-mc-tekbakis-kart-390-acik.png: Çubukta 0 ve üst sınır yazmıyor, 4'ten 6'ya artış neredeyse çubuğun tamamını kaplıyor. 02'de aynı 4→6 çubuğun küçük bir parçasıydı, burada ölçek gizlice büyütülmüş gibi; abartı izlenimi veriyor. Şüpheci bir göz buna hemen takılır.",
+    "06-mc-tekbakis-kart-390-acik.png: Çubukta 01, 02 ve 11'deki gibi 0 ve üst sınır etiketleri yok. 4 ile 6 neredeyse uçtan uca yayıldığı için 2 harflik artış olduğundan çok daha büyük görünüyor; bu hem tutarsız hem yanıltıcı. Ayrıca \"oyununda ilerleme var:\" kısmı fazlalık.",
+    "06-mc-tekbakis-kart-390-acik.png: Çubukta 0/10 gibi uç değerler yok. 4 ile 6 arası çubuğun neredeyse tamamını kaplıyor, oysa 02'de aynı 4→6 kısa görünüyor. Ölçek karttan karta değişiyor ve artış olduğundan büyük görünüyor. \"İlerleme var:\" kısmı da fazlalık."
+   ]
+  },
+  "08-f3b-sicak": {
+   "yes": 2,
+   "n": 5,
+   "weak": [
+    "08-f3b-sicak-kart-320-acik/koyu: 'Gölge ve su / işine yarar.' satır kırılması yetim gibi duruyor; kısa bir satır ve boş bir sağ kenar oluşuyor. 'Gölge ve su işine yarar' tavsiyesi de genel kalıyor ve kartta bir eylem düğmesi yok.",
+    "08-f3b-sicak-kart-320-acik.png: \"Gölge ve su / işine yarar.\" satırı garip yerden bölünüyor ve sağda boşluk kalıyor. Alttaki \"Apple Weather\" yazısı ise küçük ve soluk gri, benim gözüme zor okunuyor.",
+    "08-f3b-sicak-kart-320-acik/koyu.png: \"Gölge ve su\" satırı yarım kalıyor, \"işine yarar.\" yer olduğu halde alt satıra itilmiş, zorlama bir kırılma gibi duruyor. Ayrıca \"Gölge ve su işine yarar\" hem tavsiye olarak zayıf hem de kartta bir eylem yok; bilgi verip bırakıyor.",
+    "08-f3b-sicak-kart-320-acik.png: \"Gölge ve su / işine yarar.\" kırılması dengesiz, üçüncü satır kısa ve kopuk kalıyor. Diğer kartlarda olan vurgu rengi burada yok (31 derece vurgulanmamış), üç satırın hepsi aynı ağırlıkta. Ayrıca \"Apple Weather\" ile \"Veri kaynakları\" alt satırda aynı bilgiyi iki kez veriyor.",
+    "08-f3b-sicak-kart-320-acik.png: Üçüncü cümle \"Gölge ve su / işine yarar.\" diye bölünüyor; satır kısa kalıyor ve zorla kırılmış gibi duruyor. Gece vardiyasından önce yürüyüş saatine göre gerçekten işe yarar bir not, ama bir eylem düğmesi yok."
+   ]
+  },
+  "09-who5-dusuk": {
+   "yes": 0,
+   "n": 5,
+   "weak": [
+    "09-who5-dusuk-kart-390-acik: 'Bu bir tanı değil.' ile açılıyor ama kartta 'bu'nun neyi gösterdiği yok; bağlamsız bir uyarı gibi okunuyor ve ne yapacağıma dair bir bağlantı ya da düğme yok. 09-who5-dusuk-kart-320-acik'te soldaki etiket genişliği yediği için metin 5 satırlık dar bir sütuna sıkışıyor.",
+    "09-who5-dusuk-kart-320-koyu.png: Önemli ve hassas bir mesaj küçük, soluk gri yazıyla dar bir sütuna sıkışmış, beş satıra bölünüyor. \"Nef\" etiketi sol tarafı boşa harcıyor. Yardıma ulaşmak için bir bağlantı ya da düğme de yok; mesaj bırakılıp geçilmiş gibi.",
+    "09-who5-dusuk-kart-390-acik.png: Kart \"Bu bir tanı değil.\" diye başlıyor ama \"bu\"nun ne olduğu (WHO-5 sonucu) hiç söylenmiyor. İlk okumada soğuk bir hukuki uyarı gibi geliyor. Ne bir yol ne de bir bağlantı var; düşük iyi oluşta insanı yalnız bırakıyor. 320-koyu'da beş satıra yayılıp okunması zorlaşıyor.",
+    "09-who5-dusuk-kart-390-acik.png: Kart \"Bu bir tanı değil.\" diye savunmacı bir uyarıyla açılıyor ve \"Bu\" neyi kastediyor belli değil. Hassas bir anda sıcaklık da yok, nereye başvurulacağına dair bir bağlantı da. 09-who5-dusuk-kart-320-acik.png'de metin çipin yanında beş satırlık dar bir sütuna sıkışıyor, çipin altı boş kalıyor.",
+    "09-who5-dusuk-kart-390-acik.png: İyi oluşum düşükken kartın ilk sözü \"Bu bir tanı değil.\" oluyor; uyarı sıcaklığın önüne geçmiş, soğuk duruyor. Uzmana ulaşmak için bağlantı ya da düğme de yok. 09-who5-dusuk-kart-320-acik.png: Soldaki Nef etiketi yer kaplıyor, metin dar bir sütunda 5 satıra sıkışıyor."
+   ]
+  },
+  "11-f2b-yoga": {
+   "yes": 2,
+   "n": 5,
+   "weak": [
+    "11-f2b-yoga-kart-320-acik/koyu: 'Bu akşam da / Nefesin Ritmi · 5 dk' düğmesi iki satıra kırılıyor ve başlık 5 satır sürüyor. Ayrıca 'Geçen hafta bu akşam' ifadesi Türkçede aksak, 'geçen hafta aynı akşam' olmalı.",
+    "11-f2b-yoga-kart-390-acik.png: Ölçekte 7'den 4'e düşüş gösteriliyor ama renk geçişi 4'ten 7'ye doğru akıyor, ilk bakışta yükselmiş gibi okunabiliyor. 0 ve 10 etiketleri yine küçük. 320 genişlikte düğme iki satıra bölünüyor.",
+    "11-f2b-yoga-kart-320-acik/koyu.png: Düğme \"Bu akşam da / Nefesin Ritmi · 5 dk\" iki satıra kırılıyor, dar ekranda kusursuz değil. \"Geçen hafta bu akşam\" da kulağa biraz tuhaf geliyor; \"geçen haftanın bu akşamı\" daha doğal olurdu. İçerik kişisel ve çubuk yön olarak doğru, ama iki pürüz etkilenmeme engel oluyor.",
+    "11-f2b-yoga-kart-320-acik.png: CTA \"Bu akşam da / Nefesin Ritmi · 5 dk\" iki satıra kırılıyor. Başlık her iki genişlikte de beş satır ve \"Geçen hafta bu akşam\" ilk okumada takılıyor. Düşüşü gösteren degrade 4'ten 7'ye doğru soluyor, bu yüzden yön ilk bakışta okunmuyor.",
+    "11-f2b-yoga-kart-390-acik.png: \"Geçen hafta bu akşam\" Türkçede aksıyor (\"geçen hafta bu saatlerde\" daha doğal olur) ve başlık 5 satıra uzuyor. 11-f2b-yoga-kart-320-acik.png: Düğme metni \"Bu akşam da / Nefesin Ritmi · 5 dk\" iki satıra bölünüyor."
+   ]
+  }
+ }
+}

@@ -1,0 +1,48 @@
+{
+ "R5i": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "R5j": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Sen de hiç demedin\" ilk okumada \"hiçbir şey söylemedin\" diye anlaşılıyor.",
+   "\"Hiç demedin\" ifadesi \"hiçbir şey söylemedin\" diye de anlaşılabilir, bu yüzden anlam belirsiz.",
+   "\"Sen de hiç demedin\" iki anlama geliyor: \"hiç\" kelimesini söylemedin ya da hiçbir şey söylemedin; okuyan bir an duraklıyor.",
+   "\"Hiç demedin\" ilk okumada \"hiçbir şey söylemedin\" diye anlaşılıyor, yani belirsiz.",
+   "\"Hiç demedin\" sanki hiçbir şey söylememişsin gibi okunuyor, belirsiz."
+  ]
+ },
+ "R5k": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "R5l": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "R5m": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "R5n": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "Kişi 0 girdi, \"hiç geçmedi\" demedi; söz ağzına konmuş gibi duruyor ve okuması aksıyor.",
+   "Tırnaksız aktarılan \"hiç geçmedi dedin\" kulağa iğreti geliyor ve ilk okuyuşta takılıyor.",
+   "Kişi bir sayı girdi, \"hiç geçmedi\" demedi; metin ona söylemediği bir cümleyi yüklüyor ve biraz suçlayıcı duruyor.",
+   "Alıntı gibi devrik ve hafif suçlayıcı duruyor, \"sen 0 dedin\" daha temiz."
+  ]
+ },
+ "R5o": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "M5a": {
+  "yes": 4,
+  "n": 5,
+  "why": [
+   "\"Henüz gösterilmedi\" tek başına belirsiz kalıyor; kim, nerede göstermedi sorusu açık kalıyor ve kanıt vurgusu zayıf."
+  ]
+ },
+ "M5b": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "M5c": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"İşe yaradığı\" belirsiz kalıyor, neyin işe yaradığı anlaşılmıyor.",
+   "\"İşe yaradığı\" belirsiz; neye yaradığı anlaşılmıyor.",
+   "\"İşe yaradığı\" belirsiz kalıyor; neyin işe yaradığı anlaşılmıyor, üstelik bir fayda vaadi gibi okunuyor.",
+   "\"İşe yaradığı\" neyin kastedildiğini söylemiyor ve fark etme iddiasını bulanık, hatta sağlık iddiasına kayabilecek biçimde genelliyor.",
+   "\"İşe yaradığı\" belirsiz kalıyor, neye yaradığı anlaşılmıyor."
+  ]
+ },
+ "M5d": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Fark ettirdiğine\" nesnesiz kalmış, kulağa eksik ve tuhaf geliyor.",
+   "\"Bu bir alıştırma\" fazla genel, \"fark ettirdiğine\" de nesnesiz kalıp tuhaf duruyor.",
+   "\"Bu bir alıştırma\" fazla çıplak kalıyor, \"fark ettirdiğine\" de nesnesiz olduğu için kulağa tuhaf geliyor.",
+   "\"Fark ettirdiğine\" nesnesiz ettirgen olduğu için kulağa tuhaf geliyor, \"Bu bir alıştırma\" da fazla boş kalıyor.",
+   "\"Fark etme\" düşünce cümle yarım kalıyor, \"fark ettirdiğine\" de neyi fark ettirdiğini söylemiyor."
+  ]
+ },
+ "M5e": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "Alıştırma zaten bir caddede geçtiği için \"sokakta\" kafa karıştırıyor, \"fark ettireceği\" de yapay duruyor.",
+   "\"Sokakta daha çok fark ettireceği\" hem anlamı daraltıyor hem de devrik ve yapay duruyor.",
+   "\"Sokakta\" yeri gereksiz yere daraltıyor, nesnesiz \"fark ettireceği\" de kulağa yabancı geliyor.",
+   "Alıştırma zaten bir caddede geçtiği için \"sokakta\" kafa karıştırıyor, \"fark ettireceği\" de nesnesiz ve aksak.",
+   "\"Sokakta\" dar ve tuhaf kaçıyor, \"fark ettireceği\" de havada kalıyor."
+  ]
+ }
+}

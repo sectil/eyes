@@ -1,0 +1,18 @@
+{
+ "log": [
+  "12-f2d-yoga-oruntu 4/5"
+ ],
+ "result": {
+  "12-f2d-yoga-oruntu": {
+   "yes": 4,
+   "n": 5,
+   "weak": [
+    "12-f2d-yoga-oruntu-kart-320-acik.png: 'Bugün de Nefesin Ritmi · 5 dk' yazısı butonu neredeyse kenardan kenara dolduruyor, iç boşluk kalmamış ve sıkışık duruyor. Ayrıca skaladaki '6' etiketi '4,2' ile aynı biçimde değil ('6,0' olmalı), 0–10 ölçeğinin neyi gösterdiği de yazmıyor. Başlıktaki 'Nefesin Ritmi' adı butonda bir kez daha geçiyor, bu da beş satırlık ağır başlığı gereksiz uzatıyor.",
+    "Gerginlik çizgisinde iki nokta var ama 'önce' ve 'sonra' yazmıyor. Ayrıca 0 ve 10 etiketleri küçük ve soluk; 12-f2d-yoga-oruntu-kart-320-acik.png'de bunları gözlükle bile zor seçtim. 6'nın ders öncesi, 4,2'nin ders sonrası olduğunu çizgiden değil, başlıktan anlıyorum. Bunun dışında yazı iri ve kalın. Kart bana özel (8 seans, Nefesin Ritmi), iki temada da net, dar ekranda da taşma yok.",
+    "12-f2d-yoga-oruntu-kart-390-acik.png (ve 320 sürümleri): Çizelgedeki noktalarda 'önce/sonra' etiketi yok. Hangisinin dersten önce, hangisinin sonra olduğunu yalnızca küçük oktan çıkarmak gerekiyor. Ayrıca '6' ile '4,2' farklı biçimde yazılmış; muhasebeci gözüyle '6,0' olmalı. Bunun dışında kart bana özel ve net, iki temada ve 320 genişlikte de temiz duruyor.",
+    "12-f2d-yoga-oruntu-kart-390-acik.png: Ölçekteki 6 ve 4,2 noktalarında \"önce/sonra\" etiketi yok. Yön yalnızca küçük bir oktan anlaşılıyor, 0–10 çizgisinin gerginlik ölçeği olduğu da yazmıyor. Ayrıca beş satırlık ağır başlık \"Nefesin Ritmi yoga dersi\" diyor, buton ise \"Bugün de Nefesin Ritmi · 5 dk\" diyor. Okuyan, 5 dakikalık bir yoga dersi mi yoksa uygulama içi bir nefes seansı mı başlatacağını anlayamıyor. 320 genişlikte ve koyu temada (kart-320-koyu) düzen temiz, sorun bu anlam belirsizliğinde.",
+    "12-f2d-yoga-oruntu-kart-320-acik.png: Ölçekte 6 ve 4,2 noktalarının altında 'ders öncesi' ve 'ders sonrası' etiketi yok. Yorgun gözle hangisinin önce olduğunu ancak oka bakarak çözebiliyorum. Ayrıca 5 satırlık başlık dar ekranda ağır duruyor ve 'Nefesin Ritmi' adı hem başlıkta hem butonda tekrar ediyor."
+   ]
+  }
+ }
+}

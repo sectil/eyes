@@ -1,0 +1,11 @@
+Bağlam: Nefona'daki "Fark Ettin mi?" alıştırmasının sonuç ekranı. Kişi sahneden geçerken kendisine verilen şeyi saydı (ör. "Mavi arabaları say"), sonra "Kaç mavi araba geçti?" sorusuna cevap verdi. Sonuç ekranında görev satırının altında küçük bir satır, gerçek sayıyı ve kişinin cevabını gösterir; yanında TAM / YAKIN / KAÇTI rozeti durur. Onaylı örnek: "Mavi arabalar: 4 geçti, sen de 4 dedin". Her satır: kimlik | durum | metin. Her satıra ayrı karar ver.
+
+R5a | hareketli hedef, cevap doğru | Mavi arabalar: 4 geçti, sen de 4 dedin
+R5b | hareketli hedef, cevap farklı | Mavi arabalar: 4 geçti, sen 3 dedin
+R5c | duran hedef, cevap doğru | Karpuzlar: 5 vardı, sen de 5 dedin
+R5d | duran hedef, cevap farklı | Karpuzlar: 5 vardı, sen 6 dedin
+R5e | kişi hedefi, cevap farklı | Şapkalı kişiler: 3 vardı, sen 2 dedin
+R5f | uzun hedef adı, cevap doğru | Sarı yağmurluk giyenler: 2 vardı, sen de 2 dedin
+R5g | uzun hedef adı, cevap farklı | Çiçek dolu kovalar: 3 vardı, sen 4 dedin
+R5h | kişi hedefi, cevap doğru | Koşanlar: 2 vardı, sen de 2 dedin
+R5i | hareketli hedef, hiç yoktu, cevap farklı | Bebek arabaları: 0 geçti, sen 1 dedin

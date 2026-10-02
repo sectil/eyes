@@ -1,0 +1,17 @@
+{
+ "unit": "k.anahtar3",
+ "take": "t3",
+ "asset_id": "skZXwCTqOR0ZTSBRhESK",
+ "asset_size_bytes": 44883,
+ "ref_node": "hNlbl8Nzd4wJsIrTL0HQ",
+ "stt_node": "kJIoZLjcx5qBO28h6mWY",
+ "session_id": "c7lftMZGbPinIdSdJfz0",
+ "generation_id": "eFCXGFyLFaaAZVHdfdbf",
+ "actual_credits": 9.24,
+ "actual_cents": 0.168,
+ "spoken_duration_secs": 1.4,
+ "scribe_text": "Uyanık bir dinlenme bu",
+ "tts": "Uyanık bir dinlenme bu.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 4\n}"
+}

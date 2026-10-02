@@ -1,0 +1,20 @@
+{
+ "p1": {
+  "transpose": 1,
+  "seconds": 48,
+  "lt300": 0.8098,
+  "500_4000": 0.0297,
+  "lt150": 0.1684,
+  "1500_4000": 0.0015,
+  "method": "Welch nperseg 8192, mid channel, seed 11, bars 24-36"
+ },
+ "p13": {
+  "transpose": 13,
+  "seconds": 48,
+  "lt300": 0.1734,
+  "500_4000": 0.4051,
+  "lt150": 0.0,
+  "1500_4000": 0.0056,
+  "method": "Welch nperseg 8192, mid channel, seed 11, bars 24-36"
+ }
+}

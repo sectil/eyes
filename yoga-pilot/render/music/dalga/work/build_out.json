@@ -1,0 +1,1889 @@
+{
+ "files": [
+  {
+   "id": "dalga.vd1",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd1.wav",
+   "family": "varis-derinlesme",
+   "role": "segment",
+   "parts": [
+    "vd1"
+   ],
+   "seeds": [
+    202609291
+   ],
+   "transposeSemitones": 13,
+   "gridBar0": 46,
+   "gridBarEnd": 120,
+   "harmonicPhaseAtStart": 22,
+   "gainDb": -4.89,
+   "truePeakDbtp": -12.63,
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd1.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 296.0,
+    "lufsIntegrated": -23.94,
+    "truePeakDbtp": -12.63,
+    "samplePeakDbfs": -12.63,
+    "dc": [
+     1.68e-05,
+     7.51e-06
+    ],
+    "edgeAbs": {
+     "first": 4.77e-07,
+     "last": 1.19e-07
+    },
+    "shortTerm3s": {
+     "windows": 294,
+     "below70": 0,
+     "min": -44.11,
+     "p5": -34.37,
+     "p10": -33.66,
+     "p50": -24.05,
+     "p90": -23.09,
+     "p95": -22.81,
+     "max": -22.69,
+     "spreadP10P90": 10.57,
+     "spreadP5P95": 11.56,
+     "spreadMaxMin": 21.42,
+     "excludingIntervals": {
+      "n": 218,
+      "p10": -24.25,
+      "p50": -23.66,
+      "p90": -22.91,
+      "spreadP10P90": 1.34,
+      "spreadMaxMin": 1.71,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": -0.09
+    },
+    "onset": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0354,
+     "fluxMax": 0.1334,
+     "peakRatePerMin": 52.3,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.932,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0196,
+    "clicks": {
+     "hfTransients": 22,
+     "hfMaxDbfs": -58.9,
+     "hfP50Dbfs": -96.7,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 22,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0023,
+     "min1sRmsDbfs": -76.9
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1665,
+     "300_500": 0.4045,
+     "500_4000": 0.4287,
+     "1500_4000": 0.0071,
+     "gt4000": 0.0003
+    },
+    "stereo": {
+     "lrCorrelation": 0.98
+    }
+   },
+   "sha256": "7fb464037610ae92e7cf1507e54b1c2e098499497cf62fc5dcf748e274de385b",
+   "events": [
+    {
+     "eventsInFile": 392,
+     "perMinuteByRole": {
+      "bass": 12.36,
+      "gtr": 6.89,
+      "mel": 8.92,
+      "pad": 12.36,
+      "up": 38.92
+     },
+     "instCountsAll": {
+      "pad": 63,
+      "piano": 307,
+      "guitar": 35
+     },
+     "drumEvents": 0,
+     "bars": 74,
+     "silentBars": 13,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 291.0145,
+     "maxGapBetweenOnsetsSec": 5.99,
+     "maxGapInclEdgesSec": 5.99
+    }
+   ],
+   "rawInfo": [
+    {
+     "rawLufs": -19.05,
+     "last1sRmsDbfsRaw": -70.9
+    }
+   ]
+  },
+  {
+   "id": "dalga.vd2",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd2.wav",
+   "family": "varis-derinlesme",
+   "role": "segment",
+   "parts": [
+    "vd2"
+   ],
+   "seeds": [
+    202609292
+   ],
+   "transposeSemitones": 13,
+   "gridBar0": 118,
+   "gridBarEnd": 192,
+   "harmonicPhaseAtStart": 22,
+   "gainDb": -4.89,
+   "truePeakDbtp": -12.85,
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd2.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 296.0,
+    "lufsIntegrated": -23.93,
+    "truePeakDbtp": -12.85,
+    "samplePeakDbfs": -12.86,
+    "dc": [
+     6.81e-05,
+     4.13e-05
+    ],
+    "edgeAbs": {
+     "first": 4.77e-07,
+     "last": 1.19e-07
+    },
+    "shortTerm3s": {
+     "windows": 294,
+     "below70": 0,
+     "min": -44.06,
+     "p5": -34.04,
+     "p10": -33.34,
+     "p50": -23.99,
+     "p90": -23.0,
+     "p95": -22.78,
+     "max": -22.66,
+     "spreadP10P90": 10.34,
+     "spreadP5P95": 11.26,
+     "spreadMaxMin": 21.4,
+     "excludingIntervals": {
+      "n": 218,
+      "p10": -24.32,
+      "p50": -23.73,
+      "p90": -22.87,
+      "spreadP10P90": 1.45,
+      "spreadMaxMin": 2.03,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": -0.13
+    },
+    "onset": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0351,
+     "fluxMax": 0.1337,
+     "peakRatePerMin": 52.3,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.925,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0192,
+    "clicks": {
+     "hfTransients": 14,
+     "hfMaxDbfs": -59.0,
+     "hfP50Dbfs": -96.9,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 14,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0024,
+     "min1sRmsDbfs": -75.6
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1669,
+     "300_500": 0.398,
+     "500_4000": 0.4348,
+     "1500_4000": 0.0068,
+     "gt4000": 0.0003
+    },
+    "stereo": {
+     "lrCorrelation": 0.964
+    }
+   },
+   "sha256": "a604dd2f59749012bc3584aa83187bf1f96208a9b919b0ec38627c0e79559066",
+   "events": [
+    {
+     "eventsInFile": 385,
+     "perMinuteByRole": {
+      "bass": 12.36,
+      "gtr": 4.86,
+      "mel": 10.34,
+      "pad": 12.36,
+      "up": 38.11
+     },
+     "instCountsAll": {
+      "pad": 63,
+      "piano": 309,
+      "guitar": 26
+     },
+     "drumEvents": 0,
+     "bars": 74,
+     "silentBars": 13,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 291.0133,
+     "maxGapBetweenOnsetsSec": 5.999,
+     "maxGapInclEdgesSec": 5.999
+    }
+   ],
+   "rawInfo": [
+    {
+     "rawLufs": -19.04,
+     "last1sRmsDbfsRaw": -69.8
+    }
+   ]
+  },
+  {
+   "id": "dalga.vd3",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd3.wav",
+   "family": "varis-derinlesme",
+   "role": "segment",
+   "parts": [
+    "vd3"
+   ],
+   "seeds": [
+    202609293
+   ],
+   "transposeSemitones": 13,
+   "gridBar0": 190,
+   "gridBarEnd": 264,
+   "harmonicPhaseAtStart": 22,
+   "gainDb": -4.89,
+   "truePeakDbtp": -12.86,
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd3.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 296.0,
+    "lufsIntegrated": -24.14,
+    "truePeakDbtp": -12.86,
+    "samplePeakDbfs": -12.87,
+    "dc": [
+     -8.55e-05,
+     -4.95e-05
+    ],
+    "edgeAbs": {
+     "first": 5.96e-07,
+     "last": 0.0
+    },
+    "shortTerm3s": {
+     "windows": 294,
+     "below70": 0,
+     "min": -44.08,
+     "p5": -34.22,
+     "p10": -33.52,
+     "p50": -24.15,
+     "p90": -23.31,
+     "p95": -23.2,
+     "max": -22.99,
+     "spreadP10P90": 10.21,
+     "spreadP5P95": 11.02,
+     "spreadMaxMin": 21.09,
+     "excludingIntervals": {
+      "n": 218,
+      "p10": -24.4,
+      "p50": -24.04,
+      "p90": -23.23,
+      "spreadP10P90": 1.17,
+      "spreadMaxMin": 1.7,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": -0.12
+    },
+    "onset": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0355,
+     "fluxMax": 0.1392,
+     "peakRatePerMin": 52.7,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.926,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0189,
+    "clicks": {
+     "hfTransients": 24,
+     "hfMaxDbfs": -64.9,
+     "hfP50Dbfs": -98.3,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 24,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0022,
+     "min1sRmsDbfs": -77.0
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1833,
+     "300_500": 0.3818,
+     "500_4000": 0.4347,
+     "1500_4000": 0.0062,
+     "gt4000": 0.0002
+    },
+    "stereo": {
+     "lrCorrelation": 0.972
+    }
+   },
+   "sha256": "245655b3ff0f3b08000eac6e19c913ee4491364c3ad4a205cdd0bad48e0bb2c1",
+   "events": [
+    {
+     "eventsInFile": 384,
+     "perMinuteByRole": {
+      "bass": 12.36,
+      "gtr": 6.08,
+      "mel": 8.51,
+      "pad": 12.36,
+      "up": 38.51
+     },
+     "instCountsAll": {
+      "pad": 63,
+      "piano": 300,
+      "guitar": 30
+     },
+     "drumEvents": 0,
+     "bars": 74,
+     "silentBars": 13,
+     "midiRange": [
+      56,
+      91
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 290,
+     "maxGapBetweenOnsetsSec": 5.99,
+     "maxGapInclEdgesSec": 6.0
+    }
+   ],
+   "rawInfo": [
+    {
+     "rawLufs": -19.25,
+     "last1sRmsDbfsRaw": -70.9
+    }
+   ]
+  },
+  {
+   "id": "dalga.vd_family",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd_family.wav",
+   "family": "varis-derinlesme",
+   "role": "family-joined",
+   "parts": [
+    "vd1",
+    "vd2",
+    "vd3"
+   ],
+   "seeds": [
+    202609291,
+    202609292,
+    202609293
+   ],
+   "transposeSemitones": 13,
+   "gridBar0": 46,
+   "gridBarEnd": 264,
+   "harmonicPhaseAtStart": 22,
+   "gainDb": -4.89,
+   "truePeakDbtp": -12.63,
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_vd_family.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 872.0,
+    "lufsIntegrated": -24.0,
+    "truePeakDbtp": -12.63,
+    "samplePeakDbfs": -12.63,
+    "dc": [
+     -4.64e-07,
+     -4.22e-07
+    ],
+    "edgeAbs": {
+     "first": 4.77e-07,
+     "last": 0.0
+    },
+    "shortTerm3s": {
+     "windows": 870,
+     "below70": 0,
+     "min": -44.11,
+     "p5": -34.17,
+     "p10": -33.47,
+     "p50": -24.09,
+     "p90": -23.19,
+     "p95": -22.89,
+     "max": -22.66,
+     "spreadP10P90": 10.28,
+     "spreadP5P95": 11.28,
+     "spreadMaxMin": 21.45,
+     "excludingIntervals": {
+      "n": 650,
+      "p10": -24.32,
+      "p50": -23.78,
+      "p90": -23.08,
+      "spreadP10P90": 1.24,
+      "spreadMaxMin": 2.03,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": -0.23
+    },
+    "onset": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0354,
+     "fluxMax": 0.138,
+     "peakRatePerMin": 53.12,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.93,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0192,
+    "clicks": {
+     "hfTransients": 58,
+     "hfMaxDbfs": -58.9,
+     "hfP50Dbfs": -97.2,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 58,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0022,
+     "min1sRmsDbfs": -77.0
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1714,
+     "300_500": 0.397,
+     "500_4000": 0.4314,
+     "1500_4000": 0.0067,
+     "gt4000": 0.0003
+    },
+    "stereo": {
+     "lrCorrelation": 0.971
+    },
+    "seams": {
+     "xfadeSec": 8.0,
+     "rows": [
+      {
+       "xfadeStartSec": 288.0,
+       "loudnessDeltaDb": -2.63,
+       "percentileInBaseline": 45.5,
+       "hfJumpAtXfadeEdgesDb": [
+        2.0,
+        2.2
+       ],
+       "unattributedHfTransientsInXfade": []
+      },
+      {
+       "xfadeStartSec": 576.0,
+       "loudnessDeltaDb": -2.32,
+       "percentileInBaseline": 66.7,
+       "hfJumpAtXfadeEdgesDb": [
+        1.8,
+        12.8
+       ],
+       "unattributedHfTransientsInXfade": []
+      }
+     ],
+     "baseline": {
+      "positions": "same harmonic phase (seam + k*24.0 s)",
+      "n": 33,
+      "p5": -3.15,
+      "p50": -2.51,
+      "p95": -2.21,
+      "max": -2.14
+     },
+     "deltaDefinition": "energy-mean 400 ms loudness inside the 8 s crossfade minus mean of the 16 s before and 16 s after (dB)"
+    }
+   },
+   "sha256": "40c2a510c5d797b38180a0a950968ae99649f12b1a6e8a38411f6e766f09da5a",
+   "events": [
+    {
+     "eventsInFile": 392,
+     "perMinuteByRole": {
+      "bass": 12.36,
+      "gtr": 6.89,
+      "mel": 8.92,
+      "pad": 12.36,
+      "up": 38.92
+     },
+     "instCountsAll": {
+      "pad": 63,
+      "piano": 307,
+      "guitar": 35
+     },
+     "drumEvents": 0,
+     "bars": 74,
+     "silentBars": 13,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 291.0145,
+     "maxGapBetweenOnsetsSec": 5.99,
+     "maxGapInclEdgesSec": 5.99
+    },
+    {
+     "eventsInFile": 385,
+     "perMinuteByRole": {
+      "bass": 12.36,
+      "gtr": 4.86,
+      "mel": 10.34,
+      "pad": 12.36,
+      "up": 38.11
+     },
+     "instCountsAll": {
+      "pad": 63,
+      "piano": 309,
+      "guitar": 26
+     },
+     "drumEvents": 0,
+     "bars": 74,
+     "silentBars": 13,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 291.0133,
+     "maxGapBetweenOnsetsSec": 5.999,
+     "maxGapInclEdgesSec": 5.999
+    },
+    {
+     "eventsInFile": 384,
+     "perMinuteByRole": {
+      "bass": 12.36,
+      "gtr": 6.08,
+      "mel": 8.51,
+      "pad": 12.36,
+      "up": 38.51
+     },
+     "instCountsAll": {
+      "pad": 63,
+      "piano": 300,
+      "guitar": 30
+     },
+     "drumEvents": 0,
+     "bars": 74,
+     "silentBars": 13,
+     "midiRange": [
+      56,
+      91
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 290,
+     "maxGapBetweenOnsetsSec": 5.99,
+     "maxGapInclEdgesSec": 6.0
+    }
+   ],
+   "rawInfo": [
+    {
+     "rawLufs": -19.05,
+     "last1sRmsDbfsRaw": -70.9
+    },
+    {
+     "rawLufs": -19.04,
+     "last1sRmsDbfsRaw": -69.8
+    },
+    {
+     "rawLufs": -19.25,
+     "last1sRmsDbfsRaw": -70.9
+    }
+   ]
+  },
+  {
+   "id": "dalga.derin1",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin1.wav",
+   "family": "derin",
+   "role": "segment",
+   "parts": [
+    "derin1"
+   ],
+   "seeds": [
+    202609295
+   ],
+   "transposeSemitones": 13,
+   "gridBar0": 46,
+   "gridBarEnd": 96,
+   "harmonicPhaseAtStart": 22,
+   "gainDb": -4.73,
+   "truePeakDbtp": -12.96,
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin1.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 200.0,
+    "lufsIntegrated": -24.16,
+    "truePeakDbtp": -12.96,
+    "samplePeakDbfs": -12.97,
+    "dc": [
+     -2.66e-07,
+     -2.29e-07
+    ],
+    "edgeAbs": {
+     "first": 4.77e-07,
+     "last": 0.0
+    },
+    "shortTerm3s": {
+     "windows": 198,
+     "below70": 0,
+     "min": -44.29,
+     "p5": -33.84,
+     "p10": -33.6,
+     "p50": -24.21,
+     "p90": -23.29,
+     "p95": -23.16,
+     "max": -23.04,
+     "spreadP10P90": 10.31,
+     "spreadP5P95": 10.68,
+     "spreadMaxMin": 21.25,
+     "excludingIntervals": {
+      "n": 146,
+      "p10": -24.42,
+      "p50": -24.02,
+      "p90": -23.19,
+      "spreadP10P90": 1.23,
+      "spreadMaxMin": 1.77,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": 0.09
+    },
+    "onset": {
+     "fluxP50": 0.0047,
+     "fluxP99": 0.0163,
+     "fluxMax": 0.1007,
+     "peakRatePerMin": 30.0,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.927,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0183,
+    "clicks": {
+     "hfTransients": 0,
+     "hfMaxDbfs": -64.9,
+     "hfP50Dbfs": -106.6,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0026,
+     "min1sRmsDbfs": -77.3
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1717,
+     "300_500": 0.3931,
+     "500_4000": 0.4351,
+     "1500_4000": 0.0033,
+     "gt4000": 0.0001
+    },
+    "stereo": {
+     "lrCorrelation": 0.977
+    }
+   },
+   "sha256": "55576da872156fdd47e9d8403b7aacec5eddd4131fd8894a2041616642d2df54",
+   "events": [
+    {
+     "eventsInFile": 157,
+     "perMinuteByRole": {
+      "bass": 12.3,
+      "mel": 3.3,
+      "pad": 12.3,
+      "up": 19.2
+     },
+     "instCountsAll": {
+      "pad": 43,
+      "piano": 122
+     },
+     "drumEvents": 0,
+     "bars": 50,
+     "silentBars": 9,
+     "midiRange": [
+      56,
+      91
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 195,
+     "maxGapBetweenOnsetsSec": 7.989,
+     "maxGapInclEdgesSec": 7.989
+    }
+   ],
+   "rawInfo": [
+    {
+     "rawLufs": -19.43,
+     "last1sRmsDbfsRaw": -71.7
+    }
+   ]
+  },
+  {
+   "id": "dalga.derin2",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin2.wav",
+   "family": "derin",
+   "role": "segment",
+   "parts": [
+    "derin2"
+   ],
+   "seeds": [
+    202609296
+   ],
+   "transposeSemitones": 13,
+   "gridBar0": 94,
+   "gridBarEnd": 144,
+   "harmonicPhaseAtStart": 22,
+   "gainDb": -4.73,
+   "truePeakDbtp": -13.34,
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin2.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 200.0,
+    "lufsIntegrated": -24.11,
+    "truePeakDbtp": -13.34,
+    "samplePeakDbfs": -13.35,
+    "dc": [
+     -2.91e-07,
+     -2.9e-07
+    ],
+    "edgeAbs": {
+     "first": 4.77e-07,
+     "last": 1.19e-07
+    },
+    "shortTerm3s": {
+     "windows": 198,
+     "below70": 0,
+     "min": -44.44,
+     "p5": -33.99,
+     "p10": -33.62,
+     "p50": -24.18,
+     "p90": -23.26,
+     "p95": -23.04,
+     "max": -22.93,
+     "spreadP10P90": 10.36,
+     "spreadP5P95": 10.95,
+     "spreadMaxMin": 21.51,
+     "excludingIntervals": {
+      "n": 146,
+      "p10": -24.37,
+      "p50": -23.93,
+      "p90": -23.07,
+      "spreadP10P90": 1.3,
+      "spreadMaxMin": 1.68,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": 0.04
+    },
+    "onset": {
+     "fluxP50": 0.0048,
+     "fluxP99": 0.0219,
+     "fluxMax": 0.0962,
+     "peakRatePerMin": 36.3,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.927,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0179,
+    "clicks": {
+     "hfTransients": 0,
+     "hfMaxDbfs": -58.9,
+     "hfP50Dbfs": -100.7,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0049,
+     "min1sRmsDbfs": -76.2
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1847,
+     "300_500": 0.3747,
+     "500_4000": 0.4403,
+     "1500_4000": 0.0046,
+     "gt4000": 0.0003
+    },
+    "stereo": {
+     "lrCorrelation": 0.974
+    }
+   },
+   "sha256": "e10964ebd7c52edaaaf4139f1a663956bebc6b355d4f9526c3af2710e7529b56",
+   "events": [
+    {
+     "eventsInFile": 169,
+     "perMinuteByRole": {
+      "bass": 12.3,
+      "mel": 4.8,
+      "pad": 12.3,
+      "up": 21.3
+     },
+     "instCountsAll": {
+      "pad": 43,
+      "piano": 133
+     },
+     "drumEvents": 0,
+     "bars": 50,
+     "silentBars": 9,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 194.0121,
+     "maxGapBetweenOnsetsSec": 5.991,
+     "maxGapInclEdgesSec": 5.991
+    }
+   ],
+   "rawInfo": [
+    {
+     "rawLufs": -19.38,
+     "last1sRmsDbfsRaw": -71.0
+    }
+   ]
+  },
+  {
+   "id": "dalga.derin3",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin3.wav",
+   "family": "derin",
+   "role": "segment",
+   "parts": [
+    "derin3"
+   ],
+   "seeds": [
+    202609297
+   ],
+   "transposeSemitones": 13,
+   "gridBar0": 142,
+   "gridBarEnd": 192,
+   "harmonicPhaseAtStart": 22,
+   "gainDb": -4.73,
+   "truePeakDbtp": -12.92,
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin3.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 200.0,
+    "lufsIntegrated": -23.76,
+    "truePeakDbtp": -12.92,
+    "samplePeakDbfs": -12.94,
+    "dc": [
+     -2.33e-07,
+     -2.53e-07
+    ],
+    "edgeAbs": {
+     "first": 3.58e-07,
+     "last": 1.19e-07
+    },
+    "shortTerm3s": {
+     "windows": 198,
+     "below70": 0,
+     "min": -43.82,
+     "p5": -33.64,
+     "p10": -33.41,
+     "p50": -23.91,
+     "p90": -22.94,
+     "p95": -22.6,
+     "max": -22.54,
+     "spreadP10P90": 10.47,
+     "spreadP5P95": 11.04,
+     "spreadMaxMin": 21.28,
+     "excludingIntervals": {
+      "n": 146,
+      "p10": -24.08,
+      "p50": -23.47,
+      "p90": -22.65,
+      "spreadP10P90": 1.43,
+      "spreadMaxMin": 1.75,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": 0.08
+    },
+    "onset": {
+     "fluxP50": 0.0047,
+     "fluxP99": 0.0185,
+     "fluxMax": 0.0942,
+     "peakRatePerMin": 34.5,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.929,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0188,
+    "clicks": {
+     "hfTransients": 0,
+     "hfMaxDbfs": -64.9,
+     "hfP50Dbfs": -103.9,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0032,
+     "min1sRmsDbfs": -75.7
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1586,
+     "300_500": 0.4248,
+     "500_4000": 0.4166,
+     "1500_4000": 0.0037,
+     "gt4000": 0.0001
+    },
+    "stereo": {
+     "lrCorrelation": 0.971
+    }
+   },
+   "sha256": "5d967bf543fb3c542922db3633f3909946902a5464cc6380a4748c408be85b52",
+   "events": [
+    {
+     "eventsInFile": 168,
+     "perMinuteByRole": {
+      "bass": 12.3,
+      "mel": 5.4,
+      "pad": 12.3,
+      "up": 20.4
+     },
+     "instCountsAll": {
+      "pad": 43,
+      "piano": 133
+     },
+     "drumEvents": 0,
+     "bars": 50,
+     "silentBars": 9,
+     "midiRange": [
+      56,
+      91
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 194.0164,
+     "maxGapBetweenOnsetsSec": 7.984,
+     "maxGapInclEdgesSec": 7.984
+    }
+   ],
+   "rawInfo": [
+    {
+     "rawLufs": -19.03,
+     "last1sRmsDbfsRaw": -70.3
+    }
+   ]
+  },
+  {
+   "id": "dalga.derin_family",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin_family.wav",
+   "family": "derin",
+   "role": "family-joined",
+   "parts": [
+    "derin1",
+    "derin2",
+    "derin3"
+   ],
+   "seeds": [
+    202609295,
+    202609296,
+    202609297
+   ],
+   "transposeSemitones": 13,
+   "gridBar0": 46,
+   "gridBarEnd": 192,
+   "harmonicPhaseAtStart": 22,
+   "gainDb": -4.73,
+   "truePeakDbtp": -12.92,
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_derin_family.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 584.0,
+    "lufsIntegrated": -24.0,
+    "truePeakDbtp": -12.92,
+    "samplePeakDbfs": -12.94,
+    "dc": [
+     -2.49e-07,
+     -2.44e-07
+    ],
+    "edgeAbs": {
+     "first": 4.77e-07,
+     "last": 1.19e-07
+    },
+    "shortTerm3s": {
+     "windows": 582,
+     "below70": 0,
+     "min": -44.44,
+     "p5": -33.92,
+     "p10": -33.45,
+     "p50": -24.06,
+     "p90": -23.12,
+     "p95": -23.03,
+     "max": -22.54,
+     "spreadP10P90": 10.33,
+     "spreadP5P95": 10.89,
+     "spreadMaxMin": 21.9,
+     "excludingIntervals": {
+      "n": 434,
+      "p10": -24.32,
+      "p50": -23.83,
+      "p90": -23.07,
+      "spreadP10P90": 1.25,
+      "spreadMaxMin": 2.27,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": 0.36
+    },
+    "onset": {
+     "fluxP50": 0.0048,
+     "fluxP99": 0.0189,
+     "fluxMax": 0.0998,
+     "peakRatePerMin": 34.21,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.931,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0183,
+    "clicks": {
+     "hfTransients": 0,
+     "hfMaxDbfs": -58.9,
+     "hfP50Dbfs": -103.8,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0049,
+     "min1sRmsDbfs": -77.3
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1702,
+     "300_500": 0.4013,
+     "500_4000": 0.4284,
+     "1500_4000": 0.0039,
+     "gt4000": 0.0002
+    },
+    "stereo": {
+     "lrCorrelation": 0.974
+    },
+    "seams": {
+     "xfadeSec": 8.0,
+     "rows": [
+      {
+       "xfadeStartSec": 192.0,
+       "loudnessDeltaDb": -2.41,
+       "percentileInBaseline": 57.1,
+       "hfJumpAtXfadeEdgesDb": [
+        0.7,
+        13.1
+       ],
+       "unattributedHfTransientsInXfade": []
+      },
+      {
+       "xfadeStartSec": 384.0,
+       "loudnessDeltaDb": -2.68,
+       "percentileInBaseline": 28.6,
+       "hfJumpAtXfadeEdgesDb": [
+        2.6,
+        2.7
+       ],
+       "unattributedHfTransientsInXfade": []
+      }
+     ],
+     "baseline": {
+      "positions": "same harmonic phase (seam + k*24.0 s)",
+      "n": 21,
+      "p5": -3.12,
+      "p50": -2.43,
+      "p95": -2.2,
+      "max": -2.19
+     },
+     "deltaDefinition": "energy-mean 400 ms loudness inside the 8 s crossfade minus mean of the 16 s before and 16 s after (dB)"
+    }
+   },
+   "sha256": "6145941c5cd2a4ccb611348dcde847ba44b19f83138c5d24074155a3b2e2edac",
+   "events": [
+    {
+     "eventsInFile": 157,
+     "perMinuteByRole": {
+      "bass": 12.3,
+      "mel": 3.3,
+      "pad": 12.3,
+      "up": 19.2
+     },
+     "instCountsAll": {
+      "pad": 43,
+      "piano": 122
+     },
+     "drumEvents": 0,
+     "bars": 50,
+     "silentBars": 9,
+     "midiRange": [
+      56,
+      91
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 195,
+     "maxGapBetweenOnsetsSec": 7.989,
+     "maxGapInclEdgesSec": 7.989
+    },
+    {
+     "eventsInFile": 169,
+     "perMinuteByRole": {
+      "bass": 12.3,
+      "mel": 4.8,
+      "pad": 12.3,
+      "up": 21.3
+     },
+     "instCountsAll": {
+      "pad": 43,
+      "piano": 133
+     },
+     "drumEvents": 0,
+     "bars": 50,
+     "silentBars": 9,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 194.0121,
+     "maxGapBetweenOnsetsSec": 5.991,
+     "maxGapInclEdgesSec": 5.991
+    },
+    {
+     "eventsInFile": 168,
+     "perMinuteByRole": {
+      "bass": 12.3,
+      "mel": 5.4,
+      "pad": 12.3,
+      "up": 20.4
+     },
+     "instCountsAll": {
+      "pad": 43,
+      "piano": 133
+     },
+     "drumEvents": 0,
+     "bars": 50,
+     "silentBars": 9,
+     "midiRange": [
+      56,
+      91
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 194.0164,
+     "maxGapBetweenOnsetsSec": 7.984,
+     "maxGapInclEdgesSec": 7.984
+    }
+   ],
+   "rawInfo": [
+    {
+     "rawLufs": -19.43,
+     "last1sRmsDbfsRaw": -71.7
+    },
+    {
+     "rawLufs": -19.38,
+     "last1sRmsDbfsRaw": -71.0
+    },
+    {
+     "rawLufs": -19.03,
+     "last1sRmsDbfsRaw": -70.3
+    }
+   ]
+  },
+  {
+   "id": "dalga.varis_x",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_varis_x.wav",
+   "family": "varis-aday",
+   "role": "first-impression Varış candidate (starts on E-flat maj7; ends with bars 22,23 mod 24 so it crossfades into any vd segment)",
+   "parts": [
+    "varis_x"
+   ],
+   "seeds": [
+    202609294
+   ],
+   "transposeSemitones": 13,
+   "gridBar0": 24,
+   "gridBarEnd": 72,
+   "harmonicPhaseAtStart": 0,
+   "gainDb": -4.92,
+   "truePeakDbtp": -12.58,
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_varis_x.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 192.0,
+    "lufsIntegrated": -24.0,
+    "truePeakDbtp": -12.58,
+    "samplePeakDbfs": -12.58,
+    "dc": [
+     -5.77e-08,
+     -5.79e-08
+    ],
+    "edgeAbs": {
+     "first": 1.19e-07,
+     "last": 1.19e-07
+    },
+    "shortTerm3s": {
+     "windows": 190,
+     "below70": 0,
+     "min": -44.64,
+     "p5": -34.36,
+     "p10": -33.37,
+     "p50": -24.1,
+     "p90": -23.26,
+     "p95": -22.86,
+     "max": -22.67,
+     "spreadP10P90": 10.11,
+     "spreadP5P95": 11.5,
+     "spreadMaxMin": 21.97,
+     "excludingIntervals": {
+      "n": 144,
+      "p10": -24.41,
+      "p50": -23.67,
+      "p90": -23.09,
+      "spreadP10P90": 1.32,
+      "spreadMaxMin": 1.99,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": -0.28
+    },
+    "onset": {
+     "fluxP50": 0.005,
+     "fluxP99": 0.0346,
+     "fluxMax": 0.1223,
+     "peakRatePerMin": 48.12,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.928,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.019,
+    "clicks": {
+     "hfTransients": 6,
+     "hfMaxDbfs": -58.8,
+     "hfP50Dbfs": -95.4,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 6,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0034,
+     "min1sRmsDbfs": -77.7
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1531,
+     "300_500": 0.4308,
+     "500_4000": 0.4156,
+     "1500_4000": 0.0085,
+     "gt4000": 0.0004
+    },
+    "stereo": {
+     "lrCorrelation": 0.975
+    }
+   },
+   "sha256": "381113fd10c90c82594998b62ee2490175029969ae57ee89e574ab6ef3ea3543",
+   "events": [
+    {
+     "eventsInFile": 243,
+     "perMinuteByRole": {
+      "bass": 12.5,
+      "gtr": 3.12,
+      "mel": 9.06,
+      "pad": 12.5,
+      "up": 38.75
+     },
+     "instCountsAll": {
+      "pad": 41,
+      "piano": 198,
+      "guitar": 10
+     },
+     "drumEvents": 0,
+     "bars": 48,
+     "silentBars": 8,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 187.0111,
+     "maxGapBetweenOnsetsSec": 7.0,
+     "maxGapInclEdgesSec": 7.0
+    }
+   ],
+   "rawInfo": [
+    {
+     "rawLufs": -19.08,
+     "last1sRmsDbfsRaw": -71.1
+    }
+   ]
+  },
+  {
+   "id": "dalga.kapanis",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_kapanis.wav",
+   "family": "kapanis",
+   "role": "closing: 8 s crossfade-in bars (phase 4,5), E-flat maj7 final chord at 176 s held 7 s, natural decay",
+   "parts": [
+    "kapanis"
+   ],
+   "seeds": [
+    202609298
+   ],
+   "transposeSemitones": 13,
+   "gridBar0": 28,
+   "gridBarEnd": 75,
+   "harmonicPhaseAtStart": 4,
+   "gainDb": -5.12,
+   "truePeakDbtp": -12.49,
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_kapanis.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 188.0,
+    "lufsIntegrated": -24.0,
+    "truePeakDbtp": -12.49,
+    "samplePeakDbfs": -12.51,
+    "dc": [
+     -1.84e-08,
+     -5.8e-08
+    ],
+    "edgeAbs": {
+     "first": 1.07e-06,
+     "last": 1.19e-07
+    },
+    "shortTerm3s": {
+     "windows": 186,
+     "below70": 0,
+     "min": -65.48,
+     "p5": -40.7,
+     "p10": -33.82,
+     "p50": -24.1,
+     "p90": -23.08,
+     "p95": -22.57,
+     "max": -21.98,
+     "spreadP10P90": 10.74,
+     "spreadP5P95": 18.13,
+     "spreadMaxMin": 43.5,
+     "excludingIntervals": {
+      "n": 138,
+      "p10": -24.63,
+      "p50": -23.86,
+      "p90": -23.0,
+      "spreadP10P90": 1.63,
+      "spreadMaxMin": 43.5,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": -0.23
+    },
+    "onset": {
+     "fluxP50": 0.0051,
+     "fluxP99": 0.0347,
+     "fluxMax": 0.1217,
+     "peakRatePerMin": 45.64,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.908,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0178,
+    "clicks": {
+     "hfTransients": 8,
+     "hfMaxDbfs": -59.1,
+     "hfP50Dbfs": -96.7,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 8,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 0.0029,
+     "min1sRmsDbfs": -87.4
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.1539,
+     "300_500": 0.4092,
+     "500_4000": 0.4365,
+     "1500_4000": 0.0078,
+     "gt4000": 0.0004
+    },
+    "stereo": {
+     "lrCorrelation": 0.982
+    }
+   },
+   "sha256": "3a83a9b933909ac1f7e417cf89aef960a8ace30fc1a74d3ec419ecd882d6cade",
+   "events": [
+    {
+     "eventsInFile": 229,
+     "perMinuteByRole": {
+      "bass": 11.81,
+      "gtr": 5.43,
+      "mel": 7.34,
+      "pad": 11.81,
+      "up": 36.7
+     },
+     "instCountsAll": {
+      "pad": 39,
+      "piano": 185,
+      "guitar": 17
+     },
+     "drumEvents": 0,
+     "bars": 47,
+     "silentBars": 8,
+     "midiRange": [
+      56,
+      94
+     ],
+     "firstEventSec": 0,
+     "lastEventSec": 179.012,
+     "maxGapBetweenOnsetsSec": 5.0,
+     "maxGapInclEdgesSec": 8.988
+    }
+   ],
+   "rawInfo": [
+    {
+     "rawLufs": -18.88,
+     "last1sRmsDbfsRaw": -95.6,
+     "cutResidualAfterEndRmsDbfsRaw": -171.5
+    }
+   ]
+  },
+  {
+   "id": "dalga.imge",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_imge.wav",
+   "family": "imge",
+   "role": "layer: sparse engine piano, E-flat major pentatonic",
+   "parts": [
+    "imge"
+   ],
+   "seeds": [
+    202609299
+   ],
+   "transposeSemitones": 13,
+   "gridBar0": 24,
+   "gridBarEnd": 69,
+   "harmonicPhaseAtStart": 0,
+   "gainDb": -4.73,
+   "truePeakDbtp": -25.4,
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_imge.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 180.0,
+    "lufsIntegrated": -38.02,
+    "truePeakDbtp": -25.4,
+    "samplePeakDbfs": -25.41,
+    "dc": [
+     -7.51e-08,
+     -7.5e-08
+    ],
+    "edgeAbs": {
+     "first": 0.0,
+     "last": 0.0
+    },
+    "shortTerm3s": {
+     "windows": 178,
+     "below70": 82,
+     "min": -178.34,
+     "p5": -138.25,
+     "p10": -120.76,
+     "p50": -53.35,
+     "p90": -39.09,
+     "p95": -38.66,
+     "max": -35.98,
+     "spreadP10P90": 81.67,
+     "spreadP5P95": 99.59,
+     "spreadMaxMin": 142.36,
+     "excludingIntervals": {
+      "n": 116,
+      "p10": -134.73,
+      "p50": -51.08,
+      "p90": -38.78,
+      "spreadP10P90": 95.95,
+      "spreadMaxMin": 142.36,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": 0.3
+    },
+    "onset": {
+     "fluxP50": 0.0015,
+     "fluxP99": 0.0048,
+     "fluxMax": 0.2011,
+     "peakRatePerMin": 8.33,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.464,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0035,
+    "clicks": {
+     "hfTransients": 0,
+     "hfMaxDbfs": -58.6,
+     "hfP50Dbfs": -143.8,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 18.9499,
+     "min1sRmsDbfs": -138.8
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.0,
+     "300_500": 0.0,
+     "500_4000": 0.974,
+     "1500_4000": 0.3334,
+     "gt4000": 0.026
+    },
+    "stereo": {
+     "lrCorrelation": 0.941
+    }
+   },
+   "sha256": "44fba02f2b6579f3304b7181970e26e136b1da2b2375cdb1ec01aa4a9bcda89c",
+   "events": [
+    {
+     "eventsInFile": 25,
+     "perMinuteByRole": {
+      "mel": 8.33
+     },
+     "instCountsAll": {
+      "piano": 25
+     },
+     "drumEvents": 0,
+     "bars": 45,
+     "silentBars": 7,
+     "midiRange": [
+      75,
+      94
+     ],
+     "firstEventSec": 1,
+     "lastEventSec": 161,
+     "maxGapBetweenOnsetsSec": 24.0,
+     "maxGapInclEdgesSec": 24.0
+    }
+   ],
+   "rawInfo": [
+    {
+     "rawLufs": -33.35,
+     "last1sRmsDbfsRaw": -240.0,
+     "cutResidualAfterEndRmsDbfsRaw": -240.0
+    }
+   ],
+   "note": "gain = Derin family gain (keeps the engine-native balance of melody vs. bed); its integrated LUFS is therefore below -24"
+  },
+  {
+   "id": "dalga.imge_alt_p25",
+   "path": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_imge_alt_p25.wav",
+   "family": "imge",
+   "role": "ALTERNATIVE (not default): same notes one octave above the default imge (+25, E-flat6-B-flat7) = \"one octave above the +13 bed\" reading",
+   "parts": [
+    "imge_alt_p25"
+   ],
+   "seeds": [
+    202609299
+   ],
+   "transposeSemitones": 25,
+   "gridBar0": 24,
+   "gridBarEnd": 69,
+   "harmonicPhaseAtStart": 0,
+   "gainDb": -4.73,
+   "truePeakDbtp": -24.97,
+   "analysis": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/dalga/dalga_imge_alt_p25.wav",
+    "sampleRate": 44100,
+    "channels": 2,
+    "subtype": "PCM_24",
+    "durationSec": 180.0,
+    "lufsIntegrated": -36.3,
+    "truePeakDbtp": -24.97,
+    "samplePeakDbfs": -25.02,
+    "dc": [
+     -7.51e-08,
+     -7.51e-08
+    ],
+    "edgeAbs": {
+     "first": 0.0,
+     "last": 0.0
+    },
+    "shortTerm3s": {
+     "windows": 178,
+     "below70": 82,
+     "min": -181.35,
+     "p5": -135.79,
+     "p10": -119.69,
+     "p50": -51.47,
+     "p90": -37.73,
+     "p95": -37.15,
+     "max": -34.54,
+     "spreadP10P90": 81.96,
+     "spreadP5P95": 98.64,
+     "spreadMaxMin": 146.81,
+     "excludingIntervals": {
+      "n": 115,
+      "p10": -126.48,
+      "p50": -49.33,
+      "p90": -37.46,
+      "spreadP10P90": 89.02,
+      "spreadMaxMin": 146.81,
+      "what": "3 s windows overlapping the engine's designed silent bars (every 6th 4 s bar) excluded"
+     },
+     "lastThirdMinusFirstThirdDb": 0.58
+    },
+    "onset": {
+     "fluxP50": 0.0015,
+     "fluxP99": 0.0047,
+     "fluxMax": 0.1969,
+     "peakRatePerMin": 8.33,
+     "threshold": "median + 5*MAD over gated frames; gate = frame energy > p95 frame energy - 40 dB",
+     "gatedFrameShare": 0.464,
+     "hopMs": 10
+    },
+    "percussiveEnergyRatio": 0.0037,
+    "clicks": {
+     "hfTransients": 0,
+     "hfMaxDbfs": -47.3,
+     "hfP50Dbfs": -123.4,
+     "rule": ">10 kHz, 2.9 ms frames >= +15 dB over ±100 ms median and >= -80 dBFS; consecutive frames = one transient",
+     "attributedToNoteOnsets": 0,
+     "unattributed": 0,
+     "unattributedList": [],
+     "attributionRule": "a scheduled note event (render log) starts between 20 ms before and 6 ms after the transient start"
+    },
+    "digitalSilence": {
+     "longestRunSec": 18.9501,
+     "min1sRmsDbfs": -138.8
+    },
+    "spectralShare": {
+     "lt150": 0.0,
+     "lt300": 0.0,
+     "300_500": 0.0,
+     "500_4000": 0.8508,
+     "1500_4000": 0.6667,
+     "gt4000": 0.1492
+    },
+    "stereo": {
+     "lrCorrelation": 0.937
+    }
+   },
+   "sha256": "25a76088f019839e5b66ccbcf96147d747a34a3c87f2d52dc15b0cb974191f79",
+   "events": [
+    {
+     "eventsInFile": 25,
+     "perMinuteByRole": {
+      "mel": 8.33
+     },
+     "instCountsAll": {
+      "piano": 25
+     },
+     "drumEvents": 0,
+     "bars": 45,
+     "silentBars": 7,
+     "midiRange": [
+      87,
+      106
+     ],
+     "firstEventSec": 1,
+     "lastEventSec": 161,
+     "maxGapBetweenOnsetsSec": 24.0,
+     "maxGapInclEdgesSec": 24.0
+    }
+   ],
+   "rawInfo": [
+    {
+     "rawLufs": -31.67,
+     "last1sRmsDbfsRaw": -240.0,
+     "cutResidualAfterEndRmsDbfsRaw": -240.0
+    }
+   ],
+   "note": "same seed and note sequence as dalga_imge.wav, only the octave differs"
+  }
+ ],
+ "families": {
+  "varis-derinlesme": {
+   "gainDb": -4.892572346595628,
+   "seams": [
+    288.0,
+    576.0
+   ],
+   "dcRemoved": [
+    -5.95e-05,
+    -3.16e-05
+   ]
+  },
+  "derin": {
+   "gainDb": -4.729520957869436,
+   "seams": [
+    192.0,
+    384.0
+   ],
+   "dcRemoved": [
+    7.84e-07,
+    6.86e-07
+   ]
+  }
+ },
+ "seamEvidence": {
+  "varis-derinlesme": {
+   "usedLaw": {
+    "rows": [
+     {
+      "xfadeStartSec": 288.0,
+      "deltaDb": -2.63,
+      "minusBaselineMedianDb": -0.11
+     },
+     {
+      "xfadeStartSec": 576.0,
+      "deltaDb": -2.32,
+      "minusBaselineMedianDb": 0.19
+     }
+    ],
+    "baseline": {
+     "n": 33,
+     "median": -2.51,
+     "p95": -2.21,
+     "max": -2.14
+    }
+   },
+   "plainSinCos": {
+    "rows": [
+     {
+      "xfadeStartSec": 288.0,
+      "deltaDb": -0.34,
+      "minusBaselineMedianDb": 2.17
+     },
+     {
+      "xfadeStartSec": 576.0,
+      "deltaDb": -0.04,
+      "minusBaselineMedianDb": 2.47
+     }
+    ],
+    "baseline": {
+     "n": 33,
+     "median": -2.51,
+     "p95": -2.21,
+     "max": -2.14
+    }
+   },
+   "overlapCorrelation": [
+    {
+     "rhoGlobal": 0.951,
+     "rho1sMin": -0.376,
+     "rho1sMax": 0.988
+    },
+    {
+     "rhoGlobal": 0.938,
+     "rho1sMin": -0.297,
+     "rho1sMax": 0.984
+    }
+   ]
+  },
+  "derin": {
+   "usedLaw": {
+    "rows": [
+     {
+      "xfadeStartSec": 192.0,
+      "deltaDb": -2.41,
+      "minusBaselineMedianDb": 0.02
+     },
+     {
+      "xfadeStartSec": 384.0,
+      "deltaDb": -2.68,
+      "minusBaselineMedianDb": -0.25
+     }
+    ],
+    "baseline": {
+     "n": 21,
+     "median": -2.43,
+     "p95": -2.2,
+     "max": -2.19
+    }
+   },
+   "plainSinCos": {
+    "rows": [
+     {
+      "xfadeStartSec": 192.0,
+      "deltaDb": -0.11,
+      "minusBaselineMedianDb": 2.32
+     },
+     {
+      "xfadeStartSec": 384.0,
+      "deltaDb": -0.39,
+      "minusBaselineMedianDb": 2.04
+     }
+    ],
+    "baseline": {
+     "n": 21,
+     "median": -2.43,
+     "p95": -2.2,
+     "max": -2.19
+    }
+   },
+   "overlapCorrelation": [
+    {
+     "rhoGlobal": 0.963,
+     "rho1sMin": -0.215,
+     "rho1sMax": 0.994
+    },
+    {
+     "rhoGlobal": 0.962,
+     "rho1sMin": -0.26,
+     "rho1sMax": 0.991
+    }
+   ]
+  }
+ },
+ "uniqueness": {
+  "varis-derinlesme+varis_x": {
+   "soundingBarsWithRandomEvents": 223,
+   "distinctBarSignatures": 221,
+   "crossSeedSamePhaseBarPairs": 927,
+   "identicalPairs": 0
+  },
+  "derin": {
+   "soundingBarsWithRandomEvents": 121,
+   "distinctBarSignatures": 81,
+   "crossSeedSamePhaseBarPairs": 247,
+   "identicalPairs": 5
+  }
+ }
+}

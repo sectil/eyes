@@ -1,0 +1,14 @@
+[
+ {
+  "name": "imge_alt_p25",
+  "family": "imge",
+  "kind": "imge",
+  "seed": 202609299,
+  "startBar": 24,
+  "endBar": 69,
+  "preBars": 0,
+  "transpose": 25,
+  "tailSec": 6,
+  "eventEndBar": 67
+ }
+]

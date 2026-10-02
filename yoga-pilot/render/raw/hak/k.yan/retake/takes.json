@@ -1,0 +1,65 @@
+{
+ "unit": "k.yan",
+ "voice": "hak",
+ "voice_id": "DwjDVVARfPVjBKepXK2c",
+ "model_id": "eleven_v4",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "node_id": "ZdKo7SzhFLNkESIOEgX8",
+ "session_ids": [
+  "Ig7Zd314lLyobWUqelHj",
+  "OhcIFO3t4XgKGWKdnhLY",
+  "02aPbKLjyFzlYa9HR2i2"
+ ],
+ "requested_at": "2026-09-29T12:51:52Z",
+ "downloaded_at": "2026-09-29T12:53:16.881096+00:00",
+ "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+ "generations_count": 3,
+ "takes": [
+  {
+   "take": 1,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.yan/retake/t1.mp3",
+   "generation_id": "O9rmnWKHJyGspd0jNwGQ",
+   "session_id": "Ig7Zd314lLyobWUqelHj",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/Ig7Zd314lLyobWUqelHj/O9rmnWKHJyGspd0jNwGQ/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T125158Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=5bffcdae7688afc9d39769c15a3fd8aa62ae2469c3db7eed826626a9b23e754e7b514449993f75dd79a955a1dfb3a0295777d1defc7d21d8c74b2fcdde44f42b7bda30eec4e3115e8001bcb63b9160ee8fb39d9ce694e3e690a8772d91fa442bd0bcd7ca47d906eb24e9f837b266bb0d26b1bf24f9536f62fe902835cdaf69b8a6040b201ac9d20cd51ae59f6c063d2d53cd158195cea461aa522e4dc2a8f213038fec110c240877745d534c749dd28c6c97113cb329779b66ee257b39b4b1a496fc4fd099e24c4ed04db4714c0ae6863448a332c082ebc20c3a272d8032a78aebebcbbecd0381a60aef7746cf2bf768e41b8b1da30b73a912675eaf2179dcd9",
+   "node_id": "ZdKo7SzhFLNkESIOEgX8",
+   "api_duration_secs": 2.96,
+   "ok": true,
+   "duration_secs": 2.96,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 65363
+  },
+  {
+   "take": 2,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.yan/retake/t2.mp3",
+   "generation_id": "4BWWxOKAqHuoiwcHdYXf",
+   "session_id": "OhcIFO3t4XgKGWKdnhLY",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/OhcIFO3t4XgKGWKdnhLY/4BWWxOKAqHuoiwcHdYXf/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T125158Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6dc57b442c359fbc49e0b2caa708d210a1613b469dbb49e89af01a55b553281642c24317375ad57cf212cd184447d5bfc0170a22fae237402e6292d7efb306627c56586e71d18778dcf86fb812eca611b9a6e48fe3bd67fb2721298c00dbfb89391c86e68fa909ad7868a7c03b3e0a697e1c6ee340526a705c7740d49a8187754b3c3ebfb630a95c0e6f60483dd697164d46e80796ca46fe14026b00b8d908833acc4b271bab4b3e79fed8ff3af9744cd28aa25f7075b331303be3e7d42b6a9378d2b7269a2ee95bae91f646549f1f20a42e138430eb62da1397c628dc845430359f01b46527605f83d49babb8c360912c897116b90617a50d7c9d616efe4307",
+   "node_id": "ZdKo7SzhFLNkESIOEgX8",
+   "api_duration_secs": 3.12,
+   "ok": true,
+   "duration_secs": 3.12,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 67871
+  },
+  {
+   "take": 3,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.yan/retake/t3.mp3",
+   "generation_id": "UXpmFidKAopz2nB6C68V",
+   "session_id": "02aPbKLjyFzlYa9HR2i2",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/02aPbKLjyFzlYa9HR2i2/UXpmFidKAopz2nB6C68V/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T125158Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=73eb3663c158f0348667aeed9de71e99ae778590267e2e0025c1e8a1ef8cbf0bc21690e17c583b1bac653c61ba030e0ef09648b765d21e01370c6af3ff1d1bbce6fac964f92e85af39ac24ac5d827b86a0cb500e497e88c154549b343b0b30499c718a5bba8a6df36bf9d7c7eb440e9a091f29a121f0478d8325791ce3b14c34a3d79125bb391763d48536d7c746f523c493370cbe52f1b40c06ef208ce6d544caceff74063d87477e57633c1faeaf7c51b0c58ab39a80fc398e3e21bf24078fe61678506ae519a28cd3307112c328fbc80ed8da94eb5abae7b35dc976a23c17ff8cae82a41f99fb5edeeaee117506fa4e2fd68241df53514ca08155dd49e7ad",
+   "node_id": "ZdKo7SzhFLNkESIOEgX8",
+   "api_duration_secs": 3.12,
+   "ok": true,
+   "duration_secs": 3.12,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 67871
+  }
+ ],
+ "retake": true,
+ "retake_reason": "SPEC 4.2: Scribe word sequence of all 3 original takes != script (\"Sırt üstü\" transcribed for \"Sırtüstü\")",
+ "who": "hak-2-sel",
+ "server_prompt_echo": "Sırtüstü yatıyorsan önce bir yanına dön."
+}

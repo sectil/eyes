@@ -1,0 +1,15 @@
+{
+ "unit": "car.sirt",
+ "take": "t1",
+ "asset_id": "ckkfTT3BrtoOx99InaH3",
+ "source_node_id": "xe8wZlyh3j0SW4dlI2Op",
+ "stt_node_id": "4LyJe1GvUyfN3GILqg9m",
+ "session_id": "avH6TQoVuI38n7ul9att",
+ "generation_id": "KGHPr2FflRgdamEFp37Y",
+ "actual_credits": 46.2,
+ "actual_cents": 0.84,
+ "scribe_text": "Sağ kürek kemiği, sol kürek kemiği, bel boşluğu, omurga boydan boya, bütün sırt",
+ "spoken_duration_secs": "8.16",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 13\n}"
+}

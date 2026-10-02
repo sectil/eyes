@@ -1,0 +1,17 @@
+{
+ "unit": "k.donus",
+ "take": "t2",
+ "asset_id": "C5fckyYFTLjigWHinXOM",
+ "asset_size_bytes": 43629,
+ "ref_node": "FnWq8z49Ldg4n4oZhpFE",
+ "stt_node": "pOO1SJiZbbe4shavUMZm",
+ "session_id": "eygmpigAF7vTLIBYilub",
+ "generation_id": "hhHI1rlrDeGyxp6a3ZbO",
+ "actual_credits": 8.8,
+ "actual_cents": 0.16,
+ "spoken_duration_secs": 1.4,
+ "scribe_text": "Artık dönüş zamanı",
+ "tts": "Artık dönüş zamanı.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 3\n}"
+}

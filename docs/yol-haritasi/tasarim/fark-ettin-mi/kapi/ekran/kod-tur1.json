@@ -1,0 +1,134 @@
+{
+ "01-gorev-ilk": {
+  "yes": 4,
+  "n": 5,
+  "weak": [
+   "01-gorev-ilk-390-acik: alttaki not, \"Gerçek hayatta daha çok fark ettirdiği gösterilmedi\", Türkçede bozuk ve güvensiz bir cümle olmuş, ekranın premium havasını düşürüyor. Görev başlığının solundaki küçük şapkalı adam simgesi geniş boşlukta tek başına kalmış. 320'de de çizimdeki kişiler belden kesiliyor.",
+   "01-gorev-ilk-390-acik/koyu: 'Bu bir fark etme alıştırması…' uyarısı küçük ve soluk gri, gözlükle zor okunuyor. Şapkalı kişi simgesi de çok küçük, başlığın solunda büyük bir boşluğun içinde kaybolmuş.",
+   "01-gorev-ilk-320-acik/koyu: cadde resmi yarıdan kesilmiş; taksi, kaldırım, insanların bacakları yok, sahne bir şerit gibi kalıyor. 390'da da başlığın solundaki şapkalı adam simgesi çok küçük ve havada duruyor. Alttaki 'Gerçek hayatta daha çok fark ettirdiği gösterilmedi' cümlesi de bozuk Türkçe, okuyunca güven sarsıyor.",
+   "01-gorev-ilk-320-acik/koyu: kahraman görsel kafalardan kesiliyor, taksi ve kaldırım tamamen gidiyor. Başlığın solundaki minicik şapkalı adam simgesi 90 px'lik boş bir sütunda tek başına yüzüyor. Alttaki 'Gerçek hayatta daha çok fark ettirdiği gösterilmedi' cümlesi ilk ekranda heyecanı söndürüyor ve anlaşılması zor.",
+   "01-gorev-ilk-320-acik/koyu: üstteki sahne fazla kırpılmış, insanlar belden kesik. Başlığın solundaki şapkalı figür çok küçük kalmış ve yanında koca bir boş sütun var. Alttaki 'Gerçek hayatta daha çok fark ettirdiği gösterilmedi' cümlesi yorgun bir göze ters ve tuhaf geliyor."
+  ]
+ },
+ "02-gorev-sonraki": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "02-gorev-sonraki-320-acik/koyu: üst etiket \"FARK ETTİN Mİ? · 2 DK · AKŞAM / IŞIKLARI\" diye kırılıyor, \"IŞIKLARI\" alt satırda tek başına kalıyor. 02-gorev-sonraki-390-koyu: bisiklet simgesinin koyu gri tekerlekleri koyu zeminde neredeyse görünmüyor, simge yarım bir çizgiye dönüşüyor.",
+   "02-gorev-sonraki-320-acik/koyu: üstteki etiket kırılıyor, 'IŞIKLARI' tek başına ikinci satıra düşüyor. 02-gorev-sonraki-*-koyu'da bisiklet simgesinin tekerlekleri koyu gri, siyah zeminde neredeyse görünmüyor.",
+   "02-gorev-sonraki-320-acik/koyu: üst satır 'FARK ETTİN Mİ? · 2 DK · AKŞAM' diye bölünüyor, 'IŞIKLARI' alt satırda tek başına kalıyor. 02-gorev-sonraki-390-koyu ve 320-koyu: bisiklet simgesinin tekerlekleri koyu zeminde neredeyse görünmüyor, geriye yalnız mavi bir üçgen kalıyor.",
+   "02-gorev-sonraki-390-koyu ve 320-koyu: bisiklet simgesinin tekerlekleri ve gövdesi koyu gri, zemin de neredeyse siyah. Görevin kendisini anlatan simge görünmüyor. 02-gorev-sonraki-320: üst satır 'FARK ETTİN Mİ? · 2 DK · AKŞAM' diye bölünüyor, 'IŞIKLARI' ikinci satırda tek başına kalıyor.",
+   "02-gorev-sonraki-320-acik/koyu: üst etiket 'FARK ETTİN Mİ? · 2 DK · AKŞAM' diye bölünüyor, 'IŞIKLARI' tek başına ikinci satıra düşüyor. 02-gorev-sonraki-390-koyu ve 320-koyu: bisiklet simgesinin tekerlekleri koyu zeminde kaybolmuş, ortada yalnız mavi bir üçgen görünüyor."
+  ]
+ },
+ "03-yuruyus": {
+  "yes": 5,
+  "n": 5,
+  "weak": [
+   "03-yuruyus-390-acik: sağ üstteki \"24\" balonunun birimi yok, saniye mi, sayaç mı belli değil. Yeşil bisiklet önündeki siyah arabanın arkasında yarı yarıya kalıyor, sayma görevini haksız kılıyor. Alttaki ince beyaz ilerleme çubuğu gri kaldırımda zor seçiliyor.",
+   "03-yuruyus-390/320: sağ üstteki '24' etiketsiz duruyor; kalan saniye mi, saydığım sayı mı, anlaşılmıyor. Yanına 'sn' ya da küçük bir saat simgesi gerekiyor.",
+   "03-yuruyus-390/320 (iki tema): sağ üstteki '24' yazısının birimi yok. Görev saymak olduğu için insan bunu saydığı sayı sanabilir, oysa kalan saniye gibi duruyor. Sol kenarda 'ER' diye yarım kalmış bir tabela da var.",
+   "03-yuruyus-390/320: sağ üstteki '24' etiketsiz. Bir sayma alıştırmasında köşedeki sayı, kalan saniye yerine o ana kadarki sayım gibi okunuyor. Saat simgesi ya da halka biçiminde bir sayaç olmalı.",
+   "03-yuruyus-390/320: sağ üstteki '24' yanında birim yok, süre mi sayaç mı belli değil. Bisiklet sayan biri bunu kolayca 'şimdiye kadar 24 tane geçti' diye okuyabilir. 320'de bu hap binanın üstüne biniyor, soldaki tabela da 'ER' diye kesilmiş."
+  ]
+ },
+ "04-sayi": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "04-sayi-390-acik: dört kutu ve tek satır geri bildirimden sonra ekranın üçte ikisi boş, ödül anı yok. Doğru ve yanlış seçenek yalnız renkle ayrılıyor, ✓/✗ işareti yok. Bu haliyle bir form sayfası gibi duruyor, premium bir oyun ekranı gibi değil.",
+   "04-sayi-390-acik/koyu: geri bildirim ile 'Devam' arasında ekranın yarısı bomboş, sahnenin hiçbir izi kalmamış. Doğru ve yanlış yalnız yeşil ya da kırmızı kenarlıkla ayrılıyor, işaret yok. 'Çok yakın.' da küçük bir satırda kalıyor.",
+   "04-sayi-390-acik/koyu: dört düğme ve tek satırlık 'Çok yakın. 6 tane geçti.' yazısından sonra ekranın üçte ikisi bomboş. Ne çizim var ne başka bir şey, form gibi duruyor. 'Çok yakın' kelimesinin turuncu rengi de yanlış mı doğru mu yaptığımı karıştırıyor.",
+   "04-sayi-390-acik/koyu: dört düğmeli seçimin altında ekranın yaklaşık %55'i boş. Geri bildirim tek satırlık 'Çok yakın. 6 tane geçti.' ile kalıyor. Görsel bir karşılık, bir an ya da sahneden bir kare yok, sıradan bir form gibi duruyor.",
+   "04-sayi-390-acik/koyu: dört düğme ve tek satır geri bildirimden sonra ekranın yaklaşık yüzde 55'i bomboş, sahneden hiçbir görsel iz yok, ekran taslak gibi duruyor. 'Çok yakın.' amber renkte; doğru cevap yeşil, yanlış kırmızı olunca üç ayrı renk anlamı birden ekranda."
+  ]
+ },
+ "05-degisti-1": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "05-degisti-1-390-koyu: \"Bulamadım, bir daha göster\" düğmesi soluk griyle koyu zemin üstünde neredeyse okunmuyor. Başlıkta \"1 / 4\" yazıyor ama altta 3 nokta var, ikisi neyi saydığını söylemiyor. Saksı, yangın musluğu ve kasaların yolun ortasına rastgele dizilmesi sahneyi gerçek bir cadde gibi değil, dağınık gösteriyor.",
+   "05-degisti-1-390-koyu: 'Bulamadım, bir daha göster' düğmesi o kadar soluk ki devre dışı bir boşluk gibi duruyor, gözlükle okunmuyor. Üstte '1 / 4' yazıyor ama altta 3 nokta var; ne saydığı belli değil.",
+   "05-degisti-1-390-koyu ve 320-koyu: 'Bulamadım, bir daha göster' düğmesi o kadar soluk ki koyu temada neredeyse okunmuyor. Üstte '1 / 4' yazarken altta üç nokta var, hangisi ilerlemeyi gösteriyor belli değil. 390'da başlıkla resim arasında 150 pikselden fazla boşluk kalmış.",
+   "05-degisti-1-390: üstte '1 / 4' yazıyor, altta üç nokta var. İkisinin neyi saydığı belli değil, üstelik 'nereye dokunacağım' söylenmiyor. Yeşil bisiklet koyu asfaltta tekerleksiz görünüyor. Saksılar, kasalar ve yangın musluğu yolun ortasında duruyor, sahne mantıksız. 320'de görsel sütundan dar, 390'da başlıkla görsel arasında yaklaşık 150 px boşluk var.",
+   "05-degisti-1 (dört görüntünün hepsi): üstte 'NE DEĞİŞTİ? · 1 / 4' yazıyor, altta ise 3 nokta var. Görev ekranında da '3 sahne' yazıyordu, yani sayılar çelişiyor. Sandıklar ve saksılar asfaltın ortasında yüzer gibi duruyor; 390-koyu'daki 'Bulamadım' düğmesi koyu zeminde neredeyse görünmüyor."
+  ]
+ },
+ "06-degisti-2": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "06-degisti-2-390-acik: değişen nesne olan sandalye iki beyaz çizgiden ibaret, \"Ⴙ\" gibi bir harfe benziyor, sandalye olarak tanınmıyor. Çizimin geri kalanı ayrıntılıyken tam aranan nesnenin bu kadar ilkel olması oyunun özünü zayıflatıyor.",
+   "06-degisti-2-390-acik: başlıkla resim arasında yaklaşık 150 px, resimle nokta satırı arasında yine büyük ölü boşluk var. 'Değişen yere dokun.' talimatı sağa yaslanmış küçük bir yazı; asıl talimat olduğu hâlde ikinci planda kalıyor.",
+   "06-degisti-2-390-acik/koyu: asıl talimat 'Değişen yere dokun.' sağ altta küçük ve gri yazıyla saklanmış, büyük başlık hâlâ 'Nerede?' diyor. Koyu temada yolun üstündeki bisikletin tekerlekleri asfaltın içinde kayboluyor, geriye havada bir yeşil kadro kalıyor.",
+   "06-degisti-2-390-acik: tek talimat olan 'Değişen yere dokun.' sağa yaslanmış, küçük ve gri. Noktaların karşısında yan bilgi gibi kalıyor, asıl görev cümlesi başlığın altında olmalı. 'Bulamadım, bir daha göster' düğmesi açık temada hâlâ pasif gibi görünüyor.",
+   "06-degisti-2 (hepsi): yer değiştiren sandalye yalnız iki beyaz çizgiden oluşuyor, sandalye değil bir harf gibi okunuyor. Üstelik yolun ortasında duruyor. '1 / 4' ile 3 nokta çelişkisi bu ekranda da var."
+  ]
+ },
+ "07-bulundu": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "07-bulundu-390-acik: yeşil bilgi kutusunda \"...Sıradaki sahnede 14 nesne / var.\" kırılıyor, \"var.\" tek başına alt satırda kalıyor. Vurgu halkası görselin sol kenarında kesiliyor. \"Sandalye yer değiştirdi\" cümlesinin sonunda nokta yok.",
+   "07-bulundu-390-acik/koyu: yeşil kutudaki 'İlk bakışta buldun. Sıradaki sahnede 14 nesne var.' cümlesinde 'var.' tek başına ikinci satıra düşüyor. 'Sandalye yer değiştirdi' alt satırının sonunda da nokta yok.",
+   "07-bulundu-390-acik/koyu: yeşil şeritteki cümle bölünüyor, alt satırda yalnız 'var.' kalıyor. 'Buldun.' noktayla bitiyor ama alttaki 'Sandalye yer değiştirdi' cümlesinde nokta yok; noktalama tutarsız.",
+   "07-bulundu-390-acik/koyu: yeşil not kutusunda 'var.' ikinci satırda tek başına kalıyor. 'Buldun.' noktalı, alt satırdaki 'Sandalye yer değiştirdi' noktasız. Önce ve sonra yan yana gösterilmediği için başarı anı sönük geçiyor.",
+   "07-bulundu-390-acik/koyu: yeşil bilgi kutusunda 'var.' tek başına ikinci satıra düşmüş. 'Sandalye yer değiştirdi' sonunda nokta yok. Halkanın içinde de nesne hâlâ iki çizgi olarak görünüyor."
+  ]
+ },
+ "08-bulunamadi": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "08-bulunamadi-390-acik: büyük başlık iki ayrı bilgiyi birleştiriyor (\"Burasıydı. Sıradaki sahnede 12 nesne var.\"), asıl açıklama küçük alt satıra düşüyor. Vurgu elipsi görselin sol kenarında kesiliyor. Siyah kedi koyu asfaltta neredeyse görünmüyor.",
+   "08-bulunamadi-390/320: vurgu halkası resmin sol kenarında kesiliyor, oval yarım kalıyor. Başlık 'Burasıydı.' ile 'Sıradaki sahnede 12 nesne var.' cümlelerini tek büyük başlıkta birleştiriyor, asıl açıklama 'Şapka kırmızıydı…' ise küçük alt satırda kalıyor.",
+   "08-bulunamadi-390/320 (iki tema): değişen kişiyi gösteren mavi halka resmin sol kenarında kesiliyor. Büyük başlıkta 'Burasıydı. Sıradaki sahnede 12 nesne var.' yazıyor, asıl bilgi olan 'Şapka kırmızıydı, beyaz oldu' küçük alt satıra düşmüş; önem sırası ters.",
+   "08-bulunamadi-390/320: vurgu elipsi görselin sol kenarında kesiliyor, kişinin de yarısı kenarın dışında kalıyor. Büyük başlık 'Burasıydı.' ile sıradaki sahnenin bilgisini aynı cümlede birleştiriyor. Asıl açıklama 'Şapka kırmızıydı, beyaz oldu' küçük alt yazıya düşüyor.",
+   "08-bulunamadi (hepsi): vurgu elipsi görselin sol kenarında kesiliyor, değişen kişi yarı yarıya kenarda kalıyor. Başlık 'Burasıydı. Sıradaki sahnede 12 nesne var.' iki ayrı bilgiyi tek başlığa sıkıştırmış; 07'de aynı bilgi yeşil kutudaydı. Koyu asfaltta siyah kedi görünmüyor."
+  ]
+ },
+ "09-kacan-adim1": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "09-kacan-adim1-390-acik: ekranın yarısını kaplayan gri ve bomboş sokak görseli (alt yarısı düz asfalt) yüklenemeyen bir resim ya da yer tutucu gibi duruyor. Kasıtlı bir \"boş sahne\" olduğu hiçbir ipucuyla anlatılmıyor.",
+   "09-kacan-adim1-390-acik: ekranın yarısını boş, gri tonlu bir cadde kaplıyor. Hata ya da yüklenmemiş bir görsel gibi duruyor, soruya bir şey katmıyor. Etiketteki '1 / 2' ile yanındaki noktalar da aynı bilgiyi iki kez veriyor.",
+   "09-kacan-adim1-390-acik/koyu: büyük gri resimde in cin top oynuyor, resmin yarısı boş asfalt. Yer tutucu gibi duruyor; ekranın en büyük alanı hiçbir şey anlatmıyor. 320'de resim daralıyor, kenarlarda gereksiz boşluk kalıyor.",
+   "09-kacan-adim1-390-acik/koyu: büyük, gri, insansız sokak görseli yüklenemeyen ya da devre dışı kalmış bir görsel gibi duruyor, ekranın yarısını hiçbir şey anlatmadan kaplıyor. Ayrıca '1 / 2' ile iki nokta aynı bilgiyi iki kez veriyor.",
+   "09-kacan-adim1-390-acik/koyu: ekranın ortası tamamen boş, gri bir cadde görseli. Sorulan köpek de yok, ölü bir ekran gibi duruyor. Üstte hem '1 / 2' hem iki nokta var, aynı bilgi iki kez veriliyor."
+  ]
+ },
+ "10-kacan-adim2": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "10-kacan-adim2-390-acik: aynı boş gri sokak ikinci kez neredeyse tam boyda tekrarlanıyor, yeni bir şey göstermeden yer kaplıyor. Üstte \"1 / 2\" yazarken iki noktanın ikisi de dolu, sayaçlar birbiriyle çelişiyor.",
+   "10-kacan-adim2-*: aynı boş gri cadde ikinci kez dev boyutta gösteriliyor, ekranın büyük kısmı boşa gidiyor. 10-kacan-adim2-390-koyu'da 'siyah' renk dairesi koyu zeminde kayboluyor.",
+   "10-kacan-adim2 (dört görüntü): aynı boş gri sokak resmi ikinci kez tekrarlanmış. Üstte '1 / 2' yazarken iki nokta da dolu; 2. soruya mı geçtim, 1. sorunun 2. adımında mıyım, anlaşılmıyor.",
+   "10-kacan-adim2-390: soru 1/2'de kalırken iki nokta da dolu, ilerleme göstergesi kendi içinde çelişiyor. 'Köpeği ne renkti?' Türkçesi aksak, 'Köpek ne renkti?' olmalı. 10-kacan-adim2-390-koyu: 'siyah' renk örneği koyu kartın üzerinde neredeyse görünmüyor.",
+   "10-kacan-adim2 (hepsi): üstte '1 / 2' yazarken iki nokta da dolu, kişi hangi adımda olduğunu anlamıyor. 390-koyu ve 320-koyu'da 'siyah' renk dairesi zeminle aynı renkte, neredeyse görünmüyor."
+  ]
+ },
+ "11-s1": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "11-s1-320-acik: görsel 180 px civarında küçücük bir küçük resme iniyor, \"BERBER\" yazısı okunmuyor, bozuk bir yerleşim gibi görünüyor. Cevap sonrası köpek görselde hiç gösterilmiyor, büyük bir fırsat kaçıyor. Olumlu bir sonuç uyarı rengi olan turuncu-kahverengi kalın paragrafla veriliyor.",
+   "11-s1-320-acik/koyu: resim pul gibi küçücük bir küçük resme dönüşmüş, bozuk görünüyor. Doğru cevabın geri bildirimi uyarı rengi olan turuncu-kahvede ('Görmediğini düşünsen de doğru bildin'). Bu, seçili yeşil kutuyla çelişiyor.",
+   "11-s1-320-acik/koyu: resim birden pul büyüklüğünde küçük bir resme dönüşüyor (yaklaşık 180 piksel), 'BERBER' yazısı okunmuyor, ekran dağınık görünüyor. Doğru cevaba verilen geri bildirim de uyarı rengi olan turuncuyla yazılmış; 'Araştırmalarda… şanstan daha sık tutuyor' cümlesine de kaynak verilmemiş.",
+   "11-s1-320-acik/koyu: cevaptan sonra gri görsel küçük bir pula iniyor ve bir önceki adıma göre sayfa sıçrıyor. Cevap doğru olduğu hâlde geri bildirim uyarı rengi olan turuncu/kahverengiyle yazılıyor, oysa seçili kart yeşil.",
+   "11-s1-320-acik/koyu: sahne görseli pul büyüklüğünde, kırık bir küçük resim gibi kalmış. Doğru cevap verilmesine rağmen köpek gösterilmiyor, beklenen an boşa gidiyor. Doğru cevaba gelen geri bildirim amber renkte, uyarı gibi okunuyor."
+  ]
+ },
+ "12-sonuc": {
+  "yes": 0,
+  "n": 5,
+  "weak": [
+   "12-sonuc-320-acik: \"Bisikletler: 6 geçti, sen 5 / dedin\" ve \"Köpeğini gezdiren biri · / sarı\" satırları kırılıyor, \"dedin\" ve \"sarı\" yalnız kalıyor. \"Doğru mu, efsane mi?\" kartı Bitti düğmesinin altında yarıda kesiliyor, kaynak hiç görünmüyor. Büyük \"14 nesne\" sonucunun bir başarı mı, bir ölçü mü olduğu ilk bakışta anlaşılmıyor.",
+   "12-sonuc-320-acik/koyu: 'Doğru mu, efsane mi?' kartı 'Bitti' düğmesinin altında kesiliyor; 'Doğru.' açıklaması ve kaynak görünmüyor, aşağıda içerik olduğuna dair bir ipucu da yok. Satırlarda 'dedin' ve 'sarı' tek kalıyor, renk noktası da kelimesinden kopuyor. Büyük '14 nesne' bir puan gibi anlamsız duruyor.",
+   "12-sonuc-320-acik/koyu: satırlar bölünüyor; 'dedin' ve 'sarı' alt satırda tek başına kalıyor. 'Doğru mu, efsane mi?' kartı da 'Bitti' düğmesinin altında yarıda kesiliyor, alttan solma yok. Ayrıca 'sen  5 dedin' kısmında çift boşluk var ve kocaman '14 nesne' başlığının ne anlattığı ilk bakışta belli değil.",
+   "12-sonuc-320-acik/koyu: 'dedin' tek kelime olarak alt satıra düşüyor. 'sarı' kendi renk noktasından ayrılıyor. 'Doğru mu, efsane mi?' kartı Bitti düğmesinin altında kesiliyor, kaynak hiç görünmüyor. 390'da 'sen  5' arasında çift boşluk var. Ana sayı olan '14 nesne' sahnenin kalabalığını anlatıyor, kişinin başarısını değil.",
+   "12-sonuc-320-acik/koyu: 'Doğru mu, efsane mi?' kartı 'Bitti' düğmesinin altında kesiliyor, kaynak ve 'Doğru.' satırı görünmüyor, solma efekti de yok. Satırlarda 'dedin' ve 'sarı' tek kelime olarak alt satıra düşüyor. Doğru tahmin olan 'TAHMİN' etiketi 'YAKIN' ile aynı amber renkte."
+  ]
+ }
+}

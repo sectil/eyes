@@ -1,0 +1,7 @@
+Bağlam: Nefona uygulamasının "Yenilikler" penceresi. Uygulama güncellenince ilk açılışta bir kez gösterilir; her madde kısa bir cümle, başında "Yeni" ya da "Değişti" etiketi durur. Önceki sürüm notundan örnek: "Nef'in kartından ilgili alıştırmayı tek dokunuşla açarsın." Bu güncellemede "Fark Ettin mi?" alıştırması yenilendi: kişi çizili bir caddeden geçerken bir şey sayar, sonra "Ne değişti?" bölümünde 4 sahnede değişikliği bulur (sahnedeki nesne sayısı kişinin başarısına göre artar ya da azalır), sonra "Gözünden kaçan" sorularını cevaplar. Oynadıkça yeni sahneler açılır: Pazar yeri, Park, Akşam ışıkları, Yağmurlu cadde. Sağlık ya da dikkat iddiası olmamalı. Her satır: kimlik | etiket | metin. Her satıra ayrı karar ver.
+
+V1a | Yeni | Fark Ettin mi? yenilendi: caddeden geçip saydıktan sonra dört sahnede neyin değiştiğini buluyorsun.
+V1b | Yeni | Fark Ettin mi? yenilendi: yürüyüşten sonra dört sahnede değişikliği arıyorsun; buldukça sahneler kalabalıklaşıyor.
+V2a | Yeni | Oynadıkça yeni sahneler açılıyor: Pazar yeri, Park, Akşam ışıkları ve Yağmurlu cadde.
+V3a | Değişti | "Gözünden kaçan" sorularında kişi önce rengi gizli bir figürle görünüyor; cevap verince gerçek hâli açılıyor.
+V3b | Değişti | "Gözünden kaçan" sorularında cevabı ele vermeyen bir figür var; cevaplayınca kişinin gerçek hâlini görüyorsun.

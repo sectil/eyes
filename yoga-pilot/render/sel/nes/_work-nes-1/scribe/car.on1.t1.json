@@ -1,0 +1,15 @@
+{
+ "unit": "car.on1",
+ "take": "t1",
+ "asset_id": "JsPv4CTD3rm2bjSLXesi",
+ "source_node_id": "ozOPYIXM1SkKAEyNASZk",
+ "stt_node_id": "60rPzyJwJLXFFua6febH",
+ "session_id": "oQhxEsyr8zx1xsHFDc4O",
+ "generation_id": "HRWkQBYGulmuZzVT8nio",
+ "actual_credits": 41.36,
+ "actual_cents": 0.752,
+ "scribe_text": "Başın tepesi, alın, sağ şakak, sol şakak, sağ kaş, sol kaş",
+ "spoken_duration_secs": "7.32",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 11\n}"
+}

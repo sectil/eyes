@@ -1,0 +1,90 @@
+# Kaynak doğrulama (B1a, plan §5.5 madde 9)
+
+Tarih: 2026-09-30. Kapsam: `PLAN.v1.md` §A "Kanıt kapısı" satırındaki 11 kaynak (`kim2020`, `wolffsohn2025`,
+`fincham2023`, `laborde2022`, `balban2023`, `tucker2007`, `klimek2022`, `denissen2008`, `stout2022`, `desai2026`,
+`moszeik2025`) ve koşullu olanlar (`radin2025` yalnız meditasyon içeriğinde; ay kaynakları `cajochen2013`,
+`habarubio2015`, `chaput2016`, `smith2017`, `casiraghi2021` yalnız hava sayfasında "ay evresi" satırı kullanılırsa).
+
+Yöntem: (1) PubMed MCP `get_article_metadata` (başlık, yazar, DOI, dergi, cilt/sayı/sayfa, özet); (2) NCBI E-utilities
+`esummary` (basım tarihi `pubdate`, e-yayın `epubdate`, DOI, düzeltme/yorum bağlantıları). İkisi DOI ve künyede
+birbirini tuttu. **Yalnız PubMed özeti okundu, tam metin okunmadı.** Kişi sayısı sütunu özetteki ifadenin aynısıdır;
+özette yoksa "özette yok" yazılır. Bilim satırı kaynağı: `arastirma/nef-bildirim.md` §10.5 (plan §A bunu kullanır) ve
+`arastirma/pubmed-bilim-satirlari.md` §2 (Balban, Radin önerileri).
+
+Karar sözcükleri: **girer** = künye ve satır özetle uyuşuyor, kişi sayısı özette var; **girer (koşullu)** = girer, ama
+yalnız planın yazdığı koşulda; **tam metin gerekli** = kişi sayısı özette yok, satır yayına girmez; **girmez** = özetle
+uyuşmuyor.
+
+## 1. Doğrulama tablosu
+
+| anahtar | PMID | başlık (PubMed) | ilk yazar | yıl (basım / e-yayın) | dergi | DOI | kişi sayısı (özetten alıntı) | plandaki bilim satırı | uyuşuyor mu | not |
+|---|---|---|---|---|---|---|---|---|---|---|
+| kim2020 | 32409236 | Therapeutic benefits of blinking exercises in dry eye disease. | Kim AD | 2021 Jun / 2020 May 12 | Cont Lens Anterior Eye 44(3):101329 | 10.1016/j.clae.2020.04.014 | "Fifty-four participants with dry eye symptoms…" · "Forty-one participants completed the study" | G1: 41 kişilik kontrolsüz bir çalışmada eksik kırpma oranı 4 haftada %54'ten %34'e indi. | Evet ("proportion of incomplete blinks (54 ± 36 to 34 ± 29 %…)", "day 28") | **girer.** Kontrol grubu yok (tek kollu). Kuru göz belirtili kişiler. Basım 2021, e-yayın 2020: kartta ikisi birden. "Bırakma nedeni unutmak" özette yok, kullanılmaz. |
+| wolffsohn2025 | 40467388 | Optimisation of blinking exercises for dry eye disease. | Wolffsohn JS | 2025 Oct / 2025 Jun 3 | Cont Lens Anterior Eye 48(5):102453 | 10.1016/j.clae.2025.102453 | "…assessed in 98 participants with dry eye…" · "A second efficacy study with 28 participants with dry eye disease…" | G2: 98 kişilik bir denemede en uygun düzen günde 3 kez 15 tekrar çıktı. · G3: 28 kişilik bir denemede egzersiz bırakılınca ölçümler 2 haftada çoğunlukla başa döndü. | Evet ("Fifteen repeats of close-squeeze-open cycles, 3x/day was the optimum…"; "These readings mostly returned to baseline levels two weeks after finishing…") | **girer.** Kuru göz hastaları. Kırpma hızı, NIBUT, menisküs, kornea boyanması değişmedi (p > 0,05). İlk yazarın bağlantısı "Wolffsohn Research Ltd" (PubMed künyesi); uygulama yazarlarca kurulmuş: kartta sınır olarak anılabilir. |
+| fincham2023 | 36624160 | Effect of breathwork on stress and mental health: A meta-analysis of randomised-controlled trials. | Fincham GW | 2023 Jan 9 / 2023 Jan 9 | Sci Rep 13(1):432 | 10.1038/s41598-022-27247-y | "12 randomised-controlled trials (k = 12) with a total of 785 adult participants" | N1: 12 denemede (785 kişi) nefes çalışması, algılanan streste küçük–orta azalmayla ilişkiliydi. | Evet ("small-to-medium mean effect size, g = −0.35") | **girer.** "Most studies were deemed as being at moderate risk of bias." Kapsam genel nefes çalışması (breathwork), yavaş nefes değil. PMC9828383. |
+| laborde2022 | 35623448 | Effects of voluntary slow breathing on heart rate and heart rate variability: A systematic review and a meta-analysis. | Laborde S | 2022 Jul / 2022 May 24 | Neurosci Biobehav Rev 138:104711 | 10.1016/j.neubiorev.2022.104711 | Kişi sayısı özette yok; çalışma sayısı: "223 studies were suitable for inclusion (172 DURING, 16 IM-AFTER1, and 49 AFTER-INT)" | N2, O1, dolunay: 223 çalışmalık bir incelemede kalp atışı değişkenliği yavaş nefes sırasında arttı. | Evet ("Results indicate increases in vmHRV with VSB, DURING…") | **girer.** Plan §A: kartta kişi sayısı yerine çalışma sayısı yazar (planın açık istisnası). Etki büyüklüğü özette yok. Özetteki "could be advised … prevention and adjunct treatment" cümlesi kartta kullanılmaz (sağlık iddiası). |
+| balban2023 | 36630953 | Brief structured respiration practices enhance mood and reduce physiological arousal. | Balban MY | 2023 Jan 17 / 2023 Jan 10 | Cell Rep Med 4(1):100895 | 10.1016/j.xcrm.2022.100895 | özette yok | (plan örneklerinde yok) Öneri: Uzaktan 1 aylık denemede günde 5 dk uzun nefes verme, ruh hâlinde meditasyondan çok artış gösterdi. | Kısmen: özet "breathwork, especially the exhale-focused cyclic sighing, produces greater improvement in mood (p < 0.05)… compared with mindfulness meditation" diyor; satır yalnız döngüsel iç çekmeye bağlıyor | **tam metin gerekli.** Kişi sayısı özette yok. Satır "özellikle" kaydını düşürüyor; tam metinde döngüsel iç çekme kolunun ayrı sonucu görülmeden satır bu biçimde girmez. Aktif kontrol meditasyon. Tam metin PMC'de: PMC9873947. |
+| tucker2007 | 17920646 | The effect of season and weather on physical activity: a systematic review. | Tucker P | 2007 Dec / 2007 Oct 24 | Public Health 121(12):909-22 | 10.1016/j.puhe.2007.04.009 | "Thirty-seven primary studies (published 1980-2006) representing a total of 291883 participants" | Y3: 37 çalışmalık bir derlemede kötü ya da aşırı hava, hareketin önünde bir engel olarak görüldü. | Evet ("the ensuing effect of poor or extreme weather has been identified as a barrier to participation in physical activity") | **girer.** Sistematik derleme, nicel birleştirme (meta-analiz) yok. |
+| klimek2022 | 35151273 | The relationship of weather with daily physical activity and the time spent out of home in older adults from Germany - the ActiFE study. | Klimek M | 2022 Feb 12 / 2022 Feb 12 | Eur Rev Aging Phys Act 19(1):6 | 10.1186/s11556-022-00286-0 | özette yok ("participants aged 65 years or older", sayı yok) | H1: 65 yaş üstü kişilerle bir izlem çalışmasında yağış arttıkça günlük yürüme süresi azaldı. | Satır evet ("higher precipitation, humidities and windspeeds led to a decrease" [WD ve TOH]) | **tam metin gerekli.** Kişi sayısı özette yok; plan §A kuralı gereği sayı doğrulanmadan satır yayına girmez. Tam metin PMC'de: PMC8903592. |
+| denissen2008 | 18837616 | The effects of weather on daily mood: a multilevel approach. | Denissen JJ | 2008 Oct / — | Emotion 8(5):662-7 | 10.1037/a0013497 | "online diary study (N = 1,233)" | H2: 1233 kişilik günlük çalışmasında havanın ruh hâline ortalama etkisi küçüktü; kişiden kişiye değişti. | Evet ("the average effect of weather on mood was only small, though significant random variation was found across individuals") | **girer.** Gözlemsel. Süre özette yok. Satırdaki "günlük çalışmasında" ifadesi dil incelemesinde bakılsın ("günlük" hem "diary" hem "her gün" okunabilir; özet "online diary study"). |
+| stout2022 | 35283036 | A Randomized Trial Evaluating the Use of a Smart Water Bottle to Increase Fluid Intake in Stone Formers. | Stout TE | 2022 Jul / 2022 Mar 10 | J Ren Nutr 32(4):389-395 | 10.1053/j.jrn.2021.07.007 | "Eighty-five subjects (44 DR, 41 SB) were enrolled." · "Follow-up 24 hr Us were available for 51 patients." | U1: 85 kişilik bir denemede az su içmenin başlıca nedeni unutmaktı (%60). | Evet ("The main baseline factor limiting fluid intake was not remembering to drink (60%).") | **girer.** Böbrek taşı hastaları; izlemde 85 → 51; ölçüt 24 sa idrar hacmi (içilen su değil). %60 başlangıç anketidir. |
+| desai2026 | 41864748 | Prevention of urinary stones with hydration: a randomised clinical trial of an adherence intervention. | Desai AC | 2026 Mar 21 / — | Lancet 407(10534):1171-1181 | 10.1016/S0140-6736(25)02637-6 | "1658 participants were randomly assigned to intervention (n=826) and control (n=832) groups" | U2: 1658 kişilik bir denemede su programındakiler 6. ve 12. ayda gece daha sık tuvalete kalktı. | Evet ("Urinary storage symptoms of frequency, urgency, and nocturia were greater in the intervention group versus control at months 6 and 12 but not at other timepoints") | **girer.** Taş hastaları, ≥ 12 yaş; müdahale çok bileşenli (reçete, para ödülü, koçluk, SMS). **Düzeltme var:** esummary "Erratum in: Lancet. 2026 Aug 22;408(10556):698, PMID 42624152"; düzeltmenin içeriği bu turda okunmadı, yayından önce açılmalı. "18.00'den sonra sormuyoruz" bulgu değil kuraldır. PMC13043023. |
+| moszeik2025 | 40373021 | The Effects of an Online Yoga Nidra Meditation on Subjective Well-Being and Diurnal Salivary Cortisol: A Randomised Controlled Trial. | Moszeik EN | 2025 Jun / — | Stress Health 41(3):e70049 | 10.1002/smi.70049 | "EG1: 11 min Yoga Nidra, n = 101; EG2: 30 min Yoga Nidra, n = 80 … AC: 10 min music, n = 74 … WC, n = 107" (toplam 362 özette yazmıyor; kol sayılarının toplamı) | O2: 362 kişilik 2 aylık bir denemede 11 dakikalık yoga nidranın bekleme grubuna göre etkisi küçüktü. · O3: 362 kişilik denemede 11 dakikalık kısa yoga nidra da bekleme grubundan ayrıştı; etki küçüktü. | Evet ("Significant improvements were observed for the 11-min Yoga Nidra group compared to the WC (effect sizes d = 0.08-0.16)"; "practiced ideally daily over 2 months") | **girer.** 362 = 101 + 80 + 74 + 107 (hesap; kartta kol sayıları da yazılabilir). "Alanın kalitesi düşük" cümlesi özette yok, kullanılmaz. PMC12080877. |
+| radin2025 (koşullu) | 39808431 | Digital Meditation to Target Employee Stress: A Randomized Clinical Trial. | Radin RM | 2025 Jan 2 / 2025 Jan 2 | JAMA Netw Open 8(1):e2454435 | 10.1001/jamanetworkopen.2024.54435 | "A total of 1458 participants … Those randomized to meditation (n = 728) vs waiting list (n = 730)" | Öneri (yalnız meditasyon): 1458 çalışanla bir denemede günde 5–10 dk meditasyon yapanlarda stres, 5 dk altından çok düştü. | Evet ("Those using the app from 5 to 9.9 min/d vs less than 5 min/d showed greater reduction in stress") | **girer (koşullu):** yalnız meditasyon içeriğinde; yoga bildiriminde değil. Kullanım süresi karşılaştırması randomize değil (kartta sınır). Bekleme listesi kontrolü; tek akademik tıp merkezi çalışanları. PMC11733700. |
+| cajochen2013 (koşullu, ay) | 23891110 | Evidence that the lunar cycle influences human sleep. | Cajochen C | 2013 Aug 5 / 2013 Jul 25 | Curr Biol 23(15):1485-8 | 10.1016/j.cub.2013.06.029 | özette yok | N3 satırında sayısı yok (satır Chaput ve Haba-Rubio sayılarını kullanır) | Satırda kullanılmıyor | **tam metin gerekli** (kart kaynakçasına girecekse). Geriye dönük (a posteriori) analiz. esummary: 3 yorum ("Comment in" PMID 24937275, 24937276, 25202868). |
+| habarubio2015 (koşullu, ay) | 26498230 | Bad sleep? Don't blame the moon! A population-based study. | Haba-Rubio J | 2015 Nov / 2015 Aug 18 | Sleep Med 16(11):1321-1326 | 10.1016/j.sleep.2015.08.002 | "A total of 2125 individuals (51.2% women, age 58.8 ± 11.2 years)" · spektral analiz "759 participants" | N3: Ayın uykuya etkisi tartışmalı: 5812 çocukta ~5 dk fark bulundu, 2125 yetişkinde bulunmadı. | Evet ("provides no evidence of a significant effect of lunar phases on human sleep"; süre p = 0,31) | **girer (koşullu):** yalnız "ay evresi" satırı kullanılırsa. Alt grupta dolunayda daha kısa uyku eğilimi (p = 0,06) var; kartta sınır olarak yazılabilir. |
+| chaput2016 (koşullu, ay) | 27047907 | Are Children Like Werewolves? Full Moon and Its Association with Sleep and Activity Behaviors in an International Sample of Children. | Chaput JP | 2016 / 2016 Mar 24 | Front Pediatr 4:24 | 10.3389/fped.2016.00024 | "The present observational, cross-sectional study included 5812 children ages 9-11 years" | N3 (aynı satır) | Evet ("~5 min/night shorter during full moon compared to new moon"; "Whether this seemingly minimal difference is clinically meaningful is questionable.") | **girer (koşullu):** yalnız "ay evresi" satırı kullanılırsa. esummary: 2 yorum (PMID 27377694, 27629071). |
+| smith2017 (koşullu, ay) | 27928860 | Physical activity, subjective sleep quality and time in bed do not vary by moon phase in German adolescents. | Smith MP | 2017 Jun / 2016 Dec 8 | J Sleep Res 26(3):371-376 | 10.1111/jsr.12472 | "a population-based sample of 1411 Germans age 14-17 years" | N3 satırında sayısı yok | Satırda kullanılmıyor; özet "lunar phase was not significantly associated with physical activity, subjective sleep quality or time in bed" | **girer (koşullu):** kart kaynakçasında destekleyici; satırda anılmıyor. Uyku günlükle (öznel). |
+| casiraghi2021 (koşullu, ay) | 33571126 | Moonstruck sleep: Synchronization of human sleep with the moon cycle under field conditions. | Casiraghi L | 2021 Jan / 2021 Jan 27 | Sci Adv 7(5) (makale no. eabe0465; esummary'de sayfa alanı boş, PII "7/5/eabe0465") | 10.1126/sciadv.abe0465 | özette yok | N3 satırında sayısı yok | Satırda kullanılmıyor | **tam metin gerekli** (kart kaynakçasına girecekse). Dakika farkı da özette yok. PMC7840136. |
+
+## 2. Özet sayım
+
+- **girer (11'den 9):** kim2020, wolffsohn2025, fincham2023, laborde2022, tucker2007, denissen2008, stout2022,
+  desai2026, moszeik2025; laborde2022 kişi sayısı yerine çalışma sayısıyla (plan istisnası).
+- **tam metin gerekli (11'den 2):** balban2023, klimek2022 (kişi sayısı özette yok; ikisinin de PMC tam metni var).
+- **girmez:** yok (künyesi ya da satırı özetle çelişen kaynak çıkmadı).
+- **koşullu:** radin2025 girer (yalnız meditasyon); ay: habarubio2015, chaput2016, smith2017 girer (yalnız "ay evresi"
+  satırı kullanılırsa); cajochen2013, casiraghi2021 tam metin gerekli.
+- **Açık iş:** Desai 2026 düzeltmesi (PMID 42624152) açılmalı; Balban satırındaki "özellikle" kaydı; H2'deki "günlük
+  çalışması" ifadesi dil incelemesinde.
+
+## 3. Yıl notu
+
+Mevcut `sources.js` `year` alanında ilk yayın (e-yayın) yılını kullanıyor (ör. `talens2022`: 46(2), basım 2023;
+`sturm2020`: 22(5), basım 2022). Plan §A "kartta basım yılı; farklıysa ikisi birden" diyor ama alan adı vermiyor. Bu
+yüzden `sources-ek.taslak.js`'te (kodda `app/src/lib/sources.js`) `year` mevcut kurala uyar (e-yayın yılı) ve basım yılı farklıysa kayıt üstünde yorum olarak
+yazıldı: kim2020 (2021), wolffsohn2025 (2025, aynı), laborde2022 (2022, aynı), stout2022 (2022, aynı),
+tucker2007 (2007, aynı), habarubio2015 (2015, aynı), smith2017 (e-yayın 2016, basım 2017; anahtar plandaki gibi basım
+yılıyla bırakıldı, `year: 2016`). Alan adı (ör. `yearPrint`)
+kod oturumunda kararlaştırılır.
+
+Kaynak: PubMed (NCBI). DOI bağlantıları: https://doi.org/ + tablodaki DOI.
+
+## 4. `sources-ek.taslak.js` notu (kayıtlar `app/src/lib/sources.js`'e girdi)
+
+13 kayıt: 9 girer + radin2025 + habarubio2015, chaput2016, smith2017 (koşullu). Tam metin gerekli dört kaynak
+(balban2023, klimek2022, cajochen2013, casiraghi2021) eklenmedi. `titleTr` makale başlığının çevirisidir, bildirim
+metni değildir; yine de iki çeviride yasak listesine takılan kök var: kim2020 "tedavi edici" (özgün: "Therapeutic"),
+desai2026 "önlenmesi" (özgün: "Prevention"). Kartta `titleTr` gösteriliyorsa dil incelemesi karar versin. Node ile
+modül olarak yüklendi, sözdizimi hatası yok.
+
+## 5. Kod turu eki (2026-09-30): süre ve çalışma türü
+
+İnceleme, `sources.js`'teki `duration` değerlerinden beşinin yukarıdaki tabloda yazmadığını buldu. PubMed özetleri
+(esummary/efetch) yeniden açıldı; hepsi özette var, değerler değişmedi:
+
+| anahtar | `duration` | özetten alıntı |
+|---|---|---|
+| wolffsohn2025 | 2 hafta egzersiz + bıraktıktan 2 hafta sonra ölçüm | "before and after 2 weeks of blinking exercises, as well as 2 weeks after completing the blinking exercise routine" |
+| stout2022 | 6 ve 12 hafta | "They then repeated a 24 hr U and survey at 6 and 12 weeks, respectively." |
+| desai2026 | Ortanca 738 gün izlem | "At a median follow-up of 738 days (IQR 711-778)" |
+| radin2025 | 8 hafta, günde 10 dk; 4. ayda izlem | "complete 10 minutes of meditation per day for 8 weeks" · "baseline, 8-week, and 4-month measures" |
+| chaput2016 | 7 gün ivmeölçer | "monitored over seven consecutive days using a waist-worn accelerometer" |
+
+wolffsohn2025 `design: 'rct'`: özet "Participants were randomised between a squeeze and blink compared to blink only
+regimen, 2 to 4 repeats per day and 5 to 25 repetitions each time" diyor; PubMed yayın türü "Randomized Controlled
+Trial". Karşılaştırma düzenler arasıdır (egzersizsiz kontrol grubu yok); kart bunu `limit`'te söylemeli mi, dil
+incelemesi karar versin.
+
+Koşullu kaynaklar `sources.js`'te `only` alanı taşır (`radin2025: 'meditation'`, ay kaynakları `'moon'`);
+`modules/registry.js` bunları modül `remind.science` havuzunda reddeder.

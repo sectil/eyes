@@ -1,0 +1,16 @@
+{
+ "unit": "k.yan",
+ "take": "t1",
+ "ref_node": "QithEkJVTvphMG2GLfh3",
+ "asset_id": "TL2gjiJcsgjXJiqypk6h",
+ "stt_node": "usNfUgcXuVa16bFxovw9",
+ "session_id": "VPiuar8P31Vj6vTxFMYH",
+ "generation_id": "8KKX6d3SFCr703RgJrU6",
+ "actual_credits": 17.16,
+ "actual_cents": 0.312,
+ "spoken_duration_secs": 2.92,
+ "scribe_text": "Sırt üstü yatıyorsan önce bir yanına dön",
+ "tts": "Sırtüstü yatıyorsan önce bir yanına dön.",
+ "compare_exit": 1,
+ "compare_out": "{\n \"equal\": false,\n \"a\": [\n  \"sırtüstü\",\n  \"yatıyorsan\",\n  \"önce\",\n  \"bir\",\n  \"yanına\",\n  \"dön\"\n ],\n \"b\": [\n  \"sırt\",\n  \"üstü\",\n  \"yatıyorsan\",\n  \"önce\",\n  \"bir\",\n  \"yanına\",\n  \"dön\"\n ],\n \"diff\": [\n  {\n   \"op\": \"replace\",\n   \"a_pos\": 0,\n   \"a\": [\n    \"sırtüstü\"\n   ],\n   \"b_pos\": 0,\n   \"b\": [\n    \"sırt\",\n    \"üstü\"\n   ]\n  }\n ]\n}\nreplace @a0/b0: -sırtüstü +sırt üstü"
+}
