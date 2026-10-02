@@ -29,7 +29,7 @@ for (const f of files) {
     if (words < 95 || words > 115) e.push(`kelime ${words}`)
     if (chars < 730 || chars > 850) e.push(`harf ${chars}`)
     if (/[()]/.test(t.metin + t.baslik)) e.push('parantez')
-    if (/beyin|hastal|ölüm|tehlike/i.test(t.metin)) e.push('yasak sözcük')
+    if (/(^|[^a-zçğıöşüâîû])(beyin|hastal|ölüm|tehlike)/i.test(t.metin)) e.push('yasak sözcük')
     if (t.sorular.length !== 6) e.push('6 soru değil')
     if (t.sorular.filter((q) => q.tur === 'ana').length !== 1) e.push('ana soru 1 değil')
     for (const q of t.sorular) {
