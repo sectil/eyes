@@ -176,6 +176,24 @@ h1 { font-family: var(--font-display); font-weight: 700; font-size: 30px; line-h
   .bar1 .col { height: 48px; } .bars { padding: 8px; gap: 4px; } .bar1 span { font-size: 9.5px; }
   .lc { padding: 10px; } .lc b { font-size: 14px; } .rk b { font-size: 24px; }
 }
+
+/* tur 3 */
+.paper.mid { justify-content: center; } .paper.mid p { font-size: 25px; line-height: 1.55; }
+.hero .hl i { transition: none; }
+.hero.ok .lbl { color: var(--ok); font-weight: 700; display: inline-flex; gap: 6px; align-items: center; font-size: 15px; }
+.hero.ok .hw { background: none; color: var(--ok); -webkit-text-fill-color: var(--ok); }
+.hero.ok .hl i { background: var(--ok); } .hero.ok .hrow b { color: var(--ok); font-size: 20px; }
+.hero .hw s { text-decoration-thickness: 3px; text-decoration-color: color-mix(in srgb, var(--ok) 60%, transparent); }
+.hero .why { font-size: 15.5px; color: var(--ink-2); margin-top: 6px; }
+.paper.boxed .tk.near { outline: 2px dashed var(--accent); outline-offset: 0; padding: 0 3px; margin: 0 1px; border-radius: 6px; text-decoration: none; }
+.best { align-items: center; } .best span { font-size: 15px; color: var(--ink); font-weight: 600; } .best i { font-size: 20px; font-family: var(--font-display); }
+.lt { font-size: 14px; font-weight: 700; color: var(--ink-2); }
+.lc span { font-size: 13.5px; color: var(--ink-2); } .lc em { font-style: normal; white-space: nowrap; }
+.rk span { font-size: 14px; color: var(--ink-2); }
+@media (max-width: 340px) {
+  .paper.mid p { font-size: 19px; line-height: 1.5; } .hero .why { font-size: 14px; } .hero.ok .lbl { font-size: 14px; display: inline-flex; }
+  .lc span { font-size: 12px; } .lt { font-size: 13px; } .best { padding: 9px 12px; } .best span { font-size: 14px; } .best i { font-size: 17px; }
+}
 </style>
 </head>
 <body>
@@ -218,15 +236,16 @@ const V = {
     <div class="sp"></div>
     <p class="small"><a>Neye dayanıyor?</a></p>
     <button class="btn">Başla</button></div>`,
-  search: () => `${status}<div class="body">${topBar(1, 1)}${seek('kartı', 62)}${paper(X)}<button class="btn ghost">Metinde yok</button></div>`,
-  found: () => `${status}<div class="body">${topBar(2, 1)}${seek('kartı', 48, `<div class="time"><b>2,8</b> sn</div>`, 'ok')}${paper(X, { kartı: 'found' })}<button class="btn ghost" style="opacity:.35">Metinde yok</button></div>`,
-  absent: () => `${status}<div class="body">${topBar(4, 3)}${seek('arıların', 30, '', 'ok')}${paper(X, {}, 'arıla')}<div class="note">${check}<div>Doğru, metinde yok. <span>Benzer kelimelerin altını çizdik.</span></div></div></div>`,
+  search: () => `${status}<div class="body">${topBar(1, 1)}<div class="hero"><div class="lbl">Bu kelimeyi bul</div><div class="hw">kartı</div><div class="hrow"><div class="hl"><i style="width:60%"></i></div><b>12 sn</b></div></div>${paper(X).replace('class="paper"', 'class="paper bar mid"')}<button class="btn ghost">Metinde yok</button></div>`,
+  found: () => `${status}<div class="body">${topBar(2, 1)}<div class="hero ok"><div class="lbl">${check} Buldun</div><div class="hw">kartı</div><div class="hrow"><div class="hl"><i style="width:48%"></i></div><b>2,8 sn</b></div></div>${paper(X, { kartı: 'found' }).replace('class="paper"', 'class="paper bar mid"')}<button class="btn ghost" style="opacity:.35">Metinde yok</button></div>`,
+  absent: () => `${status}<div class="body">${topBar(4, 3)}<div class="hero ok"><div class="lbl">${check} Doğru, metinde yok</div><div class="hw">arıya</div><p class="why">Kesik çizgili kelimeler benzer ama aynı değil.</p></div>${paper(X, {}, 'arı').replace('class="paper"', 'class="paper bar mid boxed"')}<button class="btn">Devam</button></div>`,
   result: () => `${status}<div class="body">
     <div class="top"><div class="x">${close}</div></div>
-    <div><div class="ey">Tur bitti</div><div class="big" style="margin-top:8px">3,0<small>sn</small></div><p class="lead" style="margin-top:6px">Doğru bulduğun kelimelerde ortanca süre.</p></div>
-    <div class="stats"><div class="stat"><b>4/5</b><span>kelime bulundu</span></div><div class="stat"><b>1/1</b><span>doğru “Yok”</span></div><div class="stat"><b>1</b><span>yanlış dokunuş</span></div></div>
-    <div class="gel"><div class="h"><span>Kelime bulma süresi</span><b>Başlangıç · 3/8 gün</b></div><div class="seg">${[0,1,2,3,4,5,6,7].map((i) => `<i class="${i < 3 ? 'on' : ''}"></i>`).join('')}</div><div class="gs">8 gün dolunca başlangıcın belli olur; sonra Gelişim her hafta bakar.</div></div>
-    <div class="facts"><div class="small">Bu turda okuduğun bulgular</div><div class="fact"><b>Sıfırı en küçük sayan arılar</b><span>Howard ve ark. · Science 2018 · PMID 29880690</span></div><div class="fact"><b>Plan yapan kuzgunlar</b><span>Kabadayi ve Osvath · Science 2017 · PMID 28706072</span></div></div>
+    <div class="rhero"><div><div class="ey">Tur bitti</div><div class="big" style="margin-top:6px">3,0<small>sn</small></div></div><div class="rk"><b>5/6</b><span>doğru</span></div></div>
+    <p class="lead">Bir kelimeyi genelde bu sürede buldun.</p>
+    <div class="best"><span>En hızlı turun</span><i>2,6 sn</i></div>
+    <div class="learn"><div class="lt">Bugün öğrendiğin</div><div class="lc"><b>Boş kartı en az sayan arılar</b><span>Howard ve ark. · Science 2018 · <em>PMID 29880690</em></span></div><div class="lc"><b>17 saat sonrası için alet seçen kuzgunlar</b><span>Kabadayi ve Osvath · Science 2017 · <em>PMID 28706072</em></span></div></div>
+    <div class="gel"><div class="h"><span>Kelime bulma süresi</span><b>Başlangıç · 3/8 gün</b></div><div class="seg">${[0,1,2,3,4,5,6,7].map((i) => `<i class="${i < 3 ? 'on' : ''}"></i>`).join('')}</div></div>
     <div class="sp"></div><button class="btn">Tamam</button></div>`,
 }
 

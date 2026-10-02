@@ -12,6 +12,7 @@ kendi onayım → sahip. "beyin" ve "tanıma" sözcükleri geçmez. Değişim s�
 | G1 | Dikkat · 2 dk | üst satır |
 | G2 | Kelime Avı | başlık |
 | G3 | Bilimden kısa bir metin, aranan bir kelime. Bul ve dokun; metinde yoksa “Yok” de. | |
+| G3b | Bir deneyde kuzgunlar, ileride kullanacakları bir aleti 17 saat öncesinden seçebildi. | giriş örnek kartındaki metin; aranan kelime "kuzgunlar" |
 | G4a | Kelime üstte çıkar | adım 1 |
 | G4b | Metinde bul ve dokun | adım 2 |
 | G4c | Yoksa “Yok” de | adım 3 |
@@ -21,14 +22,18 @@ kendi onayım → sahip. "beyin" ve "tanıma" sözcükleri geçmez. Değişim s�
 ### Arama
 | Kimlik | Metin | Not |
 |---|---|---|
-| A1 | Bu kelimeyi bul | aranan kelimenin üst etiketi; 320'de gizli, yalnız kelime |
+| A1 | Bu kelimeyi bul | aranan kelimenin üstünde, ortada; 320'de gizli |
+| A1b | {s} sn | süre çizgisinin yanında kalan süre; 20'den geri sayar |
 | A2 | Metinde yok | düğme |
-| A3 | {Yazar} ve ark. · {Dergi} {Yıl} · PMID {pmid} | arama sırasında görünmez; metin bitince A9 geçişinde ve sonuçta S7 altında. İki yazarlıda "{Yazar1} ve {Yazar2}" |
-| A4 | {s} sn | bulununca aranan kelime kartı yeşile döner, süre büyük yazılır; kelime dolu renkle parlar |
-| A5 | Bu değil | yalnız sesli okuyucu; yanlış dokunuşta kelime kısa bir titreşimle sallanır, renk değişmez |
+| A3 | {Yazar} ve ark. · {Dergi} {Yıl} · PMID {pmid} | arama sırasında görünmez; A9 geçişinde ve sonuçta S7 altında. İki yazarlıda "{Yazar1} ve {Yazar2}" |
+| A4a | Buldun | bulununca kelimenin üstündeki etiket; kelime ve süre yeşile döner |
+| A4b | {s} sn | bulma süresi, A1b'nin yerinde |
+| A5 | Bu değil | yalnız sesli okuyucu; yanlış dokunuşta kelime kısa sallanır, renk değişmez |
 | A6a | Süre doldu. Kelime buradaydı. | 20 sn dolunca, kelime metindeyse; kelime işaretlenir |
 | A6b | Süre doldu. Bu kelime metinde yoktu. | 20 sn dolunca, kelime yoksa |
-| A7 | Doğru, metinde yok. Benzer kelimelerin altını çizdik. | "Yok" doğruysa alt not; kart yeşile döner, benzer biçimlerin altı kesik çizgili |
+| A7a | Doğru, metinde yok | "Yok" doğruysa kelimenin üstündeki etiket |
+| A7b | Kesik çizgili kelimeler benzer ama aynı değil. | A7a'nın altında; benzer biçimler kesik çizgili kutuda |
+| A7c | Devam | "Yok" doğru çıkınca düğme |
 | A8 | Kelime metindeydi, işaretledik. | "Yok" dendi ama kelime vardı |
 | A9 | Sıradaki metin | iki metin arasındaki geçiş etiketi |
 
@@ -37,15 +42,13 @@ kendi onayım → sahip. "beyin" ve "tanıma" sözcükleri geçmez. Değişim s�
 |---|---|---|
 | S1 | Tur bitti | üst satır |
 | S2 | {x} sn | büyük sayı: doğru bulunan kelimelerin ortanca süresi |
-| S3 | Kelimelerin yarısını bundan hızlı buldun. | ortancanın sade anlatımı; kapı tur 2: "ortanca" sözcüğü 4/5 anlaşılmadı |
+| S2b | {d}/6 · doğru | sağda; doğru bulunan ve doğru "Yok" sayısı |
+| S3 | Bir kelimeyi genelde bu sürede buldun. | ortancanın sade anlatımı |
 | S3b | Süre için en az 3 kelime bulmak gerekiyor; bu tur sayılarla kaydedildi. | 3'ten az bulunduysa S2 ve S3 yerine |
-| S4a | kelime bulundu | "4/5" altında |
-| S4b | doğru “Yok” | "1/1" altında |
-| S4c | yanlış dokunuş | "1" altında |
+| S4 | En hızlı turun · {x} sn | en düşük `medianSec`; değişim sözcüğü değildir, Nef'in rekor anıyla aynı veri. İlk turda gösterilmez |
 | S5 | Kelime bulma süresi | Gelişim kutusunun başlığı, metrik adıyla aynı (GL1) |
 | S6 | Başlangıç · {k}/8 gün · başlangıcından iyi · değişim yok · henüz belli değil | hüküm sözcüğü ve sayı `metricStatusV2` + `changeText` + `verdictWord`'den; modül kendisi kurmaz |
-| S6b | 8 gün sonra başlangıç ölçün çıkar; sonra her hafta onunla karşılaştırılır. | yalnız başlangıç oluşurken; 320'de gizli |
-| S7 | Bu turda okuduğun bulgular | altında her metnin başlığı ve A3 satırı |
+| S7 | Bugün öğrendiğin | altında iki metnin başlığı ve A3 satırı |
 | S8 | Tamam | düğme |
 
 ### Neye dayanıyor? sayfası
@@ -84,147 +87,147 @@ kopyalanmaz. PMID ve DOI `arastirma/KAYNAKLAR.md`'de. Tek kaynak `maket/metinler
 ile üretilir, elle düzenlenmez. Hedef türleri: E kolay, S benzer biçimli, Z iki benzer biçimli, Y metinde yok.
 
 <!-- B:basla -->
-### B1 · Sıfırı en küçük sayan arılar (`howard2018`, A tipi, 62 kelime)
+### B1 · Boş kartı en az sayan arılar (`howard2018`, A tipi, 33 kelime)
 
-Araştırmacılar bal arılarına kartlardaki şekil sayısını karşılaştırmayı öğretti. Kartlarda birden altıya kadar şekil vardı ve arılar daha az şekilli olanı seçmeyi öğrendi. Ardından hiç şekil taşımayan boş bir kart gösterildi. Arılar boş kartı, tek şekilli karttan da daha az saydı. Araştırmacılara göre arılar sıfırı sayıların en küçüğü gibi ele aldı. Benzer bir beceri daha önce papağanlarda, maymunlarda ve okul öncesi çocuklarda görülmüştü.
+Bal arıları kartlardaki şekilleri karşılaştırıp daha az şekilli olanı seçmeyi öğrendi. Sonra boş bir kart gösterildi. Arılar boş kartı, tek şekilli karttan da az saydı. Benzer bir beceri papağanlarda ve maymunlarda da görülmüştü.
 
 Hedefler: **papağanlarda** kolay · **kartı** benzer · **arıya** yok
 
-### B2 · 17 saat sonrası için seçen kuzgunlar (`kabadayi2017`, B tipi, 54 kelime)
+### B2 · 17 saat sonrası için alet seçen kuzgunlar (`kabadayi2017`, B tipi, 35 kelime)
 
-Geleceği planlamak uzun süre insana ve büyük maymunlara özgü sanıldı. Bir deneyde kuzgunlar da benzer bir beceri gösterdi. Kuşlar, ileride kullanacakları bir aleti ve takasta işe yarayacak bir nesneyi 17 saate varan bir süre öncesinden seçebildi. Kendilerini tutmayı da başardılar. Sonuçları büyük maymunlarınkine benziyor. Araştırmacılara göre bu planlama becerisi kuzgunlarda, maymunlardan bağımsız olarak gelişmiş.
+Geleceği planlamak uzun süre insana ve büyük maymunlara özgü sanıldı. Bir deneyde kuzgunlar, ileride kullanacakları bir aleti 17 saat öncesinden seçebildi; kendilerini de tuttular. Sonuçlar maymunlarınkine benziyor. Araştırmacılara göre bu beceri kuzgunlarda, maymunlardan bağımsız gelişmiş.
 
 Hedefler: **aleti** kolay · **kuzgunlarda** benzer · **maymunlara** iki benzer
 
-### B3 · Birbirine adla seslenen filler (`pardo2024`, A tipi, 52 kelime)
+### B3 · Ada benzer çağrılarla seslenen filler (`pardo2024`, A tipi, 34 kelime)
 
-Yabani Afrika filleri birbirine seslenirken kişiye özgü çağrılar kullanıyor. Araştırmacılar kayıtları bilgisayarla inceledi ve bir çağrının kime yöneldiğini sesin yapısından tahmin edebildi. Kayıtlar fillere geri dinletildiğinde her fil kendisine yöneltilmiş çağrıya daha güçlü tepki verdi. Yunuslar ve papağanlar karşısındakinin sesini taklit ederek seslenir. Fillerin ise taklit etmeden, ada benzer seslerle seslendiği düşünülüyor.
+Yabani Afrika filleri birbirine kişiye özgü çağrılarla sesleniyor. Kayıtlar geri dinletildiğinde her fil, kendisine yöneltilmiş çağrıya daha güçlü tepki verdi. Yunuslar karşısındakinin sesini taklit eder; fillerin ise taklit etmeden, ada benzer seslerle seslendiği düşünülüyor.
 
 Hedefler: **Yunuslar** kolay · **çağrıya** benzer · **filin** yok
 
-### B4 · Gıdıklanınca zıplayan sıçanlar (`ishiyama2016`, B tipi, 51 kelime)
+### B4 · Gıdıklanınca zıplayan sıçanlar (`ishiyama2016`, B tipi, 35 kelime)
 
-Sıçanlar gıdıklandığında insan kulağının duyamayacağı kadar ince sesler çıkarır. Araştırmacılar bunu yeniden gösterdi ve fazlasını da gördü. Gıdıklanan hayvanlar ele yaklaştı ve kendiliğinden havaya zıpladı. Almancada bu sıçrayışlara sevinç sıçrayışı deniyor. Ortam ürkütücü olduğunda ise gıdıklanma aynı etkiyi yapmadı, çıkan ses azaldı. Bulgular, gıdıklanma ile oyun arasında bir bağ olduğunu düşündürüyor.
+Sıçanlar gıdıklandığında insan kulağının duyamayacağı ince sesler çıkarır. Gıdıklanan sıçanlar ele yaklaştı ve kendiliğinden zıpladı; bu sıçrayışlara sevinç sıçrayışı deniyor. Ortam ürkütücüyse gıdıklanma aynı etkiyi yapmadı. Bulgular gıdıklanma ile oyun arasında bir bağ olduğunu düşündürüyor.
 
 Hedefler: **zıpladı** kolay · **sıçrayışlara** benzer · **gıdıklandığında** iki benzer
 
-### B5 · Saklambaç oynayan sıçanlar (`reinhold2019`, A tipi, 52 kelime)
+### B5 · Saklambaç oynayan sıçanlar (`reinhold2019`, A tipi, 31 kelime)
 
-Araştırmacılar sıçanlarla saklambaç oynadı. Yemek ödülü yoktu; bulunca ya da bulununca sıçanlar yalnızca oyunla, şakalaşmayla karşılandı. Hayvanlar oyunu çabuk öğrendi, saklanan ve arayan rolleri arasında geçiş yaptı. Ararken gözlerini ve eski saklanma yerlerinin anısını kullandılar. Saklanırken neredeyse hiç ses çıkarmadılar ve içi görünmeyen kutuları seçtiler. Araştırmacılara göre bu oyun çok eski olabilir.
+Araştırmacılar sıçanlarla, yemek ödülü vermeden saklambaç oynadı. Sıçanlar oyunu çabuk öğrendi, saklanan ve arayan rolleri arasında geçti. Saklanırken pek ses çıkarmadılar ve içi görünmeyen kutuları seçtiler; ararken eski saklanma yerlerini hatırladılar.
 
 Hedefler: **kutuları** kolay · **saklanma** benzer · **oyunun** yok
 
-### B6 · Susayan bitkinin sesi (`khait2023`, B tipi, 59 kelime)
+### B6 · Susuz kalan bitkinin sesi (`khait2023`, B tipi, 31 kelime)
 
-Bitkiler zor durumda kalınca rengini, kokusunu ve biçimini değiştirir. Yeni bir çalışma bir şey daha buldu: ses. Domates ve tütün bitkileri susuz kaldığında ya da kesildiğinde, uzaktan kaydedilebilen ultrasonik sesler çıkardı. Kayıtlar sessiz bir odada ve bir serada yapıldı. Bilgisayar, yalnız bu seslere bakarak bitkinin susuz mu, kesilmiş mi olduğunu ayırt edebildi. Bu sesleri başka canlılar da duyuyor olabilir.
+Domates ve tütün bitkileri susuz kaldığında ya da kesildiğinde, uzaktan kaydedilebilen ultrasonik sesler çıkardı. Kayıtlar sessiz bir odada ve bir serada yapıldı. Bilgisayar yalnız bu seslere bakarak bitkinin durumunu ayırt edebildi.
 
 Hedefler: **serada** kolay · **bitkinin** benzer · **seslere** iki benzer
 
-### B7 · Farelerin yüz ifadesi (`dolensek2020`, A tipi, 51 kelime)
+### B7 · Farelerin yüz ifadesi (`dolensek2020`, A tipi, 31 kelime)
 
-Bir hayvanın ne hissettiğini anlamak çoğu zaman zordur. Araştırmacılar farelerin yüzünü yakından filme aldı. Hoş ya da tatsız olaylar karşısında farelerin yüzünde her seferinde benzer, kalıp ifadeler belirdi. Bilgisayar bu ifadeleri ayrı gruplara ayırabildi. Aynı uyaran, hayvanın o anki durumuna göre farklı bir ifade doğurdu. Yani yüz, o anki durumu yansıtıyordu.
+Araştırmacılar farelerin yüzünü yakından filme aldı. Hoş ya da tatsız olaylarda yüzlerinde kalıp ifadeler belirdi. Bilgisayar bu ifadeleri gruplara ayırdı. Aynı uyaran, hayvanın o anki durumuna göre farklı bir ifade doğurdu.
 
 Hedefler: **filme** kolay · **ifadeleri** benzer · **farenin** yok
 
-### B8 · Ahtapotun iki uykusu (`medeiros2021`, B tipi, 57 kelime)
+### B8 · Ahtapotun iki uykusu (`medeiros2021`, B tipi, 40 kelime)
 
-Dört ahtapot uyurken kameraya alındı. Uykuda iki ayrı evre göze çarptı. Sakin evrede derileri soluk, gözbebekleri kapalıydı ve bu evre uzun sürdü. Hareketli evrede ise derileri renkten renge girdi, gözleri hızla kıpırdadı; bu evre yaklaşık kırk saniye sürdü. Hareketli evre çoğunlukla sakin evrenin ardından, yarım saate yakın aralarla geldi. Bu düzen, kuşların ve memelilerin uyku döngüsünü andırıyor.
+Dört ahtapot uyurken kameraya alındı. Uykuda iki evre vardı. Sakin evrede derileri soluktu. Hareketli evrede derileri renkten renge girdi, gözleri kıpırdadı. Bu evre çoğunlukla sakin evrenin ardından, yarım saate yakın aralarla geldi. Bu düzen kuşların ve memelilerin uyku döngüsünü andırıyor.
 
 Hedefler: **kameraya** kolay · **uykuda** benzer · **evrenin** iki benzer
 
-### B9 · Köpekler sözü ve tonu ayırıyor (`andics2016`, A tipi, 50 kelime)
+### B9 · Köpekler sözü ve tonu ayırıyor (`andics2016`, A tipi, 32 kelime)
 
-Bir köpeğe aynı övgü sözünü neşeli ve düz bir sesle söylediğinizi düşünün. Eğitilmiş köpekler tarayıcıda kıpırdamadan yatarken bu sözleri dinledi. Köpekler sözcüğün anlamını ve ses tonunu ayrı ayrı işledi. Hoşnutluk tepkisi ise yalnız söz de ton da övgü olduğunda belirdi. Bu iki bilgiyi ayırıp birleştirme yeteneği, dil olmadan da gelişebiliyor.
+Eğitilmiş köpekler tarayıcıda kıpırdamadan yatarken övgü sözlerini neşeli ve düz bir sesle dinledi. Köpekler sözcüğün anlamını ve ses tonunu ayrı işledi. Hoşnutluk tepkisi ise yalnız söz de ton da övgü olduğunda belirdi.
 
 Hedefler: **tarayıcıda** kolay · **sözcüğün** benzer · **köpeğin** yok
 
-### B10 · Tüyleri diken diken eden ikili (`shwartz2020`, B tipi, 56 kelime)
+### B10 · Tüyleri diken diken eden ikili (`shwartz2020`, B tipi, 36 kelime)
 
-Üşüdüğümüzde tüylerimiz diken diken olur. Bunu kıl köküne bağlı küçük bir kas ile ona uzanan bir sinir yapar. Farelerde yapılan bir çalışma bu ikilinin başka bir işini de buldu. Sinir, kılı yeniden üreten hücrelerin ne zaman çalışacağını etkiliyor; kas da bu sinirin yerinde kalmasını sağlıyor. Yani diken diken olan tüyler ile yeni tüylerin çıkması aynı ekipten.
+Üşüdüğümüzde tüylerimiz diken diken olur. Bunu kıl köküne bağlı küçük bir kas ile bir sinir yapar. Farelerde bu sinir, kılı yeniden üreten hücreleri de etkiliyor. Yani diken diken olan tüyler ile yeni tüylerin çıkması aynı ekipten.
 
 Hedefler: **Üşüdüğümüzde** kolay · **kılı** benzer · **tüylerimiz** iki benzer
 
-### B11 · Aynaya bakan balık (`kohda2019`, A tipi, 60 kelime)
+### B11 · Aynaya bakan balık (`kohda2019`, A tipi, 35 kelime)
 
-Aynada kendini bilmek uzun süre memelilere ve kuşlara özgü sanıldı. Temizlikçi balık adlı küçük bir balık bu sınırı zorladı. Balıklar önce yansımaya bir yabancıymış gibi tepki verdi, sonra aynanın önünde tuhaf hareketler denedi, sonunda yansımasını uzun uzun izledi. Bedenine renkli bir işaret konunca, ayna karşısında bedenini bir yüzeye sürterek işareti silmeye çalıştı. Şeffaf işarete ve aynasız ortama hiç tepki vermedi.
+Temizlikçi balık adlı küçük bir balık aynanın önünde önce yabancıya tepki verir gibi davrandı, sonra yansımasını uzun uzun izledi. Bedenine renkli bir işaret konunca, ayna karşısında bedenini sürterek işareti silmeye çalıştı. Aynasız ortamda bunu yapmadı.
 
 Hedefler: **sürterek** kolay · **aynanın** benzer · **balığın** yok
 
-### B12 · Kediler adını ayırt ediyor (`saito2019`, B tipi, 51 kelime)
+### B12 · Kediler adını ayırt ediyor (`saito2019`, B tipi, 37 kelime)
 
-Kedilerin bizi dinlemediği söylenir. Bir deneyde kedilere önce dört sıradan sözcük ya da evdeki başka kedilerin adları dinletildi. Kediler alışıp ilgisini kaybettikten sonra kendi adlarını duydu ve belirgin biçimde yeniden tepki verdi. Bu, adı yabancı biri söylese de oldu. Kedi kafede yaşayan kediler ise kendi adını evdeki öbür kedilerin adlarından ayıramadı.
+Bir deneyde kedilere önce sıradan sözcükler ya da evdeki başka kedilerin adları dinletildi. Kediler alıştıktan sonra kendi adlarını duyunca yeniden tepki verdi; adı yabancı biri söylese de. Kedi kafedeki kediler ise kendi adını öbür kedilerin adlarından ayıramadı.
 
 Hedefler: **yabancı** kolay · **adını** benzer · **kedilere** iki benzer
 
-### B13 · Gülen yüzü seçen keçiler (`nawroth2018`, A tipi, 53 kelime)
+### B13 · Gülen yüzü seçen keçiler (`nawroth2018`, A tipi, 30 kelime)
 
-Köpekler ve atlar insan yüzünü okuyabiliyor. Peki süt ve et için yetiştirilen keçiler? Bir duvara aynı yabancının iki fotoğrafı asıldı: birinde gülüyor, öbüründe kızgındı. Keçiler arenanın öbür ucundan bırakıldı. Çoğu, önce gülen yüze gitti ve onunla daha uzun ilgilendi. Bu tercih, gülen yüz sağ taraftayken belirgindi. Evcilleşme, hayvanların zihnini sandığımızdan derin etkilemiş olabilir.
+Bir duvara aynı yabancının iki fotoğrafı asıldı: birinde gülüyor, öbüründe kızgındı. Arenanın öbür ucundan bırakılan keçilerden çoğu önce gülen yüze gitti. Bu tercih, gülen yüz sağ taraftayken belirgin biçimde görüldü.
 
 Hedefler: **arenanın** kolay · **yüze** benzer · **keçilerin** yok
 
-### B14 · Suda buruşan parmaklar (`kareklas2013`, B tipi, 51 kelime)
+### B14 · Suda buruşan parmaklar (`kareklas2013`, B tipi, 35 kelime)
 
-Elimiz uzun süre suda kalınca parmak uçlarımız yavaş yavaş buruşur. Bu buruşma kendiliğinden olmaz; sinir sistemimiz onu yönetir. Bir deneyde katılımcılar küçük nesneleri elleriyle taşıdı. Nesneler suyun içindeyken, buruşuk parmaklar düz parmaklardan daha hızlı çalıştı. Kuru nesnelerde ise buruşukluk hiç fark yaratmadı. Parmak buruşması, ıslak nesneleri tutmak için bir uyum olabilir.
+Elimiz suda kalınca parmak uçlarımız buruşur. Bu buruşmayı sinir sistemimiz yönetir. Bir deneyde katılımcılar su içindeki nesneleri buruşuk parmaklarla, düz parmaklardan daha hızlı taşıdı. Kuru nesnelerde fark yoktu. Buruşma ıslak nesneleri tutmaya bir uyum olabilir.
 
 Hedefler: **katılımcılar** kolay · **nesnelerde** benzer · **parmaklardan** iki benzer
 
-### B15 · Koku izini süren insanlar (`porter2007`, A tipi, 53 kelime)
+### B15 · Koku izini süren insanlar (`porter2007`, A tipi, 34 kelime)
 
-Koku denince akla köpekler gelir. Bir deneyde insanlardan bir kokunun izini yalnız burunlarıyla sürmeleri istendi. İnsanlar bunu başardı ve denedikçe daha iyi yaptı. Burun deliklerimiz birbirinden yaklaşık üç buçuk santim ayrı yerlerden koku alıyor. İki deliğin farkı izi bulmaya yardım ediyor. Koku alma yeteneğimizin kötü ünü, belki de bu yeteneği az kullanmamızdan geliyor.
+Bir deneyde insanlardan bir kokunun izini yalnız burunlarıyla sürmeleri istendi. İnsanlar bunu başardı ve denedikçe daha iyi yaptı. Burun deliklerimiz yaklaşık üç buçuk santim ayrı yerlerden koku alıyor; bu fark izi bulmaya yardım ediyor.
 
 Hedefler: **santim** kolay · **izini** benzer · **kokuyu** yok
 
-### B16 · Su ayılarının sırrı (`hashimoto2016`, B tipi, 53 kelime)
+### B16 · Su ayılarının sırrı (`hashimoto2016`, B tipi, 34 kelime)
 
-Su ayıları suda yaşayan minicik hayvanlardır. Bazı türleri neredeyse tamamen kurumaya ve kuruyken pek çok zorlu koşula dayanabilir. Araştırmacılar en dayanıklı türlerden birinin genlerini tek tek okudu. Hasara yol açan bazı yollar kaybolmuş, hasarı onaran gen aileleri çoğalmıştı. Yalnız su ayılarında bulunan yeni proteinler de vardı. Su ayılarının dayanıklılığı bu proteinlerle ilişkili görünüyor.
+Su ayıları suda yaşayan minicik hayvanlardır; bazı türleri neredeyse tamamen kurumaya dayanabilir. Araştırmacılar en dayanıklı türlerden birinin genlerini okudu. Hasarı onaran gen aileleri çoğalmıştı. Su ayılarının dayanıklılığı, yalnız su ayılarında bulunan proteinlerle ilişkili görünüyor.
 
 Hedefler: **minicik** kolay · **türlerden** benzer · **ayılarının** iki benzer
 
-### B17 · Yunusun imza ıslığı (`king2013`, A tipi, 50 kelime)
+### B17 · Yunusun imza ıslığı (`king2013`, A tipi, 38 kelime)
 
-Her yunus kendine özgü bir ıslık geliştirir; buna imza ıslığı denir. Islık, sesin tınısından bağımsız olarak kimliği taşır. Araştırmacılar yabani yunuslara kendi ıslıklarının bir kopyasını dinletti. Yunuslar kendi ıslığını duyunca karşılık verdi. Başka yunusların ıslıklarına ise yanıt vermedi. Öğrenilmiş bir sesi ad gibi kullanmak, insan dışındaki memelilerde çok nadir görülür.
+Her yunus kendine özgü bir imza ıslığı geliştirir; ıslık, sesin tınısından bağımsız olarak kimliği taşır. Yabani yunuslar kendi ıslığının kopyasını duyunca karşılık verdi, başka yunusların ıslıklarına vermedi. Öğrenilmiş bir sesi ad gibi kullanmak insan dışındaki memelilerde çok nadirdir.
 
-Hedefler: **tınısından** kolay · **ıslığını** benzer · **yunusun** yok
+Hedefler: **tınısından** kolay · **ıslığının** benzer · **yunusun** yok
 
-### B18 · Dokunarak tadan kollar (`vangiesen2020`, B tipi, 50 kelime)
+### B18 · Dokunarak tadan kollar (`vangiesen2020`, B tipi, 39 kelime)
 
-Ahtapotlar deniz dibini esnek kollarıyla adım adım tarar. Kollar yalnız dokunmaz, dokunduğunu tadar da. Araştırmacılar bu işi yapan alıcıları buldu. Bu alıcılar suda zor çözünen maddeleri, yalnız temas edince algılıyor. Kollardaki farklı hücreler farklı alıcılar taşıyor ve bilgiyi yerinde işliyor. Bu yüzden ahtapot kolları kendi başına karar verir gibi davranabiliyor.
+Ahtapotlar deniz dibini esnek kollarıyla tarar. Kollar dokunduğunu tadar da. Araştırmacılar bu işi yapan alıcıları buldu: suda zor çözünen maddeleri yalnız temasla algılıyorlar. Kollardaki farklı hücreler farklı alıcılar taşıyor. Bu yüzden ahtapot kolları kendi başına karar verir gibi davranabiliyor.
 
 Hedefler: **esnek** kolay · **alıcıları** benzer · **kollarıyla** iki benzer
 
-### B19 · Uyuyan denizanası (`nath2017`, A tipi, 55 kelime)
+### B19 · Denizanası da uyur mu? (`nath2017`, A tipi, 35 kelime)
 
-Denizanasının bir merkezi yoktur; sinirleri bedenine ağ gibi yayılmıştır. Ters denizanası adı verilen bir tür, gün boyu düzenli aralıklarla kasılıp gevşer. Araştırmacılar bu atımları günlerce saydı. Geceleri atımlar seyreldi ve hayvan uyarılara geç tepki verdi. Güçlü bir uyarıyla ise hemen kendine geldi. Gece uyutulmayan denizanaları ertesi gün daha durgundu. Bu, uykunun çok eski olduğunu düşündürüyor.
+Ters denizanası gün boyu düzenli aralıklarla kasılıp gevşer. Araştırmacılar bu atımları günlerce saydı. Geceleri atımlar seyreldi ve hayvan uyarılara geç tepki verdi. Gece uyutulmayan denizanaları ertesi gün daha durgundu. Bu, uykunun çok eski olabileceğini düşündürüyor.
 
 Hedefler: **gevşer** kolay · **atımları** benzer · **denizanasına** yok
 
-### B20 · Sayı sayan sinekkapan (`bohm2016`, B tipi, 50 kelime)
+### B20 · Sayı sayan sinekkapan (`bohm2016`, B tipi, 30 kelime)
 
-Venüs sinekkapanı, yapraklarındaki duyarlı tüylere iki kez dokunulunca kapanır. Ama kapan yemeğe değip değmeyeceğini saymadan karar vermez. Araştırmacılar tüyleri sırayla uyarıp sinyalleri saydı. İki dokunuştan sonra kapanma yolu açıldı. Üçten fazla dokunuşta sindirim genleri çalışmaya başladı. Dokunuş arttıkça gen etkinliği de arttı. Çırpınan böcek, kendi dokunuşlarıyla besin olduğunu bildirmiş oluyor.
+Venüs sinekkapanı, duyarlı tüylere iki kez dokunulunca kapanır. Araştırmacılar tüyleri uyarıp sinyalleri saydı. Üçten fazla dokunuşta sindirim genleri çalıştı; dokunuş arttıkça etkinlik arttı. Çırpınan böcek, kendi dokunuşlarıyla besin olduğunu bildiriyor.
 
 Hedefler: **böcek** kolay · **tüylere** benzer · **dokunuşlarıyla** iki benzer
 
-### B21 · Yüzün peşindeki yenidoğan (`johnson1991`, A tipi, 55 kelime)
+### B21 · Yüzün peşindeki yenidoğan (`johnson1991`, A tipi, 31 kelime)
 
-Yaşamlarının ilk saatindeki bebeklere yavaşça hareket eden kartlar gösterildi. Kartlardan birinde yüze benzeyen bir çizim, öbürlerinde karışık çizgiler vardı. Bebekler yüze benzeyen çizimi başlarıyla ve gözleriyle daha uzağa kadar izledi. Bu bulgu iki ayrı doğumevinde yinelendi. Bulgu, bebeklerin yüze benzeyen desenlere yaşamın ilk saatinden ilgi gösterdiğini düşündürüyor. İlginç biçimde bu güçlü takip ikinci ayda azaldı.
+Yaşamlarının ilk saatindeki bebeklere yavaşça hareket eden çizimler gösterildi. Bebekler yüze benzeyen çizimi, karışık çizgilerden daha uzağa kadar izledi. Bulgu ikinci bir doğumevinde de yinelendi. Bu güçlü takip ikinci ayda azaldı.
 
 Hedefler: **doğumevinde** kolay · **çizimi** benzer · **bebeğin** yok
 
-### B22 · Monet ile Picasso'yu ayıran güvercinler (`watanabe1995`, B tipi, 51 kelime)
+### B22 · Monet ile Picasso'yu ayıran güvercinler (`watanabe1995`, B tipi, 30 kelime)
 
-Güvercinlere Monet'nin ve Picasso'nun tablolarının renkli fotoğrafları gösterildi. Kuşlar zamanla iki ressamı ayırmayı öğrendi. Daha önce hiç görmedikleri tabloları da doğru ayırdılar. Monet'den Cezanne ve Renoir'a, Picasso'dan Braque ve Matisse'e genelleme yaptılar. Monet tabloları ters çevrilince ayırma bozuldu, Picasso tabloları ters çevrilince bozulmadı. Belki de kuşlar Monet tablolarında resmedilen nesnelere bakıyordu.
+Güvercinler zamanla Monet'nin ve Picasso'nun tablolarını ayırmayı öğrendi; hiç görmedikleri yeni tabloları da ayırdılar. Monet'den Renoir'a, Picasso'dan Matisse'e genelleme yaptılar. Monet tabloları ters çevrilince ayırma bozuldu, Picasso tablolarının tersi bozmadı.
 
 Hedefler: **Renoir'a** kolay · **tablolarının** benzer · **Picasso'dan** iki benzer
 
-### B23 · Yüz ayırt eden okçu balığı (`newport2016`, A tipi, 54 kelime)
+### B23 · Yüz ayırt eden okçu balığı (`newport2016`, A tipi, 30 kelime)
 
-Okçu balığı, avını sudan tükürdüğü bir su okuyla düşürür. Araştırmacılar bu tükürüğü bir seçim aracı yaptı. Balıklara ekranda iki insan yüzü birlikte gösterildi; öğrendikleri yüze su tükürdüler ve 44 yüz arasından doğruyu seçebildiler. Renk, kafa biçimi ve parlaklık eşitlendiğinde de başarılı oldular. Balıkların insan yüzüne özel bir donanımı olmadığı düşünülüyor; yine de bunu yapabildiler.
+Okçu balığı avını tükürdüğü suyla düşürür. Balıklara ekranda iki insan yüzü gösterildi; öğrendikleri yüze su tükürdüler ve 44 yüz arasından doğruyu seçebildiler. Renk, kafa biçimi ve parlaklık eşitlenince de başardılar.
 
 Hedefler: **parlaklık** kolay · **yüze** benzer · **balığın** yok
 
-### B24 · Kızgın yüzü fark eden atlar (`smith2016`, B tipi, 52 kelime)
+### B24 · Kızgın yüzü fark eden atlar (`smith2016`, B tipi, 40 kelime)
 
-Atlara aynı yabancının gülen ve kızgın yüz fotoğrafları gösterildi. Kızgın yüzü görünce atlar başını çevirip ona daha çok sol gözüyle baktı. Hayvanlarda sol gözle bakış, olumsuz algılanan durumlarda sık görülür. Kızgın yüzler karşısında atların kalp atışı da daha hızlı yükseldi. İnsan yüz ifadesine böyle yönlü bir tepki daha önce yalnız köpeklerde gösterilmişti.
+Atlara aynı yabancının gülen ve kızgın yüzlerinin fotoğrafları gösterildi. Atlar kızgın yüzü daha çok sol gözüyle izledi; bu göz tercihi olumsuz durumlarda sık görülür. Kalp atışları daha hızlı yükseldi. İnsan yüz ifadesine böyle bir tepki daha önce yalnız köpeklerde gösterilmişti.
 
 Hedefler: **köpeklerde** kolay · **gözüyle** benzer · **yüzü** iki benzer
 

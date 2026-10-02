@@ -14,6 +14,8 @@ Sahibin isteği: `SAHIP_ISTEGI.md`. Araştırma: `ARA_RAPOR_1.md`, `arastirma/KA
 ## 1. Sahip kararları (2026-10-02)
 | Soru | Karar |
 |---|---|
+| Metin uzunluğu | 30–40 kelime |
+| Sonuçta kıyas | "En hızlı turun" rekor satırı |
 | "Ağ bağlı" | Nef'e bağlı. Metinler uygulama paketinde durur, internetsiz çalışır; yeni metinler sürümle gelir |
 | Ad | Kelime Avı |
 | Süre | Kelime başına 20 sn, ince çizgi; büyük geri sayım ve puan yok |
@@ -46,18 +48,19 @@ işareti kelimenin parçasıdır ("Renoir'a"). Dokunma alanı her kelimede en az
 kelimeye taşmaz.
 
 ## 4. Metinler ve hedefler
-- Havuz 24 metin (`maket/metinler.js`, METINLER B). Her metin 50–75 kelime, A ve B tipi sırayla.
+- Havuz 24 metin (`maket/metinler.js`, METINLER B). Her metin 30–40 kelime (sahip kararı 2026-10-02: kapıda uzun metin "yazı duvarı" bulundu), A ve B tipi sırayla.
 - Sabit karışım: her tur bir A ve bir B metni, yani 2 kolay, 2 benzer, 1 iki benzer, 1 yok. Zorluk merdiveni yok;
   her tur aynı karışımda olduğu için günden güne süre aynı işi ölçer. Çeşitlilik metinlerden gelir.
 - Sıra: metinler çiftler hâlinde sırayla; 12 tur sonra başa döner, ikinci turda çiftler kayar (1+4, 3+6 …) ki aynı
   ikili tekrar etmesin. İmleç `kelime-avi:next`.
-- Hedef konumu: havuz genelinde baş, orta ve son üçte birler 16 / 29 / 15. Orta yoğun; yeni metinlerde baş ve son
-  üçte birlere öncelik.
+- Hedef konumu: havuz genelinde baş, orta ve son üçte birler 19 / 24 / 17.
+- Hedef kelime metindeki başka bir kelimenin başında geçemez; benzer biçimli hedeflerde uzun biçim aranır, kısa biçim
+  çeldiricidir (kapı tur 2: "arıların" metindeki "arılarına"nın içinde görününce "Yok" haksız bulundu).
 - Denetim: `node maket/denetle.mjs`. Kontrol ettikleri: kelime sayısı, hedef türü kuralları, aynı kaynağın iki kez
   kullanılması, yasak sözcükler (beyin, tanıma, tedavi, hastalık…). Ana oturum bu kuralları
   `lib/kelimeAvi.test.js` testine taşır.
 - Yeni metin ekleme yolu: PubMed aracıyla PMID ve DOI doğrula → yalnız özette yazanla kendi cümlelerinle yaz →
-  denetim → 5 sn kapısında metin okunur mu → sahip onayı.
+  denetim → 5 sn kapısında metin okunur mu → sahip onayı. Deneyi anlatan her fiil özetteki fiille aynı olur.
 
 ## 5. Ölçüm ve Gelişim bağı
 ### 5.1 Metrik (`progress.metrics`)
@@ -101,18 +104,19 @@ kelimeye taşmaz.
 - Nef sözleşme testi (Nef PLAN §4.8 madde 3) bu modül için geçmeli.
 
 ## 7. Ekranlar ve bağlayıcı tasarım maddeleri
-Maketteki hâl yön ve içerik içindir; tasarım tokenları uygulamanınkidir.
-1. Metin kartı kâğıt rengi, yazı 390'da 19 px / 1,58; 320'de 16 px / 1,45. 75 kelimelik metin 320×568'de kaydırmasız
-   sığmalı. Sığmazsa yazı küçülmez, metin kısaltılır.
+Maketteki hâl yön ve içerik içindir; tasarım tokenları uygulamanınkidir. Kapı kayıtları `kapi/`.
+1. Arama: aranan kelime ortada, büyük ve renkli; altında süre çizgisi ve kalan süre "{s} sn" yazıyla. Metin kartı
+   sol kenarında renkli şerit, yazı 390'da 25 px / 1,55, 320'de 19 px / 1,5, kart içinde dikey ortalı. 40 kelimelik
+   metin 320×568'de kaydırmasız sığmalı; sığmazsa yazı küçülmez, metin kısalır.
 2. Arama sırasında metin kartında yalnız metin olur; kaynak satırı, bulunan kelime işareti, puan yok.
-3. Aranan kelime kartı: büyüteç, kelime, altta süre çizgisi. 320'de etiket gizli, tek satır.
-4. Bulma anı: kart yeşil, süre büyük; kelime dolu renk ve halka. Yanıp sönme yok, tek ve yumuşak geçiş.
-5. "Yok" doğruysa kart yeşil ve benzer biçimlerin altı kesik çizgili; öğretici an, düzeltme gibi okunmaz.
-6. Sonuç: büyük süre, üç küçük sayı kutusu, Gelişim kutusu metrik adıyla, okunan bulguların başlığı ve kaynağı.
-7. İddia sınırı "Neye dayanıyor?" sayfasında (N5); girişte yalnız bağlantı.
-8. Erişilebilirlik: kelimeler sesli okuyucuda tek tek seçilebilir; renk tek başına bilgi taşımaz (bulunan kelimede
-   kalın yazı ve halka da var); dokunma alanı ≥ 44 pt; `prefers-reduced-motion`'da halka ve sallanma yok.
-9. Kapı kayıtları: `kapi/5sn-tur1.md`, `kapi/5sn-tur2.md`.
+3. Bulma anı: "Buldun", kelime ve süre yeşil; metindeki kelime dolu renk ve halka. Yanıp sönme yok.
+4. "Yok" doğru: "Doğru, metinde yok", altında A7b; benzer biçimler kesik çizgili kutuda, üstü çizili değil.
+   Düğme "Devam".
+5. Sonuç: büyük süre ve sağda "{d}/6 doğru"; S3; "En hızlı turun" satırı; "Bugün öğrendiğin" kartları başlık ve
+   kaynakla, PMID bölünmez; Gelişim kutusu metrik adıyla.
+6. İddia sınırı "Neye dayanıyor?" sayfasında (N5); girişte yalnız bağlantı.
+7. Erişilebilirlik: kelimeler sesli okuyucuda tek tek seçilebilir; renk tek başına bilgi taşımaz; dokunma alanı
+   ≥ 44 pt; `prefers-reduced-motion`'da halka ve sallanma yok. Kaynak yazısı en az 12 px, ikincil metin `ink-2`.
 
 ## 8. Aşamalar (ana oturum uygular)
 | Aşama | İş | Bitti ölçütü |

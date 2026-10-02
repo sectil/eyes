@@ -4,8 +4,8 @@ window.TEXTS = [
   "id": "arilar-sifir",
   "src": "howard2018",
   "type": "A",
-  "title": "Sıfırı en küçük sayan arılar",
-  "text": "Araştırmacılar bal arılarına kartlardaki şekil sayısını karşılaştırmayı öğretti. Kartlarda birden altıya kadar şekil vardı ve arılar daha az şekilli olanı seçmeyi öğrendi. Ardından hiç şekil taşımayan boş bir kart gösterildi. Arılar boş kartı, tek şekilli karttan da daha az saydı. Araştırmacılara göre arılar sıfırı sayıların en küçüğü gibi ele aldı. Benzer bir beceri daha önce papağanlarda, maymunlarda ve okul öncesi çocuklarda görülmüştü.",
+  "title": "Boş kartı en az sayan arılar",
+  "text": "Bal arıları kartlardaki şekilleri karşılaştırıp daha az şekilli olanı seçmeyi öğrendi. Sonra boş bir kart gösterildi. Arılar boş kartı, tek şekilli karttan da az saydı. Benzer bir beceri papağanlarda ve maymunlarda da görülmüştü.",
   "targets": [
    {
     "w": "papağanlarda",
@@ -13,7 +13,8 @@ window.TEXTS = [
    },
    {
     "w": "kartı",
-    "t": "S"
+    "t": "S",
+    "r": "kart"
    },
    {
     "w": "arıya",
@@ -26,8 +27,8 @@ window.TEXTS = [
   "id": "kuzgun-plan",
   "src": "kabadayi2017",
   "type": "B",
-  "title": "17 saat sonrası için seçen kuzgunlar",
-  "text": "Geleceği planlamak uzun süre insana ve büyük maymunlara özgü sanıldı. Bir deneyde kuzgunlar da benzer bir beceri gösterdi. Kuşlar, ileride kullanacakları bir aleti ve takasta işe yarayacak bir nesneyi 17 saate varan bir süre öncesinden seçebildi. Kendilerini tutmayı da başardılar. Sonuçları büyük maymunlarınkine benziyor. Araştırmacılara göre bu planlama becerisi kuzgunlarda, maymunlardan bağımsız olarak gelişmiş.",
+  "title": "17 saat sonrası için alet seçen kuzgunlar",
+  "text": "Geleceği planlamak uzun süre insana ve büyük maymunlara özgü sanıldı. Bir deneyde kuzgunlar, ileride kullanacakları bir aleti 17 saat öncesinden seçebildi; kendilerini de tuttular. Sonuçlar maymunlarınkine benziyor. Araştırmacılara göre bu beceri kuzgunlarda, maymunlardan bağımsız gelişmiş.",
   "targets": [
    {
     "w": "aleti",
@@ -40,7 +41,8 @@ window.TEXTS = [
    },
    {
     "w": "maymunlara",
-    "t": "Z"
+    "t": "Z",
+    "r": "maymun"
    }
   ]
  },
@@ -48,8 +50,8 @@ window.TEXTS = [
   "id": "fil-adlari",
   "src": "pardo2024",
   "type": "A",
-  "title": "Birbirine adla seslenen filler",
-  "text": "Yabani Afrika filleri birbirine seslenirken kişiye özgü çağrılar kullanıyor. Araştırmacılar kayıtları bilgisayarla inceledi ve bir çağrının kime yöneldiğini sesin yapısından tahmin edebildi. Kayıtlar fillere geri dinletildiğinde her fil kendisine yöneltilmiş çağrıya daha güçlü tepki verdi. Yunuslar ve papağanlar karşısındakinin sesini taklit ederek seslenir. Fillerin ise taklit etmeden, ada benzer seslerle seslendiği düşünülüyor.",
+  "title": "Ada benzer çağrılarla seslenen filler",
+  "text": "Yabani Afrika filleri birbirine kişiye özgü çağrılarla sesleniyor. Kayıtlar geri dinletildiğinde her fil, kendisine yöneltilmiş çağrıya daha güçlü tepki verdi. Yunuslar karşısındakinin sesini taklit eder; fillerin ise taklit etmeden, ada benzer seslerle seslendiği düşünülüyor.",
   "targets": [
    {
     "w": "Yunuslar",
@@ -57,7 +59,8 @@ window.TEXTS = [
    },
    {
     "w": "çağrıya",
-    "t": "S"
+    "t": "S",
+    "r": "çağrı"
    },
    {
     "w": "filin",
@@ -71,7 +74,7 @@ window.TEXTS = [
   "src": "ishiyama2016",
   "type": "B",
   "title": "Gıdıklanınca zıplayan sıçanlar",
-  "text": "Sıçanlar gıdıklandığında insan kulağının duyamayacağı kadar ince sesler çıkarır. Araştırmacılar bunu yeniden gösterdi ve fazlasını da gördü. Gıdıklanan hayvanlar ele yaklaştı ve kendiliğinden havaya zıpladı. Almancada bu sıçrayışlara sevinç sıçrayışı deniyor. Ortam ürkütücü olduğunda ise gıdıklanma aynı etkiyi yapmadı, çıkan ses azaldı. Bulgular, gıdıklanma ile oyun arasında bir bağ olduğunu düşündürüyor.",
+  "text": "Sıçanlar gıdıklandığında insan kulağının duyamayacağı ince sesler çıkarır. Gıdıklanan sıçanlar ele yaklaştı ve kendiliğinden zıpladı; bu sıçrayışlara sevinç sıçrayışı deniyor. Ortam ürkütücüyse gıdıklanma aynı etkiyi yapmadı. Bulgular gıdıklanma ile oyun arasında bir bağ olduğunu düşündürüyor.",
   "targets": [
    {
     "w": "zıpladı",
@@ -79,7 +82,8 @@ window.TEXTS = [
    },
    {
     "w": "sıçrayışlara",
-    "t": "S"
+    "t": "S",
+    "r": "sıçrayış"
    },
    {
     "w": "gıdıklandığında",
@@ -93,7 +97,7 @@ window.TEXTS = [
   "src": "reinhold2019",
   "type": "A",
   "title": "Saklambaç oynayan sıçanlar",
-  "text": "Araştırmacılar sıçanlarla saklambaç oynadı. Yemek ödülü yoktu; bulunca ya da bulununca sıçanlar yalnızca oyunla, şakalaşmayla karşılandı. Hayvanlar oyunu çabuk öğrendi, saklanan ve arayan rolleri arasında geçiş yaptı. Ararken gözlerini ve eski saklanma yerlerinin anısını kullandılar. Saklanırken neredeyse hiç ses çıkarmadılar ve içi görünmeyen kutuları seçtiler. Araştırmacılara göre bu oyun çok eski olabilir.",
+  "text": "Araştırmacılar sıçanlarla, yemek ödülü vermeden saklambaç oynadı. Sıçanlar oyunu çabuk öğrendi, saklanan ve arayan rolleri arasında geçti. Saklanırken pek ses çıkarmadılar ve içi görünmeyen kutuları seçtiler; ararken eski saklanma yerlerini hatırladılar.",
   "targets": [
    {
     "w": "kutuları",
@@ -101,11 +105,13 @@ window.TEXTS = [
    },
    {
     "w": "saklanma",
-    "t": "S"
+    "t": "S",
+    "r": "saklan"
    },
    {
     "w": "oyunun",
-    "t": "Y"
+    "t": "Y",
+    "r": "oyun"
    }
   ]
  },
@@ -113,8 +119,8 @@ window.TEXTS = [
   "id": "bitki-sesi",
   "src": "khait2023",
   "type": "B",
-  "title": "Susayan bitkinin sesi",
-  "text": "Bitkiler zor durumda kalınca rengini, kokusunu ve biçimini değiştirir. Yeni bir çalışma bir şey daha buldu: ses. Domates ve tütün bitkileri susuz kaldığında ya da kesildiğinde, uzaktan kaydedilebilen ultrasonik sesler çıkardı. Kayıtlar sessiz bir odada ve bir serada yapıldı. Bilgisayar, yalnız bu seslere bakarak bitkinin susuz mu, kesilmiş mi olduğunu ayırt edebildi. Bu sesleri başka canlılar da duyuyor olabilir.",
+  "title": "Susuz kalan bitkinin sesi",
+  "text": "Domates ve tütün bitkileri susuz kaldığında ya da kesildiğinde, uzaktan kaydedilebilen ultrasonik sesler çıkardı. Kayıtlar sessiz bir odada ve bir serada yapıldı. Bilgisayar yalnız bu seslere bakarak bitkinin durumunu ayırt edebildi.",
   "targets": [
    {
     "w": "serada",
@@ -122,7 +128,8 @@ window.TEXTS = [
    },
    {
     "w": "bitkinin",
-    "t": "S"
+    "t": "S",
+    "r": "bitki"
    },
    {
     "w": "seslere",
@@ -136,7 +143,7 @@ window.TEXTS = [
   "src": "dolensek2020",
   "type": "A",
   "title": "Farelerin yüz ifadesi",
-  "text": "Bir hayvanın ne hissettiğini anlamak çoğu zaman zordur. Araştırmacılar farelerin yüzünü yakından filme aldı. Hoş ya da tatsız olaylar karşısında farelerin yüzünde her seferinde benzer, kalıp ifadeler belirdi. Bilgisayar bu ifadeleri ayrı gruplara ayırabildi. Aynı uyaran, hayvanın o anki durumuna göre farklı bir ifade doğurdu. Yani yüz, o anki durumu yansıtıyordu.",
+  "text": "Araştırmacılar farelerin yüzünü yakından filme aldı. Hoş ya da tatsız olaylarda yüzlerinde kalıp ifadeler belirdi. Bilgisayar bu ifadeleri gruplara ayırdı. Aynı uyaran, hayvanın o anki durumuna göre farklı bir ifade doğurdu.",
   "targets": [
    {
     "w": "filme",
@@ -144,11 +151,13 @@ window.TEXTS = [
    },
    {
     "w": "ifadeleri",
-    "t": "S"
+    "t": "S",
+    "r": "ifade"
    },
    {
     "w": "farenin",
-    "t": "Y"
+    "t": "Y",
+    "r": "fare"
    }
   ]
  },
@@ -157,7 +166,7 @@ window.TEXTS = [
   "src": "medeiros2021",
   "type": "B",
   "title": "Ahtapotun iki uykusu",
-  "text": "Dört ahtapot uyurken kameraya alındı. Uykuda iki ayrı evre göze çarptı. Sakin evrede derileri soluk, gözbebekleri kapalıydı ve bu evre uzun sürdü. Hareketli evrede ise derileri renkten renge girdi, gözleri hızla kıpırdadı; bu evre yaklaşık kırk saniye sürdü. Hareketli evre çoğunlukla sakin evrenin ardından, yarım saate yakın aralarla geldi. Bu düzen, kuşların ve memelilerin uyku döngüsünü andırıyor.",
+  "text": "Dört ahtapot uyurken kameraya alındı. Uykuda iki evre vardı. Sakin evrede derileri soluktu. Hareketli evrede derileri renkten renge girdi, gözleri kıpırdadı. Bu evre çoğunlukla sakin evrenin ardından, yarım saate yakın aralarla geldi. Bu düzen kuşların ve memelilerin uyku döngüsünü andırıyor.",
   "targets": [
    {
     "w": "kameraya",
@@ -180,7 +189,7 @@ window.TEXTS = [
   "src": "andics2016",
   "type": "A",
   "title": "Köpekler sözü ve tonu ayırıyor",
-  "text": "Bir köpeğe aynı övgü sözünü neşeli ve düz bir sesle söylediğinizi düşünün. Eğitilmiş köpekler tarayıcıda kıpırdamadan yatarken bu sözleri dinledi. Köpekler sözcüğün anlamını ve ses tonunu ayrı ayrı işledi. Hoşnutluk tepkisi ise yalnız söz de ton da övgü olduğunda belirdi. Bu iki bilgiyi ayırıp birleştirme yeteneği, dil olmadan da gelişebiliyor.",
+  "text": "Eğitilmiş köpekler tarayıcıda kıpırdamadan yatarken övgü sözlerini neşeli ve düz bir sesle dinledi. Köpekler sözcüğün anlamını ve ses tonunu ayrı işledi. Hoşnutluk tepkisi ise yalnız söz de ton da övgü olduğunda belirdi.",
   "targets": [
    {
     "w": "tarayıcıda",
@@ -193,7 +202,8 @@ window.TEXTS = [
    },
    {
     "w": "köpeğin",
-    "t": "Y"
+    "t": "Y",
+    "r": "köpe"
    }
   ]
  },
@@ -202,7 +212,7 @@ window.TEXTS = [
   "src": "shwartz2020",
   "type": "B",
   "title": "Tüyleri diken diken eden ikili",
-  "text": "Üşüdüğümüzde tüylerimiz diken diken olur. Bunu kıl köküne bağlı küçük bir kas ile ona uzanan bir sinir yapar. Farelerde yapılan bir çalışma bu ikilinin başka bir işini de buldu. Sinir, kılı yeniden üreten hücrelerin ne zaman çalışacağını etkiliyor; kas da bu sinirin yerinde kalmasını sağlıyor. Yani diken diken olan tüyler ile yeni tüylerin çıkması aynı ekipten.",
+  "text": "Üşüdüğümüzde tüylerimiz diken diken olur. Bunu kıl köküne bağlı küçük bir kas ile bir sinir yapar. Farelerde bu sinir, kılı yeniden üreten hücreleri de etkiliyor. Yani diken diken olan tüyler ile yeni tüylerin çıkması aynı ekipten.",
   "targets": [
    {
     "w": "Üşüdüğümüzde",
@@ -225,7 +235,7 @@ window.TEXTS = [
   "src": "kohda2019",
   "type": "A",
   "title": "Aynaya bakan balık",
-  "text": "Aynada kendini bilmek uzun süre memelilere ve kuşlara özgü sanıldı. Temizlikçi balık adlı küçük bir balık bu sınırı zorladı. Balıklar önce yansımaya bir yabancıymış gibi tepki verdi, sonra aynanın önünde tuhaf hareketler denedi, sonunda yansımasını uzun uzun izledi. Bedenine renkli bir işaret konunca, ayna karşısında bedenini bir yüzeye sürterek işareti silmeye çalıştı. Şeffaf işarete ve aynasız ortama hiç tepki vermedi.",
+  "text": "Temizlikçi balık adlı küçük bir balık aynanın önünde önce yabancıya tepki verir gibi davrandı, sonra yansımasını uzun uzun izledi. Bedenine renkli bir işaret konunca, ayna karşısında bedenini sürterek işareti silmeye çalıştı. Aynasız ortamda bunu yapmadı.",
   "targets": [
    {
     "w": "sürterek",
@@ -238,7 +248,8 @@ window.TEXTS = [
    },
    {
     "w": "balığın",
-    "t": "Y"
+    "t": "Y",
+    "r": "balı"
    }
   ]
  },
@@ -247,7 +258,7 @@ window.TEXTS = [
   "src": "saito2019",
   "type": "B",
   "title": "Kediler adını ayırt ediyor",
-  "text": "Kedilerin bizi dinlemediği söylenir. Bir deneyde kedilere önce dört sıradan sözcük ya da evdeki başka kedilerin adları dinletildi. Kediler alışıp ilgisini kaybettikten sonra kendi adlarını duydu ve belirgin biçimde yeniden tepki verdi. Bu, adı yabancı biri söylese de oldu. Kedi kafede yaşayan kediler ise kendi adını evdeki öbür kedilerin adlarından ayıramadı.",
+  "text": "Bir deneyde kedilere önce sıradan sözcükler ya da evdeki başka kedilerin adları dinletildi. Kediler alıştıktan sonra kendi adlarını duyunca yeniden tepki verdi; adı yabancı biri söylese de. Kedi kafedeki kediler ise kendi adını öbür kedilerin adlarından ayıramadı.",
   "targets": [
    {
     "w": "yabancı",
@@ -270,7 +281,7 @@ window.TEXTS = [
   "src": "nawroth2018",
   "type": "A",
   "title": "Gülen yüzü seçen keçiler",
-  "text": "Köpekler ve atlar insan yüzünü okuyabiliyor. Peki süt ve et için yetiştirilen keçiler? Bir duvara aynı yabancının iki fotoğrafı asıldı: birinde gülüyor, öbüründe kızgındı. Keçiler arenanın öbür ucundan bırakıldı. Çoğu, önce gülen yüze gitti ve onunla daha uzun ilgilendi. Bu tercih, gülen yüz sağ taraftayken belirgindi. Evcilleşme, hayvanların zihnini sandığımızdan derin etkilemiş olabilir.",
+  "text": "Bir duvara aynı yabancının iki fotoğrafı asıldı: birinde gülüyor, öbüründe kızgındı. Arenanın öbür ucundan bırakılan keçilerden çoğu önce gülen yüze gitti. Bu tercih, gülen yüz sağ taraftayken belirgin biçimde görüldü.",
   "targets": [
    {
     "w": "arenanın",
@@ -293,7 +304,7 @@ window.TEXTS = [
   "src": "kareklas2013",
   "type": "B",
   "title": "Suda buruşan parmaklar",
-  "text": "Elimiz uzun süre suda kalınca parmak uçlarımız yavaş yavaş buruşur. Bu buruşma kendiliğinden olmaz; sinir sistemimiz onu yönetir. Bir deneyde katılımcılar küçük nesneleri elleriyle taşıdı. Nesneler suyun içindeyken, buruşuk parmaklar düz parmaklardan daha hızlı çalıştı. Kuru nesnelerde ise buruşukluk hiç fark yaratmadı. Parmak buruşması, ıslak nesneleri tutmak için bir uyum olabilir.",
+  "text": "Elimiz suda kalınca parmak uçlarımız buruşur. Bu buruşmayı sinir sistemimiz yönetir. Bir deneyde katılımcılar su içindeki nesneleri buruşuk parmaklarla, düz parmaklardan daha hızlı taşıdı. Kuru nesnelerde fark yoktu. Buruşma ıslak nesneleri tutmaya bir uyum olabilir.",
   "targets": [
    {
     "w": "katılımcılar",
@@ -316,7 +327,7 @@ window.TEXTS = [
   "src": "porter2007",
   "type": "A",
   "title": "Koku izini süren insanlar",
-  "text": "Koku denince akla köpekler gelir. Bir deneyde insanlardan bir kokunun izini yalnız burunlarıyla sürmeleri istendi. İnsanlar bunu başardı ve denedikçe daha iyi yaptı. Burun deliklerimiz birbirinden yaklaşık üç buçuk santim ayrı yerlerden koku alıyor. İki deliğin farkı izi bulmaya yardım ediyor. Koku alma yeteneğimizin kötü ünü, belki de bu yeteneği az kullanmamızdan geliyor.",
+  "text": "Bir deneyde insanlardan bir kokunun izini yalnız burunlarıyla sürmeleri istendi. İnsanlar bunu başardı ve denedikçe daha iyi yaptı. Burun deliklerimiz yaklaşık üç buçuk santim ayrı yerlerden koku alıyor; bu fark izi bulmaya yardım ediyor.",
   "targets": [
    {
     "w": "santim",
@@ -339,7 +350,7 @@ window.TEXTS = [
   "src": "hashimoto2016",
   "type": "B",
   "title": "Su ayılarının sırrı",
-  "text": "Su ayıları suda yaşayan minicik hayvanlardır. Bazı türleri neredeyse tamamen kurumaya ve kuruyken pek çok zorlu koşula dayanabilir. Araştırmacılar en dayanıklı türlerden birinin genlerini tek tek okudu. Hasara yol açan bazı yollar kaybolmuş, hasarı onaran gen aileleri çoğalmıştı. Yalnız su ayılarında bulunan yeni proteinler de vardı. Su ayılarının dayanıklılığı bu proteinlerle ilişkili görünüyor.",
+  "text": "Su ayıları suda yaşayan minicik hayvanlardır; bazı türleri neredeyse tamamen kurumaya dayanabilir. Araştırmacılar en dayanıklı türlerden birinin genlerini okudu. Hasarı onaran gen aileleri çoğalmıştı. Su ayılarının dayanıklılığı, yalnız su ayılarında bulunan proteinlerle ilişkili görünüyor.",
   "targets": [
    {
     "w": "minicik",
@@ -347,7 +358,8 @@ window.TEXTS = [
    },
    {
     "w": "türlerden",
-    "t": "S"
+    "t": "S",
+    "r": "tür"
    },
    {
     "w": "ayılarının",
@@ -361,19 +373,21 @@ window.TEXTS = [
   "src": "king2013",
   "type": "A",
   "title": "Yunusun imza ıslığı",
-  "text": "Her yunus kendine özgü bir ıslık geliştirir; buna imza ıslığı denir. Islık, sesin tınısından bağımsız olarak kimliği taşır. Araştırmacılar yabani yunuslara kendi ıslıklarının bir kopyasını dinletti. Yunuslar kendi ıslığını duyunca karşılık verdi. Başka yunusların ıslıklarına ise yanıt vermedi. Öğrenilmiş bir sesi ad gibi kullanmak, insan dışındaki memelilerde çok nadir görülür.",
+  "text": "Her yunus kendine özgü bir imza ıslığı geliştirir; ıslık, sesin tınısından bağımsız olarak kimliği taşır. Yabani yunuslar kendi ıslığının kopyasını duyunca karşılık verdi, başka yunusların ıslıklarına vermedi. Öğrenilmiş bir sesi ad gibi kullanmak insan dışındaki memelilerde çok nadirdir.",
   "targets": [
    {
     "w": "tınısından",
     "t": "E"
    },
    {
-    "w": "ıslığını",
-    "t": "S"
+    "w": "ıslığının",
+    "t": "S",
+    "r": "ısl"
    },
    {
     "w": "yunusun",
-    "t": "Y"
+    "t": "Y",
+    "r": "yunus"
    }
   ]
  },
@@ -382,7 +396,7 @@ window.TEXTS = [
   "src": "vangiesen2020",
   "type": "B",
   "title": "Dokunarak tadan kollar",
-  "text": "Ahtapotlar deniz dibini esnek kollarıyla adım adım tarar. Kollar yalnız dokunmaz, dokunduğunu tadar da. Araştırmacılar bu işi yapan alıcıları buldu. Bu alıcılar suda zor çözünen maddeleri, yalnız temas edince algılıyor. Kollardaki farklı hücreler farklı alıcılar taşıyor ve bilgiyi yerinde işliyor. Bu yüzden ahtapot kolları kendi başına karar verir gibi davranabiliyor.",
+  "text": "Ahtapotlar deniz dibini esnek kollarıyla tarar. Kollar dokunduğunu tadar da. Araştırmacılar bu işi yapan alıcıları buldu: suda zor çözünen maddeleri yalnız temasla algılıyorlar. Kollardaki farklı hücreler farklı alıcılar taşıyor. Bu yüzden ahtapot kolları kendi başına karar verir gibi davranabiliyor.",
   "targets": [
    {
     "w": "esnek",
@@ -390,7 +404,8 @@ window.TEXTS = [
    },
    {
     "w": "alıcıları",
-    "t": "S"
+    "t": "S",
+    "r": "alıcı"
    },
    {
     "w": "kollarıyla",
@@ -403,8 +418,8 @@ window.TEXTS = [
   "id": "denizanasi-uyku",
   "src": "nath2017",
   "type": "A",
-  "title": "Uyuyan denizanası",
-  "text": "Denizanasının bir merkezi yoktur; sinirleri bedenine ağ gibi yayılmıştır. Ters denizanası adı verilen bir tür, gün boyu düzenli aralıklarla kasılıp gevşer. Araştırmacılar bu atımları günlerce saydı. Geceleri atımlar seyreldi ve hayvan uyarılara geç tepki verdi. Güçlü bir uyarıyla ise hemen kendine geldi. Gece uyutulmayan denizanaları ertesi gün daha durgundu. Bu, uykunun çok eski olduğunu düşündürüyor.",
+  "title": "Denizanası da uyur mu?",
+  "text": "Ters denizanası gün boyu düzenli aralıklarla kasılıp gevşer. Araştırmacılar bu atımları günlerce saydı. Geceleri atımlar seyreldi ve hayvan uyarılara geç tepki verdi. Gece uyutulmayan denizanaları ertesi gün daha durgundu. Bu, uykunun çok eski olabileceğini düşündürüyor.",
   "targets": [
    {
     "w": "gevşer",
@@ -412,7 +427,8 @@ window.TEXTS = [
    },
    {
     "w": "atımları",
-    "t": "S"
+    "t": "S",
+    "r": "atım"
    },
    {
     "w": "denizanasına",
@@ -426,7 +442,7 @@ window.TEXTS = [
   "src": "bohm2016",
   "type": "B",
   "title": "Sayı sayan sinekkapan",
-  "text": "Venüs sinekkapanı, yapraklarındaki duyarlı tüylere iki kez dokunulunca kapanır. Ama kapan yemeğe değip değmeyeceğini saymadan karar vermez. Araştırmacılar tüyleri sırayla uyarıp sinyalleri saydı. İki dokunuştan sonra kapanma yolu açıldı. Üçten fazla dokunuşta sindirim genleri çalışmaya başladı. Dokunuş arttıkça gen etkinliği de arttı. Çırpınan böcek, kendi dokunuşlarıyla besin olduğunu bildirmiş oluyor.",
+  "text": "Venüs sinekkapanı, duyarlı tüylere iki kez dokunulunca kapanır. Araştırmacılar tüyleri uyarıp sinyalleri saydı. Üçten fazla dokunuşta sindirim genleri çalıştı; dokunuş arttıkça etkinlik arttı. Çırpınan böcek, kendi dokunuşlarıyla besin olduğunu bildiriyor.",
   "targets": [
    {
     "w": "böcek",
@@ -449,7 +465,7 @@ window.TEXTS = [
   "src": "johnson1991",
   "type": "A",
   "title": "Yüzün peşindeki yenidoğan",
-  "text": "Yaşamlarının ilk saatindeki bebeklere yavaşça hareket eden kartlar gösterildi. Kartlardan birinde yüze benzeyen bir çizim, öbürlerinde karışık çizgiler vardı. Bebekler yüze benzeyen çizimi başlarıyla ve gözleriyle daha uzağa kadar izledi. Bu bulgu iki ayrı doğumevinde yinelendi. Bulgu, bebeklerin yüze benzeyen desenlere yaşamın ilk saatinden ilgi gösterdiğini düşündürüyor. İlginç biçimde bu güçlü takip ikinci ayda azaldı.",
+  "text": "Yaşamlarının ilk saatindeki bebeklere yavaşça hareket eden çizimler gösterildi. Bebekler yüze benzeyen çizimi, karışık çizgilerden daha uzağa kadar izledi. Bulgu ikinci bir doğumevinde de yinelendi. Bu güçlü takip ikinci ayda azaldı.",
   "targets": [
    {
     "w": "doğumevinde",
@@ -457,7 +473,8 @@ window.TEXTS = [
    },
    {
     "w": "çizimi",
-    "t": "S"
+    "t": "S",
+    "r": "çizim"
    },
    {
     "w": "bebeğin",
@@ -471,7 +488,7 @@ window.TEXTS = [
   "src": "watanabe1995",
   "type": "B",
   "title": "Monet ile Picasso'yu ayıran güvercinler",
-  "text": "Güvercinlere Monet'nin ve Picasso'nun tablolarının renkli fotoğrafları gösterildi. Kuşlar zamanla iki ressamı ayırmayı öğrendi. Daha önce hiç görmedikleri tabloları da doğru ayırdılar. Monet'den Cezanne ve Renoir'a, Picasso'dan Braque ve Matisse'e genelleme yaptılar. Monet tabloları ters çevrilince ayırma bozuldu, Picasso tabloları ters çevrilince bozulmadı. Belki de kuşlar Monet tablolarında resmedilen nesnelere bakıyordu.",
+  "text": "Güvercinler zamanla Monet'nin ve Picasso'nun tablolarını ayırmayı öğrendi; hiç görmedikleri yeni tabloları da ayırdılar. Monet'den Renoir'a, Picasso'dan Matisse'e genelleme yaptılar. Monet tabloları ters çevrilince ayırma bozuldu, Picasso tablolarının tersi bozmadı.",
   "targets": [
    {
     "w": "Renoir'a",
@@ -494,7 +511,7 @@ window.TEXTS = [
   "src": "newport2016",
   "type": "A",
   "title": "Yüz ayırt eden okçu balığı",
-  "text": "Okçu balığı, avını sudan tükürdüğü bir su okuyla düşürür. Araştırmacılar bu tükürüğü bir seçim aracı yaptı. Balıklara ekranda iki insan yüzü birlikte gösterildi; öğrendikleri yüze su tükürdüler ve 44 yüz arasından doğruyu seçebildiler. Renk, kafa biçimi ve parlaklık eşitlendiğinde de başarılı oldular. Balıkların insan yüzüne özel bir donanımı olmadığı düşünülüyor; yine de bunu yapabildiler.",
+  "text": "Okçu balığı avını tükürdüğü suyla düşürür. Balıklara ekranda iki insan yüzü gösterildi; öğrendikleri yüze su tükürdüler ve 44 yüz arasından doğruyu seçebildiler. Renk, kafa biçimi ve parlaklık eşitlenince de başardılar.",
   "targets": [
    {
     "w": "parlaklık",
@@ -507,7 +524,8 @@ window.TEXTS = [
    },
    {
     "w": "balığın",
-    "t": "Y"
+    "t": "Y",
+    "r": "balı"
    }
   ]
  },
@@ -516,7 +534,7 @@ window.TEXTS = [
   "src": "smith2016",
   "type": "B",
   "title": "Kızgın yüzü fark eden atlar",
-  "text": "Atlara aynı yabancının gülen ve kızgın yüz fotoğrafları gösterildi. Kızgın yüzü görünce atlar başını çevirip ona daha çok sol gözüyle baktı. Hayvanlarda sol gözle bakış, olumsuz algılanan durumlarda sık görülür. Kızgın yüzler karşısında atların kalp atışı da daha hızlı yükseldi. İnsan yüz ifadesine böyle yönlü bir tepki daha önce yalnız köpeklerde gösterilmişti.",
+  "text": "Atlara aynı yabancının gülen ve kızgın yüzlerinin fotoğrafları gösterildi. Atlar kızgın yüzü daha çok sol gözüyle izledi; bu göz tercihi olumsuz durumlarda sık görülür. Kalp atışları daha hızlı yükseldi. İnsan yüz ifadesine böyle bir tepki daha önce yalnız köpeklerde gösterilmişti.",
   "targets": [
    {
     "w": "köpeklerde",

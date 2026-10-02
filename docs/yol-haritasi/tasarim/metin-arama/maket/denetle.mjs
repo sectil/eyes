@@ -10,7 +10,7 @@ const say = (m) => { bad++; console.log(m) }
 const srcs = new Set()
 for (const x of TEXTS) {
   const T = toks(x.text), L = T.map(low), n = T.length
-  if (n < 50 || n > 75) say(`${x.id}: ${n} kelime (50–75 olmalı)`)
+  if (n < 30 || n > 40) say(`${x.id}: ${n} kelime (30–40 olmalı)`)
   if (srcs.has(x.src)) say(`${x.id}: kaynak tekrar ${x.src}`); srcs.add(x.src)
   for (const b of BAN) if (L.some((w) => w.startsWith(b))) say(`${x.id}: yasak sözcük ${b}`)
   const want = x.type === 'A' ? 'ESY' : 'ESZ'
