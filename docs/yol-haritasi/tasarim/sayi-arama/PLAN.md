@@ -42,7 +42,7 @@ Alınan yalnız mantık: ızgarada sayı dizisi bulmak. Bu, 1980'lerden beri kâ
 3. **Kaydırma.** Parmak bir rakama değince iz başlar; yatayda sağa doğru uzar. Parmak kalkınca:
    - İz 4 rakamı tam kaplıyor ve aranan diziyse: iz altın ışığa döner, halka dolar, kısa titreşim (cihaz izin
      veriyorsa). Ses yok.
-   - Değilse: iz 300 ms kırmızımsı titrer, söner. Yanlış işaret sayılır. Süre durmaz.
+   - Değilse: iz 300 ms kırmızımsı titrer, söner. Yanlış kaydırma sayılır. Süre durmaz.
    - 1–3 rakamlık iz sayılmaz, yanlış da sayılmaz: sessizce söner.
 4. **Bitiş.** 5 dizi bulununca tur biter. Kişi 90 sn sonra "Göster"e basabilir: kalan diziler sırayla yanar,
    bulunmamış sayılır. "Göster" 90 sn'den önce görünmez (chun1996: arama erken bırakılmasın).
@@ -90,8 +90,18 @@ gerekmez.
   findMs: [6120, 4380, 9050, 5210], medianMs: 5665, seconds: 74 }
 ```
 - `findMs`: her doğru dizi için, bir önceki bulma anından (ilk dizide ızgaranın görünmesinden) parmağın kalktığı ana
-  kadar. Yanlış işaretler süreyi durdurmaz.
+  kadar. Yanlış kaydırmalar süreyi durdurmaz.
 - `medianMs`: `findMs` ortancası; 2'den az dizi bulunduysa `null` (tek değer ölçü sayılmaz).
+- `wrong`: yanlış kaydırma sayısı (4 haneyi kaplayıp aranan dizi olmayan iz). Ekranda "yanlış kaydırma".
+
+### 4.1b Önceki tur karşılaştırması (sahip kararı 2026-10-02: "önerini uygulayalım")
+- Yalnız sonuç ekranında ve yalnız ölçü kuralı v2 hükmü `start` iken (ilk 8 ölçüm günü). Gelişim ekranları ve dört
+  hüküm sözcüğü değişmez.
+- Bugünkü `medianMs` ile `medianMs`'i olan bir önceki tur karşılaştırılır. Fark mutlak değerce 0,1 sn'den küçükse
+  "önceki turla aynı"; değilse "{d} sn daha hızlı" ya da "{d} sn daha yavaş". İki yatay çubuk: önceki tur, bugün.
+- İlk tur: karşılaştırma yok; Nef N2 cümlesi.
+- Hüküm `start` değilse karşılaştırma kalkar; yerine hüküm sözcüğü ve 14 günlük grafik gelir.
+- Başlangıç ilerlemesi tek küçük satır: "Başlangıç · {d}/8 gün". Bekleme anlatılmaz.
 
 ### 4.2 Gelişim (`progress`)
 ```
@@ -110,8 +120,8 @@ progress: {
 - `sdFloor: 0.3` sn VARSAYIM (Metin Arama ile aynı taban; ilk ay gerçek veriyle bakılır).
 - **Birim bağı (ana oturum, bir kez):** `changeText.js` `DIGITS.sn = 1`; `progress.js` `UNIT_SD_FLOOR.sn = 0.3`.
   Metin Arama aynı birimi kullanır; iki modül tek satırı paylaşır.
-- Doğruluk ölçü değildir ama görünür: sonuçta ve `stats()`'ta "yanlış işaret" sayısı (heitz2014).
-- `stats()`: "Dizi bulma · son" (sn), "Tur · 7 gün", "Yanlış işaret · son tur".
+- Doğruluk ölçü değildir ama görünür: sonuçta ve `stats()`'ta "yanlış kaydırma" sayısı (heitz2014).
+- `stats()`: "Dizi bulma · son" (sn), "Tur · 7 gün", "Yanlış kaydırma · son tur".
 - `coach()`: `find7` (son 7 günün turlarının `medianMs` ortancası, sn), `rounds7`, `wrong7`. Tek Bakışta `span7`
   ilkesiyle aynı (en iyi tur değil ortanca).
 
@@ -157,8 +167,12 @@ Maket: `maket/maket.html?s=<ekran>&theme=<light|dark>`. Görüntüler `maket/<tu
 | `intro` | Ad, aranan dizi örneği, kaydırma anlatımı (çizimle), "2 dk · 5 dizi", Başla, iddia satırı |
 | `play` | Aranan dizi, 5 halka (2 dolu), ızgarada 2 altın iz, parmak altında yarım teal iz |
 | `found` | Yeni bulunan dizi parlıyor, halka doluyor, "Buldun · 3/5" |
-| `result1` | İlk günler: büyük sayı "5,7 sn", "4/5 dizi · 2 yanlış işaret", "başlangıç" ve başlangıcın kaç gün sonra oluşacağı, Nef satırı, Bana hatırlat yeri |
-| `result2` | 14. gün: "başlangıcından iyi", başlangıç → şimdi, son günlerin noktaları, Nef satırı |
+| `result1` | İlk 8 gün: "Dizi başına süren" büyük sayı, "0,6 sn daha hızlı" çipi, beş dizi kapsülü ve süreleri, "2 yanlış kaydırma · Başlangıç 2/8 gün" satırı, önceki tur ve bugün çubukları, Nef satırı, Bana hatırlat, Tamam |
+| `result2` | 8. günden sonra: büyük sayı, beş kapsül, "başlangıcından iyi", 14 günlük grafik (kesik çizgi "başlangıç 5,6", son nokta "bugün 4,1"), Nef satırı, Tamam |
+
+Son hâl: `maket/maket.html`, görüntüler `maket/son/`. Kapıdan geçenler intro ve found (tur 2 hâli, son hâlde
+değişmedi). play, result1, result2 son hâlleri kapı maddelerine göre düzeltildi ama **kapıdan geçmedi**; kapıları
+gerçek kodda yapılır (§5b).
 
 Tasarım dili Nefona'nın kendisi: Onest ve Unbounded, teal–mavi vurgu, altın bulunan iz; iki tema. Kart gölgesi ve
 yuvarlaklık Ana sayfa ile aynı aile.
@@ -176,8 +190,7 @@ yuvarlaklık Ana sayfa ile aynı aile.
 | result2 | 3/5 | 3/5 | kaldı: üç sayının hangisinin ne olduğu yazmıyor |
 
 Bağlayıcı maddeler `kapi/5sn-tur2.md` sonundaki 7 madde. Yöntem değişikliği: `play` ve sonuç ekranlarının kapısı
-gerçek kodda, hareketli ekran kaydıyla yapılır (Fark Ettin mi? kararıyla aynı). result1 için tasarım kararı sahibe
-soruldu (sohbet, 2026-10-01).
+gerçek kodda, hareketli ekran kaydıyla yapılır (Fark Ettin mi? kararıyla aynı). result1 için sahip kararı §4.1b.
 
 ## 6. Aşamalar (ana oturum uygular)
 
@@ -194,7 +207,7 @@ soruldu (sohbet, 2026-10-01).
 | Risk | Önlem |
 |---|---|
 | Kaydırma küçük ekranda zor | Hücre en az 36 px; 320'de de ızgara 8 × 10 kalır (ölçü sabit), yalnız üst alan küçülür |
-| Hız için rastgele kaydırma | Yanlış işaret sayılır ve sonuçta görünür; süreye girmez |
+| Hız için rastgele kaydırma | Yanlış kaydırma sayılır ve sonuçta görünür; süreye girmez |
 | Ölçü erken "iyi" der | v2: alışma 2 gün, sabit başlangıç, iki bakış |
 | Aynı dizi akılda kalır | Her tur yeni tohum; dizi son 14 turda tekrar etmez |
 | Metin Arama ile `sn` ve kaynak çakışması | Tek satır; ana oturum ikisini aynı işte birleştirir |
@@ -205,3 +218,4 @@ soruldu (sohbet, 2026-10-01).
 3. Geri sayım yok.
 4. Kaydırarak işaretleme.
 5. Seviye yok; zorluk sabit, ölçü temiz.
+6. İlk 8 günde sonuç ekranı yalnız önceki turla karşılaştırır (§4.1b; sahip 2026-10-02).
