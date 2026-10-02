@@ -1,6 +1,6 @@
 # Yakala Yaz · ana oturum istemi (sürüm 1, 2026-10-02)
 
-Bu istem sahip METINLER ve KELIMELER'i onayladıktan sonra kullanılır. "---" altındaki metin ana oturuma olduğu gibi
+Sahip METINLER, KELIMELER ve "Yakala Yaz alıştırması" adını onayladı (2026-10-02). Bu istem artık kullanılabilir. "---" altındaki metin ana oturuma olduğu gibi
 yapıştırılır.
 
 ---

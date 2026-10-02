@@ -1,6 +1,6 @@
 # Yakala Yaz · kelime listesi (taslak, 2026-10-02)
 
-Durum: **K B** (5 kişilik kelime kapısından geçti, 5/5 "genel olarak kabul edilebilir"; `kapi/kelime-kapisi.md`; ben onayladım). Sahip onayı bekleniyor. Sahip onaylamadan koda girmez. Liste `kelimeler/liste.json`; kaynağı `kelimeler/*.mjs`
+Durum: **K B** (5 kişilik kelime kapısından geçti, 5/5 "genel olarak kabul edilebilir"; `kapi/kelime-kapisi.md`; ben onayladım). **Sahip onayı: S (2026-10-02).** Sahip onaylamadan koda girmez. Liste `kelimeler/liste.json`; kaynağı `kelimeler/*.mjs`
 (`node birlestir.mjs` listeyi yeniden kurar ve denetler).
 
 ## Seçim ölçütleri
