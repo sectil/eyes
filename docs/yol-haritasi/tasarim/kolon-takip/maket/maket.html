@@ -40,14 +40,16 @@ body{font-family:var(--body);color:var(--ink);background:radial-gradient(120% 70
 /* ---------- Izgara ---------- */
 .grid{position:relative;display:grid;grid-template-columns:repeat(var(--cols),1fr);row-gap:var(--rg);align-content:center}
 .w{position:relative;z-index:2;text-align:center;font:500 var(--fs)/1 var(--body);color:var(--word);padding:9px 0;letter-spacing:.01em}
-.w.read{color:var(--word-dim)}
-.w.t1,.w.t2,.w.t3{color:var(--ink-2)}
-.w.t1::before,.w.t2::before,.w.t3::before{content:'';position:absolute;inset:4px 14%;border-radius:12px;background:var(--teal);z-index:-1}
-.w.t1::before{opacity:.26}.w.t2::before{opacity:.15}.w.t3::before{opacity:.07}
+
+.w.t1::after,.w.t2::after,.w.t3::after{content:'';position:absolute;left:24%;right:24%;bottom:2px;height:3px;border-radius:2px;background:var(--teal)}
+.w.t1::after{opacity:.75}.w.t2::after{opacity:.45}.w.t3::after{opacity:.2}
+.w{opacity:var(--o,1)}
+.band{position:absolute;left:4px;right:4px;border-radius:14px;background:color-mix(in srgb,var(--teal) 8%,transparent);z-index:0}
 .w.on{color:var(--mark-ink);font-weight:700}
 .w.on::before{content:'';position:absolute;inset:0 6%;border-radius:14px;background:var(--mark);z-index:-1;
   box-shadow:0 0 0 6px color-mix(in srgb,var(--teal) 14%,transparent),0 8px 26px -6px var(--glow)}
-.w.swap::after{content:'';position:absolute;inset:-6px 0;border-radius:18px;border:2px solid var(--gold);z-index:-1;opacity:.9}
+.w.swap::before{background:var(--gold)!important;box-shadow:0 0 0 7px color-mix(in srgb,var(--gold) 22%,transparent),0 10px 28px -6px color-mix(in srgb,var(--gold) 60%,transparent)!important}
+.w.swap{color:#1a1200}
 svg.trail{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:visible}
 
 /* ---------- Görev ---------- */
@@ -62,24 +64,27 @@ svg.trail{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-eve
 .step{flex:1;border-radius:14px;background:var(--surface);border:1px solid var(--line);padding:10px 10px 11px;display:flex;flex-direction:column;justify-content:flex-end;gap:4px}
 .step b{font:700 20px/1 var(--display)}
 .step span{font:500 12px/1.2 var(--body);color:var(--ink-3)}
+.unit{flex:none;align-self:flex-end;font:600 12px/1.25 var(--body);color:var(--ink-3);padding-bottom:4px}
 .step i{display:block;height:4px;border-radius:2px;background:var(--accent-grad);margin-bottom:6px}
 .nef{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font:500 14.5px/1.4 var(--body);color:var(--ink-2)}
 .nef .dot{width:26px;height:26px;border-radius:50%;flex:none;background:radial-gradient(circle at 35% 35%,#7fe6ee,var(--teal) 60%,#2458cc)}
-.claim{margin-top:auto;padding-top:12px;font:500 12.5px/1.4 var(--body);color:var(--ink-3)}
+.claim{font:500 12.5px/1.4 var(--body);color:var(--ink-3)}
 
 /* ---------- Oyun ---------- */
 .hud{display:flex;align-items:center;gap:12px;flex:1}
 .segs{display:flex;gap:6px;flex:1}
-.segs i{flex:1;height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden;position:relative}
+.segs i{flex:1;height:6px;border-radius:3px;background:color-mix(in srgb,var(--ink) 14%,transparent);overflow:hidden;position:relative}
 .segs i.done{background:var(--teal)}
 .segs i.cur::after{content:'';position:absolute;inset:0;width:var(--p);background:var(--teal);border-radius:3px}
 .speed{display:flex;align-items:baseline;gap:6px;margin:14px 2px 0}
 .speed b{font:700 30px/1 var(--display)}
 .speed span{font:500 13px/1 var(--body);color:var(--ink-3)}
+.caps{display:flex;gap:5px;margin-left:12px}.caps i{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--ink-3)}.caps i.y{background:var(--gold);border-color:var(--gold)}
 .speed em{margin-left:auto;font:600 13px/1 var(--body);font-style:normal;color:var(--ink-3)}
 .board{flex:1;display:flex;flex-direction:column;justify-content:center;margin:10px -6px 0;border-radius:24px;background:var(--glass);border:1px solid var(--line);padding:8px 4px}
 .hint{flex:none;text-align:center;margin-top:12px;font:500 14px/1.3 var(--body);color:var(--ink-3)}
 .hint b{color:var(--ink);font-weight:600}
+.got{display:inline-block;padding:9px 16px;border-radius:999px;background:var(--gold);color:#1a1200;font:700 15px/1 var(--body)}
 .caught{position:absolute;z-index:3;left:50%;transform:translate(-50%,-50%);font:700 14px/1 var(--body);color:var(--btn-ink);background:var(--gold);
   padding:8px 12px;border-radius:999px;white-space:nowrap;box-shadow:0 8px 22px -8px rgba(0,0,0,.4)}
 .ripple{position:absolute;z-index:1;border-radius:50%;border:2px solid var(--gold);opacity:.55;transform:translate(-50%,-50%)}
@@ -105,6 +110,7 @@ svg.trail{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-eve
 .legend b{color:var(--ink-2);font-weight:600}
 .spark{display:block;width:100%;height:var(--sh,96px);margin-top:10px}
 .row{display:flex;justify-content:space-between;align-items:baseline;font:500 13px/1.3 var(--body);color:var(--ink-3)}
+.lab{position:absolute;font:700 12px/1 var(--display);color:var(--ink-3);background:var(--surface);padding:2px 4px}.lab.hi{color:var(--teal)}
 .row b{font:600 14px/1 var(--body);color:var(--ink)}
 
 /* ---------- Ana sayfa ---------- */
@@ -117,13 +123,18 @@ svg.trail{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-eve
 .stop{display:flex;align-items:center;gap:14px;margin-top:14px;border-radius:20px;background:var(--surface);border:1px solid var(--line);padding:14px}
 .stop .gl{width:46px;height:46px;border-radius:14px;background:var(--accent-grad);display:grid;place-items:center;flex:none}
 .stop b{display:block;font:700 16px/1.2 var(--body)}
+.stop .g2{background:color-mix(in srgb,var(--teal) 14%,var(--surface));color:var(--teal)}
+.stop.done b{color:var(--ink-2)}
+.ok{width:28px;height:28px;border-radius:50%;background:var(--ok);color:var(--btn-ink);display:grid;place-items:center}
+.new{font:700 11px/1 var(--body);font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--btn-ink);background:var(--gold);padding:4px 7px;border-radius:999px;margin-left:6px;vertical-align:2px}
 .stop span{font:500 13.5px/1.3 var(--body);color:var(--ink-3)}
 
 @media (max-width:340px){
   .title{font-size:29px}.task{font-size:17.5px}.step b{font-size:17px}.big b{font-size:60px}.speed b{font-size:26px}
   .hero .grid{--cols:3}.mini .grid{--cols:3}
 }
-@media (max-height:600px){.bars{--bh:120px}.hero{padding-top:8px;padding-bottom:12px}.task{margin-top:12px}.ladder{margin-top:12px}.nef{margin-top:10px}}
+@media (max-height:600px){.bars{--bh:84px}.big b{font-size:50px}.res-head{margin-top:8px}.card{margin-top:10px;padding:12px}.legend{margin-top:8px;font-size:12px}.chip{margin-top:8px;font-size:12.5px}
+  .board .w{padding:6px 0}.claim{padding-top:6px!important;font-size:11.5px}.btn{height:50px}.hero{padding-top:8px;padding-bottom:12px}.task{margin-top:12px}.ladder{margin-top:12px}.nef{margin-top:10px}}
 </style>
 </head>
 <body>
@@ -134,20 +145,28 @@ const S = q.get('s') || 'intro'
 document.documentElement.dataset.theme = q.get('theme') === 'dark' ? 'dark' : 'light'
 const narrow = innerWidth < 340
 const short = innerHeight < 600
+const ICON = {
+  breath: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9h11a3 3 0 1 0-3-3M3 15h15a3 3 0 1 1-3 3M3 12h8"/></svg>',
+  blink: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+  check: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+}
 const X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>'
 
 // Izgara: okuma düzeni (soldan sağa, sonra alt satır). on = işaretli hücre; iz = önceki 3 hücre.
 function grid(word, cols, rows, on, opts = {}) {
+  cols = cols
   const cells = []
   for (let i = 0; i < cols * rows; i++) {
     const cls = ['w']
-    if (i < on - 3) cls.push('read')
     const k = on - i
     if (k >= 1 && k <= (opts.trail ?? 3)) cls.push('t' + k)
     if (i === on) cls.push('on')
     if (i === on && opts.swap) cls.push('swap')
     const t = i === on && opts.swap ? opts.swap : word
-    cells.push(`<div class="${cls.join(' ')}" data-i="${i}">${t}</div>`)
+    const r0 = Math.floor(on / cols), c0 = on % cols, r = Math.floor(i / cols), c = i % cols
+    const d = Math.hypot((r - r0) * 1.6, c - c0)
+    const o = opts.focus === false || i === on ? 1 : Math.max(0.28, 1 - d * 0.16).toFixed(2)
+    cells.push(`<div class="${cls.join(' ')}" data-i="${i}" style="--o:${o}">${t}</div>`)
   }
   return `<div class="grid" data-on="${on}" data-trail="${opts.trail ?? 3}">${cells.join('')}</div>`
 }
@@ -175,68 +194,72 @@ const V = {
   intro() {
     return `<div class="scr">
       <div class="top"><div class="ic">${X}</div><div style="flex:1"></div><span class="eyebrow">2 dk · 3 bölüm</span></div>
-      <div class="hero">${grid('Kale', cols, short ? 3 : 5, cols * 2 + 1, { trail: 3 })}</div>
+      <div class="hero">${grid('Kale', cols, short ? 2 : 5, short ? cols + 1 : cols * 2 + 1, { trail: 3 })}</div>
       <div class="title" style="margin-top:6px">Kelime İzi</div>
       <div class="task">İşaretli kelimeyi gözünle izle.<small>Kelime bir an başka bir kelimeye döner. Görünce ekrana dokun.</small></div>
       <div class="ladder">
-        <div class="step" style="height:62px"><i style="width:45%"></i><b class="mono">140</b><span>kelime/dk</span></div>
-        <div class="step" style="height:74px"><i style="width:70%"></i><b class="mono">160</b><span>kelime/dk</span></div>
-        <div class="step" style="height:86px"><i style="width:100%"></i><b class="mono">180</b><span>kelime/dk</span></div>
+        <div class="step" style="height:58px"><span>1. bölüm</span><b class="mono">140</b></div>
+        <div class="step" style="height:72px"><span>2. bölüm</span><b class="mono">160</b></div>
+        <div class="step" style="height:86px"><span>3. bölüm</span><b class="mono">180</b></div>
+        <div class="unit">kelime<br>/dk</div>
       </div>
-      ${short ? '' : `<div class="nef"><span class="dot"></span><span>Geçen sefer 160'ı rahat izledin. Bugün 140'tan ısınarak başlıyoruz.</span></div>`}
-      <div class="claim">Bu bir göz takip alıştırması. Okuma hızını artırdığı gösterilmedi.</div>
+      <div class="nef"><span class="dot"></span><span>Geçen sefer 160'ı geçtin. Bugün 140'ta ısın, 180'i dene.</span></div>
+      <div style="flex:1"></div>
       <div class="btn" style="margin-top:12px">Başla</div>
+      <div class="claim" style="text-align:center;padding-top:10px">Bu bir göz takip alıştırması. Okuma hızını artırdığı gösterilmedi. <u>Neye dayanıyor?</u></div>
     </div>`
   },
   play(opt = {}) {
-    const rows = short ? 7 : 11
+    const rows = short ? 9 : 11
     const on = opt.on ?? cols * 4 + 1
     return `<div class="scr">
       <div class="top"><div class="ic">${X}</div><div class="hud"><div class="segs"><i class="done"></i><i class="cur" style="--p:${opt.p ?? '38%'}"></i><i></i></div></div></div>
-      <div class="speed"><b class="mono">160</b><span>kelime/dk</span><em>Bölüm 2 / 3</em></div>
+      <div class="speed"><b class="mono">160</b><span>kelime/dk</span><em>Bölüm 2 / 3</em><span class="caps">${opt.caps ?? '<i class="y"></i><i></i><i></i>'}</span></div>
       <div class="board" style="position:relative;--cols:${cols};--fs:${narrow ? 22 : 26}px;--rg:${short ? 0 : 6}px">${grid('Kale', cols, rows, on, { swap: opt.swap })}${opt.extra ?? ''}</div>
       <div class="hint">${opt.hint ?? 'Kelime değişince <b>ekrana dokun</b>'}</div>
     </div>`
   },
   catch() {
-    return V.play({ swap: 'Kare', extra: '<div id="cg"></div>', hint: 'Yakaladın · bu bölümde <b>2 / 3</b>' })
+    return V.play({ swap: 'Kare', caps: '<i class="y"></i><i class="y"></i><i></i>', hint: '<span class="got">Yakaladın: Kale → Kare</span>' })
   },
   result() {
     return `<div class="scr">
       <div class="top"><div class="ic">${X}</div><div style="flex:1"></div></div>
-      <div class="res-head"><span class="eyebrow">Bugün rahat izlediğin hız</span>
+      <div class="res-head"><span class="eyebrow">Bugün geçtiğin en yüksek hız</span>
         <div class="big"><b>180</b><span>kelime/dk</span></div>
-        <div class="chip"><i></i>140 → 180 · başlangıcından iyi</div></div>
+        <div class="chip"><i></i>8 günde 140 → 180 · başlangıcından iyi</div></div>
       <div class="card">
         <div class="bars">
-          ${[[140, 3, 3], [160, 3, 3], [180, 2, 3]].map(([v, h, n], i) => `<div class="bar"><div class="col" style="height:${48 + i * 26}%"><b class="mono">${v}</b></div>
+          ${[[140, 3, 3], [160, 3, 3], [180, 2, 3]].map(([v, h, n], i) => `<div class="bar"><div class="col" style="height:${Math.round(v / 180 * 100)}%"><b class="mono">${v}</b></div>
             <div class="dots">${Array.from({ length: n }, (_, k) => `<i class="${k < h ? '' : 'x'}"></i>`).join('')}</div></div>`).join('')}
         </div>
-        <div class="legend">Her nokta bir kelime değişimi. <b>9 değişimden 8'ini</b> yakaladın.</div>
+        <div class="legend">Her nokta bir kelime değişimi; 3'te 2 yakalayınca bölüm geçilir. <b>9 değişimden 8'ini</b> yakaladın.</div>
       </div>
-      ${short ? '' : `<div class="card" style="padding-bottom:12px">
-        <div class="row"><span>Son 7 tur</span><b>başlangıcın 140</b></div>
-        <svg class="spark" viewBox="0 0 300 64" preserveAspectRatio="none">
-          <line x1="0" y1="44" x2="300" y2="44" stroke="var(--ink-3)" stroke-dasharray="4 5" stroke-width="1.5" opacity=".7"/>
-          <polyline points="6,50 54,44 102,38 150,44 198,30 246,24 294,12" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="294" cy="12" r="5.5" fill="var(--teal)"/></svg></div>`}
+      <div class="card" style="padding-bottom:12px">
+        <div class="row"><span>Son 7 tur</span><span>kesikli çizgi: başlangıcın</span></div>
+        <div style="position:relative">
+        <svg class="spark" viewBox="0 0 300 64" preserveAspectRatio="none" style="--sh:${short ? 56 : 96}px">
+          <line x1="0" y1="48" x2="300" y2="48" stroke="var(--ink-3)" stroke-dasharray="4 5" stroke-width="1.5" opacity=".8"/>
+          <polyline points="6,48 54,48 102,40 150,48 198,32 246,24 270,12" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+        <span class="lab" style="left:0;bottom:-2px">140</span><span class="lab hi" style="right:0;top:-2px">180</span></div></div>
       <div style="flex:1"></div>
       <div class="btn">Bitti</div>
+      <div class="claim" style="text-align:center;padding-top:10px"><u>Neye dayanıyor?</u></div>
     </div>`
   },
   home() {
     return `<div class="scr">
-      <div class="top"><span class="eyebrow">Bugün</span></div>
+      <div class="top"><span class="eyebrow">Bugün · yolun</span></div>
       <div class="nefcard">
         <div class="nef" style="margin:0"><span class="dot"></span><span style="font-weight:600;color:var(--ink)">Nef</span></div>
         <p>Yolunda yeni bir durak var: Kelime İzi. İşaretli kelimeyi gözünle izleyeceksin; her bölümde biraz hızlanır.</p>
-        <div class="mini">${grid('Kale', cols, 2, 2, { trail: 2 })}</div>
+        ${short ? '' : `<div class="mini">${grid('Kale', cols, 2, 2, { trail: 2 })}</div>`}
         <div class="btn" style="margin-top:14px;height:50px">Dene</div>
       </div>
       <div class="stop"><div class="gl"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h4M10 7h4M16 7h4M4 12h4M10 12h4M4 17h4"/><circle cx="18" cy="12" r="2.4" fill="#fff"/></svg></div>
-        <div><b>Kelime İzi</b><span>2 dk · bugün 140'tan başlar</span></div></div>
-      ${short ? '' : `<div class="stop" style="opacity:.62"><div class="gl" style="background:var(--surface-2)"></div><div><b>Nefes</b><span>1 dk · tamam</span></div></div>
-      <div class="stop" style="opacity:.62"><div class="gl" style="background:var(--surface-2)"></div><div><b>Göz kırpma</b><span>1 dk</span></div></div>`}
+        <div style="flex:1"><b>Kelime İzi <em class="new">Yeni</em></b><span>2 dk · 3 bölüm</span></div></div>
+      <div class="stop done"><div class="gl g2">${ICON.breath}</div><div style="flex:1"><b>Nefes</b><span>1 dk</span></div><span class="ok">${ICON.check}</span></div>
+      ${short ? '' : `<div class="stop"><div class="gl g2">${ICON.blink}</div><div style="flex:1"><b>Göz kırpma</b><span>1 dk</span></div></div>`}
     </div>`
   },
 }
