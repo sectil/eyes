@@ -1,0 +1,16 @@
+{
+ "unit": "n2.dilek",
+ "take": "t2",
+ "ref_node": "Pw5A5grsOUKgS4myQud2",
+ "asset_id": "dX4hGLoSx8kzzVpBS9ot",
+ "stt_node": "LsJPFK5gFxYva9YuyEvJ",
+ "session_id": "X4JlyGPfBtlWA5fFuQyS",
+ "generation_id": "TMJRWfDRHCwvcj3UAqg3",
+ "actual_credits": 17.6,
+ "actual_cents": 0.32,
+ "spoken_duration_secs": 3.0,
+ "scribe_text": "Niyetini dersten sonra da taşımak sana kalmış",
+ "tts": "Niyetini dersten sonra da taşımak sana kalmış.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 7\n}"
+}

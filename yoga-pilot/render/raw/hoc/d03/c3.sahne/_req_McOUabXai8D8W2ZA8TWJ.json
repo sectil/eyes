@@ -1,0 +1,37 @@
+{
+ "node_id": "McOUabXai8D8W2ZA8TWJ",
+ "session_ids": [
+  "rzOEG8fYEuoZcVx2GjbM",
+  "wdNtrdjOwXFgbZTm1C22",
+  "z8jVCleDU0MHDIEtGJvJ"
+ ],
+ "requested_at": "2026-09-30T06:57:22.872Z",
+ "tts": "Zihninde yağmurlu bir akşam belirebilir.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "rzOEG8fYEuoZcVx2GjbM",
+   "generation_id": "GD2htNN2EtjP9AimgYuH",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/rzOEG8fYEuoZcVx2GjbM/GD2htNN2EtjP9AimgYuH/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065726Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=59f9499e74beebfc217fdbfeff0051fdd0075a937864c39ec53fa107fedbfbdca75eedfbeb00f82e403f5842ec2e8efe623f515db91e2be695093f200883ef80aa60b6f139e0e6f0e07e5e62cddb6910873e93f8fa81174bbb0dd8564d88ee29b314b559fcffca57b8959c6eaf13b4724a91511686f440e27d1f6cf8db20d4934cffd945d1025d501fff7ed8cc5d2146f67706174dd4422add2a14bb42dc538a88b9b59dec578810618834c281a541c18cbaecfd39a7e18a383fcff7c7ffc7854bf9d941198713abc4629fa83115d49d763e17f152559ab30455d009d3f2e11c69392d75009eb7ba711a41646446b0c25128381daa56f5782be95d864b8372dc",
+   "duration_secs": 3.04,
+   "prompt": "Zihninde yağmurlu bir akşam belirebilir.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "wdNtrdjOwXFgbZTm1C22",
+   "generation_id": "DKmz3KK9xA28xUpuuDgk",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/wdNtrdjOwXFgbZTm1C22/DKmz3KK9xA28xUpuuDgk/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070512Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=2e20d81aec0431148e651e5c30a2d53ff90c38e5762f0a9bfbb28205e9c4ad0733cb241cf2c3395fd8baec4841ab5bcf77362439bf627f60effed23fe0ae399d4f17345fb367394fab17efd463ccf50d915f3b2e6e3f6cc7fdc63e0da4ea60bf8ec48d3d96dca4da7b27c25fd60838f6c082f7afb9f1ba1d2004cee648f99f225874a111f22100a04fb36dec8a0cf92aa8991438d84ac78f68d9627b531f440f579cfb50a61064643aaf258874a0312a2f1268f18b83859e67c52fd453b1a6d6df029af5bc669abbd594100a698fd4c08d89c2e17351bb357555ce2fe56dffd87432ebee2e998c379370c6cf372abcb52a10f25762ccc6051491dd661d9bd914",
+   "duration_secs": 3.12,
+   "prompt": "Zihninde yağmurlu bir akşam belirebilir.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "z8jVCleDU0MHDIEtGJvJ",
+   "generation_id": "jz1YpfVCtrTldj61VMMf",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/z8jVCleDU0MHDIEtGJvJ/jz1YpfVCtrTldj61VMMf/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065918Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=9c34c41db0ea7fea1d5c06e1f35e578d6ef165ce158b5096ce9e1765f9f618eabd11d7c4dce1eb7a164782d93aa9697eabb7d3dc5f9f6d2973cbdbb139f5e94119dd0e989e4bf6128fe767aa5f39380367ede371d3b3a899efce2fb3b90a5cc5118d762e0a5bac76c5a197275dd5a48672e8fa819e2d131be6c69f1cffd5160546a589ddb7d6903b48e065f05f20eeb4a22dbf6123c6fc6d91bb46bf7c01489f88e88218120647f590b8765bf34c16067155d8d0f7b7ef8384005c829bd2882be30fc55c415f417b68c207804d26d623acfb5deddeb8647409a4c9dc793ab2743162e5ff9196e6297763c26455259150779891ea34fa5c23452812c5463f0b2b",
+   "duration_secs": 3.2,
+   "prompt": "Zihninde yağmurlu bir akşam belirebilir.",
+   "kind": "audio"
+  }
+ ]
+}

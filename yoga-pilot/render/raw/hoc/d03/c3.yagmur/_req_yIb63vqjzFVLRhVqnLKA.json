@@ -1,0 +1,37 @@
+{
+ "node_id": "yIb63vqjzFVLRhVqnLKA",
+ "session_ids": [
+  "EmN9vyT9FtMVY1AHLoyi",
+  "Y21voCMqUYSPAmEguKb2",
+  "NbX1C61lTlsusBywi9eu"
+ ],
+ "requested_at": "2026-09-30T06:58:20.241Z",
+ "tts": "Yağmur çatıya usul usul vuruyor.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "EmN9vyT9FtMVY1AHLoyi",
+   "generation_id": "iMmTSyxVkPwVMpHPXj2m",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/EmN9vyT9FtMVY1AHLoyi/iMmTSyxVkPwVMpHPXj2m/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065823Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=c6cad3dbd2ec6f940a4ad2fcc33ca29314620a2bdb690f8370ee66f2069222d07376e61868681d9125283e86fe94b084cd7c97180a7236572525b52fededa18bff3f350252d1301b91ece595ce63489862bf011afb7d9d89796d577199be69ca3184f87b2c42d522a84eaae589aa65c8524051a70a634a4a660fcdc70248a42a1cb2d82b639fc2a187adaf0b9d51afaf060553d6a3b9040dacca792c9ecb722a8d49ee86b8b2bd7f607308be80d9bd78406b45b0221f6c56a366ea0183e6740beed84153578744b2da0e344b8e2d3a324c05f3934b77456b9167870a6add8f32b6d16c090ac49bdde81042a610d61e12909949934835bdfac9f55472949d036d",
+   "duration_secs": 3.04,
+   "prompt": "Yağmur çatıya usul usul vuruyor.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "Y21voCMqUYSPAmEguKb2",
+   "generation_id": "UiBONsZhMUwmduifT281",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/Y21voCMqUYSPAmEguKb2/UiBONsZhMUwmduifT281/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065823Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=386ce019f790425caaea1bf851e806e894c710d1b6f2b3663b21dcc74a2874dfff4b3723c7ef0282ac7ca0854f02c4a9114b0300382ad31016a8950a96e9f385bae421419e657b9006773d366d4fbe35ec431f7a4e6cf24305593a683c3d7302787733a9b1cda0240ae6f062cf2b58b3409b95f01eedb827bf3937a506bc90ec1d699c869bdc3af1d20476dc05474b7038417dd338b4f011aef0ba0767c4cf2561a1da75c86038a9ce6b9d521632c379deae0f38e7a0a6ba3c39ddca85c155caf6e388f30ba826aa20158e952baadc731027d8d1750a08cb87445ef4d7531603ffff0c9cdfd8d7fd84921bc1162935b57ecbbcc42e4ca8634065131bd304455d",
+   "duration_secs": 2.96,
+   "prompt": "Yağmur çatıya usul usul vuruyor.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "NbX1C61lTlsusBywi9eu",
+   "generation_id": "zOlQG8GBU0ezPMPLDXwL",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/NbX1C61lTlsusBywi9eu/zOlQG8GBU0ezPMPLDXwL/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T065823Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=770529745e6352903d7a0609c604ffb0bcef7c30439bf0982b473b7e271cf127977ff15da66ca8c9c03fe554b858e2bce5f95c488262b82d6f78899ee45e1f0c735097852bbfaba1acef78476280fb71479756606796551695d4ff5438dd48e9b84ba437cddf2cbc29156e3e5bf8835b93f3ef2c21e00eea956ad0fb7d5429482deca0d384bc078a83be01b9ab4a336ff8ca27e1719b4340e91d194fb39cb98638770891d655e38b1aefd88481ab2df13cae97b168ec90252c5c06b107cbbb4c11856f5b4270ef7fa48910a7d53d697b5bef38a25073f04a47f930235b56135b3fc1a2d80b43cc6a95dcf25a6e93caf7c83c81f9275266489d99c184bb15657a",
+   "duration_secs": 3.04,
+   "prompt": "Yağmur çatıya usul usul vuruyor.",
+   "kind": "audio"
+  }
+ ]
+}

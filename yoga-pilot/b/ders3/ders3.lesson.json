@@ -1,0 +1,3661 @@
+{
+ "schema": "nefona.yoga.lesson/1 (PLAN §B.2 + ekler)",
+ "sozlesmeNotu": "PLAN §B.2 alanları aynen (id, priority, playOrder, kind, clips[id, text, voice, gapAfter, role/tier], silenceWindows, minSec, prefSec, maxSec) + pilot ekleri (ders2.lesson.json ile aynı adlar). Farklar: voice anahtarı hoc (v3 tek ses); uyku izni bloğu kind=sleepPermission (planlayıcı onu kapanış kapağı olarak okur); extras.quickClosing = \"Uykuya geç\"; skeleton30 (16–30 dk iskeleti, metinsiz).",
+ "id": "ders3-uykuya-gecis",
+ "version": "B-parti1-metin-2 (2026-09-30; karar 2 yedeği iki model incelemesi işlendi, b/INCELEME.md; sahibin kulağı bekliyor)",
+ "title": "Uykuya Geçiş",
+ "tagline": "Günü bırakıp uykuya yavaşça geçmek için.",
+ "daypart": "night",
+ "posture": "lying (yatakta, ışıklar kapalı ya da kısık)",
+ "defaultMinutes": 15,
+ "releaseMinutes": [
+  5,
+  15
+ ],
+ "minutes": {
+  "min": 5,
+  "max": 15,
+  "step": 1,
+  "designMax": 30,
+  "note": "ilk yayında çipler 5 · 15 (PLAN.v3 §A.1); planlayıcı testi 5–15'in her dakikası; 16–30 ikinci aşama (Kapı 9–11). 3 dk yok (PLAN.v3 §A.3)."
+ },
+ "openingNotice": "Bu dersi yalnızca araç ya da makine kullanmadığın ve suda olmadığın bir sırada dinle.",
+ "openingScreen": [
+  "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+  "Bu dersi yalnızca araç ya da makine kullanmadığın ve suda olmadığın bir sırada dinle. Bu dersten hemen sonra araç kullanma.",
+  "Gece kalkman gerekirse önce yana dön, otur, sonra kalk."
+ ],
+ "preparationCard": [
+  "Işığı kapat ya da iyice kıs",
+  "Telefonu, ekranı aşağıya bakacak biçimde yanına bırak",
+  "Sesi, konuşmayı zorlanmadan duyacağın en düşük düzeye getir",
+  "Uyurken kulak içi kulaklık yerine hoparlör daha iyi",
+  "Müzik kuyruğu: 0 / 5 / 10 / 20 dakika (varsayılan 10)"
+ ],
+ "preparationToggles": [
+  {
+   "id": "speechClarity",
+   "label": "Konuşmayı daha net duymak istiyorum",
+   "default": false,
+   "remember": "kullanıcı başına",
+   "effect": "voicePhaseGainDb.clarityMode + music.clarityMode + qa.speechOverBedDbMinClarity",
+   "preselect": "profilde yaş bilgisi 60 ve üstüyse önceden işaretli (pilot L3-10; VARSAYIM)"
+  }
+ ],
+ "soundCheck": {
+  "when": "modül düzeyi: ilk Yoga oturumu, \"Başla\"dan önce (Ders 2 verisiyle aynı kural); Ders 3 ilk dersse bu klipler çalar",
+  "clips": [
+   "c2.bas",
+   "c4.n03",
+   "c3.yagmur"
+  ],
+  "screenText": "Başının ağırlığını yastığa bırakıyorsun. Üç… Yağmur çatıya usul usul vuruyor.",
+  "level": "Derin evre düzeyi (−3 dB) ve kısık Derin yatağı",
+  "question": "Sözcükleri rahatça seçebildin mi?",
+  "options": [
+   "Evet",
+   "Hayır"
+  ],
+  "onNo": "speechClarity açılır ve kullanıcı başına hatırlanır",
+  "durationSec": 12,
+  "note": "VARSAYIM"
+ },
+ "scenePicker": {
+  "options": [],
+  "default": null,
+  "note": "Ders 3'te başlamadan sahne seçici yok: seçim ders içinde sözle (c3.yer: oda ya da veranda; c3.su: yağmur sesi iyi gelmezse onu çok uzakta düşünmek). Doğa katmanı Müzik / Doğa / Sessizlik seçimine bağlıdır (PLAN.v2 §A.1)."
+ },
+ "eveningHint": {
+  "afterLocalHour": null,
+  "text": "",
+  "note": "Ders 3 kendisi gece dersidir; 20.00'den sonra gündüz derslerinin kartı buraya yönlendirir (PLAN.v3 §2.0 madde 7)."
+ },
+ "leadIn": {
+  "min": 3.0,
+  "pref": 4.0,
+  "max": 6.0
+ },
+ "limits": {
+  "silenceWindowMaxSec": 45,
+  "silenceMaxSecUpTo15": 20,
+  "clipMaxSec": 15,
+  "silenceWindowNote": "uyku dersinde 30 dk'da da pencere en çok 45 sn (usta hoca kararı, düzeltme turu UH11); güvenlik §11.B-16'nın 90 sn üst sınırının altında",
+  "clipMaxNote": "Z3-07: birimin konuşması (cümle arası sessizlikler hariç) her hızda <= 15 sn",
+  "lastSecondsNoNewImage": 60,
+  "sentenceGapMinDerinSec": 1.0,
+  "note": "<= 15 dk'da duyurulu sessiz pencere yok (hiçbir boşluk 20 sn'yi aşmaz); pencereler 16–30 dk'da"
+ },
+ "sentenceGapByPhase": {
+  "Varış": {
+   "min": 0.6,
+   "pref": 0.8,
+   "max": 1.0
+  },
+  "Derinleşme": {
+   "min": 0.8,
+   "pref": 1.0,
+   "max": 1.3
+  },
+  "Derin": {
+   "min": 1.2,
+   "pref": 1.8,
+   "max": 2.5
+  },
+  "Kapanış": {
+   "min": 0.8,
+   "pref": 1.0,
+   "max": 1.2
+  }
+ },
+ "sentenceGapBreathPair": null,
+ "sentenceGapBreathPairNote": "Ders 3'te nefes çifti (breathPair) birimi yok",
+ "planner": {
+  "kural": "Pilot planlayıcı aynen (T4, T5, önek kuralı; ders2.lesson.json planner.kural). Uyku izni bloğu tek kapanış kapağıdır; dışa dönüş yok. Artım sırası entryRank/fillRank.",
+  "stretchCapBeforeIncrement": 0.5,
+  "entryRanks": {
+   "C4": 195,
+   "C5": 700
+  },
+  "p1DropOrder": [],
+  "p1DropNote": "5 dk'nın en kısa hali her köşede sığar (timing.txt boş pay); P1 blok düşmez.",
+  "variants": "Ders 3'te dönüşümlü seçenek (alternates) yok."
+ },
+ "timingModel": {
+  "model": "pilot timing.py: alt klip süresi = hece / eklemleme hızı + TTS-içi duraklamalar + uç payı (0,31; mikro 0,15) × DUR_SCALE",
+  "corners": {
+   "hoc": {
+    "rate": 4.68,
+    "profile": "hi",
+    "durScale": 1.0,
+    "basis": "Nefona Hoca önizleme eklemleme hızı 4,68 hece/sn (render/sel/hoc) + yüksek (Hakan v2) duraklama profili. VARSAYIM; en yavaş köşe"
+   },
+   "hoc-lo": {
+    "rate": 4.68,
+    "profile": "lo",
+    "durScale": 1.0,
+    "basis": "aynı hız, düşük duraklama profili. VARSAYIM; Ders 2'nin ölçülmüş hoc kliplerine en yakın model (Ders 1 raporu: ölçülen/model 0,990)"
+   },
+   "nes": {
+    "rate": 5.6,
+    "profile": "hi",
+    "durScale": 1.109,
+    "basis": "Neslihan'ın Ders 2'de ölçülmüş süreleri: ölçülen/model(5,6 yüksek) = 1,109 (110 ortak klip; v3/calc/measure.py). VARSAYIM: Ders 3 metnine aynı oranla taşındı"
+   }
+  },
+  "slackFloors": {
+   "5": 15.0,
+   "note": "min sessizliklerle 5 dk boş payı; pilot T6 tabanı (VARSAYIM)"
+  },
+  "note": "Ölçülmüş Ders 3 süresi yok; bütün süreler tahmindir. Ses üretilince voice.hoc.sec ile yeniden kurulur ve check_plan yeniden koşar."
+ },
+ "voiceProduction": {
+  "path": "yalnız MCP (creative_generate_speech); hız, kararlılık, seed, previous_text ve telaffuz sözlüğü yok",
+  "chosen": {
+   "name": "Nefona Hoca",
+   "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+   "sex_param": "m",
+   "model": "eleven_v4",
+   "generations_count": 3
+  },
+  "voice": "Nefona Hoca (voice_id Sr5w7dIZaRDglJ2cLaJm; sahip 2026-09-30, madde 8, VARSAYIM seçimi)",
+  "takes": "birim ya da taşıyıcı başına 3 çekim; Scribe birebir eşleşen, kesimi tutan ve taşıyıcı ekleminde F0 sıçraması <= 2 yarım ton olan çekim seçilir (SPEC.v3 §4, §6)",
+  "status": "bu adımda hiçbir ses üretilmedi; ElevenLabs bağlantısı bu oturumda yok"
+ },
+ "voicePhaseGainDb": {
+  "Varış": 0.0,
+  "Derinleşme": -1.5,
+  "Derin": -3.0,
+  "Kapanış": 0.0,
+  "sleepSteps": {
+   "k.anahtar3": -3.0,
+   "k.nefes": -3.0,
+   "k.izin": -3.0,
+   "k.uyanik": -4.5,
+   "k.son": -6.0,
+   "note": "uyku izninden sonra ses gerçekten alçalır (\"sesim yavaşça kısılacak\"); yatak aynı ölçüde iner, konuşma − yatak >= 15 dB korunur; rampa yalnız >= 4 sn'lik sessizlikte (S3-02). VARSAYIM"
+  },
+  "Kapanış_note": "Ders 3'te Kapanış evresi yok (uyku izni Derin evrede); yalnız Durdur dönüşü 0 dB'de çalar",
+  "clarityMode": {
+   "Varış": 0.0,
+   "Derinleşme": -0.5,
+   "Derin": -1.0,
+   "note": "pilot L2-10 (VARSAYIM)"
+  }
+ },
+ "music": {
+  "bpmFeel": 48,
+  "pulseNote": "48 BPM hissi, vuruşsuz; ElevenLabs Music'te tempo parametresi yok, istemde istenir ve ölçülür; müziğin nefese eşlik ettiği iddia edilmez (PLAN.v2 §A.1)",
+  "source": "A = ElevenLabs Music (SAHIP_ISTEKLERI madde 8; SPEC.v3 §7)",
+  "key": "La♭ majör sıcak pad + çok seyrek keçe piyano (VARSAYIM)",
+  "theme": "sürekli incelen doku; son bölümde yalnız pad ve yağmur (PLAN.v2 Ders 3 kartı)",
+  "phases": [
+   "varis",
+   "cekirdek (C1–C3; imgede seyrek keçe piyano)",
+   "uyku (yalnız pad + yağmur)",
+   "kuyruk (0/5/10/20 dk; son 3 dk kosinüs, tamamen durur)"
+  ],
+  "textureLayers": {
+   "layer:imge": "c3.sahne: seyrek keçe piyano girer, yağmur bir basamak öne",
+   "layer:uyku": "k.anahtar3: piyano çekilir, yalnız pad ve yağmur",
+   "rule": "çapraz geçiş >= 8 sn, konuşmanın altında; 20 sn'den kısa boşlukta evre geçişi yok; kreşendo yok (PLAN.v2 §A.1)"
+  },
+  "duckedBedLufs": {
+   "Varış": -35.0,
+   "Derinleşme": -36.5,
+   "Derin": -38.0,
+   "note": "gece dersi konuşma hedefi −20 LUFS (PLAN.v2 §0, VARSAYIM); yatak ≈ 15 dB altta"
+  },
+  "tail": {
+   "options": [
+    0,
+    5,
+    10,
+    20
+   ],
+   "default": 10,
+   "fadeLastSec": 180,
+   "curve": "kosinüs",
+   "stopsCompletely": true,
+   "outsideDuration": true,
+   "rule": "uyku izninden sonra ses susar; kuyruk sabaha kadar çalmaz (PLAN.v2 §B.6; güvenlik §11.D-5; dalgaSleep.js:12,18 kalıbı)"
+  },
+  "nature": {
+   "default": "çatıda hafif yağmur (sürekli, gök gürültüsü yok, damla şıpırtısı yok); varsayılan açık",
+   "variants": "4 × 30 sn döngü, rastgele sıra (PLAN.v2 §D.3)",
+   "imageSync": "c3.sahne → k.son arasında 1–2 dB öne (VARSAYIM); c3.su (\"yağmur sesi iyi gelmezse\") sözlü bir imge seçeneğidir, katmanı kapatmaz (katman Doğa / Müzik / Sessizlik seçimindedir)",
+   "uniquenessConflicts": [
+    "Ders 2 kıyı dokusu ve Ders 9 okyanus: su dokusu; yağmur ayrışık (çatıya düşen, geniş bantlı, dalga periyodu yok) — kör dinlemede yan yana"
+   ]
+  },
+  "clarityMode": {
+   "bedExtraDuckDb": -6.0,
+   "note": "L2-10 (VARSAYIM)"
+  },
+  "windowBedAboveDuckDb": null,
+  "windowNote": "<= 15 dk'da duyurulu pencere yok; yatak hiç kalkmaz"
+ },
+ "visual": {
+  "form": "sönen kor",
+  "color": {
+   "dark": "#E3A857",
+   "light": "#9B651A",
+   "name": "kehribar"
+  },
+  "phases": [
+   "varis",
+   "derinlesme",
+   "derin",
+   "uyku (kor kehribara döner, söner; ekran siyah)"
+  ],
+  "pulse": {
+   "respectFlashSafe": true,
+   "whenFlashSafeFalse": "nabız yok, yalnız çok yavaş opaklık",
+   "counting": "c4 sayılarıyla her sayıda kor bir soluk kararır (ses ne diyorsa görüntü o)"
+  },
+  "dawn": null,
+  "maxLuminance": "gece bağıl ≈ %4 (PLAN.v2 §E.2; VARSAYIM)",
+  "screen": "oynatıcı ekranı açık tutmaz; kuyrukta dokununca yalnız \"Durdur\" (PLAN.v2 §B.6)"
+ },
+ "qa": {
+  "speechOverBedDbMin": 15.0,
+  "speechOverBedDbMinClarity": 21.0,
+  "speechOverBedAllPieces": true,
+  "microClipRmsOffsetDb": 0.0,
+  "positionCheck": {
+   "lowpassHz": 4000,
+   "corrMin": 0.95,
+   "searchMs": 50,
+   "maxShiftMs": 1.0
+  },
+  "carrierJoinF0StepSemitones": 2.0,
+  "windowLoudnessRiseMaxDbPerSec": 1.0,
+  "derinClipRateCeil": 5.0,
+  "sentenceGapNote": "Derin evrede her cümle sınırında >= 1,0 sn (L3-02)",
+  "sleepEndRule": "k.son'dan sonra konuşma yok; kuyruk tam durur (ölçülür: son 3 dk kosinüs, sonrası dijital 0)",
+  "timingModel": "measuredRatioVsModel: seslendirmeden sonra yazılır (SPEC.v3 §1.1)"
+ },
+ "evidenceLine": "Neye dayanıyor: Uyumakta zorlanan 41 kişiyle yapılan bir çalışmada, ilgi çekici bir imgeyle dikkatlerini dağıtmaları söylenenler, talimat almayanlara göre daha kısa sürede uykuya daldıklarını bildirdi. Yatmadan önce yavaş nefes alma ve müzik dinleme çalışmalarında kişilerin kendi uyku değerlendirmesi iyileşti; cihazla ölçülen uykuda belirgin bir fark görülmedi. Tek bir yoga nidra kaydı sessizce uzanmaya göre uykuya dalma süresini değiştirmedi. Bu ders uyutma vaadi taşımaz.",
+ "evidenceByVersion": {
+  "5": "Beş dakikalık sürümün etkisini doğrudan sınayan bir çalışma bulamadık; bu sürüm aynı sırayı daha az ayrıntıyla izler."
+ },
+ "sourcesCard": {
+  "rows": [
+   {
+    "pmid": "11863237",
+    "cite": "Harvey & Payne 2002 · uyku öncesi imgeleme",
+    "doi": "10.1016/s0005-7967(01)00012-2",
+    "file": "sakin §5",
+    "detail": "Kontrollü klinik çalışma, uykusuzluk yaşayan 41 kişi: ilgi çekici bir imgeyle dikkat dağıtma talimatı, talimatsız gruba göre daha kısa uykuya dalma süresi ve daha az uyku öncesi zihinsel etkinlik bildirimiyle birlikte gitti; ölçüm yöntemi (öznel/objektif) özette yok. Dersin çekirdeği (C3) buna dayanır."
+   },
+   {
+    "pmid": "41886931",
+    "cite": "Eide, Hernes & Grønli 2026 · yatmadan önce yavaş nefes",
+    "doi": "10.1016/j.smrv.2026.102284",
+    "file": "sakin §4",
+    "detail": "Sistematik derleme, 9 çalışma, n=457, dakikada <= 10 nefes: öznel uyku süresi ve kalitesi iyileşti; aktigrafi ve PSG ile objektif sonuçlar belirsiz. C1 (yavaş, uzun veriş) ve C4 (8 sn'lik sayma döngüsü) buna dayanır."
+   },
+   {
+    "pmid": "25156003",
+    "cite": "Van Diest 2014 · kısa alış, uzun veriş",
+    "doi": "10.1007/s10484-014-9253-x",
+    "file": "sakin §4",
+    "detail": "n=30: kısa alış / uzun veriş (oran 0,42), uzun alış / kısa verişe göre daha fazla gevşeme bildirimiyle ilişkiliydi."
+   },
+   {
+    "pmid": "34306146",
+    "cite": "Toussaint 2021 · derin nefes talimatı",
+    "doi": "10.1155/2021/5924040",
+    "file": "güvenlik §2",
+    "detail": "Randomize, n=60: derin nefes grubunda önce ani bir fizyolojik uyarılma artışı görüldü. Bu yüzden derste \"derin nefes al\" yok; önce doğal nefes fark edilir."
+   },
+   {
+    "pmid": "36000763",
+    "cite": "Jespersen 2022 (Cochrane) · müzik ve uyku",
+    "doi": "10.1002/14651858.CD010459.pub3",
+    "file": "sakin §6",
+    "detail": "13 RKÇ, n=1.007: kayıtlı müzik öznel uyku kalitesinde fark gösterdi (PSQI −2,79, orta güven); objektif ölçümlerde iyileşme görülmedi. Müzik kuyruğunun (0/5/10/20 dk) dayanağı; \"uyutur\" denmez."
+   },
+   {
+    "pmid": "36731199",
+    "cite": "Sharpe 2023 · tek 30 dk yoga nidra kaydı (karşı kanıt)",
+    "doi": "10.1016/j.jpsychores.2023.111169",
+    "file": "sakin §1",
+    "detail": "Pilot RKÇ, n=22: 30 dk'lık kayıt sessiz uzanmaya göre uykuya dalma süresini değiştirmedi. Bu yüzden hiçbir sürüm için \"uyutur\" denmez."
+   },
+   {
+    "pmid": "16941239",
+    "cite": "Knowlton & Larkin 2006 · azalan ses",
+    "doi": "10.1007/s10484-006-9014-6",
+    "file": "teslim §1.2",
+    "detail": "RKÇ, n=48: tonu, yüksekliği ve hızı seans boyunca azalan seste EMG yalnız bu grupta düştü. Metin evreden evreye kısalır, boşluklar uzar, ses uyku izninden sonra alçalır."
+   },
+   {
+    "pmid": "39690521",
+    "cite": "Luu 2024 · travma-duyarlı yoga nidra, 10 bileşen",
+    "doi": "10.17761/2024-D-24-00021",
+    "file": "sakin, güvenlik",
+    "detail": "Öneri makalesi: özerklik ve onay, uygun uzunluk ve hazırlık, yeterli yerleşme ve dışa dönüş ya da uyku izni. Açılış cümlesi, atlama izni, imgede seçenek ve uyku izni buradan."
+   },
+   {
+    "pmid": "24882909",
+    "cite": "Cordi, Schlarb & Rasch 2014 · sesli telkin ve uyku",
+    "doi": "10.5665/sleep.3778",
+    "file": "güvenlik §3, sakin §6",
+    "detail": "n=70 genç kadın, öğle uykusu: \"daha derin uyu\" telkini yavaş dalga uykusunu kontrole göre artırdı; etki telkine yatkın kişilerde görüldü. Bu yüzden derste uyku vaadi ve \"uyuyacaksın\" dili yok."
+   },
+   {
+    "pmid": "33562129",
+    "cite": "Wang 2021 · kulaklıkla uyumak",
+    "doi": "10.3390/ijerph18041560",
+    "file": "güvenlik §9",
+    "detail": "Küme RKÇ, 830 öğrenci: sağlık eğitimi kulaklıkla uyumayı azalttı; çalışma bunu işitme açısından riskli davranış olarak ele aldı. Hazırlık kartındaki hoparlör önerisi bir tasarım çıkarımıdır."
+   },
+   {
+    "pmid": "28958002",
+    "cite": "Bioulac 2017 · uykululuk ve trafik kazası",
+    "doi": "10.1093/sleep/zsx134",
+    "file": "güvenlik §8",
+    "detail": "SD/MA, 17 çalışma: direksiyonda uykulu olmak kaza riskiyle ilişkili (OR 2,51). Açılış ekranındaki araç satırları."
+   },
+   {
+    "pmid": "39808431",
+    "cite": "Radin 2025 · gerçek kullanım süresi",
+    "doi": "10.1001/jamanetworkopen.2024.54435",
+    "file": "benlik §1",
+    "detail": "RKÇ, n=1.458: meditasyona özgü kullanım günde ortalama 3,36 dk; kullanıcıların %69,7'si günde 5 dk'nın altında. Kısa sürüm bu yüzden bütün bir ders olarak kurulur; etkisi ayrıca sınanmadı."
+   },
+   {
+    "pmid": "34260686",
+    "cite": "Tran 2021 · ayağa kalkınca kan basıncı düşüşü",
+    "doi": "10.1093/ageing/afab090",
+    "file": "güvenlik §7",
+    "detail": "SD/MA: 65 yaş üstünde ayağa kalkınca ilk anda görülen düşüş, sürekli ölçümle %29. Durdur dönüşündeki \"yana dön, otur, bekle\" sırası."
+   }
+  ],
+  "note": "cite kartta gösterilir; detail yalnız ders3.script.md içindir. Hepsi doğrulanmış dosyalardan (dossier-*.dogrulanmis.md); yeni PMID eklenmedi.",
+  "footer": "Kaynak: PubMed (National Library of Medicine). DOI'ler https://doi.org/ önekiyle açılır."
+ },
+ "progress": {
+  "domain": "wellbeing",
+  "effectKey": "uyku-gecisi",
+  "measure": "uykuya dalma kolaylığı (öznel)",
+  "question": "",
+  "beforeQuestion": null,
+  "morningQuestion": "Dün gece uykuya dalmak ne kadar kolaydı?",
+  "scale": [
+   1,
+   10
+  ],
+  "better": "up",
+  "when": "önce puanı sorulmaz; ertesi sabah uygulama ilk açıldığında, saat 12.00'ye kadar tek soru; sonra sorulmaz, o gece için veri boş kalır (PLAN.v2 Ders 3 kartı)",
+  "metric": {
+   "unit": "puan",
+   "better": "up",
+   "series": true
+  },
+  "note": "bir \"nasıl hissettin\" gidişatıdır, etki kanıtı değildir (güvenlik §11.F)"
+ },
+ "afterCheck": {
+  "question": "Ders sırasında zorlandın mı?",
+  "options": [
+   "Hayır",
+   "Biraz",
+   "Çok"
+  ],
+  "skippable": true,
+  "when": "yalnız ders Durdur (X) ile bitirildiyse durdurma ekranında; uyku izni çaldıysa gece sorulmaz (en az dokunuş; VARSAYIM)",
+  "onCok": "Bu olabiliyor ve durman doğruydu. Bir dahaki sefere daha kısa ya da gözleri açık bir sürüm deneyebilirsin. Sık tekrarlarsa ya da geçmezse bir uzmanla konuşmak iyi olur. Acil durumda 112.",
+  "storage": "veri telefonda kalır; puan olarak gösterilmez (güvenlik §11.F)"
+ },
+ "panelChecks": [
+  "Söyleyiş: \"verandadasın\" (c3.yer; beş hece, iki \"da\") akıcı mı? Değilse \"Belki üstü kapalı bir balkondasın.\" yedeği Türkçe editöre sorulur.",
+  "Vurgu ve söyleyiş: \"yan\" (a.durus: sırtüstü ya da yan), \"Her veriş, günü…\" (c1.gun: virgülde durak yoksa \"veriş günü\" diye duyulur), \"Gece senin.\" (k.son: vurgu \"senin\"de), \"Bugün bitti.\" (üç anahtar cümlede aynı ezgi, giderek yumuşak).",
+  "Sayılar (car.sayi3): 8 sn'lik aralıkla tek heceli \"üç\", \"beş\", \"on\" net mi; \"bir.\" son sayı düşen ezgiyle mi?",
+  "Uyku izninden sonra ses alçalması (sleepSteps −4,5 / −6 dB) konuşmayı yataktan >= 15 dB üstte tutuyor mu?",
+  "Yağmur dokusu ile Ders 2 kıyı ve Ders 9 okyanus dokuları yan yana ayırt ediliyor mu (su dokusu çakışması)?"
+ ],
+ "carriers": [
+  {
+   "id": "car.sayi3",
+   "text": "Sayıyorum… on… dokuz… sekiz… yedi… altı… beş… dört… üç… iki… bir.",
+   "lead": "Sayıyorum…",
+   "items": [
+    "c4.n10",
+    "c4.n09",
+    "c4.n08",
+    "c4.n07",
+    "c4.n06",
+    "c4.n05",
+    "c4.n04",
+    "c4.n03",
+    "c4.n02",
+    "c4.n01"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı; ön söz (\"Sayıyorum…\") kesilip atılır",
+   "note": "Kısa biçim \"beş\"ten başlar; altı..on tek grup olarak birlikte girer (Ders 2 kalıbı). İki nokta kullanılmadı (SPEC v3.1).",
+   "syllables": 19,
+   "voice": {
+    "hoc": {
+     "file": "yoga-uretim/ders3/hoc/car.sayi3.wav",
+     "sec": null
+    }
+   }
+  }
+ ],
+ "blocks": [
+  {
+   "id": "A",
+   "kind": "arrival",
+   "priority": 0,
+   "playOrder": 0,
+   "title": "Varış (tek kapak; isteğe bağlılar süreyle eklenir)",
+   "clips": [
+    {
+     "id": "a.acilis",
+     "text": "Günün sesleri geride kalıyor; yatağına yerleşiyorsun.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 4.0,
+      "max": 7.0
+     },
+     "phase": "Varış",
+     "cue": {
+      "visual": "phase:varis (kor, en aydınlık hâli; gece parlaklığı)",
+      "music": "phase:varis (La♭ pad)"
+     },
+     "tags": {
+      "texture": "varis",
+      "uniqueOpening": true,
+      "action": "yatağa yerleşmek",
+      "note": "PLAN.v2 §A.2.1 yönü (\"…şimdi yatağına yerleşebilirsin\") \"-(y)abil-\"siz yazıldı: 5 dakikada a.izin ile aynı 60 sn içine düşer (üç \"-(y)abil-\" onda); \"şimdi\" dolgusu da çıktı"
+     },
+     "syllables": 20,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/a.acilis.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.durus",
+     "text": "Sırtüstü ya da yan, hangisi rahatsa öyle yatıyorsun.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 6.0,
+      "max": 9.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "action": "uzanmak"
+     },
+     "syllables": 18,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/a.durus.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.ortu",
+     "text": "Üşüyorsan örtünü omuzlarına kadar çekmen iyi olur.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "action": "örtüyü çekmek"
+     },
+     "fillRank": 150,
+     "syllables": 20,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/a.ortu.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.gozler",
+     "text": "Gözlerini kapatmak ya da açık tutmak sana kalmış.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 4.0,
+      "max": 6.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "eyesOpen": true,
+      "eyes": "baskı yok; karanlıkta da açık kalabilir",
+      "action": "gözleri kapatmak ya da açık tutmak"
+     },
+     "syllables": 17,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/a.gozler.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.izin",
+     "text": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 5.0,
+      "max": 7.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "safety": "opening",
+      "eyesOpen": true,
+      "repeatOk": [
+       "gözle"
+      ]
+     },
+     "syllables": 29,
+     "words": 9,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/a.izin.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.kolay",
+     "text": "Uyumaya çalışman gerekmiyor; uzanıp dinlenmek yeter.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 5.0,
+      "max": 8.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "normalize": true,
+      "safety": "normalize",
+      "note": "uyku çabasını kaldırır; güvenlik §11.B-5 (gevşeme zorunlu değil)"
+     },
+     "syllables": 19,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/a.kolay.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.karar",
+     "text": "Ne kadar gevşeyeceğine her an sen karar veriyorsun.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 4.0,
+      "max": 7.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "safety": "control"
+     },
+     "fillRank": 110,
+     "syllables": 18,
+     "words": 8,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/a.karar.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.isler",
+     "text": "Yarına kalan işler sabaha kadar bekler.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 5.0,
+      "max": 8.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "note": "günü bırakma yayının ilk adımı; vaat değil, gündelik söz",
+      "repeatOk": [
+       "kadar"
+      ]
+     },
+     "fillRank": 160,
+     "syllables": 14,
+     "words": 6,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/a.isler.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 42.5,
+   "maxSec": 99.6,
+   "prefSec": {
+    "5": 45.2,
+    "10": 76.7,
+    "15": 85.3
+   },
+   "estimateBasis": "Nefona Hoca köşesi: 4,68 hece/sn + yüksek duraklama profili, cümle arası sessizlikler dahil (VARSAYIM); minSec = zorunlu klipler en kısa sessizlikle; prefSec = planlayıcının 5/10/15 dk planındaki blok süresi; üretimden sonra voice.hoc.sec ile"
+  },
+  {
+   "id": "C1",
+   "kind": "core",
+   "priority": 1,
+   "playOrder": 1,
+   "title": "Yavaş, uzun veriş (tutma yok, sayı yok)",
+   "clips": [
+    {
+     "id": "c1.fark",
+     "text": "Önce nefesini olduğu gibi fark ediyorsun.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "phase:derinlesme",
+      "music": "phase:cekirdek"
+     },
+     "tags": {
+      "texture": "nefes",
+      "action": "doğal nefesi birkaç döngü izlemek"
+     },
+     "syllables": 16,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c1.fark.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.yer",
+     "text": "Nefes en çok nerede belirginse dikkatin orada kalsın.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "nefes",
+      "repeatOk": [
+       "nefes"
+      ]
+     },
+     "fillRank": 170,
+     "syllables": 19,
+     "words": 8,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c1.yer.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.veris",
+     "text": "Alışı zorlamadan verişi biraz uzatmak yeterli.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 12.0,
+      "max": 16.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "nefes",
+      "action": "verişi uzatmak (tutma yok, sayı yok)"
+     },
+     "syllables": 18,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c1.veris.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.zorlanirsan",
+     "text": "Uzun veriş zor gelirse kendi ritmine dön.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 5.0,
+      "max": 8.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "nefes",
+      "safety": "breath",
+      "mood": "safety",
+      "repeatOk": [
+       "veriş"
+      ],
+      "note": "düzeltme turu (TE11): \"Nefes zor gelirse\" nefes darlığı gibi anlaşılabiliyordu"
+     },
+     "fillRank": 105,
+     "syllables": 14,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c1.zorlanirsan.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.gun",
+     "text": "Her veriş, günü biraz daha geride bırakıyor.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "nefes",
+      "callback": "a.acilis",
+      "repeatOk": [
+       "gerid",
+       "veriş"
+      ]
+     },
+     "minTarget": 360,
+     "syllables": 16,
+     "words": 7,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c1.gun.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.dudak",
+     "text": "Verişte nefes burnundan ya da hafif aralık dudaklarından çıkabilir.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "nefes",
+      "repeatOk": [
+       "veriş",
+       "nefes"
+      ]
+     },
+     "fillRank": 230,
+     "syllables": 24,
+     "words": 9,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c1.dudak.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.birkac",
+     "text": "Birkaç nefes boyunca bu ritmi sürdürüyorsun.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 16.0,
+      "pref": 18.0,
+      "max": 20.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "nefes",
+      "action": "birkaç uzun veriş (nefes payı)"
+     },
+     "syllables": 15,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c1.birkac.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.k1",
+     "text": "Bugün bitti; artık dinlenebilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 8.0,
+      "max": 12.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "nefes",
+      "key": 1
+     },
+     "syllables": 12,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c1.k1.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 67.0,
+   "maxSec": 144.1,
+   "prefSec": {
+    "5": 57.9,
+    "10": 98.6,
+    "15": 125.4
+   },
+   "estimateBasis": "Nefona Hoca köşesi: 4,68 hece/sn + yüksek duraklama profili, cümle arası sessizlikler dahil (VARSAYIM); minSec = zorunlu klipler en kısa sessizlikle; prefSec = planlayıcının 5/10/15 dk planındaki blok süresi; üretimden sonra voice.hoc.sec ile"
+  },
+  {
+   "id": "C2",
+   "kind": "core",
+   "priority": 1,
+   "playOrder": 2,
+   "title": "Bedenin ağırlaşması: ayaklardan başa yavaş beden dolaşımı",
+   "clips": [
+    {
+     "id": "c2.cerceve",
+     "text": "Ayaklarından başına doğru bedeninde dolaşacağız. Rahatsız eden bir yer olursa atla.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 4.0,
+      "max": 6.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "safety": "skip",
+      "mood": "safety"
+     },
+     "syllables": 31,
+     "words": 11,
+     "sentences": 2,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "yoga-uretim/ders3/hoc/c2.cerceve.wav",
+       "sec": null,
+       "note": "birim arşivi (tek TTS isteği); uygulama subclips dosyalarını çalar"
+      }
+     },
+     "subclips": [
+      {
+       "index": 1,
+       "text": "Ayaklarından başına doğru bedeninde dolaşacağız.",
+       "syllables": 19,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders3/hoc/c2.cerceve.1.m4a",
+         "sec": null
+        }
+       }
+      },
+      {
+       "index": 2,
+       "text": "Rahatsız eden bir yer olursa atla.",
+       "syllables": 12,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders3/hoc/c2.cerceve.2.m4a",
+         "sec": null
+        }
+       }
+      }
+     ],
+     "ttsUnit": {
+      "text": "Ayaklarından başına doğru bedeninde dolaşacağız. Rahatsız eden bir yer olursa atla.",
+      "cut": "cümle sonlarından; parça sayısı tutmazsa insan kararı"
+     }
+    },
+    {
+     "id": "c2.ayak",
+     "text": "Önce ayaklarının ağırlığını yatağa veriyorsun.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "ayak",
+      "sense": "ağırlık",
+      "repeatOk": [
+       "ayakl"
+      ]
+     },
+     "syllables": 19,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.ayak.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.topuk",
+     "text": "Ayaklarının yatağa değdiği yerleri fark ediyorsun.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "ayak",
+      "sense": "dokunma",
+      "repeatOk": [
+       "yatağ",
+       "ayakl"
+      ]
+     },
+     "fillRank": 180,
+     "syllables": 19,
+     "words": 6,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.topuk.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.bacak",
+     "text": "Bacakların da yatağa yaslanıyor.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "bacak",
+      "sense": "ağırlık",
+      "repeatOk": [
+       "yatağ"
+      ]
+     },
+     "syllables": 12,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.bacak.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.uyluk",
+     "text": "Uylukların ağır ve sıcak olabilir.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "bacak",
+      "sense": "sıcaklık"
+     },
+     "fillRank": 200,
+     "syllables": 13,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.uyluk.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.bel",
+     "text": "Gövden bütün ağırlığıyla yatakta.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "govde",
+      "sense": "ağırlık"
+     },
+     "syllables": 12,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.bel.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.omurga",
+     "text": "Omurgan boydan boya uzanıyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 8.0,
+      "max": 11.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "govde",
+      "sense": "dokunma"
+     },
+     "fillRank": 215,
+     "syllables": 11,
+     "words": 4,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.omurga.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.el",
+     "text": "Ellerin olduğu yerde dinleniyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "kol"
+     },
+     "fillRank": 210,
+     "syllables": 12,
+     "words": 4,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.el.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.kol",
+     "text": "Kollarının ağırlığını da yatağa veriyorsun.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "kol",
+      "sense": "ağırlık",
+      "repeatOk": [
+       "ağırl",
+       "yatağ"
+      ]
+     },
+     "syllables": 17,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.kol.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.omuz",
+     "text": "Omuzların yatağa doğru inebilir.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "kol",
+      "repeatOk": [
+       "yatağ"
+      ]
+     },
+     "fillRank": 190,
+     "syllables": 13,
+     "words": 4,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.omuz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.boyun",
+     "text": "Boynun yastığa yaslanıyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "bas",
+      "sense": "dokunma",
+      "note": "iki incelemenin önerisi \"Başın ve boynun…\"; \"baş\" c2.bas'ta geldiği için yalnız boyun"
+     },
+     "fillRank": 250,
+     "syllables": 9,
+     "words": 3,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.boyun.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.yuz",
+     "text": "Alnın gevşek, gözlerinin çevresi yumuşak.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "bas"
+     },
+     "fillRank": 220,
+     "syllables": 14,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.yuz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.cene",
+     "text": "Çenen serbest, dişlerin hafif aralık.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "bas"
+     },
+     "fillRank": 245,
+     "syllables": 12,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.cene.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.bas",
+     "text": "Başının ağırlığını yastığa bırakıyorsun.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "bas",
+      "sense": "ağırlık",
+      "repeatOk": [
+       "ağırl",
+       "yastı"
+      ],
+      "note": "düzeltme turu (UH13): \"ağırlığı vermek\" motifi; \"yastık taşıyor\" Ders 2'nin \"zemin taşıyor\"una yaklaşıyordu"
+     },
+     "syllables": 16,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.bas.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.sicak",
+     "text": "Ellerinde ve ayaklarında hafif bir sıcaklık olabilir.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 8.0,
+      "max": 11.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "sicaklik",
+      "sense": "sıcaklık",
+      "note": "ağırlıktan sıcaklığa geçiş (A.2.2)"
+     },
+     "fillRank": 260,
+     "syllables": 20,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.sicak.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.gelmezse",
+     "text": "Ağırlık her yerde aynı olmayabilir; bu da olur.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "normalize": true,
+      "repeatOk": [
+       "ağırl"
+      ]
+     },
+     "fillRank": 120,
+     "syllables": 17,
+     "words": 8,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.gelmezse.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.butun",
+     "text": "Baştan ayağa bütün bedenin yatağın üstünde.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 8.0,
+      "max": 12.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "beden",
+      "section": "butun",
+      "repeatOk": [
+       "beden",
+       "yatağ"
+      ]
+     },
+     "syllables": 16,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.3
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c2.butun.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 63.6,
+   "maxSec": 234.4,
+   "prefSec": {
+    "5": 68.6,
+    "10": 108.1,
+    "15": 201.3
+   },
+   "estimateBasis": "Nefona Hoca köşesi: 4,68 hece/sn + yüksek duraklama profili, cümle arası sessizlikler dahil (VARSAYIM); minSec = zorunlu klipler en kısa sessizlikle; prefSec = planlayıcının 5/10/15 dk planındaki blok süresi; üretimden sonra voice.hoc.sec ile"
+  },
+  {
+   "id": "C4",
+   "kind": "core",
+   "priority": 2,
+   "playOrder": 3,
+   "entryRank": 195,
+   "title": "Nefesle geri sayma (bire kadar; 10–13 dk beşten, 14 dk'dan ondan)",
+   "clips": [
+    {
+     "id": "c4.giris",
+     "text": "Bire kadar geri sayacağım. Her sayıda nefesini bırakıyorsun.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 6.0,
+      "max": 8.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "phase:derin",
+      "music": "phase:cekirdek (doku incelir)"
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "action": "sayıyla nefes vermek",
+      "note": "düzeltme turu (UH1 BLOCKER): başlangıç sayısı söylenmez; 10–13 dk'da sayma beşten, 14 dk'dan ondan başlar. \"Ondan bire\" 10–13 dk'da yanlıştı. Ders 2'nin \"Geriye doğru sayacağım.\"ından ayrı"
+     },
+     "syllables": 23,
+     "words": 8,
+     "sentences": 2,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "yoga-uretim/ders3/hoc/c4.giris.wav",
+       "sec": null,
+       "note": "birim arşivi (tek TTS isteği); uygulama subclips dosyalarını çalar"
+      }
+     },
+     "subclips": [
+      {
+       "index": 1,
+       "text": "Bire kadar geri sayacağım.",
+       "syllables": 10,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders3/hoc/c4.giris.1.m4a",
+         "sec": null
+        }
+       }
+      },
+      {
+       "index": 2,
+       "text": "Her sayıda nefesini bırakıyorsun.",
+       "syllables": 13,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders3/hoc/c4.giris.2.m4a",
+         "sec": null
+        }
+       }
+      }
+     ],
+     "ttsUnit": {
+      "text": "Bire kadar geri sayacağım. Her sayıda nefesini bırakıyorsun.",
+      "cut": "cümle sonlarından; parça sayısı tutmazsa insan kararı"
+     }
+    },
+    {
+     "id": "c4.uymaz",
+     "text": "Nefesin sayılara uymasa ya da sayıyı kaçırsan da olur.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 10.0,
+      "max": 13.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "geri-sayma",
+      "normalize": true,
+      "repeatOk": [
+       "sayıl",
+       "sayıy",
+       "nefes"
+      ]
+     },
+     "fillRank": 198,
+     "syllables": 21,
+     "words": 9,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c4.uymaz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.n10",
+     "text": "on…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.1,
+      "pref": 7.5,
+      "max": 7.9
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "kor: sayıyla bir soluk kararır",
+      "breath": {
+       "count": 10
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "fillRank": 270,
+     "fillGroup": "sayi10",
+     "requires": [
+      "c4.n05"
+     ],
+     "onsetPeriod": {
+      "min": 7.6,
+      "pref": 8.0,
+      "max": 8.4
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.sayi3",
+      "index": 0
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c4.n10.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.n09",
+     "text": "dokuz…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.1,
+      "pref": 7.5,
+      "max": 7.9
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "kor: sayıyla bir soluk kararır",
+      "breath": {
+       "count": 9
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "fillRank": 270,
+     "fillGroup": "sayi10",
+     "requires": [
+      "c4.n05"
+     ],
+     "onsetPeriod": {
+      "min": 7.6,
+      "pref": 8.0,
+      "max": 8.4
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.sayi3",
+      "index": 1
+     },
+     "gapFromPeriod": true,
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c4.n09.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.n08",
+     "text": "sekiz…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.1,
+      "pref": 7.5,
+      "max": 7.9
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "kor: sayıyla bir soluk kararır",
+      "breath": {
+       "count": 8
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "fillRank": 270,
+     "fillGroup": "sayi10",
+     "requires": [
+      "c4.n05"
+     ],
+     "onsetPeriod": {
+      "min": 7.6,
+      "pref": 8.0,
+      "max": 8.4
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.sayi3",
+      "index": 2
+     },
+     "gapFromPeriod": true,
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c4.n08.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.n07",
+     "text": "yedi…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.1,
+      "pref": 7.5,
+      "max": 7.9
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "kor: sayıyla bir soluk kararır",
+      "breath": {
+       "count": 7
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "fillRank": 270,
+     "fillGroup": "sayi10",
+     "requires": [
+      "c4.n05"
+     ],
+     "onsetPeriod": {
+      "min": 7.6,
+      "pref": 8.0,
+      "max": 8.4
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.sayi3",
+      "index": 3
+     },
+     "gapFromPeriod": true,
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c4.n07.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.n06",
+     "text": "altı…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.1,
+      "pref": 7.5,
+      "max": 7.9
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "kor: sayıyla bir soluk kararır",
+      "breath": {
+       "count": 6
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "fillRank": 270,
+     "fillGroup": "sayi10",
+     "requires": [
+      "c4.n05"
+     ],
+     "onsetPeriod": {
+      "min": 7.6,
+      "pref": 8.0,
+      "max": 8.4
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.sayi3",
+      "index": 4
+     },
+     "gapFromPeriod": true,
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c4.n06.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.n05",
+     "text": "beş…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.1,
+      "pref": 7.5,
+      "max": 7.9
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "kor: sayıyla bir soluk kararır",
+      "breath": {
+       "count": 5
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "onsetPeriod": {
+      "min": 7.6,
+      "pref": 8.0,
+      "max": 8.4
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.sayi3",
+      "index": 5
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c4.n05.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.n04",
+     "text": "dört…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.1,
+      "pref": 7.5,
+      "max": 7.9
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "kor: sayıyla bir soluk kararır",
+      "breath": {
+       "count": 4
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "onsetPeriod": {
+      "min": 7.6,
+      "pref": 8.0,
+      "max": 8.4
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.sayi3",
+      "index": 6
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c4.n04.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.n03",
+     "text": "üç…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.1,
+      "pref": 7.5,
+      "max": 7.9
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "kor: sayıyla bir soluk kararır",
+      "breath": {
+       "count": 3
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "onsetPeriod": {
+      "min": 7.6,
+      "pref": 8.0,
+      "max": 8.4
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.sayi3",
+      "index": 7
+     },
+     "gapFromPeriod": true,
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c4.n03.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.n02",
+     "text": "iki…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.1,
+      "pref": 7.5,
+      "max": 7.9
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "kor: sayıyla bir soluk kararır",
+      "breath": {
+       "count": 2
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "onsetPeriod": {
+      "min": 7.6,
+      "pref": 8.0,
+      "max": 8.4
+     },
+     "gapFloor": 0.8,
+     "carrier": {
+      "id": "car.sayi3",
+      "index": 8
+     },
+     "gapFromPeriod": true,
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c4.n02.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.n01",
+     "text": "bir.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 8.0,
+      "max": 11.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "kor: sayıyla bir soluk kararır",
+      "breath": {
+       "count": 1
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "carrier": {
+      "id": "car.sayi3",
+      "index": 9
+     },
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c4.n01.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.bitti",
+     "text": "Sayılar burada bitiyor. Kaçını duyduğun önemli değil.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 8.0,
+      "max": 11.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "geri-sayma",
+      "normalize": true,
+      "repeatOk": [
+       "sayıl"
+      ]
+     },
+     "syllables": 20,
+     "words": 7,
+     "sentences": 2,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "yoga-uretim/ders3/hoc/c4.bitti.wav",
+       "sec": null,
+       "note": "birim arşivi (tek TTS isteği); uygulama subclips dosyalarını çalar"
+      }
+     },
+     "subclips": [
+      {
+       "index": 1,
+       "text": "Sayılar burada bitiyor.",
+       "syllables": 9,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders3/hoc/c4.bitti.1.m4a",
+         "sec": null
+        }
+       }
+      },
+      {
+       "index": 2,
+       "text": "Kaçını duyduğun önemli değil.",
+       "syllables": 11,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders3/hoc/c4.bitti.2.m4a",
+         "sec": null
+        }
+       }
+      }
+     ],
+     "ttsUnit": {
+      "text": "Sayılar burada bitiyor. Kaçını duyduğun önemli değil.",
+      "cut": "cümle sonlarından; parça sayısı tutmazsa insan kararı"
+     }
+    },
+    {
+     "id": "c4.k2",
+     "text": "Bugün bitti; dinlenebilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 9.0,
+      "pref": 12.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "geri-sayma",
+      "key": 2,
+      "repeatOk": [
+       "bitti",
+       "bitiy"
+      ]
+     },
+     "syllables": 10,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c4.k2.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 72.6,
+   "maxSec": 157.2,
+   "prefSec": {
+    "5": 0.0,
+    "10": 82.5,
+    "15": 145.0
+   },
+   "estimateBasis": "Nefona Hoca köşesi: 4,68 hece/sn + yüksek duraklama profili, cümle arası sessizlikler dahil (VARSAYIM); minSec = zorunlu klipler en kısa sessizlikle; prefSec = planlayıcının 5/10/15 dk planındaki blok süresi; üretimden sonra voice.hoc.sec ile"
+  },
+  {
+   "id": "C3",
+   "kind": "core",
+   "priority": 1,
+   "playOrder": 4,
+   "title": "Tek sahneli, ayrıntılı imgeleme: yağmurlu akşam, oda ya da veranda",
+   "clips": [
+    {
+     "id": "c3.sahne",
+     "text": "Zihninde yağmurlu bir akşam belirebilir.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "phase:derin (kor)",
+      "music": "layer:imge (seyrek keçe piyano)",
+      "nature": "yağmur öne"
+     },
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "giriş",
+      "safety": "choice"
+     },
+     "syllables": 14,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.sahne.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.gelmezse",
+     "text": "Görüntü belirmese de, gözlerin açık kalsa da sorun değil.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "safety": "alternative",
+      "eyesOpen": true,
+      "normalize": true,
+      "repeatOk": [
+       "belir"
+      ]
+     },
+     "syllables": 20,
+     "words": 9,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.gelmezse.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.yer",
+     "text": "Belki sıcak bir odadasın. Belki üstü kapalı bir verandadasın.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "giriş",
+      "safety": "choice",
+      "repeatOk": [
+       "belki"
+      ]
+     },
+     "syllables": 22,
+     "words": 9,
+     "sentences": 2,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "yoga-uretim/ders3/hoc/c3.yer.wav",
+       "sec": null,
+       "note": "birim arşivi (tek TTS isteği); uygulama subclips dosyalarını çalar"
+      }
+     },
+     "subclips": [
+      {
+       "index": 1,
+       "text": "Belki sıcak bir odadasın.",
+       "syllables": 9,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders3/hoc/c3.yer.1.m4a",
+         "sec": null
+        }
+       }
+      },
+      {
+       "index": 2,
+       "text": "Belki üstü kapalı bir verandadasın.",
+       "syllables": 13,
+       "voice": {
+        "hoc": {
+         "file": "public/yoga/ders3/hoc/c3.yer.2.m4a",
+         "sec": null
+        }
+       }
+      }
+     ],
+     "ttsUnit": {
+      "text": "Belki sıcak bir odadasın. Belki üstü kapalı bir verandadasın.",
+      "cut": "cümle sonlarından; parça sayısı tutmazsa insan kararı"
+     }
+    },
+    {
+     "id": "c3.su",
+     "text": "Yağmur sesi sana iyi gelmezse onu çok uzakta düşünmen de olur.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "safety": "choice",
+      "repeatOk": [
+       "yağmu"
+      ],
+      "note": "su herkese iyi gelmeyebilir (güvenlik §11.B-10); sahneyi değiştirmeyen kapı, ardından gelen yağmur cümleleri doğru kalır (usta hoca kararı, UH3/TE14)"
+     },
+     "fillRank": 115,
+     "syllables": 23,
+     "words": 11,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.su.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.yagmur",
+     "text": "Yağmur çatıya usul usul vuruyor.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "yağmur",
+      "sense": "ses",
+      "repeatOk": [
+       "yağmu"
+      ]
+     },
+     "syllables": 12,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.yagmur.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.damla",
+     "text": "Oluktan tek tük damlalar düşüyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "yağmur",
+      "sense": "ses"
+     },
+     "fillRank": 140,
+     "syllables": 11,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.damla.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.toprak",
+     "text": "Havada ıslak toprağın kokusu var.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 9.0,
+      "pref": 12.0,
+      "max": 16.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "yağmur",
+      "sense": "koku"
+     },
+     "fillRank": 130,
+     "syllables": 12,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.toprak.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.cam",
+     "text": "Yakındaki camdan yağmur damlaları ağır ağır süzülüyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "yağmur",
+      "sense": "görme",
+      "repeatOk": [
+       "yağmu"
+      ]
+     },
+     "fillRank": 280,
+     "syllables": 20,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.cam.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.ortu",
+     "text": "Üstünde kalın, yumuşak bir örtü var.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "örtü",
+      "sense": "dokunma"
+     },
+     "syllables": 12,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.ortu.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.agirlik",
+     "text": "Örtünün tatlı ağırlığı seni sarıyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 9.0,
+      "pref": 12.0,
+      "max": 16.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "arc": "örtü",
+      "sense": "ağırlık",
+      "repeatOk": [
+       "örtü"
+      ]
+     },
+     "fillRank": 145,
+     "syllables": 14,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.agirlik.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.sicaklik",
+     "text": "Altında kendi sıcaklığın birikiyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 8.0,
+      "max": 11.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "arc": "örtü",
+      "sense": "sıcaklık"
+     },
+     "fillRank": 175,
+     "syllables": 13,
+     "words": 4,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.sicaklik.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.parmak",
+     "text": "Parmak uçların örtünün dokusunu buluyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 8.0,
+      "max": 11.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "arc": "örtü",
+      "sense": "dokunma",
+      "repeatOk": [
+       "örtü"
+      ]
+     },
+     "fillRank": 255,
+     "syllables": 15,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.parmak.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.yastik",
+     "text": "Yastığın kumaşı serin ve yumuşak.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 9.0,
+      "pref": 12.0,
+      "max": 16.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "arc": "örtü",
+      "sense": "dokunma"
+     },
+     "fillRank": 150,
+     "syllables": 12,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.yastik.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.lamba",
+     "text": "Köşede bir lamba sarı, sıcak bir ışık veriyor.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "lamba",
+      "sense": "görme"
+     },
+     "syllables": 16,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.lamba.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.ses2",
+     "text": "Yağmurun sesi hiç değişmeden sürüyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "arc": "lamba",
+      "sense": "ses",
+      "callback": "c3.yagmur",
+      "repeatOk": [
+       "yağmu"
+      ]
+     },
+     "fillRank": 205,
+     "syllables": 13,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.ses2.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.uzak",
+     "text": "Yukarıda yağmurun, yakında kendi nefesinin sesi var.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 9.0,
+      "pref": 12.0,
+      "max": 16.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "arc": "lamba",
+      "sense": "ses",
+      "callback": "c1",
+      "repeatOk": [
+       "yağmu",
+       "sesi"
+      ]
+     },
+     "fillRank": 265,
+     "syllables": 19,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.uzak.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.kisilir",
+     "text": "Lambanın ışığı yavaş yavaş kısılıyor.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 9.0,
+      "max": 13.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "fade",
+      "arc": "ışık kısılır",
+      "repeatOk": [
+       "lamba",
+       "ışığı"
+      ]
+     },
+     "short": {
+      "belowSec": 360,
+      "text": "Lambanın ışığı kısılıyor; loş bir aydınlık kalıyor.",
+      "gapAfter": {
+       "min": 8.0,
+       "pref": 10.0,
+       "max": 13.0
+      },
+      "note": "5 dk: c3.aydinlik bu cümleye katılır (karanlık tümüyle gelmez)",
+      "syllables": 18,
+      "words": 7,
+      "sentences": 1,
+      "voice": {
+       "hoc": {
+        "file": "public/yoga/ders3/hoc/c3.kisilir.k360.m4a",
+        "sec": null
+       }
+      }
+     },
+     "syllables": 14,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.kisilir.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.aydinlik",
+     "text": "Çevrende loş, yumuşak bir aydınlık kalıyor.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 13.0,
+      "max": 17.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "fade",
+      "arc": "ışık kısılır",
+      "safety": "darkness",
+      "note": "karanlık tümüyle gelmez (güvenlik §11.B-10)"
+     },
+     "minTarget": 360,
+     "syllables": 14,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.aydinlik.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.kal",
+     "text": "Yağmuru dinlemekten başka yapacak bir şey yok.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 9.0,
+      "max": 12.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "stay",
+      "arc": "kalış",
+      "repeatOk": [
+       "yağmu"
+      ]
+     },
+     "fillRank": 235,
+     "syllables": 15,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/c3.kal.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 88.0,
+   "maxSec": 316.8,
+   "prefSec": {
+    "5": 82.4,
+    "10": 183.9,
+    "15": 273.0
+   },
+   "estimateBasis": "Nefona Hoca köşesi: 4,68 hece/sn + yüksek duraklama profili, cümle arası sessizlikler dahil (VARSAYIM); minSec = zorunlu klipler en kısa sessizlikle; prefSec = planlayıcının 5/10/15 dk planındaki blok süresi; üretimden sonra voice.hoc.sec ile"
+  },
+  {
+   "id": "K",
+   "kind": "sleepPermission",
+   "priority": 0,
+   "playOrder": 99,
+   "title": "Uyku izni (dışa dönüş yok; müzik kuyruğu sürenin dışında)",
+   "clips": [
+    {
+     "id": "k.anahtar3",
+     "text": "Bugün bitti.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 8.0,
+      "max": 10.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "music": "phase:uyku (yalnız pad ve yağmur)",
+      "visual": "kor kehribara döner"
+     },
+     "tags": {
+      "texture": "uyku",
+      "key": 3,
+      "step": "anahtar"
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/k.anahtar3.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.nefes",
+     "text": "Nefes kendi ritminde gelip gidiyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 9.0,
+      "pref": 11.0,
+      "max": 14.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "uyku",
+      "repeatOk": [
+       "nefes"
+      ]
+     },
+     "fillRank": 225,
+     "syllables": 12,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/k.nefes.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.izin",
+     "text": "Uykuya dalarsan bu da güzel; sesim yavaşça kısılacak.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 12.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "voiceGain": "sleepSteps: bu klipten sonra −1,5 dB, k.son öncesi −3 dB daha"
+     },
+     "tags": {
+      "texture": "uyku",
+      "step": "izin",
+      "safety": "sleepPermission"
+     },
+     "syllables": 19,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/k.izin.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.uyanik",
+     "text": "Uyanık kalırsan da olur; uzanıp dinlenmek yeter.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 9.0,
+      "max": 12.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "uyku",
+      "step": "izin",
+      "normalize": true,
+      "repeatOk": [
+       "dinle",
+       "uzanı"
+      ]
+     },
+     "syllables": 17,
+     "words": 7,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/k.uyanik.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.son",
+     "text": "Gece senin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 6.0,
+      "max": 8.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "kor söner, ekran siyah",
+      "music": "kuyruk başlar (0/5/10/20 dk; son 3 dk kosinüs, tam durur)"
+     },
+     "tags": {
+      "texture": "uyku",
+      "step": "son"
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/k.son.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 39.8,
+   "maxSec": 73.7,
+   "prefSec": {
+    "5": 42.5,
+    "10": 46.3,
+    "15": 65.3
+   },
+   "estimateBasis": "Nefona Hoca köşesi: 4,68 hece/sn + yüksek duraklama profili, cümle arası sessizlikler dahil (VARSAYIM); minSec = zorunlu klipler en kısa sessizlikle; prefSec = planlayıcının 5/10/15 dk planındaki blok süresi; üretimden sonra voice.hoc.sec ile"
+  }
+ ],
+ "extras": {
+  "quickClosing": {
+   "id": "K.uyku",
+   "kind": "utility",
+   "title": "\"Uykuya geç\": aynı dosyada uyku izninin başına atlama",
+   "mode": "sameFileSleepPermission",
+   "buttonLabel": "Uykuya geç",
+   "cue": {
+    "music": "phase:uyku (yalnız pad ve yağmur); dönüş tınısı yok",
+    "visual": "kor kehribara döner",
+    "voiceGain": "o anki evre düzeyinden Derin düzeyine 4 sn rampa"
+   },
+   "leadInSec": 4.0,
+   "voiceGainRampSec": 4.0,
+   "prefixByActiveBlock": {},
+   "releaseClip": {},
+   "windowReturn": {},
+   "rule": "PLAN.v2 §B.5 ve PLAN.v3 §D.3: o anki cümle biter, aynı dosyada K'nin başına 2 sn'lik geçişle atlanır. Uyku dersinde imgeyi bırakma ön klibi yoktur: imge açıkken uykuya geçmek dersin amacıdır; dışa dönüş ve şafak yok. Klipler denetim içindir: K'nin zorunlu klipleri.",
+   "clips": [
+    {
+     "id": "k.anahtar3",
+     "text": "Bugün bitti.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 8.0,
+      "max": 10.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "music": "phase:uyku (yalnız pad ve yağmur)",
+      "visual": "kor kehribara döner"
+     },
+     "tags": {
+      "texture": "uyku",
+      "key": 3,
+      "step": "anahtar"
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/k.anahtar3.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.izin",
+     "text": "Uykuya dalarsan bu da güzel; sesim yavaşça kısılacak.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 12.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "voiceGain": "sleepSteps: bu klipten sonra −1,5 dB, k.son öncesi −3 dB daha"
+     },
+     "tags": {
+      "texture": "uyku",
+      "step": "izin",
+      "safety": "sleepPermission"
+     },
+     "syllables": 19,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/k.izin.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.uyanik",
+     "text": "Uyanık kalırsan da olur; uzanıp dinlenmek yeter.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 9.0,
+      "max": 12.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "uyku",
+      "step": "izin",
+      "normalize": true,
+      "repeatOk": [
+       "dinle",
+       "uzanı"
+      ]
+     },
+     "syllables": 17,
+     "words": 7,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/k.uyanik.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.son",
+     "text": "Gece senin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 6.0,
+      "max": 8.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "kor söner, ekran siyah",
+      "music": "kuyruk başlar (0/5/10/20 dk; son 3 dk kosinüs, tam durur)"
+     },
+     "tags": {
+      "texture": "uyku",
+      "step": "son"
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 1.2,
+      "pref": 1.8,
+      "max": 2.5
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/k.son.m4a",
+       "sec": null
+      }
+     }
+    }
+   ]
+  },
+  "stopReturn": {
+   "id": "D.durdur",
+   "kind": "utility",
+   "title": "Durdur (X) sonrası isteğe bağlı 20–30 sn sesli dönüş (uyku dersi biçimi)",
+   "screenText": "Ders burada bitti; şu an yatağındasın. Gözlerini açıp çevrene bakmak iyi olur; acele yok. Kalkacaksan önce yana dön, otur ve bekle; başın dönerse biraz daha otur.",
+   "screenTextCommon": "Gözlerini aç, etrafına bak, acele etme. Uzanıyorsan önce yana dön, sonra otur.",
+   "screenNote": "düzeltme turu (TE1 BLOCKER): ekran = söylenen. Uyku dersinde durdurma ekranı ortak metin yerine sesli dönüşün üç cümlesini gösterir; ortak metnin \"gözlerini aç, etrafına bak\"ı gece dersi için yazılmamıştı. PLAN.v2 §B.5'teki \"ekran metni ortak\" kuralından Ders 3'e özgü sapma; plana not gerekir.",
+   "rule": "PLAN.v2 §B.5: X onaysız, 2 sn'de söner. Sesli dönüş yalnız ekrandaki düğmeye dokununca çalar (kişinin kendi seçimi); uyku dersinde gece odayı hatırlatır ve kalkış sırasını söyler. Ekranda, sesli dönüş çalsa da çalmasa da, aynı üç cümle durur (screenText).",
+   "clips": [
+    {
+     "id": "d.yer",
+     "text": "Ders burada bitti; şu an yatağındasın.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 5.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "mood": "safety",
+      "step": "oda"
+     },
+     "syllables": 13,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/d.yer.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "d.goz",
+     "text": "Gözlerini açıp çevrene bakmak iyi olur; acele yok.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 6.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "mood": "safety",
+      "step": "goz"
+     },
+     "syllables": 19,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/d.goz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "d.kalk",
+     "text": "Kalkacaksan önce yana dön, otur ve bekle; başın dönerse biraz daha otur.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.0,
+      "pref": 2.0,
+      "max": 3.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "mood": "safety",
+      "step": "kalk"
+     },
+     "syllables": 25,
+     "words": 12,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.8,
+      "pref": 1.0,
+      "max": 1.2
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/d.kalk.m4a",
+       "sec": null
+      }
+     }
+    }
+   ]
+  },
+  "firstEverIntro": {
+   "id": "I.ilk",
+   "kind": "utility",
+   "title": "İlk ders cümlesi (kişinin ilk yoga dersi Ders 3 ise; ayrı giriş dosyası)",
+   "rule": "PLAN.v2 §A.1, PLAN.v3 §D.3: dersin giriş müziği + cümle, sonra dersin başına 2 sn geçiş (≈ 7 sn)",
+   "clips": [
+    {
+     "id": "g.ilk.uyku",
+     "text": "Bugün yalnızca tanışıyoruz; zorlanırsan dersi bitirmen yeterli.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.0,
+      "pref": 2.0,
+      "max": 2.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "firstEver": true,
+      "note": "PLAN.v3 §D.3 kalıbı; uyku dersinde ekrandaki düğme \"Uykuya geç\" olduğu için cümle X'i (dersi bitirmek) söyler, a.izin'deki fiille aynı. \"-(y)abil-\" yok. Gündüz derslerinin g.ilk biriminden ayrı yardımcı birim g.ilk.uyku (usta hoca UH16); PLAN.v3 §D.3'e not gerekir"
+     },
+     "syllables": 22,
+     "words": 7,
+     "sentences": 1,
+     "required": true,
+     "sentenceGap": {
+      "min": 0.6,
+      "pref": 0.8,
+      "max": 1.0
+     },
+     "voice": {
+      "hoc": {
+       "file": "public/yoga/ders3/hoc/g.ilk.uyku.m4a",
+       "sec": null
+      }
+     }
+    }
+   ]
+  }
+ },
+ "skeleton30": {
+  "status": "İKİNCİ AŞAMA (Kapı 9–11): 16–30 dk metni yazılmadı. Bu bölüm iskelettir; usta hoca (ya da karar 2 yedeği) onayına gider. Ayrıntı: iskelet30.md",
+  "playOrder": [
+   "A",
+   "C1",
+   "C2",
+   "C4",
+   "BR.orta",
+   "C3",
+   "C5",
+   "K"
+  ],
+  "anchorsSec": {
+   "5": {
+    "A": 45,
+    "C1": 60,
+    "C2": 70,
+    "C4": 0,
+    "C3": 85,
+    "K": 40
+   },
+   "15": {
+    "A": 75,
+    "C1": 105,
+    "C2": 210,
+    "C4": 150,
+    "C3": 300,
+    "K": 60
+   },
+   "20": {
+    "A": 90,
+    "C1": 120,
+    "C2": 270,
+    "C4": 240,
+    "C3": 405,
+    "K": 75
+   },
+   "30": {
+    "A": 90,
+    "C1": 150,
+    "C2": 360,
+    "C4": 270,
+    "C3": 540,
+    "C5": 300,
+    "K": 90
+   }
+  },
+  "anchorsNote": "PLAN.v2 §B.4 (Ders 3 tablosu) ve sure.md §4; VARSAYIM. 5 ve 15 dk için planlayıcının kurduğu gerçek süreler timing.txt'de; C3 15 dk'da dikkat eğrisi sınırı (tek doku <= 300 sn) yüzünden çapanın biraz altında tutuldu.",
+  "attentionCurve30": "0:00 varış · 1:30 yavaş veriş · 4:00 beden ağırlaşır: ayaklardan bele · 7:00 belden başa, ağırlıktan sıcaklığa · 10:00 nefesle geri sayma · 14:30 sahne: yağmur ve oda · 17:30 ayrıntılar: dokunma, koku, ses · 20:30 cümleler seyrekleşir · 23:30 imgede sessiz kalış: yağmurun sesiyle · 28:30 uyku izni (PLAN.v2 §A.2.2; en uzun değişimsiz aralık 4:30). Düzeltme turu (UH10): PLAN.v2 §A.2.2 23:30 satırı \"imgede sessiz yürüyüş\" idi; usta hoca kararıyla yürüyüş yok (plana not gerekir)",
+  "keySentences": [
+   "Bugün bitti; artık dinlenebilirsin.",
+   "Bugün bitti; dinlenebilirsin.",
+   "Bugün bitti."
+  ],
+  "keyNote": "PLAN.v2 §A.2.1 yönü: \"Bugün bitti; şimdi dinlenebilirsin.\" → \"Bugün bitti.\" → \"Dinlenme zamanı…\". Değişiklik: \"şimdi\" dolgusu çıktı; üçüncü söyleyiş yüklemsiz ve üç noktalıydı (üç nokta yalnız listelerde, PLAN.v2 §C.2) ve ikinciden uzundu (her söyleyiş kısalır); yerine ikinci biçim araya girdi, en kısa \"Bugün bitti.\" uyku izninin başına kondu. Türkçe editör ve usta hoca onayına.",
+  "imageArc": "yağmurlu bir akşam (oda ya da üstü kapalı veranda; yağmur sesi iyi gelmeyen için yağmuru çok uzakta düşünmek) → yağmuru dinlemek (ses, damla, ıslak toprak kokusu, camdan süzülen damlalar) → örtünün ağırlığı ve sıcaklığı → lambanın sarı ışığı → ışık yavaş yavaş kısılır, loş bir aydınlık kalır → [16–30] ayrıntılar derinleşir, cümleler seyrekleşir → [30] imgede sessiz kalış: aynı yerde, giderek seyrekleşen tek cümlelerle yağmur, örtü ve nefes → uyku izni. Tek sahne; yeni yer ve yeni hareket yok.",
+  "music": "La♭ majör sıcak pad + çok seyrek keçe piyano, 48 BPM hissi, vuruşsuz; doğa: çatıda hafif yağmur (varsayılan açık). Yay: sürekli incelen doku; imgede piyano seyrekleşir, uyku izninde yalnız pad ve yağmur; kuyruk 0/5/10/20 dk, son 3 dk kosinüs, tamamen durur. 5, 15 ve 30 dk'da aynı tema.",
+  "visual": "sönen kor (kehribar #E3A857); evreyle loşlaşır; geri saymada her sayıda bir soluk kararır; uyku izninde kehribar köze döner ve söner; ekran siyah kalır.",
+  "entryAndFillOrder": {
+   "upTo15": "timing.txt \"Blokların ve isteğe bağlı kliplerin girdiği dakika\" tablosu (her köşe için ayrı)",
+   "from16": [
+    "C3 ayrıntı klipleri (dokunma, koku, ses; ikinci ayrıntı turu) — 16–18 dk",
+    "C2 genişletme: belden başa ikinci tur, ağırlıktan sıcaklığa (sıcaklık listesi) — 17–19 dk",
+    "BR.orta: ortada \"istediğin an\" hatırlatması + gözler açık seçeneği, C3'ün hemen önünde — >= 20 dk her sürümde (güvenlik §11.B-3)",
+    "C4 genişletme: sayma sonrası \"bu kez sen içinden say\" duyurulu pencere (<= 45 sn) — 20–22 dk",
+    "C3 duyurulu pencereler (<= 45 sn; seyrekleşen cümleler) — 21–25 dk",
+    "K genişletme (1:15 → 1:30) — 23 dk",
+    "C5 İmgede sessiz kalış: yağmurun sesiyle (P5) — 26–30 dk"
+   ],
+   "rule": "Önek kuralı: 16–30 artımlarının hepsi 15 dk'nın durduğu artımın ardından gelir; <= 15 dk planları değişmez (PLAN.v3 §A.4). Derleme testi bunu denetler."
+  },
+  "blocks": [
+   {
+    "id": "BR.orta",
+    "kind": "bridge",
+    "placement": {
+     "before": "C3"
+    },
+    "requiresMinSec": 1200,
+    "content": "ortak açılış cümlesinin \"istediğin an … senin elinde\" biçimi + gözler açıksa bakış serbest + dayanak (yatağın taşıdığı beden); >= 20 dk her sürümde (PLAN.v2 §C.5, güvenlik §11.B-3)"
+   },
+   {
+    "id": "C5",
+    "kind": "core",
+    "priority": 5,
+    "playOrder": 5,
+    "entryRank": 700,
+    "title": "İmgede sessiz kalış: yağmurun sesiyle (seyrek ses)",
+    "content": "aynı yerde kalınır; yeni hareket ve yer değişimi yok (usta hoca kararı, düzeltme turu UH10: önceki \"imgede sessiz yürüyüş\" lamba kısılıp örtünün altına yerleşildikten sonra uyarılmayı geri yükseltiyordu). Giderek seyrekleşen tek cümleler: yağmur, örtü, nefes (her 30–60 sn'de bir); iki duyurulu pencere (<= 45 sn; duyuru bir kapı taşır: \"Uyanık kalırsan da olur.\"); pencere dönüşü windowRule30'a göre",
+    "anchorsSec": {
+     "30": 300
+    }
+   },
+   {
+    "id": "C2+",
+    "kind": "extension",
+    "content": "belden başa ikinci, daha yavaş tur; \"ağırlıktan sıcaklığa\": ayak tabanları, avuçlar, yüz; atlama kapısı yinelenir"
+   },
+   {
+    "id": "C4+",
+    "kind": "extension",
+    "content": "ikinci sayma yok; sayma sonrası isteğe bağlı iç sayma penceresi (Ders 2 c2.x.kendin kalıbı, 8 sn döngü; <= 45 sn)"
+   },
+   {
+    "id": "C3+",
+    "kind": "extension",
+    "content": "ayrıntılar: parmak uçlarında örtünün dokusu, yastığın serinliği, uzakta bir kapının kapanma sesi yok (ani ses yok), odanın ahşap kokusu; yağmur çatıdan oluğa"
+   }
+  ],
+  "windowRule30": {
+   "maxSec": 45,
+   "returnTone": null,
+   "welcomeClip": null,
+   "returnLine": "imgeden tek kısa cümle (ör. \"Yağmur sürüyor.\"); \"Yeniden seninleyim\" kalıbı yok",
+   "returnLevelDb": "evre düzeyinin (Derin −3 dB) 3 dB altı",
+   "announceDoor": "\"Uyanık kalırsan da olur.\"",
+   "basis": "usta hoca kararı (düzeltme turu UH11): uyku dersinde dönüş tınısı ve karşılama cümlesi uykuya dalmış dinleyiciyi uyandırabilir (güvenlik §11.B-15); güvenlik §11.B-16'nın duyuru ve dönüş şartı tınısız, fısıltıya yakın tek cümleyle karşılanır"
+  },
+  "safety30": [
+   "ortada \"istediğin an\" hatırlatması (>= 20 dk)",
+   "20 sn'yi aşan her sessizlik duyurulu, kapılı (\"Uyanık kalırsan da olur.\") ve <= 45 sn",
+   "pencere dönüşünde tını ve karşılama yok; imgeden tek kısa cümle, fısıltıya yakın düzeyde",
+   "hiçbir yerde dışa dönüş yok",
+   "son 60 sn'de yeni imge yok",
+   "müzik kuyruğu sürenin dışında, tamamen durur"
+  ]
+ }
+}

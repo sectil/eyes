@@ -1,0 +1,249 @@
+{
+ "lesson": "d05",
+ "T": 180,
+ "status": "ok",
+ "mode": "pref→max",
+ "f": 0.6097,
+ "total": 180.0,
+ "speech_sec": 61.555,
+ "sel": [
+  "C1"
+ ],
+ "stop": [
+  101,
+  "c1.nerede",
+  "sığmadı"
+ ],
+ "notes": [],
+ "check_plan": {
+  "fails": [],
+  "pass": true,
+  "density": {
+   "syll": 126.0,
+   "frac": 0.458,
+   "deep_syll": 0.0,
+   "deep_frac": 0.0,
+   "dead": [],
+   "avg": 92.667
+  }
+ },
+ "slack_min_s": 26.34,
+ "missing_clips": [],
+ "events": [
+  {
+   "clip": "a.durus",
+   "block": "A",
+   "phase": "Varış",
+   "start": 4.6097,
+   "end": 11.4958,
+   "gapAfter": 3.8048,
+   "subs": [
+    {
+     "start": 4.6097,
+     "end": 7.4131,
+     "text": "Sırtın dik olsun ama gerilmesin."
+    },
+    {
+     "start": 8.335,
+     "end": 11.4958,
+     "text": "Gözlerini kapatıp kapatmamak sana kalmış."
+    }
+   ]
+  },
+  {
+   "clip": "a.izin",
+   "block": "A",
+   "phase": "Varış",
+   "start": 15.3007,
+   "end": 20.5532,
+   "gapAfter": 3.3048,
+   "subs": [
+    {
+     "start": 15.3007,
+     "end": 20.5532,
+     "text": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin."
+    }
+   ]
+  },
+  {
+   "clip": "a.acilis",
+   "block": "A",
+   "phase": "Varış",
+   "start": 23.858,
+   "end": 29.3604,
+   "gapAfter": 6.3048,
+   "subs": [
+    {
+     "start": 23.858,
+     "end": 29.3604,
+     "text": "Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c1.yer",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 35.6652,
+   "end": 41.588,
+   "gapAfter": 6.4145,
+   "subs": [
+    {
+     "start": 35.6652,
+     "end": 41.588,
+     "text": "Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?"
+    }
+   ]
+  },
+  {
+   "clip": "c1.izle",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 48.0026,
+   "end": 52.8118,
+   "gapAfter": 15.5242,
+   "subs": [
+    {
+     "start": 48.0026,
+     "end": 52.8118,
+     "text": "Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c1.kayma",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 68.336,
+   "end": 71.7659,
+   "gapAfter": 5.2194,
+   "subs": [
+    {
+     "start": 68.336,
+     "end": 71.7659,
+     "text": "Dikkatin birazdan kayacak; bu çok olağan."
+    }
+   ]
+  },
+  {
+   "clip": "c1.donus",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 76.9853,
+   "end": 81.7356,
+   "gapAfter": 7.4388,
+   "subs": [
+    {
+     "start": 76.9853,
+     "end": 81.7356,
+     "text": "Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c1.aralik1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 89.1743,
+   "end": 92.7597,
+   "gapAfter": 17.2194,
+   "subs": [
+    {
+     "start": 89.1743,
+     "end": 92.7597,
+     "text": "Birkaç soluk boyunca ışığı orada tutuyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "c1.anahtar1",
+   "block": "C1",
+   "phase": "Derinleşme",
+   "start": 109.9791,
+   "end": 112.983,
+   "gapAfter": 16.8291,
+   "subs": [
+    {
+     "start": 109.9791,
+     "end": 112.983,
+     "text": "Fark ettiğin an, zaten geri döndün."
+    }
+   ]
+  },
+  {
+   "clip": "k.donus",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 129.8121,
+   "end": 131.6289,
+   "gapAfter": 4.4145,
+   "subs": [
+    {
+     "start": 129.8121,
+     "end": 131.6289,
+     "text": "Artık dönüş zamanı."
+    }
+   ]
+  },
+  {
+   "clip": "k.nefes",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 136.0434,
+   "end": 141.2246,
+   "gapAfter": 4.3048,
+   "subs": [
+    {
+     "start": 136.0434,
+     "end": 141.2246,
+     "text": "Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor."
+    }
+   ]
+  },
+  {
+   "clip": "k.hareket",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 145.5294,
+   "end": 151.9598,
+   "gapAfter": 7.3048,
+   "subs": [
+    {
+     "start": 145.5294,
+     "end": 151.9598,
+     "text": "Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak."
+    }
+   ]
+  },
+  {
+   "clip": "k.goz",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 159.2646,
+   "end": 162.7776,
+   "gapAfter": 7.6097,
+   "subs": [
+    {
+     "start": 159.2646,
+     "end": 162.7776,
+     "text": "Gözlerin kapalıysa, açıp çevrene bakıyorsun."
+    }
+   ]
+  },
+  {
+   "clip": "k.son",
+   "block": "K",
+   "phase": "Kapanış",
+   "start": 170.3873,
+   "end": 172.7806,
+   "gapAfter": 7.2194,
+   "subs": [
+    {
+     "start": 170.3873,
+     "end": 172.7806,
+     "text": "El feneri yine senin elinde."
+    }
+   ]
+  }
+ ]
+}

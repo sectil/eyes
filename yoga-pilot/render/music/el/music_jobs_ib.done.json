@@ -1,0 +1,38 @@
+{
+ "d02/el-derin-c": {
+  "generation_id": "Dn9sgbIBaCzxjC0YsMIR",
+  "session_id": "DOMGil3DpzTJxG5k99em",
+  "mp3": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/raw/ib/el-derin-c.mp3",
+  "wav": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-derin-c.wav",
+  "duration_s": 300.0,
+  "actual_credits": 4499,
+  "est_credits": 8250
+ },
+ "d02/el-imge-b": {
+  "generation_id": "mLReZKtqZBrIADP11TRC",
+  "session_id": "p9jQynPGQPZ6UVoBDJqx",
+  "mp3": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/raw/ib/el-imge-b.mp3",
+  "wav": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-imge-b.wav",
+  "duration_s": 180.0,
+  "actual_credits": 2699.4,
+  "est_credits": 4950
+ },
+ "d02/el-zitlik": {
+  "generation_id": "6byCOVJv52sltnXo8B7a",
+  "session_id": "csKEIA8W1u6vv6UfDvAi",
+  "mp3": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/raw/ib/el-zitlik.mp3",
+  "wav": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-zitlik.wav",
+  "duration_s": 120.0,
+  "actual_credits": 1799.6,
+  "est_credits": 1800
+ },
+ "d02/el-zitlik-b": {
+  "generation_id": "4Ylj6qRYhiNvc0jgalk8",
+  "session_id": "8KU3w7OvLzlLZDL8bX7z",
+  "mp3": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/raw/ib/el-zitlik-b.mp3",
+  "wav": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/el/el-zitlik-b.wav",
+  "duration_s": 120.0,
+  "actual_credits": 1799.6,
+  "est_credits": 1800
+ }
+}

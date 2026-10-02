@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nef örnekleri</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+/* Nefona tokenları: app/src/styles.css ile aynı değerler */
+:root {
+  --f-display: 'Unbounded', 'Avenir Next', system-ui, sans-serif;
+  --f-body: 'Onest', system-ui, -apple-system, sans-serif;
+  --bg: #f3f6f8; --surface: #ffffff; --surface-2: #e9eef2; --surface-3: #dde4ea; --border: #e1e7ec;
+  --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --accent: #0b7480; --accent-soft: rgba(17,169,184,.12); --accent-graphic: #11a9b8;
+  --iris-1: #11a9b8; --iris-2: #2f6bea;
+  --shadow: 0 1px 2px rgba(11,18,25,.04), 0 8px 24px rgba(11,18,25,.05);
+  --wall: radial-gradient(120% 80% at 20% 0%, #9fd9e0 0%, #5c9fc4 45%, #2b4e86 100%);
+  --glass: rgba(255,255,255,.62); --glass-ink: #0b1219; --glass-ink-2: rgba(11,18,25,.72);
+  --w: 390px; --h: 844px;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #070c12; --surface: #0f171f; --surface-2: #141e28; --surface-3: #1c2834; --border: rgba(255,255,255,.08);
+  --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --accent: #19c2d1; --accent-soft: rgba(25,194,209,.14); --accent-graphic: #19c2d1;
+  --iris-1: #19c2d1; --iris-2: #3e7bfa; --shadow: none;
+  --wall: radial-gradient(120% 80% at 20% 0%, #1d4d63 0%, #10233d 50%, #05080f 100%);
+  --glass: rgba(40,48,58,.66); --glass-ink: #f2f5f7; --glass-ink-2: rgba(242,245,247,.74);
+  color-scheme: dark;
+}
+:root[data-w="320"] { --w: 320px; --h: 568px; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); }
+body { font-family: var(--f-body); color: var(--ink); -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+.phone { width: var(--w); height: var(--h); position: relative; overflow: hidden; background: var(--bg); }
+[hidden] { display: none !important; }
+
+/* ---- kilit ekranı ---- */
+.lock { background: var(--wall); color: #fff; display: flex; flex-direction: column; align-items: center; }
+.lock .date { margin-top: 64px; font-weight: 600; font-size: 19px; opacity: .92; }
+.lock .clock { font-family: var(--f-display); font-weight: 600; font-size: 86px; line-height: 1; letter-spacing: -.03em; margin-top: 4px; }
+:root[data-w="320"] .lock .date { margin-top: 40px; font-size: 16px; }
+:root[data-w="320"] .lock .clock { font-size: 66px; }
+.notif { position: absolute; left: 10px; right: 10px; bottom: 132px; background: var(--glass); color: var(--glass-ink);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6); backdrop-filter: blur(24px) saturate(1.6);
+  border-radius: 22px; padding: 13px 15px 14px; display: grid; grid-template-columns: 38px 1fr; gap: 0 11px; }
+:root[data-w="320"] .notif { bottom: 74px; left: 8px; right: 8px; }
+.app-ic { width: 38px; height: 38px; border-radius: 9px; background: #070c12; display: grid; place-items: center; grid-row: span 3; align-self: start; margin-top: 2px; }
+.app-ic i { width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 50% 50%, #070c12 0 28%, transparent 29%), conic-gradient(from 200deg, #19c2d1, #3e7bfa, #19c2d1); }
+.n-head { display: flex; justify-content: space-between; font-size: 13px; color: var(--glass-ink-2); }
+.n-head b { font-weight: 600; letter-spacing: .02em; }
+.n-title { font-weight: 700; font-size: 15.5px; line-height: 1.3; margin-top: 1px; }
+.n-body { font-size: 15px; line-height: 1.34; color: var(--glass-ink); }
+.n-src { font-size: 13px; color: var(--glass-ink-2); margin-top: 3px; grid-column: 2; }
+.lock .bottom { position: absolute; bottom: 34px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 46px; }
+.lock .bottom span { width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,.16); display: grid; place-items: center; }
+:root[data-w="320"] .lock .bottom { bottom: 16px; }
+:root[data-w="320"] .lock .bottom span { width: 42px; height: 42px; }
+.lock .bar { position: absolute; bottom: 8px; left: 50%; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: rgba(255,255,255,.85); }
+
+/* ---- uygulama ---- */
+.app { padding: 58px 16px 0; background: var(--bg); }
+:root[data-w="320"] .app { padding-top: 40px; }
+.eyebrow { font-size: 13px; color: var(--ink-3); font-weight: 600; }
+.app h1 { font-family: var(--f-display); font-weight: 650; font-size: 25px; letter-spacing: -.02em; margin: 4px 0 18px; }
+:root[data-w="320"] .app h1 { font-size: 21px; margin-bottom: 12px; }
+.card { background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); border: 1px solid var(--border); padding: 18px; position: relative; overflow: hidden; }
+:root[data-w="320"] .card { padding: 15px; border-radius: 20px; }
+.badge { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; color: var(--accent); background: var(--accent-soft); padding: 5px 11px 5px 6px; border-radius: 999px; }
+.badge i { width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle, var(--surface) 0 26%, transparent 27%), conic-gradient(from 200deg, var(--iris-1), var(--iris-2), var(--iris-1)); }
+.ghost { height: 64px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); margin-top: 12px; opacity: .55; }
+.ghost.s { height: 48px; }
+
+.row-card { display: flex; justify-content: space-between; align-items: center; min-height: 54px; padding: 0 18px; margin-top: 12px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); font-size: 15px; }
+.rc-k { font-weight: 700; } .rc-v { color: var(--ink-2); }
+:root[data-w="320"] .row-card { min-height: 46px; margin-top: 10px; font-size: 14px; }
+/* M2 hatırlayan Nef */
+.recall .big { font-family: var(--f-display); font-weight: 600; font-size: 22px; line-height: 1.28; letter-spacing: -.015em; margin: 14px 0 0; }
+:root[data-w="320"] .recall .big { font-size: 18.5px; margin-top: 11px; }
+.recall .big em { font-style: normal; color: var(--accent); }
+.scale { margin: 18px 2px 4px; position: relative; height: 34px; }
+:root[data-w="320"] .scale { margin-top: 14px; }
+.scale .track { position: absolute; left: 0; right: 0; top: 14px; height: 6px; border-radius: 3px; background: var(--surface-2); }
+.scale .fill { position: absolute; top: 14px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--surface-3), var(--accent-graphic)); left: 40%; width: 30%; }
+.scale .dot { position: absolute; top: 8px; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; border: 3px solid var(--surface); }
+.scale .d1 { left: 40%; background: var(--ink-3); }
+.scale .d2 { left: 70%; background: var(--accent-graphic); box-shadow: 0 0 0 4px var(--accent-soft); }
+.scale .lab { position: absolute; top: -6px; font-size: 12px; font-weight: 700; color: var(--ink-2); transform: translateX(-50%); }
+.scale .l1 { left: 40%; } .scale .l2 { left: 70%; color: var(--accent); }
+.scale .ends { position: absolute; top: 24px; left: 0; right: 0; display: flex; justify-content: space-between; font-size: 11.5px; color: var(--ink-3); }
+.note { font-size: 13px; color: var(--ink-3); margin: 8px 0 14px; }
+.act { display: flex; justify-content: space-between; align-items: center; min-height: 50px; padding: 0 16px; border-radius: 15px; background: var(--accent); color: #fff; font-weight: 700; font-size: 16px; }
+:root[data-theme="dark"] .act { color: #041017; }
+.act .min { font-weight: 600; opacity: .85; white-space: nowrap; }
+
+/* M4 mektup */
+.letter { padding: 22px 20px 20px; }
+:root[data-w="320"] .letter { padding: 16px; }
+.letter::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 4px; background: linear-gradient(90deg, var(--iris-1), var(--iris-2)); }
+.letter h2 { font-family: var(--f-display); font-weight: 650; font-size: 21px; letter-spacing: -.015em; margin: 14px 0 12px; line-height: 1.2; }
+:root[data-w="320"] .letter h2 { font-size: 18px; margin: 10px 0 8px; }
+.letter p { margin: 0 0 11px; font-size: 16px; line-height: 1.5; color: var(--ink); }
+:root[data-w="320"] .letter p { font-size: 14.5px; line-height: 1.42; margin-bottom: 8px; }
+:root[data-w="320"] .chips span { font-size: 12px; padding: 5px 9px; }
+:root[data-w="320"] .letter .tip { font-size: 14px; padding: 9px 11px; }
+:root[data-w="320"] .app h1 { margin-bottom: 10px; }
+.letter p b { font-weight: 700; }
+.letter .tip { background: var(--accent-soft); border-radius: 14px; padding: 11px 13px; font-weight: 600; color: var(--ink); }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 12px; }
+.chips { flex-wrap: nowrap; }
+.chips span { white-space: nowrap; font-size: 13px; font-weight: 700; padding: 6px 11px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); }
+.sig { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: var(--ink-3); border-top: 1px solid var(--border); padding-top: 10px; }
+.sig b { font-family: var(--f-display); font-weight: 600; color: var(--accent); font-size: 15px; }
+</style>
+</head>
+<body>
+
+<!-- M1 · Yağmur ve kişinin yürüyüş saati (kilit ekranı) -->
+<div class="phone lock" id="M1" hidden>
+  <div class="date">Perşembe 1 Ekim</div>
+  <div class="clock">08.12</div>
+  <div class="notif">
+    <div class="app-ic"><i></i></div>
+    <div class="n-head"><b>NEFONA</b><span>şimdi</span></div>
+    <div class="n-title">Yağmur 19.00'da bekleniyor</div>
+    <div class="n-body">Her zamanki 19.30 yürüyüşünü bir saat öne alırsan yağmura kalmazsın.</div>
+    <div class="n-src">Kaynak: Apple Weather</div>
+  </div>
+  <div class="bottom"><span></span><span></span></div><div class="bar"></div>
+</div>
+
+<!-- M3 · Su hatırlatması havaya göre (kilit ekranı) -->
+<div class="phone lock" id="M3" hidden>
+  <div class="date">Salı 14 Temmuz</div>
+  <div class="clock">17.45</div>
+  <div class="notif">
+    <div class="app-ic"><i></i></div>
+    <div class="n-head"><b>NEFONA</b><span>şimdi</span></div>
+    <div class="n-title">Yürüyüşte suyunu yanına al</div>
+    <div class="n-body">18.30'da hissedilen hâlâ 31°. Her zamanki yürüyüşünü 19.30'a kaydırırsan 27°'ye iniyor.</div>
+    <div class="n-src">Kaynak: Apple Weather</div>
+  </div>
+  <div class="bottom"><span></span><span></span></div><div class="bar"></div>
+</div>
+
+<!-- M2 · Seni hatırlayan Nef (Ana sayfa kartı) -->
+<div class="phone app" id="M2" hidden>
+  <div class="eyebrow">Salı, 6 Ekim</div>
+  <h1>İyi akşamlar</h1>
+  <section class="card recall">
+    <span class="badge"><i></i>Nef</span>
+    <p class="big">Geçen hafta bu akşam Dalga'dan sonra sakinliğin <em>4'ten 7'ye</em> çıkmıştı.</p>
+    <div class="scale" aria-hidden="true">
+      <div class="track"></div><div class="fill"></div>
+      <span class="lab l1">4</span><span class="lab l2">7</span>
+      <span class="dot d1"></span><span class="dot d2"></span>
+      <div class="ends"><span>0</span><span>10</span></div>
+    </div>
+    <p class="note">Dalga sesini dinlemeden önce ve sonra kendine verdiğin puan.</p>
+    <div class="act"><span>Bu akşam da Dalga</span><span class="min">8 dk ›</span></div>
+  </section>
+  <div class="row-card"><span class="rc-k">Bugünkü yolun</span><span class="rc-v">4 durak · 9 dk</span></div>
+  <div class="row-card"><span class="rc-k">Gaziemir</span><span class="rc-v">24° · akşam açık</span></div>
+</div>
+
+<!-- M4 · Nef'ten haftalık mektup (Ana sayfa, Pazartesi) -->
+<div class="phone app" id="M4" hidden>
+  <div class="eyebrow">Pazartesi, 5 Ekim</div>
+  <h1>Günaydın</h1>
+  <section class="card letter">
+    <span class="badge"><i></i>Nef'ten mektup</span>
+    <h2>Geçen haftan, kısaca</h2>
+    <p>Yedi günün <b>beşinde</b> geldin. Perşembe akşamı nefesten sonra sakinliğin beş üzerinden <b>2'den 4'e</b> çıktı.</p>
+    <p>Yağmurlu iki akşam yürüyüş yerine nefesi seçtin; düzenin bozulmadı.</p>
+    <div class="chips"><span>5/7 gün</span><span>3 akşam yürüyüşü</span></div>
+    <p class="tip">Bu hafta için tek önerim: yürüyüşlerin hep 19.30'da. Salı ve perşembe bu saati yürüyüşe ayır.</p>
+    <div class="sig"><span>Sayılar telefonunda hesaplandı</span><b>Nef</b></div>
+  </section>
+</div>
+
+<script>
+const q = new URLSearchParams(location.search)
+document.documentElement.dataset.theme = q.get('t') === 'dark' ? 'dark' : 'light'
+document.documentElement.dataset.w = q.get('w') === '320' ? '320' : '390'
+const el = document.getElementById(q.get('s') || 'M1'); if (el) el.hidden = false
+</script>
+</body>
+</html>

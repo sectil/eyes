@@ -1,0 +1,160 @@
+<title>Işıktan Baş</title>
+<style>
+/* Onest ve Unbounded: Google Fonts'un bu sayfadaki harflere göre ürettiği alt kümeler (OFL), satır içinde; ağ gerekmez */
+/*@FONTS@*/
+/* yedek yığın: gömülü yüz okunamazsa ölçüsü yakın sistem yazısı */
+@font-face{font-family:"Onest Yedek";src:local("Arial"),local("Helvetica Neue"),local("Helvetica");size-adjust:101%;ascent-override:96%;descent-override:26%}
+@font-face{font-family:"Unbounded Yedek";src:local("Arial Black"),local("Arial");size-adjust:112%}
+:root{
+  --bg:#f3f6f8; --surface:#fff; --ink:#0b1219; --ink-2:#33414d; --ink-3:#5b6874; --line:rgba(11,18,25,.09);
+  --iris-1:#11a9b8; --iris-2:#2f6bea; --lens:#f08a00; --lens-ink:#b25f00; --ok:#13704b;
+  --r-goz:#0e97a6; --r-dikkat:#2f5fe0; --r-nefes:#6a4bd6; --r-ruh:#cf3b7c; --r-hareket:#e07b00;
+  --chip:#fff; --chip-on:#fff; --shadow:0 1px 2px rgba(11,18,25,.05),0 6px 18px rgba(11,18,25,.05);
+  /* açık temada sahne kart değildir: aynı ışık sahnesi ters çevrilir, baş sayfa zemininde grafit noktalarla çizilir */
+  --stage-bg:#f3f6f8; --stage-inv:1; --stage-m:-16px; --stage-r:0px; --stage-sh:none;
+  --stage-glow:radial-gradient(56% 50% at 46% 44%,rgba(47,107,234,.07),transparent 70%);
+  --st-ink:#0b1219; --st-ink-2:#4a5763; --st-pill:rgba(243,246,248,.86); --lb-ink:#fff; --lb-line:rgba(11,18,25,.2);
+  /* --s-*: ışık sahnesinin renkleri (iki temada aynı); --l-*: etiket renkleri (temaya göre) */
+  --s-goz:#3fd3df; --s-dikkat:#6f9bff; --s-nefes:#a78bff; --s-ruh:#ff80b5; --s-hareket:#ffb13b;
+  --l-goz:#0e8794; --l-dikkat:#2f5fe0; --l-nefes:#6a4bd6; --l-ruh:#c8336f; --l-hareket:#c06800;
+  --fs-bg:rgba(11,18,25,.06); --fs-on:#fff; --fs-on-ink:#0b1219;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#070c12; --surface:#0f171f; --ink:#eef3f6; --ink-2:#b9c4cd; --ink-3:#8795a1; --line:rgba(238,243,246,.08);
+    --iris-1:#19c2d1; --iris-2:#3e7bfa; --lens:#ffb13b; --lens-ink:#ffb13b; --ok:#35d39a;
+    --r-goz:#3fd3df; --r-dikkat:#6f9bff; --r-nefes:#a78bff; --r-ruh:#ff80b5; --r-hareket:#ffb13b;
+    --chip:#0d151c; --chip-on:#121d27; --shadow:none;
+    --stage-bg:#070c12; --stage-inv:0; --st-ink:#eef3f6; --st-ink-2:#b9c4cd; --st-pill:rgba(7,12,18,.72); --lb-ink:#06101a; --lb-line:rgba(185,196,205,.28);
+    --stage-glow:radial-gradient(58% 52% at 46% 44%,rgba(62,123,250,.10),transparent 70%);
+    --l-goz:#3fd3df; --l-dikkat:#6f9bff; --l-nefes:#a78bff; --l-ruh:#ff80b5; --l-hareket:#ffb13b;
+    --fs-bg:rgba(238,243,246,.07); --fs-on:#1a2631; --fs-on-ink:#eef3f6;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#070c12; --surface:#0f171f; --ink:#eef3f6; --ink-2:#b9c4cd; --ink-3:#8795a1; --line:rgba(238,243,246,.08);
+  --iris-1:#19c2d1; --iris-2:#3e7bfa; --lens:#ffb13b; --lens-ink:#ffb13b; --ok:#35d39a;
+  --r-goz:#3fd3df; --r-dikkat:#6f9bff; --r-nefes:#a78bff; --r-ruh:#ff80b5; --r-hareket:#ffb13b;
+  --chip:#0d151c; --chip-on:#121d27; --shadow:none;
+  --stage-bg:#070c12; --stage-inv:0; --st-ink:#eef3f6; --st-ink-2:#b9c4cd; --st-pill:rgba(7,12,18,.72); --lb-ink:#06101a; --lb-line:rgba(185,196,205,.28);
+  --stage-glow:radial-gradient(58% 52% at 46% 44%,rgba(62,123,250,.10),transparent 70%);
+  --l-goz:#3fd3df; --l-dikkat:#6f9bff; --l-nefes:#a78bff; --l-ruh:#ff80b5; --l-hareket:#ffb13b;
+  --fs-bg:rgba(238,243,246,.07); --fs-on:#1a2631; --fs-on-ink:#eef3f6;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:Onest,"Onest Yedek","SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;min-height:100vh;overflow-x:hidden}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.app{max-width:390px;margin:0 auto;padding:10px 16px 24px;display:flex;flex-direction:column}
+.seg{display:flex;gap:4px;padding:3px;border-radius:999px;background:var(--line);align-self:center;margin-bottom:10px}
+.seg button{font-size:12.5px;font-weight:500;padding:6px 12px;border-radius:999px;color:var(--ink-2);transition:background .2s,color .2s}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.top{display:flex;align-items:baseline;justify-content:space-between;margin:2px 2px 8px}
+h1{font-family:Unbounded,"Unbounded Yedek","SF Pro Display",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-weight:600;font-size:24px;letter-spacing:-.01em}
+.day{font-size:13px;font-weight:500;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px}
+.day .pulse{width:7px;height:7px;border-radius:50%;background:var(--lens);display:none}
+.day.live{color:var(--lens-ink)}
+.day.live .pulse{display:inline-block;animation:pl 1s ease-in-out infinite}
+@keyframes pl{50%{opacity:.35;transform:scale(.7)}}
+.stage{position:relative;height:clamp(250px,47vh,420px);margin:0 var(--stage-m);border-radius:var(--stage-r);overflow:hidden;
+  background:var(--stage-bg);box-shadow:var(--stage-sh);touch-action:pan-y;user-select:none;-webkit-user-select:none;isolation:isolate}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .6s}
+.stage.ready canvas{opacity:1}
+.stage canvas.inv{filter:invert(1) hue-rotate(180deg) saturate(1.25);color-interpolation-filters:sRGB}
+.stage::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:var(--stage-glow)}
+.labels{position:absolute;inset:0;pointer-events:none;z-index:2}
+.labels svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.labels line{stroke-width:1;transition:opacity .45s}
+.labels circle{transition:opacity .45s}
+.lb{position:absolute;left:0;top:0;font-size:12px;font-weight:500;letter-spacing:.01em;white-space:nowrap;line-height:1;
+  padding:5px 9px 5px;border-radius:999px;background:var(--st-pill);color:var(--c);opacity:0;transition:opacity .45s,color .45s;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--c) 26%,transparent);will-change:transform}
+.lb.on{opacity:1}
+.lb.lit{background:var(--c);color:var(--lb-ink);font-weight:600;box-shadow:0 0 14px color-mix(in srgb,var(--c) 45%,transparent)}
+.lb.dim{background:var(--st-pill);color:var(--st-ink-2);box-shadow:0 0 0 1px var(--lb-line)} .lb.on.dim{opacity:.82}
+.lb.on.fade,.lb.on.dim.fade{opacity:.2}
+/* yüz anahtarı: sahnenin hemen altında, küçük; gizlilik notu yalnız "kendi yüzün" açıkken açılır */
+.facebar{display:flex;flex-direction:column;align-items:center;margin:8px 0 0}
+.fseg{display:flex;gap:2px;padding:2px;border-radius:999px;background:var(--fs-bg)}
+.fseg button{font-size:11.5px;font-weight:500;line-height:1;padding:6px 11px;border-radius:999px;color:var(--ink-3);transition:background .25s,color .25s,box-shadow .25s;white-space:nowrap}
+.fseg button i{font-style:normal;opacity:.75;font-weight:400}
+.fseg button[aria-pressed="true"]{background:var(--fs-on);color:var(--fs-on-ink);box-shadow:0 1px 3px rgba(0,0,0,.14)}
+.priv{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease,opacity .35s;opacity:0;width:100%}
+.priv>span{overflow:hidden;font-size:11.5px;line-height:1.4;color:var(--ink-3);text-align:center;padding:0 6px}
+.facebar.own .priv{grid-template-rows:1fr;opacity:1}
+.facebar.own .priv>span{padding-top:6px}
+.say{display:flex;gap:11px;align-items:flex-start;margin:12px 2px 14px}
+.say .av{flex:none;width:26px;height:26px;border-radius:50%;margin-top:1px;
+  background:radial-gradient(circle at 50% 50%,#070c12 0 27%,var(--iris-1) 30%,var(--iris-2) 70%,transparent 73%);
+  box-shadow:0 0 0 1.5px var(--iris-2) inset}
+.txt{position:relative;flex:1;min-width:0;transition:height .3s ease}
+.txt>p{position:absolute;left:0;right:0;top:0;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .3s,transform .3s,visibility 0s .3s}
+.txt>p.on{opacity:1;visibility:visible;transform:none;transition:opacity .3s,transform .3s,visibility 0s}
+.txt .nef{font-size:15.5px;line-height:1.42;font-weight:500;color:var(--ink)}
+.txt .det{font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+.txt .det b{color:var(--ink);font-weight:600}
+.txt .det i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c);margin-right:7px;vertical-align:1px}
+.live{color:var(--lens-ink)}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chip{position:relative;text-align:left;background:var(--chip);border-radius:14px;padding:10px 11px 10px;border:1px solid var(--line);
+  box-shadow:var(--shadow);display:flex;flex-direction:column;gap:2px;transition:border-color .25s,background .25s,opacity .25s,transform .12s;min-width:0}
+.chip:active{transform:scale(.98)}
+.chip.wide{grid-column:1/-1}
+.chip .nm{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600}
+.chip .dt{width:8px;height:8px;border-radius:50%;background:var(--c);flex:none;opacity:.35}
+.chip.up .dt,.chip.live .dt{opacity:1;box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 22%,transparent)}
+.chip .v{font-size:13px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip .w{font-size:12px;font-weight:600;color:var(--ink-3)}
+.chip.up .w{color:var(--ok)}
+.chip.live .w{color:var(--lens-ink)}
+.chip[aria-pressed="true"]{border-color:var(--c);background:var(--chip-on)}
+.chips.focus .chip[aria-pressed="false"]{opacity:.55}
+.foot{margin-top:10px;font-size:11.5px;color:var(--ink-3);text-align:right}
+.fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:var(--st-ink-2);font-size:13px;z-index:3}
+.nogl .fallback{display:flex}
+@media (min-width:430px){.app{margin-top:12px;border-radius:32px;border:1px solid var(--line);background:var(--bg);padding-top:14px}}
+@media (prefers-reduced-motion: reduce){.day.live .pulse{animation:none}.chip,.lb,.seg button,.fseg button,.priv,.txt,.txt>p,.stage canvas,.labels line{transition:none}}
+@media (max-height:600px){.stage{height:clamp(236px,46vh,300px)} .txt .nef{font-size:14.5px} .say{margin:10px 2px 12px} h1{font-size:21px} .facebar{margin-top:6px}}
+@media (max-width:340px){.fseg button{padding:6px 9px;font-size:11px}}
+</style>
+
+<div class="app" id="app">
+  <div class="seg" role="group" aria-label="Örnek durum">
+    <button data-s="d30" aria-pressed="false">30. gün</button>
+    <button data-s="walk" aria-pressed="false">Yürürken</button>
+    <button data-s="d1" aria-pressed="false">1. gün</button>
+  </div>
+  <div class="top"><h1>Gelişim</h1><span class="day" id="day"><i class="pulse"></i><span></span></span></div>
+  <div class="stage" id="stage" role="img" aria-label="Işıktan bir baş">
+    <canvas id="cv"></canvas>
+    <div class="labels" id="labels"><svg id="leaders" aria-hidden="true"></svg></div>
+    <div class="fallback">Bu cihazda üç boyutlu görünüm açılamadı.</div>
+  </div>
+  <div class="facebar" id="facebar">
+    <div class="fseg" role="group" aria-label="Baştaki yüz">
+      <button data-f="genel" aria-pressed="true">Genel yüz</button>
+      <button data-f="kendi" aria-pressed="false">Kendi yüzün <i>(örnek)</i></button>
+    </div>
+    <p class="priv" id="priv"><span>Yüzünün yalnız 468 noktası telefonunda kalır; görüntü saklanmaz. İstediğinde silebilirsin.</span></p>
+  </div>
+  <div class="say"><i class="av" aria-hidden="true"></i><div class="txt" id="txt" aria-live="polite"></div></div>
+  <div class="chips" id="chips"></div>
+  <p class="foot">Örnek veri</p>
+</div>
+
+<script>
+/*@DATA@*/
+</script>
+<script>
+/*@THREE@*/
+</script>
+<script>
+/*@YUZ@*/
+/*@BAKED@*/
+/*@MAIN@*/
+</script>

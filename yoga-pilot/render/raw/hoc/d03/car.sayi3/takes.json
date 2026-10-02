@@ -1,0 +1,77 @@
+{
+ "unit": "car.sayi3",
+ "lesson": "d03",
+ "voice": "hoc",
+ "voice_name": "Nefona Hoca",
+ "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+ "sex_param": "m",
+ "model_id": "eleven_v4",
+ "flow_id": "LNL8puwI4plSuxu7oiUC",
+ "requests": [
+  {
+   "node_id": "TdxGmOTtF70AtbDG7Q8w",
+   "session_ids": [
+    "LgqlPDGFkYmo176BtF6b",
+    "Km6YN3Vl3GA2Dmb3juUr",
+    "Hla0SmAmL6kICyPpvvbq"
+   ],
+   "requested_at": "2026-09-30T07:05:10.731Z",
+   "request": "initial"
+  }
+ ],
+ "tts": "Sayıyorum… on… dokuz… sekiz… yedi… altı… beş… dört… üç… iki… bir.",
+ "generations_count": 3,
+ "takes": [
+  {
+   "take": 1,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d03/car.sayi3/t1.mp3",
+   "generation_id": "4rYsBZlpxBWZN7jNHByR",
+   "session_id": "LgqlPDGFkYmo176BtF6b",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/LgqlPDGFkYmo176BtF6b/4rYsBZlpxBWZN7jNHByR/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070516Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=be8f4106342de7420da0d433c4e1d642db9b08a27f9de284bdd8221cc0004b73a0613680dba7695536aa8f41c180fbba80cd9069256c58fd40e23a7efc3751075bcc8f7bcb253c912417c93919b3f783ddf421829754a967673a590062f21a9f3bde269be550e989ad46dccfba3d423c4c885eee943800a87beb484a1184ef1594c0a46eb3b5f5467261c5fd77e93de6cd02c0c08d2881009e554f493ad50a245c131e6c38b70c9b426a70771e08f02c900cbb38c3743684392d270217513ac8d42fb11bcbbf8306d72c849ecdc536e2e4198235652b33b9441bc4abdfe333567549b6c5ba85116704a83c6d549bb8b5cf74a88f43b05178c834969ee01f0c48",
+   "node_id": "TdxGmOTtF70AtbDG7Q8w",
+   "api_duration_secs": 10.64,
+   "ok": true,
+   "requested_at": "2026-09-30T07:05:10.731Z",
+   "request": "initial",
+   "duration_secs": 10.64,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 188243,
+   "sha256": "6085fced326562adfcb85cd1a5f9971059dcbd945d74cc7c9ce74c0f3005ffa4"
+  },
+  {
+   "take": 2,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d03/car.sayi3/t2.mp3",
+   "generation_id": "zpDVWxE372Xy7HWmgLYg",
+   "session_id": "Km6YN3Vl3GA2Dmb3juUr",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/Km6YN3Vl3GA2Dmb3juUr/zpDVWxE372Xy7HWmgLYg/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070606Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=5c163d7172a9ebca1642c37feacd7bcb0311c208148a3cb6b8d45eeb3cf271532c61257b0199f8ef6c4b2862640110f261e6bdf10bd81a8a3483f186150bc44810aa053249e62479c28dd9c75dd11bfe86b07c4d13162008b2c02373766c1d521d36803104ff71be02c87f769609e6743cab2133b61e3bc08d7abfe16b1f5d0b86b9c15f91692affd82ec8779bcd12b9d5a9c56b61cbbb6b3aaeb040d47cb0c1e7483a13e9a825cd8015b33c52655327f16652598b04bf014b2f874f3e4ac64942616fef1765062bd7d36e3b6f0d2a4a5cc4bf9e11d6260e49ecb2969a84bc9bdf6b45ed5733ded897e0e995de461013bc93baa8b78d11a0b0a87db31bd3b8a1",
+   "node_id": "TdxGmOTtF70AtbDG7Q8w",
+   "api_duration_secs": 10.64,
+   "ok": true,
+   "requested_at": "2026-09-30T07:05:10.731Z",
+   "request": "initial",
+   "duration_secs": 10.64,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 188243,
+   "sha256": "dac90870cab757e94a3d1362acbf2afd67a95fe496fa9b2300cc614386413c3f"
+  },
+  {
+   "take": 3,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/d03/car.sayi3/t3.mp3",
+   "generation_id": "YF7J8fgPvGSPFFU1kzkm",
+   "session_id": "Hla0SmAmL6kICyPpvvbq",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/Hla0SmAmL6kICyPpvvbq/YF7J8fgPvGSPFFU1kzkm/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070606Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=03bf5d7f75000382380967db1b35868f5012bdf0ef703d7664ed27c3679765d4d815351e3d978f7e3763e97a69993192dc0bcef34b20ceacbf86a5ca6d709a1a841fba14a5d2cfd0c4b04c277e76ff8bf8b409a3d77da27fd836688f22c98d0f62c0311df13edc74bbdb45bb6cb7e70b9b7b7ea9ef864322c8f82c010b81d50db9ef7065a5c7b516897a4be9a9f16a2c613f5880ba67636eec04294bcfd86641224b54d39ae4c1290bc5d3185b34173d0601d721c2671133c1d1c7f06ce2ba1c3b90422c1a89578ffa0396d4c2e5345ce5888dac461b451cddc04a08b5bb55c5d23001fb803cd939a23ace1e9fd1a93fbcce7caaedbf1b2e923872cd2b252de9",
+   "node_id": "TdxGmOTtF70AtbDG7Q8w",
+   "api_duration_secs": 10.64,
+   "ok": true,
+   "requested_at": "2026-09-30T07:05:10.731Z",
+   "request": "initial",
+   "duration_secs": 10.64,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 188243,
+   "sha256": "da560e4c38605557410ae65a3235648c12b501d98c9e9b11b7e48dab73b102f3"
+  }
+ ]
+}

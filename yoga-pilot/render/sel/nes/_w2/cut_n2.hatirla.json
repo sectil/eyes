@@ -1,0 +1,189 @@
+{
+ "source": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/nes/n2.hatirla/retake/t2.mp3",
+ "thr_db": -53.2,
+ "candidates": [
+  {
+   "gap": [
+    3.791,
+    4.255
+   ],
+   "dur": 0.464,
+   "cut_sec": 4.0229,
+   "speech_sec": [
+    3.771,
+    3.442
+   ],
+   "rates": [
+    5.04,
+    5.52
+   ],
+   "misalign": 0.023
+  },
+  {
+   "gap": [
+    5.318,
+    5.847
+   ],
+   "dur": 0.529,
+   "cut_sec": 5.5827,
+   "speech_sec": [
+    4.834,
+    2.37
+   ],
+   "rates": [
+    3.93,
+    8.02
+   ],
+   "misalign": 0.171
+  }
+ ],
+ "spec_rule_cut (longest gap)": {
+  "gap": [
+   5.318,
+   5.847
+  ],
+  "dur": 0.529,
+  "cut_sec": 5.5827,
+  "speech_sec": [
+   4.834,
+   2.37
+  ],
+  "rates": [
+   3.93,
+   8.02
+  ],
+  "misalign": 0.171
+ },
+ "chosen_cut (sentence boundary)": {
+  "gap": [
+   3.791,
+   4.255
+  ],
+  "dur": 0.464,
+  "cut_sec": 4.0229,
+  "speech_sec": [
+   3.771,
+   3.442
+  ],
+  "rates": [
+   5.04,
+   5.52
+  ],
+  "misalign": 0.023
+ },
+ "cut_misalign_max": 0.12,
+ "pieces": {
+  "n2.hatirla#1": {
+   "cut_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/n2.hatirla/s1.wav",
+   "start": 0.0,
+   "end": 4.0229,
+   "text": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli.",
+   "syll": 19,
+   "process": {
+    "sex": "f",
+    "hpf_hz": 90.0,
+    "in_duration": 4.023,
+    "trim_thr_source": "lufs",
+    "trim_passes": [
+     {
+      "trim_thr_in_dbfs": -54.01,
+      "applied_gain_db": 3.98
+     }
+    ],
+    "trim_in_sec": [
+     0.025,
+     3.794
+    ],
+    "lead_pad_ms": 35.1,
+    "tail_pad_ms": 20.9,
+    "deess": {
+     "applied": false,
+     "threshold_db": -14.74,
+     "band_peak_over_thr_db": -11.78,
+     "max_reduction_db": 0.0,
+     "time_reduced_sec": 0.0
+    },
+    "level_mode": "lufs",
+    "out_duration": 4.079,
+    "target": -18.0,
+    "level": -18.0,
+    "true_peak_dbtp": -2.78,
+    "limiter_max_db": -0.0,
+    "limiter_sec": 0.0,
+    "limiter_sec_over_1db": 0.0,
+    "rms_db": -16.75,
+    "lufs": -18.0,
+    "checks": {
+     "level_in_tolerance": true,
+     "true_peak_ok": true,
+     "no_clipping": true
+    },
+    "pass": true,
+    "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/n2.hatirla/s1.wav",
+    "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/n2.hatirla/n2.hatirla#1.wav",
+    "out_format": {
+     "sr": 44100,
+     "channels": 1,
+     "subtype": "FLOAT"
+    },
+    "exit": 0
+   }
+  },
+  "n2.hatirla#2": {
+   "cut_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/n2.hatirla/s2.wav",
+   "start": 4.0229,
+   "end": 8.4,
+   "text": "Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
+   "syll": 19,
+   "process": {
+    "sex": "f",
+    "hpf_hz": 90.0,
+    "in_duration": 4.377,
+    "trim_thr_source": "lufs",
+    "trim_passes": [
+     {
+      "trim_thr_in_dbfs": -52.71,
+      "applied_gain_db": 2.48
+     }
+    ],
+    "trim_in_sec": [
+     0.23,
+     4.186
+    ],
+    "lead_pad_ms": 0.0,
+    "tail_pad_ms": 58.6,
+    "deess": {
+     "applied": false,
+     "threshold_db": -13.18,
+     "band_peak_over_thr_db": -16.44,
+     "max_reduction_db": 0.0,
+     "time_reduced_sec": 0.0
+    },
+    "level_mode": "lufs",
+    "out_duration": 4.266,
+    "target": -18.0,
+    "level": -18.0,
+    "true_peak_dbtp": -5.74,
+    "limiter_max_db": -0.0,
+    "limiter_sec": 0.0,
+    "limiter_sec_over_1db": 0.0,
+    "rms_db": -16.7,
+    "lufs": -18.0,
+    "checks": {
+     "level_in_tolerance": true,
+     "true_peak_ok": true,
+     "no_clipping": true
+    },
+    "pass": true,
+    "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/_w2/cuts/n2.hatirla/s2.wav",
+    "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/nes/n2.hatirla/n2.hatirla#2.wav",
+    "out_format": {
+     "sr": 44100,
+     "channels": 1,
+     "subtype": "FLOAT"
+    },
+    "exit": 0
+   }
+  }
+ }
+}

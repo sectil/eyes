@@ -1,0 +1,64 @@
+{
+ "unit": "c2.birak",
+ "idx": 37,
+ "voice": "hoc",
+ "voice_name": "Nefona Hoca",
+ "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+ "model_id": "eleven_v4",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "node_id": "AOBalgfLJLKP9StEpsxW",
+ "session_ids": [
+  "SZtCB8PFn6lf20DY9umK",
+  "jLBY0oN26BDZlQ6TufDA",
+  "vbrUbXIWTrFgvU00l00i"
+ ],
+ "requested_at": "2026-09-29T21:47:19Z",
+ "downloaded_at": "2026-09-29T21:48:36.448525+00:00",
+ "tts": "Sayıları bırakabilirsin. Zihnin arada başka yerlere kaydıysa o da olur.",
+ "generations_count": 3,
+ "takes": [
+  {
+   "take": 1,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/c2.birak/t1.mp3",
+   "session_id": "SZtCB8PFn6lf20DY9umK",
+   "generation_id": "1hbkteBbVVhkFN8r0S0M",
+   "api_duration_secs": 5.2,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/SZtCB8PFn6lf20DY9umK/1hbkteBbVVhkFN8r0S0M/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T214723Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=cc527eb7f491a3e7a5953f0b3b82ce5b3127630a9bd45d14585a6ccd9965a1e7069133a7ea761103e658f6b3f75ee7870980f9844a3071f57b6842aca34aa36323eed602c2ff954ded8835b86b02bcd97315937d402f0e4cc5fe389aca97966db6b14a4f668add2ce218ae33cdfacc609101200d84ab45450da3b9617aee29a7194bf56b408fb0634fe2b7e8db50c284ce98598bcb2b7211dc3d6346fb4a1d0a751c367ac2fd4a9f3e7c1cf3e41e8fb4ca8d2417b316f2e43efe2359fa3c5bb43c196375c4cb751666d4dd1853ef46c49b32cb1e043eb28e291b19585684f02c0a44103cf673f4f0578db7ff15a881a2a92d846ae1dc3871481e11c4c82d7ad2",
+   "node_id": "AOBalgfLJLKP9StEpsxW",
+   "ok": true,
+   "duration_secs": 5.2,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 101307,
+   "attempts": 1
+  },
+  {
+   "take": 2,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/c2.birak/t2.mp3",
+   "session_id": "vbrUbXIWTrFgvU00l00i",
+   "generation_id": "AZxlxOV1kThqTaNyGkHQ",
+   "api_duration_secs": 5.28,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/vbrUbXIWTrFgvU00l00i/AZxlxOV1kThqTaNyGkHQ/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T214723Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=c0ce63c5a550eede62a52674fe659ee0bd7ad1cccdbdc8720f7d9af40e5851a013ef48ee20b73aa3a4febc0416f1905a5dc7b3203aa08bb185859a309bdafb325374158c19556167999ee811f57555cfff9c8b9db8e24e5e4d49a97093fd130cc12deccd942cf08ee484364ed65ab43913fd20163a169e8be681b4fe2d05cdbafaef0f3770baf706c91d69e435a279c289c1b64a2d4365fdaa8822ec23028209729d0f53dfe677d4194abcabc2a861ee42df1ad403f6bebf12584cd70a20cc9fa7ae57e1aabfbaa4ea228f117d07eb9b9a2ed8df4f7ac7b304d39509edf43c6786ec45c5847eda71ac18270bc10df096ebd2b576119685649ea460dc21180470",
+   "node_id": "AOBalgfLJLKP9StEpsxW",
+   "ok": true,
+   "duration_secs": 5.28,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 102561,
+   "attempts": 1
+  }
+ ],
+ "all_ok": false,
+ "n_takes_ok": 2,
+ "failed_generations": [
+  {
+   "session_id": "jLBY0oN26BDZlQ6TufDA",
+   "generation_id": "9nd2XxBsmAxoqylB6bvJ",
+   "error": "Too many concurrent requests (account max 5 concurrent); reported price 0; NOT re-called"
+  }
+ ],
+ "who": "hoc-2",
+ "retake": false,
+ "server_prompt_echo": "Sayıları bırakabilirsin. Zihnin arada başka yerlere kaydıysa o da olur.",
+ "server_prompt_equals_tts": true
+}

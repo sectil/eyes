@@ -1,0 +1,79 @@
+{
+ "el/el-v-aday.keyA.wav": {
+  "mono_sum_minus_stereo_lu": -1.65,
+  "clicks": {
+   "hf_candidates": 0,
+   "hf_candidate_max_level_rel_fullband_db": null,
+   "audible_broadband_clicks": [],
+   "fullband_transients_ge10db": []
+  },
+  "body": {
+   "body_start_s": 3.0,
+   "body_end_s": 160.0,
+   "body_dur_s": 157.0,
+   "fade_in_s": 3.0,
+   "fade_out_s": 9.9,
+   "body_st_median_lufs": -13.94,
+   "body_spread_p5_p95_lu": 0.99,
+   "body_range_lu": 3.23,
+   "body_std_lu": 0.42,
+   "body_max_rate_lu_per_s": 1.71,
+   "body_crescendo_10s_spans": 0
+  }
+ },
+ "el/el-derin-b.keyD.wav": {
+  "mono_sum_minus_stereo_lu": -0.56,
+  "clicks": {
+   "hf_candidates": 0,
+   "hf_candidate_max_level_rel_fullband_db": null,
+   "audible_broadband_clicks": [],
+   "fullband_transients_ge10db": []
+  },
+  "body": {
+   "body_start_s": 13.5,
+   "body_end_s": 220.0,
+   "body_dur_s": 206.5,
+   "fade_in_s": 13.5,
+   "fade_out_s": 34.3,
+   "body_st_median_lufs": -16.01,
+   "body_spread_p5_p95_lu": 1.73,
+   "body_range_lu": 3.93,
+   "body_std_lu": 0.64,
+   "body_max_rate_lu_per_s": 0.87,
+   "body_crescendo_10s_spans": 2
+  }
+ },
+ "common/orman-4.wav": {
+  "mono_sum_minus_stereo_lu": -2.31,
+  "clicks": {
+   "hf_candidates": 0,
+   "hf_candidate_max_level_rel_fullband_db": null,
+   "audible_broadband_clicks": [],
+   "fullband_transients_ge10db": []
+  },
+  "seam": {
+   "wrap_sample_step": 0.000437,
+   "interior_step_p999": 0.015425,
+   "wrap_level_jump_100ms_db": 0.71,
+   "interior_level_jump_p95_db": 3.54,
+   "wrap_level_jump_percentile": 0.333,
+   "wrap_hf_jump_100ms_db": 0.84,
+   "interior_hf_jump_p95_db": 3.82,
+   "wrap_hf_jump_percentile": 0.393,
+   "verdict": "PASS (seam indistinguishable from interior cuts)"
+  },
+  "body": {
+   "body_start_s": 0.0,
+   "body_end_s": 30.0,
+   "body_dur_s": 30.0,
+   "fade_in_s": 0.0,
+   "fade_out_s": 0.0,
+   "body_st_median_lufs": -46.13,
+   "body_spread_p5_p95_lu": 6.71,
+   "body_range_lu": 7.86,
+   "body_std_lu": 2.08,
+   "body_max_rate_lu_per_s": 4.0,
+   "body_crescendo_10s_spans": 0
+  }
+ }
+}

@@ -1,0 +1,13 @@
+[
+ {
+  "name": "varis_x",
+  "family": "varis-aday",
+  "kind": "vd",
+  "seed": 202609294,
+  "startBar": 24,
+  "endBar": 72,
+  "preBars": 2,
+  "transpose": 13,
+  "tailSec": 0
+ }
+]

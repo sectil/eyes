@@ -1,0 +1,16 @@
+{
+ "unit": "car.on2",
+ "take": "t2",
+ "asset_id": "4e73gNdKmZI4bQKbNaSi",
+ "source_node_id": "WTwcSVfLnIPZLAK4byh2",
+ "stt_node_id": "xGFDcjNcfm2h0UoFbsjO",
+ "session_id": "jWApbqHgfyMakXZpAvJp",
+ "generation_id": "shTb8VugL0QN3pYcAXRH",
+ "actual_credits": 52.36,
+ "actual_cents": 0.952,
+ "spoken_duration_secs": 9.24,
+ "scribe_text": "Göz kapakları, gözlerin çevresi, sağ kulak, sol kulak, sağ yanak, sol yanak, burnun ucu",
+ "tts": "Göz kapakları… gözlerin çevresi… sağ kulak… sol kulak… sağ yanak… sol yanak… burnun ucu…",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 14\n}"
+}

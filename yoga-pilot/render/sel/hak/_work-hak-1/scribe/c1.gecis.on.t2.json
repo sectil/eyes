@@ -1,0 +1,16 @@
+{
+ "unit": "c1.gecis.on",
+ "take": "t2",
+ "asset_id": "jv042roV2EtXurEl1FTb",
+ "source_node_id": "2Cc52jJcHixh9mmBWMIg",
+ "stt_node_id": "R8xuLcHnXBDN18egj9py",
+ "session_id": "7uIXJFyIoMrne5Zg11DX",
+ "generation_id": "dLobQeA6iPIm2V38yBTv",
+ "actual_credits": 23.76,
+ "actual_cents": 0.432,
+ "spoken_duration_secs": 4.08,
+ "scribe_text": "Yüzün ve bedenin ön tarafı. İstemediğin yeri yine atla",
+ "tts": "Yüzün ve bedenin ön tarafı. İstemediğin yeri yine atla.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 9\n}"
+}

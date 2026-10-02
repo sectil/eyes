@@ -1,0 +1,29 @@
+{
+ "donus": {
+  "from": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/raw/donus.orig.wav",
+  "mono": "(L-R)/2",
+  "fade_in_ms": 20,
+  "fade_out_ms": 50,
+  "peak_dbfs_before_L_R": [
+   -2.0,
+   -6.77
+  ],
+  "peak_dbfs_after": -6.7
+ },
+ "orman-4": {
+  "from": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/music/common/raw/orman-4.orig.wav",
+  "events_s": [
+   2.977,
+   11.374,
+   19.927,
+   19.929,
+   19.931,
+   20.156,
+   20.158,
+   23.654
+  ],
+  "max_cut_db": -12.04,
+  "samples_touched": 3852,
+  "touched_ms": 87.3
+ }
+}

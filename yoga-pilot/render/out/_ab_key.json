@@ -1,0 +1,11 @@
+{
+ "A": "el",
+ "B": "dalga",
+ "created": "2026-09-29T13:20:20.274657+00:00",
+ "method": "secrets.randbits(1), drawn once; reused on every later run",
+ "note": "sahibe dinlemeden önce gösterilmez (SPEC §6)",
+ "sources": {
+  "el": "ElevenLabs Music (render/music/el)",
+  "dalga": "Dalga motoru (render/music/dalga)"
+ }
+}

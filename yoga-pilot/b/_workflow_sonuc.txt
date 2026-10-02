@@ -1,0 +1,583 @@
+{
+  "summary": "Yoga B adımı (sesten bağımsız kısım): SPEC v3, Ders 2 metin düzeltmeleri, Parti 1 metinleri (Ders 1, 3, 5); iki bağımsız inceleme (Türkçe editör, usta hoca); düzeltme",
+  "agentCount": 7,
+  "logs": [
+    "yazım: **Özet (B adımı, sesten bağımsız kısım; ücretli çağrı yapılmadı, ses üretilmedi)**\n\nDosyalar (hepsi  | Ders 1, Parti 1 bitti: 3, 5 ve 15 dakikanın bütün metni ile 30 dakikanın iskeleti yazıldı. Üç hız kö | Ders 3 \"Uykuya Geçiş\" için 5 ve 15 dakikalık metin, 30 dakikalık iskelet ve zamanlama yazıldı. Ses ü | Ders 5 \"Tek Nokta\" Parti 1 metni yazıldı. Planlayıcının 3, 5 ve 15 dk planları üç köşenin hepsinde g"
+  ],
+  "result": {
+    "W": [
+      "**Özet (B adımı, sesten bağımsız kısım; ücretli çağrı yapılmadı, ses üretilmedi)**\n\nDosyalar (hepsi `$Y/b` altında, `Y=/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga`):\n- `$Y/b/SPEC.v3.md`: tek bağlayıcı şartname, 18 bölüm. Ses: Nefona Hoca `Sr5w7dIZaRDglJ2cLaJm`, `sex m` (70 Hz), `eleven_v4`, `generations_count 3`. Müzik A: pilotun istemleri ve aile yapısı; tonun ölçülmesi kuralı (Ders 2'nin müziği A/Re ailesinde çıktı, Mi♭ değil). Ayrıca yükseklik hedefleri, kodek (AAC-LC 64/96, afconvert komutları, kör dinleme karar kuralı), dosya adları, `timeline.json` şeması (`nefona.yoga.timeline/2`), qa eşikleri (1 sn altı parçalar dahil ≥ 15 dB; 4 kHz altında ilinti ≥ 0,95, kayma ≤ 1 ms), Scribe kuralları ve istisnaları, tam karışım denetimi yerine konum denetimi, 3 dk biçimi, defter ve tavanlar. §17'de pilotun geçersiz kalan 20 kuralı tablo halinde.\n- `$Y/b/mac/kodek_testi.sh` ve `$Y/b/mac/aac_kodla.sh`: Mac komutları. Sözdizimi ve karıştırma mantığı sahte afconvert ile sınandı; gerçek afconvert ile denenmedi.\n- `$Y/b/ders2/ders2.lesson.v3.json`: pilot verisinin kopyası artı metin deltası. Pilot dosyası değişmedi.\n- `$Y/b/ders2/units-v3.json`: seslendirilecek 26 birim, 1.422 karakter. Tahmini maliyet ≈ 5,0 bin kredi (TTS 4,3 bin + Scribe 0,8 bin).\n- `$Y/b/ders2/timing.txt`: 5/15/20 dk planları; `measured_durs.v3.json`: hoc süreleri eklendi.\n- Betikler: `$Y/b/work/*.py`.\n\n**(a) İki noktasız yeni metinler**\n- `n1.sec`: \"Bugün kendine kısa bir niyet seçiyorsun. Aklına bir şey gelmezse \"Kendime dinlenmeye izin veriyorum\" olsun.\" Hece 39'dan 37'ye indi; süre ölçülen 8,29 sn'den kestirimle 7,3–8,1 sn'ye.\n- `n2.hatirla`: \"Başta seçtiğin niyeti içinden üç kez söylemek yeterli. Ya da yine \"Kendime dinlenmeye izin veriyorum\" olsun.\" Hece 38'de kaldı; süre 8,05 sn'den 7,5–8,4 sn'ye.\n- 5 dk kısa biçimi: \"Niyetini içinden bir kez daha söylemek yeterli. Ya da yine \"…\" olsun.\"\n- Dönüşümlü seçenekler de iki noktasız yazıldı. Bunlar ilk yayında seslendirilmeyecek.\n\n**(b) 5 dk Varış kısa biçimi.** \"≈ 16 hece\" Neslihan için hesaplanmıştı. Nefona Hoca ölçümde modelden %12,7 yavaş okuyor (Neslihan %10,9); eski metinle boş pay 9,8 sn kalıyordu. Varış 17 hece kısaldı:\n- `a.gozler`: \"Gözlerini kapatmak sana kalmış.\"\n- `a.kolay`: \"Gevşemek zor gelirse bu da olur.\"\n- Sessizlikler aynı kaldı.\n\nVarış kısalınca H12 denetimi (evreden evreye cümleler kısalmalı) bozuldu. Bunu gidermek için `n1.soyle`'nin kısa biçimi de kısaldı: \"İçinden bir kez söylemek yeterli.\" Sonuç: boş pay 17,9 sn (birimin kendi oranıyla) ve 15,9 sn (temkinli oranla); taban 15. H12 payı çok dar: Varış 14,83, Derinleşme 14,75. İncelemede hece değişirse bu yeniden denetlenmeli.\n\n**(c) 20 dk ek birimleri.** Planlayıcıyla yeniden doğrulandı: pilot metniyle 18 klip, 653 karakter, 232 hece (PLAN.v3 ile aynı); v3 metniyle 664 karakter, 238 hece. Nefona Hoca'nın ölçülmüş süreleriyle gereken 15 klip, 11 TTS birimi eder: `car.agir`, `car.hafif`, `c3.agir`, `c3.gelmezse`, `c3.hafif`, `c3.birak`, `c4.yerles`, `c4.adim`, `c4.koku`, `c4.pencere`, `c4.donus1`. Ayrıca 3 yedek birim önerildi: `c4.acele`, `c4.geride`, `c4.x.istemiyor`. İki metin önerisi yapıldı: yüklemsiz `c3.agir` (\"Önce ağırlık.\" yerine \"Önce ağırlıkla başlıyoruz.\") ve iki noktalı `c3.hafif` (\"Şimdi hafifliğe geçiyoruz.\").\n\n**(d)** Birim grupları: metni değişen 2, 5 dk kısa biçimi 4, 20 dk 11 + 3 yedek, yardımcı 6 (`g.ilk`, `k.hizli.imge`, `k.hizli.his`, `d.goz`, `d.kalk`, `d.bekle`). `c2.akis`'in kısa biçimi kayıtlı sesi kullanır.\n\n**(e)** Nefona Hoca, iki kestirimle de: 5, 15 ve 20 dk'da `check_plan` geçti. 5–20 dk'nın her dakikası, alt küme 5 ⊂ 15 ⊂ 20, T5 ve Kapanışa geç ön klipleri (S3-01) de geçti. 15 dk planı kayıtlı hoc planıyla birebir aynı. Neslihan ve Hakan da geçti. `lint_text` temiz. Model köşelerinde 77/78; tek hata (6,6 hece/sn · 13 dk · T5) pilotta da var.\n\n**Bulgular ve açık işler**\n- **20 dk müziği PLAN tahminini aşıyor.** Derin evresi 658 sn gerektiriyor, eldeki Derin müziği ≈ 412 sn. İmge katmanı 241 sn gerektiriyor, eldeki 164,5 sn. C3 zıtlık dokusu hiç üretilmemiş. Gereken ek müzik 600 sn: 9,0 bin kredi, vokal denetimiyle ≈ 12,6 bin (PLAN \"≤ ≈ 6 bin\" diyordu). B adımının toplamı ≈ 18,2 bin; fark toplam tavandaki ≈ 19 binlik paydan düşer.\n- **600 bin sayacı:** A adımı 14.338,1 kredi harcadı. TTS gerçek fiyatla uzlaştırılmadı; ses tasarımı önizlemesinin fiyatı defterde yazılı değil.\n- **Yapılmayan araç işleri:**\n  - Karıştırıcı: 5 ve 20 dk kurulumu, WAV ana kopya çıktısı, iki parçalı imge ailesi, zıtlık katmanı, `timeline` v2.\n  - timing.py'ye 3 dk desteği.\n  - Mac'te kodlanmış dosyayı ölçecek betik.\n- **Yapılmayan metin incelemesi:** E.1'in iki bağımsız model incelemesi yapılmadı; bütün metinler bu incelemeyi bekleyen önerilerdir. Kayıtlı `c4.ses` ve `k.oda.ayrinti` yüklemsiz; bunlar `units-v3.json`'daki inceleme notlarında.\n- `/home/user/eyes` ve pilot dosyalarına yazmadım; git kullanmadım. `/home/user/eyes/yoga-pilot/v3/calc/__pycache__/timing.cpython-311.pyc` 03:33'te oluşmuş; benim komutlarımdan değil, büyük olasılıkla eşzamanlı başka bir ajandan. `$Y/b/ders1` de başka bir ajana ait; dokunmadım.",
+      "Ders 1, Parti 1 bitti: 3, 5 ve 15 dakikanın bütün metni ile 30 dakikanın iskeleti yazıldı. Üç hız köşesinde 3–15 dakikanın her biri (39/39 plan) `check_plan`'den ve metin denetiminden geçti. Ses üretilmedi, ücretli çağrı yapılmadı. Metin henüz hiçbir incelemeden geçmedi: karar 2 yedeği olan iki bağımsız model incelemesi ve sahibin kulağı bekleniyor.\n\n**Bir kural ihlali oldu ve geri alındı.** Kalibrasyon sırasında `/home/user/eyes/yoga-pilot/v3/calc` içinde modül içe aktarınca, Python kendiliğinden `__pycache__/timing.cpython-311.pyc` yazdı. Oluşturduğum bu dosyayı ve boş klasörü sildim. Klasörün içeriği eski hâline döndü, yalnız klasörün değişiklik zamanı değişti. `pilot/` klasörüne hiçbir şey yazılmadı; git kullanılmadı.\n\n**Sayılar**\n- **Birimler:** 130 klip kimliği var: 51 cümle ve 79 mikro ipucu (\"Al…\", \"ver…\", sayılar). Bunlara 3 dk'ya özgü 3 kısa biçim eklenir. Seslendirmeye 65 istek gider (51 cümle, 3 kısa biçim, 11 taşıyıcı).\n- **Karakter:** 3.289. Her derste aynı olan yardımcı klipler ayrıca 4 istek ve 196 karakter tutar. Maliyet tahmini SPEC fiyatıyla (0,926 kredi/karakter, 3 çekim) yaklaşık 9,1 bin kredi.\n- **Hece:** cümlelerde 958 (392 sözcük), kısa biçimlerde 64, mikro ipuçlarında 114.\n- **Plan başına hece:** 3 dk 293, 5 dk 470, 15 dk 1.072.\n\n**`check_plan` sonuçları (hepsi VARSAYIM köşeleri)**\n\nKöşeler: hoc = 4,68 hece/sn, yüksek duraklama; hoc-lo = aynı hız, düşük duraklama; nes = Neslihan'ın ölçülmüş süreleri (×1,109). Hoc modelinin kalibrasyonu: Ders 2'nin ölçülmüş Nefona Hoca kliplerinden yüksek duraklamayla %3,6, düşük duraklamayla %1 uzun çıktı.\n\n| Sürüm | hoc | hoc-lo | nes | Blok sırası |\n|---|---|---|---|---|\n| 3 dk | GEÇTİ | GEÇTİ | GEÇTİ | A → C1 → K |\n| 5 dk | GEÇTİ | GEÇTİ | GEÇTİ | A → C1 → K |\n| 15 dk | GEÇTİ | GEÇTİ | GEÇTİ | A → C1 → C2 → C3 → K |\n\n- **Aradaki dakikalar:** 4 ve 6–14 da üç köşede geçti.\n- **Önek kuralı:** 3 dk planı 5'in alt kümesi, 5'ten 15'e her dakika bir sonrakinin alt kümesi; ayrıca 3 ⊆ 4 ⊆ 5.\n- **Boş pay (en kısa sessizliklerle):** 3 dk'da 10,3 / 13,4 / 13,2 sn (taban 10); 5 dk'da 23,1 / 26,8 / 28,0 sn (taban 15).\n- **3 dk iskeleti:** giriş 0:04, Varış 0:32, çekirdek 1:36, Kapanış 0:48. PLAN.v3 §A.2'nin 12 kuralının hepsi karşılandı: derse özgü açılış \"-(y)abil-\"siz, `a.izin`'den sonraki 60 sn'de başka \"-(y)abil-\" yok, Kapanış'ta bir tane, şafak 48 sn.\n- **Yasak listesi:** metinde iki nokta üst üste yok, yasak sözcük yok, tekrar uyarısı yok.\n\n**Pilot planlayıcıyla ilgili:** `timing.py` birebir kopyalandı ve değiştirilmedi. Ders 2'ye özgü sabitler (oturarak kapanış adımları, anahtar cümle sırası, 3 dk şafağı, hızlı kapanış sınırları) yalnız çalışma anında ayarlandı; her biri gerekçesiyle `timing.txt` başında yazılı. Ders 1'e özgü denetimler eklendi, en önemlisi nefes kilidi: \"Al…\" ile bir sonraki \"Al…\" arası her planda 10 sn (C3'te 13 sn) ±0,02 sn tutuyor.\n\n**Şemada farklar:** JSON pilotla aynı şemada, üç farkla:\n- Tek ses kararı yüzünden ses anahtarı `female`/`male` yerine `hoc`.\n- Yeni alanlar: `breathCycles`, `evidenceByVersion`, `skeleton30`.\n- Ders 1'de sahne seçici olmadığı için `scenePicker` yok.\n\n**Kendi gördüğüm zayıf yerler**\n1. **3 dk'nın boş payı tabana çok yakın** (10,3 sn). Klip süreleri %5 uzun çıkarsa 3 dk yalnız bu denetimden kalır. İlk kısaltma adayı `c1.d2` döngüsü.\n2. **1 sn arayla sayılan döngü en riskli yer.** Bir sayı 0,7 sn'yi aşarsa kilit bozulur. Taşıyıcıyı üç nokta duraklarından kesmek de zor.\n3. **Nefese kilitli cümleler verişin içinde bitmeli** (en çok 4,2 sn). En uzunu \"Sıradaki nefes sende; ben susuyorum.\" yaklaşık 3,7 sn tutuyor.\n4. **15 dk dağılımı çapadan sapıyor:** C1 4:49 (çapa 4:30), C3 4:10 (çapa 4:30). C2 8., C3 12. dakikada giriyor.\n5. **Monotonluk riski:** 15 dk'da C1'in son 60 sn'si yalnız \"Al…\" ipucu; C3'ün ikinci turunda da 6 \"Al…\" üst üste.\n6. **7 ve 12. dakikalar esneme sınırına yakın** (T5, f yaklaşık 0,4–0,6). Süreler %10 kısa çıkarsa 6 ve 8. dakikada 60 sn'lik pencere yoğunluk tavanını (150 hece) aşıyor.\n7. **İkinci aşamanın ilk artımı en az 15 sn olmalı.** 15 dk planının payı hoc'ta 1,8, hoc-lo'da 10,1, nes'te 12,8 sn; daha kısa bir artım yayındaki 15 dk dosyasını değiştirir. Kural `iskelet30.md`'ye yazıldı.\n8. **Müzik imzası Ders 8'e yakın:** ikisi de Re'de bordun. Ders 8 yazılırken ayrışmalı.\n9. **\"Gevşeme zorunlu değil\" kuralı** (güvenlik §11.B-5) 3 ve 5 dk'da yalnız nefes kalıbı üzerinden karşılanıyor (\"Altı uzun gelirse…\", \"Sayıyı kaçırırsan…\"). Doğrudan cümle (`a.kolay`) 6. dakikadan giriyor; 3 dk'da yer kalmadı.\n10. **Dil kararı editörün:** \"Al…\", \"ver…\" ve \"Omuzların aşağı insin.\" gibi 3. kişi istek kipi davet dilinin sınırında. Ayrıca C2 ve C3 aynı kalıpla açılıyor (\"Sırada…\", \"Sıradaki…\").\n11. **Hazırlık kartı** 15 dk'daki vızıltılı nefes için \"sesinin kimseyi rahatsız etmeyeceği bir yer\" diyor; kart sürüme göre değişmiyorsa bu satır 3 ve 5 dk'da gereksiz kalır.\n12. **Doğrulanmamış bir dayanak var:** \"Vızıltı gündüz dersinde\" gerekçesi ikinci turda yeniden doğrulanmamış bir kayda (PMID 42521250) dayanıyor. Kartta kullanılmadı, yalnız script'te anıldı.\n\nDosyalar `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/` altında:\n- `ders1.lesson.json`\n- `ders1.script.md`\n- `iskelet30.md`\n- `timing.txt`\n- `ders1_kaynak.py` + `lesson_meta.json` — metnin tek kaynağı\n- `timing_d1.py` — denetim sarmalayıcısı\n- `ders1_md.py`, `iskelet_md.py` — .md üreticiler\n- `timing.py` — pilot kopyası, değiştirilmedi",
+      "Ders 3 \"Uykuya Geçiş\" için 5 ve 15 dakikalık metin, 30 dakikalık iskelet ve zamanlama yazıldı. Ses üretilmedi, ücretli çağrı yapılmadı. `/home/user/eyes` altına ve pilot klasörüne dokunulmadı; git kullanılmadı.\n\n**Metin incelemesi yapılmadı.** Metin yalnız makine denetiminden geçti (pilot `lint_text` ve `check_plan`). Karar 2'nin iki bağımsız model incelemesi ve sahibin kulağı henüz yok. Ders 3'e psikolog incelemesi gerekmiyor.\n\n**Çıktılar** (`/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/`):\n- `ders3.lesson.json`: pilotla aynı şema. Üç fark var:\n  - `voice` anahtarı `hoc` (Ders 1 ile aynı).\n  - Uyku izni bloğu `kind: sleepPermission`; planlayıcı onu kapanış olarak okur.\n  - \"Kapanışa geç\" düğmesi burada \"Uykuya geç\"tir ve doğrudan uyku iznine atlar.\n- `ders3.script.md`: bloklara göre metin, 5–15 arasındaki her dakikanın tablosu, 5 ve 15 dk planları, kaynak kartı, PLAN'dan sapmalar.\n- `iskelet30.md`: 30 dk'nın blok listesi, giriş ve dolum sırası, anahtar cümleler, imge yayı, müzik teması ve 16–30 dk'da gelecek parçalar (metinsiz).\n- `timing.txt`: 5–15 dk'nın her dakikası için plan ve `check_plan` sonucu.\n- Kaynak ve denetim dosyaları: `ders3_kaynak.py` (metnin tek kaynağı), `timing_d3.py`, `make_md.py`, değiştirilmemiş pilot `timing.py` kopyası (sha256 58f6c405…).\n\n**Sayılar**\n- **Plan birimi:** 71 (61 cümle klibi ve bir taşıyıcıdan kesilen 10 sayı).\n- **Seslendirilecek birim:** 67 (61 cümle, 1 kısa biçim, 1 taşıyıcı, 3 Durdur dönüşü, 1 ilk ders cümlesi). \"Uykuya geç\" uyku izninin kliplerini yeniden kullanır.\n- **Benzersiz metin:** 2.974 karakter, 1.076 hece, 420 sözcük.\n- **5 dk planı:** 27 klip, 445 hece, 1.217 karakter, konuşma payı %35–37.\n- **15 dk planı:** 71 klip, 975 hece, 2.680 karakter, konuşma payı %25–26.\n\n**`check_plan` sonuçları.** Köşeler VARSAYIM'dır: Nefona Hoca önizleme hızı 4,68 hece/sn (yüksek ve düşük duraklamayla) ve Neslihan'ın Ders 2'de ölçülmüş süreleri (5,6 hece/sn × 1,109).\n\n| Köşe | 5–15 dk | 5 dk | 15 dk | 5 dk boş pay (taban 15 sn) |\n|---|---|---|---|---|\n| Hoca, yüksek duraklama | 11/11 geçti | geçti | geçti | 19,4 sn |\n| Hoca, düşük duraklama | 11/11 geçti | geçti | geçti | 24,0 sn |\n| Neslihan | 11/11 geçti | geçti | geçti | 24,8 sn |\n\n- Metin denetimi geçti: iki nokta üst üste yok, yasak sözcük yok, herhangi bir 60 sn'de en çok üç \"-(y)abil-\", tekrar uyarısı yok.\n- Her dakikanın planı bir sonrakinin alt kümesi.\n- Bütün klip süreleri %10 kısalıp uzasa da denetimler geçiyor.\n- Geri sayma 10. dakikada giriyor; 14. dakikada bütün klipler çalıyor.\n\n**Zayıf yerler**\n1. **5 dk'nın boş payı ince.** Hoca, yüksek duraklamalı modelden %5 yavaş okursa boş pay 13,9 sn'ye, %10 yavaş okursa 8,5 sn'ye iner (taban 15 sn).\n2. **Metin sure.md bütçesinin altında.** 15 dk tam metin 975 hece, bütçe ≈ 1.180 (−%17). Sessizlikler 15. dakikada en uzun sınırlarına doğru %37–42 esniyor. Seyreklik bilinçli ama bütçenin altında.\n3. **Bazı bloklar çapadan sapıyor.** 15 dk'da Varış 1:30 (çapa 1:15), nefes bloğu 2:04 (çapa 1:45), imgeleme 4:32 (çapa 5:00). İmgeleme tek dokulu bir blok; 5:00'ı aşarsa dikkat eğrisi denetimi kırılır.\n4. **Anahtar cümle değişti.** PLAN'ın \"Dinlenme zamanı…\" biçimi yüklemsiz, üç noktalı ve ikinciden uzundu. Yerine: \"Bugün bitti; artık dinlenebilirsin.\" → \"Bugün bitti; dinlenebilirsin.\" → \"Bugün bitti.\" Editör ve usta hoca onayı gerekiyor.\n5. **Beden dolaşımının yönü iki plan maddesi arasında çelişiyor.** Dikkat eğrisi (A.2.2) ayaklardan başa diyor; C.1 ve E.6 #5 \"her derste aynı sıra\" diyor. A.2.2 uygulandı, sağ ve sol karışmıyor. Usta hoca kararı gerekiyor.\n6. **Açılış sırası pilot Ders 2'yi izliyor.** Dersin kendi açılışı önce, ortak açılış cümlesi göz seçiminden sonra geliyor. Ders 1'in sırasından farklı.\n7. **Uyku dersine özgü kararlar (hepsi VARSAYIM):**\n   - \"Uykuya dal\" pilotun yasak listesinden çıkarıldı; yalnız uyku izni cümlesinde kullanılıyor.\n   - Geri saymada sayılar arası süre 8 sn.\n   - \"Uykuya geç\" dizisi 25–75 sn sınırıyla denetlendi.\n   - \"Sesim yavaşça kısılacak\" sözü için ses uyku izninden sonra −4,5 ve −6 dB iniyor. Konuşmanın yatağın en az 15 dB üstünde kalıp kalmadığı ölçülmedi.\n8. **Söyleyiş riskleri kulak listesinde:** \"verandadasın\" (yedeği \"balkondasın\"); \"Her veriş, günü…\" cümlesinde virgülde durulmazsa \"veriş günü\" diye duyulur.\n9. **Durdur (X) sonrası sesli dönüş** uyku dersinde de var ve kişinin kendi dokunuşuyla çalar. Gece için ayrıca yazıldı; usta hoca onayına.\n10. **16–30 dk'daki sessiz pencerelerin dönüş sesi** uyandırabilir. `iskelet30.md`'de usta hocaya açık soru olarak yazıldı.",
+      "Ders 5 \"Tek Nokta\" Parti 1 metni yazıldı. Planlayıcının 3, 5 ve 15 dk planları üç köşenin hepsinde geçti (13 dakika × 3 köşe = 39/39). Metin denetimi de geçti. Ses, müzik ve çan üretilmedi: ElevenLabs bağlantısı yoktu, ücretli çağrı yapılmadı. Metin henüz karar 2 yedeğinden geçmedi (Türkçe editör ve usta hoca yerine iki bağımsız model incelemesi) ve sahip dinlemedi, yani \"bitti\" sayılmaz. /home/user/eyes ve pilot klasörü değişmedi; git kullanılmadı.\n\n**Sayılar**\n- **Birim:** 61 birim (6'sı çok cümleli, toplam 69 parça). Mikro klip ve taşıyıcı yok, çünkü nefes sesli sayılmıyor.\n- **Kısa biçim:** 3 dk için 3 kısa biçimin metni farklı. 8 kısa biçimde yalnız sessizlik değişiyor, bunlar için ayrı ses gerekmez.\n- **TTS:** 64 istek, 3.592 karakter. Birimler 1.240 hece ve 491 sözcük; kısa biçimler 56 hece ve 21 sözcük.\n- **Kredi tahmini:** SPEC.v3 §15.2 fiyatıyla ve 3 çekimle ≈ 10.775 kredi. Yeniden çekimler ve Scribe bu sayıya dahil değil.\n- **Ortak klipler:** Durdur dönüşü ve ilk ders girişi Ders 1 ile aynı metin; ayrıca 4 istek, 196 karakter.\n\n**Sürümlere göre check_plan sonucu** (hoc = Nefona Hoca 4,68 hece/sn, yüksek duraklama. hoc-lo aynı hız, düşük duraklama. nes = Neslihan'ın ölçülmüş süreleri, ×1,109. Hepsi VARSAYIM.)\n\n| Sürüm | Bloklar | Hoc: birim, hece, konuşma | En yoğun 60 sn | Boş pay (min sessizlik) | Sonuç (3 köşe) |\n|---|---|---|---|---|---|\n| 3 dk | A → C1 → K | 14 birim, 279 hece, %38 | 127 hece, %51 | 19,8 / 23,4 / 23,2 sn (taban 10) | GEÇTİ |\n| 5 dk | A → C1 → K | 22 birim, 484 hece, %40 | 125–147 hece | 43,8 / 32,3 / 30,9 sn (taban 15) | GEÇTİ |\n| 15 dk | A → C1 → C2 → C3 → K | 61 birim, 1.240 hece, %34 | 136–142 hece | — | GEÇTİ |\n\n- 3 ⊆ 5 kuralı ve 5'ten 15'e her dakikanın bir sonrakinin alt kümesi olma kuralı sağlanıyor.\n- 3 dk'da derse özgü açılış \"-(y)abil-\"siz. `a.izin`'den sonraki 60 sn'de başka \"-(y)abil-\" yok; Kapanış'ta bir tane var (`k.hareket`).\n- 3 dk'da iki kısa odak aralığı var (16,5 ve 15,8 sn, sınır ≤ 18) ve şafak 51 sn.\n- Blokların girdiği dakika: C2 8. dakikada, C3 12. dakikada.\n\n**Tasarımın ana kararları**\n- **Anahtar cümle:** \"Fark ettiğin an, zaten geri döndün.\" → \"Fark ettin; döndün.\" → \"Yine döndün.\" (11 → 5 → 4 hece).\n- **İmge:** tek imge, el fenerinin ışığı. Açılış: \"Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.\" Son cümle: \"El feneri yine senin elinde.\"\n- **Nefes sayma içinden yapılıyor:** hoca sayı söylemiyor, çünkü sesli sayım bir nefes temposu dayatırdı.\n- **Sessiz odak aralıkları:** ≈ 15 → 18 → 30 → 45 sn. 30 ve 45 sn'lik iki aralık duyurulu pencere; ikisi de bir çıkış kapısı taşıyor ve sonunda çan ile karşılama geliyor. Pencerede müzik kabarmıyor, çekiliyor.\n- **Kapanış'ta isteğe bağlı avuçlama:** avuçlar bastırılmıyor, gözlere değmiyor.\n- **Kanıt:** yalnız doğrulanmış dosyalardan; PMID ve DOI ile, kaynak kartıyla birlikte. Kullanılanlar: Mrazek 2012, Norris 2018, Whitfield 2021, Feruglio 2021, Bernardi 2006, Toussaint 2021, Luu 2024, Howard 2017, Cramer 2013, Radin 2025, Schumer 2018. İkinci turda doğrulanmamış Zuo, Colzato, Chu ve Pascoe kullanılmadı.\n\n**Gördüğüm zayıf yerler**\n1. Ses yok; bütün süreler hece modelinden tahmin. Süreler sarsıntı taramasında ×0,90 alınınca 11 ve 12. dakikalar yoğunluktan (151 > 150 hece) kalıyor. ×1,10 alınınca 4. dakika şafaktan (55 < 60 sn) kalıyor. İkisi de yayında olmayan dakikalar.\n2. 3 dk iskelete tam oturmuyor: Varış 0:37 (hedef 0:34), çekirdek 1:32 (hedef 1:38), Kapanış 0:51 (hedef 0:48). Açılış yoğunluğunu korumak için `c1.nokta` 3 dk'dan çıkarıldı.\n3. 15 dk dağılımı çapadan sapıyor: Varış 1:34, C2 3:20, Kapanış 2:19. Nedeni avuçlamanın Kapanış'a ≈ 58 sn eklemesi; 15 dk'ya konmasa ilk yayında hiç duyulmazdı.\n4. 15 dk planında ikinci aşamaya kalan pay dar: hoc'ta 7,7 sn, en geniş köşede 25,3 sn. 16–30 dk'nın ilk artımı en az 30 sn olmalı, yoksa yayındaki 15 dk dosyası değişir; kural `iskelet30.md` §2'de.\n5. Pencerede müziğin çekilmesi pilotun karıştırıcısında yok (pilot +6 dB kabartıyordu). `mix.py`'ye pencere yönü parametresi gerekiyor. Dinleyicinin bunu \"ses kesildi\" diye algılama riski var.\n6. Çanın ve sinüs benzeri tonun nasıl üretileceği açık. Öneri yerel sentez; \"müzik A = ElevenLabs Music\" kararının bunları kapsayıp kapsamadığına sizin karar vermeniz gerekiyor.\n7. PLAN.v2'den iki sapma var: anahtar cümlenin 3. biçimi \"Döndün…\" yerine \"Yine döndün.\" oldu. C3'ün açılışı (\"Bundan sonra yalnızca nokta ve nefes var.\") C2'ye bağlanmadı, çünkü 30 dk'da C4'ten sonra da doğru kalması gerekiyor.\n8. Kulak riskleri:\n   - metaforik ışık ile odanın gerçek ışığı karışabilir;\n   - \"ona kadar\" (sayı) ile \"ona\" (zamir) aynı yazılıyor;\n   - \"döndün\" ile hemen ardından gelen \"Artık dönüş zamanı.\" arasında yankı var;\n   - sessiz saymada 16–20 sn'lik aralıklar dinleyiciye uzun ya da kısa gelebilir;\n   - istek kipleri (\"insin\", \"değmesin\", \"yaslansın\") davet dilinin sınırında.\n9. `a.gozler` Ders 1 ve 2'nin göz cümlesiyle aynı kalıpta. Ortak ritüel saydım, benzersizlik ölçütüne sokmadım.\n\nDosyalar /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ içinde:\n- ders5.lesson.json\n- ders5.script.md\n- iskelet30.md\n- timing.txt\n- ders5_kaynak.py\n- ders5_meta.py\n- ders5_md.py\n- iskelet_md.py\n- timing_d5.py\n- timing.py (pilot kopyası, sha256 58f6c405…, değiştirilmedi)"
+    ],
+    "rev": [
+      {
+        "lens": "turkce-editor",
+        "findings": [
+          {
+            "severity": "BLOCKER",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3.lesson.json",
+            "unit": "extras.stopReturn (D.durdur.screenText ↔ d.yer, d.goz, d.kalk)",
+            "problem": "Ekran = söylenen kuralı bozuluyor. Durdurma ekranında ortak metin duruyor, ama Ders 3'ün sesli dönüşü bambaşka üç cümle okuyor. Pilotta (ders2) d.goz ve d.kalk için 'Durdurma ekranı metniyle aynı' yazıyordu; Ders 3'te sözcükler de sıra da farklı. Ortak ekran metni gece de 'gözlerini aç, etrafına bak' diyor, bu da uyku dersinin sesli dönüşüyle çelişiyor.",
+            "quote": "screenText: \"Gözlerini aç, etrafına bak, acele etme. Uzanıyorsan önce yana dön, sonra otur.\" / söylenen: \"Ders burada bitti; şu an yatağındasın.\" \"Gözlerini açıp çevrene bakmak iyi olur; acele yok.\" \"Kalkacaksan önce yana dön, otur ve bekle; başın dönerse biraz daha otur.\"",
+            "fix": "Ders 3'te sesli dönüş çalarken ekranda söylenen üç cümle gösterilsin: \"Ders burada bitti; şu an yatağındasın. Gözlerini açıp çevrene bakmak iyi olur; acele yok. Kalkacaksan önce yana dön, otur ve bekle; başın dönerse biraz daha otur.\" Öbür yol, ortak ekran metni korunacaksa d.goz ve d.kalk birebir o metne çevrilir. Birinci yol öneriliyor, çünkü gece için yazılmış metin o."
+          },
+          {
+            "severity": "BLOCKER",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders2/units-v3.json",
+            "unit": "c4.ses (orman; ayrıca ders2.lesson.v3.json c4.ses.scenes.kiyi) — inceleme_notlari kararı",
+            "problem": "Yüklemsiz cümle. Kural açık: yüklemsiz cümle yok; PLAN.v2 §C.1 isim cümlesine yalnız beden dolaşımı listelerinde izin veriyor. Bu cümle liste değil, tek başına söylenen bir imge cümlesi. Yanındaki kıyı sahnesinin cümlesi de aynı kusuru taşıyor. Varsayılan metin ('Uzaktan gelip giden hafif bir ses var.') doğru.",
+            "quote": "Uzaktan gelip giden yaprak hışırtısı. / (kiyi) Uzaktan gelip giden dalgaların sesi.",
+            "fix": "orman: \"Uzaktan yaprak hışırtısı gelip gidiyor.\" (+1 hece) · kiyi: \"Uzaktan dalgaların sesi gelip gidiyor.\" Kayıtlı birim olduğu için iki sahne de yeniden seslendirilir; 15 dk için check_plan ve H12 yeniden çalıştırılır."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders2/units-v3.json",
+            "unit": "n1.sec",
+            "problem": "'olsun'un öznesi eksik. Asıl sorun seste çıkıyor: iki nokta kalkınca tırnak işareti duyulmuyor ve cümle kulakta '…izin veriyorum olsun' diye tek parça, bozuk bir öbek gibi geliyor. Dinleyici hazır niyetin nerede başladığını duymuyor.",
+            "quote": "Aklına bir şey gelmezse \"Kendime dinlenmeye izin veriyorum\" olsun.",
+            "fix": "\"Aklına bir şey gelmezse niyetin şu olsun. \"Kendime dinlenmeye izin veriyorum.\"\" (üç cümle, iki nokta yok, kesim cümle sonlarından). En az değişiklikle: \"Aklına bir şey gelmezse niyetin \"Kendime dinlenmeye izin veriyorum\" olsun.\" (+3 hece). Değişirse 5 dk boş payı (kons 15,9 sn, taban 15) ve H12 yeniden denetlenir."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders2/units-v3.json",
+            "unit": "n2.hatirla, n2.hatirla.kisa (2. cümle)",
+            "problem": "'Ya da yine … olsun' ilk cümleye bağlanmıyor. İlk cümle niyeti söylemekten söz ediyor, ikincisi 'olsun' ile bitiyor. 'yine' sözcüğü herkesin hazır niyeti seçtiğini varsayıyor. n1.sec'teki 'veriyorum olsun' söyleyiş sorunu burada da var.",
+            "quote": "Ya da yine \"Kendime dinlenmeye izin veriyorum\" olsun.",
+            "fix": "\"Niyet seçmediysen \"Kendime dinlenmeye izin veriyorum\" demen yeterli.\" Bu cümlede 'yeterli' tekrarı kulağı rahatsız ederse: \"Niyet seçmediysen niyetin yine \"Kendime dinlenmeye izin veriyorum\" olsun.\" Aynı düzeltme kısa biçime de yapılır."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1.lesson.json",
+            "unit": "c1.guven (ayrıca openingScreen[2])",
+            "problem": "Güvenlik cümlesinde koşul eki yalnız ikinci yükleme gelmiş. Yazıda geçer, ama kulakta cümle 'Başın döner…' diye bir yargıyla açılıyor ve sakinleştirici bir derste olumsuz bir telkin gibi duyulabiliyor.",
+            "quote": "Başın döner ya da ellerin karıncalanırsa normal nefesine dön.",
+            "fix": "\"Başın dönerse ya da ellerin karıncalanırsa normal nefesine dön.\" (+1 hece). openingScreen[2] de aynı biçime çevrilir."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1.lesson.json",
+            "unit": "c2.nasil (1. cümle)",
+            "problem": "'almak' fiilinin nesnesi eksik. 'Burnundan bir kez alıyorsun' Türkçede yarım kalıyor; neyin alındığı söylenmiyor.",
+            "quote": "Burnundan bir kez alıyorsun, ardından küçük bir alış ekliyorsun.",
+            "fix": "\"Burnundan bir nefes alıyorsun, ardından üstüne küçük bir alış daha ekliyorsun.\" Hece bütçesi dar kalırsa: \"Burnundan bir nefes alıyorsun, ardından küçük bir alış ekliyorsun.\""
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1.lesson.json",
+            "unit": "c1.ritim.short (3 dk)",
+            "problem": "'tutmak'ın nesnesi atılmış. 'arada tutmak yok' tek başına ne tutulmayacağını söylemiyor. Tam biçimde doğrusu var ('Arada nefesi tutmak yok.').",
+            "quote": "Alış dört, veriş altı sayı sürecek; arada tutmak yok.",
+            "fix": "\"Alış dört, veriş altı sayı sürecek; arada nefes tutmak yok.\" (+2 hece; 3 dk boş payı 10,3 sn, taban 10, sınırda). Pay yetmezse: \"Alış dört, veriş altı sayı; arada nefes tutmak yok.\" Bu biçim yüklemsiz olduğu için daha az uygun."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1.lesson.json",
+            "unit": "c2.tur2, c3.el",
+            "problem": "Çifte izin: 'İstersen … -ebilirsin'. PLAN.v2 §C.8 bu kalıbı kusur sayıp pilot metinden çıkarmıştı. Ayrıca her biri gereksiz bir '-(y)abil-' daha ekliyor.",
+            "quote": "İstersen bir tur daha iç çekişle devam edebilirsin. / İstersen bir elini göğsüne koyup titreşimi avucunda da hissedebilirsin.",
+            "fix": "c2.tur2: \"Bir tur daha iç çekişle devam etmek sana kalmış.\" (-(y)abil- yok) · c3.el: \"Bir elini göğsüne koyup titreşimi avucunda da hissedebilirsin.\""
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5.lesson.json",
+            "unit": "k.avuc1",
+            "problem": "Çifte izin ('istersen … -ebilirsin'). PLAN.v2 §C.8 bu kalıbı kusur sayıyor.",
+            "quote": "Gözlerin kapalıysa, istersen avuçlarını birbirine sürtüp ısıtabilirsin.",
+            "fix": "\"Gözlerin kapalıysa, avuçlarını birbirine sürtüp ısıtabilirsin.\""
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5.lesson.json",
+            "unit": "c2.bas (ayrıca c2.nasil 'ona kadar')",
+            "problem": "TTS eşyazım tuzağı (PLAN.v2 §C.7). 'Ona varınca' cümlenin başında hem 'o' zamirinin yönelme hâli hem 'on' sayısı olarak duyulabiliyor. c2.nasil'de 'bir, iki, üç, dört diye' bağlamı anlamı açıyor, c2.bas'ta açmıyor. Yazar da bunu §7 madde 10'da açık nokta olarak bırakmış.",
+            "quote": "Ona varınca yeniden birden başlıyorsun; sayıyı kaybedersen de öyle.",
+            "fix": "\"On olunca yeniden birden başlıyorsun; sayıyı kaybedersen de öyle.\" (hece sayısı aynı)"
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3.lesson.json",
+            "unit": "c1.zorlanirsan",
+            "problem": "Anlam kayıyor. 'Nefes zor gelirse' 'nefes almakta güçlük çekersen' diye, tıbbi bir durum gibi anlaşılabiliyor. Kastedilen, uzun verişin zor gelmesi.",
+            "quote": "Nefes zor gelirse kendi ritmine dön.",
+            "fix": "\"Uzatmak zor gelirse kendi ritmine dön.\" ya da \"Uzun veriş zor gelirse kendi ritmine dön.\""
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3.lesson.json",
+            "unit": "c1.dudak",
+            "problem": "'Veriş … çıkmak' eşdizimi yanlış: çıkan şey verişin kendisi değil, havadır. Öbür cümleler ikinci kişi iyelikle kurulmuşken burada 'dudaklardan' iyeliksiz kalmış.",
+            "quote": "Veriş burundan ya da hafif aralık dudaklardan çıkabilir.",
+            "fix": "\"Verişte nefes burnundan ya da hafif aralık dudaklarından çıkabilir.\""
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3.lesson.json",
+            "unit": "c2.topuk, c2.bel, c2.omurga, c2.boyun (a.durus ile)",
+            "problem": "Anlam çelişkisi. a.durus yan yatmaya izin veriyor ('Sırtüstü ya da yan…'), ama beden dolaşımı yalnız sırtüstü yatana doğru olan şeyleri söylüyor. Yan yatan için topuk, sırt, omurga ve ense yatağa ya da yastığa değmez. 'Belin ve sırtın' cümlesi zorunlu (Z) olduğu için her sürümde duyuluyor.",
+            "quote": "Topuklarının yatağa değdiği yeri fark ediyorsun. / Belin ve sırtın bütün ağırlığıyla yatakta. / Omurgan boydan boya yatağa uzanıyor. / Ensen yastığa yaslanıyor.",
+            "fix": "Duruştan bağımsız biçimler: \"Ayaklarının yatağa değdiği yerleri fark ediyorsun.\" · \"Belin ve sırtın da ağırlığını yatağa bırakıyor.\" · \"Bedenin boydan boya yatağa uzanıyor.\" · \"Başın ve boynun yastığa yaslanıyor.\""
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3.lesson.json",
+            "unit": "c3.su ↔ c3.yagmur, c3.damla, c3.cam, c3.ses2, c3.uzak, c3.kal",
+            "problem": "Seçim sözü tutulmuyor. 7. dakikadan sonra 'Yağmur istemezsen sessiz bir akşam da olur.' deniyor, hemen ardından zorunlu cümle 'Yağmur çatıya usul usul vuruyor.' ile yağmur kesin bir gerçek gibi anlatılıyor ve sonraki imge cümlelerinin hepsi yağmurla sürüyor. Dinleyiciye sunulan seçenek metinde yok sayılıyor (PLAN.v2 §C.5, imgede seçenek).",
+            "quote": "Yağmur istemezsen sessiz bir akşam da olur. → Yağmur çatıya usul usul vuruyor.",
+            "fix": "c3.su'yu çıkar ve seçimi yalnız c3.gelmezse'ye bırak, ya da c3.su'yu şöyle yaz: \"Yağmuru istemezsen yalnızca sesini uzaktan dinlemen de olur.\" Seçim korunacaksa yağmur cümlelerinden en az ilki koşula bağlanır: \"Yağmur varsa çatıya usul usul vuruyor.\" Son karar usta hoca yedeğinin."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1.lesson.json",
+            "unit": "afterCheck.onCok (aynı metin ders5.lesson.json'da; kaynağı pilot ders2)",
+            "problem": "Anlam bozukluğu. Soru dersin sonunda, Tamamlandı akışında soruluyor (PLAN.v2 §E.1 madde 5). Dersi bitirip 'Çok' diyen kişi durmamış, ama metin 'durman doğruydu' diyor. Ders 3'te aynı metin yalnız X ile durdurulunca çıktığı için orada sorun yok.",
+            "quote": "Bu olabiliyor ve durman doğruydu.",
+            "fix": "Ders 1 ve 5 için: \"Bu olabiliyor; zorlandığında durmak her zaman doğru bir seçim.\" (sonraki cümleler aynı kalır)"
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3.lesson.json",
+            "unit": "evidenceLine (ekran)",
+            "problem": "Sıfat öbeği yanlış yere bağlanmış: 'Uyumakta zorlanan' dilbilgisi olarak 'çalışma'yı niteliyor. 'dikkatini dağıtmaları' iyelik uyumu zayıf. 'yavaş nefes ve müzik dinleme' ise 'yavaş nefes dinleme' diye okunabiliyor.",
+            "quote": "Uyumakta zorlanan 41 kişilik bir çalışmada, ilgi çekici bir imgeyle dikkatini dağıtmaları söylenenler… Yatmadan önce yavaş nefes ve müzik dinleme çalışmalarında…",
+            "fix": "\"Uyumakta zorlanan 41 kişiyle yapılan bir çalışmada, ilgi çekici bir imgeyle dikkatlerini dağıtmaları söylenenler, talimat almayanlara göre daha kısa sürede uykuya daldıklarını bildirdi. Yatmadan önce yavaş nefes alma ve müzik dinleme çalışmalarında…\""
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1.lesson.json",
+            "unit": "evidenceLine (ekran)",
+            "problem": "Çeviri kokusu: 'tersine göre' Türkçede karşılaştırma öğesi olarak doğal durmuyor.",
+            "quote": "kısa alış ve uzun verişle yapılan nefes, tersine göre daha çok gevşeme bildirimiyle ilişkiliydi.",
+            "fix": "\"kısa alış ve uzun verişle yapılan nefes, uzun alış ve kısa verişe göre daha çok gevşeme bildirimiyle ilişkiliydi.\""
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5.lesson.json",
+            "unit": "evidenceLine (ekran)",
+            "problem": "Çeviri kokusu. 'etkin karşılaştırmalardan üstün değildi' İngilizce 'active comparators' teriminin sözcük sözcük çevirisi. 'gevşeme ve okumaya göre' ise kıyaslanan grupları söylemiyor.",
+            "quote": "zihin dağılmasının göstergeleri gevşeme ve okumaya göre azaldı. 45 çalışmayı birleştiren bir incelemede düşünme becerilerindeki etki küçüktü ve etkin karşılaştırmalardan üstün değildi.",
+            "fix": "\"…zihin dağılmasının göstergeleri, gevşeme egzersizi yapanlara ya da okuyanlara göre azaldı. 45 çalışmayı birleştiren bir incelemede düşünme becerilerindeki etki küçüktü ve başka etkin uygulamalardan üstün değildi.\""
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders2/units-v3.json",
+            "unit": "k.oda.ayrinti (inceleme_notlari kararı)",
+            "problem": "Yüklemsiz liste. Karar: liste istisnasına girer, çünkü bir önceki cümlenin (k.goz, 'birkaç şeye bakabilirsin') nesnesini açıyor. Aynı gerekçeyle c1.gecis.arka ve c1.gecis.on başlıkları da kabul. İstenirse durum ekiyle önceki fiile dilbilgisi olarak bağlanabilir.",
+            "quote": "Bir renk, bir biçim, bir doku.",
+            "fix": "İsteğe bağlı: \"Bir renge, bir biçime, bir dokuya.\" Kayıtlı birim; değişmezse yeniden seslendirme gerekmez."
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders2/units-v3.json",
+            "unit": "n1.soyle.kisa (5 dk)",
+            "problem": "Nesne atılmış ('niyetini'). Bir önceki cümle niyetten söz ettiği için anlaşılıyor, ama kısaltma cümleyi kulakta askıda bırakıyor.",
+            "quote": "İçinden bir kez söylemek yeterli.",
+            "fix": "Pay yeterse eski biçime dönülür: \"Niyetini içinden bir kez söylemek yeterli.\" (+4 hece; H12 ve boş pay yeniden denetlenir). Pay yetmezse mevcut biçim kabul edilebilir."
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders2/units-v3.json",
+            "unit": "g.ilk (= ders1/ders5 i.ilk)",
+            "problem": "İlk dersindeki kişi 'kapanış'ın bir düğme olduğunu henüz bilmiyor, bu yüzden 'kapanışa geçmen' belirsiz kalıyor.",
+            "quote": "Bugün yalnızca tanışıyoruz; zorlanırsan kapanışa geçmen yeterli.",
+            "fix": "\"Bugün yalnızca tanışıyoruz; zorlanırsan ekrandaki \"Kapanışa geç\"e dokunman yeterli.\" (ekran = söylenen korunur)"
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1.lesson.json",
+            "unit": "c1.burun",
+            "problem": "'oradan' burun için dolaylı ve biraz yapay kalıyor.",
+            "quote": "Burnun açıksa alış da veriş de oradan olsun.",
+            "fix": "\"Burnun açıksa alış da veriş de burnundan olsun.\""
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1.lesson.json",
+            "unit": "a.gozler",
+            "problem": "'açıksa'nın öznesi ('gözlerin') ilk yan cümledeki nesneden ('gözlerini') çıkarılmak zorunda kalıyor.",
+            "quote": "Gözlerini kapatmak ya da açık tutmak sana kalmış; açıksa bakışın yumuşakça yere insin.",
+            "fix": "\"…sana kalmış; gözlerin açıksa bakışın yumuşakça yere insin.\" (Ders 5'in a.gozler cümlesine de uygulanabilir)"
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5.lesson.json",
+            "unit": "c1.kac",
+            "problem": "'Kaç kez dağıldığın' konuşma dilinde geçer, ama dağılan kişi değil dikkat.",
+            "quote": "Kaç kez dağıldığın hiç önemli değil; her dönüş değerli.",
+            "fix": "\"Dikkatinin kaç kez dağıldığı hiç önemli değil; her dönüş değerli.\" (+2 hece)"
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5.lesson.json",
+            "unit": "c1.yer",
+            "problem": "'en açık … duyuyorsun' zarf olarak biraz eğreti. Ders 3'te aynı iş için daha doğal olan 'en çok … belirgin' kullanılıyor.",
+            "quote": "Nefesi en açık burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?",
+            "fix": "\"Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?\""
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5.lesson.json",
+            "unit": "preparationCard[1]",
+            "problem": "Susan şey yer değil, bildirimler. 'Birkaç dakika' ise 15 dk sürüm için yanlış.",
+            "quote": "Birkaç dakika bildirimlerin susacağı sessiz bir yer",
+            "fix": "\"Bildirimleri sessize aldığın, sessiz bir yer\""
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3.lesson.json",
+            "unit": "c3.yer ↔ c3.ortu",
+            "problem": "'üstü örtülü veranda'nın hemen ardından 'Üstünde … bir örtü var.' geliyor. 'örtü' yankılanıyor ve 'Üstünde' verandanın üstü diye de anlaşılabiliyor.",
+            "quote": "Belki üstü örtülü bir verandadasın. … Üstünde kalın, yumuşak bir örtü var.",
+            "fix": "\"Belki üstü kapalı bir verandadasın.\""
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3.lesson.json",
+            "unit": "c3.cam",
+            "problem": "'izler süzülüyor' anlamca yerinde değil: süzülen şey iz değil, damla.",
+            "quote": "Yakındaki camda yağmur izleri ağır ağır süzülüyor.",
+            "fix": "\"Yakındaki camdan yağmur damlaları ağır ağır süzülüyor.\""
+          }
+        ]
+      },
+      {
+        "lens": "usta-hoca",
+        "findings": [
+          {
+            "severity": "BLOCKER",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3_kaynak.py (→ ders3.lesson.json, ders3.script.md §2 C4)",
+            "unit": "Ders 3 · c4.giris (Z)",
+            "problem": "Anlam bozukluğu. c4.giris zorunlu ve kısa biçimi yok, ama sayılar 10–13 dk planlarında beşten başlıyor (c4.n10–n06 yalnız 14. dakikadan giriyor). Planlayıcıyı kendim koştum. hoc hi ve hoc-lo köşelerinde 10, 11, 12 ve 13 dk için C4 sırası şu: giris → (uymaz) → n05 n04 n03 n02 n01 → bitti → k2. Yani dinleyici \"Ondan bire geri sayacağım.\" cümlesinin hemen ardından \"beş…\" duyuyor. Yayındaki 5 ve 15 dk dosyaları etkilenmiyor. Ama ara dakikalar önek testinin ve ikinci aşamadaki kaydırıcının kullanacağı planlardır. Bu klip şimdi seslendirilirse yanlış söz sese girer.",
+            "quote": "Ondan bire geri sayacağım. Her sayıda nefesini bırakıyorsun.",
+            "fix": "Başlangıç sayısı söylenmesin: \"Bire doğru geri sayacağım. Her sayıda nefesini bırakıyorsun.\" (hece sayısı aynı, 10 + 13). Ders 2'nin \"Geriye doğru sayacağım.\" cümlesi seçilmesin, benzersizlik bozulur. İkinci yol: 10–13 dk için \"Beşten bire geri sayacağım.\" diye ayrı bir kısa biçim yazılır (belowSec 840). Hangisi seçilirse seçilsin timing_d3.py yeniden koşulur."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3_kaynak.py (C2)",
+            "unit": "Ders 3 · C2 beden dolaşımı (c2.bel Z, c2.omurga, c2.topuk, c2.boyun) ↔ a.durus",
+            "problem": "Duruşla metin çelişiyor. Varış'taki a.durus \"Sırtüstü ya da yan\" diyerek yan yatmayı da sunuyor. C2'nin cümleleri ise yalnız sırtüstü yatana doğru: yan yatanın sırtı, omurgası, topukları ve ensesi yatağa ya da yastığa değmez. c2.bel zorunlu olduğundan 5 dk sürümünde de çalıyor. Usta hoca ölçütü 4 (somut beden dili) ve ölçüt 1 yönünden kaldı: dinleyiciye yanlış bir duyum söyleniyor.",
+            "quote": "Belin ve sırtın bütün ağırlığıyla yatakta. / Omurgan boydan boya yatağa uzanıyor. / Topuklarının yatağa değdiği yeri fark ediyorsun. / Ensen yastığa yaslanıyor.",
+            "fix": "İki duruşta da doğru olan cümleler yazılsın. c2.bel → \"Gövden bütün ağırlığıyla yatakta.\" · c2.omurga → \"Omurgan boydan boya uzanıyor.\" · c2.topuk → \"Ayaklarının yatağa değdiği yeri fark ediyorsun.\" · c2.boyun → \"Başın ve boynun yastığa yaslanıyor.\" Sonra timing_d3.py yeniden koşulur."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3_kaynak.py (C3)",
+            "unit": "Ders 3 · c3.su (İ 7) ve ardından gelen yağmur cümleleri",
+            "problem": "İmge seçimi sunuluyor ama metin seçimi yok sayıyor (ölçüt 8, tek imge yayı; güvenlik §11.B-10). c3.su \"sessiz bir akşam\" seçeneğini veriyor. Hemen arkasından c3.yagmur, c3.damla, c3.cam, c3.ses2, c3.uzak ve c3.kal yağmuru anlatmayı sürdürüyor. Sessiz akşamı seçen dinleyici üç dakika boyunca kendi seçmediği sahneyi dinliyor. 5 dk sürümünde c3.su hiç çalmıyor.",
+            "quote": "Yağmur istemezsen sessiz bir akşam da olur.",
+            "fix": "Sahneyi değiştirmeyen bir kapı verilsin, böylece sonraki cümleler doğru kalır: \"Yağmur sesi sana iyi gelmezse onu çok uzakta düşünmen de olur.\" Başka bir yol: c3.su çıkarılır ve yağmur istemeyen kişi hazırlık kartındaki doğa katmanı ayarına yönlendirilir. Güvenlik §11.B-10'un istediği seçim zaten zorunlu klip c3.yer'de var (oda ya da veranda)."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders2/units-v3.json (ders2.lesson.v3.json C4)",
+            "unit": "Ders 2 · c4.koku (20 dk, yeni seslendirilecek) ↔ Ders 3 · c3.toprak",
+            "problem": "Benzersizlik kaldı (ölçüt 17, PLAN.v2 §A.2.1): iki dersin imgesinde neredeyse aynı cümle geçiyor. İkisi de Parti 1 ile aynı dönemde seslendirilecek.",
+            "quote": "Ders 2: \"Havada ıslak toprak ve çam kokusu var.\" · Ders 3: \"Havada ıslak toprağın kokusu var.\"",
+            "fix": "Islak toprak Ders 3'ün yağmur imgesine ait; Ders 2'nin cümlesi değişsin: \"Havada çam ve yosun kokusu var.\" (hece sayısı azalır, 20 dk'nın sınırlarına pay kalır). Sonra final_timing.py yeniden koşulur."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders2/units-v3.json",
+            "unit": "Ders 2 · n2.hatirla ve n2.hatirla.kisa (iki nokta kaldırılınca değişen metin)",
+            "problem": "İki nokta kaldırılınca ikinci cümlenin öznesi düştü, eksik öğe kaldı. İlk cümlenin öznesi \"söylemek\". Bu yüzden \"olsun\" fiilinin neye bağlandığı belirsiz. n1.sec'te aynı kalıp sorunsuz, çünkü orada özne önceki cümledeki \"niyet\". 5 dk sürümünde n2.hatirla.kisa her dinleyişte çalıyor.",
+            "quote": "Niyetini içinden bir kez daha söylemek yeterli. Ya da yine \"Kendime dinlenmeye izin veriyorum\" olsun.",
+            "fix": "\"Niyetini içinden bir kez daha söylemek yeterli. Hatırlamazsan \"Kendime dinlenmeye izin veriyorum\" demen de olur.\" Bu biçimde \"-(y)abil-\" yok. Uzun biçimde de aynı ikinci cümle kullanılır. 5 dk'nın boş payı (15,9 sn, taban 15) yeniden ölçülür."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1_kaynak.py (C3)",
+            "unit": "Ders 1 · c3.eller (Z)",
+            "problem": "Anlam ikiye çıkıyor. Varış'ta gözleri kapatması önerilen dinleyici \"gözlerini kapatman gerekmiyor\" sözünü \"gözlerini aç\" diye anlayabilir. Cümle aslında parmaklarla kulak ve göz kapatmayı (shanmukhi) dışarıda bırakmak için yazılmış, ama parmak ya da el hiç anılmıyor.",
+            "quote": "Kulaklarını ya da gözlerini kapatman gerekmiyor.",
+            "fix": "\"Parmaklarınla kulaklarını ya da yüzünü kapatman gerekmiyor; ellerin kucağında kalsın.\" Daha kısa biçim: \"Ellerin kucağında kalıyor; kulaklarını kapatman gerekmiyor.\" (PLAN.v2 §A.1: parmaklar göze ve yüze değmez)."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1_kaynak.py (C3)",
+            "unit": "Ders 1 · C3 öğretimi (c3.ad → c3.nasil → c3.agiz → c3.eller → c3.sessiz → c3.kisa)",
+            "problem": "Ölçüt 7 (anlatmaz, yaşatır) kaldı. 15 dk'da ilk vızıltıdan önce, 9:06 ile 10:09 arasında, altı yönerge art arda geliyor ve bu ≈ 63 sn uygulamasız anlatım demek. Planlayıcı yalnız c3.ad'ı açıklama saydığı için denetim geçiyor, ama dinleyici bir dakika boyunca yalnız dinliyor.",
+            "quote": "Dişlerin birbirine değmesin; dilin ağzında rahat dursun. … Vızıltı erken biterse bir sonraki alışı beklemen yeterli.",
+            "fix": "İnce ayarlar ilk turdan sonraya alınsın. c3.agiz ve c3.kisa (İ 401) blok listesinde c3.d2'nin arkasına taşınsın. Sıra şöyle olur: ad → nasil → eller → sessiz → d1 → d2 → agiz → kisa → d3 → titresim. Sıra numaraları aynı kaldığı için önek kuralı değişmez. D1-kilit ve D1-döngü denetimleri için timing_d1.py yeniden koşulur."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1_kaynak.py (C2)",
+            "unit": "Ders 1 · c2.sonra (İ 397)",
+            "problem": "Zaman kayması var (ölçüt 8, imge yayı). Cümle, c2.dogal ile iç çekiş bırakıldıktan 20 sn sonra (15 dk'da 7:55) çalıyor, ama iç çekişi şimdiki zamanda anlatıyor. Dinleyici o sırada doğal nefeste. Ayrıca imge yayının üçüncü adımını (sesin ardından kalan sessizlik, C3 sonu) C2'de erkenden harcıyor.",
+            "quote": "Her iç çekişin ardından kısa bir sessizlik kalıyor.",
+            "fix": "Cümle döngünün içine, verişte biten bir ipucu olarak alınsın. Örneğin c2.d5 şöyle olur: \"Al… · biraz daha… · ver… · Verişin ardından kısa bir sessizlik kalıyor.\" (c2.d3 kalıbı, 1,2 + 4,8 sn). Bu yapılmayacaksa c2.sonra çıkarılsın. D1-kilit yeniden denetlenir."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5_kaynak.py (K)",
+            "unit": "Ders 5 · avuçlama sırası k.avuc2 → k.avuc3",
+            "problem": "Güvenlik yönergesi eylemden sonra geliyor (PLAN.v2 §A.1: gözlere dokunan yönerge yok). Önce avuçlar gözlerin üstüne getiriliyor. \"Değmesin\" kuralı 4 sn sonra, avuçlar yerine oturmuşken söyleniyor.",
+            "quote": "Sonra onları, bastırmadan, gözlerinin üstüne getiriyorsun. [4] Avuçların gözlerine değmesin; kenarları alnına ve elmacık kemiklerine yaslansın.",
+            "fix": "Sıra ters çevrilsin, yani kural önce söylensin: k.avuc2 → \"Avuçların gözlerine değmeyecek; kenarları alnına ve elmacık kemiklerine yaslanacak.\" · k.avuc3 → \"Şimdi onları bastırmadan gözlerinin üstüne getiriyorsun.\" Bunun yerine k.avuc2'nin sessizliği uzatılıp iki cümle tek birimde de birleştirilebilir. timing_d5.py yeniden koşulur."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/iskelet30.md (§1 C5, §8 soru 2)",
+            "unit": "Ders 3 · 30 dk iskeleti · C5 \"İmgede sessiz yürüyüş\"",
+            "problem": "İmge yayında kırılma var ve uyarılma geri yükseliyor (ölçüt 8 ve 13; güvenlik §11.B-15'in amacı). Bu noktada lamba kısılmış, dinleyici örtünün altına yerleşmiş ve anlatım azalmış. Hemen ardından imgede yataktan kalkıp dolaşmak isteniyor. Yazar da bunu açık soru olarak bırakmış. Usta hoca kararım: yürüyüş olmasın.",
+            "quote": "C5 İmgede sessiz yürüyüş … aynı sahnede ağır adımlarla kısa dolaşma … yatağa, örtünün altına dönüş",
+            "fix": "C5, iskelette yazarın önerdiği seçenekle değiştirilsin: \"yağmurun sesiyle kalmak\", yani aynı yerde, giderek seyrekleşen tek cümlelerle yağmur, örtü ve nefes. Yeni hareket ve yer değişimi olmasın. PLAN.v2 §A.2.2'deki 23:30 satırı da \"imgede sessiz kalış\" olarak güncellensin."
+          },
+          {
+            "severity": "SHOULD",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/iskelet30.md (§7, §8 soru 1)",
+            "unit": "Ders 3 · 30 dk · duyurulu pencere dönüşleri",
+            "problem": "Uyku dersinde, pencere sonunda gelen dönüş tınısı ve \"Yeniden seninleyim\" kalıbı uykuya dalmış dinleyiciyi uyandırabilir (güvenlik §11.B-15). Öte yandan güvenlik §11.B-16, 20 sn'yi aşan her sessizlik için duyuru ve dönüş istiyor. Yazar bunu açık soru olarak bırakmış. Usta hoca kararım aşağıda.",
+            "quote": "Uyku dersinde pencere dönüş cümlesi olsun mu? … Öneri: dönüş fısıltıya yakın düzeyde … dönüş tınısı yok.",
+            "fix": "30 dk'da da pencereler en çok 45 sn olsun ve dönüş tınısı hiç kullanılmasın. Dönüşte karşılama cümlesi yerine imgeden tek bir kısa cümle gelsin (ör. \"Yağmur sürüyor.\"), düzeyi evre −3 dB'in 3 dB altında olsun. Duyuruda kapı cümlesi korunsun: \"Uyanık kalırsan da olur.\" Yazarın önerisi kabul, tınısız biçimiyle."
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5_kaynak.py (C3)",
+            "unit": "Ders 5 · c3.kaydiysa, c3.d18, c3.d30",
+            "problem": "Ölçüt 6 (dolgu, tekrar) sınırda. Derin evrede ≈ 80 sn içinde (9:45, 10:15, 11:07) üç kez aynı yüklem geliyor: \"geri getiriyorsun\". Cümleler art arda olmadığı için kural bozulmuyor, ama en sessiz bölümde tekdüze duyuluyor.",
+            "quote": "Değilse, bir sonraki nefeste geri getiriyorsun. / Işığı nefese geri getiriyorsun. / Buradayım. Işık başka bir yere kaydıysa, noktaya geri getiriyorsun.",
+            "fix": "c3.d18 → \"Işık yine nefeste.\" (kısa, Derin'e uygun) · c3.d30 → \"Buradayım. Işık kaydıysa, onu usulca noktaya çağırıyorsun.\""
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3_kaynak.py (C3, C2)",
+            "unit": "Ders 3 · c3.ortu → c3.agirlik; c2.bas",
+            "problem": "c3.ortu ve c3.agirlik her planda art arda çalıyor ve ikisinde de \"üstünde\" geçiyor (ölçüt 6). Ayrıca c2.bas'taki \"yastık taşıyor\" yazarın Ders 2'den ayrışsın diye koyduğu \"ağırlığı vermek\" motifini bozuyor; Ders 2'nin motifi \"zemin taşıyor\".",
+            "quote": "Üstünde kalın, yumuşak bir örtü var. / Örtü, üstünde tatlı bir ağırlıkla duruyor. · Başının ağırlığını yastık taşıyor.",
+            "fix": "c3.agirlik → \"Örtünün tatlı ağırlığı seni sarıyor.\" · c2.bas → \"Başının ağırlığını yastığa bırakıyorsun.\""
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1_kaynak.py, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5_kaynak.py",
+            "unit": "Ders 1 · c2.tur2, c3.el · Ders 5 · k.avuc1",
+            "problem": "Çifte izin kalıbı kullanılmış (\"İstersen … -abilirsin\"). PLAN.v2 §C.8 bu kalıbın pilotta ayıklandığını yazıyor. Kural ihlali değil, üslup tutarsızlığı.",
+            "quote": "İstersen bir tur daha iç çekişle devam edebilirsin. / İstersen bir elini göğsüne koyup titreşimi avucunda da hissedebilirsin. / Gözlerin kapalıysa, istersen avuçlarını birbirine sürtüp ısıtabilirsin.",
+            "fix": "\"Bir tur daha iç çekişle devam edebilirsin.\" · \"Bir elini göğsüne koyup titreşimi avucunda da hissedebilirsin.\" · \"Gözlerin kapalıysa avuçlarını birbirine sürtüp ısıtabilirsin.\" Her birinde \"-(y)abil-\" sayısı değişmez."
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5_kaynak.py",
+            "unit": "Ders 5 · a.dagink, c2.seyrek",
+            "problem": "Kulakta iki yanlış okuma riski var. Oturan dinleyici \"Başta\" sözünü \"başının üstünde\" diye anlayabilir. \"bir de nokta\" ise sayılardan sonra noktalama işareti gibi duyulabilir.",
+            "quote": "Başta ışık geniş ve dağınık; … · Sayılar seyrekleşiyor; aralarında nefes var, bir de nokta.",
+            "fix": "\"İlk anda ışık geniş ve dağınık; …\" · \"Sayılar seyrekleşiyor; aralarında nefes var, bir de ışığın noktası.\""
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3.script.md §4, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5.script.md §0",
+            "unit": "İlk ders cümlesi (g.ilk)",
+            "problem": "PLAN.v3 §D.3 tek bir biçim yazıyor ve ders 5 ile units-v3 bu cümleyi \"her derste aynı\" diye tanımlıyor. Ders 3 ise ayrı bir biçim kullanıyor. Gerekçe haklı: uyku dersinde düğmenin adı \"Uykuya geç\", \"Kapanışa geç\" değil. Ama sapma üretim listesine ayrı bir birim olarak işlenmemiş.",
+            "quote": "Ders 3: \"Bugün yalnızca tanışıyoruz; zorlanırsan dersi bitirmen yeterli.\" · öteki dersler: \"…zorlanırsan kapanışa geçmen yeterli.\"",
+            "fix": "Ders 3'ün biçimi kabul edilsin ama ayrı bir yardımcı birim (g.ilk.uyku) olarak units listesine eklensin. PLAN.v3 §D.3'e şu not düşülsün: \"uyku dersinde düğme adı farklı olduğu için ayrı biçim\"."
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/iskelet30.md §8 soru 3",
+            "unit": "Ders 3 · beden dolaşımı yönü (ölçüt 5)",
+            "problem": "Yazar karar istiyor: PLAN.v2 §E.6 #5 ve §C.1 \"her derste aynı sıra\" diyor, §A.2.2 satır 3 Ders 3 için ayaklardan başa sırasını veriyor.",
+            "quote": "Hangisi bağlayıcı?",
+            "fix": "Usta hoca kararım: ayaklardan başa kalsın. Uyku dersinde ağırlaşma ayaktan başa doğru kurulur. Ölçüt 5'in özü, sağ ve solun karışmaması ve bir dersin kendi içinde tutarlı olmasıdır; Ders 3 bunu sağlıyor. §E.6 #5'e şu cümle eklensin: \"uyku dersi ayaklardan başa, kendi içinde tutarlı\"."
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/timing.txt, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5_kaynak.py",
+            "unit": "Ders 1 · 3 dk boş payı · Ders 5 · a.izin 3 dk kısa biçimi",
+            "problem": "(a) Ders 1'in 3 dk sürümünde boş pay 10,3 sn, taban 10 sn. Sarsıntı taramasında süreler ×1,05 olunca 3 dk kalıyor (7,4 sn). Ders 2'de Nefona Hoca'nın ölçülmüş süreleri modelin üstünde çıktı (5,6 hi köşesinde ölçülen/model 1,127). Yazar bu riski kendisi kaydetmiş. (b) Ders 5'in 3 dk'sında a.izin'den sonraki en kısa sessizlik 3'ten 2,5 sn'ye düşürülmüş. Varış bir kapaktır ve PLAN.v3 §A.2 kural 2 kapakların sıkıştırılmamasını istiyor.",
+            "quote": "boş pay (min sessizliklerle): 3 dk 10.3 sn (taban 10) · a.izin ↳ 3 dk: 2,5 / 3 / 3,5",
+            "fix": "(a) Kısaltma şimdiden hazırlansın, ses ölçülünce hemen uygulansın: 3 dk'da c1.d2 (\"Altı uzun gelirse beş de olur.\") c1.d1 (\"Al… ver…\") ile değiştirilir. Normalleştirme için c1.d3 yeterli. (b) a.izin'in 3 dk kısa biçiminde en kısa sessizlik 3 sn'ye geri alınsın, yer açmak için c1.izle'nin en uzun sessizliği azaltılsın."
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders2/units-v3.json, ders2.lesson.v3.json",
+            "unit": "Ders 2 · a.gozler.kisa (5 dk) · c4.x.yaklas",
+            "problem": "(a) 5 dk'nın göz cümlesinde gözleri açık tutma seçeneği sözle söylenmiyor, yalnız ima ediliyor (güvenlik §11.B-2). Ders 5'in 3 dk biçimi aynı hece bütçesinde bunu açıkça söylüyor. (b) c4.x.yaklas'ta ekran metni ile TTS metni arasında noktalama farkı var (virgül / üç nokta) ve bu pilottan kalma. Klip genişletme katmanında (sıra 1085) ve ≤ 20 dk'da çalmıyor.",
+            "quote": "Gözlerini kapatmak sana kalmış. · ekran \"O ses bir yaklaşıyor, bir uzaklaşıyor.\" / TTS \"O ses bir yaklaşıyor… bir uzaklaşıyor.\"",
+            "fix": "(a) \"Gözlerini kapatıp kapatmamak sana kalmış.\" (+2 hece; 5 dk boş payı yeniden ölçülür. Pay yetmezse bu cümle olduğu gibi kalabilir.) (b) Klip ikinci aşamada seslendirileceği zaman SPEC v3 kuralına göre ekran ve TTS metni eşitlensin."
+          },
+          {
+            "severity": "NIT",
+            "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b (ders1, ders3, ders5, ders2)",
+            "unit": "ÖZET · usta hoca 18 ölçütü, PLAN.v3 §A.2 ve check_plan (bu inceleme)",
+            "problem": "Bu satır bir bulgu değil, denetim kaydıdır. check_plan çıktısını kendim yeniden ürettim. timing_d1.py, timing_d3.py ve timing_d5.py'yi kopyada koştum; timing.txt dosyalarıyla fark yok. Ders 2'nin final_timing.py çıktısı da, yalnız tarih satırı dışında, birebir aynı. Sonuçlar: Ders 1 ve 5 üç köşede 13/13 dakika, Ders 3 11/11 dakika, Ders 2 5–20 dk her dakika GEÇTİ. Önek kuralı ve T5 GEÇTİ. Ders 1, 3 ve 5'te ekran metni ile TTS ve alt klip metinleri birebir eşit (Ders 2'deki tek fark yukarıdaki c4.x.yaklas). Yasak sözcük taraması temiz. Çok cümleli birimlerde iki nokta yok.",
+            "quote": "—",
+            "fix": "Ölçüt ölçüt sonuç. 1 zaman verme: geçti. 2 ve 3 sessizlik ritmi ve koruması: geçti (Ders 5'in 30 ve 45 sn'lik pencereleri duyurulu, kapılı ve karşılamalı; ≤ 20 sn dışında sessizlik yok). 4 somut beden dili: Ders 3 kaldı (yan yatma), öteki dersler geçti. 5 tutarlı yön: geçti, Ders 3 kararı yukarıda. 6 dolgu: geçti (NIT'ler yukarıda). 7 anlatmaz, yaşatır: Ders 1'in C3'ü kaldı. 8 tek imge yayı: Ders 3'ün c3.su'su, Ders 1'in c2.sonra'sı ve Ders 3'ün 30 dk C5'i kaldı. 9 davet dili: geçti (nefes ipuçlarındaki \"Al…/ver…\" bedensel yönerge sayıldı). 10 başarısızlığı normalleştirme: geçti. 11 çıkış kapısı: geçti. 12 kapanış ritüeli: geçti. 13 azalan anlatım: geçti (Ders 2'nin 5 dk'sında H12 payı yalnız 0,08 hece; o bölümde bir düzenleme yapılırsa H12 yeniden denetlenmeli). 14–16 (hız, ses–müzik, Türkçenin geri çevrilmesi): ses olmadığı için açık. 17 benzersizlik: Ders 2 c4.koku ile Ders 3 c3.toprak arasında kaldı (Ders 1 ile Ders 8'in Re bordun yakınlığı kayıtlı). 18 yasak liste ve güvenlik: geçti (Ders 5'te avuçlama sırası SHOULD). PLAN.v3 §A.2'nin 3 dk kuralları Ders 1 ve 5'te geçti: \"-(y)abil-\" açılışta yok, 3 dk kapanışında en çok bir; şafak 48 ve 51 sn; son 60 sn temiz. Uyku dersinde uyandırma yok ve kapanışlar kısalmıyor: geçti."
+          }
+        ]
+      }
+    ],
+    "fix": "Çift incelemenin 48 bulgusunun hepsi işlendi. İki BLOCKER'ın ikisi de düzeltildi; bütün SHOULD'lar düzeltildi; NIT'lerden ikisi gerekçeli olarak değişmedi. Her bulgu için bir satır, sonuç ve gerekçe `b/INCELEME.md` içinde.\n\n**Yeniden üretilen denetimler (hepsi geçiyor):**\n- **Ders 1:** 3 köşe × 13 dakika GEÇTİ, metin denetimi GEÇTİ. 3 dk boş payı 10,1 sn; taban 10, önce 10,3 sn.\n- **Ders 3:** 3 köşe × 11 dakika GEÇTİ. Sarsıntı taramasının hepsi GEÇTİ.\n- **Ders 5:** 3 köşe × 13 dakika GEÇTİ.\n- **Ders 2:** hoc, nes ve hak sesleri, iki kestirimle, 5–20 dk'nın her dakikasında GEÇTİ. Önek, T5 ve \"Kapanışa geç\" denetimleri GEÇTİ, lint temiz.\n  - 5 dk boş payı birim 17,0 / kons 15,3 sn (taban 15).\n  - H12: Varış 15,50 > Derinleşme 15,12 > Derin 12,88.\n  - Model köşeleri 77/78, pilotla aynı.\n- Ekran = söylenen denetimi dört derste temiz. Çok cümleli birimde iki nokta yok. \"İstersen … -(y)abil-\" kalıbı kalmadı.\n\n**İki BLOCKER:**\n- **Ders 3 durdurma ekranı:** ekranda artık sesli dönüşün okuduğu üç cümle duruyor.\n- **Ders 3 geri sayma:** \"Ondan bire\" 10–13 dk'da yanlıştı; planlayıcıyla doğruladım, o dakikalarda sayma beşten başlıyor. Cümle \"Bire kadar geri sayacağım.\" oldu.\n\n**Kurala ya da süreye takılıp önerilenden farklı yazılanlar:**\n- **Ders 2 `n1.sec`:** editörün tercih ettiği üç cümlelik biçim sığmadı (kons boş pay 14,5 sn). En az değişiklikli biçim alındı (+3 hece).\n- **Ders 2 `n2.hatirla` kısa biçimi:** tek cümleye indi: \"Niyetini içinden bir kez daha söylemek yeterli.\" İki öneri de 5 dk tabanını ve H12'yi bozuyordu. İçerikten bir cümle eksildi; sahibin onayını bekliyor.\n- **Ders 1 3 dk `c1.ritim`:** \"…; nefesi tutmak yok.\" oldu, hece sayısı değişmedi. Önerilen +2 hece boş payı 9,7 sn'ye düşürüyordu.\n- **İlk ders cümlesi (Ders 1, 2, 5):** \"…ekrandaki \"Kapanışa geç\" düğmesine dokunman yeterli.\" Önerilen \"\"Kapanışa geç\"e\" seste \"geçe\" diye duyulur.\n- **Ders 1 `a.gozler`:** \"yumuşakça\" çıktı. **Ders 5 `a.dagink`:** \"Önce ışık…\" oldu. İkisi de sarsıntı taramasında Varış'ın 60 sn yoğunluğunu tavanın üstüne çıkarıyordu.\n- **Usta hocanın Ders 1 3 dk önerisi işe yaramıyor:** `c1.d2` yerine `c1.d1` konunca boş pay değişmiyor (10,09 → 10,09 sn). Yerine `c1.d3` döngüsünü 3 dk'dan çıkaran yol hazırlandı ve denendi. Uygulanmadı; ses ölçülünce gerekirse `ders1/lesson_meta.json` içindeki `contingency3min` notuna göre uygulanacak.\n\n**Dosya dışında kalan işler:**\n- Ders 1, 2 ve 5'in `afterCheck` metni de düzeltildi; Ders 2'deki aynı hata bulguda yoktu, kaynak aynı olduğu için eklendi.\n- Ders 2 seslendirme listesi: `c4.ses.orman` ve `c4.ses.kiyi` artık yeniden seslendirilecek. Liste 28 birim, 1.495 karakter; tahmini kredi 5.299 (önce 5.039).\n- Ders 3'ün `iskelet30.md` dosyası elle güncellendi: C5 \"imgede sessiz kalış\", pencereler en çok 45 sn, dönüşte tını yok, beden dolaşımı ayaklardan başa.\n\n**Kalan açıklar:**\n- **Ses yok.** Bütün süreler tahmin. Ders 1'in 3 dk payı ve Ders 2'nin 5 dk payı sınırda.\n- **Plan dosyalarına not gerekiyor.** `/home/user/eyes`'a dokunmadım; beş not orkestratörü bekliyor: PLAN.v2 §B.5, §A.2.2 (23:30), §E.6 #5; PLAN.v3 §D.3 ve Ders 3'ün 45 sn pencere kuralı.\n- **İnsan onayı yok.** Kararlar karar 2 yedeğinin; sahibin kulağı ve Scribe geri çevirisi bekliyor.\n\nYedek `b/_yedek_duzeltme/` altında; pilot dosyalarına dokunulmadı, git kullanılmadı.\n\n**Değişen dosyalar:**\n- **Ders 1:**\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1_kaynak.py`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/lesson_meta.json`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1_md.py`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1.lesson.json`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/ders1.script.md`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/iskelet30.md`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders1/timing.txt`\n- **Ders 2:**\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/work/build_lesson.py`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/work/make_units.py`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders2/ders2.lesson.v3.json`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders2/units-v3.json`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders2/timing.txt`\n- **Ders 3:**\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3_kaynak.py`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/make_md.py`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3.lesson.json`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3.script.md`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/iskelet30.md`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/timing.txt`\n- **Ders 5:**\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5_kaynak.py`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5_meta.py`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5_md.py`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5.lesson.json`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/ders5.script.md`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/iskelet30.md`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders5/timing.txt`\n- **Doğrulama betikleri** (planlayıcı denemelerini yeniden koşmak için):\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/work/_d3c4.py`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/work/_d1swap.py`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/work/_d1sweep.py`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/work/_d1dense.py`\n  - `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/work/_d3sum.py`\n- **Bulgu tablosu:** `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/INCELEME.md`\n- **Yedek:** `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/_yedek_duzeltme/`"
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Yaz"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "İncele"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 3,
+      "title": "Düzelt"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "spec+ders2",
+      "phaseIndex": 1,
+      "phaseTitle": "Yaz",
+      "agentId": "ac8e2245cf3e62ca7",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790738864488,
+      "queuedAt": 1790738864360,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "ls -la --time-style=full-iso /home/user/eyes/yoga-pilot/v3/…",
+      "promptPreview": "Nefona yoga modülü, onaylı PLAN.v3 (/home/user/eyes/yoga-pilot/v3/PLAN.v3.md) \"B\" adımının SESTEN BAĞIMSIZ kısmı. ElevenLabs bağlantısı bu oturumda yok: hiçbir ses üretme, ücretli çağrı yapma. Sahibin kararları: /home/user/eyes/yoga-pilot/SAHIP_ISTEKLERI.md (madde 7 ve 8: ses Nefona Hoca voice_id Sr5w7dIZaRDglJ2cLaJm, müzik A = ElevenLabs Music; inceleyici adı yok → karar 2 yedeği: Türkçe editör v…",
+      "promptFramed": true,
+      "lastProgressAt": 1790740664591,
+      "tokens": 469850,
+      "toolCalls": 84,
+      "durationMs": 1800025,
+      "resultPreview": "**Özet (B adımı, sesten bağımsız kısım; ücretli çağrı yapılmadı, ses üretilmedi)**\n\nDosyalar (hepsi `$Y/b` altında, `Y=/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga`):\n- `$Y/b/SPEC.v3.md`: tek bağlayıcı şartname, 18 bölüm. Ses: Nefona Hoca `Sr5w7dIZaRDglJ2cLaJm`, `sex m` (70 Hz), `eleven_v4`, `generations_count 3`. Müzik A: pilotun istemleri ve aile yapısı; tonun öl…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "ders1",
+      "phaseIndex": 1,
+      "phaseTitle": "Yaz",
+      "agentId": "a61ff1be2871cc6e1",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790738864564,
+      "queuedAt": 1790738864360,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "cd /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290…",
+      "promptPreview": "Nefona yoga modülü, onaylı PLAN.v3 (/home/user/eyes/yoga-pilot/v3/PLAN.v3.md) \"B\" adımının SESTEN BAĞIMSIZ kısmı. ElevenLabs bağlantısı bu oturumda yok: hiçbir ses üretme, ücretli çağrı yapma. Sahibin kararları: /home/user/eyes/yoga-pilot/SAHIP_ISTEKLERI.md (madde 7 ve 8: ses Nefona Hoca voice_id Sr5w7dIZaRDglJ2cLaJm, müzik A = ElevenLabs Music; inceleyici adı yok → karar 2 yedeği: Türkçe editör v…",
+      "promptFramed": true,
+      "lastProgressAt": 1790741272252,
+      "tokens": 636496,
+      "toolCalls": 78,
+      "durationMs": 2406448,
+      "resultPreview": "Ders 1, Parti 1 bitti: 3, 5 ve 15 dakikanın bütün metni ile 30 dakikanın iskeleti yazıldı. Üç hız köşesinde 3–15 dakikanın her biri (39/39 plan) `check_plan`'den ve metin denetiminden geçti. Ses üretilmedi, ücretli çağrı yapılmadı. Metin henüz hiçbir incelemeden geçmedi: karar 2 yedeği olan iki bağımsız model incelemesi ve sahibin kulağı bekleniyor.\n\n**Bir kural ihlali oldu ve geri alındı.** Kalib…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "ders3",
+      "phaseIndex": 1,
+      "phaseTitle": "Yaz",
+      "agentId": "ad7c56b50d1daadcb",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790740666343,
+      "queuedAt": 1790738864360,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "cd /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290…",
+      "promptPreview": "Nefona yoga modülü, onaylı PLAN.v3 (/home/user/eyes/yoga-pilot/v3/PLAN.v3.md) \"B\" adımının SESTEN BAĞIMSIZ kısmı. ElevenLabs bağlantısı bu oturumda yok: hiçbir ses üretme, ücretli çağrı yapma. Sahibin kararları: /home/user/eyes/yoga-pilot/SAHIP_ISTEKLERI.md (madde 7 ve 8: ses Nefona Hoca voice_id Sr5w7dIZaRDglJ2cLaJm, müzik A = ElevenLabs Music; inceleyici adı yok → karar 2 yedeği: Türkçe editör v…",
+      "promptFramed": true,
+      "lastProgressAt": 1790742291885,
+      "tokens": 511124,
+      "toolCalls": 72,
+      "durationMs": 1625541,
+      "resultPreview": "Ders 3 \"Uykuya Geçiş\" için 5 ve 15 dakikalık metin, 30 dakikalık iskelet ve zamanlama yazıldı. Ses üretilmedi, ücretli çağrı yapılmadı. `/home/user/eyes` altına ve pilot klasörüne dokunulmadı; git kullanılmadı.\n\n**Metin incelemesi yapılmadı.** Metin yalnız makine denetiminden geçti (pilot `lint_text` ve `check_plan`). Karar 2'nin iki bağımsız model incelemesi ve sahibin kulağı henüz yok. Ders 3'e …"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "ders5",
+      "phaseIndex": 1,
+      "phaseTitle": "Yaz",
+      "agentId": "a89237e575838ea78",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790741275223,
+      "queuedAt": 1790738864360,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "cd /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290…",
+      "promptPreview": "Nefona yoga modülü, onaylı PLAN.v3 (/home/user/eyes/yoga-pilot/v3/PLAN.v3.md) \"B\" adımının SESTEN BAĞIMSIZ kısmı. ElevenLabs bağlantısı bu oturumda yok: hiçbir ses üretme, ücretli çağrı yapma. Sahibin kararları: /home/user/eyes/yoga-pilot/SAHIP_ISTEKLERI.md (madde 7 ve 8: ses Nefona Hoca voice_id Sr5w7dIZaRDglJ2cLaJm, müzik A = ElevenLabs Music; inceleyici adı yok → karar 2 yedeği: Türkçe editör v…",
+      "promptFramed": true,
+      "lastProgressAt": 1790743050027,
+      "tokens": 597651,
+      "toolCalls": 87,
+      "durationMs": 1774802,
+      "resultPreview": "Ders 5 \"Tek Nokta\" Parti 1 metni yazıldı. Planlayıcının 3, 5 ve 15 dk planları üç köşenin hepsinde geçti (13 dakika × 3 köşe = 39/39). Metin denetimi de geçti. Ses, müzik ve çan üretilmedi: ElevenLabs bağlantısı yoktu, ücretli çağrı yapılmadı. Metin henüz karar 2 yedeğinden geçmedi (Türkçe editör ve usta hoca yerine iki bağımsız model incelemesi) ve sahip dinlemedi, yani \"bitti\" sayılmaz. /home/us…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 5,
+      "label": "incele:turkce-editor",
+      "phaseIndex": 2,
+      "phaseTitle": "İncele",
+      "agentId": "a17178b5cc94e4f47",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790743051850,
+      "queuedAt": 1790743051725,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "Nefona yoga modülü, onaylı PLAN.v3 (/home/user/eyes/yoga-pilot/v3/PLAN.v3.md) \"B\" adımının SESTEN BAĞIMSIZ kısmı. ElevenLabs bağlantısı bu oturumda yok: hiçbir ses üretme, ücretli çağrı yapma. Sahibin kararları: /home/user/eyes/yoga-pilot/SAHIP_ISTEKLERI.md (madde 7 ve 8: ses Nefona Hoca voice_id Sr5w7dIZaRDglJ2cLaJm, müzik A = ElevenLabs Music; inceleyici adı yok → karar 2 yedeği: Türkçe editör v…",
+      "promptFramed": true,
+      "lastProgressAt": 1790743614482,
+      "tokens": 227936,
+      "toolCalls": 35,
+      "durationMs": 562553,
+      "resultPreview": "{\"findings\":[{\"severity\":\"BLOCKER\",\"file\":\"/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3.lesson.json\",\"unit\":\"extras.stopReturn (D.durdur.screenText ↔ d.yer, d.goz, d.kalk)\",\"problem\":\"Ekran = söylenen kuralı bozuluyor. Durdurma ekranında ortak metin duruyor, ama Ders 3'ün sesli dönüşü bambaşka üç cümle okuyor. Pilotta (ders2) d.goz ve d.kalk için 'Dur…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 6,
+      "label": "incele:usta-hoca",
+      "phaseIndex": 2,
+      "phaseTitle": "İncele",
+      "agentId": "a89fcc256656f3d87",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790743051927,
+      "queuedAt": 1790743051725,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "Nefona yoga modülü, onaylı PLAN.v3 (/home/user/eyes/yoga-pilot/v3/PLAN.v3.md) \"B\" adımının SESTEN BAĞIMSIZ kısmı. ElevenLabs bağlantısı bu oturumda yok: hiçbir ses üretme, ücretli çağrı yapma. Sahibin kararları: /home/user/eyes/yoga-pilot/SAHIP_ISTEKLERI.md (madde 7 ve 8: ses Nefona Hoca voice_id Sr5w7dIZaRDglJ2cLaJm, müzik A = ElevenLabs Music; inceleyici adı yok → karar 2 yedeği: Türkçe editör v…",
+      "promptFramed": true,
+      "lastProgressAt": 1790743766645,
+      "tokens": 317830,
+      "toolCalls": 44,
+      "durationMs": 713647,
+      "resultPreview": "{\"findings\":[{\"severity\":\"BLOCKER\",\"file\":\"/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/b/ders3/ders3_kaynak.py (→ ders3.lesson.json, ders3.script.md §2 C4)\",\"unit\":\"Ders 3 · c4.giris (Z)\",\"problem\":\"Anlam bozukluğu. c4.giris zorunlu ve kısa biçimi yok, ama sayılar 10–13 dk planlarında beşten başlıyor (c4.n10–n06 yalnız 14. dakikadan giriyor). Planlayıcıyı kendim k…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 7,
+      "label": "düzelt",
+      "phaseIndex": 3,
+      "phaseTitle": "Düzelt",
+      "agentId": "ab8ae3c5c03c0b87b",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790743768216,
+      "queuedAt": 1790743768144,
+      "attempt": 1,
+      "lastToolName": "Write",
+      "lastToolSummary": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c63…",
+      "promptPreview": "Nefona yoga modülü, onaylı PLAN.v3 (/home/user/eyes/yoga-pilot/v3/PLAN.v3.md) \"B\" adımının SESTEN BAĞIMSIZ kısmı. ElevenLabs bağlantısı bu oturumda yok: hiçbir ses üretme, ücretli çağrı yapma. Sahibin kararları: /home/user/eyes/yoga-pilot/SAHIP_ISTEKLERI.md (madde 7 ve 8: ses Nefona Hoca voice_id Sr5w7dIZaRDglJ2cLaJm, müzik A = ElevenLabs Music; inceleyici adı yok → karar 2 yedeği: Türkçe editör v…",
+      "promptFramed": true,
+      "lastProgressAt": 1790745424376,
+      "tokens": 418656,
+      "toolCalls": 91,
+      "durationMs": 1656159,
+      "resultPreview": "Çift incelemenin 48 bulgusunun hepsi işlendi. İki BLOCKER'ın ikisi de düzeltildi; bütün SHOULD'lar düzeltildi; NIT'lerden ikisi gerekçeli olarak değişmedi. Her bulgu için bir satır, sonuç ve gerekçe `b/INCELEME.md` içinde.\n\n**Yeniden üretilen denetimler (hepsi geçiyor):**\n- **Ders 1:** 3 köşe × 13 dakika GEÇTİ, metin denetimi GEÇTİ. 3 dk boş payı 10,1 sn; taban 10, önce 10,3 sn.\n- **Ders 3:** 3 kö…"
+    }
+  ],
+  "totalTokens": 3179543,
+  "totalToolCalls": 491
+}

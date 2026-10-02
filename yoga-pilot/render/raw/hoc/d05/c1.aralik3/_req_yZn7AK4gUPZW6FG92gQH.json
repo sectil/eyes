@@ -1,0 +1,19 @@
+{
+ "node_id": "yZn7AK4gUPZW6FG92gQH",
+ "session_ids": [
+  "9msMo5oAQMCQW4XTp32e"
+ ],
+ "requested_at": "2026-09-30T07:12:25.126Z",
+ "tts": "Şu an ışığın gideceği başka bir yer yok.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "9msMo5oAQMCQW4XTp32e",
+   "generation_id": "oTADu7Zh5enSPsENw1BC",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/9msMo5oAQMCQW4XTp32e/oTADu7Zh5enSPsENw1BC/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T071229Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=72f0b9075ccacd978af007e77b1511ee7868ab1228dd4e66245fee68a6064cf0084527ce73068a714556ed72c77d67a50a7030f4083466b6962f3aeeb34ff105b3958bd63b7744f171c4f619cdd6f9b9f605dc22d5a92455ea92d48656fa09318c869d883f2f5dfec8b917bc3fbfbf9a669c64db6d27c95aa2d22c9ae98e21e2d0e7b8c73c371ce671cdd9f519155454ca7c40d0d5598d1ee3ffd5689fbacf5d85a7c0103bce495577c3c8bebeb3148ca0e99a81b8880ccceeccbf68d70b9e774bf0b56510dee2293d31dd59862a34ad179ec1da824ffac300843d96f057ad4015a0c836c6bb591980d57fd2add57298408463298e177f30a72a58c52ddddc45",
+   "duration_secs": 3.12,
+   "prompt": "Şu an ışığın gideceği başka bir yer yok.",
+   "kind": "audio"
+  }
+ ]
+}

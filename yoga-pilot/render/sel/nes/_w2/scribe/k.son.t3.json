@@ -1,0 +1,16 @@
+{
+ "unit": "k.son",
+ "take": "t3",
+ "ref_node": "VecRVhuVMBK5u8b2HvyA",
+ "asset_id": "ML6jsdRXrc5fFuQ2LOaJ",
+ "stt_node": "MOgNN4SilkzTUETkY4Jj",
+ "session_id": "cyCB4CIe5elNPSI02zI4",
+ "generation_id": "M0JLzy7686xvkmA4VfCy",
+ "actual_credits": 12.76,
+ "actual_cents": 0.232,
+ "spoken_duration_secs": 2.12,
+ "scribe_text": "Buradasın ve uyanıksın",
+ "tts": "Buradasın ve uyanıksın.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 3\n}"
+}

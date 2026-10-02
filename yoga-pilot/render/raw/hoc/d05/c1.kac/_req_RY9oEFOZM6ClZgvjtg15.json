@@ -1,0 +1,19 @@
+{
+ "node_id": "RY9oEFOZM6ClZgvjtg15",
+ "session_ids": [
+  "nDjKDQGubYtPCKzuXQbm"
+ ],
+ "requested_at": "2026-09-30T07:12:20.580Z",
+ "tts": "Dikkatinin kaç kez dağıldığı hiç önemli değil; her dönüş değerli.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "nDjKDQGubYtPCKzuXQbm",
+   "generation_id": "goI6mPwtVuWLbQHTmf33",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/nDjKDQGubYtPCKzuXQbm/goI6mPwtVuWLbQHTmf33/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T071226Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=708bb61a6ce21a2e63257c8e2a7bc23069cd3acddfca4ff4ebaed437bd94b98d0b483bc23492f386edbbf1cced5d3357ba08d0ca373aa91959010ea2eaee5fb6990765abe26e7da88e5689ece57039ea452b48f563d6277b0a0e883a988e821bf3dbd080b0f6157884cdabaeadbe18e2cfc61c79256d07d0b6fa801884011a69e073854ad138114ae0f92130bba3ffa2308279aaec07afe1bc80abc1dbf8486f07ce8475a72690d5a597140d6605aa2ab9ee52b8b8433f778aeb127ffeb9bd731415280779fd07ba2e182e9536a5a6b408648815ce9c978915a9e26aef86f21c1ff57b81ca679e1dbc86804c29ba75dca0f97f44a17920329085a3d9872ecaab",
+   "duration_secs": 5.12,
+   "prompt": "Dikkatinin kaç kez dağıldığı hiç önemli değil; her dönüş değerli.",
+   "kind": "audio"
+  }
+ ]
+}

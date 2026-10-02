@@ -1,0 +1,55 @@
+{
+  "arac": "creative_design_voice, eleven_ttv_v3, dil tr, 2026-09-29",
+  "view_state_id": "viewstate_01m3qbt471eztaqrd2jz29jyys",
+  "tarif": "Sıcak, alçak perdeli, orta yaşta, İstanbul Türkçesiyle konuşan bir meditasyon hocası. (Warm, low-pitched, middle-aged meditation teacher speaking Istanbul Turkish.)",
+  "metin": "Hoş geldin. Bu dakikalar senin. Bir şey başarman gerekmiyor; yalnızca dinlenmek var. Uzanmadan önce üstüne ince bir örtü, dizlerinin altına bir yastık alman iyi olur.",
+  "metin_notu": "Araç en az 100 karakter istiyor; Ders 2'nin açılışı sırayla a.hosgeldin + a.acilis + a.konfor.",
+  "onizlemeler": [
+    {
+      "dosya": "onizleme-1.mp3",
+      "generated_voice_id": "H1gzcdGCqT3VPo95jBqf",
+      "sure_sn": 14.76,
+      "eklemleme_hece_sn": 5.07,
+      "f0_ort_hz": 102.9,
+      "f0_yayilim_yarim_ton": 0.85,
+      "lufs": -19.36,
+      "tepe_dbfs": -3.73,
+      "scribe_birebir": true,
+      "scribe_kredi": 81.18
+    },
+    {
+      "dosya": "onizleme-2.mp3",
+      "generated_voice_id": "sOeWpkA1MQ6k4cjZTHks",
+      "sure_sn": 15.65,
+      "eklemleme_hece_sn": 4.67,
+      "f0_ort_hz": 101.4,
+      "f0_yayilim_yarim_ton": 0.48,
+      "lufs": -18.28,
+      "tepe_dbfs": -3.65,
+      "scribe_birebir": true,
+      "scribe_kredi": 86.06
+    },
+    {
+      "dosya": "onizleme-3.mp3",
+      "generated_voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+      "sure_sn": 16.59,
+      "eklemleme_hece_sn": 4.68,
+      "f0_ort_hz": 104.1,
+      "f0_yayilim_yarim_ton": 1.05,
+      "lufs": -17.76,
+      "tepe_dbfs": -3.09,
+      "scribe_birebir": true,
+      "scribe_kredi": 91.23
+    }
+  ],
+  "olcum_araci": "render/tools/audio.py analyze --syll 56 (metnin hece sayısı 56)",
+  "durum": "SEÇİLDİ: önizleme 3 (Sr5w7dIZaRDglJ2cLaJm), 'Nefona Hoca' adıyla kaydedildi (voice_id Sr5w7dIZaRDglJ2cLaJm). Sahip seçimi orkestratöre bıraktı ('Hoca sen seç', 2026-09-29).",
+  "secim_gerekcesi": [
+    "Üçü de Scribe'da metni harfi harfine verdi (yalnız noktalama farkı); ayırt etmedi.",
+    "1 elendi: en hızlı (5,07 hece/sn) ve ıslıklı oranı en yüksek (0,0205).",
+    "2 ile 3 aynı hızda (4,67 / 4,68).",
+    "2 çok düz tonlu (F0 yayılımı 0,48 yarım ton): 15–30 dk'da tekdüzelik riski; sahibin ölçütü 'kimse sıkılmayacak'.",
+    "3 doğal ama sakin tonlama (1,05 yarım ton) ve en uzun duraklamalar (aynı konuşma süresine ≈ 1 sn fazla sessizlik).",
+    "Tını ve sıcaklık kulakla değerlendirilmedi; son karar Kapı 2 kör dinlemesinde sahibinin."
+  ]
+}

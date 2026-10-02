@@ -1,0 +1,22 @@
+[
+ {
+  "flow_id": "zAYOhRc6cOKeStKp4ijv",
+  "node_id": "taYsn0gCA2hB1RSe3Mkq",
+  "session_id": "VO0Np01s5qaAei6I5OtT",
+  "generation_id": "K1vZ7YmqRvBUgOfHiLxs",
+  "take_slot": 3,
+  "status": "failed",
+  "error_message": "Too many concurrent requests. Your current subscription is associated with a maximum of 5 concurrent requests (running in parallel). This is done such that a single user does not overwhelm our systems and affect other users negatively. Please upgrade your subscription or contact sales if you want to increase this limit.",
+  "reported_price": {
+   "credits": 0,
+   "price_cents": 0
+  },
+  "charged_note": "status reports price 0 credits for this failed take, but completed takes in the same poll also report 0 credits, so the price field does not establish that it was not charged; NOT re-called per rule",
+  "cause": "nes-1 fired 5 units x 3 takes = 15 requests back-to-back; account limit is 5 concurrent requests",
+  "takes_available": 2,
+  "unit": "a.durus",
+  "idx": 3,
+  "who": "nes-1",
+  "ts": "2026-09-29T09:40:02.353358+00:00"
+ }
+]

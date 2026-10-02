@@ -1,0 +1,19 @@
+{
+ "unit": "a.hosgeldin",
+ "take": "t1",
+ "asset_id": "7BciS3dcB047PZoz0isc",
+ "source_node_id": "O1R9T7WJmIk3izK4EX3k",
+ "stt_node_id": "BhW0MEP3GcRubo6TsEDG",
+ "session_id": "aqalbD2eE7tIP5yYsocN",
+ "generation_id": "qKaO2XizKN2DmKTizmwr",
+ "actual_credits": 13.2,
+ "actual_cents": 0.24,
+ "spoken_duration_secs": 2.2,
+ "scribe_text": "Hoş geldin. Bu dakikalar senin",
+ "tts": "Hoş geldin. Bu dakikalar senin.",
+ "compare_exit": 0,
+ "compare": {
+  "equal": true,
+  "words": 5
+ }
+}

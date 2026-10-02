@@ -1,0 +1,15 @@
+{
+ "unit": "a.acilis",
+ "take": "t1",
+ "asset_id": "jGPwcJQTn2FEtTYwL66J",
+ "source_node_id": "GlyCw1tmDEQZ1ALKvtwV",
+ "stt_node_id": "s0XYIXYjqt2eLVbrX2MI",
+ "session_id": "68wFl9aAb8HVOVBZvzFU",
+ "generation_id": "YkxMGIcnaKs0op7B3Gci",
+ "actual_credits": 22.88,
+ "actual_cents": 0.416,
+ "scribe_text": "Bir şey başarman gerekmiyor. Yalnızca dinlenmek var",
+ "spoken_duration_secs": "3.98",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 7\n}"
+}
