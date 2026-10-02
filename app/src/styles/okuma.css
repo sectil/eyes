@@ -47,7 +47,7 @@
 
 /* Metin */
 .oa .kick { font-size: 12.5px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 14px 0 6px; }
-.oa h2.tt { font-family: var(--font-display); font-weight: 600; font-size: 21.5px; line-height: 1.18; letter-spacing: -0.015em; margin: 0 0 10px; text-wrap: pretty; }
+.oa h2.tt { font-family: var(--font-display); font-weight: 600; font-size: 21.5px; line-height: 1.18; letter-spacing: -0.015em; margin: 0 0 10px; text-wrap: wrap; } /* erken kırılmasın */
 .oa-meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin: 0 0 16px; font-size: 13.5px; color: var(--ink-3); }
 .oa-meta > span { white-space: nowrap; }
 .oa-meta .tag { display: inline-flex; align-items: center; gap: 6px; font-weight: 650; color: var(--accent); background: var(--accent-soft); padding: 4px 10px 4px 7px; border-radius: 99px; }
@@ -76,7 +76,7 @@
 .oa-ring { position: relative; display: grid; place-items: center; margin: 6px 0 0; }
 .oa-ring svg { width: min(68vw, 256px); height: auto; overflow: visible; }
 .oa-ring .c { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.oa-ring .n { font-family: var(--font-display); font-weight: 650; font-size: 58px; letter-spacing: -0.03em; line-height: 1; }
+.oa-ring .n { font-family: var(--font-display); font-weight: 650; font-size: 52px; letter-spacing: -0.03em; line-height: 1; }
 .oa-ring .n.off { font-size: 40px; }
 .oa-ring .u { font-size: 14.5px; font-weight: 600; color: var(--ink-2); margin-top: 6px; }
 .oa-anl { display: flex; flex-direction: column; flex-wrap: wrap; align-items: center; gap: 12px; margin: 12px 20px 0; }
@@ -117,7 +117,7 @@ a.oa-row { cursor: pointer; text-decoration: none; }
   .oa-steps li { font-size: 12.5px; padding: 5px 10px 5px 6px; }
   .oa-steps.v li { padding: 5px 0; } .oa-steps.v strong { font-size: 14.5px; } .oa-steps.v small { font-size: 12.5px; }
   .oa-today { margin-top: 8px; padding: 11px 14px; }
-  .oa-today strong { font-size: 15.5px; }
+  .oa-today strong { font-size: 15px; } .oa-today { margin-top: 6px; }
   .oa-today .ic { width: 38px; height: 38px; }
   .oa .fair { font-size: 13px; margin-bottom: 8px; }
   .oa-dock { padding-bottom: max(18px, env(safe-area-inset-bottom)); }
@@ -131,7 +131,7 @@ a.oa-row { cursor: pointer; text-decoration: none; }
   .oa-opt { font-size: 14px; padding: 8px 12px; min-height: 44px; gap: 10px; border-radius: 15px; }
   .oa-ring svg { width: 176px; }
   .oa-ring .u { font-size: 12.5px; }
-  .oa-ring .n { font-size: 44px; }
+  .oa-ring .n { font-size: 38px; }
   .oa-ring .n.off { font-size: 32px; }
   .oa-verd { margin-top: 12px; }
   .oa-verd p { font-size: 15.5px; }

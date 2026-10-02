@@ -4,7 +4,7 @@
   "metinler": [
     {
       "id": "oa071",
-      "baslik": "On dört saniyelik dinleyiş",
+      "baslik": "Şarkı ne için söyleniyor?",
       "etiket": "insan",
       "kaynak": "mehr2018",
       "pmid": "29395919",
@@ -12,7 +12,7 @@
       "yazar": "Mehr ve ark.",
       "dergi": "Current Biology",
       "yil": 2018,
-      "metin": "İnsanlar şarkıyı pek çok iş için söyler: dans etmek, bebek yatıştırmak ya da sevgisini anlatmak için. Peki hiç tanımadığımız bir topluluğun şarkısını duyunca ne işe yaradığını anlayabilir miyiz? Bir ekip bunu internet üzerinden sınadı. 60 ülkeden 750 kişi, çoğu küçük topluluklarda kaydedilmiş şarkılardan kısa parçalar dinledi. Parçalar arasında dans şarkıları, ninniler ve aşk şarkıları vardı; her biri yalnız 14 saniye sürüyordu. Dinleyiciler her şarkının ne için söylendiğini puanladı. Topluluklar onlara yabancı olduğu hâlde, puanlar şarkıların işlevini doğru yakaladı. İkinci bir deneyde başka dinleyiciler, şarkıcının kadın mı erkek mi olduğu gibi ipuçlarını ve ezginin karmaşıklığı gibi müzik özelliklerini puanladı. Sonuçlar, şarkının biçimiyle işlevi arasında her yerde geçerli bir bağ olabileceğini düşündürüyor.",
+      "metin": "İnsanlar pek çok iş için şarkı söyler: dans etmek, bebeği yatıştırmak ya da sevgisini anlatmak için. Peki hiç tanımadığımız bir topluluğun şarkısını duyunca, ne işe yaradığını anlayabilir miyiz? Bir ekip bunu internet üzerinden sınadı. 60 ülkeden 750 kişi, çoğu küçük topluluklarda kaydedilmiş şarkılardan kısa parçalar dinledi. Parçalar arasında dans şarkıları, ninniler ve aşk şarkıları vardı; her biri yalnız 14 saniye sürüyordu. Dinleyiciler her şarkının ne için söylendiğini puanladı. Bu toplulukları hiç tanımadıkları hâlde, şarkıların işini doğru tahmin ettiler. İkinci bir deneyde başka dinleyiciler, şarkıcının kadın mı erkek mi olduğu gibi ipuçlarını ve ezginin karmaşıklığı gibi müzik özelliklerini puanladı. Sonuçlar, bir şarkının kulağa gelişiyle işlevi arasında dünyanın her yerinde geçerli bir bağ olabileceğini düşündürüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -56,12 +56,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Topluluklar dinleyicilere yabancı olduğu hâlde ne oldu?",
+          "soru": "Dinleyiciler toplulukları tanımadıkları hâlde ne başardı?",
           "secenekler": [
-            "Puanlar şarkıların işlevini doğru yakaladı",
-            "Dinleyiciler şarkıları ayırt edemedi",
-            "Puanlar tamamen rastgele çıktı",
-            "Dinleyiciler parçaları sonuna kadar dinlemedi"
+            "Şarkıların işini doğru tahmin ettiler",
+            "Şarkıcıların adlarını bildiler",
+            "Şarkıların sözlerini tek tek çevirdiler",
+            "Şarkıları hangi topluluğun söylediğini buldular"
           ]
         },
         {
@@ -78,7 +78,7 @@
     },
     {
       "id": "oa072",
-      "baslik": "Bir fotoğraf, birçok renk",
+      "baslik": "Bu elbise ne renk?",
       "etiket": "insan",
       "kaynak": "lafersousa2015",
       "pmid": "25981795",
@@ -86,7 +86,7 @@
       "yazar": "Lafer-Sousa ve ark.",
       "dergi": "Current Biology",
       "yil": 2015,
-      "metin": "İnternette bir elbise fotoğrafı yayılınca insanlar ikiye bölündü: kimi elbiseyi beyaz ve altın rengi, kimi mavi ve siyah gördü. Oysa fotoğraftaki noktaların rengi kahverengi ve maviydi. Bir ekip, bu bölünmenin yalnız sorunun iki seçenekle sorulmasından doğup doğmadığını merak etti. 1401 kişiye seçenek vermeden elbisenin rengini sordu. Çoğu kişi, fotoğrafı ilk kez görenler de, yine beyaz ve altın ya da mavi ve siyah dedi; bazıları ise mavi ve kahverengi gördü. Beyaz ve altın diyenler yaşlılarda ve kadınlarda daha fazlaydı. Yeniden sorulunca bazı kişilerin gördüğü renk değişti. Ekibe göre insanlar, fotoğraftaki ışığın türü hakkında farklı varsayımlarda bulunuyor olabilir. Işığı belli eden ipuçları ekleyince elbisenin görünen rengini değiştirebildiler.",
+      "metin": "İnternette bir elbise fotoğrafı yayılınca insanlar ikiye bölündü: kimi elbiseyi beyaz ve altın rengi, kimi mavi ve siyah gördü. Oysa fotoğraftaki renkler aslında kahverengi ve maviydi. Bu bölünme, internetteki sorunun yalnız iki seçenekle sorulmasından mı doğmuştu? Bir ekip bunu anlamak için 1401 kişiye, seçenek vermeden elbisenin rengini sordu. Fotoğrafı ilk kez görenler dahil çoğu kişi yine beyaz ve altın ya da mavi ve siyah dedi; bazıları ise mavi ve kahverengi gördü. Yaşlılar ve kadınlar arasında beyaz ve altın diyenler daha çoktu. Yeniden sorulunca bazı kişilerin gördüğü renk değişti. Ekibe göre herkes, fotoğraftaki ışığın nasıl bir ışık olduğunu farklı tahmin ediyor olabilir. Nitekim fotoğrafa ışığı belli eden ipuçları eklenince elbisenin görünen rengi değişti.",
       "sorular": [
         {
           "tur": "ana",
@@ -100,7 +100,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Fotoğraftaki noktaların rengi aslında neydi?",
+          "soru": "Fotoğraftaki renkler aslında neydi?",
           "secenekler": [
             "Kahverengi ve mavi",
             "Beyaz ve altın",
@@ -130,29 +130,29 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Beyaz ve altın diyenler kimlerde daha fazlaydı?",
+          "soru": "Beyaz ve altın diyenler kimler arasında daha çoktu?",
           "secenekler": [
-            "Yaşlılarda ve kadınlarda",
-            "Gençlerde ve erkeklerde",
-            "Bilgisayardan bakanlarda",
-            "Ressamlarda ve fotoğrafçılarda"
+            "Yaşlılar ve kadınlar",
+            "Gençler ve erkekler",
+            "Bilgisayardan bakanlar",
+            "Ressamlar ve fotoğrafçılar"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip elbisenin görünen rengini nasıl değiştirebildi?",
+          "soru": "Elbisenin görünen rengi ne zaman değişti?",
           "secenekler": [
-            "Işığı belli eden ipuçları ekleyerek",
-            "Fotoğrafı büyütüp küçülterek",
-            "Fotoğrafı siyah beyaza çevirerek",
-            "Elbisenin yanına başka bir elbise koyarak"
+            "Fotoğrafa ışığı belli eden ipuçları eklenince",
+            "Fotoğraf büyütülüp küçültülünce",
+            "Fotoğraf siyah beyaza çevrilince",
+            "Elbisenin yanına başka bir elbise konunca"
           ]
         }
       ]
     },
     {
       "id": "oa073",
-      "baslik": "Kendi elinin dokunuşu",
+      "baslik": "Kendi dokunuşumuz neden zayıf gelir?",
       "etiket": "insan",
       "kaynak": "kilteni2019",
       "pmid": "31738161",
@@ -160,7 +160,7 @@
       "yazar": "Kilteni ve ark.",
       "dergi": "eLife",
       "yil": 2019,
-      "metin": "Kendimize dokunduğumuzda his, başkasının aynı dokunuşundan daha zayıf gelir ve daha az gıdıklar. Bunun nedeni, kendi hareketimizin dokunuşta ne yaratacağının önceden kestirilmesidir. Bu kestirimin işe yaraması için zamanlamanın da tutması gerekir. Bir ekip, bu zamanlamanın değişip değişemeyeceğini sordu. Deneyde iki el kullanıldı: kişinin bir elle yaptığı hareket, öteki elde bir dokunuş olarak dönüyordu. Ama dokunuş, hareketten hep belli bir gecikmeyle geliyordu. Bu gecikmeyi tekrar tekrar yaşayanlar, anında gelen dokunuşu zayıf hissetmeyi hızla bıraktı ve gecikmeli dokunuşu zayıf hissetmeye başladı. Değişimin büyüklüğü, kişinin yaşadığı deneme sayısına bağlıydı. Gecikmeli dokunuşlar daha az, anında gelenler daha çok gıdıklar oldu. Kendi dokunuşumuzu zayıf hissetmemiz duruma göre ayarlanabiliyor.",
+      "metin": "Kendimize dokunduğumuzda his, başkasının aynı dokunuşundan daha zayıf gelir ve daha az gıdıklar. Çünkü hareketimizin nasıl bir dokunuş yaratacağını önceden kestiririz. Bu kestirimin işe yaraması için zamanlamanın da tutması gerekir. Bir ekip, bu zamanlamanın sonradan değişip değişemeyeceğini araştırdı. Deneyde kişi bir elini oynatınca öteki eline bir dokunuş geliyordu. Ama bu dokunuş, hareketten hep belli bir gecikmeyle geliyordu. Bu gecikmeyi tekrar tekrar yaşayanlar, anında gelen dokunuşu zayıf hissetmeyi hızla bıraktı; bunun yerine gecikmeli dokunuşu zayıf hissetmeye başladı. Değişimin ne kadar büyük olacağı, kişinin kaç deneme yaptığına bağlıydı. Artık gecikmeli dokunuşlar onları daha az, anında gelenler daha çok gıdıklıyordu. Demek ki kendi dokunuşumuzu zayıf hissetmemiz, duruma göre ayarlanabiliyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -184,12 +184,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Metne göre kendi dokunuşumuzun zayıf gelmesinin nedeni nedir?",
+          "soru": "Metne göre kendi dokunuşumuz neden zayıf gelir?",
           "secenekler": [
-            "Hareketin dokunuşta ne yaratacağının önceden kestirilmesi",
-            "Kendi derimizin daha kalın olması",
-            "Kendimize her seferinde başkasından çok daha hafif dokunmamız",
-            "Dokunurken gözlerimizi kapatmamız"
+            "Dokunuşu önceden kestirdiğimiz için",
+            "Kendi derimiz daha kalın olduğu için",
+            "Kendimize hep daha hafif dokunduğumuz için",
+            "Dokunurken gözlerimizi kapattığımız için"
           ]
         },
         {
@@ -204,9 +204,9 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Değişimin büyüklüğü neye bağlıydı?",
+          "soru": "Değişimin ne kadar büyük olacağı neye bağlıydı?",
           "secenekler": [
-            "Kişinin yaşadığı deneme sayısına",
+            "Kişinin kaç deneme yaptığına",
             "Kişinin yaşına",
             "Deneyin yapıldığı saate",
             "Dokunuşun ne kadar güçlü olduğuna"
@@ -214,7 +214,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Gecikmeye alışan kişilerde hangi dokunuşlar daha az gıdıkladı?",
+          "soru": "Gecikmeye alışan kişileri hangi dokunuşlar daha az gıdıklıyordu?",
           "secenekler": [
             "Gecikmeli dokunuşlar",
             "Anında gelen dokunuşlar",
@@ -226,7 +226,7 @@
     },
     {
       "id": "oa074",
-      "baslik": "Fışkıran bir meyve",
+      "baslik": "Tohumlarını fışkırtan meyve",
       "etiket": "bitki",
       "kaynak": "box2024",
       "pmid": "39586000",
@@ -234,7 +234,7 @@
       "yazar": "Box ve ark.",
       "dergi": "PNAS",
       "yil": 2024,
-      "metin": "Bitkilerde hızlı hareket pek görülmez, ama tohumunu fırlatarak dağıtan bitkiler için bu hız şarttır. Eşek hıyarı, tohumlarını yüksek basınçlı bir sıvı fışkırtarak atar. Bu olay yüzyıllardır bilim insanlarının ilgisini çekse de nasıl işlediği tam bilinmiyordu. Bir ekip deneyleri, çok hızlı çekilen videoları ve matematik modelleri bir araya getirdi. Fırlatmayı sağlayan iç basıncı ölçtüler. Beklenmedik bir ayrıntı da buldular: fırlatmadan önce meyvenin içindeki sıvının bir kısmı sapa geçiyordu. Tohumlar, kendi boylarının 2000 katından daha uzağa gidebiliyordu. Bu özellikler birlikte, tohumların ana bitkiden uzakta neredeyse eşit biçimde dağılmasını sağlıyordu. Ekibe göre bu dağılım, aynı türden bitkiler arasındaki rekabeti azaltabilir.",
+      "metin": "Bitkilerde hızlı hareket pek görülmez, ama tohumunu fırlatarak dağıtan bitkiler için bu hız şarttır. Eşek hıyarı, tohumlarını yüksek basınçlı bir sıvı fışkırtarak atar. Bu olay yüzyıllardır bilim insanlarının ilgisini çekse de nasıl işlediği tam bilinmiyordu. Bir ekip; deneyleri, yüksek hızlı kamerayla çekilen videoları ve matematik modellerini bir araya getirdi. Fırlatmayı sağlayan iç basıncı ölçtüler. Beklenmedik bir ayrıntı da buldular: fırlatmadan önce meyvenin içindeki sıvının bir kısmı sapa geçiyordu. Tohumlar, kendi boylarının 2000 katından daha uzağa gidebiliyordu. Bu özellikler birlikte, tohumların ana bitkiden uzakta neredeyse eşit biçimde dağılmasını sağlıyordu. Ekibe göre bu dağılım, aynı türden bitkiler arasındaki rekabeti azaltabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -260,7 +260,7 @@
           "tur": "ayrinti",
           "soru": "Ekip hangi yöntemleri bir araya getirdi?",
           "secenekler": [
-            "Deneyleri, hızlı çekilen videoları ve modelleri",
+            "Deneyleri, videoları ve matematik modellerini",
             "Eski kitaplardaki çizimleri ve botanik bahçesi kayıtlarını",
             "Çiftçilerle yapılan görüşmeleri",
             "Uzaydan çekilen fotoğrafları"
@@ -522,7 +522,7 @@
     },
     {
       "id": "oa078",
-      "baslik": "Yüzeye yakın yüzmek",
+      "baslik": "Daire çizen bakteri",
       "etiket": "mikro",
       "kaynak": "lauga2005",
       "pmid": "16239332",
@@ -530,7 +530,7 @@
       "yazar": "Lauga ve ark.",
       "dergi": "Biophysical Journal",
       "yil": 2005,
-      "metin": "E. coli, en çok incelenen bakterilerden biridir ve sıvının içinde yüzerek ilerler. Bu bakteri katı bir yüzeyin yakınında yüzerken ilginç bir şey yapar: saat yönünde daireler çizer. Bunun nedeni ne olabilir? Bir ekip, bu davranışı açıklamak için sıvının hareketine dayanan bir model kurdu. Yüzen bir bakteriye dışarıdan bir itme ya da döndürme uygulanmaz. Modele göre daireler, bakterinin bu yüzüş biçimiyle yüzeyin, çevresindeki sıvı üzerinden birbirini etkilemesinin doğal bir sonucudur. Aynı etki, bakterileri yüzeye yakın bir yerde tutsak gibi tutar. Ekip, modelin sonuçlarını deney verileriyle karşılaştırdı ve ikisinin makul ölçüde uyuştuğunu gördü. Daha uzun gövdeli bakterilerin çizdiği dairenin daha geniş olduğu da görüldü.",
+      "metin": "E. coli, en çok incelenen bakterilerden biridir ve sıvının içinde yüzerek ilerler. Bu bakteri katı bir yüzeyin yakınında yüzerken ilginç bir şey yapar: saat yönünde daireler çizer. Peki bunun nedeni ne olabilir? Bir ekip, bu davranışı açıklamak için sıvının hareketine dayanan bir model kurdu. Yüzen bir bakteriyi dışarıdan iten ya da döndüren bir güç yoktur. Modele göre bakteri ile yüzey, aradaki sıvı aracılığıyla birbirini etkiler; daireler bu etkinin doğal sonucudur. Aynı etki, bakterileri yüzeye yakın tutar; sanki onları orada hapseder. Ekip, modelin sonuçlarını deneylerde ölçülen verilerle karşılaştırdı ve ikisinin makul ölçüde uyuştuğunu gördü. Ayrıca gövdesi daha uzun olan bakterilerin daha geniş daireler çizdiği görüldü.",
       "sorular": [
         {
           "tur": "ana",
@@ -564,19 +564,19 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Yüzen bir bakteri hakkında metinde ne yazıyor?",
+          "soru": "Metne göre yüzen bir bakteri için hangisi doğrudur?",
           "secenekler": [
-            "Dışarıdan itilmiyor ya da döndürülmüyor",
-            "Yüzeye çarpınca hemen duruyor",
-            "Yalnız ışığa doğru yüzebiliyor",
-            "Sürekli başka bakterilerce itiliyor"
+            "Onu dışarıdan iten ya da döndüren bir güç yoktur",
+            "Yüzeye çarpınca hemen durur",
+            "Yalnız ışığa doğru yüzebilir",
+            "Sürekli başka bakterilerce itilir"
           ]
         },
         {
           "tur": "ayrinti",
           "soru": "Daireleri yaratan etki bakterilere başka ne yapar?",
           "secenekler": [
-            "Onları yüzeye yakın bir yerde tutar",
+            "Onları yüzeye yakın tutar",
             "Onları yüzeyden uzaklaştırıp sıvıya dağıtır",
             "Onları ikiye böler",
             "Onları daha hızlı yüzdürür"
@@ -584,7 +584,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Daha uzun gövdeli bakterilerin çizdiği daire nasıldı?",
+          "soru": "Gövdesi daha uzun olan bakterilerin çizdiği daireler nasıldı?",
           "secenekler": [
             "Daha geniş",
             "Daha dar",
@@ -604,7 +604,7 @@
       "yazar": "Clarke ve ark.",
       "dergi": "Science",
       "yil": 2013,
-      "metin": "Böcekler yiyecek ararken pek çok ipucundan yararlanır. Çiçeğin rengi, biçimi, deseni ve kokusu bunlardan bazılarıdır. Bir ekip, bir bombus arısı türünde daha önce fark edilmemiş bir duyuyu ortaya koydu: çiçeklerin elektrik alanını algılamak. Çiçeklerin bu elektrik alanı, arıya bir ipucu olarak iş görüyor. Arılar doğal olarak elektrik yükü taşıdığı için, bir arının ziyareti çiçeğin alanını etkiliyor. Gözle görülen işaretler gibi elektrik alanlarının da farklı desenleri ve yapıları var. Arılar bu farkları ayırt edebiliyor. Elektrik alanı bilgisi, öteki ipuçlarıyla birlikte arının hangi çiçeğin ödül verdiğini hatırlamasını kolaylaştırıyor. Bu alanlar saniyeler içinde değişebildiği için, çiçeklerle arılar arasında hızlı bir iletişim yolu olabilir.",
+      "metin": "Böcekler yiyecek ararken pek çok ipucundan yararlanır. Çiçeğin rengi, biçimi, deseni ve kokusu bunlardan bazılarıdır. Bir ekip, bir bombus arısı türünde daha önce fark edilmemiş bir duyu buldu: çiçeklerin elektrik alanını algılamak. Bu alan da arıya çiçek hakkında bir ipucu veriyor. Arılar doğal olarak elektrik yükü taşır; bu yüzden bir arı çiçeğe konunca çiçeğin alanı değişir. Gözle görülen işaretler gibi elektrik alanlarının da farklı desenleri ve yapıları var. Arılar bu farkları ayırt edebiliyor. Elektrik alanı bilgisi, öteki ipuçlarıyla birlikte, arının hangi çiçekte yiyecek bulduğunu hatırlamasını kolaylaştırıyor. Bu alanlar saniyeler içinde değişebildiği için, çiçeklerle arılar arasında hızlı bir iletişim yolu olabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -628,7 +628,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekibin ortaya koyduğu yeni duyu nedir?",
+          "soru": "Ekibin bulduğu yeni duyu nedir?",
           "secenekler": [
             "Çiçeklerin elektrik alanını algılamak",
             "Çiçeklerin yapraklarındaki titreşimi duymak",
@@ -638,7 +638,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bir arının ziyareti neden çiçeğin elektrik alanını etkiliyor?",
+          "soru": "Bir arı çiçeğe konunca çiçeğin elektrik alanı neden değişir?",
           "secenekler": [
             "Arılar doğal olarak elektrik yükü taşıdığı için",
             "Arılar çiçeğe polen bıraktığı için",
@@ -650,7 +650,7 @@
           "tur": "ayrinti",
           "soru": "Elektrik alanı bilgisi arıya ne konuda yardım ediyor?",
           "secenekler": [
-            "Ödül veren çiçeği hatırlamakta",
+            "Yiyecek bulduğu çiçeği hatırlamakta",
             "Kovanın yolunu bulmakta",
             "Düşmanlardan kaçmakta",
             "Yağmuru önceden sezmekte"
@@ -670,7 +670,7 @@
     },
     {
       "id": "oa080",
-      "baslik": "Kelebeği kuzeye çeviren",
+      "baslik": "Kelebeği eve döndüren soğuk",
       "etiket": "bocek",
       "kaynak": "guerra2013",
       "pmid": "23434279",
@@ -678,7 +678,7 @@
       "yazar": "Guerra ve Reppert",
       "dergi": "Current Biology",
       "yil": 2013,
-      "metin": "Kuzey Amerika'nın doğusundaki monark kelebekleri her sonbahar kuzeyden Meksika'nın ortasındaki kışlama yerlerine göç eder. Bu yolculukta yönlerini güneşe göre bulurlar. Güneş gün boyunca yer değiştirdiği için, kelebekler bunu duyargalarındaki iç saatlerle düzelterek güneye doğru sabit bir yön tutar. İlkbaharda aynı kelebekler kuzeye, Birleşik Devletler'in güneyine döner. Bir ekip, dönüş yolculuğunda da duyargalara bağlı aynı güneş pusulasının kullanıldığını gösterdi. Peki yön neden tersine dönüyor? Bu, göçün uzun süredir çözülemeyen bilmecelerinden biriydi. Sonbahar göçmenleri, kışlama yerindekine benzer bir soğuğa erkenden bırakılınca kuzeye yöneldi. Soğuk görmeyen yaşlı göçmenler ise güneye yönelmeyi sürdürdü. Kışlama yerindeki soğuk, göç döngüsünün tamamlanması için gerekli.",
+      "metin": "Kuzey Amerika'nın doğusundaki monark kelebekleri her sonbahar kuzeyden, Meksika'nın ortasındaki kışlama yerlerine göç eder. Bu yolculukta yönlerini güneşe bakarak bulurlar. Güneş gün boyunca gökte yer değiştirir; kelebekler bu kaymayı duyargalarındaki iç saatlerle hesaba katar ve güneye doğru sabit bir yön tutar. İlkbaharda aynı kelebekler kuzeye, Birleşik Devletler'in güneyine döner. Bir ekip, kelebeklerin dönüşte de duyargalarına bağlı aynı güneş pusulasını kullandığını gösterdi. Peki yön neden tersine dönüyor? Bu, göçün uzun süredir çözülemeyen bilmecelerinden biriydi. Sonbahar göçmenleri erkenden, kışlama yerindekine benzer bir soğukta tutulunca kuzeye yöneldi. Soğuk görmeyen yaşlı göçmenler ise güneye yönelmeyi sürdürdü. Demek ki göçün tamamlanması için kışlama yerindeki soğuk şart.",
       "sorular": [
         {
           "tur": "ana",
@@ -702,7 +702,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kelebekler göç ederken yönlerini neye göre bulur?",
+          "soru": "Kelebekler göç ederken yönlerini neye bakarak bulur?",
           "secenekler": [
             "Güneşe",
             "Yıldızlara",
@@ -722,7 +722,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Erken soğuğa bırakılan sonbahar göçmenleri ne yaptı?",
+          "soru": "Erkenden soğukta tutulan sonbahar göçmenleri ne yaptı?",
           "secenekler": [
             "Kuzeye yöneldi",
             "Güneye uçmayı sürdürdü",

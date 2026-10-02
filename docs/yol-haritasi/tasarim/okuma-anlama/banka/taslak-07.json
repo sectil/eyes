@@ -14,7 +14,7 @@
   "metinler": [
     {
       "id": "oa061",
-      "baslik": "Kumun içinde yüzmek",
+      "baslik": "Kumun içinde yüzen kertenkele",
       "etiket": "surungen",
       "kaynak": "maladen2009",
       "pmid": "19608917",
@@ -22,7 +22,7 @@
       "yazar": "Maladen ve ark.",
       "dergi": "Science",
       "yil": 2009,
-      "metin": "Bir kertenkele kumun içinde yüzebilir mi? Çölde yaşayan bir kertenkele türü, kuru kumun içinde hareket eder. Kuru kum, hem katı gibi hem de akışkan gibi davranabilen bir maddedir. Bir ekip, kertenkeleyi kumun altında hızlı çekim yapan bir röntgen düzeneğiyle izledi. Kertenkele kumun altına girince bacaklarını artık itmek için kullanmıyordu. Bunun yerine bedeni boyunca ilerleyen bir dalgayla kumun direncini yeniyordu. Bir canlının sudaki yüzme hızı hesaplanabilir, ama kum için böyle bir hesap yolu yoktu. Ekip bu yüzden kumun içinde farklı açılarla ilerletilen küçük bir silindire binen direnci ölçtü. Bu ölçümlerle kertenkelenin hızını tahmin eden bir model kurdu. Modelin tahmini deneylerle uyuştu. Buna göre kertenkele kumda, sürtünmeli bir akışkanın içinde yüzer gibi ilerliyor.",
+      "metin": "Bir kertenkele kumun içinde yüzebilir mi? Çölde yaşayan bir kertenkele türü, kuru kumun içinde ilerleyebilir. Kuru kum ilginç bir maddedir: kimi zaman katı gibi, kimi zaman akışkan gibi davranır. Araştırmacılar kertenkeleyi kumun altında, saniyede çok sayıda görüntü alan bir röntgen düzeneğiyle izledi. Kertenkele kuma girince bacaklarını itmek için kullanmayı bırakıyordu. Bunun yerine bedenini baştan kuyruğa doğru dalgalandırarak ilerliyordu. Bir canlının sudaki hızı hesaplanabilir, ama kumdaki hızını hesaplamanın bir yolu yoktu. Ekip bu yüzden kumda küçük bir silindiri farklı açılarla ilerletti ve kumun onu ne kadar zorladığını ölçtü. Bu ölçümlerle kertenkelenin hızını tahmin eden bir model kurdu. Modelin tahmini deneylerle uyuştu. Demek ki kertenkele kumda, sürtünmeli bir akışkanda yüzer gibi ilerliyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -36,7 +36,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kuru kum nasıl davranabilen bir maddedir?",
+          "soru": "Kuru kum nasıl davranır?",
           "secenekler": [
             "Hem katı hem akışkan gibi",
             "Yalnız sert bir kaya gibi, hiç akmadan",
@@ -46,9 +46,9 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip kertenkeleyi kumun altında neyle izledi?",
+          "soru": "Araştırmacılar kertenkeleyi kumun altında neyle izledi?",
           "secenekler": [
-            "Hızlı çekim yapan bir röntgen düzeneğiyle",
+            "Bir röntgen düzeneğiyle",
             "Kumun üstüne konan bir mikrofonla",
             "Kertenkelenin sırtına takılan küçük bir ışıklı aygıtla",
             "Çıplak gözle, kumu kazarak"
@@ -56,27 +56,27 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kertenkele kumun altında bacaklarını ne yapıyordu?",
+          "soru": "Kertenkele kuma girince bacaklarını ne için kullanmayı bırakıyordu?",
           "secenekler": [
-            "İtmek için kullanmıyordu",
-            "Kumu kazmak için kullanıyordu",
-            "Hızla öne arkaya çırpıyordu",
-            "Gövdesine sıkıca yapıştırıp kilitliyordu"
+            "İtmek için",
+            "Kumu kazmak için",
+            "Yön değiştirmek için",
+            "Dengede durmak için"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Kertenkeleyi kumda ileri iten neydi?",
+          "soru": "Kertenkele kumun içinde nasıl ilerliyordu?",
           "secenekler": [
-            "Bedeni boyunca ilerleyen bir dalga",
-            "Kuyruğunu dik tutması",
-            "Ön bacaklarıyla kumu hızla kazıp önünü açması",
-            "Kumun kendiliğinden akması"
+            "Bedenini baştan kuyruğa dalgalandırarak",
+            "Kuyruğunu dik tutarak",
+            "Ön bacaklarıyla kumu hızla kazıp önünü açarak",
+            "Kumun akıntısına kapılarak"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip direnci ölçmek için kumda neyi ilerletti?",
+          "soru": "Ekip kumun içinde neyi farklı açılarla ilerletti?",
           "secenekler": [
             "Küçük bir silindiri",
             "Bir kertenkele maketini",
@@ -88,7 +88,7 @@
     },
     {
       "id": "oa062",
-      "baslik": "Ağızdan atılan atık",
+      "baslik": "Kaplumbağanın tuhaf ağzı",
       "etiket": "surungen",
       "kaynak": "ip2012",
       "pmid": "23053366",
@@ -96,7 +96,7 @@
       "yazar": "Ip ve ark.",
       "dergi": "Journal of Experimental Biology",
       "yil": 2012,
-      "metin": "Bir kaplumbağa vücudundaki atığı ağzından atabilir mi? Yumuşak kabuklu bir kaplumbağa türü, hafif tuzlu bataklıklar dahil suda yaşamaya iyi uyum sağlamıştır. Bu kaplumbağa karadayken zaman zaman başını su birikintilerine sokar; bunun ağızdan nefes almak için olduğu sanılıyordu. Bir ekip, ağzın üre denen atık maddeyi dışarı atmanın da bir yolu olup olmadığını araştırdı. Kaplumbağalar suya girdiğinde ürenin büyük kısmını böbrekten değil, ağızdan attı. Karada tutulduklarında başlarını 20 ila 100 dakika suya soktular; bu sırada hem üre attılar hem oksijen aldılar. Tükürüklerindeki üre, kanlarındakinden çok daha yoğundu. Ekip, ağzın iç yüzeyinde üre taşıdığı düşünülen bir protein buldu; bu protein böbrekte yoktu. Araştırmacılara göre bu yetenek, bu kaplumbağaların tuzlu sulara yayılmasını kolaylaştırmış olabilir.",
+      "metin": "Bir kaplumbağa vücudundaki atığı ağzından atabilir mi? Yumuşak kabuklu bir kaplumbağa türü suda yaşamaya çok iyi uyum sağlamıştır; hafif tuzlu bataklıklarda bile yaşayabilir. Bu kaplumbağa karadayken arada bir başını su birikintilerine sokar. Bunu ağzından nefes almak için yaptığı sanılıyordu. Bir ekip, kaplumbağanın ağzıyla üre denen bir atık maddeyi de dışarı atıp atmadığına baktı. Kaplumbağalar suyun içindeyken ürenin büyük kısmını böbreklerinden değil, ağızlarından attı. Karada tutulduklarında başlarını 20 ila 100 dakika suya soktular; bu sırada hem üre attılar hem oksijen aldılar. Tükürüklerindeki üre, kanlarındakinden çok daha yoğundu. Ekip, ağzın iç yüzeyinde üre taşıdığı düşünülen bir protein de buldu; bu protein böbrekte yoktu. Araştırmacılara göre bu yetenek, bu kaplumbağaların tuzlu sulara yayılmasını kolaylaştırmış olabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -110,22 +110,22 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kaplumbağanın başını su birikintilerine sokması önceden neye bağlanıyordu?",
+          "soru": "Kaplumbağanın başını suya sokmasının nedeni önceden ne sanılıyordu?",
           "secenekler": [
-            "Ağızdan nefes almaya",
-            "Su içmeye",
-            "Serinlemeye",
-            "Suyun dibinde yiyecek aramaya"
+            "Ağzından nefes almak",
+            "Su içmek",
+            "Serinlemek",
+            "Suyun dibinde yiyecek aramak"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Kaplumbağalar suya girdiğinde ürenin büyük kısmını nereden attı?",
+          "soru": "Kaplumbağalar suyun içindeyken ürenin büyük kısmını nereden attı?",
           "secenekler": [
-            "Ağızdan",
-            "Böbrekten",
-            "Deriden",
-            "Kabuktan"
+            "Ağızlarından",
+            "Böbreklerinden",
+            "Derilerinden",
+            "Kabuklarından"
           ]
         },
         {
@@ -170,7 +170,7 @@
       "yazar": "Zhang ve ark.",
       "dergi": "Current Zoology",
       "yil": 2015,
-      "metin": "Gürültülü bir derenin yanında sesini duyurmak kolay değildir. Akıntılı derelerin kıyısında yaşayan bir kurbağa türü, insan kulağının duyamayacağı kadar yüksek perdeli sesler de çıkarır. Bunun, hızla akan suyun kalın ve güçlü uğultusundan kaçmanın bir yolu olduğu düşünülüyor. Peki erkek kurbağalar, çevrelerindeki gürültüye göre seslerini değiştirir mi? Bir ekip, Çin'in ortasındaki Huangshan'da gürültüsü farklı iki derede yaşayan erkeklerin seslerini kaydetti. Sonra iki derenin kurbağalarının seslerini karşılaştırdı. Seslerin çoğu özelliği iki yerde de benzerdi. Farklar, sesin bazı kısımlarının süresinde ve temel perdesinde çıktı. Daha gürültülü derenin kurbağaları daha yüksek perdeden seslenme eğilimindeydi. Yüksek perde, sesin gürültü içinde daha kolay seçilmesini sağlıyor.",
+      "metin": "Gürültülü bir derenin yanında sesini duyurmak kolay değildir. Akıntılı derelerin kıyısında yaşayan bir kurbağa türü, insan kulağının duyamayacağı kadar yüksek perdeli sesler de çıkarır. Bilim insanlarına göre bu, sesin hızla akan suyun kalın ve güçlü uğultusunda kaybolmasını önlüyor. Peki erkek kurbağalar, çevrelerindeki gürültüye göre seslerini değiştirir mi? Bir ekip, Çin'in ortasındaki Huangshan'da gürültüsü farklı iki derede yaşayan erkeklerin seslerini kaydetti. Sonra iki derenin kayıtlarını karşılaştırdı. Seslerin çoğu özelliği iki yerde de benzerdi. Fark yalnız sesin bazı bölümlerinin süresinde ve temel perdesinde vardı. Daha gürültülü derenin kurbağaları daha yüksek perdeden seslenme eğilimindeydi. Yüksek perde, sesin gürültü içinde daha kolay seçilmesini sağlıyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -184,12 +184,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kurbağaların çok yüksek perdeli ses çıkarmasının neyin yolu olduğu düşünülüyor?",
+          "soru": "Bilim insanlarına göre çok yüksek perdeli sesler neyi önlüyor?",
           "secenekler": [
-            "Akan suyun uğultusundan kaçmanın",
-            "Dişileri uzaktan görmenin",
-            "Derede yön bulmanın",
-            "Suyun sıcaklığını ve derinliğini ölçmenin"
+            "Sesin suyun uğultusunda kaybolmasını",
+            "Kurbağanın akıntıya kapılmasını",
+            "Yırtıcıların kurbağayı fark etmesini",
+            "Kurbağanın sesinin çabuk kısılmasını"
           ]
         },
         {
@@ -236,7 +236,7 @@
     },
     {
       "id": "oa064",
-      "baslik": "Ağaçtan düşen semender",
+      "baslik": "Ağaçtan süzülen semender",
       "etiket": "surungen",
       "kaynak": "brown2022",
       "pmid": "36111422",
@@ -244,7 +244,7 @@
       "yazar": "Brown ve ark.",
       "dergi": "Journal of Experimental Biology",
       "yil": 2022,
-      "metin": "Bir semender ağaçtan düşerken ne yapar? Bazı semenderler dünyanın en uzun ağaçlarının tepelerinde, dallarda biten eğrelti otu öbeklerinin arasında yaşar. Bu semenderler rahatsız edildiklerinde kolayca aşağı atlar. Kanat gibi özel bir yapıları yoktur; düşerken bacaklarını ve kuyruklarını ince ayarlarla oynatarak dengede kalırlar. Bir ekip, bu türü ve üç başka semender türünü kısa bir yükseklikten düşerken ve yukarı doğru esen bir rüzgâr tünelinde izledi. Ağaçta yaşayan semenderler düşüşlerini yavaşlatmakta ve yönlendirmekte ötekilerden daha başarılıydı. Ağaç tepesinde yaşayan tür ve yakın akrabası, düşerken hep paraşüt gibi yavaşlayıp süzüldü. Düşüşleri çok dikti, ama kendi ağaçlarının gövdesine ya da yakındaki dallara ulaşacak kadar eğikti.",
+      "metin": "Bir semender ağaçtan düşerken ne yapar? Bazı semenderler dünyanın en uzun ağaçlarının tepelerinde, dallarda yetişen eğrelti otlarının arasında yaşar. Bu semenderler rahatsız edildiklerinde kolayca aşağı atlar. Kanat gibi özel bir yapıları yoktur; düşerken bacaklarında ve kuyruklarında küçük ayarlamalar yaparak dengede kalırlar. Araştırmacılar bu türü ve üç başka semender türünü kısa bir yükseklikten düşerken ve yukarı doğru esen bir rüzgâr tünelinde izledi. Ağaçta yaşayan semenderler düşüşlerini yavaşlatmakta ve yönlendirmekte ötekilerden daha başarılıydı. Ağaç tepesinde yaşayan tür ve yakın akrabası, düşerken hep paraşüt gibi yavaşlayıp süzüldü. Düşüşleri çok dikti, ama yine de kendi ağaçlarının gövdesine ya da yakındaki dallara ulaşacak kadar eğikti.",
       "sorular": [
         {
           "tur": "ana",
@@ -278,9 +278,9 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Semenderler düşerken neyle dengede kalır?",
+          "soru": "Semenderler düşerken nasıl dengede kalır?",
           "secenekler": [
-            "Bacak ve kuyruklarını ince ayarlarla oynatarak",
+            "Bacak ve kuyruklarında küçük ayarlamalar yaparak",
             "Kanat gibi açılan geniş deri katlarını gererek",
             "Gövdelerini top gibi yuvarlayarak",
             "Gözlerini kapatarak"
@@ -288,7 +288,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip semenderleri nerede izledi?",
+          "soru": "Araştırmacılar semenderleri nerede izledi?",
           "secenekler": [
             "Yukarı doğru esen bir rüzgâr tünelinde",
             "Büyük bir akvaryumda",
@@ -384,7 +384,7 @@
     },
     {
       "id": "oa066",
-      "baslik": "Bulaşan bir alışkanlık",
+      "baslik": "Kuşlar da esnemeyi kapar mı?",
       "etiket": "kus",
       "kaynak": "gallup2015",
       "pmid": "26012708",
@@ -392,7 +392,7 @@
       "yazar": "Gallup ve ark.",
       "dergi": "Animal Cognition",
       "yil": 2015,
-      "metin": "Bir kuş, başka bir kuşun esnediğini görünce esner mi? Birinin esnemesini görünce başkasının da esnemesine bulaşıcı esneme denir. Bunun deneyle gösterildiği yalnız dört memeli türü vardı. Bir ekip, toplu yaşayan bir papağan olan muhabbet kuşunu iki çalışmayla sınadı. İlk çalışmada kuşlar ikişer ikişer yan yana kafeslere kondu. Kafeslerin arasında kimi zaman görüşü kapatan bir engel vardı, kimi zaman yoktu. Ekip, kuşların esnemelerinin zaman içinde birbirine yakın olup olmadığına baktı. İkinci çalışmada aynı kuşlara, başka muhabbet kuşlarının esnediği ve başka şeyler yaptığı videolar izletildi. İki çalışma da esnemenin bu kuşlarda bulaşıcı olduğunu gösterdi. Bu, memeli olmayan bir hayvanda bulaşıcı esnemenin ilk deneysel kanıtı oldu.",
+      "metin": "Bir kuş, başka bir kuşun esnediğini görünce o da esner mi? Birinin esnediğini görünce bizim de esnememize bulaşıcı esneme denir. Bu durum o güne dek yalnız dört memeli türünde deneyle gösterilmişti. Bir ekip, sürü hâlinde yaşayan bir papağan olan muhabbet kuşunu iki çalışmayla sınadı. İlk çalışmada kuşlar ikişer ikişer, yan yana kafeslere kondu. Kafeslerin arasında kimi zaman görüşü kapatan bir engel vardı, kimi zaman yoktu. Ekip, bir kuş esneyince yanındakinin de kısa süre içinde esneyip esnemediğine baktı. İkinci çalışmada aynı kuşlara videolar izletildi: bazılarında başka muhabbet kuşları esniyor, bazılarında başka şeyler yapıyordu. İki çalışmada da esnemenin bu kuşlara bulaştığı görüldü. Böylece bulaşıcı esneme, memeli olmayan bir hayvanda ilk kez deneyle gösterilmiş oldu.",
       "sorular": [
         {
           "tur": "ana",
@@ -406,7 +406,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Çalışmadan önce bulaşıcı esneme deneyle kaç türde gösterilmişti?",
+          "soru": "Bu çalışmadan önce bulaşıcı esneme kaç türde deneyle gösterilmişti?",
           "secenekler": [
             "Dört memeli türünde",
             "Hiçbir türde",
@@ -438,20 +438,20 @@
           "tur": "ayrinti",
           "soru": "İlk çalışmada ekip neye baktı?",
           "secenekler": [
-            "Esnemelerin zaman içinde birbirine yakın olup olmadığına",
-            "Kuşların ne kadar yem yediğine",
+            "Yanındakinin de kısa sürede esneyip esnemediğine",
+            "Kuşların gün boyunca ne kadar yem yediğine",
             "Kuşların kaç kez öttüğüne",
             "Kuşların kafeste ne kadar uçtuğuna"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Bu çalışma hangi bakımdan bir ilkti?",
+          "soru": "Bu çalışmayla bulaşıcı esneme ilk kez nerede deneyle gösterildi?",
           "secenekler": [
-            "Memeli olmayan bir hayvanda ilk deneysel kanıttı",
-            "Papağanlarla yapılan ilk deneydi",
-            "Kuşlara ilk kez video izletilen bir deney olmasıydı",
-            "Esnemenin ilk kez gözlenmesiydi"
+            "Memeli olmayan bir hayvanda",
+            "Bir maymun türünde",
+            "Yeni doğan bebeklerde",
+            "Evde beslenen köpeklerde"
           ]
         }
       ]
@@ -466,7 +466,7 @@
       "yazar": "Zitterbart ve ark.",
       "dergi": "PLoS ONE",
       "yil": 2011,
-      "metin": "İmparator penguenleri Antarktika kışında sıkı kümeler oluşturarak birbirine sokulur. Bu kümelenme, onların kışı atlatmasının anahtarıdır. Kümede penguenler o kadar sıkışıktır ki tek tek kımıldamak olanaksız hâle gelir. Oysa kümenin düzeninin sürekli değişmesi gerekir; böylece her penguen kenarda geçirdiği süreye göre içeride de yeterince kalabilir. Bir ekip, penguenlerin bu sorunu nasıl çözdüğünü inceledi. Penguenlerin çok uyumlu biçimde, hep birlikte hareket ettiğini buldu. Her 30 ila 60 saniyede bir bütün penguenler küçük adımlar atıyordu. Bu adımlar kümenin içinden bir dalga gibi geçiyordu. Zamanla bu küçük hareketler kümenin büyük ölçüde yeniden düzenlenmesini sağlıyordu. Böylece küme hem sıkı kalıyor hem de kımıldayabiliyordu.",
+      "metin": "İmparator penguenleri Antarktika kışında sıkı kümeler hâlinde birbirine sokulur. Kışı atlatmalarının sırrı bu kümelerdir. Kümede penguenler öyle sıkışıktır ki tek başına kımıldamak olanaksızdır. Oysa kümenin düzeni sürekli değişmelidir; çünkü kenarda bekleyen her penguenin de sırası gelince içeriye geçip orada yeterince kalabilmesi gerekir. Bir ekip, penguenlerin bu sorunu nasıl çözdüğünü inceledi. Penguenlerin hep birlikte, büyük bir uyum içinde hareket ettiğini gördü. Her 30 ila 60 saniyede bir, kümedeki bütün penguenler küçük adımlar atıyordu. Bu adımlar kümenin içinden bir dalga gibi geçiyordu. Zamanla bu küçük adımlar sayesinde kümenin düzeni baştan sona değişiyordu. Böylece küme hem sıkı kalıyor hem de kımıldayabiliyordu.",
       "sorular": [
         {
           "tur": "ana",
@@ -480,7 +480,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kümede penguenleri tek tek kımıldamaktan alıkoyan nedir?",
+          "soru": "Kümede penguenleri tek başına kımıldamaktan alıkoyan nedir?",
           "secenekler": [
             "Çok sıkışık durmaları",
             "Ayaklarının buza yapışması",
@@ -490,9 +490,9 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kümenin düzeninin sürekli değişmesi neden gerekir?",
+          "soru": "Kümenin düzeni neden sürekli değişmelidir?",
           "secenekler": [
-            "Her penguen içeride de yeterince kalabilsin diye",
+            "Her penguen sırası gelince içeride kalabilsin diye",
             "Penguenler yiyecek bulabilsin diye",
             "Küme daha hızlı yürüyebilsin diye",
             "Yavrular kalabalıkta annelerini kolayca bulabilsin diye"
@@ -540,7 +540,7 @@
       "yazar": "Thévenet ve ark.",
       "dergi": "Current Biology",
       "yil": 2022,
-      "metin": "Su aygırları birbirlerini seslerinden tanıyabilir mi? Afrika'nın bu iri otçulunun kendi aralarında nasıl iletişim kurduğu hakkında çok az şey biliniyor. Bir ekip, su aygırı gruplarına hoparlörden üç çeşit ses dinletti. Seslerin biri aynı gruptan bir bireye, biri aynı göldeki komşu bir gruba, biri de uzaktaki yabancı bir gruba aitti. Su aygırları en güçlü tepkiyi yabancıların sesine verdi. Bu, onların tanıdığı, komşuyu ve yabancıyı sesten ayırabildiğini gösteriyor. Çalışma, su aygırı gruplarının kendi bölgelerine sahip çıktığını ve komşularına yabancılardan daha az saldırgan davrandığını da ortaya koydu. Araştırmacılara göre hayvanları yeni bir yere taşımadan önce onlara oradakilerin sesini dinletmek, birbirini hiç görmemiş hayvanlar arasındaki çatışmayı azaltabilir.",
+      "metin": "Su aygırları birbirlerini seslerinden tanıyabilir mi? Afrika'nın bu iri otçullarının birbirleriyle nasıl anlaştığı hakkında çok az şey biliniyor. Bir ekip, su aygırı gruplarına hoparlörden üç çeşit ses dinletti. Seslerden biri aynı gruptan bir bireye, biri aynı göldeki komşu bir gruba, biri de uzaktaki yabancı bir gruba aitti. Su aygırları en güçlü tepkiyi yabancıların sesine verdi. Demek ki grup arkadaşını, komşuyu ve yabancıyı sesinden ayırt edebiliyorlar. Çalışma, su aygırı gruplarının kendi bölgelerini sahiplendiğini ve komşularına yabancılardan daha az saldırgan davrandığını da gösterdi. Araştırmacılara göre hayvanları yeni bir yere taşımadan önce onlara oradakilerin sesini dinletmek, birbirini hiç görmemiş hayvanlar arasındaki kavgaları azaltabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -606,7 +606,7 @@
     },
     {
       "id": "oa069",
-      "baslik": "Deniz dibindeki daireler",
+      "baslik": "Deniz dibindeki gizemli daireler",
       "etiket": "deniz",
       "kaynak": "kawase2013",
       "pmid": "23811799",
@@ -614,7 +614,7 @@
       "yazar": "Kawase ve ark.",
       "dergi": "Scientific Reports",
       "yil": 2013,
-      "metin": "Deniz dibindeki büyük, düzgün daireleri kim yapar? Bir balon balığı türünün erkekleri, deniz dibinde büyük ve geometrik daireler kurar. Bir ekip bu dairelerin üremedeki rolünü inceledi. Erkekler merkezden dışa doğru, farklı açılarda oluklar kazıyordu. Böylece yuvanın çevresinde, ışınlar gibi dizilmiş tepeler ve oluklar oluşuyordu. Yuvanın içinde ise ince kum tanelerinden düzensiz desenler yapıyorlardı. Daire, dişilerin eş seçiminde önemli bir rol oynuyordu. Ayrıca dişilerin seçiminde önemli olan ince kumun yuvada toplanmasını sağlıyordu. İşin tuhafı, erkekler bir yuvayı hiç yeniden kullanmıyor, her seferinde büyük emekle yeni bir daire kuruyordu. Araştırmacılara göre bunun nedeni, olukların birden çok üremeye yetecek kadar ince kum taşımaması olabilir.",
+      "metin": "Deniz dibindeki büyük, düzgün daireleri kim yapar? Bir balon balığı türünün erkekleri, deniz dibinde büyük ve geometrik daireler kurar. Bir ekip, bu dairelerin üremede ne işe yaradığını araştırdı. Erkekler merkezden dışa doğru, farklı açılarda oluklar kazıyordu. Böylece yuvanın çevresinde, ışınlar gibi dizilmiş tepeler ve oluklar oluşuyordu. Yuvanın içinde ise ince kum tanelerinden düzensiz desenler yapıyorlardı. Daire, dişilerin eş seçimini etkiliyordu. Ayrıca dişilerin önem verdiği ince kumun yuvada toplanmasına yarıyordu. İşin tuhafı, erkekler bir yuvayı hiç yeniden kullanmıyor, her seferinde büyük emekle yeni bir daire kuruyordu. Araştırmacılara göre bunun nedeni, oluklarda birden çok üreme için yetecek kadar ince kum bulunmaması olabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -658,22 +658,22 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Dairenin işlevlerinden biri hangisidir?",
+          "soru": "Daire, eş seçimini etkilemenin yanında neye yarıyordu?",
           "secenekler": [
-            "İnce kumun yuvada toplanmasını sağlamak",
-            "Yavruları güçlü akıntılardan korumak ve saklamak",
-            "Yiyecek saklamak",
-            "Başka balıkları uzak tutmak"
+            "İnce kumun yuvada toplanmasına",
+            "Yavruları güçlü akıntılardan korumaya",
+            "Yiyecek saklamaya",
+            "Başka balıkları uzak tutmaya"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Erkekler eski yuvayı neden yeniden kullanmıyor olabilir?",
+          "soru": "Erkeklerin her seferinde yeni bir daire kurmasının nedeni ne olabilir?",
           "secenekler": [
-            "Oluklarda yeterince ince kum kalmadığı için",
-            "Eski yuva akıntıyla kaybolduğu için",
-            "Dişiler eski yuvayı tanıdığı için",
-            "Eski yuvaya başka erkek balıklar yerleştiği için"
+            "Oluklarda yeterince ince kum bulunmaması",
+            "Eski yuvanın akıntıyla kaybolması",
+            "Dişilerin eski yuvayı tanıması",
+            "Eski yuvaya başka erkeklerin yerleşmesi"
           ]
         }
       ]
@@ -688,7 +688,7 @@
       "yazar": "Cook ve ark.",
       "dergi": "Scientific Reports",
       "yil": 2025,
-      "metin": "Bir ritme uyarak hareket etmek yalnız insanlara mı özgü? İnsan dışında, yeni seslerin ve müziğin vuruşuna gecikmeden ve tutarlı biçimde uyulduğunu gösteren tek kanıt, Ronan adlı eğitimli bir deniz aslanından gelir. Ronan 3 yaşındayken başarılıydı, ama hareketleri insanlarınkinden daha değişkendi. Bu fark, onun ritim tutma yolunun insanlarınkinden ayrı olduğu görüşüne dayanak yapılmıştı. Ronan sonraki 12 yıl boyunca ara ara ritim çalıştı. Bir ekip, onun başını daha önce duymadığı hızlarda, düzenli aralıklarla çalan seslere uydurmasını yeniden ölçtü. Aynı sesleri 10 insana da dinletip kollarını ritme göre sallamalarını istedi. Ronan'ın ritim tutması kesin ve tutarlıydı; sıradan yetişkinlerinkiyle aynı ya da onlardan daha iyiydi. Bu bulgu, insanların ritim tutmak için kendine özgü bir donanımı olduğu görüşünü sorguluyor.",
+      "metin": "Bir ritme uyarak hareket etmek yalnız insanlara mı özgü? İnsan dışında bir canlının yeni seslere ve müziğe gecikmeden, tutarlı biçimde uyabildiğini gösteren tek kanıt, Ronan adlı eğitimli bir deniz aslanından geliyor. Ronan 3 yaşındayken başarılıydı, ama hareketleri insanlarınkinden daha değişkendi. Bu farka bakıp onun ritmi insanlardan farklı bir yolla tuttuğu öne sürülmüştü. Ronan sonraki 12 yıl boyunca ara ara ritim çalıştı. Bir ekip, onun başını daha önce duymadığı hızlarda, metronom gibi düzenli çalan seslere uydurmasını yeniden ölçtü. Aynı sesleri 10 kişiye de dinletip kollarını ritme göre sallamalarını istedi. Ronan'ın ritim tutması kesin ve tutarlıydı; sıradan yetişkinlerinkiyle aynı ya da daha iyiydi. Bu bulgu, insanların ritim tutmak için kendilerine özgü bir donanımı olduğu görüşünü sorguluyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -732,7 +732,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ölçümde kaç insan yer aldı?",
+          "soru": "Ölçüme kaç kişi katıldı?",
           "secenekler": [
             "10",
             "3",

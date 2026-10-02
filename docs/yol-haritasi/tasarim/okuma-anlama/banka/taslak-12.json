@@ -12,7 +12,7 @@
       "yazar": "Ćwiek ve ark.",
       "dergi": "Philos Trans R Soc Lond B Biol Sci",
       "yil": 2021,
-      "metin": "Anlamı olmayan iki sözcük düşünün: bouba ve kiki. Hangisi yuvarlak bir şekle, hangisi sivri bir şekle daha çok uyar? Bu eşleşmenin farklı kültürlerde ve farklı yazılarda ne kadar sağlam olduğu tartışılıyordu. Bir ekip bunu çevrim içi bir deneyle sınadı. Deneye dokuz dil ailesinden 25 dili konuşan kişiler katıldı. Bu diller 10 farklı yazı sistemiyle yazılıyordu. Genel olarak bütün dillerde bouba yuvarlak şekle, kiki sivri şekle bağlandı; bouba daha tutarlı sonuç verdi. Latin harfleri kullanan dillerin konuşucuları bu eşleşmeyi yalnız biraz daha sık yaptı. Bouba'yı yuvarlak, kiki'yi sivri harflerle yazan yazılarda da etki daha güçlü çıkmadı. Ekip, eşleşmenin büyük ölçüde yazıdan bağımsız olduğunu ve sesle şekil arasındaki bir bağa dayandığını söylüyor.",
+      "metin": "Anlamı olmayan iki sözcük düşünün: bouba ve kiki. Hangisi yuvarlak bir şekle, hangisi sivri bir şekle daha çok uyar? Bu eşleşmenin farklı kültürlerde ve yazılarda ne kadar sağlam olduğu tartışılıyordu. Araştırmacılar bunu çevrim içi bir deneyle sınadı. Deneye dokuz dil ailesinden 25 dili konuşan kişiler katıldı. Bu diller 10 farklı yazı sistemiyle yazılıyordu. Sonuçta eşleşme dillerin genelinde güçlü çıktı: bouba yuvarlak şekle, kiki sivri şekle bağlandı. Bouba bu eşleşmede daha tutarlıydı. Latin harfleri kullanan dilleri konuşanlar bu eşleşmeyi yalnız biraz daha sık yaptı. Bouba'nın yuvarlak, kiki'nin sivri harflerle yazıldığı yazılarda da etki daha güçlü çıkmadı. Araştırmacılara göre eşleşme büyük ölçüde yazıdan bağımsız; sesle şekil arasındaki bir bağdan doğuyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -56,7 +56,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Latin harfleri kullanan dillerin konuşucuları için ne bulundu?",
+          "soru": "Latin harfleri kullanan dilleri konuşanlar için ne bulundu?",
           "secenekler": [
             "Eşleşmeyi yalnız biraz daha sık yaptılar",
             "Eşleşmeyi hiç yapmadılar",
@@ -66,12 +66,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekibe göre eşleşme neye dayanıyor?",
+          "soru": "Araştırmacılara göre eşleşme neyden doğuyor?",
           "secenekler": [
-            "Sesle şekil arasındaki bir bağa",
-            "Harflerin yazılış biçimine",
-            "Okulda öğretilen kurallara",
-            "Sözcüklerin sözlükteki anlamına"
+            "Sesle şekil arasındaki bir bağdan",
+            "Harflerin yazılış biçiminden",
+            "Okulda öğretilen kurallardan",
+            "Sözcüklerin sözlükteki anlamından"
           ]
         }
       ]
@@ -86,7 +86,7 @@
       "yazar": "Coutrot ve ark.",
       "dergi": "Nature",
       "yil": 2022,
-      "metin": "Büyüdüğümüz yer, yıllar sonra yolumuzu bulma becerimizi etkiler mi? Bir ekip bu soruyu bir video oyununun içine yerleştirilmiş bir görevle inceledi. Görev, yön bulma becerisini sözcüklere dayanmadan ölçüyordu. Dünyanın 38 ülkesinden 397 binden fazla kişi bu görevi oynadı. Genel olarak şehir dışında büyüyenler yön bulmada daha iyiydi. Daha yakından bakınca, insanların büyüdükleri yere benzeyen düzenlerde daha başarılı olduğu görüldü. Chicago gibi sokak ağı daha düzenli şehirlerde büyüyenler, oyunun düzenli bölümlerinde daha iyi sonuç aldı. Şehir dışında ya da Prag gibi sokak ağı daha karmaşık şehirlerde büyüyenler ise karmaşık bölümlerde öne çıktı. Ekip, bulgunun çevrenin düşünme becerilerine etkisine dünya ölçeğinde kanıt sunduğunu ve şehir tasarımının önemini vurguladığını söylüyor.",
+      "metin": "Büyüdüğümüz yer, yıllar sonra yolumuzu bulma becerimizi etkiler mi? Araştırmacılar bu soruyu bir video oyununa yerleştirdikleri bir görevle inceledi. Görev, yön bulma becerisini sözcüklere dayanmadan ölçüyordu. Dünyanın 38 ülkesinden 397 binden fazla kişi bu oyunu oynadı. Genel olarak şehir dışında büyüyenler yön bulmada daha iyiydi. Daha yakından bakınca, insanların büyüdükleri yere benzeyen ortamlarda daha başarılı olduğu görüldü. Chicago gibi sokakları daha düzenli şehirlerde büyüyenler, oyunun düzenli bölümlerinde daha iyi sonuç aldı. Şehir dışında ya da Prag gibi sokakları karmaşık şehirlerde büyüyenler ise karmaşık bölümlerde öne çıktı. Araştırmacılara göre bu bulgu, çevrenin düşünme becerilerimizi etkilediğini dünya ölçeğinde gösteriyor ve şehir tasarımının önemini ortaya koyuyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -110,7 +110,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Görevi kaç ülkeden insan oynadı?",
+          "soru": "Oyunu kaç ülkeden insan oynadı?",
           "secenekler": [
             "38",
             "8",
@@ -140,7 +140,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekibe göre bulgu neyin önemini vurguluyor?",
+          "soru": "Araştırmacılara göre bulgu neyin önemini ortaya koyuyor?",
           "secenekler": [
             "Şehir tasarımının",
             "Erken yaşta okumanın",
@@ -234,7 +234,7 @@
       "yazar": "Simon ve ark.",
       "dergi": "Science",
       "yil": 2011,
-      "metin": "Gündüz açan pek çok çiçek, arıları ve kuşları göz alıcı görünüşüyle kendine çeker. Peki yarasaların tozladığı çiçekler, yarasalara benzer bir işaret veriyor mu? Yarasalar çevrelerini, çıkardıkları seslerin yankısını dinleyerek tanır. Bir ekip, bir sarmaşık türünün çiçek salkımlarının üstünde duran çanak biçimli, alışılmadık bir yaprağı inceledi. Bu yaprağın yankılarının, iyi bir işaret olmak için gereken özellikleri taşıdığını gösterdi. Yankılar güçlüydü ve birçok yöne yayılıyordu. Ayrıca her seferinde aynı kalan, kolayca tanınabilen bir yankı izi de vardı. Ekip ardından çiçeklere gelen yarasalarla davranış deneyleri yaptı. Yaprak varken yarasaların çiçek arayarak geçirdiği süre yarıya indi. Bu çanak yaprak, yankısıyla yarasaları çiçeklere çekiyor.",
+      "metin": "Gündüz açan pek çok çiçek, arıları ve kuşları göz alıcı görünüşüyle kendine çeker. Peki yarasaların tozlaştırdığı çiçekler, yarasalara sesle benzer bir işaret veriyor mu? Yarasalar çevrelerini, çıkardıkları seslerin yankısını dinleyerek tanır. Araştırmacılar, bir sarmaşık türünün çiçek salkımlarının üstünde duran çanak biçimli, alışılmadık bir yaprağı inceledi. Bu yaprağın yankılarının, iyi bir işaret olmak için gereken özellikleri taşıdığını gösterdiler. Yankılar güçlüydü ve birçok yöne yayılıyordu. Ayrıca her seferinde aynı kalan, kolayca tanınabilen bir yankı izi de vardı. Ardından çiçeklere gelen yarasalarla davranış deneyleri yaptılar. Yaprak varken yarasaların çiçek arayarak geçirdiği süre yarıya indi. Bu çanak yaprak, yankısıyla yarasaları çiçeklere çekiyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -308,7 +308,7 @@
       "yazar": "Ju ve ark.",
       "dergi": "Nat Commun",
       "yil": 2012,
-      "metin": "Bazı böceklerin sırtındaki tümsekler ve bazı örümcek ipekleri sisten su toplayabilir. Kaktüslerin birçok türü de çok kurak yerlerde yaşar ve susuzluğa son derece dayanıklıdır. Bir ekip, bir kaktüs türünün kurak yaşama dayanmasını sağlayan yollardan birini inceledi. Kaktüsün sisten su toplayan etkili bir düzeneği olduğunu gösterdi. Gövdeye iyi dağılmış öbekler vardı. Her öbekte koni biçimli dikenler ve ince tüyler bulunuyordu. Her diken birbirine bağlı üç bölümden oluşuyordu. Bu bölümlerin yüzeyleri farklı yapıdaydı ve su toplamada her birinin ayrı bir görevi vardı. Ekibe göre dikenin biçimi ve yüzeyi boyunca değişen özellikler, birlikte çalışarak düzeneği etkili kılıyor. Bu düzeneği incelemek, sisten su toplayan yeni malzemeler ve aletler tasarlamaya yardım edebilir.",
+      "metin": "Bazı böceklerin sırtındaki tümsekler ve bazı örümcek ipekleri sisten su toplayabilir. Kaktüslerin birçok türü de çok kurak yerlerde yaşar ve susuzluğa son derece dayanıklıdır. Araştırmacılar, bir kaktüs türünün kuraklığa dayanmasını sağlayan yollardan birini inceledi. Bu kaktüsün sisten su toplayan çok etkili bir düzeneği olduğunu gördüler. Gövdenin her yanına düzenli biçimde dağılmış öbekler vardı. Her öbekte koni biçimli dikenler ve ince tüyler bulunuyordu. Her diken birbirine bağlı üç bölümden oluşuyordu. Bu bölümlerin yüzeyleri farklıydı ve su toplamada her birinin ayrı bir görevi vardı. Dikenin kalınlığı ve yüzeyi, boyu boyunca değişiyordu; bu farklar birlikte çalışarak düzeneği etkili kılıyordu. Bu düzeneği anlamak, sisten su toplayan yeni malzemeler ve aletler tasarlamaya yardım edebilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -362,7 +362,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bu düzeneği incelemek neye yardım edebilir?",
+          "soru": "Bu düzeneği anlamak neye yardım edebilir?",
           "secenekler": [
             "Sisten su toplayan yeni malzemeler tasarlamaya",
             "Daha hızlı büyüyen kaktüsler yetiştirmeye",
@@ -382,7 +382,7 @@
       "yazar": "Gavelis ve ark.",
       "dergi": "Nature",
       "yil": 2015,
-      "metin": "Kamera gibi çalışan gözler birkaç hayvan grubunda var; böyle karmaşık yapılar için çoğu zaman çok hücreli olmak gerekli sayılır. Oysa dinoflagellat denen bazı tek hücrelilerde göze benzer bir yapı var. Yapıda saydam bir ön katmana, merceğe, halkaya ve ışık alan bir tabakaya benzeyen parçalar bulunur. Bu canlılar yetiştirilemiyor ve doğada az bulunuyor. Bu yüzden yapının işi ve kökeni belirsizdi. Bir ekip yapıyı elektron mikroskobu ve tek hücreden gen okuma yöntemleriyle inceledi. Saydam ön katmanın, enerji işleri gören hücre parçaları olan mitokondrilerden oluştuğunu buldu. Işık alan tabakaya benzeyen parça ise plastit denen başka hücre parçalarının birbirine bağlanmasıyla yapılmıştı. Yani yapı, hücrenin hazır parçalarından kurulmuştu. Yapı o kadar karmaşık ki ilk başta çok hücreli bir göz sanılmıştı.",
+      "metin": "Kamera gibi çalışan gözler birkaç hayvan grubunda vardır. Böyle karmaşık yapılar için genellikle çok hücreli olmak gerekir diye düşünülür. Oysa dinoflagellat denen bazı tek hücrelilerde göze benzer bir yapı bulunur. Yapıda saydam bir ön katmana, merceğe, halkaya ve ışık alan bir tabakaya benzeyen parçalar vardır. Bu canlılar laboratuvarda yetiştirilemiyor ve doğada az bulunuyor. Bu yüzden yapının işi ve kökeni belirsizdi. Araştırmacılar yapıyı elektron mikroskobu ve tek hücreden gen okuma yöntemleriyle inceledi. Saydam ön katman, hücrenin enerji üreten parçaları olan mitokondrilerden oluşuyordu. Işık alan tabaka ise plastit denen hücre parçalarının birbirine bağlanmasıyla oluşmuştu. Yani yapı, hücrenin hazır parçalarından kurulmuştu. Öyle karmaşıktı ki ilk başta çok hücreli bir göz sanılmıştı.",
       "sorular": [
         {
           "tur": "ana",
@@ -426,7 +426,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Işık alan tabakaya benzeyen parça neden yapılmıştı?",
+          "soru": "Işık alan tabaka neyden oluşmuştu?",
           "secenekler": [
             "Birbirine bağlanan plastitlerden",
             "Mitokondrilerden",
@@ -456,7 +456,7 @@
       "yazar": "Larson ve ark.",
       "dergi": "Curr Biol",
       "yil": 2022,
-      "metin": "Tek bir hücre yürüyebilir mi? Euplotes denen tek hücrelilerden bir tür, yüzeylerde on dört küçük bacak benzeri uzantıyla yürür. Bir ekip bu yürüyüşü ayrıntılı biçimde izledi. Yürüyüşün, belli sayıda adım düzeni arasında düzenli geçişlerden oluştuğunu buldu. Az sayıdaki bazı geçişler sık görülüyordu ve hep aynı yönde, geri dönmeden ilerliyordu. Pek çok geçiş ise seyrekti ve iki yönde de olabiliyordu. Benzetimler ve deneyler, adımların sırasının yürüyüş için önemli olduğunu düşündürdü. Ekip, hücrenin bu davranışını bir durumdan ötekine belli kurallarla geçen basit makinelere benzetti. Uzantılar birbirine ince lif demetleriyle bağlıydı. Bu lifleri bozan deneyler, uzantıların uyumunu liflerin sağladığını düşündürdü. Yani yürüyüşün denetiminde mekanik bir temel olabilir.",
+      "metin": "Tek bir hücre yürüyebilir mi? Euplotes denen tek hücrelilerden bir tür, yüzeylerde on dört küçük bacak benzeri uzantıyla yürür. Araştırmacılar bu yürüyüşü ayrıntılı biçimde izledi. Yürüyüş, birkaç belirli adım biçimi arasında kurallı geçişlerden oluşuyordu. Bu geçişlerin birkaçı çok sık görülüyor ve hep tek yönde işliyordu; geri dönüş olmuyordu. Geri kalan birçok geçiş ise seyrekti ve iki yönde de olabiliyordu. Bilgisayar benzetimleri ve deneyler, adımların sırasının yürüyüş için önemli olduğunu düşündürdü. Araştırmacılar hücreyi, belli kurallarla bir durumdan ötekine geçen basit makinelere benzetti. Uzantılar birbirine ince lif demetleriyle bağlıydı. Lifleri bozan deneyler, uzantıların uyumunu bu liflerin sağladığını gösterdi. Yani yürüyüşü mekanik bir düzen yönetiyor olabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -482,15 +482,15 @@
           "tur": "ayrinti",
           "soru": "Sık görülen geçişler nasıldı?",
           "secenekler": [
-            "Hep aynı yönde, geri dönmeden ilerliyordu",
+            "Hep tek yönde işliyordu",
             "İki yönde de olabiliyordu",
             "Yalnız karanlıkta oluyordu",
-            "Her seferinde rastgele ve başka bir yöne değişiyordu"
+            "Her seferinde rastgele değişiyordu"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip hücrenin davranışını neye benzetti?",
+          "soru": "Araştırmacılar hücreyi neye benzetti?",
           "secenekler": [
             "Belli kurallarla durum değiştiren basit makinelere",
             "Rüzgârda bir o yana bir bu yana savrulan bir yaprağa",
@@ -510,7 +510,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Lifleri bozan deneyler neyi düşündürdü?",
+          "soru": "Lifleri bozan deneyler neyi gösterdi?",
           "secenekler": [
             "Uzantıların uyumunu liflerin sağladığını",
             "Liflerin hücreye besin taşıdığını",
@@ -530,7 +530,7 @@
       "yazar": "Bolmin ve ark.",
       "dergi": "PNAS",
       "yil": 2021,
-      "metin": "Birçok küçük hayvan, kaslarının gücü yetmediğinde yaylardan ve kilitlerden yararlanır. Bazı böcekler de yay ve kilit kullanarak gövdelerini göğüs bölgesindeki bir menteşeden büker, sonra çok hızlı biçimde açar. Bu harekete tıklama denir ve böcek serbestse onu havaya sıçratır. Sıçrayış ayrıntılı incelenmişti, ama gövdenin bu kadar hızlı açılmasını sağlayan düzenek incelenmemişti. Bir ekip önce hareketi kilitlenme, yüklenme ve enerjinin bırakılması diye üç evreye ayırdı. Menteşenin içini çok hızlı çekilen X ışını görüntüleriyle izledi. Menteşedeki yumuşak dış örtünün hızla geri esneyerek yayın bir parçası gibi çalıştığına dair kanıt buldu. Ekip ardından hareketi matematikle modelledi. Kullanılan yöntemlerin, başka küçük hayvanların aşırı hızlı hareketlerini anlamaya da yardım edebileceğini söylüyor.",
+      "metin": "Birçok küçük hayvan, kaslarının gücü yetmediğinde yaylardan ve kilitlerden yararlanır. Tıklayan böcekler de böyle yapar: gövdelerini göğüslerindeki bir menteşeden büker, sonra çok hızlı biçimde açarlar. Bu harekete tıklama denir; böcek serbestse tıklama onu havaya sıçratır. Sıçrayış ayrıntılı incelenmişti, ama gövdeyi bu kadar hızlı açan düzenek bilinmiyordu. Araştırmacılar önce hareketi üç evreye ayırdı: kilitlenme, yüklenme ve enerjinin bırakılması. Menteşenin içini çok hızlı çekilen X ışını görüntüleriyle izlediler. Menteşedeki yumuşak dış kabuğun hızla geri esneyerek yayın bir parçası gibi çalıştığını gösteren kanıtlar buldular. Ardından hareketi matematikle modellediler. Araştırmacılara göre bu yöntemler, başka küçük hayvanların aşırı hızlı hareketlerini anlamaya da yardım edebilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -556,7 +556,7 @@
           "tur": "ayrinti",
           "soru": "Böcek gövdesini nereden büker?",
           "secenekler": [
-            "Göğüs bölgesindeki bir menteşeden",
+            "Göğsündeki bir menteşeden",
             "Kuyruğunun ucundan",
             "Başının arkasından",
             "Bacaklarının ekleminden"
@@ -564,7 +564,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip hareketi hangi evrelere ayırdı?",
+          "soru": "Araştırmacılar hareketi hangi evrelere ayırdı?",
           "secenekler": [
             "Kilitlenme, yüklenme ve enerjinin bırakılması",
             "Uyanma, yürüme, yiyecek arama ve sonunda havalanıp uçma",
@@ -584,7 +584,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Menteşedeki yumuşak dış örtü ne yapıyordu?",
+          "soru": "Menteşedeki yumuşak dış kabuk ne yapıyordu?",
           "secenekler": [
             "Geri esneyerek yay gibi çalışıyordu",
             "Menteşeyi yağlıyordu",
@@ -596,7 +596,7 @@
     },
     {
       "id": "oa119",
-      "baslik": "Köşeli bir sır",
+      "baslik": "Küp biçimli dışkının sırrı",
       "etiket": "memeli",
       "kaynak": "yang2020",
       "pmid": "33289747",
@@ -604,7 +604,7 @@
       "yazar": "Yang ve ark.",
       "dergi": "Soft Matter",
       "yil": 2020,
-      "metin": "Avustralya'da yaşayan, toprak kazan ve bitkiyle beslenen keseli bir vombat türü, küp biçimli dışkısıyla ünlüdür. Peki yumuşak bir bağırsak düz yüzleri ve keskin köşeleri nasıl biçimlendirir? Bir ekip bu soruyu deneyler ve bilgisayar hesaplarıyla inceledi. Vombat bağırsakları incelenince küplerin bağırsağın son yüzde 17'lik bölümünde oluştuğu görüldü. Ekip, bağırsak duvarının kesitinde iki kat daha kalın ve dört kat daha sert bölgeler buldu. Bu sert bölgelerin, bağırsak kasıldığında köşelerin oluşmasına yardım ettiğini öne sürdü. Matematik modelde sert ve yumuşak bölgelerden oluşan esnek bir halka kasıldı. Sertlik farkı arttıkça şekil daha kare oldu. Köşeler, sert bölgeler hızlı kasılırken yumuşak bölgelerin ortası daha yavaş hareket edince ortaya çıktı.",
+      "metin": "Avustralya'da yaşayan, toprak kazan ve bitkiyle beslenen keseli bir vombat türü, küp biçimli dışkısıyla ünlüdür. Peki yumuşak bir bağırsak düz yüzleri ve keskin köşeleri nasıl biçimlendirir? Araştırmacılar bu soruyu deneylerle ve bilgisayar hesaplarıyla inceledi. Vombat bağırsaklarını incelediklerinde küplerin bağırsağın son yüzde 17'lik bölümünde oluştuğunu gördüler. Bağırsak duvarında, öteki yerlerden iki kat kalın ve dört kat sert bölgeler buldular. Bu sert bölgelerin, bağırsak kasıldığında köşelerin oluşmasına yardım ettiğini öne sürdüler. Ardından sert ve yumuşak bölgeleri sırayla dizilmiş esnek bir halkanın kasılmasını hesapladılar. Sertlik farkı arttıkça şekil daha kareye döndü. Köşeler, sert bölgeler hızlı kasılırken yumuşak bölgelerin ortası daha yavaş hareket edince ortaya çıktı.",
       "sorular": [
         {
           "tur": "ana",
@@ -648,9 +648,9 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Modelde sertlik farkı arttıkça ne oldu?",
+          "soru": "Hesaplarda sertlik farkı arttıkça ne oldu?",
           "secenekler": [
-            "Şekil daha kare oldu",
+            "Şekil daha kareye döndü",
             "Şekil daha yuvarlak oldu",
             "Halka ikiye bölündü",
             "Halka hiç kasılmadı"
@@ -670,7 +670,7 @@
     },
     {
       "id": "oa120",
-      "baslik": "Kulaksız duymak",
+      "baslik": "Kemikleriyle duyan kurbağa",
       "etiket": "surungen",
       "kaynak": "boistel2013",
       "pmid": "24003145",
@@ -678,7 +678,7 @@
       "yazar": "Boistel ve ark.",
       "dergi": "PNAS",
       "yil": 2013,
-      "metin": "Karada yaşayan dört ayaklı hayvanlarda orta kulak, kara yaşamına uyum sağlamış bir yapıdır. Dünyanın en küçük dört ayaklı kara hayvanlarından biri olan bir kurbağa türünün ise orta kulağı yoktur; bu yüzden ilk bakışta duyamıyor gibi görünür. Yine de bu kurbağa sesli işaretler üretir. Bir ekip, bu minik kurbağanın nasıl duyduğunu araştırdı. Kulak çevresindeki dokuların özelliklerini çok güçlü X ışınlarıyla elde edilen görüntülerle ölçtü. Sonra sesin bu dokularda nasıl yayıldığını modelledi. Modellere göre ses, kemikler üzerinden iç kulağa ulaşıyordu. Kurbağanın ağız boşluğu da sesle birlikte titreşerek bu iletimi güçlendiriyordu. Modeller, orta kulağı olmayan bu küçük kurbağaların birbirleriyle böylece etkili biçimde iletişim kurabildiğini gösteriyor.",
+      "metin": "Karada yaşayan dört ayaklı hayvanlarda orta kulak, kara yaşamına uyum sağlamış bir yapıdır. Dünyanın en küçük dört ayaklı kara hayvanlarından biri olan bir kurbağa türünün ise orta kulağı yoktur. Bu yüzden ilk bakışta duyamıyor gibi görünür. Yine de bu kurbağa seslerle haberleşir. Peki bu minik kurbağa nasıl duyuyor? Araştırmacılar, kulak çevresindeki dokuların özelliklerini çok güçlü X ışınlarıyla çekilen görüntülerden ölçtü. Sonra sesin bu dokularda nasıl yayıldığını modellediler. Modellere göre ses, kemikler üzerinden iç kulağa ulaşıyordu. Kurbağanın ağız boşluğu da sesle birlikte titreşerek bu iletimi güçlendiriyordu. Demek ki orta kulağı olmayan bu minik kurbağalar, birbirleriyle yine de etkili biçimde iletişim kurabiliyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -702,7 +702,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip kulak çevresindeki dokuları nasıl ölçtü?",
+          "soru": "Araştırmacılar kulak çevresindeki dokuları nasıl ölçtü?",
           "secenekler": [
             "Çok güçlü X ışını görüntüleriyle",
             "Kurbağaları suya batırarak",

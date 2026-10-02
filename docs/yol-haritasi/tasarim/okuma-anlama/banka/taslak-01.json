@@ -12,7 +12,7 @@
       "yazar": "Dacke ve ark.",
       "dergi": "Current Biology",
       "yil": 2013,
-      "metin": "Afrika'daki bazı gübre böcekleri, buldukları gübreden bir top yapar ve bu topu yuvarlayarak kalabalıktan uzaklaşır. Amaçları topu başka böceklere kaptırmadan, olabildiğince düz bir çizgide ilerlemektir. Gündüz güneşi, gece ayı yön bulmak için kullandıkları zaten biliniyordu. Peki ayın olmadığı karanlık gecelerde ne yapıyorlar? Araştırmacılar böcekleri önce açık ve yıldızlı bir gökyüzü altında izledi. Böcekler toplarını yine düz yollarda yuvarladı. Gökyüzü bulutla kapandığında ise bu beceriyi kaybettiler. Ardından deney bir planetaryuma taşındı. Böcekler tüm yıldızlar gösterildiğinde de, yalnız Samanyolu gösterildiğinde de aynı başarıyla yol aldı. Bu, bir böceğin yıldızlı gökyüzünü pusula gibi kullandığının ilk güçlü kanıtı oldu. Hayvanlar dünyasında Samanyolu'na bakarak yön bulduğu gösterilen ilk canlı olarak kayda geçtiler.",
+      "metin": "Afrika'daki bazı gübre böcekleri, gübreden bir top yapar ve onu yuvarlayarak kalabalık gübre yığınından uzaklaşır. Amaçları, topu başka böceklere kaptırmadan olabildiğince düz bir çizgide ilerlemektir. Gündüz güneşi, gece ayı kullanarak yön buldukları zaten biliniyordu. Peki ayın olmadığı karanlık gecelerde ne yapıyorlar? Araştırmacılar böcekleri önce açık ve yıldızlı bir gökyüzü altında izledi. Böcekler toplarını yine dümdüz yuvarladı. Gökyüzü bulutla kapanınca ise bu beceriyi kaybettiler. Ardından deneyi bir planetaryumda sürdürdüler. Böcekler tüm yıldızlar gösterildiğinde de, yalnız Samanyolu gösterildiğinde de aynı başarıyla yol aldı. Böylece bir böceğin yıldızlarla yön bulduğu ilk kez güçlü biçimde kanıtlandı. Gübre böcekleri, Samanyolu'na bakarak yön bulduğu bilinen ilk hayvan oldu.",
       "sorular": [
         {
           "tur": "ana",
@@ -26,7 +26,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Böcekler topu neden kalabalıktan uzaklaştırıyor?",
+          "soru": "Böcekler topu neden gübre yığınından uzaklaştırıyor?",
           "secenekler": [
             "Topu başka böceklere kaptırmamak için",
             "Topu güneşin altında iyice kurutup sertleştirmek için",
@@ -36,9 +36,9 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Gökyüzü bulutla kapandığında ne oldu?",
+          "soru": "Gökyüzü bulutla kapanınca ne oldu?",
           "secenekler": [
-            "Böcekler düz yol alma becerisini kaybetti",
+            "Böcekler düz gitme becerisini kaybetti",
             "Böcekler toplarını eskisinden çok daha hızlı yuvarladı",
             "Böcekler aya doğru yürüdü",
             "Böcekler yeni bir top yaptı"
@@ -46,7 +46,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Planetaryumda yalnız Samanyolu gösterildiğinde böcekler nasıl yol aldı?",
+          "soru": "Planetaryumda yalnız Samanyolu gösterilince böcekler nasıl yol aldı?",
           "secenekler": [
             "Tüm yıldızlar gösterildiğindeki kadar başarılı",
             "Hiç yol alamadılar",
@@ -56,7 +56,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Gündüz yön bulmak için ne kullandıkları biliniyordu?",
+          "soru": "Böceklerin gündüz yön bulmak için neyi kullandığı biliniyordu?",
           "secenekler": [
             "Güneşi",
             "Rüzgârı",
@@ -86,7 +86,7 @@
       "yazar": "Saito ve ark.",
       "dergi": "Scientific Reports",
       "yil": 2019,
-      "metin": "Köpeklerin insanla nasıl anlaştığı uzun zamandır araştırılıyor, ama kediler bu konuda daha az incelendi. Japonya'da bir ekip, kedilerin kendi adlarını başka sözcüklerden ayırt edip edemediğini merak etti. Kedilere önce arka arkaya dört sözcük dinletildi. Bunlar sıradan sözcükler ya da aynı evde yaşayan öteki kedilerin adlarıydı. Kediler her yeni sözcüğe biraz daha az tepki verdi, yani alıştı. Sonra kendi adları söylendi. Evde yaşayan kediler bu anda belirgin biçimde yeniden tepki gösterdi. Ad, tanımadıkları biri tarafından söylendiğinde bile sonuç değişmedi. Kedi kafelerinde yaşayan kediler de adlarını sıradan sözcüklerden ayırdı. Ancak onlar kendi adlarını, aynı kafedeki öteki kedilerin adlarından ayıramadı. Ekip, kedilerin sözcükleri seslerindeki farka göre ayırt edebildiği sonucuna vardı.",
+      "metin": "Köpeklerin insanla nasıl anlaştığı uzun zamandır araştırılıyor, ama kediler bu konuda daha az incelendi. Japonya'daki araştırmacılar, kedilerin kendi adlarını başka sözcüklerden ayırıp ayıramadığını sınadı. Kedilere önce art arda dört sözcük dinletildi. Bunlar sıradan sözcükler ya da aynı evdeki öteki kedilerin adlarıydı. Kediler her yeni sözcüğe biraz daha az tepki verdi; yani bu seslere alıştılar. Sonra kendi adları söylendi. Evde yaşayan kediler o anda yeniden belirgin bir tepki gösterdi. Adı tanımadıkları biri söylediğinde de sonuç değişmedi. Kedi kafelerinde yaşayan kediler de adlarını sıradan sözcüklerden ayırdı. Ama kendi adlarını, aynı kafedeki öteki kedilerin adlarından ayıramadılar. Demek ki kediler sözcükleri, seslerindeki farka bakarak ayırt edebiliyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -120,7 +120,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ad, tanımadıkları biri tarafından söylendiğinde ne oldu?",
+          "soru": "Adı tanımadıkları biri söylediğinde ne oldu?",
           "secenekler": [
             "Sonuç değişmedi",
             "Kediler hiç tepki vermedi",
@@ -140,12 +140,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekibe göre kediler sözcükleri neye göre ayırt ediyor?",
+          "soru": "Metne göre kediler sözcükleri neye bakarak ayırt ediyor?",
           "secenekler": [
-            "Seslerindeki farka göre",
-            "Söyleyenin yüzüne göre",
-            "Söylendiği saate göre",
-            "Ödül verilip verilmemesine göre"
+            "Seslerindeki farka",
+            "Söyleyenin yüzüne",
+            "Söylendiği saate",
+            "Ödül verilip verilmemesine"
           ]
         }
       ]
@@ -160,7 +160,7 @@
       "yazar": "Fernandez ve ark.",
       "dergi": "Science",
       "yil": 2021,
-      "metin": "İnsan bebekleri konuşmaya başlamadan önce ba ba ba gibi heceleri ritimle tekrar eder. Bu heceleme dönemi, konuşmaya giden yolda önemli bir adım sayılır. Bilim insanları uzun süre bunun başka memelilerde de olup olmadığını merak etti, ama elde çok az kanıt vardı. Berlin'deki bir ekip, yeni sesler öğrenebilen bir yarasa türünü doğada izledi. Yirmi yarasa yavrusunun sesleri, üç aylık büyüme dönemleri boyunca kaydedildi. Kayıtlar, insan bebeklerinin heceleme dönemiyle karşılaştırıldı. Bebeklerde görülen sekiz özelliğin sekizi de yarasa yavrularında bulundu. Bunların arasında heceleri tekrar etmek ve belli bir ritimle ses çıkarmak da vardı. Araştırmacılara göre bu benzerlik, birbirinden çok farklı iki memelide hecelemeyi ve işlevini karşılaştırmak için yeni bir kapı açıyor.",
+      "metin": "İnsan bebekleri konuşmaya başlamadan önce ba ba ba gibi heceleri ritimle tekrarlar. Bu heceleme dönemi, konuşmaya giden yolda önemli bir adım sayılır. Başka memelilerde de heceleme olup olmadığına dair ise çok az kanıt vardı. Berlin'deki bir ekip, yeni sesler öğrenebilen bir yarasa türünü doğada izledi. Yirmi yarasa yavrusunun sesleri, üç aylık büyüme dönemleri boyunca kaydedildi. Kayıtlar, insan bebeklerinin hecelemesiyle karşılaştırıldı. Bebek hecelemesini tanımlayan sekiz özelliğin sekizi de yavrularda görüldü. Bunlar arasında heceleri tekrarlamak ve belli bir ritimle ses çıkarmak da vardı. Araştırmacılara göre bu benzerlik, hecelemenin nasıl işlediğini ve ne işe yaradığını yarasalarla insanlarda karşılaştırma fırsatı sunuyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -194,10 +194,10 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bebeklerde görülen özelliklerden kaçı yavrularda bulundu?",
+          "soru": "Bebek hecelemesinin sekiz özelliğinden kaçı yavrularda görüldü?",
           "secenekler": [
-            "Sekizin sekizi",
-            "Sekizin dördü",
+            "Sekizi de",
+            "Yalnız dördü",
             "Yalnız biri",
             "Hiçbiri"
           ]
@@ -216,7 +216,7 @@
           "tur": "ayrinti",
           "soru": "Ortak özelliklerden biri hangisi?",
           "secenekler": [
-            "Heceleri tekrar etmek",
+            "Heceleri tekrarlamak",
             "Yalnız uyurken ses çıkarmak",
             "Annesinin sesini hiç taklit etmemek",
             "Yalnız yemek isterken ses çıkarmak"
@@ -234,7 +234,7 @@
       "yazar": "Schnell ve ark.",
       "dergi": "Proceedings of the Royal Society B",
       "yil": 2021,
-      "metin": "Bir ödülü hemen almak yerine daha iyisi için beklemek kolay değildir. Bu beceriye kendini tutma denir ve bugüne kadar en çok büyük omurgalı hayvanlarda incelendi. Bir araştırma ekibi bu kez soruyu, omurgası olmayan bir deniz canlısına, mürekkep balığına sordu. Mürekkep balıklarına iki seçenek sunuldu. Biri hemen alınabilen sıradan bir yiyecekti. Öteki biraz beklenirse gelecek daha iyi bir yiyecekti. Mürekkep balıkları daha iyi yiyecek için 50 ile 130 saniye arasında bekleyebildi. Ekip ayrıca hangi işaretin ödül getirdiğini öğrenme ve kural değişince yeniden öğrenme becerisini ölçtü. Daha uzun bekleyebilen mürekkep balıkları bu öğrenme işinde de daha başarılıydı. Sonuçlar, bu canlının sabrının bazı büyük omurgalılarınkiyle boy ölçüşebildiğini gösteriyor.",
+      "metin": "Bir ödülü hemen almak yerine daha iyisi için beklemek kolay değildir. Bu beceriye kendini tutma denir ve bugüne kadar çoğunlukla omurgalı hayvanlarda incelendi. Bu kez sıra, omurgası olmayan bir deniz canlısına, mürekkep balığına geldi. Araştırmacılar mürekkep balıklarına iki seçenek sundu. Biri hemen alınabilen sıradan bir yiyecekti. Öteki, biraz beklenirse gelecek daha iyi bir yiyecekti. Mürekkep balıkları daha iyi yiyecek için 50 ile 130 saniye arasında sabırla bekleyebildi. Ekip ayrıca onlara, iki işaretten hangisinin ödül getirdiğini öğretti; sonra kuralı tersine çevirdi. Daha uzun bekleyebilen mürekkep balıkları, değişen kuralı da daha iyi öğrendi. Demek ki bu canlının sabrı, bazı büyük omurgalılarınkiyle boy ölçüşebiliyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -260,7 +260,7 @@
           "tur": "ayrinti",
           "soru": "Daha uzun bekleyenler başka hangi işte daha başarılıydı?",
           "secenekler": [
-            "Kural değişince yeniden öğrenmede",
+            "Değişen kuralı öğrenmede",
             "Daha hızlı yüzmede",
             "Kumda saklanmada",
             "Kumun altında saklı daha çok yiyecek bulmada"
@@ -308,7 +308,7 @@
       "yazar": "Wathan ve ark.",
       "dergi": "Scientific Reports",
       "yil": 2016,
-      "metin": "İnsanlar birbirinin yüzüne bakarak çok şey anlar: kızgınlık, sevinç ya da ilgi. Peki bu beceri yalnız insanlara ve onlara yakın türlere mi özgü? İngiltere'de bir ekip bu soruyu evcil atlarla sınadı. Atlara, tanımadıkları başka atların yüz fotoğrafları gösterildi. Fotoğraflardaki atlar farklı durumlarda çekilmişti. Kimi rahat ve ilgiliydi, kimi saldırgan. Atlar, rahat ve ilgili görünen atların fotoğraflarına yaklaşmayı daha çok seçti. Saldırgan ifadeli fotoğraftan ise uzak durdular. Ekip atların kalp atışını da ölçtü. Olumlu ve saldırgan ifadeler, kalp atışında farklı değişimlere yol açtı. Atlar bu ifadeleri kendiliğinden, eğitim almadan ayırt etti. Sonuçlar, insandan çok uzak bir soydan gelen atların da yüz ifadelerinden bilgi çıkarabildiğini gösteriyor.",
+      "metin": "İnsanlar birbirinin yüzüne bakarak çok şey anlar: kızgınlık, sevinç ya da ilgi. Peki bu beceri yalnız insanlara ve maymunlar gibi yakın akrabalarına mı özgü? İngiltere'deki araştırmacılar bu soruyu evcil atlarla sınadı. Atlara, tanımadıkları başka atların yüz fotoğrafları gösterildi. Fotoğraflardaki atlar farklı anlarda çekilmişti. Kimi rahat ve ilgiliyken kimi saldırgandı. Atlar, rahat ve ilgili görünen atların fotoğraflarına daha çok yaklaştı. Saldırgan yüzlü fotoğraftan ise uzak durdular. Ekip atların kalp atışını da ölçtü. Olumlu ve saldırgan yüzler, kalp atışını farklı biçimlerde değiştirdi. Atlar bu ifadeleri kendiliğinden, hiç eğitim almadan ayırt etti. Demek ki insanla akrabalığı çok uzak olan atlar da yüz ifadelerinden bilgi çıkarabiliyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -332,7 +332,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Atlar saldırgan ifadeli fotoğrafa ne yaptı?",
+          "soru": "Atlar saldırgan yüzlü fotoğrafa ne yaptı?",
           "secenekler": [
             "Uzak durdular",
             "Hemen yaklaştılar",
@@ -354,7 +354,7 @@
           "tur": "ayrinti",
           "soru": "Atlar ifadeleri nasıl ayırt etti?",
           "secenekler": [
-            "Kendiliğinden, eğitim almadan",
+            "Kendiliğinden, hiç eğitim almadan",
             "Uzun bir eğitimden sonra",
             "Yalnız ödül verilince",
             "Yalnız sahipleri yanlarındayken"
@@ -382,13 +382,13 @@
       "yazar": "Laumer ve ark.",
       "dergi": "Scientific Reports",
       "yil": 2024,
-      "metin": "Sumatra adasında yaşayan bir erkek orangutanın yüzünde bir yara açıldı. Araştırmacılar onu izlemeye devam etti ve şaşırtıcı bir şey gördü. Yaralanmasından üç gün sonra orangutan, ormanda yetişen tırmanıcı bir bitkinin yapraklarını seçerek kopardı. Yaprakları çiğnedi ve çıkan suyu defalarca yarasına sürdü. Son olarak yaranın üzerini çiğnenmiş yapraklarla tamamen kapattı. Bu bitki Güneydoğu Asya'nın tropik ormanlarında yetişiyor. Daha önce bazı hayvanların belli yaprakları yuttuğu ya da tüylerine sürdüğü görülmüştü. Ancak vahşi bir hayvanın yarasını böyle bir bitkiyle etkin biçimde ele aldığı ilk kez bu kadar düzenli biçimde kaydedildi. Araştırmacılar bu davranışın, bu orangutanın kendi bulduğu yeni bir alışkanlık olabileceğini düşünüyor.",
+      "metin": "Sumatra adasında yaşayan bir erkek orangutanın yüzünde bir yara açıldı. Araştırmacılar onu izlemeyi sürdürdü ve kısa süre sonra şaşırtıcı bir şey gördü. Yaralanmasından üç gün sonra orangutan, ormandaki bir sarmaşığın yapraklarını seçerek kopardı. Yaprakları çiğnedi ve çıkan suyu defalarca yarasına sürdü. Son olarak yaranın üzerini çiğnenmiş yapraklarla tamamen kapattı, tıpkı bir sargı gibi. Bu sarmaşık, Güneydoğu Asya'nın tropik ormanlarında yetişiyor. Bazı hayvanların belli yaprakları yuttuğu ya da tüylerine sürdüğü daha önce de görülmüştü. Ama yabani bir hayvanın yarasına bir bitkiyle böyle özenle bakım yaptığı ilk kez bu kadar ayrıntılı kaydedildi. Araştırmacılar bu davranışın, orangutanın kendi bulduğu yeni bir alışkanlık olabileceğini düşünüyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Bir orangutanın yarasını bir bitkiyle ele almasını",
+            "Bir orangutanın yarasına bir bitkiyle bakım yapmasını",
             "Orangutanların ağaçların tepesinde nasıl yuva yaptığını",
             "Sumatra'daki ormanların büyüklüğünü",
             "Orangutanların ne kadar yaşadığını"
@@ -406,7 +406,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Orangutan yaprakları ne yaptı?",
+          "soru": "Orangutan yapraklarla ne yaptı?",
           "secenekler": [
             "Çiğneyip suyunu yarasına sürdü",
             "Yuvasına serdi",
@@ -530,7 +530,7 @@
       "yazar": "Scarf ve ark.",
       "dergi": "PNAS",
       "yil": 2016,
-      "metin": "Okumayı öğrenmenin bir parçası, harflerin hangi seslere karşılık geldiğini bilmektir. Öteki parçası ise sözcüklerin yazılı biçimini görünce tanımaktır. Bazı bilim insanları bu ikinci becerinin, günlük nesneleri tanıyan görme yeteneğinden geliştiğini düşünüyor. Yeni Zelanda ve Almanya'dan bir ekip, bu yeteneğin insandan çok farklı canlılarda da olup olmadığını merak etti. Güvercinlere, gerçek sözcükleri anlamsız harf dizilerinden ayırmayı öğrettiler. Güvercinler zamanla daha önce hiç görmedikleri sözcükleri de doğru tanımaya başladı. Hangi harflerin sık sık yan yana geldiğine de duyarlıydılar. İnsanla yolları 300 milyon yıldan uzun süre önce ayrılan güvercinlerin bunu yapabilmesi şaşırtıcı. Sonuç, sözcüğün biçimini tanımanın yalnız insanın görme düzenine özgü olmadığını gösteriyor.",
+      "metin": "Okumayı öğrenmenin bir parçası, harflerin hangi seslere karşılık geldiğini bilmektir. Öteki parçası ise yazılı bir sözcüğü görünce tanımaktır. Bazı bilim insanları bu ikinci becerinin, gündelik nesneleri tanımamızı sağlayan görme yeteneğinden doğduğunu düşünüyor. Peki bu yetenek insandan çok farklı canlılarda da var mı? Yeni Zelanda ve Almanya'dan araştırmacılar, güvercinlere gerçek sözcükleri anlamsız harf dizilerinden ayırmayı öğretti. Güvercinler zamanla daha önce hiç görmedikleri sözcükleri de doğru tanımaya başladı. Hangi harflerin sık sık yan yana geldiğine de dikkat ediyorlardı. Evrimde insanla yolları 300 milyon yıldan uzun süre önce ayrılmış güvercinlerin bunu yapabilmesi şaşırtıcı. Demek ki yazılı sözcükleri tanımak için insanınkine benzer bir görme sistemi gerekmiyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -554,7 +554,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip hangi ülkelerdendi?",
+          "soru": "Araştırmacılar hangi ülkelerdendi?",
           "secenekler": [
             "Yeni Zelanda ve Almanya",
             "Avustralya ve Fransa",
@@ -564,7 +564,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Güvercinlerle insanın yolları ne zaman ayrıldı?",
+          "soru": "Güvercinlerle insanın evrimdeki yolları ne zaman ayrıldı?",
           "secenekler": [
             "300 milyon yıldan uzun süre önce",
             "3 milyon yıl önce",
@@ -574,7 +574,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Güvercinler neye duyarlıydı?",
+          "soru": "Güvercinler neye dikkat ediyordu?",
           "secenekler": [
             "Hangi harflerin sık sık yan yana geldiğine",
             "Harflerin rengine",
@@ -586,7 +586,7 @@
           "tur": "ayrinti",
           "soru": "Metne göre okumayı öğrenmenin iki parçası nedir?",
           "secenekler": [
-            "Harflerin seslerini bilmek ve sözcüklerin yazılı biçimini tanımak",
+            "Harflerin seslerini bilmek ve yazılı sözcükleri tanımak",
             "Hızlı konuşabilmek ve her sözcüğü yüksek sesle, takılmadan okuyabilmek",
             "Harfleri yazmak ve sözcükleri ezberlemek",
             "Resimlere bakmak ve hikâye anlatmak"
@@ -604,7 +604,7 @@
       "yazar": "Newport ve ark.",
       "dergi": "Scientific Reports",
       "yil": 2016,
-      "metin": "Okçu balıkları, suyun üstündeki böcekleri ağızlarından fışkırttıkları su ile vurup düşürerek avlanır. Bu iş keskin bir göz ister. Avustralya'daki bir ekip, bu balıkların insan yüzlerini ayırt etmeyi öğrenip öğrenemeyeceğini merak etti. Balıklar doğada insan yüzüyle neredeyse hiç karşılaşmaz, yani böyle bir beceriye ihtiyaçları yoktur. Ekip balıklara her seferinde iki yüz resmi gösterdi ve bunlardan doğru olanı seçmeyi öğretti. İlk deneyde balıklar 44 farklı yüz resmiyle başarılı oldu. Araştırmacılar ikinci deneyde yüzlerin rengini, baş biçimini ve parlaklığını eşitledi. Balıklar bu kez 18 yüzle de yüksek doğrulukta başarılı oldu. Bu, insan yüzünü tanımak için özel bir yapısı olmayan bir canlının bile bunu öğrenebildiğini gösteriyor.",
+      "metin": "Okçu balıkları, suyun üstündeki böcekleri ağızlarından fışkırttıkları suyla vurup düşürerek avlanır. Bu iş keskin bir göz ister. Avustralya'daki araştırmacılar, bu balıkların insan yüzlerini ayırt etmeyi öğrenip öğrenemeyeceğini sınadı. Balıklar doğada insan yüzüyle neredeyse hiç karşılaşmaz, yani böyle bir beceriye ihtiyaçları yoktur. Ekip balıklara her seferinde iki ayrı yüzün resmini gösterdi ve doğru olanı seçmeyi öğretti. İlk deneyde balıklar 44 farklı yüzle başarılı oldu. İkinci deneyde araştırmacılar yüzlerin rengini, baş biçimini ve parlaklığını birbirine eşitledi. Balıklar bu kez de 18 yüz arasından büyük ölçüde doğru seçim yaptı. Demek ki insan yüzü için özel bir yeteneği olmayan bir canlı bile yüzleri ayırt etmeyi öğrenebiliyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -628,10 +628,10 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "İlk deneyde kaç farklı yüz resmi kullanıldı?",
+          "soru": "İlk deneyde balıklar kaç farklı yüzle başarılı oldu?",
           "secenekler": [
             "44",
-            "18",
+            "24",
             "4",
             "100"
           ]
@@ -648,7 +648,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip hangi ülkedeydi?",
+          "soru": "Araştırmacılar hangi ülkedeydi?",
           "secenekler": [
             "Avustralya",
             "Yeni Zelanda",
@@ -658,12 +658,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Metne göre balıkların neden böyle bir beceriye ihtiyacı yoktur?",
+          "soru": "Balıklar doğada insan yüzüyle ne sıklıkla karşılaşır?",
           "secenekler": [
-            "Doğada insan yüzüyle neredeyse hiç karşılaşmazlar",
-            "Gözleri çok zayıftır",
-            "Hep karanlık sularda yaşarlar",
-            "Avlarını gözleriyle değil yalnız kokularıyla bulurlar"
+            "Neredeyse hiç",
+            "Her gün",
+            "Haftada birkaç kez",
+            "Yalnız yaz aylarında"
           ]
         }
       ]
@@ -678,7 +678,7 @@
       "yazar": "King ve ark.",
       "dergi": "Proceedings of the Royal Society B",
       "yil": 2013,
-      "metin": "Şişe burunlu yunusların her birinin kendine özgü bir imza ıslığı vardır. Bilim insanları yunusların bazen başka bir yunusun ıslığını kopyaladığını fark etti. Peki bunu neden yapıyorlar? Bir araştırma ekibi bu kopyaların ne zaman ve kimler arasında görüldüğünü inceledi. Kopyalar neredeyse yalnız yakın yunuslar arasında görüldü: anne ile yavrusu ya da birlikte dolaşan erkekler gibi. Üstelik kopyalar çoğunlukla birbirlerinden ayrı düştüklerinde ortaya çıktı. Kopyalamanın ardından hiç kavga görülmedi. Kopyalayan yunus, ıslığın bazı özelliklerini hep biraz değiştiriyordu. Böylece kopya, asıl ıslıktan ayırt edilebiliyordu. Araştırmacılar bu kullanımı insan dilindeki bir kullanıma benzetiyor. İkisinde de amaç, karşıdakiyle kurulan bağı sürdürmek gibi görünüyor.",
+      "metin": "Şişe burunlu yunusların her birinin kendine özgü bir ıslığı vardır; bu ıslık onun imzası gibidir. Bilim insanları, yunusların bazen başka bir yunusun ıslığını kopyaladığını fark etti. Peki bunu neden yapıyorlar? Bir araştırma ekibi, bu kopyaların ne zaman ve kimler arasında duyulduğunu inceledi. Kopyalar neredeyse yalnız birbirine yakın yunuslar arasında duyuldu: anne ile yavrusu ya da birlikte dolaşan erkekler gibi. Üstelik kopyalar çoğunlukla bu yunuslar birbirinden ayrı düştüğünde ortaya çıktı. Kopyalamanın ardından hiç kavga görülmedi. Kopyalayan yunus, ıslığın bazı özelliklerini hep biraz değiştiriyordu. Böylece kopya, asıl ıslıktan ayırt edilebiliyordu. Araştırmacılar bu davranışı insan diline benzetiyor: İkisinde de amaç, yakınlarla kurulan bağı korumak gibi görünüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -692,7 +692,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kopyalar en çok kimler arasında görüldü?",
+          "soru": "Kopyalar en çok kimler arasında duyuldu?",
           "secenekler": [
             "Anne ile yavrusu gibi yakın yunuslar arasında",
             "Daha önce hiç karşılaşmamış, birbirine yabancı yunuslar arasında",
@@ -734,7 +734,7 @@
           "tur": "ayrinti",
           "soru": "Araştırmacılar bu davranışı neye benzetiyor?",
           "secenekler": [
-            "İnsan dilinde bağı sürdürmek için yapılan bir kullanıma",
+            "İnsan diline",
             "Kuşların kavga ötüşüne",
             "Bir oyuna",
             "Bir uyarı sesine"

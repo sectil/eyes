@@ -12,7 +12,7 @@
       "yazar": "Ratcliff ve ark.",
       "dergi": "PNAS",
       "yil": 2012,
-      "metin": "Tek hücreli canlılardan çok hücreli canlılara geçiş, yaşamın tarihindeki en önemli yeniliklerden biridir. Ama bu geçişin ilk adımları pek bilinmiyor. Bir ekip, tek hücreli bir mayayı, çok hücreli olmanın işe yarayacağını düşündüğü bir ortamda yetiştirdi. Kısa sürede, hücreleri kümeler hâlinde bir arada kalan mayalar ortaya çıktı. Bu kümeler yeni bir yaşam düzeni kazandı: kopan küçük hücre öbekleriyle çoğaldılar, bir gençlik evreleri oldu ve belli bir büyüklükte büyümeyi bıraktılar. Her kümedeki hücreler aynı hücreden geliyordu. Hücreler arasında basit bir görev paylaşımı da hızla gelişti. İlk kümelerin hücreleri birbirine benziyordu. Sonra kendini yok eden hücrelerin oranı arttı ve bu, kopan öbeklerin sayısını artırdı. Çok hücreli yaşamın kilit özellikleri, mayalar gibi tek hücreli canlılardan kolayca evrilebiliyor.",
+      "metin": "Tek hücreli bir canlıdan çok hücreli bir canlı nasıl doğar? Bu geçiş, yaşamın tarihindeki en önemli yeniliklerden biridir, ama ilk adımları pek bilinmiyor. Araştırmacılar, tek hücreli bir mayayı, çok hücreli olmanın işe yarayacağını düşündükleri bir ortamda yetiştirdi. Kısa sürede, hücreleri bir arada kalıp kümeler oluşturan mayalar ortaya çıktı. Bu kümelerin yeni bir yaşam düzeni vardı: kopan küçük hücre öbekleriyle çoğalıyor, bir gençlik evresi geçiriyor, belli bir büyüklüğe ulaşınca büyümeyi bırakıyorlardı. Her kümedeki hücreler aynı hücreden geliyordu. Hücreler arasında basit bir iş bölümü de hızla gelişti. İlk kümelerin hücreleri birbirine benziyordu. Sonra kendini yok eden hücrelerin oranı arttı; bu da kopan öbeklerin sayısını artırdı.",
       "sorular": [
         {
           "tur": "ana",
@@ -26,7 +26,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip mayayı nasıl bir ortamda yetiştirdi?",
+          "soru": "Araştırmacılar mayayı nasıl bir ortamda yetiştirdi?",
           "secenekler": [
             "Çok hücreli olmanın işe yarayacağı düşünülen bir ortamda",
             "Hiç besin bulunmayan, karanlık ve soğuk bir ortamda",
@@ -56,12 +56,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kümelerin büyümesi hakkında metinde ne yazıyor?",
+          "soru": "Kümeler ne zaman büyümeyi bırakıyordu?",
           "secenekler": [
-            "Belli bir büyüklükte büyümeyi bıraktılar",
-            "Durmadan büyüyüp kabın tamamını doldurdular",
-            "Yalnız ışık varken büyüyebildiler",
-            "Büyüdükçe yeniden tek hücrelere ayrıldılar"
+            "Belli bir büyüklüğe ulaşınca",
+            "Kabın tamamını doldurunca",
+            "Ortamdaki ışık kesilince",
+            "Yeniden tek hücrelere ayrılınca"
           ]
         },
         {
@@ -86,7 +86,7 @@
       "yazar": "Pfeffer ve ark.",
       "dergi": "Nature",
       "yil": 2012,
-      "metin": "Deniz dibindeki çamurun derin ve oksijensiz katmanlarında, canlı kalıntıları parçalanırken sülfür denen bir madde oluşur. Çamurda oksijenin harcanması çoğu zaman bu sülfürün tepkimeye girmesiyle bağlantılıdır. Önceki ölçümler, bu bağlantının santimetrelerce genişlikteki bir bölge boyunca taşınan elektrik akımlarıyla kurulabildiğini göstermişti. Ama akımı neyin taşıdığı bilinmiyordu. Bir ekip, bu doğal iletkenlerin uzun, ip gibi bakteriler olduğuna dair kanıtlar sundu. Bu bakteriler, çamurun elektrik akımı bulunan bölgelerinde bol bulunuyordu. Boyları boyunca, elektrik taşıma işine uygun özellikler gösteren ince şeritler vardı. Yani bu bakteriler canlı birer elektrik kablosu gibi görünüyor. Bu bulgu, doğadaki ilişkileri anlamaya yeni bir boyut katıyor. İleride teknoloji geliştirmede de işe yarayabilir.",
+      "metin": "Deniz dibindeki çamurun derin ve oksijensiz katmanlarında, canlı kalıntıları çürürken sülfür denen bir madde oluşur. Çamurun yüzeyinde ise oksijen vardır. Yüzeyde oksijenin harcanması çoğu zaman derindeki sülfürün tepkimeye girmesiyle bağlantılıdır. Önceki ölçümler, bu bağlantıyı santimetrelerce genişlikteki bir bölge boyunca akan elektrik akımlarının kurabildiğini göstermişti. Ama akımı neyin taşıdığı bilinmiyordu. Araştırmacılar, bu doğal iletkenlerin uzun, ip gibi bakteriler olduğuna dair kanıtlar sundu. Bu bakteriler, çamurun elektrik akımı bulunan bölgelerinde bol bulunuyordu. Boyları boyunca, elektrik taşımaya uygun ince şeritler vardı. Yani bu bakteriler canlı birer elektrik kablosu gibi. Bu buluş, doğayı anlamamıza yeni bir kapı açıyor; ileride teknolojide de işe yarayabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -110,11 +110,11 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip çalışmasından önce ne bilinmiyordu?",
+          "soru": "Bu çalışmadan önce ne bilinmiyordu?",
           "secenekler": [
             "Elektrik akımını neyin taşıdığı",
             "Çamurda oksijen olup olmadığı",
-            "Sülfürün nasıl kokduğu",
+            "Sülfürün nasıl koktuğu",
             "Deniz dibinin ne kadar derin olduğu"
           ]
         },
@@ -140,9 +140,9 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Metne göre bu bulgu ileride nerede işe yarayabilir?",
+          "soru": "Metne göre bu buluş ileride nerede işe yarayabilir?",
           "secenekler": [
-            "Teknoloji geliştirmede",
+            "Teknolojide",
             "Deniz suyunu tatlı suya çevirmede",
             "Balıkçılıkta av yerlerini bulmada",
             "Kıyıları dalgalardan korumada"
@@ -160,7 +160,7 @@
       "yazar": "Brock ve ark.",
       "dergi": "Nature",
       "yil": 2011,
-      "metin": "Tarım yalnız insanlara özgü değildir; mantar yetiştiren karıncalar ve termitler de bir tür tarım yapar. Peki tek hücreli bir canlı da tarım yapabilir mi? Bir ekip, bakterilerle beslenen ve topluluk hâlinde yaşayabilen bir amibi inceledi. Doğadan toplanan amip soylarının yaklaşık üçte biri bakteri yetiştiriyordu. Bu amipler, bulundukları yerdeki bütün bakterileri yemek yerine beslenmeyi erken bırakıyordu. Bakterilerin bir kısmını, sporlarını taşıyan yapının içine katıyorlardı. Sporlarla yeni bir yere dağılınca bakterileri de götürüyor ve oraya ekip yeni bir yiyecek kaynağı kurabiliyorlardı. Gidilen yerde yenebilecek bakteri yoksa bu büyük bir üstünlüktü. Ama yer zaten uygun bakterilerle doluysa, beslenmeyi erken bırakmanın bedeli karşılanmıyordu. Bu da amiplerin neden yalnız bir kısmında görüldüğünü açıklayabilir.",
+      "metin": "Tarım yalnız insanlara özgü değildir; mantar yetiştiren karıncalar ve termitler de bir tür tarım yapar. Peki tek hücreli bir canlı da tarım yapabilir mi? Araştırmacılar, bakterilerle beslenen ve topluluk hâlinde yaşayabilen bir amibi inceledi. Doğadan toplanan amip soylarının yaklaşık üçte biri bakteri yetiştiriyordu. Bu amipler, bulundukları yerdeki bütün bakterileri yiyip bitirmiyor, beslenmeyi erken bırakıyordu. Bakterilerin bir kısmını, sporlarını taşıyan yapının içine katıyorlardı. Sporlarla yeni bir yere dağılınca bakterileri de götürüyor, oraya ekerek yeni bir yiyecek kaynağı kurabiliyorlardı. Gittikleri yerde yenebilecek bakteri yoksa bu büyük bir üstünlüktü. Ama orada zaten uygun bakteriler varsa, beslenmeyi erken bırakmanın karşılığını alamıyorlardı. Bu da tarımın neden amiplerin yalnız bir kısmında görüldüğünü açıklayabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -216,8 +216,8 @@
           "tur": "ayrinti",
           "soru": "Bakteri taşımak hangi durumda büyük bir üstünlüktü?",
           "secenekler": [
-            "Gidilen yerde yenebilecek bakteri yoksa",
-            "Gidilen yer zaten uygun bakterilerle doluysa",
+            "Gittikleri yerde yenebilecek bakteri yoksa",
+            "Gittikleri yer çok nemli ve karanlıksa",
             "Hava çok sıcak ve kuru olduğunda",
             "Yakında başka amip bulunmadığında"
           ]
@@ -234,7 +234,7 @@
       "yazar": "Coupé ve ark.",
       "dergi": "Science Advances",
       "yil": 2019,
-      "metin": "Bazı diller kulağa çok hızlı, bazıları daha ağır gelir. Peki hızlı konuşulan bir dil, aynı sürede daha çok bilgi mi aktarır? Diller, kullanabildikleri hece sayısı bakımından birbirinden çok farklıdır. Bu yüzden bir hecenin taşıdığı bilgi miktarı da dilden dile büyük ölçüde değişir. Bir ekip, 17 dilden derlenmiş geniş bir dil verisi üzerinde ölçümler yaptı. Hece başına düşen bilgiyle konuşma hızını birlikte ele aldılar. Bu iki özellik tek tek çok farklı olsa da birlikte düşünülünce, diller birbirine yakın bir bilgi hızına ulaşıyordu. Bu hız saniyede yaklaşık 39 bitti; bit, bilginin ölçü birimidir. Diller, bilgi hızında, konuşma hızında olduğundan daha çok birbirine benziyordu. Yani her dil kendi yolundan gitse de aşağı yukarı aynı hızda bilgi aktarıyor.",
+      "metin": "Bazı diller kulağa çok hızlı, bazıları daha ağır gelir. Peki hızlı konuşulan bir dil, aynı sürede daha çok bilgi mi aktarır? Diller, kullanabildikleri hece sayısı bakımından birbirinden çok farklıdır. Bu yüzden bir hecenin taşıdığı bilgi de dilden dile çok değişir. Araştırmacılar, 17 dilden derlenmiş geniş bir veri üzerinde ölçümler yaptı. Hece başına düşen bilgiyi ve konuşma hızını birlikte ele aldılar. Bu iki özellik tek tek bakınca dilden dile çok farklıydı. Ama ikisi birlikte hesaba katılınca diller birbirine yakın bir bilgi hızına ulaşıyordu: saniyede yaklaşık 39 bit. Bit, bilginin ölçü birimidir. Diller, konuşma hızından çok bilgi hızında birbirine benziyordu. Yani her dil kendi yolunu izlese de aşağı yukarı aynı hızda bilgi aktarıyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -258,7 +258,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip kaç dilden derlenmiş veriyi inceledi?",
+          "soru": "Araştırmacılar kaç dilden derlenmiş veriyi inceledi?",
           "secenekler": [
             "17",
             "7",
@@ -268,7 +268,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip hangi iki özelliği birlikte ele aldı?",
+          "soru": "Araştırmacılar hangi iki özelliği birlikte ele aldı?",
           "secenekler": [
             "Hece başına düşen bilgiyi ve konuşma hızını",
             "Konuşanların sayısını ve dilin ne kadar eski olduğunu",
@@ -278,7 +278,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Dillerin ulaştığı bilgi hızı saniyede yaklaşık kaç bitti?",
+          "soru": "Diller saniyede yaklaşık kaç bit bilgi aktarıyordu?",
           "secenekler": [
             "39",
             "17",
@@ -291,7 +291,7 @@
           "soru": "Diller en çok hangi bakımdan birbirine benziyordu?",
           "secenekler": [
             "Bilgi hızında",
-            "Konuşma hızında",
+            "Konuşanların sayısında",
             "Hece sayısında",
             "Sözcük uzunluğunda"
           ]
@@ -308,7 +308,7 @@
       "yazar": "Dingemanse ve ark.",
       "dergi": "PLoS One",
       "yil": 2013,
-      "metin": "Birinin söylediğini tam duyamadığımızda, tekrar etmesini istemek için kısa bir söz kullanırız. İngilizcede bu söz \"huh?\" diye söylenir. Buna benzer bir söz, dünyanın dört bir yanındaki dillerde aşağı yukarı aynı biçimde ve aynı işle kullanılıyor. Bir ekip, on dilde kendiliğinden geçen konuşmaları inceledi. Bu sözün biçimi ve görevi diller arasında, rastlantıyla beklenenden çok daha fazla benziyordu. Ekip, bunun bir homurtu ya da duygu çığlığı gibi olmadığını, öğrenilmesi gereken gerçek bir sözcük olduğunu gösterdi. Peki benzerlik nereden geliyor? Ekibe göre bu sözcük doğuştan gelmiyor. Bütün dillerde konuşanlar, duyamadıklarını karşısındakine sorup düzeltme ister. Bütün dillerin paylaştığı bu durum, sözcüğü her dilde benzer bir biçime sokmuş olabilir.",
+      "metin": "Birinin söylediğini tam duyamayınca, tekrar etmesini istemek için kısa bir söz kullanırız. İngilizcede bu söz \"huh?\" diye söylenir. Buna benzer bir söz, dünyanın dört bir yanındaki dillerde aşağı yukarı aynı biçimde ve aynı işle kullanılıyor. Araştırmacılar on farklı dilde, günlük hayatta kendiliğinden geçen konuşmaları inceledi. Bu sözün biçimi ve görevi, rastlantıyla açıklanamayacak kadar benziyordu. Üstelik bu söz bir homurtu ya da duygu çığlığı değildi; öğrenilmesi gereken gerçek bir sözcüktü. Peki benzerlik nereden geliyor? Araştırmacılara göre bu sözcük doğuştan gelmiyor. Her dilde insanlar, duyamadıklarını sorup düzeltme ister. Bütün dillerin paylaştığı bu durum, sözcüğü her yerde benzer bir biçime sokmuş olabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -324,7 +324,7 @@
           "tur": "ayrinti",
           "soru": "Bu kısa söz ne zaman kullanılır?",
           "secenekler": [
-            "Birinin söylediğini tam duyamadığımızda",
+            "Birinin söylediğini tam duyamayınca",
             "Birine yardımı için içtenlikle teşekkür etmek istediğimizde",
             "Bir şeye çok şaşırıp sevindiğimizde",
             "Konuşmayı bitirip ayrılırken"
@@ -332,7 +332,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip kaç dilde konuşmaları inceledi?",
+          "soru": "Araştırmacılar kaç dildeki konuşmaları inceledi?",
           "secenekler": [
             "On",
             "İki",
@@ -342,9 +342,9 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip hangi konuşmaları inceledi?",
+          "soru": "Araştırmacılar hangi konuşmaları inceledi?",
           "secenekler": [
-            "Kendiliğinden geçen konuşmaları",
+            "Kendiliğinden geçen günlük konuşmaları",
             "Okunan haber metinlerini",
             "Laboratuvarda okuyup ezberletilen hazır cümleleri",
             "Şarkı sözlerini ve şiirleri"
@@ -352,20 +352,20 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip bu söz hakkında neyi gösterdi?",
+          "soru": "Metne göre bu söz aslında nedir?",
           "secenekler": [
-            "Öğrenilmesi gereken gerçek bir sözcük olduğunu",
-            "Bir homurtu olduğunu",
-            "Bir duygu çığlığı olduğunu",
-            "Yalnız İngilizce konuşanların kullandığı bir ses olduğunu"
+            "Öğrenilmesi gereken gerçek bir sözcük",
+            "Bebeklerin uydurduğu bir ses",
+            "İstemeden çıkan bir hapşırık sesi",
+            "Yalnız İngilizcede kullanılan bir ses"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekibe göre benzerlik nereden geliyor olabilir?",
+          "soru": "Araştırmacılara göre benzerlik nereden geliyor olabilir?",
           "secenekler": [
             "Bütün dillerde duyulmayanın sorulup düzeltilmesinden",
-            "Sözcüğün doğuştan gelmesinden",
+            "Dillerin birbirinden sözcük ödünç almasından",
             "Dillerin hepsinin çok eski tek bir ortak dilden doğmuş olmasından",
             "Herkesin aynı filmleri izlemesinden"
           ]
@@ -382,7 +382,7 @@
       "yazar": "Koh ve ark.",
       "dergi": "Science",
       "yil": 2015,
-      "metin": "Su yüzeyinde yaşayan bazı böcekler, suyun üstünde yürümekle kalmaz, oradan havaya sıçrayabilir de. Bu sıçrayış, özgün bir hareket biçimidir. Bir ekip, sıçrayış sırasında suyun nasıl davrandığını inceledi ve bu bilgiyle küçük bir robot yapmak istedi. Böceklerin, bacaklarının kıvrık uçlarını içe doğru döndürdüğünü gördüler. Bacaklarını suya görece yavaş indiriyorlardı. Uyguladıkları kuvvet, su yüzeyini yırtmak için gereken kuvvetin hemen altında kalıyordu. Ekip bu bilgiyle, böcek boyutunda ve 68 miligram ağırlığında bir robot yaptı. Robot da suyun üstünden sıçradı ve suya aktarılabilecek en büyük itişi kullandı. Bulgular, bu küçük canlıların sudan nasıl sıçradığını anlamaya yardım ediyor. Aynı beceriyi makinelere kazandırmanın da bir yolunu gösteriyor.",
+      "metin": "Su yüzeyinde yaşayan bazı böcekler, suyun üstünde yürümekle kalmaz, oradan havaya da sıçrar. Bu, başka canlılarda pek görülmeyen bir hareket biçimidir. Araştırmacılar, sıçrayış sırasında suyun nasıl davrandığını inceledi ve bu bilgiyle küçük bir robot yapmak istedi. Böceklerin, bacaklarının kıvrık uçlarını içe doğru döndürdüğünü gördüler. Bacaklarını suya görece yavaş indiriyorlardı. Uyguladıkları kuvvet, su yüzeyini yırtmaya yetecek kuvvetin hemen altında kalıyordu. Ekip bu bilgiyle böcek boyutunda, 68 miligramlık bir robot yaptı. Robot da suyun üstünden sıçradı ve suya aktarılabilecek en büyük itişi aktardı. Bulgular, bu küçük canlıların sudan nasıl sıçradığını anlamamıza yardım ediyor. Aynı beceriyi makinelere kazandırmanın yolunu da gösteriyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -418,8 +418,8 @@
           "tur": "ayrinti",
           "soru": "Böceklerin uyguladığı kuvvet nasıldı?",
           "secenekler": [
-            "Su yüzeyini yırtmak için gerekenin hemen altında",
-            "Su yüzeyini yırtmak için gerekenin iki katı",
+            "Su yüzeyini yırtmaya yetecek kuvvetin hemen altında",
+            "Su yüzeyini yırtmaya yetecek kuvvetin iki katı",
             "Robotun uyguladığı kuvvetle tamamen aynı",
             "Her sıçrayışta rastgele değişen, bazen çok büyük bir kuvvet"
           ]
@@ -456,7 +456,7 @@
       "yazar": "Mlot ve ark.",
       "dergi": "PNAS",
       "yil": 2011,
-      "metin": "Tek bir ateş karıncası suya düşünce zorlanır, ama bir karınca topluluğu günlerce suyun üstünde rahatça yüzebilir. Bunu nasıl başarıyorlar? Bir ekip, karıncaların bedenlerini birbirine bağlayarak su geçirmez sallar kurmasını aralıklı fotoğraf çekimiyle izledi. Suyu itmek, şimdiye dek yaprakların ya da böcek kabuklarının değişmeyen bir özelliği olarak görülüyordu. Oysa karıncalar bedenlerini birbirine bağlayınca suyu itme becerileri belirgin biçimde arttı. Ekip bunu su geçirmez bir kumaş dokumaya benzetiyor. Salın üstündeki karıncaların yollarını izleyerek salın ne hızda kurulduğunu açıklayan bir model de geliştirdiler. Kurulumun merkezinde, salın kenarına gelen karıncaların komşuları tarafından orada tutulması vardı. Bu, iş birliği gibi görünen bazı davranışların zorlamaya dayanabileceğini düşündürüyor.",
+      "metin": "Tek bir ateş karıncası suya düşünce zorlanır, ama bir karınca topluluğu günlerce suyun üstünde rahatça yüzebilir. Bunu nasıl başarıyorlar? Araştırmacılar, karıncaların bedenlerini birbirine bağlayarak su geçirmez sallar kurmasını aralıklı fotoğraf çekimiyle izledi. Suyu itmek bugüne dek yaprakların ya da böcek kabuklarının hiç değişmeyen bir özelliği sanılıyordu. Oysa karıncalar bedenlerini birbirine bağlayınca suyu çok daha iyi itti. Ekip bunu su geçirmez bir kumaş dokumaya benzetiyor. Salın üstündeki karıncaların yollarını izleyerek salın ne hızla kurulduğunu açıklayan bir model de geliştirdiler. Kurulumda en önemli şey, salın kenarına gelen karıncaları komşularının orada tutmasıydı. Bu, iş birliği gibi görünen bazı davranışların aslında zorlamaya dayanabileceğini düşündürüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -480,7 +480,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip karıncaları nasıl izledi?",
+          "soru": "Araştırmacılar karıncaları nasıl izledi?",
           "secenekler": [
             "Aralıklı fotoğraf çekimiyle",
             "Suyun altına koyduğu mikrofonlarla",
@@ -490,7 +490,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Suyu itmek daha önce neyin özelliği olarak görülüyordu?",
+          "soru": "Suyu itmek daha önce neyin özelliği sanılıyordu?",
           "secenekler": [
             "Yaprakların ya da böcek kabuklarının",
             "Yalnız su kuşlarının yağlı tüylerinin",
@@ -505,7 +505,7 @@
             "Su geçirmez bir kumaş dokumaya",
             "Taşları üst üste koyarak sağlam bir duvar örmeye",
             "Bir ip düğümlemeye",
-            "Bir kayık kürek çekmeye"
+            "Bir kayıkta kürek çekmeye"
           ]
         },
         {
@@ -530,7 +530,7 @@
       "yazar": "Scialdone ve ark.",
       "dergi": "eLife",
       "yil": 2013,
-      "metin": "Birçok bitki gündüz ışıkla ürettiği besinin bir kısmını yapraklarında nişasta olarak biriktirir. Gece bu birikimi kullanarak yaşamını sürdürür ve büyür. Bir ekip, bir bitkinin yapraklarındaki nişastanın gece boyunca nasıl azaldığını inceledi. Nişasta, gece boyunca aşağı yukarı düzenli bir hızla tükeniyordu. Karanlık erken ya da geç bastığında, birikmiş nişasta az ya da çok olduğunda bitki bu hızı ayarlıyordu. Böylece birikim neredeyse tam şafak sökerken bitiyordu. Bunun için bitkinin, eldeki nişastayı şafağa kalan süreye bölmesi gerekir. Ekip, bu bölme işini kimyasal tepkimelerle yapabilecek iki model önerdi. Modellerin tahminleri, gece bir süre ışık verilen bitkilerde ve nişastayı parçalama yolu değişmiş bitkilerde başarıyla sınandı.",
+      "metin": "Bir bitki gece aç kalmamak için hesap yapabilir mi? Birçok bitki, gündüz ışıkla ürettiği besinin bir kısmını yapraklarında nişasta olarak biriktirir. Gece bu birikimle yaşar ve büyür. Araştırmacılar, küçük bir bitkinin yapraklarındaki nişastanın gece boyunca nasıl azaldığını inceledi. Nişasta, aşağı yukarı düzenli bir hızla tükeniyordu. Karanlık erken ya da geç bastığında, birikmiş nişasta az ya da çok olduğunda bitki bu hızı ayarlıyordu. Böylece birikim neredeyse tam şafak sökerken bitiyordu. Bunun için bitkinin, eldeki nişastayı şafağa kalan süreye bölmesi gerekir. Ekip, bu bölme işini kimyasal tepkimelerle yapabilecek iki model önerdi. Modellerin tahminleri, gece bir süre ışık verilen bitkilerde ve nişasta parçalama genleri değişmiş bitkilerde denendi ve doğru çıktı.",
       "sorular": [
         {
           "tur": "ana",
@@ -574,12 +574,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bitkinin nişastayı şafağa kalan süreye ne yapması gerekir?",
+          "soru": "Bitki eldeki nişastayı şafağa kalan süreyle ne yapmalı?",
           "secenekler": [
-            "Bölmesi",
-            "Eklemesi",
-            "Çarpması",
-            "Çıkarması"
+            "Bölmeli",
+            "Toplamalı",
+            "Çarpmalı",
+            "Çıkarmalı"
           ]
         },
         {
@@ -604,7 +604,7 @@
       "yazar": "Evangelista ve ark.",
       "dergi": "Journal of Experimental Biology",
       "yil": 2011,
-      "metin": "Bitkiler yürüyemez, ama tohumlarını uzağa göndermenin yollarını bulmuşlardır. Sardunyalarla akraba, küçük ve çiçekli bir bitki bu konuda kendine özgü bir yol izler. Önce tohumlarını yarım metreye kadar uzağa fırlatabilir. Sonra tohumlar, havanın nemi değiştikçe burulup açılarak toprağı deler ve kendilerini gömer. Bu işi, tohumlara bağlı sarmal biçimli kılçıklar yapar. Kılçıklar cansız bir dokudan oluşur, ama neme tepki vermeyi sürdürür. Bir ekip, fırlatmayı ve gömülmeyi çok hızlı çekim yapan kameralarla ve aralıklı çekimlerle ayrıntılı olarak inceledi. Kılçığın kıvrılmasını açıklayan basit bir model kurdular. Bu modelle kılçıkta depolanan enerjiyi, tohumun fırlarkenki hareket enerjisiyle karşılaştırdılar. Model, uzağa fırlatmakla düzeneğin güvenilir çalışması arasındaki dengeyi incelemeye de yarıyor.",
+      "metin": "Bitkiler yürüyemez, ama tohumlarını uzağa göndermenin yollarını bulmuşlardır. Sardunyalarla akraba, küçük ve çiçekli bir bitki bu konuda kendine özgü bir yol izler. Önce tohumlarını yarım metreye kadar uzağa fırlatabilir. Sonra tohumlar, havanın nemi değiştikçe burulup açılarak toprağı deler ve kendilerini gömer. Bu işi, tohumlara bağlı sarmal biçimli kılçıklar yapar. Kılçıklar cansız bir dokudan oluşur, ama neme tepki vermeyi sürdürür. Araştırmacılar, fırlatmayı ve gömülmeyi çok hızlı çekim yapan kameralarla ve aralıklı çekimlerle ayrıntılı olarak inceledi. Kılçığın kıvrılmasını açıklayan basit bir model kurdular. Bu modelle kılçıkta biriken enerjiyi, tohumun fırladığı andaki hareket enerjisiyle karşılaştırdılar. Model, tohumu uzağa atmakla düzeneğin her seferinde sorunsuz çalışması arasındaki dengeyi anlamaya da yarıyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -658,10 +658,10 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip modelle hangi iki şeyi karşılaştırdı?",
+          "soru": "Araştırmacılar modelle hangi iki şeyi karşılaştırdı?",
           "secenekler": [
-            "Kılçıkta depolanan enerjiyle tohumun hareket enerjisini",
-            "Tohumun ağırlığıyla toprağın sertliğini",
+            "Kılçıkta biriken enerjiyle tohumun hareket enerjisini",
+            "Tohumun ağırlığıyla toprağın ne kadar sert olduğunu",
             "Bitkinin boyuyla çiçeklerinin sayısını",
             "Nemli günlerle kuru günlerin sayısını"
           ]
@@ -670,7 +670,7 @@
     },
     {
       "id": "oa060",
-      "baslik": "Çiçeklerin gizli düzeni",
+      "baslik": "Arılara göz kırpan çiçekler",
       "etiket": "bitki",
       "kaynak": "moyroud2017",
       "pmid": "29045384",
@@ -678,13 +678,13 @@
       "yazar": "Moyroud ve ark.",
       "dergi": "Nature",
       "yil": 2017,
-      "metin": "Bazı renkler boyadan değil, yüzeydeki çok küçük yapıların ışıkla etkileşiminden doğar. Bunlara yapısal renk denir ve aşağı yukarı düzenli, tekrar eden dizilişlerden ortaya çıkar. Canlılarda bu düzen hiçbir zaman kusursuz olmaz. Peki bu düzensizlik bir işe yarıyor mu? Bir ekip, çiçekli bitkilerin büyük gruplarının çoğunda, çiçeklerde düzensiz küçük yapılar buldu. Bu yapıların görünüşü birbirinden farklıydı, ama ışığa etkileri benzerdi. Hepsi bakış açısına göre değişen, çoğunlukla morötesi ve mavi bir ışık saçıyordu. Ekip, düzensizliği ayarlanmış yapılarla yapay çiçekler yaptı ve yiyecek arayan bombus arılarının bunlara tepkisini inceledi. Sonuca göre bu düzensizlik, arıların kolayca fark ettiği bir sinyal üretiyor. Çiçeklerde birbirinden bağımsız olarak birçok kez evrilmiş.",
+      "metin": "Bazı renkler boyadan değil, yüzeydeki çok küçük yapıların ışıkla etkileşiminden doğar. Bunlara yapısal renk denir; aşağı yukarı düzenli, tekrar eden dizilişlerden ortaya çıkar. Ama canlılarda bu düzen hiçbir zaman kusursuz olmaz. Peki bu düzensizlik bir işe yarıyor mu? Araştırmacılar, çiçekli bitkilerin büyük gruplarının çoğunda, çiçeklerde düzensiz küçük yapılar buldu. Bu yapılar farklı görünüyordu, ama ışığa etkileri benzerdi. Hepsi bakış açısına göre değişen, çoğunlukla morötesi ve mavi bir ışık saçıyordu. Ekip, düzensizliği ayarlanmış yapılarla yapay çiçekler yaptı ve yiyecek arayan bombus arılarının bunlara tepkisini inceledi. Sonuca göre bu düzensizlik, arıların kolayca fark ettiği bir işaret üretiyor. Bu işe yarar düzensizlik, çiçeklerde birbirinden bağımsız olarak birçok kez evrilmiş.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Çiçeklerdeki küçük yapıların düzensizliğinin arılara sinyal üretmesini",
+            "Çiçeklerdeki küçük yapıların düzensizliğinin arılara işaret vermesini",
             "Arıların çiçek tozunu kovana nasıl taşıdığını",
             "Çiçeklerin renklerini boyalardan nasıl ürettiğini",
             "Bombus arılarının mavi rengi neden sevmediğini"
@@ -702,7 +702,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip düzensiz küçük yapıları nerede buldu?",
+          "soru": "Araştırmacılar düzensiz küçük yapıları nerede buldu?",
           "secenekler": [
             "Çiçekli bitkilerin büyük gruplarının çoğunda",
             "Yalnız tropik ormanlarda yetişen tek bir çiçek türünde",
