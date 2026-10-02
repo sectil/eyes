@@ -10,9 +10,10 @@ export function firstTwo(text = '') {
   return String(text).split(/[^\p{L}\p{N}]+/u).filter(Boolean).slice(0, 2).join(' ')
 }
 
-// start(onResult) → Promise<stop>; onText(metin) her ara sonuçta; onDone({ text, heard, failed }) bir kez.
+// start(onResult, onLevel) → Promise<stop>; onText(metin) her ara sonuçta; onLevel(0–1) ses seviyesi; onDone({ text, heard,
+// failed }) bir kez.
 // failed: başlatılamadı (izin yok, cihaz içi yok): mikrofon bu turda gizlenir, klavye sürer.
-export function createListener({ start, onText, onDone, silenceMs = SILENCE_MS, setTimer = setTimeout, clearTimer = clearTimeout }) {
+export function createListener({ start, onText, onLevel, onDone, silenceMs = SILENCE_MS, setTimer = setTimeout, clearTimer = clearTimeout }) {
   let stopFn = null
   let timer = null
   let text = ''
@@ -45,7 +46,7 @@ export function createListener({ start, onText, onDone, silenceMs = SILENCE_MS, 
 
   arm()
   Promise.resolve()
-    .then(() => start(onResult))
+    .then(() => start(onResult, (l) => { if (!ended) onLevel?.(l) }))
     .then((s) => {
       if (ended) Promise.resolve(s?.()).catch(() => {})
       else stopFn = s

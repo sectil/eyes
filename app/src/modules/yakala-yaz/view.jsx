@@ -24,7 +24,7 @@ export function useYakalaMic() {
     ask: pref === 'ask',
     setPref: (v) => setPrefs({ yakalaMic: v }),
     request: requestSpeechPermission,
-    start: (onResult) => startSpeech(onResult, { locale: 'tr-TR', strictOnDevice: true }),
+    start: (onResult, onLevel) => startSpeech(onResult, { locale: 'tr-TR', strictOnDevice: true, onLevel }),
   }
 }
 

@@ -46,6 +46,18 @@ function Track({ cur, start = 0, lost = 0, lo = 6, hi = 18 }) {
   )
 }
 
+// Dinlerken kartta: kırmızı nokta, "Dinliyorum" ve ses çubukları (sahip kararı 2026-10-02: sesin alındığı görünsün)
+const LVL = [0.55, 0.8, 1, 0.8, 0.55]
+// on değilken yeri tutulur (görünmez): dinleme başlayıp bitince başlık kaymaz (dinleme kapısı tur 4)
+function LiveRow({ level, on }) {
+  return (
+    <span className="live" role="status" style={on ? undefined : { visibility: 'hidden' }} aria-hidden={on ? undefined : true}>
+      <i aria-hidden="true" />Dinliyorum
+      <span className="lvl" aria-hidden="true">{LVL.map((m, k) => <b key={k} style={{ height: 4 + Math.round(14 * Math.min(1, level * m * 1.4)) }} />)}</span>
+    </span>
+  )
+}
+
 // Son 7 turun eşikleri (ms): hızlı tur yukarıda (sahip kararı 2026-10-02, kapı madde 9 değişti); kesikli çizgi başlangıç
 function Points({ values, baseline }) {
   const all = [...values, ...(Number.isFinite(baseline) ? [baseline] : [])]
@@ -100,6 +112,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
   const [sheet, setSheet] = useState(false)
   const [listening, setListening] = useState(false)
   const [unheard, setUnheard] = useState(false) // D11
+  const [level, setLevel] = useState(0) // 0–1, dinlerken ses çubukları
   const [heard, setHeard] = useState(false) // sesle iki kelime geldi: "Gerekirse düzelt, sonra Gönder'e bas." 
   const listenRef = useRef(null)
   const voice = useRef(false)
@@ -114,9 +127,11 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
     listenRef.current = createListener({
       start: mic.start,
       onText: (t) => { voice.current = true; setValue(t) },
+      onLevel: setLevel,
       onDone: ({ heard, failed }) => {
         listenRef.current = null
         setListening(false)
+        setLevel(0)
         if (failed) { setMicGone(true); inputRef.current?.focus() } else if (!heard) setUnheard(true)
         else setHeard(true)
       },
@@ -330,7 +345,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
           <span className="mask" ref={maskRef} aria-hidden="true" style={{ visibility: 'hidden' }}>
             <i style={{ width: `${pair[0].length * 0.62}em` }} /><i style={{ width: `${pair[1].length * 0.62}em` }} />
           </span>
-          {sub === 'ask' ? <div className="q" role="status">Ne gördün?<small>{listening ? (value.trim() ? 'İkinci kelimeyi söyle.' : 'İki kelimeyi söyle.') : heard ? "Gerekirse düzelt, sonra Gönder'e bas." : unheard ? 'Duyamadım, yazabilirsin.' : micReady ? "Yaz ve Gönder'e bas, ya da mikrofona söyle." : "Yaz ve Gönder'e bas."}</small></div> : null}
+          {sub === 'ask' ? <div className="q" role="status">Ne gördün?{micReady ? <LiveRow level={level} on={listening} /> : null}<small>{listening ? (value.trim() ? 'İkinci kelimeyi söyle.' : 'İki kelimeyi söyle.') : heard ? "Gerekirse düzelt, sonra Gönder'e bas." : unheard ? 'Duyamadım, yazabilirsin.' : micReady ? "Yaz ve Gönder'e bas, ya da mikrofona söyle." : "Yaz ve Gönder'e bas."}</small></div> : null}
           {fb?.ok ? <span className="words ok" role="status"><span className="w ok">{fb.words[0]}</span><span className="w ok">{fb.words[1]}</span></span> : null}
           {fb && !fb.ok ? (
             <div className="cmp" role="status">
@@ -353,17 +368,15 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
             className={`field${showing ? ' quiet' : ''}`}
             value={value}
             onChange={(e) => { setValue(e.target.value); setUnheard(false); setHeard(false) }}
-            placeholder={showing || listening ? '' : 'İki kelimeyi yaz'}
+            placeholder={showing ? '' : listening ? 'Buraya yazılır' : 'İki kelimeyi yaz'}
             aria-label="İki kelimeyi yaz"
             {...INPUT}
           />
-          {/* Dinlerken alanın içinde, düğmenin hemen yanında (mikrofon kapısı tur 1–2, görev testi tur 1): yerleşime girmez */}
-          {listening ? <span className={`live${value ? '' : ' left'}`} role="status"><i aria-hidden="true" />Dinliyorum</span> : null}
         </span>
         {/* Alanın yanında yalnız mikrofon; gönderme klavyenin "Gönder"i (5sn-tur2: tek gönderme yolu) */}
         {micReady ? (
-          <button type="button" className={`rb${listening ? ' on' : ''}`} aria-label={listening ? undefined : 'Sesle söyle'} aria-pressed={listening} onPointerDown={(e) => e.preventDefault()} onClick={onMicTap}>
-            {listening ? <><Square size={14} strokeWidth={0} fill="currentColor" aria-hidden="true" />Durdur</> : <Mic size={22} strokeWidth={2.2} aria-hidden="true" />}
+          <button type="button" className={`rb${listening ? ' on' : ''}`} aria-label={listening ? undefined : 'Sesle söyle'} data-wide="1" aria-pressed={listening} onPointerDown={(e) => e.preventDefault()} onClick={onMicTap}>
+            {listening ? <><Square size={14} strokeWidth={0} fill="currentColor" aria-hidden="true" />Durdur</> : <><Mic size={20} strokeWidth={2.2} aria-hidden="true" />Söyle</>}
           </button>
         ) : null}
       </form>

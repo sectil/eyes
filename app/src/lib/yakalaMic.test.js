@@ -67,6 +67,16 @@ describe('Yakala Yaz mikrofonu · dinleme', () => {
     await flush()
     expect(done).toHaveBeenCalledWith({ text: '', heard: false, failed: true })
   })
+  it('ses seviyesi dinlerken iletilir, bitince iletilmez', async () => {
+    let lv = null
+    const levels = []
+    const l = createListener({ start: async (_cb, onLevel) => { lv = onLevel; return async () => {} }, onLevel: (x) => levels.push(x), onDone: () => {} })
+    await flush()
+    lv(0.4)
+    l.stop()
+    lv(0.9)
+    expect(levels).toEqual([0.4])
+  })
   it('elle durdurma bir kez biter; geç gelen sonuç yok sayılır', async () => {
     const s = fakeSpeech()
     const done = vi.fn()

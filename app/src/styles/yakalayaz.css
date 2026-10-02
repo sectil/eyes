@@ -124,10 +124,14 @@
 .yy-input .rb { color: var(--accent-g, #11a9b8); border: 2px solid var(--accent-g, #11a9b8); background: var(--surface); box-shadow: 0 0 0 4px rgba(17, 169, 184, 0.14); } /* boşta da dokunulacak düğme belli; alanla aynı hale */
 .yy-input .fieldwrap { position: relative; flex: 1; min-width: 0; display: flex; }
 .yy-input .fieldwrap .field { width: 100%; }
-.yy-input .live { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 10px; background: var(--surface-2); font: 600 13px var(--font-body); color: var(--ink-2); pointer-events: none; }
-.yy-input .live i { width: 8px; height: 8px; border-radius: 50%; background: #ff5a4a; box-shadow: 0 0 0 3px rgba(255, 90, 74, 0.2); flex: none; }
-.yy-input .rb.on { width: auto; padding: 0 16px; display: flex; gap: 8px; align-items: center; font: 700 16px var(--font-body); background: var(--accent-grad); border: 0; color: var(--accent-ink); box-shadow: 0 0 0 4px rgba(17, 169, 184, 0.22); } /* dinlerken "■ Durdur" (sahip kararı 2026-10-02) */
-.yy-input .live.left { right: auto; left: 12px; } /* alan boşken solda: alan dengesiz durmaz */
+.yy-stage .q .live { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 10px 0 0; font: 600 15px var(--font-body); color: #ffd2c4; }
+.yy-stage .q .live .lvl { display: flex; align-items: center; gap: 3px; height: 18px; }
+.yy-stage .q .live .lvl b { width: 4px; border-radius: 2px; background: #ff9a7d; transition: height 0.08s linear; }
+@media (prefers-reduced-motion: reduce) { .yy-stage .q .live .lvl b { transition: none; } }
+.yy-stage .q .live i { width: 8px; height: 8px; border-radius: 50%; background: #ff5a4a; box-shadow: 0 0 0 3px rgba(255, 90, 74, 0.2); flex: none; }
+/* Mikrofon düğmesi tek genişlik: boşta "Söyle", dinlerken "Durdur"; alan genişliği değişmez (dinleme kapısı tur 4) */
+.yy-input .rb[data-wide] { width: 112px; display: flex; gap: 6px; align-items: center; justify-content: center; font: 700 16px var(--font-body); }
+.yy-input .rb.on { padding: 0 16px; display: flex; gap: 8px; align-items: center; font: 700 16px var(--font-body); background: var(--accent-grad); border: 0; color: var(--accent-ink); box-shadow: 0 0 0 4px rgba(17, 169, 184, 0.22); } /* dinlerken "■ Durdur" (sahip kararı 2026-10-02) */
 /* İzin sayfası: arka plan koyu ve bulanık (kenarın arkadaki merdiveni kesiyor gibi görünmesin); altta ev çubuğu payı */
 .yy-sheetbg { position: fixed; inset: 0; z-index: 30; background: rgba(4, 8, 12, 0.66); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); display: flex; align-items: flex-end; }
 .yy-sheet { width: 100%; background: var(--surface); color: var(--ink); border-radius: 28px 28px 0 0; padding: 22px 20px max(28px, calc(16px + env(safe-area-inset-bottom))); }
@@ -138,6 +142,7 @@
 .yy-btn.ghost { background: transparent; color: var(--ink-2); box-shadow: none; border: 1.5px solid var(--border); font-weight: 600; font-size: 16px; height: 50px; margin-top: 10px; }
 
 @media (max-width: 340px) {
+  .yy-input .rb[data-wide] { width: 100px; font-size: 15px; }
   .yy-sheet h2 { font-size: 19px; } .yy-sheet .pts div { font-size: 14px; } .yy-sheet .pts { margin: 12px 0 14px; gap: 8px; }
   .yy { padding-left: 14px; padding-right: 14px; }
   .yy-h1 { font-size: 25px; } .yy-h1 br { display: none; }

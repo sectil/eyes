@@ -12,6 +12,7 @@ import Capacitor
 ///   strictOnDevice (Yakala Yaz): cihaz içi çalışamıyorsa başlamaz, hata döner; ses hiçbir koşulda telefondan çıkmaz.
 ///   onDevice (Okuma testi): cihaz içi varsa onu kullanır, yoksa Apple sunucusuna düşer (davranışı değişmedi).
 /// - "speech" olayı: { text, isFinal, segments: [{ text, t, d }] }  (t, d: saniye, ses başından)
+/// - "speechLevel" olayı: { level } 0–1, kayıt sürerken ~12/sn (Yakala Yaz'da "sesin alınıyor" çubukları; ses saklanmaz)
 /// Ses oturumu: kayıtta .playAndRecord (titreşime izinli); bitince AppAudioSession
 /// (FeedbackPlugin.swift) üzerinden Feedback.setAudioMode tercihine döner.
 @objc(SpeechPlugin)
@@ -29,6 +30,22 @@ public class SpeechPlugin: CAPPlugin, CAPBridgedPlugin {
     private var recognizer: SFSpeechRecognizer?
     private var request: SFSpeechAudioBufferRecognitionRequest?
     private var task: SFSpeechRecognitionTask?
+    private var lastLevelAt: TimeInterval = 0
+
+    // Ses seviyesi: tamponun RMS'i desibele, -50 dB → 0, -10 dB → 1. Yalnız sayı gider; ses gitmez, saklanmaz.
+    private func reportLevel(_ buffer: AVAudioPCMBuffer) {
+        let now = ProcessInfo.processInfo.systemUptime
+        guard now - lastLevelAt >= 0.08, let ch = buffer.floatChannelData?[0] else { return }
+        let n = Int(buffer.frameLength)
+        guard n > 0 else { return }
+        lastLevelAt = now
+        var sum: Float = 0
+        for i in 0..<n { sum += ch[i] * ch[i] }
+        let rms = (sum / Float(n)).squareRoot()
+        let db = 20 * log10(max(rms, 1e-6))
+        let level = max(0, min(1, (db + 50) / 40))
+        notifyListeners("speechLevel", data: ["level": Double(level)])
+    }
 
     private func makeRecognizer(_ call: CAPPluginCall) -> SFSpeechRecognizer? {
         let locale = Locale(identifier: call.getString("locale") ?? "tr-TR")
@@ -90,8 +107,9 @@ public class SpeechPlugin: CAPPlugin, CAPBridgedPlugin {
             let input = audioEngine.inputNode
             let format = input.outputFormat(forBus: 0)
             input.removeTap(onBus: 0)
-            input.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, _ in
+            input.installTap(onBus: 0, bufferSize: 1024, format: format) { [weak self] buffer, _ in
                 req.append(buffer)
+                self?.reportLevel(buffer)
             }
             audioEngine.prepare()
             try audioEngine.start()
