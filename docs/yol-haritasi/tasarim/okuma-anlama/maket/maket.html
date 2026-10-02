@@ -46,7 +46,7 @@ html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: v
 
 /* Ortak alt şerit: opak zemin + üstünde solma; içerik altında kalmaz */
 .dock { position: fixed; left: 0; right: 0; bottom: 0; padding: 0 20px 34px; background: var(--bg); }
-.dock::before { content: ''; position: absolute; left: 0; right: 0; top: -48px; height: 48px; background: linear-gradient(to bottom, transparent, var(--bg)); pointer-events: none; }
+.dock.scroll::before { content: ''; position: absolute; left: 0; right: 0; top: -48px; height: 48px; background: linear-gradient(to bottom, transparent, var(--bg)); pointer-events: none; }
 .spacer { height: 150px; flex: none; }
 
 /* Giriş */
@@ -68,12 +68,15 @@ h1.t { font-family: var(--font-display); font-weight: 650; font-size: 31px; lett
 
 /* Metin */
 .kick { font-size: 12.5px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 14px 0 6px; }
-h2.tt { font-family: var(--font-display); font-weight: 600; font-size: 23px; line-height: 1.18; letter-spacing: -.015em; margin: 0 0 14px; text-wrap: balance; }
+h2.tt { font-family: var(--font-display); font-weight: 600; font-size: 21.5px; line-height: 1.18; letter-spacing: -.015em; margin: 0 0 10px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin: 0 0 16px; font-size: 13.5px; color: var(--ink-3); }
+.meta .tag { display: inline-flex; align-items: center; gap: 6px; font-weight: 650; color: var(--accent); background: var(--accent-soft); padding: 4px 10px 4px 7px; border-radius: 99px; }
+.meta .tag svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .read { font-size: 19px; line-height: 1.62; color: var(--ink); margin: 0; text-wrap: pretty; }
 .endbtn { margin: 26px 0 0; }
 .hint { text-align: center; font-size: 13.5px; color: var(--ink-3); margin: 10px 0 40px; }
-.veil { position: fixed; left: 0; right: 0; bottom: 0; height: 170px; background: linear-gradient(to bottom, transparent, var(--bg) 62%); pointer-events: none; }
-.more { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%); font-size: 13.5px; font-weight: 600; color: var(--ink-2); display: inline-flex; gap: 6px; align-items: center; background: var(--surface); border: 1px solid var(--border); padding: 8px 14px; border-radius: 99px; box-shadow: var(--shadow); white-space: nowrap; }
+.veil { position: fixed; left: 0; right: 0; bottom: 0; height: 104px; background: linear-gradient(to bottom, transparent, var(--bg) 58%); pointer-events: none; }
+.more { position: fixed; left: 0; right: 0; bottom: 22px; text-align: center; font-size: 13px; font-weight: 500; color: var(--ink-3); display: flex; flex-direction: column; gap: 2px; align-items: center; pointer-events: none; }
 .more svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 
 /* Soru */
@@ -82,7 +85,7 @@ h2.tt { font-family: var(--font-display); font-weight: 600; font-size: 23px; lin
 .dots i.on { background: var(--accent-grad); }
 .dots i.ok { background: var(--ok); }
 .qn { font-size: 13px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 22px 0 8px; }
-h2.q { font-family: var(--font-display); font-weight: 600; font-size: 24px; line-height: 1.22; letter-spacing: -.015em; margin: 0 0 18px; text-wrap: balance; }
+h2.q { font-family: var(--font-display); font-weight: 600; font-size: 25px; line-height: 1.22; letter-spacing: -.015em; margin: 0; }
 .opts { display: flex; flex-direction: column; gap: 10px; }
 .opt { display: flex; gap: 12px; align-items: center; padding: 14px 16px; min-height: 58px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 18px; font-size: 16.5px; font-weight: 550; line-height: 1.3; color: var(--ink); box-shadow: var(--shadow); }
 .opt .r { flex: none; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--surface-3); display: grid; place-items: center; }
@@ -120,23 +123,45 @@ h2.q { font-family: var(--font-display); font-weight: 600; font-size: 24px; line
 .tg { grid-row: 1 / span 2; grid-column: 2; width: 46px; height: 28px; border-radius: 99px; background: var(--surface-3); position: relative; }
 .tg::after { content: ''; position: absolute; left: 3px; top: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
 
+
+h2.tt, h2.q, .opt > span, .row .v, .row .k, .lead, .verd p, .today strong { text-wrap: pretty; }
+.grow { flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 0; }
+.qwrap { flex: 1; display: flex; flex-direction: column; padding: 0 20px; }
+.qwrap { justify-content: center; }
+.qwrap .opts { padding-top: 20px; }
+.qhead { display: grid; place-items: center; margin: 0 0 22px; }
+.qhead .qr { width: 132px; height: 132px; }
+h2.q { text-align: center; }
+.bar.q { justify-content: flex-start; gap: 14px; }
+.bar.q .dots { flex: 1; } .bar.q .dots i { flex: 1; width: auto; }
+.opt .tagok { margin-left: auto; flex: none; font-size: 13px; font-weight: 700; color: var(--ok); }
+.anl { gap: 8px; flex-wrap: wrap; }
+.anl span.off { color: var(--ink-2); background: var(--surface-2); }
+.ring .n.off { font-size: 40px; }
 @media (max-height: 600px) {
-  .screen { padding-top: 20px; }
-  .hero svg { width: 168px; }
+  .ring .u { font-size: 12.5px; }
+  .verd p { font-size: 15px; }
+  h2.q { font-size: 21px; }
+  .qwrap .opts { padding-top: 12px; }
+  .qhead { display: none; }
+  .meta { margin-bottom: 12px; font-size: 12.5px; }
+  .screen { padding-top: 14px; }
+  .hero svg { width: 150px; }
+  .hero .inner { display: none; }
   h1.t { font-size: 26px; margin-top: 0; }
   .lead { font-size: 15.5px; }
   .steps { margin-top: 12px; gap: 6px; } .steps span { font-size: 12.5px; padding: 5px 10px 5px 6px; }
   .today { margin-top: 12px; padding: 11px 14px; } .today strong { font-size: 15.5px; } .today .ic { width: 38px; height: 38px; }
   .fair { font-size: 13px; margin-bottom: 8px; }
   .dock { padding-bottom: 18px; }
-  .spacer { height: 126px; }
+  .spacer { height: 92px !important; }
   .ring svg { width: 156px; }
   .ring svg { width: 176px; }
   .ring .n { font-size: 44px; } .ring .n.off { font-size: 32px; }
   .verd { margin-top: 12px; } .verd p { font-size: 15.5px; }
   .rows { margin-top: 12px; } .row { padding: 10px 14px; }
   h2.q { font-size: 20px; margin-bottom: 12px; } .qn { margin-top: 14px; }
-  .opt { font-size: 15px; padding: 10px 12px; min-height: 50px; gap: 10px; } .opts { gap: 8px; }
+  .opt { font-size: 14.5px; padding: 9px 12px; min-height: 48px; gap: 10px; } .opts { gap: 7px; }
 }
 @media (max-width: 340px) {
   .pad { padding: 0 16px; }
@@ -161,6 +186,7 @@ const TEXT = "Afrika'daki bazı gübre böcekleri, buldukları gübreden bir top
 
 // Kelimelerden iris: her halka iki yay; üst yay saat yönünde, alt yay soldan sağa: yazı hiçbir yerde baş aşağı değil.
 const BOOK = '<svg viewBox="0 0 24 24"><path d="M3 6.5q4.5-2.5 9 0q4.5-2.5 9 0v12q-4.5-2.5-9 0q-4.5-2.5-9 0z"/><path d="M12 6.5v12"/></svg>'
+const BUG = '<svg viewBox="0 0 24 24"><ellipse cx="12" cy="14" rx="5.5" ry="6.5"/><path d="M12 7.5v13M9 6l-2-2.5M15 6l2-2.5M6.5 12H3.5M20.5 12h-3M6.8 16.5l-2.6 1.6M17.2 16.5l2.6 1.6"/></svg>'
 const DOWN = '<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>'
 function iris() {
   const rings = [
@@ -174,8 +200,9 @@ function iris() {
     const rb = r + fs * 0.72 // alt yayda harfler dışa doğru oturur, halkayla aynı çizgiye gelsin
     defs += `<path id="t${i}" d="M${150 - r},150 A${r},${r} 0 0,1 ${150 + r},150"/><path id="b${i}" d="M${150 - rb},150 A${rb},${rb} 0 0,0 ${150 + rb},150"/>`
     const lt = Math.PI * r * 0.94, lb = Math.PI * rb * 0.94
-    body += `<text font-size="${fs}" fill="url(#g)" opacity="${op}" text-anchor="middle"><textPath href="#t${i}" startOffset="50%" textLength="${lt.toFixed(0)}" lengthAdjust="spacing">${top}</textPath></text>`
-    body += `<text font-size="${fs}" fill="url(#g)" opacity="${op}" text-anchor="middle"><textPath href="#b${i}" startOffset="50%" textLength="${lb.toFixed(0)}" lengthAdjust="spacing">${bot}</textPath></text>`
+    const cls = i >= 2 ? ' class="inner"' : ''
+    body += `<text${cls} font-size="${fs}" fill="url(#g)" opacity="${op}" text-anchor="middle"><textPath href="#t${i}" startOffset="50%" textLength="${lt.toFixed(0)}" lengthAdjust="spacing">${top}</textPath></text>`
+    body += `<text${cls} font-size="${fs}" fill="url(#g)" opacity="${op}" text-anchor="middle"><textPath href="#b${i}" startOffset="50%" textLength="${lb.toFixed(0)}" lengthAdjust="spacing">${bot}</textPath></text>`
   })
   return `<svg viewBox="0 0 300 300" aria-hidden="true"><defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--iris-1)"/><stop offset="1" stop-color="var(--iris-2)"/></linearGradient>
@@ -190,33 +217,45 @@ function iris() {
 function giris() {
   return `<div class="screen">
     <div class="bar"><span class="ib">${BACK}</span><span></span><span style="width:40px"></span></div>
+    <div class="grow">
     <div class="hero">${iris()}</div>
     <h1 class="t">Oku ve Anla</h1>
     <p class="lead">Bilimden kısa, şaşırtıcı bir bulgu oku. Sonra dört soru gelir.</p>
     <div class="steps"><span><b>1</b>Oku</span><span><b>2</b>Bitir</span><span><b>3</b>Dört soru</span></div>
     <div class="today"><span class="ic">${BOOK}</span><span><small>BUGÜNÜN METNİ</small><strong>Yıldızlarla yol bulan böcek</strong><em>107 kelime</em></span></div>
-    <div class="spacer"></div>
+    </div>
+    <div class="spacer" style="height:118px"></div>
     <div class="dock"><p class="fair">Hızın, anladığınla birlikte sayılır.</p><div class="btn">Okumaya başla</div></div>
   </div>`
 }
 function metin() {
   return `<div class="screen" style="padding-bottom:0">
     <div class="bar"><span class="ib">${X}</span><span class="mid">Kendi hızında oku</span><span style="width:40px"></span></div>
-    <div class="pad"><div class="kick">Bugünün metni</div><h2 class="tt">Yıldızlarla yol bulan böcek</h2><p class="read">${TEXT}</p>
+    <div class="pad"><div class="kick">Bugünün metni</div><h2 class="tt">Yıldızlarla yol bulan böcek</h2><div class="meta"><span class="tag">${BUG}Böcekler</span><span>107 kelime</span><span>Current Biology, 2013</span></div><p class="read">${TEXT}</p>
     <div class="endbtn btn">Bitirdim</div><p class="hint">Süre, sen dokununca durur.</p></div>
-    <div class="veil"></div><span class="more">${DOWN}Metnin sonunda: Bitirdim</span>
+    <div class="veil"></div><span class="more">${DOWN}<span>Bitirdim, metnin sonunda</span></span>
   </div>`
+}
+// Soru halkası: sonuçtaki dört soru halkasının küçüğü; sorular ilerledikçe dolar.
+function qring(done, cur) {
+  const r = 46, c = 2 * Math.PI * r, gap = 16, seg = c / 4 - gap
+  let out = ''
+  for (let i = 0; i < 4; i++) {
+    const col = i < done ? 'var(--ok)' : i === cur ? 'url(#g3)' : 'var(--track)'
+    out += `<circle cx="60" cy="60" r="${r}" fill="none" stroke="${col}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${seg.toFixed(1)} ${(c - seg).toFixed(1)}" stroke-dashoffset="${(-(i * c / 4) - gap / 2).toFixed(1)}" transform="rotate(-90 60 60)"/>`
+  }
+  return `<svg class="qr" viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--iris-1)"/><stop offset="1" stop-color="var(--iris-2)"/></linearGradient></defs>${out}
+    <text x="60" y="60" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-weight="650" font-size="34" fill="var(--ink)">${cur + 1}</text></svg>`
 }
 function soru() {
   const o = ['Gübre böceklerinin karanlık gecelerde yıldızlarla yön bulmasını', 'Gübre böceklerinin yiyeceklerini nasıl sakladığını', 'Planetaryumların nasıl çalıştığını', 'Böceklerin bulutlu havada nasıl dinlendiğini']
   const order = [1, 0, 3, 2]
   return `<div class="screen">
-    <div class="bar"><span class="ib">${X}</span><span class="dots"><i class="ok"></i><i class="on"></i><i></i><i></i></span><span style="width:40px"></span></div>
-    <div class="pad"><div class="qn">2. soru</div><h2 class="q">Metin en çok neyi anlatıyor?</h2>
-    <div class="opts">${order.map((i) => i === 0 ? `<div class="opt right"><span class="r">${CHK}</span>${o[i]}</div>` : `<div class="opt"><span class="r"></span>${o[i]}</div>`).join('')}</div>
-</div>
-    <div class="spacer"></div>
-    <div class="dock"><div class="fb">${'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'}Doğru.</div><div class="btn">Sonraki soru</div></div>
+    <div class="bar"><span class="ib">${X}</span><span class="mid">4 sorudan 2.</span><span style="width:40px"></span></div>
+    <div class="qwrap"><div class="qhead">${qring(1, 1)}</div><h2 class="q">Metin en çok neyi anlatıyor?</h2>
+    <div class="opts">${order.map((i) => i === 0 ? `<div class="opt right"><span class="r">${CHK}</span><span>${o[i]}</span><span class="tagok">Doğru</span></div>` : `<div class="opt"><span class="r"></span><span>${o[i]}</span></div>`).join('')}</div></div>
+    <div class="spacer" style="height:112px"></div>
+    <div class="dock"><div class="btn">Sonraki soru</div></div>
   </div>`
 }
 // Halka = dört soru. Doğru sayısı kadar parça saat yönünde sırayla dolar; her parçanın ortasında ✓ ya da ✕.
@@ -237,16 +276,16 @@ function ring(k) {
 function sonuc(ok) {
   return `<div class="screen">
     <div class="bar"><span class="ib">${X}</span><span class="mid">Yıldızlarla yol bulan böcek</span><span style="width:40px"></span></div>
-    <div class="ring">${ring(ok ? 4 : 2)}<div class="c">${ok ? '<span class="n">212</span><span class="u">kelime / dakika</span>' : '<span class="n off">348</span><span class="u">kelime / dakika</span><span class="off-tag">sayılmadı</span>'}</div></div>
-    <div class="anl">${ok ? '<span class="ok">4 sorunun 4’ü doğru</span>' : '<span class="lo">4 sorunun 2’si doğru</span>'}</div>
-    <div class="verd"><span class="dot"></span><p><span class="nm">Nef</span>${ok ? 'Hızın sayıldı, çünkü metni anladın.' : 'Hız, en az 3 doğruyla sayılır. Bir dahakine biraz daha yavaş oku.'}</p></div>
+    <div class="ring">${ring(ok ? 4 : 2)}<div class="c">${ok ? '<span class="n">212</span><span class="u">kelime / dakika</span>' : '<span class="n off">348</span><span class="u">kelime / dakika</span>'}</div></div>
+    <div class="anl">${ok ? '<span class="ok">4 sorunun 4’ü doğru</span>' : '<span class="lo">4 sorunun 2’si doğru</span><span class="off">Hız sayılmadı</span>'}</div>
+    <div class="verd"><span class="dot"></span><p><span class="nm">Nef</span>${ok ? 'Hızın sayıldı: metni anladın.' : 'Hız, en az 3 doğruyla sayılır. Bir dahakine biraz daha yavaş oku.'}</p></div>
     <div class="rows">
-      <div class="row"><span class="k">Başlangıç</span><span class="v">${ok ? '3 okuma sayıldı, 2 okuma kaldı' : '2 okuma sayıldı, 3 okuma kaldı'}</span><span class="pips">${[0, 1, 2, 3, 4].map((i) => `<i class="${i < (ok ? 3 : 2) ? 'on' : ''}"></i>`).join('')}</span></div>
+      <div class="row"><span class="k">Başlangıç</span><span class="v">${ok ? '3/5 okuma sayıldı' : '2/5 okuma sayıldı'}</span><span class="pips">${[0, 1, 2, 3, 4].map((i) => `<i class="${i < (ok ? 3 : 2) ? 'on' : ''}"></i>`).join('')}</span></div>
       <div class="row"><span class="k">Bu metin bir çalışmadan</span><span class="v">Dacke ve ark. · Current Biology · 2013</span><span class="go">${GO}</span></div>
       <div class="row"><span class="k">Bana hatırlat</span><span class="v">Her gün bir okuma</span><span class="tg"></span></div>
     </div>
     <div class="spacer"></div>
-    <div class="dock"><div class="btn">Bitti</div></div>
+    <div class="dock scroll"><div class="btn">Bitti</div></div>
   </div>`
 }
 const V = { giris, metin, soru, sonuc: () => sonuc(true), sayilmadi: () => sonuc(false) }
