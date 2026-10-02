@@ -14,6 +14,9 @@ merkezinde takip edilecek. 5 saniye kuralı geçerli: "kişiler etkilenmeli".
 
 ## 0. Önce oku (sırayla, atlamadan)
 
+Tasarım dosyaları `claude/kolon-takip` dalında (taslak PR #11). Önce kendi dalına al:
+`git fetch origin claude/kolon-takip && git checkout origin/claude/kolon-takip -- docs/yol-haritasi/tasarim/kolon-takip`
+
 Tasarım klasörü: `docs/yol-haritasi/tasarim/kolon-takip/`
 1. `PLAN.md` tamamı. Özellikle §1 tur yapısı (ızgara, değişim ve dokunma, hız merdiveni), §2 günlere göre basamaklar,
    §3 ölçü ve kayıt, §4 Nef, §5 ekranlar, §6 kamera, **§7 bağlayıcı 9 madde ve kapının yeri**, §8 testler.
