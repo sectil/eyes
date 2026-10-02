@@ -194,12 +194,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ahtapotlar başka ahtapotlarla karşılaştığında yaptıkları atışlar nasıldı?",
+          "soru": "Başka bir ahtapotla karşılaşınca yapılan atışlar nasıldı?",
           "secenekler": [
             "Daha güçlüydü ve daha çok çamurla yapılıyordu",
             "Daha zayıftı ve daha çok yosunla yapılıyordu",
             "Hep kabukla ve çok yavaş yapılıyordu",
-            "Hiçbir şeye çarpmadan yavaşça suyun dibine düşüyordu"
+            "Hiçbir şeye çarpmadan dibe düşüyordu"
           ]
         },
         {

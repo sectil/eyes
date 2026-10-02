@@ -1584,3 +1584,9 @@ bankProblems temiz.
 - «Bu yüzden ilk bakışta duyamıyor gibi görünür. Yine de bu kurbağa seslerle haberleşir.» → «Bu yüzden bu kurbağa ilk bakışta sağır gibi görünür. Yine de seslerle haberleşir.» · İlk cümlede özne yoktu; özne başa alındı
 - «Demek ki orta kulağı olmayan bu minik kurbağalar, birbirleriyle yine de etkili biçimde iletişim kurabiliyor.» → «Demek ki bu minik kurbağalar, orta kulakları olmasa da birbirleriyle sesle etkili biçimde haberleşebiliyor.» · 'etkili biçimde iletişim kurmak' çeviri kalıbı; 'yine de' yeri
 - «Soru 5 çeldiricisi: Derideki tüyler üzerinden» → «Ayak parmakları üzerinden» · Kurbağanın tüyü yok; saçma çeldirici
+
+### oa023 · ekran sığma düzeltmesi (tur 2 sonrası)
+Bankadaki 720 soru, cevaplanmış hâlde 320 ve 390 ekranda denendi. Yalnız bu soru 390'da son seçeneği düğmenin arkasına
+itiyordu.
+- «Ahtapotlar başka ahtapotlarla karşılaştığında yaptıkları atışlar nasıldı?» → «Başka bir ahtapotla karşılaşınca yapılan atışlar nasıldı?» · Soru beş satıra kırılıyordu; anlam aynı.
+- «Hiçbir şeye çarpmadan yavaşça suyun dibine düşüyordu» → «Hiçbir şeye çarpmadan dibe düşüyordu» · Çeldirici kısaldı, yine metne göre yanlış.

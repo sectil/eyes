@@ -91,18 +91,26 @@ function Iris({ rings = RINGS, id = 'f', className = '' }) {
 // Soru halkası: cevaplanan dolu, şu anki soluk, bekleyen gri; ortada "2/4"
 function QRing({ done, cur }) {
   const r = 46, c = 2 * Math.PI * r, gap = 16, seg = c / 4 - gap
+  const segOf = (i) => ({ on: i <= cur, dim: i === cur && i >= done })
   return (
+    <>
+    {/* Kısa ekranda (320×568) halka yerine tek satır: uzun soru ve seçenekler düğmenin arkasına kalmasın (kapı 2026-10-02) */}
+    <span className="qmini" aria-hidden="true">
+      <b>Soru {cur + 1}/4</b>
+      <span className="segs">{[0, 1, 2, 3].map((i) => <i key={i} className={`${segOf(i).on ? 'on' : ''}${segOf(i).dim ? ' dim' : ''}`} />)}</span>
+    </span>
     <svg className="qr" viewBox="0 0 120 120" aria-hidden="true">
       {[0, 1, 2, 3].map((i) => (
         <circle key={i} cx="60" cy="60" r={r} fill="none" stroke={i <= cur ? 'var(--accent)' : 'var(--oa-track)'} strokeOpacity={i === cur && i >= done ? 0.42 : 1} strokeWidth="10" strokeLinecap="round"
           strokeDasharray={`${seg.toFixed(1)} ${(c - seg).toFixed(1)}`} strokeDashoffset={(-(i * c / 4) - gap / 2).toFixed(1)} transform="rotate(-90 60 60)" />
       ))}
       {/* "Soru" yazısı: "2/4" puan sanılmasın (kapı 2026-10-02); iki parça aynı taban çizgisinde */}
-      <text x="60" y="47" textAnchor="middle" fontFamily="var(--font-body)" fontWeight="600" fontSize="13" fill="var(--ink-3)">Soru</text>
+      <text className="lbl" x="60" y="47" textAnchor="middle" fontFamily="var(--font-body)" fontWeight="600" fontSize="13" fill="var(--ink-3)">Soru</text>
       <text x="60" y="78" textAnchor="middle" fontFamily="var(--font-display)" fontWeight="650" fill="var(--ink)">
         <tspan fontSize="30">{cur + 1}</tspan><tspan fontSize="20" fill="var(--ink-3)" dx="1">/4</tspan>
       </text>
     </svg>
+    </>
   )
 }
 
