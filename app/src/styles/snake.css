@@ -198,7 +198,7 @@
 /* Canlı tahta önizlemesi: göz modunda dört kapıyla (oyundaki düzenin aynısı) */
 .snake-hero-art { position: relative; display: flex; justify-content: center; padding: 6px 0; }
 .snake-hero-art.is-eyes { padding: 30px 34px; }
-.snake-hero-art .snake-art { width: 100%; max-width: 300px; height: auto; }
+.snake-hero-art .snake-art { width: 100%; max-width: 340px; height: auto; filter: drop-shadow(0 10px 24px color-mix(in srgb, var(--accent) 22%, transparent)); }
 .snake-hero-gate {
   position: absolute; width: 28px; height: 28px; border-radius: 50%;
   display: inline-flex; align-items: center; justify-content: center;
@@ -285,9 +285,9 @@
 .snake-arena { display: flex; flex-direction: column; align-items: center; }
 /* Kapılar tahtanın DIŞINDA: tahtanın içine bakmak komut değildir (lib/snakeGaze.js) */
 .snake-arena.has-gates {
-  display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; grid-template-rows: 44px auto 44px;
+  display: grid; grid-template-columns: 42px minmax(0, 1fr) 42px; grid-template-rows: 48px auto 48px;
   grid-template-areas: '. up .' 'left board right' '. down .'; align-items: center; justify-items: center;
-  margin: 0 -8px;
+  margin: 0 -14px;
 }
 .snake-arena.has-gates .snake-board-wrap {
   grid-area: board;
@@ -314,17 +314,17 @@
 .snake-gate.left { grid-area: left; }
 .snake-gate.right { grid-area: right; }
 .snake-gate.is-target {
-  background: var(--accent-grad); color: var(--surface);
+  background: var(--accent-grad); color: var(--accent-ink);
   box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 22%, transparent), var(--shadow-lg);
   animation: snake-gate-pulse 1.1s ease-in-out infinite;
 }
-.snake-gate.is-fired { background: var(--ok); color: var(--surface); }
+.snake-gate.is-fired { background: var(--ok); color: var(--accent-ink); }
 @keyframes snake-gate-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.14); } }
 
 /* Ayar ve kontrol katmanı: tahtanın üstünde ama hafif; kapılar dışarıda görünür kalır */
 .snake-guide { justify-content: center; gap: 10px; }
 .snake-guide.is-clear { -webkit-backdrop-filter: none; backdrop-filter: none; }
-.snake-guide.is-clear::before { opacity: 0.9; }
+.snake-guide.is-clear::before { opacity: 0; }
 .snake-guide h2 { font-family: var(--font-display); font-size: 1.45rem; font-weight: 750; max-width: 16ch; }
 .snake-steps { display: flex; gap: 6px; }
 .snake-steps i { width: 22px; height: 5px; border-radius: 3px; background: var(--surface-3); }
@@ -346,7 +346,9 @@
 
 .snake-arena[hidden], .snake-scorebar[hidden] { display: none !important; }
 /* Göz modunda tahta boş kalan yüksekliğin ortasında */
-.snake-game.is-eyes .snake-arena { margin-top: auto; margin-bottom: auto; }
+.snake-game.is-eyes .snake-arena { margin-bottom: auto; }
+/* Göz modunda skor, durum ve tahta tek grup olarak dikeyde ortada */
+.snake-game.is-eyes .snake-scorebar, .snake-game.is-eyes .snake-guide-head { margin-top: auto; }
 /* Sonuç: tahtanın yerinde tam kart (küçük tahtaya sığmayan katman yerine) */
 .snake-over-card {
   align-items: center; text-align: center; gap: 8px; margin-top: auto; margin-bottom: auto;
@@ -357,3 +359,53 @@
 .snake-over-card .snake-overlay-btn { width: 100%; max-width: 320px; }
 .snake-over-card .link-btn { min-height: 44px; font-size: 0.9rem; }
 .snake-over-card .snake-final strong { font-size: 4.2rem; }
+
+/* ---------- Tur 2: derinlik, ayar/kontrol kimliği, sonuç amblemi ---------- */
+.snake-game.is-eyes .snake-board-wrap {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--ink-3));
+  background: radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--accent) 9%, var(--surface-2)), var(--surface-2) 60%);
+  box-shadow: var(--shadow-lg), 0 0 0 6px color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.snake-pointer {
+  display: inline-flex; align-items: center; justify-content: center; width: 76px; height: 76px; border-radius: 50%;
+  color: var(--accent); background: var(--accent-soft);
+  animation: snake-pointer 1.1s ease-in-out infinite;
+}
+@keyframes snake-pointer { 0%, 100% { scale: 1; } 50% { scale: 1.08; } }
+.snake-checks { display: flex; gap: 8px; margin: 4px 0; }
+.snake-checks span {
+  width: 42px; height: 42px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface-2); color: var(--ink-3); transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.snake-checks span.now { background: var(--accent-soft); color: var(--accent); transform: scale(1.12); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent); }
+.snake-checks span.done { background: var(--ok); color: var(--accent-ink); }
+.snake-checks span { width: 46px; height: 46px; }
+.snake-aim { width: 34px; height: 34px; }
+.snake-guide h2 { font-size: 1.6rem; }
+.snake-guide-head { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.snake-guide-head h2 { font-family: var(--font-display); font-size: 1.7rem; font-weight: 750; line-height: 1.15; }
+@media (max-height: 700px) { .snake-guide-head h2 { font-size: 1.35rem; } }
+
+.snake-over-card { position: relative; overflow: hidden; }
+.snake-emblem {
+  width: 84px; height: 84px; border-radius: 26px; display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent-soft); color: var(--accent); margin-bottom: 4px;
+  animation: snake-record 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+}
+.snake-emblem .snake-art { width: 68px; height: auto; }
+.snake-over-card.is-record .snake-emblem { background: var(--accent-grad); color: var(--accent-ink); box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 35%, transparent); }
+.snake-confetti { position: absolute; inset: 0; pointer-events: none; }
+.snake-confetti i {
+  position: absolute; top: -10px; left: calc(6% + var(--i) * 6.5%); width: 8px; height: 14px; border-radius: 2px;
+  background: var(--accent-graphic); opacity: 0;
+  animation: snake-confetti 1.6s cubic-bezier(0.2, 0.7, 0.4, 1) calc(var(--i) * 60ms) both;
+}
+.snake-confetti i:nth-child(3n) { background: var(--danger); }
+.snake-confetti i:nth-child(3n + 1) { background: var(--ok); }
+@keyframes snake-confetti {
+  0% { opacity: 1; transform: translateY(0) rotate(0); }
+  100% { opacity: 0; transform: translateY(260px) rotate(320deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .snake-pointer, .snake-confetti i, .snake-emblem { animation: none; }
+}

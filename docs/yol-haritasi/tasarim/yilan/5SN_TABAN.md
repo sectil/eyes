@@ -16,3 +16,17 @@ Ortak bulgular (en az 3 değerlendiricide):
 - Oyun: tahta soluk, yılan ve yem küçük ve cansız; alttaki "Bakışla kontrol" kutusu yer kaplıyor; alt üçte bir boş (5/5).
 - Sonuç: duygusuz form; skor iki kez yazıyor; arkadaki bulanık oyun kalıntıları hata gibi; rekora ne kaldığı yok (5/5).
 - Dört ekranda da alt kısım boş. Güçlü yanlar: yazı tipi, iki tema tutarlı, 320'de düzen bozulmuyor.
+
+## Tur 1 · değişiklikten sonra (2026-10-02; ekranlar: giriş, ayar, kontrol, oyun, sonuç)
+
+| Ekran | Sonuç |
+|---|---|
+| 1 giriş | 0/5 |
+| 2 ayar | 0/5 |
+| 3 kontrol | 0/5 |
+| 4 oyun | 0/5 |
+| 5 sonuç | 0/5 |
+
+Ortak bulgular: giriş ayar formu gibi, 320'de seçenekler düğmenin arkasında kesik; ayar ve kontrolde üstte gereksiz skor
+satırı, yazının arkasında silik yılan/yem izi, kontrol ayardan ayırt edilmiyor; oyunda tahta boş ve renksiz, yılan küçük;
+sonuç temiz ama duygusuz. Güçlü yanlar: parlayan kapı talimatı net (3/5), kapılı düzen anlaşılır, sonuçta tek güçlü düğme.

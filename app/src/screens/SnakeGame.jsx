@@ -204,7 +204,7 @@ function strokeBody(ctx, pts, cell, g) {
 }
 
 function renderScene(ctx, size, now, sc) {
-  const { g, prev, t, c, fx, crashAt, foodBorn } = sc
+  const { g, prev, t, c, fx, crashAt, foodBorn, empty } = sc
   const cell = size / g.cols
   ctx.clearRect(0, 0, size, size)
 
@@ -221,6 +221,9 @@ function renderScene(ctx, size, now, sc) {
     }
   }
   ctx.fill()
+
+  // Ayar ve kontrol sırasında tahta boş (yazının arkasından yılan/yem izi görünmesin)
+  if (empty) return
 
   // Yem: doğuşta büyür, sonra hafifçe nabız atar
   if (g.food) {
@@ -244,9 +247,14 @@ function renderScene(ctx, size, now, sc) {
   const pts = bodyPoints(prev, g.snake, t, g)
   ctx.lineCap = 'round'
   ctx.lineJoin = 'round'
+  // Yumuşak ışıma: yılan tahtanın üstünde parlasın
+  ctx.save()
+  ctx.shadowColor = c.body
+  ctx.shadowBlur = cell * 0.6
   ctx.strokeStyle = c.body
-  ctx.lineWidth = cell * 0.8
+  ctx.lineWidth = cell * 0.82
   strokeBody(ctx, pts, cell, g)
+  ctx.restore()
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.16)' // boru parlaklığı
   ctx.lineWidth = cell * 0.2
   strokeBody(ctx, pts, cell, g)
@@ -847,6 +855,7 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
       fx: fxRef.current,
       crashAt: crashAtRef.current,
       foodBorn: foodBornRef.current,
+      empty: phaseRef.current === 'setup' || phaseRef.current === 'check',
     })
   }
 
@@ -1171,6 +1180,7 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
   }
 
   let overlay = null
+  let guideHead = null // ayar ve kontrolde talimat: tahtanın üstünde (skor satırının yerinde)
   if (phase === 'setup') {
     const n = SETUP_TARGETS.length
     const t = setupTarget
@@ -1185,15 +1195,24 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
         <button type="button" className="link-btn" onClick={toTouch}>Dokunarak oyna</button>
       </div>
     ) : (
-      <div className="snake-overlay snake-guide is-clear" role="status" aria-label="Yılan ayarı">
-        <span className="eyebrow">{setupUi.redo ? 'Ayarı yeniliyorum' : 'Yılan ayarı'} · {Math.min(setupUi.i + 1, n)}/{n}</span>
-        <h2>{t === 'center' || t === 'center2' ? 'Ortadaki noktaya bak' : `${DIR_GATE[t][0].toUpperCase()}${DIR_GATE[t].slice(1)} kapıya bak`}</h2>
-        {(t === 'center' || t === 'center2') && <span className="snake-aim" style={{ '--p': setupUi.progress }} aria-hidden="true" />}
-        <div className="snake-steps" aria-hidden="true">
-          {SETUP_TARGETS.map((d, i) => <i key={d} className={i < setupUi.i ? 'done' : i === setupUi.i ? 'now' : ''} />)}
-        </div>
+      <div className="snake-overlay snake-guide is-clear" aria-hidden="true">
+        {t === 'center' || t === 'center2' ? (
+          <span className="snake-aim" style={{ '--p': setupUi.progress }} />
+        ) : (
+          <span className="snake-pointer" style={{ transform: `rotate(${DIR_ANGLE[t]}deg)` }}><ArrowUp size={44} strokeWidth={2.6} /></span>
+        )}
       </div>
     )
+    if (!setupUi.failed)
+      guideHead = (
+        <div className="snake-guide-head" role="status" aria-live="polite">
+          <span className="eyebrow">{setupUi.redo ? 'Ayarı yeniliyorum' : 'Yılan ayarı'} · {Math.min(setupUi.i + 1, n)}/{n}</span>
+          <h2>{t === 'center' || t === 'center2' ? 'Ortadaki noktaya bak' : `${DIR_GATE[t][0].toUpperCase()}${DIR_GATE[t].slice(1)} kapıya bak`}</h2>
+          <div className="snake-steps" aria-hidden="true">
+            {SETUP_TARGETS.map((d, i) => <i key={d} className={i < setupUi.i ? 'done' : i === setupUi.i ? 'now' : ''} />)}
+          </div>
+        </div>
+      )
   } else if (phase === 'check') {
     const n = CHECK_DIRS.length
     const t = checkTarget
@@ -1211,14 +1230,22 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
         </div>
       </div>
     ) : (
-      <div className="snake-overlay snake-guide is-clear" role="status" aria-label="Bakış kontrolü">
-        <span className="eyebrow">Kontrol · {Math.min(checkUi.i + 1, n)}/{n}</span>
-        <h2>{t ? `${DIR_GATE[t][0].toUpperCase()}${DIR_GATE[t].slice(1)} kapıya bak` : 'Hazırsın'}</h2>
-        <div className="snake-steps" aria-hidden="true">
-          {CHECK_DIRS.map((d, i) => <i key={d} className={i < checkUi.i ? 'done' : i === checkUi.i ? 'now' : ''} />)}
+      <div className="snake-overlay snake-guide is-clear" aria-hidden="true">
+        <div className="snake-checks">
+          {CHECK_DIRS.map((d, i) => {
+            const Icon = EDGE_ICONS[d]
+            return <span key={d} className={i < checkUi.i ? 'done' : i === checkUi.i ? 'now' : ''}><Icon size={22} strokeWidth={3} /></span>
+          })}
         </div>
       </div>
     )
+    if (!checkUi.failed)
+      guideHead = (
+        <div className="snake-guide-head" role="status" aria-live="polite">
+          <span className="eyebrow">Kontrol · {Math.min(checkUi.i + 1, n)}/{n}</span>
+          <h2>{t ? `${DIR_GATE[t][0].toUpperCase()}${DIR_GATE[t].slice(1)} kapıya bak` : 'Hazırsın'}</h2>
+        </div>
+      )
   } else if (phase === 'countdown') {
     overlay = (
       <div className="snake-overlay is-light" role="status">
@@ -1259,7 +1286,9 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
     const gap = result.prevBest - result.score
     const isRecord = result.record && result.score > 0
     overlay = (
-      <section className="card snake-over-card" role="dialog" aria-modal="false" aria-labelledby="snake-over-title">
+      <section className={`card snake-over-card ${isRecord ? 'is-record' : ''}`} role="dialog" aria-modal="false" aria-labelledby="snake-over-title">
+        {isRecord && <span className="snake-confetti" aria-hidden="true">{Array.from({ length: 14 }, (_, i) => <i key={i} style={{ '--i': i }} />)}</span>}
+        <span className="snake-emblem" aria-hidden="true">{isRecord ? <Crown size={30} strokeWidth={2.4} /> : <SnakeArt />}</span>
         <h2 id="snake-over-title">{result.won ? 'Kazandın!' : 'Oyun bitti'}</h2>
         <p className="snake-overlay-sub">{reason}</p>
         <div className={`snake-final ${isRecord ? 'is-record' : ''}`}>
@@ -1347,7 +1376,7 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
         </div>
       </div>
 
-      <div className="snake-scorebar" hidden={over && Boolean(result)}>
+      <div className="snake-scorebar" hidden={(over && Boolean(result)) || phase === 'setup' || phase === 'check'}>
         <div className="snake-score">
           <span className="snake-score-label">Skor</span>
           <span className="snake-score-value">{hud.score}</span>
@@ -1366,7 +1395,8 @@ export default function SnakeGame({ trueDepth = false, onFinish, onExit }) {
         </div>
       </div>
 
-      {eyes && (
+      {guideHead}
+      {eyes && !guideHead && (
         <p className={`snake-status ${tone}`} aria-live="polite">{status ?? ' '}</p>
       )}
 
