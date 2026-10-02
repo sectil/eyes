@@ -14,7 +14,7 @@ emoji yok.
 | M2 | Görevin / {görev} — ör. "Mavi arabaları say" | T (görev adları bugünkü onaylı metin) |
 | M3 | Gözün {hedef çoğul, -da/-de} olsun. Sonunda birkaç sorum var. — ör. "Gözün mavi arabalarda olsun." | T |
 | M4 | 01 Caddeden geç · 40 sn / 02 Ne değişti? · 4 sahne / 03 Gözünden kaçan · 2 soru | T |
-| M5 | Bu bir fark etme alıştırması. Gerçek hayatta daha çok fark ettirdiği gösterilmedi. | onaylı (bugünkü metin, aynen) |
+| M5 | Bu bir fark etme alıştırması. Günlük hayatta daha çok fark etmeni sağladığına dair henüz kanıt yok. | S (sahip onayı 2026-10-02; eski "Gerçek hayatta daha çok fark ettirdiği gösterilmedi." kapıda bozuk bulundu; kapi/metin-tur8 5/5) |
 | M6 | Yürümeye başla | onaylı (bugünkü) |
 
 ## Ne değişti? (D)
