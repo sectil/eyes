@@ -74,5 +74,17 @@ Kaynaklar: `arastirma/KAYNAKLAR.md`.
   - Kanıt.
   - Sözleşme testindeki 21 onaylı ad listesine yeni ad eklenir.
 
-## 7. Sahibe sorular
-Bkz. sohbet; cevaplar gelince buraya yazılır.
+## 7. Sahibe sorular ve cevaplar (2026-10-02)
+
+Sahibin cevabı, kelimesi kelimesine: "1 evet 2 önerin 3 bilmiyorum etkilesin kullanıcyı 5sn kuralı 4 olabilir 5
+olabilir... 5 sn ve mükemmlik kuralı..."
+
+| # | Soru | Karar |
+|---|---|---|
+| 1 | Her metinden sonra 4 soru mu? | Evet, 4 soru |
+| 2 | Okurken göz takibi | Önerim: ilk sürümde kamera yok. Kamera açılmaz, görüntü alınmaz |
+| 3 | Sorular gelince metin kalkar mı? | Sahip karar vermedi: "kullanıcıyı etkilesin, 5 sn kuralı". Benim kararım: metin kalkar. Ölçüm dürüstlüğü için gerekli; yoksa sorular aramaya döner ve anlama değil bulma ölçülür (miyata2012 yöntemi: okuduktan hemen sonra soru). Geçiş 5 saniye kapısından geçer |
+| 4 | İlk sürüm 120 metin | Olabilir: 120 |
+| 5 | Dört seçenekli soru, tuzaksız | Olabilir: 4 seçenek, "hangisi yanlıştır" yok |
+
+Hepsine bağlı kural: 5 saniye ve mükemmellik.
