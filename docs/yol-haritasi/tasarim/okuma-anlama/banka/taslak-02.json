@@ -1,0 +1,756 @@
+{
+  "surum": "taslak-02",
+  "not": "Her soruda doğru seçenek ilk sıradadır; uygulama şıkları her gösterimde karıştırır. 'ana' sorusu her turda sorulur, kalan 3 soru 5 ayrıntı sorusundan seçilir.",
+  "metinler": [
+    {
+      "id": "oa011",
+      "baslik": "Bir ip, bir ödül",
+      "etiket": "bocek",
+      "kaynak": "alem2016",
+      "pmid": "27701411",
+      "doi": "10.1371/journal.pbio.1002564",
+      "yazar": "Alem ve ark.",
+      "dergi": "PLoS Biology",
+      "yil": 2016,
+      "metin": "Bir hayvan topluluğunda yeni bir beceri nasıl yayılır? Bir ekip bu soruyu bombus arılarıyla sınadı. Arıların ulaşamayacağı yere bir ödül kondu; ödüle ancak bir ipi çekerek varılabiliyordu. Bu, arıların doğada yapmadığı türden bir iş olarak seçildi. Arıların yalnız küçük bir kısmı bu işi kendiliğinden çözdü. Adım adım eğitilince ise çoğu ipi çekmeyi öğrendi. Hiç eğitilmemiş arılar da eğitilmiş bir arıyı uzaktan izleyerek beceriyi kaptı. Öğrenme ani bir kavrayışla değil, basit bağlantılar kurup deneyip yanılarak oldu. Bir kovanda beceri, tek bir bilgili arıdan yiyecek toplayan arıların çoğuna hızla yayıldı. Öğrenenler sonra yeni arılara örnek oldu. Böylece beceri, onu ilk bilen arılardan daha uzun yaşayabilirdi; bunun için üstün bir zekâ gerekmiyordu.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bombus arılarının ip çekmeyi öğrenip birbirine aktarmasını",
+            "Bombus arılarının çiçek renklerini nasıl seçtiğini",
+            "Arıların kovanlarını kışın birlikte titreyerek nasıl ısıttığını",
+            "Bombus arılarının iplerden kendilerine yuva örmesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ödüle nasıl ulaşılabiliyordu?",
+          "secenekler": [
+            "Bir ipi çekerek",
+            "Bir kapağı iterek",
+            "Bir tüpün içine girerek",
+            "Bir düğmeye basarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Arıların ne kadarı işi kendiliğinden çözdü?",
+          "secenekler": [
+            "Yalnız küçük bir kısmı",
+            "Neredeyse hepsi",
+            "Yalnız en yaşlı arılar",
+            "Hiçbiri"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Eğitilmemiş arılar beceriyi nasıl kaptı?",
+          "secenekler": [
+            "Eğitilmiş bir arıyı uzaktan izleyerek",
+            "Kovandaki bir kokunun izini sürerek giderek",
+            "Araştırmacıların elinden beslenerek",
+            "Gece kovanda uyurken"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Öğrenme nasıl gerçekleşti?",
+          "secenekler": [
+            "Basit bağlantılar kurup deneyip yanılarak",
+            "Ani bir kavrayışla, bir anda",
+            "Yalnız doğuştan gelen bir içgüdüyle, hiç denemeden",
+            "Kraliçe arının yol göstermesiyle"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kovanda beceri nasıl yayıldı?",
+          "secenekler": [
+            "Tek bir bilgili arıdan toplayıcıların çoğuna hızla",
+            "Yalnız kraliçe arıya, çok yavaşça",
+            "Hiç yayılmadı, tek arıda kaldı",
+            "Yalnız yavru arılara, yıllar içinde ve çok yavaş biçimde"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa012",
+      "baslik": "Kaç kez seslenmeli?",
+      "etiket": "kus",
+      "kaynak": "liao2024",
+      "pmid": "38781375",
+      "doi": "10.1126/science.adl0984",
+      "yazar": "Liao ve ark.",
+      "dergi": "Science",
+      "yil": 2024,
+      "metin": "Belli sayıda ses çıkarmak, örneğin üç kez seslenmek, hem sayı duygusu hem de sesi denetlemeyi ister. Bu becerinin insan dışındaki hayvanlarda olup olmadığı bilinmiyordu. Bir ekip kargalara, her biri bir sayıyla eşleştirilmiş işaretler gösterdi. İşaretlerin kendisi sayıya hiç benzemiyordu. Kargalar her işarete göre bir ile dört arasında ses çıkarmayı esnek bir biçimde başardı. Araştırmacılar sonra bu seslerin yapısını, yani nasıl tınladığını tek tek inceledi. Dizinin ilk sesi, arkasından kaç ses geleceğini önceden ele veriyordu. Bu, kargaların seslenmeye başlamadan önce bir plan yaptığını gösteriyor. Her sesin yapısı, dizideki sırasını da yansıtıyordu. Böylece bir karga sayarken yanıldığında bu hata çıkardığı seslerin yapısından okunabildi.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Kargaların istenen sayıda ses çıkarabilmesini",
+            "Kargaların insan sözcüklerini taklit etmesini",
+            "Kargaların yuvalarını sayılarla işaretlemesini",
+            "Kargaların gece neden daha çok öttüğünü"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kargalar kaç ses çıkardı?",
+          "secenekler": [
+            "Bir ile dört arası",
+            "Altı ile sekiz arası",
+            "On ile yirmi arası",
+            "Otuzdan fazla"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Dizinin ilk sesi neyi ele veriyordu?",
+          "secenekler": [
+            "Arkasından kaç ses geleceğini",
+            "Karganın kaç yaşında olduğunu",
+            "İşaretin hangi renkte olduğunu",
+            "Karganın hangi yuvadan geldiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İlk sesin bu özelliği neyi gösteriyor?",
+          "secenekler": [
+            "Seslenmeden önce plan yaptıklarını",
+            "Tamamen rastgele seslendiklerini",
+            "Başka kargaları taklit ettiklerini",
+            "Yalnız acıkınca seslendiklerini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Her sesin yapısı neyi yansıtıyordu?",
+          "secenekler": [
+            "Dizideki sırasını",
+            "Karganın boyunu",
+            "Havanın sıcaklığını",
+            "Günün saatini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bir karga sayarken yanıldığında ne oldu?",
+          "secenekler": [
+            "Hata seslerden okunabildi",
+            "Karga hemen baştan başladı",
+            "Araştırmacılar deneyi durdurdu",
+            "Öteki kargalar onu uyardı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa013",
+      "baslik": "Çiçek neyi duyar?",
+      "etiket": "bitki",
+      "kaynak": "veits2019",
+      "pmid": "31286633",
+      "doi": "10.1111/ele.13331",
+      "yazar": "Veits ve ark.",
+      "dergi": "Ecology Letters",
+      "yil": 2019,
+      "metin": "Bitkiler çevrelerindeki sesleri algılayıp bunlara hızla karşılık verebilir mi? Bir ekip bu soruyu bir çiçek türüyle sınadı. Çiçeklere uçan bir arının kaydedilmiş sesi dinletildi. Bazılarına da arı sesine benzer perdede yapay sesler çalındı. Bu seslerden sonra çiçekler yalnızca 3 dakika içinde daha tatlı bir nektar üretti. Araştırmacılar çiçeklerin bu seslerle birlikte mekanik olarak titreştiğini de gördü. Yani çiçeğin kendisi bir kulak gibi iş görüyor olabilir. Daha tiz sesler ise ne titreşime ne de tatlanmaya yol açtı. Daha tatlı nektar, tozlaşma şansını artırabilir. Bu, bitkilerin arı sesine hızla karşılık verdiğini gösteren ilk kayıt oldu. Sonuçlar, bitkilerin insanların çıkardığı başka seslerden de etkilenebileceğini düşündürüyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Çiçeklerin arı sesine nektarlarını tatlandırarak karşılık vermesini",
+            "Arıların çiçekleri sesle nasıl bulduğunu",
+            "Çiçeklerin gece neden kapandığını",
+            "Müziğin bitkileri nasıl hızla büyüttüğünü ve bol bol çiçeklendirdiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Çiçeklere hangi ses dinletildi?",
+          "secenekler": [
+            "Uçan bir arının kaydedilmiş sesi",
+            "Bir kuşun sabah ötüşü",
+            "Çatıya yağan yağmurun sesi",
+            "Yakında yüksek sesle konuşan insanların sesi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Nektar ne kadar sürede tatlandı?",
+          "secenekler": [
+            "3 dakika içinde",
+            "Bir gün sonra",
+            "Bir hafta sonra",
+            "Bir ay sonra"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Çiçekler seslerle birlikte ne yaptı?",
+          "secenekler": [
+            "Titreşti",
+            "Kapandı",
+            "Renk değiştirdi",
+            "Yere eğildi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Daha tiz sesler ne yaptı?",
+          "secenekler": [
+            "Ne titreşime ne tatlanmaya yol açtı",
+            "Nektarı daha da çok tatlandırdı",
+            "Çiçekleri birkaç dakikada soldurdu",
+            "Çiçekleri her zamankinden çok daha güçlü titretti"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Daha tatlı nektar neyi artırabilir?",
+          "secenekler": [
+            "Tozlaşma şansını",
+            "Çiçeğin boyunu",
+            "Yaprak sayısını",
+            "Kökün uzunluğunu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa014",
+      "baslik": "Tek hücrenin seçimleri",
+      "etiket": "mikro",
+      "kaynak": "dexter2019",
+      "pmid": "31813604",
+      "doi": "10.1016/j.cub.2019.10.059",
+      "yazar": "Dexter ve ark.",
+      "dergi": "Current Biology",
+      "yil": 2019,
+      "metin": "Karar vermek çoğu zaman sinir sistemi olan hayvanlara özgü sanılır. Oysa tek hücreli canlılar da şaşırtıcı davranışlar gösterebilir. 1906'da bir bilim insanı, bir yere tutunarak yaşayan tek hücreli bir canlıda ilginç bir sıra görmüştü. Canlı tekrar tekrar uyarılınca tepkisini adım adım değiştiriyordu. Bu gözlem sonra tekrarlanamadığı söylenerek bir kenara itildi. Ama o denemelerde yüzerek yaşayan başka bir tür kullanılmıştı. Yeni bir ekip doğru türü laboratuvarda üretti ve mikroskopla filme aldı. Bireyler arasında büyük farklar olsa da eski gözlemdeki sıra yeniden görüldü. Canlı önce eğildi, sonra kirpiklerinin hareketini değiştirdi, ardından büzüldü ya da tutunduğu yerden koptu. Büzülmek ile kopmak arasındaki seçim, yazı tura atmaya benziyordu.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Tek hücreli bir canlının uyarılara sıralı tepki verdiğinin doğrulanmasını",
+            "Tek hücreli canlıların nasıl çoğaldığını",
+            "Mikroskobun 1906'da nasıl icat edildiğini",
+            "Tek hücreli canlıların ışığa doğru nasıl yüzdüğünü ve sonra nasıl beslendiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İlk gözlem hangi yılda yapıldı?",
+          "secenekler": [
+            "1906",
+            "1856",
+            "1956",
+            "2006"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Eski gözlem neden bir kenara itildi?",
+          "secenekler": [
+            "Tekrarlanamadığı söylendiği için",
+            "Fotoğrafı çekilmediği için",
+            "O canlının soyu tükendiği için",
+            "Bilim insanı yazmayı bıraktığı için"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Tekrarlama denemelerinde ne farklıydı?",
+          "secenekler": [
+            "Yüzerek yaşayan başka bir tür kullanılmıştı",
+            "Mikroskop bozuk olduğu için hiç görüntü alınamamıştı",
+            "Su çok soğuk tutulmuştu",
+            "Canlılar günlerce aç bırakılmıştı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Canlı ilk olarak ne yaptı?",
+          "secenekler": [
+            "Eğildi",
+            "Koptu",
+            "İkiye bölündü",
+            "Renk değiştirdi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Büzülmek ile kopmak arasındaki seçim neye benziyordu?",
+          "secenekler": [
+            "Yazı tura atmaya",
+            "Bir merdiveni çıkmaya",
+            "Bir saat gibi düzenli işlemeye",
+            "Bir şarkıyı tekrarlamaya"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa015",
+      "baslik": "Çölde yol ölçmek",
+      "etiket": "bocek",
+      "kaynak": "wittlinger2006",
+      "pmid": "16809544",
+      "doi": "10.1126/science.1126912",
+      "yazar": "Wittlinger ve ark.",
+      "dergi": "Science",
+      "yil": 2006,
+      "metin": "Çöl karıncaları geniş çöllerde yollarını, gittikleri yönü ve aldıkları yolu sürekli birleştirerek bulur. Yönü gökyüzünü bir pusula gibi kullanarak izledikleri biliniyordu. Ama ne kadar yol aldıklarını nasıl ölçtükleri hâlâ bir bilmeceydi. Bir ekip, karıncaların yürürken adımlarını sayıyor olabileceğini düşündü. Bunu sınamak için serbestçe yürüyen bazı karıncaların bacaklarını uzattılar, bazılarınınkini kısalttılar. Böylece adımlarının boyu değişmiş oldu. Uzun bacaklı karıncalar daha büyük, kısa bacaklılar daha küçük adımlar attı. Uzun bacaklı karıncalar gittikleri yolu olduğundan uzun sandı. Kısa bacaklılar ise yolu olduğundan kısa sandı. Bu sonuç, karıncaların mesafeyi bir tür adım sayacıyla, yani attıkları adımları toplayarak ölçtüğü fikrini destekliyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Çöl karıncalarının mesafeyi adımlarıyla ölçmesini",
+            "Çöl karıncalarının sıcaktan nasıl korunduğunu",
+            "Karıncaların yuvalarını nasıl kazdığını",
+            "Çöl karıncalarının yuvaya dönerken kokuyla iz sürmesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Karıncalar yönü nasıl izler?",
+          "secenekler": [
+            "Gökyüzünü pusula gibi kullanarak",
+            "Rüzgârın yönüne bakarak",
+            "Kum tepelerinin biçimini ezberleyerek",
+            "Yerdeki kokuları izleyerek"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Çalışmadan önce bilinmeyen neydi?",
+          "secenekler": [
+            "Aldıkları yolu nasıl ölçtükleri",
+            "Yönü nasıl buldukları",
+            "Neyle beslendikleri",
+            "Bir yuvada kaç karınca yaşadığı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Uzun bacaklı karıncalar nasıl adımlar attı?",
+          "secenekler": [
+            "Daha büyük adımlar",
+            "Daha küçük adımlar",
+            "Geri geri adımlar",
+            "Yana doğru adımlar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Uzun bacaklı karıncalar yolu nasıl sandı?",
+          "secenekler": [
+            "Olduğundan uzun",
+            "Olduğundan kısa",
+            "Tam olduğu gibi",
+            "Hiç tahmin edemedi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kısa bacaklı karıncalar yolu nasıl sandı?",
+          "secenekler": [
+            "Olduğundan kısa",
+            "Olduğundan uzun",
+            "Tam olduğu gibi",
+            "Hiç tahmin edemedi"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa016",
+      "baslik": "Sidney'in yeni alışkanlığı",
+      "etiket": "kus",
+      "kaynak": "klump2021",
+      "pmid": "34437121",
+      "doi": "10.1126/science.abe7808",
+      "yazar": "Klump ve ark.",
+      "dergi": "Science",
+      "yil": 2021,
+      "metin": "Şehirde yaşayan hayvanlar, insanların sunduğu yeni fırsatlara nasıl uyum sağlar? Avustralya'nın Sidney kentinde yabani sarı tepeli kakadular, evlerin çöp kutularını açmayı öğrendi. Bir ekip, bu davranışın nasıl yayıldığını anlamak için halkın gönderdiği gözlem raporlarını inceledi. Çöp kutusu açma işi önce yalnız 3 semtte görülüyordu. Zamanla bu iş 44 semte yayıldı. Kuşlar bu beceriyi birbirlerinden öğrenmişti. Araştırmacılar ayrıca 160 gözlemi yakından inceledi. Kuşların kendine özgü açma biçimleri vardı ve semtler arasında da farklar görüldü. Bu, papağanlarda yiyecek bulmaya dayanan bir kültür olduğunu gösteriyor. Yeni bir buluşun yayılıp yerden yere farklılaşması baştan sona izlenmiş oldu. Kültür, hayvanların insanın değiştirdiği çevreye uymasına yardım edebilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Kakaduların çöp kutusu açmayı öğrenip yaymasını",
+            "Kakaduların şehirden kaçıp ormana dönmesini",
+            "Papağanların insan sesini nasıl taklit ettiğini",
+            "Sidney'de çöplerin nasıl toplandığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Davranış ilk başta kaç semtte görülüyordu?",
+          "secenekler": [
+            "3",
+            "44",
+            "160",
+            "12"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Davranış zamanla kaç semte yayıldı?",
+          "secenekler": [
+            "44",
+            "3",
+            "160",
+            "10"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip yayılmayı anlamak için neyi inceledi?",
+          "secenekler": [
+            "Halkın gönderdiği gözlem raporlarını",
+            "Uzaydan çekilmiş eski uydu fotoğraflarını",
+            "Kuşlara takılan küçük vericileri",
+            "Belediyenin çöp kayıtlarını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kuşlar bu beceriyi nereden öğrenmişti?",
+          "secenekler": [
+            "Birbirlerinden",
+            "İnsanlardan",
+            "Kitaplardan",
+            "Hiç öğrenmemiş, doğuştan biliyorlardı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yakından incelenen gözlemler ne gösterdi?",
+          "secenekler": [
+            "Kuşların kendine özgü açma biçimleri olduğunu",
+            "Bütün kuşların tıpatıp aynı biçimde açtığını",
+            "Yalnız yavru kuşların kutu açtığını",
+            "Kuşların yalnız geceleri karanlıkta kutu açtığını"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa017",
+      "baslik": "Ayçiçeğinin günlük yolculuğu",
+      "etiket": "bitki",
+      "kaynak": "atamian2016",
+      "pmid": "27493185",
+      "doi": "10.1126/science.aaf9793",
+      "yazar": "Atamian ve ark.",
+      "dergi": "Science",
+      "yil": 2016,
+      "metin": "Genç ayçiçekleri bütün gün boyunca güneşi doğudan batıya doğru izler. Gece ise şafağı bekler gibi yeniden doğuya döner. Olgunlaşan bitkilerde ise bu hareket tümüyle durur ve çiçek tablaları doğuya bakar halde kalır. Bir ekip bu iki davranışın ardında hangi düzenin yattığını araştırdı. İkisinin de bitkinin iç saati tarafından düzenlendiği ortaya çıktı. Güneşi izleme, gövdenin doğu ve batı yanlarının sırayla uzamasıyla oluyordu. Gövdenin iki yanında farklı çalışan genler saat genleri değil, ışığa doğru büyümeyi yöneten genlerdi. Yani iç saat, bitkinin her gün tekrarlanan değişimlere önceden hazırlanmasına yardım ediyor. Bu düzen bitkinin daha çok büyümesini sağladı. Çiçekler de tozlaşmayı sağlayan canlılardan daha sık ziyaret aldı.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Ayçiçeklerinin hareketlerinin iç saatle düzenlenmesini",
+            "Ayçiçeklerinin tohumlarını nasıl dağıttığını",
+            "Ayçiçeklerinin kuraklığa nasıl dayandığını",
+            "Ayçiçeklerinin neden yalnız gece karanlığında çiçek açtığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Genç ayçiçekleri gece ne yapar?",
+          "secenekler": [
+            "Yeniden doğuya döner",
+            "Batıya bakar halde durur",
+            "Yapraklarını döker",
+            "Hiç kıpırdamaz"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Olgun bitkilerin çiçek tablaları hangi yöne bakar?",
+          "secenekler": [
+            "Doğuya",
+            "Batıya",
+            "Kuzeye",
+            "Güneye"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Güneşi izleme nasıl oluyordu?",
+          "secenekler": [
+            "Gövdenin doğu ve batı yanlarının sırayla uzamasıyla",
+            "Köklerin toprağın içinde dönmesiyle",
+            "Yaprakların kuş kanadı gibi aşağı yukarı çırpmasıyla",
+            "Gövdenin her gün biraz daha kısalıp eğilmesiyle"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Gövdenin iki yanında farklı çalışan genler hangileriydi?",
+          "secenekler": [
+            "Işığa doğru büyümeyi yöneten genler",
+            "Saat genleri",
+            "Çiçeğin sarı rengini belirleyen genler",
+            "Tohumun boyunu belirleyen genler"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bu düzen bitkiye ne kazandırdı?",
+          "secenekler": [
+            "Daha çok büyüme ve daha sık ziyaret",
+            "Daha az su ihtiyacı ve daha kalın bir kabuk",
+            "Daha büyük ve ağır tohumlar",
+            "Kışı rahatça geçirme gücü"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa018",
+      "baslik": "Tüplerin içindeki iz",
+      "etiket": "mikro",
+      "kaynak": "kramar2021",
+      "pmid": "33619174",
+      "doi": "10.1073/pnas.2007815118",
+      "yazar": "Kramar ve Alim",
+      "dergi": "PNAS",
+      "yil": 2021,
+      "metin": "Hafıza çoğu zaman sinir sistemi olan canlılarla birlikte düşünülür. Oysa çok basit canlılar da geçmiş deneyimlerini saklayabilir. Bir ekip, tek bir dev hücreden oluşan bir balçık mantarının besine nasıl tepki verdiğini izledi. Bu canlının bütün bedeni, farklı kalınlıkta ve birbirine bağlı tüplerden oluşur. Besin bulununca tüplerin bir kısmı kalınlaştı, bir kısmı inceldi. Böylece besinin yeri, tüplerin kalınlık düzenine kaydedildi. Besinin olduğu yerde yumuşatıcı bir madde açığa çıkıyordu. Bu madde hücrenin içindeki akışla tüplere taşınıyordu. Ekip deneyleri bir hesap modeliyle birleştirerek bu işleyişi ortaya koydu. Çok madde alan tüpler genişledi, ötekiler daraldı. Genişleyen tüpler, canlının sonraki kararlarını ve yönünü besine doğru çevirdi.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bir balçık mantarının besinin yerini tüplerinde saklamasını",
+            "Balçık mantarlarının nasıl çoğaldığını",
+            "Mantarların topraktan nasıl su çektiğini",
+            "Balçık mantarının güneş ışığından ve sıcaktan nasıl kaçıp saklandığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Canlının bedeni neyden oluşur?",
+          "secenekler": [
+            "Farklı kalınlıkta, birbirine bağlı tüplerden",
+            "Milyonlarca küçük ve birbirinden ayrı hücreden",
+            "Yapraklardan ve köklerden",
+            "Sert bir kabuktan"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Besin bulununca tüplere ne oldu?",
+          "secenekler": [
+            "Bir kısmı kalınlaştı, bir kısmı inceldi",
+            "Hepsi aynı kalınlıkta kaldı",
+            "Hepsi bir anda koptu",
+            "Hepsi renk değiştirip parlak sarıya döndü"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Besinin olduğu yerde ne açığa çıkıyordu?",
+          "secenekler": [
+            "Yumuşatıcı bir madde",
+            "Sertleştirici bir kabuk",
+            "Parlak bir ışık",
+            "Bir ses"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Madde tüplere nasıl taşınıyordu?",
+          "secenekler": [
+            "Hücrenin içindeki akışla",
+            "Rüzgârla",
+            "Yağmur suyuyla",
+            "Üstünde yürüyen böceklerle"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Genişleyen tüpler neyi etkiledi?",
+          "secenekler": [
+            "Sonraki kararları ve besine doğru yönü",
+            "Canlının rengini, kokusunu ve büyüklüğünü",
+            "Canlının yaşını",
+            "Hiçbir şeyi değiştirmedi"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa019",
+      "baslik": "Kovandaki ilk dans",
+      "etiket": "bocek",
+      "kaynak": "dong2023",
+      "pmid": "36893231",
+      "doi": "10.1126/science.ade1702",
+      "yazar": "Dong ve ark.",
+      "dergi": "Science",
+      "yil": 2023,
+      "metin": "Bal arıları kovanda bir tür dans yaparak yiyeceğin yerini birbirine anlatır. Bu dans, kaynağın yönünü, uzaklığını ve ne kadar değerli olduğunu hareket ve sesle aktarır. Bir ekip, arıların bu dansı başkalarından öğrenip öğrenmediğini merak etti. Bazı arılar ilk danslarını yapmadan önce hiçbir dansı izleme fırsatı bulamadı. Bu arıların dansları belirgin biçimde daha düzensizdi ve yön bilgisinde daha çok hata vardı. Kaynağın uzaklığını da yanlış aktarıyorlardı. Deneyim kazandıkça düzensizlik ve yön hataları azaldı. Ama uzaklıktaki hata ömür boyu düzelmedi. Başka dansçıları izleyebilen arıların ilk danslarında ise bu sorunların hiçbiri yoktu. Demek ki arıların dili de, insan bebeklerinde, kuşlarda ve başka birçok hayvanda olduğu gibi, öğrenmeyle biçimleniyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bal arılarının dansı başka arıları izleyerek öğrenmesini",
+            "Bal arılarının çiçeklerden nasıl bal yaptığını",
+            "Arıların sıcak günlerde kovanı nasıl soğuttuğunu",
+            "Arıların çiçek kokularını birbirinden nasıl ayırt ettiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Dans neleri aktarır?",
+          "secenekler": [
+            "Kaynağın yönünü, uzaklığını ve değerini",
+            "Kovanın yaşını ve büyüklüğünü",
+            "Havanın sıcaklığını ve o gün esen rüzgârın gücünü",
+            "Kraliçenin yerini ve yaşını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Hiç dans izlemeden dans eden arıların dansı nasıldı?",
+          "secenekler": [
+            "Belirgin biçimde daha düzensiz",
+            "Belirgin biçimde daha düzenli",
+            "Kısa ama baştan sona hep kusursuz",
+            "Ötekilerle tıpatıp aynı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Deneyim kazandıkça ne azaldı?",
+          "secenekler": [
+            "Düzensizlik ve yön hataları",
+            "Uzaklıktaki hata",
+            "Kovandaki arıların toplam sayısı",
+            "Dansın hızı ve çıkan ses"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Uzaklıktaki hataya ne oldu?",
+          "secenekler": [
+            "Ömür boyu düzelmedi",
+            "Bir günde düzeldi",
+            "Öteki arılar onu düzeltti",
+            "Hiç hata yapılmadı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Dans izleyebilen arıların ilk dansları nasıldı?",
+          "secenekler": [
+            "Bu sorunların hiçbiri yoktu",
+            "Hepsinden çok hata vardı",
+            "Hiç dans etmediler",
+            "Yalnız uzaklığı yanlış aktardılar"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa020",
+      "baslik": "Yemlikteki yeni yol",
+      "etiket": "kus",
+      "kaynak": "aplin2014",
+      "pmid": "25470065",
+      "doi": "10.1038/nature13998",
+      "yazar": "Aplin ve ark.",
+      "dergi": "Nature",
+      "yil": 2014,
+      "metin": "Hayvanlar arasında da bir gelenek doğup uzun süre yaşayabilir mi? Bir ekip bunu yabani büyük baştankaralarla sınadı. Birkaç ayrı kuş topluluğuna, yiyeceğe ulaşmanın yeni yollarını tanıttılar. Her toplulukta yalnız 2 kuşa bir yöntem öğretildi. Bilgi kuşlar arasındaki bağlar üzerinden hızla yayıldı ve ortalama kuşların yüzde 75'ine ulaştı. Kuşların hareketleri otomatik bir izleme düzeniyle kaydedildi. Toplam 414 kuş bu işi öğrendi ve 57 binden fazla kez çözüm üretti. Her topluluk, en başta kendisine tanıtılan yöntemi kullanmayı sürdürdü. Topluluğa sürekli yeni kuşlar katılsa da bu yerel gelenekler iki kuşak boyunca korundu. Yeni öğrenen kuşlar çoğunlukla çevrede en yaygın yöntemi seçti. Kendi deneyimlerinden çok başkalarını izlemeye güvendiler.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Baştankaralarda yeni bir yöntemin yerel geleneğe dönüşmesini",
+            "Baştankaraların kışın hangi yollarla göç ettiğini",
+            "Baştankaraların yuvalarını nasıl yaptığını",
+            "Baştankaraların yavrularına uzun ve karmaşık şarkılar öğretmesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Her toplulukta kaç kuşa yöntem öğretildi?",
+          "secenekler": [
+            "2",
+            "75",
+            "414",
+            "20"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bilgi kuşların ortalama yüzde kaçına ulaştı?",
+          "secenekler": [
+            "Yüzde 75",
+            "Yüzde 25",
+            "Yüzde 10",
+            "Yüzde 5"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Topluluklar hangi yöntemi kullanmayı sürdürdü?",
+          "secenekler": [
+            "En başta tanıtılan yöntemi",
+            "Her yıl yeni bir yöntemi",
+            "Komşu topluluğun yöntemini",
+            "Hiçbir yöntemi kullanmadılar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yerel gelenekler ne kadar korundu?",
+          "secenekler": [
+            "İki kuşak boyunca",
+            "Yalnız bir hafta",
+            "Yalnız bir gün",
+            "On kuşaktan da fazla"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yeni öğrenen kuşlar hangi yöntemi seçti?",
+          "secenekler": [
+            "Çevrede en yaygın yöntemi",
+            "En az kullanılan yöntemi",
+            "Rastgele bir yöntemi",
+            "Kendi bulduğu yeni yöntemi"
+          ]
+        }
+      ]
+    }
+  ],
+  "etiketler": {
+    "bocek": "Böcekler",
+    "kus": "Kuşlar",
+    "memeli": "Memeliler",
+    "deniz": "Deniz canlıları",
+    "bitki": "Bitkiler",
+    "insan": "İnsan",
+    "mikro": "Mikroplar",
+    "surungen": "Sürüngenler ve kurbağalar"
+  }
+}
